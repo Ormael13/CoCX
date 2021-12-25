@@ -25,7 +25,7 @@ public class VolcanicCrag extends BaseContent
 		
 		public function exploreVolcanicCrag():void {
 			flags[kFLAGS.DISCOVERED_VOLCANO_CRAG]++;
-			if (!player.hasPerk(PerkLib.FireAffinity)) ConstantHeatConditionsTick();
+			if (!player.hasPerk(PerkLib.FireAffinity) && !player.hasPerk(PerkLib.AffinityIgnis)) ConstantHeatConditionsTick();
 			doNext(playerMenu);
 			
 			var choice:Array = [];
@@ -106,7 +106,7 @@ public class VolcanicCrag extends BaseContent
 		}
 
 		public function VolcanicCragConditions():void {
-			if (!player.hasPerk(PerkLib.FireAffinity)) player.createStatusEffect(StatusEffects.ConstantHeatConditions,0,0,0,0);
+			if (!player.hasPerk(PerkLib.FireAffinity) && !player.hasPerk(PerkLib.AffinityIgnis)) player.createStatusEffect(StatusEffects.ConstantHeatConditions,0,0,0,0);
 		}
 
 		public function ConstantHeatConditionsTick():void {

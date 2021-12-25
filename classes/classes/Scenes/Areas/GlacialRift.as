@@ -242,7 +242,7 @@ use namespace CoC;
 
 		public function SubZeroConditionsTick():void {
 			var HPD:Number = 0.05;
-			if (player.hasPerk(PerkLib.FireAffinity)) HPD *= 2;
+			if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) HPD *= 2;
 			HPD *= player.maxHP();
 			HPD = Math.round(HPD);
 			outputText("Cold environment slowly seeps into your body. ");

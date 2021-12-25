@@ -120,13 +120,17 @@ public class PerkLib
 
 		//public static const AscensionUnlockedPotentialStageX:PerkType = new AscensionUnlockPotentialX();
 		public static const AscensionUnlockedPotential:PerkType = mk("Ascension: Unlocked Potential", "Ascension: Unlocked Potential",
-				"Due to your past experiences, your body gets stronger faster than in your past life (increased passive hp (+80), lust (+6), fatigue (+6) gains at lvl-up).");
+				"Due to your past experiences, your body gets stronger faster than in your past life (increased passive hp (+80), lust (+6), fatigue (+6) gains at lvl-up).")
+				.withBuffs({'maxfatigue_perlevel':+6,'maxlust_perlevel':+6});
 		public static const AscensionUnlockedPotential2ndStage:PerkType = mk("Ascension: Unlocked Potential (2nd Stage)", "Ascension: Unlocked Potential (2nd Stage)",
-				"Due to your past experiences, your body gets stronger faster than in your past life (increased passive wrath (+10), mana (+12), soulforce (+6) gains at lvl-up).");
+				"Due to your past experiences, your body gets stronger faster than in your past life (increased passive wrath (+10), mana (+12), soulforce (+6) gains at lvl-up).")
+				.withBuffs({'maxwrath_perlevel':+10,'maxmana_perlevel':+12,'maxsf_perlevel':+6});
 		public static const AscensionUnlockedPotential3rdStage:PerkType = mk("Ascension: Unlocked Potential (3rd Stage)", "Ascension: Unlocked Potential (3rd Stage)",
-				"Due to your past experiences, your body gets stronger faster than in your past life (2nd increase to passive hp (+80), lust (+6), fatigue (+6) gains at lvl-up).");
+				"Due to your past experiences, your body gets stronger faster than in your past life (2nd increase to passive hp (+80), lust (+6), fatigue (+6) gains at lvl-up).")
+				.withBuffs({'maxfatigue_perlevel':+6,'maxlust_perlevel':+6});
 		public static const AscensionUnlockedPotential4thStage:PerkType = mk("Ascension: Unlocked Potential (4th Stage)", "Ascension: Unlocked Potential (4th Stage)",
-				"Due to your past experiences, your body gets stronger faster than in your past life (2nd increase to passive wrath (+10), mana (+12), soulforce (+6) gains at lvl-up).");
+				"Due to your past experiences, your body gets stronger faster than in your past life (2nd increase to passive wrath (+10), mana (+12), soulforce (+6) gains at lvl-up).")
+				.withBuffs({'maxwrath_perlevel':+10,'maxmana_perlevel':+12,'maxsf_perlevel':+6});
 		//	public static const AscensionBuildingPrestige07:PerkType = mk("Ascension: Building Prestige (7th Stage)", "Ascension: Building Prestige (7th Stage)",
 		//			"Your understanding of prestige jobs from previous lives allows you to pick an 8th one at lvl 42+.");
 		//	public static const AscensionBuildingPrestige08:PerkType = mk("Ascension: Building Prestige (8th Stage)", "Ascension: Building Prestige (8th Stage)",
@@ -370,6 +374,9 @@ public class PerkLib
 		public static const Sadomasochism:PerkType = mk("Sadomasochism", "Sadomasochism",
 				"You are aroused by the helplessness of your opponent just as much as you get aroused in getting hit. This causes your tease to become stronger when you are close to defeat. (PC gains +20% tease damage with low health and +20% tease damage with high arousal to either PC or the target.)",
 				"You've chosen the 'Sadomasochism' perk. You are aroused by the helplessness of your opponent just as much as you get aroused in getting hit. This causes your tease to become stronger when you are close to defeat.");
+		public static const SharedPower:PerkType = mk("Shared power", "Shared power",
+				"Each elementalist perk learned gives a +10% multi bonus to health, damage and spell power when in an infused state.",
+				"You've chosen the 'Shared power' perk. Each elementalist perk learned gives a +10% multi bonus to health, damage and spell power when in an infused state.");
 		public static const SilverForMonsters:PerkType = mk("Silver for monsters", "Silver for monsters",
 				"Firearms deals 20% extra damage and 50% increased critical damage to demons and their corrupted servants.",
 				"You've chosen the 'Silver for monsters' perk. Firearms deals 20% extra damage and 50% increased critical damage to demons and their corrupted servants.");
@@ -398,17 +405,21 @@ public class PerkLib
 				//"You are currently sacrificing blood to empower your spells.",
 				//"You are currently sacrificing blood to empower your spells.");
 		public static const TooAngryToDie:PerkType = mk("Too Angry to Die", "Too Angry to Die",
-				"+3000 to max Wrath.",//stay alive when berserking at cost of super fast 20%(or 25%) max wrath drain per turn when below min HP or above max Lust (?drain decreased by some specific perks?)?
-				"You've chosen the 'Too Angry to Die' perk, .");
+				"",//stay alive when berserking at cost of super fast 20%(or 25%) max wrath drain per turn when below min HP or above max Lust (?drain decreased by some specific perks?)?
+				"You've chosen the 'Too Angry to Die' perk, .")
+				.withBuffs({'maxwrath_base':+3000});
 		public static const WarMageNovice:PerkType = mk("Novice War Mage", "Novice War Mage",
-				"Increases wrath bar by 50. Safe limit for spellcasting increased by 5%.",
-				"You've chosen the 'Novice War Mage' perk, increasing wrath bar by 50 and safe limit for spellcasting increasing by 5%.");
+				"Safe limit for spellcasting increased by 5%.",
+				"You've chosen the 'Novice War Mage' perk, increasing wrath bar by 50 and safe limit for spellcasting increasing by 5%.")
+				.withBuffs({'maxwrath_base':+50});
 		public static const WarMageApprentice:PerkType = mk("Apprentice War Mage", "Apprentice War Mage",
-				"Increases wrath bar by 50. In-combat mana recovery increased by 10. Safe limit for spellcasting increased by 5%.",
-				"You've chosen the 'Apprentice War Mage' perk, increasing wrath bar by 50, increasing in-combat mana recovery by 10 and safe limit for spellcasting increasing by 5%.");
+				"In-combat mana recovery increased by 10. Safe limit for spellcasting increased by 5%.",
+				"You've chosen the 'Apprentice War Mage' perk, increasing wrath bar by 50, increasing in-combat mana recovery by 10 and safe limit for spellcasting increasing by 5%.")
+				.withBuffs({'maxwrath_base':+50});
 		public static const WarMageAdept:PerkType = mk("Adept War Mage", "Adept War Mage",
-				"Increases wrath bar by 150. In-combat mana recovery increased by 15. Safe limit for spellcasting increased by 5%.",
-				"You've chosen the 'Adept War Mage' perk, increasing wrath bar by 150, increasing in-combat mana recovery by 15 and safe limit for spellcasting increasing by 5%.");
+				"In-combat mana recovery increased by 15. Safe limit for spellcasting increased by 5%.",
+				"You've chosen the 'Adept War Mage' perk, increasing wrath bar by 150, increasing in-combat mana recovery by 15 and safe limit for spellcasting increasing by 5%.")
+				.withBuffs({'maxwrath_base':+150});
 		public static const WarMageExpert:PerkType = mk("Expert War Mage", "Expert War Mage",
 				". Safe limit for spellcasting increased by 5%.",
 				"You've chosen the 'Expert War Mage' perk, and safe limit for spellcasting increased by 5%.");
@@ -417,7 +428,8 @@ public class PerkLib
 				"You've chosen the 'Master War Mage' perk, and safe limit for spellcasting increased by 5%.");
 		public static const FlyingSwordPath:PerkType = mk("Flying Sword Path", "Flying Sword Path",
 				"Allow to control flying swords. With spending enough soulforce can even fly on them. (+50 max soulforce)",
-				"You've chosen the 'Flying Sword Path' perk. Allow to control flying swords. With spending enough soulforce can even fly on them. (+50 max soulforce)");
+				"You've chosen the 'Flying Sword Path' perk. Allow to control flying swords. With spending enough soulforce can even fly on them. (+50 max soulforce)")
+				.withBuffs({'maxsf_base':+50});
 		public static const SoaringBlades:PerkType = mk("Soaring Blades", "Soaring Blades",
 				"Reduce SF cost of attacking with flying swords or flying on them by 20% per each stage of dantain attained.",
 				"You've chosen the 'Soaring Blades' perk. Reduce SF cost of attacking with flying swords or flying on them by 20% per each stage of dantain attained.");
@@ -438,7 +450,8 @@ public class PerkLib
 				"You've chosen the 'Lift Off' perk, allowing you to start combat already flying.");
 		public static const GreyMagic:PerkType = mk("Grey Magic", "Grey Magic",
 				"Access to learn and cast grey magic spells. (+30 to max lust)",
-				"You've chosen the 'Grey Magic' perk, gaining access to grey spells. (+30 to max lust)");
+				"You've chosen the 'Grey Magic' perk, gaining access to grey spells. (+30 to max lust)")
+				.withBuffs({'maxlust_base':+30});
 		public static const DefensiveStaffChanneling:PerkType = mk("Defensive Staff Channeling", "Defensive Staff Channeling",
 				"When you would cast defensive spell holding staff it effects would be increased a bit (higher defensive effect or longer duration).",
 				"You've chosen the 'Defensive Staff Channeling' perk. When you would cast defensive spell holding staff it effects would be increased a bit (higher defensive effect or longer duration).");
@@ -446,17 +459,17 @@ public class PerkLib
 				".",
 				"You've chosen the 'Offensive Staff Channeling' perk. .");
 		public static const ElementalConjurerKnowledge:PerkType = mk("Elemental Conjurer Knowledge", "Elemental Conjurer Knowledge",
-				"You gained knowledge how to make elementals rank up process less resource consuming. (-40% needed mana/fatigue and -40% less HP lost during failure)",
-				"You've chosen the 'Elemental Conjurer Knowledge' perk, gaining knowledge how to make elementals rank up process less resource consuming. (-40% needed mana/fatigue and -40% less HP lost during failure)");
+				"You gained knowledge how to make elementals rank up process less resource consuming. (-40% needed mana/fatigue and 40% less HP lost during failure)",
+				"You've chosen the 'Elemental Conjurer Knowledge' perk, gaining knowledge how to make elementals rank up process less resource consuming. (-40% needed mana/fatigue and 40% less HP lost during failure)");
 		public static const ElementalConjurerKnowledgeEx:PerkType = mk("Elemental Conjurer Knowledge (Ex)", "Elemental Conjurer Knowledge (Ex)",
 				"Decrease chance to fail when ranking up an elemental or/and replace mana with elemental energy gained from sacrificing elemental shards to arcane circle.",
 				"You've chosen the 'Elemental Conjurer Knowledge (Ex)' perk, .");
 		public static const ElementalConjurerKnowledgeSu:PerkType = mk("Elemental Conjurer Knowledge (Su)", "Elemental Conjurer Knowledge (Su)",
 				"Allow to convert soulforce into elemental energy.",
 				"You've chosen the 'Elemental Conjurer Knowledge (Su)' perk, .");
-		public static const SharedPower:PerkType = mk("Shared power", "Shared power",
-				"Each elementalist perk learned gives a +10% multi bonus to health, damage and spell power when in an infused state.",
-				"You've chosen the 'Shared power' perk. Each elementalist perk learned gives a +10% multi bonus to health, damage and spell power when in an infused state.");
+		public static const ElementalTouch:PerkType = mk("Elemental touch", "Elemental touch",
+				"Unarmed strikes and elemental skills inflict a status to your victim when infused respectively Frostbite, Burn, Acid and Bleed.",
+				"You've chosen the 'Elemental touch' perk. Unarmed strikes and elemental skills inflict a status to your victim when infused respectively Frostbite, Burn, Acid and Bleed.");
 		public static const PartySynergy:PerkType = mk("Party Synergy", "Party Synergy",
 				"You and your companions in party will recieve multi bonus to basic stats like str or wis (+20% for PC and +50% for henchman). With each member beyond first bonus will increase arithmeticaly.",
 				"You've chosen the 'Party Synergy' perk. You and your companions in party will recieve multi bonus to basic stats like str or wis (+20% for PC and +50% for henchman). With each member beyond first bonus will increase arithmeticaly.");
@@ -470,9 +483,6 @@ public class PerkLib
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
 				"You've chosen the 'Elements of Mareth: ' perk, your time spent in Mareth allowing you to get basic understanding of native elements that aren't classified as one of four traditional.");
 		/*public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
-		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, .");
 		public static const :PerkType = mk("", "",
@@ -507,7 +517,8 @@ public class PerkLib
 				"You've chosen the 'Advanced All-Rounder Education' perk, expanding amount of advanced jobs you can learn. (+3)");
 		public static const AdvancedEndurance:PerkType = mk("Advanced Endurance", "Advanced Endurance",
 				"Increases maximum fatigue by 200.",
-				"You've chosen the 'Advanced Endurance' perk. Thanks to your advanced physical conditioning, your maximum fatigue has been increased by 200!");
+				"You've chosen the 'Advanced Endurance' perk. Thanks to your advanced physical conditioning, your maximum fatigue has been increased by 200!")
+				.withBuffs({'maxfatigue_base':+200});
 		public static const AdvancedMagiculesTheory:PerkType = mk("Advanced Magicules Theory", "Advanced Magicules Theory",
 				"[if(player.wis>=150)" +
 						"Increases magical critical hit chance by up to 30% (Wisdom-based)." +
@@ -517,13 +528,16 @@ public class PerkLib
 				"You've chosen the 'Advanced Magicules Theory' perk, increasing magical critical hit chance by up to 30% (Wisdom-based).");
 		public static const AdvancedSelfControl:PerkType = mk("Advanced Self-Control", "Advanced Self-Control",
 				"Increases maximum lust by 300.",
-				"You've chosen the 'Advanced Self-Control' perk. Thanks to your advanced mental conditioning, your maximum lust has been increased by 300!");
+				"You've chosen the 'Advanced Self-Control' perk. Thanks to your advanced mental conditioning, your maximum lust has been increased by 300!")
+				.withBuffs({'maxlust_base':+300});
 		public static const AdvancedSpirituality:PerkType = mk("Advanced Spirituality", "Advanced Spirituality",
 				"Increases maximum mana by 900.",
-				"You've chosen the 'Advanced Spirituality' perk. Thanks to your advanced mystical conditioning, your maximum mana has been increased by 900!");
+				"You've chosen the 'Advanced Spirituality' perk. Thanks to your advanced mystical conditioning, your maximum mana has been increased by 900!")
+				.withBuffs({'maxmana_base':+900});
 		public static const AdvancedTranquilness:PerkType = mk("Advanced Tranquilness", "Advanced Tranquilness",
-				"Increases maximum wrath by 500.",
-				"You've chosen the 'Advanced Tranquilness' perk. Thanks to your advanced anger managment training, your maximum wrath has been increased by 500!");
+				"Increases maximum wrath.",
+				"You've chosen the 'Advanced Tranquilness' perk. Thanks to your advanced anger managment training, your maximum wrath has been increased by 500!")
+				.withBuffs({'maxwrath_base':+500});
 		public static const AerialCombat:PerkType = mk("Aerial Combat", "Aerial Combat",
 				"You trained basics of fighting while flying (allow melee attacks with any weapon at cost of 30% accuracy penalty).",
 				"You've chosen the 'Aerial Combat' perk, you trained basics of fighting while flying.");
@@ -538,7 +552,8 @@ public class PerkLib
 				"You've chosen the 'Alchemical cartridge' perk, adding intelligence scaling to firearms damage.");
 		public static const AllSeeing:PerkType = mk("All-Seeing", "All-Seeing",
 				"You see everything... so you should have expected this description, and the 10% soul force gain.",
-				"You've chosen the 'All-Seeing' perk, gaining +10% max Soulforce.");
+				"You've chosen the 'All-Seeing' perk, gaining +10% max Soulforce.")
+				.withBuffs({'maxsf_mult':+0.1});
 		public static const AlphaAndOmega:PerkType = mk("Alpha and Omega", "Alpha and Omega",
 				"Add up to 2 to each stat per level but remove all chimerical disposition stat gains and increase racial skill power by 50%. Stacks on top of Apex.",
 				"You've chosen the 'Alpha and Omega' perk. Further increasing your specialization into a unique race and increasing racial skill power by an additionnal 50%.");
@@ -553,7 +568,8 @@ public class PerkLib
 				"You've chosen the 'Anatomy expert' perk. Your continued study of your opponents anatomy granted you insight to their weak point allowing you to strike precisely where it will hurt the most for increased critical chances and damage with thrown weapon. (+10% crit chance and +50% crit dmg)");
 		public static const Anger:PerkType = mk("Anger", "Anger",
 				"For every 1% of missing HP you gain 1% bonus damage.",
-				"You've chosen the 'Anger' perk, increasing damage based on your missing HP.");
+				"You've chosen the 'Anger' perk, increasing damage based on your missing HP.")
+				.withBuffs({'maxwrath_base':+2000});
 		public static const Anvil:PerkType = mk("Anvil", "Anvil",
 				"Now that you have an anvil, your work can be done even better, once again increasing your armor proficiency, how you used to work without all of this is the question... (+5% phys/mag resistance)",
 				"You've chosen the 'Anvil' perk, increasing armor proficiency. (+5% phys/mag resistance)");
@@ -565,22 +581,28 @@ public class PerkLib
 				"You've chosen the 'Apprentice Golem Maker' perk, increasing your proficiency in making golems.");
 		public static const ArcanePoolI:PerkType = mk("Arcane Pool I", "Arcane Pool I",
 				"+3 extra mana per point of intelligence and wisdom.",
-				"You've chosen the 'Arcane Pool I' perk, granting +3 extra maximum mana for each point of intelligence and wisdom.");
+				"You've chosen the 'Arcane Pool I' perk, granting +3 extra maximum mana for each point of intelligence and wisdom.")
+				.withBuffs({'maxmana_perint':+3,'maxmana_perwis':+3});
 		public static const ArcanePoolII:PerkType = mk("Arcane Pool II", "Arcane Pool II",
 				"+3 extra mana per point of intelligence and wisdom.",
-				"You've chosen the 'Arcane Pool II' perk, granting +3 extra maximum mana for each point of intelligence and wisdom.");
+				"You've chosen the 'Arcane Pool II' perk, granting +3 extra maximum mana for each point of intelligence and wisdom.")
+				.withBuffs({'maxmana_perint':+3,'maxmana_perwis':+3});
 		public static const ArcanePoolIII:PerkType = mk("Arcane Pool III", "Arcane Pool III",
 				"+3 extra mana per point of intelligence and wisdom.",
-				"You've chosen the 'Arcane Pool III' perk, granting +3 extra maximum mana for each point of intelligence and wisdom.");
+				"You've chosen the 'Arcane Pool III' perk, granting +3 extra maximum mana for each point of intelligence and wisdom.")
+				.withBuffs({'maxmana_perint':+3,'maxmana_perwis':+3});
 		public static const ArcanePoolIV:PerkType = mk("Arcane Pool IV", "Arcane Pool IV",
 				"+3 extra mana per point of intelligence and wisdom.",
-				"You've chosen the 'Arcane Pool IV' perk, granting +3 extra maximum mana for each point of intelligence and wisdom.");
+				"You've chosen the 'Arcane Pool IV' perk, granting +3 extra maximum mana for each point of intelligence and wisdom.")
+				.withBuffs({'maxmana_perint':+3,'maxmana_perwis':+3});
 		public static const ArcanePoolV:PerkType = mk("Arcane Pool V", "Arcane Pool V",
 				"+3 extra mana per point of intelligence and wisdom.",
-				"You've chosen the 'Arcane Pool V' perk, granting +3 extra maximum mana for each point of intelligence and wisdom.");
+				"You've chosen the 'Arcane Pool V' perk, granting +3 extra maximum mana for each point of intelligence and wisdom.")
+				.withBuffs({'maxmana_perint':+3,'maxmana_perwis':+3});
 		public static const ArcanePoolVI:PerkType = mk("Arcane Pool VI", "Arcane Pool VI",
 				"+3 extra mana per point of intelligence and wisdom.",
-				"You've chosen the 'Arcane Pool VI' perk, granting +3 extra maximum mana for each point of intelligence and wisdom.");
+				"You've chosen the 'Arcane Pool VI' perk, granting +3 extra maximum mana for each point of intelligence and wisdom.")
+				.withBuffs({'maxmana_perint':+3,'maxmana_perwis':+3});
 		public static const ArcaneRegenerationEpic:PerkType = mk("Arcane Regeneration (Epic)", "Arcane Regeneration (Epic)",
 				"[if (player.inte>=100)" +
 						"Increase by 30 base mana recovery and 15% max mana." +
@@ -618,29 +640,36 @@ public class PerkLib
 				"You've chosen the 'Arcane Regeneration (Mythical)' perk, increasing mana recovery and mana pool.");
 		public static const ArchersStaminaI:PerkType = mk("Archer's Stamina I", "Archer's Stamina I",
 				"+1 extra fatigue per point of speed.",
-				"You've chosen the 'Archer's Stamina I' perk, granting +1 extra maximum fatigue for each point of speed.");
+				"You've chosen the 'Archer's Stamina I' perk, granting +1 extra maximum fatigue for each point of speed.")
+				.withBuffs({'maxfatigue_perspe':+1});
 		public static const ArchersStaminaII:PerkType = mk("Archer's Stamina II", "Archer's Stamina II",
 				"+1 extra fatigue per point of speed.",
-				"You've chosen the 'Archer's Stamina II' perk, granting +1 extra maximum fatigue for each point of speed.");
+				"You've chosen the 'Archer's Stamina II' perk, granting +1 extra maximum fatigue for each point of speed.")
+				.withBuffs({'maxfatigue_perspe':+1});
 		public static const ArchersStaminaIII:PerkType = mk("Archer's Stamina III", "Archer's Stamina III",
 				"+1 extra fatigue per point of speed.",
-				"You've chosen the 'Archer's Stamina III' perk, granting +1 extra maximum fatigue for each point of speed.");
+				"You've chosen the 'Archer's Stamina III' perk, granting +1 extra maximum fatigue for each point of speed.")
+				.withBuffs({'maxfatigue_perspe':+1});
 		public static const ArchersStaminaIV:PerkType = mk("Archer's Stamina IV", "Archer's Stamina IV",
 				"+1 extra fatigue per point of speed.",
-				"You've chosen the 'Archer's Stamina IV' perk, granting +1 extra maximum fatigue for each point of speed.");
+				"You've chosen the 'Archer's Stamina IV' perk, granting +1 extra maximum fatigue for each point of speed.")
+				.withBuffs({'maxfatigue_perspe':+1});
 		public static const ArchersStaminaV:PerkType = mk("Archer's Stamina V", "Archer's Stamina V",
 				"+1 extra fatigue per point of speed.",
-				"You've chosen the 'Archer's Stamina V' perk, granting +1 extra maximum fatigue for each point of speed.");
+				"You've chosen the 'Archer's Stamina V' perk, granting +1 extra maximum fatigue for each point of speed.")
+				.withBuffs({'maxfatigue_perspe':+1});
 		public static const ArchersStaminaVI:PerkType = mk("Archer's Stamina VI", "Archer's Stamina VI",
 				"+1 extra fatigue per point of speed.",
-				"You've chosen the 'Archer's Stamina VI' perk, granting +1 extra maximum fatigue for each point of speed.");
+				"You've chosen the 'Archer's Stamina VI' perk, granting +1 extra maximum fatigue for each point of speed.")
+				.withBuffs({'maxfatigue_perspe':+1});
 		public static const Archmage:PerkType = mk("Archmage", "Archmage",
 				"[if (player.inte>=100)" +
 						"Increases base spell strength by 30%, mana pool by 180 and lust bar by 45." +
 						"|" +
 						"<b>You are too dumb to gain benefit from this perk.</b>" +
 						"]",
-				"You've chosen the 'Archmage' perk, increasing base spell strength by 30%, base mana pool by 180 and lust bar by 45.");
+				"You've chosen the 'Archmage' perk, increasing base spell strength by 30%, base mana pool by 180 and lust bar by 45.")
+				.withBuffs({'maxlust_base':+45});
 		public static const ArcaneLash:PerkType = mk("Arcane Lash", "Arcane Lash",
 				"Your whip act as a catalyst for your lust inducing spells as well as for magic weapon.",
 				"You've chosen the 'Arcane Lash' perk, causing you to increase effects of lust inducing spells and weapon when using whip.");
@@ -666,17 +695,21 @@ public class PerkLib
 				"Limit of advanced job you can learn is increased by 3.",
 				"You've chosen the 'Basic All-Rounder Education' perk, expanding amount of advanced jobs you can learn. (+3)");
 		public static const BasicEndurance:PerkType = mk("Basic Endurance", "Basic Endurance",
-				"Increases maximum fatigue by 30.",
-				"You've chosen the 'Basic Endurance' perk. Thanks to your basic physical conditioning, your maximum fatigue has been increased by 30!");
+				"Increases maximum fatigue.",
+				"You've chosen the 'Basic Endurance' perk. Thanks to your basic physical conditioning, your maximum fatigue has been increased by 30!")
+				.withBuffs({'maxfatigue_base':+30});
 		public static const BasicSelfControl:PerkType = mk("Basic Self-Control", "Basic Self-Control",
-				"Increases maximum lust by 45.",
-				"You've chosen the 'Basic Self-Control' perk. Thanks to your basic mental conditioning, your maximum lust has been increased by 45!");
+				"Increases maximum lust.",
+				"You've chosen the 'Basic Self-Control' perk. Thanks to your basic mental conditioning, your maximum lust has been increased by 45!")
+				.withBuffs({'maxlust_base':+45});
 		public static const BasicSpirituality:PerkType = mk("Basic Spirituality", "Basic Spirituality",
-				"Increases maximum mana by 135.",
-				"You've chosen the 'Basic Spirituality' perk. Thanks to your basic mystical conditioning, your maximum mana has been increased by 135!");
+				"Increases maximum mana.",
+				"You've chosen the 'Basic Spirituality' perk. Thanks to your basic mystical conditioning, your maximum mana has been increased by 135!")
+				.withBuffs({'maxmana_base':+135});
 		public static const BasicTranquilness:PerkType = mk("Basic Tranquilness", "Basic Tranquilness",
-				"Increases maximum wrath by 75.",
-				"You've chosen the 'Basic Tranquilness' perk. Thanks to your basic anger managment training, your maximum wrath has been increased by 75!");
+				"Increases maximum wrath.",
+				"You've chosen the 'Basic Tranquilness' perk. Thanks to your basic anger managment training, your maximum wrath has been increased by 75!")
+				.withBuffs({'maxwrath_base':+75});
 		public static const BeginnerGolemMaker:PerkType = mk("Beginner Golem Maker", "Beginner Golem Maker",
 				"Your proficiency in making golems allows to lower by 2% chance of core shattering, storing more golems/golem cores and increase dmg scaling up on current int/wis.",
 				"You've chosen the 'Beginner Golem Maker' perk, increasing your proficiency in making golems.");
@@ -698,7 +731,8 @@ public class PerkLib
 						"|" +
 						"<b>You aren't strong enough to benefit from this anymore.</b>" +
 						"]",
-				"You've chosen the 'Berserker' perk, which unlocks the 'Berserk' magical ability.  Berserking increases attack and lust resistance but reduces physical defenses.");
+				"You've chosen the 'Berserker' perk, which unlocks the 'Berserk' magical ability.  Berserking increases attack and lust resistance but reduces physical defenses.")
+				.withBuffs({'maxwrath_base':+500});
 		public static const BerserkerArmor:PerkType = mk("Berserker Armor", "Berserker Armor",
 				"Augments the potency of all rage effects as well as Crinos shape. Wrath Gained from taking damage and dealing damage increased. Does not hinder movement or beast warrior powers.",
 				"Augments the potency of all rage effects as well as Crinos shape. Wrath Gained from taking damage and dealing damage increased. Does not hinder movement or beast warrior powers.\n");
@@ -863,10 +897,12 @@ public class PerkLib
 				"You've chosen the 'Church of the gun' perk, adding wisdom scaling to firearms damage.");
 		public static const ClawingFlurry:PerkType = mk("Clawing flurry", "Clawing flurry",
 				"When attacking with your natural weapons, add an additional attack striking up to 5 times.",
-				"You've chosen the 'Clawing flurry' perk, gaining an additional attack with your natural weapons!");
+				"You've chosen the 'Clawing flurry' perk, gaining an additional attack with your natural weapons!")
+				.withBuffs({'maxwrath_base':+250});
 		public static const ClawTraining:PerkType = mk("Claw training", "Claw training",
 				"Gain 1 extra natural attack with your natural weapons.",
-				"You've chosen the 'Claw training' perk, gain 1 extra natural attack with your natural weapons!");
+				"You've chosen the 'Claw training' perk, gain 1 extra natural attack with your natural weapons!")
+				.withBuffs({'maxwrath_base':+100});
 		public static const CloseToDeath:PerkType = mk("Close to death", "Close to death",
 				"Increasing healing spells effect by 50% when below 25% max HP.",
 				"You've chosen the 'Close to death' perk, increasing healing spells effect when below 25% max HP.");
@@ -878,16 +914,20 @@ public class PerkLib
 				"You've chosen the 'Cold Aim' perk, causing Careful but Reckless Aim and Shooting to no longer reduce your Toughness.").withBuffs({'tou.mult':0.15});
 		public static const ColderFury:PerkType = mk("Colder Fury", "Colder Fury",
 				"Berserking does not reduce your magic resistance (increase atk boost).",
-				"You've chosen the 'Colder Fury' perk, causing Berserking to not reduce your magic resistance (increase atk boost).");
+				"You've chosen the 'Colder Fury' perk, causing Berserking to not reduce your magic resistance (increase atk boost).")
+				.withBuffs({'maxwrath_base':+375});
 		public static const ColderLust:PerkType = mk("Colder Lust", "Colder Lust",
 				"Lustzerking does not reduce your magic resistance (increase atk boost).",
-				"You've chosen the 'Colder Lust' perk, causing Lustzerking to not reduce your magic resistance (increase atk boost).");
+				"You've chosen the 'Colder Lust' perk, causing Lustzerking to not reduce your magic resistance (increase atk boost).")
+				.withBuffs({'maxwrath_base':+375});
 		public static const ColdFury:PerkType = mk("Cold Fury", "Cold Fury",
 				"Berserking does not reduce your armor (increase atk boost a bit).",
-				"You've chosen the 'Cold Fury' perk, causing Berserking to not reduce your armor (increase atk boost a bit).");
+				"You've chosen the 'Cold Fury' perk, causing Berserking to not reduce your armor (increase atk boost a bit).")
+				.withBuffs({'maxwrath_base':+250});
 		public static const ColdLust:PerkType = mk("Cold Lust", "Cold Lust",
 				"Lustzerking does not reduce your lust resistance (increase atk boost a bit).",
-				"You've chosen the 'Cold Lust' perk, causing Lustzerking to not reduce your lust resistance (increase atk boost a bit).");
+				"You've chosen the 'Cold Lust' perk, causing Lustzerking to not reduce your lust resistance (increase atk boost a bit).")
+				.withBuffs({'maxwrath_base':+250});
 		public static const Collector:PerkType = mk("Collector", "Collector",
 				"This is getting out of hand! Why do you need so much money? Just, take it and leave... you monster. Take your added bonus upon victory and get out of my sight. (15% more gems from victories)",
 				"You've chosen the 'Collector' perk, increasing gem gains from victories by 15%.");
@@ -929,28 +969,35 @@ public class PerkLib
 				"You've chosen the 'Cyclone (Stage 5)' perk, increasing crit chance and damage for aoe specials like whirlwind.");
 		public static const DancersVitalityI:PerkType = mk("Dancer's Vitality I", "Dancer's Vitality I",
 				"+1.5 extra fatigue per point of speed.",
-				"You've chosen the 'Dancer's Vitality I' perk, granting +1.5 extra maximum fatigue for each point of speed.");
+				"You've chosen the 'Dancer's Vitality I' perk, granting +1.5 extra maximum fatigue for each point of speed.")
+				.withBuffs({'maxfatigue_perspe':+1.5});
 		public static const DancersVitalityII:PerkType = mk("Dancer's Vitality II", "Dancer's Vitality II",
 				"+1.5 extra fatigue per point of speed.",
-				"You've chosen the 'Dancer's Vitality II' perk, granting +1.5 extra maximum fatigue for each point of speed.");
+				"You've chosen the 'Dancer's Vitality II' perk, granting +1.5 extra maximum fatigue for each point of speed.")
+				.withBuffs({'maxfatigue_perspe':+1.5});
 		public static const DancersVitalityIII:PerkType = mk("Dancer's Vitality III", "Dancer's Vitality III",
 				"+1.5 extra fatigue per point of speed.",
-				"You've chosen the 'Dancer's Vitality III' perk, granting +1.5 extra maximum fatigue for each point of speed.");
+				"You've chosen the 'Dancer's Vitality III' perk, granting +1.5 extra maximum fatigue for each point of speed.")
+				.withBuffs({'maxfatigue_perspe':+1.5});
 		public static const DancersVitalityIV:PerkType = mk("Dancer's Vitality IV", "Dancer's Vitality IV",
 				"+1.5 extra fatigue per point of speed.",
-				"You've chosen the 'Dancer's Vitality IV' perk, granting +1.5 extra maximum fatigue for each point of speed.");
+				"You've chosen the 'Dancer's Vitality IV' perk, granting +1.5 extra maximum fatigue for each point of speed.")
+				.withBuffs({'maxfatigue_perspe':+1.5});
 		public static const DancersVitalityV:PerkType = mk("Dancer's Vitality V", "Dancer's Vitality V",
 				"+1.5 extra fatigue per point of speed.",
-				"You've chosen the 'Dancer's Vitality V' perk, granting +1.5 extra maximum fatigue for each point of speed.");
+				"You've chosen the 'Dancer's Vitality V' perk, granting +1.5 extra maximum fatigue for each point of speed.")
+				.withBuffs({'maxfatigue_perspe':+1.5});
 		public static const DancersVitalityVI:PerkType = mk("Dancer's Vitality VI", "Dancer's Vitality VI",
 				"+1.5 extra fatigue per point of speed.",
-				"You've chosen the 'Dancer's Vitality VI' perk, granting +1.5 extra maximum fatigue for each point of speed.");
+				"You've chosen the 'Dancer's Vitality VI' perk, granting +1.5 extra maximum fatigue for each point of speed.")
+				.withBuffs({'maxfatigue_perspe':+1.5});
 		public static const Dantain:PerkType = mk("Dantian", "Dantian",
 				"Increase max soulforce by 10% + 10% to 25% (per each attained cultivation stage) of base value.",
 				"You've chosen the 'Dantian' perk.  As a result of many cultivation sessions you managed to find dantian in your body, which resulted in increased capacity to store soulforce.");
 		public static const DaoistCultivator:PerkType = mk("Daoist Cultivator", "Daoist Cultivator",
 				"Allow you to train your soul cultivator mind to unleash soulskills with their apex power. (+20% soulskill/m.soulskill power, -10% soulskills cost, +50% base soulforce recovery multiplier)",
-				"You've chosen the 'Daoist Cultivator' perk, starting journey on the daoist cultivators path! (+20% soulskill/m.soulskill power, -10% soulskills cost, +50% base soulforce recovery multiplier)");
+				"You've chosen the 'Daoist Cultivator' perk, starting journey on the daoist cultivators path! (+20% soulskill/m.soulskill power, -10% soulskills cost, +50% base soulforce recovery multiplier)")
+				.withBuffs({'maxsf_base':+25});
 		public static const DaoistApprenticeStage:PerkType = mk("Daoist: Apprentice Stage", "Daoist: Apprentice Stage",
 				"Your reached first stage of Daoist path. (+40% soulskill/m.soulskill power, +40 max SF at S.Apprentice, S.Personage, S.Warrior stages)",
 				"You've chosen the 'Daoist: Apprentice Stage' perk, progressing on your Daoist path. (+40% soulskill/m.soulskill power, +40 max SF at S.Apprentice, S.Personage, S.Warrior stages)");
@@ -980,7 +1027,8 @@ public class PerkLib
 				"You've chosen the 'Deadly Throw' perk, adding your speed to throwing weapon damage.");
 		public static const Dean:PerkType = mk("Dean", "Dean",
 				"You control a section of the school as a member of the school board, answering only to the president. This increases max mana by 10%.",
-				"You've chosen the 'Dean' perk, gaining +10% max Mana.");
+				"You've chosen the 'Dean' perk, gaining +10% max Mana.")
+				.withBuffs({'maxmana_mult':+0.1});
 		public static const DeathPlunge:PerkType = mk("Death plunge", "Death plunge",
 				"When using Great Dive you may add your weapon damage as part of the attack damage as if using power attack at its current maximum value consuming no wrath in the process.",
 				"You've chosen the 'Death plunge' perk. When using Great Dive you may add your weapon damage as part of the attack damage as if using power attack at its current maximum value consuming no wrath in the process.");
@@ -992,22 +1040,28 @@ public class PerkLib
 				"You've chosen the 'Defence Stance' perk, training to master you defence pose.");
 		public static const DemonicDesireI:PerkType = mk("Demonic Desire I", "Demonic Desire I",
 				"Raises max lust by 5% of base value.",
-				"You've chosen the 'Demonic Desire I' perk, giving you an additional 5% of base value to max lust!");
+				"You've chosen the 'Demonic Desire I' perk, giving you an additional 5% of base value to max lust!")
+				.withBuffs({'maxlust_mult':+0.05});
 		public static const DemonicDesireII:PerkType = mk("Demonic Desire II", "Demonic Desire II",
 				"Raises max lust by 5% of base value.",
-				"You've chosen the 'Demonic Desire II' perk, giving you an additional 5% of base value to max lust!");
+				"You've chosen the 'Demonic Desire II' perk, giving you an additional 5% of base value to max lust!")
+				.withBuffs({'maxlust_mult':+0.05});
 		public static const DemonicDesireIII:PerkType = mk("Demonic Desire III", "Demonic Desire III",
 				"Raises max lust by 5% of base value.",
-				"You've chosen the 'Demonic Desire III' perk, giving you an additional 5% of base value to max lust!");
+				"You've chosen the 'Demonic Desire III' perk, giving you an additional 5% of base value to max lust!")
+				.withBuffs({'maxlust_mult':+0.05});
 		public static const DemonicDesireIV:PerkType = mk("Demonic Desire IV", "Demonic Desire IV",
 				"Raises max lust by 5% of base value.",
-				"You've chosen the 'Demonic Desire IV' perk, giving you an additional 5% of base value to max lust!");
+				"You've chosen the 'Demonic Desire IV' perk, giving you an additional 5% of base value to max lust!")
+				.withBuffs({'maxlust_mult':+0.05});
 		public static const DemonicDesireV:PerkType = mk("Demonic Desire V", "Demonic Desire V",
 				"Raises max lust by 5% of base value.",
-				"You've chosen the 'Demonic Desire V' perk, giving you an additional 5% of base value to max lust!");
+				"You've chosen the 'Demonic Desire V' perk, giving you an additional 5% of base value to max lust!")
+				.withBuffs({'maxlust_mult':+0.05});
 		public static const DemonicDesireVI:PerkType = mk("Demonic Desire VI", "Demonic Desire VI",
 				"Raises max lust by 5% of base value.",
-				"You've chosen the 'Demonic Desire VI' perk, giving you an additional 5% of base value to max lust!");
+				"You've chosen the 'Demonic Desire VI' perk, giving you an additional 5% of base value to max lust!")
+				.withBuffs({'maxlust_mult':+0.05});
 		public static const Desensitization:PerkType = mk("Desensitization", "Desensitization",
 				"Negative effects of sensitivity are reduced by 5%.",
 				"You've chosen the 'Desensitization' perk, decreasing negative effects of sensitivity by 5%.");
@@ -1022,10 +1076,12 @@ public class PerkLib
 				"You've chosen the 'Doctor' perk, increasing HP gains by 20%.");
 		public static const DoubleAttack:PerkType = mk("Double Attack", "Double Attack",
 				"Allows you to perform two melee attacks with normal sized weapons per round.",
-				"You've chosen the 'Double Attack' perk.  This allows you to make two melee attacks with non-large weapons.");
+				"You've chosen the 'Double Attack' perk.  This allows you to make two melee attacks with non-large weapons.")
+				.withBuffs({'maxwrath_base':+50});
 		public static const DoubleAttackLarge:PerkType = mk("Double Attack (Large)", "Double Attack (Large)",
 				"Allows you to perform two melee attacks with large weapons per round.",
-				"You've chosen the 'Double Attack (Large)' perk.  This allows you to make two melee attacks with large weapons.");
+				"You've chosen the 'Double Attack (Large)' perk.  This allows you to make two melee attacks with large weapons.")
+				.withBuffs({'maxwrath_base':+100});
 		public static const DoubleAttackSmall:PerkType = mk("Double Attack (Small)", "Double Attack (Small)",
 				"Allows you to perform two melee attacks with small weapons per round.",
 				"You've chosen the 'Double Attack (Small)' perk.  This allows you to make two melee attacks with small weapons.");
@@ -1193,7 +1249,8 @@ public class PerkLib
 				"You've chosen the 'Elements of the orthodox Path' perk, your time spent on studing elements allowing you to call those mentioned in more orthodox writings.");
 		public static const Embodiment:PerkType = mk("Embodiment", "Embodiment",
 				"You embody the principles of the monks... as usual you should only expect the 10% soulforce gain.",
-				"You've chosen the 'Embodiment' perk, gaining +10% max Soulforce.");
+				"You've chosen the 'Embodiment' perk, gaining +10% max Soulforce.")
+				.withBuffs({'maxsf_mult':+0.1});
 		public static const EnableCriticals:PerkType = mk("Enable Criticals", "Enable Criticals",
 				"You now score crits on all naturaly immune to them enemies like constructs, goo or plants.",
 				"You've chosen the 'Enable Criticals' perk, allowing you to get crits on normaly immune to this enemy types.");
@@ -1223,7 +1280,8 @@ public class PerkLib
 				"You've chosen the 'Epic Diehard' perk, getting third upgrade of Diehard effect.");
 		public static const EpicEndurance:PerkType = mk("Epic Endurance", "Epic Endurance",
 				"Increases maximum fatigue by 4500.",
-				"You've chosen the 'Epic Endurance' perk. Thanks to your epic physical conditioning, your maximum fatigue has been increased by 4500!");
+				"You've chosen the 'Epic Endurance' perk. Thanks to your epic physical conditioning, your maximum fatigue has been increased by 4500!")
+				.withBuffs({'maxfatigue_base':+4500});
 		public static const EpicGolemMaker:PerkType = mk("Epic Golem Maker", "Epic Golem Maker",
 				"Your proficiency in making golems allows to make stronger golems. Also allow to make and store 1 improved stone golem.",
 				"You've chosen the 'Epic Golem Maker' perk, increasing your proficiency in making golems. Also allow to make improved stone golems.").withBuffs({'int.mult':0.10,'wis.mult':0.10});
@@ -1244,7 +1302,8 @@ public class PerkLib
 				"You've chosen the 'Epic Lifeline' perk, increasing your self healing to epic level.");
 		public static const EpicSelfControl:PerkType = mk("Epic Self-Control", "Epic Self-Control",
 				"Increases maximum lust by 6750.",
-				"You've chosen the 'Epic Self-Control' perk. Thanks to your epic mental conditioning, your maximum lust has been increased by 6750!");
+				"You've chosen the 'Epic Self-Control' perk. Thanks to your epic mental conditioning, your maximum lust has been increased by 6750!")
+				.withBuffs({'maxlust_base':+6750});
 		public static const EpicSensitivity:PerkType = mk("Epic Sensitivity", "Epic Sensitivity",
 				"",
 				"You've chosen the 'Epic Sensitivity' perk.").withBuffs({'sens':140});
@@ -1253,7 +1312,8 @@ public class PerkLib
 				"You've chosen the 'Epic Speed' perk.").withBuffs({'spe.mult':0.35});
 		public static const EpicSpirituality:PerkType = mk("Epic Spirituality", "Epic Spirituality",
 				"Increases maximum mana by 20250.",
-				"You've chosen the 'Epic Spirituality' perk. Thanks to your epic mystical conditioning, your maximum mana has been increased by 20250!");
+				"You've chosen the 'Epic Spirituality' perk. Thanks to your epic mystical conditioning, your maximum mana has been increased by 20250!")
+				.withBuffs({'maxmana_base':+20250});
 		public static const EpicStrength:PerkType = mk("Epic Strength", "Epic Strength",
 				"",
 				"You've chosen the 'Epic Strength' perk.").withBuffs({'str.mult':0.35});
@@ -1261,8 +1321,9 @@ public class PerkLib
 				"",
 				"You've chosen the 'Epic Toughness' perk.").withBuffs({'tou.mult':0.35});
 		public static const EpicTranquilness:PerkType = mk("Epic Tranquilness", "Epic Tranquilness",
-				"Increases maximum wrath by 11250.",
-				"You've chosen the 'Epic Tranquilness' perk. Thanks to your epic anger managment training, your maximum wrath has been increased by 11250!");
+				"Increases maximum wrath.",
+				"You've chosen the 'Epic Tranquilness' perk. Thanks to your epic anger managment training, your maximum wrath has been increased by 11250!")
+				.withBuffs({'maxwrath_base':+11250});
 		public static const EpicWisdom:PerkType = mk("Epic Wisdom", "Epic Wisdom",
 				"",
 				"You've chosen the 'Epic Wisdom' perk.").withBuffs({'wis.mult':0.35});
@@ -1301,7 +1362,8 @@ public class PerkLib
 				"You've chosen the 'Explosive cartridge' perk, allowing for your gunshots dealing extra damage to group (of any size) or large enemies (9+ ft. tall).");
 		public static const ExtraClawAttack:PerkType = mk("Extra claw attack", "Extra claw attack",
 				"When attacking with your natural weapons, add an additional attack striking up to 3 times.",
-				"You've chosen the 'Extra claw attack' perk, gaining an additional attack with your natural weapons!");
+				"You've chosen the 'Extra claw attack' perk, gaining an additional attack with your natural weapons!")
+				.withBuffs({'maxwrath_base':+150});
 		public static const ExtremelyLucky:PerkType = mk("Extremely Lucky", "Extremely Lucky",
 				"You're banned from casinos with that luck of yours, but you still find stuff lying around after battles, increasing your gain upon victory. (15% more gems from victories)",
 				"You've chosen the 'Extremely Lucky' perk, increasing gem gains from victories by 15%.");
@@ -1331,7 +1393,8 @@ public class PerkLib
 				"You've chosen the 'Feint' perk. Unlock p. special 'Feint' that have chance to cause 1 turn long distraction of enemy(ies) that allow to use sneaky attack.");
 		public static const FeralArmor:PerkType = mk("Feral Armor", "Feral Armor",
 				"Gain extra armor based on your toughness so long as you’re naked and have any form of natural armor.",
-				"You've chosen the 'Feral Armor' perk, gaining extra armor as long you are naked and have any natural armor!");
+				"You've chosen the 'Feral Armor' perk, gaining extra armor as long you are naked and have any natural armor!")
+				.withBuffs({'maxwrath_base':+100});
 		public static const FertilityMinus:PerkType = mk("Fertility-", "Fertility-",
 				"Decreases fertility rating by 15 and cum volume by up to 30%. (Req's libido of less than 25.)",
 				"You've chosen the 'Fertility-' perk, making it harder to get pregnant.  It also decreases your cum volume by up to 30% (if appropriate)!");
@@ -1373,7 +1436,8 @@ public class PerkLib
 				"You've chosen the 'Flurry of Blows' perk, gaining two additional attack when fighting with fist or fist weapon. All physical soulforce ability now also strike twice.");
 		public static const FuelForTheFire:PerkType = mk("Fuel for the Fire", "Fuel for the Fire",
 				"Increase two times wrath gains from getting hit.",
-				"You've chosen the 'Fuel for the Fire' perk, increasing gained wrath after taking damage.");
+				"You've chosen the 'Fuel for the Fire' perk, increasing gained wrath after taking damage.")
+				.withBuffs({'maxwrath_base':+2500});
 		public static const FocusedMind:PerkType = mk("Focused Mind", "Focused Mind",
 				"Black Magic is less likely to backfire and White Magic threshold is increased.",
 				"You've chosen the 'Focused Mind' perk. Black Magic is less likely to backfire and White Magic threshold is increased.");
@@ -1473,21 +1537,24 @@ public class PerkLib
 						"|" +
 						"<b>You are too dumb to gain benefit from this perk.</b>" +
 						"]",
-				"You've chosen the 'Grand Archmage' perk, increasing base spell strength by 40%, mana pool by 225 and lust bar by 60.");
+				"You've chosen the 'Grand Archmage' perk, increasing base spell strength by 40%, mana pool by 225 and lust bar by 60.")
+				.withBuffs({'maxlust_base':+60});
 		public static const GrandArchmage2ndCircle:PerkType = mk("Grand Archmage (2nd Circle)", "Grand Archmage (2nd Circle)",
 				"[if (player.inte>=150)" +
 						"Increases base spell strength by 50%, mana pool by 270 and lust bar by 75." +
 						"|" +
 						"<b>You are too dumb to gain benefit from this perk.</b>" +
 						"]",
-				"You've chosen the 'Grand Archmage (2nd Circle)' perk, increasing base spell strength by 50%, mana pool by 270 and lust bar by 75.");
+				"You've chosen the 'Grand Archmage (2nd Circle)' perk, increasing base spell strength by 50%, mana pool by 270 and lust bar by 75.")
+				.withBuffs({'maxlust_base':+75});
 		public static const GrandArchmage3rdCircle:PerkType = mk("Grand Archmage (3rd Circle)", "Grand Archmage (3rd Circle)",
 				"[if (player.inte>=175)" +
 						"Increases base spell strength by 60%, mana pool by 315 and lust bar by 90." +
 						"|" +
 						"<b>You are too dumb to gain benefit from this perk.</b>" +
 						"]",
-				"You've chosen the 'Grand Archmage (3rd Circle)' perk, increasing base spell strength by 60%, mana pool by 315 and lust bar by 390.");
+				"You've chosen the 'Grand Archmage (3rd Circle)' perk, increasing base spell strength by 60%, mana pool by 315 and lust bar by 390.")
+				.withBuffs({'maxlust_base':+90});
 		public static const GrandBlademaster:PerkType = mk("Grand Blademaster", "Grand Blademaster",
 				"Gain +15% to critical strike chance when wielding weapon with blade (sword, dueling sword, axe) and not using a shield.",
 				"You've chosen the 'Grand Blademaster' perk.  Your chance of critical hit is increased by 15% as long as you're wielding weapon with blade like sword and not using a shield.");
@@ -1497,14 +1564,16 @@ public class PerkLib
 						"|" +
 						"<b>You are too dumb to gain benefit from this perk.</b>" +
 						"]",
-				"You've chosen the 'Grand Grey Archmage' perk. Your grey spell power, mana pool, lust bar and mana recovery are greatly increased. Grey spells can be cast without limitation due to current lust.");
+				"You've chosen the 'Grand Grey Archmage' perk. Your grey spell power, mana pool, lust bar and mana recovery are greatly increased. Grey spells can be cast without limitation due to current lust.")
+				.withBuffs({'maxlust_base':+160});
 		public static const GrandMage:PerkType = mk("Grand Mage", "Grand Mage",
 				"[if (player.inte>=75)" +
 						"Increases base spell strength by 30%, base mana pool by 135 and lust bar by 30." +
 						"|" +
 						"<b>You are too dumb to gain benefit from this perk.</b>" +
 						"]",
-				"You've chosen the 'Grand Mage' perk, increasing base spell strength by 30%, mana pool by 135 and lust bar by 30.");
+				"You've chosen the 'Grand Mage' perk, increasing base spell strength by 30%, mana pool by 135 and lust bar by 30.")
+				.withBuffs({'maxlust_base':+30});
 		public static const GrandMasterGolemMaker:PerkType = mk("Grand-Master Golem Maker", "Grand-Master Golem Maker",
 				"Your proficiency in making golems allows to make golems that can attack flying enemies at small cost in mana drawn from it owner (aka PC). Also allowing to store one more in golem bag.",
 				"You've chosen the 'Grand-Master Golem Maker' perk, increasing your proficiency in making golems.");
@@ -1526,7 +1595,8 @@ public class PerkLib
 				"You've chosen the 'Greater Brute' perk, greatly improving your striking strength. (+60% of max core Str as phantom Str)");
 		public static const GreaterCrinosShape:PerkType = mk("Greater Crinos Shape", "Greater Crinos Shape",
 				"Crinos Shape increase to physical might rise to 80% of core str/tou/spe.",
-				"You've chosen the 'Greater Crinos Shape' perk, gaining another increase to phys stats boost in Crinos Shape (+80%).");
+				"You've chosen the 'Greater Crinos Shape' perk, gaining another increase to phys stats boost in Crinos Shape (+80%).")
+				.withBuffs({'maxwrath_base':+400});
 		public static const GreaterDesensitization:PerkType = mk("Greater Desensitization", "Greater Desensitization",
 				"Negative effects of sensitivity are reduced by 10%.",
 				"You've chosen the 'Greater Desensitization' perk, decreasing negative effects of sensitivity by 10%.");
@@ -1554,120 +1624,155 @@ public class PerkLib
 						"|" +
 						"<b>You are too dumb to gain benefit from this perk.</b>" +
 						"]",
-				"You've chosen the 'Grey Archmage' perk, increasing grey spell power strength by 30%, mana pool by 600, lust bar by 150 and boosting mana recovery by large margin.");
+				"You've chosen the 'Grey Archmage' perk, increasing grey spell power strength by 30%, mana pool by 600, lust bar by 150 and boosting mana recovery by large margin.")
+				.withBuffs({'maxlust_base':+80});
 		public static const GreyMage:PerkType = mk("Grey Mage", "Grey Mage",
 				"[if (player.inte>=125)" +
 						"Increases grey spell strength by 20%, mana pool by 300, lust bar by 40, regain it 50% faster, treshold for Black Magic is 30 lust and for White 30 lust below current max." +
 						"|" +
 						"<b>You are too dumb to gain benefit from this perk.</b>" +
 						"]",
-				"You've chosen the 'Grey Mage' perk. Your grey spell power, mana pool, lust bar and mana recovery are greatly increased, treshold for White Magic rised and for Black lowered.");
+				"You've chosen the 'Grey Mage' perk. Your grey spell power, mana pool, lust bar and mana recovery are greatly increased, treshold for White Magic rised and for Black lowered.")
+				.withBuffs({'maxlust_base':+40});
 		public static const GreyMageApprentice:PerkType = mk("Grey Mage Apprentice", "Grey Mage Apprentice",
 				"[if (player.inte>=75)" +
 						"Increases grey spell strength by 10%, mana pool by 150, lust bar by 20, regain it 25% faster." +
 						"|" +
 						"<b>You are too dumb to gain benefit from this perk.</b>" +
 						"]",
-				"You've chosen the 'Grey Mage Apprentice' perk. Your grey spell power, mana pool, lust bar and mana recovery are increased.");
+				"You've chosen the 'Grey Mage Apprentice' perk. Your grey spell power, mana pool, lust bar and mana recovery are increased.")
+				.withBuffs({'maxlust_base':+20});
 		public static const HeavyArmorProficiency:PerkType = mk("Heavy Armor Proficiency", "Heavy Armor Proficiency",
 				"Wearing Heavy Armor's grants 10% damage reduction.",
 				"You've chosen the 'Heavy Armor Proficiency' perk.  Due to your specialization in wearing heavy armor's you gain a little bit of damage reduction.");
 		public static const HalfStepToAdvancedEndurance:PerkType = mk("Half-step-to Advanced Endurance", "Half-step-to Advanced Endurance",
 				"Increases maximum fatigue by 120.",
-				"You've chosen the 'Half-step-to Advanced Endurance' perk. Thanks to your advanced physical conditioning, your maximum fatigue has been increased by 120!");
+				"You've chosen the 'Half-step-to Advanced Endurance' perk. Thanks to your advanced physical conditioning, your maximum fatigue has been increased by 120!")
+				.withBuffs({'maxfatigue_base':+120});
 		public static const HalfStepToAdvancedSelfControl:PerkType = mk("Half-step-to Advanced Self-Control", "Half-step-to Advanced Self-Control",
 				"Increases maximum lust by 180.",
-				"You've chosen the 'Half-step-to Advanced Self-Control' perk. Thanks to your advanced mental conditioning, your maximum lust has been increased by 180!");
+				"You've chosen the 'Half-step-to Advanced Self-Control' perk. Thanks to your advanced mental conditioning, your maximum lust has been increased by 180!")
+				.withBuffs({'maxlust_base':+180});
 		public static const HalfStepToAdvancedSpirituality:PerkType = mk("Half-step-to Advanced Spirituality", "Half-step-to Advanced Spirituality",
 				"Increases maximum mana by 540.",
-				"You've chosen the 'Half-step-to Advanced Spirituality' perk. Thanks to your advanced mystical conditioning, your maximum mana has been increased by 540!");
+				"You've chosen the 'Half-step-to Advanced Spirituality' perk. Thanks to your advanced mystical conditioning, your maximum mana has been increased by 540!")
+				.withBuffs({'maxmana_base':+540});
 		public static const HalfStepToAdvancedTranquilness:PerkType = mk("Half-step-to Advanced Tranquilness", "Half-step-to Advanced Tranquilness",
-				"Increases maximum wrath by 300.",
-				"You've chosen the 'Half-step-to Advanced Tranquilness' perk. Thanks to your advanced anger managment training, your maximum wrath has been increased by 300!");
+				"Increases maximum wrath.",
+				"You've chosen the 'Half-step-to Advanced Tranquilness' perk. Thanks to your advanced anger managment training, your maximum wrath has been increased by 300!")
+				.withBuffs({'maxwrath_base':+300});;
 		public static const HalfStepToEpicEndurance:PerkType = mk("Half-step-to Epic Endurance", "Half-step-to Epic Endurance",
 				"Increases maximum fatigue by 3000.",
-				"You've chosen the 'Half-step-to Epic Endurance' perk. Thanks to your epic physical conditioning, your maximum fatigue has been increased by 3000!");
+				"You've chosen the 'Half-step-to Epic Endurance' perk. Thanks to your epic physical conditioning, your maximum fatigue has been increased by 3000!")
+				.withBuffs({'maxfatigue_base':+3000});
 		public static const HalfStepToEpicSelfControl:PerkType = mk("Half-step-to Epic Self-Control", "Half-step-to Epic Self-Control",
 				"Increases maximum lust by 4500.",
-				"You've chosen the 'Half-step-to Epic Self-Control' perk. Thanks to your epic mental conditioning, your maximum lust has been increased by 4500!");
+				"You've chosen the 'Half-step-to Epic Self-Control' perk. Thanks to your epic mental conditioning, your maximum lust has been increased by 4500!")
+				.withBuffs({'maxlust_base':+4500});
 		public static const HalfStepToEpicSpirituality:PerkType = mk("Half-step-to Epic Spirituality", "Half-step-to Epic Spirituality",
 				"Increases maximum mana by 13500.",
-				"You've chosen the 'Half-step-to Epic Spirituality' perk. Thanks to your epic mystical conditioning, your maximum mana has been increased by 13500!");
+				"You've chosen the 'Half-step-to Epic Spirituality' perk. Thanks to your epic mystical conditioning, your maximum mana has been increased by 13500!")
+				.withBuffs({'maxmana_base':+13500});
 		public static const HalfStepToEpicTranquilness:PerkType = mk("Half-step-to Epic Tranquilness", "Half-step-to Epic Tranquilness",
-				"Increases maximum wrath by 7500.",
-				"You've chosen the 'Half-step-to Epic Tranquilness' perk. Thanks to your epic anger managment training, your maximum wrath has been increased by 7500!");
+				"Increases maximum wrath.",
+				"You've chosen the 'Half-step-to Epic Tranquilness' perk. Thanks to your epic anger managment training, your maximum wrath has been increased by 7500!")
+				.withBuffs({'maxwrath_base':+7500});
 		public static const HalfStepToImprovedEndurance:PerkType = mk("Half-step-to Improved Endurance", "Half-step-to Improved Endurance",
 				"Increases maximum fatigue by 50.",
-				"You've chosen the 'Half-step-to Improved Endurance' perk. Thanks to your improved physical conditioning, your maximum fatigue has been increased by 50!");
+				"You've chosen the 'Half-step-to Improved Endurance' perk. Thanks to your improved physical conditioning, your maximum fatigue has been increased by 50!")
+				.withBuffs({'maxfatigue_base':+50});
 		public static const HalfStepToImprovedSelfControl:PerkType = mk("Half-step-to Improved Self-Control", "Half-step-to Improved Self-Control",
 				"Increases maximum lust by 75.",
-				"You've chosen the 'Half-step-to Improved Self-Control' perk. Thanks to your improved mental conditioning, your maximum lust has been increased by 75!");
+				"You've chosen the 'Half-step-to Improved Self-Control' perk. Thanks to your improved mental conditioning, your maximum lust has been increased by 75!")
+				.withBuffs({'maxlust_base':+75});
 		public static const HalfStepToImprovedSpirituality:PerkType = mk("Half-step-to Improved Spirituality", "Half-step-to Improved Spirituality",
 				"Increases maximum mana by 225.",
-				"You've chosen the 'Half-step-to Improved Spirituality' perk. Thanks to your improved mystical conditioning, your maximum mana has been increased by 225!");
+				"You've chosen the 'Half-step-to Improved Spirituality' perk. Thanks to your improved mystical conditioning, your maximum mana has been increased by 225!")
+				.withBuffs({'maxmana_base':+225});
 		public static const HalfStepToImprovedTranquilness:PerkType = mk("Half-step-to Improved Tranquilness", "Half-step-to Improved Tranquilness",
-				"Increases maximum wrath by 125.",
-				"You've chosen the 'Half-step-to Improved Tranquilness' perk. Thanks to your improved anger managment training, your maximum wrath has been increased by 125!");
+				"Increases maximum wrath.",
+				"You've chosen the 'Half-step-to Improved Tranquilness' perk. Thanks to your improved anger managment training, your maximum wrath has been increased by 125!")
+				.withBuffs({'maxwrath_base':+125});
 		public static const HalfStepToInhumanEndurance:PerkType = mk("Half-step-to Inhuman Endurance", "Half-step-to Inhuman Endurance",
 				"Increases maximum fatigue by 1500.",
-				"You've chosen the 'Half-step-to Inhuman Endurance' perk. Thanks to your inhuman physical conditioning, your maximum fatigue has been increased by 1500!");
+				"You've chosen the 'Half-step-to Inhuman Endurance' perk. Thanks to your inhuman physical conditioning, your maximum fatigue has been increased by 1500!")
+				.withBuffs({'maxfatigue_base':+1500});
 		public static const HalfStepToInhumanSelfControl:PerkType = mk("Half-step-to Inhuman Self-Control", "Half-step-to Inhuman Self-Control",
 				"Increases maximum lust by 2250.",
-				"You've chosen the 'Half-step-to Inhuman Self-Control' perk. Thanks to your inhuman mental conditioning, your maximum lust has been increased by 2250!");
+				"You've chosen the 'Half-step-to Inhuman Self-Control' perk. Thanks to your inhuman mental conditioning, your maximum lust has been increased by 2250!")
+				.withBuffs({'maxlust_base':+2250});
 		public static const HalfStepToInhumanSpirituality:PerkType = mk("Half-step-to Inhuman Spirituality", "Half-step-to Inhuman Spirituality",
 				"Increases maximum mana by 6750.",
-				"You've chosen the 'Half-step-to Inhuman Spirituality' perk. Thanks to your inhuman mystical conditioning, your maximum mana has been increased by 6750!");
+				"You've chosen the 'Half-step-to Inhuman Spirituality' perk. Thanks to your inhuman mystical conditioning, your maximum mana has been increased by 6750!")
+				.withBuffs({'maxmana_base':+6750});
 		public static const HalfStepToInhumanTranquilness:PerkType = mk("Half-step-to Inhuman Tranquilness", "Half-step-to Inhuman Tranquilness",
-				"Increases maximum wrath by 3750.",
-				"You've chosen the 'Half-step-to Inhuman Tranquilness' perk. Thanks to your inhuman anger managment training, your maximum wrath has been increased by 3750!");
+				"Increases maximum wrath.",
+				"You've chosen the 'Half-step-to Inhuman Tranquilness' perk. Thanks to your inhuman anger managment training, your maximum wrath has been increased by 3750!")
+				.withBuffs({'maxwrath_base':+3750});
 		public static const HalfStepToLegendaryEndurance:PerkType = mk("Half-step-to Legendary Endurance", "Half-step-to Legendary Endurance",
 				"Increases maximum fatigue by 7000.",
-				"You've chosen the 'Half-step-to Legendary Endurance' perk. Thanks to your legendary physical conditioning, your maximum fatigue has been increased by 7000!");
+				"You've chosen the 'Half-step-to Legendary Endurance' perk. Thanks to your legendary physical conditioning, your maximum fatigue has been increased by 7000!")
+				.withBuffs({'maxfatigue_base':+7000});
 		public static const HalfStepToLegendarySelfControl:PerkType = mk("Half-step-to Legendary Self-Control", "Half-step-to Legendary Self-Control",
 				"Increases maximum lust by 10500.",
-				"You've chosen the 'Half-step-to Legendary Self-Control' perk. Thanks to your legendary mental conditioning, your maximum lust has been increased by 10500!");
+				"You've chosen the 'Half-step-to Legendary Self-Control' perk. Thanks to your legendary mental conditioning, your maximum lust has been increased by 10500!")
+				.withBuffs({'maxlust_base':+10500});
 		public static const HalfStepToLegendarySpirituality:PerkType = mk("Half-step-to Legendary Spirituality", "Half-step-to Legendary Spirituality",
 				"Increases maximum mana by 31500.",
-				"You've chosen the 'Half-step-to Legendary Spirituality' perk. Thanks to your legendary mystical conditioning, your maximum mana has been increased by 31500!");
+				"You've chosen the 'Half-step-to Legendary Spirituality' perk. Thanks to your legendary mystical conditioning, your maximum mana has been increased by 31500!")
+				.withBuffs({'maxmana_base':+31500});
 		public static const HalfStepToLegendaryTranquilness:PerkType = mk("Half-step-to Legendary Tranquilness", "Half-step-to Legendary Tranquilness",
-				"Increases maximum wrath by 17500.",
-				"You've chosen the 'Half-step-to Legendary Tranquilness' perk. Thanks to your legendary anger managment training, your maximum wrath has been increased by 17500!");
+				"Increases maximum wrath.",
+				"You've chosen the 'Half-step-to Legendary Tranquilness' perk. Thanks to your legendary anger managment training, your maximum wrath has been increased by 17500!")
+				.withBuffs({'maxwrath_base':+17500});
 		public static const HalfStepToMythicalEndurance:PerkType = mk("Half-step-to Mythical Endurance", "Half-step-to Mythical Endurance",
 				"Increases maximum fatigue by 15000.",
-				"You've chosen the 'Half-step-to Mythical Endurance' perk. Thanks to your mythical physical conditioning, your maximum fatigue has been increased by 15000!");
+				"You've chosen the 'Half-step-to Mythical Endurance' perk. Thanks to your mythical physical conditioning, your maximum fatigue has been increased by 15000!")
+				.withBuffs({'maxfatigue_base':+15000});
 		public static const HalfStepToMythicalSelfControl:PerkType = mk("Half-step-to Mythical Self-Control", "Half-step-to Mythical Self-Control",
 				"Increases maximum lust by 22500.",
-				"You've chosen the 'Half-step-to Mythical Self-Control' perk. Thanks to your mythical mental conditioning, your maximum lust has been increased by 22500!");
+				"You've chosen the 'Half-step-to Mythical Self-Control' perk. Thanks to your mythical mental conditioning, your maximum lust has been increased by 22500!")
+				.withBuffs({'maxlust_base':+22500});
 		public static const HalfStepToMythicalSpirituality:PerkType = mk("Half-step-to Mythical Spirituality", "Half-step-to Mythical Spirituality",
 				"Increases maximum mana by 67500.",
-				"You've chosen the 'Half-step-to Mythical Spirituality' perk. Thanks to your mythical mystical conditioning, your maximum mana has been increased by 67500!");
+				"You've chosen the 'Half-step-to Mythical Spirituality' perk. Thanks to your mythical mystical conditioning, your maximum mana has been increased by 67500!")
+				.withBuffs({'maxmana_base':+67500});
 		public static const HalfStepToMythicalTranquilness:PerkType = mk("Half-step-to Mythical Tranquilness", "Half-step-to Mythical Tranquilness",
-				"Increases maximum wrath by 37500.",
-				"You've chosen the 'Half-step-to Mythical Tranquilness' perk. Thanks to your mythical anger managment training, your maximum wrath has been increased by 37500!");
+				"Increases maximum wrath.",
+				"You've chosen the 'Half-step-to Mythical Tranquilness' perk. Thanks to your mythical anger managment training, your maximum wrath has been increased by 37500!")
+				.withBuffs({'maxwrath_base':+37500});
 		public static const HalfStepToPeerlessEndurance:PerkType = mk("Half-step-to Peerless Endurance", "Half-step-to Peerless Endurance",
 				"Increases maximum fatigue by 700.",
-				"You've chosen the 'Half-step-to Peerless Endurance' perk. Thanks to your peerless physical conditioning, your maximum fatigue has been increased by 700!");
+				"You've chosen the 'Half-step-to Peerless Endurance' perk. Thanks to your peerless physical conditioning, your maximum fatigue has been increased by 700!")
+				.withBuffs({'maxfatigue_base':+700});
 		public static const HalfStepToPeerlessSelfControl:PerkType = mk("Half-step-to Peerless Self-Control", "Half-step-to Peerless Self-Control",
 				"Increases maximum lust by 1050.",
-				"You've chosen the 'Half-step-to Peerless Self-Control' perk. Thanks to your peerless mental conditioning, your maximum lust has been increased by 1050!");
+				"You've chosen the 'Half-step-to Peerless Self-Control' perk. Thanks to your peerless mental conditioning, your maximum lust has been increased by 1050!")
+				.withBuffs({'maxlust_base':+1050});
 		public static const HalfStepToPeerlessSpirituality:PerkType = mk("Half-step-to Peerless Spirituality", "Half-step-to Peerless Spirituality",
 				"Increases maximum mana by 3150.",
-				"You've chosen the 'Half-step-to Peerless Spirituality' perk. Thanks to your peerless mystical conditioning, your maximum mana has been increased by 3150!");
+				"You've chosen the 'Half-step-to Peerless Spirituality' perk. Thanks to your peerless mystical conditioning, your maximum mana has been increased by 3150!")
+				.withBuffs({'maxmana_base':+3150});
 		public static const HalfStepToPeerlessTranquilness:PerkType = mk("Half-step-to Peerless Tranquilness", "Half-step-to Peerless Tranquilness",
-				"Increases maximum wrath by 1750.",
-				"You've chosen the 'Half-step-to Peerless Tranquilness' perk. Thanks to your peerless anger managment training, your maximum wrath has been increased by 1750!");
+				"Increases maximum wrath.",
+				"You've chosen the 'Half-step-to Peerless Tranquilness' perk. Thanks to your peerless anger managment training, your maximum wrath has been increased by 1750!")
+				.withBuffs({'maxwrath_base':+1750});
 		public static const HalfStepToSuperiorEndurance:PerkType = mk("Half-step-to Superior Endurance", "Half-step-to Superior Endurance",
 				"Increases maximum fatigue by 320.",
-				"You've chosen the 'Half-step-to Superior Endurance' perk. Thanks to your superior physical conditioning, your maximum fatigue has been increased by 320!");
+				"You've chosen the 'Half-step-to Superior Endurance' perk. Thanks to your superior physical conditioning, your maximum fatigue has been increased by 320!")
+				.withBuffs({'maxfatigue_base':+320});
 		public static const HalfStepToSuperiorSelfControl:PerkType = mk("Half-step-to Superior Self-Control", "Half-step-to Superior Self-Control",
 				"Increases maximum lust by 480.",
-				"You've chosen the 'Half-step-to Superior Self-Control' perk. Thanks to your superior mental conditioning, your maximum lust has been increased by 480!");
+				"You've chosen the 'Half-step-to Superior Self-Control' perk. Thanks to your superior mental conditioning, your maximum lust has been increased by 480!")
+				.withBuffs({'maxlust_base':+480});
 		public static const HalfStepToSuperiorSpirituality:PerkType = mk("Half-step-to Superior Spirituality", "Half-step-to Superior Spirituality",
 				"Increases maximum mana by 1440.",
-				"You've chosen the 'Half-step-to Superior Spirituality' perk. Thanks to your superior mystical conditioning, your maximum mana has been increased by 1440!");
+				"You've chosen the 'Half-step-to Superior Spirituality' perk. Thanks to your superior mystical conditioning, your maximum mana has been increased by 1440!")
+				.withBuffs({'maxmana_base':+1440});
 		public static const HalfStepToSuperiorTranquilness:PerkType = mk("Half-step-to Superior Tranquilness", "Half-step-to Superior Tranquilness",
-				"Increases maximum wrath by 800.",
-				"You've chosen the 'Half-step-to Superior Tranquilness' perk. Thanks to your superior anger managment training, your maximum wrath has been increased by 800!");
+				"Increases maximum wrath.",
+				"You've chosen the 'Half-step-to Superior Tranquilness' perk. Thanks to your superior anger managment training, your maximum wrath has been increased by 800!")
+				.withBuffs({'maxwrath_base':+800});
 		public static const Hammer:PerkType = mk("Hammer", "Hammer",
 				"You found a hammer! Now you can pound out any dents in your armor, increasing its proficiency! Look at you growing up. (+5% phys/mag resistance)",
 				"You've chosen the 'Hammer' perk, increasing armor proficiency. (+5% phys/mag resistance)");
@@ -1685,7 +1790,8 @@ public class PerkLib
 				"You've chosen the 'Heroism' perk. Due to your heroic stance you can now deal more damage toward boss or gigant type enemies.");
 		public static const HexaAttack:PerkType = mk("Hexa Attack", "Hexa Attack",
 				"Allows you to perform six melee attacks with normal sized weapons per round.",
-				"You've chosen the 'Hexa Attack' perk. This allows you to make six melee attacks with non-large weapons.");
+				"You've chosen the 'Hexa Attack' perk. This allows you to make six melee attacks with non-large weapons.")
+				.withBuffs({'maxwrath_base':+50});
 		public static const HexaAttackSmall:PerkType = mk("Hexa Attack (Small)", "Hexa Attack (Small)",
 				"Allows you to perform six melee attacks with small weapons per round.",
 				"You've chosen the 'Hexa Attack (Small)' perk. This allows you to make six melee attacks with small weapons.");
@@ -1731,13 +1837,15 @@ public class PerkLib
 				"You've chosen the 'Improved Brute' perk, improving your striking strength. (+40% of max core Str as phantom Str)");
 		public static const ImprovedCrinosShape:PerkType = mk("Improved Crinos Shape", "Improved Crinos Shape",
 				"Crinos Shape increase to physical might rise to 40% of core str/tou/spe.",
-				"You've chosen the 'Improved Crinos Shape' perk, increasing boost recived by using Crinos Shape (+40%).");
+				"You've chosen the 'Improved Crinos Shape' perk, increasing boost recived by using Crinos Shape (+40%).")
+				.withBuffs({'maxwrath_base':+200});
 		public static const ImprovedDiehard:PerkType = mk("Improved Diehard", "Improved Diehard",
 				"You can't lose by HP until your health drops into the negatives any more than 4% of max HP + 1200(scalable). HP limit cumulative with other Diehard perks.",
 				"You've chosen the 'Improved Diehard' perk, increasing limit on how long you can fight.");
 		public static const ImprovedEndurance:PerkType = mk("Improved Endurance", "Improved Endurance",
 				"Increases maximum fatigue by 80.",
-				"You've chosen the 'Improved Endurance' perk. Thanks to your improved physical conditioning, your maximum fatigue has been increased by 80!");
+				"You've chosen the 'Improved Endurance' perk. Thanks to your improved physical conditioning, your maximum fatigue has been increased by 80!")
+				.withBuffs({'maxfatigue_base':+80});
 		public static const ImprovedEvade:PerkType = mk("Improved Evade", "Improved Evade",
 				"Increases chances of evading enemy attacks. (+10% to evasion)",
 				"You've chosen the 'Improved Evade' perk, allowing you to avoid enemy attacks more often! (+10% to evasion)");
@@ -1746,13 +1854,16 @@ public class PerkLib
 				"You've chosen the 'Improved Lifeline' perk, improving your self healing.");
 		public static const ImprovedSelfControl:PerkType = mk("Improved Self-Control", "Improved Self-Control",
 				"Increases maximum lust by 120.",
-				"You've chosen the 'Improved Self-Control' perk. Thanks to your improved mental conditioning, your maximum lust has been increased by 120!");
+				"You've chosen the 'Improved Self-Control' perk. Thanks to your improved mental conditioning, your maximum lust has been increased by 120!")
+				.withBuffs({'maxlust_base':+120});
 		public static const ImprovedSpirituality:PerkType = mk("Improved Spirituality", "Improved Spirituality",
 				"Increases maximum mana by 360.",
-				"You've chosen the 'Improved Spirituality' perk. Thanks to your improved mystical conditioning, your maximum mana has been increased by 360!");
+				"You've chosen the 'Improved Spirituality' perk. Thanks to your improved mystical conditioning, your maximum mana has been increased by 360!")
+				.withBuffs({'maxmana_base':+360});
 		public static const ImprovedTranquilness:PerkType = mk("Improved Tranquilness", "Improved Tranquilness",
-				"Increases maximum wrath by 200.",
-				"You've chosen the 'Improved Tranquilness' perk. Thanks to your improved anger managment training, your maximum wrath has been increased by 200!");
+				"Increases maximum wrath.",
+				"You've chosen the 'Improved Tranquilness' perk. Thanks to your improved anger managment training, your maximum wrath has been increased by 200!")
+				.withBuffs({'maxwrath_base':+200});
 		public static const ImprovingNaturesBlueprintsNaturalArmor:PerkType = mk("Improving Nature's Blueprints (Natural Armor)", "Improving Nature's Blueprints (Natural Armor)",
 				"Charge Armor can be casted even if PC is not wearing any armor as long it have any form of natural armor (any skin type providing bonus to armor) and slight boost armor while under Crinos Shape effects.",
 				"You've chosen the 'Improving Nature's Blueprints (Natural Armor)' perk, allowing you to use Charge Armor even without wearing any armor and slight boost armor when using Crinos Shape.");
@@ -1764,55 +1875,72 @@ public class PerkLib
 				"You've chosen the 'Improving Nature's Blueprints (Apex Predator)' perk, allowing you to become an Apex Predator that isn't dull and slow witted along with increased regeneration while using Crinos Shape.").withBuffs({'int.mult':0.10,'wis.mult':0.10});
 		public static const InControl:PerkType = mk("In Control", "In Control",
 				"You are in control of your desires, that's it... except another 10% soul force gain.",
-				"You've chosen the 'In Control' perk, gaining +10% max Soulforce.");
+				"You've chosen the 'In Control' perk, gaining +10% max Soulforce.")
+				.withBuffs({'maxsf_mult':+0.1});
 		public static const InhumanDesireI:PerkType = mk("Inhuman Desire I", "Inhuman Desire I",
 				"+3 extra LP per point of libido.",
-				"You've chosen the 'Inhuman Desire I' perk, granting an extra +3 to maximum LP for each point of libido.");
+				"You've chosen the 'Inhuman Desire I' perk, granting an extra +3 to maximum LP for each point of libido.")
+				.withBuffs({'maxlust_perlib':+3});
 		public static const InhumanDesireII:PerkType = mk("Inhuman Desire II", "Inhuman Desire II",
 				"+3 extra LP per point of libido.",
-				"You've chosen the 'Inhuman Desire II' perk, granting an extra +3 to maximum LP for each point of libido.");
+				"You've chosen the 'Inhuman Desire II' perk, granting an extra +3 to maximum LP for each point of libido.")
+				.withBuffs({'maxlust_perlib':+3});
 		public static const InhumanDesireIII:PerkType = mk("Inhuman Desire III", "Inhuman Desire III",
 				"+3 extra LP per point of libido.",
-				"You've chosen the 'Inhuman Desire III' perk, granting an extra +3 to maximum LP for each point of libido.");
+				"You've chosen the 'Inhuman Desire III' perk, granting an extra +3 to maximum LP for each point of libido.")
+				.withBuffs({'maxlust_perlib':+3});
 		public static const InhumanDesireIV:PerkType = mk("Inhuman Desire IV", "Inhuman Desire IV",
 				"+3 extra LP per point of libido.",
-				"You've chosen the 'Inhuman Desire IV' perk, granting an extra +3 to maximum LP for each point of libido.");
+				"You've chosen the 'Inhuman Desire IV' perk, granting an extra +3 to maximum LP for each point of libido.")
+				.withBuffs({'maxlust_perlib':+3});
 		public static const InhumanDesireV:PerkType = mk("Inhuman Desire V", "Inhuman Desire V",
 				"+3 extra LP per point of libido.",
-				"You've chosen the 'Inhuman Desire V' perk, granting an extra +3 to maximum LP for each point of libido.");
+				"You've chosen the 'Inhuman Desire V' perk, granting an extra +3 to maximum LP for each point of libido.")
+				.withBuffs({'maxlust_perlib':+3});
 		public static const InhumanDesireVI:PerkType = mk("Inhuman Desire VI", "Inhuman Desire VI",
 				"+3 extra LP per point of libido.",
-				"You've chosen the 'Inhuman Desire VI' perk, granting an extra +3 to maximum LP for each point of libido.");
+				"You've chosen the 'Inhuman Desire VI' perk, granting an extra +3 to maximum LP for each point of libido.")
+				.withBuffs({'maxlust_perlib':+3});
 		public static const InhumanEndurance:PerkType = mk("Inhuman Endurance", "Inhuman Endurance",
 				"Increases maximum fatigue by 2000.",
-				"You've chosen the 'Inhuman Endurance' perk. Thanks to your inhuman physical conditioning, your maximum fatigue has been increased by 2000!");
+				"You've chosen the 'Inhuman Endurance' perk. Thanks to your inhuman physical conditioning, your maximum fatigue has been increased by 2000!")
+				.withBuffs({'maxfatigue_base':+2000});
 		public static const InhumanSelfControl:PerkType = mk("Inhuman Self-Control", "Inhuman Self-Control",
 				"Increases maximum lust by 3000.",
-				"You've chosen the 'Inhuman Self-Control' perk. Thanks to your inhuman mental conditioning, your maximum lust has been increased by 3000!");
+				"You've chosen the 'Inhuman Self-Control' perk. Thanks to your inhuman mental conditioning, your maximum lust has been increased by 3000!")
+				.withBuffs({'maxlust_base':+3000});
 		public static const InhumanSpirituality:PerkType = mk("Inhuman Spirituality", "Inhuman Spirituality",
 				"Increases maximum mana by 9000.",
-				"You've chosen the 'Inhuman Spirituality' perk. Thanks to your inhuman mystical conditioning, your maximum mana has been increased by 9000!");
+				"You've chosen the 'Inhuman Spirituality' perk. Thanks to your inhuman mystical conditioning, your maximum mana has been increased by 9000!")
+				.withBuffs({'maxmana_base':+9000});
 		public static const InhumanTranquilness:PerkType = mk("Inhuman Tranquilness", "Inhuman Tranquilness",
-				"Increases maximum wrath by 5000.",
-				"You've chosen the 'Inhuman Tranquilness' perk. Thanks to your inhuman anger managment training, your maximum wrath has been increased by 5000!");
+				"Increases maximum wrath.",
+				"You've chosen the 'Inhuman Tranquilness' perk. Thanks to your inhuman anger managment training, your maximum wrath has been increased by 5000!")
+				.withBuffs({'maxwrath_base':+5000});
 		public static const InsightfulResourcesI:PerkType = mk("Insightful Resources I", "Insightful Resources I",
 				"+5 extra soulforce per point of wisdom.",
-				"You've chosen the 'Insightful Resources I' perk, granting +5 extra maximum soulforce for each point of wisdom.");
+				"You've chosen the 'Insightful Resources I' perk, granting +5 extra maximum soulforce for each point of wisdom.")
+				.withBuffs({'maxsf_perwis':+3});
 		public static const InsightfulResourcesII:PerkType = mk("Insightful Resources II", "Insightful Resources II",
 				"+5 extra soulforce per point of wisdom.",
-				"You've chosen the 'Insightful Resources II' perk, granting +5 extra maximum soulforce for each point of wisdom.");
+				"You've chosen the 'Insightful Resources II' perk, granting +5 extra maximum soulforce for each point of wisdom.")
+				.withBuffs({'maxsf_perwis':+3});
 		public static const InsightfulResourcesIII:PerkType = mk("Insightful Resources III", "Insightful Resources III",
 				"+5 extra soulforce per point of wisdom.",
-				"You've chosen the 'Insightful Resources III' perk, granting +5 extra maximum soulforce for each point of wisdom.");
+				"You've chosen the 'Insightful Resources III' perk, granting +5 extra maximum soulforce for each point of wisdom.")
+				.withBuffs({'maxsf_perwis':+3});
 		public static const InsightfulResourcesIV:PerkType = mk("Insightful Resources IV", "Insightful Resources IV",
 				"+5 extra soulforce per point of wisdom.",
-				"You've chosen the 'Insightful Resources IV' perk, granting +5 extra maximum soulforce for each point of wisdom.");
+				"You've chosen the 'Insightful Resources IV' perk, granting +5 extra maximum soulforce for each point of wisdom.")
+				.withBuffs({'maxsf_perwis':+3});
 		public static const InsightfulResourcesV:PerkType = mk("Insightful Resources V", "Insightful Resources V",
 				"+5 extra soulforce per point of wisdom.",
-				"You've chosen the 'Insightful Resources V' perk, granting +5 extra maximum soulforce for each point of wisdom.");
+				"You've chosen the 'Insightful Resources V' perk, granting +5 extra maximum soulforce for each point of wisdom.")
+				.withBuffs({'maxsf_perwis':+3});
 		public static const InsightfulResourcesVI:PerkType = mk("Insightful Resources VI", "Insightful Resources VI",
 				"+5 extra soulforce per point of wisdom.",
-				"You've chosen the 'Insightful Resources VI' perk, granting +5 extra maximum soulforce for each point of wisdom.");
+				"You've chosen the 'Insightful Resources VI' perk, granting +5 extra maximum soulforce for each point of wisdom.")
+				.withBuffs({'maxsf_perwis':+3});
 		public static const IntermediateAllRounderEducation:PerkType = mk("Intermediate All-Rounder Education", "Intermediate All-Rounder Education",
 				"Limit of advanced job you can learn is increased by 3.",
 				"You've chosen the 'Intermediate All-Rounder Education' perk, expanding amount of advanced jobs you can learn. (+3)");
@@ -1863,19 +1991,19 @@ public class PerkLib
 				"You've chosen the 'Job: All-Rounder' perk, to combine effects of training in all eight basic jobs. +10% to all stats").withBuffs({'str.mult':0.10,'tou.mult':0.10,'spe.mult':0.10,'int.mult':0.10,'wis.mult':0.10,'lib.mult':0.10,'sens':6}, false);
 		public static const JobBeastWarrior:PerkType = mk("Job: Beast Warrior", "Job: Beast Warrior",
 				"You've trained to use of your own body and natural weapons to their limits in fights.",
-				"You've chosen the 'Job: Beast Warrior' perk, training yourself in the art of feral combat.").withBuffs({'str.mult':0.05,'tou.mult':0.05,'spe.mult':0.05, "int.mult":-0.05, "wis.mult":-0.05});
+				"You've chosen the 'Job: Beast Warrior' perk, training yourself in the art of feral combat.").withBuffs({'str.mult':0.05,'tou.mult':0.05,'spe.mult':0.05, "int.mult":-0.05, "wis.mult":-0.05,'maxwrath_base':+100});
 		public static const JobBrawler:PerkType = mk("Job: Brawler", "Job: Brawler",
 				"You've trained in unarmed combat.",
 				"You've chosen the 'Job: Brawler' perk, training yourself to became Brawler.").withBuffs({'str.mult':0.10});
 		public static const JobCourtesan:PerkType = mk("Job: Courtesan", "Job: Courtesan",
 				"You've mastered all various uses of tease.",
-				"You've chosen the 'Job: Courtesan' perk, training yourself to became Courtesan.").withBuffs({'lib.mult':0.15});
+				"You've chosen the 'Job: Courtesan' perk, training yourself to became Courtesan.").withBuffs({'lib.mult':0.15,'maxlust_base':+60});
 		public static const JobDefender:PerkType = mk("Job: Defender", "Job: Defender",
 				"You've trained in withstanding even the heaviest attacks head on.",
 				"You've chosen the 'Job: Defender' perk, training yourself to became Defender.").withBuffs({'tou.mult':0.15});
 		public static const JobDervish:PerkType = mk("Job: Dervish", "Job: Dervish",
 				"You've trained in multi meele attacks combat and using of medium sized dual weapons.",
-				"You've chosen the 'Job: Dervish' perk, training yourself to became Dervish.").withBuffs({'spe.mult':0.10});
+				"You've chosen the 'Job: Dervish' perk, training yourself to became Dervish.").withBuffs({'spe.mult':0.10,'maxwrath_base':+100});
 		public static const JobElementalConjurer:PerkType = mk("Job: Elemental Conjurer", "Job: Elemental Conjurer",
 				"You've trained in summoning various types of elementals.",
 				"You've chosen the 'Job: Elemental Conjurer' perk, training yourself to call elementals.").withBuffs({'wis.mult':0.05});
@@ -1893,13 +2021,13 @@ public class PerkLib
 				"You've chosen the 'Job: Guardian' perk, training yourself to became Guardian.").withBuffs({'tou.mult':0.05});
 		public static const JobGunslinger:PerkType = mk("Job: Gunslinger", "Job: Gunslinger",
 				"You've trained in ranged combat using firearms.",
-				"You've chosen the 'Job: Gunslinger' perk, training yourself to became Gunslinger.").withBuffs({'wis.mult':0.10});
+				"You've chosen the 'Job: Gunslinger' perk, training yourself to became Gunslinger.").withBuffs({'wis.mult':0.10,'maxfatigue_base':10});
 		public static const JobHealer:PerkType = mk("Job: Healer", "Job: Healer",
 				"You've trained in using more effectively heal spells and effects.",
 				"You've chosen the 'Job: Healer' perk, training yourself to became Healer.").withBuffs({'int.mult':0.05,'wis.mult':0.05});
 		public static const JobHunter:PerkType = mk("Job: Hunter", "Job: Hunter",
 				"You've trained in combat with traditional range weapons (like bows).",
-				"You've chosen the 'Job: Hunter' perk, training yourself to became Hunter.").withBuffs({'spe.mult':0.10,'int.mult':0.05});
+				"You've chosen the 'Job: Hunter' perk, training yourself to became Hunter.").withBuffs({'spe.mult':0.10,'int.mult':0.05,'maxfatigue_base':50});
 		public static const JobKnight:PerkType = mk("Job: Knight", "Job: Knight",
 				"You've trained in combat using shields and heaviest armors.",
 				"You've chosen the 'Job: Knight' perk, training yourself to became Knight.").withBuffs({'tou.mult':0.10});
@@ -1911,28 +2039,28 @@ public class PerkLib
 				"You've chosen the 'Job: Monk' perk, training yourself to became Monk.").withBuffs({'wis.mult':0.15});
 		public static const JobRanger:PerkType = mk("Job: Ranger", "Job: Ranger",
 				"You've trained in ranged combat.",
-				"You've chosen the 'Job: Ranger' perk, training yourself to became Ranger.").withBuffs({'spe.mult':0.05});
+				"You've chosen the 'Job: Ranger' perk, training yourself to became Ranger.").withBuffs({'spe.mult':0.05,'maxfatigue_base':5});
 		public static const JobRogue:PerkType = mk("Job: Rogue", "Job: Rogue",
 				"You've trained in how to strike at your opponent's vital points and use various deadly tricks. (+5 to max str/spe - scalable)",
 				"You've chosen the 'Job: Rogue' perk, training yourself to became Rogue.").withBuffs({'str.mult':0.05,'spe.mult':0.05});
 		public static const JobSeducer:PerkType = mk("Job: Seducer", "Job: Seducer",
 				"You've trained the art of seduction.",
-				"You've chosen the 'Job: Seducer' perk, training yourself to became Seducer.").withBuffs({'lib.mult':0.05});
+				"You've chosen the 'Job: Seducer' perk, training yourself to became Seducer.").withBuffs({'lib.mult':0.05,'maxlust_base':+30});
 		public static const JobSorcerer:PerkType = mk("Job: Sorcerer", "Job: Sorcerer",
 				"You've trained in magic combat.",
 				"You've chosen the 'Job: Sorcerer' perk, training yourself to became Sorcerer.").withBuffs({'int.mult':0.05});
 		public static const JobSoulCultivator:PerkType = mk("Job: Soul Cultivator", "Job: Soul Cultivator",
 				"You've cultivated powers of your soul.",
-				"You've chosen the 'Job: Soul Cultivator' perk, starting journey of the soul cultivation path!").withBuffs({'wis.mult':0.05});
+				"You've chosen the 'Job: Soul Cultivator' perk, starting journey of the soul cultivation path!").withBuffs({'wis.mult':0.05,'maxsf_base':+50});
 		public static const JobSwordsman:PerkType = mk("Job: Swordsman", "Job: Swordsman",
 				"You've trained in using large weapons in fights.",
-				"You've chosen the 'Job: Swordsman' perk, training yourself to became Swordsman.").withBuffs({'str.mult':0.10});
+				"You've chosen the 'Job: Swordsman' perk, training yourself to became Swordsman.").withBuffs({'str.mult':0.10,'maxwrath_base':+100});
 		public static const JobWarlord:PerkType = mk("Job: Warlord", "Job: Warlord",
 				"You've trained in combat against group of enemies.",
-				"You've chosen the 'Job: Warlord' perk, training yourself to became Warlord.").withBuffs({'tou.mult':0.20});
+				"You've chosen the 'Job: Warlord' perk, training yourself to became Warlord.").withBuffs({'tou.mult':0.20,'maxwrath_base':+100});
 		public static const JobWarrior:PerkType = mk("Job: Warrior", "Job: Warrior",
 				"You've trained in melee combat.",
-				"You've chosen the 'Job: Warrior' perk, training yourself to became Warrior.").withBuffs({'str.mult':0.05});
+				"You've chosen the 'Job: Warrior' perk, training yourself to became Warrior.").withBuffs({'str.mult':0.05,'maxwrath_base':+50});
 		public static const Juggernaut:PerkType = mk("Juggernaut", "Juggernaut",
 				"When wearing heavy armor, you have extra 10% damage resistance and are immune to damage from being constricted/squeezed (req. 100+ tou).",
 				"You've chosen the 'Juggernaut' perk, granting extra 10% damage resistance when wearing heavy armor and immunity to damage from been constricted/squeezed.");
@@ -1953,7 +2081,8 @@ public class PerkLib
 				"You've chosen the 'Legendary Desensitization' perk, decreasing negative effects of sensitivity by 20%.");
 		public static const LegendaryEndurance:PerkType = mk("Legendary Endurance", "Legendary Endurance",
 				"Increases maximum fatigue by 10000.",
-				"You've chosen the 'Legendary Endurance' perk. Thanks to your legendary physical conditioning, your maximum fatigue has been increased by 10000!");
+				"You've chosen the 'Legendary Endurance' perk. Thanks to your legendary physical conditioning, your maximum fatigue has been increased by 10000!")
+				.withBuffs({'maxfatigue_base':+10000});
 		public static const LegendaryGolemMaker:PerkType = mk("Legendary Golem Maker", "Legendary Golem Maker",
 				"Your proficiency in making golems allows to make stronger golems with higher ranked upgrades. Also allow to make and store 1 improved steel golem.",
 				"You've chosen the 'Legendary Golem Maker' perk, increasing your proficiency in making golems and quality of their upgrades. Also allow to make improved steel golems.").withBuffs({'int.mult':0.40,'wis.mult':0.40});
@@ -1980,7 +2109,8 @@ public class PerkLib
 				"You've chosen the 'Legendary Libido' perk.").withBuffs({'lib.mult':0.50});
 		public static const LegendarySelfControl:PerkType = mk("Legendary Self-Control", "Legendary Self-Control",
 				"Increases maximum lust by 15000.",
-				"You've chosen the 'Legendary Self-Control' perk. Thanks to your legendary mental conditioning, your maximum lust has been increased by 15000!");
+				"You've chosen the 'Legendary Self-Control' perk. Thanks to your legendary mental conditioning, your maximum lust has been increased by 15000!")
+				.withBuffs({'maxlust_base':+15000});
 		public static const LegendarySensitivity:PerkType = mk("Legendary Sensitivity", "Legendary Sensitivity",
 				"",
 				"You've chosen the 'Legendary Sensitivity' perk.").withBuffs({'sens':200});
@@ -1989,7 +2119,8 @@ public class PerkLib
 				"You've chosen the 'Legendary Speed' perk.").withBuffs({'spe.mult':0.50});
 		public static const LegendarySpirituality:PerkType = mk("Legendary Spirituality", "Legendary Spirituality",
 				"Increases maximum mana by 45000.",
-				"You've chosen the 'Legendary Spirituality' perk. Thanks to your legendary mystical conditioning, your maximum mana has been increased by 45000!");
+				"You've chosen the 'Legendary Spirituality' perk. Thanks to your legendary mystical conditioning, your maximum mana has been increased by 45000!")
+				.withBuffs({'maxmana_base':+45000});
 		public static const LegendaryStrength:PerkType = mk("Legendary Strength", "Legendary Strength",
 				"",
 				"You've chosen the 'Legendary Strength' perk.").withBuffs({'str.mult':0.50});
@@ -1997,8 +2128,9 @@ public class PerkLib
 				"",
 				"You've chosen the 'Legendary Toughness' perk.").withBuffs({'tou.mult':0.50});
 		public static const LegendaryTranquilness:PerkType = mk("Legendary Tranquilness", "Legendary Tranquilness",
-				"Increases maximum wrath by 25000.",
-				"You've chosen the 'Legendary Tranquilness' perk. Thanks to your legendary anger managment training, your maximum wrath has been increased by 25000!");
+				"Increases maximum wrath.",
+				"You've chosen the 'Legendary Tranquilness' perk. Thanks to your legendary anger managment training, your maximum wrath has been increased by 25000!")
+				.withBuffs({'maxwrath_base':+25000});
 		public static const LegendaryWisdom:PerkType = mk("Legendary Wisdom", "Legendary Wisdom",
 				"",
 				"You've chosen the 'Legendary Wisdom' perk.").withBuffs({'wis.mult':0.50});
@@ -2007,7 +2139,8 @@ public class PerkLib
 				"You've chosen the 'Lifeline' perk, increasing your self healing.");
 		public static const LightningReload:PerkType = mk("Lightning Reload", "Lightning Reload",
 				"Allow to reload in middle of shooting as long PC have enough fatigue for that without ending turn and decrease reload fatigue cost by 50%.",
-				"You've chosen the 'Lightning Reload' perk, lowering even more time needed to reload with ammo range weapons like pistols and decrease reload fatigue cost by 50%.");
+				"You've chosen the 'Lightning Reload' perk, lowering even more time needed to reload with ammo range weapons like pistols and decrease reload fatigue cost by 50%.")
+				.withBuffs({'maxfatigue_base':+60});
 		public static const LightningStrikes:PerkType = mk("Lightning Strikes", "Lightning Strikes",
 				"[if(player.spe>=60)" +
 						"Increases the attack damage for non-heavy/non-small melee weapons.</b>" +
@@ -2017,34 +2150,40 @@ public class PerkLib
 				"You've chosen the 'Lightning Strikes' perk, increasing the attack damage for non-heavy/non-small melee weapons.</b>");
 		public static const LimitBreakerBody1stStage:PerkType = mk("Limit Breaker: Body (1st stage)", "Limit Breaker: Body (1st stage)",
 				"Breaking your limits for 'body' for the first time grants you +5% max HP and Wrath.",
-				"You've chosen the 'Limit Breaker: Body (1st stage)' perk, breaking your limits for 'body' for the first time. (+5% max HP and Wrath)");
+				"You've chosen the 'Limit Breaker: Body (1st stage)' perk, breaking your limits for 'body' for the first time. (+5% max HP and Wrath)")
+				.withBuffs({'maxwrath_mult':+0.05});
 		public static const LimitBreakerFlesh1stStage:PerkType = mk("Limit Breaker: Flesh (1st stage)", "Limit Breaker: Flesh (1st stage)",
 				"Breaking your limits for 'flesh' for the first time.",
 				"You've chosen the 'Limit Breaker: Flesh (1st stage)' perk, breaking your limits for 'flesh' for the first time.").withBuffs({'str.mult':0.10,'tou.mult':0.10,'spe.mult':0.10});
 		public static const LimitBreakerHeart1stStage:PerkType = mk("Limit Breaker: Heart (1st stage)", "Limit Breaker: Heart (1st stage)",
 				"Breaking your limits for 'heart' for the first time grants you +5% max Lust and Fatigue.",
-				"You've chosen the 'Limit Breaker: Heart (1st stage)' perk, breaking your limits for 'heart' for the first time. (+5% max Lust and Fatigue)");
+				"You've chosen the 'Limit Breaker: Heart (1st stage)' perk, breaking your limits for 'heart' for the first time. (+5% max Lust and Fatigue)")
+				.withBuffs({'maxfatigue_mult':+0.05,'maxlust_mult':+0.05});
 		public static const LimitBreakerPsyche1stStage:PerkType = mk("Limit Breaker: Psyche (1st stage)", "Limit Breaker: Psyche (1st stage)",
 				"Breaking your limits for 'psyche' for the first time.",
 				"You've chosen the 'Limit Breaker: Psyche (1st stage)' perk, breaking your limits for 'psyche' for the first time.").withBuffs({'int.mult':0.10,'wis.mult':0.10,'lib.mult':0.10,'sens':10});
 		public static const LimitBreakerSoul1stStage:PerkType = mk("Limit Breaker: Soul (1st stage)", "Limit Breaker: Soul (1st stage)",
 				"Breaking your limits for 'soul' for the first time grants you +5% max Mana and Soulforce.",
-				"You've chosen the 'Limit Breaker: Soul (1st stage)' perk, breaking your limits for 'soul' for the first time. (+5% max Mana and Soulforce)");
+				"You've chosen the 'Limit Breaker: Soul (1st stage)' perk, breaking your limits for 'soul' for the first time. (+5% max Mana and Soulforce)")
+				.withBuffs({'maxmana_mult':+0.05,'maxsf_mult':+0.05});
 		public static const LimitBreakerBody2ndStage:PerkType = mk("Limit Breaker: Body (2nd stage)", "Limit Breaker: Body (2nd stage)",
 				"Breaking your limits for 'body' for the second time grants you +10% max HP and Wrath.",
-				"You've chosen the 'Limit Breaker: Body (2nd stage)' perk, breaking your limits for 'body' for the second time. (+10% max HP and Wrath)");
+				"You've chosen the 'Limit Breaker: Body (2nd stage)' perk, breaking your limits for 'body' for the second time. (+10% max HP and Wrath)")
+				.withBuffs({'maxwrath_mult':+0.10,'maxsf_mult':+0.10});
 		public static const LimitBreakerFlesh2ndStage:PerkType = mk("Limit Breaker: Flesh (2nd stage)", "Limit Breaker: Flesh (2nd stage)",
 				"Breaking your limits for 'flesh' for the second time.",
 				"You've chosen the 'Limit Breaker: Flesh (2nd stage)' perk, breaking your limits for 'flesh' for the second time.").withBuffs({'str.mult':0.20,'tou.mult':0.20,'spe.mult':0.20});
 		public static const LimitBreakerHeart2ndStage:PerkType = mk("Limit Breaker: Heart (2nd stage)", "Limit Breaker: Heart (2nd stage)",
 				"Breaking your limits for 'heart' for the second time grants you +10% max Lust and Fatigue.",
-				"You've chosen the 'Limit Breaker: Heart (2nd stage)' perk, breaking your limits for 'heart' for the second time. (+10% max Lust and Fatigue)");
+				"You've chosen the 'Limit Breaker: Heart (2nd stage)' perk, breaking your limits for 'heart' for the second time. (+10% max Lust and Fatigue)")
+				.withBuffs({'maxfatigue_mult':+0.1,'maxlust_mult':+0.1});
 		public static const LimitBreakerPsyche2ndStage:PerkType = mk("Limit Breaker: Psyche (2nd stage)", "Limit Breaker: Psyche (2nd stage)",
 				"Breaking your limits for 'psyche' for the second time.",
 				"You've chosen the 'Limit Breaker: Psyche (2nd stage)' perk, breaking your limits for 'psyche' for the second time.").withBuffs({'int.mult':0.20,'wis.mult':0.20,'lib.mult':0.20,'sens':20});
 		public static const LimitBreakerSoul2ndStage:PerkType = mk("Limit Breaker: Soul (2nd stage)", "Limit Breaker: Soul (2nd stage)",
 				"Breaking your limits for 'soul' for the second time grants you +10% max Mana and Soulforce.",
-				"You've chosen the 'Limit Breaker: Soul (2nd stage)' perk, breaking your limits for 'soul' for the second time. (+10% max Mana and Soulforce)");
+				"You've chosen the 'Limit Breaker: Soul (2nd stage)' perk, breaking your limits for 'soul' for the second time. (+10% max Mana and Soulforce)")
+				.withBuffs({'maxmana_mult':+0.1});
 		public static const LongerLastingBuffsI:PerkType = mk("Long(er) Lasting Buffs I", "Long(er) Lasting Buffs I",
 				"Buff spells last 1 turn longer.",
 				"You've chosen the 'Long(er) Lasting Buffs I' perk. Constant use of buffs allowed you to optimize them a little bit.");
@@ -2082,7 +2221,8 @@ public class PerkLib
 						"|" +
 						"<b>You are too dumb to gain benefit from this perk.</b>" +
 						"]",
-				"You've chosen the 'Mage' perk.  You are able to focus your magical abilities even more keenly, boosting your base spell effects by 10%, mana pool by 90 and lust bar by 15.");
+				"You've chosen the 'Mage' perk.  You are able to focus your magical abilities even more keenly, boosting your base spell effects by 10%, mana pool by 90 and lust bar by 15.")
+				.withBuffs({'maxlust_base':+15});
 		public static const MagicMetabolism:PerkType = mk("Magic Metabolism", "Magic Metabolism",
 				"When your hunger level go down below 50, you start loosing mana (5:1 ratio for mana:hunger decay) instead of hunger when it should happen. If your mana is empty, hunger works as usual.",
 				"You've chosen the 'Magic Metabolism' perk. If PC have enough mana can use it as way to keep hunger around 50 pts.");
@@ -2098,22 +2238,28 @@ public class PerkLib
 				"You've chosen the 'Make it Double' perk, allowing to make full use of dual weapons when using moves like whirlwind or whipping.");
 		public static const ManaAffinityI:PerkType = mk("Mana Affinity I", "Mana Affinity I",
 				"Raises max mana by 3% of base value and regain it 25% faster.",
-				"You've chosen the 'Mana Affinity I' perk, giving you an additional 3% of base value mana and boosting it recovery rate.");
+				"You've chosen the 'Mana Affinity I' perk, giving you an additional 3% of base value mana and boosting it recovery rate.")
+				.withBuffs({'maxmana_mult':+0.03});
 		public static const ManaAffinityII:PerkType = mk("Mana Affinity II", "Mana Affinity II",
 				"Raises max mana by 3% of base value and regain it 25% faster.",
-				"You've chosen the 'Mana Affinity II' perk, giving you an additional 3% of base value mana and boosting it recovery rate.");
+				"You've chosen the 'Mana Affinity II' perk, giving you an additional 3% of base value mana and boosting it recovery rate.")
+				.withBuffs({'maxmana_mult':+0.03});
 		public static const ManaAffinityIII:PerkType = mk("Mana Affinity III", "Mana Affinity III",
 				"Raises max mana by 3% of base value and regain it 25% faster.",
-				"You've chosen the 'Mana Affinity III' perk, giving you an additional 3% of base value mana and boosting it recovery rate.");
+				"You've chosen the 'Mana Affinity III' perk, giving you an additional 3% of base value mana and boosting it recovery rate.")
+				.withBuffs({'maxmana_mult':+0.03});
 		public static const ManaAffinityIV:PerkType = mk("Mana Affinity IV", "Mana Affinity IV",
 				"Raises max mana by 3% of base value and regain it 25% faster.",
-				"You've chosen the 'Mana Affinity IV' perk, giving you an additional 3% of base value mana and boosting it recovery rate.");
+				"You've chosen the 'Mana Affinity IV' perk, giving you an additional 3% of base value mana and boosting it recovery rate.")
+				.withBuffs({'maxmana_mult':+0.03});
 		public static const ManaAffinityV:PerkType = mk("Mana Affinity V", "Mana Affinity V",
 				"Raises max mana by 3% of base value and regain it 25% faster.",
-				"You've chosen the 'Mana Affinity V' perk, giving you an additional 3% of base value mana and boosting it recovery rate.");
+				"You've chosen the 'Mana Affinity V' perk, giving you an additional 3% of base value mana and boosting it recovery rate.")
+				.withBuffs({'maxmana_mult':+0.03});
 		public static const ManaAffinityVI:PerkType = mk("Mana Affinity VI", "Mana Affinity VI",
 				"Raises max mana by 3% of base value and regain it 25% faster.",
-				"You've chosen the 'Mana Affinity VI' perk, giving you an additional 3% of base value mana and boosting it recovery rate.");
+				"You've chosen the 'Mana Affinity VI' perk, giving you an additional 3% of base value mana and boosting it recovery rate.")
+				.withBuffs({'maxmana_mult':+0.03});
 		public static const Manyshot:PerkType = mk("Manyshot", "Manyshot",
 				"You always shoot two arrows instead of one on your first strike.",
 				"You've chosen the 'Manyshot' perk, to always shoot two arrows instead of one on your first strike.");
@@ -2128,7 +2274,8 @@ public class PerkLib
 				"You've chosen the 'Master All-Rounder Education' perk, expanding amount of advanced jobs you can learn. (+3)");
 		public static const MasterCrinosShape:PerkType = mk("Master Crinos Shape", "Master Crinos Shape",
 				"Crinos Shape increase to physical might rise to 160% of core str/tou/spe.",
-				"You've chosen the 'Master Crinos Shape' perk, once again increasing boost gained in Crinos Shape (+160%).");
+				"You've chosen the 'Master Crinos Shape' perk, once again increasing boost gained in Crinos Shape (+160%).")
+				.withBuffs({'maxwrath_base':+800});
 		public static const MasteredDefenceStance:PerkType = mk("Mastered Defence Stance", "Mastered Defence Stance",
 				"Defend move now futher reduce incoming damage and allow for slight improved fatigue/mana/soulforce recovery.",
 				"You've chosen the 'Mastered Defence Stance' perk, finally attaining mastery with your defence pose.");
@@ -2152,7 +2299,8 @@ public class PerkLib
 				"You've chosen the 'Metamorph (Ex)' perk, giving you a more options to mold your own body.");
 		public static const Metamorphable:PerkType = mk("Metamorphable", "Metamorphable",
 				"You can manipulate your soul force to change your body... but this increases your soul force by 10%.",
-				"You've chosen the 'Metamorphable' perk, gaining +10% max Soulforce.");
+				"You've chosen the 'Metamorphable' perk, gaining +10% max Soulforce.")
+				.withBuffs({'maxsf_mult':+0.1});
 		public static const MeteorStrike:PerkType = mk("Meteor Strike", "Meteor Strike",
 				"Double the chance for Jabbing grandmaster to do extra attacks and doubling the damage from grabbing style. This only work when fighting unarmed with no shield equiped.",
 				"You've chosen the 'Meteor Strike' perk, doubling the chance for Jabbing grandmaster to do extra attacks and doubling the damage from grabbing style. This only work when fighting unarmed with no shield equiped.");
@@ -2161,22 +2309,28 @@ public class PerkLib
 				"You've chosen the 'Mind of Steel' perk, gaining +10% melee phys dmg.");
 		public static const MindOverBodyI:PerkType = mk("Mind over Body I", "Mind over Body I",
 				"+6 extra mana per point of intelligence.",
-				"You've chosen the 'Mind over Body I' perk, granting +6 extra maximum mana for each point of intelligence.");
+				"You've chosen the 'Mind over Body I' perk, granting +6 extra maximum mana for each point of intelligence.")
+				.withBuffs({'maxmana_perint':+6});
 		public static const MindOverBodyII:PerkType = mk("Mind over Body II", "Mind over Body II",
 				"+6 extra mana per point of intelligence.",
-				"You've chosen the 'Mind over Body II' perk, granting +6 extra maximum mana for each point of intelligence.");
+				"You've chosen the 'Mind over Body II' perk, granting +6 extra maximum mana for each point of intelligence.")
+				.withBuffs({'maxmana_perint':+6});
 		public static const MindOverBodyIII:PerkType = mk("Mind over Body III", "Mind over Body III",
 				"+6 extra mana per point of intelligence.",
-				"You've chosen the 'Mind over Body III' perk, granting +6 extra maximum mana for each point of intelligence.");
+				"You've chosen the 'Mind over Body III' perk, granting +6 extra maximum mana for each point of intelligence.")
+				.withBuffs({'maxmana_perint':+6});
 		public static const MindOverBodyIV:PerkType = mk("Mind over Body IV", "Mind over Body IV",
 				"+6 extra mana per point of intelligence.",
-				"You've chosen the 'Mind over Body IV' perk, granting +6 extra maximum mana for each point of intelligence.");
+				"You've chosen the 'Mind over Body IV' perk, granting +6 extra maximum mana for each point of intelligence.")
+				.withBuffs({'maxmana_perint':+6});
 		public static const MindOverBodyV:PerkType = mk("Mind over Body V", "Mind over Body V",
 				"+6 extra mana per point of intelligence.",
-				"You've chosen the 'Mind over Body V' perk, granting +6 extra maximum mana for each point of intelligence.");
+				"You've chosen the 'Mind over Body V' perk, granting +6 extra maximum mana for each point of intelligence.")
+				.withBuffs({'maxmana_perint':+6});
 		public static const MindOverBodyVI:PerkType = mk("Mind over Body VI", "Mind over Body VI",
 				"+6 extra mana per point of intelligence.",
-				"You've chosen the 'Mind over Body VI' perk, granting +6 extra maximum mana for each point of intelligence.");
+				"You've chosen the 'Mind over Body VI' perk, granting +6 extra maximum mana for each point of intelligence.")
+				.withBuffs({'maxmana_perint':+6});
 		public static const MoneyFinder:PerkType = mk("Money Finder", "Money Finder",
 				"Some people get all the luck it seems... Shut up and take our money is what all enemies scream at you upon defeat, increasing your gains on victory. (15% more gems from victories)",
 				"You've chosen the 'Money Finder' perk, increasing gem gains from victories by 15%.");
@@ -2191,7 +2345,8 @@ public class PerkLib
 				"You've chosen the 'Motivation (Su)' perk. All henchman do two actions in their turn and increase power of their attacks by 150% of currently boost provided by previous Motivcation perks.");
 		public static const MultiClawAttack:PerkType = mk("Multi Claw Attack", "Multi Claw Attack",
 				"When attacking with your natural weapons, add an additional attack striking up to 4 times.",
-				"You've chosen the 'Multi Claw Attack' perk, gaining an additional attack with your natural weapons!");
+				"You've chosen the 'Multi Claw Attack' perk, gaining an additional attack with your natural weapons!")
+				.withBuffs({'maxwrath_base':+200});
 		public static const Multishot:PerkType = mk("Multishot", "Multishot",
 				"Allows you to perform additional range attack per round.",
 				"You've chosen the 'Multishot' perk, This allows you to make additional range attack.");
@@ -2209,7 +2364,8 @@ public class PerkLib
 				"You've chosen the 'Mythical Desensitization' perk, decreasing negative effects of sensitivity by 25%.");
 		public static const MythicalEndurance:PerkType = mk("Mythical Endurance", "Mythical Endurance",
 				"Increases maximum fatigue by 20000.",
-				"You've chosen the 'Mythical Endurance' perk. Thanks to your mythical physical conditioning, your maximum fatigue has been increased by 20000!");
+				"You've chosen the 'Mythical Endurance' perk. Thanks to your mythical physical conditioning, your maximum fatigue has been increased by 20000!")
+				.withBuffs({'maxfatigue_base':+20000});
 		public static const MythicalIntelligence:PerkType = mk("Mythical Intelligence", "Mythical Intelligence",
 				"",
 				"You've chosen the 'Mythical Intelligence' perk.").withBuffs({'int.mult':0.65});
@@ -2218,7 +2374,8 @@ public class PerkLib
 				"You've chosen the 'Mythical Libido' perk.").withBuffs({'lib.mult':0.65});
 		public static const MythicalSelfControl:PerkType = mk("Mythical Self-Control", "Mythical Self-Control",
 				"Increases maximum lust by 30000.",
-				"You've chosen the 'Mythical Self-Control' perk. Thanks to your mythical mental conditioning, your maximum lust has been increased by 30000!");
+				"You've chosen the 'Mythical Self-Control' perk. Thanks to your mythical mental conditioning, your maximum lust has been increased by 30000!")
+				.withBuffs({'maxlust_base':+30000});
 		public static const MythicalSensitivity:PerkType = mk("Mythical Sensitivity", "Mythical Sensitivity",
 				"",
 				"You've chosen the 'Mythical Sensitivity' perk.").withBuffs({'sens':260});
@@ -2227,7 +2384,8 @@ public class PerkLib
 				"You've chosen the 'Mythical Speed' perk.").withBuffs({'spe.mult':0.65});
 		public static const MythicalSpirituality:PerkType = mk("Mythical Spirituality", "Mythical Spirituality",
 				"Increases maximum mana by 90000.",
-				"You've chosen the 'Mythical Spirituality' perk. Thanks to your mythical mystical conditioning, your maximum mana has been increased by 90000!");
+				"You've chosen the 'Mythical Spirituality' perk. Thanks to your mythical mystical conditioning, your maximum mana has been increased by 90000!")
+				.withBuffs({'maxmana_base':+90000});
 		public static const MythicalStrength:PerkType = mk("Mythical Strength", "Mythical Strength",
 				"",
 				"You've chosen the 'Mythical Strength' perk.").withBuffs({'str.mult':0.65});
@@ -2235,8 +2393,9 @@ public class PerkLib
 				"",
 				"You've chosen the 'Mythical Toughness' perk.").withBuffs({'tou.mult':0.65});
 		public static const MythicalTranquilness:PerkType = mk("Mythical Tranquilness", "Mythical Tranquilness",
-				"Increases maximum wrath by 50000.",
-				"You've chosen the 'Mythical Tranquilness' perk. Thanks to your mythical anger managment training, your maximum wrath has been increased by 50000!");
+				"Increases maximum wrath.",
+				"You've chosen the 'Mythical Tranquilness' perk. Thanks to your mythical anger managment training, your maximum wrath has been increased by 50000!")
+				.withBuffs({'maxwrath_base':+50000});
 		public static const MythicalWisdom:PerkType = mk("Mythical Wisdom", "Mythical Wisdom",
 				"Increases maximum wisdom by 65 + 15 * NG tier.",
 				"You've chosen the 'Mythical Wisdom' perk. Increases maximum wisdom by 65 + 15 * NG tier.").withBuffs({'wis.mult':0.65});
@@ -2269,25 +2428,32 @@ public class PerkLib
 				"You've chosen the 'Natural jouster (Master grade)' perk. As long you will have taur or drider lower body and attack once per turn your spear/lance attack power will be five time higher.");
 		public static const NaturesSpringI:PerkType = mk("Nature's Spring I", "Nature's Spring I",
 				"Raises max fatigue by 20 and regain it 5% faster.",
-				"You've chosen the 'Nature's Spring I' perk, giving you an additional 20 fatigue and boosting your fatigue recovery rate.");
+				"You've chosen the 'Nature's Spring I' perk, giving you an additional 20 fatigue and boosting your fatigue recovery rate.")
+				.withBuffs({'maxfatigue_base':+20});
 		public static const NaturesSpringII:PerkType = mk("Nature's Spring II", "Nature's Spring II",
 				"Raises max fatigue by 20 and regain it 5% faster.",
-				"You've chosen the 'Nature's Spring II' perk, giving you an additional 20 fatigue and boosting your fatigue recovery rate.");
+				"You've chosen the 'Nature's Spring II' perk, giving you an additional 20 fatigue and boosting your fatigue recovery rate.")
+				.withBuffs({'maxfatigue_base':+20});
 		public static const NaturesSpringIII:PerkType = mk("Nature's Spring III", "Nature's Spring III",
 				"Raises max fatigue by 20 and regain it 5% faster.",
-				"You've chosen the 'Nature's Spring III' perk, giving you an additional 20 fatigue and boosting your fatigue recovery rate.");
+				"You've chosen the 'Nature's Spring III' perk, giving you an additional 20 fatigue and boosting your fatigue recovery rate.")
+				.withBuffs({'maxfatigue_base':+20});
 		public static const NaturesSpringIV:PerkType = mk("Nature's Spring IV", "Nature's Spring IV",
 				"Raises max fatigue by 20 and regain it 5% faster.",
-				"You've chosen the 'Nature's Spring IV' perk, giving you an additional 20 fatigue and boosting your fatigue recovery rate.");
+				"You've chosen the 'Nature's Spring IV' perk, giving you an additional 20 fatigue and boosting your fatigue recovery rate.")
+				.withBuffs({'maxfatigue_base':+20});
 		public static const NaturesSpringV:PerkType = mk("Nature's Spring V", "Nature's Spring V",
 				"Raises max fatigue by 20 and regain it 5% faster.",
-				"You've chosen the 'Nature's Spring V' perk, giving you an additional 20 fatigue and boosting your fatigue recovery rate.");
+				"You've chosen the 'Nature's Spring V' perk, giving you an additional 20 fatigue and boosting your fatigue recovery rate.")
+				.withBuffs({'maxfatigue_base':+20});
 		public static const NaturesSpringVI:PerkType = mk("Nature's Spring VI", "Nature's Spring VI",
 				"Raises max fatigue by 20 and regain it 5% faster.",
-				"You've chosen the 'Nature's Spring VI' perk, giving you an additional 20 fatigue and boosting your fatigue recovery rate.");
+				"You've chosen the 'Nature's Spring VI' perk, giving you an additional 20 fatigue and boosting your fatigue recovery rate.")
+				.withBuffs({'maxfatigue_base':+20});
 		public static const Nerd:PerkType = mk("NERD!!!", "NERD!!!",
 				"Piccolo's words, not mine... but they are perfect for describing you. Increase max mana by 10%.",
-				"You've chosen the 'NERD!!!' perk, gaining +10% max Mana.");
+				"You've chosen the 'NERD!!!' perk, gaining +10% max Mana.")
+				.withBuffs({'maxmana_mult':+0.1});
 		public static const NonaAttackSmall:PerkType = mk("Nona Attack (Small)", "Nona Attack (Small)",
 				"Allows you to perform nine melee attacks with small weapons per round.",
 				"You've chosen the 'Nona Attack (Small)' perk. This allows you to make nine melee attacks with small weapons.");
@@ -2321,22 +2487,28 @@ public class PerkLib
 				"You've chosen the 'Pastor' perk, lowering min libido by 2 and rise lust resistance by 5%.");
 		public static const PathOfEnlightenment:PerkType = mk("Path of Enlightenment", "Path of Enlightenment",
 				"You walk a path of enlightenment... You should stop expecting anything other than the 10% more soulforce.",
-				"You've chosen the 'Path of Enlightenment' perk, gaining +10% max Soulforce.");
+				"You've chosen the 'Path of Enlightenment' perk, gaining +10% max Soulforce.")
+				.withBuffs({'maxsf_mult':+0.1});
 		public static const PeerlessEndurance:PerkType = mk("Peerless Endurance", "Peerless Endurance",
 				"Increases maximum fatigue by 1000.",
-				"You've chosen the 'Peerless Endurance' perk. Thanks to your peerless physical conditioning, your maximum fatigue has been increased by 1000!</b>");
+				"You've chosen the 'Peerless Endurance' perk. Thanks to your peerless physical conditioning, your maximum fatigue has been increased by 1000!</b>")
+				.withBuffs({'maxfatigue_base':+1000});
 		public static const PeerlessSelfControl:PerkType = mk("Peerless Self-Control", "Peerless Self-Control",
 				"Increases maximum lust by 1500.",
-				"You've chosen the 'Peerless Self-Control' perk. Thanks to your peerless mental conditioning, your maximum lust has been increased by 1500!</b>");
+				"You've chosen the 'Peerless Self-Control' perk. Thanks to your peerless mental conditioning, your maximum lust has been increased by 1500!</b>")
+				.withBuffs({'maxlust_base':+1500});
 		public static const PeerlessSpirituality:PerkType = mk("Peerless Spirituality", "Peerless Spirituality",
 				"Increases maximum mana by 4500.",
-				"You've chosen the 'Peerless Spirituality' perk. Thanks to your peerless mystical conditioning, your maximum mana has been increased by 4500!</b>");
+				"You've chosen the 'Peerless Spirituality' perk. Thanks to your peerless mystical conditioning, your maximum mana has been increased by 4500!</b>")
+				.withBuffs({'maxmana_base':+4500});
 		public static const PeerlessTranquilness:PerkType = mk("Peerless Tranquilness", "Peerless Tranquilness",
-				"Increases maximum wrath by 2500.",
-				"You've chosen the 'Peerless Tranquilness' perk. Thanks to your peerless anger managment training, your maximum wrath has been increased by 2500!</b>");
+				"Increases maximum wrath.",
+				"You've chosen the 'Peerless Tranquilness' perk. Thanks to your peerless anger managment training, your maximum wrath has been increased by 2500!</b>")
+				.withBuffs({'maxwrath_base':+2500});
 		public static const PentaAttack:PerkType = mk("Penta Attack", "Penta Attack",
 				"Allows you to perform five melee attacks with normal sized weapons per round.",
-				"You've chosen the 'Penta Attack' perk.  This allows you to make five melee attacks with non-large weapons.");
+				"You've chosen the 'Penta Attack' perk.  This allows you to make five melee attacks with non-large weapons.")
+				.withBuffs({'maxwrath_base':+50});
 		public static const PentaAttackSmall:PerkType = mk("Penta Attack (Small)", "Penta Attack (Small)",
 				"Allows you to perform five melee attacks with small weapons per round.",
 				"You've chosen the 'Penta Attack (Small)' perk.  This allows you to make five melee attacks with small weapons.");
@@ -2378,16 +2550,17 @@ public class PerkLib
 				"You've chosen the 'Precision' perk.  Thanks to your intelligence, you're now more adept at finding and striking an enemy's weak points, reducing their damage resistance from armor by 10.  If your intelligence ever drops below 25 you'll no longer be smart enough to benefit from this perk.");
 		public static const President:PerkType = mk("President", "President",
 				"You own the school board, controlling what classes are taught, further increasing max mana by 10%.",
-				"You've chosen the 'President' perk, gaining +10% max Mana.");
+				"You've chosen the 'President' perk, gaining +10% max Mana.")
+				.withBuffs({'maxmana_mult':+0.1});
 		public static const PrestigeJobArcaneArcher:PerkType = mk("Prestige Job: Arcane Archer", "Prestige Job: Arcane Archer",
 				"You've trained in prestige art of combining magic and arrows.",
-				"You've chosen the 'Prestige Job: Arcane Archer' perk, training yourself to became Arcane Archer.").withBuffs({'spe.mult':0.55,'int.mult':0.65});
+				"You've chosen the 'Prestige Job: Arcane Archer' perk, training yourself to became Arcane Archer.").withBuffs({'spe.mult':0.55,'int.mult':0.65,'maxfatigue_base':600});
 		public static const PrestigeJobArchpriest:PerkType = mk("Prestige Job: Arch-priest", "Prestige Job: Arch-priest",
 				"You've trained in prestige art of divine magic. (+20% to white magic spellpower, -40% to black magic spellpower)",
 				"You've chosen the 'Prestige Job: Arch-priest' perk, training yourself to became Arch-priest.").withBuffs({'tou.mult':0.45,'int.mult':0.75});
 		public static const PrestigeJobBerserker:PerkType = mk("Prestige Job: Berserker", "Prestige Job: Berserker",
 				"You've trained in prestige art of perfect mastery over all forms of berserking.",
-				"You've chosen the 'Prestige Job: Berserker' perk, training yourself to became Berserker.").withBuffs({'str.mult':1.00,'tou.mult':0.20});
+				"You've chosen the 'Prestige Job: Berserker' perk, training yourself to became Berserker.").withBuffs({'str.mult':1.00,'tou.mult':0.20,'maxwrath_base':+1000});
 		public static const PrestigeJobBindmaster:PerkType = mk("Prestige Job: Bindmaster", "Prestige Job: Bindmaster",
 				"You've trained in prestige art of perfect mastery over all forms of binding.",
 				"You've chosen the 'Prestige Job: Bindmaster' perk, training yourself to became Bindmaster.").withBuffs({'tou.mult':0.30,'lib.mult':0.90});
@@ -2399,13 +2572,13 @@ public class PerkLib
 				"You've chosen the 'Prestige Job: Necromancer' perk, training yourself to became Necromancer.").withBuffs({'tou.mult':0.30,'wis.mult':0.90});
 		public static const PrestigeJobSeer:PerkType = mk("Prestige Job: Seer", "Prestige Job: Seer",
 				"You've trained in prestige art of combining soulforce and magic.",
-				"You've chosen the 'Prestige Job: Seer' perk, training yourself to became Seer.").withBuffs({'int.mult':0.75,'wis.mult':0.45});
+				"You've chosen the 'Prestige Job: Seer' perk, training yourself to became Seer.").withBuffs({'int.mult':0.75,'wis.mult':0.45,'maxsf_base':+500,'maxfatigue_base':+900});
 		public static const PrestigeJobSentinel:PerkType = mk("Prestige Job: Sentinel", "Prestige Job: Sentinel",
 				"You've trained in prestige art that brings 'tanking' to a whole new level.",
 				"You've chosen the 'Prestige Job: Sentinel' perk, training yourself to became Sentinel.").withBuffs({'str.mult':0.20,'tou.mult':1.00});
 		public static const PrestigeJobSoulArcher:PerkType = mk("Prestige Job: Soul Archer", "Prestige Job: Soul Archer",
 				"You've trained in prestige art of combining soulforce and arrows.",
-				"You've chosen the 'Prestige Job: Soul Archer' perk, training yourself to became Soul Archer.").withBuffs({'spe.mult':0.55,'wis.mult':0.65});
+				"You've chosen the 'Prestige Job: Soul Archer' perk, training yourself to became Soul Archer.").withBuffs({'spe.mult':0.55,'wis.mult':0.65,'maxsf_base':+1000,'maxfatigue_base':150});
 		public static const PrestigeJobSoulArtMaster:PerkType = mk("Prestige Job: Soul Art Master", "Prestige Job: Soul Art Master",
 				"You've trained in prestige art of combine soulforce with physical attacks to various deadly effect.",
 				"You've chosen the 'Prestige Job: Soul Art Master' perk, training yourself to became Soul Art Master.").withBuffs({'str.mult':0.50,'wis.mult':0.70});
@@ -2417,7 +2590,7 @@ public class PerkLib
 				"You've chosen the 'Prestige Job: Stalker' perk, training yourself to became Stalker.").withBuffs({'str.mult':0.80,'spe.mult':0.40});
 		public static const PrestigeJobTempest:PerkType = mk("Prestige Job: Tempest", "Prestige Job: Tempest",
 				"You've trained in prestige art of dual wielding as you hack and slice through your opponents like a raging storm of steel.",
-				"You've chosen the 'Prestige Job: Tempest' perk, training yourself to became Tempest.").withBuffs({'str.mult':0.30,'spe.mult':0.90});
+				"You've chosen the 'Prestige Job: Tempest' perk, training yourself to became Tempest.").withBuffs({'str.mult':0.30,'spe.mult':0.90,'maxwrath_base':+500});
 		public static const PrestigeJobWarlock:PerkType = mk("Prestige Job: Warlock", "Prestige Job: Warlock",
 				"You've trained in prestige art of hex magic. (+20% to black magic spellpower, -40% to white magic spellpower)",
 				"You've chosen the 'Prestige Job: Warlock' perk, training yourself to became Warlock.").withBuffs({'int.mult':0.75,'lib.mult':0.45});
@@ -2426,28 +2599,36 @@ public class PerkLib
 				"You've chosen the 'Priest' perk, lowering min libido by 2 and rise lust resistance by 5%.");
 		public static const PrimalFuryI:PerkType = mk("Primal Fury I", "Primal Fury I",
 				"Raises max Wrath by 5%, generates 2 point of Wrath out of combat and double this amount during fight.",
-				"You've chosen the 'Primal Fury I' perk, increasing max Wrath by 5%, generates 2 point of Wrath out of combat and double this amount during fight.");
+				"You've chosen the 'Primal Fury I' perk, increasing max Wrath by 5%, generates 2 point of Wrath out of combat and double this amount during fight.")
+				.withBuffs({'maxwrath_mult':+0.05});
 		public static const PrimalFuryII:PerkType = mk("Primal Fury II", "Primal Fury II",
 				"Raises max Wrath by 5%, generates 2 point of Wrath out of combat and double this amount during fight.",
-				"You've chosen the 'Primal Fury II' perk, increasing max Wrath by 5%, generates 2 point of Wrath out of combat and double this amount during fight.");
+				"You've chosen the 'Primal Fury II' perk, increasing max Wrath by 5%, generates 2 point of Wrath out of combat and double this amount during fight.")
+				.withBuffs({'maxwrath_mult':+0.05});
 		public static const PrimalFuryIII:PerkType = mk("Primal Fury III", "Primal Fury III",
 				"Raises max Wrath by 5%, generates 2 point of Wrath out of combat and double this amount during fight.",
-				"You've chosen the 'Primal Fury III' perk, increasing max Wrath by 5%, generates 2 point of Wrath out of combat and double this amount during fight.");
+				"You've chosen the 'Primal Fury III' perk, increasing max Wrath by 5%, generates 2 point of Wrath out of combat and double this amount during fight.")
+				.withBuffs({'maxwrath_mult':+0.05});
 		public static const PrimalFuryIV:PerkType = mk("Primal Fury IV", "Primal Fury IV",
 				"Raises max Wrath by 5%, generates 2 point of Wrath out of combat and double this amount during fight.",
-				"You've chosen the 'Primal Fury IV' perk, increasing max Wrath by 5%, generates 2 point of Wrath out of combat and double this amount during fight.");
+				"You've chosen the 'Primal Fury IV' perk, increasing max Wrath by 5%, generates 2 point of Wrath out of combat and double this amount during fight.")
+				.withBuffs({'maxwrath_mult':+0.05});
 		public static const PrimalFuryV:PerkType = mk("Primal Fury V", "Primal Fury V",
 				"Raises max Wrath by 5%, generates 2 point of Wrath out of combat and double this amount during fight.",
-				"You've chosen the 'Primal Fury V' perk, increasing max Wrath by 5%, generates 2 point of Wrath out of combat and double this amount during fight.");
+				"You've chosen the 'Primal Fury V' perk, increasing max Wrath by 5%, generates 2 point of Wrath out of combat and double this amount during fight.")
+				.withBuffs({'maxwrath_mult':+0.05});
 		public static const PrimalFuryVI:PerkType = mk("Primal Fury VI", "Primal Fury VI",
 				"Raises max Wrath by 5%, generates 2 point of Wrath out of combat and double this amount during fight.",
-				"You've chosen the 'Primal Fury VI' perk, increasing max Wrath by 5%, generates 2 point of Wrath out of combat and double this amount during fight.");
+				"You've chosen the 'Primal Fury VI' perk, increasing max Wrath by 5%, generates 2 point of Wrath out of combat and double this amount during fight.")
+				.withBuffs({'maxwrath_mult':+0.05});
 		public static const Principle:PerkType = mk("Principle", "Principle",
 				"You oversee the day to day actions inside the school, your studious nature increasing max mana by 10%.",
-				"You've chosen the 'Principle' perk, gaining +10% max Mana.");
+				"You've chosen the 'Principle' perk, gaining +10% max Mana.")
+				.withBuffs({'maxmana_mult':+0.1});
 		public static const Professor:PerkType = mk("Professor", "Professor",
 				"You're more important than the standard teacher, and your paycheck reflects that. You're hired for your knowledge which increases max mana by 10%.",
-				"You've chosen the 'Professor' perk, gaining +10% max Mana.");
+				"You've chosen the 'Professor' perk, gaining +10% max Mana.")
+				.withBuffs({'maxmana_mult':+0.1});
 		public static const Prostitute:PerkType = mk("Prostitute", "Prostitute",
 				"It's official, everyone knows to go to you for sex. You're still new to the business, but you learned some new tricks. (+15% tease dmg)",
 				"You've chosen the 'Prostitute' perk, gaining +15% tease dmg.");
@@ -2457,7 +2638,8 @@ public class PerkLib
 				"You've chosen the 'Pyro's Friend' perk, gaining +10% range phys dmg.");
 		public static const QuadrupleAttack:PerkType = mk("Quadruple Attack", "Quadruple Attack",
 				"Allows you to perform four melee attacks with normal sized weapons per round.",
-				"You've chosen the 'Quadruple Attack' perk.  This allows you to make four melee attacks with non-large weapons.");
+				"You've chosen the 'Quadruple Attack' perk.  This allows you to make four melee attacks with non-large weapons.")
+				.withBuffs({'maxwrath_base':+50});
 		public static const QuadrupleAttackSmall:PerkType = mk("Quadruple Attack (Small)", "Quadruple Attack (Small)",
 				"Allows you to perform four melee attacks with small weapons per round.",
 				"You've chosen the 'Quadruple Attack (Small)' perk.  This allows you to make four melee attacks with small weapons.");
@@ -2469,7 +2651,8 @@ public class PerkLib
 				"You've chosen the 'Racial Paragon' perk, chosing to specialise into a specific race and increasing racial skill power by 50%.");
 		public static const Rage:PerkType = mk("Rage", "Rage",
 				"Increasing crit chance by up to 50% in berserk state that would reset after succesful crit attack.",
-				"You've chosen the 'Rage' perk, increasing crit chance by up to 50% in berserk state until next crit attack.");
+				"You've chosen the 'Rage' perk, increasing crit chance by up to 50% in berserk state until next crit attack.")
+				.withBuffs({'maxwrath_base':+1500});
 		public static const RagingInferno:PerkType = mk("Raging Inferno", "Raging Inferno",
 				"Cumulative 20% damage increase for every subsequent fire spell. Each turn without casted fire spell lower damage by 20%.",
 				"You've chosen the 'Raging Inferno' perk. Cumulative 20% damage increase for every subsequent fire spell. Each turn without casted fire spell lower damage by 20%.");
@@ -2481,7 +2664,8 @@ public class PerkLib
 				"You've chosen the 'Raging Inferno (Su)' perk. Prevent decay of cumulative damage increase bonus when channeling fire based attack. Penalty for turn without casted fire spell decreased by another 5%.");
 		public static const RapidReload:PerkType = mk("Rapid Reload", "Rapid Reload",
 				"Allow to not spend whole turn to use Reload button as long PC got enough fatigue.",
-				"You've chosen the 'Rapid Reload' perk, lowering time needed to reload ammo for range weapons like pistols.");
+				"You've chosen the 'Rapid Reload' perk, lowering time needed to reload ammo for range weapons like pistols.")
+				.withBuffs({'maxfatigue_base':+20});
 		public static const RecoveryMantra:PerkType = mk("Recovery mantra", "Recovery mantra",
 				"Gain soulforce recovery equal to 2% of your total soulforce.",
 				"You've chosen the 'Recovery mantra' perk, gaining soulfroce recovery rate equal to 2% of your total soulforce.");
@@ -2668,7 +2852,8 @@ public class PerkLib
 				"You've chosen the 'Soul Personage' perk, reaching 2nd stage of soul cultivation! (+20 max Hunger, +40 max SF at lvl 12, 14, 16; +10% to max SF at lvl 12)").withBuffs({'wis.mult':0.05});
 		public static const SoulPowered:PerkType = mk("Soul Powered", "Soul Powered",
 				"You use your soul force more than anything else... increasing its size by 10%.",
-				"You've chosen the 'Soul Powered' perk, gaining +10% max Soulforce.");
+				"You've chosen the 'Soul Powered' perk, gaining +10% max Soulforce.")
+				.withBuffs({'maxsf_mult':+0.1});
 		public static const SoulScholar:PerkType = mk("Soul Scholar", "Soul Scholar",
 				"Allow reaching 5th stage of soul cultivation. (+25 max Hunger, +5 to max Wis, +70 max SF at lvl 30, 32, 34; +15% to max SF at lvl 30)",
 				"You've chosen the 'Soul Scholar' perk, reaching 5th stage of soul cultivation! (+25 max Hunger, +70 max SF at lvl 30, 32, 34; +15% to max SF at lvl 30)").withBuffs({'wis.mult':0.05});
@@ -2773,22 +2958,27 @@ public class PerkLib
 				"You've chosen the 'Strongest Elemental Bond (Su)' perk, reaching near the peak of connection strength with your elementals.");
 		public static const Studious:PerkType = mk("Studious", "Studious",
 				"You're a new student, kinda have to be studious. Your hours of study has helped you increase max mana by 10%.",
-				"You've chosen the 'Studious' perk, gaining +10% max Mana.");
+				"You've chosen the 'Studious' perk, gaining +10% max Mana.")
+				.withBuffs({'maxmana_mult':+0.1});
 		public static const SuperChargedCore:PerkType = mk("Super Charged Core", "Super Charged Core",
 				"At the cost of using additional mana you can super charge each temporary golem core attaing ever better effects than before. Allow to deal reduced (50%) damage to enemies that are immune to physical attacks.",
 				"You've chosen the 'Super Charged Core' perk, learning how to make core charging more effective. Even to be able damage enemeis highly resistant to physical attacks.");
 		public static const SuperiorEndurance:PerkType = mk("Superior Endurance", "Superior Endurance",
 				"Increases maximum fatigue by 500.",
-				"You've chosen the 'Superior Endurance' perk. Thanks to your superior physical conditioning, your maximum fatigue has been increased by 500!</b>");
+				"You've chosen the 'Superior Endurance' perk. Thanks to your superior physical conditioning, your maximum fatigue has been increased by 500!</b>")
+				.withBuffs({'maxfatigue_base':+500});
 		public static const SuperiorSelfControl:PerkType = mk("Superior Self-Control", "Superior Self-Control",
 				"Increases maximum lust by 750.",
-				"You've chosen the 'Superior Self-Control' perk. Thanks to your superior mental conditioning, your maximum lust has been increased by 750!</b>");
+				"You've chosen the 'Superior Self-Control' perk. Thanks to your superior mental conditioning, your maximum lust has been increased by 750!</b>")
+				.withBuffs({'maxlust_base':+750});
 		public static const SuperiorSpirituality:PerkType = mk("Superior Spirituality", "Superior Spirituality",
 				"Increases maximum mana by 2250.",
-				"You've chosen the 'Superior Spirituality' perk. Thanks to your superior mystical conditioning, your maximum mana has been increased by 2250!</b>");
+				"You've chosen the 'Superior Spirituality' perk. Thanks to your superior mystical conditioning, your maximum mana has been increased by 2250!</b>")
+				.withBuffs({'maxmana_base':+2250});
 		public static const SuperiorTranquilness:PerkType = mk("Superior Tranquilness", "Superior Tranquilness",
-				"Increases maximum wrath by 1250.",
-				"You've chosen the 'Superior Tranquilness' perk. Thanks to your superior anger managment training, your maximum wrath has been increased by 1250!</b>");
+				"Increases maximum wrath.",
+				"You've chosen the 'Superior Tranquilness' perk. Thanks to your superior anger managment training, your maximum wrath has been increased by 1250!</b>")
+				.withBuffs({'maxwrath_base':+1250});
 		public static const SuperSensual:PerkType = mk("Super Sensual", "Super Sensual",
 				"Lowering by another ~40% needed exp to lvl-up tease, increasing max tease lvl cap to 70, increasing a bit lust dmg when tease chance is above 100% (each 1% above 100% increase lust dmg by ~2%) and +2 more tease exp after succes.",
 				"You've chosen the 'Super Sensual' perk, lowering by another ~33% needed exp to lvl-up tease, increasing max tease lvl cap to 70, increasing a bit lust dmg when tease chance is above 100% and +2 more tease exp after succes.");
@@ -2849,7 +3039,8 @@ public class PerkLib
 				"You've chosen the 'Tank VI' perk, granting +12 extra maximum HP for each point of toughness.");
 		public static const Teacher:PerkType = mk("Teacher", "Teacher",
 				"Instead of being taught, now you teach others. Your skill allows you to increase max mana by 10%.",
-				"You've chosen the 'Teacher' perk, gaining +10% max Mana.");
+				"You've chosen the 'Teacher' perk, gaining +10% max Mana.")
+				.withBuffs({'maxmana_mult':+0.1});
 		public static const Telekinesis:PerkType = mk("Telekinesis", "Telekinesis",
 				"You have the power to wield and throw objects with your mind alone. Gain a bonus to damage based on inteligence when using thrown weapons and aquire additionnal attacks based on character level.");
 		public static const TemporalGolemsRestructuration:PerkType = mk("Temporal Golems Restructuration", "Temporal Golems Restructuration",
@@ -2923,10 +3114,12 @@ public class PerkLib
 				"Double gems gained from selling items and gems found. Gem based abilities are more powerful.");
 		public static const TripleAttack:PerkType = mk("Triple Attack", "Triple Attack",
 				"Allows you to perform three melee attacks with normal sized weapons per round.",
-				"You've chosen the 'Triple Attack' perk.  This allows you to make three melee attacks with non-large weapons.");
+				"You've chosen the 'Triple Attack' perk.  This allows you to make three melee attacks with non-large weapons.")
+				.withBuffs({'maxwrath_base':+50});
 		public static const TripleAttackLarge:PerkType = mk("Triple Attack (Large)", "Triple Attack (Large)",
 				"Allows you to perform three melee attacks with large weapons per round.",
-				"You've chosen the 'Triple Attack (Large)' perk.  This allows you to make three melee attacks with large weapons.");
+				"You've chosen the 'Triple Attack (Large)' perk.  This allows you to make three melee attacks with large weapons.")
+				.withBuffs({'maxwrath_base':+100});
 		public static const TripleAttackSmall:PerkType = mk("Triple Attack (Small)", "Triple Attack (Small)",
 				"Allows you to perform three melee attacks with small weapons per round.",
 				"You've chosen the 'Triple Attack (Small)' perk.  This allows you to make three melee attacks with small weapons.");
@@ -2941,16 +3134,20 @@ public class PerkLib
 				"You've chosen the 'Unhindered' perk, granting chance to evade when you are naked.");
 		public static const UnlockArdor:PerkType = mk("Unlock: Ardor", "Unlock: Ardor (1st Stage)",
 				"Unlocking ardor grants additional 3 Lust on each lvl-up (retroactive effect).",
-				"You've chosen the 'Unlock: Ardor (1st Stage)' perk, allowing you to increase passive Lust gains on lvl-up!");
+				"You've chosen the 'Unlock: Ardor (1st Stage)' perk, allowing you to increase passive Lust gains on lvl-up!")
+				.withBuffs({'maxlust_perlevel':+3});
 		public static const UnlockArdor2ndStage:PerkType = mk("Unlock: Ardor (2nd Stage)", "Unlock: Ardor (2nd Stage)",
 				"Unlocking ardor grants additional 3 Lust on each lvl-up (retroactive effect).",
-				"You've chosen the 'Unlock: Ardor (2nd Stage)' perk, allowing you to increase passive Lust gains on lvl-up!");
+				"You've chosen the 'Unlock: Ardor (2nd Stage)' perk, allowing you to increase passive Lust gains on lvl-up!")
+				.withBuffs({'maxlust_perlevel':+3});
 		public static const UnlockArdor3rdStage:PerkType = mk("Unlock: Ardor (3rd Stage)", "Unlock: Ardor (3rd Stage)",
 				"Unlocking ardor grants additional 3 Lust on each lvl-up (retroactive effect).",
-				"You've chosen the 'Unlock: Ardor (3rd Stage)' perk, allowing you to increase passive Lust gains on lvl-up!");
+				"You've chosen the 'Unlock: Ardor (3rd Stage)' perk, allowing you to increase passive Lust gains on lvl-up!")
+				.withBuffs({'maxlust_perlevel':+3});
 		public static const UnlockArdor4thStage:PerkType = mk("Unlock: Ardor (4th Stage)", "Unlock: Ardor (4th Stage)",
 				"Unlocking ardor grants additional 3 Lust on each lvl-up (retroactive effect).",
-				"You've chosen the 'Unlock: Ardor (4th Stage)' perk, allowing you to increase passive Lust gains on lvl-up!");
+				"You've chosen the 'Unlock: Ardor (4th Stage)' perk, allowing you to increase passive Lust gains on lvl-up!")
+				.withBuffs({'maxlust_perlevel':+3});
 		public static const UnlockBody:PerkType = mk("Unlock: Body", "Unlock: Body (1st Stage)",
 				"Unlocking body potential grants additional 60 HP on each lvl-up (retroactive effect).",
 				"You've chosen the 'Unlock: Body (1st Stage)' perk, allowing you to increase passive HP gains on lvl-up!");
@@ -2965,52 +3162,68 @@ public class PerkLib
 				"You've chosen the 'Unlock: Body (4th Stage)' perk, allowing you to increase passive HP gains on lvl-up!");
 		public static const UnlockEndurance:PerkType = mk("Unlock: Endurance", "Unlock: Endurance (1st Stage)",
 				"Unlocking innate endurance grants additional 5 Fatigue on each lvl-up (retroactive effect).",
-				"You've chosen the 'Unlock: Endurance (1st Stage)' perk, allowing you to increase passive Fatigue gains on lvl-up!");
+				"You've chosen the 'Unlock: Endurance (1st Stage)' perk, allowing you to increase passive Fatigue gains on lvl-up!")
+				.withBuffs({'maxfatigue_perlevel':+5});
 		public static const UnlockEndurance2ndStage:PerkType = mk("Unlock: Endurance (2nd Stage)", "Unlock: Endurance (2nd Stage)",
 				"Unlocking innate endurance grants additional 5 Fatigue on each lvl-up (retroactive effect).",
-				"You've chosen the 'Unlock: Endurance (2nd Stage)' perk, allowing you to increase passive Fatigue gains on lvl-up!");
+				"You've chosen the 'Unlock: Endurance (2nd Stage)' perk, allowing you to increase passive Fatigue gains on lvl-up!")
+				.withBuffs({'maxfatigue_perlevel':+5});
 		public static const UnlockEndurance3rdStage:PerkType = mk("Unlock: Endurance (3rd Stage)", "Unlock: Endurance (3rd Stage)",
 				"Unlocking innate endurance grants additional 5 Fatigue on each lvl-up (retroactive effect).",
-				"You've chosen the 'Unlock: Endurance (3rd Stage)' perk, allowing you to increase passive Fatigue gains on lvl-up!");
+				"You've chosen the 'Unlock: Endurance (3rd Stage)' perk, allowing you to increase passive Fatigue gains on lvl-up!")
+				.withBuffs({'maxfatigue_perlevel':+5});
 		public static const UnlockEndurance4thStage:PerkType = mk("Unlock: Endurance (4th Stage)", "Unlock: Endurance (4th Stage)",
 				"Unlocking innate endurance grants additional 5 Fatigue on each lvl-up (retroactive effect).",
-				"You've chosen the 'Unlock: Endurance (4th Stage)' perk, allowing you to increase passive Fatigue gains on lvl-up!");
+				"You've chosen the 'Unlock: Endurance (4th Stage)' perk, allowing you to increase passive Fatigue gains on lvl-up!")
+				.withBuffs({'maxfatigue_perlevel':+5});
 		public static const UnlockId:PerkType = mk("Unlock: Id", "Unlock: Id (1st Stage)",
 				"Unlocking id grants additional 5 Wrath on each lvl-up (retroactive effect).",
-				"You've chosen the 'Unlock: Id (1st Stage)' perk, allowing you to increase passive Wrath gains on lvl-up!");
+				"You've chosen the 'Unlock: Id (1st Stage)' perk, allowing you to increase passive Wrath gains on lvl-up!")
+				.withBuffs({'maxwrath_perlevel':+5});
 		public static const UnlockId2ndStage:PerkType = mk("Unlock: Id (2nd Stage)", "Unlock: Id (2nd Stage)",
 				"Unlocking id grants additional 5 Wrath on each lvl-up (retroactive effect).",
-				"You've chosen the 'Unlock: Id (2nd Stage)' perk, allowing you to increase passive Wrath gains on lvl-up!");
+				"You've chosen the 'Unlock: Id (2nd Stage)' perk, allowing you to increase passive Wrath gains on lvl-up!")
+				.withBuffs({'maxwrath_perlevel':+5});
 		public static const UnlockId3rdStage:PerkType = mk("Unlock: Id (3rd Stage)", "Unlock: Id (3rd Stage)",
 				"Unlocking id grants additional 5 Wrath on each lvl-up (retroactive effect).",
-				"You've chosen the 'Unlock: Id (3rd Stage)' perk, allowing you to increase passive Wrath gains on lvl-up!");
+				"You've chosen the 'Unlock: Id (3rd Stage)' perk, allowing you to increase passive Wrath gains on lvl-up!")
+				.withBuffs({'maxwrath_perlevel':+5});
 		public static const UnlockId4thStage:PerkType = mk("Unlock: Id (4th Stage)", "Unlock: Id (4th Stage)",
 				"Unlocking id grants additional 5 Wrath on each lvl-up (retroactive effect).",
-				"You've chosen the 'Unlock: Id (4th Stage)' perk, allowing you to increase passive Wrath gains on lvl-up!");
+				"You've chosen the 'Unlock: Id (4th Stage)' perk, allowing you to increase passive Wrath gains on lvl-up!")
+				.withBuffs({'maxwrath_perlevel':+5});
 		public static const UnlockSpirit:PerkType = mk("Unlock: Spirit", "Unlock: Spirit (1st Stage)",
 				"Unlocking spirit potential grants additional 5 Soulforce on each lvl-up (retroactive effect).",
-				"You've chosen the 'Unlock: Spirit (1st Stage)' perk, allowing you to increase passive Soulforce gains on lvl-up!");
+				"You've chosen the 'Unlock: Spirit (1st Stage)' perk, allowing you to increase passive Soulforce gains on lvl-up!")
+				.withBuffs({'maxsf_perlevel':+5});
 		public static const UnlockSpirit2ndStage:PerkType = mk("Unlock: Spirit (2nd Stage)", "Unlock: Spirit (2nd Stage)",
 				"Unlocking spirit potential grants additional 5 Soulforce Spirit each lvl-up (retroactive effect).",
-				"You've chosen the 'Unlock: Spirit (2nd Stage)' perk, allowing you to increase passive Soulforce gains on lvl-up!");
+				"You've chosen the 'Unlock: Spirit (2nd Stage)' perk, allowing you to increase passive Soulforce gains on lvl-up!")
+				.withBuffs({'maxsf_perlevel':+5});
 		public static const UnlockSpirit3rdStage:PerkType = mk("Unlock: Spirit (3rd Stage)", "Unlock: Spirit (3rd Stage)",
 				"Unlocking spirit potential grants additional 5 Soulforce on each lvl-up (retroactive effect).",
-				"You've chosen the 'Unlock: Spirit (3rd Stage)' perk, allowing you to increase passive Soulforce gains on lvl-up!");
+				"You've chosen the 'Unlock: Spirit (3rd Stage)' perk, allowing you to increase passive Soulforce gains on lvl-up!")
+				.withBuffs({'maxsf_perlevel':+5});
 		public static const UnlockSpirit4thStage:PerkType = mk("Unlock: Spirit (4th Stage)", "Unlock: Spirit (4th Stage)",
 				"Unlocking spirit potential grants additional 5 Soulforce on each lvl-up (retroactive effect).",
-				"You've chosen the 'Unlock: Spirit (4th Stage)' perk, allowing you to increase passive Soulforce gains on lvl-up!");
+				"You've chosen the 'Unlock: Spirit (4th Stage)' perk, allowing you to increase passive Soulforce gains on lvl-up!")
+				.withBuffs({'maxsf_perlevel':+5});
 		public static const UnlockForce:PerkType = mk("Unlock: Force", "Unlock: Force (1st Stage)",
 				"Unlocking magic potential grants additional 10 Mana on each lvl-up (retroactive effect).",
-				"You've chosen the 'Unlock: Force (1st Stage)' perk, allowing you to increase passive Mana gains on lvl-up!");
+				"You've chosen the 'Unlock: Force (1st Stage)' perk, allowing you to increase passive Mana gains on lvl-up!")
+				.withBuffs({'maxmana_perlevel':+10});
 		public static const UnlockForce2ndStage:PerkType = mk("Unlock: Force (2nd Stage)", "Unlock: Force (2nd Stage)",
 				"Unlocking magic potential grants additional 10 Mana on each lvl-up (retroactive effect).",
-				"You've chosen the 'Unlock: Force (2nd Stage)' perk, allowing you to increase passive Mana gains on lvl-up!");
+				"You've chosen the 'Unlock: Force (2nd Stage)' perk, allowing you to increase passive Mana gains on lvl-up!")
+				.withBuffs({'maxmana_perlevel':+10});
 		public static const UnlockForce3rdStage:PerkType = mk("Unlock: Force (3rd Stage)", "Unlock: Force (3rd Stage)",
 				"Unlocking magic potential grants additional 10 Mana on each lvl-up (retroactive effect).",
-				"You've chosen the 'Unlock: Force (3rd Stage)' perk, allowing you to increase passive Mana gains on lvl-up!");
+				"You've chosen the 'Unlock: Force (3rd Stage)' perk, allowing you to increase passive Mana gains on lvl-up!")
+				.withBuffs({'maxmana_perlevel':+10});
 		public static const UnlockForce4thStage:PerkType = mk("Unlock: Force (4th Stage)", "Unlock: Force (4th Stage)",
 				"Unlocking magic potential grants additional 10 Mana on each lvl-up (retroactive effect).",
-				"You've chosen the 'Unlock: Force (4th Stage)' perk, allowing you to increase passive Mana gains on lvl-up!");
+				"You've chosen the 'Unlock: Force (4th Stage)' perk, allowing you to increase passive Mana gains on lvl-up!")
+				.withBuffs({'maxmana_perlevel':+10});
 		public static const VampiricBlade:PerkType = mk("Vampiric blade", "Vampiric blade",
 				"PC recovers 0.5/1/2/4 % of its health each time it strikes with a melee attack. (% restored depend on weapon size used)",
 				"You've chosen the 'Vampiric blade' perk, recovering some HP after each succesfull melee attack.");
@@ -3098,7 +3311,8 @@ public class PerkLib
 				"You've chosen the 'Wisp Major General' perk, training your wisp to Wisp Brigadier General.");*/
 		public static const Wizened:PerkType = mk("Wizened", "Wizened",
 				"You are wise, what did you expect, something wise? You do get 10% more soulforce though.",
-				"You've chosen the 'Wizened' perk, gaining +10% max Soulforce.");
+				"You've chosen the 'Wizened' perk, gaining +10% max Soulforce.")
+				.withBuffs({'maxsf_mult':+0.1});
 		public static const ZZZ:PerkType = mk("ZZZ", "ZZZ",
 				"Sample Text Here/+20% fatigue recovery rate",
 				"You've chosen the 'ZZZ' perk, gaining +20% fatigue recovery rate.");
@@ -3123,7 +3337,7 @@ public class PerkLib
 				"You chose 'Job: Barbarian' perk, training yourself to become a Barbarian.").withBuffs({'str.mult':0.20});
 		public static const PrestigeJobGreySage:PerkType = mk("Prestige Job: Grey Sage", "Prestige Job: Grey Sage",
 				"You've trained in prestige art of perfect mastery over all forms of aoe magic spells. (+80 to max int - scalable)",
-				"You've chosen the 'Prestige Job: Grey Sage' perk, training yourself to became Grey Sage - master of area spells.").withBuffs({'int.mult':0.80});
+				"You've chosen the 'Prestige Job: Grey Sage' perk, training yourself to became Grey Sage - master of area spells.").withBuffs({'int.mult':0.80,'maxlust_base':+300});
 
 		// Needlework perks
 		public static const ChiReflowAttack:PerkType = mk("Chi Reflow - Attack", "Chi Reflow - Attack",
@@ -3208,7 +3422,9 @@ public class PerkLib
 		public static const BladeWarden:PerkType = mk("Blade-Warden", "Blade-Warden",
 				"Enables Resonance Volley soul skill while equipped: Perform a ranged attack where each arrow after the first gets an additional 10% accuracy for every arrow before it.",null,true);
 		public static const BodyCultivatorsFocus:BodyCultivatorsFocusPerk = new BodyCultivatorsFocusPerk();
+		public static const BodyCultivatorsFocusRange:BodyCultivatorsFocusRangePerk = new BodyCultivatorsFocusRangePerk();
 		public static const DaoistsFocus:DaoistsFocusPerk = new DaoistsFocusPerk();
+		public static const DaoistsFocusRange:DaoistsFocusRangePerk = new DaoistsFocusRangePerk();
 		public static const DexterousSwordsmanship:PerkType = mk("Dexterous swordsmanship", "Dexterous swordsmanship",
 				"Increases parry chance by 10% while wielding a weapon.",null,true);
 		public static const InariBlessedKimono:PerkType = mk("Inari Blessed Kimono", "Inari Blessed Kimono",
@@ -3231,7 +3447,9 @@ public class PerkLib
 			wPerks.push(Accuracy2);
 			wPerks.push(BladeWarden);
 			wPerks.push(BodyCultivatorsFocus);
+			wPerks.push(BodyCultivatorsFocusRange);
 			wPerks.push(DaoistsFocus);
+			wPerks.push(DaoistsFocusRange);
 			wPerks.push(DexterousSwordsmanship);
 			wPerks.push(InariBlessedKimono);
 			wPerks.push(MageWarden);
@@ -3261,7 +3479,8 @@ public class PerkLib
 		public static const LikeAnAsuraBoss:PerkType = mk("Like A-sura Boss", "Like A-sura Boss",
 				"Adds to toggle starting in Asura Form at combat start, increase to physical might rise to 120%/60%/40% of core str/tou/spe. (+10% of OverMax Wrath)");
 		public static const ICastAsuraFist:PerkType = mk("I Cast (Asura) Fist", "I Cast (Asura) Fist",
-				"Safe treshold for magic/m.specials is calculated based on overmax wrath not max wrath, +50% of base max wrath. (+10% of OverMax Wrath)");
+				"Safe treshold for magic/m.specials is calculated based on overmax wrath not max wrath, +50% of base max wrath. (+10% of OverMax Wrath)")
+				.withBuffs({'maxwrath_mult':+0.5});
 		public static const HiddenJobBloodDemon:PerkType = mk("Hidden Job: Blood Demon", "Hidden Job: Blood Demon",
 				"You've trained in the art of blood demons. Beings that reached mastery of using their own or others blood to great effect. (+10% of OverMax HP, -5% blood spells/soulskills cost, +10% blood spells/soulskills power)");
 		public static const WayOfTheBlood:PerkType = mk("Way of the Blood", "Way of the Blood",
@@ -3275,7 +3494,14 @@ public class PerkLib
 		public static const BloodDemonToughness:PerkType = mk("Blood Demon Toughness", "Blood Demon Toughness",
 				"Gain Blood Demon Toughness. When below 0 HP it would negate any negative effect of other perks that would cause negative HP regen. (+10% of OverMax HP, -5% blood spells/soulskills cost, +10% blood spells/soulskills power/Base TOU Cap, +0,5% HP regen)");
 		public static const DeityJobMunchkin:PerkType = mk("Deity Job: Munchkin", "Deity Job: Munchkin",
-				"You're Munchkin, an ultimate being that possess a god-like body and powers. (+20% max HP/Lust/Wrath, +10% max SF/Mana/Fatigue, increase limit of negative HP equal to all stats (aside of corruption) added up)");
+				"You're Munchkin, an ultimate being that possess a god-like body and powers. (+20% max HP/Lust/Wrath, +10% max SF/Mana/Fatigue, increase limit of negative HP equal to all stats (aside of corruption) added up)")
+				.withBuffs({
+					'maxlust_mult':+0.2,
+					'maxwrath_mult':+0.2,
+					'maxmana_mult':+0.1,
+					'maxsf_mult':+0.1,
+					'maxfatigue_mult':+0.1
+				});
 		public static const MunchkinAtGym:PerkType = mk("Munchkin @Gym", "Munchkin @Gym",
 				"Increase by 5% caps for mutagen, alchemic, knowledge multi.").withBuffs({'str.mult':0.25,'tou.mult':0.25,'spe.mult':0.25,"int.mult":0.25,'wis.mult':0.25,'lib.mult':0.25,'sens':100}, false);
 		public static const AsuraToughness:PerkType = mk("Asura Toughness", "Asura Toughness",
@@ -3330,14 +3556,14 @@ public class PerkLib
 				"Increase strength modifier on unarmed attack by 100%.");
 		public static const BimboBody:PerkType = mk("Bimbo Body", "Bimbo Body",
 				"Gives the body of a bimbo.  Tits will never stay below a 'DD' cup, libido is raised, lust resistance is raised, and upgrades tease.")
-				.withBuffs({'lib.mult':0.50,'sens':45});
+				.withBuffs({'lib.mult':0.50,'sens':45,'maxlust_base':+60});
 		public static const BimboBrains:PerkType = mk("Bimbo Brains", "Bimbo Brains",
 				"Now that you've drank bimbo liquer, you'll never, like, have the attention span and intelligence you once did!  But it's okay, 'cause you get to be so horny an' stuff!").withBuffs({'int.mult':-0.50});
 		public static const BouncyBody:PerkType = mk("Bouncy body", "Bouncy body",
 				"Attacks that would deal more than half of your health have a chance to simply punt you around, reducing damage taken by 25%.");
 		public static const BroBody:PerkType = mk("Bro Body", "Bro Body",
 				"Grants an ubermasculine body that's sure to impress.")
-				.withBuffs({'lib.mult':0.50,'sens':45});
+				.withBuffs({'lib.mult':0.50,'sens':45,'maxlust_base':+60});
 		public static const BroBrains:PerkType = mk("Bro Brains", "Bro Brains",
 				"Makes thou... thin... fuck, that shit's for nerds.").withBuffs({'int.mult':-0.50});
 		public static const BullStrength:PerkType = mk("Bull Strength", "Bull Strength",
@@ -3423,7 +3649,7 @@ public class PerkLib
 				"It's super hard to think about stuff that like, isn't working out or fucking!").withBuffs({'int.mult':-0.50});
 		public static const FutaForm:PerkType = mk("Futa Form", "Futa Form",
 				"Ensures that your body fits the Futa look (Tits DD+, Dick 8\"+, & Pussy).  Also keeps your lusts burning bright and improves the tease skill.")
-				.withBuffs({'lib.mult':0.50,'sens':45});
+				.withBuffs({'lib.mult':0.50,'sens':45,'maxlust_base':+60});
 		public static const GeneticMemory:PerkType = mk("Genetic Memory", "Genetic Memory",
 				"Your body can remember almost any transformation it undergone.");
 		public static const Ghostslinger:PerkType = mk("Ghost-slinger", "Ghost-slinger",
@@ -3481,7 +3707,8 @@ public class PerkLib
 		public static const FromTheFrozenWaste:PerkType = mk("From the frozen waste", "Lord of the Frozen Wastes",
 				"The icy wastes where winter reigns are your domain. You are resistant to cold but vulnerable to heat.");
 		public static const Lustzerker:PerkType = mk("Lustzerker", "Lustzerker",
-				"Lustserking increases attack and physical defenses resistance but reduces lust resistance.");
+				"Lustserking increases attack and physical defenses resistance but reduces lust resistance.")
+				.withBuffs({'maxwrath_base':+500});
 		public static const ManticoreCumAddict:PerkType = mk("Manticore Cum Addict", "Manticore Cum Addict",
 				"Causes you to crave cum frequently.  Yet at the same time grants you immunity to Minotaur Cum addiction.");
 		public static const MantisOvipositor:PerkType = mk("Mantis Ovipositor", "Mantis Ovipositor",
@@ -3542,13 +3769,22 @@ public class PerkLib
 		public static const WendigoCurse:PerkType = mk("Wendigo Curse", "Wendigo Curse",
 				"Your body and soul has been cursed by a wendigo. Transformative no longer have an effect on you.");
 		public static const ZenjisInfluence1:PerkType = mk("Zenji's influence 1", "Zenji's influence 1",
-				"Increases maximum mana and fatigue by 10%.");
+				"Increases maximum mana and fatigue by 10%.")
+				.withBuffs({'maxmana_mult':+0.10,'maxfatigue_mult':+0.10});
 		public static const ZenjisInfluence2:PerkType = mk("Zenji's influence 2", "Zenji's influence 2",
 				"Reduces effect from curses by 40%.");
 		public static const ZenjisInfluence3:PerkType = mk("Zenji's influence 3", "Zenji's influence 3",
 				"Reduces physical special cost by 20%. Increase physical special damage by 50% and spellpower by 30%.");
 
 		// Quest, Event & NPC perks
+		public static const AffinityGnome:PerkType = mk("Affinity (Gnome)", "Affinity (Gnome)",
+				"Gain a boon based on the terrain, abundance of plants grants regeneration 15% while rocky ground gives +20% Damage reduction. Aquatic or snowy terrain gives nothing.");
+		public static const AffinityIgnis:PerkType = mk("Affinity (Ignis)", "Affinity (Ignis)",
+				"+100% fire damage dealt +100% ice damage taken, takes massive damage (5% max HP) per round while underwater.");
+		public static const AffinitySylph:PerkType = mk("Affinity (Sylph)", "Affinity (Sylph)",
+				"When outdoors you are considered to be permanently flying, allowing you to use great dive and flying skills at will. Useless underwater.");
+		public static const AffinityUndine:PerkType = mk("Affinity (Undine)", "Affinity (Undine)",
+				"Can breath underwater and gain +50 to speed and spell power while underwater. Weak to electricity (-100% resistance).");
 		public static const AdvancedLeadership:PerkType = mk("Advanced Leadership", "Advanced Leadership",
 				"Allows to form 4 people party.");
 		public static const AuraOfCorruption:PerkType = mk("Aura of Corruption", "Aura of Corruption",
@@ -3637,7 +3873,8 @@ public class PerkLib
 		public static const MorphicWeaponry:PerkType = mk("Morphic Weaponry", "Morphic Weaponry",
 				"Gains a number of extra tentacle-like natural weapon attacks based on your level (+1 per 10 level).");
 		public static const OmnibusGift:PerkType = mk("Omnibus' Gift", "Omnibus' Gift",
-				"Increases minimum lust but provides some lust resistance.");
+				"Increases minimum lust but provides some lust resistance.")
+				.withBuffs({'maxlust_base':+45});
 		public static const OneTrackMind:PerkType = mk("One Track Mind", "One Track Mind",
 				"Your constant desire for sex causes your sexual organs to be able to take larger insertions and disgorge greater amounts of fluid.");
 		public static const Phylactery:PerkType = mk("Phylactery", "Phylactery",
@@ -5406,6 +5643,8 @@ public class PerkLib
                     .requirePerk(PerfectStrike);
             BoneSoul.requireLevel(66)
                     .requirePerk(GreaterHarvest);
+            ElementalTouch.requireLevel(66)
+                    .requirePerk(SharedPower);
             ElementalContractRank12.requirePerk(ElementalContractRank11)
                     .requireWis(300)
                     .requireLevel(66);
@@ -6811,3 +7050,4 @@ public class PerkLib
 	initDependencies();
 }
 }
+

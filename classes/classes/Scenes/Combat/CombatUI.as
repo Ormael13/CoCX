@@ -642,7 +642,7 @@ public class CombatUI extends BaseCombatContent {
 		buildAbilityMenu(CombatAbilities.ALL_HEX_SPELLS, hexSpellButtons);
 		buildAbilityMenu(CombatAbilities.ALL_DIVINE_SPELLS, divineSpellButtons);
 		buildAbilityMenu(CombatAbilities.ALL_NECRO_SPELLS, necroSpellButtons);
-		buildAbilityMenu(CombatAbilities.ALL_BLOOD_SPELLS, necroSpellButtons);
+		buildAbilityMenu(CombatAbilities.ALL_BLOOD_SPELLS, bloodSpellButtons);
 		if (whiteSpellButtons.length > 0) buttons.add("White Spells", curry(submenu,whiteSpellButtons, submenuSpells, 0, false)).hint("Open your White magic book");
 		if (blackSpellButtons.length > 0) buttons.add("Black Spells", curry(submenu,blackSpellButtons, submenuSpells, 0, false)).hint("Open your Black magic book");
 		if (player.hasPerk(PerkLib.GreyMagic) && greySpellButtons.length > 0) buttons.add("Grey Spells", curry(submenu,greySpellButtons, submenuSpells, 0, false)).hint("Open your Grey magic book");
@@ -716,11 +716,11 @@ public class CombatUI extends BaseCombatContent {
 			addButton(1, "Wait", (monster as Lethice).grappleWait);
 
 			var whitefireLustCap:int = player.maxLust() * 0.75;
-			if (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < (10 + player.corruptionTolerance())) whitefireLustCap += (player.maxLust() * 0.1);
-			if (player.findPerk(PerkLib.FocusedMind) >= 0 && player.findPerk(PerkLib.GreyMage) < 0) whitefireLustCap += (player.maxLust() * 0.1);
-			if (player.findPerk(PerkLib.GreyMage) >= 0) whitefireLustCap = (player.maxLust() - 45);
-			if (player.findPerk(PerkLib.GreyMage) >= 0 && player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < (10 + player.corruptionTolerance())) whitefireLustCap = (player.maxLust() - 15);
-			var gotEnergy:Boolean = player.findPerk(PerkLib.BloodMage) < 0 && player.mana >= 30;
+			if (player.hasPerk(PerkLib.Enlightened) && player.cor < (10 + player.corruptionTolerance())) whitefireLustCap += (player.maxLust() * 0.1);
+			if (player.hasPerk(PerkLib.FocusedMind) && !player.hasPerk(PerkLib.GreyMage)) whitefireLustCap += (player.maxLust() * 0.1);
+			if (player.hasPerk(PerkLib.GreyMage)) whitefireLustCap = (player.maxLust() - 45);
+			if (player.hasPerk(PerkLib.GreyMage) && player.hasPerk(PerkLib.Enlightened) && player.cor < (10 + player.corruptionTolerance())) whitefireLustCap = (player.maxLust() - 15);
+			var gotEnergy:Boolean = !player.hasPerk(PerkLib.BloodMage) && player.mana >= 30;
 			if (player.lust < whitefireLustCap && player.hasStatusEffect(StatusEffects.KnowsWhitefire) && gotEnergy) {
 				addButton(2, "Dispell", (monster as Lethice).dispellRapetacles);
 			}

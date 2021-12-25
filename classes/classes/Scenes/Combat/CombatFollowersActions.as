@@ -25,7 +25,7 @@ import classes.StatusEffects;
 				if (player.level >= 54) IEoA += 0.5;
 				if (player.level >= 102) IEoA += 0.5;
 			}
-			if (player.hasPerk(PerkLib.MotivationSu)) IEoA *= 2.5;
+			if (player.hasPerk(PerkLib.MotivationSu)) IEoA *= 1.5;
 			IEoA += 1;
 			//ITEMS EFFEC TS? MISC ACC / RINGS / NECK / HEAD ACC, WEAPON?
 			return IEoA;

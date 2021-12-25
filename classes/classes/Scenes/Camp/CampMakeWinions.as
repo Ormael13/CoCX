@@ -212,7 +212,7 @@ public class CampMakeWinions extends BaseContent
 		public function makeTemporalStoneGolem():void {
 			clearOutput();
 			if (player.mana < temporalGolemMakingCost()) {
-				outputText("Your mana is too low to finish golem creation.");
+				outputText("Your mana runs dry halfway through the golem creation process. The rocks you were using crumble, falling apart as the magic binding them together fails.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
@@ -222,7 +222,7 @@ public class CampMakeWinions extends BaseContent
 				return;
 			}
 			else if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] == maxTemporalGolemsBagSize()) {
-				outputText("You not having enough space to store another one.");
+				outputText("You try to place your new golem into your bag, but it's already full. You groan, annoyed at your embarassing mistake.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
@@ -230,7 +230,7 @@ public class CampMakeWinions extends BaseContent
 			else player.destroyItems(useables.GOLCORE, 1);
 			useMana(temporalGolemMakingCost());
 			statScreenRefresh();
-			outputText("You draw a seal in the ground around the pile of stones that will soon be your servant. Once done you put golem core in pile, stand back and begin to seep your mana inside of the pile till it form 6 feet tall shape. Finishing the work on your creation you store it in your 'golem bag'.");
+			outputText("You draw a seal in the ground, placing a ring of stones along the inside edge. Next, you put the golem core in the middle of the seal, with another line of smaller stones around the core. With the groundwork done, you stand back and begin to chant, mana flowing from your hands into the seal. The stones glow, the smaller ring coating the core as it rises from the ground. One by one, the stones on the outer ring leap from the earth, attaching to the core and forming a rough bumanoid shape, just over six feet tall. The golem stands, the seal vanishing from the earth. You order the newly created golem to come to you, storing it in your golem bag.");
 			if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] < 1) flags[kFLAGS.TEMPORAL_GOLEMS_BAG] = 1;
 			else flags[kFLAGS.TEMPORAL_GOLEMS_BAG]++;
 			doNext(accessMakeWinionsMainMenu);
@@ -240,7 +240,7 @@ public class CampMakeWinions extends BaseContent
 		public function makeTemporalStoneGolems():void {
 			clearOutput();
 			if (player.mana < (temporalGolemMakingCost() * 5)) {
-				outputText("Your mana is too low to finish golems creation.");
+				outputText("Your mana runs dry halfway through the golem creation process. The rocks you were using crumble, falling apart as the magic binding them together fails.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
@@ -250,7 +250,7 @@ public class CampMakeWinions extends BaseContent
 				return;
 			}
 			else if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] > (maxTemporalGolemsBagSize() - 5)) {
-				outputText("You not having enough space to store all five.");
+				outputText("You try to place your new golem into your bag, but it's already full. You groan, annoyed at your embarassing mistake.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
@@ -258,7 +258,7 @@ public class CampMakeWinions extends BaseContent
 			else player.destroyItems(useables.GOLCORE, 5);
 			useMana(temporalGolemMakingCost() * 5);
 			statScreenRefresh();
-			outputText("You draw a complex seal on the ground with 5 node points at which you put piles of stones that will soon be your servants. Once done you put a golem core in each pile, stand back and begin to seep your mana inside of the seal till each pile becomes a 6 feet tall golem. Finishing the work on your creations, you store them in your 'golem bag'.");
+			outputText("You draw five seals in the ground, each with a ring of stones, golem core in the middle and another line of smaller stones. With the groundwork done, you stand back and begin to chant, mana flowing from your hands into the seals. The stones glow, the smaller rings coating the five cores as they rise from the ground. One by one, the stones cover the cores, forming five rough bumanoid shapes. The golems stand, the seals vanishing from the earth. You order the newly created golems to come to you, storing them in your golem bag.");
 			flags[kFLAGS.TEMPORAL_GOLEMS_BAG] += 5;
 			doNext(accessMakeWinionsMainMenu);
 			if (player.hasPerk(PerkLib.TemporalGolemsRestructurationEx)) eachMinuteCount(15);
@@ -267,7 +267,7 @@ public class CampMakeWinions extends BaseContent
 		public function makeTemporalStoneGolemsMore():void {
 			clearOutput();
 			if (player.mana < (temporalGolemMakingCost() * 20)) {
-				outputText("Your mana is too low to finish golems creation.");
+				outputText("Your mana runs dry halfway through the golem creation process. The rocks you were using crumble, falling apart as the magic binding them together fails.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
@@ -277,7 +277,7 @@ public class CampMakeWinions extends BaseContent
 				return;
 			}
 			else if (flags[kFLAGS.TEMPORAL_GOLEMS_BAG] > (maxTemporalGolemsBagSize() - 20)) {
-				outputText("You not having enough space to store all twenty.");
+				outputText("Your golem bag may be able to store 20 golems, but you still have too many.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
@@ -285,7 +285,7 @@ public class CampMakeWinions extends BaseContent
 			else player.destroyItems(useables.GOLCORE, 20);
 			useMana(temporalGolemMakingCost() * 20);
 			statScreenRefresh();
-			outputText("You draw a complex seal on the ground with 20 node points at which you put piles of stones that will soon be your servants. Once done you put a golem core in each pile, stand back and begin to seep your mana inside of the seal till each pile becomes a 6 feet tall golem. Finishing the work on your creations, you store them in your 'golem bag'.");
+			outputText("You draw a complex seal on the ground with 20 node points, complete with golem core and a pile of stones. Once done, you stand back and begin to seep your mana into the seal. Each pile becomes a 6 feet tall golem. Finishing the work on your creations, you store them in your 'golem bag'.");
 			flags[kFLAGS.TEMPORAL_GOLEMS_BAG] += 20;
 			doNext(accessMakeWinionsMainMenu);
 			eachMinuteCount(40);
@@ -303,17 +303,17 @@ public class CampMakeWinions extends BaseContent
 				return;
 			}
 			else if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv3(StatusEffects.GolemUpgrades1) > 0 && !player.hasItem(useables.ELSHARD, 1)) {
-				outputText("You lack elemental shard to finish golem creation.");
+				outputText("You don't have the elemental shards you need to upgrade your golem.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
 			else if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] < 10) {
-				outputText("You lack high quality stones to use as body for your new golem.");
+				outputText("You lack high quality stones to use as the body for your new golem.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
 			else if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] == maxPermanentStoneGolemsBagSize()) {
-				outputText("You not having enough space to store another one.");
+				outputText("There's no more space in your golem bag.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
@@ -332,22 +332,22 @@ public class CampMakeWinions extends BaseContent
 		public function makePermanentImprovedStoneGolem():void {
 			clearOutput();
 			if (player.mana < permanentImprovedStoneGolemMakingCost()) {
-				outputText("Your mana is too low to finish golem creation.");
+				outputText("Your mana runs dry halfway through the golem creation process. The rocks you were using crumble, falling apart as the magic binding them together fails.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
 			else if (!player.hasItem(useables.GOLCORE, 3) && flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] < 3) {
-				outputText("You lack golem cores to finish golem creation.");
+				outputText("You lack golem cores.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
 			else if (flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] < 1) {
-				outputText("You lack energy core to use as power source for your new golem.");
+				outputText("You don't have an energy core. No power, no golem.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
 			else if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv3(StatusEffects.GolemUpgrades1) > 0 && !player.hasItem(useables.ELSHARD, 1)) {
-				outputText("You lack elemental shard to finish golem creation.");
+				outputText("You lack the elemental shard you need.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
@@ -357,7 +357,7 @@ public class CampMakeWinions extends BaseContent
 				return;
 			}
 			else if (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] == maxPermanentImprovedStoneGolemsBagSize()) {
-				outputText("You not having enough space to store another one.");
+				outputText("There's no more space in your golem bag.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
@@ -368,8 +368,8 @@ public class CampMakeWinions extends BaseContent
 			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 50;
 			useMana(permanentImprovedStoneGolemMakingCost());
 			statScreenRefresh();
-			outputText("You draw a seal in the ground around the pile of high quality stones, which were arranged in the form of a gigantic four armed shape. Once done you put the energy core in upper section of torso and golem cores in a pile at the golem's future chest in a triangle formation. You stand back and begin to seep your mana toward the laying stones. ");
-			outputText("Slowly all the stones and cores connect with threads of magic, forming a 12 feet tall shape. Finishing the work by making some last adjustments to cores you store it in your 'golem bag'.");
+			outputText("You draw a seal in the ground around the pile of high quality stones, which were arranged in the form of a gigantic four armed shape. Once done you put the energy core in the upper section of the torso and golem cores in a pile at the golem's future chest in a triangle formation. You stand back and begin to seep your mana toward the laying stones. ");
+			outputText("Slowly all the stones and cores connect with threads of magic, forming a hulking, 12 foot tall shape. Making some last adjustments to the cores, you store it in your 'golem bag'.");
 			if (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] < 1) flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] = 1;
 			else flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG]++;
 			doNext(accessMakeWinionsMainMenu);
@@ -378,37 +378,37 @@ public class CampMakeWinions extends BaseContent
 		public function makePermanentSteelGolem():void {
 			clearOutput();
 			if (player.mana < permanentSteelGolemMakingCost()) {
-				outputText("Your mana is too low to finish golem creation.");
+				outputText("Your mana is too low to make another golem.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
 			else if (!player.hasItem(useables.GOLCORE, 1) && flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] < 1) {
-				outputText("You lack a golem core to finish the creation of a golem.");
+				outputText("You need more golem cores.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
 			else if (flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] < 2) {
-				outputText("You lack energy cores to use as power source for your new golem.");
+				outputText("You lack energy cores.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
 			else if (player.hasStatusEffect(StatusEffects.GolemUpgrades1) && player.statusEffectv3(StatusEffects.GolemUpgrades1) > 0 && !player.hasItem(useables.ELSHARD, 1)) {
-				outputText("You lack elemental shard to finish golem creation.");
+				outputText("You lack the elemental shards for this work.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
 			else if (flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] < 10) {
-				outputText("You lack metal pieces to use as body for your new golem.");
+				outputText("You don't have enough metal to make a new golem.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
 			else if (flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] < 4) {
-				outputText("You lack mechanisms to use for your new golem body.");
+				outputText("You lack mechanisms for your new golem body.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
 			else if (flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] == maxPermanentSteelGolemsBagSize()) {
-				outputText("You not having enough space to store another one.");
+				outputText("Your golem bag is already full.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
@@ -420,8 +420,8 @@ public class CampMakeWinions extends BaseContent
 			flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] -= 4;
 			useMana(permanentSteelGolemMakingCost());
 			statScreenRefresh();
-			outputText("You draw a seal in the ground around the body of your future servant. All parts are put in precise place be it mechanisms or twin energy cores hidden beneath metal plates. Once done you put golem core in the empty space left in the chest area and put on it last metal plate. You stand back and begin to seep your mana toward the laying parts as it begin to connect ");
-			outputText("each part of the future golem body. After few moments mechanisms comes alive supplied with energy from inserted energy cores under main core control. It slowly rising up reaching a bit over 7 feet tall looking pretty durable with all the body covered by metal plates and glowing red eyes. Finishing the work on your creation you store it in your 'golem bag'.");
+			outputText("You draw a seal in the ground, and inside, you delicately place a golem core, wrapping it in metal pieces. Mechanisms branch out, forming a rough torso, and you attach golem cores throughout the frame, ending with humanoid arms and legs, wrapped in solid metal. You stand back, examining your handiwork for a moment, before splaying your fingers out over it. You pull mana through your body, tendrils of power lancing into the now clattering metal frame.");
+			outputText("One by one, the cores you placed by the limbs light up, making your creation glow from within. A powerful humming noise sounds, and the mechanisms on the limbs begin to move. As you watch, with bated breath, your lumbering creation bends its legs, levering itself to its spiked feet. Standing over seven feet tall, with glowing red sensory units covered with blackened steel, your creation is imposing, at the very least. It marches itself to you, and you store it in your golem bag");
 			if (flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] < 1) flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] = 1;
 			else flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG]++;
 			doNext(accessMakeWinionsMainMenu);
@@ -430,17 +430,17 @@ public class CampMakeWinions extends BaseContent
 		public function makePermanentImprovedSteelGolem():void {
 			clearOutput();
 			if (player.mana < permanentImprovedSteelGolemMakingCost()) {
-				outputText("Your mana is too low to finish golem creation.");
+				outputText("You don't have the mana to make another golem.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
 			else if (!player.hasItem(useables.GOLCORE, 3) && flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG] < 3) {
-				outputText("You lack a golem core to finish the creation of a golem.");
+				outputText("Upon closer inspection of your supplies, you realize you don't have enough golem cores!");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
 			else if (flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] < 6) {
-				outputText("You lack energy cores to use as power source for your new golem.");
+				outputText("Your new creation will need power, and you don't have enough cores for it!");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
@@ -450,17 +450,17 @@ public class CampMakeWinions extends BaseContent
 				return;
 			}
 			else if (flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] < 50) {
-				outputText("You lack metal pieces to use as body for your new golem.");
+				outputText("Your metal reserves are low. You'll need to find some more before you can make more golems.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
 			else if (flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] < 12) {
-				outputText("You lack mechanisms to use for your new golem body.");
+				outputText("You lack the mechanisms for your new golem.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
 			else if (flags[kFLAGS.IMPROVED_PERMANENT_STEEL_GOLEMS_BAG] == maxPermanentImprovedSteelGolemsBagSize()) {
-				outputText("You not having enough space to store another one.");
+				outputText("Your golem bag is full. You cannot store any more.");
 				doNext(accessMakeWinionsMainMenu);
 				return;
 			}
@@ -482,14 +482,14 @@ public class CampMakeWinions extends BaseContent
 
 		public function putInGolemCoreIntoGolemBag():void {
 			clearOutput();
-			outputText("In order to have some free space in your backpack you put in one of golem cores into your bag.\n\n");
+			outputText("In order to have some free space in your backpack you put one of golem cores into your bag.\n\n");
 			player.destroyItems(useables.GOLCORE, 1);
 			flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]++;
 			doNext(accessMakeWinionsMainMenu);
 		}
 		public function takeOutGolemCoreFromGolemBag():void {
 			clearOutput();
-			outputText("In order to not overload your bag for reusable golem cores you take out one of them.\n\n");
+			outputText("In order to not overload your bag for reusable golem cores you take one out, putting it in your backpack.\n\n");
 			flags[kFLAGS.REUSABLE_GOLEM_CORES_BAG]--;
 			inventory.takeItem(useables.GOLCORE, accessMakeWinionsMainMenu);
 		}
@@ -532,7 +532,7 @@ public class CampMakeWinions extends BaseContent
 			menu();
 			if (player.statusEffectv1(StatusEffects.GolemUpgrades1) == 0) addButton(0, "MultiAtks(1)", upgradesForPernamentGolemsMultiAttacksRank1);
 			else addButtonDisabled(0, "MultiAtks(1)", "You already used this upgrade option on your golems.");
-			if (player.statusEffectv1(StatusEffects.GolemUpgrades1) < 1) addButtonDisabled(1, "MultiAtks(2)", "You can't use this upgrade options without previous one.");
+			if (player.statusEffectv1(StatusEffects.GolemUpgrades1) < 1) addButtonDisabled(1, "MultiAtks(2)", "You can't use this upgrade option without previous one.");
 			else {
 				if (player.statusEffectv1(StatusEffects.GolemUpgrades1) == 1) addButton(1, "MultiAtks(2)", upgradesForPernamentGolemsMultiAttacksRank2);
 				else addButtonDisabled(1, "MultiAtks(2)", "You already used this upgrade option on your golems.");
@@ -542,7 +542,7 @@ public class CampMakeWinions extends BaseContent
 		public function upgradesForPernamentGolemsMultiAttacksRank1():void {
 			clearOutput();
 			outputText("You decided to work on multi attack upgrade of your golem.\n\n");
-			outputText("Checking page for this upgrade you see it would req. 100 mana per each possesed pernament golem to make that modification.\n\n");
+			outputText("Checking the page for this upgrade, you see it would req. 100 mana for each permanent golem to make that modification.\n\n");
 			if (player.mana >= (100 * counterOfPernamentGolems())) doYesNo(upgradesForPernamentGolemsMultiAttacksRank1Yes, upgradesForPernamentGolemsMultiAttacks);
 			else {
 				outputText("It seems you're too low on mana to proceed with this upgrade.\n\n");
@@ -551,7 +551,7 @@ public class CampMakeWinions extends BaseContent
 		}
 		public function upgradesForPernamentGolemsMultiAttacksRank1Yes():void {
 			useMana((100 * counterOfPernamentGolems()));
-			outputText("Focusing on the instruction you take out each pernament golem out of your bag and start slow process of engraving new mana patchways that would allow them to attack 2nd time. And as it been described in instruction it would make their attcks drains more mana from you each time they attack.\n");
+			outputText("Focusing on the instructions, you take each pernament golem out of your bag and start engraving new mana pathways. It's slow work, but you know that a 2nd attack is worth the time. Each attack will drain more mana from you, but you deem the cost worth it.\n");
 			player.addStatusValue(StatusEffects.GolemUpgrades1, 1, 1);
 			doNext(upgradesForPernamentGolemsMultiAttacks);
 			eachMinuteCount(30);
@@ -568,7 +568,7 @@ public class CampMakeWinions extends BaseContent
 		}
 		public function upgradesForPernamentGolemsMultiAttacksRank2Yes():void {
 			useMana((100 * counterOfPernamentGolems()));
-			outputText("Focusing on the instruction you take out each pernament golem out of your bag and start slow process of engraving new mana patchways that would allow them to attack 3rd time. And as it been described in instruction it would make their attcks drains more mana from you each time they attack.\n");
+			outputText("Focusing on the instructions, you take each pernament golem out of your bag and start engraving new mana pathways. It's slow work, but you know that a 3rd attack is worth the time. Each attack will drain more mana from you, but you deem the cost worth it.\n");
 			player.addStatusValue(StatusEffects.GolemUpgrades1, 1, 1);
 			doNext(upgradesForPernamentGolemsMultiAttacks);
 			eachMinuteCount(30);
@@ -601,7 +601,7 @@ public class CampMakeWinions extends BaseContent
 		}
 		public function upgradesForPernamentGolemsImprovedManaCircuitRank1Yes():void {
 			useMana((150 * counterOfPernamentGolems()));
-			outputText("Focusing on the instruction you take out each pernament golem out of your bag and start slow process of removing old mana circuits and then engraving new and more efficient patchways. That would allow to lower mana consumtion for each golem activation and increase effectivness of their attacks.\n");
+			outputText("Focusing on the instructions, you take out each permanent golem out of your bag. You sit down beside each golem, removing the old mana circuits. Once that's done, you engrave new, more efficient pathways. Once you're done, these new and improved golems will not only be more effective in combat, but also be much easier on your mana reserves.\n");
 			player.addStatusValue(StatusEffects.GolemUpgrades1, 2, 1);
 			doNext(upgradesForPernamentGolemsImprovedManaCircuit);
 			eachMinuteCount(30);
@@ -609,7 +609,7 @@ public class CampMakeWinions extends BaseContent
 		public function upgradesForPernamentGolemsImprovedManaCircuitRank2():void {
 			clearOutput();
 			outputText("You decided to work on mana circuits upgrade of your golem.\n\n");
-			outputText("Checking page for this upgrade you see it would req. 150 mana per each possesed pernament golem to make that modification.\n\n");
+			outputText("Checking the page for this upgrade, you see it would req. 150 mana for each permanent golem to make that modification.\n\n");
 			if (player.mana >= (150 * counterOfPernamentGolems())) doYesNo(upgradesForPernamentGolemsImprovedManaCircuitRank2Yes, upgradesForPernamentGolemsImprovedManaCircuit);
 			else {
 				outputText("It seems you're too low on mana to proceed with this upgrade.\n\n");
@@ -618,7 +618,7 @@ public class CampMakeWinions extends BaseContent
 		}
 		public function upgradesForPernamentGolemsImprovedManaCircuitRank2Yes():void {
 			useMana((150 * counterOfPernamentGolems()));
-			outputText("Focusing on the instruction you take out each pernament golem out of your bag and start slow process of removing old mana circuits and then engraving new and more efficient patchways. That would allow to lower mana consumtion for each golem activation and increase effectivness of their attacks.\n");
+			outputText("Focusing on the instructions, you take out each permanent golem out of your bag. You sit down beside each golem, removing the old mana circuits. Once that's done, you engrave new, more efficient pathways. Once you're done, these new and improved golems will not only be more effective in combat, but also be much easier on your mana reserves.\\n");
 			player.addStatusValue(StatusEffects.GolemUpgrades1, 2, 1);
 			doNext(upgradesForPernamentGolemsImprovedManaCircuit);
 			eachMinuteCount(30);
@@ -693,7 +693,7 @@ public class CampMakeWinions extends BaseContent
 			clearOutput();
 			outputText("You sit down by the golem and begin extracting the core from the big chunk that remains of its chest. ");
 			if (rand(4) == 0 || player.hasPerk(PerkLib.JobGolemancer)) {
-				outputText("At first the core resist but after a few tries you successfully manage to harvest the golem core.");
+				outputText("At first the core resists, but after a few tries you successfully manage to harvest the golem core.");
 				doNext(takeCore);
 			}
 			else {
@@ -706,7 +706,7 @@ public class CampMakeWinions extends BaseContent
 			outputText("You sit down by the golem and begin extracting the core from the big chunk that remains of its chest. ");
 			player.addStatusValue(StatusEffects.GolemScavenge, 1, -1);
 			if (rand(4) == 0 || player.statusEffectv1(StatusEffects.GolemScavenge) == 0 || player.hasPerk(PerkLib.JobGolemancer)) {
-				outputText("At first the core resist but after a few tries you successfully manage to harvest the golem core.");
+				outputText("At first the core resists, but after a few tries you successfully manage to harvest the golem core.");
 				doNext(takeCore);
 			}
 			else {
@@ -1353,13 +1353,15 @@ public class CampMakeWinions extends BaseContent
 			if (player.hasPerk(PerkLib.JobElementalConjurer) && ((currentSizeOfElementalsArmy() + 1) < maxSizeOfElementalsArmy())) addButton(1, "Summon(E)", summoningEpicElementalsSubmenu).hint("Summon an Epic-tier Elementals");
 			else addButtonDisabled(1, "Summon(E)", "You either summoned all possible Epic-tier elementals or reached limit of how many elementals you can command at once.");
 			if (currentSizeOfElementalsArmy() > 0) addButton(5, "ElementUp", elementaLvlUp,-9000,-9000,-9000,"Level up your Normal Elementals!")
-			else addButtonDisabled(5, "ElementUp", "You don't have any elementals, try summoning one!");
+			else addButtonDisabled(5, "ElementUp", "You don't have any normal elementals, try summoning one!");
+			if (player.statusEffectv2(StatusEffects.SummonedElementals) > 0) addButton(6, "ElementUp(E)", elementaLvlUpEpic);
+			else addButtonDisabled(6, "ElementUp(E)", "You don't have any epic elementals, try summoning one!");
 			if (player.statusEffectv3(StatusEffects.ElementalEnergyConduits) >= 1) addButton(12, "E.S.Conv.", elementalShardsConversion).hint("Conversion of Elemental Shards into energy stored in arcane circle elemental conduit.");
 			else addButtonDisabled(12, "E.S.Conv.", "You need to have any elemental conduit added to the arcane circle to use this option.");
 			addButton(13, "EvocationTome", evocationTome).hint("Description of various elemental powers.");
 			addButton(14, "Back", camp.campWinionsArmySim);
 		}
-		private function elementaLvlUp():void{
+		private function elementaLvlUp():void {
 			var elementalTypes:Array = [];
 			var contractRankI:int = 0;
 			var btnInt:int = 0;
@@ -1388,7 +1390,7 @@ public class CampMakeWinions extends BaseContent
 					}
 				}
 			}
-			var arcaneCMax:int = (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] *4)-1;
+			var arcaneCMax:int = (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE]*4);
 			for (var i:int = 0,j:int = elementalTypes.length; i < j; i++){
 				if (i % 3 == 0){
 					var btnName:String = elementalTypes[i];
@@ -1396,7 +1398,7 @@ public class CampMakeWinions extends BaseContent
 					//outputText(btnName);
 					var pElemLvlStat:int = player.statusEffectv2(elementalTypes[i]);
 					if (pElemLvlStat <= contractRankI && pElemLvlStat > 0){//Checks Elemental level lower than max, but not 0.
-						if (contractRankI <= arcaneCMax){	//If lower, don't care. You have the circle and the highest level circle can support.
+						if (pElemLvlStat < arcaneCMax){	//If lower, don't care. You have the circle and the highest level circle can support.
 							addButton(btnInt, btnName,elementalLvlUpCostCheck , elementalTypes[i + 1], pElemLvlStat, btnName, "Level up your "+ elementalTypes[i + 2] +" elemental!");
 						}
 						else{//Outside Bracket.
@@ -1429,18 +1431,50 @@ public class CampMakeWinions extends BaseContent
 			}
 			addButton(14, "Back", elementaLvlUp);
 		}
+		private function elementaLvlUpEpic():void {
+			menu();
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsAirE) < 5) {
+				if (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= (player.statusEffectv2(StatusEffects.SummonedElementalsAirE) * 1200)) {
+					if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] > player.statusEffectv2(StatusEffects.SummonedElementalsAirE)) addButton(0, "Air", rankUpElementalAirEpic);
+					else addButtonDisabled(0, "Air", "Your Arcane Circle can't handle the epic elemental level up safely!");
+				}
+				else addButtonDisabled(0, "Air", "Your stored elemental energy is too low. Missing: "+((player.statusEffectv2(StatusEffects.SummonedElementalsAirE) * 1200)-player.statusEffectv1(StatusEffects.ElementalEnergyConduits))+"");
+			}
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) < 5) {
+				if (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= (player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) * 1200)) {
+					if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] > player.statusEffectv2(StatusEffects.SummonedElementalsEarthE)) addButton(1, "Earth", rankUpElementalEarthEpic);
+					else addButtonDisabled(1, "Earth", "Your Arcane Circle can't handle the epic elemental level up safely!");
+				}
+				else addButtonDisabled(1, "Earth", "Your stored elemental energy is too low. Missing: "+((player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) * 1200)-player.statusEffectv1(StatusEffects.ElementalEnergyConduits))+"");
+			}
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsFireE) < 5) {
+				if (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= (player.statusEffectv2(StatusEffects.SummonedElementalsFireE) * 1200)) {
+					if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] > player.statusEffectv2(StatusEffects.SummonedElementalsFireE)) addButton(2, "Fire", rankUpElementalFireEpic);
+					else addButtonDisabled(2, "Fire", "Your Arcane Circle can't handle the epic elemental level up safely!");
+				}
+				else addButtonDisabled(2, "Fire", "Your stored elemental energy is too low. Missing: "+((player.statusEffectv2(StatusEffects.SummonedElementalsFireE) * 1200)-player.statusEffectv1(StatusEffects.ElementalEnergyConduits))+"");
+			}
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) < 5) {
+				if (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) >= (player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) * 1200)) {
+					if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] > player.statusEffectv2(StatusEffects.SummonedElementalsWaterE)) addButton(3, "Water", rankUpElementalWaterEpic);
+					else addButtonDisabled(3, "Water", "Your Arcane Circle can't handle the epic elemental level up safely!");
+				}
+				else addButtonDisabled(3, "Water", "Your stored elemental energy is too low. Missing: "+((player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) * 1200)-player.statusEffectv1(StatusEffects.ElementalEnergyConduits))+"");
+			}
+			addButton(14, "Back", accessSummonElementalsMainMenu)
+		}
 		private function elementalShardsConversion():void {
 			clearOutput();
 			outputText("Elemental Energy Stored in Conduits: <i>"+player.statusEffectv1(StatusEffects.ElementalEnergyConduits)+" / "+player.statusEffectv2(StatusEffects.ElementalEnergyConduits)+"</i>\n\n");
 			outputText("Do you like to convert elemental shard into energy stored in conduit? (Excess energy will be lost)\n\n");
 			menu();
 			if (player.hasItem(useables.ELSHARD, 1)) addButton(1, "Yes", elementalShardsConversionGo);
-			else addButtonDisabled(1, "Yes", "you not have any Elemental Shardsa to convert currently.");
+			else addButtonDisabled(1, "Yes", "You not have any Elemental Shards to convert currently.");
 			addButton(3, "Back", accessSummonElementalsMainMenu);
 		}
 		private function elementalShardsConversionGo():void {
 			clearOutput();
-			outputText("WiP for now conversion scene text.\n\n");
+			outputText("You remove the elemental shard from your pack, taking it in both hands. You sit in the middle of your circle, the shard resting in your palms. You close your eyes, letting your mana spread into the crystal. As you focus your power, the crystal shatters, little pieces floating around your head. You can’t see, but you feel it as the shards liquify, crystal bits becoming globes, shimmering with power. With a thought, you will the globes down, into the leylines you’ve made in the ground, into the engravings of your circle. You feel the power settle, a magical pulse that you feel, ready to be unleashed. \n\n");
 			player.destroyItems(useables.ELSHARD, 1);
 			var convertedShard:Number = 0;
 			if (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) + 400 > player.statusEffectv2(StatusEffects.ElementalEnergyConduits)) convertedShard += (player.statusEffectv2(StatusEffects.ElementalEnergyConduits) - player.statusEffectv1(StatusEffects.ElementalEnergyConduits));
@@ -2129,6 +2163,123 @@ public class CampMakeWinions extends BaseContent
 			if (player.hasPerk(PerkLib.ElementalConjurerKnowledge)) failure -= 0.2;
 			return failure;
 		}
+		private function rankUpElementalAirEpic():void {
+			clearOutput();
+			player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,-(player.statusEffectv2(StatusEffects.SummonedElementalsAirE) * 1200));
+			outputText("Finally feeling like you could coax a little more power out of your Epic Air elemental, you begin drawing runes in your magic circle, far more intricate than your older, lesser rituals.\n\n");
+			outputText("You start with three circles, offset from the very center of the magic circle. Each with a slightly different color of light-blue. Each circle consists of the “Control” rune, of uniform size, each running into the next with no space between them.\n\n");
+			outputText("Spiraling runes of black, white and grey come next, coming out from the center and wrapping around the group of three circles, binding them together. “Power” forms the majority of them, but you throw in “flow” and “wind” periodically, each of those runes forming their own miniature swirl of runes. ");
+			outputText("Finally, at the edge, “Movement”, and “Freedom” runes adorn the outside edge. With that last step completed, you sit, mentally calling for your Epic Air elemental.\n\n");
+			outputText("A swirl of air, barely more than a breeze, forms into solid mass, your epic air elemental, its arms folded, stares at you.\n\n");
+			outputText("\"<i>What is the meaning of this containment?</i>\" It looks down at the clearly magical circle. You explain that it’s time to upgrade its power.\n\n");
+			outputText("\"<i>So even the most abhorrent creations serve a purpose. Very well.</i>\"\n\n");
+			outputText("You call to your power, magic enfusing the runes in the middle. Your three circles shoot up, growing larger at the top, and shrinking down into the three small circles at the ground. Your waves of spiralling runes are taken with them, ");
+			outputText("the trails of different colored runes bleeding into each other, lashing in dizzying, chaotic flows. In the center, in the middle of those three runic tornadoes, your epic air elemental raises its hands, calm in the eye of your storm.\n\n");
+			outputText("<i>Winds howl, the sky’s fury made will. Land and Sea bow before it.</i> Lightning strikes your runes, and the wind howls, nearly picking you up off the ground. <i>Breath of life, storm of Death, the line between them ragged and torn.</i>\n\n");
+			var summmast:Number = 0;
+			if (player.wis > player.statusEffectv2(StatusEffects.SummonedElementalsAirE) * 100) summmast += 25;
+			else summmast += player.wis / (player.statusEffectv2(StatusEffects.SummonedElementalsAirE) * 4);
+			if (rand(summmast) > 5) {
+				outputText("Your storm, as quickly as it had formed, is drawn into the center. The three howling tornadoes shrink into one, then are pulled down, down further, back towards the ground. Your runes wrap around the wrists of your epic air elemental, and are absorbed, bit by bit, into the creature’s body.\n\n");
+				outputText("\"<i>But in that uncertainty lies power, for the bold...or the foolish.</i>\" Your epic air elemental begins to fade into ethereality, a bit bigger than before. \"<i>Call upon me soon, [master].</i>\"\n\n");
+				player.addStatusValue(StatusEffects.SummonedElementalsAirE, 2, 1);
+			}
+			else {
+				outputText("Your magic circle groans, your control runes warping. You watch in horror as one of your runes is pulled in between two of the three swirling vortexes...and is promptly torn to shreds. As if a switch had been pulled, the winds explode in a howling, screaming force, throwing you away from the circle. ");
+				outputText("You hit a rock back-first, and as you sit there, dazed, the figure of your epic air elemental lowers itself in front of you.\n\n");
+				outputText("\"<i>The storm seems to have failed to claim you. Good. Call upon the winds once more, once you have recovered.</i>\" Your epic air elemental fades from view, a light warm breeze blowing past your face.\n\n");
+				HPChange(-(Math.round(player.HP * failToRankUpHPCost())), true);
+			}
+			doNext(elementaLvlUpEpic);
+			eachMinuteCount(45);
+		}
+		private function rankUpElementalEarthEpic():void {
+			clearOutput();
+			player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,-(player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) * 1200));
+			outputText("Finally feeling like you could coax a little more power out of your Epic Earth elemental, you begin drawing runes in your magic circle, far more intricate than your older, lesser rituals.\n\n");
+			outputText("First, you coat the outside of the circle in green ink, stenciling in “Control”. Nodes of brown and grey runes, clumped into seemingly random spots along the summoning circle, spell “Power”. On completion, each rune shakes a little before stopping, in a slightly different place than you drew it in.\n\n");
+			outputText("“Ground”, “Earth” and “Stone” runes line the inner layers, painted in red, blue and green. As you finish each one, it begins to shine from within, and you can see the stone you painted it on, underneath.\n\n");
+			outputText("Finally, a layer of gold-colored runes in the very center, spiraling out. The runes shine, glittering as if a spotlight was shone on a gold bar.\n\n");
+			outputText("Encouraged, you call out to your epic earth elemental.\n\n");
+			outputText("\"<i>You called?</i>\" Rising from within the circle, your epic earth elemental pops from the ground. Her eyes are gemstones, red and green, and a simple ring of sapphires adorn what would be her ‘neck’. Other than that, your elemental looks like a well-made statue of a nubile young woman. She sits in the circle, feminine legs crossed, and tilts her head as your elemental considers you.\n\n");
+			outputText("\"<i>What needs to be swallowed?</i>\" You tell your epic earth elemental that you are preparing to draw out more of its power. Its gem eyes light up, and you swear you could see a smile on its face.\n\n");
+			outputText("\"<i>Let us begin, then!</i>\" Your earth elemental stands, folding her arms over her ample chest and looking down at the runes below.\n\n");
+			outputText("You call out to your power, mana visibly clumping into pieces, then latching themselves onto your runes. As you pour more mana into the ritual, a gold band forms, rising from the inner circle and spinning rapidly. Your control runes shoot up, carried by crude spikes of stone that curve inwards, forming a mountainous cocoon around your circle and blocking out the light.\n\n");
+			outputText("Your flickering, glowing runes in the inner circle are the next to rise, floating in midair. Despite the darkness, they shine with an inner light, almost like enchanted gemstones. The rocks around you stop shaking, and for a moment, all is still.\n\n");
+			outputText("\"<i>Gold, Gems, Plant, Animal: All come from the cradle of the earth. And to Earth they all return...</i>\"\n\n");
+			var summmast:Number = 0;
+			if (player.wis > player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) * 100) summmast += 25;
+			else summmast += player.wis / (player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) * 4);
+			if (rand(summmast) > 5) {
+				outputText("\"<i>And the earth hungers.</i>\" The mountain crumbles, showering you and your elemental in stone. Your gemstone runes fade, and your epic earth elemental stands, arching its back as the last light from the runes shoot into its body. \"<i>Well done, [master].</i>\"\n\n");
+				player.addStatusValue(StatusEffects.SummonedElementalsEarthE, 2, 1);
+			}
+			else {
+				outputText("\"<i>Some sooner than most.</i>\" Your mountain caves inward, spikes of stone forming on the inside. You charge one side of your magic circle, and the thin spire of stone explodes outwards. Finally disrupted, the gemstones shatter, pelting you in painful shards. ");
+				outputText("As the dust settles, cuts on your [skin] gushing blood, your elemental frowns, shaking its head. \"<i>A disappointment, to be sure.</i>\"\n\n");
+				HPChange(-(Math.round(player.HP * failToRankUpHPCost())), true);
+			}
+			doNext(elementaLvlUpEpic);
+			eachMinuteCount(45);
+		}
+		private function rankUpElementalFireEpic():void {
+			clearOutput();
+			player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,-(player.statusEffectv2(StatusEffects.SummonedElementalsFireE) * 1200));
+			outputText("Finally feeling like you could coax a little more power out of your Epic Fire elemental, you begin drawing runes in your magic circle, far more intricate than your older, lesser rituals. In red ink, you stencil runes reading “power”, in thin, curving lines inside the circle. As you complete each section of the fiery pattern, you can feel the air around you heat up slightly.\n\n");
+			outputText("Inside of each line, you stencil curls of “control” runes in orange. Each rune flickers as you complete it, making each rune slightly harder to create.\n\n");
+			outputText("Yellow ink comes next: you write “Heat” in waves, rising from between the orange curls towards the center of the circle. As you draw each one, the center of the circle begins to shimmer, distorting what you can see through it.\n\n");
+			outputText("You draw wavy lines from the center of your circle, where the heat is, twelve in total, in a white color.\n\n");
+			outputText("Upon completion, the runes shift, beginning to move, flickering like the flames their design suggests. Encouraged by this, you sit in your magic circle, and call upon your Epic Fire Elemental. At your call, you feel a stirring, rising heat in your head.\n\n");
+			outputText("\"<i>What shall we turn to ash, [master]?</i>\" The womanly form of your Elemental appears in the summoning circle, her face featureless except for burning yellow eyes.\n\n");
+			outputText("You tell your elemental that the time has come to draw upon more of her power.\n\n");
+			outputText("\"<i>How bold...Calling so much heat into the world...Very well. So it shall be...If you can handle more of me.</i>\"\n\n");
+			outputText("As your elemental settles in, the flickering runes rise from the ground, the red splitting, mixing. Your elemental leans back, womanly curves setting the runes ablaze. Strings of runic power mix with the flames, the mixture wrapping around the edges of the circle. A pillar of flame and text sear the edges of the circle, reaching skyward with hungry intent.\n\n");
+			outputText("\"<i>All fires wish to grow, to consume…So it has always been...</i>\"\n\n");
+			var summmast:Number = 0;
+			if (player.wis > player.statusEffectv2(StatusEffects.SummonedElementalsFireE) * 100) summmast += 25;
+			else summmast += player.wis / (player.statusEffectv2(StatusEffects.SummonedElementalsFireE) * 4);
+			if (rand(summmast) > 5) {
+				outputText("Your elemental floats up, into the center of the circle. Your runes float towards her, sticking to her body, the text slowly merging with the writhing flames of her body. Quicker and quicker, the flames enter, whipping past your body. The heat rises, rises...You close your eyes as a flash of light envelops the area.\n\n");
+				outputText("When you open your eyes, your epic flame elemental is lounging in midair. She seems slightly bigger than before, her flames brighter.\n\n");
+				outputText("\"<i>And so it shall be. Show this world our heat. Consume what you will.</i>\" Your elemental vanishes, leaving your [skin] looking like you’d spent a week in the sun.\n\n");
+				player.addStatusValue(StatusEffects.SummonedElementalsFireE, 2, 1);
+			}
+			else {
+				outputText("The flames roar, and your elemental winces, vanishing from the circle. You watch in horror as the flames roar out of control, consuming your runes, turning them black before they vanish. The lines of your magic circle whine, barely containing the raging inferno. You wince, enduring the flames as best you can, but before it dies down, you’ve taken a lot of damage.\n\n");
+				outputText("\"<i>...And it will consume those who underestimate its power. Perhaps another time, [master].</i>\"\n\n");
+				HPChange(-(Math.round(player.HP * failToRankUpHPCost())), true);
+			}
+			doNext(elementaLvlUpEpic);
+			eachMinuteCount(45);
+		}
+		private function rankUpElementalWaterEpic():void {
+			clearOutput();
+			player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,-(player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) * 1200));
+			outputText("Finally feeling like you could coax a little more power out of your Epic Water elemental, you begin drawing runes in your magic circle, far more intricate than your older, lesser rituals. You start with rolling lines of “control” runes, in a dark, almost black blue, then a line of lighter blue waves of “Power” runes, all along the outside of the circle. ");
+			outputText("In the middle, you draw a single circle of “Tide” runes in white, with smaller circles inside.\n\nAs you complete the last of the “Tide” runes, you notice your white runes in the middle spin, slow at first, but picking up speed. As it does, the runes along the outside begin to move, colors mixing and flowing like water. ");
+			outputText("The white keeps spinning, seemingly pulling the outer ‘waves’ along with it.\n\nYou know that the time to call upon your epic water elemental has come. You feel your mana drain, and a deep, masculine voice sounds in your head.\n\n");
+			outputText("\"<i>So you call me.</i>\" Very well. Water erupts from the ground below you, quickly forming into a masculine form. Your epic water elemental stands, body shifting visibly as the tide runes below him rotate. He sits, shifting with the tides below.\n\n");
+			outputText("You explain to your elemental that you can draw more power, and it nods. \"<i>So it would seem. I will not attempt to stop you.</i>\"\n\n");
+			outputText("You call upon your power, and a roaring sound fills your ears. Your runes whip around inside the circle, and your waves rise, spraying up around the edges. Your white moon below begins to glow, and the water moves faster, still faster.\n\n");
+			outputText("\"<i>Mighty is the great flow: For none can stand forever. The rivers flow, the oceans roar...</i>\"\n\n");
+			var summmast:Number = 0;
+			if (player.wis > player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) * 25) summmast += 25;
+			else summmast += player.wis / (player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) * 4);
+			if (rand(summmast) > 5) {
+				outputText("Your epic elemental grabs hold of the white orb in the center of the circle. It begins to glow, and as it does, the spiraling flow of runic water comes in, closer and closer...and as it nears the orb, it vanishes, absorbed into the fluids of your epic elemental. The water roars, faster...Faster…It stings your everything, and keeping your eyes open is impossible.\n\n");
+				outputText("The roaring stops. You open your eyes to see your masculine water elemental, arms crossed, and as you see it, the creature nods.\n\n");
+				outputText("\"<i>But the water’s flow can be beneficial, to those who can bend.</i>\" The elemental closes its eyes. \"<i>We are more powerful. Wash away those who defy us.</i>\" It vanishes, leaving you soaking wet.\n\n");
+				player.addStatusValue(StatusEffects.SummonedElementalsWaterE, 2, 1);
+			}
+			else {
+				outputText("The moon-runes underneath you warp and groan, the white-whipped waters thrash harder. A single rune in the thrashing waves shudders...and shatters. This unleashes a wave of power that shatters your control runes. Stuck in the magic circle, you hunker down as the roaring water strikes you from every side. ");
+				outputText("For what feels like hours, you sit in your circle, enduring the waves you unleashed until your power runes are spent.\n\n");
+				outputText("\"<i>...and wash away those foolish enough to think they can weather the storm.</i>\" Your epic water elemental stands. \"<i>A pity, that more of my power cannot be unleashed in this realm.</i>\"\n\n");
+				HPChange(-(Math.round(player.HP * failToRankUpHPCost())), true);
+			}
+			doNext(elementaLvlUpEpic);
+			eachMinuteCount(45);
+		}
 		
 		//-------------
 		//
@@ -2248,4 +2399,5 @@ public class CampMakeWinions extends BaseContent
 			eachMinuteCount(10);
 		}
 	}
-}
+}
+

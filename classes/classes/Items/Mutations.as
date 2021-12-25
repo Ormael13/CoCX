@@ -9184,7 +9184,10 @@ public final class Mutations extends MutationsHelper {
             transformations.EyesGryphon.applyEffect();
             changes++;
         }
-        if (changes == 0 && type == 0) outputText("[pg]It seems like the fruit had no effect this time. Maybe it was spoiled, or kept in storage for too much time?");
+        if (changes == 0) {
+			if (type == 0) outputText("[pg]It seems like the fruit had no effect this time. Maybe it was spoiled, or kept in storage for too much time?");
+			else outputText("[pg]It seems like the energy from statuette was weak to change you this time. Maybe, more luck next time?");
+		}
         if (type == 0) player.refillHunger(15);
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
     }

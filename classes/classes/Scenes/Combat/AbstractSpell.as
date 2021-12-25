@@ -60,7 +60,7 @@ public class AbstractSpell extends CombatAbility {
 		// Run our checks
 		var manaCost:Number = this.manaCost();
 		if (isBloodMagicApplicable && player.hasStatusEffect(StatusEffects.BloodMage)) {
-			if (player.HP - player.minHP() > manaCost) {
+			if (player.HP - player.minHP() <= manaCost) {
 				return "Your hp is too low to cast this spell."
 			}
 		} else {

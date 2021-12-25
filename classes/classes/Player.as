@@ -1158,7 +1158,7 @@ use namespace CoC;
 		}
 		//Staff <<SCECOMM(scepter not staff)>>
 		public function isStaffTypeWeapon():Boolean {
-			return (weaponClass("Staff"));
+			return (weaponClass("Staff")) || weapon == game.weapons.ASCENSU || weapon == game.weapons.B_STAFF || weapon == game.weapons.DEPRAVA || weapon == game.weapons.PURITAS || weapon == game.weapons.WDSTAFF;
 		}
 		//Whip-type weapons
 		public function isWhipTypeWeapon():Boolean {
@@ -1174,7 +1174,7 @@ use namespace CoC;
 		}
 		//Partial staff type weapons
 		public function isPartiallyStaffTypeWeapon():Boolean {
-			return (weaponClass("StaffPart"));// || weapon == game.weapons.E_STAFF || weapon == game.weapons.L_STAFF || weapon == game.weapons.N_STAFF || weapon == game.weapons.U_STAFF || weapon == game.weapons.W_STAFF || weapon == game.weapons.WDSTAFF || weapon == game.weapons.B_STAFF || weapon == game.weapons.DEMSCYT
+			return (weaponClass("StaffPart")) || weapon == game.weapons.DEMSCYT || weapon == game.weapons.LHSCYTH;// || weapon == game.weapons.E_STAFF || weapon == game.weapons.L_STAFF || weapon == game.weapons.N_STAFF || weapon == game.weapons.U_STAFF || weapon == game.weapons.W_STAFF || weapon == game.weapons.WDSTAFF
 		}
 		//Weapons for Sneak Attack (Meele and Range)
 		public function haveWeaponForSneakAttack():Boolean
@@ -2756,7 +2756,7 @@ use namespace CoC;
 			if (necklaceName == "Blue Winter scarf" || necklaceName == "Green Winter scarf" || necklaceName == "Purple Winter scarf" || necklaceName == "Red Winter scarf" || necklaceName == "Yellow Winter scarf") mult -= 20;
 			if (hasPerk(PerkLib.FromTheFrozenWaste) || hasPerk(PerkLib.ColdAffinity)) mult -= 50;
 			if (hasPerk(PerkLib.IcyFlesh)) mult -= 40;
-			if (hasPerk(PerkLib.FireAffinity)) mult += 100;
+			if (hasPerk(PerkLib.FireAffinity) || hasPerk(PerkLib.AffinityIgnis)) mult += 100;
 			if (jewelryEffectId == JewelryLib.MODIFIER_ICE_R) mult -= jewelryEffectMagnitude;
 			if (jewelryEffectId2 == JewelryLib.MODIFIER_ICE_R) mult -= jewelryEffectMagnitude2;
 			if (jewelryEffectId3 == JewelryLib.MODIFIER_ICE_R) mult -= jewelryEffectMagnitude3;
@@ -2817,6 +2817,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.LightningAffinity)) mult -= 50;
 			if (hasPerk(MutationsLib.HeartOfTheStormPrimitive)) mult -= 10;
 			if (hasPerk(MutationsLib.HeartOfTheStormEvolved)) mult -= 30;
+			if (hasPerk(PerkLib.AquaticAffinity) || hasPerk(PerkLib.AffinityUndine)) mult += 100;
 			if (jewelryEffectId == JewelryLib.MODIFIER_LIGH_R) mult -= jewelryEffectMagnitude;
 			if (jewelryEffectId2 == JewelryLib.MODIFIER_LIGH_R) mult -= jewelryEffectMagnitude2;
 			if (jewelryEffectId3 == JewelryLib.MODIFIER_LIGH_R) mult -= jewelryEffectMagnitude3;
@@ -6685,7 +6686,7 @@ use namespace CoC;
 		{
 			Begin("Player","racialScore","goo");
 			var gooCounter:Number = 0;
-			if (InCollection(skin.base.color, ["green", "magenta", "blue", "cerulean", "emerald", "pink"])) {
+			if (InCollection(skin.base.color, ["green", "magenta", "blue", "cerulean", "emerald", "pink", "milky white"])) {
 				gooCounter++;
 				if (hairType == Hair.GOO)
 					gooCounter++;
@@ -8548,7 +8549,7 @@ use namespace CoC;
 			}
 			if (faceType == Face.SALAMANDER_FANGS) {
 				salamanderCounter++;
-				if (ears.type == Ears.HUMAN || ears.type == Ears.LIZARD || ears.type == Ears.DRAGON)
+				if (ears.type == Ears.HUMAN || ears.type == Ears.LIZARD)
 					salamanderCounter++;
 			}
 			if (eyes.type == Eyes.LIZARD)
@@ -9436,7 +9437,7 @@ use namespace CoC;
 				phoenixCounter++;
 				if ((faceType == Face.HUMAN || faceType == Face.SALAMANDER_FANGS) && phoenixCounter > 2)
 					phoenixCounter++;
-				if (ears.type == Ears.HUMAN || ears.type == Ears.ELFIN || ears.type == Ears.LIZARD || ears.type == Ears.DRAGON && phoenixCounter > 2)
+				if ((ears.type == Ears.HUMAN || ears.type == Ears.ELFIN || ears.type == Ears.LIZARD) && phoenixCounter > 2)
 					phoenixCounter++;
 			}
 			if (eyes.type == Eyes.LIZARD)
@@ -10374,7 +10375,7 @@ use namespace CoC;
 				avianCounter += 50;
 			if (hasPerk(PerkLib.AscensionHybridTheory) && avianCounter >= 4)
 				avianCounter += 1;
-			if (hasPerk(PerkLib.AscensionCruelChimerasThesis)  && avianCounter >= 8)
+			if (hasPerk(PerkLib.AscensionCruelChimerasThesis) && avianCounter >= 8)
 				avianCounter += 1;
 			if (isGargoyle()) avianCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) avianCounter = 0;
@@ -10748,10 +10749,12 @@ use namespace CoC;
 			return prestigeJobs1;
 		}
 		public function maxPrestigeJobs():Number {
-			//var prestigeJobs2:Number = 2;
+			var prestigeJobs2:Number = 2;
 			//if (hasPerk(PerkLib.DeityJobMunchkin))
 			//	prestigeJobs2++;
-			return perkv1(PerkLib.AscensionBuildingPrestigeX)
+			if (hasPerk(PerkLib.AscensionBuildingPrestigeX))
+				prestigeJobs2 += perkv1(PerkLib.AscensionBuildingPrestigeX);
+			return prestigeJobs2;
 		}
 		public function freePrestigeJobsSlots():Number {
 			var prestigeJobs3:Number = 0;
@@ -13586,6 +13589,9 @@ use namespace CoC;
 			if(hasStatusEffect(StatusEffects.UnderwaterCombatBoost)) {
 				dynStats("spe", -statusEffectv2(StatusEffects.UnderwaterCombatBoost), "scale", false);
 				removeStatusEffect(StatusEffects.UnderwaterCombatBoost);
+			}
+			if(hasStatusEffect(StatusEffects.UnderwaterAndIgnis)) {
+				removeStatusEffect(StatusEffects.UnderwaterAndIgnis);
 			}
 			if(hasStatusEffect(StatusEffects.EzekielCurse) && EvangelineFollower.EvangelineAffectionMeter >= 3 && hasPerk(PerkLib.EzekielBlessing)) {
 				removeStatusEffect(StatusEffects.EzekielCurse);

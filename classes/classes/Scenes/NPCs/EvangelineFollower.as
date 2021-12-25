@@ -412,25 +412,44 @@ private function HardSpar():void {
 	evangelineAffection(10);
 }
 
-private function evangelineAlchemyMenu():void {
+private function evangelineAlchemyMenu(page:int = 1):void {
 	clearOutput();
 	outputText("\"<i>So you do want another transformational item made by me?</i>\" She asked after hearing what potion you want to purpose to her this time, at which you simply nod. Without wasting time she walks, with you closely behind, toward a entrance to a small cave right outside the camp's border, in which she keep her equipment.\n\n\"<i>So what you want this time for me to make?</i>\" Stopping at the edge of the entrance to lab Evangeline glance in your direction.");
 	menu();
-	addButton(0, "Gorgon Oil", MakingGorgonPotion).hint("Ask her to brew a special potion that could aid in becoming a gorgon. \n\nCost: 10 Gems \nNeeds 1 Snake Oil and 1 Reptilum.");
-	addButton(1, "Vouivre Oil", MakingVouivrePotion).hint("Ask her to brew a special potion that could aid in becoming a vouivre. \n\nCost: 15 Gems \nNeeds 1 Snake Oil and 1 Drake Heart.");
-	addButton(2, "Couatl Oil", MakingCouatlPotion).hint("Ask her to brew a special potion that could aid in becoming a couatl. \n\nCost: 10 Gems \nNeeds 1 Snake Oil and 1 Golden Seed.");
-	addButton(3, "Centaurinum", MakingCentaurPotion).hint("Ask her to brew a special potion that could aid in becoming a centaur. \n\nCost: 10 Gems \nNeeds 1 Equinum and 1 Minotaur Blood.");
-	addButton(4, "Unicornum", MakingUnicornumPotion).hint("Ask her to brew a special potion that could aid in becoming a unicorn. \n\nCost: 20 Gems \nNeeds 1 Equinum and 4 Low-grade Soulforce Recovery Pills.");//1st stage Soul evolution race TF
-	addButton(6, "Nocello Liq", MakingNocelloLiqueur).hint("Ask her to brew a special potion that could aid in becoming a phoenix. \n\nCost: 10 Gems \nNeeds 1 Golden Seed and 1 Salamander Firewater.");//Hybryd race TF
-	//addButton(7, "", ).hint(".");siren TF//Hybryd race TF
-	addButton(7, "LeviSun", MakingLevisunPotion).hint("Ask her to brew a special potion that could aid in becoming a sea dragon. \n\n\nCost: 100 Gems \nNeeds 1 Drake flower and 1 Orca sunscreen.");
-	addButton(8, "Storm Seed", MakingStormSeed).hint("Ask her to brew a special potion that could aid in becoming a thunderbird. \n\nCost: 10 Gems \nNeeds 1 Magically-enhanced Golden Seed and 1 Voltage topaz.");//Hybryd race TF
-	addButton(9, "Enigmanium", MakingEnigmaniumPotion).hint("Ask her to brew a special potion that could aid in becoming a sphinx. \n\nCost: 30 Gems \nNeeds 1 Centarium, 1 Golden Seed and 1 Whisker Fruit.");
-	addButton(10, "Alicornum", MakingAlicornumPotion).hint("Ask her to brew a special potion that could aid in becoming an alicorn. \n\nCost: 50 Gems \nNeeds 1 Unicornum and 20 Low-grade Soulforce Recovery Pills/2 bottles of Low-grade Soulforce Recovery Pills.");//2nd stage Soul evolution race TF
-	addButton(11, "Scylla Ink", MakingScyllaInkPotion).hint("Ask her to brew a special potion based on Black Ink.");
-	addButton(12, "Abyssal Ink", MakingKrakenInkPotion).hint("Ask her to brew a special potion based on Abbysal Ink.");
-	addButton(13, "InferWine", MakingInfernalWinePotion).hint("Ask her to brew a special potion that could aid in becoming a infernal goat/devil. \n\nCost: 480 Gems \nNeeds 1 Satyr Wine, 1 Succubi milk and 1 Incubi draft.");
-	addButton(14, "Back", meetEvangeline);
+	if (page == 1) {
+		addButton(0, "Gorgon Oil", MakingGorgonPotion).hint("Ask her to brew a special potion that could aid in becoming a gorgon. \n\nCost: 10 Gems \nNeeds 1 Snake Oil and 1 Reptilum.");
+		addButton(1, "Vouivre Oil", MakingVouivrePotion).hint("Ask her to brew a special potion that could aid in becoming a vouivre. \n\nCost: 15 Gems \nNeeds 1 Snake Oil and 1 Drake Heart.");
+		addButton(2, "Couatl Oil", MakingCouatlPotion).hint("Ask her to brew a special potion that could aid in becoming a couatl. \n\nCost: 10 Gems \nNeeds 1 Snake Oil and 1 Golden Seed.");
+		addButton(3, "Nocello Liq", MakingNocelloLiqueur).hint("Ask her to brew a special potion that could aid in becoming a phoenix. \n\nCost: 10 Gems \nNeeds 1 Golden Seed and 1 Salamander Firewater.");//Hybryd race TF
+		addButton(4, "Unicornum", MakingUnicornumPotion).hint("Ask her to brew a special potion that could aid in becoming a unicorn. \n\nCost: 20 Gems \nNeeds 1 Equinum and 4 Low-grade Soulforce Recovery Pills.");//1st stage Soul evolution race TF
+		//addButton(5, "", ).hint(".");kitsune/salamander TF//Hybryd race TF
+		//6
+		//addButton(7, "", ).hint(".");siren TF//Hybryd race TF
+		//8
+		addButton(9, "Alicornum", MakingAlicornumPotion).hint("Ask her to brew a special potion that could aid in becoming an alicorn. \n\nCost: 50 Gems \nNeeds 1 Unicornum and 20 Low-grade Soulforce Recovery Pills/2 bottles of Low-grade Soulforce Recovery Pills.");//2nd stage Soul evolution race TF
+		addButton(10, "Grey Ink", MakingGreyInkPotion).hint("Grey Ink for Herm Scylla form. \n\nCost: 10 Gems \nNeeds 1 vial of Black Ink and 1 sealed bottle of behemoth cum.");
+		addButton(11, "White Ink", MakingWhiteInkPotion).hint("White Ink for Male Scylla form. \n\nCost: 20 Gems \nNeeds 1 vial of Black Ink and 2 sealed bottles of behemoth cum.");
+		addButton(12, "InferWine", MakingInfernalWinePotion).hint("Ask her to brew a special potion that could aid in becoming a infernal goat/devil. \n\nCost: 480 Gems \nNeeds 1 Satyr Wine, 1 Succubi milk and 1 Incubi draft.");
+		addButton(13, "-2-", evangelineAlchemyMenu, page + 1);
+		addButton(14, "Back", meetEvangeline);
+	}
+	if (page == 2) {
+		addButton(0, "Centaurinum", MakingCentaurPotion).hint("Ask her to brew a special potion that could aid in becoming a centaur. \n\nCost: 10 Gems \nNeeds 1 Equinum and 1 Minotaur Blood.");
+		addButton(1, "Storm Seed", MakingStormSeed).hint("Ask her to brew a special potion that could aid in becoming a thunderbird. \n\nCost: 10 Gems \nNeeds 1 Magically-enhanced Golden Seed and 1 Voltage topaz.");//Hybryd race TF
+		addButton(2, "Enigmanium", MakingEnigmaniumPotion).hint("Ask her to brew a special potion that could aid in becoming a sphinx. \n\nCost: 30 Gems \nNeeds 1 Centarium, 1 Golden Seed and 1 Whisker Fruit.");
+		//3
+		//4
+		addButton(5, "LeviSun", MakingLevisunPotion).hint("Ask her to brew a special potion that could aid in becoming a sea dragon. \n\n\nCost: 100 Gems \nNeeds 1 Drake flower and 1 Orca sunscreen.");
+		//6
+		//7
+		//8
+		//9
+		addButton(10, "Grey A. Ink", MakingGreyAbyssalInkPotion).hint("Grey Abyssal Ink for Herm Kraken form. \n\nCost: 10 Gems \nNeeds 1 vial of Abyssal Ink and 1 sealed bottle of behemoth cum.");
+		addButton(11, "White A. Ink", MakingWhiteAbyssalInkPotion).hint("White Abyssal Ink for Male Kraken form. \n\nCost: 20 Gems \nNeeds 1 vial of Abyssal Ink and 2 sealed bottles of behemoth cum.");
+		//12
+		addButton(13, "-1-", evangelineAlchemyMenu, page - 1);
+		addButton(14, "Back", meetEvangeline);
+	}
 }
 
 private function MakingLevisunPotion():void {
@@ -473,7 +492,7 @@ private function MakingGorgonPotion():void {
 	statScreenRefresh();
 	outputText("You hand over one vial of Snake Oil, one vial of Reptilum and ten gems to Evangeline, which she gingerly takes them and proceeds to make potion for you.");
 	outputText("\n\nAfter a while, she hands you a vial filled with an oily, greenish liquid.  ");
-	inventory.takeItem(consumables.GORGOIL, evangelineAlchemyMenu);
+	inventory.takeItem(consumables.GORGOIL, curry(evangelineAlchemyMenu, 1));
 	cheatTime(1/6);
 }
 private function MakingVouivrePotion():void {
@@ -494,7 +513,7 @@ private function MakingVouivrePotion():void {
 	statScreenRefresh();
 	outputText("You hand over one vial of Snake Oil, one Drake Heart and fifteen gems to Evangeline, which she gingerly takes them and proceeds to make potion for you.");
 	outputText("\n\nAfter a while, she hands you a vial filled with an oily, purple liquid.  ");
-	inventory.takeItem(consumables.VOUIOIL, evangelineAlchemyMenu);
+	inventory.takeItem(consumables.VOUIOIL, curry(evangelineAlchemyMenu, 1));
 	cheatTime(1/6);
 }
 private function MakingCouatlPotion():void {
@@ -515,32 +534,9 @@ private function MakingCouatlPotion():void {
 	statScreenRefresh();
 	outputText("You hand over one vial of Snake Oil, one Golden Seed and ten gems to Evangeline, which she gingerly takes them and proceeds to make potion for you.");
 	outputText("\n\nAfter a while, she hands you a vial filled with an oily, red liquid.  ");
-	inventory.takeItem(consumables.COUAOIL, evangelineAlchemyMenu);
+	inventory.takeItem(consumables.COUAOIL, curry(evangelineAlchemyMenu, 1));
 	cheatTime(1/6);
 }
-
-private function MakingCentaurPotion():void {
-	clearOutput();
-	if (player.gems < 10) {
-		outputText("\"<i>I'm sorry but you don't have the gems for this potion,</i>\" Evangeline says.");
-		doNext(evangelineAlchemyMenu);
-		return;
-	}
-	else if (!(player.hasItem(consumables.EQUINUM, 1) && player.hasItem(consumables.MINOBLO, 1))) {
-		outputText("\"<i>I'm sorry but you don't have the materials I need. I need vial of Equinum and vial of Minotaur blood,</i>\" Evangeline says.");
-		doNext(evangelineAlchemyMenu);
-		return;
-	}
-	player.destroyItems(consumables.EQUINUM, 1);
-	player.destroyItems(consumables.MINOBLO, 1);
-	player.gems -= 10;
-	statScreenRefresh();
-	outputText("You hand over one vial of Equinum, one vial of Minotaur Blood and ten gems to Evangeline, which she gingerly takes them and proceeds to make potion for you.");
-	outputText("\n\nAfter a while, she hands you a vial labeled \"Centaurinum\".  ");
-	inventory.takeItem(consumables.CENTARI, evangelineAlchemyMenu);
-	cheatTime(1/6);
-}
-
 private function MakingUnicornumPotion():void {
 	clearOutput();
 	if (player.gems < 20) {
@@ -559,10 +555,9 @@ private function MakingUnicornumPotion():void {
 	statScreenRefresh();
 	outputText("You hand over one vial of Equinum, four Low-grade Soulforce Recovery Pills and twenty gems to Evangeline, which she gingerly takes them and proceeds to make potion for you.");
 	outputText("\n\nAfter a while, she hands you a vial labeled \"Unicornum\".  ");
-	inventory.takeItem(consumables.UNICORN, evangelineAlchemyMenu);
+	inventory.takeItem(consumables.UNICORN, curry(evangelineAlchemyMenu, 1));
 	cheatTime(1/6);
 }
-
 private function MakingNocelloLiqueur():void {
 	clearOutput();
 	if (player.gems < 10) {
@@ -581,55 +576,9 @@ private function MakingNocelloLiqueur():void {
 	statScreenRefresh();
 	outputText("You hand over one Golden Seed, one hip flask of Salamander Firewater and ten gems to Evangeline, which she gingerly takes them and proceeds to make potion for you.");
 	outputText("\n\nAfter a while, she hands you a bottle labeled \"Nocello\".  ");
-	inventory.takeItem(consumables.NOCELIQ, evangelineAlchemyMenu);
+	inventory.takeItem(consumables.NOCELIQ, curry(evangelineAlchemyMenu, 1));
 	cheatTime(1/6);
 }
-
-private function MakingStormSeed():void {
-	clearOutput();
-	if (player.gems < 10) {
-		outputText("\"<i>I'm sorry but you don't have the gems for this potion,</i>\" Evangeline says.");
-		doNext(evangelineAlchemyMenu);
-		return;
-	}
-	else if (!(player.hasItem(consumables.MAGSEED, 1) && player.hasItem(consumables.VOLTTOP, 1))) {
-		outputText("\"<i>I'm sorry but you don't have the materials I need. I need Magically-enhanced Golden Seed and Voltage topaz,</i>\" Evangeline says.");
-		doNext(evangelineAlchemyMenu);
-		return;
-	}
-	player.destroyItems(consumables.MAGSEED, 1);
-	player.destroyItems(consumables.VOLTTOP, 1);
-	player.gems -= 10;
-	statScreenRefresh();
-	outputText("You hand over one Magically-enhanced Golden Seed, one Voltage topaz and ten gems to Evangeline, which she gingerly takes them and proceeds to make potion for you.");
-	outputText("\n\nAfter a while, she hands you a magical seed that radiate a faint aura of static as if struck by lightning.  ");
-	inventory.takeItem(consumables.SRMSEED, evangelineAlchemyMenu);
-	cheatTime(1/6);
-}
-
-private function MakingEnigmaniumPotion():void {
-	clearOutput();
-	if (player.gems < 30) {
-		outputText("\"<i>I'm sorry but you don't have the gems for this potion,</i>\" Evangeline says.");
-		doNext(evangelineAlchemyMenu);
-		return;
-	}
-	else if (!(player.hasItem(consumables.CENTARI, 1) && player.hasItem(consumables.GLDSEED, 1) && player.hasItem(consumables.W_FRUIT, 1))) {
-		outputText("\"<i>I'm sorry but you don't have the materials I need. I need vial of Centaurinum, Golden Seed and Whisker Fruit,</i>\" Evangeline says.");
-		doNext(evangelineAlchemyMenu);
-		return;
-	}
-	player.destroyItems(consumables.CENTARI, 1);
-	player.destroyItems(consumables.GLDSEED, 1);
-	player.destroyItems(consumables.W_FRUIT, 1);
-	player.gems -= 30;
-	statScreenRefresh();
-	outputText("You hand over one vial of Centaurinum, one Golden Seed, one Whisker Fruit and thirty gems to Evangeline, which she gingerly takes them and proceeds to make potion for you.");
-	outputText("\n\nAfter a while, she hands you a vial labeled \"Enigmanium\".  ");
-	inventory.takeItem(consumables.ENIGMANIUM, evangelineAlchemyMenu);
-	cheatTime(1/6);
-}
-
 private function MakingAlicornumPotion():void {
 	clearOutput();
 	if (player.gems < 50) {
@@ -656,18 +605,9 @@ private function MakingAlicornumPotion():void {
 	}
 	outputText(" Low-grade Soulforce Recovery Pills and fifty gems to Evangeline, which she gingerly takes them and proceeds to make potion for you.");
 	outputText("\n\nAfter a while, she hands you a vial labeled \"Alicornum\".  ");
-	inventory.takeItem(consumables.ALICORN, evangelineAlchemyMenu);
+	inventory.takeItem(consumables.ALICORN, curry(evangelineAlchemyMenu, 1));
 	cheatTime(1/6);
 }
-
-private function MakingScyllaInkPotion():void {
-	outputText("\n\n\"<i>So the grey or white ink this time?</i>\"");
-	menu();
-	addButton(0, "Grey Ink", MakingGreyInkPotion).hint("Grey Ink for Herm Scylla form. \n\nCost: 10 Gems \nNeeds 1 vial of Black Ink and 1 sealed bottle of behemoth cum.");
-	addButton(1, "White Ink", MakingWhiteInkPotion).hint("White Ink for Male Scylla form. \n\nCost: 20 Gems \nNeeds 1 vial of Black Ink and 2 sealed bottles of behemoth cum.");
-	addButton(4, "Back", evangelineAlchemyMenu);
-}
-
 private function MakingGreyInkPotion():void {
 	clearOutput();
 	if (player.gems < 10) {
@@ -686,10 +626,9 @@ private function MakingGreyInkPotion():void {
 	statScreenRefresh();
 	outputText("You hand over one vial of Black Ink, one sealed bottle of behemoth cum and fifty gems to Evangeline, which she gingerly takes them and proceeds to make potion for you.");
 	outputText("\n\nAfter a while, she hands you a vial of Grey Ink.  ");
-	inventory.takeItem(consumables.GREYINK, evangelineAlchemyMenu);
+	inventory.takeItem(consumables.GREYINK, curry(evangelineAlchemyMenu, 1));
 	cheatTime(1/6);
 }
-
 private function MakingWhiteInkPotion():void {
 	clearOutput();
 	if (player.gems < 20) {
@@ -708,62 +647,9 @@ private function MakingWhiteInkPotion():void {
 	statScreenRefresh();
 	outputText("You hand over one vial of Black Ink, two sealed bottles of behemoth cum and fifty gems to Evangeline, which she gingerly takes them and proceeds to make potion for you.");
 	outputText("\n\nAfter a while, she hands you a vial of White Ink.  ");
-	inventory.takeItem(consumables.WHITEIN, evangelineAlchemyMenu);
+	inventory.takeItem(consumables.WHITEIN, curry(evangelineAlchemyMenu, 1));
 	cheatTime(1/6);
 }
-
-private function MakingKrakenInkPotion():void {
-	outputText("\n\n\"<i>So the grey or white abyssal ink this time?</i>\"");
-	menu();
-	addButton(0, "Grey A. Ink", MakingGreyAbyssalInkPotion).hint("Grey Abyssal Ink for Herm Kraken form. \n\nCost: 10 Gems \nNeeds 1 vial of Abyssal Ink and 1 sealed bottle of behemoth cum.");
-	addButton(1, "White A. Ink", MakingWhiteAbyssalInkPotion).hint("White Abyssal Ink for Male Kraken form. \n\nCost: 20 Gems \nNeeds 1 vial of Abyssal Ink and 2 sealed bottles of behemoth cum.");
-	addButton(4, "Back", evangelineAlchemyMenu);
-}
-
-private function MakingGreyAbyssalInkPotion():void {
-	clearOutput();
-	if (player.gems < 10) {
-		outputText("\"<i>I'm sorry but you don't have the gems for this potion,</i>\" Evangeline says.");
-		doNext(evangelineAlchemyMenu);
-		return;
-	}
-	else if (!(player.hasItem(consumables.ABYSSIN, 1) && player.hasItem(consumables.BHMTCUM, 1))) {
-		outputText("\"<i>I'm sorry but you don't have the materials I need. I need vial of Abyssal Ink and one sealed bottle of behemoth cum,</i>\" Evangeline says.");
-		doNext(evangelineAlchemyMenu);
-		return;
-	}
-	player.destroyItems(consumables.ABYSSIN, 1);
-	player.destroyItems(consumables.BHMTCUM, 1);
-	player.gems -= 10;
-	statScreenRefresh();
-	outputText("You hand over one vial of Abyssal Ink, one sealed bottle of behemoth cum and fifty gems to Evangeline, which she gingerly takes them and proceeds to make potion for you.");
-	outputText("\n\nAfter a while, she hands you a vial of Grey Abyssal Ink.  ");
-	inventory.takeItem(consumables.ABYSGIN, evangelineAlchemyMenu);
-	cheatTime(1/6);
-}
-
-private function MakingWhiteAbyssalInkPotion():void {
-	clearOutput();
-	if (player.gems < 20) {
-		outputText("\"<i>I'm sorry but you don't have the gems for this potion,</i>\" Evangeline says.");
-		doNext(evangelineAlchemyMenu);
-		return;
-	}
-	else if (!(player.hasItem(consumables.ABYSSIN, 1) && player.hasItem(consumables.BHMTCUM, 2))) {
-		outputText("\"<i>I'm sorry but you don't have the materials I need. I need vial of Abyssal Ink and two sealed bottle of behemoth cum,</i>\" Evangeline says.");
-		doNext(evangelineAlchemyMenu);
-		return;
-	}
-	player.destroyItems(consumables.ABYSSIN, 1);
-	player.destroyItems(consumables.BHMTCUM, 2);
-	player.gems -= 20;
-	statScreenRefresh();
-	outputText("You hand over one vial of Abyssal Ink, two sealed bottles of behemoth cum and fifty gems to Evangeline, which she gingerly takes them and proceeds to make potion for you.");
-	outputText("\n\nAfter a while, she hands you a vial of White Abyssal Ink.  ");
-	inventory.takeItem(consumables.ABYSWIN, evangelineAlchemyMenu);
-	cheatTime(1/6);
-}
-
 private function MakingInfernalWinePotion():void {
 	clearOutput();
 	if (player.gems < 480) {
@@ -783,8 +669,136 @@ private function MakingInfernalWinePotion():void {
 	statScreenRefresh();
 	outputText("You hand over one bottle of Satyr Wine, bottle of Succubi milk, Incubi draft and four hundred eighty gems to Evangeline, which she gingerly takes them and proceeds to make potion for you.");
 	outputText("\n\nAfter a while, she hands you a bottle of infernal wine.  ");
-	inventory.takeItem(consumables.INFWINE, evangelineAlchemyMenu);
+	inventory.takeItem(consumables.INFWINE, curry(evangelineAlchemyMenu, 1));
 	cheatTime(1/4);
+}
+
+private function MakingCentaurPotion():void {
+	clearOutput();
+	if (player.gems < 10) {
+		outputText("\"<i>I'm sorry but you don't have the gems for this potion,</i>\" Evangeline says.");
+		doNext(evangelineAlchemyMenu);
+		return;
+	}
+	else if (!(player.hasItem(consumables.EQUINUM, 1) && player.hasItem(consumables.MINOBLO, 1))) {
+		outputText("\"<i>I'm sorry but you don't have the materials I need. I need vial of Equinum and vial of Minotaur blood,</i>\" Evangeline says.");
+		doNext(evangelineAlchemyMenu);
+		return;
+	}
+	player.destroyItems(consumables.EQUINUM, 1);
+	player.destroyItems(consumables.MINOBLO, 1);
+	player.gems -= 10;
+	statScreenRefresh();
+	outputText("You hand over one vial of Equinum, one vial of Minotaur Blood and ten gems to Evangeline, which she gingerly takes them and proceeds to make potion for you.");
+	outputText("\n\nAfter a while, she hands you a vial labeled \"Centaurinum\".  ");
+	inventory.takeItem(consumables.CENTARI, curry(evangelineAlchemyMenu, 2));
+	cheatTime(1/6);
+}
+private function MakingStormSeed():void {
+	clearOutput();
+	if (player.gems < 10) {
+		outputText("\"<i>I'm sorry but you don't have the gems for this potion,</i>\" Evangeline says.");
+		doNext(evangelineAlchemyMenu);
+		return;
+	}
+	else if (!(player.hasItem(consumables.MAGSEED, 1) && player.hasItem(consumables.VOLTTOP, 1))) {
+		outputText("\"<i>I'm sorry but you don't have the materials I need. I need Magically-enhanced Golden Seed and Voltage topaz,</i>\" Evangeline says.");
+		doNext(evangelineAlchemyMenu);
+		return;
+	}
+	player.destroyItems(consumables.MAGSEED, 1);
+	player.destroyItems(consumables.VOLTTOP, 1);
+	player.gems -= 10;
+	statScreenRefresh();
+	outputText("You hand over one Magically-enhanced Golden Seed, one Voltage topaz and ten gems to Evangeline, which she gingerly takes them and proceeds to make potion for you.");
+	outputText("\n\nAfter a while, she hands you a magical seed that radiate a faint aura of static as if struck by lightning.  ");
+	inventory.takeItem(consumables.SRMSEED, curry(evangelineAlchemyMenu, 2));
+	cheatTime(1/6);
+}
+private function MakingEnigmaniumPotion():void {
+	clearOutput();
+	if (player.gems < 30) {
+		outputText("\"<i>I'm sorry but you don't have the gems for this potion,</i>\" Evangeline says.");
+		doNext(evangelineAlchemyMenu);
+		return;
+	}
+	else if (!(player.hasItem(consumables.CENTARI, 1) && player.hasItem(consumables.GLDSEED, 1) && player.hasItem(consumables.W_FRUIT, 1))) {
+		outputText("\"<i>I'm sorry but you don't have the materials I need. I need vial of Centaurinum, Golden Seed and Whisker Fruit,</i>\" Evangeline says.");
+		doNext(evangelineAlchemyMenu);
+		return;
+	}
+	player.destroyItems(consumables.CENTARI, 1);
+	player.destroyItems(consumables.GLDSEED, 1);
+	player.destroyItems(consumables.W_FRUIT, 1);
+	player.gems -= 30;
+	statScreenRefresh();
+	outputText("You hand over one vial of Centaurinum, one Golden Seed, one Whisker Fruit and thirty gems to Evangeline, which she gingerly takes them and proceeds to make potion for you.");
+	outputText("\n\nAfter a while, she hands you a vial labeled \"Enigmanium\".  ");
+	inventory.takeItem(consumables.ENIGMANIUM, curry(evangelineAlchemyMenu, 2));
+	cheatTime(1/6);
+}
+private function MakingLevisunPotion():void {
+	clearOutput();
+	if (player.gems < 100) {
+		outputText("\"<i>I'm sorry but you don't have the gems for this potion,</i>\" Evangeline says.");
+		doNext(evangelineAlchemyMenu);
+		return;
+	}
+	else if (!(player.hasItem(consumables.ORCASUN, 1) && player.hasItem(consumables.DRAKHRT, 1))) {
+		outputText("\"<i>I'm sorry but you don't have the materials I need. I need a vial of Orca sunscreen and a drake heart flower,</i>\" Evangeline says.");
+		doNext(evangelineAlchemyMenu);
+		return;
+	}
+	player.destroyItems(consumables.ORCASUN, 1);
+	player.destroyItems(consumables.DRAKHRT, 1);
+	player.gems -= 100;
+	statScreenRefresh();
+	outputText("You hand over one vial of Orca sunscreen, a drake heart flower and a hundred gems to Evangeline, which she gingerly takes them and proceeds to make potion for you.");
+	outputText("\n\nAfter a while, she hands you a vial labeled \"Leviathan Sunscreen\".  ");
+	inventory.takeItem(consumables.LEVISUN, curry(evangelineAlchemyMenu, 2));
+	cheatTime(1/6);
+}
+private function MakingGreyAbyssalInkPotion():void {
+	clearOutput();
+	if (player.gems < 10) {
+		outputText("\"<i>I'm sorry but you don't have the gems for this potion,</i>\" Evangeline says.");
+		doNext(evangelineAlchemyMenu);
+		return;
+	}
+	else if (!(player.hasItem(consumables.ABYSSIN, 1) && player.hasItem(consumables.BHMTCUM, 1))) {
+		outputText("\"<i>I'm sorry but you don't have the materials I need. I need vial of Abyssal Ink and one sealed bottle of behemoth cum,</i>\" Evangeline says.");
+		doNext(evangelineAlchemyMenu);
+		return;
+	}
+	player.destroyItems(consumables.ABYSSIN, 1);
+	player.destroyItems(consumables.BHMTCUM, 1);
+	player.gems -= 10;
+	statScreenRefresh();
+	outputText("You hand over one vial of Abyssal Ink, one sealed bottle of behemoth cum and fifty gems to Evangeline, which she gingerly takes them and proceeds to make potion for you.");
+	outputText("\n\nAfter a while, she hands you a vial of Grey Abyssal Ink.  ");
+	inventory.takeItem(consumables.ABYSGIN, curry(evangelineAlchemyMenu, 2));
+	cheatTime(1/6);
+}
+private function MakingWhiteAbyssalInkPotion():void {
+	clearOutput();
+	if (player.gems < 20) {
+		outputText("\"<i>I'm sorry but you don't have the gems for this potion,</i>\" Evangeline says.");
+		doNext(evangelineAlchemyMenu);
+		return;
+	}
+	else if (!(player.hasItem(consumables.ABYSSIN, 1) && player.hasItem(consumables.BHMTCUM, 2))) {
+		outputText("\"<i>I'm sorry but you don't have the materials I need. I need vial of Abyssal Ink and two sealed bottle of behemoth cum,</i>\" Evangeline says.");
+		doNext(evangelineAlchemyMenu);
+		return;
+	}
+	player.destroyItems(consumables.ABYSSIN, 1);
+	player.destroyItems(consumables.BHMTCUM, 2);
+	player.gems -= 20;
+	statScreenRefresh();
+	outputText("You hand over one vial of Abyssal Ink, two sealed bottles of behemoth cum and fifty gems to Evangeline, which she gingerly takes them and proceeds to make potion for you.");
+	outputText("\n\nAfter a while, she hands you a vial of White Abyssal Ink.  ");
+	inventory.takeItem(consumables.ABYSWIN, curry(evangelineAlchemyMenu, 2));
+	cheatTime(1/6);
 }
 
 private function LvLUp():void {

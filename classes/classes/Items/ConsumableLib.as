@@ -196,6 +196,7 @@ public final class ConsumableLib extends BaseContent
 		public const AIRWEED:SimpleConsumable = mk("Airweed", "Airweed", "an Airweed", 10, "Upon consumption, this magic seaweed grants water breathing for 24 hours.", m.airweed);
 		public const AKBALSL:Consumable       = new AkbalSaliva();
 		public const ALCTHUN:SimpleConsumable = mk("AlcThun", "Alch.Thunder", "an Alchemical Thunder", 50, "Lightning in a bottle. Add heavy electricity damage to your weapon for a limited time upon use.", m.buffAlchemicalThunder);
+		public const AMBROSA:Consumable       = new Ambrosia();
 		public const BALLOFL:BallsOfFlame     = new BallsOfFlame();
 		public const BALLOTD:BallsOfTheDarkness = new BallsOfTheDarkness();
 		public const BANGB_M:MiniBangBall     = new MiniBangBall();
@@ -208,7 +209,6 @@ public final class ConsumableLib extends BaseContent
 		public const C_VEMOM:CentipedeVenom   = new CentipedeVenom();
 		public const CERUL_P:Consumable       = new CeruleanPotion();
 		public const COAL___:Consumable       = new Coal();
-		public const AMBROSA:Consumable       = new Ambrosia();
 		public const CFISHS:SimpleConsumable  = mk("CFishS.", "Cold Fish S.", "a bowl of cold fish soup", 20, "A soup made with fishes from the glacial rift. It is served cold to preserve the flavor and supposed calming effect which act as a lustkiller.", m.coldFishSoup);
 	//	public const DAO_DEW:SimpleConsumable = mk("Dao Dew", "Dao Dew", "a cup of vixen tea", 15, "An exotic tea made by kitsunes. This herbal infusion is rumored to improve your expertise and expand your sexual knowledge.", m.daoDew);
 		public const DEBIMBO:DeBimbo          = new DeBimbo();

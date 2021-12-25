@@ -614,7 +614,7 @@ use namespace CoC;
 			clearOutput();
 			outputText("With the imps defeated, you check their bodies for any gems before you go back to sleep.");
 			cleanupAfterCombat();
-			goNext(timeQ, false);
+			goNext(false);
 		}
 
 		public function impGangabangaEXPLOSIONS(loss:Boolean = false):void {

@@ -135,14 +135,14 @@ public class EventParser {
         EngineCore.doNext(SceneLib.camp.returnToCampUseOneHour);
     }
 
-    public static function goNext(time:Number, needNext:Boolean):Boolean {
-        Utils.Begin("eventParser", "goNext", time);
-        var x:Boolean = goNextWrapped(time, needNext);
+    public static function goNext(needNext:Boolean):Boolean {
+        Utils.Begin("eventParser", "goNext");
+        var x:Boolean = goNextWrapped(needNext);
         Utils.End("eventParser", "goNext");
         return x;
     }
 
-    private static function goNextWrapped(time:Number, needNext:Boolean):Boolean {
+    private static function goNextWrapped(needNext:Boolean):Boolean {
         var player:Player = CoC.instance.player;
         //Update system time
         //date = new Date();
@@ -161,7 +161,24 @@ public class EventParser {
             }
             timeAwareLargeLastEntry = -1;
         }
-        while (CoC.instance.timeQ > 0) {
+        var time:Number = CoC.instance.timeQ;
+        while (CoC.instance.timeQ > 0 || CoC.instance.timeQmin > 0) {
+            // Advance minutes, but only 1 hour at a time
+            if (CoC.instance.timeQmin >= 60) {
+                CoC.instance.model.time.minutes += 60;
+                CoC.instance.timeQmin -= 60;
+            } else {
+                CoC.instance.model.time.minutes += CoC.instance.timeQmin;
+                CoC.instance.timeQmin = 0;
+            }
+            if (CoC.instance.model.time.minutes >= 60) {
+                CoC.instance.model.time.minutes -= 60;
+                CoC.instance.timeQ++;
+            }
+            if (CoC.instance.timeQ <= 0) {
+                // There were minutes scheduled, but they didn't result in hour change.
+                break;
+            }
             CoC.instance.timeQ--;
             CoC.instance.model.time.hours++;
             var HPPercent:Number;
@@ -644,7 +661,7 @@ public class EventParser {
         if (CoC.instance.model.time.minutes > 59) {
             CoC.instance.timeQ++;
             CoC.instance.model.time.minutes -= 60;
-            if (!EngineCore.buttonIsVisible(0)) goNext(CoC.instance.timeQ, needNext);
+            if (!EngineCore.buttonIsVisible(0)) goNext(needNext);
         }
         time = Math.floor(time);
         //Advance hours
@@ -659,19 +676,19 @@ public class EventParser {
         EngineCore.statScreenRefresh();
     }
 	public static function eachMinuteCount(time:Number, needNext:Boolean = false):void {
-		var minutesToPass:Number = time;
-		CoC.instance.model.time.minutes += minutesToPass;
-		SceneLib.combat.regeneration(minutesToPass);
-		if (CoC.instance.player.hasPerk(PerkLib.JobSoulCultivator)) SceneLib.combat.soulforceregeneration(minutesToPass);
-		if (CoC.instance.player.hasPerk(PerkLib.JobSorcerer) || CoC.instance.player.hasPerk(PerkLib.JobElementalConjurer)) SceneLib.combat.manaregeneration(minutesToPass);
-		SceneLib.combat.wrathregeneration(minutesToPass);
-		SceneLib.combat.fatigueRecovery(minutesToPass);
-		SceneLib.combat.venomCombatRecharge(minutesToPass);
-		if (CoC.instance.model.time.minutes > 59) {
-            CoC.instance.timeQ++;
-            CoC.instance.model.time.minutes -= 60;
-            if (!EngineCore.buttonIsVisible(0)) goNext(CoC.instance.timeQ, needNext);
+        // Ex. minutes = 45, time = 20, overflow = 6
+        var overflow:Number = (CoC.instance.model.time.minutes + time) - 59;
+        if (overflow > 0) {
+            CoC.instance.timeQmin += overflow;
+            time -= overflow;
         }
+        CoC.instance.model.time.minutes += time;
+		SceneLib.combat.regeneration(time);
+		if (CoC.instance.player.hasPerk(PerkLib.JobSoulCultivator)) SceneLib.combat.soulforceregeneration(time);
+		if (CoC.instance.player.hasPerk(PerkLib.JobSorcerer) || CoC.instance.player.hasPerk(PerkLib.JobElementalConjurer)) SceneLib.combat.manaregeneration(time);
+		SceneLib.combat.wrathregeneration(time);
+		SceneLib.combat.fatigueRecovery(time);
+		SceneLib.combat.venomCombatRecharge(time);
         EngineCore.statScreenRefresh();
 	}
 

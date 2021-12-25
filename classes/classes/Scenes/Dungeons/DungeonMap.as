@@ -1380,8 +1380,8 @@ public class DungeonMap extends BaseContent
 				if (DungeonAbstractContent.dungeonLoc == 135) {
 					rawOutputText(", Floor 3");
 					rawOutputText("\n                [P]        ");
-					rawOutputText("\n                 |         ");
-					rawOutputText("\n       -[ ]-[ ]-[ ]        ");
+					rawOutputText("\n         |       |         ");
+					rawOutputText("\n        [ ]-[ ]-[ ]        ");
 					rawOutputText("\n             |             ");
 					rawOutputText("\n[ ]         [ ]-[ ]-[ ]-[ ]");
 					rawOutputText("\n |           |   |       | ");

@@ -119,7 +119,7 @@ public class Camp extends NPCAwareContent{
 		if (!CoC.instance.inCombat) spriteSelect(-1);
 		hideMenus();
 		timeQ = timeUsed;
-		goNext(timeUsed, false);
+		goNext(false);
 	}
 
 	public function returnToCampUseOneHour():void {
@@ -408,11 +408,11 @@ public class Camp extends NPCAwareContent{
 			flags[kFLAGS.PC_PENDING_PREGGERS] = 2;
 			return;
 		}
-		if (timeQ > 0) {
+		if (timeQueued) {
 			if (!campQ) {
 				clearOutput();
 				outputText("More time passes...\n");
-				goNext(timeQ, false);
+				goNext(false);
 				return;
 			} else {
 				if (IsSleeping) {
@@ -473,17 +473,17 @@ public class Camp extends NPCAwareContent{
 			}
 		}
 		if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] > 1 && flags[kFLAGS.CHRISTMAS_TREE_LEVEL] < 5 && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
-			if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 2 && flags[kFLAGS.CHRISTMAS_TREE_GROWTH_COUNTER] >= 6) {
+			if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 3 && flags[kFLAGS.CHRISTMAS_TREE_GROWTH_COUNTER] >= 6) {
 				Magnolia.plantGrowsToLevel2();
 				hideMenus();
 				return;
 			}
-			if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 3 && flags[kFLAGS.CHRISTMAS_TREE_GROWTH_COUNTER] >= 22) {
+			if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 4 && flags[kFLAGS.CHRISTMAS_TREE_GROWTH_COUNTER] >= 22) {
 				Magnolia.plantGrowsToLevel3();
 				hideMenus();
 				return;
 			}
-			if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 4 && flags[kFLAGS.CHRISTMAS_TREE_GROWTH_COUNTER] >= 34) {
+			if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 5 && flags[kFLAGS.CHRISTMAS_TREE_GROWTH_COUNTER] >= 34) {
 				Magnolia.plantGrowsToLevel4();
 				hideMenus();
 				return;
@@ -2042,6 +2042,8 @@ public class Camp extends NPCAwareContent{
 			addButtonDisabled(2, "Watch Sky", "The option to watch sunset is available at 7pm.");
 		}
 		addButton(3, "Read Codex", codex.accessCodexMenu).hint("Read any codex entries you have unlocked.");
+		if (player.hasKeyItem("Gryphon Statuette") >= 0) addButton(9, "Gryphon", useGryphonStatuette);
+		if (player.hasKeyItem("Peacock Statuette") >= 0) addButton(9, "Peacock", usePeacockStatuette);
 		addButton(14, "Back", campActions);
 	}
 
@@ -2136,7 +2138,7 @@ public class Camp extends NPCAwareContent{
 		else addButtonDisabled(5, "Skeletons", "You need to be necromancer to use this option.");
 		if (player.hasPerk(PerkLib.PrestigeJobDruid)) addButton(6, "Fusions", druidMenu);
 		else addButtonDisabled(6, "Fusions", "You need to be druid to use this option.");
-		if ((flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4) && (flags[kFLAGS.PLAYER_COMPANION_1] != "" || flags[kFLAGS.PLAYER_COMPANION_2] != "" || flags[kFLAGS.PLAYER_COMPANION_3] != "")) addButton(10, "SimpPreTurn", simplifiedPreTurn);
+		if (((flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4) && (flags[kFLAGS.PLAYER_COMPANION_1] != "" || flags[kFLAGS.PLAYER_COMPANION_2] != "" || flags[kFLAGS.PLAYER_COMPANION_3] != "")) || player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn)) addButton(10, "SimpPreTurn", simplifiedPreTurn);
 		addButton(14, "Back", campActions);
 	}
 	private function druidMenu():void {
@@ -2152,27 +2154,28 @@ public class Camp extends NPCAwareContent{
 			addButton(13, "Unfuse", druidMenuUnfuseScene);
 		}
 		else {
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsAirE)) addButton(0, "Air", druidMenuFuseScene, "air", 1);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsAirE)) addButton(0, "Air", druidMenuFuseScene, "air", "light green", 1);
 			else addButtonDisabled(0, "Air", "You need to summon Epic Air Elemental first before trying to use this fusion option.");
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarthE)) addButton(1, "Earth", druidMenuFuseScene, "earth", 2);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarthE)) addButton(1, "Earth", druidMenuFuseScene, "earth", "dark brown", 2);
 			else addButtonDisabled(1, "Earth", "You need to summon Epic Earth Elemental first before trying to use this fusion option.");
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsFireE)) addButton(2, "Fire", druidMenuFuseScene, "fire", 3);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsFireE)) addButton(2, "Fire", druidMenuFuseScene, "fire", "tan", 3);
 			else addButtonDisabled(2, "Fire", "You need to summon Epic Fire Elemental first before trying to use this fusion option.");
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsWaterE)) addButton(3, "Water", druidMenuFuseScene, "water", 4);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsWaterE)) addButton(3, "Water", druidMenuFuseScene, "water", "light blue", 4);
 			else addButtonDisabled(3, "Water", "You need to summon Epic Water Elemental first before trying to use this fusion option.");
 			addButtonDisabled(13, "Unfuse", "You need to be fused with any of epic elementals to use this option.");
 		}
 		addButton(14, "Back", campWinionsArmySim);
 	}
-	private function druidMenuFuseScene(element:String, type:Number):void {
+	private function druidMenuFuseScene(element:String, skin:String, type:Number):void {
 		clearOutput();
+		var oldHPratio:Number = player.hp100/100;
 		outputText("You concentrate on the "+element+" elemental slowly infusing its essence within yours. Your body begins to change accordly to take on the aspect of "+element+".\n\n");
 		outputText("After a few seconds, you open your eyes, now one with "+element+" as a");
 		if (type == 1) outputText(" Sylph");
 		if (type == 2) outputText(" Gnome");
 		if (type == 3) outputText("n Ignis");
 		if (type == 4) outputText("n Undine");
-		outputText(".\n\nYou admire your new [Skin color] [skin descript with tattoo if any] skin which emphasizes the element you’ve become. Your ears have changed to "+(type == 4?"gain fins":"becoming pointed")+" like those of an "+(type == 4?"aquatic creature":"elf")+". ");
+		outputText(".\n\nYou admire your new "+skin+" skin which emphasizes the element you’ve become. Your ears have changed to "+(type == 4?"gain fins":"becoming pointed")+" like those of an "+(type == 4?"aquatic creature":"elf")+". ");
 		outputText("Your irises also have changed, the new hue is ");
 		if (type == 1) outputText("orange like the twilight sky");
 		if (type == 2) outputText("green like a leaf");
@@ -2185,35 +2188,48 @@ public class Camp extends NPCAwareContent{
 		if (type == 4) outputText("Your hairs now regularly drip fluid on the ground beneath you if you forget them. Not only that but you seem to be able to control and generate what appears to be an endless quantity of water. You have acquired true control over water.\n\n");
 		if (player.hasPerk(PerkLib.SharedPower)) player.addPerkValue(PerkLib.SharedPower, 1, druidMenuSharedPowerPerkCounting());
 		var tier:Number = 1;
-		if (type == 1 && player.statusEffectv1(StatusEffects.SummonedElementalsAirE) > 1) {
-			if (player.statusEffectv1(StatusEffects.SummonedElementalsAirE) > 3) tier += 3;
-			else if (player.statusEffectv1(StatusEffects.SummonedElementalsAirE) > 2) tier += 2;
+		if (type == 1 && player.statusEffectv2(StatusEffects.SummonedElementalsAirE) > 3) {
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsAirE) > 9) tier += 3;
+			else if (player.statusEffectv2(StatusEffects.SummonedElementalsAirE) > 6) tier += 2;
 			else tier += 1;
 		}
-		if (type == 2 && player.statusEffectv1(StatusEffects.SummonedElementalsEarthE) > 1) {
-			if (player.statusEffectv1(StatusEffects.SummonedElementalsEarthE) > 3) tier += 3;
-			else if (player.statusEffectv1(StatusEffects.SummonedElementalsEarthE) > 2) tier += 2;
+		if (type == 2 && player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) > 3) {
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) > 9) tier += 3;
+			else if (player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) > 6) tier += 2;
 			else tier += 1;
 		}
-		if (type == 3 && player.statusEffectv1(StatusEffects.SummonedElementalsFireE) > 1) {
-			if (player.statusEffectv1(StatusEffects.SummonedElementalsFireE) > 3) tier += 3;
-			else if (player.statusEffectv1(StatusEffects.SummonedElementalsFireE) > 2) tier += 2;
+		if (type == 3 && player.statusEffectv2(StatusEffects.SummonedElementalsFireE) > 3) {
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsFireE) > 9) tier += 3;
+			else if (player.statusEffectv2(StatusEffects.SummonedElementalsFireE) > 6) tier += 2;
 			else tier += 1;
 		}
-		if (type == 4 && player.statusEffectv1(StatusEffects.SummonedElementalsWaterE) > 1) {
-			if (player.statusEffectv1(StatusEffects.SummonedElementalsWaterE) > 3) tier += 3;
-			else if (player.statusEffectv1(StatusEffects.SummonedElementalsWaterE) > 2) tier += 2;
+		if (type == 4 && player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) > 3) {
+			if (player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) > 9) tier += 3;
+			else if (player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) > 6) tier += 2;
 			else tier += 1;
 		}
 		player.createPerk(PerkLib.ElementalBody,type,tier,0,0);
+		if (type == 1) player.createPerk(PerkLib.AffinitySylph,0,0,0,0);
+		if (type == 2) player.createPerk(PerkLib.AffinityGnome,0,0,0,0);
+		if (type == 3) player.createPerk(PerkLib.AffinityIgnis,0,0,0,0);
+		if (type == 4) player.createPerk(PerkLib.AffinityUndine,0,0,0,0);
+		CoC.instance.mainViewManager.updateCharviewIfNeeded();
+		player.HP = oldHPratio*player.maxHP();
 		statScreenRefresh();
 		doNext(druidMenu);
 	}
 	private function druidMenuUnfuseScene():void {
 		clearOutput();
+		var oldHPratio:Number = player.hp100/100;
 		outputText("You end your fusion separating from the elemental back into two different entities.");
 		if (player.hasPerk(PerkLib.SharedPower)) player.setPerkValue(PerkLib.SharedPower, 1, 0);
 		player.removePerk(PerkLib.ElementalBody);
+		if (player.hasPerk(PerkLib.AffinitySylph)) player.removePerk(PerkLib.AffinitySylph);
+		if (player.hasPerk(PerkLib.AffinityGnome)) player.removePerk(PerkLib.AffinityGnome);
+		if (player.hasPerk(PerkLib.AffinityIgnis)) player.removePerk(PerkLib.AffinityIgnis);
+		if (player.hasPerk(PerkLib.AffinityUndine)) player.removePerk(PerkLib.AffinityUndine);
+		CoC.instance.mainViewManager.updateCharviewIfNeeded();
+		player.HP = oldHPratio*player.maxHP();
 		statScreenRefresh();
 		doNext(druidMenu);
 	}
@@ -3145,7 +3161,6 @@ public class Camp extends NPCAwareContent{
 			else outputText("accomplish");
 			outputText(" before you went through the portal. You felt a bit sad that you didn't get to achieve your old goals.");
 			dynStats("lust", -30, "scale", false);
-
 		}
 		outputText("\n\nAfter the thought, you spend a good while relaxing and watching the sun setting. By now, the sun has already set below the horizon. The sky is glowing orange after the sunset. It looks like you could explore more for a while.");
 		doNext(camp.returnToCampUseOneHour);
@@ -3177,6 +3192,17 @@ public class Camp extends NPCAwareContent{
 		outputText("\n\nYou let your mind wander and relax.");
 		dynStats("lus", -15, "scale", false);
 		doNext(camp.returnToCampUseOneHour);
+	}
+	
+	private function useGryphonStatuette():void {
+		CoC.instance.mutations.skybornSeed(1, player);
+		eachMinuteCount(5);
+		doNext(playerMenu);
+	}
+	private function usePeacockStatuette():void {
+		CoC.instance.mutations.skybornSeed(2, player);
+		eachMinuteCount(5);
+		doNext(playerMenu);
 	}
 
 //-----------------
@@ -3317,7 +3343,7 @@ public class Camp extends NPCAwareContent{
 			if (timeQ != 1) outputText("You continue to rest for " + num2Text(timeQ) + " more hours.\n");
 			else outputText("You continue to rest for another hour.\n");
 		}
-		goNext(timeQ, true);
+		goNext(true);
 	}
 
 //-----------------
@@ -3419,7 +3445,7 @@ public class Camp extends NPCAwareContent{
 			if (timeQ != 1) outputText("You continue to wait for " + num2Text(timeQ) + " more hours.\n");
 			else outputText("You continue to wait for another hour.\n");
 		}
-		goNext(timeQ, true);
+		goNext(true);
 	}
 
 //-----------------
@@ -3451,7 +3477,7 @@ public class Camp extends NPCAwareContent{
 				if (timeQ > 1) outputText("s");
 				outputText(". ");
 				sleepRecovery(true);
-				goNext(timeQ, true);
+				goNext(true);
 				return;
 			}
 			/******************************************************************/
@@ -3616,7 +3642,7 @@ public class Camp extends NPCAwareContent{
 			else outputText("You lie down to resume sleeping for the remaining hour.\n");
 		}
 		player.sleepUpdateStat();
-		goNext(timeQ, true);
+		goNext(true);
 	}
 
 //For shit that breaks normal sleep processing.
@@ -3641,7 +3667,7 @@ public class Camp extends NPCAwareContent{
 		if (timeQ != 1) outputText("You lie down to resume sleeping for the remaining " + num2Text(timeQ) + " hours.\n");
 		else outputText("You lie down to resume sleeping for the remaining hour.\n");
 		sleepRecovery(true);
-		goNext(timeQ, true);
+		goNext(true);
 	}
 
 	public function sleepRecovery(display:Boolean = false):void {
@@ -5774,7 +5800,7 @@ public function rebirthFromBadEnd():void {
 			doNext(doCamp);
 			return;
 		}
-	/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 34) {
+		if (flags[kFLAGS.MOD_SAVE_VERSION] == 34) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 35;
 			clearOutput();
 			outputText("Jiangshi getting Tag'd and your backpack feel somehow cheaper (no worry will get back some gems for it if needed).");
@@ -5796,8 +5822,8 @@ public function rebirthFromBadEnd():void {
 				player.setPerkValue(PerkLib.NinetailsKitsuneOfBalance, 4, 0);
 				player.ascensionPerkPoints += 5;
 			}
-			if (player.hasPerk(MutationsLib.GolemArmyLieutenant) && !player.hasPerk(MutationsLib.GolemArmyJuniorLieutenant)) {
-				outputText(" We got even smth for all the golem army commnaders. No that jsut small degradation in ranks to have more glorious and longer reaching path in the future ;)");
+			if (player.hasPerk(PerkLib.GolemArmyLieutenant) && !player.hasPerk(PerkLib.GolemArmyJuniorLieutenant)) {
+				outputText(" We got even smth for all the golem army commnaders. No that just small degradation in ranks to have more glorious and longer reaching path in the future ;)");
 				if (player.hasPerk(PerkLib.GolemArmyLieutenant)) {
 					player.removePerk(PerkLib.GolemArmyLieutenant);
 					player.createPerk(PerkLib.GolemArmyJuniorLieutenant,0,0,0,0);
@@ -5870,11 +5896,13 @@ public function rebirthFromBadEnd():void {
 				if (player.hasPerk(PerkLib.AscensionBuildingPrestigeX)) player.setPerkValue(PerkLib.AscensionBuildingPrestigeX, 1,6);
 				else player.createPerk(PerkLib.AscensionBuildingPrestigeX,6,0,0,1);
 				player.removePerk(PerkLib.AscensionBuildingPrestige06);
+			}
+			if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] > 0) flags[kFLAGS.CHRISTMAS_TREE_LEVEL]++;
 			if (player.hasPerk(PerkLib.Rigidity)) jiangshiBuggedItemsCleanUpCrew();//LAST THING TO DO IN THIS SAVE UPDATE
 			doNext(doCamp);
 			return;
 		}
-		if (flags[kFLAGS.MOD_SAVE_VERSION] == 35) {
+	/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 35) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 36;
 			clearOutput();
 			outputText("Text.");
@@ -5895,7 +5923,6 @@ public function rebirthFromBadEnd():void {
 			doNext(doCamp);
 			return;
 		}*/
-
 		doCamp();
 	}
 	

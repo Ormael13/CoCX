@@ -611,6 +611,14 @@ public class Combat extends BaseContent {
 			monster.createStatusEffect(StatusEffects.MonsterAttacksDisabled, 0, 0, 0, 0);
 			outputText("\n\n");
 		}
+		if (player.hasPerk(PerkLib.AffinitySylph) && !player.hasStatusEffect(StatusEffects.InsideSmallSpace) && !player.hasStatusEffect(StatusEffects.UnderwaterCombatBoost)) {
+			player.createStatusEffect(StatusEffects.Flying, 1, 3, 0, 0);
+			if (player.hasPerk(PerkLib.Resolute) < 0) {
+				player.createStatusEffect(StatusEffects.FlyingNoStun, 0, 0, 0, 0);
+				player.createPerk(PerkLib.Resolute, 0, 0, 0, 0);
+			}
+			monster.createStatusEffect(StatusEffects.MonsterAttacksDisabled, 0, 0, 0, 0);
+		}
 	}
 
 //combat is over. Clear shit out and go to main
@@ -665,7 +673,7 @@ public class Combat extends BaseContent {
                     if (gemsLost > player.gems) gemsLost = player.gems;
                     if (monster.short == "manticore") gemsLost = 0;
                     var timePasses:int = monster.handleCombatLossText(inDungeon, gemsLost); //Allows monsters to customize the loss text and the amount of time lost
-                    if (player.hasStatusEffect(StatusEffects.SoulArena) || (monster.short == "Hellfire Snail" && player.hasPerk(PerkLib.FireAffinity))) timePasses = 1;
+                    if (player.hasStatusEffect(StatusEffects.SoulArena) || (monster.short == "Hellfire Snail" && (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)))) timePasses = 1;
                     player.gems -= gemsLost;
                     if (monster.perkv3(PerkLib.NoGemsLost) > 0) player.gems += monster.perkv3(PerkLib.NoGemsLost);
                 }
@@ -1213,6 +1221,54 @@ public class Combat extends BaseContent {
 		if (player.hasStatusEffect(StatusEffects.AlterBindScroll1)) {
 			if (player.statStore.hasBuff("NoLimiterState")) bd = buttons.add("No limiter", returnToNormalState).hint("Toggle off No limiter.");
 			else bd = buttons.add("No limiter", noLimiterState).hint("Toggle on No limiter. (STR+++, ?Lib-?)");
+		}
+		if (player.hasPerk(PerkLib.ElementalBody)) {
+			if (player.perkv1(PerkLib.ElementalBody) == 1) {//sylph
+				bd = buttons.add("Wind Blade", curry(mspecials.FusionSpecialFirst, player.statusEffectv2(StatusEffects.SummonedElementalsAirE), 1)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
+				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
+					bd.disable("Your current soulforce is too low.");
+				}
+				else if (player.hasStatusEffect(StatusEffects.InsideSmallSpace)) {
+					bd.disable("You can't use this inside too small spaces.");
+				}
+				bd = buttons.add("Healing Breeze", curry(mspecials.FusionSpecialSecond, player.statusEffectv2(StatusEffects.SummonedElementalsAirE), 1)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
+				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
+					bd.disable("Your current soulforce is too low.");
+				}
+			}
+			if (player.perkv1(PerkLib.ElementalBody) == 2) {//gnome
+				bd = buttons.add("Wild Growth", curry(mspecials.FusionSpecialFirst, player.statusEffectv2(StatusEffects.SummonedElementalsEarthE), 2)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
+				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
+					bd.disable("Your current soulforce is too low.");
+				}
+				else if (monster.hasStatusEffect(StatusEffects.Flying)) {
+					bd.disable("You can reach flying targets.");
+				}
+				bd = buttons.add("Synthesis", curry(mspecials.FusionSpecialSecond, player.statusEffectv2(StatusEffects.SummonedElementalsEarthE), 2)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
+				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
+					bd.disable("Your current soulforce is too low.");
+				}
+			}
+			if (player.perkv1(PerkLib.ElementalBody) == 3) {//ignis
+				bd = buttons.add("Pyroblast", curry(mspecials.FusionSpecialFirst, player.statusEffectv2(StatusEffects.SummonedElementalsFireE), 3)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
+				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
+					bd.disable("Your current soulforce is too low.");
+				}
+				bd = buttons.add("Warmth", curry(mspecials.FusionSpecialSecond, player.statusEffectv2(StatusEffects.SummonedElementalsFireE), 3)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
+				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
+					bd.disable("Your current soulforce is too low.");
+				}
+			}
+			if (player.perkv1(PerkLib.ElementalBody) == 4) {//undine
+				bd = buttons.add("Hydraulic Torrent", curry(mspecials.FusionSpecialFirst, player.statusEffectv2(StatusEffects.SummonedElementalsWaterE), 4)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
+				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
+					bd.disable("Your current soulforce is too low.");
+				}
+				bd = buttons.add("Lifewater", curry(mspecials.FusionSpecialSecond, player.statusEffectv2(StatusEffects.SummonedElementalsWaterE), 4)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
+				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
+					bd.disable("Your current soulforce is too low.");
+				}
+			}
 		}
     }
 	public function GolemsMenu():void {
@@ -5886,7 +5942,8 @@ public class Combat extends BaseContent {
                 WeaponMeleeStatusProcs();
                 if (player.weapon == weapons.RIPPER2) {
                     outputText("  Reeling in pain [themonster] begins to burn.");
-                    monster.createStatusEffect(StatusEffects.BurnDoT, 5, 0.05, 0, 0);
+                    if (monster.hasStatusEffect(StatusEffects.BurnDoT)) monster.addStatusValue(StatusEffects.BurnDoT,1,1);
+					else monster.createStatusEffect(StatusEffects.BurnDoT, 5, 0.05, 0, 0);
                 }
                 if (player.hasPerk(PerkLib.PoisonNails) && player.isFistOrFistWeapon()) {
                     var lust0damage:Number = 35 + rand(player.lib / 10);
@@ -6622,6 +6679,28 @@ public class Combat extends BaseContent {
                 monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
             } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
         }
+		if (player.isFistOrFistWeapon() && player.hasPerk(PerkLib.ElementalTouch) && player.hasPerk(PerkLib.ElementalBody)) {
+			if (player.perkv1(PerkLib.ElementalBody) == 1) {
+				if (monster.hasStatusEffect(StatusEffects.Hemorrhage)) monster.addStatusValue(StatusEffects.Hemorrhage, 1, 1);
+                else monster.createStatusEffect(StatusEffects.Hemorrhage, 5, 0.05, 0, 0);
+			}
+			if (player.perkv1(PerkLib.ElementalBody) == 2) {
+				if (monster.hasStatusEffect(StatusEffects.AcidDoT)) {
+					monster.addStatusValue(StatusEffects.AcidDoT,1,1);
+					monster.addStatusValue(StatusEffects.AcidDoT,3,1);
+				}
+				else monster.createStatusEffect(StatusEffects.AcidDoT,4,0.02,1,0);
+			}
+			if (player.perkv1(PerkLib.ElementalBody) == 3) {
+				if (monster.hasStatusEffect(StatusEffects.BurnDoT)) monster.addStatusValue(StatusEffects.BurnDoT,1,1);
+				else monster.createStatusEffect(StatusEffects.BurnDoT,10,0.02,0,0);
+			}
+			if (player.perkv1(PerkLib.ElementalBody) == 4) {
+				monster.statStore.addBuffObject({str:-10,spe:-10}, "Poison",{text:"Poison"});
+				if (monster.hasStatusEffect(StatusEffects.Frostbite)) monster.addStatusValue(StatusEffects.Frostbite,1,1);
+				else monster.createStatusEffect(StatusEffects.Frostbite,1,0,0,0);
+			}
+		}
     }
 
     public function WeaponRangeStatusProcs():void {
@@ -7296,6 +7375,7 @@ public class Combat extends BaseContent {
 			if (player.hasPerk(PerkLib.RatatoskrSmartsFinalForm)) damage *= (1 + (Math.round(codex.checkUnlocked() / 100) * 3));
 			else damage *= (1 + Math.round(codex.checkUnlocked() / 100));
 		}
+		if (player.hasPerk(PerkLib.SharedPower) && player.perkv1(PerkLib.SharedPower) > 0) damage *= (1+(0.1*player.perkv1(PerkLib.SharedPower)));
 		damage *= EyesOfTheHunterDamageBonus();
         damage = DamageOverhaul(damage);
 		if (monster.hasPerk(PerkLib.EnemyGhostType)) damage = 0;
@@ -7458,7 +7538,7 @@ public class Combat extends BaseContent {
         if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
         if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
         if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
-        if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
+        if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) damage *= 2;
         if (player.hasStatusEffect(StatusEffects.YukiOnnaKimono)) damage *= 0.2;
         if (player.hasPerk(PerkLib.WalpurgisIzaliaRobe)) damage *= 2;
         if (player.hasPerk(PerkLib.IceQueenGown)) damage = damage / 100;
@@ -8865,7 +8945,7 @@ public class Combat extends BaseContent {
 				flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = 0;
             }
         }
-		if (player.hasStatusEffect(StatusEffects.ConstantHeatConditions) && !player.hasPerk(PerkLib.FireAffinity)) SceneLib.volcanicCrag.ConstantHeatConditionsTick();
+		if (player.hasStatusEffect(StatusEffects.ConstantHeatConditions) && !player.hasPerk(PerkLib.FireAffinity) && !player.hasPerk(PerkLib.AffinityIgnis)) SceneLib.volcanicCrag.ConstantHeatConditionsTick();
 		if (player.hasStatusEffect(StatusEffects.SubZeroConditions) && !player.hasPerk(PerkLib.ColdAffinity)) SceneLib.glacialRift.SubZeroConditionsTick();
         if (player.hasStatusEffect(StatusEffects.UnderwaterOutOfAir)) {
             var deoxigen:Number = 0;
@@ -8873,6 +8953,12 @@ public class Combat extends BaseContent {
             deoxigen = player.takePhysDamage(deoxigen);
             outputText("<b>You are running out of oxygen. You need to finish this fight and fast before you lose consciousness. <b>(<font color=\"#800000\">" + deoxigen + "</font>)</b></b>\n\n");
         }
+		if (player.hasStatusEffect(StatusEffects.UnderwaterAndIgnis)) {
+			var ignishurt:Number = 0;
+            ignishurt += (player.maxHP() * 0.05);
+            ignishurt = player.takeWaterDamage(ignishurt);
+            outputText("<b>You are fighting in hostile to your current form place. <b>(<font color=\"#800000\">" + ignishurt + "</font>)</b></b>\n\n");
+		}
         if (player.hasStatusEffect(StatusEffects.HeroBane)) {
             player.addStatusValue(StatusEffects.HeroBane, 1, -1);
             if (player.statusEffectv1(StatusEffects.HeroBane) <= 0) {
@@ -10337,7 +10423,7 @@ public class Combat extends BaseContent {
 			healingPercent = 0;
             healingPercent += PercentBasedRegeneration();
             if (player.armor == armors.GOOARMR) healingPercent += (SceneLib.valeria.valeriaFluidsEnabled() ? (flags[kFLAGS.VALERIA_FLUIDS] < 50 ? flags[kFLAGS.VALERIA_FLUIDS] / 25 : 2) : 2);
-            if ((player.hasStatusEffect(StatusEffects.UnderwaterCombatBoost) || player.hasStatusEffect(StatusEffects.NearWater)) && player.hasPerk(PerkLib.AquaticAffinity) && player.necklaceName == "Magic coral and pearl necklace") healingPercent += 1;
+            if ((player.hasStatusEffect(StatusEffects.UnderwaterCombatBoost) || player.hasStatusEffect(StatusEffects.NearWater)) && (player.hasPerk(PerkLib.AquaticAffinity) || player.hasPerk(PerkLib.AffinityUndine)) && player.necklaceName == "Magic coral and pearl necklace") healingPercent += 1;
             if (player.statStore.hasBuff("CrinosShape") && player.hasPerk(PerkLib.ImprovingNaturesBlueprintsApexPredator)) healingPercent += 2;
             if (player.perkv1(PerkLib.Sanctuary) == 1) healingPercent += ((player.corruptionTolerance() - player.cor) / (100 + player.corruptionTolerance()));
             if (player.perkv1(PerkLib.Sanctuary) == 2) healingPercent += player.cor / (100 + player.corruptionTolerance());
@@ -10377,6 +10463,7 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.Regeneration6)) maxPercentRegen += 0.5;
         }
 		if (flags[kFLAGS.HUNGER_ENABLED] <= 0 && !player.hasPerk(PerkLib.EndlessHunger) && player.hasPerk(PerkLib.AxillaryVenomGlands)) maxPercentRegen -= 1;
+		//if (player.hasStatusEffect(StatusEffects.GnomeHomeBuff) && player.statusEffectv1(StatusEffects.GnomeHomeBuff) == 1) maxPercentRegen += 15;
         if (player.armor == armors.NURSECL) maxPercentRegen += 0.5;
         if (player.armor == armors.BLIZZ_K) {
             if (!player.hasPerk(PerkLib.ColdAffinity)) maxPercentRegen -= 10;
@@ -10432,8 +10519,9 @@ public class Combat extends BaseContent {
 		}
 		if (player.hasPerk(MutationsLib.DraconicHeartEvolved)) maxRegen += 1;
         if (player.hasPerk(PerkLib.HydraRegeneration) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) maxRegen += 1 * player.statusEffectv1(StatusEffects.HydraTailsPlayer);
-        if ((player.hasStatusEffect(StatusEffects.UnderwaterCombatBoost) || player.hasStatusEffect(StatusEffects.NearWater)) && player.hasPerk(PerkLib.AquaticAffinity) && player.necklaceName == "Magic coral and pearl necklace") maxRegen += 1;
-        if (player.statStore.hasBuff("CrinosShape") && player.hasPerk(PerkLib.ImprovingNaturesBlueprintsApexPredator)) maxRegen += 2;
+        if ((player.hasStatusEffect(StatusEffects.UnderwaterCombatBoost) || player.hasStatusEffect(StatusEffects.NearWater)) && (player.hasPerk(PerkLib.AquaticAffinity) || player.hasPerk(PerkLib.AffinityUndine)) && player.necklaceName == "Magic coral and pearl necklace") maxRegen += 1;
+        //if (player.hasStatusEffect(StatusEffects.GnomeHomeBuff) && player.statusEffectv1(StatusEffects.GnomeHomeBuff) == 1) maxRegen += 15;
+		if (player.statStore.hasBuff("CrinosShape") && player.hasPerk(PerkLib.ImprovingNaturesBlueprintsApexPredator)) maxRegen += 2;
         if (player.hasStatusEffect(StatusEffects.SecondWindRegen)) maxRegen += 5;
         if (player.hasStatusEffect(StatusEffects.Cauterize)) {
             maxRegen += 1.5;
@@ -14101,7 +14189,7 @@ public class Combat extends BaseContent {
             if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
             else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
         }
-        if (!player.hasPerk(MutationsLib.HarpyHollowBonesEvolved) && player.statusEffectv1(StatusEffects.Flying) == 0) {
+        if ((!player.hasPerk(MutationsLib.HarpyHollowBonesEvolved) && player.statusEffectv1(StatusEffects.Flying) == 0) || player.statusEffectv2(StatusEffects.Flying) != 3) {
             if (player.isFlying()) player.removeStatusEffect(StatusEffects.Flying);
             if (player.hasStatusEffect(StatusEffects.FlyingNoStun)) {
                 player.removeStatusEffect(StatusEffects.FlyingNoStun);
@@ -14823,6 +14911,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) modss += .5;
         if (player.hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) modss += .6;
         if (player.hasPerk(PerkLib.DaoistsFocus)) modss += player.perkv1(PerkLib.DaoistsFocus);
+        if (player.hasPerk(PerkLib.DaoistsFocusRange)) modss += player.perkv1(PerkLib.DaoistsFocusRange);
         if (player.hasPerk(PerkLib.WizardsAndDaoistsFocus)) modss += player.perkv2(PerkLib.WizardsAndDaoistsFocus);
         if (player.hasPerk(PerkLib.SeersInsight)) modss += player.perkv1(PerkLib.SeersInsight);
         if (player.hasPerk(PerkLib.AscensionSpiritualEnlightenment)) modss *= 1 + (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.1);
@@ -14860,6 +14949,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) modssp += .5;
         if (player.hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) modssp += .6;
         if (player.hasPerk(PerkLib.BodyCultivatorsFocus)) modssp += player.perkv1(PerkLib.BodyCultivatorsFocus);
+        if (player.hasPerk(PerkLib.BodyCultivatorsFocusRange)) modssp += player.perkv1(PerkLib.BodyCultivatorsFocusRange);
         if (player.hasPerk(PerkLib.AscensionSpiritualEnlightenment)) modssp *= 1 + (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.1);
         if (player.hasPerk(PerkLib.InariBlessedKimono)){
             var mod1:Number = 0.5;
@@ -14916,6 +15006,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) modssm += .5;
         if (player.hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) modssm += .6;
         if (player.hasPerk(PerkLib.DaoistsFocus)) modssm += player.perkv1(PerkLib.DaoistsFocus);
+        if (player.hasPerk(PerkLib.DaoistsFocusRange)) modssm += player.perkv1(PerkLib.DaoistsFocusRange);
         if (player.hasPerk(PerkLib.WizardsAndDaoistsFocus)) modssm += player.perkv2(PerkLib.WizardsAndDaoistsFocus);
         if (player.hasPerk(PerkLib.SeersInsight)) modssm += player.perkv1(PerkLib.SeersInsight);
         if (player.hasPerk(PerkLib.AscensionSpiritualEnlightenment)) modssm *= 1 + (player.perkv1(PerkLib.AscensionSpiritualEnlightenment) * 0.1);
@@ -14950,10 +15041,10 @@ public class Combat extends BaseContent {
     public function soulskillcostmulti():Number {
         var multiss:Number = 1;
         if (soulskillMod() > 1) multiss += (soulskillMod() - 1) * 0.1;
-        if (player.level >= 24 && player.wis >= 80) multiss += 1;//początek używania Dao of Elements
-        if (player.level >= 42 && player.wis >= 140) multiss += 1;//początek zdolności latania
-        if (player.level >= 60 && player.wis >= 200) multiss += 1;//początek czegoś tam 1
-        if (player.level >= 78 && player.wis >= 260) multiss += 1;//początek czegoś tam 2
+        if (player.level >= 27 && player.wis >= 80) multiss += 1;//początek używania Dao of Elements
+        if (player.level >= 54 && player.wis >= 140) multiss += 1;//początek zdolności latania
+        if (player.level >= 78 && player.wis >= 200) multiss += 1;//początek tworzenia klonów
+        //if (player.level >= 78 && player.wis >= 260) multiss += 1;//początek czegoś tam
         multiss = Math.round(multiss * 100) / 100;
         return multiss;
     }

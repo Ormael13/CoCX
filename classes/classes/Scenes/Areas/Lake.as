@@ -110,8 +110,11 @@ use namespace CoC;
 			choice[choice.length] = 1;
 			choice[choice.length] = 2;
 			//Fetish cultist not encountered till level 3
-			if (player.level >= 3 && flags[kFLAGS.FACTORY_SHUTDOWN] > 0)
+			if (player.level >= 3 && flags[kFLAGS.FACTORY_SHUTDOWN] > 0) {
 				choice[choice.length] = 3;
+				choice[choice.length] = 10;
+				choice[choice.length] = 11;
+			}
 			//Slimes/Ooze = level >= 3
 			if (player.level >= 3)
 				choice[choice.length] = 4;

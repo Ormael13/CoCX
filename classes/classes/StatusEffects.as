@@ -1054,6 +1054,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const TranceTransformation:StatusEffectType      = mkCombat("Trance Transformation");
 		public static const TrollHold:StatusEffectType                 = mkCombat("Troll Hold");
 		public static const UBERWEB:StatusEffectType                   = mkCombat("UBERWEB");
+		public static const UnderwaterAndIgnis:StatusEffectType        = mkCombat("UnderwaterAndIgnis");
 		public static const UnderwaterCombatBoost:StatusEffectType     = mkCombat("UnderwaterCombatBoost");
 		public static const UnderwaterOutOfAir:StatusEffectType        = mkCombat("UnderwaterOutOfAir");
 		public static const VioletPupilTransformation:StatusEffectType = mkCombat("Violet Pupil Transformation");

@@ -705,7 +705,6 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.mana < spellCost(100)) {
 				bd.disable("Your mana is too low to use mind thrust.");
 			}
-
 			bd = buttons.add("Mind Blast", mindBlast).hint("Overload an opponent’s mind with lewd information, stunning it.\n\nMana Cost: " + spellCostWhite(100) + "");
 			if (player.mana < spellCost(50)) {
 				bd.disable("Your mana is too low to use mind blast.");
@@ -713,10 +712,57 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasStatusEffect(StatusEffects.CooldownSpellMindBlast)) {
 				bd.disable("You need more time before you can use mind blast again.\n\n");
 			}
-
 			bd = buttons.add("Mirror Image", mirrorImage).hint("Create multiple clone of yourself to distract your opponent.\n\nMana Cost: " + spellCostWhite(100) + "");
 			if (player.mana < spellCost(100)) {
 				bd.disable("Your mana is too low to use mirror image.");
+			}
+		}
+		if (player.hasPerk(PerkLib.ElementalBody)) {
+			if (player.perkv1(PerkLib.ElementalBody) == 1) {//sylph
+				bd = buttons.add("Wind Blade", curry(FusionSpecialFirst, player.statusEffectv2(StatusEffects.SummonedElementalsAirE), 1)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
+				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
+					bd.disable("Your current soulforce is too low.");
+				}
+				else if (player.hasStatusEffect(StatusEffects.InsideSmallSpace)) {
+					bd.disable("You can't use this inside too small spaces.");
+				}
+				bd = buttons.add("Healing Breeze", curry(FusionSpecialSecond, player.statusEffectv2(StatusEffects.SummonedElementalsAirE), 1)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
+				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
+					bd.disable("Your current soulforce is too low.");
+				}
+			}
+			if (player.perkv1(PerkLib.ElementalBody) == 2) {//gnome
+				bd = buttons.add("Wild Growth", curry(FusionSpecialFirst, player.statusEffectv2(StatusEffects.SummonedElementalsEarthE), 2)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
+				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
+					bd.disable("Your current soulforce is too low.");
+				}
+				else if (monster.hasStatusEffect(StatusEffects.Flying)) {
+					bd.disable("You can reach flying targets.");
+				}
+				bd = buttons.add("Synthesis", curry(FusionSpecialSecond, player.statusEffectv2(StatusEffects.SummonedElementalsEarthE), 2)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
+				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
+					bd.disable("Your current soulforce is too low.");
+				}
+			}
+			if (player.perkv1(PerkLib.ElementalBody) == 3) {//ignis
+				bd = buttons.add("Pyroblast", curry(FusionSpecialFirst, player.statusEffectv2(StatusEffects.SummonedElementalsFireE), 3)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
+				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
+					bd.disable("Your current soulforce is too low.");
+				}
+				bd = buttons.add("Warmth", curry(FusionSpecialSecond, player.statusEffectv2(StatusEffects.SummonedElementalsFireE), 3)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
+				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
+					bd.disable("Your current soulforce is too low.");
+				}
+			}
+			if (player.perkv1(PerkLib.ElementalBody) == 4) {//undine
+				bd = buttons.add("Hydraulic Torrent", curry(FusionSpecialFirst, player.statusEffectv2(StatusEffects.SummonedElementalsWaterE), 4)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
+				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
+					bd.disable("Your current soulforce is too low.");
+				}
+				bd = buttons.add("Lifewater", curry(FusionSpecialSecond, player.statusEffectv2(StatusEffects.SummonedElementalsWaterE), 4)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
+				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
+					bd.disable("Your current soulforce is too low.");
+				}
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.ShieldingSpell)) buttons.add("Shielding", shieldingSpell);
@@ -2519,7 +2565,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(MutationsLib.DrakeLungs)) damult += 3;
 			if (player.hasPerk(MutationsLib.DrakeLungsPrimitive)) damult += 3;
 			if (player.hasPerk(MutationsLib.DrakeLungsEvolved)) damult += 3;
-			if (player.hasPerk(PerkLib.FireAffinity)) damage *= 1.25;
+			if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) damage *= 1.25;
 			if (player.hasPerk(PerkLib.ColdMastery) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 1.25;
 			if (player.hasPerk(PerkLib.LightningAffinity)) damage *= 1.25;
 			if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + ((player.lust100 * 0.01) * 0.25));
@@ -6034,6 +6080,100 @@ public class MagicSpecials extends BaseCombatContent {
 		doDamage(damage, true, true);
 		outputText(" damage.\n\n");
 		//checkMinionsAchievementDamage(damage);
+		enemyAI();
+	}
+	
+	public function FusionSpecialFirst(element:Number, type:Number):void {
+		clearOutput();
+		var soulforcecost:Number = 10 * soulskillCost() * soulskillcostmulti();
+		soulforcecost = Math.round(soulforcecost);
+		player.soulforce -= soulforcecost;
+		var damage:Number = 0;
+		var multiInt:Number = 2;
+		var multiWis:Number = 2;
+		if (element >= 4) {
+			multiInt += 0.4 * (element - 3);
+			multiWis += 0.4 * (element - 3);
+		}
+		if (element >= 7) {
+			multiInt += 0.4 * (element - 6);
+			multiWis += 0.4 * (element - 6);
+		}
+		if (element >= 10) {
+			multiInt += 0.4 * (element - 9);
+			multiWis += 0.4 * (element - 9);
+		}
+		damage += scalingBonusIntelligence() * multiInt;
+		damage += scalingBonusWisdom() * multiWis;
+		if (type == 1) {
+			outputText("You rub your palms together before unleashing the energy in the form of razor sharp winds. [Themonster] eyes grow wide in surprise as your attack leaves deep bleeding cuts in its flesh! ");
+			doWindDamage(damage, true, true);
+			if (player.isFistOrFistWeapon() && player.hasPerk(PerkLib.ElementalTouch)) {
+				if (monster.hasStatusEffect(StatusEffects.Hemorrhage)) monster.addStatusValue(StatusEffects.Hemorrhage, 1, 1);
+				else monster.createStatusEffect(StatusEffects.Hemorrhage, 5, 0.05, 0, 0);
+			}
+		}
+		if (type == 2) {
+			outputText("You smash both of your fists into the ground, causing vegetation to grow at an accelerated rate. [Themonster] is punched out of nowhere as a grown tree suddenly sprouts from beneath! ");
+			doEarthDamage(damage, true, true);
+			if (player.isFistOrFistWeapon() && player.hasPerk(PerkLib.ElementalTouch)) {
+				if (monster.hasStatusEffect(StatusEffects.AcidDoT)) {
+					monster.addStatusValue(StatusEffects.AcidDoT,1,1);
+					monster.addStatusValue(StatusEffects.AcidDoT,3,1);
+				}
+				else monster.createStatusEffect(StatusEffects.AcidDoT,4,0.02,1,0);
+			}
+		}
+		if (type == 3) {
+			outputText("You gather energy in your mouth before spitting a pyroclastic mather at your opponent, searing their flesh and setting [themonster] on fire. ");
+			doFireDamage(damage, true, true);
+			if (player.isFistOrFistWeapon() && player.hasPerk(PerkLib.ElementalTouch)) {
+				if (monster.hasStatusEffect(StatusEffects.BurnDoT)) monster.addStatusValue(StatusEffects.BurnDoT,1,1);
+				else monster.createStatusEffect(StatusEffects.BurnDoT,10,0.02,0,0);
+			}
+		}
+		if (type == 4) {
+			outputText("You push both of your palms toward your opponent, your arms turning to a pair of powerful water jets that batters [themonster] with rock crushing pressure! ");
+			doWaterDamage(damage, true, true);
+			if (player.isFistOrFistWeapon() && player.hasPerk(PerkLib.ElementalTouch)) {
+				monster.statStore.addBuffObject({str:-10,spe:-10}, "Poison",{text:"Poison"});
+				if (monster.hasStatusEffect(StatusEffects.Frostbite)) monster.addStatusValue(StatusEffects.Frostbite,1,1);
+				else monster.createStatusEffect(StatusEffects.Frostbite,1,0,0,0);
+			}
+		}
+		outputText("\n\n");
+		enemyAI();
+	}
+	public function FusionSpecialSecond(element:Number, type:Number):void {
+		clearOutput();
+		var soulforcecost:Number = 10 * soulskillCost() * soulskillcostmulti();
+		soulforcecost = Math.round(soulforcecost);
+		player.soulforce -= soulforcecost;
+		var temp:Number = 0;
+		var multiInt:Number = 2;
+		var multiWis:Number = 2;
+		if (element >= 4) {
+			multiInt += 0.8 * (element - 3);
+			multiWis += 0.8* (element - 3);
+		}
+		if (element >= 7) {
+			multiInt += 0.8 * (element - 6);
+			multiWis += 0.8 * (element - 6);
+		}
+		if (element >= 10) {
+			multiInt += 0.8 * (element - 9);
+			multiWis += 0.8 * (element - 9);
+		}
+		temp += scalingBonusIntelligence() * multiInt;
+		temp += scalingBonusWisdom() * multiWis;
+		temp = Math.round(temp);
+		if (type == 1) outputText("You soothe your wounds with a calm breeze dulling down the pain.");
+		if (type == 2) outputText("You gather energy from sunlight into the vines covering your body, converting the nutrients and repairing some of your sustained damage.");
+		if (type == 3) outputText("You channel warmth into your wounds soothing the pain and repairing the damages you sustained.");
+		if (type == 4) outputText("You relax and concentrate on your liquid form closing breaches and repairing any damage you sustained.");
+		outputText(" <b>(<font color=\"#008000\">+" + temp + "</font>)</b>");
+		HPChange(temp,false);
+		outputText("\n\n");
 		enemyAI();
 	}
 
