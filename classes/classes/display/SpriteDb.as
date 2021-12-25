@@ -834,6 +834,8 @@ public class SpriteDb {
 	public static function get s_weaponsmith(): Class {
 		return is8bit ? s_weaponsmith_8bit : s_weaponsmith_16bit;
 	}
+	[Embed(source="../../../res/sprites/WoodElves.png")]
+	public static var s_WoodElves:Class;
 	[Embed(source="../../../res/sprites/yara.png")]
 	public static var s_yara_16bit:Class;
 	[Embed(source="../../../res/sprites8bit/yara-old.png")]
