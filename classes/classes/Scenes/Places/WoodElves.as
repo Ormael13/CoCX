@@ -17,7 +17,8 @@ package classes.Scenes.Places{
 	import classes.Items.Armors.Nothing;
 	import classes.Scenes.Areas.Forest.WoodElvesHuntingParty;
 	import classes.Scenes.SceneLib;
-	import classes.internals.SaveableState;
+import classes.display.SpriteDb;
+import classes.internals.SaveableState;
 	import classes.CoC;
 
 	public class WoodElves extends BaseContent implements SaveableState {
@@ -99,6 +100,7 @@ package classes.Scenes.Places{
 		//[Find Elves]
 		public function findElves():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_WoodElves);
 			WoodElvesQuest = QUEST_STAGE_METELF;
 			outputText("As you explore the woods, you find a grove with a small pond in the middle and a large, vibrant tree growing in the corner. The tree isn’t a kind you recall seeing in the past. You examine the tree and fail to properly remember which variety it belongs to, not to mention the small green lights that dance around it, a bit like the faerie fires in a bog. As you are examining the tree you hear a crystal clear, beautiful laugh to your left, followed by the sounds of shuffling leaves. You ready yourself for combat and turn around just in time to see a blonde woman with pointed ears and green eyes staring at you from the middle of the clearing. She wears an outfit of white silk that covers her but does little to hide her feminine curves, which stand out on her delicate and ethereal frame in a way no human could match. You imagine even most succubi would be jealous of the natural way she wears her beauty, as if some goddess had sculpted her form from marble stone, clear water and living wood, then animated it with the lithe spirit of a fairy. You are still gazing, spellbound by her appearance, when she calls out to you in a clear, musical voice." +
 					"\n\n\"<i>Welcome to our sacred grove traveler. Are you perhaps lost?</i>\"\n\n" +
@@ -113,6 +115,7 @@ package classes.Scenes.Places{
 		}
 		public function findElvesRematch():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_WoodElves);
 			outputText("As you explore the forest you hear giggling. You feel a rush of air and barely have time to duck before an arrow misses you by an inch. It's the elves again! You try and run for it but a tree vine has firmly attached itself to your left leg holding you in place and slowly attempting to drag you toward what is likely an unsavory moment.");
 			outputText("\n\n\"<i>Good day mister adventurer, how kind of you to come to us. Just sit down and relax; let us take great care of you.~♥</i>\"");
 			outputText("\n\nHell no! <b>IT'S A FIGHT!</b>");
@@ -121,6 +124,7 @@ package classes.Scenes.Places{
 
 		public function AskAboutElves():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_WoodElves);
 			outputText("You press the beautiful elf for more information about her people. " +
 					"While the word is familiar enough to you from stories even in your old world, you’ve never met one, even in Mareth, and know nothing of their nature or goals. " +
 					"How have they remained hidden from the demonic threat even in these tainted woods?." +
@@ -137,6 +141,7 @@ package classes.Scenes.Places{
 
 		public function LeaveStartElfFight():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_WoodElves);
 			outputText("You decide to turn and exit the area." +
 					"\n\nThe elf speaks up as you attempt to leave, \"<i>Oh my, you wish to leave already? I’m very sorry, but you won’t be going anywhere at the moment, not so long as we have you surrounded. There's so many things left we'd like to talk about and besides... I don't think <b>he</b> would agree to let you leave either. Please don’t hold it against us, though - this is all for your own good, I promise. By the end of it you will be thanking us for it.</i>\"\n\n" +
 					"The elves tighten their circle around you to prevent any chance of escape as their sinister intentions become clear.");
@@ -147,11 +152,13 @@ package classes.Scenes.Places{
 
 		public function StartElfFight():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_WoodElves);
 			outputText("Realising that there is no peaceful way out of this you ready your weapon and prepare for battle. The elves don't seem all too worried after all its you versus an entire group of them and they likely think they can easily overwhelm you. That and they have archers ready to shoot from all directions. This is not going to be a fun fight.");
 			startCombat(new WoodElvesHuntingParty());
 		}
 		public function ElfFightWin():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_WoodElves);
 			outputText("This battle is out of your hands. The moment you manage to defeat an elf another jumps in while a battle medic moves from the back to heal the fallen. You merely manage to create an exit amidst the mayhem and escape safe and sound from them. You will need to be wary of trees and blonde girls from now on seeing as this is unlikely to be the last time you run into them.");
 			WoodElvesQuest = QUEST_STAGE_METELFSANDEVENBEATSTHEM;
 			doNext(cleanupAfterCombat);
@@ -163,12 +170,14 @@ package classes.Scenes.Places{
 
 		public function YouAreAlreadyElfSubmit():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_WoodElves);
 			outputText("You decide to let the elven lady proceed. The elf leader raises an hand and tentacle-like vines whip around you as the elves encircling you smirk and giggle");
 			YouAreAlreadyElf1();
 		}
 
 		public function YouAreAlreadyElfLose():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_WoodElves);
 			outputText("Bested in combat and unable to continue fighting, the horde of elven ladies encroach upon you. The elf leader raises an arm as tentacle-like vines whip around you while the elves circling you titter");
 			YouAreAlreadyElf1();
 		}
@@ -256,6 +265,7 @@ package classes.Scenes.Places{
 
 		public function YouAreAlreadyElf2():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_WoodElves);
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 			outputText("You awaken a short while later. Still dazed, you crawl your way to the pond to take a look at yourself, only to find a stunningly beautiful elf girl looking back at you. " +
 					"She has "+player.breastCup(0)+" breasts, round and firm and tipped with pink, blushing nipples, and clear, smooth skin as unblemished as the crystal waters of a forest stream, fairer than any mortal. " +
@@ -318,6 +328,7 @@ package classes.Scenes.Places{
 
 		public function YouAreAlreadyElf3():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_WoodElves);
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 			outputText("The next few days pass like a happy dream as you play with your sisters, collect flowers, and have 'fun time' with Alyssa, and sometimes Elenwen and even Merisiel." +
 					" However, something nags at your mind… something very important, you think, but like a wisp of smoke it keeps twisting and dissipating every time you try to grasp hold of it." +
@@ -359,6 +370,7 @@ package classes.Scenes.Places{
 
 		public function ElvesTopic():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_WoodElves);
 			outputText("You ask the three elves about the elven race: why is there so little information about them? Have they always been hidden away or is something else going on?" +
 					"\n\nMerisiel responds first. \"<i>We have been here since ancient times its just that we don't like to mingle with outsiders and this holds twice as true since the demon invasion happened.</i>\"" +
 					"\n\nAlyssa continues. \"<i>Whoever somehow finds us tends to stay here and keep shut about our existance we mind our business and prefer to keep to ourselves.</i>\"" +
@@ -380,6 +392,7 @@ package classes.Scenes.Places{
 
 		public function TheTreeTopic():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_WoodElves);
 			outputText("You tell them to explain what is going on with that bizarre tree." +
 					"\n\nAlyssa responds first. \"<i>The Sacred Tree grew from a sapling that dates back to the genesis days of mareth. It is, or it was, I suppose, a core part of our culture; we elves are forest spirits deeply connected to the trees and animals of the woods, and the Sacred Tree was like our patron. When a new elf was born, we would place it underneath the tree, and it would be blessed with the spirit of the forest, growing into a true elf.</i>\"" +
 					"\n\nElenwen continues. \"<i>When the demons found it, though, they changed all that. They corrupted it, turned it into… something else. They also corrupted us. You may have noticed that there are no male elves here; or at least none you would easily recognize as such without… checking. The truth is that male wood elves are so rare thanks to how the tree proceed that regardless of weither we have males or not our only means of increasing our numbers nowaday is to either tie that one guy to a tree and take turn raping him or abduct peoples. You can guess wich choice we prefer.</i>\"" +
@@ -400,6 +413,7 @@ package classes.Scenes.Places{
 
 		public function TheGroveTopic():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_WoodElves);
 			outputText("You ask about the Grove." +
 					"\n\n\"<i>It’s been our home for years, of course,</i>\" says Elenwen. \"<i>Well truth be told its one of the few remaining if not the last wood elf community across mareth since our species is mostly extinct due to ahem... reproduction issues.</i>\"" +
 					"\n\nMerisiel adds, \"<i>It’s a beautiful place, even after the corruption, I think. Nature thrives here; the plants and animals are healthy and free, and we live mostly in peace, aside from catching an adventurer every so often to replenish our numbers.</i>\"\n\n" +
@@ -421,6 +435,7 @@ package classes.Scenes.Places{
 
 		public function DemonsTopic():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_WoodElves);
 			outputText("You ask about the elves’ relationship to the Demons." +
 					"\n\nMerisiel answers you first. \"<i>When the demons invaded Mareth it didn’t take them long to find us here in the forest.</i>\" she says, sadly. \"<i>They… changed our Sacred Tree, and when they did we changed with it. We became much more sexually active, and our men mostly turned into women. Those of us that were affected the worst they took with them to be… toys, I suppose, or maybe soldiers; we don’t really know. Since then they’ve left us alone, I’m sure because they know we’re not a threat.</i>\"" +
 					"\n\nAlyssa interjects. \"<i>But we’re not allied with them! We hate Lethice for what she did to our Sacred Tree… even if we, um… kind of enjoy the sex now.</i>\"" +
@@ -441,6 +456,7 @@ package classes.Scenes.Places{
 
 		public function CeremonyTopic():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_WoodElves);
 			outputText("You ask Merisiel what this naming ceremony is about. She uncomfortably shifts in place before answering you." +
 					"\n\n\"<i>Well it's a big event first and foremost, all new elves get a name given to them by the sacred trees. As we told you before, we elves are bonded to the forests. When a sister is ready to become a true wood elf she must undergo the naming ceremony which consists in fully bonding with an offshoot of the sacred tree in body and soul. Your elven name is something that will come to you naturally though in exchange you will fully bond with the sacred tree and your soul will merge with that of the forest.</i>\"\n\n" +
 					"Merge with the forest? She could not possibly mean... Sensing your confusion Merisiel, with an almost ironic, somewhat deadpan soulless glare clarifies the rest for you." +
@@ -487,6 +503,7 @@ package classes.Scenes.Places{
 
 		public function Ceremony1():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_WoodElves);
 			outputText("While you do want to continue your quest you feel a strong tie to your sisters. Maybe it's the elven brainwashing magic that compels you ");
 			if (flags[kFLAGS.FACTORY_OMNIBUS_DEFEATED] > 0) outputText(", maybe it's your disillusion toward mankind after the elders of your village almost sold you into slavery to fiends all for their own gain ");
 			outputText("or maybe it's just that you really love your elder sis that much. Regardless, your old name holds little meaning to you now and you are more than ready to discard it, just as you would your past as a human. If relinquishing your soul to the forest can make you that much closer to your dear sisters then all the better. You announce your decision to take on the naming ceremony and become a true elf like them, however you will pursue your original quest as well; if not for Ingnam who never deserved your efforts in the first place then for the elves so they can one day be free of demonic influence." +
@@ -497,6 +514,7 @@ package classes.Scenes.Places{
 
 		public function Ceremony2():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_WoodElves);
 			outputText("On the following day, the elven community assembles next to the tree line. You stand amongst a few other antsy sisters. " +
 					"You feel slightly tense, but at least you are not alone in getting a new name today. One after another, " +
 					"the young elves head toward the trees. You are unable to see much given you are at the back of the crowd. " +
@@ -511,6 +529,7 @@ package classes.Scenes.Places{
 
 		public function Ceremony3():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_WoodElves);
 			outputText("The first time you met one of the tentacle trees, you were dragged against your will and fought back with all you had." +
 					" Now, you walk toward the tentacle tree with focused will and determination, discarding your ephemeral elven clothes as you press your naked form against the bark of the tree. " +
 					"\n\nYou sigh in delight as you make contact. Unlike a typical tree, the warm trunk is smooth against your elven skin." +
@@ -533,6 +552,7 @@ package classes.Scenes.Places{
 
 		public function Ceremony4():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_WoodElves);
 			outputText("This name, whispered to you by the spirit of the forest, was...");
 
 			flushOutputTextToGUI();
@@ -549,6 +569,7 @@ package classes.Scenes.Places{
 		public function chooseName():void {
 			if (mainView.nameBox.text == "") {
 				clearOutput();
+				spriteSelect(SpriteDb.s_WoodElves);
 				outputText("You try to listen again for the name you heard in the rustling leaves what is it you heard? (You must select a name)");
 				doNext(Ceremony4);
 			}
@@ -558,6 +579,7 @@ package classes.Scenes.Places{
 				player.short = mainView.nameBox.text;
 
 				clearOutput();
+				spriteSelect(SpriteDb.s_WoodElves);
 				outputText("Is this realy the name you heard?");
 				menu()
 				addButton(0, "Yes", Ceremony5);
@@ -567,6 +589,7 @@ package classes.Scenes.Places{
 
 		public function Ceremony5():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_WoodElves);
 			outputText("[name]! Yes, that is you. You are [name], beloved child of the forest, and this is the tree which initiated you." +
 					" The tree is now vibrant with green light, your soul in the safekeeping of its woods along those of the many elves who came here before you, your body having none left to give." +
 					" With tender care, the vines slowly disentangle you from its embrace before allowing you to escape." +
@@ -581,6 +604,7 @@ package classes.Scenes.Places{
 
 		public function Ceremony6():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_WoodElves);
 			outputText("Alyssa welcomes you back with a loving hug as you come running out of the woods toward her. Her hand pleasantly ruffles through your hairs while the upcoming uninitiated head for the woods." +
 					"\n\n\"<i>See? That wasn't too bad, and now we truly are connected both by blood and soul; that of the forest. I will clean you up so you can be ready for the evening meal. I know you will likely want to resume your old quest tomorrow. Merisiel, Elenwen, and I have already retrieved your things. You will be ready and up for adventure again in no time.</i>\"\n\n" +
 					"What about home, though? Is this goodbye?" +
@@ -603,6 +627,7 @@ package classes.Scenes.Places{
 
 		public function GroveLayout():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_WoodElves);
 			if (WoodElvesQuest != QUEST_STAGE_PCCAMEBACK){
 				outputText("You walk along the treeline following the way back to the elves as you last remember. You know you are nearing your destination as the familiar sound of running water as the river hits your ears before coming to view." +
 						"You spot the giant tree resting in its clearing before you quickly advance to it. Memories flow through you as you caress its fine bark. A gentle vine stretches out, endearingly caressing you in reciprocation. Your memories guide you as you follow the river back and finally spot the elven houses. You walk on the gravel as a few curious glances turn your way. Their eyes glint with the sparkling green light bouncing off of their glance as the elves take notice of you one after the other." +
@@ -632,6 +657,7 @@ package classes.Scenes.Places{
 
 		///ELF VILLAGE SECTION///
 		public function GroveLayout2(isFirstTime:Boolean = false):void {
+			spriteSelect(SpriteDb.s_WoodElves);
 			if (!isFirstTime)outputText("The elven village is at its usual calm today. Your sisters are playfully frolicking around in the grove. Sewing, swimming, playing music, or in some rare cases training with weapons in the small area dedicated to archery and more martial pursuit." +
 					" This grove is a small oasis of innocence cut away from the rest of Mareth. The elves living their long hedonistic existence on a day-to-day basis without worry or fear." +
 					"\n\nThe only stain amidst this beautiful scenery is the 'blessed' trees at the edge of this settlement which reminds you all too well that if no one steps up and does the fighting even this haven will eventually become corrupted and defiled beyond repair before disappearing from the face of Mareth. You try and keep your mind joyful however not to darken the light of day.");
@@ -657,6 +683,7 @@ package classes.Scenes.Places{
 
 		public function River():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_WoodElves);
 			if (!player.statStore.hasBuff("Sisterly bathing")) {
 				outputText("You learned to love bathing in this stream during your days spent living with the Wood elves;" +
 						" its clear, cool waters always left you feeling refreshed and clear-headed. More importantly," +
@@ -726,6 +753,7 @@ package classes.Scenes.Places{
 
 		public function Tent():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_WoodElves);
 			outputText("This tent only really gets used for one thing, and it’s just what you want right now. Alyssa and Elenwen notice you entering, and you smile as they glance at each other and leave off their work to follow you in." +
 					" Before long, the three of you are stripped naked and laying together on the bed, already feeling each other up and preparing for the fun you’re about to have." +
 					"\n\n\"<i>This brings back memories, doesn’t it, [name]?</i>\"says Elenwen, smiling nostalgically." +
@@ -794,6 +822,7 @@ package classes.Scenes.Places{
 
 		public function Fletching():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_WoodElves);
 			if (!player.hasStatusEffect(StatusEffects.FletchingTable)) player.createStatusEffect(StatusEffects.FletchingTable,0,0,0,0);
 			outputText("You approach the fletching table. Here you can craft improved arrowheads using elven tools.");
 			menu();
@@ -860,6 +889,7 @@ package classes.Scenes.Places{
 
 		public function Elenwen():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_WoodElves);
 			outputText("At the archery range, you find Elenwen practicing with her bow. Her posture is poised and masterful as she aims at a target before nocking an arrow." +
 					" She releases the arrow in a single smooth motion that leaves her long, golden hair fluttering. The arrow flies directly into the center of her mark," +
 					" joining several other perfect shots on the many targets that surround her. Her demeanor is serious and focused," +
@@ -946,6 +976,7 @@ package classes.Scenes.Places{
 
 		public function Alyssa():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_WoodElves);
 			outputText("On the sparring grounds, you find Alyssa practicing her spear technique." +
 					" She moves elegantly, alternating between smooth, dance-like footwork with broad sweeps and twirls of her long spear and sharp," +
 					" snapping thrusts that seem to pierce the air itself. She is naked, and her petite, slender frame seems to emanate vitality and grace" +
