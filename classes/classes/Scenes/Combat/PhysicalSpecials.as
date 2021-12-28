@@ -1887,6 +1887,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+		if (player.upperGarment == player.game.undergarments.COW_BRA) damage *= 1.50;
 		damage = Math.round(damage);
 		if (damage < 1) damage = 1;
 		doDamage(damage);
