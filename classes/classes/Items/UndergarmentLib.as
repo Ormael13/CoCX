@@ -34,7 +34,9 @@ package classes.Items
 		public const SSSHIRT:Undergarment = new Undergarment("SSShirt", "S.Silk Shirt", "spider-silk shirt", "a spider-silk shirt", TYPE_UPPERWEAR, 1000, "A comfortable undershirt.  It's as white as snow and woven with hundreds of strands of fine spider silk. \n\nType: Undergarment (Upper)");
 		public const STSHIRT:Undergarment = new Undergarment("STShirt", "S.T.Shirt", "soul training shirt", "a soul training shirt", TYPE_UPPERWEAR, 200, "A shirt made from fabric capable to help train soulforce. \n\nType: Undergarment (Upper)");
 		public const TECHBRA:TechnomancerBra = new TechnomancerBra();
-		
+		public const COW_BRA:Undergarment = new Undergarment("Cow Bra", "Cow Bra", "cow girl bra", "a cow girl bra", TYPE_LOWERWEAR, 1000, "This bra look like ordinary panty at a first glance save for the cow fur like motif. They increase lacta bovina lactation rate. Comes with the bonus of accomodating just any breast size! \n\nType: Undergarment (Upper)");
+
+
 		//Lower
 		public const C_LOIN :Undergarment = new Undergarment("C. Loin", "C. Loin", "comfortable loincloth", "a pair of comfortable loincloth", TYPE_LOWERWEAR, DEFAULT_VALUE, "A generic pair of loincloth. \n\nType: Undergarment (Lower)", "NagaWearable");
 		public const C_PANTY:Undergarment = new Undergarment("C.Panty", "C. Panties", "comfortable panties", "a pair of comfortable panties", TYPE_LOWERWEAR, DEFAULT_VALUE, "A generic pair of panties. \n\nType: Undergarment (Lower)");
@@ -55,7 +57,8 @@ package classes.Items
 		public const SSPANTY:Undergarment = new Undergarment("SSPanty", "S.Silk Panty", "spider-silk panties", "a pair of spider-silk panties", TYPE_LOWERWEAR, 1000, "These panties look incredibly comfortable. It's as white as snow and finely woven with hundreds of strands of spider silk. \n\nType: Undergarment (Lower)");
 		public const STPANTY:Undergarment = new Undergarment("STPanty", "S.T.Panties", "soul training panties", "a pair of soul training panties", TYPE_LOWERWEAR, 200, "A pair of panties made from fabric capable to help train soulforce. \n\nType: Undergarment (Lower)");
 		public const T_PANTY:TechnomancerPanties = new TechnomancerPanties();
-		
+		public const COW_PANTY:Undergarment = new Undergarment("Cow Panty", "Cow Panty", "cow girl panties", "a pair of Cow girl panties", TYPE_LOWERWEAR, 1000, "These panties look like ordinary panty at a first glance save for the cow fur like motif. They increase lacta bovina lactation rate. \n\nType: Undergarment (Lower)");
+
 		public function UndergarmentLib() 
 		{
 		}

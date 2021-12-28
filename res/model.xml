@@ -1181,6 +1181,9 @@
         <cell rect="1011,410,49,29" name="bra/comfortableBraSmall" dx="79" dy="68"/>
         <cell rect="1011,440,49,29" name="bra/comfortableBraMedium" dx="79" dy="68"/>
         <cell rect="1011,470,49,29" name="bra/comfortableBraLarge" dx="79" dy="68"/>
+		<cell rect="1161,410,49,29" name="bra/cowBraSmall" dx="79" dy="68"/>
+        <cell rect="1161,440,49,29" name="bra/cowBraMedium" dx="79" dy="68"/>
+        <cell rect="1161,470,49,29" name="bra/cowBraLarge" dx="79" dy="68"/>
         <cell rect="11,500,49,29" name="panty/goblinTechnomancerPanty" dx="79" dy="99"/>
         <cell rect="61,500,49,29" name="panty/sexyBlackBikiniPanty" dx="79" dy="99"/>
         <cell rect="111,500,49,29" name="panty/sexyAquamarineBikiniPanty" dx="79" dy="99"/>
@@ -1195,6 +1198,7 @@
         <cell rect="761,500,49,29" name="panty/chainMailPanty" dx="79" dy="99"/>
         <cell rect="811,500,49,29" name="panty/dragonScalePanty" dx="79" dy="99"/>
         <cell rect="1011,500,49,29" name="panty/comfortablePanty" dx="79" dy="99"/>
+		<cell rect="1161,500,49,29" name="panty/cowPanty" dx="79" dy="99"/>
     </spritemap>
     <spritemap file="tails.png">
         <cell rect="1,71,168,139" name="tail_bg/manticore" dx="20" dy="40"/>
@@ -4985,6 +4989,43 @@
 				<if test="showLegClothing">
 					<if test="isTaur()==false">
 						<show part="panty/sexyYellowBikiniPanty"/>
+						<hide part="penis/*"/>
+						<hide part="balls/*"/>
+					</if>
+				</if>
+			</if>
+		</if>
+		
+		<!--Cow Undergarment-->
+		<if test="cowTop">
+			<if test="breastRows.length gt 0">
+				<switch>
+					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
+						<show part="bra/cowBraSmall"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
+						<show part="bra/cowBraSmall"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
+						<show part="bra/cowBraMedium"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
+						<show part="bra/cowBraMedium"/>
+					</case>
+					<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
+						<show part="bra/cowBraLarge"/>
+					</case>
+					<default>
+						<show part="bra/cowBraLarge"/>
+					</default>
+				</switch>
+			</if>
+		</if>
+		<if test="cowPanty">
+			<if test="showClothing">
+				<if test="showLegClothing">
+					<if test="isTaur()==false">
+						<show part="panty/cowPanty"/>
 						<hide part="penis/*"/>
 						<hide part="balls/*"/>
 					</if>
