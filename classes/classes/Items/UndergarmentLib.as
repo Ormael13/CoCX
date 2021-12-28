@@ -34,7 +34,7 @@ package classes.Items
 		public const SSSHIRT:Undergarment = new Undergarment("SSShirt", "S.Silk Shirt", "spider-silk shirt", "a spider-silk shirt", TYPE_UPPERWEAR, 1000, "A comfortable undershirt.  It's as white as snow and woven with hundreds of strands of fine spider silk. \n\nType: Undergarment (Upper)");
 		public const STSHIRT:Undergarment = new Undergarment("STShirt", "S.T.Shirt", "soul training shirt", "a soul training shirt", TYPE_UPPERWEAR, 200, "A shirt made from fabric capable to help train soulforce. \n\nType: Undergarment (Upper)");
 		public const TECHBRA:TechnomancerBra = new TechnomancerBra();
-		public const COW_BRA:Undergarment = new Undergarment("Cow Bra", "Cow Bra", "cow girl bra", "a cow girl bra", TYPE_LOWERWEAR, 1000, "This bra look like ordinary panty at a first glance save for the cow fur like motif. They increase lacta bovina lactation rate as well as the efficiency of Milk blast. Comes with the bonus of accomodating just any breast size and letting milk flow through! \n\nType: Undergarment (Upper)");
+		public const COW_BRA:Undergarment = new Undergarment("Cow Bra", "Cow Bra", "cow girl bra", "a cow girl bra", TYPE_UPPERWEAR, 1000, "This bra look like ordinary panty at a first glance save for the cow fur like motif. They increase lacta bovina lactation rate as well as the efficiency of Milk blast. Comes with the bonus of accomodating just any breast size and letting milk flow through! \n\nType: Undergarment (Upper)");
 
 
 		//Lower
