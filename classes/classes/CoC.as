@@ -257,8 +257,8 @@ public class CoC extends MovieClip
         //model.debug = debug; // TODO: Set on model?
 
 			//Version NUMBER
-			ver = "1.0.2_mod_Xianxia_0.8s3";
-			version = ver + " (<b>Druid Prestige Job, buffs to Gunslinger & Golemancer jobs, 3rd Floor of River Dungeon, out of combat fatigue regen + shorter intervals on resource generation, many QoL changes</b>)";
+			ver = "1.0.2_mod_Xianxia_0.8s4";
+			version = ver + " (<b></b>)";
 
         this.images = new ImageManager(stage, mainView);
         this.inputManager = new InputManager(stage, mainView, false);

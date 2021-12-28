@@ -588,7 +588,7 @@ public class Ingnam extends BaseContent
 			outputText("\n5 gems - Sandwich");
 			outputText("\n3 gems - Soup");
 			outputText("\n5 gems - Hard biscuits (Packed)");
-			outputText("\n10 gems - Trail mix (Packed)");
+			outputText("\n20 gems - Trail mix (Packed)");
 			menu();
 			addButton(0, "Sandwich", buySandwich);
 			addButton(1, "Soup", buySoup);
