@@ -1969,83 +1969,21 @@ import coc.view.MainView;
 			outputText("\n\nAscension Perk Points: " + player.ascensionPerkPoints);
 			menu();
 			var btn:int = 0;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && player.internalChimeraScore() >= 10) {
-				if (player.ascensionPerkPoints >= 20 && !player.hasPerk(PerkLib.AscensionAdditionalOrganMutationX)) addButton(btn, "A.O.M.(1st)", perkAdditionalOrganMutation01).hint("Perk allowing you to get one more slot for the same internal organ mutations. (As an example: 2 slots instead 1 for heart related mutations)\n\nCost: 20 points");
-				else if (player.ascensionPerkPoints < 20) addButtonDisabled(btn, "A.O.M.(1st)", "You do not have enough ascension perk points!");
-				else addButtonDisabled(btn, "A.O.M.(1st)", "You already bought Additional Organ Mutation (1st Stage) perk.");
-			}
-			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && player.perkv1(PerkLib.AscensionAdditionalOrganMutationX) >= 1) addButtonDisabled(btn, "A.O.M.(1st)", "You already bought Additional Organ Mutation (1st Stage) perk.");
-			else addButtonDisabled(btn, "A.O.M.(1st)", "You need ascend more times and have 10+ in internal mutation score to buy this perk.");
-			btn++;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3 && player.internalChimeraScore() >= 20 && player.perkv1(PerkLib.AscensionAdditionalOrganMutationX) == 1) {
-				if (player.ascensionPerkPoints >= 40 && player.perkv1(PerkLib.AscensionAdditionalOrganMutationX) < 2) addButton(btn, "A.O.M.(2nd)", perkAdditionalOrganMutation02).hint("Perk allowing you to get one more slot for the same iternal organ mutations. (As an example: 3 slots instead 2 for heart related mutations)\n\nCost: 40 points");
-				else if (player.ascensionPerkPoints < 40) addButtonDisabled(btn, "A.O.M.(2nd)", "You do not have enough ascension perk points!");
-			}
-			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3 && player.internalChimeraScore() >= 20 && !player.hasPerk(PerkLib.AscensionAdditionalOrganMutationX)) addButtonDisabled(btn, "A.O.M.(2nd)", "You need to buy Additional Organ Mutation (1st Stage) perk first.");
-			else if (player.perkv1(PerkLib.AscensionAdditionalOrganMutationX) == 2) addButtonDisabled(btn, "A.O.M.(2nd)", "You already bought Additional Organ Mutation (2nd Stage) perk.");
-			else addButtonDisabled(btn, "A.O.M.(2nd)", "You need ascend more times and have 20+ in internal mutation score to buy this perk.");
 
-			btn++;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 5 && player.internalChimeraScore() >= 30 && player.perkv1(PerkLib.AscensionAdditionalOrganMutationX) == 2) {
-				if (player.ascensionPerkPoints >= 60 && player.perkv1(PerkLib.AscensionAdditionalOrganMutationX) < 3) addButton(btn, "A.O.M.(3rd)", perkAdditionalOrganMutation03).hint("Perk allowing you to get one more slot for the same iternal organ mutations. (As an example: 4 slots instead 3 for heart related mutations)\n\nCost: 60 points");
-				else if (player.ascensionPerkPoints < 60) addButtonDisabled(btn, "A.O.M.(3rd)", "You do not have enough ascension perk points!");
+			if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutationX)){
+				perkAOMXCheck(player.perkv1(PerkLib.AscensionAdditionalOrganMutationX) + 1, btn);
+			} else {
+				perkAOMXCheck(1, btn);
 			}
-			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 5 && player.internalChimeraScore() >= 30 && !player.perkv1(PerkLib.AscensionAdditionalOrganMutationX) == 2) addButtonDisabled(btn, "A.O.M.(3rd)", "You need to buy Additional Organ Mutation (2nd Stage) perk first.");
-			else if (player.perkv1(PerkLib.AscensionAdditionalOrganMutationX) == 3) addButtonDisabled(btn, "A.O.M.(3nd)", "You already bought Additional Organ Mutation (3rd Stage) perk.");
-			else addButtonDisabled(btn, "A.O.M.(3rd)", "You need ascend more times and have 30+ in internal mutation score to buy this perk.");
-			btn++;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 7 && player.internalChimeraScore() >= 40 && player.perkv1(PerkLib.AscensionAdditionalOrganMutationX) == 3) {
-				if (player.ascensionPerkPoints >= 80 && player.perkv1(PerkLib.AscensionAdditionalOrganMutationX) < 4) addButton(btn, "A.O.M.(4th)", perkAdditionalOrganMutation04).hint("Perk allowing you to get one more slot for the same iternal organ mutations. (As an example: 5 slots instead 4 for heart related mutations)\n\nCost: 80 points");
-				else if (player.ascensionPerkPoints < 80) addButtonDisabled(btn, "A.O.M.(4th)", "You do not have enough ascension perk points!");
+			btn++
+
+			if (player.hasPerk(PerkLib.AscensionBuildingPrestigeX)){
+				perkBPCheck(player.perkv1(PerkLib.AscensionBuildingPrestigeX) + 1, btn);
+			} else {
+				perkBPCheck(1, btn);
 			}
-			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 7 && player.internalChimeraScore() >= 40 && !player.perkv1(PerkLib.AscensionAdditionalOrganMutationX) == 3) addButtonDisabled(btn, "A.O.M.(4th)", "You need to buy Additional Organ Mutation (3rd Stage) perk first.");
-			else if (player.perkv1(PerkLib.AscensionAdditionalOrganMutationX) == 4) addButtonDisabled(btn, "A.O.M.(4th)", "You already bought Additional Organ Mutation (4th Stage) perk.");
-			else addButtonDisabled(btn, "A.O.M.(4th)", "You need ascend more times and have 40+ in internal mutation score to buy this perk.");
-			btn++;
-			if (player.ascensionPerkPoints >= 5 && !player.hasPerk(PerkLib.AscensionBuildingPrestigeX)) addButton(btn, "B.Prestige(1st)", perkBuildingPrestige01).hint("Perk allowing you to get one more slot for prestige job perks.\n\nCost: 5 points");
-			else if (player.ascensionPerkPoints < 5) addButtonDisabled(btn, "B.Prestige(1st)", "You do not have enough ascension perk points!");
-			else addButtonDisabled(btn, "B.Prestige(1st)", "You already bought Building Prestige (1st Stage) perk.");
-			btn++;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && player.perkv1(PerkLib.AscensionAdditionalOrganMutationX) == 1) {
-				if (player.ascensionPerkPoints >= 10 && player.perkv1(PerkLib.AscensionAdditionalOrganMutationX) < 2) addButton(btn, "B.Prestige(2nd)", perkBuildingPrestige02).hint("Perk allowing you to get one more slot for prestige job perks.\n\nCost: 10 points");
-				else if (player.ascensionPerkPoints < 10) addButtonDisabled(btn, "B.Prestige(2nd)", "You do not have enough ascension perk points!");
-				else addButtonDisabled(btn, "B.Prestige(2nd)", "You already bought Building Prestige (2nd Stage) perk.");
-			}
-			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && player.perkv1(PerkLib.AscensionAdditionalOrganMutationX) != 1) addButtonDisabled(btn, "B.Prestige(2nd)", "You need to buy Building Prestige (1st Stage) perk first.");
-			else addButtonDisabled(btn, "B.Prestige(2nd)", "You need ascend more times to buy this perk.");
-			btn++;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && player.perkv1(PerkLib.AscensionAdditionalOrganMutationX) == 2) {
-				if (player.ascensionPerkPoints >= 15 && player.perkv1(PerkLib.AscensionAdditionalOrganMutationX) < 3) addButton(btn, "B.Prestige(3rd)", perkBuildingPrestige03).hint("Perk allowing you to get one more slot for prestige job perks.\n\nCost: 15 points");
-				else if (player.ascensionPerkPoints < 15) addButtonDisabled(btn, "B.Prestige(3rd)", "You do not have enough ascension perk points!");
-				else addButtonDisabled(btn, "B.Prestige(3rd)", "You already bought Building Prestige (3rd Stage) perk.");
-			}
-			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && player.perkv1(PerkLib.AscensionAdditionalOrganMutationX) != 2) addButtonDisabled(btn, "B.Prestige(3rd)", "You need to buy Building Prestige (2nd Stage) perk first.");
-			else addButtonDisabled(btn, "B.Prestige(3rd)", "You need ascend more times to buy this perk.");
-			btn++;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3 && player.perkv1(PerkLib.AscensionAdditionalOrganMutationX) == 3) {
-				if (player.ascensionPerkPoints >= 20 && player.perkv1(PerkLib.AscensionAdditionalOrganMutationX) < 4) addButton(btn, "B.Prestige(4th)", perkBuildingPrestige04).hint("Perk allowing you to get one more slot for prestige job perks.\n\nCost: 20 points");
-				else if (player.ascensionPerkPoints < 20) addButtonDisabled(btn, "B.Prestige(4th)", "You do not have enough ascension perk points!");
-				else addButtonDisabled(btn, "B.Prestige(4th)", "You already bought Building Prestige (4th Stage) perk.");
-			}
-			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3 && player.perkv1(PerkLib.AscensionAdditionalOrganMutationX) != 3) addButtonDisabled(btn, "B.Prestige(4th)", "You need to buy Building Prestige (3rd Stage) perk first.");
-			else addButtonDisabled(btn, "B.Prestige(4th)", "You need ascend more times to buy this perk.");
-			btn++;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 4 && player.perkv1(PerkLib.AscensionAdditionalOrganMutationX) == 4) {
-				if (player.ascensionPerkPoints >= 25 && player.perkv1(PerkLib.AscensionAdditionalOrganMutationX) < 5) addButton(btn, "B.Prestige(5th)", perkBuildingPrestige05).hint("Perk allowing you to get one more slot for prestige job perks.\n\nCost: 25 points");
-				else if (player.ascensionPerkPoints < 25) addButtonDisabled(btn, "B.Prestige(5th)", "You do not have enough ascension perk points!");
-				else addButtonDisabled(btn, "B.Prestige(5th)", "You already bought Building Prestige (5th Stage) perk.");
-			}
-			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 4 && player.perkv1(PerkLib.AscensionAdditionalOrganMutationX) != 4) addButtonDisabled(btn, "B.Prestige(5th)", "You need to buy Building Prestige (4th Stage) perk first.");
-			else addButtonDisabled(btn, "B.Prestige(5th)", "You need ascend more times to buy this perk.");
-			btn++;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 5 && player.perkv1(PerkLib.AscensionAdditionalOrganMutationX) == 5) {
-				if (player.ascensionPerkPoints >= 30 && player.perkv1(PerkLib.AscensionAdditionalOrganMutationX) < 6) addButton(btn, "B.Prestige(6th)", perkBuildingPrestige06).hint("Perk allowing you to get one more slot for prestige job perks.\n\nCost: 30 points");
-				else if (player.ascensionPerkPoints < 30) addButtonDisabled(btn, "B.Prestige(6th)", "You do not have enough ascension perk points!");
-				else addButtonDisabled(btn, "B.Prestige(6th)", "You already bought Building Prestige (6th Stage) perk.");
-			}
-			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 5 && player.perkv1(PerkLib.AscensionAdditionalOrganMutationX) != 5) addButtonDisabled(btn, "B.Prestige(6th)", "You need to buy Building Prestige (5th Stage) perk first.");
-			else addButtonDisabled(btn, "B.Prestige(6th)", "You need ascend more times to buy this perk.");
-			btn++;
+			btn++
+
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && player.hasPerk(PerkLib.AscensionHybridTheory)) {
 				if (player.ascensionPerkPoints >= 20 && !player.hasPerk(PerkLib.AscensionCruelChimerasThesis)) addButton(btn, "C Chimera's T", perkCruelChimerasThesis).hint("Perk allowing you to receive race bonuses for one point less. (still req. min 8 race points to work).\n\nCost: 20 points");
 				else if (player.ascensionPerkPoints < 20) addButtonDisabled(btn, "C Chimera's T", "You do not have enough ascension perk points!");
@@ -2072,76 +2010,52 @@ import coc.view.MainView;
 			btn++;
 			addButton(14, "Back", ascensionMenu);
 		}
-		private function perkAdditionalOrganMutation01():void {
-			player.ascensionPerkPoints -= 20;
-			player.createPerk(PerkLib.AscensionAdditionalOrganMutationX,1,0,0,1);
+
+		private function perkAOMXCheck(tier:int, btn:int):void {
+			var NGPL:Array = [1, 3, 5, 7];
+			var pCost:int = 20;
+			if (tier > 5) {
+				addButtonDisabled(btn, "A.O.M. Rank "+ tier.toString(),"You have the highest tier already.");
+			}
+			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < NGPL[tier - 1]) {
+				addButtonDisabled(btn, "A.O.M. Rank "+ tier.toString(),"You need to ascend a few more times.");
+			}
+			else if (player.internalChimeraScore() < 10 * tier) {
+				addButtonDisabled(btn, "A.O.M. Rank "+ tier.toString(),"You do not have a high enough chimera score.");
+			}
+			else if (player.ascensionPerkPoints < pCost * tier) {
+				addButtonDisabled(btn, "A.O.M. Rank "+ tier.toString(),"You do not have enough points.");
+			}
+			else {
+				addButton(btn, "A.O.M. Tier " + tier.toString(), perkRPConfirm, tier, PerkLib.AscensionAdditionalOrganMutationX, pCost, "Acquire A.O.M. Prestige Rank " + tier.toString());
+			}
+		}
+
+		private function perkBPCheck(tier:int, btn:int):void {
+			var pCost:int = 5;
+			if (tier > 6) {
+				addButtonDisabled(btn, "B.Prestige. Rank "+ tier.toString(),"You have the highest tier already.");
+			}
+			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < tier) {
+				addButtonDisabled(btn, "B.Prestige. Rank "+ tier.toString(),"You need to ascend once more.");
+			}
+			else if (player.ascensionPerkPoints < pCost * tier) {
+				addButtonDisabled(btn, "B.Prestige. Rank "+ tier.toString(),"You do not have enough points.");
+			}
+			else {
+				addButton(btn, "B. Prestige Rank" + tier.toString(), perkRPConfirm, tier, PerkLib.AscensionBuildingPrestigeX, pCost, "Acquire Building Prestige Rank " + tier.toString());
+			}
+		}
+
+		private function perkRPConfirm(tier:int, perk:PerkType, pCost:int):void{
+			player.ascensionPerkPoints -= pCost* tier;
+			if (tier == 1) player.createPerk(perk,1,0,0,1);
+			else player.setPerkValue(perk,1,player.perkv1(perk) + 1);
 			clearOutput();
-			outputText("You gained Additional Organ Mutation (1st Stage) perk.");
+			outputText("You have acquired "+ perk.name() + "!");
 			doNext(rarePerks1);
 		}
-		private function perkAdditionalOrganMutation02():void {
-			player.ascensionPerkPoints -= 40;
-			player.setPerkValue(PerkLib.AscensionAdditionalOrganMutationX,1,2);
-			clearOutput();
-			outputText("You gained Additional Organ Mutation (2nd Stage) perk.");
-			doNext(rarePerks1);
-		}
-		private function perkAdditionalOrganMutation03():void {
-			player.ascensionPerkPoints -= 60;
-			player.setPerkValue(PerkLib.AscensionAdditionalOrganMutationX,1,3);
-			clearOutput();
-			outputText("You gained Additional Organ Mutation (3rd Stage) perk.");
-			doNext(rarePerks1);
-		}
-		private function perkAdditionalOrganMutation04():void {
-			player.ascensionPerkPoints -= 80;
-			player.setPerkValue(PerkLib.AscensionAdditionalOrganMutationX,1,4);
-			clearOutput();
-			outputText("You gained Additional Organ Mutation (4th Stage) perk.");
-			doNext(rarePerks1);
-		}
-		private function perkBuildingPrestige01():void {
-			player.ascensionPerkPoints -= 5;
-			player.createPerk(PerkLib.AscensionBuildingPrestigeX,1,0,0,1);
-			clearOutput();
-			outputText("You gained Building Prestige (1st Stage) perk.");
-			doNext(rarePerks1);
-		}
-		private function perkBuildingPrestige02():void {
-			player.ascensionPerkPoints -= 10;
-			player.setPerkValue(PerkLib.AscensionBuildingPrestigeX,1,2);
-			clearOutput();
-			outputText("You gained Building Prestige (2nd Stage) perk.");
-			doNext(rarePerks1);
-		}
-		private function perkBuildingPrestige03():void {
-			player.ascensionPerkPoints -= 15;
-			player.setPerkValue(PerkLib.AscensionBuildingPrestigeX,1,3);
-			clearOutput();
-			outputText("You gained Building Prestige (3rd Stage) perk.");
-			doNext(rarePerks1);
-		}
-		private function perkBuildingPrestige04():void {
-			player.ascensionPerkPoints -= 20;
-			player.setPerkValue(PerkLib.AscensionBuildingPrestigeX,1,4);
-			clearOutput();
-			outputText("You gained Building Prestige (4th Stage) perk.");
-			doNext(rarePerks1);
-		}
-		private function perkBuildingPrestige05():void {
-			player.ascensionPerkPoints -= 25;
-			player.setPerkValue(PerkLib.AscensionBuildingPrestigeX,1,5);
-			clearOutput();
-			outputText("You gained Building Prestige (5th Stage) perk.");
-			doNext(rarePerks1);
-		}
-		private function perkBuildingPrestige06():void {
-			player.ascensionPerkPoints -= 30;
-			player.setPerkValue(PerkLib.AscensionBuildingPrestigeX,1,6);
-			clearOutput();
-			outputText("You gained Building Prestige (6th Stage) perk.");
-			doNext(rarePerks1);
-		}
+
 		private function perkCruelChimerasThesis():void {
 			player.ascensionPerkPoints -= 20;
 			player.createPerk(PerkLib.AscensionCruelChimerasThesis,0,0,0,1);
