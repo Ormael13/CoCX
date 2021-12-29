@@ -2180,7 +2180,7 @@ import coc.view.MainView;
 		private function perkMetamorphAscCheck(btn:int):void{
 			if (!player.hasPerk(PerkLib.AscensionNaturalMetamorph)){
 				if (player.ascensionPerkPoints < 30){
-					addButtonDisabled(btn, "Nat.MetaMph", "You do not have enough point to acquire Natural Metamorph.")
+					addButtonDisabled(btn, "Nat.MetaMph", "You do not have enough point to acquire Natural Metamorph.");
 				}
 				else{
 					perkRPConfirm(1,PerkLib.AscensionNaturalMetamorph, 30);
@@ -2190,7 +2190,7 @@ import coc.view.MainView;
 				var pCost:int = 15;
 				if (!player.hasPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX)){
 					if (player.ascensionPerkPoints < pCost){
-						addButtonDisabled(btn, "Gen. Memory", "You do not have enough point to acquire Genetic Memory.")
+						addButtonDisabled(btn, "Gen. Memory", "You do not have enough point to acquire Genetic Memory.");
 					}
 					else{
 						addButton(btn, "Gen. Memory", perkRPConfirm, 1, PerkLib.AscensionTrancendentalGeneticMemoryStageX, pCost *1);
@@ -2199,16 +2199,22 @@ import coc.view.MainView;
 				else {
 					var tier:int = player.perkv1(PerkLib.AscensionTrancendentalGeneticMemoryStageX) + 1;
 					if (player.ascensionPerkPoints < pCost * tier) {
-						addButtonDisabled(btn, "Gen. Memory", "You do not have enough point to acquire Genetic Memory.")
+						addButtonDisabled(btn, "Gen. Memory", "You do not have enough point to acquire Genetic Memory.");
 					}
 					else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < tier){
-						addButtonDisabled(btn, "Gen. Memory", "You have not ascended enough times yet.")
+						addButtonDisabled(btn, "Gen. Memory", "You have not ascended enough times yet.");
 					}
 					else if (tier > 7){
-						addButtonDisabled(btn, "Gen. Memory", "You have acquired the highest tier available.")
+						addButtonDisabled(btn, "Gen. Memory", "You have acquired the highest tier available.");
 					}
 					else {
 						addButton(btn, "Gen. Memory", perkRPConfirm, tier, PerkLib.AscensionTrancendentalGeneticMemoryStageX, pCost * tier);
+						if (tier == 1){
+							player.createStatusEffect(StatusEffects.TranscendentalGeneticMemory, 15, 0, 0, 9000);
+						}
+						else{
+							player.addStatusValue(StatusEffects.TranscendentalGeneticMemory, 1, 15 * tier);
+						}
 					}
 				}
 			}
