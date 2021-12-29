@@ -161,7 +161,6 @@ public class PerkLib
 				"Your understanding of prestige jobs from previous lives allows you to pick a 6th one at lvl 42+.");
 		public static const AscensionBuildingPrestige06:PerkType = mk("Ascension: Building Prestige (6th Stage)", "Ascension: Building Prestige (6th Stage)",
 				"Your understanding of prestige jobs from previous lives allows you to pick a 7th one at lvl 42+.");
-
 		//GenMem
 		public static const AscensionTranscendentalGeneticMemoryStage1:PerkType = mk("Ascension: Transcendental Genetic Memory (Stage 1)", "Ascension: Transcendental Genetic Memory (Stage 1)",
 				"Allows you to retain up to 15 chosen unlocked metamorphic options.");
@@ -176,6 +175,7 @@ public class PerkLib
 		public static const AscensionTranscendentalGeneticMemoryStage6:PerkType = mk("Ascension: Transcendental Genetic Memory (Stage 6)", "Ascension: Transcendental Genetic Memory (Stage 6)",
 				"Allows you to retain up to 90 chosen unlocked metamorphic options.");
 
+		//End of deprecated Ascension Perks
 		// Bloodline perks
 		public static const DragonsDescendant:PerkType = mk("Dragon's descendant", "Dragon's descendant",
 				"You are a descendant of your ancestor, who was the child of a human and a Dragon. (+2 to dragon score)");
