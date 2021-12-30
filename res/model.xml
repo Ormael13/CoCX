@@ -5390,26 +5390,27 @@
 			<if test="breastRows.length gt 0">
 				<switch>
 					<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
-						<show part="bra/vampireBraSmall"/>
+						<show part="bra_fg/vampireBraSmall"/>
 					</case>
 					<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
-						<show part="bra/vampireBraSmall"/>
+						<show part="bra_fg/vampireBraSmall"/>
 					</case>
 					<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
-						<show part="bra/vampireBraMedium"/>
+						<show part="bra_fg/vampireBraMedium"/>
 					</case>
 					<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
-						<show part="bra/vampireBraMedium"/>
+						<show part="bra_fg/vampireBraMedium"/>
 					</case>
 					<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
-						<show part="bra/vampireBraLarge"/>
+						<show part="bra_fg/vampireBraLarge"/>
 					</case>
 					<default>
-						<show part="bra/vampireBraLarge"/>
+						<show part="bra_fg/vampireBraLarge"/>
 					</default>
 				</switch>
 			</if>
 			<if test="showClothing">
+				<show part="clothe/vampireTop"/>
 				<if test="showArmClothing">
 					<if test="(femininity &gt;=40) and (cor &gt;=50) and (skin.coverage==Skin.COVERAGE_NONE)">
 						<switch value="arms.type">
