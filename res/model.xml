@@ -4606,28 +4606,28 @@
 				<if test="breastRows.length gt 0">
 					<switch>
 						<case test="breastRows[0].breastRating lte BreastCup.FLAT"><!--FLAT-->
-							<show part="bra/mageRobeBraSmall"/>
+							<show part="bra_fg/mageRobeBraSmall"/>
 						</case>
 						<case test="breastRows[0].breastRating lte BreastCup.B"><!--A-B-->
-							<show part="bra/mageRobeBraSmall"/>
+							<show part="bra_fg/mageRobeBraSmall"/>
 						</case>
 						<case test="breastRows[0].breastRating lte BreastCup.C"><!--A-B-->
-							<show part="bra/mageRobeBraMedium"/>
+							<show part="bra_fg/mageRobeBraMedium"/>
 						</case>
 						<case test="breastRows[0].breastRating lte BreastCup.D"><!--A-B-->
-							<show part="bra/mageRobeBraMedium"/>
+							<show part="bra_fg/mageRobeBraMedium"/>
 						</case>
 						<case test="breastRows[0].breastRating lte BreastCup.E"><!--A-B-->
-							<show part="bra/mageRobeBraLarge"/>
+							<show part="bra_fg/mageRobeBraLarge"/>
 						</case>
 						<default>
-							<show part="bra/mageRobeBraLarge"/>
+							<show part="bra_fg/mageRobeBraLarge"/>
 						</default>
 					</switch>
 				</if>
 				<if test="showArmClothing">
-					<show part="clotheRightArm/mageRobe"/>
-					<show part="clotheLeftArm/mageRobe"/>
+					<show part="clothRightArm/mageRobe"/>
+					<show part="clothLeftArm/mageRobe"/>
 				</if>
 				<if test="showLegClothing">
 					<show part="clotheLegs/mageRobe"/>
