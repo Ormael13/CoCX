@@ -3546,10 +3546,18 @@ public final class Mutations extends MutationsHelper {
             transformations.FaceHuman.applyEffect();
             changes++;
         }
+        //Cow hair oh my!
+        if (changes < changeLimit && enhanced && (player.hairColor != "snow white") && player.lowerBody != LowerBody.GARGOYLE) {
+            outputText("[pg]");
+            transformations.HairChangeColor(["snow white"]).applyEffect();
+            transformations.HairCow.applyEffect();
+            outputText("[pg]");
+        }
         //enhanced get shitty fur
         if (changes < changeLimit && enhanced && (player.skinDesc != "fur" || player.coatColor != "black and white spotted") && player.horns.type != Horns.COW_MINOTAUR && player.lowerBody != LowerBody.GARGOYLE) {
             outputText("[pg]");
-            transformations.HairChangeColor(["black"]).applyEffect();
+            transformations.HairChangeColor(["White"]).applyEffect();
+            transformations.HairCow.applyEffect();
             outputText("[pg]");
             transformations.SkinFur(Skin.COVERAGE_COMPLETE, {color: "black", color2: "white", pattern: Skin.PATTERN_SPOTTED}).applyEffect();
         }

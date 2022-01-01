@@ -1750,6 +1750,20 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  }
 	);
 
+	public const HairCow: Transformation = new SimpleTransformation("Fairy Hair",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "You feel an itch in your hair and frustratedly go check on what is going on. To your surprise your hair took on a striped pattern" + " <b>like those of a cow.</b>";
+
+				if (doOutput) outputText(desc);
+				player.hairType = Hair.COW;
+			},
+			// is present
+			function (): Boolean {
+				return player.hairType === Hair.COW;
+			}
+	);
+
 	public function HairChangeColor(colors: /*String*/ Array): Transformation {
 	  return new SimpleTransformation("Hair Color: " + colors.join("|"),
 	    // apply effect
