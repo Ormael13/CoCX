@@ -201,7 +201,7 @@ import coc.xlogic.ExecContext;
 					goblinTechnomancerBra: player.upperGarment == game.undergarments.TECHBRA,
 					dragonscaleBikiniBra: player.upperGarment == game.undergarments.DS_BRA,
 					comfyBikiniBra: player.upperGarment == game.undergarments.C_BRA,
-					cowBra: player.lowerGarment == game.undergarments.COW_BRA,
+					cowBra: player.upperGarment == game.undergarments.COW_BRA,
 
 					//viewable panty list
 					goblinTechnomancerPanty: player.lowerGarment == game.undergarments.T_PANTY,
