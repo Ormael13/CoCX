@@ -5905,13 +5905,45 @@ public function rebirthFromBadEnd():void {
 			doNext(doCamp);
 			return;
 		}
-	/*	if (flags[kFLAGS.MOD_SAVE_VERSION] == 35) {
+		/*
+		if (flags[kFLAGS.MOD_SAVE_VERSION] == 35) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 36;
 			clearOutput();
 			outputText("Text.");
+			if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1)) {
+				if (player.hasPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX)) player.setPerkValue(PerkLib.AscensionTrancendentalGeneticMemoryStageX, 1,1);
+				else player.createPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX, 1, 0, 0, 1);
+				player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1);
+			}
+			if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage2)) {
+				if (player.hasPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX)) player.setPerkValue(PerkLib.AscensionTrancendentalGeneticMemoryStageX, 1,2);
+				else player.createPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX,2,0,0,1);
+				player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage2);
+			}
+			if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage3)){
+				if (player.hasPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX)) player.setPerkValue(PerkLib.AscensionTrancendentalGeneticMemoryStageX, 1,3);
+				else player.createPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX,3,0,0,1);
+				player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage3);
+			}
+			if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage4)){
+				if (player.hasPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX)) player.setPerkValue(PerkLib.AscensionTrancendentalGeneticMemoryStageX, 1,4);
+				else player.createPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX,4,0,0,1);
+				player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage4);
+			}
+			if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage5)) {
+				if (player.hasPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX)) player.setPerkValue(PerkLib.AscensionTrancendentalGeneticMemoryStageX, 1,5);
+				else player.createPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX, 5, 0, 0, 1);
+				player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage5);
+			}
+			if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage6)) {
+				if (player.hasPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX)) player.setPerkValue(PerkLib.AscensionTrancendentalGeneticMemoryStageX, 1,6);
+				else player.createPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX,6,0,0,1);
+				player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage6);
+			}
 			doNext(doCamp);
 			return;
 		}
+		/*
 		if (flags[kFLAGS.MOD_SAVE_VERSION] == 36) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 37;
 			clearOutput();
