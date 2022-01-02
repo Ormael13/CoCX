@@ -1875,6 +1875,9 @@ public class PlayerInfo extends BaseContent {
 			HPChange(player.spe, false);
 			statScreenRefresh();
 		}
+		//if (perk.ptype == PerkLib.RacialParagon) {
+		//	flags[kFLAGS.APEX_SELECTED_RACE] = Race.ALL_RACES[player.race];	//How do I get the current race id....
+		//}
 		if (player.perkPoints > 0) {
 			doNext(perkBuyMenu);
 		} else {
