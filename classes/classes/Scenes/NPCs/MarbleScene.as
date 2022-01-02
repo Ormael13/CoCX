@@ -2373,7 +2373,7 @@ private function talkWithMarbleAtCamp():void {
 	else if(flags[kFLAGS.D3_DISCOVERED] > 0 && flags[kFLAGS.LETHICE_DEFEATED] > 0)
 		outputText("\"<i>Well sweetie, this is it. Your mission has been to stop the demons, Lethice is their leader. Once you're ready, you need to go to their high mountain lair and take them down. Make sure you've finished everything else you want to do before you face Lethice, you won't get a second chance.</i>\"");
 	//Nothing to advise!
-	else  outputText("\"<i>Sweetie, you've finished the main story of the game!</i>\" she says to you winking. \"<i>Why not explore? There's a lot in here that isn't a part of the main story.  You could also try changing your form and see how that changes each encounter.  Just don't get caught or lose your head, ok sweetie?<i/>\"");
+	else  outputText("\"<i>Sweetie, you've finished the main story of the game!</i>\" she says to you winking. \"<i>Why not explore? There's a lot in here that isn't a part of the main story.  You could also try changing your form and see how that changes each encounter.  Just don't get caught or lose your head, ok sweetie?</i>\"");
 	//else outputText("\"<i>Sweetie, you've finished all that there is in the main story of the game so far.  You'll have to wait for Fenoxo to add more,</i>\" she says to you winking. \"<i>In the meantime, explore! There's a lot in here that isn't a part of the main story.  You could also try changing your form and see how that changes each encounter.  Just don't get caught or lose your head, ok sweetie?<i/>\"");
 	doNext(interactWithMarbleAtCamp);
 }
