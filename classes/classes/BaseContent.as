@@ -1003,10 +1003,12 @@ import coc.xxc.StoryContext;
 			}
 			if (back != null) button(14).show("Back",back);
 		}
-		//Returns an autocreated menu.
-		//Structure for array is: ["Button name", function/false/"ignore", ["Available desc", "Not available desc"]/ ""]
-		//function/false/"ignore" = addbtn, addbtndisabled, no button
-		protected function menuGen(menuItems:Array, page:int, back:Function=null, sort:Boolean=false):void{
+		/**Returns an autocreated menu.
+		 * Structure for menuItems array is: ["Button name", function/false/"ignore", ["Available desc", "Not available desc"]/ ""].
+		 * function/false/"ignore" = addbtn, addbtndisabled, no button.
+		 * btnStat returns how many buttons are active.
+		 */
+		protected function menuGen(menuItems:Array, page:int, back:Function=null, sort:Boolean=false, btnStat:Boolean = false){
 			var bList:Array = [];
 			var total:int = menuItems.length;
 			var next:Boolean = false;
@@ -1024,6 +1026,7 @@ import coc.xxc.StoryContext;
 			}
 			menu();
 			var btnval:int = 0;
+			var btnsActive: int = 0;
 			for (var i:int = 0; i < bList.length; i++){
 				if (i % 3 == 0){
 					if (!bList[i + 1]){
@@ -1034,6 +1037,7 @@ import coc.xxc.StoryContext;
 					}
 					else{
 						addButton(btnval,bList[i],bList[i + 1], null, null, null,(bList[i + 2] is Array) ? bList[i+2][0]: bList[i+2]);
+						btnsActive++
 					}
 					btnval++
 				}
@@ -1043,6 +1047,8 @@ import coc.xxc.StoryContext;
 				button(13).show("Next Page", curry(menuGen, menuItems,page + 1,  back, sort)).disableIf(!next);
 			}
 			if (back != null) button(14).show("Back",back);
+
+			if (btnStat) return btnsActive;
 		}
 	}
 
