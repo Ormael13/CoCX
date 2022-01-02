@@ -47,6 +47,8 @@ import classes.PerkLib;
 				case "spider-silk shirt":
 				case "spider-silk loincloth":
 				case "spider-silk panties":
+				case "cow girl bra":
+				case "cow girl panties":
 					return 1;
 				case "dragonscale bra":
 				case "dragonscale vest":
@@ -76,6 +78,8 @@ import classes.PerkLib;
 				case "ebonweave thong":
 				case "rune thong":
 				case "rune jock":
+				case "cow girl bra":
+				case "cow girl panties":
 					return 1;
 				case "dragonscale bra":
 				case "dragonscale vest":
@@ -113,6 +117,8 @@ import classes.PerkLib;
 					return 2;
 				case "rune thong":
 				case "rune jock":
+				case "cow girl bra":
+				case "cow girl panties":
 					return 3;
 				default:
 					return 0;

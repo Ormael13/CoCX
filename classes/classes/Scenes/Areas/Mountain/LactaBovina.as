@@ -92,6 +92,8 @@ import classes.internals.*;
 			this.tailType = Tail.COW;
 			this.drop = new WeightedDrop().
 					add(necklaces.COWBELL, 12).
+					add(undergarments.COW_BRA, 10).
+					add(undergarments.COW_PANTY, 8).
 					//add(consumables., 10).	- for lacta bovinba milk (like mino cum)
 					add(consumables.PROBOVA, 4).
 					add(consumables.LABOVA_, 7);

@@ -201,11 +201,13 @@ import coc.xlogic.ExecContext;
 					goblinTechnomancerBra: player.upperGarment == game.undergarments.TECHBRA,
 					dragonscaleBikiniBra: player.upperGarment == game.undergarments.DS_BRA,
 					comfyBikiniBra: player.upperGarment == game.undergarments.C_BRA,
+					cowBra: player.lowerGarment == game.undergarments.COW_BRA,
 
 					//viewable panty list
 					goblinTechnomancerPanty: player.lowerGarment == game.undergarments.T_PANTY,
 					dragonscaleBikiniPanty: player.lowerGarment == game.undergarments.DSTHONG,
 					comfyBikiniPanty: player.lowerGarment == game.undergarments.C_PANTY || player.lowerGarment == game.undergarments.C_LOIN,
+					cowPanty: player.lowerGarment == game.undergarments.COW_PANTY,
 
 					// Unique misc Accessories
 					oniGourd: player.miscJewelry == game.miscjewelries.ONI_GOURD || player.miscJewelry2 == game.miscjewelries.ONI_GOURD,

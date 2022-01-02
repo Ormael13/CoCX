@@ -11111,6 +11111,10 @@ use namespace CoC;
 				total *= 2.5;
 			if (necklaceName == "Cow bell")
 				total *= 1.5;
+			if (upperGarment == game.undergarments.COW_BRA)
+				total *= 1.5;
+			if (lowerGarment == game.undergarments.COW_PANTY)
+				total *= 1.5;
 			if (statusEffectv1(StatusEffects.LactationReduction) >= 48)
 				total = total * 1.5;
 			if (total > int.MAX_VALUE)
