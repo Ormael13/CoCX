@@ -10279,7 +10279,7 @@ use namespace CoC;
 			if (ears.type == Ears.HUMAN)
 				femaleMindbreakerCounter++;
 			if (tailType == Tail.NONE)
-				femaleMindbreakerCounter ++;
+				femaleMindbreakerCounter++;
 			if (rearBody.type == RearBody.MINDBREAKER)
 				femaleMindbreakerCounter+= 4;
 			if (arms.type == Arms.MINDBREAKER)
@@ -10289,7 +10289,7 @@ use namespace CoC;
 			if (tongue.type == Tongue.MINDBREAKER)
 				femaleMindbreakerCounter++;
 			if (wings.type == Wings.NONE)
-				femaleMindbreakerCounter += 3;
+				femaleMindbreakerCounter+= 3;
 			if (vaginaType() == VaginaClass.MINDBREAKER)
 				femaleMindbreakerCounter++;
 			if ((hairType == Hair.MINDBREAKER) && hairColor == "purple")
@@ -10297,17 +10297,17 @@ use namespace CoC;
 			if (hasPlainSkinOnly() && (InCollection(skin.base.color, ["pale", "ghostly white", "light purple"])))
 				femaleMindbreakerCounter++;
 			if (skinAdj == "slippery")
-				femaleMindbreakerCounter ++;
+				femaleMindbreakerCounter++;
 			if (hasPerk(PerkLib.Insanity))
 				femaleMindbreakerCounter++;
 			if (hasPerk(PerkLib.MindbreakerBrain1toX))
 				femaleMindbreakerCounter+= perkv1(PerkLib.MindbreakerBrain1toX);
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
-				femaleMindbreakerCounter += 50;
+				femaleMindbreakerCounter+= 50;
 			if (hasPerk(PerkLib.AscensionHybridTheory) && femaleMindbreakerCounter >= 4)
 				femaleMindbreakerCounter++;
 			if (hasPerk(PerkLib.AscensionCruelChimerasThesis) && femaleMindbreakerCounter >= 8)
-				femaleMindbreakerCounter += 1;
+				femaleMindbreakerCounter++;
 			if (isGargoyle()) femaleMindbreakerCounter = 0;
 			if (hasCock()) femaleMindbreakerCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) femaleMindbreakerCounter = 0;
