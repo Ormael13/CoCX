@@ -155,19 +155,24 @@ public class YaraPiercingStudio extends TelAdreAbstractContent {
             locChoices.push("Labia", ((!player.hasVagina() || player.vaginas[0].labiaPierced == TYPE_NONE) ? false: curry (fun, LOC_VULVA)), pDesc);
         }
 
-        var result:int = menuGen(locChoices,0, piercingStudio, false, true);
-        return result != 0;
+        var result:int = menuGen(locChoices,0, piercingStudio, false);
+        if (pierce){
+            return result < 9;
+        }
+        else{
+            return result > 0;
+        }
     }
 
     private function pierceMenu():void {
         spriteSelect(63);
         hideUpDown();
-        var spaceAvailable:Boolean = buildLocChoices2(chooseLoc, true);
         clearOutput();
         outputText("Yara asks, \"<i>Ok then, what would you like pierced " + player.mf("sir", "cutie") + "?  Just keep in mind my piercings are special - they're permanent and CAN'T be removed.</i>\"");
+        var spaceAvailable:Boolean = buildLocChoices2(chooseLoc, true);
         if (!spaceAvailable) {
             outputText("\n\nYou give yourself a quick once-over and realize there's nowhere left for her to pierce you.  Oh well.");
-            //doNext(piercingStudio);
+            doNext(piercingStudio);
         }
     }
 
@@ -556,27 +561,24 @@ public class YaraPiercingStudio extends TelAdreAbstractContent {
     private function piercingRemove():void {
         spriteSelect(63);
         hideUpDown();
+        clearOutput();
+        outputText("\"<i>Really?</i>\" asks Yara, \"<i>I told you those piercings are permanent!  Well, I suppose they CAN be removed, but you're gonna hurt like hell afterwards.  If you really want me to, I can remove something, but it'll cost you 100 gems for the painkillers and labor.</i>\"");
         var hasPiercings:Boolean = buildLocChoices2(doRemove, false);
         if (!hasPiercings) {
-            clearOutput();
-            outputText("Yara giggles, \"<i>You don't have any piercings, silly!</i>\"");
+            outputText("\n\n\"Although... \" Yara giggles, \"<i>You don't have any piercings, silly!</i>\"");
             doNext(piercingStudio);
             return;
         }
-        clearOutput();
-        outputText("\"<i>Really?</i>\" asks Yara, \"<i>I told you those piercings are permanent!  Well, I suppose they CAN be removed, but you're gonna hurt like hell afterwards.  If you really want me to, I can remove something, but it'll cost you 100 gems for the painkillers and labor.</i>\"");
         if (player.gems < 100) {
             outputText("\n\n<b>You do not have enough gems.</b>");
             doNext(piercingStudio);
             return;
         }
         if (player.tou <= 5.5) {
-            clearOutput();
             outputText("Yara looks you up and down before refusing you outright, \"<i>You don't look so good [name].  I don't think your body could handle it right now.</i>\"");
             doNext(piercingStudio);
             return;
         }
-        //submenu(locChoices, piercingStudio);
 
         function doRemove(loc:int):void {
             clearOutput();
