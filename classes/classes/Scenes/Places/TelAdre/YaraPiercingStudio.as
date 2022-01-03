@@ -132,7 +132,7 @@ public class YaraPiercingStudio extends TelAdreAbstractContent {
         var locChoices:Array = [];
         var pDesc:Array;
         if (pierce){
-            pDesc = ["Add Piercing", "You already have a piercing here!"];
+            pDesc = ["Add Piercing", "You can't have a piercing here!"];
             locChoices.push("Clit", ((!player.hasVagina() || player.vaginas[0].clitPierced != TYPE_NONE) ? false: curry(fun, LOC_CLIT)), pDesc);
             locChoices.push("Dick", ((!player.hasCock() || player.cocks[0].pierced != 0) ? false: curry(fun, LOC_DICK)), pDesc);
             locChoices.push("Ears", (player.earsPierced != TYPE_NONE ? false: curry (fun, LOC_EARS)), pDesc);
