@@ -1008,7 +1008,7 @@ import coc.xxc.StoryContext;
 		 * function/false/"ignore" = addbtn, addbtndisabled, no button.
 		 * btnStat returns how many buttons are active.
 		 */
-		protected function menuGen(menuItems:Array, page:int, back:Function=null, sort:Boolean=false, btnStat:Boolean = false){
+		protected function menuGen(menuItems:Array, page:int, back:Function=null, sort:Boolean=false):int{
 			var bList:Array = [];
 			var total:int = menuItems.length;
 			var next:Boolean = false;
@@ -1047,8 +1047,7 @@ import coc.xxc.StoryContext;
 				button(13).show("Next Page", curry(menuGen, menuItems,page + 1,  back, sort)).disableIf(!next);
 			}
 			if (back != null) button(14).show("Back",back);
-
-			if (btnStat) return btnsActive;
+			return btnsActive;
 		}
 	}
 
