@@ -8,6 +8,7 @@ import classes.Scenes.Places.HeXinDao.JourneyToTheEast;
 import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.NPCs.IsabellaScene;
 import classes.Scenes.NPCs.ZenjiScenes;
+import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.SceneLib;
 import classes.Stats.StatUtils;
 import classes.StatusEffects.VampireThirstEffect;
@@ -132,7 +133,7 @@ public class PlayerInfo extends BaseContent {
 			miscStats += "<b>Camp Underground Population:</b> " + camp.getCampUndergroundPopulation() + "\n";
 			miscStats += "<b>Minions Count:</b> " + player.playerMinionsCount() + "\n";
 			if (player.race() == "mindbreaker") {
-				miscStats += "<b>Mindbroken Minions:</b> " + player.perkv1(PerkLib.MindbreakerBrain1toX) + "\n";
+				miscStats += "<b>Mindbroken Minions:</b> " + Mindbreaker.MindBreakerConvert + "\n";
 			}
 		}
 
