@@ -7520,6 +7520,10 @@ public class Combat extends BaseContent {
                 dynStats("lus", 3);
             }
         }
+		if (player.hasPerk(PerkLib.EclipticInfusion) && player.perkv3(PerkLib.ElementalBody) > 0) {
+			if (player.perkv3(PerkLib.ElementalBody) == 1) damage *= 1 + (0.01 * player.cor);
+			else damage *= 1 + (0.01 * (100 - player.cor));
+		}
         if (monster.hasStatusEffect(StatusEffects.BerzerkingSiegweird)) damage *= 1.2;
         if (player.hasPerk(PerkLib.Anger) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
             var bonusDamageFromMissingHP:Number = 1;
@@ -7937,6 +7941,10 @@ public class Combat extends BaseContent {
                 dynStats("lus", 3);
             }
         }
+		if (player.hasPerk(PerkLib.EclipticInfusion) && player.perkv3(PerkLib.ElementalBody) > 0) {
+			if (player.perkv3(PerkLib.ElementalBody) == 1) damage *= 1 + (0.01 * player.cor);
+			else damage *= 1 + (0.01 * (100 - player.cor));
+		}
         if (monster.hasStatusEffect(StatusEffects.BerzerkingSiegweird)) damage *= 1.2;
         if (player.hasPerk(PerkLib.Anger) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
             var bonusDamageFromMissingHP:Number = 1;
@@ -8010,6 +8018,10 @@ public class Combat extends BaseContent {
                 dynStats("lus", 3);
             }
         }
+		if (player.hasPerk(PerkLib.EclipticInfusion) && player.perkv3(PerkLib.ElementalBody) > 0) {
+			if (player.perkv3(PerkLib.ElementalBody) == 1) damage *= 1 + (0.01 * player.cor);
+			else damage *= 1 + (0.01 * (100 - player.cor));
+		}
         if (monster.hasStatusEffect(StatusEffects.BerzerkingSiegweird)) damage *= 1.2;
         if (player.hasPerk(PerkLib.Anger) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
             var bonusDamageFromMissingHP:Number = 1;
@@ -8083,6 +8095,10 @@ public class Combat extends BaseContent {
                 dynStats("lus", 3);
             }
         }
+		if (player.hasPerk(PerkLib.EclipticInfusion) && player.perkv3(PerkLib.ElementalBody) > 0) {
+			if (player.perkv3(PerkLib.ElementalBody) == 1) damage *= 1 + (0.01 * player.cor);
+			else damage *= 1 + (0.01 * (100 - player.cor));
+		}
         if (monster.hasStatusEffect(StatusEffects.BerzerkingSiegweird)) damage *= 1.2;
         if (player.hasPerk(PerkLib.Anger) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
             var bonusDamageFromMissingHP:Number = 1;
