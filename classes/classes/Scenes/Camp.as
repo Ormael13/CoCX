@@ -2192,31 +2192,31 @@ public class Camp extends NPCAwareContent{
 		clearOutput();
 		outputText("Would you like to also add an aligned elemental to your fusion?");
 		menu();
-		if (player.hasStatusEffect(StatusEffects.SummonedElementalsPurity)) addButton(1, "Purity", druidMenuFuseScene, "earth", 1, 2);
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsPurity)) addButton(1, "Purity", druidMenuFuseScene, "earth", 2, 2);
 		else addButtonDisabled(1, "Purity", "You need to summon Normal Purity Elemental first before trying to use this fusion option.");
-		if (player.hasStatusEffect(StatusEffects.SummonedElementalsCorruption)) addButton(2, "Corruption", druidMenuFuseScene, "earth", 1, 1);
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsCorruption)) addButton(2, "Corruption", druidMenuFuseScene, "earth", 2, 1);
 		else addButtonDisabled(2, "Corruption", "You need to summon Normal Corruption Elemental first before trying to use this fusion option.");
-		addButton(3, "No", druidMenuFuseScene, "earth", 1, 0);
+		addButton(3, "No", druidMenuFuseScene, "earth", 2, 0);
 	}
 	private function druidMenuFire():void {
 		clearOutput();
 		outputText("Would you like to also add an aligned elemental to your fusion?");
 		menu();
-		if (player.hasStatusEffect(StatusEffects.SummonedElementalsPurity)) addButton(1, "Purity", druidMenuFuseScene, "fire", 1, 2);
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsPurity)) addButton(1, "Purity", druidMenuFuseScene, "fire", 3, 2);
 		else addButtonDisabled(1, "Purity", "You need to summon Normal Purity Elemental first before trying to use this fusion option.");
-		if (player.hasStatusEffect(StatusEffects.SummonedElementalsCorruption)) addButton(2, "Corruption", druidMenuFuseScene, "fire", 1, 1);
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsCorruption)) addButton(2, "Corruption", druidMenuFuseScene, "fire", 3, 1);
 		else addButtonDisabled(2, "Corruption", "You need to summon Normal Corruption Elemental first before trying to use this fusion option.");
-		addButton(3, "No", druidMenuFuseScene, "fire", 1, 0);
+		addButton(3, "No", druidMenuFuseScene, "fire", 3, 0);
 	}
 	private function druidMenuWater():void {
 		clearOutput();
 		outputText("Would you like to also add an aligned elemental to your fusion?");
 		menu();
-		if (player.hasStatusEffect(StatusEffects.SummonedElementalsPurity)) addButton(1, "Purity", druidMenuFuseScene, "water", 1, 2);
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsPurity)) addButton(1, "Purity", druidMenuFuseScene, "water", 4, 2);
 		else addButtonDisabled(1, "Purity", "You need to summon Normal Purity Elemental first before trying to use this fusion option.");
-		if (player.hasStatusEffect(StatusEffects.SummonedElementalsCorruption)) addButton(2, "Corruption", druidMenuFuseScene, "water", 1, 1);
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsCorruption)) addButton(2, "Corruption", druidMenuFuseScene, "water", 4, 1);
 		else addButtonDisabled(2, "Corruption", "You need to summon Normal Corruption Elemental first before trying to use this fusion option.");
-		addButton(3, "No", druidMenuFuseScene, "water", 1, 0);
+		addButton(3, "No", druidMenuFuseScene, "water", 4, 0);
 	}
 	private function druidMenuFuseScene(element:String, type:Number, type2:Number):void {
 		clearOutput();
