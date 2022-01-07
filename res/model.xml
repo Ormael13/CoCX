@@ -4591,9 +4591,11 @@
 		</if>
 		<if test="goblinTechnomancerPanty">
 			<if test="showClothing">
-				<show part="panty/goblinTechnomancerPanty"/>
-				<hide part="penis/*"/>
-				<hide part="balls/*"/>
+				<if test="showPanty">
+					<show part="panty/goblinTechnomancerPanty"/>
+					<hide part="penis/*"/>
+					<hide part="balls/*"/>
+				</if>	
 			</if>
 		</if>
 
@@ -4705,9 +4707,11 @@
 		</if>
 		<if test="dragonscaleBikiniPanty">
 			<if test="showClothing">
-				<show part="panty/dragonScalePanty"/>
-				<hide part="penis/*"/>
-				<hide part="balls/*"/>
+				<if test="showPanty">
+					<show part="panty/dragonScalePanty"/>
+					<hide part="penis/*"/>
+					<hide part="balls/*"/>
+				</if>
 			</if>
 		</if>
 
@@ -4737,11 +4741,13 @@
 			</if>
 		</if>
 		<if test="comfyBikiniPanty">
-			<if test="showLegClothing">
-				<show part="panty/comfortablePanty"/>
-				<hide part="penis/*"/>
-				<hide part="balls/*"/>
-			</if>
+			<if test="showClothing">
+				<if test="showPanty">
+					<show part="panty/comfortablePanty"/>
+					<hide part="penis/*"/>
+					<hide part="balls/*"/>
+				</if>
+			</if>	
 		</if>
 
 		<!--Bikini set -->
@@ -4769,7 +4775,7 @@
 				</switch>
 			</if>
 			<if test="showClothing">
-				<if test="showLegClothing">
+				<if test="showPanty">
 					<if test="(legCount>=4)==false">
 						<show part="panty/sexyBlackBikiniPanty"/>
 						<hide part="penis/*"/>
@@ -4802,7 +4808,7 @@
 				</switch>
 			</if>
 			<if test="showClothing">
-				<if test="showLegClothing">
+				<if test="showPanty">
 					<if test="isTaur()==false">
 						<show part="panty/sexyAquamarineBikiniPanty"/>
 						<hide part="penis/*"/>
@@ -4835,7 +4841,7 @@
 				</switch>
 			</if>
 			<if test="showClothing">
-				<if test="showLegClothing">
+				<if test="showPanty">
 					<if test="isTaur()==false">
 						<show part="panty/sexyBlueBikiniPanty"/>
 						<hide part="penis/*"/>
@@ -4868,7 +4874,7 @@
 				</switch>
 			</if>
 			<if test="showClothing">
-				<if test="showLegClothing">
+				<if test="showPanty">
 					<if test="isTaur()==false">
 						<show part="panty/sexyGreenBikiniPanty"/>
 						<hide part="penis/*"/>
@@ -4901,7 +4907,7 @@
 				</switch>
 			</if>
 			<if test="showClothing">
-				<if test="showLegClothing">
+				<if test="showPanty">
 					<if test="isTaur()==false">
 						<show part="panty/sexyPinkBikiniPanty"/>
 						<hide part="penis/*"/>
@@ -4934,7 +4940,7 @@
 				</switch>
 			</if>
 			<if test="showClothing">
-				<if test="showLegClothing">
+				<if test="showPanty">
 					<if test="isTaur()==false">
 						<show part="panty/sexyRedBikiniPanty"/>
 						<hide part="penis/*"/>
@@ -4967,7 +4973,7 @@
 				</switch>
 			</if>
 			<if test="showClothing">
-				<if test="showLegClothing">
+				<if test="showPanty">
 					<if test="isTaur()==false">
 						<show part="panty/sexyWhiteBikiniPanty"/>
 						<hide part="penis/*"/>
@@ -5000,7 +5006,7 @@
 				</switch>
 			</if>
 			<if test="showClothing">
-				<if test="showLegClothing">
+				<if test="showPanty">
 					<if test="isTaur()==false">
 						<show part="panty/sexyYellowBikiniPanty"/>
 						<hide part="penis/*"/>
@@ -5037,7 +5043,7 @@
 		</if>
 		<if test="cowPanty">
 			<if test="showClothing">
-				<if test="showLegClothing">
+				<if test="showPanty">
 					<if test="isTaur()==false">
 						<show part="panty/cowPanty"/>
 						<hide part="penis/*"/>
