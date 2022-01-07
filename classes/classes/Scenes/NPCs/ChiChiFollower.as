@@ -286,9 +286,19 @@ public function TrainingSoulArtsWithChiChi():void {
 			outputText("You're ready to begin your training and tell her as such.\n\n");
 			outputText("Chi Chi nods, then proceeds to show you a whole new form of combat, this one much more aggressive than that of the Lotus. Soon you manage to learn a few additional stances, as well as how to control the energy flow in your body to increase the power of an impact. She has you training on the dummies for several hours to increase your stamina. ");
 			outputText("As the flow of your movements and energy starts to become automatic, you discover your kicks and punches have become way stronger.");
-			player.trainStat("tou", +2, 75);
-			player.trainStat("tou", +1, 100);
-			if (player.tou >= 100) {
+			if (player.hasPerk(PerkLib.IcyFlesh)) {
+				player.trainStat("int", +2, 75);
+				player.trainStat("int", +1, 100);
+			}
+			else if (player.hasPerk(PerkLib.HaltedVitals)) {
+				player.trainStat("lib", +2, 75);
+				player.trainStat("lib", +1, 100);
+			}
+			else {
+				player.trainStat("tou", +2, 75);
+				player.trainStat("tou", +1, 100);
+			}
+			if (player.tou >= 100 || (player.hasPerk(PerkLib.IcyFlesh) && player.inte >= 100) || (player.hasPerk(PerkLib.HaltedVitals) && player.lib >= 100)) {
 				if (!player.hasPerk(PerkLib.MightyFist)) {
 					player.createPerk(PerkLib.MightyFist, 0, 0, 0, 0);
 					outputText(" <b>You've gained the Mighty Fist perk.</b>");

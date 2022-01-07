@@ -43,6 +43,8 @@ public class BeeGirlScene extends BaseContent
 		private function get conversation():int { return (flags[kFLAGS.BEE_GIRL_STATUS] & BEE_GIRL_CONVERSATION) >> 16; }
 
 		private function set conversation(value:int):void { flags[kFLAGS.BEE_GIRL_STATUS] = (flags[kFLAGS.BEE_GIRL_STATUS] & BEE_GIRL_ATTITUDE) + (value << 16); }
+		
+		public static var beeHair:Array = ["shiny black", "black and yellow", "brown and yellow", "brown"];
 
 		//The Queen Bee
 		//location: Forest
@@ -72,7 +74,7 @@ public class BeeGirlScene extends BaseContent
 		private function beeEncounterSelect(clearScreen:Boolean = true):void {
 			if (clearScreen) clearOutput();
 			spriteSelect(6);
-			outputText("That's when she comes into view.  A great woman, yellow and black, a Bee-like handmaiden would be the best comparison.  She sits atop a great flower while humming her tune, happily picking the petals off of another flower.  Her body is thin, save her abdomen.  Her head is more humanoid than bee, with black eyes, antennae.type, and luscious black lips that glimmer wetly");
+			outputText("That's when she comes into view.  A great woman, yellow and black, a Bee-like handmaiden would be the best comparison.  She sits atop a great flower while humming her tune, happily picking the petals off of another flower.  Her body is thin, save her abdomen.  Her head is more humanoid than bee, with black eyes, floppy ntennae, and luscious black lips that glimmer wetly");
 			if (player.lowerBody == LowerBody.PLANT_FLOWER) {
 				AlrauneAndBee();
 				return;
@@ -412,7 +414,7 @@ public class BeeGirlScene extends BaseContent
 			clearOutput();
 			spriteSelect(6);
 			outputText("You clear your head and resolve to defeat the monstrous bee-girl");
-			if ((rand(3) == 0 && player.level < 12) || (rand(3) > 0 && player.level >= 12)) {
+			if (player.level >= 3 && ((rand(4) == 0 && player.level < 12) || (rand(4) > 0 && player.level >= 12))) {
 				outputText(" huntress.");
 				startCombat(new BeeGirlHuntress());
 			}

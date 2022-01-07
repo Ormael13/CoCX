@@ -1,7 +1,18 @@
+/**
+ * ...
+ * @author Liadri
+ */
 package classes.Scenes.NPCs 
 {
 import classes.*;
+import classes.BodyParts.Antennae;
+import classes.BodyParts.Arms;
+import classes.BodyParts.Eyes;
+import classes.BodyParts.Horns;
 import classes.BodyParts.LowerBody;
+import classes.BodyParts.RearBody;
+import classes.BodyParts.Tail;
+import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 	
 public class TifaFollower extends NPCAwareContent
@@ -58,7 +69,7 @@ public function tifaMainMenuTalkReturn():void {
 	addButton(0, "Her", tifaMainMenuTalkHer);
 	addButton(1, "Bee life?", tifaMainMenuTalkBeeLife);
 	addButton(2, "Relations", tifaMainMenuTalkRelations);
-	if (player.gender > 1 && flags[kFLAGS.TIFA_AFFECTION] >= 100 && flags[kFLAGS.TIFA_FOLLOWER] == 9 && player.beeScore() >= 9) addButton(2, "Handmaiden", tifaMainMenuTalkBecomeHerHandmaiden).hint("Become her handmaiden.");
+	if (player.gender > 1 && flags[kFLAGS.TIFA_AFFECTION] >= 100 && flags[kFLAGS.TIFA_FOLLOWER] == 9 && player.beeScore() >= 14) addButton(2, "Handmaiden", tifaMainMenuTalkBecomeHerHandmaiden).hint("Become her handmaiden.");
 	else if (flags[kFLAGS.TIFA_FOLLOWER] > 9) addButtonDisabled(3, "Handmaiden", "You're already her handmaiden.");
 	else addButtonDisabled(3, "Handmaiden", "Become her handmaiden. (Req. female or herm bee morph and discussed all conversation at least once, also have an affection rating with Tifa of 100)");
 	addButton(4, "Back", tifaMainMenu);
@@ -115,9 +126,12 @@ public function tifaMainMenuTalkBecomeHerHandmaidenYes():void {
 	outputText("You’ll definitely accept to be hers for life.\n\n");
 	outputText("\"<i>Then… then pleazzze have thizzz… I… I kept thizzz item in cazzze zzzomeday I would need it. Thizzz izzz some of my own royal jelly and it should allow you to become the firzzzt true member of my hive and my mozzzt cherizzzhed handmaiden.</i>\"\n\n");
 	outputText("She hands you a small candy like item. The way she’s saying it, it's almost as awkward as a wedding proposal but you already know your answer is a yes. \n\n");
-	outputText("\n\n");
-	outputText("\n\n");
-	outputText("\n\n");
+	outputText("You take a deep breath before accepting the candy from your insectoid lover. It is a small, round and shaped like a teardrop, about an inch long and half an inch thick. You put it in your mouth. It is soft and sweet, but has a bit of a sour aftertaste. After a few moments, you feel like your head is spinning, and you lie back down on the flower while Tifa moves over you and gently caresses your face with her chitin covered arms. ");
+	outputText("Suddenly your whole body start to ache, then burn. You look down at yourself to see what is happening, only to see a layer of "+(player.coatColor == "black"?"brown":"black")+" chitin slowly growing across your torso, in the same places as a true bee! Looks like you’re turning into a full bee now.\n\n");
+	outputText("Your energy rapidly fades as more of your body changes. You try to steady your breathing while the transformation progresses. It isn’t easy, especially when something fundamental about your pussy changes, and you feel something viscous start to flow out of it. Thankfully, it isn’t gasps of pain that are making it hard to take deep breaths anymore, but gasps of pleasure. ");
+	outputText("You can’t wait to feel another part of your body rearrange itself and to experience the rush of new feelings from them. The sensations from your new honeypot in particular are almost overwhelming and every few moments another torrent of honey sprays out.\n\n");
+	outputText("Eventually, the transformation ends, and you open your eyes again. Still dizzy you try to stand back up. You look over your body, and find that you have indeed become just like a handmaiden. You push out your lips a bit and find that yes, you now have luscious black lips. Your whole body is now covered in chitin plating, in the same way as a true bees would be. Finally, you check your womanhood and find that it is now secreting honey, not unlike the bee maidens surrounding Tifa. ");
+	outputText("You are a bit surprised to find that the honey’s scent doesn’t seem to be affecting you anymore. At least not as strongly as before. Now, however, is the time for you to take on your role as Tifa’s lover and so you ask what happens next.\n\n");
 	outputText("\"<i>Now that you are part of my brood I will fill you with my eggzzz so that you can find proper incubatorzzz for them to gezzztate.</i>\"\n\n");
 	outputText("Whoa! To your surprise, her abdomen has indeed grown to double its original size while you were changing and so she explains.\n\n");
 	outputText("\"<i>I already had ahem... fertilizzzerzzz I took from back home for when the time would be right. However to truly become a queen I will need to empty my abdomen at leazzzt once. Afterward, my abdomen will only keep expanding up to the sizzze of my mother’zzz so long azzz I keep nourishing it, do not worry about the nourishment, I already zzzent an emizzzary to my zzzizzzter to obtain zzzpare dronezzz.</i>\"\n\n");
@@ -127,7 +141,21 @@ public function tifaMainMenuTalkBecomeHerHandmaidenYes():void {
 	outputText("It doesn’t take much longer for the process of being filled with your lover’s eggs to finish, and the stinger is retracted from your body. You pant, exhausted from the ordeal. Tifa is tired too, likely because it's her first time. You lean on her a little, still panting and she caresses your hair in response.\n\n");
 	outputText("\"<i>Well, we are in thizzz for the better and the worzzze. I love you [name], now and until death do uzzz part.</i>\"\n\n");
 	outputText("You do too and you know what you must do next. It's time to head out and find someone to carry these eggs, your abdomen is just this full.\n\n");
-	//code for body changes ^^
+	player.antennae.type == Antennae.BEE;
+	player.eyes.type = Eyes.BLACK_EYES_SAND_TRAP;
+	player.tailType = Tail.NONE;
+	player.arms.type = Arms.BEE;
+	player.lowerBody = LowerBody.BEE;
+	//player.tongue.type = Tongue.ELF;
+	player.wings.type = Wings.BEE_LARGE;
+	player.horns.type = Horns.NONE;
+	player.horns.count = 0;
+	player.rearBody.type = RearBody.NONE;
+	player.killCocks(-1);
+	//player.createPerk(PerkLib.,0,0,0,0) - tf immunity perk
+	player.removeAllRacialMutation();
+	outputText("\n\n");
+	CoC.instance.mainViewManager.updateCharviewIfNeeded();
 	doNext(tifaMainMenuTalkReturn);
 }
 public function tifaMainMenuTalkBecomeHerHandmaidenNo():void {

@@ -17,17 +17,418 @@ package classes.Scenes
 		{}
 		
 		public function accessChangelogMenu():void {
-			Changelog37();
+			Changelog39();
 		}
 		//zrobić do 2021 na świeta event z reniferami i nie odblokowywać go do ok. 20-24 grudnia 2021 xD
+		private function Changelog40():void {
+			clearOutput();
+			menu();
+			addButton(0, "Next", Changelog39);
+			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
+		}
 		private function Changelog39():void {
 			clearOutput();
+			outputText("(Part 2/2) <b>Version 0.8s3 (Druid Prestige Job, buffs to Gunslinger & Golemancer jobs, 3rd Floor of River Dungeon, out of combat fatigue regen + shorter intervals on resource generation, many QoL changes):</b>\n\n");
+			outputText("-Backpack prices dropped 4 times. And small/medium sized ones can be bought at Oswald pawn shop too.\n");
+			outputText("-Demonic Scythe upgrade at (pure) Celess unlocked.\n");
+			outputText("-Charge p.special base fatigue cost been lowered to 40% from 60%.\n");
+			outputText("-Kitsune sisters now are starting as 4 tailed kitsunes. Similar to Izumi, Priscilla or Akbal they can now lvl up up to lvl 37.\n");
+			outputText("-Chicken Harpy can be found from Places after PC meet her twice/used exchange option for ovi elixirs twice.\n");
+			outputText("-Temporal golems base dmg and bonus from charged core perks been doubled. Also capacity for temporal golems and golem cores bag gained from perks possible to pick before lvl 24 been increased (since golemancer should use alot of them before getting to stage of using perm ones it feels tough to just have like 5-7 of them only ready to use).\n");
+			outputText("-Battlefield now have two subareas (Boundary) and (Outer). First is for lower lvl enemies and 2nd got some tougher ones including ghost type enemies (which can give a bit of pain to pure phys fighters ;) )\n");
+			outputText("-When playing on diff higher than normal, with secondary stats higher than lowest one, NG+ or higher tier enemy regeneration will not be scaling proportional to enemy max hp increase (meaning it will be bit lower than it should be normaly).\n");
+			outputText("-Time after which Sidone can go gather wood with PC increased by 24 hours.\n");
+			outputText("-2nd Gauntlet 3rd and 4th enemy been bit tweaked to make it not so randomn or tough enemy. That too early to throw such tough cookies at PC.\n");
+			outputText("-Job: Elemental Conjuer and other three perks that unlock additional types of elementals to summon giving now 1 more slots for summoning elementals.\n");
+			outputText("-All Elemental Contract (Rank 1-31) will increase amount of summonable elementals only by 1.\n");
+			outputText("-Increase wood/stones (300 > 400, 900 > 1200) and nails (200 > 250, 600 > 750) storage sizes.\n");
+			outputText("-HB Mech can be only bought once now from Dinah after PC buy and have equipped HB armor and HB helmet.\n");
+			outputText("-HB Helmet height req. been increased to match the one for HB Armor or HB Mech: 7+ ft tall.\n");
+			outputText("-Tier 2 white/black magic spells dmg increased (from ~1,5x) to be roughly ~3x of tier 1 spells. Tier 3 spells power been normalized to both deal similar amount of dmg of ~12x dmg of tier 1 (that mean meteor shower spell lost 1/3 power to match dmg done by polar midnight).\n");
+			outputText("-Resource generation been changed from been given each hour to be given per minutes that passed (ofc that mean per minute PC in theory getting less resources but can't have tiem ingame progress by 1 minute only (least is 5 min progress). Player info page have updated amount generated per 5 min.\n");
+			outputText("-Due to option to ascend without starting harder ng+ game to perm Nine-tails Kitsune of Balance perk is req. additional thing: been on 2nd ascension (which increase difficulty of the game).\n");
+			outputText("-To get Inscribed Spellblade it's now req. to finish 1st main storyline dungeon instead of 2nd.\n");
+			outputText("-Clearing out Factory can be achieved also after bribing incubus mechanic (so PC no longer need to beat him to mark the dungeon done).\n");
+			outputText("-Motivation perk effect changed to decrease idle action chance for henchman by 30% (20%) and would also make their attacks ~50% stronger. Motivation (Ex) perk effect changed to futher decrease idle action chance by 19% (1%) and increase their attacks power by 50% each time PC reach specific lvl (up to 4 times currently). ");
+			outputText("Motivation (Su) perk effect changed to make each henchman do 2 actions in their turn and increase power of their attacks 150% of currently boost provided by previous Motivcation perks.\n");
+			outputText("-Soul Cultivation perks are now showing less often (each 9 or 12 levels). First one is moved to be avialable at lvl 0+. Pills to recover SF would give more. On top of previous fixed amount they will restore 1/2/3% of max soulfroce per pill grade. Using bottle of 10 would mean it will be even up to 10/20/30% of max SF + fixed amount gained.\n");
+			outputText("-Mana potions also would restorte 1/2/3% of max mana + fixed amount it was giving before.\n");
+			outputText("-Training Dummy stats when sparring ring is upgraded to 2nd and 3rd stage got much better both in HP, Lust caps or phys/mag defence values. Still some (many?) of you will be able to annihilate it with casual attack :(\n");
+			outputText("-Pernament Golems base damage would scale now with PC int/wis stats and it will be also doubled before adding others effects increasing dmg output.\n");
+			outputText("-Having henchman and at least one type of minions that will attack at the first part of PC turn would enable turning on simplified pre PC turn for combat in minions menu in camp. It will condense into one screen attacks of wisp, golem, elementals (normal + epic) and henchman. It will ofc make some of randomness of elemental attacks taken out to use one of basic 4 elementals types ");
+			outputText("and in case PC not have any of those will skip elementals attack turn proceeding to next minions/henchman actions. Also if PC would lack mana each minion would skip it preturn attack. So in general if someone not likes to clik up to... 5-6 times before seeing PC combat menu options could shorten it to one click to be done with all minions/helpers stuff at minor price.\n");
+			outputText("-Super Charged Core perk have additional effect of converting dmg temporal golems deal when attacking from physical to magical at cost of halfing damage.\n");
+			outputText("-Added on stats page short note when camp npc would reach max lvl it could get. So the PC will stop beat them up in order to force them to lvl up xD\n");
+			outputText("-Lumi sell mats option moved to her shop offer menu. All garage/workshop related option are under bottom row of buttons. And so the overlap of en hance of items options will no longer happen ^^\n");
+			outputText("-After getting Master Golem Maker perk there will be new stuff to buy from golemancer gobo in HXD ;)\n");
+			//3 of 11 pages
+			outputText("-Pure Peach from Minerva Oasis would restore 5% less HP (20% only), refill 5 less hunger (20) but will give much higher fatigue reductions (15 -> 1% of max fatigue + 10). Back button in garden menu will lead back to herbalism main menu not to camp actions main menu (who would want to click 1 more time to get from harvesting to making stuff, right?)\n");
+			outputText("-Controlled Breath perk effects ingame and on tooltip become unified; increase fatigue/mana/soulforce regeneration by 20% as long PC corruption is below 30 (+corruption tolerance perk bonus).\n");
+			outputText("-Temporal Golems Restructuration perk will no longer unlock option to send all temp golems to attacks instead giving more options for sending different amount of temporal golems against enemy. Also would add +5 to max limit of stored temporary stone golems. It req. also been decreased due to moving from tier 6 to 5.\n");
+			outputText("-Improved Stone Golems can be made from Epic Golem Maker not Epic Golem Maker (3rd Circle) and each Epic Golem Maker perk would increase cap for them by 1. Similary perks from Golem Army Major would start to add +1 capacity for improved stone golems instead from Golem Army General.\n");
+			outputText("-Cow Succubus/Mino Incubus could be now killed to take their demon skulls or harvested for bones. Also if req. are meet could be accessed unique sex scenes.\n");
+			outputText("-Prestige jobs accesability would be moved from lvl 42+ to 54+ (meaning it will be all perks moved 2 tiers higher with minimal stat req. changes). Slots for prestige job will start at 2 and multi bonuses to stats would be 50% higher with few jobs having % slight adjusted. Current possesed perks from prestige jobs will be kept even if PC wouldn't be able to get them after changes.\n");
+			outputText("-Epic Elementals now req. 2 elemental shards to summon not 1. All those that summoned them already with 1 shard... you damn lucky people :P\n");
+			outputText("-Golemancer goblin would sell new items when PC gain specific perks (they are meanitoned in tooltip for grey out buttons).\n");
+			outputText("-Golem army perks been moved more apart making place for additional perks + last 3 of old perks (before they got their name changed) add 1 slot for metal golem.\n");
+			outputText("-Pernament improved stone golems cost in stones been cut in half.\n");
+			outputText("-Wisp Captain perk lvl req. rised from 24 to 27. Wisp Major and Wisp Colonel perks moved up by 2 and 1 tier respectively with increase by 10 pts needed int/wis for both.\n");
+			outputText("-Each next super perk in both Hidden Job will req. to have 10 lvl more starting from lvl 0 for first Hidden Job perk itself (so the 5th one will now req. lvl 40+ not 30+ as before).\n");
+			outputText("-Added option to surrender via HP defeat. Those options would be accessable also when PC is under stun / power stun or fear effect.\n");
+			outputText("-Alcove in High Mountains will now no longer show for PC's with less than 6 pts in avian score. Also statuette that PC can pick form there will be under 'Camp Actions > Spend Time' instead of 'Inventory > Misc'. Each use of those times would take 5 min.\n");
+			outputText("-Aimozg changes to spells code including new tab in Stats to give general estimate how much damage would they deal.\n");
+			outputText("-All perks in tree of Daoist Cultivator and Body Cultivator have effects increased (more for those that are gained later on).\n");
+			outputText("-Evangeline can make Leviatan Sunscreen (Sea Dragon TF) from Orca and Dragon TF items. Alchemy menu been split between 2 subpages with all options now spread there without any additional submenus (like the one before for scylla or abyssal ink).\n");
+			outputText("-Druid job allow to undergone another (sorta) transformation: fusion with one of 4 epic elementals (water, firte, air, earth). Fusion would change PC look, disable most of physical and magical speicals that req. to have specific bodypart, if PC nopt have any range weapon equipped that allow to attack will be granted default to specific fusion base range attack option.\n");
+			outputText("-Elemental fusions would change PC sprite look to either male or female version of one of four options. (sprites by Liadri)\n");
+			outputText("-Body Cultivator's Focus & Daoist's Focus perks on melee and range weapons will be seperated with change to perk desc (so there will be possible to have 2 perks with one with suffix (M) and other (R)). For making sure nothing glitch futher please deequip both melee and range weapons then reequip them anew.\n");
+			outputText("-Aquatic Affinity perk adding now weakness to lightining damage (-100% resistance).\n");
+			outputText("-Fusing with epic elemental would remove raical bonuses and give new ones realted to specific fusion. Also would give access to passive effect + 2 specials. When Epic elemental are higher ranked it will unlock 2nd and 3rd special.\n");
+			outputText("-Jtex numerous fixes, including Neisa bug after bad end, Valeria conflicy with Jiangshi, Yeti fix.\n");
+			outputText("-Zetta fixes.\n");
+			outputText("-Liadri many small changes.\n");
+			outputText("-Fixed Bugs: Morph option at Aether Twins leading to Feed page, possibility to equip by Jiangshi PC items from melee/range weapons, armor, underwear cathegories, Sextuple Thrust cooldown frozen, Woodcutting location in Places req. 3x more visits that Quarry, White Book teaching few spells at once, penatly to acc for melee weapons applied even if PC not use deal melee weapons, ");
+			outputText("Angst Daggers not been equippable with dual wield perk, some of combat debuffs not clearing up after combat, Dinah been in false training mode when Luna is actualy training/leveling herself, error in map display for one of Den of Desire rooms, Bee Hive entrance skipping bee guards andf afterwards showing wrong desc of the room until clearing dungeon, button on 2nd page of ");
+			outputText("unique sex scenes not leading to 1st page, Mysterious Seed missing from Unequip/Misc menu\n\n");
+			outputText("<b>Version 0.8s4:</b>\n\n");
+			//outputText("-New tier 13 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+3000 max Wrath)\n");
+			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
+			//outputText("-New tier 9 strength lvl-up perk: Prestige Job: Stalker. Req. Job: Warrior and Hunter perks, 150+ str/spe. Effect: +60 to str multi and +20 to spe multi (scalable with NG tiers), +20% damage and critical damage with thrown weapon.\n");
+			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
+			//outputText("-New tier 5 wisdom lvl-up perk: Elemental Conjurer Knowledge (Ex). Req. Elemental Conjurer Knowledge and Elemental Contract Rank 4 perks, 150+ wis. Effect: .\n");
+			//outputText("-New tier 11 wisdom lvl-up perk: Elemental Conjurer Knowledge (Su). Req. Elemental Conjurer Knowledge (Ex) and Elemental Contract Rank 10 perks, 300+ wis. Effect: .\n");
+			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
+			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
+			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
+			outputText("-New tier 12 wisdom lvl-up perk: Greater shared power. Req. Elemental touch perk. Effect: Double the effect of Shared power.\n");
+			outputText("-New tier 13 wisdom lvl-up perk: Ecliptic Infusion. Req. Greater shared power perk. Effect: Your Infuse ability allows you to add and combine a corrupted or a purity normal elemental with a water, fire, earth or wind epic elemental. Doing so adds a purity or corruption scaling to your abilities.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
+			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
+			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
+			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
+			outputText("-Fixed Bugs: One of Ingnam Tavern food options having wrong price listed on menu, unique sex scenes accesable during Druid fusion\n");/*ostatni punkt changelogu//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			//outputText("-Added in current version race effects to Metamorph perk: \n");
+			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
+			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
+			//outputText("-New tier 15 sensitivity lvl-up perk: Legendary Desensitization. Req. Epic Desensitization perk and 100+ sens. Effect: Negative effects of sensitivity are reduced by 20%.\n");
+			//outputText("-New tier 20 sensitivity lvl-up perk: Mythical Desensitization. Req. Legendary Desensitization perk and 200+ sens. Effect: Negative effects of sensitivity are reduced by 25%.\n");
+			//outputText("-New TF item (by Pyromania): Troll Fig. Dropped by Corrupted Troll enemies.\n");// Using this item will turn PC into troll. Half Panda/Panda bonuses at 5/10 pts in racial score (scalable): +50/100 to max Str, +30/70 to max Tou, -5/20 to max Int.
+			//outputText("-New TF item (by Pyromania): Icy Fig. Dropped by Glacial Troll enemies.\n");// Using this item will turn PC into troll. Half Panda/Panda bonuses at 5/10 pts in racial score (scalable): +50/100 to max Str, +30/70 to max Tou, -5/20 to max Int.
+			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
+			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
+			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			//outputText("-New encounter in Glacial Rift: Melkie Huntress.\n");
+			//outputText("-New necklace (by Ormael): Necklace of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
+			//outputText("-New head jewelery/accesory/misc (by Ormael):  of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
+			//outputText("-New soulskill: Devourer. Req. ... Devour up to 400 lust and wrath from enemy transfering 50% of it back to player. Cooldown: 3 turns.\n");
+			//outputText("-New enemy possible to encounter during Bog exploration: Dark Elf Ranger - lvl 39\n");
+			//outputText("\n");cel na 0.8: dodać kitsune/salamander TF - variant name of Sionnach?
+			//outputText("\n");cel na 0.8: dodać kitsune/nekomanta TF
+			//outputText("\n");cel na 0.8: dodać siren TF
+			//outputText("-New TF item: . Gained by bringing Orc Mead to Lumi for enhancing. Using this item will turn PC into high orc. High Orc (scalable): +130 to max Str, +30 to max Tou, +10 to max Spe, -30 to max Int, +25 to max Lib, +20% to max Wrath.\n");
+			//outputText("-New TF item: . Gained by bringing Elf Ear to Lumi for enhancing. Using this item will turn PC into high elf. High Elf (scalable): -10 to max Str, -15 to max Tou, +80 to max Spe, +80 to max Int, +60 to max Wis, +30 max/min Sens, +20% to max Mana.\n");
+			outputText("-New necklace (by Ormael):  - obtained by . Cost xx0 gems. \n");
+			outputText("-New head accesory (by Ormael):  - obtained by . Cost xx0 gems. \n");
+			outputText("-New ring (by Ormael):  - obtained by . Cost xx0 gems. \n");
+			outputText("-Added in current version race effects to Metamorph perk: \n");
+			outputText("-Added in current version race effects to Metamorph perk: \n");
+			outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
+			outputText("-New event perk: . Gained by . Effects: \n");
+			outputText("-New range weapon (by Liadri):  - obtainable by giving  to Pure Celess to purify. (item properties desc).\n");
+			outputText("-New range weapon (by Liadri):  - obtainable by giving  to Corrupted Celess to corrupt. (item properties desc).\n");
+			outputText("-New tier 12 misc lvl-up perk: Chimerical Body: ... Stage. Req. Chimerical Body: Epic Stage perk and xx+ points in Internal Chimerical Disposition score. Effect: delay by another xx points appearing effect of negative HP regeneration and +5 to max Lib/Sens (scalable), +10 to max Str/Tou/Spe/Int/Wis (scalable).\n");
+			outputText("-New tier ?? misc lvl-up perk: Creationism. Req. Perfection perk. Effect: number of possible effects of transformatives +1.\n");
+			outputText("-New tier ?? misc lvl-up perk: All-Seeing. Req. Soul Powered perk. Effect: +10% max soulforce.\n");
+			outputText("-New tier ?? misc lvl-up perk: God of Steel. Req. Soul of Steel perk. Effect: +10% melee phys dmg.\n");
+			outputText("-New tier ?? misc lvl-up perk: Lady Godiva's favorite Child. Req. Blessed by Lady Godiva perk. Effect: 15% more gems from victories.\n");
+			outputText("-New tier ?? misc lvl-up perk: MEDIC!!!. Req. Surgeon perk. Effect: increases HP gains by 20%.\n");
+			outputText("-New tier ?? misc lvl-up perk: Pope. Req. Cardinal perk. Effect: -2 min libido and +5% to lust resistance.\n");				Tier 43 perks?
+			outputText("-New tier ?? misc lvl-up perk: NERD!!!. Req. President perk. Effect: +10% max mana.\n");
+			outputText("-New tier ?? misc lvl-up perk: SHIT YOU TOUCHED SASHA!!! Req. Spy's Enemy perk. Effect: +10% range phys dmg.\n");
+			outputText("-New tier ?? misc lvl-up perk: LAZY!!! Req. ZZZ perk. Effect: +20% to fatigue recovery.\n");
+			//slut line
+			outputText("-New tier ?? misc lvl-up perk: Armor. Req. Weapon perk. Effect: increasing armor proficiency. (+5% phys/mag resistance)\n");
+			outputText("-New tier ?? misc lvl-up perk: Sex Deity. Req. Sex Champion perk. Effect: +15% tease dmg.\n");
+			outputText("-New tier 1 misc lvl-up perk: . Req. History: Slut or Past Life: Slut perk. Effect: +10% max lust.\n");.
+			outputText("-New tier 4 misc lvl-up perk: . Req.  perk. Effect: +10% max lust.\n");
+			outputText("-New tier 7 misc lvl-up perk: . Req.  perk. Effect: +10% max lust.\n");
+			outputText("-New tier 12 misc lvl-up perk: . Req.  perk. Effect: +10% max lust.\n");
+			outputText("-New tier 17 misc lvl-up perk: . Req.  perk. Effect: +10% max lust.\n");
+			outputText("-New tier 30 misc lvl-up perk: . Req.  perk. Effect: +10% max lust.\n");
+			outputText("-New tier ?? misc lvl-up perk: . Req.  perk. Effect: +10% max lust.\n");
+			outputText("-New tier 1 misc lvl-up perk: . Req. History: Tactician or Past Life: Tactician perk. Effect: +10% minions/pets damage.\n");.
+			outputText("-New tier 4 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
+			outputText("-New tier 7 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
+			outputText("-New tier 12 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
+			outputText("-New tier 17 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
+			outputText("-New tier 30 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
+			outputText("-New tier ?? misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
+			outputText("\n");
+			outputText("\n");full stats bonuses not added yet to: Dragonne, Echidna, Ferret-morph, Kitshoo-morph, Scorpion-morph
+			outputText("\n");
+			outputText("\n");wolf pepper - nieużywany item chyba co można go by w wolf TF zmienić: dodaje special coś na kształt likantropii ^^
+			outputText("\n");aqua seed - item mający być siren tf item
+			outputText("\n");
+			outputText("<b>Version 0.8t:</b>\n\n");
+			outputText("-Added in current version race effects to Metamorph perk: \n");
+			outputText("\n");
+			outputText("\n");cel na 0.8(/9): może jak beda dodane nowe typy sukubów, inkubów w Blight Ridge pomyśleć nad ograniczeniem szansy na drop bibmo/bro pots tylko dla silniejszych odmian demonów jeśli bedą one wcześniej już za czesto wypadać
+			outputText("\n");cel na 0.8(/9): przy dodawaniu scen dla poteżniejszych niż zwykły inkub pamitać o scenie z incubus mechanic w D3 (ta z wybieraniem dick type w win scenie przez PC jaki ma miec inkub) - pewnie w tych inkubach powyżej minoinkuba bedzie to używane
+			outputText("\n");cel na 0.8(/9): dodać w mieście kultywatorów arene/ring na którym sie można pojedynkować z niektórymi przedstawicielami ras bedącymi soul cultivators (opcje ras do walki: goblinka, salamander, male(/lub female jeśli kanon nie pozwala na male) kitsune, scylla)
+			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
+			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
+			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");*/
+			outputText("\n\n\n");
+			outputText("Plans for future builds (I know some of them are HUGE ones but without dreams to chase how can one change?):\n");
+			outputText("-Add more soulforce options.\n");
+			outputText("-Add soulforce stuff to our lovely monk-ish mouse ^^\n");
+			outputText("-Add soulforce stuff to kitsune encounters.\n");
+			outputText("-Add Wuxia themed area and enemies.\n");
+			outputText("-Add few new options during chara creation.\n");
+			outputText("-Add option to upgrade some of the items ingame (ofc using soulforce) and generaly few new shiny things to find/buy/store/use.\n");
+			outputText("-More camp build options (involving using stones and etc.)\n");
+			outputText("-Make use of Metamorph perk (ofc all TF would be powered by soulforce ^^)\n");
 			menu();
 			addButton(0, "Next", Changelog38);
 			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
 		}
 		private function Changelog38():void {
 			clearOutput();
+			outputText("(Part 2/2) <b>Version 0.8s2 (Jiangshi mini X-pack, Bee race & Eyes of the Hunter minor changes, Twins 2nd evo & obligatory package of QoL changes/bugfixes):</b>\n\n");
+			outputText("-Eyes of the Hunter perks changes: Novice perk would show all types which enemy possess. Adept would increase crit chance against Huge, Groups, Beast or Animal-morph, Construct, Feral, Goo, True Demon type enemies by 5% and increase damage by ~10% (similar to acid attacks). Master Eyes of the Hunter will give same bonuses against Colossal, Flesh Construct, Fire/Ice/Lightning/Darkness Nature type enemies.\n");
+			outputText("-Eyes of the Hunter (Master) perk was moved to tier 3 from 2. It req. changed to Eyes of the Hunter (Expert) perk and 100+ sensitivity.\n");
+			outputText("-Numb Rocks cost reverted back to 15 gems. Efect of Rut / Heat shortening removed from them.\n");
+			outputText("-3rd Tifa sex scene account for pc having tentacle / stamen cocks or alraune lower body.\n");
+			outputText("-Expanded to 3 choices menu after finishing choosing options/bonuses in ascension menu. Can reincarnate as ususal with increased new game tier by 1 or... start anew without increased difficulty (would not let to access higher rank of some perks) at minor cost of 50 ascension perk points.\n");
+			outputText("-When enemy HP drops below 0 will be added few more words to desc of enemy health situation that would indicate pc must keep attacking enemy to win by HP.\n");
+			outputText("-Ghost type enemies become immune to bleed effects and they're 'virtualy' immune to any physical damage (them deal 1 dmg because orginal enought decent to keep fencode not likes total 0).\n");
+			outputText("-Epic/Legendary/Mythical Sensitivity perks giving now 4 times higher bonus to sensitivity.\n");
+			outputText("-Soul Arrow shop, JttE Inn in HXD now only accepts payment in spirit stones. Some of items in Golem shop also would req. spirit stones instead of gems.\n");
+			outputText("-Soul Arena free trial period ended: now you gotta pay 1, 2 or 3 spirit stones for fights there, fight will additionaly no longer have penalty of 50% less exp gains. It even giving you 200% of normal exp for defeating the same enemy outside arena. Thank you all for using that free trial ^^\n");
+			outputText("-Elemental Shard and vial of E-Ichor items worth lowered to 1 gem. Both can be exchanged for spirit stones at Moga Hen shop now and purple shards exchange give 2x more stones ^^ On more sad notes he retire from his offer tf items PC can buy somewhere else. He not gonna sell stuff other sells (totaly not like they would sell cheaper making pc go to them....totaly not that). Also he now slee much less tf items ");
+			outputText("(as some of those are not so hard to get from other vendors in Mareth). Plus some of the more worthy items he will not sell for gems but in exchange for some spirit stones.\n");
+			outputText("-Benoit shop have now 5 slots for items to sell instead of 3. All items that was before in those 3 slots been spread to 5 slots so no worry no item been discarded from our fav basilisk offer ^^\n");
+			outputText("-Windstorm Emerald cost increased from 6 to 20 gems.\n");
+			outputText("-Simplified requirements for dragon racial mutation perks.\n");
+			outputText("-Added counter how many ascensions PC already have in general stats subpage. Ignam Thief spawn chance increased from 25% to 75%.\n");
+			outputText("-Feral Imps and Raging Tentacle Beasts will not spawn when PC is below lvl 3. Only exception is in case of feral imps when PC took quests that req. to kill/capture them.\n");
+			outputText("-Harpy Womb perk would give 2 pts instead of 1 to race scores of three races related to harpies. Should make possible getting race scores for full rac3e score without need to pick mutation perks by those race PC's.\n");
+			outputText("-Blademaster perk and Flame Blade special effect work with dagger type weapons too.\n");
+			outputText("-Phoenix / Winter Wolf breath attacks have now scaling based on stats (for both str/tou as they bot more of phys than mag boosts in stats).\n");
+			outputText("-Flurry of Blows perk will make attacks been split into 2 seperate instead of one 2x stronger. Also would work with phys soulskills that can be used with first or any other weapon (but only when pc got gauntlets or not holding any weapon) so Draco Sweep and Triple Thrust+it 6/9 hit variants/\n");
+			outputText("-History/Past Life: Fighter bonus to accuracy increased by 10% up to 20%. Base melee and range attack accuracy been made even at 64%. Each level above 0 would increase acc by 6% up to 30% at lvl 6+.\n");
+			outputText("-Ring of Ambidexty acc bonus increased to 20% from 15%. Both this and Ring of deadeye aim price been lowered from 800 to 600 gems.\n");
+			outputText("-Fatigue cost of bow shooting, throwing (but not telekinesis throw) been removed. Damage scaling on range attacks has been increased by large margin.\n");
+			outputText("-Goblins assassins and warriors had their HP stat bit adjusted (to not make assassins more tanky than warriors *sweats*). Also Priscilla would no longer appear in randomn gobo pick pool when she already chilling in Soul Sense menu.\n");
+			outputText("-Aether Twins can now after evolution eat new materials: Iron ore. Also they can eat 1 new shield and 3 new gauntlet type weapons. After eating those and then all materials the can it would enable them evolving to gauntlets 2nd form. After this they can freely switch between both forms (new option in their main menu).\n");
+			outputText("-Player PC giving birth to goblin daughter(s) would increase cup / hips / ass size by 1.\n");
+			outputText("-Beautiful item discovery scene at the lake been reduced to proc once per day (some PC's due to specific progress could end up see like only that scene and no others for most of the exploration attempts at the Lake).\n");
+			outputText("-Aurora, Etna and Neisa option to spar with them is disabled when PC earlier asked any of them to assist (meaning said npc is part of the PC team). That would avoid weirdness when Aurora fight as part of PC team and also as enemy for herself.\n");
+			outputText("-Can now give Dinah some itmes to change her bodyshape: Purified Succubus Milk (tits), Bron Egg (butt), Blue Egg (hips), Reducto.\n");
+			outputText("-Three blocked by formation passages in Hidden Cave now have counter of how many more enemies (solo or groups) need to be beaten down to deactivate each formation.\n");
+			outputText("-Damage from exploring Glacial Rift have been changed to be ice damage so ice resistance would be more naturaly reducing amount of recieved damage. Base % damage is lowered to 5% of PC max HP. And fire affinity still would make PC take 2x more damage (before ice resistance reduction).\n");
+			outputText("-Tooltip for firearms button in combat menu now have ammo left counter.\n");
+			outputText("-Tease max lvl starts at 16 and would rise until lvl 24 reaching cap of lvl 40. Tease base chance to hit increased from 70% to 90% and it increase by 1% per tease level.\n");
+			outputText("-Temporal golems base damage will be scaling with int/wis by adding current value of both stats. Also it base value was increased.\n");
+			outputText("-Super Sensual perk would increase tease cap up to 70. Also each 1% above 100% chance to succesfully tease oponent will not give ~2% more lust dmg instead of ~1%. Base lust damage from tease been increased.\n");
+			outputText("-Marble can give PC 2 new items from Present option: Minotaur Horns (the same PC get from killing minotaurs) and Pack of nails.\n");
+			outputText("-Option to get internal mutation form Evangeline no longer req. her to be lvl 6.\n");
+			outputText("-Charged Core perk req. of having Apprentice Golem Maker perk was replacd with Job: Golemancer perk.\n");
+			outputText("-Perks from Beginner Golem Maker to Master Golem Maker would also increase damage of temporal golems based on cuurent int/wis.\n");
+			outputText("-Secondary Stats Modifier scaling would be different for Boss type enemies and rest of enemies. Boss one modifiers would be 10/40/200/1600% instead of 5/10/25/100%.\n");
+			outputText("-Added checks to prevent wood elfs from piloting all goblin mechs (they weren't treated as all others elfs and so they cheated their way to cockpits xD)\n");
+			outputText("-Giant Slayer mech req. for max height been increased to 5 1/2 foot and PC can have small wings (those that not allow using wing slap special) or tail.\n");
+			outputText("-None of demonic enemies (imps, true demons) can impregnate goblonoid PC (goblin/gremlin).\n");
+			outputText("-Bit lowered scaling on melee attack(s).\n");
+			outputText("-Job: Monk perk moved from tier 2 to tier 1 and have it wis req. lowered from 60 to 40.\n");
+			outputText("-Many of perks form Job: Gunslinger tree moved between perk tiers (and in many cases req. stats increased/decreased according to moving up or down). Affected perks included: Job: Gunslinger - t1 > t0, AmateurGunslinger - t1 > t2, Explosive Cartridge - t2 > t3, Expert Gunslinger - t3 > t4, Named Bullet - t3 > t5, Master Gunslinger - t5 > t6, Alchemical Cartridge - t5 > t2, Church of the gun - t6 > t1.\n");
+			outputText("-Added option under 3rd special action button in combat menu to pick few of used thrown weapons (only for those that give limited amount of them like gnol throwing axes). Each pick up will recover 5 of them but will use up player combat turn.\n");
+			outputText("-Lightning Reload perk effect expanded to include lowering fatigue cost of reloading ammo by 50%.\n");
+			outputText("-Cooldown toggle for spells been removed and some of the spells power been a bit lowered. Now cooldown option for spells will be on by default without way to turn it off.\n");
+			outputText("-Jtex with unweaving fevor implemented tag system for weapons that was in one or another way requested recently.\n");
+			outputText("-Halberd, Guandao and Urta's halberd been reclassified as Polearm type weapon instead of scythe type weapon.\n");
+			outputText("-Charge weapon spell cost been doubled but it would now also affect range weapon (unless pc got no weapon there or it's one of tomes).\n");
+			outputText("-Mechanism and Energy Core items been converted to materials stored in flags (with max storage cap of 200). For all Mechanisms and Energy Cores that PC have as items are convertable to flag value by option added to camp menu. All checks from now for those crafting material would look for flag value than items kept in PC inventory.\n");
+			outputText("-Racial paragon req. of having Job: Beast Warrior been removed.\n");
+			outputText("-Bee score for half/full bee-morph rised from 5/9 to 7/14 pts. Bonuses was also increased according to the change: +40/80% to Tou/Spe raical multi, +25/50% to Int racial multi, +0/20% ot Lib racial multi, +0/20 to min Libido.\n");
+			outputText("-Bee score now accept 2 more hair color variants and give points for: black eyes (same look as sandtrap), bee cocks, skin pattern for bees, not having any horns/read body variants.\n");
+			outputText("-Lactoblasters have been removed from Kaiba shop and placed in Mountains as remains that PC must find and bring to Tripixi for restoration.\n");
+			outputText("-From time to time Dinah can present PC with some small things (gifts?). It won't happen usualy more often that once a day. Oh and she not gonna run to notify about this like Marble, option to get smth from her for free will became avialable among her interactions options.\n");
+			outputText("-Defeat would progress time only for six not eigth hours.\n");
+			outputText("-PerksDB V2 is released, but in beta. Missing main feature of perk description, but the layout will be as such. Thoughts? -Jtecx\n");
+			outputText("-Options in Alteration of Cursed Tag: No limiter -> Your zombified body is extremely resilient to physical damage and thus grants you +40% damage reduction. Furthermore the absence of a brain limiter allows you to push your limb strength beyond their normal capacity increasing your total strength by 100% of its value at the cost of your body integrity, taking light libido weakening on each attack. ");
+			outputText("This is a togglable ability. / Unliving Leech -> Double the benefits of Life Leech and the power cap on Energy harvested from Energy Dependant. / Undead resistance -> Gain Immunity to Cold, Poison and Fatigue damage. / Vital Sense -> You sense and see your opponents strong vital points which grants you increased critical damage. Increase critical strike damage multiplier by 1 time. / ");
+			outputText("Zombified -> You are immune to mental attacks that would affect living sane beings. Furthermore you have unlimited fatigue.\n");
+			outputText("-Vladimir Regalia (by Liadri) added to Kaiba temporaly. It's light armor with +100% damage dealt from grapple and Dark ability, Player suffer from 5% degeneration during the day but regenerate 5% faster at night instead.\n");
+			outputText("-In mutation racial perks all perks with suffixes (Evolved) and (Final Form) been renamed to (Primitive) and (Evolved) respectively.\n");
+			outputText("-Added option to disable Chi Chi like few other npc's.\n");
+			outputText("-After defeating true demon male/herm/female enemy or minotaur Jiangshi PC could access one of three unique sex scenes.\n");
+			outputText("-Shouldra attack with magic missiles can apply now weak dispell effect if pc got one of four white/black magic buffs casted.\n");
+			outputText("-Added option to surrender when PC is bound and can only wait or struggle (for cases when PC is locked into never ending cycle of struggling with enemy).\n");
+			outputText("-Feeding as Jiangshi would cure up to 5 pts of 'Weakened' and 'Drained' type curse on libido stat.\n");
+			outputText("-Asura Form second special req. 3rd ot 2nd perk in this job.\n");
+			outputText("-Chi Chi training posisble for Yuki Onna/Jinagshi PC's (the one part where it rise stat for max HP, which normaly would be Tou not Int/Lib)\n");
+			outputText("-Jtex changes: code simplification on elemental summoning/ranking up, added in a notice for players using mutationdb first time and just seeing ??? not knowing they can toggle it to be visible, moving Gen/Elem to combat desc, Perk Database v2, fix for fire snail tf glitches.\n");
+			outputText("-Zetta certificated fix for raiju skin pattern becoming kitsune skin pattern.\n");
+			outputText("-Fixes by Daikael.\n");
+			outputText("-Kekvit Irae changes & fixes.\n");
+			outputText("-The long awaited kitsune bugfix (corrupted/enlightned perm) has finally happened, thanks to Kekvit!\n");
+			outputText("-Celess corruption was tweaked to be more in line with original idea, solution implemented by Lia, Kekvit. Imported back into main by Jtecx.\n");
+			outputText("-Elven Hunting party should no longer steal your weapon and keep it until next encounter.\n");
+			outputText("-Many minor type/parser errors fixed here and there.\n");
+			outputText("-Fixed Bugs: sell metal plates at Lumi errors, clicking NO in Dinah rulette sending to boss tf, Grey Sage prestige job still been accessable, gremlin ale giving skin tones not matching with req. for that race score, not all winter scarfs giving ice resistance, Crinos Shape and Asura Form autocast not checking if pc got enough wrath to sustain them during first turn, Gathering Chitin and Green Gel repeat quest ");
+			outputText("in adventure guild never refreshing, Patchouli sending PC to Glacial Rift not procing dmg from cold, Pack of nails item not dropping from any goblin enemy at all, SAT Googles craft option using incorect amount of nails, Bad End in River Dungeon before getting Basic Leadership perk causing Neisa to stay with PC, getting goblonoid blood perk via use of tf items not activating goblin accesories effects, ");
+			outputText("Wrathless necklace not giving spellpower bonus\n\n");
+			outputText("(Part 1/2) <b>Version 0.8s3 (Druid Prestige Job, buffs to Gunslinger & Golemancer jobs, 3rd Floor of River Dungeon, out of combat fatigue regen + shorter intervals on resource generation, many QoL changes):</b>\n\n");
+			outputText("-Added in current version race effects to Metamorph perk: Frost Wyrm\n");
+			outputText("-New tier 5 misc lvl-up perk: Golem Army Junior Lieutenant. Req. Master Golem Maker perk and 110+ int/wis. Effect: +1/2 to max limit stored of permanent/temporary stone golems.\n");
+			outputText("-New tier 7 misc lvl-up perk: Advanced Golemancy Theory. Req. Grand-Master Golem Maker perk, 140+ in int+wis. Effect: Enable option to make steel golems and store 1 such golem.\n");
+			outputText("-New tier 9 misc lvl-up perk: Temporal Golems Restructuration (Ex). Req. Temporal Golems Restructuration and Grand-Master Golem Maker perks, 160+ in int+wis. Effect: Allow to use option of send all temporary golems to attack in one turn. Adding option to make 20 temporary golems at once and shorten a bit time to make 1 temporary golem. (+10 to max limit of stored temporary stone golems)\n");
+			outputText("-New tier 9 wisdom lvl-up perk: Prestige Job: Druid. Req. Elemental Contract Rank 7 and Archmage perks, 200+ wis. Effect: You've trained in prestige art of fusing with elementals. (allow to fuse with one of four basic epic elementals) (+50% tou multi and +70% wisdom multi)\n");
+			outputText("-New tier 10 wisdom lvl-up perk: Shared power. Req. Prestige Job: Druid perk. Effect: Each elementalist perk learned gives a +10% multi bonus to health, damage and spell power when in an infused state.\n");
+			outputText("-New tier 11 wisdom lvl-up perk: Elemental touch. Req. Shared power perk. Effect: Unarmed strikes and elemental skills inflict a status to your victim when infused respectively Frostbite, Burn, Acid and Bleed.\n");
+			outputText("-New tier 13 misc lvl-up perk: Golem Army Lieutenant Colonel. Req. Golem Army Major, Epic Golem Maker 3rd Circle perks and 210+ int/wis. Effect: +1/1/5/10 to max limit stored of pernament steel and (permanent improved/normal)/temporary stone golems.\n");
+			outputText("-New tier 14 misc lvl-up perk: Legendary Golem Maker. Req. Epic Golem Maker (3rd Circle) perk and 225+ int/wis. Effect: Your proficiency in making golems allows to make stronger golems with higher ranked upgrades. Also allow to make and store 1 improved steel golem.\n");
+			outputText("-New tier 15 misc lvl-up perk: Golem Army Colonel. Req. Golem Army Lieutenant Colonel, Legendary Golem Maker perks and 235+ int/wis. Effect: +1/1/1/6/12 to max limit stored of pernament (improved/normal) steel and (permanent improved/normal)/temporary stone golems.\n");
+			outputText("-New tier 16 misc lvl-up perk: Legendary Golem Maker (2nd Circle). Req. Legendary Golem Maker perk and 250+ int/wis. Effect: Your pernament golems mana efficiency is improved (20% less of mana used before adding effect of upgrades that can lower it even lower). Allow to store 1 more improved steel golem.\n");
+			outputText("-New tier 17 misc lvl-up perk: Golem Army Brigadier General. Req. Golem Army Colonel, Legendary Golem Maker (2nd Circle) perks and 260+ int/wis. Effect: +1/1/1/7/14 to max limit stored of pernament (improved/normal) steel and (permanent improved/normal)/temporary stone golems.\n");
+			outputText("-New event perk: Affinity (Gnome). Gained by fusing with epic earth elemental. Effects: Gain a boon based on the terrain, abundance of plants grants regeneration 15% while rocky ground gives +20% Damage reduction. Aquatic or snowy terrain gives nothing.\n");
+			outputText("-New event perk: Affinity (Ignis). Gained by fusing with epic fire elemental. Effects: +100% fire damage dealt +100% ice damage taken, takes massive damage (5% max HP) per round while underwater.\n");
+			outputText("-New event perk: Affinity (Sylph). Gained by fusing with epic air elemental. Effects: When outdoors you are considered to be permanently flying, allowing you to use great dive and flying skills at will. Useless underwater.\n");
+			outputText("-New event perk: Affinity (Undine). Gained by fusing with epic water elemental. Effects: Can breath underwater and gain +50 to speed and spell power while underwater. Weak to electricity (-100% resistance).\n");
+			outputText("-New super perk: Munchkin@Gym. Gained by having merely 1 super perk, having 'Deity Job: Munchkin' super munchkin perk, lvl 105+. Effect: +25% to multi Str/Tou/Spe/Inte/Wis/Lib multi, +100 to Sens, increase by 5% caps for mutagen, alchemic, knowledge multi.\n");
+			outputText("-New head jewelery (by Liadri): Jiangshi Curse Tag - Given after PC became Jiangshi. Cost 400 gems. +20% to Strength, Toughness, Libido and +80 Sensitivity.\n");
+			outputText("-New enemies: Ice/Lightning/Darkness Elementals. Elementals are lvl 26/29/32/35 and could be found in 3rd strata of River Dungeon.\n");
+			outputText("-New camp structure: Arcane Circle Elemental Energy Conduits Upgrade. Req. at least 1st arcane circle, 3 stones, 3 elemental shards, 150 mana. PC adds basic elemental energy conduit to arcane circle allowing to convert elemental shards into energy stored directly into circle(s). After this there are next upgrade stages that futher expand cap of stopred energy. It can be used to rank up epic tier elementals.\n");
+			outputText("-New option in Summon menu for elemental conjuer PC - conversion of elemental shards into energy stored in the arcane circle. 1 shard adds 400 energy and most basic conduit can store up to 600 energy. Over the cap energy form converted shards is lost.\n");
+			outputText("-1 new achievment.\n");
+			outputText("-Hidden Job: Blood Demon super perks would each give +10% of maxOver HP instead of +10x Tou/Int of maxOver HP.\n");
+			outputText("-Aether Twins evolutions now need to be started manualy from seperate menu than been part of feeding them weapons.\n");
+			outputText("-Jiangshi PC aside not able to equip melee/range weapons, shields, armors and underwear will now not be able to equip two more items types: head jewelry and vehicles.\n");
+			outputText("-Ingnam Thiefs post fight win options and giving gems scenes would take less time: from 1 hour down to 15 minutes. Gems reward for beating them increased a bit too.\n");
+			outputText("-Exploring Ingnam would also take only 15 minutes. Working at farm could make PC gain 10 not 15 fatigue and gain 5 more gems. Trading Post can buy items form PC too now but at 1/3 of it orginal price (that not the price they sell those items at).\n");
+			outputText("-New items added in Ingnam: Heal Pill, Incese of Wisdom, Agility Elixir, ManUp Beer added to trading post; Healing herb, Moonlight grass added to alchemist, Ringtail fig to Black Market.\n");
+			outputText("-Ignam elders will never again cause PC to loose weapon during trip to Mareth ^^\n");
+			outputText("-Luna talk scenes takes 15 min now and not sends PC back to main camp menu. In choice after nuring added lust req. for 1st option that will be greyed out if pc lust is too low.\n");
+			outputText("-Charge special will be unusable if PC not have enough fatigue to use it.\n");
+			outputText("-Added affecion/addition gains on first milestone scene with Marble. Added her Affection on Stats page (NPC's subpage).\n");
+			outputText("-Tainted Magazine perk increase cost of reload by 2 (down from 10). Default reload cost decreased from 20 to 4.\n");
+			outputText("-Job: Gunslinger, Amateur Gunslinger, Expert Gunslinger, Master Gunslinger perks increase fatigue recovery by 1 each. Perks Alchemical Cartridge and Church of the gun by 2/3. Both perks for scaling dmg based on int/wis are also switched.\n");
+			outputText("-Removed some unneded stats tracked on combat subpage.\n");
+			outputText("-Konstantin and Jojo talk options takes each 5 min now. Jojo training counter added to stats page.\n");
+			outputText("-Diana combat use of Heal having now cooldown of 2 turns (so she will no longer ends keep healing herself when below 20% of HP until running out of the mana).\n");
+			outputText("-Shouldra recruitment moved from morning to time during the day (between 10 and 18) to prevent some weirdness with other events triggering at the morning.\n");
+			outputText("-Added out of combat fatigue recovery. In combat fatigue recovery due to that been increased twicefold. Both fatigue recovery rates can be checked on stats page / combat subpage.\n");
+			outputText("-Imp Skulls, Feral Imp Skulls, Minotaur Horns and Demon Skulls could be now stored in special bag given at joining / promotion in Adventure Guild. Adventures with Copper plate can store in it two items and those that have already Iron plate can store 4 types of items. In both cases bag limit is 10 items of the same type. PC can freely put in and take out them from the bag.");
+			outputText("When turning in one of those four quest items they will be first taken form quest itme bag and then if PC not have enough of them in bag from inventory.\n");
+			outputText("-Fletching table accessable at Elven Village. Allow to: improve bow string. Each of those options increase damage of shoot arrows and are act like multiplier bonuses that can stack on each other.\n");
+			outputText("-Added option to put in golem cores into bag for cores without need to first make temporal golem and then using it.\n");
+			outputText("-Snippler remains moved from Deepwoods to Plains, M1 Cerberus remains moved to Swamp from Forest and Desert Eagle remains req. lvl 6+ to found them at the Desert.\n");
+			outputText("-Counters for all materials (wood, stones, nails, etc.) would be visible at all times.\n");
+			outputText("-Forest area been split into two that have only partialy shared encounters. Exploring both count toward one shared counter of forest exploration.\n");
+			outputText("-Slight shuffling buttons in explore menu with adding greyed out buttons telling how to unlock that area (at least which area to explore to get it but not telling min lvl for that - that would be too easy would it?)\n");
+			outputText("-Selected enemies in Forest/Deepwoods area got either slight decrease in lvl or increased lvl (with buffed a bit stats).\n");
 			menu();
 			addButton(0, "Next", Changelog37);
 			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
@@ -103,7 +504,6 @@ package classes.Scenes
 			outputText("-Some of cases when new 'pregnancy' been forcefully replacing existing been changed to only happen when pc is not pregnant. Included/affected enemies or npc's: Zenji, Nightmare rape event (Celess), Unicorn sex (Celess), Valeria (her stuffing PC holes with goo), Infected Hellhound stuffing PC with worms\n");
 			outputText("-Numb Rocks cost increased from 15 to 75 gems. Aside current effect they gained new effect: to decrease up to 24 hours of Heat or/and Rut duration. Disfunction effect can't trigger anymore if pc is in heat/rut.\n");
 			outputText("-Charging move now scale on both str and spe and both scalings are pretty high due to move having cooldown. Now it should be packing similar or bit more punch than base melee attacks.\n");
-			//7 page of 11
 			outputText("-Evangeline can change Abyssal Ink to it grey/white variants (similary like for scylla ink it's connected to female/herm/male varaint of that tf item). Cost and req. additional items are the same as for black ink.\n");
 			outputText("-Zetta refactored/renovated whole way transformations and metamorph are handle under the hood steamlining both systems. IT'S MASSIVE WORK so be kind to Zetta for that long and painful work done.\n");
 			outputText("-Dyes not working on permament races. (by Liadri)\n");
@@ -114,245 +514,34 @@ package classes.Scenes
 			outputText("bad-end, crash in trying to access Fetishes submenu in setting without loaded save, sphinx race not giving access to Cat-like Nimbleness perks, wrath been drained on Pyre Burst instead of Pyre Burst (Ex), Wendigo psychosis countdown counter been frozen, Hex magic spells cooldowns been frozen, one of Nightmare attacks giving Dodge error msg, still more than a few TF items ignoring perm TF's ");
 			outputText("immunity to been TF'd, Tamani brood giving options for sex even for dickless PC's, Kid A training locked when above 90 fatigue, Mighty Fist not gained in Chi Chi training, putting imp skulls on the wall, inscribed spellblade not working with multiattacks, two aerial combat perks not extending duration of flight by natural means (wings), Fera first halloween event not triggering if pc had permed ");
 			outputText("one of two fera perks from 1st encounter, 2nd fera event not happening when triggered due to using Eternal Holiday setting, hiring Luna in recruit scene that loop not taking gems, Blood Spells/Soulskills giving HP instead of draining it on cast, curing Jiangshi looping and not ending, corrupted glades vine option changing eye color of tf immune races, some of the shields that aren't typical ones ");
-			outputText("been displayed as default shield in chara viewer, goblin power bracer buff not been applied after crafting, glacial rift debuff healing PC instead of damaging slowly\n");
-			outputText("<b>Version 0.8s2:</b>\n\n");
-			outputText("-Added in current version race effects to Metamorph perk: Winter Wolf, Cave Wyrm\n");
+			outputText("been displayed as default shield in chara viewer, goblin power bracer buff not been applied after crafting, glacial rift debuff healing PC instead of damaging slowly\n\n");
+			outputText("(Part 1/2) <b>Version 0.8s2 (Jiangshi mini X-pack, Bee race & Eyes of the Hunter minor changes, Twins 2nd evo & obligatory package of QoL changes/bugfixes):</b>\n\n");
+			outputText("-Added in current version race effects to Metamorph perk: Winter Wolf, Cave Wyrm, Mouse, Hinezumi, Cyclop, Gazer\n");
+			outputText("-New tier 0 misc lvl-up perk: Cursed Tag. Req. Jiangshi race (20+ pts in score). Effect: Through arcane study, you've begun to understand the magical working of your cursed tag, allowing you to improve your abilities by altering some of the unholy text. This allows you to add one power from a list of abilities. (Option is located in misc actions subsection of camp actions)\n");
+			outputText("-New tier 0 misc lvl-up perk: Improved Cursed Tag. Req. Jiangshi race (20+ pts in score) and Cursed Tag perk. Effect: You may keep 2 undead powers active at all times.\n");
+			outputText("-New tier 0 misc lvl-up perk: Greater Cursed Tag. Req. Jiangshi race (20+ pts in score) and Improved Cursed Tag perk. Effect: You benefit from all undead powers at all times.\n");
 			outputText("-New tier 2 sensitivity lvl-up perk: Eyes of the Hunter (Expert). Req. Eyes of the Hunter (Adept) and 75+ sensitivity. Effect: Increase crit chance against Giant, Large Groups, Elemental, Ghost, Plant, Fire/Ice/Lightning/Darkness Vulnerability type enemies by 5% and increase damage by ~10% (similar to acid attacks).\n");
+			outputText("-New tier 3 wisdom lvl-up perk: Tainted Magazine. Req. Amateur Gunslinger perk, 55+ wis, 50+ tou, 45+ spe. Effect: Increase reload cost by 10 and doubles max ammo (200% of base ammo count).\n");
+			outputText("-New tier 4 wisdom lvl-up perk: Silver for monsters. Req. Expert Gunslinger perk, 70+ wis, 65+ tou and 60+ spe. Effect: Firearms deals 20% extra damage and 50% increased critical damage to demons and their corrupted servants.\n");
 			outputText("-New tier 4 sensitivity lvl-up perk: Eyes of the Hunter (Grand Master). Req. Eyes of the Hunter (Master) and 125+ sensitivity. Effect: Increase crit chance against God, Boss type enemies by 5% and increase damage by ~10% (similar to acid attacks).\n");
 			outputText("-New tier 5 sensitivity lvl-up perk: Eyes of the Hunter (Ex). Req. Eyes of the Hunter (Novice) and 75+ sensitivity Effect: Allowing you to be able to fight much higher level enemeis than you as long your sensitivtiy is high enough. (increase by 1 lvl (up to 30) per 25 sensitivity cap on lvl diff after which attacks deal 1 dmg to enemy)\n");
+			outputText("-New tier 5 wisdom lvl-up perk: Lock and load. Req. Expert Gunslinger perk, 80+ wis, 75+ tou and 70+ spe. Effect: You gained decreased accuracy penalty (-5%) for multi attacks and slight increased firerate (+1 attack per 2 attacks).\n");
+			outputText("-New tier 6 wisdom lvl-up perk: Primed Clip Warp. Req. Tainted Magazine perk, 100+ wis, 95+ tou, 90+ spe. Effect: Triples max ammo (600% of base ammo count) and give 25% chance to not use ammo after each single attack.\n");
 			outputText("-New tier 7 sensitivity lvl-up perk: Eyes of the Hunter (Su). Req. Eyes of the Hunter (Ex) and 75+ sensitivity. Effect: Allowing you to increase critical chance and overeal damage dealt to enemies (all with specific type that eyes of hunter allow to recognize) based on how high is sensitivty. (+1% crit chance/+2% damage per 5 sensitvity up to 95%/190% bonus)\n");
 			outputText("-New tier 15 wisdom lvl-up perk: Stronger Elemental Bond (Su). Req. Stronger Elemental Bond (Ex) and Elemental Contract Rank 16 perks, 400+ wis. Effect: Lower by 60 needed mana to sustain active elemental in combat and +12 mana regeneration.\n");
 			outputText("-New tier 23 wisdom lvl-up perk: Strongest Elemental Bond (Ex). Req. Strongest Elemental Bond and Elemental Contract Rank 24 perks, 600+ wis. Effect: Lower by 80 needed mana to sustain active elemental in combat and +16 mana regeneration.\n");
 			outputText("-New tier 27 wisdom lvl-up perk: Strongest Elemental Bond (Su). Req. Strongest Elemental Bond (Ex) and Elemental Contract Rank 28 perks, 700+ wis. Effect: Lower by 90 needed mana to sustain active elemental in combat and +18 mana regeneration.\n");
+			outputText("-New mutation perk: Gazer Eye. Req. having free eye mutation slot, having monoeye, 2+ eyestalks and gazer score 4+. Effects: Keep true seeing at all times and empower gaze attacks. +5% int multi.\n");
+			outputText("-New mutation perk: Gazer Eye (Primitive). Req. having Gazer Eye perk, having monoeye, 4+ eyestalks and gazer score 8+. Effects: Keep true seeing at all times, empower gaze attacks and empower your ability to cast many spells as a Gazer if available (each part of split spell deal 30% not 20% of orginal spell power). +5% lib multi, + 10& int multi.\n");
+			outputText("-New mutation perk: Gazer Eye (Evolved). Req. having Gazer Eye (Primitive) perk, having monoeye, 6+ eyestalks and gazer score 12+. Effects: Keep true seeing at all times, empower gaze attacks, further empower your ability to cast many spells as a Gazer if available (each part of split spell deal 50% not 20% of orginal spell power) and increase spell critical hit chance by 10%. +5% lib multi, + 10& int multi.\n");
 			outputText("-New consumable (by Ormael/Pyromania): Numb Candies. Obtained when giving Numb Rock to Lumi for enhance. Effect: Shorten Heat/Rut duration by 24 hours. If duration is 24 hours or less will instead shorten duration to 1 hour. Also have minor lust reducing effect.\n");
-			outputText("-Eyes of the Hunter perks changes: Novice perk would show all types which enemy possess. Adept would increase crit chance against Huge, Groups, Beast or Animal-morph, Construct, Feral, Goo, True Demon type enemies by 5% and increase damage by ~10% (similar to acid attacks). Master Eyes of the Hunter will give same bonuses against Colossal, Flesh Construct, Fire/Ice/Lightning/Darkness Nature type enemies.\n");
-			outputText("-Eyes of the Hunter (Master) perk was moved to tier 3 from 2. It req. changed to Eyes of the Hunter (Expert) perk and 100+ sensitivity.\n");
-			outputText("-Numb Rocks cost reverted back to 15 gems. Efect of Rut / Heat shortening removed from them.\n");
-			outputText("-3rd Tifa sex scene account for pc having tentacle / stamen cocks or alraune lower body.\n");
-			outputText("-Expanded to 3 choices menu after finishing choosing options/bonuses in ascension menu. Can reincarnate as ususal with increased new game tier by 1 or... start anew without increased difficulty (would not let to access higher rank of some perks) at minor cost of 50 ascension perk points.\n");
-			outputText("-When enemy HP drops below 0 will be added few more words to desc of enemy health situation that would indicate pc must keep attacking enemy to win by HP.\n");
-			outputText("-Ghost type enemies become immune to bleed effects.\n");
-			outputText("-Epic/Legendary/Mythical Sensitivity perks giving now 4 times higher bonus to sensitivity.\n");
-			outputText("-Soul Arrow shop, JttE Inn in HXD now only accepts payment in spirit stones. Some of items in Golem shop also would req. spirit stones instead of gems.\n");
-			outputText("-Soul Arena free trial period ended: now you gotta pay 1, 2 or 3 spirit stones for fights there, fight will additionaly no longer have penatly of 50% less exp gains. Thank you all for using that free trial ^^\n");
-			outputText("-Jtex changes: code simplification on elemental summoning/ranking up, added in a notice for players using mutationdb first time and just seeing ??? not knowing they can toggle it to be visible, moving Gen/Elem to combat desc.\n");
-			outputText("-Kekvit Irae changes & fixes.\n");
-			outputText("-Many minor type/parser errors fixed here and there.\n");
-			//outputText("-New tier 11 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+3000 max Wrath)\n");
-			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
-			//outputText("-Dragon and Kitsune racial perks unlock been limited now by New Game tier in which PC is currently. Those that get all three 3 perks for dragons in NG or NG+... well you lucky until next ascension you not need worry on limits to get all 3 perklines for dragons.\n");
-			//outputText("-New event perk: Munchkin@Gym. Gained by having merely 1 super perk, having 'Deity Job: Munchkin' super munchkin perk, lvl 96+. Effect: +25% to multi Str/Tou/Spe/Inte/Wis/Lib multi, +100 to Sens, \n");
-			//outputText("-New tier 7 strength lvl-up perk: Prestige Job: Stalker. Req. Job: Warrior and Hunter perks, 150+ str/spe. Effect: +60 to str multi and +20 to spe multi (scalable with NG tiers), +20% damage and critical damage with thrown weapon.\n");
-			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
-			//outputText("-New tier 5 wisdom lvl-up perk: Elemental Conjurer Knowledge (Ex). Req. Elemental Conjurer Knowledge and Elemental Contract Rank 4 perks, 150+ wis. Effect: .\n");
-			//outputText("-New tier 11 wisdom lvl-up perk: Elemental Conjurer Knowledge (Su). Req. Elemental Conjurer Knowledge (Ex) and Elemental Contract Rank 10 perks, 300+ wis. Effect: .\n");
-			//outputText("-New enemies: Ice/Lightning/Darkness Elementals. Elementals are lvl 26/29/32/35 and could be found in 3rd strata of River Dungeon.\n");
-			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
-			outputText("-Elemental Shard and vial of E-Ichor items worth lowered to 1 gem. Both can be exchanged for spirit stones at Moga Hen shop now and purple shards exchange give 2x more stones ^^ On more sad notes he retire from his offer tf items PC can buy somewhere else. He not gonna sell stuff other sells (totaly not like they would sell cheaper making pc go to them....totaly not that). Also he now slee much less tf items ");
-			outputText("(as some of those are not so hard to get from other vendors in Mareth). Plus some of the more worthy items he will not sell for gems but in exchange for some spirit stones.\n");
-			outputText("-Benoit shop have now 5 slots for items to sell instead of 3. All items that was before in those 3 slots been spread to 5 slots so no worry no item been discarded from our fav basilisk offer ^^\n");
-			outputText("-Windstorm Emerald cost increased from 6 to 20 gems.\n");
-			outputText("-Glacial Rift damage ticks from cold climate would be 50% lower when PC is in combat (tick at the exploration been unchanged).\n");
-			outputText("-Simplified requirements for dragon racial mutation perks.\n");
-			outputText("-Option to get internal mutation form Evangeline no longer req. her to be lvl 6.\n");
-			outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
-			outputText("-Added counter how many ascensions PC already have in general stats subpage. Ignam Thief spawn chance increased from 25% to 75%.\n");
-			outputText("-Feral Imps and Raging Tentacle Beasts will not spawn when PC is below lvl 3. Only exception is in case of feral imps when PC took quests that req. to kill/capture them.\n");
-			outputText("-Harpy Womb perk would give 2 pts instead of 1 to race scores of three races related to harpies. Should make possible getting race scores for full rac3e score without need to pick mutation perks by those race PC's.\n");
-			outputText("-Blademaster perk and Flame Blade special effect work with dagger type weapons too.\n");
-			outputText("-Phoenix / Winter Wolf breath attacks have now scaling based on stats (for both str/tou as they bot more of phys than mag boosts in stats).\n");
-			outputText("-Flurry of Blows perk will make attacks been split into 2 seperate instead of one 2x stronger. Also would work with phys soulskills that can be used with first or any other weapon (but only when pc got gauntlets or not holding any weapon) so Draco Sweep and Triple Thrust+it 6/9 hit variants/\n");
+			outputText("-New consumable (by Daikael): Ambrosia. Obtained by giving Sand Mother Bee Honey and 25 gems. Effect: As Pure Honey item but without TF body effect.\n");
+			outputText("-New necklace (by Liadri): Cow bell - drop after bgeating lacta bovina or minotaur enemies. Cost 1500 gems. Raise milk productivity by 50% and immunise players to the negative effects of minotaur cum addiction as if a cow girl. If the player is a cowgirl, raise maximum strength and libido by 20%.\n");
+			outputText("-New vehicle (by Ormael): Howling Banshee Mech - buyable at Dinah Rulette. Cost 2000 gems. Can't be used by character shorter than 7 ft. Would increase Armor and Magic Resistance by 15 and giving +15%/+10%/+25% to str/tou/spe multi. ");
+			outputText("When used with any ayo armor it would increase soulforce drain from armor by 60 units, increase soulforce stored and usable by ayo armor by 1,000 and boost mech meele/range weapon damage by 25%. Can be upgraded by using blueprint and materials (by PC goblin or any other capable to do this goblin npc).\n");
 			outputText("-New material: Iron ore. Costs 40 gems. Minable in Quarry.\n");
-			outputText("-History/Past Life: Fighter bonus to accuracy increased by 10% up to 20%. Base melee and range attack accuracy been made even at 64%. Each level above 0 would increase acc by 6% up to 30% at lvl 6+.\n");
-			outputText("-Ring of Ambidexty acc bonus increased to 20% from 15%. Both this and Ring of deadeye aim price been lowered from 800 to 600 gems.\n");
-			outputText("-Fatigue cost of bow shooting, throwing (but not telekinesis throw) been removed. Scaling on range attacks been increased.\n");
-			outputText("-Goblins assassins and warriors had their HP stat bit adjusted (to not make assassins more tanky than warriors *sweats*). Also Priscilla would no longer appear in randomn gobo pick pool when she already chilling in Soul Sense menu.\n");
-			outputText("-Aether Twins can now after evolution eat new materials: Iron ore. Also they can eat 1 new shield and 3 new gauntlet tpye weapons. After eating those and then all materials the can it would enable them evolving to gauntlets 2nd form. After this they can freely switch between both forms (new moption in their main menu).\n");
-			outputText("-Player PC giving birth to goblin daughter(s) would increase cup / hips / ass size by 1.\n");
-			outputText("-Beautiful item discovery scene at the lake been reduced to proc once per day (some PC's due to specific progress could end up see like only that scene and no others for most of the exploration attempts at the Lake).\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
-			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
-			outputText("-\n");//Mansion Kitsunes, ?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
-			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
-			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-Fixed Bugs: sell metal plates at Lumi errors, clicking NO in Dinah rulette sending to boss tf, Grey Sage prestige job still been accessable, gremlin ale giving skin tones not matching with req. for that race score, not all winter scarfs giving ice resistance, Crinos Shape and Asura Form autocast not checking if pc got enough wrath to sustain them during first turn, Gathering Chitin and Green Gel repeat quest ");
-			outputText("in adventure guild never refreshing, Patchouli sending PC to Glacial Rift not procing dmg from cold, Pack of nails item not dropping form any goblin enemy at all\n");/*ostatni punkt changelogu
-			//outputText("-Added in current version race effects to Metamorph perk: \n");
-			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
-			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
-			//outputText("-New tier 15 sensitivity lvl-up perk: Legendary Desensitization. Req. Epic Desensitization perk and 100+ sens. Effect: Negative effects of sensitivity are reduced by 20%.\n");
-			//outputText("-New tier 20 sensitivity lvl-up perk: Mythical Desensitization. Req. Legendary Desensitization perk and 200+ sens. Effect: Negative effects of sensitivity are reduced by 25%.\n");
-			//outputText("-New TF item (by Pyromania): Troll Fig. Dropped by Corrupted Troll enemies.\n");// Using this item will turn PC into troll. Half Panda/Panda bonuses at 5/10 pts in racial score (scalable): +50/100 to max Str, +30/70 to max Tou, -5/20 to max Int.
-			//outputText("-New TF item (by Pyromania): Icy Fig. Dropped by Glacial Troll enemies.\n");// Using this item will turn PC into troll. Half Panda/Panda bonuses at 5/10 pts in racial score (scalable): +50/100 to max Str, +30/70 to max Tou, -5/20 to max Int.
-			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
-			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
-			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
-			outputText("-New tier 5 misc lvl-up perk: Deity Job: Munchkin Req. perks Job: All-Rounder, Job: Barbarian, Job: Dervish, Job: Enchanter, Job: Eromancer, Job: Hunter, 150+ str/tou/spe/int/wis, 90+ lib Effects: +25 to max str/tou/spe/int/wis, +15 to max lib (all scalable with NG tiers), ");
-			outputText("+150 to max HP, +50 to max lust, +100 to max Fatigue, +10% to max soulforce, allow to take one more prestige job.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			//outputText("-New vehicle (by Ormael): Howling Banshee Mech - buyable at Kaiba shop in Tel'Adre. Cost 1500 gems. Would increase Armor and Magic Resistance by 15 and giving +15%/+10%/+25% to str/tou/spe multi. ");
-			//outputText("When used with any ayo armor it would increase soulforce drain from armor by 60 units, increase soulforce stored and usable by ayo armor by 1,000 and boost mech meele/range weapon damage by 25%. Can be upgraded by using blueprint and materials (by PC goblin or any other capable to do this goblin npc).\n");
-			//outputText("-New encounter in Glacial Rift: Melkie Huntress.\n");
-			//outputText("-New necklace (by Ormael): Necklace of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
-			//outputText("-New head jewelery/accesory/misc (by Ormael):  of  - buyable at Kaiba shop in Tel'Adre. Cost 00 gems. .\n");
-			//outputText("-New soulskill: Devourer. Req. ... Devour up to 400 lust and wrath from enemy transfering 50% of it back to player. Cooldown: 3 turns.\n");
-			//outputText("-New enemy possible to encounter during Bog exploration: Dark Elf Ranger - lvl 39\n");
-			//outputText("\n");cel na 0.8: dodać kitsune/salamander TF - variant name of Sionnach?
-			//outputText("\n");cel na 0.8: dodać kitsune/nekomanta TF
-			//outputText("\n");cel na 0.8: dodać siren TF
-			//outputText("-New TF item: . Gained by bringing Orc Mead to Lumi for enhancing. Using this item will turn PC into high orc. High Orc (scalable): +130 to max Str, +30 to max Tou, +10 to max Spe, -30 to max Int, +25 to max Lib, +20% to max Wrath.\n");
-			//outputText("-New TF item: . Gained by bringing Elf Ear to Lumi for enhancing. Using this item will turn PC into high elf. High Elf (scalable): -10 to max Str, -15 to max Tou, +80 to max Spe, +80 to max Int, +60 to max Wis, +30 max/min Sens, +20% to max Mana.\n");
-			outputText("-New necklace (by Ormael):  - obtained by . Cost xx0 gems. \n");
-			outputText("-New head accesory (by Ormael):  - obtained by . Cost xx0 gems. \n");
-			outputText("-New ring (by Ormael):  - obtained by . Cost xx0 gems. \n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");
-			outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
-			outputText("-New event perk: . Gained by . Effects: \n");
-			outputText("-New range weapon (by Liadri):  - obtainable by giving  to Pure Celess to purify. (item properties desc).\n");
-			outputText("-New range weapon (by Liadri):  - obtainable by giving  to Corrupted Celess to corrupt. (item properties desc).\n");
-			outputText("-New tier 12 misc lvl-up perk: Chimerical Body: ... Stage. Req. Chimerical Body: Epic Stage perk and xx+ points in Internal Chimerical Disposition score. Effect: delay by another xx points appearing effect of negative HP regeneration and +5 to max Lib/Sens (scalable), +10 to max Str/Tou/Spe/Int/Wis (scalable).\n");
-			outputText("-New tier ?? misc lvl-up perk: Creationism. Req. Perfection perk. Effect: number of possible effects of transformatives +1.\n");
-			outputText("-New tier ?? misc lvl-up perk: All-Seeing. Req. Soul Powered perk. Effect: +10% max soulforce.\n");
-			outputText("-New tier ?? misc lvl-up perk: God of Steel. Req. Soul of Steel perk. Effect: +10% melee phys dmg.\n");
-			outputText("-New tier ?? misc lvl-up perk: Lady Godiva's favorite Child. Req. Blessed by Lady Godiva perk. Effect: 15% more gems from victories.\n");
-			outputText("-New tier ?? misc lvl-up perk: MEDIC!!!. Req. Surgeon perk. Effect: increases HP gains by 20%.\n");
-			outputText("-New tier ?? misc lvl-up perk: Pope. Req. Cardinal perk. Effect: -2 min libido and +5% to lust resistance.\n");				Tier 43 perks?
-			outputText("-New tier ?? misc lvl-up perk: NERD!!!. Req. President perk. Effect: +10% max mana.\n");
-			outputText("-New tier ?? misc lvl-up perk: SHIT YOU TOUCHED SASHA!!! Req. Spy's Enemy perk. Effect: +10% range phys dmg.\n");
-			outputText("-New tier ?? misc lvl-up perk: LAZY!!! Req. ZZZ perk. Effect: +20% to fatigue recovery.\n");
-			//slut line
-			outputText("-New tier ?? misc lvl-up perk: Armor. Req. Weapon perk. Effect: increasing armor proficiency. (+5% phys/mag resistance)\n");
-			outputText("-New tier ?? misc lvl-up perk: Sex Deity. Req. Sex Champion perk. Effect: +15% tease dmg.\n");
-			outputText("-New tier 1 misc lvl-up perk: . Req. History: Slut or Past Life: Slut perk. Effect: +10% max lust.\n");.
-			outputText("-New tier 4 misc lvl-up perk: . Req.  perk. Effect: +10% max lust.\n");
-			outputText("-New tier 7 misc lvl-up perk: . Req.  perk. Effect: +10% max lust.\n");
-			outputText("-New tier 12 misc lvl-up perk: . Req.  perk. Effect: +10% max lust.\n");
-			outputText("-New tier 17 misc lvl-up perk: . Req.  perk. Effect: +10% max lust.\n");
-			outputText("-New tier 30 misc lvl-up perk: . Req.  perk. Effect: +10% max lust.\n");
-			outputText("-New tier ?? misc lvl-up perk: . Req.  perk. Effect: +10% max lust.\n");
-			outputText("-New tier 1 misc lvl-up perk: . Req. History: Tactician or Past Life: Tactician perk. Effect: +10% minions/pets damage.\n");.
-			outputText("-New tier 4 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
-			outputText("-New tier 7 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
-			outputText("-New tier 12 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
-			outputText("-New tier 17 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
-			outputText("-New tier 30 misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
-			outputText("-New tier ?? misc lvl-up perk: . Req.  perk. Effect: +10% minions/pets damage.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Hinezumi, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede, Frost Wyrm, Gazer(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("-New tier 7 speed lvl-up perk: Prestige Job: Soul Archer Req. Soul Overlord, Job: Hunter perks and 200+ spe Effect: +40 to max spe and wis (scalable with NG tiers), +150 to max Fatigue, +1000 to max Soulforce\n");
-			outputText("\n");
-			outputText("\n");full stats bonuses not added yet to: Dragonne, Echidna, Ferret-morph, Kitshoo-morph, Scorpion-morph
-			outputText("\n");
-			outputText("\n");wolf pepper - nieużywany item chyba co można go by w wolf TF zmienić: dodaje special coś na kształt likantropii ^^
-			outputText("\n");aqua seed - item mający być siren tf item
-			outputText("\n");
-			outputText("<b>Version 0.8t:</b>\n\n");
-			outputText("-Added in current version race effects to Metamorph perk: \n");
-			outputText("\n");
-			outputText("\n");cel na 0.8(/9): może jak beda dodane nowe typy sukubów, inkubów w Blight Ridge pomyśleć nad ograniczeniem szansy na drop bibmo/bro pots tylko dla silniejszych odmian demonów jeśli bedą one wcześniej już za czesto wypadać
-			outputText("\n");cel na 0.8(/9): przy dodawaniu scen dla poteżniejszych niż zwykły inkub pamitać o scenie z incubus mechanic w D3 (ta z wybieraniem dick type w win scenie przez PC jaki ma miec inkub) - pewnie w tych inkubach powyżej minoinkuba bedzie to używane
-			outputText("\n");cel na 0.8(/9): dodać w mieście kultywatorów arene/ring na którym sie można pojedynkować z niektórymi przedstawicielami ras bedącymi soul cultivators (opcje ras do walki: goblinka, salamander, male(/lub female jeśli kanon nie pozwala na male) kitsune, scylla)
-			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
-			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
-			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");*/
-			outputText("\n\n\n");
-			outputText("Plans for future builds (I know some of them are HUGE ones but without dreams to chase how can one change?):\n");
-			outputText("-Add more soulforce options.\n");
-			outputText("-Add soulforce stuff to our lovely monk-ish mouse ^^\n");
-			outputText("-Add soulforce stuff to kitsune encounters.\n");
-			outputText("-Add Wuxia themed area and enemies.\n");
-			outputText("-Add few new options during chara creation.\n");
-			outputText("-Add option to upgrade some of the items ingame (ofc using soulforce) and generaly few new shiny things to find/buy/store/use.\n");
-			outputText("-More camp build options (involving using stones and etc.)\n");
-			outputText("-Make use of Metamorph perk (ofc all TF would be powered by soulforce ^^)\n");
+			outputText("-New enemies: Vengeful Apparitions (lvl 24 or 30 normal/large sized group of ghost type enemies and can be found in (Outer) Battlefield).\n");
+			outputText("-Added mastery for: polearm type weapons AND fighting with body weapons (it would boost some of physcial specials that use bodyparts in attack - it will not affect specials that are attacks with fluids or other substances aka breath attacks).\n");
 			menu();
 			addButton(0, "Next", Changelog36);
 			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
@@ -370,7 +559,7 @@ package classes.Scenes
 			outputText("-New tier 2 misc lvl-up perk: Axillary Venom Glands. Req. Venomous Adipose Tissue perk. Effect: Increase venom/web recharge speed based by 100% at cost of 1% of max HP lost per tick. (if hunger mode is active will instead drain hunger 2x faster)\n");
 			outputText("-New tier 3 misc lvl-up perk: Lift Off. Req. Aerobatics perk, 45+ str and 40+ spe. Effect: Allows you to start combat already flying.\n");
 			outputText("-New tier 3 toughness lvl-up perk: Ayo Armor Proficiency - req. 100+ tou and perk Heavy Armor Proficiency, granting 10% dmg reduction when wearing any ayo armor.\n");
-			outputText("-New tier 3 wisdom lvl-up perk: Elemental Conjurer Knowledge. Req. Elemental Contract Rank 2 perk and 100+ wis. Effect: You gained knowledge how to make elementals rank up process less resource consuming. (-40% needed mana/fatigue and -40% less HP lost during failure)\n");
+			outputText("-New tier 3 wisdom lvl-up perk: Elemental Conjurer Knowledge. Req. Elemental Contract Rank 2 perk and 100+ wis. Effect: You gained knowledge how to make elementals rank up process less resource consuming. (-40% needed mana/fatigue and 40% less HP lost during failure)\n");
 			outputText("-New tier 3 intelligence lvl-up perk: Defensive Staff Channeling. Req. Staff Channeling and Job: Enchanter perks, knowing any defensive spell, 120+ int. Effect: When you would cast defensive spell holding staff it effects would be increased a bit (higher defensive effect or longer duration).");
 			outputText(" (Mana shield would be able to absorb more damage per mana spent and blizzard would last longer or block more fire attacks before vanishing)\n");
 			outputText("-New tier 4 misc lvl-up perk: Survivalist 3. Req. Survivalist 2 perk and hunger mode enabled. Effect: Slows hunger rate by another 20%.\n");
@@ -537,7 +726,7 @@ package classes.Scenes
 			outputText("-Reaching room 150+/300+ in Labirinth will grant PC new rewards from Questlog (but need to pick them in order without skipping or getting few rewards at once).\n");
 			outputText("-When PC have active quest of capture feral imps chances to meet normal and feral one imp become reverted (meaning that most of imps pc meet will be feral ones).\n");
 			outputText("-Manticore feed special gained additional effect of recharging venom by 50 pts. Having Manticore Metabolism (Evolved) perk would increase this recharge rate 2x.\n");
-			outputText("-Manticore and Displacer feed effect after rewaching max stacks would be extended by 2/3 (w/ Race Metabolism (Evovlved) perk) hours after each feed. Also both feeding bonus to speed from having (Evolved) racial perk will be +50% not +1000%.\n");
+			outputText("-Manticore and Displacer feed effect after rewaching max stacks would be extended by 2/3 (w/ Race Metabolism (Evolved) perk) hours after each feed. Also both feeding bonus to speed from having (Evolved) racial perk will be +50% not +1000%.\n");
 			outputText("-Tank and Refined Body perks was switched meaning first will be accesable Tank and it would be req. to unlock Refined Body perk. Also Refined Body perks effect was changed from giving 50 HP to 5% of base HP.\n");
 			outputText("-Demonic Desire and Inhuman Desire perks effects was switched and effect of Demonic Desire (formely Inhuman Desire) perks was changed from +20 max lust to +5% of max lust.\n");
 			outputText("During fight small part of your blood from into blood puppies that can attack on your behalf with blood soulskills. When you grow in mastery of blood they would grow stronger with you.\n");
@@ -873,7 +1062,7 @@ package classes.Scenes
 			outputText("-New tier 4 libido lvl-up perk: Improved Straddle. Req. Straddle perk and 130+ lib. Effect: Increase the straddle maneuver maximum duration by two rounds.\n");
 			outputText("-New tier 5 misc  lvl-up perk: Chimerical Body: Improved Stage. Req. Chimerical Body: Semi-Improved Stage and 18+ points in Internal Chimerical Disposition score. Effect: delay by another 6 points appearing effect of negative HP regeneration, +0.05 to multi for Str/Tou/Spe/Int/Wis, +0.10 for multi for Lib and +5 sens.\n");
 			outputText("-New tier 6 misc lvl-up perk: Lizan Marrow (Final Form). Req. Lizan Marrow (Evolved) perk and lizan score 12+. Effect: Regenerates 1.5% of HP per round in combat and 3% of HP per hour. Additionaly your limit for innate self-regeneration rate increased. When below 25% of max HP regeneration provided by Lizan regeneration doubles. ");
-			outputText("You can't loose by HP until reaching droping into negative health larger than 5% of max HP.\n");
+			outputText("You can't lose by HP until your health drops into the negatives any more than 5% of max HP.\n");
 			outputText("-New ascension perks: Ascension: Transhumanism (Str/Tou/Spe/Int/Wis/Lib) - one for each core stat aside sensitivity and corruption. Each rank rise max cap of related stat by 8.\n");
 			outputText("-New event perk: Zenji's influence 1. Gained by training with Zenji 5+ times. Effects: Increases maximum mana and fatigue by 10%.\n");
 			outputText("-New event perk: Zenji's influence 2. Gained by training with Zenji 15+ times. Effects: Reduces effect from curses by 40%.\n");
@@ -1345,7 +1534,7 @@ package classes.Scenes
 			outputText("-New body part - wings: Ethereal Wings. Req. Ghostly Aura\n");
 			outputText("-New event perk: Ghost-slinger. Gained by having 12+ in poltergeist score. Effects: +1 to poltergeist score, increases damage with guns/thrown weapons by 15%.\n");
 			outputText("-New event perk: Phantom Shooting. Gained by having 12+ in poltergeist score. Effects: +1 to poltergeist score, using part of own body PC form phantom bullets or throwing weapons to attack enemy (throwing/firearm shooting will not use fatigue/ammo instead draining small amount of PC ectoplasmic body (HP)).\n");
-			outputText("-New enemy perk: Ghost enemy type. Shouldra only use this perk atm. It would make enemies immune to Possess special.\n");// and reduce demages they take
+			outputText("-New enemy perk: Ghost enemy type. Shouldra only use this perk atm. It would make enemies immune to Possess special.\n");
 			outputText("-New possible race to become: Jiangshi - at 20+ pts they giving following bonuses: +140 to max Strength, +100 to max Toughness, -90 to max Speed, -90 to max Intelligence, +110 to max Wisdom, +130 to max Libido (all scaling with NG tiers)\n");
 			outputText("-New body part - eyes: Jiangshi Eyes. Req. After event\n");
 			outputText("-New body part - face: Jiangshi Face. Req. After event\n");
@@ -1471,7 +1660,7 @@ package classes.Scenes
 			outputText("-New head jewelery/accesory/misc (by Ormael): crown of darkness protection - buyable at Jewel shop in Tel'Adre. Cost 3200 gems. Increase darkness resistance by 20%.\n");
 			outputText("-New head jewelery/accesory/misc (by Ormael): crown of poison protection - buyable at Jewel shop in Tel'Adre. Cost 3200 gems. Increase poison resistance by 20%.\n");
 			outputText("-New head jewelery/accesory/misc (by Ormael): crown of lust protection - buyable at Jewel shop in Tel'Adre. Cost 4800 gems. Increase lust resistance by 20%.\n");
-			outputText("-New head jewelery/accesory/misc (by Ormael): Crown of the Undefeated King - buyable at Kaiba shop in Tel'Adre. Cost 6000 gems. You can't loose by HP until reaching droping into negative health larger than 5% of max HP + 500(scalable). When below 0 HP PC wouldn gain additional 1% of max HP per turn regeneration effect.\n");
+			outputText("-New head jewelery/accesory/misc (by Ormael): Crown of the Undefeated King - buyable at Kaiba shop in Tel'Adre. Cost 6000 gems. You can't lose by HP until your health drops into the negatives any more than 5% of max HP + 500(scalable). When below 0 HP PC wouldn gain additional 1% of max HP per turn regeneration effect.\n");
 			outputText("-New necklace (by Liadri): Magic coral and pearl necklace - buyable at Pinchou shop. Cost 800 gems, grants water breathing to races without gills and a small amount of regeneration (1%) to aquatic races when near sources of water or underwater. Also increases speed by 10 while underwater stacking with similar bonuses such as those granted by swimwear and Aquatic Affinity.\n");
 			outputText("-New necklace (by Ormael): Crinos Shape necklace - buyable at Kaiba shop. Cost 4000 gems. Would allow PC to use Crinos Shape even without perk Job: Beast Warrior with wrath costs and boost as the one gained from picking Job: Beast Warrior. In case PC got this perk or pick it in future will boost Crinos Shape transformation by 20% and drain additional 5 wrath per turn on top of current Crinos Shape stats boost and wraith drain.");
 			outputText("-New necklace (by Ormael): necklace of of fire protection - buyable at Jewel shop in Tel'Adre. Cost 4000 gems. Increase fire resistance by 25%.\n");
@@ -1843,14 +2032,14 @@ package classes.Scenes
 			outputText("-New tier 1 misc lvl-up perk: Whistles. Req. History: Slacker or Past Life: Slacker perk. Effect: +20% to fatigue recovery.\n");
 			outputText("-New tier 1 misc lvl-up perk: Tongs. Req. History: Smith or Past Life: Smith perk. Effect: increasing armor proficiency. (+5% phys/mag resistance)\n");
 			outputText("-New tier 1 misc lvl-up perk: Amateur. Req. History: Whore or Past Life: Whore perk. Effect: +15% tease dmg.\n");
-			outputText("-New tier 1 misc lvl-up perk: Diehard. Req. none beside lvl 6+. Effect: You can't loose by HP until reaching droping into negative health larger than 2% of max HP + 200(scalable). When below 0 HP would lose 1% of max HP per turn.\n");
+			outputText("-New tier 1 misc lvl-up perk: Diehard. Req. none beside lvl 6+. Effect: You can't lose by HP until your health drops into the negatives any more than 2% of max HP + 200(scalable). When below 0 HP would lose 1% of max HP per turn.\n");
 			outputText("-New tier 2 misc lvl-up perk: Pig/Boar Fat (Evolved). Req. Pig/Boar Fat perk, 100+ thickness and pig score 8+. Effect: +1 to pig score, lower req. thickness for Body Slam to 85, +2 to physical/magicical armor def value (scalable), +20 to max thickness and +10 to max tou (scalable).\n");
 			outputText("-New tier 2 misc lvl-up perk: Orc Adrenal Glands (Evolved). Req. Free adrenal glands mutation slot, Orc Adrenal Glands perk and 8+ orc score. Effect: +1 to orc score, increasing Ferocity limit by 3%, 10 pts of phantom Str (scalable), increase natural strength (+5 (scalable)) and tone (+10).\n");
 			outputText("-New tier 2 misc lvl-up perk: Elvish Peripheral NervSys (Evolved). Req. Elvish Peripheral NervSys perk and 8+ elf score. Effect: +1 to elf score, 10 pts of phantom Spe (scalable), increase natural speed (+5 (scalable)), evasion (+10%) and thickness (+10).\n");
 			outputText("-New tier 2 wisdom lvl-up perk: Rapid Reload. Req. Job: Gunslinger perk, 60+ wis and 30+ spe. Effect: Allow to not spend whole turn to use Reload button as long PC got enough fatigue. Also it rise max fatigue by 15.\n");
 			outputText("-New tier 2 speed lvl-up perk: Speed Demon. Req. Job: Dervish or Job: Rogue perk and 90+ spe. Effect: Add speed based scaling of melee attacks when using non large weapon(s) and attacking more than once per turn.\n");
 			outputText("-New tier 3 speed lvl-up perk: Quick Strike. Req. Speed Demon perk and 120+ spe. Effect: Add speed based scaling of melee attacks when using small weapon(s) and attacking more than once per turn. It effect is added on top of Speed Demon perk boost.\n");
-			outputText("-New tier 3 misc lvl-up perk: Improved Diehard. Req. Diehard perk. Effect: You can't loose by HP until reaching droping into negative health larger than 4% of max HP + 400(scalable). HP limit cumulative with other Diehard perks.\n");
+			outputText("-New tier 3 misc lvl-up perk: Improved Diehard. Req. Diehard perk. Effect: You can't lose by HP until your health drops into the negatives any more than 4% of max HP + 400(scalable). HP limit cumulative with other Diehard perks.\n");
 			outputText("-New tier 3 wisdom lvl-up perk: Expert Gunslinger. Req. Amateur Gunslinger perk, 100+ wis and 50+ spe. Effect: Allow to shoot firearm 3rd time in turn (at 20% acc penalty).\n");
 			outputText("-New tier 4 wisdom lvl-up perk: Lightning Reload. Req. Rapid Reload perk, 120+ wis and 60+ spe. Effect: Allow to reload in middle of shooting as long PC have enough fatigue for that without ending turn. Also it rise max fatigue by 25.\n");
 			outputText("-New tier 4 toughness lvl-up perk: Improved Lifeline. Req. Lifeline perk and 125+ tou. Effect: Increases self heling by 120 out of combat and by 60 in combat (using defend option will double it).\n");
@@ -1870,12 +2059,12 @@ package classes.Scenes
 			outputText("-New tier 5 misc lvl-up perk: Elvish Peripheral NervSys (Final Form). Req. Elvish Peripheral NervSys (Evolved) perk and 12+ elf score. Effect: +1 to elf score, 15 pts of phantom Spe (scalable), increase natural speed (+5 (scalable)), evasion (+15%), decrease melee/range accuracy (-5%) penalty when using multiattack options.\n");
 			outputText("-New tier 5 misc lvl-up perk: Salamander Adrenal Glands (Final Form). Req. Salamander Adrenal Glands (Evolved) perk and 11+ slamander score. Effect: +1 to salamander score, slight boost to your natural strength, speed, (+15 to both (scalable)) and toughness, libido (+5 to both (scalable)); double bonus to attack, slight boost natural wrath generation rate (+2 ooc/+4 in combat), ");
 			outputText("extend duration of berserking/lustzerking by 8 turns and enable to starting fight with one/both of them active.\n");
-			outputText("-New tier 5 misc lvl-up perk: Greater Diehard. Req. Improved Diehard perk. Effect: You can't loose by HP until reaching droping into negative health larger than 6% of max HP + 600(scalable). HP limit cumulative with other Diehard perks.\n");
+			outputText("-New tier 5 misc lvl-up perk: Greater Diehard. Req. Improved Diehard perk. Effect: You can't lose by HP until your health drops into the negatives any more than 6% of max HP + 600(scalable). HP limit cumulative with other Diehard perks.\n");
 			outputText("-New tier 6 speed lvl-up perk: Grand Blademaster. Req. Blademaster perk, 160+ spe, 120+ str. Effect: Gain +15% to critical strike chance when wielding weapon with blade (sword, dueling sword, axe) and not using a shield.\n");
 			outputText("-New tier 6 intelligence lvl-up perk: Grand Tactician. Req. Tactician perk and 150+ int. Effect: Increases physical critical hit chance by up to 30% (Intelligence-based).\n");
 			outputText("-New tier 6 wisdom lvl-up perk: Advanced Magicules Theory. Req. Magicules Theory perk and 150+ wis. Effect: Increases magical critical hit chance by up to 30% (Wisdom-based).\n");
 			outputText("-New tier 6 toughness lvl-up perk: Greater Lifeline. Req. Improved Lifeline perk and 175+ tou. Effect: Increases self heling by 180 out of combat and by 90 in combat (using defend option will double it).\n");
-			outputText("-New tier 7 misc lvl-up perk: Epic Diehard. Req. Greater Diehard and Epic Toughness perks. Effect: You can't loose by HP until reaching droping into negative health larger than 8% of max HP + 800(scalable). HP limit cumulative with other Diehard perks and when below 0 HP will not longer loose 1% of max HP per turn.\n");
+			outputText("-New tier 7 misc lvl-up perk: Epic Diehard. Req. Greater Diehard and Epic Toughness perks. Effect: You can't lose by HP until your health drops into the negatives any more than 8% of max HP + 800(scalable). HP limit cumulative with other Diehard perks and when below 0 HP will not longer loose 1% of max HP per turn.\n");
 			outputText("-New tier 7 misc lvl-up perk: Enchantment. Req. Fusion perk. Effect: number of possible effects of transformatives +1.\n");
 			outputText("-New tier 7 misc lvl-up perk: Embodiment. Req. Path of Enlightenment perk. Effect: +10% max soulforce.\n");
 			outputText("-New tier 7 misc lvl-up perk: Heart of Steel. Req. Muscles of Steel perk. Effect: +10% melee phys dmg.\n");
@@ -3581,4 +3770,4 @@ package classes.Scenes
 			addButton(1, "Back", CoC.instance.mainMenu.mainMenu);
 		}
 	}
-}
+}

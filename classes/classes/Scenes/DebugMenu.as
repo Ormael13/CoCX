@@ -574,6 +574,8 @@ public class DebugMenu extends BaseContent
 			//Page 2
 			undergarmentArray.push(undergarments.SS_LOIN);
 			undergarmentArray.push(undergarments.SSPANTY);
+			undergarmentArray.push(undergarments.COW_BRA);
+			undergarmentArray.push(undergarments.COW_PANTY);
 
 			//------------
 			// Accessories

@@ -12,7 +12,7 @@ package classes.Items.Weapons
 		
 		public function DualBFWhip() 
 		{
-			super("DBFWhip", "D.B.F.Whip", "dual big fucking whips", "a pair of big fucking whips", "whipping", 36, 2880, "Big Fucking Whips - the best solution for master tiny e-pen complex at this side of the Mareth!  This pair of 2H 5 meters long whips requires 225 (strength+speed) to fully unleash it power.", "Dual Large");
+			super("DBFWhip", "D.B.F.Whip", "dual big fucking whips", "a pair of big fucking whips", "whipping", 36, 2880, "Big Fucking Whips - the best solution for master tiny e-pen complex at this side of the Mareth!  This pair of 2H 5 meters long whips requires 225 (strength+speed) to fully unleash it power.", "Dual Large, Whipping", "Whip");
 		}
 		
 		override public function get attack():Number {
@@ -34,7 +34,7 @@ package classes.Items.Weapons
         }
 		
 		override public function canUse():Boolean {
-			if (game.player.hasPerk(PerkLib.DualWield) && game.player.hasPerk(PerkLib.GigantGrip)) return true;
+			if (game.player.hasPerk(PerkLib.DualWield) && game.player.hasPerk(PerkLib.GigantGrip)) return super.canUse();
 			if (!game.player.hasPerk(PerkLib.DualWield)) outputText("You aren't skilled in handling large weapons with one hand yet to effectively use those whips. Unless you want to hurt yourself instead enemies when trying to use them...  ");
 			else outputText("You aren't skilled enough to handle this pair of weapons!  ");
 			return false;

@@ -190,6 +190,13 @@ public class Hair extends BodyPart {
 		appearanceDesc: "Smaller webbings frill along the top of your head, forming a crown-like ring. Along these frills are longer hair-like tentacles that reach down to drape past your shoulders, just above your pectorals."
 	});
 
+	public static const COW:int = 21;
+	EnumValue.add(Types, COW, "COW", {
+		name:"cow like",
+		shortDesc: "dark spoted {hair}",
+		appearanceDesc: "Your {hairInfo} looks about normal except that they have darker spot reminding of cow fur."
+	});
+
 	// Additional modifiers for hair descriptions
 	public static var Styles:/*EnumValue*/Array = [];
 

@@ -14,6 +14,6 @@ package classes.Scenes.NPCs
 		
 		
 		
-		//cow-bicorn-drider chimera that can defile items into legendaries like Black celess ^^
+		//cow-bicorn-drider chimera that can defile items into legendaries like Black celess ^^ welp she's now named differently so time to give this one new purpose and races xD
 	}
 }

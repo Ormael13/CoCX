@@ -12,7 +12,7 @@ package classes.Items.Weapons
 		
 		public function LustRapier() 
 		{
-			super("LRapier", "LRapier", "lust rapier", "lust-coated rapier", "slash", 8, 640, "A rapier with edge that seems to have been enchanted to always be covered in a light aphrodisiac to arouse anything cut with it.");
+			super("LRapier", "LRapier", "lust rapier", "lust-coated rapier", "slash", 8, 640, "A rapier with edge that seems to have been enchanted to always be covered in a light aphrodisiac to arouse anything cut with it.", "", "Dueling");
 		}
 		
 		override public function get attack():Number {

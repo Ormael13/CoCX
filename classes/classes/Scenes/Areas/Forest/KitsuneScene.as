@@ -67,7 +67,7 @@ public class KitsuneScene extends BaseContent
 			kitsuneSprite();
 			outputText("As you fall to the ground in defeat, you look up to see the imp standing over you.  You prepare yourself for the worst, but are surprised to see the vile creature disappear in a puff of blue flames.\n\n");
 			outputText("\"<i>Well...  that was...  easier than I thought.  Kind of boring, actually.</i>\"\n\n");
-			outputText("The woman from earlier bends low over you, smiling bemusedly.  Before your eyes, her face, body, and clothing all begin to shift form.  Clad in a set of loose, revealing robes, she brushes her " + monster.hairColor + " hair out of her face, reaching up to straighten out her large triangular fox ears.  Six lustrous, bushy tails sway from side to side behind her, drawing your gaze hypnotically, and a generous layer of ornate tattoos follow the curves of her body.\n\n");
+			outputText("The woman from earlier bends low over you, smiling bemusedly.  Before your eyes, her face, body, and clothing all begin to shift form.  Clad in a set of loose, revealing robes, she brushes her " + monster.hairColor + " hair out of her face, reaching up to straighten out her large triangular fox ears.  "+fluffCount2()+" lustrous, bushy tails sway from side to side behind her, drawing your gaze hypnotically, and a generous layer of ornate tattoos follow the curves of her body.\n\n");
 			outputText("\"<i>My, my, you're kind of a pushover, aren't you?</i>\"  she remarks, grinning precociously.  \"<i>Well, hopefully you make for a better snack than you do a bodyguard.</i>\"");
 			// -> Go to standard kitsune loss scenes
 			menu();
@@ -85,14 +85,14 @@ public class KitsuneScene extends BaseContent
 			kitsuneSprite();
 			outputText("\"<i>Oh, thank you, thank you!  I don't know </i>what<i> would have happened if you hadn't come along.</i>\"\n\n" + ((player.cor < 50) ? "As the imp falls at your feet, you lower your [weapon] and turn to the grateful woman.  Beating down an imp is really nothing special, but you were glad to be of assistance, and tell her as much with a friendly smile." : "You scoff haughtily, lowering your [weapon] and turning to the woman.  Beating down an imp was hardly worth your time, you tell her, crossing your arms in irritation.") + "\n\n");
 			outputText("\"<i>My hero!</i>\"  she swoons, beaming.  \"<i>Oh, if there's </i>anything<i> I can do to repay you, please, tell me!</i>\"\n\n");
-			outputText("You find yourself gazing deep into her eyes, a dim haze entering your mind as you are drawn deeper and deeper into the glistening green pools.  The corners of her lips curl into a broad smile as she starts to step toward you, and for a moment you swear you can see a subtle change in her.  You rub your eyes, certain they are playing tricks on you, slowly following the gentle sway of her six tails as she strolls up to you." + ( ((player.lust > 70) || (player.inte < 40)) ? "  Nope, nothing wrong here...\n\n\"<i>Mm...  my hero...</i>\" she croons again, reaching up to caress your cheek." : "\n\nWait.") + "\n\n");
+			outputText("You find yourself gazing deep into her eyes, a dim haze entering your mind as you are drawn deeper and deeper into the glistening green pools.  The corners of her lips curl into a broad smile as she starts to step toward you, and for a moment you swear you can see a subtle change in her.  You rub your eyes, certain they are playing tricks on you, slowly following the gentle sway of her "+fluffCount()+" tails as she strolls up to you." + ( ((player.lust > 70) || (player.inte < 40)) ? "  Nope, nothing wrong here...\n\n\"<i>Mm...  my hero...</i>\" she croons again, reaching up to caress your cheek." : "\n\nWait.") + "\n\n");
 			//PC saw through glamour
 			if ((player.lust < 70) || (player.inte >= 40)) {
 				outputText("You push her away, almost cracking your head open as you stumble over a stump.  Now that you have broken free of her sorcery, you can see her for what she is.  A pair of large triangular fox ears poke up from her ");
 				if (monster.hairColor == "blonde") outputText("back-length, flaxen");
 				else if (monster.hairColor == "black") outputText("ass-length, raven");
 				else outputText("shoulder-length, crimson");
-				outputText(" hair, six luxuriously furred tails fanning out behind her.\n\n");
+				outputText(" hair, "+fluffCount()+" luxuriously furred tails fanning out behind her.\n\n");
 
 				outputText("\"<i>So, you saw through my glamour did you?  That's quite impressive...</i>\" she says, teasing you with her tails.  You back away from her, but give a start and wheel around when you feel yourself bump into something.");
 				// -> Go to <i>"Going Somewhere?</i>\"
@@ -106,7 +106,7 @@ public class KitsuneScene extends BaseContent
 				if (monster.hairColor == "blonde") outputText("back-length, flaxen");
 				else if (monster.hairColor == "black") outputText("ass-length, raven");
 				else outputText("shoulder-length, crimson");
-				outputText(" hair, six luxuriously furred tails fanning out behind her.  A layer of ornate tattoos covers patches of her exposed flesh, accentuating her feminine curves nicely.\n\n");
+				outputText(" hair, "+fluffCount()+" luxuriously furred tails fanning out behind her.  A layer of ornate tattoos covers patches of her exposed flesh, accentuating her feminine curves nicely.\n\n");
 
 				outputText("\"<i>So, you saw through my glamour did you?  That's quite impressive...</i>\" she says, teasing you with her tails.  You back away from her, but give a start and wheel around when you feel yourself bump into something.");
 				// -> Go to <i>"Going Somewhere?</i>\"
@@ -138,7 +138,9 @@ public class KitsuneScene extends BaseContent
 			if (player.hasKeyItem("Traveler's Guide") >= 0) {
 				outputText("\n\nYour mind is jogged out of its haze when you remember a note from the Traveler's Guide.  It warned about mysterious flames in the forest that lead hapless adventurers astray.  You hesitate now, wondering what to do.");
 				//[Turn Back] [Follow] //automatically follow without traveler's guide.
-				simpleChoices("Turn Back", turnBackFromWillOWisp, "Follow", followTheWillOWisp, "", null, "", null, "", null);
+				menu();
+				addButton(1, "Turn Back", turnBackFromWillOWisp);
+				addButton(3, "Follow", followTheWillOWisp);
 			}
 			else doNext(followTheWillOWisp);
 		}
@@ -175,11 +177,10 @@ public class KitsuneScene extends BaseContent
 					else outputText("shoulder-length, crimson");
 					outputText(" hair, smirking precociously.\n\n");
 					outputText("\"<i>My, my, aren't we the clever one?</i>\"\n\n");
-					outputText("As she closes the gap even more, you now notice that she isn't any ordinary woman - a pair of large, vulpine ears parts her hair at the top of her head, and six luxuriously furred tails fan out around her.  A layer of ornate tattoos covers patches of her exposed flesh, accentuating her feminine curves nicely.  She's so close now that a few of the tails are drifting along your " + player.skinFurScales() + ", leaving a trail of crackling blue sparks that impart the same cool tingling that the flame did.\n\n");
+					outputText("As she closes the gap even more, you now notice that she isn't any ordinary woman - a pair of large, vulpine ears parts her hair at the top of her head, and "+fluffCount()+" luxuriously furred tails fan out around her.  A layer of ornate tattoos covers patches of her exposed flesh, accentuating her feminine curves nicely.  She's so close now that a few of the tails are drifting along your " + player.skinFurScales() + ", leaving a trail of crackling blue sparks that impart the same cool tingling that the flame did.\n\n");
 					outputText("\"<i>You resisted my illusions...  that's impressive,</i>\" she says, teasing you with her tails.  You back away from her, but give a start and wheel around when you feel yourself bump into something.\n\n");
 				}
 				outputText("\"<i>Going somewhere?</i>\"\n\n");
-
 				outputText("How did she get behind you so quickly?  You were staring at her the entire time!  Glancing quickly over your shoulder, you confirm that this is not a case of twins, but when you turn to face her, she has disappeared once again!\n\n");
 				outputText("\"<i>Over here, silly~</i>\" she calls to you with a mischievous tone, beckoning to you as you whip around to face her voice.  \"<i>Don't be shy, I don't bite...  often...</i>\"\n\n");
 				outputText("Her tone is innocuous enough, but her mannerisms are a little disconcerting, somehow.  What are you going to do?");
@@ -592,7 +593,7 @@ public class KitsuneScene extends BaseContent
 			else {
 				outputText("Fingers trail delicately across your [chest] as the redhead slides in next to you, sparks flying from her fingertips as she encircles your free " + nippleDescript(0) + ", eliciting a moan.  Her body presses against yours softly, one leg draping over your waist as she lays her head down and begins to run her tongue along the outer edge, warming you up for her sister.\n\n");
 			}
-			outputText("A shock of pleasure jolts through you as six golden tails press against your body, azure embers sensually sizzling against your skin.  The blonde giggles lightly as she teases you, her eyes full of mischief, one finger lightly tracing the underside of your jaw.  It's a simple gesture, but the way she does it makes you practically melt into her arms, more a slave to pleasure now than ever.\n\n");
+			outputText("A shock of pleasure jolts through you as "+fluffCount()+" golden tails press against your body, azure embers sensually sizzling against your skin.  The blonde giggles lightly as she teases you, her eyes full of mischief, one finger lightly tracing the underside of your jaw.  It's a simple gesture, but the way she does it makes you practically melt into her arms, more a slave to pleasure now than ever.\n\n");
 			if (flags[kFLAGS.redheadIsFuta] > 0) {
 				outputText("The redhead's hips slap up against her sister's ass again and again, driving her into your chest with a surprised yelp.  The black-haired girl's lips ripple and flow wetly over your nipples, a deep moan vibrating through it as the redhead digs her fingers into her expansive ass flesh, rolling her eyes back and groaning obscenely.  A liquid gurgle fills the air as the redhead unleashes a torrent of seed, the ravenette's belly swelling slowly.  Her moans intensify against your chest with each passing second, hands passionately kneading and squeezing your breasts.\n\n");
 			}
@@ -623,7 +624,7 @@ public class KitsuneScene extends BaseContent
 			outputText("Without hesitation, your tentacle-dick drills eagerly into her sopping snatch before you can think.  Your moans join hers in a lewd symphony, each of your writhing tentacles finding its home in one hole or another, sending the three girls into a lust-filled frenzy atop you.  Before long, you lose track of where one girl ends and the others begin, your hands cascading over their soft, supple bodies, intersecting in a carnal mass of flesh, tails, tentacles and lust.\n\n");
 			outputText("Your tentacles move of their own accord, ensnaring the three sisters in a densely tangled knot of limbs and tendrils.  The redhead hangs upside-down, dangling by her ankles with a look of utter bliss on her face as her cock is furiously jerked by one of your tentacles, both of her holes being pounded simultaneously by two thick tendrils pistoning in and out alternately.  The black-haired girl is in no less of a predicament, her eyes rolled back and tongue hanging out as her ass is stuffed full of throbbing tentacle, one hand haphazardly thrusting into her pussy alongside another.\n\n");
 			outputText("\"<i>Uuuoohh... my belly's so fulllll...</i>\" she groans orgasmically, clutching her stomach as your cock snakes its way through her insides, visibly distorting her pudgy belly.  Her body goes slack, hand falling away from her groin as a thick stream of girlcum arcs through the air, her face turning red and her eyes going blank with ecstasy.\n\n");
-			outputText("The blonde is folded double, her thighs spread out while her ankles are hooked behind her head, all six of her tails twitching madly.  Her breasts squash and bulge around your tentacles as they squeeze and coil around them, rubbing lewdly against her nipples.  It seems as though sense has long since been driven from her mind, her mouth hanging agape and her eyes vacant with lust.  Her throat bulges from the intrusion of your cock, pre-cum mixed with drool dribbling down her chin as she eagerly begins to suck on it, thrusting her hips automatically in sync with the undulations of your cocks in her other orifices.\n\n");
+			outputText("The blonde is folded double, her thighs spread out while her ankles are hooked behind her head, all "+fluffCount()+" of her tails twitching madly.  Her breasts squash and bulge around your tentacles as they squeeze and coil around them, rubbing lewdly against her nipples.  It seems as though sense has long since been driven from her mind, her mouth hanging agape and her eyes vacant with lust.  Her throat bulges from the intrusion of your cock, pre-cum mixed with drool dribbling down her chin as she eagerly begins to suck on it, thrusting her hips automatically in sync with the undulations of your cocks in her other orifices.\n\n");
 			outputText("The air is filled with the heavy, musky scent of semen as a jet of cum shoots skyward from the redhead's cock, the throbbing member swelling visibly each time she spurts another stream.  The entire deck and the water around you is stained with her seed, she and her sisters all plastered from head to toe with her copious emissions.  The cooling sensation of mint permeates your skin wherever the sticky droplets land on you, making you shudder in pleasure, and the tingling feeling of her seed dribbling down along your tentacle shafts sends an unbearable pleasure to your groin.\n\n");
 			outputText("The three insensate kitsune twitch helplessly in the grips of your tentacles, maddened by pleasure as your magically enhanced tendrils plow away at them without pause, pummeling their abused holes unceasingly.  Every muscle in your body tenses in preparation for an incredible climax, the lust boiling in your loins like a coiling spring.  The pressure builds until you just can't take it any longer, convulsing beneath the three sisters and groaning in ecstasy as your orgasm shoots up each of your shafts simultaneously, swelling from base to tip and releasing your thick load inside of them.\n\n");
 			if (player.cumQ() <= 150) {
@@ -668,7 +669,7 @@ public class KitsuneScene extends BaseContent
 		outputText("Without hesitation, your tentacle-dick drills eagerly into her sopping snatch before you can think.  Your moans join hers in a lewd symphony, each of your writhing vines finding its home in one hole or another, sending the three girls into a lust-filled frenzy atop you.  Before long, you lose track of where one girl ends and the others begin, your hands cascading over their soft, supple bodies, intersecting in a carnal mass of flesh, tails, vines and lust.\n\n");
 		outputText("Your vines move of their own accord, ensnaring the three sisters in a densely tangled knot of limbs and tendrils.  The redhead hangs upside-down, dangling by her ankles with a look of utter bliss on her face as her cock is furiously jerked by one of your apprendage, both of her holes being pounded simultaneously by two thick tendrils pistoning in and out alternately.  The black-haired girl is in no less of a predicament, her eyes rolled back and tongue hanging out as her ass is stuffed full of throbbing vines, one hand haphazardly thrusting into her pussy alongside another.\n\n");
 		outputText("\"<i>Uuuoohh... my belly's so fulllll...</i>\" she groans orgasmically, clutching her stomach as your cock snakes its way through her insides, visibly distorting her pudgy belly.  Her body goes slack, hand falling away from her groin as a thick stream of girlcum arcs through the air, her face turning red and her eyes going blank with ecstasy.\n\n");
-		outputText("The blonde is folded double, her thighs spread out while her ankles are hooked behind her head, all six of her tails twitching madly.  Her breasts squash and bulge around your tentacles as they squeeze and coil around them, rubbing lewdly against her nipples.  It seems as though sense has long since been driven from her mind, her mouth hanging agape and her eyes vacant with lust.  Her throat bulges from the intrusion of your cock, pre-cum mixed with drool dribbling down her chin as she eagerly begins to suck on it, thrusting her hips automatically in sync with the undulations of your cocks in her other orifices.\n\n");
+		outputText("The blonde is folded double, her thighs spread out while her ankles are hooked behind her head, all "+fluffCount()+" of her tails twitching madly.  Her breasts squash and bulge around your tentacles as they squeeze and coil around them, rubbing lewdly against her nipples.  It seems as though sense has long since been driven from her mind, her mouth hanging agape and her eyes vacant with lust.  Her throat bulges from the intrusion of your cock, pre-cum mixed with drool dribbling down her chin as she eagerly begins to suck on it, thrusting her hips automatically in sync with the undulations of your cocks in her other orifices.\n\n");
 		outputText("The air is filled with the heavy, musky scent of semen as a jet of cum shoots skyward from the redhead's cock, the throbbing member swelling visibly each time she spurts another stream.  The entire deck and the water around you is stained with her seed, she and her sisters all plastered from head to toe with her copious emissions.  The cooling sensation of mint permeates your skin wherever the sticky droplets land on you, making you shudder in pleasure, and the tingling feeling of her seed dribbling down along your tentacle shafts sends an unbearable pleasure to your groin.\n\n");
 		outputText("The three insensate kitsune twitch helplessly in the grips of your tendrils, maddened by pleasure as your magically enhanced tendrils plow away at them without pause, pummeling their abused holes unceasingly.  Every muscle in your body tenses in preparation for an incredible climax, the lust boiling in your loins like a coiling spring.  The pressure builds until you just can't take it any longer, convulsing beneath the three sisters and groaning in ecstasy as your orgasm shoots up each of your shafts simultaneously, swelling from base to tip and releasing your thick load inside of them.\n\n");
 		if (player.cumQ() <= 150) {
@@ -796,7 +797,6 @@ public class KitsuneScene extends BaseContent
 				outputText("\"<i>Oh, you're not going to make this easy for me, are you?</i>\"");
 				outputText("\n\nWith a wry grin, she stands back and cracks her knuckles, and your eyes are drawn down to a slight tent in her robes.  \"<i>Good, I like when my prey has a little fight in it.  Just don't go crying if you lose~.</i>\" she says, one hand sliding down to caress the bulge hugging her thigh.  Whatever she's packing, it's at least 12 inches long, and she seems pretty keen on using it.");
 			}
-
 			outputText("\n\n<b>You are now fighting a ");
 			if (monster.hairColor == "blonde") outputText("blonde");
 			else if (monster.hairColor == "black") outputText("black-haired");
@@ -804,7 +804,22 @@ public class KitsuneScene extends BaseContent
 			outputText(" kitsune!</b>");
 			doNext(playerMenu);
 		}
-
+		private function fluffCount():String
+		{
+			var str:String = "";
+			if (flags[kFLAGS.MET_KITSUNES] >= 4) str += "six";
+			else if (flags[kFLAGS.MET_KITSUNES] >= 2) str += "five";
+			else str += "four";
+			return str;
+		}
+		private function fluffCount2():String
+		{
+			var str:String = "";
+			if (flags[kFLAGS.MET_KITSUNES] >= 4) str += "Six";
+			else if (flags[kFLAGS.MET_KITSUNES] >= 2) str += "Five";
+			else str += "Four";
+			return str;
+		}
 
 		public function loseToKitsunes():void
 		{
@@ -937,7 +952,7 @@ public class KitsuneScene extends BaseContent
 		{
 			clearOutput();
 			kitsuneSprite();
-			outputText("The precocious kitsune closes in on you with a predatory smirk as you fall to the ground, panting furiously.  You look up at her, fearing for whatever she has in store for you.  Mustering up every bit of willpower you have left, you scramble backward, but as you try to drag yourself up to your feet, you find your face pressing into something incredibly soft.  Six shimmering golden tails curl around your body, and you look up from between the kitsune's sizeable breasts to see her grinning down at you, her expression somewhere between doting and hungry.\n\n");
+			outputText("The precocious kitsune closes in on you with a predatory smirk as you fall to the ground, panting furiously.  You look up at her, fearing for whatever she has in store for you.  Mustering up every bit of willpower you have left, you scramble backward, but as you try to drag yourself up to your feet, you find your face pressing into something incredibly soft.  "+fluffCount2()+" shimmering golden tails curl around your body, and you look up from between the kitsune's sizeable breasts to see her grinning down at you, her expression somewhere between doting and hungry.\n\n");
 			outputText("\"<i>Shh...  It'll be easier if you don't resist,</i>\" she whispers, her warm voice melting down your resistance almost instantly.\n\n");
 			outputText("Her fingers trail over your cheek, dazzling sparks bursting to life beneath her fingertips and licking across your skin in their wake, making you shiver comfortably.  Though a small part of your mind still urges you to break away from her tender caress, it is extinguished in short order when she slides her hands under your [armor], running her fingertips over your bare body.  You groan involuntarily, shuddering powerfully and feeling your muscles go slack.\n\n");
 			outputText("Without taking her hands off of you, she skillfully pulls your [armor] off piece by piece using her tails, slowly easing you backward onto the ground.  Fully nude, you give yourself over to her tender touch, shivering as the cool flames zigzag down your [fullChest] toward your groin.  Your [cock] rises up to brush against the underside of her forearm, twitching lightly.  Smirking gleefully, she gives it a gentle squeeze, pushing it back against your stomach and giggling when she lets it go to watch it spring back, slinging a few thin strings of precum into the air.\n\n");
@@ -1029,7 +1044,7 @@ public class KitsuneScene extends BaseContent
 			outputText("Summarily beaten, you fall to the ground, propping yourself up in one final fleeting moment of defiance.  As you collapse in defeat, the fox-woman skips merrily over to your prone form, pausing momentarily to bend down and give you a patronizing kiss on the forehead.  Gripping you under the shoulders, she drags you bodily toward a fallen log" + ((player.tallness > 96) ? ", her face going beet red with the strain as she finally heaves your half-comatose frame into position" : ((player.tallness > 60) ? ", openly grunting with effort" : "") ) + ".\n\n");
 			outputText("\"<i>Let's just see...</i>\"  she quietly muses to herself, slipping her hands under your [armor], <i>\"what we have here...\"</i>\n\n");
 			outputText("Her coy grin turns to one of delighted surprise as her fingertips pass over your [balls], giving them a firm but gentle squeeze.  She licks her lips and eagerly pulls your [armor] off with a hungry glint in her eyes, lifting up your [cock biggest] and flexing it slightly as though examining it.  She leans down, her face close to your balls, and drinks in their scent with a long, drawn-out sigh.\n\n");
-			outputText("\"<i>Smells like you've got a thick one brewing...</i>\"  she says, softly licking the " + ((player.hasSheath()) ? "sheath" : "base" ) + " with a giggle.  Six inky black tails slither forth to bind your limbs, twisting your wrists behind your back.  \"<i>Let's see if we can't help it along...</i>\"\n\n");
+			outputText("\"<i>Smells like you've got a thick one brewing...</i>\"  she says, softly licking the " + ((player.hasSheath()) ? "sheath" : "base" ) + " with a giggle.  "+fluffCount2()+" inky black tails slither forth to bind your limbs, twisting your wrists behind your back.  \"<i>Let's see if we can't help it along...</i>\"\n\n");
 			outputText("She snaps her fingers, blue sparks popping from her fingertips and igniting into a wispy azure flame that dances across her hand.\n\n");
 			outputText("You try and fail to suppress a moan as she presses her palms to your balls, an intense tingle crawling across your scrotum as it tightens up.  The tension in your groin builds steadily, and as the flesh of your sack becomes taut, you realize that her magic is causing your balls to physically swell with seed!\n\n");
 			outputText("Pulling your [cock biggest] into a double-fisted grip, she squeezes tightly around the base while stroking the shaft vigorously up to full mast.  With a playful smirk, she cups her hand around your [cockHead biggest] and blows into it.  Azure flames cascade down your length, making you arch back and thrust your hips upward involuntarily as cool pleasure spreads across your groin.\n\n");
@@ -1126,12 +1141,27 @@ public class KitsuneScene extends BaseContent
 				kitsuneSprite();
 				if (monster.HP < 1) {
 					outputText("The kitsune hits the ground with an 'Oomph', landing roughly on her well-cushioned backside." + ((monster.hairColor == "red" && flags[kFLAGS.redheadIsFuta] == 0) ? "  The moment her rounded rump impacts the dirt, a swirling flame crackles to life between her legs, engulfing her exposed cock.  When it dies away, all that remains of her throbbing member is a pert cherry-colored bud between her dripping lips." : "") + "  She rubs her sore posterior, wincing in pain and pouting childishly.\n\n");
-
 					outputText("\"<i>I only wanted to play...</i>\" she says, looking crestfallen.\n\n" + ((player.lust >= 33) ? "<b>Well, you can certainly think of a few ways to 'play.'  What will you do to her?</b>" : "" ));
 				}
 				//Lust victory
 				else {
 					outputText("The kitsune falls to the ground, one hand buried in her robes as she plays with herself shamelessly, too turned on to continue fighting." + ((monster.hairColor == "red" && flags[kFLAGS.redheadIsFuta] == 0) ? "  The moment her rounded rump impacts the dirt, a swirling flame crackles to life between her legs, engulfing her exposed cock.  When it dies away, all that remains of her throbbing member is a pert cherry-colored bud between her dripping lips." : "") + "\n\n" + ((player.lust >= 33) ? "<b>As you watch her lewd display, you realize your own lusts have not been sated yet. What will you do to her?</b>" : ""));
+				}
+			}
+			if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) {
+				if (flags[kFLAGS.KITSUNES_DEFEATS_COUNTER] >= 1) flags[kFLAGS.KITSUNES_DEFEATS_COUNTER]++;
+				else flags[kFLAGS.KITSUNES_DEFEATS_COUNTER] = 1;
+				if (flags[kFLAGS.KITSUNES_DEFEATS_COUNTER] == 1 && flags[kFLAGS.MET_KITSUNES] == 1) {
+					flags[kFLAGS.KITSUNES_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.MET_KITSUNES] = 2;
+				}
+				if (flags[kFLAGS.KITSUNES_DEFEATS_COUNTER] == 2 && flags[kFLAGS.MET_KITSUNES] == 2) {
+					flags[kFLAGS.KITSUNES_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.MET_KITSUNES] = 3;
+				}
+				if (flags[kFLAGS.KITSUNES_DEFEATS_COUNTER] == 3 && flags[kFLAGS.MET_KITSUNES] == 3) {
+					flags[kFLAGS.KITSUNES_DEFEATS_COUNTER] = 0;
+					flags[kFLAGS.MET_KITSUNES] = 4;
 				}
 			}
 			menu();
@@ -1245,7 +1275,7 @@ public class KitsuneScene extends BaseContent
 
 			outputText("\"<i>Oh my...</i>\" she says, blushing a little as you close in on her, your hot breath on her neck.\n\n");
 
-			outputText("Your fingertips trail down through her hair, gliding over her cheek and neck, down over her bountiful chest and sliding over the curves of her hips.  With your other hand, you tug on the sash that holds her robes together, letting her perky breasts bounce free, and begin to grope and squeeze them.  You grab a nice handful of her plump, juicy ass, eliciting a small squeak from her before she calms down and shivers beneath your touch, her six tails curling forward to caress you gently.\n\n");
+			outputText("Your fingertips trail down through her hair, gliding over her cheek and neck, down over her bountiful chest and sliding over the curves of her hips.  With your other hand, you tug on the sash that holds her robes together, letting her perky breasts bounce free, and begin to grope and squeeze them.  You grab a nice handful of her plump, juicy ass, eliciting a small squeak from her before she calms down and shivers beneath your touch, her "+fluffCount()+" tails curling forward to caress you gently.\n\n");
 
 			outputText("\"<i>Hey now, don't think you've gotten the best of me,</i>\" she says, fighting against the pleasures of your touch with every fiber of her being.  \"<i>I'll...  I'll...</i>\"\n\n");
 
@@ -1420,7 +1450,7 @@ public class KitsuneScene extends BaseContent
 		{
 			clearOutput();
 			kitsuneSprite();
-			outputText("Eying her silky tails, you come up with a wonderful plan to relieve some tension.  Working quickly, you untie the sash around the kitsune's waist and then retie it so that her arms are pinned to her sides.  Turning her onto her back, you prop her up against a tree and then begin to strip out of your [armor], reaching down to gather up her six tails in your arms.  She looks up at you curiously, watching as you wrap one of the fluffy coils around [eachCock], slowly dragging your fingertips through the lustrous fur.  As your fingers slide across their fluffy surface, she gives an involuntary shudder, her cheeks flushing a slight pink.  The tail seems to constrict around you automatically, and without any further encouragement needed the tight ring of fur begins to slide up and down, squeezing and massaging your shaft" + ((player.cocks.length > 1) ? "s" : "" ) + " sensually.\n\n");
+			outputText("Eying her silky tails, you come up with a wonderful plan to relieve some tension.  Working quickly, you untie the sash around the kitsune's waist and then retie it so that her arms are pinned to her sides.  Turning her onto her back, you prop her up against a tree and then begin to strip out of your [armor], reaching down to gather up her "+fluffCount()+" tails in your arms.  She looks up at you curiously, watching as you wrap one of the fluffy coils around [eachCock], slowly dragging your fingertips through the lustrous fur.  As your fingers slide across their fluffy surface, she gives an involuntary shudder, her cheeks flushing a slight pink.  The tail seems to constrict around you automatically, and without any further encouragement needed the tight ring of fur begins to slide up and down, squeezing and massaging your shaft" + ((player.cocks.length > 1) ? "s" : "" ) + " sensually.\n\n");
 
 			outputText("The level of control she has over her tails is absolutely marvelous!  They stroke and tickle along your groin, running their soft, brushlike tips across every inch of exposed flesh that they can find." + ((player.balls > 0) ? "  One warm coil begins to wrap itself around your [balls], leaving the underside exposed so that the tip can curl down, sliding gently back and forth over the seam to send shivers up your spine." : "") + ((player.cocks.length > 1) ? "  Her remaining tails begin to weave in between your cocks, curling and wrapping around the shafts.  As they slide up and down, they begin to gently constrict, acting like furry cock rings." : "  Her remaining tails wrap themselves around your member, sliding up and down along the shaft.  One of them coils around your " + ((player.hasSheath()) ? "sheath" : "base" ) + " and begins to constrict it gently, acting like a furry cock ring.") + "  You feel like you could cum almost instantly from their incredibly delicate touch, but every time you feel your climax coming on, the kitsune holds back.\n\n");
 
@@ -1468,7 +1498,7 @@ public class KitsuneScene extends BaseContent
 
 			outputText("You trail your fingertips slowly over her smooth skin, tracing the edges of her many exotic tattoos on the way to her plump posterior.  Your fingers sink deep into the cushiony flesh, her expansive rear jiggling enticingly as you squeeze and manipulate it.  Experimentally, you give the fleshy globes a small flick with your finger, eliciting a startled cry from the kitsune.  The rounded cheeks wobble and quiver heavily, flesh rippling and jiggling beneath your hand like gelatin.\n\n");
 
-			outputText("Softly, you begin to stroke the fine hairs at the base of her six luxurious tails, chuckling as the pink tone on her cheeks deepens to an intense crimson.  The fur on her tails stands on end with the lightest brush of your fingertips, and small tears well up at the corners of her eyes, her breath becoming labored and quick.  Once she has been satisfactorily reduced to a trembling heap of arousal from your insistent petting, you pull back to strip out of your [armor], working slowly and teasingly to give the coy trickster a taste of her own medicine.\n\n");
+			outputText("Softly, you begin to stroke the fine hairs at the base of her "+fluffCount()+" luxurious tails, chuckling as the pink tone on her cheeks deepens to an intense crimson.  The fur on her tails stands on end with the lightest brush of your fingertips, and small tears well up at the corners of her eyes, her breath becoming labored and quick.  Once she has been satisfactorily reduced to a trembling heap of arousal from your insistent petting, you pull back to strip out of your [armor], working slowly and teasingly to give the coy trickster a taste of her own medicine.\n\n");
 
 			outputText("As your " + num2Text(player.tentacleCocks()) + " writhing tentacles twist free of the confines of your [armor], the kitsune's eyes open wide with desire, her jaw hanging slack and her tongue lolling out of her mouth.  A trail of drool slides down her chin as she hungrily gawks at your slithering tendrils, leaning forward to crawl on her hands and knees toward you.\n\n");
 
@@ -1553,7 +1583,7 @@ public class KitsuneScene extends BaseContent
 
 			outputText("The powerful scent of feminine musk fills the air almost instantly, a viscous puddle spreading between her legs and soaking through the crotch of her robes." + ((player.dogCocks() > 0) || (player.inRut) ? "  As the potent smell fills your nostrils, your " + cockDescript(x) + " swells in anticipation, reacting instinctively to the scent of a female in heat.  Lurid fantasies of plugging her sloppy snatch with your " + ((player.dogCocks() > 0) ? "knot" : cockDescript(x)) + " and stuffing her belly full of kits rush into your mind unbidden" + ((player.cor < 20) ? ", disturbing you slightly" : "") + "." : "") + "  Her body trembles and quakes with carnal need, pure animalistic desire burning in her eyes.  As the effects of her chemical-induced heat come into full swing, she struggles to maintain some semblance of rational thought, desperately willing herself to crawl away.\n\n");
 
-			outputText("You look on with mild amusement as she drags herself one, two, three feet away, and collapses in a shivering wreck, raising her ample rear into the air.  Her hips flex and pump in defiance of her will, all six of her golden tails raised high and fanned out as she claws out of her robes, exposing her drenched fuckhole and gorgeous tattooed ass.\n\n");
+			outputText("You look on with mild amusement as she drags herself one, two, three feet away, and collapses in a shivering wreck, raising her ample rear into the air.  Her hips flex and pump in defiance of her will, all "+fluffCount()+" of her golden tails raised high and fanned out as she claws out of her robes, exposing her drenched fuckhole and gorgeous tattooed ass.\n\n");
 
 			outputText("\"<i>Oooh gods, what did you DO to me?!</i>\"  she demands in between gasps of pleasure, plunging her hand into her soaked twat and pounding her fingers in and out furiously.  \"<i>S-sooo...  hot...  I feel...  Ah!  For the love of Marae, j-just fuck me!</i>\"\n\n");
 
@@ -1622,7 +1652,7 @@ public class KitsuneScene extends BaseContent
 				else outputText("The sheer volume is more than she can handle, and when her now heavily pregnant-looking belly begins to press against the ground, pressurized streams start to pour out of her tight hole, splattering against your [hips] and [fullChest].");
 				outputText("  Despite looking quite as though she has swallowed a beach ball, her sloppy cunt continues to milk your shaft of every drop it can squeeze, even long after your incredible reserves are depleted.");
 			}
-			outputText("\n\nNow with a womb full of fresh, warm semen, her insatiable mating lust at last seems to have calmed down, the presence of your seed quenching the raging fire in her loins.  Panting and sighing, she sinks into a relaxed stupor underneath you, though it seems like her orgasmic expression has been permanently etched into her face.  Her six tails twitch limply, an arm or leg occasionally spasming involuntarily.");
+			outputText("\n\nNow with a womb full of fresh, warm semen, her insatiable mating lust at last seems to have calmed down, the presence of your seed quenching the raging fire in her loins.  Panting and sighing, she sinks into a relaxed stupor underneath you, though it seems like her orgasmic expression has been permanently etched into her face.  Her "+fluffCount()+" tails twitch limply, an arm or leg occasionally spasming involuntarily.");
 
 			outputText(((player.dogCocks() > 0) ? "  You try to pull out, but are a little dismayed to find that her pussy still has a vice grip on your distended knot.  Sighing, you collapse on top of her, enjoying the warmth of her flesh " + ((player.cor < 33) ? "while gently stroking her golden hair " : "" ) + "as you wait for the swollen bulge to deflate." : "" ) + "\n\n");
 
@@ -1819,23 +1849,23 @@ public class KitsuneScene extends BaseContent
 			if (player.cumQ() <= 150) {
 				outputText("The convulsing muscles of her rectum milk your shaft strongly, squeezing from base to tip as you spill stream after stream of thick, cloying cum into her innards.  At the peak of your pleasure, you resume your lustful thrusting, her flesh quivering in shallow waves as your orgasm begins to wane.  As the last stream spurts into her abused asshole, you plant your palms against her thick ass cheeks and squeeze them together around your shaft, pulling back slowly as her anus clamps down, milking the last of your load from your urethra.\n\n");
 
-				outputText("She lies spread eagle on her face, panting contentedly as her six ebony tails waft left and right in the air.  A small spurt of cum follows your cock shortly after you pull out, dribbling onto the ground between her thighs.");
+				outputText("She lies spread eagle on her face, panting contentedly as her "+fluffCount()+" ebony tails waft left and right in the air.  A small spurt of cum follows your cock shortly after you pull out, dribbling onto the ground between her thighs.");
 			}
 			else if ((player.cumQ() <= 350)) {
 				outputText("The convulsing muscles of her rectum milk your shaft strongly, squeezing from base to tip as you spill hot ribbons of thick, sticky seed into her innards.  At the height of your pleasure, you resume your lustful thrusting, her flesh quivering continuously as your orgasm begins to wane.  As one last stream spurts into her abused asshole, you plant your palms against her thick ass cheeks, digging your fingertips into the flesh and squeezing them together around your shaft.  Her anus clamps down around your throbbing rod as you slowly pull back, squeezing the last of your load out of your urethra.\n\n");
-				outputText("She lies spread eagle on her face, panting contentedly as her six ebony tails waft left and right in the air.  A small spurt of cum follows your cock shortly after you pull out, splattering onto the ground between her thighs.");
+				outputText("She lies spread eagle on her face, panting contentedly as her "+fluffCount()+" ebony tails waft left and right in the air.  A small spurt of cum follows your cock shortly after you pull out, splattering onto the ground between her thighs.");
 			}
 			else if ((player.cumQ() <= 1000)) {
 				outputText("The convulsing muscles of her rectum milk your shaft strongly, rippling sensations squeezing you repeatedly from base to tip as you pour out thick ribbons of seed into her innards, splattering her intestines with your cloying cum.  At the height of your pleasure, you resume your lustful thrusting, her flesh quivering continuously in time with each powerful spurt of cum as your orgasm begins to wane.  As the last few thick streams fill her abused asshole, you dig your fingertips into her pliable flesh and squeeze her ass cheeks together around your shaft.  Her anus clamps down hard around your throbbing rod as you slowly pull back, squeezing the last of your load from your urethra.\n\n");
-				outputText("She lies spread eagle on her face, panting contentedly as her six ebony tails waft left and right in the air.  A thick gush of cum follows your cock shortly after you pull out, splattering onto the ground between her thighs.");
+				outputText("She lies spread eagle on her face, panting contentedly as her "+fluffCount()+" ebony tails waft left and right in the air.  A thick gush of cum follows your cock shortly after you pull out, splattering onto the ground between her thighs.");
 			}
 			else if ((player.cumQ() <= 2500)) {
 				outputText("The convulsing muscles of her rectum milk your shaft strongly, heavy rippling sensations squeezing you repeatedly from base to tip as you pour out inhuman amounts of seed into her innards, stuffing her intestines with your cloying cum.  A husky groan escapes her throat as she begins to rise off the ground a little, the obscene amounts of semen distending her stomach as you fill her utterly and completely.  At the height of your pleasure, you resume your lustful thrusting, her flesh quivering continuously in time with each powerful spurt of cum as your orgasm begins to wane.  As the last thick streams stuff her abused asshole, you dig your fingertips into her pliable flesh and squeeze her ass cheeks together around your shaft.  Her anus clamps down hard around your throbbing rod as you slowly pull back, hungrily milking the last of your load from your urethra.\n\n");
-				outputText("She lies spread eagle on her face, panting contentedly as her six ebony tails waft left and right in the air.  An outpouring of cum follows your cock shortly after you pull out, pooling on the ground one stream at a time between her thighs.");
+				outputText("She lies spread eagle on her face, panting contentedly as her "+fluffCount()+" ebony tails waft left and right in the air.  An outpouring of cum follows your cock shortly after you pull out, pooling on the ground one stream at a time between her thighs.");
 			}
 			else {
 				outputText("The convulsing muscles of her rectum milk your shaft strongly, heavy rippling sensations squeezing you repeatedly from base to tip as you pour out truly monstrous amounts of seed into her innards, stuffing her with your cloying cum.  A husky groan escapes from her throat as she begins to rise off the ground, the obscene amounts of semen filling her stomach like a balloon as your seed surges through her intestines.  Her hindquarters are raised into the air as she tilts forward on her cum-bloated belly, now filled out to the size of an exercise ball.  At the height of your pleasure, you resume your lustful thrusting, her flesh quivering continuously as you fill her to excess, pressurized jets of semen spurting out around your " + cockDescript(x) + ".  As the last of your load stuffs her abused asshole, you dig your fingertips into her pliable, cum-streaked flesh and squeeze her ass cheeks together around your shaft.  Her anus clamps down hard around your throbbing rod as you slowly pull back, hungrily milking the last of your load from your urethra.\n\n");
-				outputText("She lies spread eagle on her face, panting contentedly as her six ebony tails waft left and right in the air.  A continuous river of cum follows your cock shortly after you pull out, pooling on the ground between her thighs in a slippery puddle.");
+				outputText("She lies spread eagle on her face, panting contentedly as her "+fluffCount()+" ebony tails waft left and right in the air.  A continuous river of cum follows your cock shortly after you pull out, pooling on the ground between her thighs in a slippery puddle.");
 			}
 			outputText("\n\nShe rolls onto her side, curling up in a puddle of sweat and sex, resting her hands on her " + ((player.cumQ() > 1000) ? "inflated" : "pudgy" ) + " stomach and sighing contentedly, the tips of her tails gently twitching with residual pleasure.  You take a moment to recuperate, then gather your things and turn toward camp, leaving the insensate kitsune to recover on her own.");
 			//Advance time 1hr and return to camp. +Sensitivity, +Libido
@@ -2056,7 +2086,7 @@ public class KitsuneScene extends BaseContent
 
 			outputText("Your hips rise and fall slowly, rolling back and forth while your inner muscles squeeze and massage her pulsating member, teasing her with every ounce of skill you can muster.  It seems as though the teasing trickster enjoys getting a taste of her own medicine - her chest trembles with a deep groan, both hands dragging slowly down her chest in an unrestrained display of ecstasy.  Taking her by the wrists, you hold her arms back on either side of her head, bearing down on her with your [hips] to keep her pinned to the ground.  Her curvaceous hips swivel and squirm underneath you, seeking purchase wherever it can be found for just the tiniest bit of movement.  You ask her how she likes getting a taste of her own medicine, laughing derisively at her struggles and running your fingertip in a circle on her forehead.  She breaks from her raucous moan long enough to purse her lips cheekily, her green eyes glaring at you with a wry frustration.  All of your teasing certainly didn't diminish that fiery spirit, though it is now obfuscated by a layer of fervent lust that shudders through her core with your every touch.\n\n");
 
-			outputText("Her cock swells within you, sending a pulse of tingling coolness rippling up your torso.  You shiver, " + ((player.biggestTitSize() > 3) ? "your [fullChest] jiggling from side to side, " : "" ) + "unable to prevent a moan from escaping your throat.  In retaliation, you rise up and drop your [hips] against hers a tad harder than previously, using your pelvic muscles to squeeze her cock forcefully.  Again and again you thrust her wide hips against the ground, knocking the wind out of her sails and reducing her once more to a quivering heap.  Six crimson tails thrash wildly beneath her, curling toward your body instinctively as they seek to wrap about whatever they can reach.  The silky coils slither across your [skin] as well as her own, sparks crackling in their wake and bringing the two of you to the heights of pleasure.\n\n");
+			outputText("Her cock swells within you, sending a pulse of tingling coolness rippling up your torso.  You shiver, " + ((player.biggestTitSize() > 3) ? "your [fullChest] jiggling from side to side, " : "" ) + "unable to prevent a moan from escaping your throat.  In retaliation, you rise up and drop your [hips] against hers a tad harder than previously, using your pelvic muscles to squeeze her cock forcefully.  Again and again you thrust her wide hips against the ground, knocking the wind out of her sails and reducing her once more to a quivering heap.  "+fluffCount2()+" crimson tails thrash wildly beneath her, curling toward your body instinctively as they seek to wrap about whatever they can reach.  The silky coils slither across your [skin] as well as her own, sparks crackling in their wake and bringing the two of you to the heights of pleasure.\n\n");
 
 			outputText("The sounds of your pelvises mashing together fills the forest, lewd slapping noises echoing through the trees.  Her engorged dick pulses against your walls, twitching almost constantly as her climax builds toward a marvelous conclusion.  You are close to your limit as well, your vaginal muscles clenching down freely as you ride her throbbing rod with a determined zeal, prepared to milk it of all she has to offer.  The first stream of sticky jism hits your womb like a jolt of ice, making you grimace with surprised pleasure as it resolves into a warm tingle that spreads calm through your convulsing nethers.  Your muscles ripple against her shaft, drawing her load upward and into your waiting womb.  Her output is quite prodigious to say the least, ribbon after ribbon of roiling, foaming cum spurting up into your uterus with an audible sloshing sound.  Your belly jiggles and swells, slowly filling with her tingling seed as it expands to the size of a watermelon, thick cum gushing from your gash" + ((player.wetness() == 5) ? " while a viscous spray of femcum soaks her front" : "") + ".\n\n");
 
@@ -2199,7 +2229,7 @@ public class KitsuneScene extends BaseContent
 
 			outputText("The sash around her waist falls away as you tug on the knot, reaching around to slide your fingers down the front of her robes and pull them open.  Her bare breasts bounce free, and she puffs her chest out a bit in a bid to get you to squeeze them.  Nearly every muscle in her body goes slack when you begin to grope and tease the supple mounds, her arm still gently pumping up and down your shaft on autopilot.  It takes only the slightest bit of teasing to coax her nipples to fill out into rigid, sensitive nubs, and by that point she is putty in your hands.\n\n");
 
-			outputText("Her jaw hangs slack, each shuddering breath making her breast quiver in your hands as she stares off into space with a half-lidded gaze.  Her six tails have nearly ceased moving altogether, limply curled around you, only giving the slightest twitch every now and again when you pinch her tender nipples or drag a finger sensually across her bare flesh.  Each time your sensual teasing overcomes her, you back off, only rewarding her by resuming when she comes to her senses and continues to stroke your cock - she mustn't forget who is in charge, after all.\n\n");
+			outputText("Her jaw hangs slack, each shuddering breath making her breast quiver in your hands as she stares off into space with a half-lidded gaze.  Her "+fluffCount()+" tails have nearly ceased moving altogether, limply curled around you, only giving the slightest twitch every now and again when you pinch her tender nipples or drag a finger sensually across her bare flesh.  Each time your sensual teasing overcomes her, you back off, only rewarding her by resuming when she comes to her senses and continues to stroke your cock - she mustn't forget who is in charge, after all.\n\n");
 
 			outputText("She's nothing if not obedient, though her technique seems to be somewhat slurred by your teasing.  Changing up your approach, you slide one hand down to her hip while the other moves up to her face, cradling her head gently and tilting it to one side, exposing her neck.  You firmly bury your fingertips in the quivering flesh of her ass, groping and squeezing it lustfully, then lean forward to press your lips to her shoulder, running your tongue sensually along her smooth skin.\n\n");
 
@@ -2357,7 +2387,7 @@ public class KitsuneScene extends BaseContent
 			}
 			flags[kFLAGS.KITSUNE_SHRINE_VISIT]++;
 			var SphereMastery:Number = 10;
-			if (player.hasPerk(MutationsLib.KitsuneThyroidGlandFinalForm)) SphereMastery += 15;
+			if (player.hasPerk(MutationsLib.KitsuneThyroidGlandEvolved)) SphereMastery += 15;
 			//[Read Books] [Meditate] [Steal Statue] - [Leave]
 			menu();
 			addButton(0, "Read Books", readKitsuneBooks);

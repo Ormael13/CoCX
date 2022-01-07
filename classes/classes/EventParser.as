@@ -53,9 +53,7 @@ public class EventParser {
     }
 
     public static function gameOver(clear:Boolean = false):void { //Leaves text on screen unless clear is set to true
-        if (CoC.instance.testingBlockExiting) {
-            EngineCore.doNext(SceneLib.camp.returnToCampUseOneHour); //Prevent ChaosMonkah instances from getting stuck
-        }
+        if (CoC.instance.testingBlockExiting) EngineCore.doNext(SceneLib.camp.returnToCampUseOneHour); //Prevent ChaosMonkah instances from getting stuck
         else {
             var textChoices:Number = Utils.rand(4);
             if (clear) EngineCore.clearOutput();
@@ -84,11 +82,9 @@ public class EventParser {
             //addButton(3, "NewGamePlus", charCreation.newGamePlus).hint("Start a new game with your equipment, experience, and gems carried over.");
             if (CoC.instance.flags[kFLAGS.EASY_MODE_ENABLE_FLAG] == 1 || CoC.instance.debug) EngineCore.addButton(4, "Debug Cheat", playerMenu);
             gameOverMenuOverride();
-
         }
         CoC.instance.inCombat = false;
         DungeonAbstractContent.dungeonLoc = 0; //Replaces inDungeon = false;
-
 		if (CoC.instance.player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) {
 			if (CoC.instance.player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) CoC.instance.player.removeStatusEffect(StatusEffects.ThereCouldBeOnlyOne);
 			if (CoC.instance.flags[kFLAGS.EBON_LABYRINTH_RECORD] < CoC.instance.player.statusEffectv1(StatusEffects.EbonLabyrinthB)) CoC.instance.flags[kFLAGS.EBON_LABYRINTH_RECORD] = CoC.instance.player.statusEffectv1(StatusEffects.EbonLabyrinthB);
@@ -98,11 +94,11 @@ public class EventParser {
 			if (CoC.instance.player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss2)) CoC.instance.player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss2);
 		}
 		if (CoC.instance.player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
+			if (CoC.instance.flags[kFLAGS.NEISA_FOLLOWER] == 3) CoC.instance.flags[kFLAGS.PLAYER_COMPANION_1] = "";
 			if (CoC.instance.player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) CoC.instance.player.removeStatusEffect(StatusEffects.ThereCouldBeOnlyOne);
 			CoC.instance.player.removeStatusEffect(StatusEffects.RiverDungeonA);
 		}
     }
-
     private static function gameOverMenuOverride():void { //Game over event; override whatever the fuck has been done to the UI up to this point to force display of the data and new game buttons
         CoC.instance.mainView.showMenuButton(MainView.MENU_NEW_MAIN);
         CoC.instance.mainView.showMenuButton(MainView.MENU_DATA);
@@ -139,14 +135,14 @@ public class EventParser {
         EngineCore.doNext(SceneLib.camp.returnToCampUseOneHour);
     }
 
-    public static function goNext(time:Number, needNext:Boolean):Boolean {
-        Utils.Begin("eventParser", "goNext", time);
-        var x:Boolean = goNextWrapped(time, needNext);
+    public static function goNext(needNext:Boolean):Boolean {
+        Utils.Begin("eventParser", "goNext");
+        var x:Boolean = goNextWrapped(needNext);
         Utils.End("eventParser", "goNext");
         return x;
     }
 
-    private static function goNextWrapped(time:Number, needNext:Boolean):Boolean {
+    private static function goNextWrapped(needNext:Boolean):Boolean {
         var player:Player = CoC.instance.player;
         //Update system time
         //date = new Date();
@@ -165,33 +161,51 @@ public class EventParser {
             }
             timeAwareLargeLastEntry = -1;
         }
-        while (CoC.instance.timeQ > 0) {
+        var time:Number = CoC.instance.timeQ;
+        while (CoC.instance.timeQ > 0 || CoC.instance.timeQmin > 0) {
+            // Advance minutes, but only 1 hour at a time
+            if (CoC.instance.timeQmin >= 60) {
+                CoC.instance.model.time.minutes += 60;
+                CoC.instance.timeQmin -= 60;
+            } else {
+                CoC.instance.model.time.minutes += CoC.instance.timeQmin;
+                CoC.instance.timeQmin = 0;
+            }
+            if (CoC.instance.model.time.minutes >= 60) {
+                CoC.instance.model.time.minutes -= 60;
+                CoC.instance.timeQ++;
+            }
+            if (CoC.instance.timeQ <= 0) {
+                // There were minutes scheduled, but they didn't result in hour change.
+                break;
+            }
             CoC.instance.timeQ--;
             CoC.instance.model.time.hours++;
             var HPPercent:Number;
             HPPercent = player.HP/player.maxHP();
             player.statStore.advanceTime(Buff.RATE_HOURS,1);
             player.HP = HPPercent*player.maxHP();
-            if (player.statStore.recentlyRemovedTags["IzumiSmoke"]){
+            if (player.statStore.recentlyRemovedTags["IzumiSmoke"]) {
                 EngineCore.outputText("\n<b>You groan softly as your thoughts begin to clear somewhat. It looks like the effects of Izumi's pipe smoke have worn off.</b>\n");
             }
-            if (player.statStore.recentlyRemovedTags["AndysSmoke"]){
+            if (player.statStore.recentlyRemovedTags["AndysSmoke"]) {
                 EngineCore.outputText("\n<b>You groan softly as your body begins to feels less sluggish and mind less sharp. It looks like the effects of Andy's pipe smoke have worn off.</b>\n");
             }
-            if (player.statStore.recentlyRemovedTags["DrunkenPowerEmpower"]){
+            if (player.statStore.recentlyRemovedTags["DrunkenPowerEmpower"]) {
                 EngineCore.outputText("\nYou sober up, loosing the benefits of your oni drunken rampage.\n");
             }
-            if (player.statStore.recentlyRemovedTags["Hangover"]){
+            if (player.statStore.recentlyRemovedTags["Hangover"]) {
                 EngineCore.outputText("\nYour head finally clears as your hangover wears off. Drinking with the shemale lizard was definitely a bad idea.\n");
             }
-            if (player.statStore.recentlyRemovedTags["Feeding Euphoria"]){
+            if (player.statStore.recentlyRemovedTags["Feeding Euphoria"]) {
                 EngineCore.outputText("\nThe change in your body agility prowess confirms that the effects of cum must have worn off.\n");
             }
             player.HP = HPPercent*player.maxHP();
-            SceneLib.combat.regeneration(false);
-            if (player.hasPerk(PerkLib.JobSoulCultivator)) SceneLib.combat.soulforceregeneration(false);
-            if (player.hasPerk(PerkLib.JobSorcerer) || player.hasPerk(PerkLib.JobElementalConjurer)) SceneLib.combat.manaregeneration(false);
-            SceneLib.combat.wrathregeneration(false);
+            SceneLib.combat.regeneration1(false);
+            if (player.hasPerk(PerkLib.JobSoulCultivator)) SceneLib.combat.soulforceregeneration1(false);
+            if (player.hasPerk(PerkLib.JobSorcerer) || player.hasPerk(PerkLib.JobElementalConjurer)) SceneLib.combat.manaregeneration1(false);
+            SceneLib.combat.wrathregeneration1(false);
+			SceneLib.combat.fatigueRecovery1(false);
             //Inform all time aware classes that a new hour has arrived
             for (var tac:int = 0; tac < _timeAwareClassList.length; tac++) {
                 item = _timeAwareClassList[tac];
@@ -353,7 +367,7 @@ public class EventParser {
             return true;
         }
         //Unequip shield if you're wielding a large weapon.
-        if (((player.weaponPerk == "Large" && !player.hasPerk(PerkLib.GigantGrip)) || player.weaponPerk == "Dual" || player.weaponPerk == "Dual Large") && player.shield != ShieldLib.NOTHING) {
+        if (((player.weaponSpecials("Large") && !player.hasPerk(PerkLib.GigantGrip)) || player.weaponSpecials("Dual") || player.weaponSpecials("Dual Large")) && player.shield != ShieldLib.NOTHING) {
             EngineCore.outputText("Your current weapon requires the use of two hands. As such, your shield has been unequipped automatically. ");
             SceneLib.inventory.takeItem(player.setShield(ShieldLib.NOTHING), playerMenu);
             return true;
@@ -647,7 +661,7 @@ public class EventParser {
         if (CoC.instance.model.time.minutes > 59) {
             CoC.instance.timeQ++;
             CoC.instance.model.time.minutes -= 60;
-            if (!EngineCore.buttonIsVisible(0)) goNext(CoC.instance.timeQ, needNext);
+            if (!EngineCore.buttonIsVisible(0)) goNext(needNext);
         }
         time = Math.floor(time);
         //Advance hours
@@ -661,27 +675,22 @@ public class EventParser {
         }
         EngineCore.statScreenRefresh();
     }
-	public static function cheatTime2(time:Number, needNext:Boolean = false):void {
-        //Advance minutes
-        var minutesToPass:Number = time;
-        CoC.instance.model.time.minutes += minutesToPass;
-        if (CoC.instance.model.time.minutes > 59) {
-            CoC.instance.timeQ++;
-            CoC.instance.model.time.minutes -= 60;
-            if (!EngineCore.buttonIsVisible(0)) goNext(CoC.instance.timeQ, needNext);
+	public static function eachMinuteCount(time:Number, needNext:Boolean = false):void {
+        // Ex. minutes = 45, time = 20, overflow = 6
+        var overflow:Number = (CoC.instance.model.time.minutes + time) - 59;
+        if (overflow > 0) {
+            CoC.instance.timeQmin += overflow;
+            time -= overflow;
         }
-        time = Math.floor(time);
-        //Advance hours
-        if (CoC.instance.timeQ > 0) {
-            CoC.instance.timeQ--;
-            CoC.instance.model.time.hours++;
-            if (CoC.instance.model.time.hours > 23) {
-                CoC.instance.model.time.days++;
-                CoC.instance.model.time.hours = 0;
-            }
-        }
+        CoC.instance.model.time.minutes += time;
+		SceneLib.combat.regeneration(time);
+		if (CoC.instance.player.hasPerk(PerkLib.JobSoulCultivator)) SceneLib.combat.soulforceregeneration(time);
+		if (CoC.instance.player.hasPerk(PerkLib.JobSorcerer) || CoC.instance.player.hasPerk(PerkLib.JobElementalConjurer)) SceneLib.combat.manaregeneration(time);
+		SceneLib.combat.wrathregeneration(time);
+		SceneLib.combat.fatigueRecovery(time);
+		SceneLib.combat.venomCombatRecharge(time);
         EngineCore.statScreenRefresh();
-    }
+	}
 
     public static function growHair(amount:Number = .1):Boolean {
         //Grow hair!

@@ -2565,7 +2565,6 @@ public function jojoTalkVillage():void
 	clearOutput();
 	jojoSprite();
 	flags[kFLAGS.TIMES_TALKED_WITH_JOJO]++;
-
 	outputText("You decide to ask Jojo about his village.\n\n");
 	outputText("He speaks softly with a smile on his face and in his voice, “<i>It was a small village near a large beautiful lake. We were peaceful people who laughed and trusted one another, just good simple folk you know?”\n\n");
 	outputText("“Most of the people of Belridge were either fishers or farmers with huge families that stayed near the village. There were a few hunters and a few craftsmen. We made enemies of no one and sought to do no harm to others,</i>” Jojo says, his smile fading.\n\n");
@@ -2573,7 +2572,6 @@ public function jojoTalkVillage():void
 	outputText("“<i>My father was a fisherman.  He was this calm, strong man with a lot of silver whiskers that always smelled like fish.  I remember I used to go out on the boat with him and a few of my brothers and he’d always make sure to pick me up and put me on his shoulders... that is until I got too big. He always made everything look so easy, like the world was just there to shake his hand and make him smile. No one could cook seafood like he did, no one.</i>”\n\n");
 	outputText("“<i>Then there was my mother who was a little high strung, but no one could hug you more fiercely or love you more dearly.  She was a small woman with a big soul who loved her family more than anything.  She was a seamstress before she met my dad and was always the brightest one in the room, which is hard when you have seventeen loud children clamoring for your attention.</i>”\n\n");
 	outputText("“<i>Even with 19 people living under one roof my family wasn’t the biggest family in town, but there was always plenty work and plenty food.  It was a nice simple existence and I am thankful for the time I had with everyone in that village,</i>” he finishes with a serene smile.\n\n");
-
 	if (player.cor < 40)
 	{
 		outputText("Looks like Jojo's childhood wasn't so bad... you thank the mouse morph monk for sharing his treasured memories with you now that the conversation is over.\n\n");
@@ -2582,9 +2580,8 @@ public function jojoTalkVillage():void
 	{
 		outputText("Looks like Jojo’s childhood wasn’t so bad. A little sickly sweet and void of wet pussies and drooling dicks but not bad. You tell him you’re happy to have him near you and he smiles for ear to ear, ignorant of your thoughts.\n\n");
 	}
-
-	menu();
-	doNext(camp.returnToCampUseOneHour); // Dunno where exactly to kick back to, fuck it, back to camp yo!
+	doNext(talkMenu); // Dunno where exactly to kick back to, fuck it, back to camp yo!
+	eachMinuteCount(5);
 }
 
 //Joining the Monks convo
@@ -2593,16 +2590,14 @@ public function jojoTalkJoiningTheMonks():void
 	clearOutput();
 	jojoSprite();
 	flags[kFLAGS.TIMES_TALKED_WITH_JOJO]++;
-
 	outputText("You decide to ask Jojo why he decided to become a monk in the first place.\n\n");
 	outputText("He gives you a warm smile as he speaks, “<i>Well I grew up in a big family of 19 so when I was younger I was always the quiet one.  I guess I was just introverted but being quiet meant that I didn’t always get a lot of attention.  It didn’t bother me, quite the opposite actually, I enjoyed quiet introspection but with so many brothers and sisters it was next to impossible to get a quiet moment at home.</i>”\n\n");
 	outputText("“<i>So I would sneak out. My father understood but it drove my mother crazy.  Whenever she noticed I had slipped away she would stop everything in the house and take my two oldest brothers to come find me.  I never understood why it was such a big deal.  We were in a small village near a prestigious monastery, we were safe.  Parents let their kids go out and play and run and explore because everyone knew everyone but not my mom.  She had to know where you were going, what you were doing and how long until you got back. I would’ve told her but saying I wanted to explore wasn’t a satisfactory answer.</i>”\n\n");
 	outputText("“<i>Whenever she found me she would yell for a bit and then hold me close like she’d just watched me dodge a charging rhinoceros.  Whenever she asked why I did it I just told her the truth, it was too loud and crowded at home.  After a few weeks of this she suggested a compromise.  She said I could leave if I had one of my older brothers walk me to the temple and I stayed there where the clergy could see me and keep me safe and fed.  Honestly I think my dad came up with the idea, he was always good at compromising and keeping the peace.</i>”\n\n");
 	outputText("“<i>The temple became very important to me.  I read about the world, I spoke to the clergy and I sat and thought.  I was enraptured with learning but I didn’t want to be a priest, I don’t know why... I guess it just didn’t appeal to me.  When I first saw the monks visiting the temple, it was like dawn breaking.  After that I waited until I was old enough to join and made the short pilgrimage to the Monastery of the Celestial Lotus.</i>”\n\n");
 	outputText("Jojo wears this quiet little smile as he finishes.  Then he chuckles and says, “<i>Thank you for the memories, [name].  I enjoy our talks.</i>”\n\n");
-
-	menu();
-	doNext(camp.returnToCampUseOneHour);
+	doNext(talkMenu);
+	eachMinuteCount(5);
 }
 
 //Fall of the Monks convo
@@ -2611,7 +2606,6 @@ public function jojoTalkFallOfTheMonks():void
 	clearOutput();
 	jojoSprite();
 	flags[kFLAGS.TIMES_TALKED_WITH_JOJO]++;
-
 	outputText("You decide to ask Jojo if he'd be willing to tell you exactly what happened to the monks of his order.\n\n");
 	outputText("Jojo speaks with eyes downcast and a voice soft as feathers landing on fallen soldiers, “<i>Truthfully?...  I don’t know exactly how it happened... or why... but my order was wiped out.  Though I've looked for my brothers and sisters of the Celestial Lotus ever since then, I'm the only survivor, as far as I can tell.  You see the demons attacked the monastery while I was away with one of the senior brothers.  I was a mere novice and he was one of the more fun teachers so we lost track of time.  The sun was setting and we were halfway back to the monastery when we saw what we thought was a huge column of smoke rising from the central building.  When we got closer we saw the cloud for what it truly was, a billowing tower of those imps.  We were spotted and several of them came flying at us - they crossed the distance far faster than we could have.</i>”\n\n");
 	outputText("“<i>Senior Brother Logray didn't hesitate - he leapt in front of me, staff twirling, shattering skulls and breaking limbs with each sweep.  As he barred their path, he cried out to me to flee, to run for the safety of the village... and I did.  Overwhelmed by the bitter-sweet stink of corruption wafting off the demons, I ran like a frightened little field mouse.  I was a coward and I left my masters and all my friends to face the horde one mouse short.</i>”\n\n");
@@ -2619,9 +2613,8 @@ public function jojoTalkFallOfTheMonks():void
 	outputText("“<i>Never again....</i>”\n\n");
 	outputText("You try to comfort Jojo, telling him he couldn’t have made a difference being but a single mouse, but he waves you off.  He tells you he is fine and thanks you for your concern.\n\n");
 	outputText("You can tell the story has affected him, but you’re surprised to hear the resolve in his voice and see the defiant strength in his eyes. Excusing yourself, you rise and leave him to do as he will.\n\n");
-
-	menu();
-	doNext(camp.returnToCampUseOneHour);
+	doNext(talkMenu);
+	eachMinuteCount(5);
 }
 
 //Forest Convo
@@ -2630,12 +2623,10 @@ public function jojoTalkForestConvo():void
 	clearOutput();
 	jojoSprite();
 	flags[kFLAGS.TIMES_TALKED_WITH_JOJO]++;
-
 	outputText("You think for a while and decide to ask Jojo how he ended up in the forest.\n\n");
 	outputText("He looks at you with suddenly tired eyes as he says, “<i>Well, I was training in the fields with one of the senior brothers when we saw the monastery was under attack.  He sent me to the village to save me since I was a novice.  I decided to rally the people there.  I figured that I had ran like a coward, I wasn’t going to hide like one.  It was the village where I was born and a home to many of my brothers and sisters, both figuratively and literally.  I ran towards the village with everything I had, hoping to redeem my cowardice by returning with a militia of mice to aid the members of my order.</i>”  His voice catches and he looks away, obviously struggling to form words.\n\n");
 	outputText("When you open your mouth to speak he raises his hand, asking for a moment with a single furry finger.\n\n");
 	outputText("“<i>I was too late.  The demons had struck there first, then moved on to my monastery once they were finished.  I spent hours searching the streets; every basement, every alley, every attic, every place I could think of where somebody might have hidden.  Nothing but ruined buildings, smears of assorted tainted bodily fluids, and the occasional corpse - some demons, many more mice.</i>”\n\n");
-
 	if (player.cor < 35)
 	{
 		outputText("That's terrible... you can only imagine what you'd feel like if you returned to Ignam and saw it destroyed... your family, your friends... You put a hand on the monk's shoulder, intent on comforting him for the moment.\n\n");
@@ -2648,9 +2639,7 @@ public function jojoTalkForestConvo():void
 	{
 		outputText("Mice... must've been a village of wimps if a few demons could take them out... The monk is obviously distressed... maybe you should comfort him for the moment, if only to make him stop.  You put a hand on his silent shoulder...\n\n");
 	}
-
 	outputText("“<i>Thank you [name].  I was born there and seeing that...</i>”  The monk falls silent again.\n\n");
-
 	if (player.cor < 35)
 	{
 		outputText("You slide an arm around Jojo’s shoulders in an attempt to reassure the monk.  He manages a smile in response as he looks up at you.  A single tear manages to slide down his muzzle as he says, “<i>Thank you, my friend.</i>”\n\n");
@@ -2664,17 +2653,14 @@ public function jojoTalkForestConvo():void
 		outputText("Seeing an opportunity, you wrap your arms around the monk as he silently tries to reign in his emotions.  Holding him close you can feel the mouse morph’s lean muscles as you rub his back ‘accidentally’ going too low and feeling the base of his tail and the top of his tight little pert ass.  As you ‘hug’ the mouse you make sure he doesn’t notice your true intentions and when you release him he actually thanks you.\n\n");
 		dynStats("lus+", 10);
 	}
-
 	outputText("After you’ve comforted the monk you ask him what he did next.\n\n");
-
 	outputText("When he answers you his shoulders are squared and his voice has regained some of its former volume, “<i>I did what anyone looking at the shattered remains of their life would.  I buried them.  For the next few hours I took the time to lay each and every villager to rest before praying over them all.  Then I went back to my monastery, praying with all my heart that they had managed to hold out, at least long enough to escape rather than to be captured and twisted into perverse shells of their former selves.  Yet the monastery was another graveyard.  I found many bodies there.  Some were of the order but there were also countless imps and more than a few demons.  The place was defiled with semen and milk reeking of corruption.</i>”\n\n");
 	outputText("You see anger in the monk’s eyes as he clenches his fists, “<i>They had utterly defiled the monastery and there was nothing I could do about it but honor its memory.  I labored for what felt like days; burying the fallen; seeking out survivors; gathering what few items of my faith had escaped demonic desecration.</i>”  He touches the large beads around his neck meaningfully.\n\n");
 	outputText("“<i>Then, I burned the monastery to the ground and set fire to all the fields...  Since that day, I have eked out a meager existence in the wilderness; I study the texts I can, train my body as best I can, and seek to fortify my soul against demonic blandishments.  Though I have technically progressed far along my path, with no master and only a pale echo of a fraction of my order’s texts at my disposal, I may never be a true master in my own right.</i>”\n\n");
 	outputText("He gives you an appraising look before looking away, “<i>Until I met you, [name], my only purpose had been to find the demons who destroyed my order and make them pay for the lives they took.  That is why I was in the forest, I was in the middle of a harsh training regimen to increase my power and skill so that I may seek out those evil brutes who took everything I loved away from me... but vengeance is not the way of the Celestial Lotus.  The Celestial doesn’t train bullies or assassins.  Finding you and aiding in your quest to protect your village from these demonic creatures of perversion gave me new purpose and would make my departed brothers and sisters proud.  I can’t honestly say I’ve given up on having my vengeance but... I will aid you in your quest first if for nothing more than to honor our friendship and honor the memory of the order and its teachings.</i>\n\n");
 	outputText("Looking renewed and at peace despite the emotional storm you know must be raging within his tiny frame Jojo returns to what he was doing after thanking you for giving him new purpose.\n\n");
-
-	menu();
-	doNext(camp.returnToCampUseOneHour);
+	doNext(talkMenu);
+	eachMinuteCount(5);
 }
 
 //Yourself
@@ -2684,7 +2670,6 @@ public function jojoTalkYourOrigin():void // Prob tack on some interaction count
 	clearOutput();
 	jojoSprite();
 	flags[kFLAGS.TIMES_TALKED_WITH_JOJO]++;
-
 	outputText("As you start up a conversation with Jojo, the two of you speak at length about nothing really important or noteworthy, just small talk.  That is until the monk brings up the subject of your background.  You tell him about Ingnam and your family there, and the tradition of sending a champion through the portal.  When he asks why anyone would choose to come here, you tell him how legends say that in years a champion wasn’t sent through the portal, terrible things happened to the village.\n\n");
 	outputText("“<i>That portal?</i>” Jojo asks, pointing to the very portal you stumbled through. You nod and he asks, “<i>So... what were you like in Ingnam?</i>”\n\n");
 	if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) {
@@ -2735,8 +2720,8 @@ public function jojoTalkYourOrigin():void // Prob tack on some interaction count
 		outputText("You're not sure where to start. You have been doing countless activities before arriving in Mareth that it'd be virtually impossible to list all of them. It's almost impossible to choose where to start or what to even begin talking about. It comes to the point where you're not sure if there's anything you HAVEN'T done.\n\n");
 	}
 	outputText("Jojo smiles now that he has gotten to know you a little better. After a little bit more small talk, the two of you decide the conversation is over and part ways.\n\n");
-	menu();
-	doNext(camp.returnToCampUseOneHour);
+	doNext(talkMenu);
+	eachMinuteCount(5);
 }
 
 //Dungeon Convo: Factory
@@ -2746,15 +2731,11 @@ public function jojoTalkFactory():void
 	clearOutput();
 	jojoSprite();
 	flags[kFLAGS.TIMES_TALKED_WITH_JOJO]++;
-
 	outputText("You tell Jojo about your having successfully found and stopped the demonic factory.  You tell him how you found out the factory was there and how you defeated the demons inside. He seems impressed.\n\n");
-
 	if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2)
 	{
 		outputText("His ears perk at the news as you continue, telling him that you destroyed the factory controls, which permanently shut down the factory - but released an enormous quantity of corrupted fluids into the environment.\n\n");
-
 		outputText("Jojo cocks his head to the side as he considers his words carefully before speaking, “<i>I guess it seems like the right move.  Permanently disabling the factory would not only deal a heavy blow to the demons, but also give the rest of us time to reclaim the forest... but I don’t know.  If the release of fluids was as much as you say it was then there’s a chance that it’ll do more harm than good.  I’ve seen what corruption does to this world and that much corrupted fluid flooding out all at once could really hurt our cause. I’m not saying it was the wrong thing to do, or lessening your accomplishment, but you have to be careful.  The demons aren’t just powerful, they’re deceptive.</i>”\n\n");
-
 		outputText("You listen to the monk’s council and despite his concerns he seems genuinely happy to hear you’ve struck a blow against the demonic regime.\n\n");
 	}
 	else
@@ -2762,11 +2743,9 @@ public function jojoTalkFactory():void
 		outputText("His ears perk at the news as you continue, telling him that you shut down the factory and destroyed the controls, for the sake of the surrounding environment.\n\n");
 		outputText("Jojo’s chest swells with pride as he looks at you with new eyes before saying, “<i>Wow [name], I don’t know what to say.  I know it uprooted your life and took you away from the ones you love but I sincerely believe that the day you came through that portal was a good day for all of Mareth.  I am proud of you and humbled by the fact that I can call you my friend.</i>”  He rises and gives you a hug of fierce devotion and friendly affection before pulling away and saying, “<i>We’ll have to watch the factory though... the demons can’t be allowed to reopen that evil place.</i>”\n\n");
 	}
-
 	outputText("Once the two of you are done discussing the demonic factory Jojo excuses himself to think on what you’ve told him.\n\n");
-
-	menu();
-	doNext(camp.returnToCampUseOneHour);
+	doNext(talkMenu);
+	eachMinuteCount(5);
 }
 
 //Dungeon Convo: Sand Cave
@@ -2776,10 +2755,8 @@ public function jojoTalkSandCave():void
 	clearOutput();
 	jojoSprite();
 	flags[kFLAGS.TIMES_TALKED_WITH_JOJO]++;
-
 	outputText("You tell Jojo about your discovery of a cave that served as a base for the sand witches of the desert. You tell him about the whole ordeal, and he listens with wide eyes and jaw agape. When you tell him about meeting the Sand Mother Jojo gasps.\n\n");
 	outputText("“<i>Wait... so you mean to tell me that these sand witches a-are... allies of Marae?  But they’re s-so... sexual.</i>”  He seems genuinely confused, but you tell him that sex is part of nature after all, and that there is nothing wrong or shameful about it.  He agrees with you, but decries the way the sand witches use their power.\n\n");
-
 	//if PC raped Sand Mother
 	if (flags[kFLAGS.SAND_WITCHES_COWED] == 1)
 	{
@@ -2798,13 +2775,11 @@ public function jojoTalkSandCave():void
 		outputText("You tell Jojo about how the Sand Mother spoke with you once you had battled your way to her.  You tell him she was reasonable and how the whole thing was, in the end, a simple misunderstanding.\n\n");
 		outputText("He marvels at the way you handled the situation, “<i>Many would have expected her trying to talk to them to be a trap [name] and hurried to attack her but not you... that is... wow [name], you are truly a great individual.</i>”\n\n");
 	}
-
 	//[if {PC met bath slut}
 	if (flags[kFLAGS.MET_MILK_SLAVE] == 1)
 	{
 		outputText("You tell Jojo about the poor mind addled thing you found sitting in a tub of milk acting as a slave to the sand witch coven.\n\n");
 		outputText("He shudders like a child being told a scary story and asks, “<i>What did you do?</i>”\n\n");
-
 		//[if {PC hasn’t spoken to Sand Mother about Bath Slut yet}
 		// Can't differentiate this
 		// All I have is HAS_MET and HAS_RECRUITED effectively
@@ -2818,7 +2793,6 @@ public function jojoTalkSandCave():void
 		{
 			outputText("As the question leaves his lips you give Jojo a confused look and, with a glance, direct his gaze toward " + flags[kFLAGS.MILK_NAME] + ".\n\n");
 			outputText("He slaps his own forehead and says, “<i>Oh... yeah... right.</i>” Obviously embarrassed by not putting two and two together. He smiles good naturedly though, “<i>I don’t know I guess I just assumed you found some poor mind addled soul and decided to save her.</i>” Jojo says as he looks over at " + flags[kFLAGS.MILK_NAME] + ".\n\n");
-
 			//[if (bathSlutStage1 - unaltered)
 			if (flags[kFLAGS.MILK_SIZE] == 0)
 			{
@@ -2836,13 +2810,11 @@ public function jojoTalkSandCave():void
 			}
 		}
 	}
-
 	// There's an untracked gap here, where the player doesn't accept a blessing from the Cum Witch, but there's no other existing tracking for this shit.
 	//[if {PC met Cum Witch}
 	if (flags[kFLAGS.CUM_WITCH_DEFEATED] == 1 || flags[kFLAGS.BEEN_BLESSED_BY_CUM_WITCH] == 1)
 	{
 		outputText("You tell Jojo about the cum witch, the herm witch responsible for inseminating the witches there, acting as a father to the others.  When you do he scratches his ear, “<i>Like I said, I don’t get why sex is so overly important to these creatures but whatever, continue.</i>”\n\n");
-
 		//[if {PC allowed Cum Witches to increase their numbers}
 		if (flags[kFLAGS.MORE_CUM_WITCHES] == 1)
 		{
@@ -2860,11 +2832,9 @@ public function jojoTalkSandCave():void
 			outputText("“You tell Jojo that you’re actually done. He says, “<i>Oh... well that’s weird.</i>” and after an awkward silence, the two of you burst out laughing.\n\n");
 		}
 	}
-
 	outputText("Having concluded the conversation the two of you stand and Jojo gives you an appreciative pat on the shoulder, seeming more fond of you.\n\n");
-
-	menu();
-	doNext(camp.returnToCampUseOneHour);
+	doNext(talkMenu);
+	eachMinuteCount(5);
 }
 
 //Training
@@ -2873,18 +2843,15 @@ public function apparantlyJojoDOESlift():void
 {
 	clearOutput();
 	jojoSprite();
-
 	//{First Session only}
 	if (flags[kFLAGS.UNLOCKED_JOJO_TRAINING] == 0)
 	{
 		flags[kFLAGS.UNLOCKED_JOJO_TRAINING] = 1;
 		outputText("You ask Jojo if he can teach you how to fight like a monk.\n\n");
 		outputText("Jojo considers you for a moment before saying, “<i>Yes I can teach you the forms, skills and techniques I was taught by my order. Plus...</i>” Jojo gazes off into the distance, his attention drifing for a moment before he continues, “<i>since I am all that is left, it is up to me to bestow this knowledge upon a worthy soul.</i>”\n\n");
-
 		if (player.cor >= (25 + player.corruptionTolerance()))
 		{
 			outputText("Jojo frowns, “<i>I am willing to teach you [name], when I can.  However I am no master, therefore I am unworthy of taking a disciple.  But as your friend, I will teach you what I know so that you may protect yourself.  I believe our time would be better spent meditating.  There is very little you can do with these techniques without first finding your center.</i>”\n\n");
-
 			// Kick back to previous menu
 			menu();
 			doNext(jojoCamp);
@@ -2893,7 +2860,6 @@ public function apparantlyJojoDOESlift():void
 		else
 		{
 			outputText("Jojo smiles, “<i>I am not a master, therefore I am unworthy of taking you on as a disciple... but as a friend I can teach you all I know.  Whenever you are ready, just ask.</i>.”\n\n");
-
 			// Sounds like this should kick back to menu
 			menu();
 			doNext(jojoCamp);
@@ -2903,30 +2869,25 @@ public function apparantlyJojoDOESlift():void
 	// {Repeatable Generic Training Session Stuffs}
 	else
 	{
-		if (player.fatigue >= player.maxFatigue() - 60)
+		if (player.fatigue >= player.maxFatigue() - 150)
 		{
 			outputText("You ask the monk to continue your training; but he shakes his head.\n\n");
 			outputText("“<i>Not yet [name]. Your body must be fit and rested before our training sessions. Rest first, and come back to me later.</i>”\n\n");
-
 			menu();
 			doNext(jojoCamp);
 			return;
 		}
-
 		if (player.cor >= (25 + player.corruptionTolerance()))
 		{
 			outputText("You ask the monk to continue your training; but he shakes his head.\n\n");
 			outputText("“<i>I fear that your time would be better spend meditating before we continue your training. Would you like to do so now?</i>”\n\n");
-
 			menu();
 			doYesNo(jojoFollowerMeditate, jojoCamp);
 			return;
 		}
 	}
-
 	flags[kFLAGS.TIMES_TRAINED_WITH_JOJO]++;
 	trace(flags[kFLAGS.TIMES_TRAINED_WITH_JOJO]);
-
 	// {If everything is cool}
 	if (player.findPerk(PerkLib.ControlledBreath) < 0 && player.findPerk(PerkLib.CleansingPalm) < 0 && player.findPerk(PerkLib.Enlightened) < 0)
 	{
@@ -2935,9 +2896,7 @@ public function apparantlyJojoDOESlift():void
 		outputText("The entire session is intense, and each brief lecture or demonstration serves as a quick break to stop your body from giving out, and help you build endurance.\n\n");
 		outputText("By the end of the training session you are covered in sweat, your lungs heaving for breath.\n\n");
 		outputText("As you bow to Jojo he bows back and says, “<i>Go get some rest [name], you’ve earned it.</i>”\n\n");
-
-		fatigue(60);
-
+		fatigue(150);
 		if (flags[kFLAGS.TIMES_TRAINED_WITH_JOJO] == 5)
 		{
 			trace("ADDING FIRST PERK");
@@ -2946,8 +2905,7 @@ public function apparantlyJojoDOESlift():void
 			if (player.biggestTitSize() == 0) outputText(" rises and falls");
 			else outputText(" rise and fall");
 			outputText(" smoothly even in the heat of battle.  From now on you know you’ll recover more quickly.\n\n");
-
-			outputText("<b>(Perk Gained: Controlled Breath -</b> Increases rate of fatigue regeneration by 10%<b>)</b>");
+			outputText("<b>(Perk Gained: Controlled Breath -</b> Increases rate of fatigue/mana/soulforce regeneration by 20%<b>)</b>");
 			player.createPerk(PerkLib.ControlledBreath, 0, 0, 0, 0);
 		}
 	}
@@ -2957,15 +2915,12 @@ public function apparantlyJojoDOESlift():void
 		outputText("Jojo gives you a big toothy grin, “<i>Alright [name]... let’s begin.</i>”\n\n");
 		outputText("Jojo switches up the way he is instructing you.  Largely due to your increased endurance, the two of you spend more time moving through forms together and practicing strikes and maneuvers.  When it comes time for a brief lecture, he breaks out one of the few scrolls he has from his order and tells you what he knows about the contents.\n\n");
 		outputText("Before too long, the two of you are up again and practicing forms and mock strikes, even sparring briefly from time to time.  By the end of the intense training session you are covered in sweat... but so is Jojo, and neither of you are out of breath. As you bow to Jojo he returns the gesture and says, “<i>Go get some rest [name], you’ve earned it.</i>”\n\n");
-
-		fatigue(60);
-
+		fatigue(150);
 		if (flags[kFLAGS.TIMES_TRAINED_WITH_JOJO] == 10)
 		{
 			trace("ADDING SECOND PERK");
 			outputText("The repeated movements are slowly starting to sink in, your muscles becoming accustomed to Jojo’s training.\n\n");
 			outputText("By the end of the training session with the mouse, you think that you may have picked up something that might help against the denizens of this world.\n\n");
-
 			outputText("<b>(Ability Gained: Cleansing Palm -</b> A ranged fighting technique of Jojo’s order, allows you to blast your enemies with waves of pure spiritual energy, weakening them and hurting the corrupt.<b>)</b>");
 			player.createPerk(PerkLib.CleansingPalm, 0, 0, 0, 0);
 		}
@@ -2977,18 +2932,14 @@ public function apparantlyJojoDOESlift():void
 		outputText("Largely due to your increased endurance and improved technique the two of you spend more time sparring and dancing through the forms Jojo knows.  When it comes time for a brief lecture, Jojo pants as he sits with you, taking a minute to regain his breath.  Jojo’s lectures, instead of dealing with how to strike and defend oneself, deal with the nature of the soul.  You learn much about individuality, willpower and determination and after the lecture the two of you meditate on what you’ve learned for a few silent moments.\n\n");
 		outputText("Then the two of you are back up, sweeping gracefully through forms and striking invisible enemies with fierce blows.  By the end of the intense training session both you and Jojo are tired, having trained to both of your limits.\n\n");
 		outputText("As the two of you give each other decidedly shaky bows, Jojo says, “<i>Great effort [name], you are... wow... I need a rest. I’ve earned it.</i>”  The two of you share a laugh and end you training.\n\n");
-
-		fatigue(60);
-
-		if (flags[kFLAGS.TIMES_TRAINED_WITH_JOJO] >= 16 && player.inte >= 70)
+		fatigue(150);
+		if (flags[kFLAGS.TIMES_TRAINED_WITH_JOJO] >= 15 && player.inte >= 70)
 		{
 			trace("ADDING THIRD PERK");
 			//{text shows after generic 16th technique training session}
 			outputText("As you finish training you decide to meditate alone; returning to your " + camp.bedDesc() + ", you close your eyes and begin to breathe.  Then the world around you begins to sing.\n\n");
 			outputText("The camp is alive with the sounds of voices on the wind, of the ominous sizzling of the great scar between worlds that is the portal that brought you here.  You feel open to the universe as if it were a lady in a dress sitting next to you, that you could easily reach out and touch.  You feel liberated and free despite the fact that you are not moving a muscle.  You are ready for anything but expecting nothing.  You are neither thinking nor dreaming, you simply are.\n\n");
-
 			outputText("<b>(Perk Gained: Enlightened -</b> White magic threshold reduced. Meditation restores health. Grants the ability to meditate alone.<b>)</b>");
-
 			player.createPerk(PerkLib.Enlightened, 0, 0, 0, 0);
 		}
 	}
@@ -2997,14 +2948,10 @@ public function apparantlyJojoDOESlift():void
 	{
 		outputText("Jojo smiles, “<i>In all honesty [name], I should be asking you to teach me, but I’ll do my best.</i>”\n\n");
 		outputText("There are no lectures.  Neither you nor Jojo are masters, but as of right now, the two of you have exhausted the small store of knowledge available to you from the Celestial Lotus.  You and Jojo instead practice to exhaustion, heaving and panting for breath, whilst still finding time to enjoy each others company.\n\n");
-
-		fatigue(60);
-
+		fatigue(150);
 		//{each scene only shows if the follower is there}
 		var enlightenedBlurbs:Array = new Array();
-
 		enlightenedBlurbs.push("You can hear Jojo’s feet move through the campsite as he heads toward his rock, seeking rest after your training session.");
-
 		// Lookit all these different ways followers are tracked! fml.
 		if (player.hasStatusEffect(StatusEffects.CampMarble)) enlightenedBlurbs.push("You can hear Marble humming a song to herself you can’t place.");
 		if (flags[kFLAGS.AMILY_FOLLOWER] > 0) enlightenedBlurbs.push("You can hear Amily changing the bedding to her nest.");
@@ -3013,7 +2960,6 @@ public function apparantlyJojoDOESlift():void
 		if (sophieFollower()) enlightenedBlurbs.push("You can hear Sophie breathing as she sleeps.");
 		if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] > 0) enlightenedBlurbs.push("You can hear Izma flipping through the pages of a book."); // TODO: (if Izmael gets put in) you can hear Izmael doing push ups to stay fit.
 		if (SceneLib.helScene.followerHel()) enlightenedBlurbs.push("You can hear Helia throwing her fists at nothing.");
-
 		outputText(enlightenedBlurbs[rand(enlightenedBlurbs.length)] + "\n\n");
 	}
 	//Boost attributes!
@@ -3041,8 +2987,6 @@ public function apparantlyJojoDOESlift():void
 		dynStats("wis", 1); //Wisdom boost to 100
 		player.wisStat.core.value += .5;
 	}
-
-	menu();
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -3336,3 +3280,4 @@ public function mishapsLunaJojo():void {
 }
 }
 }
+

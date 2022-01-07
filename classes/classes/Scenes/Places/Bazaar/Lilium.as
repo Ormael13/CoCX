@@ -206,7 +206,7 @@ private function liliumDickRidah():void {
 	player.orgasm();
 	dynStats("cor", 1);
 	//(imp preg check)
-	player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 14, 61); //Lilium causes faster pregnancies
+	if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 14, 61); //Lilium causes faster pregnancies
 	doNext(camp.returnToCampUseOneHour);
 }
 

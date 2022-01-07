@@ -27,7 +27,7 @@ import classes.internals.*;
 				outputText(", swiftly following it with another!  ");
 				player.takePhysDamage(damage - rand(10), true);
 				player.takePhysDamage(damage - rand(9), true);
-				player.addCombatBuff("spe", -4);
+				player.addCombatBuff("spe", -4, "Combat Debuff", "CombatDebuffSpe");
 				if (!player.hasStatusEffect(StatusEffects.IzmaBleed))
 					player.createStatusEffect(StatusEffects.IzmaBleed, 2, 0, 0, 0);
 				else (player.addStatusValue(StatusEffects.IzmaBleed, 1, 2));
@@ -45,7 +45,7 @@ import classes.internals.*;
 			else {
 				outputText(" with deadly precision! It protrudes from your body painfully, making it somewhat difficult to move around.  ");
 				player.takePhysDamage(damage, true);
-				player.addCombatBuff("spe", -4);
+				player.addCombatBuff("spe", -4, "Combat Debuff", "CombatDebuffSpe");
 				if (!player.hasStatusEffect(StatusEffects.IzmaBleed))
 					player.createStatusEffect(StatusEffects.IzmaBleed, 2, 0, 0, 0);
 				else
@@ -66,7 +66,7 @@ import classes.internals.*;
 		{
 			outputText("Aiko nocks an arrow on her bow and lines up a shot, biting the end of her tongue as she focuses. As she lets it fly, the arrowhead sparks and then bursts into flame! The flaming obsidian tip pierces through your [armor] like a hot knife through butter, sinking into your flesh and forcing a pained cry from your throat.  ");
 			player.takeFireDamage((this.hasStatusEffect(StatusEffects.AikoArcaneArcher)?2*(str + rand(40)):str + rand(40))+30, true);
-			player.addCombatBuff("spe", -5);
+			player.addCombatBuff("spe", -5, "Fire Arrow", "FireArrow");
 		}
 		
 		private function aikoIllusion():void
@@ -79,7 +79,7 @@ import classes.internals.*;
 				castIllusion += 2;
 			}
 			if (player.hasStatusEffect(StatusEffects.Illusion))
-				player.addCombatBuff("spe", -3);
+				player.addCombatBuff("spe", -3, "Illusion", "Illusion");
 			resistIllusion();
 		}
 		
@@ -95,14 +95,14 @@ import classes.internals.*;
 				outputText("As the world around you begins to twist, you push back the influence of her illusions with your mind! She lets out a small cry of pain, clutching her forehead, and curses audibly as she realizes that you resisted her magic.\n\n");
 				if (player.hasStatusEffect(StatusEffects.Illusion)) {
 					player.removeStatusEffect(StatusEffects.Illusion);
-					player.addCombatBuff("spe", 3);
+					player.addCombatBuff("spe", 3, "Illusion", "Illusion");
 				}
 			} else {
 				if (player.hasStatusEffect(StatusEffects.Illusion)) {
-					player.addCombatBuff("spe", -1);
+					player.addCombatBuff("spe", -1, "Illusion", "Illusion");
 				} else {
 					player.createStatusEffect(StatusEffects.Illusion, 0, 0, 0, 0);
-					addCombatBuff("spe", -7);
+					addCombatBuff("spe", -7, "Illusion", "Illusion");
 				}
 			}	
 		}
@@ -143,7 +143,7 @@ import classes.internals.*;
 			} else {
 				var damage:int = int(str) + rand(15);
 				player.takePhysDamage(damage, true);
-				player.addCombatBuff("spe", -4);
+				player.addCombatBuff("spe", -4, "Combat Debuff", "CombatDebuffSpe");
 				if (!player.hasStatusEffect(StatusEffects.IzmaBleed))
 					player.createStatusEffect(StatusEffects.IzmaBleed, 2, 0, 0, 0);
 				else (player.addStatusValue(StatusEffects.IzmaBleed, 1, 1));
@@ -174,10 +174,11 @@ import classes.internals.*;
 					player.removeStatusEffect(StatusEffects.Fear);
 			} else {
 				if (player.hasStatusEffect(StatusEffects.Fear))
-					addCombatBuff("spe", -4);
-				else
+					addCombatBuff("spe", -4, "Fear", "Fear");
+				else {
 					createStatusEffect(StatusEffects.Fear, 0, 0, 0, 0);
-				addCombatBuff("spe", -10);
+					addCombatBuff("spe", -10, "Fear", "Fear");
+				}
 			}
 		}
 		
@@ -245,10 +246,10 @@ import classes.internals.*;
 						player.takeLustDamage(lustDmg);
 						
 						if (player.hasStatusEffect(StatusEffects.Illusion)) {
-							player.addCombatBuff("spe", -3);
+							player.addCombatBuff("spe", -3, "Illusion", "Illusion");
 						} else {
 							player.createStatusEffect(StatusEffects.Illusion, 0, 0, 0, 0);
-							addCombatBuff("spe", -7);
+							addCombatBuff("spe", -7, "Illusion", "Illusion");
 							castIllusion += 2;
 						}
 				} else {
@@ -266,10 +267,10 @@ import classes.internals.*;
 				player.takeLustDamage(lustDmg * 2);
 				
 				if (player.hasStatusEffect(StatusEffects.Illusion)) {
-					player.addCombatBuff("spe", -3);
+					player.addCombatBuff("spe", -3, "Illusion", "Illusion");
 				} else {
 					player.createStatusEffect(StatusEffects.Illusion, 0, 0, 0, 0);
-					addCombatBuff("spe", -7);
+					addCombatBuff("spe", -7, "Illusion", "Illusion");
 				}
 			} else {
 				outputText("Aiko takes a moment to stretch out her limber body, thrusting out her chest as she stretches her arms toward the sky. She spins girlishly, giving you a come-hither glare, and then bows forward to give you a good angle at her cleavage, packed tightly into her too-small chest wrap."
@@ -283,18 +284,20 @@ import classes.internals.*;
 			outputText("<i>“I'll show you my training as a guardian... can you stand my magic and my bow? Let's find out.”</i> she says. You almost take her words as a joke, but you can clearly see her determination, and she has the power to back up her demeanor!\n\nYou see her body enveloped by a golden aura, and sparks of yellow-white arc out from her from time to time, she looks a little frightening!\n\n");
 			
 			this.createStatusEffect(StatusEffects.AikoArcaneArcher, 0, 0, 0, 0);
-			this.addCombatBuff("str", 10);
-			this.addCombatBuff("spe", 10);
+			this.addCombatBuff("str", 10, "Combat Debuff", "CombatDebuffStr");
+			this.addCombatBuff("spe", 10, "Combat Debuff", "CombatDebuffSpe");
 		}
 		
 		private function splinterLightningArrow():void
 		{
 			outputText("Aiko summons her magic inside her bow and shoots to you a lighting arrow that splits into a multitude of dangerous sparks! They are too many and have too irregular movements, you can't dodge them! You are hit!\n\n"
 			+"You fall to the ground, your legs giving in once the initial shock lets up.  ");
-			player.addCombatBuff('str',-10);
-			player.addCombatBuff('spe',-10);
 			player.takeLightningDamage(45+25/(rand(3)+1), true);
-			if (!player.hasStatusEffect(StatusEffects.AikoLightningArrow)) player.createStatusEffect(StatusEffects.AikoLightningArrow, 4, 0, 0, 0);
+			if (!player.hasStatusEffect(StatusEffects.AikoLightningArrow)) {
+				player.createStatusEffect(StatusEffects.AikoLightningArrow, 4, 0, 0, 0);
+				player.addCombatBuff('str',-25,"Lightning Arrow","LightningArrowStr");
+				player.addCombatBuff('spe',-25,"Lightning Arrow","LightningArrowSpe");
+			}
 			else player.addStatusValue(StatusEffects.AikoLightningArrow, 1, 3);
 		}
 		
@@ -319,7 +322,7 @@ import classes.internals.*;
 				outputText("You narrowly avoid the barrage of arrows and watch as the last one whizzes past and embeds itself with a great thunk in a tree on the opposite end of the clearing, instantly freezing half the tree.");
 			} else {
 				outputText("You are hit by one of the frozen arrows, frost rapidly spreading over the skin surrounding the arrow [if (player.armor != ArmorLib.NOTHING)and chilling your armor]  ");
-				player.addCombatBuff("spe", -15);
+				player.addCombatBuff("spe", -15, "Ice Arrow", "IceArrow");
 				player.takeIceDamage(str*2 + rand(40), true);
 			}
 		}
@@ -341,7 +344,7 @@ import classes.internals.*;
 			for (var i:int = 0; i < arrows; i++) {
 				player.takePhysDamage((str + rand(10)), true);
 				outputText(" ");
-				player.addCombatBuff("spe", -2);
+				player.addCombatBuff("spe", -2, "Combat Debuff", "CombatDebuffSpe");
 				if (!player.hasStatusEffect(StatusEffects.IzmaBleed))
 					player.createStatusEffect(StatusEffects.IzmaBleed, 2, 0, 0, 0);
 				else (player.addStatusValue(StatusEffects.IzmaBleed, 1, 1));
@@ -361,8 +364,8 @@ import classes.internals.*;
 				outputText("<i>“I'll punish every demon in this world!”</i> As she finishes her incantation, she releases the string of her arrow and unleashes an immense beam of golden white light directly at you! It was a wise choice to stand back to see what was going on! You narrowly manage to dodge the attack by rolling away as you see the forest behind you completely obliterated. Aiko stands speechless before you, she clearly did not expected you to dodge her attack.");
 			} else {
 				outputText("<i>“I'll punish every demon in this world!”</i> As she finishes her incantation, she releases the string of her arrow and unleashes an immense beam of golden white light directly at you! Oh shit! You barely have the time to widen your eyes as you get blasted away by the enormous mass of energy who seems to obliterate you as you come crashing down to the floor, all of your body smoking.  ");
-				player.addCombatBuff("spe", -20);
-				player.addCombatBuff("str", -15);
+				player.addCombatBuff("spe", -20, "Combat Debuff", "CombatDebuffSpe");
+				player.addCombatBuff("str", -15, "Combat Debuff", "CombatDebuffStr");
 				if (player.cor <= 20)
 					player.takeMagicDamage(250, true);
 				else

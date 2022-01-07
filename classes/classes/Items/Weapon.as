@@ -4,6 +4,7 @@
 package classes.Items
 {
 
+import classes.GlobalFlags.kFLAGS;
 import classes.PerkLib;
 import classes.Scenes.SceneLib;
 
@@ -37,17 +38,13 @@ public class Weapon extends Useable //Equipable
 		override public function get description():String {
 			var desc:String = _description;
 			//Type
-			desc += "\n\nType: Melee Weapon ";
-			if (perk == "Massive") desc += "(Massive)";
-			else if (perk == "Large") desc += "(Large)";
-			else if (perk == "Hybrid") desc += "(Hybrid)";
-			else if (perk == "Small") desc += "(Small)";
-			else if (perk == "Staff") desc += "(Staff)";
-			else if (perk == "Wand") desc += "(Wand)";
-			else if (perk == "Dual") desc += "(Dual)";
-			else if (perk == "Dual Large") desc += "(Dual Large)";
-			else if (perk == "Dual Small") desc += "(Dual Small)";
-			else if (perk == "Quad") desc += "(Quad)";
+			desc += "\n\nType: Melee Weapon";
+			if (type != "") {
+				desc += "\nWeapon Class: " + type;
+			}
+			if (perk != "") {
+				desc += "\nSpecials: " + specInterpret(perk);
+			}
 			/*else if (verb.indexOf("whip") >= 0) desc += "(Whip)";
 			else if (verb.indexOf("punch") >= 0) desc += "(Gauntlet)";
 			else if (verb == "slash" || verb == "keen cut") desc += "(Sword)";
@@ -58,6 +55,35 @@ public class Weapon extends Useable //Equipable
 			//Value
 			desc += "\nBase value: " + String(value);
 			return desc;
+		}
+
+		public function specInterpret(perkList:String = ""):String{
+			var temp:Array = perkList.split(", ");
+			var specTrans:Array = []
+			var result:String = ""
+			specTrans.push("Stun10", "+10% Stun");
+			specTrans.push("Stun15", "+15% Stun");
+			specTrans.push("Stun20", "+20% Stun");
+			specTrans.push("Stun25", "+25% Stun");
+			specTrans.push("Stun30", "+30% Stun");
+			specTrans.push("Stun40", "+40% Stun");
+			specTrans.push("Stun50", "+50% Stun");
+			specTrans.push("Bleed10", "+10% Bleed");
+			specTrans.push("Bleed25", "+25% Bleed");
+			specTrans.push("Bleed45", "+45% Bleed");
+			specTrans.push("Bleed100", "+100% Bleed");
+			specTrans.push("LGWrath", "Low Grade Wrath");
+
+			for each (var spec:String in temp){
+				if (specTrans.indexOf(spec) >= 0){
+					result += specTrans[specTrans.indexOf(spec) + 1];
+				}
+				else{
+					result += spec;
+				}
+				result += ", ";
+			}
+			return result.slice(0, -2);
 		}
 		
 		override public function useText():void {
@@ -87,6 +113,7 @@ public class Weapon extends Useable //Equipable
 			|| (game.player.shieldPerk == "Massive" && game.player.shield != ShieldLib.NOTHING && !game.player.hasPerk(PerkLib.GigantGrip))) {
 				SceneLib.inventory.unequipShield();
 			}
+			if (game.flags[kFLAGS.FERAL_COMBAT_MODE] == 1) game.flags[kFLAGS.FERAL_COMBAT_MODE] = 0;
 			return this;
 		}
 		

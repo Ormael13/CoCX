@@ -1,5 +1,5 @@
 //Ingnam: The Prologue
-package classes.Scenes.Places 
+package classes.Scenes.Places
 {
 import classes.*;
 import classes.BodyParts.Ears;
@@ -20,14 +20,14 @@ public class Ingnam extends BaseContent
 		
 		public function get inIngnam():Boolean { return flags[kFLAGS.IN_INGNAM] > 0; }
 		
-		public function Ingnam() 
-		{	
+		public function Ingnam()
+		{
 		}
 		
 		//Main Ingnam menu.
 		public function menuIngnam():void {
 			//Force autosave
-			if (player.slotName != "VOID" && mainView.getButtonText(0) != "Game Over" && flags[kFLAGS.HARDCORE_MODE] > 0) 
+			if (player.slotName != "VOID" && mainView.getButtonText(0) != "Game Over" && flags[kFLAGS.HARDCORE_MODE] > 0)
 			{
 				trace("Autosaving to slot: " + player.slotName);
 
@@ -39,6 +39,11 @@ public class Ingnam extends BaseContent
 				return;
 			}
 			clearOutput();
+			if (timeQueued) {
+				if (goNext(false)) {
+					return;
+				}
+			}
 			outputText(images.showImage("location-ingnam"));
 			outputText("Ingnam is a rich and prosperous village despite its small size. There is already a well-established array of shops with a constant hum of tradesmen and merchants. The temple sits within view of the patrons sitting at tables at the tavern which serves as a hub for people near and far to drink and dance. On the road leading out of the plaza that sits before the temple is a trail that meanders its way to a large farm in the distance.");
 			outputText("\n\nLooming ominously in the distance is a mountain known by the locals as Mount Ilgast. Surrounding Ingnam is a vast expanse of wilderness.");
@@ -91,29 +96,6 @@ public class Ingnam extends BaseContent
 			clearOutput();
 			hideMenus();
 			outputText("Your time has come to meet up with the village elders. You know you are going to get sent to the demon realm and you're most likely not going to be able to return to Ingnam. You give your family and friends a long farewell.");
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) { //Doesn't happen in New Game+.
-				if (player.weaponName != "fists") {
-					hasWeapon = true;
-					player.setWeapon(WeaponLib.FISTS);
-				}
-				while (player.hasItem(weapons.DAGGER, 1)) {
-					hasWeapon = true;
-					player.destroyItems(weapons.DAGGER, 1);
-				}
-				while (player.hasItem(weapons.PIPE, 1)) {
-					hasWeapon = true;
-					player.destroyItems(weapons.PIPE, 1);
-				}
-				while (player.hasItem(weapons.SPEAR, 1)) {
-					hasWeapon = true;
-					player.destroyItems(weapons.SPEAR, 1);
-				}
-				while (player.hasItem(weapons.KATANA, 1)) {
-					hasWeapon = true;
-					player.destroyItems(weapons.KATANA, 1);
-				}
-				if (hasWeapon) outputText("\n\n<b>Unfortunately, you were instructed to leave your weapon behind.</b>");
-			}
 			flags[kFLAGS.IN_INGNAM] = 0;
 			flags[kFLAGS.INGNAM_PROLOGUE_COMPLETE] = 1;
 			doNext(CoC.instance.charCreation.arrival);
@@ -139,7 +121,8 @@ public class Ingnam extends BaseContent
 			clearOutput();
 			if (rand(4) == 0) {
 				outputText("You explore the village of Ingnam for a while but you don't find anything intersting.");
-				doNext(camp.returnToCampUseOneHour);
+				eachMinuteCount(15);
+				doNext(camp.doCamp);
 			}
 			else thiefScene.encounterThief();
 		}
@@ -169,29 +152,29 @@ public class Ingnam extends BaseContent
 			}
 			outputText("\n\n<b><u>Blacksmith's pricings</u></b>");
 			menu();
-			if (player.findPerk(PerkLib.HistoryFighter) >= 0) { //20% discount for History: Fighter
-				addShopItem(weapons.DAGGER, 32, 1);
+			if (player.findPerk(PerkLib.HistoryFighter) >= 0 || player.findPerk(PerkLib.PastLifeFighter) >= 0) { //20% discount for History: Fighter
+				addShopItem(weapons.DAGGER, 48, 1);
 				addShopItem(weapons.PIPE, 40, 1);
 				addShopItem(weapons.SPEAR, 140, 1);
 				addShopItem(weapons.KATANA, 200, 1);
 				addShopItem(weapons.MACE, 80, 1);
 			}
 			else {
-				addShopItem(weapons.DAGGER, 40, 1);
+				addShopItem(weapons.DAGGER, 60, 1);
 				addShopItem(weapons.PIPE, 50, 1);
 				addShopItem(weapons.SPEAR, 175, 1);
 				addShopItem(weapons.KATANA, 250, 1);
 				addShopItem(weapons.MACE, 100, 1);
 			}
-			if (player.findPerk(PerkLib.HistorySmith) >= 0) { //20% discount for History: Smith perk
+			if (player.findPerk(PerkLib.HistorySmith) >= 0 || player.findPerk(PerkLib.PastLifeSmith) >= 0) { //20% discount for History: Smith perk
 				addShopItem(armors.LEATHRA, 40, 2);
 				addShopItem(armors.FULLCHN, 120, 2);
-				addShopItem(armors.SCALEML, 160, 2);
+				addShopItem(armors.SCALEML, 288, 2);
 			}
 			else {
 				addShopItem(armors.LEATHRA, 50, 2);
 				addShopItem(armors.FULLCHN, 150, 2);
-				addShopItem(armors.SCALEML, 200, 2);
+				addShopItem(armors.SCALEML, 360, 2);
 			}
 			addButton(14, "Leave", menuShops);
 		}
@@ -228,17 +211,21 @@ public class Ingnam extends BaseContent
 			}
 			outputText("\n\n<b><u>Alchemy shop pricings</u></b>");
 			menu();
-			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) { //20% discount for History: Alchemist perk
+			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0 || player.findPerk(PerkLib.PastLifeAlchemist) >= 0) { //20% discount for History: Alchemist perk
 				addShopItem(consumables.REDUCTO, 80, 4);
 				addShopItem(consumables.GROPLUS, 80, 4);
 				addShopItem(consumables.L_DRAFT, 25, 4);
 				addShopItem(consumables.LACTAID, 40, 4);
+				addShopItem(consumables.HEALHERB, 12, 4);
+				addShopItem(consumables.MOONGRASS, 12, 4);
 			}
 			else {
 				addShopItem(consumables.REDUCTO, 100, 4);
 				addShopItem(consumables.GROPLUS, 100, 4);
 				addShopItem(consumables.L_DRAFT, 30, 4);
 				addShopItem(consumables.LACTAID, 50, 4);
+				addShopItem(consumables.HEALHERB, 15, 4);
+				addShopItem(consumables.MOONGRASS, 15, 4);
 			}
 			addButton(14, "Leave", menuShops);
 		}
@@ -246,13 +233,94 @@ public class Ingnam extends BaseContent
 		public function shopTradingPost():void {
 			clearOutput();
 			outputText("The trading post is one of the larger buildings in the village with its porch covered in barrels filled with pickled goods, preserved delicacies and dried goods from the humble local farm to exotic faraway lands. The interior is packed with crowded shelves that boast a variety of goods, all arranged neatly on shelves.");
-			outputText("\n\nYou suspect you could buy some imported goods here.");
+			outputText("\n\nYou suspect you could buy or sell some imported goods here.");
 			outputText("\n\n<b><u>Trading post pricings</u></b>");
 			menu();
+			addShopItem(consumables.MANUP_B, 12, 5);
 			addShopItem(consumables.VITAL_T, 30, 5);
+			addShopItem(consumables.AGILI_E, 12, 5);
 			addShopItem(consumables.SMART_T, 30, 5);
+			addShopItem(consumables.INCOINS, 30, 5);
 			addShopItem(consumables.FISHFIL, 5, 5);
+			addShopItem(consumables.H_PILL, 10, 5);
+			addButton(10, "Sell", sellAtTradingPost);
 			addButton(14, "Leave", menuShops);
+		}
+		private function sellAtTradingPost(page:int = 1):void {
+			var slot:int;
+			clearOutput();
+			outputText("The trading post is one of the larger buildings in the village with its porch covered in barrels filled with pickled goods, preserved delicacies and dried goods from the humble local farm to exotic faraway lands. The interior is packed with crowded shelves that boast a variety of goods, all arranged neatly on shelves.");
+			outputText("\n\nYou suspect you could buy or sell some imported goods here.\n\n");
+			menu();
+			var totalItems:int = 0;
+			if (page == 1) {
+				for (slot = 0; slot < 10; slot++) {
+					if (player.itemSlots[slot].quantity > 0 && player.itemSlots[slot].itype.value >= 1) {
+						outputText("\n" + int(player.itemSlots[slot].itype.value / 3) + " gems for " + player.itemSlots[slot].itype.longName + ".");
+						addButton(slot, (player.itemSlots[slot].itype.shortName + " x" + player.itemSlots[slot].quantity), shopTradingPostSell, slot);
+						totalItems += player.itemSlots[slot].quantity;
+					}
+				}
+				if (inventory.getMaxSlots() > 10) addButton(13, "Next", sellAtTradingPost, page + 1);
+			}
+			if (page == 2) {
+				for (slot = 10; slot < 20; slot++) {
+					if (player.itemSlots[slot].quantity > 0 && player.itemSlots[slot].itype.value >= 1) {
+						outputText("\n" + int(player.itemSlots[slot].itype.value / 3) + " gems for " + player.itemSlots[slot].itype.longName + ".");
+						addButton(slot-10, (player.itemSlots[slot].itype.shortName + " x" + player.itemSlots[slot].quantity), shopTradingPostSell, slot);
+						totalItems += player.itemSlots[slot].quantity;
+					}
+				}
+				addButton(13, "Prev", sellAtTradingPost, page - 1);
+			}
+			if (totalItems > 1) addButton(12, "Sell All", shopTradingPostSellAll);
+			addButton(14, "Back", shopTradingPost);
+		}
+		private function shopTradingPostSell(slot:int):void {
+			var itemValue:int = int(player.itemSlots[slot].itype.value / 3);
+			clearOutput();
+			if (flags[kFLAGS.SHIFT_KEY_DOWN] == 1) {
+				if (itemValue == 0)
+					outputText("You hand over " + num2Text(player.itemSlots[slot].quantity) + " " +  player.itemSlots[slot].itype.shortName + " to trader.  He shrugs and says, “<i>Well ok, it isn't worth anything, but I'll take it.</i>”");
+				else outputText("You hand over " + num2Text(player.itemSlots[slot].quantity) + " " +  player.itemSlots[slot].itype.shortName + " to trader.  He nervously pulls out " + num2Text(itemValue * player.itemSlots[slot].quantity)  + " gems and drops them into your waiting hand.");
+				while (player.itemSlots[slot].quantity > 0){
+					player.itemSlots[slot].removeOneItem();
+					if (player.hasPerk(PerkLib.Greedy)) itemValue *= 2;
+					player.gems += itemValue;
+				}
+			}
+			else {
+				if (player.hasPerk(PerkLib.Greedy)) itemValue *= 2;
+				if (player.hasPerk(PerkLib.TravelingMerchantOutfit)) itemValue *= 2;
+				if (itemValue == 0)
+				outputText("You hand over " + player.itemSlots[slot].itype.longName + " to trader.  He shrugs and says, “<i>Well ok, it isn't worth anything, but I'll take it.</i>”");
+				else outputText("You hand over " + player.itemSlots[slot].itype.longName + " to trader.  He nervously pulls out " + num2Text(itemValue) + " gems and drops them into your waiting hand.");
+				player.itemSlots[slot].removeOneItem();
+				if (itemValue != 0 && player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for double the amount.");
+				if (itemValue != 0 && player.hasPerk(PerkLib.Greedy) && player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for four time the amount.");
+				player.gems += itemValue;
+			}
+			statScreenRefresh();
+			doNext(sellAtTradingPost);
+		}
+
+		private function shopTradingPostSellAll():void {
+			var itemValue:int = 0;
+			clearOutput();
+			for (var slot:int = 0; slot < 20; slot++) {
+				if (player.itemSlots[slot].quantity > 0 && player.itemSlots[slot].itype.value >= 1) {
+					itemValue += player.itemSlots[slot].quantity * int(player.itemSlots[slot].itype.value / 2);
+					player.itemSlots[slot].quantity = 0;
+				}
+			}
+			if (player.hasPerk(PerkLib.Greedy)) itemValue *= 2;
+			if (player.hasPerk(PerkLib.TravelingMerchantOutfit)) itemValue *= 2;
+			outputText("You lay out all the items you're carrying on the counter in front of trader.  He examines them all and nods.  Nervously, he pulls out " + num2Text(itemValue) + " gems and drops them into your waiting hand.");
+			if (player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for double the amount.");
+			if (player.hasPerk(PerkLib.Greedy) && player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for four time the amount.");
+			player.gems += itemValue;
+			statScreenRefresh();
+			doNext(sellAtTradingPost);
 		}
 		
 		public function shopBlackMarket():void {
@@ -276,6 +344,7 @@ public class Ingnam extends BaseContent
 			addShopItem(consumables.EQUINUM, 75, 6);
 			addShopItem(consumables.INCUBID, 75, 6);
 			addShopItem(consumables.SUCMILK, 75, 6);
+			addShopItem(consumables.RINGFIG, 75, 6);
 			addButton(14, "Leave", menuShops);
 		}
 		
@@ -376,7 +445,7 @@ public class Ingnam extends BaseContent
 			clearOutput();
 			outputText("The innkeeper looks at you and says, \"<i>Welcome back! I've missed you! How did your adventures go?</i>\"");
 			outputText("\n\nYou tell the innkeeper about your adventures and how you've met various denizens in Mareth.\n\n");
-			if (flags[kFLAGS.TIMES_TRANSFORMED] <= 0) outputText("The innkeeper looks at you in awe and says, \"<i>Wow, you haven't changed at all! How did you manage to stay in that strange realm for years and still be normal?</i>\""); 
+			if (flags[kFLAGS.TIMES_TRANSFORMED] <= 0) outputText("The innkeeper looks at you in awe and says, \"<i>Wow, you haven't changed at all! How did you manage to stay in that strange realm for years and still be normal?</i>\"");
 			else if (player.race() == "human") {
 				outputText("The innkeeper looks at you and says, \"<i>I can see that you have changed a bit.</i>\" ");
 			}
@@ -519,7 +588,7 @@ public class Ingnam extends BaseContent
 			outputText("\n5 gems - Sandwich");
 			outputText("\n3 gems - Soup");
 			outputText("\n5 gems - Hard biscuits (Packed)");
-			outputText("\n10 gems - Trail mix (Packed)");
+			outputText("\n20 gems - Trail mix (Packed)");
 			menu();
 			addButton(0, "Sandwich", buySandwich);
 			addButton(1, "Soup", buySoup);
@@ -575,13 +644,13 @@ public class Ingnam extends BaseContent
 
 		private function buyTrailMix():void {
 			clearOutput();
-			if (player.gems < 10) {
+			if (player.gems < 20) {
 				outputText("You can't afford one of those!");
 				doNext(orderFood);
 				return;
 			}
 			outputText("You pay twenty gems for a pack of trail mix.  ");
-			player.gems -= 10;
+			player.gems -= 20;
 			statScreenRefresh();
 			inventory.takeItem(consumables.TRAILMX, orderFood);
 		}

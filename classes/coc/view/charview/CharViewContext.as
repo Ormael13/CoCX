@@ -44,14 +44,20 @@ import coc.xlogic.ExecContext;
 				{}, // local variables
 				character,
 				{
+					IsEarthElemental: player.perkv1(PerkLib.ElementalBody) == 2,
+					IsFireElemental: player.perkv1(PerkLib.ElementalBody) == 3,
+					IsWaterElemental: player.perkv1(PerkLib.ElementalBody) == 4,
+					IsWindElemental: player.perkv1(PerkLib.ElementalBody) == 1,
 					CaveWyrmPussy: player.vaginaType() == VaginaClass.CAVE_WYRM,
 					CaveWyrmNipples: player.hasStatusEffect(StatusEffects.GlowingNipples),
+					MindBreakerPussy: player.vaginaType() == VaginaClass.MINDBREAKER,
 					CancerCrabStance: player.hasStatusEffect(StatusEffects.CancerCrabStance),
 					SlimeCore: player.hasPerk(PerkLib.SlimeCore),
 					DarkSlimeCore: player.hasPerk(PerkLib.DarkSlimeCore),
 					showClothing: [Arms.GAZER, Arms.DISPLACER].indexOf(player.arms.type) == -1 && !player.isAlraune() && !player.isSitStancing() && !player.isGargoyleStancing(),
 					showArmClothing: [Arms.GAZER, Arms.DISPLACER, Arms.GARGOYLE, Arms.GARGOYLE_2, Arms.YETI, Arms.HINEZUMI].indexOf(player.arms.type) == -1 && !player.hasStatusEffect(StatusEffects.CancerCrabStance) && !player.isStancing(),
 					showLegClothing: [LowerBody.GAZER, LowerBody.YETI, LowerBody.HOOFED, LowerBody.CLOVEN_HOOFED, LowerBody.HARPY, LowerBody.BUNNY, LowerBody.GOO, LowerBody.NAGA, LowerBody.HYDRA, LowerBody.DRIDER, LowerBody.ATLACH_NACHA, LowerBody.HINEZUMI, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER, LowerBody.GHOST_2].indexOf(player.lowerBody) == -1 && player.legCount == 2 && !player.isStancing(),
+					showPanty: [LowerBody.GAZER, LowerBody.GOO, LowerBody.NAGA, LowerBody.HYDRA, LowerBody.DRIDER, LowerBody.ATLACH_NACHA, LowerBody.HINEZUMI, LowerBody.MELKIE, LowerBody.CENTIPEDE, LowerBody.SCYLLA, LowerBody.KRAKEN, LowerBody.CANCER, LowerBody.GHOST_2].indexOf(player.lowerBody) == -1 && player.legCount == 2 && !player.isStancing(),
 					PlayerHasViewableOutfit: player.isWearingArmor(),
 					PlayerIsStancing: player.isStancing(),
 					PlayerIsFeralStancing: player.isFeralStancing(),
@@ -196,11 +202,13 @@ import coc.xlogic.ExecContext;
 					goblinTechnomancerBra: player.upperGarment == game.undergarments.TECHBRA,
 					dragonscaleBikiniBra: player.upperGarment == game.undergarments.DS_BRA,
 					comfyBikiniBra: player.upperGarment == game.undergarments.C_BRA,
+					cowBra: player.upperGarment == game.undergarments.COW_BRA,
 
 					//viewable panty list
 					goblinTechnomancerPanty: player.lowerGarment == game.undergarments.T_PANTY,
 					dragonscaleBikiniPanty: player.lowerGarment == game.undergarments.DSTHONG,
 					comfyBikiniPanty: player.lowerGarment == game.undergarments.C_PANTY || player.lowerGarment == game.undergarments.C_LOIN,
+					cowPanty: player.lowerGarment == game.undergarments.COW_PANTY,
 
 					// Unique misc Accessories
 					oniGourd: player.miscJewelry == game.miscjewelries.ONI_GOURD || player.miscJewelry2 == game.miscjewelries.ONI_GOURD,
@@ -226,7 +234,8 @@ import coc.xlogic.ExecContext;
 							player.necklace == game.necklaces.NECKSPE || player.necklace == game.necklaces.NECKSTR || player.necklace == game.necklaces.NECKTOU ||
 							player.necklace == game.necklaces.NECKWIS || player.necklace == game.necklaces.FIRENEC || player.necklace == game.necklaces.ICENECK ||
 							player.necklace == game.necklaces.LIGHNEC || player.necklace == game.necklaces.DARKNEC || player.necklace == game.necklaces.POISNEC ||
-							player.necklace == game.necklaces.LUSTNEC
+							player.necklace == game.necklaces.LUSTNEC,
+					CowBellAmulet: player.necklace == game.necklaces.COWBELL
 				}
 			]);
 			this.charview = charview;

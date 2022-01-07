@@ -409,7 +409,7 @@ use namespace CoC;
 			if (player.pregnancyIncubation == 0) outputText("  You'll probably get pregnant.");
 			player.orgasm();
 			player.sexReward("cum","Vaginal");
-			player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 14, 50);
+			if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 14, 50);
 			cleanupAfterCombat();
 		}
 		public function loseToImpMob():void {

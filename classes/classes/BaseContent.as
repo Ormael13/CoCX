@@ -40,9 +40,9 @@ import coc.xxc.StoryContext;
 		{
 			EventParser.cheatTime(time, needNext);
 		}
-		protected function cheatTime2(time:Number, needNext:Boolean = false):void
+		protected function eachMinuteCount(time:Number, needNext:Boolean = false):void
 		{
-			EventParser.cheatTime2(time, needNext);
+			EventParser.eachMinuteCount(time, needNext);
 		}
 		/*protected function incrementDay(time:Number):void
 		{
@@ -51,6 +51,13 @@ import coc.xxc.StoryContext;
 		protected function get timeQ():Number
 		{
 			return CoC.instance.timeQ;
+		}
+		
+		/**
+		 * Time advancement is planned
+		 */
+		protected static function get timeQueued():Boolean {
+			return CoC.instance.timeQ > 0 || CoC.instance.timeQmin > 0;
 		}
 
 		protected function get isNightTime():Boolean {
@@ -77,10 +84,15 @@ import coc.xxc.StoryContext;
 		protected function get d3():D3 {
 			return SceneLib.d3;
 		}
-
-		public function goNext(time:Number,defNext:Boolean):Boolean
+		
+		/**
+		 * Advance queued time and execute scheduled events. Then go to playerMenu (camp/Ingnam)
+		 * @param defNext Require [Next] button, otherwise can display the playerMenu right away
+		 * @return {Boolean} true if some menu was displayed, false if no display or text only
+		 */
+		public function goNext(defNext:Boolean):Boolean
 		{
-			return EventParser.goNext(time,defNext);
+			return EventParser.goNext(defNext);
 		}
 
 		protected function awardAchievement(title:String, achievement:*, display:Boolean = true, nl:Boolean = false, nl2:Boolean = true):void
@@ -192,6 +204,11 @@ import coc.xxc.StoryContext;
 		protected function cleanupAfterCombat(nextFunc:Function = null):void
 		{
 			SceneLib.combat.cleanupAfterCombatImpl(nextFunc);
+		}
+
+		protected function cleanupAfterCombatTFEvent(nextFunc:Function = null, ThisIsNotATFScene:Boolean = false):void
+		{
+			SceneLib.combat.cleanupAfterCombatImpl(nextFunc,ThisIsNotATFScene);
 		}
 
 		protected function enemyAI():void
@@ -986,31 +1003,41 @@ import coc.xxc.StoryContext;
 			}
 			if (back != null) button(14).show("Back",back);
 		}
-		//Returns an autocreated menu.
-		//Structure for array is: ["Button name", function/false, ["Available desc", "Not available desc"]/ ""]
-		protected function menuGen(menuItems:Array, page:int, back:Function=null, sort:Boolean=false):void{
+		/**Returns an autocreated menu.
+		 * Structure for menuItems array is: ["Button name", function/false/"ignore", ["Available desc", "Not available desc"]/ ""].
+		 * function/false/"ignore" = addbtn, addbtndisabled, no button.
+		 * btnStat returns how many buttons are active.
+		 */
+		protected function menuGen(menuItems:Array, page:int, back:Function=null, sort:Boolean=false):int{
 			var bList:Array = [];
 			var total:int = menuItems.length;
 			var next:Boolean = false;
+			if(sort){
+				menuItems = menuItems.sort()
+			}
 			if(total/3 > 12){
 				for (var h:int = (page * 12) * 3, j:int = Math.min((h + 35), total - 1); h <= j; h++){ // Page 0 - array 0-36. Page 1 - array 37 -?
 					bList.push(menuItems[h]);
 					if(j != total - 1) next = true;
 				}
 			}
-			else{ //Less than 12 items to display.
+			else{
 				bList = menuItems;
 			}
-			//Actually... check page, multiply by 13 to start button creation. 14,15 is page-,+
 			menu();
 			var btnval:int = 0;
+			var btnsActive: int = 0;
 			for (var i:int = 0; i < bList.length; i++){
 				if (i % 3 == 0){
 					if (!bList[i + 1]){
 						addButtonDisabled(btnval, bList[i],(bList[i + 2] is Array) ? bList[i+2][1]: bList[i+2]);
 					}
+					else if (bList[i + 1] == "ignore") { //Not sure when this would ever be used, but in case.
+						continue;
+					}
 					else{
 						addButton(btnval,bList[i],bList[i + 1], null, null, null,(bList[i + 2] is Array) ? bList[i+2][0]: bList[i+2]);
+						btnsActive++
 					}
 					btnval++
 				}
@@ -1020,6 +1047,7 @@ import coc.xxc.StoryContext;
 				button(13).show("Next Page", curry(menuGen, menuItems,page + 1,  back, sort)).disableIf(!next);
 			}
 			if (back != null) button(14).show("Back",back);
+			return btnsActive;
 		}
 	}
 

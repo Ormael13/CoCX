@@ -196,6 +196,7 @@ public final class ConsumableLib extends BaseContent
 		public const AIRWEED:SimpleConsumable = mk("Airweed", "Airweed", "an Airweed", 10, "Upon consumption, this magic seaweed grants water breathing for 24 hours.", m.airweed);
 		public const AKBALSL:Consumable       = new AkbalSaliva();
 		public const ALCTHUN:SimpleConsumable = mk("AlcThun", "Alch.Thunder", "an Alchemical Thunder", 50, "Lightning in a bottle. Add heavy electricity damage to your weapon for a limited time upon use.", m.buffAlchemicalThunder);
+		public const AMBROSA:Consumable       = new Ambrosia();
 		public const BALLOFL:BallsOfFlame     = new BallsOfFlame();
 		public const BALLOTD:BallsOfTheDarkness = new BallsOfTheDarkness();
 		public const BANGB_M:MiniBangBall     = new MiniBangBall();
@@ -208,7 +209,6 @@ public final class ConsumableLib extends BaseContent
 		public const C_VEMOM:CentipedeVenom   = new CentipedeVenom();
 		public const CERUL_P:Consumable       = new CeruleanPotion();
 		public const COAL___:Consumable       = new Coal();
-		public const AMBROSA:Consumable       = new Ambrosia();
 		public const CFISHS:SimpleConsumable  = mk("CFishS.", "Cold Fish S.", "a bowl of cold fish soup", 20, "A soup made with fishes from the glacial rift. It is served cold to preserve the flavor and supposed calming effect which act as a lustkiller.", m.coldFishSoup);
 	//	public const DAO_DEW:SimpleConsumable = mk("Dao Dew", "Dao Dew", "a cup of vixen tea", 15, "An exotic tea made by kitsunes. This herbal infusion is rumored to improve your expertise and expand your sexual knowledge.", m.daoDew);
 		public const DEBIMBO:DeBimbo          = new DeBimbo();
@@ -266,7 +266,7 @@ public final class ConsumableLib extends BaseContent
 		public const CENTARI:Centaurinum      = new Centaurinum();
 		public const CHILLYP:SimpleConsumable = mk("ChillyP", "ChillyPp", "a Chilly pepper", 10, "This pepper is positively shrouded with a thin layer of ice.", m.chillyPepper);
 		public const COUAOIL:SimpleConsumable = mk("CouaOil", "CouatlOil", "a vial of couatl oil", 20, "A vial the size of your fist made of dark blue glass. It contains what appears to be an oily, red liquid. The odor is strange.", curry(m.evolvedNagaOil, 2));
-		public const D_FRUIT:SimpleConsumable = mk("D.Fruit", "D.Fruit", "a Displacement Fruit", 25, "This weird fruit is said to taste completely otherworldly. They grow in only the weirdest of place. Highly favored by displacer beasts.", curry(m.catTransformation, 3));
+		public const D_FRUIT:SimpleConsumable = mk("D.Fruit", "D.Fruit", "a Displacement Fruit", 25, "This weird fruit is said to taste completely otherworldly. They grow in only the weirdest of place. Highly favored by displacer beasts.", m.displacementFruit);
 		public const DBLPEPP:SimpleConsumable = mk("DblPepp", "DblPepp", "a double canine pepper", 10, "This canine pepper is actually two that have grown together due to some freak coincidence.", curry(m.caninePepper, 2));
 		public const DSLIMEJ:SimpleConsumable = mk("DSlimeJ", "DarkSlimeJelly", "a Dark slime jelly", 20, "This looks to be a chunk of inert goop from a dark slime. Consuming this thing may have a weird effect on you.", curry(m.gooGasmic, 2));
 		public const DRAKHRT:SimpleConsumable = mk("DrakHrt", "DrakeHeart", "a drake's heart's flower", 50, "A rare, beautiful flower.  It could make an exquisite perfume.  According to a legend, dragons give this flower to the ones they intend to court.", curry(m.drakeHeart));
@@ -282,7 +282,7 @@ public final class ConsumableLib extends BaseContent
 		public const FRRTFRT:SimpleConsumable = mk("Frrtfrt", "FerretFrt", "a ferret fruit", 6, "This fruit is curved oddly, just like the tree it came from.  The skin is fuzzy and brown, like the skin of a peach.", m.ferretTF);
 		public const FOXJEWL:SimpleConsumable = mk("FoxJewl", "Fox Jewel", "a fox jewel", 50, "A shining teardrop-shaped jewel.  An eerie blue flame dances beneath the surface.", curry(m.foxJewel, false));
 		public const FSNAILS:SimpleConsumable = mk("FSnailS", "FireSnailSaliva", "a Fire snail Saliva", 20, "The saliva of a fire snail. Highly volatile.", m.firesnailsaliva);
-		public const G_FRUIT:SimpleConsumable = mk("G.Fruit", "G.Fruit", "a Ghastly fruit", 10, "A ghastly whisker fruit from some underground place. Legends even says they may been growing in netherwold. Highly favored by nekomata.", curry(m.catTransformation, 1));
+		public const G_FRUIT:SimpleConsumable = mk("G.Fruit", "G.Fruit", "a Ghastly fruit", 10, "A ghastly whisker fruit from some underground place. Legends even says they may been growing in netherwold. Highly favored by nekomata.", m.ghastlyFruit);
 		public const GLDRIND:GoldenRind       = new GoldenRind();
 		public const GORGOIL:SimpleConsumable = mk("GorgOil", "GorgonOil", "a vial of gorgon oil", 20, "A vial the size of your fist made of dark green glass. It contains what appears to be oily, greenish liquid. The odor is foul.", curry(m.evolvedNagaOil, 0));
 		public const GREYINK:SimpleConsumable = mk("GreyInk", "GreyInk", "a vial of grey ink", 30, "Ash grey ink normaly used for writing consuming this doesnt seem like the best idea.", curry(m.scyllaInk, 1));
@@ -350,10 +350,10 @@ public final class ConsumableLib extends BaseContent
 		public const VIXVIGR:SimpleConsumable = mk("VixVigr", "VixVigr", "a bottle labelled \"Vixen's Vigor\"", 30, "This small medicine bottle contains something called \"Vixen's Vigor\", supposedly distilled from common fox-berries.  It is supposed to be a great deal more potent, and a small warning label warns of \"extra boobs\", whatever that means.", curry(m.foxTF, true));
 		public const VOLTTOP:SimpleConsumable = mk("VoltTop", "VoltTopaz", "a Voltage topaz", 6, "This glittering jewel sparkles with a wondrous light. With such beauty, it would probably fetch a fair amount of gems in various markets. A faint static tingle warms your [hands] as a light flush travels up your arms...", curry(m.voltageTopaz, true));
 		public const VOUIOIL:SimpleConsumable = mk("VouiOil", "VouivreOil", "a vial of vouivre oil", 70, "A vial the size of your fist made of light green glass. It contains what appears to be an oily, purple liquid. The odor is strange.", curry(m.evolvedNagaOil, 1));
-		public const W_FRUIT:SimpleConsumable = mk("W.Fruit", "W.Fruit", "a piece of whisker-fruit", 6, "This small, peach-sized fruit has tiny whisker-like protrusions growing from the sides.", curry(m.catTransformation, 0));
+		public const W_FRUIT:SimpleConsumable = mk("W.Fruit", "W.Fruit", "a piece of whisker-fruit", 6, "This small, peach-sized fruit has tiny whisker-like protrusions growing from the sides.", m.whiskerFruit);
 		public const W_EMRLD:SimpleConsumable = mk("W.Emerald", "W.Emerald", "a Windstorm Emerald", 20, "This glittering jewel sparkles with a wondrous light. With such beauty, it would probably fetch a fair amount of gems in various markets. A faint green glow warms your [hands] as a light breeze travels up your arms...", curry(m.windstormEmerald, true));
 		public const WHITEIS:SimpleConsumable = mk("WhiteIS", "WhiteIceShard", "a White Ice Shard", 30, "This shard of cloudy white ice seems to resist all forms of heat and appears to radiate a sense of loneliness and frigid desire.", m.whiteIceShard);
-		public const WOFRUIT:SimpleConsumable = mk("WoFruit", "WonderFruit", "a Wonder fruit", 10, "A strange whisker fruit from what appears to be a different dimension. Its skin is dyed with all the color of the rainbow.", curry(m.catTransformation, 2));
+		public const WOFRUIT:SimpleConsumable = mk("WoFruit", "WonderFruit", "a Wonder fruit", 10, "A strange whisker fruit from what appears to be a different dimension. Its skin is dyed with all the color of the rainbow.", m.wonderFruit);
 		public const WETCLTH:SimpleConsumable = mk("WetClth", "WetCloth", "a wet cloth dripping with slippery slime", 6, "Dripping with a viscous slime, you've no doubt rubbing this cloth on your body would have some kind of strange effect.", curry(m.gooGasmic, 0));
 		public const WHITEIN:SimpleConsumable = mk("WhiteIn", "WhiteInk", "a vial of white ink", 50, "Pearly white ink normaly used for writing consuming this doesnt seem like the best idea.", curry(m.scyllaInk, 2));
 		//Wolf Pepper chyba jest nieużywanym itemem ale jesli jednak gdzie byl uzyty zostawie go nie wycietego a w przyszłosci zrobic z niego prawdziwy wolf TF ^^

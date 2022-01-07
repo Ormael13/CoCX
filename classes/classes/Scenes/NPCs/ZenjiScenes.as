@@ -1444,7 +1444,7 @@ public function loverZenjiComfort():void {
 	dynStats("cor", -0.5);
 	if (player.statusEffectv1(StatusEffects.ZenjiPreparationsList) < 15) player.addStatusValue(StatusEffects.ZenjiPreparationsList, 1, 1);
 	doNext(loverZenjiTalks);
-	cheatTime2(5);
+	eachMinuteCount(5);
 }
 
 public function loverZenjiFood():void {
@@ -1458,7 +1458,7 @@ public function loverZenjiFood():void {
 	if (player.statusEffectv1(StatusEffects.ZenjiPreparationsList) < 15) player.addStatusValue(StatusEffects.ZenjiPreparationsList, 1, 1);
 	ZenjiFood = true;
 	inventory.takeItem(consumables.ZENJI_H, loverZenjiTalks);
-	cheatTime2(5);
+	eachMinuteCount(5);
 }
 
 public function loverZenjiGiveItem():void {

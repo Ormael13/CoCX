@@ -241,19 +241,12 @@ use namespace CoC;
 		}
 
 		public function SubZeroConditionsTick():void {
-			var HPD:Number = 0.1;
-			if ((Math.round(player.damageIcePercent())) >= 55) HPD -= 0.01;
-			if ((Math.round(player.damageIcePercent())) >= 70) HPD -= 0.01;
-			if ((Math.round(player.damageIcePercent())) >= 80) HPD -= 0.01;
-			if ((Math.round(player.damageIcePercent())) >= 90) HPD -= 0.01;
-			if ((Math.round(player.damageIcePercent())) >= 95) HPD -= 0.01;
-			if (player.hasPerk(PerkLib.FireAffinity) && HPD > 0) HPD *= 2;
-			if (CoC.instance.inCombat) HPD *= 0.5;
-			if (HPD > 0) {
-				HPD *= player.maxHP();
-				HPD = Math.round(HPD);
-				HPChange(-HPD, true);
-			}
+			var HPD:Number = 0.05;
+			if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) HPD *= 2;
+			HPD *= player.maxHP();
+			HPD = Math.round(HPD);
+			outputText("Cold environment slowly seeps into your body. ");
+			player.takeIceDamage(HPD, true);
 		}
 
 		private function fightValeria():void {

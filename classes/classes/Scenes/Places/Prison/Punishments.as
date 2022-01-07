@@ -91,7 +91,7 @@ public class Punishments extends BaseContent
 					}
 					outputText("\n\n");
 					player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,4, player.statusEffectv4(StatusEffects.PrisonCaptorEllyStatus) + 2);
-					player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
+					if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
 					player.slimeFeed();
 					player.refillHunger(25);
 					player.orgasm();

@@ -1,6 +1,7 @@
 package classes.Items
 {
 import classes.BodyParts.LowerBody;
+import classes.PerkLib;
 	/**
 	 * @author Kitteh6660
 	 */
@@ -46,6 +47,8 @@ import classes.BodyParts.LowerBody;
 				case "spider-silk shirt":
 				case "spider-silk loincloth":
 				case "spider-silk panties":
+				case "cow girl bra":
+				case "cow girl panties":
 					return 1;
 				case "dragonscale bra":
 				case "dragonscale vest":
@@ -75,6 +78,8 @@ import classes.BodyParts.LowerBody;
 				case "ebonweave thong":
 				case "rune thong":
 				case "rune jock":
+				case "cow girl bra":
+				case "cow girl panties":
 					return 1;
 				case "dragonscale bra":
 				case "dragonscale vest":
@@ -112,6 +117,8 @@ import classes.BodyParts.LowerBody;
 					return 2;
 				case "rune thong":
 				case "rune jock":
+				case "cow girl bra":
+				case "cow girl panties":
 					return 3;
 				default:
 					return 0;
@@ -130,6 +137,10 @@ import classes.BodyParts.LowerBody;
 					outputText("Your form makes it impossible to put this on. You place it back into your inventory.");
 					return false;
 				}
+			}
+			if (game.player.hasPerk(PerkLib.Rigidity)) {
+				outputText("You would very like to equip this item but your body stiffness prevents you from doing so.");
+				return false;
 			}
 			return true;
 		}

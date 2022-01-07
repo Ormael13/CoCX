@@ -13,7 +13,7 @@ package classes.Items.Weapons
 		
 		public function GiantShuriken()
 		{
-			super("G.Shuri","GiantShuriken","Giant Shuriken","a Giant Shuriken","slash",52,2080,"An inordinately large shuriken. Capable of being thrown by those strong enough to properly hold it.", "Massive");
+			super("G.Shuri","GiantShuriken","Giant Shuriken","a Giant Shuriken","slash",52,2080,"An inordinately large shuriken. Capable of being thrown by those strong enough to properly hold it.", "Massive", "Exotic, Thrown");
 		}
 		
 		override public function get attack():Number {
@@ -25,7 +25,7 @@ package classes.Items.Weapons
 		}
 		
 		override public function canUse():Boolean {
-			if (game.player.hasPerk(PerkLib.GigantGrip)) return true;
+			if (game.player.hasPerk(PerkLib.GigantGrip)) return super.canUse();
 			outputText("You aren't skilled in handling massive weapons, even when using both hands to use this sword.  ");
 			return false;
 		}

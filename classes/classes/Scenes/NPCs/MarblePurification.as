@@ -549,9 +549,10 @@ public class MarblePurification extends NPCAwareContent{
 			 	outputText("\n\n\"<i>Little bitch!</i>\"  The cowgirl snarls, standing up to her full impressive height.  \"<i>I will teach you not to try something like this again.</i>\"  Isabella grabs her shield and brandishes it prominently, ready to use it for defense and to bludgeon.");
 			}
 			//if (Jojo is in camp)
-			if(player.hasStatusEffect(StatusEffects.CampRathazul))
+			if(player.hasStatusEffect(StatusEffects.PureCampJojo))
 			{
-			 	outputText("\n\n\"<i>I wouldn’t have done that if I were you,</i>\" Jojo says, rising off the ground and retrieving his staff.  Falling into a combat pose, his face contorts into an almost uncharacteristic visage of anger directed at the woman before you.");
+			 	if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3) outputText("\n\n\"<i>I wouldn’t have done that if I were you,</i>\" Joy says, rising off the ground and retrieving her staff.  Falling into a combat pose, her face contorts into an almost uncharacteristic visage of anger directed at the woman before you.");
+				else outputText("\n\n\"<i>I wouldn’t have done that if I were you,</i>\" Jojo says, rising off the ground and retrieving his staff.  Falling into a combat pose, his face contorts into an almost uncharacteristic visage of anger directed at the woman before you.");
 			}
 			//if (Kiha is in camp)
 			if(followerKiha())
@@ -1344,10 +1345,11 @@ public class MarblePurification extends NPCAwareContent{
 	public function purificationQuestFinal():void
 	{
 		clearOutput();
+		var expReward:Number = 500;
+		if (player.level > 4) expReward += (player.level - 4) * 100;
 	 	outputText("\"<i>It has been quite the morning, hasn't it sweetie?</i>\"  It certainly has been, but at least now, your lover is finally free of her corruption once and for all.");
-	 	outputText("\n\nYou've gained 500 exp for helping Marble attain purity.");
-		//increase exp by x
-		player.XP += 500;
+	 	outputText("\n\nYou've gained "+expReward+" exp for helping Marble attain purity.");
+		player.XP += expReward;
 		//Marble corruption is set to 10
 		flags[kFLAGS.MARBLE_PURIFICATION_STAGE] = 5;
 		flags[kFLAGS.MARBLE_PURIFIED] = 1;

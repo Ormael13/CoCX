@@ -255,9 +255,8 @@ public class CeraphScene extends NPCAwareContent
 			player.cuntChange(monster.cockArea(0), true);
 			player.sexReward("cum", "Vaginal");
 			dynStats("lib", 3, "sen", 3, "cor", 1);
-			player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 32, 61); //Ceraph causes faster pregnancies
-            if (CoC.instance.inCombat)
-                cleanupAfterCombat();
+			if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 32, 61); //Ceraph causes faster pregnancies
+            if (CoC.instance.inCombat) cleanupAfterCombat();
 			else doNext(camp.returnToCampUseOneHour);
 		}
 

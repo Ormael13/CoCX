@@ -97,7 +97,13 @@ public class Race {
     public static const ATLACH_NACHA:Race = new Race("Atlach Nacha", 91, "atlachNachaScore");
     public static const WOODELF:Race      = new Race("Wood Elf",92, "woodElfScore");
     public static const SEA_DRAGON:Race = new Race("Sea Dragon",93, "leviathanScore");
-    public static const FMINDBREAKER:Race = new Race("Female Mind Breaker",94, "FemaleMindbreakerScore");
+    public static const FMINDBREAKER:Race = new Race("Female Mind Breaker",94, "femaleMindbreakerScore");
+    public static const MMINDBREAKER:Race = new Race("Male Mind Breaker",95, "maleMindbreakerScore");
+    public static const ELEMENTALFUSION:Race = new Race("Elemental Fusion",96, "fusedElementalScore");
+    public static const GRYPHON:Race = new Race("Gryphon",97, "gryphonScore");
+    public static const PEACOCK:Race = new Race("Peacock",98, "peacockScore");
+    public static const ANGEL:Race = new Race("Angel",99, "angelScore");
+	
 
     public var name:String;
     public var id:int;

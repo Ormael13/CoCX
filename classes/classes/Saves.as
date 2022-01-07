@@ -646,7 +646,7 @@ public function savePermObject(isFile:Boolean):void {
 		saveFile.data.flags[kFLAGS.INTELLIGENCE_SCALING] = flags[kFLAGS.INTELLIGENCE_SCALING];
 		saveFile.data.flags[kFLAGS.MELEE_DAMAGE_OVERHAUL] = flags[kFLAGS.MELEE_DAMAGE_OVERHAUL];
 		saveFile.data.flags[kFLAGS.SECONDARY_STATS_SCALING] = flags[kFLAGS.SECONDARY_STATS_SCALING];
-		saveFile.data.flags[kFLAGS.SPELLS_COOLDOWNS] = flags[kFLAGS.SPELLS_COOLDOWNS];
+		saveFile.data.flags[kFLAGS.TOUGHNESS_SCALING] = flags[kFLAGS.TOUGHNESS_SCALING];
 		//saveFile.data.settings = [];
 		//saveFile.data.settings.useMetrics = Measurements.useMetrics;
 		//achievements
@@ -708,7 +708,7 @@ public function loadPermObject():void {
 			if (saveFile.data.flags[kFLAGS.INTELLIGENCE_SCALING] != undefined) flags[kFLAGS.INTELLIGENCE_SCALING] = saveFile.data.flags[kFLAGS.INTELLIGENCE_SCALING];
 			if (saveFile.data.flags[kFLAGS.MELEE_DAMAGE_OVERHAUL] != undefined) flags[kFLAGS.MELEE_DAMAGE_OVERHAUL] = saveFile.data.flags[kFLAGS.MELEE_DAMAGE_OVERHAUL];
 			if (saveFile.data.flags[kFLAGS.SECONDARY_STATS_SCALING] != undefined) flags[kFLAGS.SECONDARY_STATS_SCALING] = saveFile.data.flags[kFLAGS.SECONDARY_STATS_SCALING];
-			if (saveFile.data.flags[kFLAGS.SPELLS_COOLDOWNS] != undefined) flags[kFLAGS.SPELLS_COOLDOWNS] = saveFile.data.flags[kFLAGS.SPELLS_COOLDOWNS];
+			if (saveFile.data.flags[kFLAGS.TOUGHNESS_SCALING] != undefined) flags[kFLAGS.TOUGHNESS_SCALING] = saveFile.data.flags[kFLAGS.TOUGHNESS_SCALING];
 		}
 		//if(saveFile.data.settings){if(saveFile.data.settings.useMetrics != undefined){Measurements.useMetrics = saveFile.data.settings.useMetrics;}}
 		//achievements, will check if achievement exists.
@@ -893,6 +893,8 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.teaseLevel = player.teaseLevel;
 		saveFile.data.teaseXP = player.teaseXP;
 		//Mastery
+		saveFile.data.masteryFeralCombatLevel = player.masteryFeralCombatLevel;
+		saveFile.data.masteryFeralCombatXP = player.masteryFeralCombatXP;
 		saveFile.data.masteryGauntletLevel = player.masteryGauntletLevel;
 		saveFile.data.masteryGauntletXP = player.masteryGauntletXP;
 		saveFile.data.masteryDaggerLevel = player.masteryDaggerLevel;
@@ -905,6 +907,8 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 		saveFile.data.masteryMaceHammerXP = player.masteryMaceHammerXP;
 		saveFile.data.masteryDuelingSwordLevel = player.masteryDuelingSwordLevel;
 		saveFile.data.masteryDuelingSwordXP = player.masteryDuelingSwordXP;
+		saveFile.data.masteryPolearmLevel = player.masteryPolearmLevel;
+		saveFile.data.masteryPolearmXP = player.masteryPolearmXP;
 		saveFile.data.masterySpearLevel = player.masterySpearLevel;
 		saveFile.data.masterySpearXP = player.masterySpearXP;
 		saveFile.data.masteryWhipLevel = player.masteryWhipLevel;
@@ -1893,6 +1897,14 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 		else
 			player.teaseLevel = saveFile.data.teaseLevel;
 		//Mastery
+		if (saveFile.data.masteryFeralCombatXP == undefined)
+			player.masteryFeralCombatXP = 0;
+		else
+			player.masteryFeralCombatXP = saveFile.data.masteryFeralCombatXP;
+		if (saveFile.data.masteryFeralCombatLevel == undefined)
+			player.masteryFeralCombatLevel = 0;
+		else
+			player.masteryFeralCombatLevel = saveFile.data.masteryFeralCombatLevel;
 		if (saveFile.data.masteryGauntletXP == undefined)
 			player.masteryGauntletXP = 0;
 		else
@@ -1981,6 +1993,14 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			player.masteryDuelingSwordLevel = 0;
 		else
 			player.masteryDuelingSwordLevel = saveFile.data.masteryDuelingSwordLevel;
+		if (saveFile.data.masteryPolearmXP == undefined)
+			player.masteryPolearmXP = 0;
+		else
+			player.masteryPolearmXP = saveFile.data.masteryPolearmXP;
+		if (saveFile.data.masteryPolearmLevel == undefined)
+			player.masteryPolearmLevel = 0;
+		else
+			player.masteryPolearmLevel = saveFile.data.masteryPolearmLevel;
 		if (saveFile.data.masterySpearXP == undefined)
 			player.masterySpearXP = 0;
 		else

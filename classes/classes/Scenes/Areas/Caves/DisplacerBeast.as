@@ -34,7 +34,7 @@ use namespace CoC;
 			damage += rand(weaponAttack);
 			damage += 1.2;
 			damage = Math.round(damage);
-			damage = player.takePhysDamage(damage, true);
+			player.takePhysDamage(damage, true);
 		}
 		
 		override public function defeated(hpVictory:Boolean):void

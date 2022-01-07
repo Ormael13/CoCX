@@ -193,7 +193,7 @@ public class TentacleBeast extends Monster
 				this.armorMDef = 2;
 				this.bonusHP = 400;
 				this.bonusLust = 122;
-				this.level = 12;
+				this.level = 11;
 			}
 			this.a = "the ";
 			this.imageName = "tentaclebeast";

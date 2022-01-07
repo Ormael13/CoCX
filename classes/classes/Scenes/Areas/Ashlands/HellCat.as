@@ -28,8 +28,8 @@ import classes.internals.*;
 		{
 			var damage:int = (inte * 1.1) + rand(25);
 			damage = Math.round(damage);
+			outputText("The hellcat cast a spell, materializing a fireball before throwing it at you. ");
 			player.takeFireDamage(damage, true);
-			outputText("The hellcat cast a spell, materializing a fireball before throwing it at you. " + damage + " fire damage!");
 		}
 		
 		public function hellcatInfernalClaw():void
@@ -45,7 +45,7 @@ import classes.internals.*;
 			player.takePhysDamage(physdamage, true);
 			if (player.hasStatusEffect(StatusEffects.Hemorrhage)) player.addStatusValue(StatusEffects.Hemorrhage, 1, 1);
 			else player.createStatusEffect(StatusEffects.Hemorrhage,3,0.05,0,0);
-			outputText("" + physdamage + " physical damage, " + firedamage + " fire damage. Reeling in pain you begin to bleed and burn at the same time.");
+			outputText(" Reeling in pain you begin to bleed and burn at the same time.");
 		}
 		
 		public function hellcatFelineCurse():void

@@ -2859,8 +2859,9 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 		//>Fuck her friendly style.
 		public function friendlySandMotherFuck():void {
 			clearOutput();
-			startCombat(new SandMother(), true);
-            CoC.instance.inCombat = false;
+			//startCombat(new SandMother(), true);
+            //CoC.instance.inCombat = false;
+			//Why is combat even here??? Can it be removed?
             var x:int = player.cockThatFits(monster.vaginalCapacity());
 			var y:int = player.cockThatFits2(monster.vaginalCapacity());
 			//First Time:
@@ -3179,7 +3180,7 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 		public function moreCumWitchesPlease():void {
 			clearOutput();
 			//Bimbo version:
-			if(player.findPerk(PerkLib.BimboBrains) >= 0 || player.findPerk(PerkLib.FutaFaculties) >= 0) {
+			if(player.hasPerk(PerkLib.BimboBrains) || player.hasPerk(PerkLib.FutaFaculties)) {
 				outputText("Wouldn't it be better if there were like, lots of cum witches, with yummy cocks that you could suck?");
 				outputText("\n\n\"<i>No, it wouldn't,</i>\" the Sand Mother retorts, ending the conversation.");
 				doNext(playerMenu);

@@ -53,8 +53,8 @@ public class DarknessElemental extends Monster
 			if (player.getEvasionRoll()) outputText(" You slide underneath the barrage!");
 			else {
 				var damage:Number = inte + wis;
-				if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 0.3;
-				if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 3;
+				if (player.hasPerk(PerkLib.FromTheFrozenWaste) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 0.3;
+				if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) damage *= 3;
 				damage *= 3.75;
 				damage = Math.round(damage);
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
@@ -194,7 +194,7 @@ public class DarknessElemental extends Monster
 			initGenderless();
 			this.weaponName = "fists";
 			this.weaponVerb = "smash";
-			this.armorName = "darkness skin";
+			this.armorName = "skin of the darkness";
 			this.createPerk(PerkLib.EnemyElementalType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.DarknessNature, 0, 0, 0, 0);
 			checkMonster();

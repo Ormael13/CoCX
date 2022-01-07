@@ -12,13 +12,19 @@ package classes
 		public static function footInchOrMetres(inches:Number, precision:int = 2):String
 		{
 			var pHeight:String = "";
-			if (CoC.instance.flags[kFLAGS.USE_METRICS]){
+			if (CoC.instance.flags[kFLAGS.USE_METRICS] == 1){
 				pHeight = (Math.round(inches * 2.54) / Math.pow(10, precision)).toFixed(precision) + " metres";
 			}
-			else{
+			else if (CoC.instance.flags[kFLAGS.USE_METRICS] == 0){
 				pHeight = Math.floor(inches / 12) + " foot"
 				if (inches % 12 > 0){
 					pHeight = pHeight + " " +  inches % 12 + " inch";
+				}
+			}
+			else{
+				pHeight = Math.floor(inches / 12) + "\'"
+				if (inches % 12 > 0){
+					pHeight = pHeight + " " +  inches % 12 + "\"";
 				}
 			}
 			return pHeight;
@@ -28,7 +34,7 @@ package classes
 		{
 			if (inches < 1) return inchesOrCentimetres(inches);
 			var value:int = Math.round(inches);
-			if (CoC.instance.flags[kFLAGS.USE_METRICS]) {
+			if (CoC.instance.flags[kFLAGS.USE_METRICS] == 1) {
 				value = Math.round(inches * 2.54);
 				return Utils.num2Text(value) + (value === 1 ? " centimetre" : " centimetres");
 			}
@@ -39,18 +45,18 @@ package classes
 		public static function inchesOrCentimetres(inches:Number, precision:int = 1):String
 		{
 			var value:Number = Math.round(inchToCm(inches) * Math.pow(10, precision)) / Math.pow(10, precision);
-			var text:String = value + (CoC.instance.flags[kFLAGS.USE_METRICS] ? " centimetre" : " inch");
+			var text:String = value.toString() + (CoC.instance.flags[kFLAGS.USE_METRICS] == 1 ? " centimetre" : " inch");
 			if (value === 1) return text;
-			return text + (CoC.instance.flags[kFLAGS.USE_METRICS] ? "s" : "es");
+			return text + (CoC.instance.flags[kFLAGS.USE_METRICS] == 1 ? "s" : "es");
 		}
 		public static function shortSuffix(inches:Number, precision:int = 1):String
 		{
 			var value:Number = Math.round(inchToCm(inches) * Math.pow(10, precision)) / Math.pow(10, precision);
-			return value + (CoC.instance.flags[kFLAGS.USE_METRICS] ? "-cm" : "-inch");
+			return value.toString() + (CoC.instance.flags[kFLAGS.USE_METRICS]  == 1 ? "-cm" : "-inch");
 		}
 		public static function inchToCm(inches:Number):Number
 		{
-			return CoC.instance.flags[kFLAGS.USE_METRICS] ? inches * 2.54 : inches;
+			return CoC.instance.flags[kFLAGS.USE_METRICS] == 1 ? inches * 2.54 : inches;
 		}
 	}
 }
