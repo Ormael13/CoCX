@@ -5779,9 +5779,7 @@ public class Combat extends BaseContent {
                             damage *= 1.75;
                         }
                         if (player.hasPerk(PerkLib.ChiReflowLust)) damage *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
-                        if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.5;
-                        if (player.hasPerk(PerkLib.Apex)) damage *= 1.5;
-                        if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.5;
+                        if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
                         damage = damage * 0.33 * monster.lustVuln;
                         damage = Math.round(damage);
                         monster.teased(damage);
@@ -5999,9 +5997,7 @@ public class Combat extends BaseContent {
                         else if (player.level < 20) lustdamage += 50 + (player.level - 10) * 2;
                         else if (player.level < 30) lustdamage += 70 + (player.level - 20) * 1;
                         else lustdamage += 80;
-                        if (player.hasPerk(PerkLib.RacialParagon)) lustdamage *= 1.50;
-                        if (player.hasPerk(PerkLib.Apex)) lustdamage *= 1.50;
-                        if (player.hasPerk(PerkLib.AlphaAndOmega)) lustdamage *= 1.50;
+                        if (player.hasPerk(PerkLib.RacialParagon)) lustdamage *= RacialParagonAbilityBoost();
                         lustdamage *= 0.14;
 						lustdamage *= DBPaaa;
                         monster.teased(monster.lustVuln * lustdamage);
@@ -6460,9 +6456,7 @@ public class Combat extends BaseContent {
                         damage *= 1.75;
                     }
                     if (player.hasPerk(PerkLib.ChiReflowLust)) damage *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
-                    if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.5;
-                    if (player.hasPerk(PerkLib.Apex)) damage *= 1.5;
-                    if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.5;
+                    if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
                     damage = damage * 0.33 * monster.lustVuln;
                     damage = Math.round(damage);
                     monster.teased(damage);
@@ -6510,9 +6504,7 @@ public class Combat extends BaseContent {
         //High damage to goes.
         damage = combat.magic.calcVoltageModImpl(damage);
         if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
-        if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-        if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-        if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+        if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
         if (player.hasPerk(MutationsLib.FloralOvaries)) damage *= 1.25;
         if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
         damage *= 2;
@@ -6583,9 +6575,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(MutationsLib.HeartOfTheStorm)) damage *= 1.1;
         if (player.hasPerk(MutationsLib.HeartOfTheStormPrimitive)) damage *= 1.2;
         if (player.hasPerk(MutationsLib.HeartOfTheStormEvolved)) damage *= 1.3;
-        if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= 1.50;
-        if (player.hasPerk(PerkLib.Apex)) lustDmgF *= 1.50;
-        if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmgF *= 1.50;
+        if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= RacialParagonAbilityBoost();
         if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmgF *= 1.50;
         lustDmgF = lustDmgF * monster.lustVuln;
         lustDmgF = Math.round(lustDmgF);
@@ -7355,6 +7345,10 @@ public class Combat extends BaseContent {
             }
             dynStats("lus", 3);
         }
+		if (player.hasPerk(PerkLib.EclipticInfusion) && player.perkv3(PerkLib.ElementalBody) > 0) {
+			if (player.perkv3(PerkLib.ElementalBody) == 1) damage *= 1 + (0.01 * player.cor);
+			else damage *= 1 + (0.01 * (100 - player.cor));
+		}
         if (monster.hasStatusEffect(StatusEffects.BerzerkingSiegweird)) damage *= 1.2;
         if (player.hasPerk(PerkLib.Anger) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
             var bonusDamageFromMissingHP:Number = 1;
@@ -7447,6 +7441,10 @@ public class Combat extends BaseContent {
                 dynStats("lus", 3);
             }
         }
+		if (player.hasPerk(PerkLib.EclipticInfusion) && player.perkv3(PerkLib.ElementalBody) > 0) {
+			if (player.perkv3(PerkLib.ElementalBody) == 1) damage *= 1 + (0.01 * player.cor);
+			else damage *= 1 + (0.01 * (100 - player.cor));
+		}
         if (monster.hasStatusEffect(StatusEffects.BerzerkingSiegweird)) damage *= 1.2;
         if (player.hasPerk(PerkLib.Anger) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
             var bonusDamageFromMissingHP:Number = 1;
@@ -7616,6 +7614,10 @@ public class Combat extends BaseContent {
                 dynStats("lus", 3);
             }
         }
+		if (player.hasPerk(PerkLib.EclipticInfusion) && player.perkv3(PerkLib.ElementalBody) > 0) {
+			if (player.perkv3(PerkLib.ElementalBody) == 1) damage *= 1 + (0.01 * player.cor);
+			else damage *= 1 + (0.01 * (100 - player.cor));
+		}
         if (monster.hasStatusEffect(StatusEffects.BerzerkingSiegweird)) damage *= 1.2;
         if (player.hasPerk(PerkLib.Anger) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
             var bonusDamageFromMissingHP:Number = 1;
@@ -7703,6 +7705,10 @@ public class Combat extends BaseContent {
                 dynStats("lus", 3);
             }
         }
+		if (player.hasPerk(PerkLib.EclipticInfusion) && player.perkv3(PerkLib.ElementalBody) > 0) {
+			if (player.perkv3(PerkLib.ElementalBody) == 1) damage *= 1 + (0.01 * player.cor);
+			else damage *= 1 + (0.01 * (100 - player.cor));
+		}
         if (monster.hasStatusEffect(StatusEffects.BerzerkingSiegweird)) damage *= 1.2;
         if (player.hasPerk(PerkLib.Anger) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
             var bonusDamageFromMissingHP:Number = 1;
@@ -7787,6 +7793,10 @@ public class Combat extends BaseContent {
                 dynStats("lus", 3);
             }
         }
+		if (player.hasPerk(PerkLib.EclipticInfusion) && player.perkv3(PerkLib.ElementalBody) > 0) {
+			if (player.perkv3(PerkLib.ElementalBody) == 1) damage *= 1 + (0.01 * player.cor);
+			else damage *= 1 + (0.01 * (100 - player.cor));
+		}
         if (monster.hasStatusEffect(StatusEffects.BerzerkingSiegweird)) damage *= 1.2;
         if (player.hasPerk(PerkLib.Anger) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
             var bonusDamageFromMissingHP:Number = 1;
@@ -7868,6 +7878,10 @@ public class Combat extends BaseContent {
                 dynStats("lus", 3);
             }
         }
+		if (player.hasPerk(PerkLib.EclipticInfusion) && player.perkv3(PerkLib.ElementalBody) > 0) {
+			if (player.perkv3(PerkLib.ElementalBody) == 1) damage *= 1 + (0.01 * player.cor);
+			else damage *= 1 + (0.01 * (100 - player.cor));
+		}
         if (monster.hasStatusEffect(StatusEffects.BerzerkingSiegweird)) damage *= 1.2;
         if (player.hasPerk(PerkLib.Anger) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
             var bonusDamageFromMissingHP:Number = 1;
@@ -8172,6 +8186,10 @@ public class Combat extends BaseContent {
                 dynStats("lus", 3);
             }
         }
+		if (player.hasPerk(PerkLib.EclipticInfusion) && player.perkv3(PerkLib.ElementalBody) > 0) {
+			if (player.perkv3(PerkLib.ElementalBody) == 1) damage *= 1 + (0.01 * player.cor);
+			else damage *= 1 + (0.01 * (100 - player.cor));
+		}
         if (monster.hasStatusEffect(StatusEffects.BerzerkingSiegweird)) damage *= 1.2;
         if (player.hasPerk(PerkLib.Anger) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
             var bonusDamageFromMissingHP:Number = 1;
@@ -8244,6 +8262,10 @@ public class Combat extends BaseContent {
             }
             dynStats("lus", 3);
         }
+		if (player.hasPerk(PerkLib.EclipticInfusion) && player.perkv3(PerkLib.ElementalBody) > 0) {
+			if (player.perkv3(PerkLib.ElementalBody) == 1) damage *= 1 + (0.01 * player.cor);
+			else damage *= 1 + (0.01 * (100 - player.cor));
+		}
         if (monster.hasStatusEffect(StatusEffects.BerzerkingSiegweird)) damage *= 1.2;
         if (player.hasPerk(PerkLib.Anger) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
             var bonusDamageFromMissingHP:Number = 1;
@@ -9073,9 +9095,7 @@ public class Combat extends BaseContent {
                 if (player.hasPerk(PerkLib.EclipticMind)) damage *= corruptionModifier;
                 if (player.hasPerk(PerkLib.EclipticMindEvolved)) damage *= corruptionModifier;
                 if (player.hasPerk(PerkLib.EclipticMindFinalForm)) damage *= corruptionModifier;
-                if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-                if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-                if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+                if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
                 if (player.hasPerk(PerkLib.EclipticMindEvolved) && monster.cor > player.cor / 2) damage = Math.round(damage * 2);
                 else if (player.hasPerk(PerkLib.EclipticMindFinalForm) && monster.cor > player.cor / 2) damage = Math.round(damage * 3);
 				damage *= fireDamageBoostedByDao();
@@ -9110,9 +9130,7 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.EclipticMind)) lustDmg *= ((player.cor / 50 / 100)+1);
             if (player.hasPerk(PerkLib.EclipticMindEvolved)) lustDmg *= ((player.cor / 50 / 100)+1);
             if (player.hasPerk(PerkLib.EclipticMindFinalForm)) lustDmg *= ((player.cor / 50 / 100)+1);
-            if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= 1.50;
-            if (player.hasPerk(PerkLib.Apex)) lustDmg *= 1.50;
-            if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmg *= 1.50;
+            if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= RacialParagonAbilityBoost();
             if (player.hasPerk(PerkLib.ArouseTheAudience) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType))) monster.lust += monster.lustVuln * 1.2 * (2 + rand(4));
             if (player.hasPerk(PerkLib.EclipticMindEvolved) && monster.cor < (player.cor / 2)) lustDmg = Math.round(lustDmg * 2);
             else if (player.hasPerk(PerkLib.EclipticMindFinalForm) && monster.cor < (player.cor / 2)) lustDmg = Math.round(lustDmg * 3);
@@ -9140,9 +9158,7 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.SluttySimplicity) && player.armorName == "nothing") lustDmgA *= (1 + ((10 + rand(11)) / 100));
             if (player.hasPerk(PerkLib.ElectrifiedDesire)) lustDmgA *= (1 + (player.lust100 * 0.01));
             if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) lustDmgA *= (1 + combat.historyWhoreBonus());
-            if (player.hasPerk(PerkLib.RacialParagon)) lustDmgA *= 1.50;
-            if (player.hasPerk(PerkLib.Apex)) lustDmgA *= 1.50;
-            if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmgA *= 1.50;
+            if (player.hasPerk(PerkLib.RacialParagon)) lustDmgA *= RacialParagonAbilityBoost();
             if (player.hasPerk(MutationsLib.FloralOvaries)) lustDmgA *= 1.2;
             if (player.hasPerk(MutationsLib.FloralOvariesPrimitive)) {
                 if (monster.isMaleOrHerm()) lustDmgA *= 1.5;
@@ -9186,8 +9202,7 @@ public class Combat extends BaseContent {
             //High damage to goes.
             damage0 = magic.calcVoltageModImpl(damage0);
             if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage0 *= (1 + (player.lust100 * 0.01));
-            if (player.hasPerk(PerkLib.Apex)) lustDmgA *= 1.50;
-            if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmgA *= 1.50;
+            if (player.hasPerk(PerkLib.RacialParagon)) lustDmgA *= RacialParagonAbilityBoost();
             damage0 = Math.round(damage0);
             dynStats("lus", (Math.round(player.maxLust() * 0.02)), "scale", false);
             var lustDmgF:Number = 20 + rand(6);
@@ -9251,9 +9266,7 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.ChiReflowLust)) lustDmgF *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
             if (player.hasPerk(PerkLib.ArouseTheAudience) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType))) lustDmgF *= 1.5;
             lustDmgF = lustDmgF * monster.lustVuln;
-            if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= 1.50;
-            if (player.hasPerk(PerkLib.Apex)) lustDmgF *= 1.50;
-            if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmgF *= 1.50;
+            if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= RacialParagonAbilityBoost();
             lustDmgF = lustDmgF/2;
             lustDmgF = Math.round(lustDmgF);
             outputText("Your opponent is struck by lightning as your lust storm rages on.")
@@ -9291,9 +9304,7 @@ public class Combat extends BaseContent {
                 var SpellMultiplier2:Number = 1;
                 SpellMultiplier2 += spellMod() - 1;
                 damageBFA *= SpellMultiplier2;
-                if (player.hasPerk(PerkLib.RacialParagon)) damageBFA *= 1.50;
-                if (player.hasPerk(PerkLib.Apex)) damageBFA *= 1.50;
-                if (player.hasPerk(PerkLib.AlphaAndOmega)) damageBFA *= 1.50;
+                if (player.hasPerk(PerkLib.RacialParagon)) damageBFA *= RacialParagonAbilityBoost();
                 damageBFA = Math.round(damageBFA * iceDamageBoostedByDao());
                 if (damageBFA > (monster.maxHP()/10)) damageBFA = Math.round(monster.maxHP()/10);
                 outputText("Your black frost aura chills [monster a] [monster name] to the bone dealing ");
@@ -11498,9 +11509,7 @@ public class Combat extends BaseContent {
             if (player.necklace == necklaces.OBNECK) damage *= 1.2;
             if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
             if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
-            if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-            if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-            if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+            if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
             if (monster.statusEffectv1(StatusEffects.OrcaHasSmashed) >= 1) {
                 damage *= 1.50;
                 monster.addStatusValue(StatusEffects.OrcaHasSmashed, 1, -1);
@@ -11599,9 +11608,7 @@ public class Combat extends BaseContent {
                 outputText("This blow is particularly vicious as your opponent defences were previously crushed. ");
                 if (monster.statusEffectv1(StatusEffects.OrcaHasSmashed) == 0) monster.removeStatusEffect(StatusEffects.OrcaHasSmashed);
             }
-            if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-            if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-            if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+            if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
             //Dealing damage -
             outputText("You give your opponent a powerful blow with your tail sending it flying back in the sky and forcing the air out of its lung. Your opponent is completely disoriented! ");
             doDamage(damage, true, true);
@@ -11652,9 +11659,7 @@ public class Combat extends BaseContent {
                 outputText("This blow is particularly vicious as your opponent defences were previously crushed. ");
                 if (monster.statusEffectv1(StatusEffects.OrcaHasSmashed) == 0) monster.removeStatusEffect(StatusEffects.OrcaHasSmashed);
             }
-            if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-            if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-            if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+            if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
             //Dealing damage -
             outputText("You grab your weapon with both hands and smash your target back up in the air breaching [monster his] defences leaving [monster him] wide open! ");
             doDamage(damage, true, true);
@@ -11713,9 +11718,7 @@ public class Combat extends BaseContent {
                 monster.addStatusValue(StatusEffects.OrcaHasSmashed, 1, -1);
                 outputText("This blow is particularly vicious as your opponent defences were previously crushed. ");
             }
-            if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-            if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-            if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+            if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
             damage *= SAMulti;
             var crit:Boolean = false;
             var critChance:int = 5;
@@ -11903,9 +11906,7 @@ public class Combat extends BaseContent {
         damage *= scalingBonusStrength() * 0.5;
         if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
         if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
-        if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-        if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-        if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+        if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
         if (monster.plural) damage *= 5;
         damage = Math.round(damage);
         doDamage(damage, true, true);
@@ -12390,9 +12391,7 @@ public class Combat extends BaseContent {
         if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
         if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
         if (player.hasPerk(PerkLib.VladimirRegalia)) damage *= 2;
-        if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-        if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-        if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+        if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
         if (player.hasPerk(PerkLib.KrakenBlackDress)) damage *= 2;
         //Squeeze -
         outputText("You begin to crush your foe with your pincer aiming to squeeze it to death in your mighty grip. You can feel it in your pincer as [monster his] struggles are briefly intensified. \n\n[Themonster] takes ");
@@ -12434,9 +12433,7 @@ public class Combat extends BaseContent {
         if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
         if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
         if (player.hasPerk(PerkLib.VladimirRegalia)) damage *= 2;
-        if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-        if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-        if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+        if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
         if (monster.plural) damage *= 5;
         if (player.hasPerk(PerkLib.KrakenBlackDress)) damage *= 2;
 		if (player.hasPerk(PerkLib.UnbreakableBind)) damage *= 2;
@@ -12586,9 +12583,7 @@ public class Combat extends BaseContent {
                 if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += historyWhoreBonus();
                 if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 10) damagemultiplier += 0.2;
                 if (player.hasPerk(PerkLib.SuperSensual) && chance > 100) damagemultiplier += (0.01 * (chance - 100));
-                if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-                if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-                if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+                if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
                 if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
 				if (player.hasPerk(PerkLib.UnbreakableBind)) damagemultiplier += 1;
 				if (player.hasStatusEffect(StatusEffects.ControlFreak)) damagemultiplier += (2 - player.statusEffectv1(StatusEffects.ControlFreak));
@@ -12647,9 +12642,7 @@ public class Combat extends BaseContent {
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
 		if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
 		if (player.hasPerk(PerkLib.VladimirRegalia)) damage *= 2;
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.UnbreakableBind)) damage *= 2;
 		if (player.hasStatusEffect(StatusEffects.ControlFreak)) damage *= player.statusEffectv1(StatusEffects.ControlFreak);
 		if (player.hasPerk(PerkLib.Sadomasochism)) damage *= player.sadomasochismBoost();
@@ -12783,9 +12776,7 @@ public class Combat extends BaseContent {
                 if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += historyWhoreBonus();
                 if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 10) damagemultiplier += 0.2;
                 if (player.hasPerk(PerkLib.SuperSensual) && chance > 100) damagemultiplier += (0.01 * (chance - 100));
-                if (player.hasPerk(PerkLib.RacialParagon)) damagemultiplier *= 1.50;
-                if (player.hasPerk(PerkLib.Apex)) damagemultiplier *= 1.50;
-                if (player.hasPerk(PerkLib.AlphaAndOmega)) damagemultiplier *= 1.50;
+                if (player.hasPerk(PerkLib.RacialParagon)) damagemultiplier *= RacialParagonAbilityBoost();
                 if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
 				if (player.hasPerk(PerkLib.UnbreakableBind)) damagemultiplier += 1;
 				if (player.hasStatusEffect(StatusEffects.ControlFreak)) damagemultiplier += (2 - player.statusEffectv1(StatusEffects.ControlFreak));
@@ -12932,9 +12923,7 @@ public class Combat extends BaseContent {
                 if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += historyWhoreBonus();
                 if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 10) damagemultiplier += 0.2;
                 if (player.hasPerk(PerkLib.SuperSensual) && chance > 100) damagemultiplier += (0.01 * (chance - 100));
-                if (player.hasPerk(PerkLib.RacialParagon)) damagemultiplier *= 1.50;
-                if (player.hasPerk(PerkLib.Apex)) damagemultiplier *= 1.50;
-                if (player.hasPerk(PerkLib.AlphaAndOmega)) damagemultiplier *= 1.50;
+                if (player.hasPerk(PerkLib.RacialParagon)) damagemultiplier *= RacialParagonAbilityBoost();
                 if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
 				if (player.hasPerk(PerkLib.UnbreakableBind)) damagemultiplier += 1;
 				if (player.hasStatusEffect(StatusEffects.ControlFreak)) damagemultiplier += (2 - player.statusEffectv1(StatusEffects.ControlFreak));
@@ -12995,9 +12984,7 @@ public class Combat extends BaseContent {
 				if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) dam4Baa *= 2;
                 poisonScaling += player.lib/100;
                 poisonScaling += player.tou/100;
-                if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= 1.50;
-                if (player.hasPerk(PerkLib.Apex)) lustDmg *= 1.50;
-                if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmg *= 1.50;
+                if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= RacialParagonAbilityBoost();
                 if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 1.50;
                 if (player.level < 10) lustDmg += 20 + (player.level * 3);
                 else if (player.level < 20) lustDmg += 50 + (player.level - 10) * 2;
@@ -13088,9 +13075,7 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += historyWhoreBonus();
             if (player.hasPerk(PerkLib.DazzlingDisplay)) damagemultiplier += 0.2;
             if (player.hasPerk(PerkLib.SuperSensual)) damagemultiplier += 0.5;
-            if (player.hasPerk(PerkLib.RacialParagon)) damagemultiplier *= 1.50;
-            if (player.hasPerk(PerkLib.Apex)) damagemultiplier *= 1.50;
-            if (player.hasPerk(PerkLib.AlphaAndOmega)) damagemultiplier *= 1.50;
+            if (player.hasPerk(PerkLib.RacialParagon)) damagemultiplier *= RacialParagonAbilityBoost();
             if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
             damage *= damagemultiplier;
             //Determine if critical tease!
@@ -13200,9 +13185,7 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += historyWhoreBonus();
             if (player.hasPerk(PerkLib.DazzlingDisplay)) damagemultiplier += 0.2;
             if (player.hasPerk(PerkLib.SuperSensual)) damagemultiplier += 0.5;
-            if (player.hasPerk(PerkLib.RacialParagon)) damagemultiplier *= 1.50;
-            if (player.hasPerk(PerkLib.Apex)) damagemultiplier *= 1.50;
-            if (player.hasPerk(PerkLib.AlphaAndOmega)) damagemultiplier *= 1.50;
+            if (player.hasPerk(PerkLib.RacialParagon)) damagemultiplier *= RacialParagonAbilityBoost();
             if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
             damage *= damagemultiplier;
             //Determine if critical tease!
@@ -13312,9 +13295,7 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += historyWhoreBonus();
             if (player.hasPerk(PerkLib.DazzlingDisplay)) damagemultiplier += 0.2;
             if (player.hasPerk(PerkLib.SuperSensual)) damagemultiplier += 0.5;
-            if (player.hasPerk(PerkLib.RacialParagon)) damagemultiplier *= 1.50;
-            if (player.hasPerk(PerkLib.Apex)) damagemultiplier *= 1.50;
-            if (player.hasPerk(PerkLib.AlphaAndOmega)) damagemultiplier *= 1.50;
+            if (player.hasPerk(PerkLib.RacialParagon)) damagemultiplier *= RacialParagonAbilityBoost();
             if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
             damage *= damagemultiplier;
             //Determine if critical tease!
@@ -13378,9 +13359,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(MutationsLib.HollowFangsPrimitive)) damage += player.maxHP() * 0.02;
         if (player.hasPerk(MutationsLib.HollowFangsEvolved)) damage += player.maxHP() * 0.08;
         if (player.hasPerk(PerkLib.VladimirRegalia)) damage *= 2;
-        if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-        if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-        if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+        if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
         damage = Math.round(damage);
         doDamage(damage, true, true);
         player.HP += damage;
@@ -13392,9 +13371,7 @@ public class Combat extends BaseContent {
         if (monster.gender != 0 && monster.lustVuln != 0) {
             var lustDmg:int = (10 + (player.lib * 0.1)) * monster.lustVuln;
             if (player.hasPerk(MutationsLib.HollowFangsEvolved)) lustDmg *= 1.5;
-            if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= 1.50;
-            if (player.hasPerk(PerkLib.Apex)) lustDmg *= 1.50;
-            if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmg *= 1.50;
+            if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= RacialParagonAbilityBoost();
             lustDmg = Math.round(lustDmg);
             outputText(" [monster he] can’t help but moan, aroused from the aphrodisiac in your saliva for ");
             monster.teased(lustDmg);
@@ -13437,9 +13414,7 @@ public class Combat extends BaseContent {
         damage += scalingBonusStrength() * 0.5;
         if (player.arms.type == Arms.DISPLACER) damage*= 2; //Displacers got extra limbs to rend
         if (player.hasPerk(PerkLib.VladimirRegalia)) damage *= 2;
-        if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-        if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-        if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+        if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
         //Determine if critical!
         var crit:Boolean = false;
         var critChance:int;
@@ -13559,9 +13534,7 @@ public class Combat extends BaseContent {
         damage += player.tou;
         damage += scalingBonusToughness() * 0.5;
         if (player.hasPerk(PerkLib.VladimirRegalia)) damage *= 2;
-        if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-        if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-        if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+        if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
         damage = Math.round(damage);
         doDamage(damage, true, true);
         if (monster.HP <= monster.minHP()) {
@@ -15107,6 +15080,14 @@ public class Combat extends BaseContent {
 		var fwsc:Number = 500;
 		if (player.perkv1(PerkLib.Dantain) > 2) fwsc -= 100;
 		return fwsc;
+	}
+	
+	public function RacialParagonAbilityBoost():Number {
+		var rpab:Number = 1.5;
+		if (player.hasPerk(PerkLib.Apex)) rpab += 0.75;
+		if (player.hasPerk(PerkLib.AlphaAndOmega)) rpab += 0.75;
+		if (player.hasPerk(PerkLib.AscensionOneRaceToRuleThemAllX)) rpab += (0.25 * player.perkv1(PerkLib.AscensionOneRaceToRuleThemAllX));
+		return rpab;
 	}
 
     public function ghostStrength():Number {

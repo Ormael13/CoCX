@@ -13321,6 +13321,14 @@ use namespace CoC;
 				maxWisCap2 += 2 * level;
 				maxLibCap2 += 2 * level;
 			}
+			if (hasPerk(PerkLib.AscensionOneRaceToRuleThemAllX)) {
+				maxStrCap2 += 2 * perkv1(PerkLib.AscensionOneRaceToRuleThemAllX) * level;
+				maxTouCap2 += 2 * perkv1(PerkLib.AscensionOneRaceToRuleThemAllX) * level;
+				maxSpeCap2 += 2 * perkv1(PerkLib.AscensionOneRaceToRuleThemAllX) * level;
+				maxIntCap2 += 2 * perkv1(PerkLib.AscensionOneRaceToRuleThemAllX) * level;
+				maxWisCap2 += 2 * perkv1(PerkLib.AscensionOneRaceToRuleThemAllX) * level;
+				maxLibCap2 += 2 * perkv1(PerkLib.AscensionOneRaceToRuleThemAllX) * level;
+			}
 			if (jiangshiScore() >= 20) {
 				maxStrCap2 += 150;
 				maxSpeCap2 -= 90;

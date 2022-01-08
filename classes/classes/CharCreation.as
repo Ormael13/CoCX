@@ -1969,21 +1969,22 @@ import coc.view.MainView;
 			outputText("\n\nAscension Perk Points: " + player.ascensionPerkPoints);
 			menu();
 			var btn:int = 0;
-
 			if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutationX)){
 				perkAOMXCheck(player.perkv1(PerkLib.AscensionAdditionalOrganMutationX) + 1, btn);
 			} else {
 				perkAOMXCheck(1, btn);
 			}
 			btn++
-
+			if (player.ascensionPerkPoints >= 25 && !player.hasPerk(PerkLib.AscensionOneRaceToRuleThemAllX)) addButton(btn, "AdvancedTraining", perkAdvancedTrainingStage1).hint("Perk allowing you to gain additional stat point on level up.\n\nCost: 25 points");
+			else if (player.ascensionPerkPoints < 25) addButtonDisabled(btn, "AdvancedTraining", "You do not have enough ascension perk points!");
+			else addButtonDisabled(btn, "AdvancedTraining", "You already bought this perk.");
+			btn++;
 			if (player.hasPerk(PerkLib.AscensionBuildingPrestigeX)){
 				perkBPCheck(player.perkv1(PerkLib.AscensionBuildingPrestigeX) + 1, btn);
 			} else {
 				perkBPCheck(1, btn);
 			}
 			btn++
-
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && player.hasPerk(PerkLib.AscensionHybridTheory)) {
 				if (player.ascensionPerkPoints >= 20 && !player.hasPerk(PerkLib.AscensionCruelChimerasThesis)) addButton(btn, "C Chimera's T", perkCruelChimerasThesis).hint("Perk allowing you to receive race bonuses for one point less. (still req. min 8 race points to work).\n\nCost: 20 points");
 				else if (player.ascensionPerkPoints < 20) addButtonDisabled(btn, "C Chimera's T", "You do not have enough ascension perk points!");
@@ -2007,6 +2008,10 @@ import coc.view.MainView;
 			if (player.ascensionPerkPoints >= 10 && !player.hasPerk(PerkLib.AscensionHybridTheory)) addButton(btn, "HybridTheory", perkHybridTheory).hint("Perk allowing you to receive race bonuses for one point less. (still req. min 4 race points to work).\n\nCost: 10 points");
 			else if (player.ascensionPerkPoints < 10 && !player.hasPerk(PerkLib.AscensionHybridTheory)) addButtonDisabled(btn, "HybridTheory", "You do not have enough ascension perk points!");
 			else addButtonDisabled(btn, "HybridTheory", "You already bought Hybrid Theory perk.");
+			btn++;
+			if (player.ascensionPerkPoints >= 10 && !player.hasPerk(PerkLib.AscensionOneRaceToRuleThemAllX)) addButton(btn, "OneRaceToRuleAll", perkOneRaceToRuleThemAllStage1).hint("Perk allowing you to receive higher bonus to stats and ability power from using Racial Paragon.\n\nCost: 10 points");
+			else if (player.ascensionPerkPoints < 10) addButtonDisabled(btn, "OneRaceToRuleAll", "You do not have enough ascension perk points!");
+			else addButtonDisabled(btn, "OneRaceToRuleAll", "You already bought this perk.");
 			btn++;
 			addButton(14, "Back", ascensionMenu);
 		}
@@ -2056,6 +2061,15 @@ import coc.view.MainView;
 			doNext(rarePerks1);
 		}
 
+		
+		
+		private function perkOneRaceToRuleThemAllStage1():void {
+			player.ascensionPerkPoints -= 10;
+			player.createPerk(PerkLib.AscensionOneRaceToRuleThemAllX, 1, 0, 0, 0);
+			clearOutput();
+			outputText("Your gained One Race To Rule Them All (Stage 1) perk.");
+			doNext(rarePerks1);
+		}
 		private function perkCruelChimerasThesis():void {
 			player.ascensionPerkPoints -= 20;
 			player.createPerk(PerkLib.AscensionCruelChimerasThesis,0,0,0,1);
@@ -2082,6 +2096,13 @@ import coc.view.MainView;
 			player.createPerk(PerkLib.AscensionHybridTheory,0,0,0,1);
 			clearOutput();
 			outputText("You gained Hybrid Theory perk.");
+			doNext(rarePerks1);
+		}
+		private function perkAdvancedTrainingStage1():void {
+			player.ascensionPerkPoints -= 25;
+			player.createPerk(PerkLib.AscensionAdvTrainingX, 1, 0, 0, 0);
+			clearOutput();
+			outputText("Your gained Advanced Training (Stage 1) perk.");
 			doNext(rarePerks1);
 		}
 

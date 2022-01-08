@@ -4608,6 +4608,7 @@ public function rebirthFromBadEnd():void {
 					mana += 12;
 					soulforce += 6;
 				}
+				if (player.hasPerk(PerkLib.AscensionAdvTrainingX)) statpoints += player.perkv1(PerkLib.AscensionAdvTrainingX);
 				if (player.hasPerk(PerkLib.UnlockBody)) hp += 60;
 				if (player.hasPerk(PerkLib.UnlockBody2ndStage)) hp += 60;
 				if (player.hasPerk(PerkLib.UnlockBody3rdStage)) hp += 60;
@@ -4633,10 +4634,10 @@ public function rebirthFromBadEnd():void {
 				if (player.hasPerk(PerkLib.UnlockArdor3rdStage)) lust += 3;
 				if (player.hasPerk(PerkLib.UnlockArdor4thStage)) lust += 3;
 				if (player.level < 6) {
-					statpoints += 5;
-					perkpoints += 1;
+					statpoints *= 2;
+					perkpoints *= 2;
 				}
-				mainView.levelButton.toolTipText = "Level up to increase your maximum: HP by " + hp + ", Lust by " + lust + ", Wrath by " + wrath + ", Fatigue by " + fatigue + ", Mana by " + mana + " and Soulforce by " + soulforce + "; gain " + statpoints + " attribute points and " + perkpoints + " perk points.";
+				mainView.levelButton.toolTipText = "Level up to increase your maximum: HP by " + hp + ", Lust by " + lust + ", Wrath by " + wrath + ", Fatigue by " + fatigue + ", Mana by " + mana + " and Soulforce by " + soulforce + "; gain " + statpoints + " attribute points and " + perkpoints + " perk point"+(perkpoints>1?"s":"")+".";
 				if (flags[kFLAGS.AUTO_LEVEL] > 0 && allowAutoLevelTransition) {
 					CoC.instance.playerInfo.levelUpGo();
 					return true; //True indicates that you should be routed to level-up.
