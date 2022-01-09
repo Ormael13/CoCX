@@ -2060,17 +2060,22 @@ import coc.view.MainView;
 			}
 		}
 
-		private function perkRPConfirm(tier:int, perk:PerkType, pCost:int):void{
-			player.ascensionPerkPoints -= pCost* tier;
-			if (tier == 1) player.createPerk(perk,1,0,0,1);
-			else player.setPerkValue(perk,1,player.perkv1(perk) + 1);
-			clearOutput();
-			outputText("You have acquired "+ perk.name() + "!");
-			doNext(rarePerks1);
+		private function perkAdvancedTrainingCheck(tier:int, btn:int):void {
+			var pCost:int = 25;
+			if (tier > 3) {
+				addButtonDisabled(btn, "Adv. Training Rank "+ tier.toString(),"You have the highest tier already.");
+			}
+			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < tier) {
+				addButtonDisabled(btn, "Adv. Training  Rank "+ tier.toString(),"You need to ascend once more.");
+			}
+			else if (player.ascensionPerkPoints < pCost * tier) {
+				addButtonDisabled(btn, "Adv. Training  Rank "+ tier.toString(),"You do not have enough points.");
+			}
+			else {
+				addButton(btn, "Adv. Training  Rank" + tier.toString(), perkRPConfirm, tier, PerkLib.AscensionAdvTrainingX, pCost, "Acquire Building Prestige Rank " + tier.toString());
+			}
 		}
 
-		
-		
 		private function perkOneRaceToRuleThemAllCheck(tier:int, btn:int):void {
 			var pCost:int = 10;
 			if (tier > 3) {
@@ -2087,6 +2092,14 @@ import coc.view.MainView;
 			}
 		}
 
+		private function perkRPConfirm(tier:int, perk:PerkType, pCost:int):void{
+			player.ascensionPerkPoints -= pCost* tier;
+			if (tier == 1) player.createPerk(perk,1,0,0,1);
+			else player.setPerkValue(perk,1,player.perkv1(perk) + 1);
+			clearOutput();
+			outputText("You have acquired "+ perk.name() + "!");
+			doNext(rarePerks1);
+		}
 
 		private function perkCruelChimerasThesis():void {
 			player.ascensionPerkPoints -= 20;
@@ -2115,22 +2128,6 @@ import coc.view.MainView;
 			clearOutput();
 			outputText("You gained Hybrid Theory perk.");
 			doNext(rarePerks1);
-		}
-
-		private function perkAdvancedTrainingCheck(tier:int, btn:int):void {
-			var pCost:int = 25;
-			if (tier > 3) {
-				addButtonDisabled(btn, "Adv. Training Rank "+ tier.toString(),"You have the highest tier already.");
-			}
-			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < tier) {
-				addButtonDisabled(btn, "Adv. Training  Rank "+ tier.toString(),"You need to ascend once more.");
-			}
-			else if (player.ascensionPerkPoints < pCost * tier) {
-				addButtonDisabled(btn, "Adv. Training  Rank "+ tier.toString(),"You do not have enough points.");
-			}
-			else {
-				addButton(btn, "Adv. Training  Rank" + tier.toString(), perkRPConfirm, tier, PerkLib.AscensionAdvTrainingX, pCost, "Acquire Building Prestige Rank " + tier.toString());
-			}
 		}
 
 		private function rarePerks2():void {
