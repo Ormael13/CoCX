@@ -96,6 +96,7 @@ public class MinotaurKing extends Monster
 			}
 			if (hpVictory && !player.hasStatusEffect(StatusEffects.MinoKing)) {
 				hpRestore();
+				if (flags[kFLAGS.WILL_O_THE_WISP] == 0) flags[kFLAGS.WILL_O_THE_WISP] = 1;
 				SceneLib.combat.combatRoundOver();
 				return;
 			}

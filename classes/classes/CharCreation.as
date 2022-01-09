@@ -2072,7 +2072,7 @@ import coc.view.MainView;
 				addButtonDisabled(btn, "Adv. Training  Rank "+ tier.toString(),"You do not have enough points.");
 			}
 			else {
-				addButton(btn, "Adv. Training  Rank" + tier.toString(), perkRPConfirm, tier, PerkLib.AscensionAdvTrainingX, pCost, "Acquire Building Prestige Rank " + tier.toString());
+				addButton(btn, "Adv. Training  Rank" + tier.toString(), perkRPConfirm, tier, PerkLib.AscensionAdvTrainingX, pCost, "Acquire Advanced Training Rank " + tier.toString());
 			}
 		}
 
@@ -2088,7 +2088,7 @@ import coc.view.MainView;
 				addButtonDisabled(btn, "ORTRTA Rank "+ tier.toString(),"You do not have enough points.");
 			}
 			else {
-				addButton(btn, "ORTRTA Rank" + tier.toString(), perkRPConfirm, tier, PerkLib.AscensionOneRaceToRuleThemAllX, pCost, "Acquire Building Prestige Rank " + tier.toString());
+				addButton(btn, "ORTRTA Rank" + tier.toString(), perkRPConfirm, tier, PerkLib.AscensionOneRaceToRuleThemAllX, pCost, "Acquire One Race To Rule Them All Rank " + tier.toString());
 			}
 		}
 

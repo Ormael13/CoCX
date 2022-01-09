@@ -11756,21 +11756,22 @@ use namespace CoC;
 			var min:Number = 0;
 			var minCap:Number = maxLust();
 			//Bimbo body boosts minimum lust by 40
-			if(hasStatusEffect(StatusEffects.BimboChampagne) || hasPerk(PerkLib.BimboBody) || hasPerk(PerkLib.BroBody) || hasPerk(PerkLib.FutaForm)) min += 40;
+			if (hasPerk(PerkLib.BimboBody) || hasPerk(PerkLib.BroBody) || hasPerk(PerkLib.FutaForm)) min += Math.round(minCap * 0.4);
+			if (hasStatusEffect(StatusEffects.BimboChampagne)) min += 20;
 			//Omnibus' Gift
-			if (hasPerk(PerkLib.OmnibusGift)) min += 35;
+			if (hasPerk(PerkLib.OmnibusGift)) min += Math.round(minCap * 0.35);
 			//Easter bunny eggballs
 			if (hasPerk(PerkLib.EasterBunnyBalls)) min += 10*ballSize;
 			//Fera Blessing
 			if (hasStatusEffect(StatusEffects.BlessingOfDivineFera)) min += 15;
 			//Nymph perk raises to 30
-			if(hasPerk(PerkLib.Nymphomania)) min += 30;
+			if (hasPerk(PerkLib.Nymphomania)) min += Math.round(minCap * 0.3);
 			//Oh noes anemone!
-			if(hasStatusEffect(StatusEffects.AnemoneArousal)) min += 30;
+			if (hasStatusEffect(StatusEffects.AnemoneArousal)) min += 30;
 			//Hot blooded perk raises min lust!
-			if(hasPerk(PerkLib.HotBlooded)) min += perkv1(PerkLib.HotBlooded);
-			if(hasPerk(PerkLib.LuststickAdapted)) min += 10;
-			if(hasStatusEffect(StatusEffects.Infested)) min += 50;
+			if (hasPerk(PerkLib.HotBlooded)) min += Math.round(minCap * 0.2);
+			if (hasPerk(PerkLib.LuststickAdapted)) min += Math.round(minCap * 0.1);
+			if (hasStatusEffect(StatusEffects.Infested)) min += 50;
 			//Add points for Crimstone
 			min += perkv1(PerkLib.PiercedCrimstone);
 			//Subtract points for Icestone!
@@ -11778,15 +11779,13 @@ use namespace CoC;
 			min += perkv1(PerkLib.PentUp);
 			//Cold blooded perk reduces min lust, to a minimum of 20! Takes effect after piercings.
 			if (hasPerk(PerkLib.ColdBlooded)) {
-				if (min >= 20) min -= 20;
+				if (min >= Math.round(minCap * 0.2)) min -= Math.round(minCap * 0.2);
 				else min = 0;
-				minCap -= 20;
 			}
 			//Purity Blessing perk reduce min lust, to a minimum of 10! Takes effect after piercings.
 			if (hasPerk(PerkLib.PurityBlessing)) {
-				if (min >= 10) min -= 10;
+				if (min >= Math.round(minCap * 0.1)) min -= Math.round(minCap * 0.1);
 				else min = 0;
-				minCap -= 10;
 			}
 			//Harpy Lipstick and Drunken Power statuses rise minimum lust by 50.
 			if(hasStatusEffect(StatusEffects.Luststick)) min += 50;
@@ -11820,7 +11819,7 @@ use namespace CoC;
 				if(eggs() >= 40) min += 10;
 			}
 			//Werebeast
-			if(hasPerk(PerkLib.Lycanthropy)) min += perkv1(PerkLib.Lycanthropy);
+			if (hasPerk(PerkLib.Lycanthropy)) min += Math.round(minCap * perkv1(PerkLib.Lycanthropy) * 0.01);
 			//Jewelry effects
 			if (jewelryEffectId == JewelryLib.MODIFIER_MINIMUM_LUST)
 			{
@@ -11834,7 +11833,6 @@ use namespace CoC;
 			if (armorName == "tentacled bark armor") min += 20;
 			//Constrain values
 			if (min < 0) min = 0;
-			if (min > (maxLust() - 10)) min = (maxLust() - 10);
 			if (min > minCap) min = minCap;
 			return min;
 		}

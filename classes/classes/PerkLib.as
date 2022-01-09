@@ -909,8 +909,8 @@ public class PerkLib
 				"Increasing healing spells effect by 50% when below 25% max HP.",
 				"You've chosen the 'Close to death' perk, increasing healing spells effect when below 25% max HP.");
 		public static const ColdBlooded:PerkType = mk("Cold Blooded", "Cold Blooded",
-				"Reduces minimum lust by up to 20, down to min of 20. Caps min lust at 80.",
-				"You've chosen the 'Cold Blooded' perk.  Thanks to increased control over your desires, your minimum lust is reduced! (Won't reduce minimum lust below 20 though.)");
+				"Reduces minimum lust by up to 20%.",
+				"You've chosen the 'Cold Blooded' perk.  Thanks to increased control over your desires, your minimum lust is reduced!");
 		public static const ColdAim:PerkType = mk("Cold Aim", "Cold Aim",
 				"Careful but Reckless Aim and Shooting no longer reduce your Toughness.",
 				"You've chosen the 'Cold Aim' perk, causing Careful but Reckless Aim and Shooting to no longer reduce your Toughness.").withBuffs({'tou.mult':0.15});
@@ -1819,8 +1819,8 @@ public class PerkLib
 				"Gain +20% strength modifier with melee weapons when not using a shield.",
 				"You've chosen the 'Hold With Both Hands' perk.  As long as you're wielding a melee weapon and you're not using a shield, you gain 20% strength modifier to damage.");
 		public static const HotBlooded:PerkType = mk("Hot Blooded", "Hot Blooded",
-				"Raises minimum lust by 20.",
-				"You've chosen the 'Hot Blooded' perk.  As a result of your enhanced libido, your lust no longer drops below 20!");
+				"Raises minimum lust by 20%.",
+				"You've chosen the 'Hot Blooded' perk.  As a result of your enhanced libido, your lust no longer drops below 20%!");
 		public static const ImmovableObject:PerkType = mk("Immovable Object", "Immovable Object",
 				"[if(player.tou>=75)" +
 						"Grants 10% physical damage reduction.</b>" +
@@ -2463,8 +2463,8 @@ public class PerkLib
 				"Constantly running around tending to the sick has made you better at taking care of yourself, increasing health regen.",
 				"You've chosen the 'Nurse' perk, increasing HP gains by 20%.");
 		public static const Nymphomania:PerkType = mk("Nymphomania", "Nymphomania",
-				"Raises minimum lust by up to 30.",
-				"You've chosen the 'Nymphomania' perk.  Due to the incredible amount of corruption you've been exposed to, you've begun to live in a state of minor constant arousal.  Your minimum lust will be increased by 30.");
+				"Raises minimum lust by up to 30%.",
+				"You've chosen the 'Nymphomania' perk.  Due to the incredible amount of corruption you've been exposed to, you've begun to live in a state of minor constant arousal.  Your minimum lust will be increased by 30%.");
 		public static const OctaAttackSmall:PerkType = mk("Octa Attack (Small)", "Octa Attack (Small)",
 				"Allows you to perform eight melee attacks with small weapons per round.",
 				"You've chosen the 'Octa Attack (Small)' perk. This allows you to make eight melee attacks with small weapons.");
@@ -3745,7 +3745,7 @@ public class PerkLib
 		public static const PsionicEmpowerment:PerkType = mk("Psionic Empowerment", "Psionic Empowerment",
 			"Your powers expands in accordance with each new convert that joins the sisterhood hivemind.");
 		public static const PurityBlessing:PerkType = mk("Purity Blessing", "Purity Blessing",
-				"Reduces the rate at which your corruption, libido, and lust increase. Reduces minimum libido and lust slightly.");
+				"Reduces the rate at which your corruption, libido, and lust increase. Reduces minimum libido slightly.");
 		public static const RapierTraining:PerkType = mk("Rapier Training", "Rapier Training",
 				"After finishing of your training, increase attack power of any rapier you're using.");
 		public static const Rigidity:PerkType = mk("Rigidity", "Rigidity",
@@ -5782,9 +5782,7 @@ public class PerkLib
                     .requireLib(40);
             //Slot 5 - minimum libido
             ColdBlooded.requireMinLust(20);
-            ColdBlooded.defaultValue1 = 20;
             HotBlooded.requireLib(50);
-            HotBlooded.defaultValue1 = 20;
             //Tier 1 Libido Perks
             //Slot 5 - minimum libido
             //Slot 5 - Fertility- decreases cum production and fertility.
