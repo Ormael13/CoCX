@@ -1709,9 +1709,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if(player.hairLength >= 12) hairDamage += 1 + rand(2);
 			if(player.hairLength >= 24) hairDamage += 1 + rand(2);
 			if(player.hairLength >= 36) hairDamage += 1;
-			if (player.hasPerk(PerkLib.RacialParagon)) hairDamage *= 1.50;
-			if (player.hasPerk(PerkLib.Apex)) hairDamage *= 1.50;
-			if (player.hasPerk(PerkLib.AlphaAndOmega)) hairDamage *= 1.50;
+			if (player.hasPerk(PerkLib.RacialParagon)) hairDamage *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) hairDamage *= 1.50;
 			while(hairDamage > 0) {
 				hairDamage--;
@@ -1786,9 +1784,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
 			if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
 			if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
-			if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-			if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-			if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 			damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 			damage *= monster.damagePercent() / 100;
@@ -1883,9 +1879,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var damage:Number = 0;
 		damage += player.lactationQ();
 		damage *= (player.lust100 * 0.01);
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		if (player.upperGarment == player.game.undergarments.COW_BRA) damage *= 1.50;
 		damage = Math.round(damage);
@@ -1918,9 +1912,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var damage:Number = 0;
 		damage += player.cumQ();
 		damage *= (player.lust100 * 0.01);
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage = Math.round(damage);
 		doDamage(damage);
@@ -1978,9 +1970,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(MutationsLib.PigBoarFat)) slamDmg += player.thickness;
 		slamDmg += scalingBonusToughness();
 		if (player.hasPerk(MutationsLib.PigBoarFatEvolved)) slamDmg *= 2;
-		if (player.hasPerk(PerkLib.RacialParagon)) slamDmg *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) slamDmg *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) slamDmg *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) slamDmg *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) slamDmg *= 1.50;
 		slamDmg *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 		slamDmg = Math.round(slamDmg);
@@ -2044,9 +2034,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.findPerk(PerkLib.SluttySimplicity) >= 0 && player.armorName == "nothing") lustDmgF *= (1 + ((10 + rand(11)) / 100));
 		if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0) lustDmgF *= (1 + (player.lust100 * 0.01));
 		if (player.findPerk(PerkLib.HistoryWhore) >= 0 || player.findPerk(PerkLib.PastLifeWhore) >= 0) lustDmgF *= (1 + combat.historyWhoreBonus());
-		if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) lustDmgF *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmgF *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmgF *= 1.50;
 		lustBoostToLustDmg += lustDmgF * 0.01;
 		lustDmgF *= 0.2;
@@ -2097,9 +2085,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) damage += player.str;
 			if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
 			if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
-			if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-			if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-			if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 			if (player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
 				if (player.mouseScore() >= 12 && player.arms.type == Arms.HINEZUMI && player.lowerBody == LowerBody.HINEZUMI && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
@@ -2914,9 +2900,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		clearOutput();
 		var pollen:Number = monster.lustVuln * (2 + rand(4));
 		if (player.headjewelryName == "pair of Golden Naga Hairpins") pollen *= 1.1;
-		if (player.hasPerk(PerkLib.RacialParagon)) pollen *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) pollen *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) pollen *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) pollen *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) pollen *= 1.50;
 		monster.lust += pollen;
 		outputText("You send a cloud of your pollen outward into the air, smiling lustfully at your opponent. Sneezing slightly as they inhale the potent pollen, they begin showing clear signs of arousal. Just how long can they resist coming to pollinate you now? Not for long, you hope. (" + pollen + ")\n\n");
@@ -2936,6 +2920,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.RacialParagon)) EntangleNerf += 0.1;
 		if (player.hasPerk(PerkLib.Apex)) EntangleNerf += 0.1;
 		if (player.hasPerk(PerkLib.AlphaAndOmega)) EntangleNerf += 0.1;
+		if (player.hasPerk(PerkLib.AscensionOneRaceToRuleThemAllX)) EntangleNerf += (0.1 * player.perkv1(PerkLib.AscensionOneRaceToRuleThemAllX));
 		if (player.hasPerk(PerkLib.NaturalArsenal)) EntangleNerf += 0.1;
 		player.createStatusEffect(StatusEffects.AlrauneEntangle,EntangleNerf,EntangleNerf,0,0);
 		monster.statStore.addBuffObject({"str.mult":-EntangleNerf,"spe.mult":-EntangleNerf}, "EntangleNerf",{text:"EntangleNerf"});
@@ -2951,9 +2936,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		damage += player.tou;
 		damage += scalingBonusToughness() * 0.5;
 		if (player.hasPerk(PerkLib.VladimirRegalia)) damage *= 2;
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 		damage = Math.round(damage);
@@ -3024,9 +3007,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.findPerk(PerkLib.SluttySimplicity) >= 0 && player.armorName == "nothing") lustDmgF *= (1 + ((10 + rand(11)) / 100));
 			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0) lustDmgF *= (1 + (player.lust100 * 0.01));
 			if (player.findPerk(PerkLib.HistoryWhore) >= 0 || player.findPerk(PerkLib.PastLifeWhore) >= 0) lustDmgF *= (1 + combat.historyWhoreBonus());
-			if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= 1.50;
-			if (player.hasPerk(PerkLib.Apex)) lustDmgF *= 1.50;
-			if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmgF *= 1.50;
+			if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmgF *= 1.50;
 			lustBoostToLustDmg += lustDmgF * 0.01;
 			lustDmgF *= 0.2;
@@ -3150,9 +3131,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
 		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage *= 2;
 		//Determine if critical hit!
@@ -3230,9 +3209,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
 		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage *= 1.6;
 		//Determine if critical hit!
@@ -3307,9 +3284,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
 		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage *= 1.5;
 		//Determine if critical hit!
@@ -3386,9 +3361,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
 		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage *= 1.5;
 		//Determine if critical hit!
@@ -3456,9 +3429,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
 		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage *= 1.5;
 		//Determine if critical hit!
@@ -3529,9 +3500,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage = Math.round(damage * combat.windDamageBoostedByDao());
 		outputText("You start to channel power into your body unleashing it it into the form of a mighty swirling tornado. [Themonster] is caught in it and carried into the windstorm taking hit from various other flying objects. ");
@@ -3586,13 +3555,14 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//LAND A HIT!
 		else {
 			var Multiplier:Number = 1;
-			if(player.hasPerk(MutationsLib.ArachnidBookLungPrimitive)) Multiplier += 0.5;
-			if(player.hasPerk(MutationsLib.ArachnidBookLungEvolved)) Multiplier += 0.5;
-			if(player.hasPerk(PerkLib.RacialParagon)) Multiplier += 0.5;
-			if(player.hasPerk(PerkLib.Apex)) Multiplier += 0.5;
-			if (player.hasPerk(PerkLib.AlphaAndOmega)) Multiplier += 0.5;
+			if (player.hasPerk(MutationsLib.ArachnidBookLungPrimitive)) Multiplier += 0.5;
+			if (player.hasPerk(MutationsLib.ArachnidBookLungEvolved)) Multiplier += 0.5;
+			if (player.hasPerk(PerkLib.RacialParagon)) Multiplier += 0.5;
+			if (player.hasPerk(PerkLib.Apex)) Multiplier += 0.75;
+			if (player.hasPerk(PerkLib.AlphaAndOmega)) Multiplier += 0.75;
+			if (player.hasPerk(PerkLib.AscensionOneRaceToRuleThemAllX)) Multiplier += (0.25 * player.perkv1(PerkLib.AscensionOneRaceToRuleThemAllX));
 			if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) Multiplier *= 2;
-			if(!monster.plural) outputText("The adhesive strands cover [themonster] with restrictive webbing, greatly slowing " + monster.mf("him","her") + ". ");
+			if (!monster.plural) outputText("The adhesive strands cover [themonster] with restrictive webbing, greatly slowing " + monster.mf("him","her") + ". ");
 			else outputText("The adhesive strands cover [themonster] with restrictive webbing, greatly slowing " + monster.mf("him","her") + ". ");
 			monster.statStore.addBuffObject({spe:-45*Multiplier}, "Web",{text:"Web"});
 			if(player.hasPerk(MutationsLib.ArachnidBookLungEvolved)){
@@ -3935,9 +3905,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.armor == armors.SPKIMO) damage *= 1.2;
 		if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage *= 1.6;
 		//Determine if critical hit!
@@ -4032,9 +4000,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.armor == armors.SPKIMO) damage *= 1.2;
 			if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
 			if (player.necklace == necklaces.OBNECK) damage *= 1.2;
-			if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-			if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-			if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 			//Determine if critical hit!
 			var crit:Boolean = false;
@@ -4148,9 +4114,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.necklace == necklaces.OBNECK) HBD *= 1.2;
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) HBD *= combat.oniRampagePowerMulti();
 		if (player.hasStatusEffect(StatusEffects.Overlimit)) HBD *= 2;
-		if (player.hasPerk(PerkLib.RacialParagon)) HBD *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) HBD *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) HBD *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) HBD *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) HBD *= 1.50;
 		HBD *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 		HBD = Math.round(HBD);
@@ -4225,9 +4189,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					var poisonScaling:Number = 1;
 					poisonScaling += player.lib/100;
 					poisonScaling += player.tou/100;
-					if (player.hasPerk(PerkLib.RacialParagon)) lustDmg2 *= 1.50;
-					if (player.hasPerk(PerkLib.Apex)) lustDmg2 *= 1.50;
-					if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmg2 *= 1.50;
+					if (player.hasPerk(PerkLib.RacialParagon)) lustDmg2 *= combat.RacialParagonAbilityBoost();
 					if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg2 *= 1.50;
 					if (player.level < 10) lustDmg2 += 20 + (player.level * 3);
 					else if (player.level < 20) lustDmg2 += 50 + (player.level - 10) * 2;
@@ -4246,9 +4208,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					if (monster.plural) outputText("  The one you bit flushes hotly, though the entire group seems to become more aroused in sympathy to their now-lusty compatriot.");
 					else outputText("  " + monster.mf("He", "She") + " flushes hotly and " + monster.mf("touches his suddenly-stiff member, moaning lewdly for a moment.", "touches a suddenly stiff nipple, moaning lewdly.  You can smell her arousal in the air."));
 					var lustDmg:Number = 35 + rand(player.lib / 10);
-					if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= 1.50;
-					if (player.hasPerk(PerkLib.Apex)) lustDmg *= 1.50;
-					if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmg *= 1.50;
+					if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= combat.RacialParagonAbilityBoost();
 					if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 1.50;
 					lustDmg *= d3Bdcc;
 					monster.teased(lustDmg, true);
@@ -4381,9 +4341,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
 		if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		//Determine if critical hit!
 		var crit:Boolean = false;
@@ -4536,9 +4494,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (damage < 25) outputText("You pull yourself free, dealing  damage.");
 			if (damage >= 25 && damage < 100) outputText("You struggle to pull your horn"+((player.horns.type == Horns.BICORN || player.horns.type == Horns.COW_MINOTAUR) ? "s":"")+" free, dealing  damage.");
 			if (damage >= 100) outputText("With great difficulty you rip your horn"+((player.horns.type == Horns.BICORN || player.horns.type == Horns.COW_MINOTAUR) ? "s":"")+" free, dealing  damage.");
-			if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-			if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-			if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 			if (player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
 				damage = Math.round(damage * combat.fireDamageBoostedByDao());
@@ -4662,9 +4618,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 				//Round it off
 				damage = int(damage);
-				if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-				if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-				if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+				if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 				if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 				if (player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
 					damage = Math.round(damage * combat.fireDamageBoostedByDao());
@@ -4755,9 +4709,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			else if (player.level < 30) damage += 50 + (player.level - 20) * 1;
 			else damage += 60;
 			damage += 20;
-			if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-			if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-			if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 			damage *= dBd3c;
 			monster.teased(monster.lustVuln * damage);
@@ -4807,9 +4759,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (damage < 10) damage = 10;
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
 		if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		var lustdamage:Number = 35 + rand(player.lib / 10);
 		if (player.level < 10) damage += 20 + (player.level * 3);
@@ -4827,9 +4777,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		lustdamage += scalingBonusLibido() * 0.1;
 		if (player.hasPerk(PerkLib.EromancyExpert)) lustdamage *= 1.5;
 		if (player.findPerk(PerkLib.JobSeducer) >= 0) lustdamage += player.teaseLevel * 3;
-		if (player.hasPerk(PerkLib.RacialParagon)) lustdamage *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) lustdamage *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) lustdamage *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) lustdamage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) lustdamage *= 1.50;
 		//Determine if critical!
 		var crit:Boolean = false;
@@ -5002,9 +4950,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if(monster.plural) outputText("  Success!  A spit-soaked kiss lands right on one of their mouths.  The victim quickly melts into your embrace, allowing you to give them a nice, heavy dose of sloppy oral aphrodisiacs.");
 				else outputText("  Success!  A spit-soaked kiss lands right on [themonster]'s mouth.  " + monster.mf("He","She") + " quickly melts into your embrace, allowing you to give them a nice, heavy dose of sloppy oral aphrodisiacs.");
 				damage = 15;
-				if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-				if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-				if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+				if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 				if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 				break;
 				//Success 2:
@@ -5012,9 +4958,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if(monster.plural) outputText("  Gold-gilt lips press into one of their mouths, the victim's lips melding with yours.  You take your time with your suddenly cooperative captive and make sure to cover every bit of their mouth with your lipstick before you let them go.");
 				else outputText("  Gold-gilt lips press into [themonster], [monster his] mouth melding with yours.  You take your time with your suddenly cooperative captive and make sure to cover every inch of [monster his] with your lipstick before you let [monster him] go.");
 				damage = 20;
-				if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-				if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-				if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+				if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 				if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 				break;
 				//CRITICAL SUCCESS (3)
@@ -5022,18 +4966,14 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if(monster.plural) outputText("  You slip past [themonster]'s guard and press your lips against one of them.  " + monster.mf("He","She") + " melts against you, " + monster.mf("his","her") + " tongue sliding into your mouth as " + monster.mf("he","she") + " quickly succumbs to the fiery, cock-swelling kiss.  It goes on for quite some time.  Once you're sure you've given a full dose to " + monster.mf("his","her") + " mouth, you break back and observe your handwork.  One of [themonster] is still standing there, licking " + monster.mf("his","her") + " his lips while " + monster.mf("his","her") + " dick is standing out, iron hard.  You feel a little daring and give the swollen meat another moist peck, glossing the tip in gold.  There's no way " + monster.mf("he","she") + " will go soft now.  Though you didn't drug the rest, they're probably a little 'heated up' from the show.");
 				else outputText("  You slip past [themonster]'s guard and press your lips against [monster his].  " + monster.mf("He","She") + " melts against you, [monster his] tongue sliding into your mouth as [monster he] quickly succumbs to the fiery, cock-swelling kiss.  It goes on for quite some time.  Once you're sure you've given a full dose to [monster his] mouth, you break back and observe your handwork.  [Themonster] is still standing there, licking [monster his] lips while [monster his] dick is standing out, iron hard.  You feel a little daring and give the swollen meat another moist peck, glossing the tip in gold.  There's no way [monster he] will go soft now.");
 				damage = 30;
-				if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-				if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-				if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+				if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 				if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 				break;
 				//Success 4:
 			default:
 				outputText("  With great effort, you slip through an opening and compress their lips against your own, lust seeping through the oral embrace along with a heavy dose of drugs.");
 				damage = 12;
-				if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-				if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-				if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+				if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 				if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 				break;
 		}
@@ -5109,9 +5049,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
 			if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
 			if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
-			if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-			if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-			if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 			damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 			damage = Math.round(damage);
@@ -5272,9 +5210,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
 		if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage *= (1 + (0.01 * combat.masteryFeralCombatLevel()));
 		//Reduce damage

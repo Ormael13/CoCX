@@ -297,7 +297,7 @@ package classes.Scenes.NPCs
 		override public function defeated(hpVictory:Boolean):void
 		{
 			if (flags[kFLAGS.DIANA_FOLLOWER] >= 6) dianaScene.wonOverDianaSpar();
-			else if (flags[kFLAGS.DIANA_AFFECTION] >= 100 && flags[kFLAGS.DIANA_LVL_UP] >= 8) {
+			else if (flags[kFLAGS.DIANA_AFFECTION] >= 100 && flags[kFLAGS.DIANA_LVL_UP] >= 8 && !player.blockingBodyTransformations()) {
 				if (flags[kFLAGS.DIANA_FOLLOWER] < 3) dianaScene.beMyStallion();
 				else dianaScene.beMyStallionRepeat();
 			}

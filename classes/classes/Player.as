@@ -10279,7 +10279,7 @@ use namespace CoC;
 			if (ears.type == Ears.HUMAN)
 				femaleMindbreakerCounter++;
 			if (tailType == Tail.NONE)
-				femaleMindbreakerCounter ++;
+				femaleMindbreakerCounter++;
 			if (rearBody.type == RearBody.MINDBREAKER)
 				femaleMindbreakerCounter+= 4;
 			if (arms.type == Arms.MINDBREAKER)
@@ -10289,7 +10289,7 @@ use namespace CoC;
 			if (tongue.type == Tongue.MINDBREAKER)
 				femaleMindbreakerCounter++;
 			if (wings.type == Wings.NONE)
-				femaleMindbreakerCounter += 3;
+				femaleMindbreakerCounter+= 3;
 			if (vaginaType() == VaginaClass.MINDBREAKER)
 				femaleMindbreakerCounter++;
 			if ((hairType == Hair.MINDBREAKER) && hairColor == "purple")
@@ -10297,17 +10297,17 @@ use namespace CoC;
 			if (hasPlainSkinOnly() && (InCollection(skin.base.color, ["pale", "ghostly white", "light purple"])))
 				femaleMindbreakerCounter++;
 			if (skinAdj == "slippery")
-				femaleMindbreakerCounter ++;
+				femaleMindbreakerCounter++;
 			if (hasPerk(PerkLib.Insanity))
 				femaleMindbreakerCounter++;
 			if (hasPerk(PerkLib.MindbreakerBrain1toX))
 				femaleMindbreakerCounter+= perkv1(PerkLib.MindbreakerBrain1toX);
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
-				femaleMindbreakerCounter += 50;
+				femaleMindbreakerCounter+= 50;
 			if (hasPerk(PerkLib.AscensionHybridTheory) && femaleMindbreakerCounter >= 4)
 				femaleMindbreakerCounter++;
 			if (hasPerk(PerkLib.AscensionCruelChimerasThesis) && femaleMindbreakerCounter >= 8)
-				femaleMindbreakerCounter += 1;
+				femaleMindbreakerCounter++;
 			if (isGargoyle()) femaleMindbreakerCounter = 0;
 			if (hasCock()) femaleMindbreakerCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) femaleMindbreakerCounter = 0;
@@ -11201,7 +11201,7 @@ use namespace CoC;
 						weightChange++;
 						hunger -= overeatingLimit;
 					}
-					modThickness(100, weightChange);
+					modThickness(maxThicknessCap(), weightChange);
 					hunger = maxHunger();
 				}
 				if (hunger > oldHunger && flags[kFLAGS.USE_OLD_INTERFACE] == 0) CoC.instance.mainView.statsView.showStatUp('hunger');
@@ -11756,21 +11756,22 @@ use namespace CoC;
 			var min:Number = 0;
 			var minCap:Number = maxLust();
 			//Bimbo body boosts minimum lust by 40
-			if(hasStatusEffect(StatusEffects.BimboChampagne) || hasPerk(PerkLib.BimboBody) || hasPerk(PerkLib.BroBody) || hasPerk(PerkLib.FutaForm)) min += 40;
+			if (hasPerk(PerkLib.BimboBody) || hasPerk(PerkLib.BroBody) || hasPerk(PerkLib.FutaForm)) min += Math.round(minCap * 0.4);
+			if (hasStatusEffect(StatusEffects.BimboChampagne)) min += Math.round(minCap * 0.2);
 			//Omnibus' Gift
-			if (hasPerk(PerkLib.OmnibusGift)) min += 35;
+			if (hasPerk(PerkLib.OmnibusGift)) min += Math.round(minCap * 0.35);
 			//Easter bunny eggballs
 			if (hasPerk(PerkLib.EasterBunnyBalls)) min += 10*ballSize;
 			//Fera Blessing
-			if (hasStatusEffect(StatusEffects.BlessingOfDivineFera)) min += 15;
+			if (hasStatusEffect(StatusEffects.BlessingOfDivineFera)) min += Math.round(minCap * 0.15);
 			//Nymph perk raises to 30
-			if(hasPerk(PerkLib.Nymphomania)) min += 30;
+			if (hasPerk(PerkLib.Nymphomania)) min += Math.round(minCap * 0.3);
 			//Oh noes anemone!
-			if(hasStatusEffect(StatusEffects.AnemoneArousal)) min += 30;
+			if (hasStatusEffect(StatusEffects.AnemoneArousal)) min += Math.round(minCap * 0.3);
 			//Hot blooded perk raises min lust!
-			if(hasPerk(PerkLib.HotBlooded)) min += perkv1(PerkLib.HotBlooded);
-			if(hasPerk(PerkLib.LuststickAdapted)) min += 10;
-			if(hasStatusEffect(StatusEffects.Infested)) min += 50;
+			if (hasPerk(PerkLib.HotBlooded)) min += Math.round(minCap * 0.2);
+			if (hasPerk(PerkLib.LuststickAdapted)) min += Math.round(minCap * 0.1);
+			if (hasStatusEffect(StatusEffects.Infested)) min += min += Math.round(minCap * 0.5);
 			//Add points for Crimstone
 			min += perkv1(PerkLib.PiercedCrimstone);
 			//Subtract points for Icestone!
@@ -11778,49 +11779,47 @@ use namespace CoC;
 			min += perkv1(PerkLib.PentUp);
 			//Cold blooded perk reduces min lust, to a minimum of 20! Takes effect after piercings.
 			if (hasPerk(PerkLib.ColdBlooded)) {
-				if (min >= 20) min -= 20;
+				if (min >= Math.round(minCap * 0.2)) min -= Math.round(minCap * 0.2);
 				else min = 0;
-				minCap -= 20;
 			}
 			//Purity Blessing perk reduce min lust, to a minimum of 10! Takes effect after piercings.
 			if (hasPerk(PerkLib.PurityBlessing)) {
-				if (min >= 10) min -= 10;
+				if (min >= Math.round(minCap * 0.1)) min -= Math.round(minCap * 0.1);
 				else min = 0;
-				minCap -= 10;
 			}
 			//Harpy Lipstick and Drunken Power statuses rise minimum lust by 50.
-			if(hasStatusEffect(StatusEffects.Luststick)) min += 50;
-			if(hasStatusEffect(StatusEffects.DrunkenPower)) min += 50;
+			if(hasStatusEffect(StatusEffects.Luststick)) min += min += Math.round(minCap * 0.5);
+			if(hasStatusEffect(StatusEffects.DrunkenPower)) min += min += Math.round(minCap * 0.5);
 			//SHOULDRA BOOSTS
 			//+20
 			if(flags[kFLAGS.SHOULDRA_SLEEP_TIMER] <= -168 && flags[kFLAGS.URTA_QUEST_STATUS] != 0.75) {
-				min += 20;
+				min += Math.round(minCap * 0.2);
 				if(flags[kFLAGS.SHOULDRA_SLEEP_TIMER] <= -216)
-					min += 30;
+					min += Math.round(minCap * 0.3);
 			}
 			//cumOmeter
 			if (tailType == Tail.MANTICORE_PUSSYTAIL && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 25) {
-				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 25 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 20) min += 10;
-				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 20 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 15) min += 20;
-				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 15 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 10) min += 30;
-				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 10 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 5) min += 40;
-				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 5) min += 50;
+				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 25 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 20) min += Math.round(minCap * 0.1);
+				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 20 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 15) min += Math.round(minCap * 0.2);
+				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 15 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 10) min += Math.round(minCap * 0.3);
+				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 10 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 5) min += Math.round(minCap * 0.4);
+				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 5) min += Math.round(minCap * 0.5);
 			}
 			//MilkOMeter
 			if (rearBody.type == RearBody.DISPLACER_TENTACLES && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 25) {
-				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 25 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 20) min += 10;
-				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 20 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 15) min += 20;
-				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 15 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 10) min += 30;
-				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 10 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 5) min += 40;
-				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 5) min += 50;
+				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 25 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 20) min += Math.round(minCap * 0.1);
+				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 20 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 15) min += Math.round(minCap * 0.2);
+				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 15 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 10) min += Math.round(minCap * 0.3);
+				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 10 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 5) min += Math.round(minCap * 0.4);
+				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 5) min += Math.round(minCap * 0.5);
 			}
 			//SPOIDAH BOOSTS
 			if(eggs() >= 20) {
-				min += 10;
-				if(eggs() >= 40) min += 10;
+				min += Math.round(minCap * 0.1);
+				if(eggs() >= 40) min += Math.round(minCap * 0.1);
 			}
 			//Werebeast
-			if(hasPerk(PerkLib.Lycanthropy)) min += perkv1(PerkLib.Lycanthropy);
+			if (hasPerk(PerkLib.Lycanthropy)) min += Math.round(minCap * perkv1(PerkLib.Lycanthropy) * 0.01);
 			//Jewelry effects
 			if (jewelryEffectId == JewelryLib.MODIFIER_MINIMUM_LUST)
 			{
@@ -11830,11 +11829,10 @@ use namespace CoC;
 					minCap += jewelryEffectMagnitude;
 				}
 			}
-			if (armorName == "lusty maiden's armor") min += 30;
-			if (armorName == "tentacled bark armor") min += 20;
+			if (armorName == "lusty maiden's armor") min += Math.round(minCap * 0.3);
+			if (armorName == "tentacled bark armor") min += Math.round(minCap * 0.2);
 			//Constrain values
 			if (min < 0) min = 0;
-			if (min > (maxLust() - 10)) min = (maxLust() - 10);
 			if (min > minCap) min = minCap;
 			return min;
 		}
@@ -13320,6 +13318,14 @@ use namespace CoC;
 				maxIntCap2 += 2 * level;
 				maxWisCap2 += 2 * level;
 				maxLibCap2 += 2 * level;
+			}
+			if (hasPerk(PerkLib.AscensionOneRaceToRuleThemAllX)) {
+				maxStrCap2 += 2 * perkv1(PerkLib.AscensionOneRaceToRuleThemAllX) * level;
+				maxTouCap2 += 2 * perkv1(PerkLib.AscensionOneRaceToRuleThemAllX) * level;
+				maxSpeCap2 += 2 * perkv1(PerkLib.AscensionOneRaceToRuleThemAllX) * level;
+				maxIntCap2 += 2 * perkv1(PerkLib.AscensionOneRaceToRuleThemAllX) * level;
+				maxWisCap2 += 2 * perkv1(PerkLib.AscensionOneRaceToRuleThemAllX) * level;
+				maxLibCap2 += 2 * perkv1(PerkLib.AscensionOneRaceToRuleThemAllX) * level;
 			}
 			if (jiangshiScore() >= 20) {
 				maxStrCap2 += 150;

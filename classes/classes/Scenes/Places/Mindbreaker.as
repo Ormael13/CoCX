@@ -127,8 +127,8 @@ package classes.Scenes.Places{
 					" make you too scared to fight so they can have their way with anyone under its effects." +
 					" It’s just a matter of steeling your nerves and venturing forth. But still… maybe this time you should listen to your instincts? Is whatever that resides within worth what you could encounter?" +
 					"\n\nDo you continue?" +
-					"\n\n<b>-Warning-\n" +
-					" -Content in this cave is not for everyone. It includes mind break, tentacles, parasitism and severe slutification. Proceed at your own risk.</b>\n");
+					"\n\n<b><u>-Warning-\n" +
+					" -Content in this cave is not for everyone. It includes mind break, tentacles, parasitism, severe slutification and PERNAMENT TRANSFORMATION. Proceed at your own risk.</u></b>\n");
 			//[Yes] [No]
 			doYesNo(YesTentacle,FuckNo);
 		}

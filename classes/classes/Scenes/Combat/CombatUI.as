@@ -259,6 +259,11 @@ public class CombatUI extends BaseCombatContent {
 		if (isPlayerBound()) {
 			mainMenuWhenBound();
 		} else if (isPlayerStunned() || isPlayerPowerStunned() || isPlayerFeared()) {
+			if (player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn) && player.statusEffectv1(StatusEffects.SimplifiedNonPCTurn) == 0) {
+				combat.simplifiedPrePCTurn();
+			} else if (player.hasPerk(PerkLib.JobLeader) && flags[kFLAGS.WILL_O_THE_WISP] == 0 && flags[kFLAGS.IN_COMBAT_PLAYER_WILL_O_THE_WISP_ATTACKED] != 1) {
+				combat.willothewispattacks();
+			}
 			menu();
 			addButton(0, "Recover", combat.wait);
 			if (CombatAbilities.ClearMind.isKnown) {

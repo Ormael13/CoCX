@@ -1977,6 +1977,13 @@ import coc.view.MainView;
 			}
 			btn++
 
+			if (player.hasPerk(PerkLib.AscensionOneRaceToRuleThemAllX)){
+				perkAdvancedTrainingCheck(player.perkv1(PerkLib.AscensionOneRaceToRuleThemAllX) + 1, btn);
+			} else {
+				perkAdvancedTrainingCheck(1, btn);
+			}
+			btn++
+
 			if (player.hasPerk(PerkLib.AscensionBuildingPrestigeX)){
 				perkBPCheck(player.perkv1(PerkLib.AscensionBuildingPrestigeX) + 1, btn);
 			} else {
@@ -2008,6 +2015,12 @@ import coc.view.MainView;
 			else if (player.ascensionPerkPoints < 10 && !player.hasPerk(PerkLib.AscensionHybridTheory)) addButtonDisabled(btn, "HybridTheory", "You do not have enough ascension perk points!");
 			else addButtonDisabled(btn, "HybridTheory", "You already bought Hybrid Theory perk.");
 			btn++;
+			if (player.hasPerk(PerkLib.AscensionOneRaceToRuleThemAllX)){
+				perkOneRaceToRuleThemAllCheck(player.perkv1(PerkLib.AscensionOneRaceToRuleThemAllX) + 1, btn);
+			} else {
+				perkOneRaceToRuleThemAllCheck(1, btn);
+			}
+			btn++
 			addButton(14, "Back", ascensionMenu);
 		}
 
@@ -2044,6 +2057,38 @@ import coc.view.MainView;
 			}
 			else {
 				addButton(btn, "B. Prestige Rank" + tier.toString(), perkRPConfirm, tier, PerkLib.AscensionBuildingPrestigeX, pCost, "Acquire Building Prestige Rank " + tier.toString());
+			}
+		}
+
+		private function perkAdvancedTrainingCheck(tier:int, btn:int):void {
+			var pCost:int = 25;
+			if (tier > 3) {
+				addButtonDisabled(btn, "Adv. Training Rank "+ tier.toString(),"You have the highest tier already.");
+			}
+			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < tier) {
+				addButtonDisabled(btn, "Adv. Training  Rank "+ tier.toString(),"You need to ascend once more.");
+			}
+			else if (player.ascensionPerkPoints < pCost * tier) {
+				addButtonDisabled(btn, "Adv. Training  Rank "+ tier.toString(),"You do not have enough points.");
+			}
+			else {
+				addButton(btn, "Adv. Training  Rank" + tier.toString(), perkRPConfirm, tier, PerkLib.AscensionAdvTrainingX, pCost, "Acquire Advanced Training Rank " + tier.toString());
+			}
+		}
+
+		private function perkOneRaceToRuleThemAllCheck(tier:int, btn:int):void {
+			var pCost:int = 10;
+			if (tier > 3) {
+				addButtonDisabled(btn, "ORTRTA Rank "+ tier.toString(),"You have the highest tier already.");
+			}
+			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < tier) {
+				addButtonDisabled(btn, "ORTRTA Rank "+ tier.toString(),"You need to ascend once more.");
+			}
+			else if (player.ascensionPerkPoints < pCost * tier) {
+				addButtonDisabled(btn, "ORTRTA Rank "+ tier.toString(),"You do not have enough points.");
+			}
+			else {
+				addButton(btn, "ORTRTA Rank" + tier.toString(), perkRPConfirm, tier, PerkLib.AscensionOneRaceToRuleThemAllX, pCost, "Acquire One Race To Rule Them All Rank " + tier.toString());
 			}
 		}
 

@@ -2143,7 +2143,7 @@ public class Camp extends NPCAwareContent{
 	}
 	private function druidMenu():void {
 		clearOutput();
-		outputText("WiP text until Lia come with something for here.");
+		outputText("Would you like to fuse with an elemental and if so which?");
 		if (player.hasPerk(PerkLib.SharedPower)) outputText("\n\n+"+player.perkv1(PerkLib.SharedPower)+"0% multi bonus to health, damage and spell power when in an infused state");//temporaly to check if perk working as intended
 		menu();
 		if (player.hasPerk(PerkLib.ElementalBody)) {
@@ -2154,28 +2154,85 @@ public class Camp extends NPCAwareContent{
 			addButton(13, "Unfuse", druidMenuUnfuseScene);
 		}
 		else {
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsAirE)) addButton(0, "Air", druidMenuFuseScene, "air", "light green", 1);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsAirE)) {
+				if (player.hasPerk(PerkLib.EclipticInfusion)) addButton(0, "Air", druidMenuAir);
+				else addButton(0, "Air", druidMenuFuseScene, "air", 1, 0);
+			}
 			else addButtonDisabled(0, "Air", "You need to summon Epic Air Elemental first before trying to use this fusion option.");
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarthE)) addButton(1, "Earth", druidMenuFuseScene, "earth", "dark brown", 2);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarthE)) {
+				if (player.hasPerk(PerkLib.EclipticInfusion)) addButton(1, "Earth", druidMenuEarth);
+				else addButton(1, "Earth", druidMenuFuseScene, "earth", 2, 0);
+			}
 			else addButtonDisabled(1, "Earth", "You need to summon Epic Earth Elemental first before trying to use this fusion option.");
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsFireE)) addButton(2, "Fire", druidMenuFuseScene, "fire", "tan", 3);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsFireE)) {
+				if (player.hasPerk(PerkLib.EclipticInfusion)) addButton(2, "Fire", druidMenuFire);
+				else addButton(2, "Fire", druidMenuFuseScene, "fire", 3, 0);
+			}
 			else addButtonDisabled(2, "Fire", "You need to summon Epic Fire Elemental first before trying to use this fusion option.");
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsWaterE)) addButton(3, "Water", druidMenuFuseScene, "water", "light blue", 4);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsWaterE)) {
+				if (player.hasPerk(PerkLib.EclipticInfusion)) addButton(3, "Water", druidMenuWater);
+				else addButton(3, "Water", druidMenuFuseScene, "water", 4, 0);
+			}
 			else addButtonDisabled(3, "Water", "You need to summon Epic Water Elemental first before trying to use this fusion option.");
 			addButtonDisabled(13, "Unfuse", "You need to be fused with any of epic elementals to use this option.");
 		}
 		addButton(14, "Back", campWinionsArmySim);
 	}
-	private function druidMenuFuseScene(element:String, skin:String, type:Number):void {
+	private function druidMenuAir():void {
+		clearOutput();
+		outputText("Would you like to also add an aligned elemental to your fusion?");
+		menu();
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsPurity)) addButton(1, "Purity", druidMenuFuseScene, "air", 1, 2);
+		else addButtonDisabled(1, "Purity", "You need to summon Normal Purity Elemental first before trying to use this fusion option.");
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsCorruption)) addButton(2, "Corruption", druidMenuFuseScene, "air", 1, 1);
+		else addButtonDisabled(2, "Corruption", "You need to summon Normal Corruption Elemental first before trying to use this fusion option.");
+		addButton(3, "No", druidMenuFuseScene, "air", 1, 0);
+	}
+	private function druidMenuEarth():void {
+		clearOutput();
+		outputText("Would you like to also add an aligned elemental to your fusion?");
+		menu();
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsPurity)) addButton(1, "Purity", druidMenuFuseScene, "earth", 2, 2);
+		else addButtonDisabled(1, "Purity", "You need to summon Normal Purity Elemental first before trying to use this fusion option.");
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsCorruption)) addButton(2, "Corruption", druidMenuFuseScene, "earth", 2, 1);
+		else addButtonDisabled(2, "Corruption", "You need to summon Normal Corruption Elemental first before trying to use this fusion option.");
+		addButton(3, "No", druidMenuFuseScene, "earth", 2, 0);
+	}
+	private function druidMenuFire():void {
+		clearOutput();
+		outputText("Would you like to also add an aligned elemental to your fusion?");
+		menu();
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsPurity)) addButton(1, "Purity", druidMenuFuseScene, "fire", 3, 2);
+		else addButtonDisabled(1, "Purity", "You need to summon Normal Purity Elemental first before trying to use this fusion option.");
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsCorruption)) addButton(2, "Corruption", druidMenuFuseScene, "fire", 3, 1);
+		else addButtonDisabled(2, "Corruption", "You need to summon Normal Corruption Elemental first before trying to use this fusion option.");
+		addButton(3, "No", druidMenuFuseScene, "fire", 3, 0);
+	}
+	private function druidMenuWater():void {
+		clearOutput();
+		outputText("Would you like to also add an aligned elemental to your fusion?");
+		menu();
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsPurity)) addButton(1, "Purity", druidMenuFuseScene, "water", 4, 2);
+		else addButtonDisabled(1, "Purity", "You need to summon Normal Purity Elemental first before trying to use this fusion option.");
+		if (player.hasStatusEffect(StatusEffects.SummonedElementalsCorruption)) addButton(2, "Corruption", druidMenuFuseScene, "water", 4, 1);
+		else addButtonDisabled(2, "Corruption", "You need to summon Normal Corruption Elemental first before trying to use this fusion option.");
+		addButton(3, "No", druidMenuFuseScene, "water", 4, 0);
+	}
+	private function druidMenuFuseScene(element:String, type:Number, type2:Number):void {
 		clearOutput();
 		var oldHPratio:Number = player.hp100/100;
-		outputText("You concentrate on the "+element+" elemental slowly infusing its essence within yours. Your body begins to change accordly to take on the aspect of "+element+".\n\n");
+		outputText("You concentrate on the "+element+" elemental slowly infusing its essence within yours. "+(type2 > 0 ? "Half way through the fusion a second elemental that of "+(type2 > 1 ? "purity":"corruption")+" also joins in. ":"")+"Your body begins to change accordly to take on the aspect of "+element+".\n\n");
 		outputText("After a few seconds, you open your eyes, now one with "+element+" as a");
 		if (type == 1) outputText(" Sylph");
 		if (type == 2) outputText(" Gnome");
 		if (type == 3) outputText("n Ignis");
 		if (type == 4) outputText("n Undine");
-		outputText(".\n\nYou admire your new "+skin+" skin which emphasizes the element you’ve become. Your ears have changed to "+(type == 4?"gain fins":"becoming pointed")+" like those of an "+(type == 4?"aquatic creature":"elf")+". ");
+		outputText(".\n\nYou admire your new ");
+		if (type == 1) outputText("light green");
+		if (type == 2) outputText("dark brown");
+		if (type == 3) outputText("tan");
+		if (type == 4) outputText("light blue");
+		outputText(" skin which emphasizes the element you’ve become. Your ears have changed to "+(type == 4?"gain fins":"becoming pointed")+" like those of an "+(type == 4?"aquatic creature":"elf")+". ");
 		outputText("Your irises also have changed, the new hue is ");
 		if (type == 1) outputText("orange like the twilight sky");
 		if (type == 2) outputText("green like a leaf");
@@ -2208,7 +2265,7 @@ public class Camp extends NPCAwareContent{
 			else if (player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) > 6) tier += 2;
 			else tier += 1;
 		}
-		player.createPerk(PerkLib.ElementalBody,type,tier,0,0);
+		player.createPerk(PerkLib.ElementalBody,type,tier,type2,0);
 		if (type == 1) player.createPerk(PerkLib.AffinitySylph,0,0,0,0);
 		if (type == 2) player.createPerk(PerkLib.AffinityGnome,0,0,0,0);
 		if (type == 3) player.createPerk(PerkLib.AffinityIgnis,0,0,0,0);
@@ -2257,6 +2314,7 @@ public class Camp extends NPCAwareContent{
 		if (player.hasPerk(PerkLib.GreaterSharedPower)) dmSPPC += 1;
 		if (player.hasPerk(PerkLib.ElementalContractRank13)) dmSPPC += 1;
 		if (player.hasPerk(PerkLib.StrongerElementalBondEx)) dmSPPC += 1;
+		if (player.hasPerk(PerkLib.EclipticInfusion)) dmSPPC += 1;
 		if (player.hasPerk(PerkLib.ElementalContractRank14)) dmSPPC += 1;
 		if (player.hasPerk(PerkLib.ElementalContractRank15)) dmSPPC += 1;
 		if (player.hasPerk(PerkLib.ElementalContractRank16)) dmSPPC += 1;
@@ -4550,6 +4608,7 @@ public function rebirthFromBadEnd():void {
 					mana += 12;
 					soulforce += 6;
 				}
+				if (player.hasPerk(PerkLib.AscensionAdvTrainingX)) statpoints += player.perkv1(PerkLib.AscensionAdvTrainingX);
 				if (player.hasPerk(PerkLib.UnlockBody)) hp += 60;
 				if (player.hasPerk(PerkLib.UnlockBody2ndStage)) hp += 60;
 				if (player.hasPerk(PerkLib.UnlockBody3rdStage)) hp += 60;
@@ -4575,10 +4634,10 @@ public function rebirthFromBadEnd():void {
 				if (player.hasPerk(PerkLib.UnlockArdor3rdStage)) lust += 3;
 				if (player.hasPerk(PerkLib.UnlockArdor4thStage)) lust += 3;
 				if (player.level < 6) {
-					statpoints += 5;
-					perkpoints += 1;
+					statpoints *= 2;
+					perkpoints *= 2;
 				}
-				mainView.levelButton.toolTipText = "Level up to increase your maximum: HP by " + hp + ", Lust by " + lust + ", Wrath by " + wrath + ", Fatigue by " + fatigue + ", Mana by " + mana + " and Soulforce by " + soulforce + "; gain " + statpoints + " attribute points and " + perkpoints + " perk points.";
+				mainView.levelButton.toolTipText = "Level up to increase your maximum: HP by " + hp + ", Lust by " + lust + ", Wrath by " + wrath + ", Fatigue by " + fatigue + ", Mana by " + mana + " and Soulforce by " + soulforce + "; gain " + statpoints + " attribute points and " + perkpoints + " perk point"+(perkpoints>1?"s":"")+".";
 				if (flags[kFLAGS.AUTO_LEVEL] > 0 && allowAutoLevelTransition) {
 					CoC.instance.playerInfo.levelUpGo();
 					return true; //True indicates that you should be routed to level-up.

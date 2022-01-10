@@ -1010,9 +1010,7 @@ public function naggaSqueeze():void {
 	if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= SceneLib.combat.oniRampagePowerMulti();
 	if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
 	if (player.hasPerk(PerkLib.VladimirRegalia)) damage *= 2;
-	if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-	if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-	if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+	if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 	if (player.lowerBody == LowerBody.FROSTWYRM) {
 		damageBonus = combat.unarmedAttack();
 		damageBonus *= combat.scalingBonusStrength() * 2;
@@ -1162,9 +1160,7 @@ public function naggaTease():void {
             damage *= 1.75;
         }
 		if (monster.hasStatusEffect(StatusEffects.HypnosisNaga)) damage *= 0.5;
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		monster.teased(monster.lustVuln * damage);
         if (crit == true) outputText(" <b>Critical!</b>");
         SceneLib.combat.teaseXP(1 + SceneLib.combat.bonusExpAfterSuccesfullTease());

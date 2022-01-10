@@ -2790,11 +2790,10 @@ public class Creature extends Utils
 			return (cocks.length);
 		}
 
-		//BOolean alternate
+		//Boolean alternate
 		public function hasCock():Boolean
 		{
 			return cocks.length >= 1;
-
 		}
 
 		public function hasSockRoom():Boolean

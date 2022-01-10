@@ -833,9 +833,7 @@ public class MagicSpecials extends BaseCombatContent {
 		damage = calcGlacialMod(damage);
 		if (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) damage *= 5;
 		if (combat.wearingWinterScarf()) damage *= 1.2;
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage = Math.round(damage * combat.iceDamageBoostedByDao());
 		outputText("Tapping into the power deep within you, you let loose a bellowing roar at your enemy, a powerful wave of cold blasting the area in front of you.  [Themonster] does [monster his] best to avoid it, but the wave of freezing air is too fast.");
@@ -931,9 +929,7 @@ public class MagicSpecials extends BaseCombatContent {
 		else damage += (player.tou/3 + rand(player.tou/2));
 		damage = calcGlacialMod(damage);
 		if (combat.wearingWinterScarf()) damage *= 1.2;
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		if (player.hasPerk(MutationsLib.YetiFat)) damage *= 1.50;
 		damage = Math.round(damage * combat.iceDamageBoostedByDao());
@@ -1016,9 +1012,7 @@ public class MagicSpecials extends BaseCombatContent {
 				if (player.hasPerk(PerkLib.ArouseTheAudience)) lustDmgF *= 7.5;
 				else lustDmgF *= 5;
 			}
-			if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= 1.50;
-			if (player.hasPerk(PerkLib.Apex)) lustDmgF *= 1.50;
-			if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmgF *= 1.50;
+			if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmgF *= 1.50;
 			if (player.hasPerk(MutationsLib.MelkieLung)) lustDmgF *= 1.2;
 			if (player.hasPerk(MutationsLib.MelkieLungPrimitive)) lustDmgF *= 1.3;
@@ -1047,9 +1041,7 @@ public class MagicSpecials extends BaseCombatContent {
 			var lustDmg2:Number = monster.lustVuln * (player.inte / 5 * (player.teaseLevel * 0.2) + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
 			lustDmg2 += IntligenceModifier * 0.5;
 			if (player.hasPerk(PerkLib.EromancyExpert)) lustDmg2 *= 1.5;
-			if (player.hasPerk(PerkLib.RacialParagon)) lustDmg2 *= 1.50;
-			if (player.hasPerk(PerkLib.Apex)) lustDmg2 *= 1.50;
-			if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmg2 *= 1.50;
+			if (player.hasPerk(PerkLib.RacialParagon)) lustDmg2 *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg2 *= 1.50;
 			if (player.hasPerk(MutationsLib.MelkieLung)) lustDmg2 *= 1.2;
 			if (player.hasPerk(MutationsLib.MelkieLungPrimitive)) lustDmg2 *= 1.3;
@@ -1067,9 +1059,7 @@ public class MagicSpecials extends BaseCombatContent {
 			var lustDmg:Number = monster.lustVuln * 0.5 * (player.inte / 5 * (player.teaseLevel * 0.2) + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
 			lustDmg += IntligenceModifier * 0.25;
 			if (player.hasPerk(PerkLib.EromancyExpert)) lustDmg *= 1.5;
-			if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= 1.50;
-			if (player.hasPerk(PerkLib.Apex)) lustDmg *= 1.50;
-			if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmg *= 1.50;
+			if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 1.50;
 			if (player.hasPerk(MutationsLib.MelkieLung)) lustDmg *= 1.2;
 			if (player.hasPerk(MutationsLib.MelkieLungPrimitive)) lustDmg *= 1.3;
@@ -1105,9 +1095,7 @@ public class MagicSpecials extends BaseCombatContent {
 		//High damage to goes.
 		damage = calcVoltageMod(damage);
 		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage = Math.round(damage * combat.lightningDamageBoostedByDao());
 		doLightingDamage(damage, true, true);
@@ -1200,9 +1188,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(MutationsLib.HeartOfTheStorm)) lustDmgF *= 1.1;
 			if (player.hasPerk(MutationsLib.HeartOfTheStormPrimitive)) lustDmgF *= 1.2;
 			if (player.hasPerk(MutationsLib.HeartOfTheStormEvolved)) lustDmgF *= 1.3;
-			if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= 1.50;
-			if (player.hasPerk(PerkLib.Apex)) lustDmgF *= 1.50;
-			if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmgF *= 1.50;
+			if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmgF *= 1.50;
 			lustDmgF = Math.round(lustDmgF);
 			monster.teased(lustDmgF);
@@ -1253,9 +1239,7 @@ public class MagicSpecials extends BaseCombatContent {
 		//High damage to goes.
 		damage = calcVoltageMod(damage);
 		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(MutationsLib.FloralOvaries)) damage *= 1.25;
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage = Math.round(damage * combat.lightningDamageBoostedByDao());
@@ -1326,9 +1310,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(MutationsLib.HeartOfTheStorm)) damage *= 1.1;
 		if (player.hasPerk(MutationsLib.HeartOfTheStormPrimitive)) damage *= 1.2;
 		if (player.hasPerk(MutationsLib.HeartOfTheStormEvolved)) damage *= 1.3;
-		if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) lustDmgF *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmgF *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmgF *= 1.50;
 		lustDmgF = lustDmgF * monster.lustVuln;
 		lustDmgF = Math.round(lustDmgF);
@@ -1363,9 +1345,7 @@ public class MagicSpecials extends BaseCombatContent {
 		//High damage to goes.
 		damage = calcVoltageMod(damage);
 		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage = Math.round(damage);
 		dynStats("lus", (Math.round(player.maxLust() * 0.02)), "scale", false);
@@ -1433,9 +1413,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(MutationsLib.HeartOfTheStormPrimitive)) lustDmgF *= 1.2;
 		if (player.hasPerk(MutationsLib.HeartOfTheStormEvolved)) lustDmgF *= 1.3;
 		lustDmgF = lustDmgF * monster.lustVuln;
-		if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) lustDmgF *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmgF *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmgF *= 1.50;
 		lustDmgF = Math.round(lustDmgF);
 		outputText("You let electricity build up in your body before unleashing it into the ambient sky, the clouds roaring with thunder. Here comes the storm! ");
@@ -1475,9 +1453,7 @@ public class MagicSpecials extends BaseCombatContent {
 			damage += player.cumQ();
 			damage *= (player.lust100 * 0.01);
 			damage *= 1.2;
-			if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-			if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-			if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 			damage = Math.round(damage * combat.lightningDamageBoostedByDao());
 			doLightingDamage(damage, true, true);
@@ -1497,9 +1473,7 @@ public class MagicSpecials extends BaseCombatContent {
 			damage += player.lactationQ();
 			damage *= (player.lust100 * 0.01);
 			damage *= 1.2;
-			if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-			if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-			if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 			damage = Math.round(damage * combat.lightningDamageBoostedByDao());
 			doLightingDamage(damage, true, true);
@@ -1521,9 +1495,7 @@ public class MagicSpecials extends BaseCombatContent {
 			damage += player.cumQ();
 			damage *= 1.5;
 			damage *= (player.lust100 * 0.02);
-			if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-			if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-			if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 			damage = Math.round(damage * combat.lightningDamageBoostedByDao());
 			doLightingDamage(damage, true, true);
@@ -1595,9 +1567,7 @@ public class MagicSpecials extends BaseCombatContent {
 		damage += scalingBonusToughness() * 0.5;
 		damage += 50 + rand(20);
 		damage = calcInfernoMod(damage);
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage = Math.round(damage);
 		//Shell
@@ -1720,9 +1690,7 @@ public class MagicSpecials extends BaseCombatContent {
 		//High damage to goes.
 		damage = calcGlacialMod(damage);
 		if (combat.wearingWinterScarf()) damage *= 1.2;
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage = Math.round(damage * combat.iceDamageBoostedByDao());
 		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
@@ -1789,9 +1757,7 @@ public class MagicSpecials extends BaseCombatContent {
 		//High damage to goes.
 		damage = calcGlacialMod(damage);
 		if (combat.wearingWinterScarf()) damage *= 1.2;
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage = Math.round(damage * combat.iceDamageBoostedByDao());
 		//if (monster.short == "goo-girl") damage = Math.round(damage * 1.5); - pomyśleć czy bdą dostawać bonusowe obrażenia
@@ -1886,9 +1852,7 @@ public class MagicSpecials extends BaseCombatContent {
 		damage += scalingBonusStrength();// * 0.5
 		damage += player.tou;
 		damage += scalingBonusToughness();// * 0.5
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage = Math.round(damage);
 		//Shell
@@ -1959,9 +1923,7 @@ public class MagicSpecials extends BaseCombatContent {
 		damage += player.tou;
 		damage += scalingBonusToughness();// * 0.5
 		damage = calcInfernoMod(damage);
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage = Math.round(damage);
 		//Shell
@@ -2074,9 +2036,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(MutationsLib.DrakeLungs)) damult += 3;
 		if (player.hasPerk(MutationsLib.DrakeLungsPrimitive)) damult += 3;
 		if (player.hasPerk(MutationsLib.DrakeLungsEvolved)) damult += 3;
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage *= 4;
 		damage *= damult;
@@ -2199,9 +2159,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(MutationsLib.DrakeLungsPrimitive)) damult += 3;
 		if (player.hasPerk(MutationsLib.DrakeLungsEvolved)) damult += 3;
 		if (combat.wearingWinterScarf()) damage *= 1.2;
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage *= 4;
 		damage *= damult;
@@ -2289,9 +2247,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(MutationsLib.DrakeLungsPrimitive)) damult += 3;
 		if (player.hasPerk(MutationsLib.DrakeLungsEvolved)) damult += 3;
 		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage *= 4;
 		damage *= damult;
@@ -2378,9 +2334,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(MutationsLib.DrakeLungs)) damult += 3;
 		if (player.hasPerk(MutationsLib.DrakeLungsPrimitive)) damult += 3;
 		if (player.hasPerk(MutationsLib.DrakeLungsEvolved)) damult += 3;
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage *= 4;
 		damage *= damult;
@@ -2466,9 +2420,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(MutationsLib.DrakeLungs)) damult += 3;
 		if (player.hasPerk(MutationsLib.DrakeLungsPrimitive)) damult += 3;
 		if (player.hasPerk(MutationsLib.DrakeLungsEvolved)) damult += 3;
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage *= 4;
 		damage *= damult;
@@ -2570,9 +2522,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.LightningAffinity)) damage *= 1.25;
 			if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + ((player.lust100 * 0.01) * 0.25));
 			if (combat.wearingWinterScarf()) damage *= 1.05;
-			if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-			if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-			if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 			damage *= 4;
 			damage *= damult;
@@ -3201,9 +3151,7 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		//High damage to goes.
 		if (player.hasPerk(PerkLib.TravelingMerchantOutfit)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage += player.gems;
 		if (player.hasPerk(MutationsLib.NukiNutsEvolved)) damage *= 2;
@@ -3341,9 +3289,7 @@ public class MagicSpecials extends BaseCombatContent {
 		damage = calcInfernoMod(damage);
 		if (monster.short == "goo-girl") damage = Math.round(damage * 1.5);
 		if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2);
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		if (player.miscJewelry == miscjewelries.DMAGETO || player.miscJewelry2 == miscjewelries.DMAGETO) damage *= 1.25;
 		damage = Math.round(damage * combat.fireDamageBoostedByDao());
@@ -3450,9 +3396,7 @@ public class MagicSpecials extends BaseCombatContent {
 		damage += combat.unarmedAttack();
 		damage += player.tou;
 		damage += scalingBonusToughness();// * 0.5
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage = Math.round(damage);
 		doAcidDamage(damage, true, true);
@@ -3555,16 +3499,12 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.EromancyExpert)) lustDmg *= 1.5;
 		lustDmg *= 0.1;
 		//ew. bonusy do lust dmg tutaj
-		if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) lustDmg *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmg *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 1.50;
 		lustDmg = Math.round(lustDmg);
 		monster.teased(lustDmg);
 		outputText(" ");
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage = Math.round(damage * combat.fireDamageBoostedByDao());
 		doFireDamage(damage, true, true);
@@ -3671,16 +3611,12 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.shieldName == "spirit focus") lustDmg *= 1.2;
 		if (player.headjewelryName == "fox hairpin") lustDmg *= 1.2;
 		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono) || player.hasPerk(PerkLib.InariBlessedKimono)) lustDmg *= 1.4;
-		if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) lustDmg *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmg *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 1.50;
 		lustDmg = Math.round(lustDmg);
 		monster.teased(lustDmg);
 		outputText(" ");
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage = Math.round(damage * combat.fireDamageBoostedByDao());
 		doFireDamage(damage, true, true);
@@ -3797,16 +3733,12 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(MutationsLib.KitsuneThyroidGlandPrimitive) && player.tailType == Tail.FOX && player.tailCount == 9) lustDmg *= 1.5;
 		if (player.shieldName == "spirit focus") lustDmg *= 1.2;
 		if (player.headjewelryName == "fox hairpin") lustDmg *= 1.2;
-		if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) lustDmg *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmg *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 1.50;
 		lustDmg = Math.round(lustDmg);
 		monster.teased(lustDmg);
 		outputText(" ");
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage = Math.round(damage * combat.fireDamageBoostedByDao());
 		doFireDamage(damage, true, true);
@@ -3917,16 +3849,12 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.shieldName == "spirit focus") lustDmg *= 1.2;
 		if (player.headjewelryName == "fox hairpin") lustDmg *= 1.2;
 		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono) || player.hasPerk(PerkLib.InariBlessedKimono)) lustDmg *= 1.4;
-		if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) lustDmg *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmg *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 1.50;
 		lustDmg = Math.round(lustDmg);
 		monster.teased(lustDmg);
 		outputText(" ");
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage = Math.round(damage * combat.fireDamageBoostedByDao());
 		doFireDamage(damage, true, true);
@@ -4042,16 +3970,12 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.shieldName == "spirit focus") lustDmg *= 1.2;
 		if (player.headjewelryName == "fox hairpin") lustDmg *= 1.2;
 		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono) || player.hasPerk(PerkLib.InariBlessedKimono)) lustDmg *= 1.4;
-		if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) lustDmg *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmg *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 1.50;
 		lustDmg = Math.round(lustDmg);
 		monster.teased(lustDmg);
 		outputText(" ");
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage = Math.round(damage * combat.fireDamageBoostedByDao());
 		doFireDamage(damage, true, true);
@@ -4126,9 +4050,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (monster.spe >= 21) speedDebuff += 20;
 			else speedDebuff += 20 - monster.spe;
 		}
-		if (player.hasPerk(PerkLib.RacialParagon)) speedDebuff *= 1.5;
-		if (player.hasPerk(PerkLib.Apex)) speedDebuff *= 1.5;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) speedDebuff *= 1.5;
+		if (player.hasPerk(PerkLib.RacialParagon)) speedDebuff *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) speedDebuff *= 1.5;
 		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono) || player.hasPerk(PerkLib.InariBlessedKimono)) speedDebuff *= 1.5;
 		monster.speStat.core.value -= speedDebuff;
@@ -4222,9 +4144,7 @@ public class MagicSpecials extends BaseCombatContent {
 				if (monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " instantly soaks her groin.  ");
 			}
 		}
-		if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= 1.5;
-		if (player.hasPerk(PerkLib.Apex)) lustDmg *= 1.5;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmg *= 1.5;
+		if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.EromancyExpert)) lustDmg *= 1.5;
 		if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 1.50;
 		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono) || player.hasPerk(PerkLib.InariBlessedKimono)) lustDmg *= 2;
@@ -4261,9 +4181,7 @@ public class MagicSpecials extends BaseCombatContent {
 			var Multiplier:Number = 1;
 			if(player.hasPerk(MutationsLib.ArachnidBookLungPrimitive)) Multiplier += 0.5;
 			if(player.hasPerk(MutationsLib.ArachnidBookLungEvolved)) Multiplier += 0.5;
-			if(player.hasPerk(PerkLib.RacialParagon)) Multiplier += 0.5;
-			if(player.hasPerk(PerkLib.Apex)) Multiplier += 0.5;
-			if(player.hasPerk(PerkLib.AlphaAndOmega)) Multiplier += 0.5;
+			if(player.hasPerk(PerkLib.RacialParagon)) Multiplier += (combat.RacialParagonAbilityBoost() - 1);
 			monster.statStore.addBuffObject({spe:-45*Multiplier}, "Web",{text:"Web"});
 			if(player.hasPerk(MutationsLib.ArachnidBookLungEvolved) && rand(100) > 50) monster.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
 			awardAchievement("How Do I Shot Web?", kACHIEVEMENTS.COMBAT_SHOT_WEB);
@@ -4333,9 +4251,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.ChiReflowLust)) lustDmgF *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
 		if (player.hasPerk(PerkLib.ArouseTheAudience) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType))) lustDmgF *= 1.5;
 		lustDmgF = lustDmgF * monster.lustVuln;
-		if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) lustDmgF *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmgF *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmgF *= 1.50;
 		lustDmgF = Math.round(lustDmgF);
 		monster.teased(lustDmgF);
@@ -4407,9 +4323,7 @@ public class MagicSpecials extends BaseCombatContent {
 			if (rand(100) < critChance) {
 				damage *= 1.75;
 			}
-			if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-			if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-			if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 			damage = Math.round(damage);
 			doMagicDamage(damage, true, true);
@@ -4450,9 +4364,7 @@ public class MagicSpecials extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		if (player.hasPerk(MutationsLib.FeyArcaneBloodstreamEvolved)) damage *= 1.50;
 		damage = Math.round(damage);
@@ -4738,9 +4650,7 @@ public class MagicSpecials extends BaseCombatContent {
 				if(monster.lust >= (monster.maxLust() * 0.6) && monster.vaginas[0].vaginalWetness == VaginaClass.WETNESS_SLAVERING) outputText(monster.capitalA + monster.short + "'s " + monster.vaginaDescript() + " instantly soaks her groin.  ");
 			}
 		}
-		if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) lustDmg *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) lustDmg *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 1.50;
 		if(player.armorName == "Scandalous Succubus Clothing") {
 			lustDmg *= 1.25;
@@ -4767,9 +4677,7 @@ public class MagicSpecials extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		if (player.hasPerk(PerkLib.MindbreakerBrain1toX)) damage*=1+(0.5*(1+player.perkv1(PerkLib.MindbreakerBrain1toX)));
 		damage = Math.round(damage);
@@ -4863,9 +4771,7 @@ public class MagicSpecials extends BaseCombatContent {
 			}
 			var damage:Number = Math.round(player.inte / 5) + rand(player.level) + player.level;
 			damage *= Math.round(1 + (0.1 * player.poltergeistScore()));
-			if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-			if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-			if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 			if (player.hasPerk(PerkLib.EromancyExpert)) damage *= 1.5;
 			if (player.poltergeistScore() >= 18) {
@@ -4914,9 +4820,7 @@ public class MagicSpecials extends BaseCombatContent {
 		outputText("You let out a soul-chilling scream freezing your opponent" + (monster.plural ? "s":"") + " in [monster his] tracks from sheer terror. This also seems to have damaged [monster his] sanity. ");
 		var damage:Number = 0;
 		damage += scalingBonusIntelligence() * spellMod();
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage = Math.round(damage);
 		doMagicDamage(damage, true, true);
@@ -4947,9 +4851,7 @@ public class MagicSpecials extends BaseCombatContent {
 		var damage:Number = 0;
 		damage += unarmedAttack();
 		damage *= spellMod();
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage = Math.round(damage);
 		outputText("You growl as you unsheath your claws, enhancing them with a dash of fire magic. You leap forward and viciously rend your opponent for " + damage + " physical and ");
@@ -4994,9 +4896,7 @@ public class MagicSpecials extends BaseCombatContent {
 		var damage:Number = 0;
 		damage += scalingBonusIntelligence()+scalingBonusToughness()+scalingBonusLibido();
 		if (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) damage *= 5;
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage = Math.round(damage);
 		monster.HP -= damage;
@@ -5025,9 +4925,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(MutationsLib.HeartOfTheStorm)) damage *= 1.5;
 		if (player.hasPerk(MutationsLib.HeartOfTheStormPrimitive)) damage *= 1.5;
 		if (player.hasPerk(MutationsLib.HeartOfTheStormEvolved)) damage *= 1.5;
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage = Math.round(damage * combat.windDamageBoostedByDao());
 		//Shell
@@ -5115,9 +5013,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(MutationsLib.HeartOfTheStorm)) damage *= 1.5;
 		if (player.hasPerk(MutationsLib.HeartOfTheStormPrimitive)) damage *= 1.5;
 		if (player.hasPerk(MutationsLib.HeartOfTheStormEvolved)) damage *= 1.5;
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.Apex)) damage *= 1.50;
-		if (player.hasPerk(PerkLib.AlphaAndOmega)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage = Math.round(damage * combat.windDamageBoostedByDao());
 		//Shell

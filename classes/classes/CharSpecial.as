@@ -1798,7 +1798,7 @@ import classes.Items.*;
 			if (!player.hasPerk(PerkLib.Fast)) player.createPerk(PerkLib.Fast, 1, 0, 0, 0); // gaining speed is pain in ass... this one is not for history flavor
 			if (!player.hasPerk(PerkLib.Smart)) player.createPerk(PerkLib.Smart, 1, 0, 0, 0); // int is easy to get, just for history flavor
 			if (!player.hasPerk(PerkLib.Lusty)) player.createPerk(PerkLib.Lusty, 1, 0, 0, 0); // have a lust problem
-			if (!player.hasPerk(PerkLib.HotBlooded)) player.createPerk(PerkLib.HotBlooded, 20, 0, 0, 0); // even with your willpower and religious training you sometimes struggling to restrain your impulse
+			if (!player.hasPerk(PerkLib.HotBlooded)) player.createPerk(PerkLib.HotBlooded, 0, 0, 0, 0); // even with your willpower and religious training you sometimes struggling to restrain your impulse
 			if (!player.hasPerk(PerkLib.Pervert)) player.createPerk(PerkLib.Pervert, 0.25, 0, 0, 0); // you always ready for something VERY lewd
 			if (!player.hasPerk(PerkLib.Masochist)) player.createPerk(PerkLib.Masochist, 0, 0, 0, 0); // with your knowlege of healing and innatural body it is easy for you to enjoy things which would be really painful for others
 			if (!player.hasPerk(PerkLib.Sadist)) player.createPerk(PerkLib.Sadist, 0, 0, 0, 0); // and you are always ready to return favor

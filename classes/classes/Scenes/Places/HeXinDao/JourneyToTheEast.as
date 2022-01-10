@@ -85,6 +85,7 @@ package classes.Scenes.Places.HeXinDao
 			else {
 				if (AhriTavernTalks) addButtonDisabled(7, "Madam", "'Madam' isn't currently at her usual table in the inn.");
 			}
+			if (workHoursTemptress() && rand(3) == 0) addButtonDisabled(7, "???", "You see mysterious looking devil sitting at one of the inn tables.");//Evelynn
 			if (flags[kFLAGS.MICHIKO_FOLLOWER] < 1) addButton(8, "???", SceneLib.michikoFollower.firstMeetingMichiko).hint("You see some suspicious looking squirrel in one of inn corners.");
 			if (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] < 2 && (player.humanScore() >= (player.humanMaxScore() - player.internalChimeraScore()))) {
 				if (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] < 1) addButton(9, "???", firstTimeMeetingNekomataBoy).hint("A strange cat morph with two tails is sitting at one of the tables muttering to himself.");
@@ -172,7 +173,7 @@ package classes.Scenes.Places.HeXinDao
 		}
 
 		private function workHoursMadam():Boolean {
-			if ((model.time.hours >= 7 && model.time.hours <= 9) || (model.time.hours >= 19 && model.time.hours <= 21)) return true;
+			if ((model.time.hours >= 6 && model.time.hours <= 9) || (model.time.hours >= 18 && model.time.hours <= 21)) return true;
 			return false;
 		}
 		private function visitMadam():void {
@@ -220,6 +221,20 @@ package classes.Scenes.Places.HeXinDao
 				eachMinuteCount(30);
 			}
 		}
+		private function workHoursTemptress():Boolean {
+			if ((model.time.hours >= 6 && model.time.hours <= 9) || (model.time.hours >= 18 && model.time.hours <= 21)) return true;
+			return false;
+		}
+		private function visitTemptress():void {
+			clearOutput();//Temptress - female displacer devil npc for perk points to stat points conversion		outputText("\"<i></i>\"\n\n");
+			menu();
+			addButton(1, "Convert", visitTemptressConvert);
+			addButton(3, "Back", curry(enteringInn,false));
+		}
+		private function visitTemptressConvert():void {
+			
+		}
+
 		public function NeisabutPCgotKOd():void {
 			clearOutput();
 			outputText("As you walk towards Neisa, she does a double take as she sees you alive and well.");
@@ -229,7 +244,6 @@ package classes.Scenes.Places.HeXinDao
 			addButton(1, "Yes", reenteringTheDungeon).hint("That will make you go to the dungeon right away!");
 			addButton(3, "No", firstTimeMeetingNeisaNo);
 		}
-
 		public function reenteringTheDungeon():void{
 			outputText("\n\nWith a nod, you shake her hand, and she gets up from her chair, before the two of you head back towards the dungeon.");
 			var strNeisa:Number = 50;

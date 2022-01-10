@@ -8,6 +8,7 @@ import classes.Scenes.Places.HeXinDao.JourneyToTheEast;
 import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.NPCs.IsabellaScene;
 import classes.Scenes.NPCs.ZenjiScenes;
+import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.SceneLib;
 import classes.Stats.StatUtils;
 import classes.StatusEffects.VampireThirstEffect;
@@ -132,7 +133,7 @@ public class PlayerInfo extends BaseContent {
 			miscStats += "<b>Camp Underground Population:</b> " + camp.getCampUndergroundPopulation() + "\n";
 			miscStats += "<b>Minions Count:</b> " + player.playerMinionsCount() + "\n";
 			if (player.race() == "mindbreaker") {
-				miscStats += "<b>Mindbroken Minions:</b> " + player.perkv1(PerkLib.MindbreakerBrain1toX) + "\n";
+				miscStats += "<b>Mindbroken Minions:</b> " + Mindbreaker.MindBreakerConvert + "\n";
 			}
 		}
 
@@ -1389,25 +1390,24 @@ public class PlayerInfo extends BaseContent {
 			else {
 				player.XP -= player.requiredXP();
 				player.level++;
-				player.perkPoints++;
-				if (player.level <= 6) player.perkPoints++;
+				var gainedPerks:Number = 1;
 				//if (player.level % 2 == 0) player.ascensionPerkPoints++;
 				//przerobić aby z asc perk co ?6/3/1? lvl dostawać another perk point?
-				//może też dodać ascension perk aby móc dostawać 6 lub nawet wiecej stat points na lvl up?
+				var gainedStats:Number = 5;
+				if (player.hasPerk(PerkLib.AscensionAdvTrainingX)) gainedStats += player.perkv1(PerkLib.AscensionAdvTrainingX);
 				if (player.hasStatusEffect(StatusEffects.PCClone) && player.statusEffectv3(StatusEffects.PCClone) > 0) player.addStatusValue(StatusEffects.PCClone,3,-1);
 				clearOutput();
 				outputText("<b>You are now level " + num2Text(player.level) + "!</b>");
-				if (player.level > 6) {
-					player.statPoints += 5;
-					outputText("\n\nYou have gained five attribute points and one perk point!");
+				if (player.level <= 6) {
+					gainedPerks *= 2;
+					gainedStats *= 2;
 				}
-				else {
-					player.statPoints += 10;
-					outputText("\n\nYou have gained ten attribute points and two perk points!");
-				}
-				//What is this one for? V
-				if (player.level > 6) outputText("\n\nYou have gained one perk point!");
-				else outputText("\n\nYou have gained two perk points!");
+				player.perkPoints += gainedPerks;
+				player.statPoints += gainedStats;
+				outputText("\n\nYou have gained " + num2Text(gainedStats) + " attribute points and " + num2Text(gainedPerks) + " perk point"+(gainedPerks > 1 ? "s":"")+"!");
+				//What is this one for? V	I not sure myself either so commented it out just in case
+				//if (player.level > 6) outputText("\n\nYou have gained one perk point!");
+				//else outputText("\n\nYou have gained two perk points!");
 			}
 			if (player.statPoints > 0) {
 				doNext(attributeMenu);
@@ -1476,11 +1476,11 @@ public class PlayerInfo extends BaseContent {
 				lvlinc++;
 				if (player.level <= 6) {
 					player.perkPoints += 2;
-					player.statPoints += 10;
+					player.statPoints += (5 + player.perkv1(PerkLib.AscensionAdvTrainingX)) * 2;
 				}
 				else {
 					player.perkPoints++;
-					player.statPoints += 5;
+					player.statPoints += (5 + player.perkv1(PerkLib.AscensionAdvTrainingX));
 					if (player.hasStatusEffect(StatusEffects.PCClone) && player.statusEffectv3(StatusEffects.PCClone) > 0) player.addStatusValue(StatusEffects.PCClone,3,-1);
 				}
 			}
@@ -1875,6 +1875,9 @@ public class PlayerInfo extends BaseContent {
 			HPChange(player.spe, false);
 			statScreenRefresh();
 		}
+		//if (perk.ptype == PerkLib.RacialParagon) {
+		//	flags[kFLAGS.APEX_SELECTED_RACE] = Race.ALL_RACES[player.race];	//How do I get the current race id....
+		//}
 		if (player.perkPoints > 0) {
 			doNext(perkBuyMenu);
 		} else {

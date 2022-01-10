@@ -99,7 +99,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 		public function mainLunaMenu():void {
 			spriteSelect(SpriteDb.s_luna_maid);
 			clearOutput();
-			if (isNightTime && flags[kFLAGS.LUNA_MOON_CYCLE] == 8 && flags[kFLAGS.LUNA_FOLLOWER] >= 7 && flags[kFLAGS.LUNA_JEALOUSY] >= 400) {
+			if (isNightTime && flags[kFLAGS.LUNA_MOON_CYCLE] == 8 && flags[kFLAGS.LUNA_FOLLOWER] >= 7 && flags[kFLAGS.LUNA_JEALOUSY] >= 400 && !player.blockingBodyTransformations()) {
 				SceneLib.lunaFollower.fullMoonEvent(true,true);
 			} else {
 				outputText("You call out to Luna, who immediately stops what she's doing and trots over to you as quickly as her professional dignity permits. She straightens her skirt and addresses you with a polite bow.\n\n" +
@@ -164,7 +164,10 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			addButton(1, "Service", talkMenuLunaWhatCanSheDo).hint("Ask what she can do for you.");
 			addButton(2, "Human", talkMenuLunaHuman).hint("Humans seem pretty rare her in Mareth, you've noticed.");
 			addButton(3, "Camp", talkMenuLunaCampThoughts).hint("Ask her her thoughts on her new place of work.");
-			if (flags[kFLAGS.LUNA_FOLLOWER] > 6) addButton(4, "Lycanthropy", talkMenuLunaLycanthropy).hint("Yeah, humans <b>are</b> pretty rare huh? Find out more about Luna's condition.");
+			if (flags[kFLAGS.LUNA_FOLLOWER] > 6) {
+				if (player.blockingBodyTransformations()) addButtonDisabled(4, "Lycanthropy", "Your body can't be transformed.");
+				else addButton(4, "Lycanthropy", talkMenuLunaLycanthropy).hint("Yeah, humans <b>are</b> pretty rare huh? Find out more about Luna's condition.");
+			}
 			else addButtonDisabled(4, "???", "You need to know her better for this.");
 			if (player.statusEffectv1(StatusEffects.LunaWasCaugh) >= 3)addButton(7, "Accuse", talkMenuLunaStopJealousy).hint("You know it was her, and it needs to stop now.");
 			if ((flags[kFLAGS.LUNA_FOLLOWER] == 13 || flags[kFLAGS.LUNA_FOLLOWER] == 14) && !player.hasPerk(PerkLib.Lycanthropy) && !player.hasPerk(PerkLib.LycanthropyDormant)) addButton(9, "Bite Me", talkMenuBiteMe).hint("This is a terrible idea!");
