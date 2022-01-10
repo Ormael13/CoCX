@@ -11201,7 +11201,7 @@ use namespace CoC;
 						weightChange++;
 						hunger -= overeatingLimit;
 					}
-					modThickness(100, weightChange);
+					modThickness(maxThicknessCap(), weightChange);
 					hunger = maxHunger();
 				}
 				if (hunger > oldHunger && flags[kFLAGS.USE_OLD_INTERFACE] == 0) CoC.instance.mainView.statsView.showStatUp('hunger');
@@ -11757,21 +11757,21 @@ use namespace CoC;
 			var minCap:Number = maxLust();
 			//Bimbo body boosts minimum lust by 40
 			if (hasPerk(PerkLib.BimboBody) || hasPerk(PerkLib.BroBody) || hasPerk(PerkLib.FutaForm)) min += Math.round(minCap * 0.4);
-			if (hasStatusEffect(StatusEffects.BimboChampagne)) min += 20;
+			if (hasStatusEffect(StatusEffects.BimboChampagne)) min += Math.round(minCap * 0.2);
 			//Omnibus' Gift
 			if (hasPerk(PerkLib.OmnibusGift)) min += Math.round(minCap * 0.35);
 			//Easter bunny eggballs
 			if (hasPerk(PerkLib.EasterBunnyBalls)) min += 10*ballSize;
 			//Fera Blessing
-			if (hasStatusEffect(StatusEffects.BlessingOfDivineFera)) min += 15;
+			if (hasStatusEffect(StatusEffects.BlessingOfDivineFera)) min += Math.round(minCap * 0.15);
 			//Nymph perk raises to 30
 			if (hasPerk(PerkLib.Nymphomania)) min += Math.round(minCap * 0.3);
 			//Oh noes anemone!
-			if (hasStatusEffect(StatusEffects.AnemoneArousal)) min += 30;
+			if (hasStatusEffect(StatusEffects.AnemoneArousal)) min += Math.round(minCap * 0.3);
 			//Hot blooded perk raises min lust!
 			if (hasPerk(PerkLib.HotBlooded)) min += Math.round(minCap * 0.2);
 			if (hasPerk(PerkLib.LuststickAdapted)) min += Math.round(minCap * 0.1);
-			if (hasStatusEffect(StatusEffects.Infested)) min += 50;
+			if (hasStatusEffect(StatusEffects.Infested)) min += min += Math.round(minCap * 0.5);
 			//Add points for Crimstone
 			min += perkv1(PerkLib.PiercedCrimstone);
 			//Subtract points for Icestone!
@@ -11788,35 +11788,35 @@ use namespace CoC;
 				else min = 0;
 			}
 			//Harpy Lipstick and Drunken Power statuses rise minimum lust by 50.
-			if(hasStatusEffect(StatusEffects.Luststick)) min += 50;
-			if(hasStatusEffect(StatusEffects.DrunkenPower)) min += 50;
+			if(hasStatusEffect(StatusEffects.Luststick)) min += min += Math.round(minCap * 0.5);
+			if(hasStatusEffect(StatusEffects.DrunkenPower)) min += min += Math.round(minCap * 0.5);
 			//SHOULDRA BOOSTS
 			//+20
 			if(flags[kFLAGS.SHOULDRA_SLEEP_TIMER] <= -168 && flags[kFLAGS.URTA_QUEST_STATUS] != 0.75) {
-				min += 20;
+				min += Math.round(minCap * 0.2);
 				if(flags[kFLAGS.SHOULDRA_SLEEP_TIMER] <= -216)
-					min += 30;
+					min += Math.round(minCap * 0.3);
 			}
 			//cumOmeter
 			if (tailType == Tail.MANTICORE_PUSSYTAIL && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 25) {
-				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 25 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 20) min += 10;
-				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 20 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 15) min += 20;
-				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 15 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 10) min += 30;
-				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 10 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 5) min += 40;
-				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 5) min += 50;
+				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 25 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 20) min += Math.round(minCap * 0.1);
+				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 20 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 15) min += Math.round(minCap * 0.2);
+				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 15 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 10) min += Math.round(minCap * 0.3);
+				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 10 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 5) min += Math.round(minCap * 0.4);
+				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 5) min += Math.round(minCap * 0.5);
 			}
 			//MilkOMeter
 			if (rearBody.type == RearBody.DISPLACER_TENTACLES && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 25) {
-				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 25 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 20) min += 10;
-				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 20 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 15) min += 20;
-				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 15 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 10) min += 30;
-				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 10 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 5) min += 40;
-				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 5) min += 50;
+				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 25 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 20) min += Math.round(minCap * 0.1);
+				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 20 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 15) min += Math.round(minCap * 0.2);
+				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 15 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 10) min += Math.round(minCap * 0.3);
+				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 10 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 5) min += Math.round(minCap * 0.4);
+				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 5) min += Math.round(minCap * 0.5);
 			}
 			//SPOIDAH BOOSTS
 			if(eggs() >= 20) {
-				min += 10;
-				if(eggs() >= 40) min += 10;
+				min += Math.round(minCap * 0.1);
+				if(eggs() >= 40) min += Math.round(minCap * 0.1);
 			}
 			//Werebeast
 			if (hasPerk(PerkLib.Lycanthropy)) min += Math.round(minCap * perkv1(PerkLib.Lycanthropy) * 0.01);
@@ -11829,8 +11829,8 @@ use namespace CoC;
 					minCap += jewelryEffectMagnitude;
 				}
 			}
-			if (armorName == "lusty maiden's armor") min += 30;
-			if (armorName == "tentacled bark armor") min += 20;
+			if (armorName == "lusty maiden's armor") min += Math.round(minCap * 0.3);
+			if (armorName == "tentacled bark armor") min += Math.round(minCap * 0.2);
 			//Constrain values
 			if (min < 0) min = 0;
 			if (min > minCap) min = minCap;

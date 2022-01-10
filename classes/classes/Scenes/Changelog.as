@@ -108,8 +108,8 @@ package classes.Scenes
 			outputText("-Added minor QoL option for minion using PC's to let those minions that can attack on their own (wisp or using simplified turn setup) even when PC itself is stunned or under fear effect. Cuz... well they had orders and pc been stunned not magicaly cause them to not bale to follow orginal order to keep smashing enemy ^^\n");
 			outputText("-Diana and Luna forced partial/full body TF events won't proc if PC got TF immunity. As side effect it may cause their storyline progress to freeze.\n");
 			outputText("-Purity Blessing, Cold Blooded, Hot Blooded, Nymphomania perks, Omnibus' Gift, Luststick Adapted, Lycanthropy, Bimbo Body, Bro Body, Futa Form effects for rise/lower minimum lust been changed from flat values to % ones.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Bimbo Champagne, Blessing of Divine Agency - Fera, Anemone Arousal, Infested, Harpy Lipstick, Drunken Power, Shouldra that been left unsatisfied too long, cumOmeter (manticore), MilkOMeter (displacer beast), having (spider) eggs effects and lusty maiden's armor, tentacled bark armor also have minimumm lust increase turtned into % values from flat ones.\n");
+			outputText("-(temporal entry) Sometimes at the table that Madam using can be seen non-interactable as of now she-devil.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -119,7 +119,7 @@ package classes.Scenes
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
 			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
-			outputText("-Fixed Bugs: One of Ingnam Tavern food options having wrong price listed on menu, unique sex scenes accesable during Druid fusion, Wisp potentialy softlocking Mino King fight\n");/*ostatni punkt changelogu//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-Fixed Bugs: One of Ingnam Tavern food options having wrong price listed on menu, unique sex scenes accesable during Druid fusion, Wisp potentialy softlocking Mino King fight, selfsucking in masturbation menu restoring max 100 hunger\n");/*ostatni punkt changelogu//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
