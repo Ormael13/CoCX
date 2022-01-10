@@ -423,11 +423,11 @@ package classes.Scenes.Places{
 				var color:String = randomChoice("pale", "ghostly white", "light purple");
 				player.skin.base.color = color;
 				player.skin.base.color2 = color;
-				player.skinAdj = "slippery";
 				player.skinType = Skin.PLAIN;
 				if (player.skin.base.pattern != Skin.PATTERN_NONE) {
 					CoC.instance.transformations.SkinPatternNone.applyEffect(false);
 				}
+				player.skinAdj = "slippery";
 				player.tone = 0;
 				player.thickness = 20;
 				player.femininity = 80;

@@ -10274,7 +10274,7 @@ use namespace CoC;
 				femaleMindbreakerCounter++;
 			if (eyes.type == Eyes.MINDBREAKER)
 				femaleMindbreakerCounter++;
-			if (eyes.colour == (InCollection(eyes.colour, ["yellow", "orange", "light green"])))
+			if (InCollection(eyes.colour, ["yellow", "orange", "light green"]))
 				femaleMindbreakerCounter++;
 			if (ears.type == Ears.HUMAN)
 				femaleMindbreakerCounter++;
@@ -10323,7 +10323,7 @@ use namespace CoC;
 				MaleMindbreakerCounter++;
 			if (eyes.type == Eyes.MINDBREAKERMALE)
 				MaleMindbreakerCounter++;
-			if (eyes.colour == (InCollection(eyes.colour, ["yellow", "orange", "light green"])))
+			if (InCollection(eyes.colour, ["yellow", "orange", "light green"]))
 				MaleMindbreakerCounter++;
 			if (ears.type == Ears.HUMAN)
 				MaleMindbreakerCounter++;
