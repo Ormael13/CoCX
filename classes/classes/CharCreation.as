@@ -1969,28 +1969,24 @@ import coc.view.MainView;
 			outputText("\n\nAscension Perk Points: " + player.ascensionPerkPoints);
 			menu();
 			var btn:int = 0;
-
 			if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutationX)){
 				perkAOMXCheck(player.perkv1(PerkLib.AscensionAdditionalOrganMutationX) + 1, btn);
 			} else {
 				perkAOMXCheck(1, btn);
 			}
 			btn++
-
-			if (player.hasPerk(PerkLib.AscensionOneRaceToRuleThemAllX)){
-				perkAdvancedTrainingCheck(player.perkv1(PerkLib.AscensionOneRaceToRuleThemAllX) + 1, btn);
+			if (player.hasPerk(PerkLib.AscensionAdvTrainingX)){
+				perkAdvancedTrainingCheck(player.perkv1(PerkLib.AscensionAdvTrainingX) + 1, btn);
 			} else {
 				perkAdvancedTrainingCheck(1, btn);
 			}
 			btn++
-
 			if (player.hasPerk(PerkLib.AscensionBuildingPrestigeX)){
 				perkBPCheck(player.perkv1(PerkLib.AscensionBuildingPrestigeX) + 1, btn);
 			} else {
 				perkBPCheck(1, btn);
 			}
 			btn++
-
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && player.hasPerk(PerkLib.AscensionHybridTheory)) {
 				if (player.ascensionPerkPoints >= 20 && !player.hasPerk(PerkLib.AscensionCruelChimerasThesis)) addButton(btn, "C Chimera's T", perkCruelChimerasThesis).hint("Perk allowing you to receive race bonuses for one point less. (still req. min 8 race points to work).\n\nCost: 20 points");
 				else if (player.ascensionPerkPoints < 20) addButtonDisabled(btn, "C Chimera's T", "You do not have enough ascension perk points!");
@@ -2028,7 +2024,7 @@ import coc.view.MainView;
 			var NGPL:Array = [1, 3, 5, 7];
 			var pCost:int = 20;
 			if (tier > 5) {
-				addButtonDisabled(btn, "A.O.M. Rank "+ tier.toString(),"You have the highest tier already.");
+				addButtonDisabled(btn, "A.O.M. Rank "+ (tier-1).toString(),"You have the highest tier already.");
 			}
 			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < NGPL[tier - 1]) {
 				addButtonDisabled(btn, "A.O.M. Rank "+ tier.toString(),"You need to ascend a few more times.");
@@ -2047,7 +2043,7 @@ import coc.view.MainView;
 		private function perkBPCheck(tier:int, btn:int):void {
 			var pCost:int = 5;
 			if (tier > 6) {
-				addButtonDisabled(btn, "B.Prestige. Rank "+ tier.toString(),"You have the highest tier already.");
+				addButtonDisabled(btn, "B.Prestige. Rank "+ (tier-1).toString(),"You have the highest tier already.");
 			}
 			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < tier) {
 				addButtonDisabled(btn, "B.Prestige. Rank "+ tier.toString(),"You need to ascend once more.");
@@ -2062,8 +2058,8 @@ import coc.view.MainView;
 
 		private function perkAdvancedTrainingCheck(tier:int, btn:int):void {
 			var pCost:int = 25;
-			if (tier > 3) {
-				addButtonDisabled(btn, "Adv. Training Rank "+ tier.toString(),"You have the highest tier already.");
+			if (tier > 5) {
+				addButtonDisabled(btn, "Adv. Training Rank "+ (tier-1).toString(),"You have the highest tier already.");
 			}
 			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < tier) {
 				addButtonDisabled(btn, "Adv. Training  Rank "+ tier.toString(),"You need to ascend once more.");
@@ -2078,8 +2074,8 @@ import coc.view.MainView;
 
 		private function perkOneRaceToRuleThemAllCheck(tier:int, btn:int):void {
 			var pCost:int = 10;
-			if (tier > 3) {
-				addButtonDisabled(btn, "ORTRTA Rank "+ tier.toString(),"You have the highest tier already.");
+			if (tier > 5) {
+				addButtonDisabled(btn, "ORTRTA Rank "+ (tier-1).toString(),"You have the highest tier already.");
 			}
 			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < tier) {
 				addButtonDisabled(btn, "ORTRTA Rank "+ tier.toString(),"You need to ascend once more.");

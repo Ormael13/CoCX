@@ -2463,8 +2463,8 @@ public class PerkLib
 				"Constantly running around tending to the sick has made you better at taking care of yourself, increasing health regen.",
 				"You've chosen the 'Nurse' perk, increasing HP gains by 20%.");
 		public static const Nymphomania:PerkType = mk("Nymphomania", "Nymphomania",
-				"Raises minimum lust by up to 30%.",
-				"You've chosen the 'Nymphomania' perk.  Due to the incredible amount of corruption you've been exposed to, you've begun to live in a state of minor constant arousal.  Your minimum lust will be increased by 30%.");
+				"Raises minimum lust by up to 15%.",
+				"You've chosen the 'Nymphomania' perk.  Due to the incredible amount of corruption you've been exposed to, you've begun to live in a state of minor constant arousal.  Your minimum lust will be increased by 15%.");
 		public static const OctaAttackSmall:PerkType = mk("Octa Attack (Small)", "Octa Attack (Small)",
 				"Allows you to perform eight melee attacks with small weapons per round.",
 				"You've chosen the 'Octa Attack (Small)' perk. This allows you to make eight melee attacks with small weapons.");

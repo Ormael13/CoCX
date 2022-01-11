@@ -103,14 +103,14 @@ package classes.Scenes
 			outputText("-New tier 12 wisdom lvl-up perk: Greater shared power. Req. Elemental touch perk. Effect: Double the effect of Shared power.\n");
 			outputText("-New tier 13 wisdom lvl-up perk: Ecliptic Infusion. Req. Greater shared power perk. Effect: Your Infuse ability allows you to add and combine a corrupted or a purity normal elemental with a water, fire, earth or wind epic elemental. Doing so adds a purity or corruption scaling to your abilities.\n");
 			outputText("-New armor (by Ormael): Green Diving Suit - buyable at Pinchou shop. Cost 1800 gems, 25 armor, 5 magic resistance.\n");
-			outputText("-New Ascension perk: One Race To Rule Them All. Your racial paragon boost is increased. +(2x rank) to each stat per level and increase racial skill power by (25x rank)%. Max Rank: 3.\n");
-			outputText("-New Ascension perk: Advanced Training. Your gain as many as perk rank more stat points at each level up. Max Rank: 3.\n");
+			outputText("-New Ascension perk: One Race To Rule Them All. Your racial paragon boost is increased. +(2x rank) to each stat per level and increase racial skill power by (25x rank)%. Max Rank: 5.\n");
+			outputText("-New Ascension perk: Advanced Training. Your gain as many as perk rank more stat points at each level up. Max Rank: 5.\n");
 			outputText("-Added minor QoL option for minion using PC's to let those minions that can attack on their own (wisp or using simplified turn setup) even when PC itself is stunned or under fear effect. Cuz... well they had orders and pc been stunned not magicaly cause them to not bale to follow orginal order to keep smashing enemy ^^\n");
 			outputText("-Diana and Luna forced partial/full body TF events won't proc if PC got TF immunity. As side effect it may cause their storyline progress to freeze.\n");
 			outputText("-Purity Blessing, Cold Blooded, Hot Blooded, Nymphomania perks, Omnibus' Gift, Luststick Adapted, Lycanthropy, Bimbo Body, Bro Body, Futa Form effects for rise/lower minimum lust been changed from flat values to % ones.\n");
 			outputText("-Bimbo Champagne, Blessing of Divine Agency - Fera, Anemone Arousal, Infested, Harpy Lipstick, Drunken Power, Shouldra that been left unsatisfied too long, cumOmeter (manticore), MilkOMeter (displacer beast), having (spider) eggs effects and lusty maiden's armor, tentacled bark armor also have minimumm lust increase turtned into % values from flat ones.\n");
 			outputText("-(temporal entry) Sometimes at the table that Madam using can be seen non-interactable as of now she-devil.\n");
-			outputText("-\n");
+			outputText("-Some of minimum lust increase perks have lowered by half % values. Also manticore/displacer based 'hunger' will have % increase to min lust halfed.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

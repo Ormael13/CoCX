@@ -11756,8 +11756,8 @@ use namespace CoC;
 			var min:Number = 0;
 			var minCap:Number = maxLust();
 			//Bimbo body boosts minimum lust by 40
-			if (hasPerk(PerkLib.BimboBody) || hasPerk(PerkLib.BroBody) || hasPerk(PerkLib.FutaForm)) min += Math.round(minCap * 0.4);
-			if (hasStatusEffect(StatusEffects.BimboChampagne)) min += Math.round(minCap * 0.2);
+			if (hasPerk(PerkLib.BimboBody) || hasPerk(PerkLib.BroBody) || hasPerk(PerkLib.FutaForm)) min += Math.round(minCap * 0.2);
+			if (hasStatusEffect(StatusEffects.BimboChampagne)) min += Math.round(minCap * 0.1);
 			//Omnibus' Gift
 			if (hasPerk(PerkLib.OmnibusGift)) min += Math.round(minCap * 0.35);
 			//Easter bunny eggballs
@@ -11765,7 +11765,7 @@ use namespace CoC;
 			//Fera Blessing
 			if (hasStatusEffect(StatusEffects.BlessingOfDivineFera)) min += Math.round(minCap * 0.15);
 			//Nymph perk raises to 30
-			if (hasPerk(PerkLib.Nymphomania)) min += Math.round(minCap * 0.3);
+			if (hasPerk(PerkLib.Nymphomania)) min += Math.round(minCap * 0.15);
 			//Oh noes anemone!
 			if (hasStatusEffect(StatusEffects.AnemoneArousal)) min += Math.round(minCap * 0.3);
 			//Hot blooded perk raises min lust!
@@ -11793,25 +11793,25 @@ use namespace CoC;
 			//SHOULDRA BOOSTS
 			//+20
 			if(flags[kFLAGS.SHOULDRA_SLEEP_TIMER] <= -168 && flags[kFLAGS.URTA_QUEST_STATUS] != 0.75) {
-				min += Math.round(minCap * 0.2);
+				min += Math.round(minCap * 0.1);
 				if(flags[kFLAGS.SHOULDRA_SLEEP_TIMER] <= -216)
-					min += Math.round(minCap * 0.3);
+					min += Math.round(minCap * 0.15);
 			}
 			//cumOmeter
 			if (tailType == Tail.MANTICORE_PUSSYTAIL && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 25) {
-				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 25 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 20) min += Math.round(minCap * 0.1);
-				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 20 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 15) min += Math.round(minCap * 0.2);
-				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 15 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 10) min += Math.round(minCap * 0.3);
-				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 10 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 5) min += Math.round(minCap * 0.4);
-				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 5) min += Math.round(minCap * 0.5);
+				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 25 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 20) min += Math.round(minCap * 0.05);
+				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 20 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 15) min += Math.round(minCap * 0.1);
+				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 15 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 10) min += Math.round(minCap * 0.15);
+				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 10 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 5) min += Math.round(minCap * 0.2);
+				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 5) min += Math.round(minCap * 0.25);
 			}
 			//MilkOMeter
 			if (rearBody.type == RearBody.DISPLACER_TENTACLES && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 25) {
-				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 25 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 20) min += Math.round(minCap * 0.1);
-				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 20 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 15) min += Math.round(minCap * 0.2);
-				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 15 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 10) min += Math.round(minCap * 0.3);
-				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 10 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 5) min += Math.round(minCap * 0.4);
-				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 5) min += Math.round(minCap * 0.5);
+				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 25 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 20) min += Math.round(minCap * 0.05);
+				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 20 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 15) min += Math.round(minCap * 0.1);
+				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 15 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 10) min += Math.round(minCap * 0.15);
+				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 10 && flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] > 5) min += Math.round(minCap * 0.2);
+				if (flags[kFLAGS.SEXUAL_FLUIDS_LEVEL] <= 5) min += Math.round(minCap * 0.25);
 			}
 			//SPOIDAH BOOSTS
 			if(eggs() >= 20) {
