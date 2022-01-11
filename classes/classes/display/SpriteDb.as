@@ -453,6 +453,8 @@ public class SpriteDb {
 	public static function get s_kitsune_red(): Class {
 		return is8bit ? s_kitsune_red_8bit : s_kitsune_red_16bit;
 	}
+	[Embed(source="../../../res/sprites/Lacta_Bovine.png")]
+	public static var s_LactaBovine_16bit:Class;
 	[Embed(source="../../../res/sprites/lilium.png")]
 	public static var s_lilium_16bit:Class;
 //	[Embed(source="../../../res/sprites8bit/lilium-old.png")]
