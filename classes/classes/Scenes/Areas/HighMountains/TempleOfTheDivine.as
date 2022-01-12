@@ -1047,12 +1047,12 @@ use namespace CoC;
 				addButton(4, "Back", templemainmenu);
 			}
 			if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] == 1) {
-				outputText("As you wander down into the basement of the temple you find what looks like an old abandoned Atelier. Down there are two unfinished statues of what looks like a gargoyle. Either could be carved in any way you wish.\n\n");
+				outputText("As you wander down into the basement of the temple you find what looks like an old abandoned Atelier. Down there is a plinth, surrounded by various depictions of what looks like gargoyles. One could follow their examples and create a gargoyle of their own.\n\n");
 				flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE]++;
-				outputText("There are two statues, one looks to be made of alabaster and the other of marble. You're pretty much sure that alabaster would conduct and resist magic easier, although it is less resistant to physical blows, while one made out of marble would be a way stronger material for delivering strikes.");
+				outputText("There is a plinth, surrounded by what looks to be depictions of various gargoyles, of all materials and forms. You're pretty sure that using these as a refernce, you could craft a gargoyle statue of your own, albeit of raw stone.");
 				menu();
-				addButton(0, "Marble", chooseToWorkOnMarbleStatue);
-				addButton(1, "Alabaster", chooseToWorkOnAlabasterStatue);
+				addButton(0, "Begin", chooseToWorkOnStoneStatue);
+				addButton(4, "Back", templemainmenu);
 			}
 		}
 
@@ -1160,10 +1160,7 @@ use namespace CoC;
 			clearOutput();
 			outputText("This statue looks like ");
 			if (flags[kFLAGS.GARGOYLE_BODY_SCULPTING_PROGRESS] >= 11) outputText("a finished");
-			else outputText("an incomplete");
-			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText(" marble");
-			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText(" alabaster");
-			outputText(" gargoyle. This statue looks like ");
+			else outputText("an incomplete stone gargoyle. This statue looks like ");
 			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) == 1) outputText("it has a gorgeous female face");
 			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) == 2) outputText("it has a handsome male face");
 			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) == 3) outputText("it has a face that would look good on a male or a female");
@@ -1288,21 +1285,14 @@ use namespace CoC;
 			doNext(templemainmenu);
 		}
 
-		public function chooseToWorkOnMarbleStatue():void {
+		public function chooseToWorkOnStoneStatue():void {
 			flags[kFLAGS.GARGOYLE_BODY_MATERIAL] = 1;
 			flags[kFLAGS.GARGOYLE_BODY_SCULPTING_PROGRESS] = 1;
 			flags[kFLAGS.GARGOYLE_QUEST] = 1;
 			flags[kFLAGS.GARGOYLE_WINGS_TYPE] = 0;
 			currentStateOfStatue();
 		}
-		public function chooseToWorkOnAlabasterStatue():void {
-			flags[kFLAGS.GARGOYLE_BODY_MATERIAL] = 2;
-			flags[kFLAGS.GARGOYLE_BODY_SCULPTING_PROGRESS] = 1;
-			flags[kFLAGS.GARGOYLE_QUEST] = 1;
-			flags[kFLAGS.GARGOYLE_WINGS_TYPE] = 0;
-			currentStateOfStatue();
-		}
-
+		
 		public function SculptFrameAndFace():void {
 			menu();
 			addButton(0, "Feminine", SculptFeminineFrameAndFace).hint("Sculpt a feminine frame and face.");
