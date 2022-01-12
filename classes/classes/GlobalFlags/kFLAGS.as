@@ -2764,8 +2764,8 @@ public static const WARRIORS_RAGE_COMBAT_MODE:int                               
 public static const MET_YETI_AS_A_GIRL_FIRST_TIME:int                               = 2756;
 public static const UNKNOWN_FLAG_NUMBER_02757:int                                   = 2757;
 public static const UNKNOWN_FLAG_NUMBER_02758:int                                   = 2758;
-public static const UNKNOWN_FLAG_NUMBER_02759:int                                   = 2759;
-public static const UNKNOWN_FLAG_NUMBER_02760:int                                   = 2760;
+public static const MET_FORGEFATHER:int                                             = 2759; //Met ForgeFather out in Volcanic Crag
+public static const FORGEFATHER_MOVED_TO_TEMPLE:int                                 = 2760; //ForgeFather has moved into Temple of The Divine
 public static const UNKNOWN_FLAG_NUMBER_02761:int                                   = 2761;
 public static const UNKNOWN_FLAG_NUMBER_02762:int                                   = 2762;
 public static const UNKNOWN_FLAG_NUMBER_02763:int                                   = 2763;
