@@ -111,6 +111,12 @@ package classes.Scenes
 			outputText("-Bimbo Champagne, Blessing of Divine Agency - Fera, Anemone Arousal, Infested, Harpy Lipstick, Drunken Power, Shouldra that been left unsatisfied too long, cumOmeter (manticore), MilkOMeter (displacer beast), having (spider) eggs effects and lusty maiden's armor, tentacled bark armor also have minimumm lust increase turtned into % values from flat ones.\n");
 			outputText("-(temporal entry) Sometimes at the table that Madam using can be seen non-interactable as of now she-devil.\n");
 			outputText("-Some of minimum lust increase perks have lowered by half % values. Also manticore/displacer based 'hunger' will have % increase to min lust halfed.\n");
+			outputText("-New rare ascension perk -> Ascension: Hero's Legacy. Req. Ascension: Hero's Lineage and be at third ascension. It costs 25 asc points and will give 1 perk point, 1 super perk point and 5 stat points (scalable with NG tiers, for super perk it's reduced by 2) at the start of each new game.\n");
+			outputText("-New rare ascension perk -> Ascension: Bloodline Heritage. Req. Ascension: Hero's Legacy and be at fourth ascension. It costs 75 asc points and will give 1 perk point, 1 super perk point and 5 stat points (scalable with NG tiers, for super perk it's reduced by 3) at the start of each new game. Also would increase racial score bonus from any descendant's/bloodline perks by 2.\n");
+			outputText("-Displacer feeding special can be now used after PC used Pounce on enemy and won;t take combat turn then letting to pick one more action. (still can proc during Stranddle)\n");
+			outputText("-Displacer Metabolism mutation effect can proc (with bit lower magnitude) after drinking bottled milk from Marble, Isabella, Excellia or drinking bottle of sheep milk, succubus milk.\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -130,7 +136,6 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -206,9 +211,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -241,9 +244,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

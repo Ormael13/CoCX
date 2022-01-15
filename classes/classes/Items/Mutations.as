@@ -1432,6 +1432,7 @@ public final class Mutations extends MutationsHelper {
             outputText(player.modFem(90, 1));
             if (rand(3) == 0) outputText(player.modTone(20, 2));
         }
+		if (player.hasPerk(MutationsLib.DisplacerMetabolism)) player.displacerFeedFromBottle();
         player.refillHunger(20);
     }
 
@@ -3192,6 +3193,7 @@ public final class Mutations extends MutationsHelper {
         if (player.hasStatusEffect(StatusEffects.BottledMilk)) {
             player.addStatusValue(StatusEffects.BottledMilk, 1, (6 + rand(6)));
         } else player.createStatusEffect(StatusEffects.BottledMilk, 12, 0, 0, 0);
+		if (player.hasPerk(MutationsLib.DisplacerMetabolism)) player.displacerFeedFromBottle();
         player.refillHunger(20);
     }
 
@@ -11109,6 +11111,7 @@ public final class Mutations extends MutationsHelper {
         outputText("You swallow down the bottle of Isabella's milk.");
         if (player.fatigue > 0) outputText("  You feel much less tired! (-33 fatigue)");
         fatigue(-33);
+		if (player.hasPerk(MutationsLib.DisplacerMetabolism)) player.displacerFeedFromBottle();
         player.refillHunger(20);
     }
 
@@ -11121,6 +11124,7 @@ public final class Mutations extends MutationsHelper {
         HPChange((((player.level * 5) + 10) * (1 + player.newGamePlusMod())), true);
         dynStats("lus", 5);
         fatigue(-50);
+		if (player.hasPerk(MutationsLib.DisplacerMetabolism)) player.displacerFeedFromBottle();
         player.refillHunger(25);
     }
 
@@ -11849,6 +11853,7 @@ public final class Mutations extends MutationsHelper {
         fatigue(-180);
         dynStats("lus", -90, "cor", -2);
         player.addCurse("lib", 2, 1);
+		if (player.hasPerk(MutationsLib.DisplacerMetabolism)) player.displacerFeedFromBottle();
         player.refillHunger(40);
     }
 

@@ -11948,6 +11948,7 @@ public class Combat extends BaseContent {
                     monster.addStatusValue(StatusEffects.Pounce, 1, 3 - monster.statusEffectv1(StatusEffects.Pounce));
                 }
                 player.addStatusValue(StatusEffects.StraddleRoundLeft,1,monster.statusEffectv1(StatusEffects.Pounce)-3);
+				if (monster.hasStatusEffect(StatusEffects.DisplacerPlug)) monster.removeStatusEffect(StatusEffects.DisplacerPlug);
                 monster.removeStatusEffect(StatusEffects.Pounce);
                 outputText("You change position and straddle your opponent in order to prepare for mating.");
             } else if (monster.hasStatusEffect(StatusEffects.MysticWeb)) {
@@ -12200,7 +12201,7 @@ public class Combat extends BaseContent {
         outputText("You lick your lips in anticipation as you hold your victim's arms to the ground and plug your two tentacle suckers to [monster his] breasts. " +
                 "[monster he] struggles, flushing red as you flood [monster his] nipples with your lactation inducing venom and begin to force the delicious milk out of [monster his] chest. ");
         var DurationLeft:int = player.statusEffectv1(StatusEffects.StraddleRoundLeft);
-        monster.createStatusEffect(StatusEffects.DisplacerPlug, 1 + rand(3), DurationLeft, 0, 0);
+        monster.createStatusEffect(StatusEffects.DisplacerPlug, 1 + rand(3), 0, 0, 0);
         player.removeStatusEffect(StatusEffects.StraddleRoundLeft);
         monster.removeStatusEffect(StatusEffects.Straddle);
     }
@@ -13117,7 +13118,7 @@ public class Combat extends BaseContent {
         enemyAI();
     }
 
-    public function DisplacerFeed():void {
+    public function displacerFeedContinue():void {
         clearOutput();
         if (monster.lustVuln == 0) {
             outputText("You attempt to suck out the milk from your victims breast, but it has no effect!  Your foe clearly does not experience lust in the same way as you.\n\n");
@@ -13457,9 +13458,18 @@ public class Combat extends BaseContent {
         enemyAI();
     }
 
+    public function displacerCombatFeed():void {
+        clearOutput();
+        fatigue(50, USEFATG_PHYSICAL);
+        outputText("You lick your lips in anticipation as you hold your victim's arms to the ground and plug your two tentacle suckers to [the monster] breasts. She struggles, flushing red as you flood her nipples with your lactation inducing venom and begin to force the delicious milk out of her tits.\n\n");
+        monster.createStatusEffect(StatusEffects.DisplacerPlug, 1 + rand(3), 0, 0, 0);
+        addButton(0, "Next", SceneLib.combat.combatMenu, false);
+    }
+
     public function PussyLeggoMyEggo():void {
         clearOutput();
         outputText("You let your opponent free ending your grapple.\n\n");
+		if (monster.hasStatusEffect(StatusEffects.DisplacerPlug)) monster.removeStatusEffect(StatusEffects.DisplacerPlug);
         monster.removeStatusEffect(StatusEffects.Pounce);
         enemyAI();
     }
@@ -15279,4 +15289,4 @@ public class Combat extends BaseContent {
         return inteWisLibScale(player.lib, randomize);
     }
 }
-}
+}

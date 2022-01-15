@@ -5999,6 +5999,7 @@ public function rebirthFromBadEnd():void {
 				else player.createPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX,6,0,0,1);
 				player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage6);
 			}
+			if (player.hasPerk(PerkLib.AscensionHerosLineage)) player.ascensionPerkPoints -= 5;
 			doNext(doCamp);
 			return;
 		}

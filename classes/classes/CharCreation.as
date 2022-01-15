@@ -1734,9 +1734,19 @@ import coc.view.MainView;
 			if (player.hasPerk(PerkLib.PastLifeSlacker)) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.PastLifeSlut)) player.perkPoints += 1;
 			if (player.hasKeyItem("PerksOverJobs") >= 0) player.removeKeyItem("PerksOverJobs");
+			if (player.hasPerk(PerkLib.AscensionBloodlineHeritage)) {
+				player.perkPoints += 1 * player.newGamePlusMod();
+				player.superPerkPoints += 1 * (player.newGamePlusMod() - 3);
+				player.statPoints += 5 * player.newGamePlusMod();
+			}
 			if (player.hasPerk(PerkLib.AscensionHerosHeritage)) {
 				player.perkPoints += 3 * player.newGamePlusMod();
 				player.statPoints += 15 * player.newGamePlusMod();
+			}
+			if (player.hasPerk(PerkLib.AscensionHerosLegacy)) {
+				player.perkPoints += 1 * player.newGamePlusMod();
+				player.superPerkPoints += 1 * (player.newGamePlusMod() - 2);
+				player.statPoints += 5 * player.newGamePlusMod();
 			}
 			if (player.hasPerk(PerkLib.AscensionHerosLineage)) {
 				player.perkPoints += 2 * player.newGamePlusMod();
@@ -1981,6 +1991,14 @@ import coc.view.MainView;
 				perkAdvancedTrainingCheck(1, btn);
 			}
 			btn++
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3 && player.hasPerk(PerkLib.AscensionHerosLegacy)) {
+				if (player.ascensionPerkPoints >= 75 && !player.hasPerk(PerkLib.AscensionBloodlineHeritage)) addButton(btn, "BloodHeritage", perkBloodlineHeritage).hint("Perk giving you an additional 1 perk point, 1 super perk point and 5 stat points at the start of the game (scaling with current NG tier, for super perk points amount is reduced by 3). Also would increase any bloodline perk bonus by 1.\n\nCost: 75 points");
+				else if (player.ascensionPerkPoints < 75) button(btn).disable("You do not have enough ascension perk points!");
+				else addButtonDisabled(btn, "BloodHeritage", "You already bought Bloodline Heritage perk.");
+			}
+			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && !player.hasPerk(PerkLib.AscensionHerosLegacy)) addButtonDisabled(btn, "BloodHeritage", "You need to buy Hero's Legacy perk first.");
+			else addButtonDisabled(btn, "BloodHeritage", "You need ascend more times to buy this perk.");
+			btn++;
 			if (player.hasPerk(PerkLib.AscensionBuildingPrestigeX)){
 				perkBPCheck(player.perkv1(PerkLib.AscensionBuildingPrestigeX) + 1, btn);
 			} else {
@@ -2000,8 +2018,8 @@ import coc.view.MainView;
 			else addButtonDisabled(btn, "HeroHeritage", "You already bought Hero's Heritage perk.");
 			btn++;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && player.hasPerk(PerkLib.AscensionHerosHeritage)) {
-				if (player.ascensionPerkPoints >= 5 && !player.hasPerk(PerkLib.AscensionHerosLineage)) addButton(btn, "HeroLineage", perkHerosLineage).hint("Perk giving you an additional 2 perk points and 10 stat points at the start of the game (scaling with current NG tier).\n\nCost: 5 points");
-				else if (player.ascensionPerkPoints < 5) button(btn).disable("You do not have enough ascension perk points!");
+				if (player.ascensionPerkPoints >= 10 && !player.hasPerk(PerkLib.AscensionHerosLineage)) addButton(btn, "HeroLineage", perkHerosLineage).hint("Perk giving you an additional 2 perk points and 10 stat points at the start of the game (scaling with current NG tier).\n\nCost: 10 points");
+				else if (player.ascensionPerkPoints < 10) button(btn).disable("You do not have enough ascension perk points!");
 				else addButtonDisabled(btn, "HeroLineage", "You already bought Hero's Lineage perk.");
 			}
 			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && !player.hasPerk(PerkLib.AscensionHerosHeritage)) addButtonDisabled(btn, "HeroLineage", "You need to buy Hero's Heritage perk first.");
@@ -2017,6 +2035,14 @@ import coc.view.MainView;
 				perkOneRaceToRuleThemAllCheck(1, btn);
 			}
 			btn++
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && player.hasPerk(PerkLib.AscensionHerosLineage)) {
+				if (player.ascensionPerkPoints >= 25 && !player.hasPerk(PerkLib.AscensionHerosLegacy)) addButton(btn, "HeroLegacy", perkHerosLegacy).hint("Perk giving you an additional 1 perk point, 1 super perk point and 5 stat points at the start of the game (scaling with current NG tier, for super perk points amount is reduced by 2).\n\nCost: 25 points");
+				else if (player.ascensionPerkPoints < 25) button(btn).disable("You do not have enough ascension perk points!");
+				else addButtonDisabled(btn, "HeroLegacy", "You already bought Hero's Legacy perk.");
+			}
+			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && !player.hasPerk(PerkLib.AscensionHerosLineage)) addButtonDisabled(btn, "HeroLegacy", "You need to buy Hero's Lineage perk first.");
+			else addButtonDisabled(btn, "HeroLegacy", "You need ascend more times to buy this perk.");
+			btn++;
 			addButton(14, "Back", ascensionMenu);
 		}
 
@@ -2097,6 +2123,13 @@ import coc.view.MainView;
 			doNext(rarePerks1);
 		}
 
+		private function perkBloodlineHeritage():void {
+			player.ascensionPerkPoints -= 75;
+			player.createPerk(PerkLib.AscensionBloodlineHeritage,0,0,0,1);
+			clearOutput();
+			outputText("You gained Bloodline Heritage perk.");
+			doNext(rarePerks1);
+		}
 		private function perkCruelChimerasThesis():void {
 			player.ascensionPerkPoints -= 20;
 			player.createPerk(PerkLib.AscensionCruelChimerasThesis,0,0,0,1);
@@ -2111,8 +2144,15 @@ import coc.view.MainView;
 			outputText("You gained Hero's Heritage perk.");
 			doNext(rarePerks1);
 		}
+		private function perkHerosLegacy():void {
+			player.ascensionPerkPoints -= 25;
+			player.createPerk(PerkLib.AscensionHerosLegacy,0,0,0,1);
+			clearOutput();
+			outputText("You gained Hero's Legacy perk.");
+			doNext(rarePerks1);
+		}
 		private function perkHerosLineage():void {
-			player.ascensionPerkPoints -= 5;
+			player.ascensionPerkPoints -= 10;
 			player.createPerk(PerkLib.AscensionHerosLineage,0,0,0,1);
 			clearOutput();
 			outputText("You gained Hero's Lineage perk.");
