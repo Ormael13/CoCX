@@ -478,7 +478,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			spriteSelect(23);
 			clearOutput();
 			if (player.hasKeyItem("Torch") > 0) {
-				outputText("<b>You already have Torch.</b>");
+				outputText("<b>Trying to cope with that pyromania? You already have a torch!</b>");
 				doNext(miscMenu);
 				return;
 			}

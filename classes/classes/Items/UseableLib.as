@@ -80,9 +80,9 @@ use namespace CoC;
 			"An vial of E-Ichor.",
 			"You look at the vial of substance called E-Ichor. It occasionally glows gently in your hand.  It may be useful for taking on mutations.");
 		//MISCELLANEOUS
-		public const CONDOM :SimpleUseable = new SimpleUseable("Condom ", "Condom", "a packet of condom", 6,
-			"This wrapper contains a latex condom that can be worn over penis. It's designed to prevent pregnancy most of the time. Can be used in certain sex scenes.",
-			"You look at the unopened packet of condom.  If applicable, you can use the condom to prevent pregnancy most of the time.");
+		public const CONDOM :SimpleUseable = new SimpleUseable("Condom ", "Condom", "a condom packet", 6,
+			"This wrapper contains a single latex condom that can be worn over the penis. It's designed to prevent pregnancy... most of the time. Can be used in certain sex scenes.",
+			"You look at the unopened condom packet.  If applicable, you can use the condom to prevent pregnancy. Most of the time, anyway.");
 		public const DEMSKLL:SimpleUseable = new SimpleUseable("DemSkll", "DemonSkull", "a demon skull", 50, 
 			"A skull taken from a slain demon.",
 			"You look at the demon skull.  A pair of horns protrude from the skull.  You admire the overall frame of the skull yet you find no obvious uses for it.");
@@ -94,7 +94,7 @@ use namespace CoC;
 			"You look at Energy Core.  It's component used to make goblin tech.");
 		public const FIMPSKL:SimpleUseable = new SimpleUseable("FImpSkl", "FImpSkul", "a feral imp skull", 25, 
 			"A skull taken from a slain feral imp.",
-			"You look at the feral imp skull.  A two pairs of horns protrude from the deformed skull.  You admire the overall frame of the skull yet you find no obvious uses for it.");
+			"You look at the feral imp skull.  A pair of horns protrude from the deformed skull. You admire the overall frame of the skull yet you find no obvious uses for it.");
 		public const GOBOEAR:SimpleUseable = new SimpleUseable("GoboEar", "GoblinEar", "a goblin ear", 25, 
 			"A goblin ear taken from a slain goblin.",
 			"You look at the goblin ear.  You admire the overall curve of the ear yet you find no obvious uses for it.");
@@ -103,7 +103,7 @@ use namespace CoC;
 			"", SceneLib.forest.kitsuneScene.kitsuneStatue);
 		public const IMPSKLL:SimpleUseable = new SimpleUseable("ImpSkll", "ImpSkull", "an imp skull", 25, 
 			"A skull taken from a slain imp.",
-			"You look at the imp skull.  A pair of horns protrude from the skull.  You admire the overall frame of the skull yet you find no obvious uses for it.");
+			"You look at the imp skull.  A pair of horns protrude from the skull. You admire the overall frame of the skull, yet you find no obvious uses for it.");
 		public const MECHANI:SimpleUseable = new SimpleUseable("Mechani", "Mechanism", "a Mechanism", 1200, 
 			"A complex set of gears and gyros.",
 			"You look at Mechanism.  It's component used to make goblin tech.");
