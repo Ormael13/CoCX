@@ -557,7 +557,7 @@ use namespace CoC;
 			if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] < 2) {
 			//Weapon Rack
 			if (player.hasKeyItem("Equipment Rack - Weapons") >= 0) {
-				outputText("There's a weapon rack set up here, set up to hold up to nine various weapons.");
+				outputText("There's a weapon rack set up here, able to hold up to nine various weapons.");
 				addButton(7, "W.Rack Put", pickItemToPlaceInWeaponRack);
 				if (weaponRackDescription()) addButton(8, "W.Rack Take", pickItemToTakeFromWeaponRack);
 				outputText("\n\n");
@@ -608,7 +608,7 @@ use namespace CoC;
 			}
 			//Weapon Rack
 			if (player.hasKeyItem("Equipment Rack - Weapons") >= 0) {
-				outputText("There's a weapon rack set up here, set up to hold up to nine various weapons.");
+				outputText("There's a weapon rack set up here, able to hold up to nine various weapons.");
 				addButton(7, "W.Rack Put", pickItemToPlaceInWeaponRack2).hint("Put weapon on the rack.");
 				if (weaponRackDescription()) addButton(8, "W.Rack Take", pickItemToTakeFromWeaponRack2).hint("Take weapon from the rack.");
 				outputText("\n\n");

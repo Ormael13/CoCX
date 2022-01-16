@@ -21,8 +21,8 @@ import classes.Player;
 		override public function canUse():Boolean{
 			if (game.player.tailType == Tail.DEMONIC){return true}
 			outputText(" Just where do you even plan to put this thing on? You do not have a demon tail");
-			if (game.player.tailType == Tail.NONE) outputText(" let alone a tail at all");
-			outputText("and this ring is way to wide for your finger!");
+			if (game.player.tailType == Tail.NONE) outputText(", let alone a tail at all");
+			outputText(", this ring is far too wide for your finger!");
 			return false;
 		}
 

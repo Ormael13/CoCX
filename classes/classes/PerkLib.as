@@ -1789,7 +1789,7 @@ public class PerkLib
 				"You've chosen the 'Hecta Attack (Small)' perk. This allows you to make seven melee attacks with small weapons.");
 		public static const Heroism:PerkType = mk("Heroism", "Heroism",
 				"Allows you to deal double damage toward boss or gigant sized enemies.",
-				"You've chosen the 'Heroism' perk. Due to your heroic stance you can now deal more damage toward boss or gigant type enemies.");
+				"You've chosen the 'Heroism' perk. Due to your heroic stance you can now deal more damage toward boss or giant type enemies.");
 		public static const HexaAttack:PerkType = mk("Hexa Attack", "Hexa Attack",
 				"Allows you to perform six melee attacks with normal sized weapons per round.",
 				"You've chosen the 'Hexa Attack' perk. This allows you to make six melee attacks with non-large weapons.")

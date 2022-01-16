@@ -379,7 +379,7 @@ private function useSandTarpsHands():void {
 			//[no balls:
 			if(player.balls == 0) outputText("\n\nThe sandtrap glides its hand up and down your [cock], picking up a warm smooth rhythm.");
 			//Balls:
-			else outputText("\n\nThe sandtrap glides its hand up and down your [cock], picking up a warm smooth rhythm as it gently cups your [balls] with its free hand.]  It slows down intermittently to move its palm around your length, letting every inch of your dick feel the tips of its delicate fingers.");
+			else outputText("\n\nThe sandtrap glides its hand up and down your [cock], picking up a warm smooth rhythm as it gently cups your [balls] with its free hand. It slows down intermittently to move its palm around your length, letting every inch of your dick feel the tips of its delicate fingers.");
 		}
 		//Cock more than 16 inches: 
 		else outputText("\n\nThe sandtrap quickly comes to the realisation it needs both hands for this.  Still cupping your behind, it moves one oily hand up the top end of your massive shaft, while the other works the other half.  You sigh with deep satisfaction, enjoying the all-too-rare sensation of having every inch of your [cock] immersed in pleasure.  The creature screws its face up and looks away in distaste at the size of your straining dick, which is in danger of poking it in the nose.  As you enjoy the warm, slippery sensation inundating you, you find you couldn't care less what it thinks.");
