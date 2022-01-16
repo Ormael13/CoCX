@@ -115,8 +115,8 @@ package classes.Scenes
 			outputText("-New rare ascension perk -> Ascension: Bloodline Heritage. Req. Ascension: Hero's Legacy and be at fourth ascension. It costs 75 asc points and will give 1 perk point, 1 super perk point and 5 stat points (scalable with NG tiers, for super perk it's reduced by 3) at the start of each new game. Also would increase racial score bonus from any descendant's/bloodline perks by 2.\n");
 			outputText("-Displacer feeding special can be now used after PC used Pounce on enemy and won;t take combat turn then letting to pick one more action. (still can proc during Stranddle)\n");
 			outputText("-Displacer Metabolism mutation effect can proc (with bit lower magnitude) after drinking bottled milk from Marble, Isabella, Excellia or drinking bottle of sheep milk, succubus milk.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Strawberry shortcake & Big chocolate cake items would now refill 10 hunger.\n");
+			outputText("-Tons of Pyro text corrections in many places.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -2897,7 +2897,7 @@ package classes.Scenes
 			outputText("-New Body part: Goat Ears Req. Goat Horns\n");
 			outputText("-New Body part: Devil Fangs Req. Goat Ears\n");
 			outputText("-New Body part: Devil Eyes Req. Devil Fangs\n");
-			outputText("-New magical special: Infernal flare Req. 10+ points in Devil score. Attack using corrupted flames dealing bonus dmg to enemeis weak to fire or pure enemies.\n");
+			outputText("-New magical special: Infernal flare Req. 10+ points in Devil score. Attack using corrupted flames dealing bonus dmg to enemies weak to fire or pure enemies.\n");
 			outputText("-New magical special: Maleficium Req. 10+ pts in Devil score. Rise spellpower by 100% and lower by 50% lust resistance. Using this special cost 50 lust and it last for 10 turns.\n");
 			outputText("-New TF item: Onikiri Sake. Can be gained as a drop from Izumi fight. Using it will turn PC into Oni. Half Oni/Oni (scalable): +50/100 to max Str, +30/60 to max Tou, -10/20 to max Int, +20/40 to max Wis, +10/15 to min and max Sensibility.\n");
 			outputText("-New body part - legs: Oni Legs No Req.\n");

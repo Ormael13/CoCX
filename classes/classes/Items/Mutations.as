@@ -172,6 +172,7 @@ public final class Mutations extends MutationsHelper {
             player.tallness -= 1 + rand(3);
             if (player.tallness < 42) player.tallness = 42;
         }
+		player.refillHunger(10);
     }
 
     //Big chocolate cake
@@ -183,6 +184,7 @@ public final class Mutations extends MutationsHelper {
             player.tallness += 1 + rand(3);
             if (player.tallness > 132) player.tallness = 132;
         }
+		player.refillHunger(10);
     }
 
     //Airweed
