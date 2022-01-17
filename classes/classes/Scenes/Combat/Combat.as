@@ -7520,6 +7520,7 @@ public class Combat extends BaseContent {
                 dynStats("lus", 3);
             }
         }
+		if (player.weapon == weapons.R_STAFF) damage *= 1.2;
 		if (player.hasPerk(PerkLib.EclipticInfusion) && player.perkv3(PerkLib.ElementalBody) > 0) {
 			if (player.perkv3(PerkLib.ElementalBody) == 1) damage *= 1 + (0.01 * player.cor);
 			else damage *= 1 + (0.01 * (100 - player.cor));
@@ -7616,6 +7617,7 @@ public class Combat extends BaseContent {
                 dynStats("lus", 3);
             }
         }
+		if (player.weapon == weapons.S_STAFF) damage *= 1.2;
 		if (player.hasPerk(PerkLib.EclipticInfusion) && player.perkv3(PerkLib.ElementalBody) > 0) {
 			if (player.perkv3(PerkLib.ElementalBody) == 1) damage *= 1 + (0.01 * player.cor);
 			else damage *= 1 + (0.01 * (100 - player.cor));
@@ -7707,6 +7709,7 @@ public class Combat extends BaseContent {
                 dynStats("lus", 3);
             }
         }
+		if (player.weapon == weapons.T_STAFF) damage *= 1.2;
 		if (player.hasPerk(PerkLib.EclipticInfusion) && player.perkv3(PerkLib.ElementalBody) > 0) {
 			if (player.perkv3(PerkLib.ElementalBody) == 1) damage *= 1 + (0.01 * player.cor);
 			else damage *= 1 + (0.01 * (100 - player.cor));
@@ -7795,6 +7798,7 @@ public class Combat extends BaseContent {
                 dynStats("lus", 3);
             }
         }
+		if (player.weapon == weapons.A_STAFF) damage *= 1.2;
 		if (player.hasPerk(PerkLib.EclipticInfusion) && player.perkv3(PerkLib.ElementalBody) > 0) {
 			if (player.perkv3(PerkLib.ElementalBody) == 1) damage *= 1 + (0.01 * player.cor);
 			else damage *= 1 + (0.01 * (100 - player.cor));
@@ -15291,4 +15295,4 @@ public class Combat extends BaseContent {
         return inteWisLibScale(player.lib, randomize);
     }
 }
-}
+}
