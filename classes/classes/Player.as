@@ -787,9 +787,12 @@ use namespace CoC;
 			}
 			if (vehiclesName == "Howling Banshee Mech") {
 				armorDef += 15;
-				if (hasKeyItem("Upgraded Armor plating 1.0") >= 0) armorDef += 8;
-				if (hasKeyItem("Upgraded Armor plating 2.0") >= 0) armorDef += 16;
-				if (hasKeyItem("Upgraded Armor plating 3.0") >= 0) armorDef += 24;
+				if (hasKeyItem("Upgraded HB Armor Plating and Leather Insulation") >= 0) {
+					if (keyItemv1("Upgraded HB Armor Plating and Leather Insulation") == 1) armorDef += 8;
+					if (keyItemv1("Upgraded HB Armor Plating and Leather Insulation") == 2) armorDef += 16;
+					if (keyItemv1("Upgraded HB Armor Plating and Leather Insulation") == 3) armorDef += 24;
+					if (keyItemv1("Upgraded HB Armor Plating and Leather Insulation") == 3) armorDef += 32;
+				}
 			}
 			armorDef = Math.round(armorDef);
 			//Berzerking removes armor
@@ -994,9 +997,12 @@ use namespace CoC;
 			}
 			if (vehiclesName == "Howling Banshee Mech") {
 				armorMDef += 15;
-				if (hasKeyItem("Upgraded Armor plating 1.0") >= 0) armorMDef += 8;
-				if (hasKeyItem("Upgraded Armor plating 2.0") >= 0) armorMDef += 16;
-				if (hasKeyItem("Upgraded Armor plating 3.0") >= 0) armorMDef += 24;
+				if (hasKeyItem("Upgraded HB Armor Plating and Leather Insulation") >= 0) {
+					if (keyItemv2("Upgraded HB Armor Plating and Leather Insulation") == 1) armorMDef += 8;
+					if (keyItemv2("Upgraded HB Armor Plating and Leather Insulation") == 2) armorMDef += 16;
+					if (keyItemv2("Upgraded HB Armor Plating and Leather Insulation") == 3) armorMDef += 24;
+					if (keyItemv2("Upgraded HB Armor Plating and Leather Insulation") == 3) armorMDef += 32;
+				}
 			}
 			armorMDef = Math.round(armorMDef);
 			//Berzerking/Lustzerking removes magic resistance
@@ -1106,7 +1112,7 @@ use namespace CoC;
 		//Free off-hand for spellcasting and etc.
 		public function isHavingFreeOffHand():Boolean
 		{
-			return !isShieldsForShieldBash() || shield != game.shields.BATTNET || shield != game.shields.Y_U_PAN;
+			return !isShieldsForShieldBash() && shield != game.shields.BATTNET && shield != game.shields.Y_U_PAN;
 		}
 		public function isNotHavingShieldCuzPerksNotWorkingOtherwise():Boolean
 		{
