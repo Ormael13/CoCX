@@ -41,7 +41,7 @@ public function repeatPlainsEnc():void {
 	clearOutput();
 	outputText("As you explore the plains area, you run into ");
 	if (flags[kFLAGS.DIANA_AFFECTION] >= 95) outputText("Diana");
-	else outputText("an unicorn");
+	else outputText("a unicorn");
 	outputText(".\n\nAt first she doesn’t notice you, given how busy she is examining a flower. You walk closer to greet her but the sound of your feet on dry leaves immediately alerts her. She turns over with a startled expression as she grabs her staff to defend herself, lunging for a set of preemptive strikes as she begins to attack you.\n\n");
 	outputText("\"<i>Eeeeep! Go away, you fiend! ");
 	if (flags[kFLAGS.DIANA_FOLLOWER] > 0) outputText("You stained my soul enough as It is. I don’t want any more of your corruption!");
@@ -58,14 +58,14 @@ public function repeatBattlefieldEnc():void {
 	outputText("As you explore the battlefield area, you run into ");
 	if (flags[kFLAGS.DIANA_AFFECTION] >= 95) outputText("Diana");
 	else outputText("an unicorn");
-	outputText(".\n\nAt first she doesn’t notice you, she’s to busy examining a flower. You walk to her to greet her, but the sound of your feet on dry leaves immediately alerts her. She turns over with a startled expression and grabs her staff to defend herself, lunging for a set of preemptive strikes as she begins to attack you.\n\n");
+	outputText(".\n\nAt first she doesn’t notice you, she’s too busy examining a flower. You walk to her to greet her, but the sound of your feet on dry leaves immediately alerts her. She turns over with a startled expression and grabs her staff to defend herself, lunging for a set of preemptive strikes as she begins to attack you.\n\n");
 	outputText("\"<i>Eeeeep! Go away, you fiend! ");
 	if (flags[kFLAGS.DIANA_FOLLOWER] > 0) outputText("You stained my soul enough as It is. I don’t want any more your corruption!");
-	else outputText("I’m not handing over my virginity to you");
+	else outputText("I’m not handing over my virginity to you!");
 	outputText("!!!!!</i>\"\n\nWell seems you got a fight on your hands.\n\n");
 	outputText("You are under attack by a");
 	if (flags[kFLAGS.DIANA_LVL_UP] >= 8) outputText("n alicorn!");
-	else outputText("n unicorn!");
+	else outputText(" unicorn!");
 	startCombat(new Diana());
 	doNext(playerMenu);
 }
