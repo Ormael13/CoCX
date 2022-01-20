@@ -111,6 +111,15 @@ package classes.Scenes
 			outputText("-Bimbo Champagne, Blessing of Divine Agency - Fera, Anemone Arousal, Infested, Harpy Lipstick, Drunken Power, Shouldra that been left unsatisfied too long, cumOmeter (manticore), MilkOMeter (displacer beast), having (spider) eggs effects and lusty maiden's armor, tentacled bark armor also have minimumm lust increase turtned into % values from flat ones.\n");
 			outputText("-(temporal entry) Sometimes at the table that Madam using can be seen non-interactable as of now she-devil.\n");
 			outputText("-Some of minimum lust increase perks have lowered by half % values. Also manticore/displacer based 'hunger' will have % increase to min lust halfed.\n");
+			outputText("-New rare ascension perk -> Ascension: Hero's Legacy. Req. Ascension: Hero's Lineage and be at third ascension. It costs 25 asc points and will give 1 perk point, 1 super perk point and 5 stat points (scalable with NG tiers, for super perk it's reduced by 2) at the start of each new game.\n");
+			outputText("-New rare ascension perk -> Ascension: Bloodline Heritage. Req. Ascension: Hero's Legacy and be at fourth ascension. It costs 75 asc points and will give 1 perk point, 1 super perk point and 5 stat points (scalable with NG tiers, for super perk it's reduced by 3) at the start of each new game. Also would increase racial score bonus from any descendant's/bloodline perks by 2.\n");
+			outputText("-Displacer feeding special can be now used after PC used Pounce on enemy and won;t take combat turn then letting to pick one more action. (still can proc during Stranddle)\n");
+			outputText("-Displacer Metabolism mutation effect can proc (with bit lower magnitude) after drinking bottled milk from Marble, Isabella, Excellia or drinking bottle of sheep milk, succubus milk.\n");
+			outputText("-Strawberry shortcake & Big chocolate cake items would now refill 10 hunger.\n");
+			outputText("-Tons of Pyro text corrections in many places.\n");
+			outputText("-New melee weapon (by Ormael): Amphyst/Ruby/Sapphire/Topaz Staff - buyable in Tel'Adre Tower. 2 atk, costs 240 gems, increase matching type of element attacks (sapphire > ice and etc.) by 40%, Wizard's Focus (20%), staff type weapon.\n");
+			outputText("-Water Dragon Breath dmg scaling now with progress in Dao of Water too.\n");
+			outputText("-1 new achievment. (shadow one)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -119,7 +128,9 @@ package classes.Scenes
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
 			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
-			outputText("-Fixed Bugs: One of Ingnam Tavern food options having wrong price listed on menu, unique sex scenes accesable during Druid fusion, Wisp potentialy softlocking Mino King fight, selfsucking in masturbation menu restoring max 100 hunger\n");/*ostatni punkt changelogu//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-Fixed Bugs: One of Ingnam Tavern food options having wrong price listed on menu, unique sex scenes accesable during Druid fusion, Wisp potentialy softlocking Mino King fight, selfsucking in masturbation menu restoring max 100 hunger, Swift Casting not usable when having Giant's Grip and Large weapon, White or Black magic buffs autocastable when having perk that disable use of white/black magic, ");
+			outputText("putting B. Sword after picking Ecalibur disabling option to pick sword at Temple\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
@@ -130,7 +141,6 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -206,9 +216,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -241,13 +249,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -2897,7 +2898,7 @@ package classes.Scenes
 			outputText("-New Body part: Goat Ears Req. Goat Horns\n");
 			outputText("-New Body part: Devil Fangs Req. Goat Ears\n");
 			outputText("-New Body part: Devil Eyes Req. Devil Fangs\n");
-			outputText("-New magical special: Infernal flare Req. 10+ points in Devil score. Attack using corrupted flames dealing bonus dmg to enemeis weak to fire or pure enemies.\n");
+			outputText("-New magical special: Infernal flare Req. 10+ points in Devil score. Attack using corrupted flames dealing bonus dmg to enemies weak to fire or pure enemies.\n");
 			outputText("-New magical special: Maleficium Req. 10+ pts in Devil score. Rise spellpower by 100% and lower by 50% lust resistance. Using this special cost 50 lust and it last for 10 turns.\n");
 			outputText("-New TF item: Onikiri Sake. Can be gained as a drop from Izumi fight. Using it will turn PC into Oni. Half Oni/Oni (scalable): +50/100 to max Str, +30/60 to max Tou, -10/20 to max Int, +20/40 to max Wis, +10/15 to min and max Sensibility.\n");
 			outputText("-New body part - legs: Oni Legs No Req.\n");

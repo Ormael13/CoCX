@@ -5703,8 +5703,6 @@ public class Combat extends BaseContent {
                 outputText("Your attacks are deflected or blocked by [monster a] [monster name].");
             }
 			else {
-                var vbladeeffect:Boolean = false;
-                var vbladeeffectChance:int = 1;
                 if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= historyFighterBonus();
                 if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
                 if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
@@ -5721,9 +5719,13 @@ public class Combat extends BaseContent {
                 if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
                 if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
                 if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
-                if (player.weapon == weapons.VBLADE && (rand(100) < vbladeeffectChance)) {
-                    vbladeeffect = true;
-                    damage *= 5;
+                if (player.weapon == weapons.VBLADE) {
+                    var vbladeeffect:Boolean = false;
+					var vbladeeffectChance:int = 1;
+					if (rand(100) < vbladeeffectChance) { 
+						vbladeeffect = true;
+						damage *= 5;
+					}
                 }
                 //FERAL COMBAT
                 if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon())) {
@@ -6098,7 +6100,7 @@ public class Combat extends BaseContent {
             WrathWeaponsProc();
             heroBaneProc(damage);
             EruptingRiposte();
-            if (player.hasPerk(PerkLib.SwiftCasting) && player.isOneHandedWeapons() && player.isHavingFreeOffHand() && flags[kFLAGS.ELEMENTAL_MELEE] > 0) {
+            if (player.hasPerk(PerkLib.SwiftCasting) && (player.isOneHandedWeapons() || (player.weaponSpecials("Large") && player.hasPerk(PerkLib.GigantGrip))) && player.isHavingFreeOffHand() && flags[kFLAGS.ELEMENTAL_MELEE] > 0) {
                 if (flags[kFLAGS.ELEMENTAL_MELEE] == 1 && CombatAbilities.Whitefire.isUsable) {
                     outputText("\n\n");
                     CombatAbilities.Whitefire.perform();
@@ -7518,6 +7520,7 @@ public class Combat extends BaseContent {
                 dynStats("lus", 3);
             }
         }
+		if (player.weapon == weapons.R_STAFF) damage *= 1.4;
 		if (player.hasPerk(PerkLib.EclipticInfusion) && player.perkv3(PerkLib.ElementalBody) > 0) {
 			if (player.perkv3(PerkLib.ElementalBody) == 1) damage *= 1 + (0.01 * player.cor);
 			else damage *= 1 + (0.01 * (100 - player.cor));
@@ -7614,6 +7617,7 @@ public class Combat extends BaseContent {
                 dynStats("lus", 3);
             }
         }
+		if (player.weapon == weapons.S_STAFF) damage *= 1.4;
 		if (player.hasPerk(PerkLib.EclipticInfusion) && player.perkv3(PerkLib.ElementalBody) > 0) {
 			if (player.perkv3(PerkLib.ElementalBody) == 1) damage *= 1 + (0.01 * player.cor);
 			else damage *= 1 + (0.01 * (100 - player.cor));
@@ -7705,6 +7709,7 @@ public class Combat extends BaseContent {
                 dynStats("lus", 3);
             }
         }
+		if (player.weapon == weapons.T_STAFF) damage *= 1.4;
 		if (player.hasPerk(PerkLib.EclipticInfusion) && player.perkv3(PerkLib.ElementalBody) > 0) {
 			if (player.perkv3(PerkLib.ElementalBody) == 1) damage *= 1 + (0.01 * player.cor);
 			else damage *= 1 + (0.01 * (100 - player.cor));
@@ -7793,6 +7798,7 @@ public class Combat extends BaseContent {
                 dynStats("lus", 3);
             }
         }
+		if (player.weapon == weapons.A_STAFF) damage *= 1.4;
 		if (player.hasPerk(PerkLib.EclipticInfusion) && player.perkv3(PerkLib.ElementalBody) > 0) {
 			if (player.perkv3(PerkLib.ElementalBody) == 1) damage *= 1 + (0.01 * player.cor);
 			else damage *= 1 + (0.01 * (100 - player.cor));
@@ -11948,6 +11954,7 @@ public class Combat extends BaseContent {
                     monster.addStatusValue(StatusEffects.Pounce, 1, 3 - monster.statusEffectv1(StatusEffects.Pounce));
                 }
                 player.addStatusValue(StatusEffects.StraddleRoundLeft,1,monster.statusEffectv1(StatusEffects.Pounce)-3);
+				if (monster.hasStatusEffect(StatusEffects.DisplacerPlug)) monster.removeStatusEffect(StatusEffects.DisplacerPlug);
                 monster.removeStatusEffect(StatusEffects.Pounce);
                 outputText("You change position and straddle your opponent in order to prepare for mating.");
             } else if (monster.hasStatusEffect(StatusEffects.MysticWeb)) {
@@ -12200,7 +12207,7 @@ public class Combat extends BaseContent {
         outputText("You lick your lips in anticipation as you hold your victim's arms to the ground and plug your two tentacle suckers to [monster his] breasts. " +
                 "[monster he] struggles, flushing red as you flood [monster his] nipples with your lactation inducing venom and begin to force the delicious milk out of [monster his] chest. ");
         var DurationLeft:int = player.statusEffectv1(StatusEffects.StraddleRoundLeft);
-        monster.createStatusEffect(StatusEffects.DisplacerPlug, 1 + rand(3), DurationLeft, 0, 0);
+        monster.createStatusEffect(StatusEffects.DisplacerPlug, 1 + rand(3), 0, 0, 0);
         player.removeStatusEffect(StatusEffects.StraddleRoundLeft);
         monster.removeStatusEffect(StatusEffects.Straddle);
     }
@@ -13117,7 +13124,7 @@ public class Combat extends BaseContent {
         enemyAI();
     }
 
-    public function DisplacerFeed():void {
+    public function displacerFeedContinue():void {
         clearOutput();
         if (monster.lustVuln == 0) {
             outputText("You attempt to suck out the milk from your victims breast, but it has no effect!  Your foe clearly does not experience lust in the same way as you.\n\n");
@@ -13457,9 +13464,18 @@ public class Combat extends BaseContent {
         enemyAI();
     }
 
+    public function displacerCombatFeed():void {
+        clearOutput();
+        fatigue(50, USEFATG_PHYSICAL);
+        outputText("You lick your lips in anticipation as you hold your victim's arms to the ground and plug your two tentacle suckers to [the monster] breasts. She struggles, flushing red as you flood her nipples with your lactation inducing venom and begin to force the delicious milk out of her tits.\n\n");
+        monster.createStatusEffect(StatusEffects.DisplacerPlug, 1 + rand(3), 0, 0, 0);
+        addButton(0, "Next", SceneLib.combat.combatMenu, false);
+    }
+
     public function PussyLeggoMyEggo():void {
         clearOutput();
         outputText("You let your opponent free ending your grapple.\n\n");
+		if (monster.hasStatusEffect(StatusEffects.DisplacerPlug)) monster.removeStatusEffect(StatusEffects.DisplacerPlug);
         monster.removeStatusEffect(StatusEffects.Pounce);
         enemyAI();
     }
@@ -15279,4 +15295,4 @@ public class Combat extends BaseContent {
         return inteWisLibScale(player.lib, randomize);
     }
 }
-}
+}

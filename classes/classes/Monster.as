@@ -1922,6 +1922,7 @@ import flash.utils.getQualifiedClassName;
 				EngineCore.outputText("" + capitalA + short + " struggle to get free.");
 				if (statusEffectv1(StatusEffects.Pounce) <= 0) {
 					EngineCore.outputText("" + capitalA + short + " struggle to get free and manage to shove you off.");
+					if (hasStatusEffect(StatusEffects.DisplacerPlug)) removeStatusEffect(StatusEffects.DisplacerPlug);
 					removeStatusEffect(StatusEffects.Pounce);
 				}
 				addStatusValue(StatusEffects.Pounce, 1, -1);
@@ -1951,7 +1952,6 @@ import flash.utils.getQualifiedClassName;
 					} else {
 						EngineCore.outputText("You growl in annoyance at your denied meal.");
 					}
-					createStatusEffect(StatusEffects.Straddle, statusEffectv2(StatusEffects.DisplacerPlug),0,0,0);
 					removeStatusEffect(StatusEffects.DisplacerPlug);
 				}
 				addStatusValue(StatusEffects.DisplacerPlug, 1, -1);

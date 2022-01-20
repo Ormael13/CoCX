@@ -78,9 +78,9 @@ public class MutationsLib
 				".",
 				".");
 		public static const DisplacerMetabolism:PerkType = mk("Displacer Metabolism", "Displacer Metabolism",
-				"Allows you to gain a boost of speed after an intake of milk and double the damage of displacer beast claws attacks.");
+				"Allows you to gain a boost of strength+speed, malus to intelligence after an intake of milk and double the damage of displacer beast claws attacks.");
 		public static const DisplacerMetabolismPrimitive:PerkType = mk("Displacer Metabolism (Primitive)", "Displacer Metabolism (Primitive)",
-				"Increase by (10 * NG tier) boost of speed for a five hours longer after an intake of milk and keeping it for 50% longer. Increase max Hunger cap by 50 (if PC have Hunger bar active) and triple the damage of displacer beast claws attacks.");
+				"Increase by 100% of base value (per NG+ tier) max cap on boost of strength+speed, malus cap on intelligence for a five hours longer after an intake of milk and keeping it for 50% longer. Increase max Hunger cap by 50 (if PC have Hunger bar active) and triple the damage of displacer beast claws attacks.");
 		public static const DisplacerMetabolismEvolved:PerkType = mk("Displacer Metabolism (Evolved)", "Displacer Metabolism (Evolved)",
 				".");
 		public static const DraconicBones:PerkType = mk("Draconic Bones", "Draconic Bones",
@@ -241,7 +241,7 @@ public class MutationsLib
 		public static const ManticoreMetabolism:PerkType = mk("Manticore Metabolism", "Manticore Metabolism",
 				"Allows you to gain a boost of speed for a few hours after an intake of cum and allow atack with many tail spikes at once.");
 		public static const ManticoreMetabolismPrimitive:PerkType = mk("Manticore Metabolism (Primitive)", "Manticore Metabolism (Primitive)",
-				"Increase by (10 * NG tier) boost of speed for a five hours longer after an intake of cum, venom recharge rate when using Manticore Feed special is 2x higher and increase max Hunger cap by 50 (if PC have Hunger bar active).");
+				"Increase by 100% of base value (per NG+ tier) max cap of speed boost for a five hours longer after an intake of cum, venom recharge rate when using Manticore Feed special is 2x higher and increase max Hunger cap by 50 (if PC have Hunger bar active).");
 		public static const ManticoreMetabolismEvolved:PerkType = mk("Manticore Metabolism (Evolved)", "Manticore Metabolism (Evolved)",
 				".");
 		public static const MantislikeAgility:PerkType = mk("Mantis-like Agility", "Mantis-like Agility",

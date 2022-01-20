@@ -93,10 +93,14 @@ public class PerkLib
 		public static const AscensionOneRaceToRuleThemAllX:PerkType = new AscensionOneRaceToRuleThemX();
 		public static const AscensionAdvTrainingX:PerkType = new AscensionAdvancedTrainingX();
 
+		public static const AscensionBloodlineHeritage:PerkType = mk("Ascension: Bloodline Heritage", "Ascension: Bloodline Heritage",
+				"Your current body have faint trace of some unidentified bloodline in it. Not super good but how could you be picky at this point, right?");
 		public static const AscensionCruelChimerasThesis:PerkType = mk("Ascension: Cruel Chimera's Thesis", "Ascension: Cruel Chimera's Thesis",
 				"Allows you to reduce the number of points required by one to acquire race-specific effects.");
 		public static const AscensionHerosHeritage:PerkType = mk("Ascension: Hero's Heritage", "Ascension: Hero's Heritage",
 				"After you reincarnated, you ended up in the body of a local hero descendant possessing a much firmer body and resolve giving you a slightly easier start to your quest in Mareth.");
+		public static const AscensionHerosLegacy:PerkType = mk("Ascension: Hero's Legacy", "Ascension: Hero's Legacy",
+				"You reincarnated into regional hero descendant, gaining much better start into your journey. As of now after another reincarnation you know you NEED it.");
 		public static const AscensionHerosLineage:PerkType = mk("Ascension: Hero's Lineage", "Ascension: Hero's Lineage",
 				"The body you reincarnate into has a stronger hero lineage than you, granting you an even better start before venturing into Mareth. You would probably need it.");
 		public static const AscensionHybridTheory:PerkType = mk("Ascension: Hybrid Theory", "Ascension: Hybrid Theory",
@@ -119,15 +123,11 @@ public class PerkLib
 		public static const AscensionUnlockedPotential4thStage:PerkType = mk("Ascension: Unlocked Potential (4th Stage)", "Ascension: Unlocked Potential (4th Stage)",
 				"Due to your past experiences, your body gets stronger faster than in your past life (2nd increase to passive wrath (+10), mana (+12), soulforce (+6) gains at lvl-up).")
 				.withBuffs({'maxwrath_perlevel':+10,'maxmana_perlevel':+12,'maxsf_perlevel':+6});
-		//	public static const AscensionBuildingPrestige07:PerkType = mk("Ascension: Building Prestige (7th Stage)", "Ascension: Building Prestige (7th Stage)",
-		//			"Your understanding of prestige jobs from previous lives allows you to pick an 8th one at lvl 42+.");
-		//	public static const AscensionBuildingPrestige08:PerkType = mk("Ascension: Building Prestige (8th Stage)", "Ascension: Building Prestige (8th Stage)",
-		//			"Your understanding of prestige jobs from previous lives allows you to pick a 9th one at lvl 42+.");
 		//	public static const Ascension:PerkType = mk("Ascension: Artifical-made Metamorph", "Ascension: Artifical-made Metamorph",
 		//			".");
-		//	public static const Ascension:PerkType = mk("Ascension: ", "Ascension: ",
+		//	public static const Ascension:PerkType = mk("Ascension: ", "Ascension: Bloodline Lineage",
 		//			".");
-		//	public static const Ascension:PerkType = mk("Ascension: ", "Ascension: ",
+		//	public static const Ascension:PerkType = mk("Ascension: ", "Ascension: Bloodline Legacy",
 		//			".");
 		//	public static const Ascension:PerkType = mk("Ascension: ", "Ascension: ",
 		//			".");
@@ -1789,7 +1789,7 @@ public class PerkLib
 				"You've chosen the 'Hecta Attack (Small)' perk. This allows you to make seven melee attacks with small weapons.");
 		public static const Heroism:PerkType = mk("Heroism", "Heroism",
 				"Allows you to deal double damage toward boss or gigant sized enemies.",
-				"You've chosen the 'Heroism' perk. Due to your heroic stance you can now deal more damage toward boss or gigant type enemies.");
+				"You've chosen the 'Heroism' perk. Due to your heroic stance you can now deal more damage toward boss or giant type enemies.");
 		public static const HexaAttack:PerkType = mk("Hexa Attack", "Hexa Attack",
 				"Allows you to perform six melee attacks with normal sized weapons per round.",
 				"You've chosen the 'Hexa Attack' perk. This allows you to make six melee attacks with non-large weapons.")

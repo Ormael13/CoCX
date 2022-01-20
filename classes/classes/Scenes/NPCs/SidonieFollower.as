@@ -59,7 +59,7 @@ package classes.Scenes.NPCs
 		public function wonGnollPackFight():void {
 			clearOutput();
 			outputText("The last gnoll falls to the ground, defeated, while you take your time recovering you breath after the fast-paced battle. As you do so, you manage to see that the horse-morph woman has beaten the two remaining attackers, and that she’s angrily shouting at one of them.\n\n");
-			outputText("You approach her, but when she manages to see you, the equine readies to another fight. You wave your hands non.threateningly, after which she noticeably relaxes. Both of you stand in the grass in awkward silence for a moment, until the horse-woman breaks the ice and thends her hand to you.\n\n");
+			outputText("You approach her, but when she manages to see you, the equine readies to another fight. You wave your hands non.threateningly, after which she noticeably relaxes. Both of you stand in the grass in awkward silence for a moment, until the horse-woman breaks the ice and extends her hand to you.\n\n");
 			outputText("\"<i>Name’s Sidonie, friend. What’s yours?</i>\"\n\n");
 			outputText("With that, you shake hands and present yourself. You gaze at her. Light brown fur covers hers body, turning to white on her belly. Her hair is a golden shade of blonde, and her azure eyes compliment her equine face pretty well. A fresh and somewhat loose cotton attire girds her body.\n\n");
 			outputText("\"<i>Well, [name], you have my thanks for that. I don’t think that I could fend off that bunch of hyena assholes alone. I’ve managed to hold my own against three, four at best and...Aaah!</i>\"\n\n");
@@ -72,7 +72,7 @@ package classes.Scenes.NPCs
 			outputText("Sidonie nods eagerly, and you walk aways some steps and turn your back, since nothing else can be done in the sea of grass. Still, you manage to hear her moans and unmistakable sound of cum splashing the ground.\n\n");
 			outputText("Once that uncomfortable moment passes, you return with her, only to find the horse-girl much more composed, albeit still heavy breathing from her recent orgasm.\n\n");
 			outputText("\"<i>Sorry, " + player.mf("boy","girl") + ". I don’t act that way often. I usually never let those fuckers get that close, and this time I was particularly unlucky...or maybe not, since someone came to rescue me. Often I wander those places, looking for some water, food, or some decent place where I practice my carpentry skills. ");
-			outputText("But what about you? How is it that from all people, you happened to stumble on the plains? Somehow, you don’t strike me as the average Marethian nomad, so I guess that you don’t live on the plains...</i>\"\n\n");
+			outputText("But what about you? How is it that of everyone possible, you happened to stumble on the plains? Somehow, you don’t strike me as the average Marethian nomad, so I guess that you don’t live on the plains...</i>\"\n\n");
 			outputText("Well, since she asked, you give her the story of your role as Champion of Ingam, how you were sent here, as well as your less than conventional adventures. You explain how you found this place during your travels, and how you were in the middle of one of them when you met with the unfriendly gnolls chasing her.\n\n");
 			outputText("Once the topic shifts to more mundane things, both of you discuss how life has been in Mareth during your stay, the strangeness of the climate under demonic rule");
 			if (flags[kFLAGS.FACTORY_SHUTDOWN] == 1) outputText(" and how it’s now slowly returning to normal, and other trivial stuff");
@@ -94,43 +94,43 @@ package classes.Scenes.NPCs
 		}
 		public function commingToCamp():void {
 			clearOutput();
-			outputText("After doing the usual route from the plains to your camp in the middle of the wastelands, you find yourself arriving with a bit more of company this time. The carpenter horse-girl, Sidonie, comes at your side, carrying with her several boxes containing her belongings and working tools.\n\n");
+			outputText("After doing the usual route from the plains to your camp in the middle of the wastelands, you find yourself arriving with a bit more company this time. The carpenter horse-girl, Sidonie, comes to your side, carrying several boxes containing her belongings and working tools.\n\n");
 			outputText("The eerie glow of the portal welcomes you both, and you let Sidonie pick a place to set up her things. She chooses a high spot, near the side of the stream, and you help her by bringing her stuff there. As you were the one who invited her here, you offer to set up her tent while she takes this time to look around the camp");
 			if (camp.companionsCount() >= 2) outputText(" and meet the rest of the camp inhabitants");
-			outputText(".\n\nOnce you’re finished with the tent, a bit later than you had expected, you call her over, only to find that she is still busy looking around. With nothing else to do, you sit on front your tent, and wait until Sidonie has finished exploring the camp to help her unpacking the rest of her stuff. ");
-			outputText("Since it takes a while, you eventually fall asleep. A couple of hours later, you’re awoken by the horse morph, and to your surprise, everything is already unpacked and in place. Noticing your surprise, Sidonie explains.\n\n");
-			outputText("\"<i>Hey, [name]. While you were asleep I finished unpacking my stuff and putting it in my tent. Thanks for setting it for me, by the way. My woodworking stuff it’s also on place, so I can start working.</i>\"\n\n");
+			outputText(".\n\nOnce you’re finished with the tent, albeit a bit later than you had expected, you call her over only to find that she is still busy looking around. With nothing else to do, you sit at the base of your tent, waiting until Sidonie finishes exploring the camp before you help her unpacking the rest of her stuff. ");
+			outputText("You eventually fall asleep as you wait. A couple of hours later, you’re awoken by the horse morph, and to your surprise, everything is already unpacked and in place. Noticing your surprise, Sidonie explains.\n\n");
+			outputText("\"<i>Hey, [name]. While you were asleep I finished unpacking my stuff and putting it in my tent. Thanks for setting it for me, by the way. My woodworking stuff is all in place now, so I can start working.</i>\"\n\n");
 			if (camp.companionsCount() >= 2) {
-				outputText("It’s good to hear. You ask her if she found something interesting on the camp while you were asleep?\n\n");
+				outputText("It’s good to hear. You ask her if she found something interesting on the camp while you were asleep.\n\n");
 				if (player.hasStatusEffect(StatusEffects.PureCampJojo)) {
-					outputText("\"<i>That white, cute mouse boy was the first person that I saw when arriving to the camp. Not to hard since his fur makes him stand out. We had a nice talk, and I got that he is a monk, in a kind of personal quest trying to push away Mareth’s corruption. It sounded quite noble, and I was quite taken with his story, so much that I wanted to grab the little boy and hug him...");
-					outputText(" but that surely would’ve been too weird.\n\nDon’t tell him, but there’s something on his twinkish body that makes me want to fuck him senseless. Good thing that I’ve much more self-control than your average horse-morph. We tend to be a bit pushy on those matters, and I’ve the feeling that our mousey friend is quite shy about that stuff.</i>\"\n\n");
+					outputText("\"<i>That white, cute mouse boy was the first person that I saw when arriving at the camp. Hard to miss since his fur makes him stand out. We had a nice talk, and I got that he is a monk, kind of in personal quest trying to push away Mareth’s corruption. It sounded quite noble, and I was taken with his story, so much that I wanted to grab the little boy and hug him...");
+					outputText(" but that surely would’ve been too weird.\n\nDon’t tell him this, but something about his twinkish body really gets me heated... Good thing that I’ve much more self-control than your average horse-morph. We tend to be a bit pushy on those matters, and I’ve the feeling that our mousey friend is quite shy about that stuff.</i>\"\n\n");
 				}
 				if (amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_BLOCK_COUNTDOWN_BECAUSE_CORRUPTED_JOJO] == 0) {
-					outputText("\"<i>The brown-furred girl and I had the opportunity to chat too. It’s a good to known that mouse people won’t be doomed to extinction as everyone feared. I have to admire her determination to help her race. ");
+					outputText("\"<i>The brown-furred girl and I had the opportunity to chat, too. It’s good to know that mouse people won’t be doomed to extinction as everyone feared. I have to admire her determination to help her race. ");
 					outputText("Going so far to modify her own body to enhance her fertility, and having to endure all those births is quite a sacrifice.</i>\"\n\n");
 				}
 				if (arianScene.arianFollower()) {
 					outputText("\"<i>Once I stumbled on that colorful looking tent I found that we’ve a wizard among us! But, that Arian ");
 					if (flags[kFLAGS.ARIAN_VAGINA] > 0) outputText("gal");
 					else outputText("guy");
-					outputText(" is quite nervous. I stepped in to said hi, but the poor thing got scared and curled into a ball. When I get ");
+					outputText(" is quite nervous. I stepped in to said hi, but the poor thing got scared and tried to hide from me. When I geot ");
 					if (flags[kFLAGS.ARIAN_VAGINA] > 0) outputText("her");
 					else outputText("him");
 					outputText(" to calm down, we finally could have a proper presentation. All on all, ");
 					if (flags[kFLAGS.ARIAN_VAGINA] > 0) outputText("she");
 					else outputText("he");
 					outputText(" seems like a fun person, albeit ");
-					if (flags[kFLAGS.ARIAN_VAGINA] > 0) outputText("her");
-					else outputText("him");
-					outputText(" attention sometimes drifted to my little ‘friend’ as we talked.</i>\"\n\n");
+					if (flags[kFLAGS.ARIAN_VAGINA] > 0) outputText("she");
+					else outputText("he");
+					outputText(" always seemed hesitant to look me in the eyes.</i>\"\n\n");
 				}
 				if (sophieFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) {
 					if (flags[kFLAGS.SOPHIE_RECRUITED_PURE] > 0) {
-						outputText("\"<i>The pink haired harpy on our camp, Sophie, is quite a piece of work.</i>\" the horse-girl says. ");
-						outputText("\"<i>She just saw me arriving and tried to hit on me. Little did she know that I’m not that into girls, so she was very disappointed when she found out. Still, she was kind enough to help me unpacking my stuff, so I think that having her near will be nice.</i>\"\n\n");
+						outputText("\"<i>The pink haired harpy on our camp, Sophie, is quite a piece of work,</i>\" the horse-girl says. ");
+						outputText("\"<i>She just saw me arriving and tried to hit on me. Little did she know that I’m not that into girls, so she was very disappointed when she found out. Still, she was kind enough to help me unpack my stuff, so I think that having her near will be nice.</i>\"\n\n");
 					}
-					if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0) outputText("\"<i>That blondie ditz is really annoying, you know</i>\" the horse-girl says, pointing at you bimbofied harpy, \"<i>I was still unpacking my things and she jumped from nowhere asking if she could suck my dick. Anyways, I guess that she is special to you, so I’ll do my best to be polite with her.</i>\"\n\n");
+					if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0) outputText("\"<i>That blondie ditz is really annoying, you know,</i>\" the horse-girl says, pointing at the bimbofied harpy, \"<i>I was still unpacking my things and she jumped from nowhere asking if she could suck my dick. Anyways, I guess she is special to you, so I’ll do my best to be polite with her.</i>\"\n\n");
 				}
 				if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) outputText("\"<i>Near the stream, I caught sight of a shark fin, and look at my surprise when I found that we were living with one of those tigersharks, that girl Izma. She was not a bloodthirsty or lust crazed as average shark girls, that’s for sure.</i>\"\n\n");
 				if (isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) outputText("\"<i>I also met that cow-looking girl, Izzy. It’s nice to know that I’m not the only tough looking gal at camp, huh? We even had the chance to have a little strength contest.</i>\"\n\n");
@@ -147,7 +147,7 @@ package classes.Scenes.NPCs
 			menu();
 			addButton(0, "Appearance", SidonieAppearance);
 			addButton(1, "Talk", SidonieTalkMenu);
-			addButton(3, "Recollection", SidonieRecollection);
+			addButton(3, "Wood", SidonieRecollection);
 			addButton(4, "Sex", SidonieSexMenu);
 			addButton(14, "Leave", camp.campFollowers);
 		}
@@ -295,26 +295,26 @@ package classes.Scenes.NPCs
 		}
 		public function SidonieRecollection():void {
 			clearOutput();
-			outputText("A bit tired of having to wander aimlessly searching for wood pieces for your building projects here and there, and not in the mood of paying an exorbitant amount of gems for them, you go to Sidonie’s place, to see if she can help you picking and getting some wood.\n\n");
+			outputText("A bit tired of having to wander aimlessly searching for wood pieces for your building projects here and there, and not in the mood of paying an exorbitant amount of gems for them, you go to Sidonie’s place to see if she can help you gather some wood.\n\n");
 			outputText("The horse-morph is currently relaxing, sitting on a bench at her tent entrance. Here, you ask her if she could give you some help searching for some wood. Sidonie nods, then says:\n\n");
 			if (flags[kFLAGS.SIDONIE_RECOLLECTION] > 0) {
-				outputText("\"<i>Sorry, [name]. I’m still tired from our last wood-chopping session</i>\" Sidonie apologizes. \"<i>Maybe tomorrow, once that my muscles have rested enough.</i>\"\n\n");
-				outputText("Nodding, you tell her that’s okay. It’s not like you are going to get much done with one of the two of you too tired.\n\n");
+				outputText("\"<i>Sorry, [name]. I’m still tired from our last wood-chopping session.</i>\" She stretches softly, \"<i>Maybe tomorrow after I've taken a chance to rest.</i>\"\n\n");
+				outputText("Nodding, you tell her that’s okay. She doesn't need to overwork herself.\n\n");
 				doNext(mainSidonieMenu);
 			}
 			else {
 				outputText("\"<i>Okay, [name]. I’m free right now, so we should go.</i>\"\n\n");
-				outputText("With that, she goes inside her place, coming out a minute later with a wagon carrying inside two axes, a saw, and some wood-cutting tools. She hands on axe two you, then explains.\n\n");
-				outputText("\"<i>We’re going to a southwestern section of the forest, near those deepwoods. That’s where the best wood is.</i>\"\n\n");
-				outputText("You follow her out of the camp, arriving the forest without major issue. Seems like no imp is taking the risk of attacking two axe-wielding travelers. Once you arrive, you immediately notice how this section of the woods is quite different from the rest. No sign of corruption is near, and the usual marks left in trees by wandering satyrs or goblins are absent. Sidonie motions you to stop in a clearing, surrounded by particularly tall and thick trees. Their trunks emanate an aromatic smell, a total contrast from the sex-smelling glade that you’ve found sometimes.\n\n");
+				outputText("With that, she goes inside her place, coming out a minute later with a wagon with two axes, a saw, and some wood-cutting tools inside. She hands an axe two you before she speaks up.\n\n");
+				outputText("\"<i>We’re going to a southwestern section of the forest near the deepwoods. That’s where the best wood is.</i>\"\n\n");
+				outputText("You follow her out of the camp, arriving in the forest without major issue. Seems like no imp is taking the risk of attacking two axe-wielding travelers. Once you arrive, you immediately notice how this section of the woods is a bit different from the rest. No sign of corruption is near, and the usual marks left in trees by wandering satyrs or goblins are absent. Sidonie motions you to stop in a clearing, surrounded by particularly tall and thick trees. Their trunks emanate an aromatic smell, a total contrast from the sex-smelling glade that you’ve found sometimes.\n\n");
 				outputText("\"<i>Here, [name]. We’re cutting a couple of those.</i>\" The horse-morph carpenter says, pointing a duo of threes with " + object() + ". \"<i>The wood on them should be enough to keep us busy today, and our stock will be filled with it by the end of the day.</i>\"\n\n");
-				outputText("Each one of you positions near a tree and start cutting them with you axes. Sidonie has little trouble bringing down her tree, while you ");
+				outputText("The two of you find a couple suitable trees before getting to work with your axes. Sidonie has little trouble bringing down her tree, while you ");
 				if (player.str < 50) outputText("require a bit more time for it");
 				else outputText("chop the wood without any particular issue");
-				outputText(", keeping a good pace with her own rhythm. Once both trees are down, you spend the next hour removing the bark and using the two-man saw that she brought to cut the log into planks.\n\n");
-				outputText("The remaining two hours are spent reducing those planks into a more manageable size, softening it with sandpaper and bringing it back to the camp in the wagon. The clearing is quite devoid of any kind of hostile wildlife, so the process is painless, but tiresome. Both of you are left sweaty and exhausted, albeit you are quite satisfied by the huge amount of high-quality wood that you’ve brought home. ");
-				outputText("Sidonie seems a bit affected by the work-induced heat, so she has to excuse herself to jerk off. You manage to see her pint-sized globs of cum staining the grass and sawdust lying on the ground when you’re collecting her pieces of wood to put them on the wagon.\n\n");
-				outputText("Once the last load of wood has been brought to the camp, you pick the tools on the wagon and return to the camp, satisfied with today’s work.\n\n");
+				outputText(", keeping a good pace with her rhythm. Once both trees are down, you spend the next hour removing the bark and using the two-man saw that she brought to cut the log into planks.\n\n");
+				outputText("The remaining two hours are spent reducing those planks into a more manageable size, softening it with sandpaper and bringing it back to the camp in the wagon. The clearing is quite devoid of any kind of hostile wildlife, so the process is painless, though tiresome. Both of you are left sweaty and exhausted, albeit you are quite satisfied by the huge amount of high-quality wood that you’ve brought home. ");
+				outputText("Sidonie seems a bit affected by the work-induced heat, excusing herself for a \"private\" matter.\n\n");
+				outputText("Once the last load of wood has been brought to the camp, you place the tools in the wagon and return to the camp, satisfied with today’s haul.\n\n");
 				flags[kFLAGS.SIDONIE_RECOLLECTION] = 46;
 				if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 3) {
 					if ((flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + 300) < 400) flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] += 300;

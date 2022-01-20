@@ -18,6 +18,7 @@ package classes.Items
 
 		public static const FISTS:Fists = new Fists();
 
+		public const A_STAFF:AmphystStaff = new AmphystStaff();
 		public const ACLAYMO:AmphystClaymore = new AmphystClaymore();
 		public const ADAGGER:Weapon = new Weapon("ADagger","A.Dagger","amethyst dagger","an amethyst dagger","stab",3,240,"This dagger is made of obsidian and grotesquely decorated with amethysts and lead engravings. The magic within this murky blade will bleed unnatural darkness when charged with magic.", "Small", "Dagger");
 		public const AETHERD:AetherD = new AetherD();
@@ -98,6 +99,7 @@ package classes.Items
 		public const PWHIP  :DualWhip = new DualWhip();
 		public const PURITAS:Puritas = new Puritas();
 		public const Q_GUARD:QueensGuard = new QueensGuard();
+		public const R_STAFF:RubyStaff = new RubyStaff();
 		public const RDAGGER:Weapon = new Weapon("RDagger","R.Dagger","ruby dagger","an ruby dagger","stab",3,240,"This dagger is made of crimson metal and richly decorated with rubies and gold engravings. The magic within this crimson blade will flare up with magical flames when charged with magic.", "Small", "Dagger");
 		public const RIBBON :Weapon = new Weapon("Ribbon ","Ribbon","long ribbon","a long ribbon","whip-like slash",5,200,"A long ribbon made of fine silk that despite it seemly fragile appearance can deal noticable damage to even few enemies at once.  Perfect example of weapon that is more dangerous than it looks.", "Whipping", "Ribbon");
 		public const RIDINGC:Weapon = new Weapon("RidingC","RidingC","riding crop","a riding crop","whip-crack",5,200,"This riding crop appears to be made of black leather, and could be quite a painful (or exciting) weapon.");
@@ -107,6 +109,7 @@ package classes.Items
 		public const RCLAYMO:RubyClaymore = new RubyClaymore();
 		public const S_BLADE:Spellblade = new Spellblade();
 		public const S_GAUNT:Weapon = new Weapon("S.Gaunt","S.Gauntlet","spiked gauntlet","a spiked gauntlet","spiked punch",0,200,"This single metal gauntlet has the knuckles tipped with metal spikes.  Though it lacks the damaging potential of other weapons, the sheer pain of its wounds has a chance of stunning your opponent.", "Stun10", "Gauntlet");
+		public const S_STAFF:SapphireStaff = new SapphireStaff();
 		public const SCARBLD:Weapon = new ScarredBlade();
 		public const SCECOMM:Weapon = new Weapon("SceComm", "SceptreOfCom", "Sceptre of Command", "a Sceptre of Command", "smack", 4, 600, "This enchanted scepter empowers the abilities and control of summoners over their minions.");
 		public const SCIMITR:Weapon = new Weapon("Scimitr", "Scimitar", "scimitar", "a scimitar", "slash", 15, 600, "This curved sword is made for slashing.  No doubt it'll easily cut through flesh.", "", "Sword");
@@ -118,6 +121,7 @@ package classes.Items
 		public const SDRILL :SoulDrill = new SoulDrill();
 		public const SPEAR  :Spear = new Spear();
 		public const SUCWHIP:SuccubiWhip = new SuccubiWhip();
+		public const T_STAFF:TopazStaff = new TopazStaff();
 		public const TCLAYMO:TopazClaymore = new TopazClaymore();
 		public const TODAGGER:Weapon = new Weapon("ToDagger","T.Dagger","topaz dagger","an topaz dagger","stab",3,240,"This dagger is made of eversteel and richly decorated with yellow topazes and copper engravings. The magic within this shining blade will oversaturate the metal with electricity when charged with magic.", "Small", "Dagger");
 		public const TDAGGER:Weapon = new Weapon("TDagger","ThrowDagger","throwing dagger","a throwing dagger","stab",2,160,"A small blade that could be thrown.  Preferred weapon for the rogues.", "Small", "Dagger, Thrown");

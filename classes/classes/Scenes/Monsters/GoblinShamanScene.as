@@ -537,12 +537,12 @@ public class GoblinShamanScene extends BaseContent
 			outputText(images.showImage("goblin-win-male-getridden"));
 			//(FITS( barley) – Get ridden)
 			if (player.cockArea(x) > monster.vaginalCapacity() * .8) {
-				outputText("You pick up the defeated goblin, looking her over. She crosses her arms across her chest pitifully and asks, \"<i>What now?</i>\" with her eyes darting down when she thinks you won't notice. A grimace temporarily crossing her face at the size of your " + cockDescript(x) + ". You get the idea of giving her more cock than she can handle, and lower her down towards your " + cockDescript(x) + ". The tip slips between her moist and folds, stretching her and taking some of her weight off your arms. She winces slightly, wrapping her legs as far around your " + hipDescript() + " as possible.\n\n");
-				outputText("You start walking, letting your movements work with gravity, allowing you to penetrate her with little difficulty. Those puffy wet walls clench you tightly as she slides down, ");
+				outputText("You pick up the defeated goblin, looking her over. She crosses her arms across her chest pitifully before asking, \"<i>What now?</i>\" with her eyes darting down when she thinks you won't notice. A grimace temporarily crossing her face at the size of your " + cockDescript(x) + ". You get the idea of giving her more cock than she can handle as you lower her towards your " + cockDescript(x) + ". The tip slips between her moist and folds, stretching her and taking some of her weight off your arms. She winces slightly, wrapping her legs as far around your " + hipDescript() + " as possible.\n\n");
+				outputText("You start walking, letting your movements work with gravity, allowing you to penetrate her with little difficulty. Her puffy, wet walls clench you tightly as she slides down, ");
 				if (player.cocks[0].cockType == CockTypesEnum.DEMON) outputText("rubbing painfully against your demonic nubs");
 				else if (player.hasKnot(0)) outputText("stretching painfully around your knot");
 				else if (player.cocks[0].cockType == CockTypesEnum.HORSE || player.cocks[0].cockType.Index > 3) outputText("feeling painfully tight around you");
-				outputText(". With each and every step she slides down further, stretching her to capacity, until she sits almost completely impaled on you, grabbing your ");
+				outputText(". With every step, she slides down further, stretching her to capacity, until she sits almost completely impaled on you, grabbing your ");
 				if (player.biggestTitSize() >= 1) outputText(player.allBreastsDescript());
 				else outputText("torso");
 				outputText(" to help support herself.  A steady pulse of motion massages you in time with the green girl's breathing.  You realize just how much of her body must be devoted to accommodating monstrous members, no wonder goblins are so fragile in a fight!\n\n");
@@ -569,7 +569,7 @@ public class GoblinShamanScene extends BaseContent
 			}
 			//(FITS – Get ridden)
 			else {
-				outputText("You pick up the defeated goblin, looking her over.  She crosses her arms across her chest pitifully and asks, \"<i>What now?</i>\" with her eyes darting down when she thinks you won't notice.  You muse to yourself 'great minds think alike' and lower her down towards your " + cockDescript(x) + ".  The tip slips between her moist and parted folds, brushing against her entrance and taking some of her weight for you.  She goes cross-eyed and smiles happily, wrapping her legs as far around your " + hipDescript() + " as possible.\n\n");
+				outputText("You pick up the defeated goblin, looking her over.  She crosses her arms across her chest pitifully before asking, \"<i>What now?</i>\" with her eyes darting down when she thinks you won't notice.  You muse to yourself 'great minds think alike' and lower her towards your " + cockDescript(x) + ".  The tip slips between her moist and parted folds, brushing against her entrance and taking some of her weight for you.  She goes cross-eyed and smiles happily, wrapping her legs as far around your " + hipDescript() + " as possible.\n\n");
 				outputText("You start walking, letting the movements work with gravity to allow you to effortlessly penetrate her.  Those puffy wet walls clench you tightly as she slides down ");
 				if (player.cocks[0].cockType == CockTypesEnum.DEMON) outputText("rubbing perfectly against your demonic nubs");
 				else if (player.hasKnot(0)) outputText("stretching tightly around your knot");

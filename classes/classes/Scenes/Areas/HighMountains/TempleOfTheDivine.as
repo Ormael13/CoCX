@@ -95,7 +95,7 @@ use namespace CoC;
 			}
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1) {
 				if (havingOrUsingBSwordOrExcalibur()) addButton(2, "Put Sword", puttingBSwordOrExcaliburOnAltair);
-				if (player.statusEffectv2(StatusEffects.TempleOfTheDivineTracker) == 2) addButton(2, "Take Sword", takingExcaliburFromAltair);
+				if (player.statusEffectv2(StatusEffects.TempleOfTheDivineTracker) == 2 || player.statusEffectv2(StatusEffects.TempleOfTheDivineTracker) == 3) addButton(2, "Take Sword", takingExcaliburFromAltair);
 				if (player.hasItem(consumables.P_PEARL, 1)) addButton(3, "Pearl", puttingPurePearlOnAltair);
 				if (player.statusEffectv3(StatusEffects.TempleOfTheDivineTracker) == 2) addButton(3, "Pearl", takingPurePearlFromAltair);
 			}
@@ -199,7 +199,7 @@ use namespace CoC;
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] >= 6) blessingPower += 0.1;
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] >= 8) blessingPower += 0.05;
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] >= 18) blessingPower += 0.05;
-			if (player.statusEffectv2(StatusEffects.TempleOfTheDivineTracker) == 2) blessingPower += 0.05;
+			if (player.statusEffectv2(StatusEffects.TempleOfTheDivineTracker) == 2 || player.statusEffectv2(StatusEffects.TempleOfTheDivineTracker) == 3) blessingPower += 0.05;
 			if (player.statusEffectv3(StatusEffects.TempleOfTheDivineTracker) == 2) blessingPower += 0.05;
 			player.createStatusEffect(StatusEffects.BlessingOfDivineMarae, 169, blessingPower, 0, 0);
 			if (player.HP < player.maxHP()) player.HP = player.maxHP();
@@ -431,7 +431,8 @@ use namespace CoC;
 		public function takingExcaliburFromAltair():void {
 			clearOutput();
 			outputText("You feel the power of the altar diminishing, however the weapon is stronger than ever and likely ready for its primary use, demon slaying.\n\n");
-			player.addStatusValue(StatusEffects.TempleOfTheDivineTracker,2,-1);
+			if (player.statusEffectv2(StatusEffects.TempleOfTheDivineTracker) == 3) player.addStatusValue(StatusEffects.TempleOfTheDivineTracker,2,-2);
+			else player.addStatusValue(StatusEffects.TempleOfTheDivineTracker,2,-1);
 			inventory.takeItem(weapons.EXCALIB, templemainmenu);
 		}
 		private function havingOrUsingBSwordOrExcalibur():Boolean {

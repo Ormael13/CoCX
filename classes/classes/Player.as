@@ -787,9 +787,12 @@ use namespace CoC;
 			}
 			if (vehiclesName == "Howling Banshee Mech") {
 				armorDef += 15;
-				if (hasKeyItem("Upgraded Armor plating 1.0") >= 0) armorDef += 8;
-				if (hasKeyItem("Upgraded Armor plating 2.0") >= 0) armorDef += 16;
-				if (hasKeyItem("Upgraded Armor plating 3.0") >= 0) armorDef += 24;
+				if (hasKeyItem("Upgraded HB Armor Plating and Leather Insulation") >= 0) {
+					if (keyItemv1("Upgraded HB Armor Plating and Leather Insulation") == 1) armorDef += 8;
+					if (keyItemv1("Upgraded HB Armor Plating and Leather Insulation") == 2) armorDef += 16;
+					if (keyItemv1("Upgraded HB Armor Plating and Leather Insulation") == 3) armorDef += 24;
+					if (keyItemv1("Upgraded HB Armor Plating and Leather Insulation") == 3) armorDef += 32;
+				}
 			}
 			armorDef = Math.round(armorDef);
 			//Berzerking removes armor
@@ -994,9 +997,12 @@ use namespace CoC;
 			}
 			if (vehiclesName == "Howling Banshee Mech") {
 				armorMDef += 15;
-				if (hasKeyItem("Upgraded Armor plating 1.0") >= 0) armorMDef += 8;
-				if (hasKeyItem("Upgraded Armor plating 2.0") >= 0) armorMDef += 16;
-				if (hasKeyItem("Upgraded Armor plating 3.0") >= 0) armorMDef += 24;
+				if (hasKeyItem("Upgraded HB Armor Plating and Leather Insulation") >= 0) {
+					if (keyItemv2("Upgraded HB Armor Plating and Leather Insulation") == 1) armorMDef += 8;
+					if (keyItemv2("Upgraded HB Armor Plating and Leather Insulation") == 2) armorMDef += 16;
+					if (keyItemv2("Upgraded HB Armor Plating and Leather Insulation") == 3) armorMDef += 24;
+					if (keyItemv2("Upgraded HB Armor Plating and Leather Insulation") == 3) armorMDef += 32;
+				}
 			}
 			armorMDef = Math.round(armorMDef);
 			//Berzerking/Lustzerking removes magic resistance
@@ -1106,7 +1112,7 @@ use namespace CoC;
 		//Free off-hand for spellcasting and etc.
 		public function isHavingFreeOffHand():Boolean
 		{
-			return !isShieldsForShieldBash() || shield != game.shields.BATTNET || shield != game.shields.Y_U_PAN;
+			return !isShieldsForShieldBash() && shield != game.shields.BATTNET && shield != game.shields.Y_U_PAN;
 		}
 		public function isNotHavingShieldCuzPerksNotWorkingOtherwise():Boolean
 		{
@@ -4948,6 +4954,12 @@ use namespace CoC;
 			return internalChimeraCounter;
 		}
 
+		public function increaseFromBloodlinePerks():Number {
+			var incFBP:Number = 2;
+			if (hasPerk(PerkLib.AscensionBloodlineHeritage)) incFBP += 2;
+			return incFBP;
+		}
+
 		//Determine Chimera Race Rating
 		public function chimeraScore():Number {
 			Begin("Player","racialScore","chimera");
@@ -5487,7 +5499,7 @@ use namespace CoC;
 			if (hasPerk(MutationsLib.LactaBovinaOvariesEvolved) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
 				cowCounter++;
 			if (hasPerk(PerkLib.MinotaursDescendant) || hasPerk(PerkLib.BloodlineMinotaur))
-				cowCounter += 2;
+				cowCounter += increaseFromBloodlinePerks();
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				cowCounter += 50;
 			if (hasPerk(PerkLib.AscensionHybridTheory) && cowCounter >= 4)
@@ -5544,7 +5556,7 @@ use namespace CoC;
 			if (hasPerk(MutationsLib.MinotaurTesticlesEvolved) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
 				minoCounter++;
 			if (hasPerk(PerkLib.MinotaursDescendant) || hasPerk(PerkLib.BloodlineMinotaur))
-				minoCounter += 2;
+				minoCounter += increaseFromBloodlinePerks();
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				minoCounter += 50;
 			if (hasPerk(PerkLib.AscensionHybridTheory) && minoCounter >= 4)
@@ -6420,7 +6432,7 @@ use namespace CoC;
 			if ((hasPerk(MutationsLib.KitsuneThyroidGlandEvolved) || hasPerk(MutationsLib.KitsuneParathyroidGlandsFinalForm)) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
 				kitsuneCounter++;
 			if (hasPerk(PerkLib.KitsunesDescendant) || hasPerk(PerkLib.BloodlineKitsune))
-				kitsuneCounter += 2;
+				kitsuneCounter += increaseFromBloodlinePerks();
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				kitsuneCounter += 50;
 			if (hasPerk(PerkLib.AscensionHybridTheory) && kitsuneCounter >= 4)
@@ -6520,7 +6532,7 @@ use namespace CoC;
 			if ((hasPerk(MutationsLib.DraconicBonesEvolved) || hasPerk(MutationsLib.DraconicHeartEvolved) || hasPerk(MutationsLib.DraconicLungsEvolved)) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
 				dragonCounter++;
 			if (hasPerk(PerkLib.DragonsDescendant) || hasPerk(PerkLib.BloodlineDragon))
-				dragonCounter += 2;
+				dragonCounter += increaseFromBloodlinePerks();
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				dragonCounter += 50;
 			if (hasPerk(PerkLib.AscensionHybridTheory) && dragonCounter >= 4)
@@ -6596,7 +6608,7 @@ use namespace CoC;
 			if ((hasPerk(MutationsLib.DraconicBonesEvolved) || hasPerk(MutationsLib.DraconicHeartEvolved) || hasPerk(MutationsLib.DrakeLungsEvolved)) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
 				jabberwockyCounter++;
 			if (hasPerk(PerkLib.DragonsDescendant) || hasPerk(PerkLib.BloodlineDragon))
-				jabberwockyCounter += 2;
+				jabberwockyCounter += increaseFromBloodlinePerks();
 			if (hasPerk(PerkLib.AscensionHybridTheory) && jabberwockyCounter >= 4)
 				jabberwockyCounter++;
 			if (hasPerk(PerkLib.AscensionCruelChimerasThesis) && jabberwockyCounter >= 8)
@@ -6660,7 +6672,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.AscensionCruelChimerasThesis) && goblinCounter >= 8)
 				goblinCounter += 1;
 			if (hasPerk(PerkLib.GoblinsDescendant) || hasPerk(PerkLib.BloodlineGoblin))
-				goblinCounter += 2;
+				goblinCounter += increaseFromBloodlinePerks();
 			if (!InCollection(skin.base.color, ["pale yellow", "grayish-blue", "green", "dark green", "emerald"]))
 				goblinCounter = 0;
 			if (ears.type != Ears.ELFIN)
@@ -6735,7 +6747,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.AscensionCruelChimerasThesis) && gremlinCounter >= 8)
 				gremlinCounter += 1;
 			if (hasPerk(PerkLib.GoblinsDescendant) || hasPerk(PerkLib.BloodlineGoblin))
-				gremlinCounter += 2;
+				gremlinCounter += increaseFromBloodlinePerks();
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				gremlinCounter += 50;
 		/*	if (hasPerk(PerkLib.Phylactery))
@@ -7785,7 +7797,7 @@ use namespace CoC;
 			if (hasPerk(MutationsLib.OniMusculatureEvolved) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
 				oniCounter++;
 			if (hasPerk(PerkLib.OnisDescendant) || hasPerk(PerkLib.BloodlineOni))
-				oniCounter += 2;
+				oniCounter += increaseFromBloodlinePerks();
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				oniCounter += 50;
 			if (hasPerk(PerkLib.AscensionHybridTheory) && oniCounter >= 4)
@@ -7899,7 +7911,7 @@ use namespace CoC;
 					elfCounter++;
 			}*/
 			if (hasPerk(PerkLib.ElfsDescendant) || hasPerk(PerkLib.BloodlineElf))
-				elfCounter += 2;
+				elfCounter += increaseFromBloodlinePerks();
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				elfCounter += 50;
 			if (hasPerk(PerkLib.AscensionHybridTheory) && elfCounter >= 4)
@@ -7964,7 +7976,7 @@ use namespace CoC;
 			if (hasPerk(MutationsLib.ElvishPeripheralNervSysEvolved))
 				WoodElfCounter += 3;
 			if (hasPerk(PerkLib.ElfsDescendant) || hasPerk(PerkLib.BloodlineElf))
-				WoodElfCounter += 2;
+				WoodElfCounter += increaseFromBloodlinePerks();
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				WoodElfCounter += 50;
 			if (hasPerk(PerkLib.AscensionHybridTheory) && WoodElfCounter >= 4)
@@ -8056,7 +8068,7 @@ use namespace CoC;
 			if ((hasPerk(MutationsLib.DraconicBonesEvolved) || hasPerk(MutationsLib.DraconicHeartEvolved) || hasPerk(MutationsLib.DrakeLungsEvolved)) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
 				frostWyrmCounter++;
 			if (hasPerk(PerkLib.DragonsDescendant) || hasPerk(PerkLib.BloodlineDragon))
-				frostWyrmCounter += 2;
+				frostWyrmCounter += increaseFromBloodlinePerks();
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				frostWyrmCounter += 50;
 			if (hasPerk(PerkLib.AscensionHybridTheory) && frostWyrmCounter >= 4)
@@ -8122,7 +8134,7 @@ use namespace CoC;
 					orcCounter++;
 			}*/
 			if (hasPerk(PerkLib.OrcsDescendant) || hasPerk(PerkLib.BloodlineOrc))
-				orcCounter += 2;
+				orcCounter += increaseFromBloodlinePerks();
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				orcCounter += 50;
 			if (hasPerk(PerkLib.AscensionHybridTheory) && orcCounter >= 4)
@@ -8176,7 +8188,7 @@ use namespace CoC;
 			if (hasPerk(MutationsLib.HeartOfTheStormEvolved) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
 				raijuCounter++;
 			if (hasPerk(PerkLib.RaijusDescendant) || hasPerk(PerkLib.BloodlineRaiju))
-				raijuCounter += 2;
+				raijuCounter += increaseFromBloodlinePerks();
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				raijuCounter += 50;
 			if (hasPerk(PerkLib.AscensionHybridTheory) && raijuCounter >= 4)
@@ -8237,7 +8249,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.RatatoskrSmartsFinalForm) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
 				ratatoskrCounter++;
 			//if (hasPerk(PerkLib.RatatoskrsDescendant) || hasPerk(PerkLib.BloodlineRatatoskr))
-			//	ratatoskrCounter += 2;
+			//	ratatoskrCounter += increaseFromBloodlinePerks();
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				ratatoskrCounter += 50;
 			if (hasPerk(PerkLib.AscensionHybridTheory) && ratatoskrCounter >= 4)
@@ -8943,7 +8955,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				melkieCounter += 50;
 			if (hasPerk(PerkLib.MelkiesDescendant) || hasPerk(PerkLib.BloodlineMelkie))
-				melkieCounter += 2;
+				melkieCounter += increaseFromBloodlinePerks();
 			if (hasPerk(PerkLib.AscensionHybridTheory) && melkieCounter >= 4)
 				melkieCounter += 1;
 			if (hasPerk(PerkLib.AscensionCruelChimerasThesis) && melkieCounter >= 8)
@@ -10616,7 +10628,7 @@ use namespace CoC;
 			if ((hasPerk(MutationsLib.VampiricBloodsteamEvolved) || hasPerk(MutationsLib.HollowFangsEvolved)) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
 				counter++;
 			if (hasPerk(PerkLib.VampiresDescendant) || hasPerk(PerkLib.BloodlineVampire))
-				counter += 2;
+				counter += increaseFromBloodlinePerks();
 			if (hasPerk(PerkLib.AscensionHybridTheory) && counter >= 4)
 				counter++;
 			if (hasPerk(PerkLib.AscensionCruelChimerasThesis) && counter >= 8)
@@ -15060,14 +15072,14 @@ use namespace CoC;
 					if (buff("Feeding Euphoria").getValueOfStatBuff("spe.mult") < 0.50 + (0.5 * (1 + newGamePlusMod()))) {
 						buff("Feeding Euphoria").addStats({"spe.mult": 0.5}).withText("Feeding Euphoria!").forHours(15);
 					}
-					else if (buff("Feeding Euphoria").getValueOfStatBuff("spe.mult") == 0.50 + (0.5 * (1 + newGamePlusMod()))) {
+					else if (buff("Feeding Euphoria").getValueOfStatBuff("spe.mult") >= 1.50 + (1.5 * (1 + newGamePlusMod()))) {
 						buff("Feeding Euphoria").addDuration(3);
 					}
 				} else {
 					if (buff("Feeding Euphoria").getValueOfStatBuff("spe.mult") < 0.50) {
 						buff("Feeding Euphoria").addStats({"spe.mult": 0.5}).withText("Feeding Euphoria!").forHours(10);
 					}
-					else if (buff("Feeding Euphoria").getValueOfStatBuff("spe.mult") == 0.50) {
+					else if (buff("Feeding Euphoria").getValueOfStatBuff("spe.mult") >= 1.50) {
 						buff("Feeding Euphoria").addDuration(2);
 					}
 				}
@@ -15087,18 +15099,18 @@ use namespace CoC;
 		public function displacerFeed():void {
 			if (hasPerk(MutationsLib.DisplacerMetabolism)) {
 				if (hasPerk(MutationsLib.DisplacerMetabolismPrimitive)) {
-					if (buff("Feeding Euphoria").getValueOfStatBuff("spe.mult") < 0.50 + (0.5 * (1 + newGamePlusMod()))) {
-						buff("Feeding Euphoria").addStats({"spe.mult": 0.5}).withText("Feeding Euphoria!").forHours(15);
+					if (buff("Milking Euphoria").getValueOfStatBuff("spe.mult") < 0.25 + (0.25 * (1 + newGamePlusMod()))) {
+						buff("Milking Euphoria").addStats({"str.mult": 0.25, "spe.mult": 0.25, "int.mult": -0.25}).withText("Milking Euphoria!").forHours(15);
 					}
-					else if (buff("Feeding Euphoria").getValueOfStatBuff("spe.mult") == 0.50 + (0.5 * (1 + newGamePlusMod()))) {
-						buff("Feeding Euphoria").addDuration(3);
+					else if (buff("Milking Euphoria").getValueOfStatBuff("spe.mult") >= 0.75 + (0.75 * (1 + newGamePlusMod()))) {
+						buff("Milking Euphoria").addDuration(3);
 					}
 				} else {
-					if (buff("Feeding Euphoria").getValueOfStatBuff("spe.mult") < 0.50) {
-						buff("Feeding Euphoria").addStats({"spe.mult": 0.5}).withText("Feeding Euphoria!").forHours(10);
+					if (buff("Milking Euphoria").getValueOfStatBuff("spe.mult") < 0.25) {
+						buff("Milking Euphoria").addStats({"str.mult": 0.25, "spe.mult": 0.25, "int.mult": -0.25}).withText("Milking Euphoria!").forHours(10);
 					}
-					else if (buff("Feeding Euphoria").getValueOfStatBuff("spe.mult") == 0.50) {
-						buff("Feeding Euphoria").addDuration(2);
+					else if (buff("Milking Euphoria").getValueOfStatBuff("spe.mult") >= 0.75) {
+						buff("Milking Euphoria").addDuration(2);
 					}
 				}
 			}
@@ -15164,7 +15176,7 @@ use namespace CoC;
 					case 'saliva':
 						break;
 					case 'milk':
-						if (hasPerk(PerkLib.ManticoreCumAddict)) displacerFeed();
+						if (hasPerk(PerkLib.DisplacerMilkAddict)) displacerFeed();
 						refillHunger(10, false);
 						break;
 				}
@@ -15314,6 +15326,27 @@ use namespace CoC;
 			EngineCore.changeFatigue(-(25 + (spe/2)));
 			removeCurse("lib", 5, 1);
 			removeCurse("lib", 5, 2);
+		}
+
+		public function displacerFeedFromBottle():void {
+			if (hasPerk(MutationsLib.DisplacerMetabolism)) {
+				if (hasPerk(MutationsLib.DisplacerMetabolismPrimitive)) {
+					if (buff("Milking Euphoria").getValueOfStatBuff("spe.mult") < 0.25 + (0.25 * (1 + newGamePlusMod()))) {
+						buff("Milking Euphoria").addStats({"str.mult": 0.05, "spe.mult": 0.05, "int.mult": -0.05}).withText("Milking Euphoria!").forHours(10);
+					}
+					else if (buff("Milking Euphoria").getValueOfStatBuff("spe.mult") >= 0.75 + (0.75 * (1 + newGamePlusMod()))) {
+						buff("Milking Euphoria").addDuration(2);
+					}
+				} else {
+					if (buff("Milking Euphoria").getValueOfStatBuff("spe.mult") < 0.05) {
+						buff("Milking Euphoria").addStats({"str.mult": 0.05, "spe.mult": 0.05, "int.mult": -0.05}).withText("Milking Euphoria!").forHours(6);
+					}
+					else if (buff("Milking Euphoria").getValueOfStatBuff("spe.mult") >= 0.75) {
+						buff("Milking Euphoria").addDuration(1);
+					}
+				}
+			}
+			EngineCore.HPChange(Math.round(maxHP() * .05), true);
 		}
 
 		public function hasUniquePregnancy():Boolean{
