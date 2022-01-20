@@ -148,7 +148,7 @@ public function wonOverDianaOralF():void {
 			else outputText("tentacles");
 			outputText(" until she can’t breath, she gasps, trying to suck air into her crushed lungs, you tell her you'll loosen your grip once she starts to see");
 		}
-		outputText(" the wisdom in licking you. She starts to quickly lick your pussy, trying to please you to stop your punishment, which you do.\n\n");
+		outputText(" the wisdom in licking you. She starts to quickly lick your pussy, trying to please you to stop your punishment.\n\n");
 	}
 	outputText("You moan happily as her large equine tongue eats your cunt out, you move your hands up to your breasts, grabbing and squeezing them under your hands while your fingers sink into your soft flesh. You moan and pinch your stiff nipples as she licks your pussy, you continuing to pleasure your breasts, helping the equine bring you to an orgasm, which you feel building.");
 	outputText(" Eventually it comes, and you moan loudly as you orgasm, spraying your girl juices over the equines face, soaking it and making her have to drink them.\n\n");
@@ -211,7 +211,7 @@ public function wonOverDianaOralM():void {
 		else outputText("scylla tentacles");
 		outputText(" tightly around her waist, lifting her off the ground and into the air."); 
 		if (flags[kFLAGS.DIANA_FOLLOWER] >= 2) {
-			outputText("She gives you a sultry look as she runs her hands lovely along your ");
+			outputText("She gives you a sultry look as she runs her hands along your ");
 			if (player.isNaga()) outputText("tail");
 			else outputText("tentacles");
 			outputText(", before giving you a come hither look.");
@@ -279,7 +279,7 @@ public function wonOverDianaOralM():void {
 	if (flags[kFLAGS.DIANA_FOLLOWER] >= 2) {
 		if (player.cumQ() >= 2000) {
 			if (player.cocks[x].cockLength >= 15) outputText("You make sure she is taking your entire length before you cum, spraying your massive load directly into her stomach with such force that her stomach bulges, making it swell and bloat with yor cum. She moans happily as her belly swells until she looks pregnant, her face totally blissed out");
-			else if (player.cocks[x].cockLength >= 5) outputText("You make sure she is taking your entire length before you cum, spraying your massive load right down her throat. She moans happily as her belly visibly swells with your cum, bloating her until she looks pregnant, her face totally blissed out");
+			else if (player.cocks[x].cockLength >= 5) outputText("You make sure she is taking your entire length before you cum, spraying your massive load right down her throat. She moans happily as her belly visibly swells with your cum, bloating her until she looks pregnant. her eyes roll back into her head, her horse-face totally blissed out");
 			else outputText("You hold your hips against her face as you cum, spraying your massive load inside her mouth making her cheeks bulge with your cum, she does her best to swallow as fast as she can but your load is too large and thick, and it starts squirting out of her nose and mouth, her face totally blissed out");
 			if (player.cockTotal() > 1) outputText(" while your other [cockplural] covers her naked body in cum");
 			outputText(".");
@@ -623,22 +623,22 @@ public function breakingInYourMare():void {
 		outputText("True to her word she cums, screaming into the ground as her pussy and arsehole tighten and convulse around your cock, while you continue to fuck her, making her scream and moan as you continue to pound her pussy and arse through her orgasm.\n\n");
 		outputText("\"<i>NOOOO! IT FEELS TOO GOOD!!! I’M GOING INSANE!!</i>\" Diana screams, her body shaking in pleasure, her face in ecstasy.\n\n");
 		outputText("Smirking, you start to savagely thrust into her, earning her loudest scream yet, prolonging her orgasm further and making her pussy and asshole tighten so much it nearly hurts. Even as her grip on your cocks tightens, you continue to thrust into her, pounding her cunt and butt as you reshape them into your personal fuckholes. ");
-		outputText("By the time her orgasm finishes, she has collapsed onto the ground, her backside only supported by your still thrusting cocks and your hands. Smirking at your exhausted mare, you grab her by the shoulder and pull her up against your chest, your hips still pumping.\n\n");
+		outputText("By the time her orgasm finishes, she has collapsed onto the ground, her backside only supported by your still thrusting cocks and hands. Smirking at your exhausted mare, you grab her by the shoulder and pull her up against your chest, your hips still pumping.\n\n");
 		outputText("You make it known that she's not done until you're done. She shivers beneath your presence, knowing very well that she's at your complete and utter mercy.\n\n");
 		outputText("\"<i>Please do,</i>\" Diana whimpers, enjoying being treated like this, \"<i>Unload all your cum into me and make me pregnant with your foals! I’ll only be happy if you fuck me until you’re satisfied...</i>\"\n\n");
 		outputText("Such a good mare is deserving of a reward. You move her head towards yours, kissing her on the lips, earning a surprised squeak from Diana before sinking into your kiss, twisting her body around to wrap her arms around your head in a light hug, moaning into your mouth as you still piston into her. Eventually you break the kiss, Diana looking at you like she is about to burst into tears.\n\n");
 		outputText("\"<i>What should I do?</i>\" Diana cries, tears forming in her eyes, \"<i>I’m so happy, it’s all like a dream and I fear at any moment I’ll wake up and you won’t be here with me.</i>\"\n\n");
 		outputText("You hold onto her tightly, letting her know that you're not going anywhere. Kissing away some of her tears, you affectionately stroke her face as she melts into your embrace.\n\n");
-		outputText("Diana giggles for a second before moaning again, as your cocks continues to fuck her. You can feel yourself growing closer to an orgasm, and any second now you’ll shoot your seed into her, truly claiming her as your mare.\n\n");
+		outputText("Diana giggles for a second before moaning again, as you continue to fuck her. You can feel yourself growing closer to an orgasm, and any second now you’ll shoot your seed into her, truly claiming her as your mare.\n\n");
 		outputText("Your thrusts grow increasingly eager as pressure builds within your loins, nearing the brink of your orgasm.\n\n");
 		outputText("\"<i>Please... cum in me. I can’t wait for you anymore!</i>\" Diana begs, still hugging your head.\n\n");
 		outputText("You grunt as you finally cum, ");
 		if (player.cumQ() >= 2000) {
-			outputText("earning a gasp from Diana as you blast your cum into her womb and guts like a hose, making her belly bulge and swell massively as you flood her womb and guts with your thick baby batter. She giggles softly as her belly swells until she looks very pregnant, showing that her guts and womb are now well stuffed with your seed, which will soon hopefully spawn a foal in her.\n\n");
-			outputText("\"<i>Hehe, it’ll be a miracle if I don’t end up pregnant with this much cum inside me,</i>\" Diana giggles, rubbing her bloated belly, \"<i>You’ve probably even gotten my butt pregnant too with how much cum you pumped into it...</i>\"\n\n");
+			outputText("earning a gasp from Diana, you blast your cum into her womb and guts like a hose, making her belly bulge and swell as you flood her womb and guts with your thick baby batter. She giggles softly as her belly swells until she looks very pregnant, showing that her guts and womb are now well stuffed with your seed.\n\n");
+			outputText("\"<i>Hehe, it’ll be a miracle if I don’t end up pregnant with this much cum inside me,</i>\" Diana giggles, rubbing her bloated belly, \"<i>Even my ass looks like it could pop out a baby...</i>\"\n\n");
 		}
 		else {
-			outputText("earning a happy moan from Diana as she feels your hot seed filling her pussy and arse, it entering her womb, where hopely it’ll pant itself into her and form the child Diana really wants.\n\n");
+			outputText("earning a happy moan from Diana as she feels your hot seed filling her holes. Your cock twitches, your baby batter pooling at her cervix and entering her womb. Diana's pussy spasms, droplets of your spooge trickling down her legs. \n\n");
 			outputText("\"<i>Thank you, I just hope I end up pregnant,</i>\" Diana says, smiling happily, \"<i>That...Would make this just...perfect</i>\"\n\n");
 		}
 	}
@@ -684,7 +684,7 @@ public function mainCampMenu():void {
 
 public function dianaAppearance():void {
 	clearOutput();
-	outputText("Diana is a white furred 7 foot tall Alicorn with long white hair. Her body is well-muscled, and covered with soft, white fur. Her green eyes look at you, wisdom in her gaze. She's currently looking at you curiously, one of her large herbology books in her hands.\n\n");
+	outputText("Diana is a 7 foot tall Alicorn with long white hair. Her body is well-muscled, and covered with soft, white fur. Her green eyes look at you, wisdom in her gaze. She's currently looking at you curiously, one of her large herbology books in her hands.\n\n");
 	outputText("Your eyes dip to her J cup breasts. You quickly look back up at her eyes, but if she noticed, she doesn't seem to care. Her legs, as with all horse morphs ends in hooves. Bound in iron, like the horseshoes back home, you know that those can be lethal weapons in a pinch. Her snow-white tail sits across her legs right now, strands of white hair covering her most intimate parts. You know Diana protected her virginity up to becoming a Alicorn, though now since you are her stallion, she is before anything your girlfriend.\n\n");
 	menu();
 	addButton(14, "Back", mainCampMenu);
@@ -913,8 +913,8 @@ public function SexMenuTitsfuck():void {
 		}
 		outputText("\"<i>My stallion is all ready I see,</i>\" Diana says, smiling.\n\n");
 		if (player.isAlraune()) outputText("Diana moves forward slightly, allowing the " + (player.cocks[x].cockLength >= 25 ? "monsterous" : "large") + " vine to sink between her mounds, your cock like vine’s lower shaft disappearing among the soft flesh.\n\n");
-		else outputText("Diana then pressing her big breasts against your stomach, your [cock biggest] cock shaft slipping between her cleavage, and you can’t help but out a little grunt of pleasure at the feelings of her soft flesh on your [skin].\n\n");
-		outputText("\"<i>Do you like my breasts [name]? I’m so glad...</i>\" Diana says starring endearingly at your cock, ");
+		else outputText("Diana then presses her big breasts against your stomach, your [cock biggest] cock shaft slipping between her cleavage. You can’t help but out a little grunt of pleasure at the feelings of her soft flesh on your [skin].\n\n");
+		outputText("\"<i>Do you like my breasts [name]? I’m so glad...</i>\" Diana says staring endearingly at your cock, ");
 		if (player.cocks[x].cockLength >= 25) outputText("which most of the monstrous length is laying across her head, making her shower the titanous member with her devotion in kisses and licks");
 		else if (player.cocks[x].cockLength >= 15) outputText("which half is right in front of her face, so she gives a loving kiss");
 		else outputText("which is sticking out of the middle of her cleavage");
@@ -943,8 +943,8 @@ public function SexMenuTitsfuck():void {
 			}
 		}
 		else {
-			outputText("Though eventually you want more, and grabbing her horn, " + (player.cocks[x].cockLength >= 15 ? "guides her up onto your cock’s head" : "guides her down onto your cock") + ".\n\n");
-			outputText("Still wanting to feel more, you suddenly begin to move your hips slightly, surprising her as the cock slams into the depths of her mouth as well as slam against her tits, earning a happy moan from her. Soon you’re both moving, you thrusting her your hips slightly, while she continues to move her body up and down your cock, while your cock is still buried in her mouth.\n\n");
+			outputText("Though your lover is blissed out, eyes glazed over with pleasure, but you're not satisfied yet. Grabbing her horn, " + (player.cocks[x].cockLength >= 15 ? "guide her up onto your cock’s head" : "guide her down onto your cock") + ".\n\n");
+			outputText("Still wanting to feel more, you suddenly begin to move your hips slightly, surprising her as the cock slams into the depths of her mouth. Your hips slam into her cheeks, and she moans, sending vibrations down your shaft. Soon, you’re both moving, you thrusting her your hips slightly, while she continues to move her body up and down you.\n\n");
 			outputText("Soon you fill the building pressure in your cock" + (player.cocks.length == 1 ? "" : "s") + ", threatening to burst out and spray your load inside her vine stuffed mouth and her vine covered body. You groan, as you feel it coming, building up and up and up, until it comes comes!\n\n");
 			outputText("You pull down on Diana horn, surprising her as she suddenly as to take even more of your cock, but not as surprised as when you suddenly spray her mouth with cum. ");
 			if (player.cumQ() >= 2000) {
