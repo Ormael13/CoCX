@@ -930,7 +930,7 @@ public function SexMenuTitsfuck():void {
 				outputText("Each vine shooting out their load over whatever surface they can, covering her upper body in their hot cum as the vines spray their huge load all over her, her fur almost disappearing under all the cum thick, while the tentacle in her mouth unloads its huge payload down her throat, the vines around her neck bulging as they making sure she takes it all, her belly swelling with the amount of cum you’ve forced in her. ");
 				outputText("As your vines finish their discharge, they remove themselves from her body, her sucking in a deep breath of air as one removes itself from her mouth and neck, before gulping down any remains in her mouth and smiling.\n\n");
 				outputText("\"<i>So much, my belly is now nice and full of your cum,</i>\" Diana says, rubbing her swollen belly, \"<i>But you turned me into quite the mess, didn’t you? I don’t think I’ll ever be able to wash out the smell of your cum, not that I mind.</i>\"\n\n");
-				outputText("\"<i>It suits you,</i>\" you say sheekily, giving her a playful kiss on the only non cum covered part of forehead.\n\n");
+				outputText("\"<i>It suits you,</i>\" you say cheekily, giving her a playful kiss on the only non cum covered part of forehead.\n\n");
 				outputText("\"<i>I’m glad you think it suits me,</i>\" Diana laughs, licking off some of the cum off her arm, \"<i>But I better clean up, see me for some more fun later, my potent stallion.</i>\"\n\n");
 				outputText("You nod and head off, while Diana cleans herself up.\n\n");
 			}
