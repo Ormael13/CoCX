@@ -18,18 +18,17 @@ package classes.Scenes.NPCs	{
 			clearOutput();
 			outputText("You wander the area, finding the remains of an abandoned, played-out mine. Remains of long destroyed golems litter the ground around the entrance. As you move closer, you hear the faintest sound of metal striking metal. Once inside, you hear a deep, sad voice, singing a sorrowful tune. \n\n");
 			outputText("Following the song, you happen across a most unique individual. A squat, muscular being; hunched over an anvil, shaping the head of a warhammer. Powerful arms rhythmically bring the hammer down, pounding the metal further into a shape that seems to flow from the beings mind.\n");
-			outputText("After minutes pass, the being stops and turns slightly to face you.\n\n\"<i>Well " + player.mf("lad","lass") + ", are you going to stand there and gawk all day, or are you going to introduce yourself?</i>\"\n\n");
+			outputText("After minutes pass, the being stops and turns slightly to face you.\n\n\"<i>Well </i>" + player.mf("<i>lad</i>","<i>lass</i>") + "<i>, are you going to stand there and gawk all day, or are you going to introduce yourself?</i>\"\n\n");
 			addButton(0, "Introduce Yourself", introduceSelf);
 			addButton(1, "Not Now", notNow);
 		}
 		
 		public function introduceSelf():void {
 			flags[kFLAGS.FORGEFATHER_MOVED_TO_TEMPLE] = 1;
-			clearOutput();
 			outputText("You introduce yourself to the being. /n/n");
 			outputText("Eyeing your quite solid form, he chuckles."
 			outputText("\"<i>That's quite the stout form you have. I thought the demons destroyed all of your kind.</i>\"\n\n");
-			outputText("Your respond, telling him of the Temple, and the 2 gargoyles now there. You describe you were a champion of your village, and how you willingly gave up your original form to inhabit the stony body.\n\n");
+			outputText("You respond, telling him of the Temple, and the 2 gargoyles now there. You describe you were a champion of your village, and how you willingly gave up your original form to inhabit the stony body.\n\n");
 			outputText("Surprised, the being exclaims.\n\n");
 			outputText("\n<i>The temple, high in the mountains. It still stands? Those old stones are more stubborn than we thought. And to hear my people's most wonderful designs live on.</i>\"\n\n");
 			outputText("The being grabs his gear from behind the anvil, and steps forward.\n\n");
@@ -38,16 +37,16 @@ package classes.Scenes.NPCs	{
 		}
 		
 		public function notNow():void {
-			clearOutput();
-			outputText("Write Write Write");
-			outputText("Not Now");
+			outputText("You decide, maybe you should just go back the way you came.\nYou turn around and begin walking out of the mine.\n\n");
+			outputText("\"<i>Fine then, if you finnaly decide to talk, you know where I'll be.</i>\"");
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		public function repeatForgefather():void {
 			clearOutput();
-			outputText("Write Write Write");
-			outputText("Welcome Back");
+			outputText("Finding yourself once again approaching the abandoned mine, you decide to check back in on the intriguing smith.\n");
+			outputText("Making your way through the tunnels, you once again find yourself beholding the being.\n\n");
+			outputText("\"<i>Well, you've returned,</i>" + player.mf("<i>lad</i>","<i>lass</i>") + "<i>. You finally going to tell me you're name?</i>\"");
 			addButton(0, "Introduce Yourself", introduceSelf);
 			addButton(1, "Not Now", notNow);
 		}
