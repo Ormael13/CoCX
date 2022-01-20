@@ -434,7 +434,7 @@ package classes.GlobalFlags
 		public static const DUNGEON_BUZZ_OFF:int					= 387;
 		public static const EPIC_F_H_B_S_CURVIER_4:int				= 388;
 		public static const EPIC_F_H_B_S_CURVIER_5:int				= 389;
-		public static const UNKNOWN_ACHIEVEMENT_390:int				= 390;
+		public static const FASHION_SUBJECT_DELTA:int				= 390;
 		public static const UNKNOWN_ACHIEVEMENT_391:int				= 391;
 		public static const UNKNOWN_ACHIEVEMENT_392:int				= 392;
 		public static const UNKNOWN_ACHIEVEMENT_393:int				= 393;

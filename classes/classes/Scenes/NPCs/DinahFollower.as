@@ -202,10 +202,7 @@ import classes.internals.Utils;
 			addButton(7, consumables.REDVIAL.shortName, buyItem3, 7).hint("Buy a vial of ominous red liquid.");
 			addButton(8, consumables.STRASCA.shortName, buyItem2, 8).hint("Buy a Strawberry shortcake.");
 			addButton(9, consumables.BCHCAKE.shortName, buyItem2, 9).hint("Buy a Big chocolate cake.");
-			if (player.headJewelry == headjewelries.HBHELM && player.armor == armors.HBARMOR) {
-				if (player.hasStatusEffect(StatusEffects.BuyedHowlingBansheMech)) addButtonDisabled(10, "???", "Wait until she find things that may be of use to fully restore HB mech.");
-				else addButton(10, vehicles.HB_MECH.shortName, buyHowlingBansheeMech).hint("Buy HB Mech - Increase armor by 15, magic resistance by 15.");
-			}
+			if (player.headJewelry == headjewelries.HBHELM && player.armor == armors.HBARMOR) addButton(10, "HB M&U", buyHowlingBansheeMechAndUpgrades);
 			else addButtonDisabled(10, "???", "Offers only for those that are wearing HB Armor & HB Helmet.");
 			if (flags[kFLAGS.DINAH_LVL_UP] > 0.5) {
 				addButton(11, "Roulette", DinahShopMainMenu3).hint("You feelin' lucky champion?");
@@ -382,23 +379,43 @@ import classes.internals.Utils;
 			inventory.takeItem(itype, DinahShopMainMenu3);
 		}
 		
+		public function buyHowlingBansheeMechAndUpgrades():void {
+			menu();
+			if (player.hasStatusEffect(StatusEffects.BuyedHowlingBansheMech)) {
+				addButtonDisabled(0, "HB Mech", "You have already bought HB mech.");
+				if (player.hasKeyItem("Upgraded HB Armor Plating and Leather Insulation")) {
+					addButtonDisabled(1, "Armor Plating", "A bit more until she find this upgrade components for sell.");
+					addButtonDisabled(2, "Leather Insulation", "A bit more until she find this upgrade components for sell.");
+				}
+				else {
+					addButtonDisabled(1, "Armor Plating", "A bit more until she find this upgrade components for sell.");
+					addButtonDisabled(2, "Leather Insulation", "A bit more until she find this upgrade components for sell.");
+				}
+			}
+			else {
+				addButton(0, vehicles.HB_MECH.shortName, buyHowlingBansheeMech).hint("Buy HB Mech - Increase armor by 15, magic resistance by 15.");
+				addButtonDisabled(1, "Armor Plating", "A bit more until she find this upgrade components for sell.");
+				addButtonDisabled(2, "Leather Insulation", "A bit more until she find this upgrade components for sell.");
+			}
+			addButton(14, "Back", DinahShopMainMenu);
+		}
 		public function buyHowlingBansheeMech():void {
 			clearOutput();
 			outputText("You point out the Howling Banshee Mech.\n\n");
 			outputText("\"<i>Oh this one? Luckly you got armor set needed to move this monster around. An it costs only " + (2000 * _extra) + " gems. It's one time deal so not expect me to find more of those.</i>\"");
 			if (player.gems < (2000 * _extra)) {
 				outputText("\n<b>You don't have enough gems...</b>");
-				doNext(DinahShopMainMenu);
+				doNext(buyHowlingBansheeMechAndUpgrades);
 				return;
 			}
-			doYesNo(Utils.curry(buyHowlingBansheeMech1), DinahShopMainMenu);
+			doYesNo(Utils.curry(buyHowlingBansheeMech1), buyHowlingBansheeMechAndUpgrades);
 		}
 		public function buyHowlingBansheeMech1():void {
 			clearOutput();
 			player.createStatusEffect(StatusEffects.BuyedHowlingBansheMech,0,0,0,0);
 			player.gems -= 2000 * _extra;
 			statScreenRefresh();
-			inventory.takeItem(vehicles.HB_MECH, DinahShopMainMenu);
+			inventory.takeItem(vehicles.HB_MECH, buyHowlingBansheeMechAndUpgrades);
 		}
 		
 		public function recieveGIFTfromDinah():void {

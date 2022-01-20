@@ -6100,7 +6100,7 @@ public class Combat extends BaseContent {
             WrathWeaponsProc();
             heroBaneProc(damage);
             EruptingRiposte();
-            if (player.hasPerk(PerkLib.SwiftCasting) && player.isOneHandedWeapons() && player.isHavingFreeOffHand() && flags[kFLAGS.ELEMENTAL_MELEE] > 0) {
+            if (player.hasPerk(PerkLib.SwiftCasting) && (player.isOneHandedWeapons() || (player.weaponSpecials("Large") && player.hasPerk(PerkLib.GigantGrip))) && player.isHavingFreeOffHand() && flags[kFLAGS.ELEMENTAL_MELEE] > 0) {
                 if (flags[kFLAGS.ELEMENTAL_MELEE] == 1 && CombatAbilities.Whitefire.isUsable) {
                     outputText("\n\n");
                     CombatAbilities.Whitefire.perform();
@@ -7520,7 +7520,7 @@ public class Combat extends BaseContent {
                 dynStats("lus", 3);
             }
         }
-		if (player.weapon == weapons.R_STAFF) damage *= 1.2;
+		if (player.weapon == weapons.R_STAFF) damage *= 1.4;
 		if (player.hasPerk(PerkLib.EclipticInfusion) && player.perkv3(PerkLib.ElementalBody) > 0) {
 			if (player.perkv3(PerkLib.ElementalBody) == 1) damage *= 1 + (0.01 * player.cor);
 			else damage *= 1 + (0.01 * (100 - player.cor));
@@ -7617,7 +7617,7 @@ public class Combat extends BaseContent {
                 dynStats("lus", 3);
             }
         }
-		if (player.weapon == weapons.S_STAFF) damage *= 1.2;
+		if (player.weapon == weapons.S_STAFF) damage *= 1.4;
 		if (player.hasPerk(PerkLib.EclipticInfusion) && player.perkv3(PerkLib.ElementalBody) > 0) {
 			if (player.perkv3(PerkLib.ElementalBody) == 1) damage *= 1 + (0.01 * player.cor);
 			else damage *= 1 + (0.01 * (100 - player.cor));
@@ -7709,7 +7709,7 @@ public class Combat extends BaseContent {
                 dynStats("lus", 3);
             }
         }
-		if (player.weapon == weapons.T_STAFF) damage *= 1.2;
+		if (player.weapon == weapons.T_STAFF) damage *= 1.4;
 		if (player.hasPerk(PerkLib.EclipticInfusion) && player.perkv3(PerkLib.ElementalBody) > 0) {
 			if (player.perkv3(PerkLib.ElementalBody) == 1) damage *= 1 + (0.01 * player.cor);
 			else damage *= 1 + (0.01 * (100 - player.cor));
@@ -7798,7 +7798,7 @@ public class Combat extends BaseContent {
                 dynStats("lus", 3);
             }
         }
-		if (player.weapon == weapons.A_STAFF) damage *= 1.2;
+		if (player.weapon == weapons.A_STAFF) damage *= 1.4;
 		if (player.hasPerk(PerkLib.EclipticInfusion) && player.perkv3(PerkLib.ElementalBody) > 0) {
 			if (player.perkv3(PerkLib.ElementalBody) == 1) damage *= 1 + (0.01 * player.cor);
 			else damage *= 1 + (0.01 * (100 - player.cor));
