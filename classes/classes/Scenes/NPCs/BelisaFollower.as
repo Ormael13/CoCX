@@ -1,8 +1,17 @@
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs {
+import classes.CoC;
+import classes.EventParser;
+import classes.Globalflags.kFLAGS;
+import classes.Scenes.SceneLib;
+import classes.lists.BreastCup;
+
+
+public class BelisaScene extends NPCAwareContent implements TimeAwareInterface
+}
 {
 	/**
 	 * ...
-	 * @author ...
+	 * @author ...Canadian Snas
 	 */
 	public class BelisaFollower 
 	{
