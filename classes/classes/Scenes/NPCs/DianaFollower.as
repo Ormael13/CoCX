@@ -73,7 +73,7 @@ public function postNameForestEnc():void {
 	clearOutput();
 	outputText("As you explore the forest area, you run into Diana.\n\n");
 	outputText("At first she doesn’t notice you, to busy examining a flower. You walk to her to say hi, but the sound of your feet on dry leaves immediately alerts her. She turns over with a startled  expression and grabs her staff to defend herself, but relax as she realise it’s you.\n\n");
-	outputText("\"<i>Oh hello [name]! I didn’t expect you. Say while you happen to be there, I’m in need of a sparring partner.<i>". She takes a few steps towards you, spinning her staff with one hand. "<i>would you mind having a friendly fight with me?</i>\"\n\n");
+	outputText("\"<i>Oh hello [name]! I didn’t expect you. Say while you happen to be there, I’m in need of a sparring partner.<i>\". She takes a few steps towards you, spinning her staff with one hand. \"<i>Would you mind having a friendly fight with me?</i>\"\n\n");
 	menu();
 	addButton(1, "Sure", postNameForestEncSure);
 	addButton(3, "Not Now", postNameForestEncNotNow);
@@ -661,7 +661,7 @@ public function breakingInYourMare2():void {
 public function mainCampMenu():void {
 	clearOutput();
 	outputText("You go check on Diana and find her reading a book on medicine. She looks up from her book, her face lighting up as you come near.\n\n");
-	outputText("\"<i>Oh hello [name], did you need anything? If you are injured, I can...patch you up." She gives you a smile, putting her book down. </i>\"\n\n");
+	outputText("\"<i>Oh hello [name], did you need anything? If you are injured, I can...patch you up.</i>\" She gives you a smile, putting her book down.\n\n");
 	menu();
 	addButton(0, "Appearance", dianaAppearance);
 	//1 - Talk
@@ -755,7 +755,7 @@ public function lostToDianaSpar():void {
 
 public function HealingScene():void {
 	clearOutput();
-	outputText("You asked Diana if she could tend to your injuries, and she perks up, rubbing her hands together. <i>"Of course I can, but you need to let me see all of you."<i> You remove your clothing, and when you look back, she's looking up and down your body. Diana gives you a reassuring smile, spreading her arms wide as if for a hug. You raise one eyebrow, but comply, allowing her to hold you against her wonderful body.\n\n");
+	outputText("You asked Diana if she could tend to your injuries, and she perks up, rubbing her hands together. \"<i>Of course I can, but you need to let me see all of you.</i>\" You remove your clothing, and when you look back, she's looking up and down your body. Diana gives you a reassuring smile, spreading her arms wide as if for a hug. You raise one eyebrow, but comply, allowing her to hold you against her wonderful body.\n\n");
 	outputText("She then starts to move her hands across your body, rubbing sensually against your [skin], making you gasp as you feel a strong tingling feeling from her fingertips. Sparks of magic play across your [skin] as she leans in, arms rubbing your [hips]. You suspect she just wants some skinship, but her magic's still potent, washing away your pain and injuries.\n\n");
 	outputText("Diana starts to rub her chest against yours, causing more of the strange tingling as her soft mounds move against your [skin], your gasps soon turning into moans as her fingers move up your inner thigh, sparks of pleasure shooting up your spine as she runs her fingertips across your " + (player.hasCock() ? "" : "wo") + "manhood.\n\n");
 	outputText("The sparks of magic intensify, becoming almost painful. You grimace, but she hushes you, soft touch on your body countering the pain. Soon enough, it's all over. Diana lets go, stepping back. All your wounds and injuries have closed up, as if they never existed. You're healed, but now you feel rather aroused.\n\n");
@@ -768,7 +768,7 @@ public function HealingScene():void {
 
 public function CuringCurseScene1():void {	//value related curses removal
 	clearOutput();
-	outputText("You ask Diana if she could remove the curses ailing you. <i>"Curses are a bit harder, but I can do that. I need access to your whole body though."<i> You remove your clothing, and when you look back, she's looking up and down your body. Diana gives you a reassuring smile, spreading her arms wide as if for a hug. You raise one eyebrow, but comply, allowing her to hold you against her wonderful body.\n\n");
+	outputText("You ask Diana if she could remove the curses ailing you. \"<i>Curses are a bit harder, but I can do that. I need access to your whole body though.</i>\" You remove your clothing, and when you look back, she's looking up and down your body. Diana gives you a reassuring smile, spreading her arms wide as if for a hug. You raise one eyebrow, but comply, allowing her to hold you against her wonderful body.\n\n");
 	outputText("She then starts to move her hands across your body, rubbing sensually against your [skin], making you gasp as you feel a strong tingling feeling from her fingertips, washing away your curses.\n\n");
 	outputText("Diana gives you a wicked little smile, rubbing her chest against yours. Her magic flares, causing more of the strange, shocking sensation as her soft mounds move against your [skin], your gasps soon turning into moans as her fingers move from your hips to your groin, sparks of pleasure shooting up your spine as she caresses your " + (player.hasCock() ? "" : "wo") + "manhood.\n\n");
 	outputText("The sparks of magic intensify, becoming almost painful. You grimace, but she hushes you, soft touch on your body countering the pain. Soon enough, it's all over. Diana lets go, stepping back. Your curses have lessened, although now you feel rather aroused.\n\n");

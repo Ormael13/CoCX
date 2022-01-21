@@ -383,19 +383,29 @@ import classes.internals.Utils;
 			menu();
 			if (player.hasStatusEffect(StatusEffects.BuyedHowlingBansheMech)) {
 				addButtonDisabled(0, "HB Mech", "You have already bought HB mech.");
-				if (player.hasKeyItem("Upgraded HB Armor Plating and Leather Insulation")) {
-					addButtonDisabled(1, "Armor Plating", "A bit more until she find this upgrade components for sell.");
-					addButtonDisabled(2, "Leather Insulation", "A bit more until she find this upgrade components for sell.");
+				if (player.hasKeyItem("HB Armor Plating") >= 0) {
+					if (player.keyItemv1("HB Armor Plating") == 2) addButtonDisabled(1, "Armor Plating v2", "Your HB Mech already have this upgrade.");
+					else addButton(1, "Armor Plating v2", buyHowlingBansheeMechUpgrade, "Armor Plating v2", 3000).hint("Increase armor by 25.");
 				}
-				else {
-					addButtonDisabled(1, "Armor Plating", "A bit more until she find this upgrade components for sell.");
-					addButtonDisabled(2, "Leather Insulation", "A bit more until she find this upgrade components for sell.");
+				else addButton(1, "Armor Plating v1", buyHowlingBansheeMechUpgrade, "Armor Plating v1", 1000).hint("Increase armor by 15.");
+				if (player.hasKeyItem("HB Leather Insulation") >= 0) {
+					if (player.keyItemv1("HB Leather Insulation") == 2) addButtonDisabled(2, "Leather Insulation v2", "Your HB Mech already have this upgrade.");
+					else addButton(2, "Leather Insulation v2", buyHowlingBansheeMechUpgrade, "Leather Insulation v2", 3000).hint("Increase magic resistance by 25.");
 				}
+				else addButton(2, "Leather Insulation v1", buyHowlingBansheeMechUpgrade, "Leather Insulation v1", 1000).hint("Increase magic resistance by 15.");
+				if (player.hasKeyItem("HB Agility") >= 0) {
+					if (player.keyItemv1("HB Agility") == 1) addButtonDisabled(3, "Agility v2", "Your HB Mech already have this upgrade.");
+					else addButton(3, "Agility v2", buyHowlingBansheeMechUpgrade, "Agility v2", 1000).hint("Adding speed scaling similar to Quick Strike perk to melee mech attacks.");
+				}
+				else addButton(3, "Agility v1", buyHowlingBansheeMechUpgrade, "Agility v1", 500).hint("Adding speed scaling similar to Speed Demon perk to melee mech attacks.");
 			}
 			else {
 				addButton(0, vehicles.HB_MECH.shortName, buyHowlingBansheeMech).hint("Buy HB Mech - Increase armor by 15, magic resistance by 15.");
-				addButtonDisabled(1, "Armor Plating", "A bit more until she find this upgrade components for sell.");
-				addButtonDisabled(2, "Leather Insulation", "A bit more until she find this upgrade components for sell.");
+				addButtonDisabled(1, "Armor Plating v1", "Req. to buy HM Mech first.");
+				addButtonDisabled(2, "Leather Insulation v1", "Req. to buy HM Mech first.");
+				addButtonDisabled(3, "Agility v1", "Req. to buy HM Mech first.");
+				//addButtonDisabled(4, "Req. to buy HM Mech first.");
+				//addButtonDisabled(5, "Req. to buy HM Mech first.");
 			}
 			addButton(14, "Back", DinahShopMainMenu);
 		}
@@ -416,6 +426,35 @@ import classes.internals.Utils;
 			player.gems -= 2000 * _extra;
 			statScreenRefresh();
 			inventory.takeItem(vehicles.HB_MECH, buyHowlingBansheeMechAndUpgrades);
+		}
+		public function buyHowlingBansheeMechUpgrade(upgrade:String, cost:Number):void {
+			clearOutput();
+			outputText("You point out " + upgrade + " upgrade options.\n\n");
+			outputText("\"<i>Oh this one? It costs " + (cost * _extra) + " gems to add to the mech. And bit of time for instaling it. Do you still want to proceed?</i>\"");
+			if (player.gems < (cost * _extra)) {
+				outputText("\n<b>You don't have enough gems...</b>");
+				doNext(buyHowlingBansheeMechAndUpgrades);
+				return;
+			}
+			doYesNo(Utils.curry(buyHowlingBansheeMechUpgrade1,upgrade,cost), buyHowlingBansheeMechAndUpgrades);
+		}
+		public function buyHowlingBansheeMechUpgrade1(upgrade:String, cost:Number):void {
+			clearOutput();
+			outputText("Fancy Placeholder text how mini blackhole suck in mech and returns it upgraded ^^\n\n");
+			player.gems -= cost * _extra;
+			statScreenRefresh();
+			if (upgrade == "Armor Plating v1") player.createKeyItem("HB Armor Plating",1,0,0,0);
+			if (upgrade == "Armor Plating v2") player.addKeyValue("HB Armor Plating",1,1);
+			if (upgrade == "Leather Insulation v1") player.createKeyItem("HB Leather Insulation",1,0,0,0);
+			if (upgrade == "Leather Insulation v2") player.addKeyValue("HB Leather Insulation",1,1);
+			if (upgrade == "Agility v1") player.createKeyItem("HB Agility",0,0,0,0);
+			if (upgrade == "Agility v2") player.addKeyValue("HB Agility",1,1);
+			//if (upgrade == "") ;
+			//if (upgrade == "") ;
+			//if (upgrade == "") ;
+			//if (upgrade == "") ;
+			//if (upgrade == "") ;
+			doNext(buyHowlingBansheeMechAndUpgrades);
 		}
 		
 		public function recieveGIFTfromDinah():void {
