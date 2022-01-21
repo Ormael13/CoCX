@@ -1332,7 +1332,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		else {
 			outputText("  <b>[Themonster] ");
 			if(!monster.plural) outputText("is ");
-			else outputText("are");
+			else outputText("are ");
 			outputText("too resolute to be frozen by your attack.</b>");
 		}
 		checkAchievementDamage(damage);

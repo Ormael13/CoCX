@@ -113,7 +113,7 @@ import classes.internals.Utils;
 		
 		public function DinahAppearance():void {
 			clearOutput();
-			outputText("Dinah is a 7' 8\" tall cat chimera of seemly all cat races in this realm. Burning eyes like those of hellcats and, fiery hair with colors like those of cheshire cats, parted by twin pair of small horns. Behind her slowly moves two blazing tails, and two long tentacles similar to that of a calamari. Her four arms completes her chimeric visage.");
+			outputText("Dinah is a 7' 8\" tall cat chimera of seemly all cat races in this realm. Burning eyes, like those of hellcats and fiery hair with colors akin to those of cheshire cats, parted by twin pair of small horns. A pair of blazing tails sway slowly behind her, and two long tentacles similar to that of a calamari. Her four arms complete her chimeric visage.");
 			outputText("\n\nShe has " + dinahHips() + " and a " + dinahButt() + ". She has a pair of " + dinahTits() + " on her chest. They have "+dinahNippleSize()+"-inch nipples at their tips and must be at least " + Appearance.breastCup(flags[kFLAGS.DINAH_CUP_SIZE]) + "s.");
 			menu();//very long, flowing locks of - between shouled length and ass length - hair desc
 			addButton(14, "Back", DinahMainMenu);
@@ -121,7 +121,7 @@ import classes.internals.Utils;
 		
 		public function DinahSparring():void {
 			clearOutput();
-			outputText("\"<i>Oh, you sensed my slowly building boredom? Not gonna say no to some entertaiment!</i>\" she makes few strenches and assumes a combat pose. \"<i>Let's <b>play</b> [name]!</i>\".");
+			outputText("\"<i>Oh, you sensed my slowly building boredom? Not gonna say no to some entertaiment!</i>\" she makes few strenches and assumes a combat pose. \"<i>Let's <b>play</b>, [name]!</i>\".");
 			player.createStatusEffect(StatusEffects.CampSparingDinah,0,0,0,0);
 			startCombat(new Dinah());
 		}
@@ -295,8 +295,8 @@ import classes.internals.Utils;
 		}
 		public function catChimeraBuy1(itype:ItemType):void {
 			clearOutput();
-			outputText("You point out the " + itype.longName + ".\n\n");
-			outputText("\"<i>Oh this one? It costs " + (itype.value * (1 + _extra)) + " gems.</i>\"");
+			outputText("You gesture at " + itype.longName + ".\n\n");
+			outputText("\"<i>Oh, this one? It costs " + (itype.value * (1 + _extra)) + " gems.</i>\"");
 			if (player.gems < (itype.value * (1 + _extra))) {
 				outputText("\n<b>You don't have enough gems...</b>");
 				doNext(DinahShopMainMenu);
@@ -306,7 +306,7 @@ import classes.internals.Utils;
 		}
 		public function catChimeraBuy2(itype:ItemType):void {
 			clearOutput();
-			outputText("You point out the " + itype.longName + ".\n\n");
+			outputText("You gesture at " + itype.longName + ".\n\n");
 			outputText("\"<i>Oh this one? It costs " + (itype.value * (2 + _extra)) + " gems.</i>\"");
 			if (player.gems < (itype.value * (2 + _extra))) {
 				outputText("\n<b>You don't have enough gems...</b>");
@@ -420,7 +420,7 @@ import classes.internals.Utils;
 		
 		public function recieveGIFTfromDinah():void {
 			clearOutput();
-			outputText("\"<i>Lady Godiva says that sometimes it's good to share something without asking for money so...</i>\" as she been talking she pulled some object from the folds of her robe and throws toward you. \"<i>...take this. And may Lady Godiva bless this place. And now firgive me i need to occupy myself with other matters.</i>\" Not giving you chance to say anything she shoo you away.");
+			outputText("\"<i>Lady Godiva says that sometimes, it's good to share something without asking for money so...</i>\" as she talks, she pulls an object from the folds of her robe and tosses it to you. \"<i>...Take this. May Lady Godiva bless this place. Now, forgive me. I have other matters that occupy my time.</i>\" Not giving you chance to say anything, she shoos you away.");
 			player.createStatusEffect(StatusEffects.DinahGift, (16+rand(15)), 0, 0, 0);
 			/*var gift:Number = rand(20);
 			if (gift == 0) inventory.takeItem(consumables.KITGIFT, DinahMainMenu);
@@ -429,7 +429,7 @@ import classes.internals.Utils;
 		
 		public function giveDinahItem():void {
 			clearOutput();
-			outputText("What item do you want to give Dinah?");
+			outputText("Which item do you want to offer to Dinah?");
 			menu();
 			var haveGift:Boolean = false;
 			var button:int = 0;
