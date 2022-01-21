@@ -3005,32 +3005,6 @@ public static const ITS_EVERY_DAY:int                                           
 public static const LOW_STANDARDS_FOR_ALL:int                                       = 2997;
 public static const HYPER_HAPPY:int                                                 = 2998;
 public static const UNKNOWN_FLAG_NUMBER_02999:int                                   = 2999; // ------------------------- Jojo Debug Flag?
-public static const BELISA_NAME_KNOWN:int					    = 3000; // 0 for no, 1 for known
-public static const BELISA_AFFECTION:int					    = 3001; // 1-100
-public static const BELISA_TIMES_MET:int					    = 3002; // determines encounter active. 0=swamp scene, 1=lake boat scene, 2=normal further scenes
-public static const BELISA_AT_CAMP:int						    = 3003; // 0 for no, 1 has her appear in lovers menu. 
-public static const BELISA_TOOTH_HEALED:int					    = 3004; // 0 for no, 1 means you've done her tooth repair quest.
-public static const BELISA_CONFESSION:int					    = 3005; // 0 if no, 1 means she's confessed to you.
-public static const BELISA_FUCKED:int						    = 3006; // 0 if she's still a virgin, 1 if you've fucked her
-public static const BELISA_PODLINGS:int						    = 3007; // number of Drider kids you've had with Belisa. 
-public static const LILY_MET:int						    = 3008; // 0 if not met, 1 if you've met her
-public static const LILY_SUBMISSIVENESS:int					    = 3009; // 0-100, how submissive Lily is towards you 
-public static const LILY_AFFECTION:int						    = 3010; // 0-100, how affectionate Lily is towards you
-public static const LILY_EXHIBITION:int						    = 3011; // how many times you've done Lily's exhibitionist camp event
-public static const LILY_SIDONIE3SOME:int					    = 3012; // 0 if not unlocked, 1 if it is
-public static const LILY_SIDONIEKIDS:int					    = 3013; // how many kids Lily and Sidonie have had together
-public static const LILY_ATCAMP:int						    = 3014; // 0 if Lily isn't at camp, 1 if she is. 
-public static const LILY_LEARNING:int						    = 3015; // 0 if you haven't seen Lily's books. 1 enables learning with Lily
-public static const TYRANTIA_AFFECTION:int					    = 3016; // 0-100
-public static const TYRANTIA_ATTACKED:int					    = 3017; // 0 if not triggered, 1 will trigger the event, 2 is after the event
-public static const TYRANTIA_GIVEN_UP:int					    = 3018; // 0 is normal, 1 will remove her from the game
-public static const TYRANTIA_CAV_FUCK:int					    = 3019; // counts how many times you've used her 'cavalry fuck' option. 5 will enable a bonus physical special if you're riding her in combat
-public static const TYRANTIA_TRAINING:int					    = 3020; // counts how many times you've trained with her in her combat style.
-public static const DRIDERS_AT_CAMP:int						    = 3021; // counts how many of the drider sisters you have at camp. 
-public static const LILYIZMA3SOME:int						    = 3022; // 0 for locked, 1 for unlocked
-public static const TYRANTIA_MET:int						    = 3023; // 0 for not met, 1 for met
-public static const TYRANTIA_UNIRIDERS:int					    = 3024; // number of children you've had with Tyrantia
-public static const LILY_DRIDERKIDS:int 					    = 3025; // number of children you've had with Lily
-public static const BELISA_TOOTH_ON:int						    = 3026; // 0 for not on, 1 for on her quest
+
 	}
 }
