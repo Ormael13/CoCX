@@ -3005,9 +3005,9 @@ public static const ITS_EVERY_DAY:int                                           
 public static const LOW_STANDARDS_FOR_ALL:int                                       = 2997;
 public static const HYPER_HAPPY:int                                                 = 2998;
 public static const UNKNOWN_FLAG_NUMBER_02999:int                                   = 2999; // ------------------------- Jojo Debug Flag?
-public static const BELISA_NAME_KNOWN:int						    = 3000; // 0 for no, 1 for known
-public static const BELISA_AFFECTION:int						    = 3001; // 1-100
-public static const BELISA_TIMES_MET:int						    = 3002; // determines encounter active. 0=swamp scene, 1=lake boat scene, 2=
+public static const BELISA_NAME_KNOWN:int					    = 3000; // 0 for no, 1 for known
+public static const BELISA_AFFECTION:int					    = 3001; // 1-100
+public static const BELISA_TIMES_MET:int					    = 3002; // determines encounter active. 0=swamp scene, 1=lake boat scene, 2=normal further scenes
 public static const BELISA_AT_CAMP:int						    = 3003; // 0 for no, 1 has her appear in lovers menu. 
 public static const BELISA_TOOTH_HEALED:int					    = 3004; // 0 for no, 1 means you've done her tooth repair quest.
 public static const BELISA_CONFESSION:int					    = 3005; // 0 if no, 1 means she's confessed to you.
@@ -3031,5 +3031,6 @@ public static const LILYIZMA3SOME:int						    = 3022; // 0 for locked, 1 for un
 public static const TYRANTIA_MET:int						    = 3023; // 0 for not met, 1 for met
 public static const TYRANTIA_UNIRIDERS:int					    = 3024; // number of children you've had with Tyrantia
 public static const LILY_DRIDERKIDS:int 					    = 3025; // number of children you've had with Lily
+public static const BELISA_TOOTH_ON:int						    = 3026; // 0 for not on, 1 for on her quest
 	}
 }
