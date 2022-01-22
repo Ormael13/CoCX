@@ -2964,7 +2964,7 @@ public static const UNKNOWN_FLAG_NUMBER_02955:int                               
 public static const UNKNOWN_FLAG_NUMBER_02956:int                                   = 2956;
 public static const UNKNOWN_FLAG_NUMBER_02957:int                                   = 2957;
 public static const UNKNOWN_FLAG_NUMBER_02958:int                                   = 2958;
-public static const ZENJITROLLVILLAGETIMERCHK:int                                   = 2959;
+public static const UNKNOWN_FLAG_NUMBER_02959:int                                   = 2959;
 public static const APEX_SELECTED_RACE:int                                   		= 2960;
 public static const UNKNOWN_FLAG_NUMBER_02961:int                                   = 2961;
 public static const NEWPERKSDISPLAY:int                                   			= 2962;//Perks Display cleanup

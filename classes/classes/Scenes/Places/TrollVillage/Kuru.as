@@ -82,7 +82,7 @@ public class Kuru extends TrollVillageAbstractContent{
         KuruExitDialogue();
     }
 
-    private function KuruExitDialogue():void{
+    public function KuruExitDialogue():void{
         if (TrollVillage.ZenjiFollowing){
             outputText("After another minute Zenji returns.\n" +
                     "\n" +

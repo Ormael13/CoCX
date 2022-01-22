@@ -14,27 +14,34 @@ public class TrollVillage extends BaseContent implements SaveableState{
     public var kalji:Kalji = new Kalji();
     public var yenza:Yenza = new Yenza();
 
-    public static var ZenjiVillageStage:int;    //1 = Intro Complete.
-    public static var JabalaUnlocked:Boolean;
-    public static var YenzaUnlocked:Boolean;
-    public static var KaljiUnlocked:Boolean;
+    public static var ZenjiVillageStage:int;    //1 = Intro Complete, 2 = Zenji forgives you.
     public static var ZenjiFollowing:Boolean;
+    public static var ZenjiBerated:Boolean;
+    public static var YenzaLockdown:int;
+    public static var ZenjiTrollVillageTimeChk:int;
+    public static var YenzaUnlocked:int;
+    public static var JabalaUnlocked:Boolean;
+    public static var KaljiUnlocked:int;
     public static var KuruUnlocked:Boolean;
     public static var HalkanoUnlocked:Boolean;
-    public static var ZenjiBerated:Boolean;
+    public static var ElderFUnlocked:Boolean;
 
     public function stateObjectName():String {
         return "TrollVillage";
     }
     public function resetState():void {
         ZenjiVillageStage = 0;
-        JabalaUnlocked = false;
-        YenzaUnlocked = false;
-        KaljiUnlocked = false;
         ZenjiFollowing = false;
+        ZenjiBerated = false;
+        YenzaLockdown = 0;
+        ZenjiTrollVillageTimeChk = 0;
+        YenzaUnlocked = 0;
+        JabalaUnlocked = false;
+        KaljiUnlocked = 0;
         KuruUnlocked = false;
         HalkanoUnlocked = false;
-        ZenjiBerated = false;
+        ElderFUnlocked = false;
+
     }
     public function saveToObject():Object {
         return{
@@ -45,7 +52,10 @@ public class TrollVillage extends BaseContent implements SaveableState{
             "ZenjiFollowing": ZenjiFollowing,
             "KuruUnlocked": KuruUnlocked,
             "HalkanoUnlocked": HalkanoUnlocked,
-            "ZenjiBerated": ZenjiBerated
+            "ZenjiBerated": ZenjiBerated,
+            "YenzaLockdown": YenzaLockdown,
+            "ZenjiTrollVillageTimeChk": ZenjiTrollVillageTimeChk,
+            "ElderFUnlocked": ElderFUnlocked
         };
     }
     public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
@@ -58,6 +68,8 @@ public class TrollVillage extends BaseContent implements SaveableState{
             KuruUnlocked = o["KuruUnlocked"];
             HalkanoUnlocked = o["HalkanoUnlocked"];
             ZenjiBerated = o["ZenjiBerated"];
+            YenzaLockdown = o["YenzaLockdown"];
+            ZenjiTrollVillageTimeChk = o["ZenjiTrollVillageTimeChk"];
         } else {
             // loading from old save
             resetState();
@@ -131,7 +143,7 @@ public class TrollVillage extends BaseContent implements SaveableState{
             outputText("You look at the large hall with a Chimney on it, the smell of food emanating from it.\n");
             outputText("The Elder’s hut stands tall, you can probably talk to someone there.\n");
             if (JabalaUnlocked) outputText("You can meet with Jabala and her husband if you like.\n");
-            if (YenzaUnlocked) outputText("You remember where Yenza’s hut is.\n");
+            if (YenzaUnlocked > 0) outputText("You remember where Yenza’s hut is.\n");
             if (KaljiUnlocked) outputText("You can meet Kal’ji at his personal hut.\n");
             ZenjiVillageStage = 1;
 
@@ -140,8 +152,8 @@ public class TrollVillage extends BaseContent implements SaveableState{
             menuItems.push("Dining Hall", SceneLib.trollVillage.diningHalls.GrabABite2Eat, "Catch a bite to eat.");
             menuItems.push("Elder's Hut", TheOldMansHut, "Look for the elder of the village.");
             menuItems.push("Jabala's Hut", (JabalaUnlocked?ReturningHome:false), ["Look for Zenji's Parents", "You don't want to disturb the nice couple."]);
-            menuItems.push("Yenza's Hut", (YenzaUnlocked?SceneLib.trollVillage.yenza.YenzaHome:false), ["Look for Yenza","You don't know who lives there."]);
-            menuItems.push("Kalji's Hut", (KaljiUnlocked?ReturningHome:false), ["",""]);
+            menuItems.push("Yenza's Hut", ((YenzaUnlocked > 0)?SceneLib.trollVillage.yenza.YenzaHome:false), ["Look for Yenza","You don't know who lives there."]);
+            menuItems.push("Kalji's Hut", ((KaljiUnlocked == 5)?SceneLib.trollVillage.kalji.KaljiHome:false), ["",""]);
             menuGen(menuItems,0, camp.returnToCampUseOneHour, false);
 
         }

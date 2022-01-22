@@ -1593,11 +1593,13 @@ public class Camp extends NPCAwareContent{
 				buttons.add("Samirah", SceneLib.samirah.samirahMainCampMenu);
 			}
 			//Zenji
-			//if (TrollVillage.ZenjiVillageStage == 2 && flags[kFLAGS.ZENJITROLLVILLAGETIMERCHK] == 0){
-			//	flags[kFLAGS.ZENJITROLLVILLAGETIMERCHK] = model.time.days + 1;
-			//}
-			//else if (TrollVillage.ZenjiVillageStage == 2 && flags[kFLAGS.ZENJITROLLVILLAGETIMERCHK] == model.time.days){
-			//}
+			if (TrollVillage.ZenjiVillageStage == 2) {
+				if (TrollVillage.ZenjiTrollVillageTimeChk == 0) {
+					TrollVillage.ZenjiTrollVillageTimeChk = model.time.days + 1;
+				} else if (TrollVillage.ZenjiTrollVillageTimeChk < model.time.days && TrollVillage.ZenjiTrollVillageTimeChk != -1) {
+					SceneLib.trollVillage.yenza.YenzaBeratePart2();
+				}
+			}
 			if (flags[kFLAGS.ZENJI_PROGRESS] == 11) {
 				if (model.time.hours >= 7 && model.time.hours <= 18) {
 					if (slavesCount() > 0 && rand(5) == 0) outputText("Zenji is keeping a close eye on some of your more corrupt camp members, ensuring that they don’t cause any harm.");

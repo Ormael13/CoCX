@@ -3,6 +3,9 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 import classes.Scenes.Places.TrollVillage;
+
+import flash.display.Scene;
+
 public class DiningHalls extends TrollVillageAbstractContent{
     public function DiningHalls():void {
     }
@@ -120,8 +123,8 @@ public class DiningHalls extends TrollVillageAbstractContent{
         menuItems.push("Waitress", SceneLib.trollVillage.kuru.KuruDining, "Talk to " + TrollVillage.KuruUnlocked?"Kuru":"the Waitress");
         menuItems.push("Halkano", (rand(4) == 1? SceneLib.trollVillage.halkano.TalksWithHalkano:"ignore"), "Talk to Halkano");
         menuItems.push("Jabala", (rand(4) == 1? SceneLib.trollVillage.jabala.JabalaDining:"ignore"), "Talk to Jabala");
-        menuItems.push("Yenza", ((rand(4) == 1 && !TrollVillage.YenzaUnlocked || (TrollVillage.YenzaUnlocked && !TrollVillage.ZenjiFollowing))? SceneLib.trollVillage.yenza.YenzaChecks:"ignore"), "Talk to Yenza");
-        menuItems.push("Elder(M)", (rand(4) == 1? TalktoElderM:"ignore"), "Talk to ElderM");
+        menuItems.push("Yenza", ((rand(4) == 1 && TrollVillage.YenzaUnlocked == 0|| (TrollVillage.YenzaUnlocked && !TrollVillage.ZenjiFollowing))? SceneLib.trollVillage.yenza.YenzaChecks:"ignore"), "Talk to Yenza");
+        menuItems.push("Elder(M)", (rand(4) == 1? SceneLib.trollVillage.kalji.TalkWithKalji:"ignore"), "Talk to ElderM");
         menuItems.push("Elder(F)", (rand(4) == 1? TalktoElderF:"ignore"), "Talk to ElderF");
         menuGen(menuItems, 0, LeaveTheHalls2, false);
 
