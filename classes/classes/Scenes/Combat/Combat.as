@@ -2340,6 +2340,14 @@ public class Combat extends BaseContent {
         //BASIC DAMAGE STUFF
         damage += player.str;
         damage += scalingBonusStrength() * 0.25;
+        if (player.hasKeyItem("HB Agility") >= 0) {
+			damage += player.spe;
+			damage += scalingBonusSpeed() * 0.20;
+			if (player.keyItemv1("HB Agility") == 1) {
+				damage += (player.spe / 2);
+				damage += scalingBonusSpeed() * 0.10;
+			}
+		}
         if (damage < 10) damage = 10;
 		if (player.isInGoblinMech()) {
 			damage *= 1.3;
