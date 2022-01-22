@@ -1731,11 +1731,11 @@ public function loverZenjiSex():void {
 		if (player.hasVagina()) addButton(1, "Take Vaginal", loverZenjiTakeVaginal).hint("Have Zenji penetrate you vaginally.");
 		else addButtonDisabled(1, "Take Vaginal", "You need a vagina for this scene.");
 		if (player.smallestCockArea() < 46) addButton(2, "Pitch Anal", loverZenjiPitchAnal).hint("Penetrate Zenji anally");
-		else addButtonDisabled(10, "Get Blown", "Your dick is too for him.\n\nZenji is a big guy, but even he has his limits!");
+		else addButtonDisabled(10, "Get Blown", "Your dick is too big for him.\n\nZenji is a big guy, but even he has his limits!");
 		if (player.isPregnant()) addButton(5, "Pregnant Sex", loverZenjiPregnantSex).hint("Zenji seems to eye your pregnant form with interest.");
-		else addButtonDisabled(5, "Pregnant Sex", "You need to be pregnanth for this.");
+		else addButtonDisabled(5, "Pregnant Sex", "You need to be pregnant for this.");
 		if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] >= 4) addButton(6, "Hot Spring", loverZenjiHotSpring).hint("Enter the hot spring with Zenji.");
-		else addButtonDisabled(6, "Hot Spring", "You not yet built Hot Spring.");
+		else addButtonDisabled(6, "Hot Spring", "You have not yet built a Hot Spring.");
 		if (player.hasVagina()) addButton(7, "Get Fingered", loverZenjiSexGetFingered).hint("Have Zenji put his thick fingers to good use.");
 		else addButtonDisabled(7, "Get Fingered", "You need a vagina for this scene.");
 		if (player.hasCock()) addButton(8, "Get Handjob", loverZenjiSexGetHandjob).hint("His hands are so luxuriously soft, put them to good use.");

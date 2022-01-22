@@ -1013,7 +1013,7 @@ import coc.xxc.StoryContext;
 			var total:int = menuItems.length;
 			var next:Boolean = false;
 			if(sort){
-				menuItems = menuItems.sort()
+				menuItems = menuItems.sort();
 			}
 			if(total/3 > 12){
 				for (var h:int = (page * 12) * 3, j:int = Math.min((h + 35), total - 1); h <= j; h++){ // Page 0 - array 0-36. Page 1 - array 37 -?
@@ -1037,9 +1037,9 @@ import coc.xxc.StoryContext;
 					}
 					else{
 						addButton(btnval,bList[i],bList[i + 1], null, null, null,(bList[i + 2] is Array) ? bList[i+2][0]: bList[i+2]);
-						btnsActive++
+						btnsActive++;
 					}
-					btnval++
+					btnval++;
 				}
 			}
 			if (page!=0 || total>12) {

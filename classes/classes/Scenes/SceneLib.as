@@ -255,6 +255,8 @@ public class SceneLib {
 
     public static var scyllaScene:ScyllaScene = new ScyllaScene();
 
+    public static var trollVillage:TrollVillage = new TrollVillage();
+
     public static var bazaar:Bazaar = new Bazaar();
 
     public static var boat:Boat = new Boat();
