@@ -1734,9 +1734,19 @@ import coc.view.MainView;
 			if (player.hasPerk(PerkLib.PastLifeSlacker)) player.perkPoints += 1;
 			if (player.hasPerk(PerkLib.PastLifeSlut)) player.perkPoints += 1;
 			if (player.hasKeyItem("PerksOverJobs") >= 0) player.removeKeyItem("PerksOverJobs");
+			if (player.hasPerk(PerkLib.AscensionBloodlineHeritage)) {
+				player.perkPoints += 1 * player.newGamePlusMod();
+				player.superPerkPoints += 1 * (player.newGamePlusMod() - 3);
+				player.statPoints += 5 * player.newGamePlusMod();
+			}
 			if (player.hasPerk(PerkLib.AscensionHerosHeritage)) {
 				player.perkPoints += 3 * player.newGamePlusMod();
 				player.statPoints += 15 * player.newGamePlusMod();
+			}
+			if (player.hasPerk(PerkLib.AscensionHerosLegacy)) {
+				player.perkPoints += 1 * player.newGamePlusMod();
+				player.superPerkPoints += 1 * (player.newGamePlusMod() - 2);
+				player.statPoints += 5 * player.newGamePlusMod();
 			}
 			if (player.hasPerk(PerkLib.AscensionHerosLineage)) {
 				player.perkPoints += 2 * player.newGamePlusMod();
@@ -1969,28 +1979,32 @@ import coc.view.MainView;
 			outputText("\n\nAscension Perk Points: " + player.ascensionPerkPoints);
 			menu();
 			var btn:int = 0;
-
 			if (player.hasPerk(PerkLib.AscensionAdditionalOrganMutationX)){
 				perkAOMXCheck(player.perkv1(PerkLib.AscensionAdditionalOrganMutationX) + 1, btn);
 			} else {
 				perkAOMXCheck(1, btn);
 			}
 			btn++
-
-			if (player.hasPerk(PerkLib.AscensionOneRaceToRuleThemAllX)){
-				perkAdvancedTrainingCheck(player.perkv1(PerkLib.AscensionOneRaceToRuleThemAllX) + 1, btn);
+			if (player.hasPerk(PerkLib.AscensionAdvTrainingX)){
+				perkAdvancedTrainingCheck(player.perkv1(PerkLib.AscensionAdvTrainingX) + 1, btn);
 			} else {
 				perkAdvancedTrainingCheck(1, btn);
 			}
 			btn++
-
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3 && player.hasPerk(PerkLib.AscensionHerosLegacy)) {
+				if (player.ascensionPerkPoints >= 75 && !player.hasPerk(PerkLib.AscensionBloodlineHeritage)) addButton(btn, "BloodHeritage", perkBloodlineHeritage).hint("Perk giving you an additional 1 perk point, 1 super perk point and 5 stat points at the start of the game (scaling with current NG tier, for super perk points amount is reduced by 3). Also would increase any bloodline perk bonus by 1.\n\nCost: 75 points");
+				else if (player.ascensionPerkPoints < 75) button(btn).disable("You do not have enough ascension perk points!");
+				else addButtonDisabled(btn, "BloodHeritage", "You already bought Bloodline Heritage perk.");
+			}
+			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && !player.hasPerk(PerkLib.AscensionHerosLegacy)) addButtonDisabled(btn, "BloodHeritage", "You need to buy Hero's Legacy perk first.");
+			else addButtonDisabled(btn, "BloodHeritage", "You need ascend more times to buy this perk.");
+			btn++;
 			if (player.hasPerk(PerkLib.AscensionBuildingPrestigeX)){
 				perkBPCheck(player.perkv1(PerkLib.AscensionBuildingPrestigeX) + 1, btn);
 			} else {
 				perkBPCheck(1, btn);
 			}
 			btn++
-
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && player.hasPerk(PerkLib.AscensionHybridTheory)) {
 				if (player.ascensionPerkPoints >= 20 && !player.hasPerk(PerkLib.AscensionCruelChimerasThesis)) addButton(btn, "C Chimera's T", perkCruelChimerasThesis).hint("Perk allowing you to receive race bonuses for one point less. (still req. min 8 race points to work).\n\nCost: 20 points");
 				else if (player.ascensionPerkPoints < 20) addButtonDisabled(btn, "C Chimera's T", "You do not have enough ascension perk points!");
@@ -2004,8 +2018,8 @@ import coc.view.MainView;
 			else addButtonDisabled(btn, "HeroHeritage", "You already bought Hero's Heritage perk.");
 			btn++;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && player.hasPerk(PerkLib.AscensionHerosHeritage)) {
-				if (player.ascensionPerkPoints >= 5 && !player.hasPerk(PerkLib.AscensionHerosLineage)) addButton(btn, "HeroLineage", perkHerosLineage).hint("Perk giving you an additional 2 perk points and 10 stat points at the start of the game (scaling with current NG tier).\n\nCost: 5 points");
-				else if (player.ascensionPerkPoints < 5) button(btn).disable("You do not have enough ascension perk points!");
+				if (player.ascensionPerkPoints >= 10 && !player.hasPerk(PerkLib.AscensionHerosLineage)) addButton(btn, "HeroLineage", perkHerosLineage).hint("Perk giving you an additional 2 perk points and 10 stat points at the start of the game (scaling with current NG tier).\n\nCost: 10 points");
+				else if (player.ascensionPerkPoints < 10) button(btn).disable("You do not have enough ascension perk points!");
 				else addButtonDisabled(btn, "HeroLineage", "You already bought Hero's Lineage perk.");
 			}
 			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && !player.hasPerk(PerkLib.AscensionHerosHeritage)) addButtonDisabled(btn, "HeroLineage", "You need to buy Hero's Heritage perk first.");
@@ -2021,6 +2035,14 @@ import coc.view.MainView;
 				perkOneRaceToRuleThemAllCheck(1, btn);
 			}
 			btn++
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && player.hasPerk(PerkLib.AscensionHerosLineage)) {
+				if (player.ascensionPerkPoints >= 25 && !player.hasPerk(PerkLib.AscensionHerosLegacy)) addButton(btn, "HeroLegacy", perkHerosLegacy).hint("Perk giving you an additional 1 perk point, 1 super perk point and 5 stat points at the start of the game (scaling with current NG tier, for super perk points amount is reduced by 2).\n\nCost: 25 points");
+				else if (player.ascensionPerkPoints < 25) button(btn).disable("You do not have enough ascension perk points!");
+				else addButtonDisabled(btn, "HeroLegacy", "You already bought Hero's Legacy perk.");
+			}
+			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && !player.hasPerk(PerkLib.AscensionHerosLineage)) addButtonDisabled(btn, "HeroLegacy", "You need to buy Hero's Lineage perk first.");
+			else addButtonDisabled(btn, "HeroLegacy", "You need ascend more times to buy this perk.");
+			btn++;
 			addButton(14, "Back", ascensionMenu);
 		}
 
@@ -2028,7 +2050,7 @@ import coc.view.MainView;
 			var NGPL:Array = [1, 3, 5, 7];
 			var pCost:int = 20;
 			if (tier > 5) {
-				addButtonDisabled(btn, "A.O.M. Rank "+ tier.toString(),"You have the highest tier already.");
+				addButtonDisabled(btn, "A.O.M. Rank "+ (tier-1).toString(),"You have the highest tier already.");
 			}
 			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < NGPL[tier - 1]) {
 				addButtonDisabled(btn, "A.O.M. Rank "+ tier.toString(),"You need to ascend a few more times.");
@@ -2047,7 +2069,7 @@ import coc.view.MainView;
 		private function perkBPCheck(tier:int, btn:int):void {
 			var pCost:int = 5;
 			if (tier > 6) {
-				addButtonDisabled(btn, "B.Prestige. Rank "+ tier.toString(),"You have the highest tier already.");
+				addButtonDisabled(btn, "B.Prestige. Rank "+ (tier-1).toString(),"You have the highest tier already.");
 			}
 			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < tier) {
 				addButtonDisabled(btn, "B.Prestige. Rank "+ tier.toString(),"You need to ascend once more.");
@@ -2062,8 +2084,8 @@ import coc.view.MainView;
 
 		private function perkAdvancedTrainingCheck(tier:int, btn:int):void {
 			var pCost:int = 25;
-			if (tier > 3) {
-				addButtonDisabled(btn, "Adv. Training Rank "+ tier.toString(),"You have the highest tier already.");
+			if (tier > 5) {
+				addButtonDisabled(btn, "Adv. Training Rank "+ (tier-1).toString(),"You have the highest tier already.");
 			}
 			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < tier) {
 				addButtonDisabled(btn, "Adv. Training  Rank "+ tier.toString(),"You need to ascend once more.");
@@ -2078,8 +2100,8 @@ import coc.view.MainView;
 
 		private function perkOneRaceToRuleThemAllCheck(tier:int, btn:int):void {
 			var pCost:int = 10;
-			if (tier > 3) {
-				addButtonDisabled(btn, "ORTRTA Rank "+ tier.toString(),"You have the highest tier already.");
+			if (tier > 5) {
+				addButtonDisabled(btn, "ORTRTA Rank "+ (tier-1).toString(),"You have the highest tier already.");
 			}
 			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] < tier) {
 				addButtonDisabled(btn, "ORTRTA Rank "+ tier.toString(),"You need to ascend once more.");
@@ -2101,6 +2123,13 @@ import coc.view.MainView;
 			doNext(rarePerks1);
 		}
 
+		private function perkBloodlineHeritage():void {
+			player.ascensionPerkPoints -= 75;
+			player.createPerk(PerkLib.AscensionBloodlineHeritage,0,0,0,1);
+			clearOutput();
+			outputText("You gained Bloodline Heritage perk.");
+			doNext(rarePerks1);
+		}
 		private function perkCruelChimerasThesis():void {
 			player.ascensionPerkPoints -= 20;
 			player.createPerk(PerkLib.AscensionCruelChimerasThesis,0,0,0,1);
@@ -2115,8 +2144,15 @@ import coc.view.MainView;
 			outputText("You gained Hero's Heritage perk.");
 			doNext(rarePerks1);
 		}
+		private function perkHerosLegacy():void {
+			player.ascensionPerkPoints -= 25;
+			player.createPerk(PerkLib.AscensionHerosLegacy,0,0,0,1);
+			clearOutput();
+			outputText("You gained Hero's Legacy perk.");
+			doNext(rarePerks1);
+		}
 		private function perkHerosLineage():void {
-			player.ascensionPerkPoints -= 5;
+			player.ascensionPerkPoints -= 10;
 			player.createPerk(PerkLib.AscensionHerosLineage,0,0,0,1);
 			clearOutput();
 			outputText("You gained Hero's Lineage perk.");

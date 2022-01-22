@@ -2424,7 +2424,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage *= 4;
 		damage *= damult;
-		damage = Math.round(damage);
+		damage = Math.round(damage * combat.waterDamageBoostedByDao());
 		//Shell
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
@@ -3265,7 +3265,7 @@ public class MagicSpecials extends BaseCombatContent {
 			return;
 		}
 		clearOutput();
-		outputText("You grin malevolently and weave an arcane sign, causing an infernal fire to surges from below and scorching your opponent \n");
+		outputText("You grin malevolently and weave an arcane sign, causing an infernal fire to surges from below and scorching your opponent ");
 		var damage:Number = scalingBonusIntelligence() * 3.2;
 		if (player.hasPerk(MutationsLib.ObsidianHeartPrimitive)) damage += scalingBonusIntelligence() * 0.8;
 		if (player.hasPerk(MutationsLib.ObsidianHeartEvolved)) damage += scalingBonusIntelligence() * 1.6;

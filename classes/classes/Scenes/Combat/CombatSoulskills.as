@@ -1010,7 +1010,7 @@ public class CombatSoulskills extends BaseCombatContent {
 	public function HailOfBlades1():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		clearOutput();
-		outputText("Letting soulforce leak out around you, you form six ethereal two meter long weapons. You thrust your hand outwards and in the blink of an eye, weapons shoot forwards [themonster].  ");
+		outputText("Letting soulforce leak out around you, you form six ethereal weapons, each measuring two meters long. You thrust your hand outwards, and in the blink of an eye, the weapons shoot towards [themonster].  ");
 		if ((player.playerIsBlinded() && rand(2) == 0) || (monster.spe - player.spe > 0 && int(Math.random() * (((monster.spe - player.spe) / 4) + 80)) > 80)) {
 			if (monster.spe - player.spe < 8) outputText(monster.capitalA + monster.short + " narrowly avoids weapons!");
 			if (monster.spe - player.spe >= 8 && monster.spe-player.spe < 20) outputText(monster.capitalA + monster.short + " dodges weapons with superior quickness!");
@@ -1332,7 +1332,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		else {
 			outputText("  <b>[Themonster] ");
 			if(!monster.plural) outputText("is ");
-			else outputText("are");
+			else outputText("are ");
 			outputText("too resolute to be frozen by your attack.</b>");
 		}
 		checkAchievementDamage(damage);

@@ -29,6 +29,8 @@ package classes.Scenes.Places.HeXinDao
 
 		public static var AhriStatsToPerksConvertCounter:Number;
 		public static var AhriTavernTalks:Boolean;
+		public static var EvelynnPerksToStatsConvertCounter:Number;
+		public static var EvelynnTavernTalks:Boolean;
 
 		public function stateObjectName():String {
 			return "JourneyToTheEast";
@@ -37,12 +39,16 @@ package classes.Scenes.Places.HeXinDao
 		public function resetState():void {
 			AhriStatsToPerksConvertCounter = 0;
 			AhriTavernTalks = false;
+			EvelynnPerksToStatsConvertCounter = 0;
+			EvelynnTavernTalks = false;
 		}
 
 		public function saveToObject():Object {
 			return {
 				"AhriStatsToPerksConvertCounter": AhriStatsToPerksConvertCounter,
-				"AhriTavernTalks": AhriTavernTalks
+				"AhriTavernTalks": AhriTavernTalks,
+				"EvelynnPerksToStatsConvertCounter": EvelynnPerksToStatsConvertCounter,
+				"EvelynnTavernTalks": EvelynnTavernTalks
 			};
 		}
 
@@ -50,6 +56,8 @@ package classes.Scenes.Places.HeXinDao
 			if (o) {
 				AhriStatsToPerksConvertCounter = o["AhriStatsToPerksConvertCounter"];
 				AhriTavernTalks = o["AhriTavernTalks"];
+				EvelynnPerksToStatsConvertCounter = valueOr(o["EvelynnPerksToStatsConvertCounter"], 0);
+				EvelynnTavernTalks = valueOr(o["EvelynnTavernTalks"], false);
 			} else {
 				// loading from old save
 				resetState();
@@ -78,14 +86,8 @@ package classes.Scenes.Places.HeXinDao
 			//addButtonDisabled(5, "???", "You see some suspicious looking human bimbo with animal tail in one of inn corners.");
 			//addButtonDisabled(6, "Monkey", "You see human bimbo with amazonian build and monkey tail sitting at the table on the rights side of inn.");
 			//addButton(6, "Monkey", SceneLib.waizabi.bimboMonkey).hint("You see human bimbo with amazonian build and monkey tail sitting at the table on the rights side of inn.");//monkey bimbo go go - Waiz'abi
-			if (workHoursMadam()) {
-				if (AhriTavernTalks) addButton(7, "Madam", visitMadam).hint("You see 'Madam' sitting at one of the inn tables.");
-				else addButton(7, "???", visitMadam).hint("You see mysterious looking animal-morph sitting at one of the inn tables.");//Ahri
-			}
-			else {
-				if (AhriTavernTalks) addButtonDisabled(7, "Madam", "'Madam' isn't currently at her usual table in the inn.");
-			}
-			if (workHoursTemptress() && rand(3) == 0) addButtonDisabled(7, "???", "You see mysterious looking devil sitting at one of the inn tables.");//Evelynn
+			if (workHoursMadam() || workHoursTemptress()) addButton(6, "5/0/0", tableNo5);
+			else addButtonDisabled(6, "5/0/0", "Table No. 5 is curently empty.");
 			if (flags[kFLAGS.MICHIKO_FOLLOWER] < 1) addButton(8, "???", SceneLib.michikoFollower.firstMeetingMichiko).hint("You see some suspicious looking squirrel in one of inn corners.");
 			if (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] < 2 && (player.humanScore() >= (player.humanMaxScore() - player.internalChimeraScore()))) {
 				if (flags[kFLAGS.CURSE_OF_THE_JIANGSHI] < 1) addButton(9, "???", firstTimeMeetingNekomataBoy).hint("A strange cat morph with two tails is sitting at one of the tables muttering to himself.");
@@ -172,6 +174,18 @@ package classes.Scenes.Places.HeXinDao
 			inventory.takeItem(itype, curry(shadyPerson,false));
 		}
 
+		private function tableNo5():void {
+			menu();
+			if (workHoursMadam()) {
+				if (AhriTavernTalks) addButton(0, "Madam", visitMadam).hint("You see 'Madam' sitting at one of the inn tables.");
+				else addButton(0, "???", visitMadam).hint("You see mysterious looking animal-morph sitting at one of the inn tables.");//Ahri
+			}
+			else {
+				if (AhriTavernTalks) addButtonDisabled(0, "Madam", "'Madam' isn't currently at her usual table in the inn.");
+			}
+			if (workHoursTemptress()) addButtonDisabled(1, "???", "You see mysterious looking devil sitting at one of the inn tables.");//Evelynn
+			addButton(14, "Back", curry(enteringInn,false));
+		}
 		private function workHoursMadam():Boolean {
 			if ((model.time.hours >= 6 && model.time.hours <= 9) || (model.time.hours >= 18 && model.time.hours <= 21)) return true;
 			return false;
@@ -191,7 +205,7 @@ package classes.Scenes.Places.HeXinDao
 			}
 			menu();
 			addButton(1, "Convert", visitMadamConvert);
-			addButton(3, "Back", curry(enteringInn,false));
+			addButton(3, "Back", tableNo5);
 		}
 		private function visitMadamConvert():void {
 			clearOutput();
@@ -229,7 +243,7 @@ package classes.Scenes.Places.HeXinDao
 			clearOutput();//Temptress - female displacer devil npc for perk points to stat points conversion		outputText("\"<i></i>\"\n\n");
 			menu();
 			addButton(1, "Convert", visitTemptressConvert);
-			addButton(3, "Back", curry(enteringInn,false));
+			addButton(3, "Back", tableNo5);
 		}
 		private function visitTemptressConvert():void {
 			

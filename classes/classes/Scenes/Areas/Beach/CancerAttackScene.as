@@ -145,10 +145,10 @@ public class CancerAttackScene extends BaseContent
 					outputText("You gently begin to insert your hardening cock inside the girl bubbling mess making her gasp in delight, her pussy squeezing your cock like a vice. " +
 							"She thankfully controls her pincers and pussy well enough not to squeeze you to death while in the middle of a mating session something you are very relieved off. " +
 							"Aware that staying immobile could spell something very bad for you you proceed to methodically fuck her bubbling hole something she rewards by weakening the death grip of her claw on you merely holding you in place now. " +
-							"Her cunt keeps on gushing everytime you insert yourself in her and to be honest you have begun to enjoy yourself as well despite your predicament.\n\n" +
-							"<i>\"Ahhh… cuming…\"</i>\n\n" +
+							"Her cunt gushes everytime you insert yourself in her, and to be honest, you have begun to enjoy yourself as well despite your predicament.\n\n" +
+							"<i>\"Ahhh… cumming…\"</i>\n\n" +
 							"Unsurprisingly even her orgasmic expression is barely different from her normal pleasured one but you can feel in her bodily movement and the massive bubbling splash on your bottom half that she's enjoying herself. " +
-							"Your penis also does achieve orgasm, your cum mixing in with her foam as you fertilise her hole thoroughly, though your own moan was way louder than hers. " +
+							"Your penis also does achieve orgasm, your cum mixing in with her foam as you fertilize her hole thoroughly, though your own moan was way louder than hers. " +
 							"Satisfied with this she simply drops you on the sand still in the afterglow and dig herself back into the hole she came from. Still panting, you proceed to slowly redress as you make your way back to camp.")
 					player.sexReward("vaginalFluids","Dick");
 				}
