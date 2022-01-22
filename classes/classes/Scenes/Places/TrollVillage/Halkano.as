@@ -172,7 +172,7 @@ public class Halkano extends TrollVillageAbstractContent{
                 "You reach your [hand] up to Halkano, guiding his length to your lips, licking the tip of his dick.\n" +
                 "\n" +
                 "Zenji prods at your backdoor, sliding his length between your cheeks. He slavers onto his shaft, lubricating himself for you as he coats his length in his drool. Once he’s sufficiently slicked, he drives himself into your rear.\n\n");
-        if (player.analCapacity < 7){
+        if (player.analCapacity() < 7){
             outputText("His lengthy shaft presses its way deep inside of your tight anus, you feel yourself stretch over his considerable manhood.\n\n");
         }
         else if (player.analCapacity() < 55){

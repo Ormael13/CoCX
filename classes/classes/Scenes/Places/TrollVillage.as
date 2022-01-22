@@ -21,6 +21,7 @@ public class TrollVillage extends BaseContent implements SaveableState{
     public static var ZenjiFollowing:Boolean;
     public static var KuruUnlocked:Boolean;
     public static var HalkanoUnlocked:Boolean;
+    public static var ZenjiBerated:Boolean;
 
     public function stateObjectName():String {
         return "TrollVillage";
@@ -33,6 +34,7 @@ public class TrollVillage extends BaseContent implements SaveableState{
         ZenjiFollowing = false;
         KuruUnlocked = false;
         HalkanoUnlocked = false;
+        ZenjiBerated = false;
     }
     public function saveToObject():Object {
         return{
@@ -42,7 +44,8 @@ public class TrollVillage extends BaseContent implements SaveableState{
             "KaljiUnlocked": KaljiUnlocked,
             "ZenjiFollowing": ZenjiFollowing,
             "KuruUnlocked": KuruUnlocked,
-            "HalkanoUnlocked": HalkanoUnlocked
+            "HalkanoUnlocked": HalkanoUnlocked,
+            "ZenjiBerated": ZenjiBerated
         };
     }
     public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
@@ -54,6 +57,7 @@ public class TrollVillage extends BaseContent implements SaveableState{
             ZenjiFollowing = o["ZenjiFollowing"];
             KuruUnlocked = o["KuruUnlocked"];
             HalkanoUnlocked = o["HalkanoUnlocked"];
+            ZenjiBerated = o["ZenjiBerated"];
         } else {
             // loading from old save
             resetState();
@@ -129,7 +133,7 @@ public class TrollVillage extends BaseContent implements SaveableState{
             if (JabalaUnlocked) outputText("You can meet with Jabala and her husband if you like.\n");
             if (YenzaUnlocked) outputText("You remember where Yenza’s hut is.\n");
             if (KaljiUnlocked) outputText("You can meet Kal’ji at his personal hut.\n");
-            ZenjiVillageStage = true;
+            ZenjiVillageStage = 1;
 
 
             var menuItems:Array = [];

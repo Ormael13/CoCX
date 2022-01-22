@@ -8,7 +8,7 @@ public class Yenza extends TrollVillageAbstractContent{
     public function Yenza() {
     }
 
-    public function YenzaChecks(){
+    public function YenzaChecks():void{
         clearOutput();
         if (!TrollVillage.YenzaUnlocked){
             if (!TrollVillage.ZenjiFollowing){
@@ -99,7 +99,7 @@ public class Yenza extends TrollVillageAbstractContent{
         }
     }
 
-    public function YenzaHome(){
+    public function YenzaHome():void{
 
     }
 
