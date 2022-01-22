@@ -120,18 +120,21 @@ startCombat(drider);
 		
 		public function secondEncounterYesCuriosity():void {
 		outputtext("You tell the girl that you just wanted to know what this giant ball in the lake was. She sighs. <i>“I made this. It’s my home."<i> She pouts a little, crossing her arms. <i>“Now can you please let me be?”<i>\n\n"); 
+		menu();
 		addbutton (1, "Leave", secondEncounterLeaveAlone);
 		addbutton (2, "Nah", secondEncounterNahFight);
 		}
 		
 		public function secondEncounterYesFishing():void {
 		outputtext("You tell her that you were just out on the lake to catch some fish. At this, she sighs. The sphere wriggles, and a dead fish, head pierced with some kind of needle, is thrown into your boat. <i>“There, you have a fish.”<i> Her voice quivers, and she points towards the shore. <i>“Now please... just leave me alone.”<i>\n\n"); 
+		menu();
 		addbutton (1, "Leave", secondEncounterLeaveAlone);
 		addbutton (2, "Nah", secondEncounterNahFight);
 		}
 		
 		public function secondEncounterYesNoWorries():void {
 		outputtext("You raise your hands, trying to assure her that you mean no harm. Her six eyes soften a little, but she points at the shore, lips quivering. <i>“Look...Just…”<i> She inhales shakily. <i>“Just leave me, please. I don’t know who you are.”<i>\n\n"); 
+		menu();
 		addbutton (1, "Leave", secondEncounterLeaveAlone);
 		addbutton (2, "Nah", secondEncounterNahFight);
 		}
