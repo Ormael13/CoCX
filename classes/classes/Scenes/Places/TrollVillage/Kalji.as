@@ -43,7 +43,7 @@ public class Kalji extends TrollVillageAbstractContent{
         }
 
         function KaljiHimself():void {
-            if (!KaljiInteractTrack) {
+            if (!KaljiInteractTrack()) {
                 outputText("You tell Kal'ji that you want to get to know him a little more. Who is he, why did he join the council. Does he enjoy his position of power?\n" +
                         "\n" +
                         "“My, you sure have a lot of questions.” He replies, “Let's see…  I am Kal'ji, as you may know. I am not tall or strong by any means. I always felt a little… well, little. It was never a terrible deal, but… It’s as if I had the potential to be more, even if the others couldn’t see it. Childhood was rough, I wasn’t wealthy by any means. I climbed my way out from the dirt, I didn’t want to grow up to be a farmer like my parents. Thankfully my parents were supportive. Sadly they didn’t stick around for long, I don’t want to talk about it.”\n" +
@@ -56,7 +56,7 @@ public class Kalji extends TrollVillageAbstractContent{
         }
 
         function KaljiCouncilCheck():void {
-            if (!KaljiInteractTrack) {
+            if (!KaljiInteractTrack()) {
                 KaljiCouncil();
             }
             SceneLib.trollVillage.kuru.KuruExitDialogue();
@@ -137,7 +137,7 @@ public class Kalji extends TrollVillageAbstractContent{
     private function KaljiSex():void{
         clearOutput();
         menu();
-        if (!player.hasCock || (player.gender == 0  && player.smallestTitSize() >= 3 && player.femininity >= 36)){
+        if (!player.hasCock() || (player.gender == 0  && player.smallestTitSize() >= 3 && player.femininity >= 36)){
             outputText("You ask Kal'ji if he’s willing to get a little more intimate with you.\n" +
                     "\n" +
                     "Kal'ji gives you a small smile, “Thanks [name]. I am very flattered, but I can’t say I’m too interested in you, you’re just… not my type…”\n" +
@@ -152,7 +152,7 @@ public class Kalji extends TrollVillageAbstractContent{
             addButton(0,"Blow Him", KjBJY);
             addButton(1,"Do not", KjBJN1)
         }
-        else if (!player.hasVagina || (player.gender == 0  && player.smallestTitSize() <= 1 && player.femininity <= 35)){
+        else if (!player.hasVagina() || (player.gender == 0  && player.smallestTitSize() <= 1 && player.femininity <= 35)){
 
         } else{
             outputText("")

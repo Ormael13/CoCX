@@ -110,7 +110,7 @@ public class Yenza extends TrollVillageAbstractContent{
                     "Zenji is adamant about not going to her house. It’s probably for the best, it’d only stir more trouble.\n");
         }
         else{
-            if (player.hasBreasts || player.femininity > 30){
+            if (player.hasBreasts() || player.femininity > 30){
                 outputText("You knock on the door. After a few minutes of waiting, nobody responds, so you decide to take your leave\n");
             }
             else{
@@ -121,7 +121,7 @@ public class Yenza extends TrollVillageAbstractContent{
                         "She guides you into her home, it’s small and comfortable. You don’t see much of it as she quickly drags you to her bedroom. Her scent is sweet and overpowering, almost attacking your nostrils.\n" +
                         "\n" +
                         "\"Let’s get straight to business, I know why you’re here, and I’m not taking no for an answer.\" She leans closer, copping a feel from your crotch.\n");
-                if (!player.hasCock){
+                if (!player.hasCock()){
                     outputText("Her hand goes uninterrupted as she attempts to grope a bulge that does not exist.\n" +
                             "\n" +
                             "\"Ew, get the fuck out of here, now!\" She turns her back against you and refuses to look at you.\n");
