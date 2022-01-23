@@ -82,7 +82,8 @@ public class BelisaScene extends NPCAwareContent implements TimeAwareInterface i
 `		public function BelisaAffection(changes:Number = 0):Number {
 			BelisaAffectionMeter += changes;
 			if (BelisaAffectionMeter > 100) BelisaAffectionMeter = 100;
-			{
+			}
+			
 		public function firstEncounter():void {
 		clearOutput();
 		outputtext("You stride through the swamp. It seems to be quieter than normal. You think you hear the telltale hissing of a Drider, but nothing pops out at you. You check your feet, but there’s no web traps around you. Still, you’re in drider territory, and you put your back to a willow tree, holding your [weapon] ready.\n\n"); 
@@ -93,9 +94,10 @@ outputtext("She jumps, almost directly over you. As she flies, you can see most 
 outputtext("The two driders hiss, their toy lost, but they quickly catch sight of you.\n\n");
 outputtext("<i>“I’ll find her”,<i> the second one growls, leaving the first. She turns to you with a sadistic grin.\n\n");
 You are now fighting a Drider!\n\n");
-(BelisaEncounternum = 1);
+BelisaEncounternum(1);
 startCombat(drider);
 			}
+			
 		public function secondEncounter():void {
 		clearoutput();
 		outputtext("Your row on the lake is peaceful. For once, the water is calming and still. The wind’s no longer blowing, and the sky above is blue. As you gaze around, something catches your eye.  \n\n"); 
@@ -112,6 +114,7 @@ startCombat(drider);
 		outputtext("It’s still getting bigger, and as you stare, the structure inflates into the front of your boat, nudging it backwards. \n\n"); 
 		outputtext("<i>“Eep!”<i> comes a muffled voice from inside the object. You hear a clattering noise from inside, like someone climbing a ladder. The object shudders, and a humanoid figure pokes out from the top. You can only see her upper body, and the silk she wears blends in with the orb. Her brown eyes stare down at you, wide. \n\n");
 		outputtext("<i>“What do you want?”<i> She demands, her voice high and wavering. <i>“Wh-what are you doing here?”<i> Despite her demands, her arms shake. She has a dagger in her hand, and it’s pointed straight at you, but the hand holding it shakes. \n\n"); 
+		BelisaEncounternum(2);
 		menu();
 		addButton(1, "Demons", secondEncounterYesDemons);
  		addbutton(2, "Curiosity", secondEncounterYesCuriosity);
@@ -199,8 +202,7 @@ startCombat(drider);
 		
 		if (BelisaAffectionMeter <=30) and (BelisaShopOpen = false); {
 		Belisa turns her back on you, holding out a finger. You wait for a few moments as she opens a curtainlike opening on her silky bubble-home, and she comes back with a few small boxes. <i>"I haven't found anyone I can trust in a while."<i> she explains. <i>"But you...seem like a decent person. You may not know what a manaweaver is...But the long and short of it is that I can make some enchanted items with my silk."<i> She blushes slightly, continuing in a chipper voice. <i>"I think, since you're out here as well, you could use my work as well. I can't just give these to you...But I would take gems for them"<i>\n\n");
-		
-		(BelisaShopOpen = true);
+		BelisaShopOpen (true);
 		menu();
 		addbutton (1, "Talk", BelisaTalk);
 		addbutton (2, "Hang", BelisaHang);
