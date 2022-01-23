@@ -199,8 +199,8 @@ startCombat(drider);
 		
 		if (BelisaAffectionMeter <=30) and (BelisaShopOpen = false); {
 		Belisa turns her back on you, holding out a finger. You wait for a few moments as she opens a curtainlike opening on her silky bubble-home, and she comes back with a few small boxes. <i>"I haven't found anyone I can trust in a while."<i> she explains. <i>"But you...seem like a decent person. You may not know what a manaweaver is...But the long and short of it is that I can make some enchanted items with my silk."<i> She blushes slightly, continuing in a chipper voice. <i>"I think, since you're out here as well, you could use my work as well. I can't just give these to you...But I would take gems for them"<i>\n\n");
+		
 		(BelisaShopOpen = true);
-			}
 		menu();
 		addbutton (1, "Talk", BelisaTalk);
 		addbutton (2, "Hang", BelisaHang);
