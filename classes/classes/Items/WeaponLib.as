@@ -46,8 +46,10 @@ package classes.Items
 		public const DEMSCYT:DemonicScythe = new DemonicScythe();
 		public const DEPRAVA:Depravatio = new Depravatio();
 		public const DE_GAXE:DemonicGreataxe = new DemonicGreataxe();
+		public const DKATANA:DualKatana = new DualKatana();
 		public const DRAPIER:DragonsRapier = new DragonsRapier();
 		public const D_WHAM_:DualHugeWarhammer = new DualHugeWarhammer();
+		public const D_LANCE:DualLance = new DualLance();
 		public const DL_AXE_:DualLargeAxe = new DualLargeAxe();
 		public const DOCDEST:DefiledOniChieftainDestroyer = new DefiledOniChieftainDestroyer();
 		public const DSWORD_:DualSwords = new DualSwords();
