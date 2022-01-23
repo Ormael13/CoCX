@@ -203,13 +203,14 @@ public class BelisaScene extends NPCAwareContent implements TimeAwareInterface i
 		if (BelisaAffectionMeter <=30) and (BelisaShopOpen = false); {
 		Belisa turns her back on you, holding out a finger. You wait for a few moments as she opens a curtainlike opening on her silky bubble-home, and she comes back with a few small boxes. <i>"I haven't found anyone I can trust in a while."<i> she explains. <i>"But you...seem like a decent person. You may not know what a manaweaver is...But the long and short of it is that I can make some enchanted items with my silk."<i> She blushes slightly, continuing in a chipper voice. <i>"I think, since you're out here as well, you could use my work as well. I can't just give these to you...But I would take gems for them"<i>\n\n");
 		BelisaShopOpen (true);
+		}
 		menu();
 		addbutton (1, "Talk", BelisaTalk);
 		addbutton (2, "Hang", BelisaHang);
 		addbutton (3, "Shop", BelisaShop);
 		addbutton (4, "Sex", BelisaSex):
 		}
-	}
+	
 		
 		
 		
@@ -241,19 +242,20 @@ public class BelisaScene extends NPCAwareContent implements TimeAwareInterface i
 			if (BelisaAffectionMeter < 20) {
 		outputtext ("<i>"You..."<i> The Drider sinks back under the water, leaving nothing but her mouth, looking up at you, above the surface. <i>"No. I don't think that's a good idea."<i> She points away, back where you came from. <i>"Please leave me alone now"<i>\n\n"); 
 		outputtext(" not wanting to aggravate the odd, aquatic Drider any further, you take your leave, heading back towards camp. \n\n");
-		else
+			}
+		else {
 		outputtext("<i>"You just want to...hang out?"<i> Belisa seems taken aback by this, but she smiles slightly. <i>I...wouldn't be opposed to spending some time with you. What are you thinking of doing?"<i> \n\n"); 
 		menu();
 			}
-		addbutton (1, "Spar", BelisaTalkHangSpar);
-		addbutton (2, "Fish", BelisaTalkHangFish);
-		addbutton (3, "Weaving", BelisaTalkHangWeave);
-		addbutton (4, "Magic", BelisaMagic);
-		addbutton (5, "House", Belisahouse);
-		addbutton (6, "back", BelisaBack);
-		
+		addbutton (1, "Spar", BelisaHangSpar);
+		addbutton (2, "Fish", BelisaHangFish);
+		addbutton (3, "Weaving", BelisaHangWeave);
+		addbutton (4, "Magic", BelisaHangMagic);
+		addbutton (5, "House", BelisaHangHouse);
+		addbutton (6, "back", BelisaHangBack);
 		}
-		public function BelisaTalkHangSpar():void {
+		
+		public function BelisaHangSpar():void {
 		clearoutput();
 		if (BelisaAffectionMeter < 30) {
 		outputtext ("<i>"You want to fight...ME?!"<i> she seems rather angry...and afraid. <i>"was this just your way of getting me to lower my guard? To be able to fight me, 'for fun' or 'for training', and weaken me so I can't run?"<i> without listening to your denials, she immediately sinks to the bottom of the lake.\n\n");
@@ -261,8 +263,33 @@ public class BelisaScene extends NPCAwareContent implements TimeAwareInterface i
 		outputtext("You ask Belisa if she feels ready to fight a demon. The little Drider looks at you, and shakes her head. “I don’t really like fighting, [name]. So…” You tell her that running and hiding won’t save her forever. \n\n"); 
 		outputtext("Belisa sighs, and looks at you with an uncomfortable look on her face. “...You want to fight me?” You tell her that it would be a spar, not a real fight, but yes. You tell her that you want her to be ready to defend herself, if she ever needed to. Belisa nods, joining you on land.  \n\n"); 
 		outputtext("“...Okay, just...Be gentle with me, please?” You tell her that you’ll try, but training can’t be weakened. She pulls two knives from her robes, her body beginning to shine with a white light. “Very well then, [name]. If you want to, I will”. \n\n"); 
-			}
+		startCombat(new Belisa());
+		doNext(playerMenu);
 		}
-	}
+		
+		public function BelisaHangFish():void {
+		clearoutput();
+		outputtext(" \n\n");
+		}
+		
+		public function BelisaHangWeave():void {
+		clearoutput();
+		outputtext(" \n\n");
 
-}
+		public function BelisaHangMagic():void {
+		clearoutput();
+		outputtext("<i>“Well...Wait...You want to learn weaving?”<i> She looks at you in disbelief. You shrug, telling her that’s what you said. <i>“Okay!”<i> Her smile brightens,\n\n");
+		If (BelisaQuestComp = false)
+		outputtext("for once showing her broken fang.\n\n"); 
+		outputtext("<i>“If you want to learn some basic threads, I can teach you.”<i>\n\n");
+		
+		outputtext("You spend an hour with the Drider, learning the basics of weaving spider-silk into a rope. Your efforts are...well, crappy, but she seems to approve. <i>“Well, you’re better than…”<i> She looks down at her lap. <i>“Never mind. You’re doing well, [name]. I think that’s enough for today, though. I need some time alone.”<i> \n\n");
+		
+		public function BelisaHangHouse():void {
+		clearoutput();
+		outputtext(" \n\n");
+		
+		public function BelisaHangBack():void {
+		clearoutput();
+		outputtext(" \n\n");
+		
