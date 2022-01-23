@@ -20,6 +20,8 @@ public class BelisaScene extends NPCAwareContent implements TimeAwareInterface i
 		public static var BelisaQuestOn:Boolean;
 		public static var BelisaQuestComp:Boolean;
 		public static var BelisaConfessed:Boolean;
+		public static var BelisaToldTyrantia:Boolean;
+		public static var BelisaInCamp:Boolean;
 		
 		public function stateObjectName():String {
 			return "BelisaFollower";
@@ -35,6 +37,8 @@ public class BelisaScene extends NPCAwareContent implements TimeAwareInterface i
 			BelisaQuestOn = false; 
 			BelisaQuestComp = false;
 			BelisaConfessed = false;
+			BelisaToldTyrantia = false;
+			BelisaInCamp = false
 		}
 		
 		public function saveToObject():Object {
@@ -44,9 +48,12 @@ public class BelisaScene extends NPCAwareContent implements TimeAwareInterface i
 			"BelisaInGame": BelisaInGame;
 			"BelisaFollowerStage": BelisaFollowerStage;
 			"BelisaVirgin": BelisaVirgin;
+			"BelisaShopOpen": BelisaShopOpen;
 			"BelisaQuestOn": BelisaQuestOn;
 			"BelisaQuestComp": BelisaQuestComp;
 			"BelisaConfessed": BelisaConfessed;
+			"BelisaToldTyrantia": BelisaToldTyrantia;
+			"BelisaInCamp": BelisaInCamp;
 		};
 	}
 	
@@ -56,9 +63,11 @@ public class BelisaScene extends NPCAwareContent implements TimeAwareInterface i
 			BelisaAffectionMeter = o["BelisaAffectionMeter"];
 			BelisaInGame = o["BelisaInGame"];
 			BelisaVirgin = o["BelisaVirgin"];
+			BelisaShopOpen = o ["BelisaShopOpen"];
 			BelisaQuestOn= o["BelisaQuestOn"];
 			BelisaQuestComp = o["BelisaQuestComp"];
 			BelisaConfessed = o["BelisaConfessed"];
+			BelisaToldTyrantia = o["BelisaToldTyrantia"];
 			} else {
 				// loading from old save
 				resetState();
@@ -77,14 +86,14 @@ public class BelisaScene extends NPCAwareContent implements TimeAwareInterface i
 		public function firstEncounter():void {
 		clearOutput();
 		outputtext("You stride through the swamp. It seems to be quieter than normal. You think you hear the telltale hissing of a Drider, but nothing pops out at you. You check your feet, but there’s no web traps around you. Still, you’re in drider territory, and you put your back to a willow tree, holding your [weapon] ready.\n\n"); 
-		outputtext("<i>“No!”<i> A curious brown and white blur flits between the trees, followed closely by several familiar, shiny black carapaces. <i>“Leave me alone!”<i> The voice is high-pitched and panicked. As it comes closer, you’re able to make more of her out. Like the driders, she has eight spider legs. Hers appear longer, but also much thinner. A pale, white fluid leaks from her ovipositor. 
-\n\n");
+		outputtext("<i>“No!”<i> A curious brown and white blur flits between the trees, followed closely by several familiar, shiny black carapaces. <i>“Leave me alone!”<i> The voice is high-pitched and panicked. As it comes closer, you’re able to make more of her out. Like the driders, she has eight spider legs. Hers appear longer, but also much thinner. A pale, white fluid leaks from her ovipositor. \n\n");
 outputtext("<i>“Oh, don’t be like that, precious,”<i> one of the driders replies, still chasing the brown. Her red eyes glow with sadistic glee. <i>“We’re just gonna take you home with us. Won’t it be nice?”<i>\n\n");
 outputtext("<i>“Oh, yes”.<i> The second drider is more masculine, with a deeper voice and longer stride. <i>“Stay with us, it will be wonderf-”<i> He gasps. <i>“Don’t let her get to the water!”<i> 
 outputtext("She jumps, almost directly over you. As she flies, you can see most of the way up her robe. Unlike her fellow driders, she seems to be wearing undergarments, and she doesn’t notice you until you’ve seen her underwear. She gasps, face turning red, before she hits the water, folding her lower body up and sinking like a rock into the murky water. The last thing you notice before she sinks below your visual range is her hat, inflated like a balloon. Her legs flail, and she vanishes, apparently swimming away under the water.\n\n");
 outputtext("The two driders hiss, their toy lost, but they quickly catch sight of you.\n\n");
 outputtext("<i>“I’ll find her”,<i> the second one growls, leaving the first. She turns to you with a sadistic grin.\n\n");
 You are now fighting a Drider!\n\n");
+(BelisaEncounternum = 1);
 startCombat(drider);
 			}
 		public function secondEncounter():void {
@@ -188,7 +197,7 @@ startCombat(drider);
 		outputtext("She doesn't even look up as the rock taps her shoulder. Belisa rises from the water as quickly as she can, bringing her silken home with her to the surface, then practically runs over to where you stand. Eyes widening, she yelps, digging her front four legs into the sand. She barely skids herself to a stop around ten feet or so away. Her back legs are tapping, and the side of her face you can see is practically beaming already, her perky C-cup breasts dripping . It seems Belisa really missed you. She tilts her pale-skinned head to one side, questioning, but willing to wait for you to make the first move. \n\n");
 			}
 		
-		if (BelisaAffectionMeter <=30) and (BelisaShopOpen = false);
+		if (BelisaAffectionMeter <=30) and (BelisaShopOpen = false); {
 		Belisa turns her back on you, holding out a finger. You wait for a few moments as she opens a curtainlike opening on her silky bubble-home, and she comes back with a few small boxes. <i>"I haven't found anyone I can trust in a while."<i> she explains. <i>"But you...seem like a decent person. You may not know what a manaweaver is...But the long and short of it is that I can make some enchanted items with my silk."<i> She blushes slightly, continuing in a chipper voice. <i>"I think, since you're out here as well, you could use my work as well. I can't just give these to you...But I would take gems for them"<i>\n\n");
 		(BelisaShopOpen = true);
 			}
@@ -196,11 +205,60 @@ startCombat(drider);
 		addbutton (1, "Talk", BelisaTalk);
 		addbutton (2, "Hang", BelisaHang);
 		addbutton (3, "Shop", BelisaShop);
+		addbutton (4, "Sex", BelisaSex):
 		}
 		
 		
 		
-		public function 
+		public function BelisaTalk():void {
+		clearoutput();
+		outputtext("<i>"“You...Just want to...talk?”<i> She looks at you, confused, as if the thought hadn’t even occurred to her. <i>“You...Don’t want to…?”<i> She rolls her eyes, making a ‘jerk-off’ motion with one hand. You tell her that you have no intention of approaching her sexually right now, and she relaxes a little, smiling. <i>“Okay then...What do you want to talk about?”<i>  \n\n"); 
+		menu();
+		addbutton (1, "Yourself", BelisaTalkYou);
+		addbutton (2, "House", BelisaTalkHome);
+		addbutton (3, "Her", BelisaTalkHer);
+		}
+		
+		public function BelisaTalkYou():void {
+		clearoutput();
+		outputtext("<i>“Oh? You want to talk about yourself?”<i> Belisa brings a hand to her mouth, a smirk on her face. <i>“How very arrogant.”<i> You raise one eyebrow, and she chuckles, the smirk fading from her face. <i>“I’m kidding, [name]. I’d love to hear about your adventures.”<i> You talk about the various demons you’ve faced, Zetaz and the portal, and even some stories from your childhood in Ignam. Belisa is a great listener. She laughs when you tell a joke, or when the story turns serious, asks questions, and listens with rapt attention when you talk about the other people you’ve met along your travels.  \n\n");
+		if (BelisaToldTyrantia = false) and (TyraniaIsRemovedFromThewGame = false)
+		outputtext(You talk about the battlefield, and about a giant Drider you met there. Belisa leans forward, her eyes wide. <i>“Wait...You said a giant Drider? Was she corrupted?”<i> You tell her, reluctantly, that yes, the Drider giantess oozes corruption from her very being. Despite this, she seemed to be a decent person, and never tried anything with you. This gets Belisa’s interest, and she looks down. <i>“...What is her name, did you get it?”<i> \n\n");
+		menu();
+		addbutton (1, "yes", BelisaTalkAbsisters);
+		addbutton (2, "no", BelisaTalkYouEnd);
+		}
+		
+		public function BelisaTalkHouse():void {
+		clearoutput();
+		outputtext(" \n\n"); 
+		
+		public function BelisaHang():void {
+		clearoutput();
+			if (BelisaAffectionMeter < 20) {
+		outputtext ("<i>"You..."<i> The Drider sinks back under the water, leaving nothing but her mouth, looking up at you, above the surface. <i>"No. I don't think that's a good idea."<i> She points away, back where you came from. <i>"Please leave me alone now"<i>\n\n"); 
+		outputtext(" not wanting to aggravate the odd, aquatic Drider any further, you take your leave, heading back towards camp. \n\n");
+		else
+		outputtext("<i>"You just want to...hang out?"<i> Belisa seems taken aback by this, but she smiles slightly. <i>I...wouldn't be opposed to spending some time with you. What are you thinking of doing?"<i> \n\n"); 
+		menu();
+		addbutton (1, "Spar", BelisaTalkHangSpar);
+		addbutton (2, "Fish", BelisaTalkHangFish);
+		addbutton (3, "Weaving", BelisaTalkHangWeave);
+		addbutton (4, "Magic", BelisaMagic);
+		addbutton (5, "House", Belisahouse);
+		addbutton (6, "back", BelisaBack);
+			}
+		}
+		public function BelisaTalkHangSpar);
+		clearoutput();
+		if (BelisaAffectionMeter < 30) {
+		outputtext ("<i>"You want to fight...ME?!"<i> she seems rather angry...and afraid. <i>"was this just your way of getting me to lower my guard? To be able to fight me, 'for fun' or 'for training', and weaken me so I can't run?"<i> without listening to your denials, she immediately sinks to the bottom of the lake.\n\n");
+		else
+		outputtext("You ask Belisa if she feels ready to fight a demon. The little Drider looks at you, and shakes her head. “I don’t really like fighting, [name]. So…” You tell her that running and hiding won’t save her forever. \n\n"); 
+		outputtext("Belisa sighs, and looks at you with an uncomfortable look on her face. “...You want to fight me?” You tell her that it would be a spar, not a real fight, but yes. You tell her that you want her to be ready to defend herself, if she ever needed to. Belisa nods, joining you on land.  \n\n"); 
+		outputtext("“...Okay, just...Be gentle with me, please?” You tell her that you’ll try, but training can’t be weakened. She pulls two knives from her robes, her body beginning to shine with a white light. “Very well then, [name]. If you want to, I will”. \n\n"); 
+			}
+		}
 	}
 
 }
