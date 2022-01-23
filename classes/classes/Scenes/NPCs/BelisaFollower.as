@@ -241,13 +241,14 @@ startCombat(drider);
 		else
 		outputtext("<i>"You just want to...hang out?"<i> Belisa seems taken aback by this, but she smiles slightly. <i>I...wouldn't be opposed to spending some time with you. What are you thinking of doing?"<i> \n\n"); 
 		menu();
+			}
 		addbutton (1, "Spar", BelisaTalkHangSpar);
 		addbutton (2, "Fish", BelisaTalkHangFish);
 		addbutton (3, "Weaving", BelisaTalkHangWeave);
 		addbutton (4, "Magic", BelisaMagic);
 		addbutton (5, "House", Belisahouse);
 		addbutton (6, "back", BelisaBack);
-			}
+		
 		}
 		public function BelisaTalkHangSpar);
 		clearoutput();
