@@ -252,7 +252,7 @@ startCombat(drider);
 		addbutton (6, "back", BelisaBack);
 		
 		}
-		public function BelisaTalkHangSpar);
+		public function BelisaTalkHangSpar():void {
 		clearoutput();
 		if (BelisaAffectionMeter < 30) {
 		outputtext ("<i>"You want to fight...ME?!"<i> she seems rather angry...and afraid. <i>"was this just your way of getting me to lower my guard? To be able to fight me, 'for fun' or 'for training', and weaken me so I can't run?"<i> without listening to your denials, she immediately sinks to the bottom of the lake.\n\n");
