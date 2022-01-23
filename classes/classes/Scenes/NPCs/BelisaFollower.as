@@ -131,7 +131,7 @@ public class BelisaScene extends NPCAwareContent implements TimeAwareInterface i
 		}
 		
 		public function secondEncounterYesCuriosity():void {
-		outputText("You tell the girl that you just wanted to know what this giant ball in the lake was. She sighs. <i>“I made this. It’s my home."<i> She pouts a little, crossing her arms. <i>“Now can you please let me be?”<i> \n\n"); 
+		outputText("You tell the girl that you just wanted to know what this giant ball in the lake was. She sighs. <i>“I made this. It’s my home./"<i> She pouts a little, crossing her arms. <i>“Now can you please let me be?”<i> \n\n"); 
 		menu();
 		addButton (1, "Leave", secondEncounterLeaveAlone);
 		addButton (2, "Nah", secondEncounterNahFight);
