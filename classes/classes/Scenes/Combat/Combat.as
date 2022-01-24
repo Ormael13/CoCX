@@ -509,7 +509,7 @@ public class Combat extends BaseContent {
 		}
         if (player.hasPerk(PerkLib.MasterGunslinger)) return 4+bonusShots;
         else if (player.hasPerk(PerkLib.ExpertGunslinger)) return 3+bonusShots;
-        else if (player.hasPerk(PerkLib.AmateurGunslinger)) return 2;
+        else if (player.hasPerk(PerkLib.AmateurGunslinger)) return 2+bonusShots;
         else return 1;
     }
 
@@ -2225,7 +2225,7 @@ public class Combat extends BaseContent {
         clearOutput();
         var weapon:String = "";
         if (player.isInGoblinMech()) weapon = "saw blade";
-		if (player.vehicles == vehicles.HB_MECH) weapon = "power blade";
+		if (player.vehicles == vehicles.HB_MECH) weapon = "twin power blades";
         if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 0) {
             outputText("You attempt to attack, but at the last moment your mech wrenches away, preventing you from even coming close to landing a blow!  ");
             if (monster is ChaosChimera) outputText("Curse");
@@ -3110,12 +3110,34 @@ public class Combat extends BaseContent {
 				if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] >= 3) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] += 2;
 				else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] += 1;
 			}
-            if ((player.weaponRange == weaponsrange.M1CERBE || player.weaponRange == weaponsrange.TRFATBI || player.weaponRange == weaponsrange.HARPGUN || player.weaponRange == weaponsrange.SNIPPLE || player.weaponRange == weaponsrange.TOUHOM3 || player.weaponRange == weaponsrange.DERPLAU || player.weaponRange == weaponsrange.DUEL_P_ || player.weaponRange == weaponsrange.FLINTLK) && flags[kFLAGS.MULTIPLE_ARROWS_STYLE] > 1) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 1;
-            if ((player.weaponRange == weaponsrange.ADBSCAT || player.weaponRange == weaponsrange.ADBSHOT || player.weaponRange == weaponsrange.DBDRAGG) && flags[kFLAGS.MULTIPLE_ARROWS_STYLE] > 1) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 2;
+			if ((player.weaponRange == weaponsrange.M1CERBE || player.weaponRange == weaponsrange.SNIPPLE) && flags[kFLAGS.MULTIPLE_ARROWS_STYLE] > 1) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 1;
+            if (player.weaponRange == weaponsrange.TRFATBI || player.weaponRange == weaponsrange.HARPGUN || player.weaponRange == weaponsrange.TOUHOM3 || player.weaponRange == weaponsrange.DERPLAU || player.weaponRange == weaponsrange.DUEL_P_ || player.weaponRange == weaponsrange.FLINTLK) {
+				if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] >= 1 && player.hasPerk(PerkLib.PrimedClipWarp)) {
+					if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] >= 6) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 6;
+					else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = flags[kFLAGS.DOUBLE_STRIKE_STYLE];
+				}
+				else if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] >= 1 && player.hasPerk(PerkLib.TaintedMagazine)) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 2;
+				else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 1;
+			}
+            if ((player.weaponRange == weaponsrange.ADBSCAT || player.weaponRange == weaponsrange.ADBSHOT || player.weaponRange == weaponsrange.DBDRAGG) && flags[kFLAGS.MULTIPLE_ARROWS_STYLE] > 2) {
+				if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] >= 3 && player.hasPerk(PerkLib.PrimedClipWarp)) {
+					if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] >= 6) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 6;
+					else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = flags[kFLAGS.DOUBLE_STRIKE_STYLE];
+				}
+				else if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] >= 3 && player.hasPerk(PerkLib.TaintedMagazine)) {
+					if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] >= 4) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 4;
+					else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = flags[kFLAGS.DOUBLE_STRIKE_STYLE];
+				}
+				else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 2;
+			}
             if (player.weaponRangePerk == "Dual Firearms") flags[kFLAGS.MULTIPLE_ARROWS_STYLE] *= 2;
         }
 		if (player.vehicles == vehicles.HB_MECH) {
-			flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 2;
+			if (player.hasKeyItem("HB Rapid Reload") >= 0) {
+				if (player.keyItemv1("HB Rapid Reload") == 1) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 4;
+				else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 3;
+			}
+			else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 2;
 		}
 //	if (player.weaponRangePerk == "Rifle") {
         //fatigue(50, USEFATG_BOW);	//wstawić tutaj typ redukcji kosztów jak dla physical specials
@@ -3246,18 +3268,28 @@ public class Combat extends BaseContent {
         }
         if (rand(100) < accRange) {
             var damage:Number = 0;
-            if (weaponRangePerk == "Bow") {
-				if (player.vehicles == vehicles.HB_MECH) damage += player.weaponRangeAttack * 20;
-                damage += player.spe * 2;
-                damage += scalingBonusSpeed() * 0.4;
-                if (damage < 20) damage = 20;
-            }
-            if (weaponRangePerk == "Crossbow") {
+			if (player.vehicles == vehicles.HB_MECH) {
+				if (player.hasKeyItem("HB Rapid Reload") >= 0) {
+					if (player.inte < 201) player.weaponRangeAttack *= (1 + (player.inte / 200));
+					else player.weaponRangeAttack *= 2;
+					if (player.keyItemv1("HB Rapid Reload") == 1) {
+						player.weaponRangeAttack *= 1.25;
+						damage += player.spe;
+						damage += scalingBonusSpeed() * 0.2;
+					}
+					player.weaponRangeAttack = Math.round(player.weaponRangeAttack);
+				}
 				damage += player.weaponRangeAttack * 20;
-				if (player.vehicles == vehicles.HB_MECH) {
+				damage += player.spe * 2;
+				damage += scalingBonusSpeed() * 0.4;
+			}
+			else {
+				if (weaponRangePerk == "Bow") {
 					damage += player.spe * 2;
 					damage += scalingBonusSpeed() * 0.4;
+					if (damage < 20) damage = 20;
 				}
+				if (weaponRangePerk == "Crossbow") damage += player.weaponRangeAttack * 20;
 			}
             if (!player.hasPerk(PerkLib.DeadlyAim)) damage *= (monster.damageRangePercent() / 100);
             //Weapon addition!

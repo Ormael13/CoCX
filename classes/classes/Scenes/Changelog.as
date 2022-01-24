@@ -123,8 +123,8 @@ package classes.Scenes
 			outputText("-New melee weapon (by Ormael): Dual Katana - dropped by corrupted flesh golems. Cost 1360 gems. Base atk is 17. It's Dual Large weapon belonging to dueling sword type.\n");
 			outputText("-New melee weapon (by Ormael): Dual Lance - dropped by corrupted flesh golems. Cost 960 gems. Base atk is 12. It's Dual Normal weapon belonging to spear type. When used in Charge special would hit twice.\n");
 			outputText("-Katana and Dual Katana now would reduce enemy armor by 10% (or by 10 if enemy armor is below 100).\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Dinah would provide PC with HB Mech upgrade options after it's bought. They could boost mech defences, attack or even provide with specials. As with all other items upgrades cost can vary depending on her mood ^^\n");
+			outputText("-SOme of one shoot firearms would now allow more shoots than 1/2 when PC get perks to expand (magicaly ^^) ammo clip to hold more ammo than 1/2.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
