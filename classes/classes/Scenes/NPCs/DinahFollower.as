@@ -398,14 +398,21 @@ import classes.internals.Utils;
 					else addButton(3, "Agility v2", buyHowlingBansheeMechUpgrade, "Agility v2", 1000).hint("Adding speed scaling similar to Quick Strike perk to melee mech attacks.");
 				}
 				else addButton(3, "Agility v1", buyHowlingBansheeMechUpgrade, "Agility v1", 500).hint("Adding speed scaling similar to Speed Demon perk to melee mech attacks.");
+				if (player.hasKeyItem("HB Rapid Reload") >= 0) {
+					if (player.keyItemv1("HB Rapid Reload") == 1) addButtonDisabled(4, "Rapid Reload v2", "Your HB Mech already have this upgrade.");
+					else addButton(4, "Rapid Reload v2", buyHowlingBansheeMechUpgrade, "Rapid Reload v2", 1500).hint("Adding speed scaling bonus to damage (half of normal bow dmg scaling based on speed) and increase base range atk by ~25%. +1 more range shoots per turn.");
+				}
+				else addButton(4, "Rapid Reload v1", buyHowlingBansheeMechUpgrade, "Rapid Reload v1", 750).hint("Adding dmg scaling similar to Sharpshooter perk to range mech attacks. +1 more range shoots per turn.");
 			}
 			else {
 				addButton(0, vehicles.HB_MECH.shortName, buyHowlingBansheeMech).hint("Buy HB Mech - Increase armor by 15, magic resistance by 15.");
 				addButtonDisabled(1, "Armor Plating v1", "Req. to buy HM Mech first.");
 				addButtonDisabled(2, "Leather Insulation v1", "Req. to buy HM Mech first.");
 				addButtonDisabled(3, "Agility v1", "Req. to buy HM Mech first.");
-				//addButtonDisabled(4, "Req. to buy HM Mech first.");
-				//addButtonDisabled(5, "Req. to buy HM Mech first.");
+				addButtonDisabled(4, "Rapid Reload v1", "Req. to buy HM Mech first.");
+				//addButtonDisabled(5, "Req. to buy HM Mech first."); - temporaly stealth + option to use during that time range or melee sneak attack option using SF from Mech xD
+				//addButtonDisabled(6, "Req. to buy HM Mech first."); - option to increase mech SF reserves max cap and decrease drain of SF for normal functioning
+				//addButtonDisabled(7, "Req. to buy HM Mech first."); - option to decrease drain of SF for using specials / amount of buff when powered up
 			}
 			addButton(14, "Back", DinahShopMainMenu);
 		}
@@ -449,6 +456,8 @@ import classes.internals.Utils;
 			if (upgrade == "Leather Insulation v2") player.addKeyValue("HB Leather Insulation",1,1);
 			if (upgrade == "Agility v1") player.createKeyItem("HB Agility",0,0,0,0);
 			if (upgrade == "Agility v2") player.addKeyValue("HB Agility",1,1);
+			if (upgrade == "Rapid Reload v1") player.createKeyItem("HB Rapid Reload",0,0,0,0);
+			if (upgrade == "Rapid Reload v2") player.addKeyValue("HB Rapid Reload",1,1);
 			//if (upgrade == "") ;
 			//if (upgrade == "") ;
 			//if (upgrade == "") ;
