@@ -80,7 +80,7 @@ import coc.xlogic.ExecContext;
 
 					PlayerHasAnAxe: player.isAxeTypeWeapon(),
 					PlayerHasAnAxeHoly:player.weapon == game.weapons.WG_GAXE,
-					PlayerHasAnAxeUnholy:player.weapon == game.weapons.DE_GAXE,
+					PlayerHasAnAxeUnholy:player.weapon == game.weapons.DE_GAXE || game.weapons.ASTERIUS,
 
 					PlayerHasAHammer: player.isMaceHammerTypeWeapon() && !player.isTetsubo(),
 					//PlayerHasAHammerHoly:player.weapon == game.weapons.POCDEST,

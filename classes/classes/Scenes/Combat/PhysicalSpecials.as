@@ -1345,6 +1345,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 			doDamage(damage, true, true);
 			damage *= 2;
 		}
+		if (player.weapon == weapons.D_LANCE) {
+			doDamage(damage, true, true);
+			damage *= 2;
+		}
 		if (crit) {
 			outputText("<b>Critical!</b>");
 			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
