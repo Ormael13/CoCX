@@ -1096,11 +1096,11 @@ use namespace CoC;
 		public function isMidGradeWrathWeapon():Boolean
 		{
 			return weapon == game.weapons.NTWHIP;
-		}
+		}*/
 		public function isDualMidGradeWrathWeapon():Boolean
 		{
-			return ;
-		}
+			return weapon == game.weapons.ASTERIUS;
+		}/*
 		public function isHighGradeWrathWeapon():Boolean
 		{
 			return weapon == game.weapons.CNTWHIP;
