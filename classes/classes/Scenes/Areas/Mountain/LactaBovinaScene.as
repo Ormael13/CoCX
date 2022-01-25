@@ -74,7 +74,7 @@ public function lactaBovinaRape():void {
 	outputText("The more you suckle the harder she shoves her massive tits up your face. ");
 	if (player.gender > 0) outputText("Just as you work her mammaries you feel a hand reach for "+(player.hasCock()? "your [cock] slowly jerking it to life":"the folds of your [pussy], parting the lips away in order to insert digits after digits inside")+".");
 	outputText("The cow, smiling, begins to pleasure you in earnest, rewarding your efforts which makes you deliver moans of your own and making her heavy breast jiggle with the sound.\n\n");
-	outputText("\"<i>Milked… finally I will get milked! Come over cutie, let mama pour her white creamy love into you!</i>\"\n\n");
+	outputText("\"<i>Moooooooooo boobgasming! I'm BOOBGASMING!</i>\"\n\n");
 	outputText("As a signal of her impending climax the cow’s breast seems to have slightly deflated from their prodigious size and"+((player.hasCock() || player.hasVagina()) ? " she doubles up the pace, making you finally cum and achieve a messy orgasm as":"")+" the cow cum from her free breast showering your face with milk.\n\n");
 	outputText("Finally lighter the lacta bovine lifts away from you with a happy sigh, leaving you dazed on the ground. You break out from your stupor a few min later, gearing back up before heading to camp\n\n");
 	cleanupAfterCombat();
