@@ -3273,6 +3273,11 @@ public class Combat extends BaseContent {
 			}
 			if (weaponRangePerk == "Bow" && player.hasStatusEffect(StatusEffects.FletchingTable) && player.statusEffectv2(StatusEffects.FletchingTable) > 0) damage *= (1 + (0.1 * player.statusEffectv2(StatusEffects.FletchingTable)));
 			damage *= (1 + (0.01 * masteryArcheryLevel()));
+			if (Forgefather.material == "sandstone" && Forgefather.refinement == 0) damage *= 1.15;
+			if (Forgefather.material == "sandstone" && Forgefather.refinement == 1) damage *= 1.25;
+			if (Forgefather.material == "sandstone" && Forgefather.refinement == 2) damage *= 1.5;
+			if (Forgefather.material == "sandstone" && Forgefather.refinement == 3) damage *= 1.5;
+			if (Forgefather.material == "sandstone" && Forgefather.refinement == 4) damage *= 2;
             if (damage == 0) {
                 if (monster.inte > 0) {
                     outputText(monster.capitalA + monster.short + " shrugs as the " + ammoWord + " bounces off them harmlessly.\n\n");
@@ -3755,6 +3760,11 @@ public class Combat extends BaseContent {
                 }
 				if (player.miscJewelry == miscjewelries.ATLATL_ || player.miscJewelry2 == miscjewelries.ATLATL_) damage *= 1.25;
                 damage *= (1 + (0.01 * masteryThrowingLevel()));
+				if (Forgefather.material == "sandstone" && Forgefather.refinement == 0) damage *= 1.15;
+				if (Forgefather.material == "sandstone" && Forgefather.refinement == 1) damage *= 1.25;
+				if (Forgefather.material == "sandstone" && Forgefather.refinement == 2) damage *= 1.5;
+				if (Forgefather.material == "sandstone" && Forgefather.refinement == 3) damage *= 1.5;
+				if (Forgefather.material == "sandstone" && Forgefather.refinement == 4) damage *= 2;
                 //Determine if critical hit!
                 var crit:Boolean = false;
                 var critChance:int = 5;
@@ -5569,6 +5579,11 @@ public class Combat extends BaseContent {
 			if (player.weaponSpecials("Dual Small")) damage *= (1 + (0.01 * dualWSLevel()));
 			if (player.weaponSpecials("Dual")) damage *= (1 + (0.01 * dualWNLevel()));
 			if (player.weaponSpecials("Dual Large")) damage *= (1 + (0.01 * dualWLLevel()));
+			if (Forgefather.material == "Ebony" && Forgefather.refinement == 0) damage *= 1.15;
+			if (Forgefather.material == "Ebony" && Forgefather.refinement == 1) damage *= 1.25;
+			if (Forgefather.material == "Ebony" && Forgefather.refinement == 2) damage *= 1.5;
+			if (Forgefather.material == "Ebony" && Forgefather.refinement == 3) damage *= 1.5;
+			if (Forgefather.material == "Ebony" && Forgefather.refinement == 4) damage *= 2;
 			//Determine if critical hit!
             var crit:Boolean = false;
             var critChance:int = 5;

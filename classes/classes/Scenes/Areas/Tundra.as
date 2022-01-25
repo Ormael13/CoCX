@@ -10,6 +10,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.Forest.AlrauneScene;
 import classes.Scenes.Areas.Tundra.*;
 import classes.Scenes.SceneLib;
+import classes.Scenes.NPCs.Forgefather;
 
 use namespace CoC;
 
@@ -36,6 +37,7 @@ use namespace CoC;
 			choice[choice.length] = 3; //Snow Lily (lvl 40)
 			choice[choice.length] = 4; //Ice Golem (lvl 64)
 			choice[choice.length] = 5; //Find nothing!
+			choice[choice.length] = 6; //Alabaster
 			
 			//Glacial Rift
 			if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] <= 0 && player.level >= 65) {
@@ -80,6 +82,9 @@ use namespace CoC;
 					outputText("As you take a stroll, from nearby trees emerge huge golem. Looks like you have encountered 'true ice golem'! You ready your [weapon] for a fight!");
 					startCombat(new GolemTrueIce());
 					break;
+				case 6: //Alabaster
+					tundraSiteMine();
+					break;
 				default:
 					clearOutput();
 					outputText("You spend one hour exploring tundra but you don't manage to find anything interesting.");
@@ -91,5 +96,22 @@ use namespace CoC;
 					doNext(camp.returnToCampUseOneHour);
 			}
 		}	
+		private function tundraSiteMine():void {
+			if (Forgefather.materialsExplained != 1) doNext(camp.returnToCampUseOneHour);
+			else {
+				clearOutput();
+				if (player.fatigue > player.maxFatigue() - 50) {
+					outputText("\n\n<b>You are too tired to consider mining. Perhaps some rest will suffice?</b>");
+					doNext(camp.returnToCampUseOneHour);
+					return;
+				}
+				outputText("\n\nYou begin slamming your pickaxe against the alabaster, spending the better part of the next two hours mining. This done, you bring back your prize to camp. ");
+				var minedStones:Number = 13 + Math.floor(player.str / 7);
+				minedStones = Math.round(minedStones);
+				fatigue(50, USEFATG_PHYSICAL);
+				Forgefather.alabaster += minedStones;
+				doNext(camp.returnToCampUseTwoHours);
+			}
+		}
 	}
 }

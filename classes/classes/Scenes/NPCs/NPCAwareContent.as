@@ -88,11 +88,6 @@ import classes.Scenes.SceneLib;
 		{
 			return SceneLib.exgartuan;
 		}
-		// Forgefather
-		protected function get ForgeFather():Forgefather
-		{
-			return SceneLib.forgefatherScene();
-		}
 		// Helia
 		protected function get helScene():HelScene
 		{

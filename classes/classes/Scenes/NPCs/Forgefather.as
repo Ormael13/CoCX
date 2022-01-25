@@ -6,51 +6,53 @@
 package classes.Scenes.NPCs	{
 	
 	import classes.*;
-	import classes.BodyParts.Antennae;
-	import classes.BodyParts.Arms;
-	import classes.BodyParts.Ears;
-	import classes.BodyParts.Eyes;
-	import classes.BodyParts.Face;
-	import classes.BodyParts.Gills;
-	import classes.BodyParts.Hair;
-	import classes.BodyParts.Horns;
-	import classes.BodyParts.LowerBody;
-	import classes.BodyParts.RearBody;
-	import classes.BodyParts.Skin;
-	import classes.BodyParts.Tail;
-	import classes.BodyParts.Tongue;
-	import classes.BodyParts.Wings;
+	import classes.BodyParts.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.internals.SaveableState;
+	import classes.Items.WeaponLib;
 	import classes.Scenes.SceneLib;
+	import classes.Scenes.NPCs.Forgefather;
+	import classes.Scenes.Areas.HighMountains.TempleOfTheDivine;
 	import classes.Stats.Buff;
 	import classes.display.SpriteDb;
 	
+	use namespace CoC;
+	
 	public class Forgefather extends NPCAwareContent implements SaveableState	{
 		
-		public static var hairLength:int
-		public static var gender:int
-		public static var wings:int
-		public static var arms:int
-		public static var tail:int
-		public static var lowerBody:int
-		public static var chest:int
-		public static var vagina:int
-		public static var cock:int
-		public static var balls:int
-		public static var material:String
-		public static var refinement:int
-		public static var channelInlay:String
-		public static var gem:String
-		public static var rarityAbsorbed:String
-		public static var purePearlEaten:Boolean
-		public static var lethiciteEaten:Boolean
+		public static var statueProgress:int;
+		public static var hairLength:int;
+		public static var gender:int;
+		public static var wings:int;
+		public static var arms:int;
+		public static var tail:int;
+		public static var lowerBody:int;
+		public static var chest:int;
+		public static var vagina:int;
+		public static var cock:int;
+		public static var balls:int;
+		public static var material:String;
+		public static var refinement:int;
+		public static var ebony:int;
+		public static var granite:int;
+		public static var alabaster:int;
+		public static var marble:int;
+		public static var sandstone:int;
+		public static var matCap:int = 300;
+		public static var channelInlay:String;
+		public static var gem:String;
+		public static var rarityAbsorbed:String;
+		public static var purePearlEaten:Boolean;
+		public static var lethiciteEaten:Boolean;
+		public static var materialsExplained:Boolean;
+		public var templeofdivine:TempleOfTheDivine = new TempleOfTheDivine();
 		
-		public function Forgefather() {
-			Saves.registerSaveableState(this);
+		public function stateObjectName():String {
+			return "Forgefather";
 		}
 		
 		public function resetState():void {
+			statueProgress = 0;
 			hairLength = 0;
 			gender = 0;
 			wings = 0;
@@ -63,15 +65,22 @@ package classes.Scenes.NPCs	{
 			balls = 0;
 			material = "";
 			refinement = 0;
+			ebony = 0;
+			granite = 0;
+			alabaster = 0;
+			marble = 0;
+			sandstone = 0;
 			channelInlay = "";
 			gem = "";
 			rarityAbsorbed = "";
 			purePearlEaten = false;
 			lethiciteEaten = false;
+			materialsExplained = false;
 		}
 		
 		public function saveToObject():Object {
 			return {
+				"statueProgress": statueProgress,
 				"hairLength": hairLength,
 				"gender": gender,
 				"wings": wings,
@@ -84,16 +93,23 @@ package classes.Scenes.NPCs	{
 				"balls": balls,
 				"material": material,
 				"refinement": refinement,
+				"ebony": ebony,
+				"granite": granite,
+				"alabaster": alabaster,
+				"marble": marble,
+				"sandstone": sandstone,
 				"channelInlay": channelInlay,
 				"gem": gem,
 				"rarityAbsorbed": rarityAbsorbed,
 				"purePearlEaten": purePearlEaten,
-				"lethiciteEaten": lethiciteEaten
+				"lethiciteEaten": lethiciteEaten,
+				"materialsExplained": materialsExplained
 			};
 		}
 		
 		public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
 			if (o) {
+				statueProgress = o["statueProgress"];
 				hairLength = o["hairLength"];
 				gender = o["gender"];
 				wings = o["wings"];
@@ -106,19 +122,25 @@ package classes.Scenes.NPCs	{
 				balls = o["balls"];
 				material = o["material"];
 				refinement = o["refinement"];
+				ebony = o["ebony"];
+				granite = o["granite"];
+				alabaster = o["alabaster"];
+				marble = o["marble"];
+				sandstone = o["sandstone"];
 				channelInlay = o["channelInlay"];
 				gem = o["gem"];
 				rarityAbsorbed = o["rarityAbsorbed"];
 				purePearlEaten = o["purePearlEaten"];
 				lethiciteEaten = o["lethiciteEaten"];
+				materialsExplained = o["materialsExplained"];
 			} else {
 				// loading from old save
 				resetState();
 			}
 		}
 		
-		public function stateObjectName():String {
-			return "ForgeFatherScenes";
+		public function Forgefather() {
+			Saves.registerSaveableState(this);
 		}
 		
 		public function meetForgefather():void	{
@@ -134,7 +156,7 @@ package classes.Scenes.NPCs	{
 		public function introduceSelf():void {
 			flags[kFLAGS.FORGEFATHER_MOVED_TO_TEMPLE] = 1;
 			outputText("You introduce yourself to the being. /n/n");
-			outputText("Eyeing your quite solid form, he chuckles."
+			outputText("Eyeing your quite solid form, he chuckles.");
 			outputText("\"<i>That's quite the stout form you have. I thought the demons destroyed all of your kind.</i>\"\n\n");
 			outputText("You respond, telling him of the Temple, and the 2 gargoyles now there. You describe you were a champion of your village, and how you willingly gave up your original form to inhabit the stony body.\n\n");
 			outputText("Surprised, the being exclaims.\n\n");
@@ -159,53 +181,89 @@ package classes.Scenes.NPCs	{
 			addButton(1, "Not Now", notNow);
 		}
 	
-		public function setGargoyleHair(hairLength:int): void {
-			this.hairLength = hairLength;
+		public function setGargoyleHair(newHairLength:int): void {
+			hairLength = newHairLength;
+			statueProgress++;
 		}
 		
-		public function setGargoyleGender(gender:int): void {
-			this.gender = gender;
+		public function setGargoyleGender(newGender:int): void {
+			gender = newGender;
+			statueProgress++;
 		}
 		
-		public function setGargoyleWings(wings:int): void {
-			this.wings = wings;
+		public function setGargoyleWings(newWings:int): void {
+			wings = newWings;
+			statueProgress++;
 		}
 		
-		public function setGargoyleArms(arms:int): void {
-			this.arms = arms;
+		public function setGargoyleArms(newArms:int): void {
+			arms = newArms;
+			statueProgress++;
 		}
 		
-		public function setGargoyleTail(tail:int): void {
-			this.tail = tail;
+		public function setGargoyleTail(newTail:int): void {
+			tail = newTail;
+			statueProgress++;
 		}
 		
-		public function setGargoyleLowerBody(lowerBody:int): void {
-			this.lowerBody = lowerBody;
+		public function setGargoyleLowerBody(newLowerBody:int): void {
+			lowerBody = newLowerBody;
+			statueProgress++;
 		}
 		
-		public function setGargoyleLowerBody(lowerBody:int): void {
-			this.lowerBody = lowerBody;
+		public function setGargoyleChest(newChest:int): void {
+			chest = newChest;
+			statueProgress++;
 		}
 		
-		public function setGargoyleChest(chest:int): void {
-			this.chest = chest;
+		public function setGargoyleVagina(newVagina:int): void {
+			vagina = newVagina;
+			statueProgress++;
 		}
 		
-		public function setGargoyleVagina(vagina:int): void {
-			this.vagina = vagina;
+		public function setGargoyleCock(newCock:int): void {
+			cock = newCock;
+			statueProgress++;
 		}
 		
-		public function setGargoyleCock(cock:int): void {
-			this.cock = cock;
+		public function setGargoyleBalls(newBalls:int): void {
+			balls = newBalls;
+			statueProgress++;
 		}
 		
-		public function setGargoyleBalls(balls:int): void {
-			this.balls = balls;
+		public function getRefinement(): String {
+			var level: String;
+			switch (refinement)
+			{
+				case (0):
+					level = "raw";
+					break;
+				
+				case (1):
+					level = "rough";
+					break;
+				
+				case (2):
+					level = "smooth";
+					break;
+				
+				case (3):
+					level = "carved";
+					break;
+				
+				case (4):
+					level = "polished";
+					break;
+				
+			}
+			return level;
 		}
 		
 		public function createGargoyleState(): void {
-			player.skinTone = "dark gray";
-			player.hairColor = "dark gray";
+			material = "stone";
+			refinement = 0;
+			player.skinTone = "gray";
+			player.hairColor = "gray";
 			player.skin.setBaseOnly({type:Skin.STONE});
 			player.hairType = Hair.NORMAL;
 			player.faceType = Face.DEVIL_FANGS;
@@ -274,7 +332,7 @@ package classes.Scenes.NPCs	{
 					break;
 			}
 			
-			switch (lower) {
+			switch (lowerBody) {
 				case 1:
 					player.lowerBody = LowerBody.GARGOYLE;
 					break;
@@ -334,5 +392,166 @@ package classes.Scenes.NPCs	{
 			}
 		}
 		
+		public function workshopMainMenu(): void{
+			clearOutput();
+			outputText("Welcome to the stone-shop, what do you wnat?");
+			menu();
+			addButtonDisabled(0, "Talk", "Not Yet Written");
+			if (materialsExplained != 1) addButton(5, "Explain Mat's", explainMaterials).hint("Ask about the various materials a gargoyle can be made of");
+			else addButtonDisabled(5, "Explain Mat's", "You already know this");
+			if (materialsExplained != 0) addButton(6, "Change Mat's", changeMaterials).hint("Change your body's material");
+			else addButtonDisabled(6, "Change Mat's", "Change your body's material");
+			addButton(7, "Refine Body", refineBody).hint("Refine your form");
+			addButton(14, "Back", templeofdivine.templemainmenu);			
+		}
+		
+		public function explainMaterials(): void{
+			clearOutput();
+			menu();
+			outputText("This will be typed out better later but:\n\n");
+			outputText("Granite - Melee (Tank)\n");
+			outputText("Ebony - Melee(Dmg)\n");
+			outputText("Alabaster - Magic\n");
+			outputText("Marble - Soulforce\n");
+			outputText("Sandstone - Ranged\n");
+			addButton(0, "Back", workshopMainMenu)
+		}
+		
+		public function changeMaterials(): void{
+			clearOutput();
+			menu();
+			outputText("To Be Written\n\n");
+			outputText("You need 100 of the material you wish to become to be transformed.");
+			if (granite >= 100) addButton(0, "Granite", changeMatFunc, "granite").hint("Change your body to Granite");
+			else addButtonDisabled(0, "Granite", "Not enough Granite");
+			if (ebony >= 100) addButton(1, "Ebony", changeMatFunc, "ebony").hint("Change your body to Ebony");
+			else addButtonDisabled(1, "Ebony", "Not enough Ebony");
+			if (alabaster >= 100) addButton(2, "Alabaster", changeMatFunc, "alabaster").hint("Change your body to Alabaster");
+			else addButtonDisabled(2, "Alabaster", "Not enough Alabaster");
+			if (marble >= 100) addButton(3, "Marble", changeMatFunc, "marble").hint("Change your body to Marble");
+			else addButtonDisabled(3, "Marble", "Not enough Marble");
+			if (sandstone >= 100) addButton(4, "Sandstone", changeMatFunc, "sandstone").hint("Change your body to Sandstone");
+			else addButtonDisabled(4, "Sandstone", "Not enough Sandstone");
+			addButton(14, "Back", workshopMainMenu);
+		}
+		
+		public function refineBody(): void{
+			clearOutput();
+			menu();
+			outputText("To Be Written\n\n");
+			outputText("You cannot yet become carved or polished\n");
+			outputText("You need 200 of the material to tranistion from raw to rough.\n");
+			outputText("You need 300 of the material to tranistion from rough to smooth.\n");
+			switch (material){
+				case ("granite"):
+					if (refinement < 2){
+						if (granite >= (100 * (refinement + 2))) addButton(0, "Refine", refineFunc);
+						else addButtonDisabled(0, "Refine", "Not enough materials");
+					} else addButtonDisabled(0, "Refine", "Not implmented yet");
+					break;
+				case ("ebony"):
+					if (refinement < 2){
+						if (ebony >= (100 * (refinement + 2))) addButton(0, "Refine", refineFunc);
+						else addButtonDisabled(0, "Refine", "Not enough materials");
+					} else addButtonDisabled(0, "Refine", "Not implmented yet");
+					break;
+				case ("alabaster"):
+					if (refinement < 2){
+						if (alabaster >= (100 * (refinement + 2))) addButton(0, "Refine", refineFunc);
+						else addButtonDisabled(0, "Refine", "Not enough materials");
+					} else addButtonDisabled(0, "Refine", "Not implmented yet");
+					break;
+				case ("marble"):
+					if (refinement < 2){
+						if (marble >= (100 * (refinement + 2))) addButton(0, "Refine", refineFunc);
+						else addButtonDisabled(0, "Refine", "Not enough materials");
+					} else addButtonDisabled(0, "Refine", "Not implmented yet");
+					break;
+				case ("sandstone"):
+					if (refinement < 2){
+						if (sandstone >= (100 * (refinement + 2))) addButton(0, "Refine", refineFunc);
+						else addButtonDisabled(0, "Refine", "Not enough materials");
+					} else addButtonDisabled(0, "Refine", "Not implmented yet");
+					break;
+				default:
+					if (refinement < 2){
+						if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= (100 * (refinement + 2))) addButton(0, "Refine", refineFunc);
+						else addButtonDisabled(0, "Refine", "Not enough materials");
+					} else addButtonDisabled(0, "Refine", "Not implmented yet");
+					break;
+			}
+			addButton(14, "Back", workshopMainMenu);
+		}
+		
+		public function changeMatFunc(mat:String): void{
+			switch (mat){
+				case "granite":
+					refinement = 0;
+					granite -= 35;
+					material = "granite";
+					player.skinTone = "gray";
+					player.hairColor = "gray";
+					break;
+				case "ebony":
+					refinement = 0;
+					ebony  -= 35;
+					material = "ebony";
+					player.skinTone = "black";
+					player.hairColor = "black";
+					break;
+				case "alabaster":
+					refinement = 0;
+					alabaster -= 35;
+					material = "alabaster";
+					player.skinTone = "albino";
+					player.hairColor = "albino";
+					break;
+				case "marble":
+					refinement = 0;
+					marble -= 35;
+					material = "marble";
+					player.skinTone = "light gray";
+					player.hairColor = "light gray";
+					break;
+				case "sandstone":
+					refinement = 0;
+					sandstone -= 35;
+					material = "sandstone";
+					player.skinTone = "caramel";
+					player.hairColor = "caramel";
+					break;
+			}
+			camp.returnToCamp(36);
+		}
+		
+		public function refineFunc(): void{
+			switch (material){
+				case "granite":
+					granite -= ((refinement + 1) * 100);
+					refinement++;
+					break;
+				case "ebony":
+					ebony -= ((refinement + 1) * 100);
+					refinement++;
+					break;
+				case "alabaster":
+					alabaster -= ((refinement + 1) * 100);
+					refinement++;
+					break;
+				case "marble":
+					marble -= ((refinement + 1) * 100);
+					refinement++;
+					break;
+				case "sandstone":
+					sandstone -= ((refinement + 1) * 100);
+					refinement++;
+					break;
+				case "stone":
+					flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= ((refinement + 1) * 100);
+					refinement++;
+					break;
+			}
+			camp.returnToCampUseSixHours();
+		}
 	}
 }

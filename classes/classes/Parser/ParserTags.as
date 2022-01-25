@@ -9,6 +9,7 @@ import classes.Scenes.SceneLib;
 import classes.StatusEffects;
 import classes.PlayerAppearance;
 import classes.internals.Utils;
+import classes.Scenes.NPCs.Forgefather;
 
 public class ParserTags {
 
@@ -62,7 +63,8 @@ public class ParserTags {
         "feet"                  : function ():* { return CoC.instance.player.feet(); },
         "foot"                  : function ():* { return CoC.instance.player.foot(); },
         "fullchest"             : function ():* { return CoC.instance.player.allChestDesc(); },
-        "gargoylematerial"      : function ():* { return PlayerAppearance.getGargoyleMaterial(CoC.instance.flags[kFLAGS.GARGOYLE_BODY_MATERIAL]); },
+        "gargoylematerial"      : function ():* { return Forgefather.material; },
+		"gargoylerefinement"	: function ():* { return SceneLib.forgefatherScene.getRefinement(); },
         "hair"                  : function ():* { return CoC.instance.player.hairDescript(); },
         "hairshortdesc"         : function ():* { return Appearance.hairShortDescription(CoC.instance.player); },
         "haircolor"             : function ():* { return CoC.instance.player.hairColor; },
