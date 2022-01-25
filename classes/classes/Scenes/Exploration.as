@@ -137,7 +137,7 @@ public class Exploration extends BaseContent
 			else addButtonDisabled(1, "Forest(I)", "You need to be ready (lvl 3+) to reach this area.");
 			//2 - desert inner part
 			//addButtonDisabled(2, "Desert(I)", "Discovered when exploring Desert.");
-			//addButton(2,"test",(TrollVillage.ZenjiVillageStage?SceneLib.trollVillage.EnterTheVillage:SceneLib.trollVillage.FirstEncountersoftheTrollKind)); //JtecxTrack
+			addButton(2,"test",(TrollVillage.ZenjiVillageStage?SceneLib.trollVillage.EnterTheVillage:SceneLib.trollVillage.FirstEncountersoftheTrollKind)); //JtecxTrack
 			if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] > 0) addButton(3, "High Mountain", SceneLib.highMountains.exploreHighMountain).hint("Visit the high mountains where basilisks and harpies are found. " + (debug ? "\n\nTimes explored: " + flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] : ""));
 			else addButtonDisabled(3, "High Mountain", "Discovered when exploring Mountain.");
 

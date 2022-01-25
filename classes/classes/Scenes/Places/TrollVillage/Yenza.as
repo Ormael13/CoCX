@@ -4,7 +4,6 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Items.ArmorLib;
 import classes.Items.UndergarmentLib;
 import classes.Scenes.NPCs.ZenjiScenes;
-import classes.Scenes.Places.TrollVillage;
 import classes.Scenes.SceneLib;
 import classes.Scenes.Places.TrollVillage;
 public class Yenza extends TrollVillageAbstractContent{

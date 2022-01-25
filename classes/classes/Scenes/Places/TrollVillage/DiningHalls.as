@@ -124,8 +124,8 @@ public class DiningHalls extends TrollVillageAbstractContent{
         menuItems.push("Halkano", (rand(4) == 1? SceneLib.trollVillage.halkano.TalksWithHalkano:"ignore"), "Talk to Halkano");
         menuItems.push("Jabala", (rand(4) == 1? SceneLib.trollVillage.jabala.JabalaDining:"ignore"), "Talk to Jabala");
         menuItems.push("Yenza", ((rand(4) == 1 && TrollVillage.YenzaUnlocked == 0|| (TrollVillage.YenzaUnlocked && !TrollVillage.ZenjiFollowing))? SceneLib.trollVillage.yenza.YenzaChecks:"ignore"), "Talk to Yenza");
-        menuItems.push("Elder(M)", (rand(4) == 1? SceneLib.trollVillage.kalji.TalkWithKalji:"ignore"), "Talk to ElderM");
-        menuItems.push("Elder(F)", (rand(4) == 1? TalktoElderF:"ignore"), "Talk to ElderF");
+        menuItems.push("Elder(M)", (rand(4) == 1? SceneLib.trollVillage.kalji.TalkWithKalji:"ignore"), "Talk to Kalji");
+        menuItems.push("Elder(F)", (rand(4) == 1? SceneLib.trollVillage.yubi.TalkWithYubi:"ignore"), "Talk to Yubi");
         menuGen(menuItems, 0, LeaveTheHalls2, false);
 
         function LeaveTheHalls2():void{

@@ -10,7 +10,7 @@ public class Halkano extends TrollVillageAbstractContent{
     public function TalksWithHalkano():void{
         clearOutput();
         menu();
-        if (!TrollVillage.JabalaUnlocked && !TrollVillage.HalkanoUnlocked){ //If Jabala is false, then Zenji has never entered the village yet.
+        if (TrollVillage.ZenjiVillageStage != 0 && !TrollVillage.HalkanoUnlocked){
             HalkanoNoZenji();
         }
         else{
