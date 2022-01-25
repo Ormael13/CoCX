@@ -20,6 +20,7 @@ package classes.Items
 
 		public const A_STAFF:AmphystStaff = new AmphystStaff();
 		public const ACLAYMO:AmphystClaymore = new AmphystClaymore();
+		public const ASTERIUS:AsteriusRage = new AsteriusRage();
 		public const ADAGGER:Weapon = new Weapon("ADagger","A.Dagger","amethyst dagger","an amethyst dagger","stab",3,240,"This dagger is made of obsidian and grotesquely decorated with amethysts and lead engravings. The magic within this murky blade will bleed unnatural darkness when charged with magic.", "Small", "Dagger");
 		public const AETHERD:AetherD = new AetherD();
 		public const ANGSTD :AngstDaggers = new AngstDaggers();
