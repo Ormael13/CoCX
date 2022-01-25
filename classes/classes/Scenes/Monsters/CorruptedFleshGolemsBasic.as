@@ -93,8 +93,10 @@ package classes.Scenes.Monsters
 					add(consumables.BIMBOLQ, 1).
 					add(consumables.BROBREW, 1).
 					add(weapons.DDAGGER, 10).
-					add(weapons.DL_AXE_, 11).
-					add(weapons.DSWORD_, 12);
+					add(weapons.DL_AXE_, 10).
+					add(weapons.DSWORD_, 10).
+					add(weapons.DKATANA, 10).
+					add(weapons.D_LANCE, 10);
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);

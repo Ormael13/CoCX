@@ -328,8 +328,11 @@ use namespace CoC;
 			}
 			if (player.upperGarment == undergarments.HBSHIRT) maxSFCapacity += 350;
 			if (player.lowerGarment == undergarments.HBSHORT) maxSFCapacity += 350;
-			if (player.vehicles == vehicles.HB_MECH) maxSFCapacity += 1000;
-			if (player.vehicles == vehicles.HB_MECH) maxSFCapacity += 1000;
+			if (player.vehicles == vehicles.HB_MECH) {
+				maxSFCapacity += 1000;
+				
+			}
+			//if (player.vehicles == vehicles.HB_MECH) maxSFCapacity += 1000;
 			outputText("Currently used Ayo Armor name: "+player.armorName+"\n\n");
 			outputText("Currently used Ayo Armor soulforce drain rate (per hour): "+currentArmorSFDrainrate+"\n\n");
 			outputText("Soulforce reserves in armor: "+flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR]+" / "+maxSFCapacity+"\n\n");
@@ -1789,4 +1792,4 @@ use namespace CoC;
 			player.itemSlots[slotNum].setItemAndQty(itype, qty);
 		}
 	}
-}
+}
