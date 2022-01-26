@@ -1202,6 +1202,7 @@ public function loverZenjiTalks():void {
 	addButton(7, "Food", loverZenjiFood).hint("Zenji seems like he has something he wants to give you.");
 	button(7).disableIf(ZenjiFood, "Zenji does not have any more food to offer you right now, ask again tomorrow.");
 	if (TrollVillage.ZenjiTrollVillageTimeChk == -1) addButton(8, "His Problems", zenjiVillageProblems);
+	ZenjiMarriagePreCheck();
 	addButton(14, "Back", loverZenjiMainCampMenu);
 }
 
@@ -2787,6 +2788,9 @@ public function zenjiVillageProblems():void{
 }
 
 //ZENJI MARRIAGE
+public function ZenjiMarriagePreCheck():void{
+
+}
 
 public function marryZenji1():void {
 	spriteSelect(SpriteDb.s_zenji);
