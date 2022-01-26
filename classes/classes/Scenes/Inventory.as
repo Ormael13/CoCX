@@ -315,8 +315,11 @@ use namespace CoC;
 			if (player.armor == armors.UHAYOARM) currentArmorSFDrainrate += 240;
 			if (player.armor == armors.HBARMOR) currentArmorSFDrainrate += 180;
 			if (player.vehicles == vehicles.HB_MECH) {
-				/*if (upgrade 1) currentArmorSFDrainrate += ?40?;
-				else */currentArmorSFDrainrate += 60;
+				if (player.hasKeyItem("HB Internal Systems") >= 0) {
+					if (player.keyItemv1("HB Internal Systems") == 2) currentArmorSFDrainrate += 40;
+					else currentArmorSFDrainrate += 50;
+				}
+				else currentArmorSFDrainrate += 60;
 			}
 			maxSFCapacity = 0;
 			if (player.armor == armors.LAYOARM) maxSFCapacity += 1500;
@@ -330,7 +333,10 @@ use namespace CoC;
 			if (player.lowerGarment == undergarments.HBSHORT) maxSFCapacity += 350;
 			if (player.vehicles == vehicles.HB_MECH) {
 				maxSFCapacity += 1000;
-				
+				if (player.hasKeyItem("HB Internal Systems") >= 0) {
+					if (player.keyItemv1("HB Internal Systems") == 2) maxSFCapacity += 5000;
+					else maxSFCapacity += 2000;
+				}
 			}
 			//if (player.vehicles == vehicles.HB_MECH) maxSFCapacity += 1000;
 			outputText("Currently used Ayo Armor name: "+player.armorName+"\n\n");
