@@ -45,6 +45,7 @@ package classes.Scenes.NPCs	{
 		public static var purePearlEaten:Boolean;
 		public static var lethiciteEaten:Boolean;
 		public static var materialsExplained:Boolean;
+		public static var refinementExplained:Boolean;
 		public var templeofdivine:TempleOfTheDivine = new TempleOfTheDivine();
 		
 		public function stateObjectName():String {
@@ -76,6 +77,7 @@ package classes.Scenes.NPCs	{
 			purePearlEaten = false;
 			lethiciteEaten = false;
 			materialsExplained = false;
+			refinementExplained = false;
 		}
 		
 		public function saveToObject():Object {
@@ -103,7 +105,8 @@ package classes.Scenes.NPCs	{
 				"rarityAbsorbed": rarityAbsorbed,
 				"purePearlEaten": purePearlEaten,
 				"lethiciteEaten": lethiciteEaten,
-				"materialsExplained": materialsExplained
+				"materialsExplained": materialsExplained,
+				"refinementExplained": refinementExplained
 			};
 		}
 		
@@ -133,6 +136,7 @@ package classes.Scenes.NPCs	{
 				purePearlEaten = o["purePearlEaten"];
 				lethiciteEaten = o["lethiciteEaten"];
 				materialsExplained = o["materialsExplained"];
+				refinementExplained = o["refinementExplained"];
 			} else {
 				// loading from old save
 				resetState();
@@ -394,26 +398,45 @@ package classes.Scenes.NPCs	{
 		
 		public function workshopMainMenu(): void{
 			clearOutput();
-			outputText("Welcome to the stone-shop, what do you wnat?");
+			outputText("Welcome to the stone-shop, what do you want?");
 			menu();
 			addButtonDisabled(0, "Talk", "Not Yet Written");
-			if (materialsExplained != 1) addButton(5, "Explain Mat's", explainMaterials).hint("Ask about the various materials a gargoyle can be made of");
-			else addButtonDisabled(5, "Explain Mat's", "You already know this");
-			if (materialsExplained != 0) addButton(6, "Change Mat's", changeMaterials).hint("Change your body's material");
-			else addButtonDisabled(6, "Change Mat's", "Change your body's material");
-			addButton(7, "Refine Body", refineBody).hint("Refine your form");
+			addButton(1, "Explain Mat's", explainMaterials).hint("Ask about the various materials a gargoyle can be made of.");
+			addButton(2, "Explain Refine", explainRefinement).hint("Ask about the various levels of refinement a gargoyle can have.");
+			if (materialsExplained != false) addButton(6, "Change Mat's", changeMaterials).hint("Change your body's material.");
+			else addButtonDisabled(6, "Change Mat's", "Maybe you should learn what the materials do first?");
+			if (refinementExplained != false) addButton(7, "Refine Body", refineBody).hint("Refine your form.");
+			else addButtonDisabled(7, "Refine Body", "Maybe you should learn about refining your form first?");
 			addButton(14, "Back", templeofdivine.templemainmenu);			
 		}
 		
 		public function explainMaterials(): void{
 			clearOutput();
 			menu();
-			outputText("This will be typed out better later but:\n\n");
-			outputText("Granite - Melee (Tank)\n");
-			outputText("Ebony - Melee(Dmg)\n");
-			outputText("Alabaster - Magic\n");
-			outputText("Marble - Soulforce\n");
-			outputText("Sandstone - Ranged\n");
+			outputText("\"<i>Well, my kin had once made Gargoyles out of pretty much any material brought to us.</i>\"\n");
+			outputText("\"<i>Unfortunately, the Demons have made gathering it quite tough. I never was a miner, so I only know of a handful of minerals you could locate.</i>\"\n\n");
+			outputText("The Dwarf hands you a list, detailing what the materials are, and where you could possibly find them:");
+			outputText("Granite - Melee (Tank) - Found in the Ashlands\n");
+			outputText("Ebony - Melee(Dmg) - Found in the Caves\n");
+			outputText("Alabaster - Magic - Found in the Tundra\n");
+			outputText("Marble - Soulforce - Found in the Defiled Ravine\n");
+			outputText("Sandstone - Ranged - Found at the Beach\n\n");
+			outputText("You might want a pick-axe, just saying.");
+			addButton(0, "Back", workshopMainMenu)
+		}
+		
+		public function explainRefinement(): void{
+			refinementExplained = true;
+			clearOutput();
+			menu();
+			outputText("\"<i>So, you want to learn about refining your form? I found this old book here teaching apprentice masons about gargoyle refinement, maybe you should take a look.</i>\"\n\n");
+			outputText("Gargoyle Refinement - Beautiful Forms for Every Occasion\n");
+			outputText("Gargoyles start as raw forms, no matter what material they are made of.\nThe Greatest of them are Carved and Polished, bearing great and mighty powers.\n");
+			outputText("To rough out a raw form gargoyle, you will need 200 units of their current material.\n");
+			outputText("To smooth out a rough form gargoyle, you will need 300 units of their current material.");
+			outputText("Note, moving past this stage will prevent the rituals to change a gargoyles material from succeeding. Proceed with caution!\n");
+			outputText("To carve ritual channels into a smooth form gargoyle, you will need ERROR: File Not Found.\n");
+			outputText("To finish and polish a gragoyles form, you will need ERROR:Gargoyle-Gate Case not decided.\n");
 			addButton(0, "Back", workshopMainMenu)
 		}
 		
@@ -438,10 +461,19 @@ package classes.Scenes.NPCs	{
 		public function refineBody(): void{
 			clearOutput();
 			menu();
-			outputText("To Be Written\n\n");
 			outputText("You cannot yet become carved or polished\n");
 			outputText("You need 200 of the material to tranistion from raw to rough.\n");
 			outputText("You need 300 of the material to tranistion from rough to smooth.\n");
+			outputText("Note: Moving past this step locks you to your chosen material.");
+			outputText("To have channels carved into your form, you need ERROR NOT DECIDED to perpare the channels.\n");
+			outputText("Finally, to polish and finish your form, you need SUPER ERROR NOT FOUND to be polished into your body, sealing your power and greatly increasing it.\n\n");
+			outputText("Materials:\n\n");
+			outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] +"\n");
+			outputText("Granite: " + granite +"\n");
+			outputText("Ebony: " + ebony +"\n");
+			outputText("Alabaster: " + alabaster +"\n");
+			outputText("Marble: " + marble +"\n");
+			outputText("Sandstone: " + sandstone +"\n");
 			switch (material){
 				case ("granite"):
 					if (refinement < 2){
@@ -525,32 +557,28 @@ package classes.Scenes.NPCs	{
 		}
 		
 		public function refineFunc(): void{
+			
 			switch (material){
 				case "granite":
 					granite -= ((refinement + 1) * 100);
-					refinement++;
 					break;
 				case "ebony":
 					ebony -= ((refinement + 1) * 100);
-					refinement++;
 					break;
 				case "alabaster":
 					alabaster -= ((refinement + 1) * 100);
-					refinement++;
 					break;
 				case "marble":
 					marble -= ((refinement + 1) * 100);
-					refinement++;
 					break;
 				case "sandstone":
 					sandstone -= ((refinement + 1) * 100);
-					refinement++;
 					break;
 				case "stone":
 					flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= ((refinement + 1) * 100);
-					refinement++;
 					break;
 			}
+			refinement++;
 			camp.returnToCampUseSixHours();
 		}
 	}
