@@ -409,24 +409,24 @@ import classes.internals.Utils;
 				//4 - for next button?
 				if (player.hasKeyItem("HB Internal Systems") >= 0) {
 					if (player.keyItemv1("HB Internal Systems") == 2) addButtonDisabled(5, "Internal Systems v2", "Your HB Mech already have this upgrade.");
-					else addButton(5, "Internal Systems v2", buyHowlingBansheeMechUpgrade, "Internal Systems v2", 1500).hint("Decrease mech SF reserves drain by 20 pts and max SF capacity by 5,000.");
+					else addButton(5, "Internal Systems v2", buyHowlingBansheeMechUpgrade, "Internal Systems v2", 1500).hint("Decrease mech SF reserves drain by 20 pts and max SF capacity by 5,000 (when PC wear Ayo armor).");
 				}
-				else addButton(5, "Internal Systems v1", buyHowlingBansheeMechUpgrade, "Internal Systems v1", 750).hint("Decrease mech SF reserves drain by 10 pts and max SF capacity by 2,000.");
-				//6
+				else addButton(5, "Internal Systems v1", buyHowlingBansheeMechUpgrade, "Internal Systems v1", 750).hint("Decrease mech SF reserves drain by 10 pts and max SF capacity by 2,000 (when PC wear Ayo armor).");
+				if (player.hasKeyItem("HB Dragon's Breath Flamer") >= 0) addButtonDisabled(6, "DB Flamer v1", "Your HB Mech already have this upgrade.");/*{
+					if (player.keyItemv1("HB Stealth System") == 1) addButtonDisabled(10, "Invisibility Mode", "Your HB Mech already have this upgrade.");
+					else addButton(10, "Invisibility Mode", buyHowlingBansheeMechUpgrade, "Invisibility Mode", 5000).hint("Upgrades Camouflage Mode to Invisibility Mode. ");
+				}*/
+				else addButton(6, "DB Flamer v1", buyHowlingBansheeMechUpgrade, "Dragon's Breath Flamer v1", 1500).hint("Add Dragon's Breath Flamer weapon - Allow to enter use special dealing fire damage.");
 				//7
 				//8
 				//9 - for prev button?
-				/*if (player.hasKeyItem("HB Stealth System") >= 0) {
+				if (player.hasKeyItem("HB Stealth System") >= 0) addButtonDisabled(10, "Camouflage Mode", "Your HB Mech already have this upgrade.");/*{
 					if (player.keyItemv1("HB Stealth System") == 1) addButtonDisabled(10, "Invisibility Mode", "Your HB Mech already have this upgrade.");
 					else addButton(10, "Invisibility Mode", buyHowlingBansheeMechUpgrade, "Invisibility Mode", 5000).hint("Upgrades Camouflage Mode to Invisibility Mode. ");
-				}
-				else addButton(10, "Camouflage Mode", buyHowlingBansheeMechUpgrade, "Camouflage Mode", 2000).hint("Enable Camouflage Mode - ");*/
+				}*/
+				else addButton(10, "Camouflage Mode", buyHowlingBansheeMechUpgrade, "Camouflage Mode", 2000).hint("Enable Camouflage Mode - Allow to enter 1 turn long camouflage opening option to use Sneak Attack (melee & range) specials.");
 			}
 			else addButton(0, vehicles.HB_MECH.shortName, buyHowlingBansheeMech).hint("Buy HB Mech - Increase armor by 15, magic resistance by 15.");
-				//addButtonDisabled(6, "Req. to buy HM Mech first."); - option to decrease drain of SF for using specials / amount of buff when powered up
-				//addButtonDisabled(7, "Req. to buy HM Mech first."); - increase speed boost multi bonus
-				//addButtonDisabled(8, "Req. to buy HM Mech first."); - allow to first jump (aka flight for 1 max 2 turns) and then flying for short time / for as long pc want and have SF reserve for it xD
-				//addButtonDisabled(10, "Req. to buy HM Mech first."); - temporaly stealth + option to use during that time range or melee sneak attack option using SF from Mech xD
 				//addButtonDisabled(11, "Req. to buy HM Mech first.");
 				//addButtonDisabled(12, "Req. to buy HM Mech first.");
 				//addButtonDisabled(13, "Req. to buy HM Mech first.");
@@ -475,14 +475,14 @@ import classes.internals.Utils;
 			if (upgrade == "Leather Insulation v3") player.addKeyValue("HB Leather Insulation",1,1);
 			if (upgrade == "Agility v1") player.createKeyItem("HB Agility",0,0,0,0);
 			if (upgrade == "Agility v2") player.addKeyValue("HB Agility",1,1);
+			if (upgrade == "Dragon's Breath Flamer v1") player.createKeyItem("HB Dragon's Breath Flamer",1,0,0,0);
+			//if (upgrade == "Dragon's Breath Flamer v2") player.addKeyValue("HB Dragon's Breath Flamer",1,1);
 			if (upgrade == "Rapid Reload v1") player.createKeyItem("HB Rapid Reload",0,0,0,0);
 			if (upgrade == "Rapid Reload v2") player.addKeyValue("HB Rapid Reload",1,1);
 			if (upgrade == "Internal Systems v1") player.createKeyItem("HB Internal Systems",1,0,0,0);
 			if (upgrade == "Internal Systems v2") player.addKeyValue("HB Internal Systems",1,1);
-			//if (upgrade == "Camouflage Mode") player.createKeyItem("HB Stealth System",0,0,0,0);
+			if (upgrade == "Camouflage Mode") player.createKeyItem("HB Stealth System",0,0,0,0);
 			//if (upgrade == "Invisibility Mode") player.addKeyValue("HB Stealth System",1,1);
-			//if (upgrade == "") ;
-			//if (upgrade == "") ;
 			//if (upgrade == "") ;
 			//if (upgrade == "") ;
 			//if (upgrade == "") ;

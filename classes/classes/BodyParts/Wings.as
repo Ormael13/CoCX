@@ -136,7 +136,6 @@ public class Wings extends SaveableBodyPart {
 		name:"large stony",
 		appearanceDescFunc: function(player: *): String {
 			var desc: String = "";
-
 			desc += " Large ";
 			if (CoC.instance.flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) desc += "marble";
 			if (CoC.instance.flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) desc += "alabaster";
@@ -144,7 +143,6 @@ public class Wings extends SaveableBodyPart {
 			if (CoC.instance.flags[kFLAGS.GARGOYLE_WINGS_TYPE] == 1) desc += "bird";
 			if (CoC.instance.flags[kFLAGS.GARGOYLE_WINGS_TYPE] == 2) desc += "bat";
 			desc += " wings and, although they were made of stone, they allow you to fly around with excellent aerial agility.";
-
 			return desc;
 		},
 		wingSlap: true,
