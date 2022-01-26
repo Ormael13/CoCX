@@ -13,12 +13,16 @@ package classes
 // BREAKING ALL THE RULES.
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
+import classes.CoC;
 import classes.Items.*;
+import classes.Parser.Parser;
 import classes.Scenes.*;
+import classes.Scenes.NPCs.JojoScene;
 import classes.Transformations.TransformationLib;
 import classes.display.DebugInfo;
 import classes.display.PerkMenu;
 import classes.display.SpriteDb;
+
 import coc.model.GameModel;
 import coc.model.TimeModel;
 import coc.view.CoCButton;
@@ -26,16 +30,17 @@ import coc.view.MainView;
 import coc.xxc.Story;
 import coc.xxc.StoryCompiler;
 import coc.xxc.StoryContext;
+
 import flash.display.MovieClip;
 import flash.display.Sprite;
 import flash.events.*;
 import flash.net.registerClassAlias;
 import flash.text.TextFormat;
 import flash.utils.setTimeout;
+
 import mx.logging.Log;
 import mx.logging.LogEventLevel;
 import mx.logging.targets.TraceTarget;
-import classes.CoC;
 
 
 

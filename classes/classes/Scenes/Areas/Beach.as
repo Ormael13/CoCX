@@ -220,7 +220,7 @@ import classes.Scenes.NPCs.Forgefather;
 				var minedStones:Number = 13 + Math.floor(player.str / 7);
 				minedStones = Math.round(minedStones);
 				fatigue(50, USEFATG_PHYSICAL);
-				Forgefather.sandstone += minedStones;
+				SceneLib.forgefatherScene.incrementSandstoneSupply(minedStones);
 				doNext(camp.returnToCampUseTwoHours);
 			}
 		}

@@ -126,7 +126,7 @@ use namespace CoC;
 				var minedStones:Number = 13 + Math.floor(player.str / 7);
 				minedStones = Math.round(minedStones);
 				fatigue(50, USEFATG_PHYSICAL);
-				Forgefather.granite += minedStones;
+				SceneLib.forgefatherScene.incrementGraniteSupply(minedStones);
 				doNext(camp.returnToCampUseTwoHours);
 			}
 		}

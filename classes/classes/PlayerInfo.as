@@ -6,6 +6,7 @@ import classes.GlobalFlags.*;
 import classes.Scenes.Combat.CombatAbility;
 import classes.Scenes.Places.HeXinDao.JourneyToTheEast;
 import classes.Scenes.NPCs.EvangelineFollower;
+import classes.Scenes.NPCs.Forgefather;
 import classes.Scenes.NPCs.IsabellaScene;
 import classes.Scenes.NPCs.ZenjiScenes;
 import classes.Scenes.Places.Mindbreaker;
@@ -152,6 +153,11 @@ public class PlayerInfo extends BaseContent {
 		miscStats += "<b>Metal Pieces:</b> " + flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] + "/200" + "\n";
 		miscStats += "<b>Mechanisms:</b> " + flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] + "/200" + "\n";
 		miscStats += "<b>Energy Cores:</b> " + flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] + "/200" + "\n";
+		miscStats += "<b>Granite:</b> " + Forgefather.granite + "/" + Forgefather.matCap + "\n";
+		miscStats += "<b>Ebony:</b> " + Forgefather.ebony + "/" + Forgefather.matCap + "\n";
+		miscStats += "<b>Alabaster:</b> " + Forgefather.alabaster + "/" + Forgefather.matCap + "\n";
+		miscStats += "<b>Marble:</b> " + Forgefather.marble + "/" + Forgefather.matCap + "\n";
+		miscStats += "<b>Sandstone:</b> " + Forgefather.sandstone + "/" + Forgefather.matCap + "\n";
 
 		miscStats += "<b>Basic Jobs:</b> " + player.currentBasicJobs() + " / 9\n";
 		miscStats += "<b>Advanced Jobs:</b> " + player.currentAdvancedJobs() + " / " + player.maxAdvancedJobs() + "\n";
@@ -2176,3 +2182,4 @@ public class PlayerInfo extends BaseContent {
 	}
 }
 }
+

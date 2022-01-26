@@ -581,5 +581,56 @@ package classes.Scenes.NPCs	{
 			refinement++;
 			camp.returnToCampUseSixHours();
 		}
+		
+		public function incrementGraniteSupply(amount:int):void {
+			outputText("<b>(+" + amount + " granite!");
+			granite += amount;
+			if (granite >= matCap) {
+				granite = matCap;
+				outputText(" Your granite capacity is full.")
+			}
+			outputText(")</b>");
+		}
+		
+		public function incrementEbonySupply(amount:int):void {
+			outputText("<b>(+" + amount + " ebony!");
+			ebony += amount;
+			if (ebony >= matCap) {
+				ebony = matCap;
+				outputText(" Your ebony capacity is full.")
+			}
+			outputText(")</b>");
+		}
+		
+		public function incrementAlabasterSupply(amount:int):void {
+			outputText("<b>(+" + amount + " alabaster!");
+			alabaster += amount;
+			if (alabaster >= matCap) {
+				alabaster = matCap;
+				outputText(" Your alabaster capacity is full.")
+			}
+			outputText(")</b>");
+		}
+		
+		public function incrementMarbleSupply(amount:int):void {
+			outputText("<b>(+" + amount + " marble!");
+			marble += amount;
+			if (marble >= matCap) {
+				marble = matCap;
+				outputText(" Your marble capacity is full.")
+			}
+			outputText(")</b>");
+		}
+		
+		public function incrementSandstoneSupply(amount:int):void {
+			outputText("<b>(+" + amount + " sandstone!");
+			sandstone += amount;
+			if (sandstone >= matCap) {
+				sandstone = matCap;
+				outputText(" Your sandstone capacity is full.")
+			}
+			outputText(")</b>");
+		}
+		
 	}
 }
