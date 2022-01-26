@@ -87,8 +87,7 @@ import classes.internals.*;
 			else if (player.cor >= 10) damage = Math.round(damage * 1.3);
 			else damage = Math.round(damage * 1.4);
 			if (hasStatusEffect(StatusEffects.Maleficium)) damage *= 2;
-			outputText("Alvina weaves her scythe above her head tracing complicated arcane signs");
-			outputText(", as a purple flame surges under you, searing your flesh. ");
+			outputText("Alvina weaves her scythe above her head tracing complicated arcane signs, as a purple flame surges under you, searing your flesh. ");
 			//outputText(". (" + damage + ")");
 			player.takeFireDamage(damage, true);//, true
 			if (player.hasStatusEffect(StatusEffects.BurnDoT)) player.addStatusValue(StatusEffects.BurnDoT, 1, 1);

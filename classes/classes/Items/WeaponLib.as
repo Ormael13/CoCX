@@ -20,6 +20,7 @@ package classes.Items
 
 		public const A_STAFF:AmphystStaff = new AmphystStaff();
 		public const ACLAYMO:AmphystClaymore = new AmphystClaymore();
+		public const ASTERIUS:AsteriusRage = new AsteriusRage();
 		public const ADAGGER:Weapon = new Weapon("ADagger","A.Dagger","amethyst dagger","an amethyst dagger","stab",3,240,"This dagger is made of obsidian and grotesquely decorated with amethysts and lead engravings. The magic within this murky blade will bleed unnatural darkness when charged with magic.", "Small", "Dagger");
 		public const AETHERD:AetherD = new AetherD();
 		public const ANGSTD :AngstDaggers = new AngstDaggers();
@@ -46,8 +47,10 @@ package classes.Items
 		public const DEMSCYT:DemonicScythe = new DemonicScythe();
 		public const DEPRAVA:Depravatio = new Depravatio();
 		public const DE_GAXE:DemonicGreataxe = new DemonicGreataxe();
+		public const DKATANA:DualKatana = new DualKatana();
 		public const DRAPIER:DragonsRapier = new DragonsRapier();
 		public const D_WHAM_:DualHugeWarhammer = new DualHugeWarhammer();
+		public const D_LANCE:DualLance = new DualLance();
 		public const DL_AXE_:DualLargeAxe = new DualLargeAxe();
 		public const DOCDEST:DefiledOniChieftainDestroyer = new DefiledOniChieftainDestroyer();
 		public const DSWORD_:DualSwords = new DualSwords();

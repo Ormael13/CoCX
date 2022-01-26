@@ -106,7 +106,7 @@ package classes.Scenes.NPCs
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 5) temp *= 3;
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 10) temp *= 3;
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 15) temp *= 3;
-			outputText("She pop the small pill into her mouth and swallow. <b>(<font color=\"#008000\">+" + temp + "</font>)</b>.");
+			outputText("She pops the small pill into her mouth and swallows. <b>(<font color=\"#008000\">+" + temp + "</font>)</b>.");
 			addHP(temp);
 		}
 		public function usingARC():void {
@@ -118,7 +118,7 @@ package classes.Scenes.NPCs
 		}
 		
 		public function usingManyBirdsSoulskill():void {
-			outputText("She thrust her hand outwards with deadly intent, and in the blink of an eye a crystals shoots towards you.  Crystals hits you, dealing ");
+			outputText("She brings her hand up towards you, palm out. A shower of crystalline shards form in front of her outstretched hand. The crystals shoots towards you. The crystals shatter as they hit you, detonating");
 			soulforce -= soulskillCostManyBirds();
 			var damage:Number = wisdomscalingbonus();
 			if (damage < 10) damage = 10;
@@ -129,9 +129,9 @@ package classes.Scenes.NPCs
 		}
 		
 		public function usingHailOfBlades1Soulskill():void {
-			outputText("Letting soulforce leak out around her, Diana form six ethereal two meter long weapons. She thrust her hand outwards and in the blink of an eye, weapons shoot towards you.  ");
+			outputText("placing her palms together, Diana's aura flares. soulforce leaks out around her, and she brings her palms out to her sides. Eyes focused on you, Diana forms six ethereal swords nearly six feet long, splaying out behind her like a fan of blades. She thrusts her hand outwards and in the blink of an eye, the etherial blades shoot towards you. ");
 			soulforce -= soulskillCostHailOfBlades1();
-			outputText("Weapons hits you, dealing ");
+			outputText("The blades cut deep, inflicting");
 			BladesD();
 			BladesD();
 			BladesD();
@@ -150,7 +150,7 @@ package classes.Scenes.NPCs
 		}
 		
 		public function usingMagicBoltsBarrageSpell():void {
-			outputText("Diana narrow her eyes, focusing her mind with deadly intent.  After longer time she spend focusing, she point her staff and shots magic bolts toward you! ");
+			outputText("Diana narrow her eyes, focusing her mind with deadly intent. Mana pours down her shoulders, past her hands and into her staff, which she spins, pointing the tip at you. Blue energy coats the staff, and she fires a barrage of mana bolts at you! ");
 			mana -= spellCostMagicBoltsBarrage();
 			var damage:Number = inteligencescalingbonus() * SpellMod() * 1.2;
 			if (damage < 10) damage = 10;
@@ -168,7 +168,7 @@ package classes.Scenes.NPCs
 		}
 		
 		public function usingMagicBoltSpell():void {
-			outputText("Diana narrow her eyes, focusing her mind with deadly intent.  Then she point her staff and shots magic bolt toward you! ");
+			outputText("Diana narrows her eyes, and her staff begins to glow. She points her staff at you, a large blue bolt lancing towards you.");
 			mana -= spellCostMagicBolt();
 			var damage:Number = inteligencescalingbonus() * SpellMod() * 1.2;
 			if (damage < 10) damage = 10;
@@ -182,7 +182,7 @@ package classes.Scenes.NPCs
 		}
 		
 		public function usingRegenerateSpell():void {
-			outputText("She focus on her body and its desire to end pain, trying to draw on her arousal without enhancing it.\n");
+			outputText("She closes her eyes, taking a wide stance and holding her staff in front of her. Her cheeks flush red, and you can see her wounds closing. The magic sticks around, clinging to her body. She's regenerating!\n");
 			var hpChange2:int = inte;
 			if (findPerk(PerkLib.WisenedHealer) >= 0) hpChange2 += wis;
 			createStatusEffect(StatusEffects.MonsterRegen2, 7, hpChange2, 0, 0);
@@ -199,7 +199,7 @@ package classes.Scenes.NPCs
 			if (flags[kFLAGS.DIANA_LVL_UP] < 2) outputText("Horse-morph");
 			else if (flags[kFLAGS.DIANA_LVL_UP] >= 2 && flags[kFLAGS.DIANA_LVL_UP] < 8) outputText("Unicorn");
 			else outputText("Diana");
-			outputText(" chant a magical song of healing and recovery and her wounds start knitting themselves shut in response. <b>(<font color=\"#008000\">+" + temp + "</font>)</b>.");
+			outputText(" cries out, planting her staff. She inhales deeply, and begins chanting. A green pulse eminates from her staff, which wraps around her, closing her injuries almost instantly.  <b>(<font color=\"#008000\">+" + temp + "</font>)</b>.");
 			addHP(temp);
 			mana -= spellCostHeal();
 			createStatusEffect(StatusEffects.AbilityCooldown1, 2, 0, 0, 0);
@@ -209,15 +209,15 @@ package classes.Scenes.NPCs
 		override protected function performCombatAction():void
 		{
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 16 && HPRatio() < .4 && soulforce >= 100 && !hasStatusEffect(StatusEffects.MonsterVPT)) {
-				outputText("Diana eyes starts to glow with a violet hue and you can see all of her wounds are now slowly healing.\n");
+				outputText("Diana's eyes starts to glow with a violet hue and you can see all of her wounds are now slowly healing.\n");
 				createStatusEffect(StatusEffects.MonsterVPT, 550, 0, 0, 0);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 12 && flags[kFLAGS.DIANA_LVL_UP] < 16 && HPRatio() < .3 && soulforce >= 100 && !hasStatusEffect(StatusEffects.MonsterVPT)) {
-				outputText("Diana eyes starts to glow with a violet hue and you can see all of her wounds are now slowly healing.\n");
+				outputText("Diana's eyes starts to glow with a violet hue and you can see all of her wounds are now slowly healing.\n");
 				createStatusEffect(StatusEffects.MonsterVPT, 350, 0, 0, 0);
 			}
 			if (flags[kFLAGS.DIANA_LVL_UP] >= 8 && flags[kFLAGS.DIANA_LVL_UP] < 12 && HPRatio() < .2 && soulforce >= 100 && !hasStatusEffect(StatusEffects.MonsterVPT)) {
-				outputText("Diana eyes starts to glow with a violet hue and you can see all of her wounds are now slowly healing.\n");
+				outputText("Diana's eyes starts to glow with a violet hue and you can see all of her wounds are now slowly healing.\n");
 				createStatusEffect(StatusEffects.MonsterVPT, 200, 0, 0, 0);
 			}
 			if (hasStatusEffect(StatusEffects.MonsterVPT)) {
