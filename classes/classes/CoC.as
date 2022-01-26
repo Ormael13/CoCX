@@ -41,12 +41,7 @@ import flash.utils.setTimeout;
 import mx.logging.Log;
 import mx.logging.LogEventLevel;
 import mx.logging.targets.TraceTarget;
-<<<<<<< HEAD
 
-
-
-=======
->>>>>>> parent of ddd361217 (Garg)
 
 /****
  classes.CoC: The Document class of Corruption of the Champions.

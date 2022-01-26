@@ -6,29 +6,20 @@
 package classes.Scenes.NPCs	{
 	
 	import classes.*;
-	import classes.BodyParts.Antennae;
-	import classes.BodyParts.Arms;
-	import classes.BodyParts.Ears;
-	import classes.BodyParts.Eyes;
-	import classes.BodyParts.Face;
-	import classes.BodyParts.Gills;
-	import classes.BodyParts.Hair;
-	import classes.BodyParts.Horns;
-	import classes.BodyParts.LowerBody;
-	import classes.BodyParts.RearBody;
-	import classes.BodyParts.Skin;
-	import classes.BodyParts.Tail;
-	import classes.BodyParts.Tongue;
-	import classes.BodyParts.Wings;
+	import classes.BodyParts.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.internals.SaveableState;
+	import classes.Items.WeaponLib;
 	import classes.Scenes.SceneLib;
+	import classes.Scenes.NPCs.Forgefather;
+	import classes.Scenes.Areas.HighMountains.TempleOfTheDivine;
 	import classes.Stats.Buff;
 	import classes.display.SpriteDb;
 	
+	use namespace CoC;
+	
 	public class Forgefather extends NPCAwareContent implements SaveableState	{
 		
-<<<<<<< HEAD
 		public static var statueProgress:int;
 		public static var hairLength:int;
 		public static var gender:int;
@@ -56,31 +47,13 @@ package classes.Scenes.NPCs	{
 		public static var materialsExplained:Boolean;
 		public static var refinementExplained:Boolean;
 		public var templeofdivine:TempleOfTheDivine = new TempleOfTheDivine();
-=======
-		public static var hairLength:int
-		public static var gender:int
-		public static var wings:int
-		public static var arms:int
-		public static var tail:int
-		public static var lowerBody:int
-		public static var chest:int
-		public static var vagina:int
-		public static var cock:int
-		public static var balls:int
-		public static var material:String
-		public static var refinement:int
-		public static var channelInlay:String
-		public static var gem:String
-		public static var rarityAbsorbed:String
-		public static var purePearlEaten:Boolean
-		public static var lethiciteEaten:Boolean
->>>>>>> parent of ddd361217 (Garg)
 		
-		public function Forgefather() {
-			Saves.registerSaveableState(this);
+		public function stateObjectName():String {
+			return "Forgefather";
 		}
 		
 		public function resetState():void {
+			statueProgress = 0;
 			hairLength = 0;
 			gender = 0;
 			wings = 0;
@@ -93,20 +66,23 @@ package classes.Scenes.NPCs	{
 			balls = 0;
 			material = "";
 			refinement = 0;
+			ebony = 0;
+			granite = 0;
+			alabaster = 0;
+			marble = 0;
+			sandstone = 0;
 			channelInlay = "";
 			gem = "";
 			rarityAbsorbed = "";
 			purePearlEaten = false;
 			lethiciteEaten = false;
-<<<<<<< HEAD
 			materialsExplained = false;
 			refinementExplained = false;
-=======
->>>>>>> parent of ddd361217 (Garg)
 		}
 		
 		public function saveToObject():Object {
 			return {
+				"statueProgress": statueProgress,
 				"hairLength": hairLength,
 				"gender": gender,
 				"wings": wings,
@@ -119,22 +95,24 @@ package classes.Scenes.NPCs	{
 				"balls": balls,
 				"material": material,
 				"refinement": refinement,
+				"ebony": ebony,
+				"granite": granite,
+				"alabaster": alabaster,
+				"marble": marble,
+				"sandstone": sandstone,
 				"channelInlay": channelInlay,
 				"gem": gem,
 				"rarityAbsorbed": rarityAbsorbed,
 				"purePearlEaten": purePearlEaten,
-<<<<<<< HEAD
 				"lethiciteEaten": lethiciteEaten,
 				"materialsExplained": materialsExplained,
 				"refinementExplained": refinementExplained
-=======
-				"lethiciteEaten": lethiciteEaten
->>>>>>> parent of ddd361217 (Garg)
 			};
 		}
 		
 		public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
 			if (o) {
+				statueProgress = o["statueProgress"];
 				hairLength = o["hairLength"];
 				gender = o["gender"];
 				wings = o["wings"];
@@ -147,24 +125,26 @@ package classes.Scenes.NPCs	{
 				balls = o["balls"];
 				material = o["material"];
 				refinement = o["refinement"];
+				ebony = o["ebony"];
+				granite = o["granite"];
+				alabaster = o["alabaster"];
+				marble = o["marble"];
+				sandstone = o["sandstone"];
 				channelInlay = o["channelInlay"];
 				gem = o["gem"];
 				rarityAbsorbed = o["rarityAbsorbed"];
 				purePearlEaten = o["purePearlEaten"];
 				lethiciteEaten = o["lethiciteEaten"];
-<<<<<<< HEAD
 				materialsExplained = o["materialsExplained"];
 				refinementExplained = o["refinementExplained"];
-=======
->>>>>>> parent of ddd361217 (Garg)
 			} else {
 				// loading from old save
 				resetState();
 			}
 		}
 		
-		public function stateObjectName():String {
-			return "ForgeFatherScenes";
+		public function Forgefather() {
+			Saves.registerSaveableState(this);
 		}
 		
 		public function meetForgefather():void	{
@@ -180,7 +160,7 @@ package classes.Scenes.NPCs	{
 		public function introduceSelf():void {
 			flags[kFLAGS.FORGEFATHER_MOVED_TO_TEMPLE] = 1;
 			outputText("You introduce yourself to the being. /n/n");
-			outputText("Eyeing your quite solid form, he chuckles."
+			outputText("Eyeing your quite solid form, he chuckles.");
 			outputText("\"<i>That's quite the stout form you have. I thought the demons destroyed all of your kind.</i>\"\n\n");
 			outputText("You respond, telling him of the Temple, and the 2 gargoyles now there. You describe you were a champion of your village, and how you willingly gave up your original form to inhabit the stony body.\n\n");
 			outputText("Surprised, the being exclaims.\n\n");
@@ -205,51 +185,87 @@ package classes.Scenes.NPCs	{
 			addButton(1, "Not Now", notNow);
 		}
 	
-		public function setGargoyleHair(hairLength:int): void {
-			this.hairLength = hairLength;
+		public function setGargoyleHair(newHairLength:int): void {
+			hairLength = newHairLength;
+			statueProgress++;
 		}
 		
-		public function setGargoyleGender(gender:int): void {
-			this.gender = gender;
+		public function setGargoyleGender(newGender:int): void {
+			gender = newGender;
+			statueProgress++;
 		}
 		
-		public function setGargoyleWings(wings:int): void {
-			this.wings = wings;
+		public function setGargoyleWings(newWings:int): void {
+			wings = newWings;
+			statueProgress++;
 		}
 		
-		public function setGargoyleArms(arms:int): void {
-			this.arms = arms;
+		public function setGargoyleArms(newArms:int): void {
+			arms = newArms;
+			statueProgress++;
 		}
 		
-		public function setGargoyleTail(tail:int): void {
-			this.tail = tail;
+		public function setGargoyleTail(newTail:int): void {
+			tail = newTail;
+			statueProgress++;
 		}
 		
-		public function setGargoyleLowerBody(lowerBody:int): void {
-			this.lowerBody = lowerBody;
+		public function setGargoyleLowerBody(newLowerBody:int): void {
+			lowerBody = newLowerBody;
+			statueProgress++;
 		}
 		
-		public function setGargoyleLowerBody(lowerBody:int): void {
-			this.lowerBody = lowerBody;
+		public function setGargoyleChest(newChest:int): void {
+			chest = newChest;
+			statueProgress++;
 		}
 		
-		public function setGargoyleChest(chest:int): void {
-			this.chest = chest;
+		public function setGargoyleVagina(newVagina:int): void {
+			vagina = newVagina;
+			statueProgress++;
 		}
 		
-		public function setGargoyleVagina(vagina:int): void {
-			this.vagina = vagina;
+		public function setGargoyleCock(newCock:int): void {
+			cock = newCock;
+			statueProgress++;
 		}
 		
-		public function setGargoyleCock(cock:int): void {
-			this.cock = cock;
+		public function setGargoyleBalls(newBalls:int): void {
+			balls = newBalls;
+			statueProgress++;
 		}
 		
-		public function setGargoyleBalls(balls:int): void {
-			this.balls = balls;
+		public function getRefinement(): String {
+			var level: String;
+			switch (refinement)
+			{
+				case (0):
+					level = "raw";
+					break;
+				
+				case (1):
+					level = "rough";
+					break;
+				
+				case (2):
+					level = "smooth";
+					break;
+				
+				case (3):
+					level = "carved";
+					break;
+				
+				case (4):
+					level = "polished";
+					break;
+				
+			}
+			return level;
 		}
 		
 		public function createGargoyleState(): void {
+			material = "stone";
+			refinement = 0;
 			player.skinTone = "dark gray";
 			player.hairColor = "dark gray";
 			player.skin.setBaseOnly({type:Skin.STONE});
@@ -320,7 +336,7 @@ package classes.Scenes.NPCs	{
 					break;
 			}
 			
-			switch (lower) {
+			switch (lowerBody) {
 				case 1:
 					player.lowerBody = LowerBody.GARGOYLE;
 					break;
@@ -380,7 +396,6 @@ package classes.Scenes.NPCs	{
 			}
 		}
 		
-<<<<<<< HEAD
 		public function workshopMainMenu(): void{
 			clearOutput();
 			outputText("Welcome to the stone-shop, what do you want?");
@@ -617,7 +632,5 @@ package classes.Scenes.NPCs	{
 			outputText(")</b>");
 		}
 		
-=======
->>>>>>> parent of ddd361217 (Garg)
 	}
 }
