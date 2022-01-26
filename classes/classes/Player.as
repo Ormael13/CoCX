@@ -13562,18 +13562,6 @@ use namespace CoC;
 						break;
 						
 				}
-				if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) {
-					maxStrCap2 += 300;
-					maxTouCap2 += 510;
-					maxSpeCap2 += 100;
-					maxIntCap2 += 80;
-				}
-				if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) {
-					maxStrCap2 += 100;
-					maxTouCap2 += 510;
-					maxSpeCap2 += 80;
-					maxIntCap2 += 300;
-				}
 				if (hasPerk(PerkLib.GargoylePure)) {
 					maxWisCap2 += 130;
 					maxLibCap2 -= 20;
