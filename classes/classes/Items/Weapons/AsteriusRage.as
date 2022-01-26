@@ -11,17 +11,21 @@ package classes.Items.Weapons
 	public class AsteriusRage extends Weapon {
 		
 		public function AsteriusRage() {
-			super("A.R", "A.R", "Asterius Rage", "Asterius Rage", "cleaves", 60, 20000, "This pair of massive axes once belonged to Asterius the god of the minotaurs.  It'd be hard for anyone smaller than a giant to wield effectively and as a mather of fact seems to work best in the hand of someone of truly titanic strength.  Those axes are double-bladed and deadly-looking.  Requires height of 6'6 or above\".", "Dual Large, LGWrath", "Axe");
+			super("A.R", "A.R", "Asterius Rage", "Asterius Rage", "cleaves", 110, 20000, "This pair of massive axes once belonged to Asterius the god of the minotaurs.  It'd be hard for anyone smaller than a giant to wield effectively and as a mather of fact seems to work best in the hand of someone of truly titanic strength.  Those axes are double-bladed and deadly-looking.  Requires height of 6'6 or above\".", "Dual Large, LGWrath", "Axe");
 		}
 		
 		override public function get attack():Number {
 			var boost:int = 0;
-			if (game.player.str >= 1000) boost += 20;
-			if (game.player.str >= 210) boost += 10;
-			if (game.player.str >= 140) boost += 10;
-			if (game.player.str >= 70) boost += 10;
+			if (game.player.str >= 1000) boost += 18;
+			if (game.player.str >= 500) boost += 16;
+			if (game.player.str >= 420) boost += 14;
+			if (game.player.str >= 350) boost += 12;
+			if (game.player.str >= 280) boost += 10;
+			if (game.player.str >= 210) boost += 8;
+			if (game.player.str >= 140) boost += 6;
+			if (game.player.str >= 70) boost += 4;
 			boost += (game.player.cor) / 5;
-			return (10 + boost);
+			return (2 + boost);
 		}
 		
 		override public function canUse():Boolean {

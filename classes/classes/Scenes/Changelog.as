@@ -124,7 +124,10 @@ package classes.Scenes
 			outputText("-New melee weapon (by Ormael): Dual Lance - dropped by corrupted flesh golems. Cost 960 gems. Base atk is 12. It's Dual Normal weapon belonging to spear type. When used in Charge special would hit twice.\n");
 			outputText("-Katana and Dual Katana now would reduce enemy armor by 10% (or by 10 if enemy armor is below 100).\n");
 			outputText("-Dinah would provide PC with HB Mech upgrade options after it's bought. They could boost mech defences, attack or even provide with specials. As with all other items upgrades cost can vary depending on her mood ^^\n");
-			outputText("-SOme of one shoot firearms would now allow more shoots than 1/2 when PC get perks to expand (magicaly ^^) ammo clip to hold more ammo than 1/2.\n");
+			outputText("-Some of one shoot firearms would now allow more shoots than 1/2 when PC get perks to expand (magicaly ^^) ammo clip to hold more ammo than 1/2.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -138,11 +141,8 @@ package classes.Scenes
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Fixed Bugs: One of Ingnam Tavern food options having wrong price listed on menu, unique sex scenes accesable during Druid fusion, Wisp potentialy softlocking Mino King fight, selfsucking in masturbation menu restoring max 100 hunger, Swift Casting not usable when having Giant's Grip and Large weapon, White or Black magic buffs autocastable when having perk that disable use of white/black magic, ");
-			outputText("putting B. Sword after picking Ecalibur disabling option to pick sword at Temple, all 3 Hall of Blade soulskill variants dealing phys not magical dmg\n");/*ostatni punkt changelogu
+			outputText("putting B. Sword after picking Ecalibur disabling option to pick sword at Temple, all 3 Hall of Blade soulskill variants dealing phys not magical dmg, Lightning Claw lowering phys dmg when used as part of feral style attack\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD

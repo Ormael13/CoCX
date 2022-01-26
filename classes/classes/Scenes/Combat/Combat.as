@@ -4895,7 +4895,7 @@ public class Combat extends BaseContent {
         //Natural weapon Full attack list
         if ((flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && ((player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon())) || player.isGargoyle())) {
             IsFeralCombat = true;
-            resolveFeralCombatAdditionnalAttacks()
+            resolveFeralCombatAdditionnalAttacks();
         }
         // Do all other attacks
         meleeDamageAcc(IsFeralCombat);
@@ -5789,42 +5789,43 @@ public class Combat extends BaseContent {
                     //DOING BASIC EXTRA NATURAL ATTACKS
                     outputText("You savagely rend [monster a] [monster name] with your natural weapons.");
                     if (player.hasPerk(PerkLib.LightningClaw)) {
-                        damage = 6 + rand(3);
-                        if (player.hasPerk(PerkLib.SensualLover)) damage += 2;
-                        if (player.hasPerk(PerkLib.Seduction)) damage += 5;
+						var damageLC:Number = 0;
+                        damageLC = 6 + rand(3);
+                        if (player.hasPerk(PerkLib.SensualLover)) damageLC += 2;
+                        if (player.hasPerk(PerkLib.Seduction)) damageLC += 5;
                         //+ slutty armor bonus
-                        if (player.hasPerk(PerkLib.SluttySeduction)) damage += player.perkv1(PerkLib.SluttySeduction);
-                        if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) damage += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
-                        if (player.hasPerk(PerkLib.BimboBody) || player.hasPerk(PerkLib.BroBody) || player.hasPerk(PerkLib.FutaForm)) damage += 5;
-                        if (player.hasPerk(PerkLib.FlawlessBody)) damage += 10;
-                        damage += scalingBonusLibido() * 0.1;
-                        if (player.hasPerk(PerkLib.JobSeducer)) damage += player.teaseLevel * 3;
-                        else damage += player.teaseLevel * 2;
+                        if (player.hasPerk(PerkLib.SluttySeduction)) damageLC += player.perkv1(PerkLib.SluttySeduction);
+                        if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) damageLC += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
+                        if (player.hasPerk(PerkLib.BimboBody) || player.hasPerk(PerkLib.BroBody) || player.hasPerk(PerkLib.FutaForm)) damageLC += 5;
+                        if (player.hasPerk(PerkLib.FlawlessBody)) damageLC += 10;
+                        damageLC += scalingBonusLibido() * 0.1;
+                        if (player.hasPerk(PerkLib.JobSeducer)) damageLC += player.teaseLevel * 3;
+                        else damageLC += player.teaseLevel * 2;
                         //partial skins bonuses
                         switch (player.coatType()) {
                             case Skin.FUR:
-                                damage += (1 + player.newGamePlusMod());
+                                damageLC += (1 + player.newGamePlusMod());
                                 break;
                             case Skin.SCALES:
-                                damage += (2 * (1 + player.newGamePlusMod()));
+                                damageLC += (2 * (1 + player.newGamePlusMod()));
                                 break;
                             case Skin.CHITIN:
-                                damage += (3 * (1 + player.newGamePlusMod()));
+                                damageLC += (3 * (1 + player.newGamePlusMod()));
                                 break;
                             case Skin.BARK:
-                                damage += (4 * (1 + player.newGamePlusMod()));
+                                damageLC += (4 * (1 + player.newGamePlusMod()));
                                 break;
                         }
                         //slutty simplicity bonus
-                        if (player.hasPerk(PerkLib.SluttySimplicity) && player.armorName == "nothing") damage *= (1 + ((10 + rand(11)) / 100));
-                        damage *= .7;
+                        if (player.hasPerk(PerkLib.SluttySimplicity) && player.armorName == "nothing") damageLC *= (1 + ((10 + rand(11)) / 100));
+                        damageLC *= .7;
                         var damagemultiplier:Number = 1;
                         if (player.hasPerk(PerkLib.ElectrifiedDesire)) damagemultiplier += player.lust100 * 0.01;
                         if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += combat.historyWhoreBonus();
                         if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 10) damagemultiplier += 0.2;
                         if (player.armorName == "desert naga pink and black silk dress") damagemultiplier += 0.1;
                         if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
-                        damage *= damagemultiplier;
+                        damageLC *= damagemultiplier;
                         //Determine if critical tease!
                         var crit1:Boolean = false;
                         var critChance1:int = 5;
@@ -5835,13 +5836,13 @@ public class Combat extends BaseContent {
                         if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance1 = 0;
                         if (rand(100) < critChance1) {
                             crit1 = true;
-                            damage *= 1.75;
+                            damageLC *= 1.75;
                         }
-                        if (player.hasPerk(PerkLib.ChiReflowLust)) damage *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
-                        if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
-                        damage = damage * 0.33 * monster.lustVuln;
-                        damage = Math.round(damage);
-                        monster.teased(damage);
+                        if (player.hasPerk(PerkLib.ChiReflowLust)) damageLC *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
+                        if (player.hasPerk(PerkLib.RacialParagon)) damageLC *= RacialParagonAbilityBoost();
+                        damageLC = damageLC * 0.33 * monster.lustVuln;
+                        damageLC = Math.round(damageLC);
+                        monster.teased(damageLC);
                         if (crit1) outputText(" <b>Critical!</b>");
                         outputText(" ");
                         if (player.hasPerk(PerkLib.SuperSensual) && player.hasPerk(PerkLib.Sensual)) teaseXP(2);
@@ -6853,7 +6854,6 @@ public class Combat extends BaseContent {
         if (player.isLowGradeWrathWeapon()) {
             if (player.wrath >= 1) player.wrath -= 1;
             else {
-
                 player.takePhysDamage(10);
                 if (player.HP <= player.minHP()) {
                     doNext(endHpLoss);
@@ -6864,8 +6864,16 @@ public class Combat extends BaseContent {
         if (player.isDualLowGradeWrathWeapon()) {
             if (player.wrath >= 2) player.wrath -= 2;
             else {
-
                 player.takePhysDamage(20);
+                if (player.HP <= player.minHP()) {
+                    doNext(endHpLoss);
+                }
+            }
+        }
+        if (player.isDualMidGradeWrathWeapon()) {
+            if (player.wrath >= 4) player.wrath -= 4;
+            else {
+                player.takePhysDamage(40);
                 if (player.HP <= player.minHP()) {
                     doNext(endHpLoss);
                 }
