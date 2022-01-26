@@ -42,7 +42,6 @@ import classes.Items.WeaponRangeLib;
 import classes.Items.Undergarment;
 import classes.Items.UndergarmentLib;
 import classes.Scenes.Areas.Forest.BeeGirlScene;
-import classes.Scenes.NPCs.Forgefather;
 import classes.Scenes.Areas.Forest.KitsuneScene;
 import classes.Scenes.Combat.CombatAbilities;
 import classes.Scenes.Combat.CombatAbility;
@@ -663,21 +662,14 @@ use namespace CoC;
 			if (lowerBody == LowerBody.DRIDER || lowerBody == LowerBody.HYDRA) armorDef += (4 * newGamePlusMod);
 			if (rearBody.type == RearBody.YETI_FUR) armorDef += (4 * newGamePlusMod);
 			if (hasPerk(PerkLib.Lycanthropy)) armorDef += 10 * newGamePlusMod;
-			if (isGargoyle()) {
-				switch (Forgefather.material) {
-					case "granite":
-						armorDef += (150 * newGamePlusMod);
-						break;
-					case "ebony":
-						armorDef += (85 * newGamePlusMod);
-						break;
-					default:
-						armorDef += (50 * newGamePlusMod);
-						break;
-				}
+			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) {
+				if (arms.type == Arms.GARGOYLE || arms.type == Arms.GARGOYLE_2) armorDef += (30 * newGamePlusMod);
+				if (tailType == Tail.GARGOYLE || tailType == Tail.GARGOYLE_2) armorDef += (30 * newGamePlusMod);
+				if (lowerBody == LowerBody.GARGOYLE || lowerBody == LowerBody.GARGOYLE_2) armorDef += (30 * newGamePlusMod);
+				if (wings.type == Wings.GARGOYLE_LIKE_LARGE) armorDef += (30 * newGamePlusMod);
+				if (faceType == Face.DEVIL_FANGS) armorDef += (30 * newGamePlusMod);
 			}
-				
-			
+			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) armorDef += (25 * newGamePlusMod);
 			if (hasPerk(PerkLib.ElementalBody)) {
 				if (perkv1(PerkLib.ElementalBody) == 2) {
 					if (perkv2(PerkLib.ElementalBody) == 1) armorDef += (10 * newGamePlusMod);
@@ -892,15 +884,6 @@ use namespace CoC;
 			if (lowerBody == LowerBody.DRAGON) armorMDef += (3 * newGamePlusMod);
 			if (lowerBody == LowerBody.DRIDER) armorMDef += (4 * newGamePlusMod);
 			//if (hasPerk(PerkLib.Vulpesthropy)) armorMDef += 10 * newGamePlusMod;
-			if (isGargoyle()){
-				switch (Forgefather.material){
-					case "alabaster":
-						armorMDef += (150 * newGamePlusMod);
-						break;
-					default:
-						armorMDef += (50 * newGamePlusMod);
-				}
-			}
 			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) armorMDef += (25 * newGamePlusMod);
 			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) {
 				if (arms.type == Arms.GARGOYLE || arms.type == Arms.GARGOYLE_2) armorMDef += (30 * newGamePlusMod);
@@ -10663,9 +10646,9 @@ use namespace CoC;
 		public function gargoyleScore():Number {
 			Begin("Player","racialScore","gargoyle");
 			var gargoyleCounter:Number = 0;
-			if (InCollection(hairColor, ["gray", "light gray", "quartz white"]))
+			if (InCollection(hairColor, ["light gray", "quartz white"]))
 				gargoyleCounter++;
-			if (InCollection(skin.base.color, ["gray", "light gray", "quartz white"]))
+			if (InCollection(skin.base.color, ["light gray", "quartz white"]))
 				gargoyleCounter++;
 			if (hairType == Hair.NORMAL)
 				gargoyleCounter++;
@@ -10687,7 +10670,7 @@ use namespace CoC;
 				gargoyleCounter++;
 			if (lowerBody == LowerBody.GARGOYLE || lowerBody == LowerBody.GARGOYLE_2)
 				gargoyleCounter++;
-			if (wings.type == Wings.GARGOYLE_LIKE_LARGE || Wings.FEATHERED_LARGE)
+			if (wings.type == Wings.GARGOYLE_LIKE_LARGE)
 				gargoyleCounter += 4;
 			if (gills.type == Gills.NONE)
 				gargoyleCounter++;
@@ -13358,13 +13341,13 @@ use namespace CoC;
 			}
 			if (jiangshiScore() >= 20) {
 				maxStrCap2 += 150;
-				
 				maxSpeCap2 -= 90;
 				maxIntCap2 -= 90;
 				maxWisCap2 += 130;
 				maxLibCap2 += 200;
 			}//+110 strength +80 toughness +60 Wisdom +100 Libido +50 sensitivity
 			if (gargoyleScore() >= 22) {//990
+<<<<<<< HEAD
 				switch (Forgefather.material){
 					case "stone":
 						switch(Forgefather.refinement){
@@ -13561,6 +13544,19 @@ use namespace CoC;
 						}
 						break;
 						
+=======
+				if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) {
+					maxStrCap2 += 300;
+					maxTouCap2 += 510;
+					maxSpeCap2 += 100;
+					maxIntCap2 += 80;
+				}
+				if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) {
+					maxStrCap2 += 100;
+					maxTouCap2 += 510;
+					maxSpeCap2 += 80;
+					maxIntCap2 += 300;
+>>>>>>> parent of ddd361217 (Garg)
 				}
 				if (hasPerk(PerkLib.GargoylePure)) {
 					maxWisCap2 += 130;
@@ -15581,11 +15577,6 @@ use namespace CoC;
 			if (scyllaScore() >= 7) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (scyllaScore() >= 12) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (unicornScore() >= 12) max += (250 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (isGargoyle() && Forgefather.material == "granite" && Forgefather.refinement == 0) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (isGargoyle() && Forgefather.material == "granite" && Forgefather.refinement == 1) max += (150 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (isGargoyle() && Forgefather.material == "granite" && Forgefather.refinement == 2) max += (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (isGargoyle() && Forgefather.material == "granite" && Forgefather.refinement == 3) max += (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (isGargoyle() && Forgefather.material == "granite" && Forgefather.refinement == 4) max += (500 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.ElementalBondFlesh) && statusEffectv1(StatusEffects.SummonedElementals) >= 2) max += maxHP_ElementalBondFleshMulti() * statusEffectv1(StatusEffects.SummonedElementals);
 			return max;
 		}

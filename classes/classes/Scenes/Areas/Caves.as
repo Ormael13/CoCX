@@ -12,7 +12,6 @@ import classes.Scenes.Areas.Caves.*;
 import classes.Scenes.Dungeons.EbonLabyrinth;
 import classes.Scenes.Monsters.DarkElfScene;
 import classes.Scenes.SceneLib;
-import classes.Scenes.NPCs.Forgefather;
 
 use namespace CoC;
 	
@@ -85,8 +84,7 @@ use namespace CoC;
 			choice[choice.length] = 3; //4Displacer Beast (lvl 60)
 			choice[choice.length] = 4; //5Ebonbloom
 			choice[choice.length] = 5; //6Methir Crystal OR Magical eye drops
-			choice[choice.length] = 6; //7Ebony
-			if (rand(4) == 0) choice[choice.length] = 7; //8Find nothing!
+			if (rand(4) == 0) choice[choice.length] = 6; //7Find nothing!
 			
 			select = choice[rand(choice.length)];
 			switch(select) {
@@ -130,9 +128,6 @@ use namespace CoC;
 						inventory.takeItem(consumables.ME_DROP, camp.returnToCampUseOneHour);
 					}
 					break;
-				case 6://7
-					cavesSiteMine();
-					break;
 				default:
 					clearOutput();
 					outputText("You spend one hour exploring the caves but you don't manage to find anything interesting, unless feeling like you are becoming slightly tougher counts.");
@@ -149,6 +144,7 @@ use namespace CoC;
 			player.createKeyItem("Touhouna M3", 0, 0, 0, 0);
 			doNext(camp.returnToCampUseOneHour);
 		}
+<<<<<<< HEAD
 		
 		private function cavesSiteMine():void {
 			if (Forgefather.materialsExplained != 1) doNext(camp.returnToCampUseOneHour);
@@ -166,5 +162,7 @@ use namespace CoC;
 				camp.returnToCampUseTwoHours();
 			}
 		}
+=======
+>>>>>>> parent of ddd361217 (Garg)
 	}
 }

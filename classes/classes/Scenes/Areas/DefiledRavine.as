@@ -12,7 +12,6 @@ import classes.CoC;
 import classes.Scenes.Areas.BlightRidge.DemonScene;
 import classes.Scenes.Areas.DefiledRavine.*;
 import classes.Scenes.SceneLib;
-import classes.Scenes.NPCs.Forgefather;
 
 use namespace CoC;
 
@@ -53,9 +52,7 @@ use namespace CoC;
 			//choice[choice.length] = 0; //???Demon Pack/Demon Centauress??? (lvl 56)
 			choice[choice.length] = 1; //Corrupted Improved Flesh Golem (lvl 59)/Corrupted Improved Flesh Golems(lvl 61)
 			choice[choice.length] = 2; //Imp Food
-			choice[choice.length] = 3; //marble
-			if (rand(4) == 0) choice[choice.length] = 4; //Find nothing! The rand will be removed from this once the Defiled Ravine is populated with more encounters.
-			
+			if (rand(4) == 0) choice[choice.length] = 3; //Find nothing! The rand will be removed from this once the Defiled Ravine is populated with more encounters.
 			
 			select = choice[rand(choice.length)];
 			switch(select) {
@@ -80,9 +77,6 @@ use namespace CoC;
 					outputText("You spot something on the ground. Taking a closer look, it's one of those imps food packages. ");
 					inventory.takeItem(consumables.IMPFOOD, camp.returnToCampUseOneHour);
 					break;
-				case 3:
-					defiledRavineSiteMine();
-					break;
 				default:
 					clearOutput();
 					outputText("You spend one hour exploring the tainted ravine but you don't manage to find anything interesting, unless feeling like you are becoming slightly more horny counts.");
@@ -99,6 +93,7 @@ use namespace CoC;
 			player.createKeyItem("Twin Dart pistol", 0, 0, 0, 0);
 			doNext(camp.returnToCampUseOneHour);
 		}
+<<<<<<< HEAD
 		
 		private function defiledRavineSiteMine():void {
 			if (Forgefather.materialsExplained != 1) doNext(camp.returnToCampUseOneHour);
@@ -117,5 +112,7 @@ use namespace CoC;
 				doNext(camp.returnToCampUseTwoHours);
 			}
 		}
+=======
+>>>>>>> parent of ddd361217 (Garg)
 	}
 }

@@ -5,7 +5,20 @@
 package classes.Scenes.Areas.HighMountains
 {
 import classes.*;
-import classes.BodyParts.*;
+import classes.BodyParts.Antennae;
+import classes.BodyParts.Arms;
+import classes.BodyParts.Ears;
+import classes.BodyParts.Eyes;
+import classes.BodyParts.Face;
+import classes.BodyParts.Gills;
+import classes.BodyParts.Hair;
+import classes.BodyParts.Horns;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.RearBody;
+import classes.BodyParts.Skin;
+import classes.BodyParts.Tail;
+import classes.BodyParts.Tongue;
+import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.WeaponLib;
 import classes.Scenes.NPCs.NPCAwareContent;
@@ -16,7 +29,7 @@ import classes.display.SpriteDb;
 
 use namespace CoC;
 
-	public class TempleOfTheDivine extends BaseContent
+	public class TempleOfTheDivine extends BaseContent extends NPCAwareContent
 	{
 
 		public function TempleOfTheDivine()
@@ -89,7 +102,7 @@ use namespace CoC;
 			addButton(5, "Sapphire", sapphiremenu).hint("Have a chat with the gargoyle.");
 			if (flags[kFLAGS.ONYX_PATH] > 0) addButton(6, "" + flags[kFLAGS.ONYX_NAME] + "", krystalonyxmenu).hint("Have a sex with " + flags[kFLAGS.ONYX_NAME] + ".");
 			addButton(7, "Basement", templeBasement).hint("Visit the temple basement.");
-			if (flags[kFLAGS.FORGEFATHER_MOVED_TO_TEMPLE] == 1) addButton(8, "Workshop", SceneLib.forgefatherScene.workshopMainMenu);
+			if (flags[kFLAGS.FORGEFATHER_MOVED_TO_TEMPLE] == 1) addButton(8, "Workshop", ForgeFather.workshopMainMenu);
 			addButton(14,"Leave", camp.returnToCampUseOneHour);
 		}
 
@@ -1150,9 +1163,8 @@ use namespace CoC;
 		public function currentStateOfStatue():void {
 			clearOutput();
 			outputText("This statue looks like ");
-			if (Forgefather.statueProgress == 10) outputText("a finished");
-			else outputText("an incomplete");
-			outputText(" stone gargoyle. This statue looks like ");
+			if (flags[kFLAGS.GARGOYLE_BODY_SCULPTING_PROGRESS] >= 11) outputText("a finished");
+			else outputText("an incomplete stone gargoyle. This statue looks like ");
 			if (Forgefather.gender == 1) outputText("it has a gorgeous female face");
 			if (Forgefather.gender == 2) outputText("it has a handsome male face");
 			if (Forgefather.gender == 3) outputText("it has a face that would look good on a male or a female");
@@ -1166,7 +1178,7 @@ use namespace CoC;
 			if (Forgefather.chest > 0) {
 				outputText("\n\nStatue have ");
 				if (Forgefather.chest == 1)outputText("flat chest");
-				if (Forgefather.chest == 2)outputText("A-cup breasts");
+				if (Forgefather.chest) == 2)outputText("A-cup breasts");
 				if (Forgefather.chest == 3)outputText("B-cup breasts");
 				if (Forgefather.chest == 4)outputText("C-cup breasts");
 				if (Forgefather.chest == 5)outputText("D-cup breasts");
@@ -1175,7 +1187,7 @@ use namespace CoC;
 				outputText(".\n\n");
 			}
 			if (Forgefather.chest == 0) outputText("\n\nThere's a block where its chest would be.\n\n");
-			if ((Forgefather.cock < 1 && Forgefather.vagina < 1)) outputText("There's a block where its crotch would be.");
+			if ((Forgefather.cock < 1) && ((Forgefather.vagina) < 1 || Forgefather.balls < 1)) outputText("There's a block where its crotch would be.");
 			else {
 				outputText("At the statue crotch ");
 				if (Forgefather.cock > 1) {
@@ -1220,10 +1232,10 @@ use namespace CoC;
 				}
 			}
 			outputText("\n\nAll the details in its");
-			if (Forgefather.wings == 1) outputText(" bat");
-			if (Forgefather.wings == 2) outputText(" feathered");
+			if (flags[Forgefather.wings == 1) outputText(" bat");
+			if (flags[Forgefather.wings == 2) outputText(" feathered");
 			outputText(" wings ");
-			if (Forgefather.wings >= 1) outputText("are completed and the wings folded behind its back");
+			if (flags[Forgefather.wings >= 1) outputText("are completed and the wings folded behind its back");
 			else outputText("have yet to be done");
 			outputText(".\n\nIt's arms ");
 			if (Forgefather.arms == 1) outputText("ends with a set of bestial four fingered sharp stone claws");
@@ -1266,9 +1278,9 @@ use namespace CoC;
 			else addButtonDisabled(7, "Pussy", "You already sculpted the Pussy Area.");
 			if (Forgefather.cock < 1) addButton(8, "Cock", SculptCock);
 			else addButtonDisabled(8, "Cock", "You already sculpted the Cock Area.");
-			if (Forgefather.balls < 1) addButton(9, "Balls", SculptBalls);
+			if (Forgefather.Balls < 1) addButton(9, "Balls", SculptBalls);
 			else addButtonDisabled(9, "Balls", "You already sculpted the Balls Area.");
-			if (Forgefather.statueProgress == 10 && flags[kFLAGS.GARGOYLE_QUEST] >= 3 && !player.isGargoyle()) addButton(13, "Ritual", becomingGargoyle);
+			if (flags[kFLAGS.GARGOYLE_BODY_SCULPTING_PROGRESS] >= 11 && flags[kFLAGS.GARGOYLE_QUEST] >= 3 && !player.isGargoyle()) addButton(13, "Ritual", becomingGargoyle);
 			addButton(14, "Back", BackToSapphire);
 		}
 		public function BackToSapphire():void {
@@ -1278,7 +1290,7 @@ use namespace CoC;
 		}
 
 		public function chooseToWorkOnStoneStatue():void {
-			//flags[kFLAGS.GARGOYLE_BODY_MATERIAL] = 1;
+			flags[kFLAGS.GARGOYLE_BODY_MATERIAL] = 1;
 			flags[kFLAGS.GARGOYLE_BODY_SCULPTING_PROGRESS] = 1;
 			flags[kFLAGS.GARGOYLE_QUEST] = 1;
 			flags[kFLAGS.GARGOYLE_WINGS_TYPE] = 0;
@@ -1293,19 +1305,19 @@ use namespace CoC;
 			addButton(14, "Back", currentStateOfStatue);
 		}
 		public function SculptFeminineFrameAndFace():void {
-			SceneLib.forgefatherScene.setGargoyleGender(1);
+			ForgeFather.setGargoyleGender(1);
 			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker1, 1, 1);
 			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker1, 1, 0, 0, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptMasculineFrameAndFace():void {
-			SceneLib.forgefatherScene.setGargoyleGender(2);
+			ForgeFather.setGargoyleGender(2);
 			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker1, 1, 2);
 			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker1, 2, 0, 0, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptAndrogynousFrameAndFace():void {
-			SceneLib.forgefatherScene.setGargoyleGender(3);
+			ForgeFather.setGargoyleGender(3);
 			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker1, 1, 3);
 			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker1, 3, 0, 0, 0);
 			SecondPartOfSculptingText();
@@ -1318,12 +1330,12 @@ use namespace CoC;
 			addButton(14, "Back", currentStateOfStatue);
 		}
 		public function SculptBatWings():void {
-			SceneLib.forgefatherScene.setGargoyleWings(1);
+			ForgeFather.setGargoyleWings(1);
 			//flags[kFLAGS.GARGOYLE_WINGS_TYPE] = 2;
 			SecondPartOfSculptingText();
 		}
 		public function SculptFeatheredWings():void {
-			SceneLib.forgefatherScene.setGargoyleWings(2);
+			ForgeFather.setGargoyleWings(2);
 			//flags[kFLAGS.GARGOYLE_WINGS_TYPE] = 1;
 			SecondPartOfSculptingText();
 		}
@@ -1335,13 +1347,13 @@ use namespace CoC;
 			addButton(14, "Back", currentStateOfStatue);
 		}
 		public function SculptMaceTail():void {
-			SceneLib.forgefatherScene.setGargoyleTail(1);
+			ForgeFather.setGargoyleTail(1);
 			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker1, 2, 1);
 			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker1, 0, 1, 0, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptAxeTail():void {
-			SceneLib.forgefatherScene.setGargoyleTail(2);
+			ForgeFather.setGargoyleTail(2);
 			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker1, 2, 2);
 			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker1, 0, 2, 0, 0);
 			SecondPartOfSculptingText();
@@ -1354,13 +1366,13 @@ use namespace CoC;
 			addButton(14, "Back", currentStateOfStatue);
 		}
 		public function SculptClawedLegs():void {
-			SceneLib.forgefatherScene.setGargoyleLowerBody(1);
+			ForgeFather.setGargoyleLowerBody(1);
 			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker1, 3, 1);
 			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker1, 0, 0, 1, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptHumaneLegs():void {
-			SceneLib.forgefatherScene.setGargoyleLowerBody(2);
+			ForgeFather.setGargoyleLowerBody(2);
 			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker1, 3, 2);
 			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker1, 0, 0, 2, 0);
 			SecondPartOfSculptingText();
@@ -1373,13 +1385,13 @@ use namespace CoC;
 			addButton(14, "Back", currentStateOfStatue);
 		}
 		public function SculptClawedArms():void {
-			SceneLib.forgefatherScene.setGargoyleArms(1);
+			ForgeFather.setGargoyleArms(1);
 			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker1, 4, 1);
 			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker1, 0, 0, 0, 1);
 			SecondPartOfSculptingText();
 		}
 		public function SculptHumaneArms():void {
-			SceneLib.forgefatherScene.setGargoyleArms(2);
+			ForgeFather.setGargoyleArms(2);
 			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker1, 4, 2);
 			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker1, 0, 0, 0, 2);
 			SecondPartOfSculptingText();
@@ -1394,25 +1406,25 @@ use namespace CoC;
 			addButton(14, "Back", currentStateOfStatue);
 		}
 		public function SculptBald():void {
-			SceneLib.forgefatherScene.setGargoyleHair(1);
+			ForgeFather.setGargoyleHair(1);
 			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 1, 1);
 			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 1, 0, 0, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptShort():void {
-			SceneLib.forgefatherScene.setGargoyleHair(2);
+			ForgeFather.setGargoyleHair(2);
 			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 1, 2);
 			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 2, 0, 0, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptMedium():void {
-			SceneLib.forgefatherScene.setGargoyleHair(3);
+			ForgeFather.setGargoyleHair(3);
 			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 1, 3);
 			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 3, 0, 0, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptLong():void {
-			SceneLib.forgefatherScene.setGargoyleHair(4);
+			ForgeFather.setGargoyleHair(4);
 			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 1, 4);
 			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 4, 0, 0, 0);
 			SecondPartOfSculptingText();
@@ -1430,43 +1442,43 @@ use namespace CoC;
 			addButton(14, "Back", currentStateOfStatue);
 		}
 		public function SculptFlat():void {
-			SceneLib.forgefatherScene.setGargoyleChest(1);
+			ForgeFather.setGargoyleChest(1);
 			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 2, 1);
 			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 1, 0, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptACup():void {
-			SceneLib.forgefatherScene.setGargoyleChest(2);
+			ForgeFather.setGargoyleChest(2);
 			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 2, 2);
 			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 2, 0, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptBCup():void {
-			SceneLib.forgefatherScene.setGargoyleChest(3);
+			ForgeFather.setGargoyleChest(3);
 			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 2, 3);
 			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 3, 0, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptCCup():void {
-			SceneLib.forgefatherScene.setGargoyleChest(4);
+			ForgeFather.setGargoyleChest(4);
 			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 2, 4);
 			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 4, 0, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptDCup():void {
-			SceneLib.forgefatherScene.setGargoyleChest(5);
+			ForgeFather.setGargoyleChest(5);
 			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 2, 5);
 			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 5, 0, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptDDCup():void {
-			SceneLib.forgefatherScene.setGargoyleChest(6);
+			ForgeFather.setGargoyleChest(6);
 			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 2, 6);
 			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 6, 0, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptBigDDCup():void {
-			SceneLib.forgefatherScene.setGargoyleChest(7);
+			ForgeFather.setGargoyleChest(7);
 			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 2, 7);
 			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 7, 0, 0);
 			SecondPartOfSculptingText();
@@ -1479,15 +1491,13 @@ use namespace CoC;
 			addButton(14, "Back", currentStateOfStatue);
 		}
 		public function SculptPussyNo():void {
-			SceneLib.forgefatherScene.setGargoyleVagina(1);
-			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker3)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker3, 1, 1);
-			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker3, 1, 0, 0, 0);
+			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker3)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker3, 1, 1);
+			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker3, 1, 0, 0, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptPussyYes():void {
-			SceneLib.forgefatherScene.setGargoyleVagina(2);
-			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker3)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker3, 1, 2);
-			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker3, 2, 0, 0, 0);
+			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker3)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker3, 1, 2);
+			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker3, 2, 0, 0, 0);
 			SecondPartOfSculptingText();
 		}
 
@@ -1508,73 +1518,73 @@ use namespace CoC;
 			addButton(14, "Back", currentStateOfStatue);
 		}
 		public function SculptNoCock():void {
-			SceneLib.forgefatherScene.setGargoyleCock(1);
+			ForgeFather.setGargoyleCock(1);
 			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 3, 1);
 			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 0, 1, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptCock1():void {
-			SceneLib.forgefatherScene.setGargoyleCock(2);
+			ForgeFather.setGargoyleCock(2);
 			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 3, 2);
 			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 0, 2, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptCock2():void {
-			SceneLib.forgefatherScene.setGargoyleCock(3);
+			ForgeFather.setGargoyleCock(3);
 			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 3, 3);
 			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 0, 3, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptCock3():void {
-			SceneLib.forgefatherScene.setGargoyleCock(4);
+			ForgeFather.setGargoyleCock(4);
 			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 3, 4);
 			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 0, 4, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptCock4():void {
-			SceneLib.forgefatherScene.setGargoyleCock(5);
+			ForgeFather.setGargoyleCock(5);
 			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 3, 5);
 			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 0, 5, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptCock5():void {
-			SceneLib.forgefatherScene.setGargoyleCock(6);
+			ForgeFather.setGargoyleCock(6);
 			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 3, 6);
 			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 0, 6, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptCock6():void {
-			SceneLib.forgefatherScene.setGargoyleCock(7);
+			ForgeFather.setGargoyleCock(7);
 			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 3, 7);
 			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 0, 7, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptCock7():void {
-			SceneLib.forgefatherScene.setGargoyleCock(8);
+			ForgeFather.setGargoyleCock(8);
 			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 3, 8);
 			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 0, 8, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptCock8():void {
-			SceneLib.forgefatherScene.setGargoyleCock(9);
+			ForgeFather.setGargoyleCock(9);
 			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 3, 9);
 			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 0, 9, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptCock9():void {
-			SceneLib.forgefatherScene.setGargoyleCock(10);
+			ForgeFather.setGargoyleCock(10);
 			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 3, 10);
 			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 0, 10, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptCock10():void {
-			SceneLib.forgefatherScene.setGargoyleCock(11);
+			ForgeFather.setGargoyleCock(11);
 			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 3, 11);
 			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 0, 11, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptCock11():void {
-			SceneLib.forgefatherScene.setGargoyleCock(12);
+			ForgeFather.setGargoyleCock(12);
 			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 3, 12);
 			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 0, 12, 0);
 			SecondPartOfSculptingText();
@@ -1592,31 +1602,31 @@ use namespace CoC;
 			addButton(14, "Back", currentStateOfStatue);
 		}
 		public function SculptBallsNo():void {
-			SceneLib.forgefatherScene.setGargoyleBalls(1);
+			ForgeFather.setGargoyleBalls(1);
 			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker3)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker3, 2, 1);
 			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker3, 0, 1, 0, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptBallsLarge():void {
-			SceneLib.forgefatherScene.setGargoyleBalls(2);
+			ForgeFather.setGargoyleBalls(2);
 			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker3)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker3, 2, 2);
 			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker3, 0, 2, 0, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptBallsBaseballSized():void {
-			SceneLib.forgefatherScene.setGargoyleBalls(3);
+			ForgeFather.setGargoyleBalls(3);
 			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker3)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker3, 2, 3);
 			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker3, 0, 3, 0, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptBallsAppleSized():void {
-			SceneLib.forgefatherScene.setGargoyleBalls(4);
+			ForgeFather.setGargoyleBalls(4);
 			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker3)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker3, 2, 4);
 			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker3, 0, 4, 0, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptBallsGrapefruitSized():void {
-			SceneLib.forgefatherScene.setGargoyleBalls(5);
+			ForgeFather.setGargoyleBalls(5);
 			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker3)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker3, 2, 5);
 			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker3, 0, 5, 0, 0);
 			SecondPartOfSculptingText();
@@ -1683,7 +1693,7 @@ use namespace CoC;
 			becomingGargoyleYes2();
 		}
 		public function becomingGargoyleYes2():void {
-			SceneLib.forgefatherScene.createGargoyleState();
+			ForgeFather.createGargoyleState();
 			/*if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) {
 				player.skinTone = "light gray";
 				player.hairColor = "light gray";

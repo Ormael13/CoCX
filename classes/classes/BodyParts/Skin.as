@@ -83,7 +83,7 @@ public class Skin extends SaveableBodyPart {
 	public static const STONE: int = 7;
 	EnumValue.add(SkinTypes, STONE, "STONE", {
 		name:"stone",
-		appearanceDesc: "Your [skin full.noadj] is completely made of [gargoylerefinement] [gargoylematerial].",
+		appearanceDesc: "Your [skin full.noadj] is completely made of [gargoylematerial].",
 		plural: false,
 		base:true
 	});

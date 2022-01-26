@@ -11,7 +11,6 @@ import classes.Scenes.Areas.Ashlands.*;
 import classes.Scenes.Areas.Forest.AlrauneScene;
 import classes.Scenes.Areas.HighMountains.PhoenixScene;
 import classes.Scenes.SceneLib;
-import classes.Scenes.NPCs.Forgefather;
 
 use namespace CoC;
 
@@ -39,7 +38,6 @@ use namespace CoC;
 			choice[choice.length] = 3; //Cinderbloom (lvl 40)
 			choice[choice.length] = 4; //Fire Golem (lvl 64)
 			choice[choice.length] = 5; //Find nothing!
-			choice[choice.length] = 6; //Granite
 			
 			//Double barreled dragon gun
 			if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1) && player.statusEffectv3(StatusEffects.TelAdreTripxiGuns1) == 0 && player.hasKeyItem("Double barreled dragon gun") < 0 && rand(2) == 0) {
@@ -89,9 +87,6 @@ use namespace CoC;
 					outputText("As you take a stroll, from behind nearby ash pile emerge huge golem. Looks like you have encountered 'true fire golem'! You ready your [weapon] for a fight!");
 					startCombat(new GolemTrueFire());
 					break;
-				case 6: //Granite
-					ahslandsSiteMine();
-					break;
 				default:
 					clearOutput();
 					outputText("You spend one hour exploring ashlands but you don't manage to find anything interesting.");
@@ -112,6 +107,7 @@ use namespace CoC;
 			player.createKeyItem("Double barreled dragon gun", 0, 0, 0, 0);
 			doNext(camp.returnToCampUseOneHour);
 		}
+<<<<<<< HEAD
 		
 		private function ahslandsSiteMine():void {
 			if (Forgefather.materialsExplained != 1) doNext(camp.returnToCampUseOneHour);
@@ -130,5 +126,7 @@ use namespace CoC;
 				doNext(camp.returnToCampUseTwoHours);
 			}
 		}
+=======
+>>>>>>> parent of ddd361217 (Garg)
 	}
 }

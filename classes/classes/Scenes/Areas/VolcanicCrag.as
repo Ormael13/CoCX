@@ -65,7 +65,7 @@ public class VolcanicCrag extends BaseContent
 			//Forgefather
 			if (flags[kFLAGS.ONYX_PATH] > 0 && flags[kFLAGS.SAPPHIRE_AFFECTION] > 5 && (player.hasPerk(PerkLib.GargoylePure) || player.hasPerk(PerkLib.GargoyleCorrupted)) && flags[kFLAGS.FORGEFATHER_MOVED_TO_TEMPLE] != 1) {
 				VolcanicCragConditions();
-				if (flags[kFLAGS.MET_FORGEFATHER] == 0) {
+				if (flags[kFLAGS.MET_FORGEFATHER == 0) {
 					SceneLib.forgefatherScene.meetForgefather();
 				}
 				else SceneLib.forgefatherScene.repeatForgefather();

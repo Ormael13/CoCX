@@ -10,7 +10,6 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.Forest.AlrauneScene;
 import classes.Scenes.Areas.Tundra.*;
 import classes.Scenes.SceneLib;
-import classes.Scenes.NPCs.Forgefather;
 
 use namespace CoC;
 
@@ -37,7 +36,6 @@ use namespace CoC;
 			choice[choice.length] = 3; //Snow Lily (lvl 40)
 			choice[choice.length] = 4; //Ice Golem (lvl 64)
 			choice[choice.length] = 5; //Find nothing!
-			choice[choice.length] = 6; //Alabaster
 			
 			//Glacial Rift
 			if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] <= 0 && player.level >= 65) {
@@ -82,9 +80,6 @@ use namespace CoC;
 					outputText("As you take a stroll, from nearby trees emerge huge golem. Looks like you have encountered 'true ice golem'! You ready your [weapon] for a fight!");
 					startCombat(new GolemTrueIce());
 					break;
-				case 6: //Alabaster
-					tundraSiteMine();
-					break;
 				default:
 					clearOutput();
 					outputText("You spend one hour exploring tundra but you don't manage to find anything interesting.");
@@ -96,6 +91,7 @@ use namespace CoC;
 					doNext(camp.returnToCampUseOneHour);
 			}
 		}	
+<<<<<<< HEAD
 		private function tundraSiteMine():void {
 			if (Forgefather.materialsExplained != 1) doNext(camp.returnToCampUseOneHour);
 			else {
@@ -113,5 +109,7 @@ use namespace CoC;
 				doNext(camp.returnToCampUseTwoHours);
 			}
 		}
+=======
+>>>>>>> parent of ddd361217 (Garg)
 	}
 }

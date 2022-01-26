@@ -15,7 +15,6 @@ import classes.Scenes.Areas.Beach.*;
 import classes.Scenes.Areas.Lake.GooGirlScene;
 import classes.Scenes.NPCs.CeaniScene;
 import classes.Scenes.SceneLib;
-import classes.Scenes.NPCs.Forgefather;
 
 //import classes.Scenes.NPCs.CaiLin;
 
@@ -141,14 +140,6 @@ import classes.Scenes.NPCs.Forgefather;
 				},
 				chance: 1
 			}, {
-				// Find sandstone
-				name: "sandstone",
-						call: function ():void {
-					player.createStatusEffect(StatusEffects.NearWater, 0, 0, 0, 0);
-					beachSiteMine();
-				},
-				chance: 1
-			}, {
 				// Nothing Happens
 				name: "nothing Happens",
 						call: function ():void {
@@ -206,6 +197,7 @@ import classes.Scenes.NPCs.Forgefather;
 			player.createKeyItem("Harpoon gun", 0, 0, 0, 0);
 			doNext(camp.returnToCampUseOneHour);
 		}
+<<<<<<< HEAD
 		
 		private function beachSiteMine():void {
 			if (Forgefather.materialsExplained != 1) NothingHappened();
@@ -224,5 +216,7 @@ import classes.Scenes.NPCs.Forgefather;
 				doNext(camp.returnToCampUseTwoHours);
 			}
 		}
+=======
+>>>>>>> parent of ddd361217 (Garg)
 	}
 }
