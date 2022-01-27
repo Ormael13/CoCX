@@ -293,15 +293,7 @@ package classes.Scenes.NPCs	{
 			}
 			
 			player.tailRecharge = 0;
-			
-			switch (wings) {
-				case 1:
-					player.wings.type = Wings.GARGOYLE_LIKE_LARGE;
-					break;
-				case 2:
-					player.wings.type = Wings.FEATHERED_LARGE;
-					break;
-			}
+			player.wings.type = Wings.GARGOYLE_LIKE_LARGE;
 			
 			switch (lowerBody) {
 				case 1:

@@ -1330,12 +1330,12 @@ use namespace CoC;
 			addButton(14, "Back", currentStateOfStatue);
 		}
 		public function SculptBatWings():void {
-			SceneLib.forgefatherScene.setGargoyleWings(1);
+			SceneLib.forgefatherScene.setGargoyleWings(2);
 			//flags[kFLAGS.GARGOYLE_WINGS_TYPE] = 2;
 			SecondPartOfSculptingText();
 		}
 		public function SculptFeatheredWings():void {
-			SceneLib.forgefatherScene.setGargoyleWings(2);
+			SceneLib.forgefatherScene.setGargoyleWings(1);
 			//flags[kFLAGS.GARGOYLE_WINGS_TYPE] = 1;
 			SecondPartOfSculptingText();
 		}
