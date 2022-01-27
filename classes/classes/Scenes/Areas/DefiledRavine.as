@@ -11,6 +11,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
 import classes.Scenes.Areas.BlightRidge.DemonScene;
 import classes.Scenes.Areas.DefiledRavine.*;
+import classes.Scenes.NPCs.Forgefather;
 import classes.Scenes.SceneLib;
 
 use namespace CoC;
@@ -52,7 +53,8 @@ use namespace CoC;
 			//choice[choice.length] = 0; //???Demon Pack/Demon Centauress??? (lvl 56)
 			choice[choice.length] = 1; //Corrupted Improved Flesh Golem (lvl 59)/Corrupted Improved Flesh Golems(lvl 61)
 			choice[choice.length] = 2; //Imp Food
-			if (rand(4) == 0) choice[choice.length] = 3; //Find nothing! The rand will be removed from this once the Defiled Ravine is populated with more encounters.
+			choice[choice.length] = 3; //Marble
+			if (rand(4) == 0) choice[choice.length] = 4; //Find nothing! The rand will be removed from this once the Defiled Ravine is populated with more encounters.
 			
 			select = choice[rand(choice.length)];
 			switch(select) {
@@ -77,6 +79,16 @@ use namespace CoC;
 					outputText("You spot something on the ground. Taking a closer look, it's one of those imps food packages. ");
 					inventory.takeItem(consumables.IMPFOOD, camp.returnToCampUseOneHour);
 					break;
+				case 3:
+					clearOutput();
+					if (player.hasKeyItem("Old Pickaxe") > 0 && Forgefather.materialsExplained == true){
+						outputText("You stumble across a vein of Ebony, this looks like suitable material for your gargoyle form.\n");
+						outputText("Do you wish to mine it?");
+						menu();
+						addButton(0, "Yes", defiledRavineSiteMine);
+						addButton(1, "No", camp.returnToCampUseOneHour);
+					}
+					break;
 				default:
 					clearOutput();
 					outputText("You spend one hour exploring the tainted ravine but you don't manage to find anything interesting, unless feeling like you are becoming slightly more horny counts.");
@@ -92,6 +104,24 @@ use namespace CoC;
 			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
 			player.createKeyItem("Twin Dart pistol", 0, 0, 0, 0);
 			doNext(camp.returnToCampUseOneHour);
+		}
+		
+		private function defiledRavineSiteMine():void {
+			if (Forgefather.materialsExplained != 1) doNext(camp.returnToCampUseOneHour);
+			else {
+				clearOutput();
+				if (player.fatigue > player.maxFatigue() - 50) {
+					outputText("\n\n<b>You are too tired to consider mining. Perhaps some rest will suffice?</b>");
+					doNext(camp.returnToCampUseOneHour);
+					return;
+				}
+				outputText("\n\nYou begin slamming your pickaxe against the marble, spending the better part of the next two hours mining. This done, you bring back your prize to camp. ");
+				var minedStones:Number = 13 + Math.floor(player.str / 7);
+				minedStones = Math.round(minedStones);
+				fatigue(50, USEFATG_PHYSICAL);
+				SceneLib.forgefatherScene.incrementMarbleSupply(minedStones);
+				doNext(camp.returnToCampUseTwoHours);
+			}
 		}
 	}
 }

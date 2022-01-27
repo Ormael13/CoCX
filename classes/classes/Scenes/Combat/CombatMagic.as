@@ -8,6 +8,7 @@ import classes.Items.HeadJewelryLib;
 import classes.Items.JewelryLib;
 import classes.Items.NecklaceLib;
 import classes.Items.ShieldLib;
+import classes.Creature;
 import classes.PerkLib;
 import classes.MutationsLib;
 import classes.Scenes.API.FnHelpers;
@@ -20,6 +21,7 @@ import classes.Scenes.Dungeons.D3.JeanClaude;
 import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.Dungeons.D3.LivingStatue;
 import classes.Scenes.NPCs.Diva;
+import classes.Scenes.NPCs.Forgefather;
 import classes.Scenes.NPCs.Holli;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.Codex;
@@ -464,6 +466,13 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.TraditionalMageIV) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
 		if (player.hasPerk(PerkLib.TraditionalMageV) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
 		if (player.hasPerk(PerkLib.TraditionalMageVI) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
+		if (player.isGargoyle() && Forgefather.material == "alabaster")
+			{
+				if (Forgefather.refinement == 0) mod += (.15);
+				if (Forgefather.refinement == 1) mod += (.25);
+				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) mod += (.5);
+				if (Forgefather.refinement == 4) mod += (1);
+			}
 		if (player.hasPerk(PerkLib.Ambition)) {
 			mod += player.perkv2(PerkLib.Ambition);
 		}

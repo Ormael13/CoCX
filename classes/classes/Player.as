@@ -47,6 +47,7 @@ import classes.Scenes.Combat.CombatAbilities;
 import classes.Scenes.Combat.CombatAbility;
 import classes.Scenes.NPCs.AetherTwinsFollowers;
 import classes.Scenes.NPCs.EvangelineFollower;
+import classes.Scenes.NPCs.Forgefather;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.Pregnancy;
@@ -662,14 +663,21 @@ use namespace CoC;
 			if (lowerBody == LowerBody.DRIDER || lowerBody == LowerBody.HYDRA) armorDef += (4 * newGamePlusMod);
 			if (rearBody.type == RearBody.YETI_FUR) armorDef += (4 * newGamePlusMod);
 			if (hasPerk(PerkLib.Lycanthropy)) armorDef += 10 * newGamePlusMod;
-			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) {
-				if (arms.type == Arms.GARGOYLE || arms.type == Arms.GARGOYLE_2) armorDef += (30 * newGamePlusMod);
-				if (tailType == Tail.GARGOYLE || tailType == Tail.GARGOYLE_2) armorDef += (30 * newGamePlusMod);
-				if (lowerBody == LowerBody.GARGOYLE || lowerBody == LowerBody.GARGOYLE_2) armorDef += (30 * newGamePlusMod);
-				if (wings.type == Wings.GARGOYLE_LIKE_LARGE) armorDef += (30 * newGamePlusMod);
-				if (faceType == Face.DEVIL_FANGS) armorDef += (30 * newGamePlusMod);
+			if (isGargoyle() && Forgefather.material == "granite")
+			{
+				if (Forgefather.refinement == 0) armorDef *= (1.15);
+				if (Forgefather.refinement == 1) armorDef *= (1.25);
+				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) armorDef *= (1.5);
+				if (Forgefather.refinement == 4) armorDef *= (2);
 			}
-			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) armorDef += (25 * newGamePlusMod);
+			//if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) {
+				//if (arms.type == Arms.GARGOYLE || arms.type == Arms.GARGOYLE_2) armorDef += (30 * newGamePlusMod);
+				//if (tailType == Tail.GARGOYLE || tailType == Tail.GARGOYLE_2) armorDef += (30 * newGamePlusMod);
+				//if (lowerBody == LowerBody.GARGOYLE || lowerBody == LowerBody.GARGOYLE_2) armorDef += (30 * newGamePlusMod);
+				//if (wings.type == Wings.GARGOYLE_LIKE_LARGE) armorDef += (30 * newGamePlusMod);
+				//if (faceType == Face.DEVIL_FANGS) armorDef += (30 * newGamePlusMod);
+			//}
+			//if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) armorDef += (25 * newGamePlusMod);
 			if (hasPerk(PerkLib.ElementalBody)) {
 				if (perkv1(PerkLib.ElementalBody) == 2) {
 					if (perkv2(PerkLib.ElementalBody) == 1) armorDef += (10 * newGamePlusMod);
@@ -884,14 +892,21 @@ use namespace CoC;
 			if (lowerBody == LowerBody.DRAGON) armorMDef += (3 * newGamePlusMod);
 			if (lowerBody == LowerBody.DRIDER) armorMDef += (4 * newGamePlusMod);
 			//if (hasPerk(PerkLib.Vulpesthropy)) armorMDef += 10 * newGamePlusMod;
-			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) armorMDef += (25 * newGamePlusMod);
-			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) {
-				if (arms.type == Arms.GARGOYLE || arms.type == Arms.GARGOYLE_2) armorMDef += (30 * newGamePlusMod);
-				if (tailType == Tail.GARGOYLE || tailType == Tail.GARGOYLE_2) armorMDef += (30 * newGamePlusMod);
-				if (lowerBody == LowerBody.GARGOYLE || lowerBody == LowerBody.GARGOYLE_2) armorMDef += (30 * newGamePlusMod);
-				if (wings.type == Wings.GARGOYLE_LIKE_LARGE) armorMDef += (30 * newGamePlusMod);
-				if (faceType == Face.DEVIL_FANGS) armorMDef += (30 * newGamePlusMod);
+			if (isGargoyle() && Forgefather.material == "alabaster")
+			{
+				if (Forgefather.refinement == 0) armorMDef *= (1.15);
+				if (Forgefather.refinement == 1) armorMDef *= (1.25);
+				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) armorMDef *= (1.5);
+				if (Forgefather.refinement == 4) armorMDef *= (2);
 			}
+			//if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) armorMDef += (25 * newGamePlusMod);
+			//if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) {
+				//if (arms.type == Arms.GARGOYLE || arms.type == Arms.GARGOYLE_2) armorMDef += (30 * newGamePlusMod);
+				//if (tailType == Tail.GARGOYLE || tailType == Tail.GARGOYLE_2) armorMDef += (30 * newGamePlusMod);
+				//if (lowerBody == LowerBody.GARGOYLE || lowerBody == LowerBody.GARGOYLE_2) armorMDef += (30 * newGamePlusMod);
+				//if (wings.type == Wings.GARGOYLE_LIKE_LARGE) armorMDef += (30 * newGamePlusMod);
+				//if (faceType == Face.DEVIL_FANGS) armorMDef += (30 * newGamePlusMod);
+			//}
 			if (hasPerk(PerkLib.ElementalBody)) {
 				if (perkv1(PerkLib.ElementalBody) == 2) {
 					if (perkv2(PerkLib.ElementalBody) == 1) armorMDef += (10 * newGamePlusMod);
@@ -1372,6 +1387,13 @@ use namespace CoC;
 				}
 				attack += zerkersboost;
 			}
+			if (isGargoyle() && Forgefather.material == "ebony")
+			{
+				if (Forgefather.refinement == 0) attack *= (1.15);
+				if (Forgefather.refinement == 1) attack *= (1.25);
+				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) attack *= (1.5);
+				if (Forgefather.refinement == 4) attack *= (2);
+			}
 			if (hasStatusEffect(StatusEffects.ChargeWeapon)) {
 				if (weaponName == "fists" && !hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalWeapons)) attack += 0;
 				else attack += Math.round(statusEffectv1(StatusEffects.ChargeWeapon));
@@ -1469,6 +1491,13 @@ use namespace CoC;
 			if (hasPerk(PerkLib.Sharpshooter) && weaponRangePerk != "Bow") {
 				if (inte < 201) rangeattack *= (1 + (inte / 200));
 				else rangeattack *= 2;
+			}
+			if (isGargoyle() && Forgefather.material == "sandstone")
+			{
+				if (Forgefather.refinement == 0) rangeattack *= (1.15);
+				if (Forgefather.refinement == 1) rangeattack *= (1.25);
+				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) rangeattack *= (1.5);
+				if (Forgefather.refinement == 4) rangeattack *= (2);
 			}
 		/*	if(hasPerk(PerkLib.LightningStrikes) && spe >= 60 && weaponRangePerk != "Large") {
 				rangeattack += Math.round((spe - 50) / 3);
@@ -10646,9 +10675,9 @@ use namespace CoC;
 		public function gargoyleScore():Number {
 			Begin("Player","racialScore","gargoyle");
 			var gargoyleCounter:Number = 0;
-			if (InCollection(hairColor, ["light gray", "quartz white"]))
+			if (InCollection(hairColor, ["light gray", "quartz white", "gray", "dark gray", "black", "caramel"]))
 				gargoyleCounter++;
-			if (InCollection(skin.base.color, ["light gray", "quartz white"]))
+			if (InCollection(skin.base.color, ["light gray", "quartz white", "gray", "dark gray", "black", "caramel"]))
 				gargoyleCounter++;
 			if (hairType == Hair.NORMAL)
 				gargoyleCounter++;
@@ -10670,7 +10699,7 @@ use namespace CoC;
 				gargoyleCounter++;
 			if (lowerBody == LowerBody.GARGOYLE || lowerBody == LowerBody.GARGOYLE_2)
 				gargoyleCounter++;
-			if (wings.type == Wings.GARGOYLE_LIKE_LARGE)
+			if (wings.type == Wings.GARGOYLE_LIKE_LARGE || Wings.FEATHERED_LARGE)
 				gargoyleCounter += 4;
 			if (gills.type == Gills.NONE)
 				gargoyleCounter++;
@@ -13347,17 +13376,202 @@ use namespace CoC;
 				maxLibCap2 += 200;
 			}//+110 strength +80 toughness +60 Wisdom +100 Libido +50 sensitivity
 			if (gargoyleScore() >= 22) {//990
-				if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) {
-					maxStrCap2 += 300;
-					maxTouCap2 += 510;
-					maxSpeCap2 += 100;
-					maxIntCap2 += 80;
-				}
-				if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) {
-					maxStrCap2 += 100;
-					maxTouCap2 += 510;
-					maxSpeCap2 += 80;
-					maxIntCap2 += 300;
+				switch (Forgefather.material){
+					case "stone":
+						switch(Forgefather.refinement){
+							case 0:
+								maxStrCap2 += 50;
+								maxTouCap2 += 50;
+								maxSpeCap2 += 50;
+								maxIntCap2 += 50;
+								maxWisCap2 += 50;
+								maxLibCap2 += 50;
+								break;
+							case 1:
+								maxStrCap2 += 75;
+								maxTouCap2 += 75;
+								maxSpeCap2 += 75;
+								maxIntCap2 += 75;
+								maxWisCap2 += 75;
+								maxLibCap2 += 75;
+								break;
+							case 2:
+								maxStrCap2 += 100;
+								maxTouCap2 += 100;
+								maxSpeCap2 += 100;
+								maxIntCap2 += 100;
+								maxWisCap2 += 100;
+								maxLibCap2 += 100;
+								break;
+						}
+						break;
+					case "alabaster":
+						//Alabaster - Magic (Int+100%, +20% max mana, +15% spell dmg)
+						switch(Forgefather.refinement){
+							case 0:
+								maxIntCap2 += 100;
+								maxWisCap2 += 50;
+								maxStrCap2 -= 10;
+								maxTouCap2 -= 10;
+								break;
+							case 1:
+								maxIntCap2 += 150;
+								maxWisCap2 += 75;
+								maxStrCap2 -= 15;
+								maxTouCap2 -= 15;
+								break;
+							case 2:
+								maxIntCap2 += 200;
+								maxWisCap2 += 100;
+								maxStrCap2 -= 20;
+								maxTouCap2 -= 20;
+								break;
+							case 3:
+								maxIntCap2 += 200;
+								maxWisCap2 += 100;
+								maxStrCap2 -= 20;
+								maxTouCap2 -= 20;
+								break;
+							case 4:
+								maxIntCap2 += 500;
+								maxWisCap2 += 250;
+								maxStrCap2 -= 30;
+								maxTouCap2 -= 30;
+								break;
+						}
+						break;
+					case "marble":
+						switch(Forgefather.refinement){
+							case 0:
+								maxWisCap2 += 100;
+								maxStrCap2 += 50;
+								maxIntCap2 -= 10;
+								break;
+							case 1:
+								maxWisCap2 += 150;
+								maxStrCap2 += 75;
+								maxIntCap2 -= 15;
+								break;
+							case 2:
+								maxWisCap2 += 200;
+								maxStrCap2 += 100;
+								maxIntCap2 -= 20;
+								break;
+							case 3:
+								maxWisCap2 += 200;
+								maxStrCap2 += 100;
+								maxIntCap2 -= 20;
+								break;
+							case 4:
+								maxWisCap2 += 500;
+								maxStrCap2 += 200;
+								maxIntCap2 -= 30;
+								break;
+						}
+						break;
+					case "granite":
+						switch(Forgefather.refinement){
+							case 0:
+								maxTouCap2 += 100;
+								maxStrCap2 += 50;
+								maxIntCap2 -= 10;
+								maxWisCap2 -= 10;
+								break;
+							case 1:
+								maxTouCap2 += 150;
+								maxStrCap2 += 75;
+								maxIntCap2 -= 15;
+								maxWisCap2 -= 15;
+								break;
+							case 2:
+								maxTouCap2 += 200;
+								maxStrCap2 += 100;
+								maxIntCap2 -= 20;
+								maxWisCap2 -= 20;
+								break;
+							case 3:
+								maxTouCap2 += 200;
+								maxStrCap2 += 100;
+								maxIntCap2 -= 20;
+								maxWisCap2 -= 20;
+								break;
+							case 4:
+								maxTouCap2 += 500;
+								maxStrCap2 += 250;
+								maxIntCap2 -= 30;
+								maxWisCap2 -= 30;
+								break;
+						}
+						break;
+					case "ebony":
+						switch(Forgefather.refinement){
+							case 0:
+								maxStrCap2 += 100;
+								maxSpeCap2 += 50;
+								maxIntCap2 -= 10;
+								maxWisCap2 -= 10;
+								break;
+							case 1:
+								maxStrCap2 += 150;
+								maxSpeCap2 += 75;
+								maxIntCap2 -= 15;
+								maxWisCap2 -= 15;
+								break;
+							case 2:
+								maxStrCap2 += 200;
+								maxSpeCap2 += 100;
+								maxIntCap2 -= 20;
+								maxWisCap2 -= 20;
+								break;
+							case 3:
+								maxStrCap2 += 200;
+								maxSpeCap2 += 100;
+								maxIntCap2 -= 20;
+								maxWisCap2 -= 20;
+								break;
+							case 4:
+								maxStrCap2 += 500;
+								maxSpeCap2 += 250;
+								maxIntCap2 -= 30;
+								maxWisCap2 -= 30;
+								break;
+						}
+						break;
+					case "sandstone":
+						switch(Forgefather.refinement){
+							case 0:
+								maxSpeCap2 += 100;
+								maxStrCap2 += 25;
+								maxIntCap2 += 25;
+								maxWisCap2 -= 10;
+								break;
+							case 1:
+								maxSpeCap2 += 150;
+								maxStrCap2 += 35;
+								maxIntCap2 += 35;
+								maxWisCap2 -= 15;
+								break;
+							case 2:
+								maxSpeCap2 += 200;
+								maxStrCap2 += 50;
+								maxIntCap2 += 50;
+								maxWisCap2 -= 20;
+								break;
+							case 3:
+								maxSpeCap2 += 200;
+								maxStrCap2 += 50;
+								maxIntCap2 += 50;
+								maxWisCap2 -= 20;
+								break;
+							case 4:
+								maxSpeCap2 += 500;
+								maxStrCap2 += 125;
+								maxIntCap2 += 125;
+								maxWisCap2 -= 30;
+								break;
+						}
+						break;
+						
 				}
 				if (hasPerk(PerkLib.GargoylePure)) {
 					maxWisCap2 += 130;
@@ -15370,6 +15584,13 @@ use namespace CoC;
 			var max:Number = super.maxHP_base();
 			if (alicornScore() >= 12) max += (250 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (centaurScore() >= 8) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (isGargoyle() && Forgefather.material == "granite")
+			{
+				if (Forgefather.refinement == 0) max *= (1.15);
+				if (Forgefather.refinement == 1) max *= (1.25);
+				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) max *= (1.35);
+				if (Forgefather.refinement == 4) max *= (1.5);
+			}
 			if (gorgonScore() >= 11) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (gorgonScore() >= 17) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (horseScore() >= 4) max += (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));

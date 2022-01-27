@@ -1,6 +1,7 @@
 package classes.BodyParts {
 import classes.internals.EnumValue;
 import classes.CoC;
+import classes.Scenes.NPCs.Forgefather;
 import classes.GlobalFlags.kFLAGS;
 
 public class Wings extends SaveableBodyPart {
@@ -137,11 +138,10 @@ public class Wings extends SaveableBodyPart {
 		appearanceDescFunc: function(player: *): String {
 			var desc: String = "";
 			desc += " Large ";
-			if (CoC.instance.flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) desc += "marble";
-			if (CoC.instance.flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) desc += "alabaster";
+			desc += Forgefather.material;
 			desc += " wings sprout from your shoulders. When unfurled they stretch wider than your arm span and a single beat of them is all you need to set out toward the sky. They look a bit like ";
-			if (CoC.instance.flags[kFLAGS.GARGOYLE_WINGS_TYPE] == 1) desc += "bird";
-			if (CoC.instance.flags[kFLAGS.GARGOYLE_WINGS_TYPE] == 2) desc += "bat";
+			if (Forgefather.wings == 1) desc += "bird";
+			if (Forgefather.wings == 2) desc += "bat";
 			desc += " wings and, although they were made of stone, they allow you to fly around with excellent aerial agility.";
 			return desc;
 		},

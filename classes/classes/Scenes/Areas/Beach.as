@@ -14,6 +14,7 @@ import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Beach.*;
 import classes.Scenes.Areas.Lake.GooGirlScene;
 import classes.Scenes.NPCs.CeaniScene;
+import classes.Scenes.NPCs.Forgefather;
 import classes.Scenes.SceneLib;
 
 //import classes.Scenes.NPCs.CaiLin;
@@ -147,6 +148,14 @@ import classes.Scenes.SceneLib;
 					NothingHappened();
 				},
 				chance: 1
+			}, {
+				// Find Sandstone
+				name: "find Sandstone",
+						call: function ():void {
+					player.createStatusEffect(StatusEffects.NearWater, 0, 0, 0, 0);
+					findBeachSite();
+				},
+				chance: 1
 			});
 		}
 
@@ -196,6 +205,36 @@ import classes.Scenes.SceneLib;
 			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
 			player.createKeyItem("Harpoon gun", 0, 0, 0, 0);
 			doNext(camp.returnToCampUseOneHour);
+		}
+		
+		public function findBeachSite():void {
+			clearOutput();
+			if (player.hasKeyItem("Old Pickaxe") > 0 && Forgefather.materialsExplained == true){
+				outputText("You stumble across a vein of Sandstone, this looks like suitable material for your gargoyle form.\n");
+				outputText("Do you wish to mine it?");
+				menu();
+				addButton(0, "Yes", beachSiteMine);
+				addButton(1, "No", camp.returnToCampUseOneHour);
+			}
+			else camp.returnToCampUseOneHour();
+		}
+		
+		private function beachSiteMine():void {
+			if (Forgefather.materialsExplained != true) NothingHappened();
+			else {
+				clearOutput();
+				if (player.fatigue > player.maxFatigue() - 50) {
+					outputText("\n\n<b>You are too tired to consider mining. Perhaps some rest will suffice?</b>");
+					doNext(camp.returnToCampUseOneHour);
+					return;
+				}
+				outputText("\n\nYou begin slamming your pickaxe against the sandstone, spending the better part of the next two hours mining. This done, you bring back your prize to camp. ");
+				var minedStones:Number = 13 + Math.floor(player.str / 7);
+				minedStones = Math.round(minedStones);
+				fatigue(50, USEFATG_PHYSICAL);
+				SceneLib.forgefatherScene.incrementSandstoneSupply(minedStones);
+				doNext(camp.returnToCampUseTwoHours);
+			}
 		}
 	}
 }
