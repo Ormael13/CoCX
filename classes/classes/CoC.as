@@ -42,7 +42,6 @@ import mx.logging.Log;
 import mx.logging.LogEventLevel;
 import mx.logging.targets.TraceTarget;
 
-
 /****
  classes.CoC: The Document class of Corruption of the Champions.
  ****/

@@ -6,17 +6,26 @@
 package classes.Scenes.NPCs	{
 	
 	import classes.*;
-	import classes.BodyParts.*;
+	import classes.BodyParts.Antennae;
+	import classes.BodyParts.Arms;
+	import classes.BodyParts.Ears;
+	import classes.BodyParts.Eyes;
+	import classes.BodyParts.Face;
+	import classes.BodyParts.Gills;
+	import classes.BodyParts.Hair;
+	import classes.BodyParts.Horns;
+	import classes.BodyParts.LowerBody;
+	import classes.BodyParts.RearBody;
+	import classes.BodyParts.Skin;
+	import classes.BodyParts.Tail;
+	import classes.BodyParts.Tongue;
+	import classes.BodyParts.Wings;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.internals.SaveableState;
-	import classes.Items.WeaponLib;
-	import classes.Scenes.SceneLib;
-	import classes.Scenes.NPCs.Forgefather;
 	import classes.Scenes.Areas.HighMountains.TempleOfTheDivine;
+	import classes.Scenes.SceneLib;
 	import classes.Stats.Buff;
 	import classes.display.SpriteDb;
-	
-	use namespace CoC;
 	
 	public class Forgefather extends NPCAwareContent implements SaveableState	{
 		
@@ -48,12 +57,11 @@ package classes.Scenes.NPCs	{
 		public static var refinementExplained:Boolean;
 		public var templeofdivine:TempleOfTheDivine = new TempleOfTheDivine();
 		
-		public function stateObjectName():String {
-			return "Forgefather";
+		public function Forgefather() {
+			Saves.registerSaveableState(this);
 		}
 		
 		public function resetState():void {
-			statueProgress = 0;
 			hairLength = 0;
 			gender = 0;
 			wings = 0;
@@ -64,13 +72,13 @@ package classes.Scenes.NPCs	{
 			vagina = 0;
 			cock = 0;
 			balls = 0;
-			material = "";
-			refinement = 0;
+			granite  = 0;
 			ebony = 0;
-			granite = 0;
-			alabaster = 0;
 			marble = 0;
 			sandstone = 0;
+			alabaster = 0;
+			material = "";
+			refinement = 0;
 			channelInlay = "";
 			gem = "";
 			rarityAbsorbed = "";
@@ -82,7 +90,6 @@ package classes.Scenes.NPCs	{
 		
 		public function saveToObject():Object {
 			return {
-				"statueProgress": statueProgress,
 				"hairLength": hairLength,
 				"gender": gender,
 				"wings": wings,
@@ -93,13 +100,13 @@ package classes.Scenes.NPCs	{
 				"vagina": vagina,
 				"cock": cock,
 				"balls": balls,
-				"material": material,
-				"refinement": refinement,
-				"ebony": ebony,
 				"granite": granite,
-				"alabaster": alabaster,
+				"ebony": ebony,
 				"marble": marble,
 				"sandstone": sandstone,
+				"alabaster": alabaster,
+				"material": material,
+				"refinement": refinement,
 				"channelInlay": channelInlay,
 				"gem": gem,
 				"rarityAbsorbed": rarityAbsorbed,
@@ -107,12 +114,11 @@ package classes.Scenes.NPCs	{
 				"lethiciteEaten": lethiciteEaten,
 				"materialsExplained": materialsExplained,
 				"refinementExplained": refinementExplained
-			};
+			}
 		}
 		
 		public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
 			if (o) {
-				statueProgress = o["statueProgress"];
 				hairLength = o["hairLength"];
 				gender = o["gender"];
 				wings = o["wings"];
@@ -123,13 +129,13 @@ package classes.Scenes.NPCs	{
 				vagina = o["vagina"];
 				cock = o["cock"];
 				balls = o["balls"];
-				material = o["material"];
-				refinement = o["refinement"];
-				ebony = o["ebony"];
 				granite = o["granite"];
-				alabaster = o["alabaster"];
+				ebony = o["ebony"];
 				marble = o["marble"];
 				sandstone = o["sandstone"];
+				alabaster = o["alabaster"];
+				material = o["material"];
+				refinement = o["refinement"];
 				channelInlay = o["channelInlay"];
 				gem = o["gem"];
 				rarityAbsorbed = o["rarityAbsorbed"];
@@ -143,8 +149,8 @@ package classes.Scenes.NPCs	{
 			}
 		}
 		
-		public function Forgefather() {
-			Saves.registerSaveableState(this);
+		public function stateObjectName():String {
+			return "ForgeFatherScenes";
 		}
 		
 		public function meetForgefather():void	{
@@ -160,7 +166,7 @@ package classes.Scenes.NPCs	{
 		public function introduceSelf():void {
 			flags[kFLAGS.FORGEFATHER_MOVED_TO_TEMPLE] = 1;
 			outputText("You introduce yourself to the being. /n/n");
-			outputText("Eyeing your quite solid form, he chuckles.");
+			outputText("Eyeing your quite solid form, he chuckles./n");
 			outputText("\"<i>That's quite the stout form you have. I thought the demons destroyed all of your kind.</i>\"\n\n");
 			outputText("You respond, telling him of the Temple, and the 2 gargoyles now there. You describe you were a champion of your village, and how you willingly gave up your original form to inhabit the stony body.\n\n");
 			outputText("Surprised, the being exclaims.\n\n");
@@ -185,90 +191,51 @@ package classes.Scenes.NPCs	{
 			addButton(1, "Not Now", notNow);
 		}
 	
-		public function setGargoyleHair(newHairLength:int): void {
-			hairLength = newHairLength;
-			statueProgress++;
+		public function setGargoyleHair(hairLengthNew:int): void {
+			hairLength = hairLengthNew;
 		}
 		
-		public function setGargoyleGender(newGender:int): void {
-			gender = newGender;
-			statueProgress++;
+		public function setGargoyleGender(genderNew:int): void {
+			gender = genderNew;
 		}
 		
-		public function setGargoyleWings(newWings:int): void {
-			wings = newWings;
-			statueProgress++;
+		public function setGargoyleWings(wingsNew:int): void {
+			wings = wingsNew;
 		}
 		
-		public function setGargoyleArms(newArms:int): void {
-			arms = newArms;
-			statueProgress++;
+		public function setGargoyleArms(armsNew:int): void {
+			arms = armsNew;
 		}
 		
-		public function setGargoyleTail(newTail:int): void {
-			tail = newTail;
-			statueProgress++;
+		public function setGargoyleTail(tailNew:int): void {
+			tail = tailNew;
 		}
 		
-		public function setGargoyleLowerBody(newLowerBody:int): void {
-			lowerBody = newLowerBody;
-			statueProgress++;
+		public function setGargoyleLowerBody(lowerBodyNew:int): void {
+			lowerBody = lowerBodyNew;
 		}
 		
-		public function setGargoyleChest(newChest:int): void {
-			chest = newChest;
-			statueProgress++;
+		public function setGargoyleChest(chestNew:int): void {
+			chest = chestNew;
 		}
 		
-		public function setGargoyleVagina(newVagina:int): void {
-			vagina = newVagina;
-			statueProgress++;
+		public function setGargoyleVagina(vaginaNew:int): void {
+			vagina = vaginaNew;
 		}
 		
-		public function setGargoyleCock(newCock:int): void {
-			cock = newCock;
-			statueProgress++;
+		public function setGargoyleCock(cockNew:int): void {
+			cock = cockNew;
 		}
 		
-		public function setGargoyleBalls(newBalls:int): void {
-			balls = newBalls;
-			statueProgress++;
-		}
-		
-		public function getRefinement(): String {
-			var level: String;
-			switch (refinement)
-			{
-				case (0):
-					level = "raw";
-					break;
-				
-				case (1):
-					level = "rough";
-					break;
-				
-				case (2):
-					level = "smooth";
-					break;
-				
-				case (3):
-					level = "carved";
-					break;
-				
-				case (4):
-					level = "polished";
-					break;
-				
-			}
-			return level;
+		public function setGargoyleBalls(ballsNew:int): void {
+			balls = ballsNew;
 		}
 		
 		public function createGargoyleState(): void {
-			material = "stone";
-			refinement = 0;
+			player.skin.setBaseOnly({type:Skin.STONE});
 			player.skinTone = "dark gray";
 			player.hairColor = "dark gray";
-			player.skin.setBaseOnly({type:Skin.STONE});
+			material = "stone";
 			player.hairType = Hair.NORMAL;
 			player.faceType = Face.DEVIL_FANGS;
 			player.tongue.type = Tongue.DEMONIC;
@@ -411,6 +378,7 @@ package classes.Scenes.NPCs	{
 		}
 		
 		public function explainMaterials(): void{
+			materialsExplained = true;
 			clearOutput();
 			menu();
 			outputText("\"<i>Well, my kin had once made Gargoyles out of pretty much any material brought to us.</i>\"\n");
@@ -444,7 +412,13 @@ package classes.Scenes.NPCs	{
 			clearOutput();
 			menu();
 			outputText("To Be Written\n\n");
-			outputText("You need 100 of the material you wish to become to be transformed.");
+			outputText("You need 100 of the material you wish to become to be transformed.\n\n");
+			outputText("Materials:\n");
+			outputText("Granite: " + granite +"\n");
+			outputText("Ebony: " + ebony +"\n");
+			outputText("Alabaster: " + alabaster +"\n");
+			outputText("Marble: " + marble +"\n");
+			outputText("Sandstone: " + sandstone +"\n");
 			if (granite >= 100) addButton(0, "Granite", changeMatFunc, "granite").hint("Change your body to Granite");
 			else addButtonDisabled(0, "Granite", "Not enough Granite");
 			if (ebony >= 100) addButton(1, "Ebony", changeMatFunc, "ebony").hint("Change your body to Ebony");
@@ -467,7 +441,7 @@ package classes.Scenes.NPCs	{
 			outputText("Note: Moving past this step locks you to your chosen material.");
 			outputText("To have channels carved into your form, you need ERROR NOT DECIDED to perpare the channels.\n");
 			outputText("Finally, to polish and finish your form, you need SUPER ERROR NOT FOUND to be polished into your body, sealing your power and greatly increasing it.\n\n");
-			outputText("Materials:\n\n");
+			outputText("Materials:\n");
 			outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] +"\n");
 			outputText("Granite: " + granite +"\n");
 			outputText("Ebony: " + ebony +"\n");
@@ -519,35 +493,35 @@ package classes.Scenes.NPCs	{
 			switch (mat){
 				case "granite":
 					refinement = 0;
-					granite -= 35;
+					granite -= 100;
 					material = "granite";
 					player.skinTone = "gray";
 					player.hairColor = "gray";
 					break;
 				case "ebony":
 					refinement = 0;
-					ebony  -= 35;
+					ebony  -= 100;
 					material = "ebony";
 					player.skinTone = "black";
 					player.hairColor = "black";
 					break;
 				case "alabaster":
 					refinement = 0;
-					alabaster -= 35;
+					alabaster -= 100;
 					material = "alabaster";
-					player.skinTone = "albino";
-					player.hairColor = "albino";
+					player.skinTone = "quartz white";
+					player.hairColor = "quartz white";
 					break;
 				case "marble":
 					refinement = 0;
-					marble -= 35;
+					marble -= 100;
 					material = "marble";
 					player.skinTone = "light gray";
 					player.hairColor = "light gray";
 					break;
 				case "sandstone":
 					refinement = 0;
-					sandstone -= 35;
+					sandstone -= 100;
 					material = "sandstone";
 					player.skinTone = "caramel";
 					player.hairColor = "caramel";
@@ -631,6 +605,5 @@ package classes.Scenes.NPCs	{
 			}
 			outputText(")</b>");
 		}
-		
 	}
 }

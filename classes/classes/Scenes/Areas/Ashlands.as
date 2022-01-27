@@ -8,6 +8,7 @@ package classes.Scenes.Areas
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.Ashlands.*;
+import classes.Scenes.NPCs.Forgefather;
 import classes.Scenes.Areas.Forest.AlrauneScene;
 import classes.Scenes.Areas.HighMountains.PhoenixScene;
 import classes.Scenes.SceneLib;
@@ -37,7 +38,8 @@ use namespace CoC;
 			choice[choice.length] = 2; //Hellcat (lvl 46)
 			choice[choice.length] = 3; //Cinderbloom (lvl 40)
 			choice[choice.length] = 4; //Fire Golem (lvl 64)
-			choice[choice.length] = 5; //Find nothing!
+			choice[choice.length] = 5; //Granite Mine
+			choice[choice.length] = 6; //Find nothing!
 			
 			//Double barreled dragon gun
 			if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1) && player.statusEffectv3(StatusEffects.TelAdreTripxiGuns1) == 0 && player.hasKeyItem("Double barreled dragon gun") < 0 && rand(2) == 0) {
@@ -87,6 +89,17 @@ use namespace CoC;
 					outputText("As you take a stroll, from behind nearby ash pile emerge huge golem. Looks like you have encountered 'true fire golem'! You ready your [weapon] for a fight!");
 					startCombat(new GolemTrueFire());
 					break;
+				case 5: //Find Granite
+					clearOutput();
+					if (player.hasKeyItem("Old Pickaxe") > 0 && Forgefather.materialsExplained == true){
+						outputText("You stumble across a vein of Granite, this looks like suitable material for your gargoyle form.\n");
+						outputText("Do you wish to mine it?");
+						menu();
+						addButton(0, "Yes", ahslandsSiteMine);
+						addButton(1, "No", camp.returnToCampUseOneHour);
+					}
+					else camp.returnToCampUseOneHour();
+					break;
 				default:
 					clearOutput();
 					outputText("You spend one hour exploring ashlands but you don't manage to find anything interesting.");
@@ -107,7 +120,6 @@ use namespace CoC;
 			player.createKeyItem("Double barreled dragon gun", 0, 0, 0, 0);
 			doNext(camp.returnToCampUseOneHour);
 		}
-<<<<<<< HEAD
 		
 		private function ahslandsSiteMine():void {
 			if (Forgefather.materialsExplained != 1) doNext(camp.returnToCampUseOneHour);
@@ -126,7 +138,5 @@ use namespace CoC;
 				doNext(camp.returnToCampUseTwoHours);
 			}
 		}
-=======
->>>>>>> parent of ddd361217 (Garg)
 	}
 }

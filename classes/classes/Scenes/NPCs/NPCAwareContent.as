@@ -91,7 +91,7 @@ import classes.Scenes.SceneLib;
 		// Forgefather
 		protected function get ForgeFather():Forgefather
 		{
-			return SceneLib.forgefatherScene();
+			return SceneLib.forgefatherScene;
 		}
 		// Helia
 		protected function get helScene():HelScene

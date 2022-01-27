@@ -14,6 +14,7 @@ import classes.Scenes.API.GroupEncounter;
 import classes.Scenes.Areas.Beach.*;
 import classes.Scenes.Areas.Lake.GooGirlScene;
 import classes.Scenes.NPCs.CeaniScene;
+import classes.Scenes.NPCs.Forgefather;
 import classes.Scenes.SceneLib;
 
 //import classes.Scenes.NPCs.CaiLin;
@@ -147,6 +148,14 @@ import classes.Scenes.SceneLib;
 					NothingHappened();
 				},
 				chance: 1
+			}, {
+				// Find Sandstone
+				name: "find Sandstone",
+						call: function ():void {
+					player.createStatusEffect(StatusEffects.NearWater, 0, 0, 0, 0);
+					findBeachSite();
+				},
+				chance: 1
 			});
 		}
 
@@ -197,10 +206,21 @@ import classes.Scenes.SceneLib;
 			player.createKeyItem("Harpoon gun", 0, 0, 0, 0);
 			doNext(camp.returnToCampUseOneHour);
 		}
-<<<<<<< HEAD
+		
+		public function findBeachSite():void {
+			clearOutput();
+			if (player.hasKeyItem("Old Pickaxe") > 0 && Forgefather.materialsExplained == true){
+				outputText("You stumble across a vein of Sandstone, this looks like suitable material for your gargoyle form.\n");
+				outputText("Do you wish to mine it?");
+				menu();
+				addButton(0, "Yes", beachSiteMine);
+				addButton(1, "No", camp.returnToCampUseOneHour);
+			}
+			else camp.returnToCampUseOneHour();
+		}
 		
 		private function beachSiteMine():void {
-			if (Forgefather.materialsExplained != 1) NothingHappened();
+			if (Forgefather.materialsExplained != true) NothingHappened();
 			else {
 				clearOutput();
 				if (player.fatigue > player.maxFatigue() - 50) {
@@ -216,7 +236,5 @@ import classes.Scenes.SceneLib;
 				doNext(camp.returnToCampUseTwoHours);
 			}
 		}
-=======
->>>>>>> parent of ddd361217 (Garg)
 	}
 }
