@@ -137,14 +137,12 @@ public class Wings extends SaveableBodyPart {
 		name:"large stony",
 		appearanceDescFunc: function(player: *): String {
 			var desc: String = "";
-
 			desc += " Large ";
 			desc += Forgefather.material;
 			desc += " wings sprout from your shoulders. When unfurled they stretch wider than your arm span and a single beat of them is all you need to set out toward the sky. They look a bit like ";
 			if (Forgefather.wings == 1) desc += "bird";
 			if (Forgefather.wings == 2) desc += "bat";
 			desc += " wings and, although they were made of stone, they allow you to fly around with excellent aerial agility.";
-
 			return desc;
 		},
 		wingSlap: true,

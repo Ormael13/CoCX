@@ -553,7 +553,28 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 		}
 		if (player.vehicles == vehicles.HB_MECH) {
-
+			if (player.hasKeyItem("HB Stealth System") >= 0) {
+				bd = buttons.add("Camouflage", StealthMode).hint("Turn your mech invisible for 1 turn. \n\nWould drain 100 SF from mech reserves or your own SF pool.");
+				if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] < 100 || player.soulforce < 100) bd.disable("<b>You are too low on SF reserves to use this option.</b>\n\n");
+				if (monster.hasStatusEffect(StatusEffects.InvisibleOrStealth) || monster.hasStatusEffect(StatusEffects.Stunned) || monster.hasStatusEffect(StatusEffects.FrozenSolid) || monster.hasStatusEffect(StatusEffects.StunnedTornado)
+					|| monster.hasStatusEffect(StatusEffects.Blind) || monster.hasStatusEffect(StatusEffects.InkBlind) || monster.hasStatusEffect(StatusEffects.Distracted)) {
+					bd = buttons.add("SneakAttack (M)", sneakAttackMech).hint("Strike the vitals of a stunned, blinded or distracted opponent for heavy damage. (Melee variant)");
+					if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+					else if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] < 100 || player.soulforce < 100) bd.disable("<b>You are too low on SF reserves to use this option.</b>");
+				}
+				if (monster.hasStatusEffect(StatusEffects.InvisibleOrStealth) || monster.hasStatusEffect(StatusEffects.Stunned) || monster.hasStatusEffect(StatusEffects.FrozenSolid) || monster.hasStatusEffect(StatusEffects.StunnedTornado)
+					|| monster.hasStatusEffect(StatusEffects.Blind) || monster.hasStatusEffect(StatusEffects.InkBlind) || monster.hasStatusEffect(StatusEffects.Distracted)) {
+					bd = buttons.add("SneakAttack (R)", sneakAttackRangeMech).hint("Strike the vitals of a stunned, blinded or distracted opponent for heavy damage. (Range variant)");
+					if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+					else if (!player.isUsingHowlingBansheeMechFriendlyRangeWeapons()) bd.disable("Your range weapon is not compatibile to be used in this special attack.");
+					else if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] < 100 || player.soulforce < 100) bd.disable("<b>You are too low on SF reserves to use this option.</b>");
+				}
+			}
+			if (player.hasKeyItem("HB Dragon's Breath Flamer") >= 0) {
+				bd = buttons.add("DB Flamer", mechWhitefireBeamCannon).hint("Shoot with Dragon's Breath Flamer at enemy burning him. \n\nWould drain 100 SF from mech reserves or your own SF pool.");
+				if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] < 100 || player.soulforce < 100) bd.disable("<b>You are too low on SF reserves to use this option.</b>\n\n");
+				else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+			}
 		}
 	}
 	internal function buildMenuForFlying(buttons:ButtonDataList):void {
@@ -946,12 +967,22 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.PhantomStrike)) fatigue(40, USEFATG_PHYSICAL);
 		else fatigue(20, USEFATG_PHYSICAL);
+		sneakAttack1();
+	}
+	public function sneakAttackMech():void {
+		clearOutput();
+		if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] >= 100) flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= 100;
+		else player.soulforce -= 100;
+		sneakAttack1();
+	}
+	public function sneakAttack1():void {
 		outputText("You strike " + monster.a + " " + monster.short + " vitals with your [weapon]. ");
 		var damage:Number = 0;
 		var SAMulti:Number = 2;
 		if (player.weapon == weapons.ANGSTD) SAMulti += 2;
 		if (player.hasPerk(PerkLib.DeadlySneaker)) SAMulti += 2;
 		if (player.hasPerk(PerkLib.Slayer)) SAMulti += 3;
+		if (monster.hasStatusEffect(StatusEffects.InvisibleOrStealth)) SAMulti *= 2;
 		damage += player.str;
 		damage += scalingBonusStrength() * 0.25;
 		if (player.hasPerk(PerkLib.SpeedDemon) && player.isNoLargeNoStaffWeapon()) {
@@ -1163,6 +1194,15 @@ public class PhysicalSpecials extends BaseCombatContent {
 			return;
 		}
 		fatigue(20, USEFATG_PHYSICAL);
+		sneakAttackRange1();
+	}
+	public function sneakAttackRangeMech():void {
+		clearOutput();
+		if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] >= 100) flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= 100;
+		else player.soulforce -= 100;
+		sneakAttackRange1();
+	}
+	public function sneakAttackRange1():void {
 		outputText("You shoot " + monster.a + " " + monster.short + " vitals with your [weaponrange]. ");
 		var damage:Number = 0;
 		var SAMulti:Number = 2;
@@ -1171,6 +1211,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//if (player.weaponRange == weaponsrange.Sakuno M2) SAMulti += 8;
 		//if (player.hasPerk(PerkLib.DeadlySneaker)) SAMulti += 2;
 		//if (player.hasPerk(PerkLib.Slayer)) SAMulti += 3;
+		if (monster.hasStatusEffect(StatusEffects.InvisibleOrStealth)) SAMulti *= 2;
 		if (player.weaponRangePerk == "Bow") {
 			damage += player.spe;
 			damage += scalingBonusSpeed() * 0.2;
@@ -5652,12 +5693,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 			doNext(endLustVictory);
 			return;
 		}
-
 		player.createStatusEffect(StatusEffects.CooldownPinDown,8,0,0,0);
 		monster.createStatusEffect(StatusEffects.Stunned,3,0,0,0);
 		enemyAI();
 	}
-
 
 	public function archerSidewinder():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
@@ -5996,7 +6035,64 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		return dmgBarrage;
 	}
-
+	
+	public function StealthMode():void {
+		clearOutput();
+		if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] >= 100) flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= 100;
+		else player.soulforce -= 100;
+		outputText("Your mech form shimmers for a second as you vanish into thin air. Your opponent starts looking for you, annoyed.\n\n");
+		var DurationIncrease:Number = 0;
+		//if (player.hasPerk(PerkLib.FairyQueenRegalia)) DurationIncrease = 1;
+		monster.createStatusEffect(StatusEffects.InvisibleOrStealth,1+DurationIncrease,0,0,0);
+		enemyAI();
+	}
+/*
+	public function mechStarcannon():void {
+		clearOutput();
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		outputText("You press the BIG lightning button and aim, smirking wide as the Raijin blaster power up your mech zapping [themonster] for ");
+		player.createStatusEffect(StatusEffects.CooldownRaijinBlaster,8,0,0,0);
+		var damage:Number;
+		damage = scalingBonusIntelligence() * spellModWhite() * 8;
+		if (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) damage *= 8;
+		if (player.armor == armors.GTECHC_) damage *= 1.5;
+		if (player.upperGarment == undergarments.TECHBRA) damage *= 1.05;
+		if (player.lowerGarment == undergarments.T_PANTY) damage *= 1.05;
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatMagicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		damage = Math.round(damage);
+		doLightingDamage(damage, true, true);
+		outputText(" damage! ");
+		if (crit) outputText("<b>*Critical Hit!*</b> ");
+		var lustDmg:Number = monster.lustVuln * (player.inte / 5 * spellModBlack() + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
+		//Determine if critical tease!
+		var crit1:Boolean = false;
+		var critChance1:int = 5;
+		if (player.hasPerk(PerkLib.CriticalPerformance)) {
+			if (player.lib <= 100) critChance1 += player.lib / 5;
+			if (player.lib > 100) critChance1 += 20;
+		}
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance1 = 0;
+		if (rand(100) < critChance1) {
+			crit1 = true;
+			lustDmg *= 1.75;
+		}
+		lustDmg = Math.round(lustDmg);
+		monster.teased(lustDmg);
+		if (crit1) outputText(" <b>Critical!</b>");
+		outputText("\n\n");
+		combat.heroBaneProc(damage);
+		statScreenRefresh();
+		enemyAI();
+	}
+*/
 	public function mechTazer():void {
 		clearOutput();
 		outputText("You press the lightning button and aim, smirking at [themonster], your mech delivering a ");
@@ -6226,8 +6322,12 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function mechWhitefireBeamCannon():void {
 		clearOutput();
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
-		outputText("You shoot with the Whitefire beam cannon at [themonster] burning [monster his] badly for ");
-		player.createStatusEffect(StatusEffects.CooldownWhitefireBeamCannon,8,0,0,0);
+		outputText("You shoot with the "+(player.vehicles == vehicles.HB_MECH ? "Dragon's Breath Flamer":"Whitefire beam cannon")+" at [themonster] burning [monster his] badly for ");
+		if (player.vehicles == vehicles.HB_MECH) {
+			if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] >= 100) flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= 100;
+			else player.soulforce -= 100;
+		}
+		else player.createStatusEffect(StatusEffects.CooldownWhitefireBeamCannon,8,0,0,0);
 		var damage:Number;
 		damage = scalingBonusIntelligence() * spellModWhite() * 8;
 		if (player.armor == armors.GTECHC_) damage *= 1.5;
