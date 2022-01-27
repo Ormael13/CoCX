@@ -677,7 +677,7 @@ use namespace CoC;
 				//if (wings.type == Wings.GARGOYLE_LIKE_LARGE) armorDef += (30 * newGamePlusMod);
 				//if (faceType == Face.DEVIL_FANGS) armorDef += (30 * newGamePlusMod);
 			//}
-			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) armorDef += (25 * newGamePlusMod);
+			//if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) armorDef += (25 * newGamePlusMod);
 			if (hasPerk(PerkLib.ElementalBody)) {
 				if (perkv1(PerkLib.ElementalBody) == 2) {
 					if (perkv2(PerkLib.ElementalBody) == 1) armorDef += (10 * newGamePlusMod);
