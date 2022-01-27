@@ -1,10 +1,10 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <project version="2">
   <!-- Output SWF options -->
   <output>
     <movie outputType="Application" />
     <movie input="" />
-    <movie path="..\..\..\Desktop\COC.swf" />
+    <movie path="C:\Users\Marcin\Desktop\CoC_Xianxia_0.8s4.swf" />
     <movie fps="24" />
     <movie width="1000" />
     <movie height="800" />
