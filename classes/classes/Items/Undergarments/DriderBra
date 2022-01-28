@@ -6,7 +6,7 @@ package classes.Items.Undergarments
 
 	public class DriderBra extends Undergarment
 	{
-		public static const TYPE_LOWERWEAR:int = 1;
+		public static const TYPE_LOWERWEAR:int = 0;
 		
 		public function DriderBra() 
 		{
