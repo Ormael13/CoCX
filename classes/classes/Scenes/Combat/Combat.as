@@ -14,6 +14,7 @@ import classes.BodyParts.Wings;
 import classes.CoC;
 import classes.CoC_Settings;
 import classes.CockTypesEnum;
+import classes.Creature;
 import classes.EngineCore;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
@@ -509,7 +510,7 @@ public class Combat extends BaseContent {
 		}
         if (player.hasPerk(PerkLib.MasterGunslinger)) return 4+bonusShots;
         else if (player.hasPerk(PerkLib.ExpertGunslinger)) return 3+bonusShots;
-        else if (player.hasPerk(PerkLib.AmateurGunslinger)) return 2;
+        else if (player.hasPerk(PerkLib.AmateurGunslinger)) return 2+bonusShots;
         else return 1;
     }
 
@@ -1598,6 +1599,13 @@ public class Combat extends BaseContent {
 				if (player.perkv2(PerkLib.ElementalBody) == 4) unarmedMulti += .4;
 			}
 		}
+		if (player.isGargoyle() && Forgefather.material == "marble")
+			{
+				if (Forgefather.refinement == 0) unarmedMulti += (.15);
+				if (Forgefather.refinement == 1) unarmedMulti += (.25);
+				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) unarmedMulti += (.5);
+				if (Forgefather.refinement == 4) unarmedMulti += (1);
+			}
         if (player.statStore.hasBuff("CrinosShape") && player.hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalWeapons)) unarmed *= 1.1;
         if (player.hasPerk(PerkLib.Lycanthropy)) unarmed += 8 * (1 + player.newGamePlusMod());
 		if (player.arms.type == Arms.HINEZUMI) unarmed += 4 * (1 + player.newGamePlusMod());
@@ -2225,7 +2233,7 @@ public class Combat extends BaseContent {
         clearOutput();
         var weapon:String = "";
         if (player.isInGoblinMech()) weapon = "saw blade";
-		if (player.vehicles == vehicles.HB_MECH) weapon = "power blade";
+		if (player.vehicles == vehicles.HB_MECH) weapon = "twin power blades";
         if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 0) {
             outputText("You attempt to attack, but at the last moment your mech wrenches away, preventing you from even coming close to landing a blow!  ");
             if (monster is ChaosChimera) outputText("Curse");
@@ -2340,6 +2348,14 @@ public class Combat extends BaseContent {
         //BASIC DAMAGE STUFF
         damage += player.str;
         damage += scalingBonusStrength() * 0.25;
+        if (player.hasKeyItem("HB Agility") >= 0) {
+			damage += player.spe;
+			damage += scalingBonusSpeed() * 0.20;
+			if (player.keyItemv1("HB Agility") == 1) {
+				damage += (player.spe / 2);
+				damage += scalingBonusSpeed() * 0.10;
+			}
+		}
         if (damage < 10) damage = 10;
 		if (player.isInGoblinMech()) {
 			damage *= 1.3;
@@ -3102,11 +3118,35 @@ public class Combat extends BaseContent {
 				if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] >= 3) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] += 2;
 				else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] += 1;
 			}
-            if ((player.weaponRange == weaponsrange.M1CERBE || player.weaponRange == weaponsrange.TRFATBI || player.weaponRange == weaponsrange.HARPGUN || player.weaponRange == weaponsrange.SNIPPLE || player.weaponRange == weaponsrange.TOUHOM3 || player.weaponRange == weaponsrange.DERPLAU || player.weaponRange == weaponsrange.DUEL_P_ || player.weaponRange == weaponsrange.FLINTLK) && flags[kFLAGS.MULTIPLE_ARROWS_STYLE] > 1) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 1;
-            if ((player.weaponRange == weaponsrange.ADBSCAT || player.weaponRange == weaponsrange.ADBSHOT || player.weaponRange == weaponsrange.DBDRAGG) && flags[kFLAGS.MULTIPLE_ARROWS_STYLE] > 1) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 2;
+			if ((player.weaponRange == weaponsrange.M1CERBE || player.weaponRange == weaponsrange.SNIPPLE) && flags[kFLAGS.MULTIPLE_ARROWS_STYLE] > 1) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 1;
+            if (player.weaponRange == weaponsrange.TRFATBI || player.weaponRange == weaponsrange.HARPGUN || player.weaponRange == weaponsrange.TOUHOM3 || player.weaponRange == weaponsrange.DERPLAU || player.weaponRange == weaponsrange.DUEL_P_ || player.weaponRange == weaponsrange.FLINTLK) {
+				if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] >= 1 && player.hasPerk(PerkLib.PrimedClipWarp)) {
+					if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] >= 6) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 6;
+					else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = flags[kFLAGS.DOUBLE_STRIKE_STYLE];
+				}
+				else if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] >= 1 && player.hasPerk(PerkLib.TaintedMagazine)) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 2;
+				else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 1;
+			}
+            if ((player.weaponRange == weaponsrange.ADBSCAT || player.weaponRange == weaponsrange.ADBSHOT || player.weaponRange == weaponsrange.DBDRAGG) && flags[kFLAGS.MULTIPLE_ARROWS_STYLE] > 2) {
+				if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] >= 3 && player.hasPerk(PerkLib.PrimedClipWarp)) {
+					if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] >= 6) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 6;
+					else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = flags[kFLAGS.DOUBLE_STRIKE_STYLE];
+				}
+				else if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] >= 3 && player.hasPerk(PerkLib.TaintedMagazine)) {
+					if (flags[kFLAGS.DOUBLE_STRIKE_STYLE] >= 4) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 4;
+					else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = flags[kFLAGS.DOUBLE_STRIKE_STYLE];
+				}
+				else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 2;
+			}
             if (player.weaponRangePerk == "Dual Firearms") flags[kFLAGS.MULTIPLE_ARROWS_STYLE] *= 2;
         }
-		if (player.vehicles == vehicles.HB_MECH) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 2;
+		if (player.vehicles == vehicles.HB_MECH) {
+			if (player.hasKeyItem("HB Rapid Reload") >= 0) {
+				if (player.keyItemv1("HB Rapid Reload") == 1) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 4;
+				else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 3;
+			}
+			else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 2;
+		}
 //	if (player.weaponRangePerk == "Rifle") {
         //fatigue(50, USEFATG_BOW);	//wstawić tutaj typ redukcji kosztów jak dla physical specials
 //	}
@@ -3236,18 +3276,28 @@ public class Combat extends BaseContent {
         }
         if (rand(100) < accRange) {
             var damage:Number = 0;
-            if (weaponRangePerk == "Bow") {
-				if (player.vehicles == vehicles.HB_MECH) damage += player.weaponRangeAttack * 20;
-                damage += player.spe * 2;
-                damage += scalingBonusSpeed() * 0.4;
-                if (damage < 20) damage = 20;
-            }
-            if (weaponRangePerk == "Crossbow") {
+			if (player.vehicles == vehicles.HB_MECH) {
+				if (player.hasKeyItem("HB Rapid Reload") >= 0) {
+					if (player.inte < 201) player.weaponRangeAttack *= (1 + (player.inte / 200));
+					else player.weaponRangeAttack *= 2;
+					if (player.keyItemv1("HB Rapid Reload") == 1) {
+						player.weaponRangeAttack *= 1.25;
+						damage += player.spe;
+						damage += scalingBonusSpeed() * 0.2;
+					}
+					player.weaponRangeAttack = Math.round(player.weaponRangeAttack);
+				}
 				damage += player.weaponRangeAttack * 20;
-				if (player.vehicles == vehicles.HB_MECH) {
+				damage += player.spe * 2;
+				damage += scalingBonusSpeed() * 0.4;
+			}
+			else {
+				if (weaponRangePerk == "Bow") {
 					damage += player.spe * 2;
 					damage += scalingBonusSpeed() * 0.4;
+					if (damage < 20) damage = 20;
 				}
+				if (weaponRangePerk == "Crossbow") damage += player.weaponRangeAttack * 20;
 			}
             if (!player.hasPerk(PerkLib.DeadlyAim)) damage *= (monster.damageRangePercent() / 100);
             //Weapon addition!
@@ -4843,7 +4893,7 @@ public class Combat extends BaseContent {
         //Natural weapon Full attack list
         if ((flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && ((player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon())) || player.isGargoyle())) {
             IsFeralCombat = true;
-            resolveFeralCombatAdditionnalAttacks()
+            resolveFeralCombatAdditionnalAttacks();
         }
         // Do all other attacks
         meleeDamageAcc(IsFeralCombat);
@@ -5732,42 +5782,43 @@ public class Combat extends BaseContent {
                     //DOING BASIC EXTRA NATURAL ATTACKS
                     outputText("You savagely rend [monster a] [monster name] with your natural weapons.");
                     if (player.hasPerk(PerkLib.LightningClaw)) {
-                        damage = 6 + rand(3);
-                        if (player.hasPerk(PerkLib.SensualLover)) damage += 2;
-                        if (player.hasPerk(PerkLib.Seduction)) damage += 5;
+						var damageLC:Number = 0;
+                        damageLC = 6 + rand(3);
+                        if (player.hasPerk(PerkLib.SensualLover)) damageLC += 2;
+                        if (player.hasPerk(PerkLib.Seduction)) damageLC += 5;
                         //+ slutty armor bonus
-                        if (player.hasPerk(PerkLib.SluttySeduction)) damage += player.perkv1(PerkLib.SluttySeduction);
-                        if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) damage += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
-                        if (player.hasPerk(PerkLib.BimboBody) || player.hasPerk(PerkLib.BroBody) || player.hasPerk(PerkLib.FutaForm)) damage += 5;
-                        if (player.hasPerk(PerkLib.FlawlessBody)) damage += 10;
-                        damage += scalingBonusLibido() * 0.1;
-                        if (player.hasPerk(PerkLib.JobSeducer)) damage += player.teaseLevel * 3;
-                        else damage += player.teaseLevel * 2;
+                        if (player.hasPerk(PerkLib.SluttySeduction)) damageLC += player.perkv1(PerkLib.SluttySeduction);
+                        if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) damageLC += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
+                        if (player.hasPerk(PerkLib.BimboBody) || player.hasPerk(PerkLib.BroBody) || player.hasPerk(PerkLib.FutaForm)) damageLC += 5;
+                        if (player.hasPerk(PerkLib.FlawlessBody)) damageLC += 10;
+                        damageLC += scalingBonusLibido() * 0.1;
+                        if (player.hasPerk(PerkLib.JobSeducer)) damageLC += player.teaseLevel * 3;
+                        else damageLC += player.teaseLevel * 2;
                         //partial skins bonuses
                         switch (player.coatType()) {
                             case Skin.FUR:
-                                damage += (1 + player.newGamePlusMod());
+                                damageLC += (1 + player.newGamePlusMod());
                                 break;
                             case Skin.SCALES:
-                                damage += (2 * (1 + player.newGamePlusMod()));
+                                damageLC += (2 * (1 + player.newGamePlusMod()));
                                 break;
                             case Skin.CHITIN:
-                                damage += (3 * (1 + player.newGamePlusMod()));
+                                damageLC += (3 * (1 + player.newGamePlusMod()));
                                 break;
                             case Skin.BARK:
-                                damage += (4 * (1 + player.newGamePlusMod()));
+                                damageLC += (4 * (1 + player.newGamePlusMod()));
                                 break;
                         }
                         //slutty simplicity bonus
-                        if (player.hasPerk(PerkLib.SluttySimplicity) && player.armorName == "nothing") damage *= (1 + ((10 + rand(11)) / 100));
-                        damage *= .7;
+                        if (player.hasPerk(PerkLib.SluttySimplicity) && player.armorName == "nothing") damageLC *= (1 + ((10 + rand(11)) / 100));
+                        damageLC *= .7;
                         var damagemultiplier:Number = 1;
                         if (player.hasPerk(PerkLib.ElectrifiedDesire)) damagemultiplier += player.lust100 * 0.01;
                         if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += combat.historyWhoreBonus();
                         if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 10) damagemultiplier += 0.2;
                         if (player.armorName == "desert naga pink and black silk dress") damagemultiplier += 0.1;
                         if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
-                        damage *= damagemultiplier;
+                        damageLC *= damagemultiplier;
                         //Determine if critical tease!
                         var crit1:Boolean = false;
                         var critChance1:int = 5;
@@ -5778,13 +5829,13 @@ public class Combat extends BaseContent {
                         if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance1 = 0;
                         if (rand(100) < critChance1) {
                             crit1 = true;
-                            damage *= 1.75;
+                            damageLC *= 1.75;
                         }
-                        if (player.hasPerk(PerkLib.ChiReflowLust)) damage *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
-                        if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
-                        damage = damage * 0.33 * monster.lustVuln;
-                        damage = Math.round(damage);
-                        monster.teased(damage);
+                        if (player.hasPerk(PerkLib.ChiReflowLust)) damageLC *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
+                        if (player.hasPerk(PerkLib.RacialParagon)) damageLC *= RacialParagonAbilityBoost();
+                        damageLC = damageLC * 0.33 * monster.lustVuln;
+                        damageLC = Math.round(damageLC);
+                        monster.teased(damageLC);
                         if (crit1) outputText(" <b>Critical!</b>");
                         outputText(" ");
                         if (player.hasPerk(PerkLib.SuperSensual) && player.hasPerk(PerkLib.Sensual)) teaseXP(2);
@@ -6796,7 +6847,6 @@ public class Combat extends BaseContent {
         if (player.isLowGradeWrathWeapon()) {
             if (player.wrath >= 1) player.wrath -= 1;
             else {
-
                 player.takePhysDamage(10);
                 if (player.HP <= player.minHP()) {
                     doNext(endHpLoss);
@@ -6807,8 +6857,16 @@ public class Combat extends BaseContent {
         if (player.isDualLowGradeWrathWeapon()) {
             if (player.wrath >= 2) player.wrath -= 2;
             else {
-
                 player.takePhysDamage(20);
+                if (player.HP <= player.minHP()) {
+                    doNext(endHpLoss);
+                }
+            }
+        }
+        if (player.isDualMidGradeWrathWeapon()) {
+            if (player.wrath >= 4) player.wrath -= 4;
+            else {
+                player.takePhysDamage(40);
                 if (player.HP <= player.minHP()) {
                     doNext(endHpLoss);
                 }

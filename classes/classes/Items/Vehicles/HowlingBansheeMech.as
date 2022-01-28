@@ -31,9 +31,21 @@ package classes.Items.Vehicles
 			var oldHPratio:Number = game.player.hp100/100;
 			game.player.buff("HB Mech").addStats( {"str.mult":0.15, "tou.mult":0.10, "spe.mult":0.25} );
 			game.player.HP = oldHPratio*game.player.maxHP();
-			if (game.player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) game.player.HP = 1.25 * game.player.maxHP();
-			if (game.player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) game.player.HP = 1.5 * game.player.maxHP();
-			if (game.player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) game.player.HP = 1.75 * game.player.maxHP();
+			var boost:int = 1;
+			if (game.player.hasKeyItem("HB Armor Plating") >= 0) {
+				if (game.player.keyItemv1("HB Armor Plating") == 1) boost += 0.25;
+				if (game.player.keyItemv1("HB Armor Plating") == 2) boost += 0.25;
+				if (game.player.keyItemv1("HB Armor Plating") == 3) boost += 0.25;
+				if (game.player.keyItemv1("HB Armor Plating") == 4) boost += 0.25;
+			}
+			if (game.player.hasKeyItem("HB Leather Insulation") >= 0) {
+				if (game.player.keyItemv1("HB Leather Insulation") == 1) boost += 0.25;
+				if (game.player.keyItemv1("HB Leather Insulation") == 2) boost += 0.25;
+				if (game.player.keyItemv1("HB Leather Insulation") == 3) boost += 0.25;
+				if (game.player.keyItemv1("HB Leather Insulation") == 4) boost += 0.25;
+			}
+			game.player.HP = boost * game.player.maxHP();
+			game.player.HP = Math.round(game.player.HP);
 			return super.playerEquip();
 		}
 		
@@ -41,9 +53,20 @@ package classes.Items.Vehicles
 			var oldHPratio:Number = game.player.hp100/100;
 			game.player.buff("HB Mech").remove();
 			game.player.HP = oldHPratio*game.player.maxHP();
-			if (game.player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) game.player.HP /= 1.25;
-			if (game.player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) game.player.HP /= 1.5;
-			if (game.player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) game.player.HP /= 1.75;
+			var boost:int = 1;
+			if (game.player.hasKeyItem("HB Armor Plating") >= 0) {
+				if (game.player.keyItemv1("HB Armor Plating") == 1) boost += 0.25;
+				if (game.player.keyItemv1("HB Armor Plating") == 2) boost += 0.25;
+				if (game.player.keyItemv1("HB Armor Plating") == 3) boost += 0.25;
+				if (game.player.keyItemv1("HB Armor Plating") == 4) boost += 0.25;
+			}
+			if (game.player.hasKeyItem("HB Leather Insulation") >= 0) {
+				if (game.player.keyItemv1("HB Leather Insulation") == 1) boost += 0.25;
+				if (game.player.keyItemv1("HB Leather Insulation") == 2) boost += 0.25;
+				if (game.player.keyItemv1("HB Leather Insulation") == 3) boost += 0.25;
+				if (game.player.keyItemv1("HB Leather Insulation") == 4) boost += 0.25;
+			}
+			game.player.HP /= boost;
 			game.player.HP = Math.round(game.player.HP);
 			return super.playerRemove();
 		}
