@@ -14,6 +14,7 @@ import classes.BodyParts.Wings;
 import classes.CoC;
 import classes.CoC_Settings;
 import classes.CockTypesEnum;
+import classes.Creature;
 import classes.EngineCore;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
@@ -1598,6 +1599,13 @@ public class Combat extends BaseContent {
 				if (player.perkv2(PerkLib.ElementalBody) == 4) unarmedMulti += .4;
 			}
 		}
+		if (player.isGargoyle() && Forgefather.material == "marble")
+			{
+				if (Forgefather.refinement == 0) unarmedMulti += (.15);
+				if (Forgefather.refinement == 1) unarmedMulti += (.25);
+				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) unarmedMulti += (.5);
+				if (Forgefather.refinement == 4) unarmedMulti += (1);
+			}
         if (player.statStore.hasBuff("CrinosShape") && player.hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalWeapons)) unarmed *= 1.1;
         if (player.hasPerk(PerkLib.Lycanthropy)) unarmed += 8 * (1 + player.newGamePlusMod());
 		if (player.arms.type == Arms.HINEZUMI) unarmed += 4 * (1 + player.newGamePlusMod());

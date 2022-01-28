@@ -2,6 +2,7 @@ package classes {
 import classes.BodyParts.*;
 import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.NPCs.Forgefather;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.SceneLib;
 import classes.internals.Utils;
@@ -1188,13 +1189,45 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.frostWyrmScore() < 1) outputText("\n<font color=\"#ff0000\">Half Frost Wyrm: 0</font>");
 		//GARGOYLE
 		if (player.gargoyleScore() >= 20 && (player.hasPerk(PerkLib.GargoylePure) || player.hasPerk(PerkLib.GargoyleCorrupted))) {
-			outputText("\n<font color=\"#0000a0\">" + (player.hasPerk(PerkLib.GargoylePure) ? "PURE":"CORRUPTED") + " GARGOYLE: " + player.gargoyleScore() + " (+");
-			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText("300% to Str racial multi, +510% to Tou racial multi, +100% to Spe racial multi, +80% to Int racial multi, ");
-			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText("100% to Str racial multi, +510% to Tou racial multi, +80% to Spe racial multi, +300% to Int racial multi, ");
-			if (player.hasPerk(PerkLib.GargoylePure)) outputText("+130% to Wis racial multi, -20% to Lib racial multi, -10 Sens, +");
-			if (player.hasPerk(PerkLib.GargoyleCorrupted)) outputText("-20% to Wis racial multi, +140% to Lib racial multi, +");
-			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText("" + (150 * (1 + player.newGamePlusMod())) + " Armor, +" + (25 * (1 + player.newGamePlusMod())) + " spell resistance");
-			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText("" + (25 * (1 + player.newGamePlusMod())) + " Armor, +" + (150 * (1 + player.newGamePlusMod())) + " spell resistance");
+			outputText("\n<font color=\"#0000a0\">" + (player.hasPerk(PerkLib.GargoylePure) ? "Pure ":"Corrupted ") + "Gargoyle: " + player.gargoyleScore() + " (");
+			if (Forgefather.material == "stone") {
+				if (Forgefather.refinement == 0) outputText("+50% to Str,Tou,Spe,Int,Wis racial multis, ");
+				if (Forgefather.refinement == 1) outputText("+75% to Str,Tou,Spe,Int,Wis racial multis, ");
+				if (Forgefather.refinement == 2) outputText("+100% to Str,Tou,Spe,Int,Wis racial multis, ");
+			}
+			if (Forgefather.material == "alabaster") {
+				if (Forgefather.refinement == 0) outputText("+100% to Int racial multi, +50% to Wis racial multi, +20% to max Mana, +15% Spell Dmg, - 10% to Str, Spe racial multis, ");
+				if (Forgefather.refinement == 1) outputText("+150% to Int racial multi, +75% to Wis racial multi, +25% to max Mana, +25% Spell Dmg, - 15% to Str, Spe racial multis, ");
+				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) outputText("+200% to Int racial multi, +100% to Wis racial multi, +35% to max Mana, +50% Spell Dmg, - 20% to Str, Spe racial multis, ");
+				if (Forgefather.refinement == 4) outputText("+500% to Int racial multi, +250% to Wis racial multi, +100% Spell Dmg, +50% to max Mana, - 30% to Str, Spe racial multis, ");
+			}
+			if (Forgefather.material == "marble") {
+				if (Forgefather.refinement == 0) outputText("+100% to Wis racial multi, +50% to Str racial multi, +20 % to max SF, +15% unarmed Dmg, - 10% to Int racial multi, ");
+				if (Forgefather.refinement == 1) outputText("+150% to Wis racial multi, +75% to Str racial multi, +25 % to max SF, +25% unarmed Dmg, - 15% to Int racial multi, ");
+				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) outputText("+200% to Wis racial multi, +100% to Str racial multi, +35 % to max SF, +50% unarmed Dmg, - 20% to Int racial multi, ");
+				if (Forgefather.refinement == 4) outputText("+500% to Wis racial multi, +250% to Str racial multi, +50 % to max SF, +100% unarmed Dmg, - 30% to Int racial multi, ");
+			}
+			if (Forgefather.material == "granite") {
+				if (Forgefather.refinement == 0) outputText("+100% to Tou racial multi, +50% to Str racial multi, +20% to max HP, +15% Dmg Resist, - 10% to Int, Wis racial multis, ");
+				if (Forgefather.refinement == 1) outputText("+150% to Tou racial multi, +75% to Str racial multi, +25% to max HP, +25% Dmg Resist, - 15% to Int, Wis racial multis, ");
+				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) outputText("+200% to Tou racial multi, +100% to Str racial multi, +20% to max HP, +50% Dmg Resist, - 20% to Int, Wis racial multis, ");
+				if (Forgefather.refinement == 4) outputText("+500% to Tou racial multi, +250% to Str racial multi, +50% to max HP, +100% Dmg Resist, - 30% to Int, Wis racial multis, ");
+			}
+			if (Forgefather.material == "ebony") {
+				if (Forgefather.refinement == 0) outputText("+100% to Str racial multi, +50% to Spd racial multi, +20% to max Wrath, +15% to Melee Dmg, - 10% to Int, Wis racial multis, ");
+				if (Forgefather.refinement == 1) outputText("+150% to Str racial multi, +75% to Spd racial multi, +25% to max Wrath, +25% to Melee Dmg, - 15% to Int, Wis racial multis, ");
+				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) outputText("+200% to Spd racial multi, +100% to Str racial multi, +20% to max Wrath, +50% to Melee Dmg, - 20% to Int, Wis racial multis, ");
+				if (Forgefather.refinement == 4) outputText("+500% to Str racial multi, +250% to Spd racial multi, +50% to max Wrath, +100% to Melee Dmg, - 30% to Int, Wis racial multis, ");
+			}
+			if (Forgefather.material == "sandstone") {
+				if (Forgefather.refinement == 0) outputText("+100% to Spd racial multi, +25% to Str,Int racial multis, +20% to max Fatigue, +15% to Ranged Dmg, - 10% to Wis racial multi, ");
+				if (Forgefather.refinement == 1) outputText("+150% to Spd racial multi, +35% to Str,Int racial multis, +25% to max Fatigue, +25% to Ranged Dmg, - 15% to Wis racial multi, ");
+				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) outputText("+200% to Spd racial multi, +50% to Str,Int racial multis, +35% to max Fatigue, +50% to Ranged Dmg, - 20% to Wis racial multi, ");
+				if (Forgefather.refinement == 4) outputText("+500% to Spd racial multi, +125% to Str,Int racial multis, +50% to max Fatigue, +100% to Ranged Dmg, - 30% to Wis racial multi, ");
+			}
+			
+			if (player.hasPerk(PerkLib.GargoylePure)) outputText("+130% to Wis racial multi, -20% to Lib racial multi, -10 Sens.");
+			if (player.hasPerk(PerkLib.GargoyleCorrupted)) outputText("-20% to Wis racial multi, +140% to Lib racial multi.");
 			outputText(")</font>");
 		}
 		else if (player.gargoyleScore() >= 1) outputText("\n<font color=\"#008000\">GARGOYLE: " + player.gargoyleScore() + "</font>");

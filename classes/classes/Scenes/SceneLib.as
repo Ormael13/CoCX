@@ -152,6 +152,8 @@ public class SceneLib {
     public static var excelliaFollower:ExcelliaFollower = new ExcelliaFollower();
 
     public static var exgartuan:Exgartuan = new Exgartuan();
+	
+	public static var forgefatherScene:Forgefather = new Forgefather();
 
     public static var galiaFollower:GaliaFollower = new GaliaFollower();
 
