@@ -3371,6 +3371,14 @@ public class PerkLib
 				"Increases the effects of penis-enlarging transformations.");
 		public static const PhallicRestraint:PerkType = mk("Phallic Restraint", "Phallic Restraint",
 				"Reduces the effects of penis-enlarging transformations.");
+				
+		// Holy Band perks
+		public static const CrimsonBandPerk = new CrimsonBandPerk();
+		public static const PinkBandPerk = new PinkBandPerk();
+		public static const TurqouiseBandPerk = new TurqouiseBandPerk();
+		public static const CrossedBandPerk = new CrossedBandPerk();
+		public static const BlueBandPerk = new BlueBandPerk();
+		
 
 		// Non-weapon equipment perks
 		public static const Ambition:AmbitionPerk = new AmbitionPerk();
@@ -3814,7 +3822,7 @@ public class PerkLib
 		public static const ELFArcherCovenant:PerkType = mk("Archer Covenant", "Archer Covenant",
 				"As an elf, gain a 25% increase to bow damage when not wielding a shield or a melee weapon other than a Spear.");
 		public static const ELFElvenBattleStyle:PerkType = mk("Elven Battle Style", "Elven Battle Style",
-				"As an elf, substitute your strenght to your intelligence modifier for spear damage when full attacking.");
+				"As an elf, substitute your strength to your intelligence modifier for spear damage when full attacking.");
 		public static const ELFElvenSpearDancingTechnique:PerkType = mk("Elven Spear Dancing Technique", "Elven Spear Dancing Technique",
 				"As an elf, deal additional tease damage based on your speed while wielding a spear.");
 		public static const ELFElvenSpearDancingFlurry1to4:ELFElvenSpearDancingFlurry = new ELFElvenSpearDancingFlurry();
