@@ -359,7 +359,7 @@ public class Kalji extends TrollVillageAbstractContent{
                     outputText("\"I wonder how far you can stretch until you snap.\" He chuckles, pulling on a crank to the side of the rack. You scream in agony into your gag as you feel your arms and legs slowly pull further and further. Tears stream down the side of your face as you squirm. Once you feel like your body is going to snap off at any moment he stops.\n" +
                             "\n" +
                             "\"Hmm...\" He sighs, \"Fragile… Like the shopkeepers… Somehow you’re softer than the farmer the other day... I thought you'd take it better than that. So weak… so pitiful...\"\n");
-                    if (player.hasCock){
+                    if (player.hasCock()){
                         outputText("His hand reaches down to your [penis] as he gently begins to stroke it. \"Perhaps there’s a better way to break you…\"\n" +
                                 "\n" +
                                 "You cry out in desperation, but your voice is muffled from the gag. You squirm, trying to resist his perverted advance, but to no avail. His hand gently starts to rub your manhood as it spikes to full mast. You despise how good his soft fur feels on your [penis]\n");
@@ -369,7 +369,7 @@ public class Kalji extends TrollVillageAbstractContent{
                                 "You cry out in desperation, but your voice is muffled from the gag. You squirm, trying to resist his perverted advance, but to no avail. His hand continues rubbing your crotch with slow teasing motions. You despite how good his soft fur feels on your body.\n");
                     }
                     outputText("\"Look at you.\" He mocks, \"Putty beneath my touch. A filthy, worthless imp before me.\"\n");
-                    if (player.hasCock){
+                    if (player.hasCock()){
                         outputText("He brings his hand to his mouth as he lathers it in his saliva, coating it thoroughly as he brings it back down to jerk you off slowly. You cry out in pain and pleasure. Your body is being stretched past its limits while your length is being stimulated. You despise every moment of it. You try to beg him to stop, but he ignores your pleas, giving you a sly grin in response.\n" +
                                 "\n" +
                                 "He continues stroking your shaft while his free hand gently strokes your stomach. His soft fur tickles you gently as you squirm again. You can’t help but feel your arousal build up at his ministrations. He gropes at your pecs, you struggle beneath him, wanting to be released from this hell, but he still doesn’t yield.\n" +
@@ -378,7 +378,7 @@ public class Kalji extends TrollVillageAbstractContent{
                                 "\n" +
                                 "\"You’re not getting off that easily…\" He replies tauntingly.\n");
                     }
-                    if (!player.isNaga){ //Uh, not entirely sure how to do a foot check. player.feet/foot?
+                    if (!player.isNaga()){ //Uh, not entirely sure how to do a foot check. player.feet/foot?
                         outputText("His hand sensually roams down your [leg], softly grazing your [skin] as he moves closer to your feet.\n" +
                                 "\n" +
                                 "You shake, stirring in place, desperate to get away from him, but you’re trapped in this hell with him.\n" +
@@ -411,7 +411,7 @@ public class Kalji extends TrollVillageAbstractContent{
                                 "\n" +
                                 "\"So helpless…\" He mumbles, \"So vulnerable…\" He sighs as he prods his toe against your [foot], slowly increasing the pace of his strokes.\n");
                     }
-                    if (player.hasCock){
+                    if (player.hasCock()){
                         outputText("You don’t know why, but your manhood has erected once more, your own body is betraying you. You feel his foot retract from your lips, sliding down your chest. His foot glides down your body, streaking your torso with your saliva before his foot finally reaches your manhood. He slides your girth between his toes.\n" +
                                 "\n" +
                                 "\"Oh, you wish I’d get you off, don’t you?\" He croons, \"Look, the filthy peasant wants a king to get him off! Too bad dirt like you doesn’t deserve to know the pleasures of a proper reward.\"\n" +
