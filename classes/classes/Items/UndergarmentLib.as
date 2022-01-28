@@ -57,7 +57,7 @@ package classes.Items
 		public const STPANTY:Undergarment = new Undergarment("STPanty", "S.T.Panties", "soul training panties", "a pair of soul training panties", TYPE_LOWERWEAR, 200, "A pair of panties made from fabric capable to help train soulforce. \n\nType: Undergarment (Lower)");
 		public const T_PANTY:TechnomancerPanties = new TechnomancerPanties();
 		public const COW_PANTY:Undergarment = new Undergarment("Cow Panty", "Cow Panty", "cow girl panties", "a pair of Cow girl panties", TYPE_LOWERWEAR, 1000, "These panties look like ordinary panty at a first glance save for the cow fur like motif. They increase lacta bovina lactation rate. \n\nType: Undergarment (Lower)");
-		public const DRI_BRA:Undergarment = new DriderPanties();
+		public const DRI_PANTY:Undergarment = new DriderPanties();
 		public function UndergarmentLib() 
 		{
 		}
