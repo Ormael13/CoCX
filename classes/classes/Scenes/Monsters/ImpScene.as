@@ -73,7 +73,8 @@ use namespace CoC;
 			if (maleRape == rapeImpWithDick && player.hasItem(useables.CONDOM)) addButton(5, "Use Condom", rapeImpWithDick, 1);
 			addButton(6, "Kill Him", killImp);
 			if (player.canOvipositBee()) addButton(7, "Oviposit", putBeeEggsInAnImpYouMonster);
-			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+			//if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+			if (uniquuuesexscene.pcCanUseUniqueSexScenev2(true, null) > 0) addButton(13, "U.Sex Scenes", curry(uniquuuesexscene.pcCanUseUniqueSexScenev2, false, [impVictory])).hint("Other non-typical sex scenes.");
 			addButton(14, "Leave", cleanupAfterCombat);
 
 		}
@@ -1656,7 +1657,8 @@ use namespace CoC;
 			}
 			if (player.lust >= 33) {
 				addButton(0, "Sex", sexAnImpLord);
-				if (player.pcCanUseUniqueSexScene()) addButton(14, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+				//if (player.pcCanUseUniqueSexScene()) addButton(14, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+				if (uniquuuesexscene.pcCanUseUniqueSexScenev2(true, null) > 0) addButton(14, "U.Sex Scenes", curry(uniquuuesexscene.pcCanUseUniqueSexScenev2, false, [defeatImpLord])).hint("Other non-typical sex scenes.");
 			} else {
 				outputText("\n\nYou are not aroused enough to rape him.");
 			}

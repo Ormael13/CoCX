@@ -669,7 +669,8 @@ public class CeraphScene extends NPCAwareContent
 				}
 				if (player.hasVagina()) addButton(1, "Ride Her", rideCeraphsCockLikeaBAWSSexclamation11eleven);
 				if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") addButton(3, "B.Titfuck", createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,monster));
-				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+				//if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+				if (uniquuuesexscene.pcCanUseUniqueSexScenev2(true, null) > 0) addButton(13, "U.Sex Scenes", curry(uniquuuesexscene.pcCanUseUniqueSexScenev2, false, [winRapeChoices])).hint("Other non-typical sex scenes.");
 				addButton(14, "Leave", leave);
 				/*
 				 if(player.gender == 1) doYesNo(maleFuckCeraphsPussy,cleanupAfterCombat);

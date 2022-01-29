@@ -201,39 +201,155 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 			EventParser.gameOver();
 		}
 
+		public function pcCanUseUniqueSexScenev2(isChecking:Boolean = false, backFunc:Array = null, page:int = 0):*{
+			var menuItems:Array = [];
+			menuItems.push("Tail Rape", USSTailRape()[0], USSTailRape()[1]);
+			menuItems.push("Tailpeg", USSTailpeg()[0], USSTailpeg()[1]);
+			menuItems.push("Strangle and Rape", USSSnRape()[0], USSSnRape()[1]);
+			menuItems.push("Volt Transfer", USSVoltTsf()[0], USSVoltTsf()[1]);
+			menuItems.push("Heat Transfer", USSHeatTsf()[0], USSHeatTsf()[1]);
+			menuItems.push("Cooldown", USSCooldown()[0], USSCooldown()[1]);
+			menuItems.push("Steal Warmth", USSStlWmth()[0], USSStlWmth()[1]);
+			menuItems.push((player.keyItemv1("Cum Reservoir")?"Cum Reservoir":"Fill the reservoir"), USSGobMech()[0], USSGobMech()[1]);
+			menuItems.push("Brain Melt", USSBrainMlt()[0], USSBrainMlt()[1]);
+			menuItems.push.apply(this,USSAlrauneSS());
+			menuItems.push("EGGS!!", USSEastrBny()[0], USSEastrBny()[1]);
+			menuItems.push("Tentacle Rape!", USSTentRape()[0], USSTentRape()[1]);
+			menuItems.push("Living Dildo", USSLiveDildo()[0], USSLiveDildo()[1]);
+			menuItems.push.apply(this,USSJiangshiDrn());
+			if (backFunc == null) backFunc = [camp.returnToCampUseOneHour];
+			return menuGen(menuItems, page, backFunc[0],false, isChecking);
+
+			function USSTailRape():Array{
+				if (player.tailType == Tail.MANTICORE_PUSSYTAIL && monster.hasCock()) return [manticoreTailRapeScene,""];
+				else return [false,"Req. to have Pussytail and enemy with cock."];
+			}
+			function USSTailpeg():Array{
+				if (player.tailType == Tail.HINEZUMI || player.tailType == Tail.SALAMANDER) {
+					if (monster is Anemone || monster is SeaAnemone || monster is HellHound || monster is InfestedHellhound) return [false, "Req. enemy to have anus."];
+					else return [hinezumiTailpegScene, ""];
+				}
+				else return [false, "Req. to have Hinezumi Tail."];
+			}
+			function USSSnRape():Array{
+				if ((player.gender == 1 || player.gender == 2) && (player.tailType == Tail.HINEZUMI || player.tailType == Tail.MOUSE || player.tailType == Tail.DEMONIC)) return [strangleAndRapeScene, ""];
+				else return[false, "Req. to be male or female with hinezumi, mouse or demon tail."];
+			}
+			function USSVoltTsf():Array{
+				if ((player.raijuScore() >= 10 || player.thunderbirdScore() >= 12) && !monster.hasPerk(PerkLib.EnemyHugeType) && !monster.hasPerk(PerkLib.EnemyGigantType) && !monster.hasPerk(PerkLib.EnemyColossalType) && !monster.isAlraune() && !monster.isDrider() && !monster.isGoo() && !monster.isNaga() && !monster.isScylla() && !monster.isTaur()) return [raijuVoltTransfer, ""];
+				else return[false, "Req. to be Raiju and enemy must be non-gigant humanoid."];
+			}
+			//OverHeat Species (?)
+			function USSHeatTsf():Array{
+				if (player.hasStatusEffect(StatusEffects.Overheat) && !monster.hasPerk(PerkLib.EnemyHugeType) && !monster.hasPerk(PerkLib.EnemyGigantType) && !monster.hasPerk(PerkLib.EnemyColossalType)) return [hinezumiHeatTransferScene, ""];
+				else return [false, "Req. to have Hinezumi Coat, over 50% of max lust, enemy must be humanoid and not giant."];
+			}
+			function USSCooldown():Array{
+				if (player.hasStatusEffect(StatusEffects.Overheat) && monster.hasPerk(PerkLib.IceNature) && player.hasVagina() && monster.hasCock()) return[Cooldown, ""];
+				else return [false, "Req. a cold type creatures with a cock, the overheat perk and a vagina."];
+			}
+			//YukiOnna
+			function USSStlWmth():Array{
+				if (player.yukiOnnaScore() >= 14 && monster.hasCock() && !monster.hasPerk(PerkLib.UniqueNPC) && !monster.hasPerk(PerkLib.EnemyHugeType) && !monster.hasPerk(PerkLib.EnemyGigantType) && !monster.hasPerk(PerkLib.EnemyColossalType) && !monster.isAlraune() && !monster.isDrider() && !monster.isGoo() && !monster.isNaga() && !monster.isScylla() && !monster.isTaur()) return[yukionnaStealWarmthScene, ""];
+				else return [false, "Req. to be Yuki Onna and enemy must be: non-gigant, humanoid, with cock, non-unique npc."];
+			}
+			function USSGobMech():Array{
+				if (player.isInGoblinMech() && player.hasKeyItem("Cum Reservoir") >= 0 && monster.hasCock()) {
+					if (player.keyItemv1("Cum Reservoir") == 4) return [false, "Reservoir is already full. You need to use all this stored cum before you harvest new one."];
+					else return [gobomechFillTheReservoir, ""];
+				}
+				else return [false, "Req. to be in goblin mech, having Cum Reservoir upgrade instaled on it and enemy with cock."];
+			}
+			function USSBrainMlt():Array{
+				if (Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_ISMB) return[brainMelt, ""];
+				else return[false, "Req. to be a mindbreaker."];
+			}
+			function USSAlrauneSS():Array{
+				var temp:Array = [];
+				if (player.isAlraune()) {
+					if (player.isLiliraune()){
+						if (monster.hasCock()) temp.push("Tag Team", TagTeam, "");
+						else temp.push("Tag Team", false, "You need to be two person against a male to use this scene.");
+						if (monster.hasVagina()) temp.push("Triple Girl Fun", TreeWayRapeLiliraune, "");
+						else temp.push("Triple Girl Fun", false, "You need to be two person against a female to use this scene.");
+					}
+					else {
+						if (player.lowerBody == LowerBody.PLANT_FLOWER && monster.hasCock()) temp.push("Get Pollinated", alrauneGetPollinatedScene, "");	//Isn't Alraune supposed to have LowerBody.PLANT_FLOWER to even pass isAlraune?
+						else temp.push("Get Pollinated", false, "Req. to have Alraune lower body and enemy with cock.");
+						if (player.lowerBody == LowerBody.PLANT_FLOWER && monster.hasVagina()) temp.push("Seeding", alrauneSeedingScene, "");
+						else temp.push( "Seeding", false, "Req. to have Alraune lower body and enemy with vagina.");
+					}
+					if (player.isAlraune() && player.cor >= 50 && monster.hasVagina() && !monster.hasPerk(PerkLib.UniqueNPC)) temp.push("Convert", Convert, "");
+					else temp.push("Convert", false, "You need to be a very corrupted alraune against a non unique female character to use this scene.");
+				}
+				else temp.push("Alraune", false, "You need to be an Alraune.");
+				return temp;
+			}
+			//easter bunneh
+			function USSEastrBny():Array{
+				if (player.hasPerk(PerkLib.EasterBunnyBalls) && player.hasCock() && player.ballSize > 3) return[EasterBunnyLayEggsRape, ""];
+				else return[false, "Req. to be a Easter Bunny."];
+			}
+			function USSTentRape():Array{
+				if (monster.hasVagina() && (player.isKraken() || player.isScylla())) return[TentacleRape, ""];
+				else return[false, "You need scylla or kraken tentacles to do this. Only works on female foes."];
+			}
+			function USSLiveDildo():Array{
+				if (player.hasVagina() && (((player.isKraken() || player.lowerBody == LowerBody.HYDRA) && player.tallness*3/2 > monster.tallness) || player.tallness > monster.tallness*2) ) return [HumanDildo, ""];
+				else return[false, "To be way taller then your opponent in order to even use this scene."];
+			}
+			function USSJiangshiDrn():Array{
+				var temp:Array = [];
+				if (player.jiangshiScore() >= 20) {
+					if (monster.hasPerk(PerkLib.EnemyTrueDemon)) {
+						if (monster.hasCock()) temp.push("Drain him", jiangshiDrainHimTrueDemons, "");
+						else temp.push("Drain him", false, "Only male/herm true demon enemies.");
+						if (monster.hasVagina()) temp.push("Drain her", jiangshiDrainHerTrueDemons, "");
+						else temp.push("Drain her", false, "Only female/herm true demon enemies.");
+					}
+					if (monster is Minotaur || monster is MinotaurLord) temp.push("Drain him", jiangshiDrainHimMinotaurs, "");
+					else temp.push("Drain him", false, "Only minotaur enemies.");
+				}
+				else temp.push("Jiangshi", false, "You need to be a Jiangshi.");
+				return temp;
+			}
+		}
+
+
 		public function pcUniqueSexScenesChoiceMenu():void {
-			menu();
-			if (player.tailType == Tail.MANTICORE_PUSSYTAIL && monster.hasCock()) addButton(0, "Tail Rape", manticoreTailRapeScene);
-			else addButtonDisabled(0, "Tail Rape", "Req. to have Pussytail and enemy with cock.");
-			if (player.tailType == Tail.HINEZUMI || player.tailType == Tail.SALAMANDER) {
-				if (monster is Anemone || monster is SeaAnemone || monster is HellHound || monster is InfestedHellhound) addButtonDisabled(1, "Tailpeg", "Req. enemy to have anus.");
-				else addButton(1, "Tailpeg", hinezumiTailpegScene);
-			}
-			else addButtonDisabled(1, "Tailpeg", "Req. to have Hinezumi Tail.");
-			if ((player.gender == 1 || player.gender == 2) && (player.tailType == Tail.HINEZUMI || player.tailType == Tail.MOUSE || player.tailType == Tail.DEMONIC)) addButton(2, "Strangle and rape", strangleAndRapeScene);
-			else addButtonDisabled(2, "Strangle and rape", "Req. to be male or female with hinezumi, mouse or demon tail.");
-			if ((player.raijuScore() >= 10 || player.thunderbirdScore() >= 12) && !monster.hasPerk(PerkLib.EnemyHugeType) && !monster.hasPerk(PerkLib.EnemyGigantType) && !monster.hasPerk(PerkLib.EnemyColossalType) && !monster.isAlraune() && !monster.isDrider() && !monster.isGoo() && !monster.isNaga() && !monster.isScylla() && !monster.isTaur()) addButton(3, "Volt Transfer", raijuVoltTransfer);
-			else addButtonDisabled(3, "Volt Transfer", "Req. to be Raiju and enemy must be non-gigant humanoid.");
+			//menu();
+			//if (player.tailType == Tail.MANTICORE_PUSSYTAIL && monster.hasCock()) addButton(0, "Tail Rape", manticoreTailRapeScene);
+			//else addButtonDisabled(0, "Tail Rape", "Req. to have Pussytail and enemy with cock.");
+			//if (player.tailType == Tail.HINEZUMI || player.tailType == Tail.SALAMANDER) {
+			//	if (monster is Anemone || monster is SeaAnemone || monster is HellHound || monster is InfestedHellhound) addButtonDisabled(1, "Tailpeg", "Req. enemy to have anus.");
+			//	else addButton(1, "Tailpeg", hinezumiTailpegScene);
+			//}
+			//else addButtonDisabled(1, "Tailpeg", "Req. to have Hinezumi Tail.");
+			//if ((player.gender == 1 || player.gender == 2) && (player.tailType == Tail.HINEZUMI || player.tailType == Tail.MOUSE || player.tailType == Tail.DEMONIC)) addButton(2, "Strangle and rape", strangleAndRapeScene);
+			//else addButtonDisabled(2, "Strangle and rape", "Req. to be male or female with hinezumi, mouse or demon tail.");
+			//if ((player.raijuScore() >= 10 || player.thunderbirdScore() >= 12) && !monster.hasPerk(PerkLib.EnemyHugeType) && !monster.hasPerk(PerkLib.EnemyGigantType) && !monster.hasPerk(PerkLib.EnemyColossalType) && !monster.isAlraune() && !monster.isDrider() && !monster.isGoo() && !monster.isNaga() && !monster.isScylla() && !monster.isTaur()) addButton(3, "Volt Transfer", raijuVoltTransfer);
+			//else addButtonDisabled(3, "Volt Transfer", "Req. to be Raiju and enemy must be non-gigant humanoid.");
 			//Overheat fire species
-			if (player.hasStatusEffect(StatusEffects.Overheat) && !monster.hasPerk(PerkLib.EnemyHugeType) && !monster.hasPerk(PerkLib.EnemyGigantType) && !monster.hasPerk(PerkLib.EnemyColossalType)) addButton(4, "Heat transfer", hinezumiHeatTransferScene);
-			else addButtonDisabled(4, "Heat transfer", "Req. to have Hinezumi Coat, over 50% of max lust, enemy must be humanoid and not giant.");
-			if (player.hasStatusEffect(StatusEffects.Overheat) && monster.hasPerk(PerkLib.IceNature) && player.hasVagina() && monster.hasCock()) addButton(5, "Cooldown", Cooldown);
-			addButtonDisabled(5, "Cooldown", "Req. a cold type creatures with a cock, the overheat perk and a vagina.");
+			//if (player.hasStatusEffect(StatusEffects.Overheat) && !monster.hasPerk(PerkLib.EnemyHugeType) && !monster.hasPerk(PerkLib.EnemyGigantType) && !monster.hasPerk(PerkLib.EnemyColossalType)) addButton(4, "Heat transfer", hinezumiHeatTransferScene);
+			//else addButtonDisabled(4, "Heat transfer", "Req. to have Hinezumi Coat, over 50% of max lust, enemy must be humanoid and not giant.");
+			//if (player.hasStatusEffect(StatusEffects.Overheat) && monster.hasPerk(PerkLib.IceNature) && player.hasVagina() && monster.hasCock()) addButton(5, "Cooldown", Cooldown);
+			//addButtonDisabled(5, "Cooldown", "Req. a cold type creatures with a cock, the overheat perk and a vagina.");
 			//Yuki onna
-			if (player.yukiOnnaScore() >= 14 && monster.hasCock() && !monster.hasPerk(PerkLib.UniqueNPC) && !monster.hasPerk(PerkLib.EnemyHugeType) && !monster.hasPerk(PerkLib.EnemyGigantType) && !monster.hasPerk(PerkLib.EnemyColossalType) && !monster.isAlraune() && !monster.isDrider() && !monster.isGoo() && !monster.isNaga() && !monster.isScylla() && !monster.isTaur()) addButton(6, "Steal warmth", yukionnaStealWarmthScene);
-			else addButtonDisabled(6, "Steal warmth", "Req. to be Yuki Onna and enemy must be: non-gigant, humanoid, with cock, non-unique npc.");
-			if (player.isInGoblinMech() && player.hasKeyItem("Cum Reservoir") >= 0 && monster.hasCock()) {
-				if (player.keyItemv1("Cum Reservoir") == 4) addButtonDisabled(7, "Fill the reservoir", "Reservoir is already full. You need to use all this stored cum before you harvest new one.");
-				else addButton(7, "Fill the reservoir", gobomechFillTheReservoir);
-			}
-			else addButtonDisabled(7, "Fill the reservoir", "Req. to be in goblin mech, having Cum Reservoir upgrade instaled on it and enemy with cock.");
-			if (Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_ISMB) addButton(8, "Brain Melt", brainMelt);
-			else addButtonDisabled(8, "Brain Melt", "Req. to be a mindbreaker.");
-			addButton(13, "-2-", pcUniqueSexScenesChoiceMenu2nd).hint("2nd page of options.");
-			addButton(14, "Leave", cleanupAfterCombat);
+			//if (player.yukiOnnaScore() >= 14 && monster.hasCock() && !monster.hasPerk(PerkLib.UniqueNPC) && !monster.hasPerk(PerkLib.EnemyHugeType) && !monster.hasPerk(PerkLib.EnemyGigantType) && !monster.hasPerk(PerkLib.EnemyColossalType) && !monster.isAlraune() && !monster.isDrider() && !monster.isGoo() && !monster.isNaga() && !monster.isScylla() && !monster.isTaur()) addButton(6, "Steal warmth", yukionnaStealWarmthScene);
+			//else addButtonDisabled(6, "Steal warmth", "Req. to be Yuki Onna and enemy must be: non-gigant, humanoid, with cock, non-unique npc.");
+			//if (player.isInGoblinMech() && player.hasKeyItem("Cum Reservoir") >= 0 && monster.hasCock()) {
+			//	if (player.keyItemv1("Cum Reservoir") == 4) addButtonDisabled(7, "Fill the reservoir", "Reservoir is already full. You need to use all this stored cum before you harvest new one.");
+			//	else addButton(7, "Fill the reservoir", gobomechFillTheReservoir);
+			//}
+			//else addButtonDisabled(7, "Fill the reservoir", "Req. to be in goblin mech, having Cum Reservoir upgrade instaled on it and enemy with cock.");
+			//if (Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_ISMB) addButton(8, "Brain Melt", brainMelt);
+			//else addButtonDisabled(8, "Brain Melt", "Req. to be a mindbreaker.");
+			//addButton(13, "-2-", pcUniqueSexScenesChoiceMenu2nd).hint("2nd page of options.");
+			//addButton(14, "Leave", cleanupAfterCombat);
 		}
 		public function pcUniqueSexScenesChoiceMenu2nd():void {
-			menu();
+			//menu();
+			/*
 			if (player.isAlraune()) {
 				if (player.isLiliraune()){
 					if (player.isLiliraune() && monster.hasCock()) addButton(0, "Tag Team", TagTeam);
@@ -249,16 +365,17 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 				}
 				if (player.isAlraune() && player.cor >= 50 && monster.hasVagina() && !monster.hasPerk(PerkLib.UniqueNPC)) addButton(2, "Convert", Convert);
 				else addButtonDisabled(2, "Convert", "You need to be a very corrupted alraune against a non unique female character to use this scene.");
-			}
+			}*/
 			//easter bunny
-			if (player.hasPerk(PerkLib.EasterBunnyBalls) && player.hasCock() && player.ballSize > 3) addButton(3, "EGGS!!", EasterBunnyLayEggsRape);
-			else addButtonDisabled(3, "EGGS!!", "Req. to be a Easter Bunny.");
+			//if (player.hasPerk(PerkLib.EasterBunnyBalls) && player.hasCock() && player.ballSize > 3) addButton(3, "EGGS!!", EasterBunnyLayEggsRape);
+			//else addButtonDisabled(3, "EGGS!!", "Req. to be a Easter Bunny.");
 			//Giantess and tentacle rape
-			if (monster.hasVagina() && (player.isKraken() || player.isScylla())) addButton(4, "Tentacle rape!", TentacleRape);
-			else addButtonDisabled(4, "Tentacle rape!", "You need scylla or kraken tentacles to do this. Only works on female foes.");
-			if (player.hasVagina() && (((player.isKraken() || player.lowerBody == LowerBody.HYDRA) && player.tallness*3/2 > monster.tallness) || player.tallness > monster.tallness*2) ) addButton(5, "Living Dildo", HumanDildo);
-			else addButtonDisabled(5, "Living Dildo", "To be way taller then your opponent in order to even use this scene.");
+			//if (monster.hasVagina() && (player.isKraken() || player.isScylla())) addButton(4, "Tentacle rape!", TentacleRape);
+			//else addButtonDisabled(4, "Tentacle rape!", "You need scylla or kraken tentacles to do this. Only works on female foes.");
+			//if (player.hasVagina() && (((player.isKraken() || player.lowerBody == LowerBody.HYDRA) && player.tallness*3/2 > monster.tallness) || player.tallness > monster.tallness*2) ) addButton(5, "Living Dildo", HumanDildo);
+			//else addButtonDisabled(5, "Living Dildo", "To be way taller then your opponent in order to even use this scene.");
 			//jiangshi
+			/*
 			if (player.jiangshiScore() >= 20) {
 				if (monster.hasPerk(PerkLib.EnemyTrueDemon)) {
 					if (monster.hasCock()) addButton(6, "Drain him", jiangshiDrainHimTrueDemons);
@@ -268,9 +385,9 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 				}
 				if (monster is Minotaur || monster is MinotaurLord) addButton(8, "Drain him", jiangshiDrainHimMinotaurs);
 				else addButtonDisabled(8, "Drain him", "Only minotaur enemies.");
-			}
-			addButton(13, "-1-", pcUniqueSexScenesChoiceMenu).hint("1st page of options.");
-			addButton(14, "Leave", cleanupAfterCombat);
+			}*/
+			//addButton(13, "-1-", pcUniqueSexScenesChoiceMenu).hint("1st page of options.");
+			//addButton(14, "Leave", cleanupAfterCombat);
 		}
 
 		public function manticoreTailRapeScene():void {

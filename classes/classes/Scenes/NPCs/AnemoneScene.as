@@ -184,7 +184,8 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 				var bikiniTits:Function =null;
 				var temp3:Function =null;
 				if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) bikiniTits = (player.armor as LustyMaidensArmor).lustyMaidenPaizuri;
-				if (player.pcCanUseUniqueSexScene()) temp3 = uniquuuesexscene.pcUniqueSexScenesChoiceMenu;
+				//if (player.pcCanUseUniqueSexScene()) temp3 = uniquuuesexscene.pcUniqueSexScenesChoiceMenu;
+				if (uniquuuesexscene.pcCanUseUniqueSexScenev2(true, null) > 0) temp3 = uniquuuesexscene.pcCanUseUniqueSexScenev2(false, [defeatAnemone]).hint("Other non-typical sex scenes.");
 				choices("Your Ass", victoryButtholeRape, "Your Cock", cockRape, "Your Vagina", vaginaRape, "Her Butt", anal, "Lay Egg", eggs,
 					"", null, "", null, "B.Titfuck", bikiniTits, "U. Sex Scenes", temp3, "Leave", cleanupAfterCombat);
 			}

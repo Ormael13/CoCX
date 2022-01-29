@@ -519,7 +519,8 @@ public class FetishCultistScene extends AbstractLakeContent
 				addButton(0, "Yes", playerRapesCultist);
 				if (player.hasStatusEffect(StatusEffects.Feeder)) addButton(2, "B.Feed", fetishCultistHasAMilkFetish).hint("Empty your heavy jugs.");
 				if (Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_ISMB) addButton(3, "Mindbreak", mindbreakFemaleCultist).hint("Toy with the cultist brain.");
-				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+				if (uniquuuesexscene.pcCanUseUniqueSexScenev2(true, null) > 0) addButton(13, "U.Sex Scenes", curry(uniquuuesexscene.pcCanUseUniqueSexScenev2, false, [cultistDefeated])).hint("Other non-typical sex scenes.");
+				//if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 				addButton(14, "Leave", cleanupAfterCombat);
 			}
 			else cleanupAfterCombat();
