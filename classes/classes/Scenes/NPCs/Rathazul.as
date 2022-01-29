@@ -1,7 +1,7 @@
 ﻿package classes.Scenes.NPCs{
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-
+import classes.internal.SaveableState;
 public class Rathazul extends NPCAwareContent implements TimeAwareInterface {
 
 //const RATHAZUL_DEBIMBO_OFFERED:int = 744;
@@ -366,7 +366,26 @@ private function rathazulPurifyIncubiDraft():void {
 	statScreenRefresh();
 	player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
 }
+//For Belisa's Tooth Quest
+public function BelisaRalthazulTalk():void {
+outputText("Hoping your trusty alchemist friend can make Belisa's smile whole again, You ask Ralthazul about curing a cursed injury. “Oh? Cursed injury, you say?” He ponders for a second. “What sort of injury, and what kind of curse?” \n\n"); 
+outputText("You explain Belisa’s plight, and he nods thoughtfully, hand on his chin. “Well…As a matter of fact, there might be a way I can help, young one.” He brings you over to his beakers excitedly. “You see, Succubus magic tends to draw upon corruption, and long-term curses…well, they’re niggly little bits of magic.” He shakes his head. “If the Succubus in question was a practiced hexmage, they’ll know how to get around this…But if they weren’t…” He gives you a wry little grin. “Standard curses of that nature draw upon corruption, if not from the individual, than from the environment around them.” He rummages around, producing a purity philter. “However, this little mixture here can cut the curse off from the environment, if you cover the wound in it, starving it out.” \n\n"); 
+outputText("You begin to get excited. Belisa is pure. Perhaps too pure. You know her body won’t give this magic any fuel.  \n\n"); 
+outputText("“But…I’ll need other ingredients to cure the actual injury. Unless we also heal the injury, the curse will just return once it absorbs enough corrupted energy.” He nods. “I can do it. I’ll need a shark’s tooth from the lake, one of my purity philter and one vitality tincture.”  \n\n"); 
+(BelisaFollower.BelisaRalthTalked= True);
+doNext(camp.returnToCampUseOneHour);
+}
 
+private function RathazulMakesToothCursePotion():void {
+	clearOutput();
+	player.destroyItems(consumables.SHARK_T, 1);
+	player.destroyItems(consumables.PPHILTR, 1);
+	player.destroyItems(consumables.VITAL_T, 1);
+	outputText("You run over to Ralthazul, showing him the ingredients you’ve obtained in your adventures. “Alright, that should do it. Give me just a moment please.” The wizened alchemist grinds up the teeth, and begins to mix the ingredients together. You take a small stroll around the camp to let him work, and within fifteen short minutes, Ralthazul comes to you, a smile on his old face. \n\n"); 
+	outputText("“Remember, you must completely submerge the injury in the mixture. And it needs some time to work.” He blinks, remembering something. “Oh, and this will hurt, in all probability. Most curses don’t go easily, and the mouth is rather sensitive.” He passes you a small vial of a silver-white liquid, with streaks of red running through it. “An hour, at least. Depending on the curse’s power. \n\n"); 
+	(BelisaFollower.BelisaRalthPotionGet = true);
+	doNext(camp.returnToCampUseOneHour);
+}
 //For Minerva purification.
 public function purificationByRathazulBegin():void {
 	outputText("Hoping the rodent-morph alchemist can assist you, you waste no time in approaching him. Rathazul looks up when he sees you, raising an eye curiously. \"<i>Is something the matter, [name]?</i>\"");
