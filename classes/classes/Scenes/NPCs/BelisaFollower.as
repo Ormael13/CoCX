@@ -462,7 +462,7 @@ public class BelisaScene extends NPCAwareContent implements TimeAwareInterface i
 		outputText("<i>“Oh...You want to buy something?”</i> Belisa blinks her two large eyes, somewhat surprised. <i>“I-I mean, sure. I’m not sure what you want, but…I have some things for sale, if you want them”.</i> The little Drider-girl runs to her silk orb, and comes back with a number of boxes attached to her Drider half. <i>“I have silk for sale. It’s raw, but someone could make it into armor for you...I also have...Underwear”.</i> She blushes a little at that. <i>\"There's also these bands I've been working on and enchanting. They really could be useful to an adventurer like you!\"</i> \n\n"); 
 		menu();
 		var button:int = 0; 
-		addButton(button++, );
+		addButton(button++, Usable.T_SSILK.shortName, confirmBuy, Usable.T_SSILK);
 		addButton(button++, Undergarments.DRI_PANTY.shortName, confirmBuy, Undergarments.DRI_PANTY);
 		addButton(button++, Undergarments.DRI_BRA.shortName, confirmBuy, Undergarments.DRI_BRA);
 		//addButton(button++, "Bands", BuyHolyBands);
