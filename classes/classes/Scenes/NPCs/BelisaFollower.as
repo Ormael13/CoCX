@@ -98,7 +98,7 @@ public class BelisaScene extends NPCAwareContent implements TimeAwareInterface i
 		outputText("You stride through the swamp. It seems to be quieter than normal. You think you hear the telltale hissing of a Drider, but nothing pops out at you. You check your feet, but there’s no web traps around you. Still, you’re in drider territory, and you put your back to a willow tree, holding your [weapon] ready.\n\n"); 
 		outputText("<i>“No!\”</i> A curious brown and white blur flits between the trees, followed closely by several familiar, shiny black carapaces. <i>\“Leave me alone!\”</i> The voice is high-pitched and panicked. As it comes closer, you’re able to make more of her out. Like the driders, she has eight spider legs. Hers appear longer, but also much thinner. A pale, white fluid leaks from her ovipositor. \n\n");
 		outputText("<i>“Oh, don’t be like that, precious,”<i> one of the driders replies, still chasing the brown. Her red eyes glow with sadistic glee. <i>“We’re just gonna take you home with us. Won’t it be nice?”<i>\n\n");
-		outputText("<i>“Oh, yes\”.</i> The second drider is more masculine, with a deeper voice and longer stride. <i>“Stay with us, it will be wonderf-”<i> He gasps. <i>“Don’t let her get to the water!”<i> \n\n");
+		outputText("<i>“Oh, yes\”.</i> The second drider is more masculine, with a deeper voice and longer stride. <i>“Stay with us, it will be wonderf-”</i> He gasps. <i>“Don’t let her get to the water!”</i> \n\n");
 		outputText("She jumps, almost directly over you. As she flies, you can see most of the way up her robe. Unlike her fellow driders, she seems to be wearing undergarments, and she doesn’t notice you until you’ve seen her underwear. She gasps, face turning red, before she hits the water, folding her lower body up and sinking like a rock into the murky water. The last thing you notice before she sinks below your visual range is her hat, inflated like a balloon. Her legs flail, and she vanishes, apparently swimming away under the water.\n\n");
 		outputText("The two driders hiss, their toy lost, but they quickly catch sight of you.\n\n");
 		outputText("<i>“I’ll find her”,</i> the second one growls, leaving the first. She turns to you with a sadistic grin.\n\n");
@@ -133,21 +133,21 @@ public class BelisaScene extends NPCAwareContent implements TimeAwareInterface i
 		
 		public function secondEncounterYesDemons():void {
 		outputText("You puff out your chest, exclaiming that you are the champion of Ignam, and you were sent to rid the world of demons and corruption. At your exclamation, her brown eyes narrow. \n\n"); 
-		outputText("<i>“...Many have tried, ‘champion’”.<i> She picks at the left side of her mouth, then catches you looking, hiding her face behind her oversized hat. <i>“If you’re looking for demons, you won’t find any here, so just go away please.”<i>\n\n"); 
+		outputText("<i>“...Many have tried, ‘champion’”.</i> She picks at the left side of her mouth, then catches you looking, hiding her face behind her oversized hat. <i>“If you’re looking for demons, you won’t find any here, so just go away please.”</i>\n\n"); 
 		menu();
 		addButton (1, "Leave", secondEncounterLeaveAlone);
 		addButton (2, "Nah", secondEncounterNahFight);
 		}
 		
 		public function secondEncounterYesCuriosity():void {
-		outputText("You tell the girl that you just wanted to know what this giant ball in the lake was. She sighs. <i>“I made this. It’s my home.\"<i> She pouts a little, crossing her arms. <i>“Now can you please let me be?”<i> \n\n"); 
+		outputText("You tell the girl that you just wanted to know what this giant ball in the lake was. She sighs. <i>“I made this. It’s my home.\"</i> She pouts a little, crossing her arms. <i>“Now can you please let me be?”</i> \n\n"); 
 		menu();
 		addButton (1, "Leave", secondEncounterLeaveAlone);
 		addButton (2, "Nah", secondEncounterNahFight);
 		}
 		
 		public function secondEncounterYesFishing():void {
-		outputtext("You tell her that you were just out on the lake to catch some fish. At this, she sighs. The sphere wriggles, and a dead fish, head pierced with some kind of needle, is thrown into your boat. <i>“There, you have a fish.”<i> Her voice quivers, and she points towards the shore. <i>“Now please... just leave me alone.”<i> \n\n"); 
+		outputtext("You tell her that you were just out on the lake to catch some fish. At this, she sighs. The sphere wriggles, and a dead fish, head pierced with some kind of needle, is thrown into your boat. <i>“There, you have a fish.”</i> Her voice quivers, and she points towards the shore. <i>“Now please... just leave me alone.”</i> \n\n"); 
 		menu();
 		addButton (1, "Leave", secondEncounterLeaveAlone);
 		addButton (2, "Nah", secondEncounterNahFight);
@@ -235,7 +235,7 @@ public class BelisaScene extends NPCAwareContent implements TimeAwareInterface i
 		
 		public function BelisaTalk():void {
 		clearoutput();
-		outputText("<i>\“You...Just want to...talk?”<i> She looks at you, confused, as if the thought hadn’t even occurred to her. <i>\“You...Don’t want to…?\”</i> She rolls her eyes, making a ‘jerk-off’ motion with one hand. You tell her that you have no intention of approaching her sexually right now, and she relaxes a little, smiling. <i>\“Okay then...What do you want to talk about?”</i>  \n\n"); 
+		outputText("<i>\“You...Just want to...talk?”</i> She looks at you, confused, as if the thought hadn’t even occurred to her. <i>\“You...Don’t want to…?\”</i> She rolls her eyes, making a ‘jerk-off’ motion with one hand. You tell her that you have no intention of approaching her sexually right now, and she relaxes a little, smiling. <i>\“Okay then...What do you want to talk about?”</i>  \n\n"); 
 		menu();
 		addButton (1, "Yourself", BelisaTalkYou);
 		addButton (2, "Home", BelisaTalkHome);
@@ -250,25 +250,25 @@ public class BelisaScene extends NPCAwareContent implements TimeAwareInterface i
 		
 		public function BelisaTalkYou():void {
 		clearoutput();
-		outputText("<i>“Oh? You want to talk about yourself?”<i> Belisa brings a hand to her mouth, a smirk on her face. <i>“How very arrogant.”<i> You raise one eyebrow, and she chuckles, the smirk fading from her face. <i>“I’m kidding, [name]. I’d love to hear about your adventures.”<i> You talk about the various demons you’ve faced, Zetaz and the portal, and even some stories from your childhood in Ignam. Belisa is a great listener. She laughs when you tell a joke, or when the story turns serious, asks questions, and listens with rapt attention when you talk about the other people you’ve met along your travels.  \n\n");
+		outputText("<i>“Oh? You want to talk about yourself?”<i> Belisa brings a hand to her mouth, a smirk on her face. <i>“How very arrogant.”</i> You raise one eyebrow, and she chuckles, the smirk fading from her face. <i>“I’m kidding, [name]. I’d love to hear about your adventures.”</i> You talk about the various demons you’ve faced, Zetaz and the portal, and even some stories from your childhood in Ignam. Belisa is a great listener. She laughs when you tell a joke, or when the story turns serious, asks questions, and listens with rapt attention when you talk about the other people you’ve met along your travels.  \n\n");
 		if (BelisaToldTyrantia = false) | (TyraniaIsRemovedFromThewGame = false)
-		outputText("You talk about the battlefield, and about a giant Drider you met there. Belisa leans forward, her eyes wide. <i>“Wait...You said a giant Drider? Was she corrupted?”<i> You tell her, reluctantly, that yes, the Drider giantess oozes corruption from her very being. Despite this, she seemed to be a decent person, and never tried anything with you. This gets Belisa’s interest, and she looks down. <i>“...What is her name, did you get it?”<i> \n\n");
+		outputText("You talk about the battlefield, and about a giant Drider you met there. Belisa leans forward, her eyes wide. <i>“Wait...You said a giant Drider? Was she corrupted?”<i> You tell her, reluctantly, that yes, the Drider giantess oozes corruption from her very being. Despite this, she seemed to be a decent person, and never tried anything with you. This gets Belisa’s interest, and she looks down. <i>“...What is her name, did you get it?”</i> \n\n");
 		menu();
 		addButton (1, "yes", BelisaTalkAbsisters);
 		addButton (2, "no", BelisaTalkYouEnd);
 		}
 		
 		public function BelisaTalkAbsisters(); void {
-			outputText("You tell her Tyrantia’s name, and the youthful Drider in front of you freezes in place, her human eyes wide and her arms frozen in midair. “Did...Did you say...Tyrantia?” She looks on the verge of tears, and you instinctively put a hand on the desolate spider-girl’s shoulder.  \n\n"); 
-			outputText("“...I didn’t tell you, [name], but...I have...had two pod-mates. Most races refer to them as ‘siblings’. In my case, I had two sisters. One named Lily...and the other…” She looks at you with tears in her eyes. “Her name’s Tyrantia. Both my sisters were captured by demons...and you’re telling me that she’s alive?” You nod, and she jumps at you, hugging your upper body with surprising strength. \n\n"); 
-			outputText("“...Thank you, [name]. If she’s as corrupt as you say...then perhaps it’s best I keep my distance for now...But knowing she’s alive brings joy to my heart. Thank you.” You excuse yourself, extracting yourself from Belisa’s embrace and heading back to camp. You can feel her eyes on your back as you walk away. \n\n"); 
+			outputText("You tell her Tyrantia’s name, and the youthful Drider in front of you freezes in place, her human eyes wide and her arms frozen in midair. <i>“Did...Did you say...Tyrantia?”</i> She looks on the verge of tears, and you instinctively put a hand on the desolate spider-girl’s shoulder.  \n\n"); 
+			outputText("<i>“...I didn’t tell you, [name], but...I have...had two pod-mates. Most races refer to them as ‘siblings’. In my case, I had two sisters. One named Lily...and the other…”</i> She looks at you with tears in her eyes. <i>“Her name’s Tyrantia. Both my sisters were captured by demons...and you’re telling me that she’s alive?”</i> You nod, and she jumps at you, hugging your upper body with surprising strength. \n\n"); 
+			outputText("<i>“...Thank you, [name]. If she’s as corrupt as you say...then perhaps it’s best I keep my distance for now...But knowing she’s alive brings joy to my heart. Thank you.”</i> You excuse yourself, extracting yourself from Belisa’s embrace and heading back to camp. You can feel her eyes on your back as you walk away. \n\n"); 
 			BelisaAffectionMeter(10)
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		public function BelisaTalkYouEnd():void {
 		clearoutput();
-		outputText("You tell Belisa that you didn’t catch her name, and that her speed, strength and corruption makes her a dangerous foe, even for you. She nods in understanding, but there’s a clear look of disappointment on her face. “Thank you for sharing your experiences with me.” You politely excuse yourself, heading back to camp.  \n\n"); 
+		outputText("You tell Belisa that you didn’t catch her name, and that her speed, strength and corruption makes her a dangerous foe, even for you. She nods in understanding, but there’s a clear look of disappointment on her face. <i>“Thank you for sharing your experiences with me.”</i> You politely excuse yourself, heading back to camp.  \n\n"); 
 		BelisaAffectionMeter(5);
 		doNext(camp.returnToCampUseOneHour);
 		}
@@ -284,7 +284,7 @@ public class BelisaScene extends NPCAwareContent implements TimeAwareInterface i
 		
 		public function BelisaTalkHer():void {
 		clearoutput();
-		outputText("“You want to learn about...Me?” Her back legs skitter about, and she seems to have trouble meeting your gaze. “That depends...What do you want to know?”  \n\n"); 
+		outputText("<i>“You want to learn about...Me?”</i> Her back legs skitter about, and she seems to have trouble meeting your gaze. <i>“That depends...What do you want to know?”</i>  \n\n"); 
 		menu();
 		addButton (1, "Family", BelisaTalkHerFamily);
 		addButton (2, "NoHerm?", BelisaTalkHerNoherm);
@@ -298,7 +298,7 @@ public class BelisaScene extends NPCAwareContent implements TimeAwareInterface i
 		
 		public function BelisaTalkHerNoherm():void {
 		clearoutput();
-		outputText("She gives you a level glare. “No, I’m not a herm. Herms weren’t even a thing really until the demons...came…” She looks down at the water. “...I’m sorry, but can you leave please? It’s a touchy subject, and I…”  \n\n");
+		outputText("She gives you a level glare. <i>“No, I’m not a herm. Herms weren’t even a thing really until the demons...came…”</i> She looks down at the water. <i>“...I’m sorry, but can you leave please? It’s a touchy subject, and I…”</i>  \n\n");
 		menu();
 		addButton (1, "Comfort", BelisaTalkHerNohermComfort);
 		addButton (2, "Leave", BelisaTalkHerNohermLeave);
@@ -308,11 +308,12 @@ public class BelisaScene extends NPCAwareContent implements TimeAwareInterface i
 		public function BelisaTalkHerNohermComfort():void {
 		clearoutput();
 		if (BelisaAffectionMeter < 15()) {
-		outputText("She pushes you back, now a bit more annoyed than before. “Look...I’m trying to be nice, but you brought up a touchy subject. So please, before I lose...My composure…” You turn and walk away, but you hear her crying as you leave, little “Tk-tk-tk” noises occasionally coming with the sobs.  \n\n"); 
+		outputText("She pushes you back, now a bit more annoyed than before. <i>“Look...I’m trying to be nice, but you brought up a touchy subject. So please, before I lose...My composure…”</i> You turn and walk away, but you hear her crying as you leave, little <i>“Tk-tk-tk”</i> noises occasionally coming with the sobs.  \n\n"); 
 		doNext(camp.returnToCampUseOneHour);
 		else {
-		outputText("You wrap your [arms] all the way around Belisa’s upper body, and she leans into you slightly. She returns the embrace for a second. “Sorry about that.” She wipes the tears from her face. “It’s been a while, but...Sometimes they still make me sad, just talking about those disgusting things that used to be my people.” She gently pulls back from your embrace. “Can we talk about something else?”  \n\n"); 	
-			}
+		outputText("You wrap your [arms] all the way around Belisa’s upper body, and she leans into you slightly. She returns the embrace for a second. <i>“Sorry about that.”</i> She wipes the tears from her face. <i>“It’s been a while, but...Sometimes they still make me sad, just talking about those disgusting things that used to be my people.”</i> She gently pulls back from your embrace. <i>“Can we talk about something else?”</i>  \n\n"); 	
+		BelisaTalk;
+		}
 		}
 
 		
