@@ -96,7 +96,7 @@ use namespace CoC;
 			var bikiniTits:Function =null;
 			if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) bikiniTits = (player.armor as LustyMaidensArmor).lustyMaidenPaizuri;
 			var temp3:Function =null;
-			if (player.pcCanUseUniqueSexScene()) temp3 = uniquuuesexscene.pcUniqueSexScenesChoiceMenu;
+			if (player.pcCanUseUniqueSexScene()) temp3 = curry(uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 039);
 			if (player.hasVagina() && player.lust >= 33) {
 				rideCock = winVSDriderTakeItsCockInCunt;
 				rideOvi = victoryVSDriderRideOviVaginal;

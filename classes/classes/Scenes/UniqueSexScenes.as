@@ -201,7 +201,7 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 			EventParser.gameOver();
 		}
 
-		public function pcUniqueSexScenesChoiceMenu():void {
+		public function pcUniqueSexScenesChoiceMenu(re:Number):void {
 			menu();
 			if (player.tailType == Tail.MANTICORE_PUSSYTAIL && monster.hasCock()) addButton(0, "Tail Rape", manticoreTailRapeScene);
 			else addButtonDisabled(0, "Tail Rape", "Req. to have Pussytail and enemy with cock.");
@@ -230,9 +230,9 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 			if (Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_ISMB) addButton(8, "Brain Melt", brainMelt);
 			else addButtonDisabled(8, "Brain Melt", "Req. to be a mindbreaker.");
 			addButton(13, "-2-", pcUniqueSexScenesChoiceMenu2nd).hint("2nd page of options.");
-			addButton(14, "Leave", cleanupAfterCombat);
+			addButton(14, "Back", pcUniqueSexScenesChoiceMenuBack, re);
 		}
-		public function pcUniqueSexScenesChoiceMenu2nd():void {
+		public function pcUniqueSexScenesChoiceMenu2nd(re:Number):void {
 			menu();
 			if (player.isAlraune()) {
 				if (player.isLiliraune()){
@@ -256,7 +256,7 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 			//Giantess and tentacle rape
 			if (monster.hasVagina() && (player.isKraken() || player.isScylla())) addButton(4, "Tentacle rape!", TentacleRape);
 			else addButtonDisabled(4, "Tentacle rape!", "You need scylla or kraken tentacles to do this. Only works on female foes.");
-			if (player.hasVagina() && (((player.isKraken() || player.lowerBody == LowerBody.HYDRA) && player.tallness*3/2 > monster.tallness) || player.tallness > monster.tallness*2) ) addButton(5, "Living Dildo", HumanDildo);
+			if (player.hasVagina() && (((player.isKraken() || player.lowerBody == LowerBody.HYDRA) && player.tallness*3/2 > monster.tallness) || player.tallness > monster.tallness*2)) addButton(5, "Living Dildo", HumanDildo);
 			else addButtonDisabled(5, "Living Dildo", "To be way taller then your opponent in order to even use this scene.");
 			//jiangshi
 			if (player.jiangshiScore() >= 20) {
@@ -270,7 +270,70 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 				else addButtonDisabled(8, "Drain him", "Only minotaur enemies.");
 			}
 			addButton(13, "-1-", pcUniqueSexScenesChoiceMenu).hint("1st page of options.");
-			addButton(14, "Leave", cleanupAfterCombat);
+			addButton(14, "Back", pcUniqueSexScenesChoiceMenuBack, re);
+		}
+		public function pcUniqueSexScenesChoiceMenuBack(re:Number):void {
+			if (re == 001) SceneLib.ashlands.hellcatScene.DefeatedHellCat();
+			if (re == 002) SceneLib.defiledravine.TrueDemons.defeatMinoIncubus();
+			if (re == 003) SceneLib.defiledravine.TrueDemons.defeatIncubus();
+			if (re == 004) SceneLib.defiledravine.TrueDemons.defeatOmnibus();
+			if (re == 005) SceneLib.defiledravine.TrueDemons.defeatCowSuccubus();
+			if (re == 006) SceneLib.defiledravine.TrueDemons.defeatSuccubus();
+			if (re == 007) SceneLib.bog.chameleonGirlScene.defeatChameleonGirl();
+			if (re == 008) SceneLib.bog.lizanScene.winAgainstLizan();
+			if (re == 009) SceneLib.bog.phoukaScene.phoukaPlayerWins2();
+			if (re == 010) SceneLib.caves.cavewyrmScene.winningOverCaveWyrm();
+			if (re == 011) SceneLib.forest.akbalScene.akbalDefeated2();
+			if (re == 012) SceneLib.desert.sandTrapScene.pcBeatsATrap2();
+			if (re == 013) SceneLib.desert.nagaScene.nagaRapeChoice();
+			if (re == 014) SceneLib.desert.sandWitchScene.beatSandwitch2();
+			if (re == 015) SceneLib.forest.beeGirlScene.afterfightoptionswithBeeGirl();
+			if (re == 016) SceneLib.forest.kitsuneScene.defeatTheKitsunes();
+			if (re == 017) SceneLib.forest.tamaniScene.TamaniDefeated2();
+			if (re == 018) SceneLib.glacialRift.giantScene.winAgainstGiant();
+			if (re == 019) SceneLib.glacialRift.giantScene.winAgainstYoungGiant();
+			if (re == 020) SceneLib.glacialRift.winterwolfScene.winAgainstWinterWolf();
+			if (re == 021) SceneLib.glacialRift.yetiScene.winAgainstYeti();
+			if (re == 022) SceneLib.highMountains.basiliskScene.defeatBasilisk();
+			if (re == 023) SceneLib.highMountains.harpyScene.harpyVictoryuuuuu();
+			if (re == 024) SceneLib.highMountains.izumiScenes.touchThatFluffyHorn2();
+			if (re == 025) SceneLib.highMountains.minotaurMobScene.victoryMinotaurGang2();
+			if (re == 026) SceneLib.highMountains.phoenixScene.winAgainstPhoenix();
+			if (re == 027) SceneLib.highMountains.phoenixScene.winAgainstPhoenix1();
+			if (re == 028) SceneLib.lake.fetishCultistScene.cultistDefeated();
+			if (re == 029) SceneLib.lake.fetishZealotScene.zealotDefeated();
+			if (re == 030) SceneLib.lake.gooGirlScene.beatUpGoo();
+			if (re == 031) SceneLib.lake.greenSlimeScene.defeatGS();
+			if (re == 032) SceneLib.mountain.hellHoundScene.hellHoundPostFightSexScenes();
+			if (re == 033) SceneLib.mountain.minotaurScene.minoVictoryRapeChoices();
+			if (re == 034) SceneLib.ocean.scyllaScene.oceanScyllaWin();
+			if (re == 035) SceneLib.plains.bunnyGirl.rapeBunBun2();
+			if (re == 036) SceneLib.plains.gnollScene.defeatHyena();
+			if (re == 037) SceneLib.plains.gnollSpearThrowerScene.hyenaVictory();
+			if (re == 038) SceneLib.plains.satyrScene.defeatASatyr2();
+			if (re == 039) SceneLib.swamp.corruptedDriderScene.defeatDriderIntro();
+			if (re == 040) SceneLib.swamp.femaleSpiderMorphScene.defeatASpiderBitch();
+			if (re == 041) SceneLib.swamp.maleSpiderMorphScene.defeatSpiderBoy();
+			if (re == 042) SceneLib.tundra.valkyrieScene.winAgainstValkyrie();
+			if (re == 043) SceneLib.volcanicCrag.behemothScene.winAgainstBehemoth();
+			if (re == 044) SceneLib.dungeons.desertcave.cumWitchDefeated();
+			if (re == 045) SceneLib.goblinAssassinScene.gobboAssassinRapeIntro();
+			if (re == 046) SceneLib.goblinElderScene.goblinElderRapeIntro2();
+			if (re == 047) SceneLib.goblinScene.gobboRapeIntro();
+			if (re == 048) SceneLib.goblinShamanScene.goblinShamanRapeIntro();
+			if (re == 049) SceneLib.goblinWarriorScene.goblinWarriorRapeIntro();
+			if (re == 050) SceneLib.impScene.impVictory();
+			if (re == 051) SceneLib.impScene.defeatImpLord();
+			if (re == 052) SceneLib.anemoneScene.defeatAnemone();
+			if (re == 053) SceneLib.ceraphScene.winRapeChoices();
+			if (re == 054) SceneLib.electraScene.PlayerSexElectra();
+			if (re == 055) SceneLib.etnaScene.etnaRapeIntro();
+			if (re == 056) SceneLib.etnaScene.etnaRape3rdWin();
+			if (re == 057) SceneLib.tedScene.defeatedTedPostHiddenCave();
+			if (re == 058) SceneLib.sharkgirlScene.sharkWinChoices2();
+			if (re == 059) SceneLib.sharkgirlScene.oceanSharkWinChoices();
+			if (re == 060) SceneLib.sharkgirlScene.oceanTigerSharkWinChoices();
+			if (re == 061) SceneLib.sharkgirlScene.oceanSharkspackWinChoices();
 		}
 
 		public function manticoreTailRapeScene():void {

@@ -1,6 +1,7 @@
 ﻿package classes.Scenes.Areas.Lake{
 	import classes.*;
 	import classes.GlobalFlags.*;
+	import classes.Scenes.UniqueSexScenes;
 
 	public class GreenSlimeScene extends AbstractLakeContent{
 //serviceLowCorruption();
@@ -10,6 +11,28 @@
 //oozeButtRapesYou();
 //oozeRapesYouOrally();
 //oozeRapesYouVaginally();
+public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
+public function defeatGS():void {
+	menu();
+	//Boobfeed.
+	if (player.hasStatusEffect(StatusEffects.Feeder) && flags[kFLAGS.SFW_MODE] <= 0) {
+		//Eligable to rape
+		if(player.lust >= 33 && player.gender > 0) {
+			outputText("\n\nYou're horny enough to try and rape it, though you'd rather see how much milk you can squirt into it.  What do you do?");
+			simpleChoices("B.Feed",rapeOozeWithMilk,"Rape",slimeVictoryRape,"",null,"U. Sex Scenes",curry(uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 031),"Leave",cleanupAfterCombat);
+		}
+		//Rapes not on the table.
+		else {
+			outputText("\n\nYour nipples ache with the desire to forcibly breastfeed the gelatinous beast.  Do you?");
+			EngineCore.doYesNo(rapeOozeWithMilk,cleanupAfterCombat);
+		}
+	}
+	//Not a breastfeeder
+	else if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
+		outputText("  Sadly you realize your own needs have not been met.  Of course, you could always play with the poor thing... Do you rape it?");
+		simpleChoices("Rape",slimeVictoryRape,"",null,"",null,"U. Sex Scenes",curry(uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 031),"Leave",cleanupAfterCombat);
+	}
+}
 
 private function serviceLowCorruption():void
 {

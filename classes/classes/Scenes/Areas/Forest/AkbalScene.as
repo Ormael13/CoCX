@@ -112,13 +112,43 @@ public class AkbalScene extends BaseContent
 						bikiniTits = (player.armor as LustyMaidensArmor).lustyMaidenPaizuri;
 						addButton(3, "B.Titfuck", bikiniTits);
 					}
-					if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+					if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 011).hint("Other non typical sex scenes.");
 					//Rape / Don't Rape
 					//EngineCore.simpleChoices("Butt-fuck", buttFuck, "Take Vaginally", vagoo, "Force Lick", vagooLick, "B.Titfuck", bikiniTits, );
 					return;
 				}
 			}
 			cleanupAfterCombat();
+		}
+		public function akbalDefeated2():void {
+			menu();
+			addButton(14, "Leave", cleanupAfterCombat);
+			if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
+				outputText("You walk around Akbal's beaten and lust crazed form with a smile on your face. The demon's growl continues as he awaits your judgment.");
+				outputText("\n\nDo you rape him?");
+				var vagoo:Function =null;
+				var vagooLick:Function =null;
+				var buttFuck:Function =null;
+				var bikiniTits:Function =null;
+				if (player.hasCock()) {
+					buttFuck = rapeAkbal;
+				addButton(0, "Butt-fuck", buttFuck);
+				}
+				if (player.hasVagina()) {
+					vagoo = girlsRapeAkbal;
+					vagooLick = rapeAkbalForcedFemaleOral;
+					addButton(1, "Take Vaginally", vagoo);
+					addButton(2, "Force Lick", vagooLick);
+			}
+				if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) {
+					bikiniTits = (player.armor as LustyMaidensArmor).lustyMaidenPaizuri;
+					addButton(3, "B.Titfuck", bikiniTits);
+				}
+				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 011).hint("Other non typical sex scenes.");
+				//Rape / Don't Rape
+			//EngineCore.simpleChoices("Butt-fuck", buttFuck, "Take Vaginally", vagoo, "Force Lick", vagooLick, "B.Titfuck", bikiniTits, );
+				return;
+			}
 		}
 
 		public function akbalWon(hpVictory:Boolean,pcCameWorms:Boolean):void{

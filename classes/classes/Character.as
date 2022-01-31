@@ -766,6 +766,10 @@ import classes.CoC;
 			max += level * maxSfPerLevelStat.value;
 			if (level <= 6) max += level * 5;
 			if (game.player.alicornScore() >= 12) multimax += 0.2;
+			if (game.player.angelScore() >= 5) multimax += 0.5;
+			if (game.player.angelScore() >= 11) multimax += 1;
+			if (game.player.demonScore() >= 5) multimax -= 0.4;
+			if (game.player.demonScore() >= 11) multimax -= 0.8;
 			if (game.player.kitsuneScore() >= 5) multimax += 0.1;
 			if (game.player.kitsuneScore() >= 9 && game.player.tailType == 13 && game.player.tailCount >= 2) {
 				multimax += 0.1;
@@ -814,6 +818,7 @@ import classes.CoC;
 			}
 			max *= multimax;
 			max = Math.round(max);
+			if (game.player.demonScore() >= 16 && hasPerk(PerkLib.Phylactery)) max = 0;
 			if (max > 1499999) max = 1499999;
 			return max;
 		}
@@ -840,6 +845,11 @@ import classes.CoC;
 			if (level <= 6) max += level * 5;
 			else max += 30;
 			//~194,455
+			if (game.player.angelScore() >= 5) multimax += 0.2;
+			if (game.player.angelScore() >= 11) multimax += 0.4;
+			if (game.player.demonScore() >= 5) multimax -= 0.15;
+			if (game.player.demonScore() >= 11) multimax -= 0.3;
+			if (game.player.demonScore() >= 16 && hasPerk(PerkLib.Phylactery)) multimax -= 0.45;
 			if (game.player.orcScore() >= 5) multimax += 0.1;
 			if (game.player.orcScore() >= 11) multimax += 0.1;
 			if (vehiclesName == "Giant Slayer Mech") {
@@ -933,6 +943,11 @@ import classes.CoC;
 			if (hasPerk(PerkLib.EromancyBeginner)) max += Math.round(inte*3);
 			if (hasPerk(PerkLib.EromancyExpert)) max += Math.round(inte*3);
 			if (hasPerk(PerkLib.EromancyMaster)) max += Math.round(inte*6);
+			if (game.player.angelScore() >= 5) multimax -= 0.4;
+			if (game.player.angelScore() >= 11) multimax -= 0.8;
+			if (game.player.demonScore() >= 5) multimax += 0.5;
+			if (game.player.demonScore() >= 11) multimax += 1;
+			if (game.player.demonScore() >= 16 && hasPerk(PerkLib.Phylactery)) multimax += 1.5;
 			if (game.player.elfScore() >= 5) multimax += 0.1;
 			if (game.player.elfScore() >= 11) multimax += 0.1;
 			if (game.player.woodElfScore() >= 22) multimax += 0.1;

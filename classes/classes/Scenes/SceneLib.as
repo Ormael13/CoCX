@@ -127,7 +127,7 @@ public class SceneLib {
 
     public static var bashemathScene:BashemathFollower = new BashemathFollower();
     
-    public static var BelisaScene:BelisaFollower = new BelisaFollower();
+    public static var belisa:BelisaFollower = new BelisaFollower();
 
     public static var ceraphScene:CeraphScene = new CeraphScene();
 

@@ -19,9 +19,11 @@ import classes.Scenes.Camp.HarvestMoonScenes;
 import classes.Scenes.Camp.HclassHeavenTribulation;
 import classes.Scenes.Camp.UniqueCampScenes;
 import classes.Scenes.Dungeons.DeepCave.ValaScene;
+import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.NPCs.CelessScene;
 import classes.Scenes.NPCs.DivaScene;
 import classes.Scenes.NPCs.LunaFollower;
+import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.NPCs.ZenjiScenes;
 import classes.Scenes.Places.WoodElves;
 import classes.Scenes.Holidays;
@@ -800,8 +802,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					else flags[kFLAGS.CHI_CHI_LVL_UP]++;
 				}
 				//Belisa Confession event
-				if (model.time.hours >= 7 && model.time.hours <= 9) && (Tyrantiafollower.TyrantiaFollowerStage = 1) && (BelisaFollower.BelisaFollowerStage = 1) && (Belisa.BelisaConfessed = false {
-				scenelib.BelisaFollower.BelisaConfession();
+				if ((model.time.hours >= 7 && model.time.hours <= 9) && TyrantiaFollower.TyrantiaFollowerStage == 1 && BelisaFollower.BelisaFollowerStage == 1 && BelisaFollower.BelisaAffectionMeter >= 80 && !BelisaFollower.BelisaConfessed) {
+					SceneLib.belisa.BelisaConfession();
 				}
 				
 				//Excellia fixing counter

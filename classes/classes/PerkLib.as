@@ -1588,7 +1588,7 @@ public class PerkLib
 				"You've chosen the 'Grand Tactician' perk, increasing physical critical hit chance by up to 30% (Intelligence-based).");
 		public static const GreaterAerialCombat:PerkType = mk("Greater Aerial Combat", "Greater Aerial Combat",
 				"You have learned to use air and gravity to your own benefit. (extend flight duration while using wings by 4 turns and increase evasion when flying by 15%)",
-				"You've chosen the 'Greater Aerial Combat' perk, you learned to use air and gravity to your own benefit.");
+				"You've chosen the 'Greater Aerial Combat' perk, you learned to use air and gravity to your own benefit. (extend flight duration while using wings by 4 turns and increase evasion when flying by 15%)");
 		public static const GreaterBrawn:PerkType = mk("Greater Brawn", "Greater Brawn",
 				"You have greatly improved your striking power. (+20% to phantom Str bonus, +15% to unarmed atk)",
 				"You've chosen the 'Greater Brawn' perk, greatly improving your striking power. (+20% to phantom Str bonus, +15% to unarmed atk)");
@@ -2004,7 +2004,7 @@ public class PerkLib
 				"You've trained in withstanding even the heaviest attacks head on.",
 				"You've chosen the 'Job: Defender' perk, training yourself to became Defender.").withBuffs({'tou.mult':0.15});
 		public static const JobDervish:PerkType = mk("Job: Dervish", "Job: Dervish",
-				"You've trained in multi meele attacks combat and using of medium sized dual weapons.",
+				"You've trained in multi meele attacks combat and using of medium sized weapons.",
 				"You've chosen the 'Job: Dervish' perk, training yourself to became Dervish.").withBuffs({'spe.mult':0.10,'maxwrath_base':+100});
 		public static const JobElementalConjurer:PerkType = mk("Job: Elemental Conjurer", "Job: Elemental Conjurer",
 				"You've trained in summoning various types of elementals.",
@@ -2403,7 +2403,7 @@ public class PerkLib
 				"You've chosen the 'Mythical Wisdom' perk. Increases maximum wisdom by 65 + 15 * NG tier.").withBuffs({'wis.mult':0.65});
 		public static const NakedTruth:PerkType = mk("Naked Truth", "Naked Truth",
 				"Opponent have a hard time dealing serious damage as the sight of your naked body distract them (+10% dmg reduction).",
-				"You've chosen the 'Naked Truth' perk, causing opponent have a hard time dealing serious damage as the sight of your naked body distract them.");
+				"You've chosen the 'Naked Truth' perk, causing opponent have a hard time dealing serious damage as the sight of your naked body distract them (+10% dmg reduction).");
 		public static const NamedBullet:PerkType = mk("Named Bullet", "Named Bullet",
 				"Bosses fears your guns, add 50% increased damage to bosses.",
 				"You've chosen the 'Named Bullet' perk, allowing for your guns deal extra damage to boss enemies.");
@@ -2815,7 +2815,7 @@ public class PerkLib
 				"You've chosen the 'Slayer' perk. Increase sneaky attack dmg by another 300% base value (7x).");
 		public static const SluttySimplicity:PerkType = mk("Slutty Simplicity", "Slutty Simplicity",
 				"Increases by 10% tease effect when you are naked. (Undergarments won't disable this perk.)",
-				"You've chosen the 'Slutty Simplicity' perk, granting increased tease effect when you are naked.");
+				"You've chosen the 'Slutty Simplicity' perk. Increases by 10% tease effect when you are naked. (Undergarments won't disable this perk.)");
 		public static const SneakyAttack:PerkType = mk("Sneaky attack", "Sneaky attack",
 				"Strike the vitals of a stunned, blinded or distracted opponent for heavy damage (2x).",
 				"You've chosen the 'Sneaky attack' perk. Strike the vitals of a stunned, blinded or distracted opponent for heavy damage (2x).");
@@ -3229,20 +3229,9 @@ public class PerkLib
 		public static const VampiricBlade:PerkType = mk("Vampiric blade", "Vampiric blade",
 				"PC recovers 0.5/1/2/4 % of its health each time it strikes with a melee attack. (% restored depend on weapon size used)",
 				"You've chosen the 'Vampiric blade' perk, recovering some HP after each succesfull melee attack.");
-		public static const VerdantMight:PerkType = mk("Verdant Might", "Verdant Might",
-				"As a plant when using natural weapon your damage scaling is based on Toughness instead of strength.",
-				"As a plant when using natural weapon your damage scaling is based on Toughness instead of strength.");
 		public static const VitalShot:PerkType = mk("Vital Shot", "Vital Shot",
 				"Gain a +10% chance to do a critical strike with arrows.",
 				"You've chosen the 'Vital Shot' perk, gaining an additional +10% chance to cause a critical hit with arrows.");
-		public static const VladimirRegalia:PerkType = mk("Vladimir Regalia", "Vladimir Regalia",
-				"+100% damage dealt from grapple and Dark ability, Player suffer from 5% degeneration during the day but regenerate 5% faster at night instead.",
-				"+100% damage dealt from grapple and Dark ability, Player suffer from 5% degeneration during the day but regenerate 5% faster at night instead.");
-		public static const WalpurgisIzaliaRobe:PerkType = mk("Walpurgis Izalia Robe", "Walpurgis Izalia Robe",
-				"Increase fire and darkness damage by 100%, weaken all other elemental damage by 99%, increase fire resistance by 25%, reduce spellcasting cost by 60%.",
-				"Increase fire damage by 100%, weaken all other elemental damage by 99%, increase fire resistance by 25%, reduce spellcasting cost by 60%.");
-		public static const IceQueenGown:PerkType = mk("Ice Queen Gown", "Ice Queen Gown",
-				"Freeze the heart of the wielder and grant a weakness to fire and a resistance to ice but double cold and light damage. A yuki onna also gains greater regeneration and the black frost aura.");
 		public static const WarCaster:PerkType = mk("War caster", "War caster",
 				"Increases magical and physical critical chance by up to 25% based on intelligence.",
 				"You've chosen the 'War caster' perk, increasing magical and physical critical chance by up to 25% based on intelligence.");
@@ -3371,15 +3360,14 @@ public class PerkLib
 				"Increases the effects of penis-enlarging transformations.");
 		public static const PhallicRestraint:PerkType = mk("Phallic Restraint", "Phallic Restraint",
 				"Reduces the effects of penis-enlarging transformations.");
-				
+/*
 		// Holy Band perks
-		public static const CrimsonBandPerk = new CrimsonBandPerk();
-		public static const PinkBandPerk = new PinkBandPerk();
-		public static const TurqouiseBandPerk = new TurqouiseBandPerk();
-		public static const CrossedBandPerk = new CrossedBandPerk();
-		public static const BlueBandPerk = new BlueBandPerk();
-		
-
+		public static const CrimsonBand:CrimsonBandPerk = new CrimsonBandPerk();
+		public static const PinkBand:PinkBandPerk = new PinkBandPerk();
+		public static const TurqouiseBand:TurqouiseBandPerk = new TurqouiseBandPerk();
+		public static const CrossedBand:CrossedBandPerk = new CrossedBandPerk();
+		public static const BlueBand:BlueBandPerk = new BlueBandPerk();
+*/
 		// Non-weapon equipment perks
 		public static const Ambition:AmbitionPerk = new AmbitionPerk();
 		public static const BlindImmunity:PerkType = mk("Blind Immunity", "Blind Immunity", "Gives PC immunity to enemy blinding effects.");
@@ -3387,6 +3375,8 @@ public class PerkLib
 				"Spellcasting now consumes health instead of mana!",null,true);
 		public static const FairyQueenRegalia:PerkType = mk("Fairy Queen Regalia", "Fairy Queen Regalia",
 				"Misdirection, Slutty seduction 10, Increase Fae storm chances to proc multiple status,reduce spellcasting cost by 60%.");
+		public static const IceQueenGown:PerkType = mk("Ice Queen Gown", "Ice Queen Gown",
+				"Freeze the heart of the wielder and grant a weakness to fire and a resistance to ice but double cold and light damage. A yuki onna also gains greater regeneration and the black frost aura.");
 		public static const KrakenBlackDress:PerkType = mk("Kraken black dress", "Kraken black dress",
 				"Increase ink spray duration by 1 round and doubles Grapple damage.",null,true);
 		public static const LastResort:PerkType = mk("Last Resort", "Last Resort",
@@ -3399,11 +3389,15 @@ public class PerkLib
 		public static const SkullOrnament:PerkType = mk("Skull hair ornament", "Skull hair ornament",
 				"Raise magic damage by up to 60% based on user corruption.",null,true);
 		public static const SluttySeduction:SluttySeductionPerk = new SluttySeductionPerk();
+		public static const WalpurgisIzaliaRobe:PerkType = mk("Walpurgis Izalia Robe", "Walpurgis Izalia Robe",
+				"Increase fire and darkness damage by 100%, weaken all other elemental damage by 99%, increase fire resistance by 25%, reduce spellcasting cost by 60%.");
 		public static const WellspringOfLust:PerkType = mk("Wellspring of Lust", "Wellspring of Lust",
 				"At the beginning of combat, gain lust up to black magic threshold if lust is bellow black magic threshold.",null,true);
 		public static const WizardsEnduranceAndSluttySeduction:WizardsEnduranceAndSluttySeductionPerk = new WizardsEnduranceAndSluttySeductionPerk();
 		public static const WizardsAndDaoistsEndurance:WizardsAndDaoistsEndurancePerk = new WizardsAndDaoistsEndurancePerk();
 		public static const WizardsEndurance:WizardsEndurancePerk = new WizardsEndurancePerk();
+		public static const VladimirRegalia:PerkType = mk("Vladimir Regalia", "Vladimir Regalia",
+				"+100% damage dealt from grapple and Dark ability, Player suffer from 5% degeneration during the day but regenerate 5% faster at night instead.");
 
 		public static function gearPerks():Array{	//Re:EnemyPerkList
 			var gPerks:Array = [];
@@ -3411,6 +3405,7 @@ public class PerkLib
 			gPerks.push(BlindImmunity);
 			gPerks.push(BloodMage);
 			gPerks.push(FairyQueenRegalia);
+			gPerks.push(IceQueenGown);
 			gPerks.push(KrakenBlackDress);
 			gPerks.push(LastResort);
 			gPerks.push(Obsession);
@@ -3419,10 +3414,12 @@ public class PerkLib
 			gPerks.push(ScandalousSuccubusClothing);
 			gPerks.push(SkullOrnament);
 			gPerks.push(SluttySeduction);
+			gPerks.push(WalpurgisIzaliaRobe);
 			gPerks.push(WellspringOfLust);
 			gPerks.push(WizardsEnduranceAndSluttySeduction);
 			gPerks.push(WizardsAndDaoistsEndurance);
 			gPerks.push(WizardsEndurance);
+			gPerks.push(VladimirRegalia);
 			return gPerks;
 		}
 
@@ -3593,6 +3590,8 @@ public class PerkLib
 		public static const DarkCharm:PerkType = mk("Dark Charm", "Dark Charm",
 				"Allows access to demons charm attacks.");
 		public static const DarkenedKitsune:DarkenedKitsunePerk = new DarkenedKitsunePerk();
+		public static const DarknessAffinity:PerkType = mk("Darkness Affinity", "Darkness Affinity",
+				"Increase all damage dealt with darkness spells by 100% and reduce darkness damage taken by 50%.");
 		public static const DarkSlimeCore:PerkType = mk("Dark Slime Core", "Dark Slime Core",
 				"Grants more control over your slimy body, allowing you to go twice as long without fluids.");
 		public static const DeadMetabolism:PerkType = mk("Dead metabolism", "Dead metabolism",
@@ -3778,6 +3777,8 @@ public class PerkLib
 				"The more sated you are the stronger you get, although your satisfaction is fleeting.");
 		public static const WendigoCurse:PerkType = mk("Wendigo Curse", "Wendigo Curse",
 				"Your body and soul has been cursed by a wendigo. Transformative no longer have an effect on you.");
+		public static const VerdantMight:PerkType = mk("Verdant Might", "Verdant Might",
+				"As a plant when using natural weapon your damage scaling is based on Toughness instead of strength.");
 		public static const ZenjisInfluence1:PerkType = mk("Zenji's influence 1", "Zenji's influence 1",
 				"Increases maximum mana and fatigue by 10%.")
 				.withBuffs({'maxmana_mult':+0.10,'maxfatigue_mult':+0.10});
@@ -5457,29 +5458,17 @@ public class PerkLib
 					.requireSpe(50)
 					.requireLevel(12);
 			GrabbingMaster.requirePerk(GrabbingStyle)
-					.requireWis(75)
-					.requireSpe(50)
+					.requireWis(85)
+					.requireSpe(55)
 					.requireLevel(16);
-			GrabbingGrandmaster.requirePerk(GrabbingMaster)
-					.requireWis(75)
-					.requireSpe(50)
-					.requireLevel(20);
 			JabbingStyle.requirePerks(JobMonk, SpeedDemon)
 					.requireWis(75)
 					.requireSpe(50)
 					.requireLevel(12);
 			JabbingMaster.requirePerk(JabbingStyle)
-					.requireWis(75)
-					.requireSpe(50)
+					.requireWis(85)
+					.requireSpe(55)
 					.requireLevel(16);
-			JabbingGrandmaster.requirePerk(JabbingMaster)
-					.requireWis(75)
-					.requireSpe(50)
-					.requireLevel(20);
-			MeteorStrike.requirePerks(JabbingGrandmaster, GrabbingGrandmaster)
-					.requireWis(75)
-					.requireSpe(50)
-					.requireLevel(24);
             ElementalContractRank3.requirePerk(ElementalContractRank2)
                     .requireWis(75)
                     .requireLevel(12);
@@ -5515,6 +5504,14 @@ public class PerkLib
                     .requireWis(80)
                     .requireSpe(100)
                     .requireLevel(18);
+			GrabbingGrandmaster.requirePerk(GrabbingMaster)
+					.requireWis(95)
+					.requireSpe(60)
+					.requireLevel(20);
+			JabbingGrandmaster.requirePerk(JabbingMaster)
+					.requireWis(95)
+					.requireSpe(60)
+					.requireLevel(20);
 			ExplosiveCartridge.requirePerk(AmateurGunslinger)
 					.requireWis(50)
                     .requireTou(45)
@@ -5530,6 +5527,10 @@ public class PerkLib
                     .requireWis(125)
                     .requireSpe(100)
                     .requireLevel(24);
+			MeteorStrike.requirePerks(JabbingGrandmaster, GrabbingGrandmaster)
+					.requireWis(105)
+					.requireSpe(65)
+					.requireLevel(24);
             ElementalContractRank5.requirePerks(ElementalContractRank4, ElementalConjurerDedication)
                     .requireWis(125)
                     .requireLevel(24);

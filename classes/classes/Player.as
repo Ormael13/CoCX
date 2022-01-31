@@ -2898,6 +2898,9 @@ use namespace CoC;
 
 		public override function damageDarknessPercent():Number {
 			var mult:Number = damageMagicalPercent();
+			if (upperGarmentName == "HB shirt") mult -= 10;
+			if (lowerGarmentName == "HB shorts") mult -= 10;
+			if (hasPerk(PerkLib.DarknessAffinity)) mult -= 50;
 			if (jewelryEffectId == JewelryLib.MODIFIER_DARK_R) mult -= jewelryEffectMagnitude;
 			if (jewelryEffectId2 == JewelryLib.MODIFIER_DARK_R) mult -= jewelryEffectMagnitude2;
 			if (jewelryEffectId3 == JewelryLib.MODIFIER_DARK_R) mult -= jewelryEffectMagnitude3;
@@ -12757,8 +12760,27 @@ use namespace CoC;
 					maxLibCap2 += 100;
 				}
 			}//+10/10-20
+			if (angelScore() >= 5) {
+				/*if (angelScore() >= 16 && hasPerk(PerkLib.Phylactery)) {
+					maxStrCap2 += 40;
+					maxTouCap2 += 60;
+					maxWisCap2 += 140;
+				} else */if (angelScore() >= 11) {
+					maxStrCap2 += 30;
+					maxTouCap2 += 35;
+					maxWisCap2 += 100;
+				} else {
+					maxStrCap2 += 15;
+					maxTouCap2 += 15;
+					maxWisCap2 += 45;
+				}
+			}//+60/50-60
 			if (demonScore() >= 5) {
-				if (demonScore() >= 11) {
+				if (demonScore() >= 16 && hasPerk(PerkLib.Phylactery)) {
+					maxSpeCap2 += 40;
+					maxIntCap2 += 60;
+					maxLibCap2 += 140;
+				} else if (demonScore() >= 11) {
 					maxSpeCap2 += 30;
 					maxIntCap2 += 35;
 					maxLibCap2 += 100;
@@ -15610,8 +15632,6 @@ use namespace CoC;
 			var max:Number = super.maxLust_base();
 			if (cowScore() >= 4) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (cowScore() >= 10) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (demonScore() >= 5) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (demonScore() >= 11) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (devilkinScore() >= 7) max += (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (devilkinScore() >= 11) max += (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (devilkinScore() >= 16) max += (80 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
