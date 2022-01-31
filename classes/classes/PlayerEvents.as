@@ -799,6 +799,11 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					if (flags[kFLAGS.CHI_CHI_LVL_UP] < 2) flags[kFLAGS.CHI_CHI_LVL_UP] = 2;
 					else flags[kFLAGS.CHI_CHI_LVL_UP]++;
 				}
+				//Belisa Confession event
+				if (model.time.hours >= 7 && model.time.hours <= 9) && (Tyrantiafollower.TyrantiaFollowerStage = 1) && (BelisaFollower.BelisaFollowerStage = 1) && (Belisa.BelisaConfessed = false {
+				scenelib.BelisaFollower.BelisaConfession();
+				}
+				
 				//Excellia fixing counter
 				if (flags[kFLAGS.EXCELLIA_RECRUITED] > 2 && flags[kFLAGS.EXCELLIA_RECRUITED] < 30) flags[kFLAGS.EXCELLIA_RECRUITED]++;
 				//Alvina timer
