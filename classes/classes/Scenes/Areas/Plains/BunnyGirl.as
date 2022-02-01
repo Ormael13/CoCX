@@ -162,8 +162,7 @@ private function rapeBunBun():void {
 			addButton(3, "69",bunbun69);
 			outputText("  Sixty-nine her?");
 		}
-		//if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
-		if (uniquuuesexscene.pcCanUseUniqueSexScenev2(true, null) > 0) addButton(13, "U.Sex Scenes", curry(uniquuuesexscene.pcCanUseUniqueSexScenev2, false, [rapeBunBun])).hint("Other non-typical sex scenes.");
+		if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 		addButton(14, "Leave", camp.returnToCampUseOneHour);
 	}
 }

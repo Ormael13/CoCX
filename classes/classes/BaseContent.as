@@ -1008,7 +1008,7 @@ import coc.xxc.StoryContext;
 		 * function/false/"ignore" = addbtn, addbtndisabled, no button.
 		 * btnStat returns how many buttons are active.
 		 */
-		protected function menuGen(menuItems:Array, page:int, back:Function=null, sort:Boolean=false, isChecking:Boolean=false):*{
+		protected function menuGen(menuItems:Array, page:int, back:Function=null, sort:Boolean=false):int{
 			var bList:Array = [];
 			var total:int = menuItems.length;
 			var next:Boolean = false;
@@ -1024,44 +1024,30 @@ import coc.xxc.StoryContext;
 			else{
 				bList = menuItems;
 			}
-			if (!isChecking){
-				menu();
-			}
+			menu();
 			var btnval:int = 0;
 			var btnsActive: int = 0;
 			for (var i:int = 0; i < bList.length; i++){
 				if (i % 3 == 0){
 					if (!bList[i + 1]){
-						if (!isChecking){
-							addButtonDisabled(btnval, bList[i],(bList[i + 2] is Array) ? bList[i+2][1]: bList[i+2]);
-						}else{
-							continue;
-						}
+						addButtonDisabled(btnval, bList[i],(bList[i + 2] is Array) ? bList[i+2][1]: bList[i+2]);
 					}
 					else if (bList[i + 1] == "ignore") { //Not sure when this would ever be used, but in case.
 						continue;
 					}
 					else{
-						if (!isChecking){
-							addButton(btnval,bList[i],bList[i + 1], null, null, null,(bList[i + 2] is Array) ? bList[i+2][0]: bList[i+2]);
-							btnsActive++;
-						}
-						else{
-							btnsActive++
-							continue;
-						}
+						addButton(btnval,bList[i],bList[i + 1], null, null, null,(bList[i + 2] is Array) ? bList[i+2][0]: bList[i+2]);
+						btnsActive++;
 					}
 					btnval++;
 				}
 			}
-			if (!isChecking){
-				if (page!=0 || total>12) {
-					button(12).show("Prev Page", curry(menuGen, menuItems,page - 1,  back, sort, isChecking)).disableIf(page == 0);
-					button(13).show("Next Page", curry(menuGen, menuItems,page + 1,  back, sort, isChecking)).disableIf(!next);
-				}
-				if (back != null) button(14).show("Back",back);
+			if (page!=0 || total>12) {
+				button(12).show("Prev Page", curry(menuGen, menuItems,page - 1,  back, sort)).disableIf(page == 0);
+				button(13).show("Next Page", curry(menuGen, menuItems,page + 1,  back, sort)).disableIf(!next);
 			}
-			if (isChecking) return btnsActive;
+			if (back != null) button(14).show("Back",back);
+			return btnsActive;
 		}
 	}
 

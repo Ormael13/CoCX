@@ -298,8 +298,7 @@ public class GoblinAssassinScene extends BaseContent
 				if (player.canOvipositSpider()) addButton(8, "Lay Eggs", eggs);
 				if (mindbreak != null) addButton(9, "Mind break", mindbreak);
 				addButton(10, "Kill", killGoblin);
-				//if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
-				if (uniquuuesexscene.pcCanUseUniqueSexScenev2(true, null) > 0) addButton(13, "U.Sex Scenes", curry(uniquuuesexscene.pcCanUseUniqueSexScenev2, false, [gobboAssassinRapeIntro])).hint("Other non-typical sex scenes.");
+				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 				addButton(14, "Leave", cleanupAfterCombat);
 			}
 			else if (feeder!=null || eggs!=null) {

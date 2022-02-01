@@ -6,7 +6,7 @@ public class ElderStoreHut extends TrollVillageAbstractContent{
     public function ElderStoreHut() {
     }
 
-    public function ElderShops():void{
+    public function ElderShops(){
         clearOutput();
         menu();
         outputText("You decide to approach the Elder’s hut, it’s very large, tall, and probably contains many different things inside. The entrance is wide and lacks a door, signaling that anyone is welcome to enter, but the guard near the entrance also enforces a sense of security.\n");

@@ -170,8 +170,7 @@ internal function pcBeatsATrap():void {
 	var bikiniTits:Function = null;
 	var temp3:Function = null;
 	if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") bikiniTits = createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,monster);
-	//if (player.pcCanUseUniqueSexScene()) temp3 = uniquuuesexscene.pcUniqueSexScenesChoiceMenu;
-	if (uniquuuesexscene.pcCanUseUniqueSexScenev2(true, null) > 0) temp3 = uniquuuesexscene.pcCanUseUniqueSexScenev2(false, [pcBeatsATrap]).hint("Other non-typical sex scenes.");
+	if (player.pcCanUseUniqueSexScene()) temp3 = uniquuuesexscene.pcUniqueSexScenesChoiceMenu;
 	//Requirements: Player is naga with tail and fangs, has met desert naga as naga at least once
 	if(player.isNaga() && player.hasStatusEffect(StatusEffects.Naga) && player.gender > 0 && player.faceType == Face.SNAKE_FANGS) nagaThreeSome = nagaThreesomeWithSandTrap;
 	

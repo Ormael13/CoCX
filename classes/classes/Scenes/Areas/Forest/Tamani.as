@@ -95,8 +95,7 @@ public class Tamani extends Goblin
 				var temp2:Function = null;
 				var temp3:Function = null;
 				if (player.hasCock() && player.cockThatFits(analCapacity()) >= 0) temp = SceneLib.forest.tamaniScene.tamaniAnalShits;
-				//if (player.pcCanUseUniqueSexScene()) temp3 = uniquuuesexscene.pcUniqueSexScenesChoiceMenu;
-				if (uniquuuesexscene.pcCanUseUniqueSexScenev2(true, null) > 0) temp3 = uniquuuesexscene.pcCanUseUniqueSexScenev2(false, [defeated(hpVictory)]).hint("Other non-typical sex scenes.");
+				if (player.pcCanUseUniqueSexScene()) temp3 = uniquuuesexscene.pcUniqueSexScenesChoiceMenu;
 				//NOT PREGGERS
 				if (!SceneLib.forest.tamaniScene.pregnancy.isPregnant && player.canOvipositSpider()) {
 					temp2 = SceneLib.forest.tamaniScene.tamaniBeaten;

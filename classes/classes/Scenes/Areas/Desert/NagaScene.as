@@ -893,8 +893,7 @@ public function nagaRapeChoice():void {
 		}
 		if (player.lowerBody == LowerBody.GOO) addButton(11, "Gooey Rape", gooNagaRape);
 		addButton(12, "Lay Eggs", eggs);
-		//if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
-		if (uniquuuesexscene.pcCanUseUniqueSexScenev2(true, null) > 0) addButton(13, "U.Sex Scenes", curry(uniquuuesexscene.pcCanUseUniqueSexScenev2, false, [nagaRapeChoice])).hint("Other non-typical sex scenes.");
+		if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 		addButton(14, "Leave", cleanupAfterCombat);
 	}
 	if (player.lust < 33) {

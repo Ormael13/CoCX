@@ -105,7 +105,6 @@ public class PhoenixScene extends BaseContent
 		//VICTORY!
 		public function winAgainstPhoenix():void {
 			flags[kFLAGS.PHOENIX_HP_LOSS_COUNTER] = 0; //Reset counter if you win.
-			clearOutput();
 			outputText("With one final grunt, the phoenix collapses against a nearby rock, barely able to support herself. The once-proud soldier has been reduced to a " + (monster.lust >= monster.maxLust() ? "dazed, lust-crazed slut, desperately pulling at her clothing in a mad attempt to expose herself": "a beaten, battered heap; completely unable to resist your advances") + ". ");
 			if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
 				outputText("What do you do? \n\n");
@@ -120,8 +119,7 @@ public class PhoenixScene extends BaseContent
 				addButton(3, "Ride Anal", rideAnal);
 				if (player.hasVagina()) addButton(4, "Ride Vaginal", rideVaginal);
 				//addButton(5, "Suck Her Dick", rideAnal);
-				if (uniquuuesexscene.pcCanUseUniqueSexScenev2(true, null) > 0) addButton(13, "U.Sex Scenes", curry(uniquuuesexscene.pcCanUseUniqueSexScenev2, false, [winAgainstPhoenix])).hint("Other non-typical sex scenes.");
-				//if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 				addButton(14, "Leave", cleanupAfterCombat);
 			}
 			else cleanupAfterCombat();
@@ -142,9 +140,7 @@ public class PhoenixScene extends BaseContent
 				addButton(3, "Ride Anal", rideAnal);
 				if (player.hasVagina()) addButton(4, "Ride Vaginal", rideVaginal);
 				//addButton(5, "Suck Her Dick", rideAnal);
-				if (uniquuuesexscene.pcCanUseUniqueSexScenev2(true, null) > 0) addButton(13, "U.Sex Scenes", curry(uniquuuesexscene.pcCanUseUniqueSexScenev2, false, [winAgainstPhoenix1])).hint("Other non-typical sex scenes.");
-
-				//if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 				addButton(14, "Leave", cleanupAfterCombat);
 			}
 			else cleanupAfterCombat();

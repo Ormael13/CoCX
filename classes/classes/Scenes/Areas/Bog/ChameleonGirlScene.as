@@ -200,8 +200,7 @@ package classes.Scenes.Areas.Bog
 			if (player.gender == 3) addButton(2, "Herm Style", fuckDatChameleonAsACoolGuyGirlHerm);
 			if ((player.hasItem(consumables.SUCMILK) || player.hasItem(consumables.P_S_MLK)) && player.hasCock()) addButton(3, "Use Item", useAnItemOnTheChamcham);
 			else if (player.hasItem(consumables.SENSDRF) && (player.hasItem(consumables.L_DRAFT) || player.hasItem(consumables.F_DRAFT))) addButton(3, "Use Item", useAnItemOnTheChamcham);
-			//if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
-			if (uniquuuesexscene.pcCanUseUniqueSexScenev2(true, null) > 0) addButton(13, "U.Sex Scenes", curry(uniquuuesexscene.pcCanUseUniqueSexScenev2, false, [defeatChameleonGirl])).hint("Other non-typical sex scenes.");
+			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 			addButton(14, "Leave", cleanupAfterCombat);
 		}
 

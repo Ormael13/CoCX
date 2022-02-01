@@ -631,8 +631,7 @@ internal function beatSandwitch():void {
 	var temp3:Function = null;
 	var temp4:Function = null;
 	if (silly()) temp3 = missingoSex;
-    //if (player.pcCanUseUniqueSexScene()) temp4 = uniquuuesexscene.pcUniqueSexScenesChoiceMenu;
-	if (uniquuuesexscene.pcCanUseUniqueSexScenev2(true, null) > 0) temp4 = uniquuuesexscene.pcCanUseUniqueSexScenev2(false, [beatSandwitch]).hint("Other non-typical sex scenes.");
+    if (player.pcCanUseUniqueSexScene()) temp4 = uniquuuesexscene.pcUniqueSexScenesChoiceMenu;
     if (player.hasKeyItem("Deluxe Dildo") >= 0) temp2 = sandwitchGetsDildoed;
 	var shouldra:Function = null;
 	if(SceneLib.shouldraFollower.followerShouldra() && player.gender > 0) shouldra = SceneLib.shouldraFollower.sandWitchGetsGhostly;
