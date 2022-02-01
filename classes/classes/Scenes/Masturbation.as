@@ -2369,6 +2369,7 @@ public class Masturbation extends BaseContent {
 			outputText("The machine enters its second stage as the cable starts producing small jolts of electricity in your cunt, shocking your clitty in just the right way. Your eyes roll back in absolute bliss and you cum at once as your belly slowly inflates from the sheer amount of fluids your creation is pumping in, filling your addled mind with fireworks. You giggle in delight as the flow slowly ebbs, your SPMK1 holding the cum inside so no drops can leak out. Once it's over, you unfasten the tube and put it back in its compartment as you pat your belly in contentment. You really hope it took and if it didn’t, you will just have to harvest some more… hurray for progress!");
 			player.cuntChange(8, true, true, false);
 			player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+			player.addKeyValue("Cum Reservoir", 1, -4);
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -2385,6 +2386,7 @@ public class Masturbation extends BaseContent {
 			outputText("Finally the machine slows down, beginning to lower you back onto the seat with jizz leaking from every hole on your body. You groan, sore and stiff from the brutal workout but happy with the afterglow as the screen before you displays ‘Saving data on your pleasure waves for future adjustment’.\n\n");
 			outputText("Gosh if that didn't knock you up you will just use the linking tube next time.\n\n");
 			player.knockUp(PregnancyStore.PREGNANCY_GOBLIN, PregnancyStore.INCUBATION_GOBLIN);
+			player.addKeyValue("Cum Reservoir", 1, -4);
 			doNext(camp.returnToCampUseOneHour);
 		}
 

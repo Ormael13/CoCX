@@ -1016,7 +1016,11 @@ public class PlayerAppearance extends BaseContent {
 		else if (score >= 1) outputText("\n<font color=\"#008000\">Incomplete Atlach Nacha: " + score + "</font>");
 		else if (score < 1) outputText("\n<font color=\"#ff0000\">Half Spider-morph: 0</font>");
 		//Angel
-		outputText("\nHalf Angel: " + player.gryphonScore());//Half Angel, Angel-kin, Angel
+		//if (player.demonScore() >= 16 && player.hasPerk(PerkLib.Phylactery)) outputText("\n<font color=\"#0000a0\">Succub/Incubus: " + player.demonScore() + " (+30% to Spe racial multi, +35% to Int racial multi, +100% to Lib racial multi, +" + (100 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
+		//else if (player.demonScore() >= 11) outputText("\n<font color=\"#0000a0\">Succubi-kin/Incubi-kin: " + player.demonScore() + " (+30% to Spe racial multi, +35% to Int racial multi, +100% to Lib racial multi, +" + (100 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
+		if (player.angelScore() >= 5) outputText("\n<font color=\"#0000a0\">Half Angel: " + player.angelScore() + " (+15% to Str racial multi, +15% to Tou racial multi, +45% to Wis racial multi, -15% max Lust, +20% max Wrath, -40% max mana, +40% max SF)</font>");
+		else if (player.angelScore() >= 1) outputText("\n<font color=\"#008000\">Half Angel: " + player.angelScore() + "</font>");
+		else if (player.angelScore() < 1) outputText("\n<font color=\"#ff0000\">Half Angel: 0</font>");//Angel-kin, Angel
 		//Avian
 		if (player.avianScore() >= 9) outputText("\n<font color=\"#0000a0\">Avian-morph: " + player.avianScore() + " (+30% to Str racial multi, +75% to Spe racial multi, +30% to Int racial multi)</font>");
 		else if (player.avianScore() >= 4) outputText("\n<font color=\"#0000a0\">Half Avian-morph: " + player.avianScore() + " (+15% to Str racial multi, +30% to Spe racial multi, +15% to Int racial multi)</font>");
@@ -1102,9 +1106,9 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.deerScore() >= 1) outputText("\n<font color=\"#008000\">Deer-morph: " + player.deerScore() + "</font>");
 		else if (player.deerScore() < 1) outputText("\n<font color=\"#ff0000\">Deer-morph: 0</font>");
 		//Demon
-		if (player.demonScore() >= 16 && player.hasPerk(PerkLib.Phylactery)) outputText("\n<font color=\"#0000a0\">Succub/Incubus: " + player.demonScore() + " (+30% to Spe racial multi, +35% to Int racial multi, +100% to Lib racial multi, +" + (100 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
-		else if (player.demonScore() >= 11) outputText("\n<font color=\"#0000a0\">Succubi-kin/Incubi-kin: " + player.demonScore() + " (+30% to Spe racial multi, +35% to Int racial multi, +100% to Lib racial multi, +" + (100 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
-		else if (player.demonScore() >= 5) outputText("\n<font color=\"#0000a0\">Half Succubus/Incubus: " + player.demonScore() + " (+15% to Spe racial multi, +15% to Int racial multi, +45% to Lib racial multi, +" + (50 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
+		if (player.demonScore() >= 16 && player.hasPerk(PerkLib.Phylactery)) outputText("\n<font color=\"#0000a0\">Succub/Incubus: " + player.demonScore() + " (+40% to Spe racial multi, +60% to Int racial multi, +140% to Lib racial multi, +60% max Lust, -45% max Wrath, +120% max mana, max SF drops to 0)</font>");
+		else if (player.demonScore() >= 11) outputText("\n<font color=\"#0000a0\">Succubi-kin/Incubi-kin: " + player.demonScore() + " (+30% to Spe racial multi, +35% to Int racial multi, +100% to Lib racial multi, +40% max Lust, -30% max Wrath, +80% max mana, -80% max SF)</font>");
+		else if (player.demonScore() >= 5) outputText("\n<font color=\"#0000a0\">Half Succubus/Incubus: " + player.demonScore() + " (+15% to Spe racial multi, +15% to Int racial multi, +45% to Lib racial multi, +20% max Lust, -15% max Wrath, +40% max mana, -40% max SF)</font>");
 		else if (player.demonScore() >= 1) outputText("\n<font color=\"#008000\">Half Succubus/Incubus: " + player.demonScore() + "</font>");
 		else if (player.demonScore() < 1) outputText("\n<font color=\"#ff0000\">Half Succubus/Incubus: 0</font>");
 		//Devil

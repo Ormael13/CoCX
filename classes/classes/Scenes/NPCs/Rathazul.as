@@ -1,6 +1,7 @@
 ﻿package classes.Scenes.NPCs{
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.NPCs.BelisaFollower;
 
 public class Rathazul extends NPCAwareContent implements TimeAwareInterface {
 
@@ -175,7 +176,11 @@ private function rathazulWorkOffer():Boolean {
 		purificationByRathazulBegin();
 		return true;
 	}
-	if(player.hasItem(consumables.BLACKEG) || player.hasItem(consumables.L_BLKEG)) {
+	if (BelisaFollower.BelisaRalthTalked && !BelisaFollower.BelisaRalthPotionGet && player.hasItem(consumables.SHARK_T) && player.hasItem(consumables.PPHILTR) && player.hasItem(consumables.VITAL_T)) {
+		RathazulMakesToothCursePotion();
+		return true;
+	}
+	if (player.hasItem(consumables.BLACKEG) || player.hasItem(consumables.L_BLKEG)) {
 		flags[kFLAGS.PC_KNOWS_ABOUT_BLACK_EGGS] = 1;
 		spoken = true;
 		outputText("He eyes the onyx egg in your inventory and offers a little advice.  \"<i>Be careful with black eggs.  They can turn your skin to living latex or rubber.  The smaller ones are usually safer, but everyone reacts differently.  I'd get rid of them, if you want my opinion.</i>\"\n\n");
@@ -365,6 +370,27 @@ private function rathazulPurifyIncubiDraft():void {
 	player.gems -= 20;
 	statScreenRefresh();
 	player.addStatusValue(StatusEffects.MetRathazul, 2, 1);
+}
+
+//For Belisa's Tooth Quest
+public function BelisaRalthazulTalk():void {
+	outputText("Hoping your trusty alchemist friend can make Belisa's smile whole again, You ask Ralthazul about curing a cursed injury. \"<i>Oh? Cursed injury, you say?</i>\" He ponders for a second. \"<i>What sort of injury, and what kind of curse?</i>\"\n\n"); 
+	outputText("You explain Belisa’s plight, and he nods thoughtfully, hand on his chin. \"<i>Well…As a matter of fact, there might be a way I can help, young one.</i>\" He brings you over to his beakers excitedly. \"<i>You see, Succubus magic tends to draw upon corruption, and long-term curses…well, they’re niggly little bits of magic.</i>\" He shakes his head. \"<i>f the Succubus in question was a practiced hexmage, they’ll know how to get around this…But if they weren’t…</i>\" He gives you a wry little grin. \"<i>Standard curses of that nature draw upon corruption, if not from the individual, than from the environment around them.</i>\" He rummages around, producing a purity philter. \"<i>However, this little mixture here can cut the curse off from the environment, if you cover the wound in it, starving it out.</i>\"\n\n"); 
+	outputText("You begin to get excited. Belisa is pure. Perhaps too pure. You know her body won’t give this magic any fuel.\n\n"); 
+	outputText("\"<i>But…I’ll need other ingredients to cure the actual injury. Unless we also heal the injury, the curse will just return once it absorbs enough corrupted energy.</i>\" He nods. \"<i>I can do it. I’ll need a shark’s tooth from the lake, one of my purity philter and one vitality tincture.</i>\"\n\n"); 
+	BelisaFollower.BelisaRalthTalked = true;
+	doNext(camp.returnToCampUseOneHour);
+}
+
+private function RathazulMakesToothCursePotion():void {
+	clearOutput();
+	player.destroyItems(consumables.SHARK_T, 1);
+	player.destroyItems(consumables.PPHILTR, 1);
+	player.destroyItems(consumables.VITAL_T, 1);
+	outputText("You run over to Ralthazul, showing him the ingredients you’ve obtained in your adventures. \"<i>Alright, that should do it. Give me just a moment please.”</i> The wizened alchemist grinds up the teeth, and begins to mix the ingredients together. You take a small stroll around the camp to let him work, and within fifteen short minutes, Ralthazul comes to you, a smile on his old face. \n\n"); 
+	outputText("\"<i>Remember, you must completely submerge the injury in the mixture. And it needs some time to work.”</i> He blinks, remembering something. \"<i>Oh, and this will hurt, in all probability. Most curses don’t go easily, and the mouth is rather sensitive.”</i> He passes you a small vial of a silver-white liquid, with streaks of red running through it. \"<i>An hour, at least. Depending on the curse’s power.\"</i> \n\n"); 
+	BelisaFollower.BelisaRalthPotionGet = true;
+	doNext(camp.returnToCampUseOneHour);
 }
 
 //For Minerva purification.

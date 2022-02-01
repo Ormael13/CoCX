@@ -311,7 +311,7 @@ public class GoblinElderScene extends BaseContent
 				}
 				if (player.hasVagina()) addButton(7, "Pussies", cuntFuck);
 				if (player.canOvipositSpider()) addButton(8, "Lay Eggs", eggs);
-				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 046).hint("Other non typical sex scenes.");
 				addButton(14, "Leave", cleanupAfterCombat);
 			}
 			else if (feeder!=null || eggs!=null) {
@@ -321,7 +321,79 @@ public class GoblinElderScene extends BaseContent
 				menu();
 				if (player.hasStatusEffect(StatusEffects.Feeder)) addButton(5, "Breastfeed", feeder);
 				if (player.canOvipositSpider()) addButton(8, "Lay Eggs", eggs);
-				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 046).hint("Other non typical sex scenes.");
+				addButton(14, "Leave", cleanupAfterCombat);
+			}
+			else 
+			{
+				cleanupAfterCombat();
+			}
+		}
+		public function goblinElderRapeIntro2():void {
+			var buttseks:Function =null;
+			var feeder:Function =null;
+			var fitsFuck:Function =null;
+			var tooBig:Function =null;
+			var corruptTooBig:Function =null;
+			var cuntFuck:Function =null;
+			var spiderCondom:Function =null;
+			var jog:Function =null;
+			var eggs:Function =null;
+			if (player.canOvipositSpider()) {
+				eggs = laySomeDriderEggsInGobboTwat;
+			}
+			//cunt stuff
+			if (player.hasVagina()) cuntFuck = gobboGetsRapedFem;
+			//Dick stuff:
+			if (player.hasCock()) {
+				//Corrupt too big scene
+				if (player.cockArea(player.biggestCockIndex()) > monster.vaginalCapacity() && player.cor > 80 && JojoScene.monk > 2)
+					corruptTooBig = rapeAGoblinCorruptTooBig;
+				//Regular too big scene
+				if (player.cockArea(player.biggestCockIndex()) > monster.vaginalCapacity())
+					tooBig = manRapesGoblinTooBig;
+				//It fits!
+				if (player.cockThatFits(monster.vaginalCapacity()) >= 0) {
+					jog = gobboGetsRapedMaleFits;
+					fitsFuck = gatsGoblinBoners;
+				}
+				//Buttsex toggle
+				if (player.cockThatFits(monster.analCapacity()) >= 0 && player.cor > 70 - player.corruptionTolerance()) buttseks = gobboButtSecks;
+				//Spidercondom
+				if (player.tailType == Tail.SPIDER_ADBOMEN && player.cockThatFits(monster.vaginalCapacity()) >= 0)
+					spiderCondom = goblinCondomed;
+			}
+			//Breastfeed adds an option
+			if (player.hasStatusEffect(StatusEffects.Feeder)) {
+				feeder = giveGoblinAMilkMustache;
+			}
+			if (player.lust >= 33 && player.gender > 0 && (fitsFuck != null || cuntFuck != null || tooBig != null ||
+					corruptTooBig != null || buttseks != null || feeder != null || spiderCondom != null || eggs != null) && flags[kFLAGS.SFW_MODE] <= 0) {
+				outputText("\n\n<b>What do you do to her, and if anything, which of your body parts do you use?</b>");
+				menu();
+				if (fitsFuck != null) addButton(0, "Dick Fuck", fitsFuck);
+				if (tooBig != null) addButton(1, "DickTooBig", tooBig);
+				if (corruptTooBig != null) addButton(2, "CorruptDick", corruptTooBig);
+				if (buttseks != null) addButton(3, "Dick In Ass", buttseks);
+				if (jog != null) addButton(4, "Jog Fuck", jog);
+				if (player.hasStatusEffect(StatusEffects.Feeder)) addButton(5, "Breastfeed", feeder);
+				if ((player.tailType == Tail.SPIDER_ADBOMEN || player.hasItem(useables.CONDOM)) && player.cockThatFits(monster.vaginalCapacity()) >= 0) {
+					if (player.tailType == Tail.SPIDER_ADBOMEN) addButton(6, "Web Condom", goblinCondomed, 0);
+					if (player.hasItem(useables.CONDOM)) addButton(11, "Use Condom", goblinCondomed, 1);
+				}
+				if (player.hasVagina()) addButton(7, "Pussies", cuntFuck);
+				if (player.canOvipositSpider()) addButton(8, "Lay Eggs", eggs);
+				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 046).hint("Other non typical sex scenes.");
+				addButton(14, "Leave", cleanupAfterCombat);
+			}
+			else if (feeder!=null || eggs!=null) {
+				outputText("\n\n<b>You aren't horny enough to rape her, but ");
+				if (feeder!=null) outputText("your nipples ache with the desire to feed her your milk.  Do you feed her milk or leave?</b>");
+				else outputText("your abdomen aches with the desire to impregnate her full of insect eggs.  Do you?</b>");
+				menu();
+				if (player.hasStatusEffect(StatusEffects.Feeder)) addButton(5, "Breastfeed", feeder);
+				if (player.canOvipositSpider()) addButton(8, "Lay Eggs", eggs);
+				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 046).hint("Other non typical sex scenes.");
 				addButton(14, "Leave", cleanupAfterCombat);
 			}
 			else 

@@ -162,9 +162,30 @@ private function rapeBunBun():void {
 			addButton(3, "69",bunbun69);
 			outputText("  Sixty-nine her?");
 		}
-		if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+		if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 035).hint("Other non typical sex scenes.");
 		addButton(14, "Leave", camp.returnToCampUseOneHour);
 	}
+}
+public function rapeBunBun2():void {
+	menu();
+	//Dick requires one 40 area or smaller.
+	if (player.hasVagina()) {
+		addButton(0, "Your Vagina",bunbunFucksYourVag);
+		outputText("  Her dick in your vagina?");
+	}
+	outputText("  Her dick in your ass?)");
+	addButton(1, "Your Ass",bunbunFucksPCInAss);
+	if (player.cockThatFits(40) >= 0) {
+		addButton(2, "Her Vagina",bunbunGetsFucked);
+		outputText("  Fuck her vagina?");
+	}
+	else if (player.cockTotal() > 0) outputText("  <b>You're too big to fit inside her...</b>");
+	if (player.gender > 0) {
+		addButton(3, "69",bunbun69);
+		outputText("  Sixty-nine her?");
+	}
+	if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 035).hint("Other non typical sex scenes.");
+	addButton(14, "Leave", camp.returnToCampUseOneHour);
 }
 
 //[Take Dick in Vag Fukked]

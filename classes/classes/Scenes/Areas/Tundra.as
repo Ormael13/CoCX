@@ -40,7 +40,7 @@ use namespace CoC;
 			choice[choice.length] = 6; //Find nothing!
 			
 			//Glacial Rift
-			if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] <= 0 && player.level >= 65) {
+			if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] <= 0 && (player.level + combat.playerLevelAdjustment()) >= 65) {
 				flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] = 1;
 				clearOutput();
 				outputText("You walk for some time, roaming the tundra. As you progress, a cool breeze suddenly brushes your cheek, steadily increasing in intensity and power until your clothes are whipping around your body in a frenzy. Every gust of wind seems to steal away part of your strength, the cool breeze having transformed into a veritable arctic gale. ");

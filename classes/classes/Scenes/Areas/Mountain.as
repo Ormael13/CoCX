@@ -89,7 +89,7 @@ public class Mountain extends BaseContent
 						name: "highmountains",
 						when: function ():Boolean {
 							return !SceneLib.highMountains.isDiscovered()
-								   && (player.level >= 15)
+								   && ((player.level + combat.playerLevelAdjustment()) >= 15)
 						},
 						call: SceneLib.highMountains.discover,
 						chance: Encounters.ALWAYS

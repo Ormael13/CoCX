@@ -2520,13 +2520,14 @@ public class MagicSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) damage *= 1.25;
 			if (player.hasPerk(PerkLib.ColdMastery) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 1.25;
 			if (player.hasPerk(PerkLib.LightningAffinity)) damage *= 1.25;
+			if (player.hasPerk(PerkLib.DarknessAffinity)) damage *= 1.25;
 			if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + ((player.lust100 * 0.01) * 0.25));
 			if (combat.wearingWinterScarf()) damage *= 1.05;
 			if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 			damage *= 4;
 			damage *= damult;
-			damage = Math.round(damage);
+			damage = Math.round(damage * (combat.fireDamageBoostedByDao() + combat.iceDamageBoostedByDao() + combat.lightningDamageBoostedByDao() + combat.darknessDamageBoostedByDao() - 3));
 			//Shell
 			if(monster.hasStatusEffect(StatusEffects.Shell)) {
 				outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
@@ -3443,6 +3444,7 @@ public class MagicSpecials extends BaseCombatContent {
 			damage *= 1.75;
 		}
 		damage = calcInfernoMod(damage);
+		damage = calcEclypseMod(damage);
 		//damage *= 1.25;
 		if (player.tailType == 8 && player.tailCount == 2) damage *= 0.5;
 		else damage *= 0.2;
@@ -3459,8 +3461,11 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("  Your flames lick the girl's body and she opens her mouth in pained protest as you evaporate much of her moisture. When the fire passes, she seems a bit smaller and her slimy " + monster.skinTone + " skin has lost some of its shimmer.  ");
 			if(!monster.hasPerk(PerkLib.Acid)) monster.createPerk(PerkLib.Acid,0,0,0,0);
 		}
-		damage *= 4;
-		damage = Math.round(damage);
+		damage *= 2;
+		if (player.hasPerk(PerkLib.Necromancy)) damage *= 1.5;
+		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
+		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+		damage = Math.round(damage * (combat.fireDamageBoostedByDao() + combat.darknessDamageBoostedByDao() - 1));
 		if (monster.lustVuln == 0) {
 			outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
 		}
@@ -3504,10 +3509,8 @@ public class MagicSpecials extends BaseCombatContent {
 		lustDmg = Math.round(lustDmg);
 		monster.teased(lustDmg);
 		outputText(" ");
-		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
-		damage = Math.round(damage * combat.fireDamageBoostedByDao());
 		doFireDamage(damage, true, true);
+		doDarknessDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");
 		statScreenRefresh();
@@ -6128,3 +6131,4 @@ public class MagicSpecials extends BaseCombatContent {
 	}
 }
 }
+

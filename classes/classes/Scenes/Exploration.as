@@ -678,7 +678,7 @@ public class Exploration extends BaseContent
 					return;
 				}
 				//Discover Battlefield Boundary
-				if (player.exploredDesert >= 1 && flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] <= 0 && ((rand(3) == 0 && player.level >= 5) || player.level >= 10)) {
+				if (player.exploredDesert >= 1 && flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] <= 0 && (player.level + combat.playerLevelAdjustment()) >= 5) {
 					flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] = 1;
 					player.explored++;
 					clearOutput();
@@ -686,14 +686,14 @@ public class Exploration extends BaseContent
 					doNext(camp.returnToCampUseOneHour);
 					return;
 				}
-				if (flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] > 0 && player.exploredMountain <= 0 && ((rand(3) == 0 && player.level >= 5) || player.level >= 10)) {
+				if (flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] > 0 && player.exploredMountain <= 0 && (player.level + combat.playerLevelAdjustment()) >= 5) {
 					outputText("Thunder booms overhead, shaking you out of your thoughts.  High above, dark clouds encircle a distant mountain peak.  You get an ominous feeling in your gut as you gaze up at it.\n\n<b>You've discovered the Mountain!</b>");
 					player.explored++;
 					player.exploredMountain = 1;
 					doNext(camp.returnToCampUseOneHour);
 					return;
 				}
-				if (player.exploredMountain >= 1 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] <= 0 && ((rand(3) == 0 && player.level >= 9) || player.level >= 15)) {
+				if (player.exploredMountain >= 1 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] <= 0 && (player.level + combat.playerLevelAdjustment()) >= 9) {
 					flags[kFLAGS.TIMES_EXPLORED_PLAINS] = 1;
 					player.explored++;
 					outputText("You find yourself standing in knee-high grass, surrounded by flat plains on all sides.  Though the mountain, forest, and lake are all visible from here, they seem quite distant.\n\n<b>You've discovered the plains!</b>");
@@ -701,7 +701,7 @@ public class Exploration extends BaseContent
 					return;
 				}
 				//EXPLOOOOOOORE
-				if (flags[kFLAGS.TIMES_EXPLORED_SWAMP] <= 0 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0 && ((rand(3) <= 0 && player.level >= 13) || player.level >= 18)) {
+				if (flags[kFLAGS.TIMES_EXPLORED_SWAMP] <= 0 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0 && (player.level + combat.playerLevelAdjustment()) >= 13) {
 					flags[kFLAGS.TIMES_EXPLORED_SWAMP] = 1;
 					player.explored++;
 					clearOutput();
@@ -712,7 +712,7 @@ public class Exploration extends BaseContent
 					return;
 				}
 				//Discover Blight Ridge
-				if (flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] <= 0 && flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0 && ((rand(3) == 0 && player.level >= 21) || player.level >= 26)) {
+				if (flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] <= 0 && flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0 && (player.level + combat.playerLevelAdjustment()) >= 21) {
 					flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] = 1;
 					player.explored++;
 					clearOutput();
@@ -735,7 +735,7 @@ public class Exploration extends BaseContent
 					return;
 				}
 				//Discover Beach / Ocean / Deep Sea
-				if (flags[kFLAGS.DISCOVERED_BEACH] <= 0 && flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] > 0 && ((rand(3) == 0 && player.level >= 25) || player.level >= 30)) {
+				if (flags[kFLAGS.DISCOVERED_BEACH] <= 0 && flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] > 0 && (player.level + combat.playerLevelAdjustment()) >= 25) {
 					flags[kFLAGS.DISCOVERED_BEACH] = 1;
 					player.explored++;
 					clearOutput();
@@ -746,7 +746,7 @@ public class Exploration extends BaseContent
 					return;
 				}
 				//Discover Caves!
-				if (flags[kFLAGS.DISCOVERED_CAVES] <= 0 && flags[kFLAGS.DISCOVERED_BEACH] > 0 && ((rand(3) == 0 && player.level >= 30) || player.level >= 35)) {
+				if (flags[kFLAGS.DISCOVERED_CAVES] <= 0 && flags[kFLAGS.DISCOVERED_BEACH] > 0 && (player.level + combat.playerLevelAdjustment()) >= 30) {
 					flags[kFLAGS.DISCOVERED_CAVES] = 1;
 					player.explored++;
 					clearOutput();
@@ -756,7 +756,7 @@ public class Exploration extends BaseContent
 					return;
 				}/*
 				//Discover Abyss
-				if (flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] > 0 && flags[kFLAGS.] <= 0 && ((rand(3) == 0 && player.level >= 10) || player.level >= 15)) {
+				if (flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] > 0 && flags[kFLAGS.] <= 0 && (player.level + combat.playerLevelAdjustment()) >= 10) {
 					flags[kFLAGS.] = 1;
 					player.explored++;
 					clearOutput();

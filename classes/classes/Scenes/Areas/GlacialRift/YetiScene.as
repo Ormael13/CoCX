@@ -123,7 +123,7 @@ public class YetiScene extends BaseContent
 					addButton(1, "RideHisCock", rideYetisCock);
 				}
 			}
-			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 021).hint("Other non typical sex scenes.");
 			addButton(14, "Leave", cleanupAfterCombat);
 		}
 

@@ -105,7 +105,7 @@ public class HellHoundScene extends BaseContent
 			}
 			if (player.isLiliraune()) addButton(2, "TakeBothIn", takeBothIn);
 			if (monster.HP < 1) addButton (12, "Slay", killHellhound);
-			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 032).hint("Other non typical sex scenes.");
 			addButton(14, "Leave", cleanupAfterCombat);
 		}
 		public function hellHoundGetsRaped():void
