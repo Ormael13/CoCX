@@ -15,6 +15,7 @@ import classes.Items.Consumables.SimpleConsumable;
 import classes.Scenes.Areas.Forest.WoodElvesHuntingParty;
 import classes.Scenes.Areas.HighMountains.TempleOfTheDivine;
 import classes.Scenes.Places.Mindbreaker;
+import classes.Scenes.Places.TrollVillage;
 import classes.Scenes.Places.WoodElves;
 import classes.Scenes.Camp.*;
 import classes.Scenes.Dungeons.*;
@@ -1592,6 +1593,13 @@ public class Camp extends NPCAwareContent{
 				buttons.add("Samirah", SceneLib.samirah.samirahMainCampMenu);
 			}
 			//Zenji
+			if (TrollVillage.ZenjiVillageStage == 2) {
+				if (TrollVillage.ZenjiTrollVillageTimeChk == 0) {
+					TrollVillage.ZenjiTrollVillageTimeChk = model.time.days + 1;
+				} else if (TrollVillage.ZenjiTrollVillageTimeChk < model.time.days && TrollVillage.ZenjiTrollVillageTimeChk != -1) {
+					SceneLib.trollVillage.yenza.YenzaBeratePart2();
+				}
+			}
 			if (flags[kFLAGS.ZENJI_PROGRESS] == 11) {
 				if (model.time.hours >= 7 && model.time.hours <= 18) {
 					if (slavesCount() > 0 && rand(5) == 0) outputText("Zenji is keeping a close eye on some of your more corrupt camp members, ensuring that they don’t cause any harm.");

@@ -8,7 +8,7 @@ import classes.*;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.SceneLib;
+import classes.Scenes.Places.TrollVillage;
 import classes.display.SpriteDb;
 import classes.internals.SaveableState;
 import coc.view.ButtonDataList;
@@ -985,6 +985,7 @@ public function followerZenjiTalks():void {
 	addButton(0, "Himself", followerZenjiTalksHimself).hint("Talk to Zenji about himself.");
 	addButton(1, "Trolls", followerZenjiTalksTrolls).hint("Talk to Zenji about trolls.");
 	addButton(2, "Yourself", followerZenjiTalksYourself).hint("Talk to Zenji about yourself.");
+	if (TrollVillage.ZenjiTrollVillageTimeChk == -1) addButton(3, "His Problems", zenjiVillageProblems);
 	addButton(14, "Back", followerZenjiMainCampMenu);
 }
 
@@ -1200,6 +1201,8 @@ public function loverZenjiTalks():void {
 	addButton(6, "Comfort", loverZenjiComfort).hint("Spend a tender moment with him. Now with free headpats.");
 	addButton(7, "Food", loverZenjiFood).hint("Zenji seems like he has something he wants to give you.");
 	button(7).disableIf(ZenjiFood, "Zenji does not have any more food to offer you right now, ask again tomorrow.");
+	if (TrollVillage.ZenjiTrollVillageTimeChk == -1) addButton(8, "His Problems", zenjiVillageProblems);
+	ZenjiMarriagePreCheck();
 	addButton(14, "Back", loverZenjiMainCampMenu);
 }
 
@@ -1731,11 +1734,11 @@ public function loverZenjiSex():void {
 		if (player.hasVagina()) addButton(1, "Take Vaginal", loverZenjiTakeVaginal).hint("Have Zenji penetrate you vaginally.");
 		else addButtonDisabled(1, "Take Vaginal", "You need a vagina for this scene.");
 		if (player.smallestCockArea() < 46) addButton(2, "Pitch Anal", loverZenjiPitchAnal).hint("Penetrate Zenji anally");
-		else addButtonDisabled(10, "Get Blown", "Your dick is too for him.\n\nZenji is a big guy, but even he has his limits!");
+		else addButtonDisabled(10, "Get Blown", "Your dick is too big for him.\n\nZenji is a big guy, but even he has his limits!");
 		if (player.isPregnant()) addButton(5, "Pregnant Sex", loverZenjiPregnantSex).hint("Zenji seems to eye your pregnant form with interest.");
-		else addButtonDisabled(5, "Pregnant Sex", "You need to be pregnanth for this.");
+		else addButtonDisabled(5, "Pregnant Sex", "You need to be pregnant for this.");
 		if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] >= 4) addButton(6, "Hot Spring", loverZenjiHotSpring).hint("Enter the hot spring with Zenji.");
-		else addButtonDisabled(6, "Hot Spring", "You not yet built Hot Spring.");
+		else addButtonDisabled(6, "Hot Spring", "You have not yet built a Hot Spring.");
 		if (player.hasVagina()) addButton(7, "Get Fingered", loverZenjiSexGetFingered).hint("Have Zenji put his thick fingers to good use.");
 		else addButtonDisabled(7, "Get Fingered", "You need a vagina for this scene.");
 		if (player.hasCock()) addButton(8, "Get Handjob", loverZenjiSexGetHandjob).hint("His hands are so luxuriously soft, put them to good use.");
@@ -2758,7 +2761,36 @@ public function mishapsLunaZenji():void {
 	doNext(playerMenu);
 }
 
+public function zenjiVillageProblems():void{
+	clearOutput();
+	outputText("You ask Zenji if he’s ready to talk about his problems with you.\n" +
+			"\n" +
+			"Zenji’s gaze shies away from you as he turns to stone. “I…” He mutters after a brief pause.\n" +
+			"\n" +
+			"You stop him before he can argue. He’s not going to push you away as he’s done everyone else. You tell him that he is your lover as much as you are his. Nobody should hold all of the problems to themself, it’s okay to show emotions, it’s okay to be vulnerable. Having the ability to communicate how you’re feeling isn’t a sign of weakness, it’s a sign of emotional maturity and mental strength.\n" +
+			"\n" +
+			"Zenji gives you a weak smile as he turns to face you again. “You’re right…” he replies, flexing his massive arms and gesturing to his musculature. “Guess dese muscles won’t help me fight de problems in my head, will dey?”\n" +
+			"\n" +
+			"You give him a gentle laugh and Zenji gives a slightly disheartened laugh as well.\n" +
+			"\n" +
+			"There’s a brief pause before he finally speaks up again, “Thank you [name]... For everyting… I needed ta hear dis… It’s just… I guess I’ve always felt like I had to take care of all de problems wit myself alone while also helping you… It’s like… Dat’s what’s expected of me as a man. I gotta keep everyone safe while also being strong and stoic. I am also scared dat if I share my feelings I would be branded as a wuss or inferior.\"\n" +
+			"\n" +
+			"You tell Zenji that everyone gets hurt, it’s impossible to keep someone safe forever. As a man, he shouldn’t be the one to take the burden for everything and remain silent about it. Hurting will only feel worse when you do it alone. It’s okay to be hurt, it will happen to everyone. At least then one will be able to know the good times and have something to look forward to. Being a man doesn’t mean he has to be stoic, being a man means being strong with others, and nobody should ridicule him for expressing himself.\n" +
+			"\n" +
+			"“It’s not just dat, [pc]... I need to be a strong man… for you. I wanna protect ya, I need ta be able to be dere for you.”\n" +
+			"\n" +
+			"You tell him that he can, but he shouldn’t let that cloud his judgment or isolate himself from you, himself, or others. He will always be your man, no matter what. You assure him that expressing how he feels and talking to you about his problems will never make him less of a man. He doesn’t need to push others away to keep himself safe.\n" +
+			"\n" +
+			"Zenji gives you a soft smile, “You’re right. You’re everyting I have ta look forward to, [name]. I love you so much. I may be a man, and at least I know now dat I am your man. I will try ta be a little more open, I promise I will. I shouldn’t hide from myself, nor should I hide myself from you. And I guess I can be a little less harsh to some of the other people around...”\n" +
+			"\n" +
+			"He pulls you into his strong arms, clutching you closely against his chiseled body as his tail wraps around you. “You have so much ta teach me, and I have so much ta learn about myself… Thank you…” He whispers.\n");
+	doNext(playerMenu);
+}
+
 //ZENJI MARRIAGE
+public function ZenjiMarriagePreCheck():void{
+
+}
 
 public function marryZenji1():void {
 	spriteSelect(SpriteDb.s_zenji);
