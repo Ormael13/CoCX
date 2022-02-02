@@ -336,9 +336,9 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 			if (re == 061) SceneLib.sharkgirlScene.oceanSharkspackWinChoices();
 		}
 
-		//if (uniquuuesexscene.pcCanUseUniqueSexScenev2(true, null) > 0) addButton(13, "U.Sex Scenes", curry(uniquuuesexscene.pcCanUseUniqueSexScenev2, false, [BACK FUNCTION GOES HERE])).hint("Other non-typical sex scenes.");
+		//if (uniquuuesexscene.pcCanUseUniqueSexScenev2(true, null) > 0) addButton(13, "U.Sex Scenes", uniquuuesexscene.pcCanUseUniqueSexScenev2, false, BACK_FUNCTION_GOES_HERE).hint("Other non-typical sex scenes.");
 		//Replace above implementation if you want, use the above. can replace addButton + curry for the few special cases.
-		public function pcCanUseUniqueSexScenev2(isChecking:Boolean = false, backFunc:Array = null, page:int = 0):*{
+		public function pcCanUseUniqueSexScenev2(isChecking:Boolean = false, backFunc:Function = null, page:int = 0):*{
 			var menuItems:Array = [];
 			menuItems.push.apply(this, USSTailRape());
 			menuItems.push.apply(this, USSTailpeg());
@@ -354,7 +354,7 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 			menuItems.push.apply(this, USSTentRape());
 			menuItems.push.apply(this, USSLiveDildo());
 			menuItems.push.apply(this, USSJiangshiDrn());
-			if (backFunc == null) backFunc = [camp.returnToCampUseOneHour];
+			if (backFunc == null) backFunc = camp.returnToCampUseOneHour;
 			return menuGen(menuItems, page, backFunc[0],false, isChecking);
 
 			function USSTailRape():Array{
