@@ -126,6 +126,8 @@ public class SceneLib {
     public static var ayaneFollower:AyaneFollower = new AyaneFollower();
 
     public static var bashemathScene:BashemathFollower = new BashemathFollower();
+    
+    public static var belisa:BelisaFollower = new BelisaFollower();
 
     public static var ceraphScene:CeraphScene = new CeraphScene();
 
@@ -152,6 +154,8 @@ public class SceneLib {
     public static var excelliaFollower:ExcelliaFollower = new ExcelliaFollower();
 
     public static var exgartuan:Exgartuan = new Exgartuan();
+	
+	public static var forgefatherScene:Forgefather = new Forgefather();
 
     public static var galiaFollower:GaliaFollower = new GaliaFollower();
 
@@ -254,6 +258,8 @@ public class SceneLib {
     public static var sharkgirlScene:SharkGirlScene = new SharkGirlScene();
 
     public static var scyllaScene:ScyllaScene = new ScyllaScene();
+
+    public static var trollVillage:TrollVillage = new TrollVillage();
 
     public static var bazaar:Bazaar = new Bazaar();
 

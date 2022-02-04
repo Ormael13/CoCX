@@ -1600,7 +1600,20 @@ import classes.Stats.Buff;
 				addButton(4, "RevengeOral", sayThatsAPrettyFaceBeAShameIfSomebodyJizzedAllOverIt);
 				if (player.tentacleCocks() >= 8 || player.stamenCocks() >= 8) addButton(5, "Tentacruel", tentacruelRevengeFux);
 			}
-			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 024).hint("Other non typical sex scenes.");
+		}
+		public function touchThatFluffyHorn2():void {
+			menu();
+			addButton(0, "Let Go", letGoAndLeaveYouSillyFuck);
+			flags[kFLAGS.IZUMI_SEEN_PC_GENDER] = player.gender;
+			if (player.hasVagina()) addButton(1, "TribHorn", tribThatRockyHornGirl);
+			if (player.hasCock()) {
+				addButton(2, "LetsFuck", letGoAndFuck);
+				addButton(3, "RevengeAnal", gonnaGetMeSomeRevengeButtsexin);
+				addButton(4, "RevengeOral", sayThatsAPrettyFaceBeAShameIfSomebodyJizzedAllOverIt);
+				if (player.tentacleCocks() >= 8 || player.stamenCocks() >= 8) addButton(5, "Tentacruel", tentacruelRevengeFux);
+			}
+			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 024).hint("Other non typical sex scenes.");
 		}
 
 		// Pfft, nofux

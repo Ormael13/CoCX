@@ -11,6 +11,7 @@ import classes.CoC;
 import classes.Scenes.Areas.Caves.*;
 import classes.Scenes.Dungeons.EbonLabyrinth;
 import classes.Scenes.Monsters.DarkElfScene;
+import classes.Scenes.NPCs.Forgefather;
 import classes.Scenes.SceneLib;
 
 use namespace CoC;
@@ -54,7 +55,7 @@ use namespace CoC;
 				return;
 			}
 			//Ashlands
-			if (player.level >= 35 && flags[kFLAGS.DISCOVERED_ASHLANDS] == 0) {
+			if ((player.level + combat.playerLevelAdjustment()) >= 35 && flags[kFLAGS.DISCOVERED_ASHLANDS] == 0) {
 				clearOutput();
 				outputText("While exploring one of the many tunnels you begin to see a red light, curious as to where this opens you take it all the way to the surface as the heat starts to increase dramatically the cool fresh air of the tunnel replaced by a warm and smoky air, it's definitely very hot out there. ");
 				outputText("What awaits you beyond the exit is the sight of a field of ashes and lava with volcanoes in the backside.\n\n");
@@ -64,7 +65,7 @@ use namespace CoC;
 				return;
 			}
 			//Tundra
-			if (player.level >= 35 && flags[kFLAGS.DISCOVERED_TUNDRA] == 0) {
+			if ((player.level + combat.playerLevelAdjustment()) >= 35 && flags[kFLAGS.DISCOVERED_TUNDRA] == 0) {
 				clearOutput();
 				outputText("While exploring one of the many tunnels you begin to see a bluish light, curious as to where this opens you take it all the way to the surface and begin to feel chilly, it's definitely cold out there. What awaits you beyond the exit is the sight of endless tundra and icebound mountains.\n\n");
 				outputText("<b>You've discovered the Tundra!</b>");
@@ -84,7 +85,8 @@ use namespace CoC;
 			choice[choice.length] = 3; //4Displacer Beast (lvl 60)
 			choice[choice.length] = 4; //5Ebonbloom
 			choice[choice.length] = 5; //6Methir Crystal OR Magical eye drops
-			if (rand(4) == 0) choice[choice.length] = 6; //7Find nothing!
+			choice[choice.length] = 6; //7Ebony
+			if (rand(4) == 0) choice[choice.length] = 7; //8Find nothing!
 			
 			select = choice[rand(choice.length)];
 			switch(select) {
@@ -128,6 +130,17 @@ use namespace CoC;
 						inventory.takeItem(consumables.ME_DROP, camp.returnToCampUseOneHour);
 					}
 					break;
+				case 6://7
+					clearOutput();
+					if (player.hasKeyItem("Old Pickaxe") > 0 && Forgefather.materialsExplained == true){
+						outputText("You stumble across a vein of Ebony, this looks like suitable material for your gargoyle form.\n");
+						outputText("Do you wish to mine it?");
+						menu();
+						addButton(0, "Yes", cavesSiteMine);
+						addButton(1, "No", camp.returnToCampUseOneHour);
+					}
+					else camp.returnToCampUseOneHour();
+					break;
 				default:
 					clearOutput();
 					outputText("You spend one hour exploring the caves but you don't manage to find anything interesting, unless feeling like you are becoming slightly tougher counts.");
@@ -143,6 +156,23 @@ use namespace CoC;
 			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
 			player.createKeyItem("Touhouna M3", 0, 0, 0, 0);
 			doNext(camp.returnToCampUseOneHour);
+		}
+		
+		private function cavesSiteMine():void {
+			if (Forgefather.materialsExplained != 1) doNext(camp.returnToCampUseOneHour);
+			else {
+				if (player.fatigue > player.maxFatigue() - 50) {
+					outputText("\n\n<b>You are too tired to consider mining. Perhaps some rest will suffice?</b>");
+					doNext(camp.returnToCampUseOneHour);
+					return;
+				}
+				outputText("\n\nYou begin slamming your pickaxe against the ebony, spending the better part of the next two hours mining. This done, you bring back your prize to camp. ");
+				var minedStones:Number = 13 + Math.floor(player.str / 7);
+				minedStones = Math.round(minedStones);
+				fatigue(50, USEFATG_PHYSICAL);
+				SceneLib.forgefatherScene.incrementEbonySupply(minedStones);
+				camp.returnToCampUseTwoHours();
+			}
 		}
 	}
 }

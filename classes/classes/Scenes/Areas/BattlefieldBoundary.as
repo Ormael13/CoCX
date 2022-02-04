@@ -23,7 +23,7 @@ use namespace CoC;
 		public function exploreBattlefieldBoundary():void {
 			flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY]++;
 			//Discover Outer Battlefield
-			if (flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] <= 0 && player.level >= 19) {
+			if (flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] <= 0 && (player.level + combat.playerLevelAdjustment()) >= 19) {
 				flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] = 1;
 				player.explored++;
 				clearOutput();

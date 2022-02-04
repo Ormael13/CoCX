@@ -162,34 +162,29 @@ internal function pcBeatsATrap():void {
 	if(monster.HP <= monster.minHP()) outputText("The sandtrap groans and collapses forwards into the dirt.  With the creature no longer controlling it, the sand underneath you feels a great deal more stable... climbing out won't be too difficult.");
 	//PC lust victory: 
 	else outputText("The sand around you stops sinking.  Overpowered with lust, the sandtrap moans and gives up control over itself and its pit to desperately run one set of hands over its flat chest whilst the other pushes into the sand to masturbate... whatever it has down there.  With your foe in this state, climbing out won't be so difficult now.");
-	
-	var nagaThreeSome:Function = null;
-	var putYourDickInIt:Function = null;
-	var rideDatSantTrap:Function = null;
-	var useSandTarpsHand:Function = null;
-	var bikiniTits:Function = null;
-	var temp3:Function = null;
-	if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") bikiniTits = createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,monster);
-	if (player.pcCanUseUniqueSexScene()) temp3 = uniquuuesexscene.pcUniqueSexScenesChoiceMenu;
-	//Requirements: Player is naga with tail and fangs, has met desert naga as naga at least once
-	if(player.isNaga() && player.hasStatusEffect(StatusEffects.Naga) && player.gender > 0 && player.faceType == Face.SNAKE_FANGS) nagaThreeSome = nagaThreesomeWithSandTrap;
-	
-	//Requires: Penis and str requirement
-	if(player.hasCock() && player.str >= 60) putYourDickInIt = stickWangInSandgina;
-	
-	//\"<i>Ride</i>\" (Z)
-	if(player.hasVagina()) rideDatSantTrap = rideDatSandTarpLikeIts1999;
-	//\"<i>Hands</i>\" (Z)
-	if(player.gender > 0) useSandTarpsHand = useSandTarpsHands;
-	
 	//additional victory sentence if PC lust over 30: 
-	if(player.lust >= 33) {
+	if (player.lust >= 33) {
 		outputText("\n\nBefore you go, you take in the helpless body of your would-be ambusher.  What do you do?");
-		
-		choices("Naga3Some", nagaThreeSome, "UseYourCock", putYourDickInIt, "RideVaginal", rideDatSantTrap, "Handjob", useSandTarpsHand, "", null,
-			"", null, "", null, "U. Sex Scenes", temp3, "B.Titfuck", bikiniTits, "Leave", cleanupAfterCombat);
+		menu();
+		if (player.isNaga() && player.hasStatusEffect(StatusEffects.Naga) && player.gender > 0 && player.faceType == Face.SNAKE_FANGS) addButton(0, "Naga3Some", nagaThreesomeWithSandTrap);
+		if (player.hasCock() && player.str >= 60) addButton(1, "UseYourCock", stickWangInSandgina);
+		addButton(2, "RideVaginal", rideDatSandTarpLikeIts1999);
+		addButton(3, "Handjob", useSandTarpsHands);
+		if (player.pcCanUseUniqueSexScene()) addButton(7, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 012);
+		if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") addButton(8, "B.Titfuck", createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,monster));
+		addButton(9, "Leave", cleanupAfterCombat);
 	}
 	else cleanupAfterCombat();
+}
+public function pcBeatsATrap2():void {
+	menu();
+	if (player.isNaga() && player.hasStatusEffect(StatusEffects.Naga) && player.gender > 0 && player.faceType == Face.SNAKE_FANGS) addButton(0, "Naga3Some", nagaThreesomeWithSandTrap);
+	if (player.hasCock() && player.str >= 60) addButton(1, "UseYourCock", stickWangInSandgina);
+	addButton(2, "RideVaginal", rideDatSandTarpLikeIts1999);
+	addButton(3, "Handjob", useSandTarpsHands);
+	if (player.pcCanUseUniqueSexScene()) addButton(7, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 012);
+	if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") addButton(8, "B.Titfuck", createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,monster));
+	addButton(9, "Leave", cleanupAfterCombat);
 }
 
 //Male/Herm loss (Z)

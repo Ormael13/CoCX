@@ -627,20 +627,26 @@ internal function beatSandwitch():void {
 	if(monster.lust >= monster.maxLust()) outputText("You smile in satisfaction as the " + monster.short + " drops down on all fours and begins masturbating feverishly.  Sadly you realize your own needs have not been met.  Of course you could always fuck the horny witch...\n\nDo you rape her?");
 	else outputText("You smile in satisfaction as the " + monster.short + " drops down on all fours and struggles to rise.  Sadly you realize your own needs have not been met.  Of course, you could always fuck the witch...");
 	outputText("  Of course, just taunting, teasing, and humiliating her for her arrogance would be equally amusing, <b>but it would give her plenty of time to turn the tables...</b>");
-	var temp2:Function = null;
-	var temp3:Function = null;
-	var temp4:Function = null;
-	if (silly()) temp3 = missingoSex;
-    if (player.pcCanUseUniqueSexScene()) temp4 = uniquuuesexscene.pcUniqueSexScenesChoiceMenu;
-    if (player.hasKeyItem("Deluxe Dildo") >= 0) temp2 = sandwitchGetsDildoed;
-	var shouldra:Function = null;
-	if(SceneLib.shouldraFollower.followerShouldra() && player.gender > 0) shouldra = SceneLib.shouldraFollower.sandWitchGetsGhostly;
-	//doYesNo(sandwitchRaped, cleanupAfterCombat);
-	var ovi:Function = null;
-	if(player.gender > 0 && player.canOviposit()) ovi = ovipositSandWitches;
-	
-	choices("Yes", sandwitchRaped, "Dildo Rape", temp2, "Use 3i@-", temp3, "Use Shouldra", shouldra, "Lay Eggs", ovi,
-		"Taunt Her", sandwitchSpanking, "", null, "", null, "U. Sex Scenes", temp4, "Leave", cleanupAfterCombat);
+	menu();
+	addButton(0, "Yes", sandwitchRaped);
+	if (player.hasKeyItem("Deluxe Dildo") >= 0) addButton(1, "Dildo Rape", sandwitchGetsDildoed);
+	if (silly()) addButton(2, "Use 3i@-", missingoSex);
+	if(SceneLib.shouldraFollower.followerShouldra() && player.gender > 0) addButton(3, "Use Shouldra", SceneLib.shouldraFollower.sandWitchGetsGhostly);
+	if (player.gender > 0 && player.canOviposit()) addButton(4, "Lay Eggs", ovipositSandWitches);
+	addButton(5, "Taunt Her", sandwitchSpanking);
+	if (player.pcCanUseUniqueSexScene()) addButton(8, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 014);
+	addButton(9, "Leave", cleanupAfterCombat);
+}
+public function beatSandwitch2():void {
+	menu();
+	addButton(0, "Yes", sandwitchRaped);
+	if (player.hasKeyItem("Deluxe Dildo") >= 0) addButton(1, "Dildo Rape", sandwitchGetsDildoed);
+	if (silly()) addButton(2, "Use 3i@-", missingoSex);
+	if(SceneLib.shouldraFollower.followerShouldra() && player.gender > 0) addButton(3, "Use Shouldra", SceneLib.shouldraFollower.sandWitchGetsGhostly);
+	if (player.gender > 0 && player.canOviposit()) addButton(4, "Lay Eggs", ovipositSandWitches);
+	addButton(5, "Taunt Her", sandwitchSpanking);
+	if (player.pcCanUseUniqueSexScene()) addButton(8, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 014);
+	addButton(9, "Leave", cleanupAfterCombat);
 }
     //RAEP SAND-WITCH!
     private function sandwitchGetsDildoed():void {

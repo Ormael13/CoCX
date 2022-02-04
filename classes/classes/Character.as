@@ -6,6 +6,7 @@ import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.JewelryLib;
 import classes.Items.NecklaceLib;
+import classes.Scenes.NPCs.Forgefather;
 import classes.CoC;
 
 /**
@@ -691,7 +692,14 @@ import classes.CoC;
 			if (game.player.unicornScore() >= 10) max += (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.EromancyBeginner)) max += Math.round(lib);
 			if (hasPerk(PerkLib.EromancyExpert)) max += Math.round(lib*2);
-			if (hasPerk(PerkLib.EromancyMaster)) max += Math.round(lib*2);
+			if (hasPerk(PerkLib.EromancyMaster)) max += Math.round(lib * 2);
+			if (isGargoyle() && Forgefather.material == "sandstone")
+			{
+				if (Forgefather.refinement == 0) multimax += (.15);
+				if (Forgefather.refinement == 1) multimax += (.25);
+				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) multimax += (.35);
+				if (Forgefather.refinement == 4) multimax += (.5);
+			}
 			if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) max += (150 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) max += (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
@@ -758,6 +766,10 @@ import classes.CoC;
 			max += level * maxSfPerLevelStat.value;
 			if (level <= 6) max += level * 5;
 			if (game.player.alicornScore() >= 12) multimax += 0.2;
+			if (game.player.angelScore() >= 5) multimax += 0.5;
+			if (game.player.angelScore() >= 11) multimax += 1;
+			if (game.player.demonScore() >= 5) multimax -= 0.4;
+			if (game.player.demonScore() >= 11) multimax -= 0.8;
 			if (game.player.kitsuneScore() >= 5) multimax += 0.1;
 			if (game.player.kitsuneScore() >= 9 && game.player.tailType == 13 && game.player.tailCount >= 2) {
 				multimax += 0.1;
@@ -768,6 +780,13 @@ import classes.CoC;
 						if (game.player.kitsuneScore() >= 26) multimax += 0.35;
 					}
 				}
+			}
+			if (isGargoyle() && Forgefather.material == "marble")
+			{
+				if (Forgefather.refinement == 0) multimax += (.15);
+				if (Forgefather.refinement == 1) multimax += (.25);
+				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) multimax += (.35);
+				if (Forgefather.refinement == 4) multimax += (.5);
 			}
 			if (game.player.nekomataScore() >= 10) multimax += 0.1;
 			if (game.player.nekomataScore() >= 12 && game.player.tailType == 8 && game.player.tailCount == 2) multimax += 0.2;
@@ -799,6 +818,7 @@ import classes.CoC;
 			}
 			max *= multimax;
 			max = Math.round(max);
+			if (game.player.demonScore() >= 16 && hasPerk(PerkLib.Phylactery)) max = 0;
 			if (max > 1499999) max = 1499999;
 			return max;
 		}
@@ -825,6 +845,11 @@ import classes.CoC;
 			if (level <= 6) max += level * 5;
 			else max += 30;
 			//~194,455
+			if (game.player.angelScore() >= 5) multimax += 0.2;
+			if (game.player.angelScore() >= 11) multimax += 0.4;
+			if (game.player.demonScore() >= 5) multimax -= 0.15;
+			if (game.player.demonScore() >= 11) multimax -= 0.3;
+			if (game.player.demonScore() >= 16 && hasPerk(PerkLib.Phylactery)) multimax -= 0.45;
 			if (game.player.orcScore() >= 5) multimax += 0.1;
 			if (game.player.orcScore() >= 11) multimax += 0.1;
 			if (vehiclesName == "Giant Slayer Mech") {
@@ -833,6 +858,13 @@ import classes.CoC;
 				//if (upgrade mecha) multimax += 0.1;
 				//if (upgrade mecha) multimax += 0.1;
 				//if (upgrade mecha) multimax += 0.1;
+			}
+			if (isGargoyle() && Forgefather.material == "ebony")
+			{
+				if (Forgefather.refinement == 0) multimax += (.15);
+				if (Forgefather.refinement == 1) multimax += (.25);
+				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) multimax += (.35);
+				if (Forgefather.refinement == 4) multimax += (.5);
 			}
 			max *= multimax;//~245%
 			max = Math.round(max);//476 414,75
@@ -911,6 +943,11 @@ import classes.CoC;
 			if (hasPerk(PerkLib.EromancyBeginner)) max += Math.round(inte*3);
 			if (hasPerk(PerkLib.EromancyExpert)) max += Math.round(inte*3);
 			if (hasPerk(PerkLib.EromancyMaster)) max += Math.round(inte*6);
+			if (game.player.angelScore() >= 5) multimax -= 0.4;
+			if (game.player.angelScore() >= 11) multimax -= 0.8;
+			if (game.player.demonScore() >= 5) multimax += 0.5;
+			if (game.player.demonScore() >= 11) multimax += 1;
+			if (game.player.demonScore() >= 16 && hasPerk(PerkLib.Phylactery)) multimax += 1.5;
 			if (game.player.elfScore() >= 5) multimax += 0.1;
 			if (game.player.elfScore() >= 11) multimax += 0.1;
 			if (game.player.woodElfScore() >= 22) multimax += 0.1;
@@ -937,6 +974,13 @@ import classes.CoC;
 				if (hasPerk(PerkLib.GreyMageApprentice) && inte >= 75) multimax += 0.1;
 				if (hasPerk(PerkLib.Mage) && inte >= 50) multimax += 0.1;
 				if (hasPerk(PerkLib.JobSorcerer)) multimax += 0.1;
+			}
+			if (isGargoyle() && Forgefather.material == "alabaster")
+			{
+				if (Forgefather.refinement == 0) multimax += (.15);
+				if (Forgefather.refinement == 1) multimax += (.25);
+				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) multimax += (.35);
+				if (Forgefather.refinement == 4) multimax += (.5);
 			}
 			if (hasPerk(PerkLib.AscensionInnerPower)) max += perkv1(PerkLib.AscensionInnerPower) * 120;
 			if (jewelryEffectId == JewelryLib.MODIFIER_MP) max += jewelryEffectMagnitude;

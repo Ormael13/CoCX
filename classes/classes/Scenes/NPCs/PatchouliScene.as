@@ -178,113 +178,7 @@ public class PatchouliScene extends NPCAwareContent {
 
 		clearOutput();
 		outputText("The cat jumps down from the tree and walks ahead of you, showing you the way. Strangely, the landscape seems to change absurdly fast around you as you follow him until ");
-		//outer battlefield 5
-		// 5
-		if (player.exploredMountain < 1) {
-			outputText("you end up in a somewhat mountainy area.\n\n");
-			outputText("<b>Discovered Mountain!</b>\n\n");
-			player.explored++;
-			player.exploredMountain = 1;
-			outputText("As you turn a corner you end up looking at the back of a somewhat tall man with the features of a bull. You’re about to sneak away when Patchouli shouts.\n\n");
-			outputText("\"<i>Hey fatty, look! There’s an idiot right over here for you to fuck! Have fun!</i>\"\n\n");
-			outputText("You see Patchouli vanishing with a mischievous laugh as the bull man turns and sees you, his monstrously thick shaft hardening as he walks toward you. He obviously intends to beat and rape you.");
-			startCombat(new Minotaur());
-		}
-		// 7
-		else if (!player.hasStatusEffect(StatusEffects.ExploredDeepwoods)) {
-			outputText("you end up in a darker and more sinister part of the forest.\n\n");
-			outputText("<b>Discovered Deepwood!</b>\n\n");
-			player.createStatusEffect(StatusEffects.ExploredDeepwoods, 0, 0, 0, 0);
-			outputText("As you are about to question your guide, the cat suddenly jumps onto a branch and yells before vanishing.\n\n");
-			outputText("\"<i>Hey, Akbal! You have trespassers!</i>\"\n\n");
-			outputText("You see a large panther surge out of a bush, and the way it looks at you is anything but friendly!");
-			(new AkbalScene).supahAkabalEdition();
-		}
-		// 9
-		else if (flags[kFLAGS.TIMES_EXPLORED_PLAINS] < 1) {
-			outputText("you end up in a flat grassland with hills popping up every now and then.\n\n");
-			outputText("<b>Discovered the plains!</b>\n\n");
-			flags[kFLAGS.TIMES_EXPLORED_PLAINS] = 1;
-			player.explored++;
-			outputText("As you take in the beauty of the landscape, you suddenly realise the cat is no longer ahead of you. Furthermore, there are many passed out gnolls on the ground before you. You hear Patchouli laughter in the distance as a distinct shape rises amongst the defeated hyena warriors bodies, moving toward you. It’s a woman, partially covered with red scales, with reptilian arms, legs and tail. Speaking of which, her tail is actually on fire! She screams a warcry and charges at you, scimitar at the ready.\n\n");
-			startCombat(new Hel());
-		}
-		// 13
-		else if (flags[kFLAGS.TIMES_EXPLORED_SWAMP] < 1) {
-			outputText("you end up in a somewhat swampy area full of mosquitos.\n\n");
-			outputText("<b>Discovered the swamp!</b>\n\n");
-			flags[kFLAGS.TIMES_EXPLORED_SWAMP] = 1;
-			player.explored++;
-			outputText("You start to notice spider webs around you and when you’re about to ask Patchouli about it,  you notice that your feet just got stuck in a web, unable to move. The cat simply keeps moving forward and disappears into the fog, as multiple creepy eyes open in the mist above you.\n\n");
-			outputText("\"<i>Ahahaha seems I caught something, perhaps a new vessel for my broods. I will thoroughly enjoy toying with you.</i>\"\n\n");
-			outputText("A creature with the torso of a woman and the lower body of a spider moves down along the web towards you, and, by the look of her monstruous cock, you’re pretty sure she plans to rape you!");
-			startCombat(new CorruptedDrider());
-		}
-		// 15
-		else if (flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] < 1) {
-			outputText("you end up in a somewhat mountainous area with caves and high cliffs.\n\n");
-			outputText("<b>Discovered high mountain!</b>\n\n");
-			flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN] = 1;
-			outputText("You’re about to question him about this location, when you hear a low pitch growl coming from a nearby cave. Patchouli turns toward you, grinning as he vanishes into thin air, yelling.\n\n");
-			outputText("\"<i>The dinner is served, big cat. Enjoy your meal!</i>\"\n\n");
-			outputText("Suddenly, a spike misses your shoulder by an inch. You see something walk out of the cave with a sadistic grin. It looks like another cat person, a girl this time, with the features of a lion, but her scorpion like tail and large bat wings tell you she’s much, much worse than a lion.");
-			startCombat(new Etna());
-		}
-		//blight ridge 21
-		// 23
-		else if (flags[kFLAGS.BOG_EXPLORED] < 1) {
-			outputText("you end up in a bog.\n\n");
-			outputText("<b>Discovered the bog!</b>\n\n");
-			flags[kFLAGS.BOG_EXPLORED] = 1;
-			outputText("The area has something eerie and sinister about it, but as you’re about to tell such to your guide, you suddenly realise that the cat actually left a while ago and that you’ve been walking alone! Furthermore, the warning signs around you aren’t any good either. You suddenly dodge an attack surging out of nowhere. It’s a lizan and by the look of it, he’s trying to mug you.\n\n");
-			startCombat(new LizanRogue());
-		}
-		// 25
-		else if (flags[kFLAGS.DISCOVERED_BEACH] < 1) {
-			outputText("you end up on sand, hearing seagulls all around you. There's even crashing waves of water nearby.\n\n");
-			outputText("<b>Discovered Beach, Ocean and Deep Sea!</b>\n\n");
-			flags[kFLAGS.DISCOVERED_BEACH] = 1;
-			outputText("The moment your gaze turn back to your guide you realise Patchoul");
-			if (flags[kFLAGS.PATCHOULI_FOLLOWER] >= 6) {
-				outputText("e");
-			} else {
-				outputText("i");
-			}
-			outputText(" is no longer there. Instead your gaze go eye to eye with that of a demon dressed like a pirate.\n\n");
-			outputText("\"<i>Yarr we found some nice piece of ass here matey!! Lets claim that booty!</i>\"\n\n");
-			outputText("You can hear the cat chuckle in the distance as you engage with a full crew of demonic pirates!");
-			startCombat(new DemonPackBeach());
-		}
-		//caves 30 (leave with displacer beast i suppose xD)
-		// 25
-		else if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] < 1) {
-			outputText("the temperature drops drastically. You see snow falling all around you and realise that you are now in some kind of inhospitable icy wasteland.\n\n");
-			outputText("<b>Discovered glacial rift!</b>\n\n");
-			flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] = 1;
-			player.explored++;
-			outputText("You decide that you’ve had enough and prepare to tell your guide that you're leaving, when Patchouli yells into the far distance.\n\n");
-			outputText("\"<i>Hey, big idiot! There’s a puny bug for you to squish right here! ");
-			if (player.hasCock()) {
-				outputText("He");
-			} else {
-				outputText("She");
-			}
-			outputText(" said that your momma is ugly and that you were born a defect!</i>\"\n\n");
-			outputText("The cat turns over to you, grinning wide as you hear the ground quake - something is coming, and it's huge! Before you have any time to punish the cat, he vanishes, still laughing as the frame of a man the size of a building breaks out of the blizzard, looking straight at you with furious eyes.");
-			if (!player.hasPerk(PerkLib.ColdAffinity)) SceneLib.glacialRift.SubZeroConditionsTick();
-			startCombat(new FrostGiant());
-		}
-		// 25
-		else if (flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] < 1) {
-			outputText("you end up in a somewhat hot area. You can see lava rivers every now and then across the ashen land.\n\n");
-			outputText("<b>Discovered Volcanic area!</b>\n\n");
-			flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] = 1;
-			player.explored++;
-			outputText("Just as you consider leaving this unfriendly land, the cat shouts something and what looks to be a harpy mixed up with a fiery lizard flies from a cliff toward the both of you. A few seconds later a full flock of them joins in! You see the damned cat disappearing, just before the battle starts.\n\n");
-			if (!player.hasPerk(PerkLib.FireAffinity) && !player.hasPerk(PerkLib.AffinityIgnis)) SceneLib.volcanicCrag.ConstantHeatConditionsTick();
-			startCombat(new PhoenixPlatoon());
-		}
-		else {
+		if (visitedAllAreas()) {
 			if (flags[kFLAGS.PATCHOULI_AND_WONDERLAND] != 1) {
 				outputText("you end up in an exceedingly colorful version of the forest. Things here look weirder than usual, but not in a sexual way, rather it’s like the painting of a mad artist.\n\n");
 				outputText("\"<i>Well wow, out of all locations I didn’t expect us to end up in here... just... just pick up a fruit or two and I will escort you out.</i>\"\n\n");
@@ -299,12 +193,10 @@ public class PatchouliScene extends NPCAwareContent {
 				addButton(0, "Leave", patchouliExploreWonderlandLeave);
 				addButton(1, "Stay", patchouliExploreWonderlandStay);
 			}
-
 			function patchouliExploreWonderlandLeave():void {
 				outputText("You decide it's best to return to camp.\n\n");
 				doNext(camp.returnToCampUseOneHour);
 			}
-
 			function patchouliExploreWonderlandStay():void {
 				outputText("You decide to stay regardless of the cat’s thoughts on the matter and hear a roar somewhere in the forest. Patchouli whimpers in terror and tries to hide.\n\n");
 				outputText("\"<i>It’s too late, we're both dead. Jabberwocky is here!!!</i>\"\n\n");
@@ -312,6 +204,106 @@ public class PatchouliScene extends NPCAwareContent {
 				outputText("\"<i>You were told never to come back, cat! You will pay for your insolence, along with this outsider.</i>\"\n\n");
 				outputText("The rabbit dragon breathes a stream of fire to the sky and charges.\n\n");
 				startCombat(new Jabberwocky());
+			}
+		}
+		else {
+			var area:Number = rand(9);
+			switch (area) {
+				//outer battlefield 5
+				case 0:
+					outputText("you end up in a somewhat mountainy area.\n\n");
+					outputText("As you turn a corner you end up looking at the back of a somewhat tall man with the features of a bull. You’re about to sneak away when Patchouli shouts.\n\n");
+					outputText("\"<i>Hey fatty, look! There’s an idiot right over here for you to fuck! Have fun!</i>\"\n\n");
+					outputText("You see Patchouli vanishing with a mischievous laugh as the bull man turns and sees you, his monstrously thick shaft hardening as he walks toward you. He obviously intends to beat and rape you.");
+					startCombat(new Minotaur());
+					break;
+				case 1:
+					outputText("you end up in a darker and more sinister part of the forest.\n\n");
+					outputText("As you are about to question your guide, the cat suddenly jumps onto a branch and yells before vanishing.\n\n");
+					outputText("\"<i>Hey, Akbal! You have trespassers!</i>\"\n\n");
+					outputText("You see a large panther surge out of a bush, and the way it looks at you is anything but friendly!");
+					(new AkbalScene).supahAkabalEdition();
+					break;
+				case 2:
+					outputText("you end up in a flat grassland with hills popping up every now and then.\n\n");
+					outputText("As you take in the beauty of the landscape, you suddenly realise the cat is no longer ahead of you. Furthermore, there are many passed out gnolls on the ground before you. You hear Patchouli laughter in the distance as a distinct shape rises amongst the defeated hyena warriors bodies, moving toward you. It’s a woman, partially covered with red scales, with reptilian arms, legs and tail. Speaking of which, her tail is actually on fire! She screams a warcry and charges at you, scimitar at the ready.\n\n");
+					startCombat(new Hel());
+					break;
+				case 3:
+					outputText("you end up in a somewhat swampy area full of mosquitos.\n\n");
+					outputText("You start to notice spider webs around you and when you’re about to ask Patchouli about it,  you notice that your feet just got stuck in a web, unable to move. The cat simply keeps moving forward and disappears into the fog, as multiple creepy eyes open in the mist above you.\n\n");
+					outputText("\"<i>Ahahaha seems I caught something, perhaps a new vessel for my broods. I will thoroughly enjoy toying with you.</i>\"\n\n");
+					outputText("A creature with the torso of a woman and the lower body of a spider moves down along the web towards you, and, by the look of her monstruous cock, you’re pretty sure she plans to rape you!");
+					startCombat(new CorruptedDrider());
+					break;
+				case 4:
+					outputText("you end up in a somewhat mountainous area with caves and high cliffs.\n\n");
+					outputText("You’re about to question him about this location, when you hear a low pitch growl coming from a nearby cave. Patchouli turns toward you, grinning as he vanishes into thin air, yelling.\n\n");
+					outputText("\"<i>The dinner is served, big cat. Enjoy your meal!</i>\"\n\n");
+					outputText("Suddenly, a spike misses your shoulder by an inch. You see something walk out of the cave with a sadistic grin. It looks like another cat person, a girl this time, with the features of a lion, but her scorpion like tail and large bat wings tell you she’s much, much worse than a lion.");
+					startCombat(new Etna());
+					break;
+				//blight ridge 21
+				case 5:
+					outputText("you end up in a bog.\n\n");
+					outputText("The area has something eerie and sinister about it, but as you’re about to tell such to your guide, you suddenly realise that the cat actually left a while ago and that you’ve been walking alone! Furthermore, the warning signs around you aren’t any good either. You suddenly dodge an attack surging out of nowhere. It’s a lizan and by the look of it, he’s trying to mug you.\n\n");
+					startCombat(new LizanRogue());
+					break;
+				case 6:
+					outputText("you end up on sand, hearing seagulls all around you. There's even crashing waves of water nearby.\n\n");
+					outputText("The moment your gaze turn back to your guide you realise Patchoul");
+					if (flags[kFLAGS.PATCHOULI_FOLLOWER] >= 6) {
+						outputText("e");
+					} else {
+						outputText("i");
+					}
+					outputText(" is no longer there. Instead your gaze go eye to eye with that of a demon dressed like a pirate.\n\n");
+					outputText("\"<i>Yarr we found some nice piece of ass here matey!! Lets claim that booty!</i>\"\n\n");
+					outputText("You can hear the cat chuckle in the distance as you engage with a full crew of demonic pirates!");
+					startCombat(new DemonPackBeach());
+					break;
+				//caves 30 (leave with displacer beast i suppose xD)
+				case 7:
+					outputText("the temperature drops drastically. You see snow falling all around you and realise that you are now in some kind of inhospitable icy wasteland.\n\n");
+					outputText("You decide that you’ve had enough and prepare to tell your guide that you're leaving, when Patchouli yells into the far distance.\n\n");
+					outputText("\"<i>Hey, big idiot! There’s a puny bug for you to squish right here! ");
+					if (player.hasCock()) {
+						outputText("He");
+					} else {
+						outputText("She");
+					}
+					outputText(" said that your momma is ugly and that you were born a defect!</i>\"\n\n");
+					outputText("The cat turns over to you, grinning wide as you hear the ground quake - something is coming, and it's huge! Before you have any time to punish the cat, he vanishes, still laughing as the frame of a man the size of a building breaks out of the blizzard, looking straight at you with furious eyes.");
+					if (!player.hasPerk(PerkLib.ColdAffinity)) SceneLib.glacialRift.SubZeroConditionsTick();
+					startCombat(new FrostGiant());
+					break;
+				case 8:
+					outputText("you end up in a somewhat hot area. You can see lava rivers every now and then across the ashen land.\n\n");
+					outputText("Just as you consider leaving this unfriendly land, the cat shouts something and what looks to be a harpy mixed up with a fiery lizard flies from a cliff toward the both of you. You see the damned cat disappearing, just before the battle starts.\n\n");
+					if (!player.hasPerk(PerkLib.FireAffinity) && !player.hasPerk(PerkLib.AffinityIgnis)) SceneLib.volcanicCrag.ConstantHeatConditionsTick();
+					startCombat(new PhoenixPlatoon());
+					break;
+				/*case 9:
+
+					break;
+				case 10:
+
+					break;
+				case 11:
+
+					break;
+				case 12:
+
+					break;
+				case 13:
+
+					break;*/
+				default:
+					outputText("you end up in a somewhat mountainy area.\n\n");
+					outputText("As you turn a corner you end up looking at the back of a somewhat tall man with the features of a bull. You’re about to sneak away when Patchouli shouts.\n\n");
+					outputText("\"<i>Hey fatty, look! There’s an idiot right over here for you to fuck! Have fun!</i>\"\n\n");
+					outputText("You see Patchouli vanishing with a mischievous laugh as the bull man turns and sees you, his monstrously thick shaft hardening as he walks toward you. He obviously intends to beat and rape you.");
+					startCombat(new Minotaur());
 			}
 		}
 	}

@@ -490,7 +490,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 				var analFuck:Function =null;
 				if (player.hasVagina()) scissor = fSpiderMorphRape;
 				var temp3:Function =null;
-				if (player.pcCanUseUniqueSexScene()) temp3 = uniquuuesexscene.pcUniqueSexScenesChoiceMenu;
+				if (player.pcCanUseUniqueSexScene()) temp3 = curry(uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 040);
 				if (player.hasCock()) {
 					if (player.cockThatFits(monster.vaginalCapacity()) != -1) pussyFuck = fSpiderMorphRapeDude;
 					else outputText("  <b>You don't have a dick small enough to fuck her vagina.</b>");

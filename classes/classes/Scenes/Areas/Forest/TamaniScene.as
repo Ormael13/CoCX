@@ -2,6 +2,7 @@
 import classes.*;
 import classes.BodyParts.Skin;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.UniqueSexScenes;
 
 public class TamaniScene extends BaseContent implements TimeAwareInterface {
 
@@ -28,6 +29,8 @@ Males:
 	-If the player loses to the 'brood', brood encounters become more frequent.
 	-If the player lose 3 times, game over as breeding stud.
 */
+
+public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
 
 		public var pregnancy:PregnancyStore;
 
@@ -90,6 +93,15 @@ internal function tamaniChest():String {
 		default:
 	}
 	return descript + "breasts";
+}
+
+public function TamaniDefeated2():void {
+	menu();
+	addButton(0, "Fuck", tamaniSexWon);
+	if (player.hasCock() && player.cockThatFits(monster.analCapacity()) >= 0) addButton(1, "Buttfuck", tamaniAnalShits);
+	if (pregnancy.isPregnant && player.canOvipositSpider()) addButton(2, "Lay Eggs", tamaniBeaten);
+	if (player.pcCanUseUniqueSexScene()) addButton(3, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 017);
+	addButton(4, "Leave", cleanupAfterCombat);
 }
 
 //[Encounter Tamani – female]
@@ -950,3 +962,4 @@ private function acceptTamaniFacesits():void {
 }
 }
 }
+
