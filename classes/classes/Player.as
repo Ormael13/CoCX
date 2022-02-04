@@ -4499,7 +4499,7 @@ use namespace CoC;
 			}
 			if (TopRace == "siren") {
 				if (TopScore >= 10) {
-					if (TopScore >= 16) {
+					if (TopScore >= 20) {
 						if (isTaur()) race = "Greater siren-taur";
 						else race = "Greater siren";
 					} else {
@@ -10000,11 +10000,19 @@ use namespace CoC;
 				sirenCounter++;
 			if (eyes.type == Eyes.HUMAN)
 				sirenCounter++;
+			if (vaginaType() == VaginaClass.SHARK)
+				sirenCounter++;
 			if (hasPerk(MutationsLib.HarpyHollowBones))
 				sirenCounter++;
 			if (hasPerk(MutationsLib.HarpyHollowBonesPrimitive))
 				sirenCounter++;
 			if (hasPerk(MutationsLib.HarpyHollowBonesEvolved))
+				sirenCounter++;
+			if (hasPerk(MutationsLib.SharkOlfactorySystem))
+				sirenCounter++;
+			if (hasPerk(MutationsLib.SharkOlfactorySystemPrimitive))
+				sirenCounter++;
+			if (hasPerk(MutationsLib.SharkOlfactorySystemEvolved))
 				sirenCounter++;
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				sirenCounter += 50;
@@ -12565,15 +12573,15 @@ use namespace CoC;
 				}
 			}
 			if (sirenScore() >= 10) {
-				if (sirenScore() >= 16) {
-					maxStrCap2 += 70;
-					maxTouCap2 += 100;
-					maxSpeCap2 += 70;
+				if (sirenScore() >= 20) {
+					maxStrCap2 += 80;
+					maxSpeCap2 += 120;
+					maxLibCap2 += 100;
 				}
 				else {
-					maxStrCap2 += 40;
+					maxStrCap2 += 50;
 					maxSpeCap2 += 70;
-					maxIntCap2 += 40;
+					maxLibCap2 += 30;
 				}
 			}//+20/10-20
 			if (orcaScore() >= 6) {
