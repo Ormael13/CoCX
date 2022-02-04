@@ -11089,15 +11089,15 @@ use namespace CoC;
 			eyesMutations = eyesMutations += maxAscensionBoost()
 			return eyesMutations;
 		}
-		public function maxPeripheralNervSysMutations():Number {
-			var peripheralnervsysMutations:Number = 1;
+		public function maxNervSysMutations():Number {
+			var nervsysMutations:Number = 1;
 			for each (var pPerk:Array in MutationsLib.mutationsArray("Nerv/Sys")){
 				if (hasPerk(pPerk[0])) {
-					peripheralnervsysMutations--;
+					nervsysMutations--;
 				}
 			}
-			peripheralnervsysMutations = peripheralnervsysMutations += maxAscensionBoost()
-			return peripheralnervsysMutations;
+			nervsysMutations = nervsysMutations += maxAscensionBoost()
+			return nervsysMutations;
 		}
 		public function maxBonesAndMarrowMutations():Number {
 			var bonesandmarrowMutations:Number = 1;

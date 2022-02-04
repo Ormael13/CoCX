@@ -600,7 +600,7 @@ public class MutationsLib
 				EasterBunnyEggBag.requireBallsMutationSlot().requirePerk(PerkLib.EasterBunnyBalls).requireCustomFunction(function (player:Player):Boolean {
 					return player.easterbunnyScore() >= 12;
 				}, "Easter Bunny race and Easter bunny balls.");
-				ElvishPeripheralNervSys.requirePerk(PerkLib.ElvenSense).requireCustomFunction(function (player:Player):Boolean {
+				ElvishPeripheralNervSys.requireNervSysMutationSlot().requirePerk(PerkLib.ElvenSense).requireCustomFunction(function (player:Player):Boolean {
 					return player.elfScore() >= 4 || player.woodElfScore() >= 17;
 				}, "Elf race");
 				FeyArcaneBloodstream.requireBloodsteamMutationSlot().requireCustomFunction(function (player:Player):Boolean {
@@ -712,7 +712,7 @@ public class MutationsLib
 				SalamanderAdrenalGlands.requireAdrenalGlandsMutationSlot().requirePerk(PerkLib.Lustzerker).requireCustomFunction(function (player:Player):Boolean {
 					return player.salamanderScore() >= 8 || player.phoenixScore() >= 10;
 				}, "Salamander race");
-				SharkOlfactorySystem.requirePeripheralNervSysMutationSlot().requireCustomFunction(function (player:Player):Boolean {
+				SharkOlfactorySystem.requireNervSysMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.sharkScore() >= 8;
 				}, "Shark race");
 				TwinHeart.requireHeartMutationSlot().requireCustomFunction(function (player:Player):Boolean {
