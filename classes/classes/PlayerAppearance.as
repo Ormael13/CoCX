@@ -858,6 +858,9 @@ public class PlayerAppearance extends BaseContent {
 					case VaginaClass.MINDBREAKER:
 						pussyDesc += " constantly drools green slime, ensuring any cock that parts your infested cunt are sufficiently lubricated and ready to impregnate you. Your eldritch lips hides a ";
 						break;
+					case VaginaClass.SHARK:
+						pussyDesc += " looks human on the outside but its depths are filled with small sensitive tendril-like feelers that wrap around and swiftly help massage just any cocks to climax. Inside you have a ";
+						break;
 					default:
 						pussyDesc += " hides a ";
 						break;

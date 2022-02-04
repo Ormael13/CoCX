@@ -280,7 +280,7 @@ public class PatchouliScene extends NPCAwareContent {
 			outputText("<b>Discovered Volcanic area!</b>\n\n");
 			flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] = 1;
 			player.explored++;
-			outputText("Just as you consider leaving this unfriendly land, the cat shouts something and what looks to be a harpy mixed up with a fiery lizard flies from a cliff toward the both of you. You see the damned cat disappearing, just before the battle starts.\n\n");
+			outputText("Just as you consider leaving this unfriendly land, the cat shouts something and what looks to be a harpy mixed up with a fiery lizard flies from a cliff toward the both of you. A few seconds later a full flock of them joins in! You see the damned cat disappearing, just before the battle starts.\n\n");
 			if (!player.hasPerk(PerkLib.FireAffinity) && !player.hasPerk(PerkLib.AffinityIgnis)) SceneLib.volcanicCrag.ConstantHeatConditionsTick();
 			startCombat(new PhoenixPlatoon());
 		}

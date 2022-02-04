@@ -4806,6 +4806,12 @@ public final class Mutations extends MutationsHelper {
                 player.clitLength = .25;
                 player.addCurse("sen", 10, 1);
             }
+            //Shark Cunt
+            if (changes < changeLimit && rand(3) == 0 && player.vaginaType() != 15 && player.hasVagina()) {
+                outputText("[pg]Something invisible brushes against your sex, making you twinge. Undoing your clothes, you take a look at your vagina. It looks normal at a first glance despite the odd sensation but inserting a finger inside reveals that your walls are now covered with small sensitive tendril-like feelers. You blush as they instinctively drive your digits further in attempting to milk them like they would a penis. It looks like your vagina has turned into that of a shark girl.");
+                player.vaginaType(15);
+                changes++;
+            }
             //WANG GROWTH - TIGGERSHARK ONLY
             if (type == 1 && (!player.hasCock()) && changes < changeLimit && rand(3) == 0) {
                 //Genderless:

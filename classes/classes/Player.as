@@ -7586,6 +7586,8 @@ use namespace CoC;
 				sharkCounter++;
 			if (vaginas.length > 0 && cocks.length > 0)
 				sharkCounter++;
+			if (vaginaType() == VaginaClass.SHARK)
+				sharkCounter++;
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				sharkCounter += 50;
 			if (hasPerk(PerkLib.AscensionHybridTheory) && sharkCounter >= 4)
