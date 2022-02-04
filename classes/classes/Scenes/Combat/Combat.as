@@ -2156,11 +2156,11 @@ public class Combat extends BaseContent {
                 break;
             case WOOD:
                 elementalDamage *= 2;
-                doDamage(elementalDamage, true, true);
+                doMinionPhysDamage(elementalDamage, true, true);
                 break;
             case METAL:
                 elementalDamage *= 1.3;
-                doDamage(elementalDamage, true, true);
+                doMinionPhysDamage(elementalDamage, true, true);
                 break;
             case FIRE:
             case FIRE_E:
@@ -2184,14 +2184,14 @@ public class Combat extends BaseContent {
                 break;
             case PURITY:
                 elementalDamage *= purityScalingDA();
-                doDamage(elementalDamage, true, true);
+                doMinionPhysDamage(elementalDamage, true, true);
                 break;
             case CORRUPTION:
                 elementalDamage *= corruptionScalingDA();
-                doDamage(elementalDamage, true, true);
+                doMinionPhysDamage(elementalDamage, true, true);
                 break;
             default:
-                doDamage(elementalDamage, true, true);
+                doMinionPhysDamage(elementalDamage, true, true);
                 break;
         }
         if (crit) outputText(" <b>Critical!</b>");
@@ -2414,8 +2414,8 @@ public class Combat extends BaseContent {
             outputText("Your attacks are deflected or blocked by [monster a] [monster name].");
         } else {
             outputText("You activate the mech’s "+weapon+", intent on slicing your opponent in half. [Themonster] takes ");
-            doDamage(damage, true, true);
-			if (player.vehicles == vehicles.HB_MECH) doDamage(damage, true, true);
+            doPhysicalDamage(damage, true, true);
+			if (player.vehicles == vehicles.HB_MECH) doPhysicalDamage(damage, true, true);
             outputText(" damage.");
             if (crit) {
                 outputText("<b>Critical! </b>");
@@ -3432,7 +3432,7 @@ public class Combat extends BaseContent {
                 else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) doIceDamage(damage, true, true);
                 else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) doLightingDamage(damage, true, true);
                 else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) doDarknessDamage(damage, true, true);
-                else doDamage(damage, true, true);
+                else doPhysicalDamage(damage, true, true);
                 if (crit) {
 					outputText(" <b>*Critical Hit!*</b>");
 					archeryXP(1);
@@ -3455,7 +3455,7 @@ public class Combat extends BaseContent {
                     else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) doIceDamage(damage, true, true);
                     else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) doLightingDamage(damage, true, true);
                     else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) doDarknessDamage(damage, true, true);
-                    else doDamage(damage, true, true);
+                    else doPhysicalDamage(damage, true, true);
 					if (crit) archeryXP(1);
 					archeryXP(1);
                 }
@@ -3843,7 +3843,7 @@ public class Combat extends BaseContent {
                     else if (monster.plural)
                         outputText(" Your opponents staggers, collapsing onto each other from the wounds you've inflicted on [monster him]. ");
                     else outputText(" Your opponent staggers, collapsing from the wounds you've inflicted on [monster him]. ");
-                    doDamage(damage, true, true);
+                    doPhysicalDamage(damage, true, true);
                     if (crit) {
                         outputText(" <b>*One or more of the projectile did a Critical Hit!*</b>");
                         throwingXP(1);
@@ -3856,7 +3856,7 @@ public class Combat extends BaseContent {
                 } else {
                     if (!MSGControll) {
                         outputText(" ");
-                        doDamage(damage, true, true);
+                        doPhysicalDamage(damage, true, true);
                         if (crit) throwingXP(1);
                         throwingXP(1);
                     }
@@ -4033,7 +4033,7 @@ public class Combat extends BaseContent {
                 else if (monster.plural)
                     outputText(" and [monster he] stagger, collapsing onto each other from the wounds you've inflicted on [monster him]. ");
                 else outputText(" and [monster he] staggers, collapsing from the wounds you've inflicted on [monster him]. ");
-                doDamage(damage, true, true);
+                doPhysicalDamage(damage, true, true);
                 if (crit) {
 					outputText(" <b>*Critical Hit!*</b>");
 					throwingXP(1);
@@ -4045,7 +4045,7 @@ public class Combat extends BaseContent {
             } else {
                 if (!MSGControll) {
                     outputText(".  It's clearly very painful. ");
-                    doDamage(damage, true, true);
+                    doPhysicalDamage(damage, true, true);
 					if (crit) throwingXP(1);
 					throwingXP(1);
                 }
@@ -4304,7 +4304,7 @@ public class Combat extends BaseContent {
                 else if (monster.plural)
                     outputText(" and [monster he] stagger, collapsing onto each other from the wounds you've inflicted on [monster him]. ");
                 else outputText(" and [monster he] staggers, collapsing from the wounds you've inflicted on [monster him]. ");
-                doDamage(damage, true, true);
+                doPhysicalDamage(damage, true, true);
                 if (crit) {
 					outputText(" <b>*Critical Hit!*</b>");
 					firearmsXP(1);
@@ -4320,7 +4320,7 @@ public class Combat extends BaseContent {
             } else {
                 if (player.isInGoblinMech() && (player.hasKeyItem("Repeater Gun") >= 0 || player.hasKeyItem("Machine Gun MK1") >= 0 || player.hasKeyItem("Machine Gun MK2") >= 0 || player.hasKeyItem("Machine Gun MK3") >= 0)) {
                     outputText(".  It's clearly very painful. ");
-                    doDamage(damage, true, true);
+                    doPhysicalDamage(damage, true, true);
 					if (crit) firearmsXP(1);
 					firearmsXP(1);
 					if (player.weaponRangePerk == "Dual Firearms") {
@@ -4328,22 +4328,22 @@ public class Combat extends BaseContent {
 						dualWieldFirearmsXP(1);
 					}
 					if (player.weaponRange == weaponsrange.M1CERBE) {
-						if (player.hasPerk(PerkLib.AmateurGunslinger)) doDamage(damage, true, true);
-						if (player.hasPerk(PerkLib.ExpertGunslinger)) doDamage(damage, true, true);
-						if (player.hasPerk(PerkLib.MasterGunslinger)) doDamage(damage, true, true);
-						if (player.hasPerk(PerkLib.LockAndLoad)) doDamage(damage, true, true);
-						if (player.hasPerk(PerkLib.MasterGunslinger) && player.hasPerk(PerkLib.LockAndLoad)) doDamage(damage, true, true);
+						if (player.hasPerk(PerkLib.AmateurGunslinger)) doPhysicalDamage(damage, true, true);
+						if (player.hasPerk(PerkLib.ExpertGunslinger)) doPhysicalDamage(damage, true, true);
+						if (player.hasPerk(PerkLib.MasterGunslinger)) doPhysicalDamage(damage, true, true);
+						if (player.hasPerk(PerkLib.LockAndLoad)) doPhysicalDamage(damage, true, true);
+						if (player.hasPerk(PerkLib.MasterGunslinger) && player.hasPerk(PerkLib.LockAndLoad)) doPhysicalDamage(damage, true, true);
 					}
                 } else {
                     if (!MSGControll) {
                         outputText(".  It's clearly very painful. ");
-                        doDamage(damage, true, true);
+                        doPhysicalDamage(damage, true, true);
 						if (player.weaponRange == weaponsrange.M1CERBE) {
-							if (player.hasPerk(PerkLib.AmateurGunslinger)) doDamage(damage, true, true);
-							if (player.hasPerk(PerkLib.ExpertGunslinger)) doDamage(damage, true, true);
-							if (player.hasPerk(PerkLib.MasterGunslinger)) doDamage(damage, true, true);
-							if (player.hasPerk(PerkLib.LockAndLoad)) doDamage(damage, true, true);
-							if (player.hasPerk(PerkLib.MasterGunslinger) && player.hasPerk(PerkLib.LockAndLoad)) doDamage(damage, true, true);
+							if (player.hasPerk(PerkLib.AmateurGunslinger)) doPhysicalDamage(damage, true, true);
+							if (player.hasPerk(PerkLib.ExpertGunslinger)) doPhysicalDamage(damage, true, true);
+							if (player.hasPerk(PerkLib.MasterGunslinger)) doPhysicalDamage(damage, true, true);
+							if (player.hasPerk(PerkLib.LockAndLoad)) doPhysicalDamage(damage, true, true);
+							if (player.hasPerk(PerkLib.MasterGunslinger) && player.hasPerk(PerkLib.LockAndLoad)) doPhysicalDamage(damage, true, true);
 						}
 						if (crit) firearmsXP(1);
 						firearmsXP(1);
@@ -4357,46 +4357,46 @@ public class Combat extends BaseContent {
                     //	if (flaga dla efektu poison arrow) outputText(" tekst dla poison arrow effect.");
 					if (player.weaponRange == weaponsrange.TOUHOM3) {
 						outputText(" ");
-						doDamage(damage, true, true);
+                        doPhysicalDamage(damage, true, true);
 						if (crit) outputText(" <b>*Critical Hit!*</b>");
 						if (player.hasPerk(PerkLib.AmateurGunslinger)) {
 							outputText(" ");
-							doDamage(damage, true, true);
+                            doPhysicalDamage(damage, true, true);
 							if (crit) outputText(" <b>*Critical Hit!*</b>");
 							outputText(" ");
-							doDamage(damage, true, true);
+                            doPhysicalDamage(damage, true, true);
 							if (crit) outputText(" <b>*Critical Hit!*</b>");
 						}
 						if (player.hasPerk(PerkLib.ExpertGunslinger)) {
 							outputText(" ");
-							doDamage(damage, true, true);
+                            doPhysicalDamage(damage, true, true);
 							if (crit) outputText(" <b>*Critical Hit!*</b>");
 							outputText(" ");
-							doDamage(damage, true, true);
+                            doPhysicalDamage(damage, true, true);
 							if (crit) outputText(" <b>*Critical Hit!*</b>");
 						}
 						if (player.hasPerk(PerkLib.MasterGunslinger)) {
 							outputText(" ");
-							doDamage(damage, true, true);
+                            doPhysicalDamage(damage, true, true);
 							if (crit) outputText(" <b>*Critical Hit!*</b>");
 							outputText(" ");
-							doDamage(damage, true, true);
+                            doPhysicalDamage(damage, true, true);
 							if (crit) outputText(" <b>*Critical Hit!*</b>");
 						}
 						if (player.hasPerk(PerkLib.LockAndLoad)) {
 							outputText(" ");
-							doDamage(damage, true, true);
+                            doPhysicalDamage(damage, true, true);
 							if (crit) outputText(" <b>*Critical Hit!*</b>");
 							outputText(" ");
-							doDamage(damage, true, true);
+                            doPhysicalDamage(damage, true, true);
 							if (crit) outputText(" <b>*Critical Hit!*</b>");
 						}
 						if (player.hasPerk(PerkLib.MasterGunslinger) && player.hasPerk(PerkLib.LockAndLoad)) {
 							outputText(" ");
-							doDamage(damage, true, true);
+                            doPhysicalDamage(damage, true, true);
 							if (crit) outputText(" <b>*Critical Hit!*</b>");
 							outputText(" ");
-							doDamage(damage, true, true);
+                            doPhysicalDamage(damage, true, true);
 							if (crit) outputText(" <b>*Critical Hit!*</b>");
 						}
 					}
@@ -5729,7 +5729,7 @@ public class Combat extends BaseContent {
                     if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
                     if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
                     if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
-                    if (damage > 0) doDamage(damage, false);
+                    if (damage > 0) doPhysicalDamage(damage, false);
                     (monster as Doppleganger).mirrorAttack(damage);
                     return;
                 }
@@ -5871,17 +5871,17 @@ public class Combat extends BaseContent {
 					damage = Math.round(damage * darknessDamageBoostedByDao());
 					doDarknessDamage(damage, true, true);
 				}
-                else doDamage(damage, true, true);
+                else doPhysicalDamage(damage, true, true);
                 if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) doLightingDamage(Math.round(damage * 0.3), true, true);
                 if (player.weapon == weapons.PRURUMI && player.spe >= 150) {
-                    doDamage(damage, true, true);
+                    doPhysicalDamage(damage, true, true);
                     if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) doLightingDamage(Math.round(damage * 0.3), true, true);
                     if (player.spe >= 225) {
-                        doDamage(damage, true, true);
+                        doPhysicalDamage(damage, true, true);
                         if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) doLightingDamage(Math.round(damage * 0.3), true, true);
                     }
                     if (player.spe >= 300) {
-                        doDamage(damage, true, true);
+                        doPhysicalDamage(damage, true, true);
                         if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) doLightingDamage(Math.round(damage * 0.3), true, true);
                     }
                     damage += damage;
@@ -6209,7 +6209,7 @@ public class Combat extends BaseContent {
                             //Deal the fellow up blow!
                             outputText("You chain up the jab with a second blow! ");
                             extraHitDamage2 = Math.round(extraHitDamage);
-                            doDamage(extraHitDamage, true ,true);
+                            doPhysicalDamage(extraHitDamage, true ,true);
                             if (critJab) outputText("<b>Critical! </b>");
                             outputText("\n\n");
                             JabbingStyleIncrement();
@@ -6235,7 +6235,7 @@ public class Combat extends BaseContent {
                         outputText("You grab your opponent mid swing and supplex it against the ground! ");
                         if (player.hasPerk(PerkLib.MeteorStrike)) extraHitDamage2 *= 2;
                         extraHitDamage2 = Math.round(extraHitDamage2);
-                        doDamage(extraHitDamage2, true ,true);
+                        doPhysicalDamage(extraHitDamage2, true ,true);
                         if (critGrab) outputText("<b>Critical! </b>");
                         if (player.hasPerk(PerkLib.GrabbingGrandmaster)){
                             var extraHitStunChance:Number = 20;
@@ -6417,7 +6417,7 @@ public class Combat extends BaseContent {
                     if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
                     if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
                     if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
-                    if (damage > 0) doDamage(damage, false);
+                    if (damage > 0) doPhysicalDamage(damage, false);
                     (monster as Doppleganger).mirrorAttack(damage);
                     return;
                 }
@@ -6458,7 +6458,7 @@ public class Combat extends BaseContent {
                 }
                 //Damage is delivered HERE
                 damage *= FeraldamageMultiplier;
-                doDamage(damage, true, true);
+                doPhysicalDamage(damage, true, true);
                 if (player.hasPerk(PerkLib.LightningClaw)) {
                     damage = 6 + rand(3);
                     if (player.hasPerk(PerkLib.SensualLover)) damage += 2;
@@ -7391,7 +7391,16 @@ public class Combat extends BaseContent {
 		return EOTHDBonus;
 	}
 
-//DEAL DAMAGE
+    public function MonsterIsBleeding():Boolean {
+        var isBleeding:Boolean = false;
+        if (monster.hasStatusEffect(StatusEffects.KamaitachiBleed)) isBleeding = true;
+        if (monster.hasStatusEffect(StatusEffects.Hemorrhage)) isBleeding = true;
+        if (monster.hasStatusEffect(StatusEffects.SharkBiteBleed)) isBleeding = true;
+        if (monster.hasStatusEffect(StatusEffects.IzmaBleed)) isBleeding = true;
+        return isBleeding;
+    }
+
+    //DEAL DAMAGE
     public function doDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         damage *= doDamageReduction();
@@ -7487,6 +7496,17 @@ public class Combat extends BaseContent {
         //Keep shit in bounds.
         if (monster.HP < monster.minHP()) monster.HP = monster.minHP();
         return damage;
+    }
+
+    public function doPhysicalDamage(damage:Number, apply:Boolean = true, display:Boolean = false){
+        if (player.hasPerk(MutationsLib.SharkOlfactorySystem) && MonsterIsBleeding) damage *= 1.1;
+        if (player.hasPerk(MutationsLib.SharkOlfactorySystemPrimitive) && MonsterIsBleeding) damage *= 1.15;
+        if (player.hasPerk(MutationsLib.SharkOlfactorySystemEvolved) && MonsterIsBleeding) damage *= 1.25;
+        doDamage(damage, apply, display);
+    }
+
+    public function doMinionPhysDamage(damage:Number, apply:Boolean = true, display:Boolean = false){
+        doDamage(damage, apply, display);
     }
 
     public function doMagicDamage(damage:Number, apply:Boolean = true, display:Boolean = false):Number {
@@ -9653,6 +9673,14 @@ public class Combat extends BaseContent {
                 outputText("<b>Berserker effect wore off!</b>\n\n");
             } else player.addStatusValue(StatusEffects.Berzerking, 1, -1);
         }
+        //Blood Frenzy until ennemies stops bleeding
+        if (player.hasStatusEffect(StatusEffects.BloodFrenzy)) {
+            if (!MonsterIsBleeding()) {
+                player.removeStatusEffect(StatusEffects.BloodFrenzy);
+                player.statStore.removeBuffs("Blood Frenzy");
+                outputText("<b>With no blood in the air to drive you crazy your frenzy wears off!</b>\n\n");
+            }
+        }
         //Elven Eye
         if (player.hasStatusEffect(StatusEffects.ElvenEye)) {
             if (player.statusEffectv1(StatusEffects.ElvenEye) <= 0) {
@@ -11583,7 +11611,7 @@ public class Combat extends BaseContent {
             }
             //Dealing damage -
             outputText("You catch your falling opponent back into your maw and send it flying, extending your playtime. ");
-            doDamage(damage, true, true);
+            doPhysicalDamage(damage, true, true);
             outputText(" damage.");
             //Enemy faints -
             if (monster.HP <= monster.minHP()) {
@@ -11623,7 +11651,7 @@ public class Combat extends BaseContent {
             var damage:Number = unarmedAttack();
             damage += player.str;
             damage += scalingBonusStrength() * 0.25;
-            doDamage(damage, true, true);
+            doPhysicalDamage(damage, true, true);
             outputText(" damage. ");
             outputText("[monster He] try catching [monster his] breath before [monster he] stands back up, apparently prepared to fight some more.");
             monster.removeStatusEffect(StatusEffects.OrcaPlay);
@@ -11676,7 +11704,7 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
             //Dealing damage -
             outputText("You give your opponent a powerful blow with your tail sending it flying back in the sky and forcing the air out of its lung. Your opponent is completely disoriented! ");
-            doDamage(damage, true, true);
+            doPhysicalDamage(damage, true, true);
             outputText(" damage. ");
             //Enemy faints -
             if (monster.HP <= monster.minHP()) {
@@ -11727,7 +11755,7 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
             //Dealing damage -
             outputText("You grab your weapon with both hands and smash your target back up in the air breaching [monster his] defences leaving [monster him] wide open! ");
-            doDamage(damage, true, true);
+            doPhysicalDamage(damage, true, true);
             outputText(" damage. ");
             //Enemy faints -
             if (monster.HP <= monster.minHP()) {
@@ -11800,7 +11828,7 @@ public class Combat extends BaseContent {
             damage = Math.round(damage);
             //Dealing damage -
             outputText("You receive your falling opponent on the length of your weapon running [monster him] through. ");
-            doDamage(damage, true, true);
+            doPhysicalDamage(damage, true, true);
             outputText(" damage");
             if (crit) {
                 outputText("<b> Critical!</b>");
@@ -11816,7 +11844,7 @@ public class Combat extends BaseContent {
             damage = unarmedAttack();
             damage += player.str;
             damage += scalingBonusStrength() * 0.25;
-            doDamage(damage, true, true);
+            doPhysicalDamage(damage, true, true);
             outputText(" damage. ");
             combat.checkAchievementDamage(damage);
             monster.removeStatusEffect(StatusEffects.OrcaPlay);
@@ -11842,7 +11870,7 @@ public class Combat extends BaseContent {
         var damage:Number = unarmedAttack();
         damage += player.str;
         damage += scalingBonusStrength() * 0.25;
-        doDamage(damage, true, true);
+        doPhysicalDamage(damage, true, true);
         outputText(" damage. ");
         monster.removeStatusEffect(StatusEffects.OrcaPlay);
         player.removeStatusEffect(StatusEffects.OrcaPlayRoundLeft);
@@ -11974,7 +12002,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
         if (monster.plural) damage *= 5;
         damage = Math.round(damage);
-        doDamage(damage, true, true);
+        doPhysicalDamage(damage, true, true);
         monster.createStatusEffect(StatusEffects.Stunned, 3, 0, 0, 0);
         player.createStatusEffect(StatusEffects.CooldownTremor, 5, 0, 0, 0);
         outputText("\n\n");
@@ -12461,7 +12489,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.KrakenBlackDress)) damage *= 2;
         //Squeeze -
         outputText("You begin to crush your foe with your pincer aiming to squeeze it to death in your mighty grip. You can feel it in your pincer as [monster his] struggles are briefly intensified. \n\n[Themonster] takes ");
-        doDamage(damage, true, true);
+        doPhysicalDamage(damage, true, true);
         outputText(" damage.");
         //Enemy faints -
         if (monster.HP <= monster.minHP()) {
@@ -12518,7 +12546,7 @@ public class Combat extends BaseContent {
             outputText(" tentacle");
         }
         outputText(", leaving [monster him] short of breath. You can feel it in your tentacles as [monster his] struggles are briefly intensified. \n\n[Themonster] takes ");
-        doDamage(damage, true, true);
+        doPhysicalDamage(damage, true, true);
         outputText(" damage.");
         //Enemy faints -
         if (monster.HP <= monster.minHP()) {
@@ -12713,7 +12741,7 @@ public class Combat extends BaseContent {
 		if (player.hasStatusEffect(StatusEffects.ControlFreak)) damage *= player.statusEffectv1(StatusEffects.ControlFreak);
 		if (player.hasPerk(PerkLib.Sadomasochism)) damage *= player.sadomasochismBoost();
 		damage = Math.round(damage);
-		doDamage(damage, true, true);
+        doPhysicalDamage(damage, true, true);
 		//Enemy faints -
 		if(monster.HP <= monster.minHP()) {
 			outputText("You can feel [themonster]'s life signs beginning to fade, and before you squeze all the life from [monster him], you let go, dropping [monster him] to the floor, unconscious but alive.  In no time, [monster his]'s eyelids begin fluttering, and you've no doubt they'll regain consciousness soon.  ");
@@ -13427,7 +13455,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.VladimirRegalia)) damage *= 2;
         if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
         damage = Math.round(damage);
-        doDamage(damage, true, true);
+        doPhysicalDamage(damage, true, true);
         player.HP += damage;
         if (player.HP > player.maxHP()) player.HP = player.maxHP();
         outputText(" damage. You feel yourself grow stronger with each drop. ");
@@ -13491,10 +13519,10 @@ public class Combat extends BaseContent {
             damage *= 1.75;
         }
         damage = Math.round(damage);
-        doDamage(damage);
+        doPhysicalDamage(damage);
         outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>"); //Damage
         if (crit) outputText(" <b>Critical!</b>");
-        if (player.hasPerk(PerkLib.PhantomStrike)) doDamage(damage, true, true);
+        if (player.hasPerk(PerkLib.PhantomStrike)) doPhysicalDamage(damage, true, true);
     }
 
     public function clawsRend():void {
@@ -13611,7 +13639,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.VladimirRegalia)) damage *= 2;
         if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
         damage = Math.round(damage);
-        doDamage(damage, true, true);
+        doPhysicalDamage(damage, true, true);
         if (monster.HP <= monster.minHP()) {
             doNext(combat.endHpVictory);
             return;
@@ -14137,8 +14165,8 @@ public class Combat extends BaseContent {
 		else if (player.weaponFlyingSwords == weaponsflyingswords.B_HALFM) doIceDamage(damage, true, true);
 		else if (player.weaponFlyingSwords == weaponsflyingswords.S_HALFM) doLightingDamage(damage, true, true);
 		else if (player.weaponFlyingSwords == weaponsflyingswords.E_HALFM) doDarknessDamage(damage, true, true);
-		else doDamage(damage, true, true);
-		if (player.weaponFlyingSwordsPerk == "Large Two") doDamage(damage, true, true);
+		else doPhysicalDamage(damage, true, true);
+		if (player.weaponFlyingSwordsPerk == "Large Two") doPhysicalDamage(damage, true, true);
         if (crit) outputText(" <b>*Critical Hit!*</b>");
 		WeaponFlyingSwordsStatusProcs();
 		outputText("\n\n");
@@ -14244,7 +14272,7 @@ public class Combat extends BaseContent {
         }
 		outputText(".");
         damage = Math.round(damage);
-        doDamage(damage, true, true);
+        doPhysicalDamage(damage, true, true);
         if (crit) {
             outputText("<b>Critical! </b>");
             if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
@@ -14409,17 +14437,17 @@ public class Combat extends BaseContent {
 		if (monster.plural) damage *= 2;
 		damage = Math.round(damage * bloodDamageBoostedByDao());
 		outputText(monster.capitalA + monster.short + " takes ");
-		doDamage(damage, true, true);
+        doMinionPhysDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
-		doDamage(damage, true, true);
+        doMinionPhysDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
-		doDamage(damage, true, true);
+        doMinionPhysDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
-		doDamage(damage, true, true);
+        doMinionPhysDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
-		doDamage(damage, true, true);
+        doMinionPhysDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
-		doDamage(damage, true, true);
+        doMinionPhysDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		outputText(" damage.");
 		if (rand(20) < 4) {
@@ -14504,13 +14532,13 @@ public class Combat extends BaseContent {
 		if (monster.plural) damage *= 10;
 		damage = Math.round(damage * bloodDamageBoostedByDao());
 		outputText(monster.capitalA + monster.short + " takes ");
-		doDamage(damage, true, true);
+        doPhysicalDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
-		doDamage(damage, true, true);
+        doPhysicalDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
-		doDamage(damage, true, true);
+        doPhysicalDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
-		doDamage(damage, true, true);
+        doPhysicalDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		outputText(" damage.");
 		if (rand(20) < 4) {
@@ -14665,12 +14693,12 @@ public class Combat extends BaseContent {
 		}
 		damage = Math.round(damage);
 		outputText("You focus the force of your wrath, pushing the energy to the tip of your fingers. With a deep breath, you release the stored energy, thrusting it upon [themonster]. Six finger-shaped constructs materialize before you as they fly toward [themonster]. ");
-        doDamage(damage, true, true);
-        doDamage(damage, true, true);
-        doDamage(damage, true, true);
-        doDamage(damage, true, true);
-        doDamage(damage, true, true);
-        doDamage(damage, true, true);
+        doPhysicalDamage(damage, true, true);
+        doPhysicalDamage(damage, true, true);
+        doPhysicalDamage(damage, true, true);
+        doPhysicalDamage(damage, true, true);
+        doPhysicalDamage(damage, true, true);
+        doPhysicalDamage(damage, true, true);
 		if (crit) {
 			outputText("<b>Critical! </b>");
 			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
@@ -14712,40 +14740,40 @@ public class Combat extends BaseContent {
 			damage *= 1.75;
 		}
 		damage = Math.round(damage);
-		doDamage(damage, true, true);
-		if (player.perkv2(PerkLib.PrestigeJobNecromancer) > 1) doDamage(damage, true, true);
-		if (player.perkv2(PerkLib.PrestigeJobNecromancer) > 2) doDamage(damage, true, true);
-		if (player.perkv2(PerkLib.PrestigeJobNecromancer) > 3) doDamage(damage, true, true);
-		if (player.perkv2(PerkLib.PrestigeJobNecromancer) > 4) doDamage(damage, true, true);
-		if (player.perkv2(PerkLib.PrestigeJobNecromancer) > 5) doDamage(damage, true, true);
-		if (player.perkv2(PerkLib.PrestigeJobNecromancer) > 6) doDamage(damage, true, true);
-		if (player.perkv2(PerkLib.PrestigeJobNecromancer) > 7) doDamage(damage, true, true);
-		if (player.perkv2(PerkLib.PrestigeJobNecromancer) > 8) doDamage(damage, true, true);
-		if (player.perkv2(PerkLib.PrestigeJobNecromancer) > 9) doDamage(damage, true, true);
+        doMinionPhysDamage(damage, true, true);
+		if (player.perkv2(PerkLib.PrestigeJobNecromancer) > 1) doMinionPhysDamage(damage, true, true);
+		if (player.perkv2(PerkLib.PrestigeJobNecromancer) > 2) doMinionPhysDamage(damage, true, true);
+		if (player.perkv2(PerkLib.PrestigeJobNecromancer) > 3) doMinionPhysDamage(damage, true, true);
+		if (player.perkv2(PerkLib.PrestigeJobNecromancer) > 4) doMinionPhysDamage(damage, true, true);
+		if (player.perkv2(PerkLib.PrestigeJobNecromancer) > 5) doMinionPhysDamage(damage, true, true);
+		if (player.perkv2(PerkLib.PrestigeJobNecromancer) > 6) doMinionPhysDamage(damage, true, true);
+		if (player.perkv2(PerkLib.PrestigeJobNecromancer) > 7) doMinionPhysDamage(damage, true, true);
+		if (player.perkv2(PerkLib.PrestigeJobNecromancer) > 8) doMinionPhysDamage(damage, true, true);
+		if (player.perkv2(PerkLib.PrestigeJobNecromancer) > 9) doMinionPhysDamage(damage, true, true);
 		if (player.hasPerk(PerkLib.GreaterHarvest) && player.perkv1(PerkLib.GreaterHarvest) > 0) {
 			outputText("Your archer"+(player.perkv1(PerkLib.GreaterHarvest) > 1 ? "s":"")+" fellow suit unleashing a volley of arrows. ");
-			doDamage(damage, true, true);
-			if (player.perkv1(PerkLib.GreaterHarvest) > 1) doDamage(damage, true, true);
-			if (player.perkv1(PerkLib.GreaterHarvest) > 2) doDamage(damage, true, true);
-			if (player.perkv1(PerkLib.GreaterHarvest) > 3) doDamage(damage, true, true);
-			if (player.perkv1(PerkLib.GreaterHarvest) > 4) doDamage(damage, true, true);
-			if (player.perkv1(PerkLib.GreaterHarvest) > 5) doDamage(damage, true, true);
-			if (player.perkv1(PerkLib.GreaterHarvest) > 6) doDamage(damage, true, true);
-			if (player.perkv1(PerkLib.GreaterHarvest) > 7) doDamage(damage, true, true);
-			if (player.perkv1(PerkLib.GreaterHarvest) > 8) doDamage(damage, true, true);
-			if (player.perkv1(PerkLib.GreaterHarvest) > 9) doDamage(damage, true, true);
+            doMinionPhysDamage(damage, true, true);
+			if (player.perkv1(PerkLib.GreaterHarvest) > 1) doMinionPhysDamage(damage, true, true);
+			if (player.perkv1(PerkLib.GreaterHarvest) > 2) doMinionPhysDamage(damage, true, true);
+			if (player.perkv1(PerkLib.GreaterHarvest) > 3) doMinionPhysDamage(damage, true, true);
+			if (player.perkv1(PerkLib.GreaterHarvest) > 4) doMinionPhysDamage(damage, true, true);
+			if (player.perkv1(PerkLib.GreaterHarvest) > 5) doMinionPhysDamage(damage, true, true);
+			if (player.perkv1(PerkLib.GreaterHarvest) > 6) doMinionPhysDamage(damage, true, true);
+			if (player.perkv1(PerkLib.GreaterHarvest) > 7) doMinionPhysDamage(damage, true, true);
+			if (player.perkv1(PerkLib.GreaterHarvest) > 8) doMinionPhysDamage(damage, true, true);
+			if (player.perkv1(PerkLib.GreaterHarvest) > 9) doMinionPhysDamage(damage, true, true);
 			if (player.perkv2(PerkLib.GreaterHarvest) > 0) {
 				outputText("Finally the skeletal mage"+(player.perkv2(PerkLib.GreaterHarvest) > 1 ? "s":"")+" unleash a barrage of magic missles. ");
 				doMagicDamage(damage, true, true);
-				if (player.perkv2(PerkLib.GreaterHarvest) > 1) doMagicDamage(damage, true, true);
-				if (player.perkv2(PerkLib.GreaterHarvest) > 2) doMagicDamage(damage, true, true);
-				if (player.perkv2(PerkLib.GreaterHarvest) > 3) doMagicDamage(damage, true, true);
-				if (player.perkv2(PerkLib.GreaterHarvest) > 4) doMagicDamage(damage, true, true);
-				if (player.perkv2(PerkLib.GreaterHarvest) > 5) doMagicDamage(damage, true, true);
-				if (player.perkv2(PerkLib.GreaterHarvest) > 6) doMagicDamage(damage, true, true);
-				if (player.perkv2(PerkLib.GreaterHarvest) > 7) doMagicDamage(damage, true, true);
-				if (player.perkv2(PerkLib.GreaterHarvest) > 8) doMagicDamage(damage, true, true);
-				if (player.perkv2(PerkLib.GreaterHarvest) > 9) doMagicDamage(damage, true, true);
+				if (player.perkv2(PerkLib.GreaterHarvest) > 1) doMinionPhysDamage(damage, true, true);
+				if (player.perkv2(PerkLib.GreaterHarvest) > 2) doMinionPhysDamage(damage, true, true);
+				if (player.perkv2(PerkLib.GreaterHarvest) > 3) doMinionPhysDamage(damage, true, true);
+				if (player.perkv2(PerkLib.GreaterHarvest) > 4) doMinionPhysDamage(damage, true, true);
+				if (player.perkv2(PerkLib.GreaterHarvest) > 5) doMinionPhysDamage(damage, true, true);
+				if (player.perkv2(PerkLib.GreaterHarvest) > 6) doMinionPhysDamage(damage, true, true);
+				if (player.perkv2(PerkLib.GreaterHarvest) > 7) doMinionPhysDamage(damage, true, true);
+				if (player.perkv2(PerkLib.GreaterHarvest) > 8) doMinionPhysDamage(damage, true, true);
+				if (player.perkv2(PerkLib.GreaterHarvest) > 9) doMinionPhysDamage(damage, true, true);
 			}
 		}
 		outputText("\n\n");
@@ -14785,7 +14813,7 @@ public class Combat extends BaseContent {
 			damage *= 1.75;
 		}
 		damage = Math.round(damage);
-		doDamage(damage, true, true);
+		doMinionPhysDamage(damage, true, true);
 		monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 		//checkAchievementDamage(damage);
 		outputText("\n\n");
@@ -15166,6 +15194,16 @@ public class Combat extends BaseContent {
 		return rpab;
 	}
 
+    public function BleedDamageBoost(isARacialAbility:Boolean = false):Number {
+        var BleedMod:Number = 1.0;
+        if (player.hasPerk(PerkLib.ThirstForBlood)) BleedMod += 0.5;
+        if (player.hasPerk(MutationsLib.SharkOlfactorySystem)) BleedMod += 0.5;
+        if (player.hasPerk(MutationsLib.SharkOlfactorySystemPrimitive)) BleedMod += 0.5;
+        if (player.hasPerk(MutationsLib.SharkOlfactorySystemEvolved)) BleedMod += 0.5;
+        if (isARacialAbility) BleedMod *= combat.RacialParagonAbilityBoost();
+        return BleedMod;
+    }
+
     public function ghostStrength():Number {
         var ghostStr:Number = player.strStat.core.value;
         var ghostStrMulti:Number = 0;
@@ -15355,4 +15393,4 @@ public class Combat extends BaseContent {
         return inteWisLibScale(player.lib, randomize);
     }
 }
-}
+}

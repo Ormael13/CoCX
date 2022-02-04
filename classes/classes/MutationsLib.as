@@ -215,9 +215,9 @@ public class MutationsLib
 		public static const KitsuneThyroidGland:PerkType = mk("Kitsune Thyroid Gland", "Kitsune Thyroid Gland",
 				"Kitsune Thyroid Gland lower cooldowns for Illusion and Terror by three turns and increase speed of the recovery after using magic.").withBuffs({'spe.mult':0.05});
 		public static const KitsuneThyroidGlandPrimitive:PerkType = mk("Kitsune Thyroid Gland (Primitive)", "Kitsune Thyroid Gland (Primitive)",
-				"Kitsune Thyroid Gland (Evolved) increase the mana recovery after using magic and make fox fire specials 50% stronger when having 9 tails (both fire and lust damage).").withBuffs({'spe.mult':0.05,'wis.mult':0.05});
+				"Kitsune Thyroid Gland (Primitive) increase the mana recovery after using magic and make fox fire specials 50% stronger when having 9 tails (both fire and lust damage).").withBuffs({'spe.mult':0.05,'wis.mult':0.05});
 		public static const KitsuneThyroidGlandEvolved:PerkType = mk("Kitsune Thyroid Gland (Evolved)", "Kitsune Thyroid Gland (Evolved)",
-				"Kitsune Thyroid Gland (Final Form) grant bonus soulforce/mana regeneration depending on your Star Sphere rank, increase max Star Sphere rank to 20. Increase speed debuff of Terror to 50, increase evasion boost from Illusion to 20%.").withBuffs({'spe.mult':0.05,'int.mult':0.05,'wis.mult':0.05});
+				"Kitsune Thyroid Gland (Evolved) grant bonus soulforce/mana regeneration depending on your Star Sphere rank, increase max Star Sphere rank to 20. Increase speed debuff of Terror to 50, increase evasion boost from Illusion to 20%.").withBuffs({'spe.mult':0.05,'int.mult':0.05,'wis.mult':0.05});
 		public static const KitsuneThyroidGlandFinalForm:PerkType = mk("Kitsune Thyroid Gland (Final Form)", "Kitsune Thyroid Gland (Final Form)",
 				".");
 		public static const LactaBovinaOvaries:PerkType = mk("Lacta Bovina Ovaries", "Lacta Bovina Ovaries",
@@ -333,6 +333,14 @@ public class MutationsLib
 				"Your Salamander adrenal glands are giving you slight boost to your natural strength, stamina, speed, libido; double bonus to attack, boost slight natural wrath generation rate, extend berserking/lustzerking by 8 turns and enable to start with one or both of them.").withBuffs({'str.mult':0.15,'tou.mult':0.05,'spe.mult':0.15,'lib.mult':0.05});
 		public static const SalamanderAdrenalGlandsFinalForm:PerkType = mk("Salamander Adrenal Glands (Final Form)", "Salamander Adrenal Glands (Final Form)",
 				".",
+				".");
+		public static const SharkOlfactorySystem:PerkType = mk("Shark Olfactory System", "Shark Olfactory System",
+				"Shark Olfactory System increase bleed damage by 50% and increase melee damage against bleeding enemies  by 10%. Also allows non shark to use blood frenzy.").withBuffs({'spe.mult':0.05});
+		public static const SharkOlfactorySystemPrimitive:PerkType = mk("Shark Olfactory System (Primitive)", "Shark Olfactory System (Primitive)",
+				"Shark Olfactory System (Primitive) makes Bite a free action ability and increase bleed damage by 50% and increase melee damage against bleeding enemies by 15%.").withBuffs({'spe.mult':0.05,'wis.mult':0.05});
+		public static const SharkOlfactorySystemEvolved:PerkType = mk("Shark Olfactory System (Evolved)", "Shark Olfactory System (Evolved)",
+				"Shark Olfactory System (Evolved) double the bonuses of blood frenzy and increase bleed damage by 50% and increase melee damage against bleeding enemies by 25%.").withBuffs({'spe.mult':0.05,'int.mult':0.05,'wis.mult':0.05});
+		public static const SharkOlfactorySystemFinalForm:PerkType = mk("Shark Olfactory System (Final Form)", "Shark Olfactory System (Final Form)",
 				".");
 		public static const TwinHeart:PerkType = mk("Twin Heart", "Twin Heart",
 				"+40% fatigue recovery and +5 to max tou/spe (scalable). +100% fatigue recovery, reduce Charge fatigue cost by 10% as well as its cooldown by 1 round so long as your body is tauric/drider. (Also raise all Taur race score by 1, by 2 as long pc is tauric/drider).").withBuffs({'tou.mult':0.05,'spe.mult':0.05});
@@ -451,6 +459,7 @@ public class MutationsLib
 			}
 			function mutationsNervSys():void{
 				MutationsList.push([ElvishPeripheralNervSys, ElvishPeripheralNervSysPrimitive, ElvishPeripheralNervSysEvolved]);
+				MutationsList.push([SharkOlfactorySystem, SharkOlfactorySystemPrimitive, SharkOlfactorySystemEvolved]);
 			}
 			function mutationsBone():void{
 				MutationsList.push([LizanMarrow, LizanMarrowPrimitive, LizanMarrowEvolved]);

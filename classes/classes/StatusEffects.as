@@ -891,6 +891,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const BladeDance:StatusEffectType                = mkCombat("Blade Dance");
 		public static const BlazingBattleSpirit:StatusEffectType       = mkCombat("Blazing battle spirit");
 		public static const BloodField:StatusEffectType            	   = mkCombat("Blood Field");
+		public static const BloodFrenzy:StatusEffectType               = mkCombat("Blood Frenzy");
 		public static const BloodRequiem:StatusEffectType              = mkCombat("Blood Requiem");
 		public static const BloodShield:StatusEffectType               = mkCombat("Blood Shield");
 		public static const Blind:StatusEffectType                     = mkCombat("Blind");

@@ -7620,6 +7620,12 @@ use namespace CoC;
 				sharkCounter++;
 			if (vaginaType() == VaginaClass.SHARK)
 				sharkCounter++;
+			if (hasPerk(MutationsLib.SharkOlfactorySystem))
+				sharkCounter++;
+			if (hasPerk(MutationsLib.SharkOlfactorySystemPrimitive))
+				sharkCounter++;
+			if (hasPerk(MutationsLib.SharkOlfactorySystemEvolved))
+				sharkCounter++;
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				sharkCounter += 50;
 			if (hasPerk(PerkLib.AscensionHybridTheory) && sharkCounter >= 4)
@@ -12456,14 +12462,14 @@ use namespace CoC;
 				maxSpeCap2 += 15;
 			}//+20/10-20
 			if (sharkScore() >= 4) {
-				if (sharkScore() >= 10 && vaginas.length > 0 && cocks.length > 0) {
+				if (sharkScore() >= 11 && vaginas.length > 0 && cocks.length > 0) {
 					maxStrCap2 += 60;
-					maxSpeCap2 += 85;
+					maxSpeCap2 += 100;
 					maxLibCap2 += 20;
 				}
-				else if (sharkScore() >= 9) {
+				else if (sharkScore() >= 10) {
 					maxStrCap2 += 40;
-					maxSpeCap2 += 85;
+					maxSpeCap2 += 100;
 					maxLibCap2 += 10;
 				}
 				else {

@@ -835,6 +835,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (combat.wearingWinterScarf()) damage *= 1.2;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
+		if (player.hasPerk(PerkLib.AscensionOneRaceToRuleThemAllX)) damage += (0.25 * player.perkv1(PerkLib.AscensionOneRaceToRuleThemAllX));
 		damage = Math.round(damage * combat.iceDamageBoostedByDao());
 		outputText("Tapping into the power deep within you, you let loose a bellowing roar at your enemy, a powerful wave of cold blasting the area in front of you.  [Themonster] does [monster his] best to avoid it, but the wave of freezing air is too fast.");
 		//Shell
@@ -2866,6 +2867,21 @@ public class MagicSpecials extends BaseCombatContent {
 		enemyAI();
 	}
 
+	public function bloodFrenzy():void {
+		clearOutput();
+		var MultiplierBonus:Number = 0.5;
+		if (player.hasPerk(MutationsLib.SharkOlfactorySystemEvolved)) MultiplierBonus = 2;
+		outputText("You inhale deeply the smell of running blood in the air, mouth");
+		if(!player.isHerm()) outputText(" and");
+		else outputText(",");
+		if(player.hasCock()) outputText(" cock");
+		if(player.isHerm()) outputText(" and");
+		if(player.hasVagina()) outputText(" vagina");
+		outputText(" drooling as you let go of your ability to reason and lose yourself and sink into a blood frenzy!\n\n");
+		player.buff("Blood Frenzy").setStats({'spe.mult':Math.round(player.speStat.mult.value*MultiplierBonus),'int.mult':-Math.round(player.intStat.mult.value),'lib.mult':Math.round(player.libStat.mult.value*MultiplierBonus)}).combatPermanent();
+		enemyAI();
+	}
+
 	public function lustzerk():void {
 		clearOutput();
 		player.wrath -= 50;
@@ -4862,7 +4878,8 @@ public class MagicSpecials extends BaseCombatContent {
 		damage = Math.round(damage * combat.fireDamageBoostedByDao());
 		doFireDamage(damage, true, true);
 		outputText(" fire damage. Reeling in pain [themonster] begins to bleed and burn at the same time.");
-		monster.createStatusEffect(StatusEffects.Hemorrhage, 5, 0.05, 0, 0);
+
+		monster.createStatusEffect(StatusEffects.Hemorrhage, 5, 0.05*combat.BleedDamageBoost(true), 0, 0);
 		monster.createStatusEffect(StatusEffects.BurnDoT, 5, 0.05, 0, 0);
 		outputText("\n\n");
 		checkAchievementDamage(damage * 2);
@@ -5040,9 +5057,9 @@ public class MagicSpecials extends BaseCombatContent {
 			damage *= (1.75 * combat.windDamageBoostedByDao());
 			damage = Math.round(damage);
 			doWindDamage(damage, true, true);
-			if (!monster.hasStatusEffect(StatusEffects.KamaitachiBleed)) monster.createStatusEffect(StatusEffects.KamaitachiBleed,player.spe*10,1,0,0);
+			if (!monster.hasStatusEffect(StatusEffects.KamaitachiBleed)) monster.createStatusEffect(StatusEffects.KamaitachiBleed,player.spe*10*combat.BleedDamageBoost(true),1,0,0);
 			else{
-				monster.addStatusValue(StatusEffects.KamaitachiBleed, 1, player.spe*10);
+				monster.addStatusValue(StatusEffects.KamaitachiBleed, 1, player.spe*10*combat.BleedDamageBoost(true));
 				outputText("\n\nYour attack greatly worsened the bleeding your opponents suffers.");
 			}
 			combatRoundOver();
@@ -5073,9 +5090,9 @@ public class MagicSpecials extends BaseCombatContent {
 				outputText("too resolute to be stunned by your attack.</b> ");
 			}
 			doWindDamage(damage, true, true);
-			if (!monster.hasStatusEffect(StatusEffects.KamaitachiBleed)) monster.createStatusEffect(StatusEffects.KamaitachiBleed,player.spe*10,0,0,0);
+			if (!monster.hasStatusEffect(StatusEffects.KamaitachiBleed)) monster.createStatusEffect(StatusEffects.KamaitachiBleed,player.spe*10*combat.BleedDamageBoost(true),0,0,0);
 			else {
-				monster.addStatusValue(StatusEffects.KamaitachiBleed, 1, player.spe*10);
+				monster.addStatusValue(StatusEffects.KamaitachiBleed, 1, player.spe*10*combat.BleedDamageBoost(true));
 				outputText("\n\nYour attack greatly worsened the bleeding your opponent suffers.");
 			}
 		}
@@ -6008,8 +6025,8 @@ public class MagicSpecials extends BaseCombatContent {
 			outputText("You rub your palms together before unleashing the energy in the form of razor sharp winds. [Themonster] eyes grow wide in surprise as your attack leaves deep bleeding cuts in its flesh! ");
 			doWindDamage(damage, true, true);
 			if (player.isFistOrFistWeapon() && player.hasPerk(PerkLib.ElementalTouch)) {
-				if (monster.hasStatusEffect(StatusEffects.Hemorrhage)) monster.addStatusValue(StatusEffects.Hemorrhage, 1, 1);
-				else monster.createStatusEffect(StatusEffects.Hemorrhage, 5, 0.05, 0, 0);
+				if (monster.hasStatusEffect(StatusEffects.Hemorrhage)) monster.addStatusValue(StatusEffects.Hemorrhage, 1, 1*combat.BleedDamageBoost());
+				else monster.createStatusEffect(StatusEffects.Hemorrhage, 5, 0.05*combat.BleedDamageBoost(), 0, 0);
 			}
 		}
 		if (type == 2) {
@@ -6131,4 +6148,3 @@ public class MagicSpecials extends BaseCombatContent {
 	}
 }
 }
-

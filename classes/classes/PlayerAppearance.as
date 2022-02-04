@@ -1573,8 +1573,8 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.leviathanScore() >= 1) outputText("\n<font color=\"#008000\">Sea dragon-boy/girl: " + player.leviathanScore() + "</font>");
 		else if (player.leviathanScore() < 1) outputText("\n<font color=\"#ff0000\">Sea dragon-boy/girl: 0</font>");
 		//Shark
-		if (player.sharkScore() >= 9 && player.vaginas.length > 0 && player.cocks.length > 0) outputText("\n<font color=\"#0000a0\">Tigershark-morph: " + player.sharkScore() + " (+60% to Str racial multi, +70% to Spe racial multi, +20% to Lib racial multi, +" + (50 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
-		else if (player.sharkScore() >= 8) outputText("\n<font color=\"#0000a0\">Shark-morph: " + player.sharkScore() + " (+40% to Str racial multi, +70% to Spe racial multi, +10% to Lib racial multi)</font>");
+		if (player.sharkScore() >= 11 && player.vaginas.length > 0 && player.cocks.length > 0) outputText("\n<font color=\"#0000a0\">Tigershark-morph: " + player.sharkScore() + " (+60% to Str racial multi, +100% to Spe racial multi, +20% to Lib racial multi, +" + (50 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
+		else if (player.sharkScore() >= 10) outputText("\n<font color=\"#0000a0\">Shark-morph: " + player.sharkScore() + " (+40% to Str racial multi, +100% to Spe racial multi, +10% to Lib racial multi)</font>");
 		else if (player.sharkScore() >= 4) outputText("\n<font color=\"#0000a0\">Half Shark-morph: " + player.sharkScore() + " (+20% to Str racial multi, +40% to Spe racial multi)</font>");
 		else if (player.sharkScore() >= 1) outputText("\n<font color=\"#008000\">Half Shark-morph: " + player.sharkScore() + "</font>");
 		else if (player.sharkScore() < 1) outputText("\n<font color=\"#ff0000\">Half Shark-morph: 0</font>");
