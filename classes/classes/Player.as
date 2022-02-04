@@ -10022,6 +10022,8 @@ use namespace CoC;
 				sirenCounter += 1;
 			if (hasPerk(PerkLib.AscensionCruelChimerasThesis) && sirenCounter >= 8)
 				sirenCounter += 1;
+			if (wings.type != Wings.FEATHERED_LARGE)
+				sirenCounter = 0;
 			if (isGargoyle()) sirenCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) sirenCounter = 0;
 			sirenCounter = finalRacialScore(sirenCounter, Race.SIREN);
