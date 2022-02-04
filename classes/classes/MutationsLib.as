@@ -712,6 +712,9 @@ public class MutationsLib
 				SalamanderAdrenalGlands.requireAdrenalGlandsMutationSlot().requirePerk(PerkLib.Lustzerker).requireCustomFunction(function (player:Player):Boolean {
 					return player.salamanderScore() >= 8 || player.phoenixScore() >= 10;
 				}, "Salamander race");
+				SharkOlfactorySystem.requirePeripheralNervSysMutationSlot().requireCustomFunction(function (player:Player):Boolean {
+					return player.sharkScore() >= 8;
+				}, "Shark race");
 				TwinHeart.requireHeartMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.centaurScore() >= 4 || player.unicornScore() >= 8 || player.sphinxScore() >= 15 || player.cancerScore() >= 8;
 				}, "Tauric or Unicorn race");
@@ -893,6 +896,9 @@ public class MutationsLib
 				SalamanderAdrenalGlandsPrimitive.requireLevel(12).requirePerk(SalamanderAdrenalGlands).requireCustomFunction(function (player:Player):Boolean {
 					return player.salamanderScore() >= 9 || player.phoenixScore() >= 11;
 				}, "Salamander race");
+				SharkOlfactorySystemPrimitive.requireLevel(12).requirePerk(SharkOlfactorySystem).requireCustomFunction(function (player:Player):Boolean {
+					return player.sharkScore() >= 9;
+				}, "Shark race");
 				TwinHeartPrimitive.requireLevel(6)
 						.requirePerk(TwinHeart)
 						.requireCustomFunction(function (player:Player):Boolean {
@@ -1058,6 +1064,9 @@ public class MutationsLib
 				SalamanderAdrenalGlandsEvolved.requireLevel(30).requirePerk(SalamanderAdrenalGlandsPrimitive).requireCustomFunction(function (player:Player):Boolean {
 					return player.salamanderScore() >= 10 || player.phoenixScore() >= 13;
 				}, "Salamander race");
+				SharkOlfactorySystemEvolved.requireLevel(30).requirePerk(SharkOlfactorySystemPrimitive).requireCustomFunction(function (player:Player):Boolean {
+					return player.sharkScore() >= 10;
+				}, "Shark race");
 				TwinHeartEvolved.requireLevel(24)
 						.requirePerk(TwinHeartPrimitive)
 						.requireCustomFunction(function (player:Player):Boolean {
