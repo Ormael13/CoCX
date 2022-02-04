@@ -515,6 +515,16 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You're already pretty goddamn mad!");
 			}
 		}
+		if (player.hasPerk(MutationsLib.SharkOlfactorySystem || player.sharkScore() >= 9)) {
+			bd = buttons.add("Blood Frenzy", bloodFrenzy);
+			if (combat.MonsterIsBleeding()) {
+				bd.hint("Lose yourself to a blood fueled trance increasing your speed, libido and weakening your inteligence. The trance last for as long as the opponent is bleeding and cannot be disangaged willingly.\n");
+			}
+			else bd.disable("You can't go into a blood frenzy if your opponent is not bleeding.");
+			if (player.statStore.hasBuff("Blood Frenzy")) {
+				bd.disable("You're already frenzied!");
+			}
+		}
 		if (player.hasPerk(PerkLib.Lustzerker) || player.jewelryName == "Flame Lizard ring" || player.jewelryName2 == "Flame Lizard ring" || player.jewelryName3 == "Flame Lizard ring" || player.jewelryName4 == "Flame Lizard ring") {
 			bd = buttons.add("Lustserk", lustzerk);
 			if (player.hasPerk(PerkLib.ColderLust)) {
