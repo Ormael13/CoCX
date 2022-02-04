@@ -9986,13 +9986,15 @@ use namespace CoC;
 				sirenCounter++;
 			if (hairColor == "silver")
 				sirenCounter++;
+			if (ears.type == Ears.SHARK || ears.type == Ears.HUMAN || ears.type == Ears.ELFIN)
+				sirenCounter++;
 			if (tailType == Tail.SHARK)
 				sirenCounter++;
 			if (wings.type == Wings.FEATHERED_LARGE)
 				sirenCounter += 4;
-			if (arms.type == Arms.HARPY)
+			if (arms.type == Arms.HARPY || arms.type == Arms.SHARK)
 				sirenCounter++;
-			if (lowerBody == LowerBody.SHARK)
+			if (lowerBody == LowerBody.SHARK || lowerBody == LowerBody.HARPY)
 				sirenCounter++;
 			if (skinType == Skin.AQUA_SCALES && (InCollection(coatColor, ["rough gray", "orange", "dark gray", "grayish-blue", "iridescent gray", "ashen grayish-blue", "gray"])))
 				sirenCounter++;
