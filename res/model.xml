@@ -1008,7 +1008,7 @@
         <cell rect="311,170,49,29" name="breasts/Forca" dx="79" dy="68"/>
         <cell rect="361,170,49,29" name="breasts/Fgoo" dx="79" dy="68"/>
         <cell rect="661,170,49,29" name="breasts/Fdscales" dx="79" dy="68"/>
-		<cell rect="911,170,49,29" name="breasts/Fscales" dx="79" dy="68"/>
+		<cell rect="911,170,49,29" name="breasts/Fshark" dx="79" dy="68"/>
         <cell rect="711,170,49,29" name="fullbodyBreast/Fgnome" dx="79" dy="68"/>
         <cell rect="761,170,49,29" name="fullbodyBreast/Fignis" dx="79" dy="68"/>
         <cell rect="811,170,49,29" name="fullbodyBreast/Fundine" dx="79" dy="68"/>
@@ -1077,6 +1077,10 @@
         <cell rect="211,320,49,29" name="balls/Bbeelarge" dx="79" dy="104"/>
         <cell rect="211,350,49,29" name="balls/Bbeehuge" dx="79" dy="105"/>
         <cell rect="211,380,49,29" name="balls/Bbeesillyhuge" dx="79" dy="106"/>
+		<cell rect="261,290,49,29" name="balls/Bsharksmall" dx="79" dy="104"/>
+        <cell rect="261,320,49,29" name="balls/Bsharklarge" dx="79" dy="104"/>
+        <cell rect="261,350,49,29" name="balls/Bsharkhuge" dx="79" dy="105"/>
+        <cell rect="261,380,49,29" name="balls/Bsharksillyhuge" dx="79" dy="106"/>
         <cell rect="11,230,49,29" name="penis_taur/human_taur" dx="119" dy="135"/>
         <cell rect="11,260,49,29" name="penis_taur/cat_taur" dx="119" dy="135"/>
         <cell rect="461,230,49,58" name="penis_taur/catbig_taur" dx="119" dy="135"/>
@@ -1093,6 +1097,8 @@
         <cell rect="361,230,49,58" name="penis_taur/chitinbig_taur" dx="118" dy="134"/>
         <cell rect="561,290,49,35" name="penis_taur/caveWyrm_taur" dx="118" dy="135"/>
         <cell rect="561,230,49,58" name="penis_taur/caveWyrmbig_taur" dx="118" dy="135"/>
+		<cell rect="911,200,49,35" name="penis_taur/shark_taur" dx="118" dy="135"/>
+        <cell rect="911,230,49,58" name="penis_taur/sharkbig_taur" dx="118" dy="135"/>
         <cell rect="11,290,49,29" name="balls_taur/Bhumansmall_taur" dx="121" dy="128"/>
         <cell rect="11,320,49,29" name="balls_taur/Bhumanlarge_taur" dx="121" dy="128"/>
         <cell rect="11,350,49,29" name="balls_taur/Bhumanhuge_taur" dx="121" dy="128"/>
@@ -1227,7 +1233,9 @@
         <cell rect="1,211,83,139" name="tail/orca" dx="78" dy="39"/>
         <cell rect="1,211,83,139" name="tail/orca_taur" dx="127" dy="49"/>
         <cell rect="423,71,83,139" name="tail/shark" dx="78" dy="39"/>
+		<cell rect="845,211,83,139" name="tail_fg/sharktiger" dx="78" dy="39"/>
         <cell rect="423,71,83,139" name="tail/shark_taur" dx="127" dy="49"/>
+		<cell rect="845,211,83,139" name="tail_fg/sharktiger_taur" dx="127" dy="49"/>
         <cell rect="86,211,83,139" name="tail/mouse" dx="95" dy="40"/>
         <cell rect="86,211,83,139" name="tail/mouse_taur" dx="145" dy="46"/>
         <cell rect="170,211,83,139" name="tail/mouse_fire" dx="95" dy="40"/>
@@ -2351,6 +2359,7 @@
                     </case>
 					<case values="Skin.AQUA_SCALES">
                         <set var="skinb">shark</set>
+						<set var="skinx">shark</set>
                     </case>
                     <case values="Skin.FUR">
                         <set var="skinb">fur</set>
@@ -3915,6 +3924,14 @@
 						<show part="tail/shark"/>
 					</else>
 				</if>
+				<if test="skin.pattern == Skin.PATTERN_TIGER_STRIPES">
+					<if test="isTaur()">
+						<show part="tail_fg/sharktiger_taur"/>
+						<else>
+							<show part="tail_fg/sharktiger"/>
+						</else>
+					</if>
+				</if>
             </case>
 			<case values="Tail.RAIJU">
 				<if test="isTaur()">
@@ -4038,15 +4055,36 @@
                             <show part="penis$taur/humanbig$taur"/>
                         </else>
                     </if>
-                </case>
+                </case>		
+				
                 <!-- <case values="CockTypesEnum.HUMAN"></case> use default -->
                 <default>
-                    <if test="big">
-                        <show part="penis$taur/humanbig$taur"/>
-                        <else>
-                            <show part="penis$taur/human$taur"/>
-                        </else>
-                    </if>
+					<if test="skin.type == Skin.AQUA_SCALES or skin.base.pattern==Pattern.ORCA_UNDERBODY or skin.base.pattern==Pattern.SEA_DRAGON_UNDERBODY">
+						<if test="skin.base.pattern==Pattern.ORCA_UNDERBODY or skin.base.pattern==Pattern.SEA_DRAGON_UNDERBODY">		
+							<if test="big">
+								<show part="penis$taur/human2big$taur"/>
+								<else>
+									<show part="penis$taur/human2$taur"/>
+								</else>
+							</if>
+							<else>
+								<if test="big">
+									<show part="penis$taur/sharkbig$taur"/>
+									<else>
+										<show part="penis$taur/shark$taur"/>
+									</else>
+								</if>
+							</else>
+						</if>
+						<else>
+							<if test="big">
+								<show part="penis$taur/humanbig$taur"/>
+								<else>
+									<show part="penis$taur/human$taur"/>
+								</else>
+							</if>
+						</else>
+					</if>								
                 </default>
             </switch>
             <if test="lowerBody == LowerBody.CANCER or lowerBody == LowerBody.PLANT_FLOWER or lowerBody == LowerBody.FLOWER_LILIRAUNE or lowerBody == LowerBody.GAZER or (lowerBody == LowerBody.HINEZUMI and arms.type == Arms.HINEZUMI)">
