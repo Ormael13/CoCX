@@ -2887,7 +2887,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if(player.hasCock()) outputText(" cock");
 		if(player.isHerm()) outputText(" and");
 		if(player.hasVagina()) outputText(" vagina");
-		outputText(" drooling as you let go of your ability to reason and lose yourself and sink into a blood frenzy!\n\n");
+		outputText(" drooling as you let go of your ability to reason and lose yourself, sinking into a blood frenzy!\n\n");
 		player.buff("Blood Frenzy").setStats({'spe.mult':Math.round(player.speStat.mult.value*MultiplierBonus),'int.mult':-Math.round(player.intStat.mult.value),'lib.mult':Math.round(player.libStat.mult.value*MultiplierBonus)}).combatPermanent();
 		enemyAI();
 	}
