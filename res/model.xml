@@ -297,6 +297,7 @@
         <cell rect="351,90,49,59" name="torso/goo" dx="79" dy="64"/>
         <cell rect="601,90,49,59" name="torso/panda" dx="79" dy="64"/>
         <cell rect="1101,90,49,59" name="torso/dscales" dx="79" dy="64"/>
+		<cell rect="1151,90,49,59" name="torso/shark" dx="79" dy="64"/>
         <cell rect="451,90,49,59" name="torso_pattern/Bstripe" dx="79" dy="64"/>
         <cell rect="501,90,49,59" name="torso_pattern/Blightning" dx="79" dy="64"/>
         <cell rect="551,90,49,59" name="torso_pattern/Btatoo" dx="79" dy="64"/>
@@ -317,19 +318,22 @@
         <cell rect="251,150,49,59" name="arms_bg/orca" dx="56" dy="64"/>
         <cell rect="301,150,49,59" name="arms_bg/pscales" dx="56" dy="64"/>
         <cell rect="351,150,49,59" name="arms_bg/scales" dx="56" dy="64"/>
-        <cell rect="351,150,49,59" name="arms_bg/dscales" dx="56" dy="64"/>
+		<cell rect="351,150,49,59" name="arms_bg/dscales" dx="56" dy="64"/>
+        <cell rect="1151,150,49,59" name="arms_bg/shark" dx="56" dy="64"/>
         <cell rect="401,150,49,59" name="arms_bg/goo" dx="56" dy="64"/>
         <cell rect="701,150,49,59" name="arms_bg/panda" dx="56" dy="64"/>
         <cell rect="801,150,49,59" name="arms_bg/demonlewd" dx="56" dy="64"/>
         <cell rect="1,853,49,59" name="arms_bg/displacerquad_human" dx="56" dy="56"/>
         <cell rect="51,853,49,59" name="arms_bg/displacerquad_fur" dx="56" dy="56"/>
         <cell rect="101,853,49,59" name="arms_bg/displacerquad_scales" dx="56" dy="56"/>
+		<cell rect="101,853,49,59" name="arms_bg/displacerquad_dscales" dx="56" dy="56"/>
         <cell rect="151,853,49,59" name="arms_bg/displacerquad_pscales" dx="56" dy="56"/>
         <cell rect="201,853,49,59" name="arms_bg/displacerquad_chitin" dx="56" dy="56"/>
         <cell rect="251,853,49,59" name="arms_bg/displacerquad_orca" dx="56" dy="56"/>
         <cell rect="1,1064,49,59" name="arms_bg/feral_human" dx="56" dy="56"/>
         <cell rect="51,1064,49,59" name="arms_overlay_bg/feral_fur" dx="56" dy="56"/>
         <cell rect="101,1064,49,59" name="arms_overlay_bg/feral_scales" dx="56" dy="56"/>
+		<cell rect="101,1064,49,59" name="arms_overlay_bg/feral_dscales" dx="56" dy="56"/>
         <cell rect="151,1064,49,59" name="arms_overlay_bg/feral_pscales" dx="56" dy="56"/>
         <cell rect="201,1064,49,59" name="arms_overlay_bg/feral_chitin" dx="56" dy="56"/>
         <cell rect="251,1064,49,59" name="arms_overlay_bg/feral_orca" dx="56" dy="56"/>
@@ -348,7 +352,8 @@
         <cell rect="251,210,49,59" name="arms/orca" dx="104" dy="64"/>
         <cell rect="301,210,49,59" name="arms/pscales" dx="104" dy="64"/>
         <cell rect="351,210,49,59" name="arms/scales" dx="104" dy="64"/>
-        <cell rect="351,210,49,59" name="arms/dscales" dx="104" dy="64"/>
+		<cell rect="351,210,49,59" name="arms/dscales" dx="104" dy="64"/>
+        <cell rect="1151,210,49,59" name="arms/shark" dx="104" dy="64"/>
         <cell rect="401,210,49,59" name="arms/goo" dx="104" dy="64"/>
         <cell rect="701,210,49,59" name="arms/panda" dx="104" dy="64"/>
         <cell rect="638,520,90,90" name="arms/yeti" dx="57" dy="43"/>
@@ -399,6 +404,7 @@
         <cell rect="301,270,49,59" name="hands_bg/chitin2" dx="56" dy="64"/>
         <cell rect="351,270,49,59" name="hands_bg/fire" dx="56" dy="64"/>
         <cell rect="401,270,49,59" name="hands_bg/scales" dx="56" dy="64"/>
+		<cell rect="401,270,49,59" name="hands_bg/dscales" dx="56" dy="64"/>
         <cell rect="451,270,49,59" name="hands_bg/human" dx="56" dy="64"/>
         <cell rect="501,270,49,59" name="hands_bg/fins-orca" dx="56" dy="64"/>
         <cell rect="551,270,49,59" name="hands_bg/goo" dx="56" dy="64"/>
@@ -419,6 +425,7 @@
         <cell rect="251,330,49,59" name="hands/chitin" dx="104" dy="64"/>
         <cell rect="301,330,49,59" name="hands/chitin2" dx="104" dy="64"/>
         <cell rect="401,330,49,59" name="hands/scales" dx="104" dy="64"/>
+		<cell rect="401,330,49,59" name="hands/dscales" dx="104" dy="64"/>
         <cell rect="451,330,49,59" name="hands/human" dx="104" dy="64"/>
         <cell rect="501,330,49,59" name="hands/fins-orca" dx="104" dy="64"/>
         <cell rect="551,330,49,59" name="hands/goo" dx="104" dy="64"/>
@@ -443,10 +450,12 @@
         <cell rect="201,390,49,59" name="legs/orca" dx="79" dy="115"/>
         <cell rect="251,390,49,59" name="legs/pscales" dx="79" dy="115"/>
         <cell rect="301,390,49,59" name="legs/scales" dx="79" dy="115"/>
-        <cell rect="301,390,49,59" name="legs/dscales" dx="79" dy="115"/>
+		<cell rect="301,390,49,59" name="legs/dscales" dx="79" dy="115"/>
+        <cell rect="851,390,49,59" name="legs/shark" dx="79" dy="115"/>
         <cell rect="351,390,49,59" name="legs/hoof_human" dx="79" dy="115"/>
         <cell rect="1,793,49,59" name="legs/hoof_fur" dx="79" dy="115"/>
         <cell rect="51,793,49,59" name="legs/hoof_scales" dx="79" dy="115"/>
+		<cell rect="51,793,49,59" name="legs/hoof_dscales" dx="79" dy="115"/>
         <cell rect="101,793,49,59" name="legs/hoof_pscales" dx="79" dy="115"/>
         <cell rect="151,793,49,59" name="legs/hoof_chitin" dx="79" dy="115"/>
         <cell rect="201,793,49,59" name="legs/hoof_orca" dx="79" dy="115"/>
@@ -454,6 +463,7 @@
         <cell rect="1,520,90,90" name="legs/harpy_human" dx="60" dy="99"/>
         <cell rect="92,520,90,90" name="legs/harpy_fur" dx="60" dy="99"/>
         <cell rect="183,520,90,90" name="legs/harpy_scales" dx="60" dy="99"/>
+		<cell rect="183,520,90,90" name="legs/harpy_dscales" dx="60" dy="99"/>
         <cell rect="274,520,90,90" name="legs/harpy_pscales" dx="60" dy="99"/>
         <cell rect="365,520,90,90" name="legs/harpy_chitin" dx="60" dy="99"/>
         <cell rect="456,520,90,90" name="legs/harpy_orca" dx="60" dy="99"/>
@@ -461,6 +471,7 @@
         <cell rect="1,973,90,90" name="legs/displacer_human" dx="62" dy="68"/>
         <cell rect="92,973,90,90" name="legs/displacer_fur" dx="62" dy="68"/>
         <cell rect="183,973,90,90" name="legs/displacer_scales" dx="62" dy="68"/>
+		<cell rect="183,973,90,90" name="legs/displacer_dscales" dx="62" dy="68"/>
         <cell rect="274,973,90,90" name="legs/displacer_pscales" dx="62" dy="68"/>
         <cell rect="365,973,90,90" name="legs/displacer_chitin" dx="62" dy="68"/>
         <cell rect="456,973,90,90" name="legs/displacer_orca" dx="62" dy="68"/>
@@ -471,6 +482,7 @@
         <cell rect="1,611,90,90" name="legs/manticore_sit" dx="60" dy="61"/>
         <cell rect="92,611,90,90" name="legs/manticore_sit_fur" dx="60" dy="61"/>
         <cell rect="183,611,90,90" name="legs/manticore_sit_scales" dx="60" dy="61"/>
+		<cell rect="183,611,90,90" name="legs/manticore_sit_dscales" dx="60" dy="61"/>
         <cell rect="274,611,90,90" name="legs/manticore_sit_pscales" dx="60" dy="61"/>
         <cell rect="365,611,90,90" name="legs/manticore_sit_chitin" dx="60" dy="61"/>
         <cell rect="547,611,90,90" name="legs/gargoyle_sit" dx="60" dy="61"/>
@@ -820,6 +832,7 @@
         <cell rect="211,70,29,32" name="head/goo" dx="90" dy="37"/>
         <cell rect="271,70,29,32" name="head/panda" dx="90" dy="37"/>
         <cell rect="301,70,29,32" name="head/dscales" dx="90" dy="37"/>
+		<cell rect="331,70,29,32" name="head/shark" dx="90" dy="37"/>
         <cell rect="1,110,29,32" name="face/human" dx="90" dy="37"/>
         <cell rect="31,110,29,32" name="face/human_fang" dx="90" dy="37"/>
         <cell rect="61,110,29,32" name="face/fur" dx="90" dy="37"/>
@@ -965,6 +978,7 @@
         <cell rect="311,110,49,29" name="breasts/Borca" dx="79" dy="68"/>
         <cell rect="361,110,49,29" name="breasts/Bgoo" dx="79" dy="68"/>
         <cell rect="661,110,49,29" name="breasts/Bdscales" dx="79" dy="68"/>
+		<cell rect="911,110,49,29" name="breasts/Bshark" dx="79" dy="68"/>
         <cell rect="711,110,49,29" name="fullbodyBreast/Bgnome" dx="79" dy="68"/>
         <cell rect="761,110,49,29" name="fullbodyBreast/Bignis" dx="79" dy="68"/>
         <cell rect="811,110,49,29" name="fullbodyBreast/Bundine" dx="79" dy="68"/>
@@ -979,6 +993,7 @@
         <cell rect="311,140,49,29" name="breasts/Dorca" dx="79" dy="68"/>
         <cell rect="361,140,49,29" name="breasts/Dgoo" dx="79" dy="68"/>
         <cell rect="661,140,49,29" name="breasts/Ddscales" dx="79" dy="68"/>
+		<cell rect="911,140,49,29" name="breasts/Dshark" dx="79" dy="68"/>
         <cell rect="711,140,49,29" name="fullbodyBreast/Dgnome" dx="79" dy="68"/>
         <cell rect="761,140,49,29" name="fullbodyBreast/Dignis" dx="79" dy="68"/>
         <cell rect="811,140,49,29" name="fullbodyBreast/Dundine" dx="79" dy="68"/>
@@ -993,6 +1008,7 @@
         <cell rect="311,170,49,29" name="breasts/Forca" dx="79" dy="68"/>
         <cell rect="361,170,49,29" name="breasts/Fgoo" dx="79" dy="68"/>
         <cell rect="661,170,49,29" name="breasts/Fdscales" dx="79" dy="68"/>
+		<cell rect="911,170,49,29" name="breasts/Fscales" dx="79" dy="68"/>
         <cell rect="711,170,49,29" name="fullbodyBreast/Fgnome" dx="79" dy="68"/>
         <cell rect="761,170,49,29" name="fullbodyBreast/Fignis" dx="79" dy="68"/>
         <cell rect="811,170,49,29" name="fullbodyBreast/Fundine" dx="79" dy="68"/>
@@ -1017,12 +1033,14 @@
         <cell rect="161,230,49,58" name="penis/humanbig" dx="77" dy="104"/>
         <cell rect="211,230,49,58" name="penis/caninebig" dx="77" dy="103"/>
         <cell rect="261,230,49,29" name="penis/human2" dx="78" dy="106"/>
+		<cell rect="911,200,49,29" name="penis/shark" dx="78" dy="106"/>
         <cell rect="311,230,49,58" name="penis/human2big" dx="78" dy="106"/>
         <cell rect="261,260,49,29" name="penis/chitin" dx="78" dy="106"/>
         <cell rect="361,230,49,58" name="penis/chitinbig" dx="78" dy="106"/>
         <cell rect="561,290,49,35" name="penis/caveWyrm" dx="78" dy="106"/>
         <cell rect="561,230,49,58" name="penis/caveWyrmbig" dx="77" dy="108"/>
         <cell rect="461,200,49,29" name="penis/mindbreakerdrip" dx="73" dy="134"/>
+		<cell rect="911,230,49,58" name="penis/sharkbig" dx="78" dy="106"/>
         <cell rect="11,290,49,29" name="balls/Bhumansmall" dx="79" dy="104"/>
         <cell rect="11,320,49,29" name="balls/Bhumanlarge" dx="79" dy="104"/>
         <cell rect="11,350,49,29" name="balls/Bhumanhuge" dx="79" dy="105"/>
@@ -2320,7 +2338,7 @@
         <switch value="skin.coverage">
             <case values="Skin.COVERAGE_NONE,Skin.COVERAGE_HIGH,Skin.COVERAGE_COMPLETE">
                 <switch value="skin.type">
-                    <case values="Skin.PLAIN,Skin.AQUA_RUBBER_LIKE,Skin.AQUA_SCALES">
+                    <case values="Skin.PLAIN,Skin.AQUA_RUBBER_LIKE">
                         <set var="skinb">human</set>
                         <set var="skinx">human</set>
                         <if test="skin.base.pattern==Pattern.ORCA_UNDERBODY">
@@ -2330,6 +2348,9 @@
                             <set var="skinx">orca</set>
 							<show part="torso_pattern/Bbioluminescence"/>
                         </if>
+                    </case>
+					<case values="Skin.AQUA_SCALES">
+                        <set var="skinb">shark</set>
                     </case>
                     <case values="Skin.FUR">
                         <set var="skinb">fur</set>
