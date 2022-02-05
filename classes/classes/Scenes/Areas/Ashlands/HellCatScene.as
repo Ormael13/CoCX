@@ -10,6 +10,8 @@ import classes.BodyParts.Hair;
 import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
+import classes.Items.Armors.LustyMaidensArmor;
+import classes.Items.Armors.SuccubusArmor;
 import classes.Items.MutationsHelper;
 import classes.Scenes.Areas.Ashlands.HellCat;
 import classes.Scenes.UniqueSexScenes;
@@ -47,6 +49,10 @@ public function DefeatedHellCat():void {
 	addButton(0, "Back", cleanupAfterCombat);
 	if (player.hasCock()) addButton(1, "Pussycat", DefeatedHellCatPussycat);
 	if (player.hasVagina()) addButton(2, "Catcock", DefeatedHellCatCatcock);
+	if (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armor == armors.LMARMOR || player.armor == armors.S_ARMOR)) {
+		if (player.armor == armors.S_ARMOR) addButton(3, "B.Titfuck", (player.armor as SuccubusArmor).succubusPaizuri);
+		else addButton(3, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
+	}
 	if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 001).hint("Other non typical sex scenes.");
 
 }

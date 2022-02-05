@@ -1110,7 +1110,7 @@ use namespace CoC;
 		}/*
 		public function isMidGradeWrathWeapon():Boolean
 		{
-			return weapon == game.weapons.NTWHIP;
+			return weaponSpecials("MGWrath") || weapon == game.weapons.NTWHIP;
 		}*/
 		public function isDualMidGradeWrathWeapon():Boolean
 		{

@@ -27,13 +27,13 @@ package classes.Items
 		public const ASCENSU:Ascensus = new Ascensus();
 		public const B_STAFF:Weapon = new BeautifulStaff();
 		public const B_SWORD:Weapon = new BeautifulSword();
+		public const B_SCARB:Weapon = new Weapon("B.ScarB", "B.ScarBlade", "broken scarred blade", "a broken scarred blade", "slash", 12, 480, "This saber, made from lethicite-imbued metal, seems to no longer seek flesh; whatever demonic properties in this weapon is gone now but it's still an effective weapon.", "", "Sword");
+		public const B_WIDOW:BlackWidow = new BlackWidow();
 		public const BFGAUNT:Weapon = new Weapon("BFGaunt", "B.F.Gauntlets", "big fucking gauntlets", "a big fucking gauntlets", "smash", 0, 1600, "Big Fucking Gauntlets - the best solution for a tiny e-pen complex at this side of the Mareth!  This huge gauntlets signed by mysterious 'Vi' requires 150 strength to fully unleash it power.\nIncreases unarmed damage by 4x.\nIncreases stun chance by 40.", "LGWrath, Stun40", "Gauntlet");
 		public const BFTHSWORD:Weapon = new BFTHSword();
 		public const BFSWORD:Weapon = new BFSword();
 		public const BFWHIP :Weapon = new BFWhip();
-		public const B_SCARB:Weapon = new Weapon("B.ScarB", "B.ScarBlade", "broken scarred blade", "a broken scarred blade", "slash", 12, 480, "This saber, made from lethicite-imbued metal, seems to no longer seek flesh; whatever demonic properties in this weapon is gone now but it's still an effective weapon.", "", "Sword");
 		public const BLETTER:BloodLetter = new BloodLetter();
-		public const B_WIDOW:BlackWidow = new BlackWidow();
 		public const CLAWS  :Weapon = new Weapon("Claws","Claws","gauntlet with claws","a gauntlet with claws","rend",0,100,"Those metal gauntlets have tips of the fingers shaped like sharp natural claws.  Though they lacks the damaging potential of other weapons, they have a chance to leave bleeding wounds.", "Bleed10", "Gauntlet");
 		public const CLAYMOR:Weapon = new LargeClaymore();
 		public const CNTWHIP:CatONineTailWhip = new CatONineTailWhip();
@@ -71,7 +71,7 @@ package classes.Items
 		public const HNTCANE:HuntsmansCane = new HuntsmansCane();
 		public const HSWORDS:HookSwords = new HookSwords();
 		public const JRAPIER:JeweledRapier = new JeweledRapier();
-		public const KARMTOU:WeaponWithPerk = new WeaponWithPerk("KarmTou", "KarmicTouch", "karmic gloves", "a pair of karmic gloves", "punch", 0, 400, "A pair of gauntlets, made in shining steel and snow-white cloth. Their touch brings waste into the wicked’s flesh, punishing them in the form of blows more painful then should be.", "Body Cultivator's Focus, Stun25", PerkLib.BodyCultivatorsFocus, 0.5, 0, 0, 0, "", "Gauntlet");
+		public const KARMTOU:WeaponWithPerk = new WeaponWithPerk("KarmTou", "KarmicTouch", "karmic gloves", "a pair of karmic gloves", "punch", 0, 400, "A pair of gauntlets, ordinary at first glance save by its immaculate appearance in shining metal and snow-white cloth.Their touch brings waste into the wicked flesh, punishing them in the form of blows more painful then should be.", "Body Cultivator's Focus, Stun25", PerkLib.BodyCultivatorsFocus, 0.5, 0, 0, 0, "", "Gauntlet");
 		public const KATANA :Weapon = new Weapon("Katana ","Katana","katana","a katana","keen cut",17,680,"A curved bladed weapon that cuts through flesh with the greatest of ease.", "Large", "Dueling");
 		public const KIHAAXE:Weapon = new Weapon("KihaAxe","Greataxe","fiery double-bladed axe","a fiery double-bladed axe","fiery cleave",22,880,"This large, double-bladed axe matches Kiha's axe. It's constantly flaming.", "Large", "Axe");
 		public const L__AXE :LargeAxe = new LargeAxe();

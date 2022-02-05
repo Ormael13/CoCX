@@ -934,7 +934,8 @@ public class Combat extends BaseContent {
             flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] = 0;
             flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] = 0;
 			if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) flags[kFLAGS.IN_COMBAT_PLAYER_BLOOD_PUPPIES_ATTACKED] = 0;
-			if (player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn) && player.statusEffectv1(StatusEffects.SimplifiedNonPCTurn) == 1) player.addStatusValue(StatusEffects.SimplifiedNonPCTurn,1,-1);
+			if (player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn) && player.statusEffectv1(StatusEffects.SimplifiedNonPCTurn) == 1) player.addStatusValue(StatusEffects.SimplifiedNonPCTurn, 1, -1);
+			if (player.armor == armors.BMARMOR) dynStats("lus", -(Math.round(player.maxLust() * 0.02)));
         }
         mainView.hideMenuButton(MainView.MENU_DATA);
         mainView.hideMenuButton(MainView.MENU_APPEARANCE);
@@ -1716,7 +1717,10 @@ public class Combat extends BaseContent {
                     else if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 5) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 4;
                     else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 2;
                 }
-            } else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
+            }
+			else {
+				flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
+			}
 			if (player.statStore.hasBuff("AsuraForm")) {
 				if (player.hasPerk(PerkLib.AsuraStrength)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 4;
 				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 3;
@@ -3382,38 +3386,30 @@ public class Combat extends BaseContent {
                     } else damage *= 2;
                 }
             }
-            if (player.weaponRangeName == "Wild Hunt" && player.level > monster.level) damage *= 1.2;
+            if (player.weaponRangeName == "Wild Hunt" && (player.level + playerLevelAdjustment()) > monster.level) damage *= 2;
             if (player.weaponRangeName == "Hodr's bow" && monster.hasStatusEffect(StatusEffects.Blind)) damage *= 1.1;
             if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1) {
-                damage += player.inte * 0.2;
-                if (player.inte >= 50) damage += player.inte * 0.1;
-                if (player.inte >= 100) damage += player.inte * 0.1;
-                if (player.inte >= 150) damage += player.inte * 0.1;
-                if (player.inte >= 200) damage += player.inte * 0.1;
+                damage += Math.round(player.inte * 0.1);
+                if (player.inte >= 50) damage += Math.round(player.inte * ((player.inte / 50) * 0.05));
+				if (player.weaponRangeName == "Artemis") damage *= 1.5;
 				damage *= fireDamageBoostedByDao();
             }
             if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) {
-                damage += player.inte * 0.2;
-                if (player.inte >= 50) damage += player.inte * 0.1;
-                if (player.inte >= 100) damage += player.inte * 0.1;
-                if (player.inte >= 150) damage += player.inte * 0.1;
-                if (player.inte >= 200) damage += player.inte * 0.1;
+                damage += Math.round(player.inte * 0.1);
+                if (player.inte >= 50) damage += Math.round(player.inte * ((player.inte / 50) * 0.05));
+				if (player.weaponRangeName == "Artemis") damage *= 1.5;
 				damage *= iceDamageBoostedByDao();
             }
             if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) {
-                damage += player.inte * 0.2;
-                if (player.inte >= 50) damage += player.inte * 0.1;
-                if (player.inte >= 100) damage += player.inte * 0.1;
-                if (player.inte >= 150) damage += player.inte * 0.1;
-                if (player.inte >= 200) damage += player.inte * 0.1;
+                damage += Math.round(player.inte * 0.1);
+                if (player.inte >= 50) damage += Math.round(player.inte * ((player.inte / 50) * 0.05));
+				if (player.weaponRangeName == "Artemis") damage *= 1.5;
 				damage *= lightningDamageBoostedByDao();
             }
             if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) {
-                damage += player.inte * 0.2;
-                if (player.inte >= 50) damage += player.inte * 0.1;
-                if (player.inte >= 100) damage += player.inte * 0.1;
-                if (player.inte >= 150) damage += player.inte * 0.1;
-                if (player.inte >= 200) damage += player.inte * 0.1;
+                damage += Math.round(player.inte * 0.1);
+                if (player.inte >= 50) damage += Math.round(player.inte * ((player.inte / 50) * 0.05));
+				if (player.weaponRangeName == "Artemis") damage *= 1.5;
 				damage *= darknessDamageBoostedByDao();
             }
             //Section for item damage modifiers
@@ -5982,7 +5978,7 @@ public class Combat extends BaseContent {
                 //Selfcorrupting weapons
                 if ((player.weapon == weapons.DEMSCYT || player.weapon == weapons.EBNYBLD) && player.cor < 90) dynStats("cor", 0.3);
                 //Selfpurifying and Lust lowering weapons
-                if (player.weapon == weapons.NPHBLDE && player.cor > 10) dynStats("cor", -0.3);
+                if ((player.weapon == weapons.LHSCYTH || player.weapon == weapons.NPHBLDE) && player.cor > 10) dynStats("cor", -0.3);
                 if (player.weapon == weapons.EXCALIB) {
                     if (player.cor > 10) dynStats("cor", -0.3);
                     var excaliburLustSelf:Number;
@@ -6704,7 +6700,7 @@ public class Combat extends BaseContent {
                 else outputText("\n[Themonster] bleeds profusely from the many bloody gashes your [weapon] leave behind.");
             }
         }
-        if ((player.hasPerk(PerkLib.VampiricBlade) || player.hasStatusEffect(StatusEffects.LifestealEnchantment)) && !monster.hasPerk(PerkLib.EnemyConstructType)) {
+        if ((player.hasPerk(PerkLib.VampiricBlade) || player.hasStatusEffect(StatusEffects.LifestealEnchantment) || player.weapon == weapons.LHSCYTH) && !monster.hasPerk(PerkLib.EnemyConstructType)) {
 			var restoreamount:Number = 0;
 			if (player.hasPerk(PerkLib.VampiricBlade)) restoreamount += 1;
 			if (player.hasStatusEffect(StatusEffects.LifestealEnchantment)) restoreamount += 1;
@@ -15355,4 +15351,4 @@ public class Combat extends BaseContent {
         return inteWisLibScale(player.lib, randomize);
     }
 }
-}
+}

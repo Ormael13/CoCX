@@ -28,7 +28,9 @@ public class RestoreSpell extends AbstractGreySpell {
 	}
 	
 	override public function calcCooldown():int {
-		return 8;
+		var calcC:int = 8;
+		if (player.weapon == weapons.U_STAFF) calcC -= 2;
+		return calcC;
 	}
 	
 	public function calcDuration():int {

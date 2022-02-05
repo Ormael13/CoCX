@@ -8,6 +8,7 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
+import classes.Items.Armors.SuccubusArmor;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
@@ -15,14 +16,8 @@ public class IncubusMechanic extends Monster {
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if (flags[kFLAGS.D3_DISCOVERED] == 0)
-			{
-				defeatedInDungeon1(hpVictory);
-			}
-			else
-			{
-				defeatedInDungeon3(hpVictory);
-			}
+			if (flags[kFLAGS.D3_DISCOVERED] == 0) defeatedInDungeon1(hpVictory);
+			else defeatedInDungeon3(hpVictory);
 		}
 		
 		private function defeatedInDungeon1(hpVictory:Boolean):void {
@@ -47,7 +42,10 @@ public class IncubusMechanic extends Monster {
 				else {
 					outputText("  Now would be the perfect opportunity to put his tool to use...\n\nWhat do you do?");
 					if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && flags[kFLAGS.FACTORY_INCUBUS_BRIBED] == 0) outputText("\n\n<b>You swear you can hear a clicking sound coming from the west.</b>");
-					if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor == armors.LMARMOR) EngineCore.addButton(3, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri, player, this);
+					if (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armor == armors.LMARMOR || player.armor == armors.S_ARMOR)) {
+						if (player.armor == armors.S_ARMOR) EngineCore.addButton(3, "B.Titfuck", (player.armor as SuccubusArmor).succubusPaizuri, player, this);
+						else EngineCore.addButton(3, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri, player, this);
+					}
 				}
 				EngineCore.addButton(0, "Rape", SceneLib.dungeons.factory.doRapeIncubus).hint(player.hasCock() ? "Fuck his butt." : "Ride him vaginally.");
 				EngineCore.addButton(1, "Service Him", SceneLib.dungeons.factory.doOralIncubus).hint("Service the incubus orally.");

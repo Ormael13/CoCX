@@ -7,6 +7,7 @@ import classes.*;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
+import classes.Items.Armors.SuccubusArmor;
 import classes.Scenes.UniqueSexScenes;
 
 public class CeraphScene extends NPCAwareContent
@@ -667,15 +668,15 @@ public class CeraphScene extends NPCAwareContent
 					if (player.cockThatFits(monster.analCapacity()) != -1) addButton(2, "FuckHerAss", buttRapeCeraph);
 					else outputText("  <b>There's no way you could fit inside her ass - you're too big.</b>");
 				}
-				if (player.hasVagina()) addButton(1, "Ride Her", rideCeraphsCockLikeaBAWSSexclamation11eleven);
-				if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") addButton(3, "B.Titfuck", createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,monster));
+				if (player.hasVagina()) {
+					addButton(1, "Ride Her", rideCeraphsCockLikeaBAWSSexclamation11eleven);
+					if (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armorName == "lusty maiden's armor" || player.armorName == "Succubus armor")) {
+						if (player.armorName == "Succubus armor") addButton(3, "B.Titfuck", createCallBackFunction2((player.armor as SuccubusArmor).succubusPaizuri,player,monster));
+						else addButton(3, "B.Titfuck", createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,monster));
+					}
+				}
 				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 053).hint("Other non typical sex scenes.");
 				addButton(14, "Leave", leave);
-				/*
-				 if(player.gender == 1) doYesNo(maleFuckCeraphsPussy,cleanupAfterCombat);
-				 if(player.gender == 2) doYesNo(rideCeraphsCockLikeaBAWSSexclamation11eleven,cleanupAfterCombat);
-				 if(player.gender == 3) simpleChoices("Fuck Her",maleFuckCeraphsPussy,"Ride Her",rideCeraphsCockLikeaBAWSSexclamation11eleven,"",0,"",0,"Leave",cleanupAfterCombat);
-				 */
 			}
 			else {
                 if (CoC.instance.inCombat)

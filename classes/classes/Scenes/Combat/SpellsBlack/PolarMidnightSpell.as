@@ -51,8 +51,10 @@ public class PolarMidnightSpell extends AbstractBlackSpell {
 	}
 	
 	public function calcDamage(target:Monster, randomize:Boolean = true):Number {
+		var baseDamage:Number = scalingBonusIntelligence(randomize) * 24;
+		if (player.weaponRangeName == "Artemis") baseDamage *= 1.5;
 		return adjustSpellDamage(
-				scalingBonusIntelligence(randomize) * 24,
+				baseDamage,
 				DamageType.ICE,
 				CAT_SPELL_BLACK,
 				target

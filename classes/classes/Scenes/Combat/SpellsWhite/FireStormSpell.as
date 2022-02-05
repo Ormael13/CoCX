@@ -31,6 +31,7 @@ public class FireStormSpell extends AbstractWhiteSpell{
 	
 	public function calcDamage(monster:Monster, randomize:Boolean=true):Number {
 		var baseDamage:Number = scalingBonusIntelligence(randomize)*6;
+		if (player.weaponRangeName == "Artemis") baseDamage *= 1.5;
 		return adjustSpellDamage(baseDamage,DamageType.FIRE,CAT_SPELL_WHITE,monster);
 	}
 	

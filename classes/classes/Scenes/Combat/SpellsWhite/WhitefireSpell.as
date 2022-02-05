@@ -48,7 +48,8 @@ public class WhitefireSpell extends AbstractWhiteSpell {
 	 * @return {Number} Damage dealt by this spell
 	 */
 	public function calcDamage(monster:Monster, randomize:Boolean = true):Number {
-		var baseDamage:Number = 2*scalingBonusIntelligence(randomize);
+		var baseDamage:Number = 2 * scalingBonusIntelligence(randomize);
+		if (player.weaponRangeName == "Artemis") baseDamage *= 1.5;
 		if (ex) baseDamage *= 2;
 		return adjustSpellDamage(baseDamage, DamageType.FIRE, CAT_SPELL_WHITE, monster);
 	}

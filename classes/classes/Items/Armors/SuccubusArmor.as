@@ -1,7 +1,8 @@
 /**
- * Created by aimozg on 11.01.14.
+ * ...
+ * @author Liadri
  */
-package classes.Items.Armors
+package classes.Items.Armors 
 {
 import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
@@ -16,16 +17,16 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 import classes.Scenes.SceneLib;
 import classes.lists.BreastCup;
 
-public final class LustyMaidensArmor extends Armor {
+	public class SuccubusArmor extends Armor {
 		
-		public function LustyMaidensArmor() {
-			super("LMArmor", "LMArmor", "lusty maiden's armor", "a bikini-like set of armor that could only belong to a lusty maiden", 10, 0, 400, "This skimpy chain bikini barely qualifies as armor.  Indeed, the chain is made from links much finer and lighter than normal, so fine that it feels almost silken under your fingertips.  A simple seal in the g-string-like undergarment states, \"Virgins only.\" \nRequirements: breast size of at least DD-cups and be a female.", "Light", false, false);
+		public function SuccubusArmor() 
+		{
+			super("S.Armor", "S.Armor", "Succubus armor", "a Succubus armor", 20, 0, 800, "The fully corrupted maiden armor became an armor fit for a succubus. It incite its owner to sex and rewards it for debauching herself. It's already suggestive design became downright obscene as the metal and clothes color turned black as night.", "Light", false, false);
 			withTag(ItemTags.REVEALING);
 		}
 		
 		override public function get def():Number {
-			if (game.player.hasVirginVagina()) return 15 + game.flags[kFLAGS.BIKINI_ARMOR_BONUS];
-			return 10 + game.flags[kFLAGS.BIKINI_ARMOR_BONUS];
+			return 20 + (game.flags[kFLAGS.BIKINI_ARMOR_BONUS] * 2);
 		}
 		
 		override public function canUse():Boolean {
@@ -72,12 +73,7 @@ public final class LustyMaidensArmor extends Armor {
 		
 		override public function playerEquip():Armor {
 			while (game.player.hasPerk(PerkLib.SluttySeduction)) game.player.removePerk(PerkLib.SluttySeduction);
-			if (game.player.hasVirginVagina()) {
-				game.player.createPerk(PerkLib.SluttySeduction, 10 + game.flags[kFLAGS.BIKINI_ARMOR_BONUS],0,0,0);
-			}
-			else {
-				game.player.createPerk(PerkLib.SluttySeduction, 6 + game.flags[kFLAGS.BIKINI_ARMOR_BONUS],0,0,0);
-			}
+			game.player.createPerk(PerkLib.SluttySeduction, 10 + (game.flags[kFLAGS.BIKINI_ARMOR_BONUS] * 2),0,0,0);
 			return super.playerEquip();
 		}
 		
@@ -87,7 +83,7 @@ public final class LustyMaidensArmor extends Armor {
 		}
 		
 		//"Chaste" Paizuri - works for most foes with penises.
-		public function lustyMaidenPaizuri(player:Player = null, monster:Monster = null):void {
+		public function succubusPaizuri(player:Player = null, monster:Monster = null):void {
 			if (player == null) player = game.player;
 			if (monster == null) monster = game.monster;
 			clearOutput();

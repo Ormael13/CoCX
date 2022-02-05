@@ -9,6 +9,7 @@ import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.SceneLib;
 import classes.Scenes.UniqueSexScenes;
 import classes.Items.Armors.LustyMaidensArmor;
+import classes.Items.Armors.SuccubusArmor;
 
 public class FetishZealotScene extends AbstractLakeContent
 	{
@@ -264,7 +265,10 @@ public class FetishZealotScene extends AbstractLakeContent
 				outputText("\n\nDo you want to take advantage of his vulnerable state to sate your lusts?");
 				menu();
 				addButton(0, "Yes", zealotWinRape);
-				if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") addButton(1, "B.Titfuck", createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,monster));
+				if (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armorName == "lusty maiden's armor" || player.armorName == "Succubus armor")) {
+					if (player.armorName == "Succubus armor") addButton(1, "B.Titfuck", createCallBackFunction2((player.armor as SuccubusArmor).succubusPaizuri,player,monster));
+					else addButton(1, "B.Titfuck", createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,monster));
+				}
 				if (Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_ISMB) addButton(2, "Mindbreak", mindbreakMaleCultist).hint("Toy with the cultist brain.");
 				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 029).hint("Other non typical sex scenes.");
 				addButton(14, "Leave", cleanupAfterCombat);

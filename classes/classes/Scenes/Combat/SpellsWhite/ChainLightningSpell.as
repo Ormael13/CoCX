@@ -50,6 +50,7 @@ public class ChainLightningSpell extends AbstractWhiteSpell {
 	 */
 	public function calcDamage(monster:Monster, randomize:Boolean = true):Number {
 		var baseDamage:Number = 2*scalingBonusIntelligence(randomize);
+		if (player.weaponRangeName == "Artemis") baseDamage *= 1.5;
 		if (ex) baseDamage *= 2;
 		return adjustSpellDamage(baseDamage, DamageType.LIGHTNING, CAT_SPELL_WHITE, monster);
 	}

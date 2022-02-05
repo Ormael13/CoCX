@@ -4,6 +4,7 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
+import classes.Items.Armors.SuccubusArmor;
 import classes.Scenes.SceneLib;
 import classes.Scenes.UniqueSexScenes;
 import classes.Scenes.Dungeons.DungeonAbstractContent;
@@ -83,9 +84,10 @@ private function postfightoptions():void {
 		feedposit = "Lay Eggs";
 		temp2 = layEggsInAMinotaurSpiderLike;
 	}
-	if((temp2 == null || rand(2) == 0) && player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) {
+	if((temp2 == null || rand(2) == 0) && player.hasVagina() && player.biggestTitSize() >= 4 && (player.armor is LustyMaidensArmor || player.armor is SuccubusArmor)) {
 		feedposit = "B.Titfuck";
-		temp2 = (player.armor as LustyMaidensArmor).lustyMaidenPaizuri;
+		if (player.armor is SuccubusArmor) temp2 = (player.armor as SuccubusArmor).succubusPaizuri;
+		else temp2 = (player.armor as LustyMaidensArmor).lustyMaidenPaizuri;
 	}
 /*	//Used for tracking prostate milking and injection
 	var tempText:String = "";
@@ -117,7 +119,10 @@ private function postfightoptions():void {
 		}
 		if (bj != null) addButton(7, "MakeHimSuck", minotaurBlowjob);
 		if (player.canOvipositSpider() || (player.canOvipositBee() && player.gender > 0)) addButton(8, "Lay Eggs", layEggsInAMinotaurSpiderLike);
-		if ((temp2 == null || rand(2) == 0) && player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) addButton(9, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
+		if ((temp2 == null || rand(2) == 0) && player.hasVagina() && player.biggestTitSize() >= 4 && (player.armor is LustyMaidensArmor || player.armor is SuccubusArmor)) {
+			if (player.armor is SuccubusArmor) addButton(9, "B.Titfuck", (player.armor as SuccubusArmor).succubusPaizuri);
+			else addButton(9, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
+		}
 		if (player.hasPerk(PerkLib.Feeder)) addButton(10, "Nurse", minotaurDrinksMilkNewsAtEleven);
 		if (player.isAlraune()) addButton(11, "Vine in Butt", alrauneVineInButtScene);
 	}

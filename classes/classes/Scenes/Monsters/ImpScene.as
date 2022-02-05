@@ -8,6 +8,7 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
+import classes.Items.Armors.SuccubusArmor;
 import classes.Scenes.Camp.CampMakeWinions;
 import classes.Scenes.Camp.ImpGang;
 import classes.Scenes.UniqueSexScenes;
@@ -26,7 +27,7 @@ use namespace CoC;
 		public function impVictory():void {
 			clearOutput();
 			var canFeed:Boolean = (player.hasStatusEffect(StatusEffects.Feeder));
-			var canBikiniTits:Boolean = (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor);
+			var canBikiniTits:Boolean = (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armor is LustyMaidensArmor || player.armor is SuccubusArmor));
 			outputText("You smile in satisfaction as [themonster] collapses and begins masturbating feverishly.");
 			menu();
 			if (canFeed) {
@@ -69,7 +70,10 @@ use namespace CoC;
 				if (player.hasFuckableNipples()) addButton(2, "NippleFuck", noogaisNippleRape);
 			}
 			if (canFeed) addButton(3, "Breastfeed", areImpsLactoseIntolerant);
-			if (canBikiniTits) addButton(4, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
+			if (canBikiniTits) {
+				if (player.armor is SuccubusArmor) addButton(4, "B.Titfuck", (player.armor as SuccubusArmor).succubusPaizuri);
+				else addButton(4, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
+			}
 			if (maleRape == rapeImpWithDick && player.hasItem(useables.CONDOM)) addButton(5, "Use Condom", rapeImpWithDick, 1);
 			addButton(6, "Kill Him", killImp);
 			if (player.canOvipositBee()) addButton(7, "Oviposit", putBeeEggsInAnImpYouMonster);
@@ -1685,7 +1689,6 @@ use namespace CoC;
 			//if(player doesn't have centaur legs)
 			if(!player.isTaur()) outputText("  You grab his hands, removing them from his " + monster.cockDescriptShort(0) + ". This gets his attention immediately, and you grin widely, pinning him to the ground.");
 			else outputText("  You place one of your front hooves on his chest, knocking him onto his back.  He attempts to get back up, but you apply more pressure to his thick, manly chest, until he gasps.  The imp gets the idea quickly and stops masturbating, all of his focus now on you.");
-
 			menu();
 			//Continues in, Male Anal, Female Vaginal, or Breastfeed
 			if(player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
@@ -1693,7 +1696,10 @@ use namespace CoC;
 				if(player.hasCock()) addButton(1,"Get Blown",getBlownByAnImpLord);
 				if(player.hasVagina()) addButton(2,"Ride Cock",femaleVagRape);
 				if(player.findPerk(PerkLib.Feeder) >= 0 && monster.short != "imp overlord" && monster.short != "imp warlord") addButton(3,"Breastfeed",feederBreastfeedRape);
-				if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) addButton(4, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
+				if (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armor is LustyMaidensArmor || player.armor is SuccubusArmor)) {
+					if (player.armor is SuccubusArmor) addButton(4, "B.Titfuck", (player.armor as SuccubusArmor).succubusPaizuri);
+					else addButton(4, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
+				}
 			}
 			addButton(14,"Leave",cleanupAfterCombat);
 		}

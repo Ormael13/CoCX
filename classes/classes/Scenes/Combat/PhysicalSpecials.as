@@ -575,6 +575,22 @@ public class PhysicalSpecials extends BaseCombatContent {
 				if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] < 100 || player.soulforce < 100) bd.disable("<b>You are too low on SF reserves to use this option.</b>\n\n");
 				else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
+			if (player.hasKeyItem("HB Scatter Laser") >= 0) {
+				var LazorC:Number = 100;
+				if (player.keyItemv2("HB Scatter Laser") > 1) {
+					if (player.keyItemv2("HB Scatter Laser") == 3) {
+						if (monster.plural) LazorC += 500;
+						else LazorC += 300;
+					}
+					else {
+						if (monster.plural) LazorC += 200;
+						else LazorC += 100;
+					}
+				}
+				bd = buttons.add("Scatter Laser", mechScatterLaser).hint("Shoot with Scatter Laser"+((player.keyItemv2("HB Scatter Laser") > 1)?"s":"")+" at enemy. \n\nWould drain "+LazorC+" SF from mech reserves or your own SF pool.");
+				if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] < LazorC || player.soulforce < LazorC) bd.disable("<b>You are too low on SF reserves to use this option.</b>\n\n");
+				else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+			}
 		}
 	}
 	internal function buildMenuForFlying(buttons:ButtonDataList):void {
@@ -6048,6 +6064,79 @@ public class PhysicalSpecials extends BaseCombatContent {
 		monster.createStatusEffect(StatusEffects.InvisibleOrStealth,1+DurationIncrease,0,0,0);
 		enemyAI();
 	}
+
+	public function mechScatterLaser():void {
+		clearOutput();
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
+		outputText("You press the lightning button and aim, as the Scatter Laser" + ((player.keyItemv2("HB Scatter Laser") > 1)?"s":"") + " power up your mech shoot [themonster] for ");
+		var LazorC:Number = 100;
+		if (player.keyItemv2("HB Scatter Laser") > 1) {
+			if (player.keyItemv2("HB Scatter Laser") == 3) {
+				if (monster.plural) LazorC += 500;
+				else LazorC += 300;
+			}
+			else {
+				if (monster.plural) LazorC += 200;
+				else LazorC += 100;
+			}
+		}
+		if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] >= LazorC) flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= LazorC;
+		else player.soulforce -= LazorC;
+		var damage:Number;
+		damage = scalingBonusIntelligence() * spellModWhite() * 8;
+		if (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) damage *= 8;
+		if (player.armor == armors.GTECHC_) damage *= 1.5;
+		if (player.upperGarment == undergarments.TECHBRA) damage *= 1.05;
+		if (player.lowerGarment == undergarments.T_PANTY) damage *= 1.05;
+		//Determine if critical hit!
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		critChance += combatMagicalCritical();
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+		if (rand(100) < critChance) {
+			crit = true;
+			damage *= 1.75;
+		}
+		damage = Math.round(damage);
+		doLightingDamage(damage, true, true);
+		if (player.keyItemv2("HB Scatter Laser") > 1) {
+			if (player.keyItemv2("HB Scatter Laser") == 3) {
+				if (monster.plural) {
+					doLightingDamage(damage, true, true);
+					doLightingDamage(damage, true, true);
+				}
+				doLightingDamage(damage, true, true);
+				doLightingDamage(damage, true, true);
+				doLightingDamage(damage, true, true);
+			}
+			else {
+				if (monster.plural) doLightingDamage(damage, true, true);
+				doLightingDamage(damage, true, true);
+			}
+		}
+		outputText(" damage! ");
+		if (crit) outputText("<b>*Critical Hit!*</b> ");
+		var lustDmg:Number = monster.lustVuln * (player.inte / 5 * spellModBlack() + rand(monster.lib - monster.inte * 2 + monster.cor) / 5);
+		//Determine if critical tease!
+		var crit1:Boolean = false;
+		var critChance1:int = 5;
+		if (player.hasPerk(PerkLib.CriticalPerformance)) {
+			if (player.lib <= 100) critChance1 += player.lib / 5;
+			if (player.lib > 100) critChance1 += 20;
+		}
+		if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance1 = 0;
+		if (rand(100) < critChance1) {
+			crit1 = true;
+			lustDmg *= 1.75;
+		}
+		lustDmg = Math.round(lustDmg);
+		monster.teased(lustDmg);
+		if (crit1) outputText(" <b>Critical!</b>");
+		outputText("\n\n");
+		combat.heroBaneProc(damage);
+		statScreenRefresh();
+		enemyAI();
+	}
 /*
 	public function mechStarcannon():void {
 		clearOutput();
@@ -6324,10 +6413,16 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function mechWhitefireBeamCannon():void {
 		clearOutput();
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
-		outputText("You shoot with the "+(player.vehicles == vehicles.HB_MECH ? "Dragon's Breath Flamer":"Whitefire beam cannon")+" at [themonster] burning [monster his] badly for ");
+		outputText("You shoot with the "+(player.vehicles == vehicles.HB_MECH ? "Dragon's Breath Flamer"+((player.keyItemv2("HB Dragon's Breath Flamer") == 2)?"s":"")+"":"Whitefire beam cannon")+" at [themonster] burning [monster his] badly for ");
 		if (player.vehicles == vehicles.HB_MECH) {
-			if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] >= 100) flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= 100;
-			else player.soulforce -= 100;
+			if (player.keyItemv2("HB Dragon's Breath Flamer") == 2) {
+				if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] >= 100) flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= 200;
+				else player.soulforce -= 200;
+			}
+			else {
+				if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] >= 100) flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= 100;
+				else player.soulforce -= 100;
+			}
 		}
 		else player.createStatusEffect(StatusEffects.CooldownWhitefireBeamCannon,8,0,0,0);
 		var damage:Number;
@@ -6348,6 +6443,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2);
 		damage = Math.round(damage);
 		doFireDamage(damage, true, true);
+		if (player.keyItemv2("HB Dragon's Breath Flamer") == 2) doFireDamage(damage, true, true);
 		outputText(" damage!");
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		outputText("\n\n");

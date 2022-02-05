@@ -30,6 +30,7 @@ public class IceRainSpell extends AbstractBlackSpell {
 	
 	public function calcDamage(monster:Monster, randomize:Boolean = true):Number {
 		var baseDamage:Number = 6 * scalingBonusIntelligence(randomize);
+		if (player.weaponRangeName == "Artemis") baseDamage *= 1.5;
 		return adjustSpellDamage(baseDamage, DamageType.ICE, CAT_SPELL_BLACK, monster);
 	}
 	

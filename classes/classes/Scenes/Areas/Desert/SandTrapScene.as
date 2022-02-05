@@ -6,6 +6,7 @@ import classes.BodyParts.Skin;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
+import classes.Items.Armors.SuccubusArmor;
 import classes.Scenes.UniqueSexScenes;
 
 public class SandTrapScene extends BaseContent{
@@ -171,7 +172,10 @@ internal function pcBeatsATrap():void {
 		addButton(2, "RideVaginal", rideDatSandTarpLikeIts1999);
 		addButton(3, "Handjob", useSandTarpsHands);
 		if (player.pcCanUseUniqueSexScene()) addButton(7, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 012);
-		if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") addButton(8, "B.Titfuck", createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,monster));
+		if (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armorName == "lusty maiden's armor" || player.armorName == "Succubus armor")) {
+			if (player.armorName == "Succubus armor") addButton(8, "B.Titfuck", createCallBackFunction2((player.armor as SuccubusArmor).succubusPaizuri,player,monster));
+			else addButton(8, "B.Titfuck", createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,monster));
+		}
 		addButton(9, "Leave", cleanupAfterCombat);
 	}
 	else cleanupAfterCombat();
@@ -183,7 +187,10 @@ public function pcBeatsATrap2():void {
 	addButton(2, "RideVaginal", rideDatSandTarpLikeIts1999);
 	addButton(3, "Handjob", useSandTarpsHands);
 	if (player.pcCanUseUniqueSexScene()) addButton(7, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 012);
-	if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") addButton(8, "B.Titfuck", createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,monster));
+	if (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armorName == "lusty maiden's armor" || player.armorName == "Succubus armor")) {
+		if (player.armorName == "Succubus armor") addButton(8, "B.Titfuck", createCallBackFunction2((player.armor as SuccubusArmor).succubusPaizuri,player,monster));
+		else addButton(8, "B.Titfuck", createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,monster));
+	}
 	addButton(9, "Leave", cleanupAfterCombat);
 }
 
