@@ -1008,7 +1008,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			if (player.cocks.length > 1) outputText(" while your other cock" + (player.cocks.length == 2 ? "" : "s") + " explodes messily, painting the top of her head and your own torso with spurt after spurt of white, sticky cum");
 			outputText(".");
 			if (player.cumQ() >= 2000) {
-				outputText("By the time your massive ejaculation is finally finished and only a few more weak strings are spurting still from your mostly spent member, ");
+				outputText(" By the time your massive ejaculation is finally finished and only a few more weak strings are spurting still from your mostly spent member, ");
 				if (player.cocks.length > 1) outputText("your free [cock biggest2] has painted both of you and much of the surrounding area with the fruit of your orgasm, while ");
 				outputText("Luna's belly is visibly distended from the amount of your cream she has hungrily sucked down.");
 			}
@@ -1019,7 +1019,7 @@ public class LunaFollower extends NPCAwareContent implements SaveableState
 			}
 			outputText(".\n\n");
 			outputText("With one last noisy 'pop' she finally pulls her mouth from your now drooping length, licks a few stray dribbles from around her lips and off her fingertips. Then she smiles at you lovingly and says, in an exaggeratedly sugary tone " +
-					"\"<i>Oh my, " + player.mf("Master","Mistress") + "if I'd known you were going to feed me such a sumptuous snack I wouldn't have prepared my own meal today~. You must really love your cute maid Luna to offer her such a delicious treat~. I'll have to make your dinner <b>extra</b> special tonight to thank you~!</i>\"" +
+					"\"<i>Oh my, " + player.mf("Master","Mistress") + " if I'd known you were going to feed me such a sumptuous snack I wouldn't have prepared my own meal today~. You must really love your cute maid Luna to offer her such a delicious treat~. I'll have to make your dinner <b>extra</b> special tonight to thank you~!</i>\"" +
 					" She kisses you one more time and then collects her dress, heading to the river to clean off before she resumes her work. You wait for a few moments, still panting in spent, shivering bliss, before you rise and follow her to do the same.");
 			lunaJealousy(-100);
 			lunaAffection(2);
