@@ -1211,7 +1211,7 @@ public class Creature extends Utils
 			maxWrathMultStat = new BuffableStat(this, 'maxwrath_mult', {base:1});
 			maxFatigueBaseStat = new BuffableStat(this, 'maxfatigue_base', {base:150});
 			maxFatiguePerLevelStat = new BuffableStat(this, 'maxfatigue_perlevel', {base:5});
-			maxFatiguePerSpeStat = new BuffableStat(this, 'maxfatigue_perlevel', {base:0});
+			maxFatiguePerSpeStat = new BuffableStat(this, 'maxfatigue_perspe', {base:0});
 			maxFatigueMultStat = new BuffableStat(this, 'maxfatigue_mult', {base:1});
 			maxManaBaseStat = new BuffableStat(this, 'maxmana_base', {base:300});
 			maxManaPerLevelStat = new BuffableStat(this, 'maxmana_perlevel', {base:10});
@@ -4461,4 +4461,4 @@ public class Creature extends Utils
 			};
 		}
 	}
-}
+}
