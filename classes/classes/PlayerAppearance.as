@@ -1276,8 +1276,8 @@ public class PlayerAppearance extends BaseContent {
 		if (player.hellcatScore() >= 17 && player.tailType == Tail.TWINKASHA && player.tailCount == 2) {
 			outputText("\n<font color=\"#0000a0\">Kasha: " + player.hellcatScore() + " (+");
 			if (player.hasPerk(PerkLib.Flexibility)) {
-				if (player.hasPerk(PerkLib.CatlikeNimblenessFinalForm)) outputText("100");
-				else if (player.hasPerk(PerkLib.CatlikeNimblenessEvolved)) outputText("90");
+				if (player.hasPerk(MutationsLib.CatlikeNimblenessEvolved)) outputText("100");
+				else if (player.hasPerk(MutationsLib.CatlikeNimblenessPrimitive)) outputText("90");
 				else outputText("80");
 			} else outputText("70");
 			outputText("% to Spe racial multi, +135% to Int racial multi, +100% to Lib racial multi, +50 min/max Sens)</font>");
@@ -1285,8 +1285,8 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.hellcatScore() >= 10) {
 			outputText("\n<font color=\"#0000a0\">Hellcat: " + player.hellcatScore() + " (+");
 			if (player.hasPerk(PerkLib.Flexibility)) {
-				if (player.hasPerk(PerkLib.CatlikeNimblenessFinalForm)) outputText("70");
-				else if (player.hasPerk(PerkLib.CatlikeNimblenessEvolved)) outputText("60");
+				if (player.hasPerk(MutationsLib.CatlikeNimblenessEvolved)) outputText("70");
+				else if (player.hasPerk(MutationsLib.CatlikeNimblenessPrimitive)) outputText("60");
 				else outputText("50");
 			} else outputText("40");
 			outputText("% to Spe racial multi, +70% to Int racial multi, +40% to Lib racial multi, +25 min/max Sens)</font>");
@@ -1553,14 +1553,14 @@ public class PlayerAppearance extends BaseContent {
 		outputText("\nScorpion-morph: " + player.scorpionScore());
 		//Scylla
 		var scyllakrakengland:Number = 0;
-		if (player.hasPerk(PerkLib.ScyllaInkGlands)) scyllakrakengland += 10;
+		if (player.hasPerk(MutationsLib.ScyllaInkGlands)) scyllakrakengland += 10;
 		if (player.scyllaScore() >= 12 && player.isKraken()) {
 			if (player.scyllaScore() >= 17) outputText("\n<font color=\"#0000a0\">Elder Kraken: " + player.scyllaScore() + " (+"+(195+scyllakrakengland)+"% to Str racial multi, +60% to Tou racial multi, +60% to Int racial multi, +15 min sens, +" + (150 * (1 + player.newGamePlusMod())) + " max HP)</font>");
 			else outputText("\n<font color=\"#0000a0\">Kraken: " + player.scyllaScore() + " (+"+(180+scyllakrakengland)+"% to Str racial multi, +60% to Int racial multi, +15 min sens, +" + (150 * (1 + player.newGamePlusMod())) + " max HP)</font>");
 		}
 		else if (player.scyllaScore() >= 4 && player.isScylla()) {
 			if (player.scyllaScore() >= 7) outputText("\n<font color=\"#0000a0\">Scylla: " + player.scyllaScore() + " (+"+(95+scyllakrakengland)+"% to Str racial multi, +40% to Int racial multi, +" + (50 * (1 + player.newGamePlusMod())) + " max HP)</font>");
-			else outputText("\n<font color=\"#0000a0\">Half Scylla: " + player.scyllaScore() + " (+"+(player.hasPerk(PerkLib.ScyllaInkGlands) ? "80":"70")+"% to Str racial multi, +20% to Int racial multi, +" + (25 * (1 + player.newGamePlusMod())) + " max HP)</font>");
+			else outputText("\n<font color=\"#0000a0\">Half Scylla: " + player.scyllaScore() + " (+"+(player.hasPerk(MutationsLib.ScyllaInkGlands) ? "80":"70")+"% to Str racial multi, +20% to Int racial multi, +" + (25 * (1 + player.newGamePlusMod())) + " max HP)</font>");
 		}
 		else if (player.scyllaScore() >= 1) outputText("\n<font color=\"#008000\">Half Scylla: " + player.scyllaScore() + "</font>");
 		else if (player.scyllaScore() < 1) outputText("\n<font color=\"#ff0000\">Half Scylla: 0</font>");

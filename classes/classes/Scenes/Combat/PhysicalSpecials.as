@@ -314,7 +314,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				var liftWhat:String = player.gender == 1 ? "your cock" : "your front tentacle";
 				var liftWha2:String = player.gender == 1 ? "Lift your cock and s" : "S";
 				var cooldown:Number = 8;
-				if (player.hasPerk(PerkLib.ScyllaInkGlands)) cooldown -= 4;
+				if (player.hasPerk(MutationsLib.ScyllaInkGlands)) cooldown -= 4;
 				if (player.hasPerk(PerkLib.NaturalInstincts)) cooldown -= 1;
 				bd = buttons.add("Ink Spray", inkSpray);
 				bd.requireFatigue(physicalCost(30));
@@ -1904,7 +1904,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		clearOutput();
 		fatigue(30, USEFATG_PHYSICAL);
 		var cooooldown:Number = 8;
-		if (player.hasPerk(PerkLib.ScyllaInkGlands)) cooooldown -= 4;
+		if (player.hasPerk(MutationsLib.ScyllaInkGlands)) cooooldown -= 4;
 		if (player.hasPerk(PerkLib.NaturalInstincts)) cooooldown -= 1;
 		player.createStatusEffect(StatusEffects.CooldownInkSpray,cooooldown,0,0,0);
 		outputText("You ");
@@ -4366,8 +4366,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		if (monster.plural) {
 			if (player.hasPerk(MutationsLib.MantislikeAgility)) {
-				if (player.hasPerk(MutationsLib.MantislikeAgilityPrimitive) && player.hasPerk(PerkLib.TrachealSystemEvolved)) {
-					if (player.hasPerk(MutationsLib.MantislikeAgilityEvolved) && player.hasPerk(PerkLib.TrachealSystemFinalForm)) flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 15;
+				if (player.hasPerk(MutationsLib.MantislikeAgilityPrimitive) && player.hasPerk(MutationsLib.TrachealSystemPrimitive)) {
+					if (player.hasPerk(MutationsLib.MantislikeAgilityEvolved) && player.hasPerk(MutationsLib.TrachealSystemEvolved)) flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 15;
 					else flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 10;
 				}
 				else flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 6;
@@ -4376,7 +4376,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 
 		}
 		else {
-			if (player.hasPerk(MutationsLib.MantislikeAgilityEvolved) && player.hasPerk(PerkLib.TrachealSystemFinalForm)) flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 2;
+			if (player.hasPerk(MutationsLib.MantislikeAgilityEvolved) && player.hasPerk(MutationsLib.TrachealSystemEvolved)) flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 2;
 			else flags[kFLAGS.MULTIPLE_ATTACK_STYLE] = 1;
 		}
 		mantisMultipleAttacks();
@@ -4390,8 +4390,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (!player.hasPerk(MutationsLib.MantislikeAgility)) damage *= 0.6;
 		//bonuses if fighting multiple enemies
 		if (monster.plural) {
-			if (!player.hasPerk(MutationsLib.MantislikeAgility) && !player.hasPerk(PerkLib.TrachealSystemEvolved)) damage *= 1.1;
-			if (player.hasPerk(MutationsLib.MantislikeAgility) && player.hasPerk(PerkLib.TrachealSystemEvolved)) damage *= 1.5;
+			if (!player.hasPerk(MutationsLib.MantislikeAgility) && !player.hasPerk(MutationsLib.TrachealSystemPrimitive)) damage *= 1.1;
+			if (player.hasPerk(MutationsLib.MantislikeAgility) && player.hasPerk(MutationsLib.TrachealSystemPrimitive)) damage *= 1.5;
 		}
 		//other bonuses
 		damage += player.weaponAttack;

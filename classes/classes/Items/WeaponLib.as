@@ -38,7 +38,6 @@ package classes.Items
 		public const CLAYMOR:Weapon = new LargeClaymore();
 		public const CNTWHIP:CatONineTailWhip = new CatONineTailWhip();
 		public const C_BLADE:ChaosBlade = new ChaosBlade();
-		public const DWARWA :DwarvenWaraxe = new DwarvenWaraxe();
 		public const DAGGER :Weapon = new Weapon("Dagger ","Dagger","dagger","a dagger","stab",3,120,"A small blade.  Preferred weapon for the rogues.", "Small", "Dagger");
 		public const DAGWHIP:Weapon = new Weapon("DagWhip","DaggerWhip","dagger whip","a dagger whip","whip-like slash",5,200,"A small blade that is tied to the wrist by an 8 ft. cloth.  Could be used to attack few enemies at once.", "Small, Whipping", "Dagger");
 		public const DBFSWO :DualBFSword = new DualBFSword();
@@ -48,7 +47,9 @@ package classes.Items
 		public const DEPRAVA:Depravatio = new Depravatio();
 		public const DE_GAXE:DemonicGreataxe = new DemonicGreataxe();
 		public const DKATANA:DualKatana = new DualKatana();
+		public const DORSOUL:DorcSouls = new DorcSouls();
 		public const DRAPIER:DragonsRapier = new DragonsRapier();
+		public const DWARWA :DwarvenWaraxe = new DwarvenWaraxe();
 		public const D_WHAM_:DualHugeWarhammer = new DualHugeWarhammer();
 		public const D_LANCE:DualLance = new DualLance();
 		public const DL_AXE_:DualLargeAxe = new DualLargeAxe();
@@ -124,6 +125,7 @@ package classes.Items
 		public const SDRILL :SoulDrill = new SoulDrill();
 		public const SPEAR  :Spear = new Spear();
 		public const SUCWHIP:SuccubiWhip = new SuccubiWhip();
+		public const T_HEART:TrullHeart = new TrullHeart();
 		public const T_STAFF:TopazStaff = new TopazStaff();
 		public const TCLAYMO:TopazClaymore = new TopazClaymore();
 		public const TODAGGER:Weapon = new Weapon("ToDagger","T.Dagger","topaz dagger","an topaz dagger","stab",3,240,"This dagger is made of eversteel and richly decorated with yellow topazes and copper engravings. The magic within this shining blade will oversaturate the metal with electricity when charged with magic.", "Small", "Dagger");

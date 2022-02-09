@@ -312,7 +312,7 @@ public class CombatMagic extends BaseCombatContent {
 			mod += player.perkv1(PerkLib.SagesKnowledge);
 		}
 		if (player.hasPerk(PerkLib.KnowledgeIsPower)) {
-			if (player.hasPerk(PerkLib.RatatoskrSmartsFinalForm)) mod += (Math.round(codex.checkUnlocked() / 100) * 3);
+			if (player.hasPerk(MutationsLib.RatatoskrSmartsEvolved)) mod += (Math.round(codex.checkUnlocked() / 100) * 3);
 			else mod += Math.round(codex.checkUnlocked() / 100);
 		}
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) mod += .3;

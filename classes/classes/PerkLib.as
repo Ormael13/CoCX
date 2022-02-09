@@ -373,15 +373,6 @@ public class PerkLib
 		public static const PureMagic:PerkType = mk("Pure magic", "Pure magic",
 				"Your spells gain aligned damage, dealing more damage against the corrupt. Buff spells now last for the battle duration.",
 				"You've chosen the 'Pure magic' perk. Your spells gain aligned damage, dealing more damage against the corrupt. Buff spells now last for the battle duration.");
-		public static const RatatoskrSmarts:PerkType = mk("Ratatoskr smarts", "Ratatoskr smarts",
-				"Allows to perma Weird words.",
-				"You've chosen the 'Ratatoskr smarts' perk, Allows to perma Weird words.").withBuffs({'int.mult':0.05});
-		public static const RatatoskrSmartsEvolved:PerkType = mk("Ratatoskr smarts (Evolved)", "Ratatoskr smarts (Evolved)",
-				"Increase the damage of Weird words by 20%. Lower cooldown of Knowledge overload by 1 turn.",
-				"You've chosen the 'Ratatoskr smarts (Evolved)' perk, Increase the damage of Weird words by 20%. Lower cooldown of Knowledge overload by 1 turn.").withBuffs({'int.mult':0.10});
-		public static const RatatoskrSmartsFinalForm:PerkType = mk("Ratatoskr smarts (Final Form)", "Ratatoskr smarts (Final Form)",
-				"Increase the damage of Weird words by another 30%. Lower cooldowns of ratatoskr specials by 1 turn. Knowledge is power is now three times as effective.",
-				"You've chosen the 'Ratatoskr smarts (Final Form)' perk, Increase the damage of Weird words by another 30%. Lower cooldowns of ratatoskr specials by 1 turn. Knowledge is power is now three times as effective.").withBuffs({'int.mult':0.20});
 		public static const Sadomasochism:PerkType = mk("Sadomasochism", "Sadomasochism",
 				"You are aroused by the helplessness of your opponent just as much as you get aroused in getting hit. This causes your tease to become stronger when you are close to defeat. (PC gains +20% tease damage with low health and +20% tease damage with high arousal to either PC or the target.)",
 				"You've chosen the 'Sadomasochism' perk. You are aroused by the helplessness of your opponent just as much as you get aroused in getting hit. This causes your tease to become stronger when you are close to defeat.");
@@ -809,15 +800,6 @@ public class PerkLib
 						"<b>You are not fast enough to gain benefit from this perk.</b>" +
 						"]",
 				"You've chosen the 'Catch the blade' perk, giving you a chance to deflect blow with your fists. (Speed-based).");
-		public static const CatlikeNimbleness:PerkType = mk("Cat-like Nimbleness", "Cat-like Nimbleness",
-				"Your transformed joins allows you to move with greater nimbleness, increasing evasion.",
-				"You've chosen the 'Cat-like Nimbleness' perk. Your transformed joins allows you to move more with greater nimbleness, increasing evasion.");
-		public static const CatlikeNimblenessEvolved:PerkType = mk("Cat-like Nimbleness (Evolved)", "Cat-like Nimbleness (Evolved)",
-				"Your nimble body allows you to move with even better nimbleness than before, further increasing evasion.",
-				"You've chosen the 'Cat-like Nimbleness (Evolved)' perk. Your nimble body allows you to move with even better nimbleness than before, further increasing evasion.").withBuffs({'spe.mult':0.10});
-		public static const CatlikeNimblenessFinalForm:PerkType = mk("Cat-like Nimbleness (Final Form)", "Cat-like Nimbleness (Final Form)",
-				"Your nimble body allows you to move with even greater nimbleness than before, further increasing evasion.",
-				"You've chosen the 'Cat-like Nimbleness (Final Form)' perk. Your nimble body allows you to move with even greater nimbleness than before, further increasing evasion.").withBuffs({'spe.mult':0.20});
 		public static const Channeling:PerkType = mk("Channeling", "Channeling",
 				"[if (player.inte>=60)" +
 						"Increases base spell strength by 20% and base mana pool by 90." +
@@ -1117,15 +1099,6 @@ public class PerkLib
 		public static const EclipsingShadowSu:PerkType = mk("Eclipsing Shadow (Su)", "Eclipsing Shadow (Su)",
 				"Prevent decay of cumulative damage increase bonus when channeling darkness based attack. Penalty for turn without casted darkness spell decreased by another 5%.",
 				"You've chosen the 'Eclipsing Shadow (Su)' perk. Prevent decay of cumulative damage increase bonus when channeling darkness based attack. Penalty for turn without casted darkness spell decreased by another 5%.");
-		public static const EclipticMind:PerkType = mk("Ecliptic Mind", "Ecliptic Mind",
-				"Allows to retains aura at all time, gaining whichever corresponds to your alignment. Empower the effect of your aura based on your purity or corruption score.",
-				"You've chosen the 'Ecliptic Mind' perk. Allows to retains aura at all time, gaining whichever corresponds to your alignment. Empower the effect of your aura based on your purity or corruption score.");
-		public static const EclipticMindEvolved:PerkType = mk("Ecliptic Mind (Evolved)", "Ecliptic Mind (Evolved)",
-				"Further empower the effect of your aura based on your purity or corruption score. Aura effect is doubled against creatures of the opposite alignment.",
-				"You've chosen the 'Ecliptic Mind (Evolved)' perk. Further empower the effect of your aura based on your purity or corruption score. Aura effect is doubled against creatures of the opposite alignment.");
-		public static const EclipticMindFinalForm:PerkType = mk("Ecliptic Mind (Final Form)", "Ecliptic Mind (Final Form)",
-				"Further empower the effect of your aura based on your purity or corruption score. Aura effect is tripled against creatures of the opposite alignment. Gain minor regeneration based on your alignment.",
-				"You've chosen the 'Ecliptic Mind (Final Form)' perk. Further empower the effect of your aura based on your purity or corruption score. Aura effect is tripled against creatures of the opposite alignment. Gain minor regeneration based on your alignment.");
 		public static const ElementalArrows:PerkType = mk("Elemental Arrows", "Elemental Arrows",
 				"Shoot elemental arrows adding your intelligence to your damage.",
 				"You've chosen the 'Elemental Arrows' perk, allowing you to shoot elemental arrows.");
@@ -2741,12 +2714,6 @@ public class PerkLib
 		public static const Saturation:PerkType = mk("Saturation", "Saturation",
 				"Using your advanced knowledge, you soak each transformative in a special liquid to enhance their effects +2% alchemy/mutagen boost.",
 				"You've chosen the 'Saturation' perk, number of possible effects of transformatives +2% alchemy/mutagen boost.");
-		public static const ScyllaInkGlands:PerkType = mk("Scylla Ink Glands", "Scylla Ink Glands",
-				"Your Scylla Ink Glands increase rate at which your body produce ink and slight boost to your natural strength.",
-				"You've chosen the 'Scylla Ink Glands' perk, due to repeadly use of ink attack leading to denveloping ink glands!").withBuffs({'str.mult':0.10});
-		public static const ScyllaInkGlandsEvolved:PerkType = mk("Scylla Ink Glands (Evolved)", "Scylla Ink Glands (Evolved)",
-				"WiP perk.",
-				"You've chosen the 'Scylla Ink Glands (Evolved)' perk, WiP perk!");
 		public static const SecondRing:PerkType = mk("Second Ring", "Second Ring",
 				"Your basic understanding of magic pools allows you to equip second ring.",
 				"You've chosen the 'Second Ring' perk, reaching basic understanding of magic pools to allow you equip second ring.");
@@ -3078,15 +3045,6 @@ public class PerkLib
 		public static const ToughHide:PerkType = mk("Tough Hide", "Tough Hide",
 				"Increase your armor by 2 and magic resistance by 1 so long as you have scale chitin fur or other natural armor. (boost scalable with ng tiers)",
 				"You've chosen the 'Tough Hide' perk, increase your armor and magic resistance as long you have any natural armor!");
-		public static const TrachealSystem:PerkType = mk("Tracheal System", "Tracheal System",
-				"Your body possesses rudimentary respiratory system of the insects.",
-				"You've chosen the 'Tracheal System' perk, by becoming much more insect-like your body started to denvelop crude version of insects breathing system.");
-		public static const TrachealSystemEvolved:PerkType = mk("Tracheal System (Evolved)", "Tracheal System (Evolved)",
-				"Your body possesses half developed respiratory system of the insects. (+5 to max str (scalable))",
-				"You've chosen the 'Tracheal System (Evolved)' perk, continuous exposition to insectoidal changes caused your tracheal system evolution into more complete form.").withBuffs({'str.mult':0.05});
-		public static const TrachealSystemFinalForm:PerkType = mk("Tracheal System (Final Form)", "Tracheal System (Final Form)",
-				"Your body possesses fully developed respiratory system of the insects. (+10 to max spe (scalable))",
-				"You've chosen the 'Tracheal System (Final Form)' perk, continued exposition to insectoidal changes caused your tracheal system evolution into it final form.").withBuffs({'spe.mult':0.10});
 		public static const TraditionalMageI:PerkType = mk("Traditional Mage I", "Traditional Mage I",
 				"You gain 100% spell effect multiplier while using a staff and either a tome or no ranged weapon.",
 				"You've chosen the 'Traditional Mage I' perk, boosting your base spell effects while using a staff and either a tome or no ranged weapon.");
@@ -3966,6 +3924,13 @@ public class PerkLib
 		public static const ShieldWielder:PerkType = mk("Shield wielder", "Shield wielder", "");
 		public static const TeaseResistance:PerkType = mk("Tease Resistance", "Tease Resistance", "");//NYU
 		public static const UniqueNPC:PerkType = mk("Unique npc", "Unique npc", "");
+		//public static const Enemy_Type:PerkType = mk("-type enemy", "-type enemy", "");undead?
+		//public static const :PerkType = mk("", "", "");
+		//public static const :PerkType = mk("", "", "");
+		//public static const :PerkType = mk("", "", "");
+		//public static const :PerkType = mk("", "", "");
+		//public static const :PerkType = mk("", "", ""); na poźniej dopisane perki wzór
+//dodać także typy perków dla poszczególnych ras przeciwników tak, ze bedą mogły one mieć jakieś korzyści też (np. jak ma Dragon nature to bonusy jak PC miałby dragon score > 6))
 
 		//Ugly workaround to not having a proper list of specific-type perks.
 		//Tagging system for perks by classification would help, similar to WeaponsLib.
@@ -4011,14 +3976,6 @@ public class PerkLib
 			ePerkL.push(UniqueNPC);
 			return ePerkL;
 		}
-
-		//public static const Enemy_Type:PerkType = mk("-type enemy", "-type enemy", "");undead?
-		//public static const :PerkType = mk("", "", "");
-		//public static const :PerkType = mk("", "", "");
-		//public static const :PerkType = mk("", "", "");
-		//public static const :PerkType = mk("", "", "");
-		//public static const :PerkType = mk("", "", ""); na poźniej dopisane perki wzór
-//dodać także typy perków dla poszczególnych ras przeciwników tak, ze bedą mogły one mieć jakieś korzyści też (np. jak ma Dragon nature to bonusy jak PC miałby dragon score > 6))
 
 		private static function mk(id:String, name:String, desc:String, longDesc:String = null, keepOnAscension:Boolean = false):PerkType
 		{
@@ -6223,23 +6180,6 @@ public class PerkLib
             // MISCELLANEOUS
             //------------
             //Tier 0
-            CatlikeNimbleness.requirePerk(Flexibility).requireCustomFunction(function (player:Player):Boolean {
-                return player.catScore() >= 4 || player.nekomataScore() >= 4 || player.displacerbeastScore() >= 4 || player.hellcatScore() >= 4 || player.cheshireScore() >= 4 || player.sphinxScore() >= 4;
-            }, "Any cat race");
-			EclipticMind.requireCustomFunction(function (player:Player):Boolean {
-				return player.alicornScore() >= 12 || player.unicornScore() >= 12 || player.alicornkinScore() >= 10|| player.unicornkinScore() >= 10 ;
-			}, "Unicorn or Bicorn race");
-            RatatoskrSmarts.requirePerk(KnowledgeIsPower).requireCustomFunction(function (player:Player):Boolean {//.requireAdrenalGlandsMutationSlot()
-                return player.ratatoskrScore() >= 4;
-            }, "Squirrel/Ratatoskr race");
-            ScyllaInkGlands.requirePerk(InkSpray).requireCustomFunction(function (player:Player):Boolean {
-                return player.scyllaScore() >= 5;
-            }, "Scylla race");
-            TrachealSystem.requireCustomFunction(function (player:Player):Boolean {
-		//		return player.lowerBody == LowerBody.DRIDER;
-		//	}, "Drider Lower Body").requireCustomFunction(function (player:Player):Boolean {
-                return player.beeScore() >= 4 || player.mantisScore() >= 4 || player.scorpionScore() >= 4 || player.spiderScore() >= 4 || player.cancerScore() >= 4 || player.atlachNachaScore() >= 17;
-            }, "Any insect race");
             /*
 			if (player.() >=  && ) {
 			_add(new PerkClass(PerkLib.));
@@ -6247,14 +6187,6 @@ public class PerkLib
 			if (player.() >=  && ) {
 			_add(new PerkClass(PerkLib.));
 			}
-			Phoenix Thorax czy jakiś inny związany z morphami perk ub coś związane z gardłem - dla ras mogących używać ultradźwieki jako atak lub kogoś typu banshee atak wyciem
-
-			Perk związany ze skórą
-
-			Perk związany z układem nerwowym
-
-			Perk związany z koścmi
-
 			if (flags[kFLAGS.HUNGER_ENABLED] > 0 && game.player.humanScore() < 5) {
 			_add(new PerkClass(PerkLib.)); - zelazny zoladek czy cos w tym stylu
 			}
@@ -6298,22 +6230,6 @@ public class PerkLib
                 return player.jiangshiScore() >= 20;
             }, "Jiangshi race");
             //Tier 1
-            CatlikeNimblenessEvolved.requireLevel(6)
-					.requirePerk(CatlikeNimbleness)
-					.requireCustomFunction(function (player:Player):Boolean {
-						return player.catScore() >= 7 || player.nekomataScore() >= 8 || player.displacerbeastScore() >= 8 || player.hellcatScore() >= 8 || player.cheshireScore() >= 8 || player.sphinxScore() >= 8;
-					}, "Any cat race");
-            RatatoskrSmartsEvolved.requireLevel(6).requirePerk(RatatoskrSmarts).requireCustomFunction(function (player:Player):Boolean {
-                return player.ratatoskrScore() >= 8;
-            }, "Squirrel/Ratatoskr race");
-            ScyllaInkGlandsEvolved.requireLevel(6).requirePerk(ScyllaInkGlands).requireCustomFunction(function (player:Player):Boolean {
-                return player.scyllaScore() >= 10;
-            }, "Scylla race");
-            TrachealSystemEvolved.requireLevel(6).requirePerk(TrachealSystem).requireCustomFunction(function (player:Player):Boolean {
-		//		return player.lowerBody == LowerBody.DRIDER;
-		//	}, "Drider Lower Body").requireCustomFunction(function (player:Player):Boolean {
-                return player.beeScore() >= 8 || player.mantisScore() >= 8 || player.scorpionScore() >= 8 || player.spiderScore() >= 8 || player.cancerScore() >= 8 || player.atlachNachaScore() >= 17;
-            }, "Any insect race");
 			ChimericalBodyInitialStage.requireLevel(6)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.internalChimeraScore() >= 2;
@@ -6445,9 +6361,6 @@ public class PerkLib
 			Amateur.requireLevel(6)
 					.requireAnyPerk(HistoryWhore, PastLifeWhore);
             //Tier 2
-			EclipticMindEvolved.requireLevel(12).requirePerk(EclipticMind).requireCustomFunction(function (player:Player):Boolean {
-				return player.alicornScore() >= 12 || player.unicornScore() >= 12 || player.alicornkinScore() >= 10|| player.unicornkinScore() >= 10 ;
-			}, "Unicorn or Bicorn race");
 			ChimericalBodySemiBasicStage.requirePerk(ChimericalBodyInitialStage)
                     .requireLevel(12)
                     .requireCustomFunction(function (player:Player):Boolean {
@@ -6542,9 +6455,6 @@ public class PerkLib
 			HighlyVenomousDiet.requirePerk(VenomousDiet);
 			AxillaryVenomGlands.requirePerk(VenomousAdiposeTissue);
             //Tier 3
-            RatatoskrSmartsFinalForm.requireLevel(18).requirePerk(RatatoskrSmartsEvolved).requireCustomFunction(function (player:Player):Boolean {
-                return player.ratatoskrScore() >= 12;
-            }, "Squirrel/Ratatoskr race");
             ChimericalBodyBasicStage.requirePerk(ChimericalBodySemiBasicStage)
                     .requireLevel(18)
                     .requireCustomFunction(function (player:Player):Boolean {
@@ -6616,16 +6526,6 @@ public class PerkLib
 					.requireStr(40)
 					.requireSpe(45);
             //Tier 4
-			CatlikeNimblenessFinalForm.requireLevel(24)
-				.requirePerk(CatlikeNimblenessEvolved)
-				.requireCustomFunction(function (player:Player):Boolean {
-					return player.catScore() >= 10 || player.nekomataScore() >= 12 || player.displacerbeastScore() >= 12 || player.hellcatScore() >= 12 || player.cheshireScore() >= 12 || player.sphinxScore() >= 12;
-			}, "Any cat race");
-            TrachealSystemFinalForm.requireLevel(24).requirePerk(TrachealSystemEvolved).requireCustomFunction(function (player:Player):Boolean {
-		//		return player.lowerBody == LowerBody.DRIDER;
-		//	}, "Drider Lower Body").requireCustomFunction(function (player:Player):Boolean {
-                return player.beeScore() >= 12 || player.mantisScore() >= 12 || player.scorpionScore() >= 12 || player.spiderScore() >= 12 || player.cancerScore() >= 12 || player.atlachNachaScore() >= 17;
-            }, "Any insect race");
 			ChimericalBodySemiImprovedStage.requirePerk(ChimericalBodyBasicStage)
                     .requireLevel(24)
                     .requireCustomFunction(function (player:Player):Boolean {
@@ -6723,9 +6623,6 @@ public class PerkLib
 					return player.playerMinionsCount() >= 6;
 					}, "6+ pets/minions");
             //Tier 5
-			EclipticMindFinalForm.requireLevel(30).requirePerk(EclipticMindEvolved).requireCustomFunction(function (player:Player):Boolean {
-				return player.alicornScore() >= 12 || player.unicornScore() >= 12 || player.alicornkinScore() >= 10|| player.unicornkinScore() >= 10 ;
-			}, "Unicorn or Bicorn race");
             ChimericalBodyImprovedStage.requirePerk(ChimericalBodySemiImprovedStage)
                     .requireLevel(30)
                     .requireCustomFunction(function (player:Player):Boolean {

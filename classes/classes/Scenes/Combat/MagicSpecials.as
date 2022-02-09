@@ -659,8 +659,8 @@ public class MagicSpecials extends BaseCombatContent {
 		}
 		if (player.ratatoskrScore() >= 12) {
 			var cdko:Number = 12;
-			if (player.hasPerk(PerkLib.RatatoskrSmartsEvolved)) cdko -= 1;
-			if (player.hasPerk(PerkLib.RatatoskrSmartsFinalForm)) cdko -= 1;
+			if (player.hasPerk(MutationsLib.RatatoskrSmartsPrimitive)) cdko -= 1;
+			if (player.hasPerk(MutationsLib.RatatoskrSmartsEvolved)) cdko -= 1;
 			if (player.hasPerk(PerkLib.NaturalInstincts)) cdko -= 1;
 			bd = buttons.add("Knowledge overload", KnowledgeOverload).hint("Stun your opponents by overflowing their head with knowledge. \n\nWould go into cooldown after use for: "+cdko+" rounds", "Knowledge overload");
 			bd.requireMana(spellCost(80));
@@ -668,7 +668,7 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You need more time before you can use Knowledge overload again.\n\n");
 			}
 			var cdp:Number = 6;
-			if (player.hasPerk(PerkLib.RatatoskrSmartsFinalForm)) cdp -= 1;
+			if (player.hasPerk(MutationsLib.RatatoskrSmartsEvolved)) cdp -= 1;
 			if (player.hasPerk(PerkLib.NaturalInstincts)) cdp -= 1;
 			bd = buttons.add("Provoke", Provoke).hint("Insult your opponent and cause it to fly into a murderous rage increasing its damage but negating its defences and ability to do anything but attack blindly with physical strikes. \n\nWould go into cooldown after use for: "+cdp+" rounds", "Provoke");
 			bd.requireMana(spellCost(80));
@@ -676,9 +676,9 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You need more time before you can use Provoke again.\n\n");
 			}
 		}
-		if (player.ratatoskrScore() >= 12 || player.hasPerk(PerkLib.RatatoskrSmarts)) {
+		if (player.ratatoskrScore() >= 12 || player.hasPerk(MutationsLib.RatatoskrSmarts)) {
 			var cdww:Number = 4;
-			if (player.hasPerk(PerkLib.RatatoskrSmartsFinalForm)) cdww -= 1;
+			if (player.hasPerk(MutationsLib.RatatoskrSmartsEvolved)) cdww -= 1;
 			if (player.hasPerk(PerkLib.NaturalInstincts)) cdww -= 1;
 			bd = buttons.add("Weird words", WeirdWords).hint("Strike at your opponent with weird sentences charged with magic, so hard to comprehend it hurts. More potent based on your personal knowledge. \n\nWould go into cooldown after use for: "+cdww+" rounds", "Weird words");
 			bd.requireMana(spellCost(80));
@@ -3075,8 +3075,8 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		useMana(80, Combat.USEMANA_MAGIC);
 		var KOCD:Number = 12;
-		if (player.hasPerk(PerkLib.RatatoskrSmartsEvolved)) KOCD -= 1;
-		if (player.hasPerk(PerkLib.RatatoskrSmartsFinalForm)) KOCD -= 1;
+		if (player.hasPerk(MutationsLib.RatatoskrSmartsPrimitive)) KOCD -= 1;
+		if (player.hasPerk(MutationsLib.RatatoskrSmartsEvolved)) KOCD -= 1;
 		if (player.hasPerk(PerkLib.NaturalInstincts)) KOCD -= 1;
 		else player.createStatusEffect(StatusEffects.CooldownKnowledgeOverload,KOCD,0,0,0);
 		outputText("You share some of your well earned knowledge with [themonster] who stands there blankly listening to your spiel in confusion. It's going to take [monster him] a moment to come down from the absurd amount of info you forced into [monster his] tiny head"+(monster.plural?"s":"")+".\n\n");
@@ -3091,7 +3091,7 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		useMana(80, Combat.USEMANA_MAGIC);
 		var PCD:Number = 6;
-		if (player.hasPerk(PerkLib.RatatoskrSmartsFinalForm)) PCD -= 1;
+		if (player.hasPerk(MutationsLib.RatatoskrSmartsEvolved)) PCD -= 1;
 		if (player.hasPerk(PerkLib.NaturalInstincts)) PCD -= 1;
 		player.createStatusEffect(StatusEffects.CooldownProvoke,PCD,0,0,0);
 		outputText("You start out right away with the classic introduction of \"<i>You know, there's a rumor about you, it says that…</i>\" sharing with [themonster] the nastiest rumors about [monster him]. In disbelief and absolute rage [monster he] attacks relentlessly in an effort to shut you up. ");
@@ -3109,13 +3109,13 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		useMana(80, Combat.USEMANA_MAGIC);
 		var WWCD:Number = 4;
-		if (player.hasPerk(PerkLib.RatatoskrSmartsFinalForm)) WWCD -= 1;
+		if (player.hasPerk(MutationsLib.RatatoskrSmartsEvolved)) WWCD -= 1;
 		if (player.hasPerk(PerkLib.NaturalInstincts)) WWCD -= 1;
 		player.createStatusEffect(StatusEffects.CooldownWeirdWords,WWCD,0,0,0);
 		var damage:Number = scalingBonusIntelligence() * spellMod() * 4;
 		damage *= 1 + (codex.checkUnlocked() * 0.01);
-		if (player.hasPerk(PerkLib.RatatoskrSmartsEvolved)) damage *= 1.2;
-		if (player.hasPerk(PerkLib.RatatoskrSmartsFinalForm)) damage *= 1.25;
+		if (player.hasPerk(MutationsLib.RatatoskrSmartsPrimitive)) damage *= 1.2;
+		if (player.hasPerk(MutationsLib.RatatoskrSmartsEvolved)) damage *= 1.25;
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;

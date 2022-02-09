@@ -1107,11 +1107,13 @@ private function InternalMutations0(page:int = 0):void {
 	menuItems.push("Ovaries", InternalMutationsOvaries, "Ovaries Mutations");
 	menuItems.push("Testicles", InternalMutationsTesticles, "Testicles Mutations");
 	menuItems.push("Eyes", InternalMutationsEyes, "Eyes Mutations");
-	menuItems.push("Nerv/Sys", InternalMutationsPNervSys, "PNerv-Sys Mutations");
-	//Next Page
 	menuItems.push("Bone/Marrow", InternalMutationsBoneMarrow, "Bone Mutations");
+	//Next Page
+	menuItems.push("PNerv/Sys", InternalMutationsPNervSys, "PNerv-Sys Mutations");
+	menuItems.push("CNerv/Sys", InternalMutationsCNervSys, "CNerv-Sys Mutations");
 	menuItems.push("Thyroid Gland", InternalMutationsThyroidGlands, "Thyroid Mutations");
-	//menuItems.push("Parathyroid Gland", InternalMutationsParathyroid);
+	menuItems.push("Parathyroid Gland", InternalMutationsParathyroid, "Parathyroid Mutations");
+	menuItems.push("Adaptations", InternalMutationsAdaptations, "Adaptation Mutations");
 	menuGen(menuItems, page, meetEvangeline, false);
 
 	function InternalMutationsHeart():void{
@@ -1224,16 +1226,6 @@ private function InternalMutations0(page:int = 0):void {
 		addButton(14, "Back", InternalMutations0);
 	}
 
-	function InternalMutationsPNervSys():void{
-		var btnNum:int = 0
-		menu();
-		//Peripheral/NervSys Mutations
-		for each (var mutate:Array in MutationsLib.mutationsArray("Nerv/Sys")){
-			mutationsAssistant(mutate, btnNum++, "peripheral nerv-sys");
-		}
-		addButton(14, "Back", InternalMutations0);
-	}
-
 	function InternalMutationsBoneMarrow():void{
 		var btnNum:int = 0
 		menu();
@@ -1241,7 +1233,27 @@ private function InternalMutations0(page:int = 0):void {
 		for each (var mutate:Array in MutationsLib.mutationsArray("Bone")){
 			mutationsAssistant(mutate, btnNum++, "bone marrow");
 		}
+		addButton(14, "Back", InternalMutations0);
+	}
+
+	function InternalMutationsPNervSys():void{
+		var btnNum:int = 0
+		menu();
+		//Peripheral/NervSys Mutations
+		for each (var mutate:Array in MutationsLib.mutationsArray("PNerv/Sys")){
+			mutationsAssistant(mutate, btnNum++, "peripheral nerv-sys");
+		}
 		addButton(14, "Back", curry(InternalMutations0, 1));
+	}
+
+	function InternalMutationsCNervSys():void{
+		var btnNum:int = 0
+		menu();
+		//Peripheral/NervSys Mutations
+		for each (var mutate:Array in MutationsLib.mutationsArray("CNerv/Sys")){
+			mutationsAssistant(mutate, btnNum++, "central nerv-sys");
+		}
+		addButton(14, "Back", InternalMutations0);
 	}
 
 	function InternalMutationsThyroidGlands():void{
@@ -1257,9 +1269,19 @@ private function InternalMutations0(page:int = 0):void {
 	function InternalMutationsParathyroid():void{
 		var btnNum:int = 0
 		menu();
-		//ParaThyroid Glands Mutations. What's the difference between this and the above???
+		//ParaThyroid Glands Mutations
 		for each (var mutate:Array in MutationsLib.mutationsArray("PThyroid")){
 			mutationsAssistant(mutate, btnNum++, "parathyroid glands");
+		}
+		addButton(14, "Back", curry(InternalMutations0, 1));
+	}
+
+	function InternalMutationsAdaptations():void{
+		var btnNum:int = 0
+		menu();
+		//Adaptations Mutations
+		for each (var mutate:Array in MutationsLib.mutationsArray("Adaptations")){
+			mutationsAssistant(mutate, btnNum++, "adaptations");
 		}
 		addButton(14, "Back", curry(InternalMutations0, 1));
 	}

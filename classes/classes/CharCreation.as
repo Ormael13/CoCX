@@ -182,6 +182,7 @@ import coc.view.MainView;
 			player.esteem = 50;
 			player.will = 80;
 			player.lust = 15;
+			player.gems = 0;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
 				player.XP = flags[kFLAGS.NEW_GAME_PLUS_BONUS_STORED_XP];
 				player.level = 0;
@@ -409,7 +410,7 @@ import coc.view.MainView;
 			var newFlags:DefaultDict = new DefaultDict();
 			if (player.hasKeyItem("Ascension") >= 0) {
 				for each(var flag:int in [kFLAGS.NEW_GAME_PLUS_LEVEL, kFLAGS.HUNGER_ENABLED, kFLAGS.HARDCORE_MODE, kFLAGS.HARDCORE_SLOT, kFLAGS.GAME_DIFFICULTY, kFLAGS.EASY_MODE_ENABLE_FLAG, kFLAGS.NO_GORE_MODE, kFLAGS.WISDOM_SCALING, kFLAGS.INTELLIGENCE_SCALING, kFLAGS.STRENGTH_SCALING, kFLAGS.SPEED_SCALING, kFLAGS.SECONDARY_STATS_SCALING, kFLAGS.WATERSPORTS_ENABLED, 
-				kFLAGS.SILLY_MODE_ENABLE_FLAG, kFLAGS.LOW_STANDARDS_FOR_ALL, kFLAGS.HYPER_HAPPY, kFLAGS.SFW_MODE, kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM, kFLAGS.MELEE_DAMAGE_OVERHAUL, kFLAGS.LVL_UP_FAST, kFLAGS.MUTATIONS_SPOILERS, kFLAGS.INVT_MGMT_TYPE, kFLAGS.NEWPERKSDISPLAY, kFLAGS.CHARVIEW_STYLE]) {
+				kFLAGS.SILLY_MODE_ENABLE_FLAG, kFLAGS.LOW_STANDARDS_FOR_ALL, kFLAGS.HYPER_HAPPY, kFLAGS.SFW_MODE, kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM, kFLAGS.MELEE_DAMAGE_OVERHAUL, kFLAGS.LVL_UP_FAST, kFLAGS.MUTATIONS_SPOILERS, kFLAGS.INVT_MGMT_TYPE, kFLAGS.NEWPERKSDISPLAY, kFLAGS.CHARVIEW_STYLE, kFLAGS.SPIRIT_STONES]) {
 					newFlags[flag] = flags[flag];
 				}
 			}
@@ -418,6 +419,7 @@ import coc.view.MainView;
 			CoC.instance.saves.loadPermObject();
 			//Carry over data if new game plus.
 			if (player.hasKeyItem("Ascension") >= 0) CoC.instance.flags = newFlags;
+			if (flags[kFLAGS.SPIRIT_STONES] > (100 * (1 + player.newGamePlusMod()))) flags[kFLAGS.SPIRIT_STONES] = (100 * (1 + player.newGamePlusMod()));
 			//Set that jojo debug doesn't need to run
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02999] = 3;
 			//Time reset

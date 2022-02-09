@@ -342,6 +342,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		if (!isCorrupt)spriteSelect(SpriteDb.s_celessWhite);
 		var improvableItems:Array = [
 			[weapons.BFSWORD, weapons.NPHBLDE, weapons.EBNYBLD],
+			[weapons.DBFSWO, weapons.T_HEART, weapons.DORSOUL],
 			[weapons.MASTGLO, weapons.KARMTOU, weapons.YAMARG],
 			[weapons.KATANA, weapons.MASAMUN, weapons.BLETTER],
 			[weapons.W_STAFF, weapons.U_STAFF, weapons.N_STAFF],

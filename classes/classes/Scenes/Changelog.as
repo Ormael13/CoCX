@@ -137,14 +137,14 @@ package classes.Scenes
 			outputText("-Wild Hunt effect of increase dmg to enemeis below pc lvl increased from 20% to 100% more damage. Also monster level is now checked against PC effective level (Eyes of the Hunter (Ex) perk can increase it by as many levels as it decrease penalty for fighting too high lvl enemies).\n");
 			outputText("-Artemis bow now have additional effect - increase the magical damage of spells and enchanted arrows by 50%\n");
 			outputText("-Bonus damage on enchanted arrows shoot by arcane archer would now give half of previous damage, but it will no longer stops at adding more samage at 200 int. (So for very intelligent arcane archers it would be very good buff to damage with elemental arrows)\n");
-			//outputText("-New melee weapon (by Liadri): Nephilim Blade - obtainable by giving B.F.Sword to Pure Celess to purify. Increased by 6 base dmg, added scaling based on purity, deal bonus dmg to corrupted enemies and each attack will slowly purify user.\n");
-			//outputText("-New melee weapon (by Liadri): Ebony Destroyer - obtainable by giving B.F.Sword to Corrupted Celess to corrupt. Increased by 6 base dmg, added scaling based on corruption, deal bonus dmg to pure enemies and each attack will slowly corrupt user.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New melee weapon (by Liadri): Trull Heart - obtainable by giving Dual BF Sword to Pure Celess to purify. Increased by 20 base dmg, added scaling based on purity, recover 1% hp on swings.\n");
+			outputText("-New melee weapon (by Liadri): Dorc Souls - obtainable by giving Dual BF Sword to Corrupted Celess to corrupt. Increased by 20 base dmg, added scaling based on corruption, recover 1% hp on swings.\n");
+			outputText("-Gems counter reset on ascension and max 100 * NG tier (max 600) Spirits Stones are kept.\n");
+			outputText("-Added 3 new groups for Internal Mutation (perks): Parathyroid Glands, Central Nerv System and Adaptations. Ratatoskr Smarts & Ecliptic Mind mutation was moved to Central Nerv Sys group and Arachne Book Lungs and Twin Hearts moved to Adaptations group.\n");
+			outputText("-Cat-like Nimblness, Scylla Ink Glands, Tracheal System mutations been moved to Adaptations. So now all current internal mutations are placed under one of existing mutation slots ^^\n");
+			outputText("-All internal mutation perks have now more in line lvl req. for tier 2 (30) and 3 (60).\n");
+			outputText("-New mutation perk: Tracheal System (Final Form). Req. having Tracheal System (Evolved) perk and one of insect race score 16+ (atlach nacha 17+). Effects: +8% str / +6% tou / +10% spe multi.\n");
+			outputText("-First three tiers of Tracheal System got readjusted stat bonuses: +1% str / +2% spe multi; +2% str / +1% tou / +3% spe multi; +4% str / +3% tou / +5% spe multi.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -159,7 +159,8 @@ package classes.Scenes
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-Fixed Bugs: One of Ingnam Tavern food options having wrong price listed on menu, unique sex scenes accesable during Druid fusion, Wisp potentialy softlocking Mino King fight, selfsucking in masturbation menu restoring max 100 hunger, Swift Casting not usable when having Giant's Grip and Large weapon, White or Black magic buffs autocastable when having perk that disable use of white/black magic, ");
-			outputText("putting B. Sword after picking Ecalibur disabling option to pick sword at Temple, all 3 Hall of Blade soulskill variants dealing phys not magical dmg, Lightning Claw lowering phys dmg when used as part of feral style attack, using goblin Cum Reservoir not empting it out, Yuki Onna Transform scene not making sure to give proper genitalia setup\n");/*ostatni punkt changelogu
+			outputText("putting B. Sword after picking Ecalibur disabling option to pick sword at Temple, all 3 Hall of Blade soulskill variants dealing phys not magical dmg, Lightning Claw lowering phys dmg when used as part of feral style attack, using goblin Cum Reservoir not empting it out, Yuki Onna Transform scene not making sure to give proper genitalia setup, Archer's Stamina perks not giving fatigue related to ");
+			outputText("current Speed value, Half-Frost Wyrm racial bonus been attained super easy\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD

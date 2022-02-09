@@ -395,6 +395,16 @@ public class PerkType extends BaseContent
 			});
 			return this;
 		}
+		public function requireCentralNervSysMutationSlot():PerkType {
+			requirements.push({
+				fn  : function(player:Player):Boolean {
+					return player.maxCentralNervSysMutations() > 0;
+				},
+				text: "Free Central NervSys Mutation Slot",
+				type: "centralnervsysmutation"
+			});
+			return this;
+		}
 		public function requireBonesAndMarrowMutationSlot():PerkType {
 			requirements.push({
 				fn  : function(player:Player):Boolean {
@@ -422,6 +432,16 @@ public class PerkType extends BaseContent
 				},
 				text: "Free Parathyroid Gland Mutation Slot",
 				type: "parathyroidglandmutation"
+			});
+			return this;
+		}
+		public function requireAdaptationsMutationSlot():PerkType {
+			requirements.push({
+				fn  : function(player:Player):Boolean {
+					return player.maxAdaptationsMutations() > 0;
+				},
+				text: "Free Adaptations Mutation Slot",
+				type: "adaptationsmutation"
 			});
 			return this;
 		}

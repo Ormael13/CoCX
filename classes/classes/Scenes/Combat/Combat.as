@@ -6700,10 +6700,12 @@ public class Combat extends BaseContent {
                 else outputText("\n[Themonster] bleeds profusely from the many bloody gashes your [weapon] leave behind.");
             }
         }
-        if ((player.hasPerk(PerkLib.VampiricBlade) || player.hasStatusEffect(StatusEffects.LifestealEnchantment) || player.weapon == weapons.LHSCYTH) && !monster.hasPerk(PerkLib.EnemyConstructType)) {
+        if ((player.hasPerk(PerkLib.VampiricBlade) || player.hasStatusEffect(StatusEffects.LifestealEnchantment) || player.weapon == weapons.T_HEART || player.weapon == weapons.DORSOUL || player.weapon == weapons.LHSCYTH) && !monster.hasPerk(PerkLib.EnemyConstructType)) {
 			var restoreamount:Number = 0;
 			if (player.hasPerk(PerkLib.VampiricBlade)) restoreamount += 1;
 			if (player.hasStatusEffect(StatusEffects.LifestealEnchantment)) restoreamount += 1;
+			if (player.weapon == weapons.LHSCYTH) restoreamount += 1;
+			if (player.weapon == weapons.T_HEART || player.weapon == weapons.DORSOUL) restoreamount += 0.5;
             if (player.weaponSpecials("Small") || player.weaponSpecials("Dual Small")) HPChange(Math.round(player.maxHP() * restoreamount * 0.005), false);
             else if (player.weaponSpecials("Large") || player.weaponSpecials("Dual Large")) HPChange(Math.round(player.maxHP() * restoreamount * 0.02), false);
             else if (player.weaponSpecials("Massive")) HPChange(Math.round(player.maxHP() * restoreamount * 0.04), false);
@@ -7422,7 +7424,7 @@ public class Combat extends BaseContent {
         }
 		if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
 		if (player.hasPerk(PerkLib.KnowledgeIsPower)) {
-			if (player.hasPerk(PerkLib.RatatoskrSmartsFinalForm)) damage *= (1 + (Math.round(codex.checkUnlocked() / 100) * 3));
+			if (player.hasPerk(MutationsLib.RatatoskrSmartsEvolved)) damage *= (1 + (Math.round(codex.checkUnlocked() / 100) * 3));
 			else damage *= (1 + Math.round(codex.checkUnlocked() / 100));
 		}
 		if (player.hasPerk(PerkLib.SharedPower) && player.perkv1(PerkLib.SharedPower) > 0) damage *= (1+(0.1*player.perkv1(PerkLib.SharedPower)));
@@ -8342,7 +8344,7 @@ public class Combat extends BaseContent {
         }
 		if (monster.hasStatusEffect(StatusEffects.Provoke)) damage *= monster.statusEffectv2(StatusEffects.Provoke);
 		if (player.hasPerk(PerkLib.KnowledgeIsPower)) {
-			if (player.hasPerk(PerkLib.RatatoskrSmartsFinalForm)) damage *= (1 + (Math.round(codex.checkUnlocked() / 100) * 3));
+			if (player.hasPerk(MutationsLib.RatatoskrSmartsEvolved)) damage *= (1 + (Math.round(codex.checkUnlocked() / 100) * 3));
 			else damage *= (1 + Math.round(codex.checkUnlocked() / 100));
 		}
 		damage *= EyesOfTheHunterDamageBonus();
@@ -9153,12 +9155,12 @@ public class Combat extends BaseContent {
                 else damage = Math.round(damage * 1.4); //30% more damage against very high corruption.
                 var corruptionModifier:Number = ((100 - player.cor) / 50);
                 if (corruptionModifier < 1) corruptionModifier = 1;
-                if (player.hasPerk(PerkLib.EclipticMind)) damage *= corruptionModifier;
-                if (player.hasPerk(PerkLib.EclipticMindEvolved)) damage *= corruptionModifier;
-                if (player.hasPerk(PerkLib.EclipticMindFinalForm)) damage *= corruptionModifier;
+                if (player.hasPerk(MutationsLib.EclipticMind)) damage *= corruptionModifier;
+                if (player.hasPerk(MutationsLib.EclipticMindPrimitive)) damage *= corruptionModifier;
+                if (player.hasPerk(MutationsLib.EclipticMindEvolved)) damage *= corruptionModifier;
                 if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
-                if (player.hasPerk(PerkLib.EclipticMindEvolved) && monster.cor > player.cor / 2) damage = Math.round(damage * 2);
-                else if (player.hasPerk(PerkLib.EclipticMindFinalForm) && monster.cor > player.cor / 2) damage = Math.round(damage * 3);
+                if (player.hasPerk(MutationsLib.EclipticMindPrimitive) && monster.cor > player.cor / 2) damage = Math.round(damage * 2);
+                else if (player.hasPerk(MutationsLib.EclipticMindEvolved) && monster.cor > player.cor / 2) damage = Math.round(damage * 3);
 				damage *= fireDamageBoostedByDao();
                 damage = Math.round(damage);
                 if (damage > (monster.maxHP()/10)) damage = Math.round(monster.maxHP()/10);
@@ -9188,13 +9190,13 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.SluttySimplicity) && player.armorName == "nothing") lustDmg *= (1 + ((10 + rand(11)) / 100));
             if (player.hasPerk(PerkLib.ElectrifiedDesire)) lustDmg *= (1 + (player.lust100 * 0.01));
             if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) lustDmg *= (1 + combat.historyWhoreBonus());
-            if (player.hasPerk(PerkLib.EclipticMind)) lustDmg *= ((player.cor / 50 / 100)+1);
-            if (player.hasPerk(PerkLib.EclipticMindEvolved)) lustDmg *= ((player.cor / 50 / 100)+1);
-            if (player.hasPerk(PerkLib.EclipticMindFinalForm)) lustDmg *= ((player.cor / 50 / 100)+1);
+            if (player.hasPerk(MutationsLib.EclipticMind)) lustDmg *= ((player.cor / 50 / 100)+1);
+            if (player.hasPerk(MutationsLib.EclipticMindPrimitive)) lustDmg *= ((player.cor / 50 / 100)+1);
+            if (player.hasPerk(MutationsLib.EclipticMindEvolved)) lustDmg *= ((player.cor / 50 / 100)+1);
             if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= RacialParagonAbilityBoost();
             if (player.hasPerk(PerkLib.ArouseTheAudience) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType))) monster.lust += monster.lustVuln * 1.2 * (2 + rand(4));
-            if (player.hasPerk(PerkLib.EclipticMindEvolved) && monster.cor < (player.cor / 2)) lustDmg = Math.round(lustDmg * 2);
-            else if (player.hasPerk(PerkLib.EclipticMindFinalForm) && monster.cor < (player.cor / 2)) lustDmg = Math.round(lustDmg * 3);
+            if (player.hasPerk(MutationsLib.EclipticMindPrimitive) && monster.cor < (player.cor / 2)) lustDmg = Math.round(lustDmg * 2);
+            else if (player.hasPerk(MutationsLib.EclipticMindEvolved) && monster.cor < (player.cor / 2)) lustDmg = Math.round(lustDmg * 3);
             if (lustDmg > (monster.maxLust()/10)) lustDmg = Math.round(monster.maxLust()/10);
             outputText("[monster A] [monster name] slowly succumbs to [monster his] basest desires as your aura of corruption seeps through [monster him].");
             if (monster.cor < 100) outputText("Your victims purity is slowly becoming increasingly eroded by your seeping corruption.");
@@ -10559,7 +10561,6 @@ public class Combat extends BaseContent {
         }
         if (player.weapon == weapons.SESPEAR) maxPercentRegen += 2;
         if (player.hasPerk(PerkLib.LustyRegeneration)) maxPercentRegen += 0.5;
-        if (player.hasPerk(PerkLib.EclipticMindFinalForm)) maxPercentRegen += 1.5;
         if (player.hasPerk(PerkLib.LizanRegeneration)) maxPercentRegen += 1.5;
         if (player.hasPerk(MutationsLib.LizanMarrow)) maxPercentRegen += 0.5;
         if (player.hasPerk(MutationsLib.LizanMarrowPrimitive)) maxPercentRegen += 1;
@@ -10568,6 +10569,7 @@ public class Combat extends BaseContent {
 			if (player.HP < (player.maxHP() * 0.25)) maxPercentRegen += 4.5;
 		}
 		if (player.hasPerk(MutationsLib.DraconicHeartEvolved)) maxPercentRegen += 1;
+        if (player.hasPerk(MutationsLib.EclipticMindEvolved)) maxPercentRegen += 1.5;
         if (player.hasPerk(PerkLib.HydraRegeneration) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) maxPercentRegen += 1 * player.statusEffectv1(StatusEffects.HydraTailsPlayer);
         if (player.hasPerk(PerkLib.IcyFlesh)) maxPercentRegen += 1;
         if (player.hasPerk(PerkLib.BodyCultivator)) maxPercentRegen += 0.5;
@@ -15351,4 +15353,4 @@ public class Combat extends BaseContent {
         return inteWisLibScale(player.lib, randomize);
     }
 }
-}
+}
