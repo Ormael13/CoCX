@@ -228,7 +228,7 @@ public class MutationsLib
 		public static const LizanMarrowPrimitive:PerkType = mk("Lizan Marrow (Primitive)", "Lizan Marrow (Primitive)",
 				"Regenerates 1% of HP per round in combat and 2% of HP per hour. Additionaly your limit for innate self-regeneration rate increased.");
 		public static const LizanMarrowEvolved:PerkType = mk("Lizan Marrow (Evolved)", "Lizan Marrow (Evolved)",
-				"Regenerates 1.5% of HP per round in combat and 3% of HP per hour. Additionaly your limit for innate self-regeneration rate increased. When below 25% of max HP regeneration provided by Lizan regeneration doubles. You can't lose by HP until your health drops into the negatives any more than 5% of max HP.");
+				"Regenerates 1.5% of HP per round in combat and 3% of HP per hour. Additionaly your limit for innate self-regeneration rate increased. When below 25% of max HP regeneration provided by Lizan regeneration doubles. You can't lose by HP until your health drops into the negatives more than 5% of max HP.");
 		public static const LizanMarrowFinalForm:PerkType = mk("Lizan Marrow (Final Form)", "Lizan Marrow (Final Form)",
 				".");
 		public static const ManticoreMetabolism:PerkType = mk("Manticore Metabolism", "Manticore Metabolism",
@@ -572,7 +572,7 @@ public class MutationsLib
 				//Perk związany ze skórą
 				//Tier 1
 				ArachnidBookLung.requireAdaptationsMutationSlot().requireCustomFunction(function (player:Player):Boolean {
-					return player.spiderScore() >= 5 || player.atlachNachaScore() >= 5;
+					return player.spiderScore() >= 5 || player.atlachNachaScore() >= 17;
 				}, "Arachnid race");
 				BlackHeart.requireHeartMutationSlot().requirePerk(PerkLib.DarkCharm).requireCor(100).requireCustomFunction(function (player:Player):Boolean {
 					return player.demonScore() >= 5;
@@ -765,7 +765,7 @@ public class MutationsLib
 				ArachnidBookLungPrimitive.requireLevel(30)
 						.requirePerk(ArachnidBookLung)
 						.requireCustomFunction(function (player:Player):Boolean {
-							return player.spiderScore() >= 9 || player.atlachNachaScore() >= 9;
+							return player.spiderScore() >= 7 || player.atlachNachaScore() >= 18;
 						}, "Arachnid race");
 				BlackHeartPrimitive.requireLevel(30)
 						.requirePerk(BlackHeart)
@@ -938,7 +938,7 @@ public class MutationsLib
 				TrachealSystemPrimitive.requireLevel(30).requirePerk(TrachealSystem).requireCustomFunction(function (player:Player):Boolean {
 			//		return player.lowerBody == LowerBody.DRIDER;
 			//	}, "Drider Lower Body").requireCustomFunction(function (player:Player):Boolean {
-					return player.beeScore() >= 8 || player.mantisScore() >= 8 || player.scorpionScore() >= 8 || player.spiderScore() >= 8 || player.cancerScore() >= 8 || player.atlachNachaScore() >= 17;
+					return player.beeScore() >= 8 || player.mantisScore() >= 8 || player.scorpionScore() >= 8 || player.spiderScore() >= 8 || player.cancerScore() >= 8 || player.atlachNachaScore() >= 18;
 				}, "Any insect race");
 				TwinHeartPrimitive.requireLevel(30)
 						.requirePerk(TwinHeart)
@@ -952,7 +952,7 @@ public class MutationsLib
 							return player.vampireScore() >= 8;//potem dodać mosquito race i ew. inne co mogą wypijać krew
 						}, "Vampire race");
 				VenomGlandsPrimitive.requireLevel(30).requirePerk(VenomGlands).requireCustomFunction(function (player:Player):Boolean {
-					return player.spiderScore() >= 8 || player.atlachNachaScore() >= 17 || player.nagaScore() >= 6 || player.gorgonScore() >= 8 || player.vouivreScore() >= 8 || player.couatlScore() >= 8 || player.hydraScore() >= 8;
+					return player.spiderScore() >= 8 || player.atlachNachaScore() >= 18 || player.nagaScore() >= 6 || player.gorgonScore() >= 8 || player.vouivreScore() >= 8 || player.couatlScore() >= 8 || player.hydraScore() >= 8;
 				}, "Spider or any snake-like race");
 				WhaleFatPrimitive.requireLevel(30).requirePerk(WhaleFat).requireCustomFunction(function (player:Player):Boolean {
 					return player.orcaScore() >= 9 || player.leviathanScore() >= 20;
@@ -964,7 +964,7 @@ public class MutationsLib
 				ArachnidBookLungEvolved.requireLevel(60)
 						.requirePerk(ArachnidBookLungPrimitive)
 						.requireCustomFunction(function (player:Player):Boolean {
-							return player.spiderScore() >= 9 || player.atlachNachaScore() >= 9;
+							return player.spiderScore() >= 9 || player.atlachNachaScore() >= 19;
 						}, "Arachnid race");
 				BlackHeartEvolved.requireLevel(60)
 						.requirePerk(BlackHeartPrimitive)
@@ -1119,7 +1119,7 @@ public class MutationsLib
 				TrachealSystemEvolved.requireLevel(60).requirePerk(TrachealSystemPrimitive).requireCustomFunction(function (player:Player):Boolean {
 			//		return player.lowerBody == LowerBody.DRIDER;
 			//	}, "Drider Lower Body").requireCustomFunction(function (player:Player):Boolean {
-					return player.beeScore() >= 12 || player.mantisScore() >= 12 || player.scorpionScore() >= 12 || player.spiderScore() >= 12 || player.cancerScore() >= 12 || player.atlachNachaScore() >= 17;
+					return player.beeScore() >= 12 || player.mantisScore() >= 12 || player.scorpionScore() >= 12 || player.spiderScore() >= 12 || player.cancerScore() >= 12 || player.atlachNachaScore() >= 19;
 				}, "Any insect race");
 				TwinHeartEvolved.requireLevel(60)
 						.requirePerk(TwinHeartPrimitive)
@@ -1127,7 +1127,7 @@ public class MutationsLib
 							return player.centaurScore() >= 12 || player.unicornScore() >= 12 || player.sphinxScore() >= 17 || player.cancerScore() >= 12 || player.isTaur();
 						}, "Tauric or Unicorn race");
 				VenomGlandsEvolved.requireLevel(60).requirePerk(VenomGlandsPrimitive).requireCustomFunction(function (player:Player):Boolean {
-					return player.spiderScore() >= 12 || player.atlachNachaScore() >= 17 || player.nagaScore() >= 8 || player.gorgonScore() >= 12 || player.vouivreScore() >= 12 || player.couatlScore() >= 12 || player.hydraScore() >= 12;
+					return player.spiderScore() >= 12 || player.atlachNachaScore() >= 19 || player.nagaScore() >= 8 || player.gorgonScore() >= 12 || player.vouivreScore() >= 12 || player.couatlScore() >= 12 || player.hydraScore() >= 12;
 				}, "Spider or any snake-like race");
 				WhaleFatEvolved.requireLevel(60).requirePerk(WhaleFatPrimitive).requireCustomFunction(function (player:Player):Boolean {
 					return player.orcaScore() >= 12 || player.leviathanScore() >= 20;
@@ -1145,7 +1145,7 @@ public class MutationsLib
 				TrachealSystemFinalForm.requireLevel(90).requirePerk(TrachealSystemEvolved).requireCustomFunction(function (player:Player):Boolean {
 			//		return player.lowerBody == LowerBody.DRIDER;
 			//	}, "Drider Lower Body").requireCustomFunction(function (player:Player):Boolean {
-					return player.beeScore() >= 16 || player.mantisScore() >= 16 || player.scorpionScore() >= 16 || player.spiderScore() >= 16 || player.cancerScore() >= 16 || player.atlachNachaScore() >= 17;
+					return player.beeScore() >= 16 || player.mantisScore() >= 16 || player.scorpionScore() >= 16 || player.spiderScore() >= 16 || player.cancerScore() >= 16 || player.atlachNachaScore() >= 20;
 				}, "Any insect race");
 				} catch (e:Error) {
 					trace(e.getStackTrace());

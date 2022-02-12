@@ -101,7 +101,7 @@ package classes.Scenes
 			outputText("-New melee weapon (by Ormael): Dual Katana - dropped by corrupted flesh golems. Cost 1360 gems. Base atk is 17. It's Dual Large weapon belonging to dueling sword type.\n");
 			outputText("-New melee weapon (by Ormael): Dual Lance - dropped by corrupted flesh golems. Cost 960 gems. Base atk is 12. It's Dual Normal weapon belonging to spear type. When used in Charge special would hit twice.\n");
 			outputText("-New armor (by Ormael): Green Diving Suit - buyable at Pinchou shop. Cost 1800 gems, 25 armor, 5 magic resistance.\n");
-			//outputText("-New tier 13 strength lvl-up perk: Too Angry to Die. Req. Fuel for the Fire perk. Effect: . (+3000 max Wrath)\n");
+			outputText("-New tier 13 strength lvl-up perk: Too Angry to Die. Req. Anger perk. Effect: When you under berserk-like state it will prevent HP defeat as long it last. Additionaly increase limit of negative HP you can reach by amount of max wrath. (+3000 max Wrath)\n");
 			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
 			//outputText("-New tier 9 strength lvl-up perk: Prestige Job: Stalker. Req. Job: Warrior and Hunter perks, 150+ str/spe. Effect: +60 to str multi and +20 to spe multi (scalable with NG tiers), +20% damage and critical damage with thrown weapon.\n");
 			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
@@ -133,7 +133,7 @@ package classes.Scenes
 			outputText("-Unicorn & Nocturnus staff base atk increased to 10 (from 6) and price to 1,600 (from 960). Unicorn staff additionaly decrease healing spells cooldowns by 2 turns.\n");
 			outputText("-New armor (by Liadri): Battle maiden armor - obtainable by giving Lusty Maiden Armor to Pure Celess to purify. Increase armor by an additional 30 but grant no armor if the character is not virgin. No longer grant sex scenes or slutty seduction but reduce lust by 2% each round.\n");
 			outputText("-New armor (by Liadri): Succubus armor - obtainable by giving Lusty Maiden Armor to Corrupted Celess to corrupt. Same base stat as lusty maiden armor +10 but double the originally added armor bonus each time PC has sex. Base slutty seduction set to 10.\n");
-			outputText("-Added to few more enemies that may fit req. access to Lusty Maiden/Succubus Armor b.titfuck scene.\n");
+			outputText("-Added few more enemies that may fit req. access to Lusty Maiden/Succubus Armor b.titfuck scene.\n");
 			outputText("-Wild Hunt effect of increase dmg to enemeis below pc lvl increased from 20% to 100% more damage. Also monster level is now checked against PC effective level (Eyes of the Hunter (Ex) perk can increase it by as many levels as it decrease penalty for fighting too high lvl enemies).\n");
 			outputText("-Artemis bow now have additional effect - increase the magical damage of spells and enchanted arrows by 50%\n");
 			outputText("-Bonus damage on enchanted arrows shoot by arcane archer would now give half of previous damage, but it will no longer stops at adding more samage at 200 int. (So for very intelligent arcane archers it would be very good buff to damage with elemental arrows)\n");
@@ -143,15 +143,15 @@ package classes.Scenes
 			outputText("-Added 3 new groups for Internal Mutation (perks): Parathyroid Glands, Central Nerv System and Adaptations. Ratatoskr Smarts & Ecliptic Mind mutation was moved to Central Nerv Sys group and Arachne Book Lungs and Twin Hearts moved to Adaptations group.\n");
 			outputText("-Cat-like Nimblness, Scylla Ink Glands, Tracheal System mutations been moved to Adaptations. So now all current internal mutations are placed under one of existing mutation slots ^^\n");
 			outputText("-All internal mutation perks have now more in line lvl req. for tier 2 (30) and 3 (60).\n");
-			outputText("-New mutation perk: Tracheal System (Final Form). Req. having Tracheal System (Evolved) perk and one of insect race score 16+ (atlach nacha 17+). Effects: +8% str / +6% tou / +10% spe multi.\n");
+			outputText("-New mutation perk: Tracheal System (Final Form). Req. having Tracheal System (Evolved) perk and one of insect race score 16+ (atlach nacha 20+). Effects: +1 to insect races score, +8% str / +6% tou / +10% spe multi.\n");
 			outputText("-First three tiers of Tracheal System got readjusted stat bonuses: +1% str / +2% spe multi; +2% str / +1% tou / +3% spe multi; +4% str / +3% tou / +5% spe multi.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Fuel for the Fire perk been moved 2 tiers lower, Rage & Anger perks was each moved up 1 tier.\n");
+			outputText("-Fuel for the Fire perk effect changed to: Increase two times wrath gains from getting hit. +1 attack per turn when wielding any large or massive weapon under berserker/lustzerker state. +1,500 wrath\n");
+			outputText("-Rage perk effect changed to: Increasing crit chance by up to (10%)70% & crit dmg by up to (25%)175% in berserk state that would reset after succesful crit attack. Adds Diehard effect up to 5% of max HP. +2,000 wrath\n");
+			outputText("-Anger perk effect changed to: For every 1% of missing HP (up to 100%) you gain 1% bonus damage, 2% bonus crit damage. When: below 50/100% max HP grants 1/2 more attack(s) with large/massive weapons when under berserker/lustzerker state. +2,500 wrath\n");
+			outputText("-Prestige Job: Berserker gained additional effect: generate 1% of max wrath with using melee/range/specials.\n");
+			outputText("-Furious strikes & Unlimited rage perks increase generated wrath by 200% not 100% (2x -> 3x).\n");
+			outputText("-Improved Adrenaline perk increase now wrath generation by 2% not 1%.\n");
 			outputText("-\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
@@ -160,7 +160,7 @@ package classes.Scenes
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-Fixed Bugs: One of Ingnam Tavern food options having wrong price listed on menu, unique sex scenes accesable during Druid fusion, Wisp potentialy softlocking Mino King fight, selfsucking in masturbation menu restoring max 100 hunger, Swift Casting not usable when having Giant's Grip and Large weapon, White or Black magic buffs autocastable when having perk that disable use of white/black magic, ");
 			outputText("putting B. Sword after picking Ecalibur disabling option to pick sword at Temple, all 3 Hall of Blade soulskill variants dealing phys not magical dmg, Lightning Claw lowering phys dmg when used as part of feral style attack, using goblin Cum Reservoir not empting it out, Yuki Onna Transform scene not making sure to give proper genitalia setup, Archer's Stamina perks not giving fatigue related to ");
-			outputText("current Speed value, Half-Frost Wyrm racial bonus been attained super easy\n");/*ostatni punkt changelogu
+			outputText("current Speed value, Half-Frost Wyrm racial bonus been attained super easy, Mysterious Seed not causing for misc items menu appear as inventory submenu\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD

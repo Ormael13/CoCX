@@ -542,6 +542,10 @@ public class Combat extends BaseContent {
 			player.lust = player.minLust();
 			doNext(curry(combatMenu, true));
 		}
+		else if ((player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking)) && player.hasPerk(PerkLib.TooAngryToDie)) {
+			player.HP = player.minHP() + 1;
+			doNext(curry(combatMenu, true));
+		}
         else monster.won_(true, false);
     }
 
@@ -1736,6 +1740,13 @@ public class Combat extends BaseContent {
                     else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
                 } else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
                 if (player.statusEffectv1(StatusEffects.CounterAction) > 0) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = player.statusEffectv1(StatusEffects.CounterAction);
+				if ((player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking)) && (player.hasPerk(PerkLib.FuelForTheFire) || player.hasPerk(PerkLib.Anger))) {
+					if (player.hasPerk(PerkLib.Anger) && player.hp100 < 50) {
+						if (player.hp100 < 100) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 2;
+						else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 1;
+					}
+					flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 1;
+				}
                 if (player.weaponSpecials("Dual Large")) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 2;
                 if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 1 && player.hasPerk(PerkLib.SteelStorm) && !player.hasStatusEffect(StatusEffects.CounterAction) && player.weaponSpecials("Dual Large")) {
                     if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 9) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 4;
@@ -1791,8 +1802,15 @@ public class Combat extends BaseContent {
         }
         if (player.weaponSpecials("Massive")) {
             //	if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] >= 0) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
-            flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
-			if (player.statStore.hasBuff("AsuraForm")) {
+			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
+			if ((player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking)) && (player.hasPerk(PerkLib.FuelForTheFire) || player.hasPerk(PerkLib.Anger))) {
+				if (player.hasPerk(PerkLib.Anger) && player.hp100 < 50) {
+					if (player.hp100 < 100) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 2;
+					else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 1;
+				}
+				flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 1;
+			}
+            if (player.statStore.hasBuff("AsuraForm")) {
 				if (player.hasPerk(PerkLib.AsuraStrength)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 4;
 				else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 3;
 			}
@@ -2395,7 +2413,9 @@ public class Combat extends BaseContent {
         if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
         if (rand(100) < critChance) {
             crit = true;
-            damage *= 1.75;
+			var buffMultiplier:Number = 0;
+			buffMultiplier += bonusCriticalDamageFromMissingHP();
+			damage *= (1.75 + buffMultiplier);
         }
         //Apply AND DONE!
         damage *= (monster.damagePercent() / 100);
@@ -5633,6 +5653,7 @@ public class Combat extends BaseContent {
             if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
             if (rand(100) < critChance) {
                 crit = true;
+				critDamage += bonusCriticalDamageFromMissingHP();
                 if ((player.weapon == weapons.WG_GAXE && monster.cor > 66) || (player.weapon == weapons.DE_GAXE && monster.cor < 33)) critDamage += 0.1;
 				if (player.hasPerk(PerkLib.OrthodoxDuelist) && player.isDuelingTypeWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) critDamage += 0.2;
 				if (player.hasStatusEffect(StatusEffects.AlterBindScroll4)) critDamage += 1;
@@ -5847,7 +5868,7 @@ public class Combat extends BaseContent {
                     if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
                 }
                 if (!crit && player.hasPerk(PerkLib.Rage) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
-                    if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
+                    if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 70) player.addStatusValue(StatusEffects.Rage, 1, 10);
                     else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
                 }
                 //Damage is delivered HERE
@@ -6365,8 +6386,9 @@ public class Combat extends BaseContent {
             var critChance:int = 5;
             var critDamage:Number = 1.75;
             critChance += combatPhysicalCritical();
+			critDamage += bonusCriticalDamageFromMissingHP();
             if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
-            if (rand(100) < critChance) {
+			if (rand(100) < critChance) {
                 crit = true;
                 damage *= critDamage;
             }
@@ -6449,7 +6471,7 @@ public class Combat extends BaseContent {
                     if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
                 }
                 if (!crit && player.hasPerk(PerkLib.Rage) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
-                    if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
+                    if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 70) player.addStatusValue(StatusEffects.Rage, 1, 10);
                     else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
                 }
                 //Damage is delivered HERE
@@ -6811,16 +6833,18 @@ public class Combat extends BaseContent {
 
 	public function WrathGenerationPerHit1(damage:int = 0):void {	//base melee/range attacks wrath generation
 		var addedWrath:Number = damage;
-		if (player.hasPerk(PerkLib.FuriousStrikes)) addedWrath *= 2;
-		if (player.hasPerk(PerkLib.UnlimitedRage)) addedWrath *= 2;
-		if (player.hasPerk(PerkLib.ImprovedAdrenaline)) addedWrath += Math.round(player.maxWrath() * 0.01);
+		if (player.hasPerk(PerkLib.FuriousStrikes)) addedWrath *= 3;
+		if (player.hasPerk(PerkLib.UnlimitedRage)) addedWrath *= 3;
+		if (player.hasPerk(PerkLib.ImprovedAdrenaline)) addedWrath += Math.round(player.maxWrath() * 0.02);
+		if (player.hasPerk(PerkLib.PrestigeJobBerserker)) addedWrath += Math.round(player.maxWrath() * 0.01);
 		EngineCore.WrathChange(addedWrath, false);
 	}
 	public function WrathGenerationPerHit2(damage:int = 0):void {	//specials wrath generation
 		var addedWrath:Number = damage;
-		if (player.hasPerk(PerkLib.FuriousStrikes)) addedWrath *= 2;
-		if (player.hasPerk(PerkLib.UnlimitedRage)) addedWrath *= 2;
-		if (player.hasPerk(PerkLib.ImprovedAdrenaline)) addedWrath += Math.round(player.maxWrath() * 0.01);
+		if (player.hasPerk(PerkLib.FuriousStrikes)) addedWrath *= 3;
+		if (player.hasPerk(PerkLib.UnlimitedRage)) addedWrath *= 3;
+		if (player.hasPerk(PerkLib.ImprovedAdrenaline)) addedWrath += Math.round(player.maxWrath() * 0.02);
+		if (player.hasPerk(PerkLib.PrestigeJobBerserker)) addedWrath += Math.round(player.maxWrath() * 0.01);
 		EngineCore.WrathChange(addedWrath, false);
 	}
 	public function PASPAS():Number {
@@ -11794,6 +11818,9 @@ public class Combat extends BaseContent {
             if (rand(100) < critChance) {
                 crit = true;
                 damage *= critMulti;
+				var buffMultiplier:Number = 0;
+				buffMultiplier += bonusCriticalDamageFromMissingHP();
+				damage *= (1.75 + buffMultiplier);
             }
             damage = Math.round(damage);
             //Dealing damage -
@@ -11805,7 +11832,7 @@ public class Combat extends BaseContent {
                 if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
             }
             if (!crit && player.hasPerk(PerkLib.Rage) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
-                if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
+                if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 70) player.addStatusValue(StatusEffects.Rage, 1, 10);
                 else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
             }
             outputText(". ");
@@ -14235,10 +14262,10 @@ public class Combat extends BaseContent {
         if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
         if (rand(100) < critChance) {
             crit = true;
-            if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()){
-                damage *= 2.5;
-            }
-            else damage *= 1.75;
+			var buffMultiplier:Number = 0;
+            buffMultiplier += bonusCriticalDamageFromMissingHP();
+			if (player.hasPerk(PerkLib.Impale) && player.spe >= 100 && player.haveWeaponForJouster()) damage *= (1.75 + (2 * buffMultiplier));
+			else damage *= (1.75 + buffMultiplier);
         }
 		outputText(".");
         damage = Math.round(damage);
@@ -14248,7 +14275,7 @@ public class Combat extends BaseContent {
             if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
         }
         if (!crit && player.hasPerk(PerkLib.Rage) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking))) {
-            if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
+            if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 70) player.addStatusValue(StatusEffects.Rage, 1, 10);
             else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
         }
         if ((!player.hasPerk(MutationsLib.HarpyHollowBonesEvolved) && player.statusEffectv1(StatusEffects.Flying) == 0) || player.statusEffectv2(StatusEffects.Flying) != 3) {
@@ -15154,6 +15181,16 @@ public class Combat extends BaseContent {
 		var fwsc:Number = 500;
 		if (player.perkv1(PerkLib.Dantain) > 2) fwsc -= 100;
 		return fwsc;
+	}
+	
+	public function bonusCriticalDamageFromMissingHP():Number {
+		var bonusCriticalDamageFromMissingHP:Number = 0;
+		if (player.hasStatusEffect(StatusEffects.Rage)) bonusCriticalDamageFromMissingHP += 0.025 * player.statusEffectv1(StatusEffects.Rage);
+		if (player.hasPerk(PerkLib.Anger) && (player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking)) && player.hp100 < 100) {
+			if (player.hp100 < 0) bonusCriticalDamageFromMissingHP += 2;
+			else bonusCriticalDamageFromMissingHP += (1 - (player.hp100 * 0.02));
+		}
+		return bonusCriticalDamageFromMissingHP;
 	}
 	
 	public function RacialParagonAbilityBoost():Number {

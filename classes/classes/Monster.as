@@ -364,10 +364,12 @@ import flash.utils.getQualifiedClassName;
 				min -= maxHP() * 0.08;
 				min -= (2400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}//nastepny diehard to 10% i 3000
-			if (hasPerk(PerkLib.Ferocity)) min -= maxHP() * 0.07;
 			if (hasPerk(MutationsLib.LizanMarrowEvolved)) min -= maxHP() * 0.05;
 			if (hasPerk(MutationsLib.OrcAdrenalGlands)) min -= maxHP() * 0.01;
 			if (hasPerk(MutationsLib.OrcAdrenalGlandsPrimitive)) min -= maxHP() * 0.02;
+			if (hasPerk(PerkLib.Ferocity)) min -= maxHP() * 0.07;
+			if (hasPerk(PerkLib.Rage)) min -= maxHP() * 0.05;
+			if (hasPerk(PerkLib.TooAngryToDie)) min -= this.maxWrath();
 			if (hasPerk(PerkLib.DeityJobMunchkin)) {
 				min -= str;
 				min -= tou;
@@ -629,9 +631,9 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.ColdLust)) temp += 250;
 			if (hasPerk(PerkLib.ColderLust)) temp += 375;
 			if (hasPerk(PerkLib.PrestigeJobBerserker)) temp += 1000;
-			if (hasPerk(PerkLib.Rage)) temp += 1500;
-			if (hasPerk(PerkLib.Anger)) temp += 2000;
-			if (hasPerk(PerkLib.FuelForTheFire)) temp += 2500;
+			if (hasPerk(PerkLib.FuelForTheFire)) temp += 1500;
+			if (hasPerk(PerkLib.Rage)) temp += 2000;
+			if (hasPerk(PerkLib.Anger)) temp += 2500;
 			if (hasPerk(PerkLib.TooAngryToDie)) temp += 3000;
 			if (hasPerk(PerkLib.PrestigeJobTempest)) temp += 500;
 			if (hasPerk(PerkLib.WarMageNovice)) temp += 50;

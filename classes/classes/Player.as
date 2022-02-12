@@ -4952,6 +4952,8 @@ use namespace CoC;
 				internalChimeraCounter++;
 			if (hasPerk(MutationsLib.TrachealSystemEvolved))
 				internalChimeraCounter++;
+			if (hasPerk(MutationsLib.TrachealSystemFinalForm))
+				internalChimeraCounter++;
 			if (hasPerk(MutationsLib.TwinHeart))
 				internalChimeraCounter++;
 			if (hasPerk(MutationsLib.TwinHeartPrimitive))
@@ -5661,9 +5663,11 @@ use namespace CoC;
 				beeCounter++;
 			if (beeCounter > 0 && hasPerk(MutationsLib.TrachealSystem))
 				beeCounter++;
-			if (beeCounter > 4 && hasPerk(MutationsLib.TrachealSystemPrimitive))
+			if (beeCounter > 3 && hasPerk(MutationsLib.TrachealSystemPrimitive))
 				beeCounter++;
-			if (beeCounter > 8 && hasPerk(MutationsLib.TrachealSystemEvolved))
+			if (beeCounter > 6 && hasPerk(MutationsLib.TrachealSystemEvolved))
+				beeCounter++;
+			if (beeCounter > 9 && hasPerk(MutationsLib.TrachealSystemFinalForm))
 				beeCounter++;
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				beeCounter += 50;
@@ -6300,18 +6304,6 @@ use namespace CoC;
 				spiderCounter--;
 			if (hasPartialCoat(Skin.CHITIN))
 				spiderCounter++;
-			if (hasPerk(MutationsLib.ArachnidBookLung))
-				spiderCounter+=2;
-			if (hasPerk(MutationsLib.ArachnidBookLungPrimitive))
-				spiderCounter+=2;
-			if (hasPerk(MutationsLib.ArachnidBookLungEvolved))
-				spiderCounter+=2;
-			if (spiderCounter > 0 && hasPerk(MutationsLib.TrachealSystem))
-				spiderCounter++;
-			if (spiderCounter > 4 && hasPerk(MutationsLib.TrachealSystemPrimitive))
-				spiderCounter++;
-			if (spiderCounter > 8 && hasPerk(MutationsLib.TrachealSystemEvolved))
-				spiderCounter++;
 			if (hasStatusEffect(StatusEffects.BlackNipples))
 				spiderCounter++;
 			if (hasPerk(PerkLib.SpiderOvipositor))
@@ -6321,6 +6313,20 @@ use namespace CoC;
 			if (hasPerk(MutationsLib.VenomGlandsPrimitive))
 				spiderCounter++;
 			if (hasPerk(MutationsLib.VenomGlandsEvolved))
+				spiderCounter++;
+			if (hasPerk(MutationsLib.ArachnidBookLung))
+				spiderCounter+=2;
+			if (hasPerk(MutationsLib.ArachnidBookLungPrimitive))
+				spiderCounter+=2;
+			if (hasPerk(MutationsLib.ArachnidBookLungEvolved))
+				spiderCounter+=2;
+			if (spiderCounter > 0 && hasPerk(MutationsLib.TrachealSystem))
+				spiderCounter++;
+			if (spiderCounter > 3 && hasPerk(MutationsLib.TrachealSystemPrimitive))
+				spiderCounter++;
+			if (spiderCounter > 6 && hasPerk(MutationsLib.TrachealSystemEvolved))
+				spiderCounter++;
+			if (spiderCounter > 9 && hasPerk(MutationsLib.TrachealSystemFinalForm))
 				spiderCounter++;
 			if ((hasPerk(MutationsLib.VenomGlands) || hasPerk(MutationsLib.TrachealSystem)) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
 				spiderCounter++;
@@ -8588,9 +8594,11 @@ use namespace CoC;
 				scorpionCounter++;
 			if (scorpionCounter > 0 && hasPerk(MutationsLib.TrachealSystem))
 				scorpionCounter++;
-			if (scorpionCounter > 4 && hasPerk(MutationsLib.TrachealSystemPrimitive))
+			if (scorpionCounter > 3 && hasPerk(MutationsLib.TrachealSystemPrimitive))
 				scorpionCounter++;
-			if (scorpionCounter > 8 && hasPerk(MutationsLib.TrachealSystemEvolved))
+			if (scorpionCounter > 6 && hasPerk(MutationsLib.TrachealSystemEvolved))
+				scorpionCounter++;
+			if (scorpionCounter > 9 && hasPerk(MutationsLib.TrachealSystemFinalForm))
 				scorpionCounter++;
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				scorpionCounter += 50;
@@ -8629,23 +8637,26 @@ use namespace CoC;
 				mantisCounter += 4;
 			if (hasPerk(PerkLib.MantisOvipositor))
 				mantisCounter++;
-			if (mantisCounter > 0 && hasPerk(MutationsLib.TrachealSystem))
-				mantisCounter++;
-			if (mantisCounter > 4 && hasPerk(MutationsLib.TrachealSystemPrimitive))
-				mantisCounter++;
-			if (mantisCounter > 8 && hasPerk(MutationsLib.TrachealSystemEvolved))
-				mantisCounter++;
 			if (hasPerk(MutationsLib.MantislikeAgility))
 				mantisCounter++;
 			if (hasPerk(MutationsLib.MantislikeAgilityPrimitive))
 				mantisCounter++;
 			if (hasPerk(MutationsLib.MantislikeAgilityEvolved))
 				mantisCounter++;
+			if (mantisCounter > 0 && hasPerk(MutationsLib.TrachealSystem))
+				mantisCounter++;
+			if (mantisCounter > 3 && hasPerk(MutationsLib.TrachealSystemPrimitive))
+				mantisCounter++;
+			if (mantisCounter > 6 && hasPerk(MutationsLib.TrachealSystemEvolved))
+				mantisCounter++;
+			if (mantisCounter > 9 && hasPerk(MutationsLib.TrachealSystemFinalForm))
+				mantisCounter++;
 			if ((hasPerk(MutationsLib.TrachealSystem) || hasPerk(MutationsLib.MantislikeAgility)) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
 				mantisCounter++;
 			if ((hasPerk(MutationsLib.TrachealSystemPrimitive) || hasPerk(MutationsLib.MantislikeAgilityPrimitive)) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
 				mantisCounter++;
 			if ((hasPerk(MutationsLib.TrachealSystemEvolved) || hasPerk(MutationsLib.MantislikeAgilityEvolved)) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
+				mantisCounter++;
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				mantisCounter += 50;
 			if (hasPerk(PerkLib.AscensionHybridTheory) && mantisCounter >= 4)
@@ -9095,11 +9106,13 @@ use namespace CoC;
 				cancerCounter += 2;
 			if (hasPerk(MutationsLib.TwinHeartEvolved))
 				cancerCounter += 2;
-			if (hasPerk(MutationsLib.TrachealSystem))
+			if (cancerCounter > 0 && hasPerk(MutationsLib.TrachealSystem))
 				cancerCounter++;
-			if (hasPerk(MutationsLib.TrachealSystemPrimitive))
+			if (cancerCounter > 3 && hasPerk(MutationsLib.TrachealSystemPrimitive))
 				cancerCounter++;
-			if (hasPerk(MutationsLib.TrachealSystemEvolved))
+			if (cancerCounter > 6 && hasPerk(MutationsLib.TrachealSystemEvolved))
+				cancerCounter++;
+			if (cancerCounter > 9 && hasPerk(MutationsLib.TrachealSystemFinalForm))
 				cancerCounter++;
 			if ((hasPerk(MutationsLib.TwinHeart) || hasPerk(MutationsLib.TrachealSystem)) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
 				cancerCounter++;
@@ -9778,7 +9791,7 @@ use namespace CoC;
 				plantCounter -= 7;
 			if (yggdrasilScore() >= 10)
 				plantCounter -= 4;
-		//	if (scorpionCounter > 0 && hasPerk(PerkLib.TrachealSystemEvolved))
+		//	if (scorpionCounter > 0 && hasPerk(MutationsLib.TrachealSystemEvolved))
 		//		plantCounter++;
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				plantCounter += 50;
@@ -10787,11 +10800,13 @@ use namespace CoC;
 			if (hasPerk(MutationsLib.ArachnidBookLungEvolved))
 				score+=2;
 			// Perk +3 (Tracheal)
-			if (hasPerk(PerkLib.TrachealSystem))
+			if (hasPerk(MutationsLib.TrachealSystem))
 				score++;
-			if (hasPerk(PerkLib.TrachealSystemEvolved))
+			if (hasPerk(MutationsLib.TrachealSystemPrimitive))
 				score++;
-			if (hasPerk(PerkLib.TrachealSystemFinalForm))
+			if (hasPerk(MutationsLib.TrachealSystemEvolved))
+				score++;
+			if (hasPerk(MutationsLib.TrachealSystemFinalForm))
 				score++;
 			// Perk +3 (VenomGland)
 			if (hasPerk(MutationsLib.VenomGlands))
@@ -10895,24 +10910,6 @@ use namespace CoC;
 			advancedJobs3 -= currentAdvancedJobs();
 			return advancedJobs3;
 		}
-		public function currentHiddenJobs():Number {
-			var hiddenJobs1:Number = 0;
-			if (hasPerk(PerkLib.HiddenJobBloodDemon))
-				hiddenJobs1++;
-			if (hasPerk(PerkLib.HiddenJobAsura))
-				hiddenJobs1++;
-			return hiddenJobs1;
-		}
-		public function maxHiddenJobs():Number {
-			var hiddenJobs2:Number = 1;
-			return hiddenJobs2;
-		}
-		public function freeHiddenJobsSlots():Number {
-			var hiddenJobs3:Number = 0;
-			hiddenJobs3 += maxHiddenJobs();
-			hiddenJobs3 -= currentHiddenJobs();
-			return hiddenJobs3;
-		}
 		public function currentPrestigeJobs():Number {
 			var prestigeJobs1:Number = 0;
 			if (hasPerk(PerkLib.PrestigeJobArcaneArcher))
@@ -10960,6 +10957,24 @@ use namespace CoC;
 			prestigeJobs3 += maxPrestigeJobs();
 			prestigeJobs3 -= currentPrestigeJobs();
 			return prestigeJobs3;
+		}
+		public function currentHiddenJobs():Number {
+			var hiddenJobs1:Number = 0;
+			if (hasPerk(PerkLib.HiddenJobBloodDemon))
+				hiddenJobs1++;
+			if (hasPerk(PerkLib.HiddenJobAsura))
+				hiddenJobs1++;
+			return hiddenJobs1;
+		}
+		public function maxHiddenJobs():Number {
+			var hiddenJobs2:Number = 1;
+			return hiddenJobs2;
+		}
+		public function freeHiddenJobsSlots():Number {
+			var hiddenJobs3:Number = 0;
+			hiddenJobs3 += maxHiddenJobs();
+			hiddenJobs3 -= currentHiddenJobs();
+			return hiddenJobs3;
 		}
 
 		public function maxHeartMutations():Number {

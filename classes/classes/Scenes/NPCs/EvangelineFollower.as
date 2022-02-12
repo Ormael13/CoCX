@@ -1253,7 +1253,7 @@ private function InternalMutations0(page:int = 0):void {
 		for each (var mutate:Array in MutationsLib.mutationsArray("CNerv/Sys")){
 			mutationsAssistant(mutate, btnNum++, "central nerv-sys");
 		}
-		addButton(14, "Back", InternalMutations0);
+		addButton(14, "Back", curry(InternalMutations0, 1));
 	}
 
 	function InternalMutationsThyroidGlands():void{
