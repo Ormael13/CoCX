@@ -331,7 +331,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	          break;
 	        case Skin.PATTERN_RED_PANDA_UNDERBODY:
 	          if (!options.color2) options.color2 = "black";
-	          desc += "\n\nA ripple spreads through your fur as your underside changes colors, becoming " + options.color2 + " rather than " + color + ". <b>Now your underside fur is " + options.color2 + ".";
+	          desc += "\n\nA ripple spreads through your fur as your underside changes colors, becoming " + options.color2 + " rather than " + color + ". <b>Now your underside fur is " + options.color2 + ".</b>";
 	          break;
 	        }
 	      }
