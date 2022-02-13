@@ -3189,7 +3189,7 @@
             </case>
 			<case values="LowerBody.ATLACH_NACHA">
                 <hide part="legs/*"/>
-				<hide part="tail/spider"/>
+				<hide part="tail/*"/>
                 <show part="legs_fg/atlach"/>
 				<show part="overGenitals/atlach"/>
             </case>
@@ -3705,11 +3705,15 @@
 				</if>
             </case>
             <case values="Tail.SPIDER_ADBOMEN">
-				<if test="isTaur()">
-					<show part="tail/spider_taur"/>
+				<if test="lowerBody == LowerBody.ATLACH_NACHA">
 					<else>
-						<show part="tail/spider"/>
-					</else>
+						<if test="isTaur()">
+							<show part="tail/spider_taur"/>
+							<else>
+								<show part="tail/spider"/>
+							</else>
+						</if>
+					</else>		
 				</if>
             </case>
             <case values="Tail.BEE_ABDOMEN">

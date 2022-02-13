@@ -243,7 +243,7 @@ public class MutationsLib
 		public static const ManticoreMetabolismPrimitive:PerkType = mk("Manticore Metabolism (Primitive)", "Manticore Metabolism (Primitive)",
 				"Increase by 100% of base value (per NG+ tier) max cap of speed boost for a five hours longer after an intake of cum, venom recharge rate when using Manticore Feed special is 2x higher and increase max Hunger cap by 50 (if PC have Hunger bar active).");
 		public static const ManticoreMetabolismEvolved:PerkType = mk("Manticore Metabolism (Evolved)", "Manticore Metabolism (Evolved)",
-				".");
+				"All manticore tail spikes deals twice as much damage and lust damage. Speed boost from feeding is increased by another 100%. While having a manticore tail all straddle damage is greatly increased and direct tail feeding is twice as hard to remove.");
 		public static const MantislikeAgility:PerkType = mk("Mantis-like Agility", "Mantis-like Agility",
 				"Your altered musculature allows to increase your natural agility and speed. If somehow you would have some type of natural armor or even thicker skin this increase could be even greater...");
 		public static const MantislikeAgilityPrimitive:PerkType = mk("Mantis-like Agility (Primitive)", "Mantis-like Agility (Primitive)",
@@ -440,7 +440,7 @@ public class MutationsLib
 				MutationsList.push([DrakeLungs, DrakeLungsPrimitive, DrakeLungsEvolved]);
 			}
 			function mutationsMetabolism():void{
-				MutationsList.push([ManticoreMetabolism, ManticoreMetabolismPrimitive]);
+				MutationsList.push([ManticoreMetabolism, ManticoreMetabolismPrimitive, ManticoreMetabolismEvolved]);
 				MutationsList.push([DisplacerMetabolism, DisplacerMetabolismPrimitive]);
 				//MutationsList.push([SlimeMetabolism, SlimeMetabolismEvolved]);
 			}
@@ -1031,6 +1031,11 @@ public class MutationsLib
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.minotaurScore() >= 12;
 						}, "Minotaur race");
+				ManticoreMetabolismEvolved.requireLevel(30)
+						.requirePerk(ManticoreMetabolismPrimitive)
+						.requireCustomFunction(function (player:Player):Boolean {
+							return player.manticoreScore() >= 15 && player.tailType == Tail.MANTICORE_PUSSYTAIL;
+						}, "Manticore race and tail");
 				MantislikeAgilityEvolved.requireLevel(30).requirePerk(MantislikeAgilityPrimitive).requireCustomFunction(function (player:Player):Boolean {
 					return player.mantisScore() >= 15;
 				}, "Mantis race");

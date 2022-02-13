@@ -4807,6 +4807,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
 		if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
+		if (player.hasPerk(MutationsLib.ManticoreMetabolismEvolved)) damage *= 2;
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		var lustdamage:Number = 35 + rand(player.lib / 10);
 		if (player.level < 10) damage += 20 + (player.level * 3);
@@ -4815,17 +4816,18 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else damage += 80;
 		//Lust damage!
 		lustdamage *= 0.7;
-		if (player.findPerk(PerkLib.SensualLover) >= 0) lustdamage += 2;
-		if (player.findPerk(PerkLib.Seduction) >= 0) lustdamage += 5;
-		if (player.findPerk(PerkLib.SluttySeduction) >= 0) lustdamage += player.perkv1(PerkLib.SluttySeduction);
-		if (player.findPerk(PerkLib.WizardsEnduranceAndSluttySeduction) >= 0) lustdamage += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
+		if (player.hasPerk(PerkLib.SensualLover)) lustdamage += 2;
+		if (player.hasPerk(PerkLib.Seduction)) lustdamage += 5;
+		if (player.hasPerk(PerkLib.SluttySeduction)) lustdamage += player.perkv1(PerkLib.SluttySeduction);
+		if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) lustdamage += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
 		if (bimbo || bro || futa) lustdamage += 5;
-		if (player.findPerk(PerkLib.FlawlessBody) >= 0) lustdamage += 10;
+		if (player.hasPerk(PerkLib.FlawlessBody)) lustdamage += 10;
 		lustdamage += scalingBonusLibido() * 0.1;
 		if (player.hasPerk(PerkLib.EromancyExpert)) lustdamage *= 1.5;
-		if (player.findPerk(PerkLib.JobSeducer) >= 0) lustdamage += player.teaseLevel * 3;
+		if (player.hasPerk(PerkLib.JobSeducer)) lustdamage += player.teaseLevel * 3;
 		if (player.hasPerk(PerkLib.RacialParagon)) lustdamage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) lustdamage *= 1.50;
+		if (player.hasPerk(MutationsLib.ManticoreMetabolismEvolved)) lustdamage *= 2;
 		//Determine if critical!
 		var crit:Boolean = false;
 		var critChance:Number;

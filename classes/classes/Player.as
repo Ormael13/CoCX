@@ -10291,8 +10291,6 @@ use namespace CoC;
 				manticoreCounter++;
 			if (tongue.type == Tongue.CAT)
 				manticoreCounter++;
-			if (vaginaType() == VaginaClass.MANTICORE)
-				manticoreCounter++;
 			if (wings.type == Wings.MANTICORE_SMALL)
 				manticoreCounter++;
 			if (wings.type == Wings.MANTICORE_LARGE)
@@ -10301,6 +10299,8 @@ use namespace CoC;
 				manticoreCounter++;
 			if (cocks.length > 0)
 				manticoreCounter -= 3;
+			if (cor >= 20)
+				manticoreCounter++;
 			if (hasPerk(PerkLib.CatlikeNimbleness))
 				manticoreCounter++;
 			if (hasPerk(PerkLib.CatlikeNimblenessEvolved))
@@ -10310,6 +10310,8 @@ use namespace CoC;
 			if (hasPerk(MutationsLib.ManticoreMetabolism))
 				manticoreCounter++;
 			if (hasPerk(MutationsLib.ManticoreMetabolismPrimitive))
+				manticoreCounter++;
+			if (hasPerk(MutationsLib.ManticoreMetabolismEvolved))
 				manticoreCounter++;
 			if ((hasPerk(MutationsLib.ManticoreMetabolism) || hasPerk(PerkLib.CatlikeNimbleness)) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
 				manticoreCounter++;
@@ -15325,10 +15327,12 @@ use namespace CoC;
 		public function manticoreFeed():void {
 			if (hasPerk(MutationsLib.ManticoreMetabolism)) {
 				if (hasPerk(MutationsLib.ManticoreMetabolismPrimitive)) {
-					if (buff("Feeding Euphoria").getValueOfStatBuff("spe.mult") < 0.50 + (0.5 * (1 + newGamePlusMod()))) {
+					var PowerMultiplier:Number = 1;
+					if (hasPerk(MutationsLib.ManticoreMetabolismEvolved)) PowerMultiplier *= 2;
+					if (buff("Feeding Euphoria").getValueOfStatBuff("spe.mult") < (0.50*PowerMultiplier) + (0.5 * (1 + newGamePlusMod()))) {
 						buff("Feeding Euphoria").addStats({"spe.mult": 0.5}).withText("Feeding Euphoria!").forHours(15);
 					}
-					else if (buff("Feeding Euphoria").getValueOfStatBuff("spe.mult") >= 1.50 + (1.5 * (1 + newGamePlusMod()))) {
+					else if (buff("Feeding Euphoria").getValueOfStatBuff("spe.mult") >= (1.50*PowerMultiplier) + (1.5 * (1 + newGamePlusMod()))) {
 						buff("Feeding Euphoria").addDuration(3);
 					}
 				} else {
