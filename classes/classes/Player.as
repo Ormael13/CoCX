@@ -4597,7 +4597,7 @@ use namespace CoC;
 					race = "incomplete Atlach Nacha"
 				}
 			}
-			if (chimeraScore() >= 3)
+			if (chimeraScore() >= 3 && internalChimeraRating() > 0)
 			{
 				race = "chimera";
 			}
