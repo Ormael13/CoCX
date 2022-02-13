@@ -12078,7 +12078,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.JobSeducer)) StraddleDamage += player.teaseLevel * 3;
         else StraddleDamage += player.teaseLevel * 2;
         if (player.hasPerk(PerkLib.JobCourtesan) && monster.hasPerk(PerkLib.EnemyBossType)) StraddleDamage *= 1.2;
-        if (player.hasPerk(MutationsLib.ManticoreMetabolismEvolved)) StraddleDamage *= 2;
+        if (player.hasPerk(MutationsLib.ManticoreMetabolismEvolved) && player.tail.type == Tail.MANTICORE_PUSSYTAIL) StraddleDamage *= 2;
 
         //partial skins bonuses
         switch (player.coatType()) {
@@ -12272,7 +12272,7 @@ public class Combat extends BaseContent {
         outputText("Taking advantage of your opponent precary position you pull and grab one of your spike and begins to manicaly " +
                 "impale your opponent repetitively with it injecting venom over and over again while inflicting grievous wounds. " +
                 "Your victim eventually starts to struggles and knock the spike out of your hand but the damage is done.");
-        if (player.hasPerk(MutationsLib.ManticoreMetabolismEvolved)) StraddleDamage *= 2;
+        if (player.hasPerk(MutationsLib.ManticoreMetabolismEvolved) && player.tail.type == Tail.MANTICORE_PUSSYTAIL) StraddleDamage *= 2;
         monster.teased(monster.lustVuln * StraddleDamage, false);
         if (Randomcrit) outputText(" <b>Critical!</b>");
 		var dam4Ba:Number = 1;
