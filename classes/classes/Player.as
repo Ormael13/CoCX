@@ -4237,8 +4237,8 @@ use namespace CoC;
 			}
 			if (TopRace == "apophis") {
 				if (lowerBody == 3 && TopScore >= 23) {
-					if (TopScore >= 26) race = "apophis";
-					else race = "unhallowed apophis";
+					if (TopScore >= 26) race = "unhallowed apophis";
+					else race = "apophis";
 				}
 			}
 			if (TopRace == "fire snail") {

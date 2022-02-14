@@ -2314,13 +2314,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			//Gain venomancy if utherly toxic
 			if ((player.apophisScore() >= 23) && player.cor > 50 && !player.hasPerk(PerkLib.Venomancy)) {
-				outputText("\nYour inborn toxicity has reached such a peak that even your spells are now charged with venom. \n(<b>Gained Perk: Venomancy</b>)\"");
+				outputText("\nYour inborn toxicity has reached such a peak that even your spells are now charged with venom. \n\n(<b>Gained Perk: Venomancy</b>)\"");
 				player.createPerk(PerkLib.Venomancy, 0, 0, 0, 0);
 				needNext = true;
 			}
 			//Lose venomancy if not toxic
 			if ((player.apophisScore() < 23) && player.cor < 89 && player.hasPerk(PerkLib.Venomancy)) {
-				outputText("\nYour mystical powers over poison and toxins have waned. \n(<b>Lost Perk: Venomancy</b>)\"");
+				outputText("\nYour mystical powers over poison and toxins have waned. \n\n(<b>Lost Perk: Venomancy</b>)\"");
 				player.removePerk(PerkLib.Venomancy);
 				needNext = true;
 			}
