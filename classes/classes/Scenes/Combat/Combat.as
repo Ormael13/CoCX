@@ -762,8 +762,8 @@ public class Combat extends BaseContent {
 			} else {
 				outputText(replacetext);
 			}
-			if (sceneimpl == false) enemyAI();
-			if (sceneimpl == true) SceneLib.combat.enemyAIImpl();
+			if (!sceneimpl) enemyAI();
+			if (sceneimpl) SceneLib.combat.enemyAIImpl();
 			return true;
 		}
 		return false;
