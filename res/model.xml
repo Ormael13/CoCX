@@ -2067,6 +2067,9 @@
 				<show part="clothCape/mindbreaker"/>
 				<show part="clothCape_bg/mindbreaker"/>
             </case>
+			<case values="RearBody.COBRA_HOOD">
+                <show part="back_bg/cobraHood"/>
+            </case>
             <default>
             </default>
         </switch>

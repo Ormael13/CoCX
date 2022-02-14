@@ -3443,6 +3443,7 @@ use namespace CoC;
 				{name: 'minotaur', score: minotaurScore(), minscore: 4},
 				{name: 'mouse', score: mouseScore(), minscore: 4},
 				{name: 'naga', score: nagaScore(), minscore: 4},
+				{name: 'apophis', score: apophisScore(), minscore: 23},
 				{name: 'nekomata', score: nekomataScore(), minscore: 10},
 				{name: 'oni', score: oniScore(), minscore: 6},
 				{name: 'oomukade', score: oomukadeScore(), minscore: 15},
@@ -4232,6 +4233,12 @@ use namespace CoC;
 				if (lowerBody == 3 && TopScore >= 4) {
 					if (TopScore >= 8) race = "naga";
 					else race = "half-naga";
+				}
+			}
+			if (TopRace == "apophis") {
+				if (lowerBody == 3 && TopScore >= 23) {
+					if (TopScore >= 26) race = "apophis";
+					else race = "unhallowed apophis";
 				}
 			}
 			if (TopRace == "fire snail") {
@@ -7037,7 +7044,7 @@ use namespace CoC;
 				ApophisCounter++;
 			if (ears.type == Ears.SNAKE)
 				ApophisCounter++;
-			if (horns.type == Horns.COBRA_HOOD)
+			if (rearBody.type == RearBody.COBRA_HOOD)
 				ApophisCounter++;
 			if (wings.type == Wings.NONE)
 				ApophisCounter+=4;
