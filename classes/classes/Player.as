@@ -7027,7 +7027,7 @@ use namespace CoC;
 
 		//Naga score
 		public function apophisScore():Number {
-			Begin("Player","racialScore","naga");
+			Begin("Player","racialScore","apophis");
 			var ApophisCounter:Number = 0;
 			if (isNaga()) {
 				ApophisCounter += 3;
