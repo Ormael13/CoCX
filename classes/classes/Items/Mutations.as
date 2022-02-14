@@ -5185,7 +5185,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Ears!
-        if (player.ears.type != Ears.SNAKE && player.eyes.type == Eyes.SNAKE && changes < changeLimit && rand(3) == 0) {
+        if (player.ears.type != Ears.SNAKE && (player.eyes.type == Eyes.SNAKE || player.eyes.type == Eyes.SNAKEFIENDISH) && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
 			transformations.EarsSnake.applyEffect();
             changes++;

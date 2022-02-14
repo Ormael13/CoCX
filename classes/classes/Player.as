@@ -7034,7 +7034,7 @@ use namespace CoC;
 				if (arms.type == Arms.HUMAN)
 					ApophisCounter++;
 			}
-			if (hairColor == InCollection(hairColor, ("black", "midnight", "midnight black")))
+			if (InCollection(hairColor, ("black", "midnight","midnight black")))
 				ApophisCounter++;
 			if (skinTone == "light purple")
 				ApophisCounter++;
