@@ -1966,7 +1966,7 @@
             <case values="Eyes.FOX,Eyes,Eyes.CAT,Eyes.LIZARD,Eyes.SNAKE,Eyes.GORGON,Eyes.DRACONIC,Eyes.ONI,Eyes.ELF,Eyes.VAMPIRE,Eyes.WEASEL,Eyes.FIENDISH">
                 <show part="eyes/cat"/>
             </case>
-            <case values="Eyes.DEVIL,Eyes.FROSTWYRM">
+            <case values="Eyes.DEVIL,Eyes.FROSTWYRM,Eyes.SNAKEFIENDISH">
                 <show part="eyes/devil"/>
             </case>
             <case values="Eyes.RAIJU,Eyes.MANTICORE">

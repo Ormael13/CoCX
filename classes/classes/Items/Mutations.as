@@ -5182,7 +5182,6 @@ public final class Mutations extends MutationsHelper {
         if (type == 1 && player.hasPartialCoat(Skin.SCALES) && player.eyes.type != Eyes.SNAKEFIENDISH && rand(4) == 0 && changes < changeLimit) {
             outputText("[pg]");
             transformations.EyesSnakeFiendish.applyEffect();
-            player.eyes.colour = "yellow";
             changes++;
         }
         //Ears!
