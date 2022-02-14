@@ -1549,6 +1549,18 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				outputText(")</b>\n");
 				needNext = true;
 			}
+			//Dark Affinity
+			if (player.vampireScore() >= 15 || player.apophisScore() >= 23 && (!player.hasPerk(PerkLib.DarknessAffinity))) {
+				outputText("\nYou at home in darkness seeing as clearly in the shadows wich you find comforting as in broad daylight.\n\n(<b>Gained Perks: Darkness Affinity</b>)\n");
+				player.createPerk(PerkLib.DarknessAffinity, 0, 0, 0, 0);
+				needNext = true;
+			}
+			else if (player.vampireScore() < 15 && player.apophisScore() < 23 && player.hasPerk(PerkLib.DarknessAffinity)) {
+				outputText("\nThe pitch black darkness becomes hostile toward you again as you lose your affinity toward it.\n\n<b>(Lost Perks: Darkness Affinity");
+				player.removePerk(PerkLib.DarknessAffinity);
+				outputText(")</b>\n");
+				needNext = true;
+			}
 			if ((player.sirenScore() >=  10 || player.harpyScore() >=  8 || player.phoenixScore() >=  10 || player.thunderbirdScore() >=  10) && !player.hasPerk(PerkLib.HarpySong)) {
 				outputText("\n Your voice sound like magicaly entrancing music to your ears now, it would seem you have gained the infamous magicaly compeling voices common to harpies. <b>Gained Perks: Harpy Song</b>)\n");
 				player.createPerk(PerkLib.HarpySong, 0, 0, 0, 0);
