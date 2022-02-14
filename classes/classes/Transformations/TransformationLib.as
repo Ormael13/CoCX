@@ -4017,7 +4017,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 				player.eyes.type = Eyes.SNAKEFIENDISH;
 				if (doOutput) outputText(desc);
-				Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.SNAKEFIENDISH));
+				//Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.SNAKEFIENDISH));
 			},
 			// is present
 			function (): Boolean {
