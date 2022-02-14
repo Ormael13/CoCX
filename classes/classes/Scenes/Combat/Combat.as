@@ -9109,6 +9109,12 @@ public class Combat extends BaseContent {
                 return;
             }
         }
+        //Apophis Unholy Aura
+        if (player.apophisScore() >= 23){
+            outputText("Your unholy aura seeps into [monster a] [monster name] slowly and insidiously eroding its resiliance to your unholy charms.\n\n");
+            monster.lustVuln += 0.10;
+        }
+        //Arousing Aura
         if (player.hasPerk(PerkLib.ArousingAura) && monster.lustVuln > 0 && player.cor >= 70) {
             if (monster.lust < (monster.maxLust() * 0.5)) outputText("Your aura seeps into [monster a] [monster name] but does not have any visible effects just yet.\n\n");
             else if (monster.lust < (monster.maxLust() * 0.6)) {
@@ -13696,6 +13702,38 @@ public class Combat extends BaseContent {
         outputText("You initiate a healing spell. ");
         CombatAbilities.Heal.doEffect(false);
         outputText("\n\nIt's only when you finish your casting that [themonster] name snaps out of the hypnosis and realise what is going on. ");
+        if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+        statScreenRefresh();
+        flags[kFLAGS.SPELLS_CAST]++;
+        if (!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell, 0, 0, 0, 0);
+        monster.removeStatusEffect(StatusEffects.HypnosisNaga);
+        spellPerkUnlock();
+        enemyAI();
+    }
+
+    public function HypnosisDarknessShard():void {
+        clearOutput();
+        useMana(30, USEMANA_BLACK);
+        outputText("You initiate a Darkness spell. ");
+        CombatAbilities.DarknessShard.doEffect(false);
+        CombatAbilities.DarknessShard.doEffect(false);
+        outputText("\n\nIt's only when you finish your casting that [themonster] name snaps out of the hypnosis and realise what is going on just in time to receive a surprise cast taking heavy damage from your magic as you unleash darkness shard.");
+        if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
+        statScreenRefresh();
+        flags[kFLAGS.SPELLS_CAST]++;
+        if (!player.hasStatusEffect(StatusEffects.CastedSpell)) player.createStatusEffect(StatusEffects.CastedSpell, 0, 0, 0, 0);
+        monster.removeStatusEffect(StatusEffects.HypnosisNaga);
+        spellPerkUnlock();
+        enemyAI();
+    }
+
+    public function HypnosisDuskWave():void {
+        clearOutput();
+        useMana(30, USEMANA_BLACK);
+        outputText("You initiate a Darkness spell. ");
+        CombatAbilities.DuskWave.doEffect(false);
+        CombatAbilities.DuskWave.doEffect(false);
+        outputText("\n\nIt's only when you finish your casting that [themonster] name snaps out of the hypnosis and realise what is going on just in time to receive a surprise cast taking heavy damage from your magic as you unleash dusk wave.");
         if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
         statScreenRefresh();
         flags[kFLAGS.SPELLS_CAST]++;

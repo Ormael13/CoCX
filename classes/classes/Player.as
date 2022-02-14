@@ -7034,14 +7034,20 @@ use namespace CoC;
 				if (arms.type == Arms.HUMAN)
 					ApophisCounter++;
 			}
+			if (hairColor == InCollection(hairColor, ("black", "midnight", "midnight black")))
+				ApophisCounter++;
+			if (skinTone == "light purple")
+				ApophisCounter++;
+			if (InCollection(coatColor, ["black", "midnight", "midnight black"]))
+				ApophisCounter++;
 			if (tongue.type == Tongue.SNAKE)
 				ApophisCounter++;
 			if (faceType == Face.SNAKE_FANGS)
 				ApophisCounter++;
 			if (hasPartialCoat(Skin.SCALES))
 				ApophisCounter++;
-			if (eyes.type == Eyes.SNAKEFIENDISH)
-				ApophisCounter++;
+			if (eyes.type == Eyes.SNAKEFIENDISH && InCollection(eyes.colour,"yellow"))
+				ApophisCounter+=2;
 			if (ears.type == Ears.SNAKE)
 				ApophisCounter++;
 			if (rearBody.type == RearBody.COBRA_HOOD)

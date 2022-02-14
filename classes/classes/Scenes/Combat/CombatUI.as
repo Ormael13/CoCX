@@ -291,6 +291,10 @@ public class CombatUI extends BaseCombatContent {
 			addButton(2, "Coil", combat.HypnosisCoil);
 			vampireBiteDuringGrapple(3);
 			addButton(4, "Maintain", combat.HypnosisMaintain);
+			if (player.apophisScore() >= 23){
+				addButton(5, "D.Shard", combat.HypnosisDarknessShard);
+				addButton(6, "D.Wave", combat.HypnosisDuskWave);
+			}
 		} else if (monster.hasStatusEffect(StatusEffects.HypnosisNaga) && monster.hasStatusEffect(StatusEffects.Constricted)) {
 			menu();
 			addButton(0, "Squeeze", SceneLib.desert.nagaScene.naggaSqueeze).hint("Squeeze some HP out of your opponent! Break hypnosis! \n\nFatigue Cost: " + physicalCost(20) + "");
