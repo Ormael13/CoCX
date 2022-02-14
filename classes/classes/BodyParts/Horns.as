@@ -264,7 +264,7 @@ public class Horns extends BodyPart {
 		appearanceDescFunc: function(player: *): String {
 			var desc: String = "Two large sized spiraling horns grow from the side of your head, similar to those of a ram or frost wyrm. They kind of look great";
 
-			if (player.lowerBody == LowerBody.FROSTWYRM) desc += ", especially with your fur, which makes you look like a sheep serpentine dragon";
+			if (player.lowerBody == LowerBody.FROSTWYRM) desc += ", especially with your fluffy fur, which makes you look like a sheep serpentine dragon";
 
 			desc += ".";
 
@@ -294,6 +294,18 @@ public class Horns extends BodyPart {
 
 			if (player.horns.count > 0) desc += " Two large-sized horns grow from the side of your head. The faint bioluminescent specks that line the length of each horn enhance with a mesmerizing glow. At the tip of each horn is a bright red glow, both as a gentle warning and an enthralling lure to unwary prey.";
 
+			return desc;
+		}
+	});
+
+	public static const COBRA_HOOD: int = 22;
+	EnumValue.add(Types, COBRA_HOOD, "COBRA_HOOD", {
+		name:"cobra hood",
+		appearanceDescFunc: function(player: *): String {
+			var desc: String = "";
+
+			if (player.horns.count > 0) desc += " Behind your hair is a large cobra hood decorated with intimating red triangular patterns.";
+			if (player.faceType == Face.SNAKE_FANGS) desc += " Anyone can tell just from the vibrant colors that you are highly venomous.";
 			return desc;
 		}
 	});

@@ -245,6 +245,11 @@ public class Hair extends BodyPart {
 		adjective: "long fourwind"
 	});
 
+	public static const TAURPONYTAIL:int  = 9;
+	EnumValue.add(Styles, TAURPONYTAIL, "TAURPONYTAIL", {
+		adjective: "centaur ponytail"
+	});
+
 
 	public var color:String = "no";
 	public var length:Number = 0.0;

@@ -28,6 +28,7 @@ import classes.Scenes.Codex;
 import classes.Scenes.SceneLib;
 import classes.Stats.Buff;
 import classes.EngineCore;
+import classes.StatusEffectType;
 import classes.StatusEffects;
 import classes.VaginaClass;
 
@@ -852,9 +853,11 @@ public class CombatMagic extends BaseCombatContent {
 					damageB *= 1+(poisonScaling/10);
 					monster.teased(monster.lustVuln * damageB, false);
 					monster.statStore.addBuffObject({tou:-poisonScaling}, "Poison",{text:"Poison"});
-					if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
-							monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
-					} else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, 1, 0);
+					var venomType:StatusEffectType = StatusEffects.NagaVenom;
+					if (player.nagaScore() >= 23) venomType = StatusEffects.ApophisVenom;
+					if (monster.hasStatusEffect(venomType)) {
+							monster.addStatusValue(venomType, 3, 1);
+					} else monster.createStatusEffect(venomType, 0, 0, 1, 0);
 					player.tailVenom -= player.VenomWebCost();
 					flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
 					injections++;
