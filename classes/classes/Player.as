@@ -7018,6 +7018,65 @@ use namespace CoC;
 			return nagaCounter;
 		}
 
+		//Naga score
+		public function apophisScore():Number {
+			Begin("Player","racialScore","naga");
+			var ApophisCounter:Number = 0;
+			if (isNaga()) {
+				ApophisCounter += 3;
+				if (arms.type == Arms.HUMAN)
+					ApophisCounter++;
+			}
+			if (tongue.type == Tongue.SNAKE)
+				ApophisCounter++;
+			if (faceType == Face.SNAKE_FANGS)
+				ApophisCounter++;
+			if (hasPartialCoat(Skin.SCALES))
+				ApophisCounter++;
+			if (eyes.type == Eyes.SNAKEFIENDISH)
+				ApophisCounter++;
+			if (ears.type == Ears.SNAKE)
+				ApophisCounter++;
+			if (horns.type == Horns.COBRA_HOOD)
+				ApophisCounter++;
+			if (wings.type == Wings.NONE)
+				ApophisCounter+=4;
+			if (hasVagina() && (vaginaType() == VaginaClass.NAGA) || (lizardCocks() > 0))
+				ApophisCounter++;
+			if (cor >= 20)
+				ApophisCounter++;
+			if (cor >= 50)
+				ApophisCounter++;
+			if (cor >= 100)
+				ApophisCounter+=2;
+			if (hasPerk(MutationsLib.VenomGlands))
+				ApophisCounter++;
+			if (hasPerk(MutationsLib.VenomGlandsPrimitive))
+				ApophisCounter++;
+			if (hasPerk(MutationsLib.VenomGlandsEvolved))
+				ApophisCounter++;
+			if (hasPerk(MutationsLib.VenomGlands) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
+				ApophisCounter++;
+			if (hasPerk(MutationsLib.VenomGlandsPrimitive) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
+				ApophisCounter++;
+			if (hasPerk(MutationsLib.VenomGlandsEvolved) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
+				ApophisCounter++;
+			if (hasPerk(PerkLib.AscensionHybridTheory) && ApophisCounter >= 4)
+				ApophisCounter++;
+			if (hasPerk(PerkLib.AscensionCruelChimerasThesis) && ApophisCounter >= 8)
+				ApophisCounter += 1;
+			if (!isNaga() || hairType == Hair.GORGON || eyes.type == Eyes.GORGON || horns.type == Horns.DRACONIC_X4_12_INCH_LONG || horns.type == Horns.DRACONIC_X2 || tongue.type == Tongue.DRACONIC || wings.type == Wings.DRACONIC_SMALL || wings.type == Wings.DRACONIC_LARGE || wings.type == Wings.DRACONIC_HUGE || hairType == Hair.FEATHER || arms.type == Arms.HARPY || wings.type == Wings.FEATHERED_LARGE
+					|| lowerBody == LowerBody.HYDRA || arms.type == Arms.HYDRA)
+				ApophisCounter = 0;
+			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
+				ApophisCounter += 50;
+			if (isGargoyle()) ApophisCounter = 0;
+			if (hasPerk(PerkLib.ElementalBody)) ApophisCounter = 0;
+			ApophisCounter = finalRacialScore(ApophisCounter, Race.APOPHIS);
+			End("Player","racialScore");
+			return ApophisCounter;
+		}
+
 		//Gorgon score
 		public function gorgonScore():Number {
 			Begin("Player","racialScore","gorgon");
@@ -13262,6 +13321,19 @@ use namespace CoC;
 				} else {
 					maxStrCap2 += 20;
 					maxSpeCap2 += 40;
+				}
+			}
+			if (apophisScore() >= 23) {
+				if (apophisScore() >= 26) {
+					maxStrCap2 += 80;
+					maxTouCap2 += 80;
+					maxSpeCap2 += 100;
+					maxLibCap2 += 130;
+				} else {
+					maxStrCap2 += 70;
+					maxTouCap2 += 70;
+					maxSpeCap2 += 100;
+					maxLibCap2 += 105;
 				}
 			}
 			if (centaurScore() >= 8) {
