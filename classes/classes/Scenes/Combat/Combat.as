@@ -12115,6 +12115,7 @@ public class Combat extends BaseContent {
         damage = (damage * monster.lustVuln);
         if (SceneLib.urtaQuest.isUrta()) damage *= 2;
         damage = Math.round(damage);
+        return damage;
     }
 
     public function Straddle():void {
