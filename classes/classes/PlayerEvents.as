@@ -1550,7 +1550,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Dark Affinity
-			if (player.vampireScore() >= 15 || player.apophisScore() >= 23 && (!player.hasPerk(PerkLib.DarknessAffinity))) {
+			if ((player.vampireScore() >= 15 || player.apophisScore() >= 23) && (!player.hasPerk(PerkLib.DarknessAffinity))) {
 				outputText("\nYou at home in darkness seeing as clearly in the shadows wich you find comforting as in broad daylight.\n\n(<b>Gained Perks: Darkness Affinity</b>)\n");
 				player.createPerk(PerkLib.DarknessAffinity, 0, 0, 0, 0);
 				needNext = true;
