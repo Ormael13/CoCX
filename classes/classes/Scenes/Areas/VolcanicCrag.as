@@ -69,6 +69,7 @@ public class VolcanicCrag extends BaseContent
 					SceneLib.forgefatherScene.meetForgefather();
 				}
 				else SceneLib.forgefatherScene.repeatForgefather();
+				return;
 			}
 			select = choice[rand(choice.length)];
 			switch(select) {

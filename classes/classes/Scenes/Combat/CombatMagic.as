@@ -468,10 +468,10 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.TraditionalMageVI) && player.isUsingStaff() && player.isUsingTome()) mod += 1;
 		if (player.isGargoyle() && Forgefather.material == "alabaster")
 			{
-				if (Forgefather.refinement == 0) mod += (.15);
-				if (Forgefather.refinement == 1) mod += (.25);
-				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) mod += (.5);
-				if (Forgefather.refinement == 4) mod += (1);
+				if (Forgefather.refinement == 1) mod += (.15);
+				if (Forgefather.refinement == 2) mod += (.25);
+				if (Forgefather.refinement == 3 || Forgefather.refinement == 4) mod += (.5);
+				if (Forgefather.refinement == 5) mod += (1);
 			}
 		if (player.hasPerk(PerkLib.Ambition)) {
 			mod += player.perkv2(PerkLib.Ambition);

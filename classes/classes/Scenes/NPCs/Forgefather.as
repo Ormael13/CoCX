@@ -55,6 +55,8 @@ package classes.Scenes.NPCs	{
 		public static var lethiciteEaten:Boolean;
 		public static var materialsExplained:Boolean;
 		public static var refinementExplained:Boolean;
+		public static var inlaysExplained:Boolean;
+		public static var gemstonesExplained:Boolean;
 		public var templeofdivine:TempleOfTheDivine = new TempleOfTheDivine();
 		
 		public function Forgefather() {
@@ -86,6 +88,8 @@ package classes.Scenes.NPCs	{
 			lethiciteEaten = false;
 			materialsExplained = false;
 			refinementExplained = false;
+			inlaysExplained = false;
+			gemstonesExplained = false;
 		}
 		
 		public function saveToObject():Object {
@@ -113,7 +117,9 @@ package classes.Scenes.NPCs	{
 				"purePearlEaten": purePearlEaten,
 				"lethiciteEaten": lethiciteEaten,
 				"materialsExplained": materialsExplained,
-				"refinementExplained": refinementExplained
+				"refinementExplained": refinementExplained,
+				"inlaysExplained": inlaysExplained,
+				"gemstonesExplained": gemstonesExplained
 			}
 		}
 		
@@ -143,6 +149,8 @@ package classes.Scenes.NPCs	{
 				lethiciteEaten = o["lethiciteEaten"];
 				materialsExplained = o["materialsExplained"];
 				refinementExplained = o["refinementExplained"];
+				inlaysExplained = o["inlaysExplained"];
+				gemstonesExplained = o["gemstonesExplained"];
 			} else {
 				// loading from old save
 				resetState();
@@ -236,6 +244,7 @@ package classes.Scenes.NPCs	{
 			player.skinTone = "dark gray";
 			player.hairColor = "dark gray";
 			material = "stone";
+			refinement = 1;
 			player.hairType = Hair.NORMAL;
 			player.faceType = Face.DEVIL_FANGS;
 			player.tongue.type = Tongue.DEMONIC;
@@ -362,10 +371,23 @@ package classes.Scenes.NPCs	{
 			addButtonDisabled(0, "Talk", "Not Yet Written");
 			addButton(1, "Explain Mat's", explainMaterials).hint("Ask about the various materials a gargoyle can be made of.");
 			addButton(2, "Explain Refine", explainRefinement).hint("Ask about the various levels of refinement a gargoyle can have.");
+			if (refinement >=3){
+				addButton(3, "Explain Inlays", explainInlay).hint("Ask about the various inlays a gargoyle can be given.");
+				addButton(4, "Explain Gems", explainGemstones).hint("Ask about the various gemstones a gargoyle can be blinged with.");
+			}
+			else{
+				addButtonDisabled(3, "Explain Inlays", "Carve channels in your form first");
+				addButtonDisabled(4, "Explain Gems", "Carve channels in your form first");
+			}
 			if (materialsExplained != false) addButton(6, "Change Mat's", changeMaterials).hint("Change your body's material.");
 			else addButtonDisabled(6, "Change Mat's", "Maybe you should learn what the materials do first?");
 			if (refinementExplained != false) addButton(7, "Refine Body", refineBody).hint("Refine your form.");
 			else addButtonDisabled(7, "Refine Body", "Maybe you should learn about refining your form first?");
+			if (inlaysExplained != false) addButton(8, "Change Inlays", inlayBody).hint("Set/Change your Inlays.");
+			else addButtonDisabled(8, "Change Inlays", "Maybe you should learn about inlays first?");
+			if (gemstonesExplained != false) addButton(9, "Change Gems", blingBody).hint("Set/Change your Gems.");
+			else addButtonDisabled(9, "Change Inlays", "Maybe you should learn about Gemstones first?");
+			if (gemstonesExplained != false) addButton(13, "Trade for Gems", trade4Gems).hint("Temporary measure.");
 			addButton(14, "Back", templeofdivine.templemainmenu);			
 		}
 		
@@ -395,8 +417,24 @@ package classes.Scenes.NPCs	{
 			outputText("To rough out a raw form gargoyle, you will need 200 units of their current material.\n");
 			outputText("To smooth out a rough form gargoyle, you will need 300 units of their current material.");
 			outputText("Note, moving past this stage will prevent the rituals to change a gargoyles material from succeeding. Proceed with caution!\n");
-			outputText("To carve ritual channels into a smooth form gargoyle, you will need ERROR: File Not Found.\n");
-			outputText("To finish and polish a gragoyles form, you will need ERROR:Gargoyle-Gate Case not decided.\n");
+			outputText("To carve ritual channels into a smooth form gargoyle, you will need 2 Spring Waters, 2 Sheep's Milk, 1 Ectoplasm, and a pint of God's Mead.\n");
+			outputText("To finish and polish a gragoyles form, you will need 3 Rough Lotions, 2 pieces of Coal, 1 Iron Weed and 1 Light Oil.\n");
+			addButton(0, "Back", workshopMainMenu)
+		}
+		
+		public function explainInlay(): void{
+			inlaysExplained = true;
+			clearOutput();
+			menu();
+			outputText("Shit will go here when creativity happens");
+			addButton(0, "Back", workshopMainMenu)
+		}
+		
+		public function explainGemstones(): void{
+			gemstonesExplained = true;
+			clearOutput();
+			menu();
+			outputText("Shit will go here when creativity happens");
 			addButton(0, "Back", workshopMainMenu)
 		}
 		
@@ -427,12 +465,14 @@ package classes.Scenes.NPCs	{
 		public function refineBody(): void{
 			clearOutput();
 			menu();
-			outputText("You cannot yet become carved or polished\n");
+			var hasChannelMats:Boolean = (player.hasItem(consumables.GODMEAD, 1) && player.hasItem(consumables.S_WATER, 2) && player.hasItem(consumables.SHEEPMK, 2) && player.hasItem(consumables.ECTOPLS, 1));
+			var hasPolishingMats:Boolean = (player.hasItem(consumables.ROUGHLN, 3) && player.hasItem(consumables.COAL___, 2) && player.hasItem(consumables.IRONWEED, 1) && player.hasItem(consumables.LIGHTOL, 1));
+			outputText("You cannot yet become polished\n");
 			outputText("You need 200 of the material to tranistion from raw to rough.\n");
 			outputText("You need 300 of the material to tranistion from rough to smooth.\n");
 			outputText("Note: Moving past this step locks you to your chosen material.");
-			outputText("To have channels carved into your form, you need ERROR NOT DECIDED to perpare the channels.\n");
-			outputText("Finally, to polish and finish your form, you need SUPER ERROR NOT FOUND to be polished into your body, sealing your power and greatly increasing it.\n\n");
+			outputText("To have channels carved into your form, you need 2 Spring Waters, 2 Sheep's Milk, 1 Ectoplasm, and a pint of God's Mead to perpare the channels.\n");
+			outputText("Finally, to polish and finish your form, you need 3 Rough Lotions, 2 pieces of Coal, 1 Iron Weed and 1 Light Oil to be polished into your body,\nsealing your power and greatly increasing it.\n\n");
 			outputText("Materials:\n");
 			outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] +"\n");
 			outputText("Granite: " + granite +"\n");
@@ -442,40 +482,71 @@ package classes.Scenes.NPCs	{
 			outputText("Sandstone: " + sandstone +"\n");
 			switch (material){
 				case ("granite"):
-					if (refinement < 2){
-						if (granite >= (100 * (refinement + 2))) addButton(0, "Refine", refineFunc);
+					if (refinement < 3){
+						if (granite >= (100 * (refinement + 1))) addButton(0, "Refine", refineFunc);
 						else addButtonDisabled(0, "Refine", "Not enough materials");
-					} else addButtonDisabled(0, "Refine", "Not implmented yet");
+					} else if (refinement == 3){
+						if (hasChannelMats) addButton(0, "Carve Channel", refineFunc);
+						else addButtonDisabled(0, "Carve Channel", "Not enough materials");
+					} else if (refinement == 4){
+						if (hasPolishingMats) addButton(0, "Polish Form", refineFunc);
+						else addButtonDisabled(0, "Polish Form", "Not enough materials");
+					}
+					
 					break;
 				case ("ebony"):
-					if (refinement < 2){
-						if (ebony >= (100 * (refinement + 2))) addButton(0, "Refine", refineFunc);
+					if (refinement < 3){
+						if (ebony >= (100 * (refinement + 1))) addButton(0, "Refine", refineFunc);
 						else addButtonDisabled(0, "Refine", "Not enough materials");
-					} else addButtonDisabled(0, "Refine", "Not implmented yet");
+					} else if (refinement == 3){
+						if (hasChannelMats) addButton(0, "Carve Channel", refineFunc);
+						else addButtonDisabled(0, "Carve Channel", "Not enough materials");
+					} else if (refinement == 4){
+						if (hasPolishingMats) addButton(0, "Polish Form", refineFunc);
+						else addButtonDisabled(0, "Polish Form", "Not enough materials");
+					}
 					break;
 				case ("alabaster"):
-					if (refinement < 2){
-						if (alabaster >= (100 * (refinement + 2))) addButton(0, "Refine", refineFunc);
+					if (refinement < 3){
+						if (alabaster >= (100 * (refinement + 1))) addButton(0, "Refine", refineFunc);
 						else addButtonDisabled(0, "Refine", "Not enough materials");
-					} else addButtonDisabled(0, "Refine", "Not implmented yet");
+					} else if (refinement == 3){
+						if (hasChannelMats) addButton(0, "Carve Channel", refineFunc);
+						else addButtonDisabled(0, "Carve Channel", "Not enough materials");
+					} else if (refinement == 4){
+						if (hasPolishingMats) addButton(0, "Polish Form", refineFunc);
+						else addButtonDisabled(0, "Polish Form", "Not enough materials");
+					}
 					break;
 				case ("marble"):
-					if (refinement < 2){
-						if (marble >= (100 * (refinement + 2))) addButton(0, "Refine", refineFunc);
+					if (refinement < 3){
+						if (marble >= (100 * (refinement + 1))) addButton(0, "Refine", refineFunc);
 						else addButtonDisabled(0, "Refine", "Not enough materials");
-					} else addButtonDisabled(0, "Refine", "Not implmented yet");
+					} else if (refinement == 3){
+						if (hasChannelMats) addButton(0, "Carve Channel", refineFunc);
+						else addButtonDisabled(0, "Carve Channel", "Not enough materials");
+					} else if (refinement == 4){
+						if (hasPolishingMats) addButton(0, "Polish Form", refineFunc);
+						else addButtonDisabled(0, "Polish Form", "Not enough materials");
+					}
 					break;
 				case ("sandstone"):
-					if (refinement < 2){
-						if (sandstone >= (100 * (refinement + 2))) addButton(0, "Refine", refineFunc);
+					if (refinement < 3){
+						if (sandstone >= (100 * (refinement + 1))) addButton(0, "Refine", refineFunc);
 						else addButtonDisabled(0, "Refine", "Not enough materials");
-					} else addButtonDisabled(0, "Refine", "Not implmented yet");
+					} else if (refinement == 3){
+						if (hasChannelMats) addButton(0, "Carve Channel", refineFunc);
+						else addButtonDisabled(0, "Carve Channel", "Not enough materials");
+					} else if (refinement == 4){
+						if (hasPolishingMats) addButton(0, "Polish Form", refineFunc);
+						else addButtonDisabled(0, "Polish Form", "Not enough materials");
+					}
 					break;
 				default:
-					if (refinement < 2){
-						if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= (100 * (refinement + 2))) addButton(0, "Refine", refineFunc);
+					if (refinement < 3){
+						if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= (100 * (refinement + 1))) addButton(0, "Refine", refineFunc);
 						else addButtonDisabled(0, "Refine", "Not enough materials");
-					} else addButtonDisabled(0, "Refine", "Not implmented yet");
+					} else addButtonDisabled(0, "Refine", "Stone cannot be refined further");
 					break;
 			}
 			addButton(14, "Back", workshopMainMenu);
@@ -484,35 +555,35 @@ package classes.Scenes.NPCs	{
 		public function changeMatFunc(mat:String): void{
 			switch (mat){
 				case "granite":
-					refinement = 0;
+					refinement = 1;
 					granite -= 100;
 					material = "granite";
 					player.skinTone = "gray";
 					player.hairColor = "gray";
 					break;
 				case "ebony":
-					refinement = 0;
+					refinement = 1;
 					ebony  -= 100;
 					material = "ebony";
 					player.skinTone = "black";
 					player.hairColor = "black";
 					break;
 				case "alabaster":
-					refinement = 0;
+					refinement = 1;
 					alabaster -= 100;
 					material = "alabaster";
 					player.skinTone = "quartz white";
 					player.hairColor = "quartz white";
 					break;
 				case "marble":
-					refinement = 0;
+					refinement = 1;
 					marble -= 100;
 					material = "marble";
 					player.skinTone = "light gray";
 					player.hairColor = "light gray";
 					break;
 				case "sandstone":
-					refinement = 0;
+					refinement = 1;
 					sandstone -= 100;
 					material = "sandstone";
 					player.skinTone = "caramel";
@@ -524,28 +595,257 @@ package classes.Scenes.NPCs	{
 		
 		public function refineFunc(): void{
 			
-			switch (material){
-				case "granite":
-					granite -= ((refinement + 1) * 100);
+			if (refinement < 3){
+				switch (material){
+					case "granite":
+						granite -= ((refinement + 1) * 100);
+						break;
+					case "ebony":
+						ebony -= ((refinement + 1) * 100);
+						break;
+					case "alabaster":
+						alabaster -= ((refinement + 1) * 100);
+						break;
+					case "marble":
+						marble -= ((refinement + 1) * 100);
+						break;
+					case "sandstone":
+						sandstone -= ((refinement + 1) * 100);
+						break;
+					case "stone":
+						flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= ((refinement + 1) * 100);
+						break;
+				}
+				refinement++;
+				camp.returnToCampUseSixHours();
+			}
+			if (refinement == 3){
+				player.destroyItems(consumables.S_WATER, 2);
+				player.destroyItems(consumables.SHEEPMK, 2);
+				player.destroyItems(consumables.ECTOPLS, 1);
+				player.destroyItems(consumables.GODMEAD, 1);
+				refinement++;
+				camp.returnToCampUseTwelveHours();
+			}
+			if (refinement == 4){
+				player.destroyItems(consumables.ROUGHLN, 3);
+				player.destroyItems(consumables.COAL___, 2);
+				player.destroyItems(consumables.IRONWEED, 1);
+				player.destroyItems(consumables.LIGHTOL, 1);
+				refinement++
+				camp.returnToCampUseTwelveHours();
+			}
+			
+		}
+		
+		public function inlayFunc(inlayNew:String, replace:Boolean):void{
+			switch (inlayNew){
+				case "amethyst":
+					if (replace == false) player.destroyItems(useables.AMEGEM, 15);
+					else player.destroyItems(useables.AMEGEM, 20);
 					break;
-				case "ebony":
-					ebony -= ((refinement + 1) * 100);
+				case "emerald":
+					if (replace == false) player.destroyItems(useables.EMDGEM, 15);
+					else player.destroyItems(useables.EMDGEM, 20);
 					break;
-				case "alabaster":
-					alabaster -= ((refinement + 1) * 100);
+				case "ruby":
+					if (replace == false) player.destroyItems(useables.RBYGEM, 15);
+					else player.destroyItems(useables.RBYGEM, 20);
 					break;
-				case "marble":
-					marble -= ((refinement + 1) * 100);
+				case "sapphire":
+					if (replace == false) player.destroyItems(useables.SAPPGEM, 15);
+					else player.destroyItems(useables.SAPPGEM, 20);
 					break;
-				case "sandstone":
-					sandstone -= ((refinement + 1) * 100);
-					break;
-				case "stone":
-					flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= ((refinement + 1) * 100);
+				case "topaz":
+					if (replace == false) player.destroyItems(useables.TPAZGEM, 15);
+					else player.destroyItems(useables.TPAZGEM, 20);
 					break;
 			}
-			refinement++;
-			camp.returnToCampUseSixHours();
+			channelInlay = inlayNew;
+			inlayBody();
+		}
+		
+		public function blingFunc(gemNew:String, replace:Boolean):void{
+			switch (gemNew){
+				case "amethyst":
+					if (replace == false) player.destroyItems(useables.AMEGEM, 10);
+					else player.destroyItems(useables.AMEGEM, 15);
+					break;
+				case "emerald":
+					if (replace == false) player.destroyItems(useables.EMDGEM, 10);
+					else player.destroyItems(useables.EMDGEM, 15);
+					break;
+				case "ruby":
+					if (replace == false) player.destroyItems(useables.RBYGEM, 10);
+					else player.destroyItems(useables.RBYGEM, 15);
+					break;
+				case "sapphire":
+					if (replace == false) player.destroyItems(useables.SAPPGEM, 10);
+					else player.destroyItems(useables.SAPPGEM, 15);
+					break;
+				case "topaz":
+					if (replace == false) player.destroyItems(useables.TPAZGEM, 10);
+					else player.destroyItems(useables.TPAZGEM, 15);
+					break;
+			}
+			gem = gemNew;
+			blingBody();
+		}
+		
+		public function inlayBody():void{
+			clearOutput();
+			menu();
+			outputText("To have inlays placed, you need 15 of the respective inlay gem.\n\n");
+			outputText("To have inlays replaced, you need 2000 gems, plus 20 of the replacement inlay gem");
+			if (channelInlay == "amethyst"){
+				addButtonDisabled(0, "Amythyst", "Your inlays are already Amethyst.");
+			}
+			else if (channelInlay != "") {
+				if (player.hasItem(useables.AMEGEM, 20) && (player.gems >= 2000)) addButton(0, "Amethyst", inlayFunc, "amethyst", true).hint("Change inlay to Amethyst");
+				else addButtonDisabled(0, "Amythyst", "You need 20 Amethyst and 2000 gems to do this.");
+			}
+			else if (player.hasItem(useables.AMEGEM, 15)) addButton(0, "Amethyst", inlayFunc, "amethyst", false).hint("Set inlay to Amethyst");
+			else addButtonDisabled(0, "Amythyst", "You need 15 Amethyst to do this.");
+			
+			if (channelInlay == "emerald"){
+				addButtonDisabled(1, "Emerald", "Your inlays are already Emerald.");
+			}
+			else if (channelInlay != "") {
+				if (player.hasItem(useables.EMDGEM, 20) && (player.gems >= 2000)) addButton(1, "Emerald", inlayFunc, "emerald", true).hint("Change inlay to Emerald");
+				else addButtonDisabled(1, "Emerald", "You need 20 Emerald and 2000 gems to do this.");
+			}
+			else if (player.hasItem(useables.EMDGEM, 15)) addButton(1, "Emerald", inlayFunc, "emerald", false).hint("Set inlay to Emerald");
+			else addButtonDisabled(1, "Emerald", "You need 15 Emerald to do this.");
+			
+			if (channelInlay == "ruby"){
+				addButtonDisabled(1, "Ruby", "Your inlays are already Ruby.");
+			}
+			else if (channelInlay != "") {
+				if (player.hasItem(useables.RBYGEM, 20) && (player.gems >= 2000)) addButton(2, "Ruby", inlayFunc, "ruby", true).hint("Change inlay to Ruby");
+				else addButtonDisabled(2, "Ruby", "You need 20 Ruby and 2000 gems to do this.");
+			}
+			else if (player.hasItem(useables.RBYGEM, 15)) addButton(2, "Ruby", inlayFunc, "ruby", false).hint("Set inlay to Ruby");
+			else addButtonDisabled(2, "Ruby", "You need 15 Ruby to do this.");
+			
+			if (channelInlay == "sapphire"){
+				addButtonDisabled(1, "Sapphire", "Your inlays are already Sapphire.");
+			}
+			else if (channelInlay != "") {
+				if (player.hasItem(useables.SAPPGEM, 20) && (player.gems >= 2000)) addButton(3, "Sapphire", inlayFunc, "sapphire", true).hint("Change inlay to Sapphire");
+				else addButtonDisabled(3, "Sapphire", "You need 20 Sapphire and 2000 gems to do this.");
+			}
+			else if (player.hasItem(useables.SAPPGEM, 15)) addButton(3, "Sapphire", inlayFunc, "sapphire", false).hint("Set inlay to Sapphire");
+			else addButtonDisabled(3, "Sapphire", "You need 15 Sapphire to do this.");
+			
+			if (channelInlay == "topaz"){
+				addButtonDisabled(1, "Topaz", "Your inlays are already Topaz.");
+			}
+			else if (channelInlay != "") {
+				if (player.hasItem(useables.TPAZGEM, 20) && (player.gems >= 2000)) addButton(4, "Topaz", inlayFunc, "topaz", true).hint("Change inlay to Topaz");
+				else addButtonDisabled(4, "Topaz", "You need 20 Topaz and 2000 gems to do this.");
+			}
+			else if (player.hasItem(useables.TPAZGEM, 15)) addButton(4, "Topaz", inlayFunc, "topaz", false).hint("Set inlay to Topaz");
+			else addButtonDisabled(4, "Topaz", "You need 15 Topaz to do this.");
+			addButton(14, "Back", workshopMainMenu);
+		}
+		
+		public function blingBody():void{
+			clearOutput();
+			menu();
+			outputText("To have gems placed, you need 10 of the respective decroation gem.\n\n");
+			outputText("To have gems replaced, you need 2000 gems, plus 15 of the replacement decroation gem");
+			if (gem == "amethyst"){
+				addButtonDisabled(0, "Amythyst", "Your gems are already Amethyst.");
+			}
+			else if (gem != "") {
+				if (player.hasItem(useables.AMEGEM, 15) && (player.gems >= 2000)) addButton(0, "Amethyst", blingFunc, "amethyst", true).hint("Change gems to Amethyst");
+				else addButtonDisabled(0, "Amythyst", "You need 15 Amethyst and 2000 gems to do this.");
+			}
+			else if (player.hasItem(useables.AMEGEM, 10)) addButton(0, "Amethyst", blingFunc, "amethyst", false).hint("Set gems to Amethyst");
+			else addButtonDisabled(0, "Amythyst", "You need 10 Amethyst to do this.");
+			
+			if (gem == "emerald"){
+				addButtonDisabled(1, "Emerald", "Your gems are already Emerald.");
+			}
+			else if (gem != "") {
+				if (player.hasItem(useables.EMDGEM, 15) && (player.gems >= 2000)) addButton(1, "Emerald", blingFunc, "emerald", true).hint("Change gems to Emerald");
+				else addButtonDisabled(1, "Emerald", "You need 15 Emerald and 2000 gems to do this.");
+			}
+			else if (player.hasItem(useables.EMDGEM, 10)) addButton(1, "Emerald", blingFunc, "emerald", false).hint("Set gems to Emerald");
+			else addButtonDisabled(1, "Emerald", "You need 10 Emerald to do this.");
+			
+			if (gem == "ruby"){
+				addButtonDisabled(1, "Ruby", "Your gems are already Ruby.");
+			}
+			else if (gem != "") {
+				if (player.hasItem(useables.RBYGEM, 15) && (player.gems >= 2000)) addButton(2, "Ruby", blingFunc, "ruby", true).hint("Change gems to Ruby");
+				else addButtonDisabled(2, "Ruby", "You need 15 Ruby and 2000 gems to do this.");
+			}
+			else if (player.hasItem(useables.RBYGEM, 10)) addButton(2, "Ruby", blingFunc, "ruby", false).hint("Set gems to Ruby");
+			else addButtonDisabled(2, "Ruby", "You need 10 Ruby to do this.");
+			
+			if (gem == "sapphire"){
+				addButtonDisabled(1, "Sapphire", "Your gems are already Sapphire.");
+			}
+			else if (gem != "") {
+				if (player.hasItem(useables.SAPPGEM, 15) && (player.gems >= 2000)) addButton(3, "Sapphire", blingFunc, "sapphire", true).hint("Change gems to Sapphire");
+				else addButtonDisabled(3, "Sapphire", "You need 15 Sapphire and 2000 gems to do this.");
+			}
+			else if (player.hasItem(useables.SAPPGEM, 10)) addButton(3, "Sapphire", blingFunc, "sapphire", false).hint("Set gems to Sapphire");
+			else addButtonDisabled(3, "Sapphire", "You need 10 Sapphire to do this.");
+			
+			if (gem == "topaz"){
+				addButtonDisabled(1, "Topaz", "Your gems are already Topaz.");
+			}
+			else if (gem != "") {
+				if (player.hasItem(useables.TPAZGEM, 15) && (player.gems >= 2000)) addButton(4, "Topaz", blingFunc, "topaz", true).hint("Change gems to Topaz");
+				else addButtonDisabled(4, "Topaz", "You need 15 Topaz and 2000 gems to do this.");
+			}
+			else if (player.hasItem(useables.TPAZGEM, 10)) addButton(4, "Topaz", blingFunc, "topaz", false).hint("Set gems to Topaz");
+			else addButtonDisabled(4, "Topaz", "You need 10 Topaz to do this.");
+			addButton(14, "Back", workshopMainMenu);
+		}
+		
+		private function trade4Gems():void {
+			clearOutput();
+			menu();
+			outputText("So you want to trade for gems? Well, you need 3 ebonbloom per gem.");
+			if (player.hasItem(useables.EBONBLO, 3)){
+				addButton(0, "Amethys", trade, "amethyst");
+				addButton(1, "Emerald", trade, "emerald");
+				addButton(2, "Ruby", trade, "ruby");
+				addButton(3, "Sapphire", trade, "sapphire");
+				addButton(4, "Topaz", trade, "topaz");
+			}
+			else{
+				addButtonDisabled(0, "Amethys", "You need at least 3 ebonbloom");
+				addButtonDisabled(1, "Emerald", "You need at least 3 ebonbloom");
+				addButtonDisabled(2, "Ruby", "You need at least 3 ebonbloom");
+				addButtonDisabled(3, "Sapphire", "You need at least 3 ebonbloom");
+				addButtonDisabled(4, "Topaz", "You need at least 3 ebonbloom");
+			}
+			addButton(14, "Back", workshopMainMenu);
+		}
+		
+		private function trade(input:String):void {
+			player.destroyItems(useables.EBONBLO, 3);
+			switch (input){
+				case "amethyst":
+					inventory.takeItem(useables.AMEGEM, trade4Gems);
+					break;
+				case "emerald":
+					inventory.takeItem(useables.EMDGEM, trade4Gems);
+					break;
+				case "ruby":
+					inventory.takeItem(useables.RBYGEM, trade4Gems);
+					break;
+				case "sapphire":
+					inventory.takeItem(useables.SAPPGEM, trade4Gems);
+					break;
+				case "topaz":
+					inventory.takeItem(useables.TPAZGEM, trade4Gems);
+					break;
+			}
 		}
 		
 		public function incrementGraniteSupply(amount:int):void {
@@ -596,6 +896,25 @@ package classes.Scenes.NPCs	{
 				outputText(" Your sandstone capacity is full.")
 			}
 			outputText(")</b>");
+		}
+		
+		public static function materialWord(): String{
+			switch (material){
+					case "stone":
+						return "Stone";
+					case "alabaster":
+						return "Alabaster";
+					case "ebony":
+						return "Ebony";
+					case "granite":
+						return "Granite";
+					case "marble":
+						return "Marble";
+					case "sandstone":
+						return "Sandstone";
+					default:
+						return "Null";
+			}
 		}
 	}
 }

@@ -1601,10 +1601,10 @@ public class Combat extends BaseContent {
 		}
 		if (player.isGargoyle() && Forgefather.material == "marble")
 			{
-				if (Forgefather.refinement == 0) unarmedMulti += (.15);
-				if (Forgefather.refinement == 1) unarmedMulti += (.25);
-				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) unarmedMulti += (.5);
-				if (Forgefather.refinement == 4) unarmedMulti += (1);
+				if (Forgefather.refinement == 1) unarmedMulti += (.15);
+				if (Forgefather.refinement == 2) unarmedMulti += (.25);
+				if (Forgefather.refinement == 3 || Forgefather.refinement == 4) unarmedMulti += (.5);
+				if (Forgefather.refinement == 5) unarmedMulti += (1);
 			}
         if (player.statStore.hasBuff("CrinosShape") && player.hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalWeapons)) unarmed *= 1.1;
         if (player.hasPerk(PerkLib.Lycanthropy)) unarmed += 8 * (1 + player.newGamePlusMod());
@@ -4891,7 +4891,7 @@ public class Combat extends BaseContent {
         }
         if (flags[kFLAGS.ATTACKS_ACCURACY] > 0) flags[kFLAGS.ATTACKS_ACCURACY] = 0;
         //Natural weapon Full attack list
-        if ((flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && ((player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon())) || player.isGargoyle())) {
+        if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && ((player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon()))) {
             IsFeralCombat = true;
             resolveFeralCombatAdditionnalAttacks();
         }
@@ -5216,7 +5216,31 @@ public class Combat extends BaseContent {
                 ExtraNaturalWeaponAttack(ClawDamageMultiplier, "WendigoClaw");
                 ExtraNaturalWeaponAttack(ClawDamageMultiplier, "WendigoClaw");
             }
-            else{
+            if ((player.arms.type == Arms.GARGOYLE)){
+				switch (Forgefather.channelInlay){
+					case "amethyst":
+						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "darkness");
+						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "darkness");
+						break;
+					case "ruby":
+						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "fire");
+						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "fire");
+						break;
+					case "sapphire":
+						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "ice");
+						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "ice");
+						break;
+					case "topaz":
+						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "lightning");
+						ExtraNaturalWeaponAttack(ClawDamageMultiplier, "lightning");
+						break;
+					default:
+						ExtraNaturalWeaponAttack(ClawDamageMultiplier);
+						ExtraNaturalWeaponAttack(ClawDamageMultiplier);
+						break;
+				}
+			}
+			else{
                 ExtraNaturalWeaponAttack(ClawDamageMultiplier);
                 ExtraNaturalWeaponAttack(ClawDamageMultiplier);
             }
@@ -5362,6 +5386,30 @@ public class Combat extends BaseContent {
                 ExtraNaturalWeaponAttack(0.5);
                 outputText("\n")
             }
+			if ((player.tail.type == (Tail.GARGOYLE || Tail.GARGOYLE_2))){
+				switch (Forgefather.channelInlay){
+					case "amethyst":
+						ExtraNaturalWeaponAttack(TailDamageMultiplier, "darkness");
+						ExtraNaturalWeaponAttack(TailDamageMultiplier, "darkness");
+						break;
+					case "ruby":
+						ExtraNaturalWeaponAttack(TailDamageMultiplier, "fire");
+						ExtraNaturalWeaponAttack(TailDamageMultiplier, "fire");
+						break;
+					case "sapphire":
+						ExtraNaturalWeaponAttack(TailDamageMultiplier, "ice");
+						ExtraNaturalWeaponAttack(TailDamageMultiplier, "ice");
+						break;
+					case "topaz":
+						ExtraNaturalWeaponAttack(TailDamageMultiplier, "lightning");
+						ExtraNaturalWeaponAttack(TailDamageMultiplier, "lightning");
+						break;
+					default:
+						ExtraNaturalWeaponAttack(TailDamageMultiplier);
+						ExtraNaturalWeaponAttack(TailDamageMultiplier);
+						break;
+				}
+			}
             else{
                 outputText("You hit your opponent with a slam of your mighty tail");
                 if (player.tail.type == Tail.SALAMANDER) outputText(" setting your target on fire");
@@ -5855,19 +5903,19 @@ public class Combat extends BaseContent {
                     else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
                 }
                 //Damage is delivered HERE
-                if ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+                if (((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) || (Forgefather.channelInlay == "ruby")) {
 					damage = Math.round(damage * fireDamageBoostedByDao());
 					doFireDamage(damage, true, true);
 				}
-                else if ((player.weapon == weapons.SCLAYMO || player.weapon == weapons.SDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+                else if (((player.weapon == weapons.SCLAYMO || player.weapon == weapons.SDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) || (Forgefather.channelInlay == "sapphire")) {
 					damage = Math.round(damage * iceDamageBoostedByDao());
 					doIceDamage(damage, true, true);
 				}
-                else if ((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+                else if (((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) || (Forgefather.channelInlay == "topaz")) {
 					damage = Math.round(damage * lightningDamageBoostedByDao());
 					doLightingDamage(damage, true, true);
 				}
-                else if ((player.weapon == weapons.ACLAYMO || player.weapon == weapons.ADAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+                else if (((player.weapon == weapons.ACLAYMO || player.weapon == weapons.ADAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) || (Forgefather.channelInlay == "amethyst")) {
 					damage = Math.round(damage * darknessDamageBoostedByDao());
 					doDarknessDamage(damage, true, true);
 				}
@@ -6458,7 +6506,11 @@ public class Combat extends BaseContent {
                 }
                 //Damage is delivered HERE
                 damage *= FeraldamageMultiplier;
-                doDamage(damage, true, true);
+				if (SpecialEffect == "fire") doFireDamage(damage, true, true);
+				else if (SpecialEffect == "ice") doIceDamage(damage, true, true);
+				else if (SpecialEffect == "lightning") doLightingDamage(damage, true, true);
+				else if (SpecialEffect == "darkness") doDarknessDamage(damage, true, true);
+                else doDamage(damage, true, true);
                 if (player.hasPerk(PerkLib.LightningClaw)) {
                     damage = 6 + rand(3);
                     if (player.hasPerk(PerkLib.SensualLover)) damage += 2;
@@ -14169,6 +14221,10 @@ public class Combat extends BaseContent {
         if (player.hasPerk(MutationsLib.HarpyHollowBones)) damage *= 1.2;
         if (player.hasPerk(MutationsLib.HarpyHollowBonesPrimitive)) damage *= 1.5;
         if (player.hasPerk(MutationsLib.HarpyHollowBonesEvolved)) damage *= 2;
+		if (Forgefather.channelInlay == "emerald" && Forgefather.refinement == 4) damage *= 1.25;
+		if (Forgefather.channelInlay == "emerald" && Forgefather.refinement == 5) damage *= 1.5;
+		if (Forgefather.gem == "emerald" && Forgefather.refinement == 4) damage *= 1.12;
+		if (Forgefather.gem == "emerald" && Forgefather.refinement == 5) damage *= 1.25;
         outputText("You focus on [Themonster], ");
 		if (player.statusEffectv1(StatusEffects.Flying) == 0) outputText("fold your wing and dive down");
 		if (player.statusEffectv1(StatusEffects.Flying) == 1) outputText("direct your "+player.weaponFlyingSwordsName+" downward and dive down");
@@ -14253,7 +14309,7 @@ public class Combat extends BaseContent {
             if (player.hasStatusEffect(StatusEffects.Rage) && player.statusEffectv1(StatusEffects.Rage) > 5 && player.statusEffectv1(StatusEffects.Rage) < 50) player.addStatusValue(StatusEffects.Rage, 1, 10);
             else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
         }
-        if ((!player.hasPerk(MutationsLib.HarpyHollowBonesEvolved) && player.statusEffectv1(StatusEffects.Flying) == 0) || player.statusEffectv2(StatusEffects.Flying) != 3) {
+        if (((!player.hasPerk(MutationsLib.HarpyHollowBonesEvolved) || (!Forgefather.channelInlay == "emerald")) && player.statusEffectv1(StatusEffects.Flying) == 0) || player.statusEffectv2(StatusEffects.Flying) != 3) {
             if (player.isFlying()) player.removeStatusEffect(StatusEffects.Flying);
             if (player.hasStatusEffect(StatusEffects.FlyingNoStun)) {
                 player.removeStatusEffect(StatusEffects.FlyingNoStun);
