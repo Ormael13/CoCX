@@ -1251,9 +1251,9 @@ public class MagicSpecials extends BaseCombatContent {
 		lustDmgF = lustDmgF * monster.lustVuln;
 		lustDmgF = Math.round(lustDmgF);
 		monster.teased(lustDmgF);
-		combat.bonusExpAfterSuccesfullTease();
 		if (crit2) outputText(" <b>Critical!</b>");
 		outputText("\n\n");
+		combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
 		checkAchievementDamage(damage);
@@ -1317,7 +1317,7 @@ public class MagicSpecials extends BaseCombatContent {
 		monster.teased(lustDmgF, false);
 		if (crit2) outputText(" <b>Critical!</b>");
 		outputText("\n\n");
-		combat.bonusExpAfterSuccesfullTease();
+		combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		if (player.hasPerk(MutationsLib.HeartOfTheStormEvolved)){
 			if (rand(100) < 10) {
@@ -1361,6 +1361,7 @@ public class MagicSpecials extends BaseCombatContent {
 				if (player.hasPerk(MutationsLib.HeartOfTheStormPrimitive)) CumLustDmg *= 1.20;
 				if (player.hasPerk(MutationsLib.HeartOfTheStormEvolved)) CumLustDmg *= 1.20;
 				monster.teased(CumLustDmg);
+				combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 			}
 			player.lust += (player.lust100 * 0.05);
 		}
@@ -1382,6 +1383,7 @@ public class MagicSpecials extends BaseCombatContent {
 				if (player.hasPerk(MutationsLib.HeartOfTheStormPrimitive)) MilkLustDmg *= 1.20;
 				if (player.hasPerk(MutationsLib.HeartOfTheStormEvolved)) MilkLustDmg *= 1.20;
 				monster.teased(MilkLustDmg);
+				combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 			}
 			player.lust += (player.lust100 * 0.05);
 		}
@@ -1405,6 +1407,7 @@ public class MagicSpecials extends BaseCombatContent {
 				if (player.hasPerk(MutationsLib.HeartOfTheStormPrimitive)) MilkCumLustDmg *= 1.20;
 				if (player.hasPerk(MutationsLib.HeartOfTheStormEvolved)) MilkCumLustDmg *= 1.20;
 				monster.teased(MilkCumLustDmg);
+				combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 			}
 			player.lust += (player.lust100 * 0.1);
 		}

@@ -4816,21 +4816,12 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(MutationsLib.ManticoreMetabolismEvolved)) damage *= 2;
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
-		var lustdamage:Number = 35 + rand(player.lib / 10);
 		if (player.level < 10) damage += 20 + (player.level * 3);
 		else if (player.level < 20) damage += 50 + (player.level - 10) * 2;
 		else if (player.level < 30) damage += 70 + (player.level - 20) * 1;
 		else damage += 80;
 		//Lust damage!
-		lustdamage *= 0.7;
-		if (player.hasPerk(PerkLib.SensualLover)) lustdamage += 2;
-		if (player.hasPerk(PerkLib.Seduction)) lustdamage += 5;
-		if (player.hasPerk(PerkLib.SluttySeduction)) lustdamage += player.perkv1(PerkLib.SluttySeduction);
-		if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) lustdamage += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
-		if (bimbo || bro || futa) lustdamage += 5;
-		if (player.hasPerk(PerkLib.FlawlessBody)) lustdamage += 10;
-		lustdamage += scalingBonusLibido() * 0.1;
-		if (player.hasPerk(PerkLib.EromancyExpert)) lustdamage *= 1.5;
+		var lustdamage:Number = combat.calculateBasicTeaseDamage(35);
 		if (player.hasPerk(PerkLib.JobSeducer)) lustdamage += player.teaseLevel * 3;
 		if (player.hasPerk(PerkLib.RacialParagon)) lustdamage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) lustdamage *= 1.50;
@@ -4853,6 +4844,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		var dBd1c:Number = 1;
 		if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) dBd1c *= 2;
 		monster.teased(monster.lustVuln * lustdamage * dBd1c, false);
+		combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		if (crit) outputText(" <b>Critical!</b>");
 		monster.statStore.addBuffObject({spe:-(dBd1c*10)}, "Poison",{text:"Poison"});
 		if (monster.hasStatusEffect(StatusEffects.ManticoreVenom)) monster.addStatusValue(StatusEffects.ManticoreVenom,3,(dBd1c*5));
@@ -5039,6 +5031,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else monster.addStatusValue(StatusEffects.LustStick,2,Math.round(damage / 10));
 		//Deal damage
 		monster.teased(monster.lustVuln * damage);
+		combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 		outputText("\n\n");
 		//Sets up for end of combat, and if not, goes to AI.
 		if(!combatIsOver()) enemyAI();
