@@ -8,8 +8,8 @@ package classes.Scenes
 	import classes.BodyParts.Arms;
 	import classes.BodyParts.LowerBody;
 	import classes.BodyParts.Tail;
-import classes.Perks.MindBreakerBrain;
-import classes.Scenes.Areas.Mountain.HellHound;
+	import classes.Perks.MindBreakerBrain;
+	import classes.Scenes.Areas.Mountain.HellHound;
 	import classes.Scenes.Areas.Mountain.InfestedHellhound;
 	import classes.Scenes.Areas.Mountain.Minotaur;
 	import classes.Scenes.Areas.Ocean.SeaAnemone;
@@ -651,7 +651,11 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 			if (player.hasCock()) outputText("While you mentaly rape your victim of everything that used to make its sense of self you push your needy cock through the now welcoming hole that is your half broken toy butt thrusting to bring yourself to new heights of pleasant delirium.");
 			outputText("\n\nYou cum green, your fluids dripping from your partner and tainting the ground beneath into a small pool of defiled fluid as you draw in whatever remains of your victim's now empty brain.");
 
-
+			if (player.buff("Brain melt").getValueOfStatBuff("int.mult") < (player.perkv1(PerkLib.MindbreakerBrain1toX)*2)){
+				player.buff("Brain melt").addStat("int.mult",0.01);
+				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
+				CoC.instance.mainView.statsView.showStatUp("int");
+			}
 
 			player.sexReward("Default", "Default", true, false);
 			statScreenRefresh();
