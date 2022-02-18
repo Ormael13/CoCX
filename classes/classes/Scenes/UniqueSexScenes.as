@@ -478,7 +478,17 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 			}
 		}
 
-		public function RaijuSupercharged():void {
+		public function pcRapeOnVictory(re:Number):void{
+			//Repeat this for different automatic scenes and trigger and use this function as a result instead of pcUniqueSexScenesChoiceMenu when called in places where it would make senses for it to proc
+			if (player.raijuScore() >= 15 && !monster.hasPerk(PerkLib.LightningAffinity) && !monster.hasPerk(PerkLib.LightningNature)){
+				RaijuRapeSupercharged();
+			}
+			else{
+				addButton(13, "U. Sex Scenes", pcUniqueSexScenesChoiceMenu, re).hint("Other non typical sex scenes.");
+			}
+		}
+
+		public function RaijuRapeSupercharged():void {
 			clearOutput();
 			menu();
 			if (player.isHerm){

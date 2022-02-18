@@ -19,7 +19,7 @@ public function defeatGS():void {
 		//Eligable to rape
 		if(player.lust >= 33 && player.gender > 0) {
 			outputText("\n\nYou're horny enough to try and rape it, though you'd rather see how much milk you can squirt into it.  What do you do?");
-			simpleChoices("B.Feed",rapeOozeWithMilk,"Rape",slimeVictoryRape,"",null,"U. Sex Scenes",curry(uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 031),"Leave",cleanupAfterCombat);
+			simpleChoices("B.Feed",rapeOozeWithMilk,"Rape",slimeVictoryRape,"",null,"U. Sex Scenes",curry(uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 31),"Leave",cleanupAfterCombat);
 		}
 		//Rapes not on the table.
 		else {
@@ -30,7 +30,7 @@ public function defeatGS():void {
 	//Not a breastfeeder
 	else if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 		outputText("  Sadly you realize your own needs have not been met.  Of course, you could always play with the poor thing... Do you rape it?");
-		simpleChoices("Rape",slimeVictoryRape,"",null,"",null,"U. Sex Scenes",curry(uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 031),"Leave",cleanupAfterCombat);
+		simpleChoices("Rape",slimeVictoryRape,"",null,"",null,"U. Sex Scenes",curry(uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 31),"Leave",cleanupAfterCombat);
 	}
 }
 

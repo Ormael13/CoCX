@@ -130,7 +130,7 @@ internal function sharkWinChoices():void {
 		outputText("  Do you have your way with her or leave?");
         var dildo:Function = (player.hasKeyItem("Deluxe Dildo") >= 0 ? sharkGirlGetsDildoed : null);
 		var temp3:Function =null;
-		if (player.pcCanUseUniqueSexScene()) temp3 = curry(uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 058);
+		if (player.pcCanUseUniqueSexScene()) temp3 = curry(uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 58);
         if (player.gender == 1)
 			simpleChoices("Use Dick", sharkgirlDickFuck, "Pussy w/69", null, "Dildo Rape", dildo, "U. Sex Scenes", temp3, "Leave", cleanupAfterCombat);
 		else if (player.gender == 2) {
@@ -148,7 +148,7 @@ public function sharkWinChoices2():void{
 	outputText("  Do you have your way with her or leave?");
        var dildo:Function = (player.hasKeyItem("Deluxe Dildo") >= 0 ? sharkGirlGetsDildoed : null);
 	var temp3:Function =null;
-	if (player.pcCanUseUniqueSexScene()) temp3 = curry(uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 058);
+	if (player.pcCanUseUniqueSexScene()) temp3 = curry(uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 58);
     if (player.gender == 1)
 		simpleChoices("Use Dick", sharkgirlDickFuck, "Pussy w/69", null, "Dildo Rape", dildo, "U. Sex Scenes", temp3, "Leave", cleanupAfterCombat);
 	else if (player.gender == 2) {
@@ -169,7 +169,7 @@ public function oceanSharkWinChoices():void {
 	if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 		if (player.hasCock()) addButton(1, "Fuck Her", sharkgirlOceanDickFuck1);
 		if (player.hasVagina()) addButton(2, "Sixty nine", sharkgirlOceanSixtyNine1);
-		if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 059).hint("Other non typical sex scenes.");
+		if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 59).hint("Other non typical sex scenes.");
 	}
 }
 public function oceanTigerSharkWinChoices():void {
@@ -181,7 +181,7 @@ public function oceanTigerSharkWinChoices():void {
 	if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 		if (player.hasCock()) addButton(1, "Fuck Her", sharkgirlOceanDickFuck2);
 		if (player.hasVagina()) addButton(2, "Sixty nine", sharkgirlOceanSixtyNine2);
-		if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 060).hint("Other non typical sex scenes.");
+		if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 60).hint("Other non typical sex scenes.");
 	}
 }
 public function oceanSharkspackWinChoices():void {
@@ -193,7 +193,7 @@ public function oceanSharkspackWinChoices():void {
 	if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 		if (player.hasCock()) addButton(1, "Fuck Her", sharkgirlOceanDickFuck2);
 		if (player.hasVagina()) addButton(2, "Sixty nine", sharkgirlOceanSixtyNine2);
-		if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 061).hint("Other non typical sex scenes.");
+		if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 61).hint("Other non typical sex scenes.");
 	}
 }
 

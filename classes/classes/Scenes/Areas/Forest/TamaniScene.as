@@ -100,7 +100,7 @@ public function TamaniDefeated2():void {
 	addButton(0, "Fuck", tamaniSexWon);
 	if (player.hasCock() && player.cockThatFits(monster.analCapacity()) >= 0) addButton(1, "Buttfuck", tamaniAnalShits);
 	if (pregnancy.isPregnant && player.canOvipositSpider()) addButton(2, "Lay Eggs", tamaniBeaten);
-	if (player.pcCanUseUniqueSexScene()) addButton(3, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 017);
+	if (player.pcCanUseUniqueSexScene()) addButton(3, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 17);
 	addButton(4, "Leave", cleanupAfterCombat);
 }
 

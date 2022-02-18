@@ -1600,7 +1600,7 @@ import classes.Stats.Buff;
 				addButton(4, "RevengeOral", sayThatsAPrettyFaceBeAShameIfSomebodyJizzedAllOverIt);
 				if (player.tentacleCocks() >= 8 || player.stamenCocks() >= 8) addButton(5, "Tentacruel", tentacruelRevengeFux);
 			}
-			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 024).hint("Other non typical sex scenes.");
+			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 24).hint("Other non typical sex scenes.");
 		}
 		public function touchThatFluffyHorn2():void {
 			menu();
@@ -1613,7 +1613,7 @@ import classes.Stats.Buff;
 				addButton(4, "RevengeOral", sayThatsAPrettyFaceBeAShameIfSomebodyJizzedAllOverIt);
 				if (player.tentacleCocks() >= 8 || player.stamenCocks() >= 8) addButton(5, "Tentacruel", tentacruelRevengeFux);
 			}
-			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 024).hint("Other non typical sex scenes.");
+			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 24).hint("Other non typical sex scenes.");
 		}
 
 		// Pfft, nofux

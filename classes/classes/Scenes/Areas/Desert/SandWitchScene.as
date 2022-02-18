@@ -634,7 +634,7 @@ internal function beatSandwitch():void {
 	if(SceneLib.shouldraFollower.followerShouldra() && player.gender > 0) addButton(3, "Use Shouldra", SceneLib.shouldraFollower.sandWitchGetsGhostly);
 	if (player.gender > 0 && player.canOviposit()) addButton(4, "Lay Eggs", ovipositSandWitches);
 	addButton(5, "Taunt Her", sandwitchSpanking);
-	if (player.pcCanUseUniqueSexScene()) addButton(8, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 014);
+	if (player.pcCanUseUniqueSexScene()) addButton(8, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 14);
 	addButton(9, "Leave", cleanupAfterCombat);
 }
 public function beatSandwitch2():void {
@@ -645,7 +645,7 @@ public function beatSandwitch2():void {
 	if(SceneLib.shouldraFollower.followerShouldra() && player.gender > 0) addButton(3, "Use Shouldra", SceneLib.shouldraFollower.sandWitchGetsGhostly);
 	if (player.gender > 0 && player.canOviposit()) addButton(4, "Lay Eggs", ovipositSandWitches);
 	addButton(5, "Taunt Her", sandwitchSpanking);
-	if (player.pcCanUseUniqueSexScene()) addButton(8, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 014);
+	if (player.pcCanUseUniqueSexScene()) addButton(8, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 14);
 	addButton(9, "Leave", cleanupAfterCombat);
 }
     //RAEP SAND-WITCH!

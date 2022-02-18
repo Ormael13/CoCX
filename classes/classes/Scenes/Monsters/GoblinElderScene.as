@@ -311,7 +311,7 @@ public class GoblinElderScene extends BaseContent
 				}
 				if (player.hasVagina()) addButton(7, "Pussies", cuntFuck);
 				if (player.canOvipositSpider()) addButton(8, "Lay Eggs", eggs);
-				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 046).hint("Other non typical sex scenes.");
+				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 46).hint("Other non typical sex scenes.");
 				addButton(14, "Leave", cleanupAfterCombat);
 			}
 			else if (feeder!=null || eggs!=null) {
@@ -321,7 +321,7 @@ public class GoblinElderScene extends BaseContent
 				menu();
 				if (player.hasStatusEffect(StatusEffects.Feeder)) addButton(5, "Breastfeed", feeder);
 				if (player.canOvipositSpider()) addButton(8, "Lay Eggs", eggs);
-				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 046).hint("Other non typical sex scenes.");
+				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 46).hint("Other non typical sex scenes.");
 				addButton(14, "Leave", cleanupAfterCombat);
 			}
 			else 
@@ -383,7 +383,7 @@ public class GoblinElderScene extends BaseContent
 				}
 				if (player.hasVagina()) addButton(7, "Pussies", cuntFuck);
 				if (player.canOvipositSpider()) addButton(8, "Lay Eggs", eggs);
-				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 046).hint("Other non typical sex scenes.");
+				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 46).hint("Other non typical sex scenes.");
 				addButton(14, "Leave", cleanupAfterCombat);
 			}
 			else if (feeder!=null || eggs!=null) {
@@ -393,7 +393,7 @@ public class GoblinElderScene extends BaseContent
 				menu();
 				if (player.hasStatusEffect(StatusEffects.Feeder)) addButton(5, "Breastfeed", feeder);
 				if (player.canOvipositSpider()) addButton(8, "Lay Eggs", eggs);
-				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 046).hint("Other non typical sex scenes.");
+				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 46).hint("Other non typical sex scenes.");
 				addButton(14, "Leave", cleanupAfterCombat);
 			}
 			else 
