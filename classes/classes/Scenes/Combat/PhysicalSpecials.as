@@ -1136,7 +1136,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 						damage2B *= damage1Bdcc;
 						damage2B *= 1+(poisonScaling/10);
 						poisonScaling *= damage1Bdcc;
-						monster.teased(monster.lustVuln * damage2B);
+						damage2B = monster.lustVuln * damage;
+						monster.teased(damage2B);
 						monster.statStore.addBuffObject({tou:-poisonScaling}, "Poison",{text:"Poison"});
 						if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
 							monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
@@ -1148,6 +1149,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 						outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
 						var lustDmg:int = 6 * monster.lustVuln;
 						if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) lustDmg *= 2;
+						lustDmg = monster.lustVuln * damage;
 						monster.teased(lustDmg);
 						if (monster.lustVuln > 0) {
 							monster.lustVuln += 0.01;
