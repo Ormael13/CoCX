@@ -5278,9 +5278,6 @@ public class PerkLib
             GreyArchmage.requirePerk(GreyMage)
                     .requireInt(175)
                     .requireLevel(36);
-            Convergence.requirePerk(GreyMage)
-                    .requireInt(175)
-                    .requireLevel(36);
             //Tier 7 Intelligence perks
 			HalfStepToPeerlessSpirituality.requireWis(160)
                     .requireInt(240)
