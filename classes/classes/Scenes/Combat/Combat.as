@@ -12108,13 +12108,14 @@ public class Combat extends BaseContent {
         damage += scalingBonusLibido() * 0.2;
         if (player.hasPerk(PerkLib.JobSeducer)) damage += player.teaseLevel * 3;
         else damage += player.teaseLevel * 2;
-        if (player.hasPerk(PerkLib.JobCourtesan) && monster.findPerk(PerkLib.EnemyBossType) >= 0) damage *= 1.2;
+        if (player.hasPerk(PerkLib.JobCourtesan) && monster.hasPerk(PerkLib.EnemyBossType)) damage *= 1.2;
 
         var damagemultiplier:Number = 1;
         if (player.hasPerk(PerkLib.ElectrifiedDesire)) damagemultiplier += player.lust100 * 0.01;
         if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += combat.historyWhoreBonus();
-        if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 10) damagemultiplier += 0.2;
+        if (player.hasPerk(PerkLib.DazzlingDisplay)) damagemultiplier += 0.2;
         if (player.hasPerk(PerkLib.SuperSensual)) damagemultiplier += 0.50;
+        if (player.hasPerk(PerkLib.SluttySimplicity) && player.armorName == "nothing") StraddleDamage *= (1 + ((10 + rand(11)) / 100));
         if (player.armorName == "desert naga pink and black silk dress") damagemultiplier += 0.1;
         if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
         damage *= damagemultiplier;
@@ -12179,24 +12180,8 @@ public class Combat extends BaseContent {
     public function StraddleTease():void {
         clearOutput();
         StraddleDamage = 6 + rand(3);
-        if (player.hasPerk(PerkLib.SensualLover)) {
-            StraddleDamage += 2;
-        }
-        if (player.hasPerk(PerkLib.Seduction)) StraddleDamage += 5;
-        //+ slutty armor bonus
-        if (player.hasPerk(PerkLib.SluttySeduction)) StraddleDamage += player.perkv1(PerkLib.SluttySeduction);
-        if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) StraddleDamage += player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction);
-        //10% for bimbo shits
-        if (player.hasPerk(PerkLib.BimboBody) || player.hasPerk(PerkLib.BroBody) || player.hasPerk(PerkLib.FutaForm)) {
-            StraddleDamage += 5;
-        }
-        if (player.hasPerk(PerkLib.FlawlessBody)) StraddleDamage += 10;
-        StraddleDamage += scalingBonusLibido() * 0.1;
-        if (player.hasPerk(PerkLib.JobSeducer)) StraddleDamage += player.teaseLevel * 3;
-        else StraddleDamage += player.teaseLevel * 2;
-        if (player.hasPerk(PerkLib.JobCourtesan) && monster.hasPerk(PerkLib.EnemyBossType)) StraddleDamage *= 1.2;
+        StraddleDamage += calculateBasicTeaseDamage();
         if (player.hasPerk(MutationsLib.ManticoreMetabolismEvolved) && player.tail.type == Tail.MANTICORE_PUSSYTAIL) StraddleDamage *= 2;
-
         //partial skins bonuses
         switch (player.coatType()) {
             case Skin.FUR:
@@ -12212,19 +12197,6 @@ public class Combat extends BaseContent {
                 StraddleDamage += (4 * (1 + player.newGamePlusMod()));
                 break;
         }
-        //slutty simplicity bonus
-        if (player.hasPerk(PerkLib.SluttySimplicity) && player.armorName == "nothing") StraddleDamage *= (1 + ((10 + rand(11)) / 100));
-        StraddleDamage *= .7;
-        var bonusDamage:Number = 0;
-        bonusDamage *= .7;
-        var damagemultiplier:Number = 1;
-        if (player.hasPerk(PerkLib.ElectrifiedDesire)) damagemultiplier += player.lust100 * 0.01;
-        if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += combat.historyWhoreBonus();
-        if (player.hasPerk(PerkLib.DazzlingDisplay)) damagemultiplier += 0.2;
-        if (player.armorName == "desert naga pink and black silk dress") damagemultiplier += 0.1;
-        if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
-        StraddleDamage *= damagemultiplier;
-        bonusDamage *= damagemultiplier;
         //Determine if critical tease!
         Randomcrit = false;
         var critChance:int = 5;
@@ -12237,11 +12209,9 @@ public class Combat extends BaseContent {
             Randomcrit = true;
             StraddleDamage *= 1.75;
         }
-        if (player.hasPerk(PerkLib.ChiReflowLust)) StraddleDamage *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
-        if (player.hasPerk(PerkLib.ArouseTheAudience) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType))) StraddleDamage *= 1.5;
+        var bonusDamage:int = 10;
         StraddleDamage = (StraddleDamage + rand(bonusDamage)) * monster.lustVuln;
         if (player.hasStatusEffect(StatusEffects.AlrauneEntangle)) StraddleDamage *= 2;
-        StraddleDamage *= 1.5;
         StraddleDamage = Math.round(StraddleDamage);
 
         //Select the scene
