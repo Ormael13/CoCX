@@ -2453,13 +2453,30 @@ public class Camp extends NPCAwareContent{
 
 	public function Seed3(ItemID:SimpleConsumable):void{
 		clearOutput();
-		outputText("FANCY FARMING TEXT RIGHT HERE! WOOOOOOO! AND GAIN HERB EXPERIANCE!");
+		outputText("You begin carefully planting the");
 		player.destroyItems(ItemID, 1);
-		if (ItemID == CoC.instance.consumables.HEALHERB) HarvestMoonScenes.harvestmoonstageHH = HarvestMoonScenes.HARVESTMOONPENDINGHH;
-		if (ItemID == CoC.instance.consumables.MOONGRASS) HarvestMoonScenes.harvestmoonstageMG = HarvestMoonScenes.HARVESTMOONPENDINGMG;
-		if (ItemID == CoC.instance.consumables.SNAKEBANE) HarvestMoonScenes.harvestmoonstageSB = HarvestMoonScenes.HARVESTMOONPENDINGSB;
-		if (ItemID == CoC.instance.consumables.IRONWEED) HarvestMoonScenes.harvestmoonstageIW = HarvestMoonScenes.HARVESTMOONPENDINGIW;
-		if (ItemID == CoC.instance.consumables.BLADEFERN) HarvestMoonScenes.harvestmoonstageBF = HarvestMoonScenes.HARVESTMOONPENDINGBF;
+		if (ItemID == CoC.instance.consumables.HEALHERB){
+			HarvestMoonScenes.harvestmoonstageHH = HarvestMoonScenes.HARVESTMOONPENDINGHH;
+			outputText("healing herb");
+		}
+		if (ItemID == CoC.instance.consumables.MOONGRASS){
+			HarvestMoonScenes.harvestmoonstageMG = HarvestMoonScenes.HARVESTMOONPENDINGMG;
+			outputText("moon grass");
+		}
+		if (ItemID == CoC.instance.consumables.SNAKEBANE) {
+			HarvestMoonScenes.harvestmoonstageSB = HarvestMoonScenes.HARVESTMOONPENDINGSB;
+			outputText("snakebane");
+		}
+		if (ItemID == CoC.instance.consumables.IRONWEED){
+			HarvestMoonScenes.harvestmoonstageIW = HarvestMoonScenes.HARVESTMOONPENDINGIW;
+			outputText("ironweed");
+		}
+		if (ItemID == CoC.instance.consumables.BLADEFERN){
+			HarvestMoonScenes.harvestmoonstageBF = HarvestMoonScenes.HARVESTMOONPENDINGBF;
+			outputText("bladefern");
+		}
+		outputText("into the fertile soil. It should grow back into several or more plants within a few days." +
+				" Sometime you ponder if you shouldve just became a farmer back home you definitively have a knack for this.");
 		var HE:Number = 20 + player.level;
 		if (player.hasPerk(PerkLib.PlantKnowledge)) HE *= 2;
 		if (player.hasPerk(PerkLib.NaturalHerbalism)) HE *= 2;
@@ -2471,7 +2488,7 @@ public class Camp extends NPCAwareContent{
 		hideMenus();
 		clearOutput();
 		menu();
-		outputText("You survey your crops for readied harvests.");
+		outputText("You take a tour of your garden and survey your crops for readied harvests.");
 		if (!HealingHerb && !MoonGrass && !Snakebane && !Ironweed && !BladeFern) outputText("\n\n There is no crops left to harvest you will need to plan new seeds.");
 		if (HealingHerb)
 		{
