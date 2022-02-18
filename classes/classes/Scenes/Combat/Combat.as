@@ -1413,7 +1413,7 @@ public class Combat extends BaseContent {
     public function Poultice():void {
         clearOutput();
         var power:Number = CalcAlchemyPower();
-        power += (player.maxHP()*0.25)+(power*0.01*player.maxHP());
+        power += (player.maxHP()*0.15)+(power*0.01*player.maxHP());
         if (player.hasPerk(PerkLib.NaturalHerbalism)) power *= 2;
         Math.round(power);
         HPChange(power,false);
@@ -1424,6 +1424,8 @@ public class Combat extends BaseContent {
         clearOutput();
         var power:Number = CalcAlchemyPower()*5;
         fatigue(-power);
+        player.mana += power;
+        player.soulforce += power;
         outputText("You chug off on your energy drink, feeling rejuvenated with newfound magical energy and stamina. Recovered "+power+" ressources.");
     }
 
