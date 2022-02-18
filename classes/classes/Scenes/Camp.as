@@ -2562,7 +2562,8 @@ public class Camp extends NPCAwareContent{
 		menu();
 		outputText("Refine "+IngrediantName+" into a "+CraftingResult.name+"?");
 		addButton(0, "Craft", HerbalismCraftItem2, ItemID, IngrediantName, CraftingResult);
-		addButton(1, "Cancel", HerbalismMenu);
+		addButton(1, "Craft All", HerbalismCraftItem3, ItemID, IngrediantName, CraftingResult);
+		addButton(2, "Cancel", HerbalismMenu);
 	}
 
 	public function HerbalismCraftItem2(ItemID:SimpleConsumable, IngrediantName:String, CraftingResult:PotionType):void {
@@ -2573,10 +2574,29 @@ public class Camp extends NPCAwareContent{
 		}
 		outputText("You spend the better part of the next hour refining the "+IngrediantName+" into a "+CraftingResult.name+" adding it to your bag.");
 		if (player.hasPerk(PerkLib.NaturalHerbalism)) {
-			outputText("Your natural knowledge of herbalism allowed you two craft two additionnal "+CraftingResult.name+".");
+			outputText("Your natural knowledge of herbalism allowed you to craft two additionnal "+CraftingResult.name+".");
 		}
 		player.destroyItems(ItemID, 1);
 		var HE:Number = 20 + player.level;
+		if (player.hasPerk(PerkLib.PlantKnowledge)) HE *= 2;
+		if (player.hasPerk(PerkLib.NaturalHerbalism)) HE *= 2;
+		player.herbXP(HE);
+		doNext(HerbalismMenu);
+	}
+
+	public function HerbalismCraftItem3(ItemID:SimpleConsumable, IngrediantName:String, CraftingResult:PotionType):void {
+		clearOutput();
+
+		player.changeNumberOfPotions(CraftingResult,player.itemCount(ItemID));
+		if (player.hasPerk(PerkLib.NaturalHerbalism)){
+			player.changeNumberOfPotions(CraftingResult,2*player.itemCount(ItemID));
+		}
+		outputText("You spend the better part of the next hour refining the "+IngrediantName+" into multiple "+CraftingResult.name+" adding them to your bag.");
+		if (player.hasPerk(PerkLib.NaturalHerbalism)) {
+			outputText("Your natural knowledge of herbalism allowed you to craft tice as many "+CraftingResult.name+".");
+		}
+		player.destroyItems(ItemID, player.itemCount(ItemID));
+		var HE:Number = (20 + player.level)*player.itemCount(ItemID);
 		if (player.hasPerk(PerkLib.PlantKnowledge)) HE *= 2;
 		if (player.hasPerk(PerkLib.NaturalHerbalism)) HE *= 2;
 		player.herbXP(HE);
