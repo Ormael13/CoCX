@@ -7507,14 +7507,14 @@ public class Combat extends BaseContent {
         return damage;
     }
 
-    public function doPhysicalDamage(damage:Number, apply:Boolean = true, display:Boolean = false){
-        if (player.hasPerk(MutationsLib.SharkOlfactorySystem) && MonsterIsBleeding) damage *= 1.1;
-        if (player.hasPerk(MutationsLib.SharkOlfactorySystemPrimitive) && MonsterIsBleeding) damage *= 1.15;
-        if (player.hasPerk(MutationsLib.SharkOlfactorySystemEvolved) && MonsterIsBleeding) damage *= 1.25;
+    public function doPhysicalDamage(damage:Number, apply:Boolean = true, display:Boolean = false):void {
+        if (player.hasPerk(MutationsLib.SharkOlfactorySystem) && MonsterIsBleeding()) damage *= 1.1;
+        if (player.hasPerk(MutationsLib.SharkOlfactorySystemPrimitive) && MonsterIsBleeding()) damage *= 1.15;
+        if (player.hasPerk(MutationsLib.SharkOlfactorySystemEvolved) && MonsterIsBleeding()) damage *= 1.25;
         doDamage(damage, apply, display);
     }
 
-    public function doMinionPhysDamage(damage:Number, apply:Boolean = true, display:Boolean = false){
+    public function doMinionPhysDamage(damage:Number, apply:Boolean = true, display:Boolean = false):void {
         doDamage(damage, apply, display);
     }
 
@@ -11295,6 +11295,7 @@ public class Combat extends BaseContent {
     }
 
     public function showMonsterLust():void {
+        var damage1B:Number;
         //Entrapped
         if (monster.hasStatusEffect(StatusEffects.Constricted)) {
             outputText(monster.capitalA + monster.short + " is currently wrapped up in your tail-coils!  ");
@@ -11337,7 +11338,7 @@ public class Combat extends BaseContent {
                     outputText("You notice [monster he] is obviously affected by your venom, [monster his] movements become unsure, and [monster his] balance begins to fade. Sweat is beginning to roll on [monster his] skin. You wager [monster he] is probably beginning to regret provoking you.  ");
                 }
             }
-            var damage1B:Number = calculateBasicTeaseDamage();
+            damage1B = calculateBasicTeaseDamage();
             if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
                 damage1B *= 2;
             }
@@ -11366,7 +11367,7 @@ public class Combat extends BaseContent {
                     outputText("You notice [monster he] is obviously affected by your venom, [monster his] movements become unsure, and [monster his] balance begins to fade. Sweat is beginning to roll on [monster his] skin. You wager [monster he] is probably beginning to regret provoking you.  ");
                 }
             }
-            var damage1B:Number =  calculateBasicTeaseDamage();
+            damage1B = calculateBasicTeaseDamage();
             if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
                 damage1B *= 2;
             }
@@ -15548,4 +15549,4 @@ public class Combat extends BaseContent {
         return inteWisLibScale(player.lib, randomize);
     }
 }
-}
+}

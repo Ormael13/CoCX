@@ -130,8 +130,7 @@ public class HiddenCave extends DungeonAbstractContent
 			dungeons.setDungeonButtons(null, null, roomNWUP, roomNEUP);
 		}
 		public function roomSStaircase():void {
-            var beatmore:int = 8 - flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] - flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS];
-			dungeonLoc = 44;
+            dungeonLoc = 44;
 			clearOutput();
 			outputText("<b><u>Stone Staircase</u></b>\n");
 			outputText("This room was hidden by a secret passage. It leads down below.");
@@ -146,6 +145,7 @@ public class HiddenCave extends DungeonAbstractContent
 			dungeons.setDungeonButtons(null, null, roomSWUP, roomSEUP);
 		}
 		public function roomSStorage():void {
+            var beatmore:int = 8 - flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] - flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS];
 			dungeonLoc = 46;
 			clearOutput();
 			outputText("<b><u></u>Small Storage</b>\n");
