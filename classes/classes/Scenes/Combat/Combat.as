@@ -12082,27 +12082,37 @@ public class Combat extends BaseContent {
         enemyAI();
     }
 
-    public function calculateBasicTeaseDamage():Number {
-        var damage:Number = 18 + rand(6);
+    public function calculateBasicTeaseDamage(BaseTeaseDamage:Number = 18):Number {
+        var damage:Number = BaseTeaseDamage + rand(6);
         var bimbo:Boolean = false;
         var bro:Boolean = false;
         var futa:Boolean = false;
-        if (player.hasPerk(PerkLib.BimboBody)) {
-            bimbo = true;
-        }
-        if (player.hasPerk(PerkLib.BroBody)) {
-            bro = true;
-        }
-        if (player.hasPerk(PerkLib.FutaForm)) {
-            futa = true;
-        }
+
+        if (player.hasPerk(PerkLib.BimboBody)) bimbo = true;
+        if (player.hasPerk(PerkLib.BroBody)) bro = true;
+        if (player.hasPerk(PerkLib.FutaForm)) futa = true;
+
         if (player.hasPerk(PerkLib.SensualLover)) damage += 6;
         if (player.hasPerk(PerkLib.Seduction)) damage += 15;
         if (player.hasPerk(PerkLib.SluttySeduction)) damage += (2 * player.perkv1(PerkLib.SluttySeduction));
         if (player.hasPerk(PerkLib.WizardsEnduranceAndSluttySeduction)) damage += (2 * player.perkv2(PerkLib.WizardsEnduranceAndSluttySeduction));
         if (bimbo || bro || futa) {
             damage += 15;
-            bimbo = true;
+        }
+        //partial skins bonuses
+        switch (player.coatType()) {
+            case Skin.FUR:
+                damage += (1 + player.newGamePlusMod());
+                break;
+            case Skin.SCALES:
+                damage += (2 * (1 + player.newGamePlusMod()));
+                break;
+            case Skin.CHITIN:
+                damage += (3 * (1 + player.newGamePlusMod()));
+                break;
+            case Skin.BARK:
+                damage += (4 * (1 + player.newGamePlusMod()));
+                break;
         }
         if (player.hasPerk(PerkLib.FlawlessBody)) damage += 20;
         damage += scalingBonusLibido() * 0.2;
@@ -12115,7 +12125,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += combat.historyWhoreBonus();
         if (player.hasPerk(PerkLib.DazzlingDisplay)) damagemultiplier += 0.2;
         if (player.hasPerk(PerkLib.SuperSensual)) damagemultiplier += 0.50;
-        if (player.hasPerk(PerkLib.SluttySimplicity) && player.armorName == "nothing") StraddleDamage *= (1 + ((10 + rand(11)) / 100));
+        if (player.hasPerk(PerkLib.SluttySimplicity) && player.armorName == "nothing") damage *= (1 + ((10 + rand(11)) / 100));
         if (player.armorName == "desert naga pink and black silk dress") damagemultiplier += 0.1;
         if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
         damage *= damagemultiplier;
@@ -12179,24 +12189,8 @@ public class Combat extends BaseContent {
     private var Randomcrit:Boolean;
     public function StraddleTease():void {
         clearOutput();
-        StraddleDamage = 6 + rand(3);
         StraddleDamage += calculateBasicTeaseDamage();
         if (player.hasPerk(MutationsLib.ManticoreMetabolismEvolved) && player.tail.type == Tail.MANTICORE_PUSSYTAIL) StraddleDamage *= 2;
-        //partial skins bonuses
-        switch (player.coatType()) {
-            case Skin.FUR:
-                StraddleDamage += (1 + player.newGamePlusMod());
-                break;
-            case Skin.SCALES:
-                StraddleDamage += (2 * (1 + player.newGamePlusMod()));
-                break;
-            case Skin.CHITIN:
-                StraddleDamage += (3 * (1 + player.newGamePlusMod()));
-                break;
-            case Skin.BARK:
-                StraddleDamage += (4 * (1 + player.newGamePlusMod()));
-                break;
-        }
         //Determine if critical tease!
         Randomcrit = false;
         var critChance:int = 5;
