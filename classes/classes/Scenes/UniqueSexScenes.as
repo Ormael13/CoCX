@@ -272,6 +272,7 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 			addButton(13, "-1-", pcUniqueSexScenesChoiceMenu, re).hint("1st page of options.");
 			addButton(14, "Back", pcUniqueSexScenesChoiceMenuBack, re);
 		}
+
 		public function pcUniqueSexScenesChoiceMenuBack(re:Number):void {
 			if (re == 001) SceneLib.ashlands.hellcatScene.DefeatedHellCat();
 			if (re == 002) SceneLib.defiledravine.TrueDemons.defeatMinoIncubus();
@@ -474,6 +475,58 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 				else btnSet.push("Jiangshi", false, "You need to be a Jiangshi.");
 				return btnSet;
 			}
+		}
+
+		public function RaijuSupercharged():void {
+			clearOutput();
+			menu();
+			if (player.isHerm){
+				var maleOrFemale:Number = rand(100)
+				if (maleOrFemale < 50){
+					if (monster.hasVagina()){
+						outputText("CockCuntRape.\n\n");
+						player.sexReward("vaginalFluids","Dick");
+					}
+					else {
+						outputText("CockButtRape.\n\n");
+						player.sexReward("default","Dick",true,false);
+					}
+				}
+				else{
+					if (monster.hasCock()){
+						outputText("CuntCockRape.\n\n");
+						player.sexReward("cum","Vaginal");
+					}
+					else{
+						outputText("CuntMouthRape.\n\n");
+						player.sexReward("saliva","Vaginal");
+					}
+				}
+			}
+			else{
+				if (player.hasCock()){
+					if (monster.hasVagina()){
+						outputText("CockCuntRape.\n\n");
+						player.sexReward("vaginalFluids","Dick");
+					}
+					else {
+						outputText("CockButtRape.\n\n");
+						player.sexReward("default","Dick",true,false);
+					}
+				}
+				if (player.hasVagina()){
+					if (monster.hasCock()){
+						outputText("CuntCockRape.\n\n");
+						player.sexReward("cum","Vaginal");
+					}
+					else{
+						outputText("CuntMouthRape.\n\n");
+						player.sexReward("saliva","Vaginal");
+					}
+				}
+			}
+			statScreenRefresh();
+			cleanupAfterCombat();
 		}
 
 		public function manticoreTailRapeScene():void {
