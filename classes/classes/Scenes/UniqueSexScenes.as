@@ -8,8 +8,8 @@ package classes.Scenes
 	import classes.BodyParts.Arms;
 	import classes.BodyParts.LowerBody;
 	import classes.BodyParts.Tail;
-import classes.Perks.MindBreakerBrain;
-import classes.Scenes.Areas.Mountain.HellHound;
+	import classes.Perks.MindBreakerBrain;
+	import classes.Scenes.Areas.Mountain.HellHound;
 	import classes.Scenes.Areas.Mountain.InfestedHellhound;
 	import classes.Scenes.Areas.Mountain.Minotaur;
 	import classes.Scenes.Areas.Ocean.SeaAnemone;
@@ -232,6 +232,7 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 			addButton(13, "-2-", pcUniqueSexScenesChoiceMenu2nd, re).hint("2nd page of options.");
 			addButton(14, "Back", pcUniqueSexScenesChoiceMenuBack, re);
 		}
+
 		public function pcUniqueSexScenesChoiceMenu2nd(re:Number):void {
 			menu();
 			if (player.isAlraune()) {
@@ -272,68 +273,69 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 			addButton(13, "-1-", pcUniqueSexScenesChoiceMenu, re).hint("1st page of options.");
 			addButton(14, "Back", pcUniqueSexScenesChoiceMenuBack, re);
 		}
+
 		public function pcUniqueSexScenesChoiceMenuBack(re:Number):void {
-			if (re == 001) SceneLib.ashlands.hellcatScene.DefeatedHellCat();
-			if (re == 002) SceneLib.defiledravine.TrueDemons.defeatMinoIncubus();
-			if (re == 003) SceneLib.defiledravine.TrueDemons.defeatIncubus();
-			if (re == 004) SceneLib.defiledravine.TrueDemons.defeatOmnibus();
-			if (re == 005) SceneLib.defiledravine.TrueDemons.defeatCowSuccubus();
-			if (re == 006) SceneLib.defiledravine.TrueDemons.defeatSuccubus();
-			if (re == 007) SceneLib.bog.chameleonGirlScene.defeatChameleonGirl();
-			if (re == 008) SceneLib.bog.lizanScene.winAgainstLizan();
-			if (re == 009) SceneLib.bog.phoukaScene.phoukaPlayerWins2();
-			if (re == 010) SceneLib.caves.cavewyrmScene.winningOverCaveWyrm();
-			if (re == 011) SceneLib.forest.akbalScene.akbalDefeated2();
-			if (re == 012) SceneLib.desert.sandTrapScene.pcBeatsATrap2();
-			if (re == 013) SceneLib.desert.nagaScene.nagaRapeChoice();
-			if (re == 014) SceneLib.desert.sandWitchScene.beatSandwitch2();
-			if (re == 015) SceneLib.forest.beeGirlScene.afterfightoptionswithBeeGirl();
-			if (re == 016) SceneLib.forest.kitsuneScene.defeatTheKitsunes();
-			if (re == 017) SceneLib.forest.tamaniScene.TamaniDefeated2();
-			if (re == 018) SceneLib.glacialRift.giantScene.winAgainstGiant();
-			if (re == 019) SceneLib.glacialRift.giantScene.winAgainstYoungGiant();
-			if (re == 020) SceneLib.glacialRift.winterwolfScene.winAgainstWinterWolf();
-			if (re == 021) SceneLib.glacialRift.yetiScene.winAgainstYeti();
-			if (re == 022) SceneLib.highMountains.basiliskScene.defeatBasilisk();
-			if (re == 023) SceneLib.highMountains.harpyScene.harpyVictoryuuuuu();
-			if (re == 024) SceneLib.highMountains.izumiScenes.touchThatFluffyHorn2();
-			if (re == 025) SceneLib.highMountains.minotaurMobScene.victoryMinotaurGang2();
-			if (re == 026) SceneLib.highMountains.phoenixScene.winAgainstPhoenix();
-			if (re == 027) SceneLib.highMountains.phoenixScene.winAgainstPhoenix1();
-			if (re == 028) SceneLib.lake.fetishCultistScene.cultistDefeated();
-			if (re == 029) SceneLib.lake.fetishZealotScene.zealotDefeated();
-			if (re == 030) SceneLib.lake.gooGirlScene.beatUpGoo();
-			if (re == 031) SceneLib.lake.greenSlimeScene.defeatGS();
-			if (re == 032) SceneLib.mountain.hellHoundScene.hellHoundPostFightSexScenes();
-			if (re == 033) SceneLib.mountain.minotaurScene.minoVictoryRapeChoices();
-			if (re == 034) SceneLib.ocean.scyllaScene.oceanScyllaWin();
-			if (re == 035) SceneLib.plains.bunnyGirl.rapeBunBun2();
-			if (re == 036) SceneLib.plains.gnollScene.defeatHyena();
-			if (re == 037) SceneLib.plains.gnollSpearThrowerScene.hyenaVictory();
-			if (re == 038) SceneLib.plains.satyrScene.defeatASatyr2();
-			if (re == 039) SceneLib.swamp.corruptedDriderScene.defeatDriderIntro();
-			if (re == 040) SceneLib.swamp.femaleSpiderMorphScene.defeatASpiderBitch();
-			if (re == 041) SceneLib.swamp.maleSpiderMorphScene.defeatSpiderBoy();
-			if (re == 042) SceneLib.tundra.valkyrieScene.winAgainstValkyrie();
-			if (re == 043) SceneLib.volcanicCrag.behemothScene.winAgainstBehemoth();
-			if (re == 044) SceneLib.dungeons.desertcave.cumWitchDefeated();
-			if (re == 045) SceneLib.goblinAssassinScene.gobboAssassinRapeIntro();
-			if (re == 046) SceneLib.goblinElderScene.goblinElderRapeIntro2();
-			if (re == 047) SceneLib.goblinScene.gobboRapeIntro();
-			if (re == 048) SceneLib.goblinShamanScene.goblinShamanRapeIntro();
-			if (re == 049) SceneLib.goblinWarriorScene.goblinWarriorRapeIntro();
-			if (re == 050) SceneLib.impScene.impVictory();
-			if (re == 051) SceneLib.impScene.defeatImpLord();
-			if (re == 052) SceneLib.anemoneScene.defeatAnemone();
-			if (re == 053) SceneLib.ceraphScene.winRapeChoices();
-			if (re == 054) SceneLib.electraScene.PlayerSexElectra();
-			if (re == 055) SceneLib.etnaScene.etnaRapeIntro();
-			if (re == 056) SceneLib.etnaScene.etnaRape3rdWin();
-			if (re == 057) SceneLib.tedScene.defeatedTedPostHiddenCave();
-			if (re == 058) SceneLib.sharkgirlScene.sharkWinChoices2();
-			if (re == 059) SceneLib.sharkgirlScene.oceanSharkWinChoices();
-			if (re == 060) SceneLib.sharkgirlScene.oceanTigerSharkWinChoices();
-			if (re == 061) SceneLib.sharkgirlScene.oceanSharkspackWinChoices();
+			if (re == 1) SceneLib.ashlands.hellcatScene.DefeatedHellCat();
+			if (re == 2) SceneLib.defiledravine.TrueDemons.defeatMinoIncubus();
+			if (re == 3) SceneLib.defiledravine.TrueDemons.defeatIncubus();
+			if (re == 4) SceneLib.defiledravine.TrueDemons.defeatOmnibus();
+			if (re == 5) SceneLib.defiledravine.TrueDemons.defeatCowSuccubus();
+			if (re == 6) SceneLib.defiledravine.TrueDemons.defeatSuccubus();
+			if (re == 7) SceneLib.bog.chameleonGirlScene.defeatChameleonGirl();
+			if (re == 8) SceneLib.bog.lizanScene.winAgainstLizan();
+			if (re == 9) SceneLib.bog.phoukaScene.phoukaPlayerWins2();
+			if (re == 10) SceneLib.caves.cavewyrmScene.winningOverCaveWyrm();
+			if (re == 11) SceneLib.forest.akbalScene.akbalDefeated2();
+			if (re == 12) SceneLib.desert.sandTrapScene.pcBeatsATrap2();
+			if (re == 13) SceneLib.desert.nagaScene.nagaRapeChoice();
+			if (re == 14) SceneLib.desert.sandWitchScene.beatSandwitch2();
+			if (re == 15) SceneLib.forest.beeGirlScene.afterfightoptionswithBeeGirl();
+			if (re == 16) SceneLib.forest.kitsuneScene.defeatTheKitsunes();
+			if (re == 17) SceneLib.forest.tamaniScene.TamaniDefeated2();
+			if (re == 18) SceneLib.glacialRift.giantScene.winAgainstGiant();
+			if (re == 19) SceneLib.glacialRift.giantScene.winAgainstYoungGiant();
+			if (re == 20) SceneLib.glacialRift.winterwolfScene.winAgainstWinterWolf();
+			if (re == 21) SceneLib.glacialRift.yetiScene.winAgainstYeti();
+			if (re == 22) SceneLib.highMountains.basiliskScene.defeatBasilisk();
+			if (re == 23) SceneLib.highMountains.harpyScene.harpyVictoryuuuuu();
+			if (re == 24) SceneLib.highMountains.izumiScenes.touchThatFluffyHorn2();
+			if (re == 25) SceneLib.highMountains.minotaurMobScene.victoryMinotaurGang2();
+			if (re == 26) SceneLib.highMountains.phoenixScene.winAgainstPhoenix();
+			if (re == 27) SceneLib.highMountains.phoenixScene.winAgainstPhoenix1();
+			if (re == 28) SceneLib.lake.fetishCultistScene.cultistDefeated();
+			if (re == 29) SceneLib.lake.fetishZealotScene.zealotDefeated();
+			if (re == 30) SceneLib.lake.gooGirlScene.beatUpGoo();
+			if (re == 31) SceneLib.lake.greenSlimeScene.defeatGS();
+			if (re == 32) SceneLib.mountain.hellHoundScene.hellHoundPostFightSexScenes();
+			if (re == 33) SceneLib.mountain.minotaurScene.minoVictoryRapeChoices();
+			if (re == 34) SceneLib.ocean.scyllaScene.oceanScyllaWin();
+			if (re == 35) SceneLib.plains.bunnyGirl.rapeBunBun2();
+			if (re == 36) SceneLib.plains.gnollScene.defeatHyena();
+			if (re == 37) SceneLib.plains.gnollSpearThrowerScene.hyenaVictory();
+			if (re == 38) SceneLib.plains.satyrScene.defeatASatyr2();
+			if (re == 39) SceneLib.swamp.corruptedDriderScene.defeatDriderIntro();
+			if (re == 40) SceneLib.swamp.femaleSpiderMorphScene.defeatASpiderBitch();
+			if (re == 41) SceneLib.swamp.maleSpiderMorphScene.defeatSpiderBoy();
+			if (re == 42) SceneLib.tundra.valkyrieScene.winAgainstValkyrie();
+			if (re == 43) SceneLib.volcanicCrag.behemothScene.winAgainstBehemoth();
+			if (re == 44) SceneLib.dungeons.desertcave.cumWitchDefeated();
+			if (re == 45) SceneLib.goblinAssassinScene.gobboAssassinRapeIntro();
+			if (re == 46) SceneLib.goblinElderScene.goblinElderRapeIntro2();
+			if (re == 47) SceneLib.goblinScene.gobboRapeIntro();
+			if (re == 48) SceneLib.goblinShamanScene.goblinShamanRapeIntro();
+			if (re == 49) SceneLib.goblinWarriorScene.goblinWarriorRapeIntro();
+			if (re == 50) SceneLib.impScene.impVictory();
+			if (re == 51) SceneLib.impScene.defeatImpLord();
+			if (re == 52) SceneLib.anemoneScene.defeatAnemone();
+			if (re == 53) SceneLib.ceraphScene.winRapeChoices();
+			if (re == 54) SceneLib.electraScene.PlayerSexElectra();
+			if (re == 55) SceneLib.etnaScene.etnaRapeIntro();
+			if (re == 56) SceneLib.etnaScene.etnaRape3rdWin();
+			if (re == 57) SceneLib.tedScene.defeatedTedPostHiddenCave();
+			if (re == 58) SceneLib.sharkgirlScene.sharkWinChoices2();
+			if (re == 59) SceneLib.sharkgirlScene.oceanSharkWinChoices();
+			if (re == 60) SceneLib.sharkgirlScene.oceanTigerSharkWinChoices();
+			if (re == 61) SceneLib.sharkgirlScene.oceanSharkspackWinChoices();
 		}
 
 		//if (uniquuuesexscene.pcCanUseUniqueSexScenev2(true, null) > 0) addButton(13, "U.Sex Scenes", curry(uniquuuesexscene.pcCanUseUniqueSexScenev2, false, [BACK FUNCTION GOES HERE])).hint("Other non-typical sex scenes.");
@@ -476,6 +478,68 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 			}
 		}
 
+		public function pcRapeOnVictory(re:Number):void{
+			//Repeat this for different automatic scenes and trigger and use this function as a result instead of pcUniqueSexScenesChoiceMenu when called in places where it would make senses for it to proc
+			if (player.raijuScore() >= 15 && !monster.hasPerk(PerkLib.LightningAffinity) && !monster.hasPerk(PerkLib.LightningNature)){
+				RaijuRapeSupercharged();
+			}
+			else{
+				addButton(13, "U. Sex Scenes", pcUniqueSexScenesChoiceMenu, re).hint("Other non typical sex scenes.");
+			}
+		}
+
+		public function RaijuRapeSupercharged():void {
+			clearOutput();
+			menu();
+			if (player.isHerm){
+				var maleOrFemale:Number = rand(100)
+				if (maleOrFemale < 50){
+					if (monster.hasVagina()){
+						outputText("CockCuntRape.\n\n");
+						player.sexReward("vaginalFluids","Dick");
+					}
+					else {
+						outputText("CockButtRape.\n\n");
+						player.sexReward("default","Dick",true,false);
+					}
+				}
+				else{
+					if (monster.hasCock()){
+						outputText("CuntCockRape.\n\n");
+						player.sexReward("cum","Vaginal");
+					}
+					else{
+						outputText("CuntMouthRape.\n\n");
+						player.sexReward("saliva","Vaginal");
+					}
+				}
+			}
+			else{
+				if (player.hasCock()){
+					if (monster.hasVagina()){
+						outputText("CockCuntRape.\n\n");
+						player.sexReward("vaginalFluids","Dick");
+					}
+					else {
+						outputText("CockButtRape.\n\n");
+						player.sexReward("default","Dick",true,false);
+					}
+				}
+				if (player.hasVagina()){
+					if (monster.hasCock()){
+						outputText("CuntCockRape.\n\n");
+						player.sexReward("cum","Vaginal");
+					}
+					else{
+						outputText("CuntMouthRape.\n\n");
+						player.sexReward("saliva","Vaginal");
+					}
+				}
+			}
+			statScreenRefresh();
+			cleanupAfterCombat();
+		}
+
 		public function manticoreTailRapeScene():void {
 			clearOutput();
 			outputText("While your defeated foe is laying on the ground, you make a sadistic grin as you contemplate the situation. This came just as you got hungry or rather, just as your tail did.\n\n");
@@ -587,7 +651,11 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 			if (player.hasCock()) outputText("While you mentaly rape your victim of everything that used to make its sense of self you push your needy cock through the now welcoming hole that is your half broken toy butt thrusting to bring yourself to new heights of pleasant delirium.");
 			outputText("\n\nYou cum green, your fluids dripping from your partner and tainting the ground beneath into a small pool of defiled fluid as you draw in whatever remains of your victim's now empty brain.");
 
-
+			if (player.buff("Brain melt").getValueOfStatBuff("int.mult") < (player.perkv1(PerkLib.MindbreakerBrain1toX)*2)){
+				player.buff("Brain melt").addStat("int.mult",0.01);
+				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
+				CoC.instance.mainView.statsView.showStatUp("int");
+			}
 
 			player.sexReward("Default", "Default", true, false);
 			statScreenRefresh();
