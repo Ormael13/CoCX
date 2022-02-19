@@ -1824,7 +1824,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			var damage:Number = unarmedAttack();
 			damage += player.str;
 			if (player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) damage += player.str;
-			damage = calcInfernoMod(damage);
+			damage = calcInfernoMod(damage, true);
 			if (monster.plural) damage *= 5;
 			if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
 			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
@@ -6122,7 +6122,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				damage *= 1.75;
 			}
 			//High damage to goes.
-			damage = calcVoltageMod(damage);
+			damage = calcVoltageMod(damage, true);
 			if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
 			if (player.armor == armors.GTECHC_) damage *= 1.5;
 			if (player.upperGarment == undergarments.TECHBRA) damage *= 1.05;

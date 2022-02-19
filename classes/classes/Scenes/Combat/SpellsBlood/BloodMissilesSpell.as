@@ -22,20 +22,21 @@ public class BloodMissilesSpell extends AbstractBloodSpell {
 	}
 	
 	override public function describeEffectVs(target:Monster):String {
-		return "~"+calcDamage(target,false)+"(x5) magical damage"
+		return "~"+calcDamage(target, false, false)+"(x5) magical damage"
 	}
 	
 	override public function calcCooldown():int {
 		return 2;
 	}
 	
-	public function calcDamage(target:Monster, randomize:Boolean=true):Number {
+	public function calcDamage(target:Monster, randomize:Boolean=true, casting:Boolean = true):Number {
 		var damage:Number = adjustSpellDamage(
 				scalingBonusIntelligence(randomize),
 				DamageType.MAGICAL,
 				CAT_SPELL_BLOOD,
 				target,
-				false
+				false,
+                casting
 		);
 		if (damage < 10) damage = 10;
 		return Math.round(damage);
@@ -45,7 +46,7 @@ public class BloodMissilesSpell extends AbstractBloodSpell {
 		if (display) {
 			outputText("You concentrate, focusing on the power of your blood before drawing it from your body, "+(player.HP < player.maxOverHP() ? "wounds":"skin pores")+". Around you form a few crimson spheres you aim at [themonster]!\n\n");
 		}
-		var damage:Number = calcDamage(monster);
+		var damage:Number = calcDamage(monster, true, true);
 		//Determine if critical hit!
 		var crit:Boolean = false;
 		var critChance:int = 5;

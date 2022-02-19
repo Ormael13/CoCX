@@ -920,10 +920,12 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const ControlFreak:StatusEffectType			   = mkCombat("Control Freak");
 		public static const CouatlHurricane:StatusEffectType           = mkCombat("Coualt Hurricane");
 		public static const CounterAction:StatusEffectType             = mkCombat("Counter Action");
+        // For the following: 1 - modifier (1=5%), 2 - "spell cast in the current turn, no decreasing", 3 - "spell is being channeled, no decrease for (Su)"
 		public static const CounterEclipsingShadow:StatusEffectType    = mkCombat("Counter Eclipsing Shadow");
 		public static const CounterGlacialStorm:StatusEffectType       = mkCombat("Counter Glacial Storm");
 		public static const CounterHighVoltage:StatusEffectType        = mkCombat("Counter High Voltage");
 		public static const CounterRagingInferno:StatusEffectType      = mkCombat("Counter Raging Inferno");
+        //
 		public static const CurseOfDesire:StatusEffectType             = mkCombat("Curse of Desire");
 		public static const CurseOfWeeping:StatusEffectType            = mkCombat("Curse of Weeping");
 		public static const DarkRitual:StatusEffectType            	   = mkCombat("Dark Ritual");

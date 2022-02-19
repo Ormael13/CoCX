@@ -840,7 +840,7 @@ public class MagicSpecials extends BaseCombatContent {
 		damage += scalingBonusStrength() * 0.2;
 		damage += scalingBonusToughness() * 0.2;
 		damage += rand(60);
-		damage = calcGlacialMod(damage);
+		damage = calcGlacialMod(damage, true);
 		if (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType)) damage *= 5;
 		if (combat.wearingWinterScarf()) damage *= 1.2;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
@@ -938,7 +938,7 @@ public class MagicSpecials extends BaseCombatContent {
 		if (player.tou >= 901 && player.tou < 951) damage += ((player.tou * 5.25) + rand(player.tou * 5.75));
 		if (player.tou >= 951) damage += ((player.tou * 5.5) + rand(player.tou * 6));
 		else damage += (player.tou/3 + rand(player.tou/2));
-		damage = calcGlacialMod(damage);
+		damage = calcGlacialMod(damage, true);
 		if (combat.wearingWinterScarf()) damage *= 1.2;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
@@ -1104,7 +1104,7 @@ public class MagicSpecials extends BaseCombatContent {
 			damage *= 1.75;
 		}
 		//High damage to goes.
-		damage = calcVoltageMod(damage);
+		damage = calcVoltageMod(damage, true);
 		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
@@ -1248,7 +1248,7 @@ public class MagicSpecials extends BaseCombatContent {
 			damage *= 1.75;
 		}
 		//High damage to goes.
-		damage = calcVoltageMod(damage);
+		damage = calcVoltageMod(damage, true);
 		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(MutationsLib.FloralOvaries)) damage *= 1.25;
@@ -1354,7 +1354,7 @@ public class MagicSpecials extends BaseCombatContent {
 			damage *= 1.75;
 		}
 		//High damage to goes.
-		damage = calcVoltageMod(damage);
+		damage = calcVoltageMod(damage, true);
 		if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
@@ -1577,7 +1577,7 @@ public class MagicSpecials extends BaseCombatContent {
 		damage += scalingBonusStrength() * 0.5;
 		damage += scalingBonusToughness() * 0.5;
 		damage += 50 + rand(20);
-		damage = calcInfernoMod(damage);
+		damage = calcInfernoMod(damage, true);
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage = Math.round(damage);
@@ -1699,7 +1699,7 @@ public class MagicSpecials extends BaseCombatContent {
 			damage *= 1.75;
 		}
 		//High damage to goes.
-		damage = calcGlacialMod(damage);
+		damage = calcGlacialMod(damage, true);
 		if (combat.wearingWinterScarf()) damage *= 1.2;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
@@ -1766,7 +1766,7 @@ public class MagicSpecials extends BaseCombatContent {
 			damage *= 1.75;
 		}
 		//High damage to goes.
-		damage = calcGlacialMod(damage);
+		damage = calcGlacialMod(damage, true);
 		if (combat.wearingWinterScarf()) damage *= 1.2;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
@@ -1808,7 +1808,7 @@ public class MagicSpecials extends BaseCombatContent {
 		else player.createStatusEffect(StatusEffects.CooldownFrozenKiss,8,0,0,0);
 		var damage:Number = scalingBonusIntelligence() * spellModBlack() * 0.8;
 		//High damage to goes.
-		damage = calcGlacialMod(damage);
+		damage = calcGlacialMod(damage, true);
 		if (combat.wearingWinterScarf()) damage *= 1.2;
 		damage = Math.round(damage);
 		outputText("You suddenly close the gap between you and [themonster] embracing [monster him] with both arms and drawing [monster him] in for a sudden kiss. At first [themonster] is surprised but [monster his] expression changes to horror as it starts to realise you're draining [monster his] warmth away. ");
@@ -1933,7 +1933,7 @@ public class MagicSpecials extends BaseCombatContent {
 		damage += scalingBonusStrength();// * 0.5
 		damage += player.tou;
 		damage += scalingBonusToughness();// * 0.5
-		damage = calcInfernoMod(damage);
+		damage = calcInfernoMod(damage, true);
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage = Math.round(damage);
@@ -2037,7 +2037,7 @@ public class MagicSpecials extends BaseCombatContent {
 		damage += scalingBonusIntelligence();
 		damage += scalingBonusWisdom();
 		damage *= 1 + (rand(51) / 100);
-		damage = calcInfernoMod(damage);
+		damage = calcInfernoMod(damage, true);
 		if(player.hasStatusEffect(StatusEffects.DragonBreathBoost)) {
 			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
@@ -2159,7 +2159,7 @@ public class MagicSpecials extends BaseCombatContent {
 		damage += scalingBonusIntelligence();
 		damage += scalingBonusWisdom();
 		damage *= 1 + (rand(51) / 100);
-		damage = calcGlacialMod(damage);
+		damage = calcGlacialMod(damage, true);
 		if(player.hasStatusEffect(StatusEffects.DragonBreathBoost)) {
 			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
@@ -2247,7 +2247,7 @@ public class MagicSpecials extends BaseCombatContent {
 		damage += scalingBonusIntelligence();
 		damage += scalingBonusWisdom();
 		damage *= 1 + (rand(51) / 100);
-		damage = calcVoltageMod(damage);
+		damage = calcVoltageMod(damage, true);
 		if(player.hasStatusEffect(StatusEffects.DragonBreathBoost)) {
 			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
@@ -2335,7 +2335,7 @@ public class MagicSpecials extends BaseCombatContent {
 		damage += scalingBonusIntelligence();
 		damage += scalingBonusWisdom();
 		damage *= 1 + (rand(51) / 100);
-		damage = calcEclypseMod(damage);
+		damage = calcEclypseMod(damage, true);
 		if(player.hasStatusEffect(StatusEffects.DragonBreathBoost)) {
 			player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 			damage *= 1.5;
@@ -2515,10 +2515,10 @@ public class MagicSpecials extends BaseCombatContent {
 			damage += scalingBonusIntelligence() * 5;
 			damage += scalingBonusWisdom() * 5;
 			damage *= 1.5 + (rand(101) / 100);
-			damage = calcInfernoMod(damage);
-			damage = calcGlacialMod(damage);
-			damage = calcVoltageMod(damage);
-			damage = calcEclypseMod(damage);
+			damage = calcInfernoMod(damage, true);
+			damage = calcGlacialMod(damage, true);
+			damage = calcVoltageMod(damage, true);
+			damage = calcEclypseMod(damage, true);
 			if(player.hasStatusEffect(StatusEffects.DragonBreathBoost)) {
 				player.removeStatusEffect(StatusEffects.DragonBreathBoost);
 				damage *= 3;
@@ -2637,7 +2637,7 @@ public class MagicSpecials extends BaseCombatContent {
 		damage += 45 + rand(10);
 		damage += scalingBonusIntelligence() * 0.25;
 		damage += scalingBonusWisdom() * 0.25;
-		damage = calcInfernoMod(damage);
+		damage = calcInfernoMod(damage, true);
 		damage *= 4;
 		damage = Math.round(damage);
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
@@ -2751,7 +2751,7 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		fatigue(20, USEFATG_MAGIC_NOBM);
 		var damage:Number = (player.level * 8 + rand(10) + player.inte / 2 + player.wis / 2 + player.cor / 5);
-		damage = calcInfernoMod(damage);
+		damage = calcInfernoMod(damage, true);
 		damage *= 4;
 		if (combat.checkConcentration()) return; //Amily concentration
 		if (monster is LivingStatue)
@@ -3313,7 +3313,7 @@ public class MagicSpecials extends BaseCombatContent {
 		else if (monster.cor >= 10) damage = Math.round(damage * 1.3);
 		else damage = Math.round(damage * 1.4);
 		//High damage to goes.
-		damage = calcInfernoMod(damage);
+		damage = calcInfernoMod(damage, true);
 		if (monster.short == "goo-girl") damage = Math.round(damage * 1.5);
 		if (monster.short == "tentacle beast") damage = Math.round(damage * 1.2);
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
@@ -3469,8 +3469,8 @@ public class MagicSpecials extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
-		damage = calcInfernoMod(damage);
-		damage = calcEclypseMod(damage);
+		damage = calcInfernoMod(damage, true);
+		damage = calcEclypseMod(damage, true);
 		//damage *= 1.25;
 		if (player.tailType == 8 && player.tailCount == 2) damage *= 0.5;
 		else damage *= 0.2;
@@ -3577,7 +3577,7 @@ public class MagicSpecials extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
-		damage = calcInfernoMod(damage);
+		damage = calcInfernoMod(damage, true);
 		damage *= 0.25;
 		var basicfoxfiredmgmulti:Number = 1;
 		basicfoxfiredmgmulti += spellMod() - 1;
@@ -3690,7 +3690,7 @@ public class MagicSpecials extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
-		damage = calcInfernoMod(damage);
+		damage = calcInfernoMod(damage, true);
 		damage *= 0.125;
 		if (player.hasPerk(PerkLib.CorruptedNinetails) && player.tailType == Tail.FOX && player.tailCount == 9) damage *= 0.5;
 		var corruptedfoxfiredmgmulti:Number = 1;
@@ -3811,7 +3811,7 @@ public class MagicSpecials extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
-		damage = calcInfernoMod(damage);
+		damage = calcInfernoMod(damage, true);
 		damage *= 0.5;
 		if (player.tailType == Tail.FOX && player.tailCount == 9) damage *= 2;
 		var fusedfoxfiredmgmulti:Number = 1;
@@ -3927,7 +3927,7 @@ public class MagicSpecials extends BaseCombatContent {
 			crit = true;
 			damage *= 1.75;
 		}
-		damage = calcInfernoMod(damage);
+		damage = calcInfernoMod(damage, true);
 		damage *= 0.5;
 		if (player.hasPerk(PerkLib.EnlightenedNinetails) && player.tailType == Tail.FOX && player.tailCount == 9) damage *= 2;
 		var purefoxfiredmgmulti:Number = 1;
@@ -6110,7 +6110,7 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		outputText("You gather energy in your Talisman and unleash the spell contained within.  A wave of burning flames gathers around [themonster], slowly burning [monster him].");
 		var damage:int = int(100+(player.inte/2 + rand(player.inte)) * spellMod());
-		damage = calcInfernoMod(damage);
+		damage = calcInfernoMod(damage, true);
 		if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
 		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
 		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
@@ -6140,7 +6140,7 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		outputText("You gather energy in your Talisman and unleash the spell contained within.  A wave of cold air gathers around [themonster], slowly freezing [monster him].");
 		var damage:int = int(100+(player.inte/2 + rand(player.inte)) * spellMod());
-		damage = calcGlacialMod(damage);
+		damage = calcGlacialMod(damage, true);
 		if (monster.hasPerk(PerkLib.IceNature)) damage *= 0.2;
 		if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 0.5;
 		if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 2;

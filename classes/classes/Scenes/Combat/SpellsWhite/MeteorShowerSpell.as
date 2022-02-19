@@ -56,15 +56,17 @@ public class MeteorShowerSpell extends AbstractWhiteSpell{
 	}
 	
 	override public function describeEffectVs(target:Monster):String {
-		return "~" + calcDamage(target,false)+ "(x12) fire damage."
+		return "~" + calcDamage(target,false, false)+ "(x12) fire damage."
 	}
 	
-	public function calcDamage(target:Monster, randomize:Boolean=true):Number {
+	public function calcDamage(target:Monster, randomize:Boolean=true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)
 		return adjustSpellDamage(
 				scalingBonusIntelligence(randomize)*2,
 				DamageType.FIRE,
 				CAT_SPELL_WHITE,
-				target
+				target,
+                true,
+                casting
 		);
 	}
 	
@@ -79,7 +81,7 @@ public class MeteorShowerSpell extends AbstractWhiteSpell{
 		var meteor:Number = 12;
 		var totalDamage:Number = 0;
 		while (meteor-->0){
-			var damage:Number = calcDamage(monster);
+			var damage:Number = calcDamage(monster, true, true);
 			totalDamage += critAndRepeatDamage(false, damage, DamageType.FIRE, true);
 		}
 		if (display) {
