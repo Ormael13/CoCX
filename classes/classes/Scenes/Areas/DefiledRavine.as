@@ -82,7 +82,7 @@ use namespace CoC;
 				case 3:
 					clearOutput();
 					if (player.hasKeyItem("Old Pickaxe") > 0 && Forgefather.materialsExplained == true){
-						outputText("You stumble across a vein of Ebony, this looks like suitable material for your gargoyle form.\n");
+						outputText("You stumble across a vein of Marble, this looks like suitable material for your gargoyle form.\n");
 						outputText("Do you wish to mine it?");
 						menu();
 						addButton(0, "Yes", defiledRavineSiteMine);
