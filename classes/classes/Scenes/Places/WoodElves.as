@@ -853,7 +853,7 @@ import classes.internals.SaveableState;
 			if (player.statusEffectv2(StatusEffects.FletchingTable) > 1) addButtonDisabled(1, "Ebonbloom", "You already used this for improving bow string.");
 			else {
 				if (player.hasItem(useables.EBONBLO, 1)) {
-					if (player.statusEffectv2(StatusEffects.FletchingTable) == 1) addButtonDisabled(1, "Ebonbloom", "You need to imprpve string with spider silk first.");
+					if (player.statusEffectv2(StatusEffects.FletchingTable) != 1) addButtonDisabled(1, "Ebonbloom", "You need to imprpve string with spider silk first.");
 					else addButton(1, "Ebonbloom", FletchingAdjustString2, useables.EBONBLO);
 				}
 				else addButtonDisabled(1, "Ebonbloom", "You need to have ebonbloom.");
