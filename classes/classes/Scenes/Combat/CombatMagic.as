@@ -742,9 +742,9 @@ public class CombatMagic extends BaseCombatContent {
 				}
 				if (casting) {
                     if (player.statusEffectv1(StatusEffects.CounterRagingInferno) == 0)
-                        outputText("Unfortunately, traces of your previously used fire magic are too weak to be used.\n\n");
+                        outputText("\nUnfortunately, traces of your previously used fire magic are too weak to be used.\n\n");
                     else
-					    outputText("Traces of your previously used fire magic are still here, and you use them to empower another spell!\n\n");
+					    outputText("\nTraces of your previously used fire magic are still here, and you use them to empower another spell!\n\n");
 					if (player.hasPerk(PerkLib.RagingInfernoEx)) player.addStatusValue(StatusEffects.CounterRagingInferno, 1, 6);
 					else player.addStatusValue(StatusEffects.CounterRagingInferno, 1, 4);
 				    player.addStatusValue(StatusEffects.CounterRagingInferno, 2, 1);
@@ -768,9 +768,9 @@ public class CombatMagic extends BaseCombatContent {
 				}
 				if (casting) {
                     if (player.statusEffectv1(StatusEffects.CounterGlacialStorm) == 0)
-                        outputText("Unfortunately, traces of your previously used ice magic are too weak to be used.\n\n");
+                        outputText("\nUnfortunately, traces of your previously used ice magic are too weak to be used.\n\n");
                     else
-					    outputText("Traces of your previously used ice magic are still here, and you use them to empower another spell!\n\n");
+					    outputText("\nTraces of your previously used ice magic are still here, and you use them to empower another spell!\n\n");
 					if (player.hasPerk(PerkLib.GlacialStormEx)) player.addStatusValue(StatusEffects.CounterGlacialStorm, 1, 6);
 					else player.addStatusValue(StatusEffects.CounterGlacialStorm, 1, 4);
 				    player.addStatusValue(StatusEffects.CounterGlacialStorm, 2, 1);
@@ -794,9 +794,9 @@ public class CombatMagic extends BaseCombatContent {
 				}
 				if (casting) {
                     if (player.statusEffectv1(StatusEffects.CounterHighVoltage) == 0)
-                        outputText("Unfortunately, traces of your previously used lightning magic are too weak to be used.\n\n");
+                        outputText("\nUnfortunately, traces of your previously used lightning magic are too weak to be used.\n\n");
                     else
-					    outputText("Traces of your previously used lightning magic are still here, and you use them to empower another spell!\n\n");
+					    outputText("\nTraces of your previously used lightning magic are still here, and you use them to empower another spell!\n\n");
 					if (player.hasPerk(PerkLib.HighVoltageEx)) player.addStatusValue(StatusEffects.CounterHighVoltage, 1, 6);
 					else player.addStatusValue(StatusEffects.CounterHighVoltage, 1, 4);
 				    player.addStatusValue(StatusEffects.CounterHighVoltage, 2, 1);
@@ -820,9 +820,9 @@ public class CombatMagic extends BaseCombatContent {
 				}
 				if (casting) {
                     if (player.statusEffectv1(StatusEffects.CounterEclipsingShadow) == 0)
-                        outputText("Unfortunately, traces of your previously used darkness magic are too weak to be used.\n\n");
+                        outputText("\nUnfortunately, traces of your previously used darkness magic are too weak to be used.\n\n");
                     else
-					    outputText("Traces of your previously used darkness magic are still here, and you use them to empower another spell!\n\n");
+					    outputText("\nTraces of your previously used darkness magic are still here, and you use them to empower another spell!\n\n");
 					if (player.hasPerk(PerkLib.EclipsingShadowEx)) player.addStatusValue(StatusEffects.CounterEclipsingShadow, 1, 6);
 					else player.addStatusValue(StatusEffects.CounterEclipsingShadow, 1, 4);
 				    player.addStatusValue(StatusEffects.CounterEclipsingShadow, 2, 1);
