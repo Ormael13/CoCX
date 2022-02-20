@@ -13,7 +13,7 @@ public class IceRainSpell extends AbstractBlackSpell {
 				TIMING_INSTANT,
 				[TAG_DAMAGING, TAG_ICE, TAG_AOE]
 		);
-		baseManaCost = 40;
+		baseManaCost = 500;
 	}
 	
 	override public function describeEffectVs(target:Monster):String {
@@ -25,7 +25,7 @@ public class IceRainSpell extends AbstractBlackSpell {
 	}
 	
 	override public function calcCooldown():int {
-		return spellBlackCooldown();
+		return spellBlackTier2Cooldown();
 	}
 	
 	public function calcDamage(monster:Monster, randomize:Boolean = true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)
