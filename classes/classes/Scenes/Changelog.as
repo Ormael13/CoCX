@@ -149,13 +149,19 @@ package classes.Scenes
 			outputText("-Fuel for the Fire perk effect changed to: Increase two times wrath gains from getting hit. +1 attack per turn when wielding any large or massive weapon under berserker/lustzerker state. +1,500 wrath\n");
 			outputText("-Rage perk effect changed to: Increasing crit chance by up to (10%)70% & crit dmg by up to (25%)175% in berserk state that would reset after succesful crit attack. Adds Diehard effect up to 5% of max HP. +2,000 wrath\n");
 			outputText("-Anger perk effect changed to: For every 1% of missing HP (up to 100%) you gain 1% bonus damage, 2% bonus crit damage. When: below 50/100% max HP grants 1/2 more attack(s) with large/massive weapons when under berserker/lustzerker state. +2,500 wrath\n");
-			outputText("-Prestige Job: Berserker gained additional effect: generate 1% of max wrath with using melee/range/specials.\n");
+			outputText("-Prestige Job: Berserker gained additional effect: generate 1% of max wrath with using melee/range/specials. Also it req. for Job: Guardian was replaced by Job: Beast Warrior.\n");
 			outputText("-Furious strikes & Unlimited rage perks increase generated wrath by 200% not 100% (2x -> 3x).\n");
 			outputText("-Improved Adrenaline perk increase now wrath generation by 2% not 1%.\n");
 			outputText("-New tier 14 strength lvl-up perk: Endless Rage. Req. Too Angry to Die perk. Effect: Berzerker and Lustzerker cost change to 10 wrath per turn from set amount of turns. When Too Angry Too Die perk effect activate that cost change to 10%. (+3500 max Wrath)\n");
 			outputText("-Combat code for melee multiattacks been refined to cause less lag on builds that use large amount (~16+) attacks per turn. Also attacking with melee weapon when under winter claw / flame blade or similar buffs would deal elemental damage instead of physical.\n");
 			outputText("-New tier 3 intelligence lvl-up perk: Offensive Staff Channeling. Req. Staff Channeling and Grey Magic perks, knowing any attack spell, 120+ int. Effect: Allow to cast splited offensive spell without increased mana cost when using staff (3 parts at 70% power) or partial staff (2 parts at 80% power) as focus. (Effect will not activate if you already have ways to multicast spells at reduced power)\n");
-			outputText("-\n");
+			outputText("-Added modifier to melee and range attacks similar to spell power or soulskill power.\n");
+			outputText("-New Ascension perk: Killing Intent. It works same way like Spiritual Enlightenment but affecting melee physical attacks multiplier instead of soulskills. Max Rank: 30.\n");
+			outputText("-New Ascension perk: Bloodlust. It works same way like Spiritual Enlightenment but affecting range physical attacks multiplier instead of soulskills. Max Rank: 30.\n");
+			outputText("-Spiritual Enlightenment & Mysticality ascension perks gained 10 more ranks.\n");
+			outputText("-Listed job perks would provide bonus to melee physical attacks multiplier: Warrior (+10%); Brawler / Swordsman / Dervish / Rogue / Monk / Beast Warrior (+20%); Berserker (+80%); Spell-Knight / Tempest / Soul Art Master (+40%)\n");
+			outputText("-Listed job perks would provide bonus to range physical attacks multiplier: Ranger (+10%); Hunter / Gunslinger (+20%); Arcane Archer (+40%)\n");
+			outputText("-When PC is lvl 90+ it would not apply penalty to exp gained. (Meaning that in calculation for EXP gain PC will be treated as having only lvl 90 not actual above 90 - this solution will be removed or adjusted to higher cutoff at later date)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -170,6 +176,12 @@ package classes.Scenes
 			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Fixed Bugs: One of Ingnam Tavern food options having wrong price listed on menu, unique sex scenes accesable during Druid fusion, Wisp potentialy softlocking Mino King fight, selfsucking in masturbation menu restoring max 100 hunger, Swift Casting not usable when having Giant's Grip and Large weapon, White or Black magic buffs autocastable when having perk that disable use of white/black magic, ");
 			outputText("putting B. Sword after picking Ecalibur disabling option to pick sword at Temple, all 3 Hall of Blade soulskill variants dealing phys not magical dmg, Lightning Claw lowering phys dmg when used as part of feral style attack, using goblin Cum Reservoir not empting it out, Yuki Onna Transform scene not making sure to give proper genitalia setup, Archer's Stamina perks not giving fatigue related to ");
 			outputText("current Speed value, Half-Frost Wyrm racial bonus been attained super easy, Mysterious Seed not causing for misc items menu appear as inventory submenu\n");/*ostatni punkt changelogu
@@ -183,6 +195,7 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -258,7 +271,9 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -291,6 +306,13 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

@@ -1102,7 +1102,10 @@ import flash.utils.getQualifiedClassName;
 			// 2) Bonuses for underlevel all the way to 20 lvl's below enemy! Above 20 lvl diff bonus is fixed at 300%! With underdog it increase to 40 lvl diff and caps at 900%!
 			// 3) Super high level folks (over 10 levels) only get 1 xp!
 			var difference:Number = 1;
-			var diff2:Number = this.level - playerLevel;
+			//var diff2:Number = this.level - playerLevel; - odkomentować jak nie bedzie potrzebne rozwiązanie poniżej ^^
+			var diff2:Number = this.level;
+			if (playerLevel > 90) playerLevel = 90;
+			diff2 -= playerLevel;
 			if (game.player.hasPerk(PerkLib.AscensionUnderdog)) {
 				if (diff2 >= 40) difference += 8;
 				if (diff2 >= 1 && diff2 < 40) difference += diff2 * 0.2;

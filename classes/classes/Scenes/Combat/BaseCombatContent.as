@@ -198,6 +198,12 @@ public class BaseCombatContent extends BaseContent {
 	protected function scalingBonusLibido(randomize:Boolean = true):Number {
 		return combat.scalingBonusLibido(randomize);
 	}
+	protected function meleePhysicalForce():Number {
+		return combat.meleePhysicalForce();
+	}
+	protected function rangePhysicalForce():Number {
+		return combat.rangePhysicalForce();
+	}
 	protected function spellCost(mod:Number):Number {
 		return combat.magic.spellCostImpl(mod);
 	}

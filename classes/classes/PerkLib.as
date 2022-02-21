@@ -61,6 +61,7 @@ public class PerkLib
 				"Produces 50% more cum volume.", null, true);
 
 		// Ascension perks
+		public static const AscensionBloodlust:AscensionBloodlustPerk = new AscensionBloodlustPerk();
 		public static const AscensionCumHose:AscensionCumHosePerk = new AscensionCumHosePerk();
 		public static const AscensionDesires:AscensionDesiresPerk = new AscensionDesiresPerk();
 		public static const AscensionEndurance:AscensionEndurancePerk = new AscensionEndurancePerk();
@@ -69,6 +70,7 @@ public class PerkLib
 		public static const AscensionFortune:AscensionFortunePerk = new AscensionFortunePerk();
 		public static const AscensionFury:AscensionFuryPerk = new AscensionFuryPerk();
 		public static const AscensionInnerPower:AscensionInnerPowerPerk = new AscensionInnerPowerPerk();
+		public static const AscensionKillingIntent:AscensionKillingIntentPerk = new AscensionKillingIntentPerk();
 		public static const AscensionMilkFaucet:AscensionMilkFaucetPerk = new AscensionMilkFaucetPerk();
 		public static const AscensionMoralShifter:AscensionMoralShifterPerk = new AscensionMoralShifterPerk();
 		public static const AscensionMysticality:AscensionMysticalityPerk = new AscensionMysticalityPerk();
@@ -2533,7 +2535,7 @@ public class PerkLib
 				"You've chosen the 'Prestige Job: Arch-priest' perk, training yourself to became Arch-priest.").withBuffs({'tou.mult':0.45,'int.mult':0.75});
 		public static const PrestigeJobBerserker:PerkType = mk("Prestige Job: Berserker", "Prestige Job: Berserker",
 				"You've trained in prestige art of perfect mastery over all forms of berserking.",
-				"You've chosen the 'Prestige Job: Berserker' perk, training yourself to became Berserker.").withBuffs({'str.mult':1.00,'tou.mult':0.20,'maxwrath_base':+1000});
+				"You've chosen the 'Prestige Job: Berserker' perk, training yourself to became Berserker.").withBuffs({'str.mult':1.00,'tou.mult':0.10,'spe.mult':0.10,'maxwrath_base':+1000});
 		public static const PrestigeJobBindmaster:PerkType = mk("Prestige Job: Bindmaster", "Prestige Job: Bindmaster",
 				"You've trained in prestige art of perfect mastery over all forms of binding.",
 				"You've chosen the 'Prestige Job: Bindmaster' perk, training yourself to became Bindmaster.").withBuffs({'tou.mult':0.30,'lib.mult':0.90});
@@ -4197,7 +4199,7 @@ public class PerkLib
                     .requirePerks(GreaterBrawn, GreaterBrute);
             //Tier 9 Strength Perks
             PrestigeJobBerserker.requirePrestigeJobSlot()
-                    .requirePerks(JobSwordsman, JobGuardian)
+                    .requirePerks(JobSwordsman, JobBeastWarrior)
                     .requireAnyPerk(Berzerker, Lustzerker)
                     .requireStr(200)
                     .requireLevel(54);

@@ -3384,20 +3384,6 @@ public class Combat extends BaseContent {
                     outputText("You casually fire an " + ammoWord + " at [monster a] [monster name] with supreme skill");
                 }
             }
-            //Determine if critical hit!
-            var crit:Boolean = false;
-            var critChance:int = 5;
-            critChance += combatPhysicalCritical();
-            if (player.hasPerk(PerkLib.VitalShot) && player.inte >= 50) critChance += 10;
-            if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critChance += 5;
-            if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "bow") critChance += 10;
-            if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
-            if (rand(100) < critChance) {
-                crit = true;
-                var buffMultiplier:Number = 0;
-                if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "bow") buffMultiplier += 1;
-                damage *= 1.75+buffMultiplier;
-            }
             if (player.hasPerk(PerkLib.HistoryScout) || player.hasPerk(PerkLib.PastLifeScout)) damage *= historyScoutBonus();
             if (player.hasPerk(PerkLib.JobRanger)) damage *= 1.05;
             if (player.jewelryEffectId == JewelryLib.MODIFIER_R_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
@@ -3410,8 +3396,13 @@ public class Combat extends BaseContent {
                     } else damage *= 2;
                 }
             }
+            //Section for item damage modifiers
             if (player.weaponRangeName == "Wild Hunt" && (player.level + playerLevelAdjustment()) > monster.level) damage *= 2;
             if (player.weaponRangeName == "Hodr's bow" && monster.hasStatusEffect(StatusEffects.Blind)) damage *= 1.1;
+            if (weaponRangePerk == "Bow"){
+                if (player.hasPerk(PerkLib.ElvenRangerArmor)) damage *= 1.5;
+                if (player.isElf() && player.hasPerk(PerkLib.ELFArcherCovenant) && player.isSpearTypeWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise())  damage *= 1.25;
+            }
             if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1) {
                 damage += Math.round(player.inte * 0.1);
                 if (player.inte >= 50) damage += Math.round(player.inte * ((player.inte / 50) * 0.05));
@@ -3436,10 +3427,20 @@ public class Combat extends BaseContent {
 				if (player.weaponRangeName == "Artemis") damage *= 1.5;
 				damage *= darknessDamageBoostedByDao();
             }
-            //Section for item damage modifiers
-            if (weaponRangePerk == "Bow"){
-                if (player.hasPerk(PerkLib.ElvenRangerArmor)) damage *= 1.5;
-                if (player.isElf() && player.hasPerk(PerkLib.ELFArcherCovenant) && player.isSpearTypeWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise())  damage *= 1.25;
+			damage *= rangePhysicalForce();
+            //Determine if critical hit!
+            var crit:Boolean = false;
+            var critChance:int = 5;
+            critChance += combatPhysicalCritical();
+            if (player.hasPerk(PerkLib.VitalShot) && player.inte >= 50) critChance += 10;
+            if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critChance += 5;
+            if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "bow") critChance += 10;
+            if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+            if (rand(100) < critChance) {
+                crit = true;
+                var buffMultiplier:Number = 0;
+                if (player.hasStatusEffect(StatusEffects.ElvenEye) && player.weaponRangePerk == "bow") buffMultiplier += 1;
+                damage *= 1.75+buffMultiplier;
             }
             damage = Math.round(damage);
             if (monster.HP <= monster.minHP()) {
@@ -3825,20 +3826,6 @@ public class Combat extends BaseContent {
                 }
 				if (player.miscJewelry == miscjewelries.ATLATL_ || player.miscJewelry2 == miscjewelries.ATLATL_) damage *= 1.25;
                 damage *= (1 + (0.01 * masteryThrowingLevel()));
-                //Determine if critical hit!
-                var crit:Boolean = false;
-                var critChance:int = 5;
-                critChance += combatPhysicalCritical();
-                if (player.weaponRangeName == "gnoll throwing axes") critChance += 10;
-                if (player.hasPerk(PerkLib.VitalShot) && player.inte >= 50) critChance += 10;
-                if (player.hasPerk(PerkLib.AnatomyExpert)) critChance += 10;
-                if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critChance += 5;
-                if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
-                if (rand(100) < critChance) {
-                    crit = true;
-                    if (player.hasPerk(PerkLib.AnatomyExpert)) damage *= 2.25;
-                    else damage *= 1.75;
-                }
                 if (player.hasPerk(PerkLib.HistoryScout) || player.hasPerk(PerkLib.PastLifeScout)) damage *= historyScoutBonus();
                 if (player.hasPerk(PerkLib.JobRanger)) damage *= 1.05;
                 if (player.hasPerk(PerkLib.Ghostslinger)) damage *= 1.15;
@@ -3855,6 +3842,21 @@ public class Combat extends BaseContent {
                         } else damage *= 2;
                     }
                 }
+                //Determine if critical hit!
+                var crit:Boolean = false;
+                var critChance:int = 5;
+                critChance += combatPhysicalCritical();
+                if (player.weaponRangeName == "gnoll throwing axes") critChance += 10;
+                if (player.hasPerk(PerkLib.VitalShot) && player.inte >= 50) critChance += 10;
+                if (player.hasPerk(PerkLib.AnatomyExpert)) critChance += 10;
+                if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critChance += 5;
+                if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+                if (rand(100) < critChance) {
+                    crit = true;
+                    if (player.hasPerk(PerkLib.AnatomyExpert)) damage *= 2.25;
+                    else damage *= 1.75;
+                }
+				damage *= rangePhysicalForce();
                 damage = Math.round(damage);
                 checkAchievementDamage(damage);
                 if (monster.HP <= monster.minHP()) {
@@ -3988,22 +3990,6 @@ public class Combat extends BaseContent {
                     outputText("You casually throws [weaponrange] at [monster a] [monster name] with supreme skill");
                 }
             }
-            //Determine if critical hit!
-            var crit:Boolean = false;
-            var critChance:int = 5;
-            var critDmg:Number = 1.75;
-            critChance += combatPhysicalCritical();
-            if (player.weaponRangeName == "gnoll throwing axes") critChance += 10;
-            if (player.hasPerk(PerkLib.VitalShot) && player.inte >= 50) critChance += 10;
-            if (player.hasPerk(PerkLib.AnatomyExpert)) critChance += 10;
-            if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critChance += 5;
-            if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
-            if (rand(100) < critChance) {
-                crit = true;
-                if (player.hasPerk(PerkLib.AnatomyExpert)) critDmg += 0.5;
-                if (player.hasPerk(PerkLib.PrestigeJobStalker)) critDmg += 0.2;
-                damage *= critDmg;
-            }
 			if (player.hasPerk(PerkLib.PrestigeJobStalker)) damage *= 1.2;
             if (player.hasPerk(PerkLib.HistoryScout) || player.hasPerk(PerkLib.PastLifeScout)) damage *= historyScoutBonus();
             if (player.hasPerk(PerkLib.JobRanger)) damage *= 1.05;
@@ -4043,7 +4029,23 @@ public class Combat extends BaseContent {
 			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 5;
 			if (monster.hasPerk(PerkLib.FireNature)) damage *= 2;
 		}zachowane jeśli potem dodam elemental dmg do ataków innych broni dystansowych też
-*/
+*/			damage *= rangePhysicalForce();
+            //Determine if critical hit!
+            var crit:Boolean = false;
+            var critChance:int = 5;
+            var critDmg:Number = 1.75;
+            critChance += combatPhysicalCritical();
+            if (player.weaponRangeName == "gnoll throwing axes") critChance += 10;
+            if (player.hasPerk(PerkLib.VitalShot) && player.inte >= 50) critChance += 10;
+            if (player.hasPerk(PerkLib.AnatomyExpert)) critChance += 10;
+            if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critChance += 5;
+            if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+            if (rand(100) < critChance) {
+                crit = true;
+                if (player.hasPerk(PerkLib.AnatomyExpert)) critDmg += 0.5;
+                if (player.hasPerk(PerkLib.PrestigeJobStalker)) critDmg += 0.2;
+                damage *= critDmg;
+            }
             damage = Math.round(damage);
 			WeaponRangeStatusProcs();
             checkAchievementDamage(damage);
@@ -4265,18 +4267,6 @@ public class Combat extends BaseContent {
                     else outputText("You casually fire an " + ammoWord + " at [monster a] [monster name] with supreme skill");
                 }
             }
-            //Determine if critical hit!
-            var crit:Boolean = false;
-            var critChance:int = 5;
-            critChance += combatPhysicalCritical();
-            if (player.hasPerk(PerkLib.VitalShot) && player.inte >= 50) critChance += 10;
-            if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critChance += 5;
-            if ((monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) || player.weaponRange == weaponsrange.TRFATBI) critChance = 0;
-            if (rand(100) < critChance) {
-                crit = true;
-                if (player.hasPerk(PerkLib.SilverForMonsters) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 2.25;
-				else damage *= 1.75;
-            }
             if (player.hasPerk(PerkLib.HistoryScout) || player.hasPerk(PerkLib.PastLifeScout)) damage *= historyScoutBonus();
             if (player.hasPerk(PerkLib.JobRanger)) damage *= 1.05;
             if (player.hasPerk(PerkLib.Ghostslinger)) damage *= 1.15;
@@ -4314,7 +4304,20 @@ public class Combat extends BaseContent {
 			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 5;
 			if (monster.hasPerk(PerkLib.FireNature)) damage *= 2;
 		}zachowane jeśli potem dodam elemental dmg do ataków innych broni dystansowych też*/
-            damage = Math.round(damage);
+            //Determine if critical hit!
+            var crit:Boolean = false;
+            var critChance:int = 5;
+            critChance += combatPhysicalCritical();
+            if (player.hasPerk(PerkLib.VitalShot) && player.inte >= 50) critChance += 10;
+            if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critChance += 5;
+            if ((monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) || player.weaponRange == weaponsrange.TRFATBI) critChance = 0;
+            if (rand(100) < critChance) {
+                crit = true;
+                if (player.hasPerk(PerkLib.SilverForMonsters) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 2.25;
+				else damage *= 1.75;
+            }
+			damage *= rangePhysicalForce();
+			damage = Math.round(damage);
             checkAchievementDamage(damage);
 			WeaponRangeStatusProcs();
 			WrathGenerationPerHit1(5);
@@ -5646,6 +5649,7 @@ public class Combat extends BaseContent {
 		}
 		if (player.isSpearTypeWeapon() && player.hasPerk(PerkLib.ElvenRangerArmor)) damage *= 1.5;
 		if (SceneLib.urtaQuest.isUrta()) damage *= 2;
+		damage *= meleePhysicalForce();
 		return damage;
 	}
 
@@ -8717,7 +8721,6 @@ public class Combat extends BaseContent {
         if (nextFunc == null) nextFunc = camp.returnToCampUseOneHour; //Default to returning to camp.
         if (player.countCockSocks("gilded") > 0) {
             //trace( "awardPlayer found MidasCock. Gems bumped from: " + monster.gems );
-
             var bonusGems:int = monster.gems * 0.15 + 5 * player.countCockSocks("gilded"); // int so AS rounds to whole numbers
             monster.gems += bonusGems;
             //trace( "to: " + monster.gems )
@@ -15014,6 +15017,35 @@ public class Combat extends BaseContent {
         if (player.hasPerk(MutationsLib.OniMusculatureEvolved)) oniRampagePowerMulti += 2;
         return oniRampagePowerMulti;
     }
+	
+	public function meleePhysicalForce():Number {
+		var mod:Number = 1;
+		if (player.hasPerk(PerkLib.JobWarrior)) mod += .1;
+		if (player.hasPerk(PerkLib.JobBrawler)) mod += .2;
+		if (player.hasPerk(PerkLib.JobSwordsman)) mod += .2;
+		if (player.hasPerk(PerkLib.JobDervish)) mod += .2;
+		if (player.hasPerk(PerkLib.JobRogue)) mod += .2;
+		if (player.hasPerk(PerkLib.JobMonk)) mod += .2;
+		if (player.hasPerk(PerkLib.JobBeastWarrior)) mod += .2;
+		if (player.hasPerk(PerkLib.PrestigeJobBerserker)) mod += .8;
+		if (player.hasPerk(PerkLib.PrestigeJobSpellKnight)) mod += .4;
+		if (player.hasPerk(PerkLib.PrestigeJobTempest)) mod += .4;
+		if (player.hasPerk(PerkLib.PrestigeJobSoulArtMaster)) mod += .4;
+		if (player.hasPerk(PerkLib.AscensionKillingIntent)) mod *= 1 + (player.perkv1(PerkLib.AscensionKillingIntent) * 0.1);
+		mod = Math.round(mod * 100) / 100;
+		return mod;
+	}
+	
+	public function rangePhysicalForce():Number {
+		var mod:Number = 1;
+		if (player.hasPerk(PerkLib.JobRanger)) mod += .1;
+		if (player.hasPerk(PerkLib.JobHunter)) mod += .2;
+		if (player.hasPerk(PerkLib.JobGunslinger)) mod += .2;
+		if (player.hasPerk(PerkLib.PrestigeJobArcaneArcher)) mod += .4;
+		if (player.hasPerk(PerkLib.AscensionBloodlust)) mod *= 1 + (player.perkv1(PerkLib.AscensionBloodlust) * 0.1);
+		mod = Math.round(mod * 100) / 100;
+		return mod;
+	}
 
     public function soulskillMod():Number {
         var modss:Number = 1;
@@ -15432,4 +15464,4 @@ public class Combat extends BaseContent {
         return inteWisLibScale(player.lib, randomize);
     }
 }
-}
+}
