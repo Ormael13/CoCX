@@ -886,8 +886,8 @@ public class CombatMagic extends BaseCombatContent {
 	}
 	public function spellMagicBolt2(edgy:Boolean = false):void {
 		outputText("You narrow your eyes, focusing your mind with deadly intent.  ");
-		if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponSpecials("Staff")) outputText("You point your staff and shots magic bolt toward [themonster]!\n\n");
-		else outputText("You point your hand toward [themonster] and shots magic bolt!\n\n");
+		if (player.hasPerk(PerkLib.StaffChanneling) && player.weaponSpecials("Staff")) outputText("You point your staff and shoot a magic bolt toward [themonster]!\n\n");
+		else outputText("You point your hand toward [themonster] and shoot a magic bolt!\n\n");
 		var damage:Number = scalingBonusIntelligence() * spellMod() * 1.2;
 		if (damage < 10) damage = 10;
 		//weapon bonus

@@ -2070,7 +2070,7 @@ public class Camp extends NPCAwareContent{
 		}
 		if (flags[kFLAGS.CAMP_CABIN_PROGRESS] > 0 && flags[kFLAGS.CAMP_CABIN_PROGRESS] < 10) addButton(2, "Build Cabin", cabinProgress.initiateCabin).hint("Work on your cabin."); //Work on cabin.
 		else if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 0) addButtonDisabled(2, "Build Cabin", "You need to wait until 7th day.");
-		else addButtonDisabled(2, "Build Cabin", "Cabin is alreadfy built.");
+		else addButtonDisabled(2, "Build Cabin", "Looking at your cabin, it's evidently already built.");
 		if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 10) {
 			if (player.hasItem(useables.IMPSKLL, 1)) {
 				addButton(10, "AddImpSkull", promptHangImpSkull).hint("Add an imp skull to decorate the wall and to serve as deterrent for imps.", "Add Imp Skull");

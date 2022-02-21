@@ -131,8 +131,8 @@ public function buildmisc1Menu():void {
 		//7? - upgrades of conduits or do it as part of  option 6 menu?
 	}
 	if (player.inte >= 50 && flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] == 1) addButton(7, "Magic Ward", magicWard).hint("Set up a Magic Ward around the camp. (Req. 200 fatigue)");
-	if (flags[kFLAGS.CAMP_UPGRADES_DAM] < 1) addButton(8, "Dam", dam).hint("Build up a dam on the steam next to the camp. (Req. 200 fatigue * tier of built dam)");
-	if (flags[kFLAGS.CAMP_UPGRADES_DAM] >= 1 && flags[kFLAGS.CAMP_UPGRADES_FISHERY] < 1) addButton(9, "Fishery", fishery).hint("Build up a fishery on the steam next to the camp. (Req. 200 fatigue)");
+	if (flags[kFLAGS.CAMP_UPGRADES_DAM] < 1) addButton(8, "Dam", dam).hint("Build up a dam on the stream next to the camp. (Req. 200 fatigue * tier of built dam)");
+	if (flags[kFLAGS.CAMP_UPGRADES_DAM] >= 1 && flags[kFLAGS.CAMP_UPGRADES_FISHERY] < 1) addButton(9, "Fishery", fishery).hint("Build up a fishery on the stream next to the camp. (Req. 200 fatigue)");
 	addButton(14, "Back", playerMenu);
 }
 public function buildCampMembersCabinsMenu():void {
@@ -1729,8 +1729,8 @@ private function setUpMagicWard2():void {
 	flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 30;
 	clearOutput();
 	outputText("You flip through the tome, and begin to sketch copies of the required glyphs in the dirt.  Yes, this is definitely possible.  You have something ");
-	if (player.statusEffectv1(StatusEffects.TelAdre) >= 1) outputText("Tel’Adre doesn’t");
-	else outputText("most mages wouldn’t");
+	if (player.statusEffectv1(StatusEffects.TelAdre) >= 1) outputText("Tel’Adre doesn’t;");
+	else outputText("most mages wouldn’t;");
 	outputText(" the portal.  The ambient energy radiating from it could power the ward, as long as you get the web of magic working properly.  It takes hours, a great deal of stress and a lot of channeling to get the stones to their positions, carved into shape and infused with the requisite runes.  ");
 	flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] += 1;
 	if (model.time.hours >= 12) outputText("By the time you’re done, it's already dark.");
