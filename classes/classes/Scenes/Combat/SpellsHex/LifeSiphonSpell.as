@@ -20,7 +20,7 @@ public class LifeSiphonSpell extends AbstractHexSpell {
 	}
 	
 	override public function describeEffectVs(target:Monster):String {
-		return "" + calcDamage(target, false) + " HP leech for "+
+		return "" + calcDamage(target, false, false) + " HP leech for "+
 				numberOfThings(calcDuration(),"round") +
 				"; " + calcBackfirePercent() + "% backfire"
 	}
@@ -50,7 +50,7 @@ public class LifeSiphonSpell extends AbstractHexSpell {
 		}
 	}
 	
-	public function calcDamage(monster:Monster, randomize:Boolean=true):Number {
+	public function calcDamage(monster:Monster, randomize:Boolean=true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)
 		var lifesiphon:Number = 0;
 		lifesiphon += player.inte;
 		if (player.hasPerk(PerkLib.WisenedHealer)) lifesiphon += player.wis;
@@ -69,7 +69,7 @@ public class LifeSiphonSpell extends AbstractHexSpell {
 			outputText("You focus on your magic, trying to draw on it without enhancing your own arousal.\n");
 		}
 		if (!backfired(display)) {
-			var lifesiphon:Number = calcDamage(monster);
+			var lifesiphon:Number = calcDamage(monster, true, true);
 			if (display) {
 				outputText("You wave a sign linking yourself to [themonster] as you begin to funnel its health and vitality to yourself.");
 			}

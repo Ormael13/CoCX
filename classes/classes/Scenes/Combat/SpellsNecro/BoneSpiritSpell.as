@@ -17,7 +17,7 @@ public class BoneSpiritSpell extends AbstractNecroSpell {
 	}
 	
 	override public function describeEffectVs(target:Monster):String {
-		return "~"+calcDamage(target, false)+" true damage"
+		return "~"+calcDamage(target, false, false)+" true damage"
 	}
 	
 	override public function get isKnown():Boolean {
@@ -28,12 +28,14 @@ public class BoneSpiritSpell extends AbstractNecroSpell {
 		return 5;
 	}
 	
-	public function calcDamage(monster:Monster, randomize:Boolean=true):Number {
+	public function calcDamage(monster:Monster, randomize:Boolean=true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)
 		var damage:Number = adjustSpellDamage(
 				scalingBonusIntelligence()*3,
 				DamageType.TRUE,
 				CAT_SPELL_NECRO,
-				monster
+				monster,
+                true,
+                casting
 		);
 		if (player.hasPerk(PerkLib.Necromancy)) damage *= 1.5;
 		damage *= boneSoulBonus(demonBonesCost());
@@ -44,7 +46,7 @@ public class BoneSpiritSpell extends AbstractNecroSpell {
 		if (display) {
 			outputText("You wrap your soulforce around the bones and shape them into a horrifying bone wraith sending it flying and laughing madly toward [themonster]. The ghastly apparition explodes upon contact into a hundred sharp bone shards grievously wounding [themonster]. ");
 		}
-		var damage:Number = calcDamage(monster);
+		var damage:Number = calcDamage(monster, true, true);
 		consumeBones(demonBonesCost());
 		damage = critAndRepeatDamage(display, damage, DamageType.TRUE);
 		checkAchievementDamage(damage);

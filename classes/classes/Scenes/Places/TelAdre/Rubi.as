@@ -674,7 +674,7 @@ public function rubisFuckingHouseYouPervert():void {
 	addButton(0,"Sex",rubiSexMenu);
 	addButton(1,"Closet",goInRubisClosetSoThatYouCanComeOutOfTheCloset);
 	addButton(2,"Talk",talkToRubiInHouse);
-	if(rubiAffection() >= 50 && !rubiBimbo() && flags[kFLAGS.RUBI_COCK_SIZE] > 0 && (!rubiBimbo() || flags[kFLAGS.RUBI_DEBIMBO] > 0)) {
+	if(rubiAffection() >= 50 && flags[kFLAGS.RUBI_COCK_SIZE] > 0 && (!rubiBimbo() || flags[kFLAGS.RUBI_DEBIMBO] > 0)) {
 		//First Time:
 		if(flags[kFLAGS.TIMES_RUBI_MASSAGED] == 0) outputText("\n\nRubi gestures to some bottles and a box from the bakery before mentioning, \"<i>You look awful tense, babe.  I know you've got it hard out there, and well, I-I thought maybe I could really pamper you today, if you'd like.</i>\"");
 		else outputText("\n\nRubi nods towards the bottles and box in the corner and gives you a sly wink.  \"<i>Want another massage?</i>\"");

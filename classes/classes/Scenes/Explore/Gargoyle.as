@@ -215,6 +215,7 @@ private function berateTheGargoyle():void {
 private function reassureTheGargoyle():void {
 	clearOutput();
 	//(Confidence +10)
+    gargoyleConfidence(10);
 	outputText("You can't help but feel sorry for the poor gargoyle.  It isn't hard to figure out what happened, and in truth, she reminds you a bit of yourself – and of the consequences if you ever fail.  You reach over and put a hand on her smooth, cold shoulder.  As reassuringly as you can, you tell her that you are [name], the Champion of Ingnam.  Your duty isn't entirely dissimilar to what hers was, while you hope you'll never know what she's gone through, you can certainly sympathize.");
 	
 	outputText("\n\n" + flags[kFLAGS.GAR_NAME] + " looks up at you, her ruby-red eyes shining in the dim hit of light in the cathedral.  You cup her cheek and give her a smile.  \"<i>Come on, now,</i>\" you reply, offering her a hand up.  \"<i>Let's get out of here.</i>\"");

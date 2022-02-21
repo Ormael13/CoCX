@@ -1109,8 +1109,8 @@ public class PerkLib
 				"Increase traditional range weapons (like bows) base attack by another 50%.",
 				"You've chosen the 'Eagle eye' perk, increasing traditional range weapons base attack.");
 		public static const EclipsingShadow:PerkType = mk("Eclipsing Shadow", "Eclipsing Shadow",
-				"Cumulative 20% damage increase for every subsequent darkness spell. Each turn without casted darkness spell lower damage by 20%.",
-				"You've chosen the 'Eclipsing Shadow' perk. Cumulative 20% damage increase for every subsequent darkness spell. Each turn without casted darkness spell lower damage by 20%.");
+				"Cumulative 20% damage increase for every subsequent darkness spell. Each turn without cast darkness spell lower damage by 20% down to normal (100%) damage.",
+				"You've chosen the 'Eclipsing Shadow' perk. Cumulative 20% damage increase for every subsequent darkness spell. Each turn without cast darkness spell lower damage by 20% down to normal (100%) damage.");
 		public static const EclipsingShadowEx:PerkType = mk("Eclipsing Shadow (Ex)", "Eclipsing Shadow (Ex)",
 				"Increase to cumulative damage by 10%. Penalty for turn without casted darkness spell decreased by 5%.",
 				"You've chosen the 'Eclipsing Shadow (Ex)' perk. Increase to cumulative damage by 10%. Penalty for turn without casted darkness spell decreased by 5%.");
@@ -1471,8 +1471,8 @@ public class PerkLib
 				"You enhanced your Transference special to transfer 25% of your current arousal to your opponent at 25% lower fatigue cost.",
 				"You've chosen the 'Gift of Lust' perk, enhancing special Transference to transfer 10% more lust to enemy.");
 		public static const GlacialStorm:PerkType = mk("Glacial Storm", "Glacial Storm",
-				"Cumulative 20% damage increase for every subsequent ice spell. Each turn without casted ice spell lower damage by 20%.",
-				"You've chosen the 'Glacial Storm' perk. Cumulative 20% damage increase for every subsequent ice spell. Each turn without casted ice spell lower damage by 20%.");
+				"Cumulative 20% damage increase for every subsequent ice spell. Each turn without cast ice spell lower damage by 20% down to normal (100%) damage.",
+				"You've chosen the 'Glacial Storm' perk. Cumulative 20% damage increase for every subsequent ice spell. Each turn without cast ice spell lower damage by 20% down to normal (100%) damage.");
 		public static const GlacialStormEx:PerkType = mk("Glacial Storm (Ex)", "Glacial Storm (Ex)",
 				"Increase to cumulative damage by 10%. Penalty for turn without casted ice spell decreased by 5%.",
 				"You've chosen the 'Glacial Storm (Ex)' perk. Increase to cumulative damage by 10%. Penalty for turn without casted ice spell decreased by 5%.");
@@ -1804,8 +1804,8 @@ public class PerkLib
 				"You've trained in using your speed to enhance power of your single large weapons swings.",
 				"You've chosen the 'Hidden Momentum' perk, allowing to use your speed to enhance power of your attacks with single large weapons.");
 		public static const HighVoltage:PerkType = mk("High Voltage", "High Voltage",
-				"Cumulative 20% damage increase for every subsequent lightning spell. Each turn without casted lightning spell lower damage by 20%.",
-				"You've chosen the 'High Voltage' perk. Cumulative 20% damage increase for every subsequent lightning spell. Each turn without casted lightning spell lower damage by 20%.");
+				"Cumulative 20% damage increase for every subsequent lightning spell. Each turn without cast lightning spell lower damage by 20% down to normal (100%) damage.",
+				"You've chosen the 'High Voltage' perk. Cumulative 20% damage increase for every subsequent lightning spell. Each turn without cast lightning spell lower damage by 20% down to normal (100%) damage.");
 		public static const HighVoltageEx:PerkType = mk("High Voltage (Ex)", "High Voltage (Ex)",
 				"Increase to cumulative damage by 10%. Penalty for turn without casted lightning spell decreased by 5%.",
 				"You've chosen the 'High Voltage (Ex)' perk. Increase to cumulative damage by 10%. Penalty for turn without casted lightning spell decreased by 5%.");
@@ -2656,8 +2656,8 @@ public class PerkLib
 				"You've chosen the 'Rage' perk, increasing crit chance by up to 50% in berserk state until next crit attack.")
 				.withBuffs({'maxwrath_base':+1500});
 		public static const RagingInferno:PerkType = mk("Raging Inferno", "Raging Inferno",
-				"Cumulative 20% damage increase for every subsequent fire spell. Each turn without casted fire spell lower damage by 20%.",
-				"You've chosen the 'Raging Inferno' perk. Cumulative 20% damage increase for every subsequent fire spell. Each turn without casted fire spell lower damage by 20%.");
+				"Cumulative 20% damage increase for every subsequent fire spell. Each turn without cast fire spell lower damage by 20% down to normal (100%) damage.",
+				"You've chosen the 'Raging Inferno' perk. Cumulative 20% damage increase for every subsequent fire spell. Each turn without cast fire spell lower damage by 20% down to normal (100%) damage.");
 		public static const RagingInfernoEx:PerkType = mk("Raging Inferno (Ex)", "Raging Inferno (Ex)",
 				"Increase to cumulative damage by 10%. Penalty for turn without casted fire spell decreased by 5%.",
 				"You've chosen the 'Raging Inferno (Ex)' perk. Increase to cumulative damage by 10%. Penalty for turn without casted fire spell decreased by 5%.");
@@ -5276,9 +5276,6 @@ public class PerkLib
                     .requireInt(150)
                     .requireLevel(36);
             GreyArchmage.requirePerk(GreyMage)
-                    .requireInt(175)
-                    .requireLevel(36);
-            Convergence.requirePerk(GreyMage)
                     .requireInt(175)
                     .requireLevel(36);
             //Tier 7 Intelligence perks

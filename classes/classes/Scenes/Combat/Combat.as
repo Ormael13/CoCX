@@ -6564,7 +6564,7 @@ public class Combat extends BaseContent {
             damage *= 1.75;
         }
         //High damage to goes.
-        damage = combat.magic.calcVoltageModImpl(damage);
+        damage = combat.magic.calcVoltageModImpl(damage, true);
         if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
         if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
         if (player.hasPerk(MutationsLib.FloralOvaries)) damage *= 1.25;
@@ -7507,14 +7507,14 @@ public class Combat extends BaseContent {
         return damage;
     }
 
-    public function doPhysicalDamage(damage:Number, apply:Boolean = true, display:Boolean = false){
-        if (player.hasPerk(MutationsLib.SharkOlfactorySystem) && MonsterIsBleeding) damage *= 1.1;
-        if (player.hasPerk(MutationsLib.SharkOlfactorySystemPrimitive) && MonsterIsBleeding) damage *= 1.15;
-        if (player.hasPerk(MutationsLib.SharkOlfactorySystemEvolved) && MonsterIsBleeding) damage *= 1.25;
+    public function doPhysicalDamage(damage:Number, apply:Boolean = true, display:Boolean = false):void {
+        if (player.hasPerk(MutationsLib.SharkOlfactorySystem) && MonsterIsBleeding()) damage *= 1.1;
+        if (player.hasPerk(MutationsLib.SharkOlfactorySystemPrimitive) && MonsterIsBleeding()) damage *= 1.15;
+        if (player.hasPerk(MutationsLib.SharkOlfactorySystemEvolved) && MonsterIsBleeding()) damage *= 1.25;
         doDamage(damage, apply, display);
     }
 
-    public function doMinionPhysDamage(damage:Number, apply:Boolean = true, display:Boolean = false){
+    public function doMinionPhysDamage(damage:Number, apply:Boolean = true, display:Boolean = false):void {
         doDamage(damage, apply, display);
     }
 
@@ -8884,7 +8884,6 @@ public class Combat extends BaseContent {
             }
         }
         if (player.hasStatusEffect(StatusEffects.CounterEclipsingShadow)) {
-            if (player.statusEffectv4(StatusEffects.CounterEclipsingShadow) > 0) player.addStatusValue(StatusEffects.CounterEclipsingShadow, 4, -1);
             if (player.statusEffectv1(StatusEffects.CounterEclipsingShadow) > 0 && player.statusEffectv2(StatusEffects.CounterEclipsingShadow) == 0 && player.statusEffectv3(StatusEffects.CounterEclipsingShadow) == 0) {
 				if (player.hasPerk(PerkLib.EclipsingShadowSu)) player.addStatusValue(StatusEffects.CounterEclipsingShadow, 1, -2);
 				else if (player.hasPerk(PerkLib.EclipsingShadowEx)) player.addStatusValue(StatusEffects.CounterEclipsingShadow, 1, -3);
@@ -8893,7 +8892,6 @@ public class Combat extends BaseContent {
 			if (player.statusEffectv2(StatusEffects.CounterEclipsingShadow) > 0) player.addStatusValue(StatusEffects.CounterEclipsingShadow, 2, -1);
         }
         if (player.hasStatusEffect(StatusEffects.CounterGlacialStorm)) {
-            if (player.statusEffectv4(StatusEffects.CounterGlacialStorm) > 0) player.addStatusValue(StatusEffects.CounterGlacialStorm, 4, -1);
             if (player.statusEffectv1(StatusEffects.CounterGlacialStorm) > 0 && player.statusEffectv2(StatusEffects.CounterGlacialStorm) == 0 && player.statusEffectv3(StatusEffects.CounterGlacialStorm) == 0) {
 				if (player.hasPerk(PerkLib.GlacialStormSu)) player.addStatusValue(StatusEffects.CounterGlacialStorm, 1, -2);
 				else if (player.hasPerk(PerkLib.GlacialStormEx)) player.addStatusValue(StatusEffects.CounterGlacialStorm, 1, -3);
@@ -8902,7 +8900,6 @@ public class Combat extends BaseContent {
 			if (player.statusEffectv2(StatusEffects.CounterGlacialStorm) > 0) player.addStatusValue(StatusEffects.CounterGlacialStorm, 2, -1);
         }
         if (player.hasStatusEffect(StatusEffects.CounterHighVoltage)) {
-            if (player.statusEffectv4(StatusEffects.CounterHighVoltage) > 0) player.addStatusValue(StatusEffects.CounterHighVoltage, 4, -1);
             if (player.statusEffectv1(StatusEffects.CounterHighVoltage) > 0 && player.statusEffectv2(StatusEffects.CounterHighVoltage) == 0 && player.statusEffectv3(StatusEffects.CounterHighVoltage) == 0) {
 				if (player.hasPerk(PerkLib.HighVoltageSu)) player.addStatusValue(StatusEffects.CounterHighVoltage, 1, -2);
 				else if (player.hasPerk(PerkLib.HighVoltageEx)) player.addStatusValue(StatusEffects.CounterHighVoltage, 1, -3);
@@ -8910,12 +8907,11 @@ public class Combat extends BaseContent {
 			}
 			if (player.statusEffectv2(StatusEffects.CounterHighVoltage) > 0) player.addStatusValue(StatusEffects.CounterHighVoltage, 2, -1);
         }
-        if (player.hasStatusEffect(StatusEffects.CounterRagingInferno)) {
-            if (player.statusEffectv4(StatusEffects.CounterRagingInferno) > 0) player.addStatusValue(StatusEffects.CounterRagingInferno, 4, -1);
+        if (player.hasStatusEffect(StatusEffects.CounterRagingInferno)) { //if has perk
             if (player.statusEffectv1(StatusEffects.CounterRagingInferno) > 0 && player.statusEffectv2(StatusEffects.CounterRagingInferno) == 0 && player.statusEffectv3(StatusEffects.CounterRagingInferno) == 0) {
-				if (player.hasPerk(PerkLib.RagingInfernoSu)) player.addStatusValue(StatusEffects.CounterRagingInferno, 1, -2);
-				else if (player.hasPerk(PerkLib.RagingInfernoEx)) player.addStatusValue(StatusEffects.CounterRagingInferno, 1, -3);
-				player.addStatusValue(StatusEffects.CounterRagingInferno, 1, -4);
+                if (player.hasPerk(PerkLib.RagingInfernoSu)) player.addStatusValue(StatusEffects.CounterRagingInferno, 1, -2); //decrease by 10%
+				else if (player.hasPerk(PerkLib.RagingInfernoEx)) player.addStatusValue(StatusEffects.CounterRagingInferno, 1, -3); //decrease by 15%
+				player.addStatusValue(StatusEffects.CounterRagingInferno, 1, -4); //decrease by full 20%
 			}//v3 = 1 - jesli chaneluje zaklecie/special to nie traci wzmocnienia
 			if (player.statusEffectv2(StatusEffects.CounterRagingInferno) > 0) player.addStatusValue(StatusEffects.CounterRagingInferno, 2, -1);
         }
@@ -9180,7 +9176,7 @@ public class Combat extends BaseContent {
                     crit = true;
                     damage *= 1.75;
                 }
-                damage = magic.calcInfernoModImpl(damage);
+                damage = magic.calcInfernoModImpl(damage, true);
                 damage *= 0.5;
                 var SpellMultiplier:Number = 1;
                 SpellMultiplier += spellMod() - 1;
@@ -9300,7 +9296,7 @@ public class Combat extends BaseContent {
                 damage0 *= 1.75;
             }
             //High damage to goes.
-            damage0 = magic.calcVoltageModImpl(damage0);
+            damage0 = magic.calcVoltageModImpl(damage0, true);
             if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage0 *= (1 + (player.lust100 * 0.01));
             if (player.hasPerk(PerkLib.RacialParagon)) lustDmgA *= RacialParagonAbilityBoost();
             damage0 = Math.round(damage0);
@@ -9400,7 +9396,7 @@ public class Combat extends BaseContent {
                     crit3 = true;
                     damageBFA *= 1.75;
                 }
-                damageBFA = magic.calcGlacialModImpl(damageBFA)/2;
+                damageBFA = magic.calcGlacialModImpl(damageBFA, true)/2;
                 var SpellMultiplier2:Number = 1;
                 SpellMultiplier2 += spellMod() - 1;
                 damageBFA *= SpellMultiplier2;
@@ -11295,6 +11291,7 @@ public class Combat extends BaseContent {
     }
 
     public function showMonsterLust():void {
+        var damage1B:Number;
         //Entrapped
         if (monster.hasStatusEffect(StatusEffects.Constricted)) {
             outputText(monster.capitalA + monster.short + " is currently wrapped up in your tail-coils!  ");
@@ -11337,7 +11334,7 @@ public class Combat extends BaseContent {
                     outputText("You notice [monster he] is obviously affected by your venom, [monster his] movements become unsure, and [monster his] balance begins to fade. Sweat is beginning to roll on [monster his] skin. You wager [monster he] is probably beginning to regret provoking you.  ");
                 }
             }
-            var damage1B:Number = calculateBasicTeaseDamage();
+            damage1B = calculateBasicTeaseDamage();
             if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
                 damage1B *= 2;
             }
@@ -11366,7 +11363,7 @@ public class Combat extends BaseContent {
                     outputText("You notice [monster he] is obviously affected by your venom, [monster his] movements become unsure, and [monster his] balance begins to fade. Sweat is beginning to roll on [monster his] skin. You wager [monster he] is probably beginning to regret provoking you.  ");
                 }
             }
-            var damage1B:Number =  calculateBasicTeaseDamage();
+            damage1B = calculateBasicTeaseDamage();
             if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
                 damage1B *= 2;
             }
@@ -15514,4 +15511,4 @@ public class Combat extends BaseContent {
         return inteWisLibScale(player.lib, randomize);
     }
 }
-}
+}

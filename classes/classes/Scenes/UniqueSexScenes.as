@@ -491,7 +491,7 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 		public function RaijuRapeSupercharged():void {
 			clearOutput();
 			menu();
-			if (player.isHerm){
+			if (player.isHerm()){
 				var maleOrFemale:Number = rand(100)
 				if (maleOrFemale < 50){
 					if (monster.hasVagina()){

@@ -130,7 +130,7 @@ public class HiddenCave extends DungeonAbstractContent
 			dungeons.setDungeonButtons(null, null, roomNWUP, roomNEUP);
 		}
 		public function roomSStaircase():void {
-			dungeonLoc = 44;
+            dungeonLoc = 44;
 			clearOutput();
 			outputText("<b><u>Stone Staircase</u></b>\n");
 			outputText("This room was hidden by a secret passage. It leads down below.");
@@ -145,6 +145,7 @@ public class HiddenCave extends DungeonAbstractContent
 			dungeons.setDungeonButtons(null, null, roomSWUP, roomSEUP);
 		}
 		public function roomSStorage():void {
+            var beatmore:int = 8 - flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] - flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS];
 			dungeonLoc = 46;
 			clearOutput();
 			outputText("<b><u></u>Small Storage</b>\n");
@@ -158,7 +159,7 @@ public class HiddenCave extends DungeonAbstractContent
 			outputText("This room is filled with storage crates.");
 			dungeons.setDungeonButtons(roomSWUP, null, null, null);
 			if (flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] > 4 && flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] > 2) addButton(10, "West", roomSStaircase);
-			else addButtonDisabled(10, "West", "You still need to beat "+8-flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS]-flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS]+" enemies to deactivate restriction formation from this hidden passage.");
+			else addButtonDisabled(10, "West", "You still need to beat " + beatmore + " enemies to deactivate restriction formation from this hidden passage.");
 			if (flags[kFLAGS.HIDDEN_CAVE_TAKEN_SOULPILLS] > 0) {
 				if(flags[kFLAGS.HIDDEN_CAVE_TAKEN_SOULPILLS] < 5) {
 					outputText("\n\nThere is a crate with " + num2Text(5 - flags[kFLAGS.HIDDEN_CAVE_TAKEN_SOULPILLS]) + " pill bottles inside.\n\n");
@@ -185,15 +186,17 @@ public class HiddenCave extends DungeonAbstractContent
 			dungeons.setDungeonButtons(null, roomWUP, null, roomNUP);
 		}
 		public function roomWUP():void {
-			dungeonLoc = 48;
+			var beatmore:int = 5 - flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] - flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS];
+            dungeonLoc = 48;
 			clearOutput();
 			outputText("<b><u>W Underground Passage</u></b>\n");
 			outputText("Various shattered humanoid skeletons litter the floor in this corridor. They look demonic in origin. Whatever lives heres kills demon in cold blood.");
 			dungeons.setDungeonButtons(roomNWUP, roomSWUP, null, null);
 			if (flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] > 3 && flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] > 0) addButton(10, "West", roomNTE);
-			else addButtonDisabled(10, "West", "You still need to beat "+5-flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS]-flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS]+" enemies to deactivate restriction formation from this passage.");
+			else addButtonDisabled(10, "West", "You still need to beat "+ beatmore +" enemies to deactivate restriction formation from this passage.");
 		}
 		public function roomSWUP():void {
+            var beatmore:int = 4 - flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS];
 			dungeonLoc = 49;
 			clearOutput();
 			outputText("<b><u>SW Underground Passage</u></b>\n");
@@ -207,7 +210,7 @@ public class HiddenCave extends DungeonAbstractContent
 			outputText("The corridor in front of you is covered with crystal formation that glow eerily in the dark. Every now and then, you spot a shadow from the corner of your eyes but clearly this must only be your imagination.");
 			dungeons.setDungeonButtons(roomWUP, null, null, roomSUP);
 			if (flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] > 3) addButton(11, "South", roomSStorage);
-			else addButtonDisabled(11, "South", "You still need to beat "+4-flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS]+" enemies to deactivate restriction formation from this passage.");
+			else addButtonDisabled(11, "South", "You still need to beat "+ beatmore +" enemies to deactivate restriction formation from this passage.");
 		}
 		public function roomNTE():void {
 			dungeonLoc = 50;

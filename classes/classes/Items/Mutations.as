@@ -4972,6 +4972,7 @@ public final class Mutations extends MutationsHelper {
         var changeLimit:Number = 1;
         var temp:Number = 0;
         var temp2:Number = 0;
+        var color:String;
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
@@ -5207,7 +5208,7 @@ public final class Mutations extends MutationsHelper {
         // Scale color
         if (type == 1 && rand(4) == 0 && !InCollection(player.coatColor, ("black", "midnight", "midnight black")) && changes < changeLimit) {
             outputText("[pg]");
-            var color:String = randomChoice("black", "midnight", "midnight black");
+            color = randomChoice("black", "midnight", "midnight black");
             transformations.SkinScales(Skin.COVERAGE_LOW, {color: color}).applyEffect();
             player.coatColor2 = "purplish black";
             changes++;
@@ -5216,7 +5217,7 @@ public final class Mutations extends MutationsHelper {
         // Hair color
         if (type == 1 && rand(4) == 0 && !InCollection(player.hairColor, ("black", "midnight", "midnight black")) && changes < changeLimit) {
             outputText("[pg]");
-            var color:String = randomChoice("black", "midnight", "midnight black");
+            color = randomChoice("black", "midnight", "midnight black");
             outputText("[pg]Your hair suddenly tingles as "+color+" strands begins to cover your entire skalp and before long all of them are of same dark color.");
             player.hairColorOnly = color;
             changes++;
