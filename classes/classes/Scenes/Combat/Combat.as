@@ -77,6 +77,7 @@ public class Combat extends BaseContent {
     public var comfoll:CombatFollowersActions = new CombatFollowersActions();
     public var ui:CombatUI = new CombatUI();
 	public var codex:Codex = new Codex();
+	public var meleeDamageNoLag:Number = 0;
     public var MDODialogs:Boolean = false; // JA dialogs, look 3875
     public var MDOCount:int = 0; // count of how many times damage was deal
     public var MSGControll:Boolean = false; // need to correctly display damage MSG
@@ -543,6 +544,7 @@ public class Combat extends BaseContent {
 			doNext(curry(combatMenu, true));
 		}
 		else if ((player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking)) && player.hasPerk(PerkLib.TooAngryToDie)) {
+			if (!player.hasStatusEffect(StatusEffects.TooAngryTooDie)) player.createStatusEffect(StatusEffects.TooAngryTooDie, 0, 0, 0, 0);
 			player.HP = player.minHP() + 1;
 			doNext(curry(combatMenu, true));
 		}
@@ -925,6 +927,7 @@ public class Combat extends BaseContent {
         if (flags[kFLAGS.MELEE_DAMAGE_OVERHAUL] == 1) {
             MDODialogs = true; // JA dialogs, look 3875
         }
+		meleeDamageNoLag = 0;
         MDOCount = 0;
         MSGControll = false;
         MSGControllForEvasion = false;
@@ -940,6 +943,7 @@ public class Combat extends BaseContent {
 			if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) flags[kFLAGS.IN_COMBAT_PLAYER_BLOOD_PUPPIES_ATTACKED] = 0;
 			if (player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn) && player.statusEffectv1(StatusEffects.SimplifiedNonPCTurn) == 1) player.addStatusValue(StatusEffects.SimplifiedNonPCTurn, 1, -1);
 			if (player.armor == armors.BMARMOR) dynStats("lus", -(Math.round(player.maxLust() * 0.02)));
+			
         }
         mainView.hideMenuButton(MainView.MENU_DATA);
         mainView.hideMenuButton(MainView.MENU_APPEARANCE);
@@ -4768,7 +4772,7 @@ public class Combat extends BaseContent {
         //		clearOutput();
         //		fatigueRecovery1();
         //	}
-        if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 0 && !isWieldingRangedWeapon()) {
+        if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 0) {
             outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  ");
             if (monster is ChaosChimera) outputText("Curse");
             else outputText("The kitsune's seals");
@@ -4781,13 +4785,13 @@ public class Combat extends BaseContent {
             enemyAI();
             return;
         }
-        if (flags[kFLAGS.PC_FETISH] >= 3 && !SceneLib.urtaQuest.isUrta() && !isWieldingRangedWeapon()) {
+        if (flags[kFLAGS.PC_FETISH] >= 3 && !SceneLib.urtaQuest.isUrta()) {
             outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  Ceraph's piercings have made normal melee attack impossible!  Maybe you could try something else?\n\n");
             enemyAI();
             return;
         }
 		if (checkConcentration()) return; //Amily concentration
-        if (monster.hasStatusEffect(StatusEffects.Level) && !player.hasStatusEffect(StatusEffects.FirstAttack) && !isWieldingRangedWeapon()) {
+        if (monster.hasStatusEffect(StatusEffects.Level) && !player.hasStatusEffect(StatusEffects.FirstAttack)) {
             if (monster is SandTrap) {
                 outputText("It's all or nothing!  With a bellowing cry you charge down the treacherous slope and smite the sandtrap as hard as you can!  ");
                 (monster as SandTrap).trapLevel(-4);
@@ -4820,7 +4824,7 @@ public class Combat extends BaseContent {
         if (player.playerIsBlinded()) {
             outputText("You attempt to attack, but as blinded as you are right now, you doubt you'll have much luck!  ");
         }
-        if (monster is Basilisk && !player.hasPerk(PerkLib.BasiliskResistance) && !isWieldingRangedWeapon()) {
+        if (monster is Basilisk && !player.hasPerk(PerkLib.BasiliskResistance)) {
             if (monster.hasStatusEffect(StatusEffects.Blind) || monster.hasStatusEffect(StatusEffects.InkBlind))
                 outputText("Blind basilisk can't use his eyes, so you can actually aim your strikes!  ");
             //basilisk counter attack (block attack, significant speed loss):
@@ -4925,7 +4929,7 @@ public class Combat extends BaseContent {
         //		clearOutput();
         //		fatigueRecovery1();
         //	}
-        if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 0 && !isWieldingRangedWeapon()) {
+        if (player.hasStatusEffect(StatusEffects.Sealed) && player.statusEffectv2(StatusEffects.Sealed) == 0) {
             outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  ");
             if (monster is ChaosChimera) outputText("Curse");
             else outputText("The kitsune's seals");
@@ -4938,13 +4942,13 @@ public class Combat extends BaseContent {
             enemyAI();
             return;
         }
-        if (flags[kFLAGS.PC_FETISH] >= 3 && !SceneLib.urtaQuest.isUrta() && !isWieldingRangedWeapon()) {
+        if (flags[kFLAGS.PC_FETISH] >= 3 && !SceneLib.urtaQuest.isUrta()) {
             outputText("You attempt to attack, but at the last moment your body wrenches away, preventing you from even coming close to landing a blow!  Ceraph's piercings have made normal melee attack impossible!  Maybe you could try something else?\n\n");
             enemyAI();
             return;
         }
-        if (checkConcentration() && !isWieldingRangedWeapon()) return; //Amily concentration
-        if (monster.hasStatusEffect(StatusEffects.Level) && !player.hasStatusEffect(StatusEffects.FirstAttack) && !isWieldingRangedWeapon()) {
+        if (checkConcentration()) return; //Amily concentration
+        if (monster.hasStatusEffect(StatusEffects.Level) && !player.hasStatusEffect(StatusEffects.FirstAttack)) {
             if (monster is SandTrap) {
                 outputText("It's all or nothing!  With a bellowing cry you charge down the treacherous slope and smite the sandtrap as hard as you can!  ");
                 (monster as SandTrap).trapLevel(-4);
@@ -4977,7 +4981,7 @@ public class Combat extends BaseContent {
         if (player.playerIsBlinded()) {
             outputText("You attempt to attack, but as blinded as you are right now, you doubt you'll have much luck!  ");
         }
-        if (monster is Basilisk && !player.hasPerk(PerkLib.BasiliskResistance) && !isWieldingRangedWeapon()) {
+        if (monster is Basilisk && !player.hasPerk(PerkLib.BasiliskResistance)) {
             if (monster.hasStatusEffect(StatusEffects.Blind) || monster.hasStatusEffect(StatusEffects.InkBlind))
                 outputText("Blind basilisk can't use his eyes, so you can actually aim your strikes!  ");
             //basilisk counter attack (block attack, significant speed loss):
@@ -5500,6 +5504,150 @@ public class Combat extends BaseContent {
         }
         outputText("<b>)</b>");
     }
+	
+	private function meleeDamageNoLagSingle(IsFeralCombat:Boolean = false):Number {
+		var damage:Number = 0;
+		//------------
+		// DAMAGE
+		//------------
+		//Determine damage
+		//BASIC DAMAGE STUFF
+		if (IsFeralCombat && player.hasPerk(PerkLib.VerdantMight)) {
+			damage += player.tou;
+			damage += scalingBonusToughness() * 0.2;
+		}
+		else {
+			if (player.isElf() && player.isSpearTypeWeapon() && player.hasPerk(PerkLib.ELFElvenBattleStyle)) {
+				damage += player.inte;
+				damage += scalingBonusToughness() * 0.2;
+				if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry1to4)) damage*=1+(0.2*player.perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4));
+			}
+			else{
+				damage += player.str;
+				damage += scalingBonusStrength() * 0.2;
+			}
+		}
+		if (player.isFlying()){
+			if (player.hasPerk(MutationsLib.HarpyHollowBones)) damage *= 1.2;
+			if (player.hasPerk(MutationsLib.HarpyHollowBonesPrimitive)) damage *= 1.3;
+			if (player.hasPerk(MutationsLib.HarpyHollowBonesPrimitive)) damage *= 1.5;
+		}
+		if ((player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) && player.isFistOrFistWeapon()){
+			damage *= 2;
+			if (player.hasPerk(MutationsLib.YetiFatPrimitive)) damage *= 1.5;
+			if (player.hasPerk(MutationsLib.YetiFatEvolved)) damage *= 1.5;
+		}
+		if (player.hasPerk(PerkLib.SpeedDemon) && player.isNoLargeNoStaffWeapon()) {
+			damage += player.spe;
+			damage += scalingBonusSpeed() * 0.20;
+			if (player.hasStatusEffect(StatusEffects.JabbingStyle)) damage += player.spe * player.statusEffectv1(StatusEffects.JabbingStyle);
+		}
+		if (player.hasPerk(PerkLib.QuickStrike) && (player.weaponSpecials("Small") || player.weaponSpecials("Dual Small"))) {
+			damage += (player.spe / 2);
+			damage += scalingBonusSpeed() * 0.10;
+		}
+		if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 1.2;
+		if (damage < 10) damage = 10;
+		//Weapon addition!
+		if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.03));
+		else if (player.weaponAttack >= 51 && player.weaponAttack < 101) damage *= (2.5 + ((player.weaponAttack - 50) * 0.025));
+		else if (player.weaponAttack >= 101 && player.weaponAttack < 151) damage *= (3.75 + ((player.weaponAttack - 100) * 0.02));
+		else if (player.weaponAttack >= 151 && player.weaponAttack < 201) damage *= (4.75 + ((player.weaponAttack - 150) * 0.015));
+		else damage *= (5.5 + ((player.weaponAttack - 200) * 0.01));
+		if (player.hasPerk(PerkLib.DivineArmament) && player.isUsingStaff() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 3;
+		if (player.weaponSpecials("Dual Small") || player.weaponSpecials("Dual") || player.weaponSpecials("Dual Large")) damage *= meleeDualWieldDamagePenalty();
+		//Bonus sand trap / alraune damage!
+		if (monster.hasStatusEffect(StatusEffects.Level) && (monster is SandTrap || monster is Alraune)) damage = Math.round(damage * 1.75);
+		//All special weapon effects like...fire/ice
+		if (player.weapon == weapons.L_WHIP) {
+			if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
+			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
+			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
+			if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
+		}
+		if (player.weapon == weapons.NPHBLDE || player.weapon == weapons.MOONLIT || player.weapon == weapons.MASAMUN || player.weapon == weapons.SESPEAR || player.weapon == weapons.WG_GAXE || player.weapon == weapons.KARMTOU) {
+			if (monster.cor < 33) damage = Math.round(damage * 1.0);
+			else if (monster.cor < 50) damage = Math.round(damage * 1.1);
+			else if (monster.cor < 75) damage = Math.round(damage * 1.2);
+			else if (monster.cor < 90) damage = Math.round(damage * 1.3);
+			else damage = Math.round(damage * 1.4);
+		}
+		if (player.weapon == weapons.EBNYBLD || player.weapon == weapons.C_BLADE || player.weapon == weapons.BLETTER || player.weapon == weapons.DSSPEAR || player.weapon == weapons.DE_GAXE || player.weapon == weapons.YAMARG) {
+			if (monster.cor >= 66) damage = Math.round(damage * 1.0);
+			else if (monster.cor >= 50) damage = Math.round(damage * 1.1);
+			else if (monster.cor >= 25) damage = Math.round(damage * 1.2);
+			else if (monster.cor >= 10) damage = Math.round(damage * 1.3);
+			else damage = Math.round(damage * 1.4);
+		}
+		if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon()) && player.hasStatusEffect(StatusEffects.WinterClaw)) {
+			damage *= 2.2;
+			if (monster.hasPerk(PerkLib.FireNature)) damage *= 10;
+			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 4;
+			if (monster.hasPerk(PerkLib.IceNature)) damage *= 0.4;
+			if (player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
+		}
+		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
+			if (player.mouseScore() >= 12 && player.arms.type == Arms.HINEZUMI && player.lowerBody == LowerBody.HINEZUMI && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
+			else damage *= 2;
+			if (monster.hasPerk(PerkLib.IceNature)) damage *= 10;
+			if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 4;
+			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.25;
+			if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.1;
+			if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
+		}
+		if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
+			var damage1:Number = damage;
+			if (monster.hasPerk(PerkLib.IceNature)) damage1 += (damage1 * 0.5);
+			if (monster.hasPerk(PerkLib.FireVulnerability)) damage1 += (damage1 * 0.2);
+			if (monster.hasPerk(PerkLib.IceVulnerability)) damage1 += (damage1 * 0.05);
+			if (monster.hasPerk(PerkLib.FireNature)) damage1 += (damage1 * 0.02);
+			if (player.hasPerk(PerkLib.FireAffinity)) damage1 *= 2;
+			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
+			damage += damage1;
+		}
+		if ((player.isDuelingTypeWeapon() || player.isSwordTypeWeapon() || player.isAxeTypeWeapon() || player.isDaggerTypeWeapon()) && player.hasStatusEffect(StatusEffects.FlameBlade)) {
+			var damage2:Number = damage;
+			if (monster.hasPerk(PerkLib.IceNature)) damage2 += (damage2 * 0.5);
+			if (monster.hasPerk(PerkLib.FireVulnerability)) damage2 += (damage2 * 0.2);
+			if (monster.hasPerk(PerkLib.IceVulnerability)) damage2 += (damage2 * 0.05);
+			if (monster.hasPerk(PerkLib.FireNature)) damage2 += (damage2 * 0.02);
+			if (player.hasPerk(PerkLib.FireAffinity)) damage2 *= 2;
+			damage += scalingBonusLibido() * 0.20;
+			damage += damage2;
+		}
+		if (player.weapon == weapons.BFGAUNT || (player.shield == shields.AETHERS && player.weapon == weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets")) damage *= 4;
+		if (player.weapon == weapons.FRTAXE && monster.isFlying()) damage *= 1.5;
+		if (player.weapon == weapons.VENCLAW && flags[kFLAGS.FERAL_COMBAT_MODE] == 1) damage *= 1.2;
+		if (player.weaponName == "fists") damage *= (1 + (0.01 * masteryFeralCombatLevel()));
+		if (player.isGauntletWeapon()) damage *= (1 + (0.01 * masteryGauntletLevel()));
+		if (player.isSwordTypeWeapon()) damage *= (1 + (0.01 * masterySwordLevel()));
+		if (player.isAxeTypeWeapon()) damage *= (1 + (0.01 * masteryAxeLevel()));
+		if (player.isMaceHammerTypeWeapon()) damage *= (1 + (0.01 * masteryMaceHammerLevel()));
+		if (player.isDuelingTypeWeapon()) damage *= (1 + (0.01 * masteryDuelingSwordLevel()));
+		if (player.isPolearmTypeWeapon()) damage *= (1 + (0.01 * masteryPolearmLevel()));
+		if (player.isSpearTypeWeapon()) damage *= (1 + (0.01 * masterySpearLevel()));
+		if (player.isDaggerTypeWeapon()) damage *= (1 + (0.01 * masteryDaggerLevel()));
+		if (player.isWhipTypeWeapon()) damage *= (1 + (0.01 * masteryWhipLevel()));
+		if (player.isExoticTypeWeapon()) damage *= (1 + (0.01 * masteryExoticLevel()));
+		if (player.weaponSpecials("Dual Small")) damage *= (1 + (0.01 * dualWSLevel()));
+		if (player.weaponSpecials("Dual")) damage *= (1 + (0.01 * dualWNLevel()));
+		if (player.weaponSpecials("Dual Large")) damage *= (1 + (0.01 * dualWLLevel()));
+		//Thunderous Strikes
+		if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
+		if (player.hasPerk(PerkLib.ChiReflowMagic)) damage *= UmasShop.NEEDLEWORK_MAGIC_REGULAR_MULTI;
+		if (player.hasPerk(PerkLib.ChiReflowAttack)) damage *= UmasShop.NEEDLEWORK_ATTACK_REGULAR_MULTI;
+		if (player.jewelryEffectId == JewelryLib.MODIFIER_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
+		if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
+		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
+		if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+		if (player.hasPerk(PerkLib.LifeLeech) && player.isFistOrFistWeapon()) {
+			if (player.hasStatusEffect(StatusEffects.AlterBindScroll2)) damage *= 1.1;
+			else damage *= 1.05;
+		}
+		if (player.isSpearTypeWeapon() && player.hasPerk(PerkLib.ElvenRangerArmor)) damage *= 1.5;
+		if (SceneLib.urtaQuest.isUrta()) damage *= 2;
+		return damage;
+	}
 
     public function meleeDamageAcc(IsFeralCombat:Boolean = false):void {
         var accMelee:Number = 0;
@@ -5507,134 +5655,12 @@ public class Combat extends BaseContent {
         if (flags[kFLAGS.ATTACKS_ACCURACY] > 0) accMelee -= flags[kFLAGS.ATTACKS_ACCURACY];
         if (player.weaponName == "Truestrike sword") accMelee = 100;
     	if (rand(100) < accMelee) {
-            var damage:Number = 0;
-            //------------
-            // DAMAGE
-            //------------
-            //Determine damage
-            //BASIC DAMAGE STUFF
-            if (IsFeralCombat && player.hasPerk(PerkLib.VerdantMight)) {
-                damage += player.tou;
-                damage += scalingBonusToughness() * 0.2;
-            }
-            else {
-                if (player.isElf() && player.isSpearTypeWeapon() && player.hasPerk(PerkLib.ELFElvenBattleStyle)) {
-                    damage += player.inte;
-                    damage += scalingBonusToughness() * 0.2;
-                    if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry1to4)) damage*=1+(0.2*player.perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4));
-                }
-                else{
-                    damage += player.str;
-                    damage += scalingBonusStrength() * 0.2;
-                }
-            }
-            if (player.isFlying()){
-                if (player.hasPerk(MutationsLib.HarpyHollowBones)) damage *= 1.2;
-                if (player.hasPerk(MutationsLib.HarpyHollowBonesPrimitive)) damage *= 1.3;
-                if (player.hasPerk(MutationsLib.HarpyHollowBonesPrimitive)) damage *= 1.5;
-            }
-            if ((player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) && player.isFistOrFistWeapon()){
-                damage *= 2;
-                if (player.hasPerk(MutationsLib.YetiFatPrimitive)) damage *= 1.5;
-                if (player.hasPerk(MutationsLib.YetiFatEvolved)) damage *= 1.5;
-            }
-            if (player.hasPerk(PerkLib.SpeedDemon) && player.isNoLargeNoStaffWeapon()) {
-                damage += player.spe;
-                damage += scalingBonusSpeed() * 0.20;
-                if(player.hasStatusEffect(StatusEffects.JabbingStyle)) {
-                    damage += player.spe * player.statusEffectv1(StatusEffects.JabbingStyle);
-                }
-            }
-            if (player.hasPerk(PerkLib.QuickStrike) && (player.weaponSpecials("Small") || player.weaponSpecials("Dual Small"))) {
-                damage += (player.spe / 2);
-                damage += scalingBonusSpeed() * 0.10;
-            }
-            if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 1.2;
-            if (damage < 10) damage = 10;
-            //Weapon addition!
-            if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.03));
-            else if (player.weaponAttack >= 51 && player.weaponAttack < 101) damage *= (2.5 + ((player.weaponAttack - 50) * 0.025));
-            else if (player.weaponAttack >= 101 && player.weaponAttack < 151) damage *= (3.75 + ((player.weaponAttack - 100) * 0.02));
-            else if (player.weaponAttack >= 151 && player.weaponAttack < 201) damage *= (4.75 + ((player.weaponAttack - 150) * 0.015));
-            else damage *= (5.5 + ((player.weaponAttack - 200) * 0.01));
-			if (player.hasPerk(PerkLib.DivineArmament) && player.isUsingStaff() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 3;
-			if (player.weaponSpecials("Dual Small") || player.weaponSpecials("Dual") || player.weaponSpecials("Dual Large")) damage *= meleeDualWieldDamagePenalty();
-            //Bonus sand trap damage!
-            if (monster.hasStatusEffect(StatusEffects.Level) && (monster is SandTrap || monster is Alraune)) damage = Math.round(damage * 1.75);
-            //All special weapon effects like...fire/ice
-            if (player.weapon == weapons.L_WHIP) {
-                if (monster.hasPerk(PerkLib.IceNature)) damage *= 5;
-                if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 2;
-                if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
-                if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
-            }
-            if (player.weapon == weapons.NPHBLDE || player.weapon == weapons.MOONLIT || player.weapon == weapons.MASAMUN || player.weapon == weapons.SESPEAR || player.weapon == weapons.WG_GAXE || player.weapon == weapons.KARMTOU) {
-                if (monster.cor < 33) damage = Math.round(damage * 1.0);
-                else if (monster.cor < 50) damage = Math.round(damage * 1.1);
-                else if (monster.cor < 75) damage = Math.round(damage * 1.2);
-                else if (monster.cor < 90) damage = Math.round(damage * 1.3);
-                else damage = Math.round(damage * 1.4);
-            }
-            if (player.weapon == weapons.EBNYBLD || player.weapon == weapons.C_BLADE || player.weapon == weapons.BLETTER || player.weapon == weapons.DSSPEAR || player.weapon == weapons.DE_GAXE || player.weapon == weapons.YAMARG) {
-                if (monster.cor >= 66) damage = Math.round(damage * 1.0);
-                else if (monster.cor >= 50) damage = Math.round(damage * 1.1);
-                else if (monster.cor >= 25) damage = Math.round(damage * 1.2);
-                else if (monster.cor >= 10) damage = Math.round(damage * 1.3);
-                else damage = Math.round(damage * 1.4);
-            }
-            if (flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon()) && player.hasStatusEffect(StatusEffects.WinterClaw)) {
-                damage *= 2.2;
-                if (monster.hasPerk(PerkLib.FireNature)) damage *= 10;
-                if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 4;
-                if (monster.hasPerk(PerkLib.IceNature)) damage *= 0.4;
-                if (player.hasPerk(PerkLib.ColdAffinity)) damage *= 2;
-            }
-            if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) {
-                if (player.mouseScore() >= 12 && player.arms.type == Arms.HINEZUMI && player.lowerBody == LowerBody.HINEZUMI && (player.jewelryName == "Infernal Mouse ring" || player.jewelryName2 == "Infernal Mouse ring" || player.jewelryName3 == "Infernal Mouse ring" || player.jewelryName4 == "Infernal Mouse ring")) damage *= 2.2;
-                else damage *= 2;
-                if (monster.hasPerk(PerkLib.IceNature)) damage *= 10;
-                if (monster.hasPerk(PerkLib.FireVulnerability)) damage *= 4;
-                if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.25;
-                if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.1;
-                if (player.hasPerk(PerkLib.FireAffinity)) damage *= 2;
-            }
-            if (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) {
-                var damage1:Number = damage;
-                if (monster.hasPerk(PerkLib.IceNature)) damage1 += (damage1 * 0.5);
-                if (monster.hasPerk(PerkLib.FireVulnerability)) damage1 += (damage1 * 0.2);
-                if (monster.hasPerk(PerkLib.IceVulnerability)) damage1 += (damage1 * 0.05);
-                if (monster.hasPerk(PerkLib.FireNature)) damage1 += (damage1 * 0.02);
-                if (player.hasPerk(PerkLib.FireAffinity)) damage1 *= 2;
-                if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
-                damage += damage1;
-            }
-            if ((player.isDuelingTypeWeapon() || player.isSwordTypeWeapon() || player.isAxeTypeWeapon() || player.isDaggerTypeWeapon()) && player.hasStatusEffect(StatusEffects.FlameBlade)) {
-                var damage2:Number = damage;
-                if (monster.hasPerk(PerkLib.IceNature)) damage2 += (damage2 * 0.5);
-                if (monster.hasPerk(PerkLib.FireVulnerability)) damage2 += (damage2 * 0.2);
-                if (monster.hasPerk(PerkLib.IceVulnerability)) damage2 += (damage2 * 0.05);
-                if (monster.hasPerk(PerkLib.FireNature)) damage2 += (damage2 * 0.02);
-                if (player.hasPerk(PerkLib.FireAffinity)) damage2 *= 2;
-                damage += scalingBonusLibido() * 0.20;
-                damage += damage2;
-            }
-            if (player.weapon == weapons.BFGAUNT || (player.shield == shields.AETHERS && player.weapon == weapons.AETHERD && AetherTwinsFollowers.AetherTwinsShape == "Sky-tier Gaunlets")) damage *= 4;
-            if (player.weapon == weapons.FRTAXE && monster.isFlying()) damage *= 1.5;
-			if (player.weapon == weapons.VENCLAW && flags[kFLAGS.FERAL_COMBAT_MODE] == 1) damage *= 1.2;
-			if (player.weaponName == "fists") damage *= (1 + (0.01 * masteryFeralCombatLevel()));
-			if (player.isGauntletWeapon()) damage *= (1 + (0.01 * masteryGauntletLevel()));
-			if (player.isSwordTypeWeapon()) damage *= (1 + (0.01 * masterySwordLevel()));
-			if (player.isAxeTypeWeapon()) damage *= (1 + (0.01 * masteryAxeLevel()));
-			if (player.isMaceHammerTypeWeapon()) damage *= (1 + (0.01 * masteryMaceHammerLevel()));
-			if (player.isDuelingTypeWeapon()) damage *= (1 + (0.01 * masteryDuelingSwordLevel()));
-			if (player.isPolearmTypeWeapon()) damage *= (1 + (0.01 * masteryPolearmLevel()));
-			if (player.isSpearTypeWeapon()) damage *= (1 + (0.01 * masterySpearLevel()));
-			if (player.isDaggerTypeWeapon()) damage *= (1 + (0.01 * masteryDaggerLevel()));
-			if (player.isWhipTypeWeapon()) damage *= (1 + (0.01 * masteryWhipLevel()));
-			if (player.isExoticTypeWeapon()) damage *= (1 + (0.01 * masteryExoticLevel()));
-			if (player.weaponSpecials("Dual Small")) damage *= (1 + (0.01 * dualWSLevel()));
-			if (player.weaponSpecials("Dual")) damage *= (1 + (0.01 * dualWNLevel()));
-			if (player.weaponSpecials("Dual Large")) damage *= (1 + (0.01 * dualWLLevel()));
+			var damage:Number = 0;
+			if (meleeDamageNoLag != 0) damage += meleeDamageNoLagSingle();
+			else {
+				if (IsFeralCombat) damage += meleeDamageNoLagSingle(IsFeralCombat);
+				else damage += meleeDamageNoLagSingle();
+			}
 			//Determine if critical hit!
             var crit:Boolean = false;
             var critChance:int = 5;
@@ -5661,25 +5687,10 @@ public class Combat extends BaseContent {
             }
             //Apply AND DONE!
             damage *= (monster.damagePercent() / 100);
-            //Damage post processing!
-            //Thunderous Strikes
-            if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
-            if (player.hasPerk(PerkLib.ChiReflowMagic)) damage *= UmasShop.NEEDLEWORK_MAGIC_REGULAR_MULTI;
-            if (player.hasPerk(PerkLib.ChiReflowAttack)) damage *= UmasShop.NEEDLEWORK_ATTACK_REGULAR_MULTI;
-            if (player.jewelryEffectId == JewelryLib.MODIFIER_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
-            if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
-            if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
-            if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
-            if (player.hasPerk(PerkLib.LifeLeech) && player.isFistOrFistWeapon()) {
-				if (player.hasStatusEffect(StatusEffects.AlterBindScroll2)) damage *= 1.1;
-				else damage *= 1.05;
-			}
-            if (player.isSpearTypeWeapon() && player.hasPerk(PerkLib.ElvenRangerArmor)) damage *= 1.5;
-			if (SceneLib.urtaQuest.isUrta()) damage *= 2;
             //One final round
             damage = Math.round(damage);
             //ANEMONE SHIT
-            if (monster.short == "anemone" && !isWieldingRangedWeapon()) {
+            if (monster.short == "anemone") {
                 //hit successful:
                 //special event, block (no more than 10-20% of turns, also fails if PC has >75 corruption):
                 if (rand(10) <= 1) {
@@ -5702,7 +5713,7 @@ public class Combat extends BaseContent {
                     } else outputText("Though you lose a bit of steam to the display, the drive for dominance still motivates you to follow through on your swing.");
                 }
             }
-            if (monster.short == "sea anemone" && !isWieldingRangedWeapon()) {
+            if (monster.short == "sea anemone") {
                 //hit successful:
                 //special event, block (no more than 10-20% of turns, also fails if PC has >75 corruption):
                 if (rand(10) <= 1) {
@@ -5872,11 +5883,11 @@ public class Combat extends BaseContent {
                     else player.createStatusEffect(StatusEffects.Rage, 10, 0, 0, 0);
                 }
                 //Damage is delivered HERE
-                if ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+                if (((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) || ((player.isDuelingTypeWeapon() || player.isSwordTypeWeapon() || player.isAxeTypeWeapon() || player.isDaggerTypeWeapon()) && player.hasStatusEffect(StatusEffects.FlameBlade))) {
 					damage = Math.round(damage * fireDamageBoostedByDao());
 					doFireDamage(damage, true, true);
 				}
-                else if ((player.weapon == weapons.SCLAYMO || player.weapon == weapons.SDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+                else if (((player.weapon == weapons.SCLAYMO || player.weapon == weapons.SDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) || (flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon()) && player.hasStatusEffect(StatusEffects.WinterClaw))) {
 					damage = Math.round(damage * iceDamageBoostedByDao());
 					doIceDamage(damage, true, true);
 				}
@@ -5946,12 +5957,12 @@ public class Combat extends BaseContent {
             }
             if (damage > 0) {
                 //Lust raised by anemone contact!
-                if (monster.short == "anemone" && !isWieldingRangedWeapon()) {
+                if (monster.short == "anemone") {
                     outputText("\nThough you managed to hit the anemone, several of the tentacles surrounding her body sent home jolts of venom when your swing brushed past them.");
                     //(gain lust, temp lose str/spd)
                     (monster as Anemone).applyVenom((1 + rand(2)));
                 }
-                if (monster.short == "sea anemone" && !isWieldingRangedWeapon()) {
+                if (monster.short == "sea anemone") {
                     outputText("\nThough you managed to hit the sea anemone, several of the tentacles surrounding her body sent home jolts of venom when your swing brushed past them.");
                     //(gain lust, temp lose str/spd)
                     (monster as SeaAnemone).applyVenom((1 + rand(2)));
@@ -7125,10 +7136,6 @@ public class Combat extends BaseContent {
         if (blockChance2 < 10) blockChance2 = 10;
         //if (player.weaponRange == weaponsrange.M1CERBE) blockChance2 = 0;
         return blockChance2;
-    }
-
-    public function isWieldingRangedWeapon():Boolean {
-        return player.weaponName.indexOf("staff") != -1 && player.hasPerk(PerkLib.StaffChanneling);
     }
 
 // DamageOverhaul calculation
@@ -9673,20 +9680,47 @@ public class Combat extends BaseContent {
             if (player.statusEffectv1(StatusEffects.Berzerking) <= 0) {
                 player.removeStatusEffect(StatusEffects.Berzerking);
                 outputText("<b>Berserker effect wore off!</b>\n\n");
-            } else player.addStatusValue(StatusEffects.Berzerking, 1, -1);
-        }
-        //Elven Eye
-        if (player.hasStatusEffect(StatusEffects.ElvenEye)) {
-            if (player.statusEffectv1(StatusEffects.ElvenEye) <= 0) {
-                player.removeStatusEffect(StatusEffects.ElvenEye);
-                outputText("<b>Elven Eye effect wore off!</b>\n\n");
-            } else player.addStatusValue(StatusEffects.ElvenEye, 1, -1);
+            } else {
+				if (player.hasPerk(PerkLib.EndlessRage)) {
+					if (player.hasStatusEffect(StatusEffects.TooAngryTooDie)) {
+						if (player.wrath >= (player.maxWrath() * 0.1)) player.wrath -= (player.maxWrath() * 0.1);
+						else {
+							player.removeStatusEffect(StatusEffects.TooAngryTooDie);
+							player.removeStatusEffect(StatusEffects.Berzerking);
+							outputText("<b>Berserker effect wore off!</b>\n\n");
+						}
+					} else {
+						if (player.wrath >= 10) player.wrath -= 10;
+						else {
+							player.removeStatusEffect(StatusEffects.Berzerking);
+							outputText("<b>Berserker effect wore off!</b>\n\n");
+						}
+					}
+				} else player.addStatusValue(StatusEffects.Berzerking, 1, -1);
+			}
         }
         if (player.hasStatusEffect(StatusEffects.Lustzerking)) {
             if (player.statusEffectv1(StatusEffects.Lustzerking) <= 0) {
                 player.removeStatusEffect(StatusEffects.Lustzerking);
                 outputText("<b>Lustzerker effect wore off!</b>\n\n");
-            } else player.addStatusValue(StatusEffects.Lustzerking, 1, -1);
+            } else {
+				if (player.hasPerk(PerkLib.EndlessRage)) {
+					if (player.hasStatusEffect(StatusEffects.TooAngryTooDie)) {
+						if (player.wrath >= (player.maxWrath() * 0.1)) player.wrath -= (player.maxWrath() * 0.1);
+						else {
+							player.removeStatusEffect(StatusEffects.TooAngryTooDie);
+							player.removeStatusEffect(StatusEffects.Lustzerking);
+							outputText("<b>Lustzerker effect wore off!</b>\n\n");
+						}
+					} else {
+						if (player.wrath >= 10) player.wrath -= 10;
+						else {
+							player.removeStatusEffect(StatusEffects.Lustzerking);
+							outputText("<b>Lustzerker effect wore off!</b>\n\n");
+						}
+					}
+				} else player.addStatusValue(StatusEffects.Lustzerking, 1, -1);
+			}
         }
         if (player.hasStatusEffect(StatusEffects.OniRampage)) {
             if (player.statusEffectv1(StatusEffects.OniRampage) <= 0) {
@@ -9705,6 +9739,13 @@ public class Combat extends BaseContent {
                 player.removeStatusEffect(StatusEffects.Cauterize);
                 outputText("<b>Cauterize effect wore off!</b>\n\n");
             } else player.addStatusValue(StatusEffects.Cauterize, 1, -1);
+        }
+        //Elven Eye
+        if (player.hasStatusEffect(StatusEffects.ElvenEye)) {
+            if (player.statusEffectv1(StatusEffects.ElvenEye) <= 0) {
+                player.removeStatusEffect(StatusEffects.ElvenEye);
+                outputText("<b>Elven Eye effect wore off!</b>\n\n");
+            } else player.addStatusValue(StatusEffects.ElvenEye, 1, -1);
         }
         if (player.hasStatusEffect(StatusEffects.FlameBlade)) {
             if (player.statusEffectv1(StatusEffects.FlameBlade) <= 0) {
@@ -11092,6 +11133,7 @@ public class Combat extends BaseContent {
 			player.wrath += 100;
 			if (player.wrath > player.maxOverWrath()) player.wrath = player.maxOverWrath();
 		}
+		meleeDamageNoLag = 0;
 		applyAutocast0();
         magic.applyAutocast();
         mspecials.applyAutocast2();
@@ -15390,4 +15432,4 @@ public class Combat extends BaseContent {
         return inteWisLibScale(player.lib, randomize);
     }
 }
-}
+}

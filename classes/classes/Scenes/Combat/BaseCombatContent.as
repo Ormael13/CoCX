@@ -132,9 +132,6 @@ public class BaseCombatContent extends BaseContent {
 	protected function checkAchievementDamage(damage:Number):void {
 		combat.checkAchievementDamage(damage);
 	}
-	protected function isWieldingRangedWeapon():Boolean {
-		return combat.isWieldingRangedWeapon();
-	}
 	protected function isPlayerBound():Boolean {
 		return combat.isPlayerBound();
 	}

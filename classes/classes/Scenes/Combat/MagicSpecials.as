@@ -34,17 +34,25 @@ public class MagicSpecials extends BaseCombatContent {
 	public function MagicSpecials() {}
 	internal function applyAutocast2():void {
 		outputText("\n\n");
-		if (player.wrath >= 50 && (flags[kFLAGS.ZERKER_COMBAT_MODE] == 1 || flags[kFLAGS.ZERKER_COMBAT_MODE] == 3)) {
-			player.wrath -= 50;
+		if ((player.wrath >= 50 || player.hasPerk(PerkLib.EndlessRage)) && (flags[kFLAGS.ZERKER_COMBAT_MODE] == 1 || flags[kFLAGS.ZERKER_COMBAT_MODE] == 3)) {
 			var berzerkDuration:Number = 10;
+			if (player.hasPerk(PerkLib.EndlessRage)) berzerkDuration += 1;
+			else {
+				player.wrath -= 50;
+				berzerkDuration += 10;
+			}
 			if (player.hasPerk(MutationsLib.SalamanderAdrenalGlandsPrimitive)) berzerkDuration += 2;
 			if (player.hasPerk(MutationsLib.SalamanderAdrenalGlandsEvolved)) berzerkDuration += 8;
 			player.createStatusEffect(StatusEffects.Berzerking,berzerkDuration,0,0,0);
 			outputText("<b>Berzerking was used successfully.</b>\n\n");
 		}
-		if (player.wrath >= 50 && (flags[kFLAGS.ZERKER_COMBAT_MODE] == 2 || flags[kFLAGS.ZERKER_COMBAT_MODE] == 3)) {
-			player.wrath -= 50;
-			var lustzerkDuration:Number = 10;
+		if ((player.wrath >= 50 || player.hasPerk(PerkLib.EndlessRage)) && (flags[kFLAGS.ZERKER_COMBAT_MODE] == 2 || flags[kFLAGS.ZERKER_COMBAT_MODE] == 3)) {
+			var lustzerkDuration:Number = 0;
+			if (player.hasPerk(PerkLib.EndlessRage)) lustzerkDuration += 1;
+			else {
+				player.wrath -= 50;
+				lustzerkDuration += 10;
+			}
 			if (player.hasPerk(MutationsLib.SalamanderAdrenalGlandsPrimitive)) lustzerkDuration += 2;
 			if (player.hasPerk(MutationsLib.SalamanderAdrenalGlandsEvolved)) lustzerkDuration += 8;
 			player.createStatusEffect(StatusEffects.Lustzerking,lustzerkDuration,0,0,0);

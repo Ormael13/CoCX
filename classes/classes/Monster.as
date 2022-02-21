@@ -635,6 +635,7 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.Rage)) temp += 2000;
 			if (hasPerk(PerkLib.Anger)) temp += 2500;
 			if (hasPerk(PerkLib.TooAngryToDie)) temp += 3000;
+			if (hasPerk(PerkLib.EndlessRage)) temp += 3500;
 			if (hasPerk(PerkLib.PrestigeJobTempest)) temp += 500;
 			if (hasPerk(PerkLib.WarMageNovice)) temp += 50;
 			if (hasPerk(PerkLib.WarMageApprentice)) temp += 50;

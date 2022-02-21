@@ -93,6 +93,7 @@ package classes.Scenes
 			outputText("<b>Version 0.8s4:</b>\n\n");
 			outputText("-New tier 12 wisdom lvl-up perk: Greater shared power. Req. Elemental touch perk. Effect: Double the effect of Shared power.\n");
 			outputText("-New tier 13 wisdom lvl-up perk: Ecliptic Infusion. Req. Greater shared power perk. Effect: Your Infuse ability allows you to add and combine a corrupted or a purity normal elemental with a water, fire, earth or wind epic elemental. Doing so adds a purity or corruption scaling to your abilities.\n");
+			outputText("-New tier 13 strength lvl-up perk: Too Angry to Die. Req. Anger perk. Effect: When you under berserk-like state it will prevent HP defeat as long it last. Additionaly increase limit of negative HP you can reach by amount of max wrath. (+3000 max Wrath)\n");
 			outputText("-New Ascension perk: One Race To Rule Them All. Your racial paragon boost is increased. +(2x rank) to each stat per level and increase racial skill power by (25x rank)%. Max Rank: 5.\n");
 			outputText("-New Ascension perk: Advanced Training. Your gain as many as perk rank more stat points at each level up. Max Rank: 5.\n");
 			outputText("-New rare ascension perk -> Ascension: Hero's Legacy. Req. Ascension: Hero's Lineage and be at third ascension. It costs 25 asc points and will give 1 perk point, 1 super perk point and 5 stat points (scalable with NG tiers, for super perk it's reduced by 2) at the start of each new game.\n");
@@ -100,8 +101,11 @@ package classes.Scenes
 			outputText("-New melee weapon (by Ormael): Amphyst/Ruby/Sapphire/Topaz Staff - buyable in Tel'Adre Tower. 2 atk, costs 240 gems, increase matching type of element attacks (sapphire > ice and etc.) by 40%, Wizard's Focus (20%), staff type weapon.\n");
 			outputText("-New melee weapon (by Ormael): Dual Katana - dropped by corrupted flesh golems. Cost 1360 gems. Base atk is 17. It's Dual Large weapon belonging to dueling sword type.\n");
 			outputText("-New melee weapon (by Ormael): Dual Lance - dropped by corrupted flesh golems. Cost 960 gems. Base atk is 12. It's Dual Normal weapon belonging to spear type. When used in Charge special would hit twice.\n");
+			outputText("-New melee weapon (by Liadri): Trull Heart - obtainable by giving Dual BF Sword to Pure Celess to purify. Increased by 20 base dmg, added scaling based on purity, recover 1% hp on swings.\n");
+			outputText("-New melee weapon (by Liadri): Dorc Souls - obtainable by giving Dual BF Sword to Corrupted Celess to corrupt. Increased by 20 base dmg, added scaling based on corruption, recover 1% hp on swings.\n");
 			outputText("-New armor (by Ormael): Green Diving Suit - buyable at Pinchou shop. Cost 1800 gems, 25 armor, 5 magic resistance.\n");
-			outputText("-New tier 13 strength lvl-up perk: Too Angry to Die. Req. Anger perk. Effect: When you under berserk-like state it will prevent HP defeat as long it last. Additionaly increase limit of negative HP you can reach by amount of max wrath. (+3000 max Wrath)\n");
+			outputText("-New armor (by Liadri): Battle maiden armor - obtainable by giving Lusty Maiden Armor to Pure Celess to purify. Increase armor by an additional 30 but grant no armor if the character is not virgin. No longer grant sex scenes or slutty seduction but reduce lust by 2% each round.\n");
+			outputText("-New armor (by Liadri): Succubus armor - obtainable by giving Lusty Maiden Armor to Corrupted Celess to corrupt. Same base stat as lusty maiden armor +10 but double the originally added armor bonus each time PC has sex. Base slutty seduction set to 10.\n");
 			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
 			//outputText("-New tier 9 strength lvl-up perk: Prestige Job: Stalker. Req. Job: Warrior and Hunter perks, 150+ str/spe. Effect: +60 to str multi and +20 to spe multi (scalable with NG tiers), +20% damage and critical damage with thrown weapon.\n");
 			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
@@ -110,7 +114,7 @@ package classes.Scenes
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
-			outputText("-Added minor QoL option for minion using PC's to let those minions that can attack on their own (wisp or using simplified turn setup) even when PC itself is stunned or under fear effect. Cuz... well they had orders and pc been stunned not magicaly cause them to not bale to follow orginal order to keep smashing enemy ^^\n");
+			outputText("-Added minor QoL option for minion using PC's to let those minions that can attack on their own (wisp or using simplified turn setup) even when PC itself is stunned or under fear effect. Cuz... well they had orders and pc been stunned not magicaly cause them to not able to follow orginal order to keep smashing enemy ^^\n");
 			outputText("-Diana and Luna forced partial/full body TF events won't proc if PC got TF immunity. As side effect it may cause their storyline progress to freeze.\n");
 			outputText("-Purity Blessing, Cold Blooded, Hot Blooded, Nymphomania perks, Omnibus' Gift, Luststick Adapted, Lycanthropy, Bimbo Body, Bro Body, Futa Form effects for rise/lower minimum lust been changed from flat values to % ones.\n");
 			outputText("-Bimbo Champagne, Blessing of Divine Agency - Fera, Anemone Arousal, Infested, Harpy Lipstick, Drunken Power, Shouldra that been left unsatisfied too long, cumOmeter (manticore), MilkOMeter (displacer beast), having (spider) eggs effects and lusty maiden's armor, tentacled bark armor also have minimumm lust increase turtned into % values from flat ones.\n");
@@ -131,14 +135,10 @@ package classes.Scenes
 			outputText("-Nekomata Ghost Fire won't be dealing only fire dmg. It will deal half of fire dmg than before and second half of damage would be of darkness type. That also mean all the abilities to boost darkness damage (dao or perks for using darknes spells in a row) would boost it too. Additionaly Necromancy perk would boost it damage by 50%.\n");
 			outputText("-Eyes of the Hunter (Ex) effect nowe ont only allow to fight higher lvl enemies than 50 but also discover new areas much earlier (increase of lvl diff would also in the same amount lower min lvl to discover areas).\n");
 			outputText("-Unicorn & Nocturnus staff base atk increased to 10 (from 6) and price to 1,600 (from 960). Unicorn staff additionaly decrease healing spells cooldowns by 2 turns.\n");
-			outputText("-New armor (by Liadri): Battle maiden armor - obtainable by giving Lusty Maiden Armor to Pure Celess to purify. Increase armor by an additional 30 but grant no armor if the character is not virgin. No longer grant sex scenes or slutty seduction but reduce lust by 2% each round.\n");
-			outputText("-New armor (by Liadri): Succubus armor - obtainable by giving Lusty Maiden Armor to Corrupted Celess to corrupt. Same base stat as lusty maiden armor +10 but double the originally added armor bonus each time PC has sex. Base slutty seduction set to 10.\n");
 			outputText("-Added few more enemies that may fit req. access to Lusty Maiden/Succubus Armor b.titfuck scene.\n");
 			outputText("-Wild Hunt effect of increase dmg to enemeis below pc lvl increased from 20% to 100% more damage. Also monster level is now checked against PC effective level (Eyes of the Hunter (Ex) perk can increase it by as many levels as it decrease penalty for fighting too high lvl enemies).\n");
 			outputText("-Artemis bow now have additional effect - increase the magical damage of spells and enchanted arrows by 50%\n");
 			outputText("-Bonus damage on enchanted arrows shoot by arcane archer would now give half of previous damage, but it will no longer stops at adding more samage at 200 int. (So for very intelligent arcane archers it would be very good buff to damage with elemental arrows)\n");
-			outputText("-New melee weapon (by Liadri): Trull Heart - obtainable by giving Dual BF Sword to Pure Celess to purify. Increased by 20 base dmg, added scaling based on purity, recover 1% hp on swings.\n");
-			outputText("-New melee weapon (by Liadri): Dorc Souls - obtainable by giving Dual BF Sword to Corrupted Celess to corrupt. Increased by 20 base dmg, added scaling based on corruption, recover 1% hp on swings.\n");
 			outputText("-Gems counter reset on ascension and max 100 * NG tier (max 600) Spirits Stones are kept.\n");
 			outputText("-Added 3 new groups for Internal Mutation (perks): Parathyroid Glands, Central Nerv System and Adaptations. Ratatoskr Smarts & Ecliptic Mind mutation was moved to Central Nerv Sys group and Arachne Book Lungs and Twin Hearts moved to Adaptations group.\n");
 			outputText("-Cat-like Nimblness, Scylla Ink Glands, Tracheal System mutations been moved to Adaptations. So now all current internal mutations are placed under one of existing mutation slots ^^\n");
@@ -152,6 +152,18 @@ package classes.Scenes
 			outputText("-Prestige Job: Berserker gained additional effect: generate 1% of max wrath with using melee/range/specials.\n");
 			outputText("-Furious strikes & Unlimited rage perks increase generated wrath by 200% not 100% (2x -> 3x).\n");
 			outputText("-Improved Adrenaline perk increase now wrath generation by 2% not 1%.\n");
+			outputText("-New tier 14 strength lvl-up perk: Endless Rage. Req. Too Angry to Die perk. Effect: Berzerker and Lustzerker cost change to 10 wrath per turn from set amount of turns. When Too Angry Too Die perk effect activate that cost change to 10%. (+3500 max Wrath)\n");
+			outputText("-Combat code for melee multiattacks been refined to cause less lag on builds that use large amount (~16+) attacks per turn. Also attacking with melee weapon when under winter claw / flame blade or similar buffs would deal elemental damage instead of physical.\n");
+			outputText("-New tier 3 intelligence lvl-up perk: Offensive Staff Channeling. Req. Staff Channeling and Grey Magic perks, knowing any attack spell, 120+ int. Effect: Allow to cast splited offensive spell without increased mana cost when using staff (3 parts at 70% power) or partial staff (2 parts at 80% power) as focus. (Effect will not activate if you already have ways to multicast spells at reduced power)\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
@@ -279,6 +291,10 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

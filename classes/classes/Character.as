@@ -820,7 +820,7 @@ import classes.CoC;
 			}
 			max *= multimax;
 			max = Math.round(max);
-			if (game.player.demonScore() >= 16 && hasPerk(PerkLib.Phylactery)) max = 0;
+			if ((game.player.demonScore() >= 16 && hasPerk(PerkLib.Phylactery)) || max < 0) max = 0;
 			if (max > 1499999) max = 1499999;
 			return max;
 		}
@@ -993,6 +993,7 @@ import classes.CoC;
 			if (level <= 6) max += level * 10;
 			max *= multimax;
 			max = Math.round(max);
+			if (max < 0) max = 0;
 			if (max > 2499999) max = 2499999;
 			return max;
 		}

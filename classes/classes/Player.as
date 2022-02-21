@@ -804,9 +804,7 @@ use namespace CoC;
 			}
 			armorDef = Math.round(armorDef);
 			//Berzerking removes armor
-			if (hasStatusEffect(StatusEffects.Berzerking) && !hasPerk(PerkLib.ColdFury)) {
-				armorDef = 0;
-			}
+			if (hasStatusEffect(StatusEffects.Berzerking) && !hasPerk(PerkLib.ColdFury)) armorDef = 0;
 			if (hasStatusEffect(StatusEffects.ChargeArmor) && (!isNaked() || (isNaked() && haveNaturalArmor() && hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalArmor)))) armorDef += Math.round(statusEffectv1(StatusEffects.ChargeArmor));
 			if (hasStatusEffect(StatusEffects.CompBoostingPCArmorValue)) armorDef += (level * newGamePlusMod);
 			if (hasStatusEffect(StatusEffects.StoneSkin)) armorDef += Math.round(statusEffectv1(StatusEffects.StoneSkin));
@@ -1021,12 +1019,8 @@ use namespace CoC;
 			}
 			armorMDef = Math.round(armorMDef);
 			//Berzerking/Lustzerking removes magic resistance
-			if (hasStatusEffect(StatusEffects.Berzerking) && !hasPerk(PerkLib.ColderFury)) {
-				armorMDef = 0;
-			}
-			if (hasStatusEffect(StatusEffects.Lustzerking) && !hasPerk(PerkLib.ColderLust)) {
-				armorMDef = 0;
-			}
+			if (hasStatusEffect(StatusEffects.Berzerking) && !hasPerk(PerkLib.ColderFury)) armorMDef = 0;
+			if (hasStatusEffect(StatusEffects.Lustzerking) && !hasPerk(PerkLib.ColderLust)) armorMDef = 0;
 			//if (hasStatusEffect(StatusEffects.ChargeArmor) && (!isNaked() || (isNaked() && haveNaturalArmor() && hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalArmor)))) armorDef += Math.round(statusEffectv1(StatusEffects.ChargeArmor));
 			if (hasStatusEffect(StatusEffects.StoneSkin)) armorMDef += Math.round(statusEffectv1(StatusEffects.StoneSkin));
 			if (hasStatusEffect(StatusEffects.BarkSkin)) armorMDef += Math.round(statusEffectv1(StatusEffects.BarkSkin));
@@ -5047,7 +5041,7 @@ use namespace CoC;
 			if (demonScore() >= 11)
 				chimeraCounter++;
 //			if (() >= 11)
-				chimeraCounter++;
+//				chimeraCounter++;
 			if (devilkinScore() >= 11)
 				chimeraCounter++;
 			if (sharkScore() >= 8)
@@ -5998,8 +5992,8 @@ use namespace CoC;
 				catCounter += 1;
 			if (hasPerk(PerkLib.AscensionCruelChimerasThesis) && catCounter >= 8)
 				catCounter += 1;
-			if (arms.type == Arms.SPHINX || wings.type == Wings.FEATHERED_SPHINX || tailType == Tail.NEKOMATA_FORKED_1_3 || tailType == Tail.NEKOMATA_FORKED_2_3 || (tailType == Tail.CAT && tailCount > 1) || rearBody.type == RearBody.LION_MANE || (hairColor == "lilac and white striped" && coatColor == "lilac and white striped") || eyes.type == Eyes.INFERNAL || hairType == Hair.BURNING || tailType == Tail.BURNING
-			 || eyes.type == Eyes.DISPLACER || ears.type == Ears.DISPLACER || arms.type == Arms.DISPLACER || rearBody.type == RearBody.DISPLACER_TENTACLES) catCounter = 0;
+			if (arms.type == Arms.SPHINX || wings.type == Wings.FEATHERED_SPHINX || tailType == Tail.NEKOMATA_FORKED_1_3 || tailType == Tail.NEKOMATA_FORKED_2_3 || (tailType == Tail.CAT && tailCount > 1) || tailType == Tail.MANTICORE_PUSSYTAIL || rearBody.type == RearBody.LION_MANE || (hairColor == "lilac and white striped" && coatColor == "lilac and white striped") || eyes.type == Eyes.INFERNAL || hairType == Hair.BURNING
+			 || tailType == Tail.BURNING || eyes.type == Eyes.DISPLACER || ears.type == Ears.DISPLACER || arms.type == Arms.DISPLACER || rearBody.type == RearBody.DISPLACER_TENTACLES) catCounter = 0;
 			if (isGargoyle()) catCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) catCounter = 0;
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
@@ -13932,6 +13926,9 @@ use namespace CoC;
 			}
 			if(hasStatusEffect(StatusEffects.Lustzerking)) {
 				removeStatusEffect(StatusEffects.Lustzerking);
+			}
+			if(hasStatusEffect(StatusEffects.TooAngryTooDie)) {
+				removeStatusEffect(StatusEffects.TooAngryTooDie);
 			}
 			if(hasStatusEffect(StatusEffects.EverywhereAndNowhere)) {
 				removeStatusEffect(StatusEffects.EverywhereAndNowhere);

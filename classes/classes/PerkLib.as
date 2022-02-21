@@ -410,6 +410,10 @@ public class PerkLib
 		//public static const BloodSacrifice:PerkType = mk("Blood Sacrifice", "Blood Sacrifice",
 				//"You are currently sacrificing blood to empower your spells.",
 				//"You are currently sacrificing blood to empower your spells.");
+		public static const EndlessRage:PerkType = mk("Endless Rage", "Endless Rage",
+				"Berzerker and Lustzerker cost change to 10 wrath per turn from set amount of turns. When Too Angry Too Die perk effect activate that cost change to 10%.",
+				"You've chosen the 'Endless Rage' perk. Berzerker and Lustzerker cost change to 10 wrath per turn from set amount of turns. When Too Angry Too Die perk effect activate that cost change to 10%.")
+				.withBuffs({'maxwrath_base':+3500});
 		public static const WarMageNovice:PerkType = mk("Novice War Mage", "Novice War Mage",
 				"Safe limit for spellcasting increased by 5%.",
 				"You've chosen the 'Novice War Mage' perk, increasing wrath bar by 50 and safe limit for spellcasting increasing by 5%.")
@@ -458,8 +462,8 @@ public class PerkLib
 				"When you would cast defensive spell holding staff it effects would be increased a bit (higher defensive effect or longer duration).",
 				"You've chosen the 'Defensive Staff Channeling' perk. When you would cast defensive spell holding staff it effects would be increased a bit (higher defensive effect or longer duration).");
 		public static const OffensiveStaffChanneling:PerkType = mk("Offensive Staff Channeling", "Offensive Staff Channeling",
-				".",
-				"You've chosen the 'Offensive Staff Channeling' perk. .");
+				"Allow to cast splited offensive spell without increased mana cost when using staff (3 parts at 70% power) or partial staff (2 parts at 80% power) as focus. (Effect will not activate if you already have ways to multicast spells at reduced power)",
+				"You've chosen the 'Offensive Staff Channeling' perk. Allow to cast splited offensive spell without increased mana cost when using staff (3 parts at 70% power) or partial staff (2 parts at 80% power) as focus. (Effect will not activate if you already have ways to multicast spells at reduced power)");
 		public static const ElementalConjurerKnowledge:PerkType = mk("Elemental Conjurer Knowledge", "Elemental Conjurer Knowledge",
 				"You gained knowledge how to make elementals rank up process less resource consuming. (-40% needed mana/fatigue and 40% less HP lost during failure)",
 				"You've chosen the 'Elemental Conjurer Knowledge' perk, gaining knowledge how to make elementals rank up process less resource consuming. (-40% needed mana/fatigue and 40% less HP lost during failure)");
@@ -482,10 +486,6 @@ public class PerkLib
 				"You can now summon and command ice, lightning and darkness elementals. Also increase elementals command limit by 1.",
 				"You've chosen the 'Elements of Mareth: ' perk, your time spent in Mareth allowing you to get basic understanding of native elements that aren't classified as one of four traditional.");
 		/*public static const :PerkType = mk("", "",
-				".",//2Angry2Die follow up perk - berserker/lustzerker cost change to X wrath per turn form X turns, when under active 2Angry2Die perk effect that drain change to 20%(or 25%) max wrath drain per turn (?drain decreased by some specific perks?)
-				"You've chosen the '' perk, .")
-				.withBuffs({'maxwrath_base':+3500});
-		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, .");
 		public static const :PerkType = mk("", "",
@@ -727,9 +727,6 @@ public class PerkLib
 						"]",
 				"You've chosen the 'Berserker' perk, which unlocks the 'Berserk' magical ability.  Berserking increases attack and lust resistance but reduces physical defenses.")
 				.withBuffs({'maxwrath_base':+500});
-		public static const BerserkerArmor:PerkType = mk("Berserker Armor", "Berserker Armor",
-				"Augments the potency of all rage effects as well as Crinos shape. Wrath Gained from taking damage and dealing damage increased. Does not hinder movement or beast warrior powers.",
-				"Augments the potency of all rage effects as well as Crinos shape. Wrath Gained from taking damage and dealing damage increased. Does not hinder movement or beast warrior powers.\n");
 		public static const BiggerGolemBagI:PerkType = mk("Bigger Golem Bag I", "Bigger Golem Bag I",
 				"Your extra dimensional golem bag can store 6 more temporary (and 1 more permanent when becoming Master Golem Maker) golems.",
 				"You've chosen the 'Bigger Golem Bag I' perk, increasing your golems bag.");
@@ -3329,6 +3326,8 @@ public class PerkLib
 */
 		// Non-weapon equipment perks
 		public static const Ambition:AmbitionPerk = new AmbitionPerk();
+		public static const BerserkerArmor:PerkType = mk("Berserker Armor", "Berserker Armor",
+				"Augments the potency of all rage effects as well as Crinos shape. Wrath Gained from taking damage and dealing damage increased. Does not hinder movement or beast warrior powers.");
 		public static const BlindImmunity:PerkType = mk("Blind Immunity", "Blind Immunity", "Gives PC immunity to enemy blinding effects.");
 		public static const BloodMage:PerkType = mk("Blood Mage", "Blood Mage",
 				"Spellcasting now consumes health instead of mana!",null,true);
@@ -3361,6 +3360,7 @@ public class PerkLib
 		public static function gearPerks():Array{	//Re:EnemyPerkList
 			var gPerks:Array = [];
 			gPerks.push(Ambition);
+			gPerks.push(BerserkerArmor);
 			gPerks.push(BlindImmunity);
 			gPerks.push(BloodMage);
 			gPerks.push(FairyQueenRegalia);
@@ -4279,6 +4279,8 @@ public class PerkLib
                     .requirePerk(EpicTranquilness)
                     .requireLevel(78);
             //Tier 14 Strength Perks
+            EndlessRage.requirePerk(TooAngryToDie)
+                    .requireLevel(84);
             LegendaryTranquilness.requireStr(450)
                     .requireTou(150)
                     .requireSpe(150)
@@ -5134,6 +5136,13 @@ public class PerkLib
                         return player.hasStatusEffect(StatusEffects.KnowsManaShield)
                                 || player.hasStatusEffect(StatusEffects.KnowsBlizzard);
                     }, "Any defensive spell")
+                    .requireInt(120)
+                    .requireLevel(18);
+            OffensiveStaffChanneling.requirePerks(StaffChanneling, GreyMagic)
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.hasStatusEffect(StatusEffects.KnowsIceSpike) || player.hasStatusEffect(StatusEffects.KnowsDarknessShard) || player.hasStatusEffect(StatusEffects.KnowsWaterBall) || player.hasStatusEffect(StatusEffects.KnowsWindBullet)
+							 || player.hasStatusEffect(StatusEffects.KnowsWhitefire) || player.hasStatusEffect(StatusEffects.KnowsLightningBolt) || player.hasStatusEffect(StatusEffects.KnowsBloodMissiles);
+                    }, "Any offensive spell")
                     .requireInt(120)
                     .requireLevel(18);
             //Tier 4 Intelligence perks
