@@ -379,7 +379,8 @@ package classes.Scenes.NPCs	{
 				addButtonDisabled(3, "Explain Inlays", "Carve channels in your form first");
 				addButtonDisabled(4, "Explain Gems", "Carve channels in your form first");
 			}
-			if (materialsExplained != false) addButton(6, "Change Mat's", changeMaterials).hint("Change your body's material.");
+			if (materialsExplained != false && refinement < 4) addButton(6, "Change Mat's", changeMaterials).hint("Change your body's material.");
+			else if (refinement >= 4) addButtonDisabled(6, "Change Mat's", "You've crossed the rubicon, there is no turning back.");
 			else addButtonDisabled(6, "Change Mat's", "Maybe you should learn what the materials do first?");
 			if (refinementExplained != false) addButton(7, "Refine Body", refineBody).hint("Refine your form.");
 			else addButtonDisabled(7, "Refine Body", "Maybe you should learn about refining your form first?");
@@ -485,11 +486,13 @@ package classes.Scenes.NPCs	{
 					if (refinement < 3){
 						if (granite >= (100 * (refinement + 1))) addButton(0, "Refine", refineFunc);
 						else addButtonDisabled(0, "Refine", "Not enough materials");
-					} else if (refinement == 3){
-						if (hasChannelMats) addButton(0, "Carve Channel", refineFunc);
+					} 
+					else if (refinement == 3){
+						if (hasChannelMats == true) addButton(0, "Carve Channel", refineFunc);
 						else addButtonDisabled(0, "Carve Channel", "Not enough materials");
-					} else if (refinement == 4){
-						if (hasPolishingMats) addButton(0, "Polish Form", refineFunc);
+					}
+					else if (refinement == 4){
+						if (hasPolishingMats == true) addButton(0, "Polish Form", refineFunc);
 						else addButtonDisabled(0, "Polish Form", "Not enough materials");
 					}
 					
@@ -618,6 +621,7 @@ package classes.Scenes.NPCs	{
 				}
 				refinement++;
 				camp.returnToCampUseSixHours();
+				return;
 			}
 			if (refinement == 3){
 				player.destroyItems(consumables.S_WATER, 2);
@@ -626,6 +630,7 @@ package classes.Scenes.NPCs	{
 				player.destroyItems(consumables.GODMEAD, 1);
 				refinement++;
 				camp.returnToCampUseTwelveHours();
+				return;
 			}
 			if (refinement == 4){
 				player.destroyItems(consumables.ROUGHLN, 3);
@@ -634,6 +639,7 @@ package classes.Scenes.NPCs	{
 				player.destroyItems(consumables.LIGHTOL, 1);
 				refinement++
 				camp.returnToCampUseTwelveHours();
+				return;
 			}
 			
 		}
@@ -718,7 +724,7 @@ package classes.Scenes.NPCs	{
 			else addButtonDisabled(1, "Emerald", "You need 15 Emerald to do this.");
 			
 			if (channelInlay == "ruby"){
-				addButtonDisabled(1, "Ruby", "Your inlays are already Ruby.");
+				addButtonDisabled(2, "Ruby", "Your inlays are already Ruby.");
 			}
 			else if (channelInlay != "") {
 				if (player.hasItem(useables.RBYGEM, 20) && (player.gems >= 2000)) addButton(2, "Ruby", inlayFunc, "ruby", true).hint("Change inlay to Ruby");
@@ -728,7 +734,7 @@ package classes.Scenes.NPCs	{
 			else addButtonDisabled(2, "Ruby", "You need 15 Ruby to do this.");
 			
 			if (channelInlay == "sapphire"){
-				addButtonDisabled(1, "Sapphire", "Your inlays are already Sapphire.");
+				addButtonDisabled(3, "Sapphire", "Your inlays are already Sapphire.");
 			}
 			else if (channelInlay != "") {
 				if (player.hasItem(useables.SAPPGEM, 20) && (player.gems >= 2000)) addButton(3, "Sapphire", inlayFunc, "sapphire", true).hint("Change inlay to Sapphire");
@@ -738,7 +744,7 @@ package classes.Scenes.NPCs	{
 			else addButtonDisabled(3, "Sapphire", "You need 15 Sapphire to do this.");
 			
 			if (channelInlay == "topaz"){
-				addButtonDisabled(1, "Topaz", "Your inlays are already Topaz.");
+				addButtonDisabled(4, "Topaz", "Your inlays are already Topaz.");
 			}
 			else if (channelInlay != "") {
 				if (player.hasItem(useables.TPAZGEM, 20) && (player.gems >= 2000)) addButton(4, "Topaz", inlayFunc, "topaz", true).hint("Change inlay to Topaz");
@@ -775,7 +781,7 @@ package classes.Scenes.NPCs	{
 			else addButtonDisabled(1, "Emerald", "You need 10 Emerald to do this.");
 			
 			if (gem == "ruby"){
-				addButtonDisabled(1, "Ruby", "Your gems are already Ruby.");
+				addButtonDisabled(2, "Ruby", "Your gems are already Ruby.");
 			}
 			else if (gem != "") {
 				if (player.hasItem(useables.RBYGEM, 15) && (player.gems >= 2000)) addButton(2, "Ruby", blingFunc, "ruby", true).hint("Change gems to Ruby");
@@ -785,7 +791,7 @@ package classes.Scenes.NPCs	{
 			else addButtonDisabled(2, "Ruby", "You need 10 Ruby to do this.");
 			
 			if (gem == "sapphire"){
-				addButtonDisabled(1, "Sapphire", "Your gems are already Sapphire.");
+				addButtonDisabled(3, "Sapphire", "Your gems are already Sapphire.");
 			}
 			else if (gem != "") {
 				if (player.hasItem(useables.SAPPGEM, 15) && (player.gems >= 2000)) addButton(3, "Sapphire", blingFunc, "sapphire", true).hint("Change gems to Sapphire");
@@ -795,7 +801,7 @@ package classes.Scenes.NPCs	{
 			else addButtonDisabled(3, "Sapphire", "You need 10 Sapphire to do this.");
 			
 			if (gem == "topaz"){
-				addButtonDisabled(1, "Topaz", "Your gems are already Topaz.");
+				addButtonDisabled(4, "Topaz", "Your gems are already Topaz.");
 			}
 			else if (gem != "") {
 				if (player.hasItem(useables.TPAZGEM, 15) && (player.gems >= 2000)) addButton(4, "Topaz", blingFunc, "topaz", true).hint("Change gems to Topaz");
