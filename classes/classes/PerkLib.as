@@ -3550,9 +3550,9 @@ public class PerkLib
 		public static const AquaticAffinity:PerkType = mk("Aquatic Affinity", "Aquatic Affinity",
 				"When in an aquatic battle you gains a +30 to strength and speed.");
 		public static const AvatorOfCorruption:PerkType = mk("Avatar of Corruption", "Avatar of Corruption",
-				"Your impure body grants you shortened spellcasting cooldown and empowered black and healing magic.");
+				"Your impure body grants you shortened spellcasting cooldown and empowered black and healing magic. Furthermore if a full bicorn or nightmare add half of your inteligence modifier to your libido score.");
 		public static const AvatorOfPurity:PerkType = mk("Avatar of Purity", "Avatar of Purity",
-				"Your pure body grants you shortened spellcasting cooldown and empowered white and healing magic.");
+				"Your pure body grants you shortened spellcasting cooldown and empowered white and healing magic. Furthermore if a full unicorn or alicorn add half of your inteligence modifier to your wisdom score.");
 		public static const BasiliskWomb:PerkType = mk("Basilisk Womb", "Basilisk Womb",
 				"Enables your eggs to be properly fertilized into basilisks of both genders!");
 		public static const BeeOvipositor:PerkType = mk("Bee Ovipositor", "Bee Ovipositor",
