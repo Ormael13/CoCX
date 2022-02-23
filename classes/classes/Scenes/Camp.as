@@ -3525,8 +3525,8 @@ public class Camp extends NPCAwareContent{
 		if (timeQ == 0) {
 			timeQ = waitingORresting;
 
-			if (player.lowerBody == LowerBody.PLANT_FLOWER) outputText("You lie down in your pitcher, closing off your petals as you get comfortable for " + num2Text(timeQ) + " hours...\n");
-			else outputText("You wait " + num2Text(timeQ) + " hours...\n");
+			if (player.lowerBody == LowerBody.PLANT_FLOWER) outputText("You lie down in your pitcher, closing off your petals as you get comfortable for " + num2Text(timeQ) + " hour" + (timeQ % 10 == 1 ? "" : "s") + "...\n");
+			else outputText("You wait " + num2Text(timeQ) + " hour" + (timeQ % 10 == 1 ? "" : "s") + "...\n");
 			//Marble withdrawl
 			if (player.hasStatusEffect(StatusEffects.MarbleWithdrawl)) {
 				outputText("\nYour time spent waiting is very troubled, and you aren't able to settle down.  You get up feeling tired and unsatisfied, always thinking of Marble's milk.\n");
