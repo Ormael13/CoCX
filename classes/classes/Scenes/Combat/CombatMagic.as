@@ -311,7 +311,7 @@ public class CombatMagic extends BaseCombatContent {
     }
 
 	internal function spellModImpl():Number {
-		var mod:Number = player.spellpowerStat.value + modChange_all() + modChange_spell_1();
+		var mod:Number = player.spellpowerStat.value + modChange_all() + modChange_spell_1() + modChange_spell_2();
 		if (player.hasPerk(PerkLib.Obsession)) {
 			mod += player.perkv1(PerkLib.Obsession);
 		}
@@ -320,9 +320,8 @@ public class CombatMagic extends BaseCombatContent {
 			else mod += Math.round(codex.checkUnlocked() / 100);
 		}
 		if (player.hasPerk(PerkLib.ZenjisInfluence3)) mod += .3;
-		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
 
-		mod += modChange_spell_2();
+		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
 		if (player.weapon == weapons.PURITAS) mod *= 1.6;
 		if (player.weapon == weapons.DEPRAVA) mod *= 1.6;
 		if (player.weapon == weapons.ASCENSU) mod *= 2.5;
@@ -332,7 +331,8 @@ public class CombatMagic extends BaseCombatContent {
 	}
 	
 	internal function spellModBloodImpl():Number {
-		var mod:Number = spellModImpl();
+		var modS:Number = spellModImpl();
+        var mod:Number = 1;
 		if (player.hasPerk(PerkLib.HiddenJobBloodDemon)) mod += .1;
 		if (player.hasPerk(PerkLib.WayOfTheBlood)) mod += .1;
 		if (player.hasPerk(PerkLib.YourPainMyPower)) mod += .1;
@@ -342,6 +342,8 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.BloodDemonWisdom)) mod += .1;
 		//
 		if (player.hasPerk(PerkLib.BloodDemonIntelligence)) mod += .1;
+        //
+        mod *= modS; //makes sense?
 		mod = Math.round(mod * 100) / 100;
 		return mod;
 	}
@@ -361,7 +363,6 @@ public class CombatMagic extends BaseCombatContent {
 			mod += player.perkv1(PerkLib.Ambition);
 		}
 		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) mod += (player.cor * .01)/2;
-		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
 		if (player.hasPerk(PerkLib.SeersInsight)) mod += player.perkv1(PerkLib.SeersInsight);
 		if (player.hasPerk(PerkLib.InariBlessedKimono)){
 			var mod2:Number = 0.5;
@@ -369,6 +370,7 @@ public class CombatMagic extends BaseCombatContent {
 			if (mod2 < 0.1) mod2 = 0.1;
 			mod += mod2;
 		}
+		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
 		if (player.weapon == weapons.PURITAS) mod *= 1.6;
 		if (player.weapon == weapons.DEPRAVA) mod *= 1.6;
 		if (player.weapon == weapons.ASCENSU) mod *= 2.5;
@@ -377,7 +379,7 @@ public class CombatMagic extends BaseCombatContent {
 	}
 
 	internal function spellModBase():Number {
-		var mod:Number = player.spellpowerStat.value - 1 + modChange_all() + modChange_spell_1();
+		var mod:Number = player.spellpowerStat.value - 1 + modChange_all() + modChange_spell_1() + modChange_spell_2();
 		if (player.isGargoyle() && Forgefather.material == "alabaster")
 			{
 				if (Forgefather.refinement == 0) mod += (.15);
@@ -385,13 +387,11 @@ public class CombatMagic extends BaseCombatContent {
 				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) mod += (.5);
 				if (Forgefather.refinement == 4) mod += (1);
 			}
-		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
 		
-        mod += modChange_spell_2();
+        //mod += modChange_spell_2(); //old place
 
 		if (player.headJewelry == headjewelries.DMONSKUL) mod += player.cor * .006;
-		if (player.weapon == weapons.ASCENSU) mod *= 2.5;
-		mod = Math.round(mod * 100) / 100;
+        //no sus multiplying for now...
 		return mod;
 	}
 	
@@ -415,6 +415,8 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.PrestigeJobArchpriest)) mod += .2;
 		if (player.hasPerk(PerkLib.PrestigeJobWarlock)) mod -= .4;
 		if (player.hasKeyItem("Holy Symbol") >= 0) mod += .2;
+		if (player.weapon == weapons.PURITAS) mod *= 1.6;
+		if (player.weapon == weapons.ASCENSU) mod *= 2.5; //BOOM!
 		mod = Math.round(mod * 100) / 100;
 		return mod;
 	}
@@ -444,8 +446,8 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.AvatorOfPurity)) mod += .3;
 		if (player.hasPerk(PerkLib.UnicornBlessing) && player.cor <= 20) mod += .2;
 		if (player.hasKeyItem("Holy Symbol") >= 0) mod += .2;
-		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
 		if (player.hasPerk(PerkLib.SeersInsight)) mod += player.perkv1(PerkLib.SeersInsight);
+		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
 		if (player.weapon == weapons.PURITAS) mod *= 1.6;
 		if (player.weapon == weapons.ASCENSU) mod *= 2.5;
 		mod = Math.round(mod * 100) / 100;
@@ -460,6 +462,9 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.PrestigeJobArchpriest)) mod -= .4;
 		if (player.hasPerk(PerkLib.PrestigeJobWarlock)) mod += .2;
 		if (player.miscJewelry == miscjewelries.DMAGETO || player.miscJewelry2 == miscjewelries.DMAGETO) mod += 0.25;
+		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
+		if (player.weapon == weapons.DEPRAVA) mod *= 1.6;
+		if (player.weapon == weapons.ASCENSU) mod *= 2.5; //BOOM!
 		mod = Math.round(mod * 100) / 100;
 		return mod;
 	}
@@ -485,8 +490,8 @@ public class CombatMagic extends BaseCombatContent {
 		}
 		if (player.hasPerk(PerkLib.AvatorOfCorruption)) mod += .3;
 		if (player.hasPerk(PerkLib.BicornBlessing) && player.cor >= 80) mod += .2;
-		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
 		if (player.hasPerk(PerkLib.SeersInsight)) mod += player.perkv1(PerkLib.SeersInsight);
+		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
 		if (player.weapon == weapons.DEPRAVA) mod *= 1.6;
 		if (player.weapon == weapons.ASCENSU) mod *= 2.5;
 		mod = Math.round(mod * 100) / 100;
