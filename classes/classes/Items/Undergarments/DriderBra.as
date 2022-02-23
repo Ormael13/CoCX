@@ -18,12 +18,18 @@ package classes.Items.Undergarments
 		}
 		
 		override public function playerEquip():Undergarment {
-			game.player.createPerk(PerkLib.WizardsFocus, 0.1, 0, 0, 0);
+            if (game.player.hasPerk(PerkLib.WizardsFocus))
+				game.player.addPerkValue(PerkLib.WizardsFocus, 1, 0.1); //additive - for spidersilk underwear
+            else
+                game.player.createPerk(PerkLib.WizardsFocus, 0.1, 0, 0, 0);
 			return super.playerEquip();
 		}
 		
 		override public function playerRemove():Undergarment {
-			while (game.player.hasPerk(PerkLib.WizardsFocus)) game.player.removePerk(PerkLib.WizardsFocus);
+			if (game.player.perkv1(PerkLib.WizardsFocus) > 0.1)
+                game.player.addPerkValue(PerkLib.WizardsFocus, 1, -0.1); //if stacked
+            else
+			    game.player.removePerk(PerkLib.WizardsFocus); //attempt to remove perk if exists (if not, no perk - no problems)
 			return super.playerRemove();
 		}
 		

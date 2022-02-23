@@ -328,21 +328,12 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
 		if (player.hasPerk(PerkLib.SeersInsight)) mod += player.perkv1(PerkLib.SeersInsight);
 		if (player.shield == shields.SPI_FOC) mod += .2;
-		if (player.shield == shields.MABRACE) mod += .5;
-		if (player.weapon == weapons.N_STAFF) mod += player.cor * .01;
-		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .01;
 		if (player.headJewelry == headjewelries.SPHINXAS) mod += .5;
 		if (player.hasStatusEffect(StatusEffects.Maleficium)) {
 			if (player.hasPerk(MutationsLib.ObsidianHeartPrimitive)) {
 				if (player.hasPerk(MutationsLib.ObsidianHeartEvolved)) mod += 2.5;
 				else mod += 1.25;
 			} else mod += 1;
-		}
-		if (player.weapon == weapons.B_STAFF) {
-			var mod1:Number = 0.4;
-			mod1 -= player.cor / 100;
-			if (mod1 < 0.1) mod1 = 0.1;
-			mod += mod1;
 		}
 		if (player.hasPerk(PerkLib.InariBlessedKimono)){
 			var mod2:Number = 0.5;
@@ -427,15 +418,6 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.countCockSocks("blue") > 0) mod += (player.countCockSocks("blue") * .05);
 		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
 		if (player.hasPerk(PerkLib.SeersInsight)) mod += player.perkv1(PerkLib.SeersInsight);
-		if (player.shield == shields.MABRACE) mod += .5;
-		if (player.weapon == weapons.N_STAFF) mod += player.cor * .01;
-		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .01;
-		if (player.weapon == weapons.B_STAFF) {
-			var mod1:Number = 0.4;
-			mod1 -= player.cor / 100;
-			if (mod1 < 0.1) mod1 = 0.1;
-			mod += mod1;
-		}
 		if (player.hasPerk(PerkLib.InariBlessedKimono)){
 			var mod2:Number = 0.5;
 			mod2 -= player.cor / 100;
@@ -497,9 +479,6 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
 		if (player.hasPerk(PerkLib.SeersInsight)) mod += player.perkv1(PerkLib.SeersInsight);
 		if (player.shield == shields.SPI_FOC) mod += .2;
-		if (player.shield == shields.MABRACE) mod += .5;
-		if (player.weapon == weapons.N_STAFF) mod += player.cor * .01;
-		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .01;
 		if (player.headJewelry == headjewelries.SPHINXAS) mod += .5;
 		if (player.headJewelry == headjewelries.DMONSKUL) mod += player.cor * .006;
 		if (player.hasStatusEffect(StatusEffects.Maleficium)) {
@@ -507,12 +486,6 @@ public class CombatMagic extends BaseCombatContent {
 				if (player.hasPerk(MutationsLib.ObsidianHeartEvolved)) mod += 2.5;
 				else mod += 1.25;
 			} else mod += 1;
-		}
-		if (player.weapon == weapons.B_STAFF) {
-			var mod1:Number = 0.4;
-			mod1 -= player.cor / 100;
-			if (mod1 < 0.1) mod1 = 0.1;
-			mod += mod1;
 		}
 		if (player.hasPerk(PerkLib.InariBlessedKimono)){
 			var mod2:Number = 0.5;
@@ -612,15 +585,6 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.countCockSocks("blue") > 0) mod += (player.countCockSocks("blue") * .05);
 		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
 		if (player.hasPerk(PerkLib.SeersInsight)) mod += player.perkv1(PerkLib.SeersInsight);
-		if (player.shield == shields.MABRACE) mod += .5;
-		if (player.weapon == weapons.N_STAFF) mod += player.cor * .02;
-		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .017;
-		if (player.weapon == weapons.B_STAFF) {
-			var mod1:Number = 0.4;
-			mod1 -= player.cor / 10;
-			if (mod1 < 0.1) mod1 = 0.1;
-			mod += mod1;
-		}
 		if (player.weapon == weapons.PURITAS) mod *= 1.6;
 		if (player.weapon == weapons.ASCENSU) mod *= 2.5;
 		mod = Math.round(mod * 100) / 100;
@@ -683,15 +647,6 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.countCockSocks("blue") > 0) mod += (player.countCockSocks("blue") * .05);
 		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
 		if (player.hasPerk(PerkLib.SeersInsight)) mod += player.perkv1(PerkLib.SeersInsight);
-		if (player.shield == shields.MABRACE) mod += .5;
-		if (player.weapon == weapons.N_STAFF) mod += player.cor * .01;
-		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .01;
-		if (player.weapon == weapons.B_STAFF) {
-			var mod1:Number = 0.4;
-			mod1 -= player.cor / 10;
-			if (mod1 < 0.1) mod1 = 0.1;
-			mod += mod1;
-		}
 		if (player.weapon == weapons.DEPRAVA) mod *= 1.6;
 		if (player.weapon == weapons.ASCENSU) mod *= 2.5;
 		mod = Math.round(mod * 100) / 100;
