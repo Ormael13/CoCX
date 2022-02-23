@@ -3925,6 +3925,11 @@ public class PerkLib
 		public static const CleansingPalm:CleansingPalmPerk = new CleansingPalmPerk();
 		public static const Enlightened:EnlightenedPerk = new EnlightenedPerk();
 		public static const StarSphereMastery:StarSphereMasteryPerk = new StarSphereMasteryPerk();
+		
+		public static const CommandingTone:CommandingTonePerk = new CommandingTonePerk();
+		public static const Diacontrol:DiacontrolPerk = new DiacontrolPerk();
+		public static const VocalTactician:VocalTacticianPerk = new VocalTacticianPerk();
+		public static const OperaOperator:OperaOperatorPerk = new OperaOperatorPerk();
 
 		// Monster perks
 		// Please add any perks below to the enemyPerkList below. Required for PerkDB filtering of PC-unobtainable perks.
