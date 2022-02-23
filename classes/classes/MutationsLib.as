@@ -215,9 +215,9 @@ public class MutationsLib
 		public static const KitsuneThyroidGland:PerkType = mk("Kitsune Thyroid Gland", "Kitsune Thyroid Gland",
 				"Kitsune Thyroid Gland lower cooldowns for Illusion and Terror by three turns and increase speed of the recovery after using magic.").withBuffs({'spe.mult':0.05});
 		public static const KitsuneThyroidGlandPrimitive:PerkType = mk("Kitsune Thyroid Gland (Primitive)", "Kitsune Thyroid Gland (Primitive)",
-				"Kitsune Thyroid Gland (Evolved) increase the mana recovery after using magic and make fox fire specials 50% stronger when having 9 tails (both fire and lust damage).").withBuffs({'spe.mult':0.05,'wis.mult':0.05});
+				"Kitsune Thyroid Gland (Primitive) increase the mana recovery after using magic and make fox fire specials 50% stronger when having 9 tails (both fire and lust damage).").withBuffs({'spe.mult':0.05,'wis.mult':0.05});
 		public static const KitsuneThyroidGlandEvolved:PerkType = mk("Kitsune Thyroid Gland (Evolved)", "Kitsune Thyroid Gland (Evolved)",
-				"Kitsune Thyroid Gland (Final Form) grant bonus soulforce/mana regeneration depending on your Star Sphere rank, increase max Star Sphere rank to 20. Increase speed debuff of Terror to 50, increase evasion boost from Illusion to 20%.").withBuffs({'spe.mult':0.05,'int.mult':0.05,'wis.mult':0.05});
+				"Kitsune Thyroid Gland (Evolved) grant bonus soulforce/mana regeneration depending on your Star Sphere rank, increase max Star Sphere rank to 20. Increase speed debuff of Terror to 50, increase evasion boost from Illusion to 20%.").withBuffs({'spe.mult':0.05,'int.mult':0.05,'wis.mult':0.05});
 		public static const KitsuneThyroidGlandFinalForm:PerkType = mk("Kitsune Thyroid Gland (Final Form)", "Kitsune Thyroid Gland (Final Form)",
 				".");
 		public static const LactaBovinaOvaries:PerkType = mk("Lacta Bovina Ovaries", "Lacta Bovina Ovaries",
@@ -243,7 +243,7 @@ public class MutationsLib
 		public static const ManticoreMetabolismPrimitive:PerkType = mk("Manticore Metabolism (Primitive)", "Manticore Metabolism (Primitive)",
 				"Increase by 100% of base value (per NG+ tier) max cap of speed boost for a five hours longer after an intake of cum, venom recharge rate when using Manticore Feed special is 2x higher and increase max Hunger cap by 50 (if PC have Hunger bar active).");
 		public static const ManticoreMetabolismEvolved:PerkType = mk("Manticore Metabolism (Evolved)", "Manticore Metabolism (Evolved)",
-				".");
+				"All manticore tail spikes deals twice as much damage and lust damage. Speed boost from feeding is increased by another 100%. While having a manticore tail all straddle damage is greatly increased and direct tail feeding is twice as hard to remove.");
 		public static const MantislikeAgility:PerkType = mk("Mantis-like Agility", "Mantis-like Agility",
 				"Your altered musculature allows to increase your natural agility and speed. If somehow you would have some type of natural armor or even thicker skin this increase could be even greater...");
 		public static const MantislikeAgilityPrimitive:PerkType = mk("Mantis-like Agility (Primitive)", "Mantis-like Agility (Primitive)",
@@ -333,6 +333,14 @@ public class MutationsLib
 				"Your Salamander adrenal glands are giving you slight boost to your natural strength, stamina, speed, libido; double bonus to attack, boost slight natural wrath generation rate, extend berserking/lustzerking by 8 turns and enable to start with one or both of them.").withBuffs({'str.mult':0.15,'tou.mult':0.05,'spe.mult':0.15,'lib.mult':0.05});
 		public static const SalamanderAdrenalGlandsFinalForm:PerkType = mk("Salamander Adrenal Glands (Final Form)", "Salamander Adrenal Glands (Final Form)",
 				".",
+				".");
+		public static const SharkOlfactorySystem:PerkType = mk("Shark Olfactory System", "Shark Olfactory System",
+				"Shark Olfactory System increase bleed damage by 50% and increase melee damage against bleeding enemies  by 10%. Also allows non shark to use blood frenzy.").withBuffs({'spe.mult':0.05});
+		public static const SharkOlfactorySystemPrimitive:PerkType = mk("Shark Olfactory System (Primitive)", "Shark Olfactory System (Primitive)",
+				"Shark Olfactory System (Primitive) makes Bite a free action ability and increase bleed damage by 50% and increase melee damage against bleeding enemies by 15%.").withBuffs({'spe.mult':0.05,'wis.mult':0.05});
+		public static const SharkOlfactorySystemEvolved:PerkType = mk("Shark Olfactory System (Evolved)", "Shark Olfactory System (Evolved)",
+				"Shark Olfactory System (Evolved) double the bonuses of blood frenzy and increase bleed damage by 50% and increase melee damage against bleeding enemies by 25%.").withBuffs({'spe.mult':0.05,'int.mult':0.05,'wis.mult':0.05});
+		public static const SharkOlfactorySystemFinalForm:PerkType = mk("Shark Olfactory System (Final Form)", "Shark Olfactory System (Final Form)",
 				".");
 		public static const TwinHeart:PerkType = mk("Twin Heart", "Twin Heart",
 				"+40% fatigue recovery and +5 to max tou/spe (scalable). +100% fatigue recovery, reduce Charge fatigue cost by 10% as well as its cooldown by 1 round so long as your body is tauric/drider. (Also raise all Taur race score by 1, by 2 as long pc is tauric/drider).").withBuffs({'tou.mult':0.05,'spe.mult':0.05});
@@ -432,7 +440,7 @@ public class MutationsLib
 				MutationsList.push([DrakeLungs, DrakeLungsPrimitive, DrakeLungsEvolved]);
 			}
 			function mutationsMetabolism():void{
-				MutationsList.push([ManticoreMetabolism, ManticoreMetabolismPrimitive]);
+				MutationsList.push([ManticoreMetabolism, ManticoreMetabolismPrimitive, ManticoreMetabolismEvolved]);
 				MutationsList.push([DisplacerMetabolism, DisplacerMetabolismPrimitive]);
 				//MutationsList.push([SlimeMetabolism, SlimeMetabolismEvolved]);
 			}
@@ -451,6 +459,7 @@ public class MutationsLib
 			}
 			function mutationsNervSys():void{
 				MutationsList.push([ElvishPeripheralNervSys, ElvishPeripheralNervSysPrimitive, ElvishPeripheralNervSysEvolved]);
+				MutationsList.push([SharkOlfactorySystem, SharkOlfactorySystemPrimitive, SharkOlfactorySystemEvolved]);
 			}
 			function mutationsBone():void{
 				MutationsList.push([LizanMarrow, LizanMarrowPrimitive, LizanMarrowEvolved]);
@@ -591,7 +600,7 @@ public class MutationsLib
 				EasterBunnyEggBag.requireBallsMutationSlot().requirePerk(PerkLib.EasterBunnyBalls).requireCustomFunction(function (player:Player):Boolean {
 					return player.easterbunnyScore() >= 12;
 				}, "Easter Bunny race and Easter bunny balls.");
-				ElvishPeripheralNervSys.requirePerk(PerkLib.ElvenSense).requireCustomFunction(function (player:Player):Boolean {
+				ElvishPeripheralNervSys.requireNervSysMutationSlot().requirePerk(PerkLib.ElvenSense).requireCustomFunction(function (player:Player):Boolean {
 					return player.elfScore() >= 4 || player.woodElfScore() >= 17;
 				}, "Elf race");
 				FeyArcaneBloodstream.requireBloodsteamMutationSlot().requireCustomFunction(function (player:Player):Boolean {
@@ -703,6 +712,9 @@ public class MutationsLib
 				SalamanderAdrenalGlands.requireAdrenalGlandsMutationSlot().requirePerk(PerkLib.Lustzerker).requireCustomFunction(function (player:Player):Boolean {
 					return player.salamanderScore() >= 8 || player.phoenixScore() >= 10;
 				}, "Salamander race");
+				SharkOlfactorySystem.requireNervSysMutationSlot().requireCustomFunction(function (player:Player):Boolean {
+					return player.sharkScore() >= 8;
+				}, "Shark race");
 				TwinHeart.requireHeartMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.centaurScore() >= 4 || player.unicornScore() >= 8 || player.sphinxScore() >= 15 || player.cancerScore() >= 8;
 				}, "Tauric or Unicorn race");
@@ -716,7 +728,7 @@ public class MutationsLib
 					return player.facePart.isAny(Face.SNAKE_FANGS, Face.SPIDER_FANGS);
 				}, "Spider or Snake fangs")
 						.requireCustomFunction(function (player:Player):Boolean {
-							return player.spiderScore() >= 4 || player.nagaScore() >= 4 || player.gorgonScore() >= 4 || player.vouivreScore() >= 4 || player.couatlScore() >= 4 || player.hydraScore() >= 4;
+							return player.spiderScore() >= 4 || player.apophisScore() >= 23 || player.nagaScore() >= 4 || player.gorgonScore() >= 4 || player.vouivreScore() >= 4 || player.couatlScore() >= 4 || player.hydraScore() >= 4;
 						}, "Spider or any snake-like race");
 				WhaleFat.requireFatTissueMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.orcaScore() >= 6 || player.leviathanScore() >= 20;
@@ -884,6 +896,9 @@ public class MutationsLib
 				SalamanderAdrenalGlandsPrimitive.requireLevel(12).requirePerk(SalamanderAdrenalGlands).requireCustomFunction(function (player:Player):Boolean {
 					return player.salamanderScore() >= 9 || player.phoenixScore() >= 11;
 				}, "Salamander race");
+				SharkOlfactorySystemPrimitive.requireLevel(12).requirePerk(SharkOlfactorySystem).requireCustomFunction(function (player:Player):Boolean {
+					return player.sharkScore() >= 9;
+				}, "Shark race");
 				TwinHeartPrimitive.requireLevel(6)
 						.requirePerk(TwinHeart)
 						.requireCustomFunction(function (player:Player):Boolean {
@@ -896,7 +911,7 @@ public class MutationsLib
 							return player.vampireScore() >= 8;//potem dodać mosquito race i ew. inne co mogą wypijać krew
 						}, "Vampire race");
 				VenomGlandsPrimitive.requireLevel(12).requirePerk(VenomGlands).requireCustomFunction(function (player:Player):Boolean {
-					return player.spiderScore() >= 8 || player.atlachNachaScore() >= 17 || player.nagaScore() >= 6 || player.gorgonScore() >= 8 || player.vouivreScore() >= 8 || player.couatlScore() >= 8 || player.hydraScore() >= 8;
+					return player.spiderScore() >= 8 || player.atlachNachaScore() >= 17 || player.apophisScore() >= 23 || player.nagaScore() >= 6 || player.gorgonScore() >= 8 || player.vouivreScore() >= 8 || player.couatlScore() >= 8 || player.hydraScore() >= 8;
 				}, "Spider or any snake-like race");
 				WhaleFatPrimitive.requireLevel(12).requirePerk(WhaleFat).requireCustomFunction(function (player:Player):Boolean {
 					return player.orcaScore() >= 9 || player.leviathanScore() >= 20;
@@ -1016,6 +1031,11 @@ public class MutationsLib
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.minotaurScore() >= 12;
 						}, "Minotaur race");
+				ManticoreMetabolismEvolved.requireLevel(30)
+						.requirePerk(ManticoreMetabolismPrimitive)
+						.requireCustomFunction(function (player:Player):Boolean {
+							return player.manticoreScore() >= 15 && player.tailType == Tail.MANTICORE_PUSSYTAIL;
+						}, "Manticore race and tail");
 				MantislikeAgilityEvolved.requireLevel(30).requirePerk(MantislikeAgilityPrimitive).requireCustomFunction(function (player:Player):Boolean {
 					return player.mantisScore() >= 15;
 				}, "Mantis race");
@@ -1049,13 +1069,16 @@ public class MutationsLib
 				SalamanderAdrenalGlandsEvolved.requireLevel(30).requirePerk(SalamanderAdrenalGlandsPrimitive).requireCustomFunction(function (player:Player):Boolean {
 					return player.salamanderScore() >= 10 || player.phoenixScore() >= 13;
 				}, "Salamander race");
+				SharkOlfactorySystemEvolved.requireLevel(30).requirePerk(SharkOlfactorySystemPrimitive).requireCustomFunction(function (player:Player):Boolean {
+					return player.sharkScore() >= 10;
+				}, "Shark race");
 				TwinHeartEvolved.requireLevel(24)
 						.requirePerk(TwinHeartPrimitive)
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.centaurScore() >= 12 || player.unicornScore() >= 12 || player.sphinxScore() >= 17 || player.cancerScore() >= 12;
 						}, "Tauric or Unicorn race");
 				VenomGlandsEvolved.requireLevel(24).requirePerk(VenomGlandsPrimitive).requireCustomFunction(function (player:Player):Boolean {
-					return player.spiderScore() >= 12 || player.atlachNachaScore() >= 17 || player.nagaScore() >= 8 || player.gorgonScore() >= 12 || player.vouivreScore() >= 12 || player.couatlScore() >= 12 || player.hydraScore() >= 12;
+					return player.spiderScore() >= 12 || player.atlachNachaScore() >= 17 || player.apophisScore() >= 23 || player.nagaScore() >= 8 || player.gorgonScore() >= 12 || player.vouivreScore() >= 12 || player.couatlScore() >= 12 || player.hydraScore() >= 12;
 				}, "Spider or any snake-like race");
 				WhaleFatEvolved.requireLevel(24).requirePerk(WhaleFatPrimitive).requireCustomFunction(function (player:Player):Boolean {
 					return player.orcaScore() >= 12 || player.leviathanScore() >= 20;

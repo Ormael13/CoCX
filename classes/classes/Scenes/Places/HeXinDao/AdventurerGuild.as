@@ -295,9 +295,13 @@ package classes.Scenes.Places.HeXinDao
 				menu();
 				addButton(0, "Quest", BoardkeeperYangQuest);
 				addButton(1, "Talk", BoardkeeperYangTalk);
-				if (player.keyItemv1("Adventurer Guild: Copper plate") > 1) addButton(2, "Promotion", BoardkeeperYangPromotion).hint("Ask Yang for a promotion once you have achieved enough jobs.");
+				if (player.keyItemv1("Adventurer Guild: Copper plate") > 1)
+                    addButton(2, "Promotion", BoardkeeperYangPromotion).hint("Ask Yang for a promotion once you have achieved enough jobs.");
+                else if (player.hasKeyItem("Adventurer Guild: Iron plate") >= 0)
+                    addButtonDisabled(2, "Promotion", "Max level (NYI)");
 				else addButtonDisabled(2, "Promotion", "Not meet req.");
-				addButton(3, "Sex", BoardkeeperYangSex);
+				//addButton(3, "Sex", BoardkeeperYangSex);
+                addButtonDisabled(3, "Sex", "NYI");
 				addButton(4, "Back", curry(SceneLib.journeyToTheEast.enteringInn, false));
 				if (flags[kFLAGS.AURORA_LVL] == 0.3 || (flags[kFLAGS.AURORA_LVL] >= 0.6 && flags[kFLAGS.AURORA_LVL] < 0.75)) addButton(5, "GRJ", BoardkeeperYangGolemRetrievalJob).hint("Golem retrieval job");
 			}

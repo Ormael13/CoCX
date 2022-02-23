@@ -30,10 +30,10 @@ public class WaveOfEcstasySpell extends AbstractBlackSpell {
 	}
 	
 	override public function describeEffectVs(target:Monster):String {
-		return "~" + calcDamage(target, false) + " lust damage"
+		return "~" + calcDamage(target, false), false + " lust damage"
 	}
 	
-	public function calcDamage(monster:Monster, randomize:Boolean = true):Number {
+	public function calcDamage(monster:Monster, randomize:Boolean = true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)
 		return adjustLustDamage(
 				player.inte,
 				monster,
@@ -67,7 +67,7 @@ public class WaveOfEcstasySpell extends AbstractBlackSpell {
 			}
 			return;
 		}
-		var lustDmg:Number = calcDamage(monster);
+		var lustDmg:Number = calcDamage(monster, true, true);
 		if (display) {
 			if (monster.plural) {
 				outputText("Arousal breaks in the eyes of your many opponents as pleasure strikes them");

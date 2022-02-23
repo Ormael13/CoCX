@@ -170,7 +170,7 @@ internal function pcBeatsATrap():void {
 		if (player.hasCock() && player.str >= 60) addButton(1, "UseYourCock", stickWangInSandgina);
 		addButton(2, "RideVaginal", rideDatSandTarpLikeIts1999);
 		addButton(3, "Handjob", useSandTarpsHands);
-		if (player.pcCanUseUniqueSexScene()) addButton(7, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 012);
+		if (player.pcCanUseUniqueSexScene()) addButton(7, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 12);
 		if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") addButton(8, "B.Titfuck", createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,monster));
 		addButton(9, "Leave", cleanupAfterCombat);
 	}
@@ -182,7 +182,7 @@ public function pcBeatsATrap2():void {
 	if (player.hasCock() && player.str >= 60) addButton(1, "UseYourCock", stickWangInSandgina);
 	addButton(2, "RideVaginal", rideDatSandTarpLikeIts1999);
 	addButton(3, "Handjob", useSandTarpsHands);
-	if (player.pcCanUseUniqueSexScene()) addButton(7, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 012);
+	if (player.pcCanUseUniqueSexScene()) addButton(7, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 12);
 	if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") addButton(8, "B.Titfuck", createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,monster));
 	addButton(9, "Leave", cleanupAfterCombat);
 }

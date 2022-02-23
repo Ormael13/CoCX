@@ -17,7 +17,7 @@ public class BoneshatterSpell extends AbstractNecroSpell {
 	}
 	
 	override public function describeEffectVs(target:Monster):String {
-		return "~"+calcDamage(target, false)+" true damage, "+
+		return "~"+calcDamage(target, false, false)+" true damage, "+
 				"-"+Math.round(100*calcDebuffPower(monster,false))+"% str"
 	}
 	
@@ -56,12 +56,14 @@ public class BoneshatterSpell extends AbstractNecroSpell {
 		return shatterIt;
 	}
 	
-	public function calcDamage(monster:Monster, randomize:Boolean=true):Number {
+	public function calcDamage(monster:Monster, randomize:Boolean=true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)
 		var damage:Number = adjustSpellDamage(
 				scalingBonusIntelligence()*3,
 				DamageType.TRUE,
 				CAT_SPELL_NECRO,
-				monster
+				monster,
+                true,
+                casting
 		);
 		if (player.hasPerk(PerkLib.Necromancy)) damage *= 1.5;
 		damage *= boneSoulBonus(demonBonesCost());
@@ -72,7 +74,7 @@ public class BoneshatterSpell extends AbstractNecroSpell {
 		if (display) {
 			outputText("You channel your powers in [themonster] bone structure stressing it and forcing the bones to snap. [Themonster] cough blood you wreck [monster his] from the inside. ");
 		}
-		var damage:Number = calcDamage(monster);
+		var damage:Number = calcDamage(monster, true, true);
 		var shatterIt:Number = calcDebuffPower(monster);
 		consumeBones(demonBonesCost());
 		damage = critAndRepeatDamage(display, damage, DamageType.TRUE);

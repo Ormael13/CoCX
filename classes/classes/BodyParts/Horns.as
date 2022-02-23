@@ -264,7 +264,7 @@ public class Horns extends BodyPart {
 		appearanceDescFunc: function(player: *): String {
 			var desc: String = "Two large sized spiraling horns grow from the side of your head, similar to those of a ram or frost wyrm. They kind of look great";
 
-			if (player.lowerBody == LowerBody.FROSTWYRM) desc += ", especially with your fur, which makes you look like a sheep serpentine dragon";
+			if (player.lowerBody == LowerBody.FROSTWYRM) desc += ", especially with your fluffy fur, which makes you look like a sheep serpentine dragon";
 
 			desc += ".";
 

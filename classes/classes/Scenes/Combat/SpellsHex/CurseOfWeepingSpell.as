@@ -26,7 +26,7 @@ public class CurseOfWeepingSpell extends AbstractHexSpell {
 	
 	override public function describeEffectVs(target:Monster):String {
 		return "" +
-				calcDamage(target, false) + " damage over "+
+				calcDamage(target, false, false) + " damage over "+
 				numberOfThings(calcDuration(),"round") +
 				"; " + calcBackfirePercent() + "% backfire"
 	}
@@ -76,13 +76,14 @@ public class CurseOfWeepingSpell extends AbstractHexSpell {
 			}
 		}
 	}
-	public function calcDamage(monster:Monster, randomize:Boolean =true):Number {
+	public function calcDamage(monster:Monster, randomize:Boolean =true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)
 		return adjustSpellDamage(
 				scalingBonusIntelligence()*2,
 				DamageType.GENERIC,
 				CAT_SPELL_HEX,
 				monster,
-				false
+				false,
+                casting
 		);
 	}
 	
@@ -99,7 +100,7 @@ public class CurseOfWeepingSpell extends AbstractHexSpell {
 				outputText("You cut deep into your arm, drawing plenty of your blood and letting it flow in a large pattern on the ground as you hex your target with a powerful malediction, causing it to bleed from every orifice. [Themonster] screams in pain, unable to stop the blood flow. ");
 			}
 			HPChange(-hpCost(), false);
-			var CurseOfWeepingMod:Number = calcDamage(monster);
+			var CurseOfWeepingMod:Number = calcDamage(monster, true, true);
 			monster.createStatusEffect(StatusEffects.CurseOfWeeping, calcDuration(), CurseOfWeepingMod, 0, 0);
 			doDamage(CurseOfWeepingMod, true, true);
 		}

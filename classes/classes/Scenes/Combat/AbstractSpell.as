@@ -189,7 +189,8 @@ public class AbstractSpell extends CombatAbility {
 	 * @param baseDamage Base damage value (typically X*scalingBonusSomething)
 	 * @param damageType DamageType.XXX constant
 	 * @param category CombatAbility.CATEGORY_XXX constant
-	 * @param monster Target or null if evaluating damage outside combat
+	 * @param applyOmnicaster Determines if Omnicaster perk can be applied
+	 * @param casting Determines if elemental spell counter (like Raging Inferno) should be increased
 	 * @return
 	 */
 	protected function adjustSpellDamage(
@@ -197,7 +198,8 @@ public class AbstractSpell extends CombatAbility {
 			damageType:int,
 			category:int,
 			monster:Monster,
-			applyOmnicaster:Boolean = true
+			applyOmnicaster:Boolean = true,
+            casting:Boolean = true
 	):Number {
 		var damage:Number = baseDamage;
 		
@@ -218,7 +220,7 @@ public class AbstractSpell extends CombatAbility {
 				break;
 			}
 			case DamageType.FIRE: {
-				damage = calcInfernoMod(damage);
+				damage = calcInfernoMod(damage, casting);
 				if (player.armor == armors.BLIZZ_K) damage *= 0.5;
 				if (player.headJewelry == headjewelries.SNOWFH) damage *= 0.7;
 				if (monster != null) {
@@ -229,13 +231,13 @@ public class AbstractSpell extends CombatAbility {
 				break;
 			}
 			case DamageType.LIGHTNING: {
-				damage = calcVoltageMod(damage);
+				damage = calcVoltageMod(damage, casting);
 				if (player.hasPerk(PerkLib.ElectrifiedDesire)) damage *= (1 + (player.lust100 * 0.01));
 				damage *= combat.lightningDamageBoostedByDao();
 				break;
 			}
 			case DamageType.ICE: {
-				damage = calcGlacialMod(damage);
+				damage = calcGlacialMod(damage, casting);
 				if (combat.wearingWinterScarf()) damage *= 1.2;
 				if (player.armor == armors.BLIZZ_K) damage *= 1.5;
 				if (player.headJewelry == headjewelries.SNOWFH) damage *= 1.3;
@@ -243,7 +245,7 @@ public class AbstractSpell extends CombatAbility {
 				break;
 			}
 			case DamageType.DARKNESS: {
-				damage = calcEclypseMod(damage);
+				damage = calcEclypseMod(damage, casting);
 				damage *= combat.darknessDamageBoostedByDao();
 				break;
 			}

@@ -172,7 +172,7 @@ public class GnollSpearThrowerScene extends BaseContent
 				menu();
 				if (player.hasCock()) addButton(0, "Get BJ", hyenaVictoryRapeFellatio).hint("Make the gnoll suck you off.", "Get Blowjob");
 				if (player.hasVagina()) addButton(1, "Get Licked", victoryRapeHyenaCunnilingus).hint("Make the gnoll lick your pussy.");
-				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 037).hint("Other non typical sex scenes.");
+				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 37).hint("Other non typical sex scenes.");
 				addButton(14, "Leave", cleanupAfterCombat);
 			}
 			else doNext(cleanupAfterCombat);

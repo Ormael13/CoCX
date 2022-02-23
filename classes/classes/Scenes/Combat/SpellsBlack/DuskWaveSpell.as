@@ -29,7 +29,7 @@ public class DuskWaveSpell extends AbstractBlackSpell {
 	}
 	
 	override public function describeEffectVs(target:Monster):String {
-		return "~" + calcDamage(target, false) + " darkness damage"
+		return "~" + calcDamage(target, false, false) + " darkness damage"
 	}
 	
 	override public function get isKnown():Boolean {
@@ -41,17 +41,17 @@ public class DuskWaveSpell extends AbstractBlackSpell {
 		return spellBlackCooldown();
 	}
 	
-	public function calcDamage(monster:Monster, randomize:Boolean = true):Number {
+	public function calcDamage(monster:Monster, randomize:Boolean = true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)
 		var baseDamage:Number = 2 * scalingBonusIntelligence(randomize);
 		if (ex) baseDamage *= 2;
-		return adjustSpellDamage(baseDamage, DamageType.ICE, CAT_SPELL_BLACK, monster);
+		return adjustSpellDamage(baseDamage, DamageType.ICE, CAT_SPELL_BLACK, monster, true, casting);
 	}
 	
 	override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
 			outputText("You draw your lust, enfused with your power, into your eyes and down into your hands. You clasp your palms together, and as you draw them apart, your power condenses, pushing the light between your palms back. You aim both palms at [themonster], bringing them together as if snuffing out a light. A wave of darkness erupts from you, engulfing [themonster] in shadows. \n");
 		}
-		var damage:Number = calcDamage(monster);
+		var damage:Number = calcDamage(monster, true, true);
 		damage = critAndRepeatDamage(display, damage, DamageType.DARKNESS);
 		if (ex) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
 		checkAchievementDamage(damage);

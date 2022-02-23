@@ -175,6 +175,7 @@ public class PatchouliScene extends NPCAwareContent {
 		if (flags[kFLAGS.PATCHOULI_FOLLOWER] < 2 || flags[kFLAGS.PATCHOULI_FOLLOWER] == FORGIVEN) {
 			flags[kFLAGS.PATCHOULI_FOLLOWER] = OFFERTAKEN;
 		}
+
 		clearOutput();
 		outputText("The cat jumps down from the tree and walks ahead of you, showing you the way. Strangely, the landscape seems to change absurdly fast around you as you follow him until ");
 		if (visitedAllAreas()) {
@@ -283,19 +284,19 @@ public class PatchouliScene extends NPCAwareContent {
 					startCombat(new PhoenixPlatoon());
 					break;
 				/*case 9:
-					
+
 					break;
 				case 10:
-					
+
 					break;
 				case 11:
-					
+
 					break;
 				case 12:
-					
+
 					break;
 				case 13:
-					
+
 					break;*/
 				default:
 					outputText("you end up in a somewhat mountainy area.\n\n");

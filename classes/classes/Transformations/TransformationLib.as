@@ -4008,6 +4008,24 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  }
 	);
 
+	public const EyesSnakeFiendish: Transformation = new SimpleTransformation("Fiendish Snake Eyes",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += "You suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil like that of a snake with sinister black schlera that reflect the sorry state of your soul. <b>You now have fiendish snake eyes!</b>.";
+
+				player.eyes.type = Eyes.SNAKEFIENDISH;
+				player.eyes.colour = "yellow";
+				if (doOutput) outputText(desc);
+				//Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.SNAKEFIENDISH));
+			},
+			// is present
+			function (): Boolean {
+				return player.eyes.type === Eyes.SNAKEFIENDISH;
+			}
+	);
+
 	public const EyesSpider: Transformation = new SimpleTransformation("Spider Eyes",
 	  // apply effect
 	  function (doOutput: Boolean): void {
@@ -5985,6 +6003,26 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  function (): Boolean {
 	    return player.rearBody.type === RearBody.ATLACH_NACHA
 	  }
+	);
+
+	public const rearBodyCobraHood: Transformation = new SimpleTransformation("Cobra Hood",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				TransformationUtils.applyTFIfNotPresent(transformations.WingsNone, doOutput);
+
+				desc += "Pain lances through your neck as your [skin.type] flesh begins to ondulate and change. It hurts but thankfully the pain is short lived and as soon as you are relieved from it you press a hand behind your neck to check for the changes. It would appear the behind of your head all the way to the middle of your back is covered with one large fleshy hood not unlike that of a cobra. You will likely be able to intimidate your foes into submission with your brand new <b>Cobra hood!</b>";
+				player.rearBody.type = RearBody.COBRA_HOOD;
+
+				if (doOutput) outputText(desc);
+				player.rearBody.type = RearBody.COBRA_HOOD;
+				//Metamorph.unlockMetamorph(WingsMem.getMemory(RearBodyMem.COBRA_HOOD));
+			},
+			// is present
+			function (): Boolean {
+				return player.rearBody.type === RearBody.COBRA_HOOD
+			}
 	);
   /*
 */

@@ -4806,6 +4806,12 @@ public final class Mutations extends MutationsHelper {
                 player.clitLength = .25;
                 player.addCurse("sen", 10, 1);
             }
+            //Shark Cunt
+            if (changes < changeLimit && rand(3) == 0 && player.vaginaType() != 15 && player.hasVagina()) {
+                outputText("[pg]Something invisible brushes against your sex, making you twinge. Undoing your clothes, you take a look at your vagina. It looks normal at a first glance despite the odd sensation but inserting your fingers inside reveals that your walls are now covered with small sensitive tendril-like feelers. You blush as they instinctively drive your digits further in, attempting to milk them like they would a penis. <b>It looks like your vagina has turned into that of a shark girl.</b>");
+                player.vaginaType(15);
+                changes++;
+            }
             //WANG GROWTH - TIGGERSHARK ONLY
             if (type == 1 && (!player.hasCock()) && changes < changeLimit && rand(3) == 0) {
                 //Genderless:
@@ -4959,26 +4965,49 @@ public final class Mutations extends MutationsHelper {
      "A vial the size of your fist made of dark brown glass. It contains what appears to be an oily, yellowish liquid. The odor is abominable."
      */
 
-    public function snakeOil(player:Player):void {
+    public function snakeOil(type:Number, player:Player):void {
         player.slimeFeed();
         clearOutput();
         var changes:Number = 0;
         var changeLimit:Number = 1;
         var temp:Number = 0;
         var temp2:Number = 0;
+        var color:String;
         if (rand(2) == 0) changeLimit++;
         if (rand(2) == 0) changeLimit++;
         changeLimit += player.additionalTransformationChances;
         //b) Description while used
-        outputText("Pinching your nose, you quickly uncork the vial and bring it to your mouth, determined to see what effects it might have on your body. Pouring in as much as you can take, you painfully swallow before going for another shot, emptying the bottle.");
-        //(if outside combat)
-        if (!CoC.instance.inCombat) outputText("  Minutes pass as you start wishing you had water with you, to get rid of the aftertaste.");
+        if (type == 0) {
+            outputText("Pinching your nose, you quickly uncork the vial and bring it to your mouth, determined to see what effects it might have on your body. Pouring in as much as you can take, you painfully swallow before going for another shot, emptying the bottle.");
+            //(if outside combat)
+            if (!CoC.instance.inCombat) outputText("  Minutes pass as you start wishing you had water with you, to get rid of the aftertaste.");
+        } else if (type == 1) {
+            outputText("Pinching your nose, you quickly uncork the vial and bring it to your mouth, determined to see what effects it might have on your body. Pouring in as much as you can take, you painfully swallow before going for another shot, emptying the bottle. The thing taste absolutely horrible.");
+            //(if outside combat)
+            if (!CoC.instance.inCombat) outputText("  Minutes pass as you start wishing you had water with you, to get rid of the aftertaste.");
+        }
+
         //+ speed to 70!
         if (rand(2) == 0) {
             MutagenBonus("spe", (2 - (player.spe / 10 / 5)));
             outputText("[pg]Your muscles quiver, feeling ready to strike as fast as a snake!");
             if (player.spe < 40) outputText("  Of course, you're nowhere near as fast as that.");
             changes++;
+        }
+        //Corruption thoughts
+        if (rand(2) == 0 && type == 1) {
+            if (player.cor < 33) outputText("  This stuff is gross, why are you drinking it?");
+            //Corruption increase
+            if ((player.cor < 100 || rand(2))) {
+                outputText("[pg]The drink makes you feel... dirty.");
+                var mult:Number = 1;
+                //Corrupts the uncorrupted faster
+                if (player.cor < 50) mult++;
+                if (player.cor < 40) mult++;
+                if (player.cor < 30) mult++;
+                dynStats("cor", mult);
+                changes++;
+            }
         }
         if (player.blockingBodyTransformations()) changeLimit = 0;
         //Removes wings
@@ -5145,13 +5174,19 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //Snake eyes
-        if (player.hasPartialCoat(Skin.SCALES) && player.eyes.type != Eyes.SNAKE && rand(4) == 0 && changes < changeLimit) {
+        if (type == 0 && player.hasPartialCoat(Skin.SCALES) && player.eyes.type != Eyes.SNAKE && rand(4) == 0 && changes < changeLimit) {
             outputText("[pg]");
             transformations.EyesSnake.applyEffect();
             changes++;
         }
+        //Fiendish Snake eyes
+        if (type == 1 && player.hasPartialCoat(Skin.SCALES) && player.eyes.type != Eyes.SNAKEFIENDISH && rand(4) == 0 && changes < changeLimit) {
+            outputText("[pg]");
+            transformations.EyesSnakeFiendish.applyEffect();
+            changes++;
+        }
         //Ears!
-        if (player.ears.type != Ears.SNAKE && player.eyes.type == Eyes.SNAKE && changes < changeLimit && rand(3) == 0) {
+        if (player.ears.type != Ears.SNAKE && (player.eyes.type == Eyes.SNAKE || player.eyes.type == Eyes.SNAKEFIENDISH) && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
 			transformations.EarsSnake.applyEffect();
             changes++;
@@ -5160,6 +5195,49 @@ public final class Mutations extends MutationsHelper {
         if (rand(4) == 0 && player.hasGills() && changes < changeLimit) {
             outputText("[pg]");
             transformations.GillsNone.applyEffect();
+            changes++;
+        }
+
+        // Remove wings
+        if (type == 1 && rand(4) == 0 && player.wings.type != Wings.NONE && changes < changeLimit) {
+            outputText("[pg]");
+            transformations.WingsNone.applyEffect();
+            changes++;
+        }
+
+        // Scale color
+        if (type == 1 && rand(4) == 0 && !InCollection(player.coatColor, ("black", "midnight", "midnight black")) && changes < changeLimit) {
+            outputText("[pg]");
+            color = randomChoice("black", "midnight", "midnight black");
+            transformations.SkinScales(Skin.COVERAGE_LOW, {color: color}).applyEffect();
+            player.coatColor2 = "purplish black";
+            changes++;
+        }
+
+        // Hair color
+        if (type == 1 && rand(4) == 0 && !InCollection(player.hairColor, ("black", "midnight", "midnight black")) && changes < changeLimit) {
+            outputText("[pg]");
+            color = randomChoice("black", "midnight", "midnight black");
+            outputText("[pg]Your hair suddenly tingles as "+color+" strands begins to cover your entire skalp and before long all of them are of same dark color.");
+            player.hairColorOnly = color;
+            changes++;
+        }
+
+        //Skin color
+        if (type == 1 && player.skin.base.color != "light purple" && !player.isGargoyle() && changes < changeLimit && rand(3) == 0) {
+            changes++;
+            outputText("[pg]It takes a while for you to notice, but <b>");
+            if (player.hasFur()) outputText("the skin under your [skin coat.color] " + player.skinDesc);
+            else outputText("your " + player.skinDesc);
+            outputText(" has changed to become ");
+            player.skin.base.color = "light purple";
+            outputText(player.skinTone + " colored.</b>");
+        }
+
+        //Gain hood
+        if (type == 1 && rand(4) == 0 && player.rearBody.type != RearBody.COBRA_HOOD && changes < changeLimit) {
+            outputText("[pg]");
+            transformations.rearBodyCobraHood.applyEffect();
             changes++;
         }
 
