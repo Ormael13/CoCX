@@ -267,7 +267,6 @@ public class CombatMagic extends BaseCombatContent {
     internal function modChange_spell_2():Number {
 		var mod:Number = 0;
 		if (player.hasPerk(PerkLib.SeersInsight)) mod += player.perkv1(PerkLib.SeersInsight);
-		if (player.shield == shields.SPI_FOC) mod += .2;
 		if (player.headJewelry == headjewelries.SPHINXAS) mod += .5;
         if (player.hasStatusEffect(StatusEffects.Maleficium)) {
 			if (player.hasPerk(MutationsLib.ObsidianHeartPrimitive)) {
