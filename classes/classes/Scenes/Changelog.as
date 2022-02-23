@@ -99,7 +99,7 @@ package classes.Scenes
 			outputText("-New rare ascension perk -> Ascension: Hero's Legacy. Req. Ascension: Hero's Lineage and be at third ascension. It costs 25 asc points and will give 1 perk point, 1 super perk point and 5 stat points (scalable with NG tiers, for super perk it's reduced by 2) at the start of each new game.\n");
 			outputText("-New rare ascension perk -> Ascension: Bloodline Heritage. Req. Ascension: Hero's Legacy and be at fourth ascension. It costs 75 asc points and will give 1 perk point, 1 super perk point and 5 stat points (scalable with NG tiers, for super perk it's reduced by 3) at the start of each new game. Also would increase racial score bonus from any descendant's/bloodline perks by 2.\n");
 			outputText("-New melee weapon (by Ormael): Amphyst/Ruby/Sapphire/Topaz Staff - buyable in Tel'Adre Tower. 2 atk, costs 240 gems, increase matching type of element attacks (sapphire > ice and etc.) by 40%, Wizard's Focus (20%), staff type weapon.\n");
-			outputText("-New melee weapon (by Ormael): Dual Katana - dropped by corrupted flesh golems. Cost 1360 gems. Base atk is 17. It's Dual Large weapon belonging to dueling sword type.\n");
+			outputText("-New melee weapon (by Ormael): Dual Katana - dropped by corrupted flesh golems. Cost 1200 gems. Base atk is 15. It's Dual Large weapon belonging to dueling sword type.\n");
 			outputText("-New melee weapon (by Ormael): Dual Lance - dropped by corrupted flesh golems. Cost 960 gems. Base atk is 12. It's Dual Normal weapon belonging to spear type. When used in Charge special would hit twice.\n");
 			outputText("-New melee weapon (by Liadri): Trull Heart - obtainable by giving Dual BF Sword to Pure Celess to purify. Increased by 20 base dmg, added scaling based on purity, recover 1% hp on swings.\n");
 			outputText("-New melee weapon (by Liadri): Dorc Souls - obtainable by giving Dual BF Sword to Corrupted Celess to corrupt. Increased by 20 base dmg, added scaling based on corruption, recover 1% hp on swings.\n");
@@ -125,7 +125,7 @@ package classes.Scenes
 			outputText("-Strawberry shortcake & Big chocolate cake items would now refill 10 hunger.\n");
 			outputText("-Tons of Pyro text corrections in many places.\n");
 			outputText("-Water Dragon Breath dmg scaling now with progress in Dao of Water too.\n");
-			outputText("-1 new achievment. (shadow one)\n");
+			outputText("-2 new achievments. (2 shadow ones)\n");
 			outputText("-Katana and Dual Katana now would reduce enemy armor by 10% (or by 10 if enemy armor is below 100).\n");
 			outputText("-Dinah would provide PC with HB Mech upgrade options after it's bought. They could boost mech defences, attack or even provide with specials. As with all other items upgrades cost can vary depending on her mood ^^\n");
 			outputText("-Some of one shoot firearms would now allow more shoots than 1/2 when PC get perks to expand (magicaly ^^) ammo clip to hold more ammo than 1/2.\n");
@@ -149,19 +149,30 @@ package classes.Scenes
 			outputText("-Fuel for the Fire perk effect changed to: Increase two times wrath gains from getting hit. +1 attack per turn when wielding any large or massive weapon under berserker/lustzerker state. +1,500 wrath\n");
 			outputText("-Rage perk effect changed to: Increasing crit chance by up to (10%)70% & crit dmg by up to (25%)175% in berserk state that would reset after succesful crit attack. Adds Diehard effect up to 5% of max HP. +2,000 wrath\n");
 			outputText("-Anger perk effect changed to: For every 1% of missing HP (up to 100%) you gain 1% bonus damage, 2% bonus crit damage. When: below 50/100% max HP grants 1/2 more attack(s) with large/massive weapons when under berserker/lustzerker state. +2,500 wrath\n");
-			outputText("-Prestige Job: Berserker gained additional effect: generate 1% of max wrath with using melee/range/specials. Also it req. for Job: Guardian was replaced by Job: Beast Warrior.\n");
+			outputText("-Prestige Job: Berserker gained additional effect: generate 1% of max wrath with using melee/range/specials. Also it req. for Job: Guardian was replaced by Job: Beast Warrior & it bonus of 20% to tou multi been replaced by 10% to both spe and tou multi.\n");
 			outputText("-Furious strikes & Unlimited rage perks increase generated wrath by 200% not 100% (2x -> 3x).\n");
 			outputText("-Improved Adrenaline perk increase now wrath generation by 2% not 1%.\n");
 			outputText("-New tier 14 strength lvl-up perk: Endless Rage. Req. Too Angry to Die perk. Effect: Berzerker and Lustzerker cost change to 10 wrath per turn from set amount of turns. When Too Angry Too Die perk effect activate that cost change to 10%. (+3500 max Wrath)\n");
 			outputText("-Combat code for melee multiattacks been refined to cause less lag on builds that use large amount (~16+) attacks per turn. Also attacking with melee weapon when under winter claw / flame blade or similar buffs would deal elemental damage instead of physical.\n");
 			outputText("-New tier 3 intelligence lvl-up perk: Offensive Staff Channeling. Req. Staff Channeling and Grey Magic perks, knowing any attack spell, 120+ int. Effect: Allow to cast splited offensive spell without increased mana cost when using staff (3 parts at 70% power) or partial staff (2 parts at 80% power) as focus. (Effect will not activate if you already have ways to multicast spells at reduced power)\n");
-			outputText("-Added modifier to melee and range attacks similar to spell power or soulskill power.\n");
+			outputText("-Added modifier to melee and range attacks similar to spell power or soulskill power. That include some of physical specials too.\n");
 			outputText("-New Ascension perk: Killing Intent. It works same way like Spiritual Enlightenment but affecting melee physical attacks multiplier instead of soulskills. Max Rank: 30.\n");
 			outputText("-New Ascension perk: Bloodlust. It works same way like Spiritual Enlightenment but affecting range physical attacks multiplier instead of soulskills. Max Rank: 30.\n");
 			outputText("-Spiritual Enlightenment & Mysticality ascension perks gained 10 more ranks.\n");
 			outputText("-Listed job perks would provide bonus to melee physical attacks multiplier: Warrior (+10%); Brawler / Swordsman / Dervish / Rogue / Monk / Beast Warrior (+20%); Berserker (+80%); Spell-Knight / Tempest / Soul Art Master (+40%)\n");
 			outputText("-Listed job perks would provide bonus to range physical attacks multiplier: Ranger (+10%); Hunter / Gunslinger (+20%); Arcane Archer (+40%)\n");
 			outputText("-When PC is lvl 90+ it would not apply penalty to exp gained. (Meaning that in calculation for EXP gain PC will be treated as having only lvl 90 not actual above 90 - this solution will be removed or adjusted to higher cutoff at later date)\n");
+			outputText("-New melee weapon (by Ormael): Daisho - buyable at Soul Equipment shop in He'Xin'Dao. Cost 1360 gems (136 spirit stones). Base atk is 15. It's Hybrid set of weapons belonging to dueling sword type. Due to been pair of normal and large weapons damage will be slight different for both parts of the set. (As katana is part of set it will apply armor reduction effect of all katana type weapons)\n");
+			outputText("-New melee weapon (by Ormael): Awl - buyable at Soul Equipment shop in He'Xin'Dao. Cost 240 gems (24 spirit stones). Base atk is 3. It's small weapon belonging to exotic type with 45% chance to trigger bleed effect.\n");
+			outputText("-New melee weapon (by Ormael): Flying Claw - buyable at Eraendir shop. Cost  640 gems. Base atk is 4. It's small weapon belonging to exotic type with 10% chance to trigger bleed effect. Additionally have Body's Cultivator (20%) perk.\n");
+			outputText("-New melee weapon (by Ormael): Nine-ringed Saber - buyable at Soul Equipment shop in He'Xin'Dao. Cost 1120 gems (112 spirit stones). Base atk is 14. It's normal sized weapon belonging to sword type with 10% chance to trigger bleed effect.\n");
+			outputText("-New head accesory (by Ormael): Kabuto & Mempo set - buyable at Yvonne Armor Shop. Cost 100 gems, 3 armor. When worn with Samurai armor will give additionaly 4 armor.\n");
+			outputText("-New melee weapon (by Ormael): Ruler - buyable at Soul Equipment shop in He'Xin'Dao. Cost 2560 gems (256 spirit stones). Base atk is 16. It's large sized weapon belonging to mace/hammer type with 10% chance to trigger stun effect. Additionally have Body's Cultivator (20%) perk.\n");
+			outputText("-New melee weapon (by Ormael): Storm Ruler - buyable at Kaiba shop in Tel'Adre. Cost 4800 gems. Base atk is 14. It's large sized weapon belonging to mace/hammer type with 10% chance to trigger stun effect. It deal lightning type of damage and 50% more damage to huge or larger enemies. Additionally have Body's Cultivator (20%) perk.\n");
+			outputText("-Black leather armor surrounded by voluminous robes was moved from armor shop to Tailor shop in Tel'Adre.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -177,11 +188,6 @@ package classes.Scenes
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Fixed Bugs: One of Ingnam Tavern food options having wrong price listed on menu, unique sex scenes accesable during Druid fusion, Wisp potentialy softlocking Mino King fight, selfsucking in masturbation menu restoring max 100 hunger, Swift Casting not usable when having Giant's Grip and Large weapon, White or Black magic buffs autocastable when having perk that disable use of white/black magic, ");
 			outputText("putting B. Sword after picking Ecalibur disabling option to pick sword at Temple, all 3 Hall of Blade soulskill variants dealing phys not magical dmg, Lightning Claw lowering phys dmg when used as part of feral style attack, using goblin Cum Reservoir not empting it out, Yuki Onna Transform scene not making sure to give proper genitalia setup, Archer's Stamina perks not giving fatigue related to ");
 			outputText("current Speed value, Half-Frost Wyrm racial bonus been attained super easy, Mysterious Seed not causing for misc items menu appear as inventory submenu\n");/*ostatni punkt changelogu
@@ -195,6 +201,7 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -272,7 +279,9 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -306,7 +315,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

@@ -32,6 +32,7 @@ public class VictoriaTailorShop extends Shop {
         addButton(10, armors.LTHRPNT.shortName, confirmBuy, armors.LTHRPNT);
         addButton(11, armors.BIMBOSK.shortName, confirmBuy, armors.BIMBOSK);
         addButton(12, armors.A_ROBE_.shortName, confirmBuy, armors.A_ROBE_);
+        addButton(13, armors.LTHRROB.shortName, confirmBuy, armors.LTHRROB);
 
         addButton(4, "Next", undergarmentSection);
         addButton(14, "Leave", telAdre.telAdreMenu);

@@ -20,11 +20,13 @@ package classes.Items
 
 		public const A_STAFF:AmphystStaff = new AmphystStaff();
 		public const ACLAYMO:AmphystClaymore = new AmphystClaymore();
-		public const ASTERIUS:AsteriusRage = new AsteriusRage();
 		public const ADAGGER:Weapon = new Weapon("ADagger","A.Dagger","amethyst dagger","an amethyst dagger","stab",3,240,"This dagger is made of obsidian and grotesquely decorated with amethysts and lead engravings. The magic within this murky blade will bleed unnatural darkness when charged with magic.", "Small", "Dagger");
 		public const AETHERD:AetherD = new AetherD();
 		public const ANGSTD :AngstDaggers = new AngstDaggers();
 		public const ASCENSU:Ascensus = new Ascensus();
+		public const ASTERIUS:AsteriusRage = new AsteriusRage();
+		public const AWL_   :Weapon = new Weapon("Awl    ","Awl","awl","an awl","pierce",3,240,"A typical awl used to pierce magic hides when making magic armors or... to pierce organic object ;)", "Small, Bleed45", "Exotic");
+		public const NRSABER:Weapon = new Weapon("NRSaber","NineRingedSaber","Nine-ringed Saber","a nine-ringed saber","slash",14,1120,"This saber, with added nine rings is capable of delivering deep, jagged wounds.", "Bleed10", "Sword");
 		public const B_STAFF:Weapon = new BeautifulStaff();
 		public const B_SWORD:Weapon = new BeautifulSword();
 		public const B_SCARB:Weapon = new Weapon("B.ScarB", "B.ScarBlade", "broken scarred blade", "a broken scarred blade", "slash", 12, 480, "This saber, made from lethicite-imbued metal, seems to no longer seek flesh; whatever demonic properties in this weapon is gone now but it's still an effective weapon.", "", "Sword");
@@ -40,6 +42,7 @@ package classes.Items
 		public const C_BLADE:ChaosBlade = new ChaosBlade();
 		public const DAGGER :Weapon = new Weapon("Dagger ","Dagger","dagger","a dagger","stab",3,120,"A small blade.  Preferred weapon for the rogues.", "Small", "Dagger");
 		public const DAGWHIP:Weapon = new Weapon("DagWhip","DaggerWhip","dagger whip","a dagger whip","whip-like slash",5,200,"A small blade that is tied to the wrist by an 8 ft. cloth.  Could be used to attack few enemies at once.", "Small, Whipping", "Dagger");
+		public const DAISHO :Daisho = new Daisho();
 		public const DBFSWO :DualBFSword = new DualBFSword();
 		public const DBFWHIP:DualBFWhip = new DualBFWhip();
 		public const DDAGGER:Weapon = new DualDaggers();
@@ -61,6 +64,7 @@ package classes.Items
 		public const ERIBBON:EldritchRibbon = new EldritchRibbon();
 		public const EXCALIB:Weapon = new Excalibur();
 		public const FLAIL  :Weapon = new Weapon("Flail  ","Flail","flail","a flail","smash",10,400,"This is a flail, a weapon consisting of a metal spiked ball attached to a stick by chain. Be careful with this as you might end up injuring yourself.", "Whipping","Mace/Hammer");
+		public const FLYINGC:WeaponWithPerk = new WeaponWithPerk("FlyingC","FlyingClaw","Flying Claw","a flying claw","rend",4,640,"A metal claws that is tied to the wrist by an 8 ft. cloth.  Could be used to attack few enemies at once.", "Body Cultivator's Focus", PerkLib.BodyCultivatorsFocus, 0.2, 0, 0, 0, "Small, Whipping, Bleed10", "Exotic");
 		public const FLYWHIS:FlyWhisk = new FlyWhisk();
 		public const FRTAXE :Weapon = new Weapon("Fr.T.Axe","Fr.T.Axe", "Francisca throwing axe", "a Francisca throwing axe", "cleave", 25, 2000, "A foreign axe, made in polished steel and decorated with hunting reliefs in gold and silver. It’s unusually light for its size, so you may be able to manage it with a single hand. Some runes engraved on the handle assure that it will return to you once it has hit your opponent.", "Large", "Axe, Thrown");
 		public const CHAKRAM:Weapon = new Weapon("chakram","chakram", "chakram", "a chakram", "slash", 12, 960, "The chakram is a simple, elegant, and highly portable thrown weapon. It is a flat, open-centered metal discus with a sharpened edge.", "", "Exotic, Thrown");
@@ -85,6 +89,8 @@ package classes.Items
 		public const LHSCYTH:LifehuntScythe = new LifehuntScythe();
 		public const LRAPIER:LustRapier = new LustRapier();
 		public const MACE   :Weapon = new Weapon("Mace   ", "Mace", "mace", "a mace", "smash", 9, 360, "This is a mace, designed to be able to crush against various defenses.","", "Mace/Hammer");
+		public const RULER  :WeaponWithPerk = new WeaponWithPerk("Ruler  ", "Ruler", "ruler", "a ruler", "smash", 16, 2560, "The flat, wide rod has a center ridge on one side, flat on the other. The handle consists of a thick tang with a heavy iron bolster on either side.", "Body Cultivator's Focus", PerkLib.BodyCultivatorsFocus, 0.2, 0, 0, 0, "Large, Stun10", "Mace/Hammer");
+		public const S_RULER:WeaponWithPerk = new WeaponWithPerk("S.Ruler", "S.Ruler", "Storm Ruler", "a Storm Ruler", "smash", 15, 4800, "It's looking like a greatword with broken blade still possesing residual power of lightning. Also known as the Giantslayer for bringings giants to their knees.", "Body Cultivator's Focus", PerkLib.BodyCultivatorsFocus, 0.2, 0, 0, 0, "Large, Stun10", "Mace/Hammer");
 		public const MACGRSW:Weapon = new Weapon("Macgrsw","Mach.greatsword","Machine Greatsword","a Machine Greatsword","slash",19,4415,"This greatsword is half invention and half weapon. Instead of a sharp straight blade, the weapon’s sides are a set of metal teeth that constantly move in order to properly saw through flesh and more solid matter, creating grievous wounds. Very good for cutting down trees too.", "Large, Bleed100");
 		public const MASAMUN:Masamune = new Masamune();
 		public const MASTGLO:WeaponWithPerk = new WeaponWithPerk("MastGlo", "MasterGloves", "Master Gloves", "a Master Gloves", "punch", 0, 400, "These gloves belonged to Chi Chi. They seem to naturally strengthen the soulforce techniques of the user.", "Body Cultivator's Focus", PerkLib.BodyCultivatorsFocus, 0.4, 0, 0, 0, "","Gauntlet");

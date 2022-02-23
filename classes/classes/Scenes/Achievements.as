@@ -187,6 +187,7 @@ public class Achievements extends BaseContent
 			addAchievement("Dominatrix", kACHIEVEMENTS.FASHION_DOMINATRIX, "Wear any form of kinky clothing and wield any form of whip.");
 			addAchievement("Going Commando", kACHIEVEMENTS.FASHION_GOING_COMMANDO, "Wear no undergarments while wearing any clothes or armours.");
 			addAchievement("Subject Delta", kACHIEVEMENTS.FASHION_SUBJECT_DELTA, "Equip Soul Drill and Diving Suit while not having equipped any shield. Also having Spellknight job.", "", true);
+			addAchievement("Bushido - the way of the warrior", kACHIEVEMENTS.FASHION_BUSHIDO_THE_WAY_OF_THE_WARRIOR, "Equip Samurai Armor, Kabuto & Mempo and Daisho.", "", true);
 			addAchievement("Bling Bling", kACHIEVEMENTS.FASHION_BLING_BLING, "Wear ring that is valued at least 1,000 gems.");
 			addAchievement("Ka-Ching!", kACHIEVEMENTS.FASHION_KA_CHING, "Wear necklace that is valued at least 5,000 gems.");
 			addAchievement("Royalty", kACHIEVEMENTS.FASHION_ROYALTY, "Wear head accessory that is valued at least 4,000 gems.");

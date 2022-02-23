@@ -36,6 +36,7 @@ package classes.Scenes.Places.HeXinDao
 			addButton(7, weapons.SDAGGER.shortName, itemBuy1, weapons.SDAGGER);
 			addButton(8, weapons.TODAGGER.shortName, itemBuy1, weapons.TODAGGER);
 			addButton(9, weapons.ANGSTD.shortName, itemBuy1, weapons.ANGSTD);
+			addButton(10, weapons.FLYINGC.shortName, itemBuy1, weapons.FLYINGC);
 			addButton(14, "Back", EraendirMainMenu);
 		}
 		private function itemBuy1(itype:ItemType):void {
