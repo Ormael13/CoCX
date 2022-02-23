@@ -527,109 +527,144 @@ public class CombatMagic extends BaseCombatContent {
 	}
 
 	internal function calcInfernoModImpl(damage:Number, casting:Boolean = true):int {
+        var modDmg:Number = damage;
         //v1 is counter value in 5% (for later tiers), 
 		if (player.hasPerk(PerkLib.RagingInferno)) { //if has perk
-			if (player.hasStatusEffect(StatusEffects.CounterRagingInferno)) { //counter created
-				var multiplier:Number = 1;
-				if (player.statusEffectv1(StatusEffects.CounterRagingInferno) > 0) {
-					multiplier += player.statusEffectv1(StatusEffects.CounterRagingInferno) * 0.05;
-					damage = Math.round(damage * multiplier);
-				}
-				if (casting) {
+            if (casting) {
+                if (player.hasStatusEffect(StatusEffects.CounterRagingInferno)) { //counter created
+                    //calculating damage
+                    if (player.statusEffectv1(StatusEffects.CounterRagingInferno) > 0)
+                        modDmg = Math.round(damage * (1 + player.statusEffectv1(StatusEffects.CounterRagingInferno) * 0.05));
+                    //fancy messages
                     if (player.statusEffectv1(StatusEffects.CounterRagingInferno) == 0)
                         outputText("\nUnfortunately, traces of your previously used fire magic are too weak to be used.\n\n");
                     else
 					    outputText("\nTraces of your previously used fire magic are still here, and you use them to empower another spell!\n\n");
-					if (player.hasPerk(PerkLib.RagingInfernoEx)) player.addStatusValue(StatusEffects.CounterRagingInferno, 1, 6);
-					else player.addStatusValue(StatusEffects.CounterRagingInferno, 1, 4);
+                    //increasing counters
+					if (player.hasPerk(PerkLib.RagingInfernoEx))
+                        player.addStatusValue(StatusEffects.CounterRagingInferno, 1, 6);
+					else
+                        player.addStatusValue(StatusEffects.CounterRagingInferno, 1, 4);
 				    player.addStatusValue(StatusEffects.CounterRagingInferno, 2, 1);
-				}
-			}
-			else {
-				if (player.hasPerk(PerkLib.RagingInfernoEx)) player.createStatusEffect(StatusEffects.CounterRagingInferno,6,1,0,0);
-				else player.createStatusEffect(StatusEffects.CounterRagingInferno,4,1,0,0);
-			}
-		}
-		return damage;
+                }
+                else {
+                    if (player.hasPerk(PerkLib.RagingInfernoEx))
+                        player.createStatusEffect(StatusEffects.CounterRagingInferno,6,1,0,0);
+                    else
+                        player.createStatusEffect(StatusEffects.CounterRagingInferno,4,1,0,0);
+                }
+            }
+            else //just calc damage
+                if (player.hasStatusEffect(StatusEffects.CounterRagingInferno) && player.statusEffectv1(StatusEffects.CounterRagingInferno) > 0)
+                    modDmg = Math.round(damage * (1 + player.statusEffectv1(StatusEffects.CounterRagingInferno) * 0.05));
+        }
+		return modDmg;
 	}
 
-	internal function calcGlacialModImpl(damage:Number, casting:Boolean = true):int {
-		if (player.hasPerk(PerkLib.GlacialStorm)) {
-			if (player.hasStatusEffect(StatusEffects.CounterGlacialStorm)) {
-				var multiplier:Number = 1;
-			    if (player.statusEffectv1(StatusEffects.CounterGlacialStorm) > 0) {
-					multiplier += player.statusEffectv1(StatusEffects.CounterGlacialStorm) * 0.05;
-					damage = Math.round(damage * multiplier);
-				}
-				if (casting) {
+    internal function calcGlacialModImpl(damage:Number, casting:Boolean = true):int {
+        var modDmg:Number = damage;
+        //v1 is counter value in 5% (for later tiers), 
+		if (player.hasPerk(PerkLib.GlacialStorm)) { //if has perk
+            if (casting) {
+                if (player.hasStatusEffect(StatusEffects.CounterGlacialStorm)) { //counter created
+                    //calculating damage
+                    if (player.statusEffectv1(StatusEffects.CounterGlacialStorm) > 0)
+                        modDmg = Math.round(damage * (1 + player.statusEffectv1(StatusEffects.CounterGlacialStorm) * 0.05));
+                    //fancy messages
                     if (player.statusEffectv1(StatusEffects.CounterGlacialStorm) == 0)
                         outputText("\nUnfortunately, traces of your previously used ice magic are too weak to be used.\n\n");
                     else
 					    outputText("\nTraces of your previously used ice magic are still here, and you use them to empower another spell!\n\n");
-					if (player.hasPerk(PerkLib.GlacialStormEx)) player.addStatusValue(StatusEffects.CounterGlacialStorm, 1, 6);
-					else player.addStatusValue(StatusEffects.CounterGlacialStorm, 1, 4);
+                    //increasing counters
+					if (player.hasPerk(PerkLib.GlacialStormEx))
+                        player.addStatusValue(StatusEffects.CounterGlacialStorm, 1, 6);
+					else
+                        player.addStatusValue(StatusEffects.CounterGlacialStorm, 1, 4);
 				    player.addStatusValue(StatusEffects.CounterGlacialStorm, 2, 1);
-				}
-			}
-			else {
-				if (player.hasPerk(PerkLib.GlacialStormEx)) player.createStatusEffect(StatusEffects.CounterGlacialStorm,6,1,0,0);
-				else player.createStatusEffect(StatusEffects.CounterGlacialStorm,4,1,0,0);
-			}
-		}
-		return damage;
+                }
+                else {
+                    if (player.hasPerk(PerkLib.GlacialStormEx))
+                        player.createStatusEffect(StatusEffects.CounterGlacialStorm,6,1,0,0);
+                    else
+                        player.createStatusEffect(StatusEffects.CounterGlacialStorm,4,1,0,0);
+                }
+            }
+            else //just calc damage
+                if (player.hasStatusEffect(StatusEffects.CounterGlacialStorm) && player.statusEffectv1(StatusEffects.CounterGlacialStorm) > 0)
+                    modDmg = Math.round(damage * (1 + player.statusEffectv1(StatusEffects.CounterGlacialStorm) * 0.05));
+        }
+		return modDmg;
 	}
 
-	internal function calcVoltageModImpl(damage:Number, casting:Boolean = true):int {
-		if (player.hasPerk(PerkLib.HighVoltage)) {
-			if (player.hasStatusEffect(StatusEffects.CounterHighVoltage)) {
-				var multiplier:Number = 1;
-				if (player.statusEffectv1(StatusEffects.CounterHighVoltage) > 0) {
-					multiplier += player.statusEffectv1(StatusEffects.CounterHighVoltage) * 0.05;
-					damage = Math.round(damage * multiplier);
-				}
-				if (casting) {
+    internal function calcVoltageModImpl(damage:Number, casting:Boolean = true):int {
+        var modDmg:Number = damage;
+        //v1 is counter value in 5% (for later tiers), 
+		if (player.hasPerk(PerkLib.HighVoltage)) { //if has perk
+            if (casting) {
+                if (player.hasStatusEffect(StatusEffects.CounterHighVoltage)) { //counter created
+                    //calculating damage
+                    if (player.statusEffectv1(StatusEffects.CounterHighVoltage) > 0)
+                        modDmg = Math.round(damage * (1 + player.statusEffectv1(StatusEffects.CounterHighVoltage) * 0.05));
                     if (player.statusEffectv1(StatusEffects.CounterHighVoltage) == 0)
+                    //fancy messages
                         outputText("\nUnfortunately, traces of your previously used lightning magic are too weak to be used.\n\n");
                     else
 					    outputText("\nTraces of your previously used lightning magic are still here, and you use them to empower another spell!\n\n");
-					if (player.hasPerk(PerkLib.HighVoltageEx)) player.addStatusValue(StatusEffects.CounterHighVoltage, 1, 6);
-					else player.addStatusValue(StatusEffects.CounterHighVoltage, 1, 4);
+                    //increasing counters
+					if (player.hasPerk(PerkLib.HighVoltageEx))
+                        player.addStatusValue(StatusEffects.CounterHighVoltage, 1, 6);
+					else
+                        player.addStatusValue(StatusEffects.CounterHighVoltage, 1, 4);
 				    player.addStatusValue(StatusEffects.CounterHighVoltage, 2, 1);
-				}
-			}
-			else {
-				if (player.hasPerk(PerkLib.HighVoltageEx)) player.createStatusEffect(StatusEffects.CounterHighVoltage,6,1,0,0);
-				else player.createStatusEffect(StatusEffects.CounterHighVoltage,4,1,0,0);
-			}
-		}
-		return damage;
+                }
+                else {
+                    if (player.hasPerk(PerkLib.HighVoltageEx))
+                        player.createStatusEffect(StatusEffects.CounterHighVoltage,6,1,0,0);
+                    else
+                        player.createStatusEffect(StatusEffects.CounterHighVoltage,4,1,0,0);
+                }
+            }
+            else //just calc damage
+                if (player.hasStatusEffect(StatusEffects.CounterHighVoltage) && player.statusEffectv1(StatusEffects.CounterHighVoltage) > 0)
+                    modDmg = Math.round(damage * (1 + player.statusEffectv1(StatusEffects.CounterHighVoltage) * 0.05));
+        }
+		return modDmg;
 	}
 
-	internal function calcEclypseModImpl(damage:Number, casting:Boolean = true):int {
-		if (player.hasPerk(PerkLib.EclipsingShadow)) {
-			if (player.hasStatusEffect(StatusEffects.CounterEclipsingShadow)) {
-				var multiplier:Number = 1;
-				if (player.statusEffectv1(StatusEffects.CounterEclipsingShadow) > 0) {
-					multiplier += player.statusEffectv1(StatusEffects.CounterEclipsingShadow) * 0.05;
-					damage = Math.round(damage * multiplier);
-				}
-				if (casting) {
+    internal function calcEclypseModImpl(damage:Number, casting:Boolean = true):int {
+        var modDmg:Number = damage;
+        //v1 is counter value in 5% (for later tiers), 
+		if (player.hasPerk(PerkLib.EclipsingShadow)) { //if has perk
+            if (casting) {
+                if (player.hasStatusEffect(StatusEffects.CounterEclipsingShadow)) { //counter created
+                    //calculating damage
+                    if (player.statusEffectv1(StatusEffects.CounterEclipsingShadow) > 0)
+                        modDmg = Math.round(damage * (1 + player.statusEffectv1(StatusEffects.CounterEclipsingShadow) * 0.05));
+                    //fancy messages
                     if (player.statusEffectv1(StatusEffects.CounterEclipsingShadow) == 0)
                         outputText("\nUnfortunately, traces of your previously used darkness magic are too weak to be used.\n\n");
                     else
 					    outputText("\nTraces of your previously used darkness magic are still here, and you use them to empower another spell!\n\n");
-					if (player.hasPerk(PerkLib.EclipsingShadowEx)) player.addStatusValue(StatusEffects.CounterEclipsingShadow, 1, 6);
-					else player.addStatusValue(StatusEffects.CounterEclipsingShadow, 1, 4);
+                    //increasing counters
+					if (player.hasPerk(PerkLib.EclipsingShadowEx))
+                        player.addStatusValue(StatusEffects.CounterEclipsingShadow, 1, 6);
+					else
+                        player.addStatusValue(StatusEffects.CounterEclipsingShadow, 1, 4);
 				    player.addStatusValue(StatusEffects.CounterEclipsingShadow, 2, 1);
-				}
-			}
-			else {
-				if (player.hasPerk(PerkLib.EclipsingShadowEx)) player.createStatusEffect(StatusEffects.CounterEclipsingShadow,6,1,0,0);
-				else player.createStatusEffect(StatusEffects.CounterEclipsingShadow,4,1,0,0);
-			}
-		}
-		return damage;
-	}
+                }
+                else {
+                    if (player.hasPerk(PerkLib.EclipsingShadowEx))
+                        player.createStatusEffect(StatusEffects.CounterEclipsingShadow,6,1,0,0);
+                    else
+                        player.createStatusEffect(StatusEffects.CounterEclipsingShadow,4,1,0,0);
+                }
+            }
+            else //just calc damage
+                if (player.hasStatusEffect(StatusEffects.CounterEclipsingShadow) && player.statusEffectv1(StatusEffects.CounterEclipsingShadow) > 0)
+                    modDmg = Math.round(damage * (1 + player.statusEffectv1(StatusEffects.CounterEclipsingShadow) * 0.05));
+        }
+		return modDmg;
+    }
 
 	//THIS FEATURE GOVERS EVERY POST CAST EFFECT YOUR SPELLS MAY CAUSE
 	public function MagicAddonEffect(numberOfProcs:Number = 1):void {
