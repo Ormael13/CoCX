@@ -80,6 +80,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.headjewelryName == "fox hairpin") costPercent -= 20;
 		if (player.weapon == weapons.ASCENSU) costPercent -= 15;
 		if (player.weapon == weapons.N_STAFF) costPercent += 200;
+		if (player.weapon == weapons.U_STAFF) costPercent -= 50;
 		if (spellModImpl() > 1) costPercent += Math.round(spellModImpl() - 1) * 10;
 		if (player.level >= 24 && player.inte >= 60) costPercent += 50;
 		if (player.level >= 42 && player.inte >= 120) costPercent += 50;
@@ -114,6 +115,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.headjewelryName == "fox hairpin") costPercent -= 20;
 		if (player.weapon == weapons.ASCENSU) costPercent -= 15;
 		if (player.weapon == weapons.N_STAFF) costPercent += 200;
+		if (player.weapon == weapons.U_STAFF) costPercent -= 50;
 		if (spellModImpl() > 1) costPercent += Math.round(spellModImpl() - 1) * 10;
 		if (player.level >= 24 && player.inte >= 60) costPercent += 50;
 		if (player.level >= 42 && player.inte >= 120) costPercent += 50;
@@ -152,6 +154,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.headjewelryName == "fox hairpin") costPercent -= 20;
 		if (player.weapon == weapons.ASCENSU) costPercent -= 15;
 		if (player.weapon == weapons.N_STAFF) costPercent += 200;
+		if (player.weapon == weapons.U_STAFF) costPercent -= 50;
 		if (healModImpl() > 1) costPercent += Math.round(healModImpl() - 1) * 10;
 		mod *= costPercent / 100;
 		if (mod < 5) mod = 5;
@@ -171,6 +174,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.headjewelryName == "fox hairpin") costPercent -= 20;
 		if (player.weapon == weapons.PURITAS || player.weapon == weapons.ASCENSU) costPercent -= 15;
 		if (player.weapon == weapons.N_STAFF) costPercent += 200;
+		if (player.weapon == weapons.U_STAFF) costPercent -= 50;
 		if (spellModWhiteImpl() > 1) costPercent += Math.round(spellModWhiteImpl() - 1) * 10;
 		if (player.level >= 24 && player.inte >= 60) costPercent += 50;
 		if (player.level >= 42 && player.inte >= 120) costPercent += 50;
@@ -211,6 +215,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.headjewelryName == "fox hairpin") costPercent -= 20;
 		if (player.weapon == weapons.PURITAS || player.weapon == weapons.ASCENSU) costPercent -= 15;
 		if (player.weapon == weapons.N_STAFF) costPercent += 200;
+		if (player.weapon == weapons.U_STAFF) costPercent -= 50;
 		if (healModWhiteImpl() > 1) costPercent += Math.round(healModWhiteImpl() - 1) * 10;
 		mod *= costPercent / 100;
 		if (mod < 5) mod = 5;
@@ -231,6 +236,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.headjewelryName == "fox hairpin") costPercent -= 20;
 		if (player.weapon == weapons.DEPRAVA || player.weapon == weapons.ASCENSU) costPercent -= 15;
 		if (player.weapon == weapons.N_STAFF) costPercent += 200;
+		if (player.weapon == weapons.U_STAFF) costPercent -= 50;
 		if (spellModBlackImpl() > 1) costPercent += Math.round(spellModBlackImpl() - 1) * 10;
 		if (player.level >= 24 && player.inte >= 60) costPercent += 50;
 		if (player.level >= 42 && player.inte >= 120) costPercent += 50;
@@ -272,6 +278,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.headjewelryName == "fox hairpin") costPercent -= 20;
 		if (player.weapon == weapons.DEPRAVA || player.weapon == weapons.ASCENSU) costPercent -= 15;
 		if (player.weapon == weapons.N_STAFF) costPercent += 200;
+		if (player.weapon == weapons.U_STAFF) costPercent -= 50;
 		if (healModBlackImpl() > 1) costPercent += Math.round(healModBlackImpl() - 1) * 10;
 		mod *= costPercent / 100;
 		if (mod < 5) mod = 5;
@@ -329,8 +336,8 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.SeersInsight)) mod += player.perkv1(PerkLib.SeersInsight);
 		if (player.shield == shields.SPI_FOC) mod += .2;
 		if (player.shield == shields.MABRACE) mod += .5;
-		if (player.weapon == weapons.N_STAFF) mod += player.cor * .01;
-		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .01;
+		if (player.weapon == weapons.N_STAFF) mod += player.cor * .05;
+		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .034;
 		if (player.headJewelry == headjewelries.SPHINXAS) mod += .5;
 		if (player.hasStatusEffect(StatusEffects.Maleficium)) {
 			if (player.hasPerk(MutationsLib.ObsidianHeartPrimitive)) {
@@ -428,8 +435,8 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
 		if (player.hasPerk(PerkLib.SeersInsight)) mod += player.perkv1(PerkLib.SeersInsight);
 		if (player.shield == shields.MABRACE) mod += .5;
-		if (player.weapon == weapons.N_STAFF) mod += player.cor * .01;
-		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .01;
+		if (player.weapon == weapons.N_STAFF) mod += player.cor * .05;
+		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .034;
 		if (player.weapon == weapons.B_STAFF) {
 			var mod1:Number = 0.4;
 			mod1 -= player.cor / 100;
@@ -498,8 +505,8 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.SeersInsight)) mod += player.perkv1(PerkLib.SeersInsight);
 		if (player.shield == shields.SPI_FOC) mod += .2;
 		if (player.shield == shields.MABRACE) mod += .5;
-		if (player.weapon == weapons.N_STAFF) mod += player.cor * .01;
-		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .01;
+		if (player.weapon == weapons.N_STAFF) mod += player.cor * .05;
+		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .034;
 		if (player.headJewelry == headjewelries.SPHINXAS) mod += .5;
 		if (player.headJewelry == headjewelries.DMONSKUL) mod += player.cor * .006;
 		if (player.hasStatusEffect(StatusEffects.Maleficium)) {
@@ -613,8 +620,8 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
 		if (player.hasPerk(PerkLib.SeersInsight)) mod += player.perkv1(PerkLib.SeersInsight);
 		if (player.shield == shields.MABRACE) mod += .5;
-		if (player.weapon == weapons.N_STAFF) mod += player.cor * .02;
-		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .017;
+		if (player.weapon == weapons.N_STAFF) mod += player.cor * .05;
+		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .034;
 		if (player.weapon == weapons.B_STAFF) {
 			var mod1:Number = 0.4;
 			mod1 -= player.cor / 10;
@@ -684,8 +691,8 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
 		if (player.hasPerk(PerkLib.SeersInsight)) mod += player.perkv1(PerkLib.SeersInsight);
 		if (player.shield == shields.MABRACE) mod += .5;
-		if (player.weapon == weapons.N_STAFF) mod += player.cor * .01;
-		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .01;
+		if (player.weapon == weapons.N_STAFF) mod += player.cor * .05;
+		if (player.weapon == weapons.U_STAFF) mod += (100 - player.cor) * .034;
 		if (player.weapon == weapons.B_STAFF) {
 			var mod1:Number = 0.4;
 			mod1 -= player.cor / 10;
