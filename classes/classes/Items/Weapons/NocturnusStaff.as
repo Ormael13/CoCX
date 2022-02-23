@@ -24,14 +24,14 @@ package classes.Items.Weapons
 		{
 			super("N.Staff", "N. Staff", "nocturnus staff", "a nocturnus staff", "smack", 6, 960,
 					"This corrupted staff is made in black ebonwood and decorated with a bat ornament in bronze. Malice seems to seep through the item, devouring the wielder’s mana to channel its unholy power.",
-					"Staff, +200% Spell cost, Spellpower bonus for corruption", PerkLib.WizardsFocus, 1.4, 0, 0, 0, "", "Staff");
+					"Staff, +200% Spell cost, Spellpower bonus for corruption", PerkLib.WizardsFocus, 0.6, 0, 0, 0, "", "Staff");
 		}
 		
 		public function calcWizardsMult():Number {
 			var desc:String = "";
-			var multadd:Number = 1.4;
+			var multadd:Number = 0.6;
             if (game && game.player)
-                multadd += game.player.cor * 0.01;
+                multadd += game.player.cor * 0.05;
 			return multadd;
 		}
 

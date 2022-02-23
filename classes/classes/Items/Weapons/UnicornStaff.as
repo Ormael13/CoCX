@@ -23,16 +23,16 @@ package classes.Items.Weapons
 		public function UnicornStaff() 
 		{
 			super("U.Staff", "U. Staff", "unicorn staff", "a unicorn staff", "smack", 6, 960,
-					"This blessed staff is made in pearl-white sandalwood and decorated with a golden spiral pattern, reminiscent of a unicorn’s horn. The magic within seems to greatly enhance the user’s healing spells, not unlike those of the fabled creature that it emulates.",
-					"Staff, increases Spellpower based on purity", PerkLib.WizardsFocus, 0.9, 0, 0, 0, "", "Staff"
+					"This blessed staff is made in pearl-white sandalwood and decorated with a golden spiral pattern, reminiscent of a unicorn’s horn. The magic within seems to greatly enhance the user’s healing spells, not unlike those of the fabled creature that it emulates. Furthermore the staff allows the user to preserve mana when casting using a minimal ammount of energy on each spell.",
+					"Staff, Spell Cost -50% increases Spellpower based on purity", PerkLib.WizardsFocus, 0.6, 0, 0, 0, "", "Staff"
 			);
 		}
 		
 		public function calcWizardsMult():Number {
 			var desc:String = "";
-			var multadd:Number = 0.9;
+			var multadd:Number = 0.6;
             if (game && game.player)
-                multadd += (100 - game.player.cor) * 0.01;
+                multadd += (100 - game.player.cor) * 0.34;
 			return multadd;
 		}
 

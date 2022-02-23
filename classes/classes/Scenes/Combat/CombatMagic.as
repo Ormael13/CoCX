@@ -79,6 +79,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.WizardsEndurance)) costPercent -= player.perkv1(PerkLib.WizardsEndurance);
 		if (player.headjewelryName == "fox hairpin") costPercent -= 20;
         if (player.weapon == weapons.N_STAFF) costPercent += 200;
+		if (player.weapon == weapons.U_STAFF) costPercent -= 50;
         return costPercent;
     }
 
