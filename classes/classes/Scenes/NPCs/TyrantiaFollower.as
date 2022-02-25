@@ -371,13 +371,19 @@ public function repeatEncounterBattlefieldTalkHerKids():void {
 }
 public function repeatEncounterBattlefieldSex():void {
 		clearoutput();
-		outputText("The Drider woman eyes you up and down, a poorly disguised smile on her face. “Well...Since you asked nicely, I guess I wouldn’t mind.” Her spider half bobs from side to side, and she runs her hands along the outside of her armor...rubbing where the nipples are in an obvious attempt to draw your gaze to her massive pairs of jugs. “What are you thinking? \n\n"); 
+		if (TyraniaAffection2 > 24) {
+		outputText("The Drider woman eyes you up and down, a poorly disguised smile on her face. “Well...Since you asked nicely, I guess I wouldn’t mind.” Her spider half bobs from side to side, and she runs her hands along the outside of her armor...rubbing where the nipples are in an obvious attempt to draw your gaze to her massive pairs of jugs. “What are you thinking?\" \n\n"); 
 menu();
 addButton (1, "Titjob", );
 addButton (2, "Hugfuck", );
 addButton (3, "Get Phallustuffed", );
 addButton (4, "Cav.Fuck", );
 }
-
+else {
+outputText("The giantess's eyes narrow, and she gives you a stern glare. \"Yeah, I don't exactly know you well, shorty\", she says roughly. \"Being around you is one thing, but having you between my legs? Trust like that is earned. \" \n\n"); 
+doNext(camp.returnToCampUseOneHour);
+}
+}
+}
 	}
 }
