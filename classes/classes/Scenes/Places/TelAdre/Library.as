@@ -36,6 +36,7 @@ public function visitZeMagesTower():void {
 
 private function buyStarterStaff(type:ItemType):void {
 	clearOutput();
+	player.gems -= 240;
 	outputText("You pay 240 gems and Quinn hands over choosen basic elemental staff to you.");
 	inventory.takeItem(type, telAdre.telAdreMenu);
 }

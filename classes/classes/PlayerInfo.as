@@ -190,6 +190,9 @@ public class PlayerInfo extends BaseContent {
 		if (JourneyToTheEast.AhriTavernTalks > 0)
 			miscStats += "<b>Conversion (5 stat points to 1 perk point) counter:</b> "+JourneyToTheEast.AhriStatsToPerksConvertCounter+"\n";
 
+		if (JourneyToTheEast.EvelynnTavernTalks > 0)
+			miscStats += "<b>Conversion (1 perk point to 5 stat points) counter:</b> "+JourneyToTheEast.EvelynnPerksToStatsConvertCounter+"\n";
+
 		if (flags[kFLAGS.EGGS_BOUGHT] > 0)
 			miscStats += "<b>Eggs Traded For:</b> " + flags[kFLAGS.EGGS_BOUGHT] + "\n";
 

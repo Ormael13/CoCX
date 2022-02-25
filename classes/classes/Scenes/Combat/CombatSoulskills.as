@@ -673,14 +673,14 @@ public class CombatSoulskills extends BaseCombatContent {
 			if (monster.hasPerk(PerkLib.IceVulnerability)) damage *= 0.5;
 			if (monster.hasPerk(PerkLib.FireNature)) damage *= 0.2;
 		}
-		if (player.weapon == weapons.NPHBLDE || player.weapon == weapons.MOONLIT || player.weapon == weapons.MASAMUN || player.weapon == weapons.SESPEAR || player.weapon == weapons.WG_GAXE || player.weapon == weapons.KARMTOU) {
+		if (player.weapon == weapons.NPHBLDE || player.weapon == weapons.MOONLIT || player.weapon == weapons.MASAMUN || player.weapon == weapons.SESPEAR || player.weapon == weapons.WG_GAXE || player.weapon == weapons.KARMTOU || player.weapon == weapons.ARMAGED) {
 			if (monster.cor < 33) damage = Math.round(damage * 1.0);
 			else if (monster.cor < 50) damage = Math.round(damage * 1.1);
 			else if (monster.cor < 75) damage = Math.round(damage * 1.2);
 			else if (monster.cor < 90) damage = Math.round(damage * 1.3);
 			else damage = Math.round(damage * 1.4);
 		}
-		if (player.weapon == weapons.EBNYBLD || player.weapon == weapons.C_BLADE || player.weapon == weapons.BLETTER || player.weapon == weapons.DSSPEAR || player.weapon == weapons.DE_GAXE || player.weapon == weapons.YAMARG) {
+		if (player.weapon == weapons.EBNYBLD || player.weapon == weapons.C_BLADE || player.weapon == weapons.BLETTER || player.weapon == weapons.DSSPEAR || player.weapon == weapons.DE_GAXE || player.weapon == weapons.YAMARG || player.weapon == weapons.CHAOSEA) {
 			if (monster.cor >= 66) damage = Math.round(damage * 1.0);
 			else if (monster.cor >= 50) damage = Math.round(damage * 1.1);
 			else if (monster.cor >= 25) damage = Math.round(damage * 1.2);
@@ -705,6 +705,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.FireAffinity)) damage1 *= 2;
 			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
 			damage += damage1;
+			damage *= 1.1;
 		}
 		//soulskill mod effect
 		damage *= soulskillPhysicalMod();
@@ -740,15 +741,16 @@ public class CombatSoulskills extends BaseCombatContent {
 		//final touches
 		damage *= (monster.damagePercent() / 100);
 		outputText(" ");
-		if ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+		if (((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) || ((player.isDuelingTypeWeapon() || player.isSwordTypeWeapon() || player.isAxeTypeWeapon() || player.isDaggerTypeWeapon()) && player.hasStatusEffect(StatusEffects.FlameBlade))) {
+			if ((player.isDuelingTypeWeapon() || player.isSwordTypeWeapon() || player.isAxeTypeWeapon() || player.isDaggerTypeWeapon()) && player.hasStatusEffect(StatusEffects.FlameBlade)) damage += scalingBonusLibido() * 0.20;
 			damage = Math.round(damage * combat.fireDamageBoostedByDao());
 			doFireDamage(damage, true, true);
 		}
-		else if ((player.weapon == weapons.SCLAYMO || player.weapon == weapons.SDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+		else if (((player.weapon == weapons.SCLAYMO || player.weapon == weapons.SDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) || (flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon()) && player.hasStatusEffect(StatusEffects.WinterClaw))) {
 			damage = Math.round(damage * combat.iceDamageBoostedByDao());
 			doIceDamage(damage, true, true);
 		}
-		else if ((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+		else if (((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) || player.weapon == weapons.S_RULER) {
 			damage = Math.round(damage * combat.lightningDamageBoostedByDao());
 			doLightingDamage(damage, true, true);
 		}
@@ -756,7 +758,10 @@ public class CombatSoulskills extends BaseCombatContent {
 			damage = Math.round(damage * combat.darknessDamageBoostedByDao());
 			doDarknessDamage(damage, true, true);
 		}
-		else doDamage(damage, true, true);
+		else {
+			doDamage(damage, true, true);
+			if (player.weapon == weapons.DAISHO) doDamage(Math.round(damage * 0.5), true, true);
+		}
 		if (crit) {
 			outputText(" <b>*Critical Hit!*</b>");
 			if (player.hasStatusEffect(StatusEffects.Rage)) player.removeStatusEffect(StatusEffects.Rage);
@@ -806,14 +811,14 @@ public class CombatSoulskills extends BaseCombatContent {
 			if (player.isMeetingNaturalJousterReq()) damage *= 3;
 			if (player.isMeetingNaturalJousterMasterGradeReq()) damage *= 5;
 		}
-		if (player.weapon == weapons.NPHBLDE || player.weapon == weapons.MASAMUN || player.weapon == weapons.SESPEAR || player.weapon == weapons.WG_GAXE || player.weapon == weapons.KARMTOU) {
+		if (player.weapon == weapons.NPHBLDE || player.weapon == weapons.MOONLIT || player.weapon == weapons.MASAMUN || player.weapon == weapons.SESPEAR || player.weapon == weapons.WG_GAXE || player.weapon == weapons.KARMTOU || player.weapon == weapons.ARMAGED) {
 			if (monster.cor < 33) damage = Math.round(damage * 1.0);
 			else if (monster.cor < 50) damage = Math.round(damage * 1.1);
 			else if (monster.cor < 75) damage = Math.round(damage * 1.2);
 			else if (monster.cor < 90) damage = Math.round(damage * 1.3);
 			else damage = Math.round(damage * 1.4);
 		}
-		if (player.weapon == weapons.EBNYBLD || player.weapon == weapons.C_BLADE || player.weapon == weapons.BLETTER || player.weapon == weapons.DSSPEAR || player.weapon == weapons.DE_GAXE || player.weapon == weapons.YAMARG) {
+		if (player.weapon == weapons.EBNYBLD || player.weapon == weapons.C_BLADE || player.weapon == weapons.BLETTER || player.weapon == weapons.DSSPEAR || player.weapon == weapons.DE_GAXE || player.weapon == weapons.YAMARG || player.weapon == weapons.CHAOSEA) {
 			if (monster.cor >= 66) damage = Math.round(damage * 1.0);
 			else if (monster.cor >= 50) damage = Math.round(damage * 1.1);
 			else if (monster.cor >= 25) damage = Math.round(damage * 1.2);
@@ -838,6 +843,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.FireAffinity)) damage1 *= 2;
 			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
 			damage += damage1;
+			damage *= 1.1;
 		}
 		//soulskill mod effect
 		damage *= soulskillPhysicalMod();
@@ -871,15 +877,16 @@ public class CombatSoulskills extends BaseCombatContent {
 		//final touches
 		damage *= (monster.damagePercent() / 100);
 		outputText("Your [weapon] sweeps against [themonster], dealing ");
-		if ((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+		if (((player.weapon == weapons.RCLAYMO || player.weapon == weapons.RDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.BlazingBattleSpirit)) || (player.isFistOrFistWeapon() && player.hasStatusEffect(StatusEffects.HinezumiCoat)) || ((player.isDuelingTypeWeapon() || player.isSwordTypeWeapon() || player.isAxeTypeWeapon() || player.isDaggerTypeWeapon()) && player.hasStatusEffect(StatusEffects.FlameBlade))) {
+			if ((player.isDuelingTypeWeapon() || player.isSwordTypeWeapon() || player.isAxeTypeWeapon() || player.isDaggerTypeWeapon()) && player.hasStatusEffect(StatusEffects.FlameBlade)) damage += scalingBonusLibido() * 0.20;
 			damage = Math.round(damage * combat.fireDamageBoostedByDao());
 			doFireDamage(damage, true, true);
 		}
-		else if ((player.weapon == weapons.SCLAYMO || player.weapon == weapons.SDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+		else if (((player.weapon == weapons.SCLAYMO || player.weapon == weapons.SDAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) || (flags[kFLAGS.FERAL_COMBAT_MODE] == 1 && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon()) && player.hasStatusEffect(StatusEffects.WinterClaw))) {
 			damage = Math.round(damage * combat.iceDamageBoostedByDao());
 			doIceDamage(damage, true, true);
 		}
-		else if ((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) {
+		else if (((player.weapon == weapons.TCLAYMO || player.weapon == weapons.TODAGGER) && player.hasStatusEffect(StatusEffects.ChargeWeapon)) || player.weapon == weapons.S_RULER) {
 			damage = Math.round(damage * combat.lightningDamageBoostedByDao());
 			doLightingDamage(damage, true, true);
 		}
@@ -889,6 +896,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		}
 		else {
 			doDamage(damage, true, true);
+			if (player.weapon == weapons.DAISHO) doDamage(Math.round(damage * 0.5), true, true);
 			if (player.findPerk(PerkLib.FlurryOfBlows) >= 0 && player.isFistOrFistWeapon()) {
 				doDamage(damage, true, true);
 				damage *= 2;
@@ -1234,6 +1242,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.FireAffinity)) damage1 *= 2;
 			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
 			damage += damage1;
+			damage *= 1.1;
 		}
 		damage *= soulskillMod();
 		damage *= corruptionMulti;
@@ -1470,6 +1479,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.FireAffinity)) damage1 *= 2;
 			if (player.lust > player.lust100 * 0.5) dynStats("lus", -1);
 			damage += damage1;
+			damage *= 1.1;
 		}
 		//other bonuses
 		if (player.findPerk(PerkLib.PerfectStrike) >= 0 && (monster.hasStatusEffect(StatusEffects.Stunned) || monster.hasStatusEffect(StatusEffects.StunnedTornado) || monster.hasStatusEffect(StatusEffects.FrozenSolid))) damage *= 1.5;
@@ -2308,4 +2318,4 @@ public class CombatSoulskills extends BaseCombatContent {
 	 }*/
 }
 }
-
+

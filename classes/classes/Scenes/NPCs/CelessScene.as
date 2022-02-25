@@ -352,6 +352,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			[weapons.SPEAR, weapons.SESPEAR, weapons.DSSPEAR],
 			[weapons.JRAPIER, weapons.Q_GUARD, weapons.B_WIDOW],
 			[weapons.OTETSU, weapons.POCDEST, weapons.DOCDEST],
+			[weapons.BFTHSWORD, weapons.ARMAGED, weapons.CHAOSEA],
 			[weaponsrange.BOWLONG, weaponsrange.ARTEMIS, weaponsrange.WILDHUN],
 			[weaponsrange.SHUNHAR, weaponsrange.KSLHARP, weaponsrange.LEVHARP],
 			[shields.SANCTYN, shields.SANCTYL, shields.SANCTYD],
