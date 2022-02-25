@@ -135,21 +135,21 @@ public class Vapula extends NPCAwareContent implements TimeAwareInterface
 				outputText("Amily ");
 				if (jojo) outputText("and ");
 			}
-			if (jojo) outputText(flags[kFLAGS.JOJO_BIMBO_STATE] < 3 ? "Jojo " : "Joy ");
+			if (jojo) outputText(flags[kFLAGS.JOJO_BIMBO_STATE] != 3 ? "Jojo " : "Joy ");
 			outputText("walk");
 			if (!(amily && jojo)) outputText("s");
 			outputText(" up to you, worried, as Vapula struts around the camp.");
 			//Amily and/or Jojo(or Joy), text #1
-			if (amily || (jojo && flags[kFLAGS.JOJO_BIMBO_STATE] < 3)) outputText("\n\n\"<i>[name], what is this? Am I dreaming or did you actually bring a demon to your camp? What in the world is wrong with you?</i>\"");
-			else if (jojo && flags[kFLAGS.JOJO_BIMBO_STATE] >= 3) outputText("\n\n\"<i>[name], what is this? Like, a demon?</i>\"");
+			if (amily || (jojo && flags[kFLAGS.JOJO_BIMBO_STATE] != 3)) outputText("\n\n\"<i>[name], what is this? Am I dreaming or did you actually bring a demon to your camp? What in the world is wrong with you?</i>\"");
+			else if (jojo && flags[kFLAGS.JOJO_BIMBO_STATE] == 3) outputText("\n\n\"<i>[name], what is this? Like, a demon?</i>\"");
 			outputText("\n\n\"<i>Relax,</i>\" you answer.  \"<i>Yes, she's a demon, but she's MY demon. She's under control, aren't you, honey?</i>\"  The succubus simpers softly and nods.");
 			//Amily and/or Jojo(or Joy), text #2
-			if (amily || (jojo && flags[kFLAGS.JOJO_BIMBO_STATE] < 3)) outputText("\n\n\"<i>But... but this is insane!  You're supposed to be fighting demons, not joining them!  Did the taint of this cursed land somehow get the better of you?  Did you lose your soul yet?  These monsters are the same ones who destroy and corrupt innocents, and you invite one of them to camp?  This is madness!</i>\"");
-			else if (jojo && flags[kFLAGS.JOJO_BIMBO_STATE] >= 3) outputText("\n\n\"<i>Like, that's not cool. Did you get the black, icky stuff? Those monsters spread the icky stuff everywhere. Yuck!</i>\"");
+			if (amily || (jojo && flags[kFLAGS.JOJO_BIMBO_STATE] != 3)) outputText("\n\n\"<i>But... but this is insane!  You're supposed to be fighting demons, not joining them!  Did the taint of this cursed land somehow get the better of you?  Did you lose your soul yet?  These monsters are the same ones who destroy and corrupt innocents, and you invite one of them to camp?  This is madness!</i>\"");
+			else if (jojo && flags[kFLAGS.JOJO_BIMBO_STATE] == 3) outputText("\n\n\"<i>Like, that's not cool. Did you get the black, icky stuff? Those monsters spread the icky stuff everywhere. Yuck!</i>\"");
 			outputText("\n\nYou try your best to explain that Vapula is a renegade, that she fears Lethice.");
 			//Amily and/or Jojo(or Joy), text #3
-			if (amily || (jojo && flags[kFLAGS.JOJO_BIMBO_STATE] < 3)) outputText("\n\n\"<i>She's still a demon!  A succubus!  She'll suck the living soul out of you!</i>\"");
-			else if (jojo && flags[kFLAGS.JOJO_BIMBO_STATE] >= 3) outputText("\n\n\"<i>She's still a demon! Like, a succubus! She'll, like, suck the soul out of you!</i>\"");
+			if (amily || (jojo && flags[kFLAGS.JOJO_BIMBO_STATE] != 3)) outputText("\n\n\"<i>She's still a demon!  A succubus!  She'll suck the living soul out of you!</i>\"");
+			else if (jojo && flags[kFLAGS.JOJO_BIMBO_STATE] == 3) outputText("\n\n\"<i>She's still a demon! Like, a succubus! She'll, like, suck the soul out of you!</i>\"");
 			//Intelligence check
 			if (player.inte < (60 + (player.cor/2))) {
 				//[if libido >=50]
@@ -159,7 +159,7 @@ public class Vapula extends NPCAwareContent implements TimeAwareInterface
 				else outputText("mouse is");
 				outputText(" raving.  \"<i>You've clearly given in to her demonic lust.</i>\"");
 				if (jojo) {
-					if (flags[kFLAGS.JOJO_BIMBO_STATE] < 3) {
+					if (flags[kFLAGS.JOJO_BIMBO_STATE] != 3) {
 						outputText("\n\n\"<i>I'm leaving, [name],</i>\" Jojo says.  \"<i>I only hope for your sake that you come to your senses soon... I will return to my place in the forest when you require assistance in freeing your soul of taint.</i>\"");
 						flags[kFLAGS.JOJO_MOVE_IN_DISABLED] = 1;
 						player.removeStatusEffect(StatusEffects.JojoNightWatch);
@@ -184,12 +184,12 @@ public class Vapula extends NPCAwareContent implements TimeAwareInterface
 					flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00173] = 0;
 				}
 				//[(if PC corr > 70)
-				if (player.cor > 70 && !(jojo && flags[kFLAGS.JOJO_BIMBO_STATE] >= 3)) outputText("\n\n\"<i><i>Fine. Go fuck off then, I don't need you.  I have a much better and hotter slut now. Don't hesitate to come back if you want some sweet pussy, though.</i>\"");
+				if (player.cor > 70 && !(jojo && flags[kFLAGS.JOJO_BIMBO_STATE] == 3)) outputText("\n\n\"<i><i>Fine. Go fuck off then, I don't need you.  I have a much better and hotter slut now. Don't hesitate to come back if you want some sweet pussy, though.</i>\"");
 				outputText("\n\n");
-				if (jojo && flags[kFLAGS.JOJO_BIMBO_STATE] < 3) outputText("Jojo");
-				if (amily && (jojo && flags[kFLAGS.JOJO_BIMBO_STATE] < 3)) outputText(" and ");
+				if (jojo && flags[kFLAGS.JOJO_BIMBO_STATE] != 3) outputText("Jojo");
+				if (amily && (jojo && flags[kFLAGS.JOJO_BIMBO_STATE] != 3)) outputText(" and ");
 				if (amily) outputText("Amily");
-				if (amily && (jojo && flags[kFLAGS.JOJO_BIMBO_STATE] < 3)) outputText(" have ");
+				if (amily && (jojo && flags[kFLAGS.JOJO_BIMBO_STATE] != 3)) outputText(" have ");
 				else outputText(" has ");
 				outputText("moved out.");
 				outputText("\n\nMaybe it's past time you brought them around to your way of thinking?");
@@ -200,10 +200,10 @@ public class Vapula extends NPCAwareContent implements TimeAwareInterface
 				outputText("\n\nYou assure them that you'll do your best to keep her away from ");
 				if (amily) outputText("Amily");
 				if (amily && jojo) outputText(" and ");
-				if (jojo) outputText(flags[kFLAGS.JOJO_BIMBO_STATE] < 3 ? "Jojo" : "Joy");
+				if (jojo) outputText(flags[kFLAGS.JOJO_BIMBO_STATE] != 3 ? "Jojo" : "Joy");
 				outputText(" and make sure she doesn't come close.");
 				if (jojo) {
-					if (flags[kFLAGS.JOJO_BIMBO_STATE] < 3) outputText("\n\n\"<i>Fine. But I'll keep a close watch from now on,</i>\" Jojo says.");
+					if (flags[kFLAGS.JOJO_BIMBO_STATE] != 3) outputText("\n\n\"<i>Fine. But I'll keep a close watch from now on,</i>\" Jojo says.");
 					else outputText("\n\n\"<i>Like, thank you!</i>\" Joy yips excitedly, wrapping her arms around you.");
 					flags[kFLAGS.KEPT_PURE_JOJO_OVER_VAPULA] = 1;
 				}

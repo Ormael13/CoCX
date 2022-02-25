@@ -587,8 +587,8 @@ public function chichiSex():void {
 	else {
 		outputText("\"<i>That does not count! Arghhh be gone, I got training to do!</i>\"\n\n");
 		menu();
-		//if (model.time.hours > 18) addButton(0, "Until dawn", chichiSexUntilDawn);
-		//else addButtonDisabled(0, "Until dawn", "It's too early for this. Wait till 7 pm.");
+		if (model.time.hours > 18) addButton(0, "Until dawn", chichiSexUntilDawn);
+		else addButtonDisabled(0, "Until dawn", "It's too early for this. Wait till 7 pm.");
 		if (player.hasCock()) addButton(1, "Gentle fuck", chichiSexGentleFuck);
 		else addButtonDisabled(1, "Gentle fuck", "Get a dick bro.");
 		if (player.hasVagina()) addButton(2, "Hinezumi Yuri", chichiSexHinezumiYuri);

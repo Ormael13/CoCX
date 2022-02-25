@@ -61,7 +61,7 @@ public function HotSpring():void {
 public function HaveABoysBath():void {
 	clearOutput();
 	outputText("You decide to take a bath to rest your weary body.\n\n");
-	if (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] < 3) outputText("Jojo isn’t exactly what you would call muscular, but his size and lean frame fits his mouse appearance.\n\n");
+	if (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3) outputText("Jojo isn’t exactly what you would call muscular, but his size and lean frame fits his mouse appearance.\n\n");
 	if (player.hasStatusEffect(StatusEffects.CampRathazul)) outputText("You're almost glad you don’t see any part of Rathazul’s body beyond the hip level. Though, you’re not particularly interested anyway.\n\n");
 	if (arianScene.arianFollower() && flags[kFLAGS.ARIAN_VAGINA] < 1 && flags[kFLAGS.ARIAN_COCK_SIZE] > 0) outputText("Arian doesn’t seem to hate the water. He's likely cold blooded and is probably enjoying it.\n\n");
 	if (flags[kFLAGS.IZMA_BROFIED] == 1) outputText("Since Izmael is a true guy now, he was allowed to bath with the boys.\n\n");

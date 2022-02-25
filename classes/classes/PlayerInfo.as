@@ -733,7 +733,7 @@ public class PlayerInfo extends BaseContent {
 			if (flags[kFLAGS.ISABELLA_LVL_UP] < 1) interpersonStats += "<b>Isabella lvl:</b> 20\n";
 		}
 
-		if (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3) {
+		if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3) {
 			interpersonStats += "<b>Joy's Intelligence:</b> " + flags[kFLAGS.JOY_INTELLIGENCE];
 			if (flags[kFLAGS.JOY_INTELLIGENCE] >= 50) interpersonStats += " (MAX)";
 			interpersonStats += "\n";
@@ -1100,7 +1100,7 @@ public class PlayerInfo extends BaseContent {
 			childStats += "<b>Total Children with Izma:</b> " + (flags[kFLAGS.IZMA_CHILDREN_SHARKGIRLS] + flags[kFLAGS.IZMA_CHILDREN_TIGERSHARKS]) + "\n";
 
         if (SceneLib.joyScene.getTotalLitters() > 0)
-            childStats += "<b>Litters With " + (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3 ? "Joy" : "Jojo") + ":</b> " + SceneLib.joyScene.getTotalLitters() + "\n";
+            childStats += "<b>Litters With " + (flags[kFLAGS.JOJO_BIMBO_STATE] == 3 ? "Joy" : "Jojo") + ":</b> " + SceneLib.joyScene.getTotalLitters() + "\n";
         if (flags[kFLAGS.KELLY_KIDS_MALE] > 0)
 			childStats += "<b>Children With Kelly (Males):</b> " + flags[kFLAGS.KELLY_KIDS_MALE] + "\n";
 		if (flags[kFLAGS.KELLY_KIDS] - flags[kFLAGS.KELLY_KIDS_MALE] > 0)

@@ -285,10 +285,14 @@ public class Camp extends NPCAwareContent{
 			arianScene.arianLaysEggs();
 			return;
 		}
-		if (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3 && flags[kFLAGS.JOY_NIGHT_FUCK] == 1) {
+		if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3 && flags[kFLAGS.JOY_NIGHT_FUCK] == 1) {
 			joyScene.wakeUpWithJoyPostFuck();
 			return;
 		}
+        if (flags[kFLAGS.JOJO_BIMBO_STATE] == 4 && flags[kFLAGS.TALKED_TO_JOJO_ABOUT_JOY] == 0) { //post-debimbo conversation
+            jojoScene.afterDebimboTalk();
+            return;
+        }
 		if (flags[kFLAGS.EMBER_MORNING] > 0 && ((flags[kFLAGS.BENOIT_CLOCK_BOUGHT] > 0 && model.time.hours >= flags[kFLAGS.BENOIT_CLOCK_ALARM]) || (flags[kFLAGS.BENOIT_CLOCK_BOUGHT] <= 0 && model.time.hours >= 6))) {
 			hideMenus();
 			emberScene.postEmberSleep();
@@ -491,7 +495,7 @@ public class Camp extends NPCAwareContent{
 			}
 		}
 		//Jojo treeflips!
-		if (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4 && flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] < 3) {
+		if (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4 && flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3) {
 			holliScene.JojoTransformAndRollOut();
 			hideMenus();
 			return;
@@ -604,7 +608,7 @@ public class Camp extends NPCAwareContent{
 			return;
 		}
 		//Joy gives birth!
-		if (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3 && jojoScene.pregnancy.type == PregnancyStore.PREGNANCY_PLAYER && jojoScene.pregnancy.incubation == 0) {
+		if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3 && jojoScene.pregnancy.type == PregnancyStore.PREGNANCY_PLAYER && jojoScene.pregnancy.incubation == 0) {
 			joyScene.joyGivesBirth();
 			return;
 		}
@@ -1210,7 +1214,7 @@ public class Camp extends NPCAwareContent{
 
 	public function maleNpcsHotBathCount():Number {
 		var counter:Number = 0;
-		if (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] < 3) counter++;
+		if (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3) counter++;
 		if (player.hasStatusEffect(StatusEffects.CampRathazul)) counter++;
 		if (arianScene.arianFollower() && flags[kFLAGS.ARIAN_VAGINA] < 1 && flags[kFLAGS.ARIAN_COCK_SIZE] > 0) counter++;
 		if (flags[kFLAGS.IZMA_BROFIED] == 1) counter++;
@@ -1797,7 +1801,7 @@ public class Camp extends NPCAwareContent{
 			}
 			//Pure Jojo
 			if (player.hasStatusEffect(StatusEffects.PureCampJojo)) {
-				if (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3) {
+				if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3) {
 					outputText("Joy's tent is set up in a quiet corner of the [camp], close to a boulder. Inside the tent, you can see a chest holding her belongings, as well as a few clothes and books spread about her bedroll. ");
 					if (flags[kFLAGS.JOJO_LITTERS] > 0 && model.time.hours >= 16 && model.time.hours < 19) outputText("You spot the little mice you had with Joy playing about close to her tent.");
 					else outputText("Joy herself is nowhere to be found, she's probably out frolicking about or sitting atop the boulder.");
@@ -3694,7 +3698,7 @@ public class Camp extends NPCAwareContent{
 					emberScene.sleepWithEmber();
 					return;
 				}
-			} else if (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3 && jojoScene.pregnancy.isPregnant && jojoScene.pregnancy.event == 4 && player.hasCock() && flags[kFLAGS.SLEEP_WITH] == 0) {
+			} else if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3 && jojoScene.pregnancy.isPregnant && jojoScene.pregnancy.event == 4 && player.hasCock() && flags[kFLAGS.SLEEP_WITH] == 0) {
 				joyScene.hornyJoyIsPregnant();
 				return;
 			} else if (flags[kFLAGS.SLEEP_WITH] == "Sophie" && (bimboSophie() || sophieFollower()) && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) {

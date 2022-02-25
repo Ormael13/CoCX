@@ -52,9 +52,10 @@ public class JojoScene extends NPCAwareContent implements TimeAwareInterface {
 //const JOJO_MOVE_IN_DISABLED:int = 550;
 //const TIMES_EGGED_JOJO:int = 590;
 //const JOJO_EGGCUBATE_COUNT:int = 591;
+//const TALKED_TO_JOJO_ABOUT_JOY:int = 1305; //set after you talked to jojo after debimboing him
 
 public function jojoSprite():void {
-	if (flags[kFLAGS.JOJO_BIMBO_STATE] < 3) {
+	if (flags[kFLAGS.JOJO_BIMBO_STATE] != 3) {
 		if (tentacleJojo()) spriteSelect(81);
 		else spriteSelect(34);
 	}
@@ -3203,7 +3204,7 @@ private function getVagFuckedByMouse():void {
 		player.cuntChange(20, true);
 		outputText("Taken aback with his suddenness, you clench your muscles so tight that Jojo’s dick becomes stuck inside you. Jojo howls in pain and pleasure. You scold Jojo for his reckless action, but secretly you’re pleased that he took the initiative. You instruct Jojo to start slow and to go faster over time. Jojo nods and smiles nervously. You say don’t worry, you’ll guide him.");
 		outputText("\n\nYou relax and let Jojo gently work his pace. His erect cock slides in and out out of your [vagina] smoothly. So far, so good. Jojo starts picking up the pace. You can’t stop the moans of ecstasy from coming out of your mouth and that seemed to encourage Jojo to further exertions. He started ramming your cervix as if he wanted to invade your womb. You didn’t bother trying anymore, you let loose screams of pleasure. Jojo seemed to be near the end of his stamina because he started to slow down. He shouts, \"<i>I’m going to cum!</i>\" You hook your legs behind Jojo’s back to lock him in place. Jojo’s cock was right next to the entrance of your womb. When Jojo cummed, the force of his ejaculation pierces your womb and stuffs it full of hot mouse cum. " + (jojoCumQ() >= 750 ? "His orgasm seems to never end and he continues to stuff your womb. " + (jojoCumQ() >= 900 ? "Excessive mouse-spunk spills out of your [pussy]. Gods, that was intense!" : "") : ""));
-		outputText("\n\nYou orgasm at the same time, spraying girlcum all over Jojo" + (player.hasCock() ? "; [eachCock] let loose a cum shower, drenching your belly and thighs" : "") + ". Losing strength in your limbs, you release Jojo. Jojo falls back on the grass, panting. \"<i>That was… That was amazing… We are going to do this again, aren’t we?</i>\" You smile at him and nod, thinking privately that if he’s this good as a virgin, how good he’ll be when you’re through with him.");
+		outputText("\n\nYou orgasm at the same time, spraying girlcum all over Jojo" + (player.hasCock() ? "; [eachCock] let loose a cum shower, drenching your belly and thighs" : "") + ". Losing strength in your limbs, you release Jojo. Jojo falls back on the grass, panting. \"<i>That was...  That was amazing...  We are going to do this again, aren’t we?</i>\" You smile at him and nod, thinking privately that if he’s this good as a virgin, how good he’ll be when you’re through with him.");
 	}
 	else if (flags[kFLAGS.JOJO_VAGINAL_CATCH_COUNTER] == 1) {
 		outputText("\n\nYou see that Jojo’s still a little uncomfortable, so you lean back on your legs and pull open the lips of your [vagina], showing him your wet, hot insides. Jojo’s cock gets fully erect. With just a little hesitation, he gets into position in front of you. You’re impressed by Jojo’s growth. Soon he’ll be able to fuck you with no hesitation whatsoever. While you were musing the change in Jojo, he had dipped his head down and started licking your [clit] with his warm, soft tongue. You shiver, brought almost to the edge of orgasming. ");
@@ -3278,6 +3279,21 @@ public function mishapsLunaJojo():void {
 	if (player.statusEffectv1(StatusEffects.LunaWasCaugh) == 3) outputText("<b>That's it, you're sure of it now, it's all Luna's doing!</b>\n\n");
 	doNext(playerMenu);
 }
+
+public function afterDebimboTalk():void {
+	jojoSprite();
+    clearOutput();
+    outputText("About an hour passes, and Jojo eventually walks over to you, a conflicted look on his face. “<i>[name], may I... talk to you for a minute?</i>” You nod, and he sits across from you. “<i>I... It’s come to my attention that I was... under the effects of Bimbo Liqueur... and... I’ve been trying to make sense of what happened while I was... Joy.</i>” He sighs. “<i>I... Approached you for sex, didn’t I?</i>” You nod, and his face reddens. He inhales, hands shaking. “<i>...And we... We did, did we not?</i>”");
+    outputText("\n\nYou nod again. He sighs. “<i>So... I forsook my vows then. Affected as I was... I am no longer chaste.</i>” He lowers his head. “<i>[name], I... Need to talk to you... About our relationship. I am afraid I wasn’t entirely honest with you.</i>”");
+    outputText("\n\nYou tell Jojo that you know. He whips his head up, eyes locking with yours. “<i>W-wait, you know?!</i>” You laugh, telling the shy monk that Joy was very honest with what she wanted. This makes Jojo squirm uncomfortably. “<i>So... You know that I... </i>” You join the monk on his log, putting an arm around him. “<i>You know that I... care deeply for you.</i>”");
+    outputText("\n\nYou put a finger on Jojo’s lips. You tell Jojo that you know he loves you. And if he remembers his time as Joy, he knows that feeling is mutual. At this, Jojo’s eyes brighten, and he almost tears up. “<i>Y-you mean that?</i>” You nod again, and Jojo leans in, resting his muzzle against your [chest].");
+    outputText("\n\n“<i>Thank you.</i>” He says simply. “<i>I... Will need to meditate more... I have no idea what the future brings... </i>” He chuckles, standing back up. “<i>But now... At least I have a little more Joy in my life.</i>” Shocked, you ask him if he just made a joke, and he waggles his eyebrows, smiling deeply. “<i>Maybe I did... or Maybe not.</i>”");
+    if (flags[kFLAGS.JOY_TWINS_BIRTHED] > 0)
+        outputText("\n\n“<i>At this, your mousey children poke their heads out from nearby, and Jojo opens his arms wide. They swarm him, and he scoops up a half-dozen, rubbing the tops of their heads with his cheek. Many of them seem confused, but they don’t care.");
+    outputText("\n\n“<i>I’ll be in my usual spot at camp.</i>” Jojo says, looking back at you. “<i>Visit me often, won’t you?</i>”");
+    flags[kFLAGS.TALKED_TO_JOJO_ABOUT_JOY] = 1;
+    doNext(playerMenu);
+}
+
 }
 }
-

@@ -30,7 +30,7 @@ package classes.Scenes.NPCs
 			return false;
 		}
 		private function anyMalesInCamp():Boolean {
-			if ((player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] < 3) || player.hasStatusEffect(StatusEffects.CampRathazul) || (arianScene.arianFollower() && flags[kFLAGS.ARIAN_VAGINA] < 1 && flags[kFLAGS.ARIAN_COCK_SIZE] > 0) || flags[kFLAGS.IZMA_BROFIED] == 1 || flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2
+			if ((player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3) || player.hasStatusEffect(StatusEffects.CampRathazul) || (arianScene.arianFollower() && flags[kFLAGS.ARIAN_VAGINA] < 1 && flags[kFLAGS.ARIAN_COCK_SIZE] > 0) || flags[kFLAGS.IZMA_BROFIED] == 1 || flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2
 			 || emberScene.followerEmber() && flags[kFLAGS.EMBER_GENDER] == 1)
 				return true;
 			return false;
@@ -278,7 +278,7 @@ package classes.Scenes.NPCs
 			}
 			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) {
 				outputText("\"<i>And it’s good to have a place where release frustrations in a friendly way. Serves me well to keep fit, too.");
-				if ((isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) || followerKiha() || emberScene.followerEmber() || player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] < 3) outputText(" Though some of our pals are really hard to crack.");
+				if ((isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0) || followerKiha() || emberScene.followerEmber() || player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3) outputText(" Though some of our pals are really hard to crack.");
 				outputText("</i>\"\n\n");
 			}
 			doNext(SidonieTalkMenu);
