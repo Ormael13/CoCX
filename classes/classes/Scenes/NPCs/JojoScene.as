@@ -2980,7 +2980,7 @@ public function afterDebimboTalk():void {
     outputText("\n\nYou put a finger on Jojo’s lips. You tell Jojo that you know he loves you. And if he remembers his time as Joy, he knows that feeling is mutual. At this, Jojo’s eyes brighten, and he almost tears up. “<i>Y-you mean that?</i>” You nod again, and Jojo leans in, resting his muzzle against your [chest].");
     outputText("\n\n“<i>Thank you.</i>” He says simply. “<i>I... Will need to meditate more... I have no idea what the future brings... </i>” He chuckles, standing back up. “<i>But now... At least I have a little more Joy in my life.</i>” Shocked, you ask him if he just made a joke, and he waggles his eyebrows, smiling deeply. “<i>Maybe I did... or Maybe not.</i>”");
     if (flags[kFLAGS.JOY_TWINS_BIRTHED] > 0)
-        outputText("\n\n“<i>At this, your mousey children poke their heads out from nearby, and Jojo opens his arms wide. They swarm him, and he scoops up a half-dozen, rubbing the tops of their heads with his cheek. Many of them seem confused, but they don’t care.");
+        outputText("\n\nAt this, your mousey children poke their heads out from nearby, and Jojo opens his arms wide. They swarm him, and he scoops up a half-dozen, rubbing the tops of their heads with his cheek. Many of them seem confused, but they don’t care.");
     outputText("\n\n“<i>I’ll be in my usual spot at camp.</i>” Jojo says, looking back at you. “<i>Visit me often, won’t you?</i>”");
     flags[kFLAGS.TALKED_TO_JOJO_ABOUT_JOY] = 1;
     doNext(playerMenu);
