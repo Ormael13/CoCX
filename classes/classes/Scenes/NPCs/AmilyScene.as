@@ -631,8 +631,6 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			//Did the PC genderchange?  OH SHIT SON!
 			//Alternatively: get bitched at
 			if(flags[kFLAGS.AMILY_PC_GENDER] != player.gender) {
-			//Stripped this out since it was making her flip out weirdly at genderless folks
-			//|| (player.gender == 0 && flags[kFLAGS.AMILY_AFFECTION] < 15)) {
 				amilyNewGenderConfrontation();
 				return;
 			}

@@ -44,7 +44,6 @@ public class MinervaScene extends BaseContent implements TimeAwareInterface {
 	}
 
 	public var minervaPurification:MinervaPurification = new MinervaPurification;
-	public var minervaCorruption:MinervaCorruption = new MinervaCorruption;
 
 
 //All readers, please read the actual scenes before judging this work. Notes may be rough but the scenes aren't
