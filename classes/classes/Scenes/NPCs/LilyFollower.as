@@ -592,7 +592,37 @@ addButton (2, "Electra", LilyExElectra);
 addButton (3, "Izma/el", LilyExIzma);
 addButton (4, "Joy", LilyExJoy);
 
+public function LilyCampFollower():void {
+		clearoutput();
+		outputText("As you approach Lily’s silken treehouse, you see a golden chain dangling from the tree. You look up, and get splashed on the head by your Drider-lover’s pussy juice. \n\n");
+		outputText("“Hello,” she says from the tree, a smile on her face and one hand over her mouth at the naughty prank she just played.. “How are things," If (LilySubmissiveness > 79 % ) { + player.mf("master", "mistress") +} else "Champ?” \n\n");
+		outputText("You motion for her to join you on the ground, and she tilts her head, taking a silken rope. She jumps down from the tree, holding the rope, and ties it off. She smiles, bow on her back. “What brings you to my section of camp?” \n\n");
+		outputText(" \n\n");
+		menu();
+		addButton (1, "Talk", Lilytalk );
+		addButton (2, "Sex", LilyFollowerSex);
+		addButton (3, "House", LilyHouse);
+		addButton (4, "Spar", LilySpar);
+}
 
+public function LilyFollowerSex():void {
+		clearoutput();
+		outputText("You give Lily a waggle of your eyebrows, before stepping in, grabbing the chain crossing her chest and pulling. Lily gives you a moan, but says nothing. Her body, however, is honest. Lily's cunt begins drooling almost immediately, and her back legs tap rapidly. \n\n");
+		outputText("What do you want to do with your eager Drider-Slut, now that you have her?\n\n"); 
+menu();
+addButton (1, "Bondage", LilyBondage);
+addButton (2, "Roleplay", LilyRape);
+addButton (3, "3Some", Lily3Somes);
+addButton (4, "Back",LilyCampBack);
+}
+public function LilyCampBack):void {
+		clearoutput();
+		outputText("\"Yes, [name], what did you need?\" \n\n");
+		menu();
+		addButton (1, "Talk", Lilytalk );
+		addButton (2, "Sex", LilyFollowerSex);
+		addButton (3, "House", LilyHouse);
+		addButton (4, "Spar", LilySpar);
 		
 	}
 }
