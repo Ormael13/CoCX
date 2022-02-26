@@ -2054,6 +2054,7 @@ public class Camp extends NPCAwareContent{
 			addButtonDisabled(2, "Watch Sky", "The option to watch sunset is available at 7pm.");
 		}
 		addButton(3, "Read Codex", codex.accessCodexMenu).hint("Read any codex entries you have unlocked.");
+		addButton(4, "Recall", recallScenes).hint("Recall some of the unique events happened during your adventure.");
 		if (player.hasKeyItem("Gryphon Statuette") >= 0) addButton(9, "Gryphon", useGryphonStatuette);
 		if (player.hasKeyItem("Peacock Statuette") >= 0) addButton(9, "Peacock", usePeacockStatuette);
 		addButton(14, "Back", campActions);
@@ -6634,6 +6635,21 @@ public function rebirthFromBadEnd():void {
 			player.removeStatusEffect(StatusEffects.AchievementsNormalShadowTotal);
 		}
 	}
+
+    public function recallScenes():void {
+        clearOutput();
+        outputText("You close your eyes, remembering all this life put you through. All your fights, friends... lovers.\n\n");
+        outputText("Though many things are still easily reachable, you still remember some unique events of your life, and one question bothers you - what would happen if at the specific moment you were different? How would you and your companions look and behave right now?\n");
+		outputText("Falling asleep, you think about it, recalling the exact time and place...\n\n");
+		outputText("<i>I ask thee, eternal time...</i>\n");
+		outputText("\n\nThis part is WIP. You can add more scenes.");
+		outputText("\nThe idea behind is to try unique scenes with different ways or options or body parts.");
+        menu();
+		if (flags[kFLAGS.MARBLE_PURIFIED] == 1)
+			addButton(0, "Marble & Clara", SceneLib.marblePurification.defeatClaraCuntInAFight, false, true);
+        addButtonDisabled(13, "BadEnds", "SH is too lazy to add them too right now, but if anyone wants...");
+        addButton(14, "Wake Up", campSpendTimeActions);
+    }
 
 	/*
         private function fixHistory():void {
