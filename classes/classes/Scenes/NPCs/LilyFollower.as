@@ -35,6 +35,13 @@ import classes.internals.SaveableState;
 			LilyHairColor = "";
 			LilySkinTone = "";
 			LilyPierced = false;
+			LilyAffectionMeter = 0;
+			LilySubmissiveness = 0;
+			LilyTalked = false;
+			LilyFollower = false;
+			LilyExhibitionable = false;
+			Lily3SomeSidonie = false;
+			Lily3SomeIzma = false;
 		}
 
 		public function saveToObject():Object {
@@ -49,6 +56,7 @@ import classes.internals.SaveableState;
 				"LilyExhibitionAble": LilyExhibitionable,
 				"Lily3SomeSidonie": Lily3SomeSidonie,
 				"Lily3SomeIzma": Lily3SomeIzma,
+				
 			};
 		}
 
@@ -128,7 +136,7 @@ public function LilyAfterBattle():void {
 		addButton (4, "DomHome", LilySubComeCamp );
 		}
 		if (LilyAffectionMeter > 50) {
-		addButton (5, "Come2Camp", LilyComeCamp );
+		addButton (5, "Come2Camp", LilyBringCamp );
 	}
 }
 public function LilyBringCamp():void {
@@ -151,6 +159,7 @@ public function LilySubComeCamp():void {
 		addButton (2, "Tyrantia", LilyTyrantia3some);
 		}
 		addButton (1, "BringIn", LilyEnterCamp);
+		
 }
 
 public function LilyEnterCamp():void {
@@ -158,6 +167,7 @@ public function LilyEnterCamp():void {
 		outputText("Lily stays closer to you than you would have expected as you walk into camp. A few of your followers take note of her, but nobody seems to care overmuch about the nearly naked Drider you’re leading into camp. Showing Lily around, her eyes latch onto a tree just outside the camp’s grounds.  \n\n"); 
 		outputText("<i>“You wouldn’t mind if I made my new home there, would you?”</i> You aren’t planning to use the tree, and so you shrug, telling her you had no plans for it. <i>“That’s perfect then!”</i> Lily bows to you, scuttling over to the tree, taking notes on the branches and their positions. <i>“I’ll have a home in no time at all!”</i>  \n\n"); 
 		outputText("Lily has joined your camp! \n\n"); 
+		LilyFollower (true);
 }
 
 public function LilyTyrantia3some():void {
@@ -190,16 +200,33 @@ public function LilyTyrantia3Lick():void {
 		outputText("The three of you sink into a slow grind, your folds dripping into Lily’s mouth, forcing her to push your leavings aside to breathe. You grind your folds into Lily’s face, wrapping your legs around her as she begins to buck underneath you.  \n\n"); 
 		outputText("Your bigger lover pulls her head back. <i>“Lover, would you mind it if I tended to your toy?”</i> Tyrantia asks sweetly. <i>“I think the poor thing’s just about out of energy”.</i> You nod, and Tyrantia pulls out of your embrace, her cunt drooling as your hand leaves. Tyrantia grabs her Dick, slowly, teasingly dragging the tip of it down Lily’s upper body, whacking her jiggly breasts before rubbing it against Lily’s sopping passage. Under you, Lily’s Spider-legs curl, not unlike a dead spider you saw on the windowsill, and she screams into your needy quim as Tyrantia slips her Dick into Lily’s box. \n\n"); 
 		outputText("<i>“Oh, this little bitch likes it, huh?”</i> Tyrantia asks, gripping the shaft with both hands. <i>“Good”</i>. She sinks her Dick in, nearly a foot at once. Lily sprays Tyrantia’s lower body with her fluids, but this just makes Tyrantia sink it in a little more, twisting before she pulls back and out. Without the Dick inside her, Lily’s legs spasm, and she nearly falls over.  \n\n"); 
-		outputText(" \n\n"); 
+		outputText("<i>“Oh, oh my.”</i> Lily breathes heavily, her face covered in your femcum. You climb off of your well-fucked toy, and she gasps for air. \n\n"); 
 		outputText(" \n\n"); 
 		
+		
 }
+
+public function LilyTyrantiaAfterFirst():void {
+		clearoutput();
+		outputText("<i>“Wh-who else was there? I...You’re my " + player.mf("master", "mistress") +", but I didn’t...I didn’t...want…Anyone else to-”</i> She takes the blindfold off, and her mouth flies open as she beholds your giantess lover beside you, licking Lily’s leavings off her Dick.  \n\n"); 
+		outputText("<i>“Oh, hey sis.”</i> Tyrantia says, swallowing some of her sister’s spunk. <i>“Fancy meeting you here.”</i>  \n\n");
+		outputText("Lily stares, dumbstruck, as Tyrantia grins, looming over her much smaller sister. <i>“What...how? What the hell? Is that all you could think to say?!”</i> She blinks. <i>“And was that your...Dick? Dildo? Spear?!”</i>  \n\n");
+		outputText("“Yeah...This is m’dick.” She leans down, wrapping her arms around Lily’s shoulders. “But honestly, I think you’re not really looking at the important stuff here.” She grins, wiping her arm on Lily’s back half. <i>“I…never thought I’d see you again.”</i> \n\n");
+		outputText("<i>“...You’re still not going to let me live this down…are you?”</i> Lily asks nervously. \n\n");
+		outputText("<i>“Nope!”</i> Tyrantia grins. <i>“And you’re not gonna let your big bad sis stop you from pleasing your "+ player.mf("master", "mistress") +", are you?”</i> Lily shakes her head, and looks at you. She’s still spunk-drunk, but visibly pulling herself back together. \n\n");
+		outputText("<i>“Now we’ve had our fun, can I show her around?”</i> Tyrantia asks, and you nod. Tyrantia takes her sister by the hand. <i>“Well, you’ve already sampled the best part, but the rest of this place isn’t bad either.”</i> The two Driders saunter towards Tyrantia’s section of camp.  \n\n");
+LilyFollower (true);
+doNext(camp.returnToCampUseOneHour);
+}
+
+
 public function LilyBringCamp():void {
 		clearoutput();
 		outputText("You bring Lily near your camp, and turn around again to look at your Drider-toy. Her legs are shaking, and her quad tits tremble as she’s working at her blindfold with her elbows. She manages to lever the blindfold off, and she looks at the camp with a somewhat impressed look on her face. <i>“"+ player.mf("master", "mistress") +", is this your camp?”</i> She asks, and you smile, taking your pet’s face in your hands.  \n\n"); 
 		outputText("You tell her that she’s going to stay at your camp from now on, and she’s going to like it. Lily trembles, her lower lips trembling and her six eyes lit up.  \n\n"); 
 		outputText("<i>“Truly "+ player.mf("master", "mistress") +"? You want your toy around?”</i> Lily shakes her upper body at you, making sure her chain rattles. <i>“What naughty things are you going to do to me?”</i> She gives you a rather lascivious smile. <i>“On second thought...Don’t tell me. Make it a surprise...MMmmm!!”</i> Lily charges off, setting her sights on a tree near the river. “I’ll make myself a little nest, and then we’ll...Oh, I am going to love it here!”  \n\n"); 
 		outputText("You give Lily a gentle shove, and she nods, understanding what you mean. She runs towards a tree near the river, not far from camp. You head back into camp, and as you turn back towards Lily’s Tree, you can already see her spinning out threads. Lily’s now joined you at camp! \n\n"); 
+		LilyFollower (true);
 		doNext(camp.returnToCampUseOneHour);
 }
 
@@ -591,6 +618,7 @@ addButton (1, "Etna", LilyExEtna);
 addButton (2, "Electra", LilyExElectra);
 addButton (3, "Izma/el", LilyExIzma);
 addButton (4, "Joy", LilyExJoy);
+}
 
 public function LilyCampFollower():void {
 		clearoutput();
@@ -623,6 +651,8 @@ public function LilyCampBack):void {
 		addButton (2, "Sex", LilyFollowerSex);
 		addButton (3, "House", LilyHouse);
 		addButton (4, "Spar", LilySpar);
+}
+
 		
 	}
 }
