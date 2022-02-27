@@ -7,10 +7,11 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 import classes.Scenes.Places.TrollVillage;
-public class Jabala extends TrollVillageAbstractContent{
+public class Jabala extends TrollVillageAbstractContent {
     public function Jabala() {
     }
-    public function MeetTheParents():void{
+
+    public function MeetTheParents():void {
         //Side note, not loving the multiple outputTexts here, but the alternative of "" + "" is also not ideal...
         outputText("Zenji grabs your hand, \"Follow me [name], dere’s… dere’s something I need to do first…\"\n\n");
         outputText("Zenji gently, but hurriedly drags you along toward a hut. Zenji takes a deep breath before knocking on the wooden door.\n\n");
@@ -28,7 +29,7 @@ public class Jabala extends TrollVillageAbstractContent{
         outputText("There’s a small couch for you and Zenji to sit on as Halkano is seemingly too big for it now. Halkano seats himself on a sturdy seat as Jabala rests on his lap.\n\n" +
                 "Zenji spends some time talking about how the two of you met as he catches up with his parents.\n\n");
 
-        if (flags[kFLAGS.ZENJI_KIDS] != 0){
+        if (flags[kFLAGS.ZENJI_KIDS] != 0) {
             outputText("Zenji mentions that he’s already had children with you.\n\n");
             outputText("Jabala’s face illuminates as she leaps off Halkano’s lap, \"Oh, Zenji! I am so proud of you, really need to bring them here one day.\"\n\n");
             outputText("\"Now, now, Jabala,\" Halkano interjects,  \"Dey’re just babies if anyting we have ta visit dem because it’s too dangerous ta carry babies outside of de village.\"\n\n");
@@ -45,16 +46,15 @@ public class Jabala extends TrollVillageAbstractContent{
         doNext(camp.returnToCampUseOneHour);
     }
 
-    public function JabalaDining():void{
+    public function JabalaDining():void {
         clearOutput();
         menu();
-        if (TrollVillage.ZenjiBerated){
+        if (TrollVillage.ZenjiBerated) {
             outputText("You decide to approach Jabala, but before you get too close she notices you and stands up.\n" +
                     "\n" +
                     "\"You think this is a game? Toying with my sweet little boy? Stay away from my family!\" She cries.\n");
             doNext(SceneLib.trollVillage.diningHalls.GrabABite2Eat);
-        }
-        else if (!TrollVillage.ZenjiFollowing && !TrollVillage.JabalaUnlocked){
+        } else if (!TrollVillage.ZenjiFollowing && !TrollVillage.JabalaUnlocked) {
             outputText("Your gaze roams around until you decide to approach the small troll with long braided hair sitting by herself. She seems very tomboyish in appearance, clad in a simple farmers outfit with a straw hat adorned around her crown. Her svelte body is considerably smaller than almost any troll you’ve seen so far, but she’s still at least 6 feet tall. As you get closer you notice that she’s drinking the fig juice, she sets the cup down as her attention turns toward you.\n" +
                     "\n" +
                     "\"Oh? Have I seen you around here before?. You don’t look like the others. What’s your name?\"\n" +
@@ -68,8 +68,7 @@ public class Jabala extends TrollVillageAbstractContent{
                     "Once she’s gone you figure that you can go outside and perhaps check on the other activities around the village\n");
             outputText("Jabala’s Hut has been added to the troll village!\n");
             doNext(camp.returnToCampUseOneHour);
-        }
-        else if (!TrollVillage.ZenjiFollowing){
+        } else if (!TrollVillage.ZenjiFollowing) {
             outputText("Your gaze roams around until you decide to approach Jabala. Deciding that you want to talk to her again, you decide to approach her.\n" +
                     "\n" +
                     "She is currently staring off into the distance, unaware of her surroundings as her half-full cup of juice rests beside her.\n" +
@@ -79,10 +78,9 @@ public class Jabala extends TrollVillageAbstractContent{
                     "You assure her that things could be worse.\n" +
                     "\n" +
                     "\"Oh, well, I hope things will turn out for the best around you. Come, sit, was there something you wanted to talk about?\"\n");
-            addButton(0,"Herself", JabalaSelfIntro);
-            addButton(1,"The People", JabalaGossip);
-        }
-        else{
+            addButton(0, "Herself", JabalaSelfIntro);
+            addButton(1, "The People", JabalaGossip);
+        } else {
             outputText("Your gaze shifts around before spotting Jabala sitting by herself in the diner. You ask Zenji if he wants to meet up with his mother.\n" +
                     "\n" +
                     "Zenji grasps onto your hand. \"Sure, dat sounds nice, [name]. De three of us can have a chat together.\" \n" +
@@ -109,7 +107,7 @@ public class Jabala extends TrollVillageAbstractContent{
             doNext(SceneLib.trollVillage.EnterTheVillage);
         }
 
-        function JabalaSelfIntro():void{
+        function JabalaSelfIntro():void {
             outputText("You tell Jabala that you want to get to know her better, she seems like an interesting person after all. Who is she, what does she do?\n" +
                     "\n" +
                     "\"About myself... Hmm…\" Jabala pauses for a moment, looking off into the distance, \"Well, I am a farmer by profession and a gardener in my free time. I mostly grow greens, and figs… lots of figs… I guess trolls really like their figs, don’t they?\"\n" +
@@ -117,7 +115,7 @@ public class Jabala extends TrollVillageAbstractContent{
                     "Jabala snickers to herself, \"Yeah, all the farming is what led me to the man of my dreams… My husband, Halakno, Such a big... Strong carpenter…\" She says, blushing slightly, \"It just kind of happened. I lost all control when I was near him and he didn’t resist my advance.\"\n" +
                     "\n" +
                     "\"It wasn’t until long until we got married and had our first child together, we loved him with all our hearts, but…");
-            if (TrollVillage.ZenjiVillageStage > 0){
+            if (TrollVillage.ZenjiVillageStage > 0) {
                 outputText(" Thanks to you I know he’s safe.");
             }
             outputText("\"\n\n" +
@@ -129,21 +127,21 @@ public class Jabala extends TrollVillageAbstractContent{
             doNext(camp.returnToCampUseOneHour);
         }
 
-        function JabalaGossip():void{
+        function JabalaGossip():void {
             outputText("You ask Jabala about the people of the village, she seems fairly sociable for a farmer.\n" +
                     "\n" +
                     "\"The people here are pleasant to talk to… for the most part. Gossip is hard to come by because most people are into their own things, but I tell you, I’ve been hearing a lot of whispers going around about this gay guy… I don’t personally know any gay guys around here, but I hear this guy is almost like a predator for other men. Just what I heard though. Oh, the seamstress, oh no, the seamstress. Don’t talk to her, she has a nose for trouble and should keep her hands to herself. If she ever talks to you, don’t talk to her. Almost reminds me of the elder. All she does is tuck herself into her own thing, disregarding the pleas of others and is generally unaware of the world around her. She’s not bad at keeping rules governed and keeping the rest of the elders in balance, but she’s also hard to even listen to.\"\n" +
                     "\n" +
                     "Jabala’s gaze sets off into the distance for a moment before her eyes roll back to you. \"Where was I..? Oh, is there anything else you had in mind?\"\n");
 
-            addButton(0,"Gay troll", JabalaHomoSexTalks);
+            addButton(0, "Gay troll", JabalaHomoSexTalks);
             addButton(1, "Seamstress", JabalaSeamstress);
-            addButton(2,"Elder", JabalaElder);
-            addButton(3,"Love Life?",JabalaLoveLife);
-            addButton(4,"Leave",JabalaLeave);
+            addButton(2, "Elder", JabalaElder);
+            addButton(3, "Love Life?", JabalaLoveLife);
+            addButton(4, "Leave", JabalaLeave);
         }
 
-        function JabalaLeave():void{
+        function JabalaLeave():void {
             outputText("You tell Jabala that you enjoyed talking to her, but there’s nothing else you wanted to talk about.\n" +
                     "\n" +
                     "\"Oh, carry on then. I’ll be here with my thoughts.\"\n" +
@@ -152,7 +150,7 @@ public class Jabala extends TrollVillageAbstractContent{
             doNext(camp.returnToCampUseOneHour);
         }
 
-        function JabalaHomoSexTalks():void{
+        function JabalaHomoSexTalks():void {
             outputText("You want to hear more about this gay troll because apparently homosexuality is very uncommon among trolls.\n" +
                     "\n" +
                     "\"Oh, it is.\" She responds. \"Rumor has it’s the elder Kal'ji. ¡Qué cabro! He totally has the hots for this one farmer. Or so I’ve heard…\"\n" +
@@ -165,7 +163,7 @@ public class Jabala extends TrollVillageAbstractContent{
             doNext(camp.returnToCampUseOneHour);
         }
 
-        function JabalaSeamstress():void{
+        function JabalaSeamstress():void {
             outputText("You want to hear more about the seamstress, did she actively cause trouble?\n" +
                     "\n" +
                     "Jabala sighs, \"Puta de chongo. Yenza has been on the hunt for many men. She attacked my son and if I didn’t stop them, then I don’t know what could’ve happened. I don’t want to talk about that girl anymore. I should get going anyway\"\n" +
@@ -176,7 +174,7 @@ public class Jabala extends TrollVillageAbstractContent{
             doNext(camp.returnToCampUseOneHour);
         }
 
-        function JabalaElder():void{
+        function JabalaElder():void {
             outputText("You want to hear more about the elder, what makes her so difficult?\n" +
                     "\n" +
                     "\"Yubi? She’s mostly in her own world, thinking about what’s best and doing what she would like to do. Sometimes she tries and looks out for the people, but it’s difficult to know if she’s doing it for everyone or herself.\"\n" +
@@ -189,7 +187,7 @@ public class Jabala extends TrollVillageAbstractContent{
             doNext(camp.returnToCampUseOneHour);
         }
 
-        function JabalaLoveLife():void{
+        function JabalaLoveLife():void {
             outputText("You want to hear more about her husband, is he that special to her?\n" +
                     "\n" +
                     "Jabala blushes softly, \"Halkano, mi amor…\" Her gaze sets off into the distance, completely ignoring you.\n" +
@@ -203,10 +201,10 @@ public class Jabala extends TrollVillageAbstractContent{
         }
     }
 
-    public function JabalaHome():void{
+    public function JabalaHome():void {
         clearOutput();
         menu();
-        if (TrollVillage.ZenjiVillageStage == 4 && TrollVillage.ZenjiFollowing){
+        if (TrollVillage.ZenjiVillageStage == 4 && TrollVillage.ZenjiFollowing) {
             outputText("Zenji knocks on the door to the hut.\n" +
                     "\n" +
                     "You hear light footsteps approach as Jabala moves the door aside.\n" +
@@ -236,28 +234,25 @@ public class Jabala extends TrollVillageAbstractContent{
                     "\"Let’s go home, [name]. Thanks, mom... for everything.\"\n" +
                     "\n" +
                     "Jabala gives a soft smile, \"Anything for you, Zenji.\" She replies before giving you a wink as the two of you head out.");
-            player.createKeyItem("Jabala's Charm",0,0,0,0);
+            player.createKeyItem("Jabala's Charm", 0, 0, 0, 0);
             TrollVillage.ZenjiVillageStage = 5;
             doNext(camp.returnToCampUseOneHour);
-        }
-        else if (!TrollVillage.ZenjiFollowing){
+        } else if (!TrollVillage.ZenjiFollowing) {
             outputText("You knock on the door to Jabala’s hut, after a moment you hear very loud footsteps approaching. A massive, burly troll opens the door.\n");
-            if (!TrollVillage.HalkanoUnlocked){
+            if (!TrollVillage.HalkanoUnlocked) {
                 outputText("He gives you an inquisitive look but quickly shifts to a polite smile. \"Greetings, you must be one of Jabala’s friends. I am Halkano.\" He stretches an arm out to shake your hand.\n" +
                         "\n" +
                         "You shake his hand and tell him your name.\n" +
                         "\n" +
                         "\"Nice ta meetcha, [name].\"\n");
-            }
-            else{
+            } else {
                 outputText("He gives you a polite smile, \"[name]! Good ta see ya again, come in, come in!\"\n\n");
             }
             outputText("He gestures for you to enter the hut, \"What brings ya here?\"\n");
-            addButton(0,"Halkano", JabalaHalkanoTalk, true);
-            addButton(1,"Jabala", JabalaSelfTalk, true);
-            addButton(2,"Nevermind", JabalaNVM);
-        }
-        else if (TrollVillage.ZenjiFollowing){
+            addButton(0, "Halkano", JabalaHalkanoTalk, true);
+            addButton(1, "Jabala", JabalaSelfTalk, true);
+            addButton(2, "Nevermind", JabalaNVM);
+        } else if (TrollVillage.ZenjiFollowing) {
             outputText("Zenji knocks on the door to his parent’s hut.\n" +
                     "\n" +
                     "You heard loud footsteps approaching before the door opens. Halkano stands at the doorway scratching his beard. His face lights up as he sees the two of you.\n" +
@@ -290,14 +285,14 @@ public class Jabala extends TrollVillageAbstractContent{
                     "\n" +
                     "You consider what you want to talk about anyway.\n");
             addButton(0, "Money Troubles", JabalaMoneyHelp);
-            addButton(1,"Love Advice", JabalaLoveAdvice);
+            addButton(1, "Love Advice", JabalaLoveAdvice);
             addButton(2, "Gossip", JabalaGossip);
-            addButton(3,"Sex", JabalaSexWZenji);
+            addButton(3, "Sex", JabalaSexWZenji);
             addButton(4, "Leave", JabalaSayonara);
 
-            function JabalaMoneyHelp():void{
+            function JabalaMoneyHelp():void {
                 clearOutput();
-                if(TrollVillage.ZenjiMoneyHelp == 0){
+                if (TrollVillage.ZenjiMoneyHelp == 0) {
                     TrollVillage.ZenjiMoneyHelp = 24;
                     outputText("You state that there have been financial problems with you and Zenji\n" +
                             "\n" +
@@ -330,8 +325,7 @@ public class Jabala extends TrollVillageAbstractContent{
                             "You pocket the 45 gems before leaving with Zenji.\n");
                     player.gems += 45;
                     doNext(camp.returnToCampUseOneHour);
-                }
-                else{
+                } else {
                     outputText("You state that there have been financial problems with you and Zenji\n" +
                             "\n" +
                             "Zenji looks shocked at your statement, he quickly places his hand over your mouth, shushing you.\n" +
@@ -353,7 +347,7 @@ public class Jabala extends TrollVillageAbstractContent{
                 }
             }
 
-            function JabalaLoveAdvice():void{
+            function JabalaLoveAdvice():void {
                 outputText("You ask for advice on what makes a relationship strong and healthy like theirs seems to be.\n" +
                         "\n" +
                         "Zenji raises an eyebrow at you.\n" +
@@ -371,10 +365,9 @@ public class Jabala extends TrollVillageAbstractContent{
                         "Zenji nods his head as he absorbs the information.\n" +
                         "\n" +
                         "\"The two of you just need to spend time together, get to know each other. [name]. I’m sure you know that Zenji is only 20 years old, right?\"\n");
-                if (TrollVillage.JabalaLoveChat){
+                if (TrollVillage.JabalaLoveChat) {
                     outputText("As you recall, Zenji is very young.");
-                }
-                else{
+                } else {
                     outputText("Well, you do now, this is very much news to you.\n" +
                             "\n" +
                             "You turn to Zenji, giving him an inquisitive stare.\n" +
@@ -423,7 +416,7 @@ public class Jabala extends TrollVillageAbstractContent{
                 doNext(camp.returnToCampUseOneHour);
             }
 
-            function JabalaGossip():void{
+            function JabalaGossip():void {
                 clearOutput();
                 outputText("You say that you just wanted to spend some time with them and share stories.\n" +
                         "\n" +
@@ -432,7 +425,7 @@ public class Jabala extends TrollVillageAbstractContent{
                         "Halkano speaks up, \"I tink I have a few tings ta talk about, what d’ya say, honey?\"\n" +
                         "\n" +
                         "\"Sharing stories is fun, gives me time to reflect on what’s been going on lately.\" She responds.");
-                switch(rand(4)){
+                switch (rand(4)) {
                     case 0:
                         outputText("Halkano speaks first, \"Do you remember dat one time at de diner, Jabala? When you saw Yenza drinking her juice.\"\n" +
                                 "\n" +
@@ -484,7 +477,7 @@ public class Jabala extends TrollVillageAbstractContent{
                         break;
                 }
                 outputText("\"Well, enough about that. What about you? Zenji? [name]? Anything going on back at your place?\" Jabala asks\n");
-                switch(rand(5)){
+                switch (rand(5)) {
                     case 0:
                         outputText("\"Actually,\" Zenji responds before you have a chance to speak up, \"Whenever we sleep together, I noticed someting adorable. Whenever I can’t sleep, I will caress your face and you never fail to lean into my palm.\"\n" +
                                 "\n" +
@@ -535,7 +528,7 @@ public class Jabala extends TrollVillageAbstractContent{
                 doNext(camp.returnToCampUseOneHour);
             }
 
-            function JabalaSexWZenji():void{
+            function JabalaSexWZenji():void {
                 clearOutput();
                 outputText("You gesture for Zenji to lean closer to you. He does so without hesitation. You ask him quietly if he’s willing to get intimate with his parents right now.\n");
                 if (player.lib < 80) outputText("Zenji looks at you, disappointed. \"No, let’s… not do dat…\"\n");
@@ -544,7 +537,7 @@ public class Jabala extends TrollVillageAbstractContent{
                 doNext(SceneLib.trollVillage.EnterTheVillage);
             }
 
-            function JabalaSayonara():void{
+            function JabalaSayonara():void {
                 clearOutput();
                 outputText("You realize that you have nothing left to talk about right now. You apologize to Zenji and his parents for wasting their time.\n" +
                         "\n" +
@@ -561,7 +554,7 @@ public class Jabala extends TrollVillageAbstractContent{
             }
         }
 
-        function JabalaNVM():void{
+        function JabalaNVM():void {
             outputText("You realize that you don’t want to be here at this time and apologize for wasting his time.\n" +
                     "\n" +
                     "\"It’s alright, tings happen, I understand. Stay safe\"\n" +
@@ -571,9 +564,9 @@ public class Jabala extends TrollVillageAbstractContent{
         }
     }
 
-    public function JabalaHalkanoTalk(desc:Boolean = false):void{
+    public function JabalaHalkanoTalk(desc:Boolean = false):void {
         clearOutput();
-        if (desc){
+        if (desc) {
             outputText("You tell Halkano that you wanted to talk with him for now.\n" +
                     "\n" +
                     "\"Ah? Is dat so?\" Halkano responds as he rests on the couch.\n" +
@@ -583,16 +576,16 @@ public class Jabala extends TrollVillageAbstractContent{
                     "\"What is dere ya wanted ta talk about?\"\n");
         }
         menu();
-        addButton(0,"Appearance", SceneLib.trollVillage.halkano.HalkanoAppearance);
+        addButton(0, "Appearance", SceneLib.trollVillage.halkano.HalkanoAppearance);
         addButton(1, "Gossip", JabalaHalkanoGossip);
         addButton(2, "Sex", SceneLib.trollVillage.halkano.JHalkanoSexScenes);
 
 
-        function JabalaHalkanoGossip():void{
+        function JabalaHalkanoGossip():void {
             outputText("You ask Halkano if he has anything interesting to talk about.\n" +
                     "\n" +
                     "\"Ah, ya want ta hear some stories, do ya? I think I can recall some weird stuff going on lately.\"\n");
-            switch (rand(4)){
+            switch (rand(4)) {
                 case 0:
                     outputText("\"Yenza asked me ta help build her a table for her tailing store… Honestly, de nerve of some people! I told her ta get lost, I’m neva doing anyting for her, ever and left de diner. Honestly, I’m sure she was looking fa more dan just my work, I tink she wanted de entire package.\"");
                     break;
@@ -620,9 +613,9 @@ public class Jabala extends TrollVillageAbstractContent{
 
     }
 
-    private function JabalaSelfTalk(desc:Boolean = false):void{
+    private function JabalaSelfTalk(desc:Boolean = false):void {
         clearOutput();
-        if (desc){
+        if (desc) {
             outputText("You tell Halkano that you wanted to talk to Jabala right now.\n" +
                     "\n" +
                     "\"Alright, she’s in de back yard taking care of her garden. I’ll lead de way.\"\n" +
@@ -644,16 +637,16 @@ public class Jabala extends TrollVillageAbstractContent{
                     "Jabala now gives you her attention, \"Is there something you wanted..?\"\n");
         }
         menu();
-        addButton( 0, "Appearance", JabalaAppearance);
+        addButton(0, "Appearance", JabalaAppearance);
         addButton(1, "Gossip", JabalaGossip);
         addButton(2, "Sex", JabalaSex);
 
-        function JabalaGossip():void{
+        function JabalaGossip():void {
             clearOutput();
             outputText("You ask Jabala if she has anything interesting to talk about.\n" +
                     "\n" +
                     "\"¡Qué roche! I should’ve brought some tea!\" Jabala sighs, \"Ah, well, we can still talk without any. Things have been a little weird lately.\"\n");
-            switch(rand(5)){
+            switch (rand(5)) {
                 case 0:
                     outputText("\"It happened not too long ago. Yenza was flashing my husband the crazy eye. We had a staring contest in the middle of the diner and Halkano had to drag me out of the place. I’ll never forgive that bitch for raping my son.\"\n" +
                             "\n" +
@@ -674,10 +667,9 @@ public class Jabala extends TrollVillageAbstractContent{
                     break;
                 default:
                     outputText("Jabala looks down at her garden intently, \"Sometimes when I’m getting stressed out, I like to have time to myself, just me and my plants. It’s nice to have company I guess, especially from my husband. Although, it’s like my garden understands me, the way they rustle in the wind at my approach. Springing to life under the rain of my watering can. They’re almost like my children…\" \n");
-                    if (TrollVillage.ZenjiVillageStage >= 1){
+                    if (TrollVillage.ZenjiVillageStage >= 1) {
                         outputText("She sighs softly in relief. \"Thank you… Seeing Zenji again means a lot to me.\"\n");
-                    }
-                    else{
+                    } else {
                         outputText("Jabala sheds a tear.\n");
                     }
                     break;
@@ -689,7 +681,7 @@ public class Jabala extends TrollVillageAbstractContent{
 
     }
 
-    private function JabalaSex():void{
+    private function JabalaSex():void {
         clearOutput();
         outputText("You ask Jabala if she’s willing to get a little more intimate with you.\n" +
                 "\n" +
@@ -711,12 +703,12 @@ public class Jabala extends TrollVillageAbstractContent{
                 "\n" +
                 "You consider what you want to do now with the two of them.\n");
         menu();
-        if (player.hasCock || player.hasVagina) addButton(0, "SpitRoast", JabalaSpitroasted);
-        else addButtonDisabled(0,"SpitRoast", "You don't have a \"chicken\" or a \"cat\" for Jabala to \"eat\"!");
+        if (player.hasCock() || player.hasVagina()) addButton(0, "SpitRoast", JabalaSpitroasted);
+        else addButtonDisabled(0, "SpitRoast", "You don't have a \"chicken\" or a \"cat\" for Jabala to \"eat\"!");
         addButton(1, "Double Worship", JabalaDWorship);
         addButton(2, "Nevermind", JabalaBlueBalls);
 
-        function JabalaBlueBalls():void{
+        function JabalaBlueBalls():void {
             clearOutput();
             outputText("You apologize and say that you aren’t too keen on the idea anymore.\n" +
                     "\n" +
@@ -728,7 +720,7 @@ public class Jabala extends TrollVillageAbstractContent{
             doNext(camp.returnToCampUseOneHour);
         }
 
-        function JabalaSpitroasted():void{
+        function JabalaSpitroasted():void {
             outputText("Since there’s three of you, you tell them that You think that the two of you could get to work on Jabala.\n" +
                     "\n" +
                     "Halkano raises an eyebrow, \"Sandwich Jabala between us..?\"\n" +
@@ -740,7 +732,7 @@ public class Jabala extends TrollVillageAbstractContent{
                     "\"She’s into it, but I’ll be de one penetrating her. You can get blown.\"\n" +
                     "\n" +
                     "You figure that’s to be expected, but receiving oral could be worse.\n");
-            if (player.hasCock) {
+            if (player.hasCock()) {
                 outputText("Halkano slowly unbuttons Jabala’s shirt for her, tossing it aside as he removes the rest of her clothing. Once she’s naked she helps Halkano slide out of his pants.\n" +
                         "\n" +
                         "Once everyone is naked Halkano kneels at the edge of the bed, pulling her to him. Jabala is lying stomach down on the mattress, wrapping her legs around Halkano as he aligns his girth with her vagina.\n" +
@@ -770,42 +762,41 @@ public class Jabala extends TrollVillageAbstractContent{
                         "After a moment passes you decide that it’s best to get going, you say your goodbyes before packing up your stuff and leaving them.\n" +
                         "\n" +
                         "Halkano gives you a lazy wave goodbye as Jabala nestles herself comfortably against him.\n");
+            } else {
+                outputText("Halkano slowly unbuttons Jabala’s shirt for her, tossing it aside as he removes the rest of her clothing. Once she’s naked she helps Halkano slide out of his pants.\n" +
+                        "\n" +
+                        "Once everyone is naked Halkano kneels at the edge of the bed, pulling her to him. Jabala is lying stomach down on the mattress, wrapping her legs around Halkano as he aligns his girth with her vagina.\n" +
+                        "\n" +
+                        "You kneel in front of Jabala, your vagina is wet and dripping occasional beads of lubricant in anticipation for her. Jabala grabs hold of your waist for support as she brings her head to your netherlips, cautiously rubbing the underside of your clit with her long, grey tongue. Once Halkano is content with his lubrication, you can feel the bed shake as he begins thrusting. Jabala moans loudly as her body is rocked by the force of his humping.\n" +
+                        "\n" +
+                        "She presses her face against your crotch, desperately stimulating your clitoris before she digs her tongue past your lips. Her hand glides down next to her tongue as she slowly probes at your clit with her svelte fingers.\n" +
+                        "\n" +
+                        "Jabala is constantly thrusted against you as she continues eating you out. Her soft moans reverberate through you as she struggles to maintain a steady rhythm on you. She is making an attempt and is knowledgeable in where to dig her tongue to coax some pleasured moans from you.\n" +
+                        "\n" +
+                        "You gently rub your breasts with one hand, fondling yourself gently.\n" +
+                        "\n" +
+                        "You can hear Halkano growling softly as he slowly picks up the pace, getting closer to his orgasm. You can sense your climax rolling up as well.\n" +
+                        "\n" +
+                        "Jabala moans in pleasure, tensing her grip on you as she rolls her tongue around your inner walls. Halkano’s growling steadily grows louder as he continues thrusting against her. Jabala cries out softly as her orgasm hits, a sweet scent fills the room.\n" +
+                        "\n" +
+                        "Pressure builds up within your loins as Jabala continues teasing your clit with her soft fingers. You clench around her tongue as you cum. Your girlcum flows down onto her tongue, spilling out onto the bed below her.\n" +
+                        "\n" +
+                        "Halkano roars with force as he cums as well, thrusting into Jabala with greater vigor, causing her to press her face up against your box.\n" +
+                        "\n" +
+                        "You lie down on the bed, sighing in relief as your orgasm dissipates. Jabala moans softly, satisfied with the loving her husband gave her, and happy to know that she managed to get you off as well.\n" +
+                        "\n" +
+                        "Halkano is slowly pounding away at Jabala, still leaking copious amounts of cum before he finally relaxes.\n" +
+                        "\n" +
+                        "He picks you up along with his wife as the three of you take a moment to collect yourselves, lying beside each other.\n" +
+                        "\n" +
+                        "After a moment passes you decide that it’s best to get going, you say your goodbyes before packing up your stuff and leaving them.\n" +
+                        "\n" +
+                        "Halkano gives you a lazy wave goodbye as Jabala nestles herself comfortably against him.\n");
             }
-            else{
-                    outputText("Halkano slowly unbuttons Jabala’s shirt for her, tossing it aside as he removes the rest of her clothing. Once she’s naked she helps Halkano slide out of his pants.\n" +
-                            "\n" +
-                            "Once everyone is naked Halkano kneels at the edge of the bed, pulling her to him. Jabala is lying stomach down on the mattress, wrapping her legs around Halkano as he aligns his girth with her vagina.\n" +
-                            "\n" +
-                            "You kneel in front of Jabala, your vagina is wet and dripping occasional beads of lubricant in anticipation for her. Jabala grabs hold of your waist for support as she brings her head to your netherlips, cautiously rubbing the underside of your clit with her long, grey tongue. Once Halkano is content with his lubrication, you can feel the bed shake as he begins thrusting. Jabala moans loudly as her body is rocked by the force of his humping.\n" +
-                            "\n" +
-                            "She presses her face against your crotch, desperately stimulating your clitoris before she digs her tongue past your lips. Her hand glides down next to her tongue as she slowly probes at your clit with her svelte fingers.\n" +
-                            "\n" +
-                            "Jabala is constantly thrusted against you as she continues eating you out. Her soft moans reverberate through you as she struggles to maintain a steady rhythm on you. She is making an attempt and is knowledgeable in where to dig her tongue to coax some pleasured moans from you.\n" +
-                            "\n" +
-                            "You gently rub your breasts with one hand, fondling yourself gently.\n" +
-                            "\n" +
-                            "You can hear Halkano growling softly as he slowly picks up the pace, getting closer to his orgasm. You can sense your climax rolling up as well.\n" +
-                            "\n" +
-                            "Jabala moans in pleasure, tensing her grip on you as she rolls her tongue around your inner walls. Halkano’s growling steadily grows louder as he continues thrusting against her. Jabala cries out softly as her orgasm hits, a sweet scent fills the room.\n" +
-                            "\n" +
-                            "Pressure builds up within your loins as Jabala continues teasing your clit with her soft fingers. You clench around her tongue as you cum. Your girlcum flows down onto her tongue, spilling out onto the bed below her.\n" +
-                            "\n" +
-                            "Halkano roars with force as he cums as well, thrusting into Jabala with greater vigor, causing her to press her face up against your box.\n" +
-                            "\n" +
-                            "You lie down on the bed, sighing in relief as your orgasm dissipates. Jabala moans softly, satisfied with the loving her husband gave her, and happy to know that she managed to get you off as well.\n" +
-                            "\n" +
-                            "Halkano is slowly pounding away at Jabala, still leaking copious amounts of cum before he finally relaxes.\n" +
-                            "\n" +
-                            "He picks you up along with his wife as the three of you take a moment to collect yourselves, lying beside each other.\n" +
-                            "\n" +
-                            "After a moment passes you decide that it’s best to get going, you say your goodbyes before packing up your stuff and leaving them.\n" +
-                            "\n" +
-                            "Halkano gives you a lazy wave goodbye as Jabala nestles herself comfortably against him.\n");
-                }
-                doNext(camp.returnToCampUseOneHour);
-            }
+            doNext(camp.returnToCampUseOneHour);
         }
-        function JabalaDWorship():void{
+
+        function JabalaDWorship():void {
             outputText("You ask Jabala if she’s willing to help you \"assist\" Halkano with his needs.\n" +
                     "\n" +
                     "Jabala turns to Halkano and he gives her a devious grin, \"Well, two on one, how about dat..?\"\n" +
@@ -849,6 +840,7 @@ public class Jabala extends TrollVillageAbstractContent{
                     "After a moment in the afterglow, Halkano helps clean you up before you take up your things and leave. Jabala is nestled against him in his bed as, resting quietly as Halkano gives you a wave goodbye.\n");
             doNext(camp.returnToCampUseOneHour);
         }
+    }
 
     private function JabalaAppearance():void{
         clearOutput();

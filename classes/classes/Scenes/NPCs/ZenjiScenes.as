@@ -3049,7 +3049,7 @@ import coc.view.ButtonDataList;
 		private function ZenjiMarriageSceneCuatro(choice:int):void{
 			var spchk:Boolean = false;
 			if (choice == 2){
-				if (player.isPregnant){
+				if (player.isPregnant()){
 					if (silly()){
 						outputText("It's all coming to plan, oooh, the tax benefits will be so good! You tell him you want a divorce, you're keeping the children, and he's paying for your child support.\n" +
 								"\n" +
@@ -3292,13 +3292,13 @@ import coc.view.ButtonDataList;
 					outputText("You have been waiting for someone you truly loved before giving it all away.");
 				}
 				outputText("Zenji gives a contented smile, “I’ve been waiting all night for ya [name]. I love you, and now I’m gonna show you just how much I mean by dat.” He licks his hand seductively before lathering his length in his spit, then aligning his manhood with your rear. His strong hand gropes at your cheeks, getting you prepared for his entrance.\n");
-				if (player.analCapacity < 7){
+				if (player.analCapacity() < 7){
 					if (player.ass.analLooseness == AssClass.LOOSENESS_VIRGIN){
 						outputText("“You have waited your entire life for dis, [name]... Dat takes some real dedication. Now I will show you how a real troll makes love.”\n");
 					}
 					outputText("His lengthy shaft presses its way deep inside of your tight anus, you feel yourself stretch over his considerable manhood. \n");
 				}
-				else if (player.analCapacity < 55){
+				else if (player.analCapacity() < 55){
 					outputText("His lengthy shaft presses into you, you can feel him accommodating your [ass] as he presses further and further with each thrust\n");
 				}
 				else{
@@ -3356,10 +3356,10 @@ import coc.view.ButtonDataList;
 						"You take in a deep sigh, you’ve waited all night for this moment, and now you have your husband all to yourself. Your lips are already more than wet, ready for entry.\n" +
 						"\n" +
 						"Zenji aligns his shaft just above your sex, slowly rubbing his girth against your lips. His length twitches occasionally in anticipation. You squirm beneath him, desperate for his manhood. After what feels like an eternity of continued teasing, Zenji finally presses his tip against your lips.\n");
-				if (player.vaginalCapacity <= 9){
+				if (player.vaginalCapacity() <= 9){
 					outputText("His manhood presses into your tight snatch, gently stretching out your walls. He feels so big inside you as he makes his way into you.\n");
 				}
-				else if (player.vaginalCapacity < 79){
+				else if (player.vaginalCapacity() < 79){
 					outputText("His manhood presses into your moist snatch, gently pressing his way into you. He feels so good inside you as he presses deeper, gently bucking into you.\n");
 				}
 				else{
@@ -3446,7 +3446,7 @@ import coc.view.ButtonDataList;
 					outputText("So much cum is being released by him, practically painting the bed beneath him white.");
 				}
 				outputText(" A familiar pressure builds within your loins as he tries to milk you of everything you’re worth. You groan loudly as you cum inside of his awaiting hole.\n");
-				if (player.cumCapacity > 3500){
+				if (player.cumCapacity() > 3500){
 					outputText(" Your load is massive as you continuously pump more cum into him. Zenji moans softly as his stomach distends slightly from the force of your efforts.\n" +
 							"\n" +
 							"\n" +

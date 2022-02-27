@@ -323,10 +323,10 @@ public class Halkano extends TrollVillageAbstractContent{
                     "You hover over his backdoor, teasing the tip of his length with your behind.\n" +
                     "\n" +
                     "Halkano grabs onto your hips with his firm hands, pulling you down onto him. You gasp slightly in surprise, but he’s needy for you now.\n");
-            if (player.analCapacity < 7){
+            if (player.analCapacity() < 7){
                 outputText("His lengthy shaft presses its way deep inside of your tight backdoor, you feel yourself stretch over his massive manhood.\n");
             }
-            else if (player.analCapacity < 55){
+            else if (player.analCapacity() < 55){
                 outputText("His lengthy shaft presses into you, you can feel him accommodating your ass as he presses further and further with each thrust\n");
             }
             else{
@@ -341,10 +341,10 @@ public class Halkano extends TrollVillageAbstractContent{
                     "You moan in pleasure, leaning down over him, pressing your body against his burly torso. You hold onto him tightly as he continues pounding away at you.\n" +
                     "\n" +
                     "Your body is pressed against the soothing warmth of his fur and you can feel yourself getting closer. You cry in pleasure as your orgasm hits. \n");
-            if (player.hasVagina){
+            if (player.hasVagina()){
                 outputText("Girlcum leaks from your vagina, spilling out past your lips and onto him.\n");
             }
-            if (player.hasCock){
+            if (player.hasCock()){
                 outputText("Your erection twitches before finally cumming, spraying jizz all over his chest.\n");
             }
             outputText("Halkano growls louder, clutching onto you tightly as he cums. Jets of his warm seed shoot into your back door. You clench your sphincter over his throbbing girth, trying to milk him of everything he has to offer you. His orgasm is aggressive, you couldn’t hope to take all the cum he has to offer.\n" +
