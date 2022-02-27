@@ -2245,7 +2245,6 @@ use namespace CoC;
 			if(hasStatusEffect(StatusEffects.BlessingOfDivineFera)) lust *= .85;
 			//Luststick reduces lust gain by 10% to match increased min lust
 			if(hasPerk(PerkLib.LuststickAdapted)) lust *= 0.9;
-			if(hasStatusEffect(StatusEffects.Berzerking)) lust *= .6;
 			if (hasPerk(PerkLib.PureAndLoving)) lust *= 0.95;
 			//Berseking reduces lust gains by 10%
 			if (hasStatusEffect(StatusEffects.Berzerking)) lust *= 0.9;
@@ -2280,6 +2279,21 @@ use namespace CoC;
 			lust = Math.round(lust);
 			if (hasStatusEffect(StatusEffects.Lustzerking) && !hasPerk(PerkLib.ColdLust)) lust = 100;
 			if (hasStatusEffect(StatusEffects.BlazingBattleSpirit)) lust = 0;
+			if (raijuScore() >= 7 && lust100>=75){
+				if (!statStore.hasBuff("Supercharged")){
+					statStore.replaceBuffObject({'spe.mult':Math.round(speStat.mult.value)}, 'Supercharged', { text: 'Supercharged!' });
+					CoC.instance.mainView.statsView.refreshStats(CoC.instance);
+					CoC.instance.mainView.statsView.showStatUp('spe');
+					outputText("\n\nAs your bottled up voltage ramps up you begin to lose yourself to lust turning increasingly feral as your overwhelming need to discharge override any rational thinking. FUCK… you need someone to fuck that voltage out of you!");
+					if(game.inCombat) outputText(" [monster] gulp as [he] see's your lust crazed expression. Should you win [he] won't get off the hook so easily!");
+					outputText("\n\n<b>You entered the supercharged state!</b>\n\n");
+				}
+				lust = maxLust()/100*5;
+				if(lust100 >= 100){
+					this.lust = maxLust()*99/100
+				}
+			}
+			if (raijuScore() < 7 && statStore.hasBuff('Supercharged')) statStore.removeBuffs('Supercharged');
 			return lust;
 		}
 

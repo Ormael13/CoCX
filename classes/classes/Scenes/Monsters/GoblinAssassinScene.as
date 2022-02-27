@@ -298,8 +298,8 @@ public class GoblinAssassinScene extends BaseContent
 				if (player.canOvipositSpider()) addButton(8, "Lay Eggs", eggs);
 				if (mindbreak != null) addButton(9, "Mind break", mindbreak);
 				addButton(10, "Kill", killGoblin);
-				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 45).hint("Other non typical sex scenes.");
 				addButton(14, "Leave", cleanupAfterCombat);
+				if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(45);
 			}
 			else if (feeder!=null || eggs!=null) {
 				outputText("\n\n<b>You aren't horny enough to rape her, but ");

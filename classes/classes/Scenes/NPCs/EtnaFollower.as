@@ -198,7 +198,7 @@ public function etnaRapeIntro():void
 	if (player.lust >= 33 && player.hasVagina()) addButton(1, "Yes (F)", etnaRapeYesF);
 	addButton(2, "No", etnaRapeNo);
 	if (player.lust >= 33 && player.isAlraune()) addButton(3, "Fill her up!", EtnaFillHerUp);
-	if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 55).hint("Other non typical sex scenes.");
+	if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(55);
 }
 
 public function etnaRapeYesM():void
@@ -370,7 +370,7 @@ public function etnaRape3rdWin():void
 	if (player.lust >= 33 && player.hasCock()) addButton(0, "Yes (M)", etnaRapeYesM);
 	if (player.lust >= 33 && player.hasVagina()) addButton(1, "Yes (F)", etnaRapeYesF);
 	addButton(2, "No", etnaRapeNo);
-	if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 56).hint("Other non typical sex scenes.");
+	if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(56);
 }
 
 public function etnaReady2Come2Camp():void

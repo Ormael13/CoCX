@@ -359,8 +359,8 @@ public class GoblinScene extends BaseContent
 				//addButton(14, "Leave", cleanupAfterCombat);
 				}
 				addButton(10, "Kill", killGoblin);
-				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 47).hint("Other non typical sex scenes.");
 				addButton(14, "Leave", cleanupAfterCombat);
+				if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(47);
 			}
 			else {
 				//If cant rape or breastfeed

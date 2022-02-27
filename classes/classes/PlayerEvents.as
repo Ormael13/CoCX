@@ -1678,6 +1678,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.raijuScore() >= 7) {
 					player.createStatusEffect(StatusEffects.IsRaiju,0,0,0,0);
 					player.createPerk(PerkLib.LightningClaw,0,0,0,0);
+					player.createPerk(PerkLib.Supercharged,0,0,0,0);
 				}
 				player.createPerk(PerkLib.LightningAffinity, 0, 0, 0, 0);
 				player.createPerk(PerkLib.ElectrifiedDesire, 0, 0, 0, 0);
@@ -1689,6 +1690,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.LightningAffinity);
 				player.removePerk(PerkLib.ElectrifiedDesire);
 				player.removePerk(PerkLib.LightningClaw);
+				player.removePerk(PerkLib.Supercharged);
 				needNext = true;
 			}
 			else if (player.thunderbirdScore() < 12 && player.hasPerk(PerkLib.LightningAffinity) && player.hasStatusEffect(StatusEffects.IsThunderbird) && !player.hasStatusEffect(StatusEffects.IsRaiju)) {

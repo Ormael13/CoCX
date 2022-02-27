@@ -386,7 +386,7 @@ public function PlayerSexElectra():void {
 	if (player.lust >= 33) addButton(0, "Yea Sure", ElectraSeXYes);
 	addButton(1, "No Way", ElectraSeXNo);
 	addButton(2, "Headpat", ElectraSeXHeadpat);
-	if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 54).hint("Other non typical sex scenes.");
+	if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(54);
 }
 public function ElectraSeXYes():void {
 	spriteSelect(SpriteDb.s_electra);

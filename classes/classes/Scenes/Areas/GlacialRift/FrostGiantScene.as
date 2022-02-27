@@ -27,8 +27,8 @@ package classes.Scenes.Areas.GlacialRift
 				if (player.hasCock()) addButton(0, "Nosefuck", noseJob);
 				if (player.hasVagina()) addButton(1, "RideVaginally", rideVaginally);
 				addButton(2, "Ride Anally", rideAnally);
-				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 18).hint("Other non typical sex scenes.");
 				addButton(14, "Leave", cleanupAfterCombat);
+				if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(18);
 			}
 			else {
 				cleanupAfterCombat();
@@ -44,8 +44,8 @@ package classes.Scenes.Areas.GlacialRift
 				if (player.hasCock()) addButton(0, "Nosefuck", noseJob);
 				if (player.hasVagina()) addButton(1, "RideVaginally", rideVaginally);
 				addButton(2, "Ride Anally", rideAnally);
-				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 19).hint("Other non typical sex scenes.");
 				addButton(14, "Leave", cleanupAfterCombat);
+				if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(19);
 			}
 			else {
 				cleanupAfterCombat();

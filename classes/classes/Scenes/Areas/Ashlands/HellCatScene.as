@@ -47,8 +47,7 @@ public function DefeatedHellCat():void {
 	addButton(0, "Back", cleanupAfterCombat);
 	if (player.hasCock()) addButton(1, "Pussycat", DefeatedHellCatPussycat);
 	if (player.hasVagina()) addButton(2, "Catcock", DefeatedHellCatCatcock);
-	if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 1).hint("Other non typical sex scenes.");
-
+	if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(1);
 }
 public function DefeatedHellCatPussycat():void {
 	if (player.gender == 3) outputText("You ain’t gonna get any close to that feline penis of hers. " + (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] > 0 ? "If your hunch is good it’s likely even worse than that of the hellhounds. " : "") + "");

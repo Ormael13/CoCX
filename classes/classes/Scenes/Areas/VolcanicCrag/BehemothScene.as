@@ -196,8 +196,8 @@ public class BehemothScene extends BaseContent
 			}
 			menu();
 			if (player.lust >= 33) addButton(0, "Sex", behemothSexMenu, true, null, null, "Initiate sexy time with the Behemoth.");
-			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 43).hint("Other non typical sex scenes.");
 			addButton(14, "Leave", cleanupAfterCombat);
+			if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(43);
 		}
 		
 		public function loseToBehemoth():void {
