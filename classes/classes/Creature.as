@@ -2460,6 +2460,10 @@ public class Creature extends Utils
 			return countCocksOfType(CockTypesEnum.CAVE_WYRM);
 		}
 
+		public function raijuCocks():int { //How many cave wyrm-cocks?
+			return countCocksOfType(CockTypesEnum.RAIJU);
+		}
+
 		public function pigCocks():int { //How many lizard/snake-cocks?
 			return countCocksOfType(CockTypesEnum.PIG);
 		}

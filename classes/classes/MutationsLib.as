@@ -468,6 +468,7 @@ public class MutationsLib
 			}
 			function mutationsNervSys():void{
 				MutationsList.push([ElvishPeripheralNervSys, ElvishPeripheralNervSysPrimitive, ElvishPeripheralNervSysEvolved]);
+				MutationsList.push([RaijuCathode, RaijuCathodePrimitive, RaijuCathodeEvolved]);
 				MutationsList.push([SharkOlfactorySystem, SharkOlfactorySystemPrimitive, SharkOlfactorySystemEvolved]);
 			}
 			function mutationsBone():void{
@@ -718,6 +719,9 @@ public class MutationsLib
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.pigScore() >= 4;
 						}, "Pig/Boar race");
+				RaijuCathode.requireNervSysMutationSlot().requireCustomFunction(function (player:Player):Boolean {
+					return player.raijuScore() >= 8;
+				}, "raiju race");
 				SalamanderAdrenalGlands.requireAdrenalGlandsMutationSlot().requirePerk(PerkLib.Lustzerker).requireCustomFunction(function (player:Player):Boolean {
 					return player.salamanderScore() >= 8 || player.phoenixScore() >= 10;
 				}, "Salamander race");
@@ -902,6 +906,9 @@ public class MutationsLib
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.pigScore() >= 8;
 						}, "Pig/Boar race");
+				RaijuCathodePrimitive.requireLevel(12).requirePerk(RaijuCathode).requireCustomFunction(function (player:Player):Boolean {
+					return player.raijuScore() >= 9;
+				}, "raiju race");
 				SalamanderAdrenalGlandsPrimitive.requireLevel(12).requirePerk(SalamanderAdrenalGlands).requireCustomFunction(function (player:Player):Boolean {
 					return player.salamanderScore() >= 9 || player.phoenixScore() >= 11;
 				}, "Salamander race");
@@ -1075,6 +1082,9 @@ public class MutationsLib
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.pigScore() >= 12;
 						}, "Pig/Boar race");
+				RaijuCathodeEvolved.requireLevel(30).requirePerk(RaijuCathodePrimitive).requireCustomFunction(function (player:Player):Boolean {
+					return player.raijuScore() >= 10;
+				}, "raiju race");
 				SalamanderAdrenalGlandsEvolved.requireLevel(30).requirePerk(SalamanderAdrenalGlandsPrimitive).requireCustomFunction(function (player:Player):Boolean {
 					return player.salamanderScore() >= 10 || player.phoenixScore() >= 13;
 				}, "Salamander race");

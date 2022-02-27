@@ -4402,7 +4402,11 @@ use namespace CoC;
 			}
 			if (TopRace == "raiju") {
 				if (TopScore >= 5) {
-					if (TopScore >= 10) {
+					if (TopScore >= 19) {
+						if (isTaur()) race = "greater raiju-taur";
+						else race = "greater raiju";
+					}
+					else if (TopScore >= 10) {
 						if (isTaur()) race = "raiju-taur";
 						else race = "raiju";
 					} else {
@@ -8300,6 +8304,16 @@ use namespace CoC;
 			if (hairType == Hair.STORM)
 				raijuCounter++;
 			if (InCollection(hairColor, ["purple", "light blue", "yellow", "white", "lilac", "green"]))
+				raijuCounter++;
+			if (hasStatusEffect(StatusEffects.GlowingNipples) || hasStatusEffect(StatusEffects.GlowingAsshole))
+				raijuCounter++;
+			if (raijuCocks() > 0 || vaginaType() == VaginaClass.RAIJU)
+				raijuCounter++;
+			if (hasPerk(MutationsLib.RaijuCathode))
+				raijuCounter++;
+			if (hasPerk(MutationsLib.RaijuCathodePrimitive))
+				raijuCounter++;
+			if (hasPerk(MutationsLib.RaijuCathodeEvolved))
 				raijuCounter++;
 			if (hasPerk(MutationsLib.HeartOfTheStorm))
 				raijuCounter++;
@@ -12836,10 +12850,10 @@ use namespace CoC;
 				}
 			}//+10/10-20
 			if (raijuScore() >= 5) {
-				if (raijuScore() >= 14) {
-					maxSpeCap2 += 100;
+				if (raijuScore() >= 19) {
+					maxSpeCap2 += 145;
 					maxIntCap2 += 50;
-					maxLibCap2 += 120;
+					maxLibCap2 += 150;
 					currentSen += 60;
 				} else if (raijuScore() >= 10) {
 					maxSpeCap2 += 70;
