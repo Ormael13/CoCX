@@ -3375,7 +3375,7 @@ use namespace CoC;
 			return descC;
 		}
 
-		public function race():String {
+		public function race(generalType:Boolean = false):String {
 			var race:String = "human";
 			var ScoreList:Array = [
 				{name: 'human', score: 1, minscore: 1},
@@ -4605,7 +4605,13 @@ use namespace CoC;
 			{
 				race = "grand chimera";
 			}
-			return race;
+			if (generalType){
+				return TopRace;
+			}
+			else{
+				return race;
+			}
+
 		}
 
 		//Determine Human Rating

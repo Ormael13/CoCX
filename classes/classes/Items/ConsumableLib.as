@@ -81,6 +81,7 @@ public final class ConsumableLib extends BaseContent
 		public const NPNKEGG:SimpleConsumable = mk("NPnkEgg", "NPnkEgg", "a neon pink egg", 6, "This is an oblong egg with an unnatural neon pink coloration.  It tingles in your hand with odd energies that make you feel as if you could jump straight into the sky.", curry(m.neonPinkEgg, false));
 
 		//FOOD & BEVERAGES
+		public const AjidAji:SimpleConsumable = mk ("AjidAji", "Aji de Aji", "a bag of Aji de Aji", 6, "A small bag of Aji de Aji Peppers.",function(player:Player):void{SceneLib.trollVillage.elderstore.itemsConsumed("AjidAji")});
         public const BC_BEER:SimpleConsumable = mk("BC Beer", "BC Beer", "a mug of Black Cat Beer", 1, "A capped mug containing an alcoholic drink secreted from the breasts of Niamh.  It smells tasty.", function (player:Player):void {
             SceneLib.telAdre.niamh.blackCatBeerEffects(player)
         });

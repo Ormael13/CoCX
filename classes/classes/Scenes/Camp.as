@@ -1600,6 +1600,7 @@ public class Camp extends NPCAwareContent{
 					SceneLib.trollVillage.yenza.YenzaBeratePart2();
 				}
 			}
+			if (TrollVillage.ZenjiMoneyHelp > 0) TrollVillage.ZenjiMoneyHelp -= 1;
 			if (flags[kFLAGS.ZENJI_PROGRESS] == 11) {
 				if (model.time.hours >= 7 && model.time.hours <= 18) {
 					if (slavesCount() > 0 && rand(5) == 0) outputText("Zenji is keeping a close eye on some of your more corrupt camp members, ensuring that they don’t cause any harm.");

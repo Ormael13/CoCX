@@ -1,3 +1,8 @@
+/**
+ * @Author Pyromania
+ * Coded in by Jtecx, Jan/Feb 2022
+ */
+
 package classes.Scenes.Places {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
@@ -27,6 +32,8 @@ public class TrollVillage extends BaseContent implements SaveableState{
     public static var HalkanoUnlocked:Boolean;
     public static var YubiUnlocked:Boolean;
     public static var KaljiMBJDeny:int;
+    public static var ZenjiMoneyHelp:int;
+    public static var JabalaLoveChat:Boolean;
 
     public function stateObjectName():String {
         return "TrollVillage";
@@ -44,6 +51,8 @@ public class TrollVillage extends BaseContent implements SaveableState{
         HalkanoUnlocked = false;
         YubiUnlocked = false;
         KaljiMBJDeny = 0;
+        ZenjiMoneyHelp = 0;
+        JabalaLoveChat = false;
 
     }
     public function saveToObject():Object {
@@ -59,7 +68,9 @@ public class TrollVillage extends BaseContent implements SaveableState{
             "YenzaLockdown": YenzaLockdown,
             "ZenjiTrollVillageTimeChk": ZenjiTrollVillageTimeChk,
             "YubiUnlocked": YubiUnlocked,
-            "KaljiMBJDeny": KaljiMBJDeny
+            "KaljiMBJDeny": KaljiMBJDeny,
+            "ZenjiMoneyHelp": ZenjiMoneyHelp,
+            "JabalaLoveChat": JabalaLoveChat
         };
     }
     public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
@@ -76,6 +87,8 @@ public class TrollVillage extends BaseContent implements SaveableState{
             YubiUnlocked = o["YubiUnlocked"];
             KaljiMBJDeny = o["KaljiMBJDeny"];
             ZenjiTrollVillageTimeChk = o["ZenjiTrollVillageTimeChk"];
+            ZenjiMoneyHelp = o["ZenjiMoneyHelp"];
+            JabalaLoveChat = o["JabalaLoveChat"];
         } else {
             // loading from old save
             resetState();
