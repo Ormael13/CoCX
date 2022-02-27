@@ -267,7 +267,6 @@ public function electraSex():void {
 	}
 	addButton(2, "Headpat", ElectraSeXHeadpat);
 	addButton(3, "Lets just fuck", ElectraSeXYes);
-	//if (player.tailType == 28)  addButton(4, "Share a Drink", etnaShareDrink);
 	addButton(14, "Back", ElectraCampMainMenu);
 }
 

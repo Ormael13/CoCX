@@ -2201,7 +2201,10 @@ private function jojoCampMenu():void {
 	addButton(4, jojoDefense, jojoDefenseToggle).hint((player.hasStatusEffect(StatusEffects.JojoNightWatch) ? "Request him to stop guarding the camp.": "Request him to guard the camp at night."));
 	if (player.hasStatusEffect(StatusEffects.Infested)) addButton(5, "Purge", wormRemoval).hint("Request him to purge the worms from your body.");
 	if (player.cor > 10 && player.lust >= 33 && player.gender > 0 && flags[kFLAGS.DISABLED_JOJO_RAPE] <= 0) addButton(8, "Rape", jojoAtCampRape).hint("Rape the poor monk mouse-morph." + (player.cor < 25 ? "  Why would you do that?": ""));
-	if (player.lust >= 33 && monk <= -3) addButton(8, "Sex", pureJojoSexMenu).hint("Initiate sexy time with the mouse-morph.");
+	if (player.lust >= 33 && monk <= -3 && flags[kFLAGS.JOJO_BIMBO_STATE] < 4)
+        addButton(8, "Sex", pureJojoSexMenu).hint("Initiate sexy time with the mouse-morph.");
+    else if (flags[kFLAGS.JOJO_BIMBO_STATE] < 4)
+
 	addButton(14, "Leave", camp.campFollowers);
 }
 
@@ -2983,6 +2986,8 @@ public function afterDebimboTalk():void {
         outputText("\n\nAt this, your mousey children poke their heads out from nearby, and Jojo opens his arms wide. They swarm him, and he scoops up a half-dozen, rubbing the tops of their heads with his cheek. Many of them seem confused, but they don’t care.");
     outputText("\n\n“<i>I’ll be in my usual spot at camp.</i>” Jojo says, looking back at you. “<i>Visit me often, won’t you?</i>”");
     flags[kFLAGS.TALKED_TO_JOJO_ABOUT_JOY] = 1;
+    flags[kFLAGS.DISABLED_JOJO_RAPE] = 1;
+	monk = -3; //probably should lock the sex before... but better to change bimbo acquisition first.
     doNext(playerMenu);
 }
 

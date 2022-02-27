@@ -53,7 +53,8 @@ use namespace CoC;
 			//choice[choice.length] = 0; //???Demon Pack/Demon Centauress??? (lvl 56)
 			choice[choice.length] = 1; //Corrupted Improved Flesh Golem (lvl 59)/Corrupted Improved Flesh Golems(lvl 61)
 			choice[choice.length] = 2; //Imp Food
-			choice[choice.length] = 3; //Marble
+            if (player.hasKeyItem("Old Pickaxe") > 0 && Forgefather.materialsExplained)
+			    choice[choice.length] = 3; //Marble
 			if (rand(4) == 0) choice[choice.length] = 4; //Find nothing! The rand will be removed from this once the Defiled Ravine is populated with more encounters.
 			
 			select = choice[rand(choice.length)];
@@ -81,13 +82,11 @@ use namespace CoC;
 					break;
 				case 3:
 					clearOutput();
-					if (player.hasKeyItem("Old Pickaxe") > 0 && Forgefather.materialsExplained == true){
-						outputText("You stumble across a vein of Marble, this looks like suitable material for your gargoyle form.\n");
-						outputText("Do you wish to mine it?");
-						menu();
-						addButton(0, "Yes", defiledRavineSiteMine);
-						addButton(1, "No", camp.returnToCampUseOneHour);
-					}
+                    outputText("You stumble across a vein of Marble, this looks like suitable material for your gargoyle form.\n");
+                    outputText("Do you wish to mine it?");
+                    menu();
+                    addButton(0, "Yes", defiledRavineSiteMine);
+                    addButton(1, "No", camp.returnToCampUseOneHour);
 					break;
 				default:
 					clearOutput();

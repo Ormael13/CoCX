@@ -272,6 +272,7 @@ import classes.lists.Gender;
 						text += "";
 				}
 			}
+            text += " ";
 			switch(rand(4)) {
 				case 0:
 					text += "bosoms";
@@ -1684,7 +1685,7 @@ import classes.lists.Gender;
 			outputText("\n\nYou grind against her yourself; beads of pre form on your tips, and as they slide along your shafts, slickening the both of you, you grind harder and harder against Joy, attacking her mouth with your own " + tongueDescript() + ".");
 			outputText("\n\nJoy starts to buck and thrust; evidently she's so horny and turned on that she can't muster the patience to slip her cock into any available hole, she's content to just grind it against your own in hopes that the friction will let her get off.");
 			outputText("\n\nYou do the same, feeling yourself approach the edge quickly. You thrust against her once more and groan into her mouth as you begin cumming, painting both your bellies as well as your chests in hot spunk.");
-			outputText("\n\nJoy gasps and moans, eagerly blowing her load with full-body jerks and spasms until, at least, she peters out and her cock flops limply down between her legs, your front and hers painted in her spooge. \"<i>Wow... That's not, like, my favorite way to do things, but it's certainly pretty fun, y'know?</i>\" She comments. Stepping back, she gently brushes off some of the mixed spunk with her finger and slurps it up. \"<i>Mmm. We make a good mix.</i>\" She giggles");
+			outputText("\n\nJoy gasps and moans, eagerly blowing her load with full-body jerks and spasms until, at least, she peters out and her cock flops limply down between her legs, your front and hers painted in her spooge. \"<i>Wow... That's not, like, my favorite way to do things, but it's certainly pretty fun, y'know?</i>\" She comments. Stepping back, she gently brushes off some of the mixed spunk with her finger and slurps it up. \"<i>Mmm. We make a good mix.</i>\", she giggles.");
 			outputText("\n\nYou " + player.clothedOrNakedLower("gather the discarded pieces of your " + player.armorDescript() + " and ") + "give her ass a good grope before leading the both of you towards the nearest stream to clean up.");
 			player.sexReward("Default","Dick",true,false);
 			dynStats("cor", -(0.5 + Math.ceil(player.cor / 30)));
@@ -1784,7 +1785,7 @@ import classes.lists.Gender;
 
 		private function haveJoyStuffYourPussy():void {
 			clearOutput();
-			outputText("You " + player.clothedOrNakedLower("begin undressing, ", "put on a show, ") + "making sure to go as slowly as possible in order to put on a show for Joy.");
+			outputText("You " + player.clothedOrNaked("begin undressing", "present your naked body to Joy") + ", making sure to go as slowly as possible in order to put on a show for Joy.");
 			outputText("\n\nThe bimbo mouse certainly appreciates the show; her tongue is hanging out and she stares obliviously at your increasingly nude form, so caught up in looking she can't even think about removing her own clothes.");
 			outputText("\n\nWhen you're done, you're surprised to see she still has her clothes on, and ask her how does she intend to have sex still fully dressed?");
 			outputText("\n\nJoy blinks, shakes her head, and visibly snaps herself to her attention. She doesn't even bother to take her robes off, instead roughly yanking down her shorts, kicking them aside and then taking a flying leap into your arms, seeking to push you over so she can start.");
