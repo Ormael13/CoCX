@@ -1,4 +1,8 @@
-package classes.Scenes.NPCs 
+/**
+ * ...
+ * @author Canadian Snas
+ */
+ package classes.Scenes.NPCs 
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
