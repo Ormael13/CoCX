@@ -1685,7 +1685,48 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 //\"<i>Use Dick</i>\"
 		private function dickPhylla():void
 		{
-			var x:int = player.biggestCockIndex();
+            //shitty implementation, but sounds logical
+            var cockVag:int = -1, cockMouth:int = -1, cockHand1:int = -1, cockHand2:int = -1;
+            var cockTmp:int = -1;
+            var cMcnt:int = -1;
+            var mouthTent:Boolean = false;
+            //pick one for vag
+            cockVag = player.cockThatFits(phyllaCapacity());
+			if (cockVag < 0) cockVag = player.smallestCockIndex();
+            if (player.cockTotal() >= 2) {
+                //try to pick non-tentacle for mouth
+                while (true) {
+                    cockMouth = player.findCock(cMcnt, 20, 30, "length");
+                    if (cockMouth == -1)
+                        break;
+                    if (cockMouth != cockVag && player.cocks[cockMouth].cockType != CockTypesEnum.TENTACLE && player.cocks[cockMouth].cockType != CockTypesEnum.STAMEN)
+                        break;
+                    ++cMcnt;
+                }
+                //pick tentacles - no max size, they can wiggle
+                if (player.countCocksWithType(CockTypesEnum.TENTACLE, 20, -1, "length") > 0) {
+                    cMcnt = -1;
+                    while (true) {
+                        cockTmp = player.findCock(cMcnt, 20, -1, "length");
+                        if (cockTmp == -1)
+                            break;
+                        if (cockTmp == cockVag || cockTmp == cockMouth || cockTmp == cockHand1 || cockTmp == cockHand2) {
+                            if (cockMouth == -1) {
+                                cockMouth = cockTmp;
+                                mouthTent = true;
+                            }
+                            else if (cockHand1 == -1)
+                                cockHand1 = cockTmp;
+                            else if (cockHand2 == -1) {
+                                cockHand2 = cockTmp;
+                                break;
+                            }
+                        }
+                        ++cMcnt;
+                    }
+                }
+            }
+            //start
 			clearOutput();
 			outputText("You give Phylla a devious look that denotes you didn't come here to just talk.  She looks a little surprised and embarrassed for you as you start removing your [armor].  Noticing her watching, you pull each article of clothing off a little slower, letting her lust build.  You seductively drop your armor, completely revealing yourself to her.  You can see her eyes widen as she visibly feasts on your features.");
 			//(NO BJ experience)
@@ -1718,7 +1759,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 			if (flags[kFLAGS.PHYLLA_FUCKS] >= 3) outputText("\n\nShe seems like she's losing some of her shyness, or at the very least feels comfortable enough around you to assert more of her personality.");
 
 			outputText("\n\nYou watch as she spreads herself apart for you and guides your cock into her.  As the head of your penis enters her, she lets out a weak moan.  Then in a wicked attempt to make her cum, because you know it's so easy, you thrust your hips upwards forcing as much as you can into her.");
-			outputText("\n\nHer eyes widen in surprise as your " + cockDescript(x) + " fills her.  She howls a blissful scream as she drools forth her girl fluids, coating your cock ");
+			outputText("\n\nHer eyes widen in surprise as your " + cockDescript(cockVag) + " fills her.  She howls a blissful scream as she drools forth her girl fluids, coating your cock ");
 			if (player.balls > 0) outputText("and balls ");
 			outputText("in her sexual liquids.");
 
@@ -1775,20 +1816,16 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 
 			outputText("\n\nTaking her \"<i>hint,</i>\" you slam your cock into her pussy, making sure to get as deep as you can. Your initial thrust makes a very loud, squishy noise as your cock enters her soaked canal.  Your mind almost blacks out from the sheer sensual overload you both feel as a shared consciousness, unable to handle both hers and your own.  Phylla's head collapses into her hands as she releases a series of stammering moans.  Her hips twitch slightly with euphoria as she starts to slowly move up and down, her body desperately begging for more cock.");
 
-			//If PC only has the two non TD dicks (greater than 42 inches):
-			if (player.tentacleCocks() == 2 || player.stamenCocks() == 2) {
-				outputText("\n\nNow content with her efforts, Phylla's body sucks in your long cock as your other is deep inside her. You feel her warm breath escape the seal she's made around the head of your cock when you hit the right spots inside her that cause her to moan.");
-			}
-			//(Transitions to Doggy style Phylla or If PC has TD)
-			//PC has more than two Tentacle dicks (greater than 42 inches):
-			else if (player.tentacleCocks() > 2 || player.stamenCocks() > 2) {
-				outputText("\n\nNot content with just a little oral attention, you slither your other tentacle cocks up to her hands and give them a hard smack, soliciting a surprised hum from Phylla.  Seeing her lover's tentacle penile appendages caressing the back of her hand helps to clue her in that she still has some \"<i>capacity</i>\" to service you.  Propping herself upwards with a pillow, Phylla takes to leaning on her elbows as she begins to stroke and tease your cocks, coaxing a small flow of pre-cum in the process.");
-				//(Transitions to Doggy style Phylla)
-			}
-			//PC has one-two dicks 42 to 48 inches in length:
-			//if(player.cockTotal() >= 2)
-			//outputText("\n\nWell, if she wants more dick, then maybe she can be persuaded to put her mouth to use?  Expertly positioning your prick(s), you give her a quick jab in the chin in order to get her attention, causing her to look up at your over her shoulder.  You give her a knowing look and shoot a glance down at what poked her in the chin; she follows your gaze.  \"<i>Well, you did want more of them,</i>\" you convey to her with a wickedly playful grin, as though you're a kid in candy shop.  Phylla takes to your  " + cockDescript(a/ & b) + " with a zeal you've never seen before, especially in a woman so shy and uncertain. (Transitions to Doggy style Phylla)
-
+            //PC has one-two dicks 42 to 48 inches in length:
+			if(cockMouth >= 0) {
+                outputText("\n\nWell, if she wants more dick, then maybe she can be persuaded to put her mouth to use?  Expertly positioning your pricks, you give her a quick jab in the chin in order to get her attention, causing her to look up at your over her shoulder.  You give her a knowing look and shoot a glance down at what poked her in the chin; she follows your gaze.  \"<i>Well, you did want more of them,</i>\" you convey to her with a wickedly playful grin, as though you're a kid in candy shop.  Phylla takes your  " + cockDescript(cockMouth) + " with a zeal you've never seen before, especially in a woman so shy and uncertain.");
+                //and only then
+                if (cockHand1 >= 0)
+                    outputText("\n\nNot content with just a little oral attention, you slither your" + (mouthTent ? " other" : "") + " tentacle cock" + (cockHand2 >= 0 ? "s" : "") + " up to her hands and give them a hard smack, soliciting a surprised hum from Phylla.  Seeing her lover's tentacle penile appendage" + (cockHand2 >= 0 ? "s" : "") + " caressing the back of her hands helps to clue her in that she still has some \"<i>capacity</i>\" to service you.  Propping herself upwards with a pillow, Phylla takes to leaning on her elbows as she begins to stroke and tease your cock" + (cockHand2 >= 0 ? "s" : "") + ", coaxing a small flow of pre-cum in the process.");
+                //shared
+                outputText("\n\nTrying to please you as much as she can, Phylla diligently sucks on your long cock" + (cockHand1 >= 0 ? " and pleasures your flexible tentacle dick" + (cockHand2 >= 0 ? "s" : "") + " with her hands" : "") + " as your other cock is deep inside her. You feel her warm breath escape the seal she's made around the head of your cock when you hit the right spots inside her that cause her to moan.");
+            }
+			
 			//Doggy style Phylla:
 			outputText("\n\nYou give her body what it wants as you start humping her; using her abdomen as a brace, you reach a very staccato rhythm with your thrusts as she spreads out all four of her arms in front of her to hold herself in place.  With almost every other pump you feel her mind and her body building to orgasm, flooding your mind with thoughts of doing the same.  Her cunt seems to be calling upon you to fill it as it clamps down tighter with each plunge of your cock.");
 
@@ -1798,6 +1835,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 
 			outputText("\n\nPhylla stirs next to you, and groggily says, \"<i>You should come down more often.  I mean...  I miss you sometimes...</i>\"  Her shyness returns as she slowly recovers from the small sex-coma you placed each other in.  You say you'll think about it and wink at her as you get dressed and head back to camp, leaving her to eagerly await the next time you come to take her once again.");
 			player.sexReward("Default","Dick",true,false);
+            flags[kFLAGS.PHYLLA_FUCKS]++;
 			doNext(camp.returnToCampUseOneHour);
 		}
 

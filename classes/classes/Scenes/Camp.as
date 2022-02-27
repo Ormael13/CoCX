@@ -1010,10 +1010,10 @@ public class Camp extends NPCAwareContent{
 		addButton(2, "Inventory", inventory.inventoryMenu).hint("The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.");
 		if (inventory.showStash()) addButton(3, "Stash", inventory.stash).hint("The stash allows you to store your items safely until you need them later.");
 		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] >= 2) addButton(4, "Warehouse", inventory.warehouse).hint("The warehouse and granary allow you to store your items in a more organized manner.");
-		if (followersCount() > 0) addButton(5, "Followers", campFollowers).hint("Check up on any followers or companions who are joining you in or around your [camp].  You'll probably just end up sleeping with them.");
-		if (loversCount() > 0) addButton(6, "Lovers", campLoversMenu).hint("Check up on any lovers you have invited to your [camp] so far and interact with them.");
+		if (followersCount() > 0) addButton(5, "Followers", campFollowers).hint("Check up on any followers or companions who are joining you in or around your camp.  You'll probably just end up sleeping with them.");
+		if (loversCount() > 0) addButton(6, "Lovers", campLoversMenu).hint("Check up on any lovers you have invited to your camp so far and interact with them.");
 		if (slavesCount() > 0) addButton(7, "Slaves", campSlavesMenu).hint("Check up on any slaves you have received and interact with them.");
-		addButton(8, "Camp Actions", campActions).hint("Read your codex, questlog or interact with the [camp] surroundings.");
+		addButton(8, "Camp Actions", campActions).hint("Read your codex, questlog or interact with the camp surroundings.");
 		if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 10 || flags[kFLAGS.CAMP_BUILT_CABIN] >= 1) addButton(9, "Enter Cabin", cabinProgress.initiateCabin).hint("Enter your cabin."); //Enter cabin for furnish.
 		if (player.hasPerk(PerkLib.JobSoulCultivator) || debug) addButton(10, "Soulforce", soulforce.accessSoulforceMenu).hint("Spend some time on the cultivation, or spend some of the soulforce.");
 		else if (!player.hasPerk(PerkLib.JobSoulCultivator) && player.hasPerk(PerkLib.Metamorph)) addButton(10, "Metamorph", SceneLib.metamorph.openMetamorph).hint("Use your soulforce to mold your body.");
@@ -1957,10 +1957,10 @@ public class Camp extends NPCAwareContent{
 			}
 			//Pure/Corrupted Holli
 			if (flags[kFLAGS.FUCK_FLOWER_LEVEL] == 4) {
-				buttons.add("Holli", holliScene.treeMenu).hint("Holli is in her tree at the edges of your [camp].  You could go visit her if you want.");
+				buttons.add("Holli", holliScene.treeMenu).hint("Holli is in her tree at the edges of your camp.  You could go visit her if you want.");
 			}
 			if (flags[kFLAGS.FLOWER_LEVEL] == 4) {
-				buttons.add("Holli", HolliPure.treeMenu).hint("Holli is in her tree at the edges of your [camp].  You could go visit her if you want.");
+				buttons.add("Holli", HolliPure.treeMenu).hint("Holli is in her tree at the edges of your camp.  You could go visit her if you want.");
 			}
 			//Michiko
 			if (flags[kFLAGS.MICHIKO_FOLLOWER] >= 1) {
@@ -2023,11 +2023,11 @@ public class Camp extends NPCAwareContent{
 		menu();
 		clearOutput();
 		outputText("What would you like to do?");
-		addButton(0, "Build", campBuildingSim).hint("Check your [camp] build options.");
+		addButton(0, "Build", campBuildingSim).hint("Check your camp build options.");
 		if (player.hasPerk(PerkLib.JobElementalConjurer) || player.hasPerk(PerkLib.JobGolemancer) || player.hasPerk(PerkLib.PrestigeJobNecromancer)) addButton(1, "Winions", campWinionsArmySim).hint("Check your options for making some Winions.");
 		else addButtonDisabled(1, "Winions", "You need to be able to make some minions that fight for you to use this option.");
-		addButton(2, "Misc", campMiscActions).hint("Misc options to do things in and around [camp].");
-		addButton(3, "SpentTime", campSpendTimeActions).hint("Check your options to spend time in and around [camp].");
+		addButton(2, "Misc", campMiscActions).hint("Misc options to do things in and around camp.");
+		addButton(3, "SpentTime", campSpendTimeActions).hint("Check your options to spend time in and around camp.");
 		addButton(4, "NPC's", SparrableNPCsMenu);
 		//addButton(5, "Craft", kGAMECLASS.crafting.accessCraftingMenu).hint("Craft some items.");
 		if (player.hasStatusEffect(StatusEffects.CampRathazul)) addButton(7, "Herbalism", HerbalismMenu).hint("Use ingrediants to craft poultrice and battle medicines.")
@@ -2060,17 +2060,17 @@ public class Camp extends NPCAwareContent{
 		menu();
 		if (player.hasKeyItem("Carpenter's Toolbox") >= 0) {
 			if (flags[kFLAGS.CAMP_WALL_PROGRESS] < 100) {
-				if (getCampPopulation() >= 4) addButton(0, "Build Wall", buildCampWallPrompt).hint("Build a wall around your [camp] to defend from the imps." + (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 10 ? "\n\nProgress: " + (flags[kFLAGS.CAMP_WALL_PROGRESS] / 10) + "/10 complete" : "") + "");
+				if (getCampPopulation() >= 4) addButton(0, "Build Wall", buildCampWallPrompt).hint("Build a wall around your camp to defend from the imps." + (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 10 ? "\n\nProgress: " + (flags[kFLAGS.CAMP_WALL_PROGRESS] / 10) + "/10 complete" : "") + "");
 				else addButtonDisabled(0, "Build Wall", "Req. 4+ camp population.");
 				addButtonDisabled(1, "Build Gate", "Req. to build wall fully first.");
 			}
 			if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100) {
 				addButtonDisabled(0, "Build Wall", "Already built.");
 				if (flags[kFLAGS.CAMP_WALL_GATE] > 0) addButtonDisabled(1, "Build Gate", "Already built.");
-				else addButton(1, "Build Gate", buildCampGatePrompt).hint("Build a gate to complete your [camp] defense.");
+				else addButton(1, "Build Gate", buildCampGatePrompt).hint("Build a gate to complete your camp defense.");
 			}
 			//addButton(3, "Build Cabin(O)", campUpgrades.buildCampMembersCabinsMenu).hint("Work on your camp members cabins.");
-			addButton(5, "Build Misc", campUpgrades.buildmisc1Menu).hint("Build other structures than walls or cabins for your [camp].");
+			addButton(5, "Build Misc", campUpgrades.buildmisc1Menu).hint("Build other structures than walls or cabins for your camp.");
 			//addButton(6, "Build Misc(O)", campUpgrades.).hint("Other structures than walls or cabins for your camp.");
 		}
 		else {
@@ -2081,7 +2081,7 @@ public class Camp extends NPCAwareContent{
 		}
 		if (flags[kFLAGS.CAMP_CABIN_PROGRESS] > 0 && flags[kFLAGS.CAMP_CABIN_PROGRESS] < 10) addButton(2, "Build Cabin", cabinProgress.initiateCabin).hint("Work on your cabin."); //Work on cabin.
 		else if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 0) addButtonDisabled(2, "Build Cabin", "You need to wait until 7th day.");
-		else addButtonDisabled(2, "Build Cabin", "Cabin is alreadfy built.");
+		else addButtonDisabled(2, "Build Cabin", "Cabin is already built.");
 		if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 10) {
 			if (player.hasItem(useables.IMPSKLL, 1)) {
 				addButton(10, "AddImpSkull", promptHangImpSkull).hint("Add an imp skull to decorate the wall and to serve as deterrent for imps.", "Add Imp Skull");
@@ -2100,9 +2100,9 @@ public class Camp extends NPCAwareContent{
 		menu();
 		if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 1) addButton(0, "Fishery", VisitFishery).hint("Visit Fishery.");
 		else addButtonDisabled(0, "Fishery", "Would you kindly build it first?");
-		if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] >= 2) addButton(1, "Ward", MagicWardMenu).hint("Activate or Deactivate Magic Ward around [camp].");
+		if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] >= 2) addButton(1, "Ward", MagicWardMenu).hint("Activate or Deactivate Magic Ward around camp.");
 		else addButtonDisabled(1, "Ward", "Would you kindly instal it first?");
-		if (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] >= 4) addButton(2, "Kitsune Shrine", campScenes.KitsuneShrine).hint("Meditate at [camp] Kitsune Shrine.");
+		if (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] >= 4) addButton(2, "Kitsune Shrine", campScenes.KitsuneShrine).hint("Meditate at camp Kitsune Shrine.");
 		else addButtonDisabled(2, "Kitsune Shrine", "Would you kindly build it first?");
 		if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] >= 4) addButton(3, "Hot Spring", campScenes.HotSpring).hint("Visit Hot Spring.");
 		else addButtonDisabled(3, "Hot Spring", "Would you kindly build it first?");
@@ -2454,13 +2454,30 @@ public class Camp extends NPCAwareContent{
 
 	public function Seed3(ItemID:SimpleConsumable):void{
 		clearOutput();
-		outputText("FANCY FARMING TEXT RIGHT HERE! WOOOOOOO! AND GAIN HERB EXPERIANCE!");
+		outputText("You begin carefully planting the");
 		player.destroyItems(ItemID, 1);
-		if (ItemID == CoC.instance.consumables.HEALHERB) HarvestMoonScenes.harvestmoonstageHH = HarvestMoonScenes.HARVESTMOONPENDINGHH;
-		if (ItemID == CoC.instance.consumables.MOONGRASS) HarvestMoonScenes.harvestmoonstageMG = HarvestMoonScenes.HARVESTMOONPENDINGMG;
-		if (ItemID == CoC.instance.consumables.SNAKEBANE) HarvestMoonScenes.harvestmoonstageSB = HarvestMoonScenes.HARVESTMOONPENDINGSB;
-		if (ItemID == CoC.instance.consumables.IRONWEED) HarvestMoonScenes.harvestmoonstageIW = HarvestMoonScenes.HARVESTMOONPENDINGIW;
-		if (ItemID == CoC.instance.consumables.BLADEFERN) HarvestMoonScenes.harvestmoonstageBF = HarvestMoonScenes.HARVESTMOONPENDINGBF;
+		if (ItemID == CoC.instance.consumables.HEALHERB){
+			HarvestMoonScenes.harvestmoonstageHH = HarvestMoonScenes.HARVESTMOONPENDINGHH;
+			outputText("healing herb");
+		}
+		if (ItemID == CoC.instance.consumables.MOONGRASS){
+			HarvestMoonScenes.harvestmoonstageMG = HarvestMoonScenes.HARVESTMOONPENDINGMG;
+			outputText("moon grass");
+		}
+		if (ItemID == CoC.instance.consumables.SNAKEBANE) {
+			HarvestMoonScenes.harvestmoonstageSB = HarvestMoonScenes.HARVESTMOONPENDINGSB;
+			outputText("snakebane");
+		}
+		if (ItemID == CoC.instance.consumables.IRONWEED){
+			HarvestMoonScenes.harvestmoonstageIW = HarvestMoonScenes.HARVESTMOONPENDINGIW;
+			outputText("ironweed");
+		}
+		if (ItemID == CoC.instance.consumables.BLADEFERN){
+			HarvestMoonScenes.harvestmoonstageBF = HarvestMoonScenes.HARVESTMOONPENDINGBF;
+			outputText("bladefern");
+		}
+		outputText("into the fertile soil. It should grow back into several or more plants within a few days." +
+				" Sometime you ponder if you shouldve just became a farmer back home you definitively have a knack for this.");
 		var HE:Number = 20 + player.level;
 		if (player.hasPerk(PerkLib.PlantKnowledge)) HE *= 2;
 		if (player.hasPerk(PerkLib.NaturalHerbalism)) HE *= 2;
@@ -2472,7 +2489,7 @@ public class Camp extends NPCAwareContent{
 		hideMenus();
 		clearOutput();
 		menu();
-		outputText("You survey your crops for readied harvests.");
+		outputText("You take a tour of your garden and survey your crops for readied harvests.");
 		if (!HealingHerb && !MoonGrass && !Snakebane && !Ironweed && !BladeFern) outputText("\n\n There is no crops left to harvest you will need to plan new seeds.");
 		if (HealingHerb)
 		{
@@ -2546,7 +2563,8 @@ public class Camp extends NPCAwareContent{
 		menu();
 		outputText("Refine "+IngrediantName+" into a "+CraftingResult.name+"?");
 		addButton(0, "Craft", HerbalismCraftItem2, ItemID, IngrediantName, CraftingResult);
-		addButton(1, "Cancel", HerbalismMenu);
+		addButton(1, "Craft All", HerbalismCraftItem3, ItemID, IngrediantName, CraftingResult);
+		addButton(2, "Cancel", HerbalismMenu);
 	}
 
 	public function HerbalismCraftItem2(ItemID:SimpleConsumable, IngrediantName:String, CraftingResult:PotionType):void {
@@ -2557,10 +2575,29 @@ public class Camp extends NPCAwareContent{
 		}
 		outputText("You spend the better part of the next hour refining the "+IngrediantName+" into a "+CraftingResult.name+" adding it to your bag.");
 		if (player.hasPerk(PerkLib.NaturalHerbalism)) {
-			outputText("Your natural knowledge of herbalism allowed you two craft two additionnal "+CraftingResult.name+".");
+			outputText("Your natural knowledge of herbalism allowed you to craft two additionnal "+CraftingResult.name+".");
 		}
 		player.destroyItems(ItemID, 1);
 		var HE:Number = 20 + player.level;
+		if (player.hasPerk(PerkLib.PlantKnowledge)) HE *= 2;
+		if (player.hasPerk(PerkLib.NaturalHerbalism)) HE *= 2;
+		player.herbXP(HE);
+		doNext(HerbalismMenu);
+	}
+
+	public function HerbalismCraftItem3(ItemID:SimpleConsumable, IngrediantName:String, CraftingResult:PotionType):void {
+		clearOutput();
+
+		player.changeNumberOfPotions(CraftingResult,player.itemCount(ItemID));
+		if (player.hasPerk(PerkLib.NaturalHerbalism)){
+			player.changeNumberOfPotions(CraftingResult,2*player.itemCount(ItemID));
+		}
+		outputText("You spend the better part of the next hour refining the "+IngrediantName+" into multiple "+CraftingResult.name+" adding them to your bag.");
+		if (player.hasPerk(PerkLib.NaturalHerbalism)) {
+			outputText("Your natural knowledge of herbalism allowed you to craft tice as many "+CraftingResult.name+".");
+		}
+		player.destroyItems(ItemID, player.itemCount(ItemID));
+		var HE:Number = (20 + player.level)*player.itemCount(ItemID);
 		if (player.hasPerk(PerkLib.PlantKnowledge)) HE *= 2;
 		if (player.hasPerk(PerkLib.NaturalHerbalism)) HE *= 2;
 		player.herbXP(HE);
@@ -2974,12 +3011,12 @@ public class Camp extends NPCAwareContent{
 			if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] < 2) addButton(10, "Train", NPCsTrain);
 			if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) addButton(11, "Relax", NPCsRelax);
 		}
-		addButton(0, "Chi Chi", toggleChiChiMenu).hint("Enable or Disable Chi Chi. This will remove her from enc table and if already in [camp] disable access to her.");
-		addButton(1, "Diana", toggleDianaMenu).hint("Enable or Disable Diana. This will remove her from enc table and if already in [camp] disable access to her.");
-		addButton(2, "Diva", toggleDivaMenu).hint("Enable or Disable Diva. This will remove her from enc table and if already in [camp] disable access to her.");
-		addButton(3, "Electra", toggleElectraMenu).hint("Enable or Disable Electra. This will remove her from enc table and if already in [camp] disable access to her.");
-		addButton(4, "Etna", toggleEtnaMenu).hint("Enable or Disable Etna. This will remove her from enc table and if already in [camp] disable access to her.");
-		addButton(5, "Luna", toggleLunaMenu).hint("Enable or Disable Luna. This will remove her from enc table and if already in [camp] disable access to her.");
+		addButton(0, "Chi Chi", toggleChiChiMenu).hint("Enable or Disable Chi Chi. This will remove her from enc table and if already in camp disable access to her.");
+		addButton(1, "Diana", toggleDianaMenu).hint("Enable or Disable Diana. This will remove her from enc table and if already in camp disable access to her.");
+		addButton(2, "Diva", toggleDivaMenu).hint("Enable or Disable Diva. This will remove her from enc table and if already in camp disable access to her.");
+		addButton(3, "Electra", toggleElectraMenu).hint("Enable or Disable Electra. This will remove her from enc table and if already in camp disable access to her.");
+		addButton(4, "Etna", toggleEtnaMenu).hint("Enable or Disable Etna. This will remove her from enc table and if already in camp disable access to her.");
+		addButton(5, "Luna", toggleLunaMenu).hint("Enable or Disable Luna. This will remove her from enc table and if already in camp disable access to her.");
 		addButton(6, "DragonBoi", toggleTedMenu).hint("Enable or Disable Dragon Boi. This will remove him from enc table.");
 		addButton(14, "Back", campActions);
 	}
@@ -3489,8 +3526,8 @@ public class Camp extends NPCAwareContent{
 		if (timeQ == 0) {
 			timeQ = waitingORresting;
 
-			if (player.lowerBody == LowerBody.PLANT_FLOWER) outputText("You lie down in your pitcher, closing off your petals as you get comfortable for " + num2Text(timeQ) + " hours...\n");
-			else outputText("You wait " + num2Text(timeQ) + " hours...\n");
+			if (player.lowerBody == LowerBody.PLANT_FLOWER) outputText("You lie down in your pitcher, closing off your petals as you get comfortable for " + num2Text(timeQ) + " hour" + (timeQ % 10 == 1 ? "" : "s") + "...\n");
+			else outputText("You wait " + num2Text(timeQ) + " hour" + (timeQ % 10 == 1 ? "" : "s") + "...\n");
 			//Marble withdrawl
 			if (player.hasStatusEffect(StatusEffects.MarbleWithdrawl)) {
 				outputText("\nYour time spent waiting is very troubled, and you aren't able to settle down.  You get up feeling tired and unsatisfied, always thinking of Marble's milk.\n");

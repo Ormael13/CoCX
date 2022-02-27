@@ -461,7 +461,7 @@ public class PhoukaScene extends BaseContent implements TimeAwareInterface {
 					addButton(0, "Leave", phoukaLeaveOnLustWin);
 					addButton(1, "Anal Ride", phoukaSexFaeriePostCombat); //Works for all
 					if (player.hasCock()) addButton(2, "Fuck Faerie", phoukaSexFaerieFemalePostCombat); //Male or Herm Only
-					if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 009).hint("Other non typical sex scenes.");
+					if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 9).hint("Other non typical sex scenes.");
 				}
 			}
 		}
@@ -470,7 +470,7 @@ public class PhoukaScene extends BaseContent implements TimeAwareInterface {
 			addButton(0, "Leave", phoukaLeaveOnLustWin);
 			addButton(1, "Anal Ride", phoukaSexFaeriePostCombat); //Works for all
 			if (player.hasCock()) addButton(2, "Fuck Faerie", phoukaSexFaerieFemalePostCombat); //Male or Herm Only
-			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 009).hint("Other non typical sex scenes.");
+			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 9).hint("Other non typical sex scenes.");
 		}
 
 		public function phoukaPregBirth():void

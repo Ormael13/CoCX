@@ -324,7 +324,7 @@ public class CombatTeases extends BaseCombatContent {
 		}
 		//==EXTRAS========
 		//12 Cat flexibility.
-		if (player.findPerk(PerkLib.Flexibility) >= 0 && player.isBiped() && player.hasVagina()) {
+		if (player.hasPerk(PerkLib.Flexibility) && player.isBiped() && player.hasVagina()) {
 			choices[choices.length] = 12;
 			choices[choices.length] = 12;
 			if (player.wetness() >= 3) choices[choices.length] = 12;
@@ -744,13 +744,13 @@ public class CombatTeases extends BaseCombatContent {
 				break;
 				//6 pussy flash
 			case 6:
-				if (player.findPerk(PerkLib.BimboBrains) >= 0 || player.findPerk(PerkLib.FutaFaculties) >= 0) {
+				if (player.hasPerk(PerkLib.BimboBrains) || player.hasPerk(PerkLib.FutaFaculties)) {
 					outputText("You coyly open your [armor] and giggle, \"<i>Is this, like, what you wanted to see?</i>\"  ");
 				}
 				else {
 					outputText("You coyly open your [armor] and purr, \"<i>Does the thought of a hot, ");
 					if (futa) outputText("futanari ");
-					else if (player.findPerk(PerkLib.BimboBody) >= 0) outputText("bimbo ");
+					else if (player.hasPerk(PerkLib.BimboBody)) outputText("bimbo ");
 					else outputText("sexy ");
 					outputText("body turn you on?</i>\"  ");
 				}
@@ -778,7 +778,7 @@ public class CombatTeases extends BaseCombatContent {
 				//8 Pec Dance
 			case 8:
 				outputText("You place your hands on your hips and flex repeatedly, skillfully making your pecs alternatively bounce in a muscular dance.  ");
-				if (player.findPerk(PerkLib.BroBrains) >= 0) outputText("Damn, [themonster] has got to love this!");
+				if (player.hasPerk(PerkLib.BroBrains)) outputText("Damn, [themonster] has got to love this!");
 				else outputText(monster.capitalA + monster.short + " will probably enjoy the show, but you feel a bit silly doing this.");
 				chance += (player.tone - 75) / 2;
 				damage += (player.tone - 70) / 2;
@@ -787,7 +787,7 @@ public class CombatTeases extends BaseCombatContent {
 				//9 Heroic Pose
 			case 9:
 				outputText("You lift your arms and flex your incredibly muscular arms while flashing your most disarming smile.  ");
-				if (player.findPerk(PerkLib.BroBrains) >= 0) outputText(monster.capitalA + monster.short + " can't resist such a heroic pose!");
+				if (player.hasPerk(PerkLib.BroBrains)) outputText(monster.capitalA + monster.short + " can't resist such a heroic pose!");
 				else outputText("At least the physical changes to your body are proving useful!");
 				chance += (player.tone - 75) / 2;
 				damage += (player.tone - 70) / 2;
@@ -796,12 +796,12 @@ public class CombatTeases extends BaseCombatContent {
 				//10 Bulgy groin thrust
 			case 10:
 				outputText("You lean back and pump your hips at [themonster] in an incredibly vulgar display.  The bulging, barely-contained outline of your [cock] presses hard into your gear.  ");
-				if (player.findPerk(PerkLib.BroBrains) >= 0) outputText("No way could [monster he] resist your huge cock!");
+				if (player.hasPerk(PerkLib.BroBrains)) outputText("No way could [monster he] resist your huge cock!");
 				else outputText("This is so crude, but at the same time, you know it'll likely be effective.");
 				outputText("  You go on like that, humping the air for your foe");
 				outputText("'s");
 				outputText(" benefit, trying to entice them with your man-meat.");
-				if (player.findPerk(PerkLib.BulgeArmor) >= 0) damage += 15;
+				if (player.hasPerk(PerkLib.BulgeArmor)) damage += 15;
 				penis = true;
 				break;
 				//11 Show off dick
@@ -809,10 +809,10 @@ public class CombatTeases extends BaseCombatContent {
 				if (silly() && rand(2) == 0) outputText("You strike a herculean pose and flex, whispering, \"<i>Do you even lift?</i>\" to [themonster].");
 				else {
 					outputText("You open your [armor] just enough to let your [cock] and [balls] dangle free.  A shiny rope of pre-cum dangles from your cock, showing that your reproductive system is every bit as fit as the rest of you.  ");
-					if (player.findPerk(PerkLib.BroBrains) >= 0) outputText("Bitches love a cum-leaking cock.");
+					if (player.hasPerk(PerkLib.BroBrains)) outputText("Bitches love a cum-leaking cock.");
 					else outputText("You've got to admit, you look pretty good down there.");
 				}
-				if (player.findPerk(PerkLib.BulgeArmor) >= 0) damage += 15;
+				if (player.hasPerk(PerkLib.BulgeArmor)) damage += 15;
 				penis = true;
 				break;
 				//==EXTRAS========
@@ -1487,6 +1487,15 @@ public class CombatTeases extends BaseCombatContent {
 			if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
 			damage *= damagemultiplier;
 			bonusDamage *= damagemultiplier;
+			if (player.hasPerk(PerkLib.ChiReflowLust)) damage *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
+			if (player.hasPerk(PerkLib.ArouseTheAudience) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType))) damage *= 1.5;
+			damage = (damage + rand(bonusDamage)) * monster.lustVuln;
+			if (SceneLib.urtaQuest.isUrta()) damage *= 2;
+			damage = Math.round(damage);
+			if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 20) {
+				outputText("\n[themonster] is so mesmerised by your show that it stands there gawking.");
+				monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+			}
 			//Determine if critical tease!
 			var crit:Boolean = false;
 			var critChance:int = 5;
@@ -1498,15 +1507,6 @@ public class CombatTeases extends BaseCombatContent {
 			if (rand(100) < critChance) {
 				crit = true;
 				damage *= 1.75;
-			}
-			if (player.hasPerk(PerkLib.ChiReflowLust)) damage *= UmasShop.NEEDLEWORK_LUST_TEASE_DAMAGE_MULTI;
-			if (player.hasPerk(PerkLib.ArouseTheAudience) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType))) damage *= 1.5;
-			damage = (damage + rand(bonusDamage)) * monster.lustVuln;
-			if (SceneLib.urtaQuest.isUrta()) damage *= 2;
-			damage = Math.round(damage);
-			if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 20) {
-				outputText("\n[themonster] is so mesmerised by your show that it stands there gawking.");
-				monster.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 			}
 			if (monster is JeanClaude) (monster as JeanClaude).handleTease(damage, true);
 			else if (monster is Doppleganger && !monster.hasStatusEffect(StatusEffects.Stunned)) (monster as Doppleganger).mirrorTease(damage, true);

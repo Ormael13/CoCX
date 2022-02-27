@@ -624,7 +624,7 @@ internal function victoryMinotaurGang():void {
 	if (player.hasVagina()) addButton(3, "Get Licked", createCallBackFunction(forceMinitaurToGiveOral, 0));
 	if (player.hasCock()) addButton(4, "Get Sucked", createCallBackFunction(forceMinitaurToGiveOral, 1));
 	addButton(5, "Discipline", disciplineEldestMinotaurSon);
-	if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 025).hint("Other non typical sex scenes.");
+	if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 25).hint("Other non typical sex scenes.");
 	addButton(14, "Leave", cleanupAfterCombat);
 }
 public function victoryMinotaurGang2():void {
@@ -635,7 +635,7 @@ public function victoryMinotaurGang2():void {
 	if (player.hasVagina()) addButton(3, "Get Licked", createCallBackFunction(forceMinitaurToGiveOral, 0));
 	if (player.hasCock()) addButton(4, "Get Sucked", createCallBackFunction(forceMinitaurToGiveOral, 1));
 	addButton(5, "Discipline", disciplineEldestMinotaurSon);
-	if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 025).hint("Other non typical sex scenes.");
+	if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 25).hint("Other non typical sex scenes.");
 	addButton(14, "Leave", cleanupAfterCombat);
 }
 //*[Victory Tit-Fuck] (for only the fattest of fat bitch titties)

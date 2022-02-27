@@ -26,7 +26,7 @@ public class PyreBurstSpell extends AbstractWhiteSpell {
 	
 	
 	override public function describeEffectVs(target:Monster):String {
-		return "~"+calcDamage(target,false)+" fire damage"
+		return "~"+calcDamage(target, false, false)+" fire damage"
 	}
 	
 	override public function get isKnown():Boolean {
@@ -44,10 +44,10 @@ public class PyreBurstSpell extends AbstractWhiteSpell {
 	 * @param randomize true: Apply random bonus, false: Apply average bonus
 	 * @return {Number} Damage dealt by this spell
 	 */
-	public function calcDamage(monster:Monster, randomize:Boolean=true):Number {
+	public function calcDamage(monster:Monster, randomize:Boolean=true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)
 		var baseDamage:Number = 2*scalingBonusIntelligence(randomize);
 		if (ex) baseDamage *= 2;
-		return adjustSpellDamage(baseDamage, DamageType.FIRE, CAT_SPELL_WHITE, monster);
+		return adjustSpellDamage(baseDamage, DamageType.FIRE, CAT_SPELL_WHITE, monster, true, casting);
 	}
 	
 	override protected function doSpellEffect(display:Boolean = true):void {
@@ -61,7 +61,7 @@ public class PyreBurstSpell extends AbstractWhiteSpell {
 				outputText("You wave the signs with your hands before striking the grounds causing an expending wave of flames to wash over [themonster].\n");
 			}
 		}
-		var damage:Number = calcDamage(monster);
+		var damage:Number = calcDamage(monster, true, true);
 		damage = critAndRepeatDamage(display, damage, DamageType.FIRE);
 		if (ex) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
 		checkAchievementDamage(damage);
