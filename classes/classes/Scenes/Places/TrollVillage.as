@@ -21,7 +21,7 @@ public class TrollVillage extends BaseContent implements SaveableState{
     public var yenza:Yenza = new Yenza();
     public var elderstore:ElderStoreHut = new ElderStoreHut();
 
-    public static var ZenjiVillageStage:int;    //0 = Initstate, 1 = ZenjiCompanion Intro Complete, 2 = Zenji forgives you, 3 = Consolation, 4 = Opening up to problems , 5 = Marriage, -1 = Banished.
+    public static var ZenjiVillageStage:Number;    //0 = Initstate, 1 = ZenjiCompanion Intro Complete, 2 = Zenji forgives you, 3 = Consolation, 4 = Opening up to problems , 5 = Marriage, -1 = Banished. 0.5 might be needed for found but no Zenji yet.
     public static var ZenjiFollowing:Boolean;
     public static var ZenjiBerated:Boolean;
     public static var YenzaLockdown:int;
@@ -159,7 +159,7 @@ public class TrollVillage extends BaseContent implements SaveableState{
                 outputText("You emerge at the troll village once again, the guard gives you a stern look but doesn’t obstruct you as you enter.\n");
             }
         }
-        if (ZenjiFollowing && ZenjiVillageStage == 0){
+        if (ZenjiFollowing && ZenjiVillageStage == 0 || ZenjiVillageStage == 0.5){
             SceneLib.trollVillage.jabala.MeetTheParents();
         }
         else{
@@ -169,7 +169,7 @@ public class TrollVillage extends BaseContent implements SaveableState{
             if (JabalaUnlocked) outputText("You can meet with Jabala and her husband if you like.\n");
             if (YenzaUnlocked > 0) outputText("You remember where Yenza’s hut is.\n");
             if (KaljiUnlocked) outputText("You can meet Kal’ji at his personal hut.\n");
-            ZenjiVillageStage = 1;
+            ZenjiVillageStage = 0.5;
 
 
             var menuItems:Array = [];
