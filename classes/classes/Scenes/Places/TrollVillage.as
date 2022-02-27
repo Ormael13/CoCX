@@ -6,6 +6,7 @@
 package classes.Scenes.Places {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.NPCs.ZenjiScenes;
 import classes.Scenes.Places.TrollVillage.*;
 import classes.Scenes.SceneLib;
 import classes.internals.SaveableState;
@@ -20,7 +21,7 @@ public class TrollVillage extends BaseContent implements SaveableState{
     public var yenza:Yenza = new Yenza();
     public var elderstore:ElderStoreHut = new ElderStoreHut();
 
-    public static var ZenjiVillageStage:int;    //1 = Intro Complete, 2 = Zenji forgives you.
+    public static var ZenjiVillageStage:int;    //0 = Initstate, 1 = ZenjiCompanion Intro Complete, 2 = Zenji forgives you, 3 = Consolation, 4 = Opening up to problems , 5 = Marriage, -1 = Banished.
     public static var ZenjiFollowing:Boolean;
     public static var ZenjiBerated:Boolean;
     public static var YenzaLockdown:int;
@@ -34,6 +35,7 @@ public class TrollVillage extends BaseContent implements SaveableState{
     public static var KaljiMBJDeny:int;
     public static var ZenjiMoneyHelp:int;
     public static var JabalaLoveChat:Boolean;
+    public static var ZenjiMarriageDress:int;
 
     public function stateObjectName():String {
         return "TrollVillage";
@@ -53,6 +55,7 @@ public class TrollVillage extends BaseContent implements SaveableState{
         KaljiMBJDeny = 0;
         ZenjiMoneyHelp = 0;
         JabalaLoveChat = false;
+        ZenjiMarriageDress = 0;
 
     }
     public function saveToObject():Object {
@@ -70,7 +73,8 @@ public class TrollVillage extends BaseContent implements SaveableState{
             "YubiUnlocked": YubiUnlocked,
             "KaljiMBJDeny": KaljiMBJDeny,
             "ZenjiMoneyHelp": ZenjiMoneyHelp,
-            "JabalaLoveChat": JabalaLoveChat
+            "JabalaLoveChat": JabalaLoveChat,
+            "ZenjiMarriageDress": ZenjiMarriageDress
         };
     }
     public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
@@ -89,6 +93,7 @@ public class TrollVillage extends BaseContent implements SaveableState{
             ZenjiTrollVillageTimeChk = o["ZenjiTrollVillageTimeChk"];
             ZenjiMoneyHelp = o["ZenjiMoneyHelp"];
             JabalaLoveChat = o["JabalaLoveChat"];
+            ZenjiMarriageDress = o["ZenjiMarriageDress"];
         } else {
             // loading from old save
             resetState();
@@ -178,13 +183,5 @@ public class TrollVillage extends BaseContent implements SaveableState{
         }
     }
 
-    private function ReturningHome():void{
-
     }
-
-    private function TheOldMansHut():void{
-
-    }
-
-}
 }
