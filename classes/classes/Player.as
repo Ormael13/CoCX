@@ -2281,7 +2281,9 @@ use namespace CoC;
 			if (hasStatusEffect(StatusEffects.BlazingBattleSpirit)) lust = 0;
 			if (raijuScore() >= 7 && lust100>=75){
 				if (!statStore.hasBuff("Supercharged")){
-					statStore.replaceBuffObject({'spe.mult':Math.round(speStat.mult.value)}, 'Supercharged', { text: 'Supercharged!' });
+					var buff:Number = 1;
+					if (hasPerk(MutationsLib.RaijuCathodeEvolved)) buff *= 2
+					statStore.replaceBuffObject({'spe.mult':Math.round(speStat.mult.value)*buff}, 'Supercharged', { text: 'Supercharged!' });
 					CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 					CoC.instance.mainView.statsView.showStatUp('spe');
 					outputText("\n\nAs your bottled up voltage ramps up you begin to lose yourself to lust turning increasingly feral as your overwhelming need to discharge override any rational thinking. FUCK… you need someone to fuck that voltage out of you!");
