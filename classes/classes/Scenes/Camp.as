@@ -285,10 +285,14 @@ public class Camp extends NPCAwareContent{
 			arianScene.arianLaysEggs();
 			return;
 		}
-		if (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3 && flags[kFLAGS.JOY_NIGHT_FUCK] == 1) {
+		if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3 && flags[kFLAGS.JOY_NIGHT_FUCK] == 1) {
 			joyScene.wakeUpWithJoyPostFuck();
 			return;
 		}
+        if (flags[kFLAGS.JOJO_BIMBO_STATE] == 4 && flags[kFLAGS.TALKED_TO_JOJO_ABOUT_JOY] == 0) { //post-debimbo conversation
+            jojoScene.afterDebimboTalk();
+            return;
+        }
 		if (flags[kFLAGS.EMBER_MORNING] > 0 && ((flags[kFLAGS.BENOIT_CLOCK_BOUGHT] > 0 && model.time.hours >= flags[kFLAGS.BENOIT_CLOCK_ALARM]) || (flags[kFLAGS.BENOIT_CLOCK_BOUGHT] <= 0 && model.time.hours >= 6))) {
 			hideMenus();
 			emberScene.postEmberSleep();
@@ -491,7 +495,7 @@ public class Camp extends NPCAwareContent{
 			}
 		}
 		//Jojo treeflips!
-		if (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4 && flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] < 3) {
+		if (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4 && flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3) {
 			holliScene.JojoTransformAndRollOut();
 			hideMenus();
 			return;
@@ -604,7 +608,7 @@ public class Camp extends NPCAwareContent{
 			return;
 		}
 		//Joy gives birth!
-		if (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3 && jojoScene.pregnancy.type == PregnancyStore.PREGNANCY_PLAYER && jojoScene.pregnancy.incubation == 0) {
+		if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3 && jojoScene.pregnancy.type == PregnancyStore.PREGNANCY_PLAYER && jojoScene.pregnancy.incubation == 0) {
 			joyScene.joyGivesBirth();
 			return;
 		}
@@ -1154,7 +1158,7 @@ public class Camp extends NPCAwareContent{
 		if (arianScene.arianFollower()) counter++;
 		if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2 && flags[kFLAGS.CHI_CHI_FOLLOWER] != 5 && !player.hasStatusEffect(StatusEffects.ChiChiOff)) counter++;
 		if (flags[kFLAGS.CEANI_FOLLOWER] > 0) counter++;
-		if (flags[kFLAGS.DIANA_FOLLOWER] > 5 && !player.hasStatusEffect(StatusEffects.DianaOff)) counter++;
+		if (flags[kFLAGS.DIANA_FOLLOWER] >= 6 && !player.hasStatusEffect(StatusEffects.DianaOff)) counter++;
 		if (flags[kFLAGS.ELECTRA_FOLLOWER] > 1 && !player.hasStatusEffect(StatusEffects.ElectraOff)) counter++;
 		if (flags[kFLAGS.ETNA_FOLLOWER] > 0 && !player.hasStatusEffect(StatusEffects.EtnaOff)) counter++;
 		if (flags[kFLAGS.EXCELLIA_RECRUITED] >= 33) counter++;
@@ -1185,7 +1189,7 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) counter++;
 		if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2 && flags[kFLAGS.CHI_CHI_FOLLOWER] != 5 && !player.hasStatusEffect(StatusEffects.ChiChiOff)) counter++;
 		if (flags[kFLAGS.CEANI_FOLLOWER] > 0) counter++;
-		if (flags[kFLAGS.DIANA_FOLLOWER] > 5 && !player.hasStatusEffect(StatusEffects.DianaOff)) counter++;
+		if (flags[kFLAGS.DIANA_FOLLOWER] >= 6 && !player.hasStatusEffect(StatusEffects.DianaOff)) counter++;
 		if (flags[kFLAGS.ELECTRA_FOLLOWER] > 1 && !player.hasStatusEffect(StatusEffects.ElectraOff)) counter++;
 		if (flags[kFLAGS.ETNA_FOLLOWER] > 0 && !player.hasStatusEffect(StatusEffects.EtnaOff)) counter++;
 		if (flags[kFLAGS.LUNA_FOLLOWER] >= 4 && !player.hasStatusEffect(StatusEffects.LunaOff)) counter++;
@@ -1210,7 +1214,7 @@ public class Camp extends NPCAwareContent{
 
 	public function maleNpcsHotBathCount():Number {
 		var counter:Number = 0;
-		if (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] < 3) counter++;
+		if (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3) counter++;
 		if (player.hasStatusEffect(StatusEffects.CampRathazul)) counter++;
 		if (arianScene.arianFollower() && flags[kFLAGS.ARIAN_VAGINA] < 1 && flags[kFLAGS.ARIAN_COCK_SIZE] > 0) counter++;
 		if (flags[kFLAGS.IZMA_BROFIED] == 1) counter++;
@@ -1337,7 +1341,7 @@ public class Camp extends NPCAwareContent{
 				else buttons.add("Chi Chi", SceneLib.chichiScene.ChiChiCampMainMenu2).disableIf(player.statusEffectv2(StatusEffects.CampSparingNpcsTimers2) > 0, "Training.");
 			}
 			//Diana
-			if (flags[kFLAGS.DIANA_FOLLOWER] > 5 && !player.hasStatusEffect(StatusEffects.DianaOff)) {
+			if (flags[kFLAGS.DIANA_FOLLOWER] >= 6 && !player.hasStatusEffect(StatusEffects.DianaOff)) {
 				outputText("Diana is resting next to her many medical tools and medicines.\n\n");
 				buttons.add("Diana", SceneLib.dianaScene.mainCampMenu).disableIf(player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) > 0, "Training.");
 			}
@@ -1798,7 +1802,7 @@ public class Camp extends NPCAwareContent{
 			}
 			//Pure Jojo
 			if (player.hasStatusEffect(StatusEffects.PureCampJojo)) {
-				if (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3) {
+				if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3) {
 					outputText("Joy's tent is set up in a quiet corner of the [camp], close to a boulder. Inside the tent, you can see a chest holding her belongings, as well as a few clothes and books spread about her bedroll. ");
 					if (flags[kFLAGS.JOJO_LITTERS] > 0 && model.time.hours >= 16 && model.time.hours < 19) outputText("You spot the little mice you had with Joy playing about close to her tent.");
 					else outputText("Joy herself is nowhere to be found, she's probably out frolicking about or sitting atop the boulder.");
@@ -2051,6 +2055,7 @@ public class Camp extends NPCAwareContent{
 			addButtonDisabled(2, "Watch Sky", "The option to watch sunset is available at 7pm.");
 		}
 		addButton(3, "Read Codex", codex.accessCodexMenu).hint("Read any codex entries you have unlocked.");
+		addButton(4, "Recall", recallScenes).hint("Recall some of the unique events happened during your adventure.");
 		if (player.hasKeyItem("Gryphon Statuette") >= 0) addButton(9, "Gryphon", useGryphonStatuette);
 		if (player.hasKeyItem("Peacock Statuette") >= 0) addButton(9, "Peacock", usePeacockStatuette);
 		addButton(14, "Back", campActions);
@@ -3695,7 +3700,7 @@ public class Camp extends NPCAwareContent{
 					emberScene.sleepWithEmber();
 					return;
 				}
-			} else if (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3 && jojoScene.pregnancy.isPregnant && jojoScene.pregnancy.event == 4 && player.hasCock() && flags[kFLAGS.SLEEP_WITH] == 0) {
+			} else if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3 && jojoScene.pregnancy.isPregnant && jojoScene.pregnancy.event == 4 && player.hasCock() && flags[kFLAGS.SLEEP_WITH] == 0) {
 				joyScene.hornyJoyIsPregnant();
 				return;
 			} else if (flags[kFLAGS.SLEEP_WITH] == "Sophie" && (bimboSophie() || sophieFollower()) && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) {
@@ -6631,6 +6636,21 @@ public function rebirthFromBadEnd():void {
 			player.removeStatusEffect(StatusEffects.AchievementsNormalShadowTotal);
 		}
 	}
+
+    public function recallScenes():void {
+        clearOutput();
+        outputText("You close your eyes, remembering all this life put you through. All your fights, friends... lovers.\n\n");
+        outputText("Though many things are still easily reachable, you still remember some unique events of your life, and one question bothers you - what would happen if at the specific moment you were different? How would you and your companions look and behave right now?\n");
+		outputText("Falling asleep, you think about it, recalling the exact time and place...\n\n");
+		outputText("<i>I ask thee, eternal time...</i>\n");
+		outputText("\n\nThis part is WIP. You can add more scenes.");
+		outputText("\nThe idea behind is to try unique scenes with different ways or options or body parts.");
+        menu();
+		if (flags[kFLAGS.MARBLE_PURIFIED] == 1)
+			addButton(0, "Marble & Clara", SceneLib.marblePurification.defeatClaraCuntInAFight, false, true);
+        addButtonDisabled(13, "BadEnds", "SH is too lazy to add them too right now, but if anyone wants...");
+        addButton(14, "Wake Up", campSpendTimeActions);
+    }
 
 	/*
         private function fixHistory():void {

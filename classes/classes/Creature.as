@@ -1803,44 +1803,6 @@ public class Creature extends Utils
 				return 0;
 			return cocks[shortestCockIndex()].cockLength;
 		}
-/*
-		//Find the biggest cock that fits inside a given range
-		public function cockThatFits(i_fits:Number, type:String = "area", i_min:Number = 0):Number
-		{
-			if (cocks.length <= 0)
-				return -1;
-			var i:int = cocks.length;
-			//Current largest fitter
-			var best:int = -1;
-			while (i > 0)
-			{
-				i--;
-				var ival:Number;
-				var bestval:Number;
-				if (type == "area") {
-					ival   = cockArea(i);
-					bestval = best==-1?0:cockArea(best);
-				} else if (type == "length") {
-					ival = cocks[i].cockLength;
-					bestval = best==-1?0:cocks[best].cockLength;
-				}
-				if (i_min <= ival && ival <= i_fits)
-				{
-					//If one already fits
-					if (best >= 0)
-					{
-						//See if the newcomer beats the saved small guy
-						if (ival > bestval)
-							best = i;
-					}
-					//Store the index of fitting dick
-					else
-						best = i;
-				}
-			}
-			return best;
-		}
-        */
 
         public function cockThatFits(i_fits:Number, type:String = "area"):Number {
             return findCock(1, -1, i_fits, type);

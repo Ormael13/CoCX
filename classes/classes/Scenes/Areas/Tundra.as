@@ -36,8 +36,10 @@ use namespace CoC;
 			choice[choice.length] = 2; //Young Frost Giant (lvl 47)
 			choice[choice.length] = 3; //Snow Lily (lvl 40)
 			choice[choice.length] = 4; //Ice Golem (lvl 64)
-			choice[choice.length] = 5; //Find Alabaster
-			choice[choice.length] = 6; //Find nothing!
+            if (player.hasKeyItem("Old Pickaxe") > 0 && Forgefather.materialsExplained)
+			    choice[choice.length] = 5; //Find Alabaster
+            if (rand(4) == 0)
+			    choice[choice.length] = 6; //Find nothing!
 			
 			//Glacial Rift
 			if (flags[kFLAGS.DISCOVERED_GLACIAL_RIFT] <= 0 && (player.level + combat.playerLevelAdjustment()) >= 65) {
@@ -84,13 +86,11 @@ use namespace CoC;
 					break;
 				case 5: //Alabaster
 					clearOutput();
-					if (player.hasKeyItem("Old Pickaxe") > 0 && Forgefather.materialsExplained == true){
-						outputText("You stumble across a vein of Alabaster, this looks like suitable material for your gargoyle form.\n");
-						outputText("Do you wish to mine it?");
-						menu();
-						addButton(0, "Yes", tundraSiteMine);
-						addButton(1, "No", camp.returnToCampUseOneHour);
-					}
+                    outputText("You stumble across a vein of Alabaster, this looks like suitable material for your gargoyle form.\n");
+                    outputText("Do you wish to mine it?");
+                    menu();
+                    addButton(0, "Yes", tundraSiteMine);
+                    addButton(1, "No", camp.returnToCampUseOneHour);
 					break;
 				default:
 					clearOutput();
@@ -114,7 +114,7 @@ use namespace CoC;
 					return;
 				}
 				outputText("\n\nYou begin slamming your pickaxe against the alabaster, spending the better part of the next two hours mining. This done, you bring back your prize to camp. ");
-				var minedStones:Number = 13 + Math.floor(player.str / 7);
+				var minedStones:Number = 13 + Math.floor(player.str / 20);
 				minedStones = Math.round(minedStones);
 				fatigue(50, USEFATG_PHYSICAL);
 				SceneLib.forgefatherScene.incrementAlabasterSupply(minedStones);

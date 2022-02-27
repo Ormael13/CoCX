@@ -36,7 +36,7 @@ public class FireStormSpell extends AbstractWhiteSpell{
 	
 	override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
-			outputText("You narrow your eyes, deadly intent smoldering in your gaze. You draw as much mana as you can muster into a single finger, which you point at [themonster]. A few motes of light and heat form around [themonster], almost immediately exploding into a spiral of flame around them, howling like the storm-driven winds. They will burn");
+			outputText("You narrow your eyes, deadly intent smoldering in your gaze. You draw as much mana as you can muster into a single finger, which you point at [themonster]. A few motes of light and heat form around [themonster], almost immediately exploding into a spiral of flame around them, howling like the storm-driven winds.");
 		}
 		var damage:Number = calcDamage(monster, true, true);
 		damage = critAndRepeatDamage(display, damage, DamageType.FIRE);
