@@ -2844,7 +2844,8 @@ import coc.view.ButtonDataList;
 						"His rejection stings, but his words carry meaning.\n" +
 						"\n" +
 						"Zenji rests a hand on your shoulder, “Never disgrace love, [name],” he states before leaving you alone for the time being.");
-				doNext(createCallBackFunction(camp.returnToCamp,15));
+				eachMinuteCount(15);
+				doNext(loverZenjiTalks);
 			}
 			else{
 				outputText("You call Zenji to you, to which he immediately approaches you with a stride in his step. His deep voice rings to you as he stands in front of you, \"You called?\"\n" + "\n");
@@ -3614,6 +3615,7 @@ import coc.view.ButtonDataList;
 						"\n" +
 						"You say your goodbyes to Jabala and Halkano, assuring them that you will return soon as you return to your camp, ready to live your life with your newlywed husband.\n");
 			}
+			flags[kFLAGS.MARRIAGE_FLAG] = "Zenji";
 			var timeShift:int = (24 - model.time.hours) + 8
 			doNext(createCallBackFunction(camp.returnToCamp,timeShift));
 		}
