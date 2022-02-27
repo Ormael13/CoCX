@@ -1044,6 +1044,7 @@ use namespace CoC;
 			clearOutput();
 			if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] == 2) {
 				outputText("You wander back into the Temple basement atelier.");
+				
 				menu();
 				addButton(0, "Statue", currentStateOfStatue).hint("Check on the statue.");
 				addButton(1, "Strange Book", strangeBookOfGolems).hint("Examine the strange book.");
@@ -1163,7 +1164,7 @@ use namespace CoC;
 		public function currentStateOfStatue():void {
 			clearOutput();
 			outputText("This statue looks like ");
-			if (flags[kFLAGS.GARGOYLE_BODY_SCULPTING_PROGRESS] >= 11) outputText("a finished");
+			if (Forgefather.statueProgress >= 11) outputText("a finished");
 			else outputText("an incomplete stone gargoyle. This statue looks like ");
 			if (Forgefather.gender == 1) outputText("it has a gorgeous female face");
 			if (Forgefather.gender == 2) outputText("it has a handsome male face");
@@ -1280,7 +1281,7 @@ use namespace CoC;
 			else addButtonDisabled(8, "Cock", "You already sculpted the Cock Area.");
 			if (Forgefather.balls < 1) addButton(9, "Balls", SculptBalls);
 			else addButtonDisabled(9, "Balls", "You already sculpted the Balls Area.");
-			if (Forgefather.statueProgress >= 11 && flags[kFLAGS.GARGOYLE_QUEST] >= 3 && !player.isGargoyle()) addButton(13, "Ritual", becomingGargoyle);
+			if (Forgefather.statueProgress >= 10 && flags[kFLAGS.GARGOYLE_QUEST] >= 3 && !player.isGargoyle()) addButton(13, "Ritual", becomingGargoyle);
 			addButton(14, "Back", BackToSapphire);
 		}
 		public function BackToSapphire():void {

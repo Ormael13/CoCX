@@ -13,22 +13,32 @@ package classes.Scenes.NPCs
 		public function DianaFollower() 
 		{}
 
-public function dianaAffection(changes:Number = 0):Number {
-	flags[kFLAGS.DIANA_AFFECTION] += changes;
-	if (flags[kFLAGS.DIANA_AFFECTION] > 100) flags[kFLAGS.DIANA_AFFECTION] = 100;
-	return flags[kFLAGS.DIANA_AFFECTION];
-}
-//0-10 affection - Horse-morph; 10-100 affection - Unicorn; 100 affection - Alicorn
-public function repeatLakeEnc():void {
+/*
+DIANA_FOLLOWER - status:
+    0 - unknown
+    1 - intermediate
+    2 - "slightly corrupted"
+    3 - vag raped, locked
+    4 - unused, but probably corrupted too
+    5 - wants you
+    6 - follower
+
+*/
+
+public function repeatEnc():void {
 	clearOutput();
-	outputText("As you explore the lake area, you run into ");
-	if (flags[kFLAGS.DIANA_AFFECTION] >= 95) outputText("Diana");
+	outputText("As you explore the area, you run into ");
+	if (flags[kFLAGS.DIANA_LVL_UP] >= 8 && flags[kFLAGS.DIANA_FOLLOWER] != 3) outputText("Diana");
 	else if (flags[kFLAGS.DIANA_LVL_UP] >= 2) outputText("a unicorn");
 	else outputText("a white furred horse morph");
 	outputText(".\n\nAt first she doesn’t notice you, given how busy she is examining a flower. You walk closer to greet her, but the sound of your feet on dry leaves immediately alerts her. She turns over with a startled expression as she grabs her staff to defend herself, lunging for a set of preemptive strikes as she begins to attack you.\n\n");
 	outputText("\"<i>Eeeeep! Go away, you fiend! ");
-	if (flags[kFLAGS.DIANA_FOLLOWER] > 0) outputText("You stained my soul enough as it is. I don’t want any more of your corruption!");
-	else outputText("I’m not handing over my virginity to you");
+    if (flags[kFLAGS.DIANA_FOLLOWER] == 0)
+        outputText("I’m not handing over my virginity to you");
+	else if (flags[kFLAGS.DIANA_FOLLOWER] < 3)
+        outputText("You stained my soul enough as it is. I don’t want any more of your corruption!");
+	else
+        outputText("You've already taken my virginity. What else do you want?!");
 	outputText("!!!!!</i>\"\n\nYou prepare yourself as it seems you have a fight on your hands.\n\n");
 	outputText("You are under attack by a");
 	if (flags[kFLAGS.DIANA_LVL_UP] >= 8) outputText("n alicorn!");
@@ -37,48 +47,16 @@ public function repeatLakeEnc():void {
 	startCombat(new Diana());
 	doNext(playerMenu);
 }
-public function repeatPlainsEnc():void {
+public function postNameEnc():void {
 	clearOutput();
-	outputText("As you explore the plains area, you run into ");
-	if (flags[kFLAGS.DIANA_AFFECTION] >= 95) outputText("Diana");
-	else outputText("a unicorn");
-	outputText(".\n\nAt first she doesn’t notice you, given how busy she is examining a flower. You walk closer to greet her but the sound of your feet on dry leaves immediately alerts her. She turns over with a startled expression as she grabs her staff to defend herself, lunging for a set of preemptive strikes as she begins to attack you.\n\n");
-	outputText("\"<i>Eeeeep! Go away, you fiend! ");
-	if (flags[kFLAGS.DIANA_FOLLOWER] > 0) outputText("You stained my soul enough as It is. I don’t want any more of your corruption!");
-	else outputText("I’m not handing over my virginity to you");
-	outputText("!!!!!</i>\"\n\nYou prepare yourself as it seems you have a fight on your hands.\n\n");
-	outputText("You are under attack by a");
-	if (flags[kFLAGS.DIANA_LVL_UP] >= 8) outputText("n alicorn!");
-	else outputText(" unicorn!");
-	startCombat(new Diana());
-	doNext(playerMenu);
-}
-public function repeatBattlefieldEnc():void {
-	clearOutput();
-	outputText("As you explore the battlefield area, you run into ");
-	if (flags[kFLAGS.DIANA_AFFECTION] >= 95) outputText("Diana");
-	else outputText("an unicorn");
-	outputText(".\n\nAt first she doesn’t notice you, she’s too busy examining a flower. You walk to her to greet her, but the sound of your feet on dry leaves immediately alerts her. She turns over with a startled expression and grabs her staff to defend herself, lunging for a set of preemptive strikes as she begins to attack you.\n\n");
-	outputText("\"<i>Eeeeep! Go away, you fiend! ");
-	if (flags[kFLAGS.DIANA_FOLLOWER] > 0) outputText("You stained my soul enough as It is. I don’t want any more your corruption!");
-	else outputText("I’m not handing over my virginity to you!");
-	outputText("!!!!!</i>\"\n\nWell seems you got a fight on your hands.\n\n");
-	outputText("You are under attack by a");
-	if (flags[kFLAGS.DIANA_LVL_UP] >= 8) outputText("n alicorn!");
-	else outputText(" unicorn!");
-	startCombat(new Diana());
-	doNext(playerMenu);
-}
-public function postNameForestEnc():void {
-	clearOutput();
-	outputText("As you explore the forest area, you run into Diana.\n\n");
+	outputText("As you explore the area, you run into Diana.\n\n");
 	outputText("At first she doesn’t notice you, to busy examining a flower. You walk to her to say hi, but the sound of your feet on dry leaves immediately alerts her. She turns over with a startled  expression and grabs her staff to defend herself, but relax as she realise it’s you.\n\n");
-	outputText("\"<i>Oh hello [name]! I didn’t expect you. Say while you happen to be there, I’m in need of a sparring partner.<i>\". She takes a few steps towards you, spinning her staff with one hand. \"<i>Would you mind having a friendly fight with me?</i>\"\n\n");
+	outputText("\"<i>Oh hello [name]! I didn’t expect you. Say while you happen to be there, I’m in need of a sparring partner.</i>\". She takes a few steps towards you, spinning her staff with one hand. \"<i>Would you mind having a friendly fight with me?</i>\"\n\n");
 	menu();
-	addButton(1, "Sure", postNameForestEncSure);
-	addButton(3, "Not Now", postNameForestEncNotNow);
+	addButton(1, "Sure", postNameEncSure);
+	addButton(3, "Not Now", postNameEncNotNow);
 }
-public function postNameForestEncSure():void {
+public function postNameEncSure():void {
 	outputText("Well why not? You could use a warmup yourself.\n\n");
 	outputText("\"<i>Thank you [name], chances to improve myself are rare in these lands and I need all the training I can get to reach my goal and dreams.</i>\"\n\n");
 	outputText("She grabs her staff and adopt a fighting stance, ready for combat.\n\n");
@@ -86,7 +64,7 @@ public function postNameForestEncSure():void {
 	startCombat(new Diana());
 	doNext(playerMenu);
 }
-public function postNameForestEncNotNow():void {
+public function postNameEncNotNow():void {
 	outputText("You don’t have time for sparring right now. Diana looks slightly disappointed, but she nods respectfully as you head out back to camp.\n\n");
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -101,9 +79,17 @@ public function wonOverDiana():void {
 }
 public function wonOverDianaSex():void {
 	menu();
-	if (player.hasVagina()) addButton(0, "Oral (F)", wonOverDianaOralF);
+	if (player.hasVagina()) {
+        outputText("\n\nYou can make her lick your vagina.");
+        addButton(0, "Oral (F)", wonOverDianaOralF);
+    }
 	if (player.hasCock()) {
+        outputText("\n\nYou can make her suck you off.");
 		addButton(1, "Oral (M)", wonOverDianaOralM);
+        if (flags[kFLAGS.DIANA_FOLLOWER] < 3)
+            outputText("\n\nOr you can take her precious virginity she asked you not to take.");
+        else
+            outputText("\n\nOr you can fuck her pussy again.");
 		addButton(2, "Rape", wonOverDianaRape);
 	}
 	addButton(3, "Back", wonOverDiana);
@@ -325,9 +311,7 @@ private function object():String {
 	return buffer;
 }
 private function virginity():Boolean {
-	if ((flags[kFLAGS.DIANA_LVL_UP] >= 1 && flags[kFLAGS.DIANA_FOLLOWER] == 3) || (flags[kFLAGS.DIANA_LVL_UP] >= 2 && flags[kFLAGS.DIANA_FOLLOWER] == 4))
-		return false;
-	return true;
+	return !(flags[kFLAGS.DIANA_FOLLOWER] == 3);
 }
 public function wonOverDianaRape():void {
 	clearOutput();
@@ -443,15 +427,13 @@ public function wonOverDianaRape():void {
 		outputText("\"<i>NO! Cum outside!! Outside!!</i>\" she screams, trying to escape again.\n\n");
 		outputText("Grunting, and with a huge amount of self control, you pull yourself out of her, spraying your load over her back. Satisfied, you climb off her, leaving her to hang off the " + object() + ", crying softly to herself, while you dress yourself and leave.\n\n");
 	}
-	//if (player.isAlraune()) x;
-	if (flags[kFLAGS.DIANA_LVL_UP] < 3) flags[kFLAGS.DIANA_FOLLOWER] = 3;
-	else flags[kFLAGS.DIANA_FOLLOWER] = 4;
+	flags[kFLAGS.DIANA_FOLLOWER] = 3;
 	player.sexReward("vaginalFluids");
 	cleanupAfterCombat();
 }
 public function wonOverDianaSpare():void {
 	clearOutput();
-	if (flags[kFLAGS.DIANA_LVL_UP] == 7 && flags[kFLAGS.DIANA_AFFECTION] == 95) {
+	if (flags[kFLAGS.DIANA_LVL_UP] == 8 && flags[kFLAGS.DIANA_FOLLOWER] < 3) {
 		outputText("You tell the girl you will let her go. You have no business with her. The horse morph however doesn't leave right away.\n\n");
 		outputText("\"<i>Thank you. I may have been too hasty to judge you and I think it’s high time we truly gets acquainted. I just wanted you to know that my name's Diana.</i>\"\n\n");
 		outputText("Well Diana, that’s one name you don't plan to forget. still, she'd better be off on her way now. She nods and runs off disappearing in the forest.\n\n");
@@ -470,40 +452,8 @@ public function lostToDiana():void {
 	return;
 }
 private function levelingHerself():void {
-	flags[kFLAGS.DIANA_DEFEATS_COUNTER]++;
-	if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 1 && flags[kFLAGS.DIANA_LVL_UP] == 0) {
-		flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
-		flags[kFLAGS.DIANA_LVL_UP] = 1;
-	}
-	if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 1 && flags[kFLAGS.DIANA_LVL_UP] == 1) {
-		flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
-		flags[kFLAGS.DIANA_LVL_UP] = 2;
-	}
-	if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 2 && flags[kFLAGS.DIANA_LVL_UP] == 2) {
-		flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
-		flags[kFLAGS.DIANA_LVL_UP] = 3;
-	}
-	if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 2 && flags[kFLAGS.DIANA_LVL_UP] == 3) {
-		flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
-		flags[kFLAGS.DIANA_LVL_UP] = 4;
-	}
-	if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 3 && flags[kFLAGS.DIANA_LVL_UP] == 4) {
-		flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
-		flags[kFLAGS.DIANA_LVL_UP] = 5;
-	}
-	if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 3 && flags[kFLAGS.DIANA_LVL_UP] == 5) {
-		flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
-		flags[kFLAGS.DIANA_LVL_UP] = 6;
-	}
-	if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 4 && flags[kFLAGS.DIANA_LVL_UP] == 6) {
-		flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
-		flags[kFLAGS.DIANA_LVL_UP] = 7;
-	}
-	if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 4 && flags[kFLAGS.DIANA_LVL_UP] == 7) {
-		flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
-		flags[kFLAGS.DIANA_LVL_UP] = 8;
-	}
-	dianaAffection(5);
+    if (flags[kFLAGS.DIANA_FOLLOWER] < 3 && flags[kFLAGS.DIANA_LVL_UP] < 8)
+	    flags[kFLAGS.DIANA_LVL_UP]++;
 }
 public function beMyStallion():void {
 	clearOutput();
@@ -546,7 +496,7 @@ public function beMyStallionNo():void {
 }
 public function breakingInYourMare():void {
 	clearOutput();
-	if (player.gender == 0 || player.gender == 2) {
+	if (!player.hasCock()) {
 		outputText("You take the mixture, groaning as you suddenly feel a sizeable cock growing between your legs.\n\n");
 		player.createCock(10 + rand(7), 2 + rand(10) / 10);
 		player.cocks[0].cockType = CockTypesEnum.HORSE;
@@ -700,50 +650,12 @@ public function wonOverDianaSpar():void {
 	clearOutput();
 	outputText("\"<i>I need get stronger if you're going to keep at this,</i>\" she mumbles under her breath.\n\n");
 	if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) {
-		if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] >= 1) flags[kFLAGS.DIANA_DEFEATS_COUNTER]++;
-		else flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 1;
-		if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 5 && flags[kFLAGS.DIANA_LVL_UP] == 8) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, ((player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 7)+3));
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, ((player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 7)+3));
-			flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.DIANA_LVL_UP] = 9;
-		}
-		if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 6 && flags[kFLAGS.DIANA_LVL_UP] == 9) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, ((player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 8)+3));
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, ((player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 8)+3));
-			flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.DIANA_LVL_UP] = 10;
-		}
-		if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 7 && flags[kFLAGS.DIANA_LVL_UP] == 10) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, ((player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 9)+3));
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, ((player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 9)+3));
-			flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.DIANA_LVL_UP] = 11;
-		}
-		if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 8 && flags[kFLAGS.DIANA_LVL_UP] == 11) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, ((player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 10)+3));
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, ((player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 10)+3));
-			flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.DIANA_LVL_UP] = 12;
-		}
-		if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 9 && flags[kFLAGS.DIANA_LVL_UP] == 12) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, ((player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 11)+3));
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, ((player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 11)+3));
-			flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.DIANA_LVL_UP] = 13;
-		}
-		if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 10 && flags[kFLAGS.DIANA_LVL_UP] == 13) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, ((player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 12)+3));
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, ((player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 12)+3));
-			flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.DIANA_LVL_UP] = 14;
-		}
-		if (flags[kFLAGS.DIANA_DEFEATS_COUNTER] == 11 && flags[kFLAGS.DIANA_LVL_UP] == 14) {
-			if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, ((player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 13)+3));
-			else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, ((player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 13)+3));
-			flags[kFLAGS.DIANA_DEFEATS_COUNTER] = 0;
-			flags[kFLAGS.DIANA_LVL_UP] = 15;
-		}
+        if (flags[kFLAGS.DIANA_LVL_UP] < 15)
+            flags[kFLAGS.DIANA_LVL_UP]++;
+        if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers2))
+            player.addStatusValue(StatusEffects.CampSparingNpcsTimers2, 4, ((player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 8)+3));
+		else
+            player.createStatusEffect(StatusEffects.CampSparingNpcsTimers2, 0, 0, 0, ((player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 8)+3));
 	}
 	cleanupAfterCombat();
 }
@@ -805,21 +717,13 @@ public function mainSexMenu():void {
 	outputText("\"<i>How would you want us to do it?</i>\"\n\n");
 	menu();
 	if (player.hasCock()) {
-		if (player.isTaur()) {
-			//addButtonDisabled(0, "Breeding", "Not for Taurs!");
-			addButtonDisabled(1, "Vaginal", "Not for Taurs!");
-			addButtonDisabled(2, "Anal", "Not for Taurs!");
-			addButtonDisabled(3, "Titfuck", "Not for Taurs!");
-		}
-		else {
-			//addButton(0, "Breeding", SexMenuBreeding);
-			if (player.cockThatFits(36, "length") >= 0) addButton(1, "Vaginal", SexMenuVaginal);
-			else addButtonDisabled(1, "Vaginal", "You're Too Big!");
-			if (player.cockThatFits(36, "length") >= 0) addButton(2, "Anal", SexMenuAnal);
-			else addButtonDisabled(2, "Anal", "You're Too Big!");
-			if (player.cockThatFits(36, "length") >= 0) addButton(3, "Titfuck", SexMenuTitsfuck);
-			else addButtonDisabled(3, "Titfuck", "You're Too Big!");
-		}
+        //addButton(0, "Breeding", SexMenuBreeding);
+        if (player.cockThatFits(36, "length") >= 0) addButton(1, "Vaginal", SexMenuVaginal);
+        else addButtonDisabled(1, "Vaginal", "You're Too Big!");
+        if (player.cockThatFits(36, "length") >= 0) addButton(2, "Anal", SexMenuAnal);
+        else addButtonDisabled(2, "Anal", "You're Too Big!");
+        if (player.cockThatFits(36, "length") >= 0 || player.findCockWithType(CockTypesEnum.TENTACLE, 1, -1, -1)) addButton(3, "Titfuck", SexMenuTitsfuck);
+        else addButtonDisabled(3, "Titfuck", "You're Too Big!");
 	}
 	else {
 		//addButtonDisabled(0, "Breeding", "Not for Dickless!");
@@ -899,12 +803,15 @@ public function SexMenuAnal():void {
 }
 public function SexMenuTitsfuck():void {
 	clearOutput();
-	var x:int = player.cockThatFits(36, "length");
+	var x:int = player.findCockWithType(CockTypesEnum.TENTACLE, 1, -1, -1);
+    var tentacocks:int = player.countCocksWithType(CockTypesEnum.TENTACLE, -1, -1);
+    if (x < 0)
+        player.cockThatFits(36, "length");
 	outputText("You request that Diana give you a titjob.\n\n");
 	outputText("\"<i>Of course my stallion, I would love to have your cock buried between my mounds,</i>\" Diana says, smiling happily while eagerly pressing her tits together.\n\n");
 	/*if (player.isTaur()) outputText("\"<i>Please hurry, I can’t wait!</i>\" Diana begs you, still hugging your head.\n\n");
 	else {*/
-		if (player.isAlraune()) outputText("Diana gets on her knees, while your vine cocks move out around her, the largest one moves in front of her.\n\n");
+		if (tentacocks > 1) outputText("Diana gets on her knees, while your vine cocks move out around her, the largest one moves in front of her.\n\n");
 		else {
 			outputText("You sit down on a on a nearby " + object() + " while Diana gets on her knees in front of you, before undoing your [armor] and pulling out your erect " + (player.cocks.length == 1 ? "[cock]" : "[cocks]") + "");
 			if (player.isNaga()) outputText("from it’s protective snake slit");
@@ -912,7 +819,7 @@ public function SexMenuTitsfuck():void {
 			outputText(".\n\n");
 		}
 		outputText("\"<i>My stallion is all ready I see,</i>\" Diana says, smiling.\n\n");
-		if (player.isAlraune()) outputText("Diana moves forward slightly, allowing the " + (player.cocks[x].cockLength >= 25 ? "monsterous" : "large") + " vine to sink between her mounds, your cock like vine’s lower shaft disappearing among the soft flesh.\n\n");
+		if (tentacocks > 1) outputText("Diana moves forward slightly, allowing the " + (player.cocks[x].cockLength >= 25 ? "monsterous" : "large") + " vine to sink between her mounds, your cock like vine’s lower shaft disappearing among the soft flesh.\n\n");
 		else outputText("Diana then presses her big breasts against your stomach, your [cock biggest] cock shaft slipping between her cleavage. You can’t help but out a little grunt of pleasure at the feelings of her soft flesh on your [skin].\n\n");
 		outputText("\"<i>Do you like my breasts [name]? I’m so glad...</i>\" Diana says staring endearingly at your cock, ");
 		if (player.cocks[x].cockLength >= 25) outputText("which most of the monstrous length is laying across her head, making her shower the titanous member with her devotion in kisses and licks");
@@ -920,9 +827,9 @@ public function SexMenuTitsfuck():void {
 		else outputText("which is sticking out of the middle of her cleavage");
 		outputText(".\n\nDiana presses her large tits with her hands " + (player.cocks[x].cockLength >= 25 ? ". She begins to move her body gently up and down, her tits rubbing along your shaft in sync with her movements, earning another pleased grunt from you" : ", her breasts wrapping comfortably around your girth") + ".\n\n");
 		outputText("\"<i>You cock is so hot between my breasts!</i>\" Diana compliments, her eyes hot with lust.\n\n");
-		outputText("You ask Diana to speed up and she nods, speeding up her movements slightly, " + (player.isAlraune() ? "your other cock vines wrapping around her body, holding her close while others rub against her body, seeking pleasure. You lean your head back and sigh in pleasure, basking in the wonderful titjob" : "her breasts slapping against your chest when they come down") + ".\n\n");
-		if (player.isAlraune()) {
-			outputText("Want more pleasure, another of your vine cock coils around her neck before finding her mouth, prodding at her mouth. She complies, happily allowing herself to take the [cock] cock in her mouth, letting it fill her. You make her take all of the cock she can without deepthroating her, holding her there as she sucks and licks it like it is the tastiest of treats, her breasts still bouncing up and down the shaft, drool now now dripping on them from her mouth as she also thrusts her head.\n\n");
+		outputText("You ask Diana to speed up and she nods, speeding up her movements slightly, " + (tentacocks > 1 ? "your other cock vines wrapping around her body, holding her close while others rub against her body, seeking pleasure. You lean your head back and sigh in pleasure, basking in the wonderful titjob" : "her breasts slapping against your chest when they come down") + ".\n\n");
+		if (tentacocks > 1) {
+			outputText("Want more pleasure, another vine cock coils around her neck before finding her mouth, prodding at her mouth. She complies, happily allowing herself to take the [cock] cock in her mouth, letting it fill her. You make her take all of the cock she can without deepthroating her, holding her there as she sucks and licks it like it is the tastiest of treats, her breasts still bouncing up and down the shaft, drool now now dripping on them from her mouth as she also thrusts her head.\n\n");
 			outputText("Still wanting to feel more, your tentacles starts to move more, tightening their grip on her as they aggressively rub against her body, while the one in mouth and the one between start to thrust as well, the one in her mouth stopping short of deepthroating her.\n\n");
 			outputText("Soon you fill the building pressure in your cock" + (player.cocks.length == 1 ? "" : "s") + ", threatening to burst out and spray your load inside her cock stuffed mouth. You groan, as you feel it coming, building up and up and up, until it comes comes!\n\n");
 			outputText("You vines tightening again as if to stop Diana escaping, which she has no such desire, before unleashing their loads. ");
