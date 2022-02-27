@@ -11535,7 +11535,10 @@ use namespace CoC;
 
 		public function clothedOrNakedLower(clothedText:String, nakedText:String = ""):String
 		{
-			return (armorName != "gear" && (armorName != "lethicite armor" && lowerGarmentName == "nothing") && !isTaur() ? clothedText : nakedText);
+            outputText(armorName);
+            outputText(lowerGarmentName);
+            outputText(isTaur().toString());
+			return (armorName != "gear" && !(armorName == "lethicite armor" && lowerGarmentName == "nothing") && !isTaur() ? clothedText : nakedText);
 		}
 
 		public function addToWornClothesArray(armor:Armor):void {

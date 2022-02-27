@@ -272,6 +272,7 @@ import classes.lists.Gender;
 						text += "";
 				}
 			}
+            text += " ";
 			switch(rand(4)) {
 				case 0:
 					text += "bosoms";
@@ -687,7 +688,10 @@ import classes.lists.Gender;
 			outputText("\n\n\"<i>Like, [name]? Are you feeling okay? Your face is all funny-looking.</i>\" The mouse notes.");
 			outputText("\n\nYou snap out of your trance and tell Joy you were just thinking, and that you'll see her later.");
 			outputText("\n\n\"<i>Like, okay, [name]; see you later; maybe we can have some fun when you come back?</i>\" The bimbo mouse giggles with glee at the thought.");
-			//outputText("\n\nMaybe you should approach and talk to Joy about changing her back once you have a clear way of doing so...");
+            if (flags[kFLAGS.RATHAZUL_DEBIMBO_OFFERED])
+                outputText("\n\nYou remember Rathazul's offer. A way to undo the liqueur's degenerating effect. That's it! Maybe you should try bringing one of these to Joy?");
+            else
+                outputText("\n\nMaybe you should approach and talk to Joy about changing her back once you have a clear way of doing so...");
 			if (flags[kFLAGS.JOY_INTELLIGENCE] < 40) flags[kFLAGS.JOY_INTELLIGENCE]++;
 			flags[kFLAGS.JOY_TALKED_ABOUT_OLD_LIFE]++;
 			doNext(playerMenu);
@@ -1150,7 +1154,22 @@ import classes.lists.Gender;
 				addButton(buttonPos++, consumables.REDUCTO.shortName, giveJoyAReducto);
 				hasValidItems = true;
 			}
-			outputText("\n\nIf you have some Reducto, you could shrink Joy's breasts" + joyHasCockText(" and her cock") + ".");
+            //DeBimbo
+            if (flags[kFLAGS.JOY_TALKED_ABOUT_OLD_LIFE]) {
+                if (flags[kFLAGS.RATHAZUL_DEBIMBO_OFFERED]) { //corrupts don't give a fuck
+                    if (player.hasItem(consumables.DEBIMBO)) {
+                        addButton(buttonPos++, consumables.DEBIMBO.shortName, giveJoyADebimbo);
+                        hasValidItems = true;
+                    }
+                    outputText("\n\nYou look at your lovely mouse bimbo for a minute. These happy eyes, this hot body, this mind full of.. joy.");
+                    if (player.cor < 66)
+                        outputText("\nBut is it the end that you wanted for your old mouse friend? Would <b>he</b> want to be a brainless, sex-obsessed girl? Though he drunk the draught himself, you feel guilty for his fate.");
+                    else
+                        outputText("\nShe has a nice body to fuck, but her nut-sized bimbo brains are completely dumb... and boring. Maybe you could transform her back into that pure and shy monk? He would definitely like the news. And he would completely preserve Joy's memories... even 'fun' ones..");
+                    outputText("\nRathazul's recipe can reverse the effects of the liqueur. Maybe it's time to try it?");
+                }
+            }
+            
 			addButton(14, "Back", genericMenu);
 			if (!hasValidItems) {
 				outputText("\n\nUnfortunately you actually have nothing that she could use, so you apologize.");
@@ -1158,6 +1177,25 @@ import classes.lists.Gender;
 				doNext(genericMenu);
 			}
 		}
+
+        private function giveJoyADebimbo():void {
+            clearOutput();
+			player.consumeItem(consumables.DEBIMBO, 1);
+            outputText("\"<i>That <b>should</b> do.</i>\" You hide the Ralthazul’s elixir behind your back.");
+            outputText("\n\n“<i>Like, what’s up, [name]? Why are you so gloomy?</i>” Joy asks, bouncing over happily. “<i>Are we, like, gonna have some fun?</i>”");
+            outputText("\n\nYou tell your lovely mouse bimbo that maybe some other time... but you have a gift for her. Joy gasps, trying to look around your back. “<i>Like, a gift? For me?! That’s so sweeeeet! I LOVE getting prezzies!</i>” She hops up and down, her breasts bouncing with her. “<i>So... what is it? Huh?</i>”");
+            outputText("\n\nYou pull the elixir from behind your back, and present it to your bimbo with a flourish.");
+            outputText("\n\n“<i>Oh... You wanna get me all nice and tipsy so we can have some fun, hu-uh?</i>” Joy bats her eyelashes, and you barely stop yourself from rolling your eyes. “<i>Lucky for you, I’m in the mood, " + player.mf("sweetie","cutie") + ".</i>” You pass her the drink, and Joy uncorks it, downing it in two swift gulps. Immediately, Joy staggers, coughing. The bottle falls to the ground, shattering, and you rush in, taking Joy’s hand as she pitches over, nearly falling.");
+            outputText("\n\n“<i>W-wow, I didn’t think it’d be th-that... Fierce...</i>” Joy’s smooth feminine face begins to angle out, and as she looks down, she screams in horror, her breasts being sucked back into her body at a rapid pace. Thrown off-balance, Joy leans on you, her voice deepening slightly as a new, fresh mousey prick shoots out from between... his? legs.");
+            outputText("\n\nJoy stops screaming, blinking her eyes... and Jojo leans over, holding his temples with both hands. You’re still holding him upright, and for the first time in a while, as he looks at you, you can see the intelligence that Jojo had staring back at you. He blinks, seemingly stunned, and then he throws himself backwards in shock. You let go. Seemingly, Jojo is back.");
+            outputText("\n\n“<i>Gah! [name]! What are you-? Why were you holding me? What’s going...</i>?!” His eyes widen, and he holds his temples. “<i>What... what happened to me? Why are my beads around my waist, and what-</i>?!” He seems to remember something, and he blushes bright red, looking at you with a look of shock. “<i>I must meditate. I’m sorry!</i>” Jojo rushes to his section of camp, to his bedroll, and covers himself from head to toe. Not wanting to disturb the clearly distraught mouse-monk, you sit by the fire.");
+            jojoScene.pregnancy.knockUp(); //clear the pregnancy
+            flags[kFLAGS.JOJO_BIMBO_STATE] = 4; //after bimbo
+            flags[kFLAGS.TALKED_TO_JOJO_ABOUT_JOY] = 0; //waiting for talk with jojo
+            dynStats("cor", -3); //worth it
+			spriteSelect(-1); //disable sprite - it's annoyinh
+            doNext(camp.returnToCampUseOneHour);
+        }
 
 		//Scholar's Tea
 		private function giveJoyAScholarsTea():void {
@@ -1647,7 +1685,7 @@ import classes.lists.Gender;
 			outputText("\n\nYou grind against her yourself; beads of pre form on your tips, and as they slide along your shafts, slickening the both of you, you grind harder and harder against Joy, attacking her mouth with your own " + tongueDescript() + ".");
 			outputText("\n\nJoy starts to buck and thrust; evidently she's so horny and turned on that she can't muster the patience to slip her cock into any available hole, she's content to just grind it against your own in hopes that the friction will let her get off.");
 			outputText("\n\nYou do the same, feeling yourself approach the edge quickly. You thrust against her once more and groan into her mouth as you begin cumming, painting both your bellies as well as your chests in hot spunk.");
-			outputText("\n\nJoy gasps and moans, eagerly blowing her load with full-body jerks and spasms until, at least, she peters out and her cock flops limply down between her legs, your front and hers painted in her spooge. \"<i>Wow... That's not, like, my favorite way to do things, but it's certainly pretty fun, y'know?</i>\" She comments. Stepping back, she gently brushes off some of the mixed spunk with her finger and slurps it up. \"<i>Mmm. We make a good mix.</i>\" She giggles");
+			outputText("\n\nJoy gasps and moans, eagerly blowing her load with full-body jerks and spasms until, at least, she peters out and her cock flops limply down between her legs, your front and hers painted in her spooge. \"<i>Wow... That's not, like, my favorite way to do things, but it's certainly pretty fun, y'know?</i>\" She comments. Stepping back, she gently brushes off some of the mixed spunk with her finger and slurps it up. \"<i>Mmm. We make a good mix.</i>\", she giggles.");
 			outputText("\n\nYou " + player.clothedOrNakedLower("gather the discarded pieces of your " + player.armorDescript() + " and ") + "give her ass a good grope before leading the both of you towards the nearest stream to clean up.");
 			player.sexReward("Default","Dick",true,false);
 			dynStats("cor", -(0.5 + Math.ceil(player.cor / 30)));
@@ -1747,7 +1785,7 @@ import classes.lists.Gender;
 
 		private function haveJoyStuffYourPussy():void {
 			clearOutput();
-			outputText("You " + player.clothedOrNakedLower("begin undressing, ", "put on a show, ") + "making sure to go as slowly as possible in order to put on a show for Joy.");
+			outputText("You " + player.clothedOrNaked("begin undressing", "present your naked body to Joy") + ", making sure to go as slowly as possible in order to put on a show for Joy.");
 			outputText("\n\nThe bimbo mouse certainly appreciates the show; her tongue is hanging out and she stares obliviously at your increasingly nude form, so caught up in looking she can't even think about removing her own clothes.");
 			outputText("\n\nWhen you're done, you're surprised to see she still has her clothes on, and ask her how does she intend to have sex still fully dressed?");
 			outputText("\n\nJoy blinks, shakes her head, and visibly snaps herself to her attention. She doesn't even bother to take her robes off, instead roughly yanking down her shorts, kicking them aside and then taking a flying leap into your arms, seeking to push you over so she can start.");

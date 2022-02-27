@@ -296,11 +296,12 @@ package classes.Scenes.NPCs
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if (flags[kFLAGS.DIANA_FOLLOWER] >= 6) dianaScene.wonOverDianaSpar();
-			else if (flags[kFLAGS.DIANA_AFFECTION] >= 100 && flags[kFLAGS.DIANA_LVL_UP] >= 8 && !player.blockingBodyTransformations()) {
-				if (flags[kFLAGS.DIANA_FOLLOWER] < 3) dianaScene.beMyStallion();
-				else dianaScene.beMyStallionRepeat();
-			}
+			if (flags[kFLAGS.DIANA_FOLLOWER] >= 6)
+                dianaScene.wonOverDianaSpar();
+            else if (flags[kFLAGS.DIANA_FOLLOWER] == 5 && (player.hasCock() || !player.blockingBodyTransformations()))
+                dianaScene.beMyStallionRepeat();
+			else if (flags[kFLAGS.DIANA_FOLLOWER] < 3 && flags[kFLAGS.DIANA_LVL_UP] >= 8 && (player.hasCock() || !player.blockingBodyTransformations()))
+				dianaScene.beMyStallion();
 			else dianaScene.wonOverDiana();
 		}
 		
@@ -556,7 +557,7 @@ package classes.Scenes.NPCs
 					add(consumables.BAGOCA1,1/5).
 					add(consumables.UNICORN,1/2);
 			}
-			if (flags[kFLAGS.DIANA_LVL_UP] >= 2 && flags[kFLAGS.DIANA_FOLLOWER] == 4) {
+			if (flags[kFLAGS.DIANA_LVL_UP] >= 2 && flags[kFLAGS.DIANA_FOLLOWER] == 3) {
 				this.a = "the ";
 				this.short = "unicorn";
 				this.imageName = "unicornmare";
@@ -712,7 +713,7 @@ package classes.Scenes.NPCs
 				this.createPerk(PerkLib.SoulAncestor, 0, 0, 0, 0);
 				this.createPerk(PerkLib.SuperiorSpirituality, 0, 0, 0, 0);
 			}
-			if (flags[kFLAGS.DIANA_FOLLOWER] == 3 || flags[kFLAGS.DIANA_FOLLOWER] == 4) this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
+			if (flags[kFLAGS.DIANA_FOLLOWER] == 3) this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			checkMonster();
 		}
 	}

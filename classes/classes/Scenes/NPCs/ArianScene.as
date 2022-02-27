@@ -1131,7 +1131,7 @@ private function arianMagicLessons():void {
 		else outputText("return to your duties.");
 	}
 	//(else if PC int < 50 //Teach Charge Weapon if PC doesn't know.
-	else if(player.inte < 50) {
+	else if(player.inte < 50 || !player.hasStatusEffect(StatusEffects.KnowsCharge)) {
 		outputText("\n\nYou tell Arian you've got the fundamentals down, so why not cover something a bit more advanced?");
 		outputText("\n\nArian taps [Arian eir] chin in thought, then smiles.  \"<i>I know!  Let's talk about channeling.</i>\"");
 		outputText("\n\nChanneling? You ask.");
@@ -1141,7 +1141,6 @@ private function arianMagicLessons():void {
 		outputText("\n\nYou wonder whatever could have happened that was so funny.  But for the moment the lesson has tired you, so you thank Arian for the lesson and excuse yourself ");
 		if(!arianFollower()) outputText(", making your way back to camp.");
 		else outputText(", exiting [Arian eir] tent and going about your business.");
-		
 		//(if PC doesn't know Charge Weapon)
 		if(!player.hasStatusEffect(StatusEffects.KnowsCharge)) {
 			outputText("\n\nAs you ");
@@ -1152,7 +1151,7 @@ private function arianMagicLessons():void {
 			player.createStatusEffect(StatusEffects.KnowsCharge,0,0,0,0);
 		}
 	}
-	else if (player.inte < 75) {
+	else if (player.inte < 75 || !player.hasStatusEffect(StatusEffects.KnowsBlind)) {
 		outputText("<b>Game Note: This isn't canon and will be re-written soonish.</b>");
 		//Teach Blind if PC doesn't know.
 		outputText("\n\nYou say you have a pretty good understanding of how magic works now, so you'd like [Arian em] to get started on the more complex theories.");
@@ -1765,11 +1764,7 @@ private function giveArianAnal():void {
 			
 			outputText("\n\n\"<i>This is all new to me.  I'd never been with anyone before you came, so there is no problem if I act like... well, like that?  Because I could change if it really bothers you...</i>\"");
 			
-
-			outputText("\n\nNo, there's nothing about [Arian eir] behavior you want to change");
-			//(any physical TFs made to Arian:
-			if(9999 == 9999) outputText(" as hypocritical as that may be");
-			outputText("... besides, you think [Arian ey]'s kind of sexy when [Arian ey] gets like that.  At that Arian perks up.  \"<i>Really?</i>\"  Yes, really, you reply.  Arian smiles happily at you.  \"<i>So... do you want to go again?</i>\"");
+			outputText("\n\nNo, there's nothing about [Arian eir] behavior you want to change... besides, you think [Arian ey]'s kind of sexy when [Arian ey] gets like that.  At that Arian perks up.  \"<i>Really?</i>\"  Yes, really, you reply.  Arian smiles happily at you.  \"<i>So... do you want to go again?</i>\"");
 			
 			outputText("\n\nYou chuckle. Not right this moment, no, you tell [Arian em]; the two of you just had a pretty intense session, you need a few moments to recover; besides that you have other matters that need your attention.  Arian looks down in disappointment, pouting.  Now, now, there's no need for that, you can always have some fun another time.  \"<i>All right then... see you later?</i>\"  You nod.  \"<i>Ok... I'll be waiting.</i>\"");
 			
@@ -2696,7 +2691,12 @@ private function giveArianAnItem():void {
 	else if(flags[kFLAGS.ARIAN_S_DIALOGUE] == 4 && arianHealth() >= 75) arianPlot4();
 	else if(flags[kFLAGS.ARIAN_S_DIALOGUE] == 5 && arianHealth() >= 100) arianPlot5();
 	else {
-		if(player.hasItem(consumables.VITAL_T)) addButton(0,"Vital Tinct",arianVitalityTincture);
+        if (flags[kFLAGS.ARIAN_HEALTH] < 100) {
+            if (player.hasItem(consumables.VITAL_T))
+                addButton(0,"Vital Tinct",arianVitalityTincture);
+            else
+                addButtonDisabled(0, "Vital Tinct", "You don't have any.");
+        }
 		if(flags[kFLAGS.ARIAN_HEALTH] >= 20) {
 			if(player.hasItem(consumables.P_DRAFT)) addButton(1,"P. Incubi D",giveIncubusDraftToArian);
 			if(player.hasItem(consumables.P_S_MLK)) addButton(2,"P. Suc.Milk",succubiMilkForArian);
@@ -2734,11 +2734,12 @@ private function arianVitalityTincture():void {
 	outputText("\n\nYou apologize, but, hey, medicine just tends to taste nasty anyway.  Still, it's doing [Arian em] the world of good, now isn't it?");
 	
 	outputText("\n\n\"<i>I guess I do feel better.  Thank you [name].</i>\" Arian smiles at you, already looking a bit better.");
+    if (arianHealth(10) == 100)
+        outputText(" \"<i>In fact... I don't think I need those potions anymore. I'll probably keep a couple of them just in case, but since I don't use my magic too often these days, I'm completely fine.</i>\"");
 	
 	outputText("\n\nYou smile and stroke the lizan gently on [Arian eir] head, telling [Arian em] that [Arian ey]'s welcome.  Now, you think it's time [Arian ey] laid [Arian em]self back down and got some rest; give the medicine time to work.  You promise you'll try and come back to see [Arian em] later, but right now, [Arian ey] needs to get some more rest.  Arian nods and settles [Arian em]self on [Arian eir] bed.");
 	
 	player.consumeItem(consumables.VITAL_T);
-	arianHealth(10);
 	menu();
 	addButton(0,"Next",giveArianAnItem);
 }

@@ -518,7 +518,7 @@ public function part1TrollEncounterRewards():void {
 	else if(event < 6) itype = consumables.GROPLUS;
 	else if(event < 8) itype = consumables.COAL___;
 	else if(event < 10) itype = useables.T_SSILK;
-	outputText("You spend some more time looking around the area and stumble upon " + itype + ".\n\n");
+	outputText("You spend some more time looking around the area and stumble upon " + itype.longName + ".\n\n");
 	outputText("You decide to head back home afterwards as there doesn't appear to be anything else of interest right now.\n\n");
 	inventory.takeItem(itype, camp.returnToCampUseOneHour);
 }

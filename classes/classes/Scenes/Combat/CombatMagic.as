@@ -294,7 +294,7 @@ public class CombatMagic extends BaseCombatContent {
 				if (player.perkv2(PerkLib.ElementalBody) == 4) mod += .4;
 			}
 			if (player.hasPerk(PerkLib.SharedPower) && player.perkv1(PerkLib.SharedPower) > 0) mod += (0.1*player.perkv1(PerkLib.SharedPower));
-		}
+		}       
 
         return mod;
 
@@ -392,6 +392,8 @@ public class CombatMagic extends BaseCombatContent {
 
 		if (player.headJewelry == headjewelries.DMONSKUL) mod += player.cor * .006;
         //no sus multiplying for now...
+		mod = Math.round(mod * 100) / 100;
+        outputText("spellModBase")
 		return mod;
 	}
 	
@@ -415,6 +417,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.PrestigeJobArchpriest)) mod += .2;
 		if (player.hasPerk(PerkLib.PrestigeJobWarlock)) mod -= .4;
 		if (player.hasKeyItem("Holy Symbol") >= 0) mod += .2;
+        if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
 		if (player.weapon == weapons.PURITAS) mod *= 1.6;
 		if (player.weapon == weapons.ASCENSU) mod *= 2.5; //BOOM!
 		mod = Math.round(mod * 100) / 100;
@@ -462,7 +465,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasPerk(PerkLib.PrestigeJobArchpriest)) mod -= .4;
 		if (player.hasPerk(PerkLib.PrestigeJobWarlock)) mod += .2;
 		if (player.miscJewelry == miscjewelries.DMAGETO || player.miscJewelry2 == miscjewelries.DMAGETO) mod += 0.25;
-		if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
+        if (player.hasPerk(PerkLib.AscensionMysticality)) mod *= 1 + (player.perkv1(PerkLib.AscensionMysticality) * 0.1);
 		if (player.weapon == weapons.DEPRAVA) mod *= 1.6;
 		if (player.weapon == weapons.ASCENSU) mod *= 2.5; //BOOM!
 		mod = Math.round(mod * 100) / 100;

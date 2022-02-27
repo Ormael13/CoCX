@@ -144,7 +144,7 @@ public function beachInteractionsAfterArcheryTraining():void
 			doNext(camp.returnToCampUseTwoHours);
 		}	
 	}
-	if (player.hasItem(consumables.FISHFIL) || player.hasItem(consumables.FREFISH)) {
+	else if (player.hasItem(consumables.FISHFIL) || player.hasItem(consumables.FREFISH)) {
 		outputText("You find Ceani lazily resting on the beach and head out to say hello.\n\n");
 		outputText("\"<i>Hey it’s you [name] nice to see you. I was wondering how you were. How is your demon hunting going?</i>\"\n\n");
 		outputText("You tell her your latest accomplishment as she smiles widely. However her belly rumbles. You realise she must be getting hungry and pull a fish out of your bags. Ceani eyes sparkles as she see the fish.\n\n");
@@ -162,7 +162,8 @@ public function beachInteractionsAfterArcheryTraining():void
 		var x:int = player.cockThatFits(36, "length");
 		menu();
 		addButton(0, "Talk", beachInteractionsTalk);
-		if (player.gender > 1 || (player.hasCock() && player.cocks[x].cockLength >= 15 && player.cockThatFits(36, "length") >= 0)) addButton(1, "Date", beachInteractionsDate);
+		if (player.hasVagina() || player.findCock(1, 15, 36, "length")) addButton(1, "Date", beachInteractionsDate);
+		if (flags[kFLAGS.CEANI_AFFECTION] == 100) addButton(2, "Come2Camp", come2campCeani);
 	}
 	else {
 		outputText("You find Ceani lazily resting on the beach and head out to say hello.\n\n");
@@ -196,7 +197,7 @@ public function oceanInteractionsAfterArcheryTraining():void
 		var x:int = player.cockThatFits(36, "length");
 		menu();
 		addButton(0, "Talk", beachInteractionsTalk);
-		if (player.gender > 1 || (player.hasCock() && player.cocks[x].cockLength >= 15 && player.cockThatFits(36, "length") >= 0)) addButton(1, "Date", oceanInteractionsDate);
+		if (player.hasVagina() || player.findCock(1, 15, 36, "length")) addButton(1, "Date", oceanInteractionsDate);
 		if (flags[kFLAGS.CEANI_AFFECTION] == 100) addButton(2, "Come2Camp", come2campCeani);
 	}
 	else {

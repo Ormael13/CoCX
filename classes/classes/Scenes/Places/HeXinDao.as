@@ -1257,14 +1257,12 @@ public function soularena():void {
     private function orderFood(str:int,spe:int,inte:int,tou:int=5):void{
         outputText("\n\nShe notes your order on a piece of paper.");
         outputText("\n\n\"<i>How spicy would you like it to be?</i>\"");
-        if (player.statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff1) < 25) {
-            player.removeStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff1);
-            player.createStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff1, 25, 0, 0, 0);
-        }
-        else player.createStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff1, 25, 0, 0, 0);
-
-        if (player.statStore.hasBuff("ShiraOfTheEastFoodBuff")) player.statStore.removeBuffs("ShiraOfTheEastFoodBuff");
-        player.statStore.addBuffObject({str:str, spe:spe, inte:inte, tou:tou},"ShiraOfTheEastFoodBuff",{text:"Restorant meals"})
+        player.removeStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff1);
+        player.createStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff1, 25, 0, 0, 0);
+        player.buff("ShiraOfTheEastFoodBuff").remove();
+        player.buff("ShiraOfTheEastFoodBuff")
+            .setStats( { "str": str, "spe": spe, "int": inte, "tou": tou })
+            .withText("Restaurant meals!"); //no timer - removed in events with the status effect
 
         menu();
         addButton(0, "Mild", restaurantSpicing,"mild");

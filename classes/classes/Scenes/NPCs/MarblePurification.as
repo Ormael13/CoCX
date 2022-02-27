@@ -330,7 +330,7 @@ public class MarblePurification extends NPCAwareContent{
 			}
 			//if (pure Jojo is in camp)
 			//pure Jojo’s response to being asked to have tea
-			if(player.hasStatusEffect(StatusEffects.PureCampJojo))
+			if(player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE != 3])
 			{
 			 	outputText("\n\nWhen you get to Jojo’s meditation spot and ask him if he is interested in coming to the campfire for tea, the murine monk looks surprised, but nods his head. <i>\"Tea would be delightful, thank you. It’s been a long time since I was able to enjoy a civil activity such as that.\"</i>");
 				//temp follower variable ++
@@ -719,7 +719,7 @@ public class MarblePurification extends NPCAwareContent{
 		}
 	 	outputText("You’re still erect from the arousal that nursing from Clara gave you.  The young cow-girl straddles your calves and gives your " + cockDescript(x) + " a slight flick with her finger and continues to smile broadly at you.  \"<i>One thing that I was really worried about was that you woouldn’t have a penis that I could actually fit inside me.  Thankfully, that isn’t the case, and that pretty pecker is just my size!</i>\"  She pulls apart the lips of her womanhood before continuing, \"<i>This will be my first time ever putting anything in here, take note just how special of a slave you are to me!</i>\"");
 
-	 	outputText("\n\nWell, she certainly isn’t wasting any time, as the very next instant she has lowered her opened labia onto the tip of your " + cockDescript(x) + ".  The passage is already wet and slick, thanks to her previous orgasm.  Immediately, an expression of both pain and pleasure crosses over the bovine woman’s face and she starts to pant.  You lift up your hands, bClara issues a sharp command that you aren’t to do anything at all while she has the sex she wants.  You can’t do much else but just lie back and take it.");
+	 	outputText("\n\nWell, she certainly isn’t wasting any time, as the very next instant she has lowered her opened labia onto the tip of your " + cockDescript(x) + ".  The passage is already wet and slick, thanks to her previous orgasm.  Immediately, an expression of both pain and pleasure crosses over the bovine woman’s face and she starts to pant.  You lift up your hands, Clara issues a sharp command that you aren’t to do anything at all while she has the sex she wants.  You can’t do much else but just lie back and take it.");
 	 	outputText("\n\nThe woman using you as a sex toy takes things almost agonizingly slowly.  For some time she only puts the tip in, and stirs it around her entrance with her fingers while panting in unfamiliar pleasure.  There isn’t much question that she is indeed a virgin; she quite clearly has no idea what she is doing.  Of course, any attempts to help her just get you an icy glare and you return to waiting for what she intends to do next.");
 	 	outputText("\n\nFinally, Clara stops teasing you, and lowers herself down.  She gives several cute sounding gasps and long oos before the whole of your length is inside her,  at which point she promptly creams herself and cries out, \"<i>Moo!</i>\"  Her orgasm is quite a wet one, liberally drenching your waist and crotch.");
 	 	outputText("\n\nAny fears that you’re going to be left wanting are quickly dispelled, as when the once virgin woman finishes her second orgasm, she starts to violently pump her body up and down.  The abrupt change in the kind of sex you’re having catches you off guard and blows your mind almost instantly.  Clara isn’t doing much better, as all that is coming out of her mouth at this point is just mindless pleasure-filled babbling.");
@@ -838,9 +838,10 @@ public class MarblePurification extends NPCAwareContent{
 
 	//Win scenes against Clara
 	//PC defeats Clara outside camp
-	public function defeatClaraCuntInAFight(cheated:Boolean = false):void
+	public function defeatClaraCuntInAFight(cheated:Boolean = false, recall:Boolean = false):void
 	{
-		if(cheated) clearOutput();
+		if (cheated || recall)
+			clearOutput();
 		else
 		{
 			//Clara is taken out by Marble
@@ -932,16 +933,18 @@ public class MarblePurification extends NPCAwareContent{
 
 		menu();
 		//PC chooses what kind of victory scene they want to do to Clara.
+		var next:Function = recall ? camp.recallScenes : calmMurblesFatAssDown;
 		//options are: Spank (can always do), Threesome (if the PC has a cock that is under 20 area, or a vagina), "NTR" (if PC has a cock that will fit Marble, or a vagina), Marble cock (if Marble has a cock), and Calm down (always possible).
-		addButton(0,"Spank",murbleSpanksCowCunt);
-		if((player.hasCock() && player.cockThatFits(20) >= 0) || player.hasVagina()) addButton(1,"Threesome",pcAndMurbleDoubleTeamCowButt);
-		if((player.hasCock() && player.cockThatFits(marbleScene.marbleCuntCapacity()) >= 0) || player.hasVagina()) addButton(2,"NTR",NTRIsClearlyTheWorstFetishWhyWouldYouWriteThisOMG);
-		if(flags[kFLAGS.MARBLE_DICK_TYPE] > 0) addButton(3,"Marble Cock",futaMarbleIsAHugeCowToCowCuntAndStuffsCowCuntsCuntFullOfCowCock);
-		addButton(4,"Calm Down",calmMurblesFatAssDown);
+		addButton(0,"Spank",murbleSpanksCowCunt, next);
+		if((player.hasCock() && player.cockThatFits(20) >= 0) || player.hasVagina()) addButton(1,"Threesome",pcAndMurbleDoubleTeamCowButt, next);
+		if((player.hasCock() && player.cockThatFits(marbleScene.marbleCuntCapacity()) >= 0) || player.hasVagina()) addButton(2,"NTR",NTRIsClearlyTheWorstFetishWhyWouldYouWriteThisOMG, next);
+		if (flags[kFLAGS.MARBLE_DICK_TYPE] > 0) addButton(3, "Marble Cock", futaMarbleIsAHugeCowToCowCuntAndStuffsCowCuntsCuntFullOfCowCock, next);
+		if (!recall)
+			addButton(4,"Calm Down",calmMurblesFatAssDown);
 	}
 	//Marble spanks Clara
 	//Just let Marble punish Clara like the bad girl she is.
-	public function murbleSpanksCowCunt():void
+	public function murbleSpanksCowCunt(next:Function):void
 	{
 		clearOutput();
 	 	outputText("Marble seems to have a good idea on how to punish Clara already, so you just sit back and watch.");
@@ -958,12 +961,11 @@ public class MarblePurification extends NPCAwareContent{
 	 	outputText("\n\nYou mention to the girl on the ground that she should take a look at what her sister found.  Those tear filled eyes open wide in absolute terror at the sight.  \"<i>You're, hah, you're crazy!</i>\" she manages to gasp out between sobs.  Like most of the pitiful girl's comments up until now, this one is ignored.  The harsh mistress of the law has come, and that mistress is going to make a bad bovine's bum blue.");
 	 	outputText("\n\nMarble picks her sister up off the ground and roughly tosses her onto one of the sitting logs around the firepit.  Clara continues to sob and beg for the abuse to stop, but it is all in vain.  Marble squats down slightly behind her, winds up, and brings down the first of many harsh smacks against her rear end.  Your mate doesn't let up on her punishment until every last inch of Clara's heinous hindquarters has been covered in blue welts.  By this point, the wannabe kidnapper and slaver is nothing but a slobbering, incoherent mess.");
 		//continue to calm Marble down
-		menu();
-		addButton(0,"Next",calmMurblesFatAssDown);
+		doNext(next);
 	}
 	//PC and Marble rape Clara
 	//Double team Clara, will be rough forceful sex.
-	public function pcAndMurbleDoubleTeamCowButt():void
+	public function pcAndMurbleDoubleTeamCowButt(next:Function):void
 	//does not work with centaur, naga, drider, or goo bodies.  However, I don't particularly want to just say you can't do this scene if you have them.
 	{
 		clearOutput();
@@ -971,105 +973,127 @@ public class MarblePurification extends NPCAwareContent{
 	 	outputText("You step forward and suggest to Marble that the two of you should work together to punish Clara.  She nods and asks what you have in mind.  Well, you were thinking that a sexual punishment from the two of you would be appropriate.");
 	 	outputText("\n\n\"<i>What?  I don't want to have a threesome with my sister!  Only [name] should be able to touch me!</i>\"");
 	 	outputText("\n\nThat outburst from the younger sibling seems to have been enough to convince your lover to go along with it.  If it wasn't for her current mood, you doubt that she'd ever have agreed.");
-	 	outputText("\n\nThe two of you strip yourselves and the bound malefactor down.  Then, you both consider the naked tied-up girl, deciding how to go about this.  ");
-		//if (PC has a cock under 20 area, and Marble has a cock)
-		if((player.hasCock() && x >= 0) && flags[kFLAGS.MARBLE_DICK_TYPE] > 0)
-		{
-			//n is the index of the PC's biggest cock under 20 area.
-		 	outputText("Eventually you pull her up and sandwich her between your bodies.  Marble expresses an aversion to anal, so you take the backside while she takes the front.  \"<i>Hey, you can't do this to me!  I don't want to lose my virginity to my sister!</i>\" Clara cries out indignantly.");
-		 	outputText("\n\n\"<i>Well, are you saying you've learned your lesson?  Are you going to apologize for trying to take my sweetie away from me?</i>\"");
-		 	outputText("\n\n\"<i>What?  Fuck noo, your </i>sweetie<i> should be mine.</i>\"");
-		 	outputText("\n\nMarble looks to the side of her sister's head, and gives you a solemn nod.  You take that as an invitation to begin the violation and grab a good grip of Clara's expansive rear.  Then you prod your " + cockDescript(x) + " at the entrance to her anus, prompting a gasp and plea from the woman you're about to penetrate to stop.  Her sister doesn't heed her begging, and neither do you.");
-		 	outputText("\n\nThere is a sharp gasp from the girls in front of you as you push into Clara's ass while Marble takes her vagina.  \"<i>Nooo,</i>\" comes a cross between a whimper and a moan in front of you, \"<i>It wasn't suppose to be this way....</i>\"  You ignore that and instead start to push and pull inside the young cow-girl's back entrance, while enjoying the feeling of Marble's member moving in an out of the other opening against your own.  It isn't often you get to double team someone like this.");
-		 	outputText("\n\nYou wipe a trickle of sweat off of your face and continue to revel in the feeling of filling up a cow-girl's wide bum, with dual stimulation from both her contractions against your member and the other shaft so close you can feel it sliding against you through the cow-girl.  At the same time, you can hear loud moaning coming from the two girls.  The familiar earthy 'ahhs' and subdued moos from Marble, along with the sharp gasps, 'oohs', and long loud moos from her younger sister.  Clara hasn't actually protested the situation for some time now, the dual penetration clearly too much for her virgin mind to endure.");
-		 	outputText("\n\nSuddenly Clara's anus clamps down sharply on your " + cockDescript(x) + " and she lets out a long, \"<i>Moooo!</i>\" in orgasm.  She certainly came fast from this; you've barely even begun to build up your own pleasure.  You look around her to see that Marble seems to be rather surprised about this as well.  \"<i>Should we continue?</i>\" she asks somewhat uncertainly, then considers her sister again with a frown.  You shrug your shoulders and suggest that a little longer is just what you both need and well within the bounds of a reasonable punishment.  Your partner agrees, and the fucking resumes.");
-		 	outputText("\n\nThis time Clara's anus is much more relaxed and accommodating to your violation.  It almost seems to invite you in when you push forward and try to keep there when you pull back.  Maybe the gangbang has brought out her natural skills at anal sex?  It's hard to say, but it's definitely enjoyable.  A quick check on the elder sister's face reveals that she is certainly enjoying this as well, but the sounds coming from the younger sister suggest that she is enjoying this the most.  Then again, it is hard to tell if that babbling is from pleasure or just from a complete mental breakdown.");
-		 	outputText("\n\nIt doesn't take much longer for you and Marble to rush to your peaks and fill up the cow-girl holes together.  Clara seems to have fallen just short of her peak when the two of you pull back, and she seems to suddenly regain her composure.  \"<i>Wait, what?  Noo!  You can't just, uh....  What am I saying?!</i>\"  It looks like she's having a bit of a crisis deciding if she wants to cum or is too bothered by the thought of what just happened to her.");
-		 	outputText("\n\n\"<i>Damn it all, why couldn't [name] have taken the front?  Now I'll never be able to experience it for the first time with my perfect mate!  You're evil, sister.</i>\"  Marble looks like she is about to blow up once more at that comment....");
-		} //else if (PC has a cock, Marble does not)
-		else if((player.hasCock() && x >= 0) && flags[kFLAGS.MARBLE_DICK_TYPE] == 0)
-		{
-			//n is the index of the PC's biggest cock under 20 area.
-		 	outputText("\n\nEventually you push her down on all fours.  You stand behind her, while Marble stands in front of her sister's face.  \"<i>Wait, do you actually think I'll service yoou?</i>\" Clara asks indignantly.");
-		 	outputText("\n\n\"<i>You will if you don't want me to twist your ears,</i>\" comes the response.  You prod your " + cockDescript(x) + " up against her tight asshole and suggest that you might be taking a different entrance if she doesn't cooperate for her punishment.  \"<i>Of course, if you're sorry for what you tried to do to [name]...</i>\" Marble suggests.");
-		 	outputText("\n\n\"<i>What?  Why the hell would I be sorry for that?  Moop!</i>\"  In goes your length into her virginal pussy.  \"<i>Hey!  Yo-mmph,</i>\" and she is silenced as her face is forced into Marble's womanhood.  You give her a moment to get use to the sensation, then begin thrusting into her opening in earnest.  At the same time, Marble twists her sister's ears a bit and reminds her what to do before letting out a sigh of pleasure when Clara evidently complies.");
-		 	outputText("\n\nThere is no question that you're the first to claim this lady's most personal of places.  She is very tight, and the muscles contract and convulse against your intrusion reflexively and without direction.  Every thrust is met with a whole new adventure of contractions, relaxations, and unpracticed craziness.  Of course, it's quite obvious that Clara is enjoying things despite her earlier protests.  Her cunny is soaking wet.");
-		 	outputText("\n\nWhile continuing to savor the unpredictableness of Clara's interior, you turn your attention to how your partner in the punishment threesome is enjoying the experience.  Unfortunately, the younger sister's inexperience with pussy licking is showing.  Marble's expression is a mix of both enjoyment and exasperation.  Hoping to give your mate a little more of the former, you grab the cow-tail that's swishing around the bountiful rear you're connect to through your cunt claiming cock, and give it a tug.  You tell Clara that she needs to do a better job of pleasing your love.  She needs to work that cow-tongue, get all the way in there and pay special attention to... this.  With that last word, you give her clitoris a little rub.");
-		 	outputText("\n\nInstantly Marble's expression changes and she lets out a long low moan.  As a reward, you switch from quick thrusts to a slow rub against her entrance.  This proves to be quite a reward indeed as you feel a flood of Clara's juices spill out onto your groin from around the " + cockDescript(x) + " teasing her insides.  You, however, aren't finished yet.  You start a mix of both thrusting into her womanhood, and twisting your length around her innards.");
-		 	outputText("\n\nA muffled, but loud, moaning moo starts to rise out of the before you, somewhat complementing the quieter sighs and gasps you're more familiar with coming from your mate.  The whole situation is incredibly lewd, and you're loving every second of it.  It isn't often that you get to have three sweaty bodies slapping and slobbering on one another.  The fact that one of them is tied up might bother you a little, if she wasn't so clearly enjoying herself.");
-		 	outputText("\n\nIn fact, she is enjoying herself so much that she cums a second time before either you or Marble reach your peaks.  Still, you and Marble do manage to bring yourselves over the top just after that and ride out the afterglow together.  Clara stumbles to the ground, coughing and sputtering from the proof of Marble's orgasm while yours spills out of her lower hole.");
-		 	outputText("\n\n\"<i>Gah, sis, does your milk taste as bad as your pussy juices?  No wonder [name] didn't want yoou!</i>\"  Another shock of anger shoots through Marble's features.  Is she going to try and inflict more punishment on her sister?");
-		}
-		//else if (PC does not have a cock, Marble does)
-		else if(flags[kFLAGS.MARBLE_DICK_TYPE] > 0)
-		{
-		 	outputText("\n\nEventually you push her down on all fours.  You stand in front of her while Marble stands behind her sister's backside.  \"<i>Hey, you can't do this to me!  I don't want to looose my virginity to my sister!</i>\" Clara cries out indignantly.");
-		 	outputText("\n\nYou grab ahold of her ears and give them a slight tug.  She'd better go along with her punishment like a good girl, or you'll be adding some extra pain onto her head.  \"<i>Of course, if you're sorry for what you tried to do to [name]...</i>\" Marble suggests.");
-		 	outputText("\n\n\"<i>What?  Why the hell would I be sorry for that?  Moop!</i>\"  There is a low slurp as your mate pushes her newly acquired seven inch shaft deep inside her sister's womanhood.  \"<i>Hey!  Yo-mmph,</i>\"  You silence her with your " + vaginaDescript() + ", roughly forcing it into her face.  You give a slight twist to the young bovine's ears to remind her what she should be doing, and right away her tongue comes out and starts giving you experimental licks.");
-		 	outputText("\n\nYou let out a sigh and see how Marble is doing.  The older cow-girl is certainly enjoying herself.  It isn't often she gets this into sex involving her cock, but the urgency of her thrusts, the blissful expression of her face, and the happy low groans and moans certainly suggest that she is enjoying herself immensely.");
-		 	outputText("\n\nFor your own sexual experience, you're rather underwhelmed so far.  The malefactor's skills at oral certainly leave something to be desired.  She's barely doing much more than just lightly licking the edges, barely even teasing you.  Sensing that you aren't having a good time, Marble grabs her sister's tail and gives it a good tug.  \"<i>Hey, 'sis', I see you aren't doing a good job up there.  You damn well better work that tongue deep inside " + player.mf("him","her") + ", or I'll be using your tail as a leash.  Put that length to work!</i>\"  That little display certainly seems to have gotten the message through as the real performance now begins.");
-		 	outputText("\n\nNow you feel the natural power of a cow-girl's tongue at giving pleasure to a woman's parts.  Her pussy-licker is at least twice as long as a normal human's, able to easily explore your folds and go deep inside your interior.  \"<i>Good girl, be sure to pay special attention to this little button here,</i>\" comes further instructions, accompanied by Marble reaching down under her sister's legs and fingering what must be the would-be-thief's clitoris.  You're sure that's what she just touched because it triggered a shudder through Clara's body and a loud cry of orgasm into your mound.");
-		 	outputText("\n\nYou express your disappointment to Marble at her sister's unfinished performance, so the fucking continues.  Thankfully, it seems that the bad bovine did get the message and has started to tease and suck on your " + clitDescript() + " as well as continuing with her teases of your folds and depths.  You'd almost feel bad for doing what you two are doing to her if she wasn't evidently enjoying it as much as she is.  Muffled but loud gasps and moos are constantly being uttered into your " + vaginaDescript() + " by the bound girl between you and your lover.  Her breath upon your womanhood only serves to make you feel even better.");
-		 	outputText("\n\nShe is enjoying herself so much that she cums a second time before either you or Marble reach your peaks.  Still, you and Marble do manage to bring yourselves over the top just after that and ride out the afterglow together.  Clara stumbles to the ground, coughing and sputtering from the proof of your orgasm while Marble's spills out of her lower hole.");
-		 	outputText("\n\n“<i>Damn it all, why did you have to do that?  Now I'll never be able to experience it for the first time with my perfect mate!  You're evil, sister.</i>\"  Marble looks like she is about to blow up once more at that comment...");
-		}
-		else
-		//PC and Marble only have their vaginas
-		{
-		 	outputText("\n\nEventually you roll her onto her back.  Then Marble sits down on her sister's face while you put your mouth to Clara's womanhood and raise your [butt] up into the air so that your mate can reach your own " + vaginaDescript() + ".");
-		 	outputText("\n\nThis little triangle is about all you can think of doing since there isn't a whole lot three girls can do to one another if one of them is tied up, that is if you're looking for everyone to get pleasure out of the experience.  \"<i>Okay, what the hell is this?  Doo you really think I'm going to actually service -mmph!</i>\"  The naughty girl is interrupted when her elder sister smothers her face in cow-girl pussy.");
-		 	outputText("\n\n\"<i>If you don't do a good job of pleasing me....  Well, I can just grind myself all over your face,</i>\" your mate responds.  You offer up that you won't be letting Clara reach her peak if she does a poor job either.  To make your point clear, you give a small lick to the rim of the malefactor's mound and assure her that you'll be driving her to the edge but never let her cross over.");
-		 	outputText("\n\nMarble then lifts herself slightly off her sister's face and suggests, \"<i>You know, you could get out of this whole situation if you just admit you did something wrong and say you're sorry...</i>\"");
-		 	outputText("\n\n\"<i>Haven't I already told you that I was dooing the right thing?  Why would I -mmph!</i>\"  Once again she is silenced by a mouth full of another girl's snatch.  It looks like the punishment is on, and you start to mercilessly tease the cow-girl mound in front of your face.  Instantly she starts to squirm under your ministrations, desperately trying to get you to actually penetrate her or touch her emerging clitoris.  You don't give her that mercy, not yet.");
-		 	outputText("\n\nNow you get to experience the pleasure of Marble's tongue starting to tease your " + vaginaDescript() + " with her bovine tongue.  It's easily twice the length of a human's and quite adept at pleasuring a woman's passages.  Your mate is certainly quite willing to put it to that very use, using it to plunge deep inside your depths and also expertly explore and pleasure your " + clitDescript() + ".");
-		 	outputText("\n\nMeanwhile, the young cow-girl under your care continues to squirm and struggle more and more urgently.  You take a short break to suggest to her that all she needs to do is properly please Marble if she wants relief.  Finally, you hear an approving moan from your mate and take that as your cue to dive deep into Clara's needy nethers.  Almost instantly, a muffled but clearly audible moan of pleasure rises out of the woman.");
-		 	outputText("\n\nYou let out your own moan of pleasure, the elder bovine's ministrations of your lower lips have driven you close to the edge of orgasm.  She expertly knows how to use that pussy licker of hers, grasps just what places to tease and just when to switch to what part.  Then she sucks on your love button, pushing you over the edge.");
-		 	outputText("\n\nIt's around the same time that the girl under you cries out a long loud moo through Marble's womanhood, signalling her surrender to your lips.  You pull back and see your mate regard her sister with disappointment, you poke the bad bound girl in the belly and tell her to finish the job.  She gasps and returns to licking cow-girl snatch enough to bring out a nice low moan and moo from your mate's body.");
-		 	outputText("\n\nYour hot and sweaty bodies separate from one another, each face bearing the fluids of one another's orgasms.  Clara is coughing and sputtering, \"<i>Gah, sis, does your milk taste as bad as your pussy juices?  No woonder [name] didn't want you!</i>\"  Another shock of anger shoots through Marble's features.  Is she going to try and inflict more punishment on her sister?");
-		}
-		player.sexReward("Default", "Default",true,false);
-		//proceed to calm Marble down
+	 	outputText("\n\nThe two of you strip yourselves and the bound malefactor down.  Then, you both consider the naked tied-up girl, deciding how to go about this...");
+		//menu
 		menu();
-		addButton(0,"Next",calmMurblesFatAssDown);
+		if (player.cockThatFits(20) >= 0 && flags[kFLAGS.MARBLE_DICK_TYPE] > 0)
+			addButton(0, "DoubleTeam", threesomeDoubleTeam, next).hint("Use both your dicks to fuck Clara");
+		if(player.cockThatFits(20) >= 0)
+			addButton(1, "FuckHer", threesomeFuckHer, next).hint("Use your cock, Marble uses vagina");
+		if(flags[kFLAGS.MARBLE_DICK_TYPE] > 0)
+			addButton(2, "FuckHer", threesomeFuckHer, next).hint("Let Marble do everything herself");
+		addButton(3, "Lesbo", threesomeLesbo, next).hint("Engage in lesbo fun");
 	}
+	
+	public function threesomeDoubleTeam(next:Function):void {
+		var x:int = player.cockThatFits(20);
+		clearOutput();
+		outputText("Eventually you pull her up and sandwich her between your bodies.  Marble expresses an aversion to anal, so you take the backside while she takes the front.  \"<i>Hey, you can't do this to me!  I don't want to lose my virginity to my sister!</i>\" Clara cries out indignantly.");
+		outputText("\n\n\"<i>Well, are you saying you've learned your lesson?  Are you going to apologize for trying to take my sweetie away from me?</i>\"");
+		outputText("\n\n\"<i>What?  Fuck noo, your </i>sweetie<i> should be mine.</i>\"");
+		outputText("\n\nMarble looks to the side of her sister's head, and gives you a solemn nod.  You take that as an invitation to begin the violation and grab a good grip of Clara's expansive rear.  Then you prod your " + cockDescript(x) + " at the entrance to her anus, prompting a gasp and plea from the woman you're about to penetrate to stop.  Her sister doesn't heed her begging, and neither do you.");
+		outputText("\n\nThere is a sharp gasp from the girls in front of you as you push into Clara's ass while Marble takes her vagina.  \"<i>Nooo,</i>\" comes a cross between a whimper and a moan in front of you, \"<i>It wasn't suppose to be this way....</i>\"  You ignore that and instead start to push and pull inside the young cow-girl's back entrance, while enjoying the feeling of Marble's member moving in an out of the other opening against your own.  It isn't often you get to double team someone like this.");
+		outputText("\n\nYou wipe a trickle of sweat off of your face and continue to revel in the feeling of filling up a cow-girl's wide bum, with dual stimulation from both her contractions against your member and the other shaft so close you can feel it sliding against you through the cow-girl.  At the same time, you can hear loud moaning coming from the two girls.  The familiar earthy 'ahhs' and subdued moos from Marble, along with the sharp gasps, 'oohs', and long loud moos from her younger sister.  Clara hasn't actually protested the situation for some time now, the dual penetration clearly too much for her virgin mind to endure.");
+		outputText("\n\nSuddenly Clara's anus clamps down sharply on your " + cockDescript(x) + " and she lets out a long, \"<i>Moooo!</i>\" in orgasm.  She certainly came fast from this; you've barely even begun to build up your own pleasure.  You look around her to see that Marble seems to be rather surprised about this as well.  \"<i>Should we continue?</i>\" she asks somewhat uncertainly, then considers her sister again with a frown.  You shrug your shoulders and suggest that a little longer is just what you both need and well within the bounds of a reasonable punishment.  Your partner agrees, and the fucking resumes.");
+		outputText("\n\nThis time Clara's anus is much more relaxed and accommodating to your violation.  It almost seems to invite you in when you push forward and try to keep there when you pull back.  Maybe the gangbang has brought out her natural skills at anal sex?  It's hard to say, but it's definitely enjoyable.  A quick check on the elder sister's face reveals that she is certainly enjoying this as well, but the sounds coming from the younger sister suggest that she is enjoying this the most.  Then again, it is hard to tell if that babbling is from pleasure or just from a complete mental breakdown.");
+		outputText("\n\nIt doesn't take much longer for you and Marble to rush to your peaks and fill up the cow-girl holes together.  Clara seems to have fallen just short of her peak when the two of you pull back, and she seems to suddenly regain her composure.  \"<i>Wait, what?  Noo!  You can't just, uh....  What am I saying?!</i>\"  It looks like she's having a bit of a crisis deciding if she wants to cum or is too bothered by the thought of what just happened to her.");
+		outputText("\n\n\"<i>Damn it all, why couldn't [name] have taken the front?  Now I'll never be able to experience it for the first time with my perfect mate!  You're evil, sister.</i>\"  Marble looks like she is about to blow up once more at that comment....");
+		player.sexReward("Default", "Default",true,false);
+		doNext(next);
+	}
+	public function threesomeFuckHer(next:Function):void {
+		var x:int = player.cockThatFits(20);
+		clearOutput();
+		outputText("Eventually you push her down on all fours.  You stand behind her, while Marble stands in front of her sister's face.  \"<i>Wait, do you actually think I'll service yoou?</i>\" Clara asks indignantly.");
+		outputText("\n\n\"<i>You will if you don't want me to twist your ears,</i>\" comes the response.  You prod your " + cockDescript(x) + " up against her tight asshole and suggest that you might be taking a different entrance if she doesn't cooperate for her punishment.  \"<i>Of course, if you're sorry for what you tried to do to [name]...</i>\" Marble suggests.");
+		outputText("\n\n\"<i>What?  Why the hell would I be sorry for that?  Moop!</i>\"  In goes your length into her virginal pussy.  \"<i>Hey!  Yo-mmph,</i>\" and she is silenced as her face is forced into Marble's womanhood.  You give her a moment to get use to the sensation, then begin thrusting into her opening in earnest.  At the same time, Marble twists her sister's ears a bit and reminds her what to do before letting out a sigh of pleasure when Clara evidently complies.");
+		outputText("\n\nThere is no question that you're the first to claim this lady's most personal of places.  She is very tight, and the muscles contract and convulse against your intrusion reflexively and without direction.  Every thrust is met with a whole new adventure of contractions, relaxations, and unpracticed craziness.  Of course, it's quite obvious that Clara is enjoying things despite her earlier protests.  Her cunny is soaking wet.");
+		outputText("\n\nWhile continuing to savor the unpredictableness of Clara's interior, you turn your attention to how your partner in the punishment threesome is enjoying the experience.  Unfortunately, the younger sister's inexperience with pussy licking is showing.  Marble's expression is a mix of both enjoyment and exasperation.  Hoping to give your mate a little more of the former, you grab the cow-tail that's swishing around the bountiful rear you're connect to through your cunt claiming cock, and give it a tug.  You tell Clara that she needs to do a better job of pleasing your love.  She needs to work that cow-tongue, get all the way in there and pay special attention to... this.  With that last word, you give her clitoris a little rub.");
+		outputText("\n\nInstantly Marble's expression changes and she lets out a long low moan.  As a reward, you switch from quick thrusts to a slow rub against her entrance.  This proves to be quite a reward indeed as you feel a flood of Clara's juices spill out onto your groin from around the " + cockDescript(x) + " teasing her insides.  You, however, aren't finished yet.  You start a mix of both thrusting into her womanhood, and twisting your length around her innards.");
+		outputText("\n\nA muffled, but loud, moaning moo starts to rise out of the before you, somewhat complementing the quieter sighs and gasps you're more familiar with coming from your mate.  The whole situation is incredibly lewd, and you're loving every second of it.  It isn't often that you get to have three sweaty bodies slapping and slobbering on one another.  The fact that one of them is tied up might bother you a little, if she wasn't so clearly enjoying herself.");
+		outputText("\n\nIn fact, she is enjoying herself so much that she cums a second time before either you or Marble reach your peaks.  Still, you and Marble do manage to bring yourselves over the top just after that and ride out the afterglow together.  Clara stumbles to the ground, coughing and sputtering from the proof of Marble's orgasm while yours spills out of her lower hole.");
+		outputText("\n\n\"<i>Gah, sis, does your milk taste as bad as your pussy juices?  No wonder [name] didn't want yoou!</i>\"  Another shock of anger shoots through Marble's features.  Is she going to try and inflict more punishment on her sister?");
+		player.sexReward("Default", "Default",true,false);
+		doNext(next);
+	}
+	public function threesomeLetMarble(next:Function):void {
+		clearOutput();
+		outputText("Eventually you push her down on all fours.  You stand in front of her while Marble stands behind her sister's backside.  \"<i>Hey, you can't do this to me!  I don't want to looose my virginity to my sister!</i>\" Clara cries out indignantly.");
+		outputText("\n\nYou grab ahold of her ears and give them a slight tug.  She'd better go along with her punishment like a good girl, or you'll be adding some extra pain onto her head.  \"<i>Of course, if you're sorry for what you tried to do to [name]...</i>\" Marble suggests.");
+		outputText("\n\n\"<i>What?  Why the hell would I be sorry for that?  Moop!</i>\"  There is a low slurp as your mate pushes her newly acquired seven inch shaft deep inside her sister's womanhood.  \"<i>Hey!  Yo-mmph,</i>\"  You silence her with your " + vaginaDescript() + ", roughly forcing it into her face.  You give a slight twist to the young bovine's ears to remind her what she should be doing, and right away her tongue comes out and starts giving you experimental licks.");
+		outputText("\n\nYou let out a sigh and see how Marble is doing.  The older cow-girl is certainly enjoying herself.  It isn't often she gets this into sex involving her cock, but the urgency of her thrusts, the blissful expression of her face, and the happy low groans and moans certainly suggest that she is enjoying herself immensely.");
+		outputText("\n\nFor your own sexual experience, you're rather underwhelmed so far.  The malefactor's skills at oral certainly leave something to be desired.  She's barely doing much more than just lightly licking the edges, barely even teasing you.  Sensing that you aren't having a good time, Marble grabs her sister's tail and gives it a good tug.  \"<i>Hey, 'sis', I see you aren't doing a good job up there.  You damn well better work that tongue deep inside " + player.mf("him","her") + ", or I'll be using your tail as a leash.  Put that length to work!</i>\"  That little display certainly seems to have gotten the message through as the real performance now begins.");
+		outputText("\n\nNow you feel the natural power of a cow-girl's tongue at giving pleasure to a woman's parts.  Her pussy-licker is at least twice as long as a normal human's, able to easily explore your folds and go deep inside your interior.  \"<i>Good girl, be sure to pay special attention to this little button here,</i>\" comes further instructions, accompanied by Marble reaching down under her sister's legs and fingering what must be the would-be-thief's clitoris.  You're sure that's what she just touched because it triggered a shudder through Clara's body and a loud cry of orgasm into your mound.");
+		outputText("\n\nYou express your disappointment to Marble at her sister's unfinished performance, so the fucking continues.  Thankfully, it seems that the bad bovine did get the message and has started to tease and suck on your " + clitDescript() + " as well as continuing with her teases of your folds and depths.  You'd almost feel bad for doing what you two are doing to her if she wasn't evidently enjoying it as much as she is.  Muffled but loud gasps and moos are constantly being uttered into your " + vaginaDescript() + " by the bound girl between you and your lover.  Her breath upon your womanhood only serves to make you feel even better.");
+		outputText("\n\nShe is enjoying herself so much that she cums a second time before either you or Marble reach your peaks.  Still, you and Marble do manage to bring yourselves over the top just after that and ride out the afterglow together.  Clara stumbles to the ground, coughing and sputtering from the proof of your orgasm while Marble's spills out of her lower hole.");
+		outputText("\n\n“<i>Damn it all, why did you have to do that?  Now I'll never be able to experience it for the first time with my perfect mate!  You're evil, sister.</i>\"  Marble looks like she is about to blow up once more at that comment...");
+		player.sexReward("Default", "Default",true,false);
+		doNext(next);
+	}
+	public function threesomeLesbo(next:Function):void {
+		clearOutput();
+		outputText("Eventually you roll her onto her back.  Then Marble sits down on her sister's face while you put your mouth to Clara's womanhood and raise your [butt] up into the air so that your mate can reach your own " + vaginaDescript() + ".");
+		outputText("\n\nThis little triangle is about all you can think of doing since there isn't a whole lot three girls can do to one another if one of them is tied up, that is if you're looking for everyone to get pleasure out of the experience.  \"<i>Okay, what the hell is this?  Doo you really think I'm going to actually service -mmph!</i>\"  The naughty girl is interrupted when her elder sister smothers her face in cow-girl pussy.");
+		outputText("\n\n\"<i>If you don't do a good job of pleasing me....  Well, I can just grind myself all over your face,</i>\" your mate responds.  You offer up that you won't be letting Clara reach her peak if she does a poor job either.  To make your point clear, you give a small lick to the rim of the malefactor's mound and assure her that you'll be driving her to the edge but never let her cross over.");
+		outputText("\n\nMarble then lifts herself slightly off her sister's face and suggests, \"<i>You know, you could get out of this whole situation if you just admit you did something wrong and say you're sorry...</i>\"");
+		outputText("\n\n\"<i>Haven't I already told you that I was dooing the right thing?  Why would I -mmph!</i>\"  Once again she is silenced by a mouth full of another girl's snatch.  It looks like the punishment is on, and you start to mercilessly tease the cow-girl mound in front of your face.  Instantly she starts to squirm under your ministrations, desperately trying to get you to actually penetrate her or touch her emerging clitoris.  You don't give her that mercy, not yet.");
+		outputText("\n\nNow you get to experience the pleasure of Marble's tongue starting to tease your " + vaginaDescript() + " with her bovine tongue.  It's easily twice the length of a human's and quite adept at pleasuring a woman's passages.  Your mate is certainly quite willing to put it to that very use, using it to plunge deep inside your depths and also expertly explore and pleasure your " + clitDescript() + ".");
+		outputText("\n\nMeanwhile, the young cow-girl under your care continues to squirm and struggle more and more urgently.  You take a short break to suggest to her that all she needs to do is properly please Marble if she wants relief.  Finally, you hear an approving moan from your mate and take that as your cue to dive deep into Clara's needy nethers.  Almost instantly, a muffled but clearly audible moan of pleasure rises out of the woman.");
+		outputText("\n\nYou let out your own moan of pleasure, the elder bovine's ministrations of your lower lips have driven you close to the edge of orgasm.  She expertly knows how to use that pussy licker of hers, grasps just what places to tease and just when to switch to what part.  Then she sucks on your love button, pushing you over the edge.");
+		outputText("\n\nIt's around the same time that the girl under you cries out a long loud moo through Marble's womanhood, signalling her surrender to your lips.  You pull back and see your mate regard her sister with disappointment, you poke the bad bound girl in the belly and tell her to finish the job.  She gasps and returns to licking cow-girl snatch enough to bring out a nice low moan and moo from your mate's body.");
+		outputText("\n\nYour hot and sweaty bodies separate from one another, each face bearing the fluids of one another's orgasms.  Clara is coughing and sputtering, \"<i>Gah, sis, does your milk taste as bad as your pussy juices?  No woonder [name] didn't want you!</i>\"  Another shock of anger shoots through Marble's features.  Is she going to try and inflict more punishment on her sister?");
+		player.sexReward("Default", "Default",true,false);
+		doNext(next);
+	}
+	
 	//NTR Clara
 	//The PC and Marble have unusually rough and passionate sex in front of Clara, this is to show how much more real your love is to Marble.  It only serves to piss off Clara and make her jealous.
 	//does not work with centaur or drider bodies.  However, I don't particularly want to just say you can't do this scene if you have them.
-	public function NTRIsClearlyTheWorstFetishWhyWouldYouWriteThisOMG():void {
+	public function NTRIsClearlyTheWorstFetishWhyWouldYouWriteThisOMG(next:Function):void {
 		clearOutput();
-	 	outputText("You ");
-	 	outputText("step forward and tell Marble that you think that since Clara thinks your love for one another isn't real, how about the two of you show her just how real it is?  \"<i>Good idea, [name],</i>\" your lover tersely replies through her still seething visage and steps forwards.  In an instant you're forcibly pulled into a strong passionate kiss upon humanlike lips while a decidedly inhumanly long tongue invades your mouth.  “<i>Wait, are you two just gooing to fuck right in front of me?</i>\" comes an incredulous voice from somewhere behind the woman you're kissing.  Neither of you pay it any mind and continue to taste, devour, and lavish affection on each other's mouths.  An angry grunt comes once more from the woman you're showing what loves means to, and sounds of a struggle accompany it.");
-	 	outputText("\n\nProper lovemaking does not stop at kissing.  You have to be sure to show a would be thief the whole process.  Your partner is already working on that matter through efforts to free your body from the [armor] that contains it.  Not one to be outdone, you begin to remove the familiar top that oh-so-often holds bovine breasts at bay.  With Marble's melons free, she immediately pulls your head down into the great valley of flesh her breasts create.");
+	 	outputText("You step forward and tell Marble that you think that since Clara thinks your love for one another isn't real, how about the two of you show her just how real it is?  \"<i>Good idea, [name],</i>\" your lover tersely replies through her still seething visage and steps forwards.  In an instant you're forcibly pulled into a strong passionate kiss upon humanlike lips while a decidedly inhumanly long tongue invades your mouth.  “<i>Wait, are you two just gooing to fuck right in front of me?</i>\" comes an incredulous voice from somewhere behind the woman you're kissing.  Neither of you pay it any mind and continue to taste, devour, and lavish affection on each other's mouths.  An angry grunt comes once more from the woman you're showing what loves means to, and sounds of a struggle accompany it.");
+	 	outputText("\n\nWhat parts will you use?");
+		menu();
+		if (player.cockThatFits(marbleScene.marbleCuntCapacity()) >= 0)
+			addButton(0, "Your Cock", ntrSceneWithArgs, next, 0);
+		if (player.hasVagina() && flags[kFLAGS.MARBLE_DICK_TYPE] > 0)
+			addButton(1, "Marble's Cock", ntrSceneWithArgs, next, 1);
+		if (player.hasVagina())
+			addButton(2, "Vaginas", ntrSceneWithArgs, next, 2);
+		//backup
+		if (!(player.cockThatFits(marbleScene.marbleCuntCapacity()) >= 0) && !player.hasVagina()) {
+			outputText("\n\nSadly, you don't have a fitting cock to fuck Marble, and she doesn't have one either. Well, shit.");
+			addButton(3, "EpicFail", next);
+		}
+	}
+	
+	public function ntrSceneWithArgs(next:Function, type:int):void {
+		var x:int = player.cockThatFits(marbleScene.marbleCuntCapacity());
+		clearOutput();
+		outputText("Proper lovemaking does not stop at kissing.  You have to be sure to show a would be thief the whole process.  Your partner is already working on that matter through efforts to free your body from the [armor] that contains it.  Not one to be outdone, you begin to remove the familiar top that oh-so-often holds bovine breasts at bay.  With Marble's melons free, she immediately pulls your head down into the great valley of flesh her breasts create.");
 	 	outputText("\n\nFrom there, you decide it is time to let your partner lead for a while.  She is quite happy to roll her massive melons around your face while you snuggle against the wonderfully smooth skin.  Abruptly, you feel the woman whose breasts you're trapped within turn around.  \"<i>The fuck is this, sis?</i>\"  The voice is spitting mad now.  You can hear that it's behind you, evidently someone wants to make sure the audience gets a full view of your sexual escapade.");
 	 	outputText("\n\nAfter a little more rack riding, Marble decides that it is time to get onto the main event.  She uncharacteristically violently forces you into a sitting position and tears the rest of your garments off.  You don't even get a chance to pull off her skirt before ");
-		//if (PC has a cock that fits)
-		var x:int = player.cockThatFits(marbleScene.marbleCuntCapacity());
-		if(player.hasCock() && x >= 0)
-		{
-		 	outputText("she drops herself onto your " + cockDescript(x) + ".  Since your bovine mate isn't in the habit of wearing any form of undergarments, her skirt doesn't really do much to get in the way of penetration.  A shriek of dismay accompanies this act.");
-		 	outputText("\n\nThere is no hesitation after you've been mounted.  Instantly you're being roughly ridden by a beast that has been awakened in Marble, and there is nothing that can stop it.  A loud slapping sound fills the air with each drop of her hips, then they rise up again and drop once more.  What is essentially a hollow jackhammer seems to be running on your lap right now, and its operator's hands are holding firm to your shoulders to make sure you stay in place.");
-			player.sexReward("vaginalFluids", "Dick");
+		switch(type) {
+			case 0:
+				outputText("she drops herself onto your " + cockDescript(x) + ".  Since your bovine mate isn't in the habit of wearing any form of undergarments, her skirt doesn't really do much to get in the way of penetration.  A shriek of dismay accompanies this act.");
+				outputText("\n\nThere is no hesitation after you've been mounted.  Instantly you're being roughly ridden by a beast that has been awakened in Marble, and there is nothing that can stop it.  A loud slapping sound fills the air with each drop of her hips, then they rise up again and drop once more.  What is essentially a hollow jackhammer seems to be running on your lap right now, and its operator's hands are holding firm to your shoulders to make sure you stay in place.");
+				player.sexReward("vaginalFluids", "Dick");
+				break;
+			case 1:
+				outputText("she drops herself onto the ground next to you.  Abruptly, she lifts you up and drops your womanhood onto the member you gave her.  Since your bovine mate isn't in the habit of wearing any form of undergarments, her skirt doesn't really do much to get in the way of penetration.  A shriek of dismay accompanies this act.");
+				outputText("\n\nThere is no hesitation after you've been invaded, instantly you're being roughly lifted and dropped by a beast that has been awakened in Marble, and there is nothing that can stop it.  A loud slapping sound fills the air with each drop of your hips, only for them to be lifted up and dropped once more.  Your " + hipDescript() + " have been essentially turned into a jackhammer right now, and its operator shows no signs allowing you to stray from your place on her lap.");
+				player.sexReward("cum", "Vaginal");
+				break;
+			case 2:
+				outputText("she drops herself onto your legs, and grabs one of them.  Instantly, your two womanhoods are being grinded against one another with great force and urgency.  Since your bovine mate isn't in the habit of wearing any form of undergarments, her skirt doesn't really do much to get in the way of tribadism.  A shriek of dismay accompanies this act.");
+				outputText("\n\nThere has been a beast awakened in Marble, and there is nothing that can stop it.  Loud squelching noises can be heard coming from your combined pussies as she roughly scissors you.  What is essentially a high speed vibrator seems to be running on your [legs] right now, and its operator's hands are firmly holding your them to make sure you stay in place.");
+				break;
 		}
-		//else if (PC has a vagina and Marble has a cock)
-		else if(player.hasVagina() && flags[kFLAGS.MARBLE_DICK_TYPE] > 0)
-		{
-		 	outputText("she drops herself onto the ground next to you.  Abruptly, she lifts you up and drops your womanhood onto the member you gave her.  Since your bovine mate isn't in the habit of wearing any form of undergarments, her skirt doesn't really do much to get in the way of penetration.  A shriek of dismay accompanies this act.");
-		 	outputText("\n\nThere is no hesitation after you've been invaded, instantly you're being roughly lifted and dropped by a beast that has been awakened in Marble, and there is nothing that can stop it.  A loud slapping sound fills the air with each drop of your hips, only for them to be lifted up and dropped once more.  Your " + hipDescript() + " have been essentially turned into a jackhammer right now, and its operator shows no signs allowing you to stray from your place on her lap.");
-			player.sexReward("cum", "Vaginal");
-		}
-		//else if (PC has a vagina and Marble does not have a cock)
-		else if(player.hasVagina())
-		{
-		 	outputText("she drops herself onto your legs, and grabs one of them.  Instantly, your two womanhoods are being grinded against one another with great force and urgency.  Since your bovine mate isn't in the habit of wearing any form of undergarments, her skirt doesn't really do much to get in the way of tribadism.  A shriek of dismay accompanies this act.");
-		 	outputText("\n\nThere has been a beast awakened in Marble, and there is nothing that can stop it.  Loud squelching noises can be heard coming from your combined pussies as she roughly scissors you.  What is essentially a high speed vibrator seems to be running on your [legs] right now, and its operator's hands are firmly holding your them to make sure you stay in place.");
-		}
-	 	outputText("\n\nRough sex has a tendency to be rather short but eventful.  In this aspect, this particular escapade is no different.  What sets it apart is an incessant chorus of furious shouting and insults from an extremely jealous cow-girl.  It barely takes a minute before a sharp orgasm passes through your bodies, and in almost an instant, it is over.  Your sweaty bodies separate, and you get a chance to see Marble's face once more.  She's crying.");
+		outputText("\n\nRough sex has a tendency to be rather short but eventful.  In this aspect, this particular escapade is no different.  What sets it apart is an incessant chorus of furious shouting and insults from an extremely jealous cow-girl.  It barely takes a minute before a sharp orgasm passes through your bodies, and in almost an instant, it is over.  Your sweaty bodies separate, and you get a chance to see Marble's face once more.  She's crying.");
 	 	outputText("\n\nThe cause of this sadness is rather likely to be from the extreme verbal abuse that a woman red with rage has been heaping at her.  \"<i>What the fuck is wroong with you!?  Having sex like that with my mate right in froont of me while I'm tied up!  You deserve to be locked away, </i>sister<i>.</i>\"  That last word is essentially spat out.  Evidently Clara didn't enjoy the display, nor did Marble particularly care for her response.  The elder sister rises up, and steps towards her sister, fists clenched in furry.");
-		//set lust to 0
-		//Proceed to calm Marble down
-		menu();
-		addButton(0,"Next",calmMurblesFatAssDown);
+		doNext(next);
 	}
+	
 	//Futa Marble rapes Clara
 	//Similar to the threesome, but Marble is the only participant.
 	public function futaMarbleIsAHugeCowToCowCuntAndStuffsCowCuntsCuntFullOfCowCock():void

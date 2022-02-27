@@ -40,8 +40,8 @@ public function changingRoom():void {
 	}
 	//[Look Around]
 	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00181] == 0)
-		simpleChoices("Look Around", meetJasun, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
-	else simpleChoices("Jasun", meetJasun, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
+		simpleChoices("Look Around", meetJasun, "", null, "", null, "", null, "Leave", telAdre.gymDesc);
+	else simpleChoices("Jasun", meetJasun, "", null, "", null, "", null, "Leave", telAdre.gymDesc);
 }
 
 //AT CHANGING ROOM (SELECTING TO SEE THE SHARK OR LOOK AROUND IF FIRST TIME)
