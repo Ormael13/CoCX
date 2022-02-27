@@ -31,7 +31,7 @@ public class Questlog extends BaseContent
 			outputText("\n<b>End of Reign:</b> ");
 			if (flags[kFLAGS.LETHICE_DEFEATED] > 1) outputText("Completed (Reward taken)");
 			else if (SceneLib.dungeons.checkLethiceStrongholdClear()) outputText("Completed");
-			else if (flags[kFLAGS.D3_DISCOVERED] > 0) outputText("In Progress (to complete this quest PC must beat Basilisk Boss even if they managed to pass him by on first run throu the dungeon)");
+			else if (flags[kFLAGS.D3_DISCOVERED] > 0) outputText("In Progress (to complete this quest PC must beat either Basilisk Boss or Mirror Demon)");
 			else outputText("Not Started");
 			outputText("\n\n<u><b>Side Quests</b></u>");
 			outputText("\n<b>Friend of the Sand Witches:</b> ");

@@ -655,7 +655,7 @@ public class MutationsLib
 						}, "Hinezumi tail")
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.mouseScore() >= 12;
-						}, "Mouse race");
+						}, "Hinezumi race (Mouse 12+)");
 				HarpyHollowBones.requireBonesAndMarrowMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.harpyScore() >= 6 || player.sirenScore() >= 10 || player.thunderbirdScore() >= 10 || player.phoenixScore() >= 10 || player.couatlScore() >= 11;
 				}, "Harpy winged race");
@@ -1153,4 +1153,4 @@ public class MutationsLib
 			}
 		initMutations();
 	}
-}
+}
