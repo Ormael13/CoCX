@@ -6579,7 +6579,7 @@ public class Combat extends BaseContent {
                     if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
                     damage = damage * 0.33 * monster.lustVuln;
                     damage = Math.round(damage);
-                    monster.teased(damage);
+                    monster.teased(damage,false);
                     if (crit1) outputText(" <b>Critical!</b>");
                     outputText(" ");
                     if (player.hasPerk(PerkLib.SuperSensual) && player.hasPerk(PerkLib.Sensual)) teaseXP(2);
