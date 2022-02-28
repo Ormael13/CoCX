@@ -3554,7 +3554,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.ears.type = Ears.RAIJU;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.RAIJU));
 	  },
 	  // is present
 	  function (): Boolean {
