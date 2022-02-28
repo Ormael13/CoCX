@@ -251,7 +251,7 @@ public static const UNKNOWN_FLAG_NUMBER_00242:int                               
 public static const UNKNOWN_FLAG_NUMBER_00243:int                                   =  243; // Counter for minotaur chef baker procs - Maddie present at bakery.    Mod%8=0, present
 public static const COTTON_UNUSUAL_YOGA_BOOK_TRACKER:int                            =  244; // Cotton Unusual Yoga Guidebook tracker
 public static const COTTON_BREAKFAST_CLUB:int                                       =  245; // Cotton Breakfast Club
-public static const UNKNOWN_FLAG_NUMBER_00246:int                                   =  246; // Tiger Tooth Countdown
+public static const GOT_STOOTH_FROM_IZMA_TODAY:int                                   =  246; // Tiger Tooth Countdown
 public static const UNKNOWN_FLAG_NUMBER_00247:int                                   =  247; // Genderless centaur madness
 public static const IZMA_PREGNANCY_DISCUSSED:int                                   	=  248; // Izma Preggers Discussion
 public static const IZMA_PREGNANCY_ENABLED:int                                   	=  249; // Pregnancy Enabled (1 = yes)
