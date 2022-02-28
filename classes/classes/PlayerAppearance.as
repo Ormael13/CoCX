@@ -862,6 +862,9 @@ public class PlayerAppearance extends BaseContent {
 					case VaginaClass.SHARK:
 						pussyDesc += " looks human on the outside but its depths are filled with small sensitive tendril-like feelers that wrap around and swiftly help massage just any cocks to climax. Inside you have a ";
 						break;
+					case VaginaClass.RAIJU:
+						pussyDesc += " constantly drools plasma, small puffs of electrified matter wafting up from beneath where you're standing. Your static chamber hides a ";
+						break;
 					default:
 						pussyDesc += " hides a ";
 						break;
@@ -959,6 +962,28 @@ public class PlayerAppearance extends BaseContent {
 
 	public function RacialScores():void {
 		var score:int;
+		var tempStr:int;
+		var tempSpd:int;
+		var tempInt:int;
+		var tempTou:int;
+		var tempWis:int;
+		var tempLib:int;
+		var tempMDmg:int;
+		var tempSDmg:int;
+		var tempRDmg:int;
+		var tempUDmg:int;
+		var tempSF:int;
+		var tempHP:int;
+		var tempMana:int;
+		var tempWrath:int;
+		var tempDRes:int;
+		var tempSen:int;
+		var tempFat:int;
+		var tempDarkDmg:int;
+		var tempIceDmg:int;
+		var tempLtngDmg:int;
+		var tempFireDmg:int;
+		
 		clearOutput();
 		outputText("<b>Current racial scores (and bonuses to stats if applicable):</b>\n");
 		//Druid fusions
@@ -1196,46 +1221,169 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.frostWyrmScore() < 1) outputText("\n<font color=\"#ff0000\">Half Frost Wyrm: 0</font>");
 		//GARGOYLE
 		if (player.gargoyleScore() >= 20 && (player.hasPerk(PerkLib.GargoylePure) || player.hasPerk(PerkLib.GargoyleCorrupted))) {
-			outputText("\n<font color=\"#0000a0\">" + (player.hasPerk(PerkLib.GargoylePure) ? "Pure ":"Corrupted ") + "Gargoyle: " + player.gargoyleScore() + " (");
-			if (Forgefather.material == "stone") {
-				if (Forgefather.refinement == 0) outputText("+50% to Str,Tou,Spe,Int,Wis racial multis, ");
-				if (Forgefather.refinement == 1) outputText("+75% to Str,Tou,Spe,Int,Wis racial multis, ");
-				if (Forgefather.refinement == 2) outputText("+100% to Str,Tou,Spe,Int,Wis racial multis, ");
-			}
-			if (Forgefather.material == "alabaster") {
-				if (Forgefather.refinement == 0) outputText("+100% to Int racial multi, +50% to Wis racial multi, +20% to max Mana, +15% Spell Dmg, - 10% to Str, Spe racial multis, ");
-				if (Forgefather.refinement == 1) outputText("+150% to Int racial multi, +75% to Wis racial multi, +25% to max Mana, +25% Spell Dmg, - 15% to Str, Spe racial multis, ");
-				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) outputText("+200% to Int racial multi, +100% to Wis racial multi, +35% to max Mana, +50% Spell Dmg, - 20% to Str, Spe racial multis, ");
-				if (Forgefather.refinement == 4) outputText("+500% to Int racial multi, +250% to Wis racial multi, +100% Spell Dmg, +50% to max Mana, - 30% to Str, Spe racial multis, ");
-			}
-			if (Forgefather.material == "marble") {
-				if (Forgefather.refinement == 0) outputText("+100% to Wis racial multi, +50% to Str racial multi, +20 % to max SF, +15% unarmed Dmg, - 10% to Int racial multi, ");
-				if (Forgefather.refinement == 1) outputText("+150% to Wis racial multi, +75% to Str racial multi, +25 % to max SF, +25% unarmed Dmg, - 15% to Int racial multi, ");
-				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) outputText("+200% to Wis racial multi, +100% to Str racial multi, +35 % to max SF, +50% unarmed Dmg, - 20% to Int racial multi, ");
-				if (Forgefather.refinement == 4) outputText("+500% to Wis racial multi, +250% to Str racial multi, +50 % to max SF, +100% unarmed Dmg, - 30% to Int racial multi, ");
-			}
-			if (Forgefather.material == "granite") {
-				if (Forgefather.refinement == 0) outputText("+100% to Tou racial multi, +50% to Str racial multi, +20% to max HP, +15% Dmg Resist, - 10% to Int, Wis racial multis, ");
-				if (Forgefather.refinement == 1) outputText("+150% to Tou racial multi, +75% to Str racial multi, +25% to max HP, +25% Dmg Resist, - 15% to Int, Wis racial multis, ");
-				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) outputText("+200% to Tou racial multi, +100% to Str racial multi, +20% to max HP, +50% Dmg Resist, - 20% to Int, Wis racial multis, ");
-				if (Forgefather.refinement == 4) outputText("+500% to Tou racial multi, +250% to Str racial multi, +50% to max HP, +100% Dmg Resist, - 30% to Int, Wis racial multis, ");
-			}
-			if (Forgefather.material == "ebony") {
-				if (Forgefather.refinement == 0) outputText("+100% to Str racial multi, +50% to Spd racial multi, +20% to max Wrath, +15% to Melee Dmg, - 10% to Int, Wis racial multis, ");
-				if (Forgefather.refinement == 1) outputText("+150% to Str racial multi, +75% to Spd racial multi, +25% to max Wrath, +25% to Melee Dmg, - 15% to Int, Wis racial multis, ");
-				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) outputText("+200% to Spd racial multi, +100% to Str racial multi, +20% to max Wrath, +50% to Melee Dmg, - 20% to Int, Wis racial multis, ");
-				if (Forgefather.refinement == 4) outputText("+500% to Str racial multi, +250% to Spd racial multi, +50% to max Wrath, +100% to Melee Dmg, - 30% to Int, Wis racial multis, ");
-			}
-			if (Forgefather.material == "sandstone") {
-				if (Forgefather.refinement == 0) outputText("+100% to Spd racial multi, +25% to Str,Int racial multis, +20% to max Fatigue, +15% to Ranged Dmg, - 10% to Wis racial multi, ");
-				if (Forgefather.refinement == 1) outputText("+150% to Spd racial multi, +35% to Str,Int racial multis, +25% to max Fatigue, +25% to Ranged Dmg, - 15% to Wis racial multi, ");
-				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) outputText("+200% to Spd racial multi, +50% to Str,Int racial multis, +35% to max Fatigue, +50% to Ranged Dmg, - 20% to Wis racial multi, ");
-				if (Forgefather.refinement == 4) outputText("+500% to Spd racial multi, +125% to Str,Int racial multis, +50% to max Fatigue, +100% to Ranged Dmg, - 30% to Wis racial multi, ");
-			}
 			
-			if (player.hasPerk(PerkLib.GargoylePure)) outputText("+130% to Wis racial multi, -20% to Lib racial multi, -10 Sens.");
-			if (player.hasPerk(PerkLib.GargoyleCorrupted)) outputText("-20% to Wis racial multi, +140% to Lib racial multi.");
-			outputText(")</font>");
+			outputText("\n<font color=\"#0000a0\">" + (player.hasPerk(PerkLib.GargoylePure) ? "Pure ":"Corrupted ") + Forgefather.materialWord() + " Gargoyle: " + player.gargoyleScore());
+			switch (Forgefather.material) {
+				case "stone":
+					if (Forgefather.refinement == 1) {
+						tempStr+=50; tempTou+=50; tempSpd+=50; tempInt +=50; tempWis+=50;
+					}
+					if (Forgefather.refinement == 2) {
+						tempStr+=75; tempTou+=75; tempSpd+=75; tempInt +=75; tempWis+=75;
+					}
+					if (Forgefather.refinement == 3) {
+						tempStr+=100; tempTou+=100; tempSpd+=100; tempInt +=100; tempWis+=100;
+					}
+					break;
+				case "alabaster":					
+					if (Forgefather.refinement == 1) {
+						tempInt+=100; tempWis+=50; tempMana+=20; tempSDmg+=15; tempStr-=10; tempSpd -=10;
+					}
+					if (Forgefather.refinement == 2) {
+						tempInt+=150; tempWis+=75; tempMana+=25; tempSDmg+=25; tempStr-=15; tempSpd -=15;
+					}
+					if (Forgefather.refinement == 3) {
+						tempInt+=200; tempWis+=100; tempMana+=35; tempSDmg+=50; tempStr-=20; tempSpd -=20;
+					}
+					if (Forgefather.refinement == 4) {
+						tempInt+=200; tempWis+=100; tempMana+=35; tempSDmg+=50; tempStr-=20; tempSpd -=20;
+					}
+					if (Forgefather.refinement == 5) {
+						tempInt+=500; tempWis+=250; tempMana+=50; tempSDmg+=100; tempStr-=30; tempSpd -=30;
+					}
+					break;
+				case "ebony":
+					if (Forgefather.refinement == 1) {
+						tempStr+=100; tempSpd+=50; tempWrath+=20; tempMDmg+=15; tempInt -=10; tempWis-=10;
+					}
+					if (Forgefather.refinement == 2) {
+						tempStr+=150; tempSpd+=75; tempWrath+=25; tempMDmg+=25; tempInt -=15; tempWis-=15;
+					}
+					if (Forgefather.refinement == 3) {
+						tempStr+=200; tempSpd+=100; tempWrath+=35; tempMDmg+=50; tempInt -=20; tempWis-=20;
+					}
+					if (Forgefather.refinement == 4) {
+						tempStr+=200; tempSpd+=100; tempWrath+=35; tempMDmg+=50; tempInt -=20; tempWis-=20;
+					}
+					if (Forgefather.refinement == 5) {
+						tempStr+=500; tempSpd+=250; tempWrath+=50; tempMDmg+=100; tempInt -=30; tempWis-=30;
+					}
+					break;
+				case "granite":
+					if (Forgefather.refinement == 1) {
+						tempTou+=100; tempStr+=50; tempHP+=20; tempDRes+=15; tempInt-=10; tempWis-=10;
+					}
+					if (Forgefather.refinement == 2) {
+						tempTou+=150; tempStr+=75; tempHP+=25; tempDRes+=25; tempInt-=15; tempWis-=15;
+					}
+					if (Forgefather.refinement == 3) {
+						tempTou+=200; tempStr+=100; tempHP+=35; tempDRes+=50; tempInt-=20; tempWis-=20;
+					}
+					if (Forgefather.refinement == 4) {
+						tempTou+=200; tempStr+=100; tempHP+=35; tempDRes+=50; tempInt-=20; tempWis-=20;
+					}
+					if (Forgefather.refinement == 5) {
+						tempTou+=500; tempStr+=250; tempHP+=50; tempDRes+=100; tempInt-=30; tempWis-=30;
+					}
+					break;
+				case "marble":
+					if (Forgefather.refinement == 1) {
+						tempWis+=100; tempStr+=50; tempSF+=20; tempUDmg+=15; tempInt-=10;
+					}
+					if (Forgefather.refinement == 2) {
+						tempWis+=150; tempStr+=75; tempSF+=25; tempUDmg+=25; tempInt-=15;
+					}
+					if (Forgefather.refinement == 3) {
+						tempWis+=200; tempStr+=100; tempSF+=35; tempUDmg+=50; tempInt-=20;
+					}
+					if (Forgefather.refinement == 4) {
+						tempWis+=200; tempStr+=100; tempSF+=35; tempUDmg+=50; tempInt-=20;
+					}
+					if (Forgefather.refinement == 5) {
+						tempWis+=500; tempStr+=250; tempSF+=50; tempUDmg+=100; tempInt-=30;
+					}
+					break;
+				case "sandstone":
+					if (Forgefather.refinement == 1) {
+						tempSpd+=100; tempStr+=25; tempInt+=25; tempFat+=20; tempRDmg+=15; tempWis-=10;
+					}
+					if (Forgefather.refinement == 2) {
+						tempSpd+=150; tempStr+=35; tempInt+=35; tempFat+=25; tempRDmg+=25; tempWis-=15;
+					}
+					if (Forgefather.refinement == 3) {
+						tempSpd+=200; tempStr+=50; tempInt+=50; tempFat+=35; tempRDmg+=50; tempWis-=20;
+					}
+					if (Forgefather.refinement == 4) {
+						tempSpd+=200; tempStr+=125; tempInt+=125; tempFat+=35; tempRDmg+=50; tempWis-=20;
+					}
+					if (Forgefather.refinement == 5) {
+						tempSpd+=500; tempStr+=125; tempInt+=125; tempFat+=50; tempRDmg+=100; tempWis-=30;
+					}
+					break;
+				default:
+					break;
+			}
+			if (player.hasPerk(PerkLib.GargoylePure)){
+				tempWis+=130; tempLib-=20; tempSen-=10;
+			}
+			if (player.hasPerk(PerkLib.GargoyleCorrupted)){
+				tempWis-=20; tempLib+=140;
+			}
+			switch(Forgefather.channelInlay)
+			{
+				case "amethyst":
+					if (Forgefather.refinement == 4) tempDarkDmg += 25;
+					if (Forgefather.refinement == 5) tempDarkDmg += 50;
+					break;
+				case "emerald":
+					if (Forgefather.refinement == 4) tempSpd += 15;
+					if (Forgefather.refinement == 5) tempSpd += 30;
+					break;
+				case "ruby":
+					if (Forgefather.refinement == 4) tempFireDmg += 25;
+					if (Forgefather.refinement == 5) tempFireDmg += 50;
+					break;
+				case "sapphire":
+					if (Forgefather.refinement == 4) tempIceDmg += 25;
+					if (Forgefather.refinement == 5) tempIceDmg += 50;
+					break;
+				case "topaz":
+					if (Forgefather.refinement == 4) tempLtngDmg += 25;
+					if (Forgefather.refinement == 5) tempLtngDmg += 50;
+					break;
+				default:
+					break;
+			}
+			switch(Forgefather.gem)
+			{
+				case "amethyst":
+					if (Forgefather.refinement == 4) tempDarkDmg += 12;
+					if (Forgefather.refinement == 5) tempDarkDmg += 25;
+					break;
+				case "emerald":
+					if (Forgefather.refinement == 4) tempSpd += 7;
+					if (Forgefather.refinement == 5) tempSpd += 15;
+					break;
+				case "ruby":
+					if (Forgefather.refinement == 4) tempFireDmg += 12;
+					if (Forgefather.refinement == 5) tempFireDmg += 25;
+					break;
+				case "sapphire":
+					if (Forgefather.refinement == 4) tempIceDmg += 12;
+					if (Forgefather.refinement == 5) tempIceDmg += 25;
+					break;
+				case "topaz":
+					if (Forgefather.refinement == 4) tempLtngDmg += 12;
+					if (Forgefather.refinement == 5) tempLtngDmg += 25;
+					break;
+				default:
+					break;
+			}
+			outputText("\n<font color=\"#0000a0\">\t("); if (tempStr != 0) outputText("<font color=\"#0000a0\">" + tempStr + "% to Str Racial Multi, "); if (tempSpd != 0) outputText("<font color=\"#0000a0\">" + tempSpd + "% to Spe Racial Multi, "); if (tempTou != 0) outputText("<font color=\"#0000a0\">" + tempTou + "% to Tou Racial Multi, "); if (tempInt != 0) outputText("<font color=\"#0000a0\">" + tempInt + "% to Int Racial Multi, "); if (tempWis != 0) outputText("<font color=\"#0000a0\">" + tempWis + "% to Wis Racial Multi, "); if (tempLib != 0) outputText("<font color=\"#0000a0\">" + tempLib + "% to Lib Racial Multi, "); if (tempSen != 0) outputText("<font color=\"#0000a0\">" + tempSen + " to Sen, ");
+			outputText("\n<font color=\"#0000a0\">\t"); if (tempHP != 0) outputText("<font color=\"#0000a0\">" + tempHP + "% to Max HP, "); if (tempWrath != 0) outputText("<font color=\"#0000a0\">" + tempWrath + "% to Max Wrath, "); if (tempFat != 0) outputText("<font color=\"#0000a0\">" + tempFat + "% to Max Fatigue, "); if (tempMana != 0) outputText("<font color=\"#0000a0\">" + tempMana + "% to Max Mana, "); if (tempSF != 0) outputText("<font color=\"#0000a0\">" + tempSF + "% to Max Soul Force, ");
+			outputText("\n<font color=\"#0000a0\">\t"); if (tempUDmg != 0) outputText("<font color=\"#0000a0\">" + tempUDmg + "% to Unarmed Damage, "); if (tempMDmg != 0) outputText("<font color=\"#0000a0\">" + tempMDmg + "% to Melee Damage, "); if (tempRDmg != 0) outputText("<font color=\"#0000a0\">" + tempRDmg + "% to Ranged Damage, "); if (tempSDmg != 0) outputText("<font color=\"#0000a0\">" + tempSDmg + "% to Spell Damage, "); if (tempDRes != 0) outputText("<font color=\"#0000a0\">" + tempDRes + "% to Damage Resist, "); if (tempDarkDmg != 0) outputText("<font color=\"#0000a0\">" + tempDarkDmg + "% to Darkness Damage"); if (tempIceDmg != 0) outputText("<font color=\"#0000a0\">" + tempIceDmg + "% to Ice Damage"); if (tempFireDmg != 0) outputText("<font color=\"#0000a0\">" + tempFireDmg + "% to Fire Damage"); if (tempLtngDmg != 0) outputText("<font color=\"#0000a0\">" + tempLtngDmg + "% to Lightning Damage");
+			outputText("<font color=\"#0000a0\">.)");
+			
 		}
 		else if (player.gargoyleScore() >= 1) outputText("\n<font color=\"#008000\">GARGOYLE: " + player.gargoyleScore() + "</font>");
 		else if (player.gargoyleScore() < 1) outputText("\n<font color=\"#ff0000\">GARGOYLE: 0</font>");
@@ -1524,9 +1672,9 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.raccoonScore() >= 1) outputText("\n<font color=\"#008000\">Raccoon-morph: " + player.raccoonScore() + "</font>");
 		else if (player.raccoonScore() < 1) outputText("\n<font color=\"#ff0000\">Raccoon-morph: 0</font>");
 		//Raiju
-		if (player.raijuScore() >= 14) outputText("\n<font color=\"#0000a0\">Greater Raiju: " + player.raijuScore() + " (+100% to Spe racial multi, +50% to Int racial multi, +120% to Lib racial multi, +60 min Sens)</font>");
+		if (player.raijuScore() >= 20) outputText("\n<font color=\"#0000a0\">Greater Raiju: " + player.raijuScore() + " (+150% to Spe racial multi, +50% to Int racial multi, +160% to Lib racial multi, +60 min Sens)</font>");
 		else if (player.raijuScore() >= 10) outputText("\n<font color=\"#0000a0\">Raiju: " + player.raijuScore() + " (+70% to Spe racial multi, +50% to Int racial multi, +80% to Lib racial multi, +50 min Sens)</font>");
-		else if (player.raijuScore() >= 5) outputText("\n<font color=\"#0000a0\">Half Raiju: " + player.raijuScore() + " (+35% to Spe racial multi, +25% to Int racial multi, +40% to Lib racial multi, +25 min Sens)</font>");
+		else if (player.raijuScore() >= 7) outputText("\n<font color=\"#0000a0\">Half Raiju: " + player.raijuScore() + " (+35% to Spe racial multi, +25% to Int racial multi, +40% to Lib racial multi, +25 min Sens)</font>");
 		else if (player.raijuScore() >= 1) outputText("\n<font color=\"#008000\">Half Raiju: " + player.raijuScore() + "</font>");
 		else if (player.raijuScore() < 1) outputText("\n<font color=\"#ff0000\">Half Raiju: 0</font>");
 		//Ratatoskr

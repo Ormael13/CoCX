@@ -695,10 +695,10 @@ import classes.CoC;
 			if (hasPerk(PerkLib.EromancyMaster)) max += Math.round(lib * 2);
 			if (isGargoyle() && Forgefather.material == "sandstone")
 			{
-				if (Forgefather.refinement == 0) multimax += (.15);
-				if (Forgefather.refinement == 1) multimax += (.25);
-				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) multimax += (.35);
-				if (Forgefather.refinement == 4) multimax += (.5);
+				if (Forgefather.refinement == 1) multimax += (.15);
+				if (Forgefather.refinement == 2) multimax += (.25);
+				if (Forgefather.refinement == 3 || Forgefather.refinement == 4) multimax += (.35);
+				if (Forgefather.refinement == 5) multimax += (.5);
 			}
 			if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) max += (150 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
@@ -783,10 +783,10 @@ import classes.CoC;
 			}
 			if (isGargoyle() && Forgefather.material == "marble")
 			{
-				if (Forgefather.refinement == 0) multimax += (.15);
-				if (Forgefather.refinement == 1) multimax += (.25);
-				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) multimax += (.35);
-				if (Forgefather.refinement == 4) multimax += (.5);
+				if (Forgefather.refinement == 1) multimax += (.15);
+				if (Forgefather.refinement == 2) multimax += (.25);
+				if (Forgefather.refinement == 3 || Forgefather.refinement == 4) multimax += (.35);
+				if (Forgefather.refinement == 5) multimax += (.5);
 			}
 			if (game.player.nekomataScore() >= 10) multimax += 0.1;
 			if (game.player.nekomataScore() >= 12 && game.player.tailType == 8 && game.player.tailCount == 2) multimax += 0.2;
@@ -861,10 +861,10 @@ import classes.CoC;
 			}
 			if (isGargoyle() && Forgefather.material == "ebony")
 			{
-				if (Forgefather.refinement == 0) multimax += (.15);
-				if (Forgefather.refinement == 1) multimax += (.25);
-				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) multimax += (.35);
-				if (Forgefather.refinement == 4) multimax += (.5);
+				if (Forgefather.refinement == 1) multimax += (.15);
+				if (Forgefather.refinement == 2) multimax += (.25);
+				if (Forgefather.refinement == 3 || Forgefather.refinement == 4) multimax += (.35);
+				if (Forgefather.refinement == 5) multimax += (.5);
 			}
 			max *= multimax;//~245%
 			max = Math.round(max);//476 414,75
@@ -977,10 +977,10 @@ import classes.CoC;
 			}
 			if (isGargoyle() && Forgefather.material == "alabaster")
 			{
-				if (Forgefather.refinement == 0) multimax += (.15);
-				if (Forgefather.refinement == 1) multimax += (.25);
-				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) multimax += (.35);
-				if (Forgefather.refinement == 4) multimax += (.5);
+				if (Forgefather.refinement == 1) multimax += (.15);
+				if (Forgefather.refinement == 2) multimax += (.25);
+				if (Forgefather.refinement == 3 || Forgefather.refinement == 4) multimax += (.35);
+				if (Forgefather.refinement == 5) multimax += (.5);
 			}
 			if (hasPerk(PerkLib.AscensionInnerPower)) max += perkv1(PerkLib.AscensionInnerPower) * 120;
 			if (jewelryEffectId == JewelryLib.MODIFIER_MP) max += jewelryEffectMagnitude;

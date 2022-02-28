@@ -31,7 +31,7 @@ package classes.Items.Weapons
 			var desc:String = "";
 			var multadd:Number = 0.6;
             if (game && game.player)
-                multadd += game.player.cor * 0.05;
+                multadd += game.player.cor * 0.044;
 			return multadd;
 		}
 

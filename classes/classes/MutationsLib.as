@@ -325,6 +325,15 @@ public class MutationsLib
 		public static const PigBoarFatFinalForm:PerkType = mk("Pig/Boar Fat (Final Form)", "Pig/Boar Fat (Final Form)",
 				".",
 				".");
+		public static const RaijuCathode:PerkType = mk("Raiju Cathode", "Raiju Cathode",
+				"Your Raiju Cathode provides an increase in speed by 10% and increase lust damage from weapons and natural weapons by 50%.").withBuffs({'spe.mult':0.10});
+		public static const RaijuCathodePrimitive:PerkType = mk("Raiju Cathode (Primitive)", "Salamander Adrenal Glands (Primitive)",
+				"Your Raiju Cathode provides an increase in speed by 15% and increase lust damage from weapons and natural weapons by another 50%. All lightning damage is increased by 20%.").withBuffs({'spe.mult':0.15});
+		public static const RaijuCathodeEvolved:PerkType = mk("Raiju Cathode (Evolved)", "Salamander Adrenal Glands (Evolved)",
+				"Your Raiju Cathode provides an increase in speed by 25% and increase lust damage from weapons and natural weapons by 100%. Supercharged bonuses are twice as strong.").withBuffs({'spe.mult':0.25});
+		public static const RaijuCathodeFinalForm:PerkType = mk("Raiju Cathode (Final Form)", " Cathode (Final Form)",
+				".",
+				".");
 		public static const SalamanderAdrenalGlands:PerkType = mk("Salamander Adrenal Glands", "Salamander Adrenal Glands",
 				"Your Salamander adrenal glands are giving you slight boost to your natural stamina and libido.").withBuffs({'tou.mult':0.05,'lib.mult':0.05});
 		public static const SalamanderAdrenalGlandsPrimitive:PerkType = mk("Salamander Adrenal Glands (Primitive)", "Salamander Adrenal Glands (Primitive)",
@@ -459,6 +468,7 @@ public class MutationsLib
 			}
 			function mutationsNervSys():void{
 				MutationsList.push([ElvishPeripheralNervSys, ElvishPeripheralNervSysPrimitive, ElvishPeripheralNervSysEvolved]);
+				MutationsList.push([RaijuCathode, RaijuCathodePrimitive, RaijuCathodeEvolved]);
 				MutationsList.push([SharkOlfactorySystem, SharkOlfactorySystemPrimitive, SharkOlfactorySystemEvolved]);
 			}
 			function mutationsBone():void{
@@ -709,6 +719,9 @@ public class MutationsLib
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.pigScore() >= 4;
 						}, "Pig/Boar race");
+				RaijuCathode.requireNervSysMutationSlot().requireCustomFunction(function (player:Player):Boolean {
+					return player.raijuScore() >= 8;
+				}, "raiju race");
 				SalamanderAdrenalGlands.requireAdrenalGlandsMutationSlot().requirePerk(PerkLib.Lustzerker).requireCustomFunction(function (player:Player):Boolean {
 					return player.salamanderScore() >= 8 || player.phoenixScore() >= 10;
 				}, "Salamander race");
@@ -893,6 +906,9 @@ public class MutationsLib
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.pigScore() >= 8;
 						}, "Pig/Boar race");
+				RaijuCathodePrimitive.requireLevel(12).requirePerk(RaijuCathode).requireCustomFunction(function (player:Player):Boolean {
+					return player.raijuScore() >= 9;
+				}, "raiju race");
 				SalamanderAdrenalGlandsPrimitive.requireLevel(12).requirePerk(SalamanderAdrenalGlands).requireCustomFunction(function (player:Player):Boolean {
 					return player.salamanderScore() >= 9 || player.phoenixScore() >= 11;
 				}, "Salamander race");
@@ -1066,6 +1082,9 @@ public class MutationsLib
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.pigScore() >= 12;
 						}, "Pig/Boar race");
+				RaijuCathodeEvolved.requireLevel(30).requirePerk(RaijuCathodePrimitive).requireCustomFunction(function (player:Player):Boolean {
+					return player.raijuScore() >= 10;
+				}, "raiju race");
 				SalamanderAdrenalGlandsEvolved.requireLevel(30).requirePerk(SalamanderAdrenalGlandsPrimitive).requireCustomFunction(function (player:Player):Boolean {
 					return player.salamanderScore() >= 10 || player.phoenixScore() >= 13;
 				}, "Salamander race");

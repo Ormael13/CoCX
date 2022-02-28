@@ -92,6 +92,13 @@ public function isabellaKnockUpAttempt():void {
 	}
 }
 
+public function isabellaReadyToMove():Boolean {
+    var threshold:int = 50 + flags[kFLAGS.ISABELLA_TIMES_OFFERED_FOLLOWER] * 10;
+    if (threshold > 100)
+        threshold = 100; //so you won't lock her accidentally
+    return isabellaAffection() >= threshold;
+}
+
 //Isabella Moves In Intro
 internal function isabellaMoovesInGreeting():void {
 	spriteSelect(31);

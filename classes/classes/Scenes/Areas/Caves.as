@@ -166,7 +166,7 @@ use namespace CoC;
 					return;
 				}
 				outputText("\n\nYou begin slamming your pickaxe against the ebony, spending the better part of the next two hours mining. This done, you bring back your prize to camp. ");
-				var minedStones:Number = 13 + Math.floor(player.str / 7);
+				var minedStones:Number = 13 + Math.floor(player.str / 20);
 				minedStones = Math.round(minedStones);
 				fatigue(50, USEFATG_PHYSICAL);
 				SceneLib.forgefatherScene.incrementEbonySupply(minedStones);

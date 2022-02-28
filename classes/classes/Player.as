@@ -665,10 +665,10 @@ use namespace CoC;
 			if (hasPerk(PerkLib.Lycanthropy)) armorDef += 10 * newGamePlusMod;
 			if (isGargoyle() && Forgefather.material == "granite")
 			{
-				if (Forgefather.refinement == 0) armorDef *= (1.15);
-				if (Forgefather.refinement == 1) armorDef *= (1.25);
-				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) armorDef *= (1.5);
-				if (Forgefather.refinement == 4) armorDef *= (2);
+				if (Forgefather.refinement == 1) armorDef *= (1.15);
+				if (Forgefather.refinement == 2) armorDef *= (1.25);
+				if (Forgefather.refinement == 3 || Forgefather.refinement == 4) armorDef *= (1.5);
+				if (Forgefather.refinement == 5) armorDef *= (2);
 			}
 			//if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) {
 				//if (arms.type == Arms.GARGOYLE || arms.type == Arms.GARGOYLE_2) armorDef += (30 * newGamePlusMod);
@@ -894,10 +894,10 @@ use namespace CoC;
 			//if (hasPerk(PerkLib.Vulpesthropy)) armorMDef += 10 * newGamePlusMod;
 			if (isGargoyle() && Forgefather.material == "alabaster")
 			{
-				if (Forgefather.refinement == 0) armorMDef *= (1.15);
-				if (Forgefather.refinement == 1) armorMDef *= (1.25);
-				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) armorMDef *= (1.5);
-				if (Forgefather.refinement == 4) armorMDef *= (2);
+				if (Forgefather.refinement == 1) armorMDef *= (1.15);
+				if (Forgefather.refinement == 2) armorMDef *= (1.25);
+				if (Forgefather.refinement == 3 || Forgefather.refinement == 4) armorMDef *= (1.5);
+				if (Forgefather.refinement == 5) armorMDef *= (2);
 			}
 			//if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) armorMDef += (25 * newGamePlusMod);
 			//if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) {
@@ -1389,10 +1389,10 @@ use namespace CoC;
 			}
 			if (isGargoyle() && Forgefather.material == "ebony")
 			{
-				if (Forgefather.refinement == 0) attack *= (1.15);
-				if (Forgefather.refinement == 1) attack *= (1.25);
-				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) attack *= (1.5);
-				if (Forgefather.refinement == 4) attack *= (2);
+				if (Forgefather.refinement == 1) attack *= (1.15);
+				if (Forgefather.refinement == 2) attack *= (1.25);
+				if (Forgefather.refinement == 3 || Forgefather.refinement == 4) attack *= (1.5);
+				if (Forgefather.refinement == 5) attack *= (2);
 			}
 			if (hasStatusEffect(StatusEffects.ChargeWeapon)) {
 				if (weaponName == "fists" && !hasPerk(PerkLib.ImprovingNaturesBlueprintsNaturalWeapons)) attack += 0;
@@ -1494,10 +1494,10 @@ use namespace CoC;
 			}
 			if (isGargoyle() && Forgefather.material == "sandstone")
 			{
-				if (Forgefather.refinement == 0) rangeattack *= (1.15);
-				if (Forgefather.refinement == 1) rangeattack *= (1.25);
-				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) rangeattack *= (1.5);
-				if (Forgefather.refinement == 4) rangeattack *= (2);
+				if (Forgefather.refinement == 1) rangeattack *= (1.15);
+				if (Forgefather.refinement == 2) rangeattack *= (1.25);
+				if (Forgefather.refinement == 3 || Forgefather.refinement == 4) rangeattack *= (1.5);
+				if (Forgefather.refinement == 5) rangeattack *= (2);
 			}
 		/*	if(hasPerk(PerkLib.LightningStrikes) && spe >= 60 && weaponRangePerk != "Large") {
 				rangeattack += Math.round((spe - 50) / 3);
@@ -2245,7 +2245,6 @@ use namespace CoC;
 			if(hasStatusEffect(StatusEffects.BlessingOfDivineFera)) lust *= .85;
 			//Luststick reduces lust gain by 10% to match increased min lust
 			if(hasPerk(PerkLib.LuststickAdapted)) lust *= 0.9;
-			if(hasStatusEffect(StatusEffects.Berzerking)) lust *= .6;
 			if (hasPerk(PerkLib.PureAndLoving)) lust *= 0.95;
 			//Berseking reduces lust gains by 10%
 			if (hasStatusEffect(StatusEffects.Berzerking)) lust *= 0.9;
@@ -4386,7 +4385,11 @@ use namespace CoC;
 			}
 			if (TopRace == "raiju") {
 				if (TopScore >= 5) {
-					if (TopScore >= 10) {
+					if (TopScore >= 19) {
+						if (isTaur()) race = "greater raiju-taur";
+						else race = "greater raiju";
+					}
+					else if (TopScore >= 10) {
 						if (isTaur()) race = "raiju-taur";
 						else race = "raiju";
 					} else {
@@ -8267,6 +8270,8 @@ use namespace CoC;
 				raijuCounter++;
 			if (eyes.type == Eyes.RAIJU)
 				raijuCounter++;
+			if (InCollection(eyes.colour, "blue","green", "turquoise","light green"))
+				raijuCounter++;
 			if (faceType == Face.WEASEL)
 				raijuCounter++;
 			if (arms.type == Arms.RAIJU || arms.type == Arms.RAIJU_PAWS)
@@ -8283,7 +8288,17 @@ use namespace CoC;
 				raijuCounter++;
 			if (hairType == Hair.STORM)
 				raijuCounter++;
-			if (InCollection(hairColor, ["purple", "light blue", "yellow", "white", "lilac", "green"]))
+			if (InCollection(hairColor, ["purple", "light blue", "yellow", "white", "lilac", "green", "stormy blue"]))
+				raijuCounter++;
+			if (hasStatusEffect(StatusEffects.GlowingNipples) || hasStatusEffect(StatusEffects.GlowingAsshole))
+				raijuCounter++;
+			if (raijuCocks() > 0 || vaginaType() == VaginaClass.RAIJU)
+				raijuCounter++;
+			if (hasPerk(MutationsLib.RaijuCathode))
+				raijuCounter++;
+			if (hasPerk(MutationsLib.RaijuCathodePrimitive))
+				raijuCounter++;
+			if (hasPerk(MutationsLib.RaijuCathodeEvolved))
 				raijuCounter++;
 			if (hasPerk(MutationsLib.HeartOfTheStorm))
 				raijuCounter++;
@@ -12823,10 +12838,10 @@ use namespace CoC;
 				}
 			}//+10/10-20
 			if (raijuScore() >= 5) {
-				if (raijuScore() >= 14) {
-					maxSpeCap2 += 100;
+				if (raijuScore() >= 20) {
+					maxSpeCap2 += 150;
 					maxIntCap2 += 50;
-					maxLibCap2 += 120;
+					maxLibCap2 += 160;
 					currentSen += 60;
 				} else if (raijuScore() >= 10) {
 					maxSpeCap2 += 70;
@@ -13509,7 +13524,7 @@ use namespace CoC;
 				switch (Forgefather.material){
 					case "stone":
 						switch(Forgefather.refinement){
-							case 0:
+							case 1:
 								maxStrCap2 += 50;
 								maxTouCap2 += 50;
 								maxSpeCap2 += 50;
@@ -13517,7 +13532,7 @@ use namespace CoC;
 								maxWisCap2 += 50;
 								maxLibCap2 += 50;
 								break;
-							case 1:
+							case 2:
 								maxStrCap2 += 75;
 								maxTouCap2 += 75;
 								maxSpeCap2 += 75;
@@ -13525,7 +13540,7 @@ use namespace CoC;
 								maxWisCap2 += 75;
 								maxLibCap2 += 75;
 								break;
-							case 2:
+							case 3:
 								maxStrCap2 += 100;
 								maxTouCap2 += 100;
 								maxSpeCap2 += 100;
@@ -13538,23 +13553,17 @@ use namespace CoC;
 					case "alabaster":
 						//Alabaster - Magic (Int+100%, +20% max mana, +15% spell dmg)
 						switch(Forgefather.refinement){
-							case 0:
+							case 1:
 								maxIntCap2 += 100;
 								maxWisCap2 += 50;
 								maxStrCap2 -= 10;
 								maxTouCap2 -= 10;
 								break;
-							case 1:
+							case 2:
 								maxIntCap2 += 150;
 								maxWisCap2 += 75;
 								maxStrCap2 -= 15;
 								maxTouCap2 -= 15;
-								break;
-							case 2:
-								maxIntCap2 += 200;
-								maxWisCap2 += 100;
-								maxStrCap2 -= 20;
-								maxTouCap2 -= 20;
 								break;
 							case 3:
 								maxIntCap2 += 200;
@@ -13563,6 +13572,12 @@ use namespace CoC;
 								maxTouCap2 -= 20;
 								break;
 							case 4:
+								maxIntCap2 += 200;
+								maxWisCap2 += 100;
+								maxStrCap2 -= 20;
+								maxTouCap2 -= 20;
+								break;
+							case 5:
 								maxIntCap2 += 500;
 								maxWisCap2 += 250;
 								maxStrCap2 -= 30;
@@ -13572,20 +13587,15 @@ use namespace CoC;
 						break;
 					case "marble":
 						switch(Forgefather.refinement){
-							case 0:
+							case 1:
 								maxWisCap2 += 100;
 								maxStrCap2 += 50;
 								maxIntCap2 -= 10;
 								break;
-							case 1:
+							case 2:
 								maxWisCap2 += 150;
 								maxStrCap2 += 75;
 								maxIntCap2 -= 15;
-								break;
-							case 2:
-								maxWisCap2 += 200;
-								maxStrCap2 += 100;
-								maxIntCap2 -= 20;
 								break;
 							case 3:
 								maxWisCap2 += 200;
@@ -13593,6 +13603,11 @@ use namespace CoC;
 								maxIntCap2 -= 20;
 								break;
 							case 4:
+								maxWisCap2 += 200;
+								maxStrCap2 += 100;
+								maxIntCap2 -= 20;
+								break;
+							case 5:
 								maxWisCap2 += 500;
 								maxStrCap2 += 200;
 								maxIntCap2 -= 30;
@@ -13601,23 +13616,17 @@ use namespace CoC;
 						break;
 					case "granite":
 						switch(Forgefather.refinement){
-							case 0:
+							case 1:
 								maxTouCap2 += 100;
 								maxStrCap2 += 50;
 								maxIntCap2 -= 10;
 								maxWisCap2 -= 10;
 								break;
-							case 1:
+							case 2:
 								maxTouCap2 += 150;
 								maxStrCap2 += 75;
 								maxIntCap2 -= 15;
 								maxWisCap2 -= 15;
-								break;
-							case 2:
-								maxTouCap2 += 200;
-								maxStrCap2 += 100;
-								maxIntCap2 -= 20;
-								maxWisCap2 -= 20;
 								break;
 							case 3:
 								maxTouCap2 += 200;
@@ -13626,6 +13635,12 @@ use namespace CoC;
 								maxWisCap2 -= 20;
 								break;
 							case 4:
+								maxTouCap2 += 200;
+								maxStrCap2 += 100;
+								maxIntCap2 -= 20;
+								maxWisCap2 -= 20;
+								break;
+							case 5:
 								maxTouCap2 += 500;
 								maxStrCap2 += 250;
 								maxIntCap2 -= 30;
@@ -13635,23 +13650,17 @@ use namespace CoC;
 						break;
 					case "ebony":
 						switch(Forgefather.refinement){
-							case 0:
+							case 1:
 								maxStrCap2 += 100;
 								maxSpeCap2 += 50;
 								maxIntCap2 -= 10;
 								maxWisCap2 -= 10;
 								break;
-							case 1:
+							case 2:
 								maxStrCap2 += 150;
 								maxSpeCap2 += 75;
 								maxIntCap2 -= 15;
 								maxWisCap2 -= 15;
-								break;
-							case 2:
-								maxStrCap2 += 200;
-								maxSpeCap2 += 100;
-								maxIntCap2 -= 20;
-								maxWisCap2 -= 20;
 								break;
 							case 3:
 								maxStrCap2 += 200;
@@ -13660,6 +13669,12 @@ use namespace CoC;
 								maxWisCap2 -= 20;
 								break;
 							case 4:
+								maxStrCap2 += 200;
+								maxSpeCap2 += 100;
+								maxIntCap2 -= 20;
+								maxWisCap2 -= 20;
+								break;
+							case 5:
 								maxStrCap2 += 500;
 								maxSpeCap2 += 250;
 								maxIntCap2 -= 30;
@@ -13669,23 +13684,17 @@ use namespace CoC;
 						break;
 					case "sandstone":
 						switch(Forgefather.refinement){
-							case 0:
+							case 1:
 								maxSpeCap2 += 100;
 								maxStrCap2 += 25;
 								maxIntCap2 += 25;
 								maxWisCap2 -= 10;
 								break;
-							case 1:
+							case 2:
 								maxSpeCap2 += 150;
 								maxStrCap2 += 35;
 								maxIntCap2 += 35;
 								maxWisCap2 -= 15;
-								break;
-							case 2:
-								maxSpeCap2 += 200;
-								maxStrCap2 += 50;
-								maxIntCap2 += 50;
-								maxWisCap2 -= 20;
 								break;
 							case 3:
 								maxSpeCap2 += 200;
@@ -13694,6 +13703,12 @@ use namespace CoC;
 								maxWisCap2 -= 20;
 								break;
 							case 4:
+								maxSpeCap2 += 200;
+								maxStrCap2 += 50;
+								maxIntCap2 += 50;
+								maxWisCap2 -= 20;
+								break;
+							case 5:
 								maxSpeCap2 += 500;
 								maxStrCap2 += 125;
 								maxIntCap2 += 125;
@@ -13711,6 +13726,18 @@ use namespace CoC;
 				if (hasPerk(PerkLib.GargoyleCorrupted)) {
 					maxWisCap2 -= 20;
 					maxLibCap2 += 140;
+				}
+				switch (Forgefather.channelInlay){
+					case "emerald":
+						if (Forgefather.refinement == 5) maxSpeCap2 += 100;
+						else maxSpeCap2 += 50;
+						break;
+				}
+				switch (Forgefather.gem){
+					case "emerald":
+						if (Forgefather.refinement == 5) maxSpeCap2 += 50;
+						else maxSpeCap2 += 25;
+						break;
 				}
 			}
 			if (fairyScore() >= 23) {
@@ -15722,10 +15749,10 @@ use namespace CoC;
 			if (centaurScore() >= 8) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (isGargoyle() && Forgefather.material == "granite")
 			{
-				if (Forgefather.refinement == 0) max *= (1.15);
-				if (Forgefather.refinement == 1) max *= (1.25);
-				if (Forgefather.refinement == 2 || Forgefather.refinement == 3) max *= (1.35);
-				if (Forgefather.refinement == 4) max *= (1.5);
+				if (Forgefather.refinement == 1) max *= (1.15);
+				if (Forgefather.refinement == 2) max *= (1.25);
+				if (Forgefather.refinement == 3 || Forgefather.refinement == 4) max *= (1.35);
+				if (Forgefather.refinement == 5) max *= (1.5);
 			}
 			if (gorgonScore() >= 11) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (gorgonScore() >= 17) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
@@ -15927,12 +15954,12 @@ use namespace CoC;
 				if (sens > 90 && dsens < 0) dsens *= 2;
 				//Bonus gain for perks!
 				if(hasPerk(PerkLib.Strong)) dstr += dstr * perkv1(PerkLib.Strong);
-				if(hasPerk(PerkLib.Tough)) dstr += dstr * perkv1(PerkLib.Tough);
-				if(hasPerk(PerkLib.Fast)) dstr += dstr * perkv1(PerkLib.Fast);
-				if(hasPerk(PerkLib.Smart)) dstr += dstr * perkv1(PerkLib.Smart);
-				if(hasPerk(PerkLib.Wise)) dstr += dstr * perkv1(PerkLib.Wise);
-				if(hasPerk(PerkLib.Lusty)) dstr += dstr * perkv1(PerkLib.Lusty);
-				if(hasPerk(PerkLib.Sensitive)) dstr += dstr * perkv1(PerkLib.Sensitive);
+				if(hasPerk(PerkLib.Tough)) dtou += dtou * perkv1(PerkLib.Tough);
+				if(hasPerk(PerkLib.Fast)) dspe += dspe * perkv1(PerkLib.Fast);
+				if(hasPerk(PerkLib.Smart)) dinte += dinte * perkv1(PerkLib.Smart);
+				if(hasPerk(PerkLib.Wise)) dwis += dwis * perkv1(PerkLib.Wise);
+				if(hasPerk(PerkLib.Lusty)) dlib += dlib * perkv1(PerkLib.Lusty);
+				if(hasPerk(PerkLib.Sensitive)) dsens += dsens * perkv1(PerkLib.Sensitive);
 				// Uma's Str Cap from Perks (Moved to max stats)
 				/*if (hasPerk(PerkLib.ChiReflowSpeed))
 				{
@@ -15953,8 +15980,37 @@ use namespace CoC;
 			super.modStats(dstr,dtou,dspe,dinte,dwis,dlib,dsens,dlust,dcor,false,max);
 			//Refresh the stat pane with updated values
 			//mainView.statsView.showUpDown();
+			if (dlust != 0){
+				raijuSuperchargedCheck();
+			}
+			if (raijuScore() < 7 && statStore.hasBuff('Supercharged')) statStore.removeBuffs('Supercharged');
+
 			EngineCore.showUpDown();
 			EngineCore.statScreenRefresh();
+		}
+
+		public function raijuSuperchargedCheck(){
+			if (raijuScore() >= 7 && lust100>=75){
+				if (!statStore.hasBuff("Supercharged")){
+					var buff:Number = 1;
+					if (hasPerk(MutationsLib.RaijuCathodeEvolved)) buff *= 2
+					statStore.replaceBuffObject({'spe.mult':Math.round(speStat.mult.value)*buff}, 'Supercharged', { text: 'Supercharged!' });
+					CoC.instance.mainView.statsView.refreshStats(CoC.instance);
+					CoC.instance.mainView.statsView.showStatUp('spe');
+					outputText("\n\nAs your bottled up voltage ramps up you begin to lose yourself to lust turning increasingly feral as your overwhelming need to discharge override any rational thinking. FUCK… you need someone to fuck that voltage out of you!");
+					if(game.inCombat) outputText(" [monster] gulp as [he] see's your lust crazed expression. Should you win [he] won't get off the hook so easily!");
+					outputText("\n\n<b>You entered the supercharged state!</b>\n\n");
+				}
+				if(lust100 >= 100){
+					lust = maxLust()*99/100
+				}
+			}
+		}
+
+		public override function takeLustDamage(lustDmg:Number, display:Boolean = true, applyRes:Boolean = true):Number{
+			var x:Number = super.takeLustDamage(lustDmg, display, applyRes);
+			raijuSuperchargedCheck();
+			return x;
 		}
 		
 		public function knownAbilities():/*CombatAbility*/Array {

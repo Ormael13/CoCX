@@ -189,7 +189,7 @@ public function postFightOptionsHealNicePerson():void {
 	outputText("You tell her that you didn’t want to hurt her, or leave her unable to defend herself.\n\n");
 	outputText("\"<i>...Who says I can’t fight?</i>\" You stifle your response, turning back towards her other injuries. After about an hour, she stands, looking down at you with a conflicted look on her face.");
 	outputText("\"<i>...Thanks...You might want to get looked at for Corruption though.</i>\" You give her a questioning look, and she turns away.\n\n");
-	tyraniaAffection2(6);
+	tyraniaAffection2(10);
 	cleanupAfterCombat();
 }
 public function postFightOptionsHealSex():void {
@@ -197,7 +197,7 @@ public function postFightOptionsHealSex():void {
 	outputText("You tell her that there are plenty of demons who’d love to get their hands on her body, and that you’d rather keep her to yourself.\n\n");
 	outputText("\"<i>Horndog,</i>\" she complains. \"<i>...Thank you, I guess.</i>\" After about an hour, she stands, looking down at you with a conflicted look on her face. ");
 	outputText("\"<i>...Thanks...You might want to get looked at for Corruption though.</i>\" You give her a questioning look, and she turns away.\n\n");
-	tyraniaAffection2(3);
+	tyraniaAffection2(5);
 	cleanupAfterCombat();
 }
 public function postFightOptionsKiss():void {
@@ -218,7 +218,7 @@ public function postFightOptionsKiss():void {
 	else {
 		outputText("\"<i>Look, [name], I...Don’t want this, no offense.</i>\" She tries to push back, and you back away. \"<i>Thanks. Look, I’ll be fine. I’ve got shit to do, and…</i>\" She tries to rise, unsuccessfully, and glares at you. \"<i>Just let me be.</i>\"\n\n");
 		outputText("You decide to leave the Drider Giantess alone, and give her a gentle goodbye as you head back to camp.\n\n");
-		tyraniaAffection2(2);
+		tyraniaAffection2(3);
 		if (combat.inCombat) cleanupAfterCombat();
 		else doNext(camp.returnToCampUseOneHour);
 	}
@@ -226,7 +226,7 @@ public function postFightOptionsKiss():void {
 public function postFightOptionsKissStop():void {
 	outputText("She sighs in relief, none of her eyes meeting yours. \"<i>Look…[name]. I...I have...Reasons for pushing you away. I’m sorry, I just…</i>\" The giantess looks close to tears, and you find yourself staring at her eyes. ");
 	outputText("\"<i>Don’t look at me like that. It’s not you. Marae knows it’s not you.</i>\" She lies there, still, and for a while, says and does nothing while several waves of black energy pours from her horn.\n\n");
-	tyraniaAffection2(4);
+	tyraniaAffection2(5);
 	if (combat.inCombat) cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
@@ -260,18 +260,19 @@ public function repeatEncounterBattlefield():void {
 	//2 - Hunt
 	addButton(3, "Kiss", postFightOptionsKiss);
 	//Training and Sex where?
-	addButton(4, "Leave", camp.returnToCampUseOneHour);
+	addButton(5, "Leave", camp.returnToCampUseOneHour);
 }
 public function repeatEncounterBattlefieldRe():void {
 	clearOutput();
-	outputText("\"<i>Just a WiP text until something would get written for here.</i>\"\n\n");
+	outputText("\"The giant Drider laughs. <i>\"Changed your mind, did ya?\"</i> She shrugs, leaning down a little. <i>\"What did you want then?\"</i>\n\n");
 	menu();
 	addButton(0, "Talk", repeatEncounterBattlefieldTalk);
 	//1 - Spar
 	//2 - Hunt
 	addButton(3, "Kiss", postFightOptionsKiss);
-	//Training and Sex where?
-	addButton(4, "Leave", camp.returnToCampUseOneHour);
+	//addButton(4, "Training", repeatEncounterBattlefieldTrain);
+	addButton(5, "Sex", repeatEncounterBattlefieldSex);
+	addButton(6, "Leave", camp.returnToCampUseOneHour);
 }
 public function repeatEncounterBattlefieldTalk():void {
 	clearOutput();
@@ -280,9 +281,9 @@ public function repeatEncounterBattlefieldTalk():void {
 	//0 - Lab
 	addButton(1, "Self", repeatEncounterBattlefieldTalkSelf);
 	//2 - Fighting Style
-	//3 - Kiha
-	//4 - Diva
-	//5 - Her
+	addButton(3, "Kiha", repeatEncounterBattlefieldTalkKiha);
+	addButton(4, "Diva", repeatEncounterBattlefieldTalkDiva);
+	addButton(5, "Her", repeatEncounterBattlefieldTalkHer);
 	addButton(14, "Back", repeatEncounterBattlefieldRe);
 }
 public function repeatEncounterBattlefieldTalkLab():void {
@@ -299,20 +300,21 @@ public function repeatEncounterBattlefieldTalkSelf():void {
 }
 public function repeatEncounterBattlefieldTalkFightingStyle():void {
 	clearOutput();
-	outputText("\"<i></i>\"\n\n");
-	//affection gains
+	outputText("\"<i>“Honestly, I was wondering when you’d ask about that.”</i> Tyrantia scratches at her manelike hair with one hand. <i>“Honestly, it’s pretty hard to explain...but I’ll try.”</i>\"\n\n");
+	outputText(" \n\n"); 
+	//affection gains (5)
 	doNext(camp.returnToCampUseOneHour);
 }
 public function repeatEncounterBattlefieldTalkKiha():void {
 	clearOutput();
-	outputText("\"<i></i>\"\n\n");
-	//affection gains
+	outputText("<i>“Oh, you wanted to know about her?”</i> Tyrantia shrugs. <i>“We interacted a few times while we were both labrats. Some of the sickos working there had a perversion revolving around their ‘pets’ getting along. So...Yeah, we’ve done some things to each other. None of it was voluntary, but…”</i> She winces. <i>“Honestly, a part of me was genuinely happy when she made her escape...But she also didn’t come back. Can’t really blame her though.”</i> Tyrantia rolls her shoulders. <i>“She’s one hell of a fighter, too. That axe of hers may make it easy to counterattack if she misses, but if her strike lands...say goodbye to whatever limb got hit.”</i>\"\n\n");
+	//affection gains (0)
 	doNext(camp.returnToCampUseOneHour);
 }
 public function repeatEncounterBattlefieldTalkDiva():void {
 	clearOutput();
-	outputText("\"<i></i>\"\n\n");
-	//affection gains
+	outputText("\"<i>“I’d heard about the “Drama Queen” prototype for the Demon’s airforce. Never really thought she’d be so…prissy.”</i> Tyrantia shrugs. <i>“I mean, me and the other prototype…We’re fighters, so you’d expect us to kick some ass and escape…but she acts like an actor in a really bad traveling play.”</i> She chuckles. <i>“Other than that, she’s alright, but the blood-drinking kinda weirds me out.”</i>\"\n\n");
+	//affection gains (0)
 	doNext(camp.returnToCampUseOneHour);
 }
 public function repeatEncounterBattlefieldTalkHer():void {
@@ -324,7 +326,8 @@ public function repeatEncounterBattlefieldTalkHer():void {
 	//2 - Life on the Battlefield
 	addButton(3, "Different Parts", repeatEncounterBattlefieldTalkHerDifferentParts);
 	//4 - Goblin
-	//5 - Kids
+	//5 - Izumi
+	//6 - Kids
 	addButton(14, "Back", repeatEncounterBattlefieldTalk);
 }
 public function repeatEncounterBattlefieldTalkHerLifeBeforeDemons():void {
@@ -356,8 +359,8 @@ public function repeatEncounterBattlefieldTalkHerDifferentParts():void {
 }
 public function repeatEncounterBattlefieldTalkHerGoblin():void {
 	clearOutput();
-	outputText("\"<i></i>\"\n\n");
-	//affection gains
+	outputText("<i>“Oh, Flitzy? She’s one of the Salon Bitch’s many daughters. Found her wandering around the mountains. ‘Taur tried to rape her, she didn’t want it, and I...Well, you know what I do.”</i> Tyrantia looks mildly embarrassed. <i>“Saved her ass, and we’ve kinda become friends. Gobbos don’t usually care about...Anything besides getting knocked up, but whatever, y’know?”</i> You get the feeling she was going to say something else, but you decide to leave it alone. You thank her for the time, and head back to camp. </i>\"\n\n");
+	//affection gains (5)
 	doNext(camp.returnToCampUseOneHour);
 }
 public function repeatEncounterBattlefieldTalkHerKids():void {
@@ -366,5 +369,21 @@ public function repeatEncounterBattlefieldTalkHerKids():void {
 	//affection gains
 	doNext(camp.returnToCampUseOneHour);
 }
+public function repeatEncounterBattlefieldSex():void {
+	clearOutput();
+	//if (TyraniaAffection2 > 24) {
+	//outputText("The Drider woman eyes you up and down, a poorly disguised smile on her face. “Well...Since you asked nicely, I guess I wouldn’t mind.” Her spider half bobs from side to side, and she runs her hands along the outside of her armor...rubbing where the nipples are in an obvious attempt to draw your gaze to her massive pairs of jugs. “What are you thinking?\" \n\n");
+
+	//menu();
+	//addButton (1, "Titjob", );
+	//addButton (2, "Hugfuck", );
+	//addButton (3, "Get Phallustuffed", );
+	//addButton (4, "Cav.Fuck", );
+	//}
+	//else {
+	outputText("The giantess's eyes narrow, and she gives you a stern glare. \"Yeah, I don't exactly know you well, shorty\", she says roughly. \"Being around you is one thing, but having you between my legs? Trust like that is earned. \" \n\n");
+	doNext(camp.returnToCampUseOneHour);
+	//}
 	}
+}
 }

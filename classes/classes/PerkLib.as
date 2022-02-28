@@ -3765,6 +3765,8 @@ public class PerkLib
 				"Allows you to lay eggs through a special organ on your arachnid abdomen, though you need at least 10 eggs to lay.");
 		public static const StrengthOfStone:PerkType = mk("Strenght of stone", "Strenght of stone",
 				"Add half of the gargoyle toughness as a bonus to strength.");
+		public static const Supercharged:PerkType = mk("Supercharged", "Supercharged",
+				"Double Speed when over 75% lust and gain immunity to defeat by lust but lose the ability to use magic other than racial spells.");
 		public static const SuperStrength:PerkType = mk("Super strength", "Super strength",
 				"Unarmed strike damage modifier from strength is doubled.");
 		public static const ThickSkin:PerkType = mk("Thick Skin", "Thick Skin",
@@ -3925,6 +3927,11 @@ public class PerkLib
 		public static const CleansingPalm:CleansingPalmPerk = new CleansingPalmPerk();
 		public static const Enlightened:EnlightenedPerk = new EnlightenedPerk();
 		public static const StarSphereMastery:StarSphereMasteryPerk = new StarSphereMasteryPerk();
+		
+		//public static const CommandingTone:CommandingTonePerk = new CommandingTonePerk();
+		//public static const Diacontrol:DiacontrolPerk = new DiacontrolPerk();
+		//public static const VocalTactician:VocalTacticianPerk = new VocalTacticianPerk();
+		//public static const OperaOperator:OperaOperatorPerk = new OperaOperatorPerk();
 
 		// Monster perks
 		// Please add any perks below to the enemyPerkList below. Required for PerkDB filtering of PC-unobtainable perks.

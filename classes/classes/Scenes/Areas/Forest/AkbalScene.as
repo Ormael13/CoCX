@@ -112,7 +112,7 @@ public class AkbalScene extends BaseContent
 						bikiniTits = (player.armor as LustyMaidensArmor).lustyMaidenPaizuri;
 						addButton(3, "B.Titfuck", bikiniTits);
 					}
-					if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 11).hint("Other non typical sex scenes.");
+					if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(11);
 					//Rape / Don't Rape
 					//EngineCore.simpleChoices("Butt-fuck", buttFuck, "Take Vaginally", vagoo, "Force Lick", vagooLick, "B.Titfuck", bikiniTits, );
 					return;
@@ -144,7 +144,7 @@ public class AkbalScene extends BaseContent
 					bikiniTits = (player.armor as LustyMaidensArmor).lustyMaidenPaizuri;
 					addButton(3, "B.Titfuck", bikiniTits);
 				}
-				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 11).hint("Other non typical sex scenes.");
+				if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(11);
 				//Rape / Don't Rape
 			//EngineCore.simpleChoices("Butt-fuck", buttFuck, "Take Vaginally", vagoo, "Force Lick", vagooLick, "B.Titfuck", bikiniTits, );
 				return;
