@@ -8303,7 +8303,7 @@ use namespace CoC;
 				raijuCounter++;
 			if (hairType == Hair.STORM)
 				raijuCounter++;
-			if (InCollection(hairColor, ["purple", "light blue", "yellow", "white", "lilac", "green"]))
+			if (InCollection(hairColor, ["purple", "light blue", "yellow", "white", "lilac", "green", "stormy blue"]))
 				raijuCounter++;
 			if (hasStatusEffect(StatusEffects.GlowingNipples) || hasStatusEffect(StatusEffects.GlowingAsshole))
 				raijuCounter++;
