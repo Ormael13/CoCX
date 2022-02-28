@@ -393,7 +393,6 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.headJewelry == headjewelries.DMONSKUL) mod += player.cor * .006;
         //no sus multiplying for now...
 		mod = Math.round(mod * 100) / 100;
-        outputText("spellModBase")
 		return mod;
 	}
 	
