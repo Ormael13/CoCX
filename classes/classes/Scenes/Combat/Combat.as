@@ -6703,7 +6703,6 @@ public class Combat extends BaseContent {
         monster.teased(lustDmgF, false);
         combat.bonusExpAfterSuccesfullTease();
         if (crit2) outputText(" <b>Critical!</b>");
-        outputText("\n\n");
         if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
         if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
         if (player.hasPerk(MutationsLib.HeartOfTheStormEvolved)){
