@@ -15978,6 +15978,16 @@ use namespace CoC;
 			super.modStats(dstr,dtou,dspe,dinte,dwis,dlib,dsens,dlust,dcor,false,max);
 			//Refresh the stat pane with updated values
 			//mainView.statsView.showUpDown();
+			if (dlust != 0){
+				raijuSuperchargedCheck();
+			}
+			if (raijuScore() < 7 && statStore.hasBuff('Supercharged')) statStore.removeBuffs('Supercharged');
+
+			EngineCore.showUpDown();
+			EngineCore.statScreenRefresh();
+		}
+
+		public function raijuSuperchargedCheck(){
 			if (raijuScore() >= 7 && lust100>=75){
 				if (!statStore.hasBuff("Supercharged")){
 					var buff:Number = 1;
@@ -15993,9 +16003,12 @@ use namespace CoC;
 					lust = maxLust()*99/100
 				}
 			}
-			if (raijuScore() < 7 && statStore.hasBuff('Supercharged')) statStore.removeBuffs('Supercharged');
-			EngineCore.showUpDown();
-			EngineCore.statScreenRefresh();
+		}
+
+		public override function takeLustDamage(lustDmg:Number, display:Boolean = true, applyRes:Boolean = true):Number{
+			var x:Number = super.takeLustDamage(lustDmg, display, applyRes);
+			raijuSuperchargedCheck();
+			return x;
 		}
 		
 		public function knownAbilities():/*CombatAbility*/Array {
