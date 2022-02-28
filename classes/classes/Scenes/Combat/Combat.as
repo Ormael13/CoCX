@@ -6695,6 +6695,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(MutationsLib.HeartOfTheStorm)) damage *= 1.1;
         if (player.hasPerk(MutationsLib.HeartOfTheStormPrimitive)) damage *= 1.2;
         if (player.hasPerk(MutationsLib.HeartOfTheStormEvolved)) damage *= 1.3;
+        if (player.hasPerk(MutationsLib.RaijuCathodePrimitive)) damage *= 1.2;
         if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= RacialParagonAbilityBoost();
         if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmgF *= 1.50;
         lustDmgF = lustDmgF * monster.lustVuln;
