@@ -1672,7 +1672,7 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.raccoonScore() >= 1) outputText("\n<font color=\"#008000\">Raccoon-morph: " + player.raccoonScore() + "</font>");
 		else if (player.raccoonScore() < 1) outputText("\n<font color=\"#ff0000\">Raccoon-morph: 0</font>");
 		//Raiju
-		if (player.raijuScore() >= 19) outputText("\n<font color=\"#0000a0\">Greater Raiju: " + player.raijuScore() + " (+145% to Spe racial multi, +50% to Int racial multi, +150% to Lib racial multi, +60 min Sens)</font>");
+		if (player.raijuScore() >= 20) outputText("\n<font color=\"#0000a0\">Greater Raiju: " + player.raijuScore() + " (+150% to Spe racial multi, +50% to Int racial multi, +160% to Lib racial multi, +60 min Sens)</font>");
 		else if (player.raijuScore() >= 10) outputText("\n<font color=\"#0000a0\">Raiju: " + player.raijuScore() + " (+70% to Spe racial multi, +50% to Int racial multi, +80% to Lib racial multi, +50 min Sens)</font>");
 		else if (player.raijuScore() >= 7) outputText("\n<font color=\"#0000a0\">Half Raiju: " + player.raijuScore() + " (+35% to Spe racial multi, +25% to Int racial multi, +40% to Lib racial multi, +25 min Sens)</font>");
 		else if (player.raijuScore() >= 1) outputText("\n<font color=\"#008000\">Half Raiju: " + player.raijuScore() + "</font>");
