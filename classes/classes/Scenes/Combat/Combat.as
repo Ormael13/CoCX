@@ -6699,7 +6699,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmgF *= 1.50;
         lustDmgF = lustDmgF * monster.lustVuln;
         lustDmgF = Math.round(lustDmgF);
-        monster.teased(lustDmgF);
+        monster.teased(lustDmgF, false);
         combat.bonusExpAfterSuccesfullTease();
         if (crit2) outputText(" <b>Critical!</b>");
         outputText("\n\n");
