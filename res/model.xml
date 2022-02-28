@@ -177,6 +177,7 @@
             <color name="silver blonde">#fcfaf8</color>
             <color name="silver-white">#eff3f6</color>
             <color name="snow white">#f9f9fa</color>
+			<color name="stormy purple">#2f308d</color>
             <color name="ghastly white">#f9f9fa</color>
             <color name="yellowish-green">#e1eca7</color>
             <color name="black and yellow">#000000</color>
@@ -504,6 +505,7 @@
         <cell rect="1093,611,90,90" name="feet/gnome" dx="59" dy="100"/>
         <cell rect="701,450,49,59" name="feet/sylph" dx="82" dy="117"/>
         <cell rect="751,450,49,59" name="feet/ratatoskr" dx="79" dy="115"/>
+		<cell rect="801,450,49,59" name="feet/raiju" dx="79" dy="115"/>
         <cell rect="1002,611,90,90" name="legs_bg/gnome" dx="58" dy="93"/>
         <cell rect="151,450,49,59" name="overfeet/fire" dx="79" dy="115"/>
         <cell rect="701,90,49,59" name="muscle/muscle" dx="79" dy="64"/>
@@ -1043,6 +1045,8 @@
         <cell rect="561,230,49,58" name="penis/caveWyrmbig" dx="77" dy="108"/>
         <cell rect="461,200,49,29" name="penis/mindbreakerdrip" dx="73" dy="134"/>
 		<cell rect="911,230,49,58" name="penis/sharkbig" dx="78" dy="106"/>
+		<cell rect="661,290,49,35" name="penis/raiju" dx="79" dy="106"/>
+        <cell rect="661,230,49,58" name="penis/raijubig" dx="77" dy="103"/>
         <cell rect="11,290,49,29" name="balls/Bhumansmall" dx="79" dy="104"/>
         <cell rect="11,320,49,29" name="balls/Bhumanlarge" dx="79" dy="104"/>
         <cell rect="11,350,49,29" name="balls/Bhumanhuge" dx="79" dy="105"/>
@@ -1101,6 +1105,8 @@
         <cell rect="561,230,49,58" name="penis_taur/caveWyrmbig_taur" dx="118" dy="135"/>
 		<cell rect="911,200,49,35" name="penis_taur/shark_taur" dx="118" dy="135"/>
         <cell rect="911,230,49,58" name="penis_taur/sharkbig_taur" dx="118" dy="135"/>
+		<cell rect="661,290,49,35" name="penis/raiju_taur" dx="119" dy="135"/>
+        <cell rect="661,230,49,58" name="penis/raijubig_taur" dx="116" dy="134"/>
         <cell rect="11,290,49,29" name="balls_taur/Bhumansmall_taur" dx="121" dy="128"/>
         <cell rect="11,320,49,29" name="balls_taur/Bhumanlarge_taur" dx="121" dy="128"/>
         <cell rect="11,350,49,29" name="balls_taur/Bhumanhuge_taur" dx="121" dy="128"/>
@@ -3161,6 +3167,9 @@
 					<case test="lowerBody==LowerBody.SQUIRREL">
 						<show part="feet/ratatoskr"/>
 					</case>
+					<case test="lowerBody==LowerBody.RAIJU">
+						<show part="feet/raiju"/>
+					</case>
 					<case test="lowerBody==LowerBody.BEAR">
 							<show part="feet/furracoon"/>
 							<if test="ears.type==Ears.PANDA">
@@ -4072,7 +4081,16 @@
                             <show part="penis$taur/humanbig$taur"/>
                         </else>
                     </if>
-                </case>		
+                </case>	
+
+				<case values="CockTypesEnum.DOG,CockTypesEnum.RAIJU">
+                    <if test="big">
+                        <show part="penis$taur/raijubig$taur"/>
+                        <else>
+                            <show part="penis$taur/raiju$taur"/>
+                        </else>
+                    </if>
+                </case>
 				
                 <!-- <case values="CockTypesEnum.HUMAN"></case> use default -->
                 <default>

@@ -5871,6 +5871,9 @@ public class Combat extends BaseContent {
                         if (player.hasPerk(PerkLib.ElectrifiedDesire)) damagemultiplier += player.lust100 * 0.01;
                         if (player.hasPerk(PerkLib.HistoryWhore) || player.hasPerk(PerkLib.PastLifeWhore)) damagemultiplier += combat.historyWhoreBonus();
                         if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 10) damagemultiplier += 0.2;
+                        if (player.hasPerk(MutationsLib.RaijuCathode)) damagemultiplier += 0.5;
+                        if (player.hasPerk(MutationsLib.RaijuCathodePrimitive)) damagemultiplier += 0.5;
+                        if (player.hasPerk(MutationsLib.RaijuCathodeEvolved)) damagemultiplier += 1;
                         if (player.armorName == "desert naga pink and black silk dress") damagemultiplier += 0.1;
                         if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
                         damageLC *= damagemultiplier;
@@ -6556,6 +6559,9 @@ public class Combat extends BaseContent {
                     if (player.hasPerk(PerkLib.DazzlingDisplay) && rand(100) < 10) damagemultiplier += 0.2;
                     if (player.armorName == "desert naga pink and black silk dress") damagemultiplier += 0.1;
                     if (player.headjewelryName == "pair of Golden Naga Hairpins") damagemultiplier += 0.1;
+                    if (player.hasPerk(MutationsLib.RaijuCathode)) damagemultiplier += 0.5;
+                    if (player.hasPerk(MutationsLib.RaijuCathodePrimitive)) damagemultiplier += 0.5;
+                    if (player.hasPerk(MutationsLib.RaijuCathodeEvolved)) damagemultiplier += 1;
                     damage *= damagemultiplier;
                     //Determine if critical tease!
                     var crit1:Boolean = false;
@@ -7873,6 +7879,7 @@ public class Combat extends BaseContent {
         if (monster.hasStatusEffect(StatusEffects.DragonWaterBreath)) damage *= 5;
         if (monster.hasPerk(PerkLib.DarknessNature)) damage *= 5;
         if (player.hasPerk(PerkLib.LightningAffinity)) damage *= 2;
+        if (player.hasPerk(MutationsLib.RaijuCathodePrimitive)) damage *= 1.20;
         if (player.hasPerk(MutationsLib.HeartOfTheStorm)) damage *= 1.1;
         if (player.hasPerk(MutationsLib.HeartOfTheStormPrimitive)) damage *= 1.2;
         if (player.hasPerk(MutationsLib.HeartOfTheStormEvolved)) damage *= 1.3;

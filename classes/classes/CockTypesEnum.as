@@ -55,6 +55,7 @@ package classes
 		public static const GRYPHON:CockTypesEnum = new CockTypesEnum("avian");
 		public static const OOMUKADE:CockTypesEnum = new CockTypesEnum("venomous");
 		public static const MINDBREAKER:CockTypesEnum = new CockTypesEnum("eldritch");
+		public static const RAIJU:CockTypesEnum = new CockTypesEnum("mammal");
 		public static const USHI_ONI:CockTypesEnum = new CockTypesEnum("other");
 		public static const UNDEFINED:CockTypesEnum = new CockTypesEnum("");
 		

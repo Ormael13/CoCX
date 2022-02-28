@@ -85,8 +85,8 @@ public class LizanRogueScene extends BaseContent
 					outputText("You wonder what you should do to the lizan.");
 					if (player.hasCock()) addButton(0, "Use Dick", rapeLizanInTheAss).hint("Anally penetrate him with your " + player.multiCockDescriptLight() + ".");
 					if (player.hasVagina()) addButton(1, "Use Pussy", rapeLizanWithPussy).hint("Get on top of the lizan and stuff his cock into your [pussy].");
-					if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 8).hint("Other non typical sex scenes.");
 					addButton(14, "Leave", cleanupAfterCombat);
+					if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(8);
 					return;
 				}
 				else {
@@ -100,8 +100,8 @@ public class LizanRogueScene extends BaseContent
 				if (player.lust >= 33) {
 					outputText("<b>You could have sex with him if you like to.</b> ");
 					addButton(0, "Sex", haveSexWithLizan).hint("Have some fun with the oh-so-sexy lizan.");
-					if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 8).hint("Other non typical sex scenes.");
 					addButton(14, "Leave", leaveLizanAfterCombat);
+					if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(8);
 					return;
 				}
 				else leaveLizanAfterCombat();
