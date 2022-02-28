@@ -82,7 +82,7 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 			Saves.registerSaveableState(this);
 		}
 			
-		public function BelisaAffection(changes:Number = 0):Number {
+		public function BelisaAffection(changes:Number = 0):void {
 			BelisaAffectionMeter += changes;
 			if (BelisaAffectionMeter > 100) BelisaAffectionMeter = 100;
 		}
