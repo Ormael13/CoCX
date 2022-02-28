@@ -566,7 +566,7 @@ public class AbstractEquinum extends Consumable {
 			changes++;
 		}
 
-		if ((type == 1 || type == 2) && changes < changeLimit && rand(3) == 0 && player.ears.type == Ears.HORSE && player.tailType != Tail.GARGOYLE && player.tailType == Tail.HORSE) {
+		if ((type == 1 || type == 2) && changes < changeLimit && rand(3) == 0 && player.ears.type == Ears.HORSE && player.tailType == Tail.HORSE) {
 			temp = 1;
 			//New horns or expanding unicorn/alicorn horns
 			if (player.horns.type == Horns.UNICORN || player.horns.type == Horns.NONE) {

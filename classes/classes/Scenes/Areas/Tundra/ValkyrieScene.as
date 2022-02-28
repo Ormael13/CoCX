@@ -71,8 +71,8 @@ package classes.Scenes.Areas.Tundra
 					addButton(2, "Get Licked", valkyrieLicksYou);
 					addButton(3, "Scissor", valkyrieScissor);
 				}
-				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 42).hint("Other non typical sex scenes.");
 				addButton(14, "Leave", cleanupAfterCombat);
+				if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(42);
 			}
 			else {
 				cleanupAfterCombat();

@@ -40,7 +40,7 @@ import classes.Scenes.UniqueSexScenes;
 			menu();
 			outputText("You smile in satisfaction as the mino incubus collapses, unable to continue fighting.");
 			if (monster.HP < 1) addButton (5, "Kill Him", killDemon);
-			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 2).hint("Other non typical sex scenes.");
+			if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(2);
 			addButton (14, "Leave", cleanupAfterCombat);
 		}
 		
@@ -78,7 +78,7 @@ import classes.Scenes.UniqueSexScenes;
 				//if (player.lowerBody == LowerBody.PLANT_FLOWER) addButton(7, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
 			}
 			if (monster.HP < 1) addButton (5, "Kill Him", killDemon);
-			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 3).hint("Other non typical sex scenes.");
+			if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(3);
 			addButton (14, "Leave", cleanupAfterCombat);
 		}
 		
@@ -332,7 +332,7 @@ import classes.Scenes.UniqueSexScenes;
 				}*/
 			}
 			if (monster.HP < 1) addButton (5, "Kill Her", killDemon);
-			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 4).hint("Other non typical sex scenes.");
+			if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(4);
 			addButton (14, "Leave", cleanupAfterCombat);
 		}
 		
@@ -580,7 +580,7 @@ import classes.Scenes.UniqueSexScenes;
 			menu();
 			outputText("You smile in satisfaction as the cow succubus collapses, unable to continue fighting.");
 			if (monster.HP < 1) addButton (5, "Kill Her", killDemon);
-			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 5).hint("Other non typical sex scenes.");
+			if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(5);
 			addButton (14, "Leave", cleanupAfterCombat);
 		}
 		
@@ -611,7 +611,7 @@ import classes.Scenes.UniqueSexScenes;
 				//if (player.lowerBody == LowerBody.PLANT_FLOWER) addButton(2, "Seeding", uniquuuesexscene.alrauneSeedingScene);
 			}
 			if (monster.HP < 1) addButton (5, "Kill Her", killDemon);
-			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 6).hint("Other non typical sex scenes.");
+			if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(6);
 			addButton (14, "Leave", cleanupAfterCombat);
 		}
 		

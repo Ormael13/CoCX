@@ -123,8 +123,8 @@ public class YetiScene extends BaseContent
 					addButton(1, "RideHisCock", rideYetisCock);
 				}
 			}
-			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 21).hint("Other non typical sex scenes.");
 			addButton(14, "Leave", cleanupAfterCombat);
+			if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(21);
 		}
 
 		private function fuckYetiInTheAss():void {

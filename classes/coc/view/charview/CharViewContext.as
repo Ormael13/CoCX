@@ -48,7 +48,7 @@ import coc.xlogic.ExecContext;
 					IsFireElemental: player.perkv1(PerkLib.ElementalBody) == 3,
 					IsWaterElemental: player.perkv1(PerkLib.ElementalBody) == 4,
 					IsWindElemental: player.perkv1(PerkLib.ElementalBody) == 1,
-					CaveWyrmPussy: player.vaginaType() == VaginaClass.CAVE_WYRM,
+					CaveWyrmPussy: player.vaginaType() == VaginaClass.CAVE_WYRM || player.vaginaType() == VaginaClass.RAIJU,
 					CaveWyrmNipples: player.hasStatusEffect(StatusEffects.GlowingNipples),
 					MindBreakerPussy: player.vaginaType() == VaginaClass.MINDBREAKER,
 					CancerCrabStance: player.hasStatusEffect(StatusEffects.CancerCrabStance),

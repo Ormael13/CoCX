@@ -1678,6 +1678,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.raijuScore() >= 7) {
 					player.createStatusEffect(StatusEffects.IsRaiju,0,0,0,0);
 					player.createPerk(PerkLib.LightningClaw,0,0,0,0);
+					player.createPerk(PerkLib.Supercharged,0,0,0,0);
 				}
 				player.createPerk(PerkLib.LightningAffinity, 0, 0, 0, 0);
 				player.createPerk(PerkLib.ElectrifiedDesire, 0, 0, 0, 0);
@@ -1689,6 +1690,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.LightningAffinity);
 				player.removePerk(PerkLib.ElectrifiedDesire);
 				player.removePerk(PerkLib.LightningClaw);
+				player.removePerk(PerkLib.Supercharged);
 				needNext = true;
 			}
 			else if (player.thunderbirdScore() < 12 && player.hasPerk(PerkLib.LightningAffinity) && player.hasStatusEffect(StatusEffects.IsThunderbird) && !player.hasStatusEffect(StatusEffects.IsRaiju)) {
@@ -2578,10 +2580,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			if (player.statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff1) >= 1) {
 				if (player.statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff1) == 1) {
-					if (player.statStore.hasBuff("ShiraOfTheEastFoodBuff") >= 1) {
-						var tempStrength:int = player.statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff2);
-						player.statStore.removeBuffs("ShiraOfTheEastFoodBuff");
-					}
+					player.buff("ShiraOfTheEastFoodBuff").remove();
 					player.removeStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff1);
 					outputText("\n<b>Effect of eating in 'Shira of the east' restaurant wears off.</b>\n");
 					needNext = true;

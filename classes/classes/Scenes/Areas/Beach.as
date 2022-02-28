@@ -147,13 +147,16 @@ import classes.Scenes.SceneLib;
 					player.createStatusEffect(StatusEffects.NearWater, 0, 0, 0, 0);
 					NothingHappened();
 				},
-				chance: 1
+				chance: 0.25
 			}, {
 				// Find Sandstone
 				name: "find Sandstone",
 						call: function ():void {
 					player.createStatusEffect(StatusEffects.NearWater, 0, 0, 0, 0);
 					findBeachSite();
+				},
+				when: function ():Boolean {
+					return (player.hasKeyItem("Old Pickaxe") > 0 && Forgefather.materialsExplained);
 				},
 				chance: 1
 			});
@@ -209,14 +212,11 @@ import classes.Scenes.SceneLib;
 		
 		public function findBeachSite():void {
 			clearOutput();
-			if (player.hasKeyItem("Old Pickaxe") > 0 && Forgefather.materialsExplained == true){
-				outputText("You stumble across a vein of Sandstone, this looks like suitable material for your gargoyle form.\n");
-				outputText("Do you wish to mine it?");
-				menu();
-				addButton(0, "Yes", beachSiteMine);
-				addButton(1, "No", camp.returnToCampUseOneHour);
-			}
-			else camp.returnToCampUseOneHour();
+            outputText("You stumble across a vein of Sandstone, this looks like suitable material for your gargoyle form.\n");
+            outputText("Do you wish to mine it?");
+            menu();
+            addButton(0, "Yes", beachSiteMine);
+            addButton(1, "No", camp.returnToCampUseOneHour);
 		}
 		
 		private function beachSiteMine():void {
@@ -229,7 +229,7 @@ import classes.Scenes.SceneLib;
 					return;
 				}
 				outputText("\n\nYou begin slamming your pickaxe against the sandstone, spending the better part of the next two hours mining. This done, you bring back your prize to camp. ");
-				var minedStones:Number = 13 + Math.floor(player.str / 7);
+				var minedStones:Number = 13 + Math.floor(player.str / 20);
 				minedStones = Math.round(minedStones);
 				fatigue(50, USEFATG_PHYSICAL);
 				SceneLib.forgefatherScene.incrementSandstoneSupply(minedStones);

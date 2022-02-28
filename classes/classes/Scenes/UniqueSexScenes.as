@@ -478,10 +478,11 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 			}
 		}
 
-		public function pcRapeOnVictory(re:Number):void{
+		public function checkIfPcRapeOnVictory(re:Number):void{
 			//Repeat this for different automatic scenes and trigger and use this function as a result instead of pcUniqueSexScenesChoiceMenu when called in places where it would make senses for it to proc
-			if (player.raijuScore() >= 15 && !monster.hasPerk(PerkLib.LightningAffinity) && !monster.hasPerk(PerkLib.LightningNature)){
-				RaijuRapeSupercharged();
+			if (player.statStore.hasBuff("Supercharged") && !monster.hasPerk(PerkLib.LightningAffinity) && !monster.hasPerk(PerkLib.LightningNature)){
+				if(!player.hasVagina() && !player.hasCock()) raijuVoltTransfer();
+				else RaijuRapeSupercharged();
 			}
 			else{
 				addButton(13, "U. Sex Scenes", pcUniqueSexScenesChoiceMenu, re).hint("Other non typical sex scenes.");
@@ -491,51 +492,63 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 		public function RaijuRapeSupercharged():void {
 			clearOutput();
 			menu();
-			if (player.isHerm()){
-				var maleOrFemale:Number = rand(100)
-				if (maleOrFemale < 50){
-					if (monster.hasVagina()){
-						outputText("CockCuntRape.\n\n");
-						player.sexReward("vaginalFluids","Dick");
-					}
-					else {
-						outputText("CockButtRape.\n\n");
-						player.sexReward("default","Dick",true,false);
-					}
+			outputText("As [themonster] is defeated, you lose any remaining restraint or shred of rationality you previously had, "+ player.clothedOrNaked("jumping out of your equipment and ", "") + "pouncing on your opponent with your");
+			var maleOrFemale:Number = rand(100)
+			if ((maleOrFemale < 51 && player.isHerm()) || (!player.isHerm() && player.hasCock())){ //male part
+				outputText(" plasma dripping cock already rock hard at the thought of FINALLY finding a hole to plug. Your body is overflowing with latent electricity. Your [dick] throbs in eager anticipation at the thought of pumping your victim with every volt of energy you have.\n\n" +
+						"[He] pleads for you to stop, yet in your lust-addled state, the only reply you can manage to give them is an intense stare of unbridled lust. There is nothing to hold you back now, rain would be more likely to flow back into the sky at their command.\n\n" +
+						"This poor, unfortunate soul is your long-awaited outlet, and nothing can hold you from unloading every ounce of seed into them. Your presence was warning enough, they had time to run.\n\n" +
+						"Before [he] can make any further protest, you plug yourself into [his] "+monster.assholeOrPussy()+", thrusting with wanton abandon as your charge quickly builds up within you. In a moment, you quickly begin unloading surge after surge of electricity into them. The air crackles around you with latent, lustful shocks. You can't help but growl in pleasure.\n\n" +
+						"Your poor victim's hole reflexively tightens around you as you continue bucking into them eagerly, the sheer force of your electricity causing them to spasm and quiver beneath your presence. You bring more of your weight upon them as you can feel yourself getting closer to the release that you so crave. Your eyes roll back, causing your vision to white out as you continue unloading all your charge into the make-shift lightning rod.\n\n" +
+						"[monster] continues clenching against you as a familiar pressure and heat builds up within your loins. You let loose a loud grunt as you finally release your load into [him]. Shot after shot of raiju plasma fills up your hapless victim as you steadily regain your senses and your erection deflates.\n\n" +
+						"Finally, you slowly unplug yourself from them, cum slowly seeping out of the broken, twitching mess you've left the [monster] in. Your partner will be a fumbling mess for a while with all that lingering charge in them. Electricity courses around their form as [he] clenches [his] body, still cumming.\n\n" +
+						"You no longer have any need to stick around now that your vision is cleared and your mind is no longer stuck in a fog. You decide to head back to your camp, satisfied.");
+				if (monster.hasVagina()){
+					player.sexReward("vaginalFluids","Dick");
 				}
-				else{
-					if (monster.hasCock()){
-						outputText("CuntCockRape.\n\n");
-						player.sexReward("cum","Vaginal");
-					}
-					else{
-						outputText("CuntMouthRape.\n\n");
-						player.sexReward("saliva","Vaginal");
-					}
+				else {
+					player.sexReward("default","Dick",true,false);
 				}
 			}
-			else{
-				if (player.hasCock()){
-					if (monster.hasVagina()){
-						outputText("CockCuntRape.\n\n");
-						player.sexReward("vaginalFluids","Dick");
-					}
-					else {
-						outputText("CockButtRape.\n\n");
-						player.sexReward("default","Dick",true,false);
-					}
+			if ((maleOrFemale >= 51 && player.isHerm()) || (!player.isHerm() && player.hasVagina())){ //female part
+				outputText(" plasma dripping pussy juicing itself at the thought of FINALLY getting plugged! Your body is literally overflowing with electricity, and you're about all too eager to unload every last volt into your hapless victim.\n\n" +
+						"[He] pleads for you to stop, yet in your lust-addled state, the only reply you can manage to give them is an intense stare of unbridled lust. There is nothing to hold you back now, rain would be more likely to flow back into the sky at their command.\n\n" +
+						"This poor, unfortunate soul is your long-awaited plug, and nothing can hold you from dissipating all of your volts in them. Your presence was warning enough, they had time to run.");
+				if (monster.hasCock()){
+					outputText("Before [he] can make any further protest, you force [his] plug into your overloaded outlet pumping with wanton abandon as your charge quickly builds up within you.");
+					if(player.vaginalCapacity() < monster.cockArea(0)) outputText(" Damn, [his] plug is massive. You barely manage to force [him] in, but there's no helping it. It's that or going about a few extra hours as a lust crazed lunatic and you'd prefer the former.");
+					player.cuntChange(monster.cockArea(0), true);
+					outputText(" In a moment, you quickly begin unloading surge after surge of electricity into them. The air crackles around you with latent, lustful shocks. You can't help but growl in pleasure.\n\n" +
+							"Your poor victim's cock reflexively twitches around your walls as you continue pumping it eagerly, the sheer force of your electricity causing them to spasm and quiver beneath your presence." +
+							" You bring more of your weight upon them as you can feel yourself getting closer to the release that you so crave." +
+							" Your eyes roll back, causing your vision to white out as you continue unloading all your charge into the make-shift lightning rod.\n\n" +
+							"[monster] continues clenching against you as a familiar pressure and heat builds up within your loins. You let loose a loud grunt as you finally achieve release, shooting all the remaining voltage into your victim's dick as a pool of raiju plasma floods beneath you." +
+							" Emptied from your overwhelming lust, you steadily regain your senses as your orgasm ebbs down.\n\n" +
+							"Finally, you slowly unplug yourself from them, cum mixed with plasma slowly seeping out of your outlet as you give one last glance at the broken, twitching mess you've left the [monster] in." +
+							" Your unwilling partner will be a fumbling mess for a while with all that lingering charge in them." +
+							" Electricity courses around their form as [he] clenches [his] body, still cumming.\n\n" +
+							"You no longer have any need to stick around now that your vision is cleared and your mind is no longer stuck in a fog. You decide to head back to your camp, satisfied.");
+					player.sexReward("cum","Vaginal");
 				}
-				if (player.hasVagina()){
-					if (monster.hasCock()){
-						outputText("CuntCockRape.\n\n");
-						player.sexReward("cum","Vaginal");
-					}
-					else{
-						outputText("CuntMouthRape.\n\n");
-						player.sexReward("saliva","Vaginal");
-					}
+				else {
+					outputText("Before [he] can make any further protest, you force your overloaded outlet into [his] face almost asphyxiating [him]." +
+							" Immediately you shoot your first bolt causing [his] mouth to open and [his] tongue to flail wildly right into your box." +
+							" You moan in delight as the charge quickly builds up within you. In a moment, you quickly begin unloading surge after surge of electricity into them." +
+							" The air crackles around you with latent, lustful shocks. You can't help but growl in pleasure.\n\n" +
+							"Your poor victim's overstimulated tongue just twitches around your walls, the sheer force of your electricity causing their entire body to spasm and quiver beneath your presence." +
+							" You bring more of your weight upon them as you can feel yourself getting closer to the release that you so crave." +
+							" Your eyes roll back, causing your vision to white out as you continue unloading all your charge into the make-shift lightning rod.\n\n" +
+							"[monster] continues flailing randomly as a familiar pressure and heat builds up within your loins." +
+							" You let loose a loud grunt as you finally achieve release, shooting all the remaining voltage into your victim's body as a pool of raiju plasma floods into [his] open mouth." +
+							" Emptied from your overwhelming lust, you steadily regain your senses as your orgasm ebbs down and that of your victim heads up.\n\n" +
+							"Finally, you slowly unplug yourself from them plasma slowly dripping out of your outlet as you give one last glance at the broken, twitching mess you've left the [monster] in." +
+							" Your unfortunate partner will be a fumbling mess for a while with all that lingering charge in them, let alone you're not sure they are going to be able to speak again for a while." +
+							" Electricity courses around their form as [he] clenches [his] body, still cumming.\n\n" +
+							"You no longer have any need to stick around now that your vision is cleared and your mind is no longer stuck in a fog. You decide to head back to your camp, satisfied.");
+					player.sexReward("saliva","Vaginal");
 				}
 			}
+			player.statStore.removeBuffs('Supercharged');
 			statScreenRefresh();
 			cleanupAfterCombat();
 		}

@@ -10433,6 +10433,42 @@ public final class Mutations extends MutationsHelper {
             }
         }
         //Physical
+        //Glowing Raiju Cock:
+        if (player.cockTotal() > 0 && player.cocks[0].cockType != CockTypesEnum.RAIJU && rand(4) == 0 && changes < changeLimit) {
+            for (temp2 = 0; temp2 < player.cocks.length; temp2++) {
+                //Stop loopahn when dick be found
+                if (player.cocks[temp2].cockType != CockTypesEnum.RAIJU) break;
+            }
+            outputText("[pg]You feel a sudden itch in your cock and undress as an irrepressible desire to masturbate takes hold of you. You keep stroking your twitching cock, moaning as you cum neon blue fluids. Wait, what? When you inspect your “cock descript” you discover its tip not only has changed color to neon blue but is now tappered with a sheath like that of a raiju. Furthermore it seems to naturally glow in the dark like the plasma that naturaly drips out of it. <b>You now have a neon blue raiju cock that glow in the dark.</b>");
+            //(REMOVE SHEATH IF NECESSARY)
+            player.cocks[temp2].cockType = CockTypesEnum.RAIJU;
+            player.cocks[temp2].knotMultiplier = 1.25;
+            changes++;
+            dynStats("lus", 10);
+            MutagenBonus("lib", 3);
+        }
+        //Vagina Turns Glowing:
+        if (player.hasVagina() && player.vaginaType() != 16 && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0 && changes < changeLimit) {
+            outputText("[pg]You feel a sudden jolt in your pussy and undress as an irrepressible desire to masturbate takes hold of you. You keep fingering your itchy pussy moaning as you cum neon blue plasma. Wait, what? When you inspect your [vagina] you discover it has changed color to neon blue. Furthermore it seems to naturally glow in the dark like the fluids it now squirt.  <b>You now have a neon blue raiju pussy that glow in the dark.</b>");
+            dynStats("lus", 10);
+            player.addCurse("sen", 2, 1);
+            player.vaginaType(16);
+            changes++;
+        }
+        //Physical changes:
+        //Nipples Start Glowing:
+        if (!player.hasStatusEffect(StatusEffects.GlowingNipples) && !player.hasStatusEffect(StatusEffects.BlackNipples) && player.lowerBody != LowerBody.GARGOYLE && rand(4) == 0 && changes < changeLimit) {
+            outputText("[pg]You suddenly feel an itch in your nipples and undress to check up on them. To your surprise they begin to glow with a fluorescent blue light as latent electricity build up within them. Well, this will be interesting.  <b>You now have neon blue nipples that glow in the dark.</b>");
+            player.createStatusEffect(StatusEffects.GlowingNipples, 0, 0, 0, 0);
+            changes++;
+        }
+        //Nipples Turn Back:
+        if (player.hasStatusEffect(StatusEffects.BlackNipples) && changes < changeLimit && rand(3) == 0) {
+            outputText("[pg]Something invisible brushes against your " + nippleDescript(0) + ", making you twitch.  Undoing your clothes, you take a look at your chest and find that your nipples have turned back to their natural flesh colour.");
+            changes++;
+            player.removeStatusEffect(StatusEffects.BlackNipples);
+        }
+
         var raiju_hair:Array = ["purple", "light blue", "yellow", "white", "lilac", "green"];
         if (!InCollection(player.hairColor, raiju_hair) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
             player.hairColor = randomChoice(raiju_hair);
