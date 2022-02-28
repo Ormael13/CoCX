@@ -176,10 +176,10 @@ private function rathazulWorkOffer():Boolean {
 		purificationByRathazulBegin();
 		return true;
 	}
-	if (BelisaFollower.BelisaRalthTalked && !BelisaFollower.BelisaRalthPotionGet && player.hasItem(consumables.SHARK_T) && player.hasItem(consumables.PPHILTR) && player.hasItem(consumables.VITAL_T)) {
-		RathazulMakesToothCursePotion();
-		return true;
-	}
+	//if (BelisaFollower.BelisaRalthTalked && !BelisaFollower.BelisaRalthPotionGet && player.hasItem(consumables.SHARK_T) && player.hasItem(consumables.PPHILTR) && player.hasItem(consumables.VITAL_T)) {
+	//	RathazulMakesToothCursePotion();
+	//	return true;
+	//}
 	if (player.hasItem(consumables.BLACKEG) || player.hasItem(consumables.L_BLKEG)) {
 		flags[kFLAGS.PC_KNOWS_ABOUT_BLACK_EGGS] = 1;
 		spoken = true;
@@ -389,7 +389,7 @@ private function RathazulMakesToothCursePotion():void {
 	player.destroyItems(consumables.VITAL_T, 1);
 	outputText("You run over to Ralthazul, showing him the ingredients you’ve obtained in your adventures. \"<i>Alright, that should do it. Give me just a moment please.”</i> The wizened alchemist grinds up the teeth, and begins to mix the ingredients together. You take a small stroll around the camp to let him work, and within fifteen short minutes, Ralthazul comes to you, a smile on his old face. \n\n"); 
 	outputText("\"<i>Remember, you must completely submerge the injury in the mixture. And it needs some time to work.”</i> He blinks, remembering something. \"<i>Oh, and this will hurt, in all probability. Most curses don’t go easily, and the mouth is rather sensitive.”</i> He passes you a small vial of a silver-white liquid, with streaks of red running through it. \"<i>An hour, at least. Depending on the curse’s power.\"</i> \n\n"); 
-	BelisaFollower.BelisaRalthPotionGet = true;
+	//BelisaFollower.BelisaRalthPotionGet = true;
 	doNext(camp.returnToCampUseOneHour);
 }
 
