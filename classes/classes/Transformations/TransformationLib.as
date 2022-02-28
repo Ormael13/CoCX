@@ -3552,13 +3552,12 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    desc += "Your ears twitch as jolts of lightning flows through them, replacing all sound with crackling pops. You moan as the lightning arcs up to the top of your head before fanning out to the side. Hearing suddenly returns as you run your hands across your <b>new raiju ears!</b>";
 
-	    player.ears.type = Ears.WEASEL;
+	    player.ears.type = Ears.RAIJU;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.WEASEL));
 	  },
 	  // is present
 	  function (): Boolean {
-	    return player.ears.type === Ears.WEASEL;
+	    return player.ears.type === Ears.RAIJU;
 	  }
 	);
 

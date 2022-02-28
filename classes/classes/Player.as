@@ -2279,23 +2279,6 @@ use namespace CoC;
 			lust = Math.round(lust);
 			if (hasStatusEffect(StatusEffects.Lustzerking) && !hasPerk(PerkLib.ColdLust)) lust = 100;
 			if (hasStatusEffect(StatusEffects.BlazingBattleSpirit)) lust = 0;
-			if (raijuScore() >= 7 && lust100>=75){
-				if (!statStore.hasBuff("Supercharged")){
-					var buff:Number = 1;
-					if (hasPerk(MutationsLib.RaijuCathodeEvolved)) buff *= 2
-					statStore.replaceBuffObject({'spe.mult':Math.round(speStat.mult.value)*buff}, 'Supercharged', { text: 'Supercharged!' });
-					CoC.instance.mainView.statsView.refreshStats(CoC.instance);
-					CoC.instance.mainView.statsView.showStatUp('spe');
-					outputText("\n\nAs your bottled up voltage ramps up you begin to lose yourself to lust turning increasingly feral as your overwhelming need to discharge override any rational thinking. FUCK… you need someone to fuck that voltage out of you!");
-					if(game.inCombat) outputText(" [monster] gulp as [he] see's your lust crazed expression. Should you win [he] won't get off the hook so easily!");
-					outputText("\n\n<b>You entered the supercharged state!</b>\n\n");
-				}
-				lust = maxLust()/100*5;
-				if(lust100 >= 100){
-					this.lust = maxLust()*99/100
-				}
-			}
-			if (raijuScore() < 7 && statStore.hasBuff('Supercharged')) statStore.removeBuffs('Supercharged');
 			return lust;
 		}
 
@@ -8303,7 +8286,7 @@ use namespace CoC;
 				raijuCounter++;
 			if (hairType == Hair.STORM)
 				raijuCounter++;
-			if (InCollection(hairColor, ["purple", "light blue", "yellow", "white", "lilac", "green"]))
+			if (InCollection(hairColor, ["purple", "light blue", "yellow", "white", "lilac", "green", "stormy blue"]))
 				raijuCounter++;
 			if (hasStatusEffect(StatusEffects.GlowingNipples) || hasStatusEffect(StatusEffects.GlowingAsshole))
 				raijuCounter++;
@@ -15969,12 +15952,12 @@ use namespace CoC;
 				if (sens > 90 && dsens < 0) dsens *= 2;
 				//Bonus gain for perks!
 				if(hasPerk(PerkLib.Strong)) dstr += dstr * perkv1(PerkLib.Strong);
-				if(hasPerk(PerkLib.Tough)) dstr += dstr * perkv1(PerkLib.Tough);
-				if(hasPerk(PerkLib.Fast)) dstr += dstr * perkv1(PerkLib.Fast);
-				if(hasPerk(PerkLib.Smart)) dstr += dstr * perkv1(PerkLib.Smart);
-				if(hasPerk(PerkLib.Wise)) dstr += dstr * perkv1(PerkLib.Wise);
-				if(hasPerk(PerkLib.Lusty)) dstr += dstr * perkv1(PerkLib.Lusty);
-				if(hasPerk(PerkLib.Sensitive)) dstr += dstr * perkv1(PerkLib.Sensitive);
+				if(hasPerk(PerkLib.Tough)) dtou += dtou * perkv1(PerkLib.Tough);
+				if(hasPerk(PerkLib.Fast)) dspe += dspe * perkv1(PerkLib.Fast);
+				if(hasPerk(PerkLib.Smart)) dinte += dinte * perkv1(PerkLib.Smart);
+				if(hasPerk(PerkLib.Wise)) dwis += dwis * perkv1(PerkLib.Wise);
+				if(hasPerk(PerkLib.Lusty)) dlib += dlib * perkv1(PerkLib.Lusty);
+				if(hasPerk(PerkLib.Sensitive)) dsens += dsens * perkv1(PerkLib.Sensitive);
 				// Uma's Str Cap from Perks (Moved to max stats)
 				/*if (hasPerk(PerkLib.ChiReflowSpeed))
 				{
@@ -15995,8 +15978,37 @@ use namespace CoC;
 			super.modStats(dstr,dtou,dspe,dinte,dwis,dlib,dsens,dlust,dcor,false,max);
 			//Refresh the stat pane with updated values
 			//mainView.statsView.showUpDown();
+			if (dlust != 0){
+				raijuSuperchargedCheck();
+			}
+			if (raijuScore() < 7 && statStore.hasBuff('Supercharged')) statStore.removeBuffs('Supercharged');
+
 			EngineCore.showUpDown();
 			EngineCore.statScreenRefresh();
+		}
+
+		public function raijuSuperchargedCheck(){
+			if (raijuScore() >= 7 && lust100>=75){
+				if (!statStore.hasBuff("Supercharged")){
+					var buff:Number = 1;
+					if (hasPerk(MutationsLib.RaijuCathodeEvolved)) buff *= 2
+					statStore.replaceBuffObject({'spe.mult':Math.round(speStat.mult.value)*buff}, 'Supercharged', { text: 'Supercharged!' });
+					CoC.instance.mainView.statsView.refreshStats(CoC.instance);
+					CoC.instance.mainView.statsView.showStatUp('spe');
+					outputText("\n\nAs your bottled up voltage ramps up you begin to lose yourself to lust turning increasingly feral as your overwhelming need to discharge override any rational thinking. FUCK… you need someone to fuck that voltage out of you!");
+					if(game.inCombat) outputText(" [monster] gulp as [he] see's your lust crazed expression. Should you win [he] won't get off the hook so easily!");
+					outputText("\n\n<b>You entered the supercharged state!</b>\n\n");
+				}
+				if(lust100 >= 100){
+					lust = maxLust()*99/100
+				}
+			}
+		}
+
+		public override function takeLustDamage(lustDmg:Number, display:Boolean = true, applyRes:Boolean = true):Number{
+			var x:Number = super.takeLustDamage(lustDmg, display, applyRes);
+			raijuSuperchargedCheck();
+			return x;
 		}
 		
 		public function knownAbilities():/*CombatAbility*/Array {
