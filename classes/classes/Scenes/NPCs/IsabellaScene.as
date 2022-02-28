@@ -142,7 +142,7 @@ public function isabellaGreeting():void {
 		}
 		//(Shorter PC's)
 		else {
-			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00259] < 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00259]++;
+			if(flags[kFLAGS.ISABELLA_MET_SHORT_PC] < 0) flags[kFLAGS.ISABELLA_MET_SHORT_PC]++;
 			outputText("The cow-girl's big brown eyes soften as she regards your relatively diminutive form.  She smiles and coos, \"<i>Awww, you're zuch a cutey!  Izabella could never turn avay someone like you.  Come here, vould you like a drink?</i>\"");
 			outputText("\n\nYou approach and exchange introductions with the friendly woman, still a bit taken aback by her eagerness.");
 			//(Male PC's)
@@ -168,8 +168,8 @@ public function isabellaGreeting():void {
 		return;
 	}
 	//Camp Meeting – Was welcome tall, but not short yet!
-	else if(flags[kFLAGS.ISABELLA_OKAY_WITH_TALL_FOLKS] > 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00259] == 0 && player.tallness <= 78) {
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00259]++;
+	else if(flags[kFLAGS.ISABELLA_OKAY_WITH_TALL_FOLKS] > 0 && flags[kFLAGS.ISABELLA_MET_SHORT_PC] == 0 && player.tallness <= 78) {
+		flags[kFLAGS.ISABELLA_MET_SHORT_PC]++;
 		outputText("You stumble through a wall of tall grasses back into Isabella's camp!  It's amazing how much taller they've become since your last visit.  Or perhaps it just seems that way due to the change in height.  You look for Isabella, and the fiery, red-headed cow-girl is charging right at you, bellowing, \"<i>Awwww, you're so much cuter!  Iz vonderful to have such tiny, adorable friends!  Did you come back for one of mein special drinks?</i>\"  She envelops you in a hug that crushes you against jiggling breast-flesh, and in seconds you're cradled in her arms as she marvels at your new size.\n\n");
 		if(player.hasCock()) {
 			outputText("Her nose twitches and ");
@@ -190,7 +190,7 @@ public function isabellaGreeting():void {
 		//simpleChoices("Talk",0,"Drink",0,"Get Licked",suck,"Rape Attempt",0,"Leave",13);
 	}
 	//Camp Meeting – Welcomed Short but Not Tall
-	else if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00259] > 0 && flags[kFLAGS.ISABELLA_OKAY_WITH_TALL_FOLKS] == 0 && player.tallness > 78) {
+	else if(flags[kFLAGS.ISABELLA_MET_SHORT_PC] > 0 && flags[kFLAGS.ISABELLA_OKAY_WITH_TALL_FOLKS] == 0 && player.tallness > 78) {
 		outputText("You easily brush through the tall grasses and stride into Isabella the cow-girl's camp.  It looks like she was sitting in her chair mending a blanket when you arrived, and you take a moment to watch her hunched posture squeeze her breasts tightly against the gauzy silk top she's so fond of wearing.  The outline of a single areola is clearly visible through the diaphanous material, but most striking is that each areola has four VERY prominent nipple-tips.  She looks at you, first in fright, and then in embarrassment as she recognizes you AND realizes what you were doing in a single instant.\n\n");
 		//(+lust!)
 		dynStats("lus", 10+rand(10));
@@ -207,14 +207,14 @@ public function isabellaGreeting():void {
 		//simpleChoices("Talk",0,"Drink",0,"Get Licked",suck,"Rape Attempt",0,"Leave",13);
 	}
 	//Follower go!
-	else if(flags[kFLAGS.ISABELLA_CAMP_DISABLED] == 0 && flags[kFLAGS.ISABELLA_FOLLOWER_ACCEPTED] == 0 && isabellaFollowerScene.isabellaAffection() >= (50 + flags[kFLAGS.ISABELLA_TIMES_OFFERED_FOLLOWER] * 15)) {
+	else if(flags[kFLAGS.ISABELLA_CAMP_DISABLED] == 0 && flags[kFLAGS.ISABELLA_FOLLOWER_ACCEPTED] == 0 && isabellaFollowerScene.isabellaReadyToMove()) {
 		isabellaFollowerScene.isabellaMoovesInGreeting();
 		return;
 	}
 	//[Standard welcome options]
 	//Camp Meeting – Standard Repeat
 	else {
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00259] < 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00259]++;
+		if(flags[kFLAGS.ISABELLA_MET_SHORT_PC] < 0) flags[kFLAGS.ISABELLA_MET_SHORT_PC]++;
 		outputText("While making your way through the tall grasses you hear a familiar voice lilting in a high-pitched foreign song.  It sounds like Isabella the cow-girl is at it again.  You meander towards the melodic tune, smiling as it rises in pitch and volume through your journey.  A short time later you break through the edge of the grasses in time to watch Isabella finish her song and the curvy cow-girl seems completely oblivious to your presence, enraptured by the music of her homeland.\n\n");
 		outputText("You wait patiently, watching her curvy body shift and her large, milk-swollen breasts wobble dangerously inside her near-transparent shirt.  Her quad-tipped areolas are plainly on display, clearly engorged and ready to leak.  If you weren't here, in this strange place, you'd be amazed by how her breasts are basically humanized udders.  In this place, it's just another thing that adds to her exotic appeal.\n\n");
 		outputText("Isabella finishes her song and turns to you with a twinkling smile as she asks, \"<i>Did you come back for some of ze milk?</i>\"");
@@ -772,7 +772,7 @@ public function IsabellaWinsAndSpanks():void {
 				if(player.cumQ() > 1000) outputText(" until you've created a puddle around yourself");
 				outputText(".");
 			}
-			else if(player.hasVagina()) {
+			if(player.hasVagina()) {
 				outputText("  Your " + vaginaDescript() + " quivers and ");
 				if(player.wetness() < 5) outputText("drips");
 				else outputText("squirts, splashing girl-cum over the dirt");
