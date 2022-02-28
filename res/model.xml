@@ -504,6 +504,7 @@
         <cell rect="1093,611,90,90" name="feet/gnome" dx="59" dy="100"/>
         <cell rect="701,450,49,59" name="feet/sylph" dx="82" dy="117"/>
         <cell rect="751,450,49,59" name="feet/ratatoskr" dx="79" dy="115"/>
+		<cell rect="801,450,49,59" name="feet/raiju" dx="79" dy="115"/>
         <cell rect="1002,611,90,90" name="legs_bg/gnome" dx="58" dy="93"/>
         <cell rect="151,450,49,59" name="overfeet/fire" dx="79" dy="115"/>
         <cell rect="701,90,49,59" name="muscle/muscle" dx="79" dy="64"/>
@@ -3164,6 +3165,9 @@
 					</case>
 					<case test="lowerBody==LowerBody.SQUIRREL">
 						<show part="feet/ratatoskr"/>
+					</case>
+					<case test="lowerBody==LowerBody.RAIJU">
+						<show part="feet/raiju"/>
 					</case>
 					<case test="lowerBody==LowerBody.BEAR">
 							<show part="feet/furracoon"/>
