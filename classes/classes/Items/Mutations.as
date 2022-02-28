@@ -10469,7 +10469,7 @@ public final class Mutations extends MutationsHelper {
             player.removeStatusEffect(StatusEffects.BlackNipples);
         }
 
-        var raiju_hair:Array = ["purple", "light blue", "yellow", "white", "lilac", "green", "stormy purple"];
+        var raiju_hair:Array = ["purple", "light blue", "yellow", "white", "lilac", "green", "stormy blue"];
         if (!InCollection(player.hairColor, raiju_hair) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(3) == 0) {
             player.hairColor = randomChoice(raiju_hair);
             outputText("[pg]Your hair stands up on end as bolts of lightning run through each strand, changing them to a <b>[haircolor] color!</b>");
