@@ -464,12 +464,14 @@
 
                 Not so surprisingly, your nightly vampiric meal offset this issue granting you the energy to go without rest this time around.
             </text>
-            <text name="bloodyRose">
-                You point out to Diva tent and both of you head in.
+            <lib name="bloodyRose">
+                <text name="intro">
+                    You point out to Diva tent and both of you head in.
 
-                Once inside, you give Diva a seductive gaze, offering your neck on display and removing your clothes. The vampire needs no further invitation as she toss hers at the back of her tent. Diva snuggle up to you, kisses your neck and then bite in. The feeling of the blood running out of your neck is a delicious mix of pain and pleasure arousing you to no end. In the delight of the moment you also bite Diva, tasting her blood. It never occurred to you before how powerful the link between the both of you are when feeding from each others neck… were you two any closer than that you would be able to communicate through telepathy. You feel her pleasure through your neck as she can feels yours through her own.. or perhaps you both feels each other pleasure more clearly?
+                    Once inside, you give Diva a seductive gaze, offering your neck on display and removing your clothes. The vampire needs no further invitation as she toss hers at the back of her tent. Diva snuggle up to you, kisses your neck and then bite in. The feeling of the blood running out of your neck is a delicious mix of pain and pleasure arousing you to no end. In the delight of the moment you also bite Diva, tasting her blood. It never occurred to you before how powerful the link between the both of you are when feeding from each others neck… were you two any closer than that you would be able to communicate through telepathy. You feel her pleasure through your neck as she can feels yours through her own.. or perhaps you both feels each other pleasure more clearly?
 
-                <if test="player.isMale">
+                </text>
+                <text name="male">
                     Your [cock] begins to harden from the overstimulation of your sensible vampire neck and the excitement of blood.
                     Diva pussy seems to agree as she’s practically wetting the ground below the pair of you.
                     Giving in to your instinct you slowly insert yourself in her like your fang in her neck as your increasingly hardening [cock] begin to pulse along with your heartbeat.
@@ -479,9 +481,10 @@
                     You however aren’t going to simply lay back and let the devilish pussy do all the work as you begin to piston in and out of her.
                     Diva’s wings are flapping wildly behind her <if test="player.wings.type == VAMPIRE">, yours too and you try not to take flight as a the winds created by your combined flapping shake the tent</if>.
                     Both of you scream in ecstasy, breaking out of the bite, blood still dripping from each other chin as you cum your load in her greedy vagina
-                    <if test="player.cumQ() ge 20"> the excess dripping to the ground</if>.
-
-                <elseif test="player.isFemale">
+                    <if test="player.cumQ() ge 20">, the excess dripping to the ground</if>.
+                    
+                </text>
+                <text name="female">
                     You begin to feel more than blood oozing out of you.
                     Your pussy lips are drooling and you can feel Diva juices slowly running down your leg.
                     You are panting from the feeling in your neck and you desire more, Diva too, so on a common nod you get to step two.
@@ -491,14 +494,15 @@
                     Both of you slide against each other for several minutes, never parting away as a constant fountain of female fluids runs down your respective legs.
                     Diva wings are flapping wildly behind her <if test="player.wings.type == VAMPIRE">, yours too and you try not to take flight as a the winds created by your combined flapping shake the tent</if>.
                     The both of you scream in ecstasy breaking out of the bite, blood still dripping from each other chin as you and Diva reach your orgasm.
-                    Unsatisfied the both of you keep at it for several hours. After about the sixth orgasm
-                </elseif>
-                </if>
+                    Unsatisfied the both of you keep at it for several hours. After about the sixth orgasm...
 
-                You start to doze off tired as Diva pull you down in her coffin still embracing you.
+                </text>
+                <text name="outro">
+                    You start to doze off tired as Diva pull you down in her coffin still embracing you.
 
-                You wake up in the morning, still hugging with Diva. She’s fast asleep but still wearing a content smile.
-            </text>
+                    You wake up in the morning, still hugging with Diva. She’s fast asleep but still wearing a content smile.
+                </text>
+            </lib>
         </lib>
         <lib name="talkMenu">
             <text name="menu">

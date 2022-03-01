@@ -6661,3 +6661,4 @@ public function rebirthFromBadEnd():void {
         */
 	}
 }
+
