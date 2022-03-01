@@ -6579,7 +6579,7 @@ public class Combat extends BaseContent {
                     if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
                     damage = damage * 0.33 * monster.lustVuln;
                     damage = Math.round(damage);
-                    monster.teased(damage);
+                    monster.teased(damage,false);
                     if (crit1) outputText(" <b>Critical!</b>");
                     outputText(" ");
                     if (player.hasPerk(PerkLib.SuperSensual) && player.hasPerk(PerkLib.Sensual)) teaseXP(2);
@@ -6695,14 +6695,14 @@ public class Combat extends BaseContent {
         if (player.hasPerk(MutationsLib.HeartOfTheStorm)) damage *= 1.1;
         if (player.hasPerk(MutationsLib.HeartOfTheStormPrimitive)) damage *= 1.2;
         if (player.hasPerk(MutationsLib.HeartOfTheStormEvolved)) damage *= 1.3;
+        if (player.hasPerk(MutationsLib.RaijuCathodePrimitive)) damage *= 1.2;
         if (player.hasPerk(PerkLib.RacialParagon)) lustDmgF *= RacialParagonAbilityBoost();
         if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmgF *= 1.50;
         lustDmgF = lustDmgF * monster.lustVuln;
         lustDmgF = Math.round(lustDmgF);
-        monster.teased(lustDmgF);
+        monster.teased(lustDmgF, false);
         combat.bonusExpAfterSuccesfullTease();
         if (crit2) outputText(" <b>Critical!</b>");
-        outputText("\n\n");
         if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
         if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
         if (player.hasPerk(MutationsLib.HeartOfTheStormEvolved)){

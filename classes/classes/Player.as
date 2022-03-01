@@ -8276,6 +8276,8 @@ use namespace CoC;
 				raijuCounter++;
 			if (eyes.type == Eyes.RAIJU)
 				raijuCounter++;
+			if (InCollection(eyes.colour, "blue","green", "turquoise","light green"))
+				raijuCounter++;
 			if (faceType == Face.WEASEL)
 				raijuCounter++;
 			if (arms.type == Arms.RAIJU || arms.type == Arms.RAIJU_PAWS)
@@ -12842,10 +12844,10 @@ use namespace CoC;
 				}
 			}//+10/10-20
 			if (raijuScore() >= 5) {
-				if (raijuScore() >= 19) {
-					maxSpeCap2 += 145;
+				if (raijuScore() >= 20) {
+					maxSpeCap2 += 150;
 					maxIntCap2 += 50;
-					maxLibCap2 += 150;
+					maxLibCap2 += 160;
 					currentSen += 60;
 				} else if (raijuScore() >= 10) {
 					maxSpeCap2 += 70;
