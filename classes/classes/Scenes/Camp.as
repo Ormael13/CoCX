@@ -1604,6 +1604,7 @@ public class Camp extends NPCAwareContent{
 					SceneLib.trollVillage.yenza.YenzaBeratePart2();
 				}
 			}
+			if (TrollVillage.ZenjiMoneyHelp > 0) TrollVillage.ZenjiMoneyHelp -= 1;
 			if (flags[kFLAGS.ZENJI_PROGRESS] == 11) {
 				if (model.time.hours >= 7 && model.time.hours <= 18) {
 					if (slavesCount() > 0 && rand(5) == 0) outputText("Zenji is keeping a close eye on some of your more corrupt camp members, ensuring that they don’t cause any harm.");
@@ -4031,7 +4032,8 @@ public class Camp extends NPCAwareContent{
 		else addButtonDisabled(6, "???", "Search the plains.");
 		if (flags[kFLAGS.OWCA_UNLOCKED] == 1) addButton(7, "Owca", SceneLib.owca.gangbangVillageStuff).hint("Visit the sheep village of Owca, known for its pit where a person is hung on the pole weekly to be gang-raped by the demons.");
 		else addButtonDisabled(7, "???", "Search the plains.");
-		//8 - ???
+		if (TrollVillage.ZenjiVillageStage > 0) addButton(8, "Troll Village", SceneLib.trollVillage.EnterTheVillage).hint("Visit the Troll Village.");
+		else addButtonDisabled(8, "???", "Clear the factory first.");
 		//9 - ???
 
 		if (flags[kFLAGS.HEXINDAO_UNLOCKED] >= 1) addButton(10, "He'Xin'Dao", SceneLib.hexindao.riverislandVillageStuff0).hint("Visit the village of He'Xin'Dao, a place where all greenhorn soul cultivators come together.");

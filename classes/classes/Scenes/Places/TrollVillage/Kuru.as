@@ -1,7 +1,8 @@
+/**
+ * @Author Pyromania
+ * Coded in by Jtecx, Jan/Feb 2022
+ */
 package classes.Scenes.Places.TrollVillage {
-//import classes.*;
-//import classes.GlobalFlags.kFLAGS;
-//import classes.Scenes.SceneLib;
 import classes.Scenes.Places.TrollVillage;
 public class Kuru extends TrollVillageAbstractContent{
     public function Kuru() {

@@ -1725,5 +1725,6 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 			flags[kFLAGS.TIMES_BIRTHED_SHARPIES]++;
 			doNext(camp.returnToCampUseOneHour);
 		}
+
 	}
 }

@@ -1,8 +1,14 @@
+/**
+ * @Author Pyromania
+ * Coded in by Jtecx, Jan/Feb 2022
+ */
 package classes.Scenes.Places.TrollVillage {
 import classes.*;
 import classes.Items.ArmorLib;
 import classes.Items.UndergarmentLib;
 import classes.Scenes.Places.TrollVillage;
+import classes.Scenes.SceneLib;
+
 public class Halkano extends TrollVillageAbstractContent{
     public function Halkano() {
     }
@@ -154,7 +160,7 @@ public class Halkano extends TrollVillageAbstractContent{
                 "Zenji doesn’t even bother surveying his surroundings as he strips himself from his loincloth, revealing his raging erection. \"I’ve been waiting for dis…\" He growls.\n" +
                 "\n" +
                 "You take a glance around, there are not many people in the diner, around 5 people including the waitress is in the room currently.\n");
-        if (player.lowerGarment == UndergarmentLib.NOTHING && player.upperGarment == UndergarmentLib.NOTHING && player.armor == ArmorLib.NOTHING){
+        if (player.isNaked()){
             outputText("Since you’re already naked, you press your rear against Zenji, ready to be sandwiched between two hunks.\n\n");
         }
         else{
@@ -221,6 +227,137 @@ public class Halkano extends TrollVillageAbstractContent{
                 "\n" +
                 "Zenji carries you home to help you clean up, making sure that nothing is forgotten at the diner before leaving.\n");
         doNext(camp.returnToCampUseOneHour);
+    }
+
+    public function HalkanoAppearance():void{
+        clearOutput();
+        outputText("He is an 8’6\" tall male troll with a massive, portly build and ashen green fur. His face is chiseled and handsome, as many trolls are. His short, trimmed hair is grey and neatly combed. His face is symmetrical with deep-set almond eyes. He has a bushy, murky green beard that covers his entire jaw. Two tusks protrude from his mouth, each about 10 inches long.\n" +
+                "\n" +
+                "His body is very muscular with considerable heft. His bare chest is chunky and beefy, almost invitingly comfortable with his soft fur. He is currently only wearing fur pants that cover his lower body and legs, held up by a silky sash. He has the average features you’d expect on a male troll. Toned and muscular arms and legs, each supporting 4 fingers or toes. A fuzzy tail, about 3 feet long, as well as fur covering his entire body.\n" +
+                "\n" +
+                "Halkano gives a polite smile as you eye him up and down.\n");
+        SceneLib.trollVillage.jabala.JabalaHalkanoTalk();
+    }
+
+    public function JHalkanoSexScenes():void{
+        clearOutput();
+        outputText("You ask Halkano if he’s willing to get a little intimate with you. Such a strong, handsome troll deserves to have some fun once in a while.\n" +
+                "\n" +
+                "Halkanao’s brow narrows, \"Are… are ya really asking ta get down wit a married man?\"\n" +
+                "\n" +
+                "You tell him as long as he’s okay with it.\n" +
+                "\n" +
+                "\"I dunno…\" Halkano responds nervously\n" +
+                "\n" +
+                "You shout to the backyard where Jabala is tending to her plants carefully. You ask if it’s okay to spend some quality alone time with her husband.\n" +
+                "\n" +
+                "\"Stay safe!\" You hear Jabala shout back reflexively, obviously not paying attention.\n" +
+                "\n" +
+                "Halkano still seems nervous about disgracing his faith. You assure him that it’s fine, in this world, it could be far worse, at least you’re not an evil demon.\n" +
+                "\n" +
+                "Halkano relaxes slightly, \"Well… she seemed okay wit it… Shall we go to de bedroom..?\"\n" +
+                "\n" +
+                "Halkano holds out his massive hand, you take his grasp as he guides you to the bedroom.\n" +
+                "\n" +
+                "Once the two of you are inside he sheepishly removes his pants, unveiling all 14 inches of his uncut, meaty troll girth. It’s about 2 and a half inches wide as well.\n" +
+                "\n" +
+                "\"I’ve… I’ve neva done dis wit anyone else but my wife before… What makes you tink I’m so special..?\"\n" +
+                "\n" +
+                "[(pc has clothes) You begin to undress, making sure that nothing is concealed from him.] You tell him that a handsome lad such as himself deserves some appreciation and you wanted to be able to show you how much you appreciate his presence. [(pc has clothes) Your clothes fall to the floor with a soft thud.] You approach him with a coy smile, encroaching on his personal space.\n" +
+                "\n" +
+                "Halkano blushes, still nervous. \"Well…\"\n" +
+                "\n" +
+                "You press your body against his burly figure, bringing a hand up to his lips and silencing him softly. You gently push him back until he falls back onto his bed, he’s lying down as you straddle him.\n");
+        if (player.hasVagina()){
+            outputText("Halkano speaks softly, still blushing \"Please, [name]... I… No vaginal stuff… I… I can’t do dat to my wife...\"");
+        }
+        outputText("You consider what you want to do with him.");
+        menu();
+        addButton(0,"Blow Him", HalkanoBlown);
+        addButton(1,"Ride Anal", HalkanoAnal);
+
+        function HalkanoBlown():void{
+            outputText("You decide a little reward is in order for such a hunk. You slide off of his body and kneel at the side of the bed where his strong legs are resting against the bed, feet still on the ground.\n" +
+                    "\n" +
+                    "He spreads his legs aside for you, giving you a chance to get closer to his rising erection. He sits up and gives you a worried glance.\n" +
+                    "\n" +
+                    "\"Oh… Ya… Ya just wanted ta service me dis time…\"\n" +
+                    "\n" +
+                    "You smile at him as you bring yourself closer to his shaft, already at full mast. You reach your hand toward the base of his length, gently cupping his hefty balls. He has considerable heft to himself, virile as you’ve come to expect from trolls.\n" +
+                    "\n" +
+                    "You bring your tongue to the tip of his mouth as your other hand gently slides around the base of his length.\n" +
+                    "\n" +
+                    "Halkano moans softly and you’re met with a steady stream of precum leaking from the tip of his length. The salty taste of his seed instills you with purpose as you carry on with servicing him. You wrap your tongue beneath his foreskin, lapping up around his sensitive head as you coax more pre onto your tongue.\n" +
+                    "\n" +
+                    "Halkano growls contentedly, \"Grrr, so good… How are you so good…\"\n" +
+                    "\n" +
+                    "You move your tongue to the underside of his head as you press your lips at his tip. You bob your head down, inching more of his girthy erection into your mouth as you try to blow his entire length.\n" +
+                    "\n" +
+                    "You force more of his length into you as Halkano growls softly in satisfaction. He shifts his hand to the back of your head, softly pushing you into his crotch as you bury your face deeper down his length. His legs shift around as well, brushing against you, almost trying to keep you trapped between him, but they don’t close around you.\n" +
+                    "\n" +
+                    "He presses your head down with a firm push as you manage to swallow the entirety of his girth, his precum now dripping directly down your throat.\n" +
+                    "\n" +
+                    "\"Mmm…\" He growls, \"So close, I’m so close [name]! Keep going!\"\n" +
+                    "\n" +
+                    "As if you had any other options. You circle your tongue around his length, trying to coat every inch of his massive length with your mouth as you gently suck on him with more force. You feel his girth begin to convulse, twitching and pulsing within your throat, ready to burst at any given moment.\n" +
+                    "\n" +
+                    "Halkano moans loudly, bucking into you as he cums, shooting waves of his seed directly into your stomach. He growls again as his body begins to relax as he continuously cums into your awaiting stomach.\n" +
+                    "\n" +
+                    "You lap up his cum contentedly, making sure that not a single drop escapes you. You feel so full after the event, Halkano is still virile as ever.\n" +
+                    "\n" +
+                    "He gently pats the top of your head, \"Dat… Dat was really good, [name]... I… Uh, tanks… You really should leave now though…\"\n" +
+                    "\n" +
+                    "You pack up your things and leave following his wishes, but not before he gives you a brief hug in his warm embrace.\n");
+            doNext(camp.returnToCampUseOneHour);
+        }
+
+        function HalkanoAnal():void{
+            outputText("Given your position over him, you tell him that you’re gonna take him for a ride.\n" +
+                    "\n" +
+                    "Halkano shifts, slightly discomforted beneath you. He brings his legs onto the bed, lying propped up against the head of the bed, depressing the mattress slightly with his considerable weight.\n" +
+                    "\n" +
+                    "You bring your hand down to his girth, he’s already leaking precum at the thought of penetrating your backdoor.\n" +
+                    "\n" +
+                    "\"[name]... Please… please put it in…\" He begs, reaching his dense hand toward his length, rubbing his pre over himself, lubing up for you.\n" +
+                    "\n" +
+                    "You hover over his backdoor, teasing the tip of his length with your behind.\n" +
+                    "\n" +
+                    "Halkano grabs onto your hips with his firm hands, pulling you down onto him. You gasp slightly in surprise, but he’s needy for you now.\n");
+            if (player.analCapacity() < 7){
+                outputText("His lengthy shaft presses its way deep inside of your tight backdoor, you feel yourself stretch over his massive manhood.\n");
+            }
+            else if (player.analCapacity() < 55){
+                outputText("His lengthy shaft presses into you, you can feel him accommodating your ass as he presses further and further with each thrust\n");
+            }
+            else{
+                outputText("His lengthy shaft presses into you, you can feel him press into your roomy backside as he presses deeper into you with each thrust.\n");
+            }
+            outputText("You moan softly as he clutches onto your waist, pulling you up and down his girthy pecker. He bucks into you, trying to fit more of his length into your backdoor as you bounce atop him.\n" +
+                    "\n" +
+                    "You can feel the warmth of his pre seep into your rear, lubricating your further and allowing his shaft to slide into you with ease. Halkano begins growling softly, getting closer to his climax.\n" +
+                    "\n" +
+                    "You can feel yourself getting closer to the edge as well, being pushed into further pleasure by the occasional twitch of his massive length being buried deeper into your hole.\n" +
+                    "\n" +
+                    "You moan in pleasure, leaning down over him, pressing your body against his burly torso. You hold onto him tightly as he continues pounding away at you.\n" +
+                    "\n" +
+                    "Your body is pressed against the soothing warmth of his fur and you can feel yourself getting closer. You cry in pleasure as your orgasm hits. \n");
+            if (player.hasVagina()){
+                outputText("Girlcum leaks from your vagina, spilling out past your lips and onto him.\n");
+            }
+            if (player.hasCock()){
+                outputText("Your erection twitches before finally cumming, spraying jizz all over his chest.\n");
+            }
+            outputText("Halkano growls louder, clutching onto you tightly as he cums. Jets of his warm seed shoot into your back door. You clench your sphincter over his throbbing girth, trying to milk him of everything he has to offer you. His orgasm is aggressive, you couldn’t hope to take all the cum he has to offer.\n" +
+                    "\n" +
+                    "Halkano slowly relaxes as you relax atop him. \"Dat… I… You really are someting, I still don’t know what you see in me dat’s so special.\"\n" +
+                    "\n" +
+                    "You smile at him in response, he’s just a very attractive daddy.\n" +
+                    "\n" +
+                    "Halkano blushes softly. After a moment of respite together he helps clean you up.\n" +
+                    "\n" +
+                    "Once you’re cleaned you take your things and exit the hut. Halkano still seems a little nervous around you.\n");
+            doNext(camp.returnToCampUseOneHour);
+        }
     }
 }
 }

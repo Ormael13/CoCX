@@ -1,3 +1,7 @@
+/**
+ * @Author Pyromania
+ * Coded in by Jtecx, Jan/Feb 2022
+ */
 package classes.Scenes.Places.TrollVillage {
 import classes.*;
 import classes.Items.ArmorLib;
@@ -378,7 +382,7 @@ public class Kalji extends TrollVillageAbstractContent{
                                 "\n" +
                                 "\"You’re not getting off that easily…\" He replies tauntingly.\n");
                     }
-                    if (!player.isNaga()){ //Uh, not entirely sure how to do a foot check. player.feet/foot?
+                    if (player.lowerBodyPart.legCount < 2){
                         outputText("His hand sensually roams down your [leg], softly grazing your [skin] as he moves closer to your feet.\n" +
                                 "\n" +
                                 "You shake, stirring in place, desperate to get away from him, but you’re trapped in this hell with him.\n" +
