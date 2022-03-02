@@ -63,15 +63,15 @@ use namespace CoC;
 				return;
 			}
 			
-			//Discover Outer Battlefield
-			if (flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] >= 1 && flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] <= 0 && player.level >= 19) {
+			//Discover Inner Battlefield
+			/*if (flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] >= 1 && flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] <= 0 && (player.level + combat.playerLevelAdjustment()) >= 19) {
 				flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] = 1;
 				player.explored++;
 				clearOutput();
 				outputText("As you explore the boundary of the endless field, you cautiously step over countless remains of fallen and golem husks littered across the ground. Treading further, you reach a part of the battlefield you haven't seen yet. The air is thick, and it constantly feels like you're being watched by something. Perhaps the war isn't quite finished yet...\n\n<b>You've discovered the (Outer) Battlefield!</b>");
 				doNext(camp.returnToCampUseOneHour);
 				return;
-			}
+			}*/
 			
 			var choice:Array = [];
 			var select:int;
@@ -169,7 +169,7 @@ use namespace CoC;
 				doNext(playerMenu);
 			}
 		}
-		
+		/*
 		public function partsofTwinGrakaturd():void {
 			clearOutput();
 			outputText("As you explore the (outer) battlefield, you run into what appears to be the half buried remains of an old contraption. This might just be what that gun vendor was talking about! You proceed to dig up the items realizing this to indeed be the remains of a broken firearm.\n\n");
@@ -177,6 +177,6 @@ use namespace CoC;
 			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
 			player.createKeyItem("Twin Grakaturd", 0, 0, 0, 0);
 			doNext(camp.returnToCampUseOneHour);
-		}
+		}*/
 	}
 }

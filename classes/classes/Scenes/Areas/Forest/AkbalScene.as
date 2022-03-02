@@ -8,6 +8,7 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
+import classes.Items.Armors.SuccubusArmor;
 import classes.Scenes.UniqueSexScenes;
 
 public class AkbalScene extends BaseContent
@@ -108,8 +109,9 @@ public class AkbalScene extends BaseContent
 						addButton(1, "Take Vaginally", vagoo);
 						addButton(2, "Force Lick", vagooLick);
 					}
-					if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) {
-						bikiniTits = (player.armor as LustyMaidensArmor).lustyMaidenPaizuri;
+					if (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armor is LustyMaidensArmor || player.armor is SuccubusArmor)) {
+						if (player.armor is SuccubusArmor) bikiniTits = (player.armor as SuccubusArmor).succubusPaizuri;
+						else bikiniTits = (player.armor as LustyMaidensArmor).lustyMaidenPaizuri;
 						addButton(3, "B.Titfuck", bikiniTits);
 					}
 					if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(11);
@@ -140,8 +142,9 @@ public class AkbalScene extends BaseContent
 					addButton(1, "Take Vaginally", vagoo);
 					addButton(2, "Force Lick", vagooLick);
 			}
-				if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) {
-					bikiniTits = (player.armor as LustyMaidensArmor).lustyMaidenPaizuri;
+				if (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armor is LustyMaidensArmor || player.armor is SuccubusArmor)) {
+					if (player.armor is SuccubusArmor) bikiniTits = (player.armor as SuccubusArmor).succubusPaizuri;
+					else bikiniTits = (player.armor as LustyMaidensArmor).lustyMaidenPaizuri;
 					addButton(3, "B.Titfuck", bikiniTits);
 				}
 				if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(11);

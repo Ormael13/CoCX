@@ -69,7 +69,7 @@ public class CombatMagic extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.CounterEclipsingShadow)) player.removeStatusEffect(StatusEffects.CounterEclipsingShadow);
 	}
 
-    
+
 	internal function costChange_all():Number {
 		var costPercent:Number = 0;
         if (player.hasPerk(PerkLib.SeersInsight)) costPercent -= (100 * player.perkv1(PerkLib.SeersInsight));
@@ -217,7 +217,7 @@ public class CombatMagic extends BaseCombatContent {
 		mod = Math.round(mod * 100) / 100;
 		return mod;
 	}
-    
+
     internal function modChange_all():Number {
 		var mod:Number = 0;
 		if (player.hasPerk(PerkLib.WizardsFocus)) {
@@ -260,6 +260,12 @@ public class CombatMagic extends BaseCombatContent {
         if (player.hasPerk(PerkLib.Ambition)) {
 			mod += player.perkv2(PerkLib.Ambition);
 		}
+		if (player.hasPerk(PerkLib.KnowledgeIsPower)) {
+			if (player.hasPerk(MutationsLib.RatatoskrSmartsEvolved)) mod += (Math.round(codex.checkUnlocked() / 100) * 3);
+			else mod += Math.round(codex.checkUnlocked() / 100);
+		}
+		if (player.hasPerk(PerkLib.ZenjisInfluence3)) mod += .3;
+		if (player.hasPerk(PerkLib.ChiReflowMagic)) mod += UmasShop.NEEDLEWORK_MAGIC_SPELL_MULTI;
 		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono)) mod += (player.cor * .01)/2;
         return mod;
     }
@@ -294,7 +300,7 @@ public class CombatMagic extends BaseCombatContent {
 				if (player.perkv2(PerkLib.ElementalBody) == 4) mod += .4;
 			}
 			if (player.hasPerk(PerkLib.SharedPower) && player.perkv1(PerkLib.SharedPower) > 0) mod += (0.1*player.perkv1(PerkLib.SharedPower));
-		}       
+		}
 
         return mod;
 
@@ -387,7 +393,7 @@ public class CombatMagic extends BaseCombatContent {
 				if (Forgefather.refinement == 3 || Forgefather.refinement == 4) mod += (.5);
 				if (Forgefather.refinement == 5) mod += (1);
 			}
-		
+
         //mod += modChange_spell_2(); //old place
 
 		if (player.headJewelry == headjewelries.DMONSKUL) mod += player.cor * .006;
@@ -535,7 +541,7 @@ public class CombatMagic extends BaseCombatContent {
 
 	internal function calcInfernoModImpl(damage:Number, casting:Boolean = true):int {
         var modDmg:Number = damage;
-        //v1 is counter value in 5% (for later tiers), 
+        //v1 is counter value in 5% (for later tiers),
 		if (player.hasPerk(PerkLib.RagingInferno)) { //if has perk
             if (casting) {
                 if (player.hasStatusEffect(StatusEffects.CounterRagingInferno)) { //counter created
@@ -570,7 +576,7 @@ public class CombatMagic extends BaseCombatContent {
 
     internal function calcGlacialModImpl(damage:Number, casting:Boolean = true):int {
         var modDmg:Number = damage;
-        //v1 is counter value in 5% (for later tiers), 
+        //v1 is counter value in 5% (for later tiers),
 		if (player.hasPerk(PerkLib.GlacialStorm)) { //if has perk
             if (casting) {
                 if (player.hasStatusEffect(StatusEffects.CounterGlacialStorm)) { //counter created
@@ -605,7 +611,7 @@ public class CombatMagic extends BaseCombatContent {
 
     internal function calcVoltageModImpl(damage:Number, casting:Boolean = true):int {
         var modDmg:Number = damage;
-        //v1 is counter value in 5% (for later tiers), 
+        //v1 is counter value in 5% (for later tiers),
 		if (player.hasPerk(PerkLib.HighVoltage)) { //if has perk
             if (casting) {
                 if (player.hasStatusEffect(StatusEffects.CounterHighVoltage)) { //counter created
@@ -640,7 +646,7 @@ public class CombatMagic extends BaseCombatContent {
 
     internal function calcEclypseModImpl(damage:Number, casting:Boolean = true):int {
         var modDmg:Number = damage;
-        //v1 is counter value in 5% (for later tiers), 
+        //v1 is counter value in 5% (for later tiers),
 		if (player.hasPerk(PerkLib.EclipsingShadow)) { //if has perk
             if (casting) {
                 if (player.hasStatusEffect(StatusEffects.CounterEclipsingShadow)) { //counter created

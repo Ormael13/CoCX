@@ -364,10 +364,12 @@ import flash.utils.getQualifiedClassName;
 				min -= maxHP() * 0.08;
 				min -= (2400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}//nastepny diehard to 10% i 3000
-			if (hasPerk(PerkLib.Ferocity)) min -= maxHP() * 0.07;
 			if (hasPerk(MutationsLib.LizanMarrowEvolved)) min -= maxHP() * 0.05;
 			if (hasPerk(MutationsLib.OrcAdrenalGlands)) min -= maxHP() * 0.01;
 			if (hasPerk(MutationsLib.OrcAdrenalGlandsPrimitive)) min -= maxHP() * 0.02;
+			if (hasPerk(PerkLib.Ferocity)) min -= maxHP() * 0.07;
+			if (hasPerk(PerkLib.Rage)) min -= maxHP() * 0.05;
+			if (hasPerk(PerkLib.TooAngryToDie)) min -= this.maxWrath();
 			if (hasPerk(PerkLib.DeityJobMunchkin)) {
 				min -= str;
 				min -= tou;
@@ -629,10 +631,11 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.ColdLust)) temp += 250;
 			if (hasPerk(PerkLib.ColderLust)) temp += 375;
 			if (hasPerk(PerkLib.PrestigeJobBerserker)) temp += 1000;
-			if (hasPerk(PerkLib.Rage)) temp += 1500;
-			if (hasPerk(PerkLib.Anger)) temp += 2000;
-			if (hasPerk(PerkLib.FuelForTheFire)) temp += 2500;
+			if (hasPerk(PerkLib.FuelForTheFire)) temp += 1500;
+			if (hasPerk(PerkLib.Rage)) temp += 2000;
+			if (hasPerk(PerkLib.Anger)) temp += 2500;
 			if (hasPerk(PerkLib.TooAngryToDie)) temp += 3000;
+			if (hasPerk(PerkLib.EndlessRage)) temp += 3500;
 			if (hasPerk(PerkLib.PrestigeJobTempest)) temp += 500;
 			if (hasPerk(PerkLib.WarMageNovice)) temp += 50;
 			if (hasPerk(PerkLib.WarMageApprentice)) temp += 50;
@@ -802,9 +805,9 @@ import flash.utils.getQualifiedClassName;
 			//Modify armor rating based on melee weapons
 			if (game.player.weapon == game.weapons.JRAPIER || game.player.weapon == game.weapons.Q_GUARD || game.player.weapon == game.weapons.B_WIDOW || game.player.weapon == game.weapons.SPEAR || game.player.weapon == game.weapons.SESPEAR || game.player.weapon == game.weapons.DSSPEAR || game.player.weapon == game.weapons.SKYPIER
 			 || game.player.weapon == game.weapons.LANCE || game.player.weapon == game.weapons.D_LANCE || game.player.weapon == game.weapons.NORTHIP || (game.player.weaponName.indexOf("staff") != -1 && game.player.hasPerk(PerkLib.StaffChanneling) )) armorMod = 0;
-			if (game.player.weapon == game.weapons.KATANA || game.player.weapon == game.weapons.DKATANA) {
+			if (game.player.weapon == game.weapons.KATANA || game.player.weapon == game.weapons.DKATANA || game.player.weapon == game.weapons.DAISHO) {
 				if (armorMod < 100) armorMod -= 10;
-				else armorMod *= 0.9
+				else armorMod *= 0.9;
 			}
 			if (game.player.weapon == game.weapons.HALBERD) armorMod *= 0.6;
 			if (game.player.weapon == game.weapons.GUANDAO) armorMod *= 0.4;
@@ -1099,7 +1102,10 @@ import flash.utils.getQualifiedClassName;
 			// 2) Bonuses for underlevel all the way to 20 lvl's below enemy! Above 20 lvl diff bonus is fixed at 300%! With underdog it increase to 40 lvl diff and caps at 900%!
 			// 3) Super high level folks (over 10 levels) only get 1 xp!
 			var difference:Number = 1;
-			var diff2:Number = this.level - playerLevel;
+			//var diff2:Number = this.level - playerLevel; - odkomentować jak nie bedzie potrzebne rozwiązanie poniżej ^^
+			var diff2:Number = this.level;
+			if (playerLevel > 90) playerLevel = 90;
+			diff2 -= playerLevel;
 			if (game.player.hasPerk(PerkLib.AscensionUnderdog)) {
 				if (diff2 >= 40) difference += 8;
 				if (diff2 >= 1 && diff2 < 40) difference += diff2 * 0.2;
@@ -3455,3 +3461,4 @@ import flash.utils.getQualifiedClassName;
 		}
 	}
 }
+

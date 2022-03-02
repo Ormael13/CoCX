@@ -9,6 +9,7 @@ import classes.BodyParts.SkinLayer;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
+import classes.Items.Armors.SuccubusArmor;
 import classes.Scenes.Monsters.Imp;
 import classes.Scenes.SceneLib;
 import classes.Scenes.UniqueSexScenes;
@@ -1234,8 +1235,9 @@ public class KitsuneScene extends BaseContent
 				//[Ride] - requires vagina & redheadIsFuta
 				if (player.hasVagina() && flags[kFLAGS.redheadIsFuta] > 0)
 					button = kitsuneButton(button, "RideHerCock", rideDatRedheadKitsuneCockIntoTheSkyDiamonds);
-				if (flags[kFLAGS.redheadIsFuta] > 0 && player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor")
-					button = kitsuneButton(button, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
+				if (flags[kFLAGS.redheadIsFuta] > 0 && player.hasVagina() && player.biggestTitSize() >= 4 && (player.armorName == "lusty maiden's armor" || player.armorName == "Succubus armor"))
+					if (player.armorName == "Succubus armor") button = kitsuneButton(button, "B.Titfuck", (player.armor as SuccubusArmor).succubusPaizuri);
+					else button = kitsuneButton(button, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
 			}
 			//[Feeder]
 			if (player.hasPerk(PerkLib.Feeder))

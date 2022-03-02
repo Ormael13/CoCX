@@ -1249,7 +1249,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 			}
-			else if (player.hasPerk(PerkLib.Flexibility) && player.perkv4(PerkLib.Flexibility) == 0 && !player.hasPerk(PerkLib.CatlikeNimbleness)) { //Remove flexibility perk if not meeting requirements
+			else if (player.hasPerk(PerkLib.Flexibility) && player.perkv4(PerkLib.Flexibility) == 0 && !player.hasPerk(MutationsLib.CatlikeNimbleness)) { //Remove flexibility perk if not meeting requirements
 				outputText("\nYou notice that you aren't as flexible as you were when you had a more feline body.  It'll probably be harder to avoid your enemies' attacks now.\n\n(<b>Lost Perk: Flexibility</b>)\n");
 				player.removePerk(PerkLib.Flexibility);
 				needNext = true;
@@ -2224,11 +2224,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			//Losing horn
 			if (player.hasPerk(PerkLib.AvatorOfCorruption) && player.cor > 10 && player.horns.type != Horns.BICORN) {
 				outputText("\n\n<b>Without your horns, the magic power they once granted withers and dies, vanishing completely.</b>\n");
+				if (!player.hasPerk(MutationsLib.EclipticMind)) player.removePerk(PerkLib.AuraOfCorruption);
 				player.removePerk(PerkLib.AvatorOfCorruption);
-				if (!player.hasPerk(PerkLib.EclipticMind))
-				{
-					player.removePerk(PerkLib.AuraOfCorruption);
-				}
 				needNext = true;
 			}
 
@@ -2287,28 +2284,25 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			if (player.hasPerk(PerkLib.AvatorOfPurity) && player.cor < 90 && player.horns.type != Horns.UNICORN) {
 				outputText("\n<b>Without your horn, the magic power it once granted withers and dies, vanishing completely.</b>\n");
+				if (!player.hasPerk(MutationsLib.EclipticMind)) player.removePerk(PerkLib.AuraOfPurity);
 				player.removePerk(PerkLib.AvatorOfPurity);
-				if (!player.hasPerk(PerkLib.EclipticMind))
-				{
-					player.removePerk(PerkLib.AuraOfPurity);
-				}
 				needNext = true;
 			}
 			//Switch Aura Based On Alignment
-			if ((player.horns.type != Horns.BICORN && player.horns.type != Horns.UNICORN) && player.cor > 89 && player.hasPerk(PerkLib.EclipticMind) && player.hasPerk(PerkLib.AuraOfPurity)) {
+			if ((player.horns.type != Horns.BICORN && player.horns.type != Horns.UNICORN) && player.cor > 89 && player.hasPerk(MutationsLib.EclipticMind) && player.hasPerk(PerkLib.AuraOfPurity)) {
 				outputText("\nA dramatic change in your alignment has altered your formerly pure aura into one of corruption\n");
 				player.removePerk(PerkLib.AuraOfPurity);
 				player.createPerk(PerkLib.AuraOfCorruption, 0, 0, 0, 0);
 				needNext = true;
 			}
-			if ((player.horns.type != Horns.BICORN && player.horns.type != Horns.UNICORN) && player.cor < 20 && player.hasPerk(PerkLib.EclipticMind) && player.hasPerk(PerkLib.AuraOfCorruption)) {
+			if ((player.horns.type != Horns.BICORN && player.horns.type != Horns.UNICORN) && player.cor < 20 && player.hasPerk(MutationsLib.EclipticMind) && player.hasPerk(PerkLib.AuraOfCorruption)) {
 				outputText("\nA dramatic change in your alignment has altered your formerly corrupt aura into one of purity\n");
 				player.removePerk(PerkLib.AuraOfCorruption);
 				player.createPerk(PerkLib.AuraOfPurity, 0, 0, 0, 0);
 				needNext = true;
 			}
 			//Remove Bullshit
-			if ((player.horns.type != Horns.BICORN && player.horns.type != Horns.UNICORN) && (player.hasPerk(PerkLib.AuraOfPurity) || player.hasPerk(PerkLib.AuraOfCorruption)) && !player.hasPerk(PerkLib.EclipticMind)) {
+			if ((player.horns.type != Horns.BICORN && player.horns.type != Horns.UNICORN) && (player.hasPerk(PerkLib.AuraOfPurity) || player.hasPerk(PerkLib.AuraOfCorruption)) && !player.hasPerk(MutationsLib.EclipticMind)) {
 				outputText("\nNo idea how you got this weird aura about you but whatever the reason why you had it its gone now.\n");
 				player.removePerk(PerkLib.AuraOfPurity);
 				player.removePerk(PerkLib.AuraOfCorruption);
@@ -3024,3 +3018,4 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		//End of Interface Implementation
 	}
 }
+

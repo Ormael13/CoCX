@@ -564,7 +564,7 @@ public class HeXinDao extends BaseContent
         addButton(6, "Shelf 4", soulequipmentshelf4).hint("Flying Swords");
         addButton(7, "Shelf 5", soulequipmentshelf5).hint("Consumables");
         addButton(8, "Shelf 6", soulequipmentshelf6).hint("Misc");
-		//addButton(7, weapons.MACE.shortName, weaponBuy, weapons.MACE);//awl - wymagać bedzie możliwość lewitacji czy coś od PC aby to używać
+		//addButton(7, weapons.MACE.shortName, weaponBuy, weapons.MACE);//(?magically enchanced?) awl - wymagać bedzie możliwość lewitacji czy coś od PC aby to używać
         //addButton(12, "Talk", ).hint("Tak with .");
         addButton(14, "Back", riverislandVillageStuff);
         statScreenRefresh();
@@ -594,13 +594,12 @@ public class HeXinDao extends BaseContent
         addButton(4, weapons.SCLAYMO.shortName, weaponBuy2, weapons.SCLAYMO);
         addButton(5, weapons.S_GAUNT.shortName, weaponBuy2, weapons.S_GAUNT);
         addButton(6, weapons.CLAWS.shortName, weaponBuy2, weapons.CLAWS);
-        addButton(7, weapons.RIBBON.shortName, weaponBuy2, weapons.RIBBON);
+        addButton(7, weapons.DAISHO.shortName, weaponBuy2, weapons.DAISHO);
         addButton(8, weapons.TCLAYMO.shortName, weaponBuy2, weapons.TCLAYMO);
         addButton(9, weapons.ACLAYMO.shortName, weaponBuy2, weapons.ACLAYMO);
         addButton(10, weapons.WHIP.shortName, weaponBuy2, weapons.WHIP);
         addButton(11, weapons.PWHIP.shortName, weaponBuy2, weapons.PWHIP);
         addButton(12, weapons.ZWNDER.shortName, weaponBuy2, weapons.ZWNDER);
-        addButton(13, weapons.PRURUMI.shortName, weaponBuy2, weapons.PRURUMI);
         addButton(14, "Back", serenamerchant);
     }
     public function soulequipmentshelf3():void {
@@ -655,14 +654,19 @@ public class HeXinDao extends BaseContent
     }
     public function soulequipmentshelf6():void {
         menu();
-		addButton(5, weapons.W_STAFF.shortName, weaponBuy6, weapons.W_STAFF);
+		addButton(1, weapons.W_STAFF.shortName, weaponBuy6, weapons.W_STAFF);
+		addButton(2, weapons.AWL_.shortName, weaponBuy6, weapons.AWL_);
+		addButton(3, weapons.RULER.shortName, weaponBuy6, weapons.RULER);
+		addButton(4, weapons.NRSABER.shortName, weaponBuy6, weapons.NRSABER);
+		addButton(5, weapons.RIBBON.shortName, weaponBuy6, weapons.RIBBON);
         addButton(6, weapons.GUANDAO.shortName, weaponBuy6, weapons.GUANDAO);
         addButton(7, weapons.HSWORDS.shortName, weaponBuy6, weapons.HSWORDS);
 		addButton(8, weapons.SNAKESW.shortName, weaponBuy6, weapons.SNAKESW);
 		//addButton(9, Changdao
         addButton(10, weapons.FLYWHIS.shortName, weaponBuy6, weapons.FLYWHIS);
-        addButton(11, weapons.CHAKRAM.shortName, weaponBuy6, weapons.CHAKRAM);
-        addButton(12, shields.MABRACE.shortName, weaponBuy6, shields.MABRACE);
+        addButton(11, weapons.PRURUMI.shortName, weaponBuy6, weapons.PRURUMI);
+        addButton(12, weapons.CHAKRAM.shortName, weaponBuy6, weapons.CHAKRAM);
+        addButton(13, shields.MABRACE.shortName, weaponBuy6, shields.MABRACE);
         addButton(14, "Back", serenamerchant);
     }
 
@@ -1297,4 +1301,4 @@ public function soularena():void {
         doNext(camp.returnToCampUseOneHour);
     }
 }
-}
+}

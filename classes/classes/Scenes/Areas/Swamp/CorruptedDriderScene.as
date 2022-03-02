@@ -9,6 +9,7 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
+import classes.Items.Armors.SuccubusArmor;
 import classes.Scenes.UniqueSexScenes;
 
 use namespace CoC;
@@ -94,7 +95,10 @@ use namespace CoC;
 			var rideCock:Function =null;
 			var rideOvi:Function =null;
 			var bikiniTits:Function =null;
-			if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) bikiniTits = (player.armor as LustyMaidensArmor).lustyMaidenPaizuri;
+			if (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armor is LustyMaidensArmor || player.armor is SuccubusArmor)) {
+				if (player.armor is SuccubusArmor) bikiniTits = (player.armor as SuccubusArmor).succubusPaizuri;
+				else bikiniTits = (player.armor as LustyMaidensArmor).lustyMaidenPaizuri;
+			}
 			var temp3:Function =null;
 			if (player.pcCanUseUniqueSexScene()) temp3 = curry(uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 39);
 			if (player.hasVagina() && player.lust >= 33) {

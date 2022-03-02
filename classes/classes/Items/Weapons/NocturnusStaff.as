@@ -22,7 +22,7 @@ package classes.Items.Weapons
         //Normal weapon stuff
 		public function NocturnusStaff() 
 		{
-			super("N.Staff", "N. Staff", "nocturnus staff", "a nocturnus staff", "smack", 6, 960,
+			super("N.Staff", "N. Staff", "nocturnus staff", "a nocturnus staff", "smack", 10, 1600,
 					"This corrupted staff is made in black ebonwood and decorated with a bat ornament in bronze. Malice seems to seep through the item, devouring the wielder’s mana to channel its unholy power.",
 					"Staff, +200% Spell cost, Spellpower bonus for corruption", PerkLib.WizardsFocus, 0.6, 0, 0, 0, "", "Staff");
 		}

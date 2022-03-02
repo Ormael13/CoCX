@@ -345,6 +345,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		if (!isCorrupt)spriteSelect(SpriteDb.s_celessWhite);
 		var improvableItems:Array = [
 			[weapons.BFSWORD, weapons.NPHBLDE, weapons.EBNYBLD],
+			[weapons.DBFSWO, weapons.T_HEART, weapons.DORSOUL],
 			[weapons.MASTGLO, weapons.KARMTOU, weapons.YAMARG],
 			[weapons.KATANA, weapons.MASAMUN, weapons.BLETTER],
 			[weapons.W_STAFF, weapons.U_STAFF, weapons.N_STAFF],
@@ -354,9 +355,11 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			[weapons.SPEAR, weapons.SESPEAR, weapons.DSSPEAR],
 			[weapons.JRAPIER, weapons.Q_GUARD, weapons.B_WIDOW],
 			[weapons.OTETSU, weapons.POCDEST, weapons.DOCDEST],
+			[weapons.BFTHSWORD, weapons.ARMAGED, weapons.CHAOSEA],
 			[weaponsrange.BOWLONG, weaponsrange.ARTEMIS, weaponsrange.WILDHUN],
 			[weaponsrange.SHUNHAR, weaponsrange.KSLHARP, weaponsrange.LEVHARP],
-			[shields.SANCTYN, shields.SANCTYL, shields.SANCTYD]
+			[shields.SANCTYN, shields.SANCTYL, shields.SANCTYD],
+			[armors.LMARMOR, armors.BMARMOR, armors.S_ARMOR]
 		];
 		clearOutput();
 		outputText(""+_name+" can empower items using materials gems and her innate magic to bless or corrupt gear by using radiant shards and gems. Would you like her to create an epic item and in that case which?");// legendary

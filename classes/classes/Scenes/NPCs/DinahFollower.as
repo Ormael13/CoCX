@@ -385,15 +385,15 @@ import classes.internals.Utils;
 				if (player.hasKeyItem("HB Armor Plating") >= 0) {
 					if (player.keyItemv1("HB Armor Plating") == 1) addButton(0, "Armor Plating v2", buyHowlingBansheeMechUpgrade, "Armor Plating v2", 2500).hint("Increase armor by 25.");
 					if (player.keyItemv1("HB Armor Plating") == 2) addButton(0, "Armor Plating v3", buyHowlingBansheeMechUpgrade, "Armor Plating v3", 3500).hint("Increase armor by 35.");
-					//4500 v4
-					if (player.keyItemv1("HB Armor Plating") == 3) addButtonDisabled(0, "Armor Plating v3", "Your HB Mech already have this upgrade.");
+					if (player.keyItemv1("HB Armor Plating") == 3) addButton(0, "Armor Plating v3", buyHowlingBansheeMechUpgrade, "Armor Plating v4", 4500).hint("Increase armor by 45.");
+					if (player.keyItemv1("HB Armor Plating") == 4) addButtonDisabled(0, "Armor Plating v4", "Your HB Mech already have this upgrade.");
 				}
 				else addButton(0, "Armor Plating v1", buyHowlingBansheeMechUpgrade, "Armor Plating v1", 1500).hint("Increase armor by 15.");
 				if (player.hasKeyItem("HB Leather Insulation") >= 0) {
 					if (player.keyItemv1("HB Leather Insulation") == 1) addButton(1, "Leather Insulation v2", buyHowlingBansheeMechUpgrade, "Leather Insulation v2", 2500).hint("Increase magic resistance by 25.");
 					if (player.keyItemv1("HB Leather Insulation") == 2) addButton(1, "Leather Insulation v3", buyHowlingBansheeMechUpgrade, "Leather Insulation v3", 3500).hint("Increase magic resistance by 35.");
-					//4500 v4
-					if (player.keyItemv1("HB Leather Insulation") == 3) addButtonDisabled(1, "Leather Insulation v3", "Your HB Mech already have this upgrade.");
+					if (player.keyItemv1("HB Leather Insulation") == 3) addButton(1, "Leather Insulation v4", buyHowlingBansheeMechUpgrade, "Leather Insulation v3", 4500).hint("Increase magic resistance by 45.");
+					if (player.keyItemv1("HB Leather Insulation") == 4) addButtonDisabled(1, "Leather Insulation v4", "Your HB Mech already have this upgrade.");
 				}
 				else addButton(1, "Leather Insulation v1", buyHowlingBansheeMechUpgrade, "Leather Insulation v1", 1500).hint("Increase magic resistance by 15.");
 				if (player.hasKeyItem("HB Agility") >= 0) {
@@ -412,12 +412,17 @@ import classes.internals.Utils;
 					else addButton(5, "Internal Systems v2", buyHowlingBansheeMechUpgrade, "Internal Systems v2", 1500).hint("Decrease mech SF reserves drain by 20 pts and max SF capacity by 5,000 (when PC wear Ayo armor).");
 				}
 				else addButton(5, "Internal Systems v1", buyHowlingBansheeMechUpgrade, "Internal Systems v1", 750).hint("Decrease mech SF reserves drain by 10 pts and max SF capacity by 2,000 (when PC wear Ayo armor).");
-				if (player.hasKeyItem("HB Dragon's Breath Flamer") >= 0) addButtonDisabled(6, "DB Flamer v1", "Your HB Mech already have this upgrade.");/*{
-					if (player.keyItemv1("HB Stealth System") == 1) addButtonDisabled(10, "Invisibility Mode", "Your HB Mech already have this upgrade.");
-					else addButton(10, "Invisibility Mode", buyHowlingBansheeMechUpgrade, "Invisibility Mode", 5000).hint("Upgrades Camouflage Mode to Invisibility Mode. ");
-				}*/
+				if (player.hasKeyItem("HB Dragon's Breath Flamer") >= 0) {
+					if (player.keyItemv1("Dragon's Breath Flamer") == 1) addButtonDisabled(6, "DB Flamer v2", "Your HB Mech already have this upgrade.");
+					else addButton(6, "DB Flamer v2", buyHowlingBansheeMechUpgrade, "Dragon's Breath Flamer v2", 3000).hint("Instal second Dragon's Breath Flamer weapon - adds second fire attack when using this special and cost of use increase twicefold.");
+				}
 				else addButton(6, "DB Flamer v1", buyHowlingBansheeMechUpgrade, "Dragon's Breath Flamer v1", 1500).hint("Add Dragon's Breath Flamer weapon - Allow to enter use special dealing fire damage.");
-				//7
+				if (player.hasKeyItem("HB Scatter Laser") >= 0) {
+					if (player.keyItemv1("HB Scatter Laser") == 1) addButton(7, "Scatter Laser v2", buyHowlingBansheeMechUpgrade, "Scatter Laser v2", 2500).hint("Adds 2 more units that allow either double shot at lone targets or using all three against groups.");
+					if (player.keyItemv1("HB Scatter Laser") == 2) addButton(7, "Scatter Laser v3", buyHowlingBansheeMechUpgrade, "Scatter Laser v3", 3500).hint("Adding 3 more units that allow either four shots at lone targets or using all six against groups.");
+					if (player.keyItemv1("HB Scatter Laser") == 3) addButtonDisabled(7, "Scatter Laser v3", "Your HB Mech already have this upgrade.");
+				}
+				else addButton(7, "Scatter Laser v1", buyHowlingBansheeMechUpgrade, "Scatter Laser v1", 1500).hint("Add Scatter Laser weapon - Allow to enter use special dealing lightning damage.");
 				//8
 				//9 - for prev button?
 				if (player.hasKeyItem("HB Stealth System") >= 0) addButtonDisabled(10, "Camouflage Mode", "Your HB Mech already have this upgrade.");/*{
@@ -425,12 +430,11 @@ import classes.internals.Utils;
 					else addButton(10, "Invisibility Mode", buyHowlingBansheeMechUpgrade, "Invisibility Mode", 5000).hint("Upgrades Camouflage Mode to Invisibility Mode. ");
 				}*/
 				else addButton(10, "Camouflage Mode", buyHowlingBansheeMechUpgrade, "Camouflage Mode", 2000).hint("Enable Camouflage Mode - Allow to enter 1 turn long camouflage opening option to use Sneak Attack (melee & range) specials.");
+				//11
+				//12
+				//13
 			}
 			else addButton(0, vehicles.HB_MECH.shortName, buyHowlingBansheeMech).hint("Buy HB Mech - Increase armor by 15, magic resistance by 15.");
-				//addButtonDisabled(11, "Req. to buy HM Mech first.");
-				//addButtonDisabled(12, "Req. to buy HM Mech first.");
-				//addButtonDisabled(13, "Req. to buy HM Mech first.");
-			//}
 			addButton(14, "Back", DinahShopMainMenu);
 		}
 		public function buyHowlingBansheeMech():void {
@@ -470,19 +474,25 @@ import classes.internals.Utils;
 			if (upgrade == "Armor Plating v1") player.createKeyItem("HB Armor Plating",1,0,0,0);
 			if (upgrade == "Armor Plating v2") player.addKeyValue("HB Armor Plating",1,1);
 			if (upgrade == "Armor Plating v3") player.addKeyValue("HB Armor Plating",1,1);
+			if (upgrade == "Armor Plating v4") player.addKeyValue("HB Armor Plating",1,1);
 			if (upgrade == "Leather Insulation v1") player.createKeyItem("HB Leather Insulation",1,0,0,0);
 			if (upgrade == "Leather Insulation v2") player.addKeyValue("HB Leather Insulation",1,1);
 			if (upgrade == "Leather Insulation v3") player.addKeyValue("HB Leather Insulation",1,1);
+			if (upgrade == "Leather Insulation v4") player.addKeyValue("HB Leather Insulation",1,1);
 			if (upgrade == "Agility v1") player.createKeyItem("HB Agility",0,0,0,0);
 			if (upgrade == "Agility v2") player.addKeyValue("HB Agility",1,1);
-			if (upgrade == "Dragon's Breath Flamer v1") player.createKeyItem("HB Dragon's Breath Flamer",1,0,0,0);
-			//if (upgrade == "Dragon's Breath Flamer v2") player.addKeyValue("HB Dragon's Breath Flamer",1,1);
 			if (upgrade == "Rapid Reload v1") player.createKeyItem("HB Rapid Reload",0,0,0,0);
 			if (upgrade == "Rapid Reload v2") player.addKeyValue("HB Rapid Reload",1,1);
 			if (upgrade == "Internal Systems v1") player.createKeyItem("HB Internal Systems",1,0,0,0);
 			if (upgrade == "Internal Systems v2") player.addKeyValue("HB Internal Systems",1,1);
+			if (upgrade == "Dragon's Breath Flamer v1") player.createKeyItem("HB Dragon's Breath Flamer",1,0,0,0);
+			if (upgrade == "Dragon's Breath Flamer v2") player.addKeyValue("HB Dragon's Breath Flamer",1,1);
+			if (upgrade == "Scatter Laser v1") player.createKeyItem("HB Scatter Laser",1,0,0,0);
+			if (upgrade == "Scatter Laser v2") player.addKeyValue("HB Scatter Laser",1,1);
+			if (upgrade == "Scatter Laser v3") player.addKeyValue("HB Scatter Laser",1,1);
 			if (upgrade == "Camouflage Mode") player.createKeyItem("HB Stealth System",0,0,0,0);
-			//if (upgrade == "Invisibility Mode") player.addKeyValue("HB Stealth System",1,1);
+			//if (upgrade == "Invisibility Mode") player.addKeyValue("HB Stealth System",1,1);wymaga internal systems v1
+			//if (upgrade == "") ;
 			//if (upgrade == "") ;
 			//if (upgrade == "") ;
 			//if (upgrade == "") ;

@@ -156,7 +156,7 @@ import classes.Scenes.SceneLib;
 				//this.createPerk(PerkLib., 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.NEISA_LVL_UP] >= 3) {
-				this.createPerk(PerkLib.CatlikeNimblenessEvolved, 0, 0, 0, 0);
+				this.createPerk(MutationsLib.CatlikeNimblenessPrimitive, 0, 0, 0, 0);
 				this.createPerk(MutationsLib.GorgonsEyesPrimitive, 0, 0, 0, 0);
 				this.createPerk(MutationsLib.DraconicLungsPrimitive, 0, 0, 0, 0);
 				this.createPerk(MutationsLib.LizanMarrowPrimitive, 0, 0, 0, 0);

@@ -6416,6 +6416,7 @@ public function rebirthFromBadEnd():void {
 		if (player.necklace.value >= 5000) awardAchievement("Ka-Ching!", kACHIEVEMENTS.FASHION_KA_CHING);
 		if (player.headJewelry.value >= 4000) awardAchievement("Royalty", kACHIEVEMENTS.FASHION_ROYALTY);
 		if (player.armor == armors.G_DIVES && player.weapon == weapons.SDRILL && player.shield == ShieldLib.NOTHING && player.hasPerk(PerkLib.PrestigeJobSpellKnight)) awardAchievement("Subject Delta", kACHIEVEMENTS.FASHION_SUBJECT_DELTA);
+		if (player.armor == armors.SAMUARM && player.weapon == weapons.DAISHO && player.headJewelry == headjewelries.KABUMEMP) awardAchievement("Bushido - the way of the warrior", kACHIEVEMENTS.FASHION_BUSHIDO_THE_WAY_OF_THE_WARRIOR);
 
 		//Wealth
 		if (player.gems >= 1000) awardAchievement("Rich", kACHIEVEMENTS.WEALTH_RICH);
