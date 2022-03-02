@@ -163,6 +163,8 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		menu();
 		addButton(0,"Appearance",celessChildAppearance)
 		if (isAdult) {
+			outputText("\n\n<i>\"I just remembered about it but with my newly aquired powers I can actualy create powerful items for you, real actual artefacts. Should you ever find <b>radiant shards</b> and a decent medium I could use my innate magic to craft an armament of legend. Simply ask out if you ever want one." +
+					" Don't ask about how I know about that even I am not sure about it. I do believe it's just innate knowledge or something my dad magicaly passed down on to me.\"</i>");
 			if (isCorrupt || player.cor >= 20) {
 				addButton(1, "Incest", incestMenu);
 			}
