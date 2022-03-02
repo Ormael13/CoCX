@@ -356,8 +356,9 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			[shields.SANCTYN, shields.SANCTYL, shields.SANCTYD]
 		];
 		clearOutput();
-		outputText("<b>"+_name+" can empower items using materials gems and her innate magic to bless/corrupt gear. Would you like her to create an epic item and in that case which?</b>");// legendary
-//Celess
+		outputText(""+_name+" can empower items using materials gems and her innate magic to bless or corrupt gear by using radiant shards and gems. Would you like her to create an epic item and in that case which?");// legendary
+		outputText("\n\n<b>You currently have "+player.keyItemv1("Radiant shard")+" radiant shards.</b>")
+		//Celess
 		var selectfrom:int = isCorrupt ? 2 : 1;
 		var selectMenu:ButtonDataList = new ButtonDataList();
 		for (var i:int = 0; i < improvableItems.length; i++) {
@@ -366,27 +367,32 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			else {
 				var item:ItemType = improvableItems[i][selectfrom];
 				var from:ItemType = improvableItems[i][0];
-				selectMenu.add(item.id, curry(improveItem, item, from)).disableIf(!player.hasItem(from));
+				selectMenu.add(item.id, curry(improveItem, item, from)).disableIf(!player.hasItem(from) || (player.keyItemv1("Radiant shard") < 2) || player.gems < 10000,"You need a "+from+" as a base to create this item")
+				.disableIf(player.keyItemv1("Radiant shard") < 2,"You need at least two radiant shards in order to create this item.")
+				.disableIf(player.gems < 10000,"You need at least 20 000 gems in order to create this item");
 			}
 		}
 		submenu(selectMenu, campInteraction);
 
 		function improveItem(item:ItemType, from:ItemType):void {
 			outputText("You ask " + _name + " if she could imbue an item with her power.\n\n"+
-			"<i>\"Certainly mother! Just leave the item on the ground and let me get to work.\"</i>\n\n"+
+			"<i>\"Certainly mother! Just leave the items on the ground and let me get to work.\"</i>\n\n"+
 			_name + " trots over to the item and starts channeling power.");
 			if (isCorrupt){
 				outputText("You see her twin horns blazing with a dark purple aura of corruption as her horse cock goes erect. "+
 				"She start to massage her breasts then moans, her eyes rolling out as she spontaneously orgasms, a river of black cum flooding out of her flare right unto the item. "+
-				"You see the armament transforming as fluid corruption seeps into the material, infusing it with unholy power.\n\n"+
+				"You see the item, gems and shards transforming as fluid corruption seeps into the material, infusing it with unholy power.\n\n"+
 				"She sighs in relief, shakes out the few last drops of corrupt cum, then steps away, leaving you to examine the fruit of her work.");
 			}
 			else{
 				outputText("Her horns starts to glow with a white halo of purity. "+
 				"She cradles the item within her hands like a newborn baby, then finally touches it with her horns, transferring the light into it. "+
-				"A miracle happens, as the item changes shape and starts to glow with holy power.\n\n" +
+				"A miracle happens, as the armament, gems and shards combines, changes shape and starts to glow with holy power.\n\n" +
 				"Finally done, she comes back to you and solemnly deposits the blessed armament in your hand.");
 			}
+			if(player.keyItemv1("Radiant shard") == 2) player.removeKeyItem("Radiant shard");
+			else player.addKeyValue("Radiant shard",1,-2);
+			player.gems -= 20000;
 			player.destroyItems(from, 1);
 			inventory.takeItem(item, camp.returnToCampUseOneHour);
 		}
