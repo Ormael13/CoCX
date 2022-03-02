@@ -918,7 +918,7 @@ public class GoblinElderScene extends BaseContent
 			outputText("You ask the goblin if she wouldn't mind talking. ");
 			if (flags[kFLAGS.GOBLIN_ELDER_TALK_COUNTER] == 0) {
 				outputText("What is she anyway? How is she unusual from the other goblins? Of all the goblins you've seen, she isn't as sexually inclined.");
-				outputText("\n\n\"<i>Of course. My name is Priscilla and I've travelled a lot and I have slain a lot of imps, hellhounds, and minotaurs. The demons must pay for the damage caused to my race and I worked hard to keep my mind off constant sexual desires. I gave birth to hundreds of goblins but I keep my boobs normal with Reducto. I still have unfinished business,</i>\" she says.");
+				outputText("\n\n\"<i>Of course. My name is Priscilla and I've traveled a lot and I have slain a lot of imps, hellhounds, and minotaurs. The demons must pay for the damage caused to my race and I worked hard to keep my mind off constant sexual desires. I gave birth to hundreds of goblins but I keep my boobs normal with Reducto. I still have unfinished business,</i>\" she says.");
 				outputText("\n\nWhat are her current goals then?");
 				outputText("\n\n\"<i>I'm seeking out someone who's not corrupt so I can give birth to less-tainted goblin. My tribe is isolated from the corrupted Goblin societies and I tried to brew a purifying potion but to no avail" + ((flags[kFLAGS.LETHICE_DEFEATED] > 0) ? ". I did hear the news that you have defeated Lethice. You're my saviour and I'll be forever grateful at you for causing a major blow against the demons" : "") + ",</i>\" the goblin says.");
 			}
