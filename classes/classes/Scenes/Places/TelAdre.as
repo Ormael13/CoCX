@@ -1159,9 +1159,10 @@ public function kaibaShopMainMenu2():void {
 			addButtonDisabled(5, "Hodr's bow", "You already bought item from Kaiba today.");
 			addButtonDisabled(6, "Avelynn", "You already bought item from Kaiba today.");
 			addButtonDisabled(7, "Oni enchanted drinking jug", "You already bought item from Kaiba today.");
-			addButtonDisabled(8, "Oni Noble Kimono", "You already bought item from Kaiba today.");
-			addButtonDisabled(9, "Oni Tyrant Kimono", "You already bought item from Kaiba today.");
-			addButtonDisabled(10, "Demon tail ring", "You already bought item from Kaiba today.");
+			addButtonDisabled(8, "Storm Ruler", "You already bought item from Kaiba today.");
+			addButtonDisabled(10, "Oni Noble Kimono", "You already bought item from Kaiba today.");
+			addButtonDisabled(11, "Oni Tyrant Kimono", "You already bought item from Kaiba today.");
+			addButtonDisabled(12, "Demon tail ring", "You already bought item from Kaiba today.");
 		}
 		else {
 			addButton(2, "C.S.Necklace", buyItem, necklaces.CSNECK).hint("Crinos Shape necklace - Allow PC to use Crinos Shape even without perk Job: Beast Warrior with wrath costs and boost as the one gained from picking Job: Beast Warrior.");
@@ -1169,10 +1170,11 @@ public function kaibaShopMainMenu2():void {
 			addButton(4, "Soul Drill", buyItem, weapons.SDRILL).hint("Soul Drill - 1H large weapon that can deal more damage the more soulforce is feed to it each turn.");
 			addButton(5, "Hodr's bow", buyItem, weaponsrange.BOWHODR).hint("Hodr's bow - Bow that would apply blindess status or deal increased damage to blinded targets.");
 			addButton(6, "Avelynn", buyItem, weaponsrange.AVELYNN).hint("Avelynn - Crossbow that will shoot two additional bolts each time.");
-			addButton(7, "Oni enchanted drinking gourd", buyItem, miscjewelries.ONI_GOURD).hint("A magical drinking gourd beloved by onis. Suposedly it greatly increases its users attack power but also grants an endless supply of fresh drinks!");
-			addButton(8, "Oni Noble Kimono", buyItem, armors.OEKIMO).hint("The garbs of an oni noble. Suposedly it was stolen from an oni somewhere in the high mountain before being sold to kaiba by an unicorn. This is a temporary sale.");
-			addButton(9, "Oni Tyrant Kimono", buyItem, armors.OTKIMO).hint("The garbs of an oni tyrant. Suposedly it was stolen from an oni somewhere in the high mountain before being sold to kaiba by an unicorn. This is a temporary sale.");
-			addButton(10, "Demon tail ornament", buyItem, miscjewelries.DMAGETO).hint("This golden band covered with black magic incantation is big enough for an arm bracelet but was designed so it could serve as a ornament for a demon tail. This is a temporary sale.");
+			addButton(7, "Oni enchanted drinking gourd", buyItem, miscjewelries.ONI_GOURD).hint("Oni enchanted drinking gourd - A magical drinking gourd beloved by onis. Suposedly it greatly increases its users attack power but also grants an endless supply of fresh drinks!");
+			addButton(8, "Storm Ruler", buyItem, weapons.S_RULER).hint("Storm Ruler - It's large sized weapon belonging to mace/hammer type with 10% chance to trigger stun effect. It deal lightning type of damage and 50% more damage to huge or larger enemies. Additionally have Body's Cultivator (20%).");
+			addButton(10, "Oni Noble Kimono", buyItem, armors.OEKIMO).hint("The garbs of an oni noble. Suposedly it was stolen from an oni somewhere in the high mountain before being sold to kaiba by an unicorn. This is a temporary sale.");
+			addButton(11, "Oni Tyrant Kimono", buyItem, armors.OTKIMO).hint("The garbs of an oni tyrant. Suposedly it was stolen from an oni somewhere in the high mountain before being sold to kaiba by an unicorn. This is a temporary sale.");
+			addButton(12, "Demon tail ornament", buyItem, miscjewelries.DMAGETO).hint("This golden band covered with black magic incantation is big enough for an arm bracelet but was designed so it could serve as a ornament for a demon tail. This is a temporary sale.");
 		}
 		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
 		addButton(13, "-3-", kaibaShopMainMenuPage3);
@@ -1336,18 +1338,19 @@ public function tripxiShopMainMenu2a():void {
 	menu();
 	addButton(0, weaponsrange.FLINTLK.shortName, buyItemT1, weaponsrange.FLINTLK);
 	addButton(1, weaponsrange.BLUNDER.shortName, buyItemT1, weaponsrange.BLUNDER);
-	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns1) > 0) addButton(2, weaponsrange.DESEAGL.shortName, buyItemT1, weaponsrange.DESEAGL);
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) addButtonDisabled(2, "???", "Search the Desert. (lvl 6+)");
-	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns2) > 0) addButton(3, weaponsrange.M1CERBE.shortName, buyItemT1, weaponsrange.M1CERBE);
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2)) addButtonDisabled(3, "???", "Search the Swamp.");
-	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns3) > 0) addButton(4, weaponsrange.TRFATBI.shortName, buyItemT1, weaponsrange.TRFATBI);
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns3)) addButtonDisabled(4, "???", "Search the Volcanic Crag.");
-	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns4) > 0) addButton(5, weaponsrange.SNIPPLE.shortName, buyItemT1, weaponsrange.SNIPPLE);
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns4)) addButtonDisabled(5, "???", "Search the Plains.");
-	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns5) > 0) addButton(6, weaponsrange.TOUHOM3.shortName, buyItemT1, weaponsrange.TOUHOM3);
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns5)) addButtonDisabled(6, "???", "Search the Caves.");
-	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns6) > 0) addButton(7, weaponsrange.TWINGRA.shortName, buyItemT1, weaponsrange.TWINGRA);
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns6)) addButtonDisabled(7, "???", "Search the Battlefield(B).");
+	addButton(2, weaponsrange.DUEL_P_.shortName, buyItemT1, weaponsrange.DUEL_P_);
+	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns1) > 0) addButton(4, weaponsrange.DESEAGL.shortName, buyItemT1, weaponsrange.DESEAGL);
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) addButtonDisabled(4, "???", "Search the Desert. (lvl 6+)");
+	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns2) > 0) addButton(5, weaponsrange.M1CERBE.shortName, buyItemT1, weaponsrange.M1CERBE);
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2)) addButtonDisabled(5, "???", "Search the Swamp.");
+	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns3) > 0) addButton(6, weaponsrange.TRFATBI.shortName, buyItemT1, weaponsrange.TRFATBI);
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns3)) addButtonDisabled(6, "???", "Search the Volcanic Crag.");
+	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns4) > 0) addButton(7, weaponsrange.SNIPPLE.shortName, buyItemT1, weaponsrange.SNIPPLE);
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns4)) addButtonDisabled(7, "???", "Search the Plains.");
+	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns5) > 0) addButton(8, weaponsrange.TOUHOM3.shortName, buyItemT1, weaponsrange.TOUHOM3);
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns5)) addButtonDisabled(8, "???", "Search the Caves.");
+	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns6) > 0) addButton(9, weaponsrange.TWINGRA.shortName, buyItemT1, weaponsrange.TWINGRA);
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns6)) addButtonDisabled(9, "???", "Search the Battlefield(B).");
 	addButtonDisabled(10, "-1-", "Shelf 1");
 	addButton(11, "-2-", tripxiShopMainMenu2b);
 	addButton(12, "-3-", tripxiShopMainMenu2c);
@@ -1358,16 +1361,16 @@ public function tripxiShopMainMenu2b():void {
 	menu();
 	addButton(0, weaponsrange.ADBSHOT.shortName, buyItemT1, weaponsrange.ADBSHOT);
 	addButton(1, weaponsrange.ADBSCAT.shortName, buyItemT1, weaponsrange.ADBSCAT);
-	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns1) > 0) addButton(2, weaponsrange.DPISTOL.shortName, buyItemT2, weaponsrange.DPISTOL);
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) addButtonDisabled(2, "???", "Search the Blight Ridge.");
-	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns2) > 0) addButton(3, weaponsrange.TDPISTO.shortName, buyItemT2, weaponsrange.TDPISTO);
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2)) addButtonDisabled(3, "???", "Search the Defiled Ravine.");
-	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns3) > 0) addButton(4, weaponsrange.HARPGUN.shortName, buyItemT2, weaponsrange.HARPGUN);
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns3)) addButtonDisabled(4, "???", "Search the Beach.");
-	//5 - Sakuno M2
-	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns5) > 0) addButton(6, weaponsrange.DERPLAU.shortName, buyItemT2, weaponsrange.DERPLAU);
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns5)) addButtonDisabled(6, "???", "Search the Mountains.");
-	//7 - Tediore pistol
+	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns1) > 0) addButton(4, weaponsrange.DPISTOL.shortName, buyItemT2, weaponsrange.DPISTOL);
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) addButtonDisabled(4, "???", "Search the Blight Ridge.");
+	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns2) > 0) addButton(5, weaponsrange.TDPISTO.shortName, buyItemT2, weaponsrange.TDPISTO);
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2)) addButtonDisabled(5, "???", "Search the Defiled Ravine.");
+	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns3) > 0) addButton(6, weaponsrange.HARPGUN.shortName, buyItemT2, weaponsrange.HARPGUN);
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns3)) addButtonDisabled(6, "???", "Search the Beach.");
+	//7 - Sakuno M2
+	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns5) > 0) addButton(8, weaponsrange.DERPLAU.shortName, buyItemT2, weaponsrange.DERPLAU);
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns5)) addButtonDisabled(8, "???", "Search the Mountains.");
+	//9 - Tediore pistol
 	addButton(10, "-1-", tripxiShopMainMenu2a);
 	addButtonDisabled(11, "-2-", "Shelf 2");
 	addButton(12, "-3-", tripxiShopMainMenu2c);
@@ -1376,12 +1379,13 @@ public function tripxiShopMainMenu2b():void {
 
 public function tripxiShopMainMenu2c():void {
 	menu();
-	addButton(0, weaponsrange.DUEL_P_.shortName, buyItemT1, weaponsrange.DUEL_P_);
-	addButton(1, weaponsrange.IVIARG_.shortName, buyItemT1, weaponsrange.IVIARG_);
-	if (player.statusEffectv3(StatusEffects.TelAdreTripxiGuns1) > 0) addButton(2, weaponsrange.DBDRAGG.shortName, buyItemT3, weaponsrange.DBDRAGG);
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) addButtonDisabled(2, "???", "Search the Volcanic Crag.");
-	if (player.statusEffectv3(StatusEffects.TelAdreTripxiGuns2) > 0) addButton(3, weaponsrange.LBLASTR.shortName, buyItemT3, weaponsrange.LBLASTR);
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2)) addButtonDisabled(3, "???", "Search the Mountains.");
+	addButton(0, weaponsrange.IVIARG_.shortName, buyItemT1, weaponsrange.IVIARG_);
+	addButton(1, weaponsrange.HARKON1.shortName, buyItemT1, weaponsrange.HARKON1);
+	if (player.statusEffectv3(StatusEffects.TelAdreTripxiGuns1) > 0) addButton(4, weaponsrange.DBDRAGG.shortName, buyItemT3, weaponsrange.DBDRAGG);
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) addButtonDisabled(4, "???", "Search the Volcanic Crag.");
+	if (player.statusEffectv3(StatusEffects.TelAdreTripxiGuns2) > 0) addButton(5, weaponsrange.LBLASTR.shortName, buyItemT3, weaponsrange.LBLASTR);
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2)) addButtonDisabled(5, "???", "Search the Mountains.");
+	//6 lub 7 - Harkonnen II - BP req. from some dark place/area?
 	//addButton(0, weaponsrange.FLINTLK.shortName, buyItemT3, weaponsrange.);
 	//addButton(1, weaponsrange.FLINTLK.shortName, buyItemT3, weaponsrange.);
 

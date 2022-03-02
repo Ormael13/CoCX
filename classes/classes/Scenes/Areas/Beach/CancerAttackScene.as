@@ -4,7 +4,7 @@
  */
 package classes.Scenes.Areas.Beach 
 {
-	import classes.*;
+import classes.*;
 import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kFLAGS;
 import classes.display.SpriteDb;

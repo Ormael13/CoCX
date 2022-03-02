@@ -13,15 +13,12 @@ import classes.PerkLib;
 import classes.MutationsLib;
 import classes.PerkTree;
 import classes.PerkType;
-import classes.Perks.AscensionOrganMutationX;
 import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects;
 import flash.utils.Dictionary;
 import flash.events.TextEvent;
 
-
-import coc.view.ButtonDataList;
 import flash.events.MouseEvent;
 
 public class PerkMenu extends BaseContent {
@@ -802,10 +799,10 @@ public class PerkMenu extends BaseContent {
 					"\nNote: Not all body parts will use all available slots.\n\n");
 
 			outputText("<b><i><u>Mutations used per bodypart:</u></i></b>\n");
-			var bPartlist:Array = ["Heart", "Muscle", "Mouth", "Adrenals", "Bloodstream", "FaT", "Lungs", "Metabolism", "Ovaries", "Testicles", "Eyes", "Nerv/Sys", "Bone", "Thyroid"]//, "PThyroid"
+			var bPartlist:Array = ["Heart", "Muscle", "Mouth", "Adrenals", "Bloodstream", "FaT", "Lungs", "Metabolism", "Ovaries", "Testicles", "Eyes", "Bone", "PNerv/Sys", "CNerv/Sys", "Thyroid", "PThyroid", "Adaptations"]
 			for each (var bodyPart:String in bPartlist){
 				var mCount:int = 0
-				var mPerkarray:Array = MutationsLib.mutationsArray(bodyPart)
+				var mPerkarray:Array = MutationsLib.mutationsArray(bodyPart);
 				for each (var pPerk:Array in mPerkarray){
 					if (player.hasPerk(pPerk[0])){
 						mCount++;
@@ -951,21 +948,31 @@ public class PerkMenu extends BaseContent {
 			mutationsDatabase();
 		}
 
-		function mutationsDBPNervSys():void{
-			clearOutput();
-			//Peripheral/NervSys Mutations
-			displayHeader("Peripheral Nervous System Mutations");
-			for each (var mutate:Array in MutationsLib.mutationsArray("Nerv/Sys")){
-				mutationsDatabaseVerify(mutate);
-			}
-			mutationsDatabase();
-		}
-
 		function mutationsDBBoneMarrow():void{
 			clearOutput();
 			//Bones and Marrow Mutations
 			displayHeader("Bones and Marrow Mutations");
 			for each (var mutate:Array in MutationsLib.mutationsArray("Bone")){
+				mutationsDatabaseVerify(mutate);
+			}
+			mutationsDatabase();
+		}
+
+		function mutationsDBPNervSys():void{
+			clearOutput();
+			//Peripheral/NervSys Mutations
+			displayHeader("Peripheral Nervous System Mutations");
+			for each (var mutate:Array in MutationsLib.mutationsArray("PNerv/Sys")){
+				mutationsDatabaseVerify(mutate);
+			}
+			mutationsDatabase(1);
+		}
+
+		function mutationsDBCNervSys():void{
+			clearOutput();
+			//Central/NervSys Mutations
+			displayHeader("Central Nervous System Mutations");
+			for each (var mutate:Array in MutationsLib.mutationsArray("CNerv/Sys")){
 				mutationsDatabaseVerify(mutate);
 			}
 			mutationsDatabase(1);
@@ -986,6 +993,16 @@ public class PerkMenu extends BaseContent {
 			//ParaThyroid Glands Mutations.
 			displayHeader("ParaThyroid Glands Mutations");
 			for each (var mutate:Array in MutationsLib.mutationsArray("PThyroid")){
+				mutationsDatabaseVerify(mutate);
+			}
+			mutationsDatabase(1);
+		}
+
+		function mutationsDBAdaptations():void{
+			clearOutput();
+			//Adaptation Mutations.
+			displayHeader("Adaptation Mutations");
+			for each (var mutate:Array in MutationsLib.mutationsArray("Adaptations")){
 				mutationsDatabaseVerify(mutate);
 			}
 			mutationsDatabase(1);
@@ -1027,13 +1044,15 @@ public class PerkMenu extends BaseContent {
 		menuItems.push("Ovaries", mutationsDBOvaries, "Ovaries Mutations");
 		menuItems.push("Testicles", mutationsDBTesticles, "Testicle Mutations");
 		menuItems.push("Eyes", mutationsDBEyes, "Eyes Mutations");
-		menuItems.push("Nerv/Sys", mutationsDBPNervSys, "PNerv-Sys Mutations");
+		menuItems.push("Bone/Marrow", mutationsDBBoneMarrow, "Bone Mutations");
 		// Due to not being able to return which page I am at in submenu,
 		// I cannot keep the menu to be at a specific page beyond this.
 		// Thus, hardcoded into the function.
-		menuItems.push("Bone/Marrow", mutationsDBBoneMarrow, "Bone Mutations");
+		menuItems.push("PNerv/Sys", mutationsDBPNervSys, "PNerv-Sys Mutations");
+		menuItems.push("CNerv/Sys", mutationsDBCNervSys, "CNerv-Sys Mutations");
 		menuItems.push("Thyroid Gland", mutationsDBThyroidGlands, "Thyroid Mutations");
-		//menuItems.push("Parathyroid Gland", mutationsDBParathyroid);
+		menuItems.push("Parathyroid Gland", mutationsDBParathyroid, "Parathyroid Mutations");
+		menuItems.push("Adaptations", mutationsDBAdaptations, "Adaptation Mutations");
 		menuItems.push("Dragons", mutationsDBDragon, "Dragon Mutations");
 		menuItems.push("Kitsunes", mutationsDBKitsune, "Kitsune Mutations");
 		menuGen(menuItems, page, displayPerks, false);

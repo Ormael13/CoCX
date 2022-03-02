@@ -9,6 +9,8 @@ import classes.*;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
+import classes.Items.Armors.LustyMaidensArmor;
+import classes.Items.Armors.SuccubusArmor;
 import classes.Scenes.Areas.DefiledRavine.CowSuccubus;
 import classes.Scenes.Areas.DefiledRavine.MinoIncubus;
 import classes.Scenes.Camp.CampMakeWinions;
@@ -40,6 +42,10 @@ import classes.Scenes.UniqueSexScenes;
 			menu();
 			outputText("You smile in satisfaction as the mino incubus collapses, unable to continue fighting.");
 			if (monster.HP < 1) addButton (5, "Kill Him", killDemon);
+			if (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armor == armors.LMARMOR || player.armor == armors.S_ARMOR)) {
+				if (player.armor == armors.S_ARMOR) addButton(7, "B.Titfuck", (player.armor as SuccubusArmor).succubusPaizuri);
+				else addButton(7, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
+			}
 			if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(2);
 			addButton (14, "Leave", cleanupAfterCombat);
 		}
@@ -64,7 +70,7 @@ import classes.Scenes.UniqueSexScenes;
 					addButton (3, "Catch Anal", FactoryScene.doRideIncubusAnally);
 				}
 				if (player.gender == 2) {
-					if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor == armors.LMARMOR) addButton(0, "B.Titfuck", lustyPaizuri);
+					if (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armor == armors.LMARMOR || player.armor == armors.S_ARMOR)) addButton(0, "B.Titfuck", lustyPaizuri);
 					addButton (1, "F. Fuck", IncubusGetsRapedByFemale);
 					addButton (2, "Service Him", GiveIncubusOral);
 					addButton (3, "Catch Anal", FactoryScene.doRideIncubusAnally);
@@ -75,7 +81,6 @@ import classes.Scenes.UniqueSexScenes;
 					addButton (2, "Service Him", GiveIncubusOral);
 					addButton (3, "Catch Anal", FactoryScene.doRideIncubusAnally);
 				}
-				//if (player.lowerBody == LowerBody.PLANT_FLOWER) addButton(7, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
 			}
 			if (monster.HP < 1) addButton (5, "Kill Him", killDemon);
 			if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(3);
@@ -325,11 +330,11 @@ import classes.Scenes.UniqueSexScenes;
 			if (player.lust>=33 && player.gender > 0) {
 				outputText("\nNow would be the perfect opportunity to taste the fruits of her sex-ready form...\n\nDo you fuck her?");
 				if (player.gender == 1 || player.gender == 3) addButton (0, "M. Fuck", OmnibusGetsRapedByMale);
-				if (player.gender == 2 || player.gender == 3) addButton (1, "F. Fuck", OmnibusGetsRapedByFemale);/*
-				if (player.lowerBody == LowerBody.PLANT_FLOWER) {
-					addButton(2, "Seeding", uniquuuesexscene.alrauneSeedingScene);
-					addButton(3, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
-				}*/
+				if (player.gender == 2 || player.gender == 3) addButton (1, "F. Fuck", OmnibusGetsRapedByFemale);
+				if (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armor == armors.LMARMOR || player.armor == armors.S_ARMOR)) {
+					if (player.armor == armors.S_ARMOR) addButton(2, "B.Titfuck", (player.armor as SuccubusArmor).succubusPaizuri);
+					else addButton(2, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
+				}
 			}
 			if (monster.HP < 1) addButton (5, "Kill Her", killDemon);
 			if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(4);

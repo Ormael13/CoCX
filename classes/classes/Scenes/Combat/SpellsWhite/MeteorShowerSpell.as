@@ -59,9 +59,11 @@ public class MeteorShowerSpell extends AbstractWhiteSpell{
 		return "~" + calcDamage(target,false, false)+ "(x12) fire damage."
 	}
 	
-	public function calcDamage(target:Monster, randomize:Boolean=true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)
+	public function calcDamage(target:Monster, randomize:Boolean=true, casting:Boolean = true):Number {
+		var baseDamage:Number = scalingBonusIntelligence(randomize)*2;
+		if (player.weaponRangeName == "Artemis") baseDamage *= 1.5;
 		return adjustSpellDamage(
-				scalingBonusIntelligence(randomize)*2,
+				baseDamage,
 				DamageType.FIRE,
 				CAT_SPELL_WHITE,
 				target,

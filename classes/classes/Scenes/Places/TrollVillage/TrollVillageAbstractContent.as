@@ -1,3 +1,7 @@
+/**
+ * @Author Pyromania
+ * Coded in by Jtecx, Jan/Feb 2022
+ */
 package classes.Scenes.Places.TrollVillage
 {
 import classes.*;

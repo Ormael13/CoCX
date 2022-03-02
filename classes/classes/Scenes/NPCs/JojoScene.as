@@ -2990,6 +2990,5 @@ public function afterDebimboTalk():void {
 	monk = -3; //probably should lock the sex before... but better to change bimbo acquisition first.
     doNext(playerMenu);
 }
-
 }
 }

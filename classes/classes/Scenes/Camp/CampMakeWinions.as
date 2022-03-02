@@ -1474,7 +1474,7 @@ public class CampMakeWinions extends BaseContent
 		}
 		private function elementalShardsConversionGo():void {
 			clearOutput();
-			outputText("You remove the elemental shard from your pack, taking it in both hands. You sit in the middle of your circle, the shard resting in your palms. You close your eyes, letting your mana spread into the crystal. As you focus your power, the crystal shatters, little pieces floating around your head. You can’t see, but you feel it as the shards liquify, crystal bits becoming globes, shimmering with power. With a thought, you will the globes down, into the leylines you’ve made in the ground, into the engravings of your circle. You feel the power settle, a magical pulse that you feel, ready to be unleashed. \n\n");
+			outputText("You remove the elemental shard from your pack, taking it in both hands. You sit in the middle of your circle, the shard resting in your palms. You close your eyes, letting your mana spread into the crystal. As you focus your power, the crystal shatters, little pieces floating around your head. You can’t see, but you feel it as the shards liquify, crystal bits becoming globes, shimmering with power. With a thought, you will the globes down, into the leylines you’ve made in the ground, into the engravings of your circle. You feel the power settle, a magical pulse that you feel, ready to be unleashed.\n\n");
 			player.destroyItems(useables.ELSHARD, 1);
 			var convertedShard:Number = 0;
 			if (player.statusEffectv1(StatusEffects.ElementalEnergyConduits) + 400 > player.statusEffectv2(StatusEffects.ElementalEnergyConduits)) convertedShard += (player.statusEffectv2(StatusEffects.ElementalEnergyConduits) - player.statusEffectv1(StatusEffects.ElementalEnergyConduits));
@@ -2400,4 +2400,4 @@ public class CampMakeWinions extends BaseContent
 		}
 	}
 }
-
+

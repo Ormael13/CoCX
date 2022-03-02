@@ -953,11 +953,7 @@ use namespace CoC;
 		}
 		public function StatsAscensionMenu():void {
 			menu();
-			addButton(0, "EarlyAscension", EarlyAscension).hint("Allowing to premature ascension.");
-			addButton(1, "AscenPerks01", AddAscensionPerkPoints1).hint("Add 1 ascension perk point for use during ascending to the next NG+ tier.");
-			addButton(2, "AscenPerks05", AddAscensionPerkPoints2).hint("Add 5 ascension perk points for use during ascending to the next NG+ tier.");
-			addButton(3, "AscenPerks10", AddAscensionPerkPoints3).hint("Add 10 ascension perk points for use during ascending to the next NG+ tier.");
-			addButton(4, "AscenPerks50", AddAscensionPerkPoints4).hint("Add 50 ascension perk points for use during ascending to the next NG+ tier.");
+			addButton(0, "Ascension", StatsAscensionMenu2);
 			addButton(5, "Str", StatsMenuStr).hint("Adj Str.");
 			addButton(6, "Tou", StatsMenuTou).hint("Adj Tou.");
 			addButton(7, "Spe", StatsMenuSpe).hint("Adj Spe.");
@@ -968,6 +964,18 @@ use namespace CoC;
 			addButton(12, "Sen", StatsMenuSen).hint("Adj Sen.");
 			addButton(13, "Cor", StatsMenuCor).hint("Adj Cor.");
 			addButton(14, "Back", SoulforceCheats);
+		}
+		public function StatsAscensionMenu2():void {
+			menu();
+			addButton(0, "EarlyAscension", EarlyAscension).hint("Allowing to premature ascension.");
+			addButton(1, "NG tier ++", IncreaseAscensionCounter).hint("Allowing to increase ascension counter.");
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0) addButton(2, "NG tier --", DecreaseAscensionCounter).hint("Allowing to decrease ascension counter.");
+			addButton(5, "AscenPerks01", AddAscensionPerkPoints1).hint("Add 1 ascension perk point for use during ascending to the next NG+ tier.");
+			addButton(6, "AscenPerks05", AddAscensionPerkPoints2).hint("Add 5 ascension perk points for use during ascending to the next NG+ tier.");
+			addButton(7, "AscenPerks10", AddAscensionPerkPoints3).hint("Add 10 ascension perk points for use during ascending to the next NG+ tier.");
+			addButton(8, "AscenPerks50", AddAscensionPerkPoints4).hint("Add 50 ascension perk points for use during ascending to the next NG+ tier.");
+			addButton(9, "AscenPerks100", AddAscensionPerkPoints5).hint("Add 100 ascension perk points for use during ascending to the next NG+ tier.");
+			addButton(14, "Back", StatsAscensionMenu);
 		}
 		public function StatsMenuStr():void {
 			menu();
@@ -2026,27 +2034,42 @@ use namespace CoC;
 				flags[kFLAGS.LETHICE_DEFEATED] = 1;
 				outputText("\n\n<b>You can Ascend now even if you not beaten Lethice yet!</b>");
 			}
-			doNext(StatsAscensionMenu);
+			doNext(StatsAscensionMenu2);
+		}
+		public function IncreaseAscensionCounter():void {
+			outputText("\n\n<b>Your NG tier increased by 1!</b>");
+			flags[kFLAGS.NEW_GAME_PLUS_LEVEL] += 1;
+			doNext(StatsAscensionMenu2);
+		}
+		public function DecreaseAscensionCounter():void {
+			outputText("\n\n<b>Your NG tier decreased by 1!</b>");
+			flags[kFLAGS.NEW_GAME_PLUS_LEVEL] -= 1;
+			doNext(StatsAscensionMenu2);
 		}
 		public function AddAscensionPerkPoints1():void {
 			outputText("\n\n<b>You gained 1 Ascension Perk Point!</b>");
 			player.ascensionPerkPoints += 1;
-			doNext(StatsAscensionMenu);
+			doNext(StatsAscensionMenu2);
 		}
 		public function AddAscensionPerkPoints2():void {
 			outputText("\n\n<b>You gained 5 Ascension Perk Points!</b>");
 			player.ascensionPerkPoints += 5;
-			doNext(StatsAscensionMenu);
+			doNext(StatsAscensionMenu2);
 		}
 		public function AddAscensionPerkPoints3():void {
 			outputText("\n\n<b>You gained 10 Ascension Perk Points!</b>");
 			player.ascensionPerkPoints += 10;
-			doNext(StatsAscensionMenu);
+			doNext(StatsAscensionMenu2);
 		}
 		public function AddAscensionPerkPoints4():void {
 			outputText("\n\n<b>You gained 50 Ascension Perk Points!</b>");
 			player.ascensionPerkPoints += 50;
-			doNext(StatsAscensionMenu);
+			doNext(StatsAscensionMenu2);
+		}
+		public function AddAscensionPerkPoints5():void {
+			outputText("\n\n<b>You gained 100 Ascension Perk Points!</b>");
+			player.ascensionPerkPoints += 100;
+			doNext(StatsAscensionMenu2);
 		}
 		public function AddStr1():void {
 			player.strStat.core.value += 1;
@@ -4272,4 +4295,4 @@ use namespace CoC;
 			doNext(accessSoulforceMenu);
 		}
 	}
-}
+}

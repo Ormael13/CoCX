@@ -12,7 +12,7 @@ package classes.Items.Weapons
 		
 		public function DualKatana() 
 		{
-			super("D.Katana","D.Katana","dual katana","a dual katana","keen cut",17,1360,"A pair of curved bladed weapons that cuts through flesh with the greatest of ease.", "Dual Large", "Dueling");
+			super("D.Katana","D.Katana","dual katana","a dual katana","keen cut",15,1360,"A pair of curved bladed weapons that cuts through flesh with the greatest of ease.", "Dual Large", "Dueling");
 		}
 		
 		override public function canUse():Boolean {
