@@ -451,7 +451,7 @@ public function nomOnMommaIzzysTits():void {
 	//Follower stuff
 	isabellaFollowerScene.isabellaAffection(10); //she likes that
 	//Decrease 'time since milked' count
-	else if(flags[kFLAGS.ISABELLA_MILKED_YET] > 0) flags[kFLAGS.ISABELLA_MILKED_YET] = 0;
+	if(flags[kFLAGS.ISABELLA_MILKED_YET] > 0) flags[kFLAGS.ISABELLA_MILKED_YET] = 0;
 	player.slimeFeed();
 	player.refillHunger(40);
 	//(Chance of thickening body to 75, chance of softening body if PC has a vag)
@@ -1211,7 +1211,7 @@ public function victoryLactation69():void {
 	if (isabellaAccent()) outputText("\"<i>Zat vas nice... a good way to cool down angry hearts.  Let's... do zis next time ve fight!</i>\"");
 	else outputText("\"<i>That was nice... a good way to cool down angry hearts. Let's... do this next time we fight!</i>\"");
 	outputText(" You nod as the blissed-out cow-girl closes her eyes, contented and cradling the slight paunch you've given her.  A moment later you've regained your strength, but you have trouble fitting back into your [armor] with all the milk in your system.");
-	isabellaFollowerScene.isabellaAffection(10); //she's better but still angry
+	isabellaFollowerScene.isabellaAffection(12); //she's better
 	//(slimefeed, -lust, +thickness & -tone?)
 	player.slimeFeed();
 	//You've now been milked, reset the timer for that
@@ -1424,8 +1424,8 @@ public function victoryAgainstIzzzzzySixtyNine():void {
 	outputText("You get dressed and leave with a smile.");
 	//(slimefeed + izzy unmad!)
 	player.sexReward("milk");
-	isabellaFollowerScene.isabellaAffection(10);
-	flags[kFLAGS.ISABELLA_ANGRY_AT_PC_COUNTER] = 0; //okay, redeemed)
+	isabellaFollowerScene.isabellaAffection(15); //okay, redeemed)
+	flags[kFLAGS.ISABELLA_ANGRY_AT_PC_COUNTER] = 0;
     if (CoC.instance.inCombat) cleanupAfterCombat();
     else doNext(camp.returnToCampUseOneHour);
 }

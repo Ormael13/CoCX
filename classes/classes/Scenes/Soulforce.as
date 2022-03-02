@@ -264,9 +264,27 @@ use namespace CoC;
 			addButton(10, "All4HiddenPrestige", AddMaxBackpack03).hint("A11 th4t H1dd3n Prestige is Y0urs to T4ke!!!");
 			addButton(11, "PerkGalore1", PerkGalore1);
 			addButton(12, "PerkGalore2", PerkGalore2);
-			if (flags[kFLAGS.MARRIAGE_FLAG] == 1) addButton(13, "ClickItOnce", AddMaxBackpack033).hint("Fix Marriage Unlock from Michiko for future clarity.");
+			addButton(12, "-3-", cheatpart3).hint("new stuff");
 			addButton(14, "Back", SoulforceCheats);
 		}
+		public function cheatpart3():void {
+			menu();
+			if (flags[kFLAGS.MARRIAGE_FLAG] == 1) addButton(0, "ClickItOnce", AddMaxBackpack033).hint("Fix Marriage Unlock from Michiko for future clarity.");
+			addButton(1, "RemoveRP", cheatRemoveRP).hint("Remove Racial Paragon perk");
+			addButton(14, "Back", submenucuzwhynot);
+		}
+
+        public function cheatRemoveRP():void {
+            clearOutput();
+            if (player.removePerk(PerkLib.RacialParagon)) {
+                ++player.perkPoints;
+                outputText("Done!");
+            }
+            else
+                outputText("No such perk.");
+            doNext(camp.doCamp);
+        }
+
 		private function jiangshiBuggedItemsCleanUpCrew0():void {
 			if (player.weapon != WeaponLib.FISTS) {
 				if (flags[kFLAGS.AETHER_DEXTER_TWIN_AT_CAMP] == 2) {
