@@ -367,8 +367,8 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			else {
 				var item:ItemType = improvableItems[i][selectfrom];
 				var from:ItemType = improvableItems[i][0];
-				selectMenu.add(item.id, curry(improveItem, item, from)).disableIf(!player.hasItem(from) || (player.keyItemv1("Radiant shard") < 2) || player.gems < 10000,"You need a "+from+" as a base to create this item")
-				.disableIf(player.keyItemv1("Radiant shard") < 2,"You need at least two radiant shards in order to create this item.")
+				selectMenu.add(item.id, curry(improveItem, item, from)).disableIf(!player.hasItem(from),"You need a "+from+" as a base to create this item")
+				.disableIf(player.keyItemv1("Radiant shard") < 3,"You need at least three radiant shards in order to create this item.")
 				.disableIf(player.gems < 10000,"You need at least 20 000 gems in order to create this item");
 			}
 		}
@@ -390,8 +390,8 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				"A miracle happens, as the armament, gems and shards combines, changes shape and starts to glow with holy power.\n\n" +
 				"Finally done, she comes back to you and solemnly deposits the blessed armament in your hand.");
 			}
-			if(player.keyItemv1("Radiant shard") == 2) player.removeKeyItem("Radiant shard");
-			else player.addKeyValue("Radiant shard",1,-2);
+			if(player.keyItemv1("Radiant shard") == 3) player.removeKeyItem("Radiant shard");
+			else player.addKeyValue("Radiant shard",1,-3);
 			player.gems -= 20000;
 			player.destroyItems(from, 1);
 			inventory.takeItem(item, camp.returnToCampUseOneHour);
