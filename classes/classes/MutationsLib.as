@@ -317,6 +317,8 @@ public class MutationsLib
 				"Increase the damage of Weird words by another 30%. Lower cooldowns of ratatoskr specials by 1 turn. Knowledge is power is now three times as effective.").withBuffs({'int.mult':0.20});
 		public static const RatatoskrSmartsFinalForm:PerkType = mk("Ratatoskr smarts (Final Form)", "Ratatoskr smarts (Final Form)",
 				".");
+		public static const RaijuCathode:PerkType = mk("Raiju Cathode", "Raiju Cathode",
+				"Your Raiju Cathode provides an increase in speed by 10% and increase lust damage from weapons and natural weapons by 50%.").withBuffs({'spe.mult':0.10});
 		public static const RaijuCathodePrimitive:PerkType = mk("Raiju Cathode (Primitive)", "Salamander Adrenal Glands (Primitive)",
 				"Your Raiju Cathode provides an increase in speed by 15% and increase lust damage from weapons and natural weapons by another 50%. All lightning damage is increased by 20%.").withBuffs({'spe.mult':0.15});
 		public static const RaijuCathodeEvolved:PerkType = mk("Raiju Cathode (Evolved)", "Salamander Adrenal Glands (Evolved)",
@@ -1193,4 +1195,4 @@ public class MutationsLib
 			}
 		initMutations();
 	}
-}
+}
