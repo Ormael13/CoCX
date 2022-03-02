@@ -15995,7 +15995,7 @@ use namespace CoC;
 			EngineCore.statScreenRefresh();
 		}
 
-		public function raijuSuperchargedCheck(){
+		public function raijuSuperchargedCheck():void{
 			if (raijuScore() >= 7 && lust100>=75){
 				if (!statStore.hasBuff("Supercharged")){
 					var buff:Number = 1;
