@@ -64,5 +64,11 @@ package classes.Items.Weapons
 		override public function get verb():String { 
 				return game.player.hasPerk(PerkLib.StaffChanneling) ? "shot" : "smack";
 		}
+
+		override public function canUse():Boolean {
+			if (game.player.level >= 40) return super.canUse();
+			outputText("You try and wield the legendary weapon but to your disapointment the item simply refuse to stay put in your hands. It would seem you yet lack the power and right to wield this item.");
+			return false;
+		}
 	}
 }

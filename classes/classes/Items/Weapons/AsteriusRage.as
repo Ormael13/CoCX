@@ -29,10 +29,16 @@ package classes.Items.Weapons
 		}
 		
 		override public function canUse():Boolean {
-			if (game.player.hasPerk(PerkLib.DualWield) && game.player.hasPerk(PerkLib.GigantGrip)) return super.canUse();
-			if (!game.player.hasPerk(PerkLib.DualWield)) outputText("You aren't skilled in handling large weapons with one hand yet to effectively use those axes. Unless you want to hurt yourself instead enemies when trying to use them...  ");
-			else outputText("You aren't skilled enough to handle this pair of weapons!  ");
-			return false;
-		}	
+			if (game.player.level >= 40){
+				if (game.player.hasPerk(PerkLib.DualWield) && game.player.hasPerk(PerkLib.GigantGrip)) return super.canUse();
+				if (!game.player.hasPerk(PerkLib.DualWield)) outputText("You aren't skilled in handling large weapons with one hand yet to effectively use those axes. Unless you want to hurt yourself instead enemies when trying to use them...  ");
+				else outputText("You aren't skilled enough to handle this pair of weapons!  ");
+				return false;
+			}
+			else{
+				outputText("You try and wield the legendary weapon but to your disapointment the item simply refuse to stay in your hands. It would seem you yet lack the power and right to wield this item.");
+				return false;
+			}
+		}
 	}
 }
