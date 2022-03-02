@@ -170,6 +170,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			}
 			addButton(2, "Items", itemImproveMenu);
 			//addButton(3, "Armour", armourImproveMenu);
+			addButton(4, "About Shards", AboutRadiantShard);
 		}
 		else {
 			addButton(1, "Play Time", playTime);
@@ -398,6 +399,12 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			player.destroyItems(from, 1);
 			inventory.takeItem(item, camp.returnToCampUseOneHour);
 		}
+	}
+
+	public function AboutRadiantShard():void {
+		outputText("You ask " + _name + " what are radiant shards exactly."+
+				"\n\n<i>\"Well from what I think I may know they are the remains of artefacts of past legend. Items long lost to time that were probably used in the mythical age. They are useless by themselves just small fragment of lost power but if you were to bring in multiple as well as a medium I could weave back the lost item to life.\"</i>\n\n"+
+				"\n\n Truthfully, that your little girl talks about such grown up subject so early both makes you proud and creeps you up.");
 	}
 
 	/*
