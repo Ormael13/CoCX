@@ -177,27 +177,27 @@ package classes.Scenes.Places.HeXinDao
 		private function tableNo5():void {
 			menu();
 			if (workHoursMadam()) {
-				if (AhriTavernTalks) addButton(0, "Madam", visitMadam).hint("You see 'Madam' sitting at one of the inn tables.");
-				else addButton(0, "???", visitMadam).hint("You see mysterious looking animal-morph sitting at one of the inn tables.");//Ahri
+				if (AhriTavernTalks) addButton(0, "Madam", visitMadam).hint("You see 'Madam' sitting at the table.");
+				else addButton(0, "???", visitMadam).hint("You see mysterious looking animal-morph sitting at the table.");//Ahri
 			}
-			else {
-				if (AhriTavernTalks) addButtonDisabled(0, "Madam", "'Madam' isn't currently at her usual table in the inn.");
+			else if (AhriTavernTalks) addButtonDisabled(0, "Madam", "'Madam' isn't currently at her usual spot at table in the inn.");
+			if (workHoursTemptress()) {
+				if (EvelynnTavernTalks) addButton(1, "Temptress", visitTemptress).hint("You see 'Temptress' sitting at the table.");
+				else addButtonDisabled(1, "???", "You see mysterious looking devil sitting at the table.");//Evelynn
 			}
-			if (workHoursTemptress()) addButtonDisabled(1, "???", "You see mysterious looking devil sitting at one of the inn tables.");//Evelynn
+			else if (EvelynnTavernTalks) addButtonDisabled(1, "Temptress", "'Temptress' isn't currently at her usual spot at table in the inn.");
 			addButton(14, "Back", curry(enteringInn,false));
 		}
 		private function workHoursMadam():Boolean {
-			if ((model.time.hours >= 6 && model.time.hours <= 9) || (model.time.hours >= 18 && model.time.hours <= 21)) return true;
+			if ((model.time.hours >= 7 && model.time.hours <= 9) || (model.time.hours >= 18 && model.time.hours <= 22)) return true;
 			return false;
 		}
 		private function visitMadam():void {
 			clearOutput();//Madam - female kishoo npc for stat points to perk points conversion		outputText("\"<i></i>\"\n\n");
-			if (AhriTavernTalks) {
-				outputText("\"<i>You came back? What do you seek from this Madam?</i>\" You can swear to see her eyes glow for a moment under the hood as she looking at you. \"<i>Another session to exchange your grown potential to increased ability to develop mystical abilities?</i>\"\n\n");
-			}
+			if (AhriTavernTalks) outputText("\"<i>You came back? What do you seek from this Madam?</i>\" You can swear to see her eyes glow for a moment under the hood as she looking at you. \"<i>Another session to exchange your grown potential to increased ability to develop mystical abilities?</i>\"\n\n");
 			else {
-				outputText("When you apporach the table you see a person covered wholy by the loose robe. For a moment it looks like it not noticed your presence next to it.\n\n");
-				outputText("\"<i>Greeting potential customer. You can call me Madam,</i>\" clearly female voice with undeniable subtle charm interrupts the silence. \"<i>You came to my table seeking my services? I not able to provide alot aside something i call 'conversion'.</i>\"\n\n");
+				outputText("You see a person covered wholy by the loose robe. For a moment it looks like it not noticed your presence next to it.\n\n");
+				outputText("\"<i>Greeting potential customer. You can call me Madam,</i>\" clearly female voice with undeniable subtle charm interrupts the silence. \"<i>You came to our table seeking my services? I not able to provide alot aside something i call 'conversion'.</i>\"\n\n");
 				outputText("Conversion? Seeing your puzzle expression she continues, \"<i>I would take a bit of your grown potential to exchange it for increased ability to develop mystical abilities. But...</i>\" she make a gesture with one of her hands showing briefly her hand with five outstretched fingers \"<i>...I shall only do this five times. No more and no less than five.</i>\"\n\n");
 				outputText("Just like that without any string attatched?\n\n");
 				outputText("\"<i>Of course there would be additional price. Ten spirit stones.</i>\" She pause before asking \"<i>So dear customer would you like me to perform this conversion on you?</i>\"\n\n");
@@ -223,9 +223,9 @@ package classes.Scenes.Places.HeXinDao
 			}
 			else {
 				outputText("After recieving payment Madam puts them in bag that was on her robes belt. \"<i>Come we can't do 'it' here,</i>\" she starts to walk toward door that lead to backroom of the inn. As you already paid, you follow her to short corridor behind doors. Opening one of the side room doors she monition for you to come inside.\n\n");
-				outputText("\"<i>Please sit down as whole process would take some time.</i>\" She points toward casual looking sofa. After you sit and find comfortable postion she walsk behinds you. \"<i>Dear customer please close your eyes.</i>\" she nearly whisper it with extremely hypnotizing voice next to your ear.\n\n");
-				outputText("You close the eyes and then you feal weird energy that start spread, starting form sides of you head, in your body. It feels extremly comfortable and before you notice it caused you to fell asleep.\n\n");
-				outputText("When you wake up, it feel something missing in your body and yet at the same time something new appeared too. Looking around there is noone aside you in the room, with doors left opened wide. Looks like madam wanted to say 'return on your own'. Slightly unsatisfied you returns to the drinkin hall.\n\n");
+				outputText("\"<i>Please sit down as whole process would take some time.</i>\" She points toward casual looking sofa. After you sit and find comfortable postion she walks behinds you. \"<i>Dear customer please close your eyes.</i>\" she nearly whisper it with extremely hypnotizing voice next to your ear.\n\n");
+				outputText("You close the eyes and then you fell weird energy that start spread, starting form sides of you head, in your body. It feels extremly comfortable and before you notice it caused you to fell asleep.\n\n");
+				outputText("When you wake up, it feel something missing in your body and yet at the same time something new appeared too. Looking around there is noone aside you in the room, with doors left opened wide. Looks like madam wanted to say 'return on your own'. Slightly unsatisfied you returns to the drinking hall.\n\n");
 				if (AhriStatsToPerksConvertCounter > 0) AhriStatsToPerksConvertCounter += 1;
 				else AhriStatsToPerksConvertCounter = 1;
 				flags[kFLAGS.SPIRIT_STONES] -= 10;
@@ -236,17 +236,51 @@ package classes.Scenes.Places.HeXinDao
 			}
 		}
 		private function workHoursTemptress():Boolean {
-			if ((model.time.hours >= 6 && model.time.hours <= 9) || (model.time.hours >= 18 && model.time.hours <= 21)) return true;
+			if ((model.time.hours >= 8 && model.time.hours <= 9) || (model.time.hours >= 18 && model.time.hours <= 23)) return true;
 			return false;
 		}
 		private function visitTemptress():void {
 			clearOutput();//Temptress - female displacer devil npc for perk points to stat points conversion		outputText("\"<i></i>\"\n\n");
+			if (EvelynnTavernTalks) outputText("\"<i>Did you came back longing for more?</i>\" Her eyes glow for a moment under the hood as she looking at you. \"<i>Another touch to change your increased ability to develop mystical abilities for grown potential?</i>\"\n\n");
+			else {
+				outputText("You see a person covered wholy by the loose robe. She looks ocassionaly around until she finally notice you starring at her.\n\n");
+				outputText("\"<i>Hello, customer. I'm Tempress,</i>\" clearly female voice with sultry tone interrupts the silence. \"<i>You came to this table seeking my services? I can provide you with 'change'.</i>\"\n\n");
+				outputText("Change? Seeing your puzzle expression she continues, \"<i>I would take a bit of your ability to develop mystical abilities to exchange it for increased grown potential. But...</i>\" she make a gesture with one of her hands showing briefly her hand with five outstretched fingers ending with long, sharp finger claws \"<i>...I would only do this five times.</i>\"\n\n");
+				outputText("Just like that without any string attatched?\n\n");
+				outputText("\"<i>Of course there would be additional price for myu services. Ten spirit stones.</i>\" She pause before asking \"<i>So are you here to be mesmerized by me or to try out his change?</i>\"\n\n");
+				EvelynnTavernTalks = true;
+			}
 			menu();
 			addButton(1, "Convert", visitTemptressConvert);
 			addButton(3, "Back", tableNo5);
 		}
 		private function visitTemptressConvert():void {
-			
+			clearOutput();
+			if (flags[kFLAGS.SPIRIT_STONES] < 10) {
+				outputText("\"<i>Ten Spirit Stones.</i>\" Temptress almost wisper, \"<i>Come back when you have them.</i>\"\n\n");
+				doNext(visitTemptress);
+			}
+			else if (player.perkPoints < 1) {
+				outputText("\"<i>Seems your ability to develop mystical abilities is lacking.</i>\" Temptress sounds... disapointed, \"<i>Come see me again when it would increase.</i>\"\n\n");
+				doNext(visitTemptress);
+			}
+			else if (EvelynnPerksToStatsConvertCounter > 4 && EvelynnTavernTalks > 0) {
+				outputText("\"<i>Ahh I did told you didn't I?</i>\" Temptress says with a sad voice, \"<i>My services can be repeated only five times and you used them all.</i>\"\n\n");
+				doNext(visitTemptress);
+			}
+			else {
+				outputText("After recieving payment Temptress puts them in bag that was on her robes belt. \"<i>Let move to more... private place,</i>\" she starts to walk toward door that lead to backroom of the inn. As you already paid, you follow her to short corridor behind doors. Opening one of the side room doors she monition you with her finger to come inside.\n\n");
+				outputText("\"<i>Lay down comfortable and close your eyes.</i>\" She points toward luxury bed. After you done as she said you hear her sitting next to you. \"<i>All it takes is a simple touch.</i>\" she sensualy whisper to your ear when you ihnales her scent, which makes you ewven more relaxed.\n\n");
+				outputText("Enjoying her closeness you start to fell weird energy that start spread, starting form middle of your chest, in your body. It feels extremly comfortable and before you notice it caused you to fell asleep.\n\n");
+				outputText("When you wake up, it feel something missing in your body and yet at the same time something new appeared too. Looking around there is noone aside you in the room, with doors left opened wide. Looks like after doing her part temptress already left. Slightly unsatisfied you returns to the drinking hall.\n\n");
+				if (EvelynnPerksToStatsConvertCounter > 0) EvelynnPerksToStatsConvertCounter += 1;
+				else EvelynnPerksToStatsConvertCounter = 1;
+				flags[kFLAGS.SPIRIT_STONES] -= 10;
+				player.statPoints += 5;
+				player.perkPoints -= 1;
+				doNext(curry(enteringInn,false));
+				eachMinuteCount(30);
+			}
 		}
 
 		public function NeisabutPCgotKOd():void {

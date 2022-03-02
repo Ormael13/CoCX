@@ -17,32 +17,23 @@ public class MutationsLib
 		}
 		//public static const
 		public static const SlimeMetabolism:PerkType = mk("Slime Metabolism", "Slime Metabolism",
-				"Allows you to gain a boost of speed for a few hours after an intake of cum and allows you to attack twice per turn.",
-				"You've chosen the 'Slime Metabolism' perk, allows you to gain a boost of speed after an intake of cum and attack more often.");
+				".");
 		public static const SlimeMetabolismEvolved:PerkType = mk("Slime Metabolism (Evolved)", "Slime Metabolism (Evolved)",
-				"Increase by (10 * NG tier) boost of speed for a five hours longer after an intake of cum and increase max Hunger cap by 50 (if PC have Hunger bar active).",
-				"You've chosen the 'Slime Metabolism (Evolved)' perk, allows you to increase max boost of speed after an intake of cum and keeping it for 50% longer.");
+				".");
 		public static const NekomataThyroidGland:PerkType = mk("Nekomata Thyroid Gland", "Nekomata Thyroid Gland",
-				"Nekomata Thyroid Gland .",//lower cooldowns for Illusion and Terror by three turns, increase speed of the recovery after using magic and slightly boost PC speed
-				"You've chosen the 'Nekomata Thyroid Gland' perk. Some time after you become nekomata part of your body changed allowing to boost your nekomata powers.");
+				".");//lower cooldowns for Illusion and Terror by three turns, increase speed of the recovery after using magic and slightly boost PC speed
 		public static const NekomataThyroidGlandEvolved:PerkType = mk("Nekomata Thyroid Gland (Evolved)", "Nekomata Thyroid Gland (Evolved)",
-				"Nekomata Thyroid Gland (Evolved) .",//increase speed of the recovery after using magic, boost PC speed and wisdom. And make fox fire specials 50% stronger when having 9 tails (both fire and lust damage)
-				"You've chosen the 'Nekomata Thyroid Gland (Evolved)' perk. Continued using of nekomata powers caused your thyroid gland to evolve.");
+				".");//increase speed of the recovery after using magic, boost PC speed and wisdom. And make fox fire specials 50% stronger when having 9 tails (both fire and lust damage)
 		public static const NekomataThyroidGlandFinalForm:PerkType = mk("Nekomata Thyroid Gland (Final Form)", "Nekomata Thyroid Gland (Final Form)",
-				"Nekomata Thyroid Gland (Final Form) .",//grant bonus soulforce/mana regen depending on Star Sphere rank, increase max Star Sphere rank to 20. Increase speed debuff of Terror to 50, increase evasion boost from Illusion to 20%. Boost PC speed, wisdom and intelligence
-				"You've chosen the 'Nekomata Thyroid Gland (Final Form)' perk. Your thyroid gland to evolved once again increasing efficiency of your nekomata powers.");
+				".");//grant bonus soulforce/mana regen depending on Star Sphere rank, increase max Star Sphere rank to 20. Increase speed debuff of Terror to 50, increase evasion boost from Illusion to 20%. Boost PC speed, wisdom and intelligence
 		public static const HellcatParathyroidGlands:PerkType = mk("Hellcat Parathyroid Glands", "Hellcat Parathyroid Glands",
-				".",
-				"You've chosen the 'Hellcat Parathyroid Glands' perk, .");
+				".");
 		public static const HellcatParathyroidGlandsEvolved:PerkType = mk("Hellcat Parathyroid Glands (Evolved)", "Hellcat Parathyroid Glands (Evolved)",
-				".",
-				"You've chosen the 'Hellcat Parathyroid Glands (EvFolved)' perk, .");
+				".");
 		public static const HellcatParathyroidGlandsFinalForm:PerkType = mk("Hellcat Parathyroid Glands (Final Form)", "Hellcat Parathyroid Glands (Final Form)",
-				".",
-				"You've chosen the 'Hellcat Parathyroid Glands (Final Form)' perk, .");
+				".");
 		public static const CaveWyrmLungs:PerkType = mk("Cave Wyrm Lungs", "Cave Wyrm Lungs",
-				"Your lung has became accustomed to the presence of acid in your biology improving the corrosiveness and volatility of your biochemical weapons.",
-				"You've chosen the 'Cave Wyrm Lungs' perk, .");
+				"Your lung has became accustomed to the presence of acid in your biology improving the corrosiveness and volatility of your biochemical weapons.");
 		public static const CaveWyrmLungsPrimitive:PerkType = mk("Cave Wyrm Lungs (Primitive)", "Cave Wyrm Lungs (Primitive)",
 				".");
 		public static const CaveWyrmLungsEvolved:PerkType = mk("Cave Wyrm Lungs (Evolved)", "Cave Wyrm Lungs (Evolved)",
@@ -50,8 +41,7 @@ public class MutationsLib
 		public static const CaveWyrmLungsFinalForm:PerkType = mk("Cave Wyrm Lungs (Final Form)", "Cave Wyrm Lungs (Final Form)",
 				".");
 		public static const KitsuneParathyroidGlands:PerkType = mk("Kitsune Parathyroid Glands", "Kitsune Parathyroid Glands",
-				".",//decrease terror/ilussions cooldown instead of thyroid gland - rise wis or bonus sf regen or mana regen and thyroid gland instead regering sf?
-				"You've chosen the 'Kitsune Parathyroid Glands' perk, .");
+				".");//decrease terror/ilussions cooldown instead of thyroid gland - rise wis or bonus sf regen or mana regen and thyroid gland instead regering sf?
 		public static const KitsuneParathyroidGlandsPrimitive:PerkType = mk("Kitsune Parathyroid Glands (Primitive)", "Kitsune Parathyroid Glands (Primitive)",
 				".");
 		public static const KitsuneParathyroidGlandsEvolved:PerkType = mk("Kitsune Parathyroid Glands (Evolved)", "Kitsune Parathyroid Glands (Evolved)",
@@ -66,7 +56,6 @@ public class MutationsLib
 		public static const ArachnidBookLungEvolved:PerkType = mk("Arachnid Book Lung (Evolved)", "Arachnid Book Lung (Evolved)",
 				"Increase the web and poison capacity by an additional 100%, increase the effectiveness of all Web abilities by half. Web abilities have a 50% chance to immobilize opponents for 2 rounds when used as the opponent struggles to get free.").withBuffs({'int.mult':0.15});
 		public static const ArachnidBookLungFinalForm:PerkType = mk("Arachnid Book Lung (Final Form)", "Arachnid Book Lung (Final Form)",
-				".",
 				".");
 		public static const BlackHeart:PerkType = mk("Black Heart", "Black Heart",
 				"Increase the power of lust strike and empower fascinate.").withBuffs({'lib.mult':0.05});
@@ -75,7 +64,14 @@ public class MutationsLib
 		public static const BlackHeartEvolved:PerkType = mk("Black Heart (Evolved)", "Black Heart (Evolved)",
 				"Adds additional lust dmg to Lust strike depending on your current sensitivity (additional sensitivity/10 lust dmg), extend to 2 turns stun from Fascinate.").withBuffs({'lib.mult':0.15});
 		public static const BlackHeartFinalForm:PerkType = mk("Black Heart (Final Form)", "Black Heart (Final Form)",
-				".",
+				".");
+		public static const CatlikeNimbleness:PerkType = mk("Cat-like Nimbleness", "Cat-like Nimbleness",
+				"Your transformed joins allows you to move with greater nimbleness, increasing evasion.");
+		public static const CatlikeNimblenessPrimitive:PerkType = mk("Cat-like Nimbleness (Primitive)", "Cat-like Nimbleness (Primitive)",
+				"Your nimble body allows you to move with even better nimbleness than before, further increasing evasion.").withBuffs({'spe.mult':0.10});
+		public static const CatlikeNimblenessEvolved:PerkType = mk("Cat-like Nimbleness (Evolved)", "Cat-like Nimbleness (Evolved)",
+				"Your nimble body allows you to move with even greater nimbleness than before, further increasing evasion.").withBuffs({'spe.mult':0.20});
+		public static const CatlikeNimblenessFinalForm:PerkType = mk("Cat-like Nimbleness (Final Form)", "Cat-like Nimbleness (Final Form)",
 				".");
 		public static const DisplacerMetabolism:PerkType = mk("Displacer Metabolism", "Displacer Metabolism",
 				"Allows you to gain a boost of strength+speed, malus to intelligence after an intake of milk and double the damage of displacer beast claws attacks.");
@@ -122,7 +118,14 @@ public class MutationsLib
 		public static const EasterBunnyEggBagEvolved:PerkType = mk("Easter bunny balls (Evolved)", "Easter bunny balls (Evolved)",
 				"Further raise libido by a percentage based on current balls size. Double balls growth rates and double cum production again.");
 		public static const EasterBunnyEggBagFinalForm:PerkType = mk("Easter bunny balls (Final Form)", "Easter bunny balls (Final Form)",
-				".",
+				".");
+		public static const EclipticMind:PerkType = mk("Ecliptic Mind", "Ecliptic Mind",
+				"Allows to retains aura at all time, gaining whichever corresponds to your alignment. Empower the effect of your aura based on your purity or corruption score.");
+		public static const EclipticMindPrimitive:PerkType = mk("Ecliptic Mind (Primitive)", "Ecliptic Mind (Primitive)",
+				"Further empower the effect of your aura based on your purity or corruption score. Aura effect is doubled against creatures of the opposite alignment.");
+		public static const EclipticMindEvolved:PerkType = mk("Ecliptic Mind (Evolved)", "Ecliptic Mind (Evolved)",
+				"Further empower the effect of your aura based on your purity or corruption score. Aura effect is tripled against creatures of the opposite alignment. Gain minor regeneration based on your alignment.");
+		public static const EclipticMindFinalForm:PerkType = mk("Ecliptic Mind (Final Form)", "Ecliptic Mind (Final Form)",
 				".");
 		public static const ElvishPeripheralNervSys:PerkType = mk("Elvish Peripheral NervSys", "Elvish Peripheral NervSys",
 				"Your Elvish Peripheral NervSys is giving you +5% of max core Spe as phantom Spe and allow to keep Elven Sense even without elf arms/legs.");
@@ -131,7 +134,6 @@ public class MutationsLib
 		public static const ElvishPeripheralNervSysEvolved:PerkType = mk("Elvish Peripheral NervSys (Evolved)", "Elvish Peripheral NervSys (Evolved)",
 				"Your Elvish Peripheral NervSys is giving you +15% of max core Spe as phantom Spe, increase your natural evasion, decrease melee/range accuracy penalty when using multiattack options. Furthermore elven signature abilities will keep working weither you are a full blooded elf or not.").withBuffs({'spe.mult':0.05});
 		public static const ElvishPeripheralNervSysFinalForm:PerkType = mk("Elvish Peripheral NervSys (Final Form)", "Elvish Peripheral NervSys (Final Form)",
-				".",
 				".");
 		public static const FeyArcaneBloodstream:PerkType = mk("Fey Arcane Bloodstream", "Fey Arcane Bloodstream",
 				"Your Fey Arcane Bloodstream is granting you along with an eternal lifespan increased mana recovery and increased magical power.").withBuffs({'int.mult':0.05});
@@ -140,7 +142,6 @@ public class MutationsLib
 		public static const FeyArcaneBloodstreamEvolved:PerkType = mk("Fey Arcane Bloodstream (Evolved)", "Fey Arcane Bloodstream (Evolved)",
 				"Your Fey Arcane Bloodstream grants you an even greater mana recovery and further increased magical power. Furthermore your chaotic magic is more likely to explode into additionnal effects and its damage is increased by 50%.").withBuffs({'int.mult':0.20});
 		public static const FeyArcaneBloodstreamFinalForm:PerkType = mk("Fey Arcane Bloodstream (Final Form)", "Fey Arcane Bloodstream (Final Form)",
-				".",
 				".");
 		public static const FloralOvaries:PerkType = mk("Floral Ovaries", "Floral Ovaries",
 				"Increase the potency of Alraune pollen.").withBuffs({'lib.mult':0.05});
@@ -149,7 +150,6 @@ public class MutationsLib
 		public static const FloralOvariesEvolved:PerkType = mk("Floral Ovaries (Evolved)", "Floral Ovaries (Evolved)",
 				"Further increase the potency of Alraune pollen. Alraune pollen has a 25% chance per round to fascinate your victim.").withBuffs({'lib.mult':0.20});
 		public static const FloralOvariesFinalForm:PerkType = mk("Floral Ovaries (Final Form)", "Floral Ovaries (Final Form)",
-				".",
 				".");
 		public static const FrozenHeart:PerkType = mk("Frozen heart", "Frozen heart",
 				"Allow to retain the ability Ice barrage and hungering cold at all time and increase their damage by 10%.");
@@ -158,7 +158,6 @@ public class MutationsLib
 		public static const FrozenHeartEvolved:PerkType = mk("Frozen heart (Evolved)", "Frozen heart (Evolved)",
 				"Ice barrage and hungering cold abilities increase their damage by another 30%, hungering cold last for 3 additional turn and recharge 3 turn faster. Gain an extra modifier from your intelligence to health. (Increase original value by 50%).");
 		public static const FrozenHeartFinalForm:PerkType = mk("Frozen heart (Final Form)", "Frozen heart (Final Form)",
-				".",
 				".");
 		public static const GazerEye:PerkType = mk("Gazer Eye", "Gazer Eye",
 				"Keep true seeing at all times and empower gaze attacks.").withBuffs({'int.mult':0.05});
@@ -183,7 +182,6 @@ public class MutationsLib
 		public static const HarpyHollowBonesEvolved:PerkType = mk("Harpy Hollow Bones (Evolved)", "Harpy Hollow Bones (Evolved)",
 				"Your bones are hollow like those of a harpy granting you an additionnal 30% increased physical damage when flying and increasing speed at the expense of toughness. Increase great dive damage by 50% and no longuer cause it to end flight.").withBuffs({'tou.mult':-0.05,'spe.mult':0.45});
 		public static const HarpyHollowBonesFinalForm:PerkType = mk("Harpy Hollow Bones (Final Form)", "Harpy Hollow Bones (Final Form)",
-				".",
 				".");
 		public static const HeartOfTheStorm:PerkType = mk("Heart of the storm", "Heart of the storm",
 				"Increase the power of all Wind and Lightning racial abilities.").withBuffs({'spe.mult':0.05});
@@ -192,7 +190,6 @@ public class MutationsLib
 		public static const HeartOfTheStormEvolved:PerkType = mk("Heart of the storm (Evolved)", "Heart of the storm (Evolved)",
 				"Further increase the power of all Wind and Lightning abilities and Increases wind and electricity resistance by another 30%. You may fly without end so long as you got the ability to fly. If you got energy attacks you have now a chance to stun your opponents with them.").withBuffs({'spe.mult':0.20});
 		public static const HeartOfTheStormFinalForm:PerkType = mk("Heart of the storm (Final Form)", "Heart of the storm (Final Form)",
-				".",
 				".");
 		public static const HinezumiBurningBlood:PerkType = mk("Hinezumi burning blood", "Hinezumi burning blood",
 				"Increase the healing from the cauterize ability by 0.5% and raise Blazing battle spirit duration by 1 round.").withBuffs({'tou.mult':0.05});
@@ -201,7 +198,6 @@ public class MutationsLib
 		public static const HinezumiBurningBloodEvolved:PerkType = mk("Hinezumi burning blood (Evolved)", "Hinezumi burning blood (Evolved)",
 				"Increase the healing from the cauterize ability by 0.5%, raising Blazing battle spirit duration by 7 rounds and allowing to use cauterize even wihtout being an Hinezumi.").withBuffs({'tou.mult':0.15});
 		public static const HinezumiBurningBloodFinalForm:PerkType = mk("Hinezumi burning blood (Final Form)", "Hinezumi burning blood (Final Form)",
-				".",
 				".");
 		public static const HollowFangs:PerkType = mk("Hollow Fangs", "Hollow Fangs",
 				"Your fangs and mouth started to slowly change showing rudimental ability to suck out fluids like blood. (+5 max stack of Vampire Thirst)").withBuffs({'tou.mult':0.05});
@@ -210,7 +206,6 @@ public class MutationsLib
 		public static const HollowFangsEvolved:PerkType = mk("Hollow Fangs (Evolved)", "Hollow Fangs (Evolved)",
 				"You can now freely feed on blood and other atypical fluids. (+5 max stack of Vampire Thirst, +7% more healed from Vampire Bite, each Vampire Bite giving 2 stacks and deal +50% lust dmg)").withBuffs({'tou.mult':0.15});
 		public static const HollowFangsFinalForm:PerkType = mk("Hollow Fangs (Final Form)", "Hollow Fangs (Final Form)",
-				".",
 				".");
 		public static const KitsuneThyroidGland:PerkType = mk("Kitsune Thyroid Gland", "Kitsune Thyroid Gland",
 				"Kitsune Thyroid Gland lower cooldowns for Illusion and Terror by three turns and increase speed of the recovery after using magic.").withBuffs({'spe.mult':0.05});
@@ -227,16 +222,14 @@ public class MutationsLib
 		public static const LactaBovinaOvariesEvolved:PerkType = mk("Lacta Bovina Ovaries (Evolved)", "Lacta Bovina Ovaries (Evolved)",
 				"+5 to max tou an +10 to max str/lib, increase milk production by ~100%, +90 to max lust and Milk Blast cost rise to 200 lust but can be used more than once per fight.").withBuffs({'str.mult':0.10,'tou.mult':0.05,'lib.mult':0.10});
 		public static const LactaBovinaOvariesFinalForm:PerkType = mk("Lacta Bovina Ovaries (Final Form)", "Lacta Bovina Ovaries (Final Form)",
-				".",
 				".");
 		public static const LizanMarrow:PerkType = mk("Lizan Marrow", "Lizan Marrow",
 				"Regenerates 0.5% of HP per round in combat and 1% of HP per hour. Additionaly your limit for innate self-regeneration rate increased.");
 		public static const LizanMarrowPrimitive:PerkType = mk("Lizan Marrow (Primitive)", "Lizan Marrow (Primitive)",
 				"Regenerates 1% of HP per round in combat and 2% of HP per hour. Additionaly your limit for innate self-regeneration rate increased.");
 		public static const LizanMarrowEvolved:PerkType = mk("Lizan Marrow (Evolved)", "Lizan Marrow (Evolved)",
-				"Regenerates 1.5% of HP per round in combat and 3% of HP per hour. Additionaly your limit for innate self-regeneration rate increased. When below 25% of max HP regeneration provided by Lizan regeneration doubles. You can't lose by HP until your health drops into the negatives any more than 5% of max HP.");
+				"Regenerates 1.5% of HP per round in combat and 3% of HP per hour. Additionaly your limit for innate self-regeneration rate increased. When below 25% of max HP regeneration provided by Lizan regeneration doubles. You can't lose by HP until your health drops into the negatives more than 5% of max HP.");
 		public static const LizanMarrowFinalForm:PerkType = mk("Lizan Marrow (Final Form)", "Lizan Marrow (Final Form)",
-				".",
 				".");
 		public static const ManticoreMetabolism:PerkType = mk("Manticore Metabolism", "Manticore Metabolism",
 				"Allows you to gain a boost of speed for a few hours after an intake of cum and allow atack with many tail spikes at once.");
@@ -251,7 +244,6 @@ public class MutationsLib
 		public static const MantislikeAgilityEvolved:PerkType = mk("Mantis-like Agility (Evolved)", "Mantis-like Agility (Evolved)",
 				"Your musculature providing you with much higher increase to agility and speed than before. With some type of natural armor or even thicker skin this increase would be even larger. (+30% of max core Spe as phantom Spe)");
 		public static const MantislikeAgilityFinalForm:PerkType = mk("Mantis-like Agility (Final Form)", "Mantis-like Agility (Final Form)",
-				".",
 				".");
 		public static const MelkieLung:PerkType = mk("Melkie Lungs", "Melkie Lungs",
 				"Increase damage reduction against spells by 5% and increase the power of compelling aria by 20%, Compelling Aria is kept at all time.");
@@ -260,7 +252,6 @@ public class MutationsLib
 		public static const MelkieLungEvolved:PerkType = mk("Melkie Lungs (Evolved)", "Melkie Lungs (Evolved)",
 				"Increase damage reduction against spells by 15% and increase the power of compelling aria by 40%. Compelling Aria intelligence scaling is doubled.");
 		public static const MelkieLungFinalForm:PerkType = mk("Melkie Lungs (Final Form)", "Melkie Lungs (Final Form)",
-				".",
 				".");
 		public static const MinotaurTesticles:PerkType = mk("Minotaur Testicles", "Minotaur Testicles",
 				"Allow keep Cum Cannon special even if minotaur score is lower than 9. Additionaly your max Lust increase by 10.");
@@ -269,7 +260,6 @@ public class MutationsLib
 		public static const MinotaurTesticlesEvolved:PerkType = mk("Minotaur Testicles (Evolved)", "Minotaur Testicles (Evolved)",
 				"+5 to max tou an +10 to max str/lib, increase cum production by ~100%, +90 to max lust and Cum Cannon cost rise to 200 lust but can be used more than once per fight.").withBuffs({'str.mult':0.10,'tou.mult':0.05,'lib.mult':0.10});
 		public static const MinotaurTesticlesFinalForm:PerkType = mk("Minotaur Testicles (Final Form)", "Minotaur Testicles (Final Form)",
-				".",
 				".");
 		public static const NaturalPunchingBag:PerkType = mk("Natural punching bag", "Natural punching bag",
 				"Increases the damage reduction from Bouncy body by 5% and increase your natural toughness.").withBuffs({'tou.mult':0.05});
@@ -278,7 +268,6 @@ public class MutationsLib
 		public static const NaturalPunchingBagEvolved:PerkType = mk("Natural punching bag (Evolved)", "Natural punching bag (Evolved)",
 				"Increases the damage reduction from Bouncy body by 20%, continue to increase your natural toughness and healing/wrath/stat boosting items are more effective and allow to keep the effect of bouncy body as long as you are below 4 feet tall.").withBuffs({'tou.mult':0.20});
 		public static const NaturalPunchingBagFinalForm:PerkType = mk("Natural punching bag (Final Form)", "Natural punching bag (Final Form)",
-				".",
 				".");
 		public static const NukiNuts:PerkType = mk("Nuki Nuts", "Nuki Nuts",
 				"Gain a natural armor bonus based on your ball size and prevent the loss of money strike.").withBuffs({'lib.mult':0.05});
@@ -287,7 +276,6 @@ public class MutationsLib
 		public static const NukiNutsEvolved:PerkType = mk("Nuki Nuts, (Evolved)", "Nuki Nuts, (Evolved)",
 				"Further Increase the Armor bonus granted by Nuki nuts and further improve cum production. Cumming now has a greater chance of generating gems. Double the damage of Money Strike.").withBuffs({'lib.mult':0.15});
 		public static const NukiNutsFinalForm:PerkType = mk("Nuki Nuts, (Final Form)", "Nuki Nuts, (Final Form)",
-				".",
 				".");
 		public static const ObsidianHeart:PerkType = mk("Obsidian Heart", "Obsidian Heart",
 				"You can use both devil m. specials without need to be full devilkin race member (but each use of them will give a bit of corruption if it's below 60).");
@@ -296,7 +284,6 @@ public class MutationsLib
 		public static const ObsidianHeartEvolved:PerkType = mk("Obsidian Heart (Evolved)", "Obsidian Heart (Evolved)",
 				"Increase Maleficium boost to spell power from 125% to 250% of base value and lower lust resistance decrease to 30%; Infernal Flare dealing ~40% more dmg and have +20% higher chance to Crit.").withBuffs({'str.mult':0.05,'tou.mult':0.05,'spe.mult':0.05 });
 		public static const ObsidianHeartFinalForm:PerkType = mk("Obsidian Heart (Final Form)", "Obsidian Heart (Final Form)",
-				".",
 				".");
 		public static const OniMusculature:PerkType = mk("Oni Musculature", "Oni Musculature",
 				"Your altered musculature allows to increase your natural strength and tone. Oni Rampage and Drunker Power can be used at Half-Oni score.").withBuffs({'str.mult':0.05});
@@ -305,7 +292,6 @@ public class MutationsLib
 		public static const OniMusculatureEvolved:PerkType = mk("Oni Musculature (Evolved)", "Oni Musculature (Evolved)",
 				"Your altered musculature increased again your natural strength and tone limit. Dmg multi from Oni Rampage increased to 6x, it duration increased by 3 turns and cooldown decreased by 3 turns. Drunken Power boost increased to 6x.").withBuffs({'str.mult':0.15});
 		public static const OniMusculatureFinalForm:PerkType = mk("Oni Musculature (Final Form)", "Oni Musculature (Final Form)",
-				".",
 				".");
 		public static const OrcAdrenalGlands:PerkType = mk("Orc Adrenal Glands", "Orc Adrenal Glands",
 				"Your Orc adrenal glands are increasing Ferocity limit by 1%, +5% of max core Str as phantom Str.");
@@ -314,7 +300,6 @@ public class MutationsLib
 		public static const OrcAdrenalGlandsEvolved:PerkType = mk("Orc Adrenal Glands (Evolved)", "Orc Adrenal Glands (Evolved)",
 				"Your Orc adrenal glands are giving you +15% of max core Str as phantom Str, increase your natural strength, boost natural wrath generation rate, allow to use Ferocity even when been no longer an orc.").withBuffs({'str.mult':0.5});
 		public static const OrcAdrenalGlandsFinalForm:PerkType = mk("Orc Adrenal Glands (Final Form)", "Orc Adrenal Glands (Final Form)",
-				".",
 				".");
 		public static const PigBoarFat:PerkType = mk("Pig/Boar Fat", "Pig/Boar Fat",
 				"Your altered fat tissue allows to increase your natural resistance to damage, toughness and thickness. Increase max Hunger cap by 5 (if PC have Hunger bar active).").withBuffs({'tou.mult':0.05});
@@ -323,7 +308,14 @@ public class MutationsLib
 		public static const PigBoarFatEvolved:PerkType = mk("Pig/Boar Fat (Evolved)", "Pig/Boar Fat (Evolved)",
 				"Your altered fat tissue increased again your natural resistance to damage, toughness and thickness limit. Body Slam power increase twicefold and it not req. to be pig/boar to use it, also another lowering of min. thickness to use it. Increase max Hunger cap by 20 (if PC have Hunger bar active).").withBuffs({'tou.mult':0.15});
 		public static const PigBoarFatFinalForm:PerkType = mk("Pig/Boar Fat (Final Form)", "Pig/Boar Fat (Final Form)",
-				".",
+				".");
+		public static const RatatoskrSmarts:PerkType = mk("Ratatoskr smarts", "Ratatoskr smarts",
+				"Allows to perma Weird words.").withBuffs({'int.mult':0.05});
+		public static const RatatoskrSmartsPrimitive:PerkType = mk("Ratatoskr smarts ()", "Ratatoskr smarts (Evolved)",
+				"Increase the damage of Weird words by 20%. Lower cooldown of Knowledge overload by 1 turn.").withBuffs({'int.mult':0.10});
+		public static const RatatoskrSmartsEvolved:PerkType = mk("Ratatoskr smarts (Evolved)", "Ratatoskr smarts (Evolved)",
+				"Increase the damage of Weird words by another 30%. Lower cooldowns of ratatoskr specials by 1 turn. Knowledge is power is now three times as effective.").withBuffs({'int.mult':0.20});
+		public static const RatatoskrSmartsFinalForm:PerkType = mk("Ratatoskr smarts (Final Form)", "Ratatoskr smarts (Final Form)",
 				".");
 		public static const RaijuCathode:PerkType = mk("Raiju Cathode", "Raiju Cathode",
 				"Your Raiju Cathode provides an increase in speed by 10% and increase lust damage from weapons and natural weapons by 50%.").withBuffs({'spe.mult':0.10});
@@ -341,7 +333,12 @@ public class MutationsLib
 		public static const SalamanderAdrenalGlandsEvolved:PerkType = mk("Salamander Adrenal Glands (Evolved)", "Salamander Adrenal Glands (Evolved)",
 				"Your Salamander adrenal glands are giving you slight boost to your natural strength, stamina, speed, libido; double bonus to attack, boost slight natural wrath generation rate, extend berserking/lustzerking by 8 turns and enable to start with one or both of them.").withBuffs({'str.mult':0.15,'tou.mult':0.05,'spe.mult':0.15,'lib.mult':0.05});
 		public static const SalamanderAdrenalGlandsFinalForm:PerkType = mk("Salamander Adrenal Glands (Final Form)", "Salamander Adrenal Glands (Final Form)",
-				".",
+				".");
+		public static const ScyllaInkGlands:PerkType = mk("Scylla Ink Glands", "Scylla Ink Glands",
+				"Your Scylla Ink Glands increase rate at which your body produce ink and slight boost to your natural strength.").withBuffs({'str.mult':0.10});
+		public static const ScyllaInkGlandsPrimitive:PerkType = mk("Scylla Ink Glands (Primitive)", "Scylla Ink Glands (Primitive)",
+				".");
+		public static const ScyllaInkGlandsEvolved:PerkType = mk("Scylla Ink Glands (Evolved)", "Scylla Ink Glands (Evolved)",
 				".");
 		public static const SharkOlfactorySystem:PerkType = mk("Shark Olfactory System", "Shark Olfactory System",
 				"Shark Olfactory System increase bleed damage by 50% and increase melee damage against bleeding enemies  by 10%. Also allows non shark to use blood frenzy.").withBuffs({'spe.mult':0.05});
@@ -351,6 +348,14 @@ public class MutationsLib
 				"Shark Olfactory System (Evolved) double the bonuses of blood frenzy and increase bleed damage by 50% and increase melee damage against bleeding enemies by 25%.").withBuffs({'spe.mult':0.05,'int.mult':0.05,'wis.mult':0.05});
 		public static const SharkOlfactorySystemFinalForm:PerkType = mk("Shark Olfactory System (Final Form)", "Shark Olfactory System (Final Form)",
 				".");
+		public static const TrachealSystem:PerkType = mk("Tracheal System", "Tracheal System",
+				"Your body possesses rudimentary respiratory system of the insects.").withBuffs({'str.mult':0.01, 'spe.mult':0.02});
+		public static const TrachealSystemPrimitive:PerkType = mk("Tracheal System (Primitive)", "Tracheal System (Primitive)",
+				"Your body possesses basic respiratory system of the insects.").withBuffs({'str.mult':0.02, 'tou.mult':0.01, 'spe.mult':0.03});
+		public static const TrachealSystemEvolved:PerkType = mk("Tracheal System (Evolved)", "Tracheal System (Evolved)",
+				"Your body possesses half developed respiratory system of the insects.").withBuffs({'str.mult':0.04, 'tou.mult':0.03, 'spe.mult':0.05});
+		public static const TrachealSystemFinalForm:PerkType = mk("Tracheal System (Final Form)", "Tracheal System (Final Form)",
+				"Your body possesses fully developed respiratory system of the insects.").withBuffs({'str.mult':0.08, 'tou.mult':0.06, 'spe.mult':0.10});
 		public static const TwinHeart:PerkType = mk("Twin Heart", "Twin Heart",
 				"+40% fatigue recovery and +5 to max tou/spe (scalable). +100% fatigue recovery, reduce Charge fatigue cost by 10% as well as its cooldown by 1 round so long as your body is tauric/drider. (Also raise all Taur race score by 1, by 2 as long pc is tauric/drider).").withBuffs({'tou.mult':0.05,'spe.mult':0.05});
 		public static const TwinHeartPrimitive:PerkType = mk("Twin Heart (Primitive)", "Twin Heart (Primitive)",
@@ -358,7 +363,6 @@ public class MutationsLib
 		public static const TwinHeartEvolved:PerkType = mk("Twin Heart (Evolved)", "Twin Heart (Evolved)",
 				"+40% fatigue recovery and +30 to max tou/spe (scalable). +100% fatigue recovery, reduce Charge fatigue cost by 10%, increase damage by 60%, its cooldown by 1 round so long as your body is tauric/drider. (Also raise all Taur race score by 1, by 2 as long pc is tauric/drider).").withBuffs({'tou.mult':0.30,'spe.mult':0.30});
 		public static const TwinHeartFinalForm:PerkType = mk("Twin Heart (Final Form)", "Twin Heart (Final Form)",
-				".",
 				".");
 		public static const VampiricBloodsteam:PerkType = mk("Vampiric Bloodsteam", "Vampiric Bloodsteam",
 				"Your bloodsteam started to adapt to presence of vampiric blood. Increases the maximum numbers of stacks of Vampire Thirst by 15.").withBuffs({'lib.mult':0.05});
@@ -367,7 +371,6 @@ public class MutationsLib
 		public static const VampiricBloodsteamEvolved:PerkType = mk("Vampiric Bloodsteam (Evolved)", "Vampiric Bloodsteam (Evolved)",
 				"Your bloodsteam fully adapted to presence of vampiric blood. Increases the maximum numbers of stacks of Vampire Thirst by 60 and increase their potency by 50%.").withBuffs({'lib.mult':0.15});
 		public static const VampiricBloodsteamFinalForm:PerkType = mk("Vampiric Bloodsteam (Final Form)", "Vampiric Bloodsteam (Final Form)",
-				".",
 				".");
 		public static const VenomGlands:PerkType = mk("Venom Glands", "Venom Glands",
 				"Your body possesses rudimentary venom glands along with changes in teeth to been able use this venom when biting.").withBuffs({'tou.mult':0.05});
@@ -376,7 +379,6 @@ public class MutationsLib
 		public static const VenomGlandsEvolved:PerkType = mk("Venom Glands (Evolved)", "Venom Glands (Evolved)",
 				"Your body possesses fully developed venom glands with large reservoir of venom and good recharge speed. (+10% to poison resistance)").withBuffs({'tou.mult':0.15});
 		public static const VenomGlandsFinalForm:PerkType = mk("Venom Glands (Final Form)", "Venom Glands (Final Form)",
-				".",
 				".");
 		public static const WhaleFat:PerkType = mk("Whale fat", "Whale fat",
 				"Your whale fat increase your damage reduction against physical attacks and grants you resistance to cold permanantly. Increase max Hunger cap by 5 (if PC have Hunger bar active).").withBuffs({'str.mult':0.05});
@@ -385,11 +387,10 @@ public class MutationsLib
 		public static const WhaleFatEvolved:PerkType = mk("Whale fat (Evolved)", "Whale fat (Evolved)",
 				"Your whale fat further increase your damage reduction against physical attacks and the duration of juggle is increased by 1 additionnal round. Juggle can now be used a third time. Increase max Hunger cap by 20 (if PC have Hunger bar active).").withBuffs({'tou.mult':0.20});
 		public static const WhaleFatFinalForm:PerkType = mk("Whale fat (Final Form)", "Whale fat (Final Form)",
-				".",
 				".");
 		public static const YetiFat:PerkType = mk("Yeti Fat", "Yeti Fat",
 				"Gain damage reduction against attacks and increase the strength of the yeti ice breath by 50%.");
-		public static const YetiFatPrimitive:PerkType = mk("Yeti Fat (Evolved)", "Yeti Fat (Evolved)",
+		public static const YetiFatPrimitive:PerkType = mk("Yeti Fat (Primitive)", "Yeti Fat (Primitive)",
 				"Gain further damage reduction against attacks and increase the potency of Big Hand And Feet by 50%.");
 		public static const YetiFatEvolved:PerkType = mk("Yeti Fat (Evolved)", "Yeti Fat (Evolved)",
 				"Gain further damage reduction against attacks, further increase the potency of Big Hand And Feet by 50% and increase the duration of yeti breath stun by 1 round while also reducing its cooldown by 3 rounds.");
@@ -414,7 +415,6 @@ public class MutationsLib
 				MutationsList.push([BlackHeart, BlackHeartPrimitive, BlackHeartEvolved]);
 				MutationsList.push([FrozenHeart, FrozenHeartPrimitive, FrozenHeartEvolved]);
 				MutationsList.push([ObsidianHeart, ObsidianHeartPrimitive, ObsidianHeartEvolved]);
-				MutationsList.push([TwinHeart, TwinHeartPrimitive, TwinHeartEvolved]);
 				MutationsList.push([HeartOfTheStorm, HeartOfTheStormPrimitive, HeartOfTheStormEvolved]);
 				MutationsList.push([DraconicHeart, DraconicHeartPrimitive, DraconicHeartEvolved]);
 			}
@@ -442,7 +442,6 @@ public class MutationsLib
 				MutationsList.push([YetiFat, YetiFatPrimitive, YetiFatEvolved]);
 			}
 			function mutationsLungs():void{
-				MutationsList.push([ArachnidBookLung, ArachnidBookLungPrimitive, ArachnidBookLungEvolved]);
 				MutationsList.push([DraconicLungs, DraconicLungsPrimitive, DraconicLungsEvolved]);
 				//MutationsList.push([CaveWyrmLungs, CaveWyrmLungsEvolved, CaveWyrmLungsFinalForm]);
 				MutationsList.push([MelkieLung, MelkieLungPrimitive, MelkieLungEvolved]);
@@ -466,10 +465,14 @@ public class MutationsLib
 				MutationsList.push([GazerEye, GazerEyePrimitive, GazerEyeEvolved]);
 				MutationsList.push([GorgonsEyes, GorgonsEyesPrimitive]);
 			}
-			function mutationsNervSys():void{
+			function mutationsPeriNervSys():void{
 				MutationsList.push([ElvishPeripheralNervSys, ElvishPeripheralNervSysPrimitive, ElvishPeripheralNervSysEvolved]);
 				MutationsList.push([RaijuCathode, RaijuCathodePrimitive, RaijuCathodeEvolved]);
 				MutationsList.push([SharkOlfactorySystem, SharkOlfactorySystemPrimitive, SharkOlfactorySystemEvolved]);
+			}
+			function mutationsCenNervSys():void{
+				MutationsList.push([EclipticMind, EclipticMindPrimitive, EclipticMindEvolved]);
+				MutationsList.push([RatatoskrSmarts, RatatoskrSmartsPrimitive, RatatoskrSmartsEvolved]);
 			}
 			function mutationsBone():void{
 				MutationsList.push([LizanMarrow, LizanMarrowPrimitive, LizanMarrowEvolved]);
@@ -481,11 +484,18 @@ public class MutationsLib
 				//MutationsList.push([NekomataThyroidGland, NekomataThyroidGlandEvolved, NekomataThyroidGlandFinalForm]);
 			}
 			function mutationsParaThyroidGlands():void{
-				MutationsList.push([KitsuneParathyroidGlands, KitsuneParathyroidGlandsEvolved, KitsuneParathyroidGlandsFinalForm]);
-				MutationsList.push([HellcatParathyroidGlands, HellcatParathyroidGlandsEvolved, HellcatParathyroidGlandsFinalForm]);
+				//MutationsList.push([KitsuneParathyroidGlands, KitsuneParathyroidGlandsEvolved, KitsuneParathyroidGlandsFinalForm]);
+				//MutationsList.push([HellcatParathyroidGlands, HellcatParathyroidGlandsEvolved, HellcatParathyroidGlandsFinalForm]);
+			}
+			function mutationsAdaptations():void{
+				MutationsList.push([ArachnidBookLung, ArachnidBookLungPrimitive, ArachnidBookLungEvolved]);
+				MutationsList.push([CatlikeNimbleness, CatlikeNimblenessPrimitive, CatlikeNimblenessEvolved]);
+				MutationsList.push([ScyllaInkGlands]);
+				MutationsList.push([TrachealSystem, TrachealSystemPrimitive, TrachealSystemEvolved, TrachealSystemFinalForm]);
+				MutationsList.push([TwinHeart, TwinHeartPrimitive, TwinHeartEvolved]);
 			}
 			function mutationsDeprecated():void{
-				MutationsList.push([NekomataThyroidGlandFinalForm, HellcatParathyroidGlandsFinalForm, CaveWyrmLungsFinalForm, KitsuneParathyroidGlandsFinalForm, ArachnidBookLungFinalForm, BlackHeartFinalForm, DraconicBonesFinalForm, DraconicHeartFinalForm, DraconicLungsFinalForm, DrakeLungsFinalForm, EasterBunnyEggBagFinalForm, ElvishPeripheralNervSysFinalForm, FeyArcaneBloodstreamFinalForm, FloralOvariesFinalForm, FrozenHeartFinalForm, GazerEyeFinalForm, GorgonsEyesFinalForm, HarpyHollowBonesFinalForm, HeartOfTheStormFinalForm, HinezumiBurningBloodFinalForm, HollowFangsFinalForm, KitsuneThyroidGlandFinalForm, LactaBovinaOvariesFinalForm, LizanMarrowFinalForm, MantislikeAgilityFinalForm, MelkieLungFinalForm, MinotaurTesticlesFinalForm, NukiNutsFinalForm, ObsidianHeartFinalForm, OniMusculatureFinalForm, OrcAdrenalGlandsFinalForm, PigBoarFatFinalForm, SalamanderAdrenalGlandsFinalForm, TwinHeartFinalForm, VampiricBloodsteamFinalForm, VenomGlandsFinalForm, WhaleFatFinalForm, YetiFatFinalForm]);
+				MutationsList.push([NekomataThyroidGlandFinalForm, HellcatParathyroidGlandsFinalForm, CaveWyrmLungsFinalForm, KitsuneParathyroidGlandsFinalForm, ArachnidBookLungFinalForm, BlackHeartFinalForm, CatlikeNimblenessFinalForm, DraconicBonesFinalForm, DraconicHeartFinalForm, DraconicLungsFinalForm, DrakeLungsFinalForm, EasterBunnyEggBagFinalForm, EclipticMindFinalForm, ElvishPeripheralNervSysFinalForm, FeyArcaneBloodstreamFinalForm, FloralOvariesFinalForm, FrozenHeartFinalForm, GazerEyeFinalForm, GorgonsEyesFinalForm, HarpyHollowBonesFinalForm, HeartOfTheStormFinalForm, HinezumiBurningBloodFinalForm, HollowFangsFinalForm, KitsuneThyroidGlandFinalForm, LactaBovinaOvariesFinalForm, LizanMarrowFinalForm, MantislikeAgilityFinalForm, MelkieLungFinalForm, MinotaurTesticlesFinalForm, NukiNutsFinalForm, ObsidianHeartFinalForm, OniMusculatureFinalForm, OrcAdrenalGlandsFinalForm, PigBoarFatFinalForm, RatatoskrSmartsFinalForm, SalamanderAdrenalGlandsFinalForm, ScyllaInkGlandsPrimitive, ScyllaInkGlandsEvolved, TwinHeartFinalForm, VampiricBloodsteamFinalForm, VenomGlandsFinalForm, WhaleFatFinalForm, YetiFatFinalForm]);
 			}
 
 			switch(spec){
@@ -522,17 +532,23 @@ public class MutationsLib
 				case "Eyes":
 					mutationsEyes();
 					break;
-				case "Nerv/Sys":
-					mutationsNervSys();
-					break;
 				case "Bone":
 					mutationsBone();
+					break;
+				case "PNerv/Sys":
+					mutationsPeriNervSys();
+					break;
+				case "CNerv/Sys":
+					mutationsCenNervSys();
 					break;
 				case "Thyroid":
 					mutationsThyroidGlands();
 					break;
 				case "PThyroid":
 					mutationsParaThyroidGlands();
+					break;
+				case "Adaptations":
+					mutationsAdaptations();
 					break;
 				case "Deprecated":
 					mutationsDeprecated();
@@ -549,10 +565,12 @@ public class MutationsLib
 					mutationsOvaries();
 					mutationsTesticles();
 					mutationsEyes();
-					mutationsNervSys();
 					mutationsBone();
+					mutationsPeriNervSys();
+					mutationsCenNervSys();
 					mutationsThyroidGlands();
 					mutationsParaThyroidGlands();
+					mutationsAdaptations();
 			}
 
 			if (merge){
@@ -569,13 +587,18 @@ public class MutationsLib
 
 		private static function initMutations():void{
 			try {
+				//Phoenix Thorax czy jakiś inny związany z morphami perk ub coś związane z gardłem - dla ras mogących używać ultradźwieki jako atak lub kogoś typu banshee atak wyciem
+				//Perk związany ze skórą
 				//Tier 1
-				ArachnidBookLung.requireLungsMutationSlot().requireCustomFunction(function (player:Player):Boolean {
-					return player.spiderScore() >= 5 || player.atlachNachaScore() >= 5;
+				ArachnidBookLung.requireAdaptationsMutationSlot().requireCustomFunction(function (player:Player):Boolean {
+					return player.spiderScore() >= 5 || player.atlachNachaScore() >= 17;
 				}, "Arachnid race");
 				BlackHeart.requireHeartMutationSlot().requirePerk(PerkLib.DarkCharm).requireCor(100).requireCustomFunction(function (player:Player):Boolean {
 					return player.demonScore() >= 5;
 				}, "Demon race");
+				CatlikeNimbleness.requirePerk(PerkLib.Flexibility).requireCustomFunction(function (player:Player):Boolean {
+					return player.catScore() >= 4 || player.nekomataScore() >= 4 || player.displacerbeastScore() >= 4 || player.hellcatScore() >= 4 || player.cheshireScore() >= 4 || player.sphinxScore() >= 4;
+				}, "Any cat race");
 				DisplacerMetabolism.requireMetabolismMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.displacerbeastScore() >= 8;
 				}, "Displacer beast");
@@ -610,6 +633,9 @@ public class MutationsLib
 				EasterBunnyEggBag.requireBallsMutationSlot().requirePerk(PerkLib.EasterBunnyBalls).requireCustomFunction(function (player:Player):Boolean {
 					return player.easterbunnyScore() >= 12;
 				}, "Easter Bunny race and Easter bunny balls.");
+				EclipticMind.requireCentralNervSysMutationSlot().requireCustomFunction(function (player:Player):Boolean {
+					return player.alicornScore() >= 12 || player.unicornScore() >= 12 || player.alicornkinScore() >= 10 || player.unicornkinScore() >= 10;
+				}, "Unicorn or Bicorn race");
 				ElvishPeripheralNervSys.requireNervSysMutationSlot().requirePerk(PerkLib.ElvenSense).requireCustomFunction(function (player:Player):Boolean {
 					return player.elfScore() >= 4 || player.woodElfScore() >= 17;
 				}, "Elf race");
@@ -648,7 +674,7 @@ public class MutationsLib
 						}, "Hinezumi tail")
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.mouseScore() >= 12;
-						}, "Mouse race");
+						}, "Hinezumi race (Mouse 12+)");
 				HarpyHollowBones.requireBonesAndMarrowMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.harpyScore() >= 6 || player.sirenScore() >= 10 || player.thunderbirdScore() >= 10 || player.phoenixScore() >= 10 || player.couatlScore() >= 11;
 				}, "Harpy winged race");
@@ -680,7 +706,7 @@ public class MutationsLib
 				ManticoreMetabolism.requireMetabolismMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.manticoreScore() >= 5 && player.tailType == Tail.MANTICORE_PUSSYTAIL;
 				}, "Manticore race and tail");
-				MantislikeAgility.requireMusclesMutationSlot().requirePerk(PerkLib.TrachealSystem).requireCustomFunction(function (player:Player):Boolean {
+				MantislikeAgility.requireMusclesMutationSlot().requirePerk(TrachealSystem).requireCustomFunction(function (player:Player):Boolean {
 					return player.mantisScore() >= 5;
 				}, "Mantis race");
 				MelkieLung.requireLungsMutationSlot().requireCustomFunction(function (player:Player):Boolean {
@@ -722,14 +748,25 @@ public class MutationsLib
 				RaijuCathode.requireNervSysMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.raijuScore() >= 8;
 				}, "raiju race");
+				RatatoskrSmarts.requireCentralNervSysMutationSlot().requirePerk(PerkLib.KnowledgeIsPower).requireCustomFunction(function (player:Player):Boolean {
+					return player.ratatoskrScore() >= 4;
+				}, "Squirrel/Ratatoskr race");
 				SalamanderAdrenalGlands.requireAdrenalGlandsMutationSlot().requirePerk(PerkLib.Lustzerker).requireCustomFunction(function (player:Player):Boolean {
 					return player.salamanderScore() >= 8 || player.phoenixScore() >= 10;
 				}, "Salamander race");
 				SharkOlfactorySystem.requireNervSysMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.sharkScore() >= 8;
 				}, "Shark race");
-				TwinHeart.requireHeartMutationSlot().requireCustomFunction(function (player:Player):Boolean {
-					return player.centaurScore() >= 4 || player.unicornScore() >= 8 || player.sphinxScore() >= 15 || player.cancerScore() >= 8;
+				ScyllaInkGlands.requirePerk(PerkLib.InkSpray).requireCustomFunction(function (player:Player):Boolean {
+					return player.scyllaScore() >= 5;
+				}, "Scylla race");
+				TrachealSystem.requireCustomFunction(function (player:Player):Boolean {
+			//		return player.lowerBody == LowerBody.DRIDER;
+			//	}, "Drider Lower Body").requireCustomFunction(function (player:Player):Boolean {
+					return player.beeScore() >= 4 || player.mantisScore() >= 4 || player.scorpionScore() >= 4 || player.spiderScore() >= 4 || player.cancerScore() >= 4 || player.atlachNachaScore() >= 17;
+				}, "Any insect race");
+				TwinHeart.requireAdaptationsMutationSlot().requireCustomFunction(function (player:Player):Boolean {
+					return player.centaurScore() >= 4 || player.unicornScore() >= 8 || player.sphinxScore() >= 15 || player.cancerScore() >= 8 || player.isTaur();
 				}, "Tauric or Unicorn race");
 				VampiricBloodsteam.requireBloodsteamMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.hasStatusEffect(StatusEffects.VampireThirst);
@@ -750,55 +787,63 @@ public class MutationsLib
 					return player.yetiScore() >= 14;
 				}, "Yeti race");
 				//Tier 2
-				ArachnidBookLungPrimitive.requireLevel(6)
+				ArachnidBookLungPrimitive.requireLevel(30)
 						.requirePerk(ArachnidBookLung)
 						.requireCustomFunction(function (player:Player):Boolean {
-							return player.spiderScore() >= 9 || player.atlachNachaScore() >= 9;
+							return player.spiderScore() >= 7 || player.atlachNachaScore() >= 18;
 						}, "Arachnid race");
-				BlackHeartPrimitive.requireLevel(6)
+				BlackHeartPrimitive.requireLevel(30)
 						.requirePerk(BlackHeart)
 						.requireCor(100)
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.demonScore() >= 9;
 						}, "Demon race");
-				DisplacerMetabolismPrimitive.requireLevel(12)
+				CatlikeNimblenessEvolved.requireLevel(30)
+						.requirePerk(CatlikeNimbleness)
+						.requireCustomFunction(function (player:Player):Boolean {
+							return player.catScore() >= 7 || player.nekomataScore() >= 8 || player.displacerbeastScore() >= 8 || player.hellcatScore() >= 8 || player.cheshireScore() >= 8 || player.sphinxScore() >= 8;
+						}, "Any cat race");
+				DisplacerMetabolismPrimitive.requireLevel(30)
 						.requirePerk(DisplacerMetabolism).requireCustomFunction(function (player:Player):Boolean {
 					return player.displacerbeastScore() >= 12;
 				}, "Displacer beast");
-				DraconicBonesPrimitive.requireLevel(12).requirePerk(DraconicBones)
+				DraconicBonesPrimitive.requireLevel(30).requirePerk(DraconicBones)
 						.requireCustomFunction(function (player:Player):Boolean {
 							return (player.dragonScore() >= 12 || player.frostWyrmScore() >= 12 || player.leviathanScore() >= 20);
 						}, "Dragon race or its variants");
-				DraconicHeartPrimitive.requireLevel(12).requirePerk(DraconicHeart)
+				DraconicHeartPrimitive.requireLevel(30).requirePerk(DraconicHeart)
 						.requireCustomFunction(function (player:Player):Boolean {
 							return (player.dragonScore() >= 12 || player.frostWyrmScore() >= 12 || player.leviathanScore() >= 20);
 						}, "Dragon race or its variants");
-				DraconicLungsPrimitive.requireLevel(12).requirePerk(DraconicLungs)
+				DraconicLungsPrimitive.requireLevel(30).requirePerk(DraconicLungs)
 						.requireCustomFunction(function (player:Player):Boolean {
 							return (player.dragonScore() >= 12);
 						}, "Dragon race");
-				DrakeLungsPrimitive.requireLevel(12).requirePerk(DrakeLungs)
+				DrakeLungsPrimitive.requireLevel(30).requirePerk(DrakeLungs)
 						.requireCustomFunction(function (player:Player):Boolean {
 							return (player.frostWyrmScore() >= 12 || player.jabberwockyScore() >= 12 || player.vouivreScore() >= 12 || player.leviathanScore() >= 20);
 						}, "Variants of the dragon race");
-				EasterBunnyEggBagPrimitive.requireLevel(12).requirePerk(EasterBunnyEggBag).requireCustomFunction(function (player:Player):Boolean {
+				EasterBunnyEggBagPrimitive.requireLevel(30).requirePerk(EasterBunnyEggBag).requireCustomFunction(function (player:Player):Boolean {
 					return player.easterbunnyScore() >= 12;
 				}, "Easter Bunny race and Easter bunny balls.");
-				ElvishPeripheralNervSysPrimitive.requireLevel(12).requirePerk(ElvishPeripheralNervSys).requireCustomFunction(function (player:Player):Boolean {
+				EclipticMindPrimitive.requireLevel(30).requirePerk(EclipticMind).requireCustomFunction(function (player:Player):Boolean {
+					return player.alicornScore() >= 12 || player.unicornScore() >= 12 || player.alicornkinScore() >= 10 || player.unicornkinScore() >= 10;
+				}, "Unicorn or Bicorn race");
+				ElvishPeripheralNervSysPrimitive.requireLevel(30).requirePerk(ElvishPeripheralNervSys).requireCustomFunction(function (player:Player):Boolean {
 					return player.elfScore() >= 8 || player.woodElfScore() >= 17;
 				}, "Elf race");
-				FeyArcaneBloodstreamPrimitive.requireLevel(12).requirePerk(FeyArcaneBloodstream).requireCustomFunction(function (player:Player):Boolean {
+				FeyArcaneBloodstreamPrimitive.requireLevel(30).requirePerk(FeyArcaneBloodstream).requireCustomFunction(function (player:Player):Boolean {
 					return player.fairyScore() >= 21;
 				}, "Fairy race");
-				FloralOvariesPrimitive.requireLevel(6).requirePerk(FloralOvaries).requireCustomFunction(function (player:Player):Boolean {
+				FloralOvariesPrimitive.requireLevel(30).requirePerk(FloralOvaries).requireCustomFunction(function (player:Player):Boolean {
 					return player.alrauneScore() >= 13;
 				}, "Alraune race");
-				FrozenHeartPrimitive.requireLevel(6)
+				FrozenHeartPrimitive.requireLevel(30)
 						.requirePerk(FrozenHeart)
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.yukiOnnaScore() >= 14;
 						}, "Yuki onna race");
-				GazerEyePrimitive.requireLevel(12)
+				GazerEyePrimitive.requireLevel(30)
 						.requirePerk(GazerEye)
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.eyes.type == 36;
@@ -809,18 +854,18 @@ public class MutationsLib
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.gazerScore() >= 8;
 						}, "Gazer race");
-				GorgonsEyesPrimitive.requireLevel(6)
+				GorgonsEyesPrimitive.requireLevel(30)
 						.requirePerk(GorgonsEyes)
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.gorgonScore() >= 10;
 						}, "Gorgon race");
-				HarpyHollowBonesPrimitive.requireLevel(6).requirePerk(HarpyHollowBones).requireCustomFunction(function (player:Player):Boolean {
+				HarpyHollowBonesPrimitive.requireLevel(30).requirePerk(HarpyHollowBones).requireCustomFunction(function (player:Player):Boolean {
 					return player.harpyScore() >= 7 || player.sirenScore() >= 11 || player.thunderbirdScore() >= 11 || player.phoenixScore() >= 11 || player.couatlScore() >= 12;
 				}, "Harpy winged race");
-				HeartOfTheStormPrimitive.requireLevel(6).requirePerk(HeartOfTheStorm).requireCustomFunction(function (player:Player):Boolean {
+				HeartOfTheStormPrimitive.requireLevel(30).requirePerk(HeartOfTheStorm).requireCustomFunction(function (player:Player):Boolean {
 					return player.raijuScore() >= 9 || player.thunderbirdScore() >= 11 || player.kamaitachiScore() >= 11 || player.couatlScore() >= 12;
 				}, "Stormborn race");
-				HinezumiBurningBloodPrimitive.requireLevel(6)
+				HinezumiBurningBloodPrimitive.requireLevel(30)
 						.requirePerk(HinezumiBurningBlood)
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.arms.type == Arms.HINEZUMI;
@@ -834,16 +879,16 @@ public class MutationsLib
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.mouseScore() >= 12;
 						}, "Mouse race");
-				HollowFangsPrimitive.requireLevel(12).requirePerk(HollowFangs)
+				HollowFangsPrimitive.requireLevel(30).requirePerk(HollowFangs)
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.vampireScore() >= 8;//potem dodać mosquito race i ew. inne co mogą wypijać krew
 						}, "Vampire race");
-				KitsuneThyroidGlandPrimitive.requireLevel(12)
+				KitsuneThyroidGlandPrimitive.requireLevel(30)
 						.requirePerk(KitsuneThyroidGland)
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.kitsuneScore() >= 8;
 						}, "Kitsune race");
-				LactaBovinaOvariesPrimitive.requireLevel(18)
+				LactaBovinaOvariesPrimitive.requireLevel(30)
 						.requirePerk(LactaBovinaOvaries)
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.hasVagina();
@@ -854,21 +899,21 @@ public class MutationsLib
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.cowScore() >= 8;
 						}, "Lacta Bovine race");
-				LizanMarrowPrimitive.requireLevel(12).requirePerk(LizanMarrow).requireCustomFunction(function (player:Player):Boolean {
+				LizanMarrowPrimitive.requireLevel(30).requirePerk(LizanMarrow).requireCustomFunction(function (player:Player):Boolean {
 					return player.lizardScore() >= 8;
 				}, "Lizan race");
-				ManticoreMetabolismPrimitive.requireLevel(6)
+				ManticoreMetabolismPrimitive.requireLevel(30)
 						.requirePerk(ManticoreMetabolism)
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.manticoreScore() >= 10 && player.tailType == Tail.MANTICORE_PUSSYTAIL;
 						}, "Manticore race and tail");
-				MantislikeAgilityPrimitive.requireLevel(12).requirePerk(MantislikeAgility).requireCustomFunction(function (player:Player):Boolean {
+				MantislikeAgilityPrimitive.requireLevel(30).requirePerk(MantislikeAgility).requireCustomFunction(function (player:Player):Boolean {
 					return player.mantisScore() >= 10;
 				}, "Mantis race");
-				MelkieLungPrimitive.requirePerk(MelkieLung).requireCustomFunction(function (player:Player):Boolean {
+				MelkieLungPrimitive.requireLevel(30).requirePerk(MelkieLung).requireCustomFunction(function (player:Player):Boolean {
 					return player.melkieScore() >= 12;
 				}, "Melkie race");
-				MinotaurTesticlesPrimitive.requireLevel(18)
+				MinotaurTesticlesPrimitive.requireLevel(30)
 						.requirePerk(MinotaurTesticles)
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.hasCock();
@@ -879,28 +924,28 @@ public class MutationsLib
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.minotaurScore() >= 8;
 						}, "Minotaur race");
-				NaturalPunchingBagPrimitive.requireLevel(12).requirePerk(NaturalPunchingBag).requireCustomFunction(function (player:Player):Boolean {
+				NaturalPunchingBagPrimitive.requireLevel(30).requirePerk(NaturalPunchingBag).requireCustomFunction(function (player:Player):Boolean {
 					return player.isGoblinoid()
 				}, "Goblin race");
-				NukiNutsPrimitive.requireLevel(12).requirePerk(NukiNuts).requireCustomFunction(function (player:Player):Boolean {
+				NukiNutsPrimitive.requireLevel(30).requirePerk(NukiNuts).requireCustomFunction(function (player:Player):Boolean {
 					return player.raccoonScore() >= 10 && player.balls > 0 && player.ballSize > 5;
 				}, "Tanuki race and large balls");
-				ObsidianHeartPrimitive.requireLevel(6)
+				ObsidianHeartPrimitive.requireLevel(30)
 						.requirePerk(ObsidianHeart)
 						.requireCor(100)
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.devilkinScore() >= 12;
 						}, "Devil race");
-				OniMusculaturePrimitive.requireLevel(12).requirePerk(OniMusculature).requireCustomFunction(function (player:Player):Boolean {
+				OniMusculaturePrimitive.requireLevel(30).requirePerk(OniMusculature).requireCustomFunction(function (player:Player):Boolean {
 					return player.tone >= 100;
 				}, "100+ tone")
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.oniScore() >= 8;
 						}, "Oni race");
-				OrcAdrenalGlandsPrimitive.requireLevel(12).requirePerk(OrcAdrenalGlands).requireCustomFunction(function (player:Player):Boolean {
+				OrcAdrenalGlandsPrimitive.requireLevel(30).requirePerk(OrcAdrenalGlands).requireCustomFunction(function (player:Player):Boolean {
 					return player.orcScore() >= 8;
 				}, "Orc race");
-				PigBoarFatPrimitive.requireLevel(12).requirePerk(PigBoarFat).requireCustomFunction(function (player:Player):Boolean {
+				PigBoarFatPrimitive.requireLevel(30).requirePerk(PigBoarFat).requireCustomFunction(function (player:Player):Boolean {
 					return player.thickness >= 100;
 				}, "100+ thickness")
 						.requireCustomFunction(function (player:Player):Boolean {
@@ -909,78 +954,97 @@ public class MutationsLib
 				RaijuCathodePrimitive.requireLevel(12).requirePerk(RaijuCathode).requireCustomFunction(function (player:Player):Boolean {
 					return player.raijuScore() >= 9;
 				}, "raiju race");
+				RatatoskrSmartsPrimitive.requireLevel(30).requirePerk(RatatoskrSmarts).requireCustomFunction(function (player:Player):Boolean {
+					return player.ratatoskrScore() >= 8;
+				}, "Squirrel/Ratatoskr race");
 				SalamanderAdrenalGlandsPrimitive.requireLevel(12).requirePerk(SalamanderAdrenalGlands).requireCustomFunction(function (player:Player):Boolean {
 					return player.salamanderScore() >= 9 || player.phoenixScore() >= 11;
 				}, "Salamander race");
+				ScyllaInkGlandsEvolved.requireLevel(30).requirePerk(ScyllaInkGlands).requireCustomFunction(function (player:Player):Boolean {
+					return player.scyllaScore() >= 10;
+				}, "Scylla race");
 				SharkOlfactorySystemPrimitive.requireLevel(12).requirePerk(SharkOlfactorySystem).requireCustomFunction(function (player:Player):Boolean {
 					return player.sharkScore() >= 9;
 				}, "Shark race");
-				TwinHeartPrimitive.requireLevel(6)
+				TrachealSystemPrimitive.requireLevel(30).requirePerk(TrachealSystem).requireCustomFunction(function (player:Player):Boolean {
+			//		return player.lowerBody == LowerBody.DRIDER;
+			//	}, "Drider Lower Body").requireCustomFunction(function (player:Player):Boolean {
+					return player.beeScore() >= 8 || player.mantisScore() >= 8 || player.scorpionScore() >= 8 || player.spiderScore() >= 8 || player.cancerScore() >= 8 || player.atlachNachaScore() >= 18;
+				}, "Any insect race");
+				TwinHeartPrimitive.requireLevel(30)
 						.requirePerk(TwinHeart)
 						.requireCustomFunction(function (player:Player):Boolean {
-							return player.centaurScore() >= 8 || player.unicornScore() >= 8 || player.sphinxScore() >= 16 || player.cancerScore() >= 8;
+							return player.centaurScore() >= 8 || player.unicornScore() >= 8 || player.sphinxScore() >= 16 || player.cancerScore() >= 8 || player.isTaur();
 						}, "Tauric or Unicorn race");
-				VampiricBloodsteamPrimitive.requireLevel(12).requirePerk(VampiricBloodsteam).requireCustomFunction(function (player:Player):Boolean {
+				VampiricBloodsteamPrimitive.requireLevel(30).requirePerk(VampiricBloodsteam).requireCustomFunction(function (player:Player):Boolean {
 					return player.hasStatusEffect(StatusEffects.VampireThirst);
 				}, "Vampire Thirst")
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.vampireScore() >= 8;//potem dodać mosquito race i ew. inne co mogą wypijać krew
 						}, "Vampire race");
 				VenomGlandsPrimitive.requireLevel(12).requirePerk(VenomGlands).requireCustomFunction(function (player:Player):Boolean {
-					return player.spiderScore() >= 8 || player.atlachNachaScore() >= 17 || player.apophisScore() >= 23 || player.nagaScore() >= 6 || player.gorgonScore() >= 8 || player.vouivreScore() >= 8 || player.couatlScore() >= 8 || player.hydraScore() >= 8;
+					return player.spiderScore() >= 8 || player.atlachNachaScore() >= 18 || player.apophisScore() >= 23 || player.nagaScore() >= 6 || player.gorgonScore() >= 8 || player.vouivreScore() >= 8 || player.couatlScore() >= 8 || player.hydraScore() >= 8;
 				}, "Spider or any snake-like race");
-				WhaleFatPrimitive.requireLevel(12).requirePerk(WhaleFat).requireCustomFunction(function (player:Player):Boolean {
+				WhaleFatPrimitive.requireLevel(30).requirePerk(WhaleFat).requireCustomFunction(function (player:Player):Boolean {
 					return player.orcaScore() >= 9 || player.leviathanScore() >= 20;
 				}, "Orca race");
-				YetiFatPrimitive.requireLevel(12).requirePerk(YetiFat).requireCustomFunction(function (player:Player):Boolean {
+				YetiFatPrimitive.requireLevel(30).requirePerk(YetiFat).requireCustomFunction(function (player:Player):Boolean {
 					return player.yetiScore() >= 15;
 				}, "Yeti race");
 				//Tier 3
-				ArachnidBookLungEvolved.requireLevel(24)
+				ArachnidBookLungEvolved.requireLevel(60)
 						.requirePerk(ArachnidBookLungPrimitive)
 						.requireCustomFunction(function (player:Player):Boolean {
-							return player.spiderScore() >= 9 || player.atlachNachaScore() >= 9;
+							return player.spiderScore() >= 9 || player.atlachNachaScore() >= 19;
 						}, "Arachnid race");
-				BlackHeartEvolved.requireLevel(24)
+				BlackHeartEvolved.requireLevel(60)
 						.requirePerk(BlackHeartPrimitive)
 						.requireCor(100)
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.demonScore() >= 14;
 						}, "Demon race");
-				DraconicBonesEvolved.requireLevel(30).requirePerk(DraconicBonesPrimitive)
+				CatlikeNimblenessFinalForm.requireLevel(60)
+					.requirePerk(CatlikeNimblenessEvolved)
+					.requireCustomFunction(function (player:Player):Boolean {
+						return player.catScore() >= 10 || player.nekomataScore() >= 12 || player.displacerbeastScore() >= 12 || player.hellcatScore() >= 12 || player.cheshireScore() >= 12 || player.sphinxScore() >= 12;
+				}, "Any cat race");
+				DraconicBonesEvolved.requireLevel(60).requirePerk(DraconicBonesPrimitive)
 						.requireCustomFunction(function (player:Player):Boolean {
 							return (player.dragonScore() >= 16 || player.frostWyrmScore() >= 15 || player.leviathanScore() >= 20);
 						}, "Dragon race or its variants");
-				DraconicHeartEvolved.requireLevel(30).requirePerk(DraconicHeartPrimitive)
+				DraconicHeartEvolved.requireLevel(60).requirePerk(DraconicHeartPrimitive)
 						.requireCustomFunction(function (player:Player):Boolean {
 							return (player.dragonScore() >= 16 || player.jabberwockyScore() >= 16 || player.frostWyrmScore() >= 15 || player.leviathanScore() >= 20);
 						}, "Dragon race or its variants");
-				DraconicLungsEvolved.requireLevel(30).requirePerk(DraconicLungsPrimitive)
+				DraconicLungsEvolved.requireLevel(60).requirePerk(DraconicLungsPrimitive)
 						.requireCustomFunction(function (player:Player):Boolean {
 							return (player.dragonScore() >= 16);
 						}, "Dragon race");
-				DrakeLungsEvolved.requireLevel(30).requirePerk(DrakeLungsPrimitive)
+				DrakeLungsEvolved.requireLevel(60).requirePerk(DrakeLungsPrimitive)
 						.requireCustomFunction(function (player:Player):Boolean {
 							return (player.frostWyrmScore() >= 15 || player.jabberwockyScore() >= 15 || player.vouivreScore() >= 13 || player.leviathanScore() >= 20);
 						}, "Variants of the dragon race");
-				EasterBunnyEggBagEvolved.requireLevel(30).requirePerk(EasterBunnyEggBagPrimitive).requireCustomFunction(function (player:Player):Boolean {
+				EasterBunnyEggBagEvolved.requireLevel(60).requirePerk(EasterBunnyEggBagPrimitive).requireCustomFunction(function (player:Player):Boolean {
 					return player.easterbunnyScore() >= 12;
 				}, "Easter Bunny race and Easter bunny balls.");
-				ElvishPeripheralNervSysEvolved.requireLevel(30).requirePerk(ElvishPeripheralNervSysPrimitive).requireCustomFunction(function (player:Player):Boolean {
+				EclipticMindEvolved.requireLevel(60).requirePerk(EclipticMindPrimitive).requireCustomFunction(function (player:Player):Boolean {
+					return player.alicornScore() >= 12 || player.unicornScore() >= 12 || player.alicornkinScore() >= 10 || player.unicornkinScore() >= 10;
+				}, "Unicorn or Bicorn race");
+				ElvishPeripheralNervSysEvolved.requireLevel(60).requirePerk(ElvishPeripheralNervSysPrimitive).requireCustomFunction(function (player:Player):Boolean {
 					return player.elfScore() >= 12 || player.woodElfScore() >= 17;
 				}, "Elf race");
-				FeyArcaneBloodstreamEvolved.requireLevel(24).requirePerk(FeyArcaneBloodstreamPrimitive).requireCustomFunction(function (player:Player):Boolean {
+				FeyArcaneBloodstreamEvolved.requireLevel(60).requirePerk(FeyArcaneBloodstreamPrimitive).requireCustomFunction(function (player:Player):Boolean {
 					return player.fairyScore() >= 22;
 				}, "Fairy race");
-				FloralOvariesEvolved.requireLevel(24).requirePerk(FloralOvariesPrimitive).requireCustomFunction(function (player:Player):Boolean {
+				FloralOvariesEvolved.requireLevel(60).requirePerk(FloralOvariesPrimitive).requireCustomFunction(function (player:Player):Boolean {
 					return player.alrauneScore() >= 13;
 				}, "Alraune race");
-				FrozenHeartEvolved.requireLevel(24)
+				FrozenHeartEvolved.requireLevel(60)
 						.requirePerk(FrozenHeartPrimitive)
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.yukiOnnaScore() >= 14;
 						}, "Yuki onna race");
-				GazerEyeEvolved.requireLevel(30)
+				GazerEyeEvolved.requireLevel(60)
 						.requirePerk(GazerEyePrimitive)
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.eyes.type == 36;
@@ -991,17 +1055,17 @@ public class MutationsLib
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.gazerScore() >= 12;
 						}, "Gazer race");
-				HollowFangsEvolved.requireLevel(30).requirePerk(HollowFangsPrimitive)
+				HollowFangsEvolved.requireLevel(60).requirePerk(HollowFangsPrimitive)
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.vampireScore() >= 12;//potem dodać mosquito race i ew. inne co mogą wypijać krew
 						}, "Vampire race");
-				HarpyHollowBonesEvolved.requireLevel(18).requirePerk(HarpyHollowBonesPrimitive).requireCustomFunction(function (player:Player):Boolean {
+				HarpyHollowBonesEvolved.requireLevel(60).requirePerk(HarpyHollowBonesPrimitive).requireCustomFunction(function (player:Player):Boolean {
 					return player.harpyScore() >= 8 || player.sirenScore() >= 12 || player.thunderbirdScore() >= 12 || player.phoenixScore() >= 12 || player.couatlScore() >= 13;
 				}, "Harpy winged race");
-				HeartOfTheStormEvolved.requireLevel(18).requirePerk(HeartOfTheStormPrimitive).requireCustomFunction(function (player:Player):Boolean {
+				HeartOfTheStormEvolved.requireLevel(60).requirePerk(HeartOfTheStormPrimitive).requireCustomFunction(function (player:Player):Boolean {
 					return player.raijuScore() >= 12 || player.thunderbirdScore() >= 12 || player.kamaitachiScore() >= 12 || player.couatlScore() >= 13;
 				}, "Stormborn race");
-				HinezumiBurningBloodEvolved.requireLevel(18)
+				HinezumiBurningBloodEvolved.requireLevel(60)
 						.requirePerk(HinezumiBurningBloodPrimitive)
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.arms.type == Arms.HINEZUMI;
@@ -1015,11 +1079,11 @@ public class MutationsLib
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.mouseScore() >= 12;
 						}, "Mouse race");
-				KitsuneThyroidGlandEvolved.requireLevel(30).requirePerk(KitsuneThyroidGlandPrimitive)
+				KitsuneThyroidGlandEvolved.requireLevel(60).requirePerk(KitsuneThyroidGlandPrimitive)
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.kitsuneScore() >= 12;
 						}, "Kitsune race");
-				LactaBovinaOvariesEvolved.requireLevel(36)
+				LactaBovinaOvariesEvolved.requireLevel(60)
 						.requirePerk(LactaBovinaOvariesPrimitive)
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.hasVagina();
@@ -1030,13 +1094,13 @@ public class MutationsLib
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.cowScore() >= 12;
 						}, "Lacta Bovine race");
-				LizanMarrowEvolved.requireLevel(36).requirePerk(LizanMarrowPrimitive).requireCustomFunction(function (player:Player):Boolean {
+				LizanMarrowEvolved.requireLevel(60).requirePerk(LizanMarrowPrimitive).requireCustomFunction(function (player:Player):Boolean {
 					return player.lizardScore() >= 12;
 				}, "Lizan race");
-				MelkieLungEvolved.requirePerk(MelkieLungPrimitive).requireCustomFunction(function (player:Player):Boolean {
+				MelkieLungEvolved.requireLevel(60).requirePerk(MelkieLungPrimitive).requireCustomFunction(function (player:Player):Boolean {
 					return player.melkieScore() >= 12;
 				}, "Melkie race");
-				MinotaurTesticlesEvolved.requireLevel(36)
+				MinotaurTesticlesEvolved.requireLevel(60)
 						.requirePerk(MinotaurTesticlesPrimitive)
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.hasCock();
@@ -1052,31 +1116,31 @@ public class MutationsLib
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.manticoreScore() >= 15 && player.tailType == Tail.MANTICORE_PUSSYTAIL;
 						}, "Manticore race and tail");
-				MantislikeAgilityEvolved.requireLevel(30).requirePerk(MantislikeAgilityPrimitive).requireCustomFunction(function (player:Player):Boolean {
+				MantislikeAgilityEvolved.requireLevel(60).requirePerk(MantislikeAgilityPrimitive).requireCustomFunction(function (player:Player):Boolean {
 					return player.mantisScore() >= 15;
 				}, "Mantis race");
-				NaturalPunchingBagEvolved.requireLevel(30).requirePerk(NaturalPunchingBagPrimitive).requireCustomFunction(function (player:Player):Boolean {
+				NaturalPunchingBagEvolved.requireLevel(60).requirePerk(NaturalPunchingBagPrimitive).requireCustomFunction(function (player:Player):Boolean {
 					return player.isGoblinoid()
 				}, "Goblin race");
-				NukiNutsEvolved.requireLevel(30).requirePerk(NukiNutsPrimitive).requireCustomFunction(function (player:Player):Boolean {
+				NukiNutsEvolved.requireLevel(60).requirePerk(NukiNutsPrimitive).requireCustomFunction(function (player:Player):Boolean {
 					return player.raccoonScore() >= 12 && player.balls > 0 && player.ballSize > 5;
 				}, "Tanuki race and large balls");
-				ObsidianHeartEvolved.requireLevel(24)
+				ObsidianHeartEvolved.requireLevel(60)
 						.requirePerk(ObsidianHeartPrimitive)
 						.requireCor(100)
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.devilkinScore() >= 14;
 						}, "Devil race");
-				OniMusculatureEvolved.requireLevel(30).requirePerk(OniMusculaturePrimitive).requireCustomFunction(function (player:Player):Boolean {
+				OniMusculatureEvolved.requireLevel(60).requirePerk(OniMusculaturePrimitive).requireCustomFunction(function (player:Player):Boolean {
 					return player.tone >= 100;
 				}, "100+ tone")
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.oniScore() >= 12;
 						}, "Oni race");
-				OrcAdrenalGlandsEvolved.requireLevel(30).requirePerk(OrcAdrenalGlandsPrimitive).requireCustomFunction(function (player:Player):Boolean {
+				OrcAdrenalGlandsEvolved.requireLevel(60).requirePerk(OrcAdrenalGlandsPrimitive).requireCustomFunction(function (player:Player):Boolean {
 					return player.orcScore() >= 12;
 				}, "Orc race");
-				PigBoarFatEvolved.requireLevel(30).requirePerk(PigBoarFatPrimitive).requireCustomFunction(function (player:Player):Boolean {
+				PigBoarFatEvolved.requireLevel(60).requirePerk(PigBoarFatPrimitive).requireCustomFunction(function (player:Player):Boolean {
 					return player.thickness >= 100;
 				}, "100+ thickness")
 						.requireCustomFunction(function (player:Player):Boolean {
@@ -1084,33 +1148,47 @@ public class MutationsLib
 						}, "Pig/Boar race");
 				RaijuCathodeEvolved.requireLevel(30).requirePerk(RaijuCathodePrimitive).requireCustomFunction(function (player:Player):Boolean {
 					return player.raijuScore() >= 10;
-				}, "raiju race");
-				SalamanderAdrenalGlandsEvolved.requireLevel(30).requirePerk(SalamanderAdrenalGlandsPrimitive).requireCustomFunction(function (player:Player):Boolean {
+				}, "raiju race")
+				RatatoskrSmartsEvolved.requireLevel(60).requirePerk(RatatoskrSmartsPrimitive).requireCustomFunction(function (player:Player):Boolean {
+					return player.ratatoskrScore() >= 12;
+				}, "Squirrel/Ratatoskr race");
+				SalamanderAdrenalGlandsEvolved.requireLevel(60).requirePerk(SalamanderAdrenalGlandsPrimitive).requireCustomFunction(function (player:Player):Boolean {
 					return player.salamanderScore() >= 10 || player.phoenixScore() >= 13;
 				}, "Salamander race");
 				SharkOlfactorySystemEvolved.requireLevel(30).requirePerk(SharkOlfactorySystemPrimitive).requireCustomFunction(function (player:Player):Boolean {
 					return player.sharkScore() >= 10;
 				}, "Shark race");
-				TwinHeartEvolved.requireLevel(24)
+				TrachealSystemEvolved.requireLevel(60).requirePerk(TrachealSystemPrimitive).requireCustomFunction(function (player:Player):Boolean {
+			//		return player.lowerBody == LowerBody.DRIDER;
+			//	}, "Drider Lower Body").requireCustomFunction(function (player:Player):Boolean {
+					return player.beeScore() >= 12 || player.mantisScore() >= 12 || player.scorpionScore() >= 12 || player.spiderScore() >= 12 || player.cancerScore() >= 12 || player.atlachNachaScore() >= 19;
+				}, "Any insect race");
+				TwinHeartEvolved.requireLevel(60)
 						.requirePerk(TwinHeartPrimitive)
 						.requireCustomFunction(function (player:Player):Boolean {
-							return player.centaurScore() >= 12 || player.unicornScore() >= 12 || player.sphinxScore() >= 17 || player.cancerScore() >= 12;
+							return player.centaurScore() >= 12 || player.unicornScore() >= 12 || player.sphinxScore() >= 17 || player.cancerScore() >= 12 || player.isTaur();
 						}, "Tauric or Unicorn race");
 				VenomGlandsEvolved.requireLevel(24).requirePerk(VenomGlandsPrimitive).requireCustomFunction(function (player:Player):Boolean {
-					return player.spiderScore() >= 12 || player.atlachNachaScore() >= 17 || player.apophisScore() >= 23 || player.nagaScore() >= 8 || player.gorgonScore() >= 12 || player.vouivreScore() >= 12 || player.couatlScore() >= 12 || player.hydraScore() >= 12;
+					return player.spiderScore() >= 12 || player.atlachNachaScore() >= 19 || player.apophisScore() >= 23 || player.nagaScore() >= 8 || player.gorgonScore() >= 12 || player.vouivreScore() >= 12 || player.couatlScore() >= 12 || player.hydraScore() >= 12;
 				}, "Spider or any snake-like race");
-				WhaleFatEvolved.requireLevel(24).requirePerk(WhaleFatPrimitive).requireCustomFunction(function (player:Player):Boolean {
+				WhaleFatEvolved.requireLevel(60).requirePerk(WhaleFatPrimitive).requireCustomFunction(function (player:Player):Boolean {
 					return player.orcaScore() >= 12 || player.leviathanScore() >= 20;
 				}, "Orca race");
-				YetiFatEvolved.requireLevel(24).requirePerk(YetiFatPrimitive).requireCustomFunction(function (player:Player):Boolean {
+				YetiFatEvolved.requireLevel(60).requirePerk(YetiFatPrimitive).requireCustomFunction(function (player:Player):Boolean {
 					return player.yetiScore() >= 16;
 				}, "Yeti race");
-				VampiricBloodsteamEvolved.requireLevel(30).requirePerk(VampiricBloodsteamPrimitive).requireCustomFunction(function (player:Player):Boolean {
+				VampiricBloodsteamEvolved.requireLevel(60).requirePerk(VampiricBloodsteamPrimitive).requireCustomFunction(function (player:Player):Boolean {
 					return player.hasStatusEffect(StatusEffects.VampireThirst);
 				}, "Vampire Thirst")
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.vampireScore() >= 12;//potem dodać mosquito race i ew. inne co mogą wypijać krew
 						}, "Vampire race");
+				//Tier 4
+				TrachealSystemFinalForm.requireLevel(90).requirePerk(TrachealSystemEvolved).requireCustomFunction(function (player:Player):Boolean {
+			//		return player.lowerBody == LowerBody.DRIDER;
+			//	}, "Drider Lower Body").requireCustomFunction(function (player:Player):Boolean {
+					return player.beeScore() >= 16 || player.mantisScore() >= 16 || player.scorpionScore() >= 16 || player.spiderScore() >= 16 || player.cancerScore() >= 16 || player.atlachNachaScore() >= 20;
+				}, "Any insect race");
 				} catch (e:Error) {
 					trace(e.getStackTrace());
 				}

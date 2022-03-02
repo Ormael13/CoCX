@@ -120,7 +120,7 @@ public class BeeGirlScene extends BaseContent
 					default: //Any other attitude options lead to the classic bee encounter
 						outputText(", bending into a smile as she sees you approach.  Standing, she welcomes you in, her wings giving a small buzz as her arms spread open for a welcoming embrace.\n\n");
 						//Chance to avoid raaaaeeeeep
-						if ((player.lib + player.cor < 160 + (40 * player.newGamePlusMod())) || rand(2) == 0) {
+						if ((player.libStat.core.value + player.cor < 160 + (40 * player.newGamePlusMod())) && rand(3) == 0) {
 							outputText("You barely stop yourself from gleefully throwing yourself into her arms.  You realize the harmonic buzzing of her wings and the unearthly scent of her honey briefly robbed you of your reason.  Feeling momentarily more clear-headed, what do you do?");
 							menu();
 							addButton(0, "Fight", fightTheBeeGirl);

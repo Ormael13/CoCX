@@ -132,7 +132,11 @@ public function ElectraRecruitingSure():void {
 		outputText("Electra responds with middle annoyance.\n\n");
 		outputText("\"<i>Nothing about taming here Etna, I'm not some wild beast you can hold on a leash. [name] just happened to be on my path when I needed "+player.mf("him","her")+" the most, willing to help of "+player.mf("his","her")+" own volition.</i>\"\n\n");
 	}
-	outputText("(<b>Electra has been added to the Lovers menu!</b>)\n\n");
+	outputText("<b>Before setting in, as if remembering something Electra pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
+	if (player.hasKeyItem("Radiant shard")){
+		player.addKeyValue("Radiant shard",1,+1);
+	}
+	outputText("\n\n(<b>Electra has been added to the Lovers menu!</b>)\n\n");
 	flags[kFLAGS.ELECTRA_FOLLOWER] = 2;
 	flags[kFLAGS.ELECTRA_LVL_UP] = 1;
 	flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] = 0;

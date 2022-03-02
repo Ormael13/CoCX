@@ -47,7 +47,7 @@ public class RegenerateSpell extends AbstractBlackSpell {
 	}
 	
 	public function calcDuration():int {
-		return 7
+		return 7;
 	}
 	
 	override public function advance(display:Boolean):void {

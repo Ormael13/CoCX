@@ -75,6 +75,7 @@ public class Weapon extends Useable //Equipable
 			specTrans.push("Bleed45", "+45% Bleed");
 			specTrans.push("Bleed100", "+100% Bleed");
 			specTrans.push("LGWrath", "Low Grade Wrath");
+			specTrans.push("MGWrath", "Mid Grade Wrath");
 
 			for each (var spec:String in temp){
 				if (specTrans.indexOf(spec) >= 0){

@@ -24,7 +24,9 @@ public class HealSpell extends AbstractWhiteSpell {
 	}
 	
 	override public function calcCooldown():int {
-		return 6;
+		var calcC:int = 6;
+		if (player.weapon == weapons.U_STAFF) calcC -= 2;
+		return calcC;
 	}
 	
 	override protected function doSpellEffect(display:Boolean = true):void {

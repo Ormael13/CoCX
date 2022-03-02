@@ -6,6 +6,8 @@ package classes.Scenes.Areas.Bog
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.Items.Armors.LustyMaidensArmor;
+	import classes.Items.Armors.SuccubusArmor;
 	import classes.Scenes.Areas.GlacialRift.GlacialFemaleTroll;
 	import classes.Scenes.Areas.GlacialRift.GlacialMaleTroll;
 	import classes.Scenes.SceneLib;
@@ -34,6 +36,10 @@ package classes.Scenes.Areas.Bog
 			if (player.hasCock()) addButton(2, "Anal Rape", encounterAdultMaleTrollLostAnalRape);
 			else addButtonDisabled(2, "Anal Rape", "You need a penis for this scene.");
 			addButton(3, "Leave", encounterAdultMaleTrollLostLeave);
+			if (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armor == armors.LMARMOR || player.armor == armors.S_ARMOR)) {
+				if (player.armor == armors.S_ARMOR) addButton(7, "B.Titfuck", (player.armor as SuccubusArmor).succubusPaizuri);
+				else addButton(7, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
+			}
 		}
 		public function encounterAdultMaleTrollLostFemaleRape():void {
 			clearOutput();
@@ -225,6 +231,10 @@ package classes.Scenes.Areas.Bog
 			if (player.hasCock()) addButton(2, "Anal Rape", encounterAdultGlacialMaleTrollLostAnalRape);
 			else addButtonDisabled(2, "Anal Rape", "You need a penis for this scene.");
 			addButton(3, "Leave", encounterAdultGlacialMaleTrollLostLeave);
+			if (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armor == armors.LMARMOR || player.armor == armors.S_ARMOR)) {
+				if (player.armor == armors.S_ARMOR) addButton(7, "B.Titfuck", (player.armor as SuccubusArmor).succubusPaizuri);
+				else addButton(7, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
+			}
 		}
 		public function encounterAdultGlacialMaleTrollLostFemaleRape():void {
 			clearOutput();

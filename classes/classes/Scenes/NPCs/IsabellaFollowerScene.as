@@ -1375,6 +1375,7 @@ internal function receiveAllTheCowTOngues():void {
 	if(isabellaAccent()) outputText("  A bit confused, she nonetheless leaves and returns with a drink, setting it beside you before leaving you to your rest.");
 	player.sexReward("saliva");
 	dynStats("sen", -1);
+	isabellaAffection(5); //so now it's 20
 	doNext(camp.returnToCampUseOneHour);
 }
 

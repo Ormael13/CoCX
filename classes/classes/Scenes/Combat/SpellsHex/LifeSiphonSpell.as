@@ -34,7 +34,7 @@ public class LifeSiphonSpell extends AbstractHexSpell {
 	}
 	
 	public function calcDuration():int {
-		return 15
+		return 15;
 	}
 	
 	override public function advance(display:Boolean):void {

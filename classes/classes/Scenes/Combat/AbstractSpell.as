@@ -316,15 +316,21 @@ public class AbstractSpell extends CombatAbility {
 	}
 	
 	public static function omnicasterDamageFactor():Number {
-		if (player.hasPerk(PerkLib.Omnicaster)) {
+		if ((player.isStaffTypeWeapon() || player.isPartiallyStaffTypeWeapon()) && player.hasPerk(PerkLib.OffensiveStaffChanneling)) {
+			if (player.isPartiallyStaffTypeWeapon()) return 0.8;
+			else return 0.7;
+		} else if (player.hasPerk(PerkLib.Omnicaster)) {
 			if (player.hasPerk(MutationsLib.GazerEyeEvolved)) return 0.5;
 			else if (player.hasPerk(MutationsLib.GazerEyePrimitive)) return 0.3;
 			else return 0.2;
-		} else return 1.0
+		} else return 1.0;
 	}
 	
 	public static function omnicasterRepeatCount():int {
-		if (player.hasPerk(PerkLib.Omnicaster)) {
+		if ((player.isStaffTypeWeapon() || player.isPartiallyStaffTypeWeapon()) && player.hasPerk(PerkLib.OffensiveStaffChanneling)) {
+			if (player.isPartiallyStaffTypeWeapon()) return 2;
+			else return 3;
+		} else if (player.hasPerk(PerkLib.Omnicaster)) {
 			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
 				return 10;
 			} else if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {

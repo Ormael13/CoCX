@@ -12,6 +12,7 @@ import classes.PerkLib;
 import classes.Player;
 import classes.Scenes.Areas.HighMountains.MinotaurMob;
 import classes.Scenes.Areas.Mountain.Minotaur;
+import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 import classes.Scenes.SceneLib;
 import classes.lists.BreastCup;
 
@@ -65,7 +66,6 @@ public final class LustyMaidensArmor extends Armor {
 				outputText("a tight seal over your previously-claimed cunt.  Regret fills you when you realize you could have kept your chastity intact simply by servicing the lusty studs and monsters with your ass and tits.");
 			}
 			if (game.player.wetness() >= 3) outputText("  The moisture you normally drip seems to soak right into the gusset instead of running down your [legs] like normal, giving you a much more chaste appearance in spite of the lewd garments that even now seem to shape your femininity and [butt] into perfectly arousing shapes.");
-
 			outputText("\n\nLast is the chain skirt - perhaps the easiest part to put on.  It's barely three inches long, such that it exposes your [butt] almost entirely, and when you bend over, fully.  The bottom of your vaginal crease can be spied as well, and should you desire to show yourself off, a simple stretch or tug would put you completely on display.  You wiggle about, watching the reflective material ripple almost hypnotically, one hand still on your boobs, mauling at your own tits with passion.  THIS is how a chaste champion should dress - perfectly modest but full of erotic energy to overwhelm her enemies with!\n\n");
 			return true;
 		}
@@ -96,14 +96,11 @@ public final class LustyMaidensArmor extends Armor {
 			else if(monster.lust < monster.maxLust()) outputText(", nicely turgid but quite ready to feel the sensuous pleasure of your girls' tight squeeze.  You lean over the defeated foe and kiss the rod just under the " + monster.cockHead() + ", smiling when it expands under your slow kisses.  Your fingers move up to play with the sensitive, urethral bulge that runs along the underside, and in no time, [themonster] is hard as a rock, so ready that [monster his] member is lifting up on its own.");
 			else outputText(", bouncing with each beat of [monster his] heart, thick beads of pre dribbling from [monster his] tip as you bat [monster his] hands away before [monster he] can waste the load [monster he]'s saved up for you.");
 			outputText("\n\nYour own moistness has risen to uncomfortable levels, and the sticky seal of your g-string's curvy front panel slips oh-so-slightly across your hot, hard clitty, something that makes your [legs] weak and your arms quake.  The leather fold on the front of your undergarments is so slippery that each movement has it shifting and shuffling across your nethers, a tiny bit at a time.  Already, you have your [butt] up in the air, shaking it back and forth for more of the delicious friction.  The motion only exacerbates the jiggling your [chest] are doing inside their tight containment.  [Themonster]'s head tilts up to watch, an unashamedly lusty look overtaking [monster his] features as [monster he] enjoys the inadvertent show you're giving.");
-
 			outputText("\n\n\"<i>Such lascivious behavior!  I'll have to make sure you're thoroughly purified,</i>\" you state matter-of-factly with a feigned serious look on your blushing [face].  To put proof to your taunt, you grab the throbbing shaft by the base and aim it straight up, dropping your [chest] down on either side.  The slippery, self-lubricating leather that joins the cups of your sexy, chainmail bra together loops over the top of the " + monster.cockDescriptShort(0) + " to properly restrain it, pinned in the slick, sweaty valley you call your cleavage.  It thrums happily against your [skin] when you compress the jiggly flesh around it, leaning down to let it feel pleasure that rivals any pussy, no matter how wet or skilled.");
-
 			outputText("\n\nYou smile at your defeated foe as you begin to bob over [monster him], and you find more words coming from your lips without meaning to speak.  \"<i>That's better.  You really shouldn't go around trying to fuck everyone like that!  Pussies are ");
 			if(!player.hasVirginVagina()) outputText("a gift too fine for a selfish brute like you");
 			else outputText("sacred and to be shared only with a cherished loved one");
 			outputText("!  Now, I'm going to squeeze all the impure thoughts out of you through your cock, so you just lie there and focus on letting them out all over my breasts.</i>\"");
-
 			outputText("\n\n[Themonster] nods solemnly while [monster his] eyes half-cross from pleasure.  You bottom out around [monster his] base");
 			if(monster.balls > 0) outputText(" and fondle [monster his] balls one-handed, squeezing the virile orbs to try and coax more of [monster his] dirty, perverted thoughts to distill into salty seed");
 			else if(monster.short == "anemone") outputText(" and stroke [monster his] taint, even brushing over the featureless spot where an asshole would be, if she had one, to try and coax more of [monster his] dirty, perverted thoughts to distill into salty seed");
@@ -111,14 +108,12 @@ public final class LustyMaidensArmor extends Armor {
 			outputText(".  A startled moan slips out of [monster his] lips, but you're just getting warmed up.  You dive down onto [monster his] " + monster.cockDescriptShort(0) + ", taking the " + monster.cockHead() + " straight into your mouth with a smooth gulp.");
 			if(monster.cockArea(0) >= 80) outputText("  It's so big and strong that it pushes right into your throat, stretching out your neck in the shape of the intruding cock.");
 			outputText("  The strong, pulsing cock feels so good inside your mouth, like it belongs there, and you can't help but think that you're doing a good deed by helping [themonster] empty every last perverse desire onto your purifying breasts.");
-
 			outputText("\n\nUp and down, up and down, you slide across the expansive member with unhurried, slow strokes, each time making your [chest] bounce beautifully.  Your [nipples] are so hard");
 			if(player.hasFuckableNipples() || player.lactationQ() >= 100) outputText(", dripping,");
 			outputText(" and sensitive, scraping around the nebulous inner lining of your bikini and occasionally catching on the metal that feels even warmer than normal.  Behind you, your [butt] is bouncing happily to the rhythm your corruption-devouring breasts have set, the thong digging tightly into your [vagina] in the most exquisite way.  You feel so hot and sensual, but still secure in the knowledge that you won't have to worry about such a creature ravaging your ");
 			if(player.hasVirginVagina()) outputText("maidenhead");
 			else outputText("sloppy gash");
 			outputText(".  Still, you're not sure how much hotter you can get before you're cumming all over your g-string, letting your own dark thoughts seep into your magical underwear.");
-
 			outputText("\n\nBelow you, [themonster] is moaning out loud and roughly thrusting [monster his] hips to meet your every motion, their tip expanding slightly in your mouth as [monster his] passion mounts.  You pull back");
 			if(monster.cockArea(0) >= 80) outputText(" with a messy cough to clear your throat");
 			outputText(" and tease, \"<i>Oh, you're going to cum already, aren't you?  Well, go ahead then.</i>\"  You pump your [chest] faster against the twitching rod and smile when a thick bead of pre sloughs off into your squishy boobs, smearing across your [skin].  You kiss it, licking the dollop that slips out of the dilating cum-slit before commanding, \"<i>Cum for me, " + monster.mf("boy","girl") + ".  Let it allll out.</i>\"");
@@ -127,7 +122,6 @@ public final class LustyMaidensArmor extends Armor {
 			outputText(", [monster his] urethra swollen with the heavy load about to explode out of it.  \"<i>Drain out all that nasty jizz,</i>\" you quip as you bottom your breasts down on [monster him] and slurp the quivering cock-head into your sperm-hungry lips.  Salty warmth fires in a long rope into your well-prepared mouth and over your tongue.  The blissed out look on your captive foe's face combined with the feel of [monster him] giving up all [monster his] naughty thoughts thanks to your cleavage gets you so fucking hot that your [hips] begin to shake spastically.");
 			outputText("\n\nYou do your best to hold on to the pumping cock while it fires spastic ropes into your mouth, but the way your undies are digging into your [vagina] and grinding across your [clit], you simply lack the control to keep it up.  You throw back your head and cry out ecstatically, taking the next ejaculation in a long line across your cheek, up your nose, and onto your forehead.  Again and again, long ropes of tainted jizz spatter all over your face, dripping messily over the exposed tops of your teats.  You lick your lips while you cream the inside of your [armor] with girlish love-goo, feeling such immense pleasure at letting your own impure desires out into the armor.  More jets, weaker than the early ones, crest from the bouncing cock-tip to fall weakly over your well-slicked mammaries.");
 			outputText("\n\nYou seize [themonster] by [monster his] base and jerk [monster him] off with quick, sharp little strokes, commanding, \"<i>All of it!  Give me all of your lusts and cruel desires!</i>\".  " + monster.mf("His","Her") + " back arches as [monster his] orgasm redoubles, and fresh ropes begin to spout out again, ensuring your face and breasts are soaked with the sloppy spooge.  It runs in moist, warm rivulets into your concealing top, and what doesn't drip down, you compulsively rub into your skin, feeling a positively healthy glow from the feeling.  You don't free the " + monster.cockDescriptShort(0) + " from your chesty embrace until every single drop is splattered all over you, and when you do, you leave a thoroughly wiped-out " + monster.short + " behind you.");
-
 			outputText("\n\nThe stink of sperm slowly fades as you move, almost seeming to absorb into your skin.  It leaves you with a healthy glow and a surety to your movements, sure that your revealing armor is going to protect you.");
 			//Slimefeed, minus slight corruption if PC is a virgin, raise sensitivity
 			player.slimeFeed();
@@ -137,7 +131,7 @@ public final class LustyMaidensArmor extends Armor {
 			game.player.dynStats("sen", 2);
 			if(player.hasVirginVagina()) game.player.dynStats("cor", -1);
 			//If minotaur, increase addiction slightly.
-			if(monster is Minotaur || monster is MinotaurMob) player.minoCumAddiction(3);
+			if(monster is Minotaur || monster is MinotaurLord || monster is MinotaurMob) player.minoCumAddiction(3);
 			if(monster.short == "Ceraph") game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00291]++;
 			//Usable on: Imps, Minotaurs, Satyrs, Incubus Mechanic, Anemones, Spider Guys, Akbal, Drider, Fetish Zealot, Sand Trap, Very Corrupt Jojo (Maybe slight decorruption to him), Ceraph, Red Kitsune if cock out.
 			if (game.inCombat)

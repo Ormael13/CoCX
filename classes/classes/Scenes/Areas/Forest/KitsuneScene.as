@@ -9,6 +9,7 @@ import classes.BodyParts.SkinLayer;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
+import classes.Items.Armors.SuccubusArmor;
 import classes.Scenes.Monsters.Imp;
 import classes.Scenes.SceneLib;
 import classes.Scenes.UniqueSexScenes;
@@ -1234,8 +1235,9 @@ public class KitsuneScene extends BaseContent
 				//[Ride] - requires vagina & redheadIsFuta
 				if (player.hasVagina() && flags[kFLAGS.redheadIsFuta] > 0)
 					button = kitsuneButton(button, "RideHerCock", rideDatRedheadKitsuneCockIntoTheSkyDiamonds);
-				if (flags[kFLAGS.redheadIsFuta] > 0 && player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor")
-					button = kitsuneButton(button, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
+				if (flags[kFLAGS.redheadIsFuta] > 0 && player.hasVagina() && player.biggestTitSize() >= 4 && (player.armorName == "lusty maiden's armor" || player.armorName == "Succubus armor"))
+					if (player.armorName == "Succubus armor") button = kitsuneButton(button, "B.Titfuck", (player.armor as SuccubusArmor).succubusPaizuri);
+					else button = kitsuneButton(button, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
 			}
 			//[Feeder]
 			if (player.hasPerk(PerkLib.Feeder))
@@ -2585,6 +2587,12 @@ public class KitsuneScene extends BaseContent
 			outputText("\"<i>Thank you " + player.mf("lord", "lady") + " [name] please allow me to tend to your every need from now on.</i>\"");
 			outputText("\n\nAyane packs her belongings in a weird bag that seems to never be fuller or emptier and starts to follow you around.");
 			outputText("\n\n(<b>Ayane has been added to the Followers menu!</b>)\n\n");
+			outputText("\n\n<b>As if remembering something Amily pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
+			if (player.hasKeyItem("Radiant shard")){
+				player.addKeyValue("Radiant shard",1,+1);
+			}
+			else player.createKeyItem("Radiant shard", 1,0,0,0);
+			outputText("\n\n\"<i>Please take it as my first of many tribute to you my " + player.mf("lord", "lady") + ".</i>\"");
 			flags[kFLAGS.AYANE_FOLLOWER] = 2;
 			doNext(camp.returnToCampUseOneHour);
 		}
