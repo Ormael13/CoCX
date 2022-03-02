@@ -92,13 +92,6 @@ public function isabellaKnockUpAttempt():void {
 	}
 }
 
-public function isabellaReadyToMove():Boolean {
-    var threshold:int = 50 + flags[kFLAGS.ISABELLA_TIMES_OFFERED_FOLLOWER] * 10;
-    if (threshold > 100)
-        threshold = 100; //so you won't lock her accidentally
-    return isabellaAffection() >= threshold;
-}
-
 //Isabella Moves In Intro
 internal function isabellaMoovesInGreeting():void {
 	spriteSelect(31);
@@ -1382,6 +1375,7 @@ internal function receiveAllTheCowTOngues():void {
 	if(isabellaAccent()) outputText("  A bit confused, she nonetheless leaves and returns with a drink, setting it beside you before leaving you to your rest.");
 	player.sexReward("saliva");
 	dynStats("sen", -1);
+	isabellaAffection(5); //so now it's 20
 	doNext(camp.returnToCampUseOneHour);
 }
 

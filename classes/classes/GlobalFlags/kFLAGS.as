@@ -267,7 +267,7 @@ public static const ISABELLA_OKAY_WITH_TALL_FOLKS:int                           
 public static const ISABELLA_MET_SHORT_PC:int                                   =  259; // Has Isabella ever met the PC while PC is short?
 public static const ISABELLA_ANGRY_AT_PC_COUNTER:int                                =  260; // Isabella angry counter
 public static const UNKNOWN_FLAG_NUMBER_00261:int                                   =  261; // Isabella Sleep rape counter
-public static const UNKNOWN_FLAG_NUMBER_00262:int                                   =  262; // TImes talked with Isabella
+public static const ISABELLA_TALKS:int                                   =  262; // TImes talked with Isabella
 public static const UNKNOWN_FLAG_NUMBER_00263:int                                   =  263; // Met nancy
 public static const UNKNOWN_FLAG_NUMBER_00264:int                                   =  264; // Nancy relationship level
 public static const UNKNOWN_FLAG_NUMBER_00265:int                                   =  265; // Talk Nancy
@@ -372,11 +372,11 @@ public static const SHOULDRA_USES_YOUR_GIANT_COCK_COUNT:int                     
 public static const TIMES_MET_OOZE:int                                              =  364; //
 public static const UNKNOWN_FLAG_NUMBER_00365:int                                   =  365; // COUNTDOWN TILL MAIDEN FOLLOWUP
 public static const UNKNOWN_FLAG_NUMBER_00366:int                                   =  366; // TIMES MET GHOSTGIRL MAIDEN
-public static const ISABELLA_TIMES_OFFERED_FOLLOWER:int                             =  367; //
+public static const ISABELLA_TIMES_OFFERED_FOLLOWER:int                             =  367; // unused right now
 public static const ISABELLA_AFFECTION:int                                          =  368; //
 public static const ISABELLA_FOLLOWER_ACCEPTED:int                                  =  369; //
 public static const ISABELLA_PLAINS_DISABLED:int                                    =  370; //
-public static const ISABELLA_CAMP_DISABLED:int                                      =  371; //
+public static const ISABELLA_CAMP_DISABLED:int                                      =  371; // lol, unused for now
 public static const ISABELLA_ACCENT_TRAINING_PERCENT:int                            =  372; //
 public static const ISABELLA_ACCENT_TRAINING_COOLDOWN:int                           =  373; //
 public static const ISABELLA_ACCENT_FORCED_ON:int                                   =  374; //
