@@ -32,13 +32,9 @@ public class EnergyDrainSpell extends AbstractGreySpell {
 		return 7;
 	}
 	
-	public function calcMaxMagnitude():Number {
-		return manaCost()*4;
-	}
-	
 	public function calcMagnitude(target:Monster):Number {
-		var energydrain:Number = monster.maxMana() * 0.2;
-		energydrain = Math.min(calcMaxMagnitude(), energydrain);
+		var energydrain:Number = monster.mana;
+		energydrain = Math.min(monster.mana, manaCost()*5);
 		return Math.round(energydrain);
 	}
 	
@@ -55,8 +51,11 @@ public class EnergyDrainSpell extends AbstractGreySpell {
 			if (display) {
 				outputText("You point at [themonster] and with a sharp pulling gesture you rip out some of their vigor for your own use. They won’t be hitting at full strength for a while.");
 			}
-			monster.createStatusEffect(StatusEffects.EnergyDrain, calcDuration(), 0, 0, 0);
-			EngineCore.ManaChange(calcMagnitude(monster), false);
+			var magnitude:Number = calcMagnitude(monster);
+            if (magnitude > 0)
+			    monster.createStatusEffect(StatusEffects.EnergyDrain, calcDuration(), 0, 0, 0);
+			player.mana += magnitude;
+			monster.mana -= magnitude;
 		}
 	}
 }

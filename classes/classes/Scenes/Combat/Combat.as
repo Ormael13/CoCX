@@ -7630,12 +7630,6 @@ public class Combat extends BaseContent {
             } else if (damage == 0) outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>"); //Miss/block
             else if (damage < 0) outputText("<b>(<font color=\"#008000\">" + damage + "</font>)</b>"); //Heal
         }
-        //Isabella gets mad
-        if (monster.short == "Isabella") {
-            flags[kFLAGS.ISABELLA_AFFECTION]--;
-            //Keep in bounds
-            if (flags[kFLAGS.ISABELLA_AFFECTION] < 0) flags[kFLAGS.ISABELLA_AFFECTION] = 0;
-        }
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
         //Keep shit in bounds.
@@ -7718,12 +7712,6 @@ public class Combat extends BaseContent {
             } else if (damage == 0) outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>"); //Miss/block
             else if (damage < 0) outputText("<b>(<font color=\"#008000\">" + damage + "</font>)</b>"); //Heal
         }
-        //Isabella gets mad
-        if (monster.short == "Isabella") {
-            flags[kFLAGS.ISABELLA_AFFECTION]--;
-            //Keep in bounds
-            if (flags[kFLAGS.ISABELLA_AFFECTION] < 0) flags[kFLAGS.ISABELLA_AFFECTION] = 0;
-        }
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
         //Keep shit in bounds.
@@ -7803,12 +7791,6 @@ public class Combat extends BaseContent {
                 else outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>"); //Damage
             } else if (damage == 0) outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>"); //Miss/block
             else if (damage < 0) outputText("<b>(<font color=\"#008000\">" + damage + "</font>)</b>"); //Heal
-        }
-        //Isabella gets mad
-        if (monster.short == "Isabella") {
-            flags[kFLAGS.ISABELLA_AFFECTION]--;
-            //Keep in bounds
-            if (flags[kFLAGS.ISABELLA_AFFECTION] < 0) flags[kFLAGS.ISABELLA_AFFECTION] = 0;
         }
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
@@ -7903,12 +7885,6 @@ public class Combat extends BaseContent {
             } else if (damage == 0) outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>"); //Miss/block
             else if (damage < 0) outputText("<b>(<font color=\"#008000\">" + damage + "</font>)</b>"); //Heal
         }
-        //Isabella gets mad
-        if (monster.short == "Isabella") {
-            flags[kFLAGS.ISABELLA_AFFECTION]--;
-            //Keep in bounds
-            if (flags[kFLAGS.ISABELLA_AFFECTION] < 0) flags[kFLAGS.ISABELLA_AFFECTION] = 0;
-        }
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
         //Keep shit in bounds.
@@ -7997,12 +7973,6 @@ public class Combat extends BaseContent {
             } else if (damage == 0) outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>"); //Miss/block
             else if (damage < 0) outputText("<b>(<font color=\"#008000\">" + damage + "</font>)</b>"); //Heal
         }
-        //Isabella gets mad
-        if (monster.short == "Isabella") {
-            flags[kFLAGS.ISABELLA_AFFECTION]--;
-            //Keep in bounds
-            if (flags[kFLAGS.ISABELLA_AFFECTION] < 0) flags[kFLAGS.ISABELLA_AFFECTION] = 0;
-        }
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
         //Keep shit in bounds.
@@ -8084,12 +8054,6 @@ public class Combat extends BaseContent {
             } else if (damage == 0) outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>"); //Miss/block
             else if (damage < 0) outputText("<b>(<font color=\"#008000\">" + damage + "</font>)</b>"); //Heal
         }
-        //Isabella gets mad
-        if (monster.short == "Isabella") {
-            flags[kFLAGS.ISABELLA_AFFECTION]--;
-            //Keep in bounds
-            if (flags[kFLAGS.ISABELLA_AFFECTION] < 0) flags[kFLAGS.ISABELLA_AFFECTION] = 0;
-        }
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
         //Keep shit in bounds.
@@ -8160,12 +8124,6 @@ public class Combat extends BaseContent {
                 else outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>"); //Damage
             } else if (damage == 0) outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>"); //Miss/block
             else if (damage < 0) outputText("<b>(<font color=\"#008000\">" + damage + "</font>)</b>"); //Heal
-        }
-        //Isabella gets mad
-        if (monster.short == "Isabella") {
-            flags[kFLAGS.ISABELLA_AFFECTION]--;
-            //Keep in bounds
-            if (flags[kFLAGS.ISABELLA_AFFECTION] < 0) flags[kFLAGS.ISABELLA_AFFECTION] = 0;
         }
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
@@ -8238,12 +8196,6 @@ public class Combat extends BaseContent {
             } else if (damage == 0) outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>"); //Miss/block
             else if (damage < 0) outputText("<b>(<font color=\"#008000\">" + damage + "</font>)</b>"); //Heal
         }
-        //Isabella gets mad
-        if (monster.short == "Isabella") {
-            flags[kFLAGS.ISABELLA_AFFECTION]--;
-            //Keep in bounds
-            if (flags[kFLAGS.ISABELLA_AFFECTION] < 0) flags[kFLAGS.ISABELLA_AFFECTION] = 0;
-        }
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
         //Keep shit in bounds.
@@ -8314,12 +8266,6 @@ public class Combat extends BaseContent {
                 else outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>"); //Damage
             } else if (damage == 0) outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>"); //Miss/block
             else if (damage < 0) outputText("<b>(<font color=\"#008000\">" + damage + "</font>)</b>"); //Heal
-        }
-        //Isabella gets mad
-        if (monster.short == "Isabella") {
-            flags[kFLAGS.ISABELLA_AFFECTION]--;
-            //Keep in bounds
-            if (flags[kFLAGS.ISABELLA_AFFECTION] < 0) flags[kFLAGS.ISABELLA_AFFECTION] = 0;
         }
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
@@ -8392,12 +8338,6 @@ public class Combat extends BaseContent {
             } else if (damage == 0) outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>"); //Miss/block
             else if (damage < 0) outputText("<b>(<font color=\"#008000\">" + damage + "</font>)</b>"); //Heal
         }
-        //Isabella gets mad
-        if (monster.short == "Isabella") {
-            flags[kFLAGS.ISABELLA_AFFECTION]--;
-            //Keep in bounds
-            if (flags[kFLAGS.ISABELLA_AFFECTION] < 0) flags[kFLAGS.ISABELLA_AFFECTION] = 0;
-        }
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
         //Keep shit in bounds.
@@ -8468,12 +8408,6 @@ public class Combat extends BaseContent {
                 else outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>"); //Damage
             } else if (damage == 0) outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>"); //Miss/block
             else if (damage < 0) outputText("<b>(<font color=\"#008000\">" + damage + "</font>)</b>"); //Heal
-        }
-        //Isabella gets mad
-        if (monster.short == "Isabella") {
-            flags[kFLAGS.ISABELLA_AFFECTION]--;
-            //Keep in bounds
-            if (flags[kFLAGS.ISABELLA_AFFECTION] < 0) flags[kFLAGS.ISABELLA_AFFECTION] = 0;
         }
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);
@@ -8552,12 +8486,6 @@ public class Combat extends BaseContent {
                 else outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>"); //Damage
             } else if (damage == 0) outputText("<b>(<font color=\"#000080\">" + damage + "</font>)</b>"); //Miss/block
             else if (damage < 0) outputText("<b>(<font color=\"#008000\">" + damage + "</font>)</b>"); //Heal
-        }
-        //Isabella gets mad
-        if (monster.short == "Isabella") {
-            flags[kFLAGS.ISABELLA_AFFECTION]--;
-            //Keep in bounds
-            if (flags[kFLAGS.ISABELLA_AFFECTION] < 0) flags[kFLAGS.ISABELLA_AFFECTION] = 0;
         }
         //Interrupt gigaflare if necessary.
         if (monster.hasStatusEffect(StatusEffects.Gigafire)) monster.addStatusValue(StatusEffects.Gigafire, 1, damage);

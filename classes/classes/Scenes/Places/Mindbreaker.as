@@ -506,12 +506,12 @@ package classes.Scenes.Places{
 					else outputText(" The female cultist you converted sit quietly in a corner of the cave practicing your teachings by herself. It occurs to you she could use a good earfucking. Maybe you could even make a proper mindbreaker out of her?");
 				}
 			}
-			if (MindBreakerFetishFemaleConvert >= 1) {
+			if (MindBreakerFetishMaleConvert >= 1) {
 				if (MindBreakerFullConvert >= 1) {
 					outputText(" A male cultist on the other side is busy being raped by another mindbreaker, cum leaking constantly from his cock. He seems to be enjoying himself..");
 				}
 				else {
-					if (MindBreakerFetishFemaleConvert >= 2) outputText(" The male cultists you converted sit quietly in a corner of the cave practicing your teachings by himself. Of course witheout the help of a mindbreaker there is absolutely no way for them to cum so they just end up masturbating pointlessly in frustration in the hope that their next true orgasm blows their mind out.");
+					if (MindBreakerFetishMaleConvert >= 2) outputText(" The male cultists you converted sit quietly in a corner of the cave practicing your teachings by himself. Of course witheout the help of a mindbreaker there is absolutely no way for them to cum so they just end up masturbating pointlessly in frustration in the hope that their next true orgasm blows their mind out.");
 					else outputText(" The male cultist you converted sit quietly in a corner of the cave practicing your teachings by himself. Of course witheout the help of a mindbreaker there is absolutely no way for him to cum so they just end up masturbating pointlessly in frustration in the hope that his next true orgasm blows his mind out.");
 				}
 			}
