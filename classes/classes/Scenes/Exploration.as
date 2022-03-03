@@ -632,7 +632,7 @@ public class Exploration extends BaseContent
 				hiddencavediscovery();
 				return;
 			}
-			if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && TrollVillage.ZenjiVillageStage == 0){
+			if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && TrollVillage.ZenjiVillageStage == 0 && rand(10) == 0){
 				SceneLib.trollVillage.FirstEncountersoftheTrollKind();
 				return;
 			}
