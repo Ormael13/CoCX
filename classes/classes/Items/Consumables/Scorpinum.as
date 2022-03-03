@@ -23,10 +23,9 @@ public class Scorpinum extends Consumable {
 		player.slimeFeed();
 		clearOutput();
 		outputText("You down the potion, grimacing at the strong taste.");
-		if (changes < changeLimit && rand(2) == 0 && player.tou < 80) {
+		if (changes < changeLimit && rand(2) == 0 && player.MutagenBonus("tou", 1)) {
 			changes++;
 			outputText("\n\nAfter drinking the potion, you feel a bit tougher.");
-			player.MutagenBonus("tou", 1);
 		}
 		if (player.blockingBodyTransformations()) changeLimit = 0;
 		//gain scorpion tail

@@ -15782,23 +15782,32 @@ use namespace CoC;
 			return additionalTransformationChancesCounter;
 		}
 
-		public function MutagenBonus(statName: String, bonus: Number):void
+		public function MutagenBonus(statName: String, bonus: Number):Boolean
 		{
-			var MBCap:Number = 0.2;
-			if (hasPerk(PerkLib.Enhancement)) MBCap += 0.02;
-			if (hasPerk(PerkLib.Fusion)) MBCap += 0.02;
-			if (hasPerk(PerkLib.Enchantment)) MBCap += 0.02;
-			if (hasPerk(PerkLib.Refinement)) MBCap += 0.02;
-			if (hasPerk(PerkLib.Saturation)) MBCap += 0.02;
-			if (hasPerk(PerkLib.Perfection)) MBCap += 0.02;
-			if (hasPerk(PerkLib.Creationism)) MBCap += 0.02;
-			if (hasPerk(PerkLib.MunchkinAtGym)) MBCap += 0.05;
-			removeCurse(statName, bonus);
-			if (buff("Mutagen").getValueOfStatBuff(""+statName+".mult") < MBCap){
-				buff("Mutagen").addStat(""+statName+".mult",0.01);
-				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
-				CoC.instance.mainView.statsView.showStatUp(statName);
-			}
+			var cap:Number = 0.2;
+			if (hasPerk(PerkLib.Enhancement)) cap += 0.02;
+			if (hasPerk(PerkLib.Fusion)) cap += 0.02;
+			if (hasPerk(PerkLib.Enchantment)) cap += 0.02;
+			if (hasPerk(PerkLib.Refinement)) cap += 0.02;
+			if (hasPerk(PerkLib.Saturation)) cap += 0.02;
+			if (hasPerk(PerkLib.Perfection)) cap += 0.02;
+			if (hasPerk(PerkLib.Creationism)) cap += 0.02;
+			if (hasPerk(PerkLib.MunchkinAtGym)) cap += 0.05;
+            if (bonus == 0)
+                return false; //no bonus - no effect
+            if (removeCurse(statName, bonus))
+                return false; //remove existing curses
+            var current:Number = buff("Mutagen").getValueOfStatBuff(statName + ".mult");
+            var bonus_sign:Number = (bonus > 0) ? 1 : -1;
+            var current_sign:Number = (current > 0) ? 1 : -1;
+            if ((bonus_sign == current_sign) && Math.abs(current) >= cap) //already max and matching signs
+                return false;
+
+            var addBonus:Number = bonus_sign * Math.min(Math.abs(bonus_sign * cap - current), Math.abs(bonus * 0.01)); 
+            buff("Mutagen").addStat(statName + ".mult", addBonus);
+            CoC.instance.mainView.statsView.refreshStats(CoC.instance);
+            CoC.instance.mainView.statsView.showStatUp(statName);
+            return true;
 		}
 
 		public function AlchemyBonus(statName: String, bonus: Number):void

@@ -114,7 +114,7 @@ public class AbstractEquinum extends Consumable {
 		}
 		//Stat changes first
 		//STRENGTH
-		if (rand(2) == 0) {
+		if (rand(2) == 0 && player.MutagenBonus("str", 1)) {
 			//Maxxed
 			if (type == 0 && player.str >= 70) {
 				outputText("\n\nYou feel strong enough to single-handedly pull a fully-loaded wagon.");
@@ -124,7 +124,6 @@ public class AbstractEquinum extends Consumable {
 			}
 			//NOT MAXXED
 			else {
-				player.MutagenBonus("str", 1);
 				outputText("\n\nYour muscles clench and surge, making you feel as strong as a horse.");
 				changes++;
 			}
@@ -182,9 +181,8 @@ public class AbstractEquinum extends Consumable {
 				changes++;
 			}
 		}
-		if ((type == 1 || type == 2) && rand(3) == 0) {
+		if ((type == 1 || type == 2) && rand(3) == 0 && player.MutagenBonus("int", 1)) {
 			outputText("\n\nAs you finish drinking the potion you suddently feel more cunning and by far way smarter.");
-			player.MutagenBonus("int", 1);
 			changes++;
 		}
 		if (player.blockingBodyTransformations()) changeLimit = 0;

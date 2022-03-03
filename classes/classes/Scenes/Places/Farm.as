@@ -202,17 +202,17 @@ private function talkWhitney():void {
 			outputText(" You are uncomfortably aware of the number of them which are labelled ‘[name]’, and a charged memory of strong suction on your [nipples] comes back to you.");
 		}
 
-		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00331] > 0 && flags[kFLAGS.ISABELLA_MILKED_YET] != -1)
+		if (flags[kFLAGS.JOJO_TIMES_MILKED] > 0 && flags[kFLAGS.ISABELLA_MILKED_YET] != -1)
 		{
 			// Jojo only
 			outputText(" At the far end there is a small alabaster cluster labelled ‘Jojo’.");
 		}
-		else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00331] == 0 && flags[kFLAGS.ISABELLA_MILKED_YET] == -1)
+		else if (flags[kFLAGS.JOJO_TIMES_MILKED] == 0 && flags[kFLAGS.ISABELLA_MILKED_YET] == -1)
 		{
 			// Isabella Only
 			outputText(" At the far end there is a small alabaster cluster labelled ‘Isabella’.");
 		}
-		else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00331] > 0 && flags[kFLAGS.ISABELLA_MILKED_YET] == -1)
+		else if (flags[kFLAGS.JOJO_TIMES_MILKED] > 0 && flags[kFLAGS.ISABELLA_MILKED_YET] == -1)
 		{
 			// Both
 			outputText(" At the far end there is one alabaster cluster labelled ‘Jojo’, another labelled ‘Isabella’.");

@@ -30,14 +30,12 @@ public class ManticoreVenom extends Consumable {
 		player.slimeFeed();
 		clearOutput();
 		outputText("You guzzle down the vial and your lust immediately spikes up, making you spontaneously orgasm. Your body seems to react strangely to the poison however.");
-		if (changes < changeLimit && rand(2) == 0) {
+		if (changes < changeLimit && rand(2) == 0 && player.MutagenBonus("spe", 1)) {
 			outputText("\n\nFeeling energetic you suddenly make a dash for the nearest tree and realize you're way faster than before.");
-			player.MutagenBonus("spe", 1);
 			changes++;
 		}
-		if (changes < changeLimit && rand(2) == 0) {
+		if (changes < changeLimit && rand(2) == 0 && player.MutagenBonus("int", 1)) {
 			outputText("\n\nYou can't help but think about the various ways you will ambush and thoroughly rape your foes. That terrorised look on their face will be priceless.");
-			player.MutagenBonus("int", 1);
 			changes++;
 		}
 		if (changes < changeLimit && rand(2) == 0) {
