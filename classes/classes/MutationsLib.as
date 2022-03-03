@@ -951,19 +951,19 @@ public class MutationsLib
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.pigScore() >= 8;
 						}, "Pig/Boar race");
-				RaijuCathodePrimitive.requireLevel(12).requirePerk(RaijuCathode).requireCustomFunction(function (player:Player):Boolean {
+				RaijuCathodePrimitive.requireLevel(30).requirePerk(RaijuCathode).requireCustomFunction(function (player:Player):Boolean {
 					return player.raijuScore() >= 9;
 				}, "raiju race");
 				RatatoskrSmartsPrimitive.requireLevel(30).requirePerk(RatatoskrSmarts).requireCustomFunction(function (player:Player):Boolean {
 					return player.ratatoskrScore() >= 8;
 				}, "Squirrel/Ratatoskr race");
-				SalamanderAdrenalGlandsPrimitive.requireLevel(12).requirePerk(SalamanderAdrenalGlands).requireCustomFunction(function (player:Player):Boolean {
+				SalamanderAdrenalGlandsPrimitive.requireLevel(30).requirePerk(SalamanderAdrenalGlands).requireCustomFunction(function (player:Player):Boolean {
 					return player.salamanderScore() >= 9 || player.phoenixScore() >= 11;
 				}, "Salamander race");
 				ScyllaInkGlandsEvolved.requireLevel(30).requirePerk(ScyllaInkGlands).requireCustomFunction(function (player:Player):Boolean {
 					return player.scyllaScore() >= 10;
 				}, "Scylla race");
-				SharkOlfactorySystemPrimitive.requireLevel(12).requirePerk(SharkOlfactorySystem).requireCustomFunction(function (player:Player):Boolean {
+				SharkOlfactorySystemPrimitive.requireLevel(30).requirePerk(SharkOlfactorySystem).requireCustomFunction(function (player:Player):Boolean {
 					return player.sharkScore() >= 9;
 				}, "Shark race");
 				TrachealSystemPrimitive.requireLevel(30).requirePerk(TrachealSystem).requireCustomFunction(function (player:Player):Boolean {
@@ -982,7 +982,7 @@ public class MutationsLib
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.vampireScore() >= 8;//potem dodać mosquito race i ew. inne co mogą wypijać krew
 						}, "Vampire race");
-				VenomGlandsPrimitive.requireLevel(12).requirePerk(VenomGlands).requireCustomFunction(function (player:Player):Boolean {
+				VenomGlandsPrimitive.requireLevel(30).requirePerk(VenomGlands).requireCustomFunction(function (player:Player):Boolean {
 					return player.spiderScore() >= 8 || player.atlachNachaScore() >= 18 || player.apophisScore() >= 23 || player.nagaScore() >= 6 || player.gorgonScore() >= 8 || player.vouivreScore() >= 8 || player.couatlScore() >= 8 || player.hydraScore() >= 8;
 				}, "Spider or any snake-like race");
 				WhaleFatPrimitive.requireLevel(30).requirePerk(WhaleFat).requireCustomFunction(function (player:Player):Boolean {
@@ -1111,7 +1111,7 @@ public class MutationsLib
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.minotaurScore() >= 12;
 						}, "Minotaur race");
-				ManticoreMetabolismEvolved.requireLevel(30)
+				ManticoreMetabolismEvolved.requireLevel(60)
 						.requirePerk(ManticoreMetabolismPrimitive)
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.manticoreScore() >= 15 && player.tailType == Tail.MANTICORE_PUSSYTAIL;
@@ -1146,7 +1146,7 @@ public class MutationsLib
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.pigScore() >= 12;
 						}, "Pig/Boar race");
-				RaijuCathodeEvolved.requireLevel(30).requirePerk(RaijuCathodePrimitive).requireCustomFunction(function (player:Player):Boolean {
+				RaijuCathodeEvolved.requireLevel(60).requirePerk(RaijuCathodePrimitive).requireCustomFunction(function (player:Player):Boolean {
 					return player.raijuScore() >= 10;
 				}, "raiju race")
 				RatatoskrSmartsEvolved.requireLevel(60).requirePerk(RatatoskrSmartsPrimitive).requireCustomFunction(function (player:Player):Boolean {
@@ -1155,7 +1155,7 @@ public class MutationsLib
 				SalamanderAdrenalGlandsEvolved.requireLevel(60).requirePerk(SalamanderAdrenalGlandsPrimitive).requireCustomFunction(function (player:Player):Boolean {
 					return player.salamanderScore() >= 10 || player.phoenixScore() >= 13;
 				}, "Salamander race");
-				SharkOlfactorySystemEvolved.requireLevel(30).requirePerk(SharkOlfactorySystemPrimitive).requireCustomFunction(function (player:Player):Boolean {
+				SharkOlfactorySystemEvolved.requireLevel(60).requirePerk(SharkOlfactorySystemPrimitive).requireCustomFunction(function (player:Player):Boolean {
 					return player.sharkScore() >= 10;
 				}, "Shark race");
 				TrachealSystemEvolved.requireLevel(60).requirePerk(TrachealSystemPrimitive).requireCustomFunction(function (player:Player):Boolean {
@@ -1168,7 +1168,7 @@ public class MutationsLib
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.centaurScore() >= 12 || player.unicornScore() >= 12 || player.sphinxScore() >= 17 || player.cancerScore() >= 12 || player.isTaur();
 						}, "Tauric or Unicorn race");
-				VenomGlandsEvolved.requireLevel(24).requirePerk(VenomGlandsPrimitive).requireCustomFunction(function (player:Player):Boolean {
+				VenomGlandsEvolved.requireLevel(60).requirePerk(VenomGlandsPrimitive).requireCustomFunction(function (player:Player):Boolean {
 					return player.spiderScore() >= 12 || player.atlachNachaScore() >= 19 || player.apophisScore() >= 23 || player.nagaScore() >= 8 || player.gorgonScore() >= 12 || player.vouivreScore() >= 12 || player.couatlScore() >= 12 || player.hydraScore() >= 12;
 				}, "Spider or any snake-like race");
 				WhaleFatEvolved.requireLevel(60).requirePerk(WhaleFatPrimitive).requireCustomFunction(function (player:Player):Boolean {
