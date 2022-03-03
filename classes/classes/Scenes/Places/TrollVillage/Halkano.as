@@ -4,8 +4,6 @@
  */
 package classes.Scenes.Places.TrollVillage {
 import classes.*;
-import classes.Items.ArmorLib;
-import classes.Items.UndergarmentLib;
 import classes.Scenes.Places.TrollVillage;
 import classes.Scenes.SceneLib;
 

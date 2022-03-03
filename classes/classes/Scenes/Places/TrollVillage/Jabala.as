@@ -3,7 +3,6 @@
  * Coded in by Jtecx, Jan/Feb 2022
  */
 package classes.Scenes.Places.TrollVillage {
-import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 import classes.Scenes.Places.TrollVillage;
@@ -42,7 +41,7 @@ public class Jabala extends TrollVillageAbstractContent {
         outputText("\"Take care of Zenji for us, [name]. Marae knows how careless he can get sometimes.\" Halkano teased as the two of you leave.\n\n");
         outputText("Jabala’s hut added to the troll village!");
         TrollVillage.JabalaUnlocked = true;
-        TrollVillage.ZenjiVillageStage == 1;
+        TrollVillage.ZenjiVillageStage = 1;
         doNext(camp.returnToCampUseOneHour);
     }
 
