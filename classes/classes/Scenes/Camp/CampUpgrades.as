@@ -1969,9 +1969,9 @@ private function setUpMagicWard2():void {
 	flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 30;
 	clearOutput();
 	outputText("You flip through the tome, and begin to sketch copies of the required glyphs in the dirt.  Yes, this is definitely possible.  You have something ");
-	if (player.statusEffectv1(StatusEffects.TelAdre) >= 1) outputText("Tel’Adre doesn’t");
-	else outputText("most mages wouldn’t");
-	outputText(" - the portal.  The ambient energy radiating from it could power the ward, as long as you get the web of magic working properly.  It takes hours, a great deal of stress and a lot of channeling to get the stones to their positions, carved into shape and infused with the requisite runes.  ");
+	if (player.statusEffectv1(StatusEffects.TelAdre) >= 1) outputText("Tel’Adre doesn’t;");
+	else outputText("most mages wouldn’t;");
+	outputText(" the portal.  The ambient energy radiating from it could power the ward, as long as you get the web of magic working properly.  It takes hours, a great deal of stress and a lot of channeling to get the stones to their positions, carved into shape and infused with the requisite runes.  ");
 	flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] += 1;
 	if (model.time.hours >= 12) outputText("By the time you’re done, it's already dark.");
 	else outputText("By the time you’re done, the sun is beginning to droop in the sky.");

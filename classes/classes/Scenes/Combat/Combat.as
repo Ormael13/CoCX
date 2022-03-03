@@ -13958,32 +13958,45 @@ public class Combat extends BaseContent {
         }
         if (player.lowerBody == LowerBody.FIRE_SNAIL) {
             outputText("You're too slow to escape from this fight!");
-//Pass false to combatMenu instead:		menuLoc = 3;
-//		doNext(combatMenu);
+            //Pass false to combatMenu instead:		menuLoc = 3;
+            //		doNext(combatMenu);
             menu();
             addButton(0, "Next", combatMenu, false);
             return;
         }
         if (player.jiangshiScore() > 19) {
             outputText("Your cadaverous rigidity prevents any form of escape in battle!");
-//Pass false to combatMenu instead:		menuLoc = 3;
-//		doNext(combatMenu);
+            //Pass false to combatMenu instead:		menuLoc = 3;
+            //		doNext(combatMenu);
+            menu();
+            addButton(0, "Next", combatMenu, false);
+            return;
+        }
+        if (player.statStore.hasBuff("Supercharged")) {
+            outputText("Run...SERIOUSLY? There is no way you could run! You need to discharge NOW! Your genitals are glistening with dripping plasma with how much you need to FUCK at the time!");
+            if (monster.isHerm() && player.isHerm()) outputText(" Cock or cunt you don't even care! All you WANT is for that herm to fuck you wildly until your charge is gone!");
+            else{
+                if(monster.hasCock() && player.hasVagina()) outputText("Your drooling outlet DEMAND that plug!");
+                else if(player.hasCock() && monster.hasVagina()) outputText("Your drooling plug DEMAND that outlet!");
+            }
+            //Pass false to combatMenu instead:		menuLoc = 3;
+            //		doNext(combatMenu);
             menu();
             addButton(0, "Next", combatMenu, false);
             return;
         }
         if (monster.hasStatusEffect(StatusEffects.Level) && monster.statusEffectv1(StatusEffects.Level) < 4 && monster is SandTrap) {
             outputText("You're too deeply mired to escape!  You'll have to <b>climb</b> some first!");
-//Pass false to combatMenu instead:		menuLoc = 3;
-//		doNext(combatMenu);
+            //Pass false to combatMenu instead:		menuLoc = 3;
+            //		doNext(combatMenu);
             menu();
             addButton(0, "Next", combatMenu, false);
             return;
         }
         if (monster.hasStatusEffect(StatusEffects.RunDisabled)) {
             outputText("You'd like to run, but you can't scale the walls of the pit with so many demonic hands pulling you down!");
-//Pass false to combatMenu instead:		menuLoc = 3;
-//		doNext(combatMenu);
+            //Pass false to combatMenu instead:		menuLoc = 3;
+            //		doNext(combatMenu);
             menu();
             addButton(0, "Next", combatMenu, false);
             return;
@@ -14000,8 +14013,8 @@ public class Combat extends BaseContent {
         } else if (monster.short == "minotaur tribe" && monster.HPRatio() >= 0.75) {
             clearOutput();
             outputText("There's too many of them surrounding you to run!");
-//Pass false to combatMenu instead:		menuLoc = 3;
-//		doNext(combatMenu);
+            //Pass false to combatMenu instead:		menuLoc = 3;
+            //		doNext(combatMenu);
             menu();
             addButton(0, "Next", combatMenu, false);
             return;
