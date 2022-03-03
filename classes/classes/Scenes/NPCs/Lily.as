@@ -12,7 +12,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
 
-	public class Lily extends AbstractSpiderMorph//drider cumdump slave from swamp area
+	public class Lily extends Monster//drider cumdump slave from swamp area
 	{
 		
 		/*

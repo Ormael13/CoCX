@@ -66,6 +66,7 @@ public class Jabala extends TrollVillageAbstractContent {
                     "\n" +
                     "Once she’s gone you figure that you can go outside and perhaps check on the other activities around the village\n");
             outputText("Jabala’s Hut has been added to the troll village!\n");
+            TrollVillage.JabalaUnlocked = true;
             doNext(camp.returnToCampUseOneHour);
         } else if (!TrollVillage.ZenjiFollowing) {
             outputText("Your gaze roams around until you decide to approach Jabala. Deciding that you want to talk to her again, you decide to approach her.\n" +
