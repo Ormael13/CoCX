@@ -675,7 +675,8 @@ public class CeraphScene extends NPCAwareContent
 						else addButton(3, "B.Titfuck", createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,monster));
 					}
 				}
-				if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(53);
+				uniquuuesexscene.pcUSSPreChecksV2(winRapeChoices);
+				//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(53);
 				addButton(14, "Leave", leave);
 			}
 			else {

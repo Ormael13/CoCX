@@ -201,6 +201,7 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 			EventParser.gameOver();
 		}
 
+		/*
 		public function pcUniqueSexScenesChoiceMenu(re:Number):void {
 			menu();
 			if (player.tailType == Tail.MANTICORE_PUSSYTAIL && monster.hasCock()) addButton(0, "Tail Rape", manticoreTailRapeScene);
@@ -338,9 +339,20 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 			if (re == 61) SceneLib.sharkgirlScene.oceanSharkspackWinChoices();
 		}
 
+		 */
+		public function pcUSSPreChecksV2(backFunc:Function, btnPos:int = 13):void{
+			if (pcCanUseUniqueSexScenev2(true, null) > 0) {
+				addButton(btnPos, "U.Sex Scenes", pcCanUseUniqueSexScenev2, false, backFunc()).hint("Other non-typical sex scenes.");
+			}
+			else{
+				addButtonDisabled(btnPos,"U.Sex Scenes", "You don't qualify for any Unique Sex Scenes.");
+			}
+		}
+
 		//if (uniquuuesexscene.pcCanUseUniqueSexScenev2(true, null) > 0) addButton(13, "U.Sex Scenes", uniquuuesexscene.pcCanUseUniqueSexScenev2, false, BACK_FUNCTION_GOES_HERE).hint("Other non-typical sex scenes.");
 		//Replace above implementation if you want, use the above. can replace addButton + curry for the few special cases.
 		public function pcCanUseUniqueSexScenev2(isChecking:Boolean = false, backFunc:Function = null, page:int = 0):*{
+			var bypass:Function = RaijuOverLust();
 			var menuItems:Array = [];
 			menuItems.push.apply(this, USSTailRape());
 			menuItems.push.apply(this, USSTailpeg());
@@ -357,7 +369,17 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 			menuItems.push.apply(this, USSLiveDildo());
 			menuItems.push.apply(this, USSJiangshiDrn());
 			if (backFunc == null) backFunc = camp.returnToCampUseOneHour;
-			return menuGen(menuItems, page, backFunc[0],false, isChecking);
+			if (bypass == null) return menuGen(menuItems, page, backFunc(),false, isChecking);
+			else if (isChecking) return (bypass != null);
+			else bypass();
+
+			function RaijuOverLust():Function{
+				if (player.statStore.hasBuff("Supercharged") && !monster.hasPerk(PerkLib.LightningAffinity) && !monster.hasPerk(PerkLib.LightningNature)){
+					if(!player.hasVagina() && !player.hasCock()) return raijuVoltTransfer;
+					else return RaijuRapeSupercharged;
+				}
+				else return null
+			}
 
 			function USSTailRape():Array{
 				var btnSet:Array = ["Tail Rape"];
@@ -478,6 +500,7 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 			}
 		}
 
+		/*
 		public function checkIfPcRapeOnVictory(re:Number):void{
 			//Repeat this for different automatic scenes and trigger and use this function as a result instead of pcUniqueSexScenesChoiceMenu when called in places where it would make senses for it to proc
 			if (player.statStore.hasBuff("Supercharged") && !monster.hasPerk(PerkLib.LightningAffinity) && !monster.hasPerk(PerkLib.LightningNature)){
@@ -488,6 +511,7 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 				addButton(13, "U. Sex Scenes", pcUniqueSexScenesChoiceMenu, re).hint("Other non typical sex scenes.");
 			}
 		}
+		*/
 
 		public function RaijuRapeSupercharged():void {
 			clearOutput();

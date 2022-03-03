@@ -271,7 +271,8 @@ public class FetishZealotScene extends AbstractLakeContent
 				}
 				if (Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_ISMB) addButton(2, "Mindbreak", mindbreakMaleCultist).hint("Toy with the cultist brain.");
 				addButton(14, "Leave", cleanupAfterCombat);
-				if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(29);
+				uniquuuesexscene.pcUSSPreChecksV2(zealotDefeated);
+				//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(29);
 			}
 			else cleanupAfterCombat();
 		}

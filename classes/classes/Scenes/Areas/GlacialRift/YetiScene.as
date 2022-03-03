@@ -129,7 +129,8 @@ public class YetiScene extends BaseContent
 				if (player.armor == armors.S_ARMOR) addButton(2, "B.Titfuck", (player.armor as SuccubusArmor).succubusPaizuri);
 				else addButton(2, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
 			}
-			if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(21);
+			uniquuuesexscene.pcUSSPreChecksV2(winAgainstYeti);
+			//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(21);
 			addButton(14, "Leave", cleanupAfterCombat);
 		}
 

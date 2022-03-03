@@ -188,7 +188,8 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 					if (player.armor is SuccubusArmor) bikiniTits = (player.armor as SuccubusArmor).succubusPaizuri;
 					else bikiniTits = (player.armor as LustyMaidensArmor).lustyMaidenPaizuri;
 				}
-				if (player.pcCanUseUniqueSexScene()) temp3 = curry(uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 52);
+				if (uniquuuesexscene.pcCanUseUniqueSexScenev2(true, null) > 0) temp3 = curry(uniquuuesexscene.pcCanUseUniqueSexScenev2, false, defeatAnemone);
+				//if (player.pcCanUseUniqueSexScene()) temp3 = curry(uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 52);
 				choices("Your Ass", victoryButtholeRape, "Your Cock", cockRape, "Your Vagina", vaginaRape, "Her Butt", anal, "Lay Egg", eggs,
 					"", null, "", null, "B.Titfuck", bikiniTits, "U. Sex Scenes", temp3, "Leave", cleanupAfterCombat);
 			}

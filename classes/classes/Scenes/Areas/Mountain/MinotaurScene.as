@@ -130,7 +130,8 @@ private function postfightoptions():void {
 	addButton(14, "Leave", cleanupAfterCombat);
 	if(x < 0 && player.hasCock()) outputText("\nSadly, you're too well endowed to penetrate the minotaur.");
 	if(player.gender == 3 && player.isTaur()) outputText("\nIf you had a different body type you might be able to penetrate him while taking him, but as a centaur that's not an option.");
-	if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(33);
+	uniquuuesexscene.pcUSSPreChecksV2(minoVictoryRapeChoices);
+	//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(33);
 }
 
 private function killMinotaur():void {
