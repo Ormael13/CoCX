@@ -190,7 +190,7 @@ public function corruptCampJojo():void {
 	if(player.hasKeyItem("Cock Milker - Installed At Whitney's Farm") >= 0) {
 		if(flags[kFLAGS.JOJO_COCK_MILKING_COOLDOWN] > 0) outputText("\n\n<b>Jojo is still drained from his last visit to the milkers - you should wait a few hours before taking him back.</b>");
 		//First time:
-		else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00331] != 0) {
+		else if (flags[kFLAGS.JOJO_TIMES_MILKED] != 0) {
 			milkHim = repeatMilkJojo;
 			if (tentacleJojo()) tentaMilk = createCallBackFunction(repeatMilkJojo, true);
 		} else milkHim = milkJojoFirst;
@@ -676,7 +676,7 @@ private function jojoMilkPay(tentacle:Boolean = false):void {
 		player.gems += payout;
 		flags[kFLAGS.WHITNEY_GEMS_PAID_THIS_WEEK] += payout;
 		statScreenRefresh();
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00331]++;
+		flags[kFLAGS.JOJO_TIMES_MILKED]++;
 		if(payout == 1) outputText(Num2Text(payout) + " gem rolls out into a collection plate.  Whitney really put a lot of work into this!  You pocket the gem and g");
 		else outputText(Num2Text(payout) + " gems roll out into a collection plate.  Whitney really put a lot of work into this!  You pocket the gems and g");
 	}
@@ -685,9 +685,9 @@ private function jojoMilkPay(tentacle:Boolean = false):void {
 public function jojoCumQ():Number {
 	var cumQ:Number = 0;
 	cumQ = 400;
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00331] < 4) cumQ += flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00331] * 200;
-	else cumQ += flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00331] * 100;
-	if (tentacleJojo()) cumQ += 500 + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00331] * 100;
+	if(flags[kFLAGS.JOJO_TIMES_MILKED] < 4) cumQ += flags[kFLAGS.JOJO_TIMES_MILKED] * 200;
+	else cumQ += flags[kFLAGS.JOJO_TIMES_MILKED] * 100;
+	if (tentacleJojo()) cumQ += 500 + flags[kFLAGS.JOJO_TIMES_MILKED] * 100;
 	if (flags[kFLAGS.JOJO_BLOWJOB_XP] < 10) cumQ += flags[kFLAGS.JOJO_BLOWJOB_XP] * 50;
 	else cumQ += 500;
 	if (flags[kFLAGS.JOJO_SEX_COUNTER] < 10) cumQ += flags[kFLAGS.JOJO_SEX_COUNTER] * 25;
