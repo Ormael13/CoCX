@@ -332,7 +332,7 @@ player.removeCurse("str", 20);
 
 (Player only).
 
-Give a cumulative 1% bonus to stat multiplier, capped at 20% (in each category). Negative values decrease it down to -20%.
+Give a cumulative 1% bonus to stat multiplier, capped at 20% (in each category). Also reduce curse power to stat. Negative values decrease it down to -20%.
 
 **Example**:
 ```js
