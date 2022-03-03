@@ -271,7 +271,8 @@ public class GoblinWarriorScene extends BaseContent
 				if (player.canOvipositSpider()) addButton(8, "Lay Eggs", eggs);
 				addButton(10, "Kill", killGoblin);
 				addButton(14, "Leave", cleanupAfterCombat);
-				if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(49);
+				uniquuuesexscene.pcUSSPreChecksV2(goblinWarriorRapeIntro);
+				//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(49);
 			}
 			else if (feeder!=null || eggs!=null) {
 				outputText("\n\n<b>You aren't horny enough to rape her, but ");

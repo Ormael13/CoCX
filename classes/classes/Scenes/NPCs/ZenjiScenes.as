@@ -3147,7 +3147,9 @@ import coc.view.ButtonDataList;
 						"You’re not going to let your perfect day be ruined by the same skank that raped your husband. SHE’S. GOING. DOWN.\n" +
 						"\n" +
 						"You approach her in the aisle, ready to teach her a lesson.\n");
-				startCombat(new YenzaEnemy());
+				//startCombat(new YenzaEnemy());
+				outputText("WARNING: COMBAT NOT READY. YOU GET A FREE PASS FOR THIS UNTIL ENEMY IS SET UP.");
+				doNext(ZenjiMarriageSceneCinco);
 			}
 		}
 

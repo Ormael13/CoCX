@@ -53,7 +53,8 @@ public function DefeatedHellCat():void {
 		if (player.armor == armors.S_ARMOR) addButton(3, "B.Titfuck", (player.armor as SuccubusArmor).succubusPaizuri);
 		else addButton(3, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
 	}
-	if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(1);
+	uniquuuesexscene.pcUSSPreChecksV2(DefeatedHellCat);
+	//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(1);
 }
 
 public function DefeatedHellCatPussycat():void {

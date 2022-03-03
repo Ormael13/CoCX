@@ -2658,6 +2658,7 @@ public class Creature extends Utils
 		}
 
 		//Unique sex scenes
+		/*
 		public function pcCanUseUniqueSexScene():Boolean
 		{
 			if (game.player.tailType == Tail.MANTICORE_PUSSYTAIL && game.monster.hasCock()) return true;
@@ -2692,7 +2693,7 @@ public class Creature extends Utils
 			if (game.player.hasPerk(PerkLib.ElementalBody)) return false;
 			return false;
 		}
-
+		 */
 		//check for vagoo
 		public function hasVagina():Boolean
 		{

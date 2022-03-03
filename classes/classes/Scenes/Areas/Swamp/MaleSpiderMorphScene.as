@@ -97,7 +97,8 @@ public class MaleSpiderMorphScene extends BaseContent
 			}
 			addButton(3, "B.Titfuck", bikiniTits);
 			addButton(14, "Leave", cleanupAfterCombat);
-			if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(41);
+			uniquuuesexscene.pcUSSPreChecksV2(defeatSpiderBoy);
+			//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(41);
 		}
 
 //Loss selector

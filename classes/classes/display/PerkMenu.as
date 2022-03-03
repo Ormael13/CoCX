@@ -806,6 +806,7 @@ public class PerkMenu extends BaseContent {
 				for each (var pPerk:Array in mPerkarray){
 					if (player.hasPerk(pPerk[0])){
 						mCount++;
+						if (bodyPart == "Adaptations") mutationCount++;
 					}
 				}
 				outputText(bodyPart + " mutations obtained: ");

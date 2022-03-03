@@ -87,8 +87,8 @@ public class ManticoreVenom extends Consumable {
 		}
 		//Scorpion tail
 		if (player.arms.type == Arms.LION && changes < changeLimit && player.tailType != Tail.GARGOYLE && player.tailType != Tail.SCORPION && player.tailType != Tail.MANTICORE_PUSSYTAIL && rand(2) == 0) {
-      outputText("\n\n");
-      CoC.instance.transformations.TailScorpion.applyEffect();
+			outputText("\n\n");
+			CoC.instance.transformations.TailScorpion.applyEffect();
 			changes++;
 		}
 		//PussyTail (only females)

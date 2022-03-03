@@ -28,7 +28,8 @@ package classes.Scenes.Areas.GlacialRift
 				if (player.hasVagina()) addButton(1, "RideVaginally", rideVaginally);
 				addButton(2, "Ride Anally", rideAnally);
 				addButton(14, "Leave", cleanupAfterCombat);
-				if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(18);
+				uniquuuesexscene.pcUSSPreChecksV2(winAgainstGiant);
+				//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(18);
 			}
 			else {
 				cleanupAfterCombat();
@@ -45,7 +46,8 @@ package classes.Scenes.Areas.GlacialRift
 				if (player.hasVagina()) addButton(1, "RideVaginally", rideVaginally);
 				addButton(2, "Ride Anally", rideAnally);
 				addButton(14, "Leave", cleanupAfterCombat);
-				if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(19);
+				uniquuuesexscene.pcUSSPreChecksV2(winAgainstYoungGiant);
+				//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(19);
 			}
 			else {
 				cleanupAfterCombat();

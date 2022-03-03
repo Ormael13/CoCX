@@ -385,13 +385,13 @@ public class PerkType extends BaseContent
 			});
 			return this;
 		}
-		public function requireNervSysMutationSlot():PerkType {
+		public function requirePeripheralNervSysMutationSlot():PerkType {
 			requirements.push({
 				fn  : function(player:Player):Boolean {
-					return player.maxNervSysMutations() > 0;
+					return player.maxPeripheralNervSysMutations() > 0;
 				},
-				text: "Free NervSys Mutation Slot",
-				type: "nervsysmutation"
+				text: "Free Peripheral NervSys Mutation Slot",
+				type: "peripheralnervsysmutation"
 			});
 			return this;
 		}

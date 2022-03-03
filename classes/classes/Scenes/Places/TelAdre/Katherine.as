@@ -5258,7 +5258,7 @@ private function firstTimeWithKatherineUTerribleScrub():void
 	}
 	else if(player.cor < 75)
 	{
-		outputText("\n\nYou tell her that you’ve travelled outside Tel’Adre.  You’ve seen many weird and wonderful things.  Is she really that terrible?  She’s clearly no demon, you would recognize that and so would the Watch.");
+		outputText("\n\nYou tell her that you’ve traveled outside Tel’Adre.  You’ve seen many weird and wonderful things.  Is she really that terrible?  She’s clearly no demon, you would recognize that and so would the Watch.");
 		outputText("\n\nKath just leans against you, not responding to any of what you’re saying.");
 		outputText("\n\nYou tell her you can prove it to her.  You arm goes around her back and you start to gently rub the nape of her neck.  She tries to argue but you press a finger to her lips and wink.");
 		outputText("\n\nThe excitement and nervousness from before boil over.  It’s like her mind just can’t decide what to do.  Her body, on the other hand, knows exactly what to do.  You see that python-sized cock begin to tent her pants.");

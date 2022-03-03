@@ -72,7 +72,8 @@ package classes.Scenes.Areas.Tundra
 					addButton(3, "Scissor", valkyrieScissor);
 				}
 				addButton(14, "Leave", cleanupAfterCombat);
-				if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(42);
+				uniquuuesexscene.pcUSSPreChecksV2(winAgainstValkyrie);
+				//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(42);
 			}
 			else {
 				cleanupAfterCombat();

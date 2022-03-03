@@ -79,7 +79,8 @@ public class BasiliskScene extends BaseContent
 				if (player.canOvipositSpider() || player.canOvipositMantis()) addButton(2, "Lay Eggs", driderPCEggLaysBasilisk);
 				if (player.canOvipositBee() && player.gender > 0) addButton(2, "Lay Eggs", layBeeEggsInABasilisk);
 				addButton(14, "Leave", cleanupAfterCombat);
-				if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(22);
+				uniquuuesexscene.pcUSSPreChecksV2(defeatBasilisk);
+				//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(22);
 			}
 			else cleanupAfterCombat();
 		}
