@@ -80,8 +80,7 @@ import classes.internals.SaveableState;
 		public function LilyFollower() {
 			Saves.registerSaveableState(this);
 		}
-
-
+		/*
 		public function lilyEncounter():void {
 			spriteSelect(77);
 			clearOutput();
@@ -651,5 +650,7 @@ import classes.internals.SaveableState;
 			addButton (3, "House", LilyHouse);
 			addButton (4, "Spar", LilySpar);
 		}
+
+		 */
 	}
 }
