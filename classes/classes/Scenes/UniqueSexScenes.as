@@ -342,7 +342,7 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 
 		public function pcUSSPreChecksV2(backFunc:Function, btnPos:int = 13):void{
 			if (pcCanUseUniqueSexScenev2(true, null) > 0) {
-				addButton(btnPos, "U.Sex Scenes", pcCanUseUniqueSexScenev2, false, backFunc()).hint("Other non-typical sex scenes.");
+				addButton(btnPos, "U.Sex Scenes", pcCanUseUniqueSexScenev2, false, backFunc).hint("Other non-typical sex scenes.");
 			}
 			else{
 				addButtonDisabled(btnPos,"U.Sex Scenes", "You don't qualify for any Unique Sex Scenes.");
@@ -370,7 +370,7 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 			menuItems.push.apply(this, USSLiveDildo());
 			menuItems.push.apply(this, USSJiangshiDrn());
 			if (backFunc == null) backFunc = camp.returnToCampUseOneHour;
-			if (bypass == null) return menuGen(menuItems, page, backFunc(),false, isChecking);
+			if (bypass == null) return menuGen(menuItems, page, backFunc,false, isChecking);
 			else if (isChecking) return (bypass != null);
 			else bypass();
 
