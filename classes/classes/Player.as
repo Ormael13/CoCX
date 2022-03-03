@@ -10386,8 +10386,6 @@ use namespace CoC;
 				manticoreCounter += 2;
 			if (rearBody.type == RearBody.LION_MANE)
 				manticoreCounter++;
-			if (vaginaType() == VaginaClass.MANTICORE)
-				manticoreCounter++;
 			if (arms.type == Arms.LION)
 				manticoreCounter++;
 			if (lowerBody == LowerBody.LION)
@@ -10402,6 +10400,8 @@ use namespace CoC;
 				manticoreCounter++;
 			if (cocks.length > 0)
 				manticoreCounter -= 3;
+			if (vaginaType() == VaginaClass.MANTICORE)
+				manticoreCounter++;
 			if (cor >= 20)
 				manticoreCounter++;
 			if (hasPerk(MutationsLib.CatlikeNimbleness))
