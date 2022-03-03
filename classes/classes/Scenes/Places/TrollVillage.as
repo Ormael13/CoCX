@@ -6,7 +6,6 @@
 package classes.Scenes.Places {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.NPCs.ZenjiScenes;
 import classes.Scenes.Places.TrollVillage.*;
 import classes.Scenes.SceneLib;
 import classes.internals.SaveableState;
