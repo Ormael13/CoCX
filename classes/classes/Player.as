@@ -10404,6 +10404,8 @@ use namespace CoC;
 				manticoreCounter -= 3;
 			if (cor >= 20)
 				manticoreCounter++;
+			if (hasPerk(MutationsLib.CatlikeNimbleness))
+				manticoreCounter++;
 			if (hasPerk(MutationsLib.CatlikeNimblenessPrimitive))
 				manticoreCounter++;
 			if (hasPerk(MutationsLib.CatlikeNimblenessEvolved))
