@@ -1134,7 +1134,8 @@ public class DesertCave extends DungeonAbstractContent
 			if(player.tentacleCocks() >= 3 || player.stamenCocks() > 2) addButton(2,"Tentacles",tentacleVictoryGangbangCumWitch).hint("Fuck the Cum Witch with your tentacle cocks.");
 			//Female Victory Sex
 			if(player.hasVagina()) addButton(3,"Ladysex",ladyVictorySex).hint("Ride the Cum Witch's cock until she cums!");
-			if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(44);
+			uniquuuesexscene.pcUSSPreChecksV2(cumWitchDefeated);
+			//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(44);
 			if (CoC.instance.inCombat) {
                 if(monster.HP >= 1) addButton(14,"Leave",declineSandWitch);
 				else addButton(14,"Leave",cleanupAfterCombat);
@@ -4339,4 +4340,4 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 			addButton(0, "Approach", sandMotherStuffGOA).hint("Approach the Sand Mother.");
 		}
 	}
-}
+}

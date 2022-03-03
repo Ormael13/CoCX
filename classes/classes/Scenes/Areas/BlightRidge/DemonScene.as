@@ -46,7 +46,8 @@ import classes.Scenes.UniqueSexScenes;
 				if (player.armor == armors.S_ARMOR) addButton(7, "B.Titfuck", (player.armor as SuccubusArmor).succubusPaizuri);
 				else addButton(7, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
 			}
-			if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(2);
+			uniquuuesexscene.pcUSSPreChecksV2(defeatMinoIncubus);
+			//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(2);
 			addButton (14, "Leave", cleanupAfterCombat);
 		}
 		
@@ -83,7 +84,8 @@ import classes.Scenes.UniqueSexScenes;
 				}
 			}
 			if (monster.HP < 1) addButton (5, "Kill Him", killDemon);
-			if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(3);
+			uniquuuesexscene.pcUSSPreChecksV2(defeatIncubus);
+			//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(3);
 			addButton (14, "Leave", cleanupAfterCombat);
 		}
 		
@@ -337,7 +339,8 @@ import classes.Scenes.UniqueSexScenes;
 				}
 			}
 			if (monster.HP < 1) addButton (5, "Kill Her", killDemon);
-			if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(4);
+			uniquuuesexscene.pcUSSPreChecksV2(defeatOmnibus);
+			//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(4);
 			addButton (14, "Leave", cleanupAfterCombat);
 		}
 		
@@ -585,7 +588,8 @@ import classes.Scenes.UniqueSexScenes;
 			menu();
 			outputText("You smile in satisfaction as the cow succubus collapses, unable to continue fighting.");
 			if (monster.HP < 1) addButton (5, "Kill Her", killDemon);
-			if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(5);
+			//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(5);
+			uniquuuesexscene.pcUSSPreChecksV2(defeatCowSuccubus);
 			addButton (14, "Leave", cleanupAfterCombat);
 		}
 		
@@ -616,7 +620,8 @@ import classes.Scenes.UniqueSexScenes;
 				//if (player.lowerBody == LowerBody.PLANT_FLOWER) addButton(2, "Seeding", uniquuuesexscene.alrauneSeedingScene);
 			}
 			if (monster.HP < 1) addButton (5, "Kill Her", killDemon);
-			if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(6);
+			uniquuuesexscene.pcUSSPreChecksV2(defeatSuccubus);
+			//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(6);
 			addButton (14, "Leave", cleanupAfterCombat);
 		}
 		

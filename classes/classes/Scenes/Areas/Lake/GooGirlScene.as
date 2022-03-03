@@ -328,7 +328,8 @@ public class GooGirlScene extends AbstractLakeContent
 				var temp3:Function =null;
 				var valeria:Function = SceneLib.valeria.valeriaAndGooThreeStuff;
 				if (player.armorName != "goo armor" || player.isButtPregnant() || player.isPregnant()) valeria = null;
-				if (player.pcCanUseUniqueSexScene()) temp3 = curry(uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 30);
+				if (uniquuuesexscene.pcCanUseUniqueSexScenev2(true, null) > 0) temp3 = curry(uniquuuesexscene.pcCanUseUniqueSexScenev2, false, beatUpGoo);
+				//if (player.pcCanUseUniqueSexScene()) temp3 = curry(uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 30);
 				var eggs:Function =null;
 				if (player.canOvipositBee()) eggs = layBeeEggsInGoo;
 				if (player.hasCock()) {

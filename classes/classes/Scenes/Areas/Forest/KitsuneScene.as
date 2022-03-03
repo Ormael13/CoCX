@@ -1254,7 +1254,8 @@ public class KitsuneScene extends BaseContent
 				removeButton(7);
 				removeButton(8);
 			}
-			if (player.pcCanUseUniqueSexScene() && flags[kFLAGS.SFW_MODE] <= 0) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 16).hint("Other non typical sex scenes.");
+			uniquuuesexscene.pcUSSPreChecksV2(defeatTheKitsunes);
+			//if (player.pcCanUseUniqueSexScene() && flags[kFLAGS.SFW_MODE] <= 0) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 16).hint("Other non typical sex scenes.");
 			addButton(14, "Leave", leaveKitsune);
 		}
 

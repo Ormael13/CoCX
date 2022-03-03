@@ -635,7 +635,8 @@ internal function beatSandwitch():void {
 	if (player.gender > 0 && player.canOviposit()) addButton(4, "Lay Eggs", ovipositSandWitches);
 	addButton(5, "Taunt Her", sandwitchSpanking);
 	addButton(14, "Leave", cleanupAfterCombat);
-	if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(14);
+	uniquuuesexscene.pcUSSPreChecksV2(beatSandwitch2);
+	//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(14);
 }
 public function beatSandwitch2():void {
 	menu();
@@ -646,7 +647,8 @@ public function beatSandwitch2():void {
 	if (player.gender > 0 && player.canOviposit()) addButton(4, "Lay Eggs", ovipositSandWitches);
 	addButton(5, "Taunt Her", sandwitchSpanking);
 	addButton(14, "Leave", cleanupAfterCombat);
-	if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(14);
+	uniquuuesexscene.pcUSSPreChecksV2(beatSandwitch2);
+	//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(14);
 }
     //RAEP SAND-WITCH!
     private function sandwitchGetsDildoed():void {

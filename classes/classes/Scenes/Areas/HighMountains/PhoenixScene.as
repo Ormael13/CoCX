@@ -125,7 +125,8 @@ public class PhoenixScene extends BaseContent
 					if (player.armor == armors.S_ARMOR) addButton(7, "B.Titfuck", (player.armor as SuccubusArmor).succubusPaizuri);
 					else addButton(7, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
 				}
-				if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(26);
+				uniquuuesexscene.pcUSSPreChecksV2(winAgainstPhoenix);
+				//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(26);
 				addButton(14, "Leave", cleanupAfterCombat);
 			}
 			else cleanupAfterCombat();
@@ -147,7 +148,8 @@ public class PhoenixScene extends BaseContent
 				if (player.hasVagina()) addButton(4, "Ride Vaginal", rideVaginal);
 				//addButton(5, "Suck Her Dick", rideAnal);
 				addButton(14, "Leave", cleanupAfterCombat);
-				if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(27);
+				uniquuuesexscene.pcUSSPreChecksV2(winAgainstPhoenix1);
+				//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(27);
 			}
 			else cleanupAfterCombat();
 		}

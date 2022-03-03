@@ -360,7 +360,8 @@ public class GoblinScene extends BaseContent
 				}
 				addButton(10, "Kill", killGoblin);
 				addButton(14, "Leave", cleanupAfterCombat);
-				if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(47);
+				uniquuuesexscene.pcUSSPreChecksV2(gobboRapeIntro);
+				//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(47);
 			}
 			else {
 				//If cant rape or breastfeed

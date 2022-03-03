@@ -122,7 +122,8 @@ package classes.Scenes.Areas.Plains
 					addButton(2, "TakeHerClit", takeGnollClit).hint("Put your vagina to use and ride the gnoll's clit.", "Take Her Clit");
 				}
 				addButton(3, "SuckHerClit", suckGnollClit).hint("Suck the gnoll's clit.", "Suck Her Clit");
-				if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(36);
+				uniquuuesexscene.pcUSSPreChecksV2(defeatHyena);
+				//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(36);
 				addButton(14, "Leave", cleanupAfterCombat);
 			}
 			else cleanupAfterCombat();

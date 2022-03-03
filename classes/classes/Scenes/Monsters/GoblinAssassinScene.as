@@ -299,7 +299,8 @@ public class GoblinAssassinScene extends BaseContent
 				if (mindbreak != null) addButton(9, "Mind break", mindbreak);
 				addButton(10, "Kill", killGoblin);
 				addButton(14, "Leave", cleanupAfterCombat);
-				if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(45);
+				uniquuuesexscene.pcUSSPreChecksV2(gobboAssassinRapeIntro);
+				//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(45);
 			}
 			else if (feeder!=null || eggs!=null) {
 				outputText("\n\n<b>You aren't horny enough to rape her, but ");

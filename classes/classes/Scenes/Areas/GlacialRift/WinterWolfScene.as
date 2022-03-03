@@ -33,7 +33,8 @@ package classes.Scenes.Areas.GlacialRift
 					addButton(0, "RideHisCock", rideWinterWolfsCock);
 				}
 				addButton(14, "Leave", cleanupAfterCombat);
-				if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(20);
+				uniquuuesexscene.pcUSSPreChecksV2(winAgainstWinterWolf);
+				//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(20);
 			}
 			else {
 				cleanupAfterCombat();

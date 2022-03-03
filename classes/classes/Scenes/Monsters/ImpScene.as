@@ -78,7 +78,8 @@ use namespace CoC;
 			addButton(6, "Kill Him", killImp);
 			if (player.canOvipositBee()) addButton(7, "Oviposit", putBeeEggsInAnImpYouMonster);
 			addButton(14, "Leave", cleanupAfterCombat);
-			if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(50);
+			uniquuuesexscene.pcUSSPreChecksV2(impVictory);
+			//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(50);
 
 		}
 		public function impVictory2():void {
@@ -1660,7 +1661,8 @@ use namespace CoC;
 			}
 			if (player.lust >= 33) {
 				addButton(0, "Sex", sexAnImpLord);
-				if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(51);
+				uniquuuesexscene.pcUSSPreChecksV2(defeatImpLord);
+				//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(51);
 			} else {
 				outputText("\n\nYou are not aroused enough to rape him.");
 			}
