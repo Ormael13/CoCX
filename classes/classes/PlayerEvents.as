@@ -1549,6 +1549,18 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				outputText(")</b>\n");
 				needNext = true;
 			}
+			//Dark Affinity
+			if ((player.vampireScore() >= 15 || player.apophisScore() >= 23) && (!player.hasPerk(PerkLib.DarknessAffinity))) {
+				outputText("\nYou at home in darkness seeing as clearly in the shadows wich you find comforting as in broad daylight.\n\n(<b>Gained Perks: Darkness Affinity</b>)\n");
+				player.createPerk(PerkLib.DarknessAffinity, 0, 0, 0, 0);
+				needNext = true;
+			}
+			else if (player.vampireScore() < 15 && player.apophisScore() < 23 && player.hasPerk(PerkLib.DarknessAffinity)) {
+				outputText("\nThe pitch black darkness becomes hostile toward you again as you lose your affinity toward it.\n\n<b>(Lost Perks: Darkness Affinity");
+				player.removePerk(PerkLib.DarknessAffinity);
+				outputText(")</b>\n");
+				needNext = true;
+			}
 			if ((player.sirenScore() >=  10 || player.harpyScore() >=  8 || player.phoenixScore() >=  10 || player.thunderbirdScore() >=  10) && !player.hasPerk(PerkLib.HarpySong)) {
 				outputText("\n Your voice sound like magicaly entrancing music to your ears now, it would seem you have gained the infamous magicaly compeling voices common to harpies. <b>Gained Perks: Harpy Song</b>)\n");
 				player.createPerk(PerkLib.HarpySong, 0, 0, 0, 0);
@@ -1666,6 +1678,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (player.raijuScore() >= 7) {
 					player.createStatusEffect(StatusEffects.IsRaiju,0,0,0,0);
 					player.createPerk(PerkLib.LightningClaw,0,0,0,0);
+					player.createPerk(PerkLib.Supercharged,0,0,0,0);
 				}
 				player.createPerk(PerkLib.LightningAffinity, 0, 0, 0, 0);
 				player.createPerk(PerkLib.ElectrifiedDesire, 0, 0, 0, 0);
@@ -1677,6 +1690,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.LightningAffinity);
 				player.removePerk(PerkLib.ElectrifiedDesire);
 				player.removePerk(PerkLib.LightningClaw);
+				player.removePerk(PerkLib.Supercharged);
 				needNext = true;
 			}
 			else if (player.thunderbirdScore() < 12 && player.hasPerk(PerkLib.LightningAffinity) && player.hasStatusEffect(StatusEffects.IsThunderbird) && !player.hasStatusEffect(StatusEffects.IsRaiju)) {
@@ -2294,6 +2308,18 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.removePerk(PerkLib.AuraOfCorruption);
 				needNext = true;
 			}
+			//Gain venomancy if utherly toxic
+			if ((player.apophisScore() >= 23) && player.cor > 50 && !player.hasPerk(PerkLib.Venomancy)) {
+				outputText("\nYour inborn toxicity has reached such a peak that even your spells are now charged with venom. \n\n(<b>Gained Perk: Venomancy</b>)\"");
+				player.createPerk(PerkLib.Venomancy, 0, 0, 0, 0);
+				needNext = true;
+			}
+			//Lose venomancy if not toxic
+			if ((player.apophisScore() < 23) && player.cor < 89 && player.hasPerk(PerkLib.Venomancy)) {
+				outputText("\nYour mystical powers over poison and toxins have waned. \n\n(<b>Lost Perk: Venomancy</b>)\"");
+				player.removePerk(PerkLib.Venomancy);
+				needNext = true;
+			}
 			//Harpy
 			if (LowerBody.canLayEggs(player) && player.hasPerk(PerkLib.HarpyWomb)) { //Make eggs big if harpied!
 				if (player.hasStatusEffect(StatusEffects.Eggs) && player.statusEffectv2(StatusEffects.Eggs) == 0) {
@@ -2548,10 +2574,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			if (player.statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff1) >= 1) {
 				if (player.statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff1) == 1) {
-					if (player.statStore.hasBuff("ShiraOfTheEastFoodBuff") >= 1) {
-						var tempStrength:int = player.statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff2);
-						player.statStore.removeBuffs("ShiraOfTheEastFoodBuff");
-					}
+					player.buff("ShiraOfTheEastFoodBuff").remove();
 					player.removeStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff1);
 					outputText("\n<b>Effect of eating in 'Shira of the east' restaurant wears off.</b>\n");
 					needNext = true;

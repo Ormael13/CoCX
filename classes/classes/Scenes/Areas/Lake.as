@@ -42,7 +42,10 @@ use namespace CoC;
 			//Diana
 			if (player.level >= 3 && flags[kFLAGS.DIANA_FOLLOWER] < 6 && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff) && rand(5) == 0) {
 				player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
-				SceneLib.dianaScene.repeatLakeEnc();
+				if (flags[kFLAGS.DIANA_FOLLOWER] != 3 && flags[kFLAGS.DIANA_LVL_UP] >= 8)
+                    SceneLib.dianaScene.postNameEnc();
+                else
+				    SceneLib.dianaScene.repeatEnc();
 				return;
 			}
 			//Helia monogamy fucks
@@ -110,11 +113,8 @@ use namespace CoC;
 			choice[choice.length] = 1;
 			choice[choice.length] = 2;
 			//Fetish cultist not encountered till level 3
-			if (player.level >= 3 && flags[kFLAGS.FACTORY_SHUTDOWN] > 0) {
+			if (player.level >= 3 && flags[kFLAGS.FACTORY_SHUTDOWN] > 0)
 				choice[choice.length] = 3;
-				choice[choice.length] = 10;
-				choice[choice.length] = 11;
-			}
 			//Slimes/Ooze = level >= 3
 			if (player.level >= 3)
 				choice[choice.length] = 4;

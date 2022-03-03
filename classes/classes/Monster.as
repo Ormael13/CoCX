@@ -2742,6 +2742,9 @@ import flash.utils.getQualifiedClassName;
 				else {
 					var procentvalue:Number = (4 + rand(7));
 					if (game.player.hasPerk(PerkLib.ThirstForBlood)) procentvalue *= 1.5;
+					if (player.hasPerk(MutationsLib.SharkOlfactorySystem)) procentvalue *= 1.5;
+					if (player.hasPerk(MutationsLib.SharkOlfactorySystemPrimitive)) procentvalue *= 1.5;
+					if (player.hasPerk(MutationsLib.SharkOlfactorySystemEvolved)) procentvalue *= 1.5;
 					if (statusEffectv2(StatusEffects.IzmaBleed) > 0) procentvalue += statusEffectv2(StatusEffects.IzmaBleed);
 					procentvalue = Math.round(procentvalue);
 					var store:Number = maxHP() * (procentvalue) / 100;
@@ -2762,7 +2765,13 @@ import flash.utils.getQualifiedClassName;
 				//Deal damage if still wounded.
 				else {
 					var store3:Number = (player.str + player.spe) * 2;
-					if (game.player.hasPerk(PerkLib.ThirstForBlood)) store3 *= 1.5;
+					if (player.hasPerk(PerkLib.ThirstForBlood)) store3 *= 1.5;
+					if (player.hasPerk(MutationsLib.SharkOlfactorySystem)) store3 *= 1.5;
+					if (player.hasPerk(MutationsLib.SharkOlfactorySystemPrimitive)) store3 *= 1.5;
+					if (player.hasPerk(MutationsLib.SharkOlfactorySystemEvolved)) store3 *= 1.5;
+					if (player.hasPerk(PerkLib.RacialParagon)) store3 *= 1.5;
+					if (player.hasPerk(PerkLib.Apex)) store3 *= 1.5;
+					if (player.hasPerk(PerkLib.AlphaAndOmega)) store3 *= 1.5;
 					store3 = Math.round(store3);
 					if (statusEffectv2(StatusEffects.SharkBiteBleed) > 0) store3 *= statusEffectv2(StatusEffects.SharkBiteBleed);
 					store3 = SceneLib.combat.doDamage(store3);
@@ -2812,7 +2821,13 @@ import flash.utils.getQualifiedClassName;
 				//Deal damage if still wounded.
 				else {
 					var store5:Number = (player.str + player.spe) * 2;
-					if (game.player.hasPerk(PerkLib.ThirstForBlood)) store5 *= 1.5;
+					if (player.hasPerk(PerkLib.ThirstForBlood)) store5 *= 1.5;
+					if (player.hasPerk(MutationsLib.SharkOlfactorySystem)) store5 *= 1.5;
+					if (player.hasPerk(MutationsLib.SharkOlfactorySystemPrimitive)) store5 *= 1.5;
+					if (player.hasPerk(MutationsLib.SharkOlfactorySystemEvolved)) store5 *= 1.5;
+					if (player.hasPerk(PerkLib.RacialParagon)) store5 *= 1.5;
+					if (player.hasPerk(PerkLib.Apex)) store5 *= 1.5;
+					if (player.hasPerk(PerkLib.AlphaAndOmega)) store5 *= 1.5;
 					store5 = Math.round(store5);
 					store5 = SceneLib.combat.doDamage(store5);
 					if (plural) {

@@ -35,8 +35,10 @@ public class Weapon extends Useable //Equipable
 		
 		public function get name():String { return _name; }
 		
+		public function get descBase():String { return _description; }
+		
 		override public function get description():String {
-			var desc:String = _description;
+			var desc:String = descBase;
 			//Type
 			desc += "\n\nType: Melee Weapon";
 			if (type != "") {

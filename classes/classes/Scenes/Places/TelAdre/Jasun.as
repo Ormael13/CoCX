@@ -1,7 +1,5 @@
 ﻿package classes.Scenes.Places.TelAdre{
 	import classes.GlobalFlags.kFLAGS;
-	import classes.PerkLib;
-	import classes.StatusEffects;
 
 	public class Jasun extends TelAdreAbstractContent{
 
@@ -42,8 +40,8 @@ public function changingRoom():void {
 	}
 	//[Look Around]
 	if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00181] == 0)
-		simpleChoices("Look Around", meetJasun, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
-	else simpleChoices("Jasun", meetJasun, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
+		simpleChoices("Look Around", meetJasun, "", null, "", null, "", null, "Leave", telAdre.gymDesc);
+	else simpleChoices("Jasun", meetJasun, "", null, "", null, "", null, "Leave", telAdre.gymDesc);
 }
 
 //AT CHANGING ROOM (SELECTING TO SEE THE SHARK OR LOOK AROUND IF FIRST TIME)
@@ -60,12 +58,18 @@ private function meetJasun():void {
 		outputText("Before long, you blink a couple of times and break through your prior distraction.  You can see in the mirror before the man that he has been watching your revelry of his form.  A grin plays across the man's features and within it you find several rows of razor-sharp teeth, forcing you to gulp instinctively as you think of what sort of damage those could do to your tender flesh.  ");
 	
 		//IF MALE
-		if(player.gender <= 1) {
+		if(player.gender <= 1 || player.gender == 3 && player.mf("m", "f") == "m") {
 			outputText("\"<i>Eyes to yourself, boy. Try to play any games and I'll tear you apart limb from limb. Now get out of here before I do it anyway.</i>\" The shark-morph snarls threateningly before turning back to the mirror.\n\n");
 			outputText("You doubt he'd have the nerve to murder someone here, but you feel like you've wasted your time.");
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00179] = 0;
-			doNext(camp.returnToCampUseOneHour);
-			return;
+
+            if (silly() && player.armor == armors.BONSTRP) {
+                outputText("\n\nOn your way out you pass by the drawers, where you notice someone's forgotten bondage straps, just like yours.");
+                outputText("\nMaybe you should come here one more time?");
+                return;
+            }
+            else
+                strapsRouter();
+            return;
 		}
 		//IF FEMALE
 		else {
@@ -81,7 +85,7 @@ private function meetJasun():void {
 				//(+15 Lust, back to gym entrance)
 				dynStats("lus", (10+player.lib/10));
 				outputText("You book it out of there.  What a waste.");
-				doNext(camp.returnToCampUseOneHour);
+				doNext(telAdre.gymDesc);
 				return;
 			}
 			//IF PASS FITNESS CHECK
@@ -93,7 +97,7 @@ private function meetJasun():void {
 				//(+15 Lust, back to gym entrance)
 				dynStats("lus", (10+player.lib/10));
 				outputText("You book it out of there.  What a waste.");
-				doNext(camp.returnToCampUseOneHour);
+				doNext(telAdre.gymDesc);
 				return;
 			}
 			//IF YOU HAVE THE BIKINI ON
@@ -109,13 +113,18 @@ private function meetJasun():void {
 			outputText("While you look around the changing room, one of the gym's other patron asks you if you're looking for Jasun.  Seeing your confusion, they describe the hunky shark guy you met before.  You nod and smile, happy to have learned his name.\n\n");
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00181]++;
 		}
+		//IF MALE
+        if (silly() && (player.gender <= 1 || player.gender == 3 && player.mf("m", "f") == "m") && player.armor == armors.BONSTRP) {
+            jasunGachi();
+            return;
+        }
 		//If you're a dude.
-		if(player.gender <= 1 || (player.gender == 3 && player.mf("m", "f") == "m")) {
+		if(player.gender <= 1 || player.gender == 3 && player.mf("m", "f") == "m") {
 			outputText("Jasun walks out of a stall, his thick and muscular figure still as glorious as the last time you set eyes upon it.  He glances your way and smirks.\n\n");
 			outputText("\"<i>Eyes to yourself, boy. Try to play any games and I'll tear you apart limb from limb. Now get out of here before I do it anyway.</i>\" The shark-morph snarls threateningly before turning to walk away.\n\n");
 			outputText("You doubt he'd have the nerve to murder someone here, but you feel like you've wasted your time.");
-			doNext(camp.returnToCampUseOneHour);
-			return;
+            strapsRouter();
+            return;
 		}
 		//IF YOU FAIL TO MEET ANY OF HIS CRITERIA NOW
 		if(player.tone < 75 || player.armorName != "slutty swimwear") {
@@ -128,7 +137,7 @@ private function meetJasun():void {
 			outputText(", we can go swim.</i>\" He hesitates for a moment at the mirror, and then walks past you quickly without making eye contact. Feeling dejected and suddenly very alone, you ignore the sensation caused by his skin brushing against yours and walk back to the gym's entrance. Maybe you can work yourself back into Jasun's graces with time.\n\n");
 			//(-15 Lust, back to gym entrance)
 			dynStats("lus", -15);
-			doNext(camp.returnToCampUseOneHour);
+			doNext(telAdre.gymDesc);
 			return;
 		}
 		outputText("Jasun comes out of his stall and smiles when he sees you, already beginning to strain against the skimpy fabric of his bottom.  He asks, \"<i>Would you like to come swimming with me?</i>\" though his tone indicates that swimming may involve more than a few laps.");
@@ -137,13 +146,18 @@ private function meetJasun():void {
 	}
 	//Repeat
 	else {
+		//IF MALE
+        if (silly() && (player.gender <= 1 || player.gender == 3 && player.mf("m", "f") == "m") && player.armor == armors.BONSTRP) {
+            jasunGachi();
+            return;
+        }
 		//If you're a dude.
-		if(player.gender <= 1 || (player.gender == 3 && player.mf("m", "f") == "m")) {
+		if(player.gender <= 1 || player.gender == 3 && player.mf("m", "f") == "m") {
 			outputText("Jasun walks out of a stall, his thick and muscular figure still as glorious as the last time you set eyes upon it.  He glances your way and smirks.\n\n");
 			outputText("\"<i>Eyes to yourself, boy. Try to play any games and I'll tear you apart limb from limb. Now get out of here before I do it anyway.</i>\" The shark-morph snarls threateningly before turning to walk away.\n\n");
 			outputText("You doubt he'd have the nerve to murder someone here, but it's clear that so long as you lack a vagina Jasun will have no interest in you.  What a waste.");
-			doNext(camp.returnToCampUseOneHour);
-			return;
+            strapsRouter();
+            return;
 		}
 		//IF YOU FAIL TO MEET ANY OF HIS CRITERIA NOW
 		if(player.tone < 75 || player.armorName != "slutty swimwear") {
@@ -152,7 +166,7 @@ private function meetJasun():void {
 			outputText("\"<i>[name], you know, I see that a lot has changed with you. That's fine, and it's entirely up to you, but I think today I should probably swim alone. You can come and visit me anytime, of course, maybe things will be like they were before in time.</i>\" He hesitates for a moment at the mirror, and then walks past you quickly without making eye contact. Feeling dejected and suddenly very alone, you ignore the sensation caused by his skin brushing against yours and walk back to the gym's entrance. Maybe you can work yourself back into Jasun's graces with time.\n\n");
 			//(-15 Lust, back to gym entrance)
 			dynStats("lus", -15);
-			doNext(camp.returnToCampUseOneHour);
+			doNext(telAdre.gymDesc);
 			return;
 		}
 		//IF YOU MEET ALL CRITERIA STILL
@@ -185,7 +199,7 @@ private function turnAwayFromAdj():void {
 	outputText("\"<i>I understand,</i>\" he says dejectedly. He steps up and walks back toward the door. He perks up at the last minute, not letting his being rejected hurt his pride in the least, and says, \"<i>If you ever would like to swim, you know where to find me. Farewell.</i>\" He stands at the door and waits for you to leave before leaping into the water alone, as he has done no doubt many times in the past.\n\n");
 	//(Back to gym entrance)
 	outputText("You book it out of there.  What a waste.");
-	doNext(camp.returnToCampUseOneHour);
+	doNext(telAdre.gymDesc);
 	return;
 }
 
@@ -231,11 +245,126 @@ private function jasunSecks():void {
 
 		outputText("When you wake back up, you find that your bikini is next to you and that everything else seems to be fine. You put your bikini back on and look around, unable to see Jasun anywhere. You walk toward the gym's exit and reminisce of your experience today, ready for whatever your next escapade will bring.");
 	}
-	player.sexReward("cum","Vaginal");
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00180]++;
 	player.orgasm();
 	dynStats("sen", -1);
 	doNext(camp.returnToCampUseOneHour);
 }
+
+private function strapsRouter():void {
+    if (player.armor == armors.BONSTRP || player.hasItem(armors.BONSTRP)) {
+        if (silly()) {
+            outputText("\n\nYou remember about your bondage straps. Maybe you should try to come to the same place wearing it? It's Mareth, you probably won't get arrested.");
+        }
+		doNext(telAdre.gymDesc);
+        return;
+    }
+    else {
+        outputText("\n\nOn your way out you pass by the drawers, where you notice someone's forgotten bondage straps.");
+        if (!silly()) {
+            outputText("\nYou blink in amazement and realize that it's just a regular swimsuit.. You aren't <b>silly</b> enough to really think people come in gym dressed in  such fetish junk, are you?");
+		    doNext(telAdre.gymDesc);
+            return;
+        }
+        else
+            simpleChoices("Steal Them", stealStraps, "", null, "", null, "", null, "Leave", notSteal);
+    }
+    		
+}
+
+private function stealStraps():void {
+    outputText("\n\nYou see no witnesses right now. Quickly, you take a strange piece of clothing and put it into your bag. Maybe next time you should try to come to the same place wearing it? In the end, it reveals your muscles good enough to make someone fall for you.");
+    inventory.takeItem(armors.BONSTRP, camp.returnToCampUseOneHour);
+    return;
+
+}
+
+private function notSteal():void {
+    outputText("\n\nIt's probably not a good idea to steal someone else's... <i>clothes</i>, especially where anyone can come in and see you.. maybe you can buy your own at some bazaar?");
+    doNext(telAdre.gymDesc);
+    return;
+}
+    
+
+private function jasunGachi():void {
+    clearOutput();
+    outputText("Jasun is sitting on the bench facing you, dressed in leather pants. Noticing your bizzare clothing, he scowls and rises up from the bench abruptly:");
+    outputText("\n\"<i>Hey buddy, I think you've got the wrong door, the leather club is two blocks down.</i>\"");
+
+    outputText("\n\nDisgruntled by your sudden rudeness, you respond: \"<i>Fuck you!.</i>\"");
+
+    outputText("\n\n\"<i>No, fuck <b>you</b>, leather man.</i>\"");
+
+    outputText("\n\nYou're going to show him who is the boss of this gym! You tell him of some fucking slaves who dared to oppose you before and explain how these stories usually end.");
+
+    outputText("\n\n\"<i>Shut the fuck up, boy next door! You like challenges? You got me mad now!</i>\"");
+    outputText("\nJasun jumps you, trying to pin you down. Fuck, he's fast! You barely dodge his charge (good thing sharks doesn't have horns, or that would end badly..) to dive under his hands and slap his ass.");
+    outputText("\n\"<i>Endure the lash of the spanking</i>\", you sneer at him. \"<i>Do you like that? I'll give you one more round with me.</i>\"");
+
+    outputText("\n\nStunned after his unsuccessful attempt, the shark morph pulls up his pants and prepares for another charge.");
+    outputText("\n\"<i>Get your ass back here, <b>NOW</b>! You're playing with fire!!</i>\"");
+
+    outputText("\n\nThis time you didn't have enough time to avoid the charge and he pins you down. Trying to get out of the pin, you grab hold of something and try to pull on it.");
+    outputText("\n\"<i><b>AHHHH</b></i>\" - Jasun screams and lets you go, his trousers dropping down revealing him completely. \"<i><b>YOU RIPPED MY FUCKING PANTS</b>!!! That's power, son!</i>\"");
+
+    outputText("\n\nYou can apologize or use the possibility to attack him in return.");
+
+    simpleChoices("Attack!", gachiFight, "Apologize", suckSomeDick, "", null, "", null, "", null);
+    return;
+}
+
+private function suckSomeDick():void {
+    clearOutput();
+    outputText("You clearly didn't mind to do that. \"<i>Oh shit, I'm sorry</i>\" - you respond, trying to look away.");
+
+    outputText("\n\nJasun changes his scowl for a grin. \"<i>Sorry for what? Our daddy taught us not to be ashamed of our dicks.</i>\"");
+
+    outputText("\n\nSeeing your 'enemy' calm down, you lean on the closest drawer. \"<i>Yeah, I see that. Your daddy gave you good advice.</i>\"");
+
+    outputText("\n\nJasun proudly stands up. \"<i>It gets bigger when I pull on it. Sometimes, I pull on it so hard, I rip the skin.</i>\"");
+
+    outputText("\n\nYou remember your wrestling sessions in Ingnam. \"<i>Well, my daddy taught me a few things too, like, uh, how not to rip the skin by using someone else's mouth, instead of your own hands.</i>\"");
+
+    outputText("\n\n\"<i>Will you show me?</i>\"");
+
+    outputText("\n\n\"<i>I'd be right happy to.</i>\"");
+    outputText("\n\nWithout further interruption, you decide to celebrate your reconciliation.");
+    doNext(gachiFinish);
+}
+
+private function gachiFight():void {
+    clearOutput();
+    outputText("You're not going to lose this fight, so you prepare to jump at your distracted foe.");
+    outputText("\n\"<i>Oh-ho-ho, it turns me on! Let's have one more round! I bet your ass, you won't be able to catch me this time.</i>\"");
+
+    outputText("\n\nShark-morph throws his pants away and prepares to make the next move.");
+    outputText("\n\"<i>You like challenges? <b>SHOW ME WHAT YOU'VE GOT, COLLEGE BOY!</b></i>\"");
+
+    outputText("\n\nYou continue fighting for the next 2 hours trying to show each other who's the boss of this gym. Sadly, Heckel was late for competition.");
+    doNext(gachiFinish);
+}
+
+private function gachiFinish():void {
+    clearOutput();
+    outputText("As the last visitors walk out of the gym, the centauress at the entrance finally finds her book and tries to read in silence... or not. Suddenly, screams are heard from the changing room.");
+    outputText("\n\n<i>Yes, show me your deep dark fantasies!</i>\"");
+
+    outputText("\n\n<i>Aw, yes, sir! Oh, I'm fucking cumming!</i>\"");
+
+    outputText("\n\n<i>Come on, boy next door! Swallow my cum!</i>\"");
+
+    outputText("\n\n<i><b>AAAAAAAAHHHHHHHHH</b></i>\"");
+
+    outputText("\n\n<i><b>AAAAAAAAHHHHHHHHHHH</b></i>\"");
+    player.orgasm();
+    dynStats("sen", -1);
+    dynStats("str", 1);
+    dynStats("tou", 1);
+    outputText("\n\nYou gain 300 gems from this 'battle'.");
+    player.gems += 300;
+    statScreenRefresh();
+	doNext(camp.returnToCampUseTwoHours);
+}
+
 }
 }

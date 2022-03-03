@@ -893,8 +893,9 @@ public function nagaRapeChoice():void {
 		}
 		if (player.lowerBody == LowerBody.GOO) addButton(11, "Gooey Rape", gooNagaRape);
 		addButton(12, "Lay Eggs", eggs);
-		if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 013).hint("Other non typical sex scenes.");
 		addButton(14, "Leave", cleanupAfterCombat);
+		uniquuuesexscene.pcUSSPreChecksV2(nagaRapeChoice);
+		//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(13);
 	}
 	if (player.lust < 33) {
 		outputText("You aren't aroused enough to fuck her.");
@@ -1274,4 +1275,3 @@ private function beePositANagaPlease():void {
 }
 	}
 }
-

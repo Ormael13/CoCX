@@ -430,14 +430,16 @@ public class BeeGirlScene extends BaseContent
 				addButton(0, "Rape", rapeTheBeeGirl);
 				if (player.hasKeyItem("Deluxe Dildo") >= 0) addButton(1, "Dildo Rape", beeGirlsGetsDildoed);
 				if (player.hasStatusEffect(StatusEffects.Feeder)) addButton(2, "B. Feed", milkAndHoneyAreKindaFunny);
-				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 015).hint("Other non typical sex scenes.");
 				addButton(14, "Leave", leaveAfterDefeating);
+				uniquuuesexscene.pcUSSPreChecksV2(afterfightoptionswithBeeGirl);
+				//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(15);
 			}
 			if (player.hasStatusEffect(StatusEffects.Feeder) && flags[kFLAGS.SFW_MODE] <= 0) { //Genderless can still breastfeed
 				menu();
 				addButton(2, "B. Feed", milkAndHoneyAreKindaFunny);
-				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 015).hint("Other non typical sex scenes.");
 				addButton(14, "Leave", leaveAfterDefeating);
+				uniquuuesexscene.pcUSSPreChecksV2(afterfightoptionswithBeeGirl);
+				//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(15);
 			}
 		}
 

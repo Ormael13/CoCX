@@ -1,3 +1,8 @@
+/**
+ * @Author Pyromania
+ * Coded in by Jtecx, Jan/Feb 2022
+ */
+
 package classes.Scenes.Places {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
@@ -15,7 +20,7 @@ public class TrollVillage extends BaseContent implements SaveableState{
     public var yenza:Yenza = new Yenza();
     public var elderstore:ElderStoreHut = new ElderStoreHut();
 
-    public static var ZenjiVillageStage:int;    //1 = Intro Complete, 2 = Zenji forgives you.
+    public static var ZenjiVillageStage:Number;    //0 = Initstate, 1 = ZenjiCompanion Intro Complete, 2 = Zenji forgives you, 3 = Consolation, 4 = Opening up to problems , 5 = Marriage, -1 = Banished. 0.5 might be needed for found but no Zenji yet.
     public static var ZenjiFollowing:Boolean;
     public static var ZenjiBerated:Boolean;
     public static var YenzaLockdown:int;
@@ -27,6 +32,9 @@ public class TrollVillage extends BaseContent implements SaveableState{
     public static var HalkanoUnlocked:Boolean;
     public static var YubiUnlocked:Boolean;
     public static var KaljiMBJDeny:int;
+    public static var ZenjiMoneyHelp:int;
+    public static var JabalaLoveChat:Boolean;
+    public static var ZenjiMarriageDress:int;
 
     public function stateObjectName():String {
         return "TrollVillage";
@@ -44,6 +52,9 @@ public class TrollVillage extends BaseContent implements SaveableState{
         HalkanoUnlocked = false;
         YubiUnlocked = false;
         KaljiMBJDeny = 0;
+        ZenjiMoneyHelp = 0;
+        JabalaLoveChat = false;
+        ZenjiMarriageDress = 0;
 
     }
     public function saveToObject():Object {
@@ -59,7 +70,10 @@ public class TrollVillage extends BaseContent implements SaveableState{
             "YenzaLockdown": YenzaLockdown,
             "ZenjiTrollVillageTimeChk": ZenjiTrollVillageTimeChk,
             "YubiUnlocked": YubiUnlocked,
-            "KaljiMBJDeny": KaljiMBJDeny
+            "KaljiMBJDeny": KaljiMBJDeny,
+            "ZenjiMoneyHelp": ZenjiMoneyHelp,
+            "JabalaLoveChat": JabalaLoveChat,
+            "ZenjiMarriageDress": ZenjiMarriageDress
         };
     }
     public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
@@ -76,6 +90,9 @@ public class TrollVillage extends BaseContent implements SaveableState{
             YubiUnlocked = o["YubiUnlocked"];
             KaljiMBJDeny = o["KaljiMBJDeny"];
             ZenjiTrollVillageTimeChk = o["ZenjiTrollVillageTimeChk"];
+            ZenjiMoneyHelp = o["ZenjiMoneyHelp"];
+            JabalaLoveChat = o["JabalaLoveChat"];
+            ZenjiMarriageDress = o["ZenjiMarriageDress"];
         } else {
             // loading from old save
             resetState();
@@ -108,7 +125,7 @@ public class TrollVillage extends BaseContent implements SaveableState{
         }
         else{
             if (player.cor > 50){
-                outputText("His brow furrows, \"You don’t belong here… Leave now.\"\n" +
+                outputText("His brow furrows, \"You corrupted don’t belong here… Leave now.\"\n" +
                         "\n" +
                         "You look around, there are far too many trolls for you to handle. More and more trolls turn their attention to you as you decide to take your leave.\n");
                 doNext(camp.returnToCampUseOneHour);
@@ -141,7 +158,7 @@ public class TrollVillage extends BaseContent implements SaveableState{
                 outputText("You emerge at the troll village once again, the guard gives you a stern look but doesn’t obstruct you as you enter.\n");
             }
         }
-        if (ZenjiFollowing && ZenjiVillageStage == 0){
+        if (ZenjiFollowing && (ZenjiVillageStage == 0 || ZenjiVillageStage == 0.5)){
             SceneLib.trollVillage.jabala.MeetTheParents();
         }
         else{
@@ -151,27 +168,19 @@ public class TrollVillage extends BaseContent implements SaveableState{
             if (JabalaUnlocked) outputText("You can meet with Jabala and her husband if you like.\n");
             if (YenzaUnlocked > 0) outputText("You remember where Yenza’s hut is.\n");
             if (KaljiUnlocked) outputText("You can meet Kal’ji at his personal hut.\n");
-            ZenjiVillageStage = 1;
+            ZenjiVillageStage = 0.5;
 
 
             var menuItems:Array = [];
             menuItems.push("Dining Hall", SceneLib.trollVillage.diningHalls.GrabABite2Eat, "Catch a bite to eat.");
             menuItems.push("Elder's Hut", SceneLib.trollVillage.elderstore.ElderShops, "Look for the elder of the village.");
-            menuItems.push("Jabala's Hut", ((JabalaUnlocked && !ZenjiBerated)?SceneLib.trollVillage.jabala.JabalaHome:false), ["Look for Zenji's Parents", "You don't want to disturb the nice couple."]);
-            menuItems.push("Yenza's Hut", ((YenzaUnlocked > 0)?SceneLib.trollVillage.yenza.YenzaHome:false), ["Look for Yenza","You don't know who lives there."]);
-            menuItems.push("Kalji's Hut", ((KaljiUnlocked == 5)?SceneLib.trollVillage.kalji.KaljiHome:false), ["",""]);
+            menuItems.push((JabalaUnlocked && !ZenjiBerated)?"Jabala's Hut":"???", ((JabalaUnlocked && !ZenjiBerated)?SceneLib.trollVillage.jabala.JabalaHome:false), ["Look for Zenji's Parents", "You don't want to disturb the nice couple."]);
+            menuItems.push((YenzaUnlocked > 0)?"Yenza's Hut":"???", ((YenzaUnlocked > 0)?SceneLib.trollVillage.yenza.YenzaHome:false), ["Look for Yenza","You don't know who lives there."]);
+            menuItems.push((KaljiUnlocked == 5)?"Kalji's Hut":"???", ((KaljiUnlocked == 5)?SceneLib.trollVillage.kalji.KaljiHome:false), ["",""]);
             menuGen(menuItems,0, camp.returnToCampUseOneHour, false);
 
         }
     }
 
-    private function ReturningHome():void{
-
     }
-
-    private function TheOldMansHut():void{
-
-    }
-
-}
 }

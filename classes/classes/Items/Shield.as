@@ -36,8 +36,7 @@ public class Shield extends Useable //Equipable
 			var desc:String = _description;
 			//Type
 			desc += "\n\nType: Shield";
-			if (perk == "Massive") desc += "(Massive)";
-			else if (perk == "Large") desc += "(Large)";
+            if (perk != "") desc += " (" + perk + ")";
 			//Block Rating
 			desc += "\nBlock: " + String(block);
 			//Value

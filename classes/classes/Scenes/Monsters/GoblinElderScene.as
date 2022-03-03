@@ -311,8 +311,9 @@ public class GoblinElderScene extends BaseContent
 				}
 				if (player.hasVagina()) addButton(7, "Pussies", cuntFuck);
 				if (player.canOvipositSpider()) addButton(8, "Lay Eggs", eggs);
-				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 046).hint("Other non typical sex scenes.");
 				addButton(14, "Leave", cleanupAfterCombat);
+				uniquuuesexscene.pcUSSPreChecksV2(goblinElderRapeIntro2);
+				//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(46);
 			}
 			else if (feeder!=null || eggs!=null) {
 				outputText("\n\n<b>You aren't horny enough to rape her, but ");
@@ -321,8 +322,9 @@ public class GoblinElderScene extends BaseContent
 				menu();
 				if (player.hasStatusEffect(StatusEffects.Feeder)) addButton(5, "Breastfeed", feeder);
 				if (player.canOvipositSpider()) addButton(8, "Lay Eggs", eggs);
-				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 046).hint("Other non typical sex scenes.");
 				addButton(14, "Leave", cleanupAfterCombat);
+				uniquuuesexscene.pcUSSPreChecksV2(goblinElderRapeIntro2);
+				//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(46);
 			}
 			else 
 			{
@@ -383,8 +385,9 @@ public class GoblinElderScene extends BaseContent
 				}
 				if (player.hasVagina()) addButton(7, "Pussies", cuntFuck);
 				if (player.canOvipositSpider()) addButton(8, "Lay Eggs", eggs);
-				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 046).hint("Other non typical sex scenes.");
 				addButton(14, "Leave", cleanupAfterCombat);
+				uniquuuesexscene.pcUSSPreChecksV2(goblinElderRapeIntro2);
+				//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(46);
 			}
 			else if (feeder!=null || eggs!=null) {
 				outputText("\n\n<b>You aren't horny enough to rape her, but ");
@@ -393,8 +396,9 @@ public class GoblinElderScene extends BaseContent
 				menu();
 				if (player.hasStatusEffect(StatusEffects.Feeder)) addButton(5, "Breastfeed", feeder);
 				if (player.canOvipositSpider()) addButton(8, "Lay Eggs", eggs);
-				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 046).hint("Other non typical sex scenes.");
 				addButton(14, "Leave", cleanupAfterCombat);
+				uniquuuesexscene.pcUSSPreChecksV2(goblinElderRapeIntro2);
+				//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(46);
 			}
 			else 
 			{

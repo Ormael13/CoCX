@@ -8,8 +8,8 @@ package classes.Scenes
 	import classes.BodyParts.Arms;
 	import classes.BodyParts.LowerBody;
 	import classes.BodyParts.Tail;
-import classes.Perks.MindBreakerBrain;
-import classes.Scenes.Areas.Mountain.HellHound;
+	import classes.Perks.MindBreakerBrain;
+	import classes.Scenes.Areas.Mountain.HellHound;
 	import classes.Scenes.Areas.Mountain.InfestedHellhound;
 	import classes.Scenes.Areas.Mountain.Minotaur;
 	import classes.Scenes.Areas.Ocean.SeaAnemone;
@@ -201,6 +201,7 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 			EventParser.gameOver();
 		}
 
+		/*
 		public function pcUniqueSexScenesChoiceMenu(re:Number):void {
 			menu();
 			if (player.tailType == Tail.MANTICORE_PUSSYTAIL && monster.hasCock()) addButton(0, "Tail Rape", manticoreTailRapeScene);
@@ -232,6 +233,7 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 			addButton(13, "-2-", pcUniqueSexScenesChoiceMenu2nd, re).hint("2nd page of options.");
 			addButton(14, "Back", pcUniqueSexScenesChoiceMenuBack, re);
 		}
+
 		public function pcUniqueSexScenesChoiceMenu2nd(re:Number):void {
 			menu();
 			if (player.isAlraune()) {
@@ -272,73 +274,86 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 			addButton(13, "-1-", pcUniqueSexScenesChoiceMenu, re).hint("1st page of options.");
 			addButton(14, "Back", pcUniqueSexScenesChoiceMenuBack, re);
 		}
+
 		public function pcUniqueSexScenesChoiceMenuBack(re:Number):void {
-			if (re == 001) SceneLib.ashlands.hellcatScene.DefeatedHellCat();
-			if (re == 002) SceneLib.defiledravine.TrueDemons.defeatMinoIncubus();
-			if (re == 003) SceneLib.defiledravine.TrueDemons.defeatIncubus();
-			if (re == 004) SceneLib.defiledravine.TrueDemons.defeatOmnibus();
-			if (re == 005) SceneLib.defiledravine.TrueDemons.defeatCowSuccubus();
-			if (re == 006) SceneLib.defiledravine.TrueDemons.defeatSuccubus();
-			if (re == 007) SceneLib.bog.chameleonGirlScene.defeatChameleonGirl();
-			if (re == 008) SceneLib.bog.lizanScene.winAgainstLizan();
-			if (re == 009) SceneLib.bog.phoukaScene.phoukaPlayerWins2();
-			if (re == 010) SceneLib.caves.cavewyrmScene.winningOverCaveWyrm();
-			if (re == 011) SceneLib.forest.akbalScene.akbalDefeated2();
-			if (re == 012) SceneLib.desert.sandTrapScene.pcBeatsATrap2();
-			if (re == 013) SceneLib.desert.nagaScene.nagaRapeChoice();
-			if (re == 014) SceneLib.desert.sandWitchScene.beatSandwitch2();
-			if (re == 015) SceneLib.forest.beeGirlScene.afterfightoptionswithBeeGirl();
-			if (re == 016) SceneLib.forest.kitsuneScene.defeatTheKitsunes();
-			if (re == 017) SceneLib.forest.tamaniScene.TamaniDefeated2();
-			if (re == 018) SceneLib.glacialRift.giantScene.winAgainstGiant();
-			if (re == 019) SceneLib.glacialRift.giantScene.winAgainstYoungGiant();
-			if (re == 020) SceneLib.glacialRift.winterwolfScene.winAgainstWinterWolf();
-			if (re == 021) SceneLib.glacialRift.yetiScene.winAgainstYeti();
-			if (re == 022) SceneLib.highMountains.basiliskScene.defeatBasilisk();
-			if (re == 023) SceneLib.highMountains.harpyScene.harpyVictoryuuuuu();
-			if (re == 024) SceneLib.highMountains.izumiScenes.touchThatFluffyHorn2();
-			if (re == 025) SceneLib.highMountains.minotaurMobScene.victoryMinotaurGang2();
-			if (re == 026) SceneLib.highMountains.phoenixScene.winAgainstPhoenix();
-			if (re == 027) SceneLib.highMountains.phoenixScene.winAgainstPhoenix1();
-			if (re == 028) SceneLib.lake.fetishCultistScene.cultistDefeated();
-			if (re == 029) SceneLib.lake.fetishZealotScene.zealotDefeated();
-			if (re == 030) SceneLib.lake.gooGirlScene.beatUpGoo();
-			if (re == 031) SceneLib.lake.greenSlimeScene.defeatGS();
-			if (re == 032) SceneLib.mountain.hellHoundScene.hellHoundPostFightSexScenes();
-			if (re == 033) SceneLib.mountain.minotaurScene.minoVictoryRapeChoices();
-			if (re == 034) SceneLib.ocean.scyllaScene.oceanScyllaWin();
-			if (re == 035) SceneLib.plains.bunnyGirl.rapeBunBun2();
-			if (re == 036) SceneLib.plains.gnollScene.defeatHyena();
-			if (re == 037) SceneLib.plains.gnollSpearThrowerScene.hyenaVictory();
-			if (re == 038) SceneLib.plains.satyrScene.defeatASatyr2();
-			if (re == 039) SceneLib.swamp.corruptedDriderScene.defeatDriderIntro();
-			if (re == 040) SceneLib.swamp.femaleSpiderMorphScene.defeatASpiderBitch();
-			if (re == 041) SceneLib.swamp.maleSpiderMorphScene.defeatSpiderBoy();
-			if (re == 042) SceneLib.tundra.valkyrieScene.winAgainstValkyrie();
-			if (re == 043) SceneLib.volcanicCrag.behemothScene.winAgainstBehemoth();
-			if (re == 044) SceneLib.dungeons.desertcave.cumWitchDefeated();
-			if (re == 045) SceneLib.goblinAssassinScene.gobboAssassinRapeIntro();
-			if (re == 046) SceneLib.goblinElderScene.goblinElderRapeIntro2();
-			if (re == 047) SceneLib.goblinScene.gobboRapeIntro();
-			if (re == 048) SceneLib.goblinShamanScene.goblinShamanRapeIntro();
-			if (re == 049) SceneLib.goblinWarriorScene.goblinWarriorRapeIntro();
-			if (re == 050) SceneLib.impScene.impVictory();
-			if (re == 051) SceneLib.impScene.defeatImpLord();
-			if (re == 052) SceneLib.anemoneScene.defeatAnemone();
-			if (re == 053) SceneLib.ceraphScene.winRapeChoices();
-			if (re == 054) SceneLib.electraScene.PlayerSexElectra();
-			if (re == 055) SceneLib.etnaScene.etnaRapeIntro();
-			if (re == 056) SceneLib.etnaScene.etnaRape3rdWin();
-			if (re == 057) SceneLib.tedScene.defeatedTedPostHiddenCave();
-			if (re == 058) SceneLib.sharkgirlScene.sharkWinChoices2();
-			if (re == 059) SceneLib.sharkgirlScene.oceanSharkWinChoices();
-			if (re == 060) SceneLib.sharkgirlScene.oceanTigerSharkWinChoices();
-			if (re == 061) SceneLib.sharkgirlScene.oceanSharkspackWinChoices();
+			if (re == 1) SceneLib.ashlands.hellcatScene.DefeatedHellCat();
+			if (re == 2) SceneLib.defiledravine.TrueDemons.defeatMinoIncubus();
+			if (re == 3) SceneLib.defiledravine.TrueDemons.defeatIncubus();
+			if (re == 4) SceneLib.defiledravine.TrueDemons.defeatOmnibus();
+			if (re == 5) SceneLib.defiledravine.TrueDemons.defeatCowSuccubus();
+			if (re == 6) SceneLib.defiledravine.TrueDemons.defeatSuccubus();
+			if (re == 7) SceneLib.bog.chameleonGirlScene.defeatChameleonGirl();
+			if (re == 8) SceneLib.bog.lizanScene.winAgainstLizan();
+			if (re == 9) SceneLib.bog.phoukaScene.phoukaPlayerWins2();
+			if (re == 10) SceneLib.caves.cavewyrmScene.winningOverCaveWyrm();
+			if (re == 11) SceneLib.forest.akbalScene.akbalDefeated2();
+			if (re == 12) SceneLib.desert.sandTrapScene.pcBeatsATrap2();
+			if (re == 13) SceneLib.desert.nagaScene.nagaRapeChoice();
+			if (re == 14) SceneLib.desert.sandWitchScene.beatSandwitch2();
+			if (re == 15) SceneLib.forest.beeGirlScene.afterfightoptionswithBeeGirl();
+			if (re == 16) SceneLib.forest.kitsuneScene.defeatTheKitsunes();
+			if (re == 17) SceneLib.forest.tamaniScene.TamaniDefeated2();
+			if (re == 18) SceneLib.glacialRift.giantScene.winAgainstGiant();
+			if (re == 19) SceneLib.glacialRift.giantScene.winAgainstYoungGiant();
+			if (re == 20) SceneLib.glacialRift.winterwolfScene.winAgainstWinterWolf();
+			if (re == 21) SceneLib.glacialRift.yetiScene.winAgainstYeti();
+			if (re == 22) SceneLib.highMountains.basiliskScene.defeatBasilisk();
+			if (re == 23) SceneLib.highMountains.harpyScene.harpyVictoryuuuuu();
+			if (re == 24) SceneLib.highMountains.izumiScenes.touchThatFluffyHorn2();
+			if (re == 25) SceneLib.highMountains.minotaurMobScene.victoryMinotaurGang2();
+			if (re == 26) SceneLib.highMountains.phoenixScene.winAgainstPhoenix();
+			if (re == 27) SceneLib.highMountains.phoenixScene.winAgainstPhoenix1();
+			if (re == 28) SceneLib.lake.fetishCultistScene.cultistDefeated();
+			if (re == 29) SceneLib.lake.fetishZealotScene.zealotDefeated();
+			if (re == 30) SceneLib.lake.gooGirlScene.beatUpGoo();
+			if (re == 31) SceneLib.lake.greenSlimeScene.defeatGS();
+			if (re == 32) SceneLib.mountain.hellHoundScene.hellHoundPostFightSexScenes();
+			if (re == 33) SceneLib.mountain.minotaurScene.minoVictoryRapeChoices();
+			if (re == 34) SceneLib.ocean.scyllaScene.oceanScyllaWin();
+			if (re == 35) SceneLib.plains.bunnyGirl.rapeBunBun2();
+			if (re == 36) SceneLib.plains.gnollScene.defeatHyena();
+			if (re == 37) SceneLib.plains.gnollSpearThrowerScene.hyenaVictory();
+			if (re == 38) SceneLib.plains.satyrScene.defeatASatyr2();
+			if (re == 39) SceneLib.swamp.corruptedDriderScene.defeatDriderIntro();
+			if (re == 40) SceneLib.swamp.femaleSpiderMorphScene.defeatASpiderBitch();
+			if (re == 41) SceneLib.swamp.maleSpiderMorphScene.defeatSpiderBoy();
+			if (re == 42) SceneLib.tundra.valkyrieScene.winAgainstValkyrie();
+			if (re == 43) SceneLib.volcanicCrag.behemothScene.winAgainstBehemoth();
+			if (re == 44) SceneLib.dungeons.desertcave.cumWitchDefeated();
+			if (re == 45) SceneLib.goblinAssassinScene.gobboAssassinRapeIntro();
+			if (re == 46) SceneLib.goblinElderScene.goblinElderRapeIntro2();
+			if (re == 47) SceneLib.goblinScene.gobboRapeIntro();
+			if (re == 48) SceneLib.goblinShamanScene.goblinShamanRapeIntro();
+			if (re == 49) SceneLib.goblinWarriorScene.goblinWarriorRapeIntro();
+			if (re == 50) SceneLib.impScene.impVictory();
+			if (re == 51) SceneLib.impScene.defeatImpLord();
+			if (re == 52) SceneLib.anemoneScene.defeatAnemone();
+			if (re == 53) SceneLib.ceraphScene.winRapeChoices();
+			if (re == 54) SceneLib.electraScene.PlayerSexElectra();
+			if (re == 55) SceneLib.etnaScene.etnaRapeIntro();
+			if (re == 56) SceneLib.etnaScene.etnaRape3rdWin();
+			if (re == 57) SceneLib.tedScene.defeatedTedPostHiddenCave();
+			if (re == 58) SceneLib.sharkgirlScene.sharkWinChoices2();
+			if (re == 59) SceneLib.sharkgirlScene.oceanSharkWinChoices();
+			if (re == 60) SceneLib.sharkgirlScene.oceanTigerSharkWinChoices();
+			if (re == 61) SceneLib.sharkgirlScene.oceanSharkspackWinChoices();
+		}
+		 */
+
+		public function pcUSSPreChecksV2(backFunc:Function, btnPos:int = 13):void{
+			if (pcCanUseUniqueSexScenev2(true, null) > 0) {
+				addButton(btnPos, "U.Sex Scenes", pcCanUseUniqueSexScenev2, false, backFunc).hint("Other non-typical sex scenes.");
+			}
+			else{
+				addButtonDisabled(btnPos,"U.Sex Scenes", "You don't qualify for any Unique Sex Scenes.");
+			}
 		}
 
-		//if (uniquuuesexscene.pcCanUseUniqueSexScenev2(true, null) > 0) addButton(13, "U.Sex Scenes", curry(uniquuuesexscene.pcCanUseUniqueSexScenev2, false, [BACK FUNCTION GOES HERE])).hint("Other non-typical sex scenes.");
-		//Replace above implementation if you want, use the above. can replace addButton + curry for the few special cases.
-		public function pcCanUseUniqueSexScenev2(isChecking:Boolean = false, backFunc:Array = null, page:int = 0):*{
+		//if (uniquuuesexscene.pcCanUseUniqueSexScenev2(true, null) > 0) addButton(13, "U.Sex Scenes", uniquuuesexscene.pcCanUseUniqueSexScenev2, false, BACK_FUNCTION_GOES_HERE).hint("Other non-typical sex scenes.");
+		//Use above for special cases.
+		public function pcCanUseUniqueSexScenev2(isChecking:Boolean = false, backFunc:Function = null, page:int = 0):*{
+			if (player.hasPerk(PerkLib.ElementalBody)) return 0;	//Shouldn't ever fail, since check bool variant should always run first.
+			var bypass:Function = RaijuOverLust();
 			var menuItems:Array = [];
 			menuItems.push.apply(this, USSTailRape());
 			menuItems.push.apply(this, USSTailpeg());
@@ -354,8 +369,18 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 			menuItems.push.apply(this, USSTentRape());
 			menuItems.push.apply(this, USSLiveDildo());
 			menuItems.push.apply(this, USSJiangshiDrn());
-			if (backFunc == null) backFunc = [camp.returnToCampUseOneHour];
-			return menuGen(menuItems, page, backFunc[0],false, isChecking);
+			if (backFunc == null) backFunc = camp.returnToCampUseOneHour;
+			if (bypass == null) return menuGen(menuItems, page, backFunc,false, isChecking);
+			else if (isChecking) return (bypass != null);
+			else bypass();
+
+			function RaijuOverLust():Function{
+				if (player.statStore.hasBuff("Supercharged") && !monster.hasPerk(PerkLib.LightningAffinity) && !monster.hasPerk(PerkLib.LightningNature)){
+					if(!player.hasVagina() && !player.hasCock()) return raijuVoltTransfer;
+					else return RaijuRapeSupercharged;
+				}
+				else return null
+			}
 
 			function USSTailRape():Array{
 				var btnSet:Array = ["Tail Rape"];
@@ -476,6 +501,85 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 			}
 		}
 
+		/*
+		public function checkIfPcRapeOnVictory(re:Number):void{
+			//Repeat this for different automatic scenes and trigger and use this function as a result instead of pcUniqueSexScenesChoiceMenu when called in places where it would make senses for it to proc
+			if (player.statStore.hasBuff("Supercharged") && !monster.hasPerk(PerkLib.LightningAffinity) && !monster.hasPerk(PerkLib.LightningNature)){
+				if(!player.hasVagina() && !player.hasCock()) raijuVoltTransfer();
+				else RaijuRapeSupercharged();
+			}
+			else{
+				addButton(13, "U. Sex Scenes", pcUniqueSexScenesChoiceMenu, re).hint("Other non typical sex scenes.");
+			}
+		}
+		*/
+
+		public function RaijuRapeSupercharged():void {
+			clearOutput();
+			menu();
+			outputText("As [themonster] is defeated, you lose any remaining restraint or shred of rationality you previously had, "+ player.clothedOrNaked("jumping out of your equipment and ", "") + "pouncing on your opponent with your");
+			var maleOrFemale:Number = rand(100)
+			if ((maleOrFemale < 51 && player.isHerm()) || (!player.isHerm() && player.hasCock())){ //male part
+				outputText(" plasma dripping cock already rock hard at the thought of FINALLY finding a hole to plug. Your body is overflowing with latent electricity. Your [dick] throbs in eager anticipation at the thought of pumping your victim with every volt of energy you have.\n\n" +
+						"[He] pleads for you to stop, yet in your lust-addled state, the only reply you can manage to give them is an intense stare of unbridled lust. There is nothing to hold you back now, rain would be more likely to flow back into the sky at their command.\n\n" +
+						"This poor, unfortunate soul is your long-awaited outlet, and nothing can hold you from unloading every ounce of seed into them. Your presence was warning enough, they had time to run.\n\n" +
+						"Before [he] can make any further protest, you plug yourself into [his] "+monster.assholeOrPussy()+", thrusting with wanton abandon as your charge quickly builds up within you. In a moment, you quickly begin unloading surge after surge of electricity into them. The air crackles around you with latent, lustful shocks. You can't help but growl in pleasure.\n\n" +
+						"Your poor victim's hole reflexively tightens around you as you continue bucking into them eagerly, the sheer force of your electricity causing them to spasm and quiver beneath your presence. You bring more of your weight upon them as you can feel yourself getting closer to the release that you so crave. Your eyes roll back, causing your vision to white out as you continue unloading all your charge into the make-shift lightning rod.\n\n" +
+						"[themonster] continues clenching against you as a familiar pressure and heat builds up within your loins. You let loose a loud grunt as you finally release your load into [him]. Shot after shot of raiju plasma fills up your hapless victim as you steadily regain your senses and your erection deflates.\n\n" +
+						"Finally, you slowly unplug yourself from them, cum slowly seeping out of the broken, twitching mess you've left the [monster] in. Your partner will be a fumbling mess for a while with all that lingering charge in them. Electricity courses around their form as [he] clenches [his] body, still cumming.\n\n" +
+						"You no longer have any need to stick around now that your vision is cleared and your mind is no longer stuck in a fog. You decide to head back to your camp, satisfied.");
+				if (monster.hasVagina()){
+					player.sexReward("vaginalFluids","Dick");
+				}
+				else {
+					player.sexReward("default","Dick",true,false);
+				}
+			}
+			if ((maleOrFemale >= 51 && player.isHerm()) || (!player.isHerm() && player.hasVagina())){ //female part
+				outputText(" plasma dripping pussy juicing itself at the thought of FINALLY getting plugged! Your body is literally overflowing with electricity, and you're about all too eager to unload every last volt into your hapless victim.\n\n" +
+						"[He] pleads for you to stop, yet in your lust-addled state, the only reply you can manage to give them is an intense stare of unbridled lust. There is nothing to hold you back now, rain would be more likely to flow back into the sky at their command.\n\n" +
+						"This poor, unfortunate soul is your long-awaited plug, and nothing can hold you from dissipating all of your volts in them. Your presence was warning enough, they had time to run.");
+				if (monster.hasCock()){
+					outputText("Before [he] can make any further protest, you force [his] plug into your overloaded outlet pumping with wanton abandon as your charge quickly builds up within you.");
+					if(player.vaginalCapacity() < monster.cockArea(0)) outputText(" Damn, [his] plug is massive. You barely manage to force [him] in, but there's no helping it. It's that or going about a few extra hours as a lust crazed lunatic and you'd prefer the former.");
+					player.cuntChange(monster.cockArea(0), true);
+					outputText(" In a moment, you quickly begin unloading surge after surge of electricity into them. The air crackles around you with latent, lustful shocks. You can't help but growl in pleasure.\n\n" +
+							"Your poor victim's cock reflexively twitches around your walls as you continue pumping it eagerly, the sheer force of your electricity causing them to spasm and quiver beneath your presence." +
+							" You bring more of your weight upon them as you can feel yourself getting closer to the release that you so crave." +
+							" Your eyes roll back, causing your vision to white out as you continue unloading all your charge into the make-shift lightning rod.\n\n" +
+							"[themonster] continues clenching against you as a familiar pressure and heat builds up within your loins. You let loose a loud grunt as you finally achieve release, shooting all the remaining voltage into your victim's dick as a pool of raiju plasma floods beneath you." +
+							" Emptied from your overwhelming lust, you steadily regain your senses as your orgasm ebbs down.\n\n" +
+							"Finally, you slowly unplug yourself from them, cum mixed with plasma slowly seeping out of your outlet as you give one last glance at the broken, twitching mess you've left the [monster] in." +
+							" Your unwilling partner will be a fumbling mess for a while with all that lingering charge in them." +
+							" Electricity courses around their form as [he] clenches [his] body, still cumming.\n\n" +
+							"You no longer have any need to stick around now that your vision is cleared and your mind is no longer stuck in a fog. You decide to head back to your camp, satisfied.");
+					player.sexReward("cum","Vaginal");
+				}
+				else {
+					outputText("Before [he] can make any further protest, you force your overloaded outlet into [his] face almost asphyxiating [him]." +
+							" Immediately you shoot your first bolt causing [his] mouth to open and [his] tongue to flail wildly right into your box." +
+							" You moan in delight as the charge quickly builds up within you. In a moment, you quickly begin unloading surge after surge of electricity into them." +
+							" The air crackles around you with latent, lustful shocks. You can't help but growl in pleasure.\n\n" +
+							"Your poor victim's overstimulated tongue just twitches around your walls, the sheer force of your electricity causing their entire body to spasm and quiver beneath your presence." +
+							" You bring more of your weight upon them as you can feel yourself getting closer to the release that you so crave." +
+							" Your eyes roll back, causing your vision to white out as you continue unloading all your charge into the make-shift lightning rod.\n\n" +
+							"[themonster] continues flailing randomly as a familiar pressure and heat builds up within your loins." +
+							" You let loose a loud grunt as you finally achieve release, shooting all the remaining voltage into your victim's body as a pool of raiju plasma floods into [his] open mouth." +
+							" Emptied from your overwhelming lust, you steadily regain your senses as your orgasm ebbs down and that of your victim heads up.\n\n" +
+							"Finally, you slowly unplug yourself from them plasma slowly dripping out of your outlet as you give one last glance at the broken, twitching mess you've left the [monster] in." +
+							" Your unfortunate partner will be a fumbling mess for a while with all that lingering charge in them, let alone you're not sure they are going to be able to speak again for a while." +
+							" Electricity courses around their form as [he] clenches [his] body, still cumming.\n\n" +
+							"You no longer have any need to stick around now that your vision is cleared and your mind is no longer stuck in a fog. You decide to head back to your camp, satisfied.");
+					player.sexReward("saliva","Vaginal");
+				}
+			}
+			player.sexReward("default");
+			player.statStore.removeBuffs('Supercharged');
+			player.lust = 0;
+			statScreenRefresh();
+			cleanupAfterCombat();
+		}
+
 		public function manticoreTailRapeScene():void {
 			clearOutput();
 			outputText("While your defeated foe is laying on the ground, you make a sadistic grin as you contemplate the situation. This came just as you got hungry or rather, just as your tail did.\n\n");
@@ -587,7 +691,11 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 			if (player.hasCock()) outputText("While you mentaly rape your victim of everything that used to make its sense of self you push your needy cock through the now welcoming hole that is your half broken toy butt thrusting to bring yourself to new heights of pleasant delirium.");
 			outputText("\n\nYou cum green, your fluids dripping from your partner and tainting the ground beneath into a small pool of defiled fluid as you draw in whatever remains of your victim's now empty brain.");
 
-
+			if (player.buff("Brain melt").getValueOfStatBuff("int.mult") < (player.perkv1(PerkLib.MindbreakerBrain1toX)*2)){
+				player.buff("Brain melt").addStat("int.mult",0.01);
+				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
+				CoC.instance.mainView.statsView.showStatUp("int");
+			}
 
 			player.sexReward("Default", "Default", true, false);
 			statScreenRefresh();

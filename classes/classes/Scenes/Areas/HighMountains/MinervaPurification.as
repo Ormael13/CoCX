@@ -636,6 +636,8 @@ public class MinervaPurification extends BaseContent
 			}
 		}
 		
+        //Unused
+        /*
 		private function minervaCorruptionMeet():void {
 			    outputText("\n\nThe golden siren appears to be tending to her gardens, humming a happy tune all the while, her delightfully round rump swaying back and forth as her tail swishes back and forth enticingly. Grinning you start creeping up behind her with the intent to surprise your pure gentle lover, your arms out, your [player.feet] barely making any sound at all, To your surprise though it seems that you are not sneaky enough to catch Minerva off guard this time. \"<i>Well hello there my love, I knew you would come, before you even made a sound at all.</i>\" she says before turning to you, her usual gentle kind smile across her glossy black lips.");
 
@@ -650,6 +652,7 @@ public class MinervaPurification extends BaseContent
 				outputText("\n\nLooking at you closely, her playful sharky grin splitting her full glossy black lips, Minerva leans in, planting gentle kisses over your neck before gently nibbling on you. \"<i>You know, we should celebrate our feelings, how about we spend some special quality time together my love?</i>\" she says playfully, pressing her fertile broodmotherly curves against you, letting you feel her growing arousal beneath her clothes. With such an invitation, how could you decline?");
 				dynStats("cor", -3);
 		}
+        */
 		
 		public function pureMinervaMenu():void {
 			menu();
@@ -1722,5 +1725,6 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 			flags[kFLAGS.TIMES_BIRTHED_SHARPIES]++;
 			doNext(camp.returnToCampUseOneHour);
 		}
+
 	}
 }

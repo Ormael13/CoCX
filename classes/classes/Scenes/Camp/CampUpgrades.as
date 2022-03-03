@@ -2063,7 +2063,7 @@ private function buildUpWoodDam2():void {
 	flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 250;
 	flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 375;
 	clearOutput();
-	outputText("You get down to work expanding the dam plank by plank starting from sides. At first it goes slowly but you eventualy speed up, to slow down again near end of the work. New taller and wider dam starts to accumulative water to form something between steam and miniature narrow shaped lake.");
+	outputText("You get down to work expanding the dam plank by plank starting from sides. At first it goes slowly but you eventualy speed up, to slow down again near end of the work. New taller and wider dam starts to accumulative water to form something between stream and miniature narrow shaped lake.");
 	flags[kFLAGS.CAMP_UPGRADES_DAM] = 2;
 	//Gain fatigue.
 	var fatigueAmount:int = 400;
@@ -2094,7 +2094,7 @@ private function buildUpMajorWoodDam2():void {
 	flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 300;
 	flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 450;
 	clearOutput();
-	outputText("You get down to work on expanding the dam for the second time like the last time putting planks on the sides first. It progress slowly until you put last ones on the top of dam. Tired but satisfied with your work you look how previous widened steam due to higher water accumulation turn into proper miniature yet very narrow mini lake.");
+	outputText("You get down to work on expanding the dam for the second time like the last time putting planks on the sides first. It progress slowly until you put last ones on the top of dam. Tired but satisfied with your work you look how previous widened stream due to higher water accumulation turn into proper miniature yet very narrow mini lake.");
 	flags[kFLAGS.CAMP_UPGRADES_DAM] = 3;
 	//Gain fatigue.
 	var fatigueAmount:int = 600;
@@ -2244,7 +2244,7 @@ public function checkMaterials():void {
 // button 7 - cabin for camp cow-morphs (Marble+Izzy?+Clara?)
 // button 8 - ...
 // button 10 - living place for Kiha+Sophie?+Vapula?
-// button 11 - using wood making small dam on steam near camp to form small pond/pool/mini lake for camp members users - using later stones to make dam better increasing amount of gathered water
+// button 11 - using wood making small dam on stream near camp to form small pond/pool/mini lake for camp members users - using later stones to make dam better increasing amount of gathered water
 // button 12 - ...
 // button 13 - ...
 // button 14 - Back

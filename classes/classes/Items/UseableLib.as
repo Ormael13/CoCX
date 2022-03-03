@@ -79,6 +79,21 @@ use namespace CoC;
 		public const E_ICHOR:SimpleUseable = new SimpleUseable("E.Ichor", "E-Ichor vial", "a vial of E-Ichor", 1,
 			"An vial of E-Ichor.",
 			"You look at the vial of substance called E-Ichor. It occasionally glows gently in your hand.  It may be useful for taking on mutations.");
+		public const AMEGEM:SimpleUseable = new SimpleUseable("Amet.Gem", "Amethyst Gem" , "an Amethyst Gem", 1200,
+			"An Amethyst Gem.",
+			"You gaze at the Amethyst Gem. It would make for great ornamentation, if one knew how to use it.");
+		public const TPAZGEM:SimpleUseable = new SimpleUseable("TopzGem", "Topaz Gem", "a Topaz Gem", 1200,
+			"A Topaz Gem.",
+			"You gaze at the Topaz Gem. It would make for great ornamentation, if one knew how to use it.");
+		public const RBYGEM:SimpleUseable = new SimpleUseable("RubyGem", "Ruby Gem", "a Ruby Gem", 1200,
+			"A Ruby Gem.",
+			"You gaze at the Ruby Gem. It would make for great ornamentation, if one knew how to use it.");
+		public const EMDGEM:SimpleUseable = new SimpleUseable("Emd.Gem", "Emerald Gem", "an Emerald Gem", 1200,
+			"An Emerald Gem.",
+			"You gaze at the Emerald Gem. It would make for great ornamentation, if one knew how to use it.");
+		public const SAPPGEM:SimpleUseable = new SimpleUseable("Sap.Gem", "Sapphire Gem", " a Sapphire Gem", 1200,
+			"A Sapphire Gem.",
+			"You gaze at the Sapphire Gem. It would make for great ornamentation, if one knew how to use it.");
 		//MISCELLANEOUS
 		public const CONDOM :SimpleUseable = new SimpleUseable("Condom ", "Condom", "a condom packet", 6,
 			"This wrapper contains a single latex condom that can be worn over the penis. It's designed to prevent pregnancy... most of the time. Can be used in certain sex scenes.",

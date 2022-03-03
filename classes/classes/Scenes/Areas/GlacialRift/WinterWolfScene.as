@@ -32,8 +32,9 @@ package classes.Scenes.Areas.GlacialRift
 				if (player.hasVagina()) {
 					addButton(0, "RideHisCock", rideWinterWolfsCock);
 				}
-				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 020).hint("Other non typical sex scenes.");
 				addButton(14, "Leave", cleanupAfterCombat);
+				uniquuuesexscene.pcUSSPreChecksV2(winAgainstWinterWolf);
+				//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(20);
 			}
 			else {
 				cleanupAfterCombat();

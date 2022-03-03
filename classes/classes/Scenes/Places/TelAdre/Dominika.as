@@ -215,11 +215,11 @@ private function acceptDominikasKnowledge():void {
 			}
 			else if(!player.hasStatusEffect(StatusEffects.KnowsArcticGale)) {
 				player.createStatusEffect(StatusEffects.KnowsArcticGale,0,0,0,0);
-				outputText("\n\n<b>New White Magic Spell Learned: Arctic Gale</b>");
+				outputText("\n\n<b>New Black Magic Spell Learned: Arctic Gale</b>");
 			}
 			else if(!player.hasStatusEffect(StatusEffects.KnowsDuskWave)) {
 				player.createStatusEffect(StatusEffects.KnowsDuskWave,0,0,0,0);
-				outputText("\n\n<b>New White Magic Spell Learned: Dusk Wave</b>");
+				outputText("\n\n<b>New Black Magic Spell Learned: Dusk Wave</b>");
 			}
 			else if(!player.hasStatusEffect(StatusEffects.KnowsBlizzard)) {
 				player.createStatusEffect(StatusEffects.KnowsBlizzard,0,0,0,0);
@@ -239,7 +239,7 @@ private function acceptDominikasKnowledge():void {
 			}
 			else if(!player.hasStatusEffect(StatusEffects.KnowsIceRain)) {
 				player.createStatusEffect(StatusEffects.KnowsIceRain,0,0,0,0);
-				outputText("\n\n<b>New White Magic Spell Learned: Ice Rain</b>");
+				outputText("\n\n<b>New Black Magic Spell Learned: Ice Rain</b>");
 			}
 			else outputText("==SOMETHING FUCKED UP.  TELL ORMAEL VIA DISCORD (link to it in Fenoxo forum mod thread first post)==");
 			dynStats("int", 2);

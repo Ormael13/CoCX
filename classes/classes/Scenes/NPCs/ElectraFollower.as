@@ -132,7 +132,11 @@ public function ElectraRecruitingSure():void {
 		outputText("Electra responds with middle annoyance.\n\n");
 		outputText("\"<i>Nothing about taming here Etna, I'm not some wild beast you can hold on a leash. [name] just happened to be on my path when I needed "+player.mf("him","her")+" the most, willing to help of "+player.mf("his","her")+" own volition.</i>\"\n\n");
 	}
-	outputText("(<b>Electra has been added to the Lovers menu!</b>)\n\n");
+	outputText("<b>Before setting in, as if remembering something Electra pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
+	if (player.hasKeyItem("Radiant shard")){
+		player.addKeyValue("Radiant shard",1,+1);
+	}
+	outputText("\n\n(<b>Electra has been added to the Lovers menu!</b>)\n\n");
 	flags[kFLAGS.ELECTRA_FOLLOWER] = 2;
 	flags[kFLAGS.ELECTRA_LVL_UP] = 1;
 	flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] = 0;
@@ -267,7 +271,6 @@ public function electraSex():void {
 	}
 	addButton(2, "Headpat", ElectraSeXHeadpat);
 	addButton(3, "Lets just fuck", ElectraSeXYes);
-	//if (player.tailType == 28)  addButton(4, "Share a Drink", etnaShareDrink);
 	addButton(14, "Back", ElectraCampMainMenu);
 }
 
@@ -386,7 +389,8 @@ public function PlayerSexElectra():void {
 	if (player.lust >= 33) addButton(0, "Yea Sure", ElectraSeXYes);
 	addButton(1, "No Way", ElectraSeXNo);
 	addButton(2, "Headpat", ElectraSeXHeadpat);
-	if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 054).hint("Other non typical sex scenes.");
+	uniquuuesexscene.pcUSSPreChecksV2(PlayerSexElectra);
+	//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(54);
 }
 public function ElectraSeXYes():void {
 	spriteSelect(SpriteDb.s_electra);

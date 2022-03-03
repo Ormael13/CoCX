@@ -29,7 +29,7 @@ public class ArcticGaleSpell extends AbstractBlackSpell {
 	}
 	
 	override public function describeEffectVs(target:Monster):String {
-		return "~" + calcDamage(target, false) + " ice damage"
+		return "~" + calcDamage(target, false, false) + " ice damage"
 	}
 	
 	override public function get isKnown():Boolean {
@@ -41,18 +41,18 @@ public class ArcticGaleSpell extends AbstractBlackSpell {
 		return spellBlackCooldown();
 	}
 	
-	public function calcDamage(monster:Monster, randomize:Boolean = true):Number {
+	public function calcDamage(monster:Monster, randomize:Boolean = true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)
 		var baseDamage:Number = 2 * scalingBonusIntelligence(randomize);
 		if (player.weaponRangeName == "Artemis") baseDamage *= 1.5;
 		if (ex) baseDamage *= 2;
-		return adjustSpellDamage(baseDamage, DamageType.ICE, CAT_SPELL_BLACK, monster);
+		return adjustSpellDamage(baseDamage, DamageType.ICE, CAT_SPELL_BLACK, monster, true, casting);
 	}
 	
 	override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
 			outputText("You focus your power, spreading your fingers wide. The temperature drops around you, and your fingers feel almost numb as scalpel-sharp icicles form in a halo around each of your hands. The wind picks up, carrying them away, but more form in their place. With a cry, you bring your hands together in front of you, whipping the winds to a frenzy, showering [themonster] in a hailstorm of razor-sharp icicles.\n");
 		}
-		var damage:Number = calcDamage(monster);
+		var damage:Number = calcDamage(monster, true, true);
 		damage = critAndRepeatDamage(display, damage, DamageType.ICE);
 		if (ex) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
 		checkAchievementDamage(damage);

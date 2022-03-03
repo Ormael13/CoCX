@@ -3347,11 +3347,7 @@ private function katherineDrunkSeeUrta():void {
 		outputText("You get the feeling you are going to have to intervene quickly if you don’t want them to fuck right here and now.");
 		var button:int = 0;
 		menu();
-		if (submissiveness() < 3) {
-			addButton(button++, "Orgy", telAdre.katherineThreesome.orgy);
-			outputText("\n\nYou");
-		}
-		else outputText("  On the other hand everyone enjoys an orgy.\n\nOtherwise you");
+		addButton(button++, "Orgy", telAdre.katherineThreesome.orgy);
 		if (player.gender == Gender.GENDER_NONE) {
 			outputText(" could let the two of them fuck.  Unfortunately, you really aren't equipped for more than that.");
 			addButton(button++, "Watch", telAdre.katherineThreesome.watchNoIntro, true);

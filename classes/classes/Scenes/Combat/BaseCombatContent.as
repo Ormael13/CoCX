@@ -261,17 +261,17 @@ public class BaseCombatContent extends BaseContent {
 	protected function healModWhite():Number {
 		return combat.magic.healModWhiteImpl();
 	}
-	protected function calcInfernoMod(damage:Number):Number {
-		return combat.magic.calcInfernoModImpl(damage);
+	protected function calcInfernoMod(damage:Number, incCnt:Boolean):Number {
+		return combat.magic.calcInfernoModImpl(damage, incCnt);
 	}
-	protected function calcGlacialMod(damage:Number):Number {
-		return combat.magic.calcGlacialModImpl(damage);
+	protected function calcGlacialMod(damage:Number, incCnt:Boolean):Number {
+		return combat.magic.calcGlacialModImpl(damage, incCnt);
 	}
-	protected function calcVoltageMod(damage:Number):Number {
-		return combat.magic.calcVoltageModImpl(damage);
+	protected function calcVoltageMod(damage:Number, incCnt:Boolean):Number {
+		return combat.magic.calcVoltageModImpl(damage, incCnt);
 	}
-	protected function calcEclypseMod(damage:Number):Number {
-		return combat.magic.calcEclypseModImpl(damage);
+	protected function calcEclypseMod(damage:Number, incCnt:Boolean):Number {
+		return combat.magic.calcEclypseModImpl(damage, incCnt);
 	}
 }
 }

@@ -1924,7 +1924,8 @@ public function yamataLoses():void {
 	addButton(1, "Aiko finish", aikoKillSister).hint("It should be up to Aiko what to do with Yamata.");
 	addButton(2, "Finish her", killYamata).hint("Yamata has caused enough pain and misery, end her now!");
 	if (player.cor > 60) {
-		addButton(3, "Fuck her", fuckYamata).hint("You can take some pleasure first before deciding on such tough matters, that fight got you really worked up!");
+		//addButton(3, "Fuck her", fuckYamata).hint("You can take some pleasure first before deciding on such tough matters, that fight got you really worked up!");
+        addButtonDisabled(1, "Fuck her", "NYI");
 	}
 }
 

@@ -64,8 +64,9 @@ public function defeatedTedPostHiddenCave():void {
 		outputText(".");
 		outputText("\n\n\"<i>My Dao Heart is firm.</i>\" he recite before escaping with help of smokescreen.\n\n");//WIP post combat version
 		menu();
-		if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 057).hint("Other non typical sex scenes.");
 		addButton(14, "Leave", cleanupAfterCombat);
+		uniquuuesexscene.pcUSSPreChecksV2(defeatedTedPostHiddenCave);
+		//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(57);
 	}
 	if (flags[kFLAGS.TED_LVL_UP] == 2) {
 		outputText(".");

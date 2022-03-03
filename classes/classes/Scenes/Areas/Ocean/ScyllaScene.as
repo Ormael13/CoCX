@@ -41,7 +41,8 @@ public function oceanScyllaWin():void {
 		addButton(0, "No", oceanScyllaWin2);
 		if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 			addButton(1, "Fuck Her", oceanScyllaWin3);
-			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 034).hint("Other non typical sex scenes.");
+			uniquuuesexscene.pcUSSPreChecksV2(oceanScyllaWin);
+			//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(34);
 		}
 	}
 	else {

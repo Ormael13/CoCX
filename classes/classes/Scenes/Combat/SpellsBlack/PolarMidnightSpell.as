@@ -47,17 +47,19 @@ public class PolarMidnightSpell extends AbstractBlackSpell {
 	}
 	
 	override public function describeEffectVs(target:Monster):String {
-		return "~" + calcDamage(target, false) + " ice damage. "
+		return "~" + calcDamage(target, false, false) + " ice damage. "
 	}
 	
-	public function calcDamage(target:Monster, randomize:Boolean = true):Number {
+	public function calcDamage(target:Monster, randomize:Boolean = true, casting:Boolean = true):Number {
 		var baseDamage:Number = scalingBonusIntelligence(randomize) * 24;
 		if (player.weaponRangeName == "Artemis") baseDamage *= 1.5;
 		return adjustSpellDamage(
 				baseDamage,
 				DamageType.ICE,
 				CAT_SPELL_BLACK,
-				target
+				target,
+                true,
+                casting
 		);
 	}
 	
@@ -68,7 +70,7 @@ public class PolarMidnightSpell extends AbstractBlackSpell {
 		if (display) {
 			outputText("You drain the heat out of the air around your foe, causing its temperature to plummet far below its freezing point in an instant, effectively flash freezing your enemy for \n");
 		}
-		var damage:Number = calcDamage(monster);
+		var damage:Number = calcDamage(monster, true, true);
 		damage = critAndRepeatDamage(display, damage, DamageType.ICE);
 		if (display) {
 			outputText("\n\n[Monster A] [monster name] is encased in a thick layer of ice.\n\n");

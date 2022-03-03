@@ -1,10 +1,11 @@
+/**
+ * @Author Pyromania
+ * Coded in by Jtecx, Jan/Feb 2022
+ */
+
 package classes.Scenes.Places.TrollVillage {
-import classes.*;
-import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 import classes.Scenes.Places.TrollVillage;
-
-import flash.display.Scene;
 
 public class DiningHalls extends TrollVillageAbstractContent{
     public function DiningHalls():void {
@@ -131,14 +132,6 @@ public class DiningHalls extends TrollVillageAbstractContent{
         function LeaveTheHalls2():void{
             outputText("You decide that you’ve spent enough time in the dining hall and take your leave.\n");
             doNext(SceneLib.trollVillage.EnterTheVillage);
-        }
-
-        function TalktoElderM():void{
-
-        }
-
-        function TalktoElderF():void{
-
         }
     }
 }

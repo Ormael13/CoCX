@@ -96,8 +96,9 @@ public class MaleSpiderMorphScene extends BaseContent
 				if (player.biggestCockArea() > monster.analCapacity()) addButton(2, "Frot", victoryFrotTheSpoidah);
 			}
 			addButton(3, "B.Titfuck", bikiniTits);
-			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 041).hint("Other non typical sex scenes.");
 			addButton(14, "Leave", cleanupAfterCombat);
+			uniquuuesexscene.pcUSSPreChecksV2(defeatSpiderBoy);
+			//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(41);
 		}
 
 //Loss selector

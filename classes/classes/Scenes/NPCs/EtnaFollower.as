@@ -198,7 +198,8 @@ public function etnaRapeIntro():void
 	if (player.lust >= 33 && player.hasVagina()) addButton(1, "Yes (F)", etnaRapeYesF);
 	addButton(2, "No", etnaRapeNo);
 	if (player.lust >= 33 && player.isAlraune()) addButton(3, "Fill her up!", EtnaFillHerUp);
-	if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 055).hint("Other non typical sex scenes.");
+	uniquuuesexscene.pcUSSPreChecksV2(etnaRapeIntro);
+	//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(55);
 }
 
 public function etnaRapeYesM():void
@@ -370,7 +371,8 @@ public function etnaRape3rdWin():void
 	if (player.lust >= 33 && player.hasCock()) addButton(0, "Yes (M)", etnaRapeYesM);
 	if (player.lust >= 33 && player.hasVagina()) addButton(1, "Yes (F)", etnaRapeYesF);
 	addButton(2, "No", etnaRapeNo);
-	if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 056).hint("Other non typical sex scenes.");
+	uniquuuesexscene.pcUSSPreChecksV2(etnaRape3rdWin);
+	//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(56);
 }
 
 public function etnaReady2Come2Camp():void
@@ -428,6 +430,11 @@ private function etnaCome2Camp():void
 		outputText("Etna replies smirking. \"<i>So what, you milfy bird? It’s not like you need more of [name]’s affection after your hundredth kid! Heck, I'm surprised a slut like you hasn’t already taken a permanent mate or maybe, you just don't consider men as such?</i>\"\n\nIt takes everything you have to prevent Sophie and Etna from fighting, but you eventually manage to calm them down and force them to make peace. Sophie begrudgingly shakes hands with Etna but you’re quite aware the odds of them becoming friends is quite slim.\n\n");
 	}
 	outputText("Her examination of your camp done, Etna proceeds to make herself comfortable and settle down.\n\n");
+	outputText("\n\n<b>Before settling in, as if remembering something Etna pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
+	if (player.hasKeyItem("Radiant shard")){
+		player.addKeyValue("Radiant shard",1,+1);
+	}
+	else player.createKeyItem("Radiant shard", 1,0,0,0);
 	outputText("(<b>Etna has been added to the Lovers menu!</b>)\n\n");
 	flags[kFLAGS.ETNA_FOLLOWER] = 2;
 	flags[kFLAGS.ETNA_DAILY_VENOM_VIAL] = 0;

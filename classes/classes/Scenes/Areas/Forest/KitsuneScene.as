@@ -1254,7 +1254,8 @@ public class KitsuneScene extends BaseContent
 				removeButton(7);
 				removeButton(8);
 			}
-			if (player.pcCanUseUniqueSexScene() && flags[kFLAGS.SFW_MODE] <= 0) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 016).hint("Other non typical sex scenes.");
+			uniquuuesexscene.pcUSSPreChecksV2(defeatTheKitsunes);
+			//if (player.pcCanUseUniqueSexScene() && flags[kFLAGS.SFW_MODE] <= 0) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 16).hint("Other non typical sex scenes.");
 			addButton(14, "Leave", leaveKitsune);
 		}
 
@@ -2587,6 +2588,12 @@ public class KitsuneScene extends BaseContent
 			outputText("\"<i>Thank you " + player.mf("lord", "lady") + " [name] please allow me to tend to your every need from now on.</i>\"");
 			outputText("\n\nAyane packs her belongings in a weird bag that seems to never be fuller or emptier and starts to follow you around.");
 			outputText("\n\n(<b>Ayane has been added to the Followers menu!</b>)\n\n");
+			outputText("\n\n<b>As if remembering something Amily pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
+			if (player.hasKeyItem("Radiant shard")){
+				player.addKeyValue("Radiant shard",1,+1);
+			}
+			else player.createKeyItem("Radiant shard", 1,0,0,0);
+			outputText("\n\n\"<i>Please take it as my first of many tribute to you my " + player.mf("lord", "lady") + ".</i>\"");
 			flags[kFLAGS.AYANE_FOLLOWER] = 2;
 			doNext(camp.returnToCampUseOneHour);
 		}
