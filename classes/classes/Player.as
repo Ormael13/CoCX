@@ -11200,23 +11200,13 @@ use namespace CoC;
 		}
 		public function maxPeripheralNervSysMutations():Number {
 			var nervsysMutations:Number = 1;
-			for each (var pPerk:Array in MutationsLib.mutationsArray("PNerv/Sys")){
+			for each (var pPerk:Array in MutationsLib.mutationsArray("Nerv/Sys")){
 				if (hasPerk(pPerk[0])) {
 					nervsysMutations--;
 				}
 			}
 			nervsysMutations = nervsysMutations += maxAscensionBoost()
 			return nervsysMutations;
-		}
-		public function maxCentralNervSysMutations():Number {
-			var centralnervsysMutations:Number = 1;
-			for each (var pPerk:Array in MutationsLib.mutationsArray("CNerv/Sys")){
-				if (hasPerk(pPerk[0])) {
-					centralnervsysMutations--;
-				}
-			}
-			centralnervsysMutations = centralnervsysMutations += maxAscensionBoost()
-			return centralnervsysMutations;
 		}
 		public function maxBonesAndMarrowMutations():Number {
 			var bonesandmarrowMutations:Number = 1;

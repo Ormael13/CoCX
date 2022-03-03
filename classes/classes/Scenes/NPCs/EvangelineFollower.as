@@ -1109,8 +1109,7 @@ private function InternalMutations0(page:int = 0):void {
 	menuItems.push("Eyes", InternalMutationsEyes, "Eyes Mutations");
 	menuItems.push("Bone/Marrow", InternalMutationsBoneMarrow, "Bone Mutations");
 	//Next Page
-	menuItems.push("PNerv/Sys", InternalMutationsPNervSys, "PNerv-Sys Mutations");
-	menuItems.push("CNerv/Sys", InternalMutationsCNervSys, "CNerv-Sys Mutations");
+	menuItems.push("Nerv/Sys", InternalMutationsPNervSys, "Nerv-Sys Mutations");
 	menuItems.push("Thyroid Gland", InternalMutationsThyroidGlands, "Thyroid Mutations");
 	menuItems.push("Parathyroid Gland", InternalMutationsParathyroid, "Parathyroid Mutations");
 	menuItems.push("Adaptations", InternalMutationsAdaptations, "Adaptation Mutations");
@@ -1240,18 +1239,8 @@ private function InternalMutations0(page:int = 0):void {
 		var btnNum:int = 0
 		menu();
 		//Peripheral/NervSys Mutations
-		for each (var mutate:Array in MutationsLib.mutationsArray("PNerv/Sys")){
-			mutationsAssistant(mutate, btnNum++, "peripheral nerv-sys");
-		}
-		addButton(14, "Back", curry(InternalMutations0, 1));
-	}
-
-	function InternalMutationsCNervSys():void{
-		var btnNum:int = 0
-		menu();
-		//Peripheral/NervSys Mutations
-		for each (var mutate:Array in MutationsLib.mutationsArray("CNerv/Sys")){
-			mutationsAssistant(mutate, btnNum++, "central nerv-sys");
+		for each (var mutate:Array in MutationsLib.mutationsArray("Nerv/Sys")){
+			mutationsAssistant(mutate, btnNum++, "nerv-sys");
 		}
 		addButton(14, "Back", curry(InternalMutations0, 1));
 	}

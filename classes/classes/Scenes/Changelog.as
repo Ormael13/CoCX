@@ -150,7 +150,7 @@ package classes.Scenes
 			outputText("-Artemis bow now have additional effect - increase the magical damage of spells and enchanted arrows by 50%\n");
 			outputText("-Bonus damage on enchanted arrows shoot by arcane archer would now give half of previous damage, but it will no longer stops at adding more samage at 200 int. (So for very intelligent arcane archers it would be very good buff to damage with elemental arrows)\n");
 			outputText("-Gems counter reset on ascension and max 100 * NG tier (max 600) Spirits Stones are kept.\n");
-			outputText("-Added 3 new groups for Internal Mutation (perks): Parathyroid Glands, Central Nerv System and Adaptations. Ratatoskr Smarts & Ecliptic Mind mutation was moved to Central Nerv Sys group and Arachne Book Lungs and Twin Hearts moved to Adaptations group.\n");
+			outputText("-Added 2 new groups for Internal Mutation (perks): Parathyroid Glands and Adaptations. Ratatoskr Smarts & Ecliptic Mind mutation was moved to Nerv Sys group and Arachne Book Lungs and Twin Hearts moved to Adaptations group.\n");
 			outputText("-Cat-like Nimblness, Scylla Ink Glands, Tracheal System mutations been moved to Adaptations. So now all current internal mutations are placed under one of existing mutation slots ^^\n");
 			outputText("-All internal mutation perks have now more in line lvl req. for tier 2 (30) and 3 (60).\n");
 			outputText("-First three tiers of Tracheal System got readjusted stat bonuses: +1% str / +2% spe multi; +2% str / +1% tou / +3% spe multi; +4% str / +3% tou / +5% spe multi.\n");
