@@ -6650,9 +6650,9 @@ public function rebirthFromBadEnd():void {
         menu();
 		if (flags[kFLAGS.MARBLE_PURIFIED] == 1)
 			addButton(0, "Marble & Clara", SceneLib.marblePurification.defeatClaraCuntInAFight, false, true);
-        addButtonDisabled(13, "BadEnds", "SH is too lazy to add them too right now, but if anyone wants...");
+		addButtonDisabled(13, "BadEnds", "SH is too lazy to add them too right now, but if anyone wants...");
         addButton(14, "Wake Up", campSpendTimeActions);
-    }
+    }	
 
 	/*
         private function fixHistory():void {
@@ -6664,4 +6664,3 @@ public function rebirthFromBadEnd():void {
         */
 	}
 }
-

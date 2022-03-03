@@ -4872,7 +4872,6 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.hasPerk(MutationsLib.ManticoreMetabolismEvolved)) damage *= 2;
 		if (player.hasPerk(PerkLib.NaturalArsenal)) damage *= 1.50;
 		damage *= combat.rangePhysicalForce();
-		var lustdamage:Number = 35 + rand(player.lib / 10);
 		if (player.level < 10) damage += 20 + (player.level * 3);
 		else if (player.level < 20) damage += 50 + (player.level - 10) * 2;
 		else if (player.level < 30) damage += 70 + (player.level - 20) * 1;

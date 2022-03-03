@@ -40,9 +40,8 @@ public class CentipedeVenom extends Consumable {
 			dynStats("lus", (10+player.lib/10), "scale", false);
 			changes++;
 		}
-		if (changes < changeLimit && rand(3) == 0) {
+		if (changes < changeLimit && rand(3) == 0 && player.MutagenBonus("spe", 1)) {
 			outputText("\n\nYou suddenly jerk forward, feeling somewhat twitchy. Surprised, you didn't know you could react so quickly.");
-			player.MutagenBonus("spe", 1);
 			changes++;
 		}
 		//end of stat change list and starts of body changes

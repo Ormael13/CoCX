@@ -53,15 +53,13 @@ public class PotentVenom extends Consumable {
 			changes++;
 		}
 
-		if (changes < changeLimit && rand(3) == 0) {
+		if (changes < changeLimit && rand(3) == 0 && player.MutagenBonus("spe", 1)) {
 			outputText("\n\nYou suddenly jerk forward, feeling somewhat twitchy. Surprised, you didn't know you could react so quickly.");
-			player.MutagenBonus("spe", 1);
 			changes++;
 		}
 
-		if (changes < changeLimit && rand(3) == 0) {
+		if (changes < changeLimit && rand(3) == 0 && player.MutagenBonus("tou", 5)) {
 			outputText("\n\nYou feel oddly revitalized. You're so pumped that you feel that you can take on the strongest of enemies and even they would fail to even leave a scratch on you.");
-			player.MutagenBonus("tou", 5);
 			changes++;
 		}
 

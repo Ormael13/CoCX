@@ -332,13 +332,13 @@ player.removeCurse("str", 20);
 
 (Player only).
 
-Give a cumulative 1% bonus to stat multiplier, capped at 20% (in each category). Also reduce curse power to stat.
+Give a cumulative 1% bonus to stat multiplier, capped at 20% (in each category). Negative values decrease it down to -20%.
 
 **Example**:
 ```js
 player.MutagenBonus("int", 5);
 ```
-Will reduce "int" curse by 5. If "Alchemical" buff to "int.mult" is < 0.20, increase by 0.01.
+If "Mutagen" buff to "int.mult" is < 0.20, increase by 0.01.
 
 ## StatStore
 

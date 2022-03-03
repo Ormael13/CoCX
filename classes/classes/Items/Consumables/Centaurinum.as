@@ -33,14 +33,12 @@ public class Centaurinum extends Consumable{
 		clearOutput();
 		outputText("You down the potion, grimacing at the strong taste.");
 		//Speed up to 100
-		if (changes < changeLimit && rand(3) == 0) {
+		if (changes < changeLimit && rand(3) == 0 && player.MutagenBonus("spe", 3)) {
 			changes++;
 			outputText("\n\nAfter drinking the potion, you feel a bit faster.");
-			player.MutagenBonus("spe", 3);
 		}
 		//Toughness up to 80!
-		if (changes < changeLimit && rand(3) == 0) {
-			player.MutagenBonus("tou", 2);
+		if (changes < changeLimit && rand(3) == 0 && player.MutagenBonus("tou", 2)) {
 			outputText("\n\nYour body and skin both thicken noticeably.  You pinch your [skin.type] experimentally and marvel at how much tougher it has gotten.");
 			changes++;
 		}

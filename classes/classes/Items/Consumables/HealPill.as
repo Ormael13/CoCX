@@ -34,9 +34,8 @@ import classes.MutationsLib;
 				outputText("You feel an odd sensation. ");
 			}
 			
-			if (rand < 70 && player.lib < 40) {
+			if (rand < 70 && player.lib < 40 && player.MutagenBonus("lib", 1)) {
 				outputText("You feel a sense of warmth spread through your erogenous areas.");
-				player.MutagenBonus("lib", 1);
 			}
 			
 			if (rand >= 70 && rand <= 90) {
