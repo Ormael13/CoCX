@@ -352,7 +352,7 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 		//if (uniquuuesexscene.pcCanUseUniqueSexScenev2(true, null) > 0) addButton(13, "U.Sex Scenes", uniquuuesexscene.pcCanUseUniqueSexScenev2, false, BACK_FUNCTION_GOES_HERE).hint("Other non-typical sex scenes.");
 		//Use above for special cases.
 		public function pcCanUseUniqueSexScenev2(isChecking:Boolean = false, backFunc:Function = null, page:int = 0):*{
-			if (player.hasPerk(PerkLib.ElementalBody)) return false;	//Shouldn't ever fail, since check bool variant should always run first.
+			if (player.hasPerk(PerkLib.ElementalBody)) return 0;	//Shouldn't ever fail, since check bool variant should always run first.
 			var bypass:Function = RaijuOverLust();
 			var menuItems:Array = [];
 			menuItems.push.apply(this, USSTailRape());
