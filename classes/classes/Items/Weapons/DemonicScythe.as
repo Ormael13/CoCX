@@ -17,7 +17,7 @@ package classes.Items.Weapons
 		}
 		
 		override public function get verb():String { 
-			return game.player.hasPerk(PerkLib.StaffChanneling) ? "shot magic bolt" : "slash";
+			return game.player.hasPerk(PerkLib.StaffChanneling) ? "shoot magic bolt" : "slash";
 		}
 		
 		override public function get attack():Number{

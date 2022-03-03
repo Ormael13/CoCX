@@ -1757,7 +1757,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.createPerk(PerkLib.TrueSeeing, 0, 0, 0, 0);
 				needNext = true;
 			}
-			if (player.eyes.type != Eyes.MONOEYE && player.hasPerk(PerkLib.TrueSeeing)) {
+			if (player.eyes.type != Eyes.MONOEYE && player.hasPerk(PerkLib.TrueSeeing) && !player.hasPerk(MutationsLib.GazerEye)) {
 				outputText("\nYour sigh is not what it used to be. No longer having a cyclopean vision you have lost the power of true sight. \n\n(<b>Lost Perk: True seeing</b>)");
 				player.removePerk(PerkLib.TrueSeeing);
 				needNext = true;
