@@ -91,9 +91,17 @@ private function resistDatFrog():void {
 	menu();
 	addButton(0,"Question",questDatFrogGirl);
 	addButton(1,"TeachLesson",teachDatFrogALesson);
+	addButton(3,"IgnoreForever", ignoreForever);
 	addButton(4,"Leave",leaveFrogBe);
 	
 }
+
+	private function ignoreForever():void{
+		clearOutput();
+		outputText("You turn around and walk away, leaving the frog-girl to lure another unwary victim to warm her eggs.");
+		flags[kFLAGS.TIMES_ENCOUNTERED_FROG] = -1;
+		doNext(camp.returnToCampUseOneHour);
+	}
 //Leave her be:
 private function leaveFrogBe():void {
 	clearOutput();
