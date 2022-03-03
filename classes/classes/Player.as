@@ -15795,7 +15795,8 @@ use namespace CoC;
 			if (hasPerk(PerkLib.MunchkinAtGym)) cap += 0.05;
             if (bonus == 0)
                 return false; //no bonus - no effect
-
+            if (removeCurse(statName, bonus))
+                return false; //remove existing curses
             var current:Number = buff("Mutagen").getValueOfStatBuff(statName + ".mult");
             var bonus_sign:Number = (bonus > 0) ? 1 : -1;
             var current_sign:Number = (current > 0) ? 1 : -1;
