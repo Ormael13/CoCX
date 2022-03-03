@@ -745,7 +745,7 @@ public class MutationsLib
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.pigScore() >= 4;
 						}, "Pig/Boar race");
-				RaijuCathode.requireNervSysMutationSlot().requireCustomFunction(function (player:Player):Boolean {
+				RaijuCathode.requireCentralNervSysMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.raijuScore() >= 8;
 				}, "raiju race");
 				RatatoskrSmarts.requireCentralNervSysMutationSlot().requirePerk(PerkLib.KnowledgeIsPower).requireCustomFunction(function (player:Player):Boolean {
