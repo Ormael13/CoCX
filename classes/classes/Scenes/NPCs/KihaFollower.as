@@ -1685,7 +1685,7 @@ private function inviteKihaForDickings():void {
 	outputText("[pg]<b>(Kiha has joined your camp as a lover!)</b>");
 	flags[kFLAGS.KIHA_FOLLOWER] = 1;
 	outputText("\n\n<b>As if remembering something Kiha pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
-	if (player.hasKeyItem("Radiant shard")){
+	if (player.hasKeyItem("Radiant shard") >= 0){
 		player.addKeyValue("Radiant shard",1,+1);
 	}
 	else player.createKeyItem("Radiant shard", 1,0,0,0);

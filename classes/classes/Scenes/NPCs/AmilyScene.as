@@ -5118,7 +5118,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 			outputText("\"<i>Well, I better start moving in, huh?</i>\" she jokes. She then flops down on your sleeping roll beside you, \"<i>There we are, I'm moved in.</i>\" She grins at you, and you can't help but laugh.\n\n");
 			outputText("\n\n<b>As if remembering something Amily pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
-			if (player.hasKeyItem("Radiant shard")){
+			if (player.hasKeyItem("Radiant shard") >= 0){
 				player.addKeyValue("Radiant shard",1,+1);
 			}
 			else player.createKeyItem("Radiant shard", 1,0,0,0);
@@ -6787,7 +6787,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 			outputText("Amily grins and replies seductively, \"<i>Yes, " + player.mf("master","mistress") + "... Your orders are my pleasure.</i>\"\n\n");
 			outputText("<b>(Corrupted Amily added to slaves)</b>");
-			if (player.hasKeyItem("Radiant shard")){
+			if (player.hasKeyItem("Radiant shard") >= 0){
 				player.addKeyValue("Radiant shard",1,+1);
 			}
 			else player.createKeyItem("Radiant shard", 1,0,0,0);

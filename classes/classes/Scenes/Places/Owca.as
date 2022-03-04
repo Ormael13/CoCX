@@ -1032,7 +1032,7 @@ private function enslaveVapulaWithYourWang():void {
 	clearOutput();
 	if(!player.hasCock()) {
 		enslaveVapulaAsACuntWielder();
-		if (player.hasKeyItem("Radiant shard")){
+		if (player.hasKeyItem("Radiant shard") >= 0){
 			player.addKeyValue("Radiant shard",1,+1);
 		}
 		else player.createKeyItem("Radiant shard", 1,0,0,0);
@@ -1050,7 +1050,7 @@ private function enslaveVapulaWithYourWang():void {
 	outputText("\n\n\"<i>As long as they don't disturb me while I fuck your brains out, I don't care.</i>\"");
 	outputText("\n\nYou lend a hand to your newly-acquired succubus slut and help her to her feet.  She stumbles at first, still stunned by the recent fight; she quickly follows you though, firmly lead by your iron grip.  Hand in hand, you walk away from the pit and the scattered bodies without a look back.  On your way to the camp, you don't hesitate to give your succubus toy a few gropes to her boobs and buttocks, making her giggle; she playfully returns the favor, and by the time you reach your camp you are already stroking each other's crotches, your fingers softly probing her vaginal entrance until she openly moans in delight.  You stop teasing her and dismiss her at last.");
 	outputText("\n\n(<b>The demon Vapula has been added to your slaves.</b>)");
-	if (player.hasKeyItem("Radiant shard")){
+	if (player.hasKeyItem("Radiant shard") >= 0){
 		player.addKeyValue("Radiant shard",1,+1);
 	}
 	else player.createKeyItem("Radiant shard", 1,0,0,0);
