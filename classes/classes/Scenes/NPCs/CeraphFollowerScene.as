@@ -247,7 +247,13 @@ public class CeraphFollowerScene extends NPCAwareContent
 			if (monster.lust >= monster.maxLust()) outputText("resume stroking");
 			else outputText("stroke");
 			outputText(" her nodule-studded demon-dick with her free hand.  She whimpers, \"<i>Would my " + player.mf("Master", "Mistress") + " prefer to carry " + player.mf("his", "her") + " slave's token, or wear it as a belly-button piercing?</i>\"\n\n");
-
+			if (player.hasKeyItem("Radiant shard") >= 0){
+				player.addKeyValue("Radiant shard",1,+1);
+			}
+			else {
+				player.createKeyItem("Radiant shard", 1, 0, 0, 0);
+			}
+			outputText("\n\n<b>While considering her offer you get to looting from Ceraph inventory and find a shard of metal that seems to radiate untold power. You acquired a Radiant shard!</b>");
 			//[Carry] [Pierce]
 			simpleChoices("Carry", carryCarephsToken, "Pierce", getCeraphFollowerPiercing, "", null, "", null, "", null);
 		}

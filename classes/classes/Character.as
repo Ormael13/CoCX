@@ -449,7 +449,7 @@ import classes.CoC;
 			}
 		}
 
-		public function addKeyValue(statusName:String, statusValueNum:Number = 1, newNum:Number = 0):void
+		public function addKeyValue(keyItemName:String, statusValueNum:Number = 1, newNum:Number = 0):void
 		{
 			var counter:Number = keyItems.length;
 			//Various Errors preventing action
@@ -462,7 +462,7 @@ import classes.CoC;
 			{
 				counter--;
 				//Find it, change it, quit out
-				if (keyItems[counter].keyName == statusName)
+				if (keyItems[counter].keyName == keyItemName)
 				{
 					if (statusValueNum < 1 || statusValueNum > 4)
 					{
@@ -483,7 +483,7 @@ import classes.CoC;
 			//trace("ERROR: Looking for keyitem '" + statusName + "' to change value " + statusValueNum + ", and player does not have the key item.");
 		}
 
-		public function keyItemv1(statusName:String):Number
+		public function keyItemv1(keyItemName:String):Number
 		{
 			var counter:Number = keyItems.length;
 			//Various Errors preventing action
@@ -495,14 +495,14 @@ import classes.CoC;
 			while (counter > 0)
 			{
 				counter--;
-				if (keyItems[counter].keyName == statusName)
+				if (keyItems[counter].keyName == keyItemName)
 					return keyItems[counter].value1;
 			}
 			//trace("ERROR: Looking for key item '" + statusName + "', but player does not have it.");
 			return 0;
 		}
 
-		public function keyItemv2(statusName:String):Number
+		public function keyItemv2(keyItemName:String):Number
 		{
 			var counter:Number = keyItems.length;
 			//Various Errors preventing action
@@ -514,14 +514,14 @@ import classes.CoC;
 			while (counter > 0)
 			{
 				counter--;
-				if (keyItems[counter].keyName == statusName)
+				if (keyItems[counter].keyName == keyItemName)
 					return keyItems[counter].value2;
 			}
 			//trace("ERROR: Looking for key item '" + statusName + "', but player does not have it.");
 			return 0;
 		}
 
-		public function keyItemv3(statusName:String):Number
+		public function keyItemv3(keyItemName:String):Number
 		{
 			var counter:Number = keyItems.length;
 			//Various Errors preventing action
@@ -533,14 +533,14 @@ import classes.CoC;
 			while (counter > 0)
 			{
 				counter--;
-				if (keyItems[counter].keyName == statusName)
+				if (keyItems[counter].keyName == keyItemName)
 					return keyItems[counter].value3;
 			}
 			//trace("ERROR: Looking for key item '" + statusName + "', but player does not have it.");
 			return 0;
 		}
 
-		public function keyItemv4(statusName:String):Number
+		public function keyItemv4(keyItemName:String):Number
 		{
 			var counter:Number = keyItems.length;
 			//Various Errors preventing action
@@ -552,7 +552,7 @@ import classes.CoC;
 			while (counter > 0)
 			{
 				counter--;
-				if (keyItems[counter].keyName == statusName)
+				if (keyItems[counter].keyName == keyItemName)
 					return keyItems[counter].value4;
 			}
 			//trace("ERROR: Looking for key item '" + statusName + "', but player does not have it.");
