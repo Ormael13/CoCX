@@ -6,6 +6,7 @@ package classes.Scenes
 {
 import classes.*;
 import classes.BodyParts.*;
+import classes.Scenes.NPCs.DivaScene;
 
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.DeepSea.Kraken;
@@ -37,6 +38,7 @@ import classes.Scenes.NPCs.Aria;
 import classes.Scenes.NPCs.Aurora;
 import classes.Scenes.NPCs.CelessScene;
 import classes.Scenes.NPCs.Diana;
+import classes.Scenes.NPCs.DivaScene;
 import classes.Scenes.NPCs.Electra;
 import classes.Scenes.NPCs.Neisa;
 import classes.Scenes.NPCs.RyuBiDragon;
@@ -271,8 +273,79 @@ use namespace CoC;
 			menu();
 			if (flags[kFLAGS.MARRIAGE_FLAG] == 1) addButton(0, "ClickItOnce", AddMaxBackpack033).hint("Fix Marriage Unlock from Michiko for future clarity.");
 			addButton(1, "RemoveRP", cheatRemoveRP).hint("Remove Racial Paragon perk");
+            addButton(2, "Fix Shards", cheatFixShards).hint("Check player's quest and give the deserved shards");
+            addButton(3, "Add Shard", cheatAddShard).hint("Add 1 radiant shard");
+            addButton(4, "Remove Shard", cheatRemoveShard).hint("Remove 1 radiant shard");
 			addButton(14, "Back", submenucuzwhynot);
 		}
+
+        public function cheatFixShards():void {
+            var cnt:int = 0;
+            clearOutput();
+            player.removeKeyItem("Radiant shard");
+            outputText("Received shards for: ")
+            if (flags[kFLAGS.AYANE_FOLLOWER] == 2) {
+                ++cnt;
+                outputText("\nP.Ayane");
+            }
+            if (flags[kFLAGS.AMILY_FOLLOWER] == 1) {
+                ++cnt;
+                outputText("\nP.Amily");
+            }
+            if (flags[kFLAGS.AMILY_FOLLOWER] == 2) {
+                ++cnt;
+                outputText("\nC.Amily");
+            }
+            if (DivaScene.instance.status == -1) {
+                ++cnt;
+                outputText("\nDiva");
+            }
+            if (flags[kFLAGS.ELECTRA_FOLLOWER] == 2) {
+                ++cnt;
+                outputText("\nElectra");
+            }
+            if (flags[kFLAGS.ETNA_FOLLOWER] == 2) {
+                ++cnt;
+                outputText("\nEtna");
+            }
+            if (flags[kFLAGS.KIHA_FOLLOWER] == 1) {
+                ++cnt;
+                outputText("\nKiha");
+            }
+            if (flags[kFLAGS.CERAPH_FOLLOWER_PIERCING] == 1 || flags[kFLAGS.CERAPH_FOLLOWER_CARRY] == 1) {
+                ++cnt;
+                outputText("\nCeraph");
+            }
+            if (flags[kFLAGS.VAPULA_FOLLOWER] == 1) {
+                ++cnt;
+                outputText("\Vnapula");
+            }
+            if (cnt) {
+                 outputText("\nReceived " + cnt + " shards.");
+                 cheatAddShard(cnt);
+            }
+            else
+                 outputText("\nNo shards, go complete quests :(");
+            cheatpart3();
+        }
+
+        public function cheatAddShard(cnt:int = 1):void {
+            if (player.hasKeyItem("Radiant shard") >= 0)
+				player.addKeyValue("Radiant shard", 1, cnt);
+			else
+                player.createKeyItem("Radiant shard", cnt, 0, 0, 0);
+		    outputText("\n\n<b>You currently have "+ player.keyItemv1("Radiant shard") + " radiant shards.</b>");
+            cheatpart3();
+        }
+
+        public function cheatRemoveShard():void {
+            if(player.keyItemv1("Radiant shard") == 1) 
+                player.removeKeyItem("Radiant shard");
+			else
+                player.addKeyValue("Radiant shard", 1, -1);
+		    outputText("\n\n<b>You currently have "+ player.keyItemv1("Radiant shard") +" radiant shards.</b>");
+            cheatpart3();
+        }
 
         public function cheatRemoveRP():void {
             clearOutput();

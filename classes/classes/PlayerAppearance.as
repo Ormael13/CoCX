@@ -205,7 +205,7 @@ public class PlayerAppearance extends BaseContent {
 			piercingsDesc += "Looking positively perverse, a " + player.cocks[0].pShortDesc + " adorns your [cock]. ";
 			}
 		}
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00286] == 1)
+		if(flags[kFLAGS.CERAPH_FOLLOWER_PIERCING] == 1)
 			piercingsDesc += "A magical, ruby-studded bar pierces your belly button, allowing you to summon Ceraph on a whim. ";
 		if(player.hasVagina()) {
 			if(player.vaginas[0].labiaPierced > 0)

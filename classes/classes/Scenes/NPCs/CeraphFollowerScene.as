@@ -23,7 +23,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 //Is Ceraph a follower?
 		override public function ceraphIsFollower():Boolean
 		{
-			return flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00286] > 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00287] > 0;
+			return flags[kFLAGS.CERAPH_FOLLOWER_PIERCING] > 0 || flags[kFLAGS.CERAPH_FOLLOWER_CARRY] > 0;
 		}
 
 		public function ceraphFollowerEncounter(forceCeraph:Boolean = false):void
@@ -268,7 +268,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			outputText("Ceraph asks, \"<i>So, before my " + player.mf("Master", "Mistress") + " leaves, would you like to fuck your new slut one of the old ways, one last time?</i>\"\n\n");
 
 			outputText("<b>(Received Key Item: Onyx Token)</b>\n\n");
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00287] = 1;
+			flags[kFLAGS.CERAPH_FOLLOWER_CARRY] = 1;
 			player.createKeyItem("Onyx Token - Ceraph's", 0, 0, 0, 0);
 			//[Display Rape Options + Collar Option]
 			if (player.gender > 0) {
@@ -298,7 +298,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			clearOutput();
 			spriteSelect(7);
 			//Set belly button pierced as active
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00286] = 1;
+			flags[kFLAGS.CERAPH_FOLLOWER_PIERCING] = 1;
 			outputText("You bare your midriff to your new slut with ");
 			if (player.cor < 40) outputText("a little hesitation.");
 			else outputText("a smirk, secure in your knowledge of her defeat.");
