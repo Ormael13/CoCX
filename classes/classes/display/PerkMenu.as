@@ -799,7 +799,7 @@ public class PerkMenu extends BaseContent {
 					"\nNote: Not all body parts will use all available slots.\n\n");
 
 			outputText("<b><i><u>Mutations used per bodypart:</u></i></b>\n");
-			var bPartlist:Array = ["Heart", "Muscle", "Mouth", "Adrenals", "Bloodstream", "FaT", "Lungs", "Metabolism", "Ovaries", "Testicles", "Eyes", "Bone", "PNerv/Sys", "CNerv/Sys", "Thyroid", "PThyroid", "Adaptations"]
+			var bPartlist:Array = ["Heart", "Muscle", "Mouth", "Adrenals", "Bloodstream", "FaT", "Lungs", "Metabolism", "Ovaries", "Testicles", "Eyes", "Bone", "Nerv/Sys", "Thyroid", "PThyroid", "Adaptations"]
 			for each (var bodyPart:String in bPartlist){
 				var mCount:int = 0
 				var mPerkarray:Array = MutationsLib.mutationsArray(bodyPart);
@@ -963,17 +963,7 @@ public class PerkMenu extends BaseContent {
 			clearOutput();
 			//Peripheral/NervSys Mutations
 			displayHeader("Peripheral Nervous System Mutations");
-			for each (var mutate:Array in MutationsLib.mutationsArray("PNerv/Sys")){
-				mutationsDatabaseVerify(mutate);
-			}
-			mutationsDatabase(1);
-		}
-
-		function mutationsDBCNervSys():void{
-			clearOutput();
-			//Central/NervSys Mutations
-			displayHeader("Central Nervous System Mutations");
-			for each (var mutate:Array in MutationsLib.mutationsArray("CNerv/Sys")){
+			for each (var mutate:Array in MutationsLib.mutationsArray("Nerv/Sys")){
 				mutationsDatabaseVerify(mutate);
 			}
 			mutationsDatabase(1);
@@ -1049,8 +1039,7 @@ public class PerkMenu extends BaseContent {
 		// Due to not being able to return which page I am at in submenu,
 		// I cannot keep the menu to be at a specific page beyond this.
 		// Thus, hardcoded into the function.
-		menuItems.push("PNerv/Sys", mutationsDBPNervSys, "PNerv-Sys Mutations");
-		menuItems.push("CNerv/Sys", mutationsDBCNervSys, "CNerv-Sys Mutations");
+		menuItems.push("Nerv/Sys", mutationsDBPNervSys, "Nerv-Sys Mutations");
 		menuItems.push("Thyroid Gland", mutationsDBThyroidGlands, "Thyroid Mutations");
 		menuItems.push("Parathyroid Gland", mutationsDBParathyroid, "Parathyroid Mutations");
 		menuItems.push("Adaptations", mutationsDBAdaptations, "Adaptation Mutations");

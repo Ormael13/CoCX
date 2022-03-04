@@ -428,7 +428,7 @@ public class Creature extends Utils
 				CoC.instance.mainView.statsView.showStatDown(statName);
 			}
 		}
-		public function removeCurse(statName:String, power:Number, tier:Number = 0):void {
+		public function removeCurse(statName:String, power:Number, tier:Number = 0):Boolean {
 			var tierPower:String = "NOT PROPERLY ADDED STAT!";
 			if (tier == 0) tierPower = "Tribulation Vestiges";
 			if (tier == 1) tierPower = "Weakened";
@@ -441,30 +441,36 @@ public class Creature extends Utils
 			}
 			var current:Number = stat.valueOfBuff(tierPower);
 			if (statName == "sens" || statName == "cor") {
-				if (current >0){
-					if (power*2 >= current) {
+				if (current > 0) {
+					if (power >= current) {
 						stat.removeBuff(tierPower);
 						CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 						CoC.instance.mainView.statsView.showStatDown(statName);
-					} else if (power*2 < current) {
-						stat.addOrIncreaseBuff(tierPower, -power*2);
+					} else if (power < current) {
+						stat.addOrIncreaseBuff(tierPower, -power);
 						CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 						CoC.instance.mainView.statsView.showStatUp(statName);
 					}
+                    return true; //changed
 				}
+                else
+                    return false;
 			}
 			else {
 				if (current < 0) {
-					if (power*2 >= -current) {
+					if (power >= -current) {
 						stat.removeBuff(tierPower);
 						CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 						CoC.instance.mainView.statsView.showStatUp(statName);
-					} else if (power*2 < -current) {
-						stat.addOrIncreaseBuff(tierPower, power*2);
+					} else if (power < -current) {
+						stat.addOrIncreaseBuff(tierPower, power);
 						CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 						CoC.instance.mainView.statsView.showStatDown(statName);
 					}
+                    return true; //changed
 				}
+                else
+                    return false;
 			}
 		}
 

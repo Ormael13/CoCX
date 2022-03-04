@@ -73,7 +73,7 @@ public class Bog extends BaseContent
 				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
-			if (chooser == 0) {
+			if (chooser == 0 && flags[kFLAGS.TIMES_ENCOUNTERED_FROG] != -1) {
 				frogGirlScene.findTheFrogGirl();
 			}
 			else if (chooser == 1) {

@@ -168,7 +168,7 @@ public class TrollVillage extends BaseContent implements SaveableState{
             if (JabalaUnlocked) outputText("You can meet with Jabala and her husband if you like.\n");
             if (YenzaUnlocked > 0) outputText("You remember where Yenza’s hut is.\n");
             if (KaljiUnlocked) outputText("You can meet Kal’ji at his personal hut.\n");
-            ZenjiVillageStage = 0.5;
+            if (ZenjiVillageStage == 0) ZenjiVillageStage = 0.5;
 
 
             var menuItems:Array = [];

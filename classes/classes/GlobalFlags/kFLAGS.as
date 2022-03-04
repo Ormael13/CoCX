@@ -336,7 +336,7 @@ public static const UNKNOWN_FLAG_NUMBER_00327:int                               
 public static const UNKNOWN_FLAG_NUMBER_00328:int                                   =  328; // Grow up countdown
 public static const UNKNOWN_FLAG_NUMBER_00329:int                                   =  329; // Minos wasting a turn? (1 = yes)
 public static const UNKNOWN_FLAG_NUMBER_00330:int                                   =  330; // Cooldown on minotaur cum repeat messages
-public static const UNKNOWN_FLAG_NUMBER_00331:int                                   =  331; // Times Jojo Milked
+public static const JOJO_TIMES_MILKED:int                                   =  331; // Times Jojo Milked
 public static const JOJO_COCK_MILKING_COOLDOWN:int                                  =  332; // Jojo milk cooldown 4 hours
 public static const UNKNOWN_FLAG_NUMBER_00333:int                                   =  333; // Times PC been cock milked
 public static const FAP_ARENA_SESSIONS:int                                          =  334; // Times fap arena'ed

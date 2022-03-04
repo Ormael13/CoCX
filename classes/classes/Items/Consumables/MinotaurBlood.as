@@ -44,23 +44,12 @@ public class MinotaurBlood extends Consumable {
 		outputText("You drink the bubbling red fluid, tasting the tangy iron after-taste.");
 		//STATS
 		//Strength h
-		if (rand(3) == 0 && changes < changeLimit) {
+		if (rand(3) == 0 && changes < changeLimit && player.MutagenBonus("str", 2)) {
 			//weaker characters gain more
-			if (player.str <= 50) {
+			if (player.str <= 50)
 				outputText("\n\nPainful aches ripple through your body, flooding you with pain as your muscles flex and bulge, growing much stronger and more well-defined.");
-				//very weak players gain more
-				if (player.str <= 20) player.MutagenBonus("str", 3);
-				else player.MutagenBonus("str", 2);
-			}
-			//stronger characters gain less
-			else {
-				//small growth if over 75
-				if (player.str >= 75) player.MutagenBonus("str", 0.5);
-				//faster from 50-75
-				else player.MutagenBonus("str", 1);
+			else
 				outputText("\n\nYour muscles grow tighter, bulging outwards powerfully as you get even stronger!");
-			}
-			//Chance of speed drop
 			if (rand(2) == 0 && player.str > 50) {
 				outputText("\n\nYou begin to feel that the size of your muscles is starting to slow you down.");
 				player.addCurse("spe", 1,1);
@@ -68,22 +57,12 @@ public class MinotaurBlood extends Consumable {
 			changes++;
 		}
 		//Toughness (chance of - sensitivity)
-		if (rand(3) == 0 && changes < changeLimit) {
+		if (rand(3) == 0 && changes < changeLimit && player.MutagenBonus("tou", 2)) {
 			//weaker characters gain more
-			if (player.tou <= 50) {
+			if (player.tou <= 50)
 				outputText("\n\nYour hide... skin... whatever... you can feel it getting tougher as it thickens perceptibly.");
-				//very weak players gain more
-				if (player.tou <= 20) player.MutagenBonus("tou", 3);
-				else player.MutagenBonus("tou", 2);
-			}
-			//stronger characters gain less
-			else {
-				//small growth if over 75
-				if (player.tou >= 75) player.MutagenBonus("tou", 0.5);
-				//faster from 50-75
-				else player.MutagenBonus("tou", 1);
+			else
 				outputText("\n\nYour tough hide grows slightly thicker.");
-			}
 			//chance of less sensitivity
 			if (rand(2) == 0 && player.sens > 10) {
 				if (player.tou > 75) {
