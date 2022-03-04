@@ -431,7 +431,7 @@ private function etnaCome2Camp():void
 	}
 	outputText("Her examination of your camp done, Etna proceeds to make herself comfortable and settle down.\n\n");
 	outputText("\n\n<b>Before settling in, as if remembering something Etna pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
-	if (player.hasKeyItem("Radiant shard")){
+	if (player.hasKeyItem("Radiant shard") >= 0){
 		player.addKeyValue("Radiant shard",1,+1);
 	}
 	else player.createKeyItem("Radiant shard", 1,0,0,0);
