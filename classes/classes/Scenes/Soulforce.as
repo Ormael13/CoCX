@@ -292,6 +292,10 @@ use namespace CoC;
                 ++cnt;
                 outputText("\nP.Amily");
             }
+            if (flags[kFLAGS.AMILY_FOLLOWER] == 2) {
+                ++cnt;
+                outputText("\nC.Amily");
+            }
             if (DivaScene.instance.status == -1) {
                 ++cnt;
                 outputText("\nDiva");
@@ -307,6 +311,14 @@ use namespace CoC;
             if (flags[kFLAGS.KIHA_FOLLOWER] == 1) {
                 ++cnt;
                 outputText("\nKiha");
+            }
+            if (flags[kFLAGS.CERAPH_FOLLOWER_PIERCING] == 1 || flags[kFLAGS.CERAPH_FOLLOWER_CARRY] == 1) {
+                ++cnt;
+                outputText("\nCeraph");
+            }
+            if (flags[kFLAGS.VAPULA_FOLLOWER] == 1) {
+                ++cnt;
+                outputText("\Vnapula");
             }
             if (cnt) {
                  outputText("\nReceived " + cnt + " shards.");
