@@ -324,7 +324,6 @@ public class MutationsLib
 		public static const RaijuCathodeEvolved:PerkType = mk("Raiju Cathode (Evolved)", "Salamander Adrenal Glands (Evolved)",
 				"Your Raiju Cathode provides an increase in speed by 25% and increase lust damage from weapons and natural weapons by 100%. Supercharged bonuses are twice as strong.").withBuffs({'spe.mult':0.25});
 		public static const RaijuCathodeFinalForm:PerkType = mk("Raiju Cathode (Final Form)", " Cathode (Final Form)",
-				".",
 				".");
 		public static const SalamanderAdrenalGlands:PerkType = mk("Salamander Adrenal Glands", "Salamander Adrenal Glands",
 				"Your Salamander adrenal glands are giving you slight boost to your natural stamina and libido.").withBuffs({'tou.mult':0.05,'lib.mult':0.05});
@@ -467,12 +466,10 @@ public class MutationsLib
 			}
 			function mutationsPeriNervSys():void{
 				MutationsList.push([ElvishPeripheralNervSys, ElvishPeripheralNervSysPrimitive, ElvishPeripheralNervSysEvolved]);
-				MutationsList.push([RaijuCathode, RaijuCathodePrimitive, RaijuCathodeEvolved]);
-			}
-			function mutationsCenNervSys():void{
 				MutationsList.push([EclipticMind, EclipticMindPrimitive, EclipticMindEvolved]);
 				MutationsList.push([RatatoskrSmarts, RatatoskrSmartsPrimitive, RatatoskrSmartsEvolved]);
 				MutationsList.push([SharkOlfactorySystem, SharkOlfactorySystemPrimitive, SharkOlfactorySystemEvolved]);
+				MutationsList.push([RaijuCathode, RaijuCathodePrimitive, RaijuCathodeEvolved]);
 			}
 			function mutationsBone():void{
 				MutationsList.push([LizanMarrow, LizanMarrowPrimitive, LizanMarrowEvolved]);
@@ -535,11 +532,8 @@ public class MutationsLib
 				case "Bone":
 					mutationsBone();
 					break;
-				case "PNerv/Sys":
+				case "Nerv/Sys":
 					mutationsPeriNervSys();
-					break;
-				case "CNerv/Sys":
-					mutationsCenNervSys();
 					break;
 				case "Thyroid":
 					mutationsThyroidGlands();
@@ -567,7 +561,6 @@ public class MutationsLib
 					mutationsEyes();
 					mutationsBone();
 					mutationsPeriNervSys();
-					mutationsCenNervSys();
 					mutationsThyroidGlands();
 					mutationsParaThyroidGlands();
 					mutationsAdaptations();
@@ -633,7 +626,7 @@ public class MutationsLib
 				EasterBunnyEggBag.requireBallsMutationSlot().requirePerk(PerkLib.EasterBunnyBalls).requireCustomFunction(function (player:Player):Boolean {
 					return player.easterbunnyScore() >= 12;
 				}, "Easter Bunny race and Easter bunny balls.");
-				EclipticMind.requireCentralNervSysMutationSlot().requireCustomFunction(function (player:Player):Boolean {
+				EclipticMind.requirePeripheralNervSysMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.alicornScore() >= 12 || player.unicornScore() >= 12 || player.alicornkinScore() >= 10 || player.unicornkinScore() >= 10;
 				}, "Unicorn or Bicorn race");
 				ElvishPeripheralNervSys.requirePeripheralNervSysMutationSlot().requirePerk(PerkLib.ElvenSense).requireCustomFunction(function (player:Player):Boolean {
@@ -745,16 +738,16 @@ public class MutationsLib
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.pigScore() >= 4;
 						}, "Pig/Boar race");
-				RaijuCathode.requireCentralNervSysMutationSlot().requireCustomFunction(function (player:Player):Boolean {
+				RaijuCathode.requirePeripheralNervSysMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.raijuScore() >= 8;
-				}, "raiju race");
-				RatatoskrSmarts.requireCentralNervSysMutationSlot().requirePerk(PerkLib.KnowledgeIsPower).requireCustomFunction(function (player:Player):Boolean {
+				}, "Raiju race");
+				RatatoskrSmarts.requirePeripheralNervSysMutationSlot().requirePerk(PerkLib.KnowledgeIsPower).requireCustomFunction(function (player:Player):Boolean {
 					return player.ratatoskrScore() >= 4;
 				}, "Squirrel/Ratatoskr race");
 				SalamanderAdrenalGlands.requireAdrenalGlandsMutationSlot().requirePerk(PerkLib.Lustzerker).requireCustomFunction(function (player:Player):Boolean {
 					return player.salamanderScore() >= 8 || player.phoenixScore() >= 10;
 				}, "Salamander race");
-				SharkOlfactorySystem.requireCentralNervSysMutationSlot().requireCustomFunction(function (player:Player):Boolean {
+				SharkOlfactorySystem.requirePeripheralNervSysMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.sharkScore() >= 8;
 				}, "Shark race");
 				ScyllaInkGlands.requirePerk(PerkLib.InkSpray).requireCustomFunction(function (player:Player):Boolean {
@@ -953,7 +946,7 @@ public class MutationsLib
 						}, "Pig/Boar race");
 				RaijuCathodePrimitive.requireLevel(30).requirePerk(RaijuCathode).requireCustomFunction(function (player:Player):Boolean {
 					return player.raijuScore() >= 9;
-				}, "raiju race");
+				}, "Raiju race");
 				RatatoskrSmartsPrimitive.requireLevel(30).requirePerk(RatatoskrSmarts).requireCustomFunction(function (player:Player):Boolean {
 					return player.ratatoskrScore() >= 8;
 				}, "Squirrel/Ratatoskr race");
@@ -1148,7 +1141,7 @@ public class MutationsLib
 						}, "Pig/Boar race");
 				RaijuCathodeEvolved.requireLevel(60).requirePerk(RaijuCathodePrimitive).requireCustomFunction(function (player:Player):Boolean {
 					return player.raijuScore() >= 10;
-				}, "raiju race")
+				}, "Raiju race")
 				RatatoskrSmartsEvolved.requireLevel(60).requirePerk(RatatoskrSmartsPrimitive).requireCustomFunction(function (player:Player):Boolean {
 					return player.ratatoskrScore() >= 12;
 				}, "Squirrel/Ratatoskr race");
