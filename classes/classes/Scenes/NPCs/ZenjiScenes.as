@@ -29,6 +29,7 @@ import coc.view.ButtonDataList;
 		public static var ZenjiFigMulti:Number;
 		public static var ZenjiSleepCount:int;
 		public static var ZenjiLoverDays:int;
+		public static var ZenjiLoverDaysTracker:int;
 		public static var ZenjiTalkCount:int;
 
 
@@ -47,6 +48,7 @@ import coc.view.ButtonDataList;
 			ZenjiFigMulti = 0;
 			ZenjiSleepCount = 0;
 			ZenjiLoverDays = 0;
+			ZenjiLoverDaysTracker = 0;
 			ZenjiTalkCount = 0;
 		}
 
@@ -62,6 +64,7 @@ import coc.view.ButtonDataList;
 				"ZenjiFigMulti": ZenjiFigMulti,
 				"ZenjiSleepCount": ZenjiSleepCount,
 				"ZenjiLoverDays": ZenjiLoverDays,
+				"ZenjiLoverDaysTracker" : ZenjiLoverDaysTracker,
 				"ZenjiTalkCount": ZenjiTalkCount
 			};
 		}
@@ -78,6 +81,7 @@ import coc.view.ButtonDataList;
 				ZenjiFigMulti = valueOr(o["ZenjiFigMulti"], 0);
 				ZenjiSleepCount = o["ZenjiSleepCount"];
 				ZenjiLoverDays = o["ZenjiLoverDays"];
+				ZenjiLoverDaysTracker = o["ZenjiLoverDaysTracker"];
 				ZenjiTalkCount = o["ZenjiTalkCount"];
 			} else {
 				// loading from old save
@@ -1249,6 +1253,7 @@ import coc.view.ButtonDataList;
 			outputText("Zenji takes a deep sigh, \"<i>Dere was dis… one girl… Before I met you, she caught me within her hands, she… she only wanted me for what I was… my body... She did not care fa who I was… But… Dat’s behind me now. When I am wit you de tings she did ta me doesn’t hurt as much anymore and I just want ta protect you so dat you never hafta be hurt or abused like I once was.</i>\"\n\n");
 			outputText("Zenji spends the rest of the hour talking about new experiences in the camp and other things about himself that he can recall.\n\n");
 			if (player.statusEffectv1(StatusEffects.ZenjiPreparationsList) < 15) player.addStatusValue(StatusEffects.ZenjiPreparationsList, 1, 1);
+			ZenjiTalkCount++;
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -1260,6 +1265,7 @@ import coc.view.ButtonDataList;
 			outputText("He pauses for a moment, \"<i>But de other trolls in my village didn't like me too much, I caused trouble, I sought competition, when dey wanted peace and quiet, so I left. I didn't see many oda trolls out dere, but they’re probably not in de bog where I spent most of my time.</i>\"\n\n");
 			outputText("Zenji spends the rest of the hour talking about trolls and other nuances about his kind from the other trolls.\n\n");
 			if (player.statusEffectv1(StatusEffects.ZenjiPreparationsList) < 15) player.addStatusValue(StatusEffects.ZenjiPreparationsList, 1, 1);
+			ZenjiTalkCount++;
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -1273,6 +1279,7 @@ import coc.view.ButtonDataList;
 			outputText("\"<i>I just had ta be wit you, dere's no oda way to say it, I need ta be close ta ya, I hafta protect you, you are just so... so helpless, you are special ta me, I want ta be dere fa ya.</i>\" He places a hand on your shoulder, \"<i>I don't ever want to leave you [name].</i>\"\n\n");
 			outputText("You spend the rest of the hour talking about yourself and sharing old stories back in Ingnam with Zenji.\n\n");
 			if (player.statusEffectv1(StatusEffects.ZenjiPreparationsList) < 15) player.addStatusValue(StatusEffects.ZenjiPreparationsList, 1, 1);
+			ZenjiTalkCount++;
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -1286,6 +1293,7 @@ import coc.view.ButtonDataList;
 			outputText("You smile at him as you spend some time with your children, Zenji is a very tender father as you’ve grown to expect. His gruff exterior can mask just how caring and gentle he truly is. His presence is soft as the two of you play with your children. Despite his masculine figure and beefy body, he has a gentle touch and it shows with the way he treats your children.\n\n");
 			outputText("After nearly an hour of spending time with your children, you decide it’s best to continue with your day for now, but you’ll be sure that Zenji won't be a lonely father to the children.\n\n");
 			if (player.statusEffectv1(StatusEffects.ZenjiPreparationsList) < 15) player.addStatusValue(StatusEffects.ZenjiPreparationsList, 1, 1);
+			ZenjiTalkCount++;
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -1313,6 +1321,7 @@ import coc.view.ButtonDataList;
 			outputText("Once he’s done, Zenji takes an extended glance at the shredded pieces of fur. \"<i>I can always mend dem back together… Or just hunt some more animals ta make another pair... I really should do dat soon… I like ta store tings in de little pockets I make within dem.</i>\"\n\n");
 			outputText("After a brief pause, Zenji eyes you up and down once more, \"<i>Well, I know ya wanna get closer,</i>\" He states, showing off several poses for you. Making sure nothing is obstructed from view. From his toned back, muscular traps, thick arms, and legs, Zenji makes sure to show off every inch of his massively muscular body. \"<i>So why don’t I give ya front row seats to my next workout?</i>\"\n\n");
 			if (player.statusEffectv1(StatusEffects.ZenjiPreparationsList) < 15) player.addStatusValue(StatusEffects.ZenjiPreparationsList, 1, 1);
+			ZenjiTalkCount++;
 			menu();
 			addButton(1, "Yes", loverZenjiShowoffYes);
 			addButton(3, "No", loverZenjiShowoffNo);
@@ -1480,6 +1489,7 @@ import coc.view.ButtonDataList;
 			outputText("You thank him before dismissing yourself. The warmth of his presence echoes within your body, reminding you of your connection with him.\n\n");
 			dynStats("cor", -0.5);
 			if (player.statusEffectv1(StatusEffects.ZenjiPreparationsList) < 15) player.addStatusValue(StatusEffects.ZenjiPreparationsList, 1, 1);
+			ZenjiTalkCount++;
 			doNext(loverZenjiTalks);
 			eachMinuteCount(5);
 		}
@@ -1495,6 +1505,7 @@ import coc.view.ButtonDataList;
 			if (player.statusEffectv1(StatusEffects.ZenjiPreparationsList) < 15) player.addStatusValue(StatusEffects.ZenjiPreparationsList, 1, 1);
 			ZenjiFood = true;
 			inventory.takeItem(consumables.ZENJI_H, loverZenjiTalks);
+			ZenjiTalkCount++;
 			eachMinuteCount(5);
 		}
 		

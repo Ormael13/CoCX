@@ -14,6 +14,7 @@ import classes.Items.ConsumableLib;
 import classes.Items.Consumables.SimpleConsumable;
 import classes.Scenes.Areas.Forest.WoodElvesHuntingParty;
 import classes.Scenes.Areas.HighMountains.TempleOfTheDivine;
+import classes.Scenes.NPCs.ZenjiScenes;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.Places.TrollVillage;
 import classes.Scenes.Places.WoodElves;
@@ -233,6 +234,10 @@ public class Camp extends NPCAwareContent{
 			hideMenus();
 			SceneLib.trollVillage.yenza.YenzaBeratePart2();
 			return;
+		}
+		if (flags[kFLAGS.ZENJI_PROGRESS] >= 11 && time.days != ZenjiScenes.ZenjiLoverDaysTracker){
+			ZenjiScenes.ZenjiLoverDays++;
+			ZenjiScenes.ZenjiLoverDaysTracker = time.days;
 		}
 		if (TrollVillage.ZenjiMoneyHelp > 0) TrollVillage.ZenjiMoneyHelp -= 1;
 		if (!marbleScene.marbleFollower()) {
