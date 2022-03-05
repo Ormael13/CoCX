@@ -24,7 +24,7 @@ public class TrollVillage extends BaseContent implements SaveableState{
     public static var ZenjiFollowing:Boolean;
     public static var ZenjiBerated:Boolean;
     public static var YenzaLockdown:int;
-    public static var ZenjiTrollVillageTimeChk:int;
+    public static var ZenjiTrollVillageTimeChk:Number;
     public static var YenzaUnlocked:int;
     public static var JabalaUnlocked:Boolean;
     public static var KaljiUnlocked:int;

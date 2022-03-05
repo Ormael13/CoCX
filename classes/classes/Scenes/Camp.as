@@ -14,6 +14,7 @@ import classes.Items.ConsumableLib;
 import classes.Items.Consumables.SimpleConsumable;
 import classes.Scenes.Areas.Forest.WoodElvesHuntingParty;
 import classes.Scenes.Areas.HighMountains.TempleOfTheDivine;
+import classes.Scenes.NPCs.ZenjiScenes;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.Places.TrollVillage;
 import classes.Scenes.Places.WoodElves;
@@ -229,6 +230,16 @@ public class Camp extends NPCAwareContent{
 			campUniqueScenes.playsRathazulAndSoulgemScene();
 			return;
 		}
+		if (TrollVillage.ZenjiVillageStage == 2 && TrollVillage.ZenjiTrollVillageTimeChk == time.days && time.hours >= 8) {
+			hideMenus();
+			SceneLib.trollVillage.yenza.YenzaBeratePart2();
+			return;
+		}
+		if (flags[kFLAGS.ZENJI_PROGRESS] >= 11 && time.days != ZenjiScenes.ZenjiLoverDaysTracker){
+			ZenjiScenes.ZenjiLoverDays++;
+			ZenjiScenes.ZenjiLoverDaysTracker = time.days;
+		}
+		if (TrollVillage.ZenjiMoneyHelp > 0) TrollVillage.ZenjiMoneyHelp -= 1;
 		if (!marbleScene.marbleFollower()) {
 			if (flags[kFLAGS.MARBLE_LEFT_OVER_CORRUPTION] == 1 && player.cor <= 40) {
 				hideMenus();
@@ -1597,15 +1608,7 @@ public class Camp extends NPCAwareContent{
 				buttons.add("Samirah", SceneLib.samirah.samirahMainCampMenu);
 			}
 			//Zenji
-			if (TrollVillage.ZenjiVillageStage == 2) {
-				if (TrollVillage.ZenjiTrollVillageTimeChk == 0) {
-					TrollVillage.ZenjiTrollVillageTimeChk = model.time.days + 1;
-				} else if (TrollVillage.ZenjiTrollVillageTimeChk < model.time.days && TrollVillage.ZenjiTrollVillageTimeChk != -1) {
-					SceneLib.trollVillage.yenza.YenzaBeratePart2();
-				}
-			}
-			if (TrollVillage.ZenjiMoneyHelp > 0) TrollVillage.ZenjiMoneyHelp -= 1;
-			if (flags[kFLAGS.ZENJI_PROGRESS] == 11) {
+			if (flags[kFLAGS.ZENJI_PROGRESS] == 11 && TrollVillage.ZenjiVillageStage != 2) {
 				if (model.time.hours >= 7 && model.time.hours <= 18) {
 					if (slavesCount() > 0 && rand(5) == 0) outputText("Zenji is keeping a close eye on some of your more corrupt camp members, ensuring that they don’t cause any harm.");
 					else if (player.statusEffectv2(StatusEffects.ZenjiModificationsList) >= 998700 && rand(5) == 0) outputText("Zenji is around your [camp], it’s impossible to miss him as he strokes his length as cascades of cum leak from his erection.");
@@ -1845,8 +1848,8 @@ public class Camp extends NPCAwareContent{
 				outputText("Neisa is hanging by a tree next to the [camp] practicing her swordplay on a makeshift dummy for the next expedition.\n\n");
 				buttons.add("Neisa", SceneLib.neisaFollower.neisaCampMenu).hint("Visit Neisa the shield maiden.");
 			}
-			//Zenji folower
-			if (flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9) {
+			//Zenji follower
+			if ((flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9) && TrollVillage.ZenjiVillageStage != 2) {
 				if (model.time.hours >= 7 && model.time.hours <= 18) {
 					if (rand(3) == 0) outputText("Zenji is around your [camp], you see him currently relaxing atop a tree.");
 					else {

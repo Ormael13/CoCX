@@ -1055,9 +1055,9 @@ import coc.xxc.StoryContext;
 				}
 			}
 			if (!isChecking){
-				if (page!=0 || total>12) {
-					button(12).show("Prev Page", curry(menuGen, menuItems,page - 1,  back, sort, isChecking)).disableIf(page == 0);
-					button(13).show("Next Page", curry(menuGen, menuItems,page + 1,  back, sort, isChecking)).disableIf(!next);
+				if (total/3 > 12) {
+					addButton(12,"Prev Page", curry(menuGen, menuItems,page - 1,  back, sort, isChecking));
+					addButton(13, "Next Page", curry(menuGen, menuItems,page + 1,  back, sort, isChecking));
 				}
 				if (back != null) button(14).show("Back",back);
 			}
