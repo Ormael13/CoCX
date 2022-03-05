@@ -1222,7 +1222,10 @@ import coc.view.ButtonDataList;
 			addButton(6, "Comfort", loverZenjiComfort).hint("Spend a tender moment with him. Now with free headpats.");
 			addButton(7, "Food", loverZenjiFood).hint("Zenji seems like he has something he wants to give you.");
 			button(7).disableIf(ZenjiFood, "Zenji does not have any more food to offer you right now, ask again tomorrow.");
-			if (TrollVillage.ZenjiTrollVillageTimeChk == -1) addButton(8, "His Problems", zenjiVillageProblems);
+			if (TrollVillage.ZenjiTrollVillageTimeChk == -1 ) {
+				if (TrollVillage.ZenjiVillageStage < 4) addButton(3, "His Problems", zenjiVillageProblems);
+				else addButton(3, "His Problems", zenjiVillageProblems2);
+			}
 			if (ZenjiMarriagePreCheck()) {
 				if (player.hasItem(jewelries.ENDGRNG, 1)){
 					addButton (9, "Propose", ZenjiProposalScene).hint("Zenji seems to have strong feelings for you, perhaps you should propose with the engagement ring you have?\n");
