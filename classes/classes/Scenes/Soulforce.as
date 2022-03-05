@@ -45,10 +45,12 @@ import classes.Scenes.NPCs.RyuBiDragon;
 import classes.Scenes.NPCs.Sonya;
 import classes.Scenes.NPCs.Tyrantia;
 import classes.Scenes.NPCs.Zenji;
+import classes.Scenes.NPCs.ZenjiScenes;
 import classes.Scenes.Places.Boat.Marae;
 import classes.Scenes.Places.HeXinDao.AdventurerGuild;
 import classes.Player;
 import classes.Items.*;
+import classes.Scenes.Places.TrollVillage;
 import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 import classes.Stats.Buff;
 
@@ -276,6 +278,7 @@ public class Soulforce extends BaseContent
 		addButton(2, "Fix Shards", cheatFixShards).hint("Check player's quest and give the deserved shards");
 		addButton(3, "Add Shard", cheatAddShard).hint("Add 1 radiant shard");
 		addButton(4, "Remove Shard", cheatRemoveShard).hint("Remove 1 radiant shard");
+		addButton(5,"ZenjiQ", ZenjiQ).hint("Zenji Expac 2 debug tool");
 		addButton(14, "Back", submenucuzwhynot);
 	}
 
@@ -318,7 +321,7 @@ public class Soulforce extends BaseContent
 		}
 		if (flags[kFLAGS.VAPULA_FOLLOWER] == 1) {
 			++cnt;
-			outputText("\Vnapula");
+			outputText("\nVapula");
 		}
 		if (cnt) {
 			outputText("\nReceived " + cnt + " shards.");
@@ -329,150 +332,45 @@ public class Soulforce extends BaseContent
 		cheatpart3();
 	}
 
-	public function cheatAddShard(cnt:int = 1):void {
-		if (player.hasKeyItem("Radiant shard") >= 0)
-			player.addKeyValue("Radiant shard", 1, cnt);
-		else
-			player.createKeyItem("Radiant shard", cnt, 0, 0, 0);
-		outputText("\n\n<b>You currently have "+ player.keyItemv1("Radiant shard") + " radiant shards.</b>");
-		cheatpart3();
-	}
-  
-		public function SoulforceCheats():void {
+	public function ZenjiQ():void{
+		clearOutput();
+		outputText("Zenji Debug Menu: \n");
+		outputText("ZenjiVillageStage: " + TrollVillage.ZenjiVillageStage + "\n" +
+		"JabalaUnlocked: " + TrollVillage.JabalaUnlocked + "\n" +
+		"YenzaUnlocked: " + TrollVillage.YenzaUnlocked + "\n" +
+		"KaljiUnlocked: " + TrollVillage.KaljiUnlocked + "\n" +
+		"ZenjiFollowing: " + TrollVillage.ZenjiFollowing + "\n" +
+		"KuruUnlocked: " + TrollVillage.KuruUnlocked + "\n" +
+		"HalkanoUnlocked: " + TrollVillage.HalkanoUnlocked + "\n" +
+		"ZenjiBerated: " + TrollVillage.ZenjiBerated + "\n" +
+		"YenzaLockdown: " + TrollVillage.YenzaLockdown + "\n" +
+		"ZenjiTrollVillageTimeChk: " + TrollVillage.ZenjiTrollVillageTimeChk + "\n" +
+		"YubiUnlocked: " + TrollVillage.YubiUnlocked + "\n" +
+		"KaljiMBJDeny: " + TrollVillage.KaljiMBJDeny + "\n" +
+		"ZenjiMoneyHelp: " + TrollVillage.ZenjiMoneyHelp + "\n" +
+		"JabalaLoveChat: " + TrollVillage.JabalaLoveChat + "\n" +
+		"ZenjiMarriageDress: " + TrollVillage.ZenjiMarriageDress + "\n"+
+		"Zenji Marriage Vars: \n" +
+		"ZenjiSleepCount: " + ZenjiScenes.ZenjiSleepCount + "\n" +
+		"ZenjiTalkCount: " + ZenjiScenes.ZenjiTalkCount + "\n" +
+		"ZenjiLoverDays: " + ZenjiScenes.ZenjiLoverDays
+		);
+		menu();
+		addButton(0, "Reset EventLine", reset).hint("Reset chain.");
+		addButton(1, "Force Village", villageNow).hint("Force encounters village");
+		addButton(14, "Leave", cheatpart3);
+
+		function reset ():void{
 			clearOutput();
-			outputText("Collection of current used cheats that with time will be removed or replaced by new ones.");
-			outputText("\n\nAscension points: " + player.ascensionPerkPoints + "");
-			menu();
-			addButton(0, "StatsAdj/Ascen", StatsAscensionMenu).hint("For more precisely adjusting each of the 8 main stats and Ascension related stuff.");
-			addButton(1, "P/G/XP/LvL", PerksGemsEXPLvL).hint("Adding/Removing perk points and adding gems/exp/lvl.");
-			addButton(2, "Equip", EquipmentMenu).hint("For creating various equipment items for tests.");
-			addButton(3, "NonEquip", NonEquipmentMenu).hint("For creating various non-equipment items for tests.");
-			addButton(4, "Materials", MaterialMenu).hint("For creating various materials for tests.");
-			addButton(5, "Enemies", EnemiesMenu).hint("For spawning various enemies to test fight them.");
-			addButton(6, "Camp NPC's", FasterOrInstantCampNPCRecruitment).hint("Menu to speed up recruitment of camp npc's due to testing needs.");
-			addButton(7, "Body State", BodyStateMenu).hint("For more precisely adjusting a few other body values or parts than Stats Adj option.");
-			if (player.hasPerk(PerkLib.Metamorph)) addButton(8, "MetamorphFull", AllMetamorphOptionsUnlock).hint("Unlock all Metamorph options.");
-			addButton(9, "FixJiangshi", jiangshiBuggedItemsCleanUpCrew0).hint("Shit! Here we go Again! Fixing Jiangshi! (better use it only once or may be some bugs i not plan to account for in case of using this more than once - i not blocked using it more than once so belive ppl will be reasonable to not click like mad this)");
-			addButton(10, "-2-", submenucuzwhynot).hint("Other test option that don't fit anywhere else and etc.");
-			addButton(11, "Test dynamic stat", TestDynamicStats).hint("Test Dynamic stats.");
-			addButton(12, "Atlach Test", AddMaxBackpack6).hint("Trigger Atlach scenes.");
-			addButton(13, "BodyPartEditor", SceneLib.debugMenu.bodyPartEditorRoot);
-			addButton(14, "Back", accessSoulforceMenu);
-		}
-		public function submenucuzwhynot():void {
-			menu();
-			addButton(0, "ClickItTwice", AddMaxBackpack00).hint("Golem Army and Ascension: Additional Organ Mutation/Prestige perks correction pre global save upgrade on new public build.");
-			addButton(1, "Instant-house", AddMaxBackpack01).hint("Instant-house + bed");
-			addButton(2, "Hex-Mate", AddMaxBackpack02).hint("Hex-Mate");
-			addButton(3, "WendigoTrigger", AddMaxBackpack4).hint("Trigger Wendigo transformation. (Without active Wendigo Psychosis will do nothing ;) )");
-			if (!player.hasStatusEffect(StatusEffects.ZenjiZList)) addButton(4, "ClickItOnce", AddMaxBackpack3).hint("Fixing Lover Zenji missing one status effect needed for his sex scenes menu.");
-			addButton(5, "QuestItBag", AddMaxBackpack2).hint("Giving missing Quest Items Bag as part of Adventure Guild welcome/promotion package.");
-			addButton(6, "RevertCabin", RevertCabinProgress).hint("Revert cabin flag back to value 2 (for bug fix test)");
-			addButton(7, "Gargoyle", GargoyleMenu).hint("To Be or Not To Be Gargoyle that is a question.");
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] > 0) addButton(8, ":Re", AddMaxBackpack5).hint("Rewind Evangeline.");
-			addButton(9, "ChimeraBodyUlt", ChimeraBodyUltimateStage).hint("Ultimate Stage of Chimera Body for tests and lulz. Now with on/off switch for more lulz.");
-			addButton(10, "All4HiddenPrestige", AddMaxBackpack03).hint("A11 th4t H1dd3n Prestige is Y0urs to T4ke!!!");
-			addButton(11, "PerkGalore1", PerkGalore1);
-			addButton(12, "PerkGalore2", PerkGalore2);
-			addButton(12, "-3-", cheatpart3).hint("new stuff");
-			addButton(14, "Back", SoulforceCheats);
-		}
-		public function cheatpart3():void {
-			menu();
-			if (flags[kFLAGS.MARRIAGE_FLAG] == 1) addButton(0, "ClickItOnce", AddMaxBackpack033).hint("Fix Marriage Unlock from Michiko for future clarity.");
-			addButton(1, "RemoveRP", cheatRemoveRP).hint("Remove Racial Paragon perk");
-            addButton(2, "Fix Shards", cheatFixShards).hint("Check player's quest and give the deserved shards");
-            addButton(3, "Add Shard", cheatAddShard).hint("Add 1 radiant shard");
-            addButton(4, "Remove Shard", cheatRemoveShard).hint("Remove 1 radiant shard");
-			addButton(14, "Back", submenucuzwhynot);
+			SceneLib.trollVillage.resetState();
+			outputText("All Parameters cleared!");
+			doNext(camp.doCamp);
 		}
 
-        public function cheatFixShards():void {
-            var cnt:int = 0;
-            clearOutput();
-            player.removeKeyItem("Radiant shard");
-            outputText("Received shards for: ")
-            if (flags[kFLAGS.AYANE_FOLLOWER] == 2) {
-                ++cnt;
-                outputText("\nP.Ayane");
-            }
-            if (flags[kFLAGS.AMILY_FOLLOWER] == 1) {
-                ++cnt;
-                outputText("\nP.Amily");
-            }
-            if (flags[kFLAGS.AMILY_FOLLOWER] == 2) {
-                ++cnt;
-                outputText("\nC.Amily");
-            }
-            if (DivaScene.instance.status == -1) {
-                ++cnt;
-                outputText("\nDiva");
-            }
-            if (flags[kFLAGS.ELECTRA_FOLLOWER] == 2) {
-                ++cnt;
-                outputText("\nElectra");
-            }
-            if (flags[kFLAGS.ETNA_FOLLOWER] == 2) {
-                ++cnt;
-                outputText("\nEtna");
-            }
-            if (flags[kFLAGS.KIHA_FOLLOWER] == 1) {
-                ++cnt;
-                outputText("\nKiha");
-            }
-            if (flags[kFLAGS.CERAPH_FOLLOWER_PIERCING] == 1 || flags[kFLAGS.CERAPH_FOLLOWER_CARRY] == 1) {
-                ++cnt;
-                outputText("\nCeraph");
-            }
-            if (flags[kFLAGS.VAPULA_FOLLOWER] == 1) {
-                ++cnt;
-                outputText("\Vnapula");
-            }
-            if (cnt) {
-                 outputText("\nReceived " + cnt + " shards.");
-                 cheatAddShard(cnt);
-            }
-            else
-                 outputText("\nNo shards, go complete quests :(");
-            cheatpart3();
-        }
+		function villageNow():void{
+			SceneLib.trollVillage.FirstEncountersoftheTrollKind();
+		}
 
-        public function cheatAddShard(cnt:int = 1):void {
-            if (player.hasKeyItem("Radiant shard") >= 0)
-				player.addKeyValue("Radiant shard", 1, cnt);
-			else
-                player.createKeyItem("Radiant shard", cnt, 0, 0, 0);
-		    outputText("\n\n<b>You currently have "+ player.keyItemv1("Radiant shard") + " radiant shards.</b>");
-            cheatpart3();
-        }
-
-        public function cheatRemoveShard():void {
-            if(player.keyItemv1("Radiant shard") == 1) 
-                player.removeKeyItem("Radiant shard");
-			else
-                player.addKeyValue("Radiant shard", 1, -1);
-		    outputText("\n\n<b>You currently have "+ player.keyItemv1("Radiant shard") +" radiant shards.</b>");
-            cheatpart3();
-        }
-
-        public function cheatRemoveRP():void {
-            clearOutput();
-            if (player.removePerk(PerkLib.RacialParagon)) {
-                ++player.perkPoints;
-                outputText("Done!");
-            }
-            else
-                outputText("No such perk.");
-            doNext(camp.doCamp);
-        }
-
-	public function cheatRemoveShard():void {
-		if(player.keyItemv1("Radiant shard") == 1)
-			player.removeKeyItem("Radiant shard");
-		else
-			player.addKeyValue("Radiant shard", 1, -1);
-		outputText("\n\n<b>You currently have "+ player.keyItemv1("Radiant shard") +" radiant shards.</b>");
-		cheatpart3();
 	}
 
 	public function cheatRemoveRP():void {
@@ -484,6 +382,24 @@ public class Soulforce extends BaseContent
 		else
 			outputText("No such perk.");
 		doNext(camp.doCamp);
+	}
+
+	public function cheatRemoveShard():void {
+		if(player.keyItemv1("Radiant shard") == 1)
+			player.removeKeyItem("Radiant shard");
+		else
+			player.addKeyValue("Radiant shard", 1, -1);
+		outputText("\n\n<b>You currently have "+ player.keyItemv1("Radiant shard") +" radiant shards.</b>");
+		cheatpart3();
+	}
+
+	public function cheatAddShard(cnt:int = 1):void {
+		if (player.hasKeyItem("Radiant shard") >= 0)
+			player.addKeyValue("Radiant shard", 1, cnt);
+		else
+			player.createKeyItem("Radiant shard", cnt, 0, 0, 0);
+		outputText("\n\n<b>You currently have "+ player.keyItemv1("Radiant shard") + " radiant shards.</b>");
+		cheatpart3();
 	}
 
 	private function jiangshiBuggedItemsCleanUpCrew0():void {
