@@ -2856,7 +2856,7 @@ import coc.view.ButtonDataList;
 		
 		//ZENJI MARRIAGE
 		public function ZenjiMarriagePreCheck():Boolean{
-			return player.hasKeyItem("Jabala's Charm") < 0 && TrollVillage.ZenjiVillageStage > 0 && ZenjiSleepCount >= 5 && ZenjiTalkCount >= 15 && ZenjiLoverDays >= 20;
+			return player.hasKeyItem("Jabala's Charm") > 0 && TrollVillage.ZenjiVillageStage > 0 && ZenjiSleepCount >= 5 && ZenjiTalkCount >= 15 && ZenjiLoverDays >= 20;
 		}
 		
 		public function ZenjiProposalScene():void{
@@ -2937,7 +2937,7 @@ import coc.view.ButtonDataList;
 					"\n" +
 					"You hear some idle chatter outside for a moment, but you’re unsure of what exactly they are talking about.\n" +
 					"\n" +
-					"Zenji turns to you, he pulls your face towards him, “I know I have not said it enough times, but… Dere’s someting I really like about your eyes… [pceyecolor] is a really good look on ya, [name]. I could just spend all day staring into dem.”\n" +
+					"Zenji turns to you, he pulls your face towards him, “I know I have not said it enough times, but… Dere’s someting I really like about your eyes… [eyecolor] is a really good look on ya, [name]. I could just spend all day staring into dem.”\n" +
 					"\n" +
 					"You look back into his deep-set, ashen green eyes. His gaze is strong, giving off a sense of comfort and safety. Zenji gently caresses your face for a moment before you hear the door open and close followed by footsteps.\n" +
 					"\n" +
@@ -3512,7 +3512,7 @@ import coc.view.ButtonDataList;
 						"You laugh quietly to yourself, is this what they heard earlier from you two? It’s nice to know that Zenji’s parents still have that fire in their relationship, you hope that your relationship will remain strong like theirs.\n" +
 						"\n" +
 						"You turn to face Zenji, he unconsciously pulls you closer to him as you drift back to sleep in his embrace.\n");
-				outputText("<b>[Next Morning]</b>");
+				outputText("<b>Next Morning</b>");
 				outputText("You wake up the next morning, as you open your eyes your face is still nestled in Zenji's chest tuft. Daylight pours into the room and you give a small yawn and look up at Zenji, his eyes are already resting upon your face.\n" +
 						"\n" +
 						"\"Good morning [name] Sleep well?\" He asks, giving you a gentle smile.\n" +
@@ -3563,7 +3563,7 @@ import coc.view.ButtonDataList;
 						"You laugh quietly to yourself, is this what they heard earlier from you two? It’s nice to know that Zenji’s parents still have that fire in their relationship, you hope that your relationship will remain strong like theirs.\n" +
 						"\n" +
 						"You turn to face Zenji, he unconsciously pulls you closer to him as you drift back to sleep in his embrace.\n");
-				outputText("<b>[Next Morning]</b>");
+				outputText("<b>Next Morning</b>");
 				outputText("You wake up the next morning, as you open your eyes your face is still nestled in Zenji's chest tuft between his manly pectorals. Daylight pours into the room and you give a small yawn and look up at Zenji, his eyes are already resting upon your face.\n" +
 						"\n" +
 						"\"Good morning [name]. Sleep well?\" He asks, giving you a gentle smile.\n" +
@@ -3614,7 +3614,7 @@ import coc.view.ButtonDataList;
 						"You laugh quietly to yourself, is this what they heard earlier from you two? It’s nice to know that Zenji’s parents still have that fire in their relationship, you hope that your relationship will remain strong like theirs.\n" +
 						"\n" +
 						"You turn to face Zenji, he unconsciously pulls you closer to him as you drift back to sleep in his embrace.\n");
-				outputText("<b>[Next Morning]</b>");
+				outputText("<b>Next Morning</b>");
 				outputText("You wake up the next morning, as you open your eyes your face is resting against Zenji’s muscular pecs, comfortably nestled within his chest tuft. Daylight pours into the room and you give a small yawn and look up at Zenji, his eyes are resting upon your face.\n" +
 						"\n" +
 						"\"Good morning [name]. Sleep well?\" He asks, giving you a gentle smile.\n" +
@@ -3650,7 +3650,7 @@ import coc.view.ButtonDataList;
 						"You say your goodbyes to Jabala and Halkano, assuring them that you will return soon as you return to your camp, ready to live your life with your newlywed husband.\n");
 			}
 			flags[kFLAGS.MARRIAGE_FLAG] = "Zenji";
-			var timeShift:int = (24 - model.time.hours) + 8
+			var timeShift:int = (24 - time.hours) + 8
 			doNext(createCallBackFunction(camp.returnToCamp,timeShift));
 		}
 	}
