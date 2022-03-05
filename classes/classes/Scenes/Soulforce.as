@@ -272,7 +272,7 @@ use namespace CoC;
 			menu();
 			if (flags[kFLAGS.MARRIAGE_FLAG] == 1) addButton(0, "ClickItOnce", AddMaxBackpack033).hint("Fix Marriage Unlock from Michiko for future clarity.");
 			addButton(1, "RemoveRP", cheatRemoveRP).hint("Remove Racial Paragon perk");
-			addButton(2,"ZenjiQ", ZenjiQ).hint("Zenji Expac 2 debug tool");
+			addButton(5,"ZenjiQ", ZenjiQ).hint("Zenji Expac 2 debug tool");
 			addButton(14, "Back", submenucuzwhynot);
 		}
 
