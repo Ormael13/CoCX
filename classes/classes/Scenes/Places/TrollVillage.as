@@ -34,6 +34,7 @@ public class TrollVillage extends BaseContent implements SaveableState{
     public static var KaljiMBJDeny:int;
     public static var ZenjiMoneyHelp:int;
     public static var JabalaLoveChat:Boolean;
+    public static var ZenjiSleep:Boolean;
     public static var ZenjiMarriageDress:int;
 
     public function stateObjectName():String {
@@ -54,6 +55,7 @@ public class TrollVillage extends BaseContent implements SaveableState{
         KaljiMBJDeny = 0;
         ZenjiMoneyHelp = 0;
         JabalaLoveChat = false;
+        ZenjiSleep = false;
         ZenjiMarriageDress = 0;
 
     }
@@ -73,6 +75,7 @@ public class TrollVillage extends BaseContent implements SaveableState{
             "KaljiMBJDeny": KaljiMBJDeny,
             "ZenjiMoneyHelp": ZenjiMoneyHelp,
             "JabalaLoveChat": JabalaLoveChat,
+            "ZenjiSleep": ZenjiSleep,
             "ZenjiMarriageDress": ZenjiMarriageDress
         };
     }
@@ -92,6 +95,7 @@ public class TrollVillage extends BaseContent implements SaveableState{
             ZenjiTrollVillageTimeChk = o["ZenjiTrollVillageTimeChk"];
             ZenjiMoneyHelp = o["ZenjiMoneyHelp"];
             JabalaLoveChat = o["JabalaLoveChat"];
+            ZenjiSleep = o["ZenjiSleep"];
             ZenjiMarriageDress = o["ZenjiMarriageDress"];
         } else {
             // loading from old save

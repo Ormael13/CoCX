@@ -329,8 +329,12 @@ public class Yenza extends TrollVillageAbstractContent{
                 "If that’s what he wants you’ll leave him be.\n");
         outputText("Zenji has temporarily left the camp.");
         SceneLib.zenjiScene.zenjiHenchmanOption(true);
+        TrollVillage.ZenjiFollowing = false;
         TrollVillage.ZenjiVillageStage = 2;
-        if (flags[kFLAGS.SLEEP_WITH] == "Zenji") flags[kFLAGS.SLEEP_WITH] = "";
+        if (flags[kFLAGS.SLEEP_WITH] == "Zenji") {
+            flags[kFLAGS.SLEEP_WITH] = "";
+            TrollVillage.ZenjiSleep = true;
+        }
         TrollVillage.ZenjiTrollVillageTimeChk = time.days + 1;
         doNext(camp.returnToCampUseOneHour);
     }
@@ -358,7 +362,9 @@ public class Yenza extends TrollVillageAbstractContent{
                 "You begin to wonder if Zenji is ever going to return to you after that scene.\n")
         outputText(" Zenji has been removed from the game.");
         TrollVillage.ZenjiBerated = true;
-        if (flags[kFLAGS.SLEEP_WITH] == "Zenji") flags[kFLAGS.SLEEP_WITH] = "";
+        if (flags[kFLAGS.SLEEP_WITH] == "Zenji") {
+            flags[kFLAGS.SLEEP_WITH] = "";
+        }
         flags[kFLAGS.ZENJI_PROGRESS] = -1;
         doNext(camp.returnToCampUseOneHour);
     }
@@ -381,7 +387,12 @@ public class Yenza extends TrollVillageAbstractContent{
                 "\"When I’m with you it’s not so scary because I know you won’t hurt me. I love you, [name]. I love you so much...\"\n");
         TrollVillage.ZenjiTrollVillageTimeChk = -1;
         TrollVillage.ZenjiVillageStage = 3;
-        SceneLib.zenjiScene.zenjiHenchmanOption(true);
+        if (!TrollVillage.ZenjiFollowing){
+            SceneLib.zenjiScene.zenjiHenchmanOption(true);
+        }
+        if (TrollVillage.ZenjiSleep && flags[kFLAGS.SLEEP_WITH] == ""){
+            flags[kFLAGS.SLEEP_WITH] = "Zenji";
+        }
         doNext(camp.returnToCampUseOneHour);
     }
 }
