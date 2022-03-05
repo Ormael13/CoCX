@@ -139,7 +139,7 @@ import classes.internals.SaveableState;
 			}
 		}
 
-		public function LilyBringCamp():void {
+		public function Lilytalk():void {
 				clearOutput();
 				outputText("You ask Lily about her life in the swamp. She shrugs, looking around. <i>\"It’s nice for a Drider like me, although to be honest, the neighbors aren’t exactly ideal\".</i> She looks at you, a pained smile on her face. <i>\"I enjoy a good tussle or lay as much as the next gal, but...Those...Things aren’t even a good fuck. They’re all for tying you up, but they’ve got no finesse...Not to mention the dicks on them. I like a good lay, but they’re...Wrong\".</i> She looks down at herself. <i>\"Not that I can really talk...I became like them, living in the swamp.\"</i> \n\n");
 				outputText("You ask if she’d rather have you as a neighbor instead. <i>\"Well, of course, but I…\"</i> She freezes for a second. <i>\"Did you just ask me to come live with you?\"</i> You nod, giving her a smile. <i>\"Seriously?\"</i> She thinks for a moment. <i>\"I’m guessing there are others who live with you\".</i> You nod, and she gives you a serious look. <i>\"...They do not get to know\".</i> You tilt your head, confused, and she blushes, raising her voice. <i>\"I mean about us\".</i> You ask her why that matters, considering her...choice in attire. <i>\"...I mean about me being a raging submissive, you idiot\".</i>  \n\n"); 
