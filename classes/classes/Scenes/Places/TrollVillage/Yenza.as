@@ -10,6 +10,8 @@ import classes.Items.UndergarmentLib;
 import classes.Scenes.NPCs.ZenjiScenes;
 import classes.Scenes.SceneLib;
 import classes.Scenes.Places.TrollVillage;
+import classes.display.SpriteDb;
+
 public class Yenza extends TrollVillageAbstractContent{
     public function Yenza() {
     }
@@ -363,6 +365,7 @@ public class Yenza extends TrollVillageAbstractContent{
 
     public function YenzaBeratePart2():void{
         clearOutput();
+        spriteSelect(SpriteDb.s_zenji);
         outputText("While taking a moment to relax, you hear heavy footsteps approaching. You look over and see Zenji with a solemn look on his face.\n" +
                 "\n" +
                 "\"[name]... I’m… I’m sorry for dat… for what happened yesterday… I just… Dat girl, she’s put me through a lot and seeing her talk ta ya just broke me… It hurt a lot to see you wit her… It was as if she were coming after you as well… I guess I’m still an immature baby like she said. I can’t even control myself when I’m around her.\"\n" +

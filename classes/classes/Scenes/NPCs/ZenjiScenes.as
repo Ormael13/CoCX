@@ -1002,7 +1002,11 @@ import coc.view.ButtonDataList;
 			addButton(0, "Himself", followerZenjiTalksHimself).hint("Talk to Zenji about himself.");
 			addButton(1, "Trolls", followerZenjiTalksTrolls).hint("Talk to Zenji about trolls.");
 			addButton(2, "Yourself", followerZenjiTalksYourself).hint("Talk to Zenji about yourself.");
-			if (TrollVillage.ZenjiTrollVillageTimeChk == -1) addButton(3, "His Problems", zenjiVillageProblems);
+			if (TrollVillage.ZenjiTrollVillageTimeChk == -1 ) {
+				if (TrollVillage.ZenjiVillageStage < 4) addButton(3, "His Problems", zenjiVillageProblems);
+				else addButton(3, "His Problems", zenjiVillageProblems2);
+			}
+
 			addButton(14, "Back", followerZenjiMainCampMenu);
 		}
 		
@@ -1221,7 +1225,7 @@ import coc.view.ButtonDataList;
 			if (TrollVillage.ZenjiTrollVillageTimeChk == -1) addButton(8, "His Problems", zenjiVillageProblems);
 			if (ZenjiMarriagePreCheck()) {
 				if (player.hasItem(jewelries.ENDGRNG, 1)){
-					addButton (9, "Propose", ZenjiProposalScene, -9000,-9000,-9000,"Zenji seems to have strong feelings for you, perhaps you should propose with the engagement ring you have?\n");
+					addButton (9, "Propose", ZenjiProposalScene).hint("Zenji seems to have strong feelings for you, perhaps you should propose with the engagement ring you have?\n");
 				}
 				else{
 					addButtonDisabled(9, "Propose", "Zenji seems to have strong feelings for you, but you cannot propose without a proper engagement ring!\n");
@@ -2815,7 +2819,7 @@ import coc.view.ButtonDataList;
 					"\n" +
 					"You tell Zenji that everyone gets hurt, it’s impossible to keep someone safe forever. As a man, he shouldn’t be the one to take the burden for everything and remain silent about it. Hurting will only feel worse when you do it alone. It’s okay to be hurt, it will happen to everyone. At least then one will be able to know the good times and have something to look forward to. Being a man doesn’t mean he has to be stoic, being a man means being strong with others, and nobody should ridicule him for expressing himself.\n" +
 					"\n" +
-					"\"It’s not just dat, [pc]... I need to be a strong man… for you. I wanna protect ya, I need ta be able to be dere for you.\"\n" +
+					"\"It’s not just dat, [name]... I need to be a strong man… for you. I wanna protect ya, I need ta be able to be dere for you.\"\n" +
 					"\n" +
 					"You tell him that he can, but he shouldn’t let that cloud his judgment or isolate himself from you, himself, or others. He will always be your man, no matter what. You assure him that expressing how he feels and talking to you about his problems will never make him less of a man. He doesn’t need to push others away to keep himself safe.\n" +
 					"\n" +
@@ -2823,6 +2827,16 @@ import coc.view.ButtonDataList;
 					"\n" +
 					"He pulls you into his strong arms, clutching you closely against his chiseled body as his tail wraps around you. \"You have so much ta teach me, and I have so much ta learn about myself… Thank you…\" He whispers.\n");
 			TrollVillage.ZenjiVillageStage = 4;
+			doNext(playerMenu);
+		}
+
+		public function zenjiVillageProblems2():void{
+			clearOutput();
+			outputText("You ask Zenji if he's feeling better after venting to you.\n" +
+					"\n" +
+					"The burly troll sighs softly, \"Yes, [name]... I feel a bit better, thanks.\"\n" +
+					"\n" +
+					"He gives you a sincere grin, the sight warms you to your core. You feel like you can breathe a little easier as well knowing he's taken a weight off his chest.");
 			doNext(playerMenu);
 		}
 		

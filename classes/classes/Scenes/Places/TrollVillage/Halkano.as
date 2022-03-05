@@ -90,6 +90,7 @@ public class Halkano extends TrollVillageAbstractContent{
                 "\"Nice ta meetcha, [name].\" He replies. \"I’d like ta stay and chat, but… Speaking about ma wife, I just remembered dere’s someting I need ta get going back to.\" He says before quickly shoveling the rest of the salad into his mouth, getting up and exiting the building.\n" +
                 "\n" +
                 "Seeing that there’s not much left to do now, you decide to exit the dining hall.\n");
+        TrollVillage.HalkanoUnlocked = true;
         doNext(camp.returnToCampUseOneHour);
     }
 
