@@ -308,12 +308,14 @@ use namespace CoC;
 			menu();
 			addButton(0, "Reset EventLine", reset).hint("Reset chain.");
 			addButton(1, "Force Village", villageNow).hint("Force encounters village");
+			addButton(14, "Leave", cheatpart3);
 
 			function reset ():void{
 				clearOutput();
 				outputText("All Parameters cleared!")
 				SceneLib.trollVillage.resetState();
 				outputText("All Parameters cleared!");
+				doNext(camp.doCamp);
 			}
 
 			function villageNow():void{
