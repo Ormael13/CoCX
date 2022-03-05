@@ -165,6 +165,22 @@ public class CombatAbility extends BaseCombatContent {
 		name: 'Arousing',
 		desc: "This ability deals lust damage."
 	});
+	public static const TAG_WATER:int = EnumValue.add(AllTags, 11, 'WATER', {
+		name: 'Water',
+		desc: "This ability primary element is Water"
+	});
+	public static const TAG_WIND:int = EnumValue.add(AllTags, 12, 'WIND', {
+		name: 'Wind',
+		desc: "This ability primary element is Wind"
+	});
+	public static const TAG_EARTH:int = EnumValue.add(AllTags, 13, 'EARTH', {
+		name: 'Earth',
+		desc: "This ability primary element is Earth"
+	});
+	public static const TAG_ACID:int = EnumValue.add(AllTags, 14, 'ACID', {
+		name: 'Acid',
+		desc: "This ability primary element is Acid"
+	});
 	
 	/**
 	 * Unique id of this ability.

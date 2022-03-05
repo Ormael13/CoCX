@@ -3760,10 +3760,46 @@ public final class Mutations extends MutationsHelper {
                 player.createStatusEffect(StatusEffects.KnowsManaShield, 0, 0, 0, 0);
 				return;
             }
+            //Smart enough for Water Ball and doesnt have it
+            if (player.inte >= 55 && !player.hasStatusEffect(StatusEffects.KnowsWaterBall)) {
+                outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Water Ball.</b>");
+                player.createStatusEffect(StatusEffects.KnowsWaterBall, 0, 0, 0, 0);
+                return;
+            }
+            //Smart enough for Wind Bullet and doesnt have it
+            if (player.inte >= 55 && !player.hasStatusEffect(StatusEffects.KnowsWindBullet)) {
+                outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Wind Bullet.</b>");
+                player.createStatusEffect(StatusEffects.KnowsWindBullet, 0, 0, 0, 0);
+                return;
+            }
+            //Smart enough for Stalagmite and doesnt have it
+            if (player.inte >= 55 && !player.hasStatusEffect(StatusEffects.KnowsStalagmite)) {
+                outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Stalagmite.</b>");
+                player.createStatusEffect(StatusEffects.KnowsStalagmite, 0, 0, 0, 0);
+                return;
+            }
             //Smart enough for Clear Mind and doesnt have it
             if (player.inte >= 60 && !player.hasStatusEffect(StatusEffects.KnowsClearMind)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Clear Mind.</b>");
                 player.createStatusEffect(StatusEffects.KnowsClearMind, 0, 0, 0, 0);
+                return;
+            }
+            //Smart enough for Water Sphere and doesnt have it
+            if (player.inte >= 65 && !player.hasStatusEffect(StatusEffects.KnowsWaterSphere)) {
+                outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Water Sphere.</b>");
+                player.createStatusEffect(StatusEffects.KnowsWaterSphere, 0, 0, 0, 0);
+                return;
+            }
+            //Smart enough for Wind Blast and doesnt have it
+            if (player.inte >= 65 && !player.hasStatusEffect(StatusEffects.KnowsWindBlast)) {
+                outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Wind Blast.</b>");
+                player.createStatusEffect(StatusEffects.KnowsWindBlast, 0, 0, 0, 0);
+                return;
+            }
+            //Smart enough for Shatterstone and doesnt have it
+            if (player.inte >= 65 && !player.hasStatusEffect(StatusEffects.KnowsShatterstone)) {
+                outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Shatterstone.</b>");
+                player.createStatusEffect(StatusEffects.KnowsShatterstone, 0, 0, 0, 0);
                 return;
             }
             //Smart enough for  and doesnt have it
@@ -17376,4 +17412,4 @@ public final class Mutations extends MutationsHelper {
     }
 }
 }
-
+
