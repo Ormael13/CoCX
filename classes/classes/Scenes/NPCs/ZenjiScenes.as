@@ -3314,8 +3314,11 @@ import coc.view.ButtonDataList;
 			if (player.cockThatFits(45) > 0){
 				addButton(2, "Pitch Anal", ZenjiMarriageSexTime, 3, -9000, -9000, "Tooltip: Mount your husband the way he was meant to be");
 			}
-			else{
+			else if (player.hasCock()){
 				addButtonDisabled(2, "Pitch Anal", "Your dick(s) is too big to fit in your husband!");
+			}
+			else{
+				addButtonDisabled(2, "Pitch Anal", "You need a dick for this!");
 			}
 		}
 
