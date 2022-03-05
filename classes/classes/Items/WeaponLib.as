@@ -96,6 +96,7 @@ package classes.Items
 		public const MACGRSW:Weapon = new Weapon("Macgrsw","Mach.greatsword","Machine Greatsword","a Machine Greatsword","slash",19,4415,"This greatsword is half invention and half weapon. Instead of a sharp straight blade, the weapon’s sides are a set of metal teeth that constantly move in order to properly saw through flesh and more solid matter, creating grievous wounds. Very good for cutting down trees too.", "Large, Bleed100");
 		public const MASAMUN:Masamune = new Masamune();
 		public const MASTGLO:WeaponWithPerk = new WeaponWithPerk("MastGlo", "MasterGloves", "Master Gloves", "a Master Gloves", "punch", 0, 400, "These gloves belonged to Chi Chi. They seem to naturally strengthen the soulforce techniques of the user.", "Body Cultivator's Focus", PerkLib.BodyCultivatorsFocus, 0.4, 0, 0, 0, "","Gauntlet");
+		public const MGSWORD:MoonlightGreatsword = new MoonlightGreatsword();
 		public const MOONLIT:MoonlitSnow = new MoonlitSnow();
 		public const N_STAFF:NocturnusStaff = new NocturnusStaff();
 		public const NTWHIP :NineTailWhip = new NineTailWhip();

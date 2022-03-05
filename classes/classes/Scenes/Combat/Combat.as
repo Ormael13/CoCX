@@ -2883,7 +2883,7 @@ public class Combat extends BaseContent {
 
     internal function pickUpThrownWeapons():void {
         clearOutput();
-        outputText("You boldly approach enemy and instead of attacks you simply pick up some of the laying around thrown wepaons.");
+        outputText("You boldly approach enemy and instead of attacks you simply pick up some of the laying around thrown weapons.");
 		player.ammo += 5;
         wrathregeneration1();
         manaregeneration1();
@@ -3692,51 +3692,118 @@ public class Combat extends BaseContent {
 
     public function throwElementalAttack():void {
         var damage:Number = 0;
-        damage += player.str;
-        damage += ghostStrength();
-        damage += scalingBonusStrength() * 0.4;
-        if (player.hasPerk(PerkLib.Telekinesis)){
-            damage += player.inte;
-            damage += scalingBonusIntelligence() * 0.4;
-        }
-        if (damage < 20) damage = 20;
-        if (player.hasPerk(PerkLib.DeadlyThrow)) damage += player.spe;
-		damage *= 1.5;
-		damage *= (1 + (0.01 * masteryThrowingLevel()));
-        //Determine if critical hit!
-        var crit:Boolean = false;
-        var critChance:int = 5;
-        var critDmg:Number = 1.75;
-        critChance += combatPhysicalCritical();
-        if (player.hasPerk(PerkLib.VitalShot) && player.inte >= 50) critChance += 10;
-        if (player.hasPerk(PerkLib.AnatomyExpert)) critChance += 10;
-        if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critChance += 5;
-        if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
-        if (rand(100) < critChance) {
-            crit = true;
-            if (player.hasPerk(PerkLib.AnatomyExpert)) critDmg += 0.5;
-            if (player.hasPerk(PerkLib.PrestigeJobStalker)) critDmg += 0.2;
-            damage *= critDmg;
-        }
-		if (player.hasPerk(PerkLib.PrestigeJobStalker)) damage *= 1.2;
-        if (player.hasPerk(PerkLib.HistoryScout) || player.hasPerk(PerkLib.PastLifeScout)) damage *= historyScoutBonus();
-        if (player.hasPerk(PerkLib.JobRanger)) damage *= 1.05;
-        if (player.hasPerk(PerkLib.Ghostslinger)) damage *= 1.15;
-        if (player.jewelryEffectId == JewelryLib.MODIFIER_R_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
-        if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
-        if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
-        if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
-            if (player.statusEffectv1(StatusEffects.Kelt) < 100) damage *= 1 + (0.01 * player.statusEffectv1(StatusEffects.Kelt));
-            else {
-                if (player.statusEffectv1(StatusEffects.Kindra) > 0) {
-                    if (player.statusEffectv1(StatusEffects.Kindra) < 150) damage *= 2 + (0.01 * player.statusEffectv1(StatusEffects.Kindra));
-                    else damage *= 3.5;
-                } else damage *= 2;
+		damage += player.str;
+		var crit:Boolean = false;
+		var critChance:int = 5;
+		var critDmg:Number = 1.75;
+		critChance += combatPhysicalCritical();
+		if (player.weapon == weapons.MGSWORD) {
+			damage += scalingBonusStrength() * 0.2;
+			if (player.isFlying()){
+				if (player.hasPerk(MutationsLib.HarpyHollowBones)) damage *= 1.2;
+				if (player.hasPerk(MutationsLib.HarpyHollowBonesPrimitive)) damage *= 1.3;
+				if (player.hasPerk(MutationsLib.HarpyHollowBonesEvolved)) damage *= 1.5;
+			}
+			if (player.hasPerk(PerkLib.HoldWithBothHands) && !player.isFistOrFistWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise()) damage *= 1.2;
+			if (damage < 10) damage = 10;
+			//Weapon addition!
+			if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.03));
+			else if (player.weaponAttack >= 51 && player.weaponAttack < 101) damage *= (2.5 + ((player.weaponAttack - 50) * 0.025));
+			else if (player.weaponAttack >= 101 && player.weaponAttack < 151) damage *= (3.75 + ((player.weaponAttack - 100) * 0.02));
+			else if (player.weaponAttack >= 151 && player.weaponAttack < 201) damage *= (4.75 + ((player.weaponAttack - 150) * 0.015));
+			else damage *= (5.5 + ((player.weaponAttack - 200) * 0.01));
+			//Bonus sand trap / alraune damage!
+			if (monster.hasStatusEffect(StatusEffects.Level) && (monster is SandTrap || monster is Alraune)) damage = Math.round(damage * 1.75);
+			//All special weapon effects like...fire/ice
+			if (player.hasStatusEffect(StatusEffects.FlameBlade)) {
+				var damage2:Number = damage;
+				if (monster.hasPerk(PerkLib.IceNature)) damage2 += (damage2 * 0.5);
+				if (monster.hasPerk(PerkLib.FireVulnerability)) damage2 += (damage2 * 0.2);
+				if (monster.hasPerk(PerkLib.IceVulnerability)) damage2 += (damage2 * 0.05);
+				if (monster.hasPerk(PerkLib.FireNature)) damage2 += (damage2 * 0.02);
+				if (player.hasPerk(PerkLib.FireAffinity)) damage2 *= 2;
+				damage += scalingBonusLibido() * 0.20;
+				damage += damage2;
+			}
+			damage *= (1 + (0.01 * masterySwordLevel()));
+			//Thunderous Strikes
+			if (player.hasPerk(PerkLib.ThunderousStrikes) && player.str >= 80) damage *= 1.2;
+			if (player.hasPerk(PerkLib.ChiReflowMagic)) damage *= UmasShop.NEEDLEWORK_MAGIC_REGULAR_MULTI;
+			if (player.hasPerk(PerkLib.ChiReflowAttack)) damage *= UmasShop.NEEDLEWORK_ATTACK_REGULAR_MULTI;
+			if (player.jewelryEffectId == JewelryLib.MODIFIER_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
+			if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
+			if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
+			if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+			if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= historyFighterBonus();
+			if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
+			if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
+			if (player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
+			if (player.hasPerk(PerkLib.Heroism) && (monster.hasPerk(PerkLib.EnemyBossType) || monster.hasPerk(PerkLib.EnemyHugeType))) damage *= 2;
+			if (player.armor == armors.SPKIMO) damage *= 1.2;
+			if (player.hasPerk(PerkLib.OniTyrantKimono || PerkLib.OniEnlightenedKimono)) damage *= 1.4;
+			if (player.necklace == necklaces.OBNECK) damage *= 1.2;
+			if (player.hasPerk(PerkLib.GoblinoidBlood)) {
+				if (player.hasKeyItem("Power bracer") >= 0) damage *= 1.1;
+				if (player.hasKeyItem("Powboy") >= 0) damage *= 1.15;
+				if (player.hasKeyItem("M.G.S. bracer") >= 0) damage *= 1.2;
+			}
+			if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
+			if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
+			if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+			damage *= meleePhysicalForce();
+			//Determine if critical hit!
+            critChance += 10;
+            if (player.hasPerk(PerkLib.WeaponMastery) && player.weaponSpecials("Large") && player.str >= 100) critChance += 10;
+			if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+            if (rand(100) < critChance) {
+                crit = true;
+				critDmg += bonusCriticalDamageFromMissingHP();
+                damage *= critDmg;
             }
-        }
+		}
+		else {
+			damage += ghostStrength();
+			damage += scalingBonusStrength() * 0.4;
+			if (player.hasPerk(PerkLib.Telekinesis)){
+				damage += player.inte;
+				damage += scalingBonusIntelligence() * 0.4;
+			}
+			if (damage < 20) damage = 20;
+			if (player.hasPerk(PerkLib.DeadlyThrow)) damage += player.spe;
+			damage *= 1.5;
+			damage *= (1 + (0.01 * masteryThrowingLevel()));
+			//Determine if critical hit!
+			if (player.hasPerk(PerkLib.VitalShot) && player.inte >= 50) critChance += 10;
+			if (player.hasPerk(PerkLib.AnatomyExpert)) critChance += 10;
+			if (player.hasPerk(PerkLib.ElvenSense) && player.inte >= 50) critChance += 5;
+			if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
+			if (rand(100) < critChance) {
+				crit = true;
+				if (player.hasPerk(PerkLib.AnatomyExpert)) critDmg += 0.5;
+				if (player.hasPerk(PerkLib.PrestigeJobStalker)) critDmg += 0.2;
+				damage *= critDmg;
+			}
+			if (player.hasPerk(PerkLib.PrestigeJobStalker)) damage *= 1.2;
+			if (player.hasPerk(PerkLib.HistoryScout) || player.hasPerk(PerkLib.PastLifeScout)) damage *= historyScoutBonus();
+			if (player.hasPerk(PerkLib.JobRanger)) damage *= 1.05;
+			if (player.hasPerk(PerkLib.Ghostslinger)) damage *= 1.15;
+			if (player.jewelryEffectId == JewelryLib.MODIFIER_R_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
+			if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
+			if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+			if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
+				if (player.statusEffectv1(StatusEffects.Kelt) < 100) damage *= 1 + (0.01 * player.statusEffectv1(StatusEffects.Kelt));
+				else {
+					if (player.statusEffectv1(StatusEffects.Kindra) > 0) {
+						if (player.statusEffectv1(StatusEffects.Kindra) < 150) damage *= 2 + (0.01 * player.statusEffectv1(StatusEffects.Kindra));
+						else damage *= 3.5;
+					} else damage *= 2;
+				}
+			}
+		}
         damage = Math.round(damage);
         checkAchievementDamage(damage);
 		var elementalVariant:Number = player.perkv1(PerkLib.ElementalBody);
+		if (player.weapon == weapons.MGSWORD) elementalVariant = 5;
         switch (elementalVariant) {
             case 1:
                 outputText("You form and unleash a wind blade. ");
@@ -3750,9 +3817,13 @@ public class Combat extends BaseContent {
                 outputText("You charge and toss a fireball. ");
 				doFireDamage(damage, true, true);
                 break;
-            case 4 :
-                outputText("You unleash an arrow of lethally  pressurized water. ");
+            case 4:
+                outputText("You unleash an arrow of lethally pressurized water. ");
 				doWaterDamage(damage, true, true);
+                break;
+            case 5:
+                outputText("You form and unleash wave of moonlight. ");
+				doMagicDamage(damage, true, true);
                 break;
             default:
                 outputText("You form and unleash a wind blade. ");
@@ -5597,7 +5668,7 @@ public class Combat extends BaseContent {
 		if (player.isFlying()){
 			if (player.hasPerk(MutationsLib.HarpyHollowBones)) damage *= 1.2;
 			if (player.hasPerk(MutationsLib.HarpyHollowBonesPrimitive)) damage *= 1.3;
-			if (player.hasPerk(MutationsLib.HarpyHollowBonesPrimitive)) damage *= 1.5;
+			if (player.hasPerk(MutationsLib.HarpyHollowBonesEvolved)) damage *= 1.5;
 		}
 		if ((player.hasPerk(PerkLib.SuperStrength) || player.hasPerk(PerkLib.BigHandAndFeet)) && player.isFistOrFistWeapon()){
 			damage *= 2;
@@ -5972,6 +6043,7 @@ public class Combat extends BaseContent {
 					damage = Math.round(damage * darknessDamageBoostedByDao());
 					doDarknessDamage(damage, true, true);
 				}
+				else if (player.weapon == weapons.MGSWORD) doMagicDamage(damage, true, true);
                 else {
                     doPhysicalDamage(damage, true, true);
                     if (player.weapon == weapons.DAISHO) doPhysicalDamage(Math.round(damage * 0.5), true, true);
