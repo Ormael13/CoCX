@@ -2563,12 +2563,14 @@ import coc.view.ButtonDataList;
 			doNext(loverZenjiMainCampMenu);
 		}
 		
-		public function zenjiHenchmanOption():void
+		public function zenjiHenchmanOption(textBypass:Boolean =false):void
 		{
-			clearOutput();
+			if (!textBypass) clearOutput();
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "") {
-				outputText("Zenji readies his spear before flexing his arms, \"<i>¡Vamanos, flaca!</i>\"\n\n");
-				outputText("Zenji is now following you around.\n\n");
+				if (!textBypass) {
+					outputText("Zenji readies his spear before flexing his arms, \"<i>¡Vamanos, flaca!</i>\"\n\n");
+					outputText("Zenji is now following you around.\n\n");
+				}
 				var strZenji:Number = 50;
 				var meleeAtkZenji:Number = 145;
 				if (player.level > 25 && player.level < 185) {
@@ -2586,9 +2588,11 @@ import coc.view.ButtonDataList;
 				flags[kFLAGS.PLAYER_COMPANION_1] = "Zenji";
 			}
 			else {
-				outputText("You tell Zenji that you don't want him to assist you in combat anymore.\n\n");
-				outputText("Zenji raises an eyebrow at you, \"<i>If dat's whatchu want, I will guard de camp, but you stay safe out dere.</i>\"\n\n");
-				outputText("Aurora is no longer following you around.\n\n");
+				if (!textBypass){
+					outputText("You tell Zenji that you don't want him to assist you in combat anymore.\n\n");
+					outputText("Zenji raises an eyebrow at you, \"<i>If dat's whatchu want, I will guard de camp, but you stay safe out dere.</i>\"\n\n");
+					outputText("Aurora is no longer following you around.\n\n");
+				}
 				player.removeStatusEffect(StatusEffects.CombatFollowerZenji);
 				flags[kFLAGS.PLAYER_COMPANION_1] = "";
 			}

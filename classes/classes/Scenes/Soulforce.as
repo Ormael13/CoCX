@@ -47,6 +47,7 @@ import classes.Scenes.Places.Boat.Marae;
 import classes.Scenes.Places.HeXinDao.AdventurerGuild;
 import classes.Player;
 import classes.Items.*;
+import classes.Scenes.Places.TrollVillage;
 import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 import classes.Stats.Buff;
 
@@ -271,6 +272,7 @@ use namespace CoC;
 			menu();
 			if (flags[kFLAGS.MARRIAGE_FLAG] == 1) addButton(0, "ClickItOnce", AddMaxBackpack033).hint("Fix Marriage Unlock from Michiko for future clarity.");
 			addButton(1, "RemoveRP", cheatRemoveRP).hint("Remove Racial Paragon perk");
+			addButton(2,"ZenjiQ", ZenjiQ).hint("Zenji Expac 2 debug tool");
 			addButton(14, "Back", submenucuzwhynot);
 		}
 
@@ -284,6 +286,41 @@ use namespace CoC;
                 outputText("No such perk.");
             doNext(camp.doCamp);
         }
+
+		public function ZenjiQ():void{
+			clearOutput();
+			outputText("Zenji Debug Menu: \n");
+			outputText("ZenjiVillageStage: " + TrollVillage.ZenjiVillageStage + "\n" +
+			"JabalaUnlocked: " + TrollVillage.JabalaUnlocked + "\n" +
+			"YenzaUnlocked: " + TrollVillage.YenzaUnlocked + "\n" +
+			"KaljiUnlocked: " + TrollVillage.KaljiUnlocked + "\n" +
+			"ZenjiFollowing: " + TrollVillage.ZenjiFollowing + "\n" +
+			"KuruUnlocked: " + TrollVillage.KuruUnlocked + "\n" +
+			"HalkanoUnlocked: " + TrollVillage.HalkanoUnlocked + "\n" +
+			"ZenjiBerated: " + TrollVillage.ZenjiBerated + "\n" +
+			"YenzaLockdown: " + TrollVillage.YenzaLockdown + "\n" +
+			"ZenjiTrollVillageTimeChk: " + TrollVillage.ZenjiTrollVillageTimeChk + "\n" +
+			"YubiUnlocked: " + TrollVillage.YubiUnlocked + "\n" +
+			"KaljiMBJDeny: " + TrollVillage.KaljiMBJDeny + "\n" +
+			"ZenjiMoneyHelp: " + TrollVillage.ZenjiMoneyHelp + "\n" +
+			"JabalaLoveChat: " + TrollVillage.JabalaLoveChat + "\n" +
+			"ZenjiMarriageDress: " + TrollVillage.ZenjiMarriageDress);
+			menu();
+			addButton(0, "Reset EventLine", reset).hint("Reset chain.");
+			addButton(1, "Force Village", villageNow).hint("Force encounters village");
+
+			function reset ():void{
+				clearOutput();
+				outputText("All Parameters cleared!")
+				SceneLib.trollVillage.resetState();
+				outputText("All Parameters cleared!");
+			}
+
+			function villageNow():void{
+				SceneLib.trollVillage.FirstEncountersoftheTrollKind();
+			}
+
+		}
 
 		private function jiangshiBuggedItemsCleanUpCrew0():void {
 			if (player.weapon != WeaponLib.FISTS) {
@@ -4295,4 +4332,4 @@ use namespace CoC;
 			doNext(accessSoulforceMenu);
 		}
 	}
-}
+}
