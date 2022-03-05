@@ -165,7 +165,7 @@ public class Diva extends Monster {
                 DivaScene.instance.status = -1;
                 display("scenes/defeated/final/yesChoice");
                 outputText("\n\n<b>Before leaving for your camp, as if remembering something Diva pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
-                if (player.hasKeyItem("Radiant shard")){
+                if (player.hasKeyItem("Radiant shard") >= 0){
                     player.addKeyValue("Radiant shard",1,+1);
                 }
             }

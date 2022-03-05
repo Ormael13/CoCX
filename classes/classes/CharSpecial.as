@@ -1471,7 +1471,7 @@ import classes.Items.*;
 			flags[kFLAGS.GOO_OBEDIENCE] = 100;
 
 			// Ceraph
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00286] = 1;
+			flags[kFLAGS.CERAPH_FOLLOWER_PIERCING] = 1;
 
 			// Holli
 			flags[kFLAGS.FUCK_FLOWER_LEVEL] = 4;

@@ -268,7 +268,7 @@ public function loseOrSubmitToVapula():void {
 	player.buttChange(60,true,true,false);
 	outputText("  The double penetration is brutal, unexpected and painful.  Your insides are protesting vigorously against this rough treatment, even though you feel a tingle of pleasure gently tickling your colon at every thrust.  ");
 	//[(no Buttslut)
-	if(player.findPerk(PerkLib.Buttslut) < 0) outputText("No!  You aren't supposed to enjoy it...  ");
+	if(!player.hasPerk(PerkLib.Buttslut)) outputText("No!  You aren't supposed to enjoy it...  ");
 	outputText("You try to cry out but as soon as your mouth opens it is filled with another dick, then a second one.  A third tries to push its way between the first two, stretching your cheeks and making you drool.  Seeing that the monstrous dong won't fit in your already double-stuffed mouth, its owner groans in frustration and proceeds to slap your cheek with it.  He is soon joined by other demons who find the idea very entertaining.");
 	outputText("\n\nIt's a matter of minutes before a dozen hungry omnibuses and incubi are repeatedly cock-slapping your entire body, hitting every part of you with their heavy meat, grinding their rods against every fold and curve of your flesh and staining it with seminal fluids.  Your poor " +buttDescript()+ ", already abused by two giant pricks thrusting back and forth at an unnatural pace, is now the prey of numerous hands and full, erect dicks slapping it in every possible way, smearing it with pre-cum and sweat as they run across your tender skin.  You can't see anything: your eyesight has been blocked by a never-ending row of wriggling cocks.  Nor can you hear anything over the sound of a full horde of libidinous demons panting and moaning as they abuse their fuck-toy in an overwhelming orgy of pleasure; besides, a pair of imps are rubbing the tips of their dongs against your ears, as if they wanted to fill them with seed.");
 	outputText("\n\nYou can't talk, muted as you are by a pair of fat red peckers stuffing your mouth and bumping against your throat as you unwillingly suck them off.  Your jaw hurts, your itching insides are driving you mad; your whole body is being bruised from the cock-slaps, your palms are forced to rub four shafts at the same time, and even as you pump, your fingers are occasionally grabbed and stuffed into wet fuck-holes, making a few succubi moan.  A tentacle dick brushes against you, then wraps around your limbs, slithering against your skin and leaving behind a trail of pre-cum on your torso and belly.");
@@ -627,7 +627,7 @@ public function fightKindra():void {
 		startCombat(new Kindra());
 	}
 	if (flags[kFLAGS.KINDRA_LVL_UP] == 6) {
-		if(player.findPerk(PerkLib.SoulApprentice) < 0) {
+		if(!player.hasPerk(PerkLib.SoulApprentice)) {
 			outputText("You attempt to enter but the barrier holds you out. You will likely need to master soulforce in order to pierce this final defence.");
 			doNext(owcaMainScreenOn);
 		}
@@ -851,7 +851,7 @@ public function beatUpOwca():void {
 	outputText("The last of the villagers drops his improvised weapon.  They are all lying defenseless before you.  At last, you notice Rebecc, the only one still conscious, curled up as she weeps uncontrollably.  She is clearly oblivious of her surroundings, undoubtedly shocked by the violent fight.  Even if she calls herself your friend, you don't think you'd be able to reason with her after pummeling her kin.  What do you do?");
 	//Rape Rebbecc/Torch Village (needs Akbal's fire or Whitefire)/Leave
 	var torch:Function = null;
-	if(player.hasStatusEffect(StatusEffects.KnowsWhitefire) || player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0 || player.findPerk(PerkLib.DragonFireBreath) >= 0 || player.findPerk(PerkLib.DragonIceBreath) >= 0)
+	if(player.hasStatusEffect(StatusEffects.KnowsWhitefire) || player.hasPerk(PerkLib.FireLord) || player.hasPerk(PerkLib.Hellfire) || player.hasPerk(PerkLib.DragonFireBreath) || player.hasPerk(PerkLib.DragonIceBreath))
 		torch = torchOwcaMotherFuckers;
 	var rape:Function = null;
 	if(player.cor >= 60 && player.gender > 0 && player.lust >= 33) rape = createCallBackFunction(rapeRebecc,true);
@@ -1032,6 +1032,11 @@ private function enslaveVapulaWithYourWang():void {
 	clearOutput();
 	if(!player.hasCock()) {
 		enslaveVapulaAsACuntWielder();
+		if (player.hasKeyItem("Radiant shard") >= 0){
+			player.addKeyValue("Radiant shard",1,+1);
+		}
+		else player.createKeyItem("Radiant shard", 1,0,0,0);
+		outputText("\n\n<b>Looting from Vapula inventory you find a shard of metal that seems to radiate untold power. You acquired a Radiant shard!</b>");
 		return;
 	}
 	outputText("You speak in a feverish voice.  \"<i>You're such a bitch.  Damn, why did you ever think you were going to make me your slut?  How many times do you need to be shown that I'm not the bottom in our relationship?  You deserve to be turned in to Lethice so she can make you her personal fuck-toy; at least you'll remember your place.</i>\"");
@@ -1045,6 +1050,11 @@ private function enslaveVapulaWithYourWang():void {
 	outputText("\n\n\"<i>As long as they don't disturb me while I fuck your brains out, I don't care.</i>\"");
 	outputText("\n\nYou lend a hand to your newly-acquired succubus slut and help her to her feet.  She stumbles at first, still stunned by the recent fight; she quickly follows you though, firmly lead by your iron grip.  Hand in hand, you walk away from the pit and the scattered bodies without a look back.  On your way to the camp, you don't hesitate to give your succubus toy a few gropes to her boobs and buttocks, making her giggle; she playfully returns the favor, and by the time you reach your camp you are already stroking each other's crotches, your fingers softly probing her vaginal entrance until she openly moans in delight.  You stop teasing her and dismiss her at last.");
 	outputText("\n\n(<b>The demon Vapula has been added to your slaves.</b>)");
+	if (player.hasKeyItem("Radiant shard") >= 0){
+		player.addKeyValue("Radiant shard",1,+1);
+	}
+	else player.createKeyItem("Radiant shard", 1,0,0,0);
+	outputText("\n\n<b>Looting from Vapula inventory you find a shard of metal that seems to radiate untold power. You acquired a Radiant shard!</b>");
 	//[Vapula added as follwer.]
 	flags[kFLAGS.VAPULA_FOLLOWER] = 1;
 	flags[kFLAGS.OWCAS_ATTITUDE] = 100;
