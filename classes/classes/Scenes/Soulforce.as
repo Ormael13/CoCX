@@ -312,7 +312,6 @@ use namespace CoC;
 
 			function reset ():void{
 				clearOutput();
-				outputText("All Parameters cleared!")
 				SceneLib.trollVillage.resetState();
 				outputText("All Parameters cleared!");
 				doNext(camp.doCamp);
