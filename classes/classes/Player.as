@@ -8161,8 +8161,7 @@ use namespace CoC;
 			if (hasVagina() && biggestTitSize() >= 3)
 				frostWyrmCounter++;
 			if (lowerBody != LowerBody.FROSTWYRM)
-				frostWyrmCounter = 0;
-				frostWyrmCounter2 = 0;
+				frostWyrmCounter2 -= 3;
 			if (tallness > 120 && frostWyrmCounter >= 10)
 				frostWyrmCounter++;
 			if (hasPerk(PerkLib.DragonIceBreath))

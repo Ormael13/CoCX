@@ -715,6 +715,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage = Math.round(damage * combat.darknessDamageBoostedByDao());
 			doDarknessDamage(damage, true, true);
 		}
+		else if (player.weapon == weapons.MGSWORD) doMagicDamage(damage, true, true);
 		else {
 			damage = Math.round(damage);
 			doDamage(damage, true, true);
