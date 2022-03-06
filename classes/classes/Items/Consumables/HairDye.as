@@ -67,7 +67,7 @@ public class HairDye extends Consumable
 					else EngineCore.addButtonDisabled(3, "Chitin", "Your already have " + _color + " chitin!");
 				} else {
 					outputText("\n\nYou don't have any chitin.");
-					EngineCore.addButtonDisabled(3, "Chitin", "You don't have any scales!");
+					EngineCore.addButtonDisabled(3, "Chitin", "You don't have any chitin!");
 				}
 				if (game.player.hasCoatOfType(Skin.DRAGON_SCALES)) {
 					outputText("\n\nYou have [skin coat].");
@@ -75,10 +75,10 @@ public class HairDye extends Consumable
 						if (game.player.hasItem(game.useables.REAGENT, 2)) EngineCore.addButton(7, "D.Scales", dyeDragonScales);
 						else EngineCore.addButtonDisabled(7, "D.Scales", "You do not have enough reagents! (2)");
 					}
-					else EngineCore.addButtonDisabled(7, "D.Scale", "Your already have " + _color + " dragon scales!");
+					else EngineCore.addButtonDisabled(7, "D.Scales", "Your already have " + _color + " dragon scales!");
 				} else {
 					outputText("\n\nYou don't have any dragon scales.");
-					EngineCore.addButtonDisabled(7, "D.Scale", "You don't have any scales!");
+					EngineCore.addButtonDisabled(7, "D.Scales", "You don't have any scales!");
 				}
 			}
 			EngineCore.addButton(14, "Nevermind", dyeCancel);
