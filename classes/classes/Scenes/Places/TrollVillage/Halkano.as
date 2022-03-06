@@ -174,7 +174,7 @@ public class Halkano extends TrollVillageAbstractContent{
                 "\n" +
                 "\"Dey wanted dis, who am I ta deny dem of what dey want, right? Besides, dis was deir idea anyway.\" Zenji replies.\n" +
                 "\n" +
-                "You reach your [hand] up to Halkano, guiding his length to your lips, licking the tip of his dick.\n" +
+                "You reach your hand up to Halkano, guiding his length to your lips, licking the tip of his dick.\n" +
                 "\n" +
                 "Zenji prods at your backdoor, sliding his length between your cheeks. He slavers onto his shaft, lubricating himself for you as he coats his length in his drool. Once he’s sufficiently slicked, he drives himself into your rear.\n\n");
         if (player.analCapacity() < 7){

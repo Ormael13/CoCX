@@ -43,6 +43,10 @@ public class WindBlastSpell extends AbstractGreySpell {
 	
 	public function calcDamage(monster:Monster, randomize:Boolean = true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)
 		var baseDamage:Number = 2 * scalingBonusIntelligence(randomize);
+		if (player.hasPerk(PerkLib.Convergence) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType))) {
+			if (monster.hasPerk(PerkLib.EnemyGroupType)) baseDamage *= 2;
+			else baseDamage *= 1.5;
+		}
 		if (player.weaponRangeName == "Artemis") baseDamage *= 1.5;
 		if (ex) baseDamage *= 2;
 		return adjustSpellDamage(baseDamage, DamageType.WIND, CAT_SPELL_GREY, monster, true, casting);
@@ -54,7 +58,7 @@ public class WindBlastSpell extends AbstractGreySpell {
 			outputText("You call down the squall as the slicing wind cuts into them.\n");
 		}
 		var damage:Number = calcDamage(monster, true, true);
-		damage = critAndRepeatDamage(display, damage, DamageType.WIND,false,false,true);
+		damage = critAndRepeatDamage(display, damage, DamageType.WIND,false,true,true);
 		if (ex) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);

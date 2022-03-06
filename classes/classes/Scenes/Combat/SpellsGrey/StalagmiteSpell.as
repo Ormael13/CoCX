@@ -37,6 +37,16 @@ public class StalagmiteSpell extends AbstractGreySpell {
 				(!ex || player.hasPerk(PerkLib.MagesWrathEx));
 	}
 	
+	override protected function usabilityCheck():String {
+		if (monster.hasStatusEffect(StatusEffects.Flying)) {
+			return "You can only use earth magic against enemy on the ground."
+		}
+		if (player.hasStatusEffect(StatusEffects.Flying)) {
+			return "You can't use earth magic when too far from the ground."
+		}
+		return super.usabilityCheck();
+	}
+	
 	override public function calcCooldown():int {
 		return spellGreyCooldown();
 	}
