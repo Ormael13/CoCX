@@ -278,7 +278,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  return new SimpleTransformation("Fur Skin",
 	    // apply effect
 	    function (doOutput: Boolean): void {
-	      options = skinFormatOptions(options);
+	      options = skinFormatOptions(options, true);
 
 	      const color: String = options.color;
 
@@ -343,7 +343,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    },
 	    // is present
 	    function (): Boolean {
-	      options = skinFormatOptions(options);
+	      options = skinFormatOptions(options, true);
 
 	      return player.hasCoatOfType(Skin.FUR) && InCollection(player.coatColor, options.colors) && player.skin.coverage == coverage;
 	    }
@@ -354,7 +354,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  return new SimpleTransformation("Scales Skin",
 	    // apply effect
 	    function (doOutput: Boolean): void {
-	      options = skinFormatOptions(options);
+	      options = skinFormatOptions(options, false);
 
 	      const color: String = options.color;
 
@@ -403,7 +403,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    },
 	    // is present
 	    function (): Boolean {
-	      options = skinFormatOptions(options);
+	      options = skinFormatOptions(options, false);
 
 	      return player.hasCoatOfType(Skin.SCALES) && InCollection(player.coatColor, options.colors) && player.skin.coverage == coverage;
 	    }
@@ -414,7 +414,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  return new SimpleTransformation("Dragon Scales Skin",
 	    // apply effect
 	    function (doOutput: Boolean): void {
-	      options = skinFormatOptions(options);
+	      options = skinFormatOptions(options, false);
 
 	      const color: String = options.color;
 
@@ -455,7 +455,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    },
 	    // is present
 	    function (): Boolean {
-	      options = skinFormatOptions(options);
+	      options = skinFormatOptions(options, false);
 
 	      return player.hasCoatOfType(Skin.DRAGON_SCALES) && InCollection(player.coatColor, options.colors) && player.skin.coverage == coverage;
 	    }
@@ -466,7 +466,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  return new SimpleTransformation("Chitin Skin",
 	    // apply effect
 	    function (doOutput: Boolean): void {
-	      options = skinFormatOptions(options);
+	      options = skinFormatOptions(options, false);
 
 	      const color: String = options.color;
 
@@ -518,30 +518,32 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    },
 	    // is present
 	    function (): Boolean {
-	      options = skinFormatOptions(options);
+	      options = skinFormatOptions(options, false);
 
 	      return player.hasCoatOfType(Skin.CHITIN) && InCollection(player.coatColor, options.colors) && player.skin.coverage == coverage;
 	    }
 	  )
 	};
 
-	private function skinFormatOptions(options: * ): * {
-	  if (!options) options = {};
+	private function skinFormatOptions(options: *, hairy:Boolean = false): * {
+        if (!options) options = {};
+        if (!options.adj) options.adj = "";
+        if (!options.pattern) options.pattern == "";
+        if (!options.color && !options.colors)
+            if (player.coatColor == "" || player.skinType === Skin.PLAIN || (!player.skin.isHairy() && hairy) || (player.skin.isHairy() && !hairy)) {
+                //WHY THE F*** DOESN'T THIS TRASH LANGUAGE HAVE LOGICAL XOR?!
+                //the third condition - if need fur, and skin is NOT hairy, reset to hair color, and vice versa
+                options.color = hairy ? player.hairColor : player.skin.base.color;
+                options.colors = [options.color];
+            }
+            else {
+                options.color = player.coatColor;
+                options.colors = [options.color];
+            }
+        else if (!options.color && options.colors)
+            options.color = randomChoice(options.colors);
 
-	  if (player.coatColor == "" || player.skinType === Skin.PLAIN) player.coatColor = player.hairColor;
-
-	  if (!options.adj) options.adj = "";
-
-		if (!options.pattern) options.pattern == "";
-
-	  if (!options.color && !options.colors) {
-	    options.color = player.coatColor;
-	    options.colors = [options.color];
-	  } else if (!options.color && options.colors) {
-	    options.color = randomChoice(options.colors);
-	  }
-
-	  return options;
+        return options;
 	}
   /*
 */

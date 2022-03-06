@@ -299,6 +299,12 @@ public class Skin extends SaveableBodyPart {
 		if (coverage >= COVERAGE_HIGH) return coat.type;
 		return base.type;
 	}
+
+    //used to determine default coat color - 
+    public function isHairy():Boolean {
+        return (type == FUR || type == MOSS || type == FEATHER);
+    }
+
 	/**
 	 * Checks both layers against property set
 	 * @param p {color, type, adj, desc}
@@ -315,7 +321,10 @@ public class Skin extends SaveableBodyPart {
 	public function growCoat(type:int,options:Object=null,coverage:int=COVERAGE_HIGH):SkinLayer {
 		this.coverage = coverage;
 		this.coat.type = type;
-		this.coat.color = creature.hairColor;
+        if (isHairy()) //select default color
+		    this.coat.color = creature.hairColor;
+        else
+		    this.coat.color = this.base.color;
 		if (options) this.coat.setProps(options);
 		return this.coat;
 	}

@@ -13,7 +13,7 @@ public class SkinLayer extends BodyPart {
 	private var skin:Skin; // Reference to parent
 
 	public function get color():String {
-		return _color || creature.hairColor;
+		return _color || creature.skin.tone;
 	}
 	public function set color(value:String):void {
 		_color = value;
