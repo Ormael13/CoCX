@@ -6253,6 +6253,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      if (!legCount) legCount = player.legCount;
 	      var desc: String = "";
 
+            desc += "\n\n";
 	      // Case 1: Morph Taur legs without changing leg count
 	      if (player.isTaur() && legCount === 4) {
 	        if (player.lowerBody == LowerBody.HOOFED) {
@@ -6467,6 +6468,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      if (!legCount) legCount = player.legCount;
 	      var desc: String = "";
 
+            desc += "\n\n";
 	      // Case 1: Morph Taur legs without changing leg count
 	      if (player.isTaur() && legCount === 4) {
 	        desc += "You scream in agony as you feel the bones in your [feet] suddenly break and restructure themselves. When the pain is over, you realize that your [feet] have become like those of some bipedal reptilian killer, with powerful claws meant for gripping the ground. <b>You now have dragon [feet].</b>";
@@ -6954,6 +6956,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      if (!legCount) legCount = player.legCount;
 	      var desc: String = "";
 
+            desc += "\n\n";
 	      // Case 1: Morph Taur legs without changing leg count
 	      if (player.isTaur() && legCount === 4) {
 	        desc += "You scream in agony as you feel the bones in your [feet] break and rearrange into bestial paws. Soon your legs cover up with fur from the waist down. The fur is cold to the touch and yet you feel warm and comfortable under it. <b>You now have wolf paws.</b>";

@@ -135,17 +135,16 @@ public function dragonTFeffects(drakesHeart:Boolean = false):void {
 	}
 	//(Pending Tongue Masturbation Variants; if we ever get around to doing that.)
 	//Gain Dragon Head OR Dragon Fangs
-	if (changes < changeLimit && rand(3) == 0 && player.tongue.type == Tongue.DRACONIC && player.lowerBody != LowerBody.GARGOYLE && (player.faceType != Face.DRAGON || player.faceType != Face.DRAGON_FANGS)) {
-		if (player.faceType != Face.DRAGON) {
-			outputText("\n\n");
-      CoC.instance.transformations.FaceDragon.applyEffect();
-		}
-		else {
-			outputText("\n\n");
-      CoC.instance.transformations.FaceDragonFangs.applyEffect();
-		}
+    if (changes < changeLimit && rand(3) == 0 && player.tongue.type == Tongue.DRACONIC && player.lowerBody != LowerBody.GARGOYLE && (player.faceType != Face.DRAGON && player.faceType != Face.DRAGON_FANGS)) {
+        outputText("\n\n");
+        CoC.instance.transformations.FaceDragonFangs.applyEffect();
         changes++;
-	}
+    }
+    else if (changes < changeLimit && rand(3) == 0 && player.tongue.type == Tongue.DRACONIC && player.lowerBody != LowerBody.GARGOYLE && player.faceType == Face.DRAGON_FANGS) {
+        outputText("\n\n");
+        CoC.instance.transformations.FaceDragon.applyEffect();
+        changes++;
+    }
 	var dragon_coat_color:Array = ["red", "golden", "metallic golden", "metallic silver", "silver", "snow white", "green", "blue", "bronzed", "black", "midnight"];
 	//Gain Dragon Scales
 	if (player.hasPartialCoat(Skin.DRAGON_SCALES) && changes < changeLimit && rand(3) == 0) {
