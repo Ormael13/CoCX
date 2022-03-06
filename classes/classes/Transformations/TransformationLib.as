@@ -959,9 +959,9 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    var desc: String = "";
 
 	    if (player.horns.type === Horns.NONE) {
-	      desc += "With painful pressure, the skin on the sides of your forehead splits around two tiny nub-like horns. They're angled back in such a way as to resemble those you saw on the dragons in your village's legends. A few inches of horns sprout from your head before stopping. <b>You have about four inches of dragon-like horns.</b>";
+	      desc += "\n\nWith painful pressure, the skin on the sides of your forehead splits around two tiny nub-like horns. They're angled back in such a way as to resemble those you saw on the dragons in your village's legends. A few inches of horns sprout from your head before stopping. <b>You have about four inches of dragon-like horns.</b>";
 	    } else {
-	      desc += "You feel your horns changing and warping, and reach back to touch them. They have a slight curve and a gradual taper. They must look something like the horns the dragons in your village's legends always had.";
+	      desc += "\n\nYou feel your horns changing and warping, and reach back to touch them. They have a slight curve and a gradual taper. They must look something like the horns the dragons in your village's legends always had.";
 
 	      if (player.horns.count > 13) {
 	        desc += " The change seems to have shrunken the horns, they're about a foot long now.";
@@ -1169,10 +1169,10 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    var desc: String = "";
 
 	    if (player.horns.type === Horns.NONE) {
-	      desc += "You writhe in pain as two bony extrusions begin to push out of the side of your head. As a skull-splitting headache wracks through you, in an instant, the pain subsides as you feel two large, scale-colored horns on your head. They are as sensitive as they are sturdy.\n\nA quick look at a puddle also reveals they radiate several specks of bioluminescent light along the horns accompanied by red tips. <b>You have about twelve inches of sea dragon-like horns!</b>";
+	      desc += "\n\nYou writhe in pain as two bony extrusions begin to push out of the side of your head. As a skull-splitting headache wracks through you, in an instant, the pain subsides as you feel two large, scale-colored horns on your head. They are as sensitive as they are sturdy.\n\nA quick look at a puddle also reveals they radiate several specks of bioluminescent light along the horns accompanied by red tips. <b>You have about twelve inches of sea dragon-like horns!</b>";
 	    } else {
 	      if (player.horns.type == Horns.DEMON && player.horns.count > 4) {
-	        desc += "Your horns condense, twisting around each other and merging into larger, pointed protrusions. By the time they finish you have two sea dragon horns, each about twelve inches long.";
+	        desc += "\n\nYour horns condense, twisting around each other and merging into larger, pointed protrusions. By the time they finish you have two sea dragon horns, each about twelve inches long.";
 	        player.horns.count = 12;
 	      } else {
 	        desc += "\n\nYou feel your horns changing and warping, and reach back to touch them. They have a slight curve and a gradual taper. They look must look like the horns of a sea dragon.";
