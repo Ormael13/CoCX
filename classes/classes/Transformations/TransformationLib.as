@@ -935,7 +935,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    var desc: String = "";
 
 	    TransformationUtils.applyTFIfNotPresent(transformations.HornsDraconicDual, doOutput);
-
+        desc += "\n\n";
 	    if (player.horns.type == Horns.DEMON && player.horns.count > 4) {
 	      desc += "Your horns condense, twisting around each other and merging into larger, pointed protrusions. By the time they finish <b>you have four draconic-looking horns, each about twelve inches long.</b>"
 	    } else {
