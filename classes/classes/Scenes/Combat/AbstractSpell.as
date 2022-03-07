@@ -82,12 +82,6 @@ public class AbstractSpell extends CombatAbility {
 			if (combat.isEnnemyInvisible) {
 				return "You cannot use offensive spells against an opponent you cannot see or target."
 			}
-			if (monster.hasStatusEffect(StatusEffects.Flying)) {
-				return "You can only use earth magic against enemy on the ground."
-			}
-			if (player.hasStatusEffect(StatusEffects.Flying)) {
-				return "You can't use earth magic when too far from the ground."
-			}
 		}
 		
 		if (player.wrath < wrathCost()) {
@@ -364,14 +358,6 @@ public class AbstractSpell extends CombatAbility {
 		}
 	}
 	
-	public static function convergenceRepeatCount():int {
-		if (player.hasPerk(PerkLib.Convergence)) {
-			return 3;
-		} else {
-			return 1;
-		}
-	}
-	
 	public function calcBackfirePercent():int {
 		if (!canBackfire) return 0;
 		//30% backfire!
@@ -445,7 +431,8 @@ public class AbstractSpell extends CombatAbility {
 			default:
 				damageFn = doDamage;
 		}
-		var repeats:int = omnicasterRepeat ? omnicasterRepeatCount() : (convergenceRepeat ? convergenceRepeatCount() : 1);
+		var repeats:int = omnicasterRepeat ? omnicasterRepeatCount() : 1;
+		if (convergenceRepeat && player.hasPerk(PerkLib.Convergence) && !monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType)) repeats *= 2;
 		var i:int = repeats;
 		while (i-->0) {
 			damageFn(damage, true, display || displayDamageOnly);
