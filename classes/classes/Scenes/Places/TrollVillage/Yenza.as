@@ -173,9 +173,9 @@ public class Yenza extends TrollVillageAbstractContent{
                 "\n" +
                 "\"Let’s get out of these clothes…\" She states as she unbuttons her blouse, letting it drop to the floor as she shimmies out of her panties.\n\n");
         if (player.lowerGarment != UndergarmentLib.NOTHING || player.upperGarment != UndergarmentLib.NOTHING || player.armor != ArmorLib.NOTHING){
-            outputText("She approaches you and quickly makes way with your [armor] setting all of your clothing aside, making sure she has a full view of your [body]\n\n");
+            outputText("She approaches you and quickly makes way with your [armor] setting all of your clothing aside, making sure she has a full view of your body\n\n");
         }
-        outputText("\"Lie down, my little plaything…\" She instructs once she’s ready\n" +
+        outputText("\"Lie down, my little plaything…\" She instructs once she’s ready.\n" +
                 "\n" +
                 "You follow her guidance, lying down on her soft, plushy bed. She slinks up the bed, resting her breasts against your [legs]. The fur on her breasts tickles you gently, the soft texture of her is tantalizing as you can feel yourself erecting to full mast.\n" +
                 "\n" +
@@ -219,9 +219,9 @@ public class Yenza extends TrollVillageAbstractContent{
                 "\n" +
                 "She smirks as she guides you to the bedroom.\n" +
                 "\n" +
-                "\"Let’s get out of these clothes…\" She states as she unbuttons her blouse, letting it drop to the floor as she shimmies out of her panties. [(pc not nudist) She approaches you and quickly makes way with your [armor] setting all of your clothing aside, making sure she has a full view of your [body]\n" +
+                "\"Let’s get out of these clothes…\" She states as she unbuttons her blouse, letting it drop to the floor as she shimmies out of her panties. [(pc not nudist) She approaches you and quickly makes way with your [armor] setting all of your clothing aside, making sure she has a full view of your body.\n" +
                 "\n" +
-                "\"Lie down, my little plaything…\" She instructs once she’s ready\n" +
+                "\"Lie down, my little plaything…\" She instructs once she’s ready.\n" +
                 "\n" +
                 "You oblige to her wishes, splaying your body over the bed for her.\n" +
                 "\n" +
