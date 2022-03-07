@@ -542,10 +542,10 @@ public class GameSettings extends BaseContent {
 				break;
 		}
 		outputText("\nChar View Armor: ");
-		if (flags[kFLAGS.CHARVIEW_ARMOR])
-            outputText("<font color=\"#008000\"><b>ON</b></font>\n Armor is shown (some body parts may be hidden or displayed wrongly)");
-		else
+		if (flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN])
             outputText("<font color=\"#800000\"><b>OFF</b></font>\n Armor is hidden - enjoy your naked look!");
+		else
+            outputText("<font color=\"#008000\"><b>ON</b></font>\n Armor is shown (some body parts may be hidden or displayed wrongly)");
 		
         outputText("\n\n");
 		if (flags[kFLAGS.IMAGEPACK_OFF] == 0) {
@@ -649,7 +649,7 @@ public class GameSettings extends BaseContent {
 	}
 
 	public function toggleCharViewerArmor():void {
-		flags[kFLAGS.CHARVIEW_ARMOR] = flags[kFLAGS.CHARVIEW_ARMOR] ? 0 : 1;
+		flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] = flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] ? 0 : 1;
 		settingsScreenInterfaceSettings();
 	}
     

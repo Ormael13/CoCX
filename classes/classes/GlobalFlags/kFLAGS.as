@@ -2981,7 +2981,7 @@ public static const INTELLIGENCE_SCALING:int                                   	
 public static const NO_GORE_MODE:int                                   				= 2973;
 public static const SPARRABLE_NPCS_TRAINING:int                                     = 2974;
 public static const STAT_GAIN_MODE:int                                              = 2975;
-public static const CHARVIEW_ARMOR:int                                              = 2976; // Toogles armor display
+public static const CHARVIEW_ARMOR_HIDDEN:int                                              = 2976; // Toogles armor display
 public static const CHARVIEW_STYLE:int                                              = 2977; // 0 for in text, 1 for sidebar, 2 for sidebar always visible
 public static const CHARVIEWER_ENABLED:int                                          = 2978;
 public static const NEW_GAME_PLUS_LEVEL:int                                         = 2979; // Current intensity of New Game+. Each ascension increments this counter by 1.
