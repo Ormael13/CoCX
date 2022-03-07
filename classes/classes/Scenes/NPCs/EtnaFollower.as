@@ -258,7 +258,7 @@ public function etnaRapeYesF2():void
 	outputText(" a direct taste of her own poison. Soon ");
 	if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1 && !player.hasStatusEffect(StatusEffects.WildManticore)) outputText("Etna");
 	else outputText("the manticore");
-	outputText("is begging for you to stop but you deny her, knowing quite well she would have done to you the same thing had your roles been reversed. She moans what sounds like musical notes as she orgasms one time after another. Soon your own orgasm starts and you both are singing in a perfect chorus of moans ");
+	outputText(" is begging for you to stop but you deny her, knowing quite well she would have done to you the same thing had your roles been reversed. She moans what sounds like musical notes as she orgasms one time after another. Soon your own orgasm starts and you both are singing in a perfect chorus of moans ");
 	if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1 && !player.hasStatusEffect(StatusEffects.WildManticore)) outputText("Etna");
 	else outputText("the manticore");
 	outputText(" leading the tempo. She cums twice as much as you do and that’s without mentioning she cums from both holes. ");

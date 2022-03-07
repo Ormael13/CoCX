@@ -32,7 +32,7 @@ public class Yenza extends TrollVillageAbstractContent{
                     outputText("You decide to approach the rather beautiful looking troll sitting by herself. She looks toward you and raises an eyebrow as you approach her.\n" +
                             "\n" +
                             "\"I don’t think I ordered a tall glass of water, and yet here you are.\" She eyes you up and down, taking an extended look at your groin.\n");
-                    if (player.hasCock()){
+                    if (!player.hasCock()){
                         outputText("\"I’ll pass, move along now, I don’t have time for nonsense.\"\n" +
                                 "\n" +
                                 "She’s very blunt. It would seem she doesn’t even want to talk to you. You decide to leave the diner.\n");
