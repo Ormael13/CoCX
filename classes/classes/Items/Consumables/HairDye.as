@@ -47,7 +47,7 @@ public class HairDye extends Consumable
                 var itemReq:ItemType = game.useables.REAGENT;
                 var itemCnt:int = 0;
                 var alreadyText:String = "You already have " + _color + " " + coatText;
-                switch(game.player.coatType) {
+                switch(game.player.coatType()) {
                     case Skin.FUR:
                         break;
                     case Skin.SCALES:
