@@ -45,7 +45,7 @@ public class Yenza extends TrollVillageAbstractContent{
                                 "\n" +
                                 "\"The name’s Yenza, and you are..?\"\n" +
                                 "\n" +
-                                "You tell Yenza your name\n" +
+                                "You tell Yenza your name.\n" +
                                 "\n" +
                                 "Yenza gives you a sultry glare, \"[name]... I like that name…\" She leans in closer, encroaching on your personal space.\n" +
                                 "\n" +
