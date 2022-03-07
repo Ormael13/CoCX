@@ -693,12 +693,11 @@ public class Skin extends SaveableBodyPart {
 	}
 
 	public function get shortName():String {
-		return SkinTypes[coat.type || base.type].name;
+		return SkinTypes[type].name;
 	}
 
 	public static function getSkinAppearanceDescription(creature: *):String {
-		const id: int = creature.skin.coat.type || creature.skin.base.type;
-
+		const id: int = creature.skin.type;
 		return formatDescription((SkinTypes[id].appearanceDescFunc ? SkinTypes[id].appearanceDescFunc(creature) : SkinTypes[id].appearanceDesc) || "", creature);
 	}
 
