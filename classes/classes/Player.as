@@ -11579,9 +11579,6 @@ use namespace CoC;
 
 		public function clothedOrNakedLower(clothedText:String, nakedText:String = ""):String
 		{
-            outputText(armorName);
-            outputText(lowerGarmentName);
-            outputText(isTaur().toString());
 			return (armorName != "gear" && !(armorName == "lethicite armor" && lowerGarmentName == "nothing") && !isTaur() ? clothedText : nakedText);
 		}
 

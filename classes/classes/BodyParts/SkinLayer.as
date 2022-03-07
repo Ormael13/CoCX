@@ -16,19 +16,19 @@ public class SkinLayer extends BodyPart {
 		return _color || creature.hairColor;
 	}
 	public function set color(value:String):void {
-		_color = value == creature.hairColor ? "" : value;
+		_color = value;
 	}
 	public function get color2():String {
 		return _color2 || color;
 	}
 	public function set color2(value:String):void {
-		_color2 = value == color ? "" : value;
+		_color2 = value;
 	}
 	public function get color2raw():String {
 		return _color2;
 	}
 	public function set color2raw(value:String):void {
-		_color2 = value == color ? "" : value;
+		_color2 = value;
 	}
 	public function defaultDesc():String {
 		return Skin.SkinTypes[type].name || "skin";
@@ -41,19 +41,19 @@ public class SkinLayer extends BodyPart {
 		return _desc || defaultDesc();
 	}
 	public function set desc(value:String):void {
-		_desc = value == defaultDesc() ? "" : value;
+		_desc = value;
 	}
 	public function get descRaw():String {
 		return _desc;
 	}
 	public function set descRaw(value:String):void {
-		_desc = value == defaultDesc() ? "" : value;
+		_desc = value;
 	}
 	public function get adj():String {
 		return _adj;
 	}
 	public function set adj(value:String):void {
-		_adj = value == defaultAdj() ? "" : value;
+		_adj = value;
 	}
 	[Deprecated("Use color, not tone")]
 	public function get tone():String {

@@ -1458,7 +1458,7 @@ import classes.Items.*;
 			//CoC.instance.monk = 5;
 
 			// Bimbo Sophie
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] = 1;
+			flags[kFLAGS.SOPHIE_BIMBO_ACCEPTED] = 1;
 
 			// Isabella
 			flags[kFLAGS.ISABELLA_FOLLOWER_ACCEPTED] = 1;

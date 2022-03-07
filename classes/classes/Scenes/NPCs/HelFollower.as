@@ -377,7 +377,7 @@ private function bimboSophieGetsBooted4Firebutt():void {
 		
 		outputText("\n\nGod DAMMIT, Hel.");
 	}
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] = 1;
+	flags[kFLAGS.SOPHIE_DISABLED] = 1;
 	doNext(camp.returnToCampUseOneHour);
 }
 

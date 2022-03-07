@@ -32,7 +32,7 @@ public class Yenza extends TrollVillageAbstractContent{
                     outputText("You decide to approach the rather beautiful looking troll sitting by herself. She looks toward you and raises an eyebrow as you approach her.\n" +
                             "\n" +
                             "\"I don’t think I ordered a tall glass of water, and yet here you are.\" She eyes you up and down, taking an extended look at your groin.\n");
-                    if (player.hasCock()){
+                    if (!player.hasCock()){
                         outputText("\"I’ll pass, move along now, I don’t have time for nonsense.\"\n" +
                                 "\n" +
                                 "She’s very blunt. It would seem she doesn’t even want to talk to you. You decide to leave the diner.\n");
@@ -45,7 +45,7 @@ public class Yenza extends TrollVillageAbstractContent{
                                 "\n" +
                                 "\"The name’s Yenza, and you are..?\"\n" +
                                 "\n" +
-                                "You tell Yenza your name\n" +
+                                "You tell Yenza your name.\n" +
                                 "\n" +
                                 "Yenza gives you a sultry glare, \"[name]... I like that name…\" She leans in closer, encroaching on your personal space.\n" +
                                 "\n" +
@@ -173,9 +173,9 @@ public class Yenza extends TrollVillageAbstractContent{
                 "\n" +
                 "\"Let’s get out of these clothes…\" She states as she unbuttons her blouse, letting it drop to the floor as she shimmies out of her panties.\n\n");
         if (player.lowerGarment != UndergarmentLib.NOTHING || player.upperGarment != UndergarmentLib.NOTHING || player.armor != ArmorLib.NOTHING){
-            outputText("She approaches you and quickly makes way with your [armor] setting all of your clothing aside, making sure she has a full view of your [body]\n\n");
+            outputText("She approaches you and quickly makes way with your [armor] setting all of your clothing aside, making sure she has a full view of your body\n\n");
         }
-        outputText("\"Lie down, my little plaything…\" She instructs once she’s ready\n" +
+        outputText("\"Lie down, my little plaything…\" She instructs once she’s ready.\n" +
                 "\n" +
                 "You follow her guidance, lying down on her soft, plushy bed. She slinks up the bed, resting her breasts against your [legs]. The fur on her breasts tickles you gently, the soft texture of her is tantalizing as you can feel yourself erecting to full mast.\n" +
                 "\n" +
@@ -219,9 +219,9 @@ public class Yenza extends TrollVillageAbstractContent{
                 "\n" +
                 "She smirks as she guides you to the bedroom.\n" +
                 "\n" +
-                "\"Let’s get out of these clothes…\" She states as she unbuttons her blouse, letting it drop to the floor as she shimmies out of her panties. [(pc not nudist) She approaches you and quickly makes way with your [armor] setting all of your clothing aside, making sure she has a full view of your [body]\n" +
+                "\"Let’s get out of these clothes…\" She states as she unbuttons her blouse, letting it drop to the floor as she shimmies out of her panties. [(pc not nudist) She approaches you and quickly makes way with your [armor] setting all of your clothing aside, making sure she has a full view of your body.\n" +
                 "\n" +
-                "\"Lie down, my little plaything…\" She instructs once she’s ready\n" +
+                "\"Lie down, my little plaything…\" She instructs once she’s ready.\n" +
                 "\n" +
                 "You oblige to her wishes, splaying your body over the bed for her.\n" +
                 "\n" +

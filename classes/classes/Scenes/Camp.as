@@ -849,30 +849,29 @@ public class Camp extends NPCAwareContent{
 		if (player.hasStatusEffect(StatusEffects.DefenseCanopy)) {
 			outputText("A thorny tree has sprouted near the center of the [camp], growing a protective canopy of spiky vines around the portal and your [camp].  ");
 		}
+        //Wall
 		if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 10 && flags[kFLAGS.CAMP_WALL_PROGRESS] < 100) {
 			if (flags[kFLAGS.CAMP_WALL_PROGRESS] / 10 == 1) outputText("A thick wooden wall has been erected to provide a small amount of defense.  ");
 			else outputText("Thick wooden walls have been erected to provide some defense.  ");
-			if (flags[kFLAGS.CAMP_WALL_SKULLS] == 1) outputText("A single imp skull has been mounted on the wall segments");
-			else if (flags[kFLAGS.CAMP_WALL_SKULLS] >= 2 && flags[kFLAGS.CAMP_WALL_SKULLS] < 5) outputText("Few imp skulls have been mounted on the wall segments");
-			else if (flags[kFLAGS.CAMP_WALL_SKULLS] >= 5 && flags[kFLAGS.CAMP_WALL_SKULLS] < 15) outputText("Several imp skulls have been mounted on the wall segments");
-			else outputText("Innumerable imp skulls decorate the wall, some even impaled on wooden spikes");
-			outputText(" to serve as deterrence.  ");
-			if (flags[kFLAGS.CAMP_WALL_SKULLS] == 1) outputText("There is currently one skull.  ");
-			else outputText("There are currently " + num2Text(flags[kFLAGS.CAMP_WALL_SKULLS]) + " skulls.  ");
 		} else if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100) {
 			outputText("Thick wooden walls have been erected; they surround one half of your [camp] perimeter and provide good defense, leaving the the open half for access to the stream.  ");
 			if (flags[kFLAGS.CAMP_WALL_GATE] > 0) outputText("A gate has been constructed in the middle of the walls; it gets closed at night to keep any invaders out.  ");
-			if (flags[kFLAGS.CAMP_WALL_SKULLS] > 0) {
-				if (flags[kFLAGS.CAMP_WALL_SKULLS] == 1) outputText("A single imp skull has been mounted near the gateway");
-				else if (flags[kFLAGS.CAMP_WALL_SKULLS] >= 2 && flags[kFLAGS.CAMP_WALL_SKULLS] < 5) outputText("Few imp skulls have been mounted near the gateway");
-				else if (flags[kFLAGS.CAMP_WALL_SKULLS] >= 5 && flags[kFLAGS.CAMP_WALL_SKULLS] < 15) outputText("Several imp skulls have been mounted near the gateway");
-				else outputText("Innumerable imp skulls decorate the gateway and wall, some even impaled on wooden spikes");
-				outputText(" to serve as deterrence.  ");
-				if (flags[kFLAGS.CAMP_WALL_SKULLS] == 1) outputText("There is currently one skull.  ");
-				else outputText("There are currently " + num2Text(flags[kFLAGS.CAMP_WALL_SKULLS]) + " skulls.  ");
-			}
-			outputText("\n\n");
 		}
+        //Imp Skulls
+        if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 10 && flags[kFLAGS.CAMP_WALL_SKULLS] > 0) {
+            if (flags[kFLAGS.CAMP_WALL_SKULLS] == 1)
+                outputText("A single imp skull has been mounted " + (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100 ? "near the gateway" : "on the wall segments"));
+            else if (flags[kFLAGS.CAMP_WALL_SKULLS] >= 2 && flags[kFLAGS.CAMP_WALL_SKULLS] < 5)
+                outputText("Few imp skulls have been mounted " + (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100 ? "near the gateway" : "on the wall segments"));
+            else if (flags[kFLAGS.CAMP_WALL_SKULLS] >= 5 && flags[kFLAGS.CAMP_WALL_SKULLS] < 15)
+                outputText("Several imp skulls have been mounted " + (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100 ? "near the gateway" : "on the wall segments"));
+            else
+                outputText("Innumerable imp skulls decorate the " + (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100 ? "gateway and " : "") + "wall, some are even impaled on wooden spikes");
+            outputText(" to serve as deterrence.  ");
+            if (flags[kFLAGS.CAMP_WALL_SKULLS] == 1) outputText("There is currently one skull.  ");
+            else outputText("There are currently " + num2Text(flags[kFLAGS.CAMP_WALL_SKULLS]) + " skulls.  ");
+        }
+			outputText("\n\n");
 		//Magic Ward
 		if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] >= 2) {
 			if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100) outputText("Just within the wall are the");
@@ -1788,7 +1787,7 @@ public class Camp extends NPCAwareContent{
 				else if (rand(4) == 0) outputText("Sophie is sitting in her nest, idly brushing out her feathers.  Occasionally, she looks up from her work to give you a sultry wink and a come-hither gaze.\n\n");
 				else if (rand(3) == 0) outputText("Sophie is fussing around in her nest, straightening bits of straw and grass, trying to make it more comfortable.  After a few minutes, she flops down in the middle and reclines, apparently satisfied for the moment.\n\n");
 				else if (rand(2) == 0 || flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] == 0) {
-					if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0) outputText("Your platinum-blonde harpy, Sophie, is currently reading a book - a marked change from her bimbo-era behavior.  Occasionally, though, she glances up from the page and gives you a lusty look.  Some things never change....\n\n");
+					if (flags[kFLAGS.SOPHIE_BIMBO_ACCEPTED] > 0) outputText("Your platinum-blonde harpy, Sophie, is currently reading a book - a marked change from her bimbo-era behavior.  Occasionally, though, she glances up from the page and gives you a lusty look.  Some things never change....\n\n");
 					else outputText("Your pink harpy, Sophie, is currently reading a book.  She seems utterly absorbed in it, though you question how she obtained it.  Occasionally, though, she'll glance up from the pages to shoot you a lusty look.\n\n");
 				} else {
 					outputText("Sophie is sitting in her nest, ");

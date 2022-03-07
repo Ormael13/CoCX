@@ -11,6 +11,7 @@ package coc.view {
  keyboard events.
  ****/
 
+import classes.Parser.Parser;
 import classes.internals.Utils;
 
 import flash.display.MovieClip;
@@ -20,6 +21,7 @@ import flash.text.TextField;
 import flash.text.TextFormat;
 
 import flash.events.MouseEvent;
+import classes.Parser.Parser;
 
 public class CoCButton extends Block {
 
@@ -154,8 +156,12 @@ public class CoCButton extends Block {
 	public function show(text:String,callback:Function,toolTipText:String="",toolTipHeader:String=""):CoCButton {
 		this.labelText     = text;
 		this.callback      = callback;
-		this.toolTipHeader = toolTipHeader||text;
-		this.toolTipText   = toolTipText;
+		this.toolTipText = toolTipText;
+        if (this.toolTipText)
+            this.toolTipText = Parser.recursiveParser(this.toolTipText);
+		this.toolTipHeader = toolTipHeader || text;
+        if (this.toolTipHeader)
+            this.toolTipHeader = Parser.recursiveParser(this.toolTipHeader);
 		this.visible       = true;
 		this.enabled       = true;
 		this.alpha         = 1;
@@ -168,8 +174,12 @@ public class CoCButton extends Block {
 	public function showDisabled(text:String,toolTipText:String="",toolTipHeader:String=""):CoCButton {
 		this.labelText     = text;
 		this.callback      = null;
-		this.toolTipHeader = toolTipHeader||text;
-		this.toolTipText   = toolTipText;
+		this.toolTipText = toolTipText;
+        if (this.toolTipText)
+            this.toolTipText = Parser.recursiveParser(this.toolTipText);
+		this.toolTipHeader = toolTipHeader || text;
+        if (this.toolTipHeader)
+            this.toolTipHeader = Parser.recursiveParser(this.toolTipHeader);
 		this.visible       = true;
 		this.enabled       = false;
 		this.alpha         = 1;

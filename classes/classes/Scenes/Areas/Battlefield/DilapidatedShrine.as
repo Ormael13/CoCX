@@ -96,14 +96,15 @@ import classes.GlobalFlags.kFLAGS;
 			outputText("Its eyes seem ordinarily human-like, with an x shaped cross for pupils.\n\n");
 			outputText("At the base of the statue lies a metallic plaque. Given the rust coating it, the text is hard to decipher You can only make out, 'E.e.ie.'.\n\n");
 			outputText("Below the plaque lies two ornate wooden bowls, presumably used to put offerings in a time when this was a place people actively visited.\n\n");
-			if (shinshoku()) {
-				outputText("A soft voice rings not far from behind you, \"<i>Sometimes all you need is a small token of goodwill to get a response. Perhaps a few chilly peppers would be enough...</i>\"\n\n");
-				outputText("You turn around, expecting to see the old monk you've seen before. As you peer about, nobody is around. Are you hearing voices or was he truly here moments prior?\n\n");
-			}
+            //The hint gives everything away. Remove it, and people won't understand what to do. Maybe no checks here?
+			//if (shinshoku()) {
+            outputText("A soft voice rings not far from behind you, \"<i>Sometimes all you need is a small token of goodwill to get a response. Perhaps a few chilly peppers would be enough...</i>\"\n\n");
+            outputText("You turn around, expecting to see the old monk you've seen before. As you peer about, nobody is around. Are you hearing voices or was he truly here moments prior?\n\n");
+			//}
 			//outputText("\n\n");
 			menu();
 			if (player.hasItem(consumables.CHILLYP, 3)) addButton(0, "Offering", westSectionOffering);
-			else addButtonDisabled(0, "???", "Perhaps if you came back with Chilly peppers, like the voice said...");
+			else addButtonDisabled(0, "???", "Perhaps if you came back with 3 Chilly peppers, like the voice said...");
 			addButton(14, "Back", shrinemainmenu);
 		}
 		private function westSectionOffering():void {
