@@ -37,12 +37,26 @@ public class ShatterstoneSpell extends AbstractGreySpell {
 				(!ex || player.hasPerk(PerkLib.MagesWrathEx));
 	}
 	
+	override protected function usabilityCheck():String {
+		if (monster.hasStatusEffect(StatusEffects.Flying)) {
+			return "You can only use earth magic against enemy on the ground."
+		}
+		if (player.hasStatusEffect(StatusEffects.Flying)) {
+			return "You can't use earth magic when too far from the ground."
+		}
+		return super.usabilityCheck();
+	}
+	
 	override public function calcCooldown():int {
 		return spellGreyCooldown();
 	}
 	
 	public function calcDamage(monster:Monster, randomize:Boolean = true, casting:Boolean = true):Number { //casting - Increase Elemental Counter while casting (like Raging Inferno)
 		var baseDamage:Number = 2 * scalingBonusIntelligence(randomize);
+		if (player.hasPerk(PerkLib.Convergence) && (monster.hasPerk(PerkLib.EnemyGroupType) || monster.hasPerk(PerkLib.EnemyLargeGroupType))) {
+			if (monster.hasPerk(PerkLib.EnemyGroupType)) baseDamage *= 2;
+			else baseDamage *= 1.5;
+		}
 		if (player.weaponRangeName == "Artemis") baseDamage *= 1.5;
 		if (ex) baseDamage *= 2;
 		return adjustSpellDamage(baseDamage, DamageType.EARTH, CAT_SPELL_GREY, monster, true, casting);
@@ -53,7 +67,7 @@ public class ShatterstoneSpell extends AbstractGreySpell {
 			outputText("You spread your fingers, touching each of your fingertips together. Sending mana pulsing down into the earth, you grit your teeth, spikes of stone forming underneath. Your eyes flash blue for a brief moment, and the earth below your foe trembles. Spikes of stone shoot from the ground, impaling your enemy. You let a grunt of effort escape your mouth, and each spike explodes in a burst of flying stone.\n");
 		}
 		var damage:Number = calcDamage(monster, true, true);
-		damage = critAndRepeatDamage(display, damage, DamageType.EARTH,false,false,true);
+		damage = critAndRepeatDamage(display, damage, DamageType.EARTH,false,true,true);
 		if (ex) awardAchievement("Edgy Caster", kACHIEVEMENTS.COMBAT_EDGY_CASTER);
 		checkAchievementDamage(damage);
 		combat.heroBaneProc(damage);
