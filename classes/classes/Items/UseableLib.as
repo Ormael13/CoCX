@@ -57,10 +57,10 @@ use namespace CoC;
 			"You look over the branch of World Tree.  Maybe someone else will know how to use it.");
 		public const TBAPLAT:SimpleUseable = new SimpleUseable("TBaPlat", "T.BarkPlates", "a Tentacled Bark Plates", 3000, 
 			"A Tentacled Bark Plates.",
-			"You look over the Tentacled Bark Plates.  Need some better desc I suppose.");
+			"You look over the Tentacled Bark Plates.  Tencales writhe and worm softly along the thick, sturdy plate.");
 		public const DBAPLAT:SimpleUseable = new SimpleUseable("DBaPlat", "D.BarkPlates", "a Divine Bark Plates", 3000, 
 			"A Divine Bark Plates.",
-			"You look over the Divine Bark Plates.  Need some better desc I suppose.");
+			"You look over the Divine Bark Plates.  Tencales writhe and worm softly along the thick, sturdy plate.");
 		public const LETHITE:SimpleUseable = new SimpleUseable("Lethite", "Lethicite", "a chunk of lethicite", 1000, 
 			"A chunk of lethicite. It's rare as lethicite is only produced when a mortal becomes a demon and cums their souls out. A demon's favourite treat.",
 			"You examine the pinkish-purple crystal. It must be lethicite. You know that the demons like to consume them but you're sure there might be a use for it.");

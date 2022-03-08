@@ -84,7 +84,7 @@ use namespace CoC;
 
 		}
 		public function impVictory2():void {
-			if (flags[kFLAGS.FERAL_EXTRAS] == 4) outputText("The feral imps falls to the ground panting and growling in anger.  They quickly submits however, or so it seems like.  Looking like it was coordinated most fo them stands up and limps away or fly away leaving one weakest among the pack.  You walk towards him, while he gives one last defiant snarl before slipping into unconsciousness.");
+			if (flags[kFLAGS.FERAL_EXTRAS] == 4) outputText("The feral imps fall to the ground, still panting and growling in anger. Despite their efforts, they quickly submit. Most of the feral imps leave, scurrying away in desperate flight. That leaves only the weakest among the pack, trampled by his brethren. As you walk towards the imp, he tries to carry himself only to fall into unconsciousness.");
 			else outputText("The feral imp falls to the ground panting and growling in anger.  He quickly submits however, the thoroughness of his defeat obvious.  You walk towards the imp who gives one last defiant snarl before slipping into unconsciousness.");
 			menu();
 			addButton(0, "Kill Him", killFeralImp);
