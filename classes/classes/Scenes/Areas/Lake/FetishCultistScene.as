@@ -9,6 +9,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.SceneLib;
 import classes.Scenes.UniqueSexScenes;
+import classes.display.SpriteDb;
 
 public class FetishCultistScene extends AbstractLakeContent
 	{
@@ -37,7 +38,7 @@ public class FetishCultistScene extends AbstractLakeContent
 				outputText("\n\n<b>New codex entry unlocked: Followers of the Fetish!</b>")
 			}
 			startCombat(new FetishCultist());
-			spriteSelect(19);
+			spriteSelect(SpriteDb.s_fetish_cultist);
 			doNext(playerMenu);
 		}
 

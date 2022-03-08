@@ -17,6 +17,7 @@ import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.Places.WoodElves;
 import classes.Scenes.SceneLib;
 import classes.lists.Gender;
+import classes.display.SpriteDb;
 
 import coc.xxc.BoundStory;
 import coc.xxc.stmts.ZoneStmt;
@@ -733,7 +734,7 @@ use namespace CoC;
 		//Will be standalone
 		private function trappedSatyr():void {
 			clearOutput();
-			spriteSelect(99);
+			spriteSelect(SpriteDb.s_stuckSatyr);
 			outputText("As you wander through the woods, you find yourself straying into yet another corrupt glade.  However, this time the perverse grove isn't unoccupied; loud bleatings and brayings of pleasure split the air, and as you push past a bush covered in dripping, glans-shaped berries, you spot the source.\n\n");
 			outputText("A humanoid figure with a set of goat-like horns and legs - a satyr - is currently buried balls-deep in one of the vagina-flowers that scatter the grove, whooping in delight as he hungrily pounds into its ravenously sucking depths.  He stops on occasion to turn and take a slobbering suckle from a nearby breast-like growth; evidently, he doesn't care that he's stuck there until the flower's done with him.");
 			if (flags[kFLAGS.CODEX_ENTRY_SATYRS] <= 0) {
@@ -757,7 +758,7 @@ use namespace CoC;
 		//[=No=]
 		private function ignoreSatyr():void {
 			clearOutput();
-			spriteSelect(99);
+			spriteSelect(SpriteDb.s_stuckSatyr);
 			outputText("You shake your head, " +
 					((player.cor < 50)
 							? "disgusted by the strange thoughts this place seems to put into your mind"
@@ -769,7 +770,7 @@ use namespace CoC;
 		//Player returns to camp
 		private function rapeSatyr():void {
 			clearOutput();
-			spriteSelect(99);
+			spriteSelect(SpriteDb.s_stuckSatyr);
 			var x:Number = player.biggestCockIndex();
 			if (player.cor < 33) {
 				outputText("For a moment you hesitate... taking someone from behind without their consent seems wrong... but then again you doubt a satyr would pass on the opportunity if you were in his position.")
@@ -814,7 +815,7 @@ use namespace CoC;
 		//[=Leave=]
 		private function dontRepeatFuckSatyr():void {
 			clearOutput();
-			spriteSelect(99);
+			spriteSelect(SpriteDb.s_stuckSatyr);
 			outputText("You've had your fun, and you don't really want to fool around in the forest all day, so you grab your [armor] and leave the rutting satyr behind.");
 			doNext(camp.returnToCampUseOneHour);
 		}

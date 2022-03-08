@@ -2,6 +2,7 @@
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 public class SophieBimbo extends NPCAwareContent
 	{
@@ -43,8 +44,8 @@ Chance of waking the PC by whispering how much they need to fuck her in their sl
 Bimbo harpy pussy apparently tastes tangy with an undertone of sweet, almost peach-like flavor.
 */
 internal function sophieSprite():void {
-	if(flags[kFLAGS.SOPHIE_BIMBO_ACCEPTED] > 0 && flags[kFLAGS.SOPHIE_DISABLED] == 0) spriteSelect(83);
-	else spriteSelect(53);
+	if(flags[kFLAGS.SOPHIE_BIMBO_ACCEPTED] > 0 && flags[kFLAGS.SOPHIE_DISABLED] == 0) spriteSelect(SpriteDb.s_sophieBimbo);
+	else spriteSelect(SpriteDb.s_sophie);
 }
 
 override public function bimboSophie():Boolean {

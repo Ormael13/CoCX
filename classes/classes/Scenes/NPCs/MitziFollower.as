@@ -6,7 +6,7 @@ package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.display.SpriteDb;
+import classes.display.SpriteDb;
 	
 	public class MitziFollower extends NPCAwareContent implements TimeAwareInterface
 	{
@@ -310,7 +310,7 @@ private function mitziPreg():void {
 	}
 }
 private function MitziPoopsBabies():void {
-	//spriteSelect(32);
+	//spriteSelect(SpriteDb.s_izma);
 	clearOutput();
 	outputText("As you're strolling through camp, you hear a high pitched squeal catch your attention. You look to see Mitzi doubled over holding her belly. She staggers over to you, clutching her swollen belly with a heavy blush on her face.\n\n");
 	outputText("\"<i>Ooooo [name]! I-It's time! They're coming!</i>\"\n\n");

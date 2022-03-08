@@ -5,6 +5,7 @@ import classes.BodyParts.Tail;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 public class HelFollower extends NPCAwareContent
 	{
@@ -487,7 +488,7 @@ public function heliaFollowerMenu(display:Boolean = true):void {
 	if(display) 
 	{
 		clearOutput();
-		spriteSelect(68);
+		helScene.helSprite();
 	}
 	if(flags[kFLAGS.HEL_FOLLOWER_LEVEL] == 2) {
 		if(flags[kFLAGS.HELIA_ANAL_TRAINING_OFFERED] == 0 && display && player.biggestCockArea() > heliaAnalCapacity()) {

@@ -8,6 +8,7 @@ package classes.Scenes.Areas.Ocean
 	import classes.internals.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Scenes.UniqueSexScenes;
+    import classes.display.SpriteDb;
 
 	public class ScyllaScene extends BaseContent
 	{
@@ -19,7 +20,7 @@ package classes.Scenes.Areas.Ocean
 		
 public function oceanScyllaEncounter():void {
 	clearOutput();
-//	spriteSelect(32);
+//	spriteSelect(SpriteDb.s_izma);
 	outputText("As you row around on the ocean; tentacles surge around your boat, grabbing your leg and pulling you to the watery deeps under! As you scan the water to find your pseudo attacker, you end up face to face with what looks to be a mix between an octopus and a woman. Eight long tentacles grow at the place where her legs should be, each easily twice her length. She’s clearly intent on using them on you as she pulls you closer to her and opens her arms wide to welcome you in. That and the fact she's smirking like she’s about to have dinner tells you that you're clearly on the menu.\n\n");
 //	if (flags[kFLAGS.CODEX_ENTRY_SHARKGIRLS] <= 0) {
 //		flags[kFLAGS.CODEX_ENTRY_SHARKGIRLS] = 1;
@@ -28,11 +29,11 @@ public function oceanScyllaEncounter():void {
 	outputText("You are fighting a Scylla!");
 	if (!player.canSwimUnderwater()) player.createStatusEffect(StatusEffects.UnderwaterOutOfAir,0,0,0,0);
 	startCombat(new Scylla());
-	//spriteSelect(32);
+	//spriteSelect(SpriteDb.s_izma);
 }
 
 public function oceanScyllaWin():void {
-	//spriteSelect(70);
+	//spriteSelect(SpriteDb.s_sharkgirl);
 	clearOutput();
 	outputText("The scylla is defeated, weakly trying to get back to the lightless depths below. ");
 	if (player.canSwimUnderwater()) {
@@ -56,7 +57,7 @@ public function oceanScyllaWin2():void {
 	cleanupAfterCombat();
 }
 public function oceanScyllaWin3():void {
-	//spriteSelect(70);
+	//spriteSelect(SpriteDb.s_sharkgirl);
 	clearOutput();
 	outputText("Sadly for her, you are as good a swimmer as you are a fighter and as you close the distance, she is unable to deny you anymore. You smirk and slowly pull her tentacles out of the way, exposing her massive pussy");
 	if (player.hasCock()) {
@@ -83,7 +84,7 @@ public function oceanScyllaLoss():void {
 		return;
 	}
 	clearOutput();
-	//spriteSelect(32);
+	//spriteSelect(SpriteDb.s_izma);
 	oceanScyllaLoss2();
 }
 public function oceanScyllaLoss2():void {

@@ -6,7 +6,7 @@ package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.display.SpriteDb;
+    import classes.display.SpriteDb;
 	
 	public class ExcelliaFollower extends NPCAwareContent implements TimeAwareInterface
 	{
@@ -681,7 +681,7 @@ private function excelliaPreg():void {
 	}
 }
 private function ExcelliaPoopsBabies1():void {
-	//spriteSelect(32);
+	//spriteSelect(SpriteDb.s_izma);
 	clearOutput();
 	player.createStatusEffect(StatusEffects.ExcelliaChildbirth, rand(2), 0, 0, 0);
 	outputText("You can hear loud mooing coming from nearby. You follow the source of the noise until it leads you to Excellia's tent. You peek inside to find the cowgirl sitting back with her legs splayed wide and a hand on her rounded belly panting heavily. Her breasts practically leak like a running faucet and her vagina is dilated wide as a gush of fluids rushes out, making a mess of her bedroll.\n\n");
@@ -708,7 +708,7 @@ private function ExcelliaPoopsBabies1():void {
 	player.removeStatusEffect(StatusEffects.ExcelliaChildbirth);
 }
 private function ExcelliaPoopsBabies2():void {
-	//spriteSelect(32);
+	//spriteSelect(SpriteDb.s_izma);
 	clearOutput();
 	player.createStatusEffect(StatusEffects.ExcelliaChildbirth, rand(2), 0, 0, 0);
 	outputText("You can hear loud mooing coming from nearby. You follow the source of the noise until it leads you to Excellia sitting near your "+(flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 ? "cabin":"tent")+". The cowgirl sits back with her legs splayed wide and a hand on her rounded belly, panting heavily. Her breasts practically leak like a running faucet and her vagina is dilated wide as a gush of fluids rushes out pulling underneath her.\n\n");

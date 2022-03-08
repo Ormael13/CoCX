@@ -96,7 +96,6 @@ public function timeChangeLarge():Boolean {
 //const KIHA_HORSECOCK_FUCKED:int = 431;
 //const KIHA_CAMP_WATCH:int = 982;
 
-
 public function kihaSprite(nude:Boolean = false):void {
     if (!pregnancy.isPregnant) {
         if (nude) spriteSelect(SpriteDb.s_kiha_nude);

@@ -6,6 +6,7 @@ package classes.Scenes.Areas.Mountain
 import classes.*;
 import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kFLAGS;
+import classes.display.SpriteDb;
 
 public class InfestedHellhoundScene extends BaseContent
 	{
@@ -28,7 +29,7 @@ public class InfestedHellhoundScene extends BaseContent
 				outputText("\n\n<b>New codex entry unlocked: Hellhounds!</b>")
 			}
 			startCombat(new InfestedHellhound());
-			spriteSelect(27);
+			spriteSelect(SpriteDb.s_hellhound);
 		}
 
 

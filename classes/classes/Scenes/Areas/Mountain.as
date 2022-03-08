@@ -19,6 +19,7 @@ import classes.Scenes.NPCs.DivaScene;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 public class Mountain extends BaseContent
 	{
@@ -287,11 +288,11 @@ public class Mountain extends BaseContent
 		public function minotaurRouter():void {
 			//Every 15 explorations chance at mino bad-end!
 			if (player.hasPerk(PerkLib.MinotaurCumAddict) && !player.hasPerk(PerkLib.LactaBovineImmunity) && rand(16) == 0) {
-				spriteSelect(44);
+				spriteSelect(SpriteDb.s_minotaur);
 				minotaurScene.minoAddictionBadEndEncounter();
 				return;
 			} else {
-				spriteSelect(44);
+				spriteSelect(SpriteDb.s_minotaur);
 				if (!player.hasStatusEffect(StatusEffects.TF2) && player.level <= 1 && player.str <= 40) {
 					if (silly()) {
 						//(Ideally, this should occur the first time the player would normally get an auto-rape encounter with the minotaur. The idea is to give a breather encounter to serve as a warning of how dangerous the mountain is)
@@ -382,7 +383,7 @@ public class Mountain extends BaseContent
 					return;
 				}
 				minotaurScene.getRapedByMinotaur(true);
-				spriteSelect(44);
+				spriteSelect(SpriteDb.s_minotaur);
 			}
 		}
 		public function partsofDerpnadeLauncher():void {

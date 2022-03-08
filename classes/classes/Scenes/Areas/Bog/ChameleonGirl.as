@@ -67,7 +67,6 @@ public class ChameleonGirl extends Monster
 
 		override protected function performCombatAction():void
 		{
-			game.spriteSelect(89);
 			var select:int = rand(3);
 			if (select == 0) rollKickClawWhatTheFuckComboIsThisShit();
 			else if (select == 1) chameleonTongueAttack();

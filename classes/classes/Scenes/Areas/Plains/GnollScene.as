@@ -6,6 +6,7 @@ package classes.Scenes.Areas.Plains
 	import classes.*;
 	import classes.GlobalFlags.*;
 	import classes.Scenes.UniqueSexScenes;
+    import classes.display.SpriteDb;
 
 	public class GnollScene extends BaseContent
 	{
@@ -18,7 +19,7 @@ package classes.Scenes.Areas.Plains
 //Gnoll Entrance
 		public function gnollEncounter():void
 		{
-			spriteSelect(11);
+			spriteSelect(SpriteDb.s_club_gnoll);
 			clearOutput();
 			outputText("The sound of distant laughter comes across the plains, then seems to die off suddenly.  A moment later, a gnoll comes bounding from the nearest scrap of cover and barrels into you.  The monstrous thing giggles as it bounces back and forth before you, looking for an opening to exploit.");
 			startCombat(new Gnoll());

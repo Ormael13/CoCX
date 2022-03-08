@@ -6,7 +6,7 @@ package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.display.SpriteDb;
+    import classes.display.SpriteDb;
 	
 	public class MagnoliaFollower extends NPCAwareContent
 	{

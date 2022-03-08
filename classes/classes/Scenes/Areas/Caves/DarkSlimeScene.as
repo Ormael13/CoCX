@@ -22,7 +22,7 @@ package classes.Scenes.Areas.Caves
 	import classes.Items.Shields.DarkAegis;
 	import classes.Scenes.Dungeons.EbonLabyrinth;
 	import classes.Scenes.SceneLib;
-	import classes.display.SpriteDb;
+    import classes.display.SpriteDb;
 	import classes.internals.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.lists.BreastCup;

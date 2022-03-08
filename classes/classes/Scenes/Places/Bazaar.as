@@ -83,7 +83,7 @@ public function winAgainstGuard():void {
 //[Enter]
 public function enterTheBazaarAndMenu(demons:Boolean = true):void {
 	clearOutput();
-	spriteSelect(-1);
+	spriteSelect(null);
 	outputText(images.showImage("location-bazaar"));
 	//Make sure flags to allow entrance is set.
 	if(flags[kFLAGS.BAZAAR_ENTERED] == 0) flags[kFLAGS.BAZAAR_ENTERED] = 1;

@@ -9,7 +9,7 @@ package classes.Scenes.NPCs
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Scenes.Areas.HighMountains.MinotaurMob;
 	import classes.Scenes.Monsters.Manticore;
-	import classes.display.SpriteDb;
+import classes.display.SpriteDb;
 	import classes.Scenes.UniqueSexScenes;
 	
 	public class EtnaFollower extends NPCAwareContent
@@ -721,7 +721,7 @@ public function etnaMarriageYes2():void
 	outputText("You step forward to save your marriage, there's no way you're going to let these huge pricks ruin your special day or hers!\n\n");
 	flags[kFLAGS.ETNA_FOLLOWER] = 3;
 	startCombat(new MinotaurMob());
-	spriteSelect(94);
+	spriteSelect(SpriteDb.s_minotaurSons);
 	doNext(playerMenu);
 }
 public function etnaMarriageYes3():void

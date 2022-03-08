@@ -11,6 +11,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.API.Encounter;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
+
 import classes.internals.*;
 
 	public class AikoScene extends BaseContent implements Encounter, TimeAwareInterface

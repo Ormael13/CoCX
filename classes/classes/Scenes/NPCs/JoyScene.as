@@ -1198,7 +1198,6 @@ import classes.display.SpriteDb;
             flags[kFLAGS.JOJO_BIMBO_STATE] = 4; //after bimbo
             flags[kFLAGS.TALKED_TO_JOJO_ABOUT_JOY] = 0; //waiting for talk with jojo
             dynStats("cor", -3); //worth it
-			spriteSelect(-1); //disable sprite - it's annoyinh
             doNext(camp.returnToCampUseOneHour);
         }
 

@@ -17,7 +17,7 @@ package classes.Scenes.Places{
 	import classes.Items.Armors.Nothing;
 	import classes.Scenes.Areas.Forest.WoodElvesHuntingParty;
 	import classes.Scenes.SceneLib;
-import classes.display.SpriteDb;
+    import classes.display.SpriteDb;
 import classes.internals.SaveableState;
 	import classes.CoC;
 

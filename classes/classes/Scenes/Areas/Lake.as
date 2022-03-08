@@ -9,6 +9,7 @@ import classes.CoC;
 import classes.Scenes.Areas.Lake.*;
 import classes.Scenes.Holidays;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 use namespace CoC;
 
@@ -185,7 +186,7 @@ use namespace CoC;
 				//OOZE!
 				else {
 					flags[kFLAGS.TIMES_MET_OOZE]++;
-					spriteSelect(25);
+					spriteSelect(SpriteDb.s_green_slime);
 					//High int starts on even footing.
 					if (player.inte >= 25) {
 						clearOutput();

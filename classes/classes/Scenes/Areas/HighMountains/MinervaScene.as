@@ -4,6 +4,7 @@ import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 public class MinervaScene extends BaseContent implements TimeAwareInterface {
 
@@ -34,9 +35,9 @@ public class MinervaScene extends BaseContent implements TimeAwareInterface {
 		return 100;
 	}
 	public function minervaSprite():void {
-		if (flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] >= 10) spriteSelect(120);
-		else if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] >= 10) spriteSelect(121);
-		else spriteSelect(95);
+		if (flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] >= 10) spriteSelect(SpriteDb.s_minerva_pure);
+		else if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] >= 10) spriteSelect(SpriteDb.s_minerva_corrupt);
+		else spriteSelect(SpriteDb.s_minerva);
 	}
 
 	public function minervaRomanced():Boolean {

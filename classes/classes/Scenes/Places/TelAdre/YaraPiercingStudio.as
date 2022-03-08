@@ -3,9 +3,9 @@ import classes.BodyParts.Piercing;
 import classes.GlobalFlags.kFLAGS;
 import classes.PerkLib;
 import classes.StatusEffects;
+import classes.display.SpriteDb;
 
 import coc.view.ButtonData;
-
 import coc.view.ButtonDataList;
 
 public class YaraPiercingStudio extends TelAdreAbstractContent {
@@ -73,7 +73,7 @@ public class YaraPiercingStudio extends TelAdreAbstractContent {
     public var piercingLoc:Number = 0;
 
     public function piercingStudio():void {
-        spriteSelect(63);
+        spriteSelect(SpriteDb.s_yara);
         var about:Function = null;
         if (!player.hasStatusEffect(StatusEffects.Yara)) {
             about = aboutYara;
@@ -100,7 +100,7 @@ public class YaraPiercingStudio extends TelAdreAbstractContent {
     }
 
     private function aboutYara():void {
-        spriteSelect(63);
+        spriteSelect(SpriteDb.s_yara);
         player.createStatusEffect(StatusEffects.Yara, 0, 0, 0, 0);
         clearOutput();
         outputText("You introduce yourself and ask Yara about her past, noting that ");
@@ -165,7 +165,7 @@ public class YaraPiercingStudio extends TelAdreAbstractContent {
     }
 
     private function pierceMenu():void {
-        spriteSelect(63);
+        spriteSelect(SpriteDb.s_yara);
         hideUpDown();
         clearOutput();
         outputText("Yara asks, \"<i>Ok then, what would you like pierced " + player.mf("sir", "cutie") + "?  Just keep in mind my piercings are special - they're permanent and CAN'T be removed.</i>\"");
@@ -226,7 +226,7 @@ public class YaraPiercingStudio extends TelAdreAbstractContent {
     }
 
     private function chooseMaterials(loc:int, type:int):void {
-        spriteSelect(63);
+        spriteSelect(SpriteDb.s_yara);
         clearOutput();
         outputText("Yara gathers up her materials and says, \"<i>Ok, now what type of material do you want it made from?  Don't worry about price, none of these are that rare, so the piercing will only be 100 gems.  Though I do have some rarer materials; you'll need 1,000 gems to spend if you want to check them out.</i>\"");
         if (player.gems < 100) {
@@ -252,14 +252,14 @@ public class YaraPiercingStudio extends TelAdreAbstractContent {
     }
 
     private function areYouSure(loc:int, type:int, mat:int):void {
-        spriteSelect(63);
+        spriteSelect(SpriteDb.s_yara);
         clearOutput();
         outputText("Yara says, \"<i>Ok, last chance to back out, are you sure you want to go ahead with this?  Remember, once I put it in, it's permanent.</i>\"");
         doYesNo(curry(normalPierceAssemble, loc, type, mat), piercingStudio);
     }
 
     private function chooseAdvancedMaterials(loc:int, type:int):void {
-        spriteSelect(63);
+        spriteSelect(SpriteDb.s_yara);
         clearOutput();
         outputText("Yara goes back into the back and comes out with a gilded tray full of exotic materials.  She hands you a brochure and asks, \"<i>Ok, now what am I going to be working with?</i>\"");
         outputText("\n\nThere's a number of materials listed here:");
@@ -282,7 +282,7 @@ public class YaraPiercingStudio extends TelAdreAbstractContent {
     }
 
     private function normalPierceAssemble(loc:int, type:int, mat:int):void {
-        spriteSelect(63);
+        spriteSelect(SpriteDb.s_yara);
         clearOutput();
         outputText("Yara makes you comfortable and has you look away while she uses her piercing tools.  It hurts, but she's skilled and before you know it, your piercing is done!");
         var shortP:String = "";
@@ -559,7 +559,7 @@ public class YaraPiercingStudio extends TelAdreAbstractContent {
     }
 
     private function piercingRemove():void {
-        spriteSelect(63);
+        spriteSelect(SpriteDb.s_yara);
         hideUpDown();
         clearOutput();
         outputText("\"<i>Really?</i>\" asks Yara, \"<i>I told you those piercings are permanent!  Well, I suppose they CAN be removed, but you're gonna hurt like hell afterwards.  If you really want me to, I can remove something, but it'll cost you 100 gems for the painkillers and labor.</i>\"");
@@ -592,7 +592,7 @@ public class YaraPiercingStudio extends TelAdreAbstractContent {
     }
 
     private function yaraSex(girl:Boolean = true):void {
-        spriteSelect(63);
+        spriteSelect(SpriteDb.s_yara);
         clearOutput();
         outputText("Yara makes you comfortable and has you look away while she uses her piercing tools.  It hurts, but she's skilled. Before you know it, your piercing is done!  You move to rise, retaining a bit of modesty");
         if (flags[kFLAGS.PC_FETISH] > 0) {
@@ -605,7 +605,7 @@ public class YaraPiercingStudio extends TelAdreAbstractContent {
     }
 
     private function letsDoYaraSex(girl:Boolean = true):void {
-        spriteSelect(63);
+        spriteSelect(SpriteDb.s_yara);
         clearOutput();
         var x:Number = player.cockThatFits(36);
         if (flags[kFLAGS.HYPER_HAPPY]) {

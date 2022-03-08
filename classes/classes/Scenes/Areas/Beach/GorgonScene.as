@@ -3,6 +3,7 @@ package classes.Scenes.Areas.Beach
 import classes.*;
 import classes.BodyParts.Face;
 import classes.BodyParts.LowerBody;
+import classes.display.SpriteDb;
 
 public class GorgonScene extends BaseContent
 	{
@@ -12,7 +13,7 @@ public class GorgonScene extends BaseContent
 		}
 
 public function gorgonEncounter():void {
-	//spriteSelect(45);
+	//spriteSelect(SpriteDb.s_naga);
 	//Create status if needed
 	if(!player.hasStatusEffect(StatusEffects.Naga)) player.createStatusEffect(StatusEffects.Naga,0,0,0,0);
 	clearOutput();

@@ -6,6 +6,7 @@ import classes.BodyParts.Wings;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.EventParser;
+import classes.display.SpriteDb;
 
 public class MaraeScene extends AbstractBoatContent implements TimeAwareInterface {
 
@@ -42,7 +43,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
 		//End of Interface Implementation
 
 public function encounterMarae():void {
-	spriteSelect(40);
+	spriteSelect(SpriteDb.s_marae);
 	outputText(images.showImage("marae-first-encounter"));
 	outputText("Like a hidden emerald jewel, a small island appears in the distance.  You wager that you're somewhere near the center of this lake.  How coincidental.   You row closer, eager to get out of the boat and stretch your [legs].  The rowboat grounds itself in the moist earth of the island, coming to a dead stop.   You climb out, noting that this island is little more than a raised mound of earth and grass, with a small tree perched atop its apex.  ");
 	//Dungeon operational
@@ -158,7 +159,7 @@ public function encounterMarae():void {
 }
 
 public function alraunezeMe():void {
-	spriteSelect(40);
+	spriteSelect(SpriteDb.s_marae);
 	outputText(images.showImage("marae-first-encounter"));
 	outputText("For some weird reason, you feel a growing need to visit Marae. Perhaps it’s a natural calling for plant morphs like yourself, tuned to the earth's voice as you have become, or perhaps there is a greater calling to it. Perhaps it’s just that getting into the good graces of the local plant goddess while being a plant yourself is common sense. You use the boat as usual and row to the island where Marae resides. It doesn’t take long for the goddess to notice your presence.\n\n");
 	if (flags[kFLAGS.FACTORY_SHUTDOWN] == 1) {
@@ -406,7 +407,7 @@ public function winAgainstMarae3rdRound():void {
 }
 
 private function maraeBadEnd():void {
-	spriteSelect(40);
+	spriteSelect(SpriteDb.s_marae);
 	clearOutput();
 	outputText(images.showImage("marae-bad-end"));
 	if(flags[kFLAGS.MET_MARAE_CORRUPTED] <= 0) outputText("The goddess flows out of the tree, stepping away from it as a living woman, curvy and nude.\n\n");
@@ -441,7 +442,7 @@ private function maraeBadEnd():void {
 }
 
 private function maraeStealLethicite(deliberate:Boolean = false):void {
-	spriteSelect(40);
+	spriteSelect(SpriteDb.s_marae);
 	clearOutput();
 	//(SUCCESS)
 	if ((player.spe > 35 && (rand(player.spe / 3 + 30) > 20) || player.spe > 35 && player.findPerk(PerkLib.Evade) >= 0 && rand(3) < 2) && !deliberate) {
@@ -507,7 +508,7 @@ private function maraeStealLethicite(deliberate:Boolean = false):void {
 }
 
 public function level2MaraeEncounter():void {
-	spriteSelect(40);
+	spriteSelect(SpriteDb.s_marae);
 	flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] = 1;
 	clearOutput();
 	outputText(images.showImage("marae-second-encounter"));
@@ -561,7 +562,7 @@ public function level2MaraeEncounter():void {
 }
 
 private function MaraeIIStageII():void {
-	spriteSelect(40);
+	spriteSelect(SpriteDb.s_marae);
 	clearOutput();
 	outputText(images.showImage("marae-second-encounter-pt-two"));
 	flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] = 2;
@@ -703,7 +704,7 @@ private function MaraeIIStageII():void {
 }
 
 private function MaraePt2RoundIIIPrizes():void {
-	spriteSelect(40);
+	spriteSelect(SpriteDb.s_marae);
 	clearOutput();
 	//[EPILOGUE]
 	//[Dudes]
@@ -824,7 +825,7 @@ private function MaraePt2RoundIIIPrizes():void {
 }
 
 private function MaraeIIFlyAway():void {
-	spriteSelect(40);
+	spriteSelect(SpriteDb.s_marae);
 	clearOutput();
 	outputText("You launch into the air and beat your wings, taking to the skies.  The tentacle-tree lashes at you, but comes up short.  You've escaped!  Something large whooshes by, and you glance up to see your boat sailing past you.  She must have hurled it at you!  It lands with a splash near the mooring, somehow surviving the impact.  You dive down and drag it back to the dock before you return to camp.  That was close!");
 	doNext(camp.returnToCampUseOneHour);
@@ -855,7 +856,7 @@ private function runFromPervertedGoddess():void {
 }
 
 public function talkToMaraeAboutMinervaPurification():void {
-	spriteSelect(40);
+	spriteSelect(SpriteDb.s_marae);
 	outputText("As you step into the boat and sail it out into the depths of the lake, you focus on trying to find Marae. She may be Minerva’s best chance of being healed. Thankfully, luck is with you and you soon find yourself pulling ashore at the lushly forested island where the nature goddess dwells. In response to your presence, Marae herself materializes from the vegetation, looking at you in a concerned manner.");
 
 	outputText("\n\n\"<i>You return to my island, champion? What brings you here? Is there something troubling you?</i>\" the deity gently asks you.");
@@ -874,7 +875,7 @@ public function talkToMaraeAboutMinervaPurification():void {
 }
 
 public function encounterPureMaraeEndgame():void {
-	spriteSelect(40);
+	spriteSelect(SpriteDb.s_marae);
 	clearOutput();
 	outputText("As you step into the boat and sail it out into the depths of the lake, you focus on trying to find Marae. After all, you need a good challenge. Thankfully, luck is with you and you soon find yourself pulling ashore at the lushly forested island where the nature goddess dwells. In response to your presence, Marae herself materializes from the vegetation, looking at you in a concerned manner.");
 	if (flags[kFLAGS.PURE_MARAE_ENDGAME] == 0) {

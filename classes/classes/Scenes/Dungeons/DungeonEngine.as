@@ -500,7 +500,7 @@ public class DungeonEngine extends BaseContent
 		public function setDungeonButtons(northFunction:Function = null, southFunction:Function = null, westFunction:Function = null, eastFunction:Function = null):void {
 			statScreenRefresh();
 			hideUpDown();
-			spriteSelect(-1);
+			spriteSelect(null);
 			menu();
 			if (northFunction != null) addButton(6, "North", navigateToRoom, northFunction);
 			if (southFunction != null) addButton(11, "South", navigateToRoom, southFunction);
@@ -515,7 +515,7 @@ public class DungeonEngine extends BaseContent
 		public function setDungeonButtonsRD(northFunction:Function = null, southFunction:Function = null, westFunction:Function = null, eastFunction:Function = null):void {
 			statScreenRefresh();
 			hideUpDown();
-			spriteSelect(-1);
+			spriteSelect(null);
 			menu();
 			if (northFunction != null) addButton(6, "North", navigateToRoomRD, northFunction);
 			if (southFunction != null) addButton(11, "South", navigateToRoomRD, southFunction);
@@ -530,7 +530,7 @@ public class DungeonEngine extends BaseContent
 		public function setDungeonButtonsRD3D(northFunction:Function = null, southFunction:Function = null, westFunction:Function = null, eastFunction:Function = null, upFunction:Function = null, downFunction:Function = null):void {
 			statScreenRefresh();
 			hideUpDown();
-			spriteSelect(-1);
+			spriteSelect(null);
 			menu();
 			if (northFunction != null) addButton(6, "North", navigateToRoomRD, northFunction);
 			if (southFunction != null) addButton(11, "South", navigateToRoomRD, southFunction);
@@ -547,7 +547,7 @@ public class DungeonEngine extends BaseContent
 		public function setDungeonButtonsEL(northFunction:Function = null, southFunction:Function = null, westFunction:Function = null, eastFunction:Function = null, upFunction:Function = null, downFunction:Function = null):void {
 			statScreenRefresh();
 			hideUpDown();
-			spriteSelect(-1);
+			spriteSelect(null);
 			menu();
 			addButton(2, "North", navigateToRoomEL, northFunction);
 			addButton(12, "South", navigateToRoomEL, southFunction);

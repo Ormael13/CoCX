@@ -11,6 +11,7 @@ import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 import classes.Scenes.UniqueSexScenes;
+import classes.display.SpriteDb;
 
 public class BeeGirlScene extends BaseContent
 	{
@@ -52,7 +53,7 @@ public class BeeGirlScene extends BaseContent
 		public function beeEncounter():void
 		{
 			clearOutput();
-			spriteSelect(6);
+			spriteSelect(SpriteDb.s_bee_girl);
 			//Intro text...
 			outputText("As you approach the edge of the forest, a sweet scent wafts into your nose. Tantalizing, teasing, alluring. As you sniff the air, you find yourself following it, as if an invisible hand is pulling you toward its origin.  Little do you know, that is essentially what's happening. The further and further you go, the more heavy the scent grows, as well as a sound. A sound of a buzz, but not in a maddening tone, as if someone is humming. It's a lovely tune, one that would stick in the back of the mind, but not in a bad way.\n\n");
 			//Bee appears!
@@ -73,7 +74,7 @@ public class BeeGirlScene extends BaseContent
 
 		private function beeEncounterSelect(clearScreen:Boolean = true):void {
 			if (clearScreen) clearOutput();
-			spriteSelect(6);
+			spriteSelect(SpriteDb.s_bee_girl);
 			outputText("That's when she comes into view.  A great woman, yellow and black, a Bee-like handmaiden would be the best comparison.  She sits atop a great flower while humming her tune, happily picking the petals off of another flower.  Her body is thin, save her abdomen.  Her head is more humanoid than bee, with black eyes, floppy ntennae, and luscious black lips that glimmer wetly");
 			if (player.lowerBody == LowerBody.PLANT_FLOWER) {
 				AlrauneAndBee();
@@ -166,7 +167,7 @@ public class BeeGirlScene extends BaseContent
 		}
 
 		private function beeEncounterAsBeeMorphFemaleLeave():void {
-			spriteSelect(6);
+			spriteSelect(SpriteDb.s_bee_girl);
 			outputText("\n\nYou shake your head at her, and she gives you a look of disappointment.  You’re a little disappointed yourself, but you already decided to leave.  You turn away from the bee and resume your explorations.  Nothing else of note happens over the rest of the hour.");
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -179,7 +180,7 @@ public class BeeGirlScene extends BaseContent
 
 		private function beeEncounterAfraidFirstTimeSex():void {
 			clearOutput();
-			spriteSelect(6);
+			spriteSelect(SpriteDb.s_bee_girl);
 			attitude = BEE_GIRL_PLAYER_VOLUNTARY_EGGING;
 			outputText("You smile and nod to her.  She crooks her finger towards you, inviting you to come closer as she spreads her legs wide.  You walk slowly towards her, wearing a " + (player.cor < 40 ? "somewhat nervous " : "") + "smile on your face.  You decide to take the opportunity to look over her body once more.  Starting at her unusual legs and feet, you marvel at how the alien woman’s exoskeleton legs looks so much like boots, spread wide and inviting towards you.  Your eyes move up her legs to her thighs, covered in an intriguing yellow fuzz.  You find yourself wondering what that fluff would feel like to touch.  At the same time, it’s almost as if it were leading the way to her honey pot; inevitably drawing your view to it.\n\n");
 			outputText("Her cunny looks sort of like a human pussy, but is ringed with small bits of exoskeleton to grip down tightly.  However, the most notable part is how it seems to be an almost literal honey pot.  You can see small drips of yellow goo dripping out, and you guess that that must be the main source of the sweet smell that fills the clearing.  Your mind wanders back to the clearing and you look around for a moment and notice that a number of large red flowers have been strewn about.  While you don’t recognize the flowers, you guess that they’re probably the reason that the smell isn’t so overpowering this time around.  Now the bee’s scent is just at the back of your mind, making you aroused and calming your nerves a little; not unlike the gentle and calming, but not overpowering, buzzing of the handmaiden’s wings.\n\n");
@@ -222,7 +223,7 @@ public class BeeGirlScene extends BaseContent
 
 		private function beeEncounterAfraidRepeatSex():void {
 			clearOutput();
-			spriteSelect(6);
+			spriteSelect(SpriteDb.s_bee_girl);
 			outputText("You give a nod and strip off your [armor].  The bee reclines back in her flower, continuing to pick away at the smaller flower in her hands while she waits for you.  The girl makes no moves until you’re right in front of her, then she gives you a smile and invites you into her embrace.  You take a deep breath to ready yourself for what is to come before falling into her arms.  She holds you close for a time, ");
 			if (player.hasCock()) {
 				outputText("gently running her fingers along your [cocks] bringing " + (player.cocks.length > 1 ? "them" : "it") + " to full hardness" + (player.hasVagina() ? ", " : " and "));
@@ -286,7 +287,7 @@ public class BeeGirlScene extends BaseContent
 
 		private function beeEncounterDutyTalk():void {
 			clearOutput();
-			spriteSelect(6);
+			spriteSelect(SpriteDb.s_bee_girl);
 			outputText("The handmaiden seems to be quite happy to talk to you for a little while.  She is quite interested in the tales you have to share, and you have a chance to hear a bit about the world from her.  After the two of you have been talking for awhile, you notice that she has been running her hand over her lady bits and you ask her about it.  <i>“Oh?  Well, I’m juzzzt zzzo horny right now, do you think you could help me out with that?  You can keep zzzome of the honey for later, and it could do zzzome incredible thingzzz to you.”</i>  Do you take her up on her offer?”</i>");
 			if (player.inte < 50) dynStats("int", 0.5);
 			doYesNo(freeHoneyEvent, beeEncounterDutyLeave);
@@ -294,7 +295,7 @@ public class BeeGirlScene extends BaseContent
 
 		private function beeEncounterDutyLeave():void {
 			clearOutput();
-			spriteSelect(6);
+			spriteSelect(SpriteDb.s_bee_girl);
 			outputText("You decline her offer, and shortly afterwards you take your leave to return to camp.");
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -328,7 +329,7 @@ public class BeeGirlScene extends BaseContent
 
 		private function beeEncounterSheBeatsYouRegularlyTalk():void {
 			clearOutput();
-			spriteSelect(6);
+			spriteSelect(SpriteDb.s_bee_girl);
 			outputText("<i>“Zzzo, you’re being nizzze today?”</i> she smiles as she gently floats over towards you.  <i>“I know what you’re really here for, you can’t fight it anymore.”</i> she gently slaps your [butt] and you find yourself start to walk towards the large flower, the bee girl gently floating behind you.  She giggles at you and says, <i>“Zzzee?  You really juzzzt want the eggzzz and honey.  You’re a zzzpecial one, made juzzzt for carrying the hive’zzz eggzzz.”</i>  You fall into the flower and feel the bee girl gently land on your back.  <i>“Are you ready?”</i> she asks you.");
 			beeEncounterSheBeatsYouRegularlyLastChance();
 		}
@@ -345,7 +346,7 @@ public class BeeGirlScene extends BaseContent
 
 		private function beeEncounterSheBeatsYouRegularlyDontLetHer():void {
 			clearOutput();
-			spriteSelect(6);
+			spriteSelect(SpriteDb.s_bee_girl);
 			outputText("You barely manage to shake off her wiles and roll to the side.  You give her one last look before picking yourself up and running away from the clearing.  That really could have gone better.");
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -354,7 +355,7 @@ public class BeeGirlScene extends BaseContent
 			if (clearScreen)
 				clearOutput();
 			else outputText("\n\n");
-			spriteSelect(6);
+			spriteSelect(SpriteDb.s_bee_girl);
 			outputText("You almost breathlessly say <i>“Yes!”</i> just before you give yourself over to the siren call of the bee’s humming and the mind blowing effects of her scent.  <i>“Good " + player.mf("boy", "girl") + ".”</i> she coos and slips off your [armor].  Then she slowly wraps her arms around your [chest] and you feel something start to push against your [ass].  You sigh with pleasure and relax, allowing your rear entrance to be penetrated by the intruder.  You hear the bee girl giggle and sigh above you, quite pleased with your decision to allow her to enter you.\n\n");
 			if (player.hasBreasts()) {
 				outputText("She starts to grip and squeeze your [chest] as the intruder to your anal passage continues its advance.  You can only gasp and cry out in pleasure with each motion.  You hear her say, <i>“Let’zzz make thizzz extra zzzpeacial,”</i> as one of her hands is removed from your chest; within moments something wet and sticky is placed on the vacated [nipple].  You shudder as the bee rubs the honey into the sensitive tips, and squeal as she does the same treatment to the other " + nippleDescript(0) + ".\n\n");
@@ -400,7 +401,7 @@ public class BeeGirlScene extends BaseContent
 
 		private function beeEncounterWithWorms():void { //If she won't fuck infested players after combat then she shouldn't fuck them here either
 			clearOutput();
-			spriteSelect(6);
+			spriteSelect(SpriteDb.s_bee_girl);
 			outputText("You slowly " + (player.isTaur() ? "trot" : "walk") + " toward the bee girl, your mind in a haze.  Her antennae.type wiggle in anticipation and she gives you a lusty smile, eager to fill your ass with her payload.  You start to take off your clothes, the last of your underwear falling to the forest floor as you reach her.\n\n");
 			outputText("The bee maiden puts her hands on your shoulders.  She draws you gently into a kiss, but as her sweet saliva prepares you for what is to come you feel one of your annelid passengers slither down " + (player.hasStatusEffect(StatusEffects.WormPlugged) ? "from your cervix and poke out of your cunt" : "your urethra and wrap itself around the tip of your cock") + ".  The bee girl pulls back from the kiss, looks down and jumps back, the color draining from her face.\n\n");
 			outputText("<i>“By my queen!  That izzz dizzzguzzting!  How can you zzztand it?  Ugh, no, I can't lay my queen'zzz preciouzzz eggzzz in a body with thozzze.”</i>  A few drips of fluid dribble from the tip of her ovipositor and she adds, <i>“and I zzzo wanted to.  I really have to find zzzomeone who can take thezzze and keep them zzzafe.”</i>\n\n");
@@ -412,7 +413,7 @@ public class BeeGirlScene extends BaseContent
 
 		private function fightTheBeeGirl():void {
 			clearOutput();
-			spriteSelect(6);
+			spriteSelect(SpriteDb.s_bee_girl);
 			outputText("You clear your head and resolve to defeat the monstrous bee-girl");
 			if (player.level >= 3 && ((rand(4) == 0 && player.level < 12) || (rand(4) > 0 && player.level >= 12))) {
 				outputText(" huntress.");
@@ -454,7 +455,7 @@ public class BeeGirlScene extends BaseContent
 		}
 
 		private function AlrauneAndBee():void {
-			spriteSelect(6);
+			spriteSelect(SpriteDb.s_bee_girl);
 			clearOutput();
 			outputText("The bee girl can smell your floral scent long before you enter the small clearing where she is playing about. She looks at you almost entranced, as you slowly move around on your vines, displaying your verdant and fertile body for her to see. This time around you're the seducer, and the bee girl seems to have already fallen to your charms. The fact that you're spraying your aphrodisiac pollen into the air around you doesn't help the poor bee girl’s plight as she practically fawns over you, already flushed in anticipation and her honeyed smell intensifies with her arousal.\n\n");
 			outputText("\"<i>What great fragranzzze! I don’t care what kind of flower you are, but if your nectar smellzzz and tastes as good as your zzzcent, the honeybrewerzzz will clearly want some of it.</i>\"\n\n");
@@ -475,7 +476,7 @@ public class BeeGirlScene extends BaseContent
 		}
 
 		private function beeEncounterClassicSex(postCombat:Boolean = true):void {
-			spriteSelect(6);
+			spriteSelect(SpriteDb.s_bee_girl);
 			//Give into the beeee
 			if (attitude == BEE_GIRL_TALKED_AND_LEFT || attitude == BEE_GIRL_TALKED_AND_LEFT_TWICE) attitude = BEE_GIRL_TALKED; //Reset your friendly conversation path if autorape or accepted
 			//TAUR SPECIAL!
@@ -689,7 +690,7 @@ public class BeeGirlScene extends BaseContent
 
 		public function beeSexForCocks(clearScreen:Boolean = true):void {
 			if (clearScreen) clearOutput();
-			spriteSelect(6);
+			spriteSelect(SpriteDb.s_bee_girl);
 			if (badEndWarning == true && rand(2) == 0) {
 				beeDroneBadEnd();
 				return;
@@ -726,7 +727,7 @@ public class BeeGirlScene extends BaseContent
 
 		private function beeSexForCocksPart2(giantCockIndex:int):void {
 			clearOutput();
-			spriteSelect(6);
+			spriteSelect(SpriteDb.s_bee_girl);
 			outputText("This is all the encouragement the handmaiden needs, and she leaps forward and wraps her arms around your " + player.cockDescript(giantCockIndex) + ".  She eagerly starts rubbing her large chest up and down your length while using her hands to play with the tip, running them all over it.  Panting, she contiues to give your " + player.cockDescript(giantCockIndex) + " a full body massage, bringing you incredible stimulation.  " + (player.cocks[giantCockIndex].cockLength > 36 ? "Even rubbing her nether lips against the base of your massive member." : "") + "  Her body starts to feel a bit sticky and slick and sometimes catches in places, bringing you to even higher levels of pleasure.\n\n");
 			outputText("After a time the bee peeks around your length to look at you, a mock serious look on her face.  <i>“Juzzzt what do you think you’re doing, going around and getting off without a bee?”</i> she says wagging her finger at you.  <i>“It’zzz not healthy, and you could die without proper releazzze.”</i>  She laughs and moves to the side of your member, scooping honey out of her bizarre bee vagina and spreads it onto your oversized prick.  <i>“I mean zzzeriouzzzly, nothing can actually take zzzomething this big but a queen bee,”</i> she continues while gently rubbing the honey into your skin.\n\n");
 			if (player.cocks[0].cockType == CockTypesEnum.BEE) {
@@ -786,7 +787,7 @@ public class BeeGirlScene extends BaseContent
 
 		private function beeDroneBadEndPart2():void {
 			clearOutput();
-			spriteSelect(6);
+			spriteSelect(SpriteDb.s_bee_girl);
 			outputText("Before too long you reach a large yellow structure that rises out of the trees, built like a layered wedding cake.  There is a strong buzzing sound all around the spire, with swarms of bees darting around, in and out of the it.  Along with the occasional bee girl as well.  <i>“Come on,”</i> your guide says to you after letting you survey the place for a time and leads you to the landing area.  As you set down, a pair of large muscular bee girls armed with spears made of chitin approach the two of you.  <i>“It’zzz okay guardianzzz, the queen azzzked me to bring thizzz boy,”</i> your guide says to them.  One of them sizes you up and looks at you closely while the other gives a few sniffs of the handmaiden’s honeypot.  She then gives a nod to the other one and the guards return to their posts.\n\n");
 			outputText("Now free to move on, the two of you move deeper into the bee hive.  The whole place is a rush of activity.  None of the bees are ever seen at rest, humanoid or otherwise.  The small bees are constantly bringing in nectar for the hive, while the humanoid ones are busy turning the stuff into honey, storing it, or guarding the others.  The ones making the honey are really big bees, at least around the middle.  They gorge themselves on the nectar brought by the small bees, and the excrete honey in great quantities out of exaggerated bee womanhoods.  None of them spare you a glance now that you’re inside, they’re completely unlike the relaxed and loving handmaiden you’ve been spending your time with up until now.  Then again, none of them are quite as beautiful or as shapely as her either, so it isn’t like you’re complaining.\n\n");
 			outputText("The most interesting thing you see as you continue deeper into the hive is what looks like a nursery of sorts.  Some of the smaller bees you saw flying all over the place before are being mixed into hexagonal tubs of a strange thick fluid being secreted by more bee girls.  These ones have much larger breasts than the other bees you’ve seen, while having almost nothing in the way of hips.  When you first saw the bees, you thought their chest accessories were only for show, but it seems that at least one type has a use for them as the caretakers are filling the tubs with whatever bee milk would be called.  Some of the tubs are being brought off to other parts of the hive.  <i>“They’re being taken off to become new partzzz of the hive,”</i> your companion explains, <i>“and in a few monthzzz, they’ll grow into adult beezzz like me.”</i>  She points at one of the tubs where a red fluid is being mixed in along with the thick stuff, <i>“Thozzze beezzz will become the queenzzz handmaidens. Thozzze onezzz will be guards, those caretakers, and those honeybrewers,”</i> she continues while pointing to other tubs in turn.\n\n");
@@ -796,7 +797,7 @@ public class BeeGirlScene extends BaseContent
 
 		private function beeDroneBadEndPart3():void {
 			clearOutput();
-			spriteSelect(6);
+			spriteSelect(SpriteDb.s_bee_girl);
 			outputText("When you enter into the queen’s chamber, your senses are assaulted with a multitude of erotic images, sounds, and scents.  There are dozens of bees all in various states of debauchery and sexual escapades.  The females are all very much like your companion, with voluptuous thin bodies, while the males are built a bit different.  While their main bodies are still fairly thin, and they generally have cute androgynous faces, their main feature would be their massive manhoods, which are all easily three to four feet long, and at least five inches in diameter.\n\n");
 			outputText("The females outnumber the males at least four to one, but they don’t let that get in the way of having fun.  Most of them are playing with each other in pairs, letting loose all sorts of sexual moans.  Some of the lucky ones have wrapped themselves around a male bee’s large member and are panting in pleasure as they cover those organs with their honey.  For their part, there isn’t a male bee who isn’t giving their own sexual moans of pleasure, either from the attention they’re getting from their handmaiden partner, or more often the queen herself.\n\n");
 			outputText("Ah yes, the queen.  The centerpiece of all of this sexual diorama is the queen herself, and everything about her is simply huge.  She stands at least 12 feet tall, probably more.  She has a beautiful but not necessarily delicate build.  If you had to describe her, a slightly thicker scaled up version of your bee companion wouldn’t be too far off when describing everything but her face and abdomen.  Her face is, motherly but stern, regal but still kind.  Just looking into her deep black eyes is enough to set your mind at peace, and the sight of her luscious black lips smiling down at you sends your heart fluttering.  Atop her head is a massive amount of hair done up in an elaborate set of braids, bands, and knots.  Her luscious and beautifully styled black and yellow hair is probably the most beautiful hair you’ve ever seen.\n\n");
@@ -807,7 +808,7 @@ public class BeeGirlScene extends BaseContent
 
 		private function beeDroneBadEndPart4():void {
 			clearOutput();
-			spriteSelect(6);
+			spriteSelect(SpriteDb.s_bee_girl);
 			outputText("<i>“Welcome, to my hive, beautiful one!  My daughter hazzz told me about you, and I am delighted to zzzee you before me,”</i> the queen says to you in a breathless voice, her massive breasts heaving as she pants in pleasure.  <i>“You are zzzertainly as pleazzzent to the eyes azzz zhe told me you were.”</i>  You can’t help but shiver in pleasure at her words, but it also brings another spike of pain to your massive member.  <i>“You are eager it zzzeemzzz, though I cannot zzzay that I am not azzz well,”</i> she says in response to your behaviour.  <i>“Come beautiful one, take your plazzze at my side and feel my honey cover your member and bring it zzzweet releazzze.”</i>\n\n");
 			outputText("Her words are sweet, sweet honey to your ears, and you need no more encouragement to rush over to one of the free honey dripping slits on her abdomen, and start to push your member inside.  At once the walls contract around your member and start to liberally coat it with the wonderful honey that you needed so much.  The pain immediately leaves your body, and is replaced with a feeling of bliss as you slowly push your massive member further and further into her incredible massive honeypot.\n\n");
 			outputText("With each inch you push inside her, the more overwhelming the feeling is of her walls contracting and relaxing around your length.  Along with the flow of her honey washing over you, there is only one answer you have for her next question for you: <i>“Izzz it all that you wanted?”</i>  You respond by pushing yourself in faster, earning a quick gasp of pleasure from your queen.  You can’t help but grin in response, both at the pleasure you brought yourself, and that which you gave your queen.\n\n");
@@ -822,7 +823,7 @@ public class BeeGirlScene extends BaseContent
 		private function beeTalk():void
 		{
 			clearOutput();
-			spriteSelect(6);
+			spriteSelect(SpriteDb.s_bee_girl);
 			//The first time you only get the option to have eggs laid in your bum ;) BEE_GIRL_TALKED
 			if (attitude < BEE_GIRL_TALKED) { //Replaced beeProgress
 				outputText("She stops buzzing, taken aback by your resistance to her wiles.  <i>“Y-you zzzure you don't want to cuddle with me?”</i> she stammers, thrusting her exotic black and yellow breasts forwards enticingly.  With some difficulty you manage to pry your eyes back up to her face and ask her why she is trying to tempt you to embrace her.\n\n");
@@ -855,7 +856,7 @@ public class BeeGirlScene extends BaseContent
 		}
 
 		private function beeEncounterRefusedHerEggs():void {
-			spriteSelect(6);
+			spriteSelect(SpriteDb.s_bee_girl);
 			switch (attitude) {
 				case BEE_GIRL_TALKED_AND_LEFT_TWICE:
 					outputText("\n\nThe handmaiden stands up on the flower, and puts her hands on her hips.  <i>“Why not?  Thizzz will be abzzzolutly wonderful for you, I promizzze.  Why won’t you aczzzept me?”</i> she pouts through her glossy lips.\n\n");
@@ -875,7 +876,7 @@ public class BeeGirlScene extends BaseContent
 		}
 
 		private function beeEncounterRefusedHerEggsAfraid():void {
-			spriteSelect(6);
+			spriteSelect(SpriteDb.s_bee_girl);
 			attitude = BEE_GIRL_PLAYER_AFRAID;
 			outputText("\n\nYou move away from her and explain that it isn’t that you don’t like the idea of bearing the eggs, it’s that you’re afraid of the effect she has on your mind.  You’re uncomfortable that you can’t think clearly around her, and you really can’t agree to anything when you can’t remember it and thus can’t really enjoy it.  She tips her head to the side in surprise, before pursing her glossy lips in worry and saying, <i>“Really?  You mean there are people who don’t like it when they lozzze themzzzelvezzz?  Hmm, maybe I should tell my queen about thizzz.”</i>  She smiles back at you and starts to fly away, before stopping in midair and floating over to you and saying <i>“Come back another time, and maybe I can work out zzzomething you’ll be comfortable with, ok?”</i>");
 			dynStats("lus", 5 + player.lib / 25);
@@ -883,7 +884,7 @@ public class BeeGirlScene extends BaseContent
 		}
 
 		private function beeEncounterRefusedHerEggsDisgusted():void {
-			spriteSelect(6);
+			spriteSelect(SpriteDb.s_bee_girl);
 			attitude = BEE_GIRL_PLAYER_DISGUSTED;
 			outputText("\n\nYou tell her that you find the idea of her laying eggs in you repulsive, and that you’re tired of her trying to constantly tempt you into accepting against your will.  She gives you an annoyed look before stomping her foot down on the flower she is standing on, almost causing her to tumble over to the side while saying, <i>“Fine, ah!”</i> before righting herself with her wings.  <i>“If I ever zzzee you again, you can forget about getting a good time.”</i>  Before directing you away from the clearing.  You smile as you leave, now you don’t have to worry about her song getting to you anymore.");
 			dynStats("lus", 5 + player.lib / 25);
@@ -891,7 +892,7 @@ public class BeeGirlScene extends BaseContent
 		}
 
 		private function beeEncounterRefusedHerEggsDuty():void {
-			spriteSelect(6);
+			spriteSelect(SpriteDb.s_bee_girl);
 			attitude = BEE_GIRL_PLAYER_DUTY;
 			outputText("\n\nYou explain to her that you are a champion of your village, and what that means.  You explain your duty, and that you can’t do anything that might push you away from accomplishing that.\n\n");
 
@@ -901,7 +902,7 @@ public class BeeGirlScene extends BaseContent
 		}
 
 		private function beeEncounterRefusedHerEggsLeave():void {
-			spriteSelect(6);
+			spriteSelect(SpriteDb.s_bee_girl);
 			outputText("\n\nYou aren’t going to deal with this girl right now, so you just turn and walk away.");
 			dynStats("lus", 5 + player.lib / 25);
 			doNext(camp.returnToCampUseOneHour);
@@ -910,7 +911,7 @@ public class BeeGirlScene extends BaseContent
 /* Not called anywhere
 		private function declineBeeTalk():void
 		{
-			spriteSelect(6);
+			spriteSelect(SpriteDb.s_bee_girl);
 			outputText("She pouts and returns to her sing-song buzzing.  Her fingers trace circles between her thighs and the sweet scent intensifies.  You beat a hasty retreat before her efforts overcome your reason.", true);
 			dynStats("lus", (20 + player.lib / 15));
 			doNext(camp.returnToCampUseOneHour);
@@ -919,7 +920,7 @@ public class BeeGirlScene extends BaseContent
 
 		private function beeMaidenPlay():void {
 			clearOutput();
-			spriteSelect(6);
+			spriteSelect(SpriteDb.s_bee_girl);
 			outputText("You nod to her and walk up to the flower.  She moves a bit to the side and pats the spot next to her.  You first slip out of your [armor], then sit your [ass] next to her.  ");
 			if (player.cor <= 33)
 				outputText("You sit there a bit nervously and wonder what she plans to do.");
@@ -953,7 +954,7 @@ public class BeeGirlScene extends BaseContent
 
 		private function beeMaidenConversation():void {
 			clearOutput();
-			spriteSelect(6);
+			spriteSelect(SpriteDb.s_bee_girl);
 			if (conversation > 2 && player.cor > 20) conversation = 2;
 			switch (conversation) {
 				case  0:
@@ -992,7 +993,7 @@ public class BeeGirlScene extends BaseContent
 
 		private function beeMaidenFertileBeeBadEnd():void {
 			clearOutput();
-			spriteSelect(6);
+			spriteSelect(SpriteDb.s_bee_girl);
 			outputText("You take a deep breath before accepting the candy from your insectoid lover.  It is a small, round and shaped like a teardrop, about an inch long and half an inch thick.  You put it in your mouth.  It is soft and sweet, but has a bit of a sour aftertaste.  After a few moments you feel like your head is spinning, and you lie back down on the flower while the bee moves over you and gently caresses your face with her chitin covered arms.  Suddenly you whole body start to ache, then burn.  You look down at yourself to see what is happening, only to see a layer of black chitin slowly growing across your torso, in the same places as the bee above you!  Looks like you’re turning into a full bee now.\n\n");
 			outputText("Your energy rapidly fades as more of your body changes.  <i>“Clozzze your eyezzz,”</i> you hear the girl say.  With the weariness in your body and the intense dizziness you’re feeling, you don’t hesitate to comply.  <i>“Relax, deep even breathzzz.”</i>  You try to steady your breathing while transformation progresses.  It isn’t easy, especially when " + (player.hasVagina() ? "something fundamental about your " + vaginaDescript(0) + " changes, and you" : "you feel something split open on your previously bare growing and") + " feel something viscous start to flow out of it.  Thankfully, it isn’t gasps of pain that are making it hard to take deep breaths anymore, but gasps of pleasure.  You can’t wait to feel another part of your body rearrange itself and the experience the rush of new feelings from them.  The sensations from your new honeypot (what else could you call it, really?) in particular are almost overwhelming and every few moments another torrent of honey sprays out.\n\n");
 			outputText("Eventually the transformation ends, and you open your eyes again.  The handmaiden then helps you stand back up.  You consider both of your bodies, and find that you have indeed become almost mirror images of one another.  You pull out your lips a bit and find that yes, you now have luscious black lips.  Your whole body is now covered in chitin plating, in same way as the girl across from you.  Finally, you check your womanhood, and find that it is now secreting honey, not unlike the bee maiden’s.  You are a bit surprised to find that the honey’s scent doesn’t seem to be affecting you anymore.  At least not as strongly as before.\n\n");
@@ -1002,7 +1003,7 @@ public class BeeGirlScene extends BaseContent
 
 		private function beeMaidenFertileBeeBadEndPart2():void {
 			clearOutput();
-			spriteSelect(6);
+			spriteSelect(SpriteDb.s_bee_girl);
 			outputText("Before too long you reach a large yellow structure that rises out of the trees, built like a layered wedding cake.  There is a strong buzzing sound all around the spire, with swarms of bees darting around, in and out of it.  Along with the occasional bee girl as well.  <i>“Come on,”</i> your guide says to you after letting you survey the place for a time and leads you to the landing area.  As you set down, a pair of large muscular bee girls armed with spears made of chitin approach the two of you.  <i>“It’zzz okay guardianzzz, thizzz one just took our queen’s honey,”</i> your guide says to them.  One of them sizes you up and then leans down to examine your genitals while the other gives a few sniffs of the handmaiden’s honeypot.  They nod to one another and return to their posts.\n\n");
 			outputText("Now free to move on, the two of you move deeper into the bee hive.  The whole place is a rush of activity.  None of the bees are ever seen at rest, humanoid or otherwise.  The small bees are constantly bringing in nectar for the hive, while the humanoid ones are busy turning the stuff into honey, storing it, or guarding the others.  The ones making the honey are really big bees, at least around the middle.  They gorge themselves on the nectar brought by the small bees, and the excrete honey in great quantities out of exaggerated bee womanhoods.  None of them spare you a glance now that you’re inside, they’re completely unlike the relaxed and loving handmaiden you’ve been spending your time with up until now.  Then again, none of them are quite as beautiful or as shapely as her either, so it isn’t like you’re complaining.\n\n");
 			outputText("The most interesting thing you see as you continue deeper into the hive is what looks like a nursery of sorts.  Some of the smaller bees you saw flying all over the place before are being mixed into hexagonal tubs of a strange thick fluid being secreted by more bee girls.  These ones have much larger breasts than the other bees you’ve seen, while having almost nothing in the way of hips.  When you first saw the bees, you thought their chest accessories were only for show, but it seems that at least one type has a use for them as the caretakers are filling the tubs with whatever bee milk would be called.  Some of the tubs are being brought off to other parts of the hive.  ”</i>They’re being taken off to become new partzzz of the hive,”</i> your companion explains, <i>“and in a few monthzzz, they’ll grow into adult beezzz like me.”</i>  She points at one of the tubs where a red fluid is being mixed in along with the thick stuff, <i>“Thozzze beezzz will become the queenzzz handmaidens.  Thozzze onezzz will be guards, those caretakers, and those honeybrewers.”</i> she continues while pointing to other tubs in turn.\n\n");
@@ -1012,7 +1013,7 @@ public class BeeGirlScene extends BaseContent
 
 		private function beeMaidenFertileBeeBadEndPart3():void {
 			clearOutput();
-			spriteSelect(6);
+			spriteSelect(SpriteDb.s_bee_girl);
 			outputText("When you enter into the queen’s chamber, your senses are assaulted with a multitude of erotic images, sounds, and scents.  There are dozens of bees all in various states of debauchery and sexual escapades.  The females are all very much like your companion, with voluptuous thin bodies, while the males are built a bit different.  While their main bodies are still fairly thin, and they generally have cute androgynous faces, their main feature would be their massive manhoods, which are all easily three to four feet long, and at least five inches in diameter.\n\n");
 			outputText("The females outnumber the males at least four to one, but they don’t let that get in the way of having fun.  Most of them are playing with each other in pairs, letting loose all sorts of sexual moans.  Some of the lucky ones have wrapped themselves around a male bee’s large member and are panting in pleasure as they cover those organs with their honey.  For their part, there isn’t a male bee who isn’t giving their own sexual moans of pleasure, either from the attention they’re getting from their handmaiden partner, or more often the queen herself.\n\n");
 			outputText("Ah yes, the queen.  The centerpiece of this sexual diorama is the queen herself, and everything about her is simply huge.  She stands at least 12 feet tall, probably more.  She has a beautiful but not necessarily delicate build.  If you had to describe her, a slightly thicker scaled up version of your bee companion wouldn’t be too far off when describing everything but her face and abdomen.  Her face is motherly but stern, regal but still kind.  Just looking into her deep black eyes is enough to set your mind at peace, and the sight of her luscious black lips smiling down at you sends your heart fluttering.  Atop her head is a massive amount of hair done up in an elaborate set of braids, bands, and knots.  Her luscious and beautifully styled black and yellow hair is probably the most beautiful hair you’ve ever seen.\n\n");
@@ -1023,7 +1024,7 @@ public class BeeGirlScene extends BaseContent
 
 		private function beeMaidenFertileBeeBadEndPart4():void {
 			clearOutput();
-			spriteSelect(6);
+			spriteSelect(SpriteDb.s_bee_girl);
 			outputText("<i>“Welcome,”</i> an overwhelming voice speaks into your mind.  <i>“I’ve been waiting for you to arrive, child.”</i>  The queen looks down at you smiling.  <i>“You are confused, I see.  That candy that my daughter gave you was made from my honey.  It lets me connect our minds together, and make you a true member of our hive.”</i>  Her presence alone feels so powerful, like it could blow you away in an instant.\n\n");
 			outputText("Some small part of you panics for a moment before her will does indeed sweep through you, and blasts away everything that you once were in almost an instant.  Her will wraps around you in a tight embrace, like that of a parent who is just seeing their child again after being away for a long time.  <i>“Welcome my new daughter.”</i>  Her voice calls out in both a comforting and commanding voice.  <i>“A a member of my hive, I promise you the same promise I give all my daughters: a safe life and a life full of satisfying work.”</i>\n\n");
 			outputText("Your attention is drawn for a moment by the bee girl who was being screwed by the phallic stinger on the end of the queen’s abdomen.  She is screaming in orgasmic pleasure just as it retracts from her body.  She takes a few breaths to steady herself and then stands up, turning to the side and you get a chance to see that her abdomen has swollen to twice the size it was when you first noticed her.  You feel a hand on your shoulder and look the other way to see the handmaiden that brought you here.  <i>“Go on, it’zzz your turn to be filled.”</i>\n\n");
@@ -1036,7 +1037,7 @@ public class BeeGirlScene extends BaseContent
 
 		private function beeMaidenFertileBeeBadEndPart5():void {
 			clearOutput();
-			spriteSelect(6);
+			spriteSelect(SpriteDb.s_bee_girl);
 			outputText("As a member of the fertile cast within the bee hive, the days run together, and the once-champion’s life is filled with nothing but eggs, and playing with the drones and other members of the fertile cast.  Just as her older sister, the young bee will one day tempt another champion to their embrace and fill them with the eggs of their hive.  They won’t even be able to comprehend that their latest incubator wouldn’t have been willing if it hadn’t been for her siren’s song.  Nor will they spare any head to the critical mission that they sent out to accomplish all those months ago.  Nothing of her old self remains now.\n\n");
 			EventParser.gameOver();
 		}
@@ -1048,7 +1049,7 @@ public class BeeGirlScene extends BaseContent
 
 		private function freeHoneyEvent():void
 		{
-			spriteSelect(6);
+			spriteSelect(SpriteDb.s_bee_girl);
 			player.slimeFeed();
 			clearOutput();
 			outputText("You mull her offer over for a moment before deciding to pursue the sweet nectar dripping from her exposed sex.  She leans back in her flower, spreading her legs obscenely and pulling an empty vial out from a tiny pack that sits on the ground.\n\n");
@@ -1061,7 +1062,7 @@ public class BeeGirlScene extends BaseContent
 
 		private function seduceBeeGirl():void
 		{
-			spriteSelect(6);
+			spriteSelect(SpriteDb.s_bee_girl);
 			//UNFINISHED - low priority male/female variants
 			if (player.gender == 3) {
 				outputText("Panting, your arousal evident, you stand defiant before the bee-girl. She looks at you quizzically, shifting her head ot the side. You feel the pheromones thicken in the air, the desire to surrender yourself to her rising. You bite it back and steel yourself, your willpower coming through.  Surprisingly, the bee-girl smiles.  Her stance becomes relaxed, and she begins to walk towards you.  You shift your guard slightly, on edge, yet losing a bit of tension.  ");
@@ -1085,7 +1086,7 @@ public class BeeGirlScene extends BaseContent
 
 		public function beeRapesYou():void
 		{
-			spriteSelect(6);
+			spriteSelect(SpriteDb.s_bee_girl);
 			clearOutput();
 			flags[kFLAGS.BEE_GIRL_COMBAT_LOSSES]++;
 			if (doSFWloss()) return;
@@ -1363,7 +1364,7 @@ public class BeeGirlScene extends BaseContent
 
 		public function rapeTheBeeGirl():void
 		{
-			spriteSelect(6);
+			spriteSelect(SpriteDb.s_bee_girl);
 			flags[kFLAGS.BEE_GIRL_COMBAT_WINS_WITH_RAPE]++;
 			var sexed:Boolean = false;
 			clearOutput();
@@ -1415,7 +1416,7 @@ public class BeeGirlScene extends BaseContent
 
 		private function rapeTheBeeMultiCockStuff():void
 		{
-			spriteSelect(6);
+			spriteSelect(SpriteDb.s_bee_girl);
 			clearOutput();
 			//Doubledick special
 			//HermCock supreme by mallowman
@@ -1450,7 +1451,7 @@ public class BeeGirlScene extends BaseContent
 //MALE sometimes herm
 		private function rapeTheBeeGirlWithADick():void
 		{
-			spriteSelect(6);
+			spriteSelect(SpriteDb.s_bee_girl);
 			clearOutput();
 			var x:Number = player.cockThatFits(monster.vaginalCapacity());
 			if (x < 0) x = 0;
@@ -1604,7 +1605,7 @@ public class BeeGirlScene extends BaseContent
 //FEMALE sometimes herm
 		private function rapeABeeGirlWithYourVagina():void
 		{
-			spriteSelect(6);
+			spriteSelect(SpriteDb.s_bee_girl);
 			clearOutput();
 			if (player.isTaur()) {
 				outputText("The bee-girl plops onto her flower with her legs splayed out, letting you get a clear look at her dripping honeypot. She watches you nervously as you approach, letting her stinger slide out in a pointless threat. She seems taken aback when you smile down at her, but returns the gesture with a nervous smile of her own.\n\n");
@@ -1675,7 +1676,7 @@ public class BeeGirlScene extends BaseContent
 //FUTA Fallback
 		private function futaRapesBeeGirl():void
 		{
-			spriteSelect(6);
+			spriteSelect(SpriteDb.s_bee_girl);
 			clearOutput();
 			outputText("Firmly grasping her thighs at the joining of her smooth carapace and soft skin, you force them open, revealing the source of her irresistible scent.   She buzzes pitifully in protest ");
 
@@ -1753,7 +1754,7 @@ public class BeeGirlScene extends BaseContent
 //(can replace normal rape victory scenes if corruption>75, and strength>60, and while player has naga tongue, dick, vagina, or d-cup or larger breasts)
 		private function beeGirlRapeForTheDistinguishedGentleman():void
 		{
-			spriteSelect(6);
+			spriteSelect(SpriteDb.s_bee_girl);
 			clearOutput();
 			//(if win via HP)
 			if (monster.HP < 1) outputText("The bee-maiden staggers backward against her perch and wheezes.  Quickly, you launch yourself forward and pin her bodily against the giant flora, grabbing her feebly thrashing arms.  In a flash of inspiration, you pull a long supple leaf from the underside of the blossom, twisting it lengthwise and managing to bind her hands to the stem above her head with your makeshift cord before she can focus on what's happening.\n\n");
@@ -1823,7 +1824,7 @@ public class BeeGirlScene extends BaseContent
 
 		private function beeAlternate():void
 		{
-			spriteSelect(6);
+			spriteSelect(SpriteDb.s_bee_girl);
 			var x:Number = player.biggestCockIndex();
 			var y:Number = player.biggestCockIndex2();
 			//MULTIPLE MULTIPLE SCENES!
@@ -1892,7 +1893,7 @@ public class BeeGirlScene extends BaseContent
 //Naga on Bee Scene
 		private function corruptNagaBitchesRapeABee():void
 		{
-			spriteSelect(6);
+			spriteSelect(SpriteDb.s_bee_girl);
 			clearOutput();
 
 			outputText("Now that the bee-girl is unable to flit her wings and create that buzzing drone that seems to rob you of your senses, you can see her for what she truly is: Prey.\n\n");
@@ -1911,7 +1912,7 @@ public class BeeGirlScene extends BaseContent
 
 		private function nagaRapesPt2TheExtremeContinuationOfAwesome():void
 		{
-			spriteSelect(6);
+			spriteSelect(SpriteDb.s_bee_girl);
 			clearOutput();
 			//[Player is male]
 			if (player.gender == 1 || (player.gender == 3 && rand(3) == 0)) {
@@ -2025,7 +2026,7 @@ public class BeeGirlScene extends BaseContent
 		}
 
 		public function beeGirlsGetsDildoed():void {
-			spriteSelect(6);
+			spriteSelect(SpriteDb.s_bee_girl);
 			clearOutput();
 			flags[kFLAGS.BEE_GIRL_COMBAT_WINS_WITH_RAPE]++;
 			outputText("You advance on your ");
@@ -2053,7 +2054,7 @@ public class BeeGirlScene extends BaseContent
 
 		public function milkAndHoneyAreKindaFunny():void
 		{
-			spriteSelect(6);
+			spriteSelect(SpriteDb.s_bee_girl);
 			clearOutput();
 			flags[kFLAGS.BEE_GIRL_COMBAT_WINS_WITH_RAPE]++;
 			player.slimeFeed();

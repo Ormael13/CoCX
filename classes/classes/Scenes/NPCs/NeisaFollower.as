@@ -6,6 +6,7 @@ package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+    import classes.display.SpriteDb;
 	
 	public class NeisaFollower extends NPCAwareContent implements TimeAwareInterface
 	{
@@ -39,7 +40,7 @@ public function timeChange():Boolean
 }
 public function timeChangeLarge():Boolean {
 	if (model.time.hours == 6 && flags[kFLAGS.NEISA_FOLLOWER] >= 14 && !prison.inPrison) {
-		//spriteSelect(31);
+		//spriteSelect(SpriteDb.s_isabella);
 		neisaMorningPaycheckCall();
 		return true;
 	}
@@ -47,7 +48,7 @@ public function timeChangeLarge():Boolean {
 }
 //Morning Paycheck Call
 public function neisaMorningPaycheckCall():void {
-	//spriteSelect(31);
+	//spriteSelect(SpriteDb.s_isabella);
 	outputText("\n");
 	if (flags[kFLAGS.NEISA_FOLLOWER] == 17) {
 		outputText("Neisa sighs in disappointment when she realises you are short "+(9 - flags[kFLAGS.SPIRIT_STONES])+" spirit stones.\n\n");

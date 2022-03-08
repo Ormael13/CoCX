@@ -2,6 +2,7 @@
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 public class Scylla extends TelAdreAbstractContent {
 
@@ -29,8 +30,8 @@ public class Scylla extends TelAdreAbstractContent {
 //Scylla- cum addicted demon-tainted nun
 
 private function scyllaSprite():void {
-	if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] > 3) spriteSelect(82);
-	else spriteSelect(51);
+	if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] > 3) spriteSelect(SpriteDb.s_scyllaAndBear);
+	else spriteSelect(SpriteDb.s_scylla);
 }
 
 public function scyllaBarSelectAction():void {
@@ -1121,7 +1122,7 @@ private function addictionScyllaTakeAdvantageDicksBonusAndEpilogue():void {
 
 //Scylla #6 - Cat Scratch Fever
 public function Scylla6():void {
-	spriteSelect(59);
+	spriteSelect(SpriteDb.s_vagrant_cats);
 	if(flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] < 6) flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] = 6;
 	clearOutput();
 	outputText("For once, the Wet Bitch isn't terribly crowded, the few people in the bar finishing their drinks and heading out. Scylla is one of those on their way out of the bar- she's just finishing a suspiciously creamy coffee when you catch her attention. She apologizes that she's just now leaving, but invites you to join her on a walk around town. She often ministers to the ill and homeless and would welcome an extra set of hands at her modest soup kitchen. You're not really enthusiastic about that plan, but to be honest, you're a little curious to see how a cum-hungry, bimbo-proportioned, bashful nun serves her religion.\n\n");
@@ -1137,7 +1138,7 @@ public function Scylla6():void {
 }
 //(super high Intelligence or speed)
 private function Scylla6DUCK():void {
-	spriteSelect(59);
+	spriteSelect(SpriteDb.s_vagrant_cats);
 	clearOutput();
 	outputText("You turn in time to spot the ambush and drop low, a pipe swinging just past your head and cracking a brick next to you. Sweeping low, you knock your attacker's legs out from under him and rise into a defensive stance. A dozen cat-morphs have crept up behind you, silently seizing Scylla. The felines hiss, startled by your acute awareness and suddenly doubting their plan of attack.  You decide to end this before it gets too bloody, so you slowly curl your fingers into a fist, audibly cracking each knuckle on your hand one after the other. You rise to your feet and flick your ear with your thumb, chuckling. \"<i>You really broadcast that one,</i>\" you start, speaking slowly and loudly enough for your voice to bounce around the cramped alley. \"<i>But I'm sure you've got better. I mean, you know what I'm capable of. I've had demons helpless at my feet. Minotaurs three times your size cower when they remember my face. Surely you didn't just attack us at random? Nobody's luck is that bad. No, you're definitely trained professionals and not a miserable pack of errant transients, too drugged out to appreciate the scope of the mistake they've just made. So you'll be ready for the worst I've got. And oh, it is going to be DREADFUL.</i>\"\n\n");
 
@@ -1148,7 +1149,7 @@ private function Scylla6DUCK():void {
 
 //(Normal Characters)
 private function Scylla6SLOW():void {
-	spriteSelect(59);
+	spriteSelect(SpriteDb.s_vagrant_cats);
 	clearOutput();
 	outputText("Too late, you realize the pickpockets were a distraction, and before you can whip around, a heavy weight cracks against the side of your skull, turning your world into a pin point of pain in an ocean of black unconsciousness. You muscles become jelly and you don't remember falling to your knees or slumping against the brick wall of the alley");
 	if (flags[kFLAGS.KATHERINE_UNLOCKED] < 1) outputText(", but the last thing you remember is the soft jingling of a small bell");
@@ -1189,7 +1190,7 @@ private function Scylla6SLOW():void {
 }
 //[Kick Ass]
 private function lactateAndKickAss():void {
-	spriteSelect(59);
+	spriteSelect(SpriteDb.s_vagrant_cats);
 	clearOutput();
 	outputText("Cracking your neck, you decide to end this right now. Flexing your nearly unholy strength, you easily break the leather collar binding your hands and rise to your feet, dumping the cats pining you down to their asses. The felines hiss and leap backward, fearful of your might. You rub the bridge of your nose with the back of your hand, sniffing. \"<i>I enjoy a good joke,</i>\" you start, speaking slowly and loud enough for your voice to bounce around the cramped alley. \"<i>But you have to be kidding me. Cats? I've beaten demon overlords into bloody pulps. I've nearly torn the head off an imp with my bare hands. I've stomached a lot of crap since I came through the portal, but nothing I've drank or eaten, no matter how foul, has been as hard to swallow as this pathetic little ambush. I'm going to count to three and then I'm going to fuck the closest thing I lay my hands on. And if a hole isn't convenient, I'll make my own. Understand? One.</i>\"\n\n");
 
@@ -1199,7 +1200,7 @@ private function lactateAndKickAss():void {
 
 //[Yell]
 private function Scylla6YellForHelp():void {
-	spriteSelect(59);
+	spriteSelect(SpriteDb.s_vagrant_cats);
 	clearOutput();
 	outputText("You fill your lungs and scream for help as loudly as you can. The cats lying on you hiss and rake your exposed flesh with their needle-like claws. One tries to jam a leather ball in your mouth to gag you, but the damage is done. The clattering rush of the city guard surrounds the alley from both directions and the cats find themselves trapped. A few try to bolt between the guards, but a well-placed centaur kick knocks one into an unconscious slump and the others quail from the guards, huddling into a scared group.\n\n");
 
@@ -1231,7 +1232,7 @@ private function Scylla6AfterYellLie():void {
 }
 //[Wait]
 private function Scylla6MilkyWait():void {
-	spriteSelect(59);
+	spriteSelect(SpriteDb.s_vagrant_cats);
 	clearOutput();
 	outputText("You don't want to risk aggravating junkies while you're unable to defend yourself, especially while all your sensitive bits are in claw's reach of the kitties. You shiver as they begin to lick at your breasts, four felines crowding around your chest, whiskers tickling your nipples as coarse, wet tongues moisten your mounds. Their combined purring sends electric vibrations through your body, drowning out the anger and pain of the attack. Fuzzy faces and hot tongues slather your tits up to the nipples, coaxing small, white drops to the surface. They draw a weak moan from you as each cat takes a turn lapping at your leaking nubs, their rough tongues textured like slick sandpaper, softly scratching your vulnerable teats just enough to leave you panting for more.\n\n");
 
@@ -1247,7 +1248,7 @@ private function Scylla6MilkyWait():void {
 }
 //[Next]
 private function Scylla6MilkyWaitII():void {
-	spriteSelect(59);
+	spriteSelect(SpriteDb.s_vagrant_cats);
 	clearOutput();
 	//[Low milk output]
 	if(player.lactationQ() < 500) outputText("They suck a shuddering orgasm from you and your hips buck against the cats's shaggy bodies, grinding for friction as you cum messily in the street. Your breasts respond by spritzing out what they can, thin jets spitting limpid splashes of milk against the four atop you. They suck at your nipples, slurping down all you've got and teasing your inflamed buds for more. Your breath catches in your throat as their greedy suckling empties you completely and begins to send perversely erotic pain shooting through your chest's summits. When your moans turn to throbbing gasps, the thieves finally relent, taking turns licking each other's faces while clutching and smoothing your bosom, massaging the fire from your over stimulated nipples. You pant and relax under their expertise, mammaries tingling to refill your drained wells, body submitting to the furry thieves' will.\n\n");
@@ -1271,7 +1272,7 @@ private function Scylla6MilkyWaitII():void {
 	doNext(Scylla6MilkyWaitIII);
 }
 private function Scylla6MilkyWaitIII():void {
-	spriteSelect(59);
+	spriteSelect(SpriteDb.s_vagrant_cats);
 	clearOutput();
 	outputText("When the last feline has drunk their fill of you and the nun and their bloated masturbation burns off the arousal of their theft, they clumsily untie the constricting collars from your arms and help take Scylla down from her perch. They avoid meeting your eyes, perhaps ashamed or maybe just still too horny, but they press a few meager gems into your hand, trying to pay for the milk they stole. Scylla refuses what they offer her, instead giving them the money she had on her. She manages to gently scold them for not asking first while keeping her blushing gaze hidden behind a veil of her shimmering curls. You help the nun gather up the torn scraps of the top half of her robe and ineffectually drape them around her milk-inflated chest. She tries to put her habit back on but her horns have grown into twisting loops atop her head and are slow to recede while the lusty felines are still around. Before anything else can jump you, you excuse yourself and slink away, rubbing your achingly sore nipples under your [armor] as you do so.");
 	//[Gain gems. End encounter.]
@@ -1314,7 +1315,7 @@ private function Scylla6NoMilkLie():void {
 
 //[Submit] (Only available to players with vaginas)
 private function Scylla6NoMilkSubmit():void {
-	spriteSelect(59);
+	spriteSelect(SpriteDb.s_vagrant_cats);
 	clearOutput();
 	outputText("You step around the corner, ready to save the nun, but the heat in your gut overpowers your heroism and you let your tongue hang out of your mouth as your eyelids grow heavy. You stumble and fall to your knees, head hanging low as you rub your body with both hands. The cats smelt your lust, and twelve furred, clawed bodies ring yours, dark rings around their almond-shaped eyes. You weakly try to shoo them away, but hands surround you and they hold firm against your struggles. You tire almost immediately and the cats pull you to the ground. The others push the largest among them forward, a black-furred feline of five feet with a small chest and lean build. Without meeting your gaze, she unhooks the leather collar from her neck and binds your hands behind your back tight enough to make your fingertips tingle, the small bell on it jingling. Then, she ducks back into the crowd, shifting her ragged clothes uncomfortably.\n\n");
 
@@ -1336,7 +1337,7 @@ private function Scylla6NoMilkSubmit():void {
 }
 //[Next]
 private function Scylla6NoMilkSubmitII():void {
-	spriteSelect(59);
+	spriteSelect(SpriteDb.s_vagrant_cats);
 	clearOutput();
 	outputText("The black cat who bound your hands sees your lusty want all too well. While the others descend on the nun blindly, she helps you to your feet and pushes you between Scylla's massive, pillowy breasts. With swift but inexperienced motions, she ducks between your legs, grabs your pulsing cock, and guides it to the nun's blushing face. The cat inadvertently teases the captive girl by bopping your cockhead against the nun's cheeks and lips before aiming it against her moist pucker. Your legs clench when you feel Scylla's hot breath on your sensitive tip, the crowd of drinking felines on her chest blocking your view of her debased flush as she lavishes distressed kisses on your prick.\n\n");
 
@@ -1353,7 +1354,7 @@ private function Scylla6NoMilkSubmitII():void {
 	doNext(Scylla6NoMilkSubmitIII);
 }
 private function Scylla6NoMilkSubmitIII():void {
-	spriteSelect(59);
+	spriteSelect(SpriteDb.s_vagrant_cats);
 	clearOutput();
 	if(player.balls > 0) {
 		outputText("Your spot in the middle of the nun-and-cat sandwich is too much, however, and your balls slap against Scylla's face with each thrust the cat-morph makes. She must be able to feel the cum churning in your groin because her throat milks your shaft, her tongue and lips coaxing your swollen pecker as her stomach sucks on your head like a fertile womb, hungry for your seed to the point of hysteria. You finally cum and your body clenches down, muscles tight as your strength deserts you. Your body is putty as the blobs of cum are forced past the suckling lips tightly wrapped against your groin and up the nun's gulping throat, fighting past the intense pressure of her neck. When they get up into her chest, you can feel the bulbs of spunk rushing toward your cockhead with urgent desire and Scylla's stomach rumbles in anticipation. Just as the first dollop bursts free, the herm behind you slaps your ass and gives you one last thrust before cumming herself. Her balloon of flesh flares lewdly and hot jizz pours into your body, painting your womb white with the kitty's dog-seed. The sensation is invigorating and you feel renewed strength as you buck against Scylla's face, fucking her stomach with your cock, even as it squirts its first load into her suspended body. You flex your vaginal walls as best you can, ass clenching, milking the black cat for every drop as she collapses against your back, breast slick with sweat and weakly panting as the orgasm takes its toll, her soft balls straining to make the most of what feels like a long-delayed fucking.\n\n");
@@ -1395,7 +1396,7 @@ private function Scylla6NoMilkSubmitIV():void {
 
 //[Rape]
 private function Scylla6NoMilkRAPETHEWORLD():void {
-	spriteSelect(59);
+	spriteSelect(SpriteDb.s_vagrant_cats);
 	clearOutput();
 	outputText("You decide to have a little fun with this situation, so you remain hidden around the corner while the cats mill around Scylla. It's not long before their thirst overwhelms their caution and the felines sink to their knees, nuzzling Scylla's bare chest, small tongues lacquering her mountainous breasts in saliva. Her skin shimmers in the alley's waning light and the nun moans, struggling weakly against her bonds, her milk-laden tits jiggling tantalizingly. You strip off your [armor] and lightly grasp your cock, stroking slowly as you wait for the opportune moment.\n\n");
 
@@ -1409,7 +1410,7 @@ private function Scylla6NoMilkRAPETHEWORLD():void {
 	doNext(Scylla6NoMilkRapeII);
 }
 private function Scylla6NoMilkRapeII():void {
-	spriteSelect(59);
+	spriteSelect(SpriteDb.s_vagrant_cats);
 	clearOutput();
 	outputText("The cat-morph freezes in your arms, back arched as natural panic wages war against the heat pumping out of her drooling snatch. She nods her head slowly and you grin. \"<i>Good kittie,</i>\" you murmur, sliding another teasing inch into her cunny. \"<i>Let's give our friends a feast,</i>\" you whisper, directing her to turn about, toward the nursing nun. The two of you slowly pace past milk-addled felines, your captive's scarlet bulb bobbing with each deliberate step. Carefully moving between the distracted cats, you guide the dusky herm between Scylla's expanded breasts. She notices the erection you've marched up to her with a husky coo of pleasure.\n\n");
 
@@ -1423,7 +1424,7 @@ private function Scylla6NoMilkRapeII():void {
 	doNext(Scylla6NoMilkRapeIII);
 }
 private function Scylla6NoMilkRapeIII():void {
-	spriteSelect(59);
+	spriteSelect(SpriteDb.s_vagrant_cats);
 	clearOutput();
 	outputText("You give one more savage pump and, at last, the kitty-knot pushes past the nun's pussy-tight, bimbo-bloated kisser with a moist 'plop.' The onyx herm howls like a wolf as her sensitive bulb is swallowed by the captive woman, the grapefruit-sized knob stuffing her cheeks. The cat's body spasms as she howls, and you can see the nun's mouth is distended wide enough to see the knot's bulge under her jaw. Despite the frightening width of her knot, compared to the nun's normal fare, the larger-than-average herm seems positively small, so you decide to give them both a little extra cream.\n\n");
 

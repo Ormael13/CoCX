@@ -156,7 +156,7 @@ import classes.StatusEffects;
 				player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
 				var choice:Number = rand(3);
 				if (choice == 0) {
-					spriteSelect(29);
+					spriteSelect(SpriteDb.s_imp);
 					outputText("A feral imp suddenly appears from nearby passage and attacks!");
 					if (flags[kFLAGS.CODEX_ENTRY_IMPS] <= 0) {
 						flags[kFLAGS.CODEX_ENTRY_IMPS] = 1;
@@ -166,12 +166,12 @@ import classes.StatusEffects;
 					startCombat(new FeralImps(), true);
 				}
 				if (choice == 1) {
-					spriteSelect(25);
+					spriteSelect(SpriteDb.s_green_slime);
 					outputText("A soft shuffling sound catches your attention and you turn around, spotting an amorphous green mass sliding towards you!  Realizing it's been spotted, the ooze's mass surges upwards into a humanoid form with thick arms and wide shoulders.  The beast surges forward to attack!");
 					startCombat(new GreenSlime(), true);
 				}
 				if (choice == 2) {
-					spriteSelect(27);
+					spriteSelect(SpriteDb.s_hellhound);
 					outputText("You hear a fiery howl as a demonic, two-headed beast-man leaps out of nearby passage!");
 					if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] <= 0) {
 						flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] = 1;
@@ -278,7 +278,7 @@ import classes.StatusEffects;
 				player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
 				var choice:Number = rand(4);
 				if (choice == 0) {
-					//spriteSelect(25);
+					//spriteSelect(SpriteDb.s_green_slime);
 					outputText("A soft shuffling sound catches your attention and you turn around, spotting a small ball of flame rushing towards you!  Realizing it's been spotted, the elemental's body reform into a humanoid form and attacks!");
 					flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = rand(3);
 					/*if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] <= 0) {
@@ -288,7 +288,7 @@ import classes.StatusEffects;
 					startCombat(new FireElemental(), true);
 				}
 				if (choice == 1) {
-					//spriteSelect(25);
+					//spriteSelect(SpriteDb.s_green_slime);
 					outputText("A soft shuffling sound catches your attention and you turn around, spotting a small blob of water rushing towards you!  Realizing it's been spotted, the elemental's body reform into a humanoid form and attacks!");
 					flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = rand(3);
 					/*if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] <= 0) {
@@ -298,7 +298,7 @@ import classes.StatusEffects;
 					startCombat(new WaterElemental(), true);
 				}
 				if (choice == 2) {
-					//spriteSelect(25);
+					//spriteSelect(SpriteDb.s_green_slime);
 					outputText("A soft shuffling sound catches your attention and you turn around, spotting a small gust of wind rushing towards you!  Realizing it's been spotted, the elemental's body reform into a humanoid form and attacks!");
 					flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = rand(3);
 					/*if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] <= 0) {
@@ -308,7 +308,7 @@ import classes.StatusEffects;
 					startCombat(new AirElemental(), true);
 				}
 				if (choice == 3) {
-					//spriteSelect(25);
+					//spriteSelect(SpriteDb.s_green_slime);
 					outputText("A soft shuffling sound catches your attention and you turn around, spotting small mass of earth rushing towards you!  Realizing it's been spotted, the elemental's body reform into a humanoid form and attacks!");
 					flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = rand(3);
 					/*if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] <= 0) {
@@ -327,7 +327,7 @@ import classes.StatusEffects;
 				reset -= player.statusEffectv1(StatusEffects.RiverDungeonA);
 				player.addStatusValue(StatusEffects.RiverDungeonA, 1, reset);
 				player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
-				//spriteSelect(25);
+				//spriteSelect(SpriteDb.s_green_slime);
 				outputText("A soft shuffling sound catches your attention and you turn around, spotting a large ball of flame rushing towards you!  Realizing it's been spotted, the elemental's body reform into a humanoid form and attacks!");
 				flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = 3;
 				/*if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] <= 0) {
@@ -362,7 +362,7 @@ import classes.StatusEffects;
 				reset -= player.statusEffectv1(StatusEffects.RiverDungeonA);
 				player.addStatusValue(StatusEffects.RiverDungeonA, 1, reset);
 				player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
-				//spriteSelect(25);
+				//spriteSelect(SpriteDb.s_green_slime);
 				outputText("A soft shuffling sound catches your attention and you turn around, spotting a large gust of wind rushing towards you!  Realizing it's been spotted, the elemental's body reform into a humanoid form and attacks!");
 				flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = 3;
 				/*if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] <= 0) {
@@ -380,7 +380,7 @@ import classes.StatusEffects;
 				reset -= player.statusEffectv1(StatusEffects.RiverDungeonA);
 				player.addStatusValue(StatusEffects.RiverDungeonA, 1, reset);
 				player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
-				//spriteSelect(25);
+				//spriteSelect(SpriteDb.s_green_slime);
 				outputText("A soft shuffling sound catches your attention and you turn around, spotting large mass of earth rushing towards you!  Realizing it's been spotted, the elemental's body reform into a humanoid form and attacks!");
 				flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = 3;
 				/*if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] <= 0) {
@@ -520,7 +520,7 @@ import classes.StatusEffects;
 				player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
 				var choice:Number = rand(5);
 				if (choice == 0) {
-					//spriteSelect(25);
+					//spriteSelect(SpriteDb.s_green_slime);
 					outputText("A soft shuffling sound catches your attention and you turn around, spotting a small cluster of ice rushing towards you!  Realizing it's been spotted, the elemental's body reform into a humanoid form and attacks!");
 					flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = rand(4);
 					/*if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] <= 0) {
@@ -530,7 +530,7 @@ import classes.StatusEffects;
 					startCombat(new IceElemental(), true);
 				}
 				if (choice == 1) {
-					//spriteSelect(25);
+					//spriteSelect(SpriteDb.s_green_slime);
 					outputText("A soft shuffling sound catches your attention and you turn around, spotting a small ball of darkness rushing towards you!  Realizing it's been spotted, the elemental's body reform into a humanoid form and attacks!");
 					flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = rand(4);
 					/*if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] <= 0) {
@@ -540,7 +540,7 @@ import classes.StatusEffects;
 					startCombat(new DarknessElemental(), true);
 				}
 				if (choice == 2) {
-					//spriteSelect(25);
+					//spriteSelect(SpriteDb.s_green_slime);
 					outputText("A soft shuffling sound catches your attention and you turn around, spotting a small ball of lighting rushing towards you!  Realizing it's been spotted, the elemental's body reform into a humanoid form and attacks!");
 					flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = rand(4);
 					/*if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] <= 0) {
@@ -550,7 +550,7 @@ import classes.StatusEffects;
 					startCombat(new LightningElemental(), true);
 				}
 				if (choice == 3) {
-					//spriteSelect(25);
+					//spriteSelect(SpriteDb.s_green_slime);
 					outputText("Hearing a thunderous roar, you ready yourself for a fight. A massive hulking creature barrels around the corner and sets its gaze on you, its clawed hands and feet launching its body over the narrow corridors with ease as you stare the beast down. The white blur of an ice yeti attacks you!");
 					/*if (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] <= 0) {
 						flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] = 1;
@@ -579,7 +579,7 @@ import classes.StatusEffects;
 				reset -= player.statusEffectv1(StatusEffects.RiverDungeonA);
 				player.addStatusValue(StatusEffects.RiverDungeonA, 1, reset);
 				player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
-				//spriteSelect(25);
+				//spriteSelect(SpriteDb.s_green_slime);
 				if (player.hasKeyItem("Key Of Darkness") >= 0 || flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 7) flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = rand(4);
 				else flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] = rand(5);
 				if (flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4) {
