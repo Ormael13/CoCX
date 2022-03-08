@@ -348,7 +348,7 @@ public function winAgainstMarae():void {
 	clearOutput();
 	outputText(images.showImage("marae-defeated"));
 	if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2) {
-		outputText("\"<i>NO! How can a mortal defeat me?! That's IMPOSSIBLE!</i>\" Marae yells. You tell her that just because she's a goddess doesn't mean a mortal can't defeat her.");
+		outputText("\"<i>NO! How can a mortal defeat me?! That's IMPOSSIBLE!</i>\" Marae yells. All gods are fallible, even a determined mortal can stand against something like her. It's time you slay this one.");
 		if (silly()) outputText("\n\n<b>Did you just punch out Cthulhu? Or in this case, Marae?</b>\n\n");
 		if (player.hasStatusEffect(StatusEffects.KnowsWhitefire) || player.hasPerk(PerkLib.FireLord) || player.hasPerk(PerkLib.Hellfire) || player.hasPerk(PerkLib.DragonFireBreath)) outputText("You summon your magical fire and finish off Marae for the last time. You can hear her screaming as she's withering and shriveling up. While she's on fire, you turn your attention elsewhere.");
 		else outputText("You raise your [weapon] and finish off Marae at last. The corrupted goddess is no more. All the tentacles shrivel up. Afterwards, you turn your attention elsewhere.");

@@ -278,7 +278,7 @@ use namespace CoC;
 					if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 50 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 10) addButton(3, "Prayer Bench", makeNewPrayerBenches).hint("Repair some of the temple banches.");
 					else addButtonDisabled(3, "Prayer Bench", "You not have enough wood or/and nails.");
 				}
-				addButton(13, "CheckProgress", currentStateOfTemple).hint("I think I must ask Lia for fancy tooltip here.");
+				addButton(13, "CheckProgress", currentStateOfTemple).hint("See how far the sculpture has progressed.");
 				addButton(14, "Back", templemainmenu);
 			}
 			else {

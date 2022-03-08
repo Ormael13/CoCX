@@ -230,7 +230,7 @@ public class GoblinAssassinScene extends BaseContent
 		public function gobboAssassinRapeIntro2():void {
 			spriteSelect(SpriteDb.s_goblinAssassin);
 			clearOutput();
-			outputText("The adventurers falls on the ground, desperately trying to regain their composure but ultimately caving in to the exhaustion of defeat. The leather belt that was once wrapped around their pillowy breasts now hangs unfastened around waist, the syringes once adorning it now littered around them. Some of shattered needles emits a sweet-smelling vapor that soon reaches their nose, causing girls to blush furiously as lust begins to overcome their senses. Still most of them somehow managed to run away leaving one most affected by lustfull vapor.");
+			outputText("The adventurers fall on the ground, desperately trying to regain their composure but ultimately caving into the exhaustion of defeat. The leather belt wrapped around their pillowy breasts now hangs unfastened around their waist. The syringes once adorning it are now littered around them. Several shattered needles emit a sweet-smelling vapor that soon reaches their nose, causing the goblins to blush fervently as lust quickly overcomes their senses. Still, most of them manage to run away, leaving only a single goblin that has quaffed too much of the vapor.");
 			dynStats("lus", 20);
 			gobboAssassinRapeIntro();
 		}
