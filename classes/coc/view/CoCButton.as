@@ -157,9 +157,9 @@ public class CoCButton extends Block {
 		this.labelText     = text;
 		this.callback      = callback;
 		this.toolTipText = toolTipText;
+		this.toolTipHeader = toolTipHeader || text;
         if (this.toolTipText)
             this.toolTipText = Parser.recursiveParser(this.toolTipText);
-		this.toolTipHeader = toolTipHeader || text;
         if (this.toolTipHeader)
             this.toolTipHeader = Parser.recursiveParser(this.toolTipHeader);
 		this.visible       = true;
@@ -175,9 +175,9 @@ public class CoCButton extends Block {
 		this.labelText     = text;
 		this.callback      = null;
 		this.toolTipText = toolTipText;
+		this.toolTipHeader = toolTipHeader || text;
         if (this.toolTipText)
             this.toolTipText = Parser.recursiveParser(this.toolTipText);
-		this.toolTipHeader = toolTipHeader || text;
         if (this.toolTipHeader)
             this.toolTipHeader = Parser.recursiveParser(this.toolTipHeader);
 		this.visible       = true;
@@ -193,6 +193,10 @@ public class CoCButton extends Block {
 		this.labelText = text;
 		this.toolTipText = toolTipText||labelText;
 		this.toolTipHeader = toolTipHeader;
+        if (this.toolTipText)
+            this.toolTipText = Parser.recursiveParser(this.toolTipText);
+        if (this.toolTipHeader)
+            this.toolTipHeader = Parser.recursiveParser(this.toolTipHeader);
 		return this;
 	}
 	/**
@@ -202,6 +206,10 @@ public class CoCButton extends Block {
 	public function hint(toolTipText:String = "",toolTipHeader:String=""):CoCButton {
 		this.toolTipText = toolTipText;
 		this.toolTipHeader = toolTipHeader||labelText;
+        if (this.toolTipText)
+            this.toolTipText = Parser.recursiveParser(this.toolTipText);
+        if (this.toolTipHeader)
+            this.toolTipHeader = Parser.recursiveParser(this.toolTipHeader);
 		return this;
 	}
 	/**
@@ -211,7 +219,8 @@ public class CoCButton extends Block {
 	public function disableIf(condition:Boolean, toolTipText:String=null):CoCButton {
 		if (condition) {
 			enabled = false;
-			if (toolTipText !== null) this.toolTipText = toolTipText;
+			if (toolTipText !== null)
+                this.toolTipText = Parser.recursiveParser(toolTipText);
 		}
 		return this;
 	}
@@ -221,7 +230,8 @@ public class CoCButton extends Block {
 	 */
 	public function disable(toolTipText:String=null):CoCButton {
 		enabled = false;
-		if (toolTipText!==null) this.toolTipText = toolTipText;
+        if (toolTipText !== null)
+            this.toolTipText = Parser.recursiveParser(toolTipText);
 		return this;
 	}
 	/**
