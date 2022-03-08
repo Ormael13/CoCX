@@ -3,6 +3,7 @@ import classes.*;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kFLAGS;
+import classes.display.SpriteDb;
 
 public class KihaScene extends NPCAwareContent {
 

@@ -45,7 +45,7 @@ use namespace CoC;
 		public function firstvisitintro():void {
 			flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] = 1;
 			flags[kFLAGS.SAPPHIRE_TALKS] = 0;
-			spriteSelect(SpriteDb.s_gargoyle);
+			spriteSelect(SpriteDb.s_sapphire);
 			clearOutput();
 			outputText("As you wander the mountains, you eventually climb to the very top, something you never expected to do. Weirdly enough, sitting on a nearby peak is what appears to be a massive temple. You approach the intimidating doors of the building and open them wide. Instantly you’re taken aback by the sight in front of you. ");
 			outputText("There are ancient bloodstains marking the stone floor and stained glass windows depicting various deities adorning each wall. At the end of the building that obviously once was a holy site, sits one depicting Marae. Under each window is a somewhat damaged altar, the light outside shining faintly upon it.");
@@ -72,7 +72,7 @@ use namespace CoC;
 		}
 		public function repeatvisitintro():void {
 			clearOutput();
-			spriteSelect(SpriteDb.s_gargoyle);
+			spriteSelect(SpriteDb.s_sapphire);
 			outputText("You decide to make a trip to the temple. However as soon as you enter the sacred ground, Sapphire screeches and takes flight, spear at the ready. Luckily, she calms down once she recognizes you, assuming a relaxed pose in the middle of the temple.");
 			outputText("\n\n\"<i>Well, hello there! Nice to see you again [name]. You're welcome here, as usual... So are you here to pray?");
 			if (flags[kFLAGS.SAPPHIRE_AFFECTION] > 99) outputText(" Or perhaps you're here for something more... mutually agreeable, instead?");
@@ -466,7 +466,7 @@ use namespace CoC;
 
 		public function sapphiremenu():void {
 			clearOutput()
-			spriteSelect(SpriteDb.s_gargoyle);
+			spriteSelect(SpriteDb.s_sapphire);
 			outputText("You admit that you were actually looking for her, a response which she seems happy about, as she casually sits next to you and starts conversing.\n\n");
 			outputText("\n\n\"<i>So [name] what did you want to talk about?</i>\"");
 			menu();
@@ -477,7 +477,7 @@ use namespace CoC;
 		}
 		public function TalkThisPlace():void {
 			clearOutput();
-			spriteSelect(SpriteDb.s_gargoyle);
+			spriteSelect(SpriteDb.s_sapphire);
 			outputText(" You admit to being curious and Sapphire is glad to tell you about the history of the building. She starts to ");
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] >= 1) {
 				outputText("explain again.\n\n");
@@ -496,7 +496,7 @@ use namespace CoC;
 		}
 		public function TalkHer():void {
 			clearOutput();
-			spriteSelect(SpriteDb.s_gargoyle);
+			spriteSelect(SpriteDb.s_sapphire);
 			if (flags[kFLAGS.SAPPHIRE_TALKS] == 2 || flags[kFLAGS.SAPPHIRE_TALKS] == 6) {
 				outputText("Now that some time has passed you ask her if she is ready to tell you more about the events she foreshadowed in your previous discussion.\n\n");
 				outputText("\"<i>It pains me to even think about the events of that day, the day the demons appeared. They poured into the cities below us like a tidal wave, devouring souls and corrupting everything in their path. Eventually they began climbing the mountain, and we knew they would be on our doorstep within hours. To prevent them from destroying this holy ground we devised a plan. No matter what the cost to us, the temple had to be protected. ");
@@ -529,7 +529,7 @@ use namespace CoC;
 		}
 		public function TalkSex():void {
 			clearOutput();
-			spriteSelect(SpriteDb.s_gargoyle);
+			spriteSelect(SpriteDb.s_sapphire);
 			if (flags[kFLAGS.SAPPHIRE_SEX] == 1) {
 				outputText("Sapphire looks at you expectantly her tail agitated by the excitement of potential physical release.\n\n");
 				outputText("\"<i>Feeling antsy? How would you like us to do it then?");
@@ -565,7 +565,7 @@ use namespace CoC;
 
 		public function SapphireGargoyleDoubleTailfuck():void {
 			clearOutput();
-			spriteSelect(SpriteDb.s_gargoyle);
+			spriteSelect(SpriteDb.s_sapphire);
 			outputText("You check Sapphire’s tail then look at yours. An idea sparks in your mind as you tell Sapphire to get on all fours.\n\n");
 			outputText("\"<i>I don't know what’s on your mind but I'm very curious to try it now.</i>\"\n\n");
 			outputText("She complies and you go to her backside, positioning yourself to have your [ass] facing hers. You tell her to entwine her tail around yours, then insert her tip in your pussy. She gets the hint as you proceed to do the same with hers. Now, having both of your tail tips in each others pussies, you tell her to move forward and backward. She yelps in surprise as you do the same, both of your tails sliding in and out of each other's pussies at a decent rhythm. Gosh truth be told you are enjoying your tail just as much as your pussy right now. It’s like discovering you had a ");
@@ -582,7 +582,7 @@ use namespace CoC;
 		}
 		public function SapphireTripleTailOuroboros():void {
 			clearOutput();
-			spriteSelect(SpriteDb.s_gargoyle);
+			spriteSelect(SpriteDb.s_sapphire);
 			outputText("You think it over then remember about " + flags[kFLAGS.ONYX_NAME] + " being there too. The third gargoyle must be starving for sex. Unable to decide which one you want to fuck or get fucked by you propose the lot of you tail fuck each other, something to which your two stony mates are more then happy to agree. You all sit in a perfect triangle, positioning your tails appropriately and smiling in anticipation for a threesome that will go down in history.\n\n");
 			outputText("You begin by kissing Sapphire then exchanging with " + flags[kFLAGS.ONYX_NAME] + " the tree of you taking turns in order to feel each other's properly. You are not surprised to discover that out of the three of you " + flags[kFLAGS.ONYX_NAME] + " is the best kisser. Once you all are suitably aroused you playfully insert your tail in Sapphire’s pussy as she position hers over ");
 			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("Krystal’s waiting cunt");
@@ -647,7 +647,7 @@ use namespace CoC;
 		}
 		public function SapphireMutualMasturbation():void {
 			clearOutput();
-			spriteSelect(SpriteDb.s_gargoyle);
+			spriteSelect(SpriteDb.s_sapphire);
 			outputText("Unable to decide on a position you decide to help the temple guardian blow some steam by fingering her. The both of you sit down next to each other and you open the games by kissing Sapphire.");
 			if (player.isGargoyle()) outputText(" While neither of you actually have Saliva the feeling of her stone rugged tongue against yours is quite good.");
 			else outputText(" Her mouth lacking fluids is a weird experience at first but once her tongue is slick with your saliva it starts to feel like anyone else’s, albeit her tongue is slightly longer.");
@@ -674,7 +674,7 @@ use namespace CoC;
 		}
 		public function SapphireFuckHer():void {
 			clearOutput();
-			spriteSelect(SpriteDb.s_gargoyle);
+			spriteSelect(SpriteDb.s_sapphire);
 			outputText("Her pussy lips shine polished gems and you can’t stop your cock from hardening in prospect of the gargoyle waiting folds.\n\n");
 			outputText("You begin to gently pull sapphire into a kiss as you lay her over the nearest altar. Sapphire tongue is actually quite skilled for someone who barely discovered the joy of sex. You entwine and seek each other's out for a few minute caressing the gargoyle smooth stone skin with your hand. Sapphire gasp as your fingers trace the outline of her perfectly sculpted curves.\n\n");
 			outputText("\"<i>Ahhhn [name] I...mmm</i>\"\n\n");
@@ -701,7 +701,7 @@ use namespace CoC;
 
 		public function krystalonyxmenu():void {
 			clearOutput();
-			spriteSelect(SpriteDb.s_gargoyle);
+			spriteSelect(SpriteDb.s_sapphire);
 			outputText("Waving over at " + flags[kFLAGS.ONYX_NAME] + ", you ask ");
 			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
 			else outputText("him");
@@ -773,7 +773,7 @@ use namespace CoC;
 
 		public function KrystalOnyxTailFuck():void {
 			clearOutput();
-			spriteSelect(SpriteDb.s_gargoyle);
+			spriteSelect(SpriteDb.s_sapphire);
 			outputText("Lying under ");
 			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
 			else outputText("him");
@@ -870,7 +870,7 @@ use namespace CoC;
 		}
 		public function KrystalTribadism():void {
 			clearOutput();
-			spriteSelect(SpriteDb.s_gargoyle);
+			spriteSelect(SpriteDb.s_sapphire);
 			outputText("Krystal's pussy looks like it could use some attention and so does yours. You slowly push the gargoyle down on her back as you begin to grind your pussy against her nether lips. With the lubrication of your feminine juices, her smooth stone pussy soon becomes as slippery as wet ice, and grinding yourself on it is even easier than it would be with a woman made of flesh. ");
 			outputText("The both of you moan like cheap whores as your clits engorge from the repeated motions. You begin to grope Krystal's breasts, which are surprisingly malleable despite her stone skin, making her gasp in pleasure as she grabs your [breasts]. Seems she enjoys it just like any normal woman would, despite her stony body.\n\n");
 			outputText("Soon you climax ");
@@ -881,7 +881,7 @@ use namespace CoC;
 		}
 		public function KrystalOnyx69():void {
 			clearOutput();
-			spriteSelect(SpriteDb.s_gargoyle);
+			spriteSelect(SpriteDb.s_sapphire);
 			outputText("Your eyes zero in on ");
 			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("Krystal's smoothly shaped pussy");
 			else outputText("Onyx's perfectly carved cock");
@@ -929,7 +929,7 @@ use namespace CoC;
 		}
 		public function KrystalOnyxGetFucked():void {
 			clearOutput();
-			spriteSelect(SpriteDb.s_gargoyle);
+			spriteSelect(SpriteDb.s_sapphire);
 			outputText("The moment you made " + flags[kFLAGS.ONYX_NAME] + "'s perfectly defined shaft you knew you would use it! You begin to slide your hand against ");
 			if (flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
 			else outputText("his");
@@ -1014,7 +1014,7 @@ use namespace CoC;
 		}
 		public function KrystalFuckHer():void {
 			clearOutput();
-			spriteSelect(SpriteDb.s_gargoyle);
+			spriteSelect(SpriteDb.s_sapphire);
 			outputText("Krystal sure has a lovely body, you can’t deny that. Her breasts are perfectly shaped, her face could make any man fall for her and that pussy looks so inviting it would be impossible to say no. You slowly push Krystal to the ground ");
 			if (player.isGargoyle()) {
 				outputText("readying your [cock] for the smoking hot gargoyle ");

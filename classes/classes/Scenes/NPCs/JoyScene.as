@@ -5,6 +5,7 @@ import classes.GlobalFlags.*;
 import classes.Items.*;
 import classes.lists.BreastCup;
 import classes.lists.Gender;
+import classes.display.SpriteDb;
 
 /**
 	 * Bimbo Jojo by LukaDoc
@@ -378,6 +379,8 @@ import classes.lists.Gender;
 			doNext(joyEmerges);
 		}
 
+        //unused
+        /*
 		//Bimbofy Me! (The DIY version)
 		private function jojoGetsBimbofiedByYou():void {
 			jojoScene.jojoSprite();
@@ -407,10 +410,11 @@ import classes.lists.Gender;
 			dynStats("cor", 2);
 			doNext(joyEmerges);
 		}
+        */
 
 		//Jojo gets bimbofied! Joy Emerges.
 		private function joyEmerges():void {
-			spriteSelect(-1);
+			spriteSelect(SpriteDb.s_joy);
 			clearOutput();
 			outputText("Jojo doubles over and groans; you watch helpless as his fur changes from white to platinum blonde. He sprawls on the floor and you can see his lips getting fuller, his eyelashes longer and his chest begins expanding; a tearing sound rips through the air, as Jojo's new pillowy boobs rip his robes apart, perky nipples erect.");
 			outputText("\n\nYou see his pants suddenly become much less baggy as his butt, hips and thighs grow; his whole figure shifts towards the feminine and a ripping sound confirms his pants have also torn up somewhere.");
@@ -442,6 +446,7 @@ import classes.lists.Gender;
 				clearOutput();
 				outputText("\"<i>Do you need, like, anything else?</i>\" Joy asks. Her tail waggles excitedly.");
 			}
+			spriteSelect(SpriteDb.s_joy);
 			menu();
 			addButton(0, "Appearance", joysAppearance).hint("Examine Joy's appearance. She must be so sexy!");
 			addButton(1, "Talk", joyTalkMenu).hint("Talk to Joy and discuss about various topics.");
@@ -1928,6 +1933,7 @@ import classes.lists.Gender;
 
 		public function joyGivesBirth():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_joy);
 			outputText("As you stroll through the camp, a pained squeak catches your attention and you look to see Joy holding her belly in apparent pain.");
 			outputText("\n\nJoy staggers over to you, clutching her swollen belly and wincing. \"<i>Like, [name]? Can you give me a belly rub? Please? I got this horrible pain in my tummy.</i>\" She whimpers.");
 			outputText("\n\nNodding, you guide her to her tent and help her lay down; then you loosen her robes and start gently rubbing her belly. That's when you notice that the babies inside seem strangely agitated, and you feel what could only be a contraction accompanied by a pained squeak; a quick look at Joy's shorts confirms your thoughts as you notice a wet spot has formed. In one smooth motion you grab the rim of Joy's shorts and pull them off Joy.");
@@ -2057,6 +2063,7 @@ import classes.lists.Gender;
 		//Night fuck scene
 		public function hornyJoyIsPregnant():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_joy);
 			outputText("You're about to head into your " + camp.homeDesc() + " to rest after a day of adventuring, when you see Joy approach you.");
 			outputText("\n\n\"<i>Like, [name]?</i>\" Joy pleads. \"<i>The babies, like, won't stop kicking in my belly, and I'm sooo horny, too. Can we, like, please have some sex? I don't think I'll ever be able to, y'know, get some sleep if I don't take the edge off and make the babies calm down.</i>\"");
 			doYesNo(acceptJoyNightFuck, declineJoyNightFuck)
@@ -2186,6 +2193,7 @@ import classes.lists.Gender;
 				default:
 					babyGender2 = 3;
 			}
+			spriteSelect(SpriteDb.s_joy);
 			outputText("As you wander through your camp, a heavy cramp hits you in the belly, followed by a rush of fluids that gush from your [vagina]. Figuring it must be time, you yell, calling for Joy.");
 			outputText("\n\nThe mouse promptly wanders over. \"<i>Like, [name]? What's up? Why all the shouting? ...And " + player.clothedOrNakedLower("what happened to your [armor] - ") + "did you, like, pee yourself or something?</i>\" She asks, giving you a completely baffled expression.");
 			outputText("\n\nYou're in too much pain to explain right now, so you yell at Joy to help you undress, quick! And then to help you into your bed.");

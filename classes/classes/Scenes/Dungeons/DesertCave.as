@@ -9,6 +9,7 @@ import classes.Scenes.Dungeons.DesertCave.*;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.SceneLib;
 import classes.Scenes.UniqueSexScenes;
+import classes.display.SpriteDb;
 
 public class DesertCave extends DungeonAbstractContent
 	{
@@ -622,6 +623,7 @@ public class DesertCave extends DungeonAbstractContent
 		//*PC Loss - Female - Become Sand Witch
 		public function turnIntoASammitch(volunteered:Boolean = false):void {
 			clearOutput();
+            spriteSelect(SpriteDb.s_cumWitch);
 			if (!volunteered) {
 				outputText("Helplessly, you ");
 				if(player.lust >= player.maxLust()) {
@@ -727,6 +729,7 @@ public class DesertCave extends DungeonAbstractContent
 		//*Male Loss - Turned Into Cum Pump
 		public function cumWitchCumPumpBadEnd(volunteered:Boolean = false):void {
 			clearOutput();
+            spriteSelect(SpriteDb.s_cumWitch);
 			if (!volunteered) {
 				outputText("Laid low by ");
 				if(player.HP < 1) outputText("your wounds");
@@ -1094,6 +1097,7 @@ public class DesertCave extends DungeonAbstractContent
 
 
 		public function defeatedByCumWitch():void {
+            spriteSelect(SpriteDb.s_cumWitch);
 			if (inDungeon) {
 				if (player.isGargoyle()) gargoyleBadEndSandWitches();
 				else {
@@ -1118,6 +1122,7 @@ public class DesertCave extends DungeonAbstractContent
 		//*Victory Intro
 		public function cumWitchDefeated():void {
 			clearOutput();
+            spriteSelect(SpriteDb.s_cumWitch);
 			//(HP)
 			if(monster.HP <= monster.minHP()) outputText("The chocolate-skinned witch collapses down onto her hands and knees with the tattered remnants of her robes swirling about her.  With her clothing destroyed, you're treated to the perfect view of her semi-erect cock and swollen testes swaying enticingly beneath her, paired with the glimmering wetness of her juicy cunny - also on display.  Her udder-like melons sway and jiggle in sympathy to her uncoordinated swaying.  She grumbles, \"<i>You've beaten me, interloper...</i>\"");
 			else outputText("The chocolate-skinned witch collapses down onto her hands and knees, shredding her robes as she goes.  Her throbbing-hard cock drips with precum above her quaking testes while her equally enticing pussy looks positively soaked with feminine lubricants.  She rolls onto her back, tits jiggling wildly, and jams both her hands into her groin, masturbating furiously.  Panting, the witch moans, \"<i>You win... ooooohhh...  Come over here and fuck me!  Please!</i>\"\n\nWell, she did ask nicely...");
@@ -2176,6 +2181,7 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 		//{Having beat the Sammiches, and made Momma Witch your friend, add a button labeled [Free Slaves] to Momma's menu. Needs to have met Milk Slut.}
 		private function freeSlaves():void {
 			clearOutput();
+            spriteSelect(SpriteDb.s_milkgirl);
 			outputText("Thinking back to the poor, mind-broken tittymonster of a bath girl you met here in the witches' coven, you tell the Sand Mother it's about time to free her and any other slaves she's got hidden away.");
 
 			outputText("\n\nThe Sand Mother cocks an eyebrow at you, and makes a rather haughty scoff from atop her throne.  \"<i>You may have beaten my guardians, but what makes you think you can just order something like that, outsider?  The slaves are vital to the workings of the coven; we can't simply </i>release<i> them.</i>\"");
@@ -3186,6 +3192,7 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 				outputText("\n\n\"<i>No, it wouldn't,</i>\" the Sand Mother retorts, ending the conversation.");
 				doNext(playerMenu);
 			}
+            spriteSelect(SpriteDb.s_cumWitch);
 			outputText("You ask her if it wouldn't be more humane to simply create a few more cum witches, allowing them to split their duties and actually have time to serve in other ways, either as normal sisters or perhaps helping with the recruitment.");
 			outputText("\n\n\"<i>Doing so would reduce milk production and our breeding population somewhat,</i>\" the Dune Mother protests.  \"<i>We have done things this way for nearly two decades... it is the most efficient way.</i>\"");
 			outputText("\n\nIt may be the most efficient way, but reducing someone in her charge to little more than a sex slave (even if it is a happy one) does not exactly make her compare favorably to the very demons she fights.");
@@ -4256,6 +4263,7 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 		public function roomBathroom():void {
 			dungeonLoc = 33;
 			clearOutput();
+            spriteSelect(SpriteDb.s_milkgirl);
 			outputText("<b><u>Eastern Warrens, Eastern Portion, North Side (Bath Room)</u></b>\n");
 			outputText("As soon as you step in, you can smell a sweet, dairy-like scent in the air, but as your eyes adjust to the dimmer lighting, you realize you've stumbled into the sand witches' bathroom!  Fluffy towels hang from the wall, ready for use.  There's one giant tub in the center of the room, recessed deep into the floor.  It has a number of seats carved into the side with a small, open hole in the bottom.  Hanging from the ceiling, a long chain dangles down, topped with a plug.");
 			dungeons.setDungeonButtons(null, null, roomSleepingChamber, null);
@@ -4282,6 +4290,7 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 		public function roomCumWitchOffice():void {
 			dungeonLoc = 36;
 			clearOutput();
+            spriteSelect(SpriteDb.s_cumWitch);
 			outputText("<b><u>Eastern Warrens, West Portion, South Side (Cum Witch's Office)</u></b>\n");
 			dungeons.setDungeonButtons(null, null, null, roomCumWitchBedroom);
 			if(flags[kFLAGS.SAND_WITCHES_FRIENDLY] > 0) {

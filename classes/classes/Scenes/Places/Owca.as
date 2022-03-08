@@ -6,6 +6,7 @@ import classes.Items.WeaponLib;
 import classes.Scenes.NPCs.Kindra;
 import classes.Scenes.Places.Owca.*;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 use namespace CoC;
 
@@ -188,6 +189,7 @@ private function acceptRebeccsPlea(firstTime:Boolean = false, sacrificed:Boolean
 }
 private function intoTheDemonPit(sacrifice:Boolean = true):void {
 	clearOutput();
+    spriteSelect(SpriteDb.s_vapula);
 	//N is the number of hours left before night
 	if(model.time.hours < 21) {
 		var passed:int = 21 - model.time.hours;
@@ -259,6 +261,7 @@ private function fightZeDemons(sacrifice:Boolean = true):void {
 //Loss scene/Submit (gangrape) (Z)
 public function loseOrSubmitToVapula():void {
 	clearOutput();
+    spriteSelect(SpriteDb.s_vapula);
 	outputText("Vapula taunts you as she circles around you.  \"<i>Look at the slutty pet!  Ain't you a slutty pet?  Yes, you are!  Don't pretend you're not hungry for some fat demon cock, I know you are.</i>\"  As she speaks, the crowd gathers closer.  A few creatures show some temerity, giving you pinches and gropes as they near.  The cock-belted imp unties his tentacle; the horror wriggles and squirms as it drops to the ground and slithers toward you.  The tip of the absurdly long pecker inspects your body, pressing itself against your flesh, massaging you in the most sensual places, wetting you with sap-like pre-cum and teasingly grinding itself against your mouth, and then your " +assholeDescript());
 	if(player.hasVagina()) outputText(", followed by your "+vaginaDescript(0));
 	if(player.hasCock()) outputText(", before finally wrapping around your [cock] and stroking it; the friction uncontrollably arouses you, and you find yourself reaching full erectness");
@@ -344,6 +347,7 @@ public function loseOrSubmitToVapula():void {
 
 private function wakeUpAfterDemonGangBangs():void {
 	clearOutput();
+    spriteSelect(-1);
 	model.time.hours = 7;
 	model.time.days++;
 	outputText("When you wake up, you are alone, and your restraints are broken.  You are sloshing in a pool of stinky juices; your mouth and ears are still full of it.  Your whole body is covered with a thin white layer that must certainly be dried spooge.  Underneath, you're nothing but bruises and every movement seems to hurt.  A few meters away, outside the pit, you notice your items and your gear.  The village itself appears to be empty... your best assumption is that the residents are hiding, either from shame at having sacrificed you or from awkwardness at the prospect of talking to a sloshing, crusty cumdumpster.  Wearily, you head back to your camp.");
@@ -906,6 +910,7 @@ public function loseToOwca():void {
 private function morningAfterRape():void {
 	player.removeStatusEffect(StatusEffects.LostVillagerSpecial);
 	clearOutput();
+    spriteSelect(-1);
 	outputText("The village is utterly silent and almost deserted.  The few people you see look away when they spot you, probably ashamed of what they did last time.  Doors are locked and windows are closed as you pass by; everyone is obviously afraid of directly confronting their victim.  You head toward Rebecc's house, your last friend.  As you open her door, you hear a muffled wail; you recognize the pretty farmer's voice.  She is laying on her bed, weeping uncontrollably; once she finally notices your presence, she looks up to you with tear-filled eyes, sobbing convulsively as she talks.");
 	outputText("\n\n\"<i>T-they forced you to be abused... I promise I didn't want that!  I tried to convince them... they wouldn't listen... they threw you to the pit... at least I made them give you back your belongings as usual... now you must hate me, don't you?  Oh, I'm so sorry!  It's all my fault!</i>\"");
 	outputText("\n\nWhat do you do?");

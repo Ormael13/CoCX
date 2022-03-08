@@ -2,6 +2,7 @@
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 //  BROOKE_AFFECTION:int = 915;
 //  BROOKE_SHOWERED_WITH:int = 916;
@@ -56,6 +57,7 @@ public function brookeCapacity():Number {
 //Occurs automatically after the second time you choose to hit the showers after a workout.  From then, the choice to ‘hit the showers’ then becomes either visit the machine or to actually go to the shower.
 public function meetBrookeFirstTime():void {
 	clearOutput();
+	spriteSelect(SpriteDb.s_brooke_nude);
 	outputText(images.showImage("brooke-first-meeting"));
 	outputText("After yet another successful, and rewarding, workout, you begin your way down the hallways of the gym back to your favorite machine in the building.  Even after putting in so much effort, you’ve yet to finish – you still have to work <i>every</i> muscle, after all.  However, as you walk down the halls, breath still heavy and feeling the sweat drip off your brow, you pause, taking a few sniffs.  Once you’re out of the gym and into somewhat fresher air, you smell something, and it smells <i>rank</i>.  Smelling around a bit, you lift an arm and whiff your pit – it’s you!  Maybe, for once, you should actually have a wash; as you are now, the monsters would smell you long before they’d see you.");
 
@@ -94,6 +96,7 @@ public function meetBrookeFirstTime():void {
 
 public function repeatChooseShower():void {
 	clearOutput();
+	spriteSelect(SpriteDb.s_brooke_nude);
 	if(model.time.hours < 16 || model.time.hours > 18 || player.tone < 30) {
 		//Before 16:00/after 18:00, affection <= 19
 		if(brookeAffection() <= 19) {
@@ -163,6 +166,7 @@ public function brookeThirdEncounter():void {
 // Between 16:00 and 18:00, Affection <= 19
 public function lowAffectionBrookeMeeting():void {
 	clearOutput();
+	spriteSelect(SpriteDb.s_brooke_nude);
 	outputText("You head your way back to the showers, feeling the sweet ache of your muscles as you easily find your way there.  Brooke is there, already rinsing the day's work out of her muscles.  She hears you coming in, and turns to give you a warm greeting, which you happily return.");
 
 	outputText("\n\nThe shower goes by smoothly, the both of you talking idly about whatever happens to come to mind.  Learning from your previous encounter, you try to keep the topics away from Tel'Adre while still asking her about herself, and answer her own questions about yourself whenever she asks.  All in all, things go by rather well, and once again she leaves the showers before you, giving you a wave before she leaves.");
@@ -174,6 +178,7 @@ public function lowAffectionBrookeMeeting():void {
 // Between 16:00 and 18:00, Affection >= 20, <= 39, body tone 40 minimum, one-time event
 public function mediumLowBrookeAffectionOneTime():void {
 	clearOutput();
+	spriteSelect(SpriteDb.s_brooke_nude);
 	outputText("Another good workout and another fine sheen of sweat to wash off.  The day hasn't been so bad so far, and you start to whistle to yourself as you head to the showers, dropping your [armor] off in a locker beforehand.  Glancing out one of the windows, you guess that Brooke ought to be there around this time of day; and as you approach, you hear the sounds of rushing water.  Sure, it could actually be someone else, but you have a feeling it's the Shepherd girl.");
 
 	outputText("\n\nSure enough, there she is, although she's looking a little... melancholy.  She's staring down at her feet, letting the water rush over her body, not really moving or anything.  One of her ears perks as she hears you coming, and she turns to face you.  <i>\"Oh,\"</i> she sighs, <i>\"hey, [name].\"</i>");
@@ -200,6 +205,7 @@ public function mediumLowBrookeAffectionOneTime():void {
 // [=Don't help=]
 public function dontHelpBrookeShower():void {
 	clearOutput();
+	spriteSelect(SpriteDb.s_brooke_nude);
 	outputText("You say that she's right, and that you don't really know each other well enough to share a shower together, even if it's as innocent as just washing each other's hard-to-reach places.  <i>\"Yeah, okay,\"</i> she sighs again, going back to scrubbing hard at her fur.  You take your usual place two stalls down, and while you try to make conversation with Brooke, she's just not that into it.  The rest of the shower is mostly awkward silence, and as usual, she leaves before you do.");
 	outputText("\n\nYour shower proceeds uneventfully, and just a short while later, you're clean as a whistle and out the door.");
 	//(Brooke's affection resets to zero)
@@ -210,6 +216,7 @@ public function dontHelpBrookeShower():void {
 // [=Help=]
 public function helpBrookeOut():void {
 	clearOutput();
+	spriteSelect(SpriteDb.s_brooke_nude);
 	outputText("You assure her that asking for help washing her back isn't such a big deal at all, and is in fact kind of refreshing.  In a world where rape is as common as a 'hello', just a friendly wash is a breath of fresh air.  She smiles and thanks you, as you drop the towel and enter into her stall, picking up a small bar of soap and start running it over the moist fur of her back as you both stand under the running water.");
 
 	outputText("\n\nIt's tempting to go slowly with Brooke's fur – this is the first time you've got a 'hands-on' experience with her and you just want to admire the body she's put so much effort into.  You try to go at a steady pace, though: she only asked for a wash, and you don't want her to get the wrong idea...");
@@ -256,6 +263,7 @@ public function helpBrookeOut():void {
 // Between 16:00 and 18:00, Affection >= 20, <= 39
 public function mediumLowBrookeAffection():void {
 	clearOutput();
+	spriteSelect(SpriteDb.s_brooke_nude);
 	outputText("After another workout session, you head back to the showers, stopping at the lockers to set down your [armor] and to grab a towel.  You hear the sound of rushing water as you approach and, as usual, you find Brooke in her usual stall.  She's busy lightly scrubbing at her fur, but she easily picks out the sound of your footsteps over the water.  <i>\"Hey, [name]!\"</i> she says, turning to face you with a smile.  <i>\"Right on time, sweetheart.  I could use some company to talk to.  Care to hear a gal pal out?\"</i>");
 
 	outputText("\n\nYou tell her that you'd be glad to.  You step into the stall next to her, lathering up your hands and begin to rub the suds into your [hair].  She finishes doing the same to her own, before crossing her arms over the wall of the stall between you, facing you with a smile.  She waits patiently while you lather yourself – you could take this opportunity to start the conversation yourself, for once.");
@@ -271,6 +279,7 @@ public function mediumLowBrookeAffection():void {
 //Between 16:00 and 18:00, Affection >=40, after first-time sex
 public function mediumBrookeAffectionMeetingAfterSex():void {
 	clearOutput();
+	spriteSelect(SpriteDb.s_brooke_nude);
 	outputText("After another workout session, you head back to the showers, stopping at the lockers to set down your [armor] and to grab a towel.  You hear the sound of rushing water as you approach and, as usual, you find Brooke in her usual stall.  She's busy lightly scrubbing at her fur, but she easily picks out the sound of your footsteps over the water.  <i>\"Hey there, sexy!\"</i> she calls, turning to face you with a smile.  <i>\"You're just in time.  The water's plenty warm, but my stall is getting cold.  Care to help warm it up?\"</i>");
 
 	outputText("\n\nYou tell her that you'd be glad to.  You step into her stall, lathering up your hands and getting to work rubbing the suds into her sore shoulders.  She moans and leans into your touch, letting your now-practiced hands work their magic on her.");
@@ -891,6 +900,7 @@ public function doubleDicked():void {
 //flags[kFLAGS.BROOKE_MEDIUM_SCENE] == 1
 public function mediumAffectionOneTimeEvent():void {
 	clearOutput();
+	spriteSelect(SpriteDb.s_brooke_nude);
 	outputText("You wander your way back into the showers, stopping once again at the lockers to deposit your [armor].  Right on time, you hear the tell-tale sound of rushing water just up ahead, and as usual, you see Brooke washing at her fur lightly in the first shower stall.");
 
 	outputText("\n\nWith your first step, her ears perk, and she turns to you.  She smiles once more; you can't tell at this distance, but her smile looked a little... devious.  Or maybe playful.  You're not sure what the difference is.  <i>\"Hey, [name],\"</i> she says, giving you a wink.  <i>\"The water's warm, but my stall is cold... care to come and warm it up?\"</i>");
@@ -1146,6 +1156,7 @@ public function brookeSpecialMediumSceneContinued():void {
 // Affection = 70, after first-time sex, talk to Heckel between 13:00 and 15:00, must not be a first-time encounter with Heckel, requires a gender
 public function specialHeckelAndBrookeEncounter():void {
 	clearOutput();
+	spriteSelect(SpriteDb.s_brooke);
 	outputText("You stroll into the gym, looking for Heckel, but she's not at her usual routine, running laps around the gym.  The gym itself is a little bare; there aren't a lot of people using the machines dotted around the room.  Perfectly good and ready machines, barbells, bench-presses, et al sit ready and waiting for someone to test their mettle on them.");
 	outputText("\n\nIn one of the corners of the room, you hear a bit of a commotion.  Despite the size of the room, the echoes of the commotion make it a bit confusing as to just where the noise is coming from.  Do you look to your left, towards the butterfly machines, or do you look to your right, towards the leg press?");
 	//[=Butterfly=] [=Leg Press=] [=Leave=]
@@ -1212,6 +1223,7 @@ public function nopeOutofBroke():void {
 
 public function submitHeckelXBrookeThreesome():void {
 	clearOutput();
+	spriteSelect(SpriteDb.s_brooke_nude);
 	outputText(images.showImage("brooke-gym-heckelbrooke3some"));
 	outputText("Once you snap out of it, you comply, hastily removing your [armor] and leaving you just as naked as her.  Although you never really agreed to something like this in the first place, you <b>did</b> come here to see Heckel for a reason, and seeing the two of them like they are <b>is</b> really hot...");
 
@@ -1313,6 +1325,7 @@ public function legPressInsteadOfThreesome():void {
 
 public function brookeVHeckelBrookeWins2():void {
 	clearOutput();
+	spriteSelect(SpriteDb.s_brooke_nude);
 	outputText(images.showImage("brooke-gym-heckelbrookedominance"));
 	outputText("You and Brooke help Heckel into the locker room.  <i>\"[name], close the door and strip down,\"</i> Brooke says, shouldering the rest of Heckel's weight as they lumber towards the bench.  Brooke whispers some sexy nothings into Heckel's ear while you do as you're asked, making sure there's some semblance of privacy in the wide-open locker room while you go about stripping off your [armor] until you're in the nude.");
 

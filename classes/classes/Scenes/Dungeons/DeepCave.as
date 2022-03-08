@@ -11,6 +11,7 @@ import classes.Scenes.NPCs.ShouldraFollower;
 import classes.Scenes.SceneLib;
 import classes.Scenes.UniqueSexScenes;
 import classes.internals.Utils;
+import classes.display.SpriteDb;
 
 use namespace CoC;
 
@@ -492,6 +493,7 @@ use namespace CoC;
 		//[IMP GANGBANG VOL 2]
 		public function loseToImpMobII():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_zetaz);
 			if (player.isAlraune())
 			{
 				uniquuuesexscene.AlrauneDungeonBadEnd();
@@ -1104,6 +1106,7 @@ use namespace CoC;
 			outputText("This room is clearly some kind of dining or gathering hall.  The chamber's shape has been hewn from the surrounding stone, and judging by the visible tool-marks, it wasn't done with a great deal of care.  Two long wooden tables fill out the room.  They're surprisingly well made, though it appears that part of their legs were hacked off with axes to lower their overall height.  You can't help but wonder where they were stolen from.  The tables haven't been cleaned in ages, as evidenced by their many stains and a number of half-rotten bones that still rest on their battered surfaces.  Two rows of crudely crafted chairs flank their better-made brethren, made to accommodate very short beings.");
 			//[Imp Mob Fight]
 			if(flags[kFLAGS.ZETAZ_IMP_HORDE_DEFEATED] == 0) {
+				spriteSelect(SpriteDb.s_impMob);
 				outputText("\n\nThe place is swarming with two dozen imps, and none of them look happy to see you.  A number of them take flight while the rest form a ring around you, trapping you!  It looks like you'll have to fight your way out!");
 				menu();
 				addButton(0, "FIGHT!", fightImpHorde);
@@ -1194,6 +1197,7 @@ use namespace CoC;
 		public function roomZetazChamber():void {
 			dungeonLoc = 16;
 			clearOutput();
+			spriteSelect(SpriteDb.s_zetaz);
 			outputText("<b><u>Zetaz's Chambers</u></b>\n");
 			outputText("You've stepped into the most lavish room in the entire cave system, and marvel at the difference between this magnificent abode and your own crudely constructed campsite.  The stone walls are covered in stolen tapestries that each look to have been liberated from a unique source.  Judging by the variety of depictions and art styles in this one room, you've barely met a fraction of the races that once inhabited the lands of Mareth.  A pair of bright, smokeless lanterns hang from each wall, lit from within by obviously magical spheres of luminescence.  Various pieces of stolen furniture decorate the room, surrounding a four-post bed decorated with masterfully done carvings of various carnal acts.");
 			if(flags[kFLAGS.ZETAZ_DOOR_UNLOCKED] == 0) {

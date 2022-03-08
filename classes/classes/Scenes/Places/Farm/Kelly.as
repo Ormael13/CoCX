@@ -2,6 +2,7 @@
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 public class Kelly extends AbstractFarmContent implements TimeAwareInterface {
 
@@ -37,36 +38,47 @@ Kelt will first try to turn himself back male, in order to continue the mind bre
 
 Every encounter raises corruption by 5, except the last one that raises corruption by 8. In order to achieve the last encounter your corruption level must not be lower than it was at the third encounter.*/
 
-		public var pregnancy:PregnancyStore;
+public var pregnancy:PregnancyStore;
 
-		public function Kelly()
-		{
-			pregnancy = new PregnancyStore(kFLAGS.KELLY_PREGNANCY_TYPE, kFLAGS.KELLY_INCUBATION, 0, 0);
-			pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 280, 200, 100);
-												//Event: 0 (= not pregnant),  1,   2,   3,  4 (< 100)
-			EventParser.timeAwareClassAdd(this);
-		}
+public function Kelly()
+{
+    pregnancy = new PregnancyStore(kFLAGS.KELLY_PREGNANCY_TYPE, kFLAGS.KELLY_INCUBATION, 0, 0);
+    pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 280, 200, 100);
+                                        //Event: 0 (= not pregnant),  1,   2,   3,  4 (< 100)
+    EventParser.timeAwareClassAdd(this);
+}
 
-		//Implementation of TimeAwareInterface
-		public function timeChange():Boolean
-		{
-			pregnancy.pregnancyAdvance();
-			if (model.time.hours > 23) {
-				if (flags[kFLAGS.KELLY_REWARD_COOLDOWN] > 0 && model.time.days % 3 == 0) flags[kFLAGS.KELLY_REWARD_COOLDOWN] = 0;
-				if (flags[kFLAGS.KELT_BREAK_LEVEL] >= 4) flags[kFLAGS.KELLY_DISOBEYING_COUNTER]++;
-			}
-			if (pregnancy.isPregnant && pregnancy.incubation == 0) {
-				kellyPopsOutARunt();
-				pregnancy.knockUpForce(); //Clear Pregnancy
-				return true;
-			}
-			return false;
-		}
-	
-		public function timeChangeLarge():Boolean {
-			return false;
-		}
-		//End of Interface Implementation
+//Implementation of TimeAwareInterface
+public function timeChange():Boolean
+{
+    pregnancy.pregnancyAdvance();
+    if (model.time.hours > 23) {
+        if (flags[kFLAGS.KELLY_REWARD_COOLDOWN] > 0 && model.time.days % 3 == 0) flags[kFLAGS.KELLY_REWARD_COOLDOWN] = 0;
+        if (flags[kFLAGS.KELT_BREAK_LEVEL] >= 4) flags[kFLAGS.KELLY_DISOBEYING_COUNTER]++;
+    }
+    if (pregnancy.isPregnant && pregnancy.incubation == 0) {
+        kellyPopsOutARunt();
+        pregnancy.knockUpForce(); //Clear Pregnancy
+        return true;
+    }
+    return false;
+}
+
+public function timeChangeLarge():Boolean {
+    return false;
+}
+//End of Interface Implementation
+
+public function kellySprite():void {
+	if (!pregnancy.isPregnant) {
+		if (flags[kFLAGS.KELLY_BONUS_BOOB_ROWS] == 0) spriteSelect(SpriteDb.s_kelly);
+		else spriteSelect(SpriteDb.s_kelly_brst);
+	}
+	else  {
+		if (flags[kFLAGS.KELLY_BONUS_BOOB_ROWS] == 0) spriteSelect(SpriteDb.s_kelly_preg);
+		else spriteSelect(SpriteDb.s_kelly_brst_preg);
+	}
+}
 		
 private function hasPinkEgg():Boolean {
 	return (player.hasItem(consumables.PINKEGG) || player.hasItem(consumables.L_PNKEG));
@@ -560,6 +572,7 @@ outputText("\n\nKelly remains quiet for a couple of seconds before slowly mutter
 /*This one requires you not to have lost any corruption since the last encounter you had with her (so if you did, just get back to your former corruption level).*/
 private function finalKeltBreaking():void {
 	clearOutput();
+    kellySprite();
 	outputText("You resolutely walk up to the centaur slut for her final lesson.  This time you don't even need to find her: she rushes to you on her own, her eyes glinting with need.");
 	outputText("\n\n\"<i>[Master], [Master]!  You're finally here.  I-I haven't been sleeping well since you left.  I've been dreaming about you... about your cock.  I haven't been able to eat properly, it's like I'm in a state of constant hunger that can't be satisfied... except by you.</i>\"");
 	
@@ -730,6 +743,7 @@ private function kellyAppearance():void {
 }
 private function approachKelly():void {
 	clearOutput();
+    kellySprite();
 	//Fix hair color!
 	if(flags[kFLAGS.KELLY_HAIR_COLOR] == 0) flags[kFLAGS.KELLY_HAIR_COLOR] = "chestnut brown";
 	//PUNISH SCENES IF APPROPRIATE
