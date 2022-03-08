@@ -3,6 +3,7 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.HighMountains.Harpy;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 public class SophieScene extends BaseContent implements TimeAwareInterface {
 
@@ -357,7 +358,7 @@ private function PCIgnoresSophieAndHarpyIsFought():void {
 	clearOutput();
 	outputText("A harpy wings out of the sky and attacks!");
 	startCombat(new Harpy());
-	spriteSelect(26);
+	spriteSelect(SpriteDb.s_harpy);
 }
 
 

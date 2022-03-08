@@ -7,6 +7,7 @@ import classes.Items.Armors.SuccubusArmor;
 import classes.Scenes.Areas.Ashlands.PhoenixSquadAshland;
 import classes.Scenes.Areas.VolcanicCrag.PhoenixPlatoon;
 import classes.Scenes.UniqueSexScenes;
+import classes.display.SpriteDb;
 
 public class PhoenixScene extends BaseContent
 	{
@@ -18,16 +19,19 @@ public class PhoenixScene extends BaseContent
 		}
 		
 		public function encounterPhoenix1():void {
+            spriteSelect(SpriteDb.s_phoenix);
 			if (flags[kFLAGS.PHOENIX_ENCOUNTERED] <= 0) encounterPhoenixFirstTime1();
 			else encounterPhoenixRepeat1();
 		}
 		
 		public function encounterPhoenix2():void {
+            spriteSelect(SpriteDb.s_phoenix);
 			if (flags[kFLAGS.PHOENIX_ENCOUNTERED] <= 0) encounterPhoenixFirstTime2();
 			else encounterPhoenixRepeat2();
 		}
 		
 		public function encounterPhoenix3():void {
+            spriteSelect(SpriteDb.s_phoenix);
 			if (flags[kFLAGS.PHOENIX_ENCOUNTERED] <= 0) encounterPhoenixFirstTime3();
 			else encounterPhoenixRepeat3();
 		}

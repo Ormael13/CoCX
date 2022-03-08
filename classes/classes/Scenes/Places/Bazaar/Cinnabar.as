@@ -1,5 +1,6 @@
 ﻿package classes.Scenes.Places.Bazaar{
 	import classes.GlobalFlags.kFLAGS;
+    import classes.display.SpriteDb;
 
 //Cinnabar - Female rat-morph, size queen. Likes bizarre
 //stuff and extreme pen, VERY STRETCHY, & Hammerspace
@@ -32,7 +33,7 @@ public function cinnabarAppearance(output:Boolean = true):Function {
 //Approach
 private function cinnabarGreeting():void {
 	clearOutput();
-	spriteSelect(91);
+	spriteSelect(SpriteDb.s_cinnabar);
 	//1st Time:
 	if(flags[kFLAGS.CINNABAR_NUMBER_ENCOUNTERS] == 0) {
 		flags[kFLAGS.CINNABAR_NUMBER_ENCOUNTERS]++;
@@ -97,7 +98,7 @@ private function cinnabarNonHugeDickings():void {
 	flags[kFLAGS.CINNABAR_NUMBER_TIMES_FUCKED]++;
 	flags[kFLAGS.CINNABAR_FUCKED_CORRUPT_PREVIOUSLY] = 0;
 	clearOutput();
-	spriteSelect(91);
+	spriteSelect(SpriteDb.s_cinnabar);
 	//(Too poor)
 	if(player.gems < 50) {
 		outputText("\"<i>Ooooh... I'm sorry, but you don't have the gems to hire a companion, babe.   You should get some practice spreading your thighs and earn a REAL living,</i>\" Cinnabar teases.");
@@ -210,7 +211,7 @@ private function cinnabarGetsFUKKKKED():void {
 	flags[kFLAGS.CINNABAR_FUCKED_CORRUPT_PREVIOUSLY] = 0;
 	clearOutput();
 	var x:Number = player.biggestCockIndex();
-	spriteSelect(91);
+	spriteSelect(SpriteDb.s_cinnabar);
 
 	outputText("As soon as you give your assent, Cinnabar's hands are flying through your [armor] to clutch and grab at your " + cockDescript(x) + ", squeezing the hefty member with her soft pads.  She coos happily, grinning wide enough to expose her teeth while your dick fills up in her palm, gradually spreading her fingers wide.  The turgid, burgeoning mass rubs against your [armor] near-painfully before she stops, and Cinnabar licks her lips appreciatively, knowing you're not even the whole way hard.\n\n");
 
@@ -275,7 +276,7 @@ private function fuckCinnabarHugerAndCorruptedEr():void {
 	var x:Number = player.biggestCockIndex();
 
 	clearOutput();
-	spriteSelect(91);
+	spriteSelect(SpriteDb.s_cinnabar);
 	outputText("You're almost there, so close to your orgasm, but this needy skank's pussy has barely tasted the largeness of your member.  She's wearing out your endurance with her tightness, and if you're going to split her wide, you'll need to pick up the pace.  You grab her thighs, ignoring her tail as it thrashes about, and heave, yanking her dick-dilated cunt along your length with enough force to lift her knees from the mattress.   Cinnabar actually screams from the brutal penetration, her legs spasming nervelessly while her hips are split wide, your fleshy spear absolutely and completely distorting her frail form.");
 	if(flags[kFLAGS.CINNABAR_FUCKED_CORRUPT_PREVIOUSLY] > 0) outputText("  You're doing it again – turning her into a cum-sleeve without a care for her pleasure, but you don't fucking care.  You're too horny and she's too sexy not to abuse.");
 	outputText("\n\n");
@@ -341,7 +342,7 @@ private function cinnabarHuger():void {
 	var x:Number = player.biggestCockIndex();
 
 	clearOutput();
-	spriteSelect(91);
+	spriteSelect(SpriteDb.s_cinnabar);
 
 	outputText("You're almost there, so close to your orgasm, but you've got so much more cock to bury inside this flexible, stretched-out pussy, and you're determined to bury every last inch of your improbably-large prick inside her before you blast your load.  At this rate, you'll be pushing in all day, so you decide to speed things up.  You grab her by the haunches, feeling your fingers sink into her silky fur, and you pull her back, flexing your biceps as you yank her down with all your might.  She slides down fast, taking a foot of cock in seconds, fast enough to make her belly bulge out in a distinctly dick-like manner.\n\n");
 
@@ -392,7 +393,7 @@ private function cinnabarHuge():void {
 	var x:Number = player.biggestCockIndex();
 
 	clearOutput();
-	spriteSelect(91);
+	spriteSelect(SpriteDb.s_cinnabar);
 	outputText("You're almost there, and though you can feel the burgeoning warmth growing underneath your " + cockDescript(x) + ", you're determined to push the whole way inside her before you blow.  Cinnabar crams her muzzle through a particularly large mirror and locks onto your lips, ramming her tongue deeper into your throat, pushing harder with each inch of tightly-packed cock you shove inside her.  At last you bottom out, your " + player.cockHead(x) + " bumps the tight ring of her cervix while her tail pulls tight about your ");
 	if(player.balls > 0) outputText(ballsDescriptLight());
 	else if(player.hasSheath()) outputText("sheath");
@@ -447,7 +448,7 @@ private function cinnabarMultiCockPortalFuckFest():void {
 	flags[kFLAGS.CINNABAR_NUMBER_TIMES_FUCKED]++;
 	flags[kFLAGS.CINNABAR_FUCKED_CORRUPT_PREVIOUSLY] = 0;
 	clearOutput();
-	spriteSelect(91);
+	spriteSelect(SpriteDb.s_cinnabar);
 	//x pussy, y butt, z face
 	var x:Number = player.biggestCockIndex();
 	var y:Number = player.biggestCockIndex2();

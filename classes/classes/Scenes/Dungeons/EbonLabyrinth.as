@@ -742,7 +742,6 @@ public class EbonLabyrinth extends DungeonAbstractContent
 					startCombat(new DisplacerBeast(), true);
 				}
 				if (choice == 1) {
-					//spriteSelect(25);
 					if (player.gooScore() >= 11 || player.magmagooScore() >= 13 || player.darkgooScore() >= 13) {
 						spriteSelect(SpriteDb.s_darkgoogirlsprite_16bit);
 						outputText("You take the turn at the end of the corridor and run right into a dark slime. For a few second the both of you consider each other before the slime shrugs and simply asks.\n\n");

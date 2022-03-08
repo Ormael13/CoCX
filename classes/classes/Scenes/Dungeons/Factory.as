@@ -11,6 +11,7 @@ import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Dungeons.Factory.*;
 import classes.lists.Gender;
+import classes.display.SpriteDb;
 
 use namespace CoC;
 
@@ -153,7 +154,7 @@ use namespace CoC;
 		}
 
 		private function drinkCoffee():void {
-			spriteSelect(96);
+			spriteSelect(SpriteDb.s_mrsCoffee);
 			clearOutput();
 			outputText("You take a sip of the rich creamy coffee and suddenly feel refreshed. As you replace the coffeepot, the busty coffee-maker comes to life, grabbing her thick dusky nipples and squeezing out a trickle of scaldingly hot liquid. You can see her eyes roll up into her head from what you assume to be pleasure as she automatically refills the missing coffee, mouth open with ecstasy.  Her movements gradually slow as she quivers almost imperceptibly. A contented smile graces her features as immobility overtakes her, freezing her back in place.  You wonder if 'Mrs. Coffee' was created, or a victim of this place's dark master.");
 			dynStats("lus", 1);
@@ -273,7 +274,7 @@ use namespace CoC;
 
 		//Succubus Secretary
 		private function talkSuccubus():void {
-			spriteSelect(55);
+			spriteSelect(SpriteDb.s_succubus_secretary);
 			clearOutput();
 			outputText("\"<i>I suppose I really should thank you for coming down all by your lonesome.  The boss is gonna be sooo happy we found you.  Just think, in an hour or two we can get you strapped in and working with the others,</i>\"  says the secretarial succubus as she saunters over, still sipping her coffee, \"<i>You're so cute!  I tell you what, if you agree to come with me, I'll, like, make sure the experience is pleasurable.</i>\"\n\n");
 			outputText("She runs a stocking covered foot up your leg and thigh, almost to your groin.  Giggling, the succubus pulls it away and asks, \"<i>So are you ready and willing?</i>\"");
@@ -282,7 +283,7 @@ use namespace CoC;
 		}
 
 		private function talkSuccubusForWhat():void {
-			spriteSelect(55);
+			spriteSelect(SpriteDb.s_succubus_secretary);
 			clearOutput();
 			outputText("The succubus looks at you with a bemused expression, \"<i>You haven't figured it out yet?  Really?  What do you think we make at this factory, bubble-gum?</i>\" she asks with a cruel smile, \"<i>We take human and once-human champions like you, pump you full of aphrodisiacs, body-altering drugs, and corrupting agents, and then milk you of your tainted fluids continually for the rest of your life!  And don't even start to ask why, I'll tell you – there are still pockets of purity out there that repel cute demons like me.  So the best way to deal with those is just to release a river of drug-filled sex-juice at them.  By the time the area dries off, the locals welcome us with open arms... and spread legs.</i>\"");
 			simpleChoices("Sick!", talkSuccubusNo, "Sounds Fun", talkSuccubusYes,"", null,"", null,"", null);
@@ -295,7 +296,7 @@ use namespace CoC;
 		}
 
 		private function talkSuccubusYes():void {
-			spriteSelect(55);
+			spriteSelect(SpriteDb.s_succubus_secretary);
 			clearOutput();
 			outputText("The blue skinned seductress steps forward and wraps her arms around you, pulling your head down and crushing it into her heavenly breasts as she speaks, \"<i>My my, aren't you the kinky little play-toy.  Let's get you hooked up.</i>\"\n\n");
 			outputText("She catches you off-guard, lifting your feet off the ground.  You realize she has somehow grown taller.  You stretch to see what's going on, but have no leverage to pry your face from the smooth globes of flesh that smother you.   Vaguely, the click-clack of heels reaches you through the walls of flesh.  You're being moved deeper into the facility.   A creaky door opens, allowing you to hear the loud humming of machinery, mixed with what sounds like desperate sexual moans.\n\n");
@@ -303,7 +304,7 @@ use namespace CoC;
 			doNext(doBadEndSuccubusPart1);
 		}
 		private function talkSuccubusNo():void {
-			spriteSelect(55);
+			spriteSelect(SpriteDb.s_succubus_secretary);
 			clearOutput();
 			outputText("She frowns, \"<i>I was secretly hoping you would say that... I'm going to make you beg me to hook you into the machines.  Just wait.</i>\"");
 			doNext(doFightSuccubus);
@@ -437,14 +438,14 @@ use namespace CoC;
 		}
 
 		private function doFightSuccubus():void {
-			spriteSelect(55);
+			spriteSelect(SpriteDb.s_succubus_secretary);
 			clearOutput();
 			outputText("\"<i>You're going down!</i>\" you yell at her as you ready your [weapon]! \n\nAn unseen force closes the door, preventing you from running away. \n\nIt's a fight!");
 			flags[kFLAGS.FACTORY_SUCCUBUS_DEFEATED] = 1;
 			startCombat(new SecretarialSuccubus(), true);
 		}
 		private function doFightSuccubusMocked():void {
-			spriteSelect(55);
+			spriteSelect(SpriteDb.s_succubus_secretary);
 			flags[kFLAGS.FACTORY_SUCCUBUS_DEFEATED] = 1;
 			startCombat(new SecretarialSuccubus(), true);
 			monster.armorDef -= 10;
@@ -672,7 +673,7 @@ use namespace CoC;
 
 		//Incubus Mechanic
 		private function talkIncubus():void {
-			spriteSelect(30);
+			spriteSelect(SpriteDb.s_incubus_mechanic);
 			clearOutput();
 			if(player.hasKeyItem("Hentai Comic") >= 0) {
 				outputText("The incubus speaks to you with calm deep voice, \"<i>And so the insect, heedless of it's path, stumbled directly into the spider's web.  Tiny insect... wait, what is that book you're carrying?  Is that hentai?  It IS!  Let me offer you a deal – I'm not really hungry or interested in fighting. So if you hand over the comic, I'll happily ignore your presence here. Though, I guess you could also just submit. Then I could put you to work and still get the comic.</i>\"");
@@ -685,7 +686,7 @@ use namespace CoC;
 		}
 
 		private function doTradeIncubus():void {
-			spriteSelect(30);
+			spriteSelect(SpriteDb.s_incubus_mechanic);
 			clearOutput();
 			outputText("You hand over the Hentai Comic tentatively to the male sex demon.  As soon as he has it in his grubby mits he sits down and starts thumbing through the pages, toying with his half-hard member the entire time.  He must really like porn.");
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] > 0) outputText("\n\n<b>You swear you can hear a clicking sound coming from the west.</b>");
@@ -696,14 +697,14 @@ use namespace CoC;
 
 		private function doFightIncubus():void {
 			flags[kFLAGS.FACTORY_INCUBUS_DEFEATED] = 1;
-			spriteSelect(30);
+			spriteSelect(SpriteDb.s_incubus_mechanic);
 			clearOutput();
 			outputText("\"<i>You're going down!</i>\" you yell at him as you ready your [weapon]! \n\nAn unseen force closes the door, preventing you from running away. \n\nIt's a fight! ");
 			startCombat(new IncubusMechanic(), true);
 		}
 
 		private function doSubmitIncubus():void {
-			spriteSelect(30);
+			spriteSelect(SpriteDb.s_incubus_mechanic);
 			outputText("\"<i>It is good to see the insect accept its fate as the spider closes in,</i>\" intones the strange demonic mechanic as he takes you by the arm and leads you deeper into the facility.  ");
 			if(flags[kFLAGS.FACTORY_SHUTDOWN] > 0) {
 				outputText("\n\nYou enter the main milking chamber, and the incubus gives a start when he realizes what has happened.  With a grunt of rage he throws you through the doorways back into his chamber.  The demon stalks after you, taking up a fighting stance.");
@@ -934,12 +935,12 @@ use namespace CoC;
 			outputText("You strike a combat pose and prepare your [weapon].  She smiles and saunters around the desk, letting something bulbous and fleshy drop free from between her nether-lips.  You watch in shock as it hardens into a dick, growing right from where her clit should be.\n\nShe taunts, \"<i>Like what you see cow?  I'll be sure to visit you in the pens.</i>'\" \n\nAn unseen force closes the glass door to the north, preventing you from running away!");
 			flags[kFLAGS.FACTORY_OMNIBUS_DEFEATED] = 1;
 			startCombat(new OmnibusOverseer(), true);
-			spriteSelect(16);
+			spriteSelect(SpriteDb.s_factory_omnibus);
 			return;
 		}
 
 		private function acceptOmnibus():void {
-			spriteSelect(16);
+			spriteSelect(SpriteDb.s_factory_omnibus);
 			clearOutput();
 			outputText("She smiles, sauntering closer.  Your eyes widen in shock as her vulva are spread apart by something inside her.   A slick and growing cock emerges, sprouting from where her clit should be located.  She's a hermaphrodite.  You don't have time to contemplate the implications, as the demoness used your temporary distraction to sink a needle into your neck.  You sigh and black out almost instantaneously, letting her catch you with her strong arms and soft bosom.");
 			doNext(doBadEndGeneric);
@@ -980,7 +981,7 @@ use namespace CoC;
 		}
 
 		private function demonicLethicite():void {
-			spriteSelect(16);
+			spriteSelect(SpriteDb.s_factory_omnibus);
 			clearOutput();
 			outputText("The demon pouts at you. <i>Fiiiiine. All I've got on me is some processed lethicite. You'll need my help to absorb it.</i> The demoness reaches into her incredible skimpy chest band and pulls out a vial she had somehow managed to conceal there.\n\nShe unscrews the top, and then holds it before her and blows across it. A cloud of sparkling purplish black powder burst from the vial, flying right at you!");
 			outputText("\n\nYou stumble back in surprise, as the demoness makes a quick arcane gesture. The cloud glows, and then flies at your face, flowing into your mouth and nose before you can react.\n\n Your vision flashes purple, and a burning heat seems to spread through both your body and soul.\n\nThe heat in your body quickly turns into arousal, but the heat in your soul mostly dissapears- though what remains is making it feel like your soul is aroused! You realize that <b>your sex drive is increasing your soulforce, and you feel more demonic!</b>\n(Perk Gained - Demonic Lethicite - Soulforce increased and you are permanently slightly demonic!)");
@@ -990,7 +991,7 @@ use namespace CoC;
 		}
 
 		private function chooseBreasts():void {
-			spriteSelect(16);
+			spriteSelect(SpriteDb.s_factory_omnibus);
 			clearOutput();
 			//Grow if none
 			if(player.breastRows.length == 0) {
@@ -1033,7 +1034,7 @@ use namespace CoC;
 			postOmnibusBoon();
 		}
 		private function chooseDick():void {
-			spriteSelect(16);
+			spriteSelect(SpriteDb.s_factory_omnibus);
 			clearOutput();
 			//No dick?  Grow one!
 			if(player.cocks.length == 0) {
@@ -1094,7 +1095,7 @@ use namespace CoC;
 			return;
 		}
 		private function normalFace():void {
-			spriteSelect(16);
+			spriteSelect(SpriteDb.s_factory_omnibus);
 			clearOutput();
 			if(player.horns.count > 0 || player.antennae.type > Antennae.NONE) {
 				outputText("Your forehead itches intensely.  You cannot help but stratch madly at it.  ");
@@ -1120,7 +1121,7 @@ use namespace CoC;
 			postOmnibusBoon();
 		}
 		private function normalChest():void {
-			spriteSelect(16);
+			spriteSelect(SpriteDb.s_factory_omnibus);
 			clearOutput();
 			var changes:int = 0;
 			if(player.breastRows.length > 1) {
@@ -1162,7 +1163,7 @@ use namespace CoC;
 			postOmnibusBoon();
 		}
 		private function normalGroin():void {
-			spriteSelect(16);
+			spriteSelect(SpriteDb.s_factory_omnibus);
 			var changes:int = 0;
 			clearOutput();
 			outputText("You feel a strange shivering sensation pass through you.  ");
@@ -1249,7 +1250,7 @@ use namespace CoC;
 			postOmnibusBoon();
 		}
 		private function normalLegs():void {
-			spriteSelect(16);
+			spriteSelect(SpriteDb.s_factory_omnibus);
 			clearOutput();
 			if(player.lowerBody == LowerBody.HUMAN) outputText("You feel as if you should slap yourself for stupidy.  Your legs are already normal!  You flush hotly as the corrupt magics wash over you, changing nothing.");
 			else outputText("You collapse as your [legs] are unable to support you.  The sounds of bones breaking and reshaping fills the room, but oddly you feel no pain, only mild arousal.  You blink your eyes and sigh, and when you look down again <b>you have normal human legs</b>!");
@@ -1280,14 +1281,14 @@ use namespace CoC;
 		}
 
 		private function letGoOmnibus():void {
-			spriteSelect(16);
+			spriteSelect(SpriteDb.s_factory_omnibus);
 			clearOutput();
 			outputText("You refuse to fall for her ploy, and decide not to take her up on her offer.  However, being that she is so thoroughly defeated, you allow her to escape, promising her far worse should she ever oppose you in the future.\n\n\"<i>Thank you, merciful hero!</i>\" she says and she sprints out the door.  Wings unfurl from her back and she takes flight, disappearing out a skylight above the main factory floor.");
 			cleanupAfterCombat();
 			//doNext(roomForemanOffice);
 		}
 		private function killOmnibus():void {
-			spriteSelect(16);
+			spriteSelect(SpriteDb.s_factory_omnibus);
 			clearOutput();
 			outputText("You step forwards and grab her by the head.  With an abrupt twist you snap her neck, ending at least one small part of the demonic threat.");
 			flags[kFLAGS.D1_OMNIBUS_KILLED] = 1;
@@ -1352,7 +1353,7 @@ use namespace CoC;
 		}
 
 		public function doBadEndSuccubusPart1():void {
-			spriteSelect(55);
+			spriteSelect(SpriteDb.s_succubus_secretary);
 			//Arousal
 			clearOutput();
 			outputText("In no time flat your blood begins to burn hot with the fires of unnatural lust.  ");
@@ -1408,7 +1409,7 @@ use namespace CoC;
 			doNext(doBadEndSuccubusPart2);
 		}
 		private function doBadEndSuccubusPart2():void {
-			spriteSelect(55);
+			spriteSelect(SpriteDb.s_succubus_secretary);
 			clearOutput();
 			outputText("The beautiful seductress that bound you giggles and says, \"<i>Oh it only gets better baby,</i>\" as she pushes another button.  You see a number of needles lower from the equipment above.  Two pause at chest height.  Faded parchment labels on the tubes mark them as \"Gro+\".  You spot the same markings on at least some the hoses gathering around your groin.  A few are marked with different labels, but you cannot make out the demonic script.  As one, the hoses rear back, then plunge forward, burying themselves into your supple flesh and injecting their drugged payload into your body.  It hurts at first, but the drugs fog your mind, blocking the pain with pulsing waves of desire.   You begin cumming as your body erupts with artificial pleasure.\n\n");
 			//Nipples
@@ -1649,10 +1650,10 @@ use namespace CoC;
 					addButton(0, "Iron Key", takeIronKey).hint("Pick up the iron key. It looks like it might unlock the door in this factory.");
 				}
 				addButton(1, "Coffee", drinkCoffee).hint("Drink some coffee.");
-				spriteSelect(96);
+				spriteSelect(SpriteDb.s_mrsCoffee);
 			}
 			else {
-				spriteSelect(55);
+				spriteSelect(SpriteDb.s_succubus_secretary);
 				outputText("\n\nStanding next to the coffeemaker is a blue-skinned woman holding a mug of coffee.  As she takes a sip, oblivious to your presence, you see the mug has '#1 Dad' written on it.  Dressed in a tiny vest, short skirt, and sheer stockings, she looks every bit an air-headed secretarial ditz.  Her two horns are little more than nubs, mostly covered by her flowing blond hair, and if it wasn't for her blue skin and the tip of a spaded tail peeking out from under her skirt, you'd never know what she was.\n\n");
 				menu();
 				// demon bad end available
@@ -1724,7 +1725,7 @@ use namespace CoC;
 
 			//Incubus is ALLLLIVE
 			if (flags[kFLAGS.FACTORY_INCUBUS_DEFEATED] <= 0) {
-				spriteSelect(30);
+				spriteSelect(SpriteDb.s_incubus_mechanic);
 				if(flags[kFLAGS.FACTORY_INCUBUS_BRIBED] > 0) {
 					outputText("\n\nThe incubus mechanic is here, thumbing through a hentai comic and laughing to himself at the absurdity of it.  That doesn't stop him from stroking his half-hard member the whole time...");
 					addButton(0, "Fight", doFightIncubus);
@@ -1792,7 +1793,7 @@ use namespace CoC;
 			addButton(7, "Downstairs", roomMainChamber);
 			if (flags[kFLAGS.FACTORY_OMNIBUS_DEFEATED] <= 0) {
 				menu();
-				spriteSelect(16);
+				spriteSelect(SpriteDb.s_factory_omnibus);
 				outputText("\n\nA nearly nude demonic woman is standing behind the desk, appraising you.  She is gorgeous in the classical sense, with a curvy hourglass figure that radiates pure sexuality untamed by any desire for proper appearance.  Shiny black lip-gloss encapsulates her bubbly lips, while dark eyeshadow highlights her bright red eyes.  The closest thing she has to clothing is a narrow band of fabric that wraps around her significant chest, doing little to hide the pointed nubs of her erect nipples.  Her crotch is totally uncovered, revealing the hairless lips of her glistening womanhood.\n\n");
 				outputText("She paces around the edge of the desk, licking her lips and speaking, \"<i>So you've made it all the way here have you, 'champion'?  Too bad you've wasted your time.  Have you figured it out yet?  Have you discovered why you were sent here with no weapons or blessed items?  Have you found out why there are more humans here than anywhere else in this realm?  I'll tell you why.  You weren't a champion.  You were a sacrificial cow, meant to be added to our herd.  You just got lucky enough to get free.</i>\"\n\n");
 				outputText("A part of you wants to deny her, to scream that she is wrong.  But it makes too much sense to be a lie... and the evidence is right behind you, on the factory floor.  All those women must be the previous champions, kept alive and cumming for years in order to feed these insatiable demons.  The demoness watches your reaction with something approaching sexual bliss, as if the monstrous betrayal of it all is turning her on.\n\n");

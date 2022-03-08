@@ -29,7 +29,7 @@ public class EventParser {
     public static function playerMenu():void {
         CoC.instance.mainViewManager.updateCharviewIfNeeded();
         if (!CoC.instance.inCombat) {
-            CoC.instance.spriteSelect(-1);
+            CoC.instance.spriteSelect(null);
         }
         CoC.instance.mainView.setMenuButton(MainView.MENU_NEW_MAIN, "New Game", CoC.instance.charCreation.newGameGo);
         CoC.instance.mainView.nameBox.visible = false;

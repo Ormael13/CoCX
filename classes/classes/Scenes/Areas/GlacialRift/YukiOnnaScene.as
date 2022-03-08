@@ -10,7 +10,7 @@ import classes.Items.Mutations;
 import classes.Items.WeaponLib;
 	import classes.CoC;
 	import classes.BodyParts.*;
-	import classes.display.SpriteDb;
+    import classes.display.SpriteDb;
 	import classes.Scenes.SceneLib;
 	import classes.Items.Mutations;
 

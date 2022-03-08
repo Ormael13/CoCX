@@ -6,6 +6,7 @@ import classes.Scenes.Holidays;
 import classes.Scenes.NPCs.MarbleScene;
 import classes.Scenes.Places.Farm.*;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 use namespace CoC;
 
@@ -24,7 +25,7 @@ use namespace CoC;
 
 	public function whitneySprite():void
 	{
-		spriteSelect(62);
+		spriteSelect(SpriteDb.s_whitney);
 	}
 	
 public function farmExploreEncounter():void {
@@ -57,7 +58,7 @@ outputText("Whitney marches up to you as soon as you approach the farm, a stoic 
 	//Farm not yet discovered
 	if(player.statusEffectv1(StatusEffects.MetWhitney) < 2) {
 		clearOutput();
-		spriteSelect(62);
+		spriteSelect(SpriteDb.s_whitney);
 		if(!player.hasStatusEffect(StatusEffects.MetWhitney)) {
 			player.createStatusEffect(StatusEffects.MetWhitney,0,0,0,0);
 			outputText("You find a quaint farmhouse on the far shores of the lake.  Around the homestead are a range of gardens, filled with delicious fruits and vegetables.  Your belly rumbles, aching with hunger, as you approach the dwelling.  A figure in a pepper patch rises up to greet you, waving you over.\n\nYou do your best to conceal your surprise as you realize the farmer is a woman... with fur and canine-like features!  She giggles happily and beckons you over, \"<i>Welcome stranger, it sure is pleasant to see a new face 'round here.  My name's Whitney, and it's mighty fine I don't have to pitchfork you like most guests!</i>\"  She fills you in about the lake and her farm, telling you how the demons can't seem to stay close for long, and monsters always seem weaker the few times they have approached her farm.  Whitney flushes and rapidly changes subject, \"<i>I've got to get back to work, but you help yourself to the peppers, hun!</i>\"\n\n");
@@ -71,7 +72,7 @@ outputText("Whitney marches up to you as soon as you approach the farm, a stoic 
 	}
 	//Repeat Offender
 	else {
-		spriteSelect(62);
+		spriteSelect(SpriteDb.s_whitney);
 		player.addStatusValue(StatusEffects.MetWhitney,1,1); //Used for progress towards achievement.
 		clearOutput();
 		if (flags[kFLAGS.KELT_KILLED] >= 1) {
@@ -127,7 +128,7 @@ outputText("Whitney marches up to you as soon as you approach the farm, a stoic 
 
 //[YES]
 private function whitneyMilkerHookup(breast:Boolean = true):void {
-	spriteSelect(62);
+	spriteSelect(SpriteDb.s_whitney);
 	clearOutput();
 	outputText("Whitney takes the gear back to her farm after promising to have it working within the hour.  She did leave you with a cryptic warning to \"<i>leave the milkings to the beasts, lest you become one</i>.</i>\"\n\nYou shrug and head back to check up on camp.");
 	if(breast) {
@@ -142,14 +143,14 @@ private function whitneyMilkerHookup(breast:Boolean = true):void {
 }
 //[NO]
 private function whitneyMilkerRefusal():void {
-	spriteSelect(62);
+	spriteSelect(SpriteDb.s_whitney);
 	clearOutput();
 	outputText("Whitney shrugs and the two of you resume your conversation.  But like all good things, it has to come to an end.  The two of you go your separate ways.");
 	doNext(camp.returnToCampUseOneHour);
 }
 //TALK
 private function talkWhitney():void {
-	spriteSelect(62);
+	spriteSelect(SpriteDb.s_whitney);
 	//[FIND WHITNEY TXT]
 	clearOutput();
 	//Centaur Hookups!
@@ -442,7 +443,7 @@ public function workFarm():void {
 	}
 	//25% chance of stable mucking
 	if(rand(4) == 0) {
-		spriteSelect(62);
+		spriteSelect(SpriteDb.s_whitney);
 		clearOutput();
 		outputText("You find Whitney getting a scythe out of her tool shed. \"<i>Do you know how to muck out a stable?</i>\" she asks when you offer to help. You admit that you did a lot of that while growing up in your village. After passing you a rake, shovel, and pitchfork, she leads you to the milking barn.");
 		outputText("  The first thing that hits you is the smell, a mingling of sweat, milk, droppings, and rotting hay. There are also probably some cows in Whitney's herd ready for breeding.\n\n");
@@ -463,7 +464,7 @@ public function workFarm():void {
 		doNext(camp.returnToCampUseOneHour);
 		return;
 	}
-	spriteSelect(62);
+	spriteSelect(SpriteDb.s_whitney);
 	outputText("You ask Whitney if she could use help with anything and she points towards the pepper fields, \"<i>Ya mind gathering up some peppers for an hour or two?  I'm gonna need a few for supper tonight.  I'll even let you keep the best one!</i>\"\n\n");
 	outputText("You nod and borrow a basket, and set off towards the fields.  The next two hours are a blur of sweat and hard work as you prowl between the rows of plants, picking as many ripe red peppers as you can find.  When you finish, you drop the basket by Whitney's door, but not before taking your pepper.\n");
 	//always +1 spe/tou till 25, then 50% chance.
@@ -565,7 +566,7 @@ public function exploreFarm():void {
 	explore = rand(3);
 	//[JOG]
 	if(explore == 0) {
-		spriteSelect(62);
+		spriteSelect(SpriteDb.s_whitney);
 		clearOutput();
 		outputText("You run around the farm, keeping an eye for any monsters or oddities around Whitney's property.  Eventually the she-dog joins you, and the two of you have a good time pushing your speed to its limits.  ");
 		//Less than 30 speed (+2 speed)
@@ -1307,7 +1308,7 @@ private function milkerBadEnd1():void {
 
 //Introduction: Finding the Toys @ The Farm
 private function centaurToysHoooooo():void {
-	spriteSelect(62);
+	spriteSelect(SpriteDb.s_whitney);
 	clearOutput();
 	//[Places] - [Farm] - [Talk] If PC = Centaur
 	outputText("You find the dog-morph Whitney standing in the entrance to her barn, scratching her head with consternation.  You approach her and ask what's up.\n\n");

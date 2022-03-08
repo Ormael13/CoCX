@@ -33,9 +33,9 @@ public class KitsuneScene extends BaseContent
 
 		private function kitsuneSprite():void
 		{
-			if (monster.hairColor == "blonde") spriteSelect(105);
-			else if (monster.hairColor == "black") spriteSelect(104);
-			else spriteSelect(106);
+			if (monster.hairColor == "blonde") spriteSelect(SpriteDb.s_kitsune_blonde);
+			else if (monster.hairColor == "black") spriteSelect(SpriteDb.s_kitsune_black);
+			else spriteSelect(SpriteDb.s_kitsune_red);
 		}
 
 //[Enter the Trickster] (Coded)

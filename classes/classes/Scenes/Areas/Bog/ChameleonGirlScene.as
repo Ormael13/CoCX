@@ -6,6 +6,7 @@ package classes.Scenes.Areas.Bog
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Scenes.UniqueSexScenes;
+    import classes.display.SpriteDb;
 
 	public class ChameleonGirlScene extends BaseContent
 	{
@@ -43,7 +44,7 @@ package classes.Scenes.Areas.Bog
 		{
 			clearOutput();
 			startCombat(new ChameleonGirl());
-			spriteSelect(89);
+			spriteSelect(SpriteDb.s_chameleon);
 			if (flags[kFLAGS.TIMES_MET_CHAMELEON] == 0) {
 				outputText("You work your way through the dense foliage of the bog, pushing aside branches and slogging through the thick mud in search of something new.  Feeling exhausted, you slow down and look for a place to rest; finding a small clearing with shallow water no more than a couple inches deep and firmer ground, you sit back against a tree to catch your breath.  You're so soaked by now that you hardly notice the murky water beneath you and the slick mud on the trunk seeping into your [armor].  You lean your head back and close your eyes, enjoying a few moments of peace.");
 
@@ -68,7 +69,7 @@ package classes.Scenes.Areas.Bog
 		public function loseToChameleonGirl():void
 		{
 			clearOutput();
-			spriteSelect(89);
+			spriteSelect(SpriteDb.s_chameleon);
 			//-Lose by lust
 			if (player.lust >= player.maxLust()) {
 				outputText("Losing control to your own growing arousal, you fall to your knees and desperately start working to get at your needy body beneath your [armor].");
@@ -93,7 +94,7 @@ package classes.Scenes.Areas.Bog
 		private function loseToChameleonWithCockAnBallsAnCunt():void
 		{
 			var x:int = player.biggestCockIndex();
-			spriteSelect(89);
+			spriteSelect(SpriteDb.s_chameleon);
 			outputText("\n\n\"<i>Hah! You didn't think you could beat me in </i>my<i> bog, did you?</i>\" the haughty chameleon laughs. She stalks towards you, swaying her wide hips in an exaggerated imitation of a dominatrix, shedding her spare clothing as she approaches.  She stops and stands before you, trying her best to look intimidating.  Wondering what exactly she has planned for you, you await your fate.  From the worried look in her eyes, you can tell she has no idea what she's doing.");
 
 			outputText("\n\n\"<i>Um, strip for me!</i>\" she commands, as forcefully as she can manage.  Still, it almost sounds like a question.  Too weak to do anything but play along, you comply, shedding your [armor].");
@@ -125,7 +126,7 @@ package classes.Scenes.Areas.Bog
 		private function dudesLoseToChamChams():void
 		{
 			var x:int = rand(player.cockTotal());
-			spriteSelect(89);
+			spriteSelect(SpriteDb.s_chameleon);
 			outputText("\n\nRecognizing that you're no danger, her skin shifts back into its natural " + monster.skinTone + " coloration as she walks towards you.  She swings her hips seductively as she splashes slowly through the water and licks her lips with a loud smack of her tongue, then reaches out and forcefully pulls your [armor] above your waist before you can even try to resist her advances, and pushes you back against a tree.  With a few quick pulls of fabric she's stripped her own clothes, and she tosses her thong over a low-hanging branch.  The other band of silk she uses to quickly bind your wrists.  Were you in any shape to fight back you could pull free, but you're too ");
 			if (player.lust >= player.maxLust()) outputText("overwhelmed by lust");
 			else outputText("battered");
@@ -157,7 +158,7 @@ package classes.Scenes.Areas.Bog
 		//-Female Loss (Z edited)
 		private function loseToChamChamWithPCCunt():void
 		{
-			spriteSelect(89);
+			spriteSelect(SpriteDb.s_chameleon);
 			outputText("\n\n\"<i>Hah! You didn't think you could beat me in </i>my<i> bog, did you?</i>\"  She stalks toward you, swaying her wide hips in an exaggerated imitation of a dominatrix, shedding her clothes as she approaches.   Positioning her glistening sex right in front of your face, she looks down and makes the cruellest smile she can manage.  Too busy stifling laughter at the awkward display, you make no move to pleasure her.  Looking bewildered that you aren't following along, the chameleon girl opens and closes her mouth, trying to find words.  She finally stammers out, \"<i>W-well?  Get... to it?</i>\"  You resist the urge to ask her for a detailed explanation of what she wants and resolve yourself to play along.  You'd be too exhausted to resist if she really tried to force you, and this may lessen the severity of the experience.");
 
 			outputText("\n\nYou grab her by the hips and pull her in towards your face.  She gasps in surprise, but her shock quickly turns to pleasure as you begin to toy with her tiny clit, circling it and brushing lightly over it with your tongue.  As the pleasure overwhelms her, she sighs, and you think you catch something shifting from the corner of your eye.  Angling your head a bit, you can see her skin tone grow brighter as your teasing arouses her.  You'd laugh if your mouth wasn't already engaged.");
@@ -178,7 +179,7 @@ package classes.Scenes.Areas.Bog
 		public function defeatChameleonGirl():void
 		{
 			clearOutput();
-			spriteSelect(89);
+			spriteSelect(SpriteDb.s_chameleon);
 			//-Win by lust
 			if (monster.lust >= monster.maxLust()) {
 				outputText("Unable to control her arousal, the chameleon girl collapses to her knees and begins masturbating underneath her thong, having lost all capacity to fight you; she moans and throws her head back as her hand splashes in and out of the water she's kneeling in.  Her skin returns to its usual " + monster.skinTone + " and then keeps going, shifting closer and closer to pink as her moans increase in both volume and volubility.");
@@ -209,7 +210,7 @@ package classes.Scenes.Areas.Bog
 		private function fuckDatChameleonAsACoolGuyGirlHerm():void
 		{
 			clearOutput();
-			spriteSelect(89);
+			spriteSelect(SpriteDb.s_chameleon);
 			var x:Number = player.cockThatFits(monster.vaginalCapacity());
 			if (x < 0) x = player.smallestCockIndex();
 			outputText("You shed your [armor] and approach the fallen chameleon girl.  She stares at you in fascination as she spots your multiple endowments: " + sMultiCockDesc() + " and " + vaginaDescript(0) + ".  You look her up and down, following the smooth curves of her thin body with your eyes.  Squatting down beside her, you take her by the shoulders in one arm and trail your fingertips lightly up her torso with the other, feeling the soft skin of her belly.  Her eyes widen, and she looks from her hand to your face and back again.  When your hand reaches the silk cloth covering her chest, you pull it off with a light tug and cast it off to the side.  You cup her small breast in your palm, and as you squeeze it her skin tone changes perceptibly, flashing to a much brighter shade of the colors it was.");
@@ -236,7 +237,7 @@ package classes.Scenes.Areas.Bog
 		private function manFucksChameleonWithBiggishWang():void
 		{
 			clearOutput();
-			spriteSelect(89);
+			spriteSelect(SpriteDb.s_chameleon);
 			var x:int = player.biggestCockIndex();
 			outputText("You approach the fallen girl, and she looks up at you, a pleading expression in her eyes.  You might feel worse for her if she hadn't tried to assault you in a bog.  Reaching down behind her, you find the knot of the cloth covering her breasts, and with a quick pull you yank it off and toss it aside, then drop your [armorName], revealing your erect prick.  Her eyes widen when she sees it and her mouth parts slightly, letting a bit of her tongue slip out to lick her lips.  Quietly disdainful of the slutty girl's open arousal, you decide that if she wants to taste it so badly, she may.  But when you put your hand on the back of her head to push her onto your stiff cock, she manages to work up the strength to grab your arm with a free hand and resist its impulse.  Looking her over, you can see that her sudden burst of energy is due to ");
 			if (monster.lust >= monster.maxLust()) outputText("her masturbating even more furiously than before at the thought of having your cock.");
@@ -264,7 +265,7 @@ package classes.Scenes.Areas.Bog
 		private function femaleHasWinSexWithChamCham():void
 		{
 			clearOutput();
-			spriteSelect(89);
+			spriteSelect(SpriteDb.s_chameleon);
 			outputText("You shed your [armor] and approach the fallen chameleon girl");
 			if (monster.lust >= monster.maxLust()) outputText(", her moans of pleasure growing more desperate as you approach");
 			outputText(".  You look her up and down, following the smooth curves of her thin body with your eyes.  Squatting down beside her, you take her weak body by the shoulders in one arm and trail your fingertips lightly up her torso with the other, feeling the soft skin of her belly.");
@@ -291,7 +292,7 @@ package classes.Scenes.Areas.Bog
 		private function useAnItemOnTheChamcham():void
 		{
 			clearOutput();
-			spriteSelect(89);
+			spriteSelect(SpriteDb.s_chameleon);
 			outputText("Looking at the poor girl kneeling pathetically before you, you almost feel sorry for her.  But, she did try to rape you and claim that you were on 'her' territory.  You rummage through your bags, trying to find a fun way to punish her.  Fun for you, at least.");
 
 			//player must have either a purified or unpurified Succubi Milk (also requires cock,) Incubus Draft, or Lust & Sens Draft (both) in inventory
@@ -311,7 +312,7 @@ package classes.Scenes.Areas.Bog
 		private function giveTheChameleonASuccubiMilk():void
 		{
 			clearOutput();
-			spriteSelect(89);
+			spriteSelect(SpriteDb.s_chameleon);
 			outputText("You find a bottle of Succubi Milk tucked away in a pouch.  A wicked smile comes to your face as you imagine filling her so full of the stuff that her tits grow to the point where she can't even move, but you ultimately decide that just one dose will suffice for now.");
 			outputText("\n\nContainer in hand, you stride towards the collapsed girl.  She sees the glass full of liquid in your hand and tries to scramble away, but you're too fast for her, taking her by the shoulder to hold her forcefully in place.  With her mouth tightly closed, she shakes her head and tries to voice her disapproval through sealed lips.  You release her shoulder and dart your hand to her nipple, pinching it almost violently.  Her eyes water and she gasps, opening her mouth just long enough for you to put the neck of the bottle between her lips and tip the bottom of the glass up; the liquid spills into her mouth, and massaging her throat causes her to reflexively swallow the whole container's worth of fluid.");
 			outputText("\n\nFor a moment, nothing happens, and she sits there paralyzed, waiting for the drug to take effect.  Her tits begin to plump up, slowly but surely growing as the milk has its way with her body; a smile parts your lips at the sight.  Her eyes widen as her once-meager tits fill out to DD-cups, pushing against and eventually tearing the thin silk covering from within.  They finally stop growing, and the chameleon girl sits there trembling, unsure what to think about her new disproportionate bust.  Completely pleased with her new appearance and harboring no such reservations, you start to shed your [armor].");
@@ -336,7 +337,7 @@ package classes.Scenes.Areas.Bog
 		private function doseDatChameleonWithLustAndSensitivityDrafts():void
 		{
 			clearOutput();
-			spriteSelect(89);
+			spriteSelect(SpriteDb.s_chameleon);
 			outputText("You dig through your bags and come across a particularly tortuous combination of fluids.  With a Lust Draft in one hand and a Sensitivity Draft in the other, you return to the chameleon girl, swirling them and smiling at her menacingly.  She starts to protest, but you cut her off by shoving the opening of the Lust Draft vial into her open mouth.");
 			outputText("\n\nHer eyes widen in shock as the sticky fluid pours over her tongue.  She clearly hasn't had a taste of the stuff before, and her eyelids half-close as it starts to take effect.  She sways and barely manages to catch herself before falling.  \"<i>What... what is this stuff?  Why do I...</i>\"  Her thoughts run away from her, and she groans, arousal overpowering her.  Too turned on to fight further, she doesn't resist as you easily remove the cloth covering her breasts and use it to bind her wrists, pulling her hands away from her groin in the process.  You lift her chin up and pry her mouth open with your thumb, to tip the bottle of Sensitivity Draft inside.  She swallows the stuff almost greedily, apparently expecting more of the first drink, then smacks her lips and licks them, trying to collect the residue.");
 			outputText("\n\nToo turned on to just sit there, she falls forward, catching herself on you, then looks up, pleading with her eyes.  You laugh mirthlessly at her grovelling form, and tell her to beg if she wants you.  \"<i>Please!</i>\" she squeals, her eyes watering, \"<i>I need this!</i>\"  She tugs insistently at your [armor], begging for you to fill her and crying out that she can't stand to feel so empty.  You grin, and wonder if the sensitivity draft has started to take effect.  Two fingers run lightly up her forearm produce shivers at the obviously amplified sensation, and a tweak of her nipple elicits a shrill shriek.  \"<i>Why does it feel so good?!</i>\"  She puts her face into your lap and begs, \"<i>I don't even know what's going on, please, just fuck me, pleasepleaseplease...</i>\" trailing off as she grinds her pussy into you.");

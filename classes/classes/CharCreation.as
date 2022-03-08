@@ -29,6 +29,7 @@ import classes.lists.BreastCup;
 import classes.lists.Gender;
 import classes.Stats.BuffableStat;
 import classes.Stats.IStat;
+import classes.display.SpriteDb;
 
 import classes.GeneticMemories.*;
 
@@ -1542,6 +1543,7 @@ import coc.view.MainView;
 
 		private function arrivalPartTwo():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_zetaz_imp);
 			hideUpDown();
 			dynStats("lus", 40, "cor", 2);
 			model.time.hours = 18;

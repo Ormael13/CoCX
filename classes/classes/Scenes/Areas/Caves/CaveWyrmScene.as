@@ -20,7 +20,6 @@ import classes.internals.*;
 		
 public function berserkingCaveWyrmEncounter():void {
 	clearOutput();
-//	spriteSelect(32);
 	if (rand(3) == 0) flags[kFLAGS.HERM_CAVE_WYRM] = 1;
 	else flags[kFLAGS.HERM_CAVE_WYRM] = 0;
 	outputText("As you wander the cave you are suddenly surprised as a shimmering neon blue light rush at you at increasing speed. Before you can figure out what is going on a bloodcrazed lizard "+(flags[kFLAGS.HERM_CAVE_WYRM] > 0 ?"herm":"girl")+" with a pair of war axe charge at you her fluorescent eyes glimmering with uncontained rage.\n\n");

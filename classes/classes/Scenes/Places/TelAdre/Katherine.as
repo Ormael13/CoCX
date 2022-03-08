@@ -7,6 +7,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 import classes.lists.BreastCup;
 import classes.lists.Gender;
+import classes.display.SpriteDb;
 
 public class Katherine extends TelAdreAbstractContent implements TimeAwareInterface {
 
@@ -552,14 +553,6 @@ public class Katherine extends TelAdreAbstractContent implements TimeAwareInterf
 			return model.time.hours > 8 && model.time.hours < 18 && player.hasKeyItem("Silver Kitty-Bell") >= 0;
 		}
 
-		public function katherineSprite(naked:Boolean = false):void {
-			if (naked) {
-				spriteSelect(127);
-				return;
-			}
-			spriteSelect(128); //Currently returns this sprite.
-		}
-
 //If player has Silver Bell key item and is at Wet Bitch when Scylla is not busy with her Addicts Anonymous group
 public function catMorphIntr():void {
 	outputText("\n\nThe cum-drinking nun Scylla is here, apparently resting up between one of her missions.  Recalling the last 'mission' you went on, your hand unthinkingly touches the silver bell you received from that strange herm cat-morph.  Scylla could probably help you find her again.");
@@ -610,7 +603,7 @@ public function katherineGreeting():void {
 //Seeing Katherine
 public function visitKatherine():void {
 	clearOutput();
-	katherineSprite();
+	spriteSelect(SpriteDb.s_katherine_vagrant);
 	outputText(images.showImage("katherine-visit-alley"));
 	if (flags[kFLAGS.KATHERINE_UNLOCKED] == 1) {
 		if (telAdre.katherineEmployment.initiateTraining()) return;
@@ -654,7 +647,7 @@ public function visitAtHome():void { //You go to Kath's place alone - she may or
 	clearOutput();
 	if (isAt(KLOC_KATHS_APT)) {
 		if (flags[kFLAGS.KATHERINE_URTA_AFFECTION] == 31) { //Special event that happens only once
-			katherineSprite();
+			spriteSelect(SpriteDb.s_katherine_vagrant);
 			outputText("When you open the door to Kath’s place you see Kath and Urta both sitting together on the bed.  As soon as they spot you Kath crooks her finger and scoots over, leaving a space between her and Urta.\n\n");
 			outputText("Once you’re seated Urta laughs and says, “<i>so your big plan worked.  You got us fucking, " + (flags[kFLAGS.KATHERINE_URTA_DATE] == KDATE_LOTS ? "hell you encouraged us to fuck every chance we got!  So" : "so") + " it should be no surprise that we’ve become close.</i>”\n\n");
 			outputText("“<i>Really close,</i>” says Katherine, grinding her hip up against yours.\n\n");
@@ -670,7 +663,7 @@ public function visitAtHome():void { //You go to Kath's place alone - she may or
 			if (player.hasCock() || player.hasVagina()) addButton(button++, "Spitr Kath", telAdre.katherineThreesome.spitroastKath);
 		}
 		else {
-			katherineSprite();
+			spriteSelect(SpriteDb.s_katherine_vagrant);
 			outputText("It looks like Kath heard you coming.  You find her waiting in her bedroom with a sexy smile that suggests she’s up for anything.");
 			clothes();
 			outputText("\n\nShe stands next to her bed, waiting for you to " + (playerMaster() ? "tell her what to do." : "make the first move."));
@@ -838,7 +831,7 @@ public function barDescription():void {
 
 public function barApproach():void {
 	clearOutput();
-	katherineSprite();
+	spriteSelect(SpriteDb.s_katherine_vagrant);
 	outputText("Kath sits up as you approach, preening herself and " + clothesChoice("adjusting her blouse", "stretching to show off the bodysuit", "adjusting her dress", "adjusting the spider silk robe", "smothing out the tube top", "adjusting her cute nurse’s hat") + " as you navigate your way to her table." + (isMilky() ? "  Her hands subconsciously move to her breasts and you note the damp spots over her nipples." : "") + "\n\n");
 	outputText("When you sit down Kath asks you what you want to do and takes a sip of her drink.");
 	katherineMenu();
@@ -3287,7 +3280,7 @@ public function katherineSex():void {
 }
 
 private function katSexMenu():void {
-	katherineSprite(true);
+	spriteSelect(SpriteDb.s_katherine_vagrant);
 	var penetrate:Function = null;
 	var getPen:Function = null;
 	var helix:Function = null;

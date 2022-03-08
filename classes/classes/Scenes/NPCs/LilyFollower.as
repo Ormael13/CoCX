@@ -10,6 +10,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Camp;
 import classes.Scenes.NPCs.Lily;
 import classes.internals.SaveableState;
+import classes.display.SpriteDb;
 	
 	use namespace CoC;
 	
@@ -82,7 +83,7 @@ import classes.internals.SaveableState;
 		}
 
 		public function lilyEncounter():void {
-			spriteSelect(77);
+			spriteSelect(SpriteDb.s_drider);
 			clearOutput();
 			if (flags[kFLAGS.LILY_STATUS] == 1) {
 				outputText("Bushwhacking your way through the dense foliage of the swamp, it soon becomes clear that you've wandered into spider territory.  Webbing hangs from trees and the dark, dank air hides ambushes well.  Diligence and wariness pay off, for you become aware of a skittering too near to be simple background noise.\n\n");

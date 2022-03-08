@@ -10,6 +10,7 @@ import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.SceneLib;
 import classes.Scenes.UniqueSexScenes;
+import classes.display.SpriteDb;
 
 import coc.xxc.BoundStory;
 import coc.xxc.Story;
@@ -58,7 +59,7 @@ public class GoblinScene extends BaseContent
 		//RAEP TEXT 1
 		public function goblinRapesPlayer():void
 		{
-			spriteSelect(24);
+			spriteSelect(SpriteDb.s_goblin);
 			clearOutput();
 			if (player.isAlraune()){
 				outputText(images.showImage("goblin-loss-female-bimbodildo"));
@@ -287,7 +288,7 @@ public class GoblinScene extends BaseContent
 
 		//[WIN RAEPZ]
 		public function gobboRapeIntro():void {
-			spriteSelect(24);
+			spriteSelect(SpriteDb.s_goblin);
 			clearOutput();
 			menu();
 			story.display("strings/defeated/intro");
@@ -379,7 +380,7 @@ public class GoblinScene extends BaseContent
 		}
 		private function gobboButtSecks():void
 		{
-			spriteSelect(24);
+			spriteSelect(SpriteDb.s_goblin);
 			var x:Number = player.cockThatFits(monster.analCapacity());
 			if (x < 0) x = 0;
 			clearOutput();
@@ -392,7 +393,7 @@ public class GoblinScene extends BaseContent
 //[FEMSAUCE]
 		private function gobboGetsRapedFem():void
 		{
-			spriteSelect(24);
+			spriteSelect(SpriteDb.s_goblin);
 			clearOutput();
 			if (player.isTaur()) {
 				outputText(images.showImage("goblin-win-female-taur-rapedfem"));
@@ -420,7 +421,7 @@ public class GoblinScene extends BaseContent
 		{
 			var x:Number = player.biggestCockIndex();
 			clearOutput();
-			spriteSelect(24);
+			spriteSelect(SpriteDb.s_goblin);
 			outputText(images.showImage("goblin-win-male-corruptedfuck"));
 			story.display("strings/CorruptDick");
 			player.sexReward("Default", "Dick",true,false);
@@ -432,7 +433,7 @@ public class GoblinScene extends BaseContent
 		private function manRapesGoblinTooBig():void
 		{
 			clearOutput();
-			spriteSelect(24);
+			spriteSelect(SpriteDb.s_goblin);
 			outputText(images.showImage("goblin-win-male-corruptedbj"));
 			story.display("strings/DickTooBig");
 			player.sexReward("Default", "Dick",true,false);
@@ -442,7 +443,7 @@ public class GoblinScene extends BaseContent
 //[DUDEGASM]
 		private function gobboGetsRapedMaleFits():void
 		{
-			spriteSelect(24);
+			spriteSelect(SpriteDb.s_goblin);
 			var x:Number = player.cockThatFits(monster.vaginalCapacity());
 			if (x < 0) x = player.biggestCockIndex();
 			clearOutput();
@@ -456,7 +457,7 @@ public class GoblinScene extends BaseContent
 //Spider goblin condom
 		private function goblinCondomed(mode:Number = 0):void
 		{
-			spriteSelect(24);
+			spriteSelect(SpriteDb.s_goblin);
 			var x:Number = player.cockThatFits(monster.vaginalCapacity());
 			clearOutput();
 			outputText(images.showImage("goblin-win-male-goblincondomed"));

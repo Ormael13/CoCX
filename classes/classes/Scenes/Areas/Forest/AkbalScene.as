@@ -10,6 +10,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
 import classes.Items.Armors.SuccubusArmor;
 import classes.Scenes.UniqueSexScenes;
+import classes.display.SpriteDb;
 
 public class AkbalScene extends BaseContent
 	{
@@ -782,7 +783,7 @@ public class AkbalScene extends BaseContent
 		//[First Encounter]
 		public function supahAkabalEdition():void
 		{
-			spriteSelect(2);
+			spriteSelect(SpriteDb.s_akbal);
 			//Make sure that the buttchange is set correctly
 			//when submitting.  Gotta stretch em all!
 			monster.createCock();
@@ -828,7 +829,7 @@ public class AkbalScene extends BaseContent
 		//[Talk]
 		private function superAkbalioTalk():void
 		{
-			spriteSelect(2);
+			spriteSelect(SpriteDb.s_akbal);
 			clearOutput();
 			outputText("After a few moments of silence you ask, \"<i>What do you mean, 'submit'?</i>\" Akbal grins, revealing a row of wicked ivory teeth as he opens his mouth. You suddenly feel the demon's powerful body pinning you down, a wide tongue licking your neck and claws tickling your back in a way that is both horrifying and sensual. Yet after a moment of taking it in, you realize that he is still there in front of you, unmoved and grinning. You can guess what the image means: he wants you to become his mate for a day to make up for invading his territory.  What do you do?\n\n");
 
@@ -839,7 +840,7 @@ public class AkbalScene extends BaseContent
 		//[Encounter if previously submitted]
 		private function repeatAkbalPostSubmission():void
 		{
-			spriteSelect(2);
+			spriteSelect(SpriteDb.s_akbal);
 			clearOutput();
 			outputText("As you walk through the forest, you hear a purring coming from behind you.  Turning around reveals that Akbal has come to find you.  He uses his head to push you in the direction of his territory, obviously wanting to dominate you again.\n\n");
 			outputText("What do you do?");
@@ -850,7 +851,7 @@ public class AkbalScene extends BaseContent
 		//[Deny]
 		private function akbalDeny():void
 		{
-			spriteSelect(2);
+			spriteSelect(SpriteDb.s_akbal);
 			clearOutput();
 			outputText("You shake your head and rub the lust-filled jaguar behind the ear as you tell him you're busy.  The demon's eyes roll, and he licks your [leg] before his eyes find an imp in the trees above the two of you.\n\n");
 			outputText("Knowing he's found a new toy, Akbal allows you to leave unmolested.");
@@ -860,7 +861,7 @@ public class AkbalScene extends BaseContent
 		//[Encounter if previously fought and won/raped him]
 		private function ackbalRepeatAfterWin():void
 		{
-			spriteSelect(2);
+			spriteSelect(SpriteDb.s_akbal);
 			clearOutput();
 			outputText("As you walk through the forest, you hear a snarl and look up just in time to dodge a surprise attack by the jaguar demon, Akbal.  Your ");
 			if (player.isTaur())
@@ -874,7 +875,7 @@ public class AkbalScene extends BaseContent
 		//[Encounter if previously fought and lost]
 		private function ackbalRepeatAfterLoss():void
 		{
-			spriteSelect(2);
+			spriteSelect(SpriteDb.s_akbal);
 			clearOutput();
 			outputText("A chorus of laughter sounds inside your mind as the jaguar demon, Akbal, drops to the ground in front of you.  His masculine voice says, \"<i>Well, if it isn't the defiant welp who, in all their great idiocy, has wandered into my territory again.  Will you submit, or do I have to teach you another harsh lesson?</i>\"\n\n");
 
@@ -885,7 +886,7 @@ public class AkbalScene extends BaseContent
 		//[Fight]
 		private function startuAkabalFightomon():void
 		{
-			spriteSelect(2);
+			spriteSelect(SpriteDb.s_akbal);
 			clearOutput();
 			outputText("You ready your [weapon] and prepare to battle the demon jaguar.");
 			//[battle ensues]
@@ -896,7 +897,7 @@ public class AkbalScene extends BaseContent
 		//[Submit]
 		private function akbalSubmit():void
 		{
-			spriteSelect(2);
+			spriteSelect(SpriteDb.s_akbal);
 			player.slimeFeed();
 			flags[kFLAGS.AKBAL_SUBMISSION_COUNTER]++;
 			flags[kFLAGS.AKBAL_SUBMISSION_STATE] = 2;
@@ -1133,7 +1134,7 @@ public class AkbalScene extends BaseContent
 		//this before going to camp?
 		public function akbalSubmissionFollowup():void
 		{
-			spriteSelect(2);
+			spriteSelect(SpriteDb.s_akbal);
 			clearOutput();
 			if (flags[kFLAGS.AKBAL_SUBMISSION_COUNTER] < 4)
 			{

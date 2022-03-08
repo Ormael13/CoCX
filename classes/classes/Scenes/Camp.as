@@ -118,7 +118,7 @@ public class Camp extends NPCAwareContent{
 		if (timeUsed == 1)
 			outputText("An hour passes...\n");
 		else outputText(Num2Text(timeUsed) + " hours pass...\n");
-		if (!CoC.instance.inCombat) spriteSelect(-1);
+		if (!CoC.instance.inCombat) spriteSelect(null);
 		hideMenus();
 		timeQ = timeUsed;
 		goNext(false);
@@ -1281,7 +1281,7 @@ public class Camp extends NPCAwareContent{
 		var buttons:ButtonDataList = new ButtonDataList();
 		if (!descOnly) {
 			hideMenus();
-			spriteSelect(-1);
+			spriteSelect(null);
 			clearOutput();
 			CoC.instance.inCombat = false;
 			menu();
@@ -1677,7 +1677,7 @@ public class Camp extends NPCAwareContent{
 		var buttons:ButtonDataList = new ButtonDataList();
 		if (!descOnly) {
 			hideMenus();
-			spriteSelect(-1);
+			spriteSelect(null);
 			clearOutput();
 			CoC.instance.inCombat = false;
 			menu();
@@ -1750,7 +1750,7 @@ public class Camp extends NPCAwareContent{
 		var buttons:ButtonDataList = new ButtonDataList();
 		if (!descOnly) {
 			hideMenus();
-			spriteSelect(-1);
+			spriteSelect(null);
 			clearOutput();
 			CoC.instance.inCombat = false;
 			//ADD MENU FLAGS/INDIVIDUAL FOLLOWER TEXTS
@@ -3934,7 +3934,7 @@ public class Camp extends NPCAwareContent{
 	}
 
 	public function allNaturalSelfStimulationBeltBadEnd():void {
-		spriteSelect(23);
+		spriteSelect(SpriteDb.s_giacomo);
 		clearOutput();
 		outputText("Whatever the belt is, whatever it does, it no longer matters to you.  The only thing you want is to feel the belt and its creature fuck the hell out of you, day and night.  You quickly don the creature again and it begins working its usual lustful magic on your insatiable little box.  An endless wave of orgasms take you.  All you now know is the endless bliss of an eternal orgasm.\n\n");
 		outputText("Your awareness hopelessly compromised by the belt and your pleasure, you fail to notice a familiar face approach your undulating form.  It is the very person who sold you this infernal toy.  The merchant, Giacomo.\n\n");

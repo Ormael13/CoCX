@@ -12,6 +12,7 @@ import classes.Items.Armors.SuccubusArmor;
 import classes.Scenes.Camp.CampMakeWinions;
 import classes.Scenes.Camp.ImpGang;
 import classes.Scenes.UniqueSexScenes;
+import classes.display.SpriteDb;
 
 use namespace CoC;
 
@@ -624,7 +625,7 @@ use namespace CoC;
 
 		public function impGangabangaEXPLOSIONS(loss:Boolean = false):void {
 			player.slimeFeed();
-			spriteSelect(18);
+	        spriteSelect(SpriteDb.s_impMob); //yes, it's not fenimp anymore. Maybe add him somewhere else just for lulz?
 			//Set imp monster values
 			//Clear arrays in preparation
 			monster = new ImpGang();

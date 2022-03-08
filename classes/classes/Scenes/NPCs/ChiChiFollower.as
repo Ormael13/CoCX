@@ -10,7 +10,7 @@ package classes.Scenes.NPCs
 	import classes.CoC;
 	import classes.Scenes.Monsters.OniIncubus;
 	import classes.Scenes.SceneLib;
-	import classes.display.SpriteDb;
+    import classes.display.SpriteDb;
 
 use namespace CoC;
 	

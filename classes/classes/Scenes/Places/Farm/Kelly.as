@@ -2,6 +2,7 @@
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 public class Kelly extends AbstractFarmContent implements TimeAwareInterface {
 
@@ -37,36 +38,47 @@ Kelt will first try to turn himself back male, in order to continue the mind bre
 
 Every encounter raises corruption by 5, except the last one that raises corruption by 8. In order to achieve the last encounter your corruption level must not be lower than it was at the third encounter.*/
 
-		public var pregnancy:PregnancyStore;
+public var pregnancy:PregnancyStore;
 
-		public function Kelly()
-		{
-			pregnancy = new PregnancyStore(kFLAGS.KELLY_PREGNANCY_TYPE, kFLAGS.KELLY_INCUBATION, 0, 0);
-			pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 280, 200, 100);
-												//Event: 0 (= not pregnant),  1,   2,   3,  4 (< 100)
-			EventParser.timeAwareClassAdd(this);
-		}
+public function Kelly()
+{
+    pregnancy = new PregnancyStore(kFLAGS.KELLY_PREGNANCY_TYPE, kFLAGS.KELLY_INCUBATION, 0, 0);
+    pregnancy.addPregnancyEventSet(PregnancyStore.PREGNANCY_PLAYER, 280, 200, 100);
+                                        //Event: 0 (= not pregnant),  1,   2,   3,  4 (< 100)
+    EventParser.timeAwareClassAdd(this);
+}
 
-		//Implementation of TimeAwareInterface
-		public function timeChange():Boolean
-		{
-			pregnancy.pregnancyAdvance();
-			if (model.time.hours > 23) {
-				if (flags[kFLAGS.KELLY_REWARD_COOLDOWN] > 0 && model.time.days % 3 == 0) flags[kFLAGS.KELLY_REWARD_COOLDOWN] = 0;
-				if (flags[kFLAGS.KELT_BREAK_LEVEL] >= 4) flags[kFLAGS.KELLY_DISOBEYING_COUNTER]++;
-			}
-			if (pregnancy.isPregnant && pregnancy.incubation == 0) {
-				kellyPopsOutARunt();
-				pregnancy.knockUpForce(); //Clear Pregnancy
-				return true;
-			}
-			return false;
-		}
-	
-		public function timeChangeLarge():Boolean {
-			return false;
-		}
-		//End of Interface Implementation
+//Implementation of TimeAwareInterface
+public function timeChange():Boolean
+{
+    pregnancy.pregnancyAdvance();
+    if (model.time.hours > 23) {
+        if (flags[kFLAGS.KELLY_REWARD_COOLDOWN] > 0 && model.time.days % 3 == 0) flags[kFLAGS.KELLY_REWARD_COOLDOWN] = 0;
+        if (flags[kFLAGS.KELT_BREAK_LEVEL] >= 4) flags[kFLAGS.KELLY_DISOBEYING_COUNTER]++;
+    }
+    if (pregnancy.isPregnant && pregnancy.incubation == 0) {
+        kellyPopsOutARunt();
+        pregnancy.knockUpForce(); //Clear Pregnancy
+        return true;
+    }
+    return false;
+}
+
+public function timeChangeLarge():Boolean {
+    return false;
+}
+//End of Interface Implementation
+
+public function kellySprite():void {
+	if (!pregnancy.isPregnant) {
+		if (flags[kFLAGS.KELLY_BONUS_BOOB_ROWS] == 0) spriteSelect(SpriteDb.s_kelly);
+		else spriteSelect(SpriteDb.s_kelly_brst);
+	}
+	else  {
+		if (flags[kFLAGS.KELLY_BONUS_BOOB_ROWS] == 0) spriteSelect(SpriteDb.s_kelly_preg);
+		else spriteSelect(SpriteDb.s_kelly_brst_preg);
+	}
+}
 		
 private function hasPinkEgg():Boolean {
 	return (player.hasItem(consumables.PINKEGG) || player.hasItem(consumables.L_PNKEG));
@@ -76,7 +88,7 @@ private function hasPinkEgg():Boolean {
 //First encounter
 public function breakingKeltOptions():void {
 	clearOutput();
-	spriteSelect(35);
+	spriteSelect(SpriteDb.s_kelt);
 	if((!player.hasCock() && flags[kFLAGS.KELT_BREAK_LEVEL] == 0) ||flags[kFLAGS.NEVER_RESIST_KELT] == 1 || player.statusEffectv2(StatusEffects.Kelt) >= 40 || !player.hasStatusEffect(StatusEffects.Kelt)) {
 		farm.keltScene.keltEncounter();
 		return;
@@ -109,7 +121,7 @@ public function fightToBeatKelt():void {
 //Resist
 private function resistKeltsBSBreakHimIntro():void {
 	clearOutput();
-	spriteSelect(35);
+	spriteSelect(SpriteDb.s_kelt);
 	if(flags[kFLAGS.KELT_BREAK_LEVEL] == 0) {
 		outputText("You are more and more annoyed by Kelt's rudeness and dick-waving.  The centaur may be imposing at first and his archery skills are impressive, but you're sure that behind his false display of virility, there's nothing an experienced champion like you can't deal with.  With your superior strength and speed, you could probably take him by surprise and teach him a good lesson.  Of course, you won't ever be able to learn archery from him after that.");
 		//[if (PC doesn't have items)
@@ -156,14 +168,14 @@ private function resistKeltsBSBreakHimIntro():void {
 		outputText("\n\nYou don't have time to consider it any further - Kelt draws his bow, ready to fight!");
 		//[Start Combat]
 		startCombat(new Kelt());
-		spriteSelect(35);
+		spriteSelect(SpriteDb.s_kelt);
 	}
 	else if(flags[kFLAGS.KELT_BREAK_LEVEL] == 3) {
-		spriteSelect(-1);
+		spriteSelect(null);
 		finalKeltBreaking();
 	}
 	else {
-		spriteSelect(-1);
+		spriteSelect(null);
 		approachKelly();
 	}
 }
@@ -176,7 +188,7 @@ private function resistKeltsBSBreakHimIntro():void {
 
 private function neverBreakKeltIntoKelly():void {
 	clearOutput();
-	spriteSelect(35);
+	spriteSelect(SpriteDb.s_kelt);
 	flags[kFLAGS.NEVER_RESIST_KELT] = 1;
 	outputText("You decide that trying to break Kelt is something you'd never want to do.  Besides, he's teaching you a useful skill, and there's just something charming about that bastard...");
 	menu();
@@ -187,7 +199,7 @@ private function neverBreakKeltIntoKelly():void {
 
 private function breakKeltGo():void {
 	clearOutput();
-	spriteSelect(35);
+	spriteSelect(SpriteDb.s_kelt);
 	outputText("You approach the uppity centaur with glinting eyes, determined to take him down.  Kelt mistakes your anger for desire and sneers.");
 	
 	outputText("\n\n\"<i>What do you want, you little "+ player.mf("sissy", "bitch") +"?  I'm done with you.  I'm already doing you a favor by teaching you a skill sluts like you will never use nor master.</i>\"");
@@ -319,7 +331,7 @@ private function breakKeltGo():void {
 /*10 succubi milk (or 1 pink egg - large or small - and 5 succubi milk) */
 private function secondKeltBreaking():void {
 	clearOutput();
-	spriteSelect(35);
+	spriteSelect(SpriteDb.s_kelt);
 	outputText("You stroll up to Kelt, not afraid to tame the beastman a second time.  As soon as he spots you, he snorts and tramples the floor furiously.  At the same time, he turns his head back as if he was ready to gallop at any moment.  Torn between his fear of you and his desire for revenge, he doesn't dare charge you, but he doesn't move away either.  You profit from his indecision to walk straight up to him until you are face to face.  But his masculine visage doesn't appeal to you, for your main focus is the tool hanging between his hind legs.");
 	
 	outputText("\n\nYou point at it and laugh.");
@@ -334,7 +346,7 @@ private function secondKeltBreaking():void {
 	
 	outputText("\n\nIt's a fight!");
 	startCombat(new Kelt());
-	spriteSelect(35);
+	spriteSelect(SpriteDb.s_kelt);
 }
 
 
@@ -560,6 +572,7 @@ outputText("\n\nKelly remains quiet for a couple of seconds before slowly mutter
 /*This one requires you not to have lost any corruption since the last encounter you had with her (so if you did, just get back to your former corruption level).*/
 private function finalKeltBreaking():void {
 	clearOutput();
+    kellySprite();
 	outputText("You resolutely walk up to the centaur slut for her final lesson.  This time you don't even need to find her: she rushes to you on her own, her eyes glinting with need.");
 	outputText("\n\n\"<i>[Master], [Master]!  You're finally here.  I-I haven't been sleeping well since you left.  I've been dreaming about you... about your cock.  I haven't been able to eat properly, it's like I'm in a state of constant hunger that can't be satisfied... except by you.</i>\"");
 	
@@ -730,6 +743,7 @@ private function kellyAppearance():void {
 }
 private function approachKelly():void {
 	clearOutput();
+    kellySprite();
 	//Fix hair color!
 	if(flags[kFLAGS.KELLY_HAIR_COLOR] == 0) flags[kFLAGS.KELLY_HAIR_COLOR] = "chestnut brown";
 	//PUNISH SCENES IF APPROPRIATE

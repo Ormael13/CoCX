@@ -4331,7 +4331,6 @@ public class Soulforce extends BaseContent
 			player.soulforce -= 320;
 			statScreenRefresh();
 			SceneLib.goblinElderScene.goblinElderEncounter();
-			spriteSelect(122);
 		}
 		else {
 			outputText("\n\nYour current soulforce is too low.");

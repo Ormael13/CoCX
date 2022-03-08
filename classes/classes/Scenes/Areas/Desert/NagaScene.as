@@ -6,6 +6,7 @@ import classes.BodyParts.Skin;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 import classes.Scenes.UniqueSexScenes;
+import classes.display.SpriteDb;
 
 public class NagaScene extends BaseContent{
         private var gorgonOrNaga:String = "naga";
@@ -25,7 +26,7 @@ public class NagaScene extends BaseContent{
 //v1 - players last fuck was as naga - 1 = true, 0 = false
 //v2 - player has ever fucked as a naga.  1 = true, 0 = false
 public function nagaEncounter():void {
-	spriteSelect(45);
+	spriteSelect(SpriteDb.s_naga);
 	//Create status if needed
 	if(!player.hasStatusEffect(StatusEffects.Naga)) player.createStatusEffect(StatusEffects.Naga,0,0,0,0);
 	clearOutput();

@@ -9,6 +9,7 @@ import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 import classes.lists.BreastCup;
+import classes.display.SpriteDb;
 
 public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 	{
@@ -168,8 +169,8 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			return flags[kFLAGS.AMILY_FOLLOWER] == 2;
 		}
 		public function amilySprite():void {
-			if(flags[kFLAGS.AMILY_NOT_FURRY] == 0) spriteSelect(3);
-			else spriteSelect(65);
+			if(flags[kFLAGS.AMILY_NOT_FURRY] == 0) spriteSelect(SpriteDb.s_amily);
+			else spriteSelect(SpriteDb.s_amily_defurr);
 		}
 
 		private function rackCount():int {

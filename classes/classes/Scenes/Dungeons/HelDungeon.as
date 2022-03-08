@@ -10,6 +10,7 @@ import classes.Scenes.Dungeons.HelDungeon.*;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.SceneLib;
 import classes.Scenes.UniqueSexScenes;
+import classes.display.SpriteDb;
 
 use namespace CoC;
 	
@@ -258,7 +259,7 @@ use namespace CoC;
 		//[Armor] -> [Take]:
 		public function takeGooArmor4Realz():void {
 			clearOutput();
-			spriteSelect(79);
+			spriteSelect(SpriteDb.s_valeria);
 			outputText("You reach out to grab the armor, but as soon as your finger brushes the shiny surface, a human-like face appears in the helm!  You recoil as a daintily feminine and bright blue face takes shape out of nowhere, staring at you with eyes afire with rage.  More of the gooey substance that makes up the girl's face fills out the armor, yanking it off the racks on feet made of goop.");
 			outputText("\n\nQuietly, the armored goo-girl growls, \"<i>You dare to disturb my rest, mortal? Prepare yourself for my vengeance!</i>\"");
 			outputText("\n\nWhat the fuck!? Oh well, looks like she wants a fight!");
@@ -268,7 +269,7 @@ use namespace CoC;
 		
 		//Goo Armor -- PC Defeated (PC has Gender)
 		public function gooArmorBeatsUpPC():void {
-			spriteSelect(79);
+			spriteSelect(SpriteDb.s_valeria);
 			outputText("\n\nYou collapse, unable to resist the goo-armor's onslaught.  Laughing, she slithers out from underneath her armor, completely encasing you before you can do anything more than scream.  Laughing maniacally, the goo looms over you, hands on her hips.  \"<i>Tsk, tsk, tsk.  Not so eager to steal my armor now, are you?  Well... what am I to do with you, hmm?</i>\"  You struggle, but wrapped snugly in her goo, you can do little more than wiggle your hips and chest, accidentally moving yourself seductively.");
 			outputText("\n\nAs you realize your mistake, a little smile spreads on her face.  \"<i>Ah, I know... I haven't had my precious fluids in so very long...</i>\"");
 			//(PC has Vagina)
@@ -341,7 +342,7 @@ use namespace CoC;
 
 		//Goo Armor -- PC is Victorious (Intro)
 		public function beatUpGooArmor():void {
-			spriteSelect(79);
+			spriteSelect(SpriteDb.s_valeria);
 			clearOutput();
 			outputText("Succumbing to your ");
 			if(monster.lust >= monster.maxLust()) outputText("erotic abilities");
@@ -361,7 +362,7 @@ use namespace CoC;
 		}
 		//[Refuse Her]
 		public function refuseGooArmorOffer():void {
-			spriteSelect(79);
+			spriteSelect(SpriteDb.s_valeria);
 			clearOutput();
 			//In Tower of the Phoenix
 			if (flags[kFLAGS.VALERIA_FOUND_IN_GLACIAL_RIFT] == 0) {
@@ -383,7 +384,7 @@ use namespace CoC;
 		}		
 		//[Refuse Polite]
 		public function refuseGooArmorOfferPolitely():void {
-			spriteSelect(79);
+			spriteSelect(SpriteDb.s_valeria);
 			clearOutput();
 			//In Tower of the Phoenix
 			if (flags[kFLAGS.VALERIA_FOUND_IN_GLACIAL_RIFT] == 0) {
@@ -401,7 +402,7 @@ use namespace CoC;
 		}
 		//[Take Her]
 		public function takeGooArmorAndWearIt():void {
-			spriteSelect(79);
+			spriteSelect(SpriteDb.s_valeria);
 			clearOutput();
 			flags[kFLAGS.MET_VALERIA] = 1;
 			flags[kFLAGS.TOOK_GOO_ARMOR] = 1;
@@ -592,7 +593,7 @@ use namespace CoC;
 		//[Valeria]
 		public function talkToValeria():void {
 			clearOutput();
-			spriteSelect(79);
+			spriteSelect(SpriteDb.s_valeria);
 			outputText("Now that you have a few moments to catch your breath, you ask your goo-armor what she thinks about the situation.");
 			outputText("\n\n\"<i>Oh, hi,</i>\" she laughs.  She pours half-way out of your armor, forming her face a few inches from yours.  Kiri leaps in shock, wide-eyed as your armor becomes a new person before you.");
 			outputText("\n\n\"<i>Well hey there, cutie,</i>\" Valeria says, giving Kiri a little wink.  The harpy shudders slightly and shakes the surprise off.");
@@ -1334,6 +1335,7 @@ use namespace CoC;
 			//(Intro; Before Battle)
 			if(flags[kFLAGS.HEL_PHOENIXES_DEFEATED] == 0) {
 				outputText("You ascend the heavy stone steps, circling the tower's walls as you ascend.  You are stopped perhaps half-way to the second main floor on a small terrace level with a wide open view overlooking the vale beneath the high mountains.  As you step onto the mezzanine, you watch with a scowl as a number of tall, muscular hermaphrodites step out from the shadows.  Each is clad in heavy chainmail and wields a scimitar and a blood-red shield, but is otherwise nude, revealing their reptilian pricks and slick pussies.  The soldiers standing before you look like harpies, but they have scaled, humanoid legs, long, fiery tails and their wings are the darkest crimson.  These are phoenixes - the dread half-breed warriors you and Hel are here to stop!");
+                spriteSelect(SpriteDb.s_phoenix);
 				menu();
 				startCombat(new PhoenixSquad());
 				doNext(playerMenu);

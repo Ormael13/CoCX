@@ -187,7 +187,7 @@ public function telAdreMenu():void {
 		else meetingLunaFirstTime();
 		return;
 	}
-	spriteSelect(-1);
+	spriteSelect(null);
 	outputText(images.showImage("location-teladre"));
 	clearOutput();
 	outputText("Tel'Adre is a massive city, though most of its inhabitants tend to hang around the front few city blocks.  It seems the fall of Mareth did not leave the city of Tel'Adre totally unscathed.  A massive tower rises up in the center of the city, shimmering oddly.  From what you overhear in the streets, the covenant's magic-users slave away in that tower, working to keep the city veiled from outside dangers.  There does not seem to be a way to get into the unused portions of the city, but you'll keep your eyes open.\n\n");
@@ -265,7 +265,7 @@ public function houses():void {
 
 
 public function oswaldPawn():void {
-	spriteSelect(47);
+	spriteSelect(SpriteDb.s_oswald);
 	clearOutput();
 	if (!player.hasStatusEffect(StatusEffects.Oswald)) {
 		outputText("Upon closer inspection, you realize the pawnbroker appears to be some kind of golden retriever.  He doesn't look entirely comfortable and he slouches, but he manages to smile the entire time.  His appearance is otherwise immaculate, including his classy suit-jacket and tie, though he doesn't appear to be wearing any pants.  Surprisingly, his man-bits are retracted.  ");
@@ -308,7 +308,7 @@ private function buyCarrotFromOswald():void {
 
 private function oswaldPawnMenu(page:int = 1, refresh:Boolean = false):void { //Moved here from Inventory.as
 	var slot:int;
-	spriteSelect(47);
+	spriteSelect(SpriteDb.s_oswald);
 	if (refresh) {
 		clearOutput();
 		outputText("You see Oswald fiddling with a top hat as you approach his stand again.  He looks up and smiles, padding up to you and rubbing his furry hands together.  He asks, \"<i>Have any merchandise for me " + player.mf("sir","dear") + "?</i>\"\n\n");
@@ -342,7 +342,7 @@ private function oswaldPawnMenu(page:int = 1, refresh:Boolean = false):void { //
 	addButton(14, "Back", telAdreMenu);
 }
 private function oswaldPawnMenu2():void {
-	spriteSelect(47);
+	spriteSelect(SpriteDb.s_oswald);
 	menu();
 	if (player.keyItemv1("Backpack") < 12) addButton(5, "Backpack", buyBackpack).hint("This backpack will allow you to carry more items.");
 	switch (flags[kFLAGS.KATHERINE_UNLOCKED]) {
@@ -355,7 +355,7 @@ private function oswaldPawnMenu2():void {
 }
 
 private function oswaldPawnSell(slot:int):void { //Moved here from Inventory.as
-	spriteSelect(47);
+	spriteSelect(SpriteDb.s_oswald);
 	var itemValue:int = int(player.itemSlots[slot].itype.value / 2);
 	clearOutput();
 	if (flags[kFLAGS.SHIFT_KEY_DOWN] == 1) {
@@ -384,7 +384,7 @@ private function oswaldPawnSell(slot:int):void { //Moved here from Inventory.as
 }
 
 private function oswaldPawnSellAll():void {
-	spriteSelect(47);
+	spriteSelect(SpriteDb.s_oswald);
 	var itemValue:int = 0;
 	clearOutput();
 	for (var slot:int = 0; slot < 20; slot++) {
@@ -405,7 +405,7 @@ private function oswaldPawnSellAll():void {
 }
 
 private function buyBackpack():void {
-	spriteSelect(47);
+	spriteSelect(SpriteDb.s_oswald);
 	clearOutput();
 	outputText("You ask Oswald if he has a backpack to spare.");
 	outputText("\n\n\"<i>Yes. They come in two sizes. What will you pick?</i>\" he asks.");
@@ -418,7 +418,7 @@ private function buyBackpack():void {
 	addButton(14, "Nevermind", oswaldPawnMenu2);
 }
 private function buyBackpackConfirmation(size:int = 2, sizeDesc:String = "Small", price:int = 100):void {
-	spriteSelect(47);
+	spriteSelect(SpriteDb.s_oswald);
 	clearOutput();
 	if (player.gems < price) {
 		outputText("You count out your gems and realize it's beyond your price range.");
@@ -455,7 +455,7 @@ private function enterBarTelAdre():void {
 public function barTelAdre():void {
 	// Dominka & Edryn both persist their sprites if you back out of doing anything with them -- I
 	// I guess this is good a place as any to catch-all the sprite, because I don't think theres ever a case you get a sprite from just entering the bar?
-	spriteSelect( -1);
+	spriteSelect(null);
 
 	hideUpDown();
 	var button:int = 0;
@@ -634,6 +634,7 @@ public function barTelAdre():void {
 //-----------------
 public function carpentryShopEntry():void {
 	clearOutput();
+    spriteSelect(SpriteDb.s_carpenter);
 	outputText("You enter the shop marked by a sign with hammer and saw symbol painted on it. There are array of tools all hung neatly. A six feet tall zebra-morph stallion stands behind the counter. He appears to be wearing typical lumberjack outfit.\n\n");
 	outputText("\"<i>Welcome to my hardware shop dear customer. Feel free to look around,</i>\" he says. \n\n");
 	if (flags[kFLAGS.CODEX_ENTRY_ZEBRAS] <= 0) {

@@ -65,7 +65,6 @@ public class SpiderMorphMob extends Monster
 
 		private function kihaSPOIDAHAI():void {
 			outputText("[pg]");
-			game.spriteSelect(72);
 			outputText("While they're tangled up with you, however, Kiha takes the opportunity to get in a few shallow swings with her axe, to the accompaniment of crunching chitin.");
 			//horde loses HP
 			HP -= 50;
@@ -73,7 +72,6 @@ public class SpiderMorphMob extends Monster
 
 		override protected function performCombatAction():void
 		{
-			game.spriteSelect(72);
 			if(rand(2) == 0 || player.hasStatusEffect(StatusEffects.UBERWEB)) spiderStandardAttack();
 			else spoidahHordeWebLaunchahs();
 		}

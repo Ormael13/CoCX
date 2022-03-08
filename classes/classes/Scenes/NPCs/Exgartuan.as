@@ -3,6 +3,7 @@ import classes.*;
 import classes.BodyParts.Skin;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
+import classes.display.SpriteDb;
 
 public class Exgartuan extends NPCAwareContent implements TimeAwareInterface {
 
@@ -253,7 +254,7 @@ private function drinkFountainEndowment():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 private function exgartuanInfestDick():void {
-	spriteSelect(15);
+	spriteSelect(SpriteDb.s_exgartuan);
 	//(+Demon dick possession – not demoncocked)
 	if(player.cocks[0].cockType != CockTypesEnum.DEMON) {
 		outputText("\n\nYour [cock] puffs up, getting longer and harder, but also distorting as bumps and nodules sprout all along its surface.  The coloration darkens, turning a very dark purple as a ring of bigger nodules grow out around the head.  You now have a much larger and far more corrupted dick!   It dribbles pre-cum and twitches about as if sniffing the air, feeling very warm and sensitive.");
@@ -303,7 +304,7 @@ private function exgartuanInfestTits():void {
 public function exgartuanMasturbation():void {
 	clearOutput();
 	if(player.statusEffectv1(StatusEffects.Exgartuan) == 1) {
-		spriteSelect(15);
+		spriteSelect(SpriteDb.s_exgartuan);
 		//Early prep
 		if(player.cor < 15) outputText("You sheepishly find some rocks to hide in, where you remove your clothes.  Exgartuan loudly grumbles, \"<i>Quit fucking around and hiding.  I WANT someone to walk in on this!</i>\"\n\nDisgusting...\n\n");
 		if(player.cor >= 15 && player.cor < 30) outputText("You make sure you are alone and strip naked.  Exgartuan mutters, \"<i>Why did you wait until you were alone?  Wouldn't it be fun to have a succubus wander in on us?</i>\"\n\n");
@@ -786,7 +787,7 @@ public function exgartuanLactationAdjustment():void {
 
 //[BEEGIRL RAEP]
 public function exgartuanBeeRape():void {
-	spriteSelect(6);
+	spriteSelect(SpriteDb.s_bee_girl);
 	clearOutput();
 	outputText("You grin and embrace the demon's idea as if it were your own.  Maybe it's time the bee-girl had her own lesson in fluid insemination...\n\n");
 	outputText("Walking forward with a bit of supernaturally-induced swagger, you close the remaining distance with your trembling victim, oblivious to the fact that your [armor] are rapidly disengaging themselves from your body and dropping to the forest floor.  She weakly protests, exposing her stinger, but the threat is clearly futile.  There's no way she'd touch you or your magnificent [cock] with such an inferior organ.\n\n");
@@ -821,7 +822,7 @@ private function leaveBeePostRape():void {
 }
 
 private function exgartuanSleepSurprise():void {
-	spriteSelect(15);
+	spriteSelect(SpriteDb.s_exgartuan);
 	//Low corruption
 	if(player.cor <= 20 && player.findPerk(PerkLib.BulgeArmor) >= 0) {
 		outputText("A light breeze skims across your face, slowly fading away what little sleep you had managed to enjoy.  As your eyes slowly open and adjust, you begin to faintly make out the red moon sitting high in the sky through the fabric of your " + camp.homeDesc() + ".  What little light there is comes from the faint remnants of your campfire, down to just embers by this point.  You slowly roll your head to look towards the warmth only to find the entrance to your " + camp.homeDesc() + " still wide open.  A slight grimace forms as you begin to stretch awake, only to interrupt yourself upon the realization that you are still wearing your [armor].  A quick yet groggy glance also reveals that you've also managed to fall asleep on top of your " + camp.bedDesc() + " rather than nestled cozily inside it.\n\n");
@@ -1100,7 +1101,7 @@ private function exgartuanBulgeTortureIV():void {
 //3:00AM
 
 private function boobGartuanSURPRISE():void {
-	spriteSelect(15);
+	spriteSelect(SpriteDb.s_exgartuan);
 	//[if occurrence ==0]
 	if(flags[kFLAGS.BOOBGARTUAN_SURPRISE_COUNT] == 0) {
 		outputText("The sound of little snickering voices wakes you from your slumber.  A couple of imps are chattering to one another, one of which has his hand under his loincloth, making a night of it.  You think to move, but find both of your arms sprawled and padlocked to the wall behind you, your naked body dangling helplessly against it.  A quick glimpse around reveals your cobblestone dwelling: a small dank, dimly lit room with no windows and a few knick knacks and perverted toys spread haphazardly against the walls.  Offset towards the middle of the room lies an ordinary wooden table, some gold coins, jugs, and a leather pouch of some sort sit atop it.  Before you can get a good look at it, one of the imps snaps to attention, hitting the... preoccupied one in the chest, \"<i>Look alive, idiot!  The " + player.mf("chump","skank") + "'s wakin' up.  Git' the boss!</i>\" The second imp's hand flies free from his crotch, scattering some semen to the air.  He responds with a slack-jawed nod, proceeding to bang twice on the large wooden door beside him.  After a moment's pause, you can make out the sound of wood hitting stone mixed with bare footsteps.\n\n");
@@ -1142,7 +1143,7 @@ private function boobGartuanSURPRISE():void {
 }
 
 private function boobgartuanSurprise2():void {
-	spriteSelect(15);
+	spriteSelect(SpriteDb.s_exgartuan);
 	clearOutput();
 	if(flags[kFLAGS.BOOBGARTUAN_SURPRISE_COUNT] == 0) {
 		outputText("There's no time to be deciding on which cardinal direction to walk in once you exit the room; your efforts have garnered some unwanted attention.  The sound of blaring horns can be heard overhead, far off imp squeaks and squabbles slowly growing louder.  You haul ass in the opposite direction to the east and pull yourself down the next corner on your left, following what sounds like a rough thunderstorm outside.  Your effortless strides along the slick cobblestone ground come to a screeching halt soon after.  It would appear you've made it to a small dining hall, littered with debris and discarded weaponry.  Directly across the room from you lies the door to the courtyard, your last stop on the train to freedom.  But there's an imp in the way.\n\n");
@@ -1343,7 +1344,7 @@ private function boobgartuanSurprise3():void {
 //Naga lower half
 //~50%(maybe less?) to replace normal Exgartuan masturbation scene
 public function exgartuanNagaStoleMyMasturbation():void {
-	spriteSelect(15);
+	spriteSelect(SpriteDb.s_exgartuan);
 	clearOutput();
 	//[if corruption <15]
 	if(player.cor < 15) outputText("You sheepishly find some rocks to hide in, where you remove your clothes.  \"Keeping me all to yourself, slut? Hide as much as you want, it'll never keep me down,\" Exgartuan gloats.\n\n");

@@ -3,6 +3,7 @@ import classes.*;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
+import classes.display.SpriteDb;
 
 // ARIAN_FOLLOWER:int = 933;
 // ARIAN_PARK:int = 934; //-1 = disabled, 1 = helped.
@@ -190,6 +191,7 @@ public function arianChest():String {
 //If you don't help, Arian is removed from the game.
 public function meetArian():void {
 	clearOutput();
+	spriteSelect(SpriteDb.s_arian);
 	outputText("As you wander Tel'Adre's streets, you pass by one of the many dark alleys that litter the half-empty city; you hear the sound of hacking, rasping coughs.  Following your ears, you see a hooded figure wrapped in a form-concealing cloak slumped against the wall, bent over and coughing loudly, wheezing for breath.  They really don't sound very well at all... on the other hand, it could be a setup for muggers or something.  Maybe you shouldn't try playing the good samaritan here...");
 	//[Help] [Don't Help]
 	
@@ -264,6 +266,7 @@ private function helpArianWhenYouMeetHim():void {
 //Use variable ArianPark to determine the number of visits.
 public function visitThePark():void {
 	clearOutput();
+	spriteSelect(SpriteDb.s_arian);
 	outputText(images.showImage("arian-park"));
 	outputText("As you enter the ragged remnants of the park, you spot the sickly lizan, Arian, sitting at his usual bench, and greet him.  \"<i>Oh, hello there [name].  Good to see you.</i>\"  He waves lazily.");
 	
@@ -358,6 +361,7 @@ public function visitThePark():void {
 //First Visit
 public function visitAriansHouse():void {
 	clearOutput();
+	spriteSelect(SpriteDb.s_arian);
 	if (flags[kFLAGS.ARIAN_HEALTH] < 29 || flags[kFLAGS.ARIAN_VIRGIN] == 1) arianHealth(1);
 	if (arianFollower()) {
 		if (arianMF("m", "f") == "f")
@@ -3593,6 +3597,7 @@ The small tent that Arian dwells in is in its usual place in a quiet corner of t
 //Sleep With Arian
 public function sleepWithArian(newl:Boolean = false):void {
 	if(newl) clearOutput();
+	spriteSelect(SpriteDb.s_arian);
 	flags[kFLAGS.SLEEP_WITH] = "Arian";
 	outputText("Tired after a whole day of adventuring, you decide to retire and catch some shut-eye.  While going through the day's events, you recall Arian had offered to let you stay in [Arian eir] tent and sleep with [Arian em] in [Arian eir] bed.  Your tired body could surely use a soft bed today, and maybe a certain lizan to keep you company too.  With that in mind, you head to [Arian eir] tent.");
 	
@@ -3789,6 +3794,7 @@ private function TeaseHighAnalXPArian():void {
 //Outcome slightly modified by AnalXP.
 public function wakeUpAfterArianSleep():void {
 	clearOutput();
+	spriteSelect(SpriteDb.s_arian);
 	if (player.hasCock()) {
 		if (arianMF("m", "f") == "f")
 			outputText(images.showImage("arianfemale-camp-dreamingArian"));	
@@ -3970,6 +3976,7 @@ public function wakeUpAfterArianSleep():void {
 //If you don't visit Arian, you miss this event, and the eggs [Arian ey] would be laying.
 public function arianEggingEvent():void {
 	clearOutput();
+	spriteSelect(SpriteDb.s_arian);
 	flags[kFLAGS.ARIAN_EGG_EVENT] = 1;
 	if(flags[kFLAGS.ARIAN_EGG_CHAT] == 0) {
 		flags[kFLAGS.ARIAN_EGG_CHAT]++;
@@ -4051,6 +4058,7 @@ private function leaveEggs():void {
 //Randomly decide between small or large egg, I'd say 50% chance of either.
 public function arianLaysEggs():void {
 	clearOutput();
+	spriteSelect(SpriteDb.s_arian);
 	var color:String = flags[kFLAGS.ARIAN_EGG_COLOR];
 	flags[kFLAGS.ARIAN_EGG_COUNTER] = 0;
 	outputText("As you approach the tent, you wonder if Arian's ready to lay those eggs...  Your contemplations are promptly interrupted as you hear a pained moan coming from inside.  Seems like Arian is in labor!  Without delay, you rush inside, to be greeted by the sight of naked lizan-");

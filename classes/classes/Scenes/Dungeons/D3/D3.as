@@ -304,7 +304,7 @@ import classes.StatusEffects;
 		{
 			statScreenRefresh();
 			hideUpDown();
-			spriteSelect(-1);
+			spriteSelect(null);
 			SceneLib.dungeons.setTopButtons();
 			if (tRoom.NorthExit != null && tRoom.NorthExit.length > 0)
 			{

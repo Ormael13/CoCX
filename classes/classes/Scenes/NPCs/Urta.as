@@ -9,6 +9,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Places.TelAdre.Katherine;
 import classes.Scenes.Places.TelAdre.Scylla;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 public class Urta extends NPCAwareContent implements TimeAwareInterface {
 
@@ -104,8 +105,8 @@ public class Urta extends NPCAwareContent implements TimeAwareInterface {
 		//End of Interface Implementation
 
 public function urtaSprite():void {
-	if(urtaDrunk()) spriteSelect(84);
-	else spriteSelect(1);
+	if(urtaDrunk()) spriteSelect(SpriteDb.s_urtaDrunk);
+	else spriteSelect(SpriteDb.s_urta);
 }
 
 public function urtaCapacity():Number {
