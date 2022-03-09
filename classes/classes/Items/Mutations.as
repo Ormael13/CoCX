@@ -3778,6 +3778,12 @@ public final class Mutations extends MutationsHelper {
                 player.createStatusEffect(StatusEffects.KnowsStalagmite, 0, 0, 0, 0);
                 return;
             }
+            //Smart enough for Acid Spray and doesnt have it
+            if (player.inte >= 55 && !player.hasStatusEffect(StatusEffects.KnowsAcidSpray)) {
+                outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Acid Spray.</b>");
+                player.createStatusEffect(StatusEffects.KnowsAcidSpray, 0, 0, 0, 0);
+                return;
+            }
             //Smart enough for Clear Mind and doesnt have it
             if (player.inte >= 60 && !player.hasStatusEffect(StatusEffects.KnowsClearMind)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Clear Mind.</b>");
@@ -3800,6 +3806,12 @@ public final class Mutations extends MutationsHelper {
             if (player.inte >= 65 && !player.hasStatusEffect(StatusEffects.KnowsShatterstone)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Shatterstone.</b>");
                 player.createStatusEffect(StatusEffects.KnowsShatterstone, 0, 0, 0, 0);
+                return;
+            }
+            //Smart enough for Corrosive Wave and doesnt have it
+            if (player.inte >= 65 && !player.hasStatusEffect(StatusEffects.KnowsCorrosiveWave)) {
+                outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Corrosive Wave.</b>");
+                player.createStatusEffect(StatusEffects.KnowsCorrosiveWave, 0, 0, 0, 0);
                 return;
             }
             //Smart enough for  and doesnt have it
@@ -10401,7 +10413,7 @@ public final class Mutations extends MutationsHelper {
             }
             changes++;
         }
-        if (player.lowerBody == LowerBody.RAIJU && player.arms.type != Arms.RAIJU && changes < changeLimit && rand(3) == 0) {
+        if (player.lowerBody == LowerBody.RAIJU && player.arms.type != Arms.RAIJU && player.arms.type != Arms.RAIJU_PAWS && changes < changeLimit && rand(3) == 0) {
             outputText("[pg]");
             if (player.arms.type == Arms.HUMAN) {
                 transformations.ArmsRaiju.applyEffect();
@@ -17412,4 +17424,4 @@ public final class Mutations extends MutationsHelper {
     }
 }
 }
-
+
