@@ -4,7 +4,6 @@
  */
 package classes.Scenes.Places.TrollVillage {
 import classes.*;
-import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Places.TrollVillage;
 import classes.Scenes.SceneLib;
 
@@ -99,11 +98,9 @@ public class Halkano extends TrollVillageAbstractContent{
         clearOutput();
         outputText("You tell Halkano that you wanted to get to know more about him, who he is, and what he does, does he enjoy his time here?\n" +
                 "\n" +
-                "Halkano thinks for a moment, \"It’s well, I do my best ta keep my wife happy… and well… I tink I did a little too good of a job at dat…\" He gives an infatuated sigh. \"Yeah... \" His dopey expression shifts to dismay, \"It was because my son left us, I can’t say for sure why, or what caused it, but I loved him with everyting I had to give, my heart, my soul…\"\n");
-                if (flags[kFLAGS.MARRIAGE_FLAG] == "Zenji"){
-                    outputText(", \"Tanks ta you though, Zenji is back and I’m honored ta call you family.\"\n");
-                }
-                outputText("\"Aside from dat though,\" He sighs, \"I am a carpenter, I like what I do and I’m good at it. Good wit my hands, years and years of practice and hard work does pay off.\"\n" +
+                "Halkano thinks for a moment, \"It’s well, I do my best ta keep my wife happy… and well… I tink I did a little too good of a job at dat…\" He gives an infatuated sigh. \"Yeah... \" His dopey expression shifts to dismay, \"It was because my son left us, I can’t say for sure why, or what caused it, but I loved him with everyting I had to give, my heart, my soul…\" [(pc is married to Zenji), \"Tanks ta you though, Zenji is back and I’m honored ta call you family.\"]\n" +
+                "\n" +
+                "\"Aside from dat though,\" He sighs, \"I am a carpenter, I like what I do and I’m good at it. Good wit my hands, years and years of practice and hard work does pay off.\"\n" +
                 "\n" +
                 "Halkano bites his lip softly, \"Hmm, I guess I’m not really used ta talking dis much, nobody really talks ta me besides my wife anyway.\" He gives you a firm pat on the shoulder, \"Good talk, [name]. Bye.\"\n" +
                 "\n" +
@@ -209,14 +206,7 @@ public class Halkano extends TrollVillageAbstractContent{
                 "\n" +
                 "Eventually, Halkano breaks the kiss from his son, turning his attention back to you. He grabs the back of your head, forcefully pulling you over his cock, bobbing your head up and down his length for you. Zenji doesn’t give you a break either, gripping onto your hips tighter, pulling you closer to him with each powerful thrust.\n" +
                 "\n" +
-                "You can’t take it anymore, you can feel your orgasm hit like electricity through your body. You clamp your ass around Zenji’s girth and desperately suck onto Halkano’s throbbing erection. ");
-        if (player.hasCock()) {
-            outputText("Your dick shoots several ropes of cum onto the ground beneath you.")
-        }
-        if (player.hasVagina()){
-            outputText(" Your vagina joins in on the fun as well, girlcum dripping down past your lips.")
-        }
-        outputText("You moan in pleasure as you can feel both of their dicks pulsate within you, ready to cum as well.\n" +
+                "You can’t take it anymore, you can feel your orgasm hit like electricity through your body. You clamp your ass around Zenji’s girth and desperately suck onto Halkano’s throbbing erection. [(pc has penis) Your dick shoots several ropes of cum onto the ground beneath you.] [(pc has vagina) Your vagina joins in on the fun as well, girlcum dripping down past your lips.] You moan in pleasure as you can feel both of their dicks pulsate within you, ready to cum as well.\n" +
                 "\n" +
                 "Halkano is first to reach his climax. He howls loudly, growling with his deep, gravelly voice as waves of cum are poured directly down your throat. The warmth of his seed fills your stomach like soft, warm love. You gag slightly, coughing up a little cum as it’s just too much for you to swallow in a single breath. His grip on your head loosens as he holds onto you gently.\n" +
                 "\n" +
@@ -235,8 +225,6 @@ public class Halkano extends TrollVillageAbstractContent{
                 "Halkano chuckles to himself, \"I’ll leave an extra tip fa de waitress for de mess.\"\n" +
                 "\n" +
                 "Zenji carries you home to help you clean up, making sure that nothing is forgotten at the diner before leaving.\n");
-        player.refillHunger(100);
-        statScreenRefresh();
         doNext(camp.returnToCampUseOneHour);
     }
 
@@ -273,11 +261,8 @@ public class Halkano extends TrollVillageAbstractContent{
                 "Once the two of you are inside he sheepishly removes his pants, unveiling all 14 inches of his uncut, meaty troll girth. It’s about 2 and a half inches wide as well.\n" +
                 "\n" +
                 "\"I’ve… I’ve neva done dis wit anyone else but my wife before… What makes you tink I’m so special..?\"\n" +
-                "\n");
-                if (!player.isNaked()){
-                    outputText("\"You begin to undress, making sure that nothing is concealed from him.");
-                }
-                outputText("You tell him that a handsome lad such as himself deserves some appreciation and you wanted to be able to show you how much you appreciate his presence. [(pc has clothes) Your clothes fall to the floor with a soft thud.] You approach him with a coy smile, encroaching on his personal space.\n" +
+                "\n" +
+                "[(pc has clothes) You begin to undress, making sure that nothing is concealed from him.] You tell him that a handsome lad such as himself deserves some appreciation and you wanted to be able to show you how much you appreciate his presence. [(pc has clothes) Your clothes fall to the floor with a soft thud.] You approach him with a coy smile, encroaching on his personal space.\n" +
                 "\n" +
                 "Halkano blushes, still nervous. \"Well…\"\n" +
                 "\n" +
@@ -322,8 +307,6 @@ public class Halkano extends TrollVillageAbstractContent{
                     "He gently pats the top of your head, \"Dat… Dat was really good, [name]... I… Uh, tanks… You really should leave now though…\"\n" +
                     "\n" +
                     "You pack up your things and leave following his wishes, but not before he gives you a brief hug in his warm embrace.\n");
-            player.refillHunger(100);
-            statScreenRefresh();
             doNext(camp.returnToCampUseOneHour);
         }
 
