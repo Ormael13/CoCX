@@ -82,7 +82,7 @@ use namespace CoC;
                 callNext = inventoryCombatHandler; //Player will return to combat after item use
 			}
 			else {
-				spriteSelect(-1);
+				spriteSelect(null);
 				callNext = inventoryMenu; //In camp or in a dungeon player will return to inventory menu after item use
 			}
 			hideMenus();
@@ -215,7 +215,7 @@ use namespace CoC;
 				callNext = inventoryCombatHandler; //Player will return to combat after item use
 			}
 			else {
-				spriteSelect(-1);
+				spriteSelect(null);
 				callNext = inventoryMenu; //In camp or in a dungeon player will return to inventory menu after item use
 			}
 			hideMenus();
@@ -483,7 +483,7 @@ use namespace CoC;
 
 		public function BagOfCosmosMenu():void {
 			hideMenus();
-			spriteSelect(-1);
+			spriteSelect(null);
 			menu();
 			addButton(0, "Bag Store", pickItemToPlaceInBagOfCosmos);
 			addButton(1, "Bag Take", pickItemToTakeFromBagOfCosmos);
@@ -492,7 +492,7 @@ use namespace CoC;
 
 		public function SkyPoisonPearlMenu():void {
 			hideMenus();
-			spriteSelect(-1);
+			spriteSelect(null);
 			menu();
 			addButton(0, "Pearl Store 1", pickItemToPlaceInSkyPoisonPearl5).hint("Store item in Sky Poison Pearl (central section).");
 			addButton(5, "Pearl Take 1", pickItemToTakeFromSkyPoisonPearl5).hint("Take item from Sky Poison Pearl (central section).");
@@ -524,7 +524,7 @@ use namespace CoC;
 			//REMOVE THE ABOVE BEFORE RELASE ()
 			hideMenus();
 			clearOutput();
-			spriteSelect(-1);
+			spriteSelect(null);
 			menu();
 
 			if (player.hasKeyItem("Camp - Chest") >= 0 || player.hasKeyItem("Camp - Murky Chest") >= 0 || player.hasKeyItem("Camp - Ornate Chest") >= 0) {
@@ -592,7 +592,7 @@ use namespace CoC;
 		public function warehouse():void {
 			hideMenus();
 			clearOutput();
-			spriteSelect(-1);
+			spriteSelect(null);
 			menu();
 			outputText("You stand inside your warehouse");
 			if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 2) outputText(" looking at the goods stored inside.");

@@ -287,12 +287,12 @@ public static const UNKNOWN_FLAG_NUMBER_00278:int                               
 public static const UNKNOWN_FLAG_NUMBER_00279:int                                   =  279; // LOTTIE FIGURE (HIGHER = SLIMMER)
 public static const UNKNOWN_FLAG_NUMBER_00280:int                                   =  280; // LOTTIE CONFIDENCE (HIGHER = AWESOMER)
 public static const UNKNOWN_FLAG_NUMBER_00281:int                                   =  281; // TIMES ENCOUNTERED LOTTIE
-public static const UNKNOWN_FLAG_NUMBER_00282:int                                   =  282; // Sophie Bimbo Follower?
-public static const UNKNOWN_FLAG_NUMBER_00283:int                                   =  283; // Sophie Disabled Forever
+public static const SOPHIE_BIMBO_ACCEPTED:int                                   =  282; // Sophie Bimbo Follower?
+public static const SOPHIE_DISABLED:int                                   =  283; // Sophie Disabled Forever
 public static const TIMES_SOPHIE_HAS_DRUNK_OVI_ELIXIR:int                           =  284; // Has Ovi Event Procced?
 public static const UNKNOWN_FLAG_NUMBER_00285:int                                   =  285; // Luststick Resistance builder - decrements by 1 every day, incremented by 1 for every 2 hours of luststick
-public static const UNKNOWN_FLAG_NUMBER_00286:int                                   =  286; // Have Ceraph's belly-button piercing
-public static const UNKNOWN_FLAG_NUMBER_00287:int                                   =  287; // Carrying Careph's token?
+public static const CERAPH_FOLLOWER_PIERCING:int                                   =  286; // Have Ceraph's belly-button piercing
+public static const CERAPH_FOLLOWER_CARRY:int                                   =  287; // Carrying Careph's token?
 public static const CERAPH_HIDING_DICK:int                                          =  288; // Ceraph Cock Hidden (1 = yes, 0 = cock floppin') - Ceraph's Demon Dong status 0=Visible, 1=Not visible
 public static const UNKNOWN_FLAG_NUMBER_00289:int                                   =  289; // Times Ceraph Licked You Out
 public static const UNKNOWN_FLAG_NUMBER_00290:int                                   =  290; // Punished Ceraph?
@@ -2981,7 +2981,7 @@ public static const INTELLIGENCE_SCALING:int                                   	
 public static const NO_GORE_MODE:int                                   				= 2973;
 public static const SPARRABLE_NPCS_TRAINING:int                                     = 2974;
 public static const STAT_GAIN_MODE:int                                              = 2975;
-public static const UNKNOWN_FLAG_NUMBER_02976:int                                   = 2976;
+public static const CHARVIEW_ARMOR_HIDDEN:int                                              = 2976; // Toogles armor display
 public static const CHARVIEW_STYLE:int                                              = 2977; // 0 for in text, 1 for sidebar, 2 for sidebar always visible
 public static const CHARVIEWER_ENABLED:int                                          = 2978;
 public static const NEW_GAME_PLUS_LEVEL:int                                         = 2979; // Current intensity of New Game+. Each ascension increments this counter by 1.

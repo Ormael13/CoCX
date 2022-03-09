@@ -3,6 +3,7 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 public class Cotton extends TelAdreAbstractContent implements TimeAwareInterface {
 
@@ -115,7 +116,7 @@ public function cottonsIntro():Boolean {
 }
 
 public function cottonGreeting():void {
-	spriteSelect(12);
+	spriteSelect(SpriteDb.s_cotton);
 	clearOutput();
 	outputText(images.showImage("cotton-greeting"));
 	if(flags[kFLAGS.LIFETIME_GYM_MEMBER] == 0) outputText("The centauress sees you starting for the horse-girl and says, \"<i>Go ahead and talk, but if you want to work out with her I'll have to charge you.</i>\"\n\n");
@@ -201,7 +202,7 @@ private function cottonMenu():void {
 
 
 private function centaurNagaBodyBookStuff():void {
-	spriteSelect(12);
+	spriteSelect(SpriteDb.s_cotton);
 	//Havent been told about the book yet?
 	if(flags[kFLAGS.COTTON_UNUSUAL_YOGA_BOOK_TRACKER] == 0) {
 		outputText("\"<i>I'd love to teach you, but I'm afraid I don't know any good routines for your... body type. Sorry, pet...</i>\" she trails off, as if considering something, and then turns back to you, saying, \"<i>Actually, I think I might know where you could find a book of exercises that would work for you. A traveling salesman came by once, and I saw it in his wares, a book of advanced yoga techniques, aimed at the more exotically shaped denizens of Mareth. I didn't pick it up, of course, because I didn't need it. But if you could find the salesman and bring the book back to me, I'd most definitely be able to coach you.</i>\"");
@@ -235,7 +236,7 @@ private function centaurNagaBodyBookStuff():void {
 
 //(If No)
 private function turnDownYogaWifCottonFirstTime():void {
-	spriteSelect(12);
+	spriteSelect(SpriteDb.s_cotton);
 	clearOutput();
 	outputText("\"<i>That's all right, to each their own.  I'll be here if you ever change your mind.</i>\"  With that, Cotton returns to her mat and continues stretching in various poses.\n\n");
 	doNext(camp.returnToCampUseOneHour);
@@ -243,7 +244,7 @@ private function turnDownYogaWifCottonFirstTime():void {
 
 //(If Yes. Improves muscle tone up to 50, speed and feminine features.)
 private function acceptYoga():void {
-	spriteSelect(12);
+	spriteSelect(SpriteDb.s_cotton);
 	clearOutput();
 	outputText(images.showImage("cotton-yoga"));
 	var fuckHer:Function =null;
@@ -346,7 +347,7 @@ private function acceptYoga():void {
 }
 
 private function cottonChat():void {
-	spriteSelect(12);
+	spriteSelect(SpriteDb.s_cotton);
 	var chats:Array = [];
 	//Urta chance
 	if(flags[kFLAGS.TIMES_FUCKED_URTA] > 0)
@@ -408,7 +409,7 @@ private function cottonChat():void {
 }
 //(If Leave)
 private function leaveAfterYoga():void {
-	spriteSelect(12);
+	spriteSelect(SpriteDb.s_cotton);
 	clearOutput();
 	outputText("\"<i>Suit yourself. You can run around all stinky, meanwhile I'm going to go wash. Feel free to drop by later for some more yoga if you'd like.</i>\"  With that, Cotton heads off to the showers and you leave the gym.\n\n");
 	doNext(camp.returnToCampUseOneHour);
@@ -416,7 +417,7 @@ private function leaveAfterYoga():void {
 
 //(If Shower)
 private function cottonShowerFunTimes():void {
-	spriteSelect(12);
+	spriteSelect(SpriteDb.s_cotton);
 	var option1:Function =null;
 	var option2:Function =null;
 	clearOutput();
@@ -435,7 +436,7 @@ private function cottonShowerFunTimes():void {
 
 //(Fuck Her)
 private function cottonFirstTimeFuckHer():void {
-	spriteSelect(12);
+	spriteSelect(SpriteDb.s_cotton);
 	flags[kFLAGS.COTTON_MET_FUCKED] = 2;
 	clearOutput();
 	outputText(images.showImage("cotton-first-fuck"));
@@ -461,7 +462,7 @@ private function cottonFirstTimeFuckHer():void {
 }
 //(Get fucked, as Male)
 private function cottonFucksYou():void {
-	spriteSelect(12);
+	spriteSelect(SpriteDb.s_cotton);
 	flags[kFLAGS.COTTON_MET_FUCKED] = 2;
 	clearOutput();
 	outputText(images.showImage("cotton-fucks-you"));
@@ -539,7 +540,7 @@ private function cottonFucksYou():void {
 }
 //(Service her, any gender)
 private function serviceFirstTimeCotton():void {
-	spriteSelect(12);
+	spriteSelect(SpriteDb.s_cotton);
 	flags[kFLAGS.COTTON_MET_FUCKED] = 2;
 	player.slimeFeed();
 	clearOutput();
@@ -562,7 +563,7 @@ private function serviceFirstTimeCotton():void {
 }
 //(If Refuse)
 private function refuseFirstTimeCotton():void {
-	spriteSelect(12);
+	spriteSelect(SpriteDb.s_cotton);
 	clearOutput();
 	outputText("She looks at you a little sad, \"<i>You certain pet? Well, all right. But you don't know what you're missing.</i>\" The two of you continue your shower with no funny business, then redress and leave the gym. Cotton stops you before you go too far and says, \"<i>Hey, if you want to stop by the gym later for some more yoga, I'd be happy to help.</i>\" Then she heads off down the street, and you head back to camp.");
 	doNext(camp.returnToCampUseOneHour);
@@ -571,7 +572,7 @@ private function refuseFirstTimeCotton():void {
 //(Shower Sex, Fuck Her)
 private function fuckCottonInShowerRepeat():void {
 	flags[kFLAGS.COTTON_MET_FUCKED] = 2;
-	spriteSelect(12);
+	spriteSelect(SpriteDb.s_cotton);
 	clearOutput();
 	outputText(images.showImage("cotton-shower-fuck-repeat"));
 	var x:Number = player.cockThatFits(60);
@@ -826,7 +827,7 @@ private function fuckCottonInShowerRepeat():void {
 
 //(Shower Sex, Get Fucked as Male or Herm)
 private function cottonFucksYouInShowerRepeat():void {
-	spriteSelect(12);
+	spriteSelect(SpriteDb.s_cotton);
 	player.slimeFeed();
 	flags[kFLAGS.COTTON_MET_FUCKED] = 2;
 	clearOutput();
@@ -996,7 +997,7 @@ private function cottonFucksYouInShowerRepeat():void {
 
 //(Tantric Sex)
 public function cottonTantricSex():void {
-	spriteSelect(12);
+	spriteSelect(SpriteDb.s_cotton);
 	clearOutput();
 	outputText(images.showImage("cotton-tantric-sex"));
 	player.slimeFeed();
@@ -1098,7 +1099,7 @@ public function cottonTantricSex():void {
 
 //(Leave)
 private function leaveCotton():void {
-	spriteSelect(12);
+	spriteSelect(SpriteDb.s_cotton);
 	clearOutput();
 	outputText("You thank Cotton for her time, shower and head back to camp.");
 	doNext(camp.returnToCampUseOneHour);
@@ -1110,7 +1111,7 @@ private function leaveCotton():void {
 //drink from a lactating character. Character must still be
 //lactating.)
 public function nomSomeTitMilkCereal():void {
-	spriteSelect(12);
+	spriteSelect(SpriteDb.s_cotton);
 	outputText(images.showImage("cotton-visits-you-at-camp-drinks-all-your-milk-the-asshole"));
 	//(Add to Sleep screen under the sunrise line.)
 	outputText("\nAs you awaken you hear a rustling from the bushes around your camp.\n\n");

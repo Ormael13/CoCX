@@ -9,6 +9,7 @@ import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
+import classes.display.SpriteDb;
 
 public class ErlKingScene extends BaseContent
 	{
@@ -169,6 +170,7 @@ public class ErlKingScene extends BaseContent
 		protected function firstWildHuntChase(waited:Boolean = false):void
 		{
 			clearOutput();
+			spriteSelect(SpriteDb.s_erlking_clothed);
 
 			if (waited == false)
 			{
@@ -243,6 +245,7 @@ public class ErlKingScene extends BaseContent
 		public function repeatWildHuntEncounter():void
 		{
 			clearOutput();
+			spriteSelect(SpriteDb.s_erlking_clothed);
 
 			outputText("As you wander through the Deepwoods, a familiar chilly fog begins to gather around your [feet], and in the distance, you hear the sound of a hunting horns and the baying of Hounds.\n\n");
 
@@ -349,6 +352,7 @@ public class ErlKingScene extends BaseContent
 
 		public function repeatWildHuntGivenToTheHounds():void
 		{
+			spriteSelect(SpriteDb.s_erlking_nude);
 			outputText("“<i>How disappointing,</i>” drips the refined voice of the Erlking.  His horse’s hooves thud softly on the ground as he walks below you.  The cane at his side clicks against the forest floor with every other step.  You have just enough wherewithal to understand his words as your fingers grip the net.\n\n");
 
 			outputText("“<i>This was but a few minutes’ diversion.  I had been hoping for more of a challenge,</i>” he says, the red glow in his eyes dimming.  “<i>You’re not particularly good at this, are you?</i>” he says, sighing.  His long face looks almost wistful.\n\n");
@@ -412,6 +416,7 @@ public class ErlKingScene extends BaseContent
 
 		protected function repeatWildHuntAWinnerIsYou():void
 		{
+			spriteSelect(SpriteDb.s_erlking_clothed);
 			outputText("Spirited clapping fills the woods.  The Hounds fall silent, sitting obediently on their haunches as the Erlking walks into the clearing, dismounting and looking up at you.\n\n");
 
 			outputText("“<i>A spirited chase,</i>” he says, his black-gloved hands still chipping a sharp staccato through the cold air.  “<i>I have not had such fun in ages.</i>” The clearing is awash with a dim glow - it seems the Erlking’s golden antlers are lit with their own inner fire.\n\n");
@@ -490,6 +495,7 @@ public class ErlKingScene extends BaseContent
 		{
 			//[Bad End]
 			clearOutput();
+			spriteSelect(SpriteDb.s_erlking_nude);
 
 			outputText("You sit there, shivering, unable to shake off the effects of the fog, looking up in utter fear at the huntsman who has pursued you for so long.\n\n");
 
@@ -589,6 +595,7 @@ public class ErlKingScene extends BaseContent
 		protected function predatoryPrey():void
 		{
 			clearOutput();
+			spriteSelect(SpriteDb.s_erlking_nude);
 
 			outputText("You stand, unable to take your eyes from the Erlking’s slim body and erect dick.\n\n");
 
@@ -698,6 +705,7 @@ public class ErlKingScene extends BaseContent
 		protected function howDareYou():void
 		{
 			clearOutput();
+			spriteSelect(SpriteDb.s_erlking_nude);
 
 			//[ends the Hunt permanently, Opens Princess Option]
 			outputText("You’ve had more than enough of the Erlking and his insane hunt.  You rise to your [feet], slapping away his outstretched hand.  He frowns, but before he can react, you’ve charged forward and knocked the black wood cane out of his hand.  It spins off into the undergrowth, out of sight.  The light in his eyes dims, as does the glow from his antlers.\n\n");
@@ -783,6 +791,7 @@ public class ErlKingScene extends BaseContent
 		protected function encounterPrincessGwynn():void
 		{
 			clearOutput();
+			spriteSelect(SpriteDb.s_erlking_clothed);
 
 			outputText("As you wander through the Deepwoods, you hear a rustling in the bushes.  You turn to see a flash of pink between the trees.  A slim, graceful figure steps out from behind a tree, wearing a dark green cloak and a small, leather shoulder bag.  It takes you a moment to recognize the Princess, the once-Erlking.  Her deer-like face and large, doe eyes peer timidly at you.\n\n");
 
@@ -835,6 +844,7 @@ public class ErlKingScene extends BaseContent
 		protected function gwynnSucksDicks():void
 		{
 			clearOutput();
+			spriteSelect(SpriteDb.s_erlking_nude);
 			outputText("“<i>Yes, of course, M’Lord!</i>” Gwynn burbles, happily, dropping down to her knees.  In an instant, your [cock] is in her wet mouth.  Her time in the woods has developed her skill as she moans around your [cock], slurping wetly at it.\n\n");
 
 			outputText("Her slim tongue rubs against the underside of your shaft, massaging it in time to the bobbing of her head.  Her index finger and thumb form a slim O at the base of your dick, pumping it counter to her head bobs, giving you continuous stimulation as she hums.\n\n");
@@ -860,6 +870,7 @@ public class ErlKingScene extends BaseContent
 		protected function gwynnGetsButtfuxed():void
 		{
 			clearOutput();
+			spriteSelect(SpriteDb.s_erlking_nude);
 
 			outputText("“<i>At once, M’Lord!</i>” she says, clapping her hands excitedly.  She bounces up in the air, then bounds low to the ground, pulling a small bottle from her purse, and dumping a liberal amount of raspberry-scented lube on your cock.  She works it in, her slim fingers massaging your cock to full attention before she hops around.\n\n");
 
@@ -886,6 +897,7 @@ public class ErlKingScene extends BaseContent
 		protected function gwynnNomsDaCunts():void
 		{
 			clearOutput();
+			spriteSelect(SpriteDb.s_erlking_nude);
 
 			outputText("“<i>Yes Ma’am,</i>” she says, licking her lips.  She points to a nearby stump, gesturing for you to have a seat on the soft moss.  As you do, she wastes no time in dropping her pink muzzle to your pussy.  \n\n");
 
@@ -912,6 +924,7 @@ public class ErlKingScene extends BaseContent
 		protected function gwynnGetsDickmilked():void
 		{
 			clearOutput();
+			spriteSelect(SpriteDb.s_erlking_nude);
 
 			outputText("“<i>My Lord, are you sure?</i>” she says, tilting her head to the side.\n\n");
 

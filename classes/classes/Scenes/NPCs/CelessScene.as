@@ -697,7 +697,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			"You moan in delight as she fucks you up to the cervix for several minutes, your belly bulging due to the sheer size of her cock. Your eyes roll back as her cock drives your pussy completely crazy");
 		}
 		outputText("\n\n<i>\"Ahhhh! I can’t hold it anymore!\"</i>\n\n"+
-		"A huge volume of cum shoots into you, filling your womb until it’s full enough to make" + (player.isTaur()?"your lower body":"you")+"look pregnant already. "+
+		"A huge volume of cum shoots into you, filling your womb until it’s full enough to make " + (player.isTaur()?"your lower body":"you")+" look pregnant already. "+
 		"You feel her removing her cock from your pussy as you "+ (player.isTaur()?"lie down on the ground to rest exhausted by the experience.":"pass out on the grass exhausted by the experience."));
 		outputText("When you wake up you are no longer in the grove. "+
 		"It would seem that the unicorn moved you to the forest’s edge. "+

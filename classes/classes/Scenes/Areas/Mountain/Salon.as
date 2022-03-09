@@ -2,6 +2,7 @@
 import classes.*;
 	import classes.BodyParts.Hair;
 	import classes.GlobalFlags.kFLAGS;
+    import classes.display.SpriteDb;
 
 public class Salon extends BaseContent implements TimeAwareInterface {
 
@@ -101,7 +102,7 @@ private function salonPaymentMenu():void {
 
 public function salonPurchaseMenu():void {
 	flags[kFLAGS.SALON_PAID] = 1;
-	spriteSelect(38);
+	spriteSelect(SpriteDb.s_lynette);
 	var mudFacialEnabled:Boolean = false;
 	var sandFacialEnabled:Boolean = false;
 	//Enable mud facial
@@ -133,7 +134,7 @@ public function salonPurchaseMenu():void {
 }
 
 private function hairDresserGreeting():void {
-	spriteSelect(38);
+	spriteSelect(SpriteDb.s_lynette);
 	clearOutput();
 	outputText(images.showImage("location-salon"));
 	outputText("You step inside the cave, and are greeted by a sight you did not expect.  The cave's floor is covered with smooth wood panelling and the walls are nearly entirely covered with hanging mirrors.  The few stalactites have hooks drilled into them, from which hang hundreds of scissors, shears, razors, combs, and other hairstyling impliments.  It reminds you of the hair-cutter's shop in your hometown.");
@@ -151,7 +152,7 @@ private function hairDresserGreeting():void {
 }
 private function hairDresserRepeatGreeting():void {
 	clearOutput();
-	spriteSelect(38);
+	spriteSelect(SpriteDb.s_lynette);
 	outputText(images.showImage("location-salon"));
 	var minoCum:Number = 0;
 	//Chance for mino craziness here
@@ -329,7 +330,7 @@ private function gloryholeMinotaur(): void {
 
 private function goblinHairDresserFacefuck():void {
 	clearOutput();
-	spriteSelect(38);
+	spriteSelect(SpriteDb.s_lynette);
 	outputText(images.showImage("lynnette-blowjob"));
 	outputText("Lynnette licks her lips and practically tears her way into your [armor], having your crotch exposed in seconds.  Your [cock] flops out immediately, slapping her on the nose as it grows hard.  She wraps both hands around you and begins pumping with practiced ease, flicking her tongue over your crown and wrapping her lips ");
 	if(player.cocks[0].cockThickness >= 4) outputText("around as much of you as she can");
@@ -343,7 +344,7 @@ private function goblinHairDresserFacefuck():void {
 	hairDressingMainMenu();
 }
 private function hairDressingMainMenu():void {
-	spriteSelect(38);
+	spriteSelect(SpriteDb.s_lynette);
 	outputText("Lynnette offers and explains their options, \"<i>So what'll it be hun?  We could cut it down or give you a lengthening treatment. Or you can get a hair-dye to use on your own.  Just remember to come back in a few days for a touchup.</i>\"");
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00142] > 0) {
 		outputText("\n\nOf course you could always spend some gems and buy some minotaur cum instead...");
@@ -352,7 +353,7 @@ private function hairDressingMainMenu():void {
 }
 
 private function cutShort():void {
-	spriteSelect(38);
+	spriteSelect(SpriteDb.s_lynette);
 	//-trying to get a goblin to cut tentacle hair:
 	if(player.hairType == 4 || player.hairType == 6) {
 		outputText("Lynnette stares at you when you ask for a cut.  \"<i>Nothing doing, hon; that stuff looks alive and I don't want blood all over my nice floor.  Thanks for contributing to the white file, though; maybe we can do something else?</i>\"\n\n");
@@ -366,7 +367,7 @@ private function cutShort():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 private function cutMedium():void {
-	spriteSelect(38);
+	spriteSelect(SpriteDb.s_lynette);
 	//-trying to get a goblin to cut tentacle hair:
 	if(player.hairType == 4 || player.hairType == 6) {
 		outputText("Lynnette stares at you when you ask for a cut.  \"<i>Nothing doing, hon; that stuff looks alive and I don't want blood all over my nice floor.  Thanks for contributing to the white file, though; maybe we can do something else?</i>\"\n\n");
@@ -380,7 +381,7 @@ private function cutMedium():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 private function cutLong():void {
-	spriteSelect(38);
+	spriteSelect(SpriteDb.s_lynette);
 	//-trying to get a goblin to cut tentacle hair:
 	if(player.hairType == 4 || player.hairType == 6) {
 		outputText("Lynnette stares at you when you ask for a cut.  \"<i>Nothing doing, hon; that stuff looks alive and I don't want blood all over my nice floor.  Thanks for the contributing to the white file, though; maybe we can do something else?</i>\"\n\n");
@@ -394,7 +395,7 @@ private function cutLong():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 private function hairGrow():void {
-	spriteSelect(38);
+	spriteSelect(SpriteDb.s_lynette);
 	//-asking for a lengthening treatment with tentacle hair:
 	if(player.hairType == Hair.ANEMONE || player.hairType == Hair.GORGON) {
 		outputText("Lynnette looks dubiously at you when you ask for a lengthening treatment.  \"<i>No offense hon, but that stuff is basically like an arm or an organ, not hair.  I'm not a goblin chirurgeon, and I wouldn't try to lengthen it even if one of my disobedient daughters were here to donate some parts.  Sorry to make you shoot and scoot, but I can't help you.  Maybe we could do something else?</i>\"\n\n");
@@ -425,7 +426,7 @@ private function removeHair():void {
 		}
 
 private function dyeMenu():void {
-	spriteSelect(38);
+	spriteSelect(SpriteDb.s_lynette);
 	clearOutput();
 	outputText("Lynnette pulls open a cabinet in the corner, displaying a wide array of exotic hair-dyes.  Which kind do you want?");
 	menu();
@@ -639,7 +640,7 @@ private function minotaurCumBukkakeInSalon():void {
 	doNext(minotaurSalonFollowUp);
 }
 private function minotaurSalonFollowUp():void {
-	spriteSelect(38);
+	spriteSelect(SpriteDb.s_lynette);
 	clearOutput();
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00142] == 0) {
 		//Unlock mino cum purchase
@@ -656,7 +657,7 @@ private function minotaurSalonFollowUp():void {
 }
 
 private function mudFacial():void {
-	spriteSelect(38);
+	spriteSelect(SpriteDb.s_lynette);
 	clearOutput();
 	outputText("You sit back in a comfortable chair and pull on a lever to recline it.  The goblins buzz around you, gathering up 'special mud'.  You close your eyes, letting them plaster your [face] with the stuff in hopes that it will improve your complexion as much as you've been promised.  A pair of cucumber slices are laid out on your eyes, obscuring your view.\n\n");
 
@@ -666,7 +667,7 @@ private function mudFacial():void {
 }
 
 private function sandFacial():void {
-	spriteSelect(38);
+	spriteSelect(SpriteDb.s_lynette);
 	clearOutput();
 	outputText("You sit back in a comfortable chair and pull on a lever to recline it.  The goblins buzz around you, gathering up 'special sand'.  You close your eyes, letting them splatter your [face] with the rough, textured goop.  It doesn't feel very good, but that won't matter if it makes you as handsome as it's supposed to.\n\n");
 

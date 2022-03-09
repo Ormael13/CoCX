@@ -1,8 +1,9 @@
 ﻿package classes.Scenes.Places.TelAdre {
-	import classes.*;
-	import classes.GlobalFlags.kFLAGS;
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.display.SpriteDb;
 
-	public class Heckel extends TelAdreAbstractContent {
+public class Heckel extends TelAdreAbstractContent {
 public function Heckel(){
 
 }
@@ -30,6 +31,7 @@ public function heckelAppearance():void {
 //Greeting scene:
 public function greetHeckel():void {
 	clearOutput();
+	spriteSelect(SpriteDb.s_heckel);
 	if(flags[kFLAGS.MET_HECKEL] == 0) {
 		outputText("As you approach the edge of the track, the hyena comes around the bend towards you.  Her fur is a light brown mottled with spots of dark brown and black, with a thicker and longer black mane passing for hair.  You get a good view of her B-cup breasts bouncing inside her shirt, black workout bra straps sticking out on her shoulders.  She has simple black shorts on that hug her firm ass, and you can't help but admire her toned legs as they move beneath her.  As she stops running and turns toward you, you see something else entirely bouncing around in her groin.  Her body reminds you of a coiled spring, too much power and tension in too small a frame.\n\n");
 
@@ -72,6 +74,8 @@ private function heckelTraining():void {
 		doNext(telAdre.gymDesc);
 		return;
 	}
+    //Sex!
+	spriteSelect(SpriteDb.s_heckel_nude);
 	if(flags[kFLAGS.TIMES_FUCKED_HECKEL_BLOWJOB] + flags[kFLAGS.TIMES_FUCKED_HECKEL_ANAL] == 0) {
 		outputText("You tell Heckel that you're looking for a training partner, and she makes no attempt to hide her gaze as she looks you up and down.  When she's finished, her unsettling grin returns.  \"<i>Excellent!  Let me just get cleaned up and we'll start with some stretches.</i>\"\n\n");
 

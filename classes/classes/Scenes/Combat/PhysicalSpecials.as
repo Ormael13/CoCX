@@ -715,6 +715,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage = Math.round(damage * combat.darknessDamageBoostedByDao());
 			doDarknessDamage(damage, true, true);
 		}
+		else if (player.weapon == weapons.MGSWORD) doMagicDamage(damage, true, true);
 		else {
 			damage = Math.round(damage);
 			doDamage(damage, true, true);
@@ -5511,36 +5512,46 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.weaponRangeName == "Wild Hunt" && player.level > monster.level) damage *= 1.2;
 			if (player.weaponRangeName == "Hodr's bow" && monster.hasStatusEffect(StatusEffects.Blind)) damage *= 1.1;
 			if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1) {
-				damage += player.inte * 0.2;
-				if (player.inte >= 50) damage += player.inte * 0.1;
-				if (player.inte >= 100) damage += player.inte * 0.1;
-				if (player.inte >= 150) damage += player.inte * 0.1;
-				if (player.inte >= 200) damage += player.inte * 0.1;
+				damage += Math.round(player.inte * 0.1);
+                if (player.inte >= 50) damage += Math.round(player.inte * ((player.inte / 50) * 0.05));
+				if (player.weaponRangeName == "Artemis") damage *= 1.5;
 				damage = Math.round(damage * combat.fireDamageBoostedByDao());
 			}
 			if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) {
-				damage += player.inte * 0.2;
-				if (player.inte >= 50) damage += player.inte * 0.1;
-				if (player.inte >= 100) damage += player.inte * 0.1;
-				if (player.inte >= 150) damage += player.inte * 0.1;
-				if (player.inte >= 200) damage += player.inte * 0.1;
+				damage += Math.round(player.inte * 0.1);
+                if (player.inte >= 50) damage += Math.round(player.inte * ((player.inte / 50) * 0.05));
+				if (player.weaponRangeName == "Artemis") damage *= 1.5;
 				damage = Math.round(damage * combat.iceDamageBoostedByDao());
 			}
 			if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) {
-				damage += player.inte * 0.2;
-				if (player.inte >= 50) damage += player.inte * 0.1;
-				if (player.inte >= 100) damage += player.inte * 0.1;
-				if (player.inte >= 150) damage += player.inte * 0.1;
-				if (player.inte >= 200) damage += player.inte * 0.1;
+				damage += Math.round(player.inte * 0.1);
+                if (player.inte >= 50) damage += Math.round(player.inte * ((player.inte / 50) * 0.05));
+				if (player.weaponRangeName == "Artemis") damage *= 1.5;
 				damage = Math.round(damage * combat.lightningDamageBoostedByDao());
 			}
 			if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) {
-				damage += player.inte * 0.2;
-				if (player.inte >= 50) damage += player.inte * 0.1;
-				if (player.inte >= 100) damage += player.inte * 0.1;
-				if (player.inte >= 150) damage += player.inte * 0.1;
-				if (player.inte >= 200) damage += player.inte * 0.1;
+				damage += Math.round(player.inte * 0.1);
+                if (player.inte >= 50) damage += Math.round(player.inte * ((player.inte / 50) * 0.05));
+				if (player.weaponRangeName == "Artemis") damage *= 1.5;
 				damage = Math.round(damage * combat.darknessDamageBoostedByDao());
+			}
+			if (flags[kFLAGS.ELEMENTAL_ARROWS] == 5) {
+				damage += Math.round(player.inte * 0.1);
+                if (player.inte >= 50) damage += Math.round(player.inte * ((player.inte / 50) * 0.05));
+				if (player.weaponRangeName == "Artemis") damage *= 1.5;
+				damage = Math.round(damage * combat.waterDamageBoostedByDao());
+			}
+			if (flags[kFLAGS.ELEMENTAL_ARROWS] == 6) {
+				damage += Math.round(player.inte * 0.1);
+                if (player.inte >= 50) damage += Math.round(player.inte * ((player.inte / 50) * 0.05));
+				if (player.weaponRangeName == "Artemis") damage *= 1.5;
+				damage = Math.round(damage * combat.windDamageBoostedByDao());
+			}
+			if (flags[kFLAGS.ELEMENTAL_ARROWS] == 7) {
+				damage += Math.round(player.inte * 0.1);
+                if (player.inte >= 50) damage += Math.round(player.inte * ((player.inte / 50) * 0.05));
+				if (player.weaponRangeName == "Artemis") damage *= 1.5;
+				damage = Math.round(damage * combat.earthDamageBoostedByDao());
 			}
 			//Section for item damage modifiers
 			if (weaponRangePerk == "Bow"){
@@ -5558,6 +5569,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 				else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) doIceDamage(damage, true, true);
 				else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) doLightingDamage(damage, true, true);
 				else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) doDarknessDamage(damage, true, true);
+				else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 5) doWaterDamage(damage, true, true);
+				else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 6) doWindDamage(damage, true, true);
+				else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 7) doEarthDamage(damage, true, true);
 				else doDamage(damage, true, true);
 				if (crit) {
 					outputText(" <b>*Critical Hit!*</b>");
@@ -5581,6 +5595,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 					else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) doIceDamage(damage, true, true);
 					else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) doLightingDamage(damage, true, true);
 					else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) doDarknessDamage(damage, true, true);
+					else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 5) doWaterDamage(damage, true, true);
+					else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 6) doWindDamage(damage, true, true);
+					else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 7) doEarthDamage(damage, true, true);
 					else doDamage(damage, true, true);
 					if (crit) combat.archeryXP(1);
 					combat.archeryXP(1);
@@ -5812,36 +5829,46 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 		}
 		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1) {
-			damage += player.inte * 0.2;
-			if (player.inte >= 50) damage += player.inte * 0.1;
-			if (player.inte >= 100) damage += player.inte * 0.1;
-			if (player.inte >= 150) damage += player.inte * 0.1;
-			if (player.inte >= 200) damage += player.inte * 0.1;
+			damage += Math.round(player.inte * 0.1);
+            if (player.inte >= 50) damage += Math.round(player.inte * ((player.inte / 50) * 0.05));
+			if (player.weaponRangeName == "Artemis") damage *= 1.5;
 			damage = Math.round(damage * combat.fireDamageBoostedByDao());
 		}
 		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) {
-			damage += player.inte * 0.2;
-			if (player.inte >= 50) damage += player.inte * 0.1;
-			if (player.inte >= 100) damage += player.inte * 0.1;
-			if (player.inte >= 150) damage += player.inte * 0.1;
-			if (player.inte >= 200) damage += player.inte * 0.1;
+			damage += Math.round(player.inte * 0.1);
+            if (player.inte >= 50) damage += Math.round(player.inte * ((player.inte / 50) * 0.05));
+			if (player.weaponRangeName == "Artemis") damage *= 1.5;
 			damage = Math.round(damage * combat.iceDamageBoostedByDao());
 		}
 		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) {
-			damage += player.inte * 0.2;
-			if (player.inte >= 50) damage += player.inte * 0.1;
-			if (player.inte >= 100) damage += player.inte * 0.1;
-			if (player.inte >= 150) damage += player.inte * 0.1;
-			if (player.inte >= 200) damage += player.inte * 0.1;
+			damage += Math.round(player.inte * 0.1);
+            if (player.inte >= 50) damage += Math.round(player.inte * ((player.inte / 50) * 0.05));
+			if (player.weaponRangeName == "Artemis") damage *= 1.5;
 			damage = Math.round(damage * combat.lightningDamageBoostedByDao());
 		}
 		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) {
-			damage += player.inte * 0.2;
-			if (player.inte >= 50) damage += player.inte * 0.1;
-			if (player.inte >= 100) damage += player.inte * 0.1;
-			if (player.inte >= 150) damage += player.inte * 0.1;
-			if (player.inte >= 200) damage += player.inte * 0.1;
+			damage += Math.round(player.inte * 0.1);
+            if (player.inte >= 50) damage += Math.round(player.inte * ((player.inte / 50) * 0.05));
+			if (player.weaponRangeName == "Artemis") damage *= 1.5;
 			damage = Math.round(damage * combat.darknessDamageBoostedByDao());
+		}
+		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 5) {
+			damage += Math.round(player.inte * 0.1);
+            if (player.inte >= 50) damage += Math.round(player.inte * ((player.inte / 50) * 0.05));
+			if (player.weaponRangeName == "Artemis") damage *= 1.5;
+			damage = Math.round(damage * combat.waterDamageBoostedByDao());
+		}
+		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 6) {
+			damage += Math.round(player.inte * 0.1);
+            if (player.inte >= 50) damage += Math.round(player.inte * ((player.inte / 50) * 0.05));
+			if (player.weaponRangeName == "Artemis") damage *= 1.5;
+			damage = Math.round(damage * combat.windDamageBoostedByDao());
+		}
+		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 7) {
+			damage += Math.round(player.inte * 0.1);
+            if (player.inte >= 50) damage += Math.round(player.inte * ((player.inte / 50) * 0.05));
+			if (player.weaponRangeName == "Artemis") damage *= 1.5;
+			damage = Math.round(damage * combat.earthDamageBoostedByDao());
 		}
 		damage *= combat.rangePhysicalForce();
 		//Determine if critical hit!
@@ -5864,6 +5891,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) doIceDamage(damage, true, true);
 		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) doLightingDamage(damage, true, true);
 		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) doDarknessDamage(damage, true, true);
+		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 5) doWaterDamage(damage, true, true);
+		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 6) doWindDamage(damage, true, true);
+		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 7) doEarthDamage(damage, true, true);
 		else doDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		if (flags[kFLAGS.CUPID_ARROWS] == 1) {
@@ -6005,6 +6035,18 @@ public class PhysicalSpecials extends BaseCombatContent {
 			damage = Math.round(damage * combat.darknessDamageBoostedByDao());
 			doDarknessDamage(damage, true, true);
 		}
+		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 5) {
+			damage = Math.round(damage * combat.waterDamageBoostedByDao());
+			doWaterDamage(damage, true, true);
+		}
+		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 6) {
+			damage = Math.round(damage * combat.windDamageBoostedByDao());
+			doWindDamage(damage, true, true);
+		}
+		else if (flags[kFLAGS.ELEMENTAL_ARROWS] == 7) {
+			damage = Math.round(damage * combat.earthDamageBoostedByDao());
+			doEarthDamage(damage, true, true);
+		}
 		else doDamage(damage, true, true);
 		if (crit) outputText(" <b>*Critical Hit!*</b>");
 		if (flags[kFLAGS.CUPID_ARROWS] == 1) {
@@ -6066,36 +6108,39 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 		}
 		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 1) {
-			dmgBarrage += player.inte * 0.2;
-			if (player.inte >= 50) dmgBarrage += player.inte * 0.1;
-			if (player.inte >= 100) dmgBarrage += player.inte * 0.1;
-			if (player.inte >= 150) dmgBarrage += player.inte * 0.1;
-			if (player.inte >= 200) dmgBarrage += player.inte * 0.1;
-			dmgBarrage = Math.round(dmgBarrage * combat.fireDamageBoostedByDao());
+			dmgBarrage += Math.round(player.inte * 0.1);
+            if (player.inte >= 50) dmgBarrage += Math.round(player.inte * ((player.inte / 50) * 0.05));
+			if (player.weaponRangeName == "Artemis") dmgBarrage *= 1.5;
 		}
 		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 2) {
-			dmgBarrage += player.inte * 0.2;
-			if (player.inte >= 50) dmgBarrage += player.inte * 0.1;
-			if (player.inte >= 100) dmgBarrage += player.inte * 0.1;
-			if (player.inte >= 150) dmgBarrage += player.inte * 0.1;
-			if (player.inte >= 200) dmgBarrage += player.inte * 0.1;
-			dmgBarrage = Math.round(dmgBarrage * combat.iceDamageBoostedByDao());
+			dmgBarrage += Math.round(player.inte * 0.1);
+            if (player.inte >= 50) dmgBarrage += Math.round(player.inte * ((player.inte / 50) * 0.05));
+			if (player.weaponRangeName == "Artemis") dmgBarrage *= 1.5;
 		}
 		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 3) {
-			dmgBarrage += player.inte * 0.2;
-			if (player.inte >= 50) dmgBarrage += player.inte * 0.1;
-			if (player.inte >= 100) dmgBarrage += player.inte * 0.1;
-			if (player.inte >= 150) dmgBarrage += player.inte * 0.1;
-			if (player.inte >= 200) dmgBarrage += player.inte * 0.1;
-			dmgBarrage = Math.round(dmgBarrage * combat.lightningDamageBoostedByDao());
+			dmgBarrage += Math.round(player.inte * 0.1);
+            if (player.inte >= 50) dmgBarrage += Math.round(player.inte * ((player.inte / 50) * 0.05));
+			if (player.weaponRangeName == "Artemis") dmgBarrage *= 1.5;
 		}
 		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 4) {
-			dmgBarrage += player.inte * 0.2;
-			if (player.inte >= 50) dmgBarrage += player.inte * 0.1;
-			if (player.inte >= 100) dmgBarrage += player.inte * 0.1;
-			if (player.inte >= 150) dmgBarrage += player.inte * 0.1;
-			if (player.inte >= 200) dmgBarrage += player.inte * 0.1;
-			dmgBarrage = Math.round(dmgBarrage * combat.darknessDamageBoostedByDao());
+			dmgBarrage += Math.round(player.inte * 0.1);
+            if (player.inte >= 50) dmgBarrage += Math.round(player.inte * ((player.inte / 50) * 0.05));
+			if (player.weaponRangeName == "Artemis") dmgBarrage *= 1.5;
+		}
+		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 5) {
+			dmgBarrage += Math.round(player.inte * 0.1);
+            if (player.inte >= 50) dmgBarrage += Math.round(player.inte * ((player.inte / 50) * 0.05));
+			if (player.weaponRangeName == "Artemis") dmgBarrage *= 1.5;
+		}
+		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 6) {
+			dmgBarrage += Math.round(player.inte * 0.1);
+            if (player.inte >= 50) dmgBarrage += Math.round(player.inte * ((player.inte / 50) * 0.05));
+			if (player.weaponRangeName == "Artemis") dmgBarrage *= 1.5;
+		}
+		if (flags[kFLAGS.ELEMENTAL_ARROWS] == 7) {
+			dmgBarrage += Math.round(player.inte * 0.1);
+            if (player.inte >= 50) dmgBarrage += Math.round(player.inte * ((player.inte / 50) * 0.05));
+			if (player.weaponRangeName == "Artemis") dmgBarrage *= 1.5;
 		}
 		dmgBarrage *= combat.rangePhysicalForce();
 		return dmgBarrage;

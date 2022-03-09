@@ -3,6 +3,7 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 public class Gargoyle extends BaseContent{
 
@@ -50,6 +51,7 @@ public function gargoylesTheShowNowOnWBNetwork():void {
 //(Advance time by 1 hour) 
 private function gargoyleMeeting2():void {
 	clearOutput();
+    spriteSelect(SpriteDb.s_gargoyle);
 	outputText("You finally close the distance between yourself and the strange structure, which begins to take shape ahead.  Though it's half-buried under what must be years of built-up sand and debris, you can clearly make out high stone walls supported by vaulted arches, broken every so often by the shattered remains of stained-glass windows and a pair of utterly destroyed oaken doors nearly hidden behind a row of tall marble pillars, many of which have long since crumbled.  High above the ground, you can see a pair of tall, slender towers reaching up to the heavens, one of which has been nearly obliterated by some unimaginably powerful impact, leaving it a stump compared to its twin.  From the rooftops, strange shapes look down upon you – stone statues made in the image of demons, dragons, and other monsters.");
 	
 	outputText("\n\nYou arrive at the grounds around the ruins, cordoned off by a waist-high wrought-iron fence that surrounds the building and what once might have been a beautiful, pastoral garden, now rotting and wilted, its trees chopped down or burned, twig-like bushes a mere gale's difference from being tumbleweeds.  A few dozen tombstones outline the path to a gaping maw that was once the great wooden doors.  Seeing no obvious signs of danger, you make your way inside, stepping cautiously over the rubble and rotting debris that litters the courtyard.");
@@ -232,6 +234,7 @@ private function reassureTheGargoyle():void {
 //[i](Whenever the player returns to the Cathedral, play one of the following introductions, then the “Cathedral Interior” scenes. )[/i]
 //[b]Player Returns to the Cathedral A[/b]
 public function returnToCathedral(woken:Boolean = false):void {
+    spriteSelect(SpriteDb.s_gargoyle);
 	flags[kFLAGS.FOUND_CATHEDRAL] = 1;
 	if(!woken) {
 		clearOutput();

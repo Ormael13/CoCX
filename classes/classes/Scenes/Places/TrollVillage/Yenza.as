@@ -10,6 +10,8 @@ import classes.Items.UndergarmentLib;
 import classes.Scenes.NPCs.ZenjiScenes;
 import classes.Scenes.SceneLib;
 import classes.Scenes.Places.TrollVillage;
+import classes.display.SpriteDb;
+
 public class Yenza extends TrollVillageAbstractContent{
     public function Yenza() {
     }
@@ -30,7 +32,7 @@ public class Yenza extends TrollVillageAbstractContent{
                     outputText("You decide to approach the rather beautiful looking troll sitting by herself. She looks toward you and raises an eyebrow as you approach her.\n" +
                             "\n" +
                             "\"I don’t think I ordered a tall glass of water, and yet here you are.\" She eyes you up and down, taking an extended look at your groin.\n");
-                    if (player.hasCock()){
+                    if (!player.hasCock()){
                         outputText("\"I’ll pass, move along now, I don’t have time for nonsense.\"\n" +
                                 "\n" +
                                 "She’s very blunt. It would seem she doesn’t even want to talk to you. You decide to leave the diner.\n");
@@ -43,7 +45,7 @@ public class Yenza extends TrollVillageAbstractContent{
                                 "\n" +
                                 "\"The name’s Yenza, and you are..?\"\n" +
                                 "\n" +
-                                "You tell Yenza your name\n" +
+                                "You tell Yenza your name.\n" +
                                 "\n" +
                                 "Yenza gives you a sultry glare, \"[name]... I like that name…\" She leans in closer, encroaching on your personal space.\n" +
                                 "\n" +
@@ -171,9 +173,9 @@ public class Yenza extends TrollVillageAbstractContent{
                 "\n" +
                 "\"Let’s get out of these clothes…\" She states as she unbuttons her blouse, letting it drop to the floor as she shimmies out of her panties.\n\n");
         if (player.lowerGarment != UndergarmentLib.NOTHING || player.upperGarment != UndergarmentLib.NOTHING || player.armor != ArmorLib.NOTHING){
-            outputText("She approaches you and quickly makes way with your [armor] setting all of your clothing aside, making sure she has a full view of your [body]\n\n");
+            outputText("She approaches you and quickly makes way with your [armor] setting all of your clothing aside, making sure she has a full view of your body\n\n");
         }
-        outputText("\"Lie down, my little plaything…\" She instructs once she’s ready\n" +
+        outputText("\"Lie down, my little plaything…\" She instructs once she’s ready.\n" +
                 "\n" +
                 "You follow her guidance, lying down on her soft, plushy bed. She slinks up the bed, resting her breasts against your [legs]. The fur on her breasts tickles you gently, the soft texture of her is tantalizing as you can feel yourself erecting to full mast.\n" +
                 "\n" +
@@ -217,9 +219,9 @@ public class Yenza extends TrollVillageAbstractContent{
                 "\n" +
                 "She smirks as she guides you to the bedroom.\n" +
                 "\n" +
-                "\"Let’s get out of these clothes…\" She states as she unbuttons her blouse, letting it drop to the floor as she shimmies out of her panties. [(pc not nudist) She approaches you and quickly makes way with your [armor] setting all of your clothing aside, making sure she has a full view of your [body]\n" +
+                "\"Let’s get out of these clothes…\" She states as she unbuttons her blouse, letting it drop to the floor as she shimmies out of her panties. [(pc not nudist) She approaches you and quickly makes way with your [armor] setting all of your clothing aside, making sure she has a full view of your body.\n" +
                 "\n" +
-                "\"Lie down, my little plaything…\" She instructs once she’s ready\n" +
+                "\"Lie down, my little plaything…\" She instructs once she’s ready.\n" +
                 "\n" +
                 "You oblige to her wishes, splaying your body over the bed for her.\n" +
                 "\n" +
@@ -303,6 +305,7 @@ public class Yenza extends TrollVillageAbstractContent{
     }
 
     private function YenzaApology():void{
+        clearOutput();
         outputText("You apologize, you’re not sure what happened or why she was so hostile.\n" +
                 "\n" +
                 "Zenji growls, \"[name]. Why?! Why would you do dat when I specifically told ya not to?! I told you not to talk to her, and follow me. You didn’t listen. Look, I dunno if tings are gonna work out if you’re gonna be like dis.\"\n" +
@@ -324,7 +327,15 @@ public class Yenza extends TrollVillageAbstractContent{
                 "After a minute of crying it out, Zenji finally speaks up through the sniffling. \"Please, [name]... go home, leave me alone... I’ll… I’ll be back later…\"\n" +
                 "\n" +
                 "If that’s what he wants you’ll leave him be.\n");
+        outputText("Zenji has temporarily left the camp.");
+        SceneLib.zenjiScene.zenjiHenchmanOption(true);
+        TrollVillage.ZenjiFollowing = false;
         TrollVillage.ZenjiVillageStage = 2;
+        if (flags[kFLAGS.SLEEP_WITH] == "Zenji") {
+            flags[kFLAGS.SLEEP_WITH] = "";
+            TrollVillage.ZenjiSleep = true;
+        }
+        TrollVillage.ZenjiTrollVillageTimeChk = time.days + 1;
         doNext(camp.returnToCampUseOneHour);
     }
 
@@ -351,12 +362,16 @@ public class Yenza extends TrollVillageAbstractContent{
                 "You begin to wonder if Zenji is ever going to return to you after that scene.\n")
         outputText(" Zenji has been removed from the game.");
         TrollVillage.ZenjiBerated = true;
+        if (flags[kFLAGS.SLEEP_WITH] == "Zenji") {
+            flags[kFLAGS.SLEEP_WITH] = "";
+        }
         flags[kFLAGS.ZENJI_PROGRESS] = -1;
         doNext(camp.returnToCampUseOneHour);
     }
 
     public function YenzaBeratePart2():void{
         clearOutput();
+        spriteSelect(SpriteDb.s_zenji);
         outputText("While taking a moment to relax, you hear heavy footsteps approaching. You look over and see Zenji with a solemn look on his face.\n" +
                 "\n" +
                 "\"[name]... I’m… I’m sorry for dat… for what happened yesterday… I just… Dat girl, she’s put me through a lot and seeing her talk ta ya just broke me… It hurt a lot to see you wit her… It was as if she were coming after you as well… I guess I’m still an immature baby like she said. I can’t even control myself when I’m around her.\"\n" +
@@ -372,6 +387,12 @@ public class Yenza extends TrollVillageAbstractContent{
                 "\"When I’m with you it’s not so scary because I know you won’t hurt me. I love you, [name]. I love you so much...\"\n");
         TrollVillage.ZenjiTrollVillageTimeChk = -1;
         TrollVillage.ZenjiVillageStage = 3;
+        if (!TrollVillage.ZenjiFollowing){
+            SceneLib.zenjiScene.zenjiHenchmanOption(true);
+        }
+        if (TrollVillage.ZenjiSleep && flags[kFLAGS.SLEEP_WITH] == ""){
+            flags[kFLAGS.SLEEP_WITH] = "Zenji";
+        }
         doNext(camp.returnToCampUseOneHour);
     }
 }

@@ -758,6 +758,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			damage = Math.round(damage * combat.darknessDamageBoostedByDao());
 			doDarknessDamage(damage, true, true);
 		}
+		else if (player.weapon == weapons.MGSWORD) doMagicDamage(damage, true, true);
 		else {
 			doDamage(damage, true, true);
 			if (player.weapon == weapons.DAISHO) doDamage(Math.round(damage * 0.5), true, true);
@@ -894,6 +895,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			damage = Math.round(damage * combat.darknessDamageBoostedByDao());
 			doDarknessDamage(damage, true, true);
 		}
+		else if (player.weapon == weapons.MGSWORD) doMagicDamage(damage, true, true);
 		else {
 			doDamage(damage, true, true);
 			if (player.weapon == weapons.DAISHO) doDamage(Math.round(damage * 0.5), true, true);

@@ -8,6 +8,7 @@ import classes.BodyParts.Tail;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 public class CeraphFollowerScene extends NPCAwareContent
 	{
@@ -23,7 +24,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 //Is Ceraph a follower?
 		override public function ceraphIsFollower():Boolean
 		{
-			return flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00286] > 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00287] > 0;
+			return flags[kFLAGS.CERAPH_FOLLOWER_PIERCING] > 0 || flags[kFLAGS.CERAPH_FOLLOWER_CARRY] > 0;
 		}
 
 		public function ceraphFollowerEncounter(forceCeraph:Boolean = false):void
@@ -46,14 +47,14 @@ public class CeraphFollowerScene extends NPCAwareContent
 
 		public function ceraphSprite():void
 		{
-			spriteSelect(87);
+			spriteSelect(SpriteDb.s_ceraphClothed);
 		}
 
 //[Actually Ceraph] -
 		public function ceraphFollowerAppearance(output:Boolean = true):void
 		{
 			if (output) clearOutput();
-			spriteSelect(87);
+			spriteSelect(SpriteDb.s_ceraphClothed);
 			if (output) {
 				outputText("You move to a secluded portion of your camp and mentally call for your tamed Omnibus.\n\nCeraph strides from around a boulder, as if by magic.  The slave-demon wears her red-studded collar as always.  However, instead of prancing around naked like she used to, she's arrived wearing a scandalous latex outfit that's as concealing as it is titillating.  From the tips of her fingers all the way to her shoulders, she's sleeved in the glossy black material.  At her neck, the top opens up, exposing the purple curves of her breasts, even though her nipples are hidden away by a clingy, scandalous scarlet bra, also of latex.  It looks as though it would be effortless to tear away. A rubbery faux-corset hugs her waist, connected to the material over her arms and shoulders in the back. The crimson micro bikini bottom beneath it looks unfit for covering anything Ceraph has ever had between her legs, but it somehow seems to just barely be holding things together.");
 				if (flags[kFLAGS.CERAPH_HIDING_DICK] == 0) outputText("  Her demonic prick forms a ridge in the tight fabric, its head peeking ever-so-slightly over the top");
@@ -184,7 +185,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 //*Ceraph is Defeated #4 - Offers Funtimes (Zeddited)
 		public function submissiveCeraphOffer():void
 		{
-			spriteSelect(7);
+			spriteSelect(SpriteDb.s_ceraph);
 			clearOutput();
 			outputText("Once again, Ceraph ");
 			if (monster.HP < 1) outputText("drops on the ground in front of you, completely beaten.");
@@ -227,7 +228,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 		private function collarCeraph():void
 		{
 			clearOutput();
-			spriteSelect(7);
+			spriteSelect(SpriteDb.s_ceraph);
 			outputText("You reach down and snatch the collar from Ceraph's shaking hand.  Turning it over in your grip, you get a feel for the soft, supple leather.  Blood-red studs poke out around the black strap's surface, vaguely reminding you of a dog's collar, though with the aggression cranked up to max.  The snap mechanism looks simple enough to connect, but you can't see any way to release the latch.  It makes sense that Ceraph would have one-way collars; slaves shouldn't be able to remove the symbol of their station.\n\n");
 
 			outputText("Leaning over, you slide the collar around your new slave's suddenly flush neck, feeling her heart hammering away just beneath the skin.  Snapping it closed, you muse ");
@@ -262,13 +263,13 @@ public class CeraphFollowerScene extends NPCAwareContent
 		private function carryCarephsToken():void
 		{
 			clearOutput();
-			spriteSelect(7);
+			spriteSelect(SpriteDb.s_ceraph);
 			outputText("You inform your living property that you've heard quite enough about her piercings and snatch the token from her hand.  Ceraph's eyes go wide and she nods, more than a little fearfully.  Seeing the Omnibus so cowed brings a smile to your face.\n\n");
 
 			outputText("Ceraph asks, \"<i>So, before my " + player.mf("Master", "Mistress") + " leaves, would you like to fuck your new slut one of the old ways, one last time?</i>\"\n\n");
 
 			outputText("<b>(Received Key Item: Onyx Token)</b>\n\n");
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00287] = 1;
+			flags[kFLAGS.CERAPH_FOLLOWER_CARRY] = 1;
 			player.createKeyItem("Onyx Token - Ceraph's", 0, 0, 0, 0);
 			//[Display Rape Options + Collar Option]
 			if (player.gender > 0) {
@@ -296,9 +297,9 @@ public class CeraphFollowerScene extends NPCAwareContent
 		private function getCeraphFollowerPiercing():void
 		{
 			clearOutput();
-			spriteSelect(7);
+			spriteSelect(SpriteDb.s_ceraph);
 			//Set belly button pierced as active
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00286] = 1;
+			flags[kFLAGS.CERAPH_FOLLOWER_PIERCING] = 1;
 			outputText("You bare your midriff to your new slut with ");
 			if (player.cor < 40) outputText("a little hesitation.");
 			else outputText("a smirk, secure in your knowledge of her defeat.");
@@ -333,7 +334,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 		private function cawkTawgle():void
 		{
 			clearOutput();
-			spriteSelect(87);
+			spriteSelect(SpriteDb.s_ceraphClothed);
 			//Off
 			if (flags[kFLAGS.CERAPH_HIDING_DICK] == 0) {
 				outputText("You tell Ceraph that you want her to hide her demonic cock when she's around you.  Your collared demoness nods, lowering her eyelids seductively.  She slides a hand up the front of her latex panties, stroking her defiled member through the material once before concealing its form with fingers pointed down.\n\n");
@@ -358,7 +359,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 		private function CeraphHandsOutNewFetishesLikePervCandy():void
 		{
 			clearOutput();
-			spriteSelect(87);
+			spriteSelect(SpriteDb.s_ceraphClothed);
 			//*Fetish level = 0
 			if (flags[kFLAGS.PC_FETISH] == 0) {
 				outputText("Ceraph comes forward on your command, whispering calmly as she ");
@@ -471,7 +472,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 		private function unfetishifyYourselfWithFollowerCeraph():void
 		{
 			clearOutput();
-			spriteSelect(87);
+			spriteSelect(SpriteDb.s_ceraphClothed);
 			outputText("You ask Ceraph to remove one of the fetishes she generously donated earlier.  She sighs and nods, saying, \"<i>" + player.mf("Master", "Mistress") + ", are you sure? It isn't that easy to do, and I love knowing my owner is aroused by my piercings!</i>\"\n\n");
 			outputText("Growling in irritation, you tell her, \"<i>Yes, I would like a fetish removed.</i>\"\n\n");
 			outputText("The demoness slumps her shoulders and nods.  She explains, \"<i>I have to do them in the reverse order that I added them... just hold still, okay?</i>\"\n\n");
@@ -485,7 +486,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 		private function goThroughWithCeraphUnfetishification():void
 		{
 			clearOutput();
-			spriteSelect(87);
+			spriteSelect(SpriteDb.s_ceraphClothed);
 			outputText("Ceraph steps closer, her shining outfit squeaking from the movement.  Her hands gently touch your forehead, though she tries to avoid meeting your gaze.  The submissive slut keeps her eyes downcast, as is proper for a slave, and she begins to rub at your temples, working her magic to undo her mischief.  Warmth surges out, rushing through your temples and leaving a slack looseness in its wake.  Ceraph grunts and lets go, staggering back and panting.  She mumbles, \"<i>So much harder... to take those without changing... something else.</i>\"\n\n");
 			outputText("After a few moments, she seems to recover, and she asks, \"<i>Was there something else you needed me here for, " + player.mf("Master", "Mistress") + ", or did you just want to waste my time?</i>\"\n\n");
 
@@ -508,7 +509,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			if (x < 0) x = 0;
 			var y:Number = player.cockThatFits2(115);
 			clearOutput();
-			spriteSelect(87);
+			spriteSelect(SpriteDb.s_ceraphClothed);
 			//*Summary: Bind Ceraph's arms behind her back and make her lie facedown in the dirt, then grab her ankles and wheelbarrow fuck her, with her face as the wheel.
 			outputText("You let Ceraph know that you'll be using her pussy.  She sighs and says, \"<i>Yes, " + player.mf("Master", "Mistress") + ",</i>\" unable to hide the disappointment in her tone.  Ceraph shifts, the panties of her outfit fading away to reveal her dripping cunny");
 			if (flags[kFLAGS.CERAPH_HIDING_DICK] == 0) outputText(" and half-erect, throbbing cock");
@@ -594,7 +595,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 		private function followerCeraphTongueFucking():void
 		{
 			clearOutput();
-			spriteSelect(87);
+			spriteSelect(SpriteDb.s_ceraphClothed);
 
 			outputText("Desirous of being pleasured by your demonic slave, you spread out your [legs] to allow easy access to your " + vaginaDescript());
 			if (player.hasCock()) outputText(" and " + multiCockDescriptLight());
@@ -645,7 +646,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 		private function ceraphTentacleGrape():void
 		{
 			clearOutput();
-			spriteSelect(87);
+			spriteSelect(SpriteDb.s_ceraphClothed);
 
 			outputText("You tear off your [armor] and instruct Ceraph, \"<i>Please me.  All of me.</i>\"  To her credit, Ceraph only spends a moment eyeing you before she springs into action.  Her panties vanish into shreds of flying latex, utterly demolished by the sudden growth of a pair of purple, undulating tendrils, each tipped with a swollen cockhead.  Squeezing up behind them is a third, slower tentacle.  Unlike its brothers, this one is capped with a sucking orifice, drooling clear slime and ringed by nub-like nodules, peeking out from folds of skin that remind you of clitoral hoods.");
 			if (flags[kFLAGS.CERAPH_HIDING_DICK] == 0) outputText("  You can vaguely see Ceraph's hard, demonic-dick underneath all the waving tentacles.  She must have taken your command to keep her dick out for your use quite literally, even though there's little chance you'll get to put it anywhere.");
@@ -704,7 +705,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 //[Punish Her]
 		private function punishCeraphForSurpriseThroatFuck():void
 		{
-			spriteSelect(87);
+			spriteSelect(SpriteDb.s_ceraphClothed);
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00290] = 1;
 			clearOutput();
 			outputText("You grab hold of Ceraph, bending the surprised demoness over a rock and laying into her ass.  She whimpers, but manages not to cry, even as you turn her purple butt into a black and blue canvas.  With each slap you deliver, you dictate that her cock is only allowed near your mouth at YOUR discretion, not a worthless slave's.  By the end, she's sniffling and nodding, murmuring, \"<i>Yes " + player.mf("Master", "Mistress") + ",</i>\" over and over again.</i>\"\n\n");
@@ -1058,7 +1059,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 //(should probably add a cock-limit of like, whatever you want, cuz you're fucking her butt)
 		private function sweetieNOOOO():void
 		{
-			spriteSelect(41);
+			spriteSelect(SpriteDb.s_marble);
 			clearOutput();
 			//requires PC to have Marble as follower or have removed Marble from game via rape attempt and confrontation
 			outputText("\"<i>Aaaah, not satisfied with me, " + player.mf("Master", "Mistress") + "?</i>\" Ceraph huffs, feigning exasperation.  She pointedly runs a hand along her muscular thigh, up her taut belly, and around one of her perfectly-formed lilac breasts.  \"<i>And what did you have in mind for our... playtime?</i>\"\n\n");
@@ -1098,7 +1099,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 		private function noUdderPlz(perm:Boolean = false):void
 		{
 			clearOutput();
-			spriteSelect(41);
+			spriteSelect(SpriteDb.s_marble);
 			if (perm) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00295] = 1;
 			outputText("A sharp head-shake is the only declination she needs.  \"<i>Of course, Sweetie, that wouldn't be very... Marble-like, would it?</i>\"\n\n");
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00296] = 0;
@@ -1109,7 +1110,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 		private function yesUdderPWEASE():void
 		{
 			clearOutput();
-			spriteSelect(41);
+			spriteSelect(SpriteDb.s_marble);
 			outputText("A brightening of your eyes and a slight part of your lips clues her in to your answer.  She pulls her blouse up over her belly, tucking it into her cleavage to keep it out of the way.  As you watch, Ceraph pinches two spots right above her belly button, and she moves her fingers away to reveal... nipples!  She repeats the process a few inches lower, then frames the four nubs with her thumb and forefinger, taking a deep breath in anticipation.  The demoness flexes her belly muscles, and a familiar bulge pops up, nipples lengthening to match.  Liquid can also be heard splashing around her pink protrusion, and she can't help but give the thing a little slap.  Both of you delight in the subsequent jostling and splashing of the milk inside.  Her cheeks bulge with exertion as the milk-sack grows, burgeoning larger and wider with more and more milk before finally flopping heavily down above her crotch.  She sighs in relief, then slips her top back over her new udder, taking apparent pride in the four small stains forming in the fabric.\n\n");
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00296] = 1;
 			postUdderChoice();
@@ -1117,7 +1118,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 
 		private function postUdderChoice(newl:Boolean = false):void
 		{
-			spriteSelect(41);
+			spriteSelect(SpriteDb.s_marble);
 			if (newl) clearOutput();
 			outputText("That out of the way, she pulls her overall back over her shoulders and turns her back to you, waiting several seconds before turning around.  \"<i>Sweetie!?</i>\" she exclaims in horror, eyes wide and arms flung in front of her as she cowers from you.  \"<i>What-... what are you doing...</i>\"\n\n");
 
@@ -1181,7 +1182,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 //After that is a scene tailored more specifically for the PC. Intention is to give nagas and centaurs and all that their own scene. Currently only scene is for PCs with a dick - should be naga-compatible.
 		private function cerminika():void
 		{
-			spriteSelect(58);
+			spriteSelect(SpriteDb.s_uncloaked_dominika);
 			clearOutput();
 			//[first time]
 			if (flags[kFLAGS.CERAPH_ROLEPLAY_AS_DOMINIKA_COUNT] == 0) {
@@ -1492,7 +1493,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 
 		private function giveFollowerBodyBits():void
 		{
-			spriteSelect(87);
+			spriteSelect(SpriteDb.s_ceraphClothed);
 			clearOutput();
 			outputText("You ask Ceraph just what all giving up a body-part would entail.  Your submissive demonic slut presses herself against you, stroking her hands under your [armor] as she answers, \"<i>Well, [Master], I would use my body-shifting black magics to remove a choice portion of your 'fun-bits', if you know my meaning.");
 			if (player.hasCock() || player.hasVagina() || player.hasBreasts()) {
@@ -1535,7 +1536,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 
 		private function ceraphFollowerCockTaking(smallest:Boolean = false):void
 		{
-			spriteSelect(87);
+			spriteSelect(SpriteDb.s_ceraphClothed);
 			clearOutput();
 			var x:int = player.biggestCockIndex();
 			if (smallest) x = player.smallestCockIndex();
@@ -1563,7 +1564,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 
 		private function ceraphFollowerCuntTaking():void
 		{
-			spriteSelect(87);
+			spriteSelect(SpriteDb.s_ceraphClothed);
 			clearOutput();
 			outputText("You undress, just enough to point at your [vagina].  Ceraph smiles happily and muses, \"<i>I have just the troublesome slut that could learn a thing or two by having her mouth replaced by a pussy.  Face-fucking is such an effective discipline technique, thank you dear.</i>\"");
 			outputText("\n\nCeraph's fingernails stab at your [skin.type] painfully, dragging them in a circular motion around your vulva.  The pain of the action fades to a gentle, throbbing heat while her fingers go deeper, corkscrewing through your flesh.  A second later she pulls back, a featureless pillar of flesh wrapped in skin and sitting in her hand, topped with your " + vaginaDescript() + ".  The other end is capped with a strange, arcane mark, seemingly tattooed into the skin.  You glance down, expecting to find your groin ruined, but the spot your vagina once occupied is replaced with bare, unmarked skin.");
@@ -1580,7 +1581,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 
 		private function ceraphFollowerTitTaking(rowNum:int = 0):void
 		{
-			spriteSelect(87);
+			spriteSelect(SpriteDb.s_ceraphClothed);
 			clearOutput();
 			var x:Number = rowNum;
 			//Store nipplecuntz or milks
@@ -1634,7 +1635,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 //NippleCunt Stuffing (Ceraph grows dick-nipples to plow your lusty twats!)
 		private function stuffSomeNippleCunts():void
 		{
-			spriteSelect(87);
+			spriteSelect(SpriteDb.s_ceraphClothed);
 			clearOutput();
 			outputText("Wanting to take advantage of some of the more extreme of your body's changes, you pull down your [armor] to bare your hungry nipple-twats, the well-lubricated tips of your nipples slowly opening in anticipation of what's to come.  You kick the discarded gear aside and command, \"<i>Slave, fuck my nipples.</i>\"");
 			outputText("\n\nCeraph looks at you, then down at your chest, and finally back up at you with a look of incredulousness glinting in her eyes.  \"<i>You want... [Master] is... kinky,</i>\" she coos, peeling out of her tight outfit to bare her demonic bosom.  Your demonic slave approaches, hips swaying as her bottom falls away to display her puffy purple womanhood");
@@ -1676,7 +1677,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 //Portal Fuck (AKA Ceraph Hung Out With Cinnabar, Req's PC dick)
 		private function portalFuckWithFollowerCeraph():void
 		{
-			spriteSelect(87);
+			spriteSelect(SpriteDb.s_ceraphClothed);
 			clearOutput();
 			var x:int = player.cockThatFits(100);
 			var y:int = x + 1;
@@ -1770,7 +1771,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 		private function sumissivenessToCeraphFollower():void
 		{
 			clearOutput();
-			spriteSelect(87);
+			spriteSelect(SpriteDb.s_ceraphClothed);
 			outputText("When you broach the idea of submitting to your fetish queen, delight washes across Ceraph's face.  Before another word can be spoken, she lashes out with her whip (where did she get that from?) and catches you around the neck with the taut leather, yanking hard enough to drag you to the ground and make you sputter for air.  The shining leather slides off as soon as your hands hit the ground, but the demoness is already standing above you, pushing on you with her stiletto-like heels to roll you aside.");
 			outputText("\n\n\"<i>That's a better place for a useless little " + player.mf("boy", "girl") + " like you, down in the dirt where you belong,</i>\" the demoness declares, pacing back and forth.  She crouches next to you and whispers in your ear, \"<i>The safe word is 'apple', you pitiful pig.</i>\"");
 			outputText("\n\nYou nod meekly, awed by the demonic dominatrix's imposing, self-assured aura of command.");
@@ -1820,7 +1821,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 		private function sayAppleToCeraph():void
 		{
 			clearOutput();
-			spriteSelect(87);
+			spriteSelect(SpriteDb.s_ceraphClothed);
 			outputText("Fuck this!  \"<i>Apple!</i>\"");
 			outputText("\n\nCeraph gets up with a shocked expression painted on her violet features.  \"<i>Didn't you have any fun?</i>\" she asks.  \"<i>We were just about to the good part!</i>\"");
 			outputText("\n\nYou tell her that it wasn't fun in the slightest, and you want out.");
@@ -1832,7 +1833,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 		private function barkToCeraphOnce(dog:Boolean = true):void
 		{
 			clearOutput();
-			spriteSelect(87);
+			spriteSelect(SpriteDb.s_ceraphClothed);
 			outputText("\"<i>");
 			if (dog) outputText("Arf!</i>\" you bark");
 			else outputText("Meowwwww!</i>\" you mew");
@@ -1966,7 +1967,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 		private function barkOrMeowTwiceToCeraph(dog:Boolean = true):void
 		{
 			clearOutput();
-			spriteSelect(87);
+			spriteSelect(SpriteDb.s_ceraphClothed);
 			outputText("\"<i>");
 			if (dog) outputText("Arf! Arf!</i>\" you bark");
 			else outputText("Meow!  Meowwwww!</i>\" you mew");

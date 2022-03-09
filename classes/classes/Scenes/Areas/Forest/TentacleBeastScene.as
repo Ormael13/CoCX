@@ -1,6 +1,7 @@
 ﻿package classes.Scenes.Areas.Forest{
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.display.SpriteDb;
 
 public class TentacleBeastScene extends BaseContent{
 
@@ -55,7 +56,7 @@ This license supercedes all previous licenses and remains in force.
 public function encounter():void {
 	trace("Tentacle event here");
 	clearOutput();
-	spriteSelect(100);
+	spriteSelect(SpriteDb.s_tentacleMonster);
 	//Tentacle Encounter - beware legalese!
 	//Gender hilarity chance.
 	if (player.gender == 0 && rand(3) == 0 && !player.isNaga() && !player.isTaur() && !player.isGoo()) {
@@ -137,7 +138,7 @@ private function tentacleEntice():void {
 
 internal function tentacleVictoryRape():void {
 	clearOutput();
-	spriteSelect(100);
+	spriteSelect(SpriteDb.s_tentacleMonster);
 	//Male/Herm
 	if(player.gender == 1 || player.gender == 3) {
 		outputText("Seizing the opportunity, you rush the monster while it is stopped. You grab the fattest hollow tentacle you can find and summarily shit-kick the beast onto the ground. Holding the creature down with one foot, you take the hollow tentacle and poise it in front of your raging erection.\n\n"); 
@@ -180,7 +181,7 @@ public function futaTentacleBadEndEL():void {
 //[CONDITIONS: Futa/Herm, Corruption > 50, Lust Defeat Only, Obtained 3 previous Lust Defeats to Tentacle Monster.]
 private function futaTentacleBadEnd():void {
 	clearOutput();
-	spriteSelect(100);
+	spriteSelect(SpriteDb.s_tentacleMonster);
 	futaTentacleBadEnd2();
 }
 private function futaTentacleBadEnd2():void {
@@ -196,7 +197,7 @@ private function futaTentacleBadEnd2():void {
 
 private function futaTentacleEpilogue():void {
 	clearOutput();
-	spriteSelect(100);
+	spriteSelect(SpriteDb.s_tentacleMonster);
 	//[Met Giacomo at least once]
 	if(flags[kFLAGS.GIACOMO_MET] > 0) {
 		outputText("\"<i>Well, well, well. You aren't a total loss, I see.</i>\", says a sharp, masculine voice.\n\n");
@@ -221,7 +222,7 @@ private function futaTentacleEpilogue():void {
 
 internal function tentacleLossRape():void {
 	clearOutput();
-	spriteSelect(100);
+	spriteSelect(SpriteDb.s_tentacleMonster);
 	if (doSFWloss()) return; //Disables rape in SFW mode.
 	if (player.isAlraune()){
 		outputText("The tentacle beast at first is confused, mainly because it’s body fails to detect an actual mammal. It occurs to you that you both, are in theory, plants. Well there's no such thing as incest amongst flowers, what’s this moron waiting for?");
@@ -609,7 +610,7 @@ private function tentacleRapeContinuation():void {
 	player.sexReward("cum");
 	dynStats("tou", 1, "int", -.5, "lib", 2, "sen", 1, "cor", .5);
 	clearOutput();
-	spriteSelect(100);
+	spriteSelect(SpriteDb.s_tentacleMonster);
 	if (player.gender == 1) {
 		outputText("You next feel the wretched sensation of another tentacle pushing its way past your anus and into your rectum. You cry more out of frustration and anger than pain as the foreign body settles a few inches inside your body. With a furious, coordinated rhythm, the monstrosity begins swelling the tentacle in your ass and ");
 		if (player.cockTotal() == 1)
@@ -685,7 +686,7 @@ private function tentacleRapeContinuation():void {
 
 private function tentacleRapeContinuationForFemales():void {
 	clearOutput();
-	spriteSelect(100);
+	spriteSelect(SpriteDb.s_tentacleMonster);
 	if (player.vaginas.length == 1) { //single coochie
 		outputText("Satisfied, the creature drops you smartly, withdraws its limbs from you, and lumbers away.  Covered completely in cum, you see that your clitoris has swollen up to ");
 		//Big clit girls get huge clits
@@ -734,7 +735,7 @@ private function tentacleRapeContinuationForFemales():void {
 //Centaur v. Tentacle Monster: (display if pc is unsexed centaur)
 private function centaurGenderlessRetardation():void {
 	clearOutput();
-	spriteSelect(100);
+	spriteSelect(SpriteDb.s_tentacleMonster);
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00247] == 0 || player.balls == 0) {
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00247] = 1;
 		outputText("Tentacles wrap around your legs before you can make a move to stop them, binding you tightly and coiling upwards.  One slides slowly along your underside, making you shiver in ");
@@ -801,7 +802,7 @@ private function centaurGenderlessRetardation():void {
 //Naga v. Tentacle Monster:
 private function genderlessHilarityForNagaKenDolls():void {
 	clearOutput();
-	spriteSelect(100);
+	spriteSelect(SpriteDb.s_tentacleMonster);
 	outputText("Out of nowhere tentacles bind your arms and tail, holding you firm in a matter of seconds.  You struggle to free yourself but can do nothing against the strength of the beast holding you in your current state.  More of the appendages start teasing around your body, as if looking for something.  A handful test the entrance to your " + assholeDescript() + " but evidently that's not what they're after.\n\n");
 
 	outputText("An oddly human voice comes from the undergrowth, catching you off-guard.  \"<i>Look, I'm really sorry about this, but I'm really not all that familiar with, uh, whatever it is you are.  Where do you keep the naughty bits?</i>\"\n\n");
@@ -821,7 +822,7 @@ private function genderlessHilarityForNagaKenDolls():void {
 //Goo v. Tentacle Monster:
 private function tentacularGenderGooTimes():void {
 	clearOutput();
-	spriteSelect(100);
+	spriteSelect(SpriteDb.s_tentacleMonster);
 	outputText("All of a sudden, tentacles come whipping out of the undergrowth to grab you.  Though, they're moving a little too fast, and manage to compress your body walls so far together that you're almost squeezed in half.\n\n");
 
 	outputText("\"<i>SHIT. SHIT. SHIT. SHIT.</i>\"  An oddly human voice is profaning loudly.  \"<i>Are you dead?</i>\"\n\n");

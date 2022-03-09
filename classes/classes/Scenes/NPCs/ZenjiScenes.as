@@ -29,6 +29,7 @@ import coc.view.ButtonDataList;
 		public static var ZenjiFigMulti:Number;
 		public static var ZenjiSleepCount:int;
 		public static var ZenjiLoverDays:int;
+		public static var ZenjiLoverDaysTracker:int;
 		public static var ZenjiTalkCount:int;
 
 
@@ -47,6 +48,7 @@ import coc.view.ButtonDataList;
 			ZenjiFigMulti = 0;
 			ZenjiSleepCount = 0;
 			ZenjiLoverDays = 0;
+			ZenjiLoverDaysTracker = 0;
 			ZenjiTalkCount = 0;
 		}
 
@@ -62,6 +64,7 @@ import coc.view.ButtonDataList;
 				"ZenjiFigMulti": ZenjiFigMulti,
 				"ZenjiSleepCount": ZenjiSleepCount,
 				"ZenjiLoverDays": ZenjiLoverDays,
+				"ZenjiLoverDaysTracker" : ZenjiLoverDaysTracker,
 				"ZenjiTalkCount": ZenjiTalkCount
 			};
 		}
@@ -76,9 +79,10 @@ import coc.view.ButtonDataList;
 				ZenjiHolli = o["ZenjiHolli"];
 				ZenjiMarried = o["ZenjiMarried"];
 				ZenjiFigMulti = valueOr(o["ZenjiFigMulti"], 0);
-				ZenjiSleepCount = o["ZenjiSleepCount"];
-				ZenjiLoverDays = o["ZenjiLoverDays"];
-				ZenjiTalkCount = o["ZenjiTalkCount"];
+				ZenjiSleepCount =  valueOr(o["ZenjiSleepCount"], 0);
+				ZenjiLoverDays =  valueOr(o["ZenjiLoverDays"], 0);
+				ZenjiLoverDaysTracker =  valueOr(o["ZenjiLoverDaysTracker"], 0);
+				ZenjiTalkCount =  valueOr(o["ZenjiTalkCount"], 0);
 			} else {
 				// loading from old save
 				resetState();
@@ -535,7 +539,7 @@ import coc.view.ButtonDataList;
 			else if(event < 6) itype = consumables.GROPLUS;
 			else if(event < 8) itype = consumables.COAL___;
 			else if(event < 10) itype = useables.T_SSILK;
-			outputText("You spend some more time looking around the area and stumble upon " + itype + ".\n\n");
+			outputText("You spend some more time looking around the area and stumble upon " + itype.shortName + ".\n\n");
 			outputText("You decide to head back home afterwards as there doesn't appear to be anything else of interest right now.\n\n");
 			inventory.takeItem(itype, camp.returnToCampUseOneHour);
 		}
@@ -1002,7 +1006,11 @@ import coc.view.ButtonDataList;
 			addButton(0, "Himself", followerZenjiTalksHimself).hint("Talk to Zenji about himself.");
 			addButton(1, "Trolls", followerZenjiTalksTrolls).hint("Talk to Zenji about trolls.");
 			addButton(2, "Yourself", followerZenjiTalksYourself).hint("Talk to Zenji about yourself.");
-			if (TrollVillage.ZenjiTrollVillageTimeChk == -1) addButton(3, "His Problems", zenjiVillageProblems);
+			if (TrollVillage.ZenjiTrollVillageTimeChk == -1 ) {
+				if (TrollVillage.ZenjiVillageStage < 4) addButton(3, "His Problems", zenjiVillageProblems);
+				else addButton(3, "His Problems", zenjiVillageProblems2);
+			}
+
 			addButton(14, "Back", followerZenjiMainCampMenu);
 		}
 		
@@ -1218,10 +1226,13 @@ import coc.view.ButtonDataList;
 			addButton(6, "Comfort", loverZenjiComfort).hint("Spend a tender moment with him. Now with free headpats.");
 			addButton(7, "Food", loverZenjiFood).hint("Zenji seems like he has something he wants to give you.");
 			button(7).disableIf(ZenjiFood, "Zenji does not have any more food to offer you right now, ask again tomorrow.");
-			if (TrollVillage.ZenjiTrollVillageTimeChk == -1) addButton(8, "His Problems", zenjiVillageProblems);
+			if (TrollVillage.ZenjiTrollVillageTimeChk == -1 ) {
+				if (TrollVillage.ZenjiVillageStage < 4) addButton(3, "His Problems", zenjiVillageProblems);
+				else addButton(3, "His Problems", zenjiVillageProblems2);
+			}
 			if (ZenjiMarriagePreCheck()) {
 				if (player.hasItem(jewelries.ENDGRNG, 1)){
-					addButton (9, "Propose", ZenjiProposalScene, -9000,-9000,-9000,"Zenji seems to have strong feelings for you, perhaps you should propose with the engagement ring you have?\n");
+					addButton (9, "Propose", ZenjiProposalScene).hint("Zenji seems to have strong feelings for you, perhaps you should propose with the engagement ring you have?\n");
 				}
 				else{
 					addButtonDisabled(9, "Propose", "Zenji seems to have strong feelings for you, but you cannot propose without a proper engagement ring!\n");
@@ -1242,6 +1253,7 @@ import coc.view.ButtonDataList;
 			outputText("Zenji takes a deep sigh, \"<i>Dere was dis… one girl… Before I met you, she caught me within her hands, she… she only wanted me for what I was… my body... She did not care fa who I was… But… Dat’s behind me now. When I am wit you de tings she did ta me doesn’t hurt as much anymore and I just want ta protect you so dat you never hafta be hurt or abused like I once was.</i>\"\n\n");
 			outputText("Zenji spends the rest of the hour talking about new experiences in the camp and other things about himself that he can recall.\n\n");
 			if (player.statusEffectv1(StatusEffects.ZenjiPreparationsList) < 15) player.addStatusValue(StatusEffects.ZenjiPreparationsList, 1, 1);
+			ZenjiTalkCount++;
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -1253,6 +1265,7 @@ import coc.view.ButtonDataList;
 			outputText("He pauses for a moment, \"<i>But de other trolls in my village didn't like me too much, I caused trouble, I sought competition, when dey wanted peace and quiet, so I left. I didn't see many oda trolls out dere, but they’re probably not in de bog where I spent most of my time.</i>\"\n\n");
 			outputText("Zenji spends the rest of the hour talking about trolls and other nuances about his kind from the other trolls.\n\n");
 			if (player.statusEffectv1(StatusEffects.ZenjiPreparationsList) < 15) player.addStatusValue(StatusEffects.ZenjiPreparationsList, 1, 1);
+			ZenjiTalkCount++;
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -1266,6 +1279,7 @@ import coc.view.ButtonDataList;
 			outputText("\"<i>I just had ta be wit you, dere's no oda way to say it, I need ta be close ta ya, I hafta protect you, you are just so... so helpless, you are special ta me, I want ta be dere fa ya.</i>\" He places a hand on your shoulder, \"<i>I don't ever want to leave you [name].</i>\"\n\n");
 			outputText("You spend the rest of the hour talking about yourself and sharing old stories back in Ingnam with Zenji.\n\n");
 			if (player.statusEffectv1(StatusEffects.ZenjiPreparationsList) < 15) player.addStatusValue(StatusEffects.ZenjiPreparationsList, 1, 1);
+			ZenjiTalkCount++;
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -1279,6 +1293,7 @@ import coc.view.ButtonDataList;
 			outputText("You smile at him as you spend some time with your children, Zenji is a very tender father as you’ve grown to expect. His gruff exterior can mask just how caring and gentle he truly is. His presence is soft as the two of you play with your children. Despite his masculine figure and beefy body, he has a gentle touch and it shows with the way he treats your children.\n\n");
 			outputText("After nearly an hour of spending time with your children, you decide it’s best to continue with your day for now, but you’ll be sure that Zenji won't be a lonely father to the children.\n\n");
 			if (player.statusEffectv1(StatusEffects.ZenjiPreparationsList) < 15) player.addStatusValue(StatusEffects.ZenjiPreparationsList, 1, 1);
+			ZenjiTalkCount++;
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -1306,6 +1321,7 @@ import coc.view.ButtonDataList;
 			outputText("Once he’s done, Zenji takes an extended glance at the shredded pieces of fur. \"<i>I can always mend dem back together… Or just hunt some more animals ta make another pair... I really should do dat soon… I like ta store tings in de little pockets I make within dem.</i>\"\n\n");
 			outputText("After a brief pause, Zenji eyes you up and down once more, \"<i>Well, I know ya wanna get closer,</i>\" He states, showing off several poses for you. Making sure nothing is obstructed from view. From his toned back, muscular traps, thick arms, and legs, Zenji makes sure to show off every inch of his massively muscular body. \"<i>So why don’t I give ya front row seats to my next workout?</i>\"\n\n");
 			if (player.statusEffectv1(StatusEffects.ZenjiPreparationsList) < 15) player.addStatusValue(StatusEffects.ZenjiPreparationsList, 1, 1);
+			ZenjiTalkCount++;
 			menu();
 			addButton(1, "Yes", loverZenjiShowoffYes);
 			addButton(3, "No", loverZenjiShowoffNo);
@@ -1473,6 +1489,7 @@ import coc.view.ButtonDataList;
 			outputText("You thank him before dismissing yourself. The warmth of his presence echoes within your body, reminding you of your connection with him.\n\n");
 			dynStats("cor", -0.5);
 			if (player.statusEffectv1(StatusEffects.ZenjiPreparationsList) < 15) player.addStatusValue(StatusEffects.ZenjiPreparationsList, 1, 1);
+			ZenjiTalkCount++;
 			doNext(loverZenjiTalks);
 			eachMinuteCount(5);
 		}
@@ -1488,6 +1505,7 @@ import coc.view.ButtonDataList;
 			if (player.statusEffectv1(StatusEffects.ZenjiPreparationsList) < 15) player.addStatusValue(StatusEffects.ZenjiPreparationsList, 1, 1);
 			ZenjiFood = true;
 			inventory.takeItem(consumables.ZENJI_H, loverZenjiTalks);
+			ZenjiTalkCount++;
 			eachMinuteCount(5);
 		}
 		
@@ -2563,12 +2581,14 @@ import coc.view.ButtonDataList;
 			doNext(loverZenjiMainCampMenu);
 		}
 		
-		public function zenjiHenchmanOption():void
+		public function zenjiHenchmanOption(textBypass:Boolean =false):void
 		{
-			clearOutput();
+			if (!textBypass) clearOutput();
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "") {
-				outputText("Zenji readies his spear before flexing his arms, \"<i>¡Vamanos, flaca!</i>\"\n\n");
-				outputText("Zenji is now following you around.\n\n");
+				if (!textBypass) {
+					outputText("Zenji readies his spear before flexing his arms, \"<i>¡Vamanos, flaca!</i>\"\n\n");
+					outputText("Zenji is now following you around.\n\n");
+				}
 				var strZenji:Number = 50;
 				var meleeAtkZenji:Number = 145;
 				if (player.level > 25 && player.level < 185) {
@@ -2586,9 +2606,11 @@ import coc.view.ButtonDataList;
 				flags[kFLAGS.PLAYER_COMPANION_1] = "Zenji";
 			}
 			else {
-				outputText("You tell Zenji that you don't want him to assist you in combat anymore.\n\n");
-				outputText("Zenji raises an eyebrow at you, \"<i>If dat's whatchu want, I will guard de camp, but you stay safe out dere.</i>\"\n\n");
-				outputText("Aurora is no longer following you around.\n\n");
+				if (!textBypass){
+					outputText("You tell Zenji that you don't want him to assist you in combat anymore.\n\n");
+					outputText("Zenji raises an eyebrow at you, \"<i>If dat's whatchu want, I will guard de camp, but you stay safe out dere.</i>\"\n\n");
+					outputText("Aurora is no longer following you around.\n\n");
+				}
 				player.removeStatusEffect(StatusEffects.CombatFollowerZenji);
 				flags[kFLAGS.PLAYER_COMPANION_1] = "";
 			}
@@ -2811,7 +2833,7 @@ import coc.view.ButtonDataList;
 					"\n" +
 					"You tell Zenji that everyone gets hurt, it’s impossible to keep someone safe forever. As a man, he shouldn’t be the one to take the burden for everything and remain silent about it. Hurting will only feel worse when you do it alone. It’s okay to be hurt, it will happen to everyone. At least then one will be able to know the good times and have something to look forward to. Being a man doesn’t mean he has to be stoic, being a man means being strong with others, and nobody should ridicule him for expressing himself.\n" +
 					"\n" +
-					"\"It’s not just dat, [pc]... I need to be a strong man… for you. I wanna protect ya, I need ta be able to be dere for you.\"\n" +
+					"\"It’s not just dat, [name]... I need to be a strong man… for you. I wanna protect ya, I need ta be able to be dere for you.\"\n" +
 					"\n" +
 					"You tell him that he can, but he shouldn’t let that cloud his judgment or isolate himself from you, himself, or others. He will always be your man, no matter what. You assure him that expressing how he feels and talking to you about his problems will never make him less of a man. He doesn’t need to push others away to keep himself safe.\n" +
 					"\n" +
@@ -2821,10 +2843,20 @@ import coc.view.ButtonDataList;
 			TrollVillage.ZenjiVillageStage = 4;
 			doNext(playerMenu);
 		}
+
+		public function zenjiVillageProblems2():void{
+			clearOutput();
+			outputText("You ask Zenji if he's feeling better after venting to you.\n" +
+					"\n" +
+					"The burly troll sighs softly, \"Yes, [name]... I feel a bit better, thanks.\"\n" +
+					"\n" +
+					"He gives you a sincere grin, the sight warms you to your core. You feel like you can breathe a little easier as well knowing he's taken a weight off his chest.");
+			doNext(playerMenu);
+		}
 		
 		//ZENJI MARRIAGE
 		public function ZenjiMarriagePreCheck():Boolean{
-			return player.hasKeyItem("Jabala's Charm") < 0 && TrollVillage.ZenjiVillageStage > 0 && ZenjiSleepCount >= 5 && ZenjiTalkCount >= 15 && ZenjiLoverDays >= 20;
+			return player.hasKeyItem("Jabala's Charm") > 0 && TrollVillage.ZenjiVillageStage > 0 && ZenjiSleepCount >= 5 && ZenjiTalkCount >= 15 && ZenjiLoverDays >= 20;
 		}
 		
 		public function ZenjiProposalScene():void{
@@ -2905,7 +2937,7 @@ import coc.view.ButtonDataList;
 					"\n" +
 					"You hear some idle chatter outside for a moment, but you’re unsure of what exactly they are talking about.\n" +
 					"\n" +
-					"Zenji turns to you, he pulls your face towards him, “I know I have not said it enough times, but… Dere’s someting I really like about your eyes… [pceyecolor] is a really good look on ya, [name]. I could just spend all day staring into dem.”\n" +
+					"Zenji turns to you, he pulls your face towards him, “I know I have not said it enough times, but… Dere’s someting I really like about your eyes… [eyecolor] is a really good look on ya, [name]. I could just spend all day staring into dem.”\n" +
 					"\n" +
 					"You look back into his deep-set, ashen green eyes. His gaze is strong, giving off a sense of comfort and safety. Zenji gently caresses your face for a moment before you hear the door open and close followed by footsteps.\n" +
 					"\n" +
@@ -3282,8 +3314,11 @@ import coc.view.ButtonDataList;
 			if (player.cockThatFits(45) > 0){
 				addButton(2, "Pitch Anal", ZenjiMarriageSexTime, 3, -9000, -9000, "Tooltip: Mount your husband the way he was meant to be");
 			}
-			else{
+			else if (player.hasCock()){
 				addButtonDisabled(2, "Pitch Anal", "Your dick(s) is too big to fit in your husband!");
+			}
+			else{
+				addButtonDisabled(2, "Pitch Anal", "You need a dick for this!");
 			}
 		}
 
@@ -3480,7 +3515,7 @@ import coc.view.ButtonDataList;
 						"You laugh quietly to yourself, is this what they heard earlier from you two? It’s nice to know that Zenji’s parents still have that fire in their relationship, you hope that your relationship will remain strong like theirs.\n" +
 						"\n" +
 						"You turn to face Zenji, he unconsciously pulls you closer to him as you drift back to sleep in his embrace.\n");
-				outputText("<b>[Next Morning]</b>");
+				outputText("<b>Next Morning</b>");
 				outputText("You wake up the next morning, as you open your eyes your face is still nestled in Zenji's chest tuft. Daylight pours into the room and you give a small yawn and look up at Zenji, his eyes are already resting upon your face.\n" +
 						"\n" +
 						"\"Good morning [name] Sleep well?\" He asks, giving you a gentle smile.\n" +
@@ -3531,7 +3566,7 @@ import coc.view.ButtonDataList;
 						"You laugh quietly to yourself, is this what they heard earlier from you two? It’s nice to know that Zenji’s parents still have that fire in their relationship, you hope that your relationship will remain strong like theirs.\n" +
 						"\n" +
 						"You turn to face Zenji, he unconsciously pulls you closer to him as you drift back to sleep in his embrace.\n");
-				outputText("<b>[Next Morning]</b>");
+				outputText("<b>Next Morning</b>");
 				outputText("You wake up the next morning, as you open your eyes your face is still nestled in Zenji's chest tuft between his manly pectorals. Daylight pours into the room and you give a small yawn and look up at Zenji, his eyes are already resting upon your face.\n" +
 						"\n" +
 						"\"Good morning [name]. Sleep well?\" He asks, giving you a gentle smile.\n" +
@@ -3582,7 +3617,7 @@ import coc.view.ButtonDataList;
 						"You laugh quietly to yourself, is this what they heard earlier from you two? It’s nice to know that Zenji’s parents still have that fire in their relationship, you hope that your relationship will remain strong like theirs.\n" +
 						"\n" +
 						"You turn to face Zenji, he unconsciously pulls you closer to him as you drift back to sleep in his embrace.\n");
-				outputText("<b>[Next Morning]</b>");
+				outputText("<b>Next Morning</b>");
 				outputText("You wake up the next morning, as you open your eyes your face is resting against Zenji’s muscular pecs, comfortably nestled within his chest tuft. Daylight pours into the room and you give a small yawn and look up at Zenji, his eyes are resting upon your face.\n" +
 						"\n" +
 						"\"Good morning [name]. Sleep well?\" He asks, giving you a gentle smile.\n" +
@@ -3618,7 +3653,7 @@ import coc.view.ButtonDataList;
 						"You say your goodbyes to Jabala and Halkano, assuring them that you will return soon as you return to your camp, ready to live your life with your newlywed husband.\n");
 			}
 			flags[kFLAGS.MARRIAGE_FLAG] = "Zenji";
-			var timeShift:int = (24 - model.time.hours) + 8
+			var timeShift:int = (24 - time.hours) + 8
 			doNext(createCallBackFunction(camp.returnToCamp,timeShift));
 		}
 	}

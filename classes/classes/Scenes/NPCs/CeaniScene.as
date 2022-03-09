@@ -11,7 +11,7 @@ package classes.Scenes.NPCs
 	import classes.Items.WeaponRangeLib;
 	import classes.Items.UndergarmentLib;
 	import classes.Scenes.NPCs.Ceani;
-	import classes.display.SpriteDb;
+    import classes.display.SpriteDb;
 
 public class CeaniScene extends NPCAwareContent
 	{

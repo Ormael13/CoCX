@@ -2,6 +2,7 @@
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.NPCs.BelisaFollower;
+import classes.display.SpriteDb;
 
 public class Rathazul extends NPCAwareContent implements TimeAwareInterface {
 
@@ -42,7 +43,7 @@ public class Rathazul extends NPCAwareContent implements TimeAwareInterface {
 		}
 
 public function encounterRathazul():void {
-	spriteSelect(49);
+	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
 	if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 2 && player.hasStatusEffect(StatusEffects.MetRathazul))
 	{
@@ -93,7 +94,7 @@ private function rathazulMoveDecline():void {
 }
 
 public function campRathazul():void {
-	spriteSelect(49);
+	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
 	if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 2 && player.hasStatusEffect(StatusEffects.MetRathazul))
 	{
@@ -166,7 +167,7 @@ private function get dyes():Boolean {
 	return player.gems >= 50;
 }
 private function rathazulWorkOffer():Boolean {
-	spriteSelect(49);
+	spriteSelect(SpriteDb.s_rathazul);
 	var totalOffers:int = 0;
 	var spoken:Boolean = false;
 	var purify:Boolean = false;
@@ -333,7 +334,7 @@ private function rathazulWorkOffer():Boolean {
 }
 
 private function purifySomething():void {
-	spriteSelect(49);
+	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
 	outputText("Rathazul asks, \"<i>What would you like me to purify?</i>\"");
 	menu();
@@ -472,7 +473,7 @@ private function rathazulPurifyLaBova():void {
 }
 
 private function rathazulDebimboOffer():void {
-	spriteSelect(49);
+	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
 	if(flags[kFLAGS.RATHAZUL_DEBIMBO_OFFERED] == 0) {
         if (player.hasPerk(PerkLib.BimboBrains) || player.hasPerk(PerkLib.FutaFaculties)) {
@@ -498,7 +499,7 @@ private function rathazulDebimboOffer():void {
 }
 
 private function rathazulAlchemicalThunderOffer():void {
-	spriteSelect(49);
+	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
 	outputText("\"<i>I have been studying the fluids produced by your raiju friend and I may be able to produce a powerful substance that would add the fulgurating property of Raiju lightning to your weapon. Provide me with two Raiju Plasma and a Lust Draft and I will create some for you.</i>\"\n\n");
 	flags[kFLAGS.ELECTRA_FOLLOWER] = 3;
@@ -507,7 +508,7 @@ private function rathazulAlchemicalThunderOffer():void {
 	addButton(0,"Next",campRathazul);
 }
 private function makeAlchemicalThunder():void {
-	spriteSelect(49);
+	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
 	player.consumeItem(useables.RPLASMA, 2);
 	player.consumeItem(consumables.L_DRAFT, 1);
@@ -529,7 +530,7 @@ private function makeAlchemicalThunder4():void {
 }
 
 private function cureMitzi():void {
-	spriteSelect(49);
+	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
 	player.consumeItem(consumables.SMART_T, 5);
 	player.consumeItem(consumables.VITAL_T, 5);
@@ -578,7 +579,7 @@ private function cureMitziStay():void {
 }
 
 private function rathazulReptaTonguePotionOffer():void {
-	spriteSelect(49);
+	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
 	outputText("You mention the desert naga to Rathazul who look at you somewhat surprised.\n\n\"<i>Well that is an odd request? You need me to craft a potion that will allow some naga to understand the common language? Yes I can do that, but it would require some pretty rare ingredients such as hummus, reptilium, and one ovi elixir. Get me those three and I will make the potion for you.</i>\"\n\n");
 	flags[kFLAGS.SAMIRAH_FOLLOWER] = 7;
@@ -587,7 +588,7 @@ private function rathazulReptaTonguePotionOffer():void {
 	addButton(0,"Next",campRathazul);
 }
 private function makeReptaTonguePotion():void {
-	spriteSelect(49);
+	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
 	outputText("Rathazul picks up the hummus, the reptilium and the ovi elixir before mixing them up in his alchemical equipment. He hands you the potion and get back to his things. You realise he didn’t mix in the ovi elixir and you are about to ask him about it when you see that weird gleam in his eyes as he mix it with firemander whisky and what might be a massive dose of lust draft. You back down, some things are better left unknown...");
 	outputText("\n\n<b>Acquired Repta-Tongue potion</b>");
@@ -603,7 +604,7 @@ private function makeReptaTonguePotion():void {
 //Creation Of The Draft:*
 private function makeADeBimboDraft():void {
 	clearOutput();
-	spriteSelect(49);
+	spriteSelect(SpriteDb.s_rathazul);
 	outputText("Rathazul takes the teas and the gems into his wizened palms, shuffling the glittering jewels into a pouch and the teas into a large decanter.  He promptly sets the combined brews atop a flame and shuffles over to his workbench, where he picks up numerous pouches and vials of every color and description, adding them to the mix one after the other.  The mixture roils and bubbles atop the open flame like a monstrous, eerie thing, but quickly simmers down to a quiet boil.  Rathazul leaves it going for a while, stirring occasionally as he pulls out a smaller vial.  Once most of the excess liquid has evaporated, he pours the concoction into the glass container and corks it, holding it up to the light to check its coloration.");
 	outputText("\n\n\"<i>That <b>should</b> do,</i>\" he mutters to himself.  Rathazul turns, carefully handing you the mixture.  \"<i>This should counter the mental-inhibiting effects of the Bimbo Liqueur, but I have no idea to what extent those who imbibe it will retain of their time spent as a bimbo...</i>\"\n\n");
 	//Take items
@@ -683,7 +684,7 @@ private function rathazulShopMenu():void {
 private function buyDyes(fromPage2:Boolean = false):void {
 	clearOutput();
 	if (!fromPage2) {
-		spriteSelect(49);
+		spriteSelect(SpriteDb.s_rathazul);
 		outputText("Rathazul smiles and pulls forth several vials of colored fluids.  Which type of dye would you like?");
 		outputText("\n\n<b>(-50 Gems)</b>");
 		player.gems -= 50;
@@ -714,7 +715,7 @@ private function buyDyesPage2():void {
 		buyDyes(true);
 		return;
 	}
-	spriteSelect(49);
+	spriteSelect(SpriteDb.s_rathazul);
 	menu();
 	addButton(0, "Russet", buyDye, consumables.RUSSDYE);
 	if (player.statusEffectv2(StatusEffects.MetRathazul) >= 12) {
@@ -725,7 +726,7 @@ private function buyDyesPage2():void {
  }
 
 private function buyDye(dye:ItemType):void {
-	spriteSelect(49);
+	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
 	outputText(images.showImage("rathazul-buy-dye"));
 	inventory.takeItem(dye, rathazulShopMenu);
@@ -734,7 +735,7 @@ private function buyDye(dye:ItemType):void {
 }
 
 private function buyDyeNevermind():void {
-	spriteSelect(49);
+	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
 	outputText("You change your mind about the dye, and Rathazul returns your gems.\n\n<b>(+50 Gems)</b>");
 	player.gems += 50;
@@ -744,7 +745,7 @@ private function buyDyeNevermind():void {
 
 //Scales dyes
 private function makeDyes():void {
-	spriteSelect(49);
+	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
 	outputText("Rathazul smiles and pulls forth several vials preparing for mixing.  Which type of dye need?");
 	outputText("\n\n<b>(-50 Gems)</b>");
@@ -761,7 +762,7 @@ private function makeDyes():void {
 }
 
 private function makeDye1():void {
-	spriteSelect(49);
+	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
 	player.destroyItems(consumables.REPTLUM, 1);
 	player.destroyItems(consumables.WHITEDY, 1);
@@ -772,7 +773,7 @@ private function makeDye1():void {
 }
 
 private function makeDye2():void {
-	spriteSelect(49);
+	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
 	player.destroyItems(consumables.REPTLUM, 1);
 	player.destroyItems(consumables.BLUEDYE, 1);
@@ -783,7 +784,7 @@ private function makeDye2():void {
 }
 
 private function makeDye3():void {
-	spriteSelect(49);
+	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
 	player.destroyItems(consumables.REPTLUM, 1);
 	player.destroyItems(consumables.PINKDYE, 1);
@@ -794,7 +795,7 @@ private function makeDye3():void {
 }
 
 private function makeDye4():void {
-	spriteSelect(49);
+	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
 	player.destroyItems(consumables.REPTLUM, 1);
 	player.destroyItems(consumables.RAINDYE, 1);
@@ -805,7 +806,7 @@ private function makeDye4():void {
 }
 
 private function makeDyeNevermind():void {
-	spriteSelect(49);
+	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
 	outputText("You change your mind about the dye, and Rathazul returns your gems.\n\n<b>(+50 Gems)</b>");
 	player.gems += 50;
@@ -815,7 +816,7 @@ private function makeDyeNevermind():void {
 
 //Skin Oils
 private function buyOils():void {
-	spriteSelect(49);
+	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
 	outputText("Rathazul smiles and pulls forth several bottles of skin oil.  Which type of skin oil would you like?");
 	outputText("\n\n<b>(-50 Gems)</b>");
@@ -834,7 +835,7 @@ private function buyOils():void {
 }
 
 private function buyOil(oil:ItemType):void {
-	spriteSelect(49);
+	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
 	outputText(images.showImage("rathazul-buy-oil"));
 	inventory.takeItem(oil, rathazulShopMenu);
@@ -843,7 +844,7 @@ private function buyOil(oil:ItemType):void {
 }
 
 private function buyOilNevermind():void {
-	spriteSelect(49);
+	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
 	outputText("You change your mind about the oil, and Rathazul returns your gems.\n\n<b>(+50 Gems)</b>");
 	player.gems += 50;
@@ -853,7 +854,7 @@ private function buyOilNevermind():void {
 
 //Body Lotions
 private function buyLotions():void {
-	spriteSelect(49);
+	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
 	outputText("Rathazul smiles and pulls forth several vials of body lotion.  Which type of body lotion would you like?");
 	outputText("\n\n<b>(-50 Gems)</b>");
@@ -868,7 +869,7 @@ private function buyLotions():void {
 }
 
 private function buyLotion(lotion:ItemType):void {
-	spriteSelect(49);
+	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
 	outputText(images.showImage("rathazul-buy-lotion"));
 	inventory.takeItem(lotion, rathazulShopMenu);
@@ -877,7 +878,7 @@ private function buyLotion(lotion:ItemType):void {
 }
 
 private function buyLotionNevermind():void {
-	spriteSelect(49);
+	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
 	outputText("You change your mind about the lotion, and Rathazul returns your gems.\n\n<b>(+50 Gems)</b>");
 	player.gems += 50;
@@ -887,7 +888,7 @@ private function buyLotionNevermind():void {
 
 //Reducto
 private function buyReducto():void {
-	spriteSelect(49);
+	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
 	var cost:int = (flags[kFLAGS.AMILY_MET_RATHAZUL] >= 2 ? 50 : 100);
 	if (player.gems >= cost) {
@@ -906,7 +907,7 @@ private function buyReducto():void {
 
 //GroPlus
 private function buyGroPlus():void {
-	spriteSelect(49);
+	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
 	var cost:int = (flags[kFLAGS.AMILY_MET_RATHAZUL] >= 2 ? 50 : 100);
 	if (player.gems >= cost) {
@@ -992,7 +993,7 @@ private function rathazulMakesMilkPotion():void {
 }
 
 private function rathazulMakesScorpioPotion():void {
-	spriteSelect(49);
+	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
 	if (player.gems < 100) {
 		outputText("\"<i>I'm sorry but you don't have the gems for this service,</i>\" Rathazul says.");
@@ -1017,14 +1018,14 @@ private function rathazulMakesScorpioPotion():void {
 
 
 private function growLethiciteDefense():void {
-	spriteSelect(49);
+	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
 	outputText("Rathazul asks, \"<i>Are you absolutely sure?  Growing this thorn canopy as a defense will use one third of the crystal's power.</i>\"\n\n(Do you have Rathazul use the crystal to grow a defensive canopy?)");
 	doYesNo(growLethiciteDefenseYesYesYes, growLethiciteDefenseGuessNot);
 }
 
 private function growLethiciteDefenseYesYesYes():void {
-	spriteSelect(49);
+	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
 	outputText("Rathazul nods and produces a mallet and chisel from his robes.  With surprisingly steady hands for one so old, he holds the chisel against the crystal and taps it, easily cracking off a large shard.  Rathazul gathers it into his hands before slamming it down into the dirt, until only the smallest tip of the crystal is visible.  He produces vials of various substances from his robe, as if by magic, and begins pouring them over the crystal.  In a few seconds, he finishes, and runs back towards his equipment.\n\n\"<i>You may want to take a step back,</i>\" he warns, but before you have a chance to do anything, a thick trunk covered in thorny vines erupts from the ground.  Thousands of vine-like branches split off the main trunk as it reaches thirty feet in the air, radiating away from the trunk and intertwining with their neighbors as they curve back towards the ground.  In the span of a few minutes, your camp gained a thorn tree and a thick mesh of barbed vines preventing access from above.");
 	player.createStatusEffect(StatusEffects.DefenseCanopy, 0, 0, 0, 0);
@@ -1033,14 +1034,14 @@ private function growLethiciteDefenseYesYesYes():void {
 }
 
 private function growLethiciteDefenseGuessNot():void {
-	spriteSelect(49);
+	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
 	outputText("Rathazul nods sagely, \"<i>That may be wise.  Perhaps there will be another use for this power.\"</i>");
 	doNext(returnToRathazulMenu);
 }
 
 public function rathazulAprilFool():void {
-	spriteSelect(49);
+	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
 	outputText("Rathazul comes to you all of a sudden, an urgent expression on his face.\n\n");
 	outputText("\"<i>Look [name] I know you are very busy but I am in dire need of something only you can do...\"</i>\n\n");
@@ -1054,7 +1055,7 @@ public function rathazulAprilFool():void {
 	addButton(13, "Next", rathazulAprilFoolPart2);
 }
 private function rathazulAprilFoolPart2():void {
-	spriteSelect(49);
+	spriteSelect(SpriteDb.s_rathazul);
 	outputText("he suddenly pulls a single vial he was hiding in a pocket on the inside of his pants before putting them back on.\n\n");
 	outputText("\"<i>Oh please don't tell me you thought I would ever ask for something like that, I'm way too old! No obviously all I need is for you to go grab water from a fountain of purity somewhere around Mareth. With this I should be able to create the Purity elixir, my ultimate creation. A concoction that I recall could reverse and undo any corruption. Imagine… this could even perhaps fix any damage the demons did to the world. All I need is a sample to study and I could create as many vials as is necessary.\"</i>\n\n");
 	if (player.hasStatusEffect(StatusEffects.RathazulAprilFool)) {
@@ -1065,7 +1066,7 @@ private function rathazulAprilFoolPart2():void {
 	doNext(returnToRathazulMenu);
 }
 public function rathazulAprilFoolPart3():void {
-	spriteSelect(49);
+	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
 	outputText("Rathazul almost steals the vial from your hands and get to work mixing it into a potion.\n\n");
 	outputText("\"<i>Here's your purity elixir. Use it with wisdom because it's the only one you will get until I get enough materials to create a second one which considering the rarity of the components is easily going to take me a full year. I definitively need to find a way to mass produce these...\"</i>\n\n");

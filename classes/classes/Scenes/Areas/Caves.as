@@ -85,7 +85,7 @@ use namespace CoC;
 			choice[choice.length] = 3; //4Displacer Beast (lvl 60)
 			choice[choice.length] = 4; //5Ebonbloom
 			choice[choice.length] = 5; //Methir Crystal
-			choice[choice.length] = 6; //Magical eye drops
+			choice[choice.length] = 6; //Eye drops
             if (player.hasKeyItem("Old Pickaxe") > 0 && Forgefather.materialsExplained)
 			    choice[choice.length] = 7; //7Ebony
             if (rand(4) == 0)
@@ -130,7 +130,7 @@ use namespace CoC;
 				case 6://6
 					clearOutput();
 					outputText("As you explore the cave, you run into a bottle of eye drops. You pack it in your backpack in case it could be sold for a decent amount. ");
-					inventory.takeItem(consumables.ME_DROP, camp.returnToCampUseOneHour);
+					inventory.takeItem(consumables.EYEDROP, camp.returnToCampUseOneHour);
 					break;
 				case 7://7
 					clearOutput();

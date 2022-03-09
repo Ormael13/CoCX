@@ -801,7 +801,7 @@ public class Jabala extends TrollVillageAbstractContent {
                     "\n" +
                     "Jabala turns to Halkano and he gives her a devious grin, \"Well, two on one, how about dat..?\"\n" +
                     "\n" +
-                    "Jabala gives a sheepish grin as she begins to slowly unbutton her blouse. [(pc not nudist) You take off your [armor] as well.]\n" +
+                    "Jabala gives a sheepish grin as she begins to slowly unbutton her blouse." + player.clothedOrNaked("You take off your [armor] as well.", "") + "\n" +
                     "\n" +
                     "Jabala climbs onto the bed with her awaiting husband. Halkano gestures for you to approach, \"Come on den, she’s not gonna do all de work. Help me get out of dese pants.\"\n" +
                     "\n" +
@@ -815,7 +815,7 @@ public class Jabala extends TrollVillageAbstractContent {
                     "\n" +
                     "Jabala blushes softly before moving back slightly, giving you a chance to get closer to his length. With your space returned you rest your head against the top of his muscular thigh, wrapping your tongue around his length to the best of your ability as you continue servicing him.\n" +
                     "\n" +
-                    "You can feel Halkano’s length twitch slightly underneath your tongue, you can feel your arousal growing beneath him. [(pc has penis) You reach your hand down and grab at your length, gently stroking yourself, getting off as well.) [(pc has vagina, lacks penis) You reach your hand down and probe at your clit as you begin to finger yourself.]\n" +
+                    "You can feel Halkano’s length twitch slightly underneath your tongue, you can feel your arousal growing beneath him. " + (player.hasCock() ? "You reach your hand down and grab at your length, gently stroking yourself, getting off as well." : "You reach your hand down and probe at your clit as you begin to finger yourself.") + "\n" +
                     "\n" +
                     "You can hear Jabala moan softly in pleasure as she blows Halkano with you, you can tell she had the same idea.\n" +
                     "\n" +
@@ -831,7 +831,7 @@ public class Jabala extends TrollVillageAbstractContent {
                     "\n" +
                     "Halkano growls louder, \"So close, almost dere! Don’t stop!\" His thrusts become more aggressive, his erection pulses between the two of you, ready to burst.\n" +
                     "\n" +
-                    "You continue getting yourself off, so close as well. You can hear Jabala moan quietly as she cums. Halkano roars with vigor as he reaches the height of his orgasm. Thick ropes of cum shoot out before you and all over the bed. You find yourself finally reaching your climax as well. (Unleashing your load onto the bed beneath you.) (Vaginal fluids drip past your lips onto the bed beneath you.)\n" +
+                    "You continue getting yourself off, so close as well. You can hear Jabala moan quietly as she cums. Halkano roars with vigor as he reaches the height of his orgasm. Thick ropes of cum shoot out before you and all over the bed. You find yourself finally reaching your climax as well. " + (player.hasCock() ? "Unleashing your load onto the bed beneath you." : "Vaginal fluids drip past your lips onto the bed beneath you.") + "\n" +
                     "\n" +
                     "Halkano sighs as his body begins to relax and his orgasm dies down. The length of his girth is still covered in cum as the two of you help clean him off.\n" +
                     "\n" +

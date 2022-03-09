@@ -25,7 +25,7 @@ package classes.Scenes.NPCs	{
 	import classes.Scenes.Areas.HighMountains.TempleOfTheDivine;
 	import classes.Scenes.SceneLib;
 	import classes.Stats.Buff;
-	import classes.display.SpriteDb;
+    import classes.display.SpriteDb;
 	
 	public class Forgefather extends NPCAwareContent implements SaveableState	{
 		

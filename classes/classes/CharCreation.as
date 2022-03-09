@@ -29,6 +29,7 @@ import classes.lists.BreastCup;
 import classes.lists.Gender;
 import classes.Stats.BuffableStat;
 import classes.Stats.IStat;
+import classes.display.SpriteDb;
 
 import classes.GeneticMemories.*;
 
@@ -412,7 +413,7 @@ import coc.view.MainView;
 			var newFlags:DefaultDict = new DefaultDict();
 			if (player.hasKeyItem("Ascension") >= 0) {
 				for each(var flag:int in [kFLAGS.NEW_GAME_PLUS_LEVEL, kFLAGS.HUNGER_ENABLED, kFLAGS.HARDCORE_MODE, kFLAGS.HARDCORE_SLOT, kFLAGS.GAME_DIFFICULTY, kFLAGS.EASY_MODE_ENABLE_FLAG, kFLAGS.NO_GORE_MODE, kFLAGS.WISDOM_SCALING, kFLAGS.INTELLIGENCE_SCALING, kFLAGS.STRENGTH_SCALING, kFLAGS.SPEED_SCALING, kFLAGS.SECONDARY_STATS_SCALING, kFLAGS.WATERSPORTS_ENABLED, 
-				kFLAGS.SILLY_MODE_ENABLE_FLAG, kFLAGS.LOW_STANDARDS_FOR_ALL, kFLAGS.HYPER_HAPPY, kFLAGS.SFW_MODE, kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM, kFLAGS.MELEE_DAMAGE_OVERHAUL, kFLAGS.LVL_UP_FAST, kFLAGS.MUTATIONS_SPOILERS, kFLAGS.INVT_MGMT_TYPE, kFLAGS.NEWPERKSDISPLAY, kFLAGS.CHARVIEW_STYLE, kFLAGS.SPIRIT_STONES]) {
+				kFLAGS.SILLY_MODE_ENABLE_FLAG, kFLAGS.LOW_STANDARDS_FOR_ALL, kFLAGS.HYPER_HAPPY, kFLAGS.SFW_MODE, kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM, kFLAGS.MELEE_DAMAGE_OVERHAUL, kFLAGS.LVL_UP_FAST, kFLAGS.MUTATIONS_SPOILERS, kFLAGS.INVT_MGMT_TYPE, kFLAGS.NEWPERKSDISPLAY, kFLAGS.CHARVIEW_STYLE, kFLAGS.CHARVIEW_ARMOR_HIDDEN, kFLAGS.SPIRIT_STONES]) {
 					newFlags[flag] = flags[flag];
 				}
 			}
@@ -1542,6 +1543,7 @@ import coc.view.MainView;
 
 		private function arrivalPartTwo():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_zetaz_imp);
 			hideUpDown();
 			dynStats("lus", 40, "cor", 2);
 			model.time.hours = 18;

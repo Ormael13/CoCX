@@ -221,7 +221,7 @@ import coc.xxc.StoryContext;
 			player.clearStatuses(visibility);
 		}
 
-		protected function spriteSelect(choice:Object = 0):void
+		protected function spriteSelect(choice:Class = null):void
 		{
 			CoC.instance.spriteSelect(choice);
 		}
@@ -1055,9 +1055,11 @@ import coc.xxc.StoryContext;
 				}
 			}
 			if (!isChecking){
-				if (page!=0 || total>12) {
-					button(12).show("Prev Page", curry(menuGen, menuItems,page - 1,  back, sort, isChecking)).disableIf(page == 0);
-					button(13).show("Next Page", curry(menuGen, menuItems,page + 1,  back, sort, isChecking)).disableIf(!next);
+				if (total/3 > 12) {
+					addButton(12,"Prev Page", curry(menuGen, menuItems,page - 1,  back, sort, isChecking));
+					if (page == 0) addButtonDisabled(12, "Prev Page","This is the first page.");
+					addButton(13, "Next Page", curry(menuGen, menuItems,page + 1,  back, sort, isChecking));
+					if (!next) addButtonDisabled(13, "Next Page", "This is the last page.");
 				}
 				if (back != null) button(14).show("Back",back);
 			}

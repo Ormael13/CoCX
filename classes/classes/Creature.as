@@ -2656,44 +2656,7 @@ public class Creature extends Utils
 				return true;//dodać inne typy wrogów: nieumarli/duchy
 			return false;
 		}
-
-		//Unique sex scenes
-		/*
-		public function pcCanUseUniqueSexScene():Boolean
-		{
-			if (game.player.tailType == Tail.MANTICORE_PUSSYTAIL && game.monster.hasCock()) return true;
-			else if ((game.player.tailType == Tail.HINEZUMI || game.player.tailType == Tail.SALAMANDER) && game.monster.short != "anemone" && game.monster.short != "sea anemone" && game.monster.short != "hellhound" && game.monster.short != "infested hellhound") return true;
-			else if ((game.player.gender == 1 || game.player.gender == 2) && (game.player.tailType == Tail.HINEZUMI || game.player.tailType == Tail.MOUSE || game.player.tailType == Tail.DEMONIC)) return true;
-			else if ((game.player.raijuScore() >= 10 || game.player.thunderbirdScore() >= 12) && !game.monster.hasPerk(PerkLib.EnemyHugeType) && !game.monster.hasPerk(PerkLib.EnemyGigantType) && !game.monster.hasPerk(PerkLib.EnemyColossalType) && !game.monster.isAlraune() && !game.monster.isDrider() && !game.monster.isGoo() && !game.monster.isNaga() && !game.monster.isScylla() && !game.monster.isTaur()) return true;
-			else if (game.player.hasStatusEffect(StatusEffects.Overheat) && !game.monster.hasPerk(PerkLib.EnemyHugeType) && !game.monster.hasPerk(PerkLib.EnemyGigantType) && !game.monster.hasPerk(PerkLib.EnemyColossalType)) return true;
-			else if (game.player.hasStatusEffect(StatusEffects.Overheat) && game.monster.hasPerk(PerkLib.IceNature) && game.player.hasVagina() && game.monster.hasCock()) return true;
-			else if (game.player.yukiOnnaScore() >= 14 && game.monster.hasCock() && !game.monster.hasPerk(PerkLib.UniqueNPC) && !game.monster.hasPerk(PerkLib.EnemyHugeType) && !game.monster.hasPerk(PerkLib.EnemyGigantType) && !game.monster.hasPerk(PerkLib.EnemyColossalType) && !game.monster.isAlraune() && !game.monster.isDrider() && !game.monster.isGoo() && !game.monster.isNaga() && !game.monster.isScylla() && !game.monster.isTaur()) return true;
-			else if (game.player.isInGoblinMech() && game.player.hasKeyItem("Cum Reservoir") >= 0 && game.player.keyItemv1("Cum Reservoir") < 4 && game.monster.hasCock()) return true;
-			//else if (Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_ISMB) return true;
-			else if (game.player.isAlraune()) {
-				if (game.player.isLiliraune()) {
-					if (game.player.isLiliraune() && game.monster.hasCock()) return true;
-					else if (game.player.isLiliraune() && game.monster.hasVagina()) return true;
-				}
-				else {
-					if (game.player.lowerBody == LowerBody.PLANT_FLOWER && game.monster.hasCock()) return true;
-					else if (game.player.lowerBody == LowerBody.PLANT_FLOWER && game.monster.hasVagina()) return true;
-				}
-				if (game.player.isAlraune() && game.player.cor >= 50 && game.monster.hasVagina() && !game.monster.hasPerk(PerkLib.UniqueNPC)) return true;
-			}
-			else if (game.player.hasPerk(PerkLib.EasterBunnyBalls) && game.player.hasCock() && game.player.ballSize > 3) return true;
-			else if (game.monster.hasVagina() && (game.player.isKraken() || game.player.isScylla())) return true;
-			else if (game.player.hasVagina() && (((game.player.isKraken() || game.player.lowerBody == LowerBody.HYDRA) && game.player.tallness*3/2 > game.monster.tallness) || game.player.tallness > game.monster.tallness*2)) return true;
-			else if (game.player.jiangshiScore() >= 20) {
-				if (game.monster.hasPerk(PerkLib.EnemyTrueDemon)) {
-					if (game.monster.hasCock() || game.monster.hasVagina()) return true;
-				}
-				if (game.monster.short == "minotaur" || game.monster.short == "minotaur lord") return true;
-			}
-			if (game.player.hasPerk(PerkLib.ElementalBody)) return false;
-			return false;
-		}
-		 */
+        
 		//check for vagoo
 		public function hasVagina():Boolean
 		{

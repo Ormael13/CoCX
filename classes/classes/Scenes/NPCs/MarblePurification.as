@@ -20,6 +20,7 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 public class MarblePurification extends NPCAwareContent{
 
@@ -234,6 +235,7 @@ public class MarblePurification extends NPCAwareContent{
 	public function claraShowsUpInCampBECAUSESHESACUNT():void
 	{
 		clearOutput();
+        spriteSelect(SpriteDb.s_clara);
 		flags[kFLAGS.MARBLE_RATHAZUL_COUNTER_2] = 0;
 	 	outputText("As you get up, you hear the voices of two happy women chatting pleasantly to each other; you recognize one as Marble, but the other is a stranger to you. Whoever they are, they’re clearly getting along very well, and both sound quite excited.  <i>\"Morning sweetie!</i>\"  Marble excitedly exclaims at the sight of you coming out of your " + camp.homeDesc() + ".  <i>\"Let me introduce you to my sister, Clara.</i>\"");
 	 	outputText("\n\nThe other woman, whom you presume is Clara, certainly does look like she is related to Marble.  She is obviously another Lacta Bovine, with many of the same features as ");
@@ -430,9 +432,8 @@ public class MarblePurification extends NPCAwareContent{
 	 	outputText(" and get ready to fight to free yourself from this mad milkmaid’s mammaries.  Realizing your intentions, Clara’s face turns from a crazed grin to an angry glare.  With barely contained fury, she screams at you, \"<i>Oh don’t you worry darling, I will <b>make</b> you love drinking my milk!</i>\" before standing up, hefting a nasty looking heavy mace, and charging at you.");
 		//go to Clara’s fight
 		startCombatWithMarbleSister(false);
-
-
 	}
+
 	public function startCombatWithMarbleSister(inCamp:Boolean = true):void
 	{
 		startCombat(new Clara());
@@ -579,6 +580,7 @@ public class MarblePurification extends NPCAwareContent{
 	public function loseToClara(combat:Boolean = true):void
 	{
 		clearOutput();
+        spriteSelect(SpriteDb.s_clara);
 		//PC loses via health
 		if(combat)
 		{
@@ -1120,6 +1122,7 @@ public class MarblePurification extends NPCAwareContent{
 	public function calmMurblesFatAssDown():void
 	{
 		clearOutput();
+        marbleScene.marbleSprite();
 	 	outputText("That's enough.  You put your hand on Marble's shoulder and she turns to you in surprise.  Her body is still shaking with barely controlled rage, eyes filled with pain and anger mixed together, the flood of tears is just barely kept at bay.  You tell her to calm down and take a deep breath while wrapping your arms tightly around her body.  Instantly her body freezes in place for several moments, then she bursts into tears and ");
 		//if ((PC taller than 6'8" and Marble not cow-morph) or (PC taller than 7'2" and Marble cow-morph))
 		if((player.tallness >= 80 && flags[kFLAGS.MARBLE_BOVA_LEVEL] < 2) || (player.tallness >= 86 && flags[kFLAGS.MARBLE_BOVA_LEVEL] >= 2))
@@ -1265,6 +1268,7 @@ public class MarblePurification extends NPCAwareContent{
 	public function dealingWithCowCuntPostPurification():void
 	{
 		clearOutput();
+        spriteSelect(SpriteDb.s_clara);
 	 	outputText("Now there is only one more loose end in this whole effort to purify Marble: her sister.");
 	 	outputText("\n\nShe is still laying on the ground, tied up next to the firepit.  Fittingly, a couple of discarded cups lay next to her, and her tea pot lays overturned at her feet.  Your return does not go unnoticed.  \"<i>Finally remembered me, huh?  You damn evil people, do you have any idea what kind of a person I am?</i>\"");
 	 	outputText("\n\n\"<i>The kind who thinks they deserve the world thanks to a parent spoiling them horribly as a child,</i>\" Marble responds.  \"<i>However, you do deserve one thing.  Thank you, sister, for giving me your milk.  I've been purified now, and my milk is safe for anyone to drink.</i>\"");
@@ -1369,6 +1373,7 @@ public class MarblePurification extends NPCAwareContent{
 	public function purificationQuestFinal():void
 	{
 		clearOutput();
+        marbleScene.marbleSprite();
 		var expReward:Number = 500;
 		if (player.level > 4) expReward += (player.level - 4) * 100;
 	 	outputText("\"<i>It has been quite the morning, hasn't it sweetie?</i>\"  It certainly has been, but at least now, your lover is finally free of her corruption once and for all.");

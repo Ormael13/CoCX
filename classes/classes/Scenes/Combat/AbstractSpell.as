@@ -232,7 +232,6 @@ public class AbstractSpell extends CombatAbility {
 				if (Forgefather.channelInlay == "ruby" && Forgefather.refinement == 5) damage *= 1.5
 				if (Forgefather.gem == "ruby" && Forgefather.refinement == 4) damage *= 1.12
 				if (Forgefather.gem == "ruby" && Forgefather.refinement == 5) damage *= 1.25
-				
 				damage *= combat.fireDamageBoostedByDao();
 				break;
 			}
@@ -265,6 +264,22 @@ public class AbstractSpell extends CombatAbility {
 				if (Forgefather.gem == "amethyst" && Forgefather.refinement == 4) damage *= 1.12
 				if (Forgefather.gem == "amethyst" && Forgefather.refinement == 5) damage *= 1.25
 				damage *= combat.darknessDamageBoostedByDao();
+				break;
+			}
+			case DamageType.WATER: {
+				damage *= combat.waterDamageBoostedByDao();
+				break;
+			}
+			case DamageType.WIND: {
+				damage *= combat.windDamageBoostedByDao();
+				break;
+			}
+			case DamageType.EARTH: {
+				damage *= combat.earthDamageBoostedByDao();
+				break;
+			}
+			case DamageType.ACID: {
+				damage *= combat.acidDamageBoostedByDao();
 				break;
 			}
 			case DamageType.TRUE: {
@@ -368,7 +383,8 @@ public class AbstractSpell extends CombatAbility {
 			damage:Number,
 			damageType:int,
 			displayDamageOnly:Boolean=false,
-			omnicasterRepeat:Boolean=true
+			omnicasterRepeat:Boolean=true,
+			convergenceRepeat:Boolean=false
 	):Number {
 		if (display) {
 			outputText("[Themonster] takes ");
@@ -396,6 +412,18 @@ public class AbstractSpell extends CombatAbility {
 			case DamageType.LIGHTNING:
 				damageFn = doLightingDamage;
 				break;
+			case DamageType.WATER:
+				damageFn = doWaterDamage;
+				break;
+			case DamageType.WIND:
+				damageFn = doWindDamage;
+				break;
+			case DamageType.EARTH:
+				damageFn = doEarthDamage;
+				break;
+			case DamageType.ACID:
+				damageFn = doAcidDamage;
+				break;
 			case DamageType.MAGICAL:
 				damageFn = doMagicDamage;
 				break;
@@ -404,6 +432,7 @@ public class AbstractSpell extends CombatAbility {
 				damageFn = doDamage;
 		}
 		var repeats:int = omnicasterRepeat ? omnicasterRepeatCount() : 1;
+		if (convergenceRepeat && player.hasPerk(PerkLib.Convergence) && !monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType)) repeats *= 2;
 		var i:int = repeats;
 		while (i-->0) {
 			damageFn(damage, true, display || displayDamageOnly);

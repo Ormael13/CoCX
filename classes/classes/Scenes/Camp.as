@@ -14,6 +14,7 @@ import classes.Items.ConsumableLib;
 import classes.Items.Consumables.SimpleConsumable;
 import classes.Scenes.Areas.Forest.WoodElvesHuntingParty;
 import classes.Scenes.Areas.HighMountains.TempleOfTheDivine;
+import classes.Scenes.NPCs.ZenjiScenes;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.Places.TrollVillage;
 import classes.Scenes.Places.WoodElves;
@@ -117,7 +118,7 @@ public class Camp extends NPCAwareContent{
 		if (timeUsed == 1)
 			outputText("An hour passes...\n");
 		else outputText(Num2Text(timeUsed) + " hours pass...\n");
-		if (!CoC.instance.inCombat) spriteSelect(-1);
+		if (!CoC.instance.inCombat) spriteSelect(null);
 		hideMenus();
 		timeQ = timeUsed;
 		goNext(false);
@@ -229,6 +230,16 @@ public class Camp extends NPCAwareContent{
 			campUniqueScenes.playsRathazulAndSoulgemScene();
 			return;
 		}
+		if (TrollVillage.ZenjiVillageStage == 2 && TrollVillage.ZenjiTrollVillageTimeChk == time.days && time.hours >= 8) {
+			hideMenus();
+			SceneLib.trollVillage.yenza.YenzaBeratePart2();
+			return;
+		}
+		if (flags[kFLAGS.ZENJI_PROGRESS] >= 11 && time.days != ZenjiScenes.ZenjiLoverDaysTracker){
+			ZenjiScenes.ZenjiLoverDays++;
+			ZenjiScenes.ZenjiLoverDaysTracker = time.days;
+		}
+		if (TrollVillage.ZenjiMoneyHelp > 0) TrollVillage.ZenjiMoneyHelp -= 1;
 		if (!marbleScene.marbleFollower()) {
 			if (flags[kFLAGS.MARBLE_LEFT_OVER_CORRUPTION] == 1 && player.cor <= 40) {
 				hideMenus();
@@ -838,30 +849,29 @@ public class Camp extends NPCAwareContent{
 		if (player.hasStatusEffect(StatusEffects.DefenseCanopy)) {
 			outputText("A thorny tree has sprouted near the center of the [camp], growing a protective canopy of spiky vines around the portal and your [camp].  ");
 		}
+        //Wall
 		if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 10 && flags[kFLAGS.CAMP_WALL_PROGRESS] < 100) {
 			if (flags[kFLAGS.CAMP_WALL_PROGRESS] / 10 == 1) outputText("A thick wooden wall has been erected to provide a small amount of defense.  ");
 			else outputText("Thick wooden walls have been erected to provide some defense.  ");
-			if (flags[kFLAGS.CAMP_WALL_SKULLS] == 1) outputText("A single imp skull has been mounted on the wall segments");
-			else if (flags[kFLAGS.CAMP_WALL_SKULLS] >= 2 && flags[kFLAGS.CAMP_WALL_SKULLS] < 5) outputText("Few imp skulls have been mounted on the wall segments");
-			else if (flags[kFLAGS.CAMP_WALL_SKULLS] >= 5 && flags[kFLAGS.CAMP_WALL_SKULLS] < 15) outputText("Several imp skulls have been mounted on the wall segments");
-			else outputText("Innumerable imp skulls decorate the wall, some even impaled on wooden spikes");
-			outputText(" to serve as deterrence.  ");
-			if (flags[kFLAGS.CAMP_WALL_SKULLS] == 1) outputText("There is currently one skull.  ");
-			else outputText("There are currently " + num2Text(flags[kFLAGS.CAMP_WALL_SKULLS]) + " skulls.  ");
 		} else if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100) {
 			outputText("Thick wooden walls have been erected; they surround one half of your [camp] perimeter and provide good defense, leaving the the open half for access to the stream.  ");
 			if (flags[kFLAGS.CAMP_WALL_GATE] > 0) outputText("A gate has been constructed in the middle of the walls; it gets closed at night to keep any invaders out.  ");
-			if (flags[kFLAGS.CAMP_WALL_SKULLS] > 0) {
-				if (flags[kFLAGS.CAMP_WALL_SKULLS] == 1) outputText("A single imp skull has been mounted near the gateway");
-				else if (flags[kFLAGS.CAMP_WALL_SKULLS] >= 2 && flags[kFLAGS.CAMP_WALL_SKULLS] < 5) outputText("Few imp skulls have been mounted near the gateway");
-				else if (flags[kFLAGS.CAMP_WALL_SKULLS] >= 5 && flags[kFLAGS.CAMP_WALL_SKULLS] < 15) outputText("Several imp skulls have been mounted near the gateway");
-				else outputText("Innumerable imp skulls decorate the gateway and wall, some even impaled on wooden spikes");
-				outputText(" to serve as deterrence.  ");
-				if (flags[kFLAGS.CAMP_WALL_SKULLS] == 1) outputText("There is currently one skull.  ");
-				else outputText("There are currently " + num2Text(flags[kFLAGS.CAMP_WALL_SKULLS]) + " skulls.  ");
-			}
-			outputText("\n\n");
 		}
+        //Imp Skulls
+        if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 10 && flags[kFLAGS.CAMP_WALL_SKULLS] > 0) {
+            if (flags[kFLAGS.CAMP_WALL_SKULLS] == 1)
+                outputText("A single imp skull has been mounted " + (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100 ? "near the gateway" : "on the wall segments"));
+            else if (flags[kFLAGS.CAMP_WALL_SKULLS] >= 2 && flags[kFLAGS.CAMP_WALL_SKULLS] < 5)
+                outputText("Few imp skulls have been mounted " + (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100 ? "near the gateway" : "on the wall segments"));
+            else if (flags[kFLAGS.CAMP_WALL_SKULLS] >= 5 && flags[kFLAGS.CAMP_WALL_SKULLS] < 15)
+                outputText("Several imp skulls have been mounted " + (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100 ? "near the gateway" : "on the wall segments"));
+            else
+                outputText("Innumerable imp skulls decorate the " + (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100 ? "gateway and " : "") + "wall, some are even impaled on wooden spikes");
+            outputText(" to serve as deterrence.  ");
+            if (flags[kFLAGS.CAMP_WALL_SKULLS] == 1) outputText("There is currently one skull.  ");
+            else outputText("There are currently " + num2Text(flags[kFLAGS.CAMP_WALL_SKULLS]) + " skulls.  ");
+        }
+			outputText("\n\n");
 		//Magic Ward
 		if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] >= 2) {
 			if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100) outputText("Just within the wall are the");
@@ -1014,10 +1024,10 @@ public class Camp extends NPCAwareContent{
 		addButton(2, "Inventory", inventory.inventoryMenu).hint("The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.");
 		if (inventory.showStash()) addButton(3, "Stash", inventory.stash).hint("The stash allows you to store your items safely until you need them later.");
 		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] >= 2) addButton(4, "Warehouse", inventory.warehouse).hint("The warehouse and granary allow you to store your items in a more organized manner.");
-		if (followersCount() > 0) addButton(5, "Followers", campFollowers).hint("Check up on any followers or companions who are joining you in or around your camp.  You'll probably just end up sleeping with them.");
-		if (loversCount() > 0) addButton(6, "Lovers", campLoversMenu).hint("Check up on any lovers you have invited to your camp so far and interact with them.");
+		if (followersCount() > 0) addButton(5, "Followers", campFollowers).hint("Check up on any followers or companions who are joining you in or around your [camp].  You'll probably just end up sleeping with them.");
+		if (loversCount() > 0) addButton(6, "Lovers", campLoversMenu).hint("Check up on any lovers you have invited to your [camp] so far and interact with them.");
 		if (slavesCount() > 0) addButton(7, "Slaves", campSlavesMenu).hint("Check up on any slaves you have received and interact with them.");
-		addButton(8, "Camp Actions", campActions).hint("Read your codex, questlog or interact with the camp surroundings.");
+		addButton(8, "Camp Actions", campActions).hint("Read your codex, questlog or interact with the [camp] surroundings.");
 		if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 10 || flags[kFLAGS.CAMP_BUILT_CABIN] >= 1) addButton(9, "Enter Cabin", cabinProgress.initiateCabin).hint("Enter your cabin."); //Enter cabin for furnish.
 		if (player.hasPerk(PerkLib.JobSoulCultivator) || debug) addButton(10, "Soulforce", soulforce.accessSoulforceMenu).hint("Spend some time on the cultivation, or spend some of the soulforce.");
 		else if (!player.hasPerk(PerkLib.JobSoulCultivator) && player.hasPerk(PerkLib.Metamorph)) addButton(10, "Metamorph", SceneLib.metamorph.openMetamorph).hint("Use your soulforce to mold your body.");
@@ -1271,7 +1281,7 @@ public class Camp extends NPCAwareContent{
 		var buttons:ButtonDataList = new ButtonDataList();
 		if (!descOnly) {
 			hideMenus();
-			spriteSelect(-1);
+			spriteSelect(null);
 			clearOutput();
 			CoC.instance.inCombat = false;
 			menu();
@@ -1597,15 +1607,7 @@ public class Camp extends NPCAwareContent{
 				buttons.add("Samirah", SceneLib.samirah.samirahMainCampMenu);
 			}
 			//Zenji
-			if (TrollVillage.ZenjiVillageStage == 2) {
-				if (TrollVillage.ZenjiTrollVillageTimeChk == 0) {
-					TrollVillage.ZenjiTrollVillageTimeChk = model.time.days + 1;
-				} else if (TrollVillage.ZenjiTrollVillageTimeChk < model.time.days && TrollVillage.ZenjiTrollVillageTimeChk != -1) {
-					SceneLib.trollVillage.yenza.YenzaBeratePart2();
-				}
-			}
-			if (TrollVillage.ZenjiMoneyHelp > 0) TrollVillage.ZenjiMoneyHelp -= 1;
-			if (flags[kFLAGS.ZENJI_PROGRESS] == 11) {
+			if (flags[kFLAGS.ZENJI_PROGRESS] == 11 && TrollVillage.ZenjiVillageStage != 2) {
 				if (model.time.hours >= 7 && model.time.hours <= 18) {
 					if (slavesCount() > 0 && rand(5) == 0) outputText("Zenji is keeping a close eye on some of your more corrupt camp members, ensuring that they don’t cause any harm.");
 					else if (player.statusEffectv2(StatusEffects.ZenjiModificationsList) >= 998700 && rand(5) == 0) outputText("Zenji is around your [camp], it’s impossible to miss him as he strokes his length as cascades of cum leak from his erection.");
@@ -1675,7 +1677,7 @@ public class Camp extends NPCAwareContent{
 		var buttons:ButtonDataList = new ButtonDataList();
 		if (!descOnly) {
 			hideMenus();
-			spriteSelect(-1);
+			spriteSelect(null);
 			clearOutput();
 			CoC.instance.inCombat = false;
 			menu();
@@ -1748,7 +1750,7 @@ public class Camp extends NPCAwareContent{
 		var buttons:ButtonDataList = new ButtonDataList();
 		if (!descOnly) {
 			hideMenus();
-			spriteSelect(-1);
+			spriteSelect(null);
 			clearOutput();
 			CoC.instance.inCombat = false;
 			//ADD MENU FLAGS/INDIVIDUAL FOLLOWER TEXTS
@@ -1785,7 +1787,7 @@ public class Camp extends NPCAwareContent{
 				else if (rand(4) == 0) outputText("Sophie is sitting in her nest, idly brushing out her feathers.  Occasionally, she looks up from her work to give you a sultry wink and a come-hither gaze.\n\n");
 				else if (rand(3) == 0) outputText("Sophie is fussing around in her nest, straightening bits of straw and grass, trying to make it more comfortable.  After a few minutes, she flops down in the middle and reclines, apparently satisfied for the moment.\n\n");
 				else if (rand(2) == 0 || flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] == 0) {
-					if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0) outputText("Your platinum-blonde harpy, Sophie, is currently reading a book - a marked change from her bimbo-era behavior.  Occasionally, though, she glances up from the page and gives you a lusty look.  Some things never change....\n\n");
+					if (flags[kFLAGS.SOPHIE_BIMBO_ACCEPTED] > 0) outputText("Your platinum-blonde harpy, Sophie, is currently reading a book - a marked change from her bimbo-era behavior.  Occasionally, though, she glances up from the page and gives you a lusty look.  Some things never change....\n\n");
 					else outputText("Your pink harpy, Sophie, is currently reading a book.  She seems utterly absorbed in it, though you question how she obtained it.  Occasionally, though, she'll glance up from the pages to shoot you a lusty look.\n\n");
 				} else {
 					outputText("Sophie is sitting in her nest, ");
@@ -1845,8 +1847,8 @@ public class Camp extends NPCAwareContent{
 				outputText("Neisa is hanging by a tree next to the [camp] practicing her swordplay on a makeshift dummy for the next expedition.\n\n");
 				buttons.add("Neisa", SceneLib.neisaFollower.neisaCampMenu).hint("Visit Neisa the shield maiden.");
 			}
-			//Zenji folower
-			if (flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9) {
+			//Zenji follower
+			if ((flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9) && TrollVillage.ZenjiVillageStage != 2) {
 				if (model.time.hours >= 7 && model.time.hours <= 18) {
 					if (rand(3) == 0) outputText("Zenji is around your [camp], you see him currently relaxing atop a tree.");
 					else {
@@ -1961,10 +1963,10 @@ public class Camp extends NPCAwareContent{
 			}
 			//Pure/Corrupted Holli
 			if (flags[kFLAGS.FUCK_FLOWER_LEVEL] == 4) {
-				buttons.add("Holli", holliScene.treeMenu).hint("Holli is in her tree at the edges of your camp.  You could go visit her if you want.");
+				buttons.add("Holli", holliScene.treeMenu).hint("Holli is in her tree at the edges of your [camp].  You could go visit her if you want.");
 			}
 			if (flags[kFLAGS.FLOWER_LEVEL] == 4) {
-				buttons.add("Holli", HolliPure.treeMenu).hint("Holli is in her tree at the edges of your camp.  You could go visit her if you want.");
+				buttons.add("Holli", HolliPure.treeMenu).hint("Holli is in her tree at the edges of your [camp].  You could go visit her if you want.");
 			}
 			//Michiko
 			if (flags[kFLAGS.MICHIKO_FOLLOWER] >= 1) {
@@ -2027,11 +2029,11 @@ public class Camp extends NPCAwareContent{
 		menu();
 		clearOutput();
 		outputText("What would you like to do?");
-		addButton(0, "Build", campBuildingSim).hint("Check your camp build options.");
+		addButton(0, "Build", campBuildingSim).hint("Check your [camp] build options.");
 		if (player.hasPerk(PerkLib.JobElementalConjurer) || player.hasPerk(PerkLib.JobGolemancer) || player.hasPerk(PerkLib.PrestigeJobNecromancer)) addButton(1, "Winions", campWinionsArmySim).hint("Check your options for making some Winions.");
 		else addButtonDisabled(1, "Winions", "You need to be able to make some minions that fight for you to use this option.");
-		addButton(2, "Misc", campMiscActions).hint("Misc options to do things in and around camp.");
-		addButton(3, "SpentTime", campSpendTimeActions).hint("Check your options to spend time in and around camp.");
+		addButton(2, "Misc", campMiscActions).hint("Misc options to do things in and around [camp].");
+		addButton(3, "SpentTime", campSpendTimeActions).hint("Check your options to spend time in and around [camp].");
 		addButton(4, "NPC's", SparrableNPCsMenu);
 		//addButton(5, "Craft", kGAMECLASS.crafting.accessCraftingMenu).hint("Craft some items.");
 		if (player.hasStatusEffect(StatusEffects.CampRathazul)) addButton(7, "Herbalism", HerbalismMenu).hint("Use ingrediants to craft poultrice and battle medicines.")
@@ -2065,17 +2067,17 @@ public class Camp extends NPCAwareContent{
 		menu();
 		if (player.hasKeyItem("Carpenter's Toolbox") >= 0) {
 			if (flags[kFLAGS.CAMP_WALL_PROGRESS] < 100) {
-				if (getCampPopulation() >= 4) addButton(0, "Build Wall", buildCampWallPrompt).hint("Build a wall around your camp to defend from the imps." + (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 10 ? "\n\nProgress: " + (flags[kFLAGS.CAMP_WALL_PROGRESS] / 10) + "/10 complete" : "") + "");
+				if (getCampPopulation() >= 4) addButton(0, "Build Wall", buildCampWallPrompt).hint("Build a wall around your [camp] to defend from the imps." + (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 10 ? "\n\nProgress: " + (flags[kFLAGS.CAMP_WALL_PROGRESS] / 10) + "/10 complete" : "") + "");
 				else addButtonDisabled(0, "Build Wall", "Req. 4+ camp population.");
 				addButtonDisabled(1, "Build Gate", "Req. to build wall fully first.");
 			}
 			if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100) {
 				addButtonDisabled(0, "Build Wall", "Already built.");
 				if (flags[kFLAGS.CAMP_WALL_GATE] > 0) addButtonDisabled(1, "Build Gate", "Already built.");
-				else addButton(1, "Build Gate", buildCampGatePrompt).hint("Build a gate to complete your camp defense.");
+				else addButton(1, "Build Gate", buildCampGatePrompt).hint("Build a gate to complete your [camp] defense.");
 			}
 			//addButton(3, "Build Cabin(O)", campUpgrades.buildCampMembersCabinsMenu).hint("Work on your camp members cabins.");
-			addButton(5, "Build Misc", campUpgrades.buildmisc1Menu).hint("Build other structures than walls or cabins for your camp.");
+			addButton(5, "Build Misc", campUpgrades.buildmisc1Menu).hint("Build other structures than walls or cabins for your [camp].");
 			//addButton(6, "Build Misc(O)", campUpgrades.).hint("Other structures than walls or cabins for your camp.");
 		}
 		else {
@@ -2105,9 +2107,9 @@ public class Camp extends NPCAwareContent{
 		menu();
 		if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 1) addButton(0, "Fishery", VisitFishery).hint("Visit Fishery.");
 		else addButtonDisabled(0, "Fishery", "Would you kindly build it first?");
-		if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] >= 2) addButton(1, "Ward", MagicWardMenu).hint("Activate or Deactivate Magic Ward around camp.");
+		if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] >= 2) addButton(1, "Ward", MagicWardMenu).hint("Activate or Deactivate Magic Ward around [camp].");
 		else addButtonDisabled(1, "Ward", "Would you kindly instal it first?");
-		if (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] >= 4) addButton(2, "Kitsune Shrine", campScenes.KitsuneShrine).hint("Meditate at camp Kitsune Shrine.");
+		if (flags[kFLAGS.CAMP_UPGRADES_KITSUNE_SHRINE] >= 4) addButton(2, "Kitsune Shrine", campScenes.KitsuneShrine).hint("Meditate at [camp] Kitsune Shrine.");
 		else addButtonDisabled(2, "Kitsune Shrine", "Would you kindly build it first?");
 		if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] >= 4) addButton(3, "Hot Spring", campScenes.HotSpring).hint("Visit Hot Spring.");
 		else addButtonDisabled(3, "Hot Spring", "Would you kindly build it first?");
@@ -3016,12 +3018,12 @@ public class Camp extends NPCAwareContent{
 			if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] < 2) addButton(10, "Train", NPCsTrain);
 			if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) addButton(11, "Relax", NPCsRelax);
 		}
-		addButton(0, "Chi Chi", toggleChiChiMenu).hint("Enable or Disable Chi Chi. This will remove her from enc table and if already in camp disable access to her.");
-		addButton(1, "Diana", toggleDianaMenu).hint("Enable or Disable Diana. This will remove her from enc table and if already in camp disable access to her.");
-		addButton(2, "Diva", toggleDivaMenu).hint("Enable or Disable Diva. This will remove her from enc table and if already in camp disable access to her.");
-		addButton(3, "Electra", toggleElectraMenu).hint("Enable or Disable Electra. This will remove her from enc table and if already in camp disable access to her.");
-		addButton(4, "Etna", toggleEtnaMenu).hint("Enable or Disable Etna. This will remove her from enc table and if already in camp disable access to her.");
-		addButton(5, "Luna", toggleLunaMenu).hint("Enable or Disable Luna. This will remove her from enc table and if already in camp disable access to her.");
+		addButton(0, "Chi Chi", toggleChiChiMenu).hint("Enable or Disable Chi Chi. This will remove her from enc table and if already in [camp] disable access to her.");
+		addButton(1, "Diana", toggleDianaMenu).hint("Enable or Disable Diana. This will remove her from enc table and if already in [camp] disable access to her.");
+		addButton(2, "Diva", toggleDivaMenu).hint("Enable or Disable Diva. This will remove her from enc table and if already in [camp] disable access to her.");
+		addButton(3, "Electra", toggleElectraMenu).hint("Enable or Disable Electra. This will remove her from enc table and if already in [camp] disable access to her.");
+		addButton(4, "Etna", toggleEtnaMenu).hint("Enable or Disable Etna. This will remove her from enc table and if already in [camp] disable access to her.");
+		addButton(5, "Luna", toggleLunaMenu).hint("Enable or Disable Luna. This will remove her from enc table and if already in [camp] disable access to her.");
 		addButton(6, "DragonBoi", toggleTedMenu).hint("Enable or Disable Dragon Boi. This will remove him from enc table.");
 		addButton(14, "Back", campActions);
 	}
@@ -3932,7 +3934,7 @@ public class Camp extends NPCAwareContent{
 	}
 
 	public function allNaturalSelfStimulationBeltBadEnd():void {
-		spriteSelect(23);
+		spriteSelect(SpriteDb.s_giacomo);
 		clearOutput();
 		outputText("Whatever the belt is, whatever it does, it no longer matters to you.  The only thing you want is to feel the belt and its creature fuck the hell out of you, day and night.  You quickly don the creature again and it begins working its usual lustful magic on your insatiable little box.  An endless wave of orgasms take you.  All you now know is the endless bliss of an eternal orgasm.\n\n");
 		outputText("Your awareness hopelessly compromised by the belt and your pleasure, you fail to notice a familiar face approach your undulating form.  It is the very person who sold you this infernal toy.  The merchant, Giacomo.\n\n");

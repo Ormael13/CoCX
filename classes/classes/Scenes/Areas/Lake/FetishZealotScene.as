@@ -10,6 +10,7 @@ import classes.Scenes.SceneLib;
 import classes.Scenes.UniqueSexScenes;
 import classes.Items.Armors.LustyMaidensArmor;
 import classes.Items.Armors.SuccubusArmor;
+import classes.display.SpriteDb;
 
 public class FetishZealotScene extends AbstractLakeContent
 	{
@@ -69,7 +70,7 @@ public class FetishZealotScene extends AbstractLakeContent
 			}
 			//next button, go to zealot fight
 			startCombat(new FetishZealot());
-			spriteSelect(20);
+			spriteSelect(SpriteDb.s_fetish_zealot);
 		}
 
 //Regular encounter
@@ -79,7 +80,7 @@ public class FetishZealotScene extends AbstractLakeContent
 			clearOutput();
 			outputText("While exploring, you hear someone cry out behind you \"<i>This is sacred land!  You WILL be punished for trespassing!</i>\"  It seems you've managed to stumble upon whatever land this zealot has been tasked to guard, and now you must fight him.");
 			startCombat(new FetishZealot());
-			spriteSelect(20);
+			spriteSelect(SpriteDb.s_fetish_zealot);
 		}
 
 //Raping the player

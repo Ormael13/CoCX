@@ -3,6 +3,7 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 use namespace CoC;
 
@@ -10,7 +11,7 @@ use namespace CoC;
 public function Lottie(){
 
 }
-//spriteSelect(36);
+//spriteSelect(SpriteDb.s_lottie);
 //9999 - PUT IN SPRITES
 //FLAGS
 //278 - LOTTIE OFF - NEVER ENCOUNTER PIG BITCH AGAIN
@@ -83,7 +84,7 @@ private function lottieCup():String {
 private function encounterLottieCharge():void { encounterLottie(true); }
 
 public function encounterLottie(charge:Boolean = false):void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	var comedy1:Function = null;
 
 	//Choice menu vars
@@ -284,7 +285,7 @@ public function encounterLottie(charge:Boolean = false):void {
 
 //[Sex]
 private function fourthMeetingChooseSexWithLottie():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00298]++;
 	var x:Number = player.cockThatFits(40);
@@ -298,7 +299,7 @@ private function fourthMeetingChooseSexWithLottie():void {
 
 //[Buddies]
 private function stayLottieBuds4Evah():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText("You tell her you're more comfortable with staying buddies, and that turning the relationship into a sexual one would probably be more trouble than it's worth. Lottie nods, understanding but also showing slight disappointment at your decision. \"<i>I see... you're totally right! You're absolutely – that's the correct-est thing I've heard all day, y'know?</i>\" She chuckles half-heartedly, but you can only frown at her attempt to avoid the situation. You tell her that you're sorry, but there's no reason that you both can't be gym buddies anymore. The more you continue to shut her down, the more despondent Lottie appears. Eventually, she seems to be on the verge of crying. \"<i>I... I'm sorry, I just...I thought...</i>\" Grabbing her glass of water, you take Lottie outside of the gym and into the grassy track to sit down. It's empty at the moment, so the silence of the night calms her down. You tell her to relax, that you're flattered, and that you think she's still beautiful – anything that'd make her feel better right now. You didn't think she'd take such a strong reaction to being turned down for something like sex, but that's Lottie for you – she's as sensitive as a peach. Maybe this was an important thing to her? You mull it over for a while, Lottie sitting next to you, tired already. You take one last look at her before wrapping your arm around her shoulders and pulling her closer to you, commenting on how brave she was for even asking you in the first place – not many people can be so forward. The girl remains quiet, but moves closer to rest on her head on your chest. It's a bad idea to keep her this close, but you know she needs it right now. You continue talking, the vibrations of your voice lulling Lottie into a deep sleep.\n\n");
 	outputText("A while later and you both sit at the entrance to the gym, Lottie having calmed down a considerable amount. \"<i>Thanks, [name], I know I'm just overreacting, but...</i>\" she sighs. \"<i>I don't know. I don't know what I'd do without you, " + player.mf("big guy","babe") + ".</i>\" You give her one last hug before parting ways. She'll be fine in the morning.");
@@ -307,7 +308,7 @@ private function stayLottieBuds4Evah():void {
 
 //[If Decline]
 private function declineBeingLottiesGymHamsandwich():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText("\"<i>O-oh, um... okay. I understand! You're probably busy what with all that lifting you're getting up to, haha!</i>\" The pig girl chuckles nervously, shifting her towel to cover more of her soft cleavage.  \"<i>I'll uh – I'll go get outta your hair then. I've got some stuff to do at home.</i>\"  You watch as she jogs off through the door and out into Tel'Adre, towel and all.  You decide you better return home too, and head back towards the camp.");
 	//[PC no longer encounters Lottie.]
@@ -317,7 +318,7 @@ private function declineBeingLottiesGymHamsandwich():void {
 
 //[If Accept]
 private function acceptBeingLottiesHamSandwich():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00299] = 1;
 	outputText("\"<i>A-ah, really? Y'mean it? This isn't some trick or something, right? You ain't about to go ahead and flake out on me, are you?</i>\" You assure her you're serious if she is, though you make a mental note that she's more likely to flake out than you are, given her history. \"<i>Eeee! Thanks, " + player.mf("big guy","babe") + " – I can't wait to get started! For the record, my name's Lottie. What about yourself?</i>\"  You tell her your name, and remark on her enthusiasm. \"<i>[name], huh? Well [name], I'm excited because I think the two of us are about to become super close! Do you feel it? Do ya?</i>\"  Lottie wiggles in excitement, loosening the already skimpy towel and revealing one of her perky nipples. You definitely feel something, that's for sure. She follows your eyes down to her breasts and reddens as she quickly covers herself up as best as she can - only succeeding in making her pillowy breasts push up against the towel, enhancing her cleavage.\n\n");
@@ -336,7 +337,7 @@ private function acceptBeingLottiesHamSandwich():void {
 //Followups to this: outputText("\"<i>Hey, [name]! I was just... I...</i>\"Lottie seems to be at a loss of words, gaping at your new, chiselled physique. You smile and tell her how glad you are that she's doing this, thought it's a shame she hasn't found a personal trainer yet. Lottie responds with a hazy expression and an open mouth. \"<i>Y-yeah... it's a shame...</i>\" She begins, until snapping out of her daze and looking up excitedly at you. \"<i>I- Y'know, I don't know what you've been doing to yourself lately, but... you look a... you're really amazing right now, " + player.mf("big guy","babe") + "!</i>\" She squeals as you flex at her, giggling at your blatant attempts at showing off. You never really took her as one to appreciate muscles, but you figure her obsession towards the perfect body might extend to other people as well. You take one stern look at the chubby porcine in front of you and grin, asking if she wants you to be her personal trainer. She seems shocked at your proposal. </i>\"Are... are you serious?</i>\"\n\n");
 //If No]
 private function gotInShapeButTurnedDownLottie():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	outputText("\"<i>O-oh, um... okay. I understand! You're probably busy what with all that lifting you're getting up to, haha!</i>\" The pig girl chuckles nervously, shifting her towel to cover more of her soft cleavage. \"<i>I'll uh – I'll go get outta your hair then. I've got some stuff to do at home.</i>\" You watch as she jogs off through the door and out into Tel'Adre, towel and all. You decide you'd better return home too, and head back towards the camp.");
 	//[PC no longer encounters Lottie.]
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00278] = 1;
@@ -345,7 +346,7 @@ private function gotInShapeButTurnedDownLottie():void {
 
 //[If God No]
 public function gotInShapeComedyDeclineLottie():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText("Haha, of course you fucking aren't, why would you be? Lottie stares at you, tears welling in her eyes. Oh, whoops – you must've said that out loud. Proceeding to not give two shits about the bawling pig-slut in front of you, you take a good squeeze of her cushiony tits before whipping your " + cockDescript(player.biggestCockIndex()) + " out and slapping her in the face with it.  \"<i>W-w-why... why are you... *sniff* p-please...!</i>\" The pig girl chokes in between sobs. It almost gives you a hard on - almost. You take one final step backwards, before announcing quite loudly to the other cafe-goers that you're going for a home run. Lottie squeaks before you take your " + cockDescript(player.biggestCockIndex()) + " and swing at her face, hitting dead on and managing to leave a bit of pre-cum on her newly-christened cheek. You stand triumphantly at your latest work of art, though Lottie seems to have other ideas, running out the door in complete misery, pre-cum and all. You decide you'd better return home too, and head back towards the camp – but not before spending the next hour or so chasing after Lottie and taking grabs at her plush ass.");
 	//[PC no longer encounters Lottie.]
@@ -355,7 +356,7 @@ public function gotInShapeComedyDeclineLottie():void {
 
 //[If Yes]
 private function gotInShapeAcceptTrainingOffer():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00299] = 1;
 	clearOutput();
 	outputText("\"<i>A-ah, really? Y'mean it? This isn't some trick or something, right? You ain't about to go ahead and flake out on me, are you?</i>\" You assure her you're serious if she is, though you make a mental note that she's more likely to flake out than you are, given her history. \"<i>Eeee! Thanks, " + player.mf("big guy","babe") + " – I can't wait to get started!</i>\" You chuckle, remarking on her enthusiasm. \"<i>Well [name], I'm excited because I think the two of us are about to become super close! Do you feel it? Do ya?</i>\" Lottie wiggles in excitement, loosening the already skimpy towel and revealing one of her perky nipples. You definitely feel something, that's for sure. She follows your eyes down to her breasts and reddens as she quickly covers herself up as best as she can - only succeeding in making her pillowy breasts push up against the towel, increasing her cleavage.\n\n");
@@ -375,7 +376,7 @@ private function gotInShapeAcceptTrainingOffer():void {
 
 //[Water]
 private function drinkWaterWithYourHamhock():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText("You decide that drinking the mysterious, bubbling concoction wouldn't exactly be the best of ideas – there's more than enough proof in Mareth to suggest at least that much.  Playing it safe, you take the water and drink, your thirst quenched by the cool liquid trickling down your throat. You turn to Lottie, who smiles back as she starts stretching for another round at jogging.  \"<i>Ready to go again?</i>\" she asks, bending over to massage her feet and unintentionally presenting her lush booty. Jumping up, you run back to the track, reminding yourself to jerk off to the image of Lottie's ass later.\n\n");
 	outputText("<b>...</b>\n");
@@ -390,7 +391,7 @@ private function drinkWaterWithYourHamhock():void {
 
 //[Shake]
 private function drinkLustWithYourHamhock():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText("You decide to down the cup of pink liquid, savoring the sweet taste as it pours down your throat. Your thirst quenched, you start to walk back towards the track when you're suddenly overcome with a warm feeling that stretches down to your groin. " + SMultiCockDesc() + " stirs from beneath your [armor] – you need to fuck something, and fast.  \"<i>Uh, is something wrong?</i>\" Lottie glances over to you, noticing the bulge in your pants as it strains against your [armor]. She looks up at your face, concerned about your well being. You grin and tell her you've had enough running.  Confused, Lottie asks what you mean.  You explain that you know a far more effective way to lose weight and stay in shape – in fact, it's how you got to be the way you are now.  You can see Lottie's eyes widen at the idea of such a technique, especially considering your own well-muscled physique.  \"<i>I'm all ears! What is it?</i>\"  She asks.  Clearly not getting the picture, you grab her hand and put it on your crotch.  Lottie quietly squeals and looks around to see if anyone noticed before looking back at you.  \"<i>Oh, um, I don't- I don't know about that, [name]...</i>\" She mumbles, her hand still remaining on your growing hard-on.  It's perfectly fine - you've trained like this with hundreds of people, you lie.  Lottie swallows and looks down at the sound of 'hundreds'.  Not being one to question your methods, she begins to stroke your hardening length through your [armor], using her palm to massage your shaft");
 	//[if balls]
@@ -408,7 +409,7 @@ private function drinkLustWithYourHamhock():void {
 
 //[If Anal]
 public function analLottieMilkshake():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText(images.showImage("lottie-fuck-her-in-teh-butzor"));
 	var x:Number = player.cockThatFits(40);
@@ -458,7 +459,7 @@ public function analLottieMilkshake():void {
 
 //[If Oral]
 public function getSuckedOffByAHamSandwich():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText(images.showImage("lottie-gives-you-a-blowjob"));
 	var x:Number = player.biggestCockIndex();
@@ -550,7 +551,7 @@ public function getSuckedOffByAHamSandwich():void {
 }
 //[Appearance]
 private function lotteryAppearance():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText(images.showImage("lottie-examine-appearance"));
 	//[If Figure between 0 – 20]
@@ -620,7 +621,7 @@ public function lottieMorale(dif:Number = 0):Number {
 
 //[Talk]
 private function talkToPigSlut():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	var comedy1:Function = null;
 	//FIRST TIMER SHIT
@@ -752,7 +753,7 @@ private function talkToPigSlut():void {
 
 //[If Encourage]
 private function firstOralReactionChooseEncourage():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText("You tell her it isn't her fault; results don't magically appear in the first few weeks. Her weight is bound to fluctuate now and then, it's completely natural. She looks up at you, her eyes welling up slightly. \"<i>Is that true? It's completely natural?</i>\" You nod your head. \"<i>I'm glad. I'm so glad.</i>\" She sniffs, wiping away her tears and taking a deep breath. You rub her shoulder as she places her hand upon yours. Lottie continues to talk about her day for a few more minutes before you both decide to hit the track.\n\n");
 	outputText("<b>...</b>\nAfter a good workout, you decide to return back to camp, exhausted.");
@@ -764,7 +765,7 @@ private function firstOralReactionChooseEncourage():void {
 
 //[If Abuse]
 private function firstOralReactionChooseAbuse():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText("You tell Lottie your methods never fail, and if something happened that wasn't supposed to, it's her that's at fault. She looks up at you, shocked at your outburst. Lost for words, her eyes begin to well up. \"<i>I... god, I'm so stupid! Of course it was me! It's always me!</i>\" She cries softly to herself, pushing your hand off her shoulder and burying her head in her arms. \"<i>I wasted your time! I'm... I'm...</i>\" Before she finishes her sentence, you walk away from the cafe, content with what you've done. You don't stop hearing her whimpering voice until you leave the gym, returning back to camp – strangely satisfied.");
 	//ENCOURAGEMENT -2
@@ -774,7 +775,7 @@ private function firstOralReactionChooseAbuse():void {
 
 //[If Encourage]
 private function firstAnalReactionChooseEncourage():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText("You congratulate her on her success; you're quite proud that she's deciding to stick this through. Lottie beams at you, clearly excited that she's with you again. You ask her if she wants to meet you in the sauna for some 'stretches' – emphasising the last word heavily whilst making exaggerated quotation marks with your fingers. \"<i>Haha, I'm sorry [name], but to tell you the truth, my butt still hurts from the last time we stretched.  Would it be okay if we, erm, did some regular exercises for now?</i>\" You both chuckle, despite the fact that you were completely serious about boning her in the sauna. Regardless, you decide to give it a rest and tell her you're going to go hit the track, if she's willing to join you.\n\n");
 	outputText("<b>...</b>\nAfter a good workout, you decide to return back to camp, exhausted.");
@@ -786,7 +787,7 @@ private function firstAnalReactionChooseEncourage():void {
 
 //[If Abuse]
 private function firstAnalReactionChooseAbuse():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText("You sneer at Lottie, sternly reminding her that she's nowhere near her goal the way she is now – and a few pounds isn't going to change anything. In fact, she probably just measured herself in the morning, and it's likely she hasn't lost any weight at all, being the pig she is. Lottie doesn't seem to have anything to say. She stares at you, wondering where this all came from. After a few seconds of silence, she breaks into sobs, pushing herself out of her chair and running away from the gym. You know she'll come back, though. Deciding you're done here, you return back to camp – strangely satisfied.");
 	//ENCOURAGEMENT -2
@@ -796,7 +797,7 @@ private function firstAnalReactionChooseAbuse():void {
 
 //[If Encourage]
 private function lottieLowMoraleWeightGainEncourage():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText("You tell her that she shouldn't cry, or worry – sometimes, these things happen; results don't magically appear in the first few weeks, right? Her weight is bound to fluctuate now and then, it's completely natural. She looks up at you, confused at your tone of voice, but relieved at the same time. \"<i>I... okay. Th-thank you, [name].</i>\" You nod and smile, waving it off as nothing. She sniffs, wiping away her tears and taking a deep breath. You relinquish your grip on her chin, and she relaxes considerably. Lottie continues to stay at ease for a few more minutes before you both decide to hit the track.\n\n");
 	outputText("<b>...</b>After a good workout, you decide to return back to camp, exhausted.");
@@ -808,7 +809,7 @@ private function lottieLowMoraleWeightGainEncourage():void {
 
 //[If Abuse]
 private function lottieLowMorealeWeightGainAbuse():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText("You increase your grip on Lottie's face, pulling her towards you as you growl. She squeals, apologizing over and over again for her uselessness – but that's not enough. It's never enough. You take your hand off her chin, and she recoils, trying to rub the pain away. You look around for anyone curious enough to watch you but, as far as you know, the only person in the entire cafe at this time is the clerk who's thankfully taken a break for now. Without anyone to bear witness, you remove yourself from the seat and walk towards Lottie, who quickly jumps out of hers, backing away from you. You growl for her to come to you, but she winces in response. You dash quickly to her side, grabbing her arm. She could yell at any time, but you know she won't – she's weak, dependent. You're the only one who can save her from her body. And now you're about to tell her what happens when you're denied. Thwack! The sound of you backhanding your pig-slut rings through the entire cafe, though not a single soul is there to watch as Lottie crumples to the ground in a sobbing heap. You growl at her to stand up, and she complies. You've got some exercise to catch up on.\n\n");
 	outputText("<b>...</b>\nAfter a good workout, you decide to return back to camp, exhausted.");
@@ -819,7 +820,7 @@ private function lottieLowMorealeWeightGainAbuse():void {
 
 //[If Encourage]
 private function lottieMediumMoraleWeightGainEncourage():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText("You tell her it isn't her fault; these things happen all the time for a variety of reasons. Her weight is bound to fluctuate now and then, it's completely natural. She looks up at you, her eyes welling up slightly. \"<i>Is that true? It's completely natural?</i>\" You nod your head. \"<i>I'm glad. I'm so glad.</i>\" She sniffs, wiping away her tears and taking a deep breath. You rub her shoulder as she places her hand upon yours. Lottie continues to talk about her day for a few more minutes before you both decide to hit the track.\n\n");
 	outputText("<b>...</b>\nAfter a good workout, you decide to return back to camp, exhausted.");
@@ -830,7 +831,7 @@ private function lottieMediumMoraleWeightGainEncourage():void {
 }
 //If Abuse]
 private function lottieMediumMorealeWeightGainAbuse():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText("You tell Lottie your methods never fail, and if something happened that wasn't supposed to, it's her that's at fault. She looks up at you, shocked at your outburst. Lost for words, her eyes begin to well up. \"<i>I... god, I'm so stupid! Of course it was me! It's always me!</i>\" She cries softly to herself, pushing your hand off her shoulder and burying her head in her arms. \"<i>I wasted your time! I'm... I'm...</i>\" Before she finishes her sentence, you walk away from the cafe, content with what you've done. You don't stop hearing her whimpering voice until you leave the gym, returning back to camp – strangely satisfied.");
 	lottieMorale(-10);
@@ -839,7 +840,7 @@ private function lottieMediumMorealeWeightGainAbuse():void {
 
 //[If Encourage]
 private function lottieHighMoraleWeightGainEncourage():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText("You tell her it's never her fault for something like that; and it's perfectly fine to be frustrated – as long as it doesn't detract from her main goal. Her weight is bound to fluctuate now and then, it's completely natural. She looks up at you, beaming at your kind words. \"<i>[name], you really do know how to make people feel better, y'know?</i>\" You nod your head in agreement – you know. \"<i>I'm glad. I'm so glad.</i>\" She sighs, taking a deep breath. You rub her shoulder as she places her hand upon yours. Lottie continues to talk about her day for a few more minutes before you both decide to hit the track.\n\n");
 	outputText("<b>...</b>\nAfter a good workout, you decide to return back to camp, exhausted.");
@@ -851,7 +852,7 @@ private function lottieHighMoraleWeightGainEncourage():void {
 
 //[If Abuse]
 private function lottieHighMoraleWeightGainAbuse():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText("You frown, tightening your grip on her shoulder. \"<i>H-hey, what's the big idea?</i>\" she asks, brushing your grip away and standing up to face you. \"<i>I know you're probably just as annoyed as I am, but there's no reason to start being a jerk, y'know?</i>\" But you do know, you tell her, gritting your teeth at her outburst. You know that without proper discipline, there's only one road this is going to lead to. She swallows hard, wondering what direction you're planning on taking the conversation. But you don't plan on talking any further. In one swift movement, you lurch forward, punching Lottie directly in the stomach, winding her and causing the pig-girl to crumple onto the floor, writhing in pain. You tell her not to gain weight anymore, if she knows what's good for her. She sobs quietly back at you.\n\n");
 	outputText("Deciding you're done here, you return back to camp – strangely satisfied.");
@@ -861,7 +862,7 @@ private function lottieHighMoraleWeightGainAbuse():void {
 
 //[If Encourage]
 private function lottieHighMoraleWeightGainFATTYLOVESIT():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText("You tell her it's never her fault for something like that; and even though it's fine to feel frustrated once in a while, letting things get to her will only cause more problems than solve them. Her weight should never be an issue – and even if it does move about, so what? You love her all the same. She looks up at you, blushing as you mention the word 'love'. \"<i>[name], I... I love you too, babe!</i>\" She cries, leaping up and embracing you, placing a large smooch on your lips. You laugh and nod your head in agreement, though you're rather embarrassed. \"<i>I'm glad. I'm so glad.</i>\" She sighs, taking a deep breath. You share the hug for a few more seconds before taking your seats. Lottie continues to talk about her day for a few more minutes before you both decide to hit the track.\n\n");
 	outputText("<b>...</b>\nAfter a good workout, you decide to return back to camp, exhausted.");
@@ -872,7 +873,7 @@ private function lottieHighMoraleWeightGainFATTYLOVESIT():void {
 }
 //[If Abuse]
 private function lottieHighMoraleWeightGainFATTYLOVESABUSE():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText("You frown, tightening your grip on her shoulder. \"<i>H-hey, what's the big idea?</i>\" she asks, brushing your grip away and standing up to face you. \"<i>I know you're probably just as annoyed as I am, but there's no reason to start being a jerk, y'know?</i>\" But you do know, you tell her, gritting your teeth at her outburst. You know that without proper discipline, there's only one road this is going to lead. She swallows hard, wondering what direction you're planning on taking the conversation. But you don't plan on talking any further. In one swift movement, you lurch forward, punching Lottie directly in the stomach, winding her and causing the pig-girl to crumple onto the floor, writhing in pain. You tell her that you love to fuck her juicy pig fat, but if she knows what's good for her, she'll stop gaining more weight. She sobs quietly back at you.\n\n");
 	outputText("Deciding you're done here, you return back to camp – strangely satisfied.");
@@ -882,7 +883,7 @@ private function lottieHighMoraleWeightGainFATTYLOVESABUSE():void {
 
 //[If Encourage]
 private function lottieLowMoraleWeightLossEncourage():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText("You congratulate her on her success, in fact – you could almost say you are quite happy with her results. Lottie is visibly confused, not expecting you to react this way. Regardless, she takes the compliment for what it's worth and squeals happily, popping your finger into her warm mouth and suckling gently. Pulling your hand away, you pat her softly on the head. \"<i>Th-thank you... thanks, [name].</i>\"  You both share a smile, Lottie at ease with your unnaturally welcoming nature. You stand up, telling her you're going to go hit the track, if she's willing to join you – and of course, Lottie eagerly follows.\n\n");
 	outputText("<b>...</b>\nAfter a good workout, you decide to return back to camp, exhausted.");
@@ -894,7 +895,7 @@ private function lottieLowMoraleWeightLossEncourage():void {
 
 //[If Abuse]f
 private function lottieLowMoraleWeightLossAbuse():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText("You sneer at Lottie, reminding her that being excited over a bit of weight loss is a terrible idea – it'll make her lazy. You hate lazy people. Lottie's face scrunches up in angst, beating herself up and moaning useless apologies to you. But that's simply not enough, you tell her. Deciding to put matters into your own hands, you walk over, Lottie, already anticipating what's coming next, wraps herself into a ball in her seat. You quickly grab her head and twist it in your direction, causing Lottie to yell helplessly in response - though you cease her noise immediately with a kiss on the lips. She stares, surprised at your actions, giving you enough time to backhand her out of your seat. She sobs loudly as you walk out of the cafe to return back to camp – strangely satisfied.");
 	lottieMorale(-10);
@@ -903,7 +904,7 @@ private function lottieLowMoraleWeightLossAbuse():void {
 
 //[If Encourage]
 private function lottieMediumMoraleWeightLossEncourage():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText("You congratulate her on her success, you're quite proud that she's getting results so quickly. Lottie beams at you, clearly just as excited with the news. You ask her if she wants to meet you in the sauna for some 'stretches' – emphasising the last word heavily whilst making exaggerated quotation marks with your fingers. \"<i>Haha, I'm sorry [name], but to tell you the truth, my butt still hurts from the last time we stretched. Would it be okay if we, erm, did some regular exercises for now?</i>\" You both chuckle, despite the fact you were completely serious about boning her in the sauna. Regardless, you decide to give it a rest and tell her you're going to go hit the track, if she's willing to join you.\n\n");
 	outputText("<b>...</b>\nAfter a good workout, you decide to return back to camp, exhausted.");
@@ -914,7 +915,7 @@ private function lottieMediumMoraleWeightLossEncourage():void {
 
 //[If Abuse]
 private function lottieMediumMoraleWeightLossAbuse():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText("You sneer at Lottie, sternly reminding her that she's nowhere near her goal the way she is now – and a few pounds isn't going to change anything. In fact, she probably just measured herself in the morning, and it's likely she hasn't lost any weight at all, being the pig she is. Lottie doesn't seem to have anything to say. She stares at you, wondering where this all came from. After a few seconds of silence, she breaks into sobs, pushing herself out of her chair and running away from the gym. You know she'll come back, though. Deciding you're done here, you return back to camp – strangely satisfied.\n\n");
 	lottieMorale(-10);
@@ -923,7 +924,7 @@ private function lottieMediumMoraleWeightLossAbuse():void {
 
 //[If Encourage]
 private function lottieHighMoraleWeightLossEncourage():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText("You congratulate her on her success, you're quite proud that she's really getting used to the consistent workout. Lottie beams at you, clearly just as excited with the news. You ask her if she wants to meet you in the sauna for some 'stretches' – emphasising the last word heavily whilst making exaggerated quotation marks with your fingers. \"<i>Haha, I'm sorry [name], but to tell you the truth, my butt still hurts from the last time we stretched. Would it be okay if we, erm, did some regular exercises for now?</i>\" You both chuckle, despite the fact you were completely serious about boning her in the sauna. Regardless, you decide to give it a rest and tell her you're going to go hit the track, if she's willing to join you.\n\n");
 	outputText("<b>...</b>After a good workout, you decide to return back to camp, exhausted.");
@@ -934,7 +935,7 @@ private function lottieHighMoraleWeightLossEncourage():void {
 
 //[If Abuse]
 private function lottieHighMoraleWeightLossAbuse():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText("You frown at Lottie, clearly uncomfortable with her eager reaction to her results. You tighten your grip on her shoulder, before she flinches and brushes you off. \"<i>Is... is something wrong, [name]?</i>\" she asks, standing up to face you. Her brow wrinkles in concern – shouldn't you be happy? But you simply aren't. You tell her that being at ease with her results only leads in one direction – laziness. And you hate laziness. Despite this, Lottie continues to defend her position. \"<i>Look, I don't know what's gotten into you, but... but I'm happy with this. And if you aren't, then that's – it's too bad for you!</i>\" Too bad, you think, while you deck Lottie in the stomach, causing her to reel over in pain. You tell her that feelings get in the way of progress, and if she can't control her emotions – then that's just too bad for her.\n\n");
 	outputText("Deciding you're done here, you return back to camp – strangely satisfied.");
@@ -944,7 +945,7 @@ private function lottieHighMoraleWeightLossAbuse():void {
 
 //[If Encourage]
 private function lottieHighMoraleWeightLossFATTYLOVESIT():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText("You rub her shoulder, telling her she shouldn't feel ashamed of her body – whether she gains or loses weight, you'll still love her for who she is, as should she. Lottie chuckles before placing her hand on yours. \"<i>Y'know, you really know how to make a girl feel better about themselves, [name]. Even if it's just a sentence or two, I- it really helps. Thanks.</i>\" You nod in agreement before giving her a peck on the forehead and leading her out on the tracks. You figure a little working out would help clear her mind.\n\n");
 	outputText("<b>...</b>\nAfter a good workout, you decide to return back to camp, exhausted.");
@@ -955,7 +956,7 @@ private function lottieHighMoraleWeightLossFATTYLOVESIT():void {
 
 //[If Abuse]
 private function lottieHighMoraleWeightLossFATTYLOVESABUSE():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText("You frown at Lottie, clearly uncomfortable with her sudden weight loss. You tighten your grip on her shoulder, before she flinches and brushes you off. \"<i>Is... is something wrong, [name]?</i>\" she asks, standing up to face you. Her brow wrinkles in concern – she's obviously told you this for some support, but it's just not something you can forgive. You tell her it's taken time to love her for what she is now, and if she's suddenly deciding to change her body, then you aren't sure what she wants. Lottie looks shocked, but suddenly snaps back in response. \"<i>Look, I didn't - I just want you to accept me for who I am... and for who I might be. Nothing else – and if you're not happy with who I am, then... then...</i>\" You stop her, only to grab her ear and pull her close enough to hear you whisper. If you're not happy with who she is, you tell her, then you aren't sure what you're going to do. She sinks into her chair before you bark that you need to get some exercise done.\n\n");
 	outputText("<b>...</b>\nAfter a good workout, you decide to return back to camp, exhausted.");
@@ -965,7 +966,7 @@ private function lottieHighMoraleWeightLossFATTYLOVESABUSE():void {
 
 //[To Fuck]
 private function lottieFatLoserCulminationFuckChoice():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	var x:Number = player.cockThatFits(40);
 	if(x < 0) x = 0;
@@ -988,7 +989,7 @@ private function lottieFatLoserCulminationFuckChoice():void {
 
 //[To Humiliate] – (Corruption must be >40)
 private function lottieFatLoserCulminationHumiliationChoice():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	var x:Number = player.cockThatFits(40);
 	if(x < 0) x = 0;
@@ -1017,7 +1018,7 @@ private function lottieFatLoserCulminationHumiliationChoice():void {
 
 //[To Leave]
 public function lottieFatLoserCulminationLeaveComedyChoice():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText("You take one look at her before making your request. You tell her you want the pigslut to leave the gym, and never return. She stares, speechless, but immediately begins bawling at your feet. You're fine with staying here – but you never want to see her face again. For what it's worth, the girl is surprisingly light when you pick her up off her feet and carry her outside the gym. She's shivering, terrified of a life without you – so you'll give her something to remember you by. By now Lottie's stood up, walking pathetically away in tears, but you've already caught up to her, removing your pants and waddling in her direction while your [cock] swings to and fro. Before she notices, you've already thrust your entire package into her, fitting as much as you can inside before humping relentlessly. She screams, attracting the attention of a nearby guard on night watch – but you're not done yet. You take your moist member out and aim towards the advancing guard. Your brow furrows as you yell your final resolution. \"<i>TAKE THIS – MY LOVE, MY ANGER, AND ALL OF MY SORROW! CUUUUM CANNON!</i>\" With a hearty thrust, you plunge your junk forward, spurting an impossible amount of gooey spunk in the man's general direction, blasting him into the air and out of Tel'Adre's walls. \"<i>GO! GO! GO!</i>\" you shout, pumping jets of your seed at the enemy until he finally bursts into gory treats like a bloody fireworks display. You turn back to see Lottie cowering on the floor. You grin and take one final dip into her cunt, squirting a tiny amount of incredibly potent seed before walking away, leaving her abused and broken as you salute an imaginary American flag. You shed a single tear.\n\n");
 
@@ -1032,7 +1033,7 @@ public function lottieFatLoserCulminationLeaveComedyChoice():void {
 
 //[Love Yourself]
 private function lottieHighMoraleFatLoveSelfOneTimeEvent():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	var x:Number = player.cockThatFits(40);
 	if(x < 0) x = 0;
@@ -1067,7 +1068,7 @@ private function lottieHighMoraleFatLoveSelfOneTimeEvent():void {
 
 //[You'll get there]
 private function lottieHighMoraleFatYoullGetThereOneTimeEvent():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	var x:Number = player.cockThatFits(40);
 	if(x < 0) x = 0;
@@ -1102,7 +1103,7 @@ private function lottieHighMoraleFatYoullGetThereOneTimeEvent():void {
 
 //[Ew Lottie No]
 public function ewLottieNo():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText("You begin to talk about your story, about how you came to be in Mareth and how you got to be where you are now. You've encountered nasty things, and you've seen people become nasty things themselves. You also know that you've changed since then. You've become someone you didn't expect yourself to become in a million years – and whether it was for better or for worse was up to you to decide. You know you've been through hard times, but you've never once regretted the decisions you've made – because they led to her. To Lottie. The girl begins to tear up at your confession. \"<i>Oh, [name], I...</i>\" But then you laugh. You laugh harder than you ever have since you came into this hellhole. In fact, you'd be willing to bet it was the first time you've ever laughed in Mareth. Lottie's face immediately scrunches up as she begins to bawl, but you could give less of a fuck as you stand up and point at the pig-slut as cafe-goers look at you both in curiosity. \"<i>ATTENTION FURRY ASSHOLES</i>\" you yell, much to the disgust of the anthropomorphic animal-people staring in your direction. \"<i>THIS SLUT – \"<i>you point to Lottie. \"<i>- WON'T EAT MY HAM SANDWICHES.</i>\" An audible gasp is heard from the growing crowd. Lottie's buried her head in her hands but your tirade continues. Walking to the counter, you take one look at the fuzzy clerk before he nods and hands you the aforementioned sandwich. Weird, you don't remember him being fuzzy – you really need to find a pair of fucking glasses in this sand pit. Regardless, you stomp over to the pig-girl, pulling her out of her seat and forcefully shoving the meaty meal down her throat. She gags for a second before unwillingly swallowing her own species. You grab her cheeks and pull her face several inches towards yours. \"<i>You disgust me.</i>\" You tell her, before whipping your [cock] out and fucking her ham and bread-filled mouth. </i>\"Here comes the mayonnaise train!</i>\" You yell, ejaculating straight down her gullet and into her flabby abyss.\n\n");
 
@@ -1118,7 +1119,7 @@ public function ewLottieNo():void {
 
 //Threesome]
 private function lottieElleThreesomeFirstTime():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	var x:Number = player.cockThatFits(40);
 	if(x < 0) x = 0;
@@ -1139,7 +1140,7 @@ private function lottieElleThreesomeFirstTime():void {
 
 //[Elle] – (Corruption must be >40)
 private function fuckElleInsteadOfThatFatSlutFirstTime():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	var x:Number = player.cockThatFits(40);
 	if(x < 0) x = 0;
@@ -1170,7 +1171,7 @@ private function fuckElleInsteadOfThatFatSlutFirstTime():void {
 }
 //[Oh I Get It]
 public function charlottesWebComedyBullshit():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	var x:Number = player.cockThatFits(40);
 	if(x < 0) x = 0;
@@ -1184,7 +1185,7 @@ public function charlottesWebComedyBullshit():void {
 
 //[If Not Fat]
 private function lottieSuccessOneShot():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	var x:Number = player.cockThatFits(40);
 	if(x < 0) x = 0;
@@ -1233,7 +1234,7 @@ private function lottieSuccessOneShot():void {
 
 //[Leave]
 private function leaveLottieInsteadOfYogaSex():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText("As excited as you are, your mind is telling you to leave. In blissful ignorance, you walk out the door of the cafe, through the pool area, into the main gym and out the main entrance. Once outside, you figure it's as good a time as any to take a friendly stroll back to the camp.\n\n");
 	outputText("As you head home, you have the strangest feeling you've missed out on incredibly sexy sex.");
@@ -1242,7 +1243,7 @@ private function leaveLottieInsteadOfYogaSex():void {
 
 //[Exercise]
 private function lottieExercise():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText("You tell Lottie it's time to hit the gym, and she responds ");
 	if(lottieMorale() >= 66) outputText("with an enthusiastic nod");
@@ -1256,7 +1257,7 @@ private function lottieExercise():void {
 
 //[Weights]
 private function lottieWeights():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	var NTR:Function = null;
 	if(lottieMorale() <= 30 && flags[kFLAGS.TIMES_FUCKED_IFRIS_BLOWJOB] > 0 && player.str >= 75 && player.tone >= 60 && player.cumQ() >= 1000)
@@ -1278,7 +1279,7 @@ private function lottieWeights():void {
 
 //[Boast]
 private function boastAtLottie():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText("You laugh as you pick up one of the larger ones and pump mercilessly, looking at her expectantly as if she had been failing out of laziness. She tries harder to pull the heavy object over her head, but eventually she begins to shake and drops it, landing in the sand with a ");
 	if(silly()) outputText("large *pomf =3*");
@@ -1294,7 +1295,7 @@ private function boastAtLottie():void {
 
 //[Train]
 private function trainWithLottie():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText("You chuckle at her pathetic attempt and pick up one of the small ones next to hers, much to the surprise of both Lottie and the other members watching. She smiles at you and tries her best to lift, despite not being very good at it. You blow through several reps before tiring yourself out, though Lottie, determined to beat your score, continues. Eventually, she gets close enough to rival your attempts before dropping the weight to the ground wearily.\n\n");
 	outputText("After a few more attempts at the weights, you both decide you've had enough, going your separate ways and waving as you leave the gym.");
@@ -1307,7 +1308,7 @@ private function trainWithLottie():void {
 
 //[Boast]
 private function boastAtFitLottie():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText("You laugh as you pick up one of the larger ones and pump mercilessly, looking at her expectantly as if she should be pushing herself to the limit. She drops the weight she's using and picks up one around your size, trying to match your speed and strength but inevitably failing. She looks up at you and sniffles, but you just grunt in response, disappointed with her efforts. She sighs and tries her best to do it again.\n\n");
 
@@ -1320,7 +1321,7 @@ private function boastAtFitLottie():void {
 
 //[Train]
 private function trainWithFitLottie():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText("You smile at her hard work, and pull up a weight around your level. You both share a glance at each other's sizes and chuckle at the noticeable difference. You both unanimously decide to hold a competition over who can score the most reps at one time, though obviously the larger weight has the bigger disadvantage. You try and blow through several reps before tiring yourself out, though Lottie, determined to beat your score, continues. Eventually, she gets close enough to rival your attempts, before dropping the weight to the ground wearily.\n\n");
 
@@ -1334,7 +1335,7 @@ private function trainWithFitLottie():void {
 
 //[Jogging]
 private function goJoggingWithLottie():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	//[If Figure 0 – 70]
 	if(lottieTone() <= 70) {
@@ -1351,7 +1352,7 @@ private function goJoggingWithLottie():void {
 }
 //[Sprint]
 private function sprintAndLeaveLottieBehind():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText("You don't want to lose the groove you've built up so far, so you decide to go all out and tear through the track, leaving Lottie in your dust. \"<i>Wha- hey! Wait; don't leave me behind, please!</i>\" She yells, running as fast as her chubby legs are willing to go. By the time you reach the end of the track, Lottie's already given up, waiting for you to finish at the gym entrance. You give her a thumbs up before proceeding to run another lap.\n\n");
 	outputText("A few rounds later, you've exhausted yourself so you decide to return home. You notice that Lottie's nowhere in sight, but it's her loss - not yours.");
@@ -1364,7 +1365,7 @@ private function sprintAndLeaveLottieBehind():void {
 
 //[Jog]
 private function jogWithLottie():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText("You decide that sprinting wouldn't really get either of you anywhere, though taking things a little faster wouldn't be any harm. You take the power walking to the next level with a quick jog, before reminding Lottie to take this as leisurely as possible - it isn't a race. Lottie quickly picks up the idea and starts to push herself further, trying her best to keep up with you, whilst maintaining a steady rhythm on the track. You both spend the good part of the evening jogging a fair distance, before deciding to retire for the night. You're both tired, but satisfied with today's efforts.\n\n");
 	dynStats("tou", .1, "spe", .1);
@@ -1376,7 +1377,7 @@ private function jogWithLottie():void {
 }
 //[Sprint]
 private function sprintAndLeaveFitLottieBehind():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText("You don't want to lose the groove you've built up so far, so you decide to go all out and tear through the track, leaving Lottie in your dust. \"<i>Wha- hey! What's the big idea?!</i>\" She yells, trying to catch up to you. By the time you reach the end of the track, Lottie's already far behind though you can see her still trying to catch up. You give her a thumbs up before proceeding to run another lap.\n\n");
 	outputText("A few rounds later and you've exhausted yourself, so you decide to return home. You notice that Lottie's nowhere in sight, but it's her loss - not yours.");
@@ -1388,7 +1389,7 @@ private function sprintAndLeaveFitLottieBehind():void {
 }
 //[Jog]
 private function jogWithFitLottie():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText("You decide that sprinting would be a waste of time and effort, though taking things faster wouldn't be any harm. You scrap the power walking and head off on a light run, poking your tongue playfully at Lottie – signalling the start of a race. She quickly picks up the idea and starts to chase after you, her perky tits bouncing away whilst she tries to overtake you. You both spend the good part of the evening running a fair distance, before deciding to retire for the night. You're both tired, but satisfied with today's efforts.\n\n");
 	lottieMorale(2);
@@ -1399,7 +1400,7 @@ private function jogWithFitLottie():void {
 
 //[Yoga]
 private function lottieYoga():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	//[If Figure 0 – 100]
 	outputText("You know that Lottie has an affinity for yoga, so you decide to enter the dimly lit room at the end of the pool. She gladly follows, bouncing along with you as you take two of the mats out. A class has already started, and you can see many people gathering around a tanned, four-armed woman performing warm-up exercises. Knowing you both have a little time before they break out into the more complicated stretches; you scan around the room for optimal places to sit down without blocking your view of the tetra-armed instructor. By the time you've searched the room, a few more people had already blocked off most of the available spots. You look over to see Lottie already spread out and lying on her stomach – she looks over to you and giggles before patting the vacant area next to her. Throwing a quick smile, you also notice a small unused area right next to the teacher – you'd be able to take it if you went by yourself. Should you go at it alone, or stretch with Lottie?");
@@ -1409,7 +1410,7 @@ private function lottieYoga():void {
 
 //[Alone]
 private function lottieYogaAlone():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText("Taking your mat, you walk over towards the four-armed yoga trainer, sitting down only a meter or two away from her tanned, muscular body. In the corner of your eye, you can see Lottie visibly disheartened as she watches you gazing at the fit, caramel-colored woman in front of you. As you take your position, the intense smell of coffee and desert flowers hits you as the instructor lays on her back and pulls both of her legs up, giving you a clear view of her large thighs and puffy mound. You swear you can see her smiling as the other surrounding members begin to imitate her position. Not wanting to disappoint, you lie on your rear and tilt your head backwards, confronted by another pair of legs lifted into the air. You can see Lottie attempting the same position, only to lean to her right and fall over, earning an annoyed stare from the person next to her.\n\n");
 	outputText("You continue to take on the vaguely sexual positions of the athletic yoga teacher, the class ending before you know it. Your head strangely dizzy from the smell of sweat and pheromones, you walk home by yourself, completely forgetting about Lottie.");
@@ -1422,7 +1423,7 @@ private function lottieYogaAlone():void {
 
 //[Together]
 private function togetherLottieYoga():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText("Taking your mat, you walk over towards the smiling pig-girl, sitting down next to her and beginning your stretches. Lottie lies flat on her soft belly, pulling up her legs from behind her and stretching her back, jutting out her heavy breasts as they squish underneath her sweaty clothing. Her eyes clearly affixed onto the instructor in the middle of the class, you take the opportunity to gaze at her flushed body, running your eyes along her defined back to her lush ass and her rosy thighs. Realising you've been sitting awkwardly the entire time, you stretch your arms and lay on your back, replicating the pose of the yoga trainer along with the rest of the class. It isn't until you look over to Lottie that you awkwardly discover her staring at your crotch – your discreet staring has earned you a pent-up orgasm waiting to happen. You laugh nervously as Lottie continues ogling your strained boner");
 	if(player.cockTotal() > 1) outputText("s");
@@ -1438,7 +1439,7 @@ private function togetherLottieYoga():void {
 
 //[Pool – only available at high encouragement]
 private function lottiePool():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText("You often find Lottie near the pool, so it's only natural to assume she might have a knack for it. You mention swimming to the pig-girl, her ears perking up at the idea of going in the water. \"<i>S-sure! I'll go get ready!</i>\"  Wondering what she might've meant, you wait by the side of the pool, your legs dipping into the cool, blue water. Soon after, Lottie runs out into the area, wearing the daring, black bikini she wore the first time you had met. Her jiggling breasts squish past the fabric, while her chubby butt and thighs hug tightly against the bottom piece. Feeling a familiar stretching in your groin, you look down to find your [cocks] at full attention, hardly subtle against your [armor]. A thought passes your mind to cover up, but before you can begin to reflect on the idea the bouncing girl sits her plump ass next to you. You wonder if it's easier to jump straight into the pool or to wait it out – hell, she might even be flattered by your reaction.");
 	//[Jump][Wait]
@@ -1447,7 +1448,7 @@ private function lottiePool():void {
 
 //[Jump]
 private function jumpInPoolBeforeLottieSeesYourWingWang():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText("You can't risk it, so you decide to take a plunge into the water – it's freezing at first, but you quickly warm up. Lottie takes your avoidance to heart and looks visibly discouraged, though you wonder what her reaction would've been if your cockrocket");
 	if(player.cockTotal() > 1) outputText("s");
@@ -1462,7 +1463,7 @@ private function jumpInPoolBeforeLottieSeesYourWingWang():void {
 }
 //[Wait]
 private function waitAndShowLottieYourPoolBoner():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText("You figure it can't do much harm to let " + sMultiCockDesc() + " fly, so you decide to leave it be, even leaning back so as to accentuate the hardening length. It doesn't take long for Lottie to notice, letting out a little gasp as she observes your ");
 	if(player.biggestCockArea() >= 15) outputText("pride and joy");
@@ -1481,7 +1482,7 @@ private function waitAndShowLottieYourPoolBoner():void {
 
 //[Give Item – First Time] [Only Available with High INT]
 public function giveLottieAnItem():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	var bova:Function = null;
 	var gro:Function = null;
@@ -1507,7 +1508,7 @@ public function giveLottieAnItem():void {
 }
 //[If Cafe]
 private function feedLottieAWholeCafe():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText("You decide that you're better off finding something at the cafe to feed the girl, though you know Lottie won't be too keen on eating something she'll know will make her bigger. Regardless, you tell her that you've skipped on breakfast, and you've been starving all day. Concerned, Lottie suggests you buy something to eat, but you tell her you wouldn't feel right doing so if Lottie had to stay and watch. She doesn't mind, but you push it further. Eventually, she gives in and tells you that she'll buy something to eat if you do. Smiling, you wander to the cafe, asking the clerk if they have anything available in stock from the bakery. He smiles before handing you some kind of puff pastry, while you pay the appropriate gems for the item as well as a random sandwich from the glass display. Sitting back down, you hand Lottie the treat while you eagerly munch down on your own meal. \"<i>Is... is this okay to eat?</i>\" she asks, examining the chocolate covered delicacy you've bought for her. Without waiting for your answer, Lottie bites into the chocolate and squeals as the fluffy cream insides squirt out. \"<i>Th-this is delicious! Ohmigosh!</i>\" In no time at all the chocolaty confection is erotically devoured by the greedy pig-girl, before she looks up at you in guilt. \"<i>I hope that wasn't bad for me or anything...</i>\" she sighs. You shrug, telling her that it probably won't affect her weight in the slightest.\n\n");
 	outputText("You secretly know it will.");
@@ -1518,7 +1519,7 @@ private function feedLottieAWholeCafe():void {
 
 //[If LaBova]
 public function feedLottieLaBova():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00322] == 0) {
 		outputText("You pick up the bottle of LaBova, making sure to secretly remove the label of the busty cowgirl before handing it over to Lottie. \"<i>This'll help me lose weight? Are you sure?</i>\" She says, observing the misty fluid as it swirls around the glass. You nod fervently, mentioning you've seen it trim waists and tone thighs. \"<i>Oh! Well... if you say so,</i>\" Lottie remarks, convinced by the assurance of a slimmer body.  \"<i>Here goes nothing!</i>\" The pig-girl exclaims before downing the grainy mixture in one fell swoop, complementing its sweet, milky taste. She looks down at her body, keen to observe the instantaneous change expected to occur. \"<i>Huh? I... I feel kinda funny, babe,</i>\"Lottie mutters, quickly looking towards you before squealing and turning down just in time to watch her breasts and hips grow slightly larger than before. \"<i>H-huh?! What's going on? What did you give me, [name]? Why would... w-wh...</i>\" Speechless, the now chubbier girl drops to the floor, unable to comprehend your actions. You smile at her new figure, crouching down and giving her milky tits a good squeeze. \"<i>I-I don't understand...</i>\" she whimpers, flinching at your touch. It might be a while before she accepts anything else from you, but you can't help feeling like you've done some good. She'll understand, in due time.");
@@ -1535,7 +1536,7 @@ public function feedLottieLaBova():void {
 }
 //[If Gro+]
 public function giveLottieGroPlus():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText("You take out the needle filled with Gro+, taking care to flick it to remove any air bubbles that might have remained in the odd blue liquid. Lottie pales at the sight of the pointed object, and shakes her head several times before backing away. \"<i>Nuh-uh,</i>\" she begins, \"<i>there's no way I'm going to stick that thing anywhere, y'hear?</i>\" You figure it's going to take a lot of convincing to get her to take the needle.\n\n");
 	//[If Very High INT]
@@ -1555,7 +1556,7 @@ public function giveLottieGroPlus():void {
 }
 //[If Reducto]
 public function giveLottieReducto():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00323] == 0) {
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00323]++;
@@ -1576,7 +1577,7 @@ public function giveLottieReducto():void {
 
 //[If Ham Sandwich]
 public function hamSammitchTimeBIATCH():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00324] == 0) {
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00324]++;
@@ -1605,7 +1606,7 @@ public function hamSammitchTimeBIATCH():void {
 //LOTTIE SEX STARTS HERE
 
 public function lottieFuck():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	var tentacle:Function = null;
 	var thirtyMinute:Function = null;
 	if(silly() && player.hasCock()) thirtyMinute = lottiesThirtyMinutePigGasm;
@@ -1665,7 +1666,7 @@ public function lottieFuck():void {
 
 //[Doggystyle]
 public function lottieRepeatDoggieStyle():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText(images.showImage("lottie-fuck-her-doggie-style-repeat"));
 	var x:Number = player.cockThatFits(40);
@@ -1687,7 +1688,7 @@ public function lottieRepeatDoggieStyle():void {
 
 //[Walkies]
 public function lottieRepeatWalkies():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText(images.showImage("lottie-fuck-her-in-public-repeat"));
 	var x:Number = player.cockThatFits(40);
@@ -1712,7 +1713,7 @@ public function lottieRepeatWalkies():void {
 
 //[Cowgirl]
 public function lottieRepeatCowGirl():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText(images.showImage("lottie-fuck-her-cowgirl-repeat"));
 	var x:Number = player.cockThatFits(40);
@@ -1743,7 +1744,7 @@ public function lottieRepeatCowGirl():void {
 
 //[Quickie]
 public function lottieRepeatQuickie():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	var x:Number = player.cockThatFits(40);
 	if(x < 0) x = 0;
@@ -1772,7 +1773,7 @@ public function lottieRepeatQuickie():void {
 
 //[Threesome]
 public function lottieRepeatThreesome():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText(images.showImage("lottie-fuck-her-threesome-repeat"));
 	var x:Number = player.cockThatFits(40);
@@ -1788,7 +1789,7 @@ public function lottieRepeatThreesome():void {
 
 //[Netorare]
 public function lottieRepeatSUPERNEATORARES():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	var x:Number = player.cockThatFits(40);
 	if(x < 0) x = 0;
@@ -1817,7 +1818,7 @@ public function lottieRepeatSUPERNEATORARES():void {
 
 //[Reverse Cowgirl]
 public function lottieRepeatBackwardsAssCowgirl():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	var x:Number = player.cockThatFits(40);
 	if(x < 0) x = 0;
@@ -1833,7 +1834,7 @@ public function lottieRepeatBackwardsAssCowgirl():void {
 
 //[FemDom]
 public function lottieRepeatFEMDOMFEMFDOM():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	var x:Number = player.cockThatFits(40);
 	if(x < 0) x = 0;
@@ -1864,7 +1865,7 @@ public function lottieRepeatFEMDOMFEMFDOM():void {
 }
 //[Hug]
 public function hugTheShitOutOfYourHam():void {
-	spriteSelect(36);
+	spriteSelect(SpriteDb.s_lottie);
 	clearOutput();
 	outputText("You stand up, telling Lottie to come over to you. She hesitates, unsure as to what you have in mind, but follows accordingly. Soon, the rosy pig-girl stands in front of you, looking curiously with grey-green eyes. You suddenly reach out towards her, Lottie flinching and instinctively attempting to move out of the way – but it's too late. \"<i>BIG OL' BEAR HUG!</i>\" you scream, wrapping your arms around the short, shrieking pork-woman. \"<i>GRR GRR, ALL HUGS ARE GO!</i>\" You start shaking about, bringing Lottie with you as you try to hug her with all the cuddliness of a grizzly. At this point, Lottie's screams have turned into giggles, laughing and shaking while faux-attempting to escape from your grasp. \"<i>S-stop it, babe! Nooo!</i>\" she cries, flailing helplessly. You both laugh as you put her down, Lottie pretending to punch your gut while you pretend to reel in pain. It's no question that your bear hugs are simply the best.\n\n");
 	if(lottieMorale() < 70) lottieMorale(1);
