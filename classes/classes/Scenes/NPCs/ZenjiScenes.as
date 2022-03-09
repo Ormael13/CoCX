@@ -2861,9 +2861,9 @@ import coc.view.ButtonDataList;
 		
 		public function ZenjiProposalScene():void{
 			if (flags[kFLAGS.MARRIAGE_FLAG] != 0){
-				outputText("You call Zenji to you, to which he immediately approaches you with a stride in his step. His deep voice rings to you as he stands in front of you, \"You called?\"\n" +
+				outputText("You call Zenji to you, to which he immediately approaches you with a stride in his step. His deep voice rings to you as he stands in front of you, \"<i>You called?</i>\"\n" +
 						"\n" +
-						"You grab Zenji by his wrists. Zenji holds onto you gently, eyeing you carefully, unsure of where you’re going with this, “Mi costilla... someting wrong?”\n" +
+						"You grab Zenji by his wrists. Zenji holds onto you gently, eyeing you carefully, unsure of where you’re going with this, \"<i>Mi costilla... someting wrong?</i>\"\n" +
 						"\n" +
 						"You reach for Zenji's soft hand, admiring the fuzzy feeling of it within your grasp as you lower yourself to one knee. You tell Zenji that he means a lot to you, and with all the crazy havoc, sinister beings, and harm that could be brought at any moment. You know deep down that you want to spend the rest of your life with him.  With everything you’ve been through together, there is nobody more deserving of being your husband than he is.\n" +
 						"\n" +
@@ -2871,18 +2871,18 @@ import coc.view.ButtonDataList;
 						"\n" +
 						"Zenji looks at you unsurely before pushing your hand down with his.\n" +
 						"\n" +
-						"“[name]... I’m honored, but you’re already married… I can’t do dis to you. My heart aches for you... I want to love you… But… I cannot… Your heart already belongs to another, it is not mine to take… I’m sorry [name], but I cannot do this to you or them.”\n" +
+						"\"<i>[name]... I’m honored, but you’re already married… I can’t do dis to you. My heart aches for you... I want to love you… But… I cannot… Your heart already belongs to another, it is not mine to take… I’m sorry [name], but I cannot do this to you or them.</i>\"\n" +
 						"\n" +
 						"His rejection stings, but his words carry meaning.\n" +
 						"\n" +
-						"Zenji rests a hand on your shoulder, “Never disgrace love, [name],” he states before leaving you alone for the time being.");
+						"Zenji rests a hand on your shoulder, \"<i>Never disgrace love, [name],</i>\" he states before leaving you alone for the time being.");
 				eachMinuteCount(15);
 				doNext(loverZenjiTalks);
 			}
 			else{
 				outputText("You call Zenji to you, to which he immediately approaches you with a stride in his step. His deep voice rings to you as he stands in front of you, \"You called?\"\n" + "\n");
 				if (flags[kFLAGS.MALE_OR_FEMALE] == 0 && player.gender == 2 || flags[kFLAGS.MALE_OR_FEMALE] == 2){
-					outputText("You grab Zenji by his wrists. Zenji holds onto you gently, eyeing you carefully, unsure of where you’re going with this, “Mi costilla... someting wrong?”\n" +
+					outputText("You grab Zenji by his wrists. Zenji holds onto you gently, eyeing you carefully, unsure of where you’re going with this, \"<i>Mi costilla... someting wrong?</i>\"\n" +
 							"\n" +
 							"You reach for Zenji's soft hand, admiring the fuzzy feeling of it within your grasp as you lower yourself to one knee. You tell Zenji that he means a lot to you, and with all the crazy havoc, sinister beings, and harm that could be brought at any moment. You know deep down that you want to spend the rest of your life with him. You pull out the wedding ring.\n" +
 							"\n" +
@@ -2890,16 +2890,16 @@ import coc.view.ButtonDataList;
 							"\n" +
 							"With everything you’ve been through together, there is nobody more deserving of being your husband than he is. You say this as you pull out the charm Jabala has given to you.\n" +
 							"\n" +
-							"Zenji turns completely red, you’ve never seen anyone blush so hard before. “I… [name]... I was going ta ask ya soon... when de moment was perfect… but…” He’s at a loss for words, completely embarrassed.\n" +
+							"Zenji turns completely red, you’ve never seen anyone blush so hard before. \"<i>I… [name]... I was going ta ask ya soon... when de moment was perfect… but…</i>\” He’s at a loss for words, completely embarrassed.\n" +
 							"\n" +
 							"You stand up before gently grabbing onto his necklace, tying the charm onto it as a memento. You then reach your hand up and grasp onto his beard, pulling his face closer to yours as you lock your lips with his. His body is frozen, but his tail wraps around you, pulling you closer to him.\n" +
 							"\n" +
 							"Zenji’s humiliation turns to shock before he relaxes, wrapping his strong arms around you, returning the embrace. Tears of joy well up in his eyes, “Oh, [name]. You have made me de happiest troll on Mareth, you’ve done so much for me…”\n" +
 							"\n" +
-							"You feel the ground slip beneath you as you’re swept clean off your [feet]. “Well, if we’re going to get married, we best tell ma parents about de news. After all, with all you’ve done for me, I’m sure dey’ll be delighted to hear de news.”\n");
+							"You feel the ground slip beneath you as you’re swept clean off your [feet]. \“<i>Well, if we’re going to get married, we best tell ma parents about de news. After all, with all you’ve done for me, I’m sure dey’ll be delighted to hear de news.</i>\”\n");
 				}
 				else{
-					outputText("You grab Zenji by his wrists. Zenji holds onto you gently, eyeing you carefully, unsure of where you’re going with this, “Mi corazón... someting wrong?”\n" +
+					outputText("You grab Zenji by his wrists. Zenji holds onto you gently, eyeing you carefully, unsure of where you’re going with this, \“Mi corazón... someting wrong?</i>\”\n" +
 							"\n" +
 							"You reach for Zenji's soft hand, admiring the fuzzy feeling of it within your grasp as you lower yourself to one knee. You tell Zenji that he means a lot to you, and with all the crazy havoc, sinister beings, and harm that could be brought at any moment. You know deep down that you want to spend the rest of your life with him. You pull out the wedding ring.\n" +
 							"\n" +
@@ -2907,13 +2907,13 @@ import coc.view.ButtonDataList;
 							"\n" +
 							"With everything you’ve been through together, there is nobody more deserving of being your husband than he is. You say this as you pull out the charm Jabala has given to you.\n" +
 							"\n" +
-							"Zenji recoils slightly before blushing softly, “[name]... I… I…” He’s at a loss for words. Zenji pauses for a moment, taking in a deep sigh, “Of course I will marry you, [name]. I just… I wanted ta be the one t’ propose… I was going to soon, I just was waiting for de perfect chance…”\n" +
+							"Zenji recoils slightly before blushing softly, \“<i>[name]... I… I…</i>\” He’s at a loss for words. Zenji pauses for a moment, taking in a deep sigh, \“<i>Of course I will marry you, [name]. I just… I wanted ta be the one t’ propose… I was going to soon, I just was waiting for de perfect chance…</i>\”\n" +
 							"\n" +
 							"You stand up before gently grabbing onto his necklace, tying the charm onto it as a memento. You then reach your hand up and hold onto his beard, pulling his face close to yours as you lock your lips with his. His tail wraps around you, pulling you closer to him.\n" +
 							"\n" +
-							"Zenji returns the embrace, wrapping his strong arms around you. Tears of joy well up in his eyes, “Oh, [name]. You have made me de happiest troll on Mareth, you’ve done so much for me…”\n" +
+							"Zenji returns the embrace, wrapping his strong arms around you. Tears of joy well up in his eyes, \“<i>Oh, [name]. You have made me de happiest troll on Mareth, you’ve done so much for me…</i>\”\n" +
 							"\n" +
-							"You feel the ground slip beneath you as you’re swept clean off your feet, “Well, if we’re going to get married, we best tell ma parents about de news. After all, with all you’ve done for me, I’m sure dey’ll be delighted to hear de news.”\n");
+							"You feel the ground slip beneath you as you’re swept clean off your feet, \“<i>Well, if we’re going to get married, we best tell ma parents about de news. After all, with all you’ve done for me, I’m sure dey’ll be delighted to hear de news.</i>\”\n");
 				}
 				doNext(ZenjiMarriageSceneUno);
 			}
@@ -2923,47 +2923,47 @@ import coc.view.ButtonDataList;
 			clearOutput();
 			outputText("Zenji guides you back to the troll village, holding your hand tightly in a mix of love and anticipation. He guides you to his parent’s home, knocking on the door when he finally reaches the hut.\n" +
 					"\n" +
-					"Halkano slides the door open, “Zenji! Back so soon?” He says jovially.\n" +
+					"Halkano slides the door open, \“<i>Zenji! Back so soon?</i>\” he asks jovially.\n" +
 					"\n" +
-					"Zenji is practically beaming as he pulls you closer, “Get motha out here, I have some important news ta share.”\n" +
+					"Zenji is practically beaming as he pulls you closer, \“Get motha out here, I have some important news ta share.</i>\”\n" +
 					"\n" +
-					"Halkano smiles, “Sure ting, she’s out in de garden right now. Take a seat on de couch, I’ll be back soon.”\n" +
+					"Halkano smiles, \“<i>Sure ting, she’s out in de garden right now. Take a seat on de couch, I’ll be back soon.</i>\”\n" +
 					"\n" +
 					"Zenji guides you to the couch, the two of you sit patiently while Halkano goes to the back of the hut.\n" +
 					"\n" +
-					"Zenji pulls you in for a brief kiss during the idle time, “I can’t wait to see deir faces when I share de news. Let’s both say it at de same time, alright?” He says after breaking the kiss.\n" +
+					"Zenji pulls you in for a brief kiss during the idle time, \“<i>I can’t wait to see deir faces when I share de news. Let’s both say it at de same time, alright?</i>\” he asks after breaking the kiss.\n" +
 					"\n" +
 					"You give him a gentle smile in return as you nod your head, you’re sure they’ll be excited.\n" +
 					"\n" +
 					"You hear some idle chatter outside for a moment, but you’re unsure of what exactly they are talking about.\n" +
 					"\n" +
-					"Zenji turns to you, he pulls your face towards him, “I know I have not said it enough times, but… Dere’s someting I really like about your eyes… [eyecolor] is a really good look on ya, [name]. I could just spend all day staring into dem.”\n" +
+					"Zenji turns to you, he pulls your face towards him, \“<i>I know I have not said it enough times, but… Dere’s someting I really like about your eyes… [eyecolor] is a really good look on ya, [name]. I could just spend all day staring into dem.</i>\”\n" +
 					"\n" +
 					"You look back into his deep-set, ashen green eyes. His gaze is strong, giving off a sense of comfort and safety. Zenji gently caresses your face for a moment before you hear the door open and close followed by footsteps.\n" +
 					"\n" +
 					"Halkano returns with Jabala, she is currently wearing a straw hat over her long, lime hair. Halkano sits on his seat as Jabala rests on his lap. Halkano wraps his arms and tail around her.\n" +
 					"\n" +
-					"“Halkano tells me there’s something you wanted to tell us?” Jabala inquires.\n" +
+					"\“<i>Halkano tells me there’s something you wanted to tell us?</i>\” Jabala inquires.\n" +
 					"\n" +
-					"Zenji gestures toward you as both of you exclaim, “We’re getting married!”\n" +
+					"Zenji gestures toward you as both of you exclaim, \“<i>We’re getting married!</i>\”\n" +
 					"\n" +
 					"Jabala tries to leap up for joy, but she is firmly held in place by Halkano, his jaw agape in awe.\n" +
 					"\n" +
 					"Jabala slips out before rushing toward the two of you, pulling you in for a group hug.\n" +
 					"\n" +
-					"“My little Zinny is all grown up and getting married!” She exclaims, tears streaming from her face. Despite her tears of joy, she musters up a knowing wink toward you.\n" +
+					"\“<i>My little Zinny is all grown up and getting married!</i>\” she exclaims, tears streaming from her face. Despite her tears of joy, she musters up a knowing nod toward you.\n" +
 					"\n" +
 					"Zenji chuckles softly as Halkano stands up, wiping a tear from his face, “I was worried dis day would never come, but ma boy is all grown up and here ta tell us!”\n" +
 					"\n" +
-					"Jabala gives Halkano a wink, “I think you know what needs to be done now.”\n" +
+					"Jabala gives Halkano a wink, \“<i>I think you know what needs to be done now.</i>\”\n" +
 					"\n" +
-					"Halkano chuckles briefly, “I thought de day would neva come.” Halkano walks toward Zenji, “We need ta choose what ta wear for ya wedding! Come wit me, Zenji dere’s no going back now, I know dis is what ya wanted because ya came here.”\n" +
+					"Halkano chuckles briefly, \“<i>I thought de day would neva come.</i>\” Halkano walks toward Zenji, \“<i>We need ta choose what ta wear for ya wedding! Come wit me, Zenji dere’s no going back now, I know dis is what ya wanted because ya came here.</i>\”\n" +
 					"\n" +
-					"Zenji doesn’t resist, “Ya know me too well, I do want ta get married here.”\n" +
+					"Zenji doesn’t resist, \“<i>Ya know me too well, I do want ta get married here.</i>\”\n" +
 					"\n" +
 					"Halkano and Zenji exit the hut.\n" +
 					"\n" +
-					"Jabala grins before taking your hand, “Let’s go, [name]. We can figure out what you want to wear. Tell me, do you want a suit or a dress?” She asks, eyeing your form.\n");
+					"Jabala grins before taking your hand, \“<i>Let’s go, [name]. We can figure out what you want to wear. Tell me, do you want a suit or a dress?</i>\” she asks, eyeing your form.\n");
 			menu();
 			addButton(0,"Wedding Dress", ZenjiMarriageSceneDos,1);
 			addButton(1,"Wedding Suit", ZenjiMarriageSceneDos, 2);
@@ -2979,32 +2979,32 @@ import coc.view.ButtonDataList;
 						"\n" +
 						"Jabala quickly pushes the door to the side without any regard for it. “My son is getting married, and [name] is going to be the beautiful bride!”\n" +
 						"\n" +
-						"The seamstress there cheers in excitement for you, “That’s wonderful! Come, come! I need to get your dress prepared.”\n" +
+						"The seamstress there cheers in excitement for you, \“<i>That’s wonderful! Come, come! I need to get your dress prepared.</i>\”\n" +
 						"\n" +
-						"You follow the seamstress as Jabala speaks up, “Don’t worry, I’ll pay for the dress, consider it my wedding gift.”\n" +
+						"You follow the seamstress as Jabala speaks up, \“Don’t worry, I’ll pay for the dress, consider it my wedding gift.</i>\”\n" +
 						"\n" +
-						"The seamstress speaks up as she guides you to a platform where she takes your measurements. “Only the finest silk is used for dresses here, after all, it is your day and we want to make sure you are as beautiful on the outside as you are on the inside.”\n" +
+						"The seamstress speaks up as she guides you to a platform where she takes your measurements. \“</i>Only the finest silk is used for dresses here, after all, it is your day and we want to make sure you are as beautiful on the outside as you are on the inside.</i>\”\n" +
 						"\n" +
-						"Once she is done measuring your body she inspects your head and feet. “Spider silk is durable and soft with a shiny sheen, you will be radiant.”\n" +
+						"Once she is done measuring your body, she inspects your head and feet. \“<i>Spider silk is durable and soft with a shiny sheen. You will be radiant.</i>\”\n" +
 						"\n" +
-						"After taking the rest of your measurements Jabala reaches out a hand and you step off the platform and the seamstress steps away for a minute. Jabala speaks up again, “We work on our clothes very quickly here, so don’t worry.” She states, “Apparently there’s also been a lot of talking going on within the town. If you ask me, Zenji has been planning this for some time now… I was so buried within my garden that I hardly noticed all the preparations!”\n" +
+						"After taking the rest of your measurements Jabala reaches out a hand and you step off the platform and the seamstress steps away for a minute. Jabala speaks up again, \“<i>We work on our clothes very quickly here, so don’t worry,</i>\” she states. \“<i>Apparently there’s also been a lot of talking going on within the town. If you ask me, Zenji has been planning this for some time now… I was so buried within my garden that I hardly noticed that it was my Zinny!</i>\”\n" +
 						"\n" +
 						"The seamstress returns with some silk, sewing tools, and some bases for the dress.\n");
 				if (player.isNaked()){
 					outputText("You’re already naked, so she quickly goes to work on making the dress.\n");
 				}
 				else{
-					outputText("She instructs you to undress to your undergarments and you do. Once you’re in your underwear she begins tailoring the dress around you with precision and nimble fingers.\n");
+					outputText("She instructs you to undress to your undergarments and you do. Once you’re in your underwear, she begins tailoring the dress around you with precision and nimble fingers.\n");
 				}
 				outputText("You’re astonished at how quick she is with her work, the comfort of the silk dress accents your pleasant features well. The silky white gown is being made before your own eyes. She weaves around you with practiced ease, quickly spooling more thread, it’s magical how magnificent her tailoring is.\n" +
 						"\n" +
-						"It doesn’t take long before your dress is finished. Jabala sheds another tear, “You are beautiful, [name]. You remind me of me on my wedding day…” Jabala sighs softly, “My little Zinny is all grown up, getting married… I am glad to know that you will be with him, I hope he enjoyed the little gift I gave to you.”\n" +
+						"It doesn’t take long before your dress is finished. Jabala sheds another tear, \“<i>You are beautiful, [name]. You remind me of me on my wedding day…</i>\” Jabala sighs softly, \“<i>My little Zinny is all grown up, getting married… I am glad to know that you will be with him, I hope he enjoyed the little gift I gave to you.</i>\”\n" +
 						"\n" +
 						"You turn around to look at yourself in the mirror. What a sight, the layers of silken fabric, the strapless dress molds to your form accenting your features incredibly. The seamstress passes you a tiara with a silken veil, white gloves, and flats. Jabala helps put the silken flats on your feet, once you’re fully dressed the seamstress places the tiara over your head as the veil flows over your face.\n" +
 						"\n" +
-						"“You are ready.” The seamstress states, “Truly a beautiful sight, I’m sure your partner will be excited to see such beauty.”\n" +
+						"\“<i>You are ready,<i>\” the seamstress states. \“<i>Truly a beautiful sight, I’m sure your partner will be excited to see such beauty.</i>\”\n" +
 						"\n" +
-						"Jabala wipes her tears from her face, “Follow me, [name] we will get you prepared for the ceremony.”\n");
+						"Jabala wipes her tears from her face, \“<i>Follow me, [name] we will get you prepared for the ceremony.</i>\”\n");
 			}
 			else {
 				outputText("You tell Jabala that you’re interested in wearing a wedding tuxedo.\n" +
@@ -3013,32 +3013,32 @@ import coc.view.ButtonDataList;
 						"\n" +
 						"Jabala quickly pushes the door to the side without any regard for it. “My son is getting married, and [name] is going to be the handsome bride!”\n" +
 						"\n" +
-						"The seamstress there cheers in excitement for you, “That’s wonderful! Come, come! I need to get your suit prepared.”\n" +
+						"The seamstress there cheers in excitement for you, \“<i>That’s wonderful! Come, come! I need to get your suit prepared.</i>\”\n" +
 						"\n" +
-						"You follow the seamstress as Jabala speaks up, “Don’t worry, I’ll pay for the suit, consider it my wedding gift.”\n" +
+						"You follow the seamstress as Jabala speaks up, \“<i>Don’t worry, I’ll pay for the suit, consider it my wedding gift.</i>\”\n" +
 						"\n" +
 						"The seamstress speaks up as she guides you to a platform where she takes your measurements. “Only the finest silk is used for suits here, after all, it is your day and we want to make sure you are as beautiful on the outside as you are on the inside.”\n" +
 						"\n" +
-						"Once she is done measuring your body she inspects your head and feet. “Spider silk is durable and soft with a shiny sheen, you will be radiant.”\n" +
+						"Once she is done measuring your body she inspects your head and feet. \“<i>Spider silk is durable and soft with a shiny sheen. You will be radiant.</i>\”\n" +
 						"\n" +
-						"After taking the rest of your measurements Jabala reaches out a hand and you step off the platform and the seamstress steps away for a minute. Jabala speaks up again, “We work on our clothes very quickly here, so don’t worry.” She states, “Apparently there’s also been a lot of talking going on within the town. If you ask me, Zenji has been planning this for some time now… I was so buried within my garden that I hardly noticed all the preparations!”\n" +
+						"After taking the rest of your measurements Jabala reaches out a hand and you step off the platform and the seamstress steps away for a minute. Jabala speaks up again, \“<i>We work on our clothes very quickly here, so don’t worry,</i>\” she states. \“<i>Apparently there’s also been a lot of talking going on within the town. If you ask me, Zenji has been planning this for some time now… I was so buried within my garden that I hardly noticed that it was my Zinny!</i>\”\n" +
 						"\n" +
 						"The seamstress returns with some silk, sewing tools, and some bases for the tuxedo. \n");
 				if (player.isNaked()){
 					outputText("You’re already naked, so she quickly goes to work on making the suit.\n");
 				}
 				else{
-					outputText("She instructs you to undress to your undergarments and you do. Once you’re in your underwear she begins tailoring the dress around you with precision and nimble fingers.\n");
+					outputText("She instructs you to undress to your undergarments and you do. Once you’re in your underwear she begins tailoring the suit around you with precision and nimble fingers.\n");
 				}
-				outputText("You’re astonished how quick she is with her work, the comfort of the silk tuxedo accents your pleasant features well. The silky white tuxedo is being made before your own eyes. She weaves around you with practiced ease, quickly spooling more thread, it’s magical how magnificent her tailoring is. Once she’s finished with your shirt she quickly gets to work on your jacket before getting to business on your pants.\n" +
+				outputText("You’re astonished how quick she is with her work, the comfort of the silk tuxedo accents your pleasant features well. The silky white tuxedo is being made before your own eyes. She weaves around you with practiced ease, quickly spooling more thread, it’s magical how magnificent her tailoring is. Once she’s finished with your shirt, she quickly gets to work on your jacket before getting to business on your pants.\n" +
 						"\n" +
-						"It doesn’t take long before your tuxedo is finished. Jabala sheds another tear, “You are beautiful, [name]. You almost remind me of me on my wedding day…” Jabala sighs softly, “My little Zinny is all grown up, getting married… I am glad to know that you will be with him.”\n" +
+						"It doesn’t take long before your tuxedo is finished. Jabala sheds another tear, \“<i>You are beautiful, [name]. You almost remind me of me on my wedding day…</i>\” Jabala sighs softly, \“<i>My little Zinny is all grown up, getting married… I am glad to know that you will be with him.</i>\”\n" +
 						"\n" +
 						"You turn around to look at yourself in the mirror. What a sight, the layers of silken fabric, the white tuxedo molds to your form accenting your features incredibly. The seamstress passes you a pair of short white gloves and dress shoes. Jabala puts the bowtie around you once you slip into your shoes. Once you’re fully dressed the seamstress eyes you carefully.\n" +
 						"\n" +
-						"“You are ready.” The seamstress states, “Truly a beautiful sight, I’m sure your partner will be excited to see such beauty.”\n" +
+						"\“<i>You are ready,</i>\” the seamstress states, \“<i>Truly a beautiful sight, I’m sure your partner will be excited to see such beauty.</i>\”\n" +
 						"\n" +
-						"Jabala wipes her tears from her face, “Follow me, [name] we will get you prepared for the ceremony.”\n");
+						"Jabala wipes her tears from her face, \“<i>Follow me, [name] we will get you prepared for the ceremony.</i>\”\n");
 			}
 			doNext(ZenjiMarriageSceneTres);
 		}
@@ -3047,21 +3047,21 @@ import coc.view.ButtonDataList;
 			clearOutput();
 			outputText("Jabala guides you towards a tall chapel. It’s decorated in ivory paint and depictions of Marae.\n" +
 					"\n" +
-					"Jabala takes a deep sigh, “I remember when I got married… It all happened so quickly and before I knew it Zenji was with us… I wouldn’t trade that day for the world… I hope today will be just as magical for you, [name], if not more.”\n" +
+					"Jabala takes a deep sigh, \“<i>I remember when I got married… It all happened so quickly and before I knew it Zenji was with us… I wouldn’t trade that day for the world… I hope today will be just as magical for you, [name], if not more.</i>\”\n" +
 					"\n" +
-					"You can already hear conversations within as Jabala guides you to the front door. “I know you may not feel prepared [name], but trust me, follow your heart because this here, right now, is your moment. There is magic in the suddenness of a moment.”\n" +
+					"You can already hear conversations within as Jabala guides you to the front door. \“<i>I know you may not feel prepared [name], but trust me, follow your heart because this here, right now, is your moment. There is magic in the suddenness of a moment.</i>”\n" +
 					"\n" +
 					"Jabala opens the door as some music starts playing. Rows of seats are filled with trolls and you see everyone from your camp within the audience. Zenji seems to have been preparing this for some time now.\n" +
 					"\n" +
 					"Jabala walks you towards the altar as you hear the cheers and claps of your friends that you’ve made along the way.\n");
 			if (flags[kFLAGS.FACTORY_SHUTDOWN] == 1 && flags[kFLAGS.MARAE_QUEST_COMPLETE] >= 1){	//Pure Marae
-				outputText("You even see Marae, you’re surprised to meet her here. The goddess stands out, shining radiantly amongst the crowd\n" +
+				outputText("You even see Marae, you’re surprised to meet her here. The goddess stands out, shining radiantly, her body appearing within the wooden walls of the church to greet you.\n" +
 						"\n" +
-						"“I have heard that my champion was going to be wed on this day.” She states, “It would be a shame if I didn’t formally give you my blessing.”\n" +
+						"\“<i>I have heard that my champion was going to be wed on this day,</i>\” she states. \“<i>After all you've done, It would be a shame if I didn’t formally give you my blessing.</i>”\n" +
 						"\n" +
 						"You thank her, glad to know that even Marae will make time for her people.\n");
 			}
-			outputText("You finally get a good view of Zenji waiting for you at the altar, his face is beaming. He is wearing a black silk tuxedo jacket with a white silken shirt underneath. He has a black bowtie and black gloves. His black pants places the perfect amount of emphasis on his firm rear and toned legs. There is a hole in his pants to make room for his tail. You can see his black dress shoes underneath. He is the most handsome troll you have ever seen before and now you’re about to be with him forever.\n" +
+			outputText("You finally get a good view of Zenji waiting for you at the altar, his face is beaming. He is wearing a black silk tuxedo jacket with a white silken shirt underneath. He has a black bowtie and white gloves. His black pants places the perfect amount of emphasis on his firm rear and toned legs. There is a hole in his pants to make room for his tail. You can see his black dress shoes underneath. He is the most handsome troll you have ever seen before and now you’re about to be with him forever.\n" +
 					"\n" +
 					"You stand before the celebrant as Zenji picks up your hands. His grip is soft but firm. You look up at him as he mouths, “You are beautiful, [name]”.\n" +
 					"\n" +
@@ -3069,7 +3069,7 @@ import coc.view.ButtonDataList;
 					"\n" +
 					"You can barely hear the celebrant speak, everything else feels so distant as you stand with Zenji. It’s as if the entire world consists of only you and him now.\n" +
 					"\n" +
-					"Zenji speaks up, his voice like hope in the moonlight, “When I first met you, [name]. I thought you were just another person in the bog, perhaps an outcast, or someone trying to fend off corruption. But you taught me humility and how ta accept my feelings instead of hiding from dem. I know now dat I can’t run from my problems, you’ve taught me so much more about myself than I ever even knew. You revealed to me what it means to be vulnerable, being vulnerable isn’t a weakness, it’s a sign of emotional capacity. I know you are strong, [name], you’ve shown me dat strength is far more than just physical power or mental knowledge. I wish to be yours, [name]. That’s why I’m here now, dat’s why Marae brought us together, to love each other. Tell me you wish the same. Tell me you love me with every fiber of your very being in the same way I do to you.”\n" +
+					"Zenji speaks up, his voice like hope in the moonlight, \“<i>When I first met you, [name]. I thought you were just another person in the bog, perhaps an outcast, or someone trying to fend off corruption. But you taught me humility and how ta accept my feelings instead of hiding from dem. I know now dat I can’t run from my problems, you’ve taught me so much more about myself than I ever even knew. You revealed to me what it means to be vulnerable, being vulnerable isn’t a weakness, it’s a sign of emotional capacity. I know you are strong, [name], you’ve shown me dat strength is far more than just physical power or mental knowledge. I wish to be yours, [name]. That’s why I’m here now, dat’s why Marae brought us together, to love each other. Tell me you wish the same. Tell me you love me with every fiber of your very being in the same way I do to you.</i>\”\n" +
 					"\n" +
 					"The celebrant passes two golden rings to Zenji, Zenji slides one onto his finger as he holds the other to you.\n" +
 					"\n" +
@@ -3086,7 +3086,7 @@ import coc.view.ButtonDataList;
 					if (silly()){
 						outputText("It's all coming to plan, oooh, the tax benefits will be so good! You tell him you want a divorce, you're keeping the children, and he's paying for your child support.\n" +
 								"\n" +
-								"Zenji gasps, \"[name]..! You... I... What?\"\n" +
+								"Zenji gasps, \"<i>[name]..! You... I... What?</i>\"\n" +
 								"\n" +
 								"You nod your head, reaching a hand toward him, commanding him to pay up.\n" +
 								"\n" +
@@ -3116,7 +3116,7 @@ import coc.view.ButtonDataList;
 					}
 				}
 				else if (player.race(true) == "demon"){
-					outputText("With your mind set, you speak up. “I do,” you reply.\n" +
+					outputText("With your mind set, you speak up. \“I do,\” you reply.\n" +
 							"\n" +
 							"Tears begin to stream down his face as you smile at him. You look toward Zenji with faux reassurance as you hold out your hand for him.\n" +
 							"\n" +
@@ -3138,15 +3138,15 @@ import coc.view.ButtonDataList;
 					outputText("With your mind set, you smirk, he really is a clingy, foolish troll. He valued you so highly, it’s only that much more satisfying to break him. You give him the cold shoulder, completely disregarding him as you face away from him.\n");
 				}
 				if (!spchk){
-					outputText("He is more than shocked at your resistance, but before you can give him any more time to react, you walk away from the altar. You hear Zenji call out for you, “[name]! Wait, c-come back! [name]! PLEASE D-DON’T GO!” \n" +
+					outputText("He is more than shocked at your resistance, but before you can give him any more time to react, you walk away from the altar. You hear Zenji call out for you, \“<i>[name]! Wait, c-come back! [name]! PLEASE D-DON’T GO!</i>\” \n" +
 							"\n" +
 							"You leave as the audience stares at you in shock.\n" +
 							"\n" +
-							"You bump into Yenza along the way, you don’t even care what she has to say. You push her back as she falls to the ground. she’s not important anyhow, none of this was ever important to you. Zenji will be completely heartbroken, after all, you built him up so high that having everything crumble before him will only hurt more.\n" +
+							"You bump into Yenza along the way, you don’t even care what she has to say. You push her back as she falls to the ground. she’s not important anyhow, none of this was ever important to you. Zenji will be completely heartbroken. After all, you built him up so high that having everything crumble before him will only hurt more.\n" +
 							"\n" +
 							"You finally reach your camp after the journey through the jungle. He is gone, Zenji will never bother you again and you don’t have to think about him either. He was too clingy for it to ever be justified.\n");
 				}
-				outputText("Troll Village and Zenji have been removed from the game.\n");
+				outputText("<b>Troll Village and Zenji have been removed from the game.</b>\n");
 				TrollVillage.ZenjiVillageStage = -1;
 				flags[kFLAGS.ZENJI_PROGRESS] = -1;
 			}else{
@@ -3156,23 +3156,23 @@ import coc.view.ButtonDataList;
 						"\n" +
 						"The audience coos as Zenji sheds tears of joy.\n" +
 						"\n" +
-						"“I’m just… so happy…” He squeaks through his tears, “You’ve taught me so much about myself… dere’s nobody better I could’ve asked for, I just can’t believe dis is happening…”\n" +
+						"\“<i>I’m just… so happy…</i>\” he squeaks through his tears. \“<i>You’ve taught me so much about myself… there’s nobody better I could’ve asked for, I just can’t believe dis is happening…</i>”\n" +
 						"\n" +
 						"He musters up the strength to put the ring over your finger.\n" +
 						"\n" +
-						"The celebrant speaks up, “With the power invested in me, by the elders and Marae, I hereby pronounce you soul mates.”\n" +
+						"The celebrant speaks up, \“<i>With the power invested in me, by the elders and Marae, I hereby pronounce you soul mates.</i>\”\n" +
 						"\n" +
 						"Suddenly the door to the room slams open, Yenza is standing at the doorway, tears streaming down her face, completely infuriated.\n" +
 						"\n" +
-						"“YOU FUCKING BITCH! ZENJI IS SUPPOSED TO BE MINE! WHO DO YOU THINK YOU ARE? TAKING MY HUSBAND AWAY FROM ME?”\n" +
+						"\“<i>YOU FUCKING BITCH! ZENJI IS SUPPOSED TO BE MINE! WHO DO YOU THINK YOU ARE? TAKING MY HUSBAND AWAY FROM ME?</i>\”\n" +
 						"\n" +
 						"There is a long awkward silence, the air is so thick you may choke on it.\n" +
 						"\n" +
-						"Jabala speaks up, “Zenji is with [name] now! Go home Yenza! You’re not needed nor wanted here!”\n" +
+						"Jabala speaks up, \“<i>Zenji is with [name] now! Go home Yenza! You’re not needed nor wanted here!</i>\”\n" +
 						"\n" +
 						"The rest of the trolls boo at her, causing Yenza to back away slightly.\n" +
 						"\n" +
-						"Tears continue to cascade down her face, “FUCK YOU, ALL OF YOU ARE CUNTS! THIS WAS SUPPOSED TO BE MY DAY, ZENJI IS SUPPOSED TO BE MINE, THIS WAS ALL MINE AND YOU TOOK IT AWAY FROM ME!”\n" +
+						"Tears continue to cascade down her face, \“<i>FUCK YOU, ALL OF YOU ARE CUNTS! THIS WAS SUPPOSED TO BE MY DAY, ZENJI IS SUPPOSED TO BE MINE, THIS WAS ALL MINE AND YOU TOOK IT AWAY FROM ME!</i>\”\n" +
 						"\n" +
 						"With an enraged scream, she charges down the aisle. Several trolls quickly attempt to pin her down, she kicks and screams violently, clawing away at her aggressors, knocking them aside as she finally reaches you.\n" +
 						"\n" +
@@ -3190,7 +3190,7 @@ import coc.view.ButtonDataList;
 			outputText("Once Yenza is defeated the trolls quickly escort her out.\n"+
 			"Zenji looks mortified, but you stand back on the altar before gently caressing his face. His expression eases and his body relaxes. You tell him that she will no longer bother him, this time you know as a fact. It's just you and him now, nothing could ever undo the love you two share.\n" +
 					"\n" +
-					"“Thank you, [name]. I love you...” He whispers before gazing longingly into your eyes.\n");
+					"\“<i>Thank you, [name]. I love you...</i>\” He whispers before gazing longingly into your eyes.\n");
 			if (TrollVillage.ZenjiMarriageDress == 1){
 				outputText("Zenji lifts your veil over your tiara. ");
 			}
@@ -3200,21 +3200,21 @@ import coc.view.ButtonDataList;
 					"\n" +
 					"The world truly has stopped for the two of you as you hear the cheers of the audience. Zenji breaks the soft kiss between the two of you as you open your eyes. You see his face, glowing, grinning from ear to ear. You can’t help but laugh softly with him, his elation is contagious.\n" +
 					"\n" +
-					"“We are no longer alone together, we are ours forever.”\n" +
+					"\“<i>We are no longer alone together, we are ours forever.</i>\”\n" +
 					"\n" +
 					"The two of you turn to the audience as you walk down the altar. Your arms intertwined as you walk through the rows of people.\n" +
 					"\n" +
-					"Zenji speaks up, “De wedding isn’t ova just yet, we still have de party to attend!”\n" +
+					"Zenji speaks up, \“<i>The wedding isn’t over just yet, we still have de party to attend!</i>\”\n" +
 					"\n" +
 					"Zenji opens the door for you as you walk outside. The delicious smell of food permeates the air as you walk outside. The moment you step outdoors you hear an orchestra begin playing. Strings and woodwinds fill the air in a melodic symphony.\n" +
 					"\n" +
-					"Zenji grabs your hand, “Follow me, I will cut de wedding cake for us.”\n" +
+					"Zenji grabs your hand, \“<i>Follow me, I will cut de wedding cake for us.</i>\”\n" +
 					"\n" +
 					"It doesn’t take long before the rest of the guests arrive outside, chattering amongst each other.\n" +
 					"\n" +
 					"Your eyes are drawn to the food buffet, there’s several roasts, salads, a large assortment of fruits, vegetables, and sauces. Your eyes zone in on the wedding cake, 3 layers each about half a foot tall coated in silvery marzipan and decorated with white frosting.\n" +
 					"\n" +
-					"Zenji speaks up, “Dis will be a day ta remember, de day, I, Zenji, got married ta my ");
+					"Zenji speaks up, \“<i>Dis will be a day ta remember, de day, I, Zenji, got married ta my ");
 			if (flags[kFLAGS.MALE_OR_FEMALE] == 0 && player.gender == 2 || flags[kFLAGS.MALE_OR_FEMALE] == 2){
 				outputText("beautiful ");
 			}
@@ -3241,7 +3241,7 @@ import coc.view.ButtonDataList;
 					outputText("spouse");
 					break;
 			}
-			outputText(", [name]!” Zenji cuts a slice of the wedding cake before passing it to you with a spoon. The crowd cheers once more. Zenji gives you a disarming smile. “I am so glad we can share dis day, [name].”\n" +
+			outputText(", [name]!</i>” Zenji cuts a slice of the wedding cake before passing it to you with a spoon. The crowd cheers once more. \n\nZenji gives you a disarming smile. \“<i>I am so glad we can share dis day, [name].</i>”\n" +
 					"\n" +
 					"You give him a gentle smile in return. You take a spoonful of frosting from your cake before bopping him on the nose with it. You hear a few people in the audience chuckle as Zenji wipes it off with his fingers before licking them. “¡Cómo te atreves, gordita! You’re gonna pay fa dis later.” He says teasingly.\n" +
 					"\n" +
@@ -3249,29 +3249,29 @@ import coc.view.ButtonDataList;
 					"\n" +
 					"Later that night, Jabala approaches you, she is wearing a silken dress, \n");
 			if(flags[kFLAGS.ZENJI_KIDS] != 0){
-				outputText("and is currently cradling your kids");
+				outputText("and is currently cradling your kids. ");
 			}
-			outputText(", “Oh, [name]. You’ve made me the happiest mother on Mareth! This was just like my own wedding with Halkano. Why don’t you spend the night with us before you go home?”\n" +
+			outputText("\“<i>Oh, [name]. You’ve made me the happiest mother on Mareth! This was just like my own wedding with Halkano. Why don’t you spend the night with us before you go home?</i>\”\n" +
 					"\n" +
-					"Halkano approaches, in a grey tuxedo, “Haha, Jabala, if dey’re gonna spend de night, we betta give dem some… privacy.”\n" +
+					"Halkano approaches, in a grey tuxedo, \“<i>Haha, Jabala, if dey’re gonna spend de night, we betta give dem some… privacy.</i>\”\n" +
 					"\n" +
-					"Jabala turns toward him, “Alright, I just want to be with my son one more time before he becomes a man. You’re just growing up so fast…”\n" +
+					"Jabala turns toward him, \“<i>Alright, I just want to be with my son one more time before he becomes a man. You’re just growing up so fast…</i>\”\n" +
 					"\n" +
-					"Halkano gently pulls her close to him, “It was going to happen one day, I’m just glad he was here wit us.”\n" +
+					"Halkano gently pulls her close to him, \“<i>It was going to happen one day, I’m just glad he was here wit us.</i>\”\n" +
 					"\n" +
-					"Zenji looks up toward the night sky, “It is getting late, we’d best spend da night wit ya.”\n" +
+					"Zenji looks up toward the night sky, \“<i>It is getting late, we’d best spend da night wit ya.</i>\”\n" +
 					"\n" +
 					"The ceremony slowly simmers down and Zenji leads you to his parent’s home.\n" +
 					"\n" +
-					"Zenji guides you to his room, the bed is big enough to support the two of you. Zenji slowly takes off his tuxedo jacket and undoes his bowtie as it hangs loosely around his neck. “I really liked de suit, but it’s not really my thing, ya know, [name]?”\n" +
+					"Zenji guides you to his room, the bed is big enough to support the two of you. Zenji slowly takes off his tuxedo jacket and undoes his bowtie as it hangs loosely around his neck. \“<i>I really liked de suit, but it’s not really my thing, ya know, [name]?</i>\”\n" +
 					"\n" +
 					"Well, he surely is extremely handsome in a tuxedo.\n" +
 					"\n" +
-					"“Dat’s why getting out if it is dat much betta…” He says. Zenji begins to unbutton his shirt. You can see his gigantic biceps pressed tightly against the fabric. “Dis shirt is so tight… I could just…” Zenji hunches forward slightly as he flexes his massive arms. You hear the seams of the shirt start to come apart as the distinguishable sound of ripping fabric hits your ears. “I’ve been waiting to do dat all night.”\n" +
+					"\“<i>Dat’s why getting out if it is dat much betta…</i>\” he replies. Zenji begins to unbutton his shirt. You can see his large, firm biceps pressed tightly against the fabric. \“<i>Dis shirt is so tight… I could just…</i>\” Zenji hunches forward slightly as he flexes his massive arms. You hear the seams of the shirt start to come apart as the distinguishable sound of ripping fabric hits your ears. \“<i>Ngh, I’ve been waiting to do dat all night.</i>\”\n" +
 					"\n" +
-					"Now that’s impressive, considering that the entirety of his tuxedo is made out of spider silk. You’re a little surprised he hasn’t torn it sooner considering just how tightly it molds against his muscular form. Tightly wound up against his thick biceps and triceps\n" +
+					"Now that’s impressive, considering that the entirety of his tuxedo is made out of spider silk. You’re a little surprised he hasn’t torn it sooner considering just how tightly it molds against his muscular form, wound up against his thick biceps and triceps\n" +
 					"\n" +
-					"“Oh, it was a struggle not ta break out of it sooner, lemme tell ya,” Zenji replies. “It’s so satisfying ta just…” Zenji raises his arms and flexes his biceps as hard as he can. You can hear the fabric strain as his biceps burst through his sleeves. “Spider silk holds no grounds against my might! Dese arms were not meant ta be contained!”\n" +
+					"\“<i>Oh, it was a struggle not ta break out of it sooner, lemme tell ya,</i>\” Zenji replies. \“<i>It’s so satisfying ta just…</i>\” Zenji raises his arms and flexes his arms as hard as he can. You can hear the fabric strain as his biceps burst through his sleeves. \“<i>Spider silk holds no grounds against my might! These arms were not meant ta be contained!</i>\”\n" +
 					"\n" +
 					"Zenji grabs his completely shredded sleeve as he tears his shirt off of him. Scraps of fabric litter the floor as Zenji undoes his belt buckle, letting his pants fall to the ground. His loincloth is pushed out of the way as his erection pokes through. He quickly tears it off as well.\n");
 			if (TrollVillage.ZenjiMarriageDress == 1) {
@@ -3294,13 +3294,13 @@ import coc.view.ButtonDataList;
 				else{
 					outputText("You give him a moment to admire the view of your exposed chest through the unbuttoned shirt.");
 				}
-				outputText("You playfully strip off your shirt ")
+				outputText("You playfully strip off your shirt")
 				if (player.hasBreasts() && player.upperGarmentName.indexOf("bra") >= 0){
-					outputText("and bra ");
+					outputText(" and bra");
 				}
 				outputText(", leaving you completely naked.");
 			}
-			outputText("Zenji pulls you close to him, wrapping you within a warm hug before groping your behind, “Now dat de clothes are out of de way, why don’tcha get on de bed and I’ll show you how to end da night properly…” Zenji says with a cheeky smirk.\n" +
+			outputText("Zenji pulls you close to him, wrapping you within a warm hug before groping your behind, \“<i>Now dat de clothes are out of de way, why don’tcha get on de bed and I’ll show you how to end da night properly…</i>\” Zenji says with a cheeky smirk.\n" +
 					"\n" +
 					"You consider what you want to do before you get onto his bed.\n");
 			menu();
@@ -3309,10 +3309,10 @@ import coc.view.ButtonDataList;
 				addButton(1,"Get Penetrated", ZenjiMarriageSexTime, 2, -9000, -9000, "Have your husband stuff you the way a troll should breed his wife\n");
 			}
 			else{
-				addButtonDisabled(1, "Get Penetrated", "You don't have a coochie to take him!");
+				addButtonDisabled(1, "Get Penetrated", "You don't have a vagina to take him!");
 			}
 			if (player.cockThatFits(45) > 0){
-				addButton(2, "Pitch Anal", ZenjiMarriageSexTime, 3, -9000, -9000, "Tooltip: Mount your husband the way he was meant to be");
+				addButton(2, "Pitch Anal", ZenjiMarriageSexTime, 3, -9000, -9000, "Tooltip: Mount your husband on yourself the way he was meant to be");
 			}
 			else if (player.hasCock()){
 				addButtonDisabled(2, "Pitch Anal", "Your dick(s) is too big to fit in your husband!");
@@ -3329,7 +3329,7 @@ import coc.view.ButtonDataList;
 				if (player.ass.analLooseness == AssClass.LOOSENESS_VIRGIN){
 					outputText("You have been waiting for someone you truly loved before giving it all away.");
 				}
-				outputText("Zenji gives a contented smile, “I’ve been waiting all night for ya [name]. I love you, and now I’m gonna show you just how much I mean by dat.” He licks his hand seductively before lathering his length in his spit, then aligning his manhood with your rear. His strong hand gropes at your cheeks, getting you prepared for his entrance.\n");
+				outputText("Zenji gives a contented smile, \“<i>I’ve been waiting all night for ya [name]. I love you, and now I’m gonna show you just how much I mean by dat.” He licks his hand seductively before lathering his length in his spit, then aligning his manhood with your rear. His strong hand gropes at your cheeks, getting you prepared for his entrance.\n");
 				if (player.analCapacity() < 7){
 					if (player.ass.analLooseness == AssClass.LOOSENESS_VIRGIN){
 						outputText("“You have waited your entire life for dis, [name]... Dat takes some real dedication. Now I will show you how a real troll makes love.”\n");
@@ -3344,11 +3344,11 @@ import coc.view.ButtonDataList;
 				}
 				outputText("Zenji moans softly as he slowly thrusts into you. His swollen balls slap against you, desperate to fill you with every ounce of cum he has to offer. He notices your strain beneath him and he places his palm across your face, rubbing his thumb across your cheek affectionately.\n" +
 						"\n" +
-						"“Time for my mate ta see what it’s truly like ta have a husband.”\n" +
+						"\“<i>Time for my mate ta see what it’s truly like ta have a husband.</i>\”\n" +
 						"\n" +
 						"You moan softly, ready for what he has to offer.\n" +
 						"\n" +
-						"Zenji slowly begins picking up the pace, moaning softly as he buries himself deeper into your sphincter. Zenji rails like a troll in heat should, it doesn't take long before a familiar pressure builds up within your loins. His tail wraps around you, almost as if he were claiming you as his. You clench yourself around his meaty girth, his shaft throbs within your backdoor, desperate to give you the proper treatment you deserve. You moan softly and beg him not to stop. As if he was going to. Zenji redoubles his efforts, thrusting into you with greater force, his impacts rock you to your very core as he buries himself deeper with each thrust. \n");
+						"Zenji slowly begins picking up the pace, moaning softly as he buries himself deeper into your sphincter. Zenji rails you like a troll in heat should, it doesn't take long before a familiar pressure builds up within your loins. His tail wraps around you, almost as if he were claiming you as his. You clench yourself around his meaty girth, his shaft throbs within your backdoor, desperate to give you the proper treatment you deserve. You moan softly and beg him not to stop. As if he was going to. Zenji redoubles his efforts, thrusting into you with greater force, his impacts rock you to your very core as he buries himself deeper with each thrust. \n");
 				if (player.hasCock()){	//Actually... if player doesn't have cock or pussy, can they get to this scene? Might have "cock/vaginadescript" errors here.
 					outputText("You groan as you shoot your load all over the bed below you.");
 				}
@@ -3363,16 +3363,16 @@ import coc.view.ButtonDataList;
 				else if (player.hasVagina()){
 					outputText(" gently teasing your clit as he slowly fingers you");
 				}
-				outputText(". \"I’m not done with ya yet, [name]\"\n");
+				outputText(". \"<i>I’m not done with ya yet, [name]</i>\"\n");
 				outputText("Zenji bucks into your ass with slower and firm strokes as he toys around with you. You squirm beneath his softy hairy touch, desperate for more, desperate for his silky grace. He doesn't lose the gentle pace of simultaneously plowing you and giving you a gentle handjob. It doesn't take long before you can't take it anymore, the sensation is too much for you and you find yourself cumming into his hands. Waves of euphoria jolt through you, but Zenji still hasn’t stopped. The overwhelming scent of his masculinity assaunts your nose as the only thing you can think about is being railed by your newlywed husband\n" +
 						"\n" +
-						"Zenji picks up the pace as he starts panting, \"Not... Finished... Yet..!\" He growls, picking up the pace further. His girthy erection pulsates within your loins, desperate to fill you with every ounce of love he has to offer. You can feel him thrusting with greater passion before finally howling as he cums inside you. You feel the warmth of his seed race inside you as he begins to relax, careful not to put all of his weight on you. Zenji leans close, nuzzling his head against yours as he slumps down onto the bed, dragging you with him. You're forced into his fuzzy embrace as he holds you tightly. \n" +
+						"Zenji picks up the pace as he starts panting, \"<i>Not... Finished... Yet..!</i>\" he growls, picking up the pace further. His girthy erection pulsates within your loins, desperate to fill you with every ounce of love he has to offer. You can feel him thrusting with greater passion before finally howling as he cums inside you. You feel the warmth of his seed race inside you as he begins to relax, careful not to put all of his weight on you. Zenji leans close, nuzzling his head against yours as he slumps down onto the bed, dragging you with him. You're forced into his fuzzy embrace as he holds you tightly. \n" +
 						"\n" +
-						"You notice his tail reaching up to caress the underside of your chin, \"If marriage will always be like dis, den I could neva wish for a betta soulmate\"\n" +
+						"You notice his tail reaching up to caress the underside of your chin, \"<i>If marriage will always be like dis, den I could neva wish for a betta soulmate</i>\"\n" +
 						"\n" +
 						"Zenji gently caresses your face as he curls up with you, bringing his tail around your body.\n" +
 						"\n" +
-						"“Sleep tight, [name].”\n" +
+						"\“<i>Sleep tight, [name].</i>\”\n" +
 						"\n" +
 						"You plan on sleeping for the rest of the night, wrapped within the warmth of your husband’s embrace.\n");
 			}
@@ -3383,11 +3383,11 @@ import coc.view.ButtonDataList;
 				}
 				outputText("Zenji gives you a small laugh, but he can't hide his arousal for you as he's already at full mast. He creeps up onto the bed, kneeling above you. ");
 				if (player.hasVirginVagina()){
-					outputText(" “You’ve waited dis long for a true husband, dat’s some dedication. I am glad dat I can share de experience wit ya.”");
+					outputText(" \“<i>You’ve waited dis long for a true husband, dat’s some dedication. I am glad dat I can share de experience wit ya.</i>\”");
 				}
 				outputText("He places the length of his penis atop your box, gently teasing you with his manhood as he rubs his length against you, you wrap your [legs] around his waist.\n" +
 						"\n" +
-						"“Oh, I will show you how a real troll gets deir mate pregnant. I will make sure you will be full of my little children tonight.” He starts by gently fondling your form with a single hand, stroking your breasts before reaching up to your face, giving you a soft caress. His tail caresses the side of your torso as well, almost as if he were claiming you as his.\n" +
+						"\“<i>Oh, I will show you how a real troll gets deir mate pregnant. I will make sure you will be full of my little children tonight.</i>\” He starts by gently fondling your form with a single hand, stroking your breasts before reaching up to your face, giving you a soft caress. His tail caresses the side of your torso as well, almost as if he were claiming you as his.\n" +
 						"\n" +
 						"You quiver in anticipation beneath his touch. Zenji slowly begins humping you, teasing you, toying with you to get you warmed up.\n" +
 						"\n" +
@@ -3405,29 +3405,29 @@ import coc.view.ButtonDataList;
 				}
 				outputText("Zenji moans softly as he slowly thrusts into you. His massive balls press against your body, desperate to fill you with every ounce of cum he has to offer. He notices your strain beneath him and he places his palm across your face, rubbing his thumb across your cheek affectionately.\n" +
 						"\n" +
-						"\"I tink it’s time ta go fasta, you are gonna be bred tonight, but ya don’t seem ta want it... You’re mine, [name], now beg.”\n" +
+						"\"<i>I tink it’s time ta go fasta, you are gonna be bred tonight, but ya don’t seem ta want it... You’re mine, [name], now beg.</i>\”\n" +
 						"\n" +
 						"You breathe sharply before nodding.\n" +
 						"\n" +
-						"“If ya really want ta be bred like a real wife den you’re gonna have ta beg harder dan dat.”\n" +
+						"\“<i>If ya really want ta be bred like a real wife den you’re gonna have ta beg harder dan dat.</i>\”\n" +
 						"\n" +
 						"You grab hold of his large hand, caressing your face with him, giving his fuzzy finger a small lick before pleading, you need him to go faster, you want him to go faster, you're desperate for his touch, for him. You need your husband to truly make love to you tonight.\n" +
 						"\n" +
-						"\"Much betta...\" He whispers. Your words of desperation are more than enough for him as he begins picking up the pace. Zenji growls softly as he buries himself deeper into your womb, his shaft twitches every so often, ready to fill you to the brim with his love. He plows you as a troll in heat should, railing you into oblivion. You tremble beneath his strong presence, desperate to take in more of everything he has to offer. Each thrust puts in more of his length each time as his hips crash against your body. It doesn't take long before a familiar pressure builds up within your loins. You moan softly and beg him not to stop. Zenji responds with a low, affectionate growl. Unable to take it anymore, you throw your head back as you find yourself cumming over him, your [legs] squeeze around him harder, trying to milk his dick of everything he has.\n" +
+						"\"<i>Much betta...</i>\" he whispers. Your words of desperation are more than enough for him as he begins picking up the pace. Zenji growls softly as he buries himself deeper into your womb, his shaft twitches every so often, ready to fill you to the brim with his love. He plows you as a troll in heat should, railing you into oblivion. You tremble beneath his strong presence, desperate to take in more of everything he has to offer. Each thrust puts in more of his length each time as his hips crash against your body. It doesn't take long before a familiar pressure builds up within your loins. You moan softly and beg him not to stop. Zenji responds with a low, affectionate growl. Unable to take it anymore, you throw your head back as you find yourself cumming over him, your [legs] squeeze around him harder, trying to milk his dick of everything he has.\n" +
 						"\n" +
-						"Zenji gives you a cocky smile, “We're not done until I'm done...\" he growls.\n" +
+						"Zenji gives you a cocky smile, \“<i>We're not done until I'm done...</i>\" he growls.\n" +
 						"\n" +
 						"Zenji grabs your legs as he thrusts into you with greater passion. You’re pressed beneath him as he fucks you like an animal in heat.\n" +
 						"\n" +
 						"You hear wood begin to crack as the frame gives out. The world seems to fall for a moment, but Zenji has you locked beneath him, safely within his grasp. He doesn’t even seem to care that he just broke the bed. The only thing that matters to him is knocking you up right now. The world spins and you feel dizzy, the overwhelming scent of his masculinity clouds your thoughts as the only thing you can think about is being bred by your husband.\n" +
 						"\n" +
-						"Zenji continues growling softly, “Almost… dere…” You feel him thrust into you with greater effort. His manhood throbbing within your moist walls, with a howl he finally cums, triggering your orgasm again. Waves of euphoria flow through you as you feel his seed race into your womb. Zenji slowly relaxes as he lies beside you.\n" +
+						"Zenji continues growling softly, \“<i>Almost… dere…</i>\” You feel him thrust into you with greater effort. His manhood throbbing within your moist walls, with a howl he finally cums, triggering your orgasm again. Waves of euphoria flow through you as you feel his seed race into your womb. Zenji slowly relaxes as he lies beside you.\n" +
 						"\n" +
 						"You notice his tail reaching up to caress the underside of your chin, \"If marriage will always be like dis, den I could neva wish for a betta soulmate\"\n" +
 						"\n" +
 						"Zenji gently strokes your back as he curls up with you, bringing his tail around your body.\n" +
 						"\n" +
-						"“Sleep tight, [name]”\n" +
+						"\“<i>Sleep tight, [name]</i>\”\n" +
 						"\n" +
 						"You plan on sleeping for the rest of the night, wrapped within the warmth of your husband’s embrace.\n");
 				if (player.pregnancyIncubation == 0) {
@@ -3439,11 +3439,11 @@ import coc.view.ButtonDataList;
 				var pCockSize:int = player.cocks[player.cockThatFits(45)].cockLength
 				outputText("You tell Zenji that you’ve been thinking that he should lie on the bed this time, on his knees specifically.\n" +
 						"\n" +
-						"Zenji raises an eyebrow, “Are you… are you asking dat I take it from behind?”\n" +
+						"Zenji raises an eyebrow, \“<i>Are you… are you asking dat I take it from behind?</i>\”\n" +
 						"\n" +
 						"You nod, if he’s okay with it, that is.\n" +
 						"\n" +
-						"Zenji glances around slightly nervously, “I can’t lie, I’ve been wondering if I really wanted to, but… Well, you are my husband, aren’tcha? It’d be a shame if I neva gave you a chance.\n");
+						"Zenji glances around slightly nervously, \“<i>I can’t lie, I’ve been wondering if I really wanted to, but… Well, you are my husband, aren’tcha? It’d be a shame if I neva gave you a chance.\</i>\n");
 				if (player.statusEffectv4(StatusEffects.ZenjiZList) > 0){
 					outputText("You were de first one ta take me dere,");
 				}
@@ -3467,7 +3467,7 @@ import coc.view.ButtonDataList;
 				}
 				outputText("You reach around over him, grabbing his throbbing manhood as you begin to jerk him off. You dig a finger underneath his foreskin, toying with his glans.\n" +
 						"\n" +
-						"“Ah! [name]... D-don’t stop…” Zenji moans.\n" +
+						"\“Ah! [name]... D-don’t stop…</i>\” Zenji moans.\n" +
 						"\n" +
 						"You obey his request as you continue jerking off his shaft. Zenji buries his face into his pillow, growling softly.\n" +
 						"\n" +
@@ -3480,7 +3480,7 @@ import coc.view.ButtonDataList;
 						"You laugh at his vulnerability, he seems to enjoy it when you go rough, so you continue bucking into him with greater vigor. It doesn’t last long though as you feel yourself nearing your climax.\n" +
 						"\n" +
 						"Zenji growls louder this time, his manhood throbbing even harder as you feel him shoot jets of cum onto his bedroll. \n");
-				if (player.statusEffectv2(StatusEffects.ZenjiModificationsList) >= 6000){	//This was supposed to be volume based (6L), but due to Orm's black magic, I can only guess... unless that number is the actual volume. ¯\_(ツ)_/¯
+				if (player.statusEffectv2(StatusEffects.ZenjiModificationsList) >= 6000){	//This was supposed to be volume based (6L), but due to Orm's black magic, I can only guess... unless that number is the actual volume. ¯\_(ツ)_/¯ //Haha, good luck everyone -Pyromania
 					outputText("So much cum is being released by him, practically painting the bed beneath him white.");
 				}
 				outputText(" A familiar pressure builds within your loins as he tries to milk you of everything you’re worth. You groan loudly as you cum inside of his awaiting hole.\n");
@@ -3492,7 +3492,7 @@ import coc.view.ButtonDataList;
 							"\n" +
 							"You tell him that you enjoyed it as well. Zenji pulls you closer to him as he begins spooning you.\n" +
 							"\n" +
-							"You notice his tail reach up to caress the underside of your chin, \"If marriage will always be like dis, den I could neva wish for a betta soulmate. Sleep tight, [name].”\n" +
+							"You notice his tail reach up to caress the underside of your chin, \"<i>If marriage will always be like dis, den I could neva wish for a betta soulmate. Sleep tight, [name].</i>\”\n" +
 							"\n" +
 							"You plan on sleeping for the rest of the night, wrapped within the warmth of your husband’s embrace.\n");
 				}
@@ -3504,13 +3504,13 @@ import coc.view.ButtonDataList;
 			if (options == 1){
 				outputText("You wake up in the middle of the night to the sound of faint conversation.\n" +
 						"\n" +
-						"“Jabala… are you sure..? Dey’re sleeping.”\n" +
-						"“Halkano… I… I need you now more than ever… I need my big strong bear… please..?”\n" +
-						"You hear faint chuckling, “Anyting for you, sweetheart. Besides, I've been smelling ya all night.”\n" +
+						"\“<i>Jabala… are you sure..? Dey’re sleeping.</i>\”\n" +
+						"\“<i>Halkano… I… I need you now more than ever… I need my big strong bear… please..?</i>\”\n" +
+						"You hear faint chuckling, \“<i>Anyting for you, sweetheart. Besides, I've been smelling ya all night.</i>\”\n" +
 						"\n" +
 						"It doesn’t take long before you hear the shaking of wood, almost like a rocking chair.\n" +
 						"\n" +
-						"Jabala is so quiet, you can barely hear her at all over Halkano’s soft growling from the other room. It would seem Zenji gets being a growler from his father.\n" +
+						"Jabala is so quiet, you can barely hear her at all over Halkano’s soft growling from the other room... Like father like son?\n" +
 						"\n" +
 						"You laugh quietly to yourself, is this what they heard earlier from you two? It’s nice to know that Zenji’s parents still have that fire in their relationship, you hope that your relationship will remain strong like theirs.\n" +
 						"\n" +
@@ -3518,35 +3518,35 @@ import coc.view.ButtonDataList;
 				outputText("<b>Next Morning</b>");
 				outputText("You wake up the next morning, as you open your eyes your face is still nestled in Zenji's chest tuft. Daylight pours into the room and you give a small yawn and look up at Zenji, his eyes are already resting upon your face.\n" +
 						"\n" +
-						"\"Good morning [name] Sleep well?\" He asks, giving you a gentle smile.\n" +
+						"\"<i>Good morning [name] Sleep well?</i>\" he asks, giving you a gentle smile.\n" +
 						"\n" +
 						"You tell him that indeed you did. You’re glad to spend the night with your husband.\n" +
 						"\n" +
-						"Zenji strokes the top of your head, \"You know... I really hope we didn’t bother my parents wit all de noise. I’m just glad I didn’t wake ya up when I cleaned us off”\n" +
+						"Zenji strokes the top of your head, \"<i>You know... I really hope we didn’t bother my parents wit all de noise. I’m just glad I didn’t wake ya up when I cleaned us off</i>\”\n" +
 						"\n" +
 						"You’re thankful that he cares enough to help clean you up after such a rough night.\n" +
 						"\n" +
-						"Zenji plants a kiss on your lips. “Are ya ready ta say goodbye and go home, [name]?”\n" +
+						"Zenji plants a kiss on your lips. \“<i>Are ya ready ta say goodbye and go home, [name]?</i>\”\n" +
 						"\n" +
 						"You nod your head, you look around and ask Zenji where your clothes are.\n" +
 						"\n" +
-						"Zenji sits up, “Wait… uh… I didn’t tink dis through…”\n" +
+						"Zenji sits up, \“<i>Wait… uh… I didn’t tink dis through…</i>\”\n" +
 						"\n" +
 						"You hear a knocking on the door, “I have your clothes right here!” Jabala shouts.\n" +
 						"\n" +
-						"“Ah, motha! Were you eavesdropping?”\n" +
+						"\“Ah, motha! Were you eavesdropping?</i>\”\n" +
 						"\n" +
-						"“No! I was… just… gardening!”\n" +
+						"\“No! I was… just… gardening!</i>\”\n" +
 						"\n" +
-						"“You were gardening… inside..?”\n" +
+						"\“<i>You were gardening… inside..?<i>\”\n" +
 						"\n" +
-						"“Yes! I’m tending to the shade plants!”\n" +
+						"\“<i>Yes! I’m tending to the shade plants!</i>\”\n" +
 						"\n" +
-						"Zenji snickers before returning to her, “Whuteva…” He gets up, you feel cold without your husband’s warmth as he opens the door to retrieve your clothes.\n" +
+						"Zenji snickers before returning to her, \“<i>Whateva…\</i>” He gets up, you feel cold without your husband’s warmth as he opens the door to retrieve your clothes.\n" +
 						"\n" +
-						"You hear Jabala speak up, “I’ll hold onto ya wedding clothes and…” Jabala unleashes an audible gasp. “Zinny! What did you do to your shirt?!”\n" +
+						"You hear Jabala speak up, \“<i>I’ll hold onto ya wedding clothes and…</i>\” Jabala unleashes an audible gasp. \“<i>Zinny! What did you do to your shirt?!</i>\”\n" +
 						"\n" +
-						"Zenji blushes softly, “I… uh… Tanks for de clothes mom.” Zenji replies as he closes the door.\n" +
+						"Zenji blushes softly, \“<i>I… uh… Thanks for de clothes mom.</i>\” Zenji replies as he closes the door.\n" +
 						"\n" +
 						"Zenji passes you your [armor] as he puts on a loincloth.\n" +
 						"\n" +
@@ -3555,13 +3555,13 @@ import coc.view.ButtonDataList;
 			else if (options == 2){
 				outputText("You wake up in the middle of the night to the sound of faint conversation.\n" +
 						"\n" +
-						"“Jabala… are you sure..? Dey’re sleeping.”\n" +
-						"“Halkano… I… I need you now more than ever… I need my big strong bear… please..?”\n" +
-						"You hear faint chuckling, “Anyting for you, sweetheart. Besides, I've been smelling ya all night.”\n" +
+						"\“<i>Jabala… are you sure..? Dey’re sleeping.</i>\”\n" +
+						"\“<i>Halkano… I… I need you now more than ever… I need my big strong bear… please..?</i>\”\n" +
+						"You hear faint chuckling, \“<i>Anyting for you, sweetheart. Besides, I've been smelling ya all night.</i>\”\n" +
 						"\n" +
 						"It doesn’t take long before you hear the shaking of wood, almost like a rocking chair.\n" +
 						"\n" +
-						"Jabala is so quiet, you can barely hear her at all over Halkano’s soft growling from the other room. It would seem Zenji gets being a growler from his father.\n" +
+						"Jabala is so quiet, you can barely hear her at all over Halkano’s soft growling from the other room... Like father like son?\n" +
 						"\n" +
 						"You laugh quietly to yourself, is this what they heard earlier from you two? It’s nice to know that Zenji’s parents still have that fire in their relationship, you hope that your relationship will remain strong like theirs.\n" +
 						"\n" +
@@ -3569,35 +3569,35 @@ import coc.view.ButtonDataList;
 				outputText("<b>Next Morning</b>");
 				outputText("You wake up the next morning, as you open your eyes your face is still nestled in Zenji's chest tuft between his manly pectorals. Daylight pours into the room and you give a small yawn and look up at Zenji, his eyes are already resting upon your face.\n" +
 						"\n" +
-						"\"Good morning [name]. Sleep well?\" He asks, giving you a gentle smile.\n" +
+						"\"<i>Good morning [name]. Sleep well?</i>\" he asks, giving you a gentle smile.\n" +
 						"\n" +
 						"You tell him that indeed you did. You’re glad to spend the night with your husband.\n" +
 						"\n" +
-						"Zenji strokes the top of your head, \"You know I really hope we didn’t bother my parents wit all de noise. I’m just glad I didn’t wake ya up when I cleaned us off”\n" +
+						"Zenji strokes the top of your head, \"<i>You know I really hope we didn’t bother my parents wit all de noise. I’m just glad I didn’t wake ya up when I cleaned us off</i>\”\n" +
 						"\n" +
 						"You’re thankful that he cares enough to help clean you up after such a rough night.\n" +
 						"\n" +
-						"Zenji plants a kiss on your lips. “Are ya ready ta say goodbye and go home, [name]?”\n" +
+						"Zenji plants a kiss on your lips. \“<i>Are ya ready ta say goodbye and go home, [name]?</i>\”\n" +
 						"\n" +
 						"You nod your head, looking around before you ask Zenji where your clothes are.\n" +
 						"\n" +
-						"Zenji sits up, “Wait… uh… I didn’t tink dis through…”\n" +
+						"Zenji sits up, \“Wait… uh… I didn’t tink dis through…</i>\”\n" +
 						"\n" +
-						"“Don worry, I gotcha clothes right here.” You hear Halkano reply\n" +
+						"\“<i>Don' worry, I gotcha clothes right here.</i>\” You hear Halkano reply\n" +
 						"\n" +
-						"“Ah, fatha! Were you eavesdropping?”\n" +
+						"\“<i>Ah, fatha! Were you eavesdropping?</i>\”\n" +
 						"\n" +
-						"“Yep.”\n" +
+						"\“<i>Yep.</i>\”\n" +
 						"\n" +
-						"“Ugh… fatha… dis is embarrassing.”\n" +
+						"\“<i>Ugh… fatha… dis is embarrassing.</i>\”\n" +
 						"\n" +
-						"“Well, come getcha clothes.”\n" +
+						"\“<i>Well, come getcha clothes.</i>\”\n" +
 						"\n" +
-						"Zenji snickers before returning to him, “Blunt as always…” He gets up, you feel cold without your husband’s warmth as he opens the door to retrieve your clothes.\n" +
+						"Zenji snickers before returning to him, \“<i>Blunt as always…</i>\” He gets up, you feel cold without your husband’s warmth as he opens the door to retrieve your clothes.\n" +
 						"\n" +
-						"You hear Halkano speak up, “Jabala will come ta hold onto ya wedding clothes and…” Halkano gives Zenji a knowing smirk. “Dat’s my son, look at whatcha did ta dat poor bed! I don’t know what you did to dat poor girl, but I hope she’s alright!”\n" +
+						"You hear Halkano speak up, \“<i>Jabala will come ta hold onto ya wedding clothes and…</i>\” Halkano gives Zenji a knowing smirk. \“<i>Dat’s my son, look at whatcha did ta dat poor bed! I don’t know what you did to dat poor girl, but I hope she’s alright!</i>\”\n" +
 						"\n" +
-						"Zenji blushes softly, “I… uh… Tanks for de clothes dad.” Zenji replies as he closes the door.\n" +
+						"Zenji blushes softly, \“<i>I… uh… Tanks for de clothes dad.</i>\” Zenji replies as he closes the door.\n" +
 						"\n" +
 						"Zenji passes you your [armor] as he puts on a loincloth.\n" +
 						"\n" +
@@ -3606,13 +3606,13 @@ import coc.view.ButtonDataList;
 			else if (options == 3){
 				outputText("You wake up in the middle of the night to the sound of faint conversation.\n" +
 						"\n" +
-						"“Jabala… are you sure..? Dey’re sleeping.”\n" +
-						"“Halkano… I… I need you now more than ever… I need my big strong bear… please..?”\n" +
-						"You hear faint chuckling, “Anyting for you, sweetheart. Besides, I've been smelling ya all night.”\n" +
+						"\“<i>Jabala… are you sure..? Dey’re sleeping.</i>\”\n" +
+						"\“<i>Halkano… I… I need you now more than ever… I need my big strong bear… please..?</i>\”\n" +
+						"You hear faint chuckling, \“<i>Anyting for you, sweetheart. Besides, I've been smelling ya all night.</i>\”\n" +
 						"\n" +
 						"It doesn’t take long before you hear the shaking of wood, almost like a rocking chair.\n" +
 						"\n" +
-						"Jabala is so quiet, you can barely hear her at all over Halkano’s soft growling from the other room. It would seem Zenji gets being a growler from his father.\n" +
+						"Jabala is so quiet, you can barely hear her at all over Halkano’s soft growling from the other room... Like father like son?\n" +
 						"\n" +
 						"You laugh quietly to yourself, is this what they heard earlier from you two? It’s nice to know that Zenji’s parents still have that fire in their relationship, you hope that your relationship will remain strong like theirs.\n" +
 						"\n" +
@@ -3620,33 +3620,33 @@ import coc.view.ButtonDataList;
 				outputText("<b>Next Morning</b>");
 				outputText("You wake up the next morning, as you open your eyes your face is resting against Zenji’s muscular pecs, comfortably nestled within his chest tuft. Daylight pours into the room and you give a small yawn and look up at Zenji, his eyes are resting upon your face.\n" +
 						"\n" +
-						"\"Good morning [name]. Sleep well?\" He asks, giving you a gentle smile.\n" +
+						"\"<i>Good morning [name]. Sleep well?<i>\" he asks, giving you a gentle smile.\n" +
 						"\n" +
 						"You tell him that indeed you did. You’re glad to spend the night with your husband.\n" +
 						"\n" +
-						"Zenji strokes the top of your head, \"You know I really hope we didn’t bother my parents wit all de noise.”\n" +
+						"Zenji strokes the top of your head, \"<i>You know I really hope we didn’t bother my parents wit all de noise.</i>\”\n" +
 						"\n" +
-						"Zenji plants a kiss on your lips. “Are ya ready ta say goodbye and go home, [name]?”\n" +
+						"Zenji plants a kiss on your lips. \“<i>Are ya ready ta say goodbye and go home, [name]?</i>\”\n" +
 						"\n" +
 						"You nod your head, looking around before asking Zenji where your clothes are.\n" +
 						"\n" +
-						"Zenji sits up, “Wait… uh… I didn’t tink dis through…”\n" +
+						"Zenji sits up, \“<i>Wait… uh… I didn’t tink dis through…<i>\”\n" +
 						"\n" +
-						"You hear a knocking on the door, “I have your clothes right here!” Jabala shouts.\n" +
+						"You hear a knocking on the door, \“<i>I have your clothes right here!</i>\” Jabala shouts.\n" +
 						"\n" +
-						"“Ah, motha! Were you eavesdropping?”\n" +
+						"\“<i>Ah, motha! Were you eavesdropping?</i>\”\n" +
 						"\n" +
-						"“No! I was… just… gardening!”\n" +
+						"\“<i>No! I was… just… gardening!</i>\”\n" +
 						"\n" +
-						"“You were gardening… inside..?”\n" +
+						"\“<i>You were gardening… inside..?</i>\”\n" +
 						"\n" +
-						"“Yes! I’m tending to the shade plants!”\n" +
+						"\“<i>Yes! I’m tending to the shade plants!</i>\”\n" +
 						"\n" +
-						"Zenji snickers before returning to her, “Whuteva…” He gets up, you feel cold without your husband’s warmth as he opens the door to retrieve your clothes.\n" +
+						"Zenji snickers before returning to her, \“Whuteva…</i>\” He gets up, you feel cold without your husband’s warmth as he opens the door to retrieve your clothes.\n" +
 						"\n" +
-						"You hear Jabala speak up, “I’ll hold onto ya wedding clothes and…” Jabala unleashes an audible gasp. “Zinny! What did you do to your shirt?!\n" +
+						"You hear Jabala speak up, \“<i>I’ll hold onto ya wedding clothes and…</i>\” Jabala unleashes an audible gasp. \“<i>Zinny! What did you do to your shirt?!</i>\"\n" +
 						"\n" +
-						"Zenji blushes softly, “I… uh… Tanks for de clothes mom.” Zenji replies as he closes the door.\n" +
+						"Zenji blushes softly, \“<i>I… uh… Tanks for de clothes mom.</i>\” Zenji replies as he closes the door.\n" +
 						"\n" +
 						"Zenji passes you your [armor] as he puts on a loincloth.\n" +
 						"\n" +
