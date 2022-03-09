@@ -43,6 +43,8 @@ public class DiningHalls extends TrollVillageAbstractContent{
             if (TrollVillage.ZenjiFollowing) outputText(" Zenji sits beside you, \"<i>You know, my mother grows de best figs here. It’s been some time since I had any fig juice.</i>\"\n");
             outputText("\nSoon enough your juice arrives, you hold the polished wooden cup in your palms, it’s a rather large serving. You take a sip, the fig’s normally tart flavor is balanced by some sweetness. ");
             if (TrollVillage.ZenjiFollowing) outputText("You pass the juice to Zenji, he takes a large sip. \"<i>Ah, dat’s de good stuff…</i>\" He sighs as he gives you the rest of the juice.\n\n");
+                        player.refillHunger((TrollVillage.ZenjiFollowing)? 9:18);
+            statScreenRefresh();
             doNext(RandomChatter);
         }
 
@@ -55,6 +57,8 @@ public class DiningHalls extends TrollVillageAbstractContent{
             outputText("\nSoon enough your food arrives, you look at the polished wooden plate, upon its surface is some cooked meat with some brown sauce over it, the sauce smells sweet and savory. You pick up your fork and cut into the meat, it’s tender enough to cut with just your fork. The meat is very juicy and savory, with hints of sweetness and saltiness. ");
             if (TrollVillage.ZenjiFollowing) outputText("You pass your fork to Zenji as he takes a large bite, \"<i>De Hunter’s stew were always my favorite ta eat when Fatha gave me some gems ta spend here.</i>\" He states as he passes the fork back to you.\n\n");
             doNext(RandomChatter);
+                        player.refillHunger((TrollVillage.ZenjiFollowing)? 13:26);
+            statScreenRefresh();
         }
 
         function GardenSalad():void{
@@ -66,6 +70,8 @@ public class DiningHalls extends TrollVillageAbstractContent{
             outputText("\nSoon enough your salad arrives, you look down at the polished wooden plate, upon its surface are several greens and a few fruits and vegetables. You’re given a side of dressing to coat your salad in. The dressing smells sweet, salty, and slightly cheesy. You dig your fork into the salad after coating your food in the dressing. You take a bite, the salad is nice on its own, but the dressing gives it the added flavor it needs. ");
             if (TrollVillage.ZenjiFollowing) outputText("You pass your fork to Zenji as he takes a forkful of salad, \"</i>Fatha would sometimes finish all of de sauce and leave de rest of de salad ta mom,</i>\" Zenji chuckles softly, \"<i>She would get so mad dat he didn’t finish the salad.</i>\" He says as he passes the fork back to you.\n\n");
             doNext(RandomChatter);
+                        player.refillHunger((TrollVillage.ZenjiFollowing)? 10:20);
+            statScreenRefresh();
         }
 
         function ZenjiPaysorPC():void{  //So I don't have to copy/paste this....
