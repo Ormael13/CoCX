@@ -441,7 +441,7 @@ public function nagaDefaultSexScene():void {
 		outputText("Samirah looks down and suddenly giggles at your stark lack of fun-bits. You turn away in embarrassment and start to head back to your camp.\n\n");
 		outputText("\"<i>Wait,</i>\" Samirah reaches out and places a hand on your shoulder. \"<i>I didn't mean to insult you. I've never seen anyone else quite like you.</i>\" She slides her hand down your body. \"<i>I wonder if you can show me just what a body like yours can do.</i>\"\n\n");
 		outputText("Enjoying this new shift in the conversation, you coil around her and position your head over the scaly covering over her pussy. A soft hiss escapes Samirah as you slide your tongue into her, twirling it around to caress every inch of her. Her hands make their way to your head and press you deeper into her.\n\n");
-		if (1 == 0) outputText("You move your tongue faster and deeper into her pussy, your forked tongue reaching deeper than any human tongue ever could. ");
+		if (player.hasLongTongue()) outputText("You move your tongue faster and deeper into her pussy, your forked tongue reaching deeper than any human tongue ever could. ");
 		else outputText("You move your tongue faster and faster into her pussy, reaching as far in as you possibly can. ");
 		outputText("Samirah grips your head tightly to her and suddenly thrusts her hips in orgasm, her girl cum coating your tongue and mouth.\n\n");
 		outputText("You uncoil yourself and slowly gather your things, Samirah lying on the sand panting.\n\n");
