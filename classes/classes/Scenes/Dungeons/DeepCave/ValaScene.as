@@ -17,6 +17,7 @@ import classes.Items.ArmorLib;
 import classes.Items.Armors.ArmorWithPerk;
 import classes.Scenes.SceneLib;
 import classes.internals.SaveableState;
+import classes.display.SpriteDb;
 
 public class ValaScene extends BaseContent implements SaveableState
 	{
@@ -63,7 +64,7 @@ public class ValaScene extends BaseContent implements SaveableState
 
 		//Vala
 		public function useVala():void {
-			spriteSelect(85);
+			spriteSelect(SpriteDb.s_valaSlave);
 			clearOutput();
 			dynStats("lus", 20);
 			//(Male)
@@ -89,7 +90,7 @@ public class ValaScene extends BaseContent implements SaveableState
 			doNext(useValaPtII);
 		}
 		public function useValaPtII():void {
-			spriteSelect(85);
+			spriteSelect(SpriteDb.s_valaSlave);
 			clearOutput();
 			hideUpDown();
 			fatigue(5,0);
@@ -121,7 +122,7 @@ public class ValaScene extends BaseContent implements SaveableState
 
 		//[Free]
 		public function freeValazLooseCoochie():void {
-			spriteSelect(85);
+			spriteSelect(SpriteDb.s_valaSlave);
 			clearOutput();
 			outputText("You search the room for a way to free the fairy from her shackles and find an ugly, iron key that looks like a promising candidate. Opening the rusted metal with a teeth-clenching screech, the girl slumps to the ground in an ungainly heap. The fall seems to have roused her, at least, because she blinks, slowly, several times before lifting her head to stare blankly at you. You try to explain that she's free, but it's clear that thoughts are travelling through a pretty thick haze of abuse, so you take a moment to let her gather herself. When she's managed to assemble what wits are left to her, she slowly curls her mouth into a hopeful smile. \"<i>How can Bitch please Master?</i>\" she asks in an innocent voice tainted by husky desire.\n\n");
 			outputText("You bend down to comfort the girl and offer her a shoulder to lean on as you help her to her feet. As you expected, the weight of her milky tits nearly surpasses the rest of her body. She clings to you happily, stroking and rubbing her bare skin against your body. She is adamantly ignoring your efforts to dissuade her amorous advances, merely cooing \"<i>master</i>\" and \"<i>pleasure</i>\" over and over again. If you had the right materials, you might be able to mix something to heal the damage her captors have done to the fairy's mind.\n\n");
@@ -135,7 +136,7 @@ public class ValaScene extends BaseContent implements SaveableState
 
 		//[Heal]
 		public function healVala():void {
-			spriteSelect(85);
+			spriteSelect(SpriteDb.s_valaSlave);
 			clearOutput();
 			if(player.hasItem(consumables.PURHONY,1)) {
 				player.consumeItem(consumables.PURHONY, 1);
@@ -166,7 +167,7 @@ public class ValaScene extends BaseContent implements SaveableState
 
 		}
 		public function healValaPartTwoTheHealingHealsOfRevenge():void {
-			spriteSelect(85);
+			spriteSelect(SpriteDb.s_valaSlave);
 			clearOutput();
 			outputText("She tries to stand and falls back on her ass, the unbalancing weight of her corrupted breasts still surprising. She seems surprised at first, but her laughter is rich and eases your heart even just to hear it. \"<i>Oh my, I have changed a bit, haven't I? Still, any deformity is worth restoring my mind. Please, let me introduce myself.</i>\" She flaps her thin, fey wings rapidly and their lift is enough to allow her to stand. \"<i>I am Vala, and I used to be a fairy, like my sisters. I was captured by the demons of this place and used to amuse them between sexual releases. The lord of this place, in his dark designs, thought it would be better to use me for sexual release instead. They fed me such terrible drugs, to make me grow to a more pleasing size. They bound me in this room with these,</i>\" she cups her absurdly large tits, \"<i>weights. When my wings grew strong enough to carry my inflated body, they switched to chains instead. They used me terribly and, in time, I forgot who I was. Pleasure was all that mattered. But you have saved me, and now it is all but a bad dream.</i>\" She flutters up to kiss your forehead. \"<i>I must taste the sweet open air and return to my sisters, but please try to find me once you are done here. I wish to repay your kindness.</i>\"\n\n");
 
@@ -178,7 +179,7 @@ public class ValaScene extends BaseContent implements SaveableState
 
 		//[Sex]
 		public function ValaGetsSexed():void {
-			spriteSelect(85);
+			spriteSelect(SpriteDb.s_valaSlave);
 			clearOutput();
 			//(Herm/Male)
 			if(player.cockTotal() > 0) {
@@ -203,7 +204,7 @@ public class ValaScene extends BaseContent implements SaveableState
 		}
 
 		public function valaGetsSexedPtDuece():void {
-			spriteSelect(85);
+			spriteSelect(SpriteDb.s_valaSlave);
 			clearOutput();
 			hideUpDown();
 			player.orgasm();
@@ -260,7 +261,7 @@ public class ValaScene extends BaseContent implements SaveableState
 		}
 
 		public function leftValaAlone():void {
-			spriteSelect(85);
+			spriteSelect(SpriteDb.s_valaSlave);
 			clearOutput();
 			//first post meeting
 			if(flags[kFLAGS.INVESTIGATED_VALA_AFTER_ZETAZ_DEFEATED] == 0 || flags[kFLAGS.TIME_SINCE_VALA_ATTEMPTED_RAPE_PC] == 0) {
@@ -290,7 +291,7 @@ public class ValaScene extends BaseContent implements SaveableState
 		}
 
 		public function tryToHealVala():void {
-			spriteSelect(85);
+			spriteSelect(SpriteDb.s_valaSlave);
 			clearOutput();
 			//(Without Pure Honey)
 			if(!(player.hasItem(consumables.PURHONY,1) || player.hasItem(consumables.P_PEARL,1))) {
@@ -323,7 +324,7 @@ public class ValaScene extends BaseContent implements SaveableState
 			}
 		}
 		public function tryToHealValaWHoney2():void {
-			spriteSelect(85);
+			spriteSelect(SpriteDb.s_valaSlave);
 			clearOutput();
             outputText("She tries to stand and falls back on her ass, the unbalancing weight of her corrupted breasts still surprising. She seems surprised at first, but her laughter is rich and eases your heart even just to hear it. \"<i>Oh my, I have changed a bit, haven't I? Still, any deformation is worth restoring my mind. Please, let me introduce myself.</i>\" She flaps her thin, fey wings rapidly and their lift is enough to allow her to stand. \"<i>I am Vala, and I used to be a fairy, like my sisters. I was captured by the demons of this place and used to amuse them between sexual releases. The leader of them, however, thought it would be better to use me for sexual release instead. They fed me such terrible drugs, to make me grow and to bind me with these,</i>\" she cups her absurdly large tits, \"<i>weights. They used me terribly and, in time, I forgot who I was. Pleasure was all that mattered. But you have saved me, and now it is all but a bad dream.</i>\" She flutters up to kiss your forehead.\n\n");
             outputText("Leaving the way you came, Vala makes her exodus from the abyssal cavern. Despite her savagely warped body, you do not doubt that her renewed vigor for life will let her achieve some measure of happiness again. You feel like you've managed to do a truly selfless thing in this den of iniquity. Defeating monsters is satisfying, but it's the lives you save that really make you feel like a hero. You sigh contentedly and wonder where she'll end up, now that she's been given her life back.\n\n");
@@ -334,7 +335,7 @@ public class ValaScene extends BaseContent implements SaveableState
 		}
 
 		public function useValaOHYEAHSNAPINTOASLIMJIM():void {
-			spriteSelect(85);
+			spriteSelect(SpriteDb.s_valaSlave);
 			clearOutput();
 			//(Male)
 			if(player.gender == 1) {
@@ -361,7 +362,7 @@ public class ValaScene extends BaseContent implements SaveableState
 		}
 
 		public function useValaOHYEAHKOOLAIDPTII():void {
-			spriteSelect(85);
+			spriteSelect(SpriteDb.s_valaSlave);
 			clearOutput();
 			hideUpDown();
 			//m2
@@ -395,7 +396,7 @@ public class ValaScene extends BaseContent implements SaveableState
 		}
 		//[Wake]
 		public function wakeValaUpBeforeYouGoGo():void {
-			spriteSelect(85);
+			spriteSelect(SpriteDb.s_valaSlave);
 			clearOutput();
 			//(Male)
 			if(player.gender == 1) {
@@ -431,7 +432,7 @@ public class ValaScene extends BaseContent implements SaveableState
 		}
 
 		public function wakeMeUpBeforeValaGoGosPtII():void {
-			spriteSelect(85);
+			spriteSelect(SpriteDb.s_valaSlave);
 			clearOutput();
 			hideUpDown();
 			//m2
@@ -479,7 +480,7 @@ public class ValaScene extends BaseContent implements SaveableState
 
 		//[Reject]
 		public function rejectFuckingVala():void {
-			spriteSelect(85);
+			spriteSelect(SpriteDb.s_valaSlave);
 			clearOutput();
 			if(flags[kFLAGS.TIMES_PC_DEFEATED_VALA] == 0) {
 				outputText("The fairy's weak insistence has begun to get obnoxious. What kind of prisoner dry humps her rescuer? Actually, if the heavy flow of lubricating girl cum dripping out of her pussy is any indication, it's the wettest humping you've had with your [armor] still on. You seize the girl's shoulders and hold her up, pushing her away from your goo-stained lower body. You assure the girl that you won't be having sex with her here. It's far too dangerous, you tell her, to leave yourself vulnerable right now. You'll take her to safety when the demons are defeated. You try to impress on her the importance of speed and stealth, but you might as well be talking to a big-breasted brick wall. When she makes a grab at your crotch, you've had enough and throw her back.\n\n");
@@ -500,7 +501,7 @@ public class ValaScene extends BaseContent implements SaveableState
 
 		//[Fuck]
 		public function valaFightVictoryFuck():void {
-			spriteSelect(85);
+			spriteSelect(SpriteDb.s_valaSlave);
 			clearOutput();
 			//(Female)
 			if(player.gender == 2) {
@@ -542,7 +543,7 @@ public class ValaScene extends BaseContent implements SaveableState
 
 		//[Fuck]
 		public function valaFightVictoryFuckPtII():void {
-			spriteSelect(85);
+			spriteSelect(SpriteDb.s_valaSlave);
 			clearOutput();
 			//fem2
 			if(player.gender == 2) {
@@ -609,7 +610,7 @@ public class ValaScene extends BaseContent implements SaveableState
 
 		//[Vala]
 		public function chooseValaInBar():void {
-			spriteSelect(60);
+			spriteSelect(SpriteDb.s_vala);
 			var cumBath:Function = null;
 			if(player.hasCock()) cumBath = valaCumBath;
 			clearOutput();
@@ -670,7 +671,7 @@ public class ValaScene extends BaseContent implements SaveableState
 		}
 
 		public function cleansedFirstRemeet():void {
-			spriteSelect(60);
+			spriteSelect(SpriteDb.s_vala);
 			clearOutput();
 
 			outputText("When Vala finishes delivering drinks and making sure everybody is set, she lets the bartender know that she'll be taking a break and leaves her apron behind the bar. She leads you to a store room in back and closes the door behind you. Offering you the only chair in the room, a low, wide stool, she seems content to flutter in the air while the two of you talk, her obscene strength making constant flight trivial.  ");
@@ -687,7 +688,7 @@ public class ValaScene extends BaseContent implements SaveableState
 
 		//[You]
 		public function cleansedValaFuckHerBrainsOut():void {
-			spriteSelect(60);
+			spriteSelect(SpriteDb.s_vala);
 			clearOutput();
 			//[Male/Herm Growth scene]
 			if(player.cockTotal() > 0) {
@@ -746,7 +747,7 @@ public class ValaScene extends BaseContent implements SaveableState
 
 		//Part 2
 		public function cleansedValaFuckHerBrainsOutPtII():void {
-			spriteSelect(60);
+			spriteSelect(SpriteDb.s_vala);
 			clearOutput();
 			//dicks + growth
 			if(player.cockTotal() > 0) {
@@ -828,7 +829,7 @@ public class ValaScene extends BaseContent implements SaveableState
 		}
 		//[You]
 		public function cleansedValaRepeatBrainFucking():void {
-			spriteSelect(60);
+			spriteSelect(SpriteDb.s_vala);
 			clearOutput();
 			outputText("She flashes a beautiful smile and tells the bartender that she'll be taking her break early. Grabbing you by the hand, she rushes to the stockroom and sheds her dress without any trace of her former shame about her tattooed back. When you're too slow taking off your [armor], she helps, deft hands made all the quicker by eagerness. When the two of you are naked, she pushes you onto the well-worn stool and sits in your lap, staring into your eyes with a small smile.");
 			//[Next] (go to Growth scene)
@@ -836,7 +837,7 @@ public class ValaScene extends BaseContent implements SaveableState
 		}
 		//[Fairies]
 		public function faerieOrgyFuck():void {
-			spriteSelect(60);
+			spriteSelect(SpriteDb.s_vala);
 			clearOutput();
 			outputText("Vala giggles and nods to the bartender to indicate she'll be taking her break. Taking you by the hand, she flutters upstairs to one of the far rooms of the tavern. When she opens the door, you're startled to find the room is virtually filled with fairies. Unlike Vala, they're the type you're more used to seeing- three to four inches tall, the girls are clothed in shiny black leather straps and wear tiny sable stockings tipped with crystalline heels. There's quite a variety of them and dozens of eyes settle on you as Vala pulls you into the room, closing the door behind you. \"<i>These are my sisters, from the deep forest,</i>\" she introduces. \"<i>In my state, a monster or other predator of the woods would surely catch me or, worse, use me to lure my sisters to danger. But with a few complimentary bottles of whiskey, the captain of Tel'Adre's city guard was willing to give them passage to visit me in the city once a week, as long as they stay out of mischief.</i>\" The fairies lift off and buzz around you, teeny voices introducing themselves, asking your name, marveling at your huge muscles, or otherwise fawning over you. It's a bit much, truth be told.\n\n");
 			outputText("You thank Vala for introducing you, but you've really got to be going, you claim. Demons to defeat, maidens to rescue, all that. The large fairy chuckles and gives you a squeeze. \"<i>You're so cute when you're flustered. Don't worry, we're not going to all jump you at once- you'd probably end up like I did! No, I asked my sisters here to help me with a little forest magic. Don't you want to see how fairies masturbate?</i>\" You're a little taken aback by the question, but you nod all the same. \"<i>All right girls, the petals please.</i>\" The cloud of fairies in front of you disperses, each winged vixen scattering to different corners of the room to retrieve hidden flower petals. Each blossom, you note, matches the hair color of the fairy holding it, creating a dizzying array of  hues as they form circles around the two of you. Vala guides you to the bed and gently removes your [armor] before instructing you to lie down.\n\n");
@@ -851,7 +852,7 @@ public class ValaScene extends BaseContent implements SaveableState
 		}
 		//[Worries]
 		public function Worries():void {
-			spriteSelect(60);
+			spriteSelect(SpriteDb.s_vala);
 			clearOutput();
 			outputText("She seems worried for some reason and so you ask her about it.\n\n" +
 					"\"<i>Oh! I’m kind of sorry. It’s just that we fairies have lost our queen. Without the queen there is no one to protect us or safeguard our future.</i>\"\n" +
@@ -864,7 +865,7 @@ public class ValaScene extends BaseContent implements SaveableState
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function Scepter():void {
-			spriteSelect(60);
+			spriteSelect(SpriteDb.s_vala);
 			clearOutput();
 			outputText("You deposit the fifteen shards of the scepter before Vala, who looks at you with complete awe.\n\n" +
 					"\"<i>What you did today might have just saved the fairies. I will bring these back to my sisters and let you know about the developments!</i>\"\n\n" +
@@ -874,7 +875,7 @@ public class ValaScene extends BaseContent implements SaveableState
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function Scepter2():void {
-			spriteSelect(60);
+			spriteSelect(SpriteDb.s_vala);
 			clearOutput();
 			menu();
 			if (player.isFemaleOrHerm && (player.humanScore() >= (player.humanMaxScore() - player.internalChimeraScore())) || player.elfScore() >= 11)
@@ -905,7 +906,7 @@ public class ValaScene extends BaseContent implements SaveableState
 			}
 		}
 		public function Accept():void {
-			spriteSelect(60);
+			spriteSelect(SpriteDb.s_vala);
 			clearOutput();
 			outputText("While this is a great honor, maybe too much for a human you still nod in agreement. Vala hugs you right away.\n\n" +
 					"\"<i>Thank you! Thank you so much, you cannot grasp how much this means to us. Once you are ready, go lay down in the big red flower there and your coronation will begin.</i>\"\n\n" +
@@ -941,7 +942,7 @@ public class ValaScene extends BaseContent implements SaveableState
 			inventory.takeItem(armors.FQR, camp.returnToCampUseOneHour);
 		}
 		public function Decline():void {
-			spriteSelect(60);
+			spriteSelect(SpriteDb.s_vala);
 			clearOutput();
 			outputText("You announce your decision to a somewhat disappointed Vala but she nods in understanding.\n\n" +
 					"\"<i>It’s ok, [name]. No one will force you to make that choice through I wish you did.</i>\"\n\n" +
@@ -953,7 +954,7 @@ public class ValaScene extends BaseContent implements SaveableState
 
 		//[Male]
 		public function faerieOrgyFuckMaleContinue():void {
-			spriteSelect(60);
+			spriteSelect(SpriteDb.s_vala);
 			clearOutput();
 			outputText("The fairy girl lands at the edge of the bed, settling on her knees and resting her weighty chest on the mattress. Leaning in, she spreads your [legs] with warm, delicate hands, fingertips stroking the insides of your thighs. You shiver and squeeze the bedspread between your fingers, a little nervous about this 'forest magic.' One of the fairies flutters down to Vala and hands her a pale white lily petal with a tittering giggle. The larger fairy takes the soft white bloom and, whispering a silken word to it, licks the cream-colored surface. Slithering further between your legs, she reaches your [cock] and brushes the petal against your throbbing glans with a teasing caress. Then, much to your surprise, she places it on the tip of her forefinger and places it on the base of your cock. You gasp, the petal's soft surface rubbing sensitive skin with a warmth you were unprepared for. After the briefest delay, you lose your breath as the tremor of a small, barely contained orgasm rumbles through your gut. Without hesitation, the fairy barmaid takes a rose petal and repeats the process, another almost-orgasm seizing you and leaving you panting. \"<i>Normally we only need the one petal, but since you and I are so much larger than the average fairy, I had my sisters bring lots. All for you,</i>\" she whispers, coyly.\n\n");
 
@@ -980,7 +981,7 @@ public class ValaScene extends BaseContent implements SaveableState
 
 		//[Female]
 		public function faerieOrgyFuckFemaleContinue():void {
-			spriteSelect(60);
+			spriteSelect(SpriteDb.s_vala);
 			clearOutput();
 			outputText("The fairy girl lands at the edge of the bed, settling on her knees and resting her weighty chest on the mattress. Leaning in, she spreads your [legs] with warm, delicate hands, fingertips stroking the insides of your thighs. You shiver and hug your arms under your breasts, a little nervous about this 'forest magic.' One of the fairies flutters down to Vala and hands her a pale white lily petal with a tittering giggle. The larger fairy takes the soft white bloom and, whispering a silken word to it, licks the cream-colored surface. Slithering further between your legs, she reaches your " + vaginaDescript(0) + " and brushes the petal against your " + clitDescript() + " with a teasing caress. Then, much to your surprise, she places it on the tip of her forefinger and slides it into your pussy. You gasp, the petal's soft surface rubbing your inner walls with a warmth you were unprepared for. Vala presses lightly on a spot inside your vagina and you lose your breath as the tremor of a small orgasm rumbles through your gut. Without explanation, the fairy barmaid takes a rose petal and repeats the process, another orgasm seizing you and leaving you panting. \"<i>Normally we only need the one petal, but since you and I are so much larger than the average fairy, I had my sisters bring lots. All for you,</i>\" she whispers, coyly.\n\n");
 
@@ -998,7 +999,7 @@ public class ValaScene extends BaseContent implements SaveableState
 		}
 		//[Cum Bath]
 		public function valaCumBath():void {
-			spriteSelect(60);
+			spriteSelect(SpriteDb.s_vala);
 			clearOutput();
 			//FIRST TIME INTRO
 			if(flags[kFLAGS.VALA_CUMBATH_TIMES] == 0) {
@@ -1035,7 +1036,7 @@ public class ValaScene extends BaseContent implements SaveableState
 		}
 
 		public function valaCumBath2():void {
-			spriteSelect(60);
+			spriteSelect(SpriteDb.s_vala);
 			clearOutput();
 			outputText("Vala tries to compose herself before you, but the girl is too antsy to go slowly, impatient hands wrapping around your [ass] and pulling you toward her lithe body, her wings aflutter with restless gaiety.  The buoyant pixie leans in to lap at the pout of your cockhead with the tip of her pink tongue while her thumbs work fervently between the junction of her legs, stroking her glistening clit like she were polishing a precious jewel.  Her fingers curl into the slavering depths of her pussy, stroking her fey folds with trembling pleasure.  Leaving one hand to continue jilling herself, Vala takes the other and uses her honey-drenched palm to polish the quivering flesh of your swelling shaft.  She encircles the crest of your fairy-slick cock with her eager pucker, sucking the steady dribble of your pre-cum as she pumps vigorously.  Before long, the twitching bliss rushing to your loins tell you that her voracious efforts have coaxed the thickening semen bubbling inside you to the edge of your restraint.  Gently, you push her off of your member, your urethra dilating as your orgasm gushes forth.");
 			outputText("[pg]Your cum spurts out in long, drooping ropes of alabaster that splash against Vala's face, provoking a startled jolt from the over-grown fairy.  She smiles, blinking the spunk from her eyes just as another stream lances out, pallid jizz catching her on the lips as she opens her mouth to speak.  She gasps in surprise, a curtain of ivory splashing down her chin.  The shuddering pleasure coursing through your body reaches a steady rhythm as you stroke yourself off in the throes of one, long orgasm.  Forcing yourself to breath steadily despite your racing heart, you pump your [cock] with remarkable restraint, holding back your impassioned urges to fill the fairy's womb with your virile seed.");

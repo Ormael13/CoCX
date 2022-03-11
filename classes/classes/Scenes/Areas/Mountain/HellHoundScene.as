@@ -7,6 +7,7 @@ import classes.*;
 import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.UniqueSexScenes;
+import classes.display.SpriteDb;
 
 public class HellHoundScene extends BaseContent
 	{
@@ -38,7 +39,7 @@ public class HellHoundScene extends BaseContent
 				outputText("\n\n<b>New codex entry unlocked: Hellhounds!</b>")
 			}
 			startCombat(new HellHound());
-			spriteSelect(27);
+			spriteSelect(SpriteDb.s_hellhound);
 		}
 
 

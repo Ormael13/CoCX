@@ -119,24 +119,51 @@ public class CombatAbilities {
 		Boneshatter
 	];
 	
-	// leftover comments from CombatMagic on grey spells:
-	//perki z grey mage line dajace spell mod * x% wiecej (nie wplywa na sam spell mod anu spell mod white/black)
-	//	if (player.hasStatusEffect(StatusEffects.KnowsWereBeast)) buttons.add("Were-beast",	were-beast spell goes here
-	//	if (player.hasStatusEffect(StatusEffects.Knows)) buttons.add("	next spell (non-fire or non-ice based) goes here
-	//	if (player.hasStatusEffect(StatusEffects.Knows)) buttons.add("	fire single target spell goes here
-	
 	public static const ManaShield:ManaShieldSpell             = new ManaShieldSpell();
 	public static const EnergyDrain:EnergyDrainSpell           = new EnergyDrainSpell();
 	public static const Restore:RestoreSpell                   = new RestoreSpell();
 	public static const BalanceOfLife:BalanceOfLifeSpell       = new BalanceOfLifeSpell();
 	public static const ClearMind:ClearMindSpell               = new ClearMindSpell();
+	public static const WaterSphere:WaterSphereSpell           = new WaterSphereSpell();
+	public static const WaterSphereEx:WaterSphereSpell         = new WaterSphereSpell(true);
+	public static const WaterBall:WaterBallSpell               = new WaterBallSpell();
+	public static const WaterBallEx:WaterBallSpell             = new WaterBallSpell(true);
+	public static const WindBullet:WindBulletSpell             = new WindBulletSpell();
+	public static const WindBulletEx:WindBulletSpell           = new WindBulletSpell(true);
+	public static const WindBlast:WindBlastSpell               = new WindBlastSpell();
+	public static const WindBlastEx:WindBlastSpell             = new WindBlastSpell(true);
+	public static const Stalagmite:StalagmiteSpell             = new StalagmiteSpell();
+	public static const StalagmiteEx:StalagmiteSpell           = new StalagmiteSpell(true);
+	public static const Shatterstone:ShatterstoneSpell         = new ShatterstoneSpell();
+	public static const ShatterstoneEx:ShatterstoneSpell       = new ShatterstoneSpell(true);
+	public static const AcidSpray:AcidSpraySpell               = new AcidSpraySpell();
+	public static const AcidSprayEx:AcidSpraySpell             = new AcidSpraySpell(true);
+	public static const CorrosiveWave:CorrosiveWaveSpell       = new CorrosiveWaveSpell();
+	public static const CorrosiveWaveEx:CorrosiveWaveSpell     = new CorrosiveWaveSpell(true);
+	//	if (player.hasStatusEffect(StatusEffects.KnowsWereBeast)) buttons.add("Were-beast",	were-beast spell goes here
 	
 	public static const ALL_GREY_SPELLS:/*CombatAbility*/Array = [
 		ManaShield,
 		EnergyDrain,
 		Restore,
 		BalanceOfLife,
-		ClearMind
+		ClearMind,
+		WaterSphere,
+		WaterSphereEx,
+		WaterBall,
+		WaterBallEx,
+		WindBullet,
+		WindBulletEx,
+		WindBlast,
+		WindBlastEx,
+		Stalagmite,
+		StalagmiteEx,
+		Shatterstone,
+		ShatterstoneEx,
+		AcidSpray,
+		AcidSprayEx,
+		CorrosiveWave,
+		CorrosiveWaveEx
 	];
 	
 	public static const BloodMissiles:BloodMissilesSpell               = new BloodMissilesSpell();

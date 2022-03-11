@@ -3,6 +3,7 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 public class LatexGirl extends NPCAwareContent
 	{
@@ -132,6 +133,7 @@ private function gooTitSize():Number {
 public function meanGooGirlRecruitment():void {
     CoC.instance.inCombat = false;
     clearOutput();
+    spriteSelect(SpriteDb.s_latexgoogirl);
 	flags[kFLAGS.GOO_TFED_MEAN] = 1;
 	flags[kFLAGS.GOO_EYES] = monster.skinTone;
 	if(player.hasItem(consumables.SUCMILK)) player.consumeItem(consumables.SUCMILK);
@@ -280,6 +282,7 @@ private function nameZeLatexGoo():void
 //PC Couldn't Bring Her Back
 public function encounterLeftBehindGooSlave():void {
 	clearOutput();
+    spriteSelect(SpriteDb.s_latexgoogirl);
 	if(flags[kFLAGS.GOO_TFED_NICE] > 0) {
 		outputText("While exploring, you see something odd in the lake.  It's a black blob, barely visible in the azure waves, though it seems to be splashing wildly, as if it was struggling.  You walk up to the lake shore just as the black blob flops limply onto the beach, breathing hard.  It's the poor goo-girl that got turned into latex!");
 		outputText("\n\n\"<i>It's... you...</i>\" she moans, looking up at you with wide " + flags[kFLAGS.GOO_EYES] + " eyes before they close...  It seems she's fainted.  She looks almost alien in a way... more than she did before, when she was just an aqueous blob with tits and faux hair.  Now, every facet of her being is shiny, reflective latex.  Even her vaginal secretions, which dribble freely, are liquid latex, glossy black juices that slowly harden into a flexible solid once freed from her body.");
@@ -329,6 +332,7 @@ private function encounterLeftBehindGooSlaveII():void {
 public function pureGooRecruitmentStart():void {
     CoC.instance.inCombat = false;
     clearOutput();
+    spriteSelect(SpriteDb.s_latexgoogirl);
 	flags[kFLAGS.GOO_TFED_NICE] = 1;
 	flags[kFLAGS.GOO_EYES] = monster.skinTone;
 	if(player.hasItem(consumables.SUCMILK)) player.consumeItem(consumables.SUCMILK);
@@ -488,6 +492,7 @@ private function niceGuysKeepTheirGooGals():void {
 //Approach Her (Select From Slaves Tab)(F)
 public function approachLatexy():void {
 	clearOutput();
+    spriteSelect(SpriteDb.s_latexgoogirl);
 	//First Line - Happiness Dependent
 	//(Sub 10)
 	if(gooHappiness() < 10) outputText(flags[kFLAGS.GOO_NAME] + " scowls up at your approach, her unhappiness clearly visible in her " + flags[kFLAGS.GOO_EYES] + " eyes.  You doubt her solid onyx face could be any more morose.");

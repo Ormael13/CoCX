@@ -10,6 +10,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Camp;
 import classes.Scenes.NPCs.Lily;
 import classes.internals.SaveableState;
+import classes.display.SpriteDb;
 	
 	use namespace CoC;
 	
@@ -82,7 +83,7 @@ import classes.internals.SaveableState;
 		}
 
 		public function lilyEncounter():void {
-			spriteSelect(77);
+			spriteSelect(SpriteDb.s_drider);
 			clearOutput();
 			if (flags[kFLAGS.LILY_STATUS] == 1) {
 				outputText("Bushwhacking your way through the dense foliage of the swamp, it soon becomes clear that you've wandered into spider territory.  Webbing hangs from trees and the dark, dank air hides ambushes well.  Diligence and wariness pay off, for you become aware of a skittering too near to be simple background noise.\n\n");
@@ -373,7 +374,7 @@ import classes.internals.SaveableState;
 		
 		public function LilyReward():void {
 			clearOutput();
-			outputText("You stand, shakily, and lean in. You pull the gag aside, further down her neck, and you remove the blindfold. Lily’s eyes are widened, worried, but as you bring a [hand] to her dripping pussy, flicking her black button, the relief on your Drider-toy’s face is obvious.  \n\n");
+			outputText("You stand, shakily, and lean in. You pull the gag aside, further down her neck, and you remove the blindfold. Lily’s eyes are widened, worried, but as you bring a hand to her dripping pussy, flicking her black button, the relief on your Drider-toy’s face is obvious.  \n\n");
 			outputText("<i>\"Thank you, "+ player.mf("master", "mistress") +"\"</i>, Lily whispers, her back legs tapping the ground. You reach up, grabbing her raven hair and pulling Lily’s upper body back down towards her Spider-half. Leaning over her, you force her mouth to stay open, frenching her with brutal abandon as you sink two fingers into her dripping sex. Your [chest] and hers grind, her soft, supple flesh almost like four pillows.  \n\n");
 			outputText("You rest more and more of your weight onto your Drider love-toy, pinning her upper body down. Taking her hands, one after the other, you lead one of her hands to your still-sopping pussy, and her other ");
 			if (player.hasCock()) {
@@ -514,7 +515,7 @@ import classes.internals.SaveableState;
 		
 		public function SidonieDom():void {
 			clearOutput();
-			outputText("Slipping your [hand] down Sidonie’s hotpants, you grip her tool. She flinches, but doesn’t move. You tell Sidonie that you’ve always wondered what Lily saw in being the bottom...Until now. You slowly, sensually begin to stroke Sidonie off, rubbing the tip of her glorious tool until she pulls her hotpants down, her veiny rod on full display. Lily, watching, blushes bright red, her own cooter still dripping with lust. \n\n");
+			outputText("Slipping your hand down Sidonie’s hotpants, you grip her tool. She flinches, but doesn’t move. You tell Sidonie that you’ve always wondered what Lily saw in being the bottom...Until now. You slowly, sensually begin to stroke Sidonie off, rubbing the tip of her glorious tool until she pulls her hotpants down, her veiny rod on full display. Lily, watching, blushes bright red, her own cooter still dripping with lust. \n\n");
 			outputText("You whisper into Sidonie’s ear that you want her to dom you both tonight...if she feels up to it. For a second, your equine lover is still...Until she grabs your arms roughly, slamming you down onto the bed, face down. \n\n");
 			outputText("\"More silk, bitch\", Sidonie says, and you feel her roughly binding your hands. A few seconds later, you feel your [armor] sliding off your body, Sidonie’s hands sliding up your now naked flank. She flicks your little nub once, teasing you, before flipping you over. \n\n");
 			outputText("\"Sit up, and let me see what you’ve got.\" Lily spreads her spider legs wide, tongue lolling out, thrusting her hips towards Sidonie. Your equine lover whistles, stepping in and giving Lily’s black legs a rub. She leans in, inhaling Lily’s scent, before giving her clit a lick. Lily shivers, and Sidonie pats her on the head.  \n\n");

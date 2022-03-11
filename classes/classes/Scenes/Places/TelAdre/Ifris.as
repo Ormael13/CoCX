@@ -1,6 +1,7 @@
 package classes.Scenes.Places.TelAdre {
 import classes.BodyParts.Face;
 import classes.GlobalFlags.kFLAGS;
+import classes.display.SpriteDb;
 
 public class Ifris extends TelAdreAbstractContent {
 public function Ifris(){
@@ -20,7 +21,7 @@ public function ifrisIntro():Boolean {
 
 //2-Approach and Greeting-
 public function approachIfris():void {
-	spriteSelect(28);
+	spriteSelect(SpriteDb.s_ifris);
 	clearOutput();
 	if(flags[kFLAGS.MET_IFRIS] == 0) {
 		flags[kFLAGS.MET_IFRIS] = 1;
@@ -55,7 +56,7 @@ public function approachIfris():void {
 }
 //3a-PC responds they want to work out-
 private function workOutForIfris():void {
-	spriteSelect(28);
+	spriteSelect(SpriteDb.s_ifris);
 	clearOutput();
 	if(player.fatigue > player.maxFatigue() - 30) {
 		outputText("There's no way you could work out as tired as you are.  Maybe you could come back to flirt with the demonic-looking girl during your next workout.");
@@ -72,7 +73,7 @@ private function workOutForIfris():void {
 }
 //3b-PC asks if she'd like to join them-
 private function askIfrisToJoinYou():void {
-	spriteSelect(28);
+	spriteSelect(SpriteDb.s_ifris);
 	clearOutput();
 	if(player.fatigue > player.maxFatigue() - 30) {
 		outputText("There's no way you could work out as tired as you are.  Maybe you could come back to flirt with the demonic-looking girl during your next workout.");
@@ -90,7 +91,7 @@ private function askIfrisToJoinYou():void {
 
 //4a-PC does a modest work out-
 private function liftWhileIfrisWatches():void {
-	spriteSelect(28);
+	spriteSelect(SpriteDb.s_ifris);
 	flags[kFLAGS.IFRIS_SHOWED_OFF]++;
 	clearOutput();
 	if(flags[kFLAGS.LIFETIME_GYM_MEMBER] == 0) {
@@ -116,7 +117,7 @@ private function liftWhileIfrisWatches():void {
 }
 //4b-PC decides to show off, possible strength requirement?-
 private function showOffForIfris():void {
-	spriteSelect(28);
+	spriteSelect(SpriteDb.s_ifris);
 	flags[kFLAGS.IFRIS_SHOWED_OFF]++;
 	fatigue(30);
 	clearOutput();

@@ -9,6 +9,7 @@ import classes.Scenes.Combat.Combat;
 import classes.internals.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Scenes.Dungeons.DungeonAbstractContent;
+import classes.display.SpriteDb;
 	
 	public class DisplacerBeastScene extends BaseContent
 	{
@@ -19,7 +20,6 @@ import classes.internals.*;
 
 public function displacerBeastEncounter():void {
 	clearOutput();
-//	spriteSelect(32);
 	if (player.hasPerk(PerkLib.Feeder)) {
 		displacerBeastMilkfeeding();
 	}

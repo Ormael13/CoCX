@@ -256,7 +256,7 @@ public class Exploration extends BaseContent
 						if (rand(4) == 0) SceneLib.impScene.impLordFeralEncounter();
 						else SceneLib.impScene.impLordEncounter();
 					}
-					spriteSelect(29);
+					spriteSelect(SpriteDb.s_imp);
 					return;
 				}
 				//Imp Warlord
@@ -269,13 +269,13 @@ public class Exploration extends BaseContent
 						if (rand(4) == 0) SceneLib.impScene.impWarlordFeralEncounter();
 						else SceneLib.impScene.impWarlordEncounter();
 					}
-					spriteSelect(125);
+					spriteSelect(SpriteDb.s_impWarlord);
 					return;
 				}
 				//Imp Overlord (Rare!)
 				else if (impChooser >= 90) {
 					SceneLib.impScene.impOverlordEncounter();
-					spriteSelect(126);
+					spriteSelect(SpriteDb.s_impOverlord);
 					return;
 				}
 				else {
@@ -318,7 +318,7 @@ public class Exploration extends BaseContent
 							startCombat(new Imp());
 						}
 					}
-					spriteSelect(29);
+					spriteSelect(SpriteDb.s_imp);
 				}
 				return;
 			}
@@ -436,18 +436,18 @@ public class Exploration extends BaseContent
 					//Goblin warrior! (Equal chance with Goblin Shaman)
 					else if (goblinChooser >= 50 && goblinChooser < 75) {
 						SceneLib.goblinWarriorScene.goblinWarriorEncounter();
-						spriteSelect(123);
+						spriteSelect(SpriteDb.s_goblinWarrior);
 						return;
 					}
 					//Goblin shaman OR elder!
 					else if (goblinChooser >= 75) {
 						if (flags[kFLAGS.SOUL_SENSE_PRISCILLA] < 3 && rand(2) == 0) {
 							SceneLib.goblinElderScene.goblinElderEncounter();
-							spriteSelect(122);
+							spriteSelect(SpriteDb.s_goblinElder);
 						}
 						else {
 							SceneLib.goblinShamanScene.goblinShamanEncounter();
-							spriteSelect(124);
+							spriteSelect(SpriteDb.s_goblinShaman);
 						}
 						return;
 					}
@@ -459,7 +459,7 @@ public class Exploration extends BaseContent
 							outputText("\n\n<b>New codex entry unlocked: Goblins!</b>")
 						}
 						startCombat(new Goblin());
-						spriteSelect(24);
+						spriteSelect(SpriteDb.s_goblin);
 						return;
 					}
 					else {
@@ -470,7 +470,7 @@ public class Exploration extends BaseContent
 							outputText("\n\n<b>New codex entry unlocked: Goblins!</b>")
 						}
 						startCombat(new Goblin());
-						spriteSelect(24);
+						spriteSelect(SpriteDb.s_goblin);
 						return;
 					}
 				}
@@ -489,13 +489,13 @@ public class Exploration extends BaseContent
 			if (impChooser >= 50 && impChooser < 75) {
 				if (rand(4) == 0) SceneLib.impScene.impWarlordFeralEncounter();
 				else SceneLib.impScene.impWarlordEncounter();
-				spriteSelect(125);
+				spriteSelect(SpriteDb.s_impWarlord);
 				return;
 			}
 			//Imp Overlord
 			else if (impChooser >= 75) {
 				SceneLib.impScene.impOverlordEncounter();
-				spriteSelect(126);
+				spriteSelect(SpriteDb.s_impOverlord);
 				return;
 			}
 			//Pack of Imps
@@ -593,7 +593,7 @@ public class Exploration extends BaseContent
 			if (gobimpChooser >= 30) {
 				if (flags[kFLAGS.TIMES_ENCOUNTERED_GOBLIN_WARRIOR] >= 1) {
 					SceneLib.goblinWarriorScene.goblinWarriorsEncounter();
-					spriteSelect(123);
+					spriteSelect(SpriteDb.s_goblinWarrior);
 				}
 				else SceneLib.impScene.impPackEncounter();
 				return;
@@ -602,7 +602,7 @@ public class Exploration extends BaseContent
 			else {
 				if (flags[kFLAGS.TIMES_ENCOUNTERED_GOBLIN_ASSASSIN] >= 1) {
 					SceneLib.goblinAssassinScene.goblinAdventurersEncounter();
-					spriteSelect(24);
+					spriteSelect(SpriteDb.s_goblin);
 				}
 				else SceneLib.impScene.impPackEncounter2();
 				return;

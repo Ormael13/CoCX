@@ -1720,7 +1720,7 @@ public class Soulforce extends BaseContent
 			addButton(7, "Naga Oils", AddGorgonOil).hint("Add 1 vial of Gorgon, Vouivre and Couatl Oil.");
 			addButton(8, "VT RV WF", AddVoltageTopaz).hint("Add 1 Voltage Topaz, 1 vial of Red Blood (Bat TF) and 1 Wonder Fruit.");
 			addButton(9, "DSJ HS FSS", AddDarkSlimeJelly).hint("Add 1 Dark Slime Jelly, 1 Hydra Scale and 1 Fire Snail Saliva.");
-			addButton(10, "Fafnir tear", AddFTear).hint("Add 1 Fafnir tear (WIP Frost wyrm TF).");
+			addButton(10, "Fafnir tear", AddFTear).hint("Add 1 Fafnir tear (Frost wyrm TF).");
 			addButton(11, "Midnight gossamer", AddGossa).hint("Add 1 Midnight Gossamer.");
 			addButton(12, consumables.VAMPBLD.shortName, addConsumable, consumables.VAMPBLD).hint("Add 1 " + consumables.VAMPBLD.longName + ".");
 			//addButton(11, "", ).hint("Add 1 .");
@@ -4331,7 +4331,6 @@ public class Soulforce extends BaseContent
 			player.soulforce -= 320;
 			statScreenRefresh();
 			SceneLib.goblinElderScene.goblinElderEncounter();
-			spriteSelect(122);
 		}
 		else {
 			outputText("\n\nYour current soulforce is too low.");

@@ -59,6 +59,7 @@ public class ChargeWeaponSpell extends AbstractWhiteSpell {
 		if (player.weaponSpecials("Hybrid")) ab12 *= 2.5;
 		if (player.weaponSpecials("Large") || player.weaponSpecials("Dual Large")) ab12 *= 3;
 		if (player.weaponSpecials("Massive")) ab12 *= 4;
+		if (player.weapon == weapons.MGSWORD) ab12 *= 2;
 		return ab12;
 	}
 	

@@ -2,6 +2,7 @@
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 public class Faerie extends BaseContent{
 
@@ -15,7 +16,7 @@ public class Faerie extends BaseContent{
 
 //faerie Encounter
 public function encounterFaerie():void {
-	spriteSelect(17);
+	spriteSelect(SpriteDb.s_faerie);
 	clearOutput();
 	outputText("A faerie slightly taller and thicker than your middle finger flits about the air. Her flat chest and girlish bob of hair make her look quite cute, but the solid black stockings and leather straps covering her chest show her slutty nature. Her wings are a light red, the color of aroused genitals.\n\n");
 	if(player.cockTotal() > 0 && (!player.hasVagina() || rand(2) == 0)) {
@@ -57,7 +58,7 @@ public function encounterFaerie():void {
 }
 
 private function faerieRAEP():void {
-	spriteSelect(17);
+	spriteSelect(SpriteDb.s_faerie);
 	//Count secksins
 	if(!player.hasStatusEffect(StatusEffects.FaerieFemFuck)) player.createStatusEffect(StatusEffects.FaerieFemFuck,1,0,0,0);
 	else player.addStatusValue(StatusEffects.FaerieFemFuck,1,1);
@@ -152,14 +153,14 @@ private function faerieRAEP():void {
 }
 
 private function faerieShooAway():void {
-	spriteSelect(17);
+	spriteSelect(SpriteDb.s_faerie);
 	clearOutput();
 	outputText("You shake your hands, shooing away the tiny faerie.  She's clearly been touched by the magics of this land and you want nothing to do with her. With a pouting look, she turns and buzzes away.");
 	doNext(camp.returnToCampUseOneHour);
 }
 
 private function faerieDoNothing():void {
-	spriteSelect(17);
+	spriteSelect(SpriteDb.s_faerie);
 	clearOutput();
 	if(player.nippleLength >= 1) {
 		outputText("She looks you over, stopping at your upper torso and letting out a cry of glee. She lands on your chest, her exposed pussy coming to rest on your nipple. With one hand she grabs hold of you above her head and uses her other hand to guide the rapidly hardening nub between her legs. She sighs in delight as her tight confines squeeze your nipple hard, the feeling somewhere between pinching fingers and suckling lips. You gasp in delight yourself, and you notice she can exercise amazing control with her groin muscles as a rippling feeling courses through your nipple.\n\n");
@@ -205,14 +206,14 @@ private function faerieDoNothing():void {
 
 //[No] *(let her go)
 private function letFaerieGo():void {
-	spriteSelect(17);
+	spriteSelect(SpriteDb.s_faerie);
 	clearOutput();
 	outputText("You apologize and release her, letting her fly away on gossamer wings.  She thanks you, buzzing up to your lips and planting a chaste kiss on your mouth.  She zips away into the woods without a glance back...");
 	doNext(camp.returnToCampUseOneHour);
 }
 //Disable Faerie encounter
 private function disableFaerieEncounterForGood():void {
-	spriteSelect(17);
+	spriteSelect(SpriteDb.s_faerie);
 	clearOutput();
 	outputText("You apologize and release her, letting her fly away on gossamer wings.  She thanks you, buzzing up to your lips and planting a chaste kiss on your mouth.  She zips away into the woods without a glance back...");
 	outputText("\n\nYou make a mental note and resolve to never catch her again.");
@@ -222,7 +223,7 @@ private function disableFaerieEncounterForGood():void {
 
 //[YES] *make her pleasure you
 private function faerieCaptureHJ():void {
-	spriteSelect(17);
+	spriteSelect(SpriteDb.s_faerie);
 	if(player.hasStatusEffect(StatusEffects.FaerieFucked)) player.addStatusValue(StatusEffects.FaerieFucked,1,2);
 	else player.createStatusEffect(StatusEffects.FaerieFucked,2,0,0,0);
 	clearOutput();

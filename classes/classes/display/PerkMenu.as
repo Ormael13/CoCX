@@ -326,6 +326,9 @@ public class PerkMenu extends BaseContent {
 		const ICE :int = 2;
 		const LIGHTNING:int = 3;
 		const DARKNESS:int = 4;
+		const WATER:int = 5;
+		const WIND:int = 6;
+		const EARTH:int = 7;
 		var toggleflag:Function = curry(toggleFlag,doubleStrikeOptions);
         var doubleStrikeStyle:Function = curry(setFlag,doubleStrikeOptions,kFLAGS.DOUBLE_STRIKE_STYLE);
         var elementalArrows:Function = curry(setFlag,doubleStrikeOptions,kFLAGS.ELEMENTAL_ARROWS);
@@ -353,6 +356,9 @@ public class PerkMenu extends BaseContent {
 				case ICE : outputText("Ice") ;break;
 				case LIGHTNING: outputText("Lightning");break;
 				case DARKNESS: outputText("Darkness");break;
+				case WATER: outputText("Water");break;
+				case WIND: outputText("Wind");break;
+				case EARTH: outputText("Earth");break;
 			}
 			outputText("</b>");
 		}
@@ -405,6 +411,9 @@ public class PerkMenu extends BaseContent {
 		const ICE :int = 2;
 		const LIGHTNING:int = 3;
 		const DARKNESS:int = 4;
+		const WATER:int = 5;
+		const WIND:int = 6;
+		const EARTH:int = 7;
 		var toggleflag:Function = curry(toggleFlag,doubleStrikeOptions2);
         var doubleStrikeStyle:Function = curry(setFlag,doubleStrikeOptions2,kFLAGS.DOUBLE_STRIKE_STYLE);
         var elementalArrows:Function = curry(setFlag,doubleStrikeOptions2,kFLAGS.ELEMENTAL_ARROWS);
@@ -412,8 +421,11 @@ public class PerkMenu extends BaseContent {
 		if (player.hasPerk(PerkLib.ElementalArrows) && flags[kFLAGS.ELEMENTAL_ARROWS] != 0) addButton(0, "None", elementalArrows,NONE);
 		if (player.hasPerk(PerkLib.ElementalArrows) && player.hasStatusEffect(StatusEffects.KnowsWhitefire) && flags[kFLAGS.ELEMENTAL_ARROWS] != 1) addButton(1, "Fire", elementalArrows,FIRE);
 		if (player.hasPerk(PerkLib.ElementalArrows) && player.hasStatusEffect(StatusEffects.KnowsIceSpike) && flags[kFLAGS.ELEMENTAL_ARROWS] != 2) addButton(2, "Ice", elementalArrows,ICE);
-		if (player.hasPerk(PerkLib.ElementalArrows) && player.hasStatusEffect(StatusEffects.KnowsLightningBolt) && flags[kFLAGS.ELEMENTAL_ARROWS] != 3) addButton(6, "Lightning", elementalArrows,LIGHTNING);
-		if (player.hasPerk(PerkLib.ElementalArrows) && player.hasStatusEffect(StatusEffects.KnowsDarknessShard) && flags[kFLAGS.ELEMENTAL_ARROWS] != 4) addButton(7, "Darkness", elementalArrows,DARKNESS);
+		if (player.hasPerk(PerkLib.ElementalArrows) && player.hasStatusEffect(StatusEffects.KnowsLightningBolt) && flags[kFLAGS.ELEMENTAL_ARROWS] != 3) addButton(3, "Lightning", elementalArrows,LIGHTNING);
+		if (player.hasPerk(PerkLib.ElementalArrows) && player.hasStatusEffect(StatusEffects.KnowsDarknessShard) && flags[kFLAGS.ELEMENTAL_ARROWS] != 4) addButton(4, "Darkness", elementalArrows,DARKNESS);
+		if (player.hasPerk(PerkLib.ElementalArrows) && player.hasStatusEffect(StatusEffects.KnowsWaterBall) && flags[kFLAGS.ELEMENTAL_ARROWS] != 5) addButton(5, "Water", elementalArrows,WATER);
+		if (player.hasPerk(PerkLib.ElementalArrows) && player.hasStatusEffect(StatusEffects.KnowsWindBullet) && flags[kFLAGS.ELEMENTAL_ARROWS] != 6) addButton(6, "Wind", elementalArrows,WIND);
+		if (player.hasPerk(PerkLib.ElementalArrows) && player.hasStatusEffect(StatusEffects.KnowsStalagmite) && flags[kFLAGS.ELEMENTAL_ARROWS] != 7) addButton(7, "Earth", elementalArrows,EARTH);
 		if (player.hasPerk(PerkLib.Cupid) && flags[kFLAGS.CUPID_ARROWS] != 0) addButton(10, "None", toggleflag,kFLAGS.CUPID_ARROWS,false);
 		if (player.hasPerk(PerkLib.Cupid) && player.hasStatusEffect(StatusEffects.KnowsArouse) && flags[kFLAGS.CUPID_ARROWS] != 1) addButton(11, "Arouse", toggleflag,kFLAGS.CUPID_ARROWS,true);
 		if (player.hasPerk(PerkLib.EnvenomedBolt) && flags[kFLAGS.ENVENOMED_BOLTS] != 0) addButton(12, "None", toggleflag,kFLAGS.ENVENOMED_BOLTS,false);

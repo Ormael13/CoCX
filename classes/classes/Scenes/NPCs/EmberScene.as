@@ -1060,7 +1060,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 				if (flags[kFLAGS.EMBER_GENDER] >= 2) outputText("  The inviting lips of a human-looking pussy purse between her legs; some moisture seems to have gathered on her labia, giving it a slick look that just begs for attention.");
 
 				outputText("\n\nEmber's legs themselves are somewhat human-like in appearance, but they're covered in the thick protective scales that don most of " + emberMF("his", "her") + " extremities.  Only the feet look like anything but normal human anatomy; the clawed feet of a predator decorate " + emberMF("him", "her") + " instead, capped with talons meant for gripping at the ground... or at prey.");
-				outputText("\n\nHaving drawn the dragon's attention with your examination of " + emberMF("his", "her") + " body, Ember darts a reptilian tongue out from " + emberMF("his", "her") + " lips, as if to entice you.");
+				outputText("\n\nYou've drawn the dragon's attention with your examination of " + emberMF("his", "her") + " body - Ember darts a reptilian tongue out from " + emberMF("his", "her") + " lips, as if to entice you.");
 			}
 			doNext(emberCampMenu);
 		}

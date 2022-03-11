@@ -179,8 +179,24 @@ package classes.Scenes
 			outputText("-Bee-girl hypnotize scene trigger now will check for core value of libido stat not it total value. Also second trigger of been randomn 1/2 chance that can happen despite passing first check will now be req. along with passing first check to trigger this encounter variant (it also lowered to 1/3 chance).\n");
 			outputText("-Completing Deep Cave for questlog reward will no longer require to fix Vala. Also for Lethice Stronghold quest completetion either Mirror Demon or Basilisk King must be beaten not both.\n");
 			outputText("-Hinezumi mutation perks req. clarified that it req. PC been called Hinezumi (mouse 12+ score) and not just Mouse.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New Grey Spell: Water Ball - learned from Grey Book. Cost 40 mana and deal water dmg. Have cooldown of 3 turns. (spell text by Pyromania & slight different text when used in water/underwater)\n");
+			outputText("-New Grey Spell: Water Sphere - learned from Grey Book. Cost 200 mana and deal AoE water dmg. Have cooldown of 3 turns. (spell text by Pyromania & slight different text when used in water/underwater)\n");
+			outputText("-New Grey Spell: Wind Bullet - learned from Grey Book. Cost 40 mana and deal wind dmg. Have cooldown of 3 turns. (spell text by Pyromania)\n");
+			outputText("-New Grey Spell: Wind Blast - learned from Grey Book. Cost 200 mana and deal AoE wind dmg. Have cooldown of 3 turns. (spell text by Pyromania)\n");
+			outputText("-New Grey Spell: Stalagmite - learned from Grey Book. Cost 40 mana and deal earth dmg. Have cooldown of 3 turns. (spell text by Canadian Snas)\n");
+			outputText("-New Grey Spell: Shatterstone - learned from Grey Book. Cost 200 mana and deal AoE earth dmg. Have cooldown of 3 turns. (spell text by Canadian Snas)\n");
+			outputText("-New melee weapon (by Lady Aeducan): Moonlight Greatsword - buyable at Kaiba shop. Cost 3000 gems. Base atk is 25, it's Large type weapon, dealing magical dmg instead of physical, using charge weapon will give 2x larger bonus and can use range attack in case there is no range weapon equipped.\n");
+			outputText("-Arcane Archer Elemental Arrows can be now enhanced with water, wind, earth dmg as long PC learn matching grey spell.\n");
+			outputText("-Convergence perk effect slight change - for single target will hit 2x more (it would mutliply any cases of multicast/omnicast), increase aoe grey spells dmg against smaller (+100%) and larger groups (+50%). Also it effect would not be disabling offensive staff channeling effect.\n");
+			outputText("-Twin Heart can be gained by drider PC's too.\n");
+			outputText("-New Grey Spell: Acid Spray - learned from Grey Book. Cost 40 mana and deal acid dmg and apply DoT (similar to acid spit/hydra breath ones but ~half weaker). Have cooldown of 3 turns. (spell text by Canadian Snas)\n");
+			outputText("-New Grey Spell: Corrosive Wave - learned from Grey Book. Cost 200 mana and deal AoE acid dmg. Have cooldown of 3 turns and apply DoT (similar to acid spit/hydra breath ones but ~half weaker). (spell text by Canadian Snas)\n");
+			outputText("-Added 'Back' buttons for Konstantin. (Svalkash)\n");
+			outputText("-Rearranged dragon face mutations - fangs first, then full muzzle. Just like the scales. (Svalkash)\n");
+			outputText("-Fixed weird skinCoat inheritance - now the coat inherits skin/hair type only once and needs to be dyed separately afterwards. Non-fur coatings inherit the skin color. (Svalkash)\n");
+			outputText("-Added a new setting for hiding the armor in character viewer entirely. You can disable it if you don't like the way your armor looks, or if your stance is not displayed correctly. (Svalkash)\n");
+			outputText("-Imported and updates more sprites from UEE. Even the best girl! (Svalkash)\n");
+			outputText("-Liadri minor changes to vampire TF and score.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -194,7 +210,8 @@ package classes.Scenes
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
 			outputText("-Fixed Bugs: One of Ingnam Tavern food options having wrong price listed on menu, unique sex scenes accesable during Druid fusion, Wisp potentialy softlocking Mino King fight, selfsucking in masturbation menu restoring max 100 hunger, Swift Casting not usable when having Giant's Grip and Large weapon, White or Black magic buffs autocastable when having perk that disable use of white/black magic, ");
 			outputText("putting B. Sword after picking Ecalibur disabling option to pick sword at Temple, all 3 Hall of Blade soulskill variants dealing phys not magical dmg, Lightning Claw lowering phys dmg when used as part of feral style attack, using goblin Cum Reservoir not empting it out, Yuki Onna Transform scene not making sure to give proper genitalia setup, Archer's Stamina perks not giving fatigue related to ");
-			outputText("current Speed value, Half-Frost Wyrm racial bonus been attained super easy, Mysterious Seed not causing for misc items menu appear as inventory submenu, unable to add arcane circuits to 5th arcane circle, doppleganger fight won't drag unnecessary due to getting messly 1k lust after 5th round in fight, Gazer Eyes mutation not keeping True seeing perk\n");/*ostatni punkt changelogu
+			outputText("current Speed value, Half-Frost Wyrm racial bonus been attained super easy, Mysterious Seed not causing for misc items menu appear as inventory submenu, unable to add arcane circuits to 5th arcane circle, doppleganger fight won't drag unnecessary due to getting messly 1k lust after 5th round in fight, Gazer Eyes mutation not keeping True seeing perk, Magical Eye Drops as item find in Caves instead ");
+			outputText("of Eye Drops, raiju tf removing/humanizing raiju paws\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
@@ -205,6 +222,7 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -286,7 +304,9 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -322,6 +342,20 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

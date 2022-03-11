@@ -370,12 +370,12 @@ public class Evangeline1 extends Monster
 				initStrTouSpeInte(41, 46, 55, 100);
 				this.weaponName = "inscribed spellblade";
 				this.weaponVerb="slash";
-				this.weaponAttack = 9;
+				this.weaponAttack = 10;
 				this.armorName = "practically indecent steel armor";
-				this.armorDef = 11;
+				this.armorDef = 12;
 				this.armorMDef = 1;
 				this.bonusHP = 240;
-				this.bonusLust = 76;
+				this.bonusLust = 75;
 				this.lust = 70;
 				this.additionalXP += 40;
 				this.level = 15;

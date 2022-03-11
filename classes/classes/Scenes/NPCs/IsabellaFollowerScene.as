@@ -7,6 +7,7 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 public class IsabellaFollowerScene extends NPCAwareContent {
 
@@ -74,7 +75,7 @@ internal function isabellaAffection(mod:int = 0):int {
 
 public function isabellaSprite():void
 {
-	spriteSelect(31);
+	spriteSelect(SpriteDb.s_isabella);
 }
 
 public function isabellaKnockUpAttempt():void {
@@ -94,7 +95,7 @@ public function isabellaKnockUpAttempt():void {
 
 //Isabella Moves In Intro
 internal function isabellaMoovesInGreeting():void {
-	spriteSelect(31);
+	spriteSelect(SpriteDb.s_isabella);
 	clearOutput();
 	if(flags[kFLAGS.ISABELLA_TIMES_OFFERED_FOLLOWER] == 0) {
 		outputText("Isabella gives you a warm smile when you wander into her camp and spikes the sharp edge of her shield into the ground, leaving it standing next to her.  Her big brown eyes are filled with warmth and affection for a friend as she greets you, saying, \"<i>Velcome back, [name].  Did you miss little old me?</i>\"\n\n");
@@ -133,7 +134,7 @@ internal function isabellaMoovesInGreeting():void {
 }
 //Decline Izzy Initial Moving Offer (-10 affection)
 private function turnDownIsabellaFollower():void {
-	spriteSelect(31);
+	spriteSelect(SpriteDb.s_isabella);
 	isabellaAffection(-10);
 	clearOutput();
 	outputText("You push back from Isabella's smothering embrace with a little bit of frustration.  As soon as she realizes what's going on, the heavy-breasted woman's cheeks color in embarrassment and she retreats to her shield, her hands kneading the hard metal edge nervously.  You inform her that it would be best she remain here for now, at least until you've succeeded in your mission and brought peace to this strange place.\n\n");
@@ -150,7 +151,7 @@ private function turnDownIsabellaFollower():void {
 }
 //Move Ze Bitch In!
 private function moveTheBitchIn():void {
-	spriteSelect(31);
+	spriteSelect(SpriteDb.s_isabella);
 	clearOutput();
 	outputText("As soon as you nod, Isabella smiles and tears her shield out of the ground, setting off a small avalanche of dirt and pebbles across her rugs.  The industrious cow-girl starts packing up her things immediately.  \"<i>It vas time to move out of zis little camp any how,</i>\" she declares as she folds her chair into a chest.  You get an eyeful of her generous backside, the plump rump swaying and jiggling back and forth with every movement Isabella's efforts generate.  It's almost hypnotizing, even half-hidden as it is under her olive-toned skirt.  A breeze blows the hem partway up, and though it doesn't go far, you watch with an intrigued, vacant stare.\n\n");
 
@@ -167,7 +168,7 @@ private function moveTheBitchIn():void {
 
 //Follower Summoned Text:
 public function callForFollowerIsabella():void {
-	spriteSelect(31);
+	spriteSelect(SpriteDb.s_isabella);
 	clearOutput();
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0)
 	{
@@ -308,7 +309,7 @@ private function isabellasAppearance():void {
 }
 
 private function campIzzySexMenu():void {
-	spriteSelect(31);
+	spriteSelect(SpriteDb.s_isabella);
 	var tentacle:Function = null;
 	if(izzyTentacleRapeBool() && player.lust >= 33) tentacle = tentacleBoneFollowerIzzy;
 	var hotdog:Function = null;
@@ -342,7 +343,7 @@ private function campIzzySexMenu():void {
 
 //Accent Coaching
 private function isabellasAccentCoaching():void {
-	spriteSelect(31);
+	spriteSelect(SpriteDb.s_isabella);
 	clearOutput();
 	//Cooldown rejection
 	if(flags[kFLAGS.ISABELLA_ACCENT_TRAINING_COOLDOWN] > 1) {
@@ -445,7 +446,7 @@ private function isabellaAccentUncoaching():void {
 
 //Morning Wakeup Call
 public function isabellaMorningWakeupCall():void {
-	spriteSelect(31);
+	spriteSelect(SpriteDb.s_isabella);
 	flags[kFLAGS.ISABELLA_MORNING_FELLATIO_COUNT]++;
 	var x:Number = player.shortestCockIndex();
 	outputText("\n");
@@ -513,7 +514,7 @@ public function isabellaMorningWakeupCall():void {
 }
 //No BJ's Plz
 private function toggleIsabellasMorningWoodChopping():void {
-	spriteSelect(31);
+	spriteSelect(SpriteDb.s_isabella);
 	clearOutput();
 	if(flags[kFLAGS.ISABELLA_BLOWJOBS_DISABLED] == 0) {
 		outputText("You let Isabella know that you'd rather manage your morning wood yourself, and if possible, save up your cum rather than having her drain it every morning.  She looks a little disappointed but agrees to leave you be in the morning.  Before you go, she offers, \"<i>");
@@ -543,7 +544,7 @@ private function toggleIsabellasMorningWoodChopping():void {
 }
 //Repeatable Campsex: Hot Dogginz'
 private function repeatGermanBratwurstInCamp():void {
-	spriteSelect(31);
+	spriteSelect(SpriteDb.s_isabella);
 	clearOutput();
 	var x:Number = player.smallestCockIndex();
 	outputText("You ask Isabella if she would mind helping you blow off some pressure before you go back out.  She glances down at " + sMultiCockDesc() + " and ");
@@ -674,7 +675,7 @@ private function repeatGermanBratwurstInCamp():void {
 }
 
 private function izzyTentacleRapeBool():Boolean {
-	spriteSelect(31);
+	spriteSelect(SpriteDb.s_isabella);
 	var counter:Number = 0;
 	var i:int = player.cockTotal();
 	while(counter < (player.tentacleCocks() + player.stamenCocks()) && i > 0) {
@@ -691,7 +692,7 @@ private function izzyTentacleRapeBool():Boolean {
 //needs 3 cocks: 2 to tie her and lift her up and at least
 //one for penetration
 private function tentacleBoneFollowerIzzy():void {
-	spriteSelect(31);
+	spriteSelect(SpriteDb.s_isabella);
 	//Tentacle dick index holders
 	var t1:int = -1;
 	var t2:int = -1;
@@ -825,7 +826,7 @@ private function tentacleBoneFollowerIzzy():void {
 //triggers when Izzy Milked Yet flag >= 10 and PC has Bmilker at farm; unless negative, flag gets reset to 0 if PC nurses from her in any nursing scene written later
 //PC wasn't thinking about the pressure; titties get swole
 public function milktasticLacticLactation():void {
-	spriteSelect(31);
+	spriteSelect(SpriteDb.s_isabella);
 	clearOutput();
 	if(isabellaAccent()) outputText("\"<i>Ohh, mein milkers...</i>\"\n\n");
 	else outputText("\"<i>Ohh, my milkers...</i>\"\n\n");
@@ -845,7 +846,7 @@ private function izzyMilkYourselfDamnit():void {
 }
 //[Yes]
 private function izzyMilkingMeinMilkersMya():void {
-	spriteSelect(31);
+	spriteSelect(SpriteDb.s_isabella);
 	clearOutput();
 	if(player.cor < 50) outputText("Concerned");
 	else outputText("Idly");
@@ -875,7 +876,7 @@ private function izzyMilkingMeinMilkersMya():void {
 	doNext(izzyMilkingMeinMilkersMya2);
 }
 private function izzyMilkingMeinMilkersMya2():void {
-	spriteSelect(31);
+	spriteSelect(SpriteDb.s_isabella);
 	clearOutput();
 	outputText("In no time at all, Isabella has taken her place in your stall and you've helped her fasten the harnesses on and attach the milker cups.  The machinery whirrs and lifts her heavy form in the air ");
 
@@ -913,7 +914,7 @@ private function izzyMilkingMeinMilkersMya2():void {
 
 //[I'll Allow It]
 private function AllowIzzyMilkerUse():void {
-	spriteSelect(31);
+	spriteSelect(SpriteDb.s_isabella);
 	clearOutput();
 	outputText("With a smile, you tell Isabella she's free to come here whenever she's feeling pent-up, as long as there's enough left for you to have some fun together when you want to.  Isabella hugs you again, tits and nipples pressing into your ");
 	if(player.tallness < 72) outputText("face");
@@ -927,7 +928,7 @@ private function AllowIzzyMilkerUse():void {
 
 //[Mine Mine MINE!]
 private function noMilkingMilky():void {
-	spriteSelect(31);
+	spriteSelect(SpriteDb.s_isabella);
 	clearOutput();
 	outputText("You grin at Isabella and pull her over to you.  Wrapping one arm around her waist, you tell her that this was only a stopgap; you'll be the one to take care of all her needs from now on.  To emphasize your point, you ");
 	if(player.cor > 50) outputText("roughly grab");
@@ -944,7 +945,7 @@ private function noMilkingMilky():void {
 //follower menu button
 //(only appears if Izzy Milked Yet flag < 0)
 private function getMilk():void {
-	spriteSelect(31);
+	spriteSelect(SpriteDb.s_isabella);
 	clearOutput();
 	outputText("You tell Isabella that you want a bottle of her milk.  ");
 	//Izzy overmilked
@@ -992,7 +993,7 @@ public function angryMurble():void {
 //v1 = 1, normal sparring.
 //v2 = 2, 'light' sparring.
 private function isabellaSparMenu():void {
-	spriteSelect(31);
+	spriteSelect(SpriteDb.s_isabella);
 	clearOutput();
 	if(flags[kFLAGS.ISABELLA_SPARRING_INTRO] == 0) {
 		outputText("Isabella smiles when you suggest sparring and vigorously nods, exclaiming, \"<i>");
@@ -1010,7 +1011,7 @@ private function isabellaSparMenu():void {
 }
 
 private function sparring(type:int = 1):void {
-	spriteSelect(31);
+	spriteSelect(SpriteDb.s_isabella);
 	clearOutput();
 	if(flags[kFLAGS.ISABELLA_SPARRING_INTRO] == 1) {
 		outputText("You and Isabella hike to the border of the plains with some old furniture and worn out blankets, arranging a faux camp for you to fight around.  Once it is finished, you take a quick breather before getting started.\n\n");
@@ -1027,7 +1028,7 @@ private function sparring(type:int = 1):void {
 	monster.gems = 0;
 	//Nerf XP if light mode
 	if(type == 2) monster.XP = Math.round(monster.XP / 2);
-	spriteSelect(31);
+	spriteSelect(SpriteDb.s_isabella);
 }
 
 //Isabella Burps
@@ -1035,7 +1036,7 @@ private function sparring(type:int = 1):void {
 //first time (Z)
 private function isabellaBurps():void {
 	player.consumeItem(consumables.PROBOVA);
-	spriteSelect(31);
+	spriteSelect(SpriteDb.s_isabella);
 	clearOutput();
 	//First time
 	if(flags[kFLAGS.ISABELLA_PROBOVA_BURP_COUNT] == 0) {
@@ -1078,7 +1079,7 @@ private function isabellaBurps():void {
 //run
 private function runAwayFromIzzyBurps():void {
 	clearOutput();
-	spriteSelect(31);
+	spriteSelect(SpriteDb.s_isabella);
 	//First time
 	if(flags[kFLAGS.ISABELLA_PROBOVA_BURP_COUNT] == 0) {
 		outputText("Allowing common sense to dictate your judgment, you step back from the dark-skinned woman, backing up until she stops waving at you.  She grimaces in an evident cross of pain and... pleasure?  Her cheeks are puffing up and chest, puffing out.  Despite yourself, you can't help but admire the way her 'udders' sit on her out-thrust torso, jiggling constantly from the tremors running through her body.  Finally, when she can't seem to hold herself back any longer, her mouth flies open as wide as you've ever seen it, a gigantic burp thundering out.  A visible misty cloud issues from her gaping gob, gaining volume and hovering ominously around her as subsequent belches ripple forth.  In an attempt to free all of the offending gas from her poor body, Isabella roughly squishes her midsection, wincing at each emission as she forces them out.\n\n");
@@ -1109,7 +1110,7 @@ private function runAwayFromIzzyBurps():void {
 //help (ya dumbo)
 private function getIzzyBurped():void {
 	clearOutput();
-	spriteSelect(31);
+	spriteSelect(SpriteDb.s_isabella);
 	flags[kFLAGS.ISABELLA_PROBOVA_BURP_COUNT]++;
 	//First time
 	if(flags[kFLAGS.ISABELLA_PROBOVA_BURP_COUNT] == 1) {
@@ -1237,7 +1238,7 @@ private function getIzzyBurped():void {
 //no
 private function declineIzzysCowBurpApology():void {
 	clearOutput();
-	spriteSelect(31);
+	spriteSelect(SpriteDb.s_isabella);
 	if(flags[kFLAGS.ISABELLA_PROBOVA_BURP_COUNT] == 1) {
 		outputText("As strange as the situation is, you're too weirded out to reassure Isabella, at least for now, and you relay that to her.  Though crestfallen, she takes the news well, apologizing - sincerely and soberly - once more before moving back to her designated camping spot.  ");
 		if(player.hasStatusEffect(StatusEffects.BurpChanged)) {
@@ -1255,7 +1256,7 @@ private function declineIzzysCowBurpApology():void {
 //yes
 private function acceptCowpology():void {
 	clearOutput();
-	spriteSelect(31);
+	spriteSelect(SpriteDb.s_isabella);
 	//Clear burps!
 	if(player.hasStatusEffect(StatusEffects.BurpChanged))
 		player.removeStatusEffect(StatusEffects.BurpChanged);
@@ -1331,7 +1332,7 @@ private function acceptCowpology():void {
 //Get Licked in Return (seems incompatible with centaurs/driders due to lap-sitting)
 internal function receiveAllTheCowTOngues():void {
 	clearOutput();
-	spriteSelect(31);
+	spriteSelect(SpriteDb.s_isabella);
 	outputText("Isabella pulls you up into her lap when you agree.  You recline against her, the two of you sinking into the plush cushions of her big chair; ");
 	if(player.tallness <= 78) outputText("you are nearly absorbed by the great big mounds of Isabella's titflesh, sliding between her massive, milky mammaries.");
 	else outputText("Isabella nuzzles at your neck, your massive frame nearly crushing her into the chair.");
@@ -1383,7 +1384,7 @@ internal function receiveAllTheCowTOngues():void {
 //Ey bitch u wan sum fuk? (Or, how Isabella learned to love the dick regardless of size and shape) (Z)
 private function fuckIsabella():void {
 	clearOutput();
-	spriteSelect(31);
+	spriteSelect(SpriteDb.s_isabella);
 	//AREA FOR SCENE ACCESS: (164);
 	var x:int = player.shortestCockIndex();
 	if(player.cocks[x].cockLength >= 9) x = player.cockThatFits(164);
@@ -1592,7 +1593,7 @@ private function isabellaTalkMenu():void {
 }
 
 public function isabellaTalksAboutPotentialPregnancy():void {
-	spriteSelect(31);
+	spriteSelect(SpriteDb.s_isabella);
 	outputText("\nAs you head for your " + (camp.homeDesc() == "cabin" ? "bed" : "sleeping bag") + ", looking forward to the end of another long day, you notice Isabella approaching, seeming strangely nervous for the bovine warrior-woman.  You call out to her in greeting, asking if something is the matter.");
 	outputText("\n\n\"<i>Ah, [name], I was hoping to see you.</i>\" She replies.  Nervously looking at the ground, pawing at the dry earth with one cloven hoof, she suddenly blurts out, \"<i>what do you think of children, [name]?</i>\"");
 	outputText("\n\nYou look at her in surprise and ask why she is asking you that.  Isabella retains her nervous expression, before awkwardly beginning, \"<i>I... well, I always thought that, one day, I would have a family, but first I had to find a man who was worthy, and then there was the adventuring and... well, I never had the chance before I ended up in this world.  But, now that I have you... I understand that there are many reasons not to, but, if you do want to start a family with me, I am willing. Okay? I just wanted to tell you that, and for you to remember that.</i>\"");
@@ -1679,7 +1680,7 @@ private function babyMF(male:String, female:String, gender:int):String {
 
 //Isabella Gives Birth!
 public function isabellaGivesBirth():void {
-	spriteSelect(31);
+	spriteSelect(SpriteDb.s_isabella);
 	var babyGender:int = 0;
 	//Decide the gender (If Isabella is a cowmother, human offsprings will always be male. The rest is cowgirls.)
 	var babyGenderChooser:int = rand(100);

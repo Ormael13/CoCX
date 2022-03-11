@@ -4,6 +4,7 @@ import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 public class MinervaScene extends BaseContent implements TimeAwareInterface {
 
@@ -34,9 +35,9 @@ public class MinervaScene extends BaseContent implements TimeAwareInterface {
 		return 100;
 	}
 	public function minervaSprite():void {
-		if (flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] >= 10) spriteSelect(120);
-		else if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] >= 10) spriteSelect(121);
-		else spriteSelect(95);
+		if (flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] >= 10) spriteSelect(SpriteDb.s_minerva_pure);
+		else if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] >= 10) spriteSelect(SpriteDb.s_minerva_corrupt);
+		else spriteSelect(SpriteDb.s_minerva);
 	}
 
 	public function minervaRomanced():Boolean {
@@ -131,7 +132,7 @@ private function firstMinervaEncounter():void {
 	clearOutput();
 	outputText("Returning to the mountains, you begin to climb; the usual search for loot and, perhaps, some harpies driving your upward efforts.  Perhaps you'll run into");
 	//If Sophie Bimbo=0:
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] == 0 && !SceneLib.sophieFollowerScene.sophieFollower()) outputText(" that matronly harpy, Sophie");
+	if(flags[kFLAGS.MET_SOPHIE_COUNTER] > 0 && flags[kFLAGS.SOPHIE_BIMBO_ACCEPTED] == 0 && flags[kFLAGS.SOPHIE_DISABLED] == 0 && !SceneLib.sophieFollowerScene.sophieFollower()) outputText(" that matronly harpy, Sophie");
 	else outputText(" something interesting");
 	outputText(", or get some good plunder from some of the local beasts");
 	//if minotaur cum addict:

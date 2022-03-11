@@ -441,6 +441,7 @@ package classes.Scenes.NPCs
 			addButton(6, "Shirt", KonstantinCraftingSpiderSilkItems2, 5, null, null, undergarments.SSSHIRT.description);
 			addButton(7, "Panties", KonstantinCraftingSpiderSilkItems2, 6, null, null, undergarments.SSPANTY.description);
 			addButton(8, "Loincloth", KonstantinCraftingSpiderSilkItems2, 7, null, null, undergarments.SS_LOIN.description);
+			addButton(14, "Back", KonstantinMainCampMenu);
 		}
 		private function KonstantinCraftingSpiderSilkItems2(spidersilkType:int):void {
 			if (spidersilkType == 1 || spidersilkType == 2 || spidersilkType == 3) { //Armor or robes
@@ -525,6 +526,7 @@ package classes.Scenes.NPCs
 			addButton(6, "Vest", KonstantinCraftingDragonscaleItems2, 5, null, null, undergarments.DS_VEST.description);
 			addButton(7, "Thong", KonstantinCraftingDragonscaleItems2, 6, null, null, undergarments.DSTHONG.description);
 			addButton(8, "Loincloth", KonstantinCraftingDragonscaleItems2, 7, null, null, undergarments.DS_LOIN.description);
+			addButton(14, "Back", KonstantinMainCampMenu);
 		}
 		private function KonstantinCraftingDragonscaleItems2(dragonscaleType:int):void {
 			if (dragonscaleType == 1 || dragonscaleType == 2 || dragonscaleType == 3) { //Armor or robes
@@ -618,6 +620,7 @@ package classes.Scenes.NPCs
 			addButton(8, "Corset", KonstantinCraftingEbonbloomItems2, 9, null, null, undergarments.EW_CORS.description);
 			addButton(10, "R.Jock", KonstantinCraftingEbonbloomItems2, 10, null, null, undergarments.R_JOCK.description);
 			addButton(11, "R.Thong", KonstantinCraftingEbonbloomItems2, 11, null, null, undergarments.R_THONG.description);
+			addButton(14, "Back", KonstantinMainCampMenu);
 		}
 		private function KonstantinCraftingEbonbloomItems2(ebonbloomType:int):void {
 			if (ebonbloomType == 1 || ebonbloomType == 2 || ebonbloomType == 3 || ebonbloomType == 4) { //Armor or robes
@@ -744,6 +747,7 @@ package classes.Scenes.NPCs
 			addButton(1, "Sword", KonstantinCraftingYggdrasilItems2, 2, null, null, weapons.WDBLADE.description);
 			addButton(2, "Bow", KonstantinCraftingYggdrasilItems2, 3, null, null, weaponsrange.WARDBOW.description);
 			addButton(3, "Staff", KonstantinCraftingYggdrasilItems2, 4, null, null, weapons.WDSTAFF.description);
+			addButton(14, "Back", KonstantinMainCampMenu);
 		}
 		private function KonstantinCraftingYggdrasilItems2(yggdrasilType:int):void {
 			player.destroyItems(useables.WT_BRAN, 1);

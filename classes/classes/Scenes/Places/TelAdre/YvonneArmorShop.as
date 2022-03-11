@@ -4,11 +4,15 @@ import classes.CoC;
 import classes.ItemType;
 import classes.Items.Armor;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 public class YvonneArmorShop extends Shop {
     public function YvonneArmorShop() {
         story = baseStory.locate("YvonneArmorShop");
-        sprite = 64;
+    }
+
+    override public function sprite():void {
+        spriteSelect(SpriteDb.s_yvonne);
     }
 
     //-----------------
@@ -37,7 +41,7 @@ public class YvonneArmorShop extends Shop {
     }
     //[Flirt]
     private function yvonneFlirt():void {
-        spriteSelect(64);
+        spriteSelect(SpriteDb.s_yvonne);
         clearOutput();
         display("yvonneFlirt/intro");
         dynStats("lus", (10 + player.lib / 10));
@@ -59,7 +63,7 @@ public class YvonneArmorShop extends Shop {
 
     //[Fuck]
     private function fuckYvonneInZeBlacksmith():void {
-        spriteSelect(64);
+        spriteSelect(SpriteDb.s_yvonne);
         clearOutput();
         //X = cock that fits!
         var x:Number = player.cockThatFits(75);

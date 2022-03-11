@@ -4530,7 +4530,7 @@ use namespace CoC;
 			}
 			if (TopRace == "vampire") {
 				if (TopScore >= 6) {
-					if (TopScore >= 18) race = "pureblood vampire";
+					if (TopScore >= 20) race = "pureblood vampire";
 					else if (TopScore >= 10) race = "vampire";
 					else race = "dhampir";
 				}
@@ -8161,8 +8161,7 @@ use namespace CoC;
 			if (hasVagina() && biggestTitSize() >= 3)
 				frostWyrmCounter++;
 			if (lowerBody != LowerBody.FROSTWYRM)
-				frostWyrmCounter = 0;
-				frostWyrmCounter2 = 0;
+				frostWyrmCounter2 -= 3;
 			if (tallness > 120 && frostWyrmCounter >= 10)
 				frostWyrmCounter++;
 			if (hasPerk(PerkLib.DragonIceBreath))
@@ -10756,6 +10755,8 @@ use namespace CoC;
 				counter++;
 			if (eyes.colour == "blood-red")
 				counter++;
+			if (InCollection(skinTone, "pale"))
+				counter++;
 			if (counter >= 8) {
 				if (arms.type == Arms.HUMAN)
 					counter++;
@@ -10765,6 +10766,8 @@ use namespace CoC;
 			if (tail.type == Tail.NONE)
 				counter++;
 			if (horns.type == Horns.NONE)
+				counter++;
+			if (antennae.type == Antennae.NONE)
 				counter++;
 			if (hasPerk(MutationsLib.VampiricBloodsteam))
 				counter++;
@@ -11580,9 +11583,6 @@ use namespace CoC;
 
 		public function clothedOrNakedLower(clothedText:String, nakedText:String = ""):String
 		{
-            outputText(armorName);
-            outputText(lowerGarmentName);
-            outputText(isTaur().toString());
 			return (armorName != "gear" && !(armorName == "lethicite armor" && lowerGarmentName == "nothing") && !isTaur() ? clothedText : nakedText);
 		}
 
@@ -13482,12 +13482,12 @@ use namespace CoC;
 				maxLibCap2 += (10 + mod);
 			}
 			if (vampireScore() >= 6) {
-				if (vampireScore() >= 18) {
-					mod = 65;
+				if (vampireScore() >= 20) {
+					mod = 70;
 					maxStrCap2 += mod;
 					maxSpeCap2 += mod;
 					maxIntCap2 += mod;
-					maxLibCap2 += (10 + mod);
+					maxLibCap2 += (20 + mod);
 				} else if (vampireScore() >= 10) {
 					mod = 35;
 					maxStrCap2 += mod;
@@ -16007,4 +16007,4 @@ use namespace CoC;
 			}
 		}
 	}
-}
+}

@@ -8,7 +8,7 @@ package classes.Scenes.Areas.Forest
 	import classes.BodyParts.Horns;
 	import classes.BodyParts.Wings;
 	import classes.Scenes.NPCs.CelessScene;
-	import classes.display.SpriteDb;
+    import classes.display.SpriteDb;
 	import classes.CoC;
 
 public class NightmareScene extends BaseContent

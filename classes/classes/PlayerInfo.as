@@ -45,7 +45,7 @@ public class PlayerInfo extends BaseContent {
 	// STATS
 	//------------
 	public function displayStats():void {
-		spriteSelect(-1);
+		spriteSelect(null);
 		clearOutput();
 		displayHeader("General Stats");
 
@@ -379,7 +379,7 @@ public class PlayerInfo extends BaseContent {
 		statsMenu(4);
 	}
 	public function displayStatsCombat():void {
-		spriteSelect(-1);
+		spriteSelect(null);
 		clearOutput();
 		displayHeader("Combat Stats");
 		// Begin Combat Stats
@@ -540,7 +540,7 @@ public class PlayerInfo extends BaseContent {
 		statsMenu(6);
 	}
 	public function displayStatsNpcs():void {
-		spriteSelect(-1);
+		spriteSelect(null);
 		clearOutput();
 		displayHeader("NPC's Stats");
 
@@ -929,8 +929,8 @@ public class PlayerInfo extends BaseContent {
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 9) evangelineStats += "<b>Evangeline lvl:</b> 27\n";
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 8) evangelineStats += "<b>Evangeline lvl:</b> 24\n";
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 7) evangelineStats += "<b>Evangeline lvl:</b> 21\n";
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 6) evangelineStats += "<b>Evangeline lvl:</b> 18\n";
-			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 5) evangelineStats += "<b>Evangeline lvl:</b> 15\n";*/
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 6) evangelineStats += "<b>Evangeline lvl:</b> 18\n";*/
+			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 5) evangelineStats += "<b>Evangeline lvl:</b> 15\n";
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 4) evangelineStats += "<b>Evangeline lvl:</b> 12 (current max lvl)\n";
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 3) evangelineStats += "<b>Evangeline lvl:</b> 9\n";
 			if (flags[kFLAGS.EVANGELINE_LVL_UP] == 2) evangelineStats += "<b>Evangeline lvl:</b> 6\n";
@@ -1038,7 +1038,7 @@ public class PlayerInfo extends BaseContent {
 		statsMenu(7);
 	}
 	public function displayStatsChildren():void {
-		spriteSelect(-1);
+		spriteSelect(null);
 		clearOutput();
 		displayHeader("Children Stats");
 		// Begin Children Stats
@@ -1188,7 +1188,7 @@ public class PlayerInfo extends BaseContent {
 		statsMenu(8);
 	}
 	public function displayStatsmastery():void {
-		spriteSelect(-1);
+		spriteSelect(null);
 		clearOutput();
 		displayHeader("Mastery Stats");
 		// Begin Mastery Stats
@@ -1450,7 +1450,7 @@ public class PlayerInfo extends BaseContent {
 
 	//Sub-menus for limited levelling.
 	public function lvlUpFastSubMenu():void{
-		spriteSelect(-1);
+		spriteSelect(null);
 		outputText("Fast levelling, just keep clicking on the button to level up by that number. Or press LvlMax to just get all the levels.");
 		outputText("\n\nPressing \"Done\" will bring you to stat/perk allocation.");
 		menu();

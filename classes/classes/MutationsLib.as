@@ -759,8 +759,8 @@ public class MutationsLib
 					return player.beeScore() >= 4 || player.mantisScore() >= 4 || player.scorpionScore() >= 4 || player.spiderScore() >= 4 || player.cancerScore() >= 4 || player.atlachNachaScore() >= 17;
 				}, "Any insect race");
 				TwinHeart.requireAdaptationsMutationSlot().requireCustomFunction(function (player:Player):Boolean {
-					return player.centaurScore() >= 4 || player.unicornScore() >= 8 || player.sphinxScore() >= 15 || player.cancerScore() >= 8 || player.isTaur();
-				}, "Tauric or Unicorn race");
+					return player.centaurScore() >= 4 || player.unicornScore() >= 8 || player.sphinxScore() >= 15 || player.cancerScore() >= 8 || player.isTaur() || player.isDrider();
+				}, "Taur/Drider or Unicorn/Bicorn race");
 				VampiricBloodsteam.requireBloodsteamMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.hasStatusEffect(StatusEffects.VampireThirst);
 				}, "Vampire Thirst")
@@ -967,8 +967,8 @@ public class MutationsLib
 				TwinHeartPrimitive.requireLevel(30)
 						.requirePerk(TwinHeart)
 						.requireCustomFunction(function (player:Player):Boolean {
-							return player.centaurScore() >= 8 || player.unicornScore() >= 8 || player.sphinxScore() >= 16 || player.cancerScore() >= 8 || player.isTaur();
-						}, "Tauric or Unicorn race");
+							return player.centaurScore() >= 8 || player.unicornScore() >= 8 || player.sphinxScore() >= 16 || player.cancerScore() >= 8 || player.isTaur() || player.isDrider();
+						}, "Taur/Drider or Unicorn/Bicorn race");
 				VampiricBloodsteamPrimitive.requireLevel(30).requirePerk(VampiricBloodsteam).requireCustomFunction(function (player:Player):Boolean {
 					return player.hasStatusEffect(StatusEffects.VampireThirst);
 				}, "Vampire Thirst")
@@ -1159,8 +1159,8 @@ public class MutationsLib
 				TwinHeartEvolved.requireLevel(60)
 						.requirePerk(TwinHeartPrimitive)
 						.requireCustomFunction(function (player:Player):Boolean {
-							return player.centaurScore() >= 12 || player.unicornScore() >= 12 || player.sphinxScore() >= 17 || player.cancerScore() >= 12 || player.isTaur();
-						}, "Tauric or Unicorn race");
+							return player.centaurScore() >= 12 || player.unicornScore() >= 12 || player.sphinxScore() >= 17 || player.cancerScore() >= 12 || player.isTaur() || player.isDrider();
+						}, "Taur/Drider or Unicorn/Bicorn race");
 				VenomGlandsEvolved.requireLevel(60).requirePerk(VenomGlandsPrimitive).requireCustomFunction(function (player:Player):Boolean {
 					return player.spiderScore() >= 12 || player.atlachNachaScore() >= 19 || player.apophisScore() >= 23 || player.nagaScore() >= 8 || player.gorgonScore() >= 12 || player.vouivreScore() >= 12 || player.couatlScore() >= 12 || player.hydraScore() >= 12;
 				}, "Spider or any snake-like race");

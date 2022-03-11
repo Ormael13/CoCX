@@ -6,7 +6,7 @@ package classes.Scenes.Areas.Beach
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-import classes.display.SpriteDb;
+    import classes.display.SpriteDb;
 
 public class PinchousWaterwearAndTools extends BaseContent
 	{

@@ -17,7 +17,7 @@ package classes.Scenes.Places{
 	import classes.Items.Armors.Nothing;
 	import classes.Scenes.Areas.Forest.WoodElvesHuntingParty;
 	import classes.Scenes.SceneLib;
-import classes.display.SpriteDb;
+    import classes.display.SpriteDb;
 import classes.internals.SaveableState;
 	import classes.CoC;
 
@@ -196,24 +196,24 @@ import classes.internals.SaveableState;
 			if (player.hasCoat() || player.tailType != Tail.NONE || player.wings.type != Wings.NONE || player.legCount != 2) outputText("despite the radical changes your form is undergoing, ");
 			else outputText("Despite being violated in every hole you have, and some you don’t, ");
 			outputText("a wave of peace and well-being comes over you, dispelling your panic and all sense of urgency as it does. How can this be a violation when it feels so <b>good</b>? ");
-			if (player.cocks.length > 0){
+			if (player.cocks.length >= 1){
 				outputText("You sigh in pleasure as you feel a vine wrapping slowly about the base of your male organ");
-				if (player.cocks.length > 1) outputText("s");
+				if (player.cocks.length >= 2) outputText("s");
 				outputText(", and don’t even flinch as it pulls ");
 				if (player.cocks.length == 1) outputText("it ");
-				if (player.cocks.length > 1) outputText("them ");
+				if (player.cocks.length >= 2) outputText("them ");
 				outputText("off as easily as one might pluck a ripe fruit from a tree. You never needed ");
 				if (player.cocks.length == 1) outputText("it ");
-				if (player.cocks.length > 1) outputText("them ");
+				if (player.cocks.length >= 2) outputText("them ");
 				outputText("anyway, ridiculous, ugly thing");
-				if (player.cocks.length > 1) outputText("s");
+				if (player.cocks.length >= 2) outputText("s");
 				outputText("; you’re much better off without ");
 				if (player.cocks.length == 1) outputText("it.");
-				if (player.cocks.length > 1) outputText("them.");
+				if (player.cocks.length >= 2) outputText("them.");
 				if (!player.hasVagina()) {
 					outputText(" Instead you feel a rising sense of ecstatic rightness as a new slit forms where ");
 					if (player.cocks.length == 1) outputText("it");
-					if (player.cocks.length > 1) outputText("they");
+					if (player.cocks.length >= 2 ) outputText("they");
 					outputText(" once hideously stuck out of you. Ah, this is much more fitting! And <b>so</b> much more pleasurable!");
 				}
 			}
@@ -237,6 +237,9 @@ import classes.internals.SaveableState;
 			CoC.instance.transformations.HairSilky.applyEffect(false);
 			player.wings.type = Wings.NONE;
 			CoC.instance.transformations.EyesChangeColor(["light green"]).applyEffect(false);
+			if (player.skin.base.pattern != Skin.PATTERN_NONE) {
+				CoC.instance.transformations.SkinPatternNone.applyEffect(false);
+			}
 			player.skin.base.color = "light";
 			player.skinAdj = "flawless";
 			player.skinType = Skin.PLAIN;

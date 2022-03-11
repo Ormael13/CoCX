@@ -6,6 +6,7 @@ import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.UniqueSexScenes;
+import classes.display.SpriteDb;
 
 public class GoblinShamanScene extends BaseContent
 	{
@@ -185,7 +186,7 @@ public class GoblinShamanScene extends BaseContent
 //[WIN RAEPZ]
 		public function goblinShamanRapeIntro():void
 		{
-			spriteSelect(124);
+			spriteSelect(SpriteDb.s_goblinShaman);
 			clearOutput();
 			outputText("The shaman falls to her feet, smashing her titties against the ground. She looks up at you and sniffles.");
 			//If cant rape or breastfeed
@@ -279,7 +280,7 @@ public class GoblinShamanScene extends BaseContent
 		}
 		private function gobboButtSecks():void
 		{
-			spriteSelect(124);
+			spriteSelect(SpriteDb.s_goblinShaman);
 			var x:Number = player.cockThatFits(monster.analCapacity());
 			if (x < 0) x = 0;
 			clearOutput();
@@ -306,7 +307,7 @@ public class GoblinShamanScene extends BaseContent
 //[FEMSAUCE]
 		private function gobboGetsRapedFem():void
 		{
-			spriteSelect(124);
+			spriteSelect(SpriteDb.s_goblinShaman);
 			clearOutput();
 			if (player.isTaur()) {
 				outputText(images.showImage("goblin-win-female-taur-rapedfem"));
@@ -417,7 +418,7 @@ public class GoblinShamanScene extends BaseContent
 		{
 			var x:Number = player.biggestCockIndex();
 			clearOutput();
-			spriteSelect(124);
+			spriteSelect(SpriteDb.s_goblinShaman);
 			outputText(images.showImage("goblin-win-male-corruptedfuck"));
 			outputText("You begin to remove your [armor], looking down on your helpless would-be-attacker and soon-to-be victim while licking your lips hungrily. Your " + multiCockDescriptLight());
 			if (player.cockTotal() == 1) outputText(" is");
@@ -497,7 +498,7 @@ public class GoblinShamanScene extends BaseContent
 			clearOutput();
 			outputText(images.showImage("goblin-win-male-corruptedbj"));
 			var x:Number = player.biggestCockIndex();
-			spriteSelect(124);
+			spriteSelect(SpriteDb.s_goblinShaman);
 			outputText("You whip out your stiffening maleness, revealing its ");
 			if (player.cockArea(x) < 80) outputText("nearly ");
 			outputText(" absurd size to your victim.  The goblin-girl's eyes grow to the size of dinner plates in shock as she takes in the view.   Knowing you'll try regardless of the size-mismatch, she spreads her legs and settles herself more comfortably on the ground.\n\n");
@@ -531,7 +532,7 @@ public class GoblinShamanScene extends BaseContent
 //[DUDEGASM]
 		private function gobboGetsRapedMaleFits():void
 		{
-			spriteSelect(124);
+			spriteSelect(SpriteDb.s_goblinShaman);
 			var x:Number = player.cockThatFits(monster.vaginalCapacity());
 			if (x < 0) x = player.biggestCockIndex();
 			clearOutput();
@@ -612,7 +613,7 @@ public class GoblinShamanScene extends BaseContent
 //Spider goblin condom
 		private function goblinCondomed(mode:Number = 0):void
 		{
-			spriteSelect(124);
+			spriteSelect(SpriteDb.s_goblinShaman);
 			var x:Number = player.cockThatFits(monster.vaginalCapacity());
 			clearOutput();
 			outputText(images.showImage("goblin-win-male-goblincondomed"));

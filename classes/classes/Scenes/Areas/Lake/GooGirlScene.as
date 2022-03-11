@@ -9,6 +9,7 @@ import classes.Scenes.Areas.Beach.GooGirlBeach;
 import classes.Scenes.SceneLib;
 import classes.Scenes.UniqueSexScenes;
 import classes.internals.SaveableState;
+import classes.display.SpriteDb;
 
 public class GooGirlScene extends AbstractLakeContent
 	{
@@ -40,7 +41,7 @@ public class GooGirlScene extends AbstractLakeContent
 		public function encounterGooGirl():void
 		{
 			clearOutput();
-			spriteSelect(69);
+			spriteSelect(SpriteDb.s_googirlsprite);
 			GooLocation = "lake";
 			outputText("As you walk around the "+GooLocation+", you notice a pale red light pulsing in the ");
 			if (!flags[kFLAGS.FACTORY_SHUTDOWN] == 2) outputText("sapphire ");
@@ -58,7 +59,7 @@ public class GooGirlScene extends AbstractLakeContent
 		public function encounterGooGirlBeach():void
 		{
 			clearOutput();
-			spriteSelect(69);
+			spriteSelect(SpriteDb.s_googirlsprite);
 			GooLocation = "beach";
 			outputText("As you walk around the "+GooLocation+", you notice a pale red light pulsing in the waters. You pause, trying to figure out what the shape might be. Just under the surface of the seawater, there appears to be a fist-sized heart shedding a crimson glow. Leaning closer, you gaze down into your reflection only to find your face rising up with pursed lips, trying to kiss you! You jerk backwards and the pseudo-head quivers, resolving its face into a gooey-looking girl, her ");
 			outputText(gooColor() + " slime body sculpting itself into a humanoid shape. The girl curiously tilts her head to one side, as if trying to figure out why you're backing away, before she happily surges forward!");

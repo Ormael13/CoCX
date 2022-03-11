@@ -3,6 +3,7 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 public class MilkWaifu extends NPCAwareContent{
 
@@ -25,6 +26,7 @@ override public function milkSlave():Boolean {
 //Arriving at Camp
 public function arriveWithLacticWaifuAtCamp():void {
 	clearOutput();
+	spriteSelect(SpriteDb.s_milkgirl);
 	outputText("It's slow going, having to support your milky friend all the way back to camp, but after a few hours, you manage to make it home.  By the time you arrive, you see that the Sand Mother has kept her word, and a small part of the camp's perimeter has been cleared away, your belongings moved aside to make room for a large pool, its radius easily ten feet, buried in the hard-packed dirt of the wasteland.  A metallic brim surrounds the pool, just wide enough to sit or lie on with your [legs] dangling into the milky waters that will soon be filling it.");
 	
 	outputText("\n\nSeeing the pool, the milk girl gasps with glee, stumbling over to it before collapsing onto all fours, chest resting on her massive tits and ass up in the air, bare for all to see.  \"<i>Bath Slut milk time?</i>\" she asks, her bright brown eyes looking up at yours pleadingly.");
@@ -106,6 +108,7 @@ private function nameZeMilkBath():void
 
 public function ratducto():void {
 	clearOutput();
+	spriteSelect(SpriteDb.s_rathazul);
 	outputText("Looking up, you see the old rat alchemist Rathazul approaching, nose buried in an ancient-looking tome.  \"<i>Good news, [name]!</i>\" he calls, just before tripping over the prone milkmaid, going sprawling across the ground.");
 	
 	outputText("\n\n\"<i>Gah!  Help, I can't get up!</i>\" he shouts, flailing around until you rush over and pull him to his feet.");
@@ -132,6 +135,7 @@ public function ratducto():void {
 //Milky's Menu (Accessed from the FOLLOWERS tab)
 public function milkyMenu():void {
 	clearOutput();
+	spriteSelect(SpriteDb.s_milkgirl);
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] == 0)
 	{
 		outputText("You wander over to " + flags[kFLAGS.MILK_NAME] + "'s pool, and find the dusky girl sitting at its rim, ");

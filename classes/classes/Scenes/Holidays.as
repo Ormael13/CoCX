@@ -19,6 +19,7 @@ import classes.Scenes.NPCs.JojoScene;
 import classes.StatusEffects;
 import classes.VaginaClass;
 import classes.internals.Utils;
+import classes.display.SpriteDb;
 
 public class Holidays {
     public function Holidays() {
@@ -1882,7 +1883,7 @@ public class Holidays {
 
     public static function xmasBitchEncounter():void {
         EngineCore.clearOutput();
-        CoC.instance.spriteSelect(9);
+        CoC.instance.spriteSelect(SpriteDb.s_christmas_elf);
         EngineCore.outputText("Your sleep is disturbed by something repeatedly smacking into your side.  Groggily at first, you grumble and throw back your blanket.  Then you remember where you are, and snap to full wakefulness.  You launch onto your feet, bring up your fists, and stare bewildered at the sight in front of you.\n\n"
                 +"Standing there, innocent as can be, ");
         if (flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] == 0) EngineCore.outputText("is an elf.  She can't be more than four and a half feet tall, and though she has fairly womanly hips, her chest is nothing to speak of.  Her clothing is strange – a red two piece lined with some kind of white fur.  She has typically pointed ears, blond hair, and a red fur-lined cap topped with a white puffball. She's holding a large box in front of her and looking at you expectantly as you stare, dumbfounded.\n\n");
@@ -1908,7 +1909,7 @@ public class Holidays {
         }
         EngineCore.awardAchievement("Naughty or Nice", kACHIEVEMENTS.HOLIDAY_CHRISTMAS_I);
         EngineCore.outputText("You wonder out loud, \"<i>So this... present is mine?</i>\"\n\n");
-        if (player.cor >= 90 || JojoScene.monk >= 5 || player.hasStatusEffect(StatusEffects.Exgartuan) || SceneLib.amilyScene.amilyCorrupt() || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] > 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0) {
+        if (player.cor >= 90 || JojoScene.monk >= 5 || player.hasStatusEffect(StatusEffects.Exgartuan) || SceneLib.amilyScene.amilyCorrupt() || flags[kFLAGS.SOPHIE_DISABLED] > 0 || flags[kFLAGS.SOPHIE_BIMBO_ACCEPTED] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0) {
             EngineCore.outputText("She nods, bouncing up and down in excitement and flushing slightly, \"<i>Yup, just tear the lid off and get your gift!</i>\"\n\n");
             if (flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] > 0) EngineCore.outputText("Here we go again...\n\n");
             //[Open Present] [Unwrap Elf] [Decline]
@@ -1926,7 +1927,7 @@ public class Holidays {
 
         //[Decline]
         function declineXmasPresent():void {
-            CoC.instance.spriteSelect(9);
+            CoC.instance.spriteSelect(SpriteDb.s_christmas_elf);
             EngineCore.clearOutput();
             EngineCore.outputText("You shake your head 'no', and inform the elf that you'll have nothing to do with her 'gifts' or 'surprises'.  She looks on the verge of tears as she whines, \"<i>I'm going to get reamed for this!</i>\"\n\n"
                     +"Before you can react, she sprints off into the darkness.");
@@ -1936,10 +1937,10 @@ public class Holidays {
 
         //[Open Present]
         function openXmasPresent():void {
-            CoC.instance.spriteSelect(9);
+            CoC.instance.spriteSelect(SpriteDb.s_christmas_elf);
             EngineCore.clearOutput();
             EngineCore.outputText("You easily rip through the ribbons holding the box together and pull off the top.   You gasp in ");
-            if (player.cor >= 90 || JojoScene.monk >= 5 || player.hasStatusEffect(StatusEffects.Exgartuan) || SceneLib.amilyScene.amilyCorrupt() || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] > 0 || flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0) {
+            if (player.cor >= 90 || JojoScene.monk >= 5 || player.hasStatusEffect(StatusEffects.Exgartuan) || SceneLib.amilyScene.amilyCorrupt() || flags[kFLAGS.SOPHIE_DISABLED] > 0 || flags[kFLAGS.SOPHIE_BIMBO_ACCEPTED] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0) {
                 //[Bad Present]
                 EngineCore.outputText("shock at the box's contents – a nine inch cock with damn near a dozen buzzing, elliptical devices taped to it.  A pair of coal lumps rattles around underneath it, positioned as if they were the dick's testicles.\n\n"
                         +"Before you can utter a single word of confusion or protest, the elf moans and the cock erupts, spurting a rope of cum into your hair.  The next blast takes you across the nose, then on your lips, then your chin, and finally onto your [allbreasts].  Shocked and dripping, you stand dumbfounded as the elf plants a kiss on your lips, tears off the box, and runs away with her cock flopping and buzzing in time with each step.  There's no way to catch her in this darkness.\n\n"
@@ -1971,7 +1972,7 @@ public class Holidays {
 
         //[Unwrap the elf]
         function unwrapElfyPresent():void {
-            CoC.instance.spriteSelect(9);
+            CoC.instance.spriteSelect(SpriteDb.s_christmas_elf);
             EngineCore.clearOutput();
             EngineCore.outputText("The elf tosses the present to the side and saunters up to you, her hips swaying sensually.  She ");
             if (player.tallness > 60) EngineCore.outputText("reaches up and presses herself against you seductively, caressing your body.");
