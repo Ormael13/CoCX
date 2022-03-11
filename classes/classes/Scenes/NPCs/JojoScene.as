@@ -380,8 +380,8 @@ public function useTentacleJojo():void {
 			//(1dick+balls =
 			if(player.balls > 0) {
 				outputText("One of them lashes forwards, ");
-				if(player.cockArea(0) > 60) outputText("laboriously stretching around");
-				else if(player.cockArea(0) >= 20) outputText("engulfing");
+				if(player.biggestCockArea() > 60) outputText("laboriously stretching around");
+				else if(player.biggestCockArea() >= 20) outputText("engulfing");
 				else outputText("easily swallowing");
 				outputText(" your [cock] in a tight vise of pleasure.  The other two tentacles slide under, each taking a " + ballDescript() + " partially inside their 'mouths' and massaging them softly.");
 				outputText("\n\n");
@@ -389,8 +389,8 @@ public function useTentacleJojo():void {
 			//(1 dick no balls =
 			else {
 				outputText("One of them lashes forwards, ");
-				if(player.cockArea(0) > 60) outputText("laboriously stretching around");
-				else if(player.cockArea(0) >= 20) outputText("engulfing");
+				if(player.biggestCockArea() > 60) outputText("laboriously stretching around");
+				else if(player.biggestCockArea() >= 20) outputText("engulfing");
 				else outputText("easily swallowing");
 				outputText(" your [cock] in a tight vise of pleasure.  The other two tentacles slide under, ");
 				if(!player.hasVagina()) outputText("rubbing back and forth along your taint and smearing you with their slime.");
@@ -407,16 +407,16 @@ public function useTentacleJojo():void {
 			//balls)
 			if(player.balls > 0) {
 				outputText("Two of them lash forward, ");
-				if(player.cockArea(0) > 60) outputText("laboriously stretching around");
-				else if(player.cockArea(0) >= 20) outputText("engulfing");
+				if(player.biggestCockArea() > 60) outputText("laboriously stretching around");
+				else if(player.biggestCockArea() >= 20) outputText("engulfing");
 				else outputText("easily swallowing");
 				outputText(" your [cocks] in tight vises of pleasure.  The remaining tentacle slides underneath, alternatively taking each of your " + ballsDescript() + " partway into its 'mouth' and massaging them with its thousands of wriggling stimulators.\n\n");
 			}
 			//(2 dicks no balls)
 			else {
 				outputText("Two of them lash forward, ");
-				if(player.cockArea(0) > 60) outputText("laboriously stretching around");
-				else if(player.cockArea(0) >= 20) outputText("engulfing");
+				if(player.biggestCockArea() > 60) outputText("laboriously stretching around");
+				else if(player.biggestCockArea() >= 20) outputText("engulfing");
 				else outputText("easily swallowing");
 				outputText(" your [cocks] in tight vises of pleasure.  The remaining tentacle slides underneath, seeking ");
 				if(player.hasVagina()) {
@@ -431,8 +431,8 @@ public function useTentacleJojo():void {
 		//(3 dicks)
 		if(player.cockTotal() >= 3) {
 			outputText("All three of them lash forward, ");
-			if(player.cockArea(0) > 60) outputText("laboriously working to swallow");
-			else if(player.cockArea(0) >= 20) outputText("engulfing");
+			if(player.biggestCockArea() > 60) outputText("laboriously working to swallow");
+			else if(player.biggestCockArea() >= 20) outputText("engulfing");
 			else outputText("easily swallowing");
 			outputText(" your [cocks] in tight vises of pleasure.  The sensation is overwhelmingly pleasurable, like having three cocks being licked and sucked by a thousand tongues.");
 			//(if extra:

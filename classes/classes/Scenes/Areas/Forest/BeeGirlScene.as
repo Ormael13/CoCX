@@ -89,7 +89,7 @@ public class BeeGirlScene extends BaseContent
 				return;
 			}
 			var isBeeMorph:Boolean = player.race() == "bee-morph";
-			if (player.hasCock() && (player.cockArea(0) >= 50 || player.cocks[0].cockType == CockTypesEnum.BEE || isBeeMorph)) {
+			if (player.hasCock() && (player.biggestCockArea() >= 50 || player.cocks[0].cockType == CockTypesEnum.BEE || isBeeMorph)) {
 				outputText(" in the light.\n\n");
 				beeEncounterAsBeeMorphMaleOrGiantCock(isBeeMorph);
 			}
@@ -1792,7 +1792,7 @@ public class BeeGirlScene extends BaseContent
 			else if (select == 1) {
 				outputText("Seeing the girl's resistance end in an eye-rolling gasp, you decide to get in on the fun too.  With some difficulty you unfasten and shed the bottoms of your [armor] with your one free hand and maneuver your [cock] to her now-gushing honeypot.  Considering there's enough foreplay going on with her ovipositor to wet her enough for a minotaur, you unceremoniously slam your [cock] into her.");
 				//[(if dicksize>beevagdepth)
-				if (player.cockArea(0) > monster.vaginalCapacity()) outputText("  The bee-girl barely winces as the head of your shaft bumps up painfully against her cervix, quickly returning to a rictus of ecstasy as you continue jerking her ovipositor off with your now-sticky hand.");
+				if (player.biggestCockArea() > monster.vaginalCapacity()) outputText("  The bee-girl barely winces as the head of your shaft bumps up painfully against her cervix, quickly returning to a rictus of ecstasy as you continue jerking her ovipositor off with your now-sticky hand.");
 				outputText("  You work up a solid rhythm of fucking the poor girl's sopping snatch and tugging on the grotesque black shaft, never taking your eyes off the bulges forming at the base of her tumescent organ.  Soon you see the telltale bumps of eggs starting to slide into position for a deposit and you grip down harder while jerking the bee-girl off to build up an even bigger load.  Despite her whimpering, she convulses in orgasm from the dual stimulation and her body obliges you, sending up another batch of ready eggs.  The increased pressure forces a squirt of her nectar through despite your tight grip, shooting it nearly a foot in the air before it falls back down and wets the soft fuzz of her abdomen.\n\n");
 			}
 			//(if vagina)
