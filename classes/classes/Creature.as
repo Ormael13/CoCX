@@ -1021,7 +1021,7 @@ public class Creature extends Utils
 		}
 
 		public function get coatColor():String {
-			if (!skin.hasCoat()) return hairColor;
+			//if (!skin.hasCoat()) return hairColor;
 			return skin.coat.color;
 		}
 		public function get coatColor2():String {

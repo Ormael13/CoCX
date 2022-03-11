@@ -31,6 +31,8 @@ public class SkinLayer extends BodyPart {
 		_color2 = value;
 	}
 	public function defaultDesc():String {
+        //if it throws an error hear, it means Svalkash fucked up again.
+        // Add the check like "if (Skin.SkinTypes[type])" then to check for undefined        
 		return Skin.SkinTypes[type].name || "skin";
 	}
 	public function defaultAdj():String {
@@ -82,9 +84,9 @@ public class SkinLayer extends BodyPart {
 	}
 	override public function restore(keepColor:Boolean = true):void {
 		super.restore(keepColor);
-		if (!keepColor) color = "no";
+		if (!keepColor) color = "";
 		adj  = "";
-		desc = "skin";
+		desc = "";
 	}
 	public function SkinLayer(skin:Skin) {
 		super(skin.creature, ["adj", "desc", "color", "color2", "pattern"]);
