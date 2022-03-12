@@ -541,7 +541,6 @@ public class Skin extends SaveableBodyPart {
 			case COVERAGE_LOW:
 				return inBase;
 			case COVERAGE_MEDIUM:
-				return inBase + " and " + inCoat;
 			case COVERAGE_HIGH:
 			case COVERAGE_COMPLETE:
 			default:
