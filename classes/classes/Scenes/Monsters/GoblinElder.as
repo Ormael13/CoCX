@@ -282,7 +282,7 @@ public class GoblinElder extends Goblin
 			}//level up giving 2x all growns and so follow next level ups's as long each npc break lvl 100 (also makes npc use new better gear)
 			this.a = "the ";
 			this.short = "goblin elder";
-			if (flags[kFLAGS.GOBLIN_ELDER_TALK_COUNTER] > 0) {
+			if (flags[kFLAGS.PRISCILLA_TALK_COUNTER] > 0) {
 				a = "";
 				short = "Priscilla";
 			}
