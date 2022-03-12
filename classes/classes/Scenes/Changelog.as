@@ -188,11 +188,16 @@ package classes.Scenes
 			outputText("-New melee weapon (by Lady Aeducan): Moonlight Greatsword - buyable at Kaiba shop. Cost 3000 gems. Base atk is 25, it's Large type weapon, dealing magical dmg instead of physical, using charge weapon will give 2x larger bonus and can use range attack in case there is no range weapon equipped.\n");
 			outputText("-Arcane Archer Elemental Arrows can be now enhanced with water, wind, earth dmg as long PC learn matching grey spell.\n");
 			outputText("-Convergence perk effect slight change - for single target will hit 2x more (it would mutliply any cases of multicast/omnicast), increase aoe grey spells dmg against smaller (+100%) and larger groups (+50%). Also it effect would not be disabling offensive staff channeling effect.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Twin Heart can be gained by drider PC's too.\n");
+			outputText("-New Grey Spell: Acid Spray - learned from Grey Book. Cost 40 mana and deal acid dmg and apply DoT (similar to acid spit/hydra breath ones but ~half weaker). Have cooldown of 3 turns. (spell text by Canadian Snas)\n");
+			outputText("-New Grey Spell: Corrosive Wave - learned from Grey Book. Cost 200 mana and deal AoE acid dmg. Have cooldown of 3 turns and apply DoT (similar to acid spit/hydra breath ones but ~half weaker). (spell text by Canadian Snas)\n");
+			outputText("-Added 'Back' buttons for Konstantin. (Svalkash)\n");
+			outputText("-Rearranged dragon face mutations - fangs first, then full muzzle. Just like the scales. (Svalkash)\n");
+			outputText("-Fixed weird skinCoat inheritance - now the coat inherits skin/hair type only once and needs to be dyed separately afterwards. Non-fur coatings inherit the skin color. (Svalkash)\n");
+			outputText("-Added a new setting for hiding the armor in character viewer entirely. You can disable it if you don't like the way your armor looks, or if your stance is not displayed correctly. (Svalkash)\n");
+			outputText("-Imported and updates more sprites from UEE. Even the best girl! (Svalkash)\n");
+			outputText("-Liadri minor changes to vampire TF and score.\n");
+			outputText("-When using druid fusion can't pick epic elemental that is part of fusion as the one to attack enemy as part of elemental minons attack.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -203,15 +208,10 @@ package classes.Scenes
 			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Fixed Bugs: One of Ingnam Tavern food options having wrong price listed on menu, unique sex scenes accesable during Druid fusion, Wisp potentialy softlocking Mino King fight, selfsucking in masturbation menu restoring max 100 hunger, Swift Casting not usable when having Giant's Grip and Large weapon, White or Black magic buffs autocastable when having perk that disable use of white/black magic, ");
 			outputText("putting B. Sword after picking Ecalibur disabling option to pick sword at Temple, all 3 Hall of Blade soulskill variants dealing phys not magical dmg, Lightning Claw lowering phys dmg when used as part of feral style attack, using goblin Cum Reservoir not empting it out, Yuki Onna Transform scene not making sure to give proper genitalia setup, Archer's Stamina perks not giving fatigue related to ");
 			outputText("current Speed value, Half-Frost Wyrm racial bonus been attained super easy, Mysterious Seed not causing for misc items menu appear as inventory submenu, unable to add arcane circuits to 5th arcane circle, doppleganger fight won't drag unnecessary due to getting messly 1k lust after 5th round in fight, Gazer Eyes mutation not keeping True seeing perk, Magical Eye Drops as item find in Caves instead ");
-			outputText("of Eye Drops\n");/*ostatni punkt changelogu
+			outputText("of Eye Drops, raiju tf removing/humanizing raiju paws, picking none elemental during minions turn skipping many following up phases of the turn\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD

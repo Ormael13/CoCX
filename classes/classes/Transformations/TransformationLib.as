@@ -529,10 +529,8 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
         if (!options) options = {};
         if (!options.adj) options.adj = "";
         if (!options.pattern) options.pattern == "";
-        outputText(""+player.coatColor);
-        outputText(""+player.skinType);
         if (!options.color && !options.colors)
-            if (player.coatColor == "" || player.coatType() == -1 || (!player.skin.isHairy() && hairy) || (player.skin.isHairy() && !hairy)) {
+            if (player.coatColor == "" || (!player.skin.isHairy() && hairy) || (player.skin.isHairy() && !hairy)) {
                 //WHY THE F*** DOESN'T THIS TRASH LANGUAGE HAVE LOGICAL XOR?!
                 //the third condition - if need fur, and skin is NOT hairy, reset to hair color, and vice versa
                 options.color = hairy ? player.hairColor : player.skin.base.color;

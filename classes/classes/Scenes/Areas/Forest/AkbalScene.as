@@ -414,12 +414,12 @@ public class AkbalScene extends BaseContent
 				outputText(images.showImage("akbal-deepwoods-male-rapeakbal"));
 				outputText("Akbal grunts as you smash his face into the ground.  At your command he raises his hind quarters, allowing you a perfect view of his tight pucker.  From the looks of it, his tightly sealed rim would look at home on a virgin.\n\n");
 				//[Small penis (7 inches or less)]
-				if (player.cockArea(0) < 13)
+				if (player.biggestCockArea() < 13)
 				{
 					outputText("You first poke it with your finger, causing Akbal to flinch at the sensation.  Taking your [cock] in hand, you shove it in without hesitation or mercy.  The virgin-like hole clamps shut and Akbal hisses in pain as you force him open.  In no time at all you're sawing your [cock] in and out of the demon's tight hole, relishing in the way it quivers and squirms around your embedded [cock].\n\n");
 				}
 				//[Medium penis (8-12 inches)]
-				else if (player.cockArea(0) < 25)
+				else if (player.biggestCockArea() < 25)
 				{
 					outputText("A light tap of your finger causes the tiny hole to constrict and Akbal's entire body flinches in fear.  You grab your [cock] with a cruel smile.  As you shove yourself into his tight pucker, you aren't surprised to find that your [cock] is barely able to breach the tightly sealed walls.  Grunting with effort you slowly inch forward, Akbal howling and squirming beneath you as he is taken without regard for his own pleasure.\n\n");
 					outputText("After a dozen achingly slow thrusts, Akbal's asshole begins to loosen and you start sawing your [cock] in and out of his pucker with force. The demon cat's howls fluctuate between yelps of pain and moans of pleasure.\n\n");

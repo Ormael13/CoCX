@@ -55,7 +55,8 @@ use namespace CoC;
 		//-PC has achieved \"<i>Fuckbuddy</i>\" status with Helia.
 		//-HelAffection >= 70
 		public function heliaDiscovery():void {
-			//clearOutput();
+			clearOutput();
+            SceneLib.helScene.helSprite();
 			//(Scene proc's the first time all requirements are met and the player chooses [Sleep] at camp.)
 			outputText("Before bedding down for the night, you make one last check of your camp's perimeter, making sure all your traps and defenses are still in place and primed in the event of a surprise nighttime assault.  As you come to the outermost parts of your makeshift camp, you notice a cloaked stranger approaching out of the evening darkness.  You're about to ready your [weapon], but you recognize the shapely figure of Hel the salamander walking towards you, hips a-sway underneath her loose traveling cloak.");
 
@@ -140,6 +141,7 @@ use namespace CoC;
 		}
 			
 		public function morningAfterHeliaDungeonAgreements():void {
+            SceneLib.helScene.helSprite();
 			outputText("\nWhen your eyes flicker open at the crack of dawn, you're pleased to see Helia is lying on your chest, ");
 			//[If PC has >C Cups, \"<i>
 			if(player.biggestTitSize() > 3) outputText("her head nestled between your soft tits and ");
@@ -171,6 +173,7 @@ use namespace CoC;
 		}
 		public function goToHeliaDungeon2():void {
 			clearOutput();
+            SceneLib.helScene.helSprite();
 			outputText(images.showImage("dungeon-entrance-phoenixtower"));
 			outputText("Within the hour, you and Helia are hiking up the narrow ledges and crevices of the high mountains, slowly but steadily climbing toward a snow-capped peak.  Hel certainly seems to know where she's going - she blazes a certain and steady trail, as if she knew every path and shortcut up the mountain.  By the time you near the peak, you're convinced she's been up here before - many times, even.");
 			outputText("\n\nEventually, you see the crest of a squat, thick stone tower on the mountainside.  Hel easily guides you toward it, giving you a helping hand over an unusually wide gorge that would have kept most stray minotaurs well away from the solitary spire.  As you scramble onto the tower's plateau, Hel grabs your shoulders and pins you to the ground - just in time to avoid the gaze of a low-flying harpy.");
@@ -426,6 +429,7 @@ use namespace CoC;
 					if (flags[kFLAGS.VALERIA_FOUND_IN_GLACIAL_RIFT] == 0) inventory.takeItem(item, roomGuardHall);
 					else inventory.takeItem(item, camp.returnToCampUseOneHour);
 				}
+                classes.CoC.instance.mainViewManager.updateCharviewIfNeeded();
 			}
 			else{ //Needs a better explanation, cause why can't jiangshi wear armour again?
 				outputText("\nYou try and put the armour on, but as you are a Jiangshi, you are unable to. Instead you tell her the directions to your camp, and ask her to meet you there instead.");
@@ -908,6 +912,7 @@ use namespace CoC;
 		//Throne Room -- [Helia]
 		public function HeliaThroneRoom():void {
 			clearOutput();
+            SceneLib.helScene.helSprite();
 			menu();
 			outputText("You turn your attentions to the salamander, who is currently pinning down the harpy bitch to prevent her from flying off or doing something drastic.");
 			outputText("\n\n\"<i>Hey, [name],</i>\" Hel says as you approach.  She grabs you roughly by the [armor] and pulls you into a long kiss, only breaking it to wrap her arms and tail around you.  \"<i>Thank you, lover.  From the bottom of my heart.  I couldn't have done it without you.</i>\"");
@@ -1100,7 +1105,7 @@ use namespace CoC;
 			outputText("\n\nYou give Hel a little wink, and though occupied by forcing the harpy to eat her out, she just manages to return it.  With that, you press the head of your [cock] against the harpie's sphincter.  Though much of your length is eaten up by her tremendous ass cheeks, her anus still clenches frightfully at your insistent prodding.  Scowling, you rear your hand back and give the harpy bitch a forceful slap on the butt.");
 			outputText("\n\nThough her pillowy cheeks absorb much of the blow, she still lets out a pitiful yelp into Hel's pussy, and loosens up for a split second.  You plunge your shaft in, grunting at the incredible tightness of her anal passage.  She must have been a virgin back here before you took her; she screeches and writhes as your force your cock into her immensely tight bumhole, fighting for every inch you can stuff her with.");
 			outputText("\n\nYou swat the harpy again to shut her up, but all that does is make her vice-like ass squeeze on your cock, painfully compressing the head.  You growl in pain, and in revenge slam yourself into her ");
-			if(player.cockArea(0) < 100) outputText("until your hips sink into her pillowy ass");
+			if(player.biggestCockArea() < 100) outputText("until your hips sink into her pillowy ass");
 			else outputText("until your massive [cock] can go no further inside her");
 			outputText(".  Sunk in as far as you'll go, you leave your cock where it is and instead give the broodmother a hard slap.  She screeches and clamps down, wringing your [cock] hard.  But it's more pleasurable this time, now that she's nice and stretched by your anal intruder.");
 			outputText("\n\nYou give her another swat, and another, spanking the harpy bitch until she's outright milking your [cock] inside her.  Laughing, Hel starts telling the queen what a good slut she is, taking your [cock] up her ass and squeezing it like a whore as she tongue-fucks another woman.  The queen tries to protest, but you give her another hard slap to teach her some manners.");
@@ -1125,7 +1130,7 @@ use namespace CoC;
 			outputText("\n\nFinally, you feel her slick walls around your [cock]. The queen shudders, but now seeing that you mean to pump her full of your seed, visibly relaxes. Still, she's just too loose to give you the pleasure you're seeking...");
 
 			outputText("\n\nA wicked grin spreads across your face.  You reach forward and grab Hel's tail, wincing at its heat, and drag it back between the Harpy Queen's loins.  Hel looks at you over her shoulder and, grinning, takes over for you.  You brace yourself as her prehensile tail slithers back and, curling once around your [cock], slips inside the queen with you.  You and the broodmother both gasp at once as her burning-hot tail crawls along your cock's shaft and into her gaping cunt until the harpy lets out a little scream into Hel's own crotch.  You guess the salamander found her womb and is wriggling her tail into it.");
-			if(player.cockArea(0) < 48) outputText("  Not to be outdone, you slam your hips forward, ramming your [cock] into the queen's depths until you catch up with Hel, pounding the entrance to her womb.");
+			if(player.biggestCockArea() < 48) outputText("  Not to be outdone, you slam your hips forward, ramming your [cock] into the queen's depths until you catch up with Hel, pounding the entrance to her womb.");
 			outputText("\n\nNow that you have a second shaft inside the harpy's birth canal, it seems a lot less roomy. You start to piston your hips into the queen bitch; your shaft runs along three slick walls and Hel's hot tail with each thrust, leaving your [cock] feeling like it's in a liquid inferno, and it feels wonderful.  You start to fuck the queen faster, already feeling your own orgasm rising.  Her juices spill freely from her loose cunt, pooling between her thighs as you and Hel fill her utterly, giving her what's probably the first satisfying fuck she's been able to get in years.");
 			outputText("\n\nYou aren't surprised when the harpy gets off, rolling her head back and screeching as she climaxes. Laughing, Hel starts to thrash her tail around inside her, nearly managing to wrap it around your [cock] inside her.  With the sudden contractions and extra motion around your cock, you aren't able to last any longer; ");
 			if(player.cumQ() < 300) {

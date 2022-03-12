@@ -1012,7 +1012,7 @@ public class Holidays {
                     +"\n\nSeeing that you're not angry with her, she bounds over with a flutter of her seemingly useless wings, plopping into your lap with a happy cry of \"<i>Gobble!</i>\" You rustle her feathers playfully as the turkey-girl nestles in, pressing her massive bust tight to your chest.  Damn, those tits of hers are gargantuan, like they haven't been milked since you gave her a good spit-roasting last year.  You can practically hear the gravy sloshing around in them, just waiting to spill out and drench her again.  You lick your lips at the thought, your hands wandering up to the clasps of your [armor] to pull it free."
                     +"\n\n\"<i>Gobble?</i>\" Gobbles asks cheerily, big blue eyes staring intently at your crotch."
                     +"\n\n\"<i>Gobble,</i>\" you answer, pushing her head down toward your [cock].  She giggles giddily as you free your prick, already hard enough to bop her on the nose as she buries her face in your groin.  The turkey takes a deep breath, wallowing in the potent musk of your [cocks], venturing to lick along the side of your shaft.  You let out a soft moan, stroking her auburn locks as the turkey happily suckles on your prick, taking the head ");
-            if (player.cockArea(0) <= 60) EngineCore.outputText("and down to the base");
+            if (player.biggestCockArea() <= 60) EngineCore.outputText("and down to the base");
             else EngineCore.outputText("and swallowing your shaft until her throat is bulging with your massive manhood");
             EngineCore.outputText(".  She bobs up and down your length, hefting up her huge rack when she's at the peak to rub your sensitive underside, trying to titfuck you but just too damn big to get them into the action.  You suppose you'll have to take care of that...");
             EngineCore.menu();
@@ -1081,7 +1081,7 @@ public class Holidays {
             if (player.cockTotal() > 1) EngineCore.outputText("s");
             EngineCore.outputText(", drenching your [hips] and [legs] in creamy girl-spunk, tinged pink by the poison you fist-fucked up her cunt."
                     +"\n\nThe squawking turkey seems to be depthless, easily swallowing up every inch of your [cocks] until ");
-            if (player.cockArea(0) >= 50) {
+            if (player.biggestCockArea() >= 50) {
                 EngineCore.outputText("her stomach is bulging obscenely with the sheer volume of cockflesh rammed up her cunt");
                 if (player.cockTotal() > 1) EngineCore.outputText("and ass");
             }
@@ -2006,7 +2006,7 @@ public class Holidays {
 
         function dickXmasElfGo():void {
             //(Dickfuck)
-            if (player.cockArea(0) < 80) {
+            if (player.biggestCockArea() < 80) {
                 EngineCore.outputText("She pushes you down onto your bedroll and whispers, \"<i>Time to enjoy your present.</i>\"\n\n"
                         +"She mounts you without pretense, straddling and inserting your [cock] in one smooth motion.  The sudden change from cool, night air to hot, tight pussy sends shockwaves of pleasure into your skull.  You master yourself before your eyes roll the whole way back and close your mouth before you start drooling.   Her vise-like tightness is inhuman, but somehow not so tight as to be uncomfortable.   The internal muscles clench and squeeze around you with an uncommon degree of control.  She's so hot, wet, and tight that you shiver.  You start rocking underneath her, giving in completely to the pleasure of her hole.\n\n"
                         +"You grunt, pistoning into her over and over.  She clears her throat as she's bouncing atop of you, and you look back up, suddenly reminded that there's more to the world than the cunt milking your [cock].  The elf explains, \"<i>Don't be ashamed.  We elves have magical cunts.  Once something is inside it'll feel so good that it never wants to leave.  Judging from the look on your face I don't think you ever want to leave, do you?  I'm the best present you've ever had, aren't I?  Go ahead, cum for me, show me what a great gift I am.</i>\"\n\n"

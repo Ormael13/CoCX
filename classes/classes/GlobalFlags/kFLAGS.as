@@ -878,7 +878,7 @@ public static const MILK_NAME:int                                               
 public static const MILK_SIZE:int                                                   =  870; //
 public static const MET_MILK_SLAVE:int                                              =  871; //
 public static const COUNTDOWN_TO_NIGHT_RAPE:int                                     =  872; //
-public static const PHYLLA_CAPACITY:int                                             =  873; //
+public static const PHYLLA_MAXLEN:int                                             =  873; //
 public static const ANT_KIDS:int                                                    =  874; //
 public static const ANT_WAIFU:int                                                   =  875; //
 public static const PHYLLA_STAY_HOME:int                                            =  876; //
@@ -2120,11 +2120,11 @@ public static const BENOIT_PISTOL_BOUGHT:int                                    
 public static const FLINTLOCK_PISTOL_AMMO:int                                       = 2112;
 public static const BENOIT_CLOCK_BOUGHT:int                                         = 2113;
 public static const BENOIT_CLOCK_ALARM:int                                          = 2114;
-public static const GOBLIN_ELDER_GRATEFUL_OVER_LETHICE_DEFEAT:int                   = 2115;
+public static const PRISCILLA_GRATEFUL_OVER_LETHICE_DEFEAT:int                   = 2115;
 public static const MET_LIZAN_FIRST_TIME:int                                        = 2116;
 public static const TIMES_ENCOUNTERED_GOBLIN_WARRIOR:int                            = 2117;
 public static const TIMES_ENCOUNTERED_GOBLIN_SHAMAN:int                             = 2118;
-public static const TIMES_ENCOUNTERED_GOBLIN_ELDER:int                              = 2119;
+public static const TIMES_ENCOUNTERED_PRISCILLA:int                              = 2119;
 public static const TIMES_ENCOUNTERED_GOBLIN_QUEEN:int                              = 2120;
 public static const TIMES_ENCOUNTERED_IMP_WARLORD:int                               = 2121;
 public static const TIMES_ENCOUNTERED_IMP_OVERLORD:int                              = 2122;
@@ -2216,7 +2216,7 @@ public static const EMBER_MORNING:int                                           
 public static const BASILISK_RESISTANCE_TRACKER:int                                 = 2208;
 public static const MINOTAUR_CUM_RESISTANCE_TRACKER:int                             = 2209;
 public static const DLC_APRIL_FOOLS:int                                             = 2210;
-public static const GOBLIN_ELDER_TALK_COUNTER:int                                   = 2211;
+public static const PRISCILLA_TALK_COUNTER:int                                   = 2211;
 public static const ISABELLA_POTENCY_STATE:int                                      = 2212;
 public static const ISABELLA_COWMOTHER:int                                          = 2213; //0.5 means prompt happened. 1 indicates she can give birth to cowgirls.
 public static const ISABELLA_PREGNANCY_TYPE:int                                     = 2214;

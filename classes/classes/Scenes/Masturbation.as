@@ -1312,7 +1312,7 @@ public class Masturbation extends BaseContent {
 				}
 			}
 			//Round and compare cock thickness to vag looseness
-			if (Math.round(player.cockArea(0)) >= player.vaginalCapacity()) {
+			if (Math.round(player.biggestCockArea()) >= player.vaginalCapacity()) {
 				//Different noises based on sensitivity
 				if (player.sens < 45)
 					outputText("ou grunt with exertion as you attempt to stuff your [cock] into ");
@@ -1327,7 +1327,7 @@ public class Masturbation extends BaseContent {
 				else outputText("the gaping fuck-mouth of your inhuman nipple-cunt. ");
 				//Compare cockthickness and vaglooseness more specifically
 				//if it barely fits
-				if (Math.round(player.cockArea(0)) == player.vaginalCapacity()) {
+				if (Math.round(player.biggestCockArea()) == player.vaginalCapacity()) {
 					if (player.averageVaginalLooseness() < 2)
 						outputText("Your poor, tortured nipple is barely up to the task of accepting the [cock], but accept it it does. ");
 					else if (player.averageVaginalLooseness() < 4)
@@ -1382,7 +1382,7 @@ public class Masturbation extends BaseContent {
 					outputText("With each thrust, you bury your [cock] deeper into your greedy tit. Overwhelmed by the combined sensations, your mind is barely able to cope with the intense feeling of fullness where no such feeling should be possible.");
 				}
 				//if it doesnt really fit
-				if (Math.round(player.cockArea(0)) > player.vaginalCapacity()) {
+				if (Math.round(player.biggestCockArea()) > player.vaginalCapacity()) {
 					if (player.averageVaginalLooseness() < 2)
 						outputText("Your poor, tortured nipple is woefully insufficient compared to your [cock], delerious with arousal, you keep trying anyway. ");
 					else if (player.averageVaginalLooseness() < 4)
@@ -1484,7 +1484,7 @@ public class Masturbation extends BaseContent {
 				}
 				else outputText("girl-lube spurts out of your tortured nipple with each thrust of your [cock], spattering your arms and face with your secretions. ");
 			}
-			if (Math.round(player.cockArea(0)) < player.vaginalCapacity()) {
+			if (Math.round(player.biggestCockArea()) < player.vaginalCapacity()) {
 				//Different noises based on sensitivity
 				if (player.sens < 45)
 					outputText("ou sigh with pleasure");

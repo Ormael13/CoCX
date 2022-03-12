@@ -448,7 +448,7 @@ public class CombatUI extends BaseCombatContent {
 			combat.willothewispattacks();
 		} else if (player.hasPerk(PerkLib.FirstAttackGolems) && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1 && flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 1 && player.mana >= combat.pspecials.permanentgolemsendcost()) {
 			menu();
-			addButton(0, "Send P.Gol/1", combat.pspecials.sendPermanentGolem1);
+			addButton(0, "Send P.Gol/1", combat.pspecials.sendPermanentGolem1);//.hint("")
 			if (monster.plural) {
 				if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] >= 3) {
 					if (player.mana >= combat.pspecials.permanentgolemsendcost() * 3) addButton(5, "Send P.Gol/3", combat.pspecials.sendPermanentGolem3);
@@ -479,10 +479,22 @@ public class CombatUI extends BaseCombatContent {
 			}
 		} else if (player.hasPerk(PerkLib.FirstAttackElementalsSu) && player.statusEffectv2(StatusEffects.SummonedElementals) > 0 && (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4) && flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] < 1) {
 			menu();
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsAirE)) addButton(0, "Air(E)", combat.baseelementalattacks, Combat.AIR_E);
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarthE)) addButton(1, "Earth(E)", combat.baseelementalattacks, Combat.EARTH_E);
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsFireE)) addButton(2, "Fire(E)", combat.baseelementalattacks, Combat.FIRE_E);
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsWaterE)) addButton(3, "Water(E)", combat.baseelementalattacks, Combat.WATER_E);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsAirE)) {
+				if (player.hasPerk(PerkLib.ElementalBody) && player.perkv1(PerkLib.ElementalBody) == 1) addButtonDisabled(0, "Air(E)", "You can't command this elemental to attack (independently from you) when you're currently fused with it.");
+				else addButton(0, "Air(E)", combat.baseelementalattacks, Combat.AIR_E);
+			}
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarthE)) {
+				if (player.hasPerk(PerkLib.ElementalBody) && player.perkv1(PerkLib.ElementalBody) == 2) addButtonDisabled(1, "Earth(E)", "You can't command this elemental to attack (independently from you) when you're currently fused with it.");
+				else addButton(1, "Earth(E)", combat.baseelementalattacks, Combat.EARTH_E);
+			}
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsFireE)) {
+				if (player.hasPerk(PerkLib.ElementalBody) && player.perkv1(PerkLib.ElementalBody) == 3) addButtonDisabled(2, "Fire(E)", "You can't command this elemental to attack (independently from you) when you're currently fused with it.");
+				else addButton(2, "Fire(E)", combat.baseelementalattacks, Combat.FIRE_E);
+			}
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsWaterE)) {
+				if (player.hasPerk(PerkLib.ElementalBody) && player.perkv1(PerkLib.ElementalBody) == 4) addButtonDisabled(3, "Water(E)", "You can't command this elemental to attack (independently from you) when you're currently fused with it.");
+				else addButton(3, "Water(E)", combat.baseelementalattacks, Combat.WATER_E);
+			}
 			addButton(13, "None", combat.baseelementalattacks, Combat.NONE_E).hint("You forfeit potential attack of epic elemental. Would skip to next minion attack/your main turn.");
 		} else if (player.hasPerk(PerkLib.FirstAttackElementals) && (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4) && flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] < 2) {
 			menu();

@@ -16,7 +16,7 @@ public class ElderStoreHut extends TrollVillageAbstractContent{
         menu();
         outputText("You decide to approach the Elder’s hut, it’s very large, tall, and probably contains many different things inside. The entrance is wide and lacks a door, signaling that anyone is welcome to enter, but the guard near the entrance also enforces a sense of security.\n");
         if (TrollVillage.ZenjiFollowing){
-            outputText("Zenji speaks up, \"Dre Elder’s hut is really just a place where people trade goods, nobody really has anyting to say to the elders. It’s not like dey want to, anyway.\"\n");
+            outputText("Zenji speaks up, \"<i>The Elder’s hut is really just a place where people trade goods, nobody really has anyting to say to the elders. It’s not like dey want to, anyway.</i>\"\n");
         }
         //outputText("As you enter the hut you see a handful of people about. Not just trolls, but a few lizans, chameleons and other races besides trolls are trading underneath the hut. The stands contain fairly mundane general goods and supplies needed for daily life. Past all the stands is a door where you can only assume the Elders reside.\n" +
         //        "\n" +
@@ -37,7 +37,7 @@ public class ElderStoreHut extends TrollVillageAbstractContent{
                 "\n" +
                 "You browse the assortments of food each item has a label as you take your time deciding on what you should take for the road.\n" +
                 "\n" +
-                "The man behind the counter speaks up, \"¿Buscando algo de comer? Todo aquí sólo cuesta 6 gems.\"\n" +
+                "The man behind the counter speaks up, \"<i>¿Buscando algo de comer? Todo aquí sólo cuesta 6 gems.</i>\"\n" +
                 "\n" +
                 "6 gems for any of the listed items, seems reasonable.\n");
         menu();
@@ -53,7 +53,7 @@ public class ElderStoreHut extends TrollVillageAbstractContent{
                 case consumables.TROLFIG:
                     outputText("You ask for a troll fig as you fork over 6 gems to the troll.\n" +
                             "\n" +
-                            "“¡Muchas gracias!” he replies as he gives you a troll fig");
+                            "“<i>¡Muchas gracias!”</i> he replies as he gives you a troll fig");
 
                     break;
                 case "TrolMix":

@@ -899,10 +899,10 @@ package classes.Scenes.NPCs
 			menu();
 			addButton(0, "Give BJ", KonstantinSexMenuGiveBJ);
 			if (player.hasCock()) {
-				addButton(1, "Recive BJ", KonstantinSexMenuReciveBJ);
+				addButton(1, "Receive BJ", KonstantinSexMenuReciveBJ);
 				addButton(2, "69", KonstantinSexMenu69);
 			}
-			addButton(3, "Recive Anal", KonstantinSexMenuReciveAnal);
+			addButton(3, "Receive Anal", KonstantinSexMenuReciveAnal);
 			if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] >= 4) addButton(4, "Hot Spring Fuck", KonstantinSexMenuHotSpringFuck);
 			addButton(14, "Back", KonstantinMainCampMenu);
 		}

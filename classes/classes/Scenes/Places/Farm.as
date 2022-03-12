@@ -936,7 +936,7 @@ public function cockPumping():void {
 		player.addStatusValue(StatusEffects.CockPumped,1,1);
 	}
 	//Small/Medium/Large, 2x each
-	if(player.cockArea(0) < 20) {
+	if(player.biggestCockArea() < 20) {
 		//Small 1 
 		if(rand(2) == 0) {
 			if(player.cockTotal() == 1) outputText("The hose's 'tip' is many times longer than your member, and about thrice as thick.  The 'opening' is filled with something wet and pink.  It squirms and wriggles, looking very much alive.  Where did Whitney get this stuff?    It tentatively presses against your [cock], sucking wetly as the material inside slurps you down.  The feeling is immediate and intense, like being surrounded by hundreds of eager tongues, all writhing together along your length.\n\n");
@@ -948,7 +948,7 @@ public function cockPumping():void {
 			else outputText("The hoses' openings, while much larger than your [cocks], are packed full of some slimy looking pink flesh.  They wriggles hungrily as they snake up, noisily slobbering over your tip.  Your body, tired of the foreplay, thrusts forwards, rocking the harness back and forth.  The effort is wasted, as the hoses stop and slowly reposition themselves under you, having to reset before they can begin 'milking'.  You sigh and hold perfectly still as they bump back against you.    Your muscles twitch but you hold steady as they slowly slide forward, effortlessly taking your " + multiCockDescript() + " inside.  The stimulation is intense and immediate.  The suction kicks in, making you swell larger than normal.  You feel like every inch is covered in tiny wet massaging fingers and tongues.\n\n");
 		}
 	}
-	else if(player.cockArea(0) < 70) {
+	else if(player.biggestCockArea() < 70) {
 		//Medium 1
 		if(rand(2) == 0) {
 			if(player.cockTotal() == 1) {

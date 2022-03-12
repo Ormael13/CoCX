@@ -653,8 +653,8 @@ private function dualUrtaMasturbation():void {
 	outputText(".  ");
 	if(player.cockTotal() > 0) {
 		outputText("The situation gives you all the spark you need to rise to your full size, ");
-		if(player.cockArea(0) < 40) outputText("even if Urta's member dwarfs you.");
-		else if(player.cockArea(0) < 70) outputText("showing Urta you're just as big.");
+		if(player.biggestCockArea() < 40) outputText("even if Urta's member dwarfs you.");
+		else if(player.biggestCockArea() < 70) outputText("showing Urta you're just as big.");
 		else outputText("proving to Urta just who has the bigger burden.");
 		outputText("  ");
 	}

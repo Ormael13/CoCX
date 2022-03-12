@@ -22,12 +22,12 @@ package classes.Items.HeadJewelries
 			//Value
 			desc += "\nBase value: " + String(value);
 			//Perk
-			desc += "\nSpecial: Wisdom +20";
+			desc += "\nSpecial: Wisdom +20%";
 			return desc;
 		}
 		
 		override public function playerEquip():HeadJewelry {
-			game.player.statStore.addBuff('wis',+20,'CrownOfWisdom',{text:'Crown Of Wisdom'});
+			game.player.statStore.addBuff('wis.mult',0.20,'CrownOfWisdom',{text:'Crown Of Wisdom'});
 			return super.playerEquip();
 		}
 		
