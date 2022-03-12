@@ -443,16 +443,8 @@ private function repeatableMinervaRomanceScene():void {
 private function minervaTalkSelect(bath:Boolean = true):void {
 	var choices:Array = [talkingToMinervaAboutBackstory];
 	if(flags[kFLAGS.MINERVA_BACKSTORY_LEARNED] == 0) {
-		//Force first time to talk about her early backstory!
-		if(flags[kFLAGS.MINERVA_BACKSTORY] == 0) {
-			talkingToMinervaAboutBackstory();
-			return;
-		}
-		choices[choices.length] = talkingToMinervaAboutBackstory;
-		choices[choices.length] = talkingToMinervaAboutBackstory;
-		choices[choices.length] = talkingToMinervaAboutBackstory;
-		choices[choices.length] = talkingToMinervaAboutBackstory;
-		choices[choices.length] = talkingToMinervaAboutBackstory;
+        talkingToMinervaAboutBackstory();
+        return;
 	}
 	//Force start if the flag is right.
 	trace(flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS]);
@@ -460,25 +452,33 @@ private function minervaTalkSelect(bath:Boolean = true):void {
 		minervaPurification.startPurification();
 		return;
 	}
+    clearOutput();
+	if(bath && minervaRomanced() && rand(2) == 0) choices[choices.length] = bathTimeTalkWithMinerva;
+    //no bath
+    outputText("What do you want to ask her about?")
+    menu();
 	//3-2 Talk Scene 2 - talks about the spring
 	//-repeatable
-	choices[choices.length] = talkAboutTheSpringWithMinerva;
+    addButton(0, "Spring", talkAboutTheSpringWithMinerva);
 	//- requires that backstory has been told
 	//- if already romanced Minerva shamefully confesses she may have fathered a granddaughter with her first daughter -repeatable
 	//3-3 Talking Scene 3 - talks about her shark girl daughter
-	if(minervaRomanced() && flags[kFLAGS.MINERVA_BACKSTORY_LEARNED] == 1) choices[choices.length] =  talkWithMinervaAboutSharkGirlDaughter;
-	
+	if(minervaRomanced() && flags[kFLAGS.MINERVA_BACKSTORY_LEARNED] == 1)
+        addButton(2, "Daughter", talkWithMinervaAboutSharkGirlDaughter);
+    else
+        addButtonDisabled(2, "???", "You need to know her better.");
 	//3-4 Talk Scene 4 - talks about her corruption
 	//- romance yes only or if you trick her into thinking you love her. - Repeatable until Minerva is purified or corrupted
-	if(minervaRomanced()) choices[choices.length] = talkToMinervaAboutHerCorruption;
+	if(minervaRomanced())
+        addButton(3, "Corruption", talkToMinervaAboutHerCorruption);
+    else
+        addButtonDisabled(3, "???", "You need to know her better.");
+
 	//3-5 Motherhood
 	//-talks about how she wishes to be a real mother, have an actual loving family and not made from being raped- repeatable
-	choices[choices.length] = minervaMotherhood;
+    addButton(1, "Motherhood", minervaMotherhood);
 	//3-6 Bath Time - romance only
 	//Needs an option to be disabled.
-	if(bath && minervaRomanced()) choices[choices.length] = bathTimeTalkWithMinerva;
-	
-	choices[rand(choices.length)]();
 }
 
 //Talking scenes
