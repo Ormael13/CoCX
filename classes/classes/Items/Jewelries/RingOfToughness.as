@@ -22,12 +22,12 @@ package classes.Items.Jewelries
 			//Value
 			desc += "\nBase value: " + String(value);
 			//Perk
-			desc += "\nSpecial: Toughness +20%";
+			desc += "\nSpecial: Toughness +5%";
 			return desc;
 		}
 		
 		override public function playerEquip():Jewelry {
-			game.player.statStore.addBuff('tou.mult',0.20,'tag',{text:'RingOfToughness'});
+			game.player.statStore.addBuff('tou.mult',0.05,'tag',{text:'RingOfToughness'});
 			return super.playerEquip();
 		}
 		

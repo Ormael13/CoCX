@@ -22,12 +22,12 @@ package classes.Items.HeadJewelries
 			//Value
 			desc += "\nBase value: " + String(value);
 			//Perk
-			desc += "\nSpecial: Libido +40%";
+			desc += "\nSpecial: Libido +20%";
 			return desc;
 		}
 		
 		override public function playerEquip():HeadJewelry {
-			game.player.statStore.addBuff('lib.mult',0.40,'CrownOfLibido',{text:'Crown Of Libido'});
+			game.player.statStore.addBuff('lib.mult',0.20,'CrownOfLibido',{text:'Crown Of Libido'});
 			return super.playerEquip();
 		}
 		

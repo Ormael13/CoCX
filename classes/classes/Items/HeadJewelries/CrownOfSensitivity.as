@@ -23,12 +23,12 @@ public class CrownOfSensitivity extends HeadJewelry
 			//Value
 			desc += "\nBase value: " + String(value);
 			//Perk
-			desc += "\nSpecial: Sensitivity +40";
+			desc += "\nSpecial: Sensitivity +20";
 			return desc;
 		}
 		
 		override public function playerEquip():HeadJewelry {
-			game.player.statStore.addBuff('sens',40,'CrownOfSensitivity',{text:'Crown Of Sensitivity'});
+			game.player.statStore.addBuff('sens',20,'CrownOfSensitivity',{text:'Crown Of Sensitivity'});
 			return super.playerEquip();
 		}
 		

@@ -22,12 +22,12 @@ package classes.Items.Jewelries
 			//Value
 			desc += "\nBase value: " + String(value);
 			//Perk
-			desc += "\nSpecial: Wisdom +20%";
+			desc += "\nSpecial: Wisdom +5%";
 			return desc;
 		}
 		
 		override public function playerEquip():Jewelry {
-			game.player.statStore.addBuff('wis.mult',0.20,'RingOfWisdom',{text:'Ring Of Wisdom'});
+			game.player.statStore.addBuff('wis.mult',0.05,'RingOfWisdom',{text:'Ring Of Wisdom'});
 			return super.playerEquip();
 		}
 		

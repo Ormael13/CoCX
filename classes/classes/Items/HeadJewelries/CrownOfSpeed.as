@@ -22,12 +22,12 @@ package classes.Items.HeadJewelries
 			//Value
 			desc += "\nBase value: " + String(value);
 			//Perk
-			desc += "\nSpecial: Speed +40%";
+			desc += "\nSpecial: Speed +20%";
 			return desc;
 		}
 		
 		override public function playerEquip():HeadJewelry {
-			game.player.statStore.addBuff('spe.mult',0.40,'CrownOfSpeed',{text:'Crown Of Speed'});
+			game.player.statStore.addBuff('spe.mult',0.20,'CrownOfSpeed',{text:'Crown Of Speed'});
 			return super.playerEquip();
 		}
 		

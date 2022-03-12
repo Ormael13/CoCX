@@ -22,12 +22,12 @@ package classes.Items.Jewelries
 			//Value
 			desc += "\nBase value: " + String(value);
 			//Perk
-			desc += "\nSpecial: Speed +20%";
+			desc += "\nSpecial: Speed +5%";
 			return desc;
 		}
 		
 		override public function playerEquip():Jewelry {
-			game.player.statStore.addBuff('spe.mult',0.20,'RingOfSpeed',{text:'Ring Of Speed'});
+			game.player.statStore.addBuff('spe.mult',0.05,'RingOfSpeed',{text:'Ring Of Speed'});
 			return super.playerEquip();
 		}
 		
