@@ -53,7 +53,7 @@ public class ElderStoreHut extends TrollVillageAbstractContent{
                 case consumables.TROLFIG:
                     outputText("You ask for a troll fig as you fork over 6 gems to the troll.\n" +
                             "\n" +
-                            "“<i>¡Muchas gracias!”</i> he replies as he gives you a troll fig");
+                            "\"<i>¡Muchas gracias!\"</i> he replies as he gives you a troll fig");
 
                     break;
                 case "TrolMix":

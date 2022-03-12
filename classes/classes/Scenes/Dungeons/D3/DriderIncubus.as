@@ -152,10 +152,10 @@ if (this.lust < .65 * this.maxLust() && this.HP < .33 * this.maxHP()) {
 this.addHP(this.maxHP() * 0.1);
 			this.lust += 8;
 			
-			if (_hpGains == 0) outputText("<i>“You won’t defeat me so easily!”</i>");
-			else if (_hpGains == 1) outputText("<i>“I can keep this up longer than you, mortal!”</i>");
-			else if (_hpGains == 2) outputText("<i>“So stubborn! Lethice take you!”</i>");
-			else outputText("<i>“Why won’t you give in?!”</i>");
+			if (_hpGains == 0) outputText("<i>\"You won’t defeat me so easily!\"</i>");
+			else if (_hpGains == 1) outputText("<i>\"I can keep this up longer than you, mortal!\"</i>");
+			else if (_hpGains == 2) outputText("<i>\"So stubborn! Lethice take you!\"</i>");
+			else outputText("<i>\"Why won’t you give in?!\"</i>");
 			
 			_hpGains++;
 			
@@ -177,7 +177,7 @@ this.addHP(this.maxHP() * 0.1);
 this.HP -= (this.maxHP() * 0.08);
 			this.lust -= 10;
 			
-			outputText("The demon snarls and draws his spear back, placing it blade down against his arm. Grinning malevolently, he slides the razor-sharp edge along his skin, leaving a trail of glittering ruby on his wounded flesh. <i>“Pain brings clarity of mind - something you couldn’t understand.”</i> He grins wider, mastering his baser emotions. <i>“Let me teach you.”</i>\n\n");
+			outputText("The demon snarls and draws his spear back, placing it blade down against his arm. Grinning malevolently, he slides the razor-sharp edge along his skin, leaving a trail of glittering ruby on his wounded flesh. <i>\"Pain brings clarity of mind - something you couldn’t understand.\"</i> He grins wider, mastering his baser emotions. <i>\"Let me teach you.\"</i>\n\n");
 		}
 		
 		private function spearStrike():void
@@ -238,10 +238,10 @@ this.HP -= (this.maxHP() * 0.08);
 				if (player.str <= 25) outputText(" It’s getting harder just to remain upright.");
 				else if (player.str <= 1) outputText(" You don’t think you can stand any longer, let alone resist.");
 				
-				outputText("\n\nWhen he pulls out, he’s smiling and a little flushed. <i>“");
+				outputText("\n\nWhen he pulls out, he’s smiling and a little flushed. <i>\"");
 				if (player.str > 25) outputText("That should do.");
 				else outputText("Soon you won’t have the strength to resist.");
-				outputText("”</i>");
+				outputText("\"</i>");
 			}	
 			else
 			{
@@ -256,7 +256,7 @@ this.HP -= (this.maxHP() * 0.08);
 					//Hits
 					outputText(" Those needle-like canines punch into you, delivering their venomous payload! You already feel weaker, your muscles not responding as effectively.");
 					
-					outputText("<i>“I do love watching you struggle.”</i> He flashes a crooked smile.");
+					outputText("<i>\"I do love watching you struggle.\"</i> He flashes a crooked smile.");
 					
 					if (player.hasStatusEffect(StatusEffects.DriderIncubusVenom))
 					{
@@ -411,7 +411,7 @@ this.HP -= (this.maxHP() * 0.08);
 		private function taintedMind():void
 		{
 			//Prevents use of attack, bow, other physical type stuff
-			outputText("<i>“You fight well, for a mortal... but can you fight like a demon?”</i> He claps his hands together, bathing the immediate area in a wave of energy. Some of the nearby slaves cry out in alarm, then settle into giggling, cooing messes. You don’t seem any worse for the wear in its wake, though something feels wrong about holding your [weapon].");
+			outputText("<i>\"You fight well, for a mortal... but can you fight like a demon?\"</i> He claps his hands together, bathing the immediate area in a wave of energy. Some of the nearby slaves cry out in alarm, then settle into giggling, cooing messes. You don’t seem any worse for the wear in its wake, though something feels wrong about holding your [weapon].");
 			if (player.cor <= 33) outputText(" What did he mean about fighting like a demon?");
 			player.createStatusEffect(StatusEffects.TaintedMind, 4, 0, 0, 0);
 		}
@@ -419,7 +419,7 @@ this.HP -= (this.maxHP() * 0.08);
 		//On same round timer as physical stun
 		private function constrictingThoughts():void
 		{
-			outputText("<i>“Try this on for size!”</i> the corrupted arachnid shouts, waving his hand in your direction.");
+			outputText("<i>\"Try this on for size!\"</i> the corrupted arachnid shouts, waving his hand in your direction.");
 			outputText("\n\nDisjointed, erotic thoughts claw at your mind’s defenses, worming their way in through what cracks they find, plunging sensuous fantasies of every shape and size in place of your own imaginings.");
 			
 			//Resist, no new line
@@ -442,7 +442,7 @@ this.HP -= (this.maxHP() * 0.08);
 		private function purpleHaze():void
 		{
 			//Blinds 2-3 turns
-			outputText("<i>“Try this on for size!”</i> The drider gestures in your direction, gathering his will into a palpable force. It presses on your mind like a coiled snake, crushing down on you from all sides.");
+			outputText("<i>\"Try this on for size!\"</i> The drider gestures in your direction, gathering his will into a palpable force. It presses on your mind like a coiled snake, crushing down on you from all sides.");
 			
 			//Avoid
 			// 9999, scale avoidance off lust/lib/corr?
@@ -516,7 +516,7 @@ this.HP -= (this.maxHP() * 0.08);
 			//1x only.
 			outputText("Darting into the crowd, the goblin comes back with a bottle of unusual shape and design. She pops the cork and upends it across her petite but all-too-stacked form, smearing it across her more-than-ample tits with one hand, making them shine in the flickering candlelight. Her eyes are bright and mischievous while she spreads it over the rest of her form, leaving the whole of her body slick and ready for love.");
 			
-			outputText("\n\nShe dances and spins to the side, cooing, <i>“Don’t you want me anymore, baby? Look how ready I am”</i> Her nipples are taut and stiff, and the junction between her thighs absolutely drenched. Neither you nor your foe can keep from sparing lusty glances her way.");
+			outputText("\n\nShe dances and spins to the side, cooing, <i>\"Don’t you want me anymore, baby? Look how ready I am\"</i> Her nipples are taut and stiff, and the junction between her thighs absolutely drenched. Neither you nor your foe can keep from sparing lusty glances her way.");
 			
 			lust += 7;
 			player.dynStats("lus", 7);
@@ -528,7 +528,7 @@ this.HP -= (this.maxHP() * 0.08);
 			_goblinFree = true;
 			outputText("You lunge in low, hooking your hands beneath the writhing greenskin’s armpits and pulling. Webs snap like gauze between her weight and the mighty tug you strain them with. Her eyes bulge open in horror. She screams as you pull her free, revealing an inhumanly soaked rod and one seriously puffy set of labia. The poor thing won’t be able to walk without squishing them against each other.");
 			outputText("\n\nYou’re forced to drop her as the enraged drider prepares his counterattack. She lands on her feet, surprisingly enough.");
-			outputText("\n\n<i>“Oh, forgive me master! I’ll still get you off - I promise!”</i> The green slut wiggles away from you, trying to get at her master’s loins.");
+			outputText("\n\n<i>\"Oh, forgive me master! I’ll still get you off - I promise!\"</i> The green slut wiggles away from you, trying to get at her master’s loins.");
 			outputText("\n\nWell... maybe she didn’t want free after all. At least she’ll make for a good distraction.");
             SceneLib.combat.enemyAIImpl();
         }

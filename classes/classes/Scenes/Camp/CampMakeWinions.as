@@ -2167,9 +2167,9 @@ public class CampMakeWinions extends BaseContent
 			clearOutput();
 			player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,-(player.statusEffectv2(StatusEffects.SummonedElementalsAirE) * 1200));
 			outputText("Finally feeling like you could coax a little more power out of your Epic Air elemental, you begin drawing runes in your magic circle, far more intricate than your older, lesser rituals.\n\n");
-			outputText("You start with three circles, offset from the very center of the magic circle. Each with a slightly different color of light-blue. Each circle consists of the “Control” rune, of uniform size, each running into the next with no space between them.\n\n");
-			outputText("Spiraling runes of black, white and grey come next, coming out from the center and wrapping around the group of three circles, binding them together. “Power” forms the majority of them, but you throw in “flow” and “wind” periodically, each of those runes forming their own miniature swirl of runes. ");
-			outputText("Finally, at the edge, “Movement”, and “Freedom” runes adorn the outside edge. With that last step completed, you sit, mentally calling for your Epic Air elemental.\n\n");
+			outputText("You start with three circles, offset from the very center of the magic circle. Each with a slightly different color of light-blue. Each circle consists of the \"Control\" rune, of uniform size, each running into the next with no space between them.\n\n");
+			outputText("Spiraling runes of black, white and grey come next, coming out from the center and wrapping around the group of three circles, binding them together. \"Power\" forms the majority of them, but you throw in \"flow\" and \"wind\" periodically, each of those runes forming their own miniature swirl of runes. ");
+			outputText("Finally, at the edge, \"Movement\", and \"Freedom\" runes adorn the outside edge. With that last step completed, you sit, mentally calling for your Epic Air elemental.\n\n");
 			outputText("A swirl of air, barely more than a breeze, forms into solid mass, your epic air elemental, its arms folded, stares at you.\n\n");
 			outputText("\"<i>What is the meaning of this containment?</i>\" It looks down at the clearly magical circle. You explain that it’s time to upgrade its power.\n\n");
 			outputText("\"<i>So even the most abhorrent creations serve a purpose. Very well.</i>\"\n\n");
@@ -2197,8 +2197,8 @@ public class CampMakeWinions extends BaseContent
 			clearOutput();
 			player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,-(player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) * 1200));
 			outputText("Finally feeling like you could coax a little more power out of your Epic Earth elemental, you begin drawing runes in your magic circle, far more intricate than your older, lesser rituals.\n\n");
-			outputText("First, you coat the outside of the circle in green ink, stenciling in “Control”. Nodes of brown and grey runes, clumped into seemingly random spots along the summoning circle, spell “Power”. On completion, each rune shakes a little before stopping, in a slightly different place than you drew it in.\n\n");
-			outputText("“Ground”, “Earth” and “Stone” runes line the inner layers, painted in red, blue and green. As you finish each one, it begins to shine from within, and you can see the stone you painted it on, underneath.\n\n");
+			outputText("First, you coat the outside of the circle in green ink, stenciling in \"Control\". Nodes of brown and grey runes, clumped into seemingly random spots along the summoning circle, spell \"Power\". On completion, each rune shakes a little before stopping, in a slightly different place than you drew it in.\n\n");
+			outputText("\"Ground\", \"Earth\" and \"Stone\" runes line the inner layers, painted in red, blue and green. As you finish each one, it begins to shine from within, and you can see the stone you painted it on, underneath.\n\n");
 			outputText("Finally, a layer of gold-colored runes in the very center, spiraling out. The runes shine, glittering as if a spotlight was shone on a gold bar.\n\n");
 			outputText("Encouraged, you call out to your epic earth elemental.\n\n");
 			outputText("\"<i>You called?</i>\" Rising from within the circle, your epic earth elemental pops from the ground. Her eyes are gemstones, red and green, and a simple ring of sapphires adorn what would be her ‘neck’. Other than that, your elemental looks like a well-made statue of a nubile young woman. She sits in the circle, feminine legs crossed, and tilts her head as your elemental considers you.\n\n");
@@ -2225,9 +2225,9 @@ public class CampMakeWinions extends BaseContent
 		private function rankUpElementalFireEpic():void {
 			clearOutput();
 			player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,-(player.statusEffectv2(StatusEffects.SummonedElementalsFireE) * 1200));
-			outputText("Finally feeling like you could coax a little more power out of your Epic Fire elemental, you begin drawing runes in your magic circle, far more intricate than your older, lesser rituals. In red ink, you stencil runes reading “power”, in thin, curving lines inside the circle. As you complete each section of the fiery pattern, you can feel the air around you heat up slightly.\n\n");
-			outputText("Inside of each line, you stencil curls of “control” runes in orange. Each rune flickers as you complete it, making each rune slightly harder to create.\n\n");
-			outputText("Yellow ink comes next: you write “Heat” in waves, rising from between the orange curls towards the center of the circle. As you draw each one, the center of the circle begins to shimmer, distorting what you can see through it.\n\n");
+			outputText("Finally feeling like you could coax a little more power out of your Epic Fire elemental, you begin drawing runes in your magic circle, far more intricate than your older, lesser rituals. In red ink, you stencil runes reading \"power\", in thin, curving lines inside the circle. As you complete each section of the fiery pattern, you can feel the air around you heat up slightly.\n\n");
+			outputText("Inside of each line, you stencil curls of \"control\" runes in orange. Each rune flickers as you complete it, making each rune slightly harder to create.\n\n");
+			outputText("Yellow ink comes next: you write \"Heat\" in waves, rising from between the orange curls towards the center of the circle. As you draw each one, the center of the circle begins to shimmer, distorting what you can see through it.\n\n");
 			outputText("You draw wavy lines from the center of your circle, where the heat is, twelve in total, in a white color.\n\n");
 			outputText("Upon completion, the runes shift, beginning to move, flickering like the flames their design suggests. Encouraged by this, you sit in your magic circle, and call upon your Epic Fire Elemental. At your call, you feel a stirring, rising heat in your head.\n\n");
 			outputText("\"<i>What shall we turn to ash, [master]?</i>\" The womanly form of your Elemental appears in the summoning circle, her face featureless except for burning yellow eyes.\n\n");
@@ -2255,8 +2255,8 @@ public class CampMakeWinions extends BaseContent
 		private function rankUpElementalWaterEpic():void {
 			clearOutput();
 			player.addStatusValue(StatusEffects.ElementalEnergyConduits,1,-(player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) * 1200));
-			outputText("Finally feeling like you could coax a little more power out of your Epic Water elemental, you begin drawing runes in your magic circle, far more intricate than your older, lesser rituals. You start with rolling lines of “control” runes, in a dark, almost black blue, then a line of lighter blue waves of “Power” runes, all along the outside of the circle. ");
-			outputText("In the middle, you draw a single circle of “Tide” runes in white, with smaller circles inside.\n\nAs you complete the last of the “Tide” runes, you notice your white runes in the middle spin, slow at first, but picking up speed. As it does, the runes along the outside begin to move, colors mixing and flowing like water. ");
+			outputText("Finally feeling like you could coax a little more power out of your Epic Water elemental, you begin drawing runes in your magic circle, far more intricate than your older, lesser rituals. You start with rolling lines of \"control\" runes, in a dark, almost black blue, then a line of lighter blue waves of \"Power\" runes, all along the outside of the circle. ");
+			outputText("In the middle, you draw a single circle of \"Tide\" runes in white, with smaller circles inside.\n\nAs you complete the last of the \"Tide\" runes, you notice your white runes in the middle spin, slow at first, but picking up speed. As it does, the runes along the outside begin to move, colors mixing and flowing like water. ");
 			outputText("The white keeps spinning, seemingly pulling the outer ‘waves’ along with it.\n\nYou know that the time to call upon your epic water elemental has come. You feel your mana drain, and a deep, masculine voice sounds in your head.\n\n");
 			outputText("\"<i>So you call me.</i>\" Very well. Water erupts from the ground below you, quickly forming into a masculine form. Your epic water elemental stands, body shifting visibly as the tide runes below him rotate. He sits, shifting with the tides below.\n\n");
 			outputText("You explain to your elemental that you can draw more power, and it nods. \"<i>So it would seem. I will not attempt to stop you.</i>\"\n\n");

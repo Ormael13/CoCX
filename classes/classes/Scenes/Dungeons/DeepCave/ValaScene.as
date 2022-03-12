@@ -887,7 +887,7 @@ public class ValaScene extends BaseContent implements SaveableState
 						"Vala escorts you all the way to the woods where you spot an unusual amount of fairies watching you. You both enter what looks to be a grove. You can see small bubble of energy slowly flying up from the ground and deduce the place is highly magical. Vala turns to face you looking somewhat embarrassed.\n\n" +
 						"\"<i>[name] when we first met, I wanted to thank you for saving me from those imps. While we have had sex many times. I never could really feel like it was enough to let go of my debt to you. Today I’m actually telling you something very few humans have ever been told. We, the fairies would like you to become our champion.</i>\"\n\n" +
 						"Sure why not, you're already trying to save Mareth anyway.\n\n" +
-						"“You don’t understand. What the fairies agreed to is that YOU should be the next queen.”\n\n" +
+						"\"You don’t understand. What the fairies agreed to is that YOU should be the next queen.\"\n\n" +
 						"Whoa, wait, what?! You never agreed to anything of the such! Can’t you at least be allowed to make the choice.\n\n" +
 						"\"<i>I know this is a lot to take in, but take a deep breath and make a choice. Will you become the next great fairy, queen of fairykind?</i>\"\n\n" +
 						"How could you even become the queen of the fairies. You’re way too big to become a fairy to begin with. Vala laughs, but explains.\n\n" +
