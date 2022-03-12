@@ -22,12 +22,12 @@ package classes.Items.Jewelries
 			//Value
 			desc += "\nBase value: " + String(value);
 			//Perk
-			desc += "\nSpecial: Sensitivity +5";
+			desc += "\nSpecial: Sensitivity +20";
 			return desc;
 		}
 		
 		override public function playerEquip():Jewelry {
-			game.player.statStore.addBuff('sens',+5,'RingOfSensitivity',{text:'Ring Of Sensitivity'});
+			game.player.statStore.addBuff('sens',20,'RingOfSensitivity',{text:'Ring Of Sensitivity'});
 			return super.playerEquip();
 		}
 		

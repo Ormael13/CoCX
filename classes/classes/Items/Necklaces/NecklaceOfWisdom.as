@@ -22,12 +22,12 @@ package classes.Items.Necklaces
 			//Value
 			desc += "\nBase value: " + String(value);
 			//Perk
-			desc += "\nSpecial: Wisdom +25";
+			desc += "\nSpecial: Wisdom +50%";
 			return desc;
 		}
 		
 		override public function playerEquip():Necklace {
-			game.player.statStore.addBuff('wis',+25,'tag',{text:'NecklaceOfWisdom'});
+			game.player.statStore.addBuff('wis.mult',0.50,'tag',{text:'NecklaceOfWisdom'});
 			return super.playerEquip();
 		}
 		

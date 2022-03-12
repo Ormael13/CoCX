@@ -22,12 +22,12 @@ package classes.Items.Necklaces
 			//Value
 			desc += "\nBase value: " + String(value);
 			//Perk
-			desc += "\nSpecial: Sensitivity +25";
+			desc += "\nSpecial: Sensitivity +50";
 			return desc;
 		}
 		
 		override public function playerEquip():Necklace {
-			game.player.statStore.addBuff('sens',+25,'NecklaceOfSensitivity',{text:'Necklace Of Sensitivity'});
+			game.player.statStore.addBuff('sens',50,'NecklaceOfSensitivity',{text:'Necklace Of Sensitivity'});
 			return super.playerEquip();
 		}
 		

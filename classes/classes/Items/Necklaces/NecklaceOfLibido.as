@@ -22,12 +22,12 @@ package classes.Items.Necklaces
 			//Value
 			desc += "\nBase value: " + String(value);
 			//Perk
-			desc += "\nSpecial: Libido +25";
+			desc += "\nSpecial: Libido +50%";
 			return desc;
 		}
 		
 		override public function playerEquip():Necklace {
-			game.player.statStore.addBuff('lib',+25,'NecklaceOfLibido',{text:'Necklace Of Libido'});
+			game.player.statStore.addBuff('lib.mult',0.50,'NecklaceOfLibido',{text:'Necklace Of Libido'});
 			return super.playerEquip();
 		}
 		

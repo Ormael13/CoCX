@@ -22,12 +22,12 @@ package classes.Items.HeadJewelries
 			//Value
 			desc += "\nBase value: " + String(value);
 			//Perk
-			desc += "\nSpecial: Toughness +20";
+			desc += "\nSpecial: Toughness +40%";
 			return desc;
 		}
 
 		override public function playerEquip():HeadJewelry {
-			game.player.statStore.addBuff('tou',+20,'CrownOfToughness',{text:'Crown Of Toughness'});
+			game.player.statStore.addBuff('tou.mult',0.40,'CrownOfToughness',{text:'Crown Of Toughness'});
 			return super.playerEquip();
 		}
 
