@@ -202,7 +202,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			outputText(""+_name+" seems somewhat bored, and it occurs to you that being a mother comes before being the Champion." +
 					"You decide to bring your girl on an excursion, but the pair of you stumble upon a gang of imps." +
 					"You defeat them all to keep your daughter safe, but as you prepare to leave, you’re suddenly hit by a splash on your back." +
-					"You turn around and notice "+_name+" is making a naughty smile, holding one of the imps by the dick, the other hand on his torso.\n\n<i>“Tehehe. Got you, "+ player.mf("Dad", "Mom") +" !”</i>\n\nOoooh reeeeally? Well then, it’s time you teach your daughter a lesson! " +
+					"You turn around and notice "+_name+" is making a naughty smile, holding one of the imps by the dick, the other hand on his torso.\n\n<i>\"Tehehe. Got you, "+ player.mf("Dad", "Mom") +" !\"</i>\n\nOoooh reeeeally? Well then, it’s time you teach your daughter a lesson! " +
 					"You pick one of the imps and grab him by the cock, pumping to make him shoot his cum at your daughter, who laughs as this turn into an all out impshot battle. " +
 					"Imp cum is soon splashing everywhere in the forest, the both of you using trees and bushes as cover. Eventually, you and "+_name+" are covered in so much cum her black fur almost appears white. " +
 					"After a few hours of this, the both of you head back to camp, still laughing.");
@@ -211,7 +211,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		{
 			outputText("You spend some time with your beloved daughter in the forest. " +
 					"The pair of you eventually stumble upon a grove filled with blooming white flowers which she happily gallops towards to in order to smell.\n\n"+
-					"<i>\""+ player.mf("Dad", "Mom") + ", they smell <b>so</b> good! Are they blooming all the time like this?”</i>\n\n" +
+					"<i>\""+ player.mf("Dad", "Mom") + ", they smell <b>so</b> good! Are they blooming all the time like this?\"</i>\n\n" +
 					"You admit that you don’t know, as Mareth’s time and space is distorted and difficult to predict at the best of times. ");
 			if(player.inte > 60){
 				outputText("Although you could give a rough estimate if you brought the right tools, some books on Mareth’s local botany would also help");
@@ -241,14 +241,14 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				outputText("<i>\""+ player.mf("DAD", "MOM") +"! HELP! ITS BACK!</i>\n\n" +
 				"You watch, spellbound, as "+_name+"’s massive shaft rises to full mast, throbbing and leaking a steady stream of precum already. Clearly, "+_name+" has no idea about how to get it to calm down. " +
 				"It seems the job falls to you.\n\n" +
-				"<i>“I can’t hold this thing anymore. Please, "+ player.mf("dad", "mom") +", do something!”</i>\n\n" +
+				"<i>\"I can’t hold this thing anymore. Please, "+ player.mf("dad", "mom") +", do something!\"</i>\n\n" +
 				"This is a… somewhat unusual situation, but as a ");
 				if (player.gender == 1) outputText("male ");
 				if (player.gender == 2) outputText("parent ");
 				if (player.gender == 3) outputText("herm like her ");
 				outputText("it’s something you can understand. You approach your girl’s massive tool and give it a few experimental strokes, making "+_name+" gasp in surprise. " +
 				"You lick the flared tip to get a taste. Satisfied with it you then proceed to put the thing in your mouth proper."+_name+" moans as her horse dong throbs in appreciation for the attention you’re giving it.\n\n" +
-				"<i>“Eep!!! "+ player.mf("Dad", "Mom") +", I’m scared. It feels all weird... S..something is comiiiiiiing!”</i>\n\n" +
+				"<i>\"Eep!!! "+ player.mf("Dad", "Mom") +", I’m scared. It feels all weird... S..something is comiiiiiiing!\"</i>\n\n" +
 				""+_name+" whines as she finally orgasms, her sweet cum flooding your throat. It tastes like cake icing, making it an exercise on willpower to keep from desperately trying to get more. " +
 				"As her erection finally dies down, you feel something change in you as the cum reaches your stomach.");
 		doHeatOrRut();

@@ -150,7 +150,7 @@ public function WonSparringFight():void {
 	outputText(".</i>\"\n\nYou nod, saying that she did good to. Chi Chi blushes and babbles something akin to a thank you.\n\n");
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] < 4) {
 		outputText(" She then realises what she is doing and vehemently shakes her head.\n\n");
-		outputText("\"<i>It's not like I wanted to be praised! Yeah, as if! Even after all this time, your stance is still shaky.. BAAAKA!”</i>\"\n\n");
+		outputText("\"<i>It's not like I wanted to be praised! Yeah, as if! Even after all this time, your stance is still shaky.. BAAAKA!\"</i>\"\n\n");
 		outputText("Chi Chi kicks a rock away in anger and heads back to her training ground.\n\n");
 	}
 	if (flags[kFLAGS.CHI_CHI_LVL_UP] < 5) {
@@ -576,7 +576,7 @@ public function chichiSex():void {
 	spriteSelect(SpriteDb.s_chichi);
 	clearOutput();
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 3) {
-		outputText("Chi Chi blushes then gives a categorical “No”, causing you to ask her why.\n\n");
+		outputText("Chi Chi blushes then gives a categorical \"No\", causing you to ask her why.\n\n");
 		outputText("\"<i>Sorry, but I won’t. While the first time was fine, I want our relationship to proceed to the next level before we truly move to that step. And yes, unlike most monks, I can actually marry. Also, you would need to show your strength by defeating an oni first, I ain't going out with a nobody… well, at least not officially.</i>\"\n\n");
 		menu();
 		if (player.hasStatusEffect(StatusEffects.ChiChiWeddingS)) addButton(1, "Wedding", chichiSex1);
@@ -627,7 +627,7 @@ public function chichiSex3():void {
 	spriteSelect(SpriteDb.s_chichi);
 	clearOutput();
 	outputText("You suddenly drop to your knees before Chi Chi, who gives you a confused stare as you open a small box containing the ruby ring. This begins in the same way as every love tale. You gather the courage and, to her astonishment, propose right then and there.\n\n");
-	outputText("\"<i>A..are you serious???!!! You idiot! Y..you're...really?!”</i>\"\n\n");
+	outputText("\"<i>A..are you serious???!!! You idiot! Y..you're...really?!\"</i>\"\n\n");
 	outputText("Chi Chi is at a loss for words. It takes her an entire minute to come back from the shock of your proposal, but she finally answers in the clearest manner she can.\n\n");
 	outputText("\"<i>Yes…I will.</i>\"\n\n");
 	player.destroyItems(jewelries.ENDGRNG, 1);

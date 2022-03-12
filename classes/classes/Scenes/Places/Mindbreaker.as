@@ -802,7 +802,7 @@ package classes.Scenes.Places{
 					if (MindBreakerFetishFemaleConvert == 1) outputText("your male slave.");
 					else outputText("one of the many male slaves in the lair.");
 					outputText("He has been an excellent slut and it’s high time to reward his throbbing cock and complete submissiveness properly. " +
-							"\n\n\"<i>“Big brother, [name], I have become a perfect slut as you asked. I raped, and let myself be raped, by countless men and women to prove my loyalty. Please shower me with your love and tentacles.</i>\"" +
+							"\n\n\"<i>\"Big brother, [name], I have become a perfect slut as you asked. I raped, and let myself be raped, by countless men and women to prove my loyalty. Please shower me with your love and tentacles.</i>\"" +
 							"You tell him that he has done well. He is finally ready to transcend and become perfect." +
 							" Your [cock] stiffens, spilling green cum all over your legs as it sprouts from your genital slit, the thought of infesting him with your young makes you leak even more cum." +
 							" He practically throws himself into your arms as you fondly remember your transformation." +

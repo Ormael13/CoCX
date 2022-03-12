@@ -93,7 +93,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 
 			outputText("You ask Ceraph if she can help you with the farm you recently acquired.");
 
-			outputText("\n\n“<i>You mean work on a farm? Don’t be ridiculous, [name]!</i>” She chortles, before coughing as she catches your expression. “<i>I don’t think me or any of my pets are cut out for farming,</i>” she says, tapping her chin. “<i>Or at least not that kind you have in mind. But I could mark the place as being under demon protection if you like. I can only do it once,</i>” she warns. “<i>And it will wear off eventually.</i>”");
+			outputText("\n\n\"<i>You mean work on a farm? Don’t be ridiculous, [name]!</i>\" She chortles, before coughing as she catches your expression. \"<i>I don’t think me or any of my pets are cut out for farming,</i>\" she says, tapping her chin. \"<i>Or at least not that kind you have in mind. But I could mark the place as being under demon protection if you like. I can only do it once,</i>\" she warns. \"<i>And it will wear off eventually.</i>\"");
 
 			menu();
 			addButton(0, "Do It", doFarmShit);
@@ -105,7 +105,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			clearOutput();
 			ceraphSprite();
 
-			outputText("“<i>I’ll go over there tonight then,</i>” she says. There’s a far-away gleam of excitement in her eyes as she tugs on a nipple; only now does it occur to you what ‘marked as being under demon protection’ might entail. “<i>Anything else, [master]?</i>”");
+			outputText("\"<i>I’ll go over there tonight then,</i>\" she says. There’s a far-away gleam of excitement in her eyes as she tugs on a nipple; only now does it occur to you what ‘marked as being under demon protection’ might entail. \"<i>Anything else, [master]?</i>\"");
 
 			flags[kFLAGS.FOLLOWER_AT_FARM_CERAPH] = 1;
 			SceneLib.farm.farmCorruption.whitneyCorruption(10);
@@ -118,7 +118,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			clearOutput();
 			ceraphSprite();
 
-			outputText("“<i>Very well,</i>” she smirks. “<i>Anything else?</i>”");
+			outputText("\"<i>Very well,</i>\" she smirks. \"<i>Anything else?</i>\"");
 
 			ceraphFollowerAppearance(false);
 		}

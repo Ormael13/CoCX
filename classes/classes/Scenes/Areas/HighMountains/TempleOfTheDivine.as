@@ -241,7 +241,7 @@ use namespace CoC;
 		}
 		public function PlayerPrayAtTempleFeraAltair():void {
 			clearOutput();
-			outputText("You pray to the huntress patron Fera. As you word out your prayer, lewd fantasies of all kind flow into your mind. Fera delicious caress pleases you, healing your wounds and washing away your pure thoughts. You also feel the blessing of the deity empowering your “talents”.\n");
+			outputText("You pray to the huntress patron Fera. As you word out your prayer, lewd fantasies of all kind flow into your mind. Fera delicious caress pleases you, healing your wounds and washing away your pure thoughts. You also feel the blessing of the deity empowering your \"talents\".\n");
 			loosingMaraeBlessing();
 			loosingTaothBlessing();
 			loosingFenrirBlessing();

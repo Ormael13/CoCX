@@ -42,7 +42,7 @@ public class DenOfDesire extends DungeonAbstractContent
 		public function defeatedObsidianGargoyle():void {
 			clearOutput();
 			spriteSelect(SpriteDb.s_obsidian_gargoyle);
-			outputText("Screaming in agony, the abominations body begins to fissure everywhere as she look at you with a tearful expression of release and say a final “thank you”. Her body breaks down, crumbling on the ground into a pile of stone rubble. What looks to be a good hundred or more different ghostly forms escape from the stony remains, moving upward to whatever place they are going, although you notice a few remain stuck in a gem like stone.\n\n");
+			outputText("Screaming in agony, the abominations body begins to fissure everywhere as she look at you with a tearful expression of release and say a final \"thank you\". Her body breaks down, crumbling on the ground into a pile of stone rubble. What looks to be a good hundred or more different ghostly forms escape from the stony remains, moving upward to whatever place they are going, although you notice a few remain stuck in a gem like stone.\n\n");
 			outputText("<b>(Key Item Acquired: Black Soul Gem!)</b>");
 			player.createKeyItem("Black Soul Gem", 0, 0, 0, 0);
 			flags[kFLAGS.DEN_OF_DESIRE_BOSSES] = 2;

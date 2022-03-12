@@ -732,7 +732,7 @@ public class PlayerAppearance extends BaseContent {
 					case CockTypesEnum.RED_PANDA: cockDesc += " It lies protected in a soft, fuzzy sheath."; break;
 					case CockTypesEnum.OOMUKADE: cockDesc += " It constantly drips with venom."; break;
 					case CockTypesEnum.USHI_ONI: cockDesc += " It's starfish tipped shaft."; break;
-					case CockTypesEnum.MINDBREAKER: cockDesc += " Hidden in a slit along with the rest of your male equipment, it constantly fills with your thick green slimy cum, to the point that your cum constantly leaks out of your genital slit, leaving a sticky trail of green “slime” in your wake."; break;
+					case CockTypesEnum.MINDBREAKER: cockDesc += " Hidden in a slit along with the rest of your male equipment, it constantly fills with your thick green slimy cum, to the point that your cum constantly leaks out of your genital slit, leaving a sticky trail of green \"slime\" in your wake."; break;
 					default: //Nothing here, move along!
 				}
 				// Knot?

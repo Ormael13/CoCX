@@ -73,7 +73,7 @@ public final class Mutations extends MutationsHelper {
     public function manUpBeer(player:Player):void {
         player.slimeFeed();
         clearOutput();
-        outputText("You open the can and “bottom up”, hoping it wasn’t just a scam to buy an overpriced beer. “Whoa, that’s one hell of a manly beverage!” The alcohol in the beer is so strong you actually feel like you could lift bigger things now. No...wait, you actually do as your muscle seems to surge with new raw power.");
+        outputText("You open the can and \"bottom up\", hoping it wasn’t just a scam to buy an overpriced beer. \"Whoa, that’s one hell of a manly beverage!\" The alcohol in the beer is so strong you actually feel like you could lift bigger things now. No...wait, you actually do as your muscle seems to surge with new raw power.");
         if (player.hasPerk(PerkLib.GoblinoidBlood) && player.hasPerk(MutationsLib.NaturalPunchingBagEvolved)) AlchemyBonus("str", 2 + rand(3));
         else AlchemyBonus("str", 1 + rand(2));
         if (rand(3) == 0) {
@@ -7854,7 +7854,7 @@ public final class Mutations extends MutationsHelper {
                 //Stop loopahn when dick be found
                 if (player.cocks[temp2].cockType != CockTypesEnum.CAVE_WYRM) break;
             }
-            outputText("[pg]You feel a sudden itch in your cock and undress as an irrepressible desire to masturbate takes hold of you. You keep stroking your twitching cock, moaning as you cum neon blue fluids. Wait, what? When you inspect your “cock descript” you discover it has not only changed color to neon blue but reshaped into a lizard cock. Furthermore it seems to naturally glow in the dark like the fluids that comes out of it. <b>You now have a neon blue lizard cock that glow in the dark.</b>");
+            outputText("[pg]You feel a sudden itch in your cock and undress as an irrepressible desire to masturbate takes hold of you. You keep stroking your twitching cock, moaning as you cum neon blue fluids. Wait, what? When you inspect your \"cock descript\" you discover it has not only changed color to neon blue but reshaped into a lizard cock. Furthermore it seems to naturally glow in the dark like the fluids that comes out of it. <b>You now have a neon blue lizard cock that glow in the dark.</b>");
             //(REMOVE SHEATH IF NECESSARY)
             if (player.hasSheath()) {
                 player.cocks[temp2].cockType = CockTypesEnum.CAVE_WYRM;
@@ -10368,7 +10368,7 @@ public final class Mutations extends MutationsHelper {
                 //Stop loopahn when dick be found
                 if (player.cocks[temp2].cockType != CockTypesEnum.RAIJU) break;
             }
-            outputText("[pg]You feel a sudden itch in your cock and undress as an irrepressible desire to masturbate takes hold of you. You keep stroking your twitching cock, moaning as you cum neon blue fluids. Wait, what? When you inspect your “cock descript” you discover its tip not only has changed color to neon blue but is now tappered with a sheath like that of a raiju. Furthermore it seems to naturally glow in the dark like the plasma that naturaly drips out of it. <b>You now have a neon blue raiju cock that glow in the dark.</b>");
+            outputText("[pg]You feel a sudden itch in your cock and undress as an irrepressible desire to masturbate takes hold of you. You keep stroking your twitching cock, moaning as you cum neon blue fluids. Wait, what? When you inspect your \"cock descript\" you discover its tip not only has changed color to neon blue but is now tappered with a sheath like that of a raiju. Furthermore it seems to naturally glow in the dark like the plasma that naturaly drips out of it. <b>You now have a neon blue raiju cock that glow in the dark.</b>");
             //(REMOVE SHEATH IF NECESSARY)
             player.cocks[temp2].cockType = CockTypesEnum.RAIJU;
             player.cocks[temp2].knotMultiplier = 1.25;
@@ -12330,14 +12330,14 @@ public final class Mutations extends MutationsHelper {
             player.modThickness(40, 3);
             changes++;
         }
-        //Thigh Loss: (towards “girly”)
+        //Thigh Loss: (towards \"girly\")
         if (player.hips.type >= 10 && rand(4) == 0 && changes < changeLimit) {
             outputText("[pg]You touch your thighs speculatively.  It's not just your imagination; you've lost a bit of weight around your waist.");
             player.hips.type--;
             if (player.hips.type > 15) player.hips.type -= 2 + rand(3);
             changes++;
         }
-        //Thigh Gain: (towards “girly”)
+        //Thigh Gain: (towards \"girly\")
         if (player.hips.type < 6 && rand(4) == 0 && changes < changeLimit) {
             outputText("[pg]You touch your thighs speculatively.  You think you may have gained a little weight around your waist.");
             player.hips.type++;
@@ -12413,7 +12413,7 @@ public final class Mutations extends MutationsHelper {
             //Testicle Reduction final:
             if (player.ballSize < 1 && !player.hasStatusEffect(StatusEffects.Uniball)) {
                 outputText("  You whimper as once again, your balls tighten and shrink.  Your eyes widen when you feel the gentle weight of your testicles pushing against the top of your [hips], and a few hesitant swings of your rear confirm what you can feel - you've tightened your balls up so much they no longer hang beneath your [cocks], but press perkily upwards.  Heat ringing your ears, you explore your new sack with a careful hand.  You are deeply grateful you apparently haven't reversed puberty, but you discover that though you still have " + num2Text(player.balls) + ", your balls now look and feel like one: one cute, tight little sissy parcel, its warm, insistent pressure upwards upon the joining of your thighs a never-ending reminder of it.");
-                //[Note: Balls description should no longer say “swings heavily beneath”.  For simplicity's sake sex scenes should continue to assume two balls]
+                //[Note: Balls description should no longer say \"swings heavily beneath\".  For simplicity's sake sex scenes should continue to assume two balls]
                 player.ballSize = 1;
                 player.createStatusEffect(StatusEffects.Uniball, 0, 0, 0, 0);
             } else if (player.ballSize < 1) player.ballSize = 1;
@@ -13046,8 +13046,8 @@ public final class Mutations extends MutationsHelper {
         //CoC Ferret TF (Ferret Fruit)
         //Finding Ferret Fruit
         //- Ferret Fruit may be randomly found while exploring the plains.
-        //- Upon finding Ferret Fruit: “While searching the plains, you find an odd little tree with a curved trunk. The shape of its fruit appears to mimic that of the tree. A few of the fruits seem to have fallen off. You brush the dirt off of one of the fruits before placing in in your (x) pouch. (if there is no room in your inventory, you get the generic option to use now or abandon)
-        //- If you hover over the fruit in your inventory, this is its description:  “This fruit is curved oddly, just like the tree it came from.  The skin is fuzzy and brown, like the skin of a peach.”
+        //- Upon finding Ferret Fruit: \"While searching the plains, you find an odd little tree with a curved trunk. The shape of its fruit appears to mimic that of the tree. A few of the fruits seem to have fallen off. You brush the dirt off of one of the fruits before placing in in your (x) pouch. (if there is no room in your inventory, you get the generic option to use now or abandon)
+        //- If you hover over the fruit in your inventory, this is its description:  \"This fruit is curved oddly, just like the tree it came from.  The skin is fuzzy and brown, like the skin of a peach.\"
         //-Upon eating the fruit:
         clearOutput();
         outputText("Feeling parched, you gobble down the fruit without much hesitation. Despite the skin being fuzzy like a peach, the inside is relatively hard, and its taste reminds you of that of an apple.  It even has a core like an apple. Finished, you toss the core aside.");
@@ -13104,7 +13104,7 @@ public final class Mutations extends MutationsHelper {
             if (player.hips.type > 23) player.hips.type--;
             changes++;
         }
-        //- If butt rating is greater than “petite”:
+        //- If butt rating is greater than \"petite\":
         if (player.butt.type >= 8 && rand(3) == 0 && changes < changeLimit) {
             outputText("[pg]You cringe as your [butt] begins to feel uncomfortably tight.  Once the sensation passes, you look over your shoulder, inspecting yourself.  It would appear that your ass has become smaller!");
             player.butt.type--;
@@ -17424,4 +17424,3 @@ public final class Mutations extends MutationsHelper {
     }
 }
 }
-

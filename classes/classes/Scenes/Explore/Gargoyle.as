@@ -31,7 +31,7 @@ private function gargoyleConfidence(arg:Number = 0):Number {
 //[b]Introduction, 1st Time:[/b]
 public function gargoylesTheShowNowOnWBNetwork():void {
 	clearOutput();
-	//(When using the “Explore” option; perhaps a 15-25% chance of discovery per go)
+	//(When using the \"Explore\" option; perhaps a 15-25% chance of discovery per go)
 	outputText("You set off in search of new horizons, setting off from camp in a completely new direction than you've ever tried before.  Away from the parts of Mareth you have thus far discovered, much of the world seems to be a barren wasteland");
 	//if Desert is discovered:
 	if(player.exploredDesert > 0) outputText(", making even the desert seem healthy and full of life");
@@ -231,7 +231,7 @@ private function reassureTheGargoyle():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 
-//[i](Whenever the player returns to the Cathedral, play one of the following introductions, then the “Cathedral Interior” scenes. )[/i]
+//[i](Whenever the player returns to the Cathedral, play one of the following introductions, then the \"Cathedral Interior\" scenes. )[/i]
 //[b]Player Returns to the Cathedral A[/b]
 public function returnToCathedral(woken:Boolean = false):void {
     spriteSelect(SpriteDb.s_gargoyle);
@@ -331,7 +331,7 @@ private function gargoyleAnal():void {
 	
 	outputText("\n\n" + flags[kFLAGS.GAR_NAME] + " makes a sharp little gasp as you push your finger into her.  You slide into her with surprising ease, reveling in how <i>cold</i> her interior is.  She's like ice inside!  You start thrusting your finger faster, trying to get her warmed up a little as your prepare her anus.  " + flags[kFLAGS.GAR_NAME] + " squirms and moans softly as you finger-fuck her bum, slowly changing from moans of discomfort to little gasps of pleasure.");
 	
-	outputText("\n\nDeciding you've gotten her more than ready, you grasp your [cock biggest] and push the head against her still-tight ass.  Her mouth forms a sharp “O” of pleasure as you grab her hips and push into her.  Though you've lubed her up plenty, her passage is still incredibly tight, and so cool inside it takes a force of will to keep your cock from wilting.  But all it takes is one look at her face over her shoulder, eyes rolled back in pleasure, to keep you thrusting in at full mast.");
+	outputText("\n\nDeciding you've gotten her more than ready, you grasp your [cock biggest] and push the head against her still-tight ass.  Her mouth forms a sharp \"O\" of pleasure as you grab her hips and push into her.  Though you've lubed her up plenty, her passage is still incredibly tight, and so cool inside it takes a force of will to keep your cock from wilting.  But all it takes is one look at her face over her shoulder, eyes rolled back in pleasure, to keep you thrusting in at full mast.");
 	
 	//(if PC's first cock is 50 inches or bigger; Silly Mode only:)
 	if(player.cocks[player.biggestCockIndex()].cockLength >= 50) {
@@ -395,7 +395,7 @@ private function titFuckTheGargoyle():void {
 	clearOutput();
 	outputText("You situate yourself on a pew and spread your legs.  You pat your thighs, telling " + flags[kFLAGS.GAR_NAME] + " to sit between your legs as you fish out your [cock biggest].  She approaches, hesitantly placing herself on the floor between your legs as you recline and stroke your shaft to full hardness.  You let the gargoyle sit there, watching you wide-eyed as you continue to masturbate.  Though you're only preparing for the main act, you can't help but enjoy the sensation of such a basic sexual act, made all the more pleasurable by the creature at your feet, her face barely an inch from your cock's head as you stroke yourself.");
 	
-	outputText("\n\nOnce you're satisfied at your cock's rigid hardness, you tell " + flags[kFLAGS.GAR_NAME] + " to put those big, soft tits of hers to work.  \"<i>M-Master?</i>\" she gasps, making a cute little “o” with her mouth just an inch from your shaft.  You repeat the order, and giver her a thump on the nose with your cock for emphasis.  Shyly, she cups her D-cups and leans into you, squeezing your [cock biggest] between them.");
+	outputText("\n\nOnce you're satisfied at your cock's rigid hardness, you tell " + flags[kFLAGS.GAR_NAME] + " to put those big, soft tits of hers to work.  \"<i>M-Master?</i>\" she gasps, making a cute little \"o\" with her mouth just an inch from your shaft.  You repeat the order, and giver her a thump on the nose with your cock for emphasis.  Shyly, she cups her D-cups and leans into you, squeezing your [cock biggest] between them.");
 	
 	outputText("\n\nWith a little encouragement, " + flags[kFLAGS.GAR_NAME] + " starts to rise and fall on her knees, dragging your shaft through her soft, cool mounds.  With a pleasured sigh, you reach down and stroke her hair, petting the girl as she begins to slowly but steadily titfuck you.  Still mumbling encouragements, you sit back and let the pleasure run over you, reveling in the incredible softness of her sizable chest massaging your cock, making steady progress toward stroking the cum out of you.");
 	
@@ -461,7 +461,7 @@ private function strapOnGargoyle():void {
 //Requires Vag
 private function tailFuckGargoyleScene():void {
 	clearOutput();
-	outputText("Without warning, you grab " + flags[kFLAGS.GAR_NAME] + "'s thick, spiked tail and give it a playful yank.  She lets out a surprised \"<i>EEP,</i>\" but settles down after you tell her to cop a squat and stiffen it up.  Obediently, she assumes a low crouch and stiffens her tail into a “U” shape between her legs, its tip pointed straight up between your belly and her face.  You ruffle her hair and strip out of your [armor], soon standing nude before the gargoyle.  At a command from you, the brutal stone spikes protruding from her tail's tip retract, leaving the appendage a smooth, cool surface.");
+	outputText("Without warning, you grab " + flags[kFLAGS.GAR_NAME] + "'s thick, spiked tail and give it a playful yank.  She lets out a surprised \"<i>EEP,</i>\" but settles down after you tell her to cop a squat and stiffen it up.  Obediently, she assumes a low crouch and stiffens her tail into a \"U\" shape between her legs, its tip pointed straight up between your belly and her face.  You ruffle her hair and strip out of your [armor], soon standing nude before the gargoyle.  At a command from you, the brutal stone spikes protruding from her tail's tip retract, leaving the appendage a smooth, cool surface.");
 	
 	outputText("\n\nWith a little balancing help from a nearby pew, you balance yourself over the narrow tip of her tail and slowly lower yourself down upon it.  The tip slips through your lower lips easily, its stone cold surface sending a chill up your spine as you slide down the gargoyle's shaft.");
 	player.cuntChange(15, true, true, true); 
@@ -588,7 +588,7 @@ private function gargoyleCuddleAfterBodyRitual():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 
-//[b]“Mind”[/b]
+//[b]\"Mind\"[/b]
 //(PC Decreases Corruption and Lust, increases Intelligence)
 private function mindGargoyleRitual():void {
 	clearOutput();
@@ -652,7 +652,7 @@ private function banishmentGargoyleRitual():void {
 //[b]Nothing[/b]
 private function dontFreakOutAfterBanishment():void {
 	clearOutput();
-	outputText("You simply lie still and try to recover from " + flags[kFLAGS.GAR_NAME] + "'s “gentle ministrations. ” After a few minutes, you've caught your breath and, gathering your possessions, make your way out of the Cathedral without another word. Damn, you're sore.");
+	outputText("You simply lie still and try to recover from " + flags[kFLAGS.GAR_NAME] + "'s \"gentle ministrations. \" After a few minutes, you've caught your breath and, gathering your possessions, make your way out of the Cathedral without another word. Damn, you're sore.");
 	//(Return PC to camp, advance time 1 hour)
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -769,7 +769,7 @@ private function banishPervRitual():void {
 	else outputText("them");
 	outputText(".  She gives you an understanding nod and tells you to strip.  As you do so, she dips beneath the altar, reappearing with a silver, blue-rune covered rod nestled into what looks like a leather thong.  " + flags[kFLAGS.GAR_NAME] + " slips the thong on, letting a slight gasp escape her lips as the inner end of the rod enters her.");
 	
-	outputText("\n\nShe gives the shaft of the strap-on a few experimental strokes and, satisfied, says, \"<i>I've turned down the power of the runes, so it will not hurt you so much... though it will take longer than normal.  I suggest you lubricate it, Master.</i>\"  Smiling, she sits herself atop the alter and presents her silver “cock” to you.  You kneel and slip your face between her spread legs, giving the rod a quick lick.  It's incredibly smooth and quite cold, much like its wearer, but your tongue comes away with a warm tingle spreading through it – not pain, but more like numbness.  You take the rod into your mouth, running your tongue across its length and thrusting your face against it, blowing it like a cock while getting it sopping wet with your saliva.  You've only been at it for a minute when you notice " + flags[kFLAGS.GAR_NAME] + " is bucking her hips slightly and moaning quietly, obviously getting more than a little enjoyment from the sensation.  Perhaps she can feel through it, like a real dick?  Grinning, you redouble your efforts to suck her off.");
+	outputText("\n\nShe gives the shaft of the strap-on a few experimental strokes and, satisfied, says, \"<i>I've turned down the power of the runes, so it will not hurt you so much... though it will take longer than normal.  I suggest you lubricate it, Master.</i>\"  Smiling, she sits herself atop the alter and presents her silver \"cock\" to you.  You kneel and slip your face between her spread legs, giving the rod a quick lick.  It's incredibly smooth and quite cold, much like its wearer, but your tongue comes away with a warm tingle spreading through it – not pain, but more like numbness.  You take the rod into your mouth, running your tongue across its length and thrusting your face against it, blowing it like a cock while getting it sopping wet with your saliva.  You've only been at it for a minute when you notice " + flags[kFLAGS.GAR_NAME] + " is bucking her hips slightly and moaning quietly, obviously getting more than a little enjoyment from the sensation.  Perhaps she can feel through it, like a real dick?  Grinning, you redouble your efforts to suck her off.");
 	
 	outputText("\n\n\"<i>Enough, Master,</i>\" she gasps, pushing you back.  Breathing heavily, she takes you by the hand and gets you to brace yourself against the altar.  Your entire mouth is numb now, tingling from the strange sensation given off by the holy rod-cock.  " + flags[kFLAGS.GAR_NAME] + " slips behind you, putting a cool, soft hand on your [hips] as she lines up for penetration.  You grip down hard on the edge of the altar, and try your best to relax your sphincter as you begin to feel a tingling pressure against your back door.");
 	if(player.ass.analWetness > 0) outputText("  She slips in easily, sliding her tingling holy rod into you until her hips are pressed against your [butt]");

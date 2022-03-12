@@ -1498,21 +1498,21 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 			outputText("\"<i>These are...?</i>\" You begin hesitantly, unable to say it.\n\n");
 
-			outputText("“<i>Our children, yours and mine");
+			outputText("\"<i>Our children, yours and mine");
 			// Mix
 			if (flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS] > 0 && flags[kFLAGS.AMILY_BIRTH_TOTAL] > 0)
 			{
-				outputText(".</i>”");
+				outputText(".</i>\"");
 			}
 			// Only PC birth
 			else if (flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS] > 0 && flags[kFLAGS.AMILY_BIRTH_TOTAL] == 0)
 			{
-				outputText(", planted by me inside of you.</i>”");
+				outputText(", planted by me inside of you.</i>\"");
 			}
 			// Only Amily birth
 			else if (flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS] == 0 && flags[kFLAGS.AMILY_BIRTH_TOTAL] > 0)
 			{
-				outputText(", planted by you inside of me.</i>”");
+				outputText(", planted by you inside of me.</i>\"");
 			}
 			outputText("  Amily trills happily.\n\n");
 
@@ -1980,7 +1980,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				{
 					outputText("You pause for a few moments, trying to think of a way to phrase this delicately, then ask her how she thinks your children are doing.\n\n");
 
-					outputText("A hint of worry creeps into her expression, matching your own; but she remains resolute. “<i>The first of our kids grew up so fast, and they seem to be doing OK out there without their parents to dote on them. The eldest are doing a great job caring for the young ones.</i>” she answers.\n\n");
+					outputText("A hint of worry creeps into her expression, matching your own; but she remains resolute. \"<i>The first of our kids grew up so fast, and they seem to be doing OK out there without their parents to dote on them. The eldest are doing a great job caring for the young ones.</i>\" she answers.\n\n");
 				}
 
 				outputText("Feeling somewhat more reassured, but not entirely so, you get ready to leave.\n\n");
@@ -2581,7 +2581,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 						flags[kFLAGS.FOLLOWER_AT_FARM_AMILY_GIBS_MILK] = 2;
 						outputText("\n\nYou wordlessly hold out your hand. Grinning, Amily produces a bottle of succubus milk and places it in your palm.");
 
-						outputText("\n\n“<i>I'll leave my regular production with the rest of the payment Whitney owes you [master].</i>”\n\n");
+						outputText("\n\n\"<i>I'll leave my regular production with the rest of the payment Whitney owes you [master].</i>\"\n\n");
 
 						inventory.takeItem(consumables.SUCMILK, amilyFollowerEncounter);
 						return;
@@ -5839,9 +5839,9 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 			outputText("You tell your pet mouse that she is to head towards the lake, find a farm, present herself to the lady who works there and do as she says.");
 
-			outputText("\n\n“<i>You’re... you’re sending me away?</i>” An expression of miserable horror dawns on Amily’s face. “<i>Have... have I done something to offend you [master]? Please punish me any way you see fit, I deserve it, but please don’t take me away from your glorious person!</i>” You laugh fondly.");
+			outputText("\n\n\"<i>You’re... you’re sending me away?</i>\" An expression of miserable horror dawns on Amily’s face. \"<i>Have... have I done something to offend you [master]? Please punish me any way you see fit, I deserve it, but please don’t take me away from your glorious person!</i>\" You laugh fondly.");
 
-			outputText("\n\n“<i>This isn’t a punishment, but I need you to be doing more than sitting around diddling yourself to the thought of servicing me. I’ll visit often and keep you well fed, don’t worry about that - and all that farm work will make you nice and limber for when I’m throwing you around. Go on now.</i>” Slightly mollified but still looking uncertain, Amily gets up off her knees and trundles off in the direction of the lake.");
+			outputText("\n\n\"<i>This isn’t a punishment, but I need you to be doing more than sitting around diddling yourself to the thought of servicing me. I’ll visit often and keep you well fed, don’t worry about that - and all that farm work will make you nice and limber for when I’m throwing you around. Go on now.</i>\" Slightly mollified but still looking uncertain, Amily gets up off her knees and trundles off in the direction of the lake.");
 
 			outputText("\n\nShe will make a hard worker for Whitney, you think, but you doubt she will be much use protection wise.");
 
@@ -5856,7 +5856,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 			outputText("You tell her to head back to camp; there are things you need to do to her you can’t do whilst she’s here. Repeatedly. Amily bites her lip, trembling with excitement.");
 
-			outputText("\n\n“<i>Immediately, [master]!</i>” You watch the purple blur disappear over the hill and laugh to yourself.");
+			outputText("\n\n\"<i>Immediately, [master]!</i>\" You watch the purple blur disappear over the hill and laugh to yourself.");
 
 			flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] = 0;
 
@@ -5870,10 +5870,10 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 			outputText("You tell Amily that you want her hooked up to a milking machine whenever possible; you need her fluids.");
 
-			outputText("\n\n“<i>You want to use me like an animal, [master]? Drain my teats every day like the fuck-cow I am?</i>” Amily quivers, staining the ground beneath her with pussy juices at the thought.");
+			outputText("\n\n\"<i>You want to use me like an animal, [master]? Drain my teats every day like the fuck-cow I am?</i>\" Amily quivers, staining the ground beneath her with pussy juices at the thought.");
 
-			if (flags[kFLAGS.FARM_UPGRADES_REFINERY] == 0) outputText("\n\n“<i>I-I’m sorry though, master. The milk I produce wouldn’t be much use to you. Talk to Mistress Whitney, maybe she can be build a machine that can concentrate it.</i>”");
-			else outputText("\n\n“<i>It will be an honor, [master]!</i>”");
+			if (flags[kFLAGS.FARM_UPGRADES_REFINERY] == 0) outputText("\n\n\"<i>I-I’m sorry though, master. The milk I produce wouldn’t be much use to you. Talk to Mistress Whitney, maybe she can be build a machine that can concentrate it.</i>\"");
+			else outputText("\n\n\"<i>It will be an honor, [master]!</i>\"");
 
 			if (flags[kFLAGS.FARM_UPGRADES_REFINERY] == 1) flags[kFLAGS.FOLLOWER_PRODUCTION_AMILY] = 1;
 
@@ -5887,7 +5887,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 			outputText("You tell Amily to stop producing succubus milk; you’re practically drowning in the stuff.");
 
-		outputText("\n\n“<i>Ooh... what a fabulous idea.</i>” Amily moans and begins to paw at her vagina. You cough deliberately before she can immerse herself entirely in the fantasy. “<i>O-of course [master]. I’ll stop immediately.</i>”");
+		outputText("\n\n\"<i>Ooh... what a fabulous idea.</i>\" Amily moans and begins to paw at her vagina. You cough deliberately before she can immerse herself entirely in the fantasy. \"<i>O-of course [master]. I’ll stop immediately.</i>\"");
 
 			flags[kFLAGS.FOLLOWER_PRODUCTION_AMILY] = 0;
 

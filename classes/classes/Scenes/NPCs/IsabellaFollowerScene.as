@@ -205,8 +205,8 @@ public function callForFollowerIsabella():void {
 	{
 		outputText("Isabella puts down the milk canister she’s carrying and wipes her brow at your approach.");
 
-		if (isabellaAccent()) outputText("\n\n“<i>Guten tag, [name]. What can Isabella help you with?</i>”");
-		else outputText("\n\n“<i>Hello [name]. What can Isabella help you with?</i>”");
+		if (isabellaAccent()) outputText("\n\n\"<i>Guten tag, [name]. What can Isabella help you with?</i>\"");
+		else outputText("\n\n\"<i>Hello [name]. What can Isabella help you with?</i>\"");
 	}
 
 	menu();
@@ -237,10 +237,10 @@ private function sendToFarm():void
 	clearOutput();
 	isabellaSprite();
 
-	outputText("“<i>Do you think you could do me a favor?</i>” you say to the Teutonic tit-monster. “<i>There’s a farm near here, down by the lake. I need anyone who is strong, and vigilant, and... has a lot of milk...</i>” To your relief, Isabella responds well to the idea.");
+	outputText("\"<i>Do you think you could do me a favor?</i>\" you say to the Teutonic tit-monster. \"<i>There’s a farm near here, down by the lake. I need anyone who is strong, and vigilant, and... has a lot of milk...</i>\" To your relief, Isabella responds well to the idea.");
 
-	if (isabellaAccent()) outputText("\n\n“<i>Ja, I know of this place from mein own travels. The baurehund is very kind, yes? She let me use the milk machines whenever I wanted. If her farm is now unsere farm, I will gladly help!</i>”");
-	else outputText("\n\n“<i>Yes, I know of this place from my own travels. The farmdog is very kind, yes? She let me use the milk machines whenever I wanted. If her farm is now our farm, I will gladly help!</i>”");
+	if (isabellaAccent()) outputText("\n\n\"<i>Ja, I know of this place from mein own travels. The baurehund is very kind, yes? She let me use the milk machines whenever I wanted. If her farm is now unsere farm, I will gladly help!</i>\"");
+	else outputText("\n\n\"<i>Yes, I know of this place from my own travels. The farmdog is very kind, yes? She let me use the milk machines whenever I wanted. If her farm is now our farm, I will gladly help!</i>\"");
 
 	outputText("\n\nShe happily packs up and then sways off in the direction of the lake. She will get along very well with Whitney, you think, as well as providing the farm with a great deal of both strength and milk.");
 
@@ -254,10 +254,10 @@ private function backToCamp():void
 	clearOutput();
 	isabellaSprite();
 
-	outputText("“<i>Could you head back to camp? It’s just... it’s getting a little lonely at night up there.</i>” Your gambit pays off and Isabella pinches your cheek in delight.");
+	outputText("\"<i>Could you head back to camp? It’s just... it’s getting a little lonely at night up there.</i>\" Your gambit pays off and Isabella pinches your cheek in delight.");
 
-	if (isabellaAccent()) outputText("\n\n“<i>Aww, is mein little kuschelbar getting all cold and lonely by [himself]? Isabella will come back and keep you warm, ja, very warm indeed!</i>”");
-	else outputText("\n\n“<i>Aww, is my little teddybear getting all cold and lonely by [himself]? Isabella will come back and keep you warm, yes, very warm indeed!</i>” You leave her to pack up her things and go.");
+	if (isabellaAccent()) outputText("\n\n\"<i>Aww, is mein little kuschelbar getting all cold and lonely by [himself]? Isabella will come back and keep you warm, ja, very warm indeed!</i>\"");
+	else outputText("\n\n\"<i>Aww, is my little teddybear getting all cold and lonely by [himself]? Isabella will come back and keep you warm, yes, very warm indeed!</i>\" You leave her to pack up her things and go.");
 
 	flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] = 0;
 
@@ -1627,11 +1627,11 @@ private function toggleIsabellaContraceptives():void {
 private function isabellaCowifyPrompt():void {
 	clearOutput();
 	if (flags[kFLAGS.ISABELLA_COWMOTHER] == 0) {
-		outputText("As you chat to the expectant warrior-woman, you notice an occasional sad expression when she touches her bulging belly, and ask her what the matter is.  “It is nothing, [name].” She replies, at first, but you can tell that’s not the truth and continue probing until she sighs and explains.  \"<i>It is just, well... I am not human any more, but, from what I heard on the plains, my little babies will be human.  I do not regret giving up my humanity, but I do worry sometimes how it will affect them, to have a literal cow-woman like myself for a mother.</i>\"");
+		outputText("As you chat to the expectant warrior-woman, you notice an occasional sad expression when she touches her bulging belly, and ask her what the matter is.  \"It is nothing, [name].\" She replies, at first, but you can tell that’s not the truth and continue probing until she sighs and explains.  \"<i>It is just, well... I am not human any more, but, from what I heard on the plains, my little babies will be human.  I do not regret giving up my humanity, but I do worry sometimes how it will affect them, to have a literal cow-woman like myself for a mother.</i>\"");
 		outputText("\n\nYou note that does sound like a bit of a worry, but, well, it’s not as if either of you have a way of changing that.");
 		outputText("\n\nIsabella’s face morphs into a strange expression, at once pleased and nervous.  \"<i>Well, that is not entirely true.  You see, I encountered a demon, some time ago in the plains, and after a little... persuasion... they gave me something.</i>\"  She turns and begins rummaging through her chest of belongings, giving you an excellent view of her ass as she does so, before turning back towards you with a tightly-wrapped bundle of dense cloth.  Gingerly she unwraps it, exposing to you a small shard of some crystalline material.");
 		if (player.hasKeyItem("Marae's Lethicite") >= 0) outputText("\n\nYou recognize it instantly as a shard of lethicite, though obviously not as powerful as the one you stole from the corrupted goddess.  You tell her that such a crystal could almost assuredly change her into truly being the cowgirl she looks like, and cause that trait to breed true in your children.");
-		else outputText("\n\nYou ask what the crystal is.  \"<i>It is called lethicite, and it is the source of the demonic shapeshifting powers.”  Isabella explains.  “I think... I think that, with this, I could make myself truly be what I appear to be, and pass on what I am to our children.</i>\"");
+		else outputText("\n\nYou ask what the crystal is.  \"<i>It is called lethicite, and it is the source of the demonic shapeshifting powers.\"  Isabella explains.  \"I think... I think that, with this, I could make myself truly be what I appear to be, and pass on what I am to our children.</i>\"");
 		outputText("\n\nShe looks at you, nervous and uncertain.  \"<i>I...I do not know what would be best for our children, [name]. Tell me, do you think I should use it?</i>\"");
 	}
 	else {
@@ -1711,7 +1711,7 @@ public function isabellaGivesBirth():void {
 			if (babyGender == 3) outputText("One thing she does have that her mother lacks, however, is a juvenile yet very masculine appendage swinging between her legs.  The shape of it kind of reminds you of a minotaur’s distinctive masculinity, but you quietly confirm that she also has an infantile vagina there as well; she’s a herm.");
 		}
 		outputText("\n\nWith a paternal smile of adoration, you announce the baby’s gender to Isabella and hand " + babyMF("him", "her", babyGender) + " over.");
-		outputText("\n\nIsabella takes " + babyMF("him", "her", babyGender) + " with a smile of motherly delight, already forgetting about the strain of birth now that she can hold her " + babyMF("son", "daughter", babyGender) + ".  “Isn’t " + babyMF("he", "she", babyGender) + " just beautiful, [name]?” She asks. " + (babyGender == 1 ? "\"<i>It’s strange that it didn’t work on him... but he’s just so precious this way.</i>\"" : "") + " You agree that " + babyMF("he", "she", babyGender) + " is, watching as the delighted new mother puts her new baby to her ever-seeping quad-nipples; the smell of the bountiful milk helps guide the infant to her breast and " + babyMF("he", "she", babyGender) + " is soon sucking away with the greedy enthusiasm of the newborn.  With a soft groan of effort, Isabella sinks to the ground, seating herself against the boulder to nurse her new " + babyMF("son", "daughter", babyGender) + ".");
+		outputText("\n\nIsabella takes " + babyMF("him", "her", babyGender) + " with a smile of motherly delight, already forgetting about the strain of birth now that she can hold her " + babyMF("son", "daughter", babyGender) + ".  \"Isn’t " + babyMF("he", "she", babyGender) + " just beautiful, [name]?\" She asks. " + (babyGender == 1 ? "\"<i>It’s strange that it didn’t work on him... but he’s just so precious this way.</i>\"" : "") + " You agree that " + babyMF("he", "she", babyGender) + " is, watching as the delighted new mother puts her new baby to her ever-seeping quad-nipples; the smell of the bountiful milk helps guide the infant to her breast and " + babyMF("he", "she", babyGender) + " is soon sucking away with the greedy enthusiasm of the newborn.  With a soft groan of effort, Isabella sinks to the ground, seating herself against the boulder to nurse her new " + babyMF("son", "daughter", babyGender) + ".");
 	}
 	outputText("\n\nYou gently fetch a blanket for the new mother and " + babyMF("son", "daughter", babyGender) + ", wrapping them both in its warm softness even as Isabella continues to nurse.  You ask if there’s anything else she needs, but the bovine braud simply gives you a blissful smile and shakes her head.  You kiss her gently on the cheek and quietly withdraw to let mother and child bond.");
 	//Increment children count

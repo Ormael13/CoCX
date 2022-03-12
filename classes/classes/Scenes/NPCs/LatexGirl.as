@@ -599,11 +599,11 @@ private function sendToFarm():void
 {
 	clearOutput();
 	
-	outputText("You tell your goo pet that she is to head towards the lake, find a farm, present herself to the lady who works there and do as she says. The word “lake” has the effect you expected it would have; joy creases [latexyname]’s liquid face as you mention the Promised Land.");
+	outputText("You tell your goo pet that she is to head towards the lake, find a farm, present herself to the lady who works there and do as she says. The word \"lake\" has the effect you expected it would have; joy creases [latexyname]’s liquid face as you mention the Promised Land.");
 
-	outputText("\n\n“<i>No sneaking off,</i>” you warn. “<i>I want you to work hard and earn the fluids you’ll be given.</i>”");
+	outputText("\n\n\"<i>No sneaking off,</i>\" you warn. \"<i>I want you to work hard and earn the fluids you’ll be given.</i>\"");
 
-	outputText("\n\n“<i>As you wish [master],</i>” she sighs, before slowly sliding off in the direction of the lake. She will be utterly useless as either a worker or a protector, you think; however, you suspect if Whitney keeps her well fed she will be able to harvest latex from her, which is surely worth something, and maybe some good old fashioned exertion will do the willful goo some good.");
+	outputText("\n\n\"<i>As you wish [master],</i>\" she sighs, before slowly sliding off in the direction of the lake. She will be utterly useless as either a worker or a protector, you think; however, you suspect if Whitney keeps her well fed she will be able to harvest latex from her, which is surely worth something, and maybe some good old fashioned exertion will do the willful goo some good.");
 	
 	flags[kFLAGS.FOLLOWER_AT_FARM_LATEXY] = 1;
 	
