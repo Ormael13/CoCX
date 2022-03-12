@@ -585,7 +585,7 @@ public class DebugMenu extends BaseContent
 			accessoryArray.push(jewelries.FERTRNG);
 			accessoryArray.push(jewelries.ICE_RNG);
 			accessoryArray.push(jewelries.LIFERNG);
-			accessoryArray.push(jewelries.SPELRNG);
+			accessoryArray.push(jewelries.MYSTRNG);
 			accessoryArray.push(jewelries.POWRRNG);
 			accessoryArray.push(jewelries.PURERNG);
 			accessoryArray.push(jewelries.DIAMRNG);
