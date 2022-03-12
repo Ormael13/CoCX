@@ -275,7 +275,8 @@ private function rapeRaphael():void {
 	outputText("\n\nRaphael gasps as your [cock] meets the star of his pucker. Despite Raphael yelling at you, you're determined to teach him a lesson. You slide your [cock] right into his butthole, revelling in his virgin tightness. <b>Raphael has lost his anal virginity!</b>");
 	outputText("\n\n\"<i>No! Your cock! Get it out of my butt! It's not normal! Sex is supposed to be about one man and one woman!</i>\" Raphael yells. You whisper into his ears and tell him that here in Mareth, anal sex is perfectly normal and it's a common occurrence. He's just too vanilla for his tastes! Time to spice things up.");
 	outputText("\n\nYou shove him on the ground, grab him by the legs and push your [cock] as deep as you can. Deeming the depth sufficient, you begin to piston in and out, picking up the speed until you're practically ravaging his ass. The russet rogue yelps in mixed pain and pleasure, his vulpine cock sliding out of its sheath and inflates to full erection. You continue to fuck him like there's no tomorrow.");
-	if (player.tentacleCocks() > 0 || player.stamenCocks() > 0) outputText("You push your tentacle cock in all the way through. You can feel it snaking its way through his intestines and stomach before finally comes out of his mouth! The fox looks down, unable to speak. You laugh at the poor fox-thief and pull your cock so you're just fucking his anus.");
+	if (player.findCockWithType(CockTypesEnum.TENTACLE, 1, 48, -1, "length")) //you CAN'T do all-way through with 1-inch dick :)
+        outputText("You push your tentacle cock in all the way through. You can feel it snaking its way through his intestines and stomach before finally comes out of his mouth! The fox looks down, unable to speak. You laugh at the poor fox-thief and pull your cock so you're just fucking his anus.");
 	outputText("\n\nEventually, you can hold back no more and empty your seed into his bowels. Raphael cums as well, shooting ropes of fox-jizz. With your orgasmic high complete, you pull your cock out of his ass, cum still dripping from his abused butthole. You give him a naughty grin and take his gems and rapier while he's still dazed. To the victor go the spoils after all! ");
 	player.gems += 100 + rand(20);
 	player.sexReward("Default","Default",true,false);
@@ -494,7 +495,7 @@ private function RaphaelChooseFrisk():void {
 		//Reject] [Accept]
 		simpleChoices("Reject", friskRejectChoice, "Accept", friskAcceptChoice, "", null, "", null, "", null);
 	}
-	//{If player's corruption is higher than 19 and higher than Intelligence.}
+	//{If player's corruption is higher than 35 and higher than Intelligence.}
 	else {
 		outputText("You don't quite manage to follow where Raphael keeps the pendant, but you're certain it's somewhere on his body and you intend to find out where! With more eagerness than the fox had expected, you paw across his lean body. You slip into his leather clothes and run the hairs of his fur through scraping fingers. It makes Raphael gasp slightly as you trace down his body, eventually discovering that the bulge in front of his tight leather pants has become larger than you noticed it to be earlier!\n\n");
 
@@ -605,7 +606,7 @@ private function RaphaelPicnicII():void {
 
 	outputText("Curious and certain he has a great deal of knowledge on Mareth, you begin asking Raphael questions about his craft and his experiences. Soon enough, two distinct subjects come up as possible topics. Then again, the wine goes straight to your head and this seems like the perfect time to enjoy more leisurely activities and simply enjoy yourself.\n\n");
 	//[Discuss] [Skill] [Flirt]
-	simpleChoices("Fencing", RaphaelPicnicSkill, "Thieving", RaphaelPicnicChooseThieving, "Flirt", null, "", null, "", null);
+	simpleChoices("Fencing", RaphaelPicnicSkill, "Thieving", RaphaelPicnicChooseThieving, "", null, "", null, "", null);
 }
 private function RaphaelPicnicEnd():void {
 	clearOutput();

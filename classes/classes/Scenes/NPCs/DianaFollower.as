@@ -622,12 +622,12 @@ public function mainCampMenu():void {
 	if (player.HP < player.maxOverHP()) addButton(5, "Healing", HealingScene);
 	else addButtonDisabled(5, "Healing", "You're fully healed already.");
 	if (player.statStore.hasBuff("Weakened") || player.statStore.hasBuff("Drained") || player.statStore.hasBuff("Damaged")) {
-		addButton(6, "C.C.(A)", CuringCurseScene1).hint("Cure curses that affect stats non-multiplier bonuses.");
-		addButton(7, "C.C.(B)", CuringCurseScene2).hint("Cure curses that affect stats multiplier bonsues.");
+		addButton(6, "C.C.(Base)", CuringCurseScene1).hint("Cure curses that affect stats non-multiplier bonuses.");
+		addButton(7, "C.C.(Mult)", CuringCurseScene2).hint("Cure curses that affect stats multiplier bonsues.");
 	}
 	else {
-		addButtonDisabled(6, "C.C.(A)", "You not have any curses to cure. (Type A)");
-		addButtonDisabled(7, "C.C.(B)", "You not have any curses to cure. (Type B)");
+		addButtonDisabled(6, "C.C.(Base)", "You not have any curses to cure. (Type A)");
+		addButtonDisabled(7, "C.C.(Mult)", "You not have any curses to cure. (Type B)");
 	}
 	addButton(14, "Back", camp.campLoversMenu);
 }
@@ -803,15 +803,15 @@ public function SexMenuAnal():void {
 }
 public function SexMenuTitsfuck():void {
 	clearOutput();
-	var x:int = player.findCockWithType(CockTypesEnum.TENTACLE, 1, -1, -1);
-    var tentacocks:int = player.countCocksWithType(CockTypesEnum.TENTACLE, -1, -1);
-    if (x < 0)
-        player.cockThatFits(36, "length");
+	var x:int = player.cockThatFits(36, "length");
+    var tentacock:int = player.cocks.length > 1 ? player.findCockWithType(CockTypesEnum.TENTACLE, 1, -1, -1) : -1;
+    if (x == tentacock)
+        tentacock = player.findCockWithType(CockTypesEnum.TENTACLE, 2, -1, -1);
 	outputText("You request that Diana give you a titjob.\n\n");
 	outputText("\"<i>Of course my stallion, I would love to have your cock buried between my mounds,</i>\" Diana says, smiling happily while eagerly pressing her tits together.\n\n");
 	/*if (player.isTaur()) outputText("\"<i>Please hurry, I can’t wait!</i>\" Diana begs you, still hugging your head.\n\n");
 	else {*/
-		if (tentacocks > 1) outputText("Diana gets on her knees, while your vine cocks move out around her, the largest one moves in front of her.\n\n");
+		if (tentacock >= 0) outputText("Diana gets on her knees, while your vine cocks move out around her, the largest one moves in front of her.\n\n");
 		else {
 			outputText("You sit down on a on a nearby " + object() + " while Diana gets on her knees in front of you, before undoing your [armor] and pulling out your erect " + (player.cocks.length == 1 ? "[cock]" : "[cocks]") + "");
 			if (player.isNaga()) outputText("from it’s protective snake slit");
@@ -819,7 +819,7 @@ public function SexMenuTitsfuck():void {
 			outputText(".\n\n");
 		}
 		outputText("\"<i>My stallion is all ready I see,</i>\" Diana says, smiling.\n\n");
-		if (tentacocks > 1) outputText("Diana moves forward slightly, allowing the " + (player.cocks[x].cockLength >= 25 ? "monsterous" : "large") + " vine to sink between her mounds, your cock like vine’s lower shaft disappearing among the soft flesh.\n\n");
+		if (tentacock >= 0) outputText("Diana moves forward slightly, allowing the " + (player.cocks[x].cockLength >= 25 ? "monsterous" : "large") + " vine to sink between her mounds, your cock like vine’s lower shaft disappearing among the soft flesh.\n\n");
 		else outputText("Diana then presses her big breasts against your stomach, your [cock biggest] cock shaft slipping between her cleavage. You can’t help but out a little grunt of pleasure at the feelings of her soft flesh on your [skin].\n\n");
 		outputText("\"<i>Do you like my breasts [name]? I’m so glad...</i>\" Diana says staring endearingly at your cock, ");
 		if (player.cocks[x].cockLength >= 25) outputText("which most of the monstrous length is laying across her head, making her shower the titanous member with her devotion in kisses and licks");
@@ -827,8 +827,8 @@ public function SexMenuTitsfuck():void {
 		else outputText("which is sticking out of the middle of her cleavage");
 		outputText(".\n\nDiana presses her large tits with her hands " + (player.cocks[x].cockLength >= 25 ? ". She begins to move her body gently up and down, her tits rubbing along your shaft in sync with her movements, earning another pleased grunt from you" : ", her breasts wrapping comfortably around your girth") + ".\n\n");
 		outputText("\"<i>You cock is so hot between my breasts!</i>\" Diana compliments, her eyes hot with lust.\n\n");
-		outputText("You ask Diana to speed up and she nods, speeding up her movements slightly, " + (tentacocks > 1 ? "your other cock vines wrapping around her body, holding her close while others rub against her body, seeking pleasure. You lean your head back and sigh in pleasure, basking in the wonderful titjob" : "her breasts slapping against your chest when they come down") + ".\n\n");
-		if (tentacocks > 1) {
+		outputText("You ask Diana to speed up and she nods, speeding up her movements slightly, " + (tentacock >= 0 ? "your other cock vines wrapping around her body, holding her close while others rub against her body, seeking pleasure. You lean your head back and sigh in pleasure, basking in the wonderful titjob" : "her breasts slapping against your chest when they come down") + ".\n\n");
+		if (tentacock >= 0) {
 			outputText("Want more pleasure, another vine cock coils around her neck before finding her mouth, prodding at her mouth. She complies, happily allowing herself to take the [cock] cock in her mouth, letting it fill her. You make her take all of the cock she can without deepthroating her, holding her there as she sucks and licks it like it is the tastiest of treats, her breasts still bouncing up and down the shaft, drool now now dripping on them from her mouth as she also thrusts her head.\n\n");
 			outputText("Still wanting to feel more, your tentacles starts to move more, tightening their grip on her as they aggressively rub against her body, while the one in mouth and the one between start to thrust as well, the one in her mouth stopping short of deepthroating her.\n\n");
 			outputText("Soon you fill the building pressure in your cock" + (player.cocks.length == 1 ? "" : "s") + ", threatening to burst out and spray your load inside her cock stuffed mouth. You groan, as you feel it coming, building up and up and up, until it comes comes!\n\n");
@@ -851,7 +851,7 @@ public function SexMenuTitsfuck():void {
 		}
 		else {
 			outputText("Though your lover is blissed out, eyes glazed over with pleasure, but you're not satisfied yet. Grabbing her horn, " + (player.cocks[x].cockLength >= 15 ? "guide her up onto your cock’s head" : "guide her down onto your cock") + ".\n\n");
-			outputText("Still wanting to feel more, you suddenly begin to move your hips slightly, surprising her as the cock slams into the depths of her mouth. Your hips slam into her cheeks, and she moans, sending vibrations down your shaft. Soon, you’re both moving, you thrusting her your hips slightly, while she continues to move her body up and down you.\n\n");
+			outputText("Still wanting to feel more, you suddenly begin to move your hips slightly, surprising her as the cock slams into the depths of her mouth. Your hips slam into her cheeks, and she moans, sending vibrations down your shaft. Soon, you’re both moving, you thrusting her your hips slightly, while she continues to move her body up and down your cock.\n\n");
 			outputText("Soon you fill the building pressure in your cock" + (player.cocks.length == 1 ? "" : "s") + ", threatening to burst out and spray your load inside her vine stuffed mouth and her vine covered body. You groan, as you feel it coming, building up and up and up, until it comes comes!\n\n");
 			outputText("You pull down on Diana horn, surprising her as she suddenly as to take even more of your cock, but not as surprised as when you suddenly spray her mouth with cum. ");
 			if (player.cumQ() >= 2000) {

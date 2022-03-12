@@ -329,33 +329,80 @@ public class AbstractSpell extends CombatAbility {
 		else if (monster.cor < 90) return 1.3;
 		else return 1.4
 	}
-	
-	public static function omnicasterDamageFactor():Number {
-		if ((player.isStaffTypeWeapon() || player.isPartiallyStaffTypeWeapon()) && player.hasPerk(PerkLib.OffensiveStaffChanneling)) {
-			if (player.isPartiallyStaffTypeWeapon()) return 0.8;
-			else return 0.7;
-		} else if (player.hasPerk(PerkLib.Omnicaster)) {
+    
+    public static function omnicasterDamageFactor_gazer():Number {
+        if (player.hasPerk(PerkLib.Omnicaster)) {
 			if (player.hasPerk(MutationsLib.GazerEyeEvolved)) return 0.5;
 			else if (player.hasPerk(MutationsLib.GazerEyePrimitive)) return 0.3;
 			else return 0.2;
-		} else return 1.0;
-	}
+		}
+        else return 0.0;
+    }
 	
-	public static function omnicasterRepeatCount():int {
+	public static function omnicasterRepeatCount_gazer():int {
+		if (player.hasPerk(PerkLib.Omnicaster)) {
+			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) return 10;
+			else if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) return 8;
+			else return 6;
+		}
+        else return 1;
+	}
+    
+    public static function omnicasterDamageFactor_osc():Number {
+		if ((player.isStaffTypeWeapon() || player.isPartiallyStaffTypeWeapon()) && player.hasPerk(PerkLib.OffensiveStaffChanneling)) {
+			if (player.isPartiallyStaffTypeWeapon()) return 0.8;
+			else return 0.7;
+		}
+        else return 0.0;
+    }
+	
+	public static function omnicasterRepeatCount_osc():int {
 		if ((player.isStaffTypeWeapon() || player.isPartiallyStaffTypeWeapon()) && player.hasPerk(PerkLib.OffensiveStaffChanneling)) {
 			if (player.isPartiallyStaffTypeWeapon()) return 2;
 			else return 3;
-		} else if (player.hasPerk(PerkLib.Omnicaster)) {
-			if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
-				return 10;
-			} else if (player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 8) {
-				return 8;
-			} else {
-				return 6;
-			}
-		} else {
-			return 1;
 		}
+        else return 1;
+	}
+
+    public static function oscOverGazer():Boolean {
+        //you still can attack, so you CAN use your staff
+        //damageFactors return 0 if not present
+        return omnicasterDamageFactor_osc() * omnicasterRepeatCount_osc() > omnicasterDamageFactor_gazer() * omnicasterRepeatCount_gazer()
+    }
+	
+	public static function omnicasterDamageFactor():Number {
+        /*
+        if (!player.hasPerk(PerkLib.Omnicaster) &&
+                !(player.isStaffTypeWeapon() || player.isPartiallyStaffTypeWeapon()) && player.hasPerk(PerkLib.OffensiveStaffChanneling))
+            return 1.0;
+        return oscOverGazer() ? omnicasterDamageFactor_osc() : omnicasterDamageFactor_gazer();
+        */
+        if ((player.isStaffTypeWeapon() || player.isPartiallyStaffTypeWeapon()) && player.hasPerk(PerkLib.OffensiveStaffChanneling)) {
+            if (player.hasPerk(PerkLib.Omnicaster) && !oscOverGazer()) 
+                return omnicasterDamageFactor_gazer() * 1.1;
+                /*
+                Because:
+                1. I fixed the selection, so I want this.
+                2. "player is familiar with multicasting, so his ability to focus is slightly better"
+                3. "the staff helps to concentrate beacause.... eh.. PC's familiar with it"
+                4. :P
+                */
+            else
+                return omnicasterDamageFactor_osc();
+        }
+        else {
+            if (player.hasPerk(PerkLib.Omnicaster))
+                return omnicasterDamageFactor_gazer();
+            else
+                return 1.0;
+        }
+	}
+	
+	public static function omnicasterRepeatCount():int {
+        if (!player.hasPerk(PerkLib.Omnicaster) &&
+                !(player.isStaffTypeWeapon() || player.isPartiallyStaffTypeWeapon()) && player.hasPerk(PerkLib.OffensiveStaffChanneling))
+            return 1;
+        return oscOverGazer() ? omnicasterRepeatCount_osc() : omnicasterRepeatCount_gazer();
 	}
 	
 	public function calcBackfirePercent():int {

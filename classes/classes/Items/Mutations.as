@@ -10688,8 +10688,8 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         if (changes < changeLimit && rand(3) == 0 && player.spe > 15 && type == 1) {
-            outputText("[pg]Ugh why are you even in such a hurry all the time you should just relax and take your time instead of rushing ahead. The world ain't gonna end overnight.");
-			if (player.wings.type != Wings.LEVITATION) outputText(" Heck walking takes so much effort, if you could levitate you would skip on that too.");
+            outputText("[pg]Ugh, why are you even in such a hurry all the time? You should just relax and take your time instead of rushing ahead. The world ain't gonna end overnight.");
+			if (player.wings.type != Wings.LEVITATION) outputText(" Heck, even walking takes so much effort... If you could levitate you would skip on that too.");
             player.addCurse("spe", 1, 1);
             if (player.str > 60) player.addCurse("spe", 1, 1);
             if (player.str > 80) player.addCurse("spe", 1, 1);

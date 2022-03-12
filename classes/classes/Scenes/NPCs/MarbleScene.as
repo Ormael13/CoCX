@@ -256,8 +256,8 @@ public function timeChangeLarge():Boolean {
                 outputText("<b><u>Codex: Lacta Bovine</u></b>\n");
                 outputText("Description: <i>A race of all female bovine-morphs, more commonly called cow-girls.  They appear as tall well endowed women, with numerous bovine characteristics.  Generally they have bovine horns, ears, tail, and legs.  Like all minotaurs, they are very strong and resilient, however, they are unusually sensitive compared to their relatives.</i>\n");
                 outputText("Skin and Fur: <i>The skin tone for these creatures is very close to being human, their fur more closely follows the common minotaur fur colors: brown, black or white with brown spots.</i>\n");
-                outputText("Behavior: <i>The behavior of Lacta Minotaurs varies greatly between each individual.  The only major unifying piece of behavior is their desire to give milk to almost any living creature, and their high libido, common to all corrupted creatures.</i>\n");
-                outputText("Special abilities: <i>A lightly corrupted creature, most of the corruption is centered on their breast milk.  It is addictive to those that drink it repeatedly, eventually making them dependent on the one from whom it was drank from.  The milk also strengthens the drinker, makes them better able to find the one who nursed them, and grants limited powers of control over them to the Lacta Minotaur that nursed them.  Finally, the breasts of Lacta Minotaurs are incredibly resilient, healing from almost any damage, even being cut off; they are able to produce milk for their entire life without fail.</i>\n");
+                outputText("Behavior: <i>The behavior of Lacta Bovines varies greatly between each individual.  The only major unifying piece of behavior is their desire to give milk to almost any living creature, and their high libido, common to all corrupted creatures.</i>\n");
+                outputText("Special abilities: <i>A lightly corrupted creature, most of the corruption is centered on their breast milk.  It is addictive to those that drink it repeatedly, eventually making them dependent on the one from whom it was drank from.  The milk also strengthens the drinker, makes them better able to find the one who nursed them, and grants limited powers of control over them to the Lacta Bovine that nursed them.  Finally, the breasts of Lacta Bovines are incredibly resilient, healing from almost any damage, even being cut off; they are able to produce milk for their entire life without fail.</i>\n");
                 outputText("\nUnderneath the entry is a single line, written in a crude and unsteady hand:     <i>No one will ever drink my milk again.  I'm sorry, sweetie.</i>\n");
                 flags[kFLAGS.CODEX_ENTRY_LABOVINES] = 1;
                 outputText("\n\n<b>New codex entry unlocked!</b>");
@@ -491,8 +491,8 @@ public function encounterMarbleInitially():void {
 	outputText("\n\n(Of course, you could always turn around and resolve to avoid her from this point on, if you wanted.)");
 	//- player chooses caress, suckle, or rape
 	menu();
-	addButton(1, "Caress", caressMarble).hint("+5% affection");
-	addButton(3, "Suckle", suckleMarble).hint("+15% affection, +10% addiction");
+	addButton(1, "Caress", caressMarble);
+	addButton(3, "Suckle", suckleMarble);
 	addButton(2, "Rape", rapeDAHMARBLEZ);
 	addButton(4, "Leave", turnOffMarbleForever).hint("You will never meet her again");
 }
@@ -631,9 +631,10 @@ private function rapeMarbleInHerRoom():void {
 	if(player.cocks.length > 0) {
 		outputText("Chuckling to yourself, you free your [cocks] from your [armor].  You spend a moment to ask the helpless cow-girl if she is ready, her only response being a whimper, before ");
 		//If player's main dick is less than 3 inches wide, ie would fit inside Marble
-		if(player.cocks[0].cockThickness < 3) {
-			//how far in does the player go?
-			if(player.cocks[0].cockLength <= 8) {
+		var x:int = player.findCock(1, -1, 3, "thickness");
+			if(x >= 0) {
+				//how far in does the player go?
+				if(player.cocks[x].cockLength <= 8) {
 				outputText("forcing your [cock] in as far as it will go.  ");
 			} else 
 			{
@@ -738,8 +739,8 @@ private function resistMarbleInitially():void {
 	outputText("\"<i>My name's Marble, what's yours?</i>\" she asks you.  You introduce yourself and exchange a few pleasantries before she asks how she can help you.  You tell her that you actually came to help her, explaining that Whitney said she could use a gentle touch.  \"<i>Oh that would be nice</i>\", she says \"<i>Spending the night connected to the milking machine was a mistake, and now I need something gentle.</i>\"  How will you help her?");
 	//- player chooses caress, suckle, or rape
 	menu();
-	addButton(1, "Caress", caressMarble).hint("+5% affection");
-	addButton(3, "Suckle", suckleMarble).hint("+15% affection, +10% addiction");
+	addButton(1, "Caress", caressMarble);
+	addButton(3, "Suckle", suckleMarble);
 	addButton(2, "Rape", rapeDAHMARBLEZ);
 }
 
@@ -2868,9 +2869,10 @@ private function rapeDAHMARBLEZ():void {
 		if(player.cocks.length > 0) {
 			outputText("Chuckling to yourself, you free your [cocks] from your [armor].  You spend a moment to ask the helpless cow-girl if she is ready, her only response being a whimper, before ");
 			//If player's main dick is less than 3 inches wide, ie would fit inside Marble
-			if(player.cocks[0].cockThickness < 3) {
+            var x:int = player.findCock(1, -1, 3, "thickness");
+			if(x >= 0) {
 				//how far in does the player go?
-				if(player.cocks[0].cockLength <= 8) {
+				if(player.cocks[x].cockLength <= 8) {
 					outputText("forcing your [cock] in as far as it will go.  ");
 				} else 
 				{
@@ -2990,33 +2992,6 @@ public function marbleBadEndFollowup():void {
 	//Variables for this function:
 	//morph – keeps track of player's form (human, dog-morph, centaur)
 	var morph:String = player.race(); //Now uses actual race.
-	//var morph:String = "human";
-	/*if(player.lowerBody == CENTAUR) morph = "centaur";
-	if (player.catScore() >= 4) morph = "cat-morph";
-	if (player.demonScore() >= 4) morph = "demon-morph";
-	if (player.dogScore() >= 4) morph = "dog-morph";
-	if(player.horseScore() >= 3) {
-		if(player.lowerBody == CENTAUR) morph = "centaur-morph";
-		else morph = "equine-morph";
-	}
-	if(player.mutantScore() >= 5) morph = "corrupted mutant";
-	if(player.minoScore() >= 4) morph = "minotaur-morph";
-	if(player.cowScore() >= 5) {
-		morph = "cow-";
-		if(player.gender <= 1) morph += "boi";
-		else morph += "girl";
-	}
-	if(player.beeScore() >= 4) morph = "bee-morph";
-	if(player.spiderScore() >= 4) morph = "spider-morph";
-	if (player.raccoonSocre() >= 4) morph = "raccoon-morph";
-	if (player.kitsuneScore() >= 4) morph = "kitsune-morph";
-	if(player.goblinScore() >= 5) morph = "goblin";
-	if(player.humanScore() >= 5 && morph == "corrupted mutant") morph = "somewhat human mutant";
-	if(player.lowerBody == CENTAUR) morph = "centaur";	
-	if(player.lowerBody == CENTAUR) morph = "centaur";*/
-	//gender – keeps track of player's gender (male, female, genderless, or hermaphrodite)
-	//pronouns – holds the proper pronouns for the player's gender, he/she, his/hers, him/her (should probably be multiple
-	//OH FUCK THIS!
 	//approxHeight – short description for approximately how tall is the player is, (very short, short, average height, tall, very tall)
 	var approxHeight:String = "";
 	if(player.tallness < 54) approxHeight = "very short";
@@ -3286,6 +3261,10 @@ public function marbleNightSleepFlavor():Boolean {
 	}
 	//Marble is really aroused
 	//Replaces laying down texts when Marble is at or over 50 lust
+    var tailJob:Function = null;
+    //tailjob for futa marble if PC is naga
+    //moved it here: player still can refuse while lusty, so why not have fun?
+    if(player.isNaga() && flags[kFLAGS.MARBLE_DICK_LENGTH] > 0) tailJob = giveMarbleTailjobRelease;
 	else {
 		outputText("You lie down and notice that Marble hasn't gone to bed yet.  You decide not worry about it too much until you hear Marble come clopping up outside.  \"<i>Sweetie?</i>\" she calls out to you as she crawls in next to you.  \"<i>Sweetie, I'm feeling really horny ");
 		//if (PC's lust is under minimum to request sex)
@@ -3298,15 +3277,12 @@ public function marbleNightSleepFlavor():Boolean {
 				outputText("lick my womanhood?  I really want to feel your tongue bring me to release...</i>\"");
 			outputText("\n\nWill you orally pleasure Marble?");
 			//options: yes/no (yes continues the current scene, this is a bit awkward as the current breaks are in the middle of if statements, so new futa/female if statements will need to be added)
-			var tailJob:Function = null;
-			//tailjob for futa marble if PC is naga
-			if(player.isNaga() && flags[kFLAGS.MARBLE_DICK_LENGTH] > 0) tailJob = giveMarbleTailjobRelease;
 			simpleChoices("Yes", marbleNomNoms, "No", playerMenu, "Tailjob", tailJob, "", null, "", null);
 		}
 		else {
 			outputText(".  I can tell you want this too, so can we please have sex?</i>\"  You sit up and consider her request.  Will you have sex with Marble?  If not, you could always offer to give her oral instead.");
 			//options: yes/no/oral (yes continues to the next part of the scene as it did before.
-			simpleChoices("Yes", marbleNightSexIntro, "No", playerMenu, "Oral", marbleNomNoms, "", null, "", null);
+			simpleChoices("Yes", marbleNightSexIntro, "No", playerMenu, "Oral", marbleNomNoms, "Tailjob", tailJob, "", null);
 		}
 		return true;
 	}
@@ -3458,7 +3434,7 @@ private function marbleNightSexDudes():void {
 	}
 	outputText("You look Marble in the eye and the two of you relish the moment; you are two lovers, connected in the most enjoyable of ways.  ");
 	//Is Marble going to take the initiative here?
-	if(player.cor + player.lib < player.statusEffectv4(StatusEffects.Marble) + 10) {
+	if(player.cor + player.lib < player.statusEffectv4(StatusEffects.Marble) + 10 || rand(3) == 0) {
 		outputText("You get so caught up in the moment that Marble takes the initiative. \"<i>Now, now, it's not nice to keep me waiting, sweetie,</i>\" she says before lifting up your hips and repeatedly inserting you inside her at a fair pace.  You're caught off guard and fall forward, ");
 		//Do you fall into the boobies?
 		if(player.tallness < 66) {
@@ -3530,7 +3506,7 @@ private function marbleNightSexChicks():void {
 		//(Message about vagina becoming looser)
 		outputText("After adjusting to the feeling of the shaft inside you, you can't deny what a wonderful feeling it is to be connected like this.  ");
 		//Does Marble take the initiative?
-		if(player.cor + player.lib < player.statusEffectv4(StatusEffects.Marble) + 10) {
+		if(player.cor + player.lib < player.statusEffectv4(StatusEffects.Marble) + 10 || rand(3) == 0) {
 			outputText("Marble gives you a grin and starts lifting your hips up and down, while simultaneously bouncing her own hips.  The combination results in both your " + vaginaDescript(0) + " and Marble's being pistoned by her double dildo.  The two of you start moaning in unison from the overwhelming feelings, leaving you unable to do anything but let her buckle and bounce you around like a rough wagon, and you love every second of it.\n\n");
 			outputText("\"<i>Oh sweetie, am I going too fast for you?  Here, let me give you a chance to catch your breath.</i>\"  She offers as she slows down her rapid movement, letting your mind settle back into place.\n\n");
 			//If (PC's breasts are D cup or bigger)
@@ -4486,6 +4462,8 @@ private function milkMarbleNoMilking():void
 	doNext(camp.returnToCampUseTwoHours);
 }
 
+//Abandoned at the moment
+/*
 //Hammer quest!
 private function hammerQuest():void {
 	clearOutput();
@@ -4496,5 +4474,6 @@ private function hammerQuest():void {
 	outputText("\n\n\"<i>Sweetie, that would be wonderful!  I still remember how to make a hammer and I think I can forge one like the hammer I have.  But I will need the resources.  Steel ingots will do; the ores can be found at the mountains.  You'll need a pickaxe though.</i>\"");
 	flags[kFLAGS.MARBLE_HAMMER_QUEST_PROGRESS] = 1;
 }
+*/
 }
 }

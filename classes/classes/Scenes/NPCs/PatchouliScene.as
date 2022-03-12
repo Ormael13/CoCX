@@ -135,6 +135,8 @@ public class PatchouliScene extends NPCAwareContent {
 				player.sexReward("cum","Vaginal");
 			} else {
 				var x:int = player.cockThatFits(36, "length");
+                if (x < 0)
+                    x = 0;
 				outputText("You force the catboy on his back and yank his shorts away, revealing his girly ass and his cute pucker. Patchouli gulps as your [cock] hardens, already aware of what is about to happen.\n\n");
 				outputText("\"<i>Uh I’m sure we can sort that out in a different way! I can lead you to treasure, riches, a minotaur... wait, forget I ever said anything about the minotaur!</i>\"\n\n");
 				outputText("You don’t give him the chance to teleport away as you grab him by the neck and force your [cock] in.\n\n");
@@ -146,10 +148,8 @@ public class PatchouliScene extends NPCAwareContent {
 				outputText("\"<i>Some poor girl in that village must be pregnant by now, you should be ashamed, you know?</i>\"\n\n");
 				outputText("This little asshole has pranked you long enough. You knock him unconscious and bring him back to camp, making sure to tie him to a nearby tree");
 				player.sexReward("Default","Default",true,false);
-				if (camp.getCampPopulation() >=
-				    2) {
+				if (camp.getCampPopulation() >= 2)
 					outputText(". Leaving one of your friends to watch over him at all time");
-				}
 				outputText(".\n\n");
 			}
 			flags[kFLAGS.PATCHOULI_FOLLOWER] = TIEDINCAMP;
@@ -457,9 +457,7 @@ public class PatchouliScene extends NPCAwareContent {
 			addButton(2, "Vaginal", patchouleVaginal);
 			addButton(3, "Anal", patchouleAnal);
 		}
-		if(player.isGenderless()){
-			addButton(14, "Back", patchouleMainCampMenu);
-		}
+		addButton(14, "Back", patchouleMainCampMenu);
 	}
 
 	private function patchouleGirlOnGirl():void {
@@ -546,6 +544,8 @@ public class PatchouliScene extends NPCAwareContent {
 
 	private function patchouleAnal():void {
 		var x:int = player.cockThatFits(36, "length");
+        if (x < 0)
+            x = 0;
 		outputText("You force the cat on her back and yank her shorts away, revealing her fuck ready ass and cute pussy. Patchoulie purrs as your [cock] hardens, already aware of what is about to happen.\n\n");
 		outputText("\"<i>Nyaaaa~, c'mon [name] stop teasing me. You already know I want it, so please put it in!</i>\"\n\n");
 		outputText("Well you sure are going to give her what she wants as you grab her by the thigh and force your [cock] in.\n\n");

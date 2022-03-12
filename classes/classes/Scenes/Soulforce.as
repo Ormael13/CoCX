@@ -3131,7 +3131,7 @@ public class Soulforce extends BaseContent
 		outputText("You find a flat, comfortable rock to sit down on and contemplate.  Minute after minute you feel immersed into elements that surrounds you.  How they flow around you, how they change on their own and how they interact with each other.  All this while trying to understand, despite being insignificant while the great dao manifests around you.\n\n");
 		var dao:Number = rand(6);
 		if (dao > 0) {
-			outputText("After session ends you managed to progress in Dao of "+daoname+".");
+			outputText("After the session ends you managed to progress in Dao of "+daoname+".");
 			if (player.hasStatusEffect(statusEffect)) {
 				player.addStatusValue(statusEffect, 1, dao);
 				if (player.statusEffectv1(statusEffect) > 140 && player.statusEffectv2(statusEffect) == 4) {
@@ -3162,7 +3162,7 @@ public class Soulforce extends BaseContent
 			}
 			else player.createStatusEffect(statusEffect, dao, 0, 0, 0);
 		}
-		else outputText("After the session ends, you did not manage to make an progress in your comprehension.");
+		else outputText("After the session ends, you did not manage to progress in your comprehension.");
 		outputText("\n\n");
 		doNext(camp.returnToCampUseEightHours);
 	}
