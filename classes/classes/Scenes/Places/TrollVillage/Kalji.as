@@ -170,23 +170,25 @@ public class Kalji extends TrollVillageAbstractContent{
             outputText("")
         }
 
-        function KjBJFY():void{
+        function KjBJFY(resist:Boolean = false):void{
             clearOutput();
             outputText("You crawl onto your knees before him, pulling down his leather pants as all 7 inches of his glorious manhood is revealed to you. As his pants are pulled down, you see him pull out a dagger hidden from within them, he places it behind him. You gulp slightly at the sight of it.\n" +
                     "\n" +
                     "You stroke the tip of his length with your hand, bringing his length up to full mast. His erection pokes out toward you, awaiting your advance. You bring your mouth closer to him. You press your [lips] at the head of his shaft, flitting your tongue along the tip of his erection. You lean forward further, wrapping your [tongue] around his manhood, slowly taking in more of his length.\n" +
                     "\n" +
                     "Kal'ji suddenly grabs the back of your head, forcing you down his cock. You gag as several inches are forced down your throat. You try to resist, but he keeps you locked firmly in place, your [face] pressed against his crotch.\n" +
-                    "\n" +
-                    "[(pc resisted) \"<i>If you’re gonna do your job, you better do a damn good job, slut.</i>\"]\n" +
-                    "[(pc willing) \"<i>If you don’t want to disappoint me then you better get to work.</i>\"]\n" +
-                    "\n" +
+                    "\n");
+                    if (resist) outputText("\"<i>If you’re gonna do your job, you better do a damn good job, slut.</i>\"\n");
+                    else outputText("\"<i>If you don’t want to disappoint me then you better get to work.</i>\"\n");
+                    outputText("\n" +
                     "You choke, trying to pull away from him but he’s not letting you go. After realizing struggling is useless you give in, trying to steady your rhythm and find a good pace to blow him at.\n" +
                     "\n" +
                     "He keeps his hand pressed against the back of your head, pressing your head into his length. Soon a bit of pre hits your tongue, you’ve almost forgotten how virile trolls are and you’re sure he’s no different.\n" +
                     "\n" +
-                    "\"<i>Getting closer... </i>\" Kal'ji mutters, [(pc resisted\"<i>You’re a good pile of dirt, you’re actually not a complete disappointment.</i>\"] [(pc willing) \"<i>Such a good girl, you’re doing well.</i>\"]\n" +
-                    "\n" +
+                    "\"<i>Getting closer... </i>\" Kal'ji mutters, ");
+                    if (resist) outputText("<i>You’re a good pile of dirt, you’re actually not a complete disappointment.</i>\"");
+                    else outputText("\"<i>Such a good girl, you’re doing well.</i>\"]\n");
+                    outputText("\n" +
                     "You redouble your efforts, working your [tongue] around his shaft, making sure not a single inch of him is neglected. You feel him twitch within you, he’s ready to cum.\n" +
                     "\n" +
                     "\"<i>So close, I’m so close now!</i>\" he moans.\n" +
@@ -210,7 +212,7 @@ public class Kalji extends TrollVillageAbstractContent{
                     "Kal'ji shakes his head, \"<i>And what makes you think you’re in charge of the situation here? You’re in my hut, I am a member of the council. Who will the people listen to here?</i>\"\n" +
                     "\n" +
                     "He gives you a cocky grin. \"<i>There are people aware of you inside my hut right now, there’s nothing you can do about it. I will give you one. More. Chance… Blow me.</i>\"\n");
-            addButton(0, "Submit",KjBJFY);
+            addButton(0, "Submit",KjBJFY, true);
             addButton(1,"Grovel", KjBJNF2);
         }
 

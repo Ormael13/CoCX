@@ -216,19 +216,19 @@ public class ErlKingScene extends BaseContent
 
 			outputText("Most of his body is covered with fine clothing.  A cloak of dark green, decorated with complex patterns of gold, drapes over a hunting outfit of black leather.  One arm holds the reins of his mount, but the other, wearing a heavy leather hunting glove, grips a thick cane of shiny, black wood.  His legs taper down into slim, graceful hooves, and they touch down silently on the mossy ground as he dismounts.\n\n");
 
-			outputText("“<i>I am the Erlking, Master of the Wild Hunt,</i>” he says in a deep, hollow voice. “<i>and you... you are a very unusual [race].  My hounds can scent it on you.</i>” He gestures toward the stock-still hounds surrounding you. \n\n");
+			outputText("\"<i>I am the Erlking, Master of the Wild Hunt,</i>\" he says in a deep, hollow voice. \"<i>and you... you are a very unusual [race].  My hounds can scent it on you.</i>\" He gestures toward the stock-still hounds surrounding you. \n\n");
 
 			outputText("His gaze runs up and down your form, and despite yourself, you shiver at his attention.\n\n");
 
 			if (waited)
 			{
 				//[If Stand Your Ground Selected]
-				outputText("“<i>You’re a brave one, aren’t you?  Standing your ground in the face of the Wild Hunt?  I applaud your audacity.  I’m going to enjoy hunting you....</i>”\n\n");
+				outputText("\"<i>You’re a brave one, aren’t you?  Standing your ground in the face of the Wild Hunt?  I applaud your audacity.  I’m going to enjoy hunting you....</i>\"\n\n");
 			}
 			else
 			{
 				//[If Run Selected]
-				outputText("“<i>I’m afraid you’re going to have to learn to run faster if you hope to elude me in the future.  I do hope you won’t bore me.</i>”\n\n");
+				outputText("\"<i>I’m afraid you’re going to have to learn to run faster if you hope to elude me in the future.  I do hope you won’t bore me.</i>\"\n\n");
 			}
 
 			outputText("Before you can say another word, the fog closes in, leaving nothing but the red glow from the eyes of the Erlking and his Hounds.  One by one, they vanish, the Erlking’s last, leaving you alone in the darkness, the mist, and the cold.\n\n");
@@ -353,15 +353,15 @@ public class ErlKingScene extends BaseContent
 		public function repeatWildHuntGivenToTheHounds():void
 		{
 			spriteSelect(SpriteDb.s_erlking_nude);
-			outputText("“<i>How disappointing,</i>” drips the refined voice of the Erlking.  His horse’s hooves thud softly on the ground as he walks below you.  The cane at his side clicks against the forest floor with every other step.  You have just enough wherewithal to understand his words as your fingers grip the net.\n\n");
+			outputText("\"<i>How disappointing,</i>\" drips the refined voice of the Erlking.  His horse’s hooves thud softly on the ground as he walks below you.  The cane at his side clicks against the forest floor with every other step.  You have just enough wherewithal to understand his words as your fingers grip the net.\n\n");
 
-			outputText("“<i>This was but a few minutes’ diversion.  I had been hoping for more of a challenge,</i>” he says, the red glow in his eyes dimming.  “<i>You’re not particularly good at this, are you?</i>” he says, sighing.  His long face looks almost wistful.\n\n");
+			outputText("\"<i>This was but a few minutes’ diversion.  I had been hoping for more of a challenge,</i>\" he says, the red glow in his eyes dimming.  \"<i>You’re not particularly good at this, are you?</i>\" he says, sighing.  His long face looks almost wistful.\n\n");
 
-			outputText("“<i>Perhaps next time,</i>” he sighs.  He turns, his dark cloak flaring.  Is it your imagination or do his golden antlers seem a bit more dull?\n\n");
+			outputText("\"<i>Perhaps next time,</i>\" he sighs.  He turns, his dark cloak flaring.  Is it your imagination or do his golden antlers seem a bit more dull?\n\n");
 
 			outputText("You allow yourself a brief moment of relief as he turns his attention from you.\n\n");
 
-			outputText("“<i>But it would be wrong to not reward my Hounds for a job well done.</i>”  His cane flashes with golden light as he slashes it against the support rope.\n\n");
+			outputText("\"<i>But it would be wrong to not reward my Hounds for a job well done.</i>\"  His cane flashes with golden light as he slashes it against the support rope.\n\n");
 
 			outputText("The fog swallows the Erlking as you drop to the ground.  The impact against the mossy forest floor doesn’t injure you, but it <b>does</b> knock the wind from you.  As you struggle to regain your breath, you inhale the icy fog, and a cascade of terror... and something else... runs through you.\n\n");
 
@@ -419,13 +419,13 @@ public class ErlKingScene extends BaseContent
 			spriteSelect(SpriteDb.s_erlking_clothed);
 			outputText("Spirited clapping fills the woods.  The Hounds fall silent, sitting obediently on their haunches as the Erlking walks into the clearing, dismounting and looking up at you.\n\n");
 
-			outputText("“<i>A spirited chase,</i>” he says, his black-gloved hands still chipping a sharp staccato through the cold air.  “<i>I have not had such fun in ages.</i>” The clearing is awash with a dim glow - it seems the Erlking’s golden antlers are lit with their own inner fire.\n\n");
+			outputText("\"<i>A spirited chase,</i>\" he says, his black-gloved hands still chipping a sharp staccato through the cold air.  \"<i>I have not had such fun in ages.</i>\" The clearing is awash with a dim glow - it seems the Erlking’s golden antlers are lit with their own inner fire.\n\n");
 
-			outputText("“<i>And so, my hind, my prey, you have a choice,</i>” he says, his refined tones ringing through the air.  Through the net you can see the fog receding from the forest floor.  You take a few experimental breaths, and feel your head begin to clear.  \n\n");
+			outputText("\"<i>And so, my hind, my prey, you have a choice,</i>\" he says, his refined tones ringing through the air.  Through the net you can see the fog receding from the forest floor.  You take a few experimental breaths, and feel your head begin to clear.  \n\n");
 
-			outputText("He grasps the rope holding you up, and with strength surprising for his slim frame, lowers you down to the forest floor.  “<i>You have my thanks for a grand hunt,</i>” he says as, hand-over-hand, you are returned to the ground.	\n\n");
+			outputText("He grasps the rope holding you up, and with strength surprising for his slim frame, lowers you down to the forest floor.  \"<i>You have my thanks for a grand hunt,</i>\" he says as, hand-over-hand, you are returned to the ground.	\n\n");
 
-			outputText("As you touch down on the moss, the net falls away from you, and the Erlking offers you a hand up.  “<i>I’d like to offer you something.</i>”\n\n");
+			outputText("As you touch down on the moss, the net falls away from you, and the Erlking offers you a hand up.  \"<i>I’d like to offer you something.</i>\"\n\n");
 
 			outputText("You look up to see the slim, elegant form of the Erlking looking down at you.  Under his hunting gear, you can see the outline of a thick, equine cock, complete with triple prepuce rings straining against the black leathers.\n\n");
 
@@ -452,9 +452,9 @@ public class ErlKingScene extends BaseContent
 
 			outputText("You stand up, brushing yourself off, and ignore the Erlking’s clearly-visible dick, stating that you’d like some compensation for all the trouble.\n\n");
 
-			outputText("“<i>Of course, of course!</i>” laughs the Erlking, reaching into one of his saddle bags, and retrieving a small bundle.  He tosses it to you.  “<i>Better luck to you on the next hunt!</i>”\n\n");
+			outputText("\"<i>Of course, of course!</i>\" laughs the Erlking, reaching into one of his saddle bags, and retrieving a small bundle.  He tosses it to you.  \"<i>Better luck to you on the next hunt!</i>\"\n\n");
 
-			outputText("“<i>Next hunt?</i>” you begin, but before you can get the words out, the Erlking is already on his horse, thundering away through the trees.\n\n");
+			outputText("\"<i>Next hunt?</i>\" you begin, but before you can get the words out, the Erlking is already on his horse, thundering away through the trees.\n\n");
 
 			//[You gain: Gems + Fox berries / Canine Peppers / Neon Pink Egg ]
 			var gemFind:int = 10 + rand(15);
@@ -479,11 +479,11 @@ public class ErlKingScene extends BaseContent
 
 			outputText("Supremely irritated, you tell him to stop hunting you. \n\n");
 
-			outputText("“<i>Stop?</i>” he asks, the red light in his eyes dimming.\n\n");
+			outputText("\"<i>Stop?</i>\" he asks, the red light in his eyes dimming.\n\n");
 
 			outputText("Narrowing your eyes, you begin to tell him exactly how fed up you are with this never-ending hunt.\n\n");
 
-			outputText("“<i>As you wish,</i>” says the Erlking.  The fog rolls in once more, engulfing the Erlking and his steed.  It clears a moment later, leaving you alone in the forest.\n\n");
+			outputText("\"<i>As you wish,</i>\" says the Erlking.  The fog rolls in once more, engulfing the Erlking and his steed.  It clears a moment later, leaving you alone in the forest.\n\n");
 
 			outputText("You get the feeling you won’t be seeing him anymore.\n\n");
 
@@ -501,11 +501,11 @@ public class ErlKingScene extends BaseContent
 
 			outputText("In a quavering voice, you bow your head, and ask him to take you as his prey once and for all.\n\n");
 
-			outputText("“<i>My poor hind,</i>” he mutters.  You feel his gloved hand on your head, running through your [hair] as your shoulders slump.  “<i>Perhaps I hounded you too fiercely,</i>” he murmurs, cupping your cheek.\n\n");
+			outputText("\"<i>My poor hind,</i>\" he mutters.  You feel his gloved hand on your head, running through your [hair] as your shoulders slump.  \"<i>Perhaps I hounded you too fiercely,</i>\" he murmurs, cupping your cheek.\n\n");
 
 			outputText("You shiver at his touch, completely broken.\n\n");
 
-			outputText("“<i>Look at me,</i>” he commands.  Completely obedient to the Hunter’s words, you look up, meeting his red-ember eyes.  “<i>I shall make amends,</i>” he says softly. \n\n");
+			outputText("\"<i>Look at me,</i>\" he commands.  Completely obedient to the Hunter’s words, you look up, meeting his red-ember eyes.  \"<i>I shall make amends,</i>\" he says softly. \n\n");
 
 			outputText("The words rumble through you, and you feel a warm heat building in your stomach.  Something about your arms and legs feel... off... but you can’t take your eyes away from the Erlking’s, not even when pain lances through your body, your muscles swelling, your [armor] tearing and falling away.  The Erlking releases his hold on you and you look down immediately at your body.\n\n");
 
@@ -571,7 +571,7 @@ public class ErlKingScene extends BaseContent
 			if (player.faceType != Face.DOG) outputText(" new");
 			outputText(" muzzle and broad, flat tongue can’t reach it.\n\n");
 
-			outputText("The Erlking... The Master, your mind corrects itself.  The Master murmurs softly to you.  “<i>Patience, Hound,</i>” he commands, pressing a strong, gloved hand against your chest, holding you down on the ground.  You go still, submissive to the Master as he kneels next to your prone form.  His other hand grasps your dick slowly, and your mind melts.\n\n");
+			outputText("The Erlking... The Master, your mind corrects itself.  The Master murmurs softly to you.  \"<i>Patience, Hound,</i>\" he commands, pressing a strong, gloved hand against your chest, holding you down on the ground.  You go still, submissive to the Master as he kneels next to your prone form.  His other hand grasps your dick slowly, and your mind melts.\n\n");
 
 			outputText("You’re in absolute heaven as the Master pins you down, stroking your dick.  His gloved fingers work your shaft with elegant efficiency, running down your length, and squeezing in a delicious rhythm.  The hand on your chest stays firm, but runs through your fur, petting your broad, muscular chest.\n\n");
 
@@ -601,7 +601,7 @@ public class ErlKingScene extends BaseContent
 
 			outputText("You smile seductively, asking the Erlking exactly what he’s offering.\n\n");
 
-			outputText("“<i>Exactly what you’re thinking,</i>” rumbles the Erlking.  You feel the voice vibrating up through your arm.  Maybe it’s the lingering effects of the fog, but you need the Huntsman inside you, his arms around you, and as he slips one arm around at the small of your back, the other behind your head, fingers entwined in your [hair], you melt into his embrace.  \n\n");
+			outputText("\"<i>Exactly what you’re thinking,</i>\" rumbles the Erlking.  You feel the voice vibrating up through your arm.  Maybe it’s the lingering effects of the fog, but you need the Huntsman inside you, his arms around you, and as he slips one arm around at the small of your back, the other behind your head, fingers entwined in your [hair], you melt into his embrace.  \n\n");
 
 			outputText("His warm mouth presses against your neck, his fingers undoing your [armor], letting it fall to the forest floor.  His touch sends warm shivers through you, and you moan as he walks you backward, pressing you firmly against a tree.\n\n");
 
@@ -614,7 +614,7 @@ public class ErlKingScene extends BaseContent
 					else if (player.isNaga()) outputText(" tail up, letting your coils wrap around his back.");
 					outputText("  One hand grasps firmly under your [ass], holding you up, while the other plays softly across your chest, squeezing and caressing each of your [chest] in turn.  He tweaks your nipples, one by one, sending shockwaves of pleasure through your body.\n\n");
 
-					outputText("“<i>Take me, Huntsman,</i>” you moan.  His shaft is already poised, his equine dick sliding up into your [vagina], pushing deep inside you.");
+					outputText("\"<i>Take me, Huntsman,</i>\" you moan.  His shaft is already poised, his equine dick sliding up into your [vagina], pushing deep inside you.");
 
 					player.cuntChange(12 * 3, true, true, false);
 					outputText("\n\n");
@@ -636,7 +636,7 @@ public class ErlKingScene extends BaseContent
 					else if (player.isNaga()) outputText(" tail up, letting your coils wrap around his back.");
 					outputText("  One hand grasps firmly under your [ass], holding you up, while the other plays softly across your chest, tweaking each nipple before trailing down your stomach, grasping [oneCock]\n\n");
 
-					outputText("“<i>Take me, Huntsman,</i>” you groan.  His shaft is already at your [ass].  His equine dick pushing up into your [asshole], pushing deep inside you.");
+					outputText("\"<i>Take me, Huntsman,</i>\" you groan.  His shaft is already at your [ass].  His equine dick pushing up into your [asshole], pushing deep inside you.");
 
 					player.buttChange(12 * 3, true, true, false);
 					outputText("\n\n");
@@ -654,7 +654,7 @@ public class ErlKingScene extends BaseContent
 			}
 			else
 			{
-				outputText("The Erlking smiles at you, caressing your cheek.  “<i>I pride myself in keeping a proper stable,</i>” he says, delicately moving behind you.  With his strong hands on your flanks, he guides you to face up against a tree.\n\n");
+				outputText("The Erlking smiles at you, caressing your cheek.  \"<i>I pride myself in keeping a proper stable,</i>\" he says, delicately moving behind you.  With his strong hands on your flanks, he guides you to face up against a tree.\n\n");
 
 				if (player.hasVagina() && !player.hasCock())
 				{
@@ -710,27 +710,27 @@ public class ErlKingScene extends BaseContent
 			//[ends the Hunt permanently, Opens Princess Option]
 			outputText("You’ve had more than enough of the Erlking and his insane hunt.  You rise to your [feet], slapping away his outstretched hand.  He frowns, but before he can react, you’ve charged forward and knocked the black wood cane out of his hand.  It spins off into the undergrowth, out of sight.  The light in his eyes dims, as does the glow from his antlers.\n\n");
 
-			outputText("He stumbles backward, pained as if you’d struck him directly.  A look of confusion crosses his ridiculous deer face.  “<i>Wait - my cane - it fortifies me against the rigors of this land... </i>” he gasps, suddenly staggering.\n\n");
+			outputText("He stumbles backward, pained as if you’d struck him directly.  A look of confusion crosses his ridiculous deer face.  \"<i>Wait - my cane - it fortifies me against the rigors of this land... </i>\" he gasps, suddenly staggering.\n\n");
 
 			outputText("You sneer and stalk forward, another well-placed shove to his shoulders knocking him from his feet.  He drops to his knees with a groan.  At the edge of the clearing, the Hounds sit silently, awaiting the outcome of the confrontation.\n\n");
 
-			outputText("“<i>Please... my cane...</i>” he pleads.  On his knees, his trembling arms hold him up.  He seems to be telling the truth - without the cane, he’s as weak as a newborn.\n\n");
+			outputText("\"<i>Please... my cane...</i>\" he pleads.  On his knees, his trembling arms hold him up.  He seems to be telling the truth - without the cane, he’s as weak as a newborn.\n\n");
 
-			outputText("“<i>You taunt me, you hunt me, and now you ask for favors?</i>”  you snort.  “<i>No, no, you’re about to be taught a very lasting lesson,</i>” you snarl.\n\n");
+			outputText("\"<i>You taunt me, you hunt me, and now you ask for favors?</i>\"  you snort.  \"<i>No, no, you’re about to be taught a very lasting lesson,</i>\" you snarl.\n\n");
 
-			outputText("“<i>What do yo-</i>” begins the Erlking, looking up at you.  You slap his face, cutting off the end of the question.\n\n");
+			outputText("\"<i>What do yo-</i>\" begins the Erlking, looking up at you.  You slap his face, cutting off the end of the question.\n\n");
 
 			if (player.hasVagina() && !player.hasCock())
 			{
 				outputText("You grab his horns, shoving him over backwards.  He seems to be getting weaker by the moment.  He can barely pick himself up off the ground.  You look down at the prone huntsman with disdain, striding to his head, your [feet] on either side of his head.\n\n");
 
-				outputText("“<i>What are yo-</i>” he tries to ask, before you crouch down, burying his deer-muzzle in your muff.  You grab the forward prongs of his antlers, steering his mouth against your dripping vagina.\n\n");
+				outputText("\"<i>What are yo-</i>\" he tries to ask, before you crouch down, burying his deer-muzzle in your muff.  You grab the forward prongs of his antlers, steering his mouth against your dripping vagina.\n\n");
 
-				outputText("“<i>Lick it, Huntsman!</i>” you order, pulling on his antlers, his dark muzzle pushing hard against your pussy.  You snarl, feeling the timid push of his tongue against your pussy lips.\n\n");
+				outputText("\"<i>Lick it, Huntsman!</i>\" you order, pulling on his antlers, his dark muzzle pushing hard against your pussy.  You snarl, feeling the timid push of his tongue against your pussy lips.\n\n");
 
-				outputText("“<i>Deeper!</i>” you command.  You feel his tongue explore deeper into your wet snatch, and you guide his wet deer nose to rub against your clit. \n\n");
+				outputText("\"<i>Deeper!</i>\" you command.  You feel his tongue explore deeper into your wet snatch, and you guide his wet deer nose to rub against your clit. \n\n");
 
-				outputText("“<i>Not a king anymore, are you?</i>” you growl, smiling.  “<i>You’re more like a Princess now.  A slutty, little Princess,</i>” you grin.  You see a tremble run down his chest and front, his cock straining against his tight leathers.  “<i>Eat my pussy, Princess,</i>” you order.\n\n");
+				outputText("\"<i>Not a king anymore, are you?</i>\" you growl, smiling.  \"<i>You’re more like a Princess now.  A slutty, little Princess,</i>\" you grin.  You see a tremble run down his chest and front, his cock straining against his tight leathers.  \"<i>Eat my pussy, Princess,</i>\" you order.\n\n");
 
 				outputText("Your princess moans, shuddering and submissive, shoving his flat tongue into your pussy.  It might be a trick of the light, but you swear his fur just got a little lighter.  His hips writhe, drawing attention to how slim and girlish they really are.  He’s obviously responding very well to the abuse.\n\n");
 
@@ -744,21 +744,21 @@ public class ErlKingScene extends BaseContent
 			{
 				outputText("You undo your [armor], releasing your [cock].  Narrowing your eyes at the fallen hunter, you grab him by the antlers, shoving your cock in his face.\n\n");
 
-				outputText("“<i>Lick it, huntsman.  Make me good and wet,</i>” you growl.  \n\n");
+				outputText("\"<i>Lick it, huntsman.  Make me good and wet,</i>\" you growl.  \n\n");
 
 				outputText("Strangely, the Erlking needs little encouragement, and almost eagerly takes your [cock] into his long stag muzzle, his hot tongue running up and down the underside of your shaft.  Is it possible that the cane was reinforcing his mind as much as his body?  He moans in pleasure as you grip his antlers, driving yourself deep into his mouth.\n\n");
 
 				outputText("What the Erlking lacks in skill, he makes up for in enthusiasm, licking and sucking noisily at your cock.  When the huntsman has sufficiently lubed up your cock you shove back on his antlers, pushing his mouth from your [cock].  The force of the impact breaks his golden horns, and they come free in your hands.  The Erlking whimpers, hornless, looking up at you, reaching for your cock.\n\n");
 
-				outputText("“<i>On all fours, slut,</i>” you smirk, shoving the huntsman back.  You throw his horns to the side as he stumbles to the mossy ground, visibly weakened without his cane.  Somehow, you don’t think it’s only the loss of his cane making him so submissive.  He looks more like a doe now with his horns gone.\n\n");
+				outputText("\"<i>On all fours, slut,</i>\" you smirk, shoving the huntsman back.  You throw his horns to the side as he stumbles to the mossy ground, visibly weakened without his cane.  Somehow, you don’t think it’s only the loss of his cane making him so submissive.  He looks more like a doe now with his horns gone.\n\n");
 
 				outputText("The Erlking turns over on all fours, his cloak riding up over his shoulders.  Just above his taut buttocks is a tufted deer tail.  You smirk, grabbing the fluffy tail with one hand, and shoving down his leather pants around his knees.  He looks back over his shoulder at you.  The red light has gone out of his eyes, leaving them as wide, doe-brown eyes.  Heavy lashes blink hopefully at you as you spread his white-furred rump.\n\n");
 
-				outputText("“<i>Not a king anymore, are you?</i>” you growl, smiling.  “<i>You’re more like a Princess now.  A slutty, little Princess,</i>” you grin.  You see a tremble run down his back, and his soft, fluffy tail twitches in your hand.  “<i>Say it,</i>” you order.\n\n");
+				outputText("\"<i>Not a king anymore, are you?</i>\" you growl, smiling.  \"<i>You’re more like a Princess now.  A slutty, little Princess,</i>\" you grin.  You see a tremble run down his back, and his soft, fluffy tail twitches in your hand.  \"<i>Say it,</i>\" you order.\n\n");
 
-				outputText("“<i>I... I’m a Princess,</i>” he mutters, his voice noticeably higher.  You smile, wondering what else the loss of his cane will do to your princess.\n\n");
+				outputText("\"<i>I... I’m a Princess,</i>\" he mutters, his voice noticeably higher.  You smile, wondering what else the loss of his cane will do to your princess.\n\n");
 
-				outputText("“<i>Good girl,</i>” you coo, pressing your [cock] against his pucker.  The new princess moans, shuddering  as you do, shoving his ass back against you.\n\n");
+				outputText("\"<i>Good girl,</i>\" you coo, pressing your [cock] against his pucker.  The new princess moans, shuddering  as you do, shoving his ass back against you.\n\n");
 
 				outputText("You push into him, and he moans, tossing his head back.  He’s ridiculously tight, but hungry for it.  As you begin fucking him, his voice grows higher and higher, much more girly than his earlier, thundering boom.  Thrust after thrust, you push into his supple ass.  It might be a trick of the light as the last tendrils of mist fade away, but it seems like his fur is less dark than before.\n\n");
 
@@ -768,13 +768,13 @@ public class ErlKingScene extends BaseContent
 
 				outputText("He moans, slumping down, cheek to the ground, and you bend over him, grinding his face to the ground.\n\n");
 
-				outputText("“<i>Dirty little slut,</i>” you growl.  “<i>Did you like that?</i>”\n\n");
+				outputText("\"<i>Dirty little slut,</i>\" you growl.  \"<i>Did you like that?</i>\"\n\n");
 
-				outputText("“<i>Y-yes...</i>” purrs the once-Lord.  “<i>I... I loved it...</i>” He shudders again, and you notice that the lighter fur is no illusion.  Your new doe princess is no longer midnight black, but a sandy-tan, and still slowly lightening.\n\n");
+				outputText("\"<i>Y-yes...</i>\" purrs the once-Lord.  \"<i>I... I loved it...</i>\" He shudders again, and you notice that the lighter fur is no illusion.  Your new doe princess is no longer midnight black, but a sandy-tan, and still slowly lightening.\n\n");
 
-				outputText("“<i>I don’t expect we’ll have any more problems, will we?</i>” you ask, sliding out of him.  You rise, watching as his fur takes on a curiously pink hue.\n\n");
+				outputText("\"<i>I don’t expect we’ll have any more problems, will we?</i>\" you ask, sliding out of him.  You rise, watching as his fur takes on a curiously pink hue.\n\n");
 
-				outputText("“<i>No, my Lord,</i>” She croons, rising up to her knees, lapping at your dick.  Once she’s finished cleaning, she helps you with your [armor].  You nod a goodbye to her and begin walking, smirking in amusement at the trickle of cum running down her taut cheeks and down her legs as she waves farewell.\n\n");
+				outputText("\"<i>No, my Lord,</i>\" She croons, rising up to her knees, lapping at your dick.  Once she’s finished cleaning, she helps you with your [armor].  You nod a goodbye to her and begin walking, smirking in amusement at the trickle of cum running down her taut cheeks and down her legs as she waves farewell.\n\n");
 			}
 
 			player.createKeyItem("Golden Antlers", 0, 0, 0, 0);
@@ -795,7 +795,7 @@ public class ErlKingScene extends BaseContent
 
 			outputText("As you wander through the Deepwoods, you hear a rustling in the bushes.  You turn to see a flash of pink between the trees.  A slim, graceful figure steps out from behind a tree, wearing a dark green cloak and a small, leather shoulder bag.  It takes you a moment to recognize the Princess, the once-Erlking.  Her deer-like face and large, doe eyes peer timidly at you.\n\n");
 
-			outputText("“<i>Muh-M’lord?</i>” she asks softly.  Her lithe arms push through the low branches and trees as she steps closer to you.  She’s timid and twitchy, quite different from the ominous and powerful huntsman she’d once been.  In a moment, you see why.\n\n");
+			outputText("\"<i>Muh-M’lord?</i>\" she asks softly.  Her lithe arms push through the low branches and trees as she steps closer to you.  She’s timid and twitchy, quite different from the ominous and powerful huntsman she’d once been.  In a moment, you see why.\n\n");
 
 			var selector:int = rand(6);
 
@@ -808,22 +808,22 @@ public class ErlKingScene extends BaseContent
 
 			outputText("Despite that, she looks very happy to see you.  She’s become more feminine since you last saw her.  Her hair is tufted up into a rose-colored pixie cut with two spritely pigtails at the nape of her neck. Her chest is still flat, but she’s lost muscle mass, making her tall, thin, and androgynous.  Her black leathers are gone, and her fur is mostly cotton-candy pink, accented by her white chest, stomach, and thighs.  Her cock swings with each careful movement, a mottled white and pink, matching her fur, with three prepuce rings.  She steps forward, her long, deer legs giving her hips an unintentional sway as she gingerly minces toward you.\n\n");
 
-			outputText("“<i>Master!  It’s wonderful to see you again!</i>” she coos, throwing her arms around your shoulders, kissing you with pink, pouty lips.  “<i>I’ve been having so much </i>fun<i> as a Princess!  I can’t believe how much happier I am now!  Thank you </i>so<i> much!</i>”  Her voice sounds a bit slurred, as if she’s been mentally affected by slutting around in the Deepwoods.\n\n");
+			outputText("\"<i>Master!  It’s wonderful to see you again!</i>\" she coos, throwing her arms around your shoulders, kissing you with pink, pouty lips.  \"<i>I’ve been having so much </i>fun<i> as a Princess!  I can’t believe how much happier I am now!  Thank you </i>so<i> much!</i>\"  Her voice sounds a bit slurred, as if she’s been mentally affected by slutting around in the Deepwoods.\n\n");
 
 			if (flags[kFLAGS.TIMES_ENCOUNTERED_PRINCESS_GWYNN] == 0)
 			{
-				outputText("“<i>I’m so happy you helped me get rid of that nasty old cane,</i>” she says, waving a pink-furred arm vaguely at the forest.  “<i>It may have kept out the corruption, but it was giving me a </i>weird<i> idea of fun,</i>” she bubbles.  “<i>No more hunting for me - no, sir!</i>”\n\n");
-				outputText("She touches her white fingers to her chest and purrs demurely, “<i>You can call me Gwynn, now.  But I’ll still be your princess!</i>”\n\n");
+				outputText("\"<i>I’m so happy you helped me get rid of that nasty old cane,</i>\" she says, waving a pink-furred arm vaguely at the forest.  \"<i>It may have kept out the corruption, but it was giving me a </i>weird<i> idea of fun,</i>\" she bubbles.  \"<i>No more hunting for me - no, sir!</i>\"\n\n");
+				outputText("She touches her white fingers to her chest and purrs demurely, \"<i>You can call me Gwynn, now.  But I’ll still be your princess!</i>\"\n\n");
 			}
 
 			flags[kFLAGS.TIMES_ENCOUNTERED_PRINCESS_GWYNN]++;
 
-			outputText("“<i>What can I do to repay you?</i>” Gwynn chirps cutely, kissing your cheek.  ");
+			outputText("\"<i>What can I do to repay you?</i>\" Gwynn chirps cutely, kissing your cheek.  ");
 
-			if (player.hasCock()) outputText("“<i>I could suck your dick, or you could fuck my princess pussy, or ");
-			else outputText("“<i>");
+			if (player.hasCock()) outputText("\"<i>I could suck your dick, or you could fuck my princess pussy, or ");
+			else outputText("\"<i>");
 			if (player.hasVagina()) outputText("I could eat your pussy, ");
-			outputText(" or I could share some of my special potion with you,</i>” she counts the options off on her slim fingers.\n\n");
+			outputText(" or I could share some of my special potion with you,</i>\" she counts the options off on her slim fingers.\n\n");
 
 			outputText("You run through the options in your head, even briefly considering ‘getting some of her potion’ on your own terms.\n\n");
 
@@ -845,7 +845,7 @@ public class ErlKingScene extends BaseContent
 		{
 			clearOutput();
 			spriteSelect(SpriteDb.s_erlking_nude);
-			outputText("“<i>Yes, of course, M’Lord!</i>” Gwynn burbles, happily, dropping down to her knees.  In an instant, your [cock] is in her wet mouth.  Her time in the woods has developed her skill as she moans around your [cock], slurping wetly at it.\n\n");
+			outputText("\"<i>Yes, of course, M’Lord!</i>\" Gwynn burbles, happily, dropping down to her knees.  In an instant, your [cock] is in her wet mouth.  Her time in the woods has developed her skill as she moans around your [cock], slurping wetly at it.\n\n");
 
 			outputText("Her slim tongue rubs against the underside of your shaft, massaging it in time to the bobbing of her head.  Her index finger and thumb form a slim O at the base of your dick, pumping it counter to her head bobs, giving you continuous stimulation as she hums.\n\n");
 
@@ -853,11 +853,11 @@ public class ErlKingScene extends BaseContent
 
 			outputText("The vibration of her chirpy voice and pressure of her lips around your cock soon push you over the edge, and with a relaxed shudder, you cum in her mouth.  She takes the first jet down her throat, then pulls her mouth from your dick with a satisfied gasp, taking the next jet across her face.\n\n");
 
-			outputText("“<i>Oooooo...</i>” she moans, shivering in delight, her tongue lapping at the dripping cum, her fingers delicately wiping the thick spooge from her cheeks and depositing it in her mouth.  You notice that she’s shoved two of her slim fingers up her cute, perky ass as she slurps away at your spilled seed.\n\n");
+			outputText("\"<i>Oooooo...</i>\" she moans, shivering in delight, her tongue lapping at the dripping cum, her fingers delicately wiping the thick spooge from her cheeks and depositing it in her mouth.  You notice that she’s shoved two of her slim fingers up her cute, perky ass as she slurps away at your spilled seed.\n\n");
 
 			outputText("Satisfied, you pat her head, ruffling her short, pink hair, leaving her happy and smiling.\n\n");
 
-			outputText("“<i>Thank you, M’lord!</i>” she calls as you walk off.\n\n");
+			outputText("\"<i>Thank you, M’lord!</i>\" she calls as you walk off.\n\n");
 
 			//[Libido + 2]
 			dynStats("lib+", 2, "lus=", 0);
@@ -872,15 +872,15 @@ public class ErlKingScene extends BaseContent
 			clearOutput();
 			spriteSelect(SpriteDb.s_erlking_nude);
 
-			outputText("“<i>At once, M’Lord!</i>” she says, clapping her hands excitedly.  She bounces up in the air, then bounds low to the ground, pulling a small bottle from her purse, and dumping a liberal amount of raspberry-scented lube on your cock.  She works it in, her slim fingers massaging your cock to full attention before she hops around.\n\n");
+			outputText("\"<i>At once, M’Lord!</i>\" she says, clapping her hands excitedly.  She bounces up in the air, then bounds low to the ground, pulling a small bottle from her purse, and dumping a liberal amount of raspberry-scented lube on your cock.  She works it in, her slim fingers massaging your cock to full attention before she hops around.\n\n");
 
-			outputText("“<i>Princess Gwynn is always prepared!</i>” she chirps happily.\n\n");
+			outputText("\"<i>Princess Gwynn is always prepared!</i>\" she chirps happily.\n\n");
 
-			outputText("She drops her shoulders to the ground and raises her white rump in the air, her pink, tufted tail twitching excitedly.  “<i>Your Princess is ready for you, m’Lord!</i>”\n\n");
+			outputText("She drops her shoulders to the ground and raises her white rump in the air, her pink, tufted tail twitching excitedly.  \"<i>Your Princess is ready for you, m’Lord!</i>\"\n\n");
 
 			outputText("You grin and grip her ass, pushing your slippery cock into her pink bud.  She’s a lot looser than she was before, and you slide easily into her.  She purrs as you sink in, inch after inch, your hands gripping her small, plush ass.  It seems like her time spent with the monsters in the woods has stretched her out immensely.  You just hope she won’t be too loose.\n\n");
 
-			outputText("“<i>Oh Master, yes!  Fuck my lovely cunt!</i>” she moans as you bury yourself inside her.  Her hole twitches and tightens, and you realize you needn’t have worried.  As you begin thrusting in and out of her, her hole begins squeezing tighter and tighter around your cock.  Her ass milks your dick as you plunge deep inside her and draw out.\n\n");
+			outputText("\"<i>Oh Master, yes!  Fuck my lovely cunt!</i>\" she moans as you bury yourself inside her.  Her hole twitches and tightens, and you realize you needn’t have worried.  As you begin thrusting in and out of her, her hole begins squeezing tighter and tighter around your cock.  Her ass milks your dick as you plunge deep inside her and draw out.\n\n");
 
 			outputText("She moans and purrs, eyes rolled back and tongue hanging out as you have your way with her.  When you finally cum, her pink-and-white cock spills out her own load, strangely raspberry-scented, onto the forest floor.  Her hole doesn’t stop squeezing you, and continues to milk you until you’re completely spent.\n\n");
 
@@ -899,7 +899,7 @@ public class ErlKingScene extends BaseContent
 			clearOutput();
 			spriteSelect(SpriteDb.s_erlking_nude);
 
-			outputText("“<i>Yes Ma’am,</i>” she says, licking her lips.  She points to a nearby stump, gesturing for you to have a seat on the soft moss.  As you do, she wastes no time in dropping her pink muzzle to your pussy.  \n\n");
+			outputText("\"<i>Yes Ma’am,</i>\" she says, licking her lips.  She points to a nearby stump, gesturing for you to have a seat on the soft moss.  As you do, she wastes no time in dropping her pink muzzle to your pussy.  \n\n");
 
 			outputText("Her tongue eagerly plunges between your folds, running up and down the length of your pussy. Each time her muzzle bobs up, her candy-pink nose rubs against your clit, and she purrs, closing her eyes and nuzzling it.  She slowly laps at your slit, gradually building speed.\n\n");
 
@@ -926,21 +926,21 @@ public class ErlKingScene extends BaseContent
 			clearOutput();
 			spriteSelect(SpriteDb.s_erlking_nude);
 
-			outputText("“<i>My Lord, are you sure?</i>” she says, tilting her head to the side.\n\n");
+			outputText("\"<i>My Lord, are you sure?</i>\" she says, tilting her head to the side.\n\n");
 
 			outputText("You assure her that this is what you want and order her onto her back, lying on the soft, mossy ground.  One lithe arm is draped over her head, the other crosses over her chest, as she bites her lip, looking up at you nervously.\n\n");
 
 			outputText("Her dick is already rigid, a foot long and mottled pink and white, like clouds at dawn.  You kneel down next to her and grasp it slowly, your fingers finding natural handholds along her triple prepuce rings.\n\n");
 
-			outputText("“<i>Master, I have lube in my bag... if you’d like to use it, that is,</i>” she says shyly, reaching into her purse and offering you a small, pink bottle.  You realized that this purse used to be one of her saddlebags.  As you uncork the bottle and pour out a liberal amount of lube over her massive, flat-headed equine cock, you idly wonder if she used to carry lube as the Erlking.\n\n");
+			outputText("\"<i>Master, I have lube in my bag... if you’d like to use it, that is,</i>\" she says shyly, reaching into her purse and offering you a small, pink bottle.  You realized that this purse used to be one of her saddlebags.  As you uncork the bottle and pour out a liberal amount of lube over her massive, flat-headed equine cock, you idly wonder if she used to carry lube as the Erlking.\n\n");
 
 			outputText("You begin stroking her thick cock, feeling her pulse through it as it throbs under your fingers.  You squeeze it roughly, drawing a squeal from Princess Gwynn as she bites her bottom lip.  Unsure of what to do with her hands, she runs them through her own hair, looking up at the canopy from under heavy lids.  Her long lashes flutter as she pants shallowly.\n\n");
 
 			outputText("Faster and faster you pump her, until her breath comes in shallow gasps and her body trembles at the edge of orgasm.  You’re immediately seized by a wicked idea, and with your free hand, you pull her tail up, raising her ass in the air.  She squeaks in pain but you’re not done yet.  You curl her whole lower body over, and aim her heavy cock at her face.\n\n");
 
-			outputText("“<i>Oh, nuh-nooo...</i>” she gasps, her knees now planted on either side of her head.\n\n");
+			outputText("\"<i>Oh, nuh-nooo...</i>\" she gasps, her knees now planted on either side of her head.\n\n");
 
-			outputText("“<i>Oh, yes,</i>” you coo wickedly, shoving the lithe doe’s cock into her own mouth.  She blathers a muffled protest before you give her tufted tail another sharp tug, drawing out her orgasm..\n\n");
+			outputText("\"<i>Oh, yes,</i>\" you coo wickedly, shoving the lithe doe’s cock into her own mouth.  She blathers a muffled protest before you give her tufted tail another sharp tug, drawing out her orgasm..\n\n");
 
 			outputText("Her cock spurts into her own mouth, immediately ballooning out her cheeks.  Her eyes roll back in her head as she gurgles around her cock.  Slightly-pink, raspberry-scented cum spills out from her pouty lips, as she coughs and nearly chokes on her own cum.  \n\n");
 
@@ -958,15 +958,15 @@ public class ErlKingScene extends BaseContent
 		{
 			clearOutput();
 
-			outputText("“<i>Do you have any presents for your Master?</i>” you ask casually.\n\n");
+			outputText("\"<i>Do you have any presents for your Master?</i>\" you ask casually.\n\n");
 
-			outputText("Princess Gwynn claps her hands, bouncing on one foot, then the other.  “<i>Yes I do, M’Lord!  Yes I do!</i>”  She stops bouncing long enough to rifle through her purse, pulling out a small, pink bottle. \n\n");
+			outputText("Princess Gwynn claps her hands, bouncing on one foot, then the other.  \"<i>Yes I do, M’Lord!  Yes I do!</i>\"  She stops bouncing long enough to rifle through her purse, pulling out a small, pink bottle. \n\n");
 
-			outputText("“<i>This is my lube!</i>” she says with a smile.  “<i>Well, I use it for lube.  But you can also drink it to help control yourself when you don’t want to go crazy with lust,</i>” she babbles.  Her chirpy voice and new, even more bubbly attitude makes you unsure about this claim.  You give her a look and she blinks at you with wide eyes.  “<i>It’s yummy,</i>” she assures you with a bob of her head. \n\n");
+			outputText("\"<i>This is my lube!</i>\" she says with a smile.  \"<i>Well, I use it for lube.  But you can also drink it to help control yourself when you don’t want to go crazy with lust,</i>\" she babbles.  Her chirpy voice and new, even more bubbly attitude makes you unsure about this claim.  You give her a look and she blinks at you with wide eyes.  \"<i>It’s yummy,</i>\" she assures you with a bob of her head. \n\n");
 
-			outputText("She minces up to you, placing the bottle in your hands and giving you a kiss on the cheek.  “<i>I only have one on me, but if my Lord gives me a little time, I can make more,</i>” she purrs, kissing you softly on the lips, biting lightly on your bottom lip as she presses and rubs her flat chest and cock against you.\n\n");
+			outputText("She minces up to you, placing the bottle in your hands and giving you a kiss on the cheek.  \"<i>I only have one on me, but if my Lord gives me a little time, I can make more,</i>\" she purrs, kissing you softly on the lips, biting lightly on your bottom lip as she presses and rubs her flat chest and cock against you.\n\n");
 
-			outputText("“<i>I’ll get started on it right away!</i>” she says suddenly.  She pulls away from you, nods her head seriously, then bounds off into the woods.\n\n");
+			outputText("\"<i>I’ll get started on it right away!</i>\" she says suddenly.  She pulls away from you, nods her head seriously, then bounds off into the woods.\n\n");
 
 			outputText("Before you can stop her, she’s gone, and you pocket the small bottle for later.\n\n");
 
@@ -976,7 +976,7 @@ public class ErlKingScene extends BaseContent
 
 		private function goldenRindBonus():void {
 			clearOutput();
-			outputText("“<i>Oh, I also had this left over from brewing my Pucker,</i>” she says, popping out of the brush behind you.  You yelp in surprise.  She’d vanished into the forest in front of you a moment ago.  How did she move so quickly?  “<i>Here you go!</i>” she pipes up, depositing a small item in your hand before disappearing back into the woods.  If she can move that quickly and quietly through the woods, it’s pretty likely that her falling prey to the forest predators has been entirely voluntary.\n\n");
+			outputText("\"<i>Oh, I also had this left over from brewing my Pucker,</i>\" she says, popping out of the brush behind you.  You yelp in surprise.  She’d vanished into the forest in front of you a moment ago.  How did she move so quickly?  \"<i>Here you go!</i>\" she pipes up, depositing a small item in your hand before disappearing back into the woods.  If she can move that quickly and quietly through the woods, it’s pretty likely that her falling prey to the forest predators has been entirely voluntary.\n\n");
 			inventory.takeItem(consumables.GLDRIND, camp.returnToCampUseOneHour);
 		}
 
@@ -1004,7 +1004,7 @@ public class ErlKingScene extends BaseContent
 			}
 			//Gain deer tail
 			if (rand(3) == 0 && changes < changeLimit && player.ears.type == Ears.DEER && player.tailType != Tail.DEER) {
-				outputText("\n\nYou feel a tightening just above your ass, as if a massive hand was pinching you.  It releases with a curious “pomf”-ing noise.  You turn this way and that, finally managing to crane your neck to see your <b>fluffy, flicking deer tail.</b>");
+				outputText("\n\nYou feel a tightening just above your ass, as if a massive hand was pinching you.  It releases with a curious \"pomf\"-ing noise.  You turn this way and that, finally managing to crane your neck to see your <b>fluffy, flicking deer tail.</b>");
 				player.tailType = Tail.DEER;
 				changes++;
 			}
