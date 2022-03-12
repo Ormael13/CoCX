@@ -194,10 +194,10 @@ public function oceanInteractionsAfterArcheryTraining():void
 			if (player.hasItem(consumables.FISHFIL)) player.destroyItems(consumables.FISHFIL, 1);
 			if (player.hasItem(consumables.FREFISH)) player.destroyItems(consumables.FREFISH, 1);
 		}
-		var x:int = player.cockThatFits(36, "length");
 		menu();
 		addButton(0, "Talk", beachInteractionsTalk);
-		if (player.hasVagina() || player.findCock(1, 15, 36, "length")) addButton(1, "Date", oceanInteractionsDate);
+        //there was a check for cock length > 15. But it was not failsafe later and wasn't written in the text. So fuck it.
+		if (player.hasVagina() || player.cockThatFits(36, "length") >= 0) addButton(1, "Date", oceanInteractionsDate);
 		if (flags[kFLAGS.CEANI_AFFECTION] == 100) addButton(2, "Come2Camp", come2campCeani);
 	}
 	else {
@@ -386,10 +386,13 @@ public function beachInteractionsDateUnderwater2():void
 	if (player.armor != ArmorLib.NOTHING) outputText(". You were too busy pondering these details to notice as Ceani slowly removed your [armor]");
 	if (player.lowerGarment != UndergarmentLib.NOTHING) outputText(" and undergarment");
 	outputText(". Ceani surprise you by grabbing your shoulder and kissing you. Is it just you or the water around you both is starting to get even warmer. The two of you play with each other tongue for a moment. You aren’t so surprised to find a sea salt taste on Ceani’s saliva, as the both of you have been pretty much talking underwater for this long.\n\n");
-	if (player.gender == 3) {
+	if (player.gender == 3) { //additional check
 		outputText("Now that you think of it, you could take her as a man or a woman, so which way do you prefer?\n\n");
 		menu();
-		addButton(0, "Male", underwaterDateMaleVer);
+        if (player.cockThatFits(36, "length") > 0)
+		    addButton(0, "Male", underwaterDateMaleVer);
+        else
+		    addButtonDisabled(0, "Male", "Too big!");
 		addButton(1, "Female", underwaterDateFemaleVer);
 	}
 	if (player.gender == 1) underwaterDateMaleVer();
@@ -503,7 +506,10 @@ public function beachInteractionsDateOnTheBeach2():void
 	if (player.gender == 3) {
 		outputText("It occurs to you that you could fuck her as a man or a woman so which way do you prefer?\n\n");
 		menu();
-		addButton(0, "Male", beachDateMaleVer);
+        if (player.cockThatFits(36, "length") > 0)
+		    addButton(0, "Male", beachDateMaleVer);
+        else
+		    addButtonDisabled(0, "Male", "Too big!");
 		addButton(1, "Female", beachDateFemaleVer);
 	}
 	if (player.gender == 1) beachDateMaleVer();
