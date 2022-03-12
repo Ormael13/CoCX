@@ -1247,6 +1247,9 @@ public class Combat extends BaseContent {
 				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
 					bd.disable("Your current soulforce is too low.");
 				}
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAirE) == 5) {
+					//True Evasion
+				}
 			}
 			if (player.perkv1(PerkLib.ElementalBody) == 2) {//gnome
 				bd = buttons.add("Wild Growth", curry(mspecials.FusionSpecialFirst, player.statusEffectv2(StatusEffects.SummonedElementalsEarthE), 2)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
@@ -1260,6 +1263,9 @@ public class Combat extends BaseContent {
 				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
 					bd.disable("Your current soulforce is too low.");
 				}
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) == 5) {
+					//Adamantine Shell
+				}
 			}
 			if (player.perkv1(PerkLib.ElementalBody) == 3) {//ignis
 				bd = buttons.add("Pyroblast", curry(mspecials.FusionSpecialFirst, player.statusEffectv2(StatusEffects.SummonedElementalsFireE), 3)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
@@ -1270,6 +1276,9 @@ public class Combat extends BaseContent {
 				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
 					bd.disable("Your current soulforce is too low.");
 				}
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFireE) == 5) {
+					//Fiery Rage
+				}
 			}
 			if (player.perkv1(PerkLib.ElementalBody) == 4) {//undine
 				bd = buttons.add("Hydraulic Torrent", curry(mspecials.FusionSpecialFirst, player.statusEffectv2(StatusEffects.SummonedElementalsWaterE), 4)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
@@ -1279,6 +1288,9 @@ public class Combat extends BaseContent {
 				bd = buttons.add("Lifewater", curry(mspecials.FusionSpecialSecond, player.statusEffectv2(StatusEffects.SummonedElementalsWaterE), 4)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
 				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
 					bd.disable("Your current soulforce is too low.");
+				}
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) == 5) {
+					//Moment of Clarity
 				}
 			}
 		}
@@ -1889,11 +1901,20 @@ public class Combat extends BaseContent {
 		}
 		if (player.hasPerk(PerkLib.FirstAttackGolems) && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1 && flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 1 && player.mana >= combat.pspecials.permanentgolemsendcost()) combat.pspecials.sendPermanentGolem1();
 		if (player.hasPerk(PerkLib.FirstAttackElementalsSu) && player.statusEffectv2(StatusEffects.SummonedElementals) > 0 && (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4) && flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] < 1) {
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsAirE)) baseelementalattacks(Combat.AIR_E);
-			else if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarthE)) baseelementalattacks(Combat.EARTH_E);
-			else if (player.hasStatusEffect(StatusEffects.SummonedElementalsFireE)) baseelementalattacks(Combat.FIRE_E);
-			else if (player.hasStatusEffect(StatusEffects.SummonedElementalsWaterE)) baseelementalattacks(Combat.WATER_E);
-			else baseelementalattacks(Combat.NONE_E);
+			if (player.hasPerk(PerkLib.ElementalBody)) {
+				if (player.hasStatusEffect(StatusEffects.SummonedElementalsAirE) && player.perkv1(PerkLib.ElementalBody) != 1) baseelementalattacks(Combat.AIR_E);
+				else if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarthE) && player.perkv1(PerkLib.ElementalBody) != 2) baseelementalattacks(Combat.EARTH_E);
+				else if (player.hasStatusEffect(StatusEffects.SummonedElementalsFireE) && player.perkv1(PerkLib.ElementalBody) != 3) baseelementalattacks(Combat.FIRE_E);
+				else if (player.hasStatusEffect(StatusEffects.SummonedElementalsWaterE) && player.perkv1(PerkLib.ElementalBody) != 4) baseelementalattacks(Combat.WATER_E);
+				else baseelementalattacks(Combat.NONE_E);
+			}
+			else {
+				if (player.hasStatusEffect(StatusEffects.SummonedElementalsAirE)) baseelementalattacks(Combat.AIR_E);
+				else if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarthE)) baseelementalattacks(Combat.EARTH_E);
+				else if (player.hasStatusEffect(StatusEffects.SummonedElementalsFireE)) baseelementalattacks(Combat.FIRE_E);
+				else if (player.hasStatusEffect(StatusEffects.SummonedElementalsWaterE)) baseelementalattacks(Combat.WATER_E);
+				else baseelementalattacks(Combat.NONE_E);
+			}
 		}
 		if (player.hasPerk(PerkLib.FirstAttackElementals) && (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4) && flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] < 2) {
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsAir)) baseelementalattacks(Combat.AIR);
@@ -1903,6 +1924,7 @@ public class Combat extends BaseContent {
 			else baseelementalattacks(Combat.NONE);
 		}
 		if (flags[kFLAGS.PLAYER_COMPANION_1] != "" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1 && !player.hasStatusEffect(StatusEffects.MinoKing)) {
+			outputText("\n\n");
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Alvina") {
 				comfoll.alvinaCombatActions();
 				if (player.hasPerk(PerkLib.MotivationSu)) comfoll.alvinaCombatActions();
@@ -2048,74 +2070,77 @@ public class Combat extends BaseContent {
                 break;
 			case NONE		:
 				flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] = 2;
-				doNext(curry(combatMenu, false));
 				break;
 			case NONE_E		:
 				flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] = 1;
-				doNext(curry(combatMenu, false));
 				break;
         }
-        var manaCost:Number = 1;
-		var manaCostInt:Number = 8;
-		var manaCostWis:Number = 8;
-		if (player.hasPerk(PerkLib.FirstAttackElementalsSu)) {
-			manaCostInt += 17;
-			manaCostWis += 42;
+		if (elementType == NONE || elementType == NONE_E) {
+			doNext(curry(combatMenu, false));
 		}
-        manaCost += summonedElementals;
-        if (summonedElementals >= 11) manaCost += summonedElementals;
-        if (summonedElementals >= 21) manaCost += summonedElementals;
-        if (summonedElementals >= 29) manaCost += summonedElementals;
-        manaCost += player.inte / manaCostInt;
-        manaCost += player.wis / manaCostWis;
-        if (summonedElementals >= 2 && manaCost > 11 && player.hasPerk(PerkLib.StrongElementalBond)) manaCost -= 10;
-        if (summonedElementals >= 4 && manaCost > 22 && player.hasPerk(PerkLib.StrongElementalBondEx)) manaCost -= 20;
-        if (summonedElementals >= 6 && manaCost > 33 && player.hasPerk(PerkLib.StrongElementalBondSu)) manaCost -= 30;
-        if (summonedElementals >= 9 && manaCost > 44 && player.hasPerk(PerkLib.StrongerElementalBond)) manaCost -= 40;
-        if (summonedElementals >= 12 && manaCost > 55 && player.hasPerk(PerkLib.StrongerElementalBondEx)) manaCost -= 50;
-        if (summonedElementals >= 15 && manaCost > 66 && player.hasPerk(PerkLib.StrongerElementalBondSu)) manaCost -= 60;
-        if (summonedElementals >= 19 && manaCost > 77 && player.hasPerk(PerkLib.StrongestElementalBond)) manaCost -= 70;
-        if (summonedElementals >= 23 && manaCost > 88 && player.hasPerk(PerkLib.StrongestElementalBondEx)) manaCost -= 80;
-        if (summonedElementals >= 27 && manaCost > 99 && player.hasPerk(PerkLib.StrongestElementalBondSu)) manaCost -= 90;
-		if (manaCost > 1 && player.hasPerk(PerkLib.FirstAttackElementalsSu)) manaCost *= 0.5;
-        manaCost = Math.round(manaCost);
-        if (player.mana < manaCost) {
-            outputText("\n\nYour mana is too low to fuel your elemental attack!");
-            flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] = 1;
-            doNext(curry(combatMenu, false));
-        } else {
-			if (!player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn)) outputText("\n\n");
-			switch (elementType) {
-				case AIR_E      :
-					outputText("Sylph");
-					break;
-				case EARTH_E    :
-					outputText("Golem");
-					break;
-				case FIRE_E     :
-					outputText("Ifrit");
-					break;
-				case WATER_E    :
-					outputText("Undine");
-					break;
-				default:
-                    outputText("Your elemental");
-                    break;
+		else {
+			var manaCost:Number = 1;
+			var manaCostInt:Number = 8;
+			var manaCostWis:Number = 8;
+			if (player.hasPerk(PerkLib.FirstAttackElementalsSu)) {
+				manaCostInt += 17;
+				manaCostWis += 42;
 			}
-            if (manaCost > 0) player.mana -= manaCost;
-			if (player.hasPerk(PerkLib.FirstAttackElementalsEx) && player.hasStatusEffect(StatusEffects.SummonedElementals)) {
-				var elementalDamageMulti:Number = 1;
-				elementalDamageMulti += 0.05 * (player.statusEffectv1(StatusEffects.SummonedElementals));
-				elementalDamageMulti += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementals));
-				elementalDamageMulti += 0.2 * (player.statusEffectv3(StatusEffects.SummonedElementals));
-				summonedElementals *= elementalDamageMulti;
-				summonedElementalsMulti += 1;
-				if (rand(10) == 0 || player.hasPerk(PerkLib.FirstAttackElementalsSu)) summonedElementalsMulti += 1;
-				if (player.hasPerk(PerkLib.FirstAttackElementalsSu)) summonedElementalsMulti += 1;
+			manaCost += summonedElementals;
+			if (summonedElementals >= 11) manaCost += summonedElementals;
+			if (summonedElementals >= 21) manaCost += summonedElementals;
+			if (summonedElementals >= 29) manaCost += summonedElementals;
+			manaCost += player.inte / manaCostInt;
+			manaCost += player.wis / manaCostWis;
+			if (summonedElementals >= 2 && manaCost > 11 && player.hasPerk(PerkLib.StrongElementalBond)) manaCost -= 10;
+			if (summonedElementals >= 4 && manaCost > 22 && player.hasPerk(PerkLib.StrongElementalBondEx)) manaCost -= 20;
+			if (summonedElementals >= 6 && manaCost > 33 && player.hasPerk(PerkLib.StrongElementalBondSu)) manaCost -= 30;
+			if (summonedElementals >= 9 && manaCost > 44 && player.hasPerk(PerkLib.StrongerElementalBond)) manaCost -= 40;
+			if (summonedElementals >= 12 && manaCost > 55 && player.hasPerk(PerkLib.StrongerElementalBondEx)) manaCost -= 50;
+			if (summonedElementals >= 15 && manaCost > 66 && player.hasPerk(PerkLib.StrongerElementalBondSu)) manaCost -= 60;
+			if (summonedElementals >= 19 && manaCost > 77 && player.hasPerk(PerkLib.StrongestElementalBond)) manaCost -= 70;
+			if (summonedElementals >= 23 && manaCost > 88 && player.hasPerk(PerkLib.StrongestElementalBondEx)) manaCost -= 80;
+			if (summonedElementals >= 27 && manaCost > 99 && player.hasPerk(PerkLib.StrongestElementalBondSu)) manaCost -= 90;
+			if (manaCost > 1 && player.hasPerk(PerkLib.FirstAttackElementalsSu)) manaCost *= 0.5;
+			manaCost = Math.round(manaCost);
+			if (player.mana < manaCost) {
+				outputText("\n\nYour mana is too low to fuel your elemental attack!");
+				flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] = 1;
+				doNext(curry(combatMenu, false));
+			} else {
+				if (!player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn)) outputText("\n\n");
+				switch (elementType) {
+					case AIR_E      :
+						outputText("Sylph");
+						break;
+					case EARTH_E    :
+						outputText("Golem");
+						break;
+					case FIRE_E     :
+						outputText("Ifrit");
+						break;
+					case WATER_E    :
+						outputText("Undine");
+						break;
+					default:
+						outputText("Your elemental");
+						break;
+				}
+				if (manaCost > 0) player.mana -= manaCost;
+				if (player.hasPerk(PerkLib.FirstAttackElementalsEx) && player.hasStatusEffect(StatusEffects.SummonedElementals)) {
+					var elementalDamageMulti:Number = 1;
+					elementalDamageMulti += 0.05 * (player.statusEffectv1(StatusEffects.SummonedElementals));
+					elementalDamageMulti += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementals));
+					elementalDamageMulti += 0.2 * (player.statusEffectv3(StatusEffects.SummonedElementals));
+					summonedElementals *= elementalDamageMulti;
+					summonedElementalsMulti += 1;
+					if (rand(10) == 0 || player.hasPerk(PerkLib.FirstAttackElementalsSu)) summonedElementalsMulti += 1;
+					if (player.hasPerk(PerkLib.FirstAttackElementalsSu)) summonedElementalsMulti += 1;
+				}
+				outputText(" hit"+(summonedElementalsMulti > 1 ? "s":"")+" [monster a] [monster name]! ");
+				elementalattacks(elementType, summonedElementals, summonedElementalsMulti, summonedEpicElemental);
 			}
-			outputText(" hit"+(summonedElementalsMulti > 1 ? "s":"")+" [monster a] [monster name]! ");
-            elementalattacks(elementType, summonedElementals, summonedElementalsMulti, summonedEpicElemental);
-        }
+		}
     }
 
     public function intwisscaling():Number {
