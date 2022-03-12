@@ -316,7 +316,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			}
 			mainView.nameBox.visible = false;
 			clearOutput();
-			outputText("\n\n<i>\"" + _name + "... this is a good name, right my child?\"\n</i>"+
+			outputText("<i>\"" + _name + "... this is a good name, right my child?\"\n</i>"+
 			_name + " stops crying and looks at you with her big eyes, letting out a cute laugh in response.\n"+
 			"You think she likes it. Having solved this important matter, you drift asleep with " + _name + " still hugging your chest.\n\n"+
 			"When you wake up, you're no longer holding a baby, but what looks like a centaur girl in her tender years.\n" +

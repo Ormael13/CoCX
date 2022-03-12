@@ -55,7 +55,8 @@ use namespace CoC;
 		//-PC has achieved \"<i>Fuckbuddy</i>\" status with Helia.
 		//-HelAffection >= 70
 		public function heliaDiscovery():void {
-			//clearOutput();
+			clearOutput();
+            SceneLib.helScene.helSprite();
 			//(Scene proc's the first time all requirements are met and the player chooses [Sleep] at camp.)
 			outputText("Before bedding down for the night, you make one last check of your camp's perimeter, making sure all your traps and defenses are still in place and primed in the event of a surprise nighttime assault.  As you come to the outermost parts of your makeshift camp, you notice a cloaked stranger approaching out of the evening darkness.  You're about to ready your [weapon], but you recognize the shapely figure of Hel the salamander walking towards you, hips a-sway underneath her loose traveling cloak.");
 
@@ -140,6 +141,7 @@ use namespace CoC;
 		}
 			
 		public function morningAfterHeliaDungeonAgreements():void {
+            SceneLib.helScene.helSprite();
 			outputText("\nWhen your eyes flicker open at the crack of dawn, you're pleased to see Helia is lying on your chest, ");
 			//[If PC has >C Cups, \"<i>
 			if(player.biggestTitSize() > 3) outputText("her head nestled between your soft tits and ");
@@ -171,6 +173,7 @@ use namespace CoC;
 		}
 		public function goToHeliaDungeon2():void {
 			clearOutput();
+            SceneLib.helScene.helSprite();
 			outputText(images.showImage("dungeon-entrance-phoenixtower"));
 			outputText("Within the hour, you and Helia are hiking up the narrow ledges and crevices of the high mountains, slowly but steadily climbing toward a snow-capped peak.  Hel certainly seems to know where she's going - she blazes a certain and steady trail, as if she knew every path and shortcut up the mountain.  By the time you near the peak, you're convinced she's been up here before - many times, even.");
 			outputText("\n\nEventually, you see the crest of a squat, thick stone tower on the mountainside.  Hel easily guides you toward it, giving you a helping hand over an unusually wide gorge that would have kept most stray minotaurs well away from the solitary spire.  As you scramble onto the tower's plateau, Hel grabs your shoulders and pins you to the ground - just in time to avoid the gaze of a low-flying harpy.");
@@ -426,6 +429,7 @@ use namespace CoC;
 					if (flags[kFLAGS.VALERIA_FOUND_IN_GLACIAL_RIFT] == 0) inventory.takeItem(item, roomGuardHall);
 					else inventory.takeItem(item, camp.returnToCampUseOneHour);
 				}
+                classes.CoC.instance.mainViewManager.updateCharviewIfNeeded();
 			}
 			else{ //Needs a better explanation, cause why can't jiangshi wear armour again?
 				outputText("\nYou try and put the armour on, but as you are a Jiangshi, you are unable to. Instead you tell her the directions to your camp, and ask her to meet you there instead.");
@@ -908,6 +912,7 @@ use namespace CoC;
 		//Throne Room -- [Helia]
 		public function HeliaThroneRoom():void {
 			clearOutput();
+            SceneLib.helScene.helSprite();
 			menu();
 			outputText("You turn your attentions to the salamander, who is currently pinning down the harpy bitch to prevent her from flying off or doing something drastic.");
 			outputText("\n\n\"<i>Hey, [name],</i>\" Hel says as you approach.  She grabs you roughly by the [armor] and pulls you into a long kiss, only breaking it to wrap her arms and tail around you.  \"<i>Thank you, lover.  From the bottom of my heart.  I couldn't have done it without you.</i>\"");
