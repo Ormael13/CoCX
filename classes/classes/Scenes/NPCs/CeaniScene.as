@@ -159,10 +159,9 @@ public function beachInteractionsAfterArcheryTraining():void
 			if (player.hasItem(consumables.FISHFIL)) player.destroyItems(consumables.FISHFIL, 1);
 			if (player.hasItem(consumables.FREFISH)) player.destroyItems(consumables.FREFISH, 1);
 		}
-		var x:int = player.cockThatFits(36, "length");
 		menu();
 		addButton(0, "Talk", beachInteractionsTalk);
-		if (player.hasVagina() || player.findCock(1, 15, 36, "length")) addButton(1, "Date", beachInteractionsDate);
+		if (player.hasVagina() || player.findCock(1, 15, 36, "length") >= 0) addButton(1, "Date", beachInteractionsDate);
 		if (flags[kFLAGS.CEANI_AFFECTION] == 100) addButton(2, "Come2Camp", come2campCeani);
 	}
 	else {
@@ -196,8 +195,7 @@ public function oceanInteractionsAfterArcheryTraining():void
 		}
 		menu();
 		addButton(0, "Talk", beachInteractionsTalk);
-        //there was a check for cock length > 15. But it was not failsafe later and wasn't written in the text. So fuck it.
-		if (player.hasVagina() || player.cockThatFits(36, "length") >= 0) addButton(1, "Date", oceanInteractionsDate);
+        if (player.hasVagina() || player.findCock(1, 15, 36, "length") >= 0) addButton(1, "Date", oceanInteractionsDate);
 		if (flags[kFLAGS.CEANI_AFFECTION] == 100) addButton(2, "Come2Camp", come2campCeani);
 	}
 	else {
@@ -389,7 +387,7 @@ public function beachInteractionsDateUnderwater2():void
 	if (player.gender == 3) { //additional check
 		outputText("Now that you think of it, you could take her as a man or a woman, so which way do you prefer?\n\n");
 		menu();
-        if (player.cockThatFits(36, "length") > 0)
+        if (player.findCock(1, 15, 36, "length") >= 0)
 		    addButton(0, "Male", underwaterDateMaleVer);
         else
 		    addButtonDisabled(0, "Male", "Too big!");
@@ -401,7 +399,7 @@ public function beachInteractionsDateUnderwater2():void
 
 public function underwaterDateMaleVer():void
 {
-	var x:int = player.cockThatFits(36, "length");
+	var x:int = player.findCock(1, 15, 36, "length");
 	outputText("You barely register Ceani hand moving down to your cock as she begins to stroke it.\n\n");
 	outputText("\"<i>Mmmm... since we are underwater we won’t need lubrication as I am pretty much as wet as I can be.</i>\"\n\n");
 	if (player.cocks[x].cockLength >= 22) {
@@ -506,7 +504,7 @@ public function beachInteractionsDateOnTheBeach2():void
 	if (player.gender == 3) {
 		outputText("It occurs to you that you could fuck her as a man or a woman so which way do you prefer?\n\n");
 		menu();
-        if (player.cockThatFits(36, "length") > 0)
+        if (player.findCock(1, 15, 36, "length") >= 0)
 		    addButton(0, "Male", beachDateMaleVer);
         else
 		    addButtonDisabled(0, "Male", "Too big!");
@@ -517,7 +515,7 @@ public function beachInteractionsDateOnTheBeach2():void
 }
 
 public function beachDateMaleVer():void {
-	var x:int = player.cockThatFits(36, "length");
+	var x:int = player.findCock(1, 15, 36, "length");
 	if (player.cocks[x].cockLength >= 22) {
 		outputText("Ceani licks her lips as she eye your massive [cock], truth be told, finding someone with a cock large enough to fit her pussy up to the cervix must be a difficult task.\n\n");
 		outputText("\"<i>Mmmmmm... you have quite the beast you know? Do you realise how hard it is to find a dick that can properly fit in my cunny? I had wet dreams about this one...</i>\"\n\n");
