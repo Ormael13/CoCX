@@ -206,7 +206,7 @@ public function urtaBarDescript():Boolean {
 		outputText("Urta has an ecstatic grin plastered across her muzzle, and it only gets wider when she sees you.  Perhaps you should see what all the fuss is about?");
 		return true;
 	}
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00350] == 1) {
+	if(flags[kFLAGS.AMILY_URTA_FOLLOWUP] == 1) {
 		outputText("Urta is sitting at her usual table, holding her head in her hands.  She doesn't even seem to notice you.");
 		return true;
 	}
@@ -296,7 +296,7 @@ public function urtaBarApproach():void {
 		return;
 	}
 	//Post Amily Sad Shit
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00350] == 1) {
+	if(flags[kFLAGS.AMILY_URTA_FOLLOWUP] == 1) {
 		amilyXUrtaUrtaFallout();
 		return;
 	}
@@ -2670,7 +2670,7 @@ private function tellUrtaToStayTheSame():void {
 }
 
 private function amilyXUrtaUrtaFallout(): void {
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00350] = 2;
+	flags[kFLAGS.AMILY_URTA_FOLLOWUP] = 2;
 	urtaSprite();
 	clearOutput();
 	outputText("You ");

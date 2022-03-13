@@ -1530,7 +1530,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 			outputText("You spend over an hour getting to know your many sons and daughters, helping them pack up their meager supplies and wishing them well as they set off. Then, with Amily's hand in yours, you return to your camp, leaving behind this empty village to be reclaimed by the wilderness.\n\n");
 			//Oh boy.  So excited.  wee.  Blech.
-			outputText("\\[<b>Amily has joined you as a lover.</b>\\]\n\n");
+			outputText("<b>Amily has joined you as a lover.</b>\n\n");
 			//Set amily follower flag
 			flags[kFLAGS.AMILY_FOLLOWER] = 1;
 			flags[kFLAGS.AMILY_CUP_SIZE] = 1;
@@ -3383,10 +3383,14 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				else if (player.hasItem(armors.NURSECL))
 					outputText("You have a hunch if you had a penis that wasn't too big, giving Amily a nurse's outfit might set off some kinky roleplay.\n\n");
 				else {
-					outputText("You have a hunch that if you had a nurse's outfit you could get Amily to give you a rather erotic checkup, provided ");
-					if (!player.hasCock())
-						outputText("you had a dick.");
-					else if (player.cockThatFits(61) < 0) outputText(" your dick could fit.");
+					outputText("You have a hunch that if you had a nurse's outfit you could get Amily to give you a rather erotic checkup");
+                    if (player.cockThatFits(61) < 0) {
+                        outputText(", provided ");
+                        if (!player.hasCock())
+                            outputText("you had a dick.");
+                        else if (player.cockThatFits(61) < 0) outputText(" your dick could fit.");
+                    }
+                    else outputText(".");
 				}
 			}
 			if (haveGift)
