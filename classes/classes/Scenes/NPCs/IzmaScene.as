@@ -1230,7 +1230,7 @@ private function acceptIzmaAsYourBitch():void {
 
 		outputText("Izma looks to you curiously once you return to her.  \"<i>So what's your story with her?</i>\" she asks.  You give a sigh and tell Izma how you met Marble at Whitney's farm and how a relationship formed between you over time.  Then you go on about how, sadly, you became addicted to her milk without even realizing its corrupt nature.  ");
 		//(If the player is fatally addicted)
-		if(player.findPerk(PerkLib.MarblesMilk) >= 0) outputText("You couldn't break your addiction, and now you'll die without a steady supply of her milk.");
+		if(player.hasPerk(PerkLib.MarblesMilk)) outputText("You couldn't break your addiction, and now you'll die without a steady supply of her milk.");
 		//(If the player broke their addiction)
 		else outputText("Thankfully, though you were able to break her milk's hold, and you realized you love Marble despite all that transpired between you, letting her move in with you.");
 		outputText("\n\n");
@@ -1255,6 +1255,11 @@ private function acceptIzmaAsYourBitch():void {
 	}
 	//Set 'camp Izma' flag
 	flags[kFLAGS.IZMA_FOLLOWER_STATUS] = 1;
+	if (player.hasKeyItem("Radiant shard") >= 0){
+		player.addKeyValue("Radiant shard",1,+1);
+	}
+	else player.createKeyItem("Radiant shard", 1,0,0,0);
+	outputText("\n\n<b>Before fully settling in your camp as if remembering something Izma pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
 	doNext(camp.returnToCampUseOneHour);
 }
 
