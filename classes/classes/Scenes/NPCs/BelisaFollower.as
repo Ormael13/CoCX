@@ -25,7 +25,7 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		public static var BelisaInCamp:Boolean;
 		
 		public function stateObjectName():String {
-			return "BelisaScene";
+			return "BelisaFollower";
 		}
 		
 		public function resetState():void {
@@ -44,49 +44,51 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		}
 		
 		public function saveToObject():Object {
-		return {
-			"BelisaEncounternum": BelisaEncounternum,
-		 	"BelisaAffectionMeter": BelisaAffectionMeter,
-			"BelisaInGame": BelisaInGame,
-			"BelisaFollowerStage": BelisaFollowerStage,
-			"BelisaVirgin": BelisaVirgin,
-			"BelisaShopOpen": BelisaShopOpen,
-			"BelisaQuestOn": BelisaQuestOn,
-			"BelisaRalthTalked":BelisaRalthTalked,
-			"BelisaQuestComp": BelisaQuestComp,
-			"BelisaConfessed": BelisaConfessed,
-			"BelisaToldTyrantia": BelisaToldTyrantia,
-			"BelisaInCamp": BelisaInCamp
-		};
-	}
+			return {
+				"BelisaEncounternum": BelisaEncounternum,
+				"BelisaAffectionMeter": BelisaAffectionMeter,
+				"BelisaInGame": BelisaInGame,
+				"BelisaFollowerStage": BelisaFollowerStage,
+				"BelisaVirgin": BelisaVirgin,
+				"BelisaShopOpen": BelisaShopOpen,
+				"BelisaQuestOn": BelisaQuestOn,
+				"BelisaRalthTalked":BelisaRalthTalked,
+				"BelisaQuestComp": BelisaQuestComp,
+				"BelisaConfessed": BelisaConfessed,
+				"BelisaToldTyrantia": BelisaToldTyrantia,
+				"BelisaInCamp": BelisaInCamp
+			};
+		}
 	
 		public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
 			if (o) {
-			BelisaEncounternum = o["BelisaEncounternum"];
-			BelisaAffectionMeter = o["BelisaAffectionMeter"];
-			BelisaInGame = o["BelisaInGame"];
-			BelisaVirgin = o["BelisaVirgin"];
-			BelisaShopOpen = o ["BelisaShopOpen"];
-			BelisaQuestOn= o["BelisaQuestOn"];
-			BelisaQuestComp = o["BelisaQuestComp"];
-			BelisaConfessed = o["BelisaConfessed"];
-			BelisaToldTyrantia = o["BelisaToldTyrantia"];
+				BelisaEncounternum = o["BelisaEncounternum"];
+				BelisaAffectionMeter = o["BelisaAffectionMeter"];
+				BelisaInGame = o["BelisaInGame"];
+				BelisaVirgin = o["BelisaVirgin"];
+				BelisaShopOpen = o ["BelisaShopOpen"];
+				BelisaQuestOn= o["BelisaQuestOn"];
+				BelisaQuestComp = o["BelisaQuestComp"];
+				BelisaConfessed = o["BelisaConfessed"];
+				BelisaToldTyrantia = o["BelisaToldTyrantia"];
 			} else {
 				// loading from old save
 				resetState();
 			}
 		}
-			
+		
 		public function BelisaFollower()
 		{
 			Saves.registerSaveableState(this);
 		}
-			
-		public function BelisaAffection(changes:Number = 0):void {
+		
+		public function BelisaAffection(changes:Number = 0):Number {
 			BelisaAffectionMeter += changes;
 			if (BelisaAffectionMeter > 100) BelisaAffectionMeter = 100;
+			if (BelisaAffectionMeter < 0) BelisaAffectionMeter = 0;
+			return BelisaAffectionMeter;
 		}
-			
+		
 		public function firstEncounter():void {
 			clearOutput();
 			outputText("You stride through the swamp. It seems to be quieter than normal. You think you hear the telltale hissing of a Drider, but nothing pops out at you. You check your feet, but there’s no web traps around you. Still, you’re in drider territory, and you put your back to a willow tree, holding your [weapon] ready.\n\n");

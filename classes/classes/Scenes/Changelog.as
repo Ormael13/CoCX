@@ -198,6 +198,12 @@ package classes.Scenes
 			outputText("-Imported and updates more sprites from UEE. Even the best girl! (Svalkash)\n");
 			outputText("-Liadri minor changes to vampire TF and score.\n");
 			outputText("-When using druid fusion can't pick epic elemental that is part of fusion as the one to attack enemy as part of elemental minons attack.\n");
+			outputText("-Training Dummy durability and resistances for it higher than 0 lvl version been improved (so maybe it will break less often when using it for training ^^)\n");
+			outputText("-Moved buttons to skip golem/elemental pre-PC rounds to fist button. Added mana cost of golems attacks in tooltips.\n");
+			outputText("-Buffed stat-boosting jewelry: now it increases stat multiplier. Still useless trash compared to resistances in the late game. Maybe one day someone will balance all this stuff properly... (Svalkash)\n");
+			outputText("-Fixes: Diana last encounter repeating after recruiting her, body lotions not working (at all), Phylla dick checks comparing area instead of length and vice versa (Svalkash)\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -208,10 +214,19 @@ package classes.Scenes
 			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Fixed Bugs: One of Ingnam Tavern food options having wrong price listed on menu, unique sex scenes accesable during Druid fusion, Wisp potentialy softlocking Mino King fight, selfsucking in masturbation menu restoring max 100 hunger, Swift Casting not usable when having Giant's Grip and Large weapon, White or Black magic buffs autocastable when having perk that disable use of white/black magic, ");
 			outputText("putting B. Sword after picking Ecalibur disabling option to pick sword at Temple, all 3 Hall of Blade soulskill variants dealing phys not magical dmg, Lightning Claw lowering phys dmg when used as part of feral style attack, using goblin Cum Reservoir not empting it out, Yuki Onna Transform scene not making sure to give proper genitalia setup, Archer's Stamina perks not giving fatigue related to ");
 			outputText("current Speed value, Half-Frost Wyrm racial bonus been attained super easy, Mysterious Seed not causing for misc items menu appear as inventory submenu, unable to add arcane circuits to 5th arcane circle, doppleganger fight won't drag unnecessary due to getting messly 1k lust after 5th round in fight, Gazer Eyes mutation not keeping True seeing perk, Magical Eye Drops as item find in Caves instead ");
-			outputText("of Eye Drops, raiju tf removing/humanizing raiju paws, picking none elemental during minions turn skipping many following up phases of the turn\n");/*ostatni punkt changelogu
+			outputText("of Eye Drops, raiju tf removing/humanizing raiju paws, picking no elemental during minions turn skipping many following up phases of the turn, epic/legendary/mythical perks for stats not affecting monsters\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
@@ -222,6 +237,7 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -305,7 +321,9 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

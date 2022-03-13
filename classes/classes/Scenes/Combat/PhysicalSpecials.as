@@ -2977,6 +2977,16 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		else enemyAI();
 	}
+	public function notSendAnyGolem():void {
+		if (flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 1 && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1) {
+			flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] = 1;
+			if (!player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn)) {
+				menu();
+				addButton(0, "Next", combatMenu, false);
+			}
+		}
+		else enemyAI();
+	}
 
 	public function AlraunePollen():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;

@@ -302,15 +302,6 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) temp += (225 * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) temp += (300 * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) temp += (375 * (1 + newGamePlusMod()));
-			var multimax:Number = 1;
-			if (hasPerk(PerkLib.RefinedBodyI)) multimax += (0.05 * (1 + newGamePlusMod()));
-			if (hasPerk(PerkLib.LimitBreakerBody1stStage)) multimax += 0.05;
-			if (hasPerk(PerkLib.LimitBreakerBody2ndStage)) multimax += 0.1;
-			if (hasPerk(PerkLib.DeityJobMunchkin)) multimax += 0.2;
-			if (statusEffectv2(StatusEffects.SaiyanNumber1a) > 0) multimax += statusEffectv2(StatusEffects.SaiyanNumber1a);
-			if (statusEffectv2(StatusEffects.SaiyanNumber2a) > 0) multimax += statusEffectv2(StatusEffects.SaiyanNumber2a);
-			if (statusEffectv2(StatusEffects.SaiyanNumber3a) > 0) multimax += statusEffectv2(StatusEffects.SaiyanNumber3a);
-			temp *= multimax;
 			if (hasPerk(PerkLib.ShieldWielder)) temp *= 1.2;
 			if (hasPerk(PerkLib.EnemyHugeType)) temp *= 1.5;
 			if (hasPerk(PerkLib.EnemyGigantType)) temp *= 2.25;
@@ -327,8 +318,19 @@ import flash.utils.getQualifiedClassName;
 			if (temp < (130 + 10 * this.level * (flags[kFLAGS.GAME_DIFFICULTY]+1) + (100 * newGamePlusMod()))) temp = (130 + 10 * this.level * (flags[kFLAGS.GAME_DIFFICULTY]+1) + (100 * newGamePlusMod()));
 			return temp;
 		}
+		private function maxHPmult():Number {
+			var maxHP_mult1:Number = 1;
+			if (hasPerk(PerkLib.RefinedBodyI)) maxHP_mult1 += (0.05 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.LimitBreakerBody1stStage)) maxHP_mult1 += 0.05;
+			if (hasPerk(PerkLib.LimitBreakerBody2ndStage)) maxHP_mult1 += 0.1;
+			if (hasPerk(PerkLib.DeityJobMunchkin)) maxHP_mult1 += 0.2;
+			if (statusEffectv2(StatusEffects.SaiyanNumber1a) > 0) maxHP_mult1 += statusEffectv2(StatusEffects.SaiyanNumber1a);
+			if (statusEffectv2(StatusEffects.SaiyanNumber2a) > 0) maxHP_mult1 += statusEffectv2(StatusEffects.SaiyanNumber2a);
+			if (statusEffectv2(StatusEffects.SaiyanNumber3a) > 0) maxHP_mult1 += statusEffectv2(StatusEffects.SaiyanNumber3a);
+			return maxHP_mult1;
+        }
 		public override function maxHP():Number {
-            return Math.round(maxHP_base()*maxHP_mult());
+            return Math.round(maxHP_base()*maxHPmult());
         }
 		public override function maxOverHP():Number {
 			var maxOver:Number = maxHP();
@@ -1511,7 +1513,6 @@ import flash.utils.getQualifiedClassName;
 			this.touStat.core.value = tou;
 			this.speStat.core.value = spe;
 			this.intStat.core.value = inte;
-
 			initedStrTouSpeInte = true;
 		}
 
@@ -2307,7 +2308,7 @@ import flash.utils.getQualifiedClassName;
 			outputText(" <b>(<font color=\"#ff00ff\">" + lustDelta + "</font>)</b>");
 		}
 
-		public function generateDebugDescription():String{
+		public function generateDebugDescription():String {
 			var result:String;
 			var be:String =plural?"are":"is";
 			var have:String = plural ? "have" : "has";
@@ -2354,7 +2355,6 @@ import flash.utils.getQualifiedClassName;
 			else result += wings.desc + " wings (type " + Object(Wings.Types[wings.type]||{}).name + "), ";
 			if (antennae.type == Antennae.NONE) result += "no antennae.type.\n\n";
 			else result += Object(Antennae.Types[antennae.type]||{}).name + " antennae.type.\n\n";
-
 			// GENITALS AND BREASTS
 			for (var i:int = 0; i<cocks.length; i++){
 				var cock:Cock = (cocks[i] as Cock);
@@ -2394,15 +2394,13 @@ import flash.utils.getQualifiedClassName;
 				result += "; anal capacity is increased by " + statusEffectv1(StatusEffects.BonusACapacity);
 			}
 			result +=".\n\n";
-
 			// COMBAT AND OTHER STATS
-			result += Hehas + "str=" + str + ", tou=" + tou + ", spe=" + spe +", inte=" + inte +", wis=" + wis +", lib=" + lib + ", sens=" + sens + ", cor=" + cor + ".\n";
+			result += Hehas + "str=" + this.strStat.core.value + ", tou=" + /*this.touStat.core.value*/this.touStat.max + ", spe=" + this.speStat.core.value +", inte=" + this.intStat.core.value +", wis=" + this.wisStat.core.value +", lib=" + this.libStat.core.value + ", sens=" + sens + ", cor=" + cor + ".\n";
 			result += Pronoun1 + " can " + weaponVerb + " you with  " + weaponPerk + " " + weaponName+" (attack " + weaponAttack + ", value " + weaponValue+").\n";
 			result += Pronoun1 + " is guarded with " + armorPerk + " " + armorName+" (phys defense " + armorDef + ", mag defense " + armorMDef + ", value " + armorValue+").\n";
 			result += Hehas + HP + "/" + maxHP() + " HP, " + lust + "/" + maxLust() + " lust, " + fatigue + "/" + maxFatigue() + " fatigue, " + wrath + "/" + maxWrath() + " wrath, " + soulforce + "/" + maxSoulforce() + " soulforce, " + mana + "/" + maxMana() + " mana. ";
 			result += Pronoun3 + " bonus HP=" + bonusHP + ", bonus lust=" + bonusLust + ", bonus wrath=" + bonusWrath + ", bonus mana=" + bonusMana + ", bonus soulforce=" + bonusSoulforce + ", and lust vulnerability=" + lustVuln + ".\n"
 			result += Heis + "level " + level + " and " + have+" " + gems + " gems. You will be awarded " + XP + " XP.\n";
-
 			var numSpec:int = (special1 != null ? 1 : 0) + (special2 != null ? 1 : 0) + (special3 != null ? 1 : 0);
 			if (numSpec > 0) {
 				result += Hehas + numSpec + " special attack" + (numSpec > 1 ? "s" : "") + ".\n";
@@ -2410,7 +2408,63 @@ import flash.utils.getQualifiedClassName;
 			else {
 				result += Hehas + "no special attacks.\n";
 			}
-
+			return result;
+		}
+		
+		public function scanningEnemy():String {
+			var result:String;
+			var be:String =plural?"are":"is";
+			var have:String = plural ? "have" : "has";
+			var Heis:String = Pronoun1+" "+be+" ";
+			var Hehas:String = Pronoun1 + " " + have + " ";
+			result = "You are inspecting "+a+short+" (imageName='"+imageName+"', class='"+getQualifiedClassName(this)+"'). You are fighting "+pronoun2+".\n\n";
+			result += Heis+(Appearance.DEFAULT_GENDER_NAMES[gender]||("gender#"+gender))+
+					" with "+Appearance.numberOfThings(cocks.length,"cock") +
+					", "+Appearance.numberOfThings(vaginas.length,"vagina")+
+					" and "+Appearance.numberOfThings(breastRows.length,"breast row")+".\n\n";
+			// APPEARANCE
+			result += Heis + Appearance.inchesAndFeetsAndInches(tallness) + " tall with " +
+			          Appearance.describeByScale(hips.type,Appearance.DEFAULT_HIP_RATING_SCALES,"thinner than","wider than") + " hips and " +
+			          Appearance.describeByScale(butt.type,Appearance.DEFAULT_BUTT_RATING_SCALES,"thinner than","wider than") + " butt.\n";
+			result += Pronoun3+" lower body is "+Object(LowerBody.Types[lowerBody]||{}).name;
+			result += ", "+pronoun3+" arms are "+Object(Arms.Types[arms.type]||{}).name;
+			result += ", "+pronoun1+" "+have+" "+skinTone+" "+skinAdj+" "+skinDesc+
+					  " (base "+Object(Skin.SkinTypes[skin.baseType()]||{}).id+")." +
+					  " (coat "+Object(Skin.SkinTypes[skin.coatType()]||{}).id+")." +
+					  "\n";
+			result += Hehas;
+			if (hairLength>0){
+				result += hairColor+" "+Appearance.inchesAndFeetsAndInches(hairLength)+" long "+Object(Hair.Types[hairType]||{}).name+" hair.\n";
+			} else {
+				result += "no hair.\n";
+			}
+			result += Hehas;
+			if (beardLength>0){
+				result += hairColor+" "+Appearance.inchesAndFeetsAndInches(beardLength)+" long "+Object(Beard.Types[beardStyle]||{}).name+" beard.\n";
+			} else {
+				result += "no beard.\n";
+			}
+			result += Hehas
+			          + Object(Face.Types[faceType]||{}).name + " face, "
+			          + Object(Ears.Types[ears.type]||{}).name + " ears, "
+			          + Object(Tongue.Types[tongue.type]||{}).name + " tongue and "
+			          + Object(Eyes.Types[eyes.type]||{}).name + " eyes.\n";
+			result += Hehas;
+			if (tailType == Tail.NONE) result += "no tail, ";
+			else result+=Object(Tail.Types[tailType]||{}).name+" "+tailCount+" tails with venom="+tailVenom+" and recharge="+tailRecharge+", ";
+			if (horns.type == Horns.NONE) result += "no horns, ";
+			else result += horns.count + " " + Object(Horns.Types[horns.type]||{}).name + " horns, ";
+			if (wings.type == Wings.NONE) result += "no wings, ";
+			else result += wings.desc + " wings (type " + Object(Wings.Types[wings.type]||{}).name + "), ";
+			if (antennae.type == Antennae.NONE) result += "no antennae.type.\n\n";
+			else result += Object(Antennae.Types[antennae.type]||{}).name + " antennae.type.\n\n";
+			// COMBAT AND OTHER STATS
+			result += Hehas + "str=" + str + ", tou=" + tou + ", spe=" + spe +", inte=" + inte +", wis=" + wis +", lib=" + lib + ", sens=" + sens + ", cor=" + cor + ".\n";
+			result += Pronoun1 + " can " + weaponVerb + " you with  " + weaponPerk + " " + weaponName+" (attack " + weaponAttack + ", value " + weaponValue+").\n";
+			result += Pronoun1 + " is guarded with " + armorPerk + " " + armorName+" (phys defense " + armorDef + ", mag defense " + armorMDef + ", value " + armorValue+").\n";
+			result += Hehas + HP + "/" + maxHP() + " HP, " + lust + "/" + maxLust() + " lust, " + fatigue + "/" + maxFatigue() + " fatigue, " + wrath + "/" + maxWrath() + " wrath, " + soulforce + "/" + maxSoulforce() + " soulforce, " + mana + "/" + maxMana() + " mana. ";
+			result += Pronoun3 + " bonus HP=" + bonusHP + ", bonus lust=" + bonusLust + ", bonus wrath=" + bonusWrath + ", bonus mana=" + bonusMana + ", bonus soulforce=" + bonusSoulforce + ", and lust vulnerability=" + lustVuln + ".\n"
+			result += Heis + "level " + level + " and " + have+" " + gems + " gems. You will be awarded " + XP + " XP.\n";
 			return result;
 		}
 
@@ -3426,6 +3480,24 @@ import flash.utils.getQualifiedClassName;
 			}*/
 			armorDef += ((int)(1 + armorDef / 10)) * 3 * newGamePlusMod();
 			armorMDef += ((int)(1 + armorMDef / 10)) * 3 * newGamePlusMod();
+			if (hasPerk(PerkLib.EpicStrength)) this.strStat.core.value += Math.round(this.strStat.core.value * 0.35);
+			if (hasPerk(PerkLib.LegendaryStrength)) this.strStat.core.value += Math.round(this.strStat.core.value * 0.5);
+			if (hasPerk(PerkLib.MythicalStrength)) this.strStat.core.value += Math.round(this.strStat.core.value * 0.65);
+			if (hasPerk(PerkLib.EpicToughness)) this.touStat.core.value += Math.round(this.touStat.core.value * 0.35);
+			if (hasPerk(PerkLib.LegendaryToughness)) this.touStat.core.value += Math.round(this.touStat.core.value * 0.5);
+			if (hasPerk(PerkLib.MythicalToughness)) this.touStat.core.value += Math.round(this.touStat.core.value * 0.65);
+			if (hasPerk(PerkLib.EpicSpeed)) this.speStat.core.value += Math.round(this.speStat.core.value * 0.35);
+			if (hasPerk(PerkLib.LegendarySpeed)) this.speStat.core.value += Math.round(this.speStat.core.value * 0.5);
+			if (hasPerk(PerkLib.MythicalSpeed)) this.speStat.core.value += Math.round(this.speStat.core.value * 0.65);
+			if (hasPerk(PerkLib.EpicIntelligence)) this.intStat.core.value += Math.round(this.intStat.core.value * 0.35);
+			if (hasPerk(PerkLib.LegendaryIntelligence)) this.intStat.core.value += Math.round(this.intStat.core.value * 0.5);
+			if (hasPerk(PerkLib.MythicalIntelligence)) this.intStat.core.value += Math.round(this.intStat.core.value * 0.65);
+			if (hasPerk(PerkLib.EpicWisdom)) this.wisStat.core.value += Math.round(this.wisStat.core.value * 0.35);
+			if (hasPerk(PerkLib.LegendaryWisdom)) this.wisStat.core.value += Math.round(this.wisStat.core.value * 0.5);
+			if (hasPerk(PerkLib.MythicalWisdom)) this.wisStat.core.value += Math.round(this.wisStat.core.value * 0.65);
+			if (hasPerk(PerkLib.EpicLibido)) this.libStat.core.value += Math.round(this.libStat.core.value * 0.35);
+			if (hasPerk(PerkLib.LegendaryLibido)) this.libStat.core.value += Math.round(this.libStat.core.value * 0.5);
+			if (hasPerk(PerkLib.MythicalLibido)) this.libStat.core.value += Math.round(this.libStat.core.value * 0.65);
 			if (hasPerk(PerkLib.EnemyHugeType)) {
 				this.strStat.core.value += Math.round(this.strStat.core.value * 0.1);
 				this.touStat.core.value += Math.round(this.touStat.core.value * 0.1);
