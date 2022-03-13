@@ -355,7 +355,7 @@ public static const AMILY_VISITING_URTA:int                                     
 public static const AMILY_NEED_TO_FREAK_ABOUT_URTA:int                              =  347; // AMILY_NEED_TO_FREAK_ABOUT_URTA (1= yes)
 public static const UNKNOWN_FLAG_NUMBER_00348:int                                   =  348; // Joey Big balls counter
 public static const UNKNOWN_FLAG_NUMBER_00349:int                                   =  349; // Times told joey to masturbate his big balls.
-public static const UNKNOWN_FLAG_NUMBER_00350:int                                   =  350; // Urta x Amily Urta followup needed?  (1 = cue Urta angst, 2 = done)
+public static const AMILY_URTA_FOLLOWUP:int                                   =  350; // Urta x Amily Urta followup needed?  (1 = cue Urta angst, 2 = done)
 public static const TIMES_MET_SHOULDRA:int                                          =  351; //
 public static const TIMES_BEATEN_SHOULDRA:int                                       =  352; //
 public static const TIMES_POSSESSED_BY_SHOULDRA:int                                 =  353; //
