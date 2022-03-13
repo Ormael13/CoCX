@@ -219,7 +219,7 @@ public function ayaneAnal():void
 	outputText("Ayane moans as you proceed to explore the depths of her ass, her tails moving wildly behind her as you pump in and out of the lusty shrine priestess.\n\n");
 	outputText("\"<i>Oooh! Good lord Taoth grant me the aaahn...</i>\"\n\n");
 	outputText("She’s way beyond the ability to voice her prayer coherently as you keep plowing her ass thoroughly. You grab two of her tails, playing with the fur and using them as handles as you pull in and out. Ayane doesn’t seem to mind it, her tight pucker, against all logic, reacts more like a pussy than a traditional anus, trying to milk you more the rougher you are with her.\n\n");
-	outputText("\"<i>Ahhhhn " + player.mf("milord", "milady") + " fuck me harder, faster, let me bask in the glory of your proud hard tool!”</i>\"\n\n");
+	outputText("\"<i>Ahhhhn " + player.mf("milord", "milady") + " fuck me harder, faster, let me bask in the glory of your proud hard tool!\"</i>\"\n\n");
 	outputText("You sure feel like obliging her, increasing the pace as Ayane wails in pleasure. Your cock suddenly throbs and explodes in her ass with a creamy deluge. You slowly remove your cock from the abused kitsune's ass, cum drooling slowly from her hole.\n\n");
 	outputText("\"<i>Ahh... So wonderful... To be filled with your seed is a blessing...</i>\"\n\n");
 	outputText("You clean your cock on one of her silky white tails, making her gasp, as the both of you slowly proceed to redress.");

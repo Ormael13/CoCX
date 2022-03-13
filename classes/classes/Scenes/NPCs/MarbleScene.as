@@ -2103,10 +2103,6 @@ private function marbleSleepToggle():void {
 	addButton(0,"Next", marbleTalkOverhaul);
 }
 
-private function sleepWith(arg:String = ""):void {
-	flags[kFLAGS.SLEEP_WITH] = arg;
-}
-
 //Kid playtime
 private function marbleKidsPlaytime():void {
 	clearOutput();
@@ -3090,7 +3086,7 @@ public function marblePoopsBaybees():void {
 			outputText("\n\nMarble looks at her other breast a moment before looking at you and saying \"<i>Still, I think I could use you on the other side.</i>\" You oblige her by suckling her other breast.");
 
 			//since the PC must either be addicted, or have removed Marble’s addictive trait in order to father a child with her, there is no need for a check for addiction here!
-			outputText("\n\nOnce the two of you have had your fill, Marble puts the child inside the nursery.  The little boy is already starting to look like he is a few years old, and is already trotting around on his little hoofs.  Marble turns to look at you and says, \”<i>Hmm, well Sweetie, I can’t think of a good name right now, I'll figure one out tomorrow.</i>\"");
+			outputText("\n\nOnce the two of you have had your fill, Marble puts the child inside the nursery.  The little boy is already starting to look like he is a few years old, and is already trotting around on his little hoofs.  Marble turns to look at you and says, \"<i>Hmm, well Sweetie, I can’t think of a good name right now, I'll figure one out tomorrow.</i>\"");
 
 			//note that these may have to change, I'm not sure if they'll belong here or not
 			flags[kFLAGS.MARBLE_BOYS]++;  //again, n is the flag for the number of male kids Marble has had
@@ -4129,7 +4125,7 @@ private function milkMarbleFuckDatCowPussy():void
 		
 		outputText( "[pg]It takes a few minutes of effort, but when you find yourself finally closing with the peak of an orgasm, there is a spray followed by a ping. You finally manage to get some milk flowing from Marble's breasts, just in time for her to scream in pleasure and drive herself back into you more forcefully than before.  Her tail shoots straight up again, twitches twice, and you're thrown over the edge as well." );
 		
-		outputText( "[pg]The two of you cum together at least three times over the next hour or so, and while your hand milking certainly isn't as efficient as Whitney's machine, it manages well enough in satisfying your bovine lover.  When you go to tell the farmer what happened to her device, she is rather surprised at just how nonchalant and pleasant the two of you were about it.  As she put it, \"<i>Most folks generally feel bad when they go round breaking other people's things.</i>\"  Though, you're certain she knew what you'd been up to." );
+		outputText( "[pg]The two of you cum together at least three times over the next hour or so, and while your hand milking certainly isn't as efficient as Whitney's machine, it manages well enough in satisfying your bovine lover.  When you go to tell the farmer what happened to her device, she is rather surprised at just how nonchalant and pleasant the two of you were about it.  As she put it, \"<i>Most folks generally feel bad when they go round breaking other people's things.</i>\"  Though, you're certain she knew what you'd been up to.\n\n" );
 
 		player.sexReward("milk");
 		flags[kFLAGS.MARBLE_LUST] = 10;

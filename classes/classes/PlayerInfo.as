@@ -5,9 +5,11 @@ import classes.BodyParts.Tail;
 import classes.GlobalFlags.*;
 import classes.Scenes.Combat.CombatAbility;
 import classes.Scenes.Places.HeXinDao.JourneyToTheEast;
+import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.NPCs.Forgefather;
 import classes.Scenes.NPCs.IsabellaScene;
+import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.NPCs.ZenjiScenes;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.SceneLib;
@@ -584,6 +586,10 @@ public class PlayerInfo extends BaseContent {
 			if (flags[kFLAGS.AURORA_LVL] == 2) interpersonStats += "<b>Aurora lvl:</b> 7\n";
 			if (flags[kFLAGS.AURORA_LVL] == 1) interpersonStats += "<b>Aurora lvl:</b> 1\n";
 		}
+		
+		if (BelisaFollower.BelisaEncounternum > 0) {
+			interpersonStats += "<b>Belisa Affection:</b> " + BelisaFollower.BelisaAffectionMeter + "%\n";
+		}
 
 		if (SceneLib.bazaar.benoit.benoitAffection() > 0)
             interpersonStats += "<b>" + SceneLib.bazaar.benoit.benoitMF("Benoit", "Benoite") + " Affection:</b> " + Math.round(SceneLib.bazaar.benoit.benoitAffection()) + "%\n";
@@ -878,6 +884,10 @@ public class PlayerInfo extends BaseContent {
 
 		if (SceneLib.valeria.valeriaFluidsEnabled()) {
             interpersonStats += "<b>Valeria's Fluid:</b> " + flags[kFLAGS.VALERIA_FLUIDS] + "%\n"
+		}
+		
+		if (TyrantiaFollower.TyrantiaFollowerStage > 0) {
+			interpersonStats += "<b>Tyrantia Affection:</b> " + TyrantiaFollower.TyrantiaAffectionMeter + "%\n";
 		}
 
 		if (flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] != 0) {
@@ -2193,3 +2203,4 @@ public class PlayerInfo extends BaseContent {
 	}
 }
 }
+

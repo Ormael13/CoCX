@@ -448,70 +448,71 @@ public class CombatUI extends BaseCombatContent {
 			combat.willothewispattacks();
 		} else if (player.hasPerk(PerkLib.FirstAttackGolems) && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1 && flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 1 && player.mana >= combat.pspecials.permanentgolemsendcost()) {
 			menu();
-			addButton(0, "Send P.Gol/1", combat.pspecials.sendPermanentGolem1);//.hint("")
+			addButton(0, "None", combat.pspecials.notSendAnyGolem).hint("You forfeit potential attack of golem(s). Would skip to next minion attack/your main turn.");
+			addButton(1, "Send P.Gol/1", combat.pspecials.sendPermanentGolem1).hint("Mana cost of sending 1 pernament golem: "+combat.pspecials.permanentgolemsendcost());
 			if (monster.plural) {
 				if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] >= 3) {
-					if (player.mana >= combat.pspecials.permanentgolemsendcost() * 3) addButton(5, "Send P.Gol/3", combat.pspecials.sendPermanentGolem3);
-					else addButtonDisabled(5, "Send P.Gol/3", "Not enough mana.");
+					if (player.mana >= combat.pspecials.permanentgolemsendcost() * 3) addButton(6, "Send P.Gol/3", combat.pspecials.sendPermanentGolem3).hint("Mana cost of sending 3 pernament golems: "+(combat.pspecials.permanentgolemsendcost()*3));
+					else addButtonDisabled(6, "Send P.Gol/3", "Not enough mana.");
 				}
 				if (flags[kFLAGS.PERMANENT_GOLEMS_BAG] >= 5) {
-					if (player.mana >= combat.pspecials.permanentgolemsendcost() * 5) addButton(10, "Send P.Gol/5", combat.pspecials.sendPermanentGolem5);
-					else addButtonDisabled(10, "Send P.Gol/5", "Not enough mana.");
+					if (player.mana >= combat.pspecials.permanentgolemsendcost() * 5) addButton(11, "Send P.Gol/5", combat.pspecials.sendPermanentGolem5).hint("Mana cost of sending 5 pernament golems: "+(combat.pspecials.permanentgolemsendcost()*5));
+					else addButtonDisabled(11, "Send P.Gol/5", "Not enough mana.");
 				}
 			}
 			if (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] > 0) {
-				if (player.mana >= combat.pspecials.permanentimprovedgolemsendcost()) addButton(1, "Send I.P.Gol/1", combat.pspecials.sendPermanentImprovedGolem1);
-				else addButtonDisabled(1, "Send I.P.Gol/1", "Not enough mana.");
+				if (player.mana >= combat.pspecials.permanentimprovedgolemsendcost()) addButton(2, "Send I.P.Gol/1", combat.pspecials.sendPermanentImprovedGolem1).hint("Mana cost of sending 1 improved pernament golem: "+combat.pspecials.permanentimprovedgolemsendcost());
+				else addButtonDisabled(2, "Send I.P.Gol/1", "Not enough mana.");
 				if (monster.plural) {
 					if (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] >= 3) {
-						if (player.mana >= combat.pspecials.permanentimprovedgolemsendcost() * 3) addButton(6, "Send I.P.Gol/3", combat.pspecials.sendPermanentImprovedGolem3);
-						else addButtonDisabled(6, "Send I.P.Gol/3", "Not enough mana.");
+						if (player.mana >= combat.pspecials.permanentimprovedgolemsendcost() * 3) addButton(7, "Send I.P.Gol/3", combat.pspecials.sendPermanentImprovedGolem3).hint("Mana cost of sending 3 improved pernament golems: "+(combat.pspecials.permanentimprovedgolemsendcost()*3));
+						else addButtonDisabled(7, "Send I.P.Gol/3", "Not enough mana.");
 					}
 					if (flags[kFLAGS.IMPROVED_PERMANENT_GOLEMS_BAG] >= 5) {
-						if (player.mana >= combat.pspecials.permanentimprovedgolemsendcost() * 5) addButton(11, "Send I.P.Gol/5", combat.pspecials.sendPermanentImprovedGolem5);
-						else addButtonDisabled(11, "Send I.P.Gol/5", "Not enough mana.");
+						if (player.mana >= combat.pspecials.permanentimprovedgolemsendcost() * 5) addButton(12, "Send I.P.Gol/5", combat.pspecials.sendPermanentImprovedGolem5).hint("Mana cost of sending 5 improved pernament golems: "+(combat.pspecials.permanentimprovedgolemsendcost()*5));
+						else addButtonDisabled(12, "Send I.P.Gol/5", "Not enough mana.");
 					}
 				}
 			}
 			if (flags[kFLAGS.PERMANENT_STEEL_GOLEMS_BAG] > 0) {
-				if (player.mana >= combat.pspecials.permanentsteelgolemsendcost()) addButton(2, "Send S.Gol/1", combat.pspecials.sendPermanentSteelGolem1);
+				if (player.mana >= combat.pspecials.permanentsteelgolemsendcost()) addButton(3, "Send S.Gol/1", combat.pspecials.sendPermanentSteelGolem1).hint("Mana cost of sending 1 pernament steel golem: "+combat.pspecials.permanentsteelgolemsendcost());
 				else addButtonDisabled(2, "Send S.Gol/1", "Not enough mana.");
 			}
 		} else if (player.hasPerk(PerkLib.FirstAttackElementalsSu) && player.statusEffectv2(StatusEffects.SummonedElementals) > 0 && (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4) && flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] < 1) {
 			menu();
+			addButton(0, "None", combat.baseelementalattacks, Combat.NONE_E).hint("You forfeit potential attack of epic elemental. Would skip to next minion attack/your main turn.");
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsAirE)) {
-				if (player.hasPerk(PerkLib.ElementalBody) && player.perkv1(PerkLib.ElementalBody) == 1) addButtonDisabled(0, "Air(E)", "You can't command this elemental to attack (independently from you) when you're currently fused with it.");
-				else addButton(0, "Air(E)", combat.baseelementalattacks, Combat.AIR_E);
+				if (player.hasPerk(PerkLib.ElementalBody) && player.perkv1(PerkLib.ElementalBody) == 1) addButtonDisabled(1, "Air(E)", "You can't command this elemental to attack (independently from you) when you're currently fused with it.");
+				else addButton(1, "Air(E)", combat.baseelementalattacks, Combat.AIR_E);
 			}
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarthE)) {
-				if (player.hasPerk(PerkLib.ElementalBody) && player.perkv1(PerkLib.ElementalBody) == 2) addButtonDisabled(1, "Earth(E)", "You can't command this elemental to attack (independently from you) when you're currently fused with it.");
-				else addButton(1, "Earth(E)", combat.baseelementalattacks, Combat.EARTH_E);
+				if (player.hasPerk(PerkLib.ElementalBody) && player.perkv1(PerkLib.ElementalBody) == 2) addButtonDisabled(2, "Earth(E)", "You can't command this elemental to attack (independently from you) when you're currently fused with it.");
+				else addButton(2, "Earth(E)", combat.baseelementalattacks, Combat.EARTH_E);
 			}
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsFireE)) {
-				if (player.hasPerk(PerkLib.ElementalBody) && player.perkv1(PerkLib.ElementalBody) == 3) addButtonDisabled(2, "Fire(E)", "You can't command this elemental to attack (independently from you) when you're currently fused with it.");
-				else addButton(2, "Fire(E)", combat.baseelementalattacks, Combat.FIRE_E);
+				if (player.hasPerk(PerkLib.ElementalBody) && player.perkv1(PerkLib.ElementalBody) == 3) addButtonDisabled(3, "Fire(E)", "You can't command this elemental to attack (independently from you) when you're currently fused with it.");
+				else addButton(3, "Fire(E)", combat.baseelementalattacks, Combat.FIRE_E);
 			}
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsWaterE)) {
-				if (player.hasPerk(PerkLib.ElementalBody) && player.perkv1(PerkLib.ElementalBody) == 4) addButtonDisabled(3, "Water(E)", "You can't command this elemental to attack (independently from you) when you're currently fused with it.");
-				else addButton(3, "Water(E)", combat.baseelementalattacks, Combat.WATER_E);
+				if (player.hasPerk(PerkLib.ElementalBody) && player.perkv1(PerkLib.ElementalBody) == 4) addButtonDisabled(4, "Water(E)", "You can't command this elemental to attack (independently from you) when you're currently fused with it.");
+				else addButton(4, "Water(E)", combat.baseelementalattacks, Combat.WATER_E);
 			}
-			addButton(13, "None", combat.baseelementalattacks, Combat.NONE_E).hint("You forfeit potential attack of epic elemental. Would skip to next minion attack/your main turn.");
 		} else if (player.hasPerk(PerkLib.FirstAttackElementals) && (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4) && flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] < 2) {
 			menu();
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsAir)) addButton(0, "Air", combat.baseelementalattacks, Combat.AIR);
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarth)) addButton(1, "Earth", combat.baseelementalattacks, Combat.EARTH);
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsFire)) addButton(2, "Fire", combat.baseelementalattacks, Combat.FIRE);
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsWater)) addButton(3, "Water", combat.baseelementalattacks, Combat.WATER);
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsEther)) addButton(4, "Ether", combat.baseelementalattacks, Combat.ETHER);
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsWood)) addButton(5, "Wood", combat.baseelementalattacks, Combat.WOOD);
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsMetal)) addButton(6, "Metal", combat.baseelementalattacks, Combat.METAL);
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsIce)) addButton(7, "Ice", combat.baseelementalattacks, Combat.ICE);
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsLightning)) addButton(8, "Lightning", combat.baseelementalattacks, Combat.LIGHTNING);
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsDarkness)) addButton(9, "Darkness", combat.baseelementalattacks, Combat.DARKNESS);
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsPoison)) addButton(10, "Poison", combat.baseelementalattacks, Combat.POISON);
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsPurity)) addButton(11, "Purity", combat.baseelementalattacks, Combat.PURITY);
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsCorruption)) addButton(12, "Corruption", combat.baseelementalattacks, Combat.CORRUPTION);
-			addButton(13, "None", combat.baseelementalattacks, Combat.NONE).hint("You forfeit potential attack of normal elemental. Would skip to next minion attack/your main turn.");
+			addButton(0, "None", combat.baseelementalattacks, Combat.NONE).hint("You forfeit potential attack of normal elemental. Would skip to next minion attack/your main turn.");
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsAir)) addButton(1, "Air", combat.baseelementalattacks, Combat.AIR);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarth)) addButton(2, "Earth", combat.baseelementalattacks, Combat.EARTH);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsFire)) addButton(3, "Fire", combat.baseelementalattacks, Combat.FIRE);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsWater)) addButton(4, "Water", combat.baseelementalattacks, Combat.WATER);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsEther)) addButton(5, "Ether", combat.baseelementalattacks, Combat.ETHER);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsWood)) addButton(6, "Wood", combat.baseelementalattacks, Combat.WOOD);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsMetal)) addButton(7, "Metal", combat.baseelementalattacks, Combat.METAL);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsIce)) addButton(8, "Ice", combat.baseelementalattacks, Combat.ICE);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsLightning)) addButton(9, "Lightning", combat.baseelementalattacks, Combat.LIGHTNING);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsDarkness)) addButton(10, "Darkness", combat.baseelementalattacks, Combat.DARKNESS);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsPoison)) addButton(11, "Poison", combat.baseelementalattacks, Combat.POISON);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsPurity)) addButton(12, "Purity", combat.baseelementalattacks, Combat.PURITY);
+			if (player.hasStatusEffect(StatusEffects.SummonedElementalsCorruption)) addButton(13, "Corruption", combat.baseelementalattacks, Combat.CORRUPTION);
 		} else if (flags[kFLAGS.PLAYER_COMPANION_1] != "" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1 && !player.hasStatusEffect(StatusEffects.MinoKing)) {
 			clearOutput();
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Alvina") {

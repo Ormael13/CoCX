@@ -1913,7 +1913,7 @@ public class Creature extends Utils
             if (biggest > 0)
                 return sorted[biggest - 1];
             if (biggest < 0)
-                return sorted[biggest];
+                return sorted[sorted.length + biggest];
 			return sorted[0];
         }
 		

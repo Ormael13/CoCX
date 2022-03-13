@@ -22,6 +22,7 @@ package classes.Scenes.Places.HeXinDao
 	import classes.Items.WeaponLib;
 	import classes.Items.WeaponRangeLib;
 	import classes.internals.SaveableState;
+    import classes.display.SpriteDb;
 
 	public class JourneyToTheEast extends HeXinDaoAbstractContent implements SaveableState
 	{
@@ -536,6 +537,7 @@ package classes.Scenes.Places.HeXinDao
 
 		public function ChiChiDrunkSex():void {
 			clearOutput();
+            spriteSelect(SpriteDb.s_chichi);
 			outputText("As you enter the bar you hear a feminine laughter swiftly spotting what seems to be ");
 			if (flags[kFLAGS.CHI_CHI_FOLLOWER] >= 1 && flags[kFLAGS.CHI_CHI_AFFECTION] >= 20) outputText("Chi Chi");
 			else if (flags[kFLAGS.CHI_CHI_FOLLOWER] >= 1 && flags[kFLAGS.CHI_CHI_AFFECTION] < 20) outputText("Chi Chi the waitress from the exotic food restaurant");
@@ -560,7 +562,7 @@ package classes.Scenes.Places.HeXinDao
 				doNext(camp.returnToCampUseOneHour);
 			}
 			else {
-				outputText("You would have to be an idiot indeed to refuse this free fuck. The drunken mouse girl licks her lips in anticipation, grabbing your clothes and begins to removing them one-by-one. Unsurprisingly, her own clothes barely takes a second to remove. She is so close now you can feel her breath on your neck.");
+				outputText("You would have to be an idiot indeed to refuse this free fuck. The drunken mouse girl licks her lips in anticipation, grabbing your clothes and begins to removing them one-by-one. Unsurprisingly, her own clothes barely take a second to remove. She is so close now you can feel her breath on your neck.");
 				if (flags[kFLAGS.CHI_CHI_FOLLOWER] < 1) {
 					outputText(" The mousette introduces herself.\n\n");
 					outputText("\"<i>My name’s Chi Chi by the way, but... oh why does it matter? What's important is that we are about to have a lot of fun.</i>\"");

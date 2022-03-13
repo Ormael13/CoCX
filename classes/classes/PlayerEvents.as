@@ -2975,7 +2975,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					return true;
 				}
 				if (player.plantScore() >= 4 && player.hasPerk(PerkLib.SoulSense) && flags[kFLAGS.SOUL_SENSE_WORLD_TREE] < 1) {
-					outputText("\nYou find yourself in a forest. You feel a delicate melody fill the air around you, and while it has no discernable sound it somehow resonates with your being. Without even realizing it, you find yourself walking towards the source. Before long, you’re standing before a towering goliath of a tree, much larger than the others around you. As you touch the bark, you hear a soft voice. “Welcome home”. You bolt awake, and realize it was but a dream.  But somehow, you still feel the song whispering in your mind... <b>Perhaps you could seek out this tree in the waking world?</b>");
+					outputText("\nYou find yourself in a forest. You feel a delicate melody fill the air around you, and while it has no discernable sound it somehow resonates with your being. Without even realizing it, you find yourself walking towards the source. Before long, you’re standing before a towering goliath of a tree, much larger than the others around you. As you touch the bark, you hear a soft voice. \"Welcome home\". You bolt awake, and realize it was but a dream.  But somehow, you still feel the song whispering in your mind... <b>Perhaps you could seek out this tree in the waking world?</b>");
 					flags[kFLAGS.SOUL_SENSE_WORLD_TREE] = 1;
 					EngineCore.doNext(playerMenu);
 					return true;
@@ -3018,4 +3018,3 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		//End of Interface Implementation
 	}
 }
-

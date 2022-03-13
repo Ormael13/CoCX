@@ -324,22 +324,22 @@ public class BasiliskScene extends BaseContent
 				//First Time:
 				if(flags[kFLAGS.BENOIT_GENERIC_EGGS] == 0) {
 					outputText("\n\nApprehensively, you explain the situation - you were caught unawares by a basilisk in the mountains, and then... you put an egg into his hand to feel.  Benoit is silent for a time, his claws rubbing pensively over the smooth surface.");
-					outputText("\n\n“I see,” he says heavily.  \"<i>No, you were right to bring zem ere.  Zey will be safe with me and 'ell knows I will need all ze eggs I can get if I am to make zis work.</i>\"  You breathe an inward sigh of relief and follow him into his shop.");
+					outputText("\n\n\"I see,\" he says heavily.  \"<i>No, you were right to bring zem ere.  Zey will be safe with me and 'ell knows I will need all ze eggs I can get if I am to make zis work.</i>\"  You breathe an inward sigh of relief and follow him into his shop.");
 					if(flags[kFLAGS.BENOIT_EGGS] + flags[kFLAGS.BENOIT_GENERIC_EGGS] == 0) {
 						outputText("\n\nHe feels around the clutter of his store room until he finds what he's looking for: A battered old basket stuffed with a soft pillow.  You raise an eyebrow at the liberal amounts of dog hair the pillow is covered with and Benoit coughs apologetically.");
-						outputText("\n\n“E isn't 'appy about me taking is bed, but to 'ell wizzim; e always gets is 'air on everysing anyway.” You spend some time arranging the eggs where they will be safe and warm.  Although you know they can't be, Benoit's blind eyes seem to be fixed upon the brood when you have finished.");
-						outputText("\n\n“And zese eggs are different?” he says hesitantly.  “Zere will be...little girls?”  You shrug and say even if they aren't female, at least he'll have some sons he can keep away from the mountain.  He sets his jaw and nods.");
+						outputText("\n\n\"E isn't 'appy about me taking is bed, but to 'ell wizzim; e always gets is 'air on everysing anyway.\" You spend some time arranging the eggs where they will be safe and warm.  Although you know they can't be, Benoit's blind eyes seem to be fixed upon the brood when you have finished.");
+						outputText("\n\n\"And zese eggs are different?\" he says hesitantly.  \"Zere will be...little girls?\"  You shrug and say even if they aren't female, at least he'll have some sons he can keep away from the mountain.  He sets his jaw and nods.");
 					}
 					//[Not first time:
 					else {
 						outputText("\n\nBenoit places the eggs into a blanket-swaddled basket with the same painstaking care he did with the others, before turning back to you.");
 						outputText("\n\nThe blind basilisk reaches out, finds your hand, and then squeezes it.  \"<i>[name], you must be more careful in ze future,</i>\" he says.  \"<i>Please understand I am not saying zis because I am jealous or angry or anysing so zilly.  You 'ave done a great sing to change your body to 'elp my people, but if you keep getting attacked by my bruzzers and zey find out... if zey work out what you are... I do not like to sink about it.</i>\"  You tell him you'll be more on guard in the future and he seems to accept this.  He gestures to the corner where he has put together a serviceable stove from scrap.");
-						outputText("\n\n“<i>'Ungry?</i>”");
+						outputText("\n\n\"<i>'Ungry?</i>\"");
 						outputText("\n\nYou linger long enough to share breakfast with him, and then return to camp.");
 					}
 				}
 				//Subsequent: Sheepishly, you give him an egg to feel.  Benoit shakes his head in exasperation, but lets you in.
-				else outputText("\n\nHe puts your latest batch with the others and then shares breakfast with you.  You leave with his final words lingering in your ears:  “More eggs is always good [name], but for ze Gods sake: Be.  More.  Careful.”");
+				else outputText("\n\nHe puts your latest batch with the others and then shares breakfast with you.  You leave with his final words lingering in your ears:  \"More eggs is always good [name], but for ze Gods sake: Be.  More.  Careful.\"");
 				outputText("\n");
 				flags[kFLAGS.BENOIT_GENERIC_EGGS] += Math.floor(player.totalFertility() / 10);
 			}

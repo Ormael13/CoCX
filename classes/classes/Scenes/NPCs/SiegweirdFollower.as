@@ -69,7 +69,7 @@ public function siegweirdFirstEncounterPostFightJoin():void
 public function siegweirdFirstEncounterPostFightJoinYes():void
 {
 	spriteSelect(SpriteDb.s_siegweird);
-	outputText("You would gladly have someone such as him in your camp.\n\n His face curls into a grin from ear to ear, \“<i>Thank you, [name]. I… I will not disappoint you! Now, lead the way, I will walk alongside you.</i>\”");
+	outputText("You would gladly have someone such as him in your camp.\n\n His face curls into a grin from ear to ear, \"<i>Thank you, [name]. I… I will not disappoint you! Now, lead the way, I will walk alongside you.</i>\"");
 	outputText("\n\n You guide Siegweird to your camp, he smiles softly as he surveys the area.\n\n Once he’s found a place he’s content with he quickly builds a fire pit before reaching into his knapsack and pulling out a large cast iron pot.\n\n");
 	outputText("He sets everything up before igniting the flame.\n\n\"<i>I got some Soup! Call it a hero's feast, [name]. Feel free to ask me for some if you’re ever hungry.</i>\"");
 	outputText("\n\n<b>Siegweird has joined you as a follower.</b>\n\n");
@@ -99,14 +99,14 @@ public function siegweirdFirstEncounterPostFightAnotherFight():void
 {
 	spriteSelect(SpriteDb.s_siegweird);
 	outputText("The suit of armor notices your demonic outlook as his helmet slowly illuminates with a brilliant golden light. You can see an enraged expression on his face before it’s too bright to see anything within his helmet.\n\n");
-	outputText("\"<i>No! Can’t believe I was helped out by a demon! Have I been so blind? Was this all a test? NO! I WILL NOT FAIL! I WILL PURGE YOU AND YOUR CORRUPTION FROM THIS LAND, FIEND!”</i>\"");
+	outputText("\"<i>No! Can’t believe I was helped out by a demon! Have I been so blind? Was this all a test? NO! I WILL NOT FAIL! I WILL PURGE YOU AND YOUR CORRUPTION FROM THIS LAND, FIEND!\"</i>\"");
 	startCombat(new Siegweird());
 }
 public function siegweirdFirstEncounterPostFightAnotherFightWon():void
 {
 	spriteSelect(SpriteDb.s_siegweird);
 	outputText("Siegweird stumbles back, falling to his knees, unable to fight any longer. The glowing radiance from his eyes dim as his helm ceases to glow. He keeps himself propped up as he clutches onto his massive sword, head lowered to the ground. A golden, pearly substance cascades from his helmet, pooling on the ground before him before he falls prone on the ground.\n\n");
-	outputText("The radiance he once emitted has now faded to the dull luster of his blood-stained armor. \"<i>I was too weak…</i>\" he mumbles, not looking up to face you. \“<i>I cannot do anything… I amount to nothing… Who was I fooling..?</i>\"\n\n");
+	outputText("The radiance he once emitted has now faded to the dull luster of his blood-stained armor. \"<i>I was too weak…</i>\" he mumbles, not looking up to face you. \"<i>I cannot do anything… I amount to nothing… Who was I fooling..?</i>\"\n\n");
 	outputText("You approach the knight, he’s still mumbling words of self-depreciation, hardly paying any attention to you at this point. \n\n");
 	outputText("You pick him up by the helmet, his limp body does not attempt fighting back, he’s utterly defeated. His massive limbs are weighing him down, lifting him is almost a struggle as his entire body desperately clutches onto the force of gravity.\n\n");
 	outputText("He looks past you, still mumbling to himself, \"<i> I’m nothing… worthless… Marae was wrong to trust me to carry out their duties.</i>\"\n\n Is this knight going to shut up?\n\n");
@@ -128,7 +128,7 @@ public function siegweirdRepeatEncounterPostFight():void
 		clearOutput();
 		outputText("It takes a while to find Siegweird. For a guy completely covered in full plate, he moves surprisingly fast along the blight ridge.\n\nHe seems to be in search of something… You’re positive the object of his search is someone you’ve gotten to know quite well recently.\n\n");
 		outputText("He’s quick to notice you, despite the fact that you haven’t made any attempt to announce your presence.\n\n");
-		outputText("\"<i>So, you came back after all... I should've known... You've been working with this witch from the start haven't you?</i>\” He shakes his head, \"<i>The voices in my head tell me ‘run away’, but I will not turn back, lest I go astray. I don't know what she promised you but in the end you will come to regret it, be it by my blade or by some twisted machinations she may have prepared for you.</i>\"\n\n");
+		outputText("\"<i>So, you came back after all... I should've known... You've been working with this witch from the start haven't you?</i>\" He shakes his head, \"<i>The voices in my head tell me ‘run away’, but I will not turn back, lest I go astray. I don't know what she promised you but in the end you will come to regret it, be it by my blade or by some twisted machinations she may have prepared for you.</i>\"\n\n");
 		outputText("You’re here for his life and his pendant. You know you’re not leaving without it..\n\n");
 		outputText("He raises his greatsword to his gauntlet, running his hand over it, infusing it with holy energy before pointing it toward you.");
 		outputText("\"<i>You’re going to have to pry it from my cold, dead hands, fiend.</i>\"\n\n");

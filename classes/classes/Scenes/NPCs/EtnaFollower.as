@@ -51,7 +51,7 @@ public function repeatEnc():void
 		if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1 && !player.hasStatusEffect(StatusEffects.WildManticore)) {
 			outputText("You take a stroll in the mountain area when a spike passes a few inches away from your side.\n\n");
 			outputText("Etna moves out of the shadow of a nearby cave, adopting a combat stance. Seems you actually threaded on her hunting grounds. She makes a playful growl before calling to you.\n\n");
-			outputText("\"<i>Well hello there [name]. Seems you stepped in my territory yet again. As rival huntresses it is only proper that we fight for who’s going to rape who dont you think?”</i>\"\n\n");
+			outputText("\"<i>Well hello there [name]. Seems you stepped in my territory yet again. As rival huntresses it is only proper that we fight for who’s going to rape who dont you think?\"</i>\"\n\n");
 			outputText("Well now if she wants to show she’s the top female around here let here come. You’re going to use her pretty mouth as your personal ride today.\n\n");
 			outputText("\"<i>Oh I have doubts about that. Hope you’re good at licking [name], because your going bottom!</i>\"\n\n");
 			outputText("Guess there's no avoiding it, you're catfighting with Etna again!");

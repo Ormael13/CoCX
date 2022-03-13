@@ -236,7 +236,7 @@ public class Vapula extends NPCAwareContent implements TimeAwareInterface
 				}
 				else
 				{
-					outputText("Vapula mooches over when you call her name, resentfully kicking an imp out of the way as she does. “<i>Yes, [master]?</i>” she says, with exaggerated sweetness.");
+					outputText("Vapula mooches over when you call her name, resentfully kicking an imp out of the way as she does. \"<i>Yes, [master]?</i>\" she says, with exaggerated sweetness.");
 
 					if (flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA_GIBS_MILK] == 1)
 					{
@@ -292,9 +292,9 @@ public class Vapula extends NPCAwareContent implements TimeAwareInterface
 
 			outputText("You tell your succubus concubine that she is to head towards the lake, find a farm, present herself to the lady who works there and do as she says. Vapula laughs long and hard at this.");
 
-			outputText("\n\n“<i>Good one [master],</i>” she guffaws. “<i>Me! Working on a farm! Taking orders from a dog! You’ve got such a wicked sense of humor, I wish I could coil it and suck it dry. You... you really can’t be serious about this, can you?</i>” she asks, sobering as she catches your expression.");
+			outputText("\n\n\"<i>Good one [master],</i>\" she guffaws. \"<i>Me! Working on a farm! Taking orders from a dog! You’ve got such a wicked sense of humor, I wish I could coil it and suck it dry. You... you really can’t be serious about this, can you?</i>\" she asks, sobering as she catches your expression.");
 
-			outputText("\n\n“<i>I am. Her working with a succubus will teach her just as important a lesson as it will you, slaving in the dirt for my benefit. Don’t worry... I’ll be over to check up on you frequently, and if you’re </i>really<i> good I’ll give you something better to milk than your average cow when I do.</i>” ");
+			outputText("\n\n\"<i>I am. Her working with a succubus will teach her just as important a lesson as it will you, slaving in the dirt for my benefit. Don’t worry... I’ll be over to check up on you frequently, and if you’re </i>really<i> good I’ll give you something better to milk than your average cow when I do.</i>\" ");
 
 			outputText("\n\nVapula argues for a while longer, but you stand firm and eventually, complaining bitterly under her breath, the succubus stomps off in the direction of the lake. It’s difficult to believe she will be anything like a competent worker, you think, and the cloud of imps she will inevitably take with her means she’s pretty dubious in the protection stakes too; on the other hand, such close exposure to an out-and-out demon will surely have an interesting effect on Whitney.");
 
@@ -309,7 +309,7 @@ public class Vapula extends NPCAwareContent implements TimeAwareInterface
 
 			outputText("You tell her to head back to camp; there are things you need to do to her you can’t do whilst she’s here. Repeatedly. Vapula fist pumps the sky.");
 
-			outputText("\n\n“<i>Yessssss! You will NOT regret this, [master]. Oh, I am SO out of here!</i>” She practically sprints out of the farm yard, leaving you to laugh and then cough in the dust cloud she leaves.");
+			outputText("\n\n\"<i>Yessssss! You will NOT regret this, [master]. Oh, I am SO out of here!</i>\" She practically sprints out of the farm yard, leaving you to laugh and then cough in the dust cloud she leaves.");
 
 			flags[kFLAGS.FOLLOWER_AT_FARM_VAPULA] = 0;
 
@@ -322,10 +322,10 @@ public class Vapula extends NPCAwareContent implements TimeAwareInterface
 
 			outputText("You tell Vapula that you want her hooked up to a milking machine whenever possible; you need her fluids.");
 
-			outputText("\n\n“<i>Ooh, so that’s why you wanted me to come out here!</i>” Vapula grins and her fingers reach for a breast, already fantasising about insistent pressure on her nipples.");
+			outputText("\n\n\"<i>Ooh, so that’s why you wanted me to come out here!</i>\" Vapula grins and her fingers reach for a breast, already fantasising about insistent pressure on her nipples.");
 
-			if (flags[kFLAGS.FARM_UPGRADES_REFINERY] == 0) outputText("“<i>It’ll sure as hell beat whatever disgusting thing the bitch would have me doing instead. Why don’t you make her build a concentration machine? Lethice has loads; makes one dose of cream go so much further.</i>”");
-			else outputText("“<i>As you insist, [master]. It’ll sure as hell beat working.</i>”");
+			if (flags[kFLAGS.FARM_UPGRADES_REFINERY] == 0) outputText("\"<i>It’ll sure as hell beat whatever disgusting thing the bitch would have me doing instead. Why don’t you make her build a concentration machine? Lethice has loads; makes one dose of cream go so much further.</i>\"");
+			else outputText("\"<i>As you insist, [master]. It’ll sure as hell beat working.</i>\"");
 
 			flags[kFLAGS.FOLLOWER_PRODUCTION_VAPULA] = 1;
 
@@ -338,7 +338,7 @@ public class Vapula extends NPCAwareContent implements TimeAwareInterface
 
 			outputText("You tell Vapula to stop producing succubus milk; you’re practically drowning in the stuff.");
 
-			outputText("\n\n“<i>Well, that was the whole idea, [master]. Sure you don’t want to drink some more? Alright, alright!</i>” A familiarly sulky expression descends on the demon’s face as you deny her her second most favourite activity.");
+			outputText("\n\n\"<i>Well, that was the whole idea, [master]. Sure you don’t want to drink some more? Alright, alright!</i>\" A familiarly sulky expression descends on the demon’s face as you deny her her second most favourite activity.");
 
 			flags[kFLAGS.FOLLOWER_PRODUCTION_VAPULA] = 0;
 

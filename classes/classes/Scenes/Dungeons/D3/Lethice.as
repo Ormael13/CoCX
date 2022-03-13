@@ -113,7 +113,7 @@ public class Lethice extends Monster
 		
 		override public function postPlayerAbility(ability:CombatAbility):void {
 			if (fightPhase == 3 && ability is AbstractSpell && ability.hasTag(CombatAbility.TAG_DAMAGING)) {
-				outputText("\n\n<i>“Ouch. Such arcane skills for one so uncouth,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your magics?”</i>\n\n");
+				outputText("\n\n<i>\"Ouch. Such arcane skills for one so uncouth,\"</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>\"How will you beat me without your magics?\"</i>\n\n");
 				createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
 			}
 		}
@@ -332,7 +332,7 @@ public class Lethice extends Monster
 			{
 				outputText("Unable to resist your sensual assault, Lethice lets loose a howl of frustration and swoops back to the earth, mounting her throne once again.");
 			}
-			outputText("\n\n<i>“I tire of this game!”</i> she shouts, grasping at the arms of her towering throne. Suddenly, her gaze snaps from you, to the horde of demons clamoring in the stands. <i>“What are you waiting for, fools!? Get [himher]!”</i>");
+			outputText("\n\n<i>\"I tire of this game!\"</i> she shouts, grasping at the arms of her towering throne. Suddenly, her gaze snaps from you, to the horde of demons clamoring in the stands. <i>\"What are you waiting for, fools!? Get [himher]!\"</i>");
 			outputText("\n\nOh, shit. You look up in time to see a cavalcade of demonic flesh swooping down from on high, bodies practically tumbling one over the other to get at you. The horde takes every physical form imaginable: towering, hulking brutish males, inhumanly curvaceous succubi, and the reverse of both - not to mention hermaphrodites masculine and feminine - and all with every sort of transformation. Bestial creatures, dragon-like incubi, and succubi whose skins range the colors of the rainbow and so, so much more come piling down the throne hall in a ceaseless barrage of flesh and decadence. They won’t stop until they’ve dragged you to the ground and fucked you into submission!");
 			// 9999 reconfigure for the group
 			HP   = maxHP();
@@ -456,7 +456,7 @@ public class Lethice extends Monster
 
 			if (combatMiss())
 			{
-				outputText(" You grab the biggest incubus you can find and shove him in the way of the airborne bukkake, letting his burly back take the brunt of the demons’ load. He grunts in displeasure, giving you a rough shove back into the demonic gang-bang. <i>“No escape!”</i>");
+				outputText(" You grab the biggest incubus you can find and shove him in the way of the airborne bukkake, letting his burly back take the brunt of the demons’ load. He grunts in displeasure, giving you a rough shove back into the demonic gang-bang. <i>\"No escape!\"</i>");
 			}
 			else if (player.findPerk(PerkLib.Misdirection) >= 0)
 			{
@@ -508,7 +508,7 @@ public class Lethice extends Monster
 			if (player.hasCock()) outputText(" cock.");
 			else outputText(" cunt.");
 
-			outputText("\n\n<i>“O-oh my!”</i> she purrs, black eyes batting at you as you make your intentions clear. <i>“Here I thought you were saving this for the queen.”</i>");
+			outputText("\n\n<i>\"O-oh my!\"</i> she purrs, black eyes batting at you as you make your intentions clear. <i>\"Here I thought you were saving this for the queen.\"</i>");
 			outputText("\n\nYou growl for her to get started, prompting her to slither out a forked tongue to");
 			if (player.hasCock()) outputText(" wrap around your [cock]");
 			else outputText(" lap across the lips of your [cunt]");
@@ -560,7 +560,7 @@ public class Lethice extends Monster
 			if (!player.hasFuckableNipples()) outputText(" that splatters all over your chest");
 			else outputText(" right into your tit");
 			outputText("! You give her a reproachful look, still grinding your hips as the aftershocks of orgasm pass.");
-			outputText("\n\n<i>“Not sorry,”</i> she giggles, running a finger around her cum-smeared twat and pushing every spare droplet back in as you pull out. <i>“Mmm, that’ll make for a lovely brood of imps, </i>Champion<i>!”</i>");
+			outputText("\n\n<i>\"Not sorry,\"</i> she giggles, running a finger around her cum-smeared twat and pushing every spare droplet back in as you pull out. <i>\"Mmm, that’ll make for a lovely brood of imps, </i>Champion<i>!\"</i>");
 			outputText("\n\nShuddering at the thought, you grab your gear and stagger up and away, leaving the demons to finish each other off. Confident in your readiness, you advance on Lethice.");
 
 			player.orgasm();
@@ -572,7 +572,7 @@ public class Lethice extends Monster
 			clearOutput();
 
 			outputText("Considering the demons seem intent on having you get down and dirty with their defeated compatriot, you figure you might as well get the most out of the moment. Lethice doesn’t seem to be in any hurry to resume your battle, after all!");
-			outputText("\n\nYou give the buxom demon hermaphrodite down on her ass, letting her rest her head in the lap of another cow-girl demon who’s busy sucking off a two-cock’d incubus, and crawl up her shapely red body. <i>“Oooh,”</i> the omnibus coos as her throbbing red rocket is pressed between your bodies. <i>“Gonna go for a ride, Champion?”</i>");
+			outputText("\n\nYou give the buxom demon hermaphrodite down on her ass, letting her rest her head in the lap of another cow-girl demon who’s busy sucking off a two-cock’d incubus, and crawl up her shapely red body. <i>\"Oooh,\"</i> the omnibus coos as her throbbing red rocket is pressed between your bodies. <i>\"Gonna go for a ride, Champion?\"</i>");
 			outputText("\n\nDamn right you are. You grab her tits, sinking your fingers into the soft, crimson udders as you straddle her hips and grind your [vagOrAss] against the demon’s tumescent shaft. She’s hung like a stud, rock hard and ready to roll before you even get near her pointed crown. You feel her hands grasp your [hips], guiding you down until your [vagOrAss] is sinking onto her thick rod. Your belly bulges with the sheer length of cockflesh sliding into you, and your mind goes blank with overwhelming pleasure.");
 			outputText("\n\nIt takes you a moment to recover from the initial shock, but when you do, you start moving with a vengeance, bouncing on the demonic doggy-cock with mounting speed. Its owner moans and squirms beneath you, too weakened from your fight to do anything but go along for the ride. Still, her big, black nipples are hard as rocks in your hand, and her pussy soaks both your thighs in her ever-rising excitement.");
 			outputText("\n\nSuddenly, your entire body tenses, shivering with new sensation. You look over your shoulder in time to see another succubus crawling up behind you,");
@@ -583,7 +583,7 @@ public class Lethice extends Monster
 			if (player.hasVagina()) outputText(" womb");
 			else outputText(" bowels");
 			outputText(". You only barely keep your wits about you enough to push her back down before she can force her knot inside you, though you’re treated to a veritable waterfall of white spunk pouring out of your well-bred hole instead.");
-			outputText("\n\n<i>“I can see why they call you ‘Champion,’”</i> the demon purrs as her spunk-slathered red prick flops against her belly. <i>“Maybe after our queen beats you down, I’ll come visit you in the breaking tanks... I could always use another eager little broodmare.”</i>");
+			outputText("\n\n<i>\"I can see why they call you ‘Champion,’\"</i> the demon purrs as her spunk-slathered red prick flops against her belly. <i>\"Maybe after our queen beats you down, I’ll come visit you in the breaking tanks... I could always use another eager little broodmare.\"</i>");
 			outputText("\n\nYou shove the demoness away, suddenly reminded of her true nature. At least for now, you’re sated. Confident in your readiness, you advance on Lethice.");
 
 			player.orgasm();
@@ -605,10 +605,10 @@ public class Lethice extends Monster
 		{
 			clearOutput();
 
-			outputText("<i>“Useless whelps,”</i> Lethice growls, rising back to her feet and spreading her");
+			outputText("<i>\"Useless whelps,\"</i> Lethice growls, rising back to her feet and spreading her");
 			if (_wingsDestroyed) outputText(" tattered");
 			outputText(" draconic wings behind herself, letting them flare out to their full majesty. She grabs a whip from her flank and uncoils it with a snap, cracking it just over your head. Black fire seethes on the length of the whip, burning with corrupt magics that make the air reek of sex and desire around her.");
-			outputText("\n\n<i>“Very well, Champion,”</i> she snarls, throwing aside her goblet of Lethicite. The crystals go scattering as the vessel shatters on the flagstone, and in an instant even the defeated demons are scrambling for the gems, making the floor you fight on a rabid hell to walk through. <i>“I see I’ll have to finish you myself! Let us see what you’re really made of... before I rape your soul out of your body!”</i>");
+			outputText("\n\n<i>\"Very well, Champion,\"</i> she snarls, throwing aside her goblet of Lethicite. The crystals go scattering as the vessel shatters on the flagstone, and in an instant even the defeated demons are scrambling for the gems, making the floor you fight on a rabid hell to walk through. <i>\"I see I’ll have to finish you myself! Let us see what you’re really made of... before I rape your soul out of your body!\"</i>");
 
 			beginPhase3(false);
 		}
@@ -642,7 +642,7 @@ public class Lethice extends Monster
 			// If you hit her with a physical attack, the next turn she’ll have massive evasion (200 speed or some shit) and massively boosted defense.
 			// GEDNOTE: We can't really do this- CoCs combat was NEVER designed with that in mind wrt to enemy stats, it would mean modifying EVERY player attack, spell and special to account for it. However, I figured out a potential workaround that covers this so....
 			
-			// If you hit her with a lusty-damaging attack, she will become immune to lust damage for one turn. Might also have other special resistances too. Will detail in text in the “Reactions” section.
+			// If you hit her with a lusty-damaging attack, she will become immune to lust damage for one turn. Might also have other special resistances too. Will detail in text in the \"Reactions\" section.
 			
 			if (flags[kFLAGS.LAST_ATTACK_TYPE] == 1 || flags[kFLAGS.LAST_ATTACK_TYPE] == 2 || flags[kFLAGS.LAST_ATTACK_TYPE] == 4) _defMode = 1;
 			else _defMode = 2;
@@ -779,7 +779,7 @@ public class Lethice extends Monster
 
 		private function whipchoke():void
 		{
-			outputText("<i>“Silence your prattling, curr.”</i> Lethice strikes out with her whip, aimed at your neck!");
+			outputText("<i>\"Silence your prattling, curr.\"</i> Lethice strikes out with her whip, aimed at your neck!");
 
 			if (combatMiss())
 			{
@@ -833,8 +833,8 @@ public class Lethice extends Monster
 
 		private function gropehands():void
 		{
-			outputText("<i>“Let’s see how you fight while you’re being groped, shall we? A shame Pigby isn’t around to see how I’ve improved his hands,”</i> Lethice murmurs. Cupping her hands into a parody of lecher’s grip, the corruptive Queen squeezes and chants. Immediately, you feel phantasmal hands all over your body, reaching through your armor to fondle your bare [skinFurScales]. Digits slip into your [butt]. Fingertips brush your [nipples]. Warm palms slide down your quivering belly toward your vulnerable loins.");
-			outputText("\n\nYou glare daggers at Lethice, but she merely laughs. <i>“A shame I never got to convince him that his hands were so much more effective when used like this.”</i>");
+			outputText("<i>\"Let’s see how you fight while you’re being groped, shall we? A shame Pigby isn’t around to see how I’ve improved his hands,\"</i> Lethice murmurs. Cupping her hands into a parody of lecher’s grip, the corruptive Queen squeezes and chants. Immediately, you feel phantasmal hands all over your body, reaching through your armor to fondle your bare [skinFurScales]. Digits slip into your [butt]. Fingertips brush your [nipples]. Warm palms slide down your quivering belly toward your vulnerable loins.");
+			outputText("\n\nYou glare daggers at Lethice, but she merely laughs. <i>\"A shame I never got to convince him that his hands were so much more effective when used like this.\"</i>");
 			player.dynStats("lus", 5);
 			player.createStatusEffect(StatusEffects.PigbysHands, 0, 0, 0, 0);
 		}

@@ -34,7 +34,7 @@ public class BlindSpell extends AbstractWhiteSpell{
 				if (display) {
 					outputText("You hold your [weapon] aloft and thrust your will forward, causing it to erupt in a blinding flash of light. The demons of the court scream and recoil from the radiant burst, clutching at their eyes and trampling over each other to get back.");
 					
-					outputText("\n\n<i>“Damn you, fight!”</i> Lethice screams, grabbing her whip and lashing out at the back-most demons, driving them forward -- and causing the middle bunch to be crushed between competing forces of retreating demons! <i>“Fight, or you'll be in the submission tanks for the rest of your miserable lives!”</i>");
+					outputText("\n\n<i>\"Damn you, fight!\"</i> Lethice screams, grabbing her whip and lashing out at the back-most demons, driving them forward -- and causing the middle bunch to be crushed between competing forces of retreating demons! <i>\"Fight, or you'll be in the submission tanks for the rest of your miserable lives!\"</i>");
 				}
 			} else {
 				if (display) {

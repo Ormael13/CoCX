@@ -21,13 +21,13 @@ import classes.internals.*;
 			var damage:int;
 			if (x==0)
 			{
-				outputText("Rushing toward you, Yamata drops down low, then leaps up into a wide swing. You flinch as you see the tip of her blade glide across your skin, but she dances away at the last second, leaving behind an angry red wound that hurts like hell, but is far from life-threatening. <i>“Oh yeah, scream for me baby!”</i> The realization that she’s toying with you is practically infuriating!  ");
+				outputText("Rushing toward you, Yamata drops down low, then leaps up into a wide swing. You flinch as you see the tip of her blade glide across your skin, but she dances away at the last second, leaving behind an angry red wound that hurts like hell, but is far from life-threatening. <i>\"Oh yeah, scream for me baby!\"</i> The realization that she’s toying with you is practically infuriating!  ");
 				damage = int(str/2) + rand(15);
 			} else if (x == 1) {
 				outputText("You back away as Yamata goes into the offensive, doing your best to dodge her attacks. The tip of her blade grazes you a few times, and the shallow wounds they leave behind hurt far worse than they really should. She raises the blade to her lips and gently licks it, grinning vindictively at you. You’re certain now that Yamata is just trying to inflict as much pain as possible before finishing you off.  ");	
 				damage = int(str/2) + rand(35);	
 			} else if (x == 2) {
-				outputText("Yamata digs her heels into the ground, taunting you with a crude gesture. Her serpentine hair suddenly lashes forward, morphing before your eyes into countless blades! Thankfully, she seems to purposely avoid anything vital, but the grazing cuts they leave behind hurt terribly. <i>“Ahahahaha! Doesn’t it just make you HARD?!”</i>  ");
+				outputText("Yamata digs her heels into the ground, taunting you with a crude gesture. Her serpentine hair suddenly lashes forward, morphing before your eyes into countless blades! Thankfully, she seems to purposely avoid anything vital, but the grazing cuts they leave behind hurt terribly. <i>\"Ahahahaha! Doesn’t it just make you HARD?!\"</i>  ");
 				damage = int(str) - rand(25);
 				player.takeLustDamage(7);
 				flags[kFLAGS.YAMATA_MASOCHIST]++;
@@ -66,7 +66,7 @@ import classes.internals.*;
 			if (player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 20)
 				resist += 15 - player.corAdjustedDown();
 			if (rand(100) < resist) {
-				outputText("\n\nSummoning up every last ounce of courage you have, you push back the illusions with your mind! Yamata reels a bit, clutching her forehead in pain, but only grins at you. <i>“That all you got, hero?”</i>");				
+				outputText("\n\nSummoning up every last ounce of courage you have, you push back the illusions with your mind! Yamata reels a bit, clutching her forehead in pain, but only grins at you. <i>\"That all you got, hero?\"</i>");				
 				if (player.hasStatusEffect(StatusEffects.Fear))
 					player.removeStatusEffect(StatusEffects.Fear);
 			} else {
@@ -109,7 +109,7 @@ import classes.internals.*;
 						flags[kFLAGS.YAMATA_MASOCHIST]++;
 						break;
 					case 1:
-						outputText("\n\n<i>“This is my realm... and in my realm... you get to feel good...”</i> her strange words entice you as you widen your eyes, you try to hit her but you always seem to miss. A mischievous grin comes from her figure as you feel something rubbing your crotch, is one of her tails! Oh damn, it feels so good!  ");
+						outputText("\n\n<i>\"This is my realm... and in my realm... you get to feel good...\"</i> her strange words entice you as you widen your eyes, you try to hit her but you always seem to miss. A mischievous grin comes from her figure as you feel something rubbing your crotch, is one of her tails! Oh damn, it feels so good!  ");
 						player.takeLustDamage(lustDmg);
 						break;
 					case 2:
@@ -123,7 +123,7 @@ import classes.internals.*;
 						break;
 				}
 			outputText("\n\nYamata takes a moment to stretch out her limber body, thrusting out her bound chest as she stretches her arms toward the sky. She twirls around, head slightly askew, and then bows forward to give you a good angle at her cleavage, packed tightly into her chest wrap, all the while with a sickly grin on her face.\n\n"
-			+"<i>“Why dont you just surrender already? We can have so much fun in my torture devices, it will feel so good! We might even have some fun on the side if you scream prettily enough, hehehe.”</i> Yamata whispers sultrily, running a hand along her tails and making them fan out around her seductively.\n\n");
+			+"<i>\"Why dont you just surrender already? We can have so much fun in my torture devices, it will feel so good! We might even have some fun on the side if you scream prettily enough, hehehe.\"</i> Yamata whispers sultrily, running a hand along her tails and making them fan out around her seductively.\n\n");
 			if (flags[kFLAGS.YAMATA_MASOCHIST]>60) {
 				outputText("You find yourself giving it a moments thought before pulling yourself beck to the present. What is she doing to you?!  ");
 				lustDmg += 5;
@@ -138,7 +138,7 @@ import classes.internals.*;
 		
 		private function yamataEntwine():void
 		{
-			outputText("Yamata’s hair whips toward you with a blinding speed, each of the snakes sinking its fangs into a different part of you and lifting you into the air. <I>“You’re MINE!”</I> she yells, bringing you in close as her hair begins to constrict around you. You can feel the bite wounds begin to tingle, and look in horror as you see that each of the snakes is injecting her corrupted purple flames directly into your body! If you can’t escape soon, you’ll be reduced to a gibbering masochistic heap in no time!\n\n"
+			outputText("Yamata’s hair whips toward you with a blinding speed, each of the snakes sinking its fangs into a different part of you and lifting you into the air. <I>\"You’re MINE!\"</I> she yells, bringing you in close as her hair begins to constrict around you. You can feel the bite wounds begin to tingle, and look in horror as you see that each of the snakes is injecting her corrupted purple flames directly into your body! If you can’t escape soon, you’ll be reduced to a gibbering masochistic heap in no time!\n\n"
 			+"You are bound by Yamata’s snake-like hair. The only thing you can do is try to struggle free!\n\n"
 			+"As the venomous flames course through your system, you start to become more and more turned on by the thought of being abused and degraded...  ");
 			
@@ -180,7 +180,7 @@ import classes.internals.*;
 		
 		private function entwineEscape():void
 		{
-			outputText("You lash out with reserves of strength you didn’t know you had, tearing yourself away from her with a few stray hairs clinging to your body still as you tumble away. As you move back into a defensive stance, Yamata looks incredulously at the frayed clump of hair where you broke free from her, then shouts, “You fucking did it now! I’m gonna carve you to ribbons!” In spite of her threats, her hair seems to repair itself, easily growing back into its monstrous snake form.\n\n");
+			outputText("You lash out with reserves of strength you didn’t know you had, tearing yourself away from her with a few stray hairs clinging to your body still as you tumble away. As you move back into a defensive stance, Yamata looks incredulously at the frayed clump of hair where you broke free from her, then shouts, \"You fucking did it now! I’m gonna carve you to ribbons!\" In spite of her threats, her hair seems to repair itself, easily growing back into its monstrous snake form.\n\n");
 			player.removeStatusEffect(StatusEffects.YamataEntwine);
 			outputText("<b>You feel relief as Yamata's serpents finally release their hold, though you can still feel their corruption pulsing in your veins.</b>\n\n");
 		}
@@ -212,7 +212,7 @@ import classes.internals.*;
 					outputText("You somehow manage to emerge unscathed, but the effort of avoiding or deflecting them all has put a strain on your muscles!");
 					player.fatigue += 10;
 				} else {
-					outputText(hits + (hits>1?" fireballs rocket":" fireball rockets")+" into you with deadly force! As the corrupted flames wash over you, you start to enjoy the pain, gripping yourself in masochistic pleasure!  ");
+					outputText("" + hits + (hits>1?" fireballs rocket":" fireball rockets")+" into you with deadly force! As the corrupted flames wash over you, you start to enjoy the pain, gripping yourself in masochistic pleasure!  ");
 					for(var i:int = 0; i < hits; i++) {
 						var x:int = rand(10)+5;
 						player.dynStats("cor", 1);
@@ -228,7 +228,7 @@ import classes.internals.*;
 		
 		private function yamataMiss():void
 		{
-			outputText("You neatly dodge Yamata’s wild attack, backing up and holding up your [weapon] defensively. <i>“Haha! I love it when my prey has some fight in them!”</i>");
+			outputText("You neatly dodge Yamata’s wild attack, backing up and holding up your [weapon] defensively. <i>\"Haha! I love it when my prey has some fight in them!\"</i>");
 		}
 		
 		private function yamataSodomasochistApply(dmg:int):void
@@ -310,7 +310,7 @@ import classes.internals.*;
 
 		override protected function handleBlind():Boolean
 		{
-			outputText("<i>“Your fancy tricks wont work on me Champion, I see right through them.”</i> Your blinding attack simply fades away before her magic.")
+			outputText("<i>\"Your fancy tricks wont work on me Champion, I see right through them.\"</i> Your blinding attack simply fades away before her magic.")
 			return true;
 		}
 		
