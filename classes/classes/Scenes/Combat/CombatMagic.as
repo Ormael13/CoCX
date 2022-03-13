@@ -814,7 +814,7 @@ public class CombatMagic extends BaseCombatContent {
 		{
 			if (monster is Lethice && (monster as Lethice).fightPhase == 3)
 			{
-				outputText("\n\n<i>“Ouch. Such arcane skills for one so uncouth,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your magics?”</i>\n\n");
+				outputText("\n\n<i>\"Ouch. Such arcane skills for one so uncouth,\"</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>\"How will you beat me without your magics?\"</i>\n\n");
 				monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
 			}
 			enemyAI();

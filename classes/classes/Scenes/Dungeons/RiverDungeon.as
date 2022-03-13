@@ -502,7 +502,7 @@ import classes.StatusEffects;
 		}
 		public function defeatQuatroElementalBoss():void {
 			clearOutput();
-			outputText("The revenant collapses as all the elements it's gained die out. The rubble lies dormantly before you before slowly sinking into the ground. The voices ring as sparks of multicolored embers, each resembling one of the four elements it aligned with fly out, <i>“The elements will rise again.”</i>\n\n");
+			outputText("The revenant collapses as all the elements it's gained die out. The rubble lies dormantly before you before slowly sinking into the ground. The voices ring as sparks of multicolored embers, each resembling one of the four elements it aligned with fly out, <i>\"The elements will rise again.\"</i>\n\n");
 			outputText("As the sparks fade, all that remains is an empty shell, cold and lifeless. You inspect the elemental carefully, but somehow you know nothing will come from it this time. It's apparently bare now. Though, you can't say for sure if you won't be meeting something like it again later.\n\n");
 			outputText("As you begin to take your leave, a sudden glow illuminates within the rubble, pulsating gently. Carefully, you draw closer, moving aside the debris to reveal a small, glowing heart. It pulses gently within your grasp, warm, almost alive.\n\n<b>You have gained Key Item: Flame Heart</b>\n\n");
 			player.addStatusValue(StatusEffects.RivereDungeonIB, 3, 1);

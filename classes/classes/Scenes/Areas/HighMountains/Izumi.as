@@ -404,7 +404,7 @@ public class Izumi extends Monster
 			if (player.isBiped()) outputText(" raise a [leg] and kick her roundly");
 			else if (player.isNaga()) outputText(" raise your tail and slap her solidly");
 			else outputText(" and slap her square");
-			outputText(" in the face.  Izumi drops you, staggering back in surprise.  “Ow!”  She actually yelps, covering her face with her hands.\n\n");
+			outputText(" in the face.  Izumi drops you, staggering back in surprise.  \"Ow!\"  She actually yelps, covering her face with her hands.\n\n");
 
 			outputText("You drop to the ground and roll away, expecting some form of retribution.  Izumi glares at you from behind her hand for a moment, then snickers.  Slowly, she drops back into her fighting stance and gestures for your bout to continue.");
 			outputText("<b>(<font color=\"#800000\">" + damage + "</font>)</b>");
@@ -494,7 +494,7 @@ public class Izumi extends Monster
 				if (rand(2) == 0)
 				{
 					clearOutput();
-					outputText("“Hah!  Say goodnight, ‘cause I’m going to choke the fight right out of you!”  She cries exuberantly, forcibly mashing your face into her bosom.  It would appear that she is trying to throttle you, but only having one hand is making the task difficult.  You can breathe just fine, but having your face forced into the constantly jostling mass of tit-flesh before you is distracting to say the least.\n\n");
+					outputText("\"Hah!  Say goodnight, ‘cause I’m going to choke the fight right out of you!\"  She cries exuberantly, forcibly mashing your face into her bosom.  It would appear that she is trying to throttle you, but only having one hand is making the task difficult.  You can breathe just fine, but having your face forced into the constantly jostling mass of tit-flesh before you is distracting to say the least.\n\n");
 					outputText("You scrabble desperately against Izumi’s grip, trying not to think about where you’re placing your hands, or how soft and pliant the flesh beneath you is, or any number of other upsetting little details - but to no avail.  Izumi’s grip is incredibly strong.  You hang there for a moment, trying to get your breath back for another attempt as Izumi jostles and presses against you from all sides.");
 				}
 				else
@@ -532,7 +532,7 @@ public class Izumi extends Monster
 			if (player.str < 90)
 			{
 				outputText("Straining with all your might, you still can’t quite manage to break Izumi’s grip, but you do manage to somehow slide upwards through the valley of her bust.  Izumi’s face looms into view, the enormous woman gritting her teeth as she attempts to crush the fight out of you.  In an act of desperation, you rear back and then knife forwards in a brutal headbutt.\n\n");
-				outputText("“Ack!”  Your forehead connects with her chin in a collision that probably hurts you as much as her, judging by the searing pain that lances through your forehead as she drops you to the floor. Meanwhile, Izumi staggers back, rubbing at her chin.  “Ow.  That hurt, kid!”  She says reproachfully.  The two of you take a moment to shake the cobwebs from your heads before dropping back into your combat stances, a little more wary this time around.\n\n");
+				outputText("\"Ack!\"  Your forehead connects with her chin in a collision that probably hurts you as much as her, judging by the searing pain that lances through your forehead as she drops you to the floor. Meanwhile, Izumi staggers back, rubbing at her chin.  \"Ow.  That hurt, kid!\"  She says reproachfully.  The two of you take a moment to shake the cobwebs from your heads before dropping back into your combat stances, a little more wary this time around.\n\n");
 			}
 			else
 			{
@@ -543,7 +543,7 @@ public class Izumi extends Monster
 				}
 				outputText("  Izumi grits her teeth and growls as she pulls with all her might, trying to force your limbs to give way, but to no avail - with a final thrust, Izumi lets out a yelp as you knock her arm aside and leap away.  Izumi rolls her arm around a little, massaging her shoulder as she regards you, thoughtfully.  Then she reaches up and fans at her face with one hand, grinning that suggestive grin.\n\n");
 			}
-			outputText("“Oh my,” she purrs, lasciviously. “Aren’t you the impressive one?  Keep surprising me like that and I might just forget about this handicap...” ");
+			outputText("\"Oh my,\" she purrs, lasciviously. \"Aren’t you the impressive one?  Keep surprising me like that and I might just forget about this handicap...\" ");
 			cleanupTitsmother();
 			var damage:Number = (15 + rand(player.str));
 			this.HP -= damage;

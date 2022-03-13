@@ -167,7 +167,7 @@ public class MinotaurKing extends Monster
 		
 		private function headbutt():void
 		{
-			outputText("<i>“Settle down,”</i> the brute growls, moments before attempting to slam his forehead into your own.");
+			outputText("<i>\"Settle down,\"</i> the brute growls, moments before attempting to slam his forehead into your own.");
 			var damage:Number = ((str + weaponAttack) / 2) - rand(player.tou);
 			if (damage <= 0 || combatMiss() || player.findPerk(PerkLib.Flexibility) >= 0) {
 				outputText(" Luckily, you dodge aside.");

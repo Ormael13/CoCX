@@ -14,28 +14,28 @@ package classes.Scenes.Camp
 		public function TrainingDummy() 
 		{
 			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 4) {
-				initStrTouSpeInte(10, 1500, 600, 10);
-				initWisLibSensCor(10, 300, 10, 50);
-				this.bonusHP = 50000;
-				this.bonusLust = 500;
-				this.armorDef = 5000;
-				this.armorMDef = 5000;
+				initStrTouSpeInte(10, 3500, 1000, 10);
+				initWisLibSensCor(10, 500, 10, 50);
+				this.bonusHP = 140000;
+				this.bonusLust = 7000;
+				this.armorDef = 7000;
+				this.armorMDef = 7000;
 				this.level = 60;
 			}
 			else if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 3) {
-				initStrTouSpeInte(10, 1000, 400, 10);
-				initWisLibSensCor(10, 200, 10, 50);
-				this.bonusHP = 30000;
-				this.bonusLust = 250;
-				this.armorDef = 3000;
-				this.armorMDef = 3000;
+				initStrTouSpeInte(10, 2000, 600, 10);
+				initWisLibSensCor(10, 300, 10, 50);
+				this.bonusHP = 80000;
+				this.bonusLust = 4000;
+				this.armorDef = 4000;
+				this.armorMDef = 4000;
 				this.level = 30;
 			}
 			else {
 				initStrTouSpeInte(10, 500, 200, 10);
 				initWisLibSensCor(10, 100, 10, 50);
-				this.bonusHP = 10000;
-				this.bonusLust = 100;
+				this.bonusHP = 20000;
+				this.bonusLust = 1000;
 				this.armorDef = 1000;
 				this.armorMDef = 1000;
 				this.level = 0;
@@ -60,10 +60,14 @@ package classes.Scenes.Camp
 			this.createPerk(PerkLib.EnemyConstructType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.AlwaysSuccesfullRunaway, 0, 0, 0, 0);
 			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 3) {
-				
+				this.createPerk(PerkLib.EpicToughness, 0, 0, 0, 0);
+				this.createPerk(PerkLib.EpicSpeed, 0, 0, 0, 0);
+				this.createPerk(PerkLib.EpicLibido, 0, 0, 0, 0);
 			}
 			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 4) {
-				
+				this.createPerk(PerkLib.LegendaryToughness, 0, 0, 0, 0);
+				this.createPerk(PerkLib.LegendarySpeed, 0, 0, 0, 0);
+				this.createPerk(PerkLib.LegendaryLibido, 0, 0, 0, 0);
 			}
 			checkMonster();
 		}

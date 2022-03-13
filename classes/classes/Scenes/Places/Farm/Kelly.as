@@ -1781,13 +1781,13 @@ private function talkNHandToKelly():void {
 		}
 		else
 		{
-			outputText("\n\n“<i>[Master],</i>” trills Kelly, drawing the last syllable out, her tone one of mocking pique underpinned by dark glee. “<i>You promised me you would let me be there when you made Whitney yours!</i>”");
+			outputText("\n\n\"<i>[Master],</i>\" trills Kelly, drawing the last syllable out, her tone one of mocking pique underpinned by dark glee. \"<i>You promised me you would let me be there when you made Whitney yours!</i>\"");
 
 			outputText("\n\nYou reply stiffly that you promised no such thing. You want to add more but you are lost in the shift of her hand around your [cock], making both your sex and your mind feel red, sweet and full.");
 
-			outputText("\n\n“<i>You are so mean, [master]. I guess I will just have to imagine what it was like.</i>” Her voice has lowered to a playful husk. “<i>Did she resist? Did she spend days and weeks pretending she didn’t feel the creep of your influence, that she didn’t feel her heart quicken when you gave her orders? That she didn’t even notice you or the way you had taken possession of her home? I bet she did – stuck up bitch spent her whole life acting that way. Bet it became a struggle when heat began to run to her pussy every time you passed her.</i>”");
+			outputText("\n\n\"<i>You are so mean, [master]. I guess I will just have to imagine what it was like.</i>\" Her voice has lowered to a playful husk. \"<i>Did she resist? Did she spend days and weeks pretending she didn’t feel the creep of your influence, that she didn’t feel her heart quicken when you gave her orders? That she didn’t even notice you or the way you had taken possession of her home? I bet she did – stuck up bitch spent her whole life acting that way. Bet it became a struggle when heat began to run to her pussy every time you passed her.</i>\"");
 
-			outputText("\n\nShe knows exactly what she’s doing. Her hand moves slowly but surely over your bulging meat, and you close your eyes allowing your slave’s gloating, lascivious tones fill your head. “<i>Did you make her get on her knees? Make her sit up and beg for it? No... you didn’t </i>make<i> her do anything, did you? Prissy britches did it all by herself when it got unbearable, didn’t she. She got out the deeds to this place. She smashed her toy crossbow. She made herself a collar, and handed the leash to you. That’s how it was for butter-wouldn’t-melt, wasn’t it? All... by... herself.</i>”");
+			outputText("\n\nShe knows exactly what she’s doing. Her hand moves slowly but surely over your bulging meat, and you close your eyes allowing your slave’s gloating, lascivious tones fill your head. \"<i>Did you make her get on her knees? Make her sit up and beg for it? No... you didn’t </i>make<i> her do anything, did you? Prissy britches did it all by herself when it got unbearable, didn’t she. She got out the deeds to this place. She smashed her toy crossbow. She made herself a collar, and handed the leash to you. That’s how it was for butter-wouldn’t-melt, wasn’t it? All... by... herself.</i>\"");
  
 			outputText("\n\nYou tense and cum, opening your mouth as you ride it, flexing out buckets of spunk");
 			if (!player.isTaur()) outputText(" into the air");
@@ -1796,14 +1796,14 @@ private function talkNHandToKelly():void {
 
 			outputText("\n\nYou gather yourself, and tell her with as much sternness as you can muster that Whitney is your right hand on this farm, and whatever else she may think of her she must follow the dog woman’s orders to the letter.");
 
-			outputText("\n\n“<i>Of course,</i>” replies Kelly innocently. “<i>Right hands are important things to have. I am certain that Mistress Whitney makes a very effective right hand for you, [master].</i>” You redress and give her a harder slap than usual on the ass as you leave.");
+			outputText("\n\n\"<i>Of course,</i>\" replies Kelly innocently. \"<i>Right hands are important things to have. I am certain that Mistress Whitney makes a very effective right hand for you, [master].</i>\" You redress and give her a harder slap than usual on the ass as you leave.");
 		}
 	}
 	player.orgasm();
 	doNext(camp.returnToCampUseOneHour);
 }
 //Reward
-//Requirements: PC used “punish” at least once, 3+ days have gone by and “punish” has not proced*
+//Requirements: PC used \"punish\" at least once, 3+ days have gone by and \"punish\" has not proced*
 private function rewardKelly():void {
 	flags[kFLAGS.KELLY_REWARD_COOLDOWN] = 1;
 	clearOutput();
@@ -1819,7 +1819,7 @@ private function rewardKelly():void {
 		outputText("  \"<i>Hurray!</i>\"");
 	}
 	flags[kFLAGS.KELLY_TIMES_REWARDED]++;
-	//*Don't know how the current “punish” system works so leave the function up to you.  Ideally each option should turn up 50% of the time after first punish
+	//*Don't know how the current \"punish\" system works so leave the function up to you.  Ideally each option should turn up 50% of the time after first punish
 	
 	menu();
 	//Hair Dye/Apple Sauce
@@ -1898,7 +1898,7 @@ private function giveKellyAppleSauce():void {
 		outputText("\n\n\"<i>Oh.  Um.  Well...</i>\" she furrows her brow as if remembering a very distant time.  \"<i>I used to like fruit.</i>\"  She laughs a bit.  \"<i>A stereotype really, you know, horses and apples?  Whitney even planted me a couple of apple trees across the back, but I never took care of them because I was a bit of a jerk-off back then.</i>\"");
 		outputText("\n\nAt least your jerk off-ing is put to good use these days, you say kindly.  \"<i>That's nice of you to say, [Master],</i>\" replies the centaur solemnly.  She's wringing her hands, her thoughts elsewhere.");
 		if (!farm.farmCorruption.whitneyCorrupt()) outputText(" \"<i>I'd like to go and check on it, but... I don't think Whitney likes me much anymore.  I'd hate to cause more trouble than I already have.</i>\"");
-		else outputText("“<i>I'd like to go and check on it, but... I’d hate to get into Mistress Whitney’s bad books.  I’ve caused enough trouble already.</i>”");
+		else outputText("\"<i>I'd like to go and check on it, but... I’d hate to get into Mistress Whitney’s bad books.  I’ve caused enough trouble already.</i>\"");
 		outputText(" You 'pfft' and wave your hand airily to show what YOU think of Whitney.  You tell her to stay put - as her treat, you'll go check on the orchard and bring back some apples for her, if there are any.");
 		outputText("\n\n\"<i>You will?  I- well, thank you so much [Master], but you'll be careful, won't you?</i>\" she says fretfully, still wringing her hands.  You go into her barn, grab a metal bowl and then stride off gallantly, as if setting off to take on Lethice herself, when in fact your epic quest involves jumping over a fence and walking 200 yards through some light woodland.");
 		
@@ -1928,7 +1928,7 @@ private function giveKellyAppleSauce():void {
 	else {
 		outputText("\n\nYou go to the barn and grab your trusty metal bowl.  Kelly knows what this means: she clasps her hands eagerly, her horse half clopping backwards and forwards impatiently as she watches you walk casually towards the forest.");
 		outputText("\n\nThe small grove of apple trees has changed significantly from when you first found it.  Somebody has begun cutting the encroaching wild trees right back and pruned the rosaceae themselves so they aren't tangling into each other anymore- they look considerably happier.");
-		if(flags[kFLAGS.KELLY_KIDS] > 1) outputText("  Somebody has even cleared an oblong patch of earth alongside the trees- a piece of card stuck into it is scrawled with a childish hand which declares it to be “CAROTS”.  You marvel at it all.  Who would have imagined your lust for horse pussy would have turned a pointless asshole into a loving mother who gardens with her children?  Really, you deserve a medal for your efforts.");
+		if(flags[kFLAGS.KELLY_KIDS] > 1) outputText("  Somebody has even cleared an oblong patch of earth alongside the trees- a piece of card stuck into it is scrawled with a childish hand which declares it to be \"CAROTS\".  You marvel at it all.  Who would have imagined your lust for horse pussy would have turned a pointless asshole into a loving mother who gardens with her children?  Really, you deserve a medal for your efforts.");
 		
 		outputText("\n\nYou take your time picking the best apples which catch your eye before mashing them up, once again removing the seeds and stalks.  Then, with a wicked smile, you ");
 		if(!player.isTaur()) {
@@ -1979,7 +1979,7 @@ private function giveKellyAppleSauce():void {
 	}
 	//Centaur: 
 	else {
-		outputText("\n\nThe mere smell of the apple sauce has got Kelly's vagina dribbling, and in the close, warm environment of the barn the cloying, sweet smell radiating off her has got [eachCock] rock hard again, and your arousal urges you to work quickly.  With a “hup” you mount her, settling yourself onto her warm, rippling back, surrounding her with your heavy flesh, smell and presence, your [chest] pressing into her back as you bring the bowl around her head.  Transfixed by it, swallowing audibly, the centaur reaches for it automatically.");
+		outputText("\n\nThe mere smell of the apple sauce has got Kelly's vagina dribbling, and in the close, warm environment of the barn the cloying, sweet smell radiating off her has got [eachCock] rock hard again, and your arousal urges you to work quickly.  With a \"hup\" you mount her, settling yourself onto her warm, rippling back, surrounding her with your heavy flesh, smell and presence, your [chest] pressing into her back as you bring the bowl around her head.  Transfixed by it, swallowing audibly, the centaur reaches for it automatically.");
 		outputText("\n\nYou tut mockingly and pull it away until she lowers her hands, then bring it in close to her face.  Her hands fall on her erect nipples as she dips her head into the bowl, scoops up a long lap of the green mash with her tongue and guides it into her wet mouth.  Her throat works and she closes her eyes.  The intermittent dripping of her femcum on the straw behind you turns into a steady trickle and your own arousal urgent now, you push your " + cockDescript(x) + " against her sopping pussy gently.  She is radiating heat and her wet depths suck at your " + player.cockHead(x) + " deliciously.");
 		outputText("\n\nStill, you hold back on your pulsing need to bury your cock into her, pressing at her entrance softly until you touch the brim of the bowl against her teeth and watch her tongue slide out again, the sloppy sound of a centaur trying to draw as much apple sauce into her mouth as she can inundating your ears.  With a contented sigh, you slide your " + cockDescript(x) + " into her, exulting in the hot slickness which envelops your sex bit by bit.");
 		if(player.cocks[x].cockThickness >= 4) outputText("  Your girth spreads her fuck tunnel wide and you grunt at the delicious tightness of it as you pack her full of cock.");
@@ -2198,11 +2198,11 @@ private function kellyBJsAhoy():void {
 		outputText("\n\nBit by bit, she takes more and more of your [cock biggest] into her milking redness.  ");
 		//[Cock >12:
 		if(player.biggestCockLength() > 12) {
-			outputText("  She can't take all of your dick but she tries her best, thrusting her head down as she crams her mouth with your thick hardness until you are touching her tonsils.  Lust crowding you now, you thrust your back haunches forward, forcing her further down your [cock biggest], gently but purposefully pushing further into her tight throat with each thrust.  You manage to hold back on your urge to simply face fuck her as hard as you can, instead moving her back and forth on your length as sensually as you can, drawing your dick back from the delicious tightness of her throat so she can breathe deep and spend a moment worshipping your [cockHead biggest] with her tongue and lips, eliciting a moaned “mmm” from her each time before penetrating her gullet again.");
+			outputText("  She can't take all of your dick but she tries her best, thrusting her head down as she crams her mouth with your thick hardness until you are touching her tonsils.  Lust crowding you now, you thrust your back haunches forward, forcing her further down your [cock biggest], gently but purposefully pushing further into her tight throat with each thrust.  You manage to hold back on your urge to simply face fuck her as hard as you can, instead moving her back and forth on your length as sensually as you can, drawing your dick back from the delicious tightness of her throat so she can breathe deep and spend a moment worshipping your [cockHead biggest] with her tongue and lips, eliciting a moaned \"mmm\" from her each time before penetrating her gullet again.");
 		}
 		//[Cock <12: 
 		else {
-			outputText("  Her mouth is a good fit for your dick and you soon find your limit, touching the back of her throat with each gentle thrust.  You manage to hold back on your urge to simply face fuck her as hard as you can, instead moving your haunches back and forth as sensually as you can, drawing your dick back to the entrance of her mouth so she can worship your [cockHead biggest] with her tongue and lips, eliciting a moaned “mmm” from her each time before thrusting deep into her maw again.");
+			outputText("  Her mouth is a good fit for your dick and you soon find your limit, touching the back of her throat with each gentle thrust.  You manage to hold back on your urge to simply face fuck her as hard as you can, instead moving your haunches back and forth as sensually as you can, drawing your dick back to the entrance of her mouth so she can worship your [cockHead biggest] with her tongue and lips, eliciting a moaned \"mmm\" from her each time before thrusting deep into her maw again.");
 		}
 		outputText("\n\nShe runs her tongue forward along the underbelly of your [cock biggest] as you thrust inwards and then backwards as you withdraw, creating the sweetest friction imaginable, and you find you are breathing hard, running close to the wind now as you thrust into her sucking, milking mouth harder and harder.  The more vigorously you do it the louder Kelly's muffled slurps and sighs of pleasure become.");
 		

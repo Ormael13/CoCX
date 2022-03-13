@@ -174,12 +174,12 @@ public class Tyrantia extends Monster
 				}
 			//}
 		}
-		/*
+		
 		override public function defeated(hpVictory:Boolean):void
 		{
 			SceneLib.tyrania.postFightOptions(hpVictory);
 		}
-		*/
+		
 		override public function get long():String
 		{
 			var str:String = "";

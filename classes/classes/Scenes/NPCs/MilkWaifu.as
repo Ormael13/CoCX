@@ -149,13 +149,13 @@ public function milkyMenu():void {
 		{
 			outputText("[bathgirlname] shakes vaguely out of her boob daze as you pick your way over to her.");
 
-			outputText("\n\n“<i>Bath time?</i>”");
+			outputText("\n\n\"<i>Bath time?</i>\"");
 		}
 		else
 		{
 			outputText("[bathgirlname] smiles at you as you pick your way over to her.");
 
-			outputText("\n\n“<i>Hello [name]. Is there something you need?</i>”");
+			outputText("\n\n\"<i>Hello [name]. Is there something you need?</i>\"");
 		}
 	}
 
@@ -198,7 +198,7 @@ private function sendToFarm():void
 	
 	outputText("You describe to [bathgirlname] the lake, and the farm which is situated close to it. Gently you tell her you want her to go there, present herself to the dog woman who owns it, and do as she says.");
 
-	outputText("“<i>Ok,</i>” says [bathgirlname], cautiously testing the idea out. “<i>You’ll come and visit sometimes, right?</i>” Of course. Mollified, the former sand witch slave gets to her feet and cautiously picks her way towards the lake. She won’t be much use protection-wise but she’ll give your milk production a boost.");
+	outputText("\"<i>Ok,</i>\" says [bathgirlname], cautiously testing the idea out. \"<i>You’ll come and visit sometimes, right?</i>\" Of course. Mollified, the former sand witch slave gets to her feet and cautiously picks her way towards the lake. She won’t be much use protection-wise but she’ll give your milk production a boost.");
 
 	if (player.cor >= 90)
 	{
@@ -215,9 +215,9 @@ private function backToCamp():void
 	clearOutput();
 	
 	//TODO
-	outputText("“<i>I want you to head on back to camp,</i>” you tell her. “<i>You’ll be more useful to me there.</i>” [bathgirlName]’s brow crinkles but she seems to accept your instruction.");
+	outputText("\"<i>I want you to head on back to camp,</i>\" you tell her. \"<i>You’ll be more useful to me there.</i>\" [bathgirlName]’s brow crinkles but she seems to accept your instruction.");
 
-	outputText("“<i>As you wish.</i>” She wipes her hands before walking slowly down and out of the farm’s gate.");
+	outputText("\"<i>As you wish.</i>\" She wipes her hands before walking slowly down and out of the farm’s gate.");
 	
 	flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] = 0;
 	

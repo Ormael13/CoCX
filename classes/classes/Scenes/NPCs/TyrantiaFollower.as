@@ -66,13 +66,11 @@ import classes.internals.SaveableState;
 
 public function tyraniaAffection(changes:Number = 0):Number {
 	TyrantiaAffectionMeter += changes;
-	if (TyrantiaAffectionMeter > 100) TyrantiaAffectionMeter = 100;
-	else if (TyrantiaAffectionMeter < 0) TyrantiaAffectionMeter = 0;
-	return TyrantiaAffectionMeter;
-}
-public function tyraniaAffection2(changes:Number = 0):Number {
-	TyrantiaAffectionMeter += changes;
-	if (TyrantiaAffectionMeter > 60) TyrantiaAffectionMeter = 60;
+	if (TyrantiaAffectionMeter > 40) {
+		if (TyrantiaFollowerStage > 1 && TyrantiaAffectionMeter > 100) TyrantiaAffectionMeter = 100;
+		else if (TyraniaPostFinalKissScene > 0 && TyrantiaAffectionMeter > 60) TyrantiaAffectionMeter = 60;
+		else TyrantiaAffectionMeter = 40;
+	}
 	else if (TyrantiaAffectionMeter < 0) TyrantiaAffectionMeter = 0;
 	return TyrantiaAffectionMeter;
 }
@@ -91,6 +89,7 @@ public function firstEncounterYes():void {
 	outputText("Almost absently, two of its metal legs sink into two downed golems, metal blades cracking the stone with shocking ease. A stone flies past your hiding spot, and you flinch. The rubble under your feet grinds, and as the final golem falls, its head snapped clean off by the giant spider...Woman? She growls, in a low voice.\n\n");
 	outputText("\"<i>Okay, Tyrantia, stop playing around with your food. Find that demon cunt who’s been summoning them.</i>\" As she turns towards you, you see the first indication of organic life under all that steel. She wears a half-helm, and her fangs gleam in the sunlight. ");
 	outputText("Five purple eyes shine under the helm, wary and alert. Twin horns poke out from holes in her helmet, black as night. She’s clearly heard you move, but as she looks back and forth, she doesn’t seem to know where you are yet.\n\n");
+	TyrantiaFollowerStage = 1;
 	menu();
 	addButton(1, "Hide", firstEncounterYesHide);
 	addButton(3, "No Hiding", firstEncounterYesNoHiding);
@@ -116,7 +115,7 @@ public function firstEncounterYesHideSurrender():void {
 	outputText("and dodges to one side as another golem comes hurtling through the space her upper body had been in before. She grabs it before it can hit you, spinning the hundreds of pounds of stone like a toy before slamming it into the ground, where it shatters.\n\n");
 	outputText("She looks at the golem leg in her hands, looks at you, looks back at the leg...then shrugs. \"<i>Okay, fair enough. Stupid thing wanted to hit you too.</i>\" A demon incubus claws his way out of the ruins, but the spider-giant turns, whipping the golem’s arm at the creature. It crushes the luckless demon’s skull, and she turns back to you, completely unphased.\n\n");
 	outputText("\"<i>So...who are you?</i>\" You tell her your name, that you’re a champion from Ignam, and that you’re no fan of demons either. \"<i>No Kiddin’? Well shit. Name’s Tyrantia. Sorry. I’m a bit busy right now, so why don’t you come back another time, and we’ll get a fresh start, okay?</i>\"\n\n");
-	tyraniaAffection2(5);
+	tyraniaAffection(5);
 	doNext(camp.returnToCampUseOneHour);
 }
 public function firstEncounterYesNoHiding():void {
@@ -131,7 +130,7 @@ public function firstEncounterYesNoHidingDunno():void {
 	clearOutput();
 	outputText("You shrug, not really knowing why you’d do that. She looks at you, dumbfounded, for a second, before bursting into uproarious laughter. A bit of black energy pulses around her, making your cheeks flush, but the laughter dies down quickly. \"<i>Y’know, for a little "+player.mf("guy","gal")+", you have some balls.</i>\" ");
 	outputText("You tell her that you’re [name], a Champion from Ignam, but she wheels about. A single demon crawls out from underneath a pillar and she turns, running after him. \"<i>Hey, I’ll talk to you another time!</i>\"\n\n");
-	tyraniaAffection2(5);
+	tyraniaAffection(5);
 	doNext(camp.returnToCampUseOneHour);
 }
 public function firstEncounterYesNoHidingTPolice():void {
@@ -142,7 +141,7 @@ public function firstEncounterYesNoHidingTPolice():void {
 	outputText("\"<i>Y’know, you cost me a bounty, shorty.</i>\" She reaches down, ruffling your [hair], \"<i>But I’m not even mad. That was fucking hilarious. I’m Tyrantia, but who are you?</i>\"\n\n");
 	outputText("You tell her that you’re [name], a champion from Ignam, and her five functioning eyes light up. \"<i>Oh?</i>\" She gives you a slap on the back. \"<i>Well, you’ve gotta show me what you can do sometime.</i>\" She sobers up a bit. ");
 	outputText("\"<i>But not today. I need to find me another demon to fight, and you, "+player.mf("mister","miss")+" ‘titty police’ should find someone else to arrest</i>\" She picks up her spear, giving you a sarcastic salute before striding away.\n\n");
-	tyraniaAffection2(10);
+	tyraniaAffection(10);
 	doNext(camp.returnToCampUseOneHour);
 }
 public function firstEncounterYesNoHidingFight():void {
@@ -168,7 +167,7 @@ public function postFightOptions(hpVictory:Boolean):void {
 		outputText("Tyrantia’s shaking legs finally give out, and she drops her phallic spear, both of her meaty hands dropping to her cunt-flap. Ignoring you entirely, she begins to grab at the flap, pulling the steel up and revealing a large-labed, drooling cunny. Wasting no time, she begins jilling herself off, breathing heavily from both exhaustion and arousal.\n\n");
 		outputText("\"<i>Fuck, no. Not now, you…</i>\" She moans, her armored chest heaving. Her black aura is nearly gone, but you can see a pink glow coming from her eyes. \"<i>What do you want?</i>\"\n\n");
 	}
-	tyraniaAffection2(5);
+	tyraniaAffection(5);
 	menu();
 	addButton(1, "Heal", postFightOptionsHeal);
 	addButton(2, "Kiss", postFightOptionsKiss);
@@ -189,7 +188,7 @@ public function postFightOptionsHealNicePerson():void {
 	outputText("You tell her that you didn’t want to hurt her, or leave her unable to defend herself.\n\n");
 	outputText("\"<i>...Who says I can’t fight?</i>\" You stifle your response, turning back towards her other injuries. After about an hour, she stands, looking down at you with a conflicted look on her face.");
 	outputText("\"<i>...Thanks...You might want to get looked at for Corruption though.</i>\" You give her a questioning look, and she turns away.\n\n");
-	tyraniaAffection2(10);
+	tyraniaAffection(10);
 	cleanupAfterCombat();
 }
 public function postFightOptionsHealSex():void {
@@ -197,7 +196,7 @@ public function postFightOptionsHealSex():void {
 	outputText("You tell her that there are plenty of demons who’d love to get their hands on her body, and that you’d rather keep her to yourself.\n\n");
 	outputText("\"<i>Horndog,</i>\" she complains. \"<i>...Thank you, I guess.</i>\" After about an hour, she stands, looking down at you with a conflicted look on her face. ");
 	outputText("\"<i>...Thanks...You might want to get looked at for Corruption though.</i>\" You give her a questioning look, and she turns away.\n\n");
-	tyraniaAffection2(5);
+	tyraniaAffection(5);
 	cleanupAfterCombat();
 }
 public function postFightOptionsKiss():void {
@@ -218,7 +217,7 @@ public function postFightOptionsKiss():void {
 	else {
 		outputText("\"<i>Look, [name], I...Don’t want this, no offense.</i>\" She tries to push back, and you back away. \"<i>Thanks. Look, I’ll be fine. I’ve got shit to do, and…</i>\" She tries to rise, unsuccessfully, and glares at you. \"<i>Just let me be.</i>\"\n\n");
 		outputText("You decide to leave the Drider Giantess alone, and give her a gentle goodbye as you head back to camp.\n\n");
-		tyraniaAffection2(3);
+		tyraniaAffection(3);
 		if (combat.inCombat) cleanupAfterCombat();
 		else doNext(camp.returnToCampUseOneHour);
 	}
@@ -226,14 +225,14 @@ public function postFightOptionsKiss():void {
 public function postFightOptionsKissStop():void {
 	outputText("She sighs in relief, none of her eyes meeting yours. \"<i>Look…[name]. I...I have...Reasons for pushing you away. I’m sorry, I just…</i>\" The giantess looks close to tears, and you find yourself staring at her eyes. ");
 	outputText("\"<i>Don’t look at me like that. It’s not you. Marae knows it’s not you.</i>\" She lies there, still, and for a while, says and does nothing while several waves of black energy pours from her horn.\n\n");
-	tyraniaAffection2(5);
+	tyraniaAffection(5);
 	if (combat.inCombat) cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
 public function postFightOptionsKissKeepGoing():void {
 	outputText("You tell her that whatever’s wrong, she can tell you. You kiss her again, and she pushes you away, this time strong enough to dislodge you. She tries to stand, to stagger away, roaring in anger. \"<i>Weak! Stupid!</i>\" She falls again, staying down. ");
 	outputText("\"<i>Just LEAVE ME BE!</i>\" She blindly fires a black web at you, missing by a mile. You decide it’s time to leave, and the sobbing giant’s tears fade away behind you as you walk back towards camp.\n\n");
-	tyraniaAffection2(-2);
+	tyraniaAffection(-2);
 	if (combat.inCombat) cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
@@ -371,7 +370,7 @@ public function repeatEncounterBattlefieldTalkHerKids():void {
 }
 public function repeatEncounterBattlefieldSex():void {
 	clearOutput();
-	//if (TyraniaAffection2 > 24) {
+	//if (TyraniaAffection > 24) {
 	//outputText("The Drider woman eyes you up and down, a poorly disguised smile on her face. “Well...Since you asked nicely, I guess I wouldn’t mind.” Her spider half bobs from side to side, and she runs her hands along the outside of her armor...rubbing where the nipples are in an obvious attempt to draw your gaze to her massive pairs of jugs. “What are you thinking?\" \n\n");
 
 	//menu();
@@ -384,6 +383,13 @@ public function repeatEncounterBattlefieldSex():void {
 	outputText("The giantess's eyes narrow, and she gives you a stern glare. \"Yeah, I don't exactly know you well, shorty\", she says roughly. \"Being around you is one thing, but having you between my legs? Trust like that is earned. \" \n\n");
 	doNext(camp.returnToCampUseOneHour);
 	//}
-	}
+}
+
+public function encounterBattlefieldAfterFinalKiss():void {
+	clearOutput();
+	outputText("\"<i></i>\"\n\n");
+	//affection gains
+	doNext(camp.returnToCampUseOneHour);
+}
 }
 }

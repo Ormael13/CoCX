@@ -155,10 +155,10 @@ public class Phouka extends Monster
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			if (pcCameWorms) {
-				outputText("\n\nThe " + this.short + " looks on, amused. <i>“Kinky! But those wee things can't handle whiskey, so I’m safe from ‘em. Now be a good ");
+				outputText("\n\nThe " + this.short + " looks on, amused. <i>\"Kinky! But those wee things can't handle whiskey, so I’m safe from ‘em. Now be a good ");
 				if (player.hasVagina())
-					outputText("lass and spread yer legs for me.”</i>\n\n");
-				else outputText("lad and spread yer asscheeks for me.”</i>\n\n");
+					outputText("lass and spread yer legs for me.\"</i>\n\n");
+				else outputText("lad and spread yer asscheeks for me.\"</i>\n\n");
 				doNext(SceneLib.combat.endLustLoss);
 			}
 			else {
