@@ -5716,7 +5716,11 @@ public class Combat extends BaseContent {
 				damage += scalingBonusToughness() * 0.2;
 				if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry1to4)) damage*=1+(0.2*player.perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4));
 			}
-			else{
+			else if (player.weapon == weapons.MGSWORD) {
+				damage += player.inte;
+				damage += scalingBonusIntelligence() * 0.2;
+			}
+			else {
 				damage += player.str;
 				damage += scalingBonusStrength() * 0.2;
 			}
