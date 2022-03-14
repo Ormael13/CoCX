@@ -1142,6 +1142,67 @@ public class PerkMenu extends BaseContent {
 		outputText("\n");
 	}
 
+	public function mutationsDatabaseVerify2(perks:Array, acquireReq:String = ""):void {
+		var perkCount:int = player.perkv1(perks[0]);
+		if (flags[kFLAGS.MUTATIONS_SPOILERS]) { //Help On
+			if (player.hasPerk(perks[0])) {	//Just checking if you have the base.
+				outputText("\n" + perks.name() + ": <font color=\"#008000\">Acquired.</font>");
+			} else {
+				outputText("\n" + perks.name() + ": <font color=\"#800000\">Missing.</font>");
+			}
+			outputText("\nPerk Rank: " + String(perkCount) + ".");
+			if (acquireReq == "") {	//In case manual information dump required, e.g. mutation handled in different way.
+				var reqs:Array = [];
+				for each (var cond:Object in perks[0].requirements) {
+					var reqStr:String = cond.text;
+					var color:String = "";
+					if (!(reqStr.indexOf("Mutation") >= 0)) { //Ignores the "free mutation slot" note.
+						if (cond.fn(player)) {
+							color = "#008000";
+						} else {
+							color = "#800000";
+						}
+						reqs.push("<font color='" + color + "'>" + cond.text + "</font>");
+					} else if (perkCount == perks[1]){
+						outputText("\"You already have the highest tier.\"")
+					}
+					else {	//Information not available.
+						reqs.push("Missing data. Perhaps Unacquirable?");
+					}
+					outputText("\nRequirements for next tier: " + reqs.join(", "));
+				}
+			}
+			else {	//Manual done this way.
+				outputText("\nRequirements for next tier: " + acquireReq + ".");
+			}
+			outputText("\nDescription: ");
+			if(perks[0].desc().length <= 1) {	//Some desc. contains only "."
+				outputText("No description available.");
+			}
+			else{
+				outputText(perks[0].desc());
+			}
+		}
+		else { //Help Off
+			if (player.hasPerk(perks[0])) {
+				outputText("\n" + perks.name() + ": <font color=\"#008000\">Acquired.</font>");
+				outputText("\nTier: " + player.perkv1(perks[0]));
+				outputText("\nDescription: ");
+				if(perks[0].desc().length <= 1) {	//Some desc. contains only "."
+					outputText("No description available.");
+				}
+				else{
+					outputText(perks[0].desc());
+				}
+			}
+			else {
+				outputText("\n???" + "\n Tier: ?" + "\nDescription: ???");
+			}
+		}
+		outputText("\n");
+	}
+
+
 	public function perkDatabase(page:int=0, count:int=50):void {
 		var allPerks:Array = PerkTree.obtainablePerks().sort();
 		var mutationList:Array = MutationsLib.mutationsArray("",true);

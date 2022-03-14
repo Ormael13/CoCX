@@ -279,9 +279,18 @@ public class Soulforce extends BaseContent
 		addButton(3, "Add Shard", cheatAddShard).hint("Add 1 radiant shard");
 		addButton(4, "Remove Shard", cheatRemoveShard).hint("Remove 1 radiant shard");
 		addButton(5,"ZenjiQ", ZenjiQ).hint("Zenji Expac 2 debug tool");
+		addButton (6, "Mutation test reset", resetMutations).hint("Reset Mutations");
 		addButton(14, "Back", submenucuzwhynot);
 	}
 
+	public function resetMutations():void{
+		clearOutput();
+		player.removePerk(MutationsLib.KitsuneThyroidGland);
+		player.removePerk(MutationsLib.KitsuneThyroidGlandPrimitive);
+		player.removePerk(MutationsLib.KitsuneThyroidGlandEvolved);
+		outputText("Reset done!");
+		cheatpart3();
+	}
 	public function cheatFixShards():void {
 		var cnt:int = 0;
 		clearOutput();
