@@ -202,9 +202,9 @@ package classes.Scenes
 			outputText("-Moved buttons to skip golem/elemental pre-PC rounds to fist button. Added mana cost of golems attacks in tooltips.\n");
 			outputText("-Buffed stat-boosting jewelry: now it increases stat multiplier. Still useless trash compared to resistances in the late game. Maybe one day someone will balance all this stuff properly... (Svalkash)\n");
 			outputText("-Fixes: Diana last encounter repeating after recruiting her, body lotions not working (at all), Phylla dick checks comparing area instead of length and vice versa (Svalkash)\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New Grey Spell: Hydro Acid - learned from Grey Book. Cost 100 mana and deal acid dmg and apply DoT (similar to acid spit/hydra breath ones). Have cooldown of 6 turns. It's Tier 2 spell. (spell text by Canadian Snas)\n");
+			outputText("-New Grey Spell: Acid Rain - learned from Grey Book. Cost 500 mana and deal AoE acid dmg. Have cooldown of 6 turns and apply DoT (similar to acid spit/hydra breath ones). It's Tier 2 spell. (spell text by Canadian Snas)\n");
+			outputText("-Added: Grey Spellpower, Tier 1 & 2 cooldown info to Stats > Combat subpage.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
