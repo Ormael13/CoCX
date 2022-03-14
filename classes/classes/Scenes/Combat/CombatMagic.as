@@ -360,6 +360,12 @@ public class CombatMagic extends BaseCombatContent {
 		return mod;
 	}
 
+	internal function spellGreyTier2CooldownImpl():Number {
+		var mod:Number = 6;
+		if (mod < 0) mod = 0;
+		return mod;
+	}
+
 	internal function healModImpl():Number {
 		var mod:Number = 1 + modChange_all() + modChange_heal();
 		if (player.hasPerk(PerkLib.Obsession)) {

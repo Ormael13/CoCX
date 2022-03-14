@@ -60,7 +60,7 @@ public class StalagmiteSpell extends AbstractGreySpell {
 	
 	override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
-			outputText("You spread your hands, focusing your mana down, down, deep into the earth below. [Themonster] in front of you leaves a slight indent, that you can feel through the earth. With a moment of hard focus, you harden the earth underneath them into a spike of solid stone. With a cry of effort, you motion, and your spike of stone shoots up from below, striking your foe.\n");
+			outputText("You spread your hands, focusing your mana down, down, deep into the earth below. [Monster A] [monster name] in front of you leaves a slight indent, that you can feel through the earth. With a moment of hard focus, you harden the earth underneath them into a spike of solid stone. With a cry of effort, you motion, and your spike of stone shoots up from below, striking your foe.\n");
 		}
 		var damage:Number = calcDamage(monster, true, true);
 		damage = critAndRepeatDamage(display, damage, DamageType.EARTH);

@@ -3814,7 +3814,7 @@ public final class Mutations extends MutationsHelper {
                 player.createStatusEffect(StatusEffects.KnowsCorrosiveWave, 0, 0, 0, 0);
                 return;
             }
-            //Smart enough for  and doesnt have it
+            //Smart enough for Turbulence and doesnt have it
             /*if (player.inte >= 70 && !player.hasStatusEffect(StatusEffects.)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: .</b>");
                 player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
@@ -3826,10 +3826,22 @@ public final class Mutations extends MutationsHelper {
                 player.createStatusEffect(StatusEffects., 0, 0, 0, 0);
                 return;
             }*/
+            //Smart enough for Hydro Acid and doesnt have it
+            if (player.inte >= 75 && !player.hasStatusEffect(StatusEffects.KnowsHydroAcid)) {
+                outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Hydro Acid.</b>");
+                player.createStatusEffect(StatusEffects.KnowsHydroAcid, 0, 0, 0, 0);
+                return;
+            }
             //Smart enough for Energy Drain and doesnt have it
             if (player.inte >= 80 && !player.hasStatusEffect(StatusEffects.KnowsEnergyDrain)) {
                 outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Energy Drain.</b>");
                 player.createStatusEffect(StatusEffects.KnowsEnergyDrain, 0, 0, 0, 0);
+                return;
+            }
+            //Smart enough for Acid Rain and doesnt have it
+            if (player.inte >= 85 && !player.hasStatusEffect(StatusEffects.KnowsAcidRain)) {
+                outputText("[pg]You blink in surprise, assaulted by the knowledge of a <b>new spell: Acid Rain.</b>");
+                player.createStatusEffect(StatusEffects.KnowsAcidRain, 0, 0, 0, 0);
                 return;
             }
             //Smart enough for Restore and doesnt have it

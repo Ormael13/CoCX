@@ -13,8 +13,8 @@ public class AcidSpraySpell extends AbstractGreySpell {
 		super(
 			ex ? "Acid Spray (Ex)" : "Acid Spray",
 			ex ?
-					"Condense part of the the ambivalent moisture into wrath-enpowered water sphere to attack your enemy."
-					: "Condense part of the the ambivalent moisture into sphere water to attack your enemy.",
+					"Condense part of the the ambivalent moisture into wrath-enpowered acid droplets to attack your enemy."
+					: "Condense part of the the ambivalent moisture into acid droplets to attack your enemy.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
 			[TAG_DAMAGING, TAG_ACID]
@@ -56,7 +56,7 @@ public class AcidSpraySpell extends AbstractGreySpell {
 		var damage:Number = calcDamage(monster, true, true);
 		damage = critAndRepeatDamage(display, damage, DamageType.ACID);
 		if (monster.hasStatusEffect(StatusEffects.AcidDoT)) {
-			monster.addStatusValue(StatusEffects.AcidDoT,1,0.5);
+			monster.addStatusValue(StatusEffects.AcidDoT,1,1);
 			monster.addStatusValue(StatusEffects.AcidDoT,3,0.5);
 		}
 		else monster.createStatusEffect(StatusEffects.AcidDoT,2,0.01,0.5,0);

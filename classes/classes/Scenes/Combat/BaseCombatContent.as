@@ -246,6 +246,9 @@ public class BaseCombatContent extends BaseContent {
 	protected function spellGreyCooldown():Number {
 		return combat.magic.spellGreyCooldownImpl();
 	}
+	protected function spellGreyTier2Cooldown():Number {
+		return combat.magic.spellGreyTier2CooldownImpl();
+	}
 	protected function spellWhiteCooldown():Number {
 		return combat.magic.spellWhiteCooldownImpl();
 	}
