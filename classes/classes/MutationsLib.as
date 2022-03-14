@@ -9,7 +9,7 @@ import classes.BodyParts.Face;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.RearBody;
 import classes.BodyParts.Tail;
-import classes.Mutations.KitsuneThyroidGlands;
+import classes.Mutations.*;
 
 public class MutationsLib
 	{
