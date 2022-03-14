@@ -9,6 +9,7 @@ import classes.BodyParts.Face;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.RearBody;
 import classes.BodyParts.Tail;
+import classes.Mutations.KitsuneThyroidGlands;
 
 public class MutationsLib
 	{
@@ -207,6 +208,7 @@ public class MutationsLib
 				"You can now freely feed on blood and other atypical fluids. (+5 max stack of Vampire Thirst, +7% more healed from Vampire Bite, each Vampire Bite giving 2 stacks and deal +50% lust dmg)").withBuffs({'tou.mult':0.15});
 		public static const HollowFangsFinalForm:PerkType = mk("Hollow Fangs (Final Form)", "Hollow Fangs (Final Form)",
 				".");
+		//public static const KitsuneThyroidGland = new KitsuneThyroidGlands().withBuffs(KitsuneThyroidGlands.perkBuffs());
 		public static const KitsuneThyroidGland:PerkType = mk("Kitsune Thyroid Gland", "Kitsune Thyroid Gland",
 				"Kitsune Thyroid Gland lower cooldowns for Illusion and Terror by three turns and increase speed of the recovery after using magic.").withBuffs({'spe.mult':0.05});
 		public static const KitsuneThyroidGlandPrimitive:PerkType = mk("Kitsune Thyroid Gland (Primitive)", "Kitsune Thyroid Gland (Primitive)",
