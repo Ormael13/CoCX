@@ -270,7 +270,7 @@ public class Soulforce extends BaseContent
 		menuItems.push("Add Shard", cheatAddShard, "Add 1 radiant shard");
 		menuItems.push("Remove Shard", cheatRemoveShard, "Remove 1 radiant shard");
 		menuItems.push("ZenjiQ", ZenjiQ, "Zenji Expac 2 debug tool");
-		menuItems.push("Mutation test reset", resetMutations, "Reset Mutations");
+		//menuItems.push("Mutation test reset", resetMutations, "Reset Mutations");
 		menuGen(menuItems, page, accessSoulforceMenu, false);
 	}
 
