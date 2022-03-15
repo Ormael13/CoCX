@@ -13,8 +13,8 @@ public class CorrosiveWaveSpell extends AbstractGreySpell {
 		super(
 			ex ? "Corrosive Wave (Ex)" : "Corrosive Wave",
 			ex ?
-					"Condense part of the the ambivalent moisture into wrath-enpowered water sphere to attack your enemy."
-					: "Condense part of the the ambivalent moisture into sphere water to attack your enemy.",
+					"Condense part of the the ambivalent moisture into wrath-enpowered acid wave to attack your enemy."
+					: "Condense part of the the ambivalent moisture into acid wave to attack your enemy.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
 			[TAG_DAMAGING, TAG_ACID, TAG_AOE]
@@ -55,12 +55,12 @@ public class CorrosiveWaveSpell extends AbstractGreySpell {
 	override protected function doSpellEffect(display:Boolean = true):void {
 		if (display) {
 			outputText("Your mana condenses around you, beads of moisture forming, growing. Focusing, you grit your teeth, motioning upwards with both hands. Sickly green acid rises in a wave, hissing as it touches the ground around you.\n");
-			outputText("[Themonster] is covered in the burning fluids, and they flail, the acidic liquid clinging to them.\n");
+			outputText("[Monster A] [monster name] is covered in the burning fluids, and they flail, the acidic liquid clinging to them.\n");
 		}
 		var damage:Number = calcDamage(monster, true, true);
 		damage = critAndRepeatDamage(display, damage, DamageType.ACID,false,true,true);
 		if (monster.hasStatusEffect(StatusEffects.AcidDoT)) {
-			monster.addStatusValue(StatusEffects.AcidDoT,1,0.5);
+			monster.addStatusValue(StatusEffects.AcidDoT,1,1);
 			monster.addStatusValue(StatusEffects.AcidDoT,3,0.5);
 		}
 		else monster.createStatusEffect(StatusEffects.AcidDoT,2,0.01,0.5,0);
