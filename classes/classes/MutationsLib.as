@@ -9,6 +9,7 @@ import classes.BodyParts.Face;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.RearBody;
 import classes.BodyParts.Tail;
+import classes.Mutations.*;
 
 public class MutationsLib
 	{
@@ -207,6 +208,7 @@ public class MutationsLib
 				"You can now freely feed on blood and other atypical fluids. (+5 max stack of Vampire Thirst, +7% more healed from Vampire Bite, each Vampire Bite giving 2 stacks and deal +50% lust dmg)").withBuffs({'tou.mult':0.15});
 		public static const HollowFangsFinalForm:PerkType = mk("Hollow Fangs (Final Form)", "Hollow Fangs (Final Form)",
 				".");
+		//public static const KitsuneThyroidGland:PerkType = new KitsuneThyroidGlandMutation().withBuffs(KitsuneThyroidGlandMutation.perkBuffs());
 		public static const KitsuneThyroidGland:PerkType = mk("Kitsune Thyroid Gland", "Kitsune Thyroid Gland",
 				"Kitsune Thyroid Gland lower cooldowns for Illusion and Terror by three turns and increase speed of the recovery after using magic.").withBuffs({'spe.mult':0.05});
 		public static const KitsuneThyroidGlandPrimitive:PerkType = mk("Kitsune Thyroid Gland (Primitive)", "Kitsune Thyroid Gland (Primitive)",
@@ -478,6 +480,7 @@ public class MutationsLib
 			}
 			function mutationsThyroidGlands():void{
 				MutationsList.push([KitsuneThyroidGland, KitsuneThyroidGlandPrimitive, KitsuneThyroidGlandEvolved]);
+				//MutationsList.push([KitsuneThyroidGland, 3]);
 				//MutationsList.push([NekomataThyroidGland, NekomataThyroidGlandEvolved, NekomataThyroidGlandFinalForm]);
 			}
 			function mutationsParaThyroidGlands():void{
@@ -681,6 +684,7 @@ public class MutationsLib
 						.requireCustomFunction(function (player:Player):Boolean {
 							return player.vampireScore() >= 4;//potem dodać mosquito race i ew. inne co mogą wypijać krew
 						}, "Vampire race");
+				//KitsuneThyroidGlandMutation.mutationReqs();
 				KitsuneThyroidGland.requireThyroidGlandMutationSlot().requireAnyPerk(PerkLib.EnlightenedKitsune, PerkLib.CorruptedKitsune).requireCustomFunction(function (player:Player):Boolean {
 					return player.kitsuneScore() >= 5;
 				}, "Kitsune race");

@@ -1567,7 +1567,7 @@ public function arcaneCircleUpgrade():void {
 					return;
 				}
 				if (player.statusEffectv3(StatusEffects.ElementalEnergyConduits) == 2) {
-					if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 2) {
+					if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 2) {
 						buildSecondElementalEnergyConduit();
 						return;
 					}
@@ -1581,7 +1581,7 @@ public function arcaneCircleUpgrade():void {
 					return;
 				}
 				if (player.statusEffectv3(StatusEffects.ElementalEnergyConduits) == 4) {
-					if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 3) {
+					if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 3) {
 						buildThirdElementalEnergyConduit();
 						return;
 					}
