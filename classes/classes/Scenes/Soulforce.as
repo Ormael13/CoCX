@@ -36,6 +36,7 @@ import classes.Scenes.Monsters.Oozaru;
 import classes.Scenes.NPCs.Alvina;
 import classes.Scenes.NPCs.Aria;
 import classes.Scenes.NPCs.Aurora;
+import classes.Scenes.NPCs.Belisa;
 import classes.Scenes.NPCs.CelessScene;
 import classes.Scenes.NPCs.Diana;
 import classes.Scenes.NPCs.DivaScene;
@@ -1780,7 +1781,7 @@ public class Soulforce extends BaseContent
 			addButton(2, "Pierce", FightPierce).hint("Test fight with Pierce.");
 			addButton(3, "SuccGard", FightSuccubusGardener).hint("Test fight with Succubus Gardener. (Also it will glitch right after fight so not start this fight if you got unsaved progress that you not wanna loose as only way to handle post fight glitch is restarting game)");
 			addButton(4, "The Dummy", FightTheDummy).hint("Fight with The Dummy.");
-			//addButton(5, "", ).hint("Test fight with .");
+			addButton(5, "M.WSeaver", FightBelisa).hint("Test fight with Mana Weaver.");
 			addButton(6, "D.Giantess", FightTyrantia).hint("Test fight with Drider Giantess.");
 			addButton(7, "Zenji", FightZenji).hint("Test fight with Zenji.");
 			addButton(8, "Sonya", FightSonya).hint("Test fight with Sonya.");
@@ -2818,6 +2819,11 @@ public class Soulforce extends BaseContent
 		}
 		player.createPerk(PerkLib.TransformationImmunity, 0, 0, 0, 0);
 		doNext(curry(SoulforceCheats1, 0));
+	}
+	public function FightBelisa():void {
+		clearOutput();
+		outputText("Entering battle with Mana Weaver! Enjoy ^^");
+		startCombat(new Belisa());
 	}
 	public function FightTyrantia():void {
 		clearOutput();

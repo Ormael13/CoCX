@@ -1399,7 +1399,7 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.goblinScore() < 1) outputText("\n<font color=\"#ff0000\">Goblin: 0</font>");
 		//Gremlin
 		if (player.gremlinScore() >= 18) outputText("\n<font color=\"#0000a0\">High Gremlin: " + player.gremlinScore() + " (-50% to Str racial multi, +90% to Spe racial multi, +135% to Int racial multi, +100% to Lib racial multi, +20 min sens)</font>");
-		if (player.gremlinScore() >= 15) outputText("\n<font color=\"#0000a0\">Gremlin: " + player.gremlinScore() + " (-50% to Str racial multi, +75% to Spe racial multi, +120% to Int racial multi, +115% to Lib racial multi, +20 min sens)</font>");
+		else if (player.gremlinScore() >= 15) outputText("\n<font color=\"#0000a0\">Gremlin: " + player.gremlinScore() + " (-50% to Str racial multi, +75% to Spe racial multi, +120% to Int racial multi, +115% to Lib racial multi, +20 min sens)</font>");
 		else if (player.gremlinScore() >= 1) outputText("\n<font color=\"#008000\">Gremlin: " + player.gremlinScore() + "</font>");
 		else if (player.gremlinScore() < 1) outputText("\n<font color=\"#ff0000\">Gremlin: 0</font>");
 		//Gryphon
