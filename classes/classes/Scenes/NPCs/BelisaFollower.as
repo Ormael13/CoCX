@@ -65,12 +65,15 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 				BelisaEncounternum = o["BelisaEncounternum"];
 				BelisaAffectionMeter = o["BelisaAffectionMeter"];
 				BelisaInGame = o["BelisaInGame"];
+				BelisaFollowerStage= o["BelisaFollowerStage"];
 				BelisaVirgin = o["BelisaVirgin"];
 				BelisaShopOpen = o ["BelisaShopOpen"];
 				BelisaQuestOn= o["BelisaQuestOn"];
+				BelisaRalthTalked= o["BelisaRalthTalked"];
 				BelisaQuestComp = o["BelisaQuestComp"];
 				BelisaConfessed = o["BelisaConfessed"];
 				BelisaToldTyrantia = o["BelisaToldTyrantia"];
+				BelisaInCamp = o["BelisaInCamp"];
 			} else {
 				// loading from old save
 				resetState();

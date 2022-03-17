@@ -140,6 +140,8 @@ public class CombatAbilities {
 	public static const AcidSprayEx:AcidSpraySpell             = new AcidSpraySpell(true);
 	public static const CorrosiveWave:CorrosiveWaveSpell       = new CorrosiveWaveSpell();
 	public static const CorrosiveWaveEx:CorrosiveWaveSpell     = new CorrosiveWaveSpell(true);
+	public static const HydroAcid:HydroAcidSpell               = new HydroAcidSpell();
+	public static const AcidRain:AcidRainSpell                 = new AcidRainSpell();
 	//	if (player.hasStatusEffect(StatusEffects.KnowsWereBeast)) buttons.add("Were-beast",	were-beast spell goes here
 	
 	public static const ALL_GREY_SPELLS:/*CombatAbility*/Array = [
@@ -163,7 +165,9 @@ public class CombatAbilities {
 		AcidSpray,
 		AcidSprayEx,
 		CorrosiveWave,
-		CorrosiveWaveEx
+		CorrosiveWaveEx,
+		HydroAcid,
+		AcidRain
 	];
 	
 	public static const BloodMissiles:BloodMissilesSpell               = new BloodMissilesSpell();

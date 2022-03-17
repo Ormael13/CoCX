@@ -96,7 +96,7 @@ package classes.Scenes
 			outputText("-New tier 13 wisdom lvl-up perk: Ecliptic Infusion. Req. Greater shared power perk. Effect: Your Infuse ability allows you to add and combine a corrupted or a purity normal elemental with a water, fire, earth or wind epic elemental. Doing so adds a purity or corruption scaling to your abilities.\n");
 			outputText("-New tier 13 strength lvl-up perk: Too Angry to Die. Req. Anger perk. Effect: When you under berserk-like state it will prevent HP defeat as long it last. Additionaly increase limit of negative HP you can reach by amount of max wrath. (+10% melee physical attacks multiplier, 2x for been under berzerk type state and another 2x when using large or masive weapon(s)) (+3000 max Wrath)\n");
 			outputText("-New tier 14 strength lvl-up perk: Endless Rage. Req. Too Angry to Die perk. Effect: Berzerker and Lustzerker cost change to 10 wrath per turn from set amount of turns. When Too Angry Too Die perk effect activate that cost change to 10%. (+10% melee physical attacks multiplier, 2x for been under berzerk type state and another 2x when using large or masive weapon(s)) (+3500 max Wrath)\n");
-			outputText("-New mutation perk: Tracheal System (Final Form). Req. having Tracheal System (Evolved) perk and one of insect race score 16+ (atlach nacha 20+). Effects: +1 to insect races score, +8% str / +6% tou / +10% spe multi.\n");
+			outputText("-New mutation perk: Tracheal System (Final Form). Req. having Tracheal System (Evolved) perk. Effects: +1 to insect races score, +8% str / +6% tou / +10% spe multi.\n");
 			outputText("-New rare ascension perk -> Ascension: Hero's Legacy. Req. Ascension: Hero's Lineage and be at third ascension. It costs 25 asc points and will give 1 perk point, 1 super perk point and 5 stat points (scalable with NG tiers, for super perk it's reduced by 2) at the start of each new game.\n");
 			outputText("-New rare ascension perk -> Ascension: Bloodline Heritage. Req. Ascension: Hero's Legacy and be at fourth ascension. It costs 75 asc points and will give 1 perk point, 1 super perk point and 5 stat points (scalable with NG tiers, for super perk it's reduced by 3) at the start of each new game. Also would increase racial score bonus from any descendant's/bloodline perks by 2.\n");
 			outputText("-New Ascension perk: One Race To Rule Them All. Your racial paragon boost is increased. +(2x rank) to each stat per level and increase racial skill power by (25x rank)%. Max Rank: 5.\n");
@@ -152,7 +152,7 @@ package classes.Scenes
 			outputText("-Gems counter reset on ascension and max 100 * NG tier (max 600) Spirits Stones are kept.\n");
 			outputText("-Added 2 new groups for Internal Mutation (perks): Parathyroid Glands and Adaptations. Ratatoskr Smarts & Ecliptic Mind mutation was moved to Nerv Sys group and Arachne Book Lungs and Twin Hearts moved to Adaptations group.\n");
 			outputText("-Cat-like Nimblness, Scylla Ink Glands, Tracheal System mutations been moved to Adaptations. So now all current internal mutations are placed under one of existing mutation slots ^^\n");
-			outputText("-All internal mutation perks have now more in line lvl req. for tier 2 (30) and 3 (60).\n");
+			outputText("-All internal mutation perks have now more in line lvl req. for tier 2 (30) and 3 (60). Req. for tier 2 and higher would be only previous mutation perk and lvl. Tier 1 perks req. for race scores will be increased to scores around full race score.\n");
 			outputText("-First three tiers of Tracheal System got readjusted stat bonuses: +1% str / +2% spe multi; +2% str / +1% tou / +3% spe multi; +4% str / +3% tou / +5% spe multi.\n");
 			outputText("-Fuel for the Fire perk been moved 2 tiers lower, Rage & Anger perks was each moved up 1 tier.\n");
 			outputText("-Fuel for the Fire perk effect changed to: Increase two times wrath gains from getting hit. +1 attack per turn when wielding any large or massive weapon under berserker/lustzerker state. +1,500 wrath\n");
@@ -185,7 +185,7 @@ package classes.Scenes
 			outputText("-New Grey Spell: Wind Blast - learned from Grey Book. Cost 200 mana and deal AoE wind dmg. Have cooldown of 3 turns. (spell text by Pyromania)\n");
 			outputText("-New Grey Spell: Stalagmite - learned from Grey Book. Cost 40 mana and deal earth dmg. Have cooldown of 3 turns. (spell text by Canadian Snas)\n");
 			outputText("-New Grey Spell: Shatterstone - learned from Grey Book. Cost 200 mana and deal AoE earth dmg. Have cooldown of 3 turns. (spell text by Canadian Snas)\n");
-			outputText("-New melee weapon (by Lady Aeducan): Moonlight Greatsword - buyable at Kaiba shop. Cost 3000 gems. Base atk is 25, it's Large type weapon, dealing magical dmg instead of physical, using charge weapon will give 2x larger bonus and can use range attack in case there is no range weapon equipped.\n");
+			outputText("-New melee weapon (by Lady Aeducan): Moonlight Greatsword - buyable at Kaiba shop. Cost 3000 gems. Base atk is 25, it's Large type weapon, dealing magical dmg instead of physical (scale off int instead of str), using charge weapon will give 2x larger bonus and can use range attack in case there is no range weapon equipped (range attacks giving small amount of sword mastery exp).\n");
 			outputText("-Arcane Archer Elemental Arrows can be now enhanced with water, wind, earth dmg as long PC learn matching grey spell.\n");
 			outputText("-Convergence perk effect slight change - for single target will hit 2x more (it would mutliply any cases of multicast/omnicast), increase aoe grey spells dmg against smaller (+100%) and larger groups (+50%). Also it effect would not be disabling offensive staff channeling effect.\n");
 			outputText("-Twin Heart can be gained by drider PC's too.\n");
@@ -202,6 +202,12 @@ package classes.Scenes
 			outputText("-Moved buttons to skip golem/elemental pre-PC rounds to fist button. Added mana cost of golems attacks in tooltips.\n");
 			outputText("-Buffed stat-boosting jewelry: now it increases stat multiplier. Still useless trash compared to resistances in the late game. Maybe one day someone will balance all this stuff properly... (Svalkash)\n");
 			outputText("-Fixes: Diana last encounter repeating after recruiting her, body lotions not working (at all), Phylla dick checks comparing area instead of length and vice versa (Svalkash)\n");
+			outputText("-New Grey Spell: Hydro Acid - learned from Grey Book. Cost 100 mana and deal acid dmg and apply DoT (similar to acid spit/hydra breath ones). Have cooldown of 6 turns. It's Tier 2 spell. (spell text by Canadian Snas)\n");
+			outputText("-New Grey Spell: Acid Rain - learned from Grey Book. Cost 500 mana and deal AoE acid dmg. Have cooldown of 6 turns and apply DoT (similar to acid spit/hydra breath ones). It's Tier 2 spell. (spell text by Canadian Snas)\n");
+			outputText("-Added: Grey Spellpower, Tier 1 & 2 cooldown info to Stats > Combat subpage.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -214,12 +220,6 @@ package classes.Scenes
 			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

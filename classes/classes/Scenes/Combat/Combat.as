@@ -403,6 +403,18 @@ public class Combat extends BaseContent {
         return magic.spellBlackTier2CooldownImpl();
     }
 
+    public function spellModGrey():Number {
+        return magic.spellModGrey();
+    }
+
+    public function spellGreyCooldown():Number {
+        return magic.spellGreyCooldownImpl();
+    }
+
+    public function spellGreyTier2Cooldown():Number {
+        return magic.spellGreyTier2CooldownImpl();
+    }
+
     public function healMod():Number {
         return magic.healModImpl();
     }
@@ -3747,7 +3759,7 @@ public class Combat extends BaseContent {
 		var critDmg:Number = 1.75;
 		critChance += combatPhysicalCritical();
 		if (player.weapon == weapons.MGSWORD) {
-			damage += scalingBonusStrength() * 0.2;
+			damage += scalingBonusIntelligence() * 0.2;
 			if (player.isFlying()){
 				if (player.hasPerk(MutationsLib.HarpyHollowBones)) damage *= 1.2;
 				if (player.hasPerk(MutationsLib.HarpyHollowBonesPrimitive)) damage *= 1.3;
@@ -3881,9 +3893,13 @@ public class Combat extends BaseContent {
         }
 		if (crit) {
 			outputText(" <b>*Critical Hit!*</b>");
-			throwingXP(1);
+			if (player.weapon == weapons.MGSWORD) swordXP(1);
+			else throwingXP(1);
 		}
-		throwingXP(1);
+		if (player.weapon == weapons.MGSWORD) swordXP(1);
+		else throwingXP(1);
+		WrathGenerationPerHit1(5);
+        heroBaneProc(damage);
         if (monster.HP <= monster.minHP()) {
             if (monster.plural) outputText(" [monster He] stagger, collapsing onto each other from the wounds you've inflicted on [monster him].");
             else outputText(" [monster He] staggers, collapsing from the wounds you've inflicted on [monster him].");
@@ -3891,14 +3907,17 @@ public class Combat extends BaseContent {
             doNext(endHpVictory);
             return;
         }
-		else {
-            outputText(" It's clearly very painful.\n\n");
-			WrathGenerationPerHit1(5);
-            heroBaneProc(damage);
-        }
         if (monster.lust >= monster.maxLust()) {
             doNext(endLustVictory);
+            return;
         }
+		outputText(" It's clearly very painful.\n\n");
+        wrathregeneration1();
+        fatigueRecovery1();
+        manaregeneration1();
+        soulforceregeneration1();
+		venomCombatRecharge1();
+        enemyAI();
     }
 
     public function TelekinesisThrow():void {
@@ -5709,7 +5728,11 @@ public class Combat extends BaseContent {
 				damage += scalingBonusToughness() * 0.2;
 				if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry1to4)) damage*=1+(0.2*player.perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4));
 			}
-			else{
+			else if (player.weapon == weapons.MGSWORD) {
+				damage += player.inte;
+				damage += scalingBonusIntelligence() * 0.2;
+			}
+			else {
 				damage += player.str;
 				damage += scalingBonusStrength() * 0.2;
 			}

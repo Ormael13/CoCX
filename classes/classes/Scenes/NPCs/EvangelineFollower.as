@@ -8,14 +8,11 @@ package classes.Scenes.NPCs
 	import classes.*;
 	import classes.BodyParts.Arms;
 	import classes.BodyParts.Eyes;
-	import classes.BodyParts.Face;
 	import classes.BodyParts.Horns;
 	import classes.BodyParts.LowerBody;
-	import classes.BodyParts.Tail;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Scenes.Monsters.Imp;
 	import classes.Items.Armor;
-	import classes.Items.ArmorLib;
 	import classes.MutationsLib;
 	import classes.Items.Shield;
 	import classes.Items.ShieldLib;
@@ -28,7 +25,6 @@ package classes.Scenes.NPCs
 	import classes.Items.WeaponRange;
 	import classes.Items.WeaponRangeLib;
 	import classes.internals.SaveableState;
-	import coc.view.ButtonDataList;
 
 	public class EvangelineFollower extends NPCAwareContent implements SaveableState
 	{
@@ -1297,6 +1293,21 @@ private function InternalMutations0(page:int = 0):void {
 		}
 	}
 
+	function mutationsAssistant2(perkName:Array, menuButton:int, partSwap:String):void {
+		var perkCount:int = 0
+		if (!(player.hasPerk(perkName[0]))) {
+			if (perkName[0].available(player)) {
+				addButton(menuButton, perkName[0].name(), perkChoice2, perkName, partSwap, -9000, "Next Perk: " + perkName[0].name())
+			} else {
+				addButtonDisabled(menuButton, perkName[0].name(), "Requirements not met. Check MutationsDB.");
+			}
+		}
+		perkCount++
+		if (perkCount == perkName[1]) {
+			addButtonDisabled(menuButton, perkName[0].name(), "Highest Tier obtained!");
+		}
+	}
+
 	function perkChoice(perkTier:PerkType, partSwap:String):void {
 		clearOutput();
 		if (player.hasItem(useables.E_ICHOR, 1)) player.destroyItems(useables.E_ICHOR, 1);
@@ -1305,6 +1316,19 @@ private function InternalMutations0(page:int = 0):void {
 		outputText("\"<i>This might sting a little… bear it with me [name].</i>\"\n\n");
 		outputText("You don't have the time to gasp before she pushes the injection in. The transformative in the wound burns at first but then spreads to your " + partSwap + " as it slowly changes to acquire new inhuman property. The transformation was successful. You now have "+ perkTier.name() +"!");
 		player.createPerk(perkTier, 0, 0, 0, 0);
+		eachMinuteCount(30);
+		doNext(InternalMutations);
+	}
+
+	function perkChoice2(perkTier:Array, partSwap:String):void {
+		clearOutput();
+		if (player.hasItem(useables.E_ICHOR, 1)) player.destroyItems(useables.E_ICHOR, 1);
+		else player.gems -= 500;
+		outputText("Evangeline gets to brewing the mutagen. An half hour later, the injection is ready. She has you laid down into a makeshift seat.\n\n");
+		outputText("\"<i>This might sting a little… bear it with me [name].</i>\"\n\n");
+		outputText("You don't have the time to gasp before she pushes the injection in. The transformative in the wound burns at first but then spreads to your " + partSwap + " as it slowly changes to acquire new inhuman property. The transformation was successful. You now have "+ perkTier.name() +"!");
+		if (player.hasPerk(perkTier[0])) player.setPerkValue(perkTier[0],1,player.perkv1(perkTier[0]) + 1);
+		else player.createPerk(perkTier[0], 1, 0, 0, 0);
 		eachMinuteCount(30);
 		doNext(InternalMutations);
 	}
