@@ -8141,7 +8141,6 @@ use namespace CoC;
 				frostWyrmCounter2++;
 			if (wings.type == Wings.NONE)
 				frostWyrmCounter += 4;
-				frostWyrmCounter2 += 4;
 			if (hasPartialCoat(Skin.DRAGON_SCALES) || hasCoatOfType(Skin.DRAGON_SCALES))
 				frostWyrmCounter++;
 				frostWyrmCounter2++;
@@ -11917,11 +11916,13 @@ use namespace CoC;
 				if (this.hasKeyItem("Powboy") >= 0) minSen += 10;
 				if (this.hasKeyItem("M.G.S. bracer") >= 0) minSen += 15;
 			}
+			if (hasPerk(PerkLib.Soulless)) minCor += 50;
 			if (hasPerk(PerkLib.Phylactery)) minCor = 100;
 			if (hasPerk(PerkLib.BlessingOfTheAncestorTree)) minCor = 50;
 			if (this.hasPerk(PerkLib.PurityElixir)) minCor -= (this.perkv1(PerkLib.PurityElixir) * 20);
 			if (minLib < 1) minLib = 1;
 			if (minCor < 0) minCor = 0;
+			if (minCor > 100) minCor = 100;
 			return {
 				str:minStr,
 				tou:minTou,
