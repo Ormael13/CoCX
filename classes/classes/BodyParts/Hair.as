@@ -347,9 +347,7 @@ public class Hair extends BodyPart {
 
 	public static function getHairLength (creature: *): String {
 		var options:Array;
-		var hairscale:Number;
-
-		hairscale = int((creature.hairLength/creature.tallness)*100)/100
+		var hairscale:Number = creature.hairLength / creature.tallness;
 		if (hairscale == 0) {
 			options = ["shaved", "bald", "smooth", "hairless", "glabrous"];
 			return randomChoice(options);
