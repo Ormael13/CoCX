@@ -5294,40 +5294,49 @@ use namespace CoC;
 			Begin("Player","racialScore","demon");
 			var demonCounter:Number = 0;
 			var demonCounter2:Number = 0;
-			if (horns.type == Horns.DEMON && horns.count > 0)
+			if (horns.type == Horns.DEMON && horns.count > 0) {
 				demonCounter++;
 				demonCounter2++;
-			if (tailType == Tail.DEMONIC)
+			}
+			if (tailType == Tail.DEMONIC) {
 				demonCounter++;
 				demonCounter2++;
-			if (wings.type == Wings.BAT_LIKE_TINY)
+			}
+			if (wings.type == Wings.BAT_LIKE_TINY) {
 				demonCounter += 2;
 				demonCounter2 += 2;
-			if (wings.type == Wings.BAT_LIKE_LARGE)
+			}
+			if (wings.type == Wings.BAT_LIKE_LARGE) {
 				demonCounter += 4;
 				demonCounter2 += 4;
-			if (tongue.type == Tongue.DEMONIC)
+			}
+			if (tongue.type == Tongue.DEMONIC) {
 				demonCounter++;
 				demonCounter2++;
-			if (ears.type == Ears.ELFIN || ears.type == Ears.ELVEN || ears.type == Ears.HUMAN)
+			}
+			if (ears.type == Ears.ELFIN || ears.type == Ears.ELVEN || ears.type == Ears.HUMAN) {
 				demonCounter++;
 				demonCounter2++;
-			if (lowerBody == LowerBody.DEMONIC_HIGH_HEELS || lowerBody == LowerBody.DEMONIC_CLAWS)
+			}
+			if (lowerBody == LowerBody.DEMONIC_HIGH_HEELS || lowerBody == LowerBody.DEMONIC_CLAWS) {
 				demonCounter++;
 				demonCounter2++;
+			}
 			if (demonCocks() > 0 || (hasVagina() && vaginaType() == VaginaClass.DEMONIC))
 				demonCounter++;
 			if (cor >= 50) {
-				if (horns.type == Horns.DEMON && horns.count > 4)
+				if (horns.type == Horns.DEMON && horns.count > 4) {
 					demonCounter++;
 					demonCounter2++;
+				}
 				if (hasPlainSkinOnly() && skinAdj != "slippery")
 					demonCounter++;
 				if (InCollection(skin.base.color, ["shiny black", "sky blue", "indigo", "ghostly white", "light purple", "purple", "red", "grey", "blue"]))
 					demonCounter++;
-				if (faceType == Face.HUMAN || faceType == Face.ANIMAL_TOOTHS || faceType == Face.DEVIL_FANGS)
+				if (faceType == Face.HUMAN || faceType == Face.ANIMAL_TOOTHS || faceType == Face.DEVIL_FANGS) {
 					demonCounter++;
 					demonCounter2++;
+				}
 				if (arms.type == Arms.HUMAN)
 					demonCounter++;
 			}
@@ -5356,6 +5365,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.DemonicLethicite))
 				demonCounter+=1;
 			if (demonCounter2 < 5) demonCounter = demonCounter2;
+			if (demonCounter < 0) demonCounter = 0;
 			if (isGargoyle()) demonCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) demonCounter = 0;
 			demonCounter = finalRacialScore(demonCounter, Race.DEMON);
@@ -6298,22 +6308,33 @@ use namespace CoC;
 		public function spiderScore():Number {
 			Begin("Player","racialScore","spider");
 			var spiderCounter:Number = 0;
-			if (eyes.type == Eyes.SPIDER)
+			var spiderCounter2:Number = 0;
+			if (eyes.type == Eyes.SPIDER) {
 				spiderCounter++;
-			if (faceType == Face.SPIDER_FANGS)
+				spiderCounter2++;
+			}
+			if (faceType == Face.SPIDER_FANGS) {
 				spiderCounter++;
+				spiderCounter2++;
+			}
 			if (ears.type == Ears.ELFIN)
 				spiderCounter++;
-			if (arms.type == Arms.SPIDER)
+			if (arms.type == Arms.SPIDER) {
 				spiderCounter++;
-			if (lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS)
+				spiderCounter2++;
+			}
+			if (lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS) {
 				spiderCounter++;
-			if (lowerBody == LowerBody.DRIDER)
+				spiderCounter2++;
+			}
+			if (lowerBody == LowerBody.DRIDER) {
 				spiderCounter += 2;
-			if (tailType == Tail.SPIDER_ADBOMEN)
+				spiderCounter2 += 2;
+			}
+			if (tailType == Tail.SPIDER_ADBOMEN) {
 				spiderCounter++;
-			if (!hasPartialCoat(Skin.CHITIN) && spiderCounter > 0)
-				spiderCounter--;
+				spiderCounter2++;
+			}
 			if (hasPartialCoat(Skin.CHITIN))
 				spiderCounter++;
 			if (hasStatusEffect(StatusEffects.BlackNipples))
@@ -6340,11 +6361,11 @@ use namespace CoC;
 				spiderCounter++;
 			if (spiderCounter > 9 && hasPerk(MutationsLib.TrachealSystemFinalForm))
 				spiderCounter++;
-			if ((hasPerk(MutationsLib.VenomGlands) || hasPerk(MutationsLib.TrachealSystem)) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
+			if ((hasPerk(MutationsLib.VenomGlands) || hasPerk(MutationsLib.ArachnidBookLung) || hasPerk(MutationsLib.TrachealSystem)) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
 				spiderCounter++;
-			if ((hasPerk(MutationsLib.VenomGlandsPrimitive) || hasPerk(MutationsLib.TrachealSystemPrimitive)) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
+			if ((hasPerk(MutationsLib.VenomGlandsPrimitive) || hasPerk(MutationsLib.ArachnidBookLungPrimitive) || hasPerk(MutationsLib.TrachealSystemPrimitive)) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
 				spiderCounter++;
-			if ((hasPerk(MutationsLib.VenomGlandsEvolved) || hasPerk(MutationsLib.TrachealSystemEvolved)) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
+			if ((hasPerk(MutationsLib.VenomGlandsEvolved) || hasPerk(MutationsLib.ArachnidBookLungEvolved) || hasPerk(MutationsLib.TrachealSystemEvolved)) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
 				spiderCounter++;
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				spiderCounter += 50;
@@ -6352,6 +6373,8 @@ use namespace CoC;
 				spiderCounter += 1;
 			if (hasPerk(PerkLib.AscensionCruelChimerasThesis) && spiderCounter >= 8)
 				spiderCounter += 1;
+			if (spiderCounter2 < 4) spiderCounter = spiderCounter2;
+			if (spiderCounter < 0) spiderCounter = 0;
 			if (isGargoyle()) spiderCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) spiderCounter = 0;
 			spiderCounter = finalRacialScore(spiderCounter, Race.SPIDER);
@@ -8118,35 +8141,44 @@ use namespace CoC;
 			Begin("Player","racialScore","frost wyrm");
 			var frostWyrmCounter:Number = 0;
 			var frostWyrmCounter2:Number = 0;
-			if (ears.type == Ears.SNAKE || ears.type == Ears.DRAGON)
+			if (ears.type == Ears.SNAKE || ears.type == Ears.DRAGON) {
 				frostWyrmCounter++;
 				frostWyrmCounter2++;
-			if (eyes.type == Eyes.FROSTWYRM)
+			}
+			if (eyes.type == Eyes.FROSTWYRM) {
 				frostWyrmCounter++;
 				frostWyrmCounter2++;
-			if (faceType == Face.ANIMAL_TOOTHS)
+			}
+			if (faceType == Face.ANIMAL_TOOTHS) {
 				frostWyrmCounter++;
 				frostWyrmCounter2++;
-			if (tongue.type == Tongue.DRACONIC)
+			}
+			if (tongue.type == Tongue.DRACONIC) {
 				frostWyrmCounter++;
 				frostWyrmCounter2++;
-			if (arms.type == Arms.FROSTWYRM)
+			}
+			if (arms.type == Arms.FROSTWYRM) {
 				frostWyrmCounter++;
 				frostWyrmCounter2++;
-			if (lowerBody == LowerBody.FROSTWYRM)
+			}
+			if (lowerBody == LowerBody.FROSTWYRM) {
 				frostWyrmCounter += 3;
 				frostWyrmCounter2 += 3;
-			if (rearBody.type == RearBody.FROSTWYRM)
+			}
+			if (rearBody.type == RearBody.FROSTWYRM) {
 				frostWyrmCounter++;
 				frostWyrmCounter2++;
+			}
 			if (wings.type == Wings.NONE)
 				frostWyrmCounter += 4;
-			if (hasPartialCoat(Skin.DRAGON_SCALES) || hasCoatOfType(Skin.DRAGON_SCALES))
+			if (hasPartialCoat(Skin.DRAGON_SCALES) || hasCoatOfType(Skin.DRAGON_SCALES)) {
 				frostWyrmCounter++;
 				frostWyrmCounter2++;
-			if (horns.type == Horns.FROSTWYRM)
+			}
+			if (horns.type == Horns.FROSTWYRM) {
 				frostWyrmCounter += 2;
 				frostWyrmCounter2 += 2;
+			}
 			if (horns.type == Horns.DRACONIC_X4_12_INCH_LONG || horns.type == Horns.DRACONIC_X2)
 				frostWyrmCounter -= 2;
 			if (InCollection(hairColor, ["white", "snow white", "glacial white", "silver", "platinum silver"]))
@@ -8159,6 +8191,10 @@ use namespace CoC;
 				frostWyrmCounter++;
 			if (hasVagina() && biggestTitSize() >= 3)
 				frostWyrmCounter++;
+			if (horns.type != Horns.FROSTWYRM)
+				frostWyrmCounter2--;
+			if (arms.type != Arms.FROSTWYRM)
+				frostWyrmCounter2--;
 			if (lowerBody != LowerBody.FROSTWYRM)
 				frostWyrmCounter2 -= 3;
 			if (tallness > 120 && frostWyrmCounter >= 10)
@@ -8198,6 +8234,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.AscensionCruelChimerasThesis) && frostWyrmCounter >= 8)
 				frostWyrmCounter += 1;
 			if (frostWyrmCounter2 < 5) frostWyrmCounter = frostWyrmCounter2;
+			if (frostWyrmCounter < 0) frostWyrmCounter = 0;
 			if (isGargoyle()) frostWyrmCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) frostWyrmCounter = 0;
 			frostWyrmCounter = finalRacialScore(frostWyrmCounter, Race.FROSTWYRM);
