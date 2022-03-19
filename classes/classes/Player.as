@@ -5365,7 +5365,6 @@ use namespace CoC;
 			if (hasPerk(PerkLib.DemonicLethicite))
 				demonCounter+=1;
 			if (demonCounter2 < 5) demonCounter = demonCounter2;
-			if (demonCounter < 0) demonCounter = 0;
 			if (isGargoyle()) demonCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) demonCounter = 0;
 			demonCounter = finalRacialScore(demonCounter, Race.DEMON);
@@ -5378,27 +5377,34 @@ use namespace CoC;
 			Begin("Player","racialScore","devil");
 			var devilkinCounter:Number = 0;
 			var devilkinCounter2:Number = 0;
-			if (lowerBody == LowerBody.HOOFED)
+			if (lowerBody == LowerBody.HOOFED) {
 				devilkinCounter++;
 				devilkinCounter2++;
-			if (tailType == Tail.GOAT || tailType == Tail.DEMONIC)
+			}
+			if (tailType == Tail.GOAT || tailType == Tail.DEMONIC) {
 				devilkinCounter++;
 				devilkinCounter2++;
-			if (wings.type == Wings.BAT_LIKE_TINY || wings.type == Wings.BAT_LIKE_LARGE || wings.type == Wings.DEVILFEATHER)
+			}
+			if (wings.type == Wings.BAT_LIKE_TINY || wings.type == Wings.BAT_LIKE_LARGE || wings.type == Wings.DEVILFEATHER) {
 				devilkinCounter += 4;
 				devilkinCounter2 += 4;
-			if (arms.type == Arms.DEVIL)
+			}
+			if (arms.type == Arms.DEVIL) {
 				devilkinCounter++;
 				devilkinCounter2++;
-			if (horns.type == Horns.GOAT || horns.type == Horns.GOATQUAD)
+			}
+			if (horns.type == Horns.GOAT || horns.type == Horns.GOATQUAD) {
 				devilkinCounter++;
 				devilkinCounter2++;
-			if (ears.type == Ears.GOAT)
+			}
+			if (ears.type == Ears.GOAT) {
 				devilkinCounter++;
 				devilkinCounter2++;
-			if (faceType == Face.DEVIL_FANGS)
+			}
+			if (faceType == Face.DEVIL_FANGS) {
 				devilkinCounter++;
 				devilkinCounter2++;
+			}
 			if (eyes.type == Eyes.DEVIL || eyes.type == Eyes.GOAT)
 				devilkinCounter++;
 			if (tallness < 48)
@@ -5439,40 +5445,50 @@ use namespace CoC;
 		public function angelScore():Number {
 			Begin("Player","racialScore","angel");
 			var angelCounter:Number = 0;/*
-			if (horns.type == Horns.DEMON && horns.count > 0)
+			var demonCounter2:Number = 0;
+			if (horns.type == Horns.DEMON && horns.count > 0) {
 				demonCounter++;
 				demonCounter2++;
-			if (tailType == Tail.DEMONIC)
+			}
+			if (tailType == Tail.DEMONIC) {
 				demonCounter++;
 				demonCounter2++;
-			if (wings.type == Wings.BAT_LIKE_TINY)
+			}
+			if (wings.type == Wings.BAT_LIKE_TINY) {
 				demonCounter += 2;
 				demonCounter2 += 2;
-			if (wings.type == Wings.BAT_LIKE_LARGE)
+			}
+			if (wings.type == Wings.BAT_LIKE_LARGE) {
 				demonCounter += 4;
 				demonCounter2 += 4;
-			if (tongue.type == Tongue.DEMONIC)
+			}
+			if (tongue.type == Tongue.DEMONIC) {
 				demonCounter++;
 				demonCounter2++;
-			if (ears.type == Ears.ELFIN || ears.type == Ears.ELVEN || ears.type == Ears.HUMAN)
+			}
+			if (ears.type == Ears.ELFIN || ears.type == Ears.ELVEN || ears.type == Ears.HUMAN) {
 				demonCounter++;
 				demonCounter2++;
-			if (lowerBody == LowerBody.DEMONIC_HIGH_HEELS || lowerBody == LowerBody.DEMONIC_CLAWS)
+			}
+			if (lowerBody == LowerBody.DEMONIC_HIGH_HEELS || lowerBody == LowerBody.DEMONIC_CLAWS) {
 				demonCounter++;
 				demonCounter2++;
+			}
 			if (demonCocks() > 0 || (hasVagina() && vaginaType() == VaginaClass.DEMONIC))
 				demonCounter++;
 			if (cor >= 50) {
-				if (horns.type == Horns.DEMON && horns.count > 4)
+				if (horns.type == Horns.DEMON && horns.count > 4) {
 					demonCounter++;
 					demonCounter2++;
+				}
 				if (hasPlainSkinOnly() && skinAdj != "slippery")
 					demonCounter++;
 				if (InCollection(skin.base.color, ["shiny black", "sky blue", "indigo", "ghostly white", "light purple", "purple", "red", "grey", "blue"]))
 					demonCounter++;
-				if (faceType == Face.HUMAN || faceType == Face.ANIMAL_TOOTHS || faceType == Face.DEVIL_FANGS)
+				if (faceType == Face.HUMAN || faceType == Face.ANIMAL_TOOTHS || faceType == Face.DEVIL_FANGS) {
 					demonCounter++;
 					demonCounter2++;
+				}
 				if (arms.type == Arms.HUMAN)
 					demonCounter++;
 			}
@@ -6525,49 +6541,62 @@ use namespace CoC;
 			Begin("Player","racialScore","dragon");
 			var dragonCounter:Number = 0;
 			var dragonCounter2:Number = 0;
-			if (faceType == Face.DRAGON || faceType == Face.DRAGON_FANGS)
+			if (faceType == Face.DRAGON || faceType == Face.DRAGON_FANGS) {
 				dragonCounter++;
 				dragonCounter2++;
+			}
 			if (faceType == Face.JABBERWOCKY || faceType == Face.BUCKTOOTH)
 				dragonCounter -= 10;
-			if (eyes.type == Eyes.DRACONIC)
+			if (eyes.type == Eyes.DRACONIC) {
 				dragonCounter++;
 				dragonCounter2++;
-			if (ears.type == Ears.DRAGON)
+			}
+			if (ears.type == Ears.DRAGON) {
 				dragonCounter++;
 				dragonCounter2++;
-			if (tailType == Tail.DRACONIC)
+			}
+			if (tailType == Tail.DRACONIC) {
 				dragonCounter++;
 				dragonCounter2++;
-			if (tongue.type == Tongue.DRACONIC)
+			}
+			if (tongue.type == Tongue.DRACONIC) {
 				dragonCounter++;
 				dragonCounter2++;
-			if (wings.type == Wings.DRACONIC_SMALL)
+			}
+			if (wings.type == Wings.DRACONIC_SMALL) {
 				dragonCounter++;
 				dragonCounter2++;
-			if (wings.type == Wings.DRACONIC_LARGE)
+			}
+			if (wings.type == Wings.DRACONIC_LARGE) {
 				dragonCounter += 2;
 				dragonCounter2 += 2;
-			if (wings.type == Wings.DRACONIC_HUGE)
+			}
+			if (wings.type == Wings.DRACONIC_HUGE) {
 				dragonCounter += 4;
 				dragonCounter2 += 4;
+			}
 			if (wings.type == Wings.FEY_DRAGON || lowerBody == LowerBody.FROSTWYRM)
 				dragonCounter -= 10;
-			if (lowerBody == LowerBody.DRAGON)
+			if (lowerBody == LowerBody.DRAGON) {
 				dragonCounter++;
 				dragonCounter2++;
-			if (arms.type == Arms.DRACONIC)
+			}
+			if (arms.type == Arms.DRACONIC) {
 				dragonCounter++;
 				dragonCounter2++;
-			if (hasPartialCoat(Skin.DRAGON_SCALES) || hasCoatOfType(Skin.DRAGON_SCALES))
+			}
+			if (hasPartialCoat(Skin.DRAGON_SCALES) || hasCoatOfType(Skin.DRAGON_SCALES)) {
 				dragonCounter++;
 				dragonCounter2++;
-			if (horns.type == Horns.DRACONIC_X4_12_INCH_LONG)
+			}
+			if (horns.type == Horns.DRACONIC_X4_12_INCH_LONG) {
 				dragonCounter += 2;
 				dragonCounter2 += 2;
-			if (horns.type == Horns.DRACONIC_X2)
+			}
+			if (horns.type == Horns.DRACONIC_X2) {
 				dragonCounter++;
 				dragonCounter2++;
+			}
 			if (horns.type == Horns.FROSTWYRM)
 				dragonCounter -= 3;
 			if (dragonCocks() > 0 || hasVagina())
@@ -8234,7 +8263,6 @@ use namespace CoC;
 			if (hasPerk(PerkLib.AscensionCruelChimerasThesis) && frostWyrmCounter >= 8)
 				frostWyrmCounter += 1;
 			if (frostWyrmCounter2 < 5) frostWyrmCounter = frostWyrmCounter2;
-			if (frostWyrmCounter < 0) frostWyrmCounter = 0;
 			if (isGargoyle()) frostWyrmCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) frostWyrmCounter = 0;
 			frostWyrmCounter = finalRacialScore(frostWyrmCounter, Race.FROSTWYRM);

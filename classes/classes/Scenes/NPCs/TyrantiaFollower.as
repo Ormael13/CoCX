@@ -391,6 +391,10 @@ public function encounterBattlefieldAfterFinalKiss():void {
 	//affection gains
 	doNext(camp.returnToCampUseOneHour);
 }
+
+
+
+/*
 //Requires DriderTown, no kids, 80% affection.
 public function TyrantiaTalkKids():void {
 		clearOutput();
@@ -464,8 +468,8 @@ public function encounterBattlefieldAfterFinalKiss():void {
 	outputText("\"  \"\n\n");
 	outputText("\"  \"\n\n");
 	menu();
-addButton (1, "JumpIn", TyrantiaSaveFight);
-addButton (2, "StayHidden", TyrantiaLetDieYouMonster);
+addButton(1, "JumpIn", TyrantiaSaveFight);
+addButton(2, "StayHidden", TyrantiaLetDieYouMonster);
 }
 
 public function TyrantiaSaveFight():void {
@@ -479,10 +483,10 @@ public function TyrantiaSaveFight():void {
 }
 
 public function TyrantiaLetDieYouMonster():void {
-		clearOutput();
-		outputText("You watch as the fiery light that was always in your Drider companion’s eyes leave them for good. The commander demon’s dick expands, moving like a third arm as it flicks aside the hatch covering her spider-pussy. He begins pistoning in and out, and as Tyrantia silently orgasms, her legs folding, a blackened piece of lethicite, nearly as large as one of her boobs, comes out with it. The commander demon sighs happily, taking it and swallowing the crystal. The demons walk away, leaving Tyrantia’s body lying there on the battleground. As you watch, her body turns jet-black, then begins to dissolve, fading into powder, blowing away in the breeze. \n\n"); 
-		TyraniaIsRemovedFromThewGame = true;
-		doNext(camp.returnToCampUseOneHour);
+	clearOutput();
+	outputText("You watch as the fiery light that was always in your Drider companion’s eyes leave them for good. The commander demon’s dick expands, moving like a third arm as it flicks aside the hatch covering her spider-pussy. He begins pistoning in and out, and as Tyrantia silently orgasms, her legs folding, a blackened piece of lethicite, nearly as large as one of her boobs, comes out with it. The commander demon sighs happily, taking it and swallowing the crystal. The demons walk away, leaving Tyrantia’s body lying there on the battleground. As you watch, her body turns jet-black, then begins to dissolve, fading into powder, blowing away in the breeze. \n\n"); 
+	TyraniaIsRemovedFromThewGame = true;
+	doNext(camp.returnToCampUseOneHour);
 }
 
 
@@ -829,6 +833,6 @@ public function TyrantiaAllOut():void {
 		outputText("Tyrantia points to a nearby flat area, the rocks swept aside. You join her there, and her eyes glow as she levels her spear, spreading her legs out into a wide stance. You notice she isn’t putting much weight on her front legs, and you suspect she’s just as ready to strike with those as with her Phallic Spear. \n\n");
 		outputText("<i>“Show me what you’ve got!”</i> \n\n");
 //Tyrantia Fight, with her corruption aura
-}
+}*/
 }
 }

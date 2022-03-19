@@ -96,8 +96,7 @@ private function rathazulMoveDecline():void {
 public function campRathazul():void {
 	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
-	if(flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 2 && player.hasStatusEffect(StatusEffects.MetRathazul))
-	{
+	if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 2 && player.hasStatusEffect(StatusEffects.MetRathazul)) {
 		marblePurification.visitRathazulToPurifyMarbleAfterLaBovaStopsWorkin();
 		return;
 	}
@@ -177,10 +176,10 @@ private function rathazulWorkOffer():Boolean {
 		purificationByRathazulBegin();
 		return true;
 	}
-	//if (BelisaFollower.BelisaRalthTalked && !BelisaFollower.BelisaRalthPotionGet && player.hasItem(consumables.SHARK_T) && player.hasItem(consumables.PPHILTR) && player.hasItem(consumables.VITAL_T)) {
-	//	RathazulMakesToothCursePotion();
-	//	return true;
-	//}
+	if (BelisaFollower.BelisaQuestOn && BelisaFollower.BelisaFollowerStage == 0 && player.hasItem(consumables.SHARK_T) && player.hasItem(consumables.PPHILTR) && player.hasItem(consumables.VITAL_T)) {
+		BelisaRalthazulTalk();
+		return true;
+	}
 	if (player.hasItem(consumables.BLACKEG) || player.hasItem(consumables.L_BLKEG)) {
 		flags[kFLAGS.PC_KNOWS_ABOUT_BLACK_EGGS] = 1;
 		spoken = true;
@@ -253,8 +252,6 @@ private function rathazulWorkOffer():Boolean {
 		totalOffers++;
 		spoken = true;
 	}
-
-	
 	//Vines
 	if(player.keyItemv1("Marae's Lethicite") > 0 && !player.hasStatusEffect(StatusEffects.DefenseCanopy) && player.hasStatusEffect(StatusEffects.CampRathazul)) {
 		outputText("His eyes widen in something approaching shock when he sees the Lethicite crystal you took from Marae.  Rathazul stammers, \"<i>By the goddess... that's the largest piece of lethicite I've ever seen.  I don't know how you got it, but there is immense power in those crystals.  If you like, I know a way we could use its power to grow a canopy of thorny vines that would hide the camp and keep away imps.  Growing such a defense would use a third of that lethicite's power.</i>\"\n\n");
@@ -303,6 +300,7 @@ private function rathazulWorkOffer():Boolean {
 		else
 			addButtonDisabled(0, "Shop", "You can't afford anything Rathazul has to offer.");
 		addButton(1, "Purify", purifySomething).hint("Ask him to purify any tainted potions. \n\nCost: 20 Gems.");
+		if (BelisaFollower.BelisaRalthTalked && BelisaFollower.BelisaFollowerStage == 0 && player.hasItem(consumables.SHARK_T) && player.hasItem(consumables.PPHILTR) && player.hasItem(consumables.VITAL_T)) addButton(3, "C.CurePotion", RathazulMakesToothCursePotion).hint("Ask him to make cure curse cure potion. \n\nNeeds shark tooth, purity philter and vitality tincture");
 		if (dyes && player.hasItem(consumables.REPTLUM, 1) && flags[kFLAGS.ARIAN_SCALES] > 0) addButton(4, "Make Dye", makeDyes).hint("Ask him to make a special dye for you. (Only dyes here are for Arian) \n\nCost: 50 Gems.");
 		if (player.hasItem(consumables.BEEHONY)) addButton(5, consumables.PURHONY.shortName, rathazulMakesPureHoney).hint("Ask him to distill a vial of bee honey into a pure honey. \n\nCost: 25 Gems \nNeeds 1 vial of Bee Honey");
 		if (player.statusEffectv2(StatusEffects.MetRathazul) >= 5) addButton(6, "ProLactaid", rathazulMakesMilkPotion).hint("Ask him to brew a special lactation potion. \n\nCost: 250 Gems \nNeeds 5 Lactaids and 2 Purified LaBovas.");
@@ -390,7 +388,7 @@ private function RathazulMakesToothCursePotion():void {
 	player.destroyItems(consumables.VITAL_T, 1);
 	outputText("You run over to Ralthazul, showing him the ingredients you’ve obtained in your adventures. \"<i>Alright, that should do it. Give me just a moment please.\"</i> The wizened alchemist grinds up the teeth, and begins to mix the ingredients together. You take a small stroll around the camp to let him work, and within fifteen short minutes, Ralthazul comes to you, a smile on his old face. \n\n");
 	outputText("\"<i>Remember, you must completely submerge the injury in the mixture. And it needs some time to work.\"</i> He blinks, remembering something. \"<i>Oh, and this will hurt, in all probability. Most curses don’t go easily, and the mouth is rather sensitive.\"</i> He passes you a small vial of a silver-white liquid, with streaks of red running through it. \"<i>An hour, at least. Depending on the curse’s power.\"</i> \n\n");
-	//BelisaFollower.BelisaRalthPotionGet = true;
+	BelisaFollower.BelisaFollowerStage = 1;
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -398,9 +396,7 @@ private function RathazulMakesToothCursePotion():void {
 public function purificationByRathazulBegin():void {
 	outputText("Hoping the rodent-morph alchemist can assist you, you waste no time in approaching him. Rathazul looks up when he sees you, raising an eye curiously. \"<i>Is something the matter, [name]?</i>\"");
 	outputText("\n\nYou nod, and ask him if he knows anything about either killing pests or purifying the corruption from people as well as objects. At his bemused expression, you explain about Minerva and her conditions, repeating your query if he could possibly help you. Rathazul looks downcast and shakes his head.");
-
 	outputText("\n\n\"<i>I am afraid that I have never truly succeeded in my efforts to create a potion to purify the corrupted themselves.</i>\" The rat alchemist explains sadly. \"<i>The problem is there is very little, if anything, in this world that is capable of removing corruption from a consumer... But, I do have a theoretical recipe. If you can just find me some foodstuffs that would lower corruption and soothe the libido, and bring them to me, then I might be able to complete it. I can suggest pure giant bee honey as one, but I need at least two other items that can perform at least one of those effects. You said that the spring was able to keep your friend's corruption in check? Maybe some of the plants that grow there would be viable; bring me some samples, and a fresh dose of pure honey, and we’ll see what I can do.</i>\" He proclaims, managing to shake off his old depression and sound determined.");
-
 	outputText("\n\nWith that in mind, you walk away from him; gathering the items that could cure Minerva is your responsibility.");
 	flags[kFLAGS.MINERVA_PURIFICATION_RATHAZUL_TALKED] = 2;
 	doNext(camp.returnToCampUseOneHour);
@@ -412,13 +408,9 @@ private function rathazulMakesPurifyPotion():void {
 	player.destroyItems(consumables.C__MINT, 1);
 	player.destroyItems(consumables.PURPEAC, 1);
 	outputText("You hurry over to Rathazul, and tell him you have the items you think he needs. His eyes widen in shock as you show them to him, and he immediately snatches them from you without a word, hurrying over to his alchemical equipment. You watch, uncertain of what he’s doing, as he messes around with it, but within minutes he has produced a strange-looking potion that he brings back to you.");
-
 	outputText("\n\n\"<i>Have her swallow this, and it should kill the parasite within her at the very least.</i>\"");
-
 	outputText("\n\nYou take it gratefully, but can’t help asking what he means by ‘should’.");
-
 	outputText("\n\nRathazul shrugs helplessly. \"<i>This formula is untested; its effects are unpredictable... But, surely it cannot make things worse?</i>\"");
-
 	outputText("\n\nYou concede he has a point and take the potion; all you need to do now is give it to Minerva and hope for the best.");
 	player.createKeyItem("Rathazul's Purity Potion", 0, 0, 0, 0);
 	menu();

@@ -168,18 +168,16 @@ public class Belisa extends Monster
 		override public function get long():String
 		{
 			var str:String = "";
-			str += "Facing you is "+(BelisaFollower.BelisaFollowerStage > 0 ? "Belisa":"a slender Drider-woman")+": in a silk robe and Sunhat. Her backmost legs are off the ground, rubbing together nervously, but the ornate daggers in her hands smell like blood, and her abdomen is raised, ready to spit string.";
-			/*if (BelisaFollower.BelisaQuestOn) str += " Her fangs glint dangerously in the light, and she smiles despite her situation. She seems eager to bite.";
-			else */str += " The one fang of hers you can see is dripping a clear venom, but her sunhat covers most of her face, hiding her eyes from you.";
+			str += "Facing you is Belisa in a silk robe and Sunhat. Her backmost legs are off the ground, rubbing together nervously, but the ornate daggers in her hands smell like blood, and her abdomen is raised, ready to spit string.";
+			if (BelisaFollower.BelisaQuestOn) str += " Her fangs glint dangerously in the light, and she smiles despite her situation. She seems eager to bite.";
+			else str += " The one fang of hers you can see is dripping a clear venom, but her sunhat covers most of her face, hiding her eyes from you.";
 			return str;
 		}
 		
 		public function Belisa() 
 		{
-			this.a = "a";
-			this.short = "slender Drider-woman";
-			//this.a = "";
-			//this.short = "Belisa";
+			this.a = "";
+			this.short = "Belisa";
 			this.imageName = "puredrider";
 			this.long = "";
 			// this.plural = false;
@@ -197,7 +195,7 @@ public class Belisa extends Monster
 			this.hairLength = 24;
 			initStrTouSpeInte(80, 90, 100, 250);
 			initWisLibSensCor(100, 80, 100, 0);
-			this.weaponName = "Daggers";
+			this.weaponName = "daggers";
 			this.weaponVerb="slash";
 			this.weaponAttack = 60;
 			this.armorName = "silken robe";
