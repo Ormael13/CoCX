@@ -2202,10 +2202,8 @@ private function jojoCampMenu():void {
 	addButton(4, jojoDefense, jojoDefenseToggle).hint((player.hasStatusEffect(StatusEffects.JojoNightWatch) ? "Request him to stop guarding the camp.": "Request him to guard the camp at night."));
 	if (player.hasStatusEffect(StatusEffects.Infested)) addButton(5, "Purge", wormRemoval).hint("Request him to purge the worms from your body.");
 	if (player.cor > 10 && player.lust >= 33 && player.gender > 0 && flags[kFLAGS.DISABLED_JOJO_RAPE] <= 0) addButton(8, "Rape", jojoAtCampRape).hint("Rape the poor monk mouse-morph." + (player.cor < 25 ? "  Why would you do that?": ""));
-	if (player.lust >= 33 && monk <= -3 && flags[kFLAGS.JOJO_BIMBO_STATE] < 4)
+	if (player.lust >= 33 && monk <= -3)
         addButton(8, "Sex", pureJojoSexMenu).hint("Initiate sexy time with the mouse-morph.");
-    else if (flags[kFLAGS.JOJO_BIMBO_STATE] < 4)
-
 	addButton(14, "Leave", camp.campFollowers);
 }
 
