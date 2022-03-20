@@ -854,6 +854,25 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 			outputText("You cuddle in the afterglow with your Drider lover, but after a while, you gently pull yourself from her arms.  \n\n");
 			outputText("<i>\"You’ve got to go, huh?\"</i> Belisa asks, somewhat saddened. <i>\"Come back soon, [name].\"</i>\n\n");
 		}
+//This should only be an option pre-camp.
+		public function BelisaTalkHerSkittish():void {
+		clearOutput();
+		outputText("You ask your Drider friend why she’s so nervous around people, which gets you a tilted head, and a six-eyed eyeroll that lasts a few seconds before Belisa decides to respond.  \n\n"); 
+		outputText("<i>“Well, I’m sure that the always-present demon hordes have nothing to do with that”,</i> Belisa responds sarcastically. <i>“Or the constant deluge of corrupt filth they seem to spread wherever they go.” She pauses in mock-thought. “Could it be that every single Drider I’ve met since they came seems to have a penis, tits bigger than my head, and a seemingly infinite desire to tie me down and rape me? No, that couldn’t be it, could it?”</i>  \n\n");
+		outputText("You almost laugh at the dripping sarcasm, raising your hands and telling her that you get the point.  \n\n");
+		outputText("<i>“I mean…Really, [name]. My best defense is people like that not knowing where I am…so it’s kind of obvious…Right?”</i> You sigh, telling her that she’s made her point. <i>“Look…If I’ve learned anything on my own out here, it’s that I can’t really trust that the normal-looking person I see in the distance won’t try and turn me into some kind of fuck-toy…No matter how lonely that really is.”</i> \n\n");
+		outputText("It seems you’ve touched a nerve. You apologize for your words, and Belisa smirks a little, putting a hand over your mouth. <i>“It’s okay, [name]. Honestly, it was a little funny.”</i>  \n\n");
+		outputText("You head back to camp, a little embarrassed about that rather boneheaded question. \n\n");
+doNext(camp.returnToCampUseOneHour);
+}
+public function BelisaMagic():void {
+		clearOutput();
+		outputText("<i>“Oh, you want to learn the mystic arts?”</i> She gives you a smile. <i>“Well, I’m not the most accomplished mage, but...If it’ll help you, then I can help you along the path.”  \n\n"); 
+		outputText("You sit down with Belisa, and she begins to cover the basics of magic with you. Since she doesn’t know that much, she focuses on healing magic, guiding you through bone-knitting, magical stitching, and other healing techniques. An hour passes, and at the end of it, she stands, stretching her spider legs.  \n\n");
+		outputText("<i>“It’s best to learn in small doses.”</i> She says simply. <i>“I can’t risk either of us burning out, all things considered.”</i> You thank Belisa for her time, and she smiles happily. <i>“Oh, you’re welcome. It’s…nice to practice magic again like this.”</i> \n\n");
+		outputText(" \n\n");
+//Training with Belisa increases base INT up to 80, and can teach PCs the heal, Whitefire and blind spells. 
+}
 
 	public function timeChange():Boolean {
 		return false;
