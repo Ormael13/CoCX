@@ -1052,6 +1052,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const SlimeInsert:StatusEffectType               = mkCombat("Slime Inserted itself into opponent");
 		public static const Snow:StatusEffectType                      = mkCombat("Snow");
 		public static const Snowstorms:StatusEffectType                = mkCombat("Snowstorms");
+		public static const SparingBelisa:StatusEffectType             = mkCombat("SparingBelisa");
 		public static const StoneLust:StatusEffectType                 = mkCombat("Stone Lust");
 		public static const StoneSkin:StatusEffectType                 = mkCombat("Stone Skin");
 		public static const Stunned:StatusEffectType                   = mkCombat("Stunned");
@@ -1219,3 +1220,4 @@ import classes.StatusEffects.VampireThirstEffect;
 		}
 	}
 }
+

@@ -7,6 +7,7 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
 import classes.Scenes.Areas.Lake.*;
+import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.Holidays;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
@@ -47,6 +48,11 @@ use namespace CoC;
                     SceneLib.dianaScene.postNameEnc();
                 else
 				    SceneLib.dianaScene.repeatEnc();
+				return;
+			}
+			//Belisa
+			if (BelisaFollower.BelisaInGame == true && BelisaFollower.BelisaFollowerStage < 3) {// && rand(5) == 0
+				SceneLib.belisa.subsequentEncounters();
 				return;
 			}
 			//Helia monogamy fucks

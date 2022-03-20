@@ -16,6 +16,7 @@ import classes.PerkLib;
 import classes.StatusEffects;
 import classes.VaginaClass;
 import classes.Scenes.NPCs.BelisaFollower;
+import classes.Scenes.SceneLib;
 import classes.StatusEffects.Combat.WebDebuff;
 import classes.internals.WeightedDrop;
 
@@ -63,7 +64,7 @@ public class Belisa extends Monster
 		
 		private function belisaWebAttack():void
 		{
-			outputText("\"<i>Leave me alone!</i>\" She yells in her high-pitched voice, spraying a wide swathe of webbing at you. It sticks to your [skin.type] like glue.");
+			outputText("\"<i>"+(player.hasStatusEffect(StatusEffects.SparingBelisa)?"Slow down":"Leave me alone")+"!</i>\" She yells in her high-pitched voice, spraying a wide swathe of webbing at you. It sticks to your [skin.type] like glue.");
 			//Blind dodge change
 			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
 				outputText("She misses completely due to their blindness.");
@@ -102,9 +103,10 @@ public class Belisa extends Monster
 		}
 		
 		private function belisaWhitefire():void {
-			outputText("\"<i>Corruption? Burn!</i>\" She squeaks, and a sudden burst of white fire engulfs you. You hold your breath, turning your [face] away and closing your [eyes]. ");
+			outputText("\"<i>"+(player.hasStatusEffect(StatusEffects.SparingBelisa)?"Eat flames!":"Corruption? Burn")+"!</i>\" She squeaks, and a sudden burst of white fire engulfs you. You hold your breath, turning your [face] away and closing your [eyes]. ");
 			if (player.cor < 15) {
 				outputText("You take no damage from the cleansing flame, and she stares at you, absolutely baffled. \"<i>Wh-what? H-how?! You’re Pure?!</i>\"");
+				if (BelisaFollower.BelisaEncounternum == 2) BelisaFollower.BelisaEncounternum = 3;
 			}
 			else {
 				outputText("The fire burns your flesh, but you remain standing afterward. The spider-girl in front of you takes a half-step back, bringing one hand to her breast. \"<i>You...You’re still standing?</i>\"");
@@ -144,6 +146,7 @@ public class Belisa extends Monster
 		
 		override protected function performCombatAction():void
 		{
+			if (BelisaFollower.BelisaEncounternum == 3 && flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) SceneLib.belisa.postFightOptionsWhitefireWait();
 			var choice0:Number = rand(4);
 			switch (choice0) {
 				case 0:
@@ -168,18 +171,16 @@ public class Belisa extends Monster
 		override public function get long():String
 		{
 			var str:String = "";
-			str += "Facing you is "+(BelisaFollower.BelisaFollowerStage > 0 ? "Belisa":"a slender Drider-woman")+": in a silk robe and Sunhat. Her backmost legs are off the ground, rubbing together nervously, but the ornate daggers in her hands smell like blood, and her abdomen is raised, ready to spit string.";
-			/*if (BelisaFollower.BelisaQuestOn) str += " Her fangs glint dangerously in the light, and she smiles despite her situation. She seems eager to bite.";
-			else */str += " The one fang of hers you can see is dripping a clear venom, but her sunhat covers most of her face, hiding her eyes from you.";
+			str += "Facing you is Belisa in a silk robe and Sunhat. Her backmost legs are off the ground, rubbing together nervously, but the ornate daggers in her hands smell like blood, and her abdomen is raised, ready to spit string.";
+			if (BelisaFollower.BelisaQuestOn) str += " Her fangs glint dangerously in the light, and she smiles despite her situation. She seems eager to bite.";
+			else str += " The one fang of hers you can see is dripping a clear venom, but her sunhat covers most of her face, hiding her eyes from you.";
 			return str;
 		}
 		
 		public function Belisa() 
 		{
-			this.a = "a";
-			this.short = "slender Drider-woman";
-			//this.a = "";
-			//this.short = "Belisa";
+			this.a = "";
+			this.short = "Belisa";
 			this.imageName = "puredrider";
 			this.long = "";
 			// this.plural = false;
@@ -197,7 +198,7 @@ public class Belisa extends Monster
 			this.hairLength = 24;
 			initStrTouSpeInte(80, 90, 100, 250);
 			initWisLibSensCor(100, 80, 100, 0);
-			this.weaponName = "Daggers";
+			this.weaponName = "daggers";
 			this.weaponVerb="slash";
 			this.weaponAttack = 60;
 			this.armorName = "silken robe";
