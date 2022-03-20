@@ -206,10 +206,18 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 				outputText("<i>\"H-Hello?\"</i> She sees you, and swims slowly to the surface, poking her head up nervously. <i>\"Wh-what do you want?\"</i>");
 				BelisaAffection(5);
 			}
-			else if (BelisaAffectionMeter >= 10) outputText(" The Drider-girl looks up from the bottom of the lake, then swims up to the surface. She stays mostly underwater, but her shoulders are above the lake this time.");
-			else if (BelisaAffectionMeter >= 20) outputText(" Belisa, kicks off, ascending quickly to the surface of the water. She seems less nervous around you, and she steps onto the beach, shaking the water out of her hair. Her silken house bobs to the surface, but she doesn't seem to mind. <i>\"So, what brings you here, [name]?\"</i>");
-			else if (BelisaAffectionMeter >= 30) outputText(" Upon seeing you, Belisa's eyes widen slightly, and you can see her spider legs quicken. She smiles up at you, waving with one hand before she kicks off. She breaches the surface with a slight splash, and she quickly walks towards you. <i>\"Oh, hey!\"</i> She walks up to you, still hiding half her face, but the eyes you can see seem bright. <i>\"What brings you to my home?\"</i>");
-			else if (BelisaAffectionMeter >= 40) outputText("She doesn't even look up as the rock taps her shoulder. Belisa rises from the water as quickly as she can, bringing her silken home with her to the surface, then practically runs over to where you stand. Eyes widening, she yelps, digging her front four legs into the sand. She barely skids herself to a stop around ten feet or so away. Her back legs are tapping, and the side of her face you can see is practically beaming already, her perky C-cup breasts dripping wet from the lake . It seems Belisa really missed you. She tilts her pale-skinned head to one side, questioning, but willing to wait for you to make the first move.");
+			if (BelisaAffectionMeter >= 10 && BelisaAffectionMeter > 20) { 
+			outputText(" The Drider-girl looks up from the bottom of the lake, then swims up to the surface. She stays mostly underwater, but her shoulders are above the lake this time."); 
+			}
+			else if (BelisaAffectionMeter >= 20 && BelisaAffectionMeter > 30) {
+			outputText(" Belisa, kicks off, ascending quickly to the surface of the water. She seems less nervous around you, and she steps onto the beach, shaking the water out of her hair. Her silken house bobs to the surface, but she doesn't seem to mind. <i>\"So, what brings you here, [name]?\"</i>");
+			}
+			else if (BelisaAffectionMeter >= 30 && BelisaAffectionMeter > 40) { 
+			outputText(" Upon seeing you, Belisa's eyes widen slightly, and you can see her spider legs quicken. She smiles up at you, waving with one hand before she kicks off. She breaches the surface with a slight splash, and she quickly walks towards you. <i>\"Oh, hey!\"</i> She walks up to you, still hiding half her face, but the eyes you can see seem bright. <i>\"What brings you to my home?\"</i>");
+			}
+			else if (BelisaAffectionMeter >= 40 && BelisaAffectionMeter > 50) {
+			outputText("She doesn't even look up as the rock taps her shoulder. Belisa rises from the water as quickly as she can, bringing her silken home with her to the surface, then practically runs over to where you stand. Eyes widening, she yelps, digging her front four legs into the sand. She barely skids herself to a stop around ten feet or so away. Her back legs are tapping, and the side of her face you can see is practically beaming already, her perky C-cup breasts dripping wet from the lake . It seems Belisa really missed you. She tilts her pale-skinned head to one side, questioning, but willing to wait for you to make the first move.");
+			}
 			if (BelisaAffectionMeter < 30 && !BelisaShopOpen) {
 				outputText("\n\nBelisa turns her back on you, holding out a finger. You wait for a few moments as she opens a curtainlike opening on her silky bubble-home, and she comes back with a few small boxes. <i>\"I haven't found anyone I can trust in a while.\"</i> she explains. <i>\"But you...seem like a decent person. You may not know what a manaweaver is...But the long and short of it is that I can make some enchanted items with my silk.\"</i> She blushes slightly, continuing in a chipper voice. <i>\"I think, since you're out here as well, you could use my work as well. I can't just give these to you...But I would take gems for them.\"</i>\n\n");
 				BelisaShopOpen = true;
@@ -255,7 +263,8 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 				addButton(1, "Yes", BelisaTalkAbsisters);
 				addButton(2, "No", BelisaTalkYouEnd);
 			}
-			else doNext(camp.returnToCampUseOneHour);
+			else outputText("After some time talking with your Drider friend, you excuse yourself. You still need to keep watch over the portal. Belisa gives you an odd smile, smoothing her robe as she stands. \"<i>Come back when you have some more stories, Champion.</i>\" /n/n")
+		doNext(camp.returnToCampUseOneHour);
 		}
 		public function BelisaTalkAbsisters(): void {
 			outputText("You tell her Tyrantia’s name, and the youthful Drider in front of you freezes in place, her human eyes wide and her arms frozen in midair. <i>\"Did...Did you say...Tyrantia?\"</i> She looks on the verge of tears, and you instinctively put a hand on the desolate spider-girl’s shoulder.\n\n"); 
@@ -310,7 +319,7 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 				doNext(camp.returnToCampUseOneHour);
 			}
 			else {
-				outputText("You wrap your [arms] all the way around Belisa’s upper body, and she leans into you slightly. She returns the embrace for a second. <i>\"Sorry about that.\"</i> She wipes the tears from her face. <i>\"It’s been a while, but...Sometimes they still make me sad, just talking about those disgusting things that used to be my people.\"</i> She gently pulls back from your embrace. <i>\"Can we talk about something else?\"</i>\n\n");
+				outputText("You wrap your arms all the way around Belisa’s upper body, and she leans into you slightly. She returns the embrace for a second. <i>\"Sorry about that.\"</i> She wipes the tears from her face. <i>\"It’s been a while, but...Sometimes they still make me sad, just talking about those disgusting things that used to be my people.\"</i> She gently pulls back from your embrace. <i>\"Can we talk about something else?\"</i>\n\n");
 				doNext(BelisaTalk);
 			}
 		}
