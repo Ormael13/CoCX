@@ -748,15 +748,15 @@ public function exgartuanLactationAdjustment():void {
 		//(Increase)
 		if(rand(2) == 0 || player.hasStatusEffect(StatusEffects.Feeder)) {
 			outputText("Your nipples grow warm and sensitive, then start dripping milk into your [armor].  Exgartuan appears to be having some fun with you again...");
-			player.boostLactation(player.breastRows.length);
+			player.boostLactation(player.breastRows.length, true); //to make it less annoying for player
 		}
 		//(Stops)
 		else {
-			outputText("Your " + nippleDescript(0) + "s tighten up.  What's that demon up to?  Realization dawns on you when you realize your [allbreasts] no longer feel so 'full'.  Your lactation has stopped!");
+			outputText("Your " + nippleDescript(0) + "s tighten up.  What's that demon up to?  Realization dawns on you when you realize your [allbreasts] no longer feel so 'full'.");
 			boobs = player.breastRows.length;
 			while(boobs > 0) {
 				boobs--;
-				player.breastRows[boobs].lactationMultiplier = 0;
+				player.boostLactation(-player.breastRows.length);
 			}
 		}
 	}

@@ -354,38 +354,35 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				}
 				else player.addStatusValue(StatusEffects.Dysfunction, 1, -1);
 			}
-			if (!player.hasStatusEffect(StatusEffects.LactationReduction)) { //Lactation reduction
-				if (player.biggestLactation() > 0) player.createStatusEffect(StatusEffects.LactationReduction, 0, 0, 0, 0);
-			}
-			else if (player.biggestLactation() > 0 && !player.hasStatusEffect(StatusEffects.Feeder) && !player.hasPerk(PerkLib.MilkMaid) && player.pregnancyIncubation == 0) {
-				player.addStatusValue(StatusEffects.LactationReduction, 1, 1);
-				if (player.statusEffectv1(StatusEffects.LactationReduction) >= 48) {
-					if (!player.hasStatusEffect(StatusEffects.LactationReduc0)) {
-						player.createStatusEffect(StatusEffects.LactationReduc0, 0, 0, 0, 0);
-						if (player.biggestLactation() >= 1) outputText("\n<b>Your " + Appearance.nippleDescription(player, 0) + "s feel swollen and bloated, needing to be milked.</b>\n");
-						if (player.biggestLactation() <= 2) player.createStatusEffect(StatusEffects.LactationReduc1, 0, 0, 0, 0);
-						if (player.biggestLactation() <= 1) player.createStatusEffect(StatusEffects.LactationReduc2, 0, 0, 0, 0);
-						needNext = true;
-					}
-					player.boostLactation(-0.5 * player.breastRows.length / 24);
-					if (player.biggestLactation() <= 2.5 && !player.hasStatusEffect(StatusEffects.LactationReduc1)) {
-						outputText("\n<b>Your breasts feel lighter as your body's milk production winds down.</b>\n");
-						player.createStatusEffect(StatusEffects.LactationReduc1, 0, 0, 0, 0);
-						needNext = true;
-					}
-					else if (player.biggestLactation() <= 1.5 && !player.hasStatusEffect(StatusEffects.LactationReduc2)) {
-						outputText("\n<b>Your body's milk output drops down to what would be considered 'normal' for a pregnant woman.</b>\n");
-						player.createStatusEffect(StatusEffects.LactationReduc2, 0, 0, 0, 0);
-						needNext = true;
-					}
-					if (player.biggestLactation() < 1 && !player.hasStatusEffect(StatusEffects.LactationReduc3)) {
-						player.createStatusEffect(StatusEffects.LactationReduc3, 0, 0, 0, 0);
-						outputText("\n<b>Your body no longer produces any milk.</b>\n");
-						player.removeStatusEffect(StatusEffects.LactationReduction);
-						needNext = true;
-					}
-				}
-			}
+            //Lactation reduction
+            if (player.biggestLactation() > 0 && !player.hasStatusEffect(StatusEffects.Feeder) && !player.hasPerk(PerkLib.MilkMaid) && player.pregnancyIncubation == 0) {
+                if (!player.hasStatusEffect(StatusEffects.LactationReduction))
+                    player.createStatusEffect(StatusEffects.LactationReduction, 0, 0, 0, 0);
+                else {//reduction effect
+                    player.addStatusValue(StatusEffects.LactationReduction, 1, 1); //increase timer
+                    //first warning
+                    if (player.statusEffectv1(StatusEffects.LactationReduction) == 48 && player.biggestLactation() >= 1)
+                        outputText("\n<b>Your " + Appearance.nippleDescription(player, 0) + "s feel swollen and bloated, needing to be milked.</b>\n");
+                    if (player.statusEffectv1(StatusEffects.LactationReduction) > 48) {
+                        var before:Number = player.biggestLactation();
+                        player.boostLactation(-0.5 * player.breastRows.length / 24); //decrease by 0.5 each day
+                        var after:Number = player.biggestLactation();
+                        //compare and show message
+                        if (before > 2.5 && after <= 2.5) {
+						    outputText("\n<b>Your breasts feel lighter as your body's milk production winds down.</b>\n");
+						    needNext = true;
+                        }
+                        if (before > 1.5 && after <= 1.5) {
+						    outputText("\n<b>Your body's milk output drops down to what would be considered 'normal' for a pregnant woman.</b>\n");
+						    needNext = true;
+                        }
+                        if (before > 1.0 && after <= 1.0) {
+						    outputText("\n<b>Your body no longer produces any milk.</b>\n");
+						    needNext = true;
+                        }
+                    }
+                }
+            }
 			if (player.hasStatusEffect(StatusEffects.CuntStretched)) { //Cunt stretching stuff
 				player.addStatusValue(StatusEffects.CuntStretched, 1, 1);
 				if (player.vaginas.length > 0) {

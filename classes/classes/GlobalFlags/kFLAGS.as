@@ -63,7 +63,7 @@ public static const NUMBER_OF_TIMES_MET_SCYLLA:int                              
 public static const TIMES_ENCOUNTED_TAMANIS_DAUGHTERS:int                           =   55; // Times encountered Tamani's Daughters
 public static const TAMANI_TIMES_HYPNOTISED:int                                     =   56; // Tamani Hypno Level" Description="increases by 1 for each hypno event.  1-3 slight lust raises, 4-9 medium lust raises, 10-19 super high lust raises, 20+ high chance of autorape with special scene.
 public static const TAMANI_DAUGHTER_PREGGO_COUNTDOWN:int                            =   57; // Daughter Pregnancy Counter" Description="they will not return until this countdown timer is 0.  Same length as Tamani's incubation &#x2014; approx 1 week.
-public static const UNKNOWN_FLAG_NUMBER_00058:int                                   =   58; // Times In Goblin Daughter 'CHAIR'
+public static const TAMANI_DAUGHTERS_TIMES_LOST:int                                   =   58; // Times In Goblin Daughter 'CHAIR'
 public static const TIMES_FUCKED_TAMANIS_DAUGHTERS:int                              =   59; // TimeSleptWithDaughters
 public static const UNABLE_TO_MASTURBATE_BECAUSE_CENTAUR:int                        =   60; // Fail Masturbation As Centaur?
 public static const CERULEAN_POTION_BAD_END_FUTA_COUNTER:int                        =   61; // Cerulean Potion Bad-End Futa Count
@@ -370,8 +370,8 @@ public static const SHOULDRA_VAGINAL_POSSESSIONS:int                            
 public static const SHOULDRA_HERMSEX_COUNT:int                                      =  362; //
 public static const SHOULDRA_USES_YOUR_GIANT_COCK_COUNT:int                         =  363; //
 public static const TIMES_MET_OOZE:int                                              =  364; //
-public static const UNKNOWN_FLAG_NUMBER_00365:int                                   =  365; // COUNTDOWN TILL MAIDEN FOLLOWUP
-public static const UNKNOWN_FLAG_NUMBER_00366:int                                   =  366; // TIMES MET GHOSTGIRL MAIDEN
+public static const SHOULDRA_MAIDEN_COUNTDOWN:int                                   =  365; // COUNTDOWN TILL MAIDEN FOLLOWUP
+public static const SHOULDRA_MAIDEN_TIMES_MET:int                                   =  366; // TIMES MET GHOSTGIRL MAIDEN
 public static const ISABELLA_TIMES_OFFERED_FOLLOWER:int                             =  367; // unused right now
 public static const ISABELLA_AFFECTION:int                                          =  368; //
 public static const ISABELLA_FOLLOWER_ACCEPTED:int                                  =  369; //
