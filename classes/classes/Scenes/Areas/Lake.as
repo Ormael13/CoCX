@@ -51,7 +51,7 @@ use namespace CoC;
 				return;
 			}
 			//Belisa
-			if (BelisaFollower.BelisaInGame == true && BelisaFollower.BelisaFollowerStage < 3 && rand(5) == 0) {
+			if (BelisaFollower.BelisaInGame == true && BelisaFollower.BelisaFollowerStage < 3) {// && rand(5) == 0
 				SceneLib.belisa.subsequentEncounters();
 				return;
 			}
