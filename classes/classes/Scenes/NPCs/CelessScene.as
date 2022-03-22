@@ -163,7 +163,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		menu();
 		addButton(0,"Appearance",celessChildAppearance)
 		if (isAdult) {
-			outputText("\n\n<i>\" "+player.mf("Dad", "Mom") ", now that I'm fully grown...I can feel power surging through my horn. I don't know how it works, exactly...But I can create powerful items for you, real actual artefacts. Should you ever find <b>radiant shards</b> and a decent medium I could use my innate magic to craft an armament of legend. Simply ask me if you ever want one." +
+			outputText("\n\n<i>\" "+player.mf("Dad", "Mom")+", now that I'm fully grown...I can feel power surging through my horn. I don't know how it works, exactly...But I can create powerful items for you, real actual artefacts. Should you ever find <b>radiant shards</b> and a decent medium I could use my innate magic to craft an armament of legend. Simply ask me if you ever want one." +
 					" please don't ask me how I know this. I think it's just innate knowledge or something my dad magically passed down to me.\"</i>");
 			if (isCorrupt || player.cor >= 20) {
 				addButton(1, "Incest", incestMenu);

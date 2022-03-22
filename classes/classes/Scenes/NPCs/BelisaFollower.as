@@ -90,7 +90,7 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		
 		public function BelisaAffection(changes:Number = 0):Number {
 			BelisaAffectionMeter += changes;
-			if (BelisaAffectionMeter > 50) BelisaAffectionMeter = 50;
+			if (BelisaAffectionMeter > 70) BelisaAffectionMeter = 70;
 			if (BelisaAffectionMeter < 0) BelisaAffectionMeter = 0;
 			return BelisaAffectionMeter;
 		}
@@ -249,8 +249,8 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 			addButton(3, "Her", BelisaTalkHer);
 			if (BelisaAffectionMeter >= 50) addButton(6, "Injuries", BelisaTalkInjuries);
 			else addButtonDisabled(6, "???", "Req. 50+ affection.");
-			if (BelisaQuestComp && BelisaAffectionMeter >= 80) addButton(7, "ComeW/Me", BelisaComeCamp);
-			else addButtonDisabled(7, "???", "Req. 80+ affection and healing her tooth injury.");
+			if (BelisaQuestComp && BelisaAffectionMeter >= 80 && player.statusEffectv1(StatusEffects.TelAdre) >= 1 && flags[kFLAGS.HEXINDAO_UNLOCKED] >= 1 && player.hasStatusEffect(StatusEffects.MetWhitney) && player.statusEffectv1(StatusEffects.MetWhitney) > 1) addButton(7, "ComeW/Me", BelisaComeCamp);
+			else addButtonDisabled(7, "???", "Req. 80+ affection, healing her tooth injury and finding: Farm, Tel'Adre, He'Xin'Dao.");
 			addButton(8, "Back", Encounterback);
 		}
 		
@@ -359,8 +359,8 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 				doNext(camp.returnToCampUseOneHour);
 			}
 			else {
-				outputText("You ask her about her other fang, and why she hides it from you. Belisa instinctively turns away, but you continue talking. You tell her that  it doesn’t make her any less of a person. That you care about her, and want to see if you can help. Slowly, surely, Belisa turns around, facing towards you. She slowly pulls back her lip to reveal the right side of her mouth. Several teeth are broken, cracks along the enamel, but worst of all is the fang. She’s hidden it under a layer of silk bandages, but as she pulls it back, you can’t help but wince. Belisa’s fang is all but torn out of her mouth, and poison that would normally go into the tooth is instead dripping. ");
-				outputText("Belisa dabs at the wound with her silk bandage, but as you get closer, she turns away, quickly replacing the bandage and turning back to you as if nothing’s wrong.\n\n");
+				outputText("You ask her about her other fang, and why she hides it from you. Belisa instinctively turns away, but you continue talking. You tell her that  it doesn’t make her any less of a person. That you care about her, and want to see if you can help. Slowly, surely, Belisa turns around, facing towards you. She slowly pulls back her lip to reveal the right side of her mouth. Several teeth are broken, cracks along the enamel, but worst of all is the fang. She’s hidden it under a layer of silk bandages, but as she pulls it back, you can’t help but wince. ");
+				outputText("Belisa’s fang is all but torn out of her mouth, and poison that would normally go into the tooth is instead dripping. Belisa dabs at the wound with her silk bandage, but as you get closer, she turns away, quickly replacing the bandage and turning back to you as if nothing’s wrong.\n\n");
 				menu();
 				addButton(1, "Comfort", BelisaTalkInjuriesComfort);
 				addButton(2, "Heal", BelisaTalkInjuriesHeal);
@@ -370,8 +370,8 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		
 		public function BelisaTalkInjuriesComfort():void {
 			clearOutput();
-			outputText("You tell her that you had no idea how bad it was. \"Yeah, I know. That was kind of the point.\" She sighs. \"But now you know…\"  \n\n"); 
-			outputText("You ask her what happened, how she’d managed to injure herself so badly. \"Demons\", she spits. \"Demons thought it would be funny to make the little Drider bite metal, then stomp on her jaw.\" She closes her eyes. \"And now...I can’t even bite my food properly.\" \n\n"); 
+			outputText("You tell her that you had no idea how bad it was. <i>\"Yeah, I know. That was kind of the point.\"</i> She sighs. <i>\"But now you know…\"</i>\n\n"); 
+			outputText("You ask her what happened, how she’d managed to injure herself so badly. <i>\"Demons\"</i>, she spits. <i>\"Demons thought it would be funny to make the little Drider bite metal, then stomp on her jaw.\"</i> She closes her eyes. <i>\"And now...I can’t even bite my food properly.\"</i>\n\n"); 
 			outputText("You put a hand on her shoulder and pull her into you. You tell Belisa that even though she has trouble with food, she should never worry about finding the good, even now. You tell her about her accomplishments, and how tough she is, living on her own in these times. Your words put a small smile on the little Drider’s face, but she turns away. You excuse yourself and walk back to camp, but at the back of your mind, a question rises. Could you help her?\n\n"); 
 			BelisaAffection(5);
 			doNext(camp.returnToCampUseOneHour);
@@ -379,8 +379,8 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		public function BelisaTalkInjuriesHeal():void {
 			clearOutput();
 			outputText("You put your hands on Belisa’s cheeks. You pinch them slightly, smooshing her soft cheeks, and you tell Belisa that if it matters that much to her, you’ll help. She begins to tear up, her lips quivering, and you lean in, resting your forehead against hers. You tell her that you can’t promise anything, but that you know some people who may be able to help. You ask her what happened, and she whimpers, barely moving her mouth as she buries her face into your [breasts].\n\n");
-			outputText("\"Demons...They attacked my village\", she whispers this, her arms wrapped tightly around your torso. \"They took my sisters, corrupted my people...I ran, like my sisters told me to, but...some of them found me. They caught me, took my head and…\" She begins to cry. \"They took a sheet of metal, made me bite down on it, then threw my face into a stone!\" She nuzzles your shoulder, trying to wipe her tears away. \"I got them with some whitefire...but…There was a succubus with them. She cursed me, took my mouth in her hands and made sure it wouldn’t heal.\"\n\n");
-			outputText("You take her cheeks in your hands, looking into the drider’s eyes. You promise her that you’ll do what you can to make her smile whole again. \"Okay...I’ll be waiting here for you.\"\n\n");
+			outputText("<i>\"Demons...They attacked my village\"</i>, she whispers this, her arms wrapped tightly around your torso. <i>\"They took my sisters, corrupted my people...I ran, like my sisters told me to, but...some of them found me. They caught me, took my head and…\"</i> She begins to cry. <i>\"They took a sheet of metal, made me bite down on it, then threw my face into a stone!\"</i> She nuzzles your shoulder, trying to wipe her tears away. <i>\"I got them with some whitefire...but…There was a succubus with them. She cursed me, took my mouth in her hands and made sure it wouldn’t heal.\"</i>\n\n");
+			outputText("You take her cheeks in your hands, looking into the drider’s eyes. You promise her that you’ll do what you can to make her smile whole again. <i>\"Okay...I’ll be waiting here for you.\"</i>\n\n");
 			outputText("You think to yourself, who could help you figure this out?\n\n");
 			outputText("The old alchemist is an obvious choice\n\n");
 			if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) outputText("Ayane can heal curses. She'd be more than willing to help if she could.\n\n");
@@ -406,13 +406,12 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 			else {
 				outputText("<i>\"You just want to...hang out?\"</i> Belisa seems taken aback by this, but she smiles slightly. <i>\"I...wouldn't be opposed to spending some time with you. What are you thinking of doing?\"</i>\n\n");
 				menu();
-				if (BelisaAffectionMeter >= 30) addButton(1, "Spar", BelisaHangSpar);
-				else addButtonDisabled(1, "???", "Req. 30+ affection.");
+				addButton(1, "Spar", BelisaHangSpar);
 				addButton(2, "Fish", BelisaHangFish);
 				addButton(3, "Weaving", BelisaHangWeave);
 				addButton(6, "Magic", BelisaHangMagic);
 				addButton(7, "House", BelisaHangHouse);
-				addButton(8, "Back", BelisaHangBack);
+				addButton(8, "Back", Encounterback);
 			}
 		}
 
@@ -438,7 +437,7 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 			if (player.hasGills()) outputText(" She brings an odd bunch of silk down with her, and you look at it curiously. She drapes it over your head, and you breathe in a lungful of fresh air. You point at your gills, and she nods, taking a breath herself. She gives you a thumbs-up, and doesn’t give you the air-bag again.\n\n");
 			else outputText(" You dive down, deep into the lake with Belisa. Eventually, you begin to run low on air, and...she keeps going down! You turn back, but Belisa grabs your foot, pulling you down to her. The spider-girl produces an odd, silky bag, draping it over your head. You struggle at first, but you quickly realize that the bag’s...full of breathable air? She takes it off your head, and giggles, sending bubbles back up to the surface of the water.\n\n");
 			outputText("You spend an hour under the water with Belisa, and she swims with you. You catch a few fish, but you can’t hold a candle to the water-spider. Her eight lower limbs move precisely, and she swims circles around you. You miss your spear throw a few times, and when you do, she gives you a bright laugh, swimming over to your spear and bringing it back to you. It’s odd, but a lot of fun, just throwing spears and swimming deep under the lake. Eventually, you point back to the surface. Belisa’s bright smile shrinks a little, but she nods, guiding you back to her silky orb.\n\n");
-			outputText("\"I forgot how nice it was to have a fishing partner\", she says simply, taking your hand as you leave the water together. \"Come back soon, okay?\" She looks into your eyes, then pulls her hand away. \"It gets lonely out here.\" You smile to yourself as Belisa dives back into the water, and head back to camp.\n\n");
+			outputText("<i>\"I forgot how nice it was to have a fishing partner\"</i>, she says simply, taking your hand as you leave the water together. <i>\"Come back soon, okay?\"</i> She looks into your eyes, then pulls her hand away. <i>\"It gets lonely out here.\"</i> You smile to yourself as Belisa dives back into the water, and head back to camp.\n\n");
 			inventory.takeItem(consumables.FREFISH, camp.returnToCampUseOneHour);
 		}
 		
@@ -479,7 +478,7 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 			clearOutput();
 			outputText("<i>\"Oh, you’re wondering about the house?\"</i> Belisa seems surprised you’re taking an interest in her dwelling. <i>\"I made it from a bit of...Well, no...A lot of silk, some spongy wood from the swamp, and bits and pieces here and there.\"</i> She motions to you, and you follow her onto her vessel-home.\n\n");
 			outputText("The inside is surprisingly warm and cozy, wooden floor clearly insulated from the water underneath. Instead of a bed, a hammock hangs from the ceiling, easily large enough to fit Belisa twice over. To one side, various knitting and weaving materials sit in corkboard boxes, and a desk, clearly modified to fit a Drider, is tucked away in one corner.\n\n");
-			outputText("\"Oh! And here’s the fun part!\" Belisa taps one of the wooden panels, then pulls a hatch open. There’s water underneath, clearly opening to the rest of the lake. Belisa grins, grabbing a spool with rope attached to it. She turns the spool, and…nothing happens. She keeps turning it, and you begin to feel a slight pressure increase in your [ears]. Curious, you open the hatch, only to see the bottom of the lake, far closer than it had been before.\n\n");
+			outputText("<i>\"Oh! And here’s the fun part!\"</i> Belisa taps one of the wooden panels, then pulls a hatch open. There’s water underneath, clearly opening to the rest of the lake. Belisa grins, grabbing a spool with rope attached to it. She turns the spool, and…nothing happens. She keeps turning it, and you begin to feel a slight pressure increase in your [ears]. Curious, you open the hatch, only to see the bottom of the lake, far closer than it had been before.\n\n");
 			outputText("<i>\"Cool, right?!\"</i> Belisa asks, a huge smile on the half of her face she’ll let you see. <i>\"My silk has an odd effect on the water. No matter how deep we go, we’ll have breathable air for a long time. I don’t know how it works, but…It lasts for over a day if I don’t do anything strenuous.\"</i> Now you understand how your Drider friend’s been able to remain hidden for so long.\n\n");
 			outputText("For a while, you sit in Belisa’s odd, but surprisingly cozy home, chatting with your Drider friend. Eventually, you tell her that you need to leave. Belisa nods, and brings the silk bubble back to the surface. As you step out onto the shore, you realize it’s been nearly an hour. You excuse yourself, and Belisa waves as you leave.\n\n");
 			BelisaAffection(5);
@@ -593,6 +592,8 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		public function BelisaSetUp():void {
 			clearOutput();
 			outputText("You tell Belisa that she’ll need to set up her house before nightfall...Unless she’d rather sleep in your [Tent/Cabin] tonight. She blinks once, twice, then the Drider launches herself off the silky house-boat and into the water, screaming in embarrassment. You decide to leave her to it, laughing to yourself as you walk off and onto dry land.  \n\n");
+			outputText("<b>Belisa has joined you as a lover.</b>\n\n");
+			BelisaFollowerStage = 3;
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
