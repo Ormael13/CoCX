@@ -26,10 +26,10 @@ public function EnterOfTheChiChi():void {
 	outputText("You step into the arena once more, but this time your opponent is slightly different. While of small stature like other mice you’ve met in He’Xin’Dao, this mouse morph has pinkish red hair and oriental clothes. She wears a pair of spiked gloves, her fists are clenched slightly at her sides, and she clearly sports a pair of C cup breasts under her clothes. The announcer screams out the participant's names as usual, their enthusiastic introductions is something you’ve grown used to.\n\n");
 	outputText("\"<i>In the left corner, coming from another world, [name], Champion of Ingnam! And in the right corner, from a land far away to the east, the martial arts master, Chi Chi of the four winds!</i>\"\n\n");
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 0) {
-		outputText("Hey that's the waitress of the exotic food restaurant. Chi Chi adopts a battle stance as she catches fire, turning into a living inferno.\n\n");
-		outputText("\"<i>Get ready for this one dishes will be EXTRA spicy! You prefer inferno or Hell? Because I’m about to leave you with fifth-degree burns!!!</i>\"");
+		outputText("You recognize her from the exotic restaraunt here in town. Chi Chi adopts a battle stance as she catches fire, turning into a living inferno.\n\n");
+		outputText("\"<i>Today's dishes will be EXTRA spicy. I hope you're used to the heat [name], because I’m about to leave you with fifth-degree burns!!!</i>\"");
 	}
-	else outputText("Chi Chi, as it’s obviously her name, adopts a battle stance. Her fists, tail and legs suddenly light aflame! Gosh a fire mouse? Something tells you this is going to hurt.");
+	else outputText("Chi Chi, as it’s obviously her name, adopts a battle stance. Her fists, tail and legs suddenly light aflame. You blink in surprise as the heat washes over you. Something tells you this is going to hurt.");
 	flags[kFLAGS.CHI_CHI_AFFECTION] = 0;
 	flags[kFLAGS.CHI_CHI_LVL_UP] = 1;
 	startCombat(new ChiChi());
@@ -51,12 +51,12 @@ public function LostFirstFight():void {
 	spriteSelect(SpriteDb.s_chichi);
 	clearOutput();
 	if (player.HP < 1) {
-		outputText("\"<i>Is that all you’ve got? How dare you even call yourself a champion? You barely know how to fight! You tried well, albeit, not well enough. If you intend to actually call yourself a warrior, perhaps someday you should seek me out in town, I could teach you...  if you have knowledge of the basics that is, I don’t teach my skill to just anyone.</i>\"\n\n");
+		outputText("\"<i>Is that all you’ve got? How dare you even call yourself a champion? You barely know how to fight! You tried but that was <i>not</i> enough. If you intend to call yourself a true warrior, you should seek me out in town. I could teach you...  if you already know the basics. I don’t have time for complete novices.</i>\"\n\n");
 		outputText("The mouse girl leaves you half conscious on the arena sand as the medics come to your rescue.\n\n");
 	}
 	else {
 		outputText("Declared the winner, the burning mouse approaches you. She looks angry and it's likely because you forfeited.\n\n");
-		outputText("\"<i>I’m disappointed. You pretend to be a champion, yet you seem to consider battles a kid’s game. Do you have any idea what would have happened in a real fight? You tried well, albeit, not well enough because obviously you cowered down. I’m interested in you however, so perhaps someday you should seek me out in town. I could teach you how to fight better than that...  if you have knowledge of the basics that is, I don’t teach my skill to just anyone.</i>\"\n\n");
+		outputText("\"<i>I’m disappointed. You pretend to be a champion, yet you seem to consider battles a kid’s game. Do you have any idea what would have happened in a real fight? No demon would back off like this. You seem to have some potential at least, so perhaps someday you should seek me out. I could teach you...  if you already know the basics. I don’t have time for complete novices</i>\"\n\n");
 		outputText("The fiery mouse girl leaves you there as she heads out of the ring.\n\n");
 	}
 	flags[kFLAGS.CHI_CHI_AFFECTION] = 20;
