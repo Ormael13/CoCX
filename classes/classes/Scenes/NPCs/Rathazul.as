@@ -238,10 +238,14 @@ private function rathazulWorkOffer():Boolean {
 	//Bee honey
 	if (player.hasItem(consumables.BEEHONY)) {
 		outputText("Rathazul offers, \"<i>If you're in need of a pure honey, I can distill the regular bee honey. You'll also need 25 gems up front.</i>\"\n\n");
+		spoken = true;
+		totalOffers++;
 	}
 	//Pro Lactaid & Centaurinum & Scorpinum
 	if (player.statusEffectv2(StatusEffects.MetRathazul) >= 5) {
 		outputText("The rat mentions, \"<i>You know, I could make something new if you're willing to hand over two of vials labeled \"Equinum\", one vial of minotaur blood and one hundred gems. Or two vials of Bee Honey, two vials of Snake Oil and 100 gems. Or five bottles of Lactaid and two bottles of purified LaBova along with 250 gems.</i>\"\n\n");
+		spoken = true;
+		totalOffers++;
 	}
 	//Reducto
 	if(reductos) {
