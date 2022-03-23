@@ -160,12 +160,14 @@ public function nagaEncounter():void {
 	if (flags[kFLAGS.SAMIRAH_FOLLOWER] > 9) {
 		outputText("You are walking through the shifting sands of the desert when you hear a sudden hiss behind you.  Not expecting to be attacked by a snake, you quickly leap forward and turn around.\n\n");
 		outputText("To your surprise, what you see is not Samirah even thou she looks very similar - a half-human half-snake hybrid with some purple lines over her body.  She surges up and hisses even louder than before, showing off a pair of formidable fangs dripping with venom and making purple lines on her body glowing faintly.");
+		return;
 	}
 	//If player's last fight did not involve them being a naga
 	if(player.statusEffectv1(StatusEffects.Naga) == 0) {
 		if(!player.hasStatusEffect(StatusEffects.Naga)) player.createStatusEffect(StatusEffects.Naga,0,0,0,0);
 		outputText("You are walking through the shifting sands of the desert when you hear a sudden hiss behind you.  Expecting to be attacked by a snake, you quickly leap forward and turn around.\n\n");
 		outputText("To your surprise, what you see is not exactly a snake; it's a naga - a half-human half-snake hybrid.  She surges up and hisses even louder than before, showing off a pair of formidable fangs dripping with venom. Gazing at her long and slender reptilian body swaying on the sand like quicksilver, you can only stand still in admiration of this terrible wonder.");
+		return;
 	}
 	//If player was a naga during last encounter
 	//And isnt now
@@ -1164,7 +1166,7 @@ public function naggaTease():void {
 		if (monster.hasStatusEffect(StatusEffects.HypnosisNaga)) damage *= 0.5;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		monster.teased(monster.lustVuln * damage);
-        if (crit == true) outputText(" <b>Critical!</b>");
+        if (crit) outputText(" <b>Critical!</b>");
         SceneLib.combat.teaseXP(1 + SceneLib.combat.bonusExpAfterSuccesfullTease());
     }
     //Nuttin honey
