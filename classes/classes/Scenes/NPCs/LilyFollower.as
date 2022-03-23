@@ -21,7 +21,7 @@ import classes.display.SpriteDb;
 		public static var LilyAffectionMeter:int;
 		public static var LilySubmissiveness:int;
 		public static var LilyTalked:Boolean;
-		public static var LilyFollower:Boolean;
+		public static var LilyFollowerState:Boolean;
 		public static var LilyExhibitionAble:Boolean;
 		public static var Lily3SomeSidonie:Boolean;
 		public static var Lily3SomeIzma:Boolean;
@@ -38,7 +38,7 @@ import classes.display.SpriteDb;
 			LilyAffectionMeter = 0;
 			LilySubmissiveness = 0;
 			LilyTalked = false;
-			LilyFollower = false;
+			LilyFollowerState = false;
 			LilyExhibitionAble = false;
 			Lily3SomeSidonie = false;
 			Lily3SomeIzma = false;
@@ -52,7 +52,7 @@ import classes.display.SpriteDb;
 				"LilyAffectionMeter": LilyAffectionMeter,
 				"LilySubmissiveness": LilySubmissiveness,
 				"LilyTalked": LilyTalked,
-				"LilyFollower": LilyFollower,
+				"LilyFollowerState": LilyFollowerState,
 				"LilyExhibitionAble": LilyExhibitionAble,
 				"Lily3SomeSidonie": Lily3SomeSidonie,
 				"Lily3SomeIzma": Lily3SomeIzma
@@ -68,7 +68,7 @@ import classes.display.SpriteDb;
 				LilyAffectionMeter = o ["LilyAffectionMeter"];
 				LilySubmissiveness = o["LilySubmissiveness"];
 				LilyTalked = o ["LilyTalked"];
-				LilyFollower = o["LilyFollower"];
+				LilyFollowerState = o["LilyFollowerState"];
 				LilyExhibitionAble = o ["LilyExhibitionAble"];
 				Lily3SomeSidonie = o ["Lily3SomeSidonie"];
 				Lily3SomeIzma = o ["Lily3SomeIzma"];
