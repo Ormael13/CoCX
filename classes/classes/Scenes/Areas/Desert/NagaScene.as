@@ -1166,7 +1166,7 @@ public function naggaTease():void {
 		if (monster.hasStatusEffect(StatusEffects.HypnosisNaga)) damage *= 0.5;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
 		monster.teased(monster.lustVuln * damage);
-        if (crit == true) outputText(" <b>Critical!</b>");
+        if (crit) outputText(" <b>Critical!</b>");
         SceneLib.combat.teaseXP(1 + SceneLib.combat.bonusExpAfterSuccesfullTease());
     }
     //Nuttin honey
