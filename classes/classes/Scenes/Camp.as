@@ -3692,7 +3692,7 @@ public class Camp extends NPCAwareContent{
 					return;
 				} else outputText("Luna hugs you tightly, almost possessively so as you both doze off to sleep.");
 			} else if (flags[kFLAGS.SLEEP_WITH] == "Samirah" && flags[kFLAGS.SAMIRAH_FOLLOWER] > 9) {
-				outputText("As you both head to sleep, Samirah slithers to you and coils her tail around " + (player.lowerBody == 4)? "yours":"your lower half" +", wrapping her arms around your torso as she rests her head on your shoulder. Her body is cold and she looks at you as if in a daze.");
+				outputText("As you both head to sleep, Samirah slithers to you and coils her tail around " + ((player.lowerBody == 3)? "yours" : "your lower half") + ", wrapping her arms around your torso as she rests her head on your shoulder. Her body is cold and she looks at you as if in a daze.");
 				if (player.isNaga()) outputText(" She’s not alone either. It indeed took you a while to realise that you are also cold blooded now. The cold night air sure puts you in a similar state as of late.");
 				outputText("\n\n\"<i>Sweet dreams [name], till morning and sunshine come.</i>\"\n");
 			} else if (flags[kFLAGS.SLEEP_WITH] == "Ember" && flags[kFLAGS.EMBER_AFFECTION] >= 75 && followerEmber()) {
