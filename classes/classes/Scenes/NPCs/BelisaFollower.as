@@ -248,7 +248,8 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 			else addButtonDisabled(2, "???", "Req. 15+ affection.");
 			addButton(3, "Her", BelisaTalkHer);
 			if (BelisaAffectionMeter >= 50) addButton(6, "Injuries", BelisaTalkInjuries);
-			else addButtonDisabled(6, "???", "Req. 50+ affection.");
+			else if (BelisaQuestComp) addButtonDisabled(6, "Injuries", "You've already solved her tooth problem!");
+			else  addButtonDisabled(6, "???", "Req. 50+ affection.");
 			if (BelisaQuestComp && BelisaAffectionMeter >= 80 && player.statusEffectv1(StatusEffects.TelAdre) >= 1 && flags[kFLAGS.HEXINDAO_UNLOCKED] >= 1 && player.hasStatusEffect(StatusEffects.MetWhitney) && player.statusEffectv1(StatusEffects.MetWhitney) > 1) addButton(7, "ComeW/Me", BelisaComeCamp);
 			else addButtonDisabled(7, "???", "Req. 80+ affection, healing her tooth injury and finding: Farm, Tel'Adre, He'Xin'Dao.");
 			addButton(8, "Back", Encounterback);
@@ -257,13 +258,13 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		public function BelisaTalkYou():void {
 			clearOutput();
 			outputText("<i>\"Oh? You want to talk about yourself?\"</i> Belisa brings a hand to her mouth, a smirk on her face. <i>\"How very arrogant.\"</i> You raise one eyebrow, and she chuckles, the smirk fading from her face. <i>\"I’m kidding, [name]. I’d love to hear about your adventures.\"</i> You talk about the various demons you’ve faced, Zetaz and the portal, and even some stories from your childhood in Ignam. Belisa is a great listener. She laughs when you tell a joke, or when the story turns serious, asks questions, and listens with rapt attention when you talk about the other people you’ve met along your travels.\n\n");
-			if (TyrantiaFollower.TyrantiaFollowerStage > 0 && TyrantiaFollower.TyraniaIsRemovedFromThewGame == false) {// && !BelisaToldTyrantia
+			if (TyrantiaFollower.TyrantiaFollowerStage > 0 && !TyrantiaFollower.TyraniaIsRemovedFromThewGame) {// && !BelisaToldTyrantia
 				outputText("You talk about the battlefield, and about a giant Drider you met there. Belisa leans forward, her eyes wide. <i>\"Wait...You said a giant Drider? Was she corrupted?\"</i> You tell her, reluctantly, that yes, the Drider giantess oozes corruption from her very being. Despite this, she seemed to be a decent person, and never tried anything with you. This gets Belisa’s interest, and she looks down. <i>\"...What is her name, did you get it?\"</i>\n\n");
 				menu();
 				addButton(1, "Yes", BelisaTalkAbsisters);
 				addButton(2, "No", BelisaTalkYouEnd);
 			}
-			else outputText("After some time talking with your Drider friend, you excuse yourself. You still need to keep watch over the portal. Belisa gives you an odd smile, smoothing her robe as she stands. \"<i>Come back when you have some more stories, Champion.</i>\" /n/n")
+			else outputText("After some time talking with your Drider friend, you excuse yourself. You still need to keep watch over the portal. Belisa gives you an odd smile, smoothing her robe as she stands. \"<i>Come back when you have some more stories, Champion.</i>\"\n\n")
 		doNext(camp.returnToCampUseOneHour);
 		}
 		public function BelisaTalkAbsisters(): void {
@@ -297,6 +298,7 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 			addButton(2, "NoHerm?", BelisaTalkHerNoherm);
 			addButton(3, "WhySkittish", BelisaTalkHerSkittish);
 			if (BelisaAffectionMeter >= 50) addButton(4, "Injuries", BelisaTalkInjuries);
+			else if (BelisaQuestComp) addButtonDisabled(4, "Injuries", "You've already solved her tooth problem!");
 			else addButtonDisabled(4, "???", "Req. 50+ affection.");
 			addButton(14, "Back", BelisaTalk);
 		}
