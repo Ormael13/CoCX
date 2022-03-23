@@ -1515,7 +1515,7 @@ public class Camp extends NPCAwareContent{
 			}
 			//MARBLE
 			if (player.hasStatusEffect(StatusEffects.CampMarble) && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) {
-				outputText("A second bedroll rests next to yours; a large two handed hammer sometimes rests against it, depending on whether or not its owner needs it at the time.  ");
+				outputText((flags[kFLAGS.CAMP_BUILT_CABIN] > 0 ? "A bedroll rests next to your cabin" : "A second bedroll rests next to yours") + "; a large two handed hammer sometimes rests against it, depending on whether or not its owner needs it at the time.  ");
 				//Normal Murbles
 				if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 4) outputText("Marble isn’t here right now; she’s still off to see her family.");
 				//requires at least 1 kid, time is just before sunset, this scene always happens at this time if the PC has at least one kid.
@@ -3013,6 +3013,7 @@ public class Camp extends NPCAwareContent{
 		if (player.hasStatusEffect(StatusEffects.EtnaOff)) outputText("\nEtna: <font color=\"#800000\"><b>Disabled</b></font>");
 		if (player.hasStatusEffect(StatusEffects.LunaOff)) outputText("\nLuna: <font color=\"#800000\"><b>Disabled</b></font>");
 		if (player.hasStatusEffect(StatusEffects.TedOff)) outputText("\nDragon Boi: <font color=\"#800000\"><b>Disabled</b></font>");
+		if (player.hasStatusEffect(StatusEffects.BelisaOff)) outputText("\nBelisa: <font color=\"#800000\"><b>Disabled</b></font>");
 		menu();
 		if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) {
 			if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] < 2) addButton(10, "Train", NPCsTrain);
@@ -3025,6 +3026,8 @@ public class Camp extends NPCAwareContent{
 		addButton(4, "Etna", toggleEtnaMenu).hint("Enable or Disable Etna. This will remove her from enc table and if already in [camp] disable access to her.");
 		addButton(5, "Luna", toggleLunaMenu).hint("Enable or Disable Luna. This will remove her from enc table and if already in [camp] disable access to her.");
 		addButton(6, "DragonBoi", toggleTedMenu).hint("Enable or Disable Dragon Boi. This will remove him from enc table.");
+		//since this section is WIP anyway, let her be here too, lol
+        addButton(7, "Belisa", toggleBelisaMenu).hint("Enable or Disable Belisa. This will remove her ONLY from enc table.");
 		addButton(14, "Back", campActions);
 	}
 
@@ -3082,6 +3085,12 @@ public class Camp extends NPCAwareContent{
 	private function toggleTedMenu():void {
 		if (player.hasStatusEffect(StatusEffects.TedOff)) player.removeStatusEffect(StatusEffects.TedOff);
 		else player.createStatusEffect(StatusEffects.TedOff, 0, 0, 0, 0);
+		SparrableNPCsMenu();
+	}
+
+	private function toggleBelisaMenu():void {
+		if (player.hasStatusEffect(StatusEffects.BelisaOff)) player.removeStatusEffect(StatusEffects.BelisaOff);
+		else player.createStatusEffect(StatusEffects.BelisaOff, 0, 0, 0, 0);
 		SparrableNPCsMenu();
 	}
 

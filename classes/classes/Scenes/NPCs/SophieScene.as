@@ -942,8 +942,8 @@ internal function sophieLostCombat():void {
             else addButton(0, "Use Dick", maleVictorySophieRape);
         }
         if (player.hasVagina()) {
-            addButton(1, "Scissor", cuntFuck);
-            if(player.clitLength >= 5) addButton(2, "Fuck wClit", clitFuck);
+            addButton(1, "Scissor", sophieVictoryPussyGrind);
+            if(player.clitLength >= 5) addButton(2, "Fuck wClit", fuckDatClit);
         }
         if (player.biggestLactation() >= 1)
             addButton(3, "Forcefeed", cramANippleInIt);
