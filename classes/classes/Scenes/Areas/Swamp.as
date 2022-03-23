@@ -39,7 +39,7 @@ use namespace CoC;
 			flags[kFLAGS.TIMES_EXPLORED_SWAMP]++;
 			/*  SPECIAL SCENE OVERWRITES */
 			//Belisa
-			if (BelisaFollower.BelisaEncounternum == 0 && rand(5) == 0) {
+			if (!player.hasStatusEffect(StatusEffects.BelisaOff) && BelisaFollower.BelisaEncounternum == 0 && rand(5) == 0) {
 				SceneLib.belisa.firstEncounter();
 				return;
 			}
