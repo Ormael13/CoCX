@@ -438,7 +438,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (player.gems < 30) {
-				outputText("\n\nGiacomo sighs, indicating you need 30 gem to purchase this item.");
+				outputText("\n\nGiacomo sighs, indicating you need 30 gems to purchase this item.");
 				doNext(miscMenu);
 			}
 			else {
@@ -462,7 +462,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (player.gems < 100) {
-				outputText("\n\nGiacomo sighs, indicating you need 100 gem to purchase this item.");
+				outputText("\n\nGiacomo sighs, indicating you need 100 gems to purchase this item.");
 				doNext(miscMenu);
 			}
 			else {
@@ -491,7 +491,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (player.gems < 100) {
-				outputText("\n\nGiacomo sighs, indicating you need 100 gem to purchase this item.");
+				outputText("\n\nGiacomo sighs, indicating you need 100 gems to purchase this item.");
 				doNext(miscMenu);
 			}
 			else {
@@ -506,7 +506,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		private function pitchWhiteBook():void {
 			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
-			outputText("Giacomo holds up a white book.  \"<i>While you may not find value in this as a simple book,</i>\", Giacomo opens, \"<i>you never know what you may learn from it!  Maybe even some usefull spell!  I will offer the super-cheap price of 100 gem!</i>\"");
+			outputText("Giacomo holds up a white book.  \"<i>While you may not find value in this as a simple book,</i>\", Giacomo opens, \"<i>you never know what you may learn from it!  Maybe even some useful spell!  I will offer the super-cheap price of 100 gems!</i>\"");
 			doYesNo(buyWhiteBook, bookMenu);
 		}
 		
@@ -514,7 +514,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (player.gems < 100) {
-				outputText("\n\nGiacomo sighs, indicating you need 100 gem to purchase this item.");
+				outputText("\n\nGiacomo sighs, indicating you need 100 gems to purchase this item.");
 				doNext(bookMenu);
 			}
 			else {
@@ -528,7 +528,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		private function pitchGreyBook():void {
 			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
-			outputText("Giacomo holds up a grey book.  \"<i>While you may not find value in this as a simple book,</i>\", Giacomo opens, \"<i>you never know what you may learn from it!  Maybe even some usefull spell!  I will offer the super-cheap price of 500 gem!</i>\"");
+			outputText("Giacomo holds up a grey book.  \"<i>While you may not find value in this as a simple book,</i>\", Giacomo opens, \"<i>you never know what you may learn from it!  Maybe even some useful spell!  I will offer the super-cheap price of 500 gems!</i>\"");
 			doYesNo(buyGreyBook, bookMenu);
 		}
 		
@@ -536,7 +536,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (player.gems < 500) {
-				outputText("\n\nGiacomo sighs, indicating you need 500 gem to purchase this item.");
+				outputText("\n\nGiacomo sighs, indicating you need 500 gems to purchase this item.");
 				doNext(bookMenu);
 			}
 			else {
@@ -550,7 +550,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		private function pitchBlackBook():void {
 			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
-			outputText("Giacomo holds up a black book.  \"<i>While you may not find value in this as a simple book,</i>\", Giacomo opens, \"<i>you never know what you may learn from it!  Maybe even some usefull spell!  I will offer the super-cheap price of 100 gem!</i>\"");
+			outputText("Giacomo holds up a black book.  \"<i>While you may not find value in this as a simple book,</i>\", Giacomo opens, \"<i>you never know what you may learn from it!  Maybe even some useful spell!  I will offer the super-cheap price of 100 gems!</i>\"");
 			doYesNo(buyBlackBook, bookMenu);
 		}
 		
@@ -558,7 +558,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (player.gems < 100) {
-				outputText("\n\nGiacomo sighs, indicating you need 100 gem to purchase this item.");
+				outputText("\n\nGiacomo sighs, indicating you need 100 gems to purchase this item.");
 				doNext(bookMenu);
 			}
 			else {
@@ -572,7 +572,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		private function pitchRedManuscript():void {
 			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
-			outputText("Giacomo holds up a red manuscript.  \"<i>While you may not find value in this as a simple manuscript,</i>\", Giacomo opens, \"<i>you never know what you may learn from it!  Maybe even some usefull spell!  I will offer the super-cheap price of 125 gem!</i>\"");
+			outputText("Giacomo holds up a red manuscript.  \"<i>While you may not find value in this as a simple manuscript,</i>\", Giacomo opens, \"<i>you never know what you may learn from it!  Maybe even some useful spell!  I will offer the super-cheap price of 125 gems!</i>\"");
 			doYesNo(buyRedManuscript, bookMenu);
 		}
 		
@@ -580,7 +580,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (player.gems < 125) {
-				outputText("\n\nGiacomo sighs, indicating you need 125 gem to purchase this item.");
+				outputText("\n\nGiacomo sighs, indicating you need 125 gems to purchase this item.");
 				doNext(bookMenu);
 			}
 			else {
@@ -594,7 +594,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		private function pitchCrimsonJade():void {
 			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
-			outputText("Giacomo holds up a crimson jade.  \"<i>While you may not find value in this as a simple jade,</i>\", Giacomo waves, \"<i>you never know what you may learn from it!  Maybe even some usefull soulskill!  I will offer the super-cheap price of 125 gem!</i>\"");
+			outputText("Giacomo holds up a crimson jade.  \"<i>While you may not find value in this as a simple jade,</i>\", Giacomo waves, \"<i>you never know what you may learn from it!  Maybe even some useful soulskill!  I will offer the super-cheap price of 125 gems!</i>\"");
 			doYesNo(buyCrimsonJade, bookMenu);
 		}
 		
@@ -602,7 +602,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (player.gems < 125) {
-				outputText("\n\nGiacomo sighs, indicating you need 125 gem to purchase this item.");
+				outputText("\n\nGiacomo sighs, indicating you need 125 gems to purchase this item.");
 				doNext(bookMenu);
 			}
 			else {
@@ -616,7 +616,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 		private function pitchElementalistsTome():void {
 			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
-			outputText("Giacomo holds up an Elementalist’s Tome.  \"<i>While you may not find value in this as a simple tome,</i>\", Giacomo opens, \"<i>you never know what you may learn from it!  I will offer the super-cheap price of 1,000 gem!</i>\"");
+			outputText("Giacomo holds up an Elementalist’s Tome.  \"<i>While you may not find value in this as a simple tome,</i>\", Giacomo opens, \"<i>you never know what you may learn from it!  I will offer the super-cheap price of 1,000 gems!</i>\"");
 			doYesNo(buyElementalistsTome, bookMenu);
 		}
 		
@@ -624,7 +624,7 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (player.gems < 1000) {
-				outputText("\n\nGiacomo sighs, indicating you need 1,000 gem to purchase this item.");
+				outputText("\n\nGiacomo sighs, indicating you need 1,000 gems to purchase this item.");
 				doNext(bookMenu);
 			}
 			else {
