@@ -208,7 +208,7 @@ public function addIngredientMenu():void {
     addIngrButton(8, consumables.MAGSEED, StatusEffects.SiegweirdSoup4, 2);
     addIngrButton(9, consumables.NOCELIQ, StatusEffects.SiegweirdSoup5, 2);
     addIngrButton(10,consumables.GODMEAD, StatusEffects.SiegweirdSoup1, 3);
-    addButton(14, "Back", camp.campFollowers);
+    addButton(14, "Back", siegweirdMainCampMenu);
 
 }
 
@@ -218,7 +218,7 @@ public function addIngredientText():void {
 	outputText("You ask Siegweird if he wouldn’t mind allowing you to add something to his recipe so that the soup could be better.\n\n");
 	outputText("Siegweird gives you a suspicious glance before redirecting his attention to the item in your grasp, \"<i>I… Um… Okay… Go ahead, [name]. I don’t really see an issue with that ingredient. </i>\"");
 	outputText("You drop it in the soup as Siegweird scratches the back of his head nervously, \"<i>I’m sure the magic within will make the soup a little stronger.</i>\"\n\n");
-	doNext(camp.campFollowers);
+	doNext(siegweirdMainCampMenu);
 	eachMinuteCount(5);
 }
 
@@ -336,6 +336,7 @@ public function siegweirdCampStudy():void
 
 public function siegweirdAdvancedCampStudy():void
 {
+    clearOutput();
 	spriteSelect(SpriteDb.s_siegweird);
 	if (player.hasStatusEffect(StatusEffects.SiegweirdTraining2)) {
 		if (player.statusEffectv1(StatusEffects.SiegweirdTraining2) == 2) {
