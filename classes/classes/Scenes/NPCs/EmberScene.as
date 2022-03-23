@@ -253,6 +253,13 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			addButton(14, "Back", camp.campFollowers);
 		}
 
+        private function noSleepWith():void {
+            clearOutput();
+            outputText("You decide to spend the next night alone and tell this to Ember. She tries to look indifferent, but there's a hint of disappointment in her eyes.")
+            flags[kFLAGS.SLEEP_WITH] = "";
+            doNext(emberCampMenu);
+        }
+
 //Approach for sex - initial output when selecting [Sex] menu (Z)
 		private function emberSexMenu(output:Boolean = true):void
 		{
