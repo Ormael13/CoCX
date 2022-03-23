@@ -258,7 +258,7 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		public function BelisaTalkYou():void {
 			clearOutput();
 			outputText("<i>\"Oh? You want to talk about yourself?\"</i> Belisa brings a hand to her mouth, a smirk on her face. <i>\"How very arrogant.\"</i> You raise one eyebrow, and she chuckles, the smirk fading from her face. <i>\"I’m kidding, [name]. I’d love to hear about your adventures.\"</i> You talk about the various demons you’ve faced, Zetaz and the portal, and even some stories from your childhood in Ignam. Belisa is a great listener. She laughs when you tell a joke, or when the story turns serious, asks questions, and listens with rapt attention when you talk about the other people you’ve met along your travels.\n\n");
-			if (TyrantiaFollower.TyrantiaFollowerStage > 0 && TyrantiaFollower.TyraniaIsRemovedFromThewGame == false) {// && !BelisaToldTyrantia
+			if (TyrantiaFollower.TyrantiaFollowerStage > 0 && !TyrantiaFollower.TyraniaIsRemovedFromThewGame) {// && !BelisaToldTyrantia
 				outputText("You talk about the battlefield, and about a giant Drider you met there. Belisa leans forward, her eyes wide. <i>\"Wait...You said a giant Drider? Was she corrupted?\"</i> You tell her, reluctantly, that yes, the Drider giantess oozes corruption from her very being. Despite this, she seemed to be a decent person, and never tried anything with you. This gets Belisa’s interest, and she looks down. <i>\"...What is her name, did you get it?\"</i>\n\n");
 				menu();
 				addButton(1, "Yes", BelisaTalkAbsisters);
