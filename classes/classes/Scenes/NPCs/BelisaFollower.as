@@ -264,7 +264,7 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 				addButton(1, "Yes", BelisaTalkAbsisters);
 				addButton(2, "No", BelisaTalkYouEnd);
 			}
-			else outputText("After some time talking with your Drider friend, you excuse yourself. You still need to keep watch over the portal. Belisa gives you an odd smile, smoothing her robe as she stands. \"<i>Come back when you have some more stories, Champion.</i>\" /n/n")
+			else outputText("After some time talking with your Drider friend, you excuse yourself. You still need to keep watch over the portal. Belisa gives you an odd smile, smoothing her robe as she stands. \"<i>Come back when you have some more stories, Champion.</i>\"\n\n")
 		doNext(camp.returnToCampUseOneHour);
 		}
 		public function BelisaTalkAbsisters(): void {
