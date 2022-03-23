@@ -658,7 +658,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				flags[kFLAGS.BENOIT_TALKED_TODAY] = 0;
                 SceneLib.bazaar.benoit.updateBenoitInventory();
                 flags[kFLAGS.ROGAR_FUCKED_TODAY] = 0;
-				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00285] > 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00285]--; //Reduce lust-stick resistance building
+				if (flags[kFLAGS.LUSTSTICK_RESISTANCE] > 0) flags[kFLAGS.LUSTSTICK_RESISTANCE]--; //Reduce lust-stick resistance building
 				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00155] > 0) { //Dominika fellatrix countdown
 					flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00155]--;
 					if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00155] < 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00155] = 0;
@@ -2432,7 +2432,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					needNext = true;
 				}
 			}
-			if (player.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00285] >= 50 && !player.hasPerk(PerkLib.LuststickAdapted)) { //Luststick resistance unlock
+			if (player.flags[kFLAGS.LUSTSTICK_RESISTANCE] >= 50 && !player.hasPerk(PerkLib.LuststickAdapted)) { //Luststick resistance unlock
                 SceneLib.sophieBimbo.unlockResistance();
                 if (player.hasStatusEffect(StatusEffects.Luststick)) player.removeStatusEffect(StatusEffects.Luststick);
 				needNext = true;

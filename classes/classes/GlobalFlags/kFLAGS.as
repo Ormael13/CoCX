@@ -290,7 +290,7 @@ public static const UNKNOWN_FLAG_NUMBER_00281:int                               
 public static const SOPHIE_BIMBO_ACCEPTED:int                                   =  282; // Sophie Bimbo Follower?
 public static const SOPHIE_DISABLED:int                                   =  283; // Sophie Disabled Forever
 public static const TIMES_SOPHIE_HAS_DRUNK_OVI_ELIXIR:int                           =  284; // Has Ovi Event Procced?
-public static const UNKNOWN_FLAG_NUMBER_00285:int                                   =  285; // Luststick Resistance builder - decrements by 1 every day, incremented by 1 for every 2 hours of luststick
+public static const LUSTSTICK_RESISTANCE:int                                   =  285; // Luststick Resistance builder - decrements by 1 every day, incremented by 1 for every 2 hours of luststick
 public static const CERAPH_FOLLOWER_PIERCING:int                                   =  286; // Have Ceraph's belly-button piercing
 public static const CERAPH_FOLLOWER_CARRY:int                                   =  287; // Carrying Careph's token?
 public static const CERAPH_HIDING_DICK:int                                          =  288; // Ceraph Cock Hidden (1 = yes, 0 = cock floppin') - Ceraph's Demon Dong status 0=Visible, 1=Not visible
