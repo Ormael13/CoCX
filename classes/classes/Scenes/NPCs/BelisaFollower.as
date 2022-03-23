@@ -250,7 +250,7 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 			if (BelisaAffectionMeter >= 15) addButton(2, "Home", BelisaTalkHome);
 			else addButtonDisabled(2, "???", "Req. 15+ affection.");
 			addButton(3, "Her", BelisaTalkHer);
-			if (BelisaAffectionMeter >= 50) addButton(6, "Injuries", BelisaTalkInjuries);
+			if (BelisaAffectionMeter >= 50 && !BelisaQuestComp) addButton(6, "Injuries", BelisaTalkInjuries);
 			else if (BelisaQuestComp) addButtonDisabled(6, "Injuries", "You've already solved her tooth problem!");
 			else  addButtonDisabled(6, "???", "Req. 50+ affection.");
 			if (BelisaQuestComp && BelisaAffectionMeter >= 80 && player.statusEffectv1(StatusEffects.TelAdre) >= 1 && flags[kFLAGS.HEXINDAO_UNLOCKED] >= 1 && player.hasStatusEffect(StatusEffects.MetWhitney) && player.statusEffectv1(StatusEffects.MetWhitney) > 1) addButton(7, "ComeW/Me", BelisaComeCamp);
@@ -300,10 +300,10 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 			menu();
 			addButton(0, "NoHerm?", BelisaTalkHerNoherm);
 			addButton(1, "WhySkittish", BelisaTalkHerSkittish);
-			if (BelisaAffectionMeter >= 50) addButton(2, "Injuries", BelisaTalkInjuries);
+			if (BelisaAffectionMeter >= 50 && !BelisaQuestComp) addButton(2, "Injuries", BelisaTalkInjuries);
+			else if (BelisaQuestComp) addButtonDisabled(2, "Injuries", "You've already solved her tooth problem!");
 			else addButtonDisabled(2, "???", "Req. 50+ affection.");
 			if (BelisaAffectionMeter >= 50) addButton(3, "Family", BelisaTalkHerFamily);
-			else if (BelisaQuestComp) addButtonDisabled(4, "Injuries", "You've already solved her tooth problem!");
 			else addButtonDisabled(3, "???", "Req. 50+ affection.");
 			addButton(4, "Back", BelisaTalk);
 		}
@@ -1002,4 +1002,3 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 	}
 	}
 }
-
