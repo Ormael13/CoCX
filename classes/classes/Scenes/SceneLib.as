@@ -188,6 +188,8 @@ public class SceneLib {
     public static var konstantin:Konstantin = new Konstantin();
 
     public static var latexGirl:LatexGirl = new LatexGirl();
+    
+    public static var lily:LilyFollower = new LilyFollower();
 
     public static var lunaFollower:LunaFollower = new LunaFollower();
 
