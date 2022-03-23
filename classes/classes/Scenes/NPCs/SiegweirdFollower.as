@@ -162,7 +162,6 @@ public function siegweirdMainCampMenu():void
 	if (player.statusEffectv1(StatusEffects.SiegweirdSoup) == 1) addButtonDisabled(5, "Soup", "You already ate today bowl of Siegweird’s soup.");
 	else addButton(5, "Soup", siegweirdCampSoup);
 	if (!soupMaxLevel()) addButton(9, "Add an ingredient", addIngredientMenu);
-	else addButtonDisabled(9, "Add an ingredient", "Need to have one of those: Icicle, Canine pepper, Bayr leaf, Firemander whisky, La bova, Ringtail fig, Alicornium, Wonder fruit, Magic seed, Nocello or God Mead to be able to improve soup.");
 	if (player.hasStatusEffect(StatusEffects.SiegweirdTraining)) addButtonDisabled(10, "Study", "You already completed basic Study.");
 	else addButton(10, "Study", siegweirdCampStudy);
 	if (player.hasStatusEffect(StatusEffects.SiegweirdTraining) && !player.hasStatusEffect(StatusEffects.SiegweirdTraining2)) addButton(11, "Advanced Study", siegweirdAdvancedCampStudy);
@@ -183,17 +182,17 @@ public function siegweirdMainCampMenu():void
 }
 
 public function soupMaxLevel():Boolean {
-    return player.statusEffectv1(StatusEffects.SiegweirdSoup1) == 1
-        && player.statusEffectv1(StatusEffects.SiegweirdSoup2) == 1
-        && player.statusEffectv1(StatusEffects.SiegweirdSoup3) == 1
-        && player.statusEffectv1(StatusEffects.SiegweirdSoup4) == 1
-        && player.statusEffectv1(StatusEffects.SiegweirdSoup5) == 1
-        && player.statusEffectv2(StatusEffects.SiegweirdSoup1) == 1
-        && player.statusEffectv2(StatusEffects.SiegweirdSoup2) == 1
-        && player.statusEffectv2(StatusEffects.SiegweirdSoup3) == 1
-        && player.statusEffectv2(StatusEffects.SiegweirdSoup4) == 1
-        && player.statusEffectv2(StatusEffects.SiegweirdSoup5) == 1
-        && player.statusEffectv3(StatusEffects.SiegweirdSoup1) == 1;
+    return player.statusEffectv1(StatusEffects.SiegweirdSoup1) > 0
+        && player.statusEffectv1(StatusEffects.SiegweirdSoup2) > 0
+        && player.statusEffectv1(StatusEffects.SiegweirdSoup3) > 0
+        && player.statusEffectv1(StatusEffects.SiegweirdSoup4) > 0
+        && player.statusEffectv1(StatusEffects.SiegweirdSoup5) > 0
+        && player.statusEffectv2(StatusEffects.SiegweirdSoup1) > 0
+        && player.statusEffectv2(StatusEffects.SiegweirdSoup2) > 0
+        && player.statusEffectv2(StatusEffects.SiegweirdSoup3) > 0
+        && player.statusEffectv2(StatusEffects.SiegweirdSoup4) > 0
+        && player.statusEffectv2(StatusEffects.SiegweirdSoup5) > 0
+        && player.statusEffectv3(StatusEffects.SiegweirdSoup1) > 0;
 }
 
 public function addIngredientMenu():void {
@@ -241,19 +240,22 @@ public function addIngrButton(bnum:int, item:ItemType, effect:StatusEffectType, 
     }
 }
 
+
+
 public function soupRecovery():Number {
     var recoveryV:Number = 0.25;
-    if (player.statusEffectv1(StatusEffects.SiegweirdSoup1) == 1) recoveryV += 0.05;
-    if (player.statusEffectv1(StatusEffects.SiegweirdSoup2) == 1) recoveryV += 0.05;
-    if (player.statusEffectv1(StatusEffects.SiegweirdSoup3) == 1) recoveryV += 0.05;
-    if (player.statusEffectv1(StatusEffects.SiegweirdSoup4) == 1) recoveryV += 0.05;
-    if (player.statusEffectv1(StatusEffects.SiegweirdSoup5) == 1) recoveryV += 0.05;
-    if (player.statusEffectv2(StatusEffects.SiegweirdSoup1) == 1) recoveryV += 0.05;
-    if (player.statusEffectv2(StatusEffects.SiegweirdSoup2) == 1) recoveryV += 0.05;
-    if (player.statusEffectv2(StatusEffects.SiegweirdSoup3) == 1) recoveryV += 0.05;
-    if (player.statusEffectv2(StatusEffects.SiegweirdSoup4) == 1) recoveryV += 0.05;
-    if (player.statusEffectv2(StatusEffects.SiegweirdSoup5) == 1) recoveryV += 0.05;
-    if (player.statusEffectv3(StatusEffects.SiegweirdSoup1) == 1) recoveryV += 0.05;
+    //Due to an old bug, it's possible that some of these values is > 1 in some saves. So it should be fixed before using the exact numbers again.
+    if (player.statusEffectv1(StatusEffects.SiegweirdSoup1) > 0) recoveryV += 0.05;
+    if (player.statusEffectv1(StatusEffects.SiegweirdSoup2) > 0) recoveryV += 0.05;
+    if (player.statusEffectv1(StatusEffects.SiegweirdSoup3) > 0) recoveryV += 0.05;
+    if (player.statusEffectv1(StatusEffects.SiegweirdSoup4) > 0) recoveryV += 0.05;
+    if (player.statusEffectv1(StatusEffects.SiegweirdSoup5) > 0) recoveryV += 0.05;
+    if (player.statusEffectv2(StatusEffects.SiegweirdSoup1) > 0) recoveryV += 0.05;
+    if (player.statusEffectv2(StatusEffects.SiegweirdSoup2) > 0) recoveryV += 0.05;
+    if (player.statusEffectv2(StatusEffects.SiegweirdSoup3) > 0) recoveryV += 0.05;
+    if (player.statusEffectv2(StatusEffects.SiegweirdSoup4) > 0) recoveryV += 0.05;
+    if (player.statusEffectv2(StatusEffects.SiegweirdSoup5) > 0) recoveryV += 0.05;
+    if (player.statusEffectv3(StatusEffects.SiegweirdSoup1) > 0) recoveryV += 0.05;
     return recoveryV;
 }
 
