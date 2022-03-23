@@ -266,7 +266,8 @@ use namespace CoC;
 					}, {
 						name  : "tentaBeast",
 						call  : tentacleBeastEncounterFn,
-						when  : fn.ifLevelMin(3)
+						when  : fn.ifLevelMin(3),
+						chance: 0.5
 					}, {
 						name  : "corrGlade",
 						call  : corruptedGladeFn,
@@ -279,7 +280,7 @@ use namespace CoC;
 					}, {
 						name  : "beegirl",
 						call  : beeGirlScene.beeEncounter,
-						chance: 0.50
+						chance: 1.0
 					}, {
 						name  : "WoodElf",
 						call  : SceneLib.woodElves.findElves,

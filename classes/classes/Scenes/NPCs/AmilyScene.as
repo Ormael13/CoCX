@@ -214,7 +214,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			flags[kFLAGS.AMILY_VILLAGE_EXPLORED]++;
 			clearOutput();
 			//50% chance of ghost-girl
-			if((flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00365] == 0 && rackCount() >= 2 && rand(10) <= 3) && !followerShouldra() && flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] != .5) {
+			if((flags[kFLAGS.SHOULDRA_MAIDEN_COUNTDOWN] == 0 && rackCount() >= 2 && rand(10) <= 3) && !followerShouldra() && flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] != .5) {
 				shouldraScene.shouldraGreeting();
 				return;
 			}
@@ -7038,6 +7038,8 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			doNext(camp.returnToCampUseOneHour); // To camp
 		}
 
+//Anyone, find a place to call it please
+/*
 		// NOTE: Not sure how this ties in.
 		// Be a humongous asshole to Amily and tell her that she's, in effect, a whiny bitch.  Or something.
 		private function amilySufferNotTheFurryToLive():void
@@ -7048,6 +7050,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			clearOutput();
 			outputText("You laugh spitefully as you look at the now humanized mouse girl. You tell her, with a grin on your face, that you did all this to screw with her; she should really trust her gut next time. Continuing with your tirade, you tell her that she's a complete fool, as well as a hypocrite that pretends to be noble, but is just a whore deep down inside. Pausing only to savor the look of betrayal on her face, you remark that her clinging to some twisted ideal of repopulating her people is just a depraved pipe dream; one that will never happen. You smirk and taunt her, implying that she should \"enjoy\" her new body as you depart, leaving your words to ring through her as she visibly tears up. The faint sounds of sniffling are all that echo behind you as you head back to camp.");
 		}
+*/
 
 		public function amilyDefurryOfferAtCamp():void
 		{
@@ -7760,7 +7763,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				if(player.lib >= 60) outputText(", eagerly anticipating the opportunity to drink in her form while it's bound up in body-hugging black fabric.");
 				else if(player.cor < 50) outputText(", happy to share the fruits of your adventure with your mousy lover.");
 				else outputText(", secretly hoping she'll get used to putting on a show for you.");
-				outputText("\n\nAmily's eyes open so wide they're nearly as big around as her ears, and she happily bounds up to you, touching the fabric carefully.  \"<i>It's so beautiful, [name],</i>\" she says, \"Do you really think I would look good in something like this?</i>\"  She bounces on her toes, still touching the fabric but unwilling to take it out of your hands.");
+				outputText("\n\nAmily's eyes open so wide they're nearly as big around as her ears, and she happily bounds up to you, touching the fabric carefully.  \"<i>It's so beautiful, [name],</i>\" she says, \"<i>Do you really think I would look good in something like this?</i>\"  She bounces on her toes, still touching the fabric but unwilling to take it out of your hands.");
 				outputText("\n\nYou push the pile of tiny triangles and string into the mouse-girl's hands and say, \"<i>Why don't you try it on and come for a swim in the stream with me?  Then we can see just how good it looks on you.</i>\"");
 				outputText("\n\nShe squeaks in excitement and runs off, cheeks aglow.  The saucy sway of her " + amilyHips() + " draws your eye as she vanishes behind a rock and makes it clear she's not too shy to change around you - she's just building up to a big reveal.  You suppress the urge to follow her and sneak a peak.  Seeing her half-clothed isn't exactly a new thing for you, and you want to be floored when you see how she fills it out.  Sitting back on a rock, the sounds of swishing fabric reaches your ears, and before you know it, Amily calls out, \"<i>Okay, I'm ready!");
 				if(flags[kFLAGS.AMILY_WANG_LENGTH] > 0) outputText("  D-don't laugh, okay?");

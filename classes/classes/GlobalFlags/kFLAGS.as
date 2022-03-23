@@ -63,7 +63,7 @@ public static const NUMBER_OF_TIMES_MET_SCYLLA:int                              
 public static const TIMES_ENCOUNTED_TAMANIS_DAUGHTERS:int                           =   55; // Times encountered Tamani's Daughters
 public static const TAMANI_TIMES_HYPNOTISED:int                                     =   56; // Tamani Hypno Level" Description="increases by 1 for each hypno event.  1-3 slight lust raises, 4-9 medium lust raises, 10-19 super high lust raises, 20+ high chance of autorape with special scene.
 public static const TAMANI_DAUGHTER_PREGGO_COUNTDOWN:int                            =   57; // Daughter Pregnancy Counter" Description="they will not return until this countdown timer is 0.  Same length as Tamani's incubation &#x2014; approx 1 week.
-public static const UNKNOWN_FLAG_NUMBER_00058:int                                   =   58; // Times In Goblin Daughter 'CHAIR'
+public static const TAMANI_DAUGHTERS_TIMES_LOST:int                                   =   58; // Times In Goblin Daughter 'CHAIR'
 public static const TIMES_FUCKED_TAMANIS_DAUGHTERS:int                              =   59; // TimeSleptWithDaughters
 public static const UNABLE_TO_MASTURBATE_BECAUSE_CENTAUR:int                        =   60; // Fail Masturbation As Centaur?
 public static const CERULEAN_POTION_BAD_END_FUTA_COUNTER:int                        =   61; // Cerulean Potion Bad-End Futa Count
@@ -290,7 +290,7 @@ public static const UNKNOWN_FLAG_NUMBER_00281:int                               
 public static const SOPHIE_BIMBO_ACCEPTED:int                                   =  282; // Sophie Bimbo Follower?
 public static const SOPHIE_DISABLED:int                                   =  283; // Sophie Disabled Forever
 public static const TIMES_SOPHIE_HAS_DRUNK_OVI_ELIXIR:int                           =  284; // Has Ovi Event Procced?
-public static const UNKNOWN_FLAG_NUMBER_00285:int                                   =  285; // Luststick Resistance builder - decrements by 1 every day, incremented by 1 for every 2 hours of luststick
+public static const LUSTSTICK_RESISTANCE:int                                   =  285; // Luststick Resistance builder - decrements by 1 every day, incremented by 1 for every 2 hours of luststick
 public static const CERAPH_FOLLOWER_PIERCING:int                                   =  286; // Have Ceraph's belly-button piercing
 public static const CERAPH_FOLLOWER_CARRY:int                                   =  287; // Carrying Careph's token?
 public static const CERAPH_HIDING_DICK:int                                          =  288; // Ceraph Cock Hidden (1 = yes, 0 = cock floppin') - Ceraph's Demon Dong status 0=Visible, 1=Not visible
@@ -370,8 +370,8 @@ public static const SHOULDRA_VAGINAL_POSSESSIONS:int                            
 public static const SHOULDRA_HERMSEX_COUNT:int                                      =  362; //
 public static const SHOULDRA_USES_YOUR_GIANT_COCK_COUNT:int                         =  363; //
 public static const TIMES_MET_OOZE:int                                              =  364; //
-public static const UNKNOWN_FLAG_NUMBER_00365:int                                   =  365; // COUNTDOWN TILL MAIDEN FOLLOWUP
-public static const UNKNOWN_FLAG_NUMBER_00366:int                                   =  366; // TIMES MET GHOSTGIRL MAIDEN
+public static const SHOULDRA_MAIDEN_COUNTDOWN:int                                   =  365; // COUNTDOWN TILL MAIDEN FOLLOWUP
+public static const SHOULDRA_MAIDEN_TIMES_MET:int                                   =  366; // TIMES MET GHOSTGIRL MAIDEN
 public static const ISABELLA_TIMES_OFFERED_FOLLOWER:int                             =  367; // unused right now
 public static const ISABELLA_AFFECTION:int                                          =  368; //
 public static const ISABELLA_FOLLOWER_ACCEPTED:int                                  =  369; //

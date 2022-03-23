@@ -1600,36 +1600,32 @@ public class Creature extends Utils
 			return this._statusEffects.addStatusValue(stype, statusValueNum, bonus);
 		}
 
-		public function statusEffectv1(stype:StatusEffectType):Number
+		public function getStatusValue(stype:StatusEffectType, statusValueNum:int):Number
 		{
 			if (this._statusEffects.hasStatusEffect(stype)) {
-				return this._statusEffects.getStatusValue(stype, 1);
+				return this._statusEffects.getStatusValue(stype, statusValueNum);
 			}
 			return 0;
+		}
+
+		public function statusEffectv1(stype:StatusEffectType):Number
+		{
+            return getStatusValue(stype, 1);
 		}
 
 		public function statusEffectv2(stype:StatusEffectType):Number
 		{
-			if (this._statusEffects.hasStatusEffect(stype)) {
-				return this._statusEffects.getStatusValue(stype, 2);
-			}
-			return 0;
+            return getStatusValue(stype, 2);
 		}
 
 		public function statusEffectv3(stype:StatusEffectType):Number
 		{
-			if (this._statusEffects.hasStatusEffect(stype)) {
-				return this._statusEffects.getStatusValue(stype, 3);
-			}
-			return 0;
+            return getStatusValue(stype, 3);
 		}
 
 		public function statusEffectv4(stype:StatusEffectType):Number
 		{
-			if (this._statusEffects.hasStatusEffect(stype)) {
-				return this._statusEffects.getStatusValue(stype, 4);
-			}
-			return 0;
+            return getStatusValue(stype, 4);
 		}
 
 		public function cleanAllBuffs():void
@@ -2074,14 +2070,6 @@ public class Creature extends Utils
 		{
 			if (hasStatusEffect(StatusEffects.LactationReduction))
 				changeStatusValue(StatusEffects.LactationReduction, 1, 0);
-			if (hasStatusEffect(StatusEffects.LactationReduc0))
-				removeStatusEffect(StatusEffects.LactationReduc0);
-			if (hasStatusEffect(StatusEffects.LactationReduc1))
-				removeStatusEffect(StatusEffects.LactationReduc1);
-			if (hasStatusEffect(StatusEffects.LactationReduc2))
-				removeStatusEffect(StatusEffects.LactationReduc2);
-			if (hasStatusEffect(StatusEffects.LactationReduc3))
-				removeStatusEffect(StatusEffects.LactationReduc3);
 			if (hasPerk(PerkLib.Feeder))
 			{
 				//You've now been milked, reset the timer for that
@@ -2089,7 +2077,7 @@ public class Creature extends Utils
 				changeStatusValue(StatusEffects.Feeder, 2, 0);
 			}
 		}
-		public function boostLactation(todo:Number):Number
+		public function boostLactation(todo:Number, directIncrease:Boolean = false):Number
 		{
 			if (breastRows.length == 0)
 				return 0;
@@ -2098,38 +2086,31 @@ public class Creature extends Utils
 			var changes:Number = 0;
 			var temp2:Number = 0;
 			//Prevent lactation decrease if lactating.
-			if (todo >= 0)
-			{
-				if (hasStatusEffect(StatusEffects.LactationReduction))
+			if (todo >= 0 && hasStatusEffect(StatusEffects.LactationReduction))
 					changeStatusValue(StatusEffects.LactationReduction, 1, 0);
-				if (hasStatusEffect(StatusEffects.LactationReduc0))
-					removeStatusEffect(StatusEffects.LactationReduc0);
-				if (hasStatusEffect(StatusEffects.LactationReduc1))
-					removeStatusEffect(StatusEffects.LactationReduc1);
-				if (hasStatusEffect(StatusEffects.LactationReduc2))
-					removeStatusEffect(StatusEffects.LactationReduc2);
-				if (hasStatusEffect(StatusEffects.LactationReduc3))
-					removeStatusEffect(StatusEffects.LactationReduc3);
-			}
 			if (todo > 0)
 			{
 				while (todo > 0)
 				{
 					counter = breastRows.length;
-					todo -= .1;
+                    //select breast row with the lowest lactation
 					while (counter > 0)
 					{
 						counter--;
 						if (breastRows[index].lactationMultiplier > breastRows[counter].lactationMultiplier)
 							index = counter;
 					}
-					temp2 = .1;
-					if (breastRows[index].lactationMultiplier > 1.5)
-						temp2 /= 2;
-					if (breastRows[index].lactationMultiplier > 2.5)
-						temp2 /= 2;
-					if (breastRows[index].lactationMultiplier > 3)
-						temp2 /= 2;
+					temp2 = todo > .1 ? .1 : todo;
+					todo -= temp2;
+                    //diminishing increase - NOT INCLUDING LACTAID, IT WORKS WELL
+                    if (!directIncrease) {
+                        if (breastRows[index].lactationMultiplier > 1.5)
+                            temp2 /= 2;
+                        if (breastRows[index].lactationMultiplier > 2.5)
+                            temp2 /= 2;
+                        if (breastRows[index].lactationMultiplier > 3)
+                            temp2 /= 2;
+                    }
 					changes += temp2;
 					breastRows[index].lactationMultiplier += temp2;
 				}
@@ -2140,35 +2121,20 @@ public class Creature extends Utils
 				{
 					counter = breastRows.length;
 					index = 0;
-					if (todo > -.1)
-					{
-						while (counter > 0)
-						{
-							counter--;
-							if (breastRows[index].lactationMultiplier < breastRows[counter].lactationMultiplier)
-								index = counter;
-						}
-						//trace(biggestLactation());
-						breastRows[index].lactationMultiplier += todo;
-						if (breastRows[index].lactationMultiplier < 0)
-							breastRows[index].lactationMultiplier = 0;
-						todo = 0;
-					}
-					else
-					{
-						todo += .1;
-						while (counter > 0)
-						{
-							counter--;
-							if (breastRows[index].lactationMultiplier < breastRows[counter].lactationMultiplier)
-								index = counter;
-						}
-						temp2 = todo;
-						changes += temp2;
-						breastRows[index].lactationMultiplier += temp2;
-						if (breastRows[index].lactationMultiplier < 0)
-							breastRows[index].lactationMultiplier = 0;
-					}
+                    //select breast row with the lowest lactation
+                    while (counter > 0)
+                    {
+                        counter--;
+                        if (breastRows[index].lactationMultiplier < breastRows[counter].lactationMultiplier)
+                            index = counter;
+                    }
+                    temp2 = todo < -.1 ? -.1 : todo;
+                    todo -= temp2;
+                    //normal decrease
+                    changes += temp2;
+                    breastRows[index].lactationMultiplier += temp2;
+                    if (breastRows[index].lactationMultiplier < 0)
+                        breastRows[index].lactationMultiplier = 0;
 				}
 			}
 			return changes;

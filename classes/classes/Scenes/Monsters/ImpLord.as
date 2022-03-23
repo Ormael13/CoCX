@@ -79,7 +79,7 @@ public class ImpLord extends Imp
 			if (player.hasStatusEffect(StatusEffects.SiegweirdImp)) {
 				player.removeStatusEffect(StatusEffects.SiegweirdImp);
 				cleanupAfterCombat();
-				SceneLib.siegweirdFollower.siegweirdFirstEncounterPostFight();
+				doNext(SceneLib.siegweirdFollower.siegweirdFirstEncounterPostFight);
 			}
 			else {
 				game.flags[kFLAGS.DEMONS_DEFEATED]++;

@@ -522,10 +522,6 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const KonstantinWeaponSharpening:StatusEffectType     = mk("Konstantin Weapon Sharpening");
 		public static const LactationEndurance:StatusEffectType             = mk("Lactation Endurance");
 		public static const LactationReduction:StatusEffectType             = mk("Lactation Reduction");
-		public static const LactationReduc0:StatusEffectType                = mk("Lactation Reduc0");
-		public static const LactationReduc1:StatusEffectType                = mk("Lactation Reduc1");
-		public static const LactationReduc2:StatusEffectType                = mk("Lactation Reduc2");
-		public static const LactationReduc3:StatusEffectType                = mk("Lactation Reduc3");
 		public static const Liliraune:StatusEffectType                     	= mk("Liliraune");
 		public static const LethiceRedemed:StatusEffectType                 = mk("Lethice Redemed");
 		public static const LootEgg:StatusEffectType                        = mk("lootEgg");
@@ -726,6 +722,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const EtnaOff:StatusEffectType             = mk("Etna Off");
 		public static const LunaOff:StatusEffectType             = mk("Luna Off");
 		public static const TedOff:StatusEffectType              = mk("Ted Off");
+		public static const BelisaOff:StatusEffectType           = mk("Belisa Off");
 		public static const ThereCouldBeOnlyOne:StatusEffectType = mk("There Could Be Only One");
 		public static const UmasMassage:StatusEffectType         = mk("Uma's Massage"); //v1 = bonus index; v2 = bonus value; v3 = remaining time
 		public static const Uniball:StatusEffectType             = mk("Uniball");
