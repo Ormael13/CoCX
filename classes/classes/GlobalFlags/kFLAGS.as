@@ -1405,9 +1405,9 @@ public static const UNKNOWN_FLAG_NUMBER_01396:int                               
 public static const UNKNOWN_FLAG_NUMBER_01397:int                                   = 1397;
 public static const UNKNOWN_FLAG_NUMBER_01398:int                                   = 1398;
 public static const UNKNOWN_FLAG_NUMBER_01399:int                                   = 1399;
-public static const LILY_STATUS:int                                   				= 1400;
-public static const LILY_DEFEATS_COUNTER:int                                   		= 1401;
-public static const LILY_LVL_UP:int                                 				= 1402;
+public static const LILY_DEFEATS_COUNTER:int                                   		= 1400;
+public static const LILY_LVL_UP:int                                   				= 1401;
+public static const UNKNOWN_FLAG_NUMBER_01402:int                                 	= 1402;
 public static const UNKNOWN_FLAG_NUMBER_01403:int                                   = 1403;
 public static const UNKNOWN_FLAG_NUMBER_01404:int                                   = 1404;
 public static const UNKNOWN_FLAG_NUMBER_01405:int                                   = 1405;

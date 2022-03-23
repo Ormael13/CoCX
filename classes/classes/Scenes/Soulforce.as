@@ -42,6 +42,7 @@ import classes.Scenes.NPCs.CelessScene;
 import classes.Scenes.NPCs.Diana;
 import classes.Scenes.NPCs.DivaScene;
 import classes.Scenes.NPCs.Electra;
+import classes.Scenes.NPCs.LilyFollower;
 import classes.Scenes.NPCs.Neisa;
 import classes.Scenes.NPCs.RyuBiDragon;
 import classes.Scenes.NPCs.Sonya;
@@ -251,6 +252,7 @@ public class Soulforce extends BaseContent
 		menuItems.push("Test dynamic stat", TestDynamicStats, "Test Dynamic stats.");
 		menuItems.push("MetamorphFull", (player.hasPerk(PerkLib.Metamorph))? AllMetamorphOptionsUnlock: false, "Unlock all Metamorph options.");
 		menuItems.push("BelisaTest", (BelisaFollower.BelisaInGame && BelisaFollower.BelisaFollowerStage < 3 && BelisaFollower.BelisaEncounternum > 1) ? belisatest : false, "Belisa Trigger");
+		menuItems.push("LilyTest", (LilyFollower.LilyFollowerState == false) ? lilytest : false, "Lily Trigger");
 		menuItems.push("FixJiangshi", jiangshiBuggedItemsCleanUpCrew0, "Shit! Here we go Again! Fixing Jiangshi! (better use it only once or may be some bugs i not plan to account for in case of using this more than once - i not blocked using it more than once so belive ppl will be reasonable to not click like mad this)");
 		menuItems.push("Atlach Test", AddMaxBackpack6, "Trigger Atlach scenes.");
 		menuItems.push("BodyPartEditor", SceneLib.debugMenu.bodyPartEditorRoot, "");
@@ -277,6 +279,9 @@ public class Soulforce extends BaseContent
 		menuGen(menuItems, page, accessSoulforceMenu, false);
 	}
 
+	public function lilytest():void{
+		SceneLib.lily.lilyEncounter();
+	}
 	public function belisatest():void{
 		SceneLib.belisa.subsequentEncounters();
 	}

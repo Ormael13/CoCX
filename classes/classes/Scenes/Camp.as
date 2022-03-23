@@ -1166,6 +1166,7 @@ public class Camp extends NPCAwareContent{
 		var counter:Number = 0;
 		if (flags[kFLAGS.ALVINA_FOLLOWER] > 19) counter++;
 		if (arianScene.arianFollower()) counter++;
+		if (BelisaFollower.BelisaInCamp) counter++;
 		if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2 && flags[kFLAGS.CHI_CHI_FOLLOWER] != 5 && !player.hasStatusEffect(StatusEffects.ChiChiOff)) counter++;
 		if (flags[kFLAGS.CEANI_FOLLOWER] > 0) counter++;
 		if (flags[kFLAGS.DIANA_FOLLOWER] >= 6 && !player.hasStatusEffect(StatusEffects.DianaOff)) counter++;
@@ -1336,6 +1337,11 @@ public class Camp extends NPCAwareContent{
 			if (arianScene.arianFollower()) {
 				outputText("Arian's tent is here, if you'd like to go inside.\n\n");
 				buttons.add("Arian", arianScene.visitAriansHouse);
+			}
+			//Belisa
+			if (BelisaFollower.BelisaInCamp) {
+				outputText("On the water, Belisa anchored her silk dome. However, since you’ve seen it, the dwelling has changed. Instead of a fully submerged bubble-like structure, it’s got a silky curtain for a door, and a solid wooden dock’s been added to anchor the odd building to the ground. Outside the dwelling, a small stall’s been set up, and Belisa’s wares are on display.\n\n");
+				buttons.add("Belisa", SceneLib.belisa.BelisaMainCampMenu).hint("Visit Belisa.");
 			}
 			//Cai'Lin
 //	buttons.add("???").disable("Look into my eyes and answer me: Am I beautiful?");
@@ -3478,13 +3484,8 @@ public class Camp extends NPCAwareContent{
 		addButton(1, "2 Hours", doWait2).hint("Wait two hours.");
 		addButton(2, "4 Hours", doWait4).hint("Wait four hours.");
 		addButton(3, "8 Hours", doWait8).hint("Wait eight hours.");
-		if (player.isNightCreature())
-		{
-			addButton(4, "Till Dawn", doWaitTillDawn).hint("Wait until the dawn comes.");
-		}
-		else{
-			addButton(4, "Till Dusk", doWaitTillDusk).hint("Wait until the night comes.");
-		}
+		if (player.isNightCreature()) addButton(4, "Till Dawn", doWaitTillDawn).hint("Wait until the dawn comes.");
+		else addButton(4, "Till Dusk", doWaitTillDusk).hint("Wait until the night comes.");
 		addButton(14, "Back", playerMenu);
 	}
 
