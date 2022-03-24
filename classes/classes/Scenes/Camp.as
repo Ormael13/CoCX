@@ -752,15 +752,15 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 8) outputText("There's an unfinished cabin. It's currently missing both windows and a door.\n\n");
 		if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 9) outputText("There's a nearly-finished cabin. It looks complete from the outside, but inside, the floors are still bare earth.\n\n");
 		if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 10) outputText("Your cabin is situated near the edge of [camp].\n\n");
-		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 0 || flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 1) outputText("In between the portal and [camp] edge is set place where you will store piles of wood or stones used for constructions. ");
-		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 3) outputText("In between the portal and the [camp] edge rests a medium sized wooden platform, which you use to store wood. Beside to it is a spot where your stones rest. ");
-		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) outputText("In between the portal and [camp] edge rests a large wooden platform with protective barriers at the edges. Inside it, you can safely store large amounts of wood and stone. ");
+		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 0 || flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 1) outputText("Halfway between portal and [camp] edge is set place where you will store piles of wood or stones used for constructions. ");
+		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 3) outputText("Halfway between portal and [camp] edge rests a medium sized wood platform, which you use to store wood and next to it is place for storing stones. ");
+		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) outputText("Halfway between portal and [camp] edge rests a long and wide wood platform with protective barriers at the edges. Inside it, you can safely store large amounts of wood and stone. ");
 		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 1) outputText("There's a half finished warehouse construction near the east edge of your campsite.\n\n");
 		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 2) outputText("There's a warehouse located in the east section of your campsite.\n\n");
-		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 3) outputText("There's a warehouse and a half finished building, timbers hanging off of it, that will be your granary once completed. The buildings are located in the east section of your campsite.\n\n");
-		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 4) outputText("There's a warehouse with a connected granary in the eastern section of your campsite.\n\n");
-		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 5) outputText("There's a warehouse and second one warehouse half finished construction connected by granary located in the eastern section of your campsite.\n\n");
-		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 6) outputText("There's two warehouses, with a granary connecting them. The cluster of buildings fills the eastern section of your campsite.\n\n");
+		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 3) outputText("There's a warehouse and connected to it half finished granary construction located in the east section of your campsite.\n\n");
+		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 4) outputText("There's a warehouse and connected to it granary located in the east section of your campsite.\n\n");
+		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 5) outputText("There's a warehouse and second one warehouse half finished construction connected by granary located in the east section of your campsite.\n\n");
+		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 6) outputText("There are two warehouses and granary connecting them located in the east section of your campsite.\n\n");
 		if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) {
 			outputText("Some of your friends are currently sparring at the ");
 			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 4) outputText("massive");
@@ -854,7 +854,7 @@ public class Camp extends NPCAwareContent{
 			if (flags[kFLAGS.CAMP_WALL_PROGRESS] / 10 == 1) outputText("A thick wooden wall has been erected. Incomplete as it is, it provides only a small amount of defense.  ");
 			else outputText("Thick wooden walls have been erected around your camp.  ");
 		} else if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100) {
-			outputText("Thick wooden walls have been erected; they surround half of your [camp] perimeter and provide solid defense. The riverside remains open, for ease of access to the water. ");
+			outputText("Thick wooden walls have been erected; they surround half of your [camp] perimeter and provide sound defense, leaving the the open half for access to the stream.  ");
 			if (flags[kFLAGS.CAMP_WALL_GATE] > 0) outputText("A gate has been constructed in the middle of the walls; it gets closed at night to keep any invaders out.  ");
 		}
         //Imp Skulls
@@ -867,7 +867,7 @@ public class Camp extends NPCAwareContent{
                 outputText("Several imp skulls have been mounted " + (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100 ? "near the gateway" : "on the wall segments"));
             else
                 outputText("Innumerable imp skulls decorate the " + (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100 ? "gateway and " : "") + "wall, some are even impaled on wooden spikes");
-            outputText(" to serve as deterrence.  ");
+            outputText(" to serve as a deterrence.  ");
             if (flags[kFLAGS.CAMP_WALL_SKULLS] == 1) outputText("There is currently one skull.  ");
             else outputText("There are currently " + num2Text(flags[kFLAGS.CAMP_WALL_SKULLS]) + " skulls.  ");
         }
@@ -1036,7 +1036,7 @@ public class Camp extends NPCAwareContent{
 			addButton(11, "Masturbate", SceneLib.masturbation.masturbateMenu);
 			if ((((player.hasPerk(PerkLib.HistoryReligious) || player.hasPerk(PerkLib.PastLifeReligious)) && player.cor <= 66) || (player.hasPerk(PerkLib.Enlightened) && player.cor < 10)) && !(player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0) || flags[kFLAGS.SFW_MODE] >= 1) addButton(11, "Meditate", SceneLib.masturbation.masturbateMenu);
 		}
-		addButton(12, "Wait", doWaitMenu).hint("Wait for oneth to eigth hours. Or until the night comes.");
+		addButton(12, "Wait", doWaitMenu).hint("Wait for one to eight hours. Or until the night comes.");
 		if (player.fatigue > 40 || player.HP / player.maxHP() <= .9) addButton(12, "Rest", restMenu).hint("Rest for one to eight hours. Or until fully healed / night comes.");
 		if(((model.time.hours <= 5 || model.time.hours >= 21) && !canExploreAtNight) || (!isNightTime && canExploreAtNight)) {
 			addButton(12, "Sleep", doSleep).hint("Turn yourself in for the night.");

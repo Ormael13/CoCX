@@ -90,7 +90,7 @@ package classes.Items
 		public const LANCE  :Lance = new Lance();
 		public const LHSCYTH:LifehuntScythe = new LifehuntScythe();
 		public const LRAPIER:LustRapier = new LustRapier();
-		public const MACE   :Weapon = new Weapon("Mace   ", "Mace", "mace", "a mace", "smash", 9, 360, "This is a mace, designed to be able to crush against various defenses.","", "Mace/Hammer");
+		public const MACE   :Weapon = new Weapon("Mace   ", "Mace", "mace", "a mace", "smash", 9, 360, "This is a mace, designed to be able to crush various defenses.","", "Mace/Hammer");
 		public const RULER  :WeaponWithPerk = new WeaponWithPerk("Ruler  ", "Ruler", "ruler", "a ruler", "smash", 16, 2560, "The flat, wide rod has a center ridge on one side, flat on the other. The handle consists of a thick tang with a heavy iron bolster on either side.", "Body Cultivator's Focus", PerkLib.BodyCultivatorsFocus, 0.2, 0, 0, 0, "Large, Stun10", "Mace/Hammer");
 		public const S_RULER:WeaponWithPerk = new WeaponWithPerk("S.Ruler", "S.Ruler", "Storm Ruler", "a Storm Ruler", "smash", 15, 4800, "It's looking like a greatword with broken blade still possesing residual power of lightning. Also known as the Giantslayer for bringings giants to their knees.", "Body Cultivator's Focus", PerkLib.BodyCultivatorsFocus, 0.2, 0, 0, 0, "Large, Stun10", "Mace/Hammer");
 		public const MACGRSW:Weapon = new Weapon("Macgrsw","Mach.greatsword","Machine Greatsword","a Machine Greatsword","slash",19,4415,"This greatsword is half invention and half weapon. Instead of a sharp straight blade, the weapon’s sides are a set of metal teeth that constantly move in order to properly saw through flesh and more solid matter, creating grievous wounds. Very good for cutting down trees too.", "Large, Bleed100");

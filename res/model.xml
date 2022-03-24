@@ -151,6 +151,7 @@
             <color name="light green">#c5eec3</color>
             <color name="light gray">#c4d1d9</color>
             <color name="light purple">#e4cdf3</color>
+			<color name="light pink">#ffbdcb</color>
             <color name="lime green">#73df72</color>
             <color name="mediterranean-toned">#ac7339</color>
             <color name="metallic golden">#ddc469</color>
@@ -536,6 +537,10 @@
         <cell rect="546,325,175,119" name="legs_fg/bugtaur" dx="32" dy="65"/>
         <cell rect="165,689,130,108" name="legs_fg/snail" dx="42" dy="97"/>
         <cell rect="122,1514,173,86" name="legs_fg/liliraune" dx="2" dy="123"/>
+		<cell rect="1166,1114,70,100" name="legs_fg/sandWorm" dx="61" dy="47"/>
+		<cell rect="1253,1114,70,100" name="legs_truefg/sandWorm" dx="98" dy="45"/>
+		<cell rect="1166,1234,70,100" name="hands/sandWorm" dx="93" dy="46"/>
+		<cell rect="1253,1234,70,100" name="hands_bg/sandWorm" dx="46" dy="35"/>
         <cell rect="607,101,143,107" name="legs/centaur" dx="57" dy="93"/>
         <cell rect="507,230,125,88" name="legs/cattaur" dx="81" dy="103"/>
         <cell rect="633,230,125,88" name="legs/reptaur" dx="81" dy="103"/>
@@ -559,6 +564,7 @@
         <cell rect="296,1272,173,156" name="legs_bg/hydra6" dx="29" dy="47"/>
         <cell rect="644,1272,173,156" name="legs_bg/centipede" dx="31" dy="17"/>
         <cell rect="122,1430,173,186" name="legs_bg/liliraune" dx="2" dy="39"/>
+		<cell rect="992,1114,173,371" name="legs_bg/sandWorm" dx="39" dy="33"/>
         <cell rect="470,956,173,156" name="fullbody/femalejiangshi" dx="16" dy="23"/>
         <cell rect="470,1272,173,156" name="fullbody/malejiangshi" dx="16" dy="23"/>
         <cell rect="644,956,173,156" name="fullbody/gnome" dx="17" dy="23"/>
@@ -566,6 +572,7 @@
         <cell rect="992,956,173,156" name="fullbody/undine" dx="16" dy="21"/>
         <cell rect="1166,956,173,156" name="fullbody/femalesylph" dx="16" dy="21"/>
         <cell rect="1340,956,173,156" name="fullbody/malesylph" dx="16" dy="21"/>
+		<cell rect="1514,956,173,156" name="fullbody/cerberus" dx="16" dy="18"/>
         <cell rect="260,620,21,28" name="neck/darkGooCore" dx="95" dy="67"/>
         <cell rect="162,59,54,31" name="neck/manticore" dx="77" dy="47"/>
         <cell rect="217,59,54,31" name="neck/weasel" dx="77" dy="50"/>
@@ -972,6 +979,7 @@
         <cell rect="761,80,49,29" name="fullbodyBreast/ignis0" dx="79" dy="68"/>
         <cell rect="811,80,49,29" name="fullbodyBreast/undine0" dx="79" dy="68"/>
         <cell rect="861,80,49,29" name="fullbodyBreast/sylph0" dx="79" dy="68"/>
+		<cell rect="11,530,49,29" name="fullbodyBreast/cerberus" dx="78" dy="71"/>
         <cell rect="11,110,49,29" name="breasts/Bhuman" dx="79" dy="68"/>
         <cell rect="61,110,49,29" name="breasts/Bfur" dx="79" dy="68"/>
         <cell rect="61,110,49,29" name="breasts/Bpanda" dx="79" dy="68"/>
@@ -1276,8 +1284,6 @@
         <cell rect="339,491,83,69" name="tail/panda_taur" dx="141" dy="97"/>
         <cell rect="170,561,83,139" name="tail/bee_abdomen" dx="95" dy="40"/>
         <cell rect="170,561,83,139" name="tail/bee_taur" dx="136" dy="48"/>
-        <cell rect="255,561,83,139" name="tail/spider" dx="95" dy="40"/>
-        <cell rect="255,561,83,139" name="tail/spider_taur" dx="135" dy="50"/>
         <cell rect="675,561,83,139" name="tail/mantis" dx="95" dy="40"/>
         <cell rect="675,561,83,139" name="tail/mantis_taur" dx="135" dy="50"/>
         <cell rect="339,561,83,139" name="tail/weasel" dx="95" dy="40"/>
@@ -1320,6 +1326,8 @@
         <cell rect="1,701,173,156" name="tail_bg/fox9_taur" dx="60" dy="47"/>
         <cell rect="175,1015,173,156" name="tail_bg/Kumiho" dx="21" dy="37"/>
         <cell rect="175,1015,173,156" name="tail_bg/Kumiho_taur" dx="60" dy="47"/>
+		<cell rect="255,561,83,139" name="tail_bg/spider" dx="95" dy="40"/>
+        <cell rect="255,561,83,139" name="tail_bg/spider_taur" dx="135" dy="50"/>
     </spritemap>
     <spritemap file="wings.png">
         <cell rect="1,70,84,139" name="wings_bg/mantibig" dx="20" dy="20"/>
@@ -1370,6 +1378,7 @@
 		<layer name="shield"/>
 		<layer name="weapon"/>
 		<layer name="weaponBuff"/>
+		<layer name="legs_truefg"/>
 		<layer name="hands_fg"/>
 		<layer name="glove_fg"/>
 		<layer name="arms_fg"/>
@@ -3340,7 +3349,7 @@
                 <show part="legs/chitin2"/>
             </case>
             <case values="LowerBody.DRIDER">
-				<hide part="tail/spider"/>
+				<hide part="tail_bg/spider"/>
                 <hide part="legs/*"/>
                 <show part="legs_fg/drider"/>
             </case>
@@ -3730,9 +3739,9 @@
 				<if test="lowerBody == LowerBody.ATLACH_NACHA">
 					<else>
 						<if test="isTaur()">
-							<show part="tail/spider_taur"/>
+							<show part="tail_bg/spider_taur"/>
 							<else>
-								<show part="tail/spider"/>
+								<show part="tail_bg/spider"/>
 							</else>
 						</if>
 					</else>		
