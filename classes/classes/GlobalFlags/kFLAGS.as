@@ -1302,7 +1302,7 @@ public static const EASTER_BUNNY_EGGS_STORED:int                                
 public static const BENOIT_4:int 		                            				= 1294;
 public static const BENOIT_5:int                                   					= 1295;
 public static const BEE_GIRL_RESET_COUNTER:int                                      = 1296;
-public static const UNKNOWN_FLAG_NUMBER_01297:int                                   = 1297;
+public static const SOPHIE_BIMBO_AGAIN:int                                          = 1297;
 public static const UNKNOWN_FLAG_NUMBER_01298:int                                   = 1298;
 public static const UNKNOWN_FLAG_NUMBER_01299:int                                   = 1299;
 public static const KAIBA_SHELFS:int                                   				= 1300;

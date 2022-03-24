@@ -71,34 +71,39 @@ private function yesDebimboSophie():void {
 	
 	outputText("\n\n\"<i>Ew!  That TOTALLY wasn't booze!</i>\" Sophie complains, struggling out of your grasp and pouting, feather arms crossed beneath her heavy bosom.  You observe her for a long moment, waiting... waiting....  \"<i>Hey, I like, don't feel so good...</i>\" Sophie finally says, clutching her head, fingers running through her thick blonde locks.  \"<i>Ugh, I don't... Why... Oh, shit, where am I?  And what happened to my TITS!?</i>\" Sophie staggers forward, blinking hard.  When she looks up at you a moment later, you can see that gleam of intelligence flaring brightly once more in her blue eyes.");
 	
-	outputText("\n\n\"<i>Wha... what did you DO TO ME!?!?!</i>\" Sophie screams, a look of sheer feral rage splayed across her still-bimbofied face, full-lips drawn into a snarl beneath gleaming eyes and long golden hair.  Her shiny yellow feathers ruffle as she stomps up to you, putting her face right up to yours.  \"<i>You " + player.mf("bastard","bitch") + "!  WHAT DID YOU DO TO ME?</i>\"");
-	
-	outputText("\n\nYou recoil at the sudden outburst of rage, mind racing for an appropriate course of action...");
-	flags[kFLAGS.SOPHIE_DEBIMBOED] = 1;
-	if(flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] > 0) flags[kFLAGS.SOPHIES_DAUGHTERS_DEBIMBOED] = 1;
-	//[Beat her] {if Int > 30: [Apologize] [Why I Did It]} [Let Her Go] [Bimbo again!(if PC has Bimbo Liqueur)]
-	menu();
-	addButton(0,"Beat Her",beatSophieAroundYouMonster);
-	if(player.inte > 30) {
-		addButton(1,"Apologize",apologizeToDebimboSophie);
-		addButton(2,"WhyIDidIt",whyIDidItToDebimboSophie);
-	}
-	addButton(3,"Let Her Go",letDebimboSophieGo);
-	if(player.hasItem(consumables.BIMBOLQ)) addButton(4,"Bimbo Again",bimboSophieAgain);
-	
-	
+    if (flags[kFLAGS.SOPHIE_BIMBO_AGAIN] == 0) //first time
+	    outputText("\n\n\"<i>Wha... what did you DO TO ME!?!?!</i>\" Sophie screams, a look of sheer feral rage splayed across her still-bimbofied face, full-lips drawn into a snarl beneath gleaming eyes and long golden hair.  Her shiny yellow feathers ruffle as she stomps up to you, putting her face right up to yours.  \"<i>You " + player.mf("bastard","bitch") + "!  WHAT DID YOU DO TO ME?</i>\"");
+        outputText("\n\nYou recoil at the sudden outburst of rage, mind racing for an appropriate course of action...");
+        flags[kFLAGS.SOPHIE_DEBIMBOED] = 1;
+        if(flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] > 0) flags[kFLAGS.SOPHIES_DAUGHTERS_DEBIMBOED] = 1;
+        //[Beat her] {if Int > 30: [Apologize] [Why I Did It]} [Let Her Go] [Bimbo again!(if PC has Bimbo Liqueur)]
+        menu();
+        addButton(0,"Beat Her",beatSophieAroundYouMonster);
+        if(player.inte > 30) {
+            addButton(1,"Apologize",apologizeToDebimboSophie);
+            addButton(2,"WhyIDidIt",whyIDidItToDebimboSophie);
+        }
+        addButton(3,"Let Her Go",letDebimboSophieGo);
+	//no re-bimbo here - you must beat her first
+    else {
+        outputText("\n\nThis time the process goes slower, but as soon as she can think straight again, the harpy jumps away from you. \"<i>You " + player.mf("bastard","bitch") + "! YOU DID IT AGAIN! I HATE YOU!</i>\"");
+        outputText("\nSeems like the fight is inevitable this time...");
+        //(Go to normal Sophie Combat screen)
+        startCombat(new Sophie());
+        monster.createStatusEffect(StatusEffects.BimboBrawl,0,0,0,0);
+        monster.createStatusEffect(StatusEffects.GenericRunDisabled,0,0,0,0);
+    }
 }
 
 //Bimbo Again! (You monster)
 private function bimboSophieAgain():void {
 	clearOutput();
-	
-	outputText("Oh no, fuck this!  You lunge forward, seizing the recovering harpy while removing another Bimbo Liqueur from your belt.  \"<i>Wha- No!</i>\" she cries, but too late!  You pop the cork, and dump the braincell-killing booze down her gullet, keeping her mouth muffled and nose pinched shut until she swallows it allllllll down like the good little slut she truly is; the spent bottle rolling around on the floor as the sound of wet gulping fills the air.  The deed done, she slumps to the ground, her eyes crossing with familiar confusion as the liqueur does its job, frying her brain back into oblivion.");
-	
+	outputText("You lunge forward, seizing the recovering harpy while removing another Bimbo Liqueur from your belt.  \"<i>Wha- No!</i>\" she cries, but too late!  You pop the cork, and dump the braincell-killing booze down her gullet, keeping her mouth muffled and nose pinched shut until she swallows it allllllll down like the good little slut she truly is; the spent bottle rolling around on the floor as the sound of wet gulping fills the air.  The deed done, she slumps to the ground, her eyes crossing with familiar confusion as the liqueur does its job, frying her brain back into oblivion.");
 	outputText("\n\n\"<i>B... babe?</i>\" she asks a moment later, looking up at you with wide, dim eyes.  Her hand drifts down toward her sodden box, idly fingering it as she looks to you.  \"<i>Wanna, like, fuck or something?</i>\"");
 	outputText("\n\nWell then, crisis averted!");
 	flags[kFLAGS.SOPHIE_DEBIMBOED] = 0;
 	flags[kFLAGS.SOPHIES_DAUGHTERS_DEBIMBOED] = 0;
+    flags[kFLAGS.SOPHIE_BIMBO_AGAIN] = 1;
 	player.consumeItem(consumables.BIMBOLQ);
     if (CoC.instance.inCombat)
         cleanupAfterCombat(); //(Display Sophie's normal options.You monster)
@@ -124,13 +129,15 @@ internal function beatUpDebimboSophie():void {
 	//[Apologize] [Why I Did It] [Let Her Go] [Bimbo again!(if PC has Bimbo Liqueur)]
 	//{No INT gate now!}
 	menu();
-	//addButton(0,"Beat Her",beatUpDebimboSophie) {
-	addButton(1,"Apologize",apologizeToDebimboSophie);
-	addButton(2,"WhyIDidIt",whyIDidItToDebimboSophie);
+    if (flags[kFLAGS.SOPHIE_BIMBO_AGAIN] == 0)
+	    addButton(2,"WhyIDidIt",whyIDidItToDebimboSophie); //you just beat her up.
+    else
+		addButtonDisabled(2,"WhyIDidIt", "Your explanations won't work this time.");
 	addButton(3,"Let Her Go",letDebimboSophieGo);
 	if(player.hasItem(consumables.BIMBOLQ)) addButton(4,"Bimbo Again",bimboSophieAgain);
-	
+	else addButtonDisabled(4, "Bimbo Again", "Oops... you were not prepared for this outcome, were you?");
 }
+
 //Get the Shit Beaten Out of You by a God-damn Bimbo (You (weakling) Monster)
 internal function debimboSophieBeatsYouUp():void {
 	clearOutput();
@@ -139,8 +146,12 @@ internal function debimboSophieBeatsYouUp():void {
 	outputText("\n\nSophie buries her face in her hands and starts to cry, tears soon streaming around her fingers, staining her platinum blonde feathers.");
 	//[Apologize] [Why I Did It] [Let Her Go]
 	menu();
-	addButton(1,"Apologize",apologizeToDebimboSophie);
-	addButton(2,"WhyIDidIt",whyIDidItToDebimboSophie);
+	if(player.inte > 60 && flags[kFLAGS.SOPHIE_BIMBO_AGAIN] == 0) //fuck your explanations, you just attacked her!
+		addButton(1,"Apologize",apologizeToDebimboSophie);
+    else if (flags[kFLAGS.SOPHIE_BIMBO_AGAIN] > 0)
+		addButtonDisabled(1,"Apologize", "You did it again! What did you expect, you monster?");
+    else
+		addButtonDisabled(1,"Apologize", "You're too dumb to find the right words");
 	addButton(3,"Let Her Go",letDebimboSophieGo);
 }
 
@@ -777,11 +788,11 @@ private function forceSophieBlowjob():void {
 	if(player.cocks[x].cockType != CockTypesEnum.DOG) outputText("slip your spasming boner out of her golden gates, dripping the last few drops onto her pouty lower-lip.");
 	else outputText("pull against Sophie's cock-locked mouth, but your knot won't budge.  You sit there waiting for it to go down for what seems like forever, and her lipstick doesn't exactly help - it seems like your cum continues to flow and dribble the entire time, your animal-dong intent on inseminating the harpy's mouth.  Still, you manage to 'pop' free eventually, even though it stretches Sophie's jaw and echoes around your camp.");
 	outputText("\n\nThe harpy blushes up at you, gulping down the last thick deposit as she continues to masturbate her way to a second breathless orgasm, her tailfeathers quivering as it runs through her.  You tweak one of her tits for good measure before getting dressed and reminding her that she enjoyed it.  Sophie protests through her white-stained lips, \"<i>");
-	if(flags[kFLAGS.SOPHIE_FOLLOWER_IRRITATION] == 1) outputText("Ahhh... not... not as much as... I would if you'd reciprocate!");
-	else if(flags[kFLAGS.SOPHIE_FOLLOWER_IRRITATION] < 4) outputText("Ahhh... I... I don't know how many times I'll put up with this kind of treatment!");
-	else if(flags[kFLAGS.SOPHIE_FOLLOWER_IRRITATION] < 8) outputText("Ahhh... are... are you ever going to reciprocate?");
-	else if(flags[kFLAGS.SOPHIE_FOLLOWER_IRRITATION] == 8) outputText("Ahhh... I think... I've had enough...");
-	else outputText("Ahhh... actually... I think... <b>I think if you don't treat me nicer, I might leave.</b>");
+	if (flags[kFLAGS.SOPHIE_FOLLOWER_IRRITATION] == 1) outputText("Ahhh... not... not as much as... I would if you'd reciprocate!");
+	else if(flags[kFLAGS.SOPHIE_FOLLOWER_IRRITATION] == 2) outputText("Ahhh... I... I don't know how many times I'll put up with this kind of treatment!");
+	else if(flags[kFLAGS.SOPHIE_FOLLOWER_IRRITATION] == 3) outputText("Ahhh... are... are you ever going to reciprocate?");
+	else if(flags[kFLAGS.SOPHIE_FOLLOWER_IRRITATION] == 4) outputText("Ahhh... actually... I think... <b>I think if you don't treat me nicer, I might leave.</b>");
+	else outputText("Ahhh... I think... I've had enough...");
 	outputText("</i>\"");
 	
 	outputText("\n\nYou get dressed with a self-satisfied sigh.");
@@ -790,13 +801,15 @@ private function forceSophieBlowjob():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 
-//SixtyNine (* Temp until someone writes dis shit)
-//Get that vajajay in yo face.
-private function sophieSixtyNine():void {
+public function sophieLeft():void {
 	clearOutput();
-	outputText("Sophie cocks an eyebrow and asks, \"<i>A little sapphic delight for the horny champion?</i>\"  She snorts and rolls her eyes, \"<i>No thanks.  I'm not really that into girls.</i>\"  It doesn't seem like she's up for it.");
-	menu();
-	addButton(0,"Next",sleepWithSophieToggle);
+    outputText("After washing yourself up, you return to the camp to check up on Sophie. Only then do you notice something strange - you can find neither her, nor her daughters, nor her nest.");
+    outputText("\n\nFuck. Seems like she was serious about leaving.");
+    if (player.cor < 50)
+        outputText("\nYou feel slightly sorry: if you just had made her feel good, she probably would have forgiven you.");
+    else
+        outputText("\nWell, fuck her anyway. Stupid harpy bitch.");
+    flags[kFLAGS.SOPHIE_DISABLED] = 1;
 }
 
 //Sophie Teases Small Dicks In The Morning*
