@@ -71,7 +71,7 @@ private function yesDebimboSophie():void {
 	
 	outputText("\n\n\"<i>Ew!  That TOTALLY wasn't booze!</i>\" Sophie complains, struggling out of your grasp and pouting, feather arms crossed beneath her heavy bosom.  You observe her for a long moment, waiting... waiting....  \"<i>Hey, I like, don't feel so good...</i>\" Sophie finally says, clutching her head, fingers running through her thick blonde locks.  \"<i>Ugh, I don't... Why... Oh, shit, where am I?  And what happened to my TITS!?</i>\" Sophie staggers forward, blinking hard.  When she looks up at you a moment later, you can see that gleam of intelligence flaring brightly once more in her blue eyes.");
 	
-    if (flags[kFLAGS.SOPHIE_BIMBO_AGAIN] == 0) //first time
+    if (flags[kFLAGS.SOPHIE_BIMBO_AGAIN] == 0) {//first time
 	    outputText("\n\n\"<i>Wha... what did you DO TO ME!?!?!</i>\" Sophie screams, a look of sheer feral rage splayed across her still-bimbofied face, full-lips drawn into a snarl beneath gleaming eyes and long golden hair.  Her shiny yellow feathers ruffle as she stomps up to you, putting her face right up to yours.  \"<i>You " + player.mf("bastard","bitch") + "!  WHAT DID YOU DO TO ME?</i>\"");
         outputText("\n\nYou recoil at the sudden outburst of rage, mind racing for an appropriate course of action...");
         flags[kFLAGS.SOPHIE_DEBIMBOED] = 1;
@@ -84,7 +84,8 @@ private function yesDebimboSophie():void {
             addButton(2,"WhyIDidIt",whyIDidItToDebimboSophie);
         }
         addButton(3,"Let Her Go",letDebimboSophieGo);
-	//no re-bimbo here - you must beat her first
+		//no re-bimbo here - you must beat her first
+	}
     else {
         outputText("\n\nThis time the process goes slower, but as soon as she can think straight again, the harpy jumps away from you. \"<i>You " + player.mf("bastard","bitch") + "! YOU DID IT AGAIN! I HATE YOU!</i>\"");
         outputText("\nSeems like the fight is inevitable this time...");
