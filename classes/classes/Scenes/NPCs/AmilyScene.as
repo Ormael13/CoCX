@@ -7327,7 +7327,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 			// Reset urta cumtimer
 			flags[kFLAGS.URTA_CUM_NO_CUM_DAYS] = 0;
-			flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 3+rand(4);
+			urta.hoursUntilHorny(3+rand(4));
 			//Enable threesome mode!
 			if(flags[kFLAGS.AMILY_VISITING_URTA] == 0) {
 				outputText("\n\n(<b>Urta unlocked in Amily's sex menu!</b>)");
