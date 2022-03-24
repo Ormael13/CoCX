@@ -367,8 +367,8 @@ public final class ConsumableLib extends BaseContent
 		public const SMALL_EGGS:Array = [BLACKEG,BLUEEGG,BROWNEG,PINKEGG,PURPLEG,WHITEEG];
 
 		//ALCHEMICAL INGREDIANTS
-		public const HEALHERB:SimpleConsumable  = mk("HealHerb", "HealHerb", "a Healing herb", 6, "A herb with healing properties. Can be consumed directly or processed into a poultice.", m.HealingHerb);
-		public const MOONGRASS:SimpleConsumable = mk("MoonGrass", "MoonGrass", "a Moonlight grass", 6, "A grass with invigorative properties. Can be consumed directly or processed into a medicine.\n", m.MoonGrass);
+		public const HEALHERB:SimpleConsumable  = mk("HealHerb", "HealHerb", "a Healing herb", 6, "An herb with healing properties. Can be consumed directly or processed into a poultice.", m.HealingHerb);
+		public const MOONGRASS:SimpleConsumable = mk("MoonGrass", "MoonGrass", "Moonlight grass", 6, "A tuft of grass with invigorative properties. Can be consumed directly or processed into a medicine.\n", m.MoonGrass);
 		public const SNAKEBANE:SimpleConsumable = mk("SnakFlowr", "SnakFlowr", "a Snakebane flower", 6, "This flower can cure poison but, when alchemically processed, remove burns and frostburns as well. Can be consumed directly or processed into a medicine.", m.SnakeFlower);
 		public const IRONWEED:SimpleConsumable  = mk("IronWeed", "IronWeed", "a Iron weed", 6, "This magical weed dulls one’s sense of pain and temporarily hardens the skin. Can be consumed directly or processed into a medicine.", m.Ironweed);
 		public const BLADEFERN:SimpleConsumable = mk("BladeFerns", "BladeFerns", "a handfull of Blade ferns", 6, "This magical ferns helps the user temporarily generate more adrenaline and boosts the muscle mass, improving one’s strength and speed. Can be consumed directly or processed into a medicine.", m.BladeFerns);
