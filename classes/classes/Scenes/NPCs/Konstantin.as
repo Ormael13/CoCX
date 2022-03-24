@@ -890,7 +890,7 @@ package classes.Scenes.NPCs
 				outputText("As you’re about to sit, your ursine friend points to you.\n\n");
 				outputText("\"<i>Hey, [name]. Better take out those.</i>\" he suggests \"<i>Well feel more fresh that way, and I don’t think that anyone is gonna come in and see us.</i>\"\n\n");
 				outputText("Nodding, you remove you clothing and leave it next to his bed, then you hop in and sit beside the naked bear, feeling the warm embrace of his fur on your [skin].\n\n");
-				outputText("\"<i>“So, you came here only to hand around naked with me?</i>\" he jokingly remarks.\n\n");
+				outputText("\"<i>\"So, you came here only to hand around naked with me?</i>\" he jokingly remarks.\n\n");
 				outputText("Blushing, you admit that you’d like to do what you were seeking, spend a good time with him, if he catches what you mean. He nods and smiles, enveloping you in one of his bear-hugs.\n\n");
 				outputText("\"<i>It’s okay, " + player.mf("man", "girl") + ". We always have those urges sooner or later. And, on those times is much more sooner than later. And, with you, I’d be more than happy.</i>\" he assures you. \"<i>So, what’s on your mind?</i>\"\n\n");
 				flags[kFLAGS.KONSTANTIN_SEX_MENU] = 1;
@@ -899,10 +899,10 @@ package classes.Scenes.NPCs
 			menu();
 			addButton(0, "Give BJ", KonstantinSexMenuGiveBJ);
 			if (player.hasCock()) {
-				addButton(1, "Recive BJ", KonstantinSexMenuReciveBJ);
+				addButton(1, "Receive BJ", KonstantinSexMenuReciveBJ);
 				addButton(2, "69", KonstantinSexMenu69);
 			}
-			addButton(3, "Recive Anal", KonstantinSexMenuReciveAnal);
+			addButton(3, "Receive Anal", KonstantinSexMenuReciveAnal);
 			if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] >= 4) addButton(4, "Hot Spring Fuck", KonstantinSexMenuHotSpringFuck);
 			addButton(14, "Back", KonstantinMainCampMenu);
 		}

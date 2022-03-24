@@ -863,7 +863,7 @@ private function barBeerOrgyTits():void {
 		if(player.hasVagina()) outputText("  You gag on it at the same time a new cock fills your cunt, ready to renew the thrusting that's been causing your tits to bounce all over the place.");
 
 		//IF [player has single cock small-med cock]
-		if(player.cockTotal() == 1 && player.cockArea(0) < 75) outputText("\n\nA cat girl with six C-cup breasts jumps up onto the table and mounts you.  She grabs your cock and proceeds to shove it up between the folds of her tight pussy.");
+		if(player.cockTotal() == 1 && player.biggestCockArea() < 75) outputText("\n\nA cat girl with six C-cup breasts jumps up onto the table and mounts you.  She grabs your cock and proceeds to shove it up between the folds of her tight pussy.");
 		//OR IF [player has single huge cock]
 		else if(player.cockTotal() == 1) outputText("\n\nA cow girl with six large tits and quad nipples crawls with difficulty up and onto the table, carefully positioning her bare bovine cunt above your massive member, and proceeds to thrust her ridiculously wide hips down around it.");
 		// FOR BOTH COCK SIZES -

@@ -247,6 +247,8 @@ public class SpriteDb {
 	public static var s_gargoyle:Class;
 	[Embed(source="../../../res/sprites/sapphire.png")]
 	public static var s_sapphire:Class;
+	[Embed(source="../../../res/sprites/obsidian_gargoyle.png")]
+	public static var s_obsidian_gargoyle:Class;
 	[Embed(source="../../../res/sprites8bit/shouldra-normal-old.png")]
 	public static var s_ghostGirl_8bit:Class;
 	public static function get s_ghostGirl(): Class {

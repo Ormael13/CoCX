@@ -43,7 +43,7 @@ public class GoblinElderScene extends BaseContent
 		public function goblinElderEncounter():void {
 			clearOutput();
 			//First Time Intro
-			if(flags[kFLAGS.TIMES_ENCOUNTERED_GOBLIN_ELDER] == 0)
+			if(flags[kFLAGS.TIMES_ENCOUNTERED_PRISCILLA] == 0)
 			{
 				outputText("As you take a stroll, you catch the glimpse of an imposing goblin. Unlike most of the goblins you've seen so far, she's clad in primitive bone armor, wielding a metal sword lined with lethicite crystal, and holding a metal greatshield. Her hair is crimson and black. She walks over to you in a peaceful manner.");
 				if (player.hasCock()) {
@@ -56,7 +56,7 @@ public class GoblinElderScene extends BaseContent
 			}
 			//Repeat Intro - Cell Chambers
 			else {
-				outputText("As you walk, the familiar sight of a powerful goblin catches your eye. You have encountered " + (flags[kFLAGS.GOBLIN_ELDER_TALK_COUNTER] > 0 ? "Priscilla" : "the goblin elder") + " again!");
+				outputText("As you walk, the familiar sight of a powerful goblin catches your eye. You have encountered " + (flags[kFLAGS.PRISCILLA_TALK_COUNTER] > 0 ? "Priscilla" : "the goblin elder") + " again!");
 				if (player.hasCock()) {
 					if (player.cor < 60 + player.corruptionTolerance()) outputText("\n\n\"<i>Hello again" + (player.hasCock() ? ", stud. Ready to knock me up with your cum? Or are you here to duel?" : ",") + "</i>\" she says.");
 					else outputText("\n\n\"<i>Please don't fuck me! You're too corrupt!</i>\"");
@@ -65,7 +65,7 @@ public class GoblinElderScene extends BaseContent
 					outputText("\n\n\"<i>You don't have anything to knock me up but I'm always up for the challenge,</i>\" she says.");
 				}
 			}
-			flags[kFLAGS.TIMES_ENCOUNTERED_GOBLIN_ELDER]++;
+			flags[kFLAGS.TIMES_ENCOUNTERED_PRISCILLA]++;
 			if (flags[kFLAGS.CODEX_ENTRY_GOBLINS] <= 0) {
 				flags[kFLAGS.CODEX_ENTRY_GOBLINS] = 1;
 				outputText("\n\n<b>New codex entry unlocked: Goblins!</b>")
@@ -77,7 +77,7 @@ public class GoblinElderScene extends BaseContent
 			}
 			menu();
 			addButton(0, "Fight", startFight);
-			if (flags[kFLAGS.GOBLIN_ELDER_TALK_COUNTER] < 2) addButton(1, "Talk", talkToGoblinElder);
+			if (flags[kFLAGS.PRISCILLA_TALK_COUNTER] < 2) addButton(1, "Talk", talkToGoblinElder);
 			if (player.hasCock() && player.lust >= 33 && player.cor < 60 + player.corruptionTolerance()) {
 				monster = new GoblinElder();
 				if (player.cockThatFits(monster.vaginalCapacity()) >= 0) addButton(2, "Fuck Her", gatsGoblinBoners);
@@ -105,7 +105,7 @@ public class GoblinElderScene extends BaseContent
 				outputText("\n\nThe goblin elder watches impassively for a moment, but as your need intensifies, her attitude softens while your member hardens.  \"<i>Oh, I think I’m gonna regret this, but ");
 				if(player.cockTotal() == 1) outputText("that thing");
 				else outputText("those things");
-				outputText(" look mighty tasty.  You don’t mind if I sample just a little bit of your seed do you?</i>\"  The crimson-maned beauty kneels down next to you and lets her tiny, delicate digits dance across the underside of [oneCock], drawing a lurid moan from your lips as she wonders out loud, “I don’t hear a no, " + player.mf("stud","sexy") + ".  That’s good... I’m just going to take a little bit of cum... just a few squirts.  Surely a ");
+				outputText(" look mighty tasty.  You don’t mind if I sample just a little bit of your seed do you?</i>\"  The crimson-maned beauty kneels down next to you and lets her tiny, delicate digits dance across the underside of [oneCock], drawing a lurid moan from your lips as she wonders out loud, \"I don’t hear a no, " + player.mf("stud","sexy") + ".  That’s good... I’m just going to take a little bit of cum... just a few squirts.  Surely a ");
 				if(player.tallness >= 60) outputText("big, ");
 				outputText(player.mf("strapping young man","sexy breeder") + " will have enough jizz to pay for " + player.mf("his","her") + " trespass?</i>\"");
 				outputText("  Those delightful, dancing fingers pirouette down to your ");
@@ -148,7 +148,7 @@ public class GoblinElderScene extends BaseContent
 			{
 				x = player.biggestCockIndex();
 				outputText("You tear through your [armor] in a rush, anything to release [eachCock] from its hellish confinement.  You’re so aroused, so horny.  Any passing thoughts of modesty are immediately discarded and forgotten, washed away under the wave of your all-consuming lust as your fingers slide home around [oneCock] and begin to play with the turgid tool.  You immediately buck from the sensation of incredible, pent-up need, nearly cumming on the spot.  Looking up, you meet the emerald-skinned woman’s eyes pleadingly.");
-				outputText("\n\nThe elder sighs and grumbles, \"<i>Another one with a fucking tree-trunk for a cock.</i>\"  She begrudgingly slips out of her straps, perky, dark-green nipples popping free from their confinement to jut proudly from her chest.  “The downside of being a goblin,” explains the athletic green-skinned beauty, \'<i>is that around a dick like that... a heaving, pulsating tower of cock-flesh like that... I’ve just gotta TRY it.</i>\"  Now nude, your captor saunters up, wide hips shaking from side to side with every step.  \"<i>Being a size-queen is suffering,</i>\" she finishes with a wry smile.");
+				outputText("\n\nThe elder sighs and grumbles, \"<i>Another one with a fucking tree-trunk for a cock.</i>\"  She begrudgingly slips out of her straps, perky, dark-green nipples popping free from their confinement to jut proudly from her chest.  \"The downside of being a goblin,\" explains the athletic green-skinned beauty, \'<i>is that around a dick like that... a heaving, pulsating tower of cock-flesh like that... I’ve just gotta TRY it.</i>\"  Now nude, your captor saunters up, wide hips shaking from side to side with every step.  \"<i>Being a size-queen is suffering,</i>\" she finishes with a wry smile.");
 				outputText("\n\nYou watch her tirade with confused indifference, comprehending little beyond the petite slut’s desire to mount your member.  Tracing your hands over the pulsating veins on your " + cockDescript(x) + ", your body continues on autopilot, masturbating hard and fast for the emerald beauty as she climbs atop you.  Her juicy gash spreads over the bulge of your urethra as the goblin sinks down atop you, her legs splaying to the sides obscenely.  She commands, \"<i>Hands off bub.  You lost to a goblin, and that means you get to be a dad, whether you want to or not.</i>\"");
 				outputText("\n\nThe puffy emerald curtains drape your dick in elastic goblin pussy and brush your feverishly pumping fingers away.  Your captor lets a lewd moan slip through her lips as she begins grinding along your mammoth pole, dragging dark-hued genetalia back and forth on your massive dong.  A perky, hard little clit pops out of the top of the goblin’s glittery pussy-folds, visibly twitching in a display of supreme enjoyment.  Driven by your own insatiable desire, you shift under her, trying to slide your " + cockDescript(x) + " even faster through her pussy.");
 				if(player.biggestCockLength() > player.tallness/2) outputText("  Your incredibly long phallus blocks your view of the sultry goblin, and you never see the blow coming.");
@@ -921,18 +921,18 @@ public class GoblinElderScene extends BaseContent
 		private function talkToGoblinElder():void {
 			clearOutput();
 			outputText("You ask the goblin if she wouldn't mind talking. ");
-			if (flags[kFLAGS.GOBLIN_ELDER_TALK_COUNTER] == 0) {
+			if (flags[kFLAGS.PRISCILLA_TALK_COUNTER] == 0) {
 				outputText("What is she anyway? How is she unusual from the other goblins? Of all the goblins you've seen, she isn't as sexually inclined.");
 				outputText("\n\n\"<i>Of course. My name is Priscilla and I've traveled a lot and I have slain a lot of imps, hellhounds, and minotaurs. The demons must pay for the damage caused to my race and I worked hard to keep my mind off constant sexual desires. I gave birth to hundreds of goblins but I keep my boobs normal with Reducto. I still have unfinished business,</i>\" she says.");
 				outputText("\n\nWhat are her current goals then?");
 				outputText("\n\n\"<i>I'm seeking out someone who's not corrupt so I can give birth to less-tainted goblin. My tribe is isolated from the corrupted Goblin societies and I tried to brew a purifying potion but to no avail" + ((flags[kFLAGS.LETHICE_DEFEATED] > 0) ? ". I did hear the news that you have defeated Lethice. You're my saviour and I'll be forever grateful at you for causing a major blow against the demons" : "") + ",</i>\" the goblin says.");
 			}
-			else if (flags[kFLAGS.GOBLIN_ELDER_TALK_COUNTER] == 1) {
+			else if (flags[kFLAGS.PRISCILLA_TALK_COUNTER] == 1) {
 				outputText("Where did she originally came from? How did she escape corruption?");
 				outputText("\n\n\"<i>I came from the old goblin city. Before the demons came, we were the technological leaders. When the demons came, they offer us a treaty guaranteeing the peace and safety. But they lied and they corrupted the water supply. I knew there was something wrong with the water supply so I escaped and hid in the Deepwoods, where no demons would find me.</i>\"");
 			}
 			outputText("\n\nYou thank the goblin for telling you and wave her off.");
-			flags[kFLAGS.GOBLIN_ELDER_TALK_COUNTER]++;
+			flags[kFLAGS.PRISCILLA_TALK_COUNTER]++;
 			doNext(camp.returnToCampUseOneHour);
 		}
 	}

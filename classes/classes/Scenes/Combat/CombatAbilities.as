@@ -136,6 +136,12 @@ public class CombatAbilities {
 	public static const StalagmiteEx:StalagmiteSpell           = new StalagmiteSpell(true);
 	public static const Shatterstone:ShatterstoneSpell         = new ShatterstoneSpell();
 	public static const ShatterstoneEx:ShatterstoneSpell       = new ShatterstoneSpell(true);
+	public static const AcidSpray:AcidSpraySpell               = new AcidSpraySpell();
+	public static const AcidSprayEx:AcidSpraySpell             = new AcidSpraySpell(true);
+	public static const CorrosiveWave:CorrosiveWaveSpell       = new CorrosiveWaveSpell();
+	public static const CorrosiveWaveEx:CorrosiveWaveSpell     = new CorrosiveWaveSpell(true);
+	public static const HydroAcid:HydroAcidSpell               = new HydroAcidSpell();
+	public static const AcidRain:AcidRainSpell                 = new AcidRainSpell();
 	//	if (player.hasStatusEffect(StatusEffects.KnowsWereBeast)) buttons.add("Were-beast",	were-beast spell goes here
 	
 	public static const ALL_GREY_SPELLS:/*CombatAbility*/Array = [
@@ -155,7 +161,13 @@ public class CombatAbilities {
 		Stalagmite,
 		StalagmiteEx,
 		Shatterstone,
-		ShatterstoneEx
+		ShatterstoneEx,
+		AcidSpray,
+		AcidSprayEx,
+		CorrosiveWave,
+		CorrosiveWaveEx,
+		HydroAcid,
+		AcidRain
 	];
 	
 	public static const BloodMissiles:BloodMissilesSpell               = new BloodMissilesSpell();

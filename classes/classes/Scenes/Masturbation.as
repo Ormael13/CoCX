@@ -1312,7 +1312,7 @@ public class Masturbation extends BaseContent {
 				}
 			}
 			//Round and compare cock thickness to vag looseness
-			if (Math.round(player.cockArea(0)) >= player.vaginalCapacity()) {
+			if (Math.round(player.biggestCockArea()) >= player.vaginalCapacity()) {
 				//Different noises based on sensitivity
 				if (player.sens < 45)
 					outputText("ou grunt with exertion as you attempt to stuff your [cock] into ");
@@ -1327,7 +1327,7 @@ public class Masturbation extends BaseContent {
 				else outputText("the gaping fuck-mouth of your inhuman nipple-cunt. ");
 				//Compare cockthickness and vaglooseness more specifically
 				//if it barely fits
-				if (Math.round(player.cockArea(0)) == player.vaginalCapacity()) {
+				if (Math.round(player.biggestCockArea()) == player.vaginalCapacity()) {
 					if (player.averageVaginalLooseness() < 2)
 						outputText("Your poor, tortured nipple is barely up to the task of accepting the [cock], but accept it it does. ");
 					else if (player.averageVaginalLooseness() < 4)
@@ -1382,7 +1382,7 @@ public class Masturbation extends BaseContent {
 					outputText("With each thrust, you bury your [cock] deeper into your greedy tit. Overwhelmed by the combined sensations, your mind is barely able to cope with the intense feeling of fullness where no such feeling should be possible.");
 				}
 				//if it doesnt really fit
-				if (Math.round(player.cockArea(0)) > player.vaginalCapacity()) {
+				if (Math.round(player.biggestCockArea()) > player.vaginalCapacity()) {
 					if (player.averageVaginalLooseness() < 2)
 						outputText("Your poor, tortured nipple is woefully insufficient compared to your [cock], delerious with arousal, you keep trying anyway. ");
 					else if (player.averageVaginalLooseness() < 4)
@@ -1484,7 +1484,7 @@ public class Masturbation extends BaseContent {
 				}
 				else outputText("girl-lube spurts out of your tortured nipple with each thrust of your [cock], spattering your arms and face with your secretions. ");
 			}
-			if (Math.round(player.cockArea(0)) < player.vaginalCapacity()) {
+			if (Math.round(player.biggestCockArea()) < player.vaginalCapacity()) {
 				//Different noises based on sensitivity
 				if (player.sens < 45)
 					outputText("ou sigh with pleasure");
@@ -2378,7 +2378,7 @@ public class Masturbation extends BaseContent {
 			clearOutput();
 			outputText("You launch the FUNTIME function and your mech’s structure opens out as gears and features align, the driver’s seat moving down to the ground for you to sit on.\n\n");
 			outputText("You cheerfully sit on your seat, ready for a session. The screen before you quickly flickers to life, welcoming you and asking you to kindly place your feet in the appropriate safety straps and place your arms in the secure cuffs as to avoid injury. You grumble about the pointlessness of adding a set of safety measures but work your way into the tight fitting straps anyways.\n\n");
-			outputText("Within moments, the machine lifts you up, pulling your arms out and apart, away from your pleasure aching body. You don't bother to fight the strong pull of the mechanical assistant. It whirs to life, stating that it is beginning “Phase 1: Preconditioning”.\n\n");
+			outputText("Within moments, the machine lifts you up, pulling your arms out and apart, away from your pleasure aching body. You don't bother to fight the strong pull of the mechanical assistant. It whirs to life, stating that it is beginning \"Phase 1: Preconditioning\".\n\n");
 			outputText("You feel your mech begin to tug at your clothes with various mechanical clamps. It pulls your clothing free in moments, revealing your [breasts], [cunt], and your [ass] to the outside world’s air. It doesn’t take the machine but a couple of moments to place a metallic, phallic-shaped device against your labia and anus, the cold metal eliciting a pleasured gasp from you, allowing it to slip another cock into your mouth. The tip of the metal cock tastes salty, leaking some fluid slowly from the tip. You blush with arousal as your machine force feeds you cum.\n\n");
 			outputText("Continuing its molestations, the machine attaches a small sucker hose to your clit, quickly suctioning it erect. The device follows suit with your perky nipples. You begin to moan, unable to hold back the delirious pleasure shooting through your body from the suctioning tubes. A mechanical arm with a syringe moves to your pussy and injects your clit with a chemical concoction of your design, causing your [pussy] lips to puff up and your throbbing clitoris to double in size"+(player.clitLength >= 3 ? " rivaling or perhaps even beating the length of a true penis":"")+". Distracted by the amazing feelings in your cunt you almost don’t notice the cum leaking from both phallic devices between your legs, lubing you further until they’re both starting to penetrate you at the same time, stuffing you full of mechanical cock from nearly every angle.\n\n");
 			player.cuntChange(8, true, true, false);

@@ -196,7 +196,7 @@ public class HeXinDao extends BaseContent
         menu();
         var buyItem1:Function = curry(confirmBuy1,golemmerchant,"Golem",1);
         var buyItem2:Function = curry(confirmBuy2,golemmerchant,"Golem",0.2);
-        var introText:String = "\"When you reach towards one of the items on the display, the golem says, \\\"<i>";
+        var introText:String = "\"When you reach towards one of the items on the display, the golem says, \"<i>";
         var costText:String = " Interested?  It is <b>";
         var endText1:String = " gems</b></i>.\"";
         var endText2:String = " spirit stones</b></i>.\"";
@@ -1301,4 +1301,4 @@ public function soularena():void {
         doNext(camp.returnToCampUseOneHour);
     }
 }
-}
+}

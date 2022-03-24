@@ -747,10 +747,10 @@ public class Camp extends NPCAwareContent{
 				outputText("set up perfectly, and in good repair.  ");
 			}
 		}
-		if (model.time.days >= 20) outputText("You've even managed to carve some artwork into the rocks around the [camp]'s perimeter.\n\n");
-		if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 7) outputText("There's an unfinished wooden structure. As of right now, it's just frames nailed together.\n\n");
-		if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 8) outputText("There's an unfinished cabin. It's currently missing windows and door.\n\n");
-		if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 9) outputText("There's a nearly-finished cabin. It looks complete from the outside but inside, it's missing flooring.\n\n");
+		if (model.time.days >= 20) outputText("You've even managed to carve some artwork into the rocks around the [camp] perimeter.\n\n");
+		if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 7) outputText("There's an unfinished wooden structure. As of right now, it's little more than wooden frames nailed together.\n\n");
+		if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 8) outputText("There's an unfinished cabin. It's currently missing both windows and a door.\n\n");
+		if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 9) outputText("There's a nearly-finished cabin. It looks complete from the outside, but inside, the floors are still bare earth.\n\n");
 		if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 10) outputText("Your cabin is situated near the edge of [camp].\n\n");
 		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 0 || flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 1) outputText("Halfway between portal and [camp] edge is set place where you will store piles of wood or stones used for constructions. ");
 		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 3) outputText("Halfway between portal and [camp] edge rests a medium sized wood platform, which you use to store wood and next to it is place for storing stones. ");
@@ -783,9 +783,9 @@ public class Camp extends NPCAwareContent{
 			outputText(" written at the edge of your [camp]. Their runes regularly glow with impulse of power.\n\n");
 		}
 		if (flags[kFLAGS.CAMP_UPGRADES_DAM] >= 1) {
-			if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 3) outputText("A big, wooden dam noticably increases the width of the nearby stream, up to the point of creating very narrow miniature lake");
+			if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 3) outputText("A big, wooden dam noticably increases the width of the nearby stream, slowing the water to a near still. It's created a small bay next to camp.");
 			else if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 2) outputText("A wooden dam noticably increases the width of the nearby stream, slowing the passage of water");
-			else outputText("A small wooden dam helps increase the width of the nearby stream slowing the passage of water");
+			else outputText("A small wooden dam drapes across the stream, slowing the passage of water");
 			outputText(".\n\n");
 		}
 		if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 1) {
@@ -797,7 +797,7 @@ public class Camp extends NPCAwareContent{
 			outputText(" fishery. You can see several barrels at its side to store any fish that are caught.\n\n");
 		}
 		if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] >= 2 && flags[kFLAGS.CHRISTMAS_TREE_LEVEL] < 8) {
-			if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 2) outputText("At the corner of camp where you planted a seed, sapling has grown. It has dozens of branches and bright green leaves.\n\n");
+			if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 2) outputText("At the corner of camp where you planted a seed, a sapling has grown. It has dozens of branches and bright green leaves.\n\n");
 			else if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 3) outputText("At the corner of camp, the tree like sapling has grown bigger having grown more branches and leaves.\n\n");
 			else if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 4) outputText("At the corner of camp, a small tree has grown. The bright green leaves gently sway with the blowing wind.\n\n");
 			else outputText("At the corner of camp sits a rather large tree. It's leafy canopy sways with the wind and the thick trunk is covered in sturdy bark." + (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 7 ? " The tree is covered in colorful ornaments and lights for the season." : "") + "\n\n");
@@ -817,7 +817,7 @@ public class Camp extends NPCAwareContent{
 			//Rookery Descriptions (Short)
 			//Small (1 mature daughter)
 			if (flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] == 1) {
-				outputText("There's a smallish harpy nest that your daughter has built up with rocks piled high near the fringes of your [camp].  It's kind of pathetic, but she seems proud of her accomplishment.  ");
+				outputText("There's a small harpy nest that your daughter has built up, made from rocks near the fringes of your [camp].  It's kind of pathetic, but she seems proud of her accomplishment.  ");
 			}
 			//Medium (2-3 mature daughters)
 			else if (flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] <= 3) {
@@ -851,8 +851,8 @@ public class Camp extends NPCAwareContent{
 		}
         //Wall
 		if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 10 && flags[kFLAGS.CAMP_WALL_PROGRESS] < 100) {
-			if (flags[kFLAGS.CAMP_WALL_PROGRESS] / 10 == 1) outputText("A thick wooden wall has been erected to provide a small amount of defense.  ");
-			else outputText("Thick wooden walls have been erected to provide some defense.  ");
+			if (flags[kFLAGS.CAMP_WALL_PROGRESS] / 10 == 1) outputText("A thick wooden wall has been erected. Incomplete as it is, it provides only a small amount of defense.  ");
+			else outputText("Thick wooden walls have been erected around your camp.  ");
 		} else if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100) {
 			outputText("Thick wooden walls have been erected; they surround half of your [camp] perimeter and provide sound defense, leaving the the open half for access to the stream.  ");
 			if (flags[kFLAGS.CAMP_WALL_GATE] > 0) outputText("A gate has been constructed in the middle of the walls; it gets closed at night to keep any invaders out.  ");
@@ -975,7 +975,7 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.CAMP_CABIN_PROGRESS] <= 0 && model.time.days >= 7) {
 			flags[kFLAGS.CAMP_CABIN_PROGRESS] = 1;
 			clearOutput();
-			outputText("You realize that you have spent week sleeping in tent every night. You think of something so you can sleep nicely and comfortably. Perhaps a cabin will suffice?");
+			outputText("You realize that you have spent a whole week sleeping in tent every night. You need to make something so you can sleep better, long-term. Perhaps a cabin will suffice?");
 			doNext(playerMenu);
 			return;
 		}
@@ -1166,6 +1166,7 @@ public class Camp extends NPCAwareContent{
 		var counter:Number = 0;
 		if (flags[kFLAGS.ALVINA_FOLLOWER] > 19) counter++;
 		if (arianScene.arianFollower()) counter++;
+		if (BelisaFollower.BelisaInCamp) counter++;
 		if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2 && flags[kFLAGS.CHI_CHI_FOLLOWER] != 5 && !player.hasStatusEffect(StatusEffects.ChiChiOff)) counter++;
 		if (flags[kFLAGS.CEANI_FOLLOWER] > 0) counter++;
 		if (flags[kFLAGS.DIANA_FOLLOWER] >= 6 && !player.hasStatusEffect(StatusEffects.DianaOff)) counter++;
@@ -1336,6 +1337,11 @@ public class Camp extends NPCAwareContent{
 			if (arianScene.arianFollower()) {
 				outputText("Arian's tent is here, if you'd like to go inside.\n\n");
 				buttons.add("Arian", arianScene.visitAriansHouse);
+			}
+			//Belisa
+			if (BelisaFollower.BelisaInCamp) {
+				outputText("On the water, Belisa anchored her silk dome. However, since you’ve seen it, the dwelling has changed. Instead of a fully submerged bubble-like structure, it’s got a silky curtain for a door, and a solid wooden dock’s been added to anchor the odd building to the ground. Outside the dwelling, a small stall’s been set up, and Belisa’s wares are on display.\n\n");
+				buttons.add("Belisa", SceneLib.belisa.BelisaMainCampMenu).hint("Visit Belisa.");
 			}
 			//Cai'Lin
 //	buttons.add("???").disable("Look into my eyes and answer me: Am I beautiful?");
@@ -1515,7 +1521,7 @@ public class Camp extends NPCAwareContent{
 			}
 			//MARBLE
 			if (player.hasStatusEffect(StatusEffects.CampMarble) && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) {
-				outputText("A second bedroll rests next to yours; a large two handed hammer sometimes rests against it, depending on whether or not its owner needs it at the time.  ");
+				outputText((flags[kFLAGS.CAMP_BUILT_CABIN] > 0 ? "A bedroll rests next to your cabin" : "A second bedroll rests next to yours") + "; a large two handed hammer sometimes rests against it, depending on whether or not its owner needs it at the time.  ");
 				//Normal Murbles
 				if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 4) outputText("Marble isn’t here right now; she’s still off to see her family.");
 				//requires at least 1 kid, time is just before sunset, this scene always happens at this time if the PC has at least one kid.
@@ -3013,6 +3019,7 @@ public class Camp extends NPCAwareContent{
 		if (player.hasStatusEffect(StatusEffects.EtnaOff)) outputText("\nEtna: <font color=\"#800000\"><b>Disabled</b></font>");
 		if (player.hasStatusEffect(StatusEffects.LunaOff)) outputText("\nLuna: <font color=\"#800000\"><b>Disabled</b></font>");
 		if (player.hasStatusEffect(StatusEffects.TedOff)) outputText("\nDragon Boi: <font color=\"#800000\"><b>Disabled</b></font>");
+		if (player.hasStatusEffect(StatusEffects.BelisaOff)) outputText("\nBelisa: <font color=\"#800000\"><b>Disabled</b></font>");
 		menu();
 		if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) {
 			if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] < 2) addButton(10, "Train", NPCsTrain);
@@ -3025,6 +3032,8 @@ public class Camp extends NPCAwareContent{
 		addButton(4, "Etna", toggleEtnaMenu).hint("Enable or Disable Etna. This will remove her from enc table and if already in [camp] disable access to her.");
 		addButton(5, "Luna", toggleLunaMenu).hint("Enable or Disable Luna. This will remove her from enc table and if already in [camp] disable access to her.");
 		addButton(6, "DragonBoi", toggleTedMenu).hint("Enable or Disable Dragon Boi. This will remove him from enc table.");
+		//since this section is WIP anyway, let her be here too, lol
+        addButton(7, "Belisa", toggleBelisaMenu).hint("Enable or Disable Belisa. This will remove her ONLY from enc table.");
 		addButton(14, "Back", campActions);
 	}
 
@@ -3082,6 +3091,12 @@ public class Camp extends NPCAwareContent{
 	private function toggleTedMenu():void {
 		if (player.hasStatusEffect(StatusEffects.TedOff)) player.removeStatusEffect(StatusEffects.TedOff);
 		else player.createStatusEffect(StatusEffects.TedOff, 0, 0, 0, 0);
+		SparrableNPCsMenu();
+	}
+
+	private function toggleBelisaMenu():void {
+		if (player.hasStatusEffect(StatusEffects.BelisaOff)) player.removeStatusEffect(StatusEffects.BelisaOff);
+		else player.createStatusEffect(StatusEffects.BelisaOff, 0, 0, 0, 0);
 		SparrableNPCsMenu();
 	}
 
@@ -3469,13 +3484,8 @@ public class Camp extends NPCAwareContent{
 		addButton(1, "2 Hours", doWait2).hint("Wait two hours.");
 		addButton(2, "4 Hours", doWait4).hint("Wait four hours.");
 		addButton(3, "8 Hours", doWait8).hint("Wait eight hours.");
-		if (player.isNightCreature())
-		{
-			addButton(4, "Till Dawn", doWaitTillDawn).hint("Wait until the dawn comes.");
-		}
-		else{
-			addButton(4, "Till Dusk", doWaitTillDusk).hint("Wait until the night comes.");
-		}
+		if (player.isNightCreature()) addButton(4, "Till Dawn", doWaitTillDawn).hint("Wait until the dawn comes.");
+		else addButton(4, "Till Dusk", doWaitTillDusk).hint("Wait until the night comes.");
 		addButton(14, "Back", playerMenu);
 	}
 
@@ -3692,7 +3702,7 @@ public class Camp extends NPCAwareContent{
 					return;
 				} else outputText("Luna hugs you tightly, almost possessively so as you both doze off to sleep.");
 			} else if (flags[kFLAGS.SLEEP_WITH] == "Samirah" && flags[kFLAGS.SAMIRAH_FOLLOWER] > 9) {
-				outputText("As you both head to sleep, Samirah slithers to you and coils her tail around your legs, wrapping her arms around your torso as she rests her head on your shoulder. Her body is cold and she looks at you as if in a daze.");
+				outputText("As you both head to sleep, Samirah slithers to you and coils her tail around " + ((player.lowerBody == 3)? "yours" : "your lower half") + ", wrapping her arms around your torso as she rests her head on your shoulder. Her body is cold and she looks at you as if in a daze.");
 				if (player.isNaga()) outputText(" She’s not alone either. It indeed took you a while to realise that you are also cold blooded now. The cold night air sure puts you in a similar state as of late.");
 				outputText("\n\n\"<i>Sweet dreams [name], till morning and sunshine come.</i>\"\n");
 			} else if (flags[kFLAGS.SLEEP_WITH] == "Ember" && flags[kFLAGS.EMBER_AFFECTION] >= 75 && followerEmber()) {

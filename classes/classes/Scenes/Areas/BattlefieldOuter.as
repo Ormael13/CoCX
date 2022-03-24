@@ -9,6 +9,7 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
 import classes.Scenes.Areas.Battlefield.*;
+import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.SceneLib;
 import classes.Items.Vehicles;
 
@@ -41,17 +42,22 @@ use namespace CoC;
 			}
 			//Diana
 			if (flags[kFLAGS.DIANA_FOLLOWER] < 6 && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff) && rand(5) == 0) {
-				if (flags[kFLAGS.DIANA_FOLLOWER] != 3 && flags[kFLAGS.DIANA_LVL_UP] >= 8)
+				if ((flags[kFLAGS.DIANA_FOLLOWER] < 3 || flags[kFLAGS.DIANA_FOLLOWER] == 5) && flags[kFLAGS.DIANA_LVL_UP] >= 8)
                     SceneLib.dianaScene.postNameEnc();
                 else
 				    SceneLib.dianaScene.repeatEnc();
 				return;
 			}
 			//Tyrania
-			/*if (rand(10) == 0 && (player.level >= 45)) {
+			if (rand(5) == 0 && (player.level >= 45)) {
 				SceneLib.tyrania.firstEncounter();
 				return;
-			}*/
+			}
+			if (rand(5) == 0 && TyrantiaFollower.TyrantiaFollowerStage == 1) {
+				if (TyrantiaFollower.TyraniaPostFinalKissScene) SceneLib.tyrania.encounterBattlefieldAfterFinalKiss();
+				else SceneLib.tyrania.repeatEncounterBattlefield();
+				return;
+			}
 			//Ted
 			if (flags[kFLAGS.TED_LVL_UP] >= 1 && flags[kFLAGS.TED_LVL_UP] < 4 && !player.hasStatusEffect(StatusEffects.TedOff) && player.statusEffectv1(StatusEffects.CampSparingNpcsTimers4) < 1 && rand(10) == 0) {
 				SceneLib.tedScene.introPostHiddenCave();

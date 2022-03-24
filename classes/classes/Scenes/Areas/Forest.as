@@ -266,7 +266,8 @@ use namespace CoC;
 					}, {
 						name  : "tentaBeast",
 						call  : tentacleBeastEncounterFn,
-						when  : fn.ifLevelMin(3)
+						when  : fn.ifLevelMin(3),
+						chance: 0.5
 					}, {
 						name  : "corrGlade",
 						call  : corruptedGladeFn,
@@ -279,7 +280,7 @@ use namespace CoC;
 					}, {
 						name  : "beegirl",
 						call  : beeGirlScene.beeEncounter,
-						chance: 0.50
+						chance: 1.0
 					}, {
 						name  : "WoodElf",
 						call  : SceneLib.woodElves.findElves,
@@ -329,7 +330,7 @@ use namespace CoC;
 					}, {
 						name: "dianaName",
 						when: function():Boolean {
-							return (flags[kFLAGS.DIANA_FOLLOWER] != 3 && flags[kFLAGS.DIANA_LVL_UP] >= 8) && !player.hasStatusEffect(StatusEffects.DianaOff) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1;
+							return ((flags[kFLAGS.DIANA_FOLLOWER] < 3 || flags[kFLAGS.DIANA_FOLLOWER] == 5) && flags[kFLAGS.DIANA_LVL_UP] >= 8) && !player.hasStatusEffect(StatusEffects.DianaOff) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1;
 						},
 						chance: 0.5,
 						call: SceneLib.dianaScene.postNameEnc

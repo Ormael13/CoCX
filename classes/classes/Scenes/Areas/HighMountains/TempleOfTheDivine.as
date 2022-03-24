@@ -90,8 +90,8 @@ use namespace CoC;
 			outputText("\n\nTemple Repair progress: " + flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] + "");
 			menu();
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] >= 1) {
-				addButton(0, "Pray", PlayerPrayAtTemple).hint("Offer your prayer to one of the temple altar.");
-				addButton(1, "Repair", TempleAltairsRebuildMenu).hint("Do reparation to the temple.");
+				addButton(0, "Pray", PlayerPrayAtTemple).hint("Offer your prayer to one of the temple altars.");
+				addButton(1, "Repair", TempleAltairsRebuildMenu).hint("Restore the temple.");
 			}
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1) {
 				if (havingOrUsingBSwordOrExcalibur()) addButton(2, "Put Sword", puttingBSwordOrExcaliburOnAltair);
@@ -241,7 +241,7 @@ use namespace CoC;
 		}
 		public function PlayerPrayAtTempleFeraAltair():void {
 			clearOutput();
-			outputText("You pray to the huntress patron Fera. As you word out your prayer, lewd fantasies of all kind flow into your mind. Fera delicious caress pleases you, healing your wounds and washing away your pure thoughts. You also feel the blessing of the deity empowering your “talents”.\n");
+			outputText("You pray to the huntress patron Fera. As you word out your prayer, lewd fantasies of all kind flow into your mind. Fera delicious caress pleases you, healing your wounds and washing away your pure thoughts. You also feel the blessing of the deity empowering your \"talents\".\n");
 			loosingMaraeBlessing();
 			loosingTaothBlessing();
 			loosingFenrirBlessing();

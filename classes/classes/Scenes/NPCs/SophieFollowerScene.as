@@ -290,7 +290,7 @@ public function followerSophieMainScreen():void {
 	{
 		outputText("When you call her name, Sophie's gold-glossed lips curve upward in a smile. She takes her time picking her way out of her nest, and then glides down to you.");
 
-		outputText("\n\n“<i>Need something from Momma Sophie?</i>” she coos.");
+		outputText("\n\n\"<i>Need something from Momma Sophie?</i>\" she coos.");
 	}
 	
 	//BimboBody Sophie Follower, Options*
@@ -329,7 +329,7 @@ private function sendToFarm():void
 	
 	outputText("You tell your live-in harpy that she is to head towards the lake, find a farm, present herself to the lady who works there and do as she says. Sophie isn’t exactly enthused by this idea.");
 
-	outputText("\n\n“<i>I'm here to be with you, not till some farm,</i>” she flounces. She looks at you slyly and sidles her warm, pillowy weight into your side. “<i>Wouldn’t you get lonely out here on your own, [name]? Yes, you would. Give mama Sophie a kiss and we’ll forget all about this...</i>” You take a step back and firmly point in the direction of the farm.");
+	outputText("\n\n\"<i>I'm here to be with you, not till some farm,</i>\" she flounces. She looks at you slyly and sidles her warm, pillowy weight into your side. \"<i>Wouldn’t you get lonely out here on your own, [name]? Yes, you would. Give mama Sophie a kiss and we’ll forget all about this...</i>\" You take a step back and firmly point in the direction of the farm.");
 	
 	outputText("\n\nHer whining and complaining can be heard long after her pink feathers have disappeared over the rise. She’ll be useless as a worker, you think, but she’s considerably more vigilant and sharp than she lets herself on to be. And who knows, maybe she can produce some eggs whilst she’s there.");
 	
@@ -345,7 +345,7 @@ private function backToCamp():void
 	
 	outputText("You tell her she’s welcome to head back to camp now.");
 
-	outputText("\n\n“<i>Thank the Gods,</i>” she says, rolling her eyes. “<i>Any longer out here and I was going to suffocate from boredom.</i>” She kisses your cheek affectionately before stretching her huge wings out to fly off in the direction of the portal.");
+	outputText("\n\n\"<i>Thank the Gods,</i>\" she says, rolling her eyes. \"<i>Any longer out here and I was going to suffocate from boredom.</i>\" She kisses your cheek affectionately before stretching her huge wings out to fly off in the direction of the portal.");
 
 	flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] = 0;
 	
@@ -359,7 +359,7 @@ private function harvestEggs():void
 	
 	outputText("You ask Sophie if it’s possible for her to produce eggs of a certain color whilst she’s here.");
 
-	outputText("\n\n“<i>Using the lake magic? Sure,</i>” she says, yawning, and stretching. “<i>Some of my sisters used to come down here so they could get knocked up with eggs they could sell on the side. What color would you like?</i>”");
+	outputText("\n\n\"<i>Using the lake magic? Sure,</i>\" she says, yawning, and stretching. \"<i>Some of my sisters used to come down here so they could get knocked up with eggs they could sell on the side. What color would you like?</i>\"");
 	
 	eggSelector();
 }
@@ -404,7 +404,7 @@ private function postEggSelector(selected:String):void
 	clearOutput();
 	sophieSprite();
 	
-	outputText("“<i>I’ll make some nice " + selected.toLowerCase() + "eggs for you then, hun,</i>” she says with a small grin. “<i>I can only produce one a week, though. I’ll put it with everything else you earn out of this hole in the ground. How’s that?</i>”");
+	outputText("\"<i>I’ll make some nice " + selected.toLowerCase() + "eggs for you then, hun,</i>\" she says with a small grin. \"<i>I can only produce one a week, though. I’ll put it with everything else you earn out of this hole in the ground. How’s that?</i>\"");
 	
 	flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE] = 1;
 	if (flags[kFLAGS.FOLLOWER_PRODUCTION_SOPHIE_COLORCHOICE] != selected)
@@ -424,7 +424,7 @@ private function stopHarvest():void
 	
 	outputText("You tell Sophie to stop giving you eggs; you’d rather she’d put them towards making the farm money.");
 
-	outputText("\n\n“<i>Awww,</i>” she replies with pleading eyes. “<i>Couldn't you just fuck some REAL eggs into me instead?</i>”");
+	outputText("\n\n\"<i>Awww,</i>\" she replies with pleading eyes. \"<i>Couldn't you just fuck some REAL eggs into me instead?</i>\"");
 
 	outputText("\n\nYou respond to the negative, earning a pout from the busty hen. She looks like she's going to obey you regardless.");
 
@@ -440,7 +440,7 @@ private function changeEggs():void
 	
 	outputText("You ask Sophie if she will change the type of eggs that she is producing for you.");
 	
-	outputText("\n\n<i>I'd </i>much<i> prefer you to be fucking me full of eggs yourself, but I guess I can change just for you...</i>”");
+	outputText("\n\n<i>I'd </i>much<i> prefer you to be fucking me full of eggs yourself, but I guess I can change just for you...</i>\"");
 	
 	eggSelector();
 }

@@ -403,6 +403,18 @@ public class Combat extends BaseContent {
         return magic.spellBlackTier2CooldownImpl();
     }
 
+    public function spellModGrey():Number {
+        return magic.spellModGrey();
+    }
+
+    public function spellGreyCooldown():Number {
+        return magic.spellGreyCooldownImpl();
+    }
+
+    public function spellGreyTier2Cooldown():Number {
+        return magic.spellGreyTier2CooldownImpl();
+    }
+
     public function healMod():Number {
         return magic.healModImpl();
     }
@@ -1247,6 +1259,9 @@ public class Combat extends BaseContent {
 				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
 					bd.disable("Your current soulforce is too low.");
 				}
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsAirE) == 5) {
+					//True Evasion
+				}
 			}
 			if (player.perkv1(PerkLib.ElementalBody) == 2) {//gnome
 				bd = buttons.add("Wild Growth", curry(mspecials.FusionSpecialFirst, player.statusEffectv2(StatusEffects.SummonedElementalsEarthE), 2)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
@@ -1260,6 +1275,9 @@ public class Combat extends BaseContent {
 				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
 					bd.disable("Your current soulforce is too low.");
 				}
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsEarthE) == 5) {
+					//Adamantine Shell
+				}
 			}
 			if (player.perkv1(PerkLib.ElementalBody) == 3) {//ignis
 				bd = buttons.add("Pyroblast", curry(mspecials.FusionSpecialFirst, player.statusEffectv2(StatusEffects.SummonedElementalsFireE), 3)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
@@ -1270,6 +1288,9 @@ public class Combat extends BaseContent {
 				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
 					bd.disable("Your current soulforce is too low.");
 				}
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsFireE) == 5) {
+					//Fiery Rage
+				}
 			}
 			if (player.perkv1(PerkLib.ElementalBody) == 4) {//undine
 				bd = buttons.add("Hydraulic Torrent", curry(mspecials.FusionSpecialFirst, player.statusEffectv2(StatusEffects.SummonedElementalsWaterE), 4)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
@@ -1279,6 +1300,9 @@ public class Combat extends BaseContent {
 				bd = buttons.add("Lifewater", curry(mspecials.FusionSpecialSecond, player.statusEffectv2(StatusEffects.SummonedElementalsWaterE), 4)).hint("Soulforce cost: " + Math.round(10 * soulskillCost() * soulskillcostmulti()));
 				if (player.soulforce < 10 * soulskillCost() * soulskillcostmulti()) {
 					bd.disable("Your current soulforce is too low.");
+				}
+				if (player.statusEffectv2(StatusEffects.SummonedElementalsWaterE) == 5) {
+					//Moment of Clarity
 				}
 			}
 		}
@@ -1889,11 +1913,20 @@ public class Combat extends BaseContent {
 		}
 		if (player.hasPerk(PerkLib.FirstAttackGolems) && flags[kFLAGS.GOLEMANCER_PERM_GOLEMS] == 1 && flags[kFLAGS.IN_COMBAT_PLAYER_GOLEM_ATTACKED] != 1 && player.mana >= combat.pspecials.permanentgolemsendcost()) combat.pspecials.sendPermanentGolem1();
 		if (player.hasPerk(PerkLib.FirstAttackElementalsSu) && player.statusEffectv2(StatusEffects.SummonedElementals) > 0 && (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4) && flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] < 1) {
-			if (player.hasStatusEffect(StatusEffects.SummonedElementalsAirE)) baseelementalattacks(Combat.AIR_E);
-			else if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarthE)) baseelementalattacks(Combat.EARTH_E);
-			else if (player.hasStatusEffect(StatusEffects.SummonedElementalsFireE)) baseelementalattacks(Combat.FIRE_E);
-			else if (player.hasStatusEffect(StatusEffects.SummonedElementalsWaterE)) baseelementalattacks(Combat.WATER_E);
-			else baseelementalattacks(Combat.NONE_E);
+			if (player.hasPerk(PerkLib.ElementalBody)) {
+				if (player.hasStatusEffect(StatusEffects.SummonedElementalsAirE) && player.perkv1(PerkLib.ElementalBody) != 1) baseelementalattacks(Combat.AIR_E);
+				else if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarthE) && player.perkv1(PerkLib.ElementalBody) != 2) baseelementalattacks(Combat.EARTH_E);
+				else if (player.hasStatusEffect(StatusEffects.SummonedElementalsFireE) && player.perkv1(PerkLib.ElementalBody) != 3) baseelementalattacks(Combat.FIRE_E);
+				else if (player.hasStatusEffect(StatusEffects.SummonedElementalsWaterE) && player.perkv1(PerkLib.ElementalBody) != 4) baseelementalattacks(Combat.WATER_E);
+				else baseelementalattacks(Combat.NONE_E);
+			}
+			else {
+				if (player.hasStatusEffect(StatusEffects.SummonedElementalsAirE)) baseelementalattacks(Combat.AIR_E);
+				else if (player.hasStatusEffect(StatusEffects.SummonedElementalsEarthE)) baseelementalattacks(Combat.EARTH_E);
+				else if (player.hasStatusEffect(StatusEffects.SummonedElementalsFireE)) baseelementalattacks(Combat.FIRE_E);
+				else if (player.hasStatusEffect(StatusEffects.SummonedElementalsWaterE)) baseelementalattacks(Combat.WATER_E);
+				else baseelementalattacks(Combat.NONE_E);
+			}
 		}
 		if (player.hasPerk(PerkLib.FirstAttackElementals) && (flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 3 || flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] == 4) && flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] < 2) {
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsAir)) baseelementalattacks(Combat.AIR);
@@ -1903,6 +1936,7 @@ public class Combat extends BaseContent {
 			else baseelementalattacks(Combat.NONE);
 		}
 		if (flags[kFLAGS.PLAYER_COMPANION_1] != "" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1 && !player.hasStatusEffect(StatusEffects.MinoKing)) {
+			outputText("\n\n");
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Alvina") {
 				comfoll.alvinaCombatActions();
 				if (player.hasPerk(PerkLib.MotivationSu)) comfoll.alvinaCombatActions();
@@ -2048,74 +2082,77 @@ public class Combat extends BaseContent {
                 break;
 			case NONE		:
 				flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] = 2;
-				doNext(curry(combatMenu, false));
 				break;
 			case NONE_E		:
 				flags[kFLAGS.IN_COMBAT_PLAYER_ELEMENTAL_ATTACKED] = 1;
-				doNext(curry(combatMenu, false));
 				break;
         }
-        var manaCost:Number = 1;
-		var manaCostInt:Number = 8;
-		var manaCostWis:Number = 8;
-		if (player.hasPerk(PerkLib.FirstAttackElementalsSu)) {
-			manaCostInt += 17;
-			manaCostWis += 42;
+		if (elementType == NONE || elementType == NONE_E) {
+			doNext(curry(combatMenu, false));
 		}
-        manaCost += summonedElementals;
-        if (summonedElementals >= 11) manaCost += summonedElementals;
-        if (summonedElementals >= 21) manaCost += summonedElementals;
-        if (summonedElementals >= 29) manaCost += summonedElementals;
-        manaCost += player.inte / manaCostInt;
-        manaCost += player.wis / manaCostWis;
-        if (summonedElementals >= 2 && manaCost > 11 && player.hasPerk(PerkLib.StrongElementalBond)) manaCost -= 10;
-        if (summonedElementals >= 4 && manaCost > 22 && player.hasPerk(PerkLib.StrongElementalBondEx)) manaCost -= 20;
-        if (summonedElementals >= 6 && manaCost > 33 && player.hasPerk(PerkLib.StrongElementalBondSu)) manaCost -= 30;
-        if (summonedElementals >= 9 && manaCost > 44 && player.hasPerk(PerkLib.StrongerElementalBond)) manaCost -= 40;
-        if (summonedElementals >= 12 && manaCost > 55 && player.hasPerk(PerkLib.StrongerElementalBondEx)) manaCost -= 50;
-        if (summonedElementals >= 15 && manaCost > 66 && player.hasPerk(PerkLib.StrongerElementalBondSu)) manaCost -= 60;
-        if (summonedElementals >= 19 && manaCost > 77 && player.hasPerk(PerkLib.StrongestElementalBond)) manaCost -= 70;
-        if (summonedElementals >= 23 && manaCost > 88 && player.hasPerk(PerkLib.StrongestElementalBondEx)) manaCost -= 80;
-        if (summonedElementals >= 27 && manaCost > 99 && player.hasPerk(PerkLib.StrongestElementalBondSu)) manaCost -= 90;
-		if (manaCost > 1 && player.hasPerk(PerkLib.FirstAttackElementalsSu)) manaCost *= 0.5;
-        manaCost = Math.round(manaCost);
-        if (player.mana < manaCost) {
-            outputText("\n\nYour mana is too low to fuel your elemental attack!");
-            flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] = 1;
-            doNext(curry(combatMenu, false));
-        } else {
-			if (!player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn)) outputText("\n\n");
-			switch (elementType) {
-				case AIR_E      :
-					outputText("Sylph");
-					break;
-				case EARTH_E    :
-					outputText("Golem");
-					break;
-				case FIRE_E     :
-					outputText("Ifrit");
-					break;
-				case WATER_E    :
-					outputText("Undine");
-					break;
-				default:
-                    outputText("Your elemental");
-                    break;
+		else {
+			var manaCost:Number = 1;
+			var manaCostInt:Number = 8;
+			var manaCostWis:Number = 8;
+			if (player.hasPerk(PerkLib.FirstAttackElementalsSu)) {
+				manaCostInt += 17;
+				manaCostWis += 42;
 			}
-            if (manaCost > 0) player.mana -= manaCost;
-			if (player.hasPerk(PerkLib.FirstAttackElementalsEx) && player.hasStatusEffect(StatusEffects.SummonedElementals)) {
-				var elementalDamageMulti:Number = 1;
-				elementalDamageMulti += 0.05 * (player.statusEffectv1(StatusEffects.SummonedElementals));
-				elementalDamageMulti += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementals));
-				elementalDamageMulti += 0.2 * (player.statusEffectv3(StatusEffects.SummonedElementals));
-				summonedElementals *= elementalDamageMulti;
-				summonedElementalsMulti += 1;
-				if (rand(10) == 0 || player.hasPerk(PerkLib.FirstAttackElementalsSu)) summonedElementalsMulti += 1;
-				if (player.hasPerk(PerkLib.FirstAttackElementalsSu)) summonedElementalsMulti += 1;
+			manaCost += summonedElementals;
+			if (summonedElementals >= 11) manaCost += summonedElementals;
+			if (summonedElementals >= 21) manaCost += summonedElementals;
+			if (summonedElementals >= 29) manaCost += summonedElementals;
+			manaCost += player.inte / manaCostInt;
+			manaCost += player.wis / manaCostWis;
+			if (summonedElementals >= 2 && manaCost > 11 && player.hasPerk(PerkLib.StrongElementalBond)) manaCost -= 10;
+			if (summonedElementals >= 4 && manaCost > 22 && player.hasPerk(PerkLib.StrongElementalBondEx)) manaCost -= 20;
+			if (summonedElementals >= 6 && manaCost > 33 && player.hasPerk(PerkLib.StrongElementalBondSu)) manaCost -= 30;
+			if (summonedElementals >= 9 && manaCost > 44 && player.hasPerk(PerkLib.StrongerElementalBond)) manaCost -= 40;
+			if (summonedElementals >= 12 && manaCost > 55 && player.hasPerk(PerkLib.StrongerElementalBondEx)) manaCost -= 50;
+			if (summonedElementals >= 15 && manaCost > 66 && player.hasPerk(PerkLib.StrongerElementalBondSu)) manaCost -= 60;
+			if (summonedElementals >= 19 && manaCost > 77 && player.hasPerk(PerkLib.StrongestElementalBond)) manaCost -= 70;
+			if (summonedElementals >= 23 && manaCost > 88 && player.hasPerk(PerkLib.StrongestElementalBondEx)) manaCost -= 80;
+			if (summonedElementals >= 27 && manaCost > 99 && player.hasPerk(PerkLib.StrongestElementalBondSu)) manaCost -= 90;
+			if (manaCost > 1 && player.hasPerk(PerkLib.FirstAttackElementalsSu)) manaCost *= 0.5;
+			manaCost = Math.round(manaCost);
+			if (player.mana < manaCost) {
+				outputText("\n\nYour mana is too low to fuel your elemental attack!");
+				flags[kFLAGS.ELEMENTAL_CONJUER_SUMMONS] = 1;
+				doNext(curry(combatMenu, false));
+			} else {
+				if (!player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn)) outputText("\n\n");
+				switch (elementType) {
+					case AIR_E      :
+						outputText("Sylph");
+						break;
+					case EARTH_E    :
+						outputText("Golem");
+						break;
+					case FIRE_E     :
+						outputText("Ifrit");
+						break;
+					case WATER_E    :
+						outputText("Undine");
+						break;
+					default:
+						outputText("Your elemental");
+						break;
+				}
+				if (manaCost > 0) player.mana -= manaCost;
+				if (player.hasPerk(PerkLib.FirstAttackElementalsEx) && player.hasStatusEffect(StatusEffects.SummonedElementals)) {
+					var elementalDamageMulti:Number = 1;
+					elementalDamageMulti += 0.05 * (player.statusEffectv1(StatusEffects.SummonedElementals));
+					elementalDamageMulti += 0.1 * (player.statusEffectv2(StatusEffects.SummonedElementals));
+					elementalDamageMulti += 0.2 * (player.statusEffectv3(StatusEffects.SummonedElementals));
+					summonedElementals *= elementalDamageMulti;
+					summonedElementalsMulti += 1;
+					if (rand(10) == 0 || player.hasPerk(PerkLib.FirstAttackElementalsSu)) summonedElementalsMulti += 1;
+					if (player.hasPerk(PerkLib.FirstAttackElementalsSu)) summonedElementalsMulti += 1;
+				}
+				outputText(" hit"+(summonedElementalsMulti > 1 ? "s":"")+" [monster a] [monster name]! ");
+				elementalattacks(elementType, summonedElementals, summonedElementalsMulti, summonedEpicElemental);
 			}
-			outputText(" hit"+(summonedElementalsMulti > 1 ? "s":"")+" [monster a] [monster name]! ");
-            elementalattacks(elementType, summonedElementals, summonedElementalsMulti, summonedEpicElemental);
-        }
+		}
     }
 
     public function intwisscaling():Number {
@@ -3675,7 +3712,7 @@ public class Combat extends BaseContent {
         }
         if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] == 1) {
             if (monster is Lethice && (monster as Lethice).fightPhase == 3) {
-                outputText("\n\n<i>“Ouch. Such a cowardly weapon,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your pathetic " + ammoWord + "s?”</i>\n\n");
+                outputText("\n\n<i>\"Ouch. Such a cowardly weapon,\"</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>\"How will you beat me without your pathetic " + ammoWord + "s?\"</i>\n\n");
                 monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
             }
             enemyAI();
@@ -3722,7 +3759,7 @@ public class Combat extends BaseContent {
 		var critDmg:Number = 1.75;
 		critChance += combatPhysicalCritical();
 		if (player.weapon == weapons.MGSWORD) {
-			damage += scalingBonusStrength() * 0.2;
+			damage += scalingBonusIntelligence() * 0.2;
 			if (player.isFlying()){
 				if (player.hasPerk(MutationsLib.HarpyHollowBones)) damage *= 1.2;
 				if (player.hasPerk(MutationsLib.HarpyHollowBonesPrimitive)) damage *= 1.3;
@@ -3856,9 +3893,13 @@ public class Combat extends BaseContent {
         }
 		if (crit) {
 			outputText(" <b>*Critical Hit!*</b>");
-			throwingXP(1);
+			if (player.weapon == weapons.MGSWORD) swordXP(1);
+			else throwingXP(1);
 		}
-		throwingXP(1);
+		if (player.weapon == weapons.MGSWORD) swordXP(1);
+		else throwingXP(1);
+		WrathGenerationPerHit1(5);
+        heroBaneProc(damage);
         if (monster.HP <= monster.minHP()) {
             if (monster.plural) outputText(" [monster He] stagger, collapsing onto each other from the wounds you've inflicted on [monster him].");
             else outputText(" [monster He] staggers, collapsing from the wounds you've inflicted on [monster him].");
@@ -3866,14 +3907,17 @@ public class Combat extends BaseContent {
             doNext(endHpVictory);
             return;
         }
-		else {
-            outputText(" It's clearly very painful.\n\n");
-			WrathGenerationPerHit1(5);
-            heroBaneProc(damage);
-        }
         if (monster.lust >= monster.maxLust()) {
             doNext(endLustVictory);
+            return;
         }
+		outputText(" It's clearly very painful.\n\n");
+        wrathregeneration1();
+        fatigueRecovery1();
+        manaregeneration1();
+        soulforceregeneration1();
+		venomCombatRecharge1();
+        enemyAI();
     }
 
     public function TelekinesisThrow():void {
@@ -4185,7 +4229,7 @@ public class Combat extends BaseContent {
         }
         if (flags[kFLAGS.MULTIPLE_ARROWS_STYLE] == 1 || player.ammo == 0) {
             if (monster is Lethice && (monster as Lethice).fightPhase == 3) {
-                outputText("\n\n<i>“Ouch. Such a cowardly weapon,”</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>“How will you beat me without your pathetic weapon?”</i>\n\n");
+                outputText("\n\n<i>\"Ouch. Such a cowardly weapon,\"</i> Lethice growls. With a snap of her fingers, a pearlescent dome surrounds her. <i>\"How will you beat me without your pathetic weapon?\"</i>\n\n");
                 monster.createStatusEffect(StatusEffects.Shell, 2, 0, 0, 0);
             }
             if (player.ammo == 0) outputText("\n\n<b>You're out of weapons to throw in this fight!</b>\n\n");
@@ -5684,7 +5728,11 @@ public class Combat extends BaseContent {
 				damage += scalingBonusToughness() * 0.2;
 				if (player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry1to4)) damage*=1+(0.2*player.perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4));
 			}
-			else{
+			else if (player.weapon == weapons.MGSWORD) {
+				damage += player.inte;
+				damage += scalingBonusIntelligence() * 0.2;
+			}
+			else {
 				damage += player.str;
 				damage += scalingBonusStrength() * 0.2;
 			}
@@ -6335,12 +6383,12 @@ public class Combat extends BaseContent {
                 }
                 if (player.lust <= 30) {
                     outputText("\n\nJean-Claude doesn’t even budge when you wade into him with your [weapon].");
-                    outputText("\n\n“<i>Why are you attacking me, slave?</i>” he says. The basilisk rex sounds genuinely confused. His eyes pulse with hot, yellow light, reaching into you as he opens his arms, staring around as if begging the crowd for an explanation. “<i>You seem lost, unable to understand, lashing out at those who take care of you. Don’t you know who you are? Where you are?</i>” That compulsion in his eyes, that never-ending heat, it’s... it’s changing things. You need to finish this as fast as you can.");
+                    outputText("\n\n\"<i>Why are you attacking me, slave?</i>\" he says. The basilisk rex sounds genuinely confused. His eyes pulse with hot, yellow light, reaching into you as he opens his arms, staring around as if begging the crowd for an explanation. \"<i>You seem lost, unable to understand, lashing out at those who take care of you. Don’t you know who you are? Where you are?</i>\" That compulsion in his eyes, that never-ending heat, it’s... it’s changing things. You need to finish this as fast as you can.");
                 } else if (player.lust <= 50) {
                     outputText("\n\nAgain your [weapon] thumps into Jean-Claude. Again it feels wrong. Again it sends an aching chime through you, that you are doing something that revolts your nature.");
-                    outputText("\n\n“<i>Why are you fighting your master, slave?</i>” he says. He is bigger than he was before. Or maybe you are smaller. “<i>You are confused. Put your weapon down- you are no warrior, you only hurt yourself when you flail around with it. You have forgotten what you were trained to be. Put it down, and let me help you.</i>” He’s right. It does hurt. Your body murmurs that it would feel so much better to open up and bask in the golden eyes fully, let it move you and penetrate you as it may. You grit your teeth and grip your [weapon] harder, but you can’t stop the warmth the hypnotic compulsion is building within you.");
+                    outputText("\n\n\"<i>Why are you fighting your master, slave?</i>\" he says. He is bigger than he was before. Or maybe you are smaller. \"<i>You are confused. Put your weapon down- you are no warrior, you only hurt yourself when you flail around with it. You have forgotten what you were trained to be. Put it down, and let me help you.</i>\" He’s right. It does hurt. Your body murmurs that it would feel so much better to open up and bask in the golden eyes fully, let it move you and penetrate you as it may. You grit your teeth and grip your [weapon] harder, but you can’t stop the warmth the hypnotic compulsion is building within you.");
                 } else if (player.lust <= 80) {
-                    outputText("\n\n“<i>Do you think I will be angry at you?</i>” growls Jean-Claude lowly. Your senses feel intensified, his wild, musky scent rich in your nose. It’s hard to concentrate... or rather it’s hard not to concentrate on the sweat which runs down his hard, defined frame, the thickness of his bulging cocks, the assured movement of his powerful legs and tail, and the glow, that tantalizing, golden glow, which pulls you in and pushes so much delicious thought and sensation into your head…  “<i>I am not angry. You will have to be punished, yes, but you know that is only right, that in the end you will accept and enjoy being corrected. Come now, slave. You only increase the size of the punishment with this silliness.</i>”");
+                    outputText("\n\n\"<i>Do you think I will be angry at you?</i>\" growls Jean-Claude lowly. Your senses feel intensified, his wild, musky scent rich in your nose. It’s hard to concentrate... or rather it’s hard not to concentrate on the sweat which runs down his hard, defined frame, the thickness of his bulging cocks, the assured movement of his powerful legs and tail, and the glow, that tantalizing, golden glow, which pulls you in and pushes so much delicious thought and sensation into your head…  \"<i>I am not angry. You will have to be punished, yes, but you know that is only right, that in the end you will accept and enjoy being corrected. Come now, slave. You only increase the size of the punishment with this silliness.</i>\"");
                 } else {
                     outputText("\n\nYou can’t... there is a reason why you keep raising your weapon against your master, but what was it? It can’t be that you think you can defeat such a powerful, godly alpha male as him. And it would feel so much better to supplicate yourself before the glow, lose yourself in it forever, serve it with your horny slut body, the only thing someone as low and helpless as you could possibly offer him. Master’s mouth is moving but you can no longer tell where his voice ends and the one in your head begins... only there is a reason you cling to like you cling onto your [weapon], whatever it is, however stupid and distant it now seems, a reason to keep fighting...");
                 }
@@ -11031,6 +11079,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(MutationsLib.FeyArcaneBloodstream)) manaregen += 5;
         if (player.hasPerk(MutationsLib.FeyArcaneBloodstream)) manaregen += 10;
         if (player.hasPerk(MutationsLib.FeyArcaneBloodstream)) manaregen += 15;
+		if (player.hasPerk(MutationsLib.KitsuneThyroidGlandPrimitive)) manaregen += 20;
         if (player.hasPerk(MutationsLib.KitsuneThyroidGlandEvolved) && player.hasPerk(PerkLib.StarSphereMastery)) manaregen += (player.perkv1(PerkLib.StarSphereMastery) * 2);
         if (player.miscJewelry == miscjewelries.DMAGETO || player.miscJewelry2 == miscjewelries.DMAGETO) manaregen += Math.round(player.maxMana()*0.02);
         return manaregen;

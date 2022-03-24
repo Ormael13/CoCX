@@ -253,6 +253,13 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			addButton(14, "Back", camp.campFollowers);
 		}
 
+        private function noSleepWith():void {
+            clearOutput();
+            outputText("You decide to spend the next night alone and tell this to Ember. She tries to look indifferent, but there's a hint of disappointment in her eyes.")
+            flags[kFLAGS.SLEEP_WITH] = "";
+            doNext(emberCampMenu);
+        }
+
 //Approach for sex - initial output when selecting [Sex] menu (Z)
 		private function emberSexMenu(output:Boolean = true):void
 		{
@@ -408,7 +415,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("\n\n\"<i>What is this?  An egg?  Eggs aren't much good for armor, cutie, no matter how big.  One good blow and POW!</i>\"  To demonstrate, she raises her hand, then strikes the shell with the blade of her palm - and pulls it away, smarting.  \"<i>My gods!  It's so hard!  Ok... maybe we can do this.</i>\"");
 			outputText("\n\nShe turns the cracked shell over in her hands, then puts it into the fire and whacks at it with a pair of tongs, attempting to bend and break it.  \"<i>Ist not softening.  Tch, cannot make armor if I cannot shape it.  Vell, it iz nice und curved, ja?  It vill make a decent small-shield to deflect blows, if I sand ze edges down und fit some straps.</i>\"");
 			outputText("\n\nYou tell the armorsmith that a shield will be fine, and she sets to work smoothing the edges.  After nearly an hour of idle browsing through armor you don't really care about, she attracts your attention.  \"<i>It's done, cutie.  Payment up front.</i>\"");
-			outputText("\n\nHanding over the gems, you take the white shell back from her; true to her word, she's rounded it into a proper shield and fitted adjustable straps to the back.  Its hardness is indisputable, but you can only wonder if its liquid absorption properties are still intact.  Worth a test, right?");
+			outputText("\n\nHanding over the gems, you take the white shell back from her; true to her word, she's rounded it into a proper shield and fitted adjustable straps to the back.  Its hardness is indisputable, but you can only wonder if its liquid absorption properties are still intact.  Worth a test, right?\n\n");
 			//this is where the Dragonshell Shield lives, git you one!
 			player.gems -= 200;
 			statScreenRefresh();

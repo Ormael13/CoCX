@@ -85,6 +85,7 @@ public class PhoenixScene extends BaseContent
 		}
 		
 		public function encounterPhoenixRepeat1():void {
+            clearOutput();
 			outputText("Strolling along the mountain path, you spot the familiar Phoenix. You ready your [weapon].");
 			if (flags[kFLAGS.PHOENIX_ENCOUNTERED] == 1) outputText("\n\n\"<i>Back again?</i>\" The phoenix says with a glare. \"<i>But... I guess you're a worthy opponent. Let's see what you're made of!</i>\" The phoenix yells as she readies her scimitar and shield. You assume a combat stance.");
 			else outputText("\n\n\"<i>Back again?</i>\" The phoenix says with a glare. \"<i>Get ready for a rematch!</i>\" The phoenix yells as she readies her scimitar and shield. You assume a combat stance.");
@@ -93,6 +94,7 @@ public class PhoenixScene extends BaseContent
 		}
 		
 		public function encounterPhoenixRepeat2():void {
+            clearOutput();
 			outputText("Strolling along the ashlands, you spot the familiar Phoenix squad. You ready your [weapon].");
 			if (flags[kFLAGS.PHOENIX_ENCOUNTERED] == 1) outputText("\n\n\"<i>Back again?</i>\" The leading phoenix says with a glare. \"<i>But... I guess you're a worthy opponent. Let's see what you're made of!</i>\" The phoenix yells as whole squad readies their scimitars and shields. You assume a combat stance.");
 			else outputText("\n\n\"<i>Back again?</i>\" The leading phoenix says with a glare. \"<i>Get ready for a rematch!</i>\" The phoenix yells as whole squad readies their scimitars and shields. You assume a combat stance.");
@@ -101,6 +103,7 @@ public class PhoenixScene extends BaseContent
 		}
 		
 		public function encounterPhoenixRepeat3():void {
+            clearOutput();
 			outputText("Strolling along the vulcanic crag, you spot the familiar Phoenix platoon. You ready your [weapon].");
 			if (flags[kFLAGS.PHOENIX_ENCOUNTERED] == 1) outputText("\n\n\"<i>Back again?</i>\" The leading phoenix says with a glare. \"<i>But... I guess you're a worthy opponent. Let's see what you're made of!</i>\" The phoenix yells as whole platoon readies their scimitars and shields. You assume a combat stance.");
 			else outputText("\n\n\"<i>Back again?</i>\" The leading phoenix says with a glare. \"<i>Get ready for a rematch!</i>\" The phoenix yells as whole platoon readies their scimitars and shields. You assume a combat stance.");

@@ -149,13 +149,13 @@ public function milkyMenu():void {
 		{
 			outputText("[bathgirlname] shakes vaguely out of her boob daze as you pick your way over to her.");
 
-			outputText("\n\n“<i>Bath time?</i>”");
+			outputText("\n\n\"<i>Bath time?</i>\"");
 		}
 		else
 		{
 			outputText("[bathgirlname] smiles at you as you pick your way over to her.");
 
-			outputText("\n\n“<i>Hello [name]. Is there something you need?</i>”");
+			outputText("\n\n\"<i>Hello [name]. Is there something you need?</i>\"");
 		}
 	}
 
@@ -198,7 +198,7 @@ private function sendToFarm():void
 	
 	outputText("You describe to [bathgirlname] the lake, and the farm which is situated close to it. Gently you tell her you want her to go there, present herself to the dog woman who owns it, and do as she says.");
 
-	outputText("“<i>Ok,</i>” says [bathgirlname], cautiously testing the idea out. “<i>You’ll come and visit sometimes, right?</i>” Of course. Mollified, the former sand witch slave gets to her feet and cautiously picks her way towards the lake. She won’t be much use protection-wise but she’ll give your milk production a boost.");
+	outputText("\"<i>Ok,</i>\" says [bathgirlname], cautiously testing the idea out. \"<i>You’ll come and visit sometimes, right?</i>\" Of course. Mollified, the former sand witch slave gets to her feet and cautiously picks her way towards the lake. She won’t be much use protection-wise but she’ll give your milk production a boost.");
 
 	if (player.cor >= 90)
 	{
@@ -215,9 +215,9 @@ private function backToCamp():void
 	clearOutput();
 	
 	//TODO
-	outputText("“<i>I want you to head on back to camp,</i>” you tell her. “<i>You’ll be more useful to me there.</i>” [bathgirlName]’s brow crinkles but she seems to accept your instruction.");
+	outputText("\"<i>I want you to head on back to camp,</i>\" you tell her. \"<i>You’ll be more useful to me there.</i>\" [bathgirlName]’s brow crinkles but she seems to accept your instruction.");
 
-	outputText("“<i>As you wish.</i>” She wipes her hands before walking slowly down and out of the farm’s gate.");
+	outputText("\"<i>As you wish.</i>\" She wipes her hands before walking slowly down and out of the farm’s gate.");
 	
 	flags[kFLAGS.FOLLOWER_AT_FARM_BATH_GIRL] = 0;
 	
@@ -510,8 +510,8 @@ private function fuckTheMilkWaifu():void {
 	outputText("You turn around and pull the milk-slut against you, her massive teats pressing hard against your [chest] until they spurt.  You stroke her cheeks, bringing her lips up to yours.  Her hand finds your [cock] again, stroking you with mounting speed as your tongue finds its way into her mouth, your hands wandering down to grope her sizable ass and flared, breeder's hips.  Your lover sighs heavily, breath filled with lust as you push her up against the rim of the tub, her legs spreading wide for easy access to her milk-lubed cunt.  She locks her arms around your shoulders, moaning happily as you press into her, your [cock] slipping easily into her sodden box.");
 	
 	outputText("\n\nSubmerged beneath a sea of creamy milk, it's so very, very easy to slide into " + flags[kFLAGS.MILK_NAME] + ", ");
-	if(player.cockArea(0) < 20) outputText("pushing your few inches into her until your hips join, her nice and loose cunt easily taking your length");
-	else if(player.cockArea(0) < 50) outputText("hilting her in one long stroke");
+	if(player.biggestCockArea() < 20) outputText("pushing your few inches into her until your hips join, her nice and loose cunt easily taking your length");
+	else if(player.biggestCockArea() < 50) outputText("hilting her in one long stroke");
 	else outputText("your cock gaining as much entrance as your massive member can, the excess dickmeat embraced in cream between you");
 	outputText(".  With your prick buried in her, " + flags[kFLAGS.MILK_NAME] + " hooks her legs around your [hips] and starts to gently rock her hips, letting you take the initiative.  Smiling at the meek girl, you sink your fingers into milk-yielding titflesh and start to move your hips, thrusting into her with measured ease, letting milk flood into her channel and coat your dick to lubricate each and every stroke.");
 	

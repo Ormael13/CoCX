@@ -7,6 +7,8 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
 import classes.Scenes.Areas.Swamp.*;
+import classes.Scenes.NPCs.BelisaFollower;
+import classes.Scenes.NPCs.LilyFollower;
 import classes.Scenes.SceneLib;
 
 use namespace CoC;
@@ -37,6 +39,15 @@ use namespace CoC;
 			}
 			flags[kFLAGS.TIMES_EXPLORED_SWAMP]++;
 			/*  SPECIAL SCENE OVERWRITES */
+			//Belisa
+			if (!player.hasStatusEffect(StatusEffects.BelisaOff) && BelisaFollower.BelisaEncounternum == 0 && rand(5) == 0) {
+				SceneLib.belisa.firstEncounter();
+				return;
+			}
+			//Lily
+			if (LilyFollower.LilyFollowerState == false && rand(5) == 0) {
+				SceneLib.lily.lilyEncounter();
+			}
 			//KIHA X HEL THREESOME!
 			if (!SceneLib.kihaFollower.followerKiha() && player.cor < 60 && flags[kFLAGS.KIHA_AFFECTION_LEVEL] >= 1 && flags[kFLAGS.HEL_FUCKBUDDY] > 0 && player.hasCock() && flags[kFLAGS.KIHA_AND_HEL_WHOOPIE] == 0) {
 				SceneLib.kihaFollower.kihaXSalamander();

@@ -3864,6 +3864,8 @@ public class PerkLib
 				"Allow you to determine how much wrath the enemy has.");
 		public static const SensualLover:PerkType = mk("Sensual Lover", "Sensual Lover",
 				"Your sensual attitude towards love and romance makes your tease ability slightly more effective.");
+		public static const Soulless:PerkType = mk("Soulless", "Soulless",
+				"The absence of a soul allows you to completely go astray of the morality compass, increasing your libido and corruption beyond normal.").withBuffs({'lib.mult':0.75});
 		public static const SoulSense:PerkType = mk("Soul Sense", "Soul Sense",
 				"Your strong affinity toward soullforce helped to denvelop another sense called 'Soul Sense' by a fellow soul cultivators.");
 		public static const SoulTempering:SoulTemperingPerk = new SoulTemperingPerk();

@@ -27,7 +27,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 //  ANTS_PC_LOST_TO_GNOLL:int = 475;
 //  MET_ANT_ARENA_GNOLL:int = 476;
 
-//  PHYLLA_CAPACITY:int = 873;
+//  PHYLLA_MAXLEN:int = 873;
 //  ANT_KIDS:int = 874;
 //  ANT_WAIFU:int = 875;
 //  PHYLLA_STAY_HOME:int = 876;
@@ -109,9 +109,9 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 			else firstAntColonyEncounter();
 		}
 
-		private function phyllaCapacity():Number
+		private function phyllaMaxLen():Number
 		{
-			return flags[kFLAGS.PHYLLA_CAPACITY];
+			return flags[kFLAGS.PHYLLA_MAXLEN];
 		}
 
 
@@ -502,7 +502,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 		{
 			clearOutput();
             phyllaSprite();
-			flags[kFLAGS.PHYLLA_CAPACITY] = 50;
+			flags[kFLAGS.PHYLLA_MAXLEN] = 50;
 			outputText("As you turn to leave, something is different; the crowd seems unusually silent. Phylla swiftly climbs down from her seat and jumps into the arena.  You glance warily at the gnoll but it's already being dragged out.  Phylla runs to you, and gives you a massive hug, wrapping all four of her arms around you and squeezing as hard as she can.  Her open display of affection leaves you more than a little shocked, given the creaking and soft cracking of bone in your body.  Interlocking her fingers with yours, she turns and raises your hands in the air, proclaiming your victory to every ant in the colony.  The awed crowd suddenly erupts, filling the stadium with cheers for your victory.  She turns towards the exit and tugs on your sleeve.");
 			outputText("\n\nPhylla drags you blindly through myriads of unlit tunnels until you reach the Queen's chamber, where Chylla seems to be awaiting you. Though, something is different than the last time you saw her; she's dressed just as regally as Phylla is, but it appears more...  formal.");
 			outputText("\n\n\"<i>Phylla seems to have been right about you. You are as smart as you are strong.  Though I had my doubts, you are truly something special.  You have my blessing to start your own colony with Phylla, should you choose to.</i>\" Chylla turns to her daughter and nods some kind of silent message.  You're not sure if the Ant-Queen has really warmed up to you, or she's just saying it because she must in her role as Queen, bestowing a great honor on someone she detests.  Whatever the reason, Phylla seems ecstatic about what's to come next.");
@@ -515,7 +515,6 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 			outputText("\n\nAs you look into her eyes and your lips lock together, you feel as if you're a single mind. It's one of the strangest feelings; you can feel... what she's feeling.  As you run your hands over her body you feel your own motions as if you were the recipient.  It's almost thrilling in a way, knowing exactly how your touch feels on another.  You smile wickedly as you lay her down on the cushioned pillows.");
 			//Use Penis - Male Continuation
 			//Use Vagina - Female Continuation
-			//simpleChoices("UseYourPenis",0,"UseYourVagina",0,"",0,"",0,"",0);
 			menu();
 			if (player.hasCock()) addButton(0, "Use Penis", gigititigitigitigitigityAntGirl);
 			if (player.hasVagina()) addButton(1, "Use Vagina", femalePhyllaFirstFuckGooooo);
@@ -538,7 +537,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 			clearOutput();
             phyllaSprite(true);
 			outputText("Sporting a painfully obvious tent, your body betrays its desire for sexual gratification and it causes Phylla to smile with interest.  \"<i>I-I didn't think I had that ability to... to...  I mean I'm not like you, so I thought...</i>\" she begins, but trails off as she takes in the rough, obscured shape given off by your bulge.");
-			var x:int = player.cockThatFits(phyllaCapacity());
+			var x:int = player.findCock(1, -1, phyllaMaxLen(), "length");
 			if (x < 0) x = player.smallestCockIndex();
 			//***Dick(s) size less than 36 inches:
 			if (player.cockArea(x) < 36) {
@@ -592,7 +591,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 			}
 			menu();
 			//If PC has dick(s) that will fit: Jump to - Regular Male Scene Continuation
-			if (player.cockArea(x) <= phyllaCapacity()) {
+			if (player.cockArea(x) <= phyllaMaxLen()) {
 				addButton(0, "Next", malePhyllaContinuation,x);
 			}
 			//If PC has dick(s) that won't fit: Jump to - Cunnilingus Scene Continuation
@@ -657,7 +656,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 		private function phyllaFirstTimePureBabiesFuckEnding():void
 		{
 			clearOutput();
-			var x:int = player.cockThatFits(phyllaCapacity());
+			var x:int = player.findCock(1, -1, phyllaMaxLen(), "length");
 			if (x < 0) x = player.smallestCockIndex();
 			outputText("For a while, you allow Phylla to slowly adapt to your presence inside of her and the stretching of her vaginal walls; something she reacts to with soft moans of pleasurable appreciation.  She wears her obvious discomfort at being forcefully stretched by your " + cockDescript(x) + ", but you see she can hardly complain as her body cradles yours in an attempt to keep you where you are.  Once you feel she's comfortable you start slowly pumping away at her, gradually building your own rut.");
 			outputText("\n\nYou feel the smaller set of her hands move between your [legs] and start to fondle your ");
@@ -727,7 +726,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 			else outputText("belly");
 			outputText(", but it will only serve to help you.  You will need a brace for what you're about to pull and her rigid abdomen will do just fine.  Phylla makes a confused noise, glancing over her shoulder with a look of concern growing on her face.");
 			outputText("\n\n\"<i>W-What are you doing?</i>\" she asks nervously. \"<i>This isn't how I imag~</i>\"");
-			var x:int = player.cockThatFits(phyllaCapacity());
+			var x:int = player.findCock(1, -1, phyllaMaxLen(), "length");
 			if (x < 0) x = player.smallestCockIndex();
 
 			outputText("\n\nWithout letting her finish, you plunge your " + cockDescript(x) + " into her, causing her to yell out in sheer surprise and discomfort.  \"<i>This is how <b>I</b> mate!</i>\" you inform her, telling her that she won't EVER forget her first time with you.  Her mouth goes open slightly before your subsequent gyrations put an end to whatever she was going to sputter out.  Smirking like a mad jester at the position you have Phylla in, you begin to work your hips as you dominate her from behind.  You hear your ");
@@ -738,7 +737,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 			if (player.isGoo()) outputText("  Perhaps the poor dear could use some tender attention, you ponder to yourself.  Reducing the solidity of your body, you work her abdomen deep into your sticky, goopy body, re-solidifying once she's firmly in there and lowering your hands down to her nipples, pinching them hard as you continue your pumping of her rump.");
 			outputText("\n\nPoor Phylla can only grasp at her cushions as she struggles to maintain her comfort.  The brutish drilling of her pussy forces her to lift her rear further and further towards an acute angle. Try as she might, her efforts are no match for your barbaric tactics as you pound her love hole into oblivion.  All her attempts at maintaining a comfortable position quickly evaporate, and she resigns herself to being roughly taken from behind.  You watch as she buries her head into her cushions to muffle her howls of painful ecstasy.");
 			//PC has more than one cock that is suitable:
-			var y:int = player.cockThatFits2(phyllaCapacity());
+			var y:int = player.cockThatFits2(phyllaMaxLen());
 			if (player.cockTotal() < 2) y = -1;
 			if (y >= 0) {
 				outputText("\n\nIntent on increasing your own pleasures, you decide to work ");
@@ -748,7 +747,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 				outputText("\n\n\"<i>No... P-please, you can't... I mean...</i>\" she manages to protest between moans of ecstasy and cries of pain as your cock works its way deeper with each thrust.  Scoffing at her plea, you guide your other cock into her anus.  It was never her choice to make in the first place, you tell her.  You feel the tightness of her muscular butt squeeze around your shaft - it's not as tight as her cunt is but it'll do!  You continue to thrust your hips as your cocks fill both of her holes.  You hear more muffled, painful moaning as you pound away along her anus.");
 				outputText("\n\n<b>You have taken Phylla's anal virginity! And you love every second of it.</b>");
 				//PC has more than one cock that is over 25 inches that's not in Phylla's butt or vag:
-				if (player.biggestCockArea() > phyllaCapacity()) {
+				if (player.biggestCockArea() > phyllaMaxLen()) {
 					outputText("\n\nSeeing as how her hands aren't busy and she's certainly not using that mouth for anything useful; you reach down and guide one of your cocks so it presses against her down turned stomach.  You tell her to press it between her breasts and start sucking at the head.  Though this doesn't stop you from pounding away at her backside. She quickly grabs your [cock biggest] with her smaller hands and guides for a better position between her breasts.  She uses her upper hands to press her breasts together.  You immediately feel the effect of her B-Cups as with each thrust they warm the shaft of your long cock.");
 				}
 			}
@@ -902,7 +901,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 			outputText("\n\nThen a sudden image, and sensation of shock fires into your mind;  Her whole body seems to tense up and with a sudden hip grinding pulse, she orgasms; moaning so loud it seems to echo off the walls.  Well toned legs squeeze tightly against your head, and then relax with a hearty groan as she squirts her girl cum all over you. Your hand and face are utterly drenched with her warm love juices and you try to drink up what you can... but there's just too much!");
 			outputText("\n\nShe rolls off of you in a state of absolute euphoria. You sit up on your elbows and make eye contact with her for a moment, causing her to giggle as she admires her comedic handiwork.  Of course, the once shy Ant Morph now eyes your own drooling pussy.  She looks as though she's about to continue stimulating you, but then you think of a better idea.  It's time you take control.");
 			//(If dick(s) (is/are) huge, length unknown - Jump to - Dick(s) too Big)
-			if (player.smallestCockArea() > phyllaCapacity()) {
+			if (player.smallestCockArea() > phyllaMaxLen()) {
 				//Dicks too Big:
 				outputText("\n\nDespite your best efforts to try and get into a comfortable position to scissor, your painfully erect  [cocks] prevent you from doing so, given that they are now compressed against the ceiling.  While the display of rainbows is pretty to watch on your [cocks], the crushing pain and the unyielding nature of your [cocks] is too much.  ");
 
@@ -926,7 +925,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 			//(If applicable transitions to - Freakishly huge dick(s))
 			//(If not applicable transition to - Scissoring w/ Dick(s))
 			//Freakishly huge dick(s):
-			if (player.smallestCockArea() > phyllaCapacity()) {
+			if (player.smallestCockArea() > phyllaMaxLen()) {
 				outputText("\n\nYou start rocking your hips and your pussies kiss, fluids mixing harmoniously together as shots of pleasure pass through both of you.  Her clit seems to penetrate further and further into yours with every push, and though it's not enough to fully enter you, the sensation on the inside sends wave after wave of euphoric bliss over the both of you.");
 				//(Leads to - Scissoring w/ Dick(s))
 			}
@@ -958,7 +957,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 				}
 				else {
 					//PC has one/two dick(s) not exceeding 4 inches in width total:
-					if (player.cockTotal() == 2 && (player.cockArea(player.smallestCockIndex2()) + player.cockArea(player.smallestCockIndex()) <= phyllaCapacity()))
+					if (player.cockTotal() == 2 && (player.cockArea(player.smallestCockIndex2()) + player.cockArea(player.smallestCockIndex()) <= phyllaMaxLen()))
 						outputText("two of your [cocks], stroking them apologetically as she scissors you.  You feel her almost insatiable appetite for all parts of your body.  You feel Phylla's mind slowly becoming lost in pleasure.");
 					//TODO: "player.cocks[player.smallestCockIndex()] < 4" changed to cockLength. Not sure if it is the appropriate attribute.
 					else if (player.cocks[player.smallestCockIndex()].cockLength < 4) outputText("your " + cockDescript(player.smallestCockIndex()) + ", stroking it apologetically as she scissors you.  You feel her almost insatiable appetite for all parts of your body.  You feel Phylla's mind slowly becoming lost in pleasure.");
@@ -1039,7 +1038,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 
 		public function introductionToPhyllaFollower():void
 		{
-			if (flags[kFLAGS.PHYLLA_CAPACITY] < 50) flags[kFLAGS.PHYLLA_CAPACITY] = 50;
+			if (flags[kFLAGS.PHYLLA_MAXLEN] < 50) flags[kFLAGS.PHYLLA_MAXLEN] = 50;
 			clearOutput();
 			if (pregnancy.isPregnant && pregnancy.incubation == 0) {
 				phyllaLaysSomeDriderEggs();
@@ -1720,7 +1719,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
             var cMcnt:int = -1;
             var mouthTent:Boolean = false;
             //pick one for vag
-            cockVag = player.cockThatFits(phyllaCapacity());
+            cockVag = player.findCock(1, -1, phyllaMaxLen(), "length");
 			if (cockVag < 0) cockVag = player.smallestCockIndex();
             if (player.cockTotal() >= 2) {
                 //try to pick non-tentacle for mouth
@@ -2278,7 +2277,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 			//Repeat:
 			else outputText("\n\nYou knew this moment would come and you're mentally prepared for it.  Feeling your mind link to everyone in the room is still overwhelming at first, but you quickly get over it as your mind finds balance.");
 
-			var x:int = player.cockThatFits(phyllaCapacity());
+			var x:int = player.findCock(1, -1, phyllaMaxLen(), "length");
 			if (x < 0) x = player.smallestCockIndex();
 			outputText("\n\nWhen you've felt your mind completely sync up with everyone else in the room, it's like being drunk on sexual euphoria.  You almost lose yourself in it for a moment, but focusing your mind, you snap your eyes open. You see Phylla in front of you looking like a drugged slut; she runs all four of her hands over your " + cockDescript(x) + " at the entrance of her flooded cunt while her children play with her nipples and suck each other off.  Aggressively, you grab her arms and pin her down while simultaneously shoving your cock into her.");
 

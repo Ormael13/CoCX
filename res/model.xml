@@ -509,10 +509,10 @@
         <cell rect="1002,611,90,90" name="legs_bg/gnome" dx="58" dy="93"/>
         <cell rect="151,450,49,59" name="overfeet/fire" dx="79" dy="115"/>
         <cell rect="701,90,49,59" name="muscle/muscle" dx="79" dy="64"/>
-        <cell rect="1151,90,49,59" name="fullbodyMuscle/musclegnome" dx="79" dy="64"/>
         <cell rect="1201,90,49,59" name="fullbodyMuscle/muscleignis" dx="79" dy="64"/>
         <cell rect="1251,90,49,59" name="fullbodyMuscle/muscleundine" dx="79" dy="64"/>
         <cell rect="1301,90,49,59" name="fullbodyMuscle/musclesylph" dx="79" dy="64"/>
+		<cell rect="1351,90,49,59" name="fullbodyMuscle/musclegnome" dx="79" dy="64"/>
         <cell rect="401,90,49,59" name="clothe/krakenM" dx="79" dy="64"/>
         <cell rect="851,90,49,59" name="clothe/krakenL" dx="79" dy="64"/>
         <cell rect="901,90,49,59" name="clothe/krakenS" dx="79" dy="64"/>

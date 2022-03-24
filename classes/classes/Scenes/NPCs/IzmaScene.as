@@ -1230,7 +1230,7 @@ private function acceptIzmaAsYourBitch():void {
 
 		outputText("Izma looks to you curiously once you return to her.  \"<i>So what's your story with her?</i>\" she asks.  You give a sigh and tell Izma how you met Marble at Whitney's farm and how a relationship formed between you over time.  Then you go on about how, sadly, you became addicted to her milk without even realizing its corrupt nature.  ");
 		//(If the player is fatally addicted)
-		if(player.findPerk(PerkLib.MarblesMilk) >= 0) outputText("You couldn't break your addiction, and now you'll die without a steady supply of her milk.");
+		if(player.hasPerk(PerkLib.MarblesMilk)) outputText("You couldn't break your addiction, and now you'll die without a steady supply of her milk.");
 		//(If the player broke their addiction)
 		else outputText("Thankfully, though you were able to break her milk's hold, and you realized you love Marble despite all that transpired between you, letting her move in with you.");
 		outputText("\n\n");
@@ -1255,6 +1255,11 @@ private function acceptIzmaAsYourBitch():void {
 	}
 	//Set 'camp Izma' flag
 	flags[kFLAGS.IZMA_FOLLOWER_STATUS] = 1;
+	if (player.hasKeyItem("Radiant shard") >= 0){
+		player.addKeyValue("Radiant shard",1,+1);
+	}
+	else player.createKeyItem("Radiant shard", 1,0,0,0);
+	outputText("\n\n<b>Before fully settling in your camp as if remembering something Izma pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -1705,7 +1710,7 @@ public function izmaFollowerMenu():void {
 	{
 		outputText("Izma smiles and puts away her book at your approach.");
 
-		outputText("\n\n“<i>What can I do for you, Alpha?</i>”");
+		outputText("\n\n\"<i>What can I do for you, Alpha?</i>\"");
 	}
 	if (flags[kFLAGS.IZMA_BROFIED] > 0) {
 		izmaelScene.izmaelMenu();
@@ -1754,7 +1759,7 @@ private function sendToFishery():void
 	clearOutput();
 	izmaSprite();
 	outputText("You ask Izma if she wouldn’t mind working at the newly made fishery to bring back some food to camp.");
-	outputText("\n\n“<i>Sure anything for you Alpha. I will fill barrels worth of food.</i>”");
+	outputText("\n\n\"<i>Sure anything for you Alpha. I will fill barrels worth of food.</i>\"");
 	outputText("\n\n<b>Izma will now start bringing fish back to camp.</b>");
 	flags[kFLAGS.FOLLOWER_AT_FISHERY_IZMA] = 1;
 	doNext(camp.returnToCampUseOneHour);
@@ -1767,9 +1772,9 @@ private function sendToFarm():void
 
 	outputText("You tell your beta that she is to head towards the lake, find a farm, present herself to the lady who works there and do as she says. Izma’s brow furrows as she takes this in.");
 
-	outputText("\n\n“<i>If you say so, alpha. It’ll be nice to be near the lake again, but... have I done something wrong?</i>”");
+	outputText("\n\n\"<i>If you say so, alpha. It’ll be nice to be near the lake again, but... have I done something wrong?</i>\"");
 
-	outputText("\n\n“<i>Not at all,</i>” you reply. “<i>I just need someone I can trust down there helping out. I’ll visit often though, don’t worry.</i>” This seems to content the tiger shark. She packs up her chest, waves at you, and then begins to haul it in the direction of the lake.");
+	outputText("\n\n\"<i>Not at all,</i>\" you reply. \"<i>I just need someone I can trust down there helping out. I’ll visit often though, don’t worry.</i>\" This seems to content the tiger shark. She packs up her chest, waves at you, and then begins to haul it in the direction of the lake.");
 
 	outputText("\n\nIzma might be strong, you think, but she is completely unused to manual labor and taking orders from anyone but yourself; you doubt she will help Whitney much. On the other hand, there’s no doubt you’ve just given the farm a powerful protector.");
 
@@ -1785,7 +1790,7 @@ private function backToCamp():void
 
 	outputText("You tell her to head back to camp; she will be more use to her alpha there.");
 
-	outputText("\n\n“<i>Whatever you say.</i>” She grins and wrinkles her nose. “<i>It was nice to be by the lake again, but I’m glad to get out of here: farm work isn't exactly stimulating.</i>” You leave Izma to pack up her things and go.");
+	outputText("\n\n\"<i>Whatever you say.</i>\" She grins and wrinkles her nose. \"<i>It was nice to be by the lake again, but I’m glad to get out of here: farm work isn't exactly stimulating.</i>\" You leave Izma to pack up her things and go.");
 
 	flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] = 0;
 

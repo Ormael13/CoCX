@@ -443,16 +443,8 @@ private function repeatableMinervaRomanceScene():void {
 private function minervaTalkSelect(bath:Boolean = true):void {
 	var choices:Array = [talkingToMinervaAboutBackstory];
 	if(flags[kFLAGS.MINERVA_BACKSTORY_LEARNED] == 0) {
-		//Force first time to talk about her early backstory!
-		if(flags[kFLAGS.MINERVA_BACKSTORY] == 0) {
-			talkingToMinervaAboutBackstory();
-			return;
-		}
-		choices[choices.length] = talkingToMinervaAboutBackstory;
-		choices[choices.length] = talkingToMinervaAboutBackstory;
-		choices[choices.length] = talkingToMinervaAboutBackstory;
-		choices[choices.length] = talkingToMinervaAboutBackstory;
-		choices[choices.length] = talkingToMinervaAboutBackstory;
+        talkingToMinervaAboutBackstory();
+        return;
 	}
 	//Force start if the flag is right.
 	trace(flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS]);
@@ -460,25 +452,33 @@ private function minervaTalkSelect(bath:Boolean = true):void {
 		minervaPurification.startPurification();
 		return;
 	}
+    clearOutput();
+	if(bath && minervaRomanced() && rand(2) == 0) choices[choices.length] = bathTimeTalkWithMinerva;
+    //no bath
+    outputText("What do you want to ask her about?")
+    menu();
 	//3-2 Talk Scene 2 - talks about the spring
 	//-repeatable
-	choices[choices.length] = talkAboutTheSpringWithMinerva;
+    addButton(0, "Spring", talkAboutTheSpringWithMinerva);
 	//- requires that backstory has been told
 	//- if already romanced Minerva shamefully confesses she may have fathered a granddaughter with her first daughter -repeatable
 	//3-3 Talking Scene 3 - talks about her shark girl daughter
-	if(minervaRomanced() && flags[kFLAGS.MINERVA_BACKSTORY_LEARNED] == 1) choices[choices.length] =  talkWithMinervaAboutSharkGirlDaughter;
-	
+	if(minervaRomanced() && flags[kFLAGS.MINERVA_BACKSTORY_LEARNED] > 0)
+        addButton(2, "Daughter", talkWithMinervaAboutSharkGirlDaughter);
+    else
+        addButtonDisabled(2, "???", "You need to know her better.");
 	//3-4 Talk Scene 4 - talks about her corruption
 	//- romance yes only or if you trick her into thinking you love her. - Repeatable until Minerva is purified or corrupted
-	if(minervaRomanced()) choices[choices.length] = talkToMinervaAboutHerCorruption;
+	if(minervaRomanced() && flags[kFLAGS.MINERVA_BACKSTORY_LEARNED] == 2)
+        addButton(3, "Corruption", talkToMinervaAboutHerCorruption);
+    else
+        addButtonDisabled(3, "???", "You need to know her better.");
+
 	//3-5 Motherhood
 	//-talks about how she wishes to be a real mother, have an actual loving family and not made from being raped- repeatable
-	choices[choices.length] = minervaMotherhood;
+    addButton(1, "Motherhood", minervaMotherhood);
 	//3-6 Bath Time - romance only
 	//Needs an option to be disabled.
-	if(bath && minervaRomanced()) choices[choices.length] = bathTimeTalkWithMinerva;
-	
-	choices[rand(choices.length)]();
 }
 
 //Talking scenes
@@ -546,7 +546,7 @@ private function talkingToMinervaAboutBackstory():void {
 		
 		outputText("\n\n\"<i>I was so hungry I didn't care if they changed me.  So I dug in, eating the walnut-sized things one after another until I couldn't eat anymore.</i>\"  Bringing a wing into view, Minerva gently strokes the feathers.  \"<i>I grew these very soon after, sprouting right from my back as my arms were covered in these... sleeves of feathers.  It hurt to grow them, but it didn't really matter to me... I was full of food and had a way to get around more quickly.  I'd tried a few times to get the hang at first... and almost slammed into the mountain for my troubles!</i>\" she chuckles, remembering how dangerous it was.  \"<i>But eventually I got the hang of it; for the first time since I got here, it felt like I was truly free...</i>\"  Judging from the tone of her voice, you can tell she is getting close to the end of her tale.");
 		outputText("\n\n\"<i>I must have flown for hours, the seeds I'd eaten getting burned off fairly quickly, leaving me starving again...  What is up with that, anyway?  Why is normal food so hard to come by around here?</i>\" she asks seriously, as if it has been on her mind for a while.  Shrugging your shoulders since you really have no answer for her, you have to admit that you had actually been wondering that yourself.  \"<i>Well... with exhaustion, hunger, and corruption catching up with me, I finally could go no further and crashed onto a cliff side.  I could feel the corruption's warm, all-consuming grasp closing around me.  It was so tempting to give in and let it happen.  But as fate would have it, I landed on the rocks just outside this tower.  I hadn't seen it while in the air because of the mist.</i>\"  Smiling a little, the siren pats the soft moss that grows from the ground.  You can't help but notice the somewhat bittersweet look on her face.");
-		outputText("\n\n\"<i>If I was going to become a monster, I at least wanted to have some shelter, so I went inside the tower.  That's when I found this place.  This... oasis of life... hidden away inside the tower.  I guess it was built as some kind of sanctuary, though it clearly fell into disrepair long before I found it.  This place turned out to be my... salvation...</i>\" she states and looks down again, her bittersweet expression deepening.  \"<i>As soon as I saw the fruit on the trees and the fresh water in the spring, I couldn't help myself.  Feasting with my corruption forgotten, I just gorged on the fruits and water and, with each bite, each drink, I felt the corruption recede.  My mind and thoughts became more clear - clearer than they had been in a long time, too.  This place is blessed!  It didn't get rid of the corruption entirely, but it calmed it, made it less pervasive.  I was happy to be more or less back to normal, but... I knew I could never really leave this tower as, if I did, the corruption would just come back.  This place, while beautiful, is my prison, my... gilded cage,</i>\" she says sadly.  You can only imagine it, being on the brink of turning into a monster, only to be saved at the cost of your freedom.  To be safe, fed, and sane, but unable to leave, lest the corruption returns to consume you.  This fact is clearly the source of the bitterness so clear on her face and in her voice.");
+		outputText("\n\n\"<i>If I was going to become a monster, I at least wanted to have some shelter, so I went inside the tower.  That's when I found this place.  This... oasis of life... hidden away inside the tower.  I guess it was built as some kind of sanctuary, though it clearly fell into disrepair long before I found it.  This place turned out to be my... salvation...</i>\" she states and looks down again, her bittersweet expression deepening.  \"<i>As soon as I saw the fruit on the trees and the fresh water in the spring, I couldn't help myself.  Feasting with my corruption forgotten, I just gorged on the fruits and water and, with each bite, each drink, I felt the corruption recede.  My mind and thoughts became more clear - clearer than they had been in a long time, too.  This place is blessed!  It didn't get rid of the corruption entirely, but I calmed it, made it less pervasive.  I was happy to be more or less back to normal, but... I knew I could never really leave this tower as, if I did, the corruption would just come back.  This place, while beautiful, is my prison, my... gilded cage,</i>\" she says sadly.  You can only imagine it, being on the brink of turning into a monster, only to be saved at the cost of your freedom.  To be safe, fed, and sane, but unable to leave, lest the corruption returns to consume you.  This fact is clearly the source of the bitterness so clear on her face and in her voice.");
 		outputText("\n\nReaching out to her, you put an arm around her shoulder, trying to make her feel better.  It seems to help, as the look on her face visibly changes, a tiny smile resurfacing.  \"<i>Thank you for listening to my story; I know it was long and boring,</i>\" she says with a chuckle.  \"<i>You're the first sane person to visit me.  Sometimes, harpies come and try to get me to fuck them... it might even be those same harpies from before... anyway, I just want to tell you how much I appreciate you coming to visit me like this,</i>\" she explains with a genuine smile.  The siren leans in to give you a small peck on the cheek.");
 		//No Romance:
 		if(!minervaRomanced()) outputText("  \"<i>You're a good friend to have, and you know that, [name].</i>\"");
@@ -592,19 +592,13 @@ private function talkWithMinervaAboutSharkGirlDaughter():void {
 	
 	outputText("\n\nHearing you ask about her daughter brings a bittersweet smile to Minerva's face and she looks away from you.  \"<i>I... that's a very sensitive topic... I'm not sure how far I'll get into it.  She was such a sweet girl, so lively and playful.  I remember the day she was born.  As you know, it wasn't my first time giving birth, but this one was much more serious.  She was much bigger than that anemone thing I birthed... you should have seen her.  Big red eyes, so bright with wonder as I held her in my arms - I had never seen such a cute little girl, even though she was a shark girl,</i>\" Minerva says with a bright smile as she remembers her daughter.  Hearing her describe it like this, you can't help but grin at the tender scene the siren is painting for you.");
 	outputText("\n\n\"<i>I'm sure you've noticed things grow up quickly in this world, and she was no exception.  When I fed her for the first time, she grew up right in my arms, not stopping until she was about the size of a preteen or maybe a very young teenager.  She would follow me everywhere, the adorable little sweetheart... always hanging onto my tail so she would never lose her mommy,</i>\" Minerva tells you with a giggle, and you have to admit, it would have been an cute thing to see.");
-	
 	outputText("\n\n\"<i>The little one would never leave my side, and I had never been a mother before, so I did the best I could... I played with her, kept her well-fed and taught her all that I could about how to feed herself, how to defend herself and to be wary of her surroundings at all times.  Like a sponge, she absorbed it all.  I really wish I could have had more time with her...</i>\" the siren says, sadness bleeding out into her smile.");
-	
-	//No romance:
-	if(!minervaRomanced()) outputText("\n\n\"<i>I think that's enough for now...  I would rather not get into it any further...  It gets... bad after that.  Thank you for listening, though.  Perhaps, some day when we are more familiar, I think I could probably tell you the rest.</i>\"  With her being reluctant to continue, you decide it's time to go.  Saying goodbye to the siren, you leave the tower and head back to camp, leaving Minerva to her thoughts.");
-	//Romance:
-	else {
-		outputText("\n\n\"<i>I may have told you this already, but there was an incident between us.  She grew up so fast, I didn't expect her become an adult in only a few months.  It... it was such a shock to me; I had no idea she would grow that quickly.  If I had, I would have established proper boundaries...</i>\" she says, looking down and sighing.  \"<i>I guess it could've had something to do with her shark girl nature, as well, the ones I encountered always were sexually aggressive creatures, especially when it came to breeding,</i>\" Minerva notes with a sigh and a sour look on her face, clearly not happy with how things went with her daughter.");
-		outputText("\n\n\"<i>It's my own fault for not doing enough, for not being strong enough to resist her and failing to teach her properly before it got to that point.  She came to me one night, claimed she was ready to be an adult.  She needed me to get her pregnant so she could be a mother in turn... and something... I just couldn't resist her.  We had sex... a lot of sex, at that.</i>\"");
-		outputText("\n\n\"<i>Once she seduced me, I couldn't hold back.  She sucked me off, rode me, I plowed her so hard in my lustful haze, and I had to have cum inside her at least half a dozen times that night.  With how needy and fertile those shark girls are, I know I got her pregnant.  How shameful is that?!  I knocked up my own daughter and probably have a granddaughter that I fathered!</i>\" the siren declares sorely, her voice lined with regret and shame for her actions.  \"<i>I'm sorry for yelling, love, I just miss her.  I wish we hadn't parted on those terms.  One day though, I'll see her again... maybe get another chance at being a proper mother,</i>\" she says with a final sigh before looking you in the eyes and hugging you.");
-		outputText("\n\n\"<i>Thank you for listening to me, hun, I'm so happy to have someone like you in my life,</i>\" Minerva whispers to you with a genuine smile on her black lips.");
-		outputText("\n\nThe two of you stay like this for a while, just spending a little time together before you decide you must return to camp and your quest.  Saying your goodbyes, you give Minerva a kiss before heading home.");
-	}
+	outputText("\n\n\"<i>I may have told you this already, but there was an incident between us.  She grew up so fast, I didn't expect her become an adult in only a few months.  It... it was such a shock to me; I had no idea she would grow that quickly.  If I had, I would have established proper boundaries...</i>\" she says, looking down and sighing.  \"<i>I guess it could've had something to do with her shark girl nature, as well, the ones I encountered always were sexually aggressive creatures, especially when it came to breeding,</i>\" Minerva notes with a sigh and a sour look on her face, clearly not happy with how things went with her daughter.");
+    outputText("\n\n\"<i>It's my own fault for not doing enough, for not being strong enough to resist her and failing to teach her properly before it got to that point.  She came to me one night, claimed she was ready to be an adult.  She needed me to get her pregnant so she could be a mother in turn... and something... I just couldn't resist her.  We had sex... a lot of sex, at that.</i>\"");
+    outputText("\n\n\"<i>Once she seduced me, I couldn't hold back.  She sucked me off, rode me, I plowed her so hard in my lustful haze, and I had to have cum inside her at least half a dozen times that night.  With how needy and fertile those shark girls are, I know I got her pregnant.  How shameful is that?!  I knocked up my own daughter and probably have a granddaughter that I fathered!</i>\" the siren declares sorely, her voice lined with regret and shame for her actions.  \"<i>I'm sorry for yelling, love, I just miss her.  I wish we hadn't parted on those terms.  One day though, I'll see her again... maybe get another chance at being a proper mother,</i>\" she says with a final sigh before looking you in the eyes and hugging you.");
+    outputText("\n\n\"<i>Thank you for listening to me, hun, I'm so happy to have someone like you in my life,</i>\" Minerva whispers to you with a genuine smile on her black lips.");
+    outputText("\n\nThe two of you stay like this for a while, just spending a little time together before you decide you must return to camp and your quest.  Saying your goodbyes, you give Minerva a kiss before heading home.");
+    flags[kFLAGS.MINERVA_BACKSTORY_LEARNED] = 2;
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -619,8 +613,6 @@ private function talkToMinervaAboutHerCorruption():void {
 	outputText("\n\nLooking at her, you notice her sad expression and ask what's bothering her; she looked happy just moments before, what could be troubling her now?  The tall redhead looks over at you before sighing and turning around to face you.  She puts a hand to her chest and holds it there.  \"<i>What I'm about to tell you... is very personal to me.  It's the reason I'm here, the reason I can't really leave this place,</i>\" she says as she looks you in the eyes, clearly quite serious about this.");
 	outputText("\n\n\"<i>There is something inside me.  I told you how I came to be here, about how the demons attacked me.  Well, it's obvious I didn't escape unharmed.  There was this little demonic creature that attached itself to me.  It  burrowed inside me.  It's in here right now,</i>\" she finishes, tapping her midriff, above her stomach and under her breasts.  \"<i>Sometimes, I can feel it... squirming...  It's the reason for my corruption and why it won't just go away.  This thing just keeps pumping its corrupting influence into my body; it's probably doing all kinds of other stuff I don't know about, too...</i>\"");
 	outputText("\n\nYou look at her with wide eyes, your gaze automatically shifting to her chest where her hand is.  Quickly noticing your look, she turns away, a little embarrassed that you're just staring at her chest.  \"<i>Anyway.  It's this thing that binds me here; it's why I need to consume the blessed water and fruit of this grove.  At one point, this corruption made me do things I feel great shame for...");
-	//PC told about shark daughter:
-	if(flags[kFLAGS.MINERVA_BACKSTORY_LEARNED] == 1) outputText("  You remember my firstborn, the shark girl I had?  Well... not long after she reached maturity, she... well, she got a bit amorous...  She seduced me and I... I mated with her.  I mated with her over and over that night.  I enjoyed it... it was like I couldn't get enough...  I probably got her pregnant...  So shameful...  I impregnated my own daughter and made her bear my grandchild,");
 	outputText("</i>\" she declares sourly as she stares into the pure waters of the spring.");
 	outputText("\n\nYou put a hand on her shoulder, inquiring about the nature of the creature, but your siren companion can only shrug in answer.  \"<i>I don't know.  Considering the demons, it's likely it was supposed to corrupt and mutate me into some foul, twisted beast of rape and pleasure...</i>\"  Minerva looks to you, her eyes soft and full of emotion.  \"<i>I want to be free of this curse.  It's my greatest wish, even more than having a true family of my own.  I want to be pure, to be clean.  I want this creature exiled from my body and myself to be purged of this corruption...</i>\"");
 	outputText("\n\nCuddling up to you, the siren slips her arms around you, hugging you tightly.  \"<i>Thank you for listening to me, hun, I'm so happy to have someone like you in my life,</i>\" Minerva whispers to you with a genuine smile on her black lips.  \"<i>Sharing one of my hopes and dreams like that, I can't help but feel closer to you.</i>\"");

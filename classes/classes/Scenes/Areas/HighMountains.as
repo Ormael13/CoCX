@@ -76,7 +76,7 @@ use namespace CoC;
 				if (flags[kFLAGS.ETNA_AFFECTION] < 5) SceneLib.etnaScene.firstEnc();
 				else SceneLib.etnaScene.repeatEnc();
 				return;
-			}
+			}/*
 			//Wild manticore/malikore
 			if (chooser == 5) {
 				if (flags[kFLAGS.ETNA_AFFECTION] < 5) chooser = rand(5);
@@ -91,7 +91,7 @@ use namespace CoC;
 						return;
 					}
 				}
-			}
+			}*/
 			//Temple of the Divine
 			if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] < 1 && rand(4) == 0) {
 				templeofdivine.firstvisitintro();

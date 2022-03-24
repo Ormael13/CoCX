@@ -762,7 +762,7 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 			outputText("As your opponent falls defeated on the ground, it dawns on your prey is in desperate need of some punishment. " +
 					"She wanted to rape you? Well, you're going to open her vocabulary to an entirely new definiton of the term.\n\n" +
 					"You pick up the defeated woman, easily lifting her by the leg with one of your tentacles as she's helplessly held upside down.\n\n" +
-					"She quickly cries out in protest, <i>”Wait, what are you doing?! Stop!”</i>\n\n" +
+					"She quickly cries out in protest, <i>\"Wait, what are you doing?! Stop!\"</i>\n\n" +
 					"You pull her to you, smiling widely as you begin to return her question with mockery.\n\n" +
 					"Were she not so eager to fuck you just a second ago? Is this not what she wanted? It's not like she's going to back now, is she?" +
 					" Not that she has a choice in this matter anymore.\n\n" +
@@ -804,7 +804,7 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 					"[monster he] eyes widen in terror as [monster he] realizes that from predator [monster he] became the prey. You grab that ass and smack it a few times for good measure forcing a moan or two out of your partner before grabbing your victims tight as you prepare for the mating." +
 					" [themonster] eyes are almost begging for mercy by now but you’re too far gone in your lust to care.\n\n");
 			outputText("You gasp in delight as your bunny cock slides into that sweet hole the walls tighten around you. Using your powerful bunny legs you begin to jump in and out of this rabbit hole your unwilling partner groaning as you use his/her/its backside to sate your bottomless lust.\n\n");
-			outputText("<i>”Eggs…!!!! EGGS!!!”</i> You finally scream, eye crossed in delight as your two/four heavy eggs finally slide out of your balls, moving through your urethra and into your victim's spacious bowels.\n\n");
+			outputText("<i>\"Eggs…!!!! EGGS!!!\"</i> You finally scream, eye crossed in delight as your two/four heavy eggs finally slide out of your balls, moving through your urethra and into your victim's spacious bowels.\n\n");
 			outputText("Your [cock] still hard, you keep bucking inside -opponent- name relentlessly until you cum not once not twice but three times, tongues out, caring little for the destroyed hole of your partner. Only caring for your own satisfaction you stop fucking only once [themonster] faint from exhaustion. " +
 					"Well you still got plenty of energy left but might as well fuck something that's awake. You unplug your still hard cock from [monster his] asshole gasping as your cock sensitive flesh is exposed to the air again." +
 					" Without anything to plug it the excessive load of cum stashed in your victim's stomach surges out and dye the ground beneath [monster his] white. For good measure you clean your dripping penis on [themonster] ass and hops off back to camp.\n\n");

@@ -47,6 +47,7 @@ public function siegweirdFirstEncounterDoNotHelpHim():void
 
 public function siegweirdFirstEncounterPostFight():void
 {
+    clearOutput();
 	spriteSelect(SpriteDb.s_siegweird);
 	outputText("You kick the imp away and take the sword. You can only hope he’s still near where you last saw him.\n\n");
 	outputText("You eventually find him not too far from where you first met him. He notices you and quickly approaches, the heavy sound of his geaves smash against the ground until he halts before you.\n\n");
@@ -59,7 +60,7 @@ public function siegweirdFirstEncounterPostFight():void
 public function siegweirdFirstEncounterPostFightJoin():void
 {
 	spriteSelect(SpriteDb.s_siegweird);
-	outputText("A paladin?\n\n");
+	outputText("  A paladin?\n\n");
 	outputText("He stands proudly, \"<i>Yes, a righteous, holy warrior… I am trained in white magic as well as with this sword. If you’d let me, I’m sure there’s plenty of things we could teach each other.</i>\"\n\n");
 	outputText("Would you like to invite Siegweird to your camp? The presence of someone so vibrantly holy and devout will surely become a nuisance to those who are far more inclined toward corruption.\n\n");
 	menu();
@@ -69,7 +70,7 @@ public function siegweirdFirstEncounterPostFightJoin():void
 public function siegweirdFirstEncounterPostFightJoinYes():void
 {
 	spriteSelect(SpriteDb.s_siegweird);
-	outputText("You would gladly have someone such as him in your camp.\n\n His face curls into a grin from ear to ear, \“<i>Thank you, [name]. I… I will not disappoint you! Now, lead the way, I will walk alongside you.</i>\”");
+	outputText("You would gladly have someone such as him in your camp.\n\n His face curls into a grin from ear to ear, \"<i>Thank you, [name]. I… I will not disappoint you! Now, lead the way, I will walk alongside you.</i>\"");
 	outputText("\n\n You guide Siegweird to your camp, he smiles softly as he surveys the area.\n\n Once he’s found a place he’s content with he quickly builds a fire pit before reaching into his knapsack and pulling out a large cast iron pot.\n\n");
 	outputText("He sets everything up before igniting the flame.\n\n\"<i>I got some Soup! Call it a hero's feast, [name]. Feel free to ask me for some if you’re ever hungry.</i>\"");
 	outputText("\n\n<b>Siegweird has joined you as a follower.</b>\n\n");
@@ -99,14 +100,14 @@ public function siegweirdFirstEncounterPostFightAnotherFight():void
 {
 	spriteSelect(SpriteDb.s_siegweird);
 	outputText("The suit of armor notices your demonic outlook as his helmet slowly illuminates with a brilliant golden light. You can see an enraged expression on his face before it’s too bright to see anything within his helmet.\n\n");
-	outputText("\"<i>No! Can’t believe I was helped out by a demon! Have I been so blind? Was this all a test? NO! I WILL NOT FAIL! I WILL PURGE YOU AND YOUR CORRUPTION FROM THIS LAND, FIEND!”</i>\"");
+	outputText("\"<i>No! Can’t believe I was helped out by a demon! Have I been so blind? Was this all a test? NO! I WILL NOT FAIL! I WILL PURGE YOU AND YOUR CORRUPTION FROM THIS LAND, FIEND!\"</i>\"");
 	startCombat(new Siegweird());
 }
 public function siegweirdFirstEncounterPostFightAnotherFightWon():void
 {
 	spriteSelect(SpriteDb.s_siegweird);
 	outputText("Siegweird stumbles back, falling to his knees, unable to fight any longer. The glowing radiance from his eyes dim as his helm ceases to glow. He keeps himself propped up as he clutches onto his massive sword, head lowered to the ground. A golden, pearly substance cascades from his helmet, pooling on the ground before him before he falls prone on the ground.\n\n");
-	outputText("The radiance he once emitted has now faded to the dull luster of his blood-stained armor. \"<i>I was too weak…</i>\" he mumbles, not looking up to face you. \“<i>I cannot do anything… I amount to nothing… Who was I fooling..?</i>\"\n\n");
+	outputText("The radiance he once emitted has now faded to the dull luster of his blood-stained armor. \"<i>I was too weak…</i>\" he mumbles, not looking up to face you. \"<i>I cannot do anything… I amount to nothing… Who was I fooling..?</i>\"\n\n");
 	outputText("You approach the knight, he’s still mumbling words of self-depreciation, hardly paying any attention to you at this point. \n\n");
 	outputText("You pick him up by the helmet, his limp body does not attempt fighting back, he’s utterly defeated. His massive limbs are weighing him down, lifting him is almost a struggle as his entire body desperately clutches onto the force of gravity.\n\n");
 	outputText("He looks past you, still mumbling to himself, \"<i> I’m nothing… worthless… Marae was wrong to trust me to carry out their duties.</i>\"\n\n Is this knight going to shut up?\n\n");
@@ -128,7 +129,7 @@ public function siegweirdRepeatEncounterPostFight():void
 		clearOutput();
 		outputText("It takes a while to find Siegweird. For a guy completely covered in full plate, he moves surprisingly fast along the blight ridge.\n\nHe seems to be in search of something… You’re positive the object of his search is someone you’ve gotten to know quite well recently.\n\n");
 		outputText("He’s quick to notice you, despite the fact that you haven’t made any attempt to announce your presence.\n\n");
-		outputText("\"<i>So, you came back after all... I should've known... You've been working with this witch from the start haven't you?</i>\” He shakes his head, \"<i>The voices in my head tell me ‘run away’, but I will not turn back, lest I go astray. I don't know what she promised you but in the end you will come to regret it, be it by my blade or by some twisted machinations she may have prepared for you.</i>\"\n\n");
+		outputText("\"<i>So, you came back after all... I should've known... You've been working with this witch from the start haven't you?</i>\" He shakes his head, \"<i>The voices in my head tell me ‘run away’, but I will not turn back, lest I go astray. I don't know what she promised you but in the end you will come to regret it, be it by my blade or by some twisted machinations she may have prepared for you.</i>\"\n\n");
 		outputText("You’re here for his life and his pendant. You know you’re not leaving without it..\n\n");
 		outputText("He raises his greatsword to his gauntlet, running his hand over it, infusing it with holy energy before pointing it toward you.");
 		outputText("\"<i>You’re going to have to pry it from my cold, dead hands, fiend.</i>\"\n\n");
@@ -156,13 +157,11 @@ public function siegweirdMainCampMenu():void
 	clearOutput();
 	outputText("You wave a hearty hello to Siegweird in which he responds with a respectful nod,");
 	outputText("\"<i>[name]... Is there something you wanted?</i>\"\n\n");
+    outputText("\n\nCurrent soup recovery: " + Math.round(soupRecovery() * 100) + "%.");
 	menu();
 	if (player.statusEffectv1(StatusEffects.SiegweirdSoup) == 1) addButtonDisabled(5, "Soup", "You already ate today bowl of Siegweird’s soup.");
 	else addButton(5, "Soup", siegweirdCampSoup);
-	if ((player.hasItem(consumables.ICICLE_, 1) && player.statusEffectv1(StatusEffects.SiegweirdSoup1) < 1) || (player.hasItem(consumables.CANINEP, 1) && player.statusEffectv1(StatusEffects.SiegweirdSoup2) < 1) || (player.hasItem(consumables.BAYRLEA, 1) && player.statusEffectv1(StatusEffects.SiegweirdSoup3) < 1) || (player.hasItem(consumables.SALAMFW, 1) && player.statusEffectv1(StatusEffects.SiegweirdSoup4) < 1) || 
-	(player.hasItem(consumables.LABOVA_, 1) && player.statusEffectv1(StatusEffects.SiegweirdSoup5) < 1) || (player.hasItem(consumables.RINGFIG, 1) && player.statusEffectv2(StatusEffects.SiegweirdSoup1) < 1) || (player.hasItem(consumables.ALICORN, 1) && player.statusEffectv2(StatusEffects.SiegweirdSoup2) < 1) || (player.hasItem(consumables.WOFRUIT, 1) && player.statusEffectv2(StatusEffects.SiegweirdSoup3) < 1) || 
-	(player.hasItem(consumables.MAGSEED, 1) && player.statusEffectv2(StatusEffects.SiegweirdSoup4) < 1) || (player.hasItem(consumables.NOCELIQ, 1) && player.statusEffectv2(StatusEffects.SiegweirdSoup5) < 1) || (player.hasItem(consumables.GODMEAD, 1) && player.statusEffectv3(StatusEffects.SiegweirdSoup1) < 1)) addButton(9, "Add an ingredient", siegweirdCampSoup2);
-	else addButtonDisabled(9, "Add an ingredient", "Need to have one of those: Icicle, Canine pepper, Bayr leaf, Firemander whisky, La bova, Ringtail fig, Alicornium, Wonder fruit, Magic seed, Nocello or God Mead to be able to improve soup.");
+	if (!soupMaxLevel()) addButton(9, "Add an ingredient", addIngredientMenu);
 	if (player.hasStatusEffect(StatusEffects.SiegweirdTraining)) addButtonDisabled(10, "Study", "You already completed basic Study.");
 	else addButton(10, "Study", siegweirdCampStudy);
 	if (player.hasStatusEffect(StatusEffects.SiegweirdTraining) && !player.hasStatusEffect(StatusEffects.SiegweirdTraining2)) addButton(11, "Advanced Study", siegweirdAdvancedCampStudy);
@@ -182,6 +181,84 @@ public function siegweirdMainCampMenu():void
 	addButton(14, "Back", camp.campFollowers);
 }
 
+public function soupMaxLevel():Boolean {
+    return player.statusEffectv1(StatusEffects.SiegweirdSoup1) > 0
+        && player.statusEffectv1(StatusEffects.SiegweirdSoup2) > 0
+        && player.statusEffectv1(StatusEffects.SiegweirdSoup3) > 0
+        && player.statusEffectv1(StatusEffects.SiegweirdSoup4) > 0
+        && player.statusEffectv1(StatusEffects.SiegweirdSoup5) > 0
+        && player.statusEffectv2(StatusEffects.SiegweirdSoup1) > 0
+        && player.statusEffectv2(StatusEffects.SiegweirdSoup2) > 0
+        && player.statusEffectv2(StatusEffects.SiegweirdSoup3) > 0
+        && player.statusEffectv2(StatusEffects.SiegweirdSoup4) > 0
+        && player.statusEffectv2(StatusEffects.SiegweirdSoup5) > 0
+        && player.statusEffectv3(StatusEffects.SiegweirdSoup1) > 0;
+}
+
+public function addIngredientMenu():void {
+    menu();
+    addIngrButton(0, consumables.ICICLE_, StatusEffects.SiegweirdSoup1, 1);
+    addIngrButton(1, consumables.CANINEP, StatusEffects.SiegweirdSoup2, 1);
+    addIngrButton(2, consumables.BAYRLEA, StatusEffects.SiegweirdSoup3, 1);
+    addIngrButton(3, consumables.SALAMFW, StatusEffects.SiegweirdSoup4, 1);
+    addIngrButton(4, consumables.LABOVA_, StatusEffects.SiegweirdSoup5, 1);
+    addIngrButton(5, consumables.RINGFIG, StatusEffects.SiegweirdSoup1, 2);
+    addIngrButton(6, consumables.ALICORN, StatusEffects.SiegweirdSoup2, 2);
+    addIngrButton(7, consumables.WOFRUIT, StatusEffects.SiegweirdSoup3, 2);
+    addIngrButton(8, consumables.MAGSEED, StatusEffects.SiegweirdSoup4, 2);
+    addIngrButton(9, consumables.NOCELIQ, StatusEffects.SiegweirdSoup5, 2);
+    addIngrButton(10,consumables.GODMEAD, StatusEffects.SiegweirdSoup1, 3);
+    addButton(14, "Back", camp.campFollowers);
+
+}
+
+public function addIngredientText():void {
+    spriteSelect(SpriteDb.s_siegweird);
+	clearOutput();
+	outputText("You ask Siegweird if he wouldn’t mind allowing you to add something to his recipe so that the soup could be better.\n\n");
+	outputText("Siegweird gives you a suspicious glance before redirecting his attention to the item in your grasp, \"<i>I… Um… Okay… Go ahead, [name]. I don’t really see an issue with that ingredient. </i>\"");
+	outputText("You drop it in the soup as Siegweird scratches the back of his head nervously, \"<i>I’m sure the magic within will make the soup a little stronger.</i>\"\n\n");
+	doNext(camp.campFollowers);
+	eachMinuteCount(5);
+}
+
+//adds the 'val' value of 'effect' and consumes the 'item'
+public function addSomething(item:ItemType, effect:StatusEffectType, val:int):void {
+    player.destroyItems(item, 1);
+    if (player.getStatusValue(effect, val) < 1) //extra check
+	    player.addStatusValue(effect, val, 1);
+    addIngredientText();
+}
+
+//checks if the item can be added and adds a button for it. No button if already consumed
+public function addIngrButton(bnum:int, item:ItemType, effect:StatusEffectType, val:int):void {
+    if (player.getStatusValue(effect, val) < 1) {
+        if (player.hasItem(item))
+            addButton(bnum, item.shortName, addSomething, item, effect, val);
+        else
+            addButtonDisabled(bnum, item.shortName, "You don't have this!");
+    }
+}
+
+
+
+public function soupRecovery():Number {
+    var recoveryV:Number = 0.25;
+    //Due to an old bug, it's possible that some of these values is > 1 in some saves. So it should be fixed before using the exact numbers again.
+    if (player.statusEffectv1(StatusEffects.SiegweirdSoup1) > 0) recoveryV += 0.05;
+    if (player.statusEffectv1(StatusEffects.SiegweirdSoup2) > 0) recoveryV += 0.05;
+    if (player.statusEffectv1(StatusEffects.SiegweirdSoup3) > 0) recoveryV += 0.05;
+    if (player.statusEffectv1(StatusEffects.SiegweirdSoup4) > 0) recoveryV += 0.05;
+    if (player.statusEffectv1(StatusEffects.SiegweirdSoup5) > 0) recoveryV += 0.05;
+    if (player.statusEffectv2(StatusEffects.SiegweirdSoup1) > 0) recoveryV += 0.05;
+    if (player.statusEffectv2(StatusEffects.SiegweirdSoup2) > 0) recoveryV += 0.05;
+    if (player.statusEffectv2(StatusEffects.SiegweirdSoup3) > 0) recoveryV += 0.05;
+    if (player.statusEffectv2(StatusEffects.SiegweirdSoup4) > 0) recoveryV += 0.05;
+    if (player.statusEffectv2(StatusEffects.SiegweirdSoup5) > 0) recoveryV += 0.05;
+    if (player.statusEffectv3(StatusEffects.SiegweirdSoup1) > 0) recoveryV += 0.05;
+    return recoveryV;
+}
+
 public function siegweirdCampSoup():void
 {
 	spriteSelect(SpriteDb.s_siegweird);
@@ -192,18 +269,7 @@ public function siegweirdCampSoup():void
 		outputText("You share the meal with Siegweird, the magical soup replenishing your endurance and healing your wounds.\n\n");
 		player.addStatusValue(StatusEffects.SiegweirdSoup, 1, 1);
 		player.hunger = player.maxHunger();
-		var recoveryV:Number = 0.25;
-		if (player.statusEffectv1(StatusEffects.SiegweirdSoup1) == 1) recoveryV += 0.05;
-		if (player.statusEffectv1(StatusEffects.SiegweirdSoup2) == 1) recoveryV += 0.05;
-		if (player.statusEffectv1(StatusEffects.SiegweirdSoup3) == 1) recoveryV += 0.05;
-		if (player.statusEffectv1(StatusEffects.SiegweirdSoup4) == 1) recoveryV += 0.05;
-		if (player.statusEffectv1(StatusEffects.SiegweirdSoup5) == 1) recoveryV += 0.05;
-		if (player.statusEffectv2(StatusEffects.SiegweirdSoup1) == 1) recoveryV += 0.05;
-		if (player.statusEffectv2(StatusEffects.SiegweirdSoup2) == 1) recoveryV += 0.05;
-		if (player.statusEffectv2(StatusEffects.SiegweirdSoup3) == 1) recoveryV += 0.05;
-		if (player.statusEffectv2(StatusEffects.SiegweirdSoup4) == 1) recoveryV += 0.05;
-		if (player.statusEffectv2(StatusEffects.SiegweirdSoup5) == 1) recoveryV += 0.05;
-		if (player.statusEffectv3(StatusEffects.SiegweirdSoup1) == 1) recoveryV += 0.05;
+        var recoveryV:Number = soupRecovery();
 		HPChange(Math.round(player.maxHP() * recoveryV), true);
 		EngineCore.changeFatigue(-(Math.round(player.maxFatigue() * recoveryV)));
 		doNext(camp.campFollowers);
@@ -223,60 +289,6 @@ public function siegweirdCampSoup():void
 		menu();
 		addButton(14, "Back", siegweirdMainCampMenu);
 	}
-}
-public function siegweirdCampSoup2():void
-{
-	spriteSelect(SpriteDb.s_siegweird);
-	clearOutput();
-	outputText("You ask Siegweird if he wouldn’t mind allowing you to add something to his recipe so that the soup could be better.\n\n");
-	outputText("Siegweird gives you a suspicious glance before redirecting his attention to the item in your grasp, \"<i>I… Um… Okay… Go ahead, [name]. I don’t really see an issue with that ingredient. </i>\"");
-	outputText("You drop it in the soup as Siegweird scratches the back of his head nervously, \"<i>I’m sure the magic within will make the soup a little stronger.</i>\"\n\n");
-	if (player.hasItem(consumables.ICICLE_, 1)) {
-		player.destroyItems(consumables.ICICLE_, 1);
-		player.addStatusValue(StatusEffects.SiegweirdSoup1, 1, 1);
-	}
-	if (player.hasItem(consumables.CANINEP, 1)) {
-		player.destroyItems(consumables.CANINEP, 1);
-		player.addStatusValue(StatusEffects.SiegweirdSoup2, 1, 1);
-	}
-	if (player.hasItem(consumables.BAYRLEA, 1)) {
-		player.destroyItems(consumables.BAYRLEA, 1);
-		player.addStatusValue(StatusEffects.SiegweirdSoup3, 1, 1);
-	}
-	if (player.hasItem(consumables.SALAMFW, 1)) {
-		player.destroyItems(consumables.SALAMFW, 1);
-		player.addStatusValue(StatusEffects.SiegweirdSoup4, 1, 1);
-	}
-	if (player.hasItem(consumables.LABOVA_, 1)) {
-		player.destroyItems(consumables.LABOVA_, 1);
-		player.addStatusValue(StatusEffects.SiegweirdSoup5, 1, 1);
-	}
-	if (player.hasItem(consumables.RINGFIG, 1)) {
-		player.destroyItems(consumables.RINGFIG, 1);
-		player.addStatusValue(StatusEffects.SiegweirdSoup1, 2, 1);
-	}
-	if (player.hasItem(consumables.ALICORN, 1)) {
-		player.destroyItems(consumables.ALICORN, 1);
-		player.addStatusValue(StatusEffects.SiegweirdSoup2, 2, 1);
-	}
-	if (player.hasItem(consumables.WOFRUIT, 1)) {
-		player.destroyItems(consumables.WOFRUIT, 1);
-		player.addStatusValue(StatusEffects.SiegweirdSoup3, 2, 1);
-	}
-	if (player.hasItem(consumables.MAGSEED, 1)) {
-		player.destroyItems(consumables.MAGSEED, 1);
-		player.addStatusValue(StatusEffects.SiegweirdSoup4, 2, 1);
-	}
-	if (player.hasItem(consumables.NOCELIQ, 1)) {
-		player.destroyItems(consumables.NOCELIQ, 1);
-		player.addStatusValue(StatusEffects.SiegweirdSoup5, 2, 1);
-	}
-	if (player.hasItem(consumables.GODMEAD, 1)) {
-		player.destroyItems(consumables.GODMEAD, 1);
-		player.addStatusValue(StatusEffects.SiegweirdSoup1, 3, 1);
-	}
-	doNext(camp.campFollowers);
-	eachMinuteCount(5);
 }
 
 public function siegweirdCampStudy():void

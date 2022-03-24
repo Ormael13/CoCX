@@ -419,6 +419,8 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const KeltOff:StatusEffectType                        = mk("KeltOff");
 		public static const Kindra:StatusEffectType                         = mk("Kindra");
 		public static const KitsuneEnergyThirstFeed:StatusEffectType        = mk("kitsune fed from orgasm");
+		public static const KnowsAcidRain:StatusEffectType             		= mk("Knows Acid Rain");
+		public static const KnowsAcidSpray:StatusEffectType             	= mk("Knows Acid Spray");
 		public static const KnowsAegis:StatusEffectType                     = mk("Knows Aegis");
 		public static const KnowsArcticGale:StatusEffectType                = mk("Knows Arctic Gale");
 		public static const KnowsArouse:StatusEffectType                    = mk("Knows Arouse");
@@ -449,6 +451,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const KnowsCleave:StatusEffectType                    = mk("Knows Cleave");
 		public static const KnowsComet:StatusEffectType                     = mk("Knows Comet");
 		public static const KnowsConsumingDarkness:StatusEffectType         = mk("Knows Consuming darkness");
+		public static const KnowsCorrosiveWave:StatusEffectType             = mk("Knows Corrosive Wave");
 		public static const KnowsCure:StatusEffectType                      = mk("Knows Cure");
 		public static const KnowsCurseOfDesire:StatusEffectType             = mk("Knows Curse of Desire");
 		public static const KnowsCurseOfWeeping:StatusEffectType            = mk("Knows Curse of Weeping");
@@ -471,6 +474,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const KnowsHeal:StatusEffectType                      = mk("Knows Heal");
 		public static const KnowsHeavensDevourer:StatusEffectType           = mk("Knows Heaven's Devourer");
 		public static const KnowsHurricaneDance:StatusEffectType            = mk("Knows Hurricane Dance");
+		public static const KnowsHydroAcid:StatusEffectType             	= mk("Knows Hydro Acid");
 		public static const KnowsIceFist:StatusEffectType                   = mk("Knows Ice Fist");
 		public static const KnowsIceRain:StatusEffectType                   = mk("Knows Ice Rain");
 		public static const KnowsIceSpike:StatusEffectType                  = mk("Knows Ice Spike");
@@ -518,10 +522,6 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const KonstantinWeaponSharpening:StatusEffectType     = mk("Konstantin Weapon Sharpening");
 		public static const LactationEndurance:StatusEffectType             = mk("Lactation Endurance");
 		public static const LactationReduction:StatusEffectType             = mk("Lactation Reduction");
-		public static const LactationReduc0:StatusEffectType                = mk("Lactation Reduc0");
-		public static const LactationReduc1:StatusEffectType                = mk("Lactation Reduc1");
-		public static const LactationReduc2:StatusEffectType                = mk("Lactation Reduc2");
-		public static const LactationReduc3:StatusEffectType                = mk("Lactation Reduc3");
 		public static const Liliraune:StatusEffectType                     	= mk("Liliraune");
 		public static const LethiceRedemed:StatusEffectType                 = mk("Lethice Redemed");
 		public static const LootEgg:StatusEffectType                        = mk("lootEgg");
@@ -722,6 +722,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const EtnaOff:StatusEffectType             = mk("Etna Off");
 		public static const LunaOff:StatusEffectType             = mk("Luna Off");
 		public static const TedOff:StatusEffectType              = mk("Ted Off");
+		public static const BelisaOff:StatusEffectType           = mk("Belisa Off");
 		public static const ThereCouldBeOnlyOne:StatusEffectType = mk("There Could Be Only One");
 		public static const UmasMassage:StatusEffectType         = mk("Uma's Massage"); //v1 = bonus index; v2 = bonus value; v3 = remaining time
 		public static const Uniball:StatusEffectType             = mk("Uniball");
@@ -1052,6 +1053,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const SlimeInsert:StatusEffectType               = mkCombat("Slime Inserted itself into opponent");
 		public static const Snow:StatusEffectType                      = mkCombat("Snow");
 		public static const Snowstorms:StatusEffectType                = mkCombat("Snowstorms");
+		public static const SparingBelisa:StatusEffectType             = mkCombat("SparingBelisa");
 		public static const StoneLust:StatusEffectType                 = mkCombat("Stone Lust");
 		public static const StoneSkin:StatusEffectType                 = mkCombat("Stone Skin");
 		public static const Stunned:StatusEffectType                   = mkCombat("Stunned");
@@ -1219,3 +1221,4 @@ import classes.StatusEffects.VampireThirstEffect;
 		}
 	}
 }
+

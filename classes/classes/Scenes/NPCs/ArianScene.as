@@ -1427,7 +1427,7 @@ private function takeYerLizardHomePartII():void {
 	outputText("\n\nYou politely excuse yourself, saying you should let the lizan make [Arian emself] comfortable in [Arian eir] new home, and step back outside.");
 	//flag arian as follower
 	flags[kFLAGS.ARIAN_FOLLOWER] = 1;
-	flags[kFLAGS.ARIAN_SCALES] = 0;
+	flags[kFLAGS.ARIAN_SCALES] = 1;
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -4268,9 +4268,9 @@ private function arianAppearance():void {
 	outputText(" scales, lashing from side to side as [Arian ey] walks.\n\n");
 	if (flags[kFLAGS.ARIAN_COCK_SIZE] > 0) {
 		outputText("Concealed most of the time on a genital slit on [Arian em] crotch a ");
-		if (flags[kFLAGS.ARIAN_COCK_SIZE] == 1) outputText("6” long and 1.5” thick");
-		if (flags[kFLAGS.ARIAN_COCK_SIZE] == 2) outputText("10” long and 2” thick");
-		if (flags[kFLAGS.ARIAN_COCK_SIZE] == 3) outputText("14” long and 3” thick");
+		if (flags[kFLAGS.ARIAN_COCK_SIZE] == 1) outputText("6\" long and 1.5\" thick");
+		if (flags[kFLAGS.ARIAN_COCK_SIZE] == 2) outputText("10\" long and 2\" thick");
+		if (flags[kFLAGS.ARIAN_COCK_SIZE] == 3) outputText("14\" long and 3\" thick");
 		if (flags[kFLAGS.ARIAN_DOUBLE_COCK] == 0) outputText(" penis emerge when aroused. It’s ");
 		if (flags[kFLAGS.ARIAN_DOUBLE_COCK] > 0) outputText(" pair of penises emerge when aroused. They’re ");
 		outputText("purple colored, with and odd, bumpy shape. Unlike those of most races, Arian’s testicles are internal, protecting them from any external damage.\n\n");

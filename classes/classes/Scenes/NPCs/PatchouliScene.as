@@ -135,6 +135,8 @@ public class PatchouliScene extends NPCAwareContent {
 				player.sexReward("cum","Vaginal");
 			} else {
 				var x:int = player.cockThatFits(36, "length");
+                if (x < 0)
+                    x = 0;
 				outputText("You force the catboy on his back and yank his shorts away, revealing his girly ass and his cute pucker. Patchouli gulps as your [cock] hardens, already aware of what is about to happen.\n\n");
 				outputText("\"<i>Uh I’m sure we can sort that out in a different way! I can lead you to treasure, riches, a minotaur... wait, forget I ever said anything about the minotaur!</i>\"\n\n");
 				outputText("You don’t give him the chance to teleport away as you grab him by the neck and force your [cock] in.\n\n");
@@ -146,10 +148,8 @@ public class PatchouliScene extends NPCAwareContent {
 				outputText("\"<i>Some poor girl in that village must be pregnant by now, you should be ashamed, you know?</i>\"\n\n");
 				outputText("This little asshole has pranked you long enough. You knock him unconscious and bring him back to camp, making sure to tie him to a nearby tree");
 				player.sexReward("Default","Default",true,false);
-				if (camp.getCampPopulation() >=
-				    2) {
+				if (camp.getCampPopulation() >= 2)
 					outputText(". Leaving one of your friends to watch over him at all time");
-				}
 				outputText(".\n\n");
 			}
 			flags[kFLAGS.PATCHOULI_FOLLOWER] = TIEDINCAMP;
@@ -160,7 +160,7 @@ public class PatchouliScene extends NPCAwareContent {
 			spriteSelect(SpriteDb.s_patchouli_male);
 			clearOutput();
 			if (silly) {
-				outputText("You toss the cat into the air and start by punching its chest to increase his altitude, then kick his balls. You chain this with a hundred kicks, tossing him even higher into the air as you charge an energy ball and fire it at the feline. As the cat is disintegrated, a disembodied voice growls out <b>“FATALITY!”</b> in the background. You strike a vicious pose… And are immediately mortified of whatever came over to you.\n\n");
+				outputText("You toss the cat into the air and start by punching its chest to increase his altitude, then kick his balls. You chain this with a hundred kicks, tossing him even higher into the air as you charge an energy ball and fire it at the feline. As the cat is disintegrated, a disembodied voice growls out <b>\"FATALITY!\"</b> in the background. You strike a vicious pose… And are immediately mortified of whatever came over to you.\n\n");
 				outputText("You have no idea how you did that... must’ve been the anger. You decide to never speak, or even think, of this ever again and head back to camp.");
 			} else {
 				outputText("No way are you going to forgive him for this. You proceed to snap his neck, leaving him lifeless on the ground. Oddly enough, the jerk is still smiling, even in death.\n\n");
@@ -437,7 +437,7 @@ public class PatchouliScene extends NPCAwareContent {
 		outputText("Just what is " + (tiedUp ? "he" : "she") + " really? You don’t know of cat morph with teleportation ability.\n\n");
 		outputText("\"<i>Me nya? I am everything and nothing, everywhere and nowhere. Nya to describe what I am is to also describe what I am not. Through for people like you the simple answer is a cheshire cat.</i>\"\n\n");
 		outputText("How can " + (tiedUp ? "he" : "she") + " be and not be at the same time that makes no senses.\n\n");
-		outputText("\"<i>I’m from a different world with a different mindset. One where simple rules such as your so called “physics” and “logic” do not apply. A mad dimension where such things are commonplace and the norm. How very amusing of you to question whether I make sense or not when the very stability of this dimension you call Mareth in itself makes so little sense. People fucking everywhere, mad mages trading their souls for power, animals talking and breeding, food that transforms you, people being jealous, hurting and stealing from each other? None of this makes sense, you know, yet you're here questioning a cat about the logics of ");
+		outputText("\"<i>I’m from a different world with a different mindset. One where simple rules such as your so called \"physics\" and \"logic\" do not apply. A mad dimension where such things are commonplace and the norm. How very amusing of you to question whether I make sense or not when the very stability of this dimension you call Mareth in itself makes so little sense. People fucking everywhere, mad mages trading their souls for power, animals talking and breeding, food that transforms you, people being jealous, hurting and stealing from each other? None of this makes sense, you know, yet you're here questioning a cat about the logics of ");
 		outputText((tiedUp ? "his" : "her") + " action? I say you're the crazy one. Know this... by the time your so called quest is over you will be even crazier then me");
 		if (tiedUp) outputText(". It’s like that rope and tree, why do you think I didn’t go elsewhere yet? It's because I don’t have a cheese on me to break free. I'm not bound by the same rules and reality, yet I’m bound all the same. You and I come from different worlds, [name]");
 		outputText(".</i>\"\n\nCome again? Is the cat actually calling you crazy? The cheshire teasingly replies with a wide smile.\n\n");
@@ -457,9 +457,7 @@ public class PatchouliScene extends NPCAwareContent {
 			addButton(2, "Vaginal", patchouleVaginal);
 			addButton(3, "Anal", patchouleAnal);
 		}
-		if(player.isGenderless()){
-			addButton(14, "Back", patchouleMainCampMenu);
-		}
+		addButton(14, "Back", patchouleMainCampMenu);
 	}
 
 	private function patchouleGirlOnGirl():void {
@@ -508,7 +506,7 @@ public class PatchouliScene extends NPCAwareContent {
 		} else {
 			outputText("girl");
 		}
-		outputText(" mewls and moans as she milks you with her pussy. The fact she's a bimbo also somehow helps her skill despite having been a male not so long before. She lets her purple fur slide against your [skin] and you grope her ass as she joyfully bounces up and down along your cock length. You cum in her cunt as she howls a final “NYYAAAAAAA” skyward her tail straight like an iron bar. After this ordeal the both of you finally doze off to sleep.\n\n");
+		outputText(" mewls and moans as she milks you with her pussy. The fact she's a bimbo also somehow helps her skill despite having been a male not so long before. She lets her purple fur slide against your [skin] and you grope her ass as she joyfully bounces up and down along your cock length. You cum in her cunt as she howls a final \"NYYAAAAAAA\" skyward her tail straight like an iron bar. After this ordeal the both of you finally doze off to sleep.\n\n");
 		outputText("When you wake up Patchoulie is resting on all four next to you in a seductive pose, still holding that unsettling smile that is her signature as she plays with one of the hair braid she likely got made while you were sleeping. You ought to admit, this new girl’s hair cut fits her well.\n\n");
 		if (flags[kFLAGS.PATCHOULI_FOLLOWER] == MATE) {
 			outputText("\"<i>Nyaaa... Always a pleasure to breed with you, [name]. Ask me whenever you are in the mood again, I’m looking forward to it.</i>\"\n\n");
@@ -546,6 +544,8 @@ public class PatchouliScene extends NPCAwareContent {
 
 	private function patchouleAnal():void {
 		var x:int = player.cockThatFits(36, "length");
+        if (x < 0)
+            x = 0;
 		outputText("You force the cat on her back and yank her shorts away, revealing her fuck ready ass and cute pussy. Patchoulie purrs as your [cock] hardens, already aware of what is about to happen.\n\n");
 		outputText("\"<i>Nyaaaa~, c'mon [name] stop teasing me. You already know I want it, so please put it in!</i>\"\n\n");
 		outputText("Well you sure are going to give her what she wants as you grab her by the thigh and force your [cock] in.\n\n");

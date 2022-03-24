@@ -296,7 +296,7 @@ public class Skin extends SaveableBodyPart {
 		return skinValue(base.isAre(s, p), coat.isAre(s, p));
 	}
 	override public function get type():int {
-		if (coverage >= COVERAGE_HIGH) return coat.type;
+		if (coverage > COVERAGE_NONE) return coat.type;
 		return base.type;
 	}
 
@@ -315,16 +315,16 @@ public class Skin extends SaveableBodyPart {
 		if (coverage > COVERAGE_NONE && coat.checkProps(p)) return coat;
 		return null;
 	}
-	/**
-	 * @param options = {color,color2,pattern,adj,desc}
-	 */
+    
 	public function growCoat(type:int,options:Object=null,coverage:int=COVERAGE_HIGH):SkinLayer {
 		this.coverage = coverage;
 		this.coat.type = type;
-        if (isHairy()) //select default color
-		    this.coat.color = creature.hairColor;
-        else
-		    this.coat.color = this.base.color;
+        if (!this.coat.color) {
+            if (isHairy()) //select default color
+		        this.coat.color = creature.hairColor;
+            else
+                this.coat.color = this.base.color;
+        }
 		if (options) this.coat.setProps(options);
 		return this.coat;
 	}
@@ -341,8 +341,11 @@ public class Skin extends SaveableBodyPart {
 	 * @param baseOptions = {color,adj,desc,type}
 	 */
 	public function setBaseOnly(baseOptions:Object =null):void {
-		coverage = Skin.COVERAGE_NONE;
-		if (baseOptions) base.setAllProps(baseOptions);
+        //mainly workaround to fix *something* setting the skin desc forever. Fuck.
+        //clear coverage. Nobody needs its type, color
+		this.coverage = Skin.COVERAGE_NONE;
+        coat.restore(true); //restore, keep color for parts
+		if (baseOptions) this.base.setAllProps(baseOptions);
 	}
 	/**
 	 * @param layer 'base','coat','skin' (both layer if MEDIUM, else major),'full' (both layers if present)
@@ -538,7 +541,6 @@ public class Skin extends SaveableBodyPart {
 			case COVERAGE_LOW:
 				return inBase;
 			case COVERAGE_MEDIUM:
-				return inBase + " and " + inCoat;
 			case COVERAGE_HIGH:
 			case COVERAGE_COMPLETE:
 			default:

@@ -93,7 +93,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 
 			outputText("You ask Ceraph if she can help you with the farm you recently acquired.");
 
-			outputText("\n\n“<i>You mean work on a farm? Don’t be ridiculous, [name]!</i>” She chortles, before coughing as she catches your expression. “<i>I don’t think me or any of my pets are cut out for farming,</i>” she says, tapping her chin. “<i>Or at least not that kind you have in mind. But I could mark the place as being under demon protection if you like. I can only do it once,</i>” she warns. “<i>And it will wear off eventually.</i>”");
+			outputText("\n\n\"<i>You mean work on a farm? Don’t be ridiculous, [name]!</i>\" She chortles, before coughing as she catches your expression. \"<i>I don’t think me or any of my pets are cut out for farming,</i>\" she says, tapping her chin. \"<i>Or at least not that kind you have in mind. But I could mark the place as being under demon protection if you like. I can only do it once,</i>\" she warns. \"<i>And it will wear off eventually.</i>\"");
 
 			menu();
 			addButton(0, "Do It", doFarmShit);
@@ -105,7 +105,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			clearOutput();
 			ceraphSprite();
 
-			outputText("“<i>I’ll go over there tonight then,</i>” she says. There’s a far-away gleam of excitement in her eyes as she tugs on a nipple; only now does it occur to you what ‘marked as being under demon protection’ might entail. “<i>Anything else, [master]?</i>”");
+			outputText("\"<i>I’ll go over there tonight then,</i>\" she says. There’s a far-away gleam of excitement in her eyes as she tugs on a nipple; only now does it occur to you what ‘marked as being under demon protection’ might entail. \"<i>Anything else, [master]?</i>\"");
 
 			flags[kFLAGS.FOLLOWER_AT_FARM_CERAPH] = 1;
 			SceneLib.farm.farmCorruption.whitneyCorruption(10);
@@ -118,7 +118,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			clearOutput();
 			ceraphSprite();
 
-			outputText("“<i>Very well,</i>” she smirks. “<i>Anything else?</i>”");
+			outputText("\"<i>Very well,</i>\" she smirks. \"<i>Anything else?</i>\"");
 
 			ceraphFollowerAppearance(false);
 		}
@@ -876,7 +876,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			SceneLib.urta.urtaSprite();
 			clearOutput();
 			outputText("You rise and run your hands along the lighter fur of her toned abs. \"<i>Please,</i>\" she whispers, \"<i>I want to feel you inside me.</i>\"  Your [cock] is all too willing, throbbing meat sliding up and down her lubricated lips as you slowly rock back and forth. Bracing your tip at the pucker of her honey-slick passage, you take one of her hands in yours, entwining your fingers with a squeeze as you push into her. Urta jolts with a sharp intake of breath before relaxing herself and closing her eyes to focus on the sensation of your inflamed shaft parting her inner walls. You push in deeper, amazed at how wet she is already, the strength of her love for you intensifying every motion. Despite all the sexual encounters she's had before this moment, in this single instant, it's as if she's experiencing pleasure for the first time. Aching bliss coursing through her limbs, it's all she can do to gasp and slowly toss her head side to side as you sink deeper into the girl, her recesses filling with the almost liquid heat of your throbbing member.");
-			if (player.cockArea(0) > 150) outputText("  Even your tremendous size is no impediment to blessing the girl with your passion- every inch of her body gives way as you sink into her beyond the limits you would normally expect, as if her body were perfectly tailored to yours.");
+			if (player.biggestCockArea() > 150) outputText("  Even your tremendous size is no impediment to blessing the girl with your passion- every inch of her body gives way as you sink into her beyond the limits you would normally expect, as if her body were perfectly tailored to yours.");
 			outputText("\n\n");
 
 			outputText("When you finally bottom out, the two of you are already panting, the sheer rapture of the penetration coaxing the two of you to the precipice of orgasm. You stop moving, just drinking in the moist pressure of her body clenching around you. Urta, in turn, can only wordlessly move her lips at the ecstasy of being so utterly filled, her breasts heaving on her chest, shimmering onyx nipples glinting at the tips of her mammaries. When the two of you feel you have mastered yourselves, you begin to pull back out, her trembling cunny grasping at your [cock] as if regretting every lost inch. With a steady pace, you begin to thrust into the guard captain, her hips matching your motions eagerly. She strokes the tips of her fingers along your " + chestDesc() + ", wrapping her hand around the side of your neck as the two of you rock the cot back and forth.  The vixen's pussy splashes with each pounding advance of your engorged shaft, her twinkling honey running between her thighs in gleaming rivulets. She locks her ankles around your [butt], using her legs to speed up your pace until you find yourself fucking the vulpine woman at a frenzied pitch. The two of you noisily, wetly slam against one another hard enough for the sounds of your passion to carry all over your camp and into the surrounding forest, cries of moaning gratification piercing the air.\n\n");
@@ -1283,7 +1283,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 
 				outputText("\"<i>Was that good?</i>\" Ceraph asks in her own voice, immediately ruining the illusion. \"<i>");
 				//[Player has huge dick:
-				if (player.cockArea(0) >= 75) outputText("I doubt her ass could actually take you so well, but... I wanted my " + player.mf("master", "mistress") + " to enjoy a perfect asshole.  Sue me.  ");
+				if (player.biggestCockArea() >= 75) outputText("I doubt her ass could actually take you so well, but... I wanted my " + player.mf("master", "mistress") + " to enjoy a perfect asshole.  Sue me.  ");
 				outputText("I hope that little slut appreciates what she's missing out on.</i>\"  She laps at your dick a few more times in the corrupted cabalist's visage, eventually sitting upright and slipping around behind you to massage your shoulders.\n\n");
 
 				outputText("\"<i>That said,</i>\" she whispers in your ear, \"<i>If you get a chance to do that to that cunt, do invite me.</i>\"");
