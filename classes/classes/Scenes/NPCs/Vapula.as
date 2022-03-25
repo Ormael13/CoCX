@@ -877,7 +877,7 @@ public class Vapula extends NPCAwareContent implements TimeAwareInterface
             if (player.cocks.length == tentaCnt)
                 --tentaCnt;
             //select tentas first
-            var tentas:Array = newArray();
+            var tentas:Array = [];
             for (var i:int = 0; i < 3; ++i)
                 tentas[i] = tentaCnt > i ? player.findCockWithType(CockTypesEnum.TENTACLE, i, 50, -1, "length") : -1;
             //now select main
@@ -1006,7 +1006,7 @@ public class Vapula extends NPCAwareContent implements TimeAwareInterface
 		{
 			clearOutput();
 			//Requires: Vapula not fucking harem
-			if (flags[kFLAGS.VAPULA_TEASE_COUNT] == 0)) {
+			if (flags[kFLAGS.VAPULA_TEASE_COUNT] == 0) {
 				outputText("You decide you aren't going to give her what she wants so easily . You're also genuinely curious about how badly she needs cum, and how far you can push her.  You don't say anything as you slowly buckle the strap-on, sighing as you slip the small, pink end into your " + vaginaDescript(0) + ".  You make Vapula wait as you close your eyes and make the dildo pulse inside you, slowly filling you up and then withdrawing, letting it push up against your " + clitDescript() + ".");
 				outputText("\n\nYou open your eyes to find Vapula is biting her lip fretfully from watching you, a small pool of liquid arousal collecting beneath her.  You smile lazily as you stand over her and brush the purple end against her face; the way this makes the end wedged inside of you push to and fro against your sensitive walls makes you coo.  Vapula follows the bulbous tip like a cat and a string; as it brushes against her mouth she tries to wrap her lips around it, but you tut mockingly and pull it out of reach. With an evidently huge force of will the succubus makes herself be still again, and you resume stroking her face with your artificial cock.");
 				outputText("\n\n\"<i>How badly do you want this, slut?</i>\" you ask.");
@@ -1186,3 +1186,4 @@ public class Vapula extends NPCAwareContent implements TimeAwareInterface
 		}
 	}
 }
+

@@ -1922,14 +1922,16 @@ public class Creature extends Utils
             var sign:int = (biggest >= 0) ? 1 : -1;
             var cnt:int = sign;
             var biggest_cnt:int = sign;
+            //correct 'biggest' value to account for zeros
+            if (biggest == 0) biggest = 1;
             do {
                 ret = findCockWithType(type, cnt, minSize, maxSize, compareBy, tentaEQstamen); //find n-th cock
-                if (arr.indexOf(ret) != -1) //if in array, invalidate it
-                    ret = -1;
-                if (ret >= 0 && biggest_cnt == biggest) //if found b-th cock, return it
-                    return ret;
-                if (ret >= 0) //found a cock, but <b - increase counter
-                    biggest_cnt += sign;
+                if (ret >= 0 && arr.indexOf(ret) == -1) { //count those outside of the array
+                    if (biggest_cnt == biggest) //if found b-th cock, return it
+                        return ret;
+                    else
+                        biggest_cnt += sign;
+                }
                 cnt += sign;
             } while (ret >= 0);
             return -1;
@@ -1937,6 +1939,7 @@ public class Creature extends Utils
 
 		public function findCockNotIn(arr:Array, biggest:int = 0, minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", tentaEQstamen:Boolean = true):int {
 			return findCockWithTypeNotIn(arr, CockTypesEnum.UNDEFINED, biggest, minSize, maxSize, compareBy, tentaEQstamen);
+		}
 
 		public function cockDescript(cockIndex:int = 0):String
 		{
