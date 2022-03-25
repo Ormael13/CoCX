@@ -1864,7 +1864,7 @@ public class Creature extends Utils
                 var isize:Number = compareBy == "length" ? cocks[i].cockLength :
                                 compareBy == "thickness" ? cocks[i].cockThickness :
                                 cockArea(i);
-                if ((isize >= minSize || minSize <= 0) && (isize <= maxSize || maxSize <= 0)
+                if ((isize >= minSize || minSize < 0) && (isize < maxSize || maxSize < 0)
                 && (cocks[i].cockType == type || tEQs && (cocks[i].cockType == CockTypesEnum.STAMEN || cocks[i].cockType == CockTypesEnum.TENTACLE) || type == CockTypesEnum.UNDEFINED))
                     ++cnt;
             }
@@ -1891,7 +1891,7 @@ public class Creature extends Utils
                 var nsize:Number = compareBy == "length" ? cocks[num].cockLength :
                                 compareBy == "thickness" ? cocks[num].cockThickness :
                                 cockArea(num);
-                if ((nsize >= minSize || minSize <= 0) && (nsize <= maxSize || maxSize <= 0)
+                if ((nsize >= minSize || minSize < 0) && (nsize < maxSize || maxSize < 0)
                 && (cocks[num].cockType == type || tEQs && (cocks[num].cockType == CockTypesEnum.STAMEN || cocks[num].cockType == CockTypesEnum.TENTACLE) || type == CockTypesEnum.UNDEFINED)) {
                     var j:int;
                     for (j = 0; j < sorted.length; ++j) {
@@ -1920,6 +1920,27 @@ public class Creature extends Utils
 		public function findCock(biggest:int = 0, minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", tentaEQstamen:Boolean = true):int {
 			return findCockWithType(CockTypesEnum.UNDEFINED, biggest, minSize, maxSize, compareBy, tentaEQstamen);
 		}
+
+        public function findCockWithTypeNotIn(arr:Array, type:CockTypesEnum, biggest:int = 0, minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", tentaEQstamen:Boolean = true):int {
+            var ret:int = -1;
+            var sign:int = (biggest >= 0) ? 1 : -1;
+            var cnt:int = sign;
+            var biggest_cnt:int = sign;
+            do {
+                ret = findCockWithType(type, cnt, minSize, maxSize, compareBy, tentaEQstamen); //find n-th cock
+                if (arr.indexOf(ret) != -1) //if in array, invalidate it
+                    ret = -1;
+                if (ret >= 0 && biggest_cnt == biggest) //if found b-th cock, return it
+                    return ret;
+                if (ret >= 0) //found a cock, but <b - increase counter
+                    biggest_cnt += sign;
+                cnt += sign;
+            } while (ret >= 0);
+            return -1;
+        }
+
+		public function findCockNotIn(arr:Array, biggest:int = 0, minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", tentaEQstamen:Boolean = true):int {
+			return findCockWithTypeNotIn(arr, CockTypesEnum.UNDEFINED, biggest, minSize, maxSize, compareBy, tentaEQstamen);
 
 		public function cockDescript(cockIndex:int = 0):String
 		{
