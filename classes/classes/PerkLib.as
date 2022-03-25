@@ -358,7 +358,7 @@ public class PerkLib
 				"Tier 1 elemental spells will be castable in (Ex) version that increase their power 2x while additionaly using 100 wrath. Safe limit for spellcasting increased by 5%.",
 				"You've chosen the 'Mage's Wrath (Ex)' perk, allowing you to cast tier 1 elemental spells, while using wrath to enpower them, and increase the safe limit of wrath for spellcasting.");
 		public static const ManaCore:PerkType = mk("Mana Core", "Mana Core",
-				"Increase max mana by 10% + 10% to 15% (per each attained magical mastery stage) of base value.",
+				"Increase max mana by 10% + (10% to 15%) (per each attained magical mastery stage) of base value.",
 				"You've chosen the 'Mana Core' perk. As a result of extended magical training and exercises, you managed to form a mana core in your body, which resulted in an increased capacity to store mana.");
 		public static const NaturalArsenal:PerkType = mk("Natural Arsenal", "Natural Arsenal",
 				"All natural weapon-based racial abilities gain a +50% damage bonus.",
