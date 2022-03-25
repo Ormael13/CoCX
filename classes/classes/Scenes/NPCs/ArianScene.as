@@ -1427,7 +1427,7 @@ private function takeYerLizardHomePartII():void {
 	outputText("\n\nYou politely excuse yourself, saying you should let the lizan make [Arian emself] comfortable in [Arian eir] new home, and step back outside.");
 	//flag arian as follower
 	flags[kFLAGS.ARIAN_FOLLOWER] = 1;
-	flags[kFLAGS.ARIAN_SCALES] = 0;
+	flags[kFLAGS.ARIAN_SCALES] = 1;
 	doNext(camp.returnToCampUseOneHour);
 }
 

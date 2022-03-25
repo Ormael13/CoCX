@@ -427,6 +427,7 @@ public class BeeGirlScene extends BaseContent
 				clearOutput();
 			else outputText("\n\n");
 			spriteSelect(SpriteDb.s_bee_girl);
+            flags[kFLAGS.BEE_GIRL_RESET_COUNTER] = 0;
 			outputText("You almost breathlessly say <i>\"Yes!\"</i> just before you give yourself over to the siren call of the bee’s humming and the mind blowing effects of her scent.  <i>\"Good " + player.mf("boy", "girl") + ".\"</i> she coos and slips off your [armor].  Then she slowly wraps her arms around your [chest] and you feel something start to push against your [ass].  You sigh with pleasure and relax, allowing your rear entrance to be penetrated by the intruder.  You hear the bee girl giggle and sigh above you, quite pleased with your decision to allow her to enter you.\n\n");
 			if (player.hasBreasts()) {
 				outputText("She starts to grip and squeeze your [chest] as the intruder to your anal passage continues its advance.  You can only gasp and cry out in pleasure with each motion.  You hear her say, <i>\"Let’zzz make thizzz extra zzzpeacial,\"</i> as one of her hands is removed from your chest; within moments something wet and sticky is placed on the vacated [nipple].  You shudder as the bee rubs the honey into the sensitive tips, and squeal as she does the same treatment to the other " + nippleDescript(0) + ".\n\n");

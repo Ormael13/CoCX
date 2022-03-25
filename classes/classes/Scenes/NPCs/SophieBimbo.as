@@ -272,7 +272,12 @@ public function approachBimboSophieInCamp(output:Boolean = true):void {
 	}
 	if(player.hasItem(consumables.DEBIMBO)) {
 		addButton(4,"Debimbo",sophieFollowerScene.unbimboSophie);
-		if(output) outputText("\n\n<b>You could use the bottle of debimbo to return Sophie's intellect...</b>");
+		if(output) {
+            if (flags[kFLAGS.SOPHIE_BIMBO_AGAIN] == 0)
+                outputText("\n\n<b>You could use a bottle of debimbo to return Sophie's intellect...</b>");
+            else
+                outputText("\n\n<b>You could use a bottle of debimbo to return Sophie's intellect... Though you don't think she'll listen to any of your explanations anymore.</b>");
+        }
 	}
 	if(flags[kFLAGS.SOPHIE_CAMP_EGG_COUNTDOWN] > 0 && output) outputText("\n\n<b>Sophie's egg is sitting nearby.</b>");
 	if(flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] > 0) {

@@ -148,12 +148,12 @@ public static const RAPHAEL_DISGUSTED_BY_PC_APPEARANCE:int                      
 public static const RAPHAEL_SECOND_DATE:int                                         =  140; // Raphael 2nd Date Happen?
 public static const HELLHOUND_MASTER_PROGRESS:int                                   =  141; // Hellhound Progression
 public static const UNKNOWN_FLAG_NUMBER_00142:int                                   =  142; // Can buy minotaur cum from goblins?
-public static const UNKNOWN_FLAG_NUMBER_00143:int                                   =  143; // How Many Times Have You Caught Urta + Scylla?
+public static const URTA_SCYLLA_TIMES_CAUGHT:int                                   =  143; // How Many Times Have You Caught Urta + Scylla?
 public static const UNKNOWN_FLAG_NUMBER_00144:int                                   =  144; // Multitake Scylla meeting take advantage ever done?
-public static const UNKNOWN_FLAG_NUMBER_00145:int                                   =  145; // Urta confrontation about Scylla ever done?
-public static const UNKNOWN_FLAG_NUMBER_00146:int                                   =  146; // Urta drink toggle = 0 is same, 1 is more, -1 is less.
-public static const UNKNOWN_FLAG_NUMBER_00147:int                                   =  147; // Is Urta banned from Scylla?  1 = yes.
-public static const UNKNOWN_FLAG_NUMBER_00148:int                                   =  148; // Has Urta paid out Raphael's Bounty? (1 = yes)
+public static const URTA_TALKED_ABOUT_SCYLLA:int                                   =  145; // Urta confrontation about Scylla ever done?
+public static const URTA_DRINK_TOOGLE:int                                   =  146; // Urta drink toggle = 0 is same, 1 is more, -1 is less.
+public static const URTA_NO_MORE_SCYLLA:int                                   =  147; // Is Urta banned from Scylla?  1 = yes.
+public static const REPORTED_RAPHAEL_TO_URTA:int                                   =  148; // Has Urta paid out Raphael's Bounty? (1 = yes)
 public static const UNKNOWN_FLAG_NUMBER_00149:int                                   =  149; // Did you bone Raphael?
 public static const UNKNOWN_FLAG_NUMBER_00150:int                                   =  150; // Dominika Stage - 0=unknown, 1=met, 2=received, -1=blocked
 public static const UNKNOWN_FLAG_NUMBER_00151:int                                   =  151; // Times Dominika Sucked off Smaller dicks
@@ -1302,7 +1302,7 @@ public static const EASTER_BUNNY_EGGS_STORED:int                                
 public static const BENOIT_4:int 		                            				= 1294;
 public static const BENOIT_5:int                                   					= 1295;
 public static const BEE_GIRL_RESET_COUNTER:int                                      = 1296;
-public static const UNKNOWN_FLAG_NUMBER_01297:int                                   = 1297;
+public static const SOPHIE_BIMBO_AGAIN:int                                          = 1297;
 public static const UNKNOWN_FLAG_NUMBER_01298:int                                   = 1298;
 public static const UNKNOWN_FLAG_NUMBER_01299:int                                   = 1299;
 public static const KAIBA_SHELFS:int                                   				= 1300;
@@ -1405,9 +1405,9 @@ public static const UNKNOWN_FLAG_NUMBER_01396:int                               
 public static const UNKNOWN_FLAG_NUMBER_01397:int                                   = 1397;
 public static const UNKNOWN_FLAG_NUMBER_01398:int                                   = 1398;
 public static const UNKNOWN_FLAG_NUMBER_01399:int                                   = 1399;
-public static const LILY_STATUS:int                                   				= 1400;
-public static const LILY_DEFEATS_COUNTER:int                                   		= 1401;
-public static const LILY_LVL_UP:int                                 				= 1402;
+public static const LILY_DEFEATS_COUNTER:int                                   		= 1400;
+public static const LILY_LVL_UP:int                                   				= 1401;
+public static const UNKNOWN_FLAG_NUMBER_01402:int                                 	= 1402;
 public static const UNKNOWN_FLAG_NUMBER_01403:int                                   = 1403;
 public static const UNKNOWN_FLAG_NUMBER_01404:int                                   = 1404;
 public static const UNKNOWN_FLAG_NUMBER_01405:int                                   = 1405;

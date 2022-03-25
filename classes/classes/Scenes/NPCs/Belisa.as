@@ -62,8 +62,7 @@ public class Belisa extends Monster
 			else player.createStatusEffect(StatusEffects.Hemorrhage,2+rand(2),0.05,0,0);
 		}
 		
-		private function belisaWebAttack():void
-		{
+		private function belisaWebAttack():void {
 			outputText("\"<i>"+(player.hasStatusEffect(StatusEffects.SparingBelisa)?"Slow down":"Leave me alone")+"!</i>\" She yells in her high-pitched voice, spraying a wide swathe of webbing at you. It sticks to your [skin.type] like glue.");
 			//Blind dodge change
 			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {

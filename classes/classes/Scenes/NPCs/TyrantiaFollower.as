@@ -320,9 +320,9 @@ public function repeatEncounterBattlefieldTalkHer():void {
 	clearOutput();
 	outputText("\"<i>Okay...Don’t think I’m that interesting, but...whatever. What do ya wanna know?</i>\"\n\n");
 	menu();
-	//0 - Life Before Demons
+	addButton(0, "L.B.D.", repeatEncounterBattlefieldTalkHerLifeBeforeDemons).hint("Life Before Demons");
 	addButton(1, "NoHerm?", repeatEncounterBattlefieldTalkHerNoHerm);
-	//2 - Life on the Battlefield
+	//addButton(2, "LotB", repeatEncounterBattlefieldTalkHerLifeOnTheBattlefield).hint("Life on the Battlefield");
 	addButton(3, "Different Parts", repeatEncounterBattlefieldTalkHerDifferentParts);
 	//4 - Goblin
 	//5 - Izumi
@@ -331,8 +331,63 @@ public function repeatEncounterBattlefieldTalkHer():void {
 }
 public function repeatEncounterBattlefieldTalkHerLifeBeforeDemons():void {
 	clearOutput();
-	outputText("\"<i></i>\"\n\n");
-	//affection gains
+	if (TyrantiaAffectionMeter < 30) {
+		outputText("\"<i>...Look. I’d rather not talk about that. It’s...A touchy subject.</i>\" Her hands twitch, and she holds them together. \"<i>Can we talk about literally anything else?</i>\"\n\n");
+		doNext(camp.returnToCampUseOneHour);
+	}
+	else {
+		outputText("\"<i>...I had a family. Look...I don’t like talking about it, cuz I get all sappy...and sappy makes you weak, and...I can’t afford to be weak. Not anymore.</i>\" Her eyes are full of unshed tears. \"<i>[name], You get it, right?</i>\"\n\n");
+		menu();
+		addButton(1, "Yeah", repeatEncounterBattlefieldTalkHerLifeBeforeDemonsYeah);
+		addButton(3, "No", repeatEncounterBattlefieldTalkHerLifeBeforeDemonsNo);
+	}
+}
+public function repeatEncounterBattlefieldTalkHerLifeBeforeDemonsYeah():void {
+	outputText("You nod once, putting a hand on her shoulder. You tell your Drider friend that you understand it all too well. You’re the champion of Ignam, and you have a responsibility to the people back home, even if you’ll never see them again, to keep fighting.\n\n");
+	outputText("\"<i>I knew you’d get it,</i>\" she says, relieved. \"<i>I’m sorry. Here I am, blathering on, when you’ve lost people too.</i>\"You shake your head, waving it off, and the two of you begin to exchange stories of your adventures. This cheers her up a little, but you can tell her mind is elsewhere. You turn to leave, and she stands as well, wrapping her warm, floofy arms around you.\n\n");
+	outputText("\"<i>[name]...Come back sometime, okay? Battlefield seems a bit more bearable when your tiny ass comes around.</i>\" Her eyes watch you leave. \"<i>I L-</i>\" She cuts herself off. \"<i>I left an imp skull back at the rock! Fuck!</i>\" She rushes off into the battlefield.\n\n");
+	tyraniaAffection(5);
+	doNext(camp.returnToCampUseOneHour);
+}
+public function repeatEncounterBattlefieldTalkHerLifeBeforeDemonsNo():void {
+	outputText("\"<i>The fuck do you mean ‘no’?</i>\" Tyrantia seems taken aback. \"<i>You have people at home, back through the portal you guard. You should understand perfectly. What, were you one of those shut-ins who couldn’t stand others or something?!</i>\"\n\n");
+	outputText("You shake your head, saying that’s not it.\n\n");
+	outputText("\"<i>What is it then?</i>\" She asks, growing frustrated.\n\n");
+	outputText("You step in, putting a finger on her lips. During the second or so of shocked silence, you ask her to let you explain. She nods, and sits there, waiting as you tell her about the others you’ve met along your travels. The friends and lovers you’ve made, the burdens that were made easier when they were shared.\n\n");
+	outputText("After you finish, she looks down, closing her eyes tight against a wave of tears. \"<i>...Promise me something.</i>\" She looks at you, all five eyes tearing up, and her furry arms wrapped tightly around herself. You take her hands, asking her what she wanted of you. \"<i>Promise me you won’t...Think less of me. I’m still an asskicking, demonslaying badass, okay?!</i>\" ");
+	outputText("You nod, holding her hands tight, and she begins to speak, her voice cracking. You occasionally stop to comfort her, or to let her cry it out, but she chokes her way through her story.\n\n");
+	outputText("\"<i>I had two little sisters. Both little Driders, like me. I was never this freakishly large, but I was the biggest, oldest and strongest of my clutch. Only a few of our clutches survive, and from a young age, the oldest Drider in the clutch is expected to help look after their little siblings.</i>\" She begins to hiccup, and hesitates. ");
+	outputText("\"<i>Momma Oaklee taught us how to weave, to use the silk we made to trade with other settlements...I was never any good at that, my silk always came out a bit...Goopy.</i>\" She smiles down at the ground. \"<i>Belisa was the youngest. She was the best at weaving. She made the nicest...umm...Underwear.</i>\"\n\n");
+	outputText("You smile, but she shrugs. \"<i>Hey, Silk underwear was basically a sack full of gems if it was made right.</i>\" Her top half shivers, as if cold, and you insert yourself up close, slipping the latch on her armored top and sliding it aside. You hug the distressed Drider-girl, and she leans her torso into you, hugging you close with her muscular, furry arms.\n\n");
+	outputText("\"<i>When a Drider comes of age, we were supposed to go to the ancient egg-cave and breathe in the fumes from the great Deep. After our visions, we would emerge, our shells covered with a darker shade, and we’d be adults in the colony.</i>\" She hugs you tighter, creaking your ribs.\n\n");
+	outputText("\"<i>I was going to be a warrior, ready to defend the colony from invaders. Lily? A Huntress, lithe and beautiful, to feed us all when the winter’s cold stopped our farms.</i>\" She begins to cry again, clutching onto you like a drowning woman. \"<i>And Belisa, poor, sweet Belisa...She was going to be our mana weaver. Mom and the elders had been grooming her for years.</i>\"\n\n");
+	outputText("You gently press on. And then the demons came?\n\n");
+	outputText("\"<i>...Yeah. They came, alright. They came all over the walls, the ceilings, the web-lines, everything.</i>\" Her bad joke does little to ease her mood, and she loosens her grip on you a bit. \"<i>When they broke the gates, half the warriors had already succumbed to the spooge-throwers, jerking themselves off like monkeys. I told Lily to run, to grab Belisa and flee...But it was too little, too late. Lily was taken, right in front of me, as I tried desperately to keep fighting. They came in waves, great, terrible waves that just…</i>\"\n\n");
+	outputText("She takes a moment to breathe. \"<i>They tied me down, slathered me in their juices, and made me beg for it...But I never fell all the way, like some of the others. That got some of them thinking. They wanted to turn me into a war machine, wind me up and unleash me onto the world...They got some of that right.</i>\"\n\n");
+	if (TyrantiaFollowerStage > 1) {
+		outputText("Tyrantia shakes herself, armor pieces clattering loudly. \"<i>But anyways, that’s in the past. Now I’m here…With you.</i>\" She gives you a grin.\n\n");
+		eachMinuteCount(15);
+	}
+	else {
+		outputText("She looks at you, tears in her eyes. \"<i>[name], they...did such terrible things.</i>\" She finally breaks down, and you comfort the desolate Drider any way you can. Ultimately, you can only wait out the tears. After it dies down, and Tyrantia sinks into a shallow, sad sleep, you untie yourself from her grip, intent on going home...until a whisper comes from the ground where you left her.\n\n");
+		outputText("\"<i>[name]...please stay? Just for one night?</i>\"\n\n");
+		menu();
+		addButton(1, "No", repeatEncounterBattlefieldTalkHerLifeBeforeDemonsNoNo);
+		addButton(3, "Yes", repeatEncounterBattlefieldTalkHerLifeBeforeDemonsNoYes);
+	}
+	outputText("\"<i></i>\"\n\n");outputText("\"<i></i>\"\n\n");outputText("\"<i></i>\"\n\n");outputText("\"<i></i>\"\n\n");outputText("\"<i></i>\"\n\n");
+}
+public function repeatEncounterBattlefieldTalkHerLifeBeforeDemonsNoNo():void {
+	outputText("You gently explain that you have to go back to the portal. Tyrantia cries into her makeshift pillow, but ultimately lets you go. You hear her bitter tears as you head back to your camp.\n\n");
+	tyraniaAffection(5);
+	doNext(camp.returnToCampUseOneHour);
+}
+public function repeatEncounterBattlefieldTalkHerLifeBeforeDemonsNoYes():void {
+	outputText("You lie down beside Tyrantia’s upper half, and she takes your hands in hers. \"<i>Thank you,</i>\"she whispers, kissing you on the lips. Her fangs are out of the way, and you kiss back, a gentle, slow thing. You tell her that you’d never leave her alone like this. This gets a smile from the spider-girl, and she hums a gentle tune as she drifts off to sleep.\n\n");
+	tyraniaAffection(10);
+	CoC.instance.timeQ = 30 - model.time.hours;
+	camp.sleepRecovery(true);
+	CoC.instance.timeQ = 0;
 	doNext(camp.returnToCampUseOneHour);
 }
 public function repeatEncounterBattlefieldTalkHerNoHerm():void {
@@ -340,12 +395,12 @@ public function repeatEncounterBattlefieldTalkHerNoHerm():void {
 	outputText("\"<i>...Herms were almost unheard of before the Demons came.</i>\" She looks down at herself. \"<i>I...of all the insane shit I’ve had to deal with...At least I didn’t become one of them.</i>\" \"<i>Not that there’s anything wrong with that, but...I like not having a second head, y’know?</i>\" She looks at her spear, rolling her eyes. \"<i>Well...A third head.</i>\"\n\n");
 	outputText("You grin, cracking a joke about how she still waves her Dick around, and she gives you a laugh, her eyes glistening. \"<i>Okay, ya got me there.</i>\" She rubs the shaft with one finger, the hair on her arms standing up. \"<i>Demons and imps run more often if you run at them screaming ‘I’m gonna shove m’dick down your throat!’, then if you threaten to kill them. Fucking Crazy, the lot of them!</i>\"\n\n");
 	outputText("She laughs, but you notice that the laughter doesn’t quite reach her eyes. You idly chat with your Drider comrade for a while, and when you leave, she seems a bit happier than before.\n\n");
-	//tyraniaAffection(2);
+	tyraniaAffection(2);
 	doNext(camp.returnToCampUseOneHour);
 }
 public function repeatEncounterBattlefieldTalkHerLifeOnTheBattlefield():void {
 	clearOutput();
-	outputText("\"<i></i>\"\n\n");
+	outputText("\"<i>Honestly, it’s about what you’d expect. Demons all over the place, imps everywhere, those rocky fuckers popping up if there’s even a decent-sized rock left intact...Honestly, it’s a great place to let off steam...Even if it is a bit corrupted.</i>\"\n\n");
 	//affection gains
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -353,7 +408,7 @@ public function repeatEncounterBattlefieldTalkHerDifferentParts():void {
 	clearOutput();
 	outputText("You ask about her non-spider parts, and Tyrantia sighs, her horse-ears folding. \"<i>Look, it’s not something I like to discuss. Suffice to say, Demons happened. I trust you not to fuck me when I’m not with it, but…</i>\" She looks down, glaring at the ground, and whispers, so low you can barely make it out. \"<i>I can’t…</i>\"\n\n");
 	outputText("You apologize to your Drider friend, patting her leg sympathetically. You tell her that if she isn’t comfortable with it, you won’t pry. You give her leg a hug before heading back to camp.\n\n");
-	//tyraniaAffection(5);
+	tyraniaAffection(5);
 	doNext(camp.returnToCampUseOneHour);
 }
 public function repeatEncounterBattlefieldTalkHerGoblin():void {

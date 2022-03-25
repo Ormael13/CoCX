@@ -8,6 +8,7 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.UndergarmentLib;
 import classes.Scenes.Areas.Swamp.CorruptedDrider;
+import classes.Scenes.NPCs.LilyFollower;
 import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.internals.SaveableState;
 import classes.internals.Utils;
@@ -223,6 +224,7 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 				BelisaShopOpen = true;
 			}
 			menu();
+			addButton(0, "Apperance", BelisaAppearance);
 			addButton(1, "Talk", BelisaTalk);
 			addButton(2, "Hang", BelisaHang);
 			if (BelisaShopOpen) addButton(3, "Shop", BelisaShop);
@@ -233,6 +235,7 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 			clearOutput();
 			outputText("<i>\"Well, what is it you want then?\"</i>\n\n");
 			menu();
+			addButton(0, "Apperance", BelisaAppearance);
 			addButton(1, "Talk", BelisaTalk);
 			addButton(2, "Hang", BelisaHang);
 			if (BelisaShopOpen) addButton(3, "Shop", BelisaShop);
@@ -247,8 +250,9 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 			if (BelisaAffectionMeter >= 15) addButton(2, "Home", BelisaTalkHome);
 			else addButtonDisabled(2, "???", "Req. 15+ affection.");
 			addButton(3, "Her", BelisaTalkHer);
-			if (BelisaAffectionMeter >= 50) addButton(6, "Injuries", BelisaTalkInjuries);
-			else addButtonDisabled(6, "???", "Req. 50+ affection.");
+			if (BelisaAffectionMeter >= 50 && !BelisaQuestComp) addButton(6, "Injuries", BelisaTalkInjuries);
+			else if (BelisaQuestComp) addButtonDisabled(6, "Injuries", "You've already solved her tooth problem!");
+			else  addButtonDisabled(6, "???", "Req. 50+ affection.");
 			if (BelisaQuestComp && BelisaAffectionMeter >= 80 && player.statusEffectv1(StatusEffects.TelAdre) >= 1 && flags[kFLAGS.HEXINDAO_UNLOCKED] >= 1 && player.hasStatusEffect(StatusEffects.MetWhitney) && player.statusEffectv1(StatusEffects.MetWhitney) > 1) addButton(7, "ComeW/Me", BelisaComeCamp);
 			else addButtonDisabled(7, "???", "Req. 80+ affection, healing her tooth injury and finding: Farm, Tel'Adre, He'Xin'Dao.");
 			addButton(8, "Back", Encounterback);
@@ -257,14 +261,16 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		public function BelisaTalkYou():void {
 			clearOutput();
 			outputText("<i>\"Oh? You want to talk about yourself?\"</i> Belisa brings a hand to her mouth, a smirk on her face. <i>\"How very arrogant.\"</i> You raise one eyebrow, and she chuckles, the smirk fading from her face. <i>\"I’m kidding, [name]. I’d love to hear about your adventures.\"</i> You talk about the various demons you’ve faced, Zetaz and the portal, and even some stories from your childhood in Ignam. Belisa is a great listener. She laughs when you tell a joke, or when the story turns serious, asks questions, and listens with rapt attention when you talk about the other people you’ve met along your travels.\n\n");
-			if (TyrantiaFollower.TyrantiaFollowerStage > 0 && TyrantiaFollower.TyraniaIsRemovedFromThewGame == false) {// && !BelisaToldTyrantia
+			if (TyrantiaFollower.TyrantiaFollowerStage > 0 && !TyrantiaFollower.TyraniaIsRemovedFromThewGame) {// && !BelisaToldTyrantia
 				outputText("You talk about the battlefield, and about a giant Drider you met there. Belisa leans forward, her eyes wide. <i>\"Wait...You said a giant Drider? Was she corrupted?\"</i> You tell her, reluctantly, that yes, the Drider giantess oozes corruption from her very being. Despite this, she seemed to be a decent person, and never tried anything with you. This gets Belisa’s interest, and she looks down. <i>\"...What is her name, did you get it?\"</i>\n\n");
 				menu();
 				addButton(1, "Yes", BelisaTalkAbsisters);
 				addButton(2, "No", BelisaTalkYouEnd);
 			}
-			else outputText("After some time talking with your Drider friend, you excuse yourself. You still need to keep watch over the portal. Belisa gives you an odd smile, smoothing her robe as she stands. \"<i>Come back when you have some more stories, Champion.</i>\" /n/n")
-		doNext(camp.returnToCampUseOneHour);
+			else {
+				outputText("After some time talking with your Drider friend, you excuse yourself. You still need to keep watch over the portal. Belisa gives you an odd smile, smoothing her robe as she stands. \"<i>Come back when you have some more stories, Champion.</i>\"\n\n");
+				doNext(camp.returnToCampUseOneHour);
+			}
 		}
 		public function BelisaTalkAbsisters(): void {
 			outputText("You tell her Tyrantia’s name, and the youthful Drider in front of you freezes in place, her human eyes wide and her arms frozen in midair. <i>\"Did...Did you say...Tyrantia?\"</i> She looks on the verge of tears, and you instinctively put a hand on the desolate spider-girl’s shoulder.\n\n"); 
@@ -283,7 +289,7 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		public function BelisaTalkHome():void {
 			clearOutput();
 			outputText("<i>\"...Well, I lived in a Drider colony not far from the deepwoods.\"</i> Belisa begins, fidgeting with her needles. She begins to work on another robe. <i>\"Mother was grooming me to be our town’s manaweaver...but then the demons came.\"</i> She looks at you, and you give her an odd look. <i>\"Oh...You meant...My house?\"</i> Her face brightens a bit. <i>\"Well...Before they came, Driders could come in different types. The type of the parents didn’t really matter, but certain spider-types are better at certain things than others.\"</i> She realizes she’s gotten off track, and blushes, looking down at her weaving.\n\n");
-			outputText("<i>\"Aaaaaanyways, my silk’s slightly different from most Drider’s. It’s lighter, stronger, and when submerged in water, it can do some really cool things. Momma Oaklee taught me how to keep it waterproof while weaving,and how to do other things with it. So, when I needed a safe place to hide...I made one underwater!\"</i>\n\n");
+			outputText("<i>\"Aaaaaanyways, my silk’s slightly different from most Drider’s. It’s lighter, stronger, and when submerged in water, it can do some really cool things. Momma Oaklee taught me how to keep it waterproof while weaving, and how to do other things with it. So, when I needed a safe place to hide...I made one underwater!\"</i>\n\n");
 			BelisaAffection(5);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -291,19 +297,45 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		public function BelisaTalkHer():void {
 			clearOutput();
 			outputText("<i>\"You want to learn about...Me?\"</i> Her back legs skitter about, and she seems to have trouble meeting your gaze. <i>\"That depends...What do you want to know?\"</i>\n\n");
-			menu();/*
-			if (BelisaAffectionMeter >= 50) addButton(1, "Family", BelisaTalkHerFamily);
-			else addButtonDisabled(1, "???", "Req. 50+ affection.");*/
-			addButton(2, "NoHerm?", BelisaTalkHerNoherm);
-			addButton(3, "WhySkittish", BelisaTalkHerSkittish);
-			if (BelisaAffectionMeter >= 50) addButton(4, "Injuries", BelisaTalkInjuries);
-			else addButtonDisabled(4, "???", "Req. 50+ affection.");
-			addButton(14, "Back", BelisaTalk);
+			menu();
+			addButton(0, "NoHerm?", BelisaTalkHerNoherm);
+			addButton(1, "WhySkittish", BelisaTalkHerSkittish);
+			if (BelisaAffectionMeter >= 50 && !BelisaQuestComp) addButton(2, "Injuries", BelisaTalkInjuries);
+			else if (BelisaQuestComp) addButtonDisabled(2, "Injuries", "You've already solved her tooth problem!");
+			else addButtonDisabled(2, "???", "Req. 50+ affection.");
+			if (BelisaAffectionMeter >= 50) addButton(3, "Family", BelisaTalkHerFamily);
+			else addButtonDisabled(3, "???", "Req. 50+ affection.");
+			addButton(4, "Back", BelisaTalk);
 		}
 		public function BelisaTalkHerFamily():void {
 			clearOutput();
-			outputText("Her eyes narrow, and Belisa looks away from you. <i>\"...If you’re asking about my family before the demons came...that’s a subject I’ve been avoiding for some time.\"</i>\n\n");
-			doNext(camp.returnToCampUseOneHour);
+			outputText("Her eyes narrow, and Belisa looks away from you. <i>\"...If you’re asking about my family before the demons came...that’s a subject I’ve been avoiding for some time.\"</i> She sighs. \"<i>I suppose I can tell you. It’s not like you can do much with the information anyways.</i>\" Belisa rests her spider-half on the ground, looking down at the dirt in front of her.\n\n");
+			outputText("\"<i>I had two pod-mates. Most races of Mareth refer to them as ‘Siblings’, or ‘Sisters’.</i>\" She fidgets nervously. \"<i>When the demons first started to conquer, my tribe stayed neutral. Our elders assumed that, like many other conflicts, this was just other races being stupid. They thought that our people staying out of the conflict was the best chance we had…</i>\" She shivers.\n\n");
+			outputText("\"<i>They were wrong. The demons, once they’d hit our closest trading partners, immediately attacked our village. They came from all sides, releasing thick mists and magics designed to ensnare us, to turn our own bodies against us…</i>\" She hugs herself. ");
+			outputText("\"<i>Lily, our huntress, the middle of my podmates, she and Tyrantia, the largest of us…Our fiercest warrior…They carved a path through them. They made a gap in their ranks, and…A few of us escaped. We scattered, leading them away…But when I got to the place we were supposed to meet up…I was the only one.</i>\"\n\n");
+			outputText("Belisa looks up at you, sighing. \"<i>Thank you for listening…It’s not something I like to revisit…But sometimes I don’t really have a choice.</i>\"\n\n");
+			BelisaAffection(5);
+			if (LilyFollower.LilyTalked > 0) {
+				outputText("Lily…You recognize that name! A drider named Lily, an archer and huntress? She fits the description perfectly!\n\n");
+				menu();
+				addButton(1, "Don't", BelisaTalkHerFamilyDont).hint("Don’t Tell her");
+				addButton(3, "Do", BelisaTalkHerFamilyDo).hint("If you tell her");
+			}
+			else {
+				eachMinuteCount(15);
+				doNext(BelisaTalk);
+			}
+		}
+		public function BelisaTalkHerFamilyDo():void {
+			outputText("You clear your throat, and you look Belisa in the eyes. Seeing your seriousness, Belisa looks down and away as you tell her about Lily. \"<i>...If what you say is true…Then my sister is alive!</i>\" She stands. \"<i>If you can convince her to join you…Maybe…</i>\" She looks at you, hope in her eyes. \"<i>I hope to see her someday.</i>\"\n\n");
+			BelisaAffection(10);
+			eachMinuteCount(15);
+			doNext(BelisaTalk);
+		}
+		public function BelisaTalkHerFamilyDont():void {
+			outputText("You put a hand on Belisa’s shoulder, saying that you can change the topic if she wants. Belisa nods. \"<i>Something lighter, perhaps?</i>\"\n\n");
+			eachMinuteCount(15);
+			doNext(BelisaTalk);
 		}
 		public function BelisaTalkHerNoherm():void {
 			clearOutput();
@@ -559,26 +591,26 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		public function BelisaComeCamp():void {
 			clearOutput();
 			outputText("You tell Belisa that Mareth is a dangerous place. She looks at you as if you’re an idiot, hand on her hip. <i>\"Yes, I do know that.\"</i>\n\n");
-			outputText("You say to her that you’ve come across several places in your travels that the pure (or at least the not completely corrupt) at heart congregate. You ask Belisa why she hasn’t gone to Tel’adre, or He’din Xiao. A weaver and healer would be more than welcome in either place. Belisa looks at the ground, then back at you, a single tear sliding down her face.\n\n");
+			outputText("You say to her that you’ve come across several places in your travels that the pure (or at least the not completely corrupt) at heart congregate. You ask Belisa why she hasn’t gone to Tel’adre, or He’Xin’Dao. A weaver and healer would be more than welcome in either place. Belisa looks at the ground, then back at you, a single tear sliding down her face.\n\n");
 			outputText("<i>\"...Because those places...Are targets.\"</i> She sighs, sitting down on the lake’s shore. You sit beside her, and she smiles slightly as you come closer. <i>\"You’re assuming I never did go elsewhere, [name]...I did.\"</i> You put a hand on the closest spider leg to you, giving her a reassuring smile. <i>\"...There was a goblin-run city not far from the battlefield. You know where that is.\"</i> You nod, and she continues. <i>\"As you said, a weaver and healer was more than welcome. I made a few friends, since the Goblins and Driders always were allies...But...They came again.\"</i>\n\n");
 			outputText("Belisa bites her lower lip, forcing back her tears. <i>\"I knew there was something in the water. I tried to warn the council, the people, but...By the time I’d figured it out, it was too late. I was able to cure my own corruption, but...Everyone else was gone again.\"</i> She winces. <i>\"Every time I see a goblin now, it’s...Like seeing a mockery of the friends I made.\"</i>\n\n");
-			outputText("You scoot closer, sitting up and putting your hands on your Drider friend’s shoulders. She gives you a little smile, her repaired fang gleaming almost as bright as her eyes. <i>\"Thank you for listening, [name]. It’s been a long time since I had anyone I could talk to about this.\"</i> \n\n");
-			outputText("You tell Belisa that you’re just happy she’s finally getting it off her chest. As you’re saying that, however, an idea hits you. You ask Belisa if she’d be okay with a smaller group, or a hamlet, rather than a full-blown city. Not as big of a target, but still with people she could talk to, rely on and help.  \n\n");
+			outputText("You scoot closer, sitting up and putting your hands on your Drider friend’s shoulders. She gives you a little smile, her repaired fang gleaming almost as bright as her eyes. <i>\"Thank you for listening, [name]. It’s been a long time since I had anyone I could talk to about this.\"</i>\n\n");
+			outputText("You tell Belisa that you’re just happy she’s finally getting it off her chest. As you’re saying that, however, an idea hits you. You ask Belisa if she’d be okay with a smaller group, or a hamlet, rather than a full-blown city. Not as big of a target, but still with people she could talk to, rely on and help.\n\n");
 			outputText("<i>\"W-well, I…\"</i> The drider-girl looks at you, somewhat flustered, her pale, squishy cheeks now bright red. <i>\"I...Suppose that wouldn’t be out of the question, but I wouldn’t know where to find such a place. I’d need it to be near water, away from demon hot-zones, and far away from the swamps, since I can’t go back there…\"</i> She rambles on for a bit, pacing back and forth on the beach, until you stand up, putting your hands on her shoulders. <i>\"Sorry...I went on for a bit there.\"</i> Belisa stares, wide-eyed, at you. <i>\"Why are you asking all of these questions?\"</i>\n\n");
-			outputText("You tell her that you know a few locations that would fit her requirements. You mention Whitney’s farm, the people there. She winces at the notion. \n\n");
-			outputText("<i>\"Yeah, I’ve been there. No thank you. That horse-man makes my chitin itch.\"</i> You press on, describing a few other locations you know about, all of which are shot down in short order. You mention that there’s one more place you know of. You begin to describe your camp, some of the people you’ve gathered on your travels, and the defenses, if any, you’ve put up to deter the demons from coming after it. You explain the river running nearby, the portal, and how her orb-house could just pull right up and dock.  \n\n");
+			outputText("You tell her that you know a few locations that would fit her requirements. You mention Whitney’s farm, the people there. She winces at the notion.\n\n");
+			outputText("<i>\"Yeah, I’ve been there. No thank you. That horse-man makes my chitin itch.\"</i> You press on, describing a few other locations you know about, all of which are shot down in short order. You mention that there’s one more place you know of. You begin to describe your camp, some of the people you’ve gathered on your travels, and the defenses, if any, you’ve put up to deter the demons from coming after it. You explain the river running nearby, the portal, and how her orb-house could just pull right up and dock.\n\n");
 			outputText("<i>\"Oh?\"</i> She seems somewhat interested, and Belisa scratches the back of her head. <i>\"You...Seem to know this place rather well. What’s it called?\"</i>\n\n");
-			outputText("You tell her that the place you’re describing doesn’t have a name, not really, but ever since you came to this world, you’ve been calling it home.  \n\n");
+			outputText("You tell her that the place you’re describing doesn’t have a name, not really, but ever since you came to this world, you’ve been calling it home.\n\n");
 			outputText("<i>\"D-did you just ask me to come live with you?!\"</i> Belisa’s face turns bright red, and she turns around, hiding herself from your view. You gently walk around, to see her, and she covers her face with her hands. Her face is bright red, from scalp to chin, and she’s shaking a bit.\n\n");
 			outputText("With a low, calm voice, you tell Belisa that yes. You just asked her to come live with you. You reassure her that you weren’t asking to sleep with her, or anything of the sort...Not unless she wanted it. At that, she slowly begins to bring her hands down. She won’t meet your eyes, but the spider-girl’s at least looking in your general direction. You remind Belisa of how strong you are, and you reassure her that everyone at your camp is a survivor. Belisa looks at you, her eyes shining with tears, and something seems to break in her. She rushes at you, arms outstretched, and you stand firm as she runs full-speed into your arms.\n\n");
-			outputText("<i>\"Y-you mean it, [name]?\"</i> She whispers, and you hug her tighter, telling her that you meant every word. That Mareth is a tough world, and that nobody, especially someone like her, should face it alone.  \n\n");
+			outputText("<i>\"Y-you mean it, [name]?\"</i> She whispers, and you hug her tighter, telling her that you meant every word. That Mareth is a tough world, and that nobody, especially someone like her, should face it alone.\n\n");
 			outputText("Belisa buries her face into your [chest], and you know that you’ve convinced her. <i>\"Okay. If you want me with you...I’ll follow you to your camp.\"</i>\n\n");
-			outputText("You spend the next hour wrestling with the huge ball of silk that Belisa calls a home, folding it down until it’s flat(ish) on the water. Belisa produces a pair of oars, and begins to row. You take one oar, and the spider-girl smiles, a sunny beam from ear to ear.  \n\n");
-			outputText("The two of you row Belisa’s silky home through the lake, down the river, and down towards your camp, and it takes most of the rest of the day. Belisa hums a tune, lost in her own thoughts, and you look at her, a smile on your face as you row. As you get closer, Belisa’s arms tire, and she begins to fall behind. You take the oar wordlessly, and the Drider-girl chitters a bit.  \n\n");
-			outputText("<i>\"S-sorry, but…\"</i> You tell her not to be sorry, that you’re almost home. <i>\"...Home?\"</i> You turn a bend in the river, and Belisa and you can finally see your camp, as it is from the water. The Drider’s eyes shine in the red light of the setting sun, and you can see her repaired fang as her jaw drops. <i>\"It’s…Amazing\"</i> She looks at you, the little smile on your face, and she blushes, turning away. <i>\"What? I’ve been living on my own, [name].\"</i> She pouts a little, and you chuckle, wrapping your arm around Belisa’s shoulder. The ball of silk slows, and you take her chin in a hand, gently turning her head to face you. Her eyes, shining in the orange-red sunset, seem so tender, almost delicate. \n\n");
+			outputText("You spend the next hour wrestling with the huge ball of silk that Belisa calls a home, folding it down until it’s flat(ish) on the water. Belisa produces a pair of oars, and begins to row. You take one oar, and the spider-girl smiles, a sunny beam from ear to ear.\n\n");
+			outputText("The two of you row Belisa’s silky home through the lake, down the river, and down towards your camp, and it takes most of the rest of the day. Belisa hums a tune, lost in her own thoughts, and you look at her, a smile on your face as you row. As you get closer, Belisa’s arms tire, and she begins to fall behind. You take the oar wordlessly, and the Drider-girl chitters a bit.\n\n");
+			outputText("<i>\"S-sorry, but…\"</i> You tell her not to be sorry, that you’re almost home. <i>\"...Home?\"</i> You turn a bend in the river, and Belisa and you can finally see your camp, as it is from the water. The Drider’s eyes shine in the red light of the setting sun, and you can see her repaired fang as her jaw drops. <i>\"It’s…Amazing\"</i> She looks at you, the little smile on your face, and she blushes, turning away. <i>\"What? I’ve been living on my own, [name].\"</i> She pouts a little, and you chuckle, wrapping your arm around Belisa’s shoulder. The ball of silk slows, and you take her chin in a hand, gently turning her head to face you. Her eyes, shining in the orange-red sunset, seem so tender, almost delicate.\n\n");
 			menu();
-			addButton(1, "Kiss", BelisaSmooch);
-			addButton(2, "Set up", BelisaSetUp);
+			addButton(1, "Set up", BelisaSetUp);
+			addButton(3, "Kiss", BelisaSmooch);
 		}
 		
 		public function BelisaSmooch():void {
@@ -591,10 +623,59 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 
 		public function BelisaSetUp():void {
 			clearOutput();
-			outputText("You tell Belisa that she’ll need to set up her house before nightfall...Unless she’d rather sleep in your [Tent/Cabin] tonight. She blinks once, twice, then the Drider launches herself off the silky house-boat and into the water, screaming in embarrassment. You decide to leave her to it, laughing to yourself as you walk off and onto dry land.  \n\n");
+			outputText("You tell Belisa that she’ll need to set up her house before nightfall...Unless she’d rather sleep in your "+(flags[kFLAGS.CAMP_BUILT_CABIN] > 0 ? "Cabin":"Tent")+" tonight. She blinks once, twice, then the Drider launches herself off the silky house-boat and into the water, screaming in embarrassment. You decide to leave her to it, laughing to yourself as you walk off and onto dry land.\n\n");
 			outputText("<b>Belisa has joined you as a lover.</b>\n\n");
 			BelisaFollowerStage = 3;
+			BelisaInCamp = true;
+			/*
+			CoC.instance.timeQ = 30 - model.time.hours;
+			camp.sleepRecovery(true);
+			CoC.instance.timeQ = 0;
+               if (!CoC.instance.inCombat)
+                   doNext(camp.returnToCampUseOneHour);
+			else cleanupAfterCombat();
+			*/
 			doNext(camp.returnToCampUseOneHour);
+			model.time.hours = 21;
+		}
+
+		public function BelisaMainCampMenu():void {
+			clearOutput();
+			outputText("You decide to go see your bashful Drider, Belisa. As you get near, you ");
+			var visit:Number = rand(3);
+			switch (visit) {
+				case 0:
+					outputText("notice that Belisa is nowhere to be seen. You walk to her home, and as you expected, you can see a “Fishing” sign on her door. You go to the river, and easily catch sight of Belisa underwater. You toss a rock down, and she looks up and sees you, swimming to the surface as fast as she can.");
+					break;
+				case 1:
+					outputText("notice that Belisa is relaxing just outside her home, needles busy at work. As you approach, she puts the needles and silkwork down, giving you a smile.");
+					break;
+				case 2:
+					outputText("can hear a faint humming from inside her home, golden light spilling through the silk. The light and sound flares, then stops, seemingly at random. You knock on the door, and you can hear a faint <i>\"Coming!\"</i> From inside. Belisa comes over to the door, opening it for you. Inside, one of her silk bands sits on her desk, a few arcane-looking tools holding it in place.");
+					break;
+				default:
+					outputText("notice that Belisa is relaxing just outside her home, needles busy at work. As you approach, she puts the needles and silkwork down, giving you a smile.");
+			}
+			outputText("<i>\"Oh, hello!\"</i> Belisa says brightly, her lower-half bobbing slightly. <i>\"What’s brought you over here?\"</i>");
+			if (BelisaConfessed) outputText("<i>\"...Anything I can help you with?\"</i> When she thinks you aren’t looking, she takes a glance down, beads of drool forming on her fangs.");
+			outputText("\n\n");
+			menu();
+			addButton(0, "Apperance", BelisaAppearance);
+			addButton(4, "Sex", BelisaSex);
+			addButton(14, "Leave", camp.campLoversMenu);
+		}
+		
+		public function BelisaAppearance():void {
+			clearOutput();
+			outputText("Belisa, at first glance, appears to be an odd cross between a spider-morph and a drider. She only has two humanlike eyes, with light brown pupils. Her face is mostly humanoid, save for a thin ridge of chitin that adorns her brow like a crown. Long, straight black hair runs down her back, almost touching her Drider back half. The top of her head is shielded from the sun by a large, glistening sun hat that you can only assume was woven from her own silk. Her skin is pale, almost white, and her full lips draw into a natural pout.\n\n");
+			if (BelisaQuestComp) outputText("As she sees you looking at her face, she smiles, revealing her restored teeth and glimmering fangs. She blushes, but doesn’t seem to mind the attention.\n\n");
+			else outputText("One of her thin fangs sticks out over her lower lip, but she’s deliberately hidden the other from view. When you look at where that fang would be, she cringes, tilting her head so her sunhat hides her face from view.\n\n");
+			outputText("Unlike every drider you’ve ever seen, she only has two C-cup breasts, and she’s covered herself with a thin, opaque robe made from spider silk. Underneath, you can see she’s wearing a bra made out of scales, though from what, you have no idea. Her robe trails down and covers her naughty bits, and when it looks like it’s about to reveal her dark-brown pussy lips, she brings a hand down. You get a peek at some white silk panties before she covers back up.\n\n");
+			outputText("She has the eight legs of a drider, but her exoskeleton is chocolate-brown, with splotches of blue along the sides that look remarkably like raindrops. Her legs are thinner and longer than most other driders, and you can see faded lighter-brown marks along several of her legs, likely where the chitin was broken in the past. Her abdomen is slender and streamlined, smaller than you’d expect, but it flexes periodically.\n\n");
+			outputText("Her arms are covered in the same brown chitin, up to the forearm, at which point it smoothly transitions into smooth, pale skin. Her fingernails are the same color as her chitin, but otherwise her arms are smooth as silk, and her hands are extremely soft.\n\n");
+			outputText("She wears a saddle-like silk backpack, filled with odds and ends. A pair of knitting needles sits on her wrists, and a half-finished spider silk robe hangs over her back. When she catches you looking at her work, she blushes.\n\n");
+			if (BelisaInCamp) doNext(BelisaMainCampMenu);
+			else doNext(Encounterback);
 		}
 		
 		public function BelisaSex():void {
@@ -629,7 +710,8 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 				else if (BelisaAffectionMeter < 60) outputText("Belisa stares at you for a moment, her blush getting redder. <i>\"...No.\"</i> She shakes herself, slapping her cheeks. <i>\"It’s not that I don’t trust you…But…\"</i> She winces. <i>\"Just…I can’t, okay?\"</i>\n\nYou apologize, and Belisa nods, accepting your apology. She heads back inside, and you back away, leaving her in peace to do…whatever she’s doing now.\n\n");
 				else if (BelisaAffectionMeter < 80) outputText("Belisa blushes, turning her head away from you shyly. <i>\"...[name], I can’t right now, okay?\"</i> She heads back into her home, and you can hear some rustling inside. You can hear a small gasp, and a wet <i>schluck</i>. Is...Is Belisa...?\n\n");
 				else if (BelisaAffectionMeter >= 80) outputText("Your shy Drider looks you up and down, a small bit of drool dripping from the corner of her mouth. She snaps out of it, then immediately turns her head. <i>\"Nope! Nope nope nope nope! Nope!\"</i> She sprints as fast as she can, launching herself face-first into the water. Judging from her reaction…she wants to…? But…Something’s in the way? You’re not sure whether to be amused or insulted by her reaction.\n\n");
-				doNext(camp.returnToCampUseOneHour);
+				if (BelisaInCamp) doNext(camp.campLoversMenu);
+				else doNext(camp.returnToCampUseOneHour);
 			}
 		}
 
@@ -808,7 +890,7 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 			}
 		}
 		
-		public function BelisaFTGentle ():void {
+		public function BelisaFTGentle():void {
 			clearOutput();
 			outputText("Deciding to ease into things, you take a hold of her now opaque again robe, pulling it over her head slowly, tossing it to one side. Belisa blushes, embarrassed, but returns the favor, stripping you down and tossing your [armor] away. Now both naked, you slide one hand around her waist, laying your lips onto her belly as you slowly, sensually run your hands from her hips, up to her C-cup breasts, flicking her dusky nipple with one finger before bringing your hand back to the curve of her bubble-butt. As you work with your hands, Belisa tries to copy your movements, her soft fingers barely touching your [skin]. You make a trail of kisses up Belisa’s front, from her belly to her neck, reveling in the shivers you get from your inexperienced lover. \n\n");
 			outputText("You lock lips with Belisa, tasting her sweet saliva, nicking her fangs with your [tongue] and tasting the vaguely bitter taste of her venom on the tip. As she kisses back, her hand on your [ass], you drop a finger to her quivering pussy, gently sliding a digit into her, tickling the inside rim of her lips. Belisa gasps, her folds dampening rapidly. You pull your hand back, showing her the clear, sticky fluid on your fingertips. \n\n");
