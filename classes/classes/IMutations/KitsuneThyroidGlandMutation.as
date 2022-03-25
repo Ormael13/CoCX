@@ -2,7 +2,7 @@
  * Original code by aimozg on 27.01.14.
  * Reworked for Mutations by Jtecx on 14.03.22.
  */
-package classes.Mutations
+package classes.IMutations
 {
     import classes.MutationsLib;
     import classes.PerkClass;

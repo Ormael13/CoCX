@@ -1741,6 +1741,7 @@ public class PlayerInfo extends BaseContent {
 		player.tempWis = 0;
 		player.tempLib = 0;
 		statScreenRefresh();
+		if (flags[kFLAGS.SHIFT_KEY_DOWN] == 1) flags[kFLAGS.SHIFT_KEY_DOWN] = 0;
 		if (player.perkPoints > 0) doNext(perkBuyMenu);
 		else doNext(playerMenu);
 	}
