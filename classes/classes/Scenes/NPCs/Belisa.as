@@ -167,11 +167,16 @@ public class Belisa extends Monster
 			}
 		}
 		
+		override public function defeated(hpVictory:Boolean):void
+		{
+			SceneLib.belisa.BelisaHangSparWon(hpVictory);
+		}
+		
 		override public function get long():String
 		{
 			var str:String = "";
 			str += "Facing you is Belisa in a silk robe and Sunhat. Her backmost legs are off the ground, rubbing together nervously, but the ornate daggers in her hands smell like blood, and her abdomen is raised, ready to spit string.";
-			if (BelisaFollower.BelisaQuestOn) str += " Her fangs glint dangerously in the light, and she smiles despite her situation. She seems eager to bite.";
+			if (BelisaFollower.BelisaQuestComp) str += " Her fangs glint dangerously in the light, and she smiles despite her situation. She seems eager to bite.";
 			else str += " The one fang of hers you can see is dripping a clear venom, but her sunhat covers most of her face, hiding her eyes from you.";
 			return str;
 		}

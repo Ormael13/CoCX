@@ -91,7 +91,7 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		
 		public function BelisaAffection(changes:Number = 0):Number {
 			BelisaAffectionMeter += changes;
-			if (BelisaAffectionMeter > 70) BelisaAffectionMeter = 70;
+			if (BelisaAffectionMeter > 100) BelisaAffectionMeter = 100;
 			if (BelisaAffectionMeter < 0) BelisaAffectionMeter = 0;
 			return BelisaAffectionMeter;
 		}
@@ -461,6 +461,25 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 				startCombat(new Belisa);
 				doNext(playerMenu);
 			}
+		}
+		public function BelisaHangSparWon(hpVictory:Boolean):void {
+			clearOutput();
+			if (hpVictory) {
+				outputText("Injured, the spider-girl falls, her spindly legs folding underneath her. <i>\"Ow…\"</i> She cradles one arm, trying to focus on the healing magic, but the light isn’t even enough to make her robes see-through. <i>\"No...I can’t be out yet, I…\"</i> She looks up as you approach, her six eyes wide with fear.");
+				outputText(" <i>\"...s-stay back!\"</i> She brandishes her dagger with her good arm, trying to keep it between her and you. She bites her lower lip, one fang barely sticking out beyond it. She trembles, almost dropping the knife.");
+				if (player.hasStatusEffect(StatusEffects.SparingBelisa)) {
+					outputText("\n\nYou remind the spider-girl that you were just sparring. That this was a practice, not the real thing. <i>\"O-oh...Right.\"</i> She lets out a little <i>\"Tk-Tk-Tk-Tk.\"</i>");
+					outputText(" You offer her a hand up, and she takes it. Despite her spider-half’s size, she’s surprisingly light, and you pull too hard. She skitters forward, and her top half careens into you. She instinctively wraps her arms around you, blushing as she lets go.");
+				}
+			}
+			else {
+				outputText("<i>\"...Demon…\"</i> She tries to cast another fireball at you, but the magic fizzles. <i>\"...No. I can’t…\"</i> Despite her words, one of her hands drops to the point where her spider body meets her womanly upper half. Pushing aside the sopping wet front of her silk robe, she cries out, clearly sensitive. <i>\"I…\"</i>");
+				if (player.hasStatusEffect(StatusEffects.SparingBelisa)) {
+					outputText("\n\nYou ask her if she’s okay, and she pouts up at you, sheepishly stuffing her fingers into her dripping pussy. <i>\"No, I’m not. You...You’re fighting like a demon, [name], and it’s not fair!\"</i> You remind her that many demons fight this way, and that her white magic won’t always protect her.");
+					outputText(" <i>\"I know...And now I can’t cast for the rest of the day\"</i> She looks up at you, somewhat annoyed, but also giving you a nice view of her drooling cunt. When she sees you looking, she blushes, putting a hand over her honeypot to block your view. ");
+				}
+			}
+            cleanupAfterCombat();
 		}
 		
 		public function BelisaHangFish():void {
