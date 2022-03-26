@@ -909,7 +909,7 @@ public class PlayerInfo extends BaseContent {
 			else if (flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] == -1)
 				interpersonStats += "<b>Urta Status:</b> Ashamed\n";
 			else if (flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] < 30)
-				interpersonStats += "<b>Urta's Affection:</b> " + Math.round(flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] * 3.3333) + "%\n";
+				interpersonStats += "<b>Urta's Affection:</b> " + Math.round(flags[kFLAGS.URTA_PC_AFFECTION_COUNTER] * 10/3) + "%\n";
 			else
 				interpersonStats += "<b>Urta Status:</b> Ready To Confess Love\n";
 		}

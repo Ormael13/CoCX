@@ -25,6 +25,11 @@ public class SophieScene extends BaseContent implements TimeAwareInterface {
 			if (flags[kFLAGS.SOPHIE_DISABLED] > 0) return false; //Nothing can happen if she's been kicked out or disappeared off into the mountains
 			var needNext:Boolean = false;
 			checkedSophie = 0;
+            //first of all, check her leaving
+            if (flags[kFLAGS.SOPHIE_FOLLOWER_IRRITATION] == 8) { //you fucked up -> she leaves
+                sophieFollowerScene.sophieLeft();
+                return true;
+            }
 			pregnancy.pregnancyAdvance();
 			if (flags[kFLAGS.SOPHIE_ANGRY_AT_PC_COUNTER] > 0) flags[kFLAGS.SOPHIE_ANGRY_AT_PC_COUNTER]--;
 			if (flags[kFLAGS.SOPHIES_DAUGHTERS_DEBIMBOED] == 1 && sophieFollowerScene.sophieFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) {

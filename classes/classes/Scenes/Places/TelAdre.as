@@ -607,11 +607,11 @@ public function barTelAdre():void {
 		}
 		//Urta X Scylla threesome
 		if (scylla.action == Scylla.SCYLLA_ACTION_FUCKING_URTA) {
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00143] == 0)
+			if (flags[kFLAGS.URTA_SCYLLA_TIMES_CAUGHT] == 0)
 				outputText("\n\n<b>Though Urta would normally be here getting sloshed, her usual spot is completely vacant.  You ask around but all you get are shrugs and giggles.  Something isn't quite right here.  You see an empty bottle of one of her favorite brands of whiskey still rolling on her table, so she can't have been gone long.  Maybe she had guard business, or had to head to the back rooms for something?</b>");
 			else
 				outputText("\n\nUrta's usual place is vacant, though her table still holds a half-drank mug of something potent and alcoholic.  If it's anything like the last time this happened, she's snuck into a back room with Scylla to relieve some pressure.  It might not hurt to join in...");
-			flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 4;
+			SceneLib.urta.hoursUntilHorny(4);
 			button = anotherButton(button, "Back Room", SceneLib.urta.scyllaAndUrtaSittingInATree);
 		}
 		else if (SceneLib.urta.urtaBarDescript()) {

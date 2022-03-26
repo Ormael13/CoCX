@@ -188,7 +188,7 @@ public class Vapula extends NPCAwareContent implements TimeAwareInterface
 					//FLAG THAT THIS SHIT WENT DOWN
 					flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] = 1;
 					//Make sure the camp warning thing is off so she never moves back in.  Bitch be mad.
-					flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00173] = 0;
+					flags[kFLAGS.AMILY_WARNING] = 0;
 				}
 				//[(if PC corr > 70)
 				if (player.cor > 70 && !(jojo && flags[kFLAGS.JOJO_BIMBO_STATE] == 3)) outputText("\n\n\"<i><i>Fine. Go fuck off then, I don't need you.  I have a much better and hotter slut now. Don't hesitate to come back if you want some sweet pussy, though.</i>\"");
@@ -262,16 +262,15 @@ public class Vapula extends NPCAwareContent implements TimeAwareInterface
 				if (player.lust >= 33) fFeed = chixFeedVapulaBlehblehIVantToZuckYourSpooo;
 				else if (output && !player.hasCock()) outputText("\n\nYou aren't suitably aroused to feed Vapula right now.");
 			}
+            //threesomes
 			var threesome:Function = null;
-			if (player.lust < 33) {
 				if (output) outputText("\n\nYou aren't much interested in any of the threesomes Vapula seems poised to suggest.");
-			}
-			var spank:Function = null;
+			else threesome = vapulaThreesomeMenu;
 			//Spank Vapula for misbehaving.
 			//Requires Vapula force herself on you for food.
 			//Requires bipedal-ness
+			var spank:Function = null;
 			if (flags[kFLAGS.VAPULA_EARNED_A_SPANK] > 0 && !player.isTaur() && !player.isDrider()) spank = spankVapulaLikeABoss;
-			else threesome = vapulaThreesomeMenu;
 
 			choices("Appearance", fapulaFapfapfapAppearance, "Talk", talkToVapulaForSomeReason, "Feed", mFeed, "Feed(Dildo)", fFeed, "Threesome", threesome,
 				"Spank", spank, "", null, "", null, "", null, "Leave", camp.campSlavesMenu);
@@ -872,8 +871,18 @@ public class Vapula extends NPCAwareContent implements TimeAwareInterface
 		private function jojoButtFuckTrain():void
 		{
 			clearOutput();
-			var x:int = player.cockThatFits(100);
-			if (x < 0) x = player.smallestCockIndex();
+            //count tentacles for their part
+            var tentaCnt:int = player.countCocksWithType(CockTypesEnum.TENTACLE, 50, -1, "length");
+            //leave place for the "main" dick
+            if (player.cocks.length == tentaCnt)
+                --tentaCnt;
+            //select tentas first
+            var tentas:Array = [];
+            for (var i:int = 0; i < 3; ++i)
+                tentas[i] = tentaCnt > i ? player.findCockWithType(CockTypesEnum.TENTACLE, i, 50, -1, "length") : -1;
+            //now select main
+			var mainCock:int = player.findCockNotIn(tentas, 1, -1, 100); //try to fit
+			if (mainCock < 0) mainCock = player.findCockNotIn(tentas, -1, -1, -1); //smallest then
 			outputText("You tell Jojo it's his lucky day - you're going to have a joyful butt-fuck session with him and your purple pet.");
 			outputText("\n\n\"<i>Admit it, you'd love to use that smoking hot body, wouldn't you?  Don't lie to me.  You'd give up your soul in order to fuck her brains out.  Don't you want to plunge your dick inside her?  Don't you want to fuck my beautiful succubus wife?</i>\"");
 			outputText("\n\nJojo shakes his head in denial, but he can hardly keep any shred of credibility when his rock-hard mouse cock speaks for him.");
@@ -881,8 +890,8 @@ public class Vapula extends NPCAwareContent implements TimeAwareInterface
 			outputText("\n\n\"<i>Remember: you get to use her butt temporarily but only because I say so.  Other than that, she's mine.  You have no right on her pussy, tits or even face.  You are allowed to fuck her butt only because it turns me on to see her at the end of a butt-fuck train, but don't you dare take advantage of the situation.  You're a mindless dick, nothing else.  If I order you to stop fucking her, you will stop fucking her right away.  Your whole body is mine, and hers too. Do you understand?</i>\"");
 			outputText("\n\nJojo mumbles a few words, you can't understand all of them but you think he's gotten the message.");
 			outputText("\n\n\"<i>All right! Let's get going!</i>\"");
-			outputText("\n\nYou seize your " + cockDescript(x) + " and press its tip against the mouse's sphincter, slowly pushing.  Startled by the sudden anal invasion, Jojo reflexively grabs Vapula's hips and inserts his rodent prick into her.  The simultaneous penetrations make your sluts squeak and moan in ecstasy, their bodies entranced as their anal walls provide them one thousand subtle sensations.  You grip his arms, using him as leverage to pull out, and slam it back home again.  Used like the fucktoy he truly is, Jojo doesn't resist; his dick moves of its own volition in and out of Vapula's interior as you relentlessly push him back and forth.  You secretly rejoice: his tight little ass is clearly adapting to your " + cockDescript(x) + " and it somehow feels even better than usual.  You pound hard, making him groan and beg for more; you eagerly give him what he wants and stuff him full of your dickflesh.");
-			if (player.cockArea(x) > 100) outputText("  You can actually feel his internal organs being bumped against your meat as your " + cockDescript(x) + " stretches his colon beyond its normal size and thrusts in and out like a charging mammoth.");
+			outputText("\n\nYou seize your " + cockDescript(mainCock) + " and press its tip against the mouse's sphincter, slowly pushing.  Startled by the sudden anal invasion, Jojo reflexively grabs Vapula's hips and inserts his rodent prick into her.  The simultaneous penetrations make your sluts squeak and moan in ecstasy, their bodies entranced as their anal walls provide them one thousand subtle sensations.  You grip his arms, using him as leverage to pull out, and slam it back home again.  Used like the fucktoy he truly is, Jojo doesn't resist; his dick moves of its own volition in and out of Vapula's interior as you relentlessly push him back and forth.  You secretly rejoice: his tight little ass is clearly adapting to your " + cockDescript(mainCock) + " and it somehow feels even better than usual.  You pound hard, making him groan and beg for more; you eagerly give him what he wants and stuff him full of your dickflesh.");
+			if (player.cockArea(mainCock) > 100) outputText("  You can actually feel his internal organs being bumped against your meat as your " + cockDescript(mainCock) + " stretches his colon beyond its normal size and thrusts in and out like a charging mammoth.");
 			outputText("\n\nYou pump him full of your junk as he does the same to the buttslut in front of him.  You can't tell who yelps louder, but these bitches seem to enjoy the butt-fucking they're receiving.  This only entices you to fuck Jojo harder, knowing that the might of your thrusts will propagate down Vapula's butt; you ruthlessly smash your groin against Jojo's butt, pulling his arms harder at each thrust and oblivious of the mouse's pain in your passionate embrace.  Besides, the monk slut is probably getting off on getting manhandled like that.  You reach around and grab Vapula's breasts, holding her tight and crushing Jojo between the two of you as you keep ravaging his butt with repeated assaults.");
 			//[if tentacle Jojo]
 			if (jojoScene.tentacleJojo()) {
@@ -890,42 +899,29 @@ public class Vapula extends NPCAwareContent implements TimeAwareInterface
 				//[if vagina]
 				if (player.hasVagina()) outputText("  Last but not least, a soft cock-knock at the entrance of your " + vaginaDescript() + " signals an incoming intrusion.  If your mouth weren't so full of cock you would sigh in relief as your aching pussy is thoroughly penetrated.");
 			}
-			//[if PC has extra long tentacle cock, variable is n1]
-			var n1:int = -1;
-			var n2:int = -1;
-			var n3:int = -1;
-			var i:int = player.cockTotal();
-			while (i > 0) {
-				i--;
-				if (player.cocks[i].cockType == CockTypesEnum.TENTACLE && i != x) {
-					if (n1 == -1) n1 = i;
-					else if (n2 == -1) n2 = i;
-					else if (n3 == -1) n3 = i;
-					break;
-				}
-			}
-			if (n1 >= 0) outputText("\n\nA deliciously depraved idea crosses your mind; using your dick muscles, you move your " + cockDescript(n1) + " toward Vapula.  It squirms for a moment as you look for her wet snatch, poking her everywhere with your tip and teasing her with your accidental ministrations, but at last you find her vaginal entrance.  Using the rubbery flexibility of your plant-like prick, you brutally shove it down her love-tunnel, trying to force inside as many inches as you can.  You can feel her instinctively altering her own body in order to accommodate more dickflesh inside her, and you keep pushing until your " + cockDescript(n1) + " is stretched to maximum capacity.  Somehow your tentacle rod is entirely buried in Vapula's warm depths, and her unbelievable tightness is driving you mad with lust.  It twists on its on volition inside her, its vegetable-like texture being more sensitive and receptive to pleasure than a normal prick and the sensations it sends to you are abnormally exquisite.  You almost forgot the asshole you were pounding with your " + cockDescript(x) + " but the way Jojo wriggles against it in order to fit more of your length inside him reminds you of your job.");
-			//[if PC has another tentacle cock, variable is n2]
-			if (n2 >= 0) outputText("\n\nSince your sluts still have free holes left, you decide to fill some more fuck-holes with your junk.  Guiding  your " + cockDescript(n2) + " toward Vapula's mouth, you think you could use a proper blowjob from a trained succubus and wait for her to let out another moan before filling your junk completely and thrusting up and down brutally, literally mouth-fucking her and treating her lips as a tight cock-ring.  Her expert tongue wraps around your girth, squeezing it and clinging to it like it's the most precious thing in her life.  She keeps jerking back and forth due to the hard butt-fucking she's receiving, and the jolts are transmitted to your " + cockDescript(n2) + " in the most teasing manner.");
-			//[if PC has another tentacle cock, variable is n3]
-			if (n3 >= 0) outputText("\n\nSince Vapula is already sucking you off, why not Jojo?  You still have appropriate junk left after all.  You promptly send your wriggling " + cockDescript(n3) + " and push it between the mousey's lips.  However, the slut won't open them!  You pound him ragingly, slamming the entirety of your " + cockDescript(x) + " down his colon and bruising his firm butt until he lets out a deep howl of pleasure and pain mixed; you profit from the opening and stuff his mouth so full of your " + cockDescript(n3) + " you think he's going to choke.  However, his mouth seems to be accustomed to take monstrous lengths - probably a side-effect of his corruption - and he quickly accommodates to your size.  Although he can't provide a blowjob as sweet as Vapula, you can definitely tell he's skilled at sucking dick.  The cute little slut!  You ram his asshole faster to reward him; this increased butt-fucking pace seems to have the desired effect, and soon your " + cockDescript(n3) + " is throbbing in need as is bathes in the mousey's saliva.");
+            //tentacock part
+			if (tentas[0] >= 0) outputText("\n\nA deliciously depraved idea crosses your mind; using your dick muscles, you move your " + cockDescript(tentas[0]) + " toward Vapula.  It squirms for a moment as you look for her wet snatch, poking her everywhere with your tip and teasing her with your accidental ministrations, but at last you find her vaginal entrance.  Using the rubbery flexibility of your plant-like prick, you brutally shove it down her love-tunnel, trying to force inside as many inches as you can.  You can feel her instinctively altering her own body in order to accommodate more dickflesh inside her, and you keep pushing until your " + cockDescript(tentas[0]) + " is stretched to maximum capacity.  Somehow your tentacle rod is entirely buried in Vapula's warm depths, and her unbelievable tightness is driving you mad with lust.  It twists on its on volition inside her, its vegetable-like texture being more sensitive and receptive to pleasure than a normal prick and the sensations it sends to you are abnormally exquisite.  You almost forgot the asshole you were pounding with your " + cockDescript(mainCock) + " but the way Jojo wriggles against it in order to fit more of your length inside him reminds you of your job.");
+			//[if PC has another tentacle cock, variable is tentas[1]]
+			if (tentas[1] >= 0) outputText("\n\nSince your sluts still have free holes left, you decide to fill some more fuck-holes with your junk.  Guiding  your " + cockDescript(tentas[1]) + " toward Vapula's mouth, you think you could use a proper blowjob from a trained succubus and wait for her to let out another moan before filling your junk completely and thrusting up and down brutally, literally mouth-fucking her and treating her lips as a tight cock-ring.  Her expert tongue wraps around your girth, squeezing it and clinging to it like it's the most precious thing in her life.  She keeps jerking back and forth due to the hard butt-fucking she's receiving, and the jolts are transmitted to your " + cockDescript(tentas[1]) + " in the most teasing manner.");
+			//[if PC has another tentacle cock, variable is tentas[2]]
+			if (tentas[2] >= 0) outputText("\n\nSince Vapula is already sucking you off, why not Jojo?  You still have appropriate junk left after all.  You promptly send your wriggling " + cockDescript(tentas[2]) + " and push it between the mousey's lips.  However, the slut won't open them!  You pound him ragingly, slamming the entirety of your " + cockDescript(mainCock) + " down his colon and bruising his firm butt until he lets out a deep howl of pleasure and pain mixed; you profit from the opening and stuff his mouth so full of your " + cockDescript(tentas[2]) + " you think he's going to choke.  However, his mouth seems to be accustomed to take monstrous lengths - probably a side-effect of his corruption - and he quickly accommodates to your size.  Although he can't provide a blowjob as sweet as Vapula, you can definitely tell he's skilled at sucking dick.  The cute little slut!  You ram his asshole faster to reward him; this increased butt-fucking pace seems to have the desired effect, and soon your " + cockDescript(tentas[2]) + " is throbbing in need as is bathes in the mousey's saliva.");
 			//[add this at the end of any tentacle multicock text]
-			if (n1 >= 0) {
+			if (tentas[0] >= 0) {
 				outputText("\n\nYou pound Vapula and Jojo harder than ever, riding the butt-fuck wave and creating delightful disruptions in the whole train as you fill both sluts with your junk over and over again.  You keep pumping, the tightness of either hole threatening to send you over the edge at every thrust.");
 				//[if Jojo has tentacle dicks]
 				if (jojoScene.tentacleJojo()) outputText("  You enjoy this absolutely crazy display of corrupted debauchery: you, getting dick and giving dick to the same creature as well as indirectly and directly violating multiple holes with your junk.  An endless circle of loop-fuck feeding itself through lust and dicklesh.  How weird the three of you would appear to an external observer, locked as you are in this train of penetrating dicks!  None of you can moan to express the sheer bliss you're all feeling, as your mouths are filled with dick; you can't slow down, as both your sluts are taken in an insane frenzy, always willing to fill more cock in some hole.  All you can do is pump faster and faster until the final release.");
 			}
 			outputText("\n\nYou wish this blissful state of mind and pleasure would last forever, and you're sure both your butt-fuck partners are feeling the same way; sadly, your stamina has a limit, and theirs does too.  You feel your spooge flowing all through your genitals, ready to be unloaded.  With a silent groan, you give Jojo one last pound before utterly blasting him with spunk.  You paint his anal walls white");
 			//[if second multicock]
-			if (n1 >= 0) outputText(", as well as Vapula's love-tunnel");
-			if (n2 >= 0) outputText(" and throat, ");
-			if (n3 >= 0) outputText("and Jojo's too");
+			if (tentas[0] >= 0) outputText(", as well as Vapula's love-tunnel");
+			if (tentas[1] >= 0) outputText(" and throat, ");
+			if (tentas[2] >= 0) outputText("and Jojo's too");
 			outputText(".  You feel that Jojo's release is coming too.  With a powerful thrust, he squirts his own mouse semen down Vapula's waiting ass");
 			//[if tentacle Jojo]
 			if (jojoScene.tentacleJojo()) outputText("; his tentacles absolutely drench your every hole with greenish mousey-cum");
 			outputText(".  Vapula's own orgasm also starts kicking in, the feeling of hot cum flooding her interior being too much for her horny body to bear.");
-			outputText("\n\nYou all spend a few minutes in utter ecstasy, thinking of nothing but the steady flow of sexual juices flowing in and out of various bodies.  You all focus on two things: giving everything you've got and keeping everything you're receiving.  Jojo, the nexus of this network of cum-flows, thrashes savagely as his genitals throb with need and his ass spasms reflexively; the poor thing is clearly getting unbearable pleasure and can't control his own movements anymore.  Your own orgasm brings you to a new level of ecstasy as your " + cockDescript(x) + " keeps pulsating and releasing torrents of baby-batter.  At last, when the cum-flow finally ebbs, you rest on Jojo's back for a while, cock buried deep in his ass.  He does the same to Vapula, but you're too exhausted to care.  Besides, the naughty little pet deserved a reward.  You all fall over, sloshing in a newly-formed puddle of thick sexual fluids, and rest for a while.  As you're about to fall asleep you whisper in Jojo's ear, \"<i>Good job slut...</i>\"  Your last vision is the mouse's head nodding in contentment.");
-			outputText("\n\nWhen you wake up, Jojo is gone, and Vapula is still snoring deep in the cum puddle, her body entirely coated with dried semen.  You cock-slap the purple succubus to wake her and tell her she might as well clean your " + cockDescript(x) + " since the cowardly mouse left.  She nods weakly and her mouth opens, visibly waiting for your sloppy dick to fill her since she's too tired to sit up.  Sighing, you lower your junk into a proper sucking position; her tongue seems to be working on its own as it licks your meat clean of any dirty juice left.  You try to shove more dickflesh inside her throat but you can see she's too winded to perform any elaborate blowjob.  Shrugging in mild disappointment, you leave the purple slut as she carelessly wallows in the cum puddle; you head toward a stream to get cleaned up.");
+			outputText("\n\nYou all spend a few minutes in utter ecstasy, thinking of nothing but the steady flow of sexual juices flowing in and out of various bodies.  You all focus on two things: giving everything you've got and keeping everything you're receiving.  Jojo, the nexus of this network of cum-flows, thrashes savagely as his genitals throb with need and his ass spasms reflexively; the poor thing is clearly getting unbearable pleasure and can't control his own movements anymore.  Your own orgasm brings you to a new level of ecstasy as your " + cockDescript(mainCock) + " keeps pulsating and releasing torrents of baby-batter.  At last, when the cum-flow finally ebbs, you rest on Jojo's back for a while, cock buried deep in his ass.  He does the same to Vapula, but you're too exhausted to care.  Besides, the naughty little pet deserved a reward.  You all fall over, sloshing in a newly-formed puddle of thick sexual fluids, and rest for a while.  As you're about to fall asleep you whisper in Jojo's ear, \"<i>Good job slut...</i>\"  Your last vision is the mouse's head nodding in contentment.");
+			outputText("\n\nWhen you wake up, Jojo is gone, and Vapula is still snoring deep in the cum puddle, her body entirely coated with dried semen.  You cock-slap the purple succubus to wake her and tell her she might as well clean your " + cockDescript(mainCock) + " since the cowardly mouse left.  She nods weakly and her mouth opens, visibly waiting for your sloppy dick to fill her since she's too tired to sit up.  Sighing, you lower your junk into a proper sucking position; her tongue seems to be working on its own as it licks your meat clean of any dirty juice left.  You try to shove more dickflesh inside her throat but you can see she's too winded to perform any elaborate blowjob.  Shrugging in mild disappointment, you leave the purple slut as she carelessly wallows in the cum puddle; you head toward a stream to get cleaned up.");
 			player.sexReward("vaginalFluids");
 			dynStats("sen", -2, "cor", 2);
 			flags[kFLAGS.VAPULA_DAYS_SINCE_FED] = 0;
@@ -995,9 +991,14 @@ public class Vapula extends NPCAwareContent implements TimeAwareInterface
 			clearOutput();
 			outputText("You produce the demonic dildo and hold it by the hilt of its giant purple end, wagging it lazily by your side with a playful grin.  Vapula knows what that means; she is on her knees in an instant, staring at you with wolfish anticipation.");
 			//Feed/Tease
-			var tease:Function = null;
-			if (flags[kFLAGS.VAPULA_HAREM_FUCK] == 0) tease = teaseVapula;
-			simpleChoices("Feed", chicksFeedVapula, "Tease", tease, "", null, "", null, "", null);
+            menu();
+            addButton(0, "Feed", chicksFeedVapula);
+            if (flags[kFLAGS.VAPULA_HAREM_FUCK] == 0)
+                addButtonDisabled(1, "Tease", "Can't tease her while she can fuck everyone whenever she wants.");
+			if (flags[kFLAGS.VAPULA_TEASE_COUNT] > flags[kFLAGS.VAPULA_DAYS_SINCE_FED])
+                addButtonDisabled(1, "Tease", "Already teased the poor bitch today, wait until tomorrow.");
+            else
+                addButton(1, "Tease", teaseVapula);
 		}
 
 //Tease
@@ -1005,7 +1006,7 @@ public class Vapula extends NPCAwareContent implements TimeAwareInterface
 		{
 			clearOutput();
 			//Requires: Vapula not fucking harem
-			if (flags[kFLAGS.VAPULA_HAREM_FUCK] == 0 && (flags[kFLAGS.VAPULA_DAYS_SINCE_FED] == 0)) {
+			if (flags[kFLAGS.VAPULA_TEASE_COUNT] == 0) {
 				outputText("You decide you aren't going to give her what she wants so easily . You're also genuinely curious about how badly she needs cum, and how far you can push her.  You don't say anything as you slowly buckle the strap-on, sighing as you slip the small, pink end into your " + vaginaDescript(0) + ".  You make Vapula wait as you close your eyes and make the dildo pulse inside you, slowly filling you up and then withdrawing, letting it push up against your " + clitDescript() + ".");
 				outputText("\n\nYou open your eyes to find Vapula is biting her lip fretfully from watching you, a small pool of liquid arousal collecting beneath her.  You smile lazily as you stand over her and brush the purple end against her face; the way this makes the end wedged inside of you push to and fro against your sensitive walls makes you coo.  Vapula follows the bulbous tip like a cat and a string; as it brushes against her mouth she tries to wrap her lips around it, but you tut mockingly and pull it out of reach. With an evidently huge force of will the succubus makes herself be still again, and you resume stroking her face with your artificial cock.");
 				outputText("\n\n\"<i>How badly do you want this, slut?</i>\" you ask.");
@@ -1022,7 +1023,7 @@ public class Vapula extends NPCAwareContent implements TimeAwareInterface
 			}
 			//Second Tease
 			//Requires: Vapula not fucking harem, teased the day before
-			else if (flags[kFLAGS.VAPULA_HAREM_FUCK] == 0 && flags[kFLAGS.VAPULA_DAYS_SINCE_FED] == 1) {
+			else if (flags[kFLAGS.VAPULA_TEASE_COUNT] == 1) {
 				outputText("You smile as once again Vapula gets into position on her knees, and you buckle on the strap-on and stand over her.  This time you make the pink end grow long, closing your eyes as it inches up your tunnel, before slowly thrusting your " + hipDescript() + " backwards and forwards in front of your succubus, letting it shrink and grow so it climbs up and down your wet walls.");
 				outputText("\n\nBreathing heavily, you open your eyes to find Vapula is struggling to stop herself from openly drooling, her eyes shooting from you back to the tip of the purple dildo in front of her as she licks her lips and swallows continuously.");
 				outputText("\n\n\"<i>You must be very hungry by now, slut,</i>\" you tease.");
@@ -1185,3 +1186,4 @@ public class Vapula extends NPCAwareContent implements TimeAwareInterface
 		}
 	}
 }
+

@@ -16,7 +16,12 @@ public class TedScenes extends NPCAwareContent
 		public function TedScenes() 
 		{
 		}
-		
+
+public function tedAvailablePostCave():Boolean {
+    return !player.hasStatusEffect(StatusEffects.TedOff) && flags[kFLAGS.TED_LVL_UP] >= 1 && flags[kFLAGS.TED_LVL_UP] < 2;
+    //disabled after level 2 because he's fucking annoying and doesn't make any progress
+}
+
 public function tedWrath(changes:Number = 0):Number {
 	flags[kFLAGS.TED_WRATH] += changes;
 	if (flags[kFLAGS.TED_WRATH] > 100) flags[kFLAGS.TED_WRATH] = 100;
@@ -59,6 +64,13 @@ public function introPostHiddenCave():void {
 	startCombat(new Ted());
 	doNext(playerMenu);
 }
+
+/*
+After the cave, counter BEFORE levelling up:
+    1 - amulet.
+    2 - without witty talks. LEVEL UP TO 2.
+After - disabled for now, he's annoying.
+*/
 public function defeatedTedPostHiddenCave():void {
 	if (flags[kFLAGS.TED_LVL_UP] >= 3) {
 		outputText(".");

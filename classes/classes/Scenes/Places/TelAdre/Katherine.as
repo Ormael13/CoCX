@@ -777,6 +777,7 @@ private function urtaPlusKathCuddle():void {
 
 public function katherineOnDuty():void {
 	clearOutput();
+    spriteSelect(null);
 	outputText("As you walk through the streets of Tel’Adre you notice a small group of Watch officers out on patrol.  One of them looks your way and you see a familiar face.  Kath says something to one of the other officers.  Soon enough Kath is headed your way while the others walk to a nearby cafe.\n\n");
 	if (flags[kFLAGS.KATHERINE_UNLOCKED] == 4) { //First encounter since training
 		outputText("\"<i>[name]!</i>\" she calls out, running straight into your arms.  \"<i>I’ve been hoping to run into you - here,</i>\" she says, thrusting a key into your hand.  \"<i>I was so excited when I saw you at the gate; I completely forgot to give you this.  It's a key to my new place.</i>\"  She beams proudly as she speaks the words.\n\n\"<i>Please come by any time, that way we can get up to anything we want,</i>\" she adds before kissing you and wrapping her tail around your waist.  She whispers the directions to her new place in your ear, then releases you and steps back.\n\n\"<i>Now, as for right now, y");

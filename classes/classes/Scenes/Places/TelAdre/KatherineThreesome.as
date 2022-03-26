@@ -118,7 +118,7 @@ public class KatherineThreesome extends TelAdreAbstractContent
 			player.orgasm();
 			katherine.orgasm();
 			katherine.katherineAndUrtaHadSex(false);
-			flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 2 + rand(2);
+			urta.hoursUntilHorny(2 + rand(2));
 			flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] += 2;
 			urta.urtaLove(1);
 			if (flags[kFLAGS.KATHERINE_UNLOCKED] != 3) {
@@ -184,7 +184,7 @@ public class KatherineThreesome extends TelAdreAbstractContent
 			katherine.orgasm();
 			katherine.katherineAndUrtaHadSex(false);
 			flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
-			flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 2 + rand(2);
+			urta.hoursUntilHorny(2 + rand(2));
 			urta.urtaLove(1);
 			if (flags[kFLAGS.KATHERINE_UNLOCKED] != 3)
 				if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
@@ -292,7 +292,7 @@ public class KatherineThreesome extends TelAdreAbstractContent
 			katherine.orgasm();
 			katherine.katherineAndUrtaHadSex(false);
 			flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
-			flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 2 + rand(2);
+			urta.hoursUntilHorny(2 + rand(2));
 			urta.urtaLove(1);
 			if (flags[kFLAGS.KATHERINE_UNLOCKED] != 3)
 				if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
@@ -356,7 +356,7 @@ public class KatherineThreesome extends TelAdreAbstractContent
 			katherine.orgasm();
 			katherine.katherineAndUrtaHadSex(false);
 			flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
-			flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 2 + rand(2);
+			urta.hoursUntilHorny(2 + rand(2));
 			urta.urtaLove(1);
 			if (flags[kFLAGS.KATHERINE_UNLOCKED] != 3)
 				if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
@@ -446,7 +446,7 @@ public class KatherineThreesome extends TelAdreAbstractContent
 			player.sexReward("vaginalFluids","Dick");
 			player.orgasm();
 			flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
-			flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 8 + rand(2);
+			urta.hoursUntilHorny(8 + rand(2));
 			if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -493,7 +493,7 @@ public class KatherineThreesome extends TelAdreAbstractContent
 			outputText("You pull out of Kath and give her a pat on the back.  You tell Urta that there are two ways to shrink " + katherine.cockMultiple("that knot", "those knots") + " and it’s up to them to decide which to use.  Kath looks tired, but her tail wags back and forth.  Urta just groans and says, \"<i>I can’t, I’m so full.</i>\"\n\n");
 
 			outputText("You lock the door on the way out, " + (flags[kFLAGS.KATHERINE_URTA_AFFECTION] >= 31 ? "knowing that with those two the sex option will eventually win out." : "hoping your sated girlfriends will bond over this."));
-			flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 2 + rand(2);
+			urta.hoursUntilHorny(2 + rand(2));
 			if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -553,7 +553,7 @@ public class KatherineThreesome extends TelAdreAbstractContent
 			katherine.orgasm();
 			katherine.katherineAndUrtaHadSex(true);
 			flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
-			flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 2 + rand(2);
+			urta.hoursUntilHorny(2 + rand(2));
 			dynStats("lus", 20 + player.lib / 20);
 			if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
 			doNext(camp.returnToCampUseOneHour);
@@ -574,7 +574,7 @@ public class KatherineThreesome extends TelAdreAbstractContent
 			dynStats("lus", 20 + player.lib / 20);
 			katherine.katherineAndUrtaHadSex(true);
 			flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
-			flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 2 + rand(2);
+			urta.hoursUntilHorny(2 + rand(2));
 			urta.drainedByKath = true;
 			doNext(katherine.katherineSex);
 		}
@@ -614,7 +614,7 @@ public class KatherineThreesome extends TelAdreAbstractContent
 			katherine.orgasm();
 			katherine.katherineAndUrtaHadSex(true);
 			flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
-			flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 2 + rand(2);
+			urta.hoursUntilHorny(2 + rand(2));
 			urta.urtaLove(1);
 			if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
 			doNext(camp.returnToCampUseOneHour);
@@ -745,7 +745,7 @@ public class KatherineThreesome extends TelAdreAbstractContent
 			katherine.orgasm();
 			katherine.katherineAndUrtaHadSex(true);
 			flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
-			flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 2 + rand(2);
+			urta.hoursUntilHorny(2 + rand(2));
 			urta.urtaLove(1);
 			if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
 			doNext(camp.returnToCampUseOneHour);
@@ -804,7 +804,7 @@ public class KatherineThreesome extends TelAdreAbstractContent
 			katherine.orgasm();
 			katherine.katherineAndUrtaHadSex(true);
 			flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
-			flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 10 + rand(2);
+			urta.hoursUntilHorny(10 + rand(2));
 			urta.urtaLove(1);
 			if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
 			doNext(camp.returnToCampUseTwoHours);
@@ -898,7 +898,7 @@ public class KatherineThreesome extends TelAdreAbstractContent
 			katherine.orgasm();
 			katherine.katherineAndUrtaHadSex(true);
 			flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
-			flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 2 + rand(2);
+			urta.hoursUntilHorny(2 + rand(2));
 			urta.urtaLove(1);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -996,7 +996,7 @@ public class KatherineThreesome extends TelAdreAbstractContent
 			katherine.orgasm();
 			katherine.katherineAndUrtaHadSex(true);
 			flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY]++;
-			flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 2 + rand(2);
+			urta.hoursUntilHorny(2 + rand(2));
 			urta.urtaLove(1);
 			if (model.time.hours >= 13) flags[kFLAGS.KATHERINE_LOCATION] = Katherine.KLOC_URTAS_APT; //Katherine.timeChange will sort out whether Kath actually stays with Urta
 			doNext(camp.returnToCampUseOneHour);
