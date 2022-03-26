@@ -2700,7 +2700,14 @@ import flash.utils.getQualifiedClassName;
 				else outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " currently asleep!</b>\n\n");
 			}
 			if(hasStatusEffect(StatusEffects.InvisibleOrStealth)) {
-				addStatusValue(StatusEffects.InvisibleOrStealth,1,-1);
+				if (statusEffectv2(StatusEffects.InvisibleOrStealth) > 0) {
+					if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] < SceneLib.combat.StealthModeMechCost() || player.soulforce < SceneLib.combat.StealthModeMechCost()) addStatusValue(StatusEffects.InvisibleOrStealth,1,-1);
+					else {
+						if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] >= SceneLib.combat.StealthModeMechCost()) flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= SceneLib.combat.StealthModeMechCost();
+						else player.soulforce -= SceneLib.combat.StealthModeMechCost();
+					}
+				}
+				else addStatusValue(StatusEffects.InvisibleOrStealth,1,-1);
 				if(statusEffectv1(StatusEffects.InvisibleOrStealth) <= 0) {
 					outputText("<b>" + capitalA + short + (plural ? " have" : " has") + " found you!</b>\n\n");
 					removeStatusEffect(StatusEffects.InvisibleOrStealth);

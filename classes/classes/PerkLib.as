@@ -4891,8 +4891,8 @@ public class PerkLib
                     .requirePerk(PrestigeJobArcaneArcher)
                     .requireCustomFunction(function (player:Player):Boolean {
                         return player.hasStatusEffect(StatusEffects.KnowsWhitefire) || player.hasStatusEffect(StatusEffects.KnowsIceSpike) || player.hasStatusEffect(StatusEffects.KnowsLightningBolt) || player.hasStatusEffect(StatusEffects.KnowsDarknessShard)
-						|| player.hasStatusEffect(StatusEffects.KnowsWaterBall) || player.hasStatusEffect(StatusEffects.KnowsWindBullet) || player.hasStatusEffect(StatusEffects.KnowsStalagmite);
-                    }, "Whitefire or Ice Spike or Lightning Bolt or Darkness Shard or Water Ball or Wind Bullet or Stalagmite spell");
+						|| player.hasStatusEffect(StatusEffects.KnowsWaterBall) || player.hasStatusEffect(StatusEffects.KnowsWindBullet) || player.hasStatusEffect(StatusEffects.KnowsStalagmite) || player.hasStatusEffect(StatusEffects.KnowsAcidSpray);
+                    }, "Whitefire or Ice Spike or Lightning Bolt or Darkness Shard or Water Ball or Wind Bullet or Stalagmite or Acid Spray spell");
             SteelStorm.requireLevel(60)
                     .requirePerk(PrestigeJobTempest);
             UnlockEndurance3rdStage.requirePerk(UnlockEndurance2ndStage)
@@ -5010,7 +5010,7 @@ public class PerkLib
             ArcaneRegenerationMinor.requireAnyPerk(JobSorcerer, JobHealer, JobElementalConjurer, JobGolemancer)
                     .requireInt(50)
                     .requireLevel(6);
-            GreyMageApprentice.requirePerk(GreyMagic)
+            GreyMageApprentice.requirePerks(GreyMagic, JobSorcerer)
                     .requireInt(75)
                     .requireLevel(6);
             //Tier 2 Intelligence perks

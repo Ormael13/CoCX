@@ -425,10 +425,19 @@ import classes.internals.Utils;
 				else addButton(7, "Scatter Laser v1", buyHowlingBansheeMechUpgrade, "Scatter Laser v1", 1500).hint("Add Scatter Laser weapon - Allow to enter use special dealing lightning damage.");
 				//8
 				//9 - for prev button?
-				if (player.hasKeyItem("HB Stealth System") >= 0) addButtonDisabled(10, "Camouflage Mode", "Your HB Mech already have this upgrade.");/*{
-					if (player.keyItemv1("HB Stealth System") == 1) addButtonDisabled(10, "Invisibility Mode", "Your HB Mech already have this upgrade.");
-					else addButton(10, "Invisibility Mode", buyHowlingBansheeMechUpgrade, "Invisibility Mode", 5000).hint("Upgrades Camouflage Mode to Invisibility Mode. ");
-				}*/
+				if (player.hasKeyItem("HB Stealth System") >= 0) {
+					if (player.keyItemv1("HB Stealth System") >= 1) {
+						if (player.keyItemv1("HB Stealth System") == 1) {
+							if (player.hasKeyItem("HB Internal Systems") >= 1) addButton(10, "Invisibility Mode v2", buyHowlingBansheeMechUpgrade, "Invisibility Mode v2", 10000).hint("Upgrades Invisibility Mode from v1 to v2. Decrease cost of activating and sustaining this mobe by 20%.");
+							else addButtonDisabled(10, "Invisibility Mode v2", "Your need to have installed Internal Systems v2 or better to unlock this upgrade.");
+						}
+						if (player.keyItemv1("HB Stealth System") == 2) addButtonDisabled(10, "Invisibility Mode v2", "Your HB Mech already have this upgrade.");
+					}
+					else {
+						if (player.hasKeyItem("HB Internal Systems") >= 0) addButton(10, "Invisibility Mode v1", buyHowlingBansheeMechUpgrade, "Invisibility Mode v1", 5000).hint("Upgrades Camouflage Mode to Invisibility Mode. Allow to stay camouflaged without time limit. Sustaining this mode cost 100 SF per turn.");
+						else addButtonDisabled(10, "Invisibility Mode v1", "Your need to have installed Internal Systems v1 or better to unlock this upgrade.");
+					}
+				}
 				else addButton(10, "Camouflage Mode", buyHowlingBansheeMechUpgrade, "Camouflage Mode", 2000).hint("Enable Camouflage Mode - Allow to enter 1 turn long camouflage opening option to use Sneak Attack (melee & range) specials.");
 				//11
 				//12
@@ -491,8 +500,8 @@ import classes.internals.Utils;
 			if (upgrade == "Scatter Laser v2") player.addKeyValue("HB Scatter Laser",1,1);
 			if (upgrade == "Scatter Laser v3") player.addKeyValue("HB Scatter Laser",1,1);
 			if (upgrade == "Camouflage Mode") player.createKeyItem("HB Stealth System",0,0,0,0);
-			//if (upgrade == "Invisibility Mode") player.addKeyValue("HB Stealth System",1,1);wymaga internal systems v1
-			//if (upgrade == "") ;
+			if (upgrade == "Invisibility Mode v1") player.addKeyValue("HB Stealth System",1,1);
+			if (upgrade == "Invisibility Mode v2") player.addKeyValue("HB Stealth System",1,1);
 			//if (upgrade == "") ;
 			//if (upgrade == "") ;
 			//if (upgrade == "") ;

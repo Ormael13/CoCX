@@ -6416,7 +6416,24 @@ public class Combat extends BaseContent {
                     CombatAbilities.LightningBolt.perform();
                 }
                 if (flags[kFLAGS.ELEMENTAL_MELEE] == 4 && CombatAbilities.DarknessShard.isUsable) {
+                    outputText("\n\n");
                     CombatAbilities.DarknessShard.perform();
+                }
+                if (flags[kFLAGS.ELEMENTAL_MELEE] == 5 && CombatAbilities.WaterBall.isUsable) {
+                    outputText("\n\n");
+                    CombatAbilities.WaterBall.perform();
+                }
+                if (flags[kFLAGS.ELEMENTAL_MELEE] == 6 && CombatAbilities.WindBullet.isUsable) {
+                    outputText("\n\n");
+                    CombatAbilities.WindBullet.perform();
+                }
+                if (flags[kFLAGS.ELEMENTAL_MELEE] == 7 && CombatAbilities.Stalagmite.isUsable) {
+                    outputText("\n\n");
+                    CombatAbilities.Stalagmite.perform();
+                }
+                if (flags[kFLAGS.ELEMENTAL_MELEE] == 8 && CombatAbilities.AcidSpray.isUsable) {
+                    outputText("\n\n");
+                    CombatAbilities.AcidSpray.perform();
                 }
             }
             if (player.hasPerk(PerkLib.LifeLeech) && player.isFistOrFistWeapon()) {
@@ -15222,6 +15239,14 @@ public class Combat extends BaseContent {
 		player.statStore.removeBuffs("NoLimiterState");
 		menu();
 		addButton(0, "Next", combatMenu, false);
+	}
+	
+	public function StealthModeMechCost():Number {
+		var SMMC:Number = 100;
+		if (player.keyItemv1("HB Stealth System") >= 2) SMMC -= 20;
+		//if (player.keyItemv1("HB Stealth System") >= 3) SMMC -= 20;
+		//SMMC -= 10;
+		return SMMC;
 	}
 
 	public function fireDamageBoostedByDao():Number {
