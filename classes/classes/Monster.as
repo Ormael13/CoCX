@@ -437,6 +437,7 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.GreyMage)) temp += 40;
 			if (hasPerk(PerkLib.GreyArchmage)) temp += 80;
 			if (hasPerk(PerkLib.GrandGreyArchmage)) temp += 160;
+			if (hasPerk(PerkLib.GrandGreyArchmage2ndCircle)) temp += 320;
 			if (hasPerk(PerkLib.InhumanDesireI)) temp += Math.round(this.lib * 3 * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.JobCourtesan)) temp += 60;
 			if (hasPerk(PerkLib.JobSeducer)) temp += 30;
@@ -711,6 +712,7 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.GrandArchmage2ndCircle) && inte >= 150) temp += 270;
 			if (hasPerk(PerkLib.GrandArchmage3rdCircle) && inte >= 175) temp += 315;
 			if (hasPerk(PerkLib.GrandGreyArchmage) && inte >= 225) temp += 600;
+			if (hasPerk(PerkLib.GrandGreyArchmage2ndCircle) && inte >= 275) temp += 900;
 			if (hasPerk(PerkLib.GrandMage) && inte >= 75) temp += 135;
 			if (hasPerk(PerkLib.GreyArchmage) && inte >= 175) temp += 450;
 			if (hasPerk(PerkLib.GreyMage) && inte >= 125) temp += 300;
@@ -719,6 +721,7 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.Spellpower) && inte >= 50) temp += 45;
 			if (hasPerk(PerkLib.JobSorcerer)) temp += 45;
 			if (hasPerk(PerkLib.JobHealer)) temp += 90;
+			if (hasPerk(PerkLib.SpellpowerGrey) && inte >= 50) temp += 75;
 			if (hasPerk(PerkLib.SpellpowerHealing) && wis >= 50) temp += 90;
 			if (hasPerk(PerkLib.EromancyBeginner)) temp += Math.round(this.inte * 3);
 			if (hasPerk(PerkLib.EromancyExpert)) temp += Math.round(this.inte * 3);
@@ -2600,6 +2603,7 @@ import flash.utils.getQualifiedClassName;
 				if (hasPerk(PerkLib.GreyMage)) manaRecoveryMulti += 0.5;
 				if (hasPerk(PerkLib.GreyArchmage)) manaRecoveryMulti += 0.75;
 				if (hasPerk(PerkLib.GrandGreyArchmage)) manaRecoveryMulti += 1;
+				if (hasPerk(PerkLib.GrandGreyArchmage2ndCircle)) manaRecoveryMulti += 1.5;
 				if (hasPerk(PerkLib.ManaAffinityI)) manaRecoveryMulti += (0.2 * (1 + newGamePlusMod()));
 				manaRecovery *= manaRecoveryMulti;
 				addMana(manaRecovery);
@@ -3539,4 +3543,4 @@ import flash.utils.getQualifiedClassName;
 			}
 		}
 	}
-}
+}

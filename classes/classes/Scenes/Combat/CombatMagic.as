@@ -218,6 +218,26 @@ public class CombatMagic extends BaseCombatContent {
 		return mod;
 	}
 
+    internal function costChange_grey():Number {
+		var costPercent:Number = 0;
+		if (player.hasPerk(PerkLib.GrandGreyArchmage2ndCircle)) costPercent -= 20;
+		if (player.weapon == weapons.ASCENSU) costPercent -= 15;
+        return costPercent;
+    }
+
+	internal function spellCostGreyImpl(mod:Number):Number {
+		var costPercent:Number = 100 + costChange_all() + costChange_spell() + costChange_grey();
+		//Addiditive mods
+		if (spellModGrey() > 1) costPercent += Math.round(spellModGrey() - 1) * 10;
+		//Limiting it and multiplicative mods
+		if (player.hasPerk(PerkLib.BloodMage) && costPercent < 50) costPercent = 50;
+		mod *= costPercent / 100;
+		if (player.hasPerk(PerkLib.BloodMage) && mod < 5) mod = 5;
+		else if (mod < 2) mod = 2;
+		mod = Math.round(mod * 100) / 100;
+		return mod;
+	}
+
     internal function modChange_all():Number {
 		var mod:Number = 0;
 		if (player.hasPerk(PerkLib.WizardsFocus)) {
@@ -410,10 +430,12 @@ public class CombatMagic extends BaseCombatContent {
 	
 	public function spellModGrey():Number {
 		var mod:Number = 1;
+		if (player.hasPerk(PerkLib.SpellpowerGrey) && player.inte >= 50) mod += .15;
 		if (player.hasPerk(PerkLib.GreyMageApprentice) && player.inte >= 75) mod += .1;
 		if (player.hasPerk(PerkLib.GreyMage) && player.inte >= 125) mod += .2;
 		if (player.hasPerk(PerkLib.GreyArchmage) && player.inte >= 175) mod += .3;
 		if (player.hasPerk(PerkLib.GrandGreyArchmage) && player.inte >= 225) mod += .4;
+		if (player.hasPerk(PerkLib.GrandGreyArchmage2ndCircle) && player.inte >= 275) mod += .5;
 		return mod;
 	}
 

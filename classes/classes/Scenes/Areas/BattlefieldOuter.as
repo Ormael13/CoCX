@@ -49,17 +49,15 @@ use namespace CoC;
 				return;
 			}
 			//Tyrania
-			if (rand(5) == 0 && (player.level >= 45)) {
-				SceneLib.tyrania.firstEncounter();
-				return;
-			}
-			if (rand(5) == 0 && TyrantiaFollower.TyrantiaFollowerStage == 1) {
+			if (rand(5) == 0 && player.level >= 45 && TyrantiaFollower.TyrantiaFollowerStage < 4 && !TyrantiaFollower.TyraniaIsRemovedFromThewGame) {
 				if (TyrantiaFollower.TyraniaPostFinalKissScene) SceneLib.tyrania.encounterBattlefieldAfterFinalKiss();
-				else SceneLib.tyrania.repeatEncounterBattlefield();
+				else if (TyrantiaFollower.TyrantiaAffectionMeter > 40) SceneLib.tyrania.encounterBattlefieldAfter40Affection();
+				else if (TyrantiaFollower.TyrantiaFollowerStage > 0) SceneLib.tyrania.repeatEncounterBattlefield();
+				else SceneLib.tyrania.firstEncounter();
 				return;
 			}
 			//Ted
-			if (SceneLib.tedScene.tedAvailablePostCave() && player.statusEffectv1(StatusEffects.CampSparingNpcsTimers4) < 1 && rand(10) == 0) {
+			if (flags[kFLAGS.TED_LVL_UP] >= 1 && flags[kFLAGS.TED_LVL_UP] < 2 && !player.hasStatusEffect(StatusEffects.TedOff) && player.statusEffectv1(StatusEffects.CampSparingNpcsTimers4) < 1 && rand(10) == 0) {
 				SceneLib.tedScene.introPostHiddenCave();
 				return;
 			}

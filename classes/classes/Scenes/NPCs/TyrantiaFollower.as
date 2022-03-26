@@ -66,11 +66,7 @@ import classes.internals.SaveableState;
 
 public function tyraniaAffection(changes:Number = 0):Number {
 	TyrantiaAffectionMeter += changes;
-	if (TyrantiaAffectionMeter > 40) {
-		if (TyrantiaFollowerStage > 1 && TyrantiaAffectionMeter > 100) TyrantiaAffectionMeter = 100;
-		else if (TyraniaPostFinalKissScene > 0 && TyrantiaAffectionMeter > 60) TyrantiaAffectionMeter = 60;
-		else TyrantiaAffectionMeter = 40;
-	}
+	if (TyrantiaAffectionMeter > 40) TyrantiaAffectionMeter = 40;//if (TyrantiaAffectionMeter > 100) TyrantiaAffectionMeter = 100;
 	else if (TyrantiaAffectionMeter < 0) TyrantiaAffectionMeter = 0;
 	return TyrantiaAffectionMeter;
 }
@@ -440,6 +436,46 @@ public function repeatEncounterBattlefieldSex():void {
 	//}
 }
 
+public function encounterBattlefieldAfter40Affection():void {
+	clearOutput();
+	outputText("You walk to the battlefield, heart heavy. It’s been a while, but the battlefield is even more quiet than usual, clouds hanging low in the sky. You sit down inside one of the ruined slabs of odd stone, taking a break from your walk, when you hear footsteps. A lot of footsteps. You instinctively hide under one of the slabs of ruined stone.\n\n");
+	outputText("<i>“Company...HALT!”</i> You peek your head out and see two demons, an Incubus in a lab coat and a Succubus in revealing armor, leading a platoon of similarly clad demons. <i>“Alright, what’s the sitch, bitch?”</i> He asks into an odd square device he pulls from his belt. A female, high pitched voice speaks from the boxy thing. <i>“We found her, sir. Project Screwed Earth is not only alive, but she’s the one who’s been tearing apart our summoners here”</i>.\n\n");
+	outputText("<i>“That Bitch. How big is she now?”</i> He grins at the news, however, a sickly satisfied smirk.\n\n");
+	outputText("<i>“At least Fourteen feet. Tall.”</i> The voice from the other end is a mix between scared, impressed and lustful. The commander of the demons grins. <i>“So...It worked. Hah! Lethice will be pleased.”</i> Lethice?! Now you HAVE to know what’s going on, even if it wasn’t about who you think it is. But...Project Screwed Earth? What did those demons DO to her? The demons move out, and you stealthily follow them. Apparently, these are not the first demons to come after her today. You hear roars of anger, the clash of steel, and the moans of the debilitatingly aroused. You peer owlishly at the battleground, and what you see isn’t surprising, but it still takes you aback.\n\n");
+	outputText("Over three dozen demons lie dead, in various states of dismemberment. Another two-dozen form a circle around their target, black magics on their fingertips. Even more roll around on the ground, masturbating feverishly as they can’t hold on.\n\n");
+	outputText("Lust spills from the giant being in the center, in sickening black waves. A dick-shaped spear clutched in both hands, Tyrantia, her helmet gone, her scarred face splattered with blood, pants heavily. Thin trails of moisture drip from the armor-flap on her front, and her violet eyes are partly closed.\n\n");
+	outputText("<i>“I must say, I’m impressed”</i>. The scientist walks slowly towards the ring. <i>“You’ve come a long way since the project’s start”</i>. He smiles. <i>“That aura, that corruption..and that strength. Truly a work of art!”</i>\n\n");
+	outputText("<i>“Pr-project?”</i> Tyrantia’s eyes focus on the demon. <i>“N-no...Not you. Anyone but…”</i>\n\n");
+	outputText("The demon commander grins lecherously, spreading his labcoat’s front and revealing what looks like a cross between a throbbing demon erection and a tail. He swings it like another limb, spreading pre-cum around him. <i>“So, you remember me? Not surprising. You and I had such fun together, remember?”</i>\n\n");
+	outputText("<i>“No. You...You hurt me. You…”</i> Your Drider giantess is backing up, fear on her face.\n\n");
+	outputText("<i>“And here I remember you asking for it...Begging for it. Do you still want it, Tyrantia?”</i> He pulls his pants down. Tyrantia licks her lips, the flap covering her pussy quivering, but snaps out of it.\n\n");
+	outputText("<i>“No! I broke free! Get away from me!”</i> Tyrantia backs up, her hands shaking.\n\n");
+	outputText("The demon scientist laughs at that. <i>“Oh, my dear, you think you broke free? Then why did you never stray far from the battleground? You think you were ever out of our grasp?”</i> The demon scientist smiles. We let you free, to see what you’d do. You performed exactly as we expected. You killed some schmucks, corrupted the landscape around you...And you even made some of Mareth’s pure-hearted champions feel sorry for you. Were they enough to satisfy that thirst we gave you? Even close?”</i>\n\n");
+	outputText("The fire in your Drider friend’s eyes begins to die down. Her legs shake, and she looks down at the ground. Between the lust magic covering her, the cuts and bruises, she looks about to give up. Her arousal leaks down the sides of her frontmost legs in a near-constant stream.\n\n");
+	outputText("<i>“That’s it, my pet. Return to your rightful place. You’ll get the reward you want, too”</i>.\n\n");
+	menu();
+	addButton(1, "StayHidden", TyrantiaLetDieYouMonster);
+	addButton(3, "JumpIn", TyrantiaSaveFight);
+}
+
+public function TyrantiaLetDieYouMonster():void {
+	clearOutput();
+	outputText("You watch as the fiery light that was always in your Drider companion’s eyes leave them for good. The commander demon’s dick expands, moving like a third arm as it flicks aside the hatch covering her spider-pussy. He begins pistoning in and out, and as Tyrantia silently orgasms, her legs folding, a blackened piece of lethicite, nearly as large as one of her boobs, comes out with it. The commander demon sighs happily, taking it and swallowing the crystal. The demons walk away, leaving Tyrantia’s body lying there on the battleground. As you watch, her body turns jet-black, then begins to dissolve, fading into powder, blowing away in the breeze.\n\n"); 
+	TyraniaIsRemovedFromThewGame = true;
+	doNext(camp.returnToCampUseOneHour);
+}
+
+public function TyrantiaSaveFight():void {
+	clearOutput();
+	outputText("With a roar of rage, you jump from hiding, bowling through the shocked demons. The commander turns, too late, as you draw your [weapon], striking him hard enough to snap his neck with a single blow. Shocked, the demons take a step back as their commanding officer falls, dead. You turn, putting your back to Tyrantia.\n\n");
+	outputText("<i>“[name], what are you doing here?!”</i> She snaps back, alert once more. <i>“Leave me. I’m not worth your life. You...You heard what they said?”</i> You call her an idiot. You tell her that your life is yours to live, and yours to spend. You remind her that she has her mission as well, to find her sisters, and that she can’t do that from the end of a demon’s dick. She looks at you, five eyes focusing, and she grits her teeth in raw anger, her armour visibly rippling as she looks down at her fists.\n\n"); 
+	outputText("<i>“Argh!”</i> She punches the ground, sending tremors through it. Nearby demons lose their footing, but she punches again, cracking the stone of the battlefield and sending stone shards flying. Her cunt drools faster, and the black energy emitting from her stops, reversing its course and covering her body. <i>“Stupid!”</i> The earth shakes again as she slams her fist through a stone the size of your head. <i>“Weak-willed!”</i> She stands, shattering the stone by flexing her wrist. <i>“I’ve...Had...ENOUGH!”</i> Her roars of rage echo throughout the battlefield, and as you watch, in utter awe, her helmet flies from the ground, planting itself back on her head.\n\n"); 
+	outputText("The aura that had once flowed from her, in pulsing waves, now clings tight to her body. Her violet eyes shine brighter, and her black armor pulses with brown light. Tyrantia motions with one hand, and the stones on the battleground form into more spears, complete with the crude phalluses on the tips. <i>“YOU WANNA GET FUCKED?!”</i> She roars, her new, odd aura flaring, the spears rotating, aiming at the demon horde. <i>“LETS FUCKING GO!”</i>\n\n"); 
+	outputText("You notice that there are still a hundred or so demons left, but the one-woman army at your back looks like she could take on the whole damn horde...Something you find surprisingly arousing. You smile at the incoming demons, letting out your own, much quieter, less dramatic war cry, and you charge the demon horde together.\n\n"); 
+	TyrantiaFollowerStage = 2;
+	//Demon Horde - with Enemy300 perk + set Tyrtsantia as henchman on slot 0
+}
+
 public function encounterBattlefieldAfterFinalKiss():void {
 	clearOutput();
 	outputText("\"<i></i>\"\n\n");
@@ -502,48 +538,6 @@ if (rand(2) == 0) {
   b TyrantiaFollower.TyrantiaKids += 4;	
 	}
 }
-
-public function encounterBattlefieldAfterFinalKiss():void {
-	clearOutput();
-	outputText("\"You walk to the battlefield, heart heavy. It’s been a while, but the battlefield is even more quiet than usual, clouds hanging low in the sky. You sit down inside one of the ruined slabs of odd stone, taking a break from your walk, when you hear footsteps. A lot of footsteps. You instinctively hide under one of the slabs of ruined stone.   \"\n\n");
-	outputText("\"<i>“Company...HALT!”</i> You peek your head out and see two demons, an Incubus in a lab coat and a Succubus in revealing armor, leading a platoon of similarly clad demons. <i>“Alright, what’s the sitch, bitch?”</i> He asks into an odd square device he pulls from his belt. A female, high pitched voice speaks from the boxy thing. <i>“We found her, sir. Project Screwed Earth is not only alive, but she’s the one who’s been tearing apart our summoners here”</i>.   \"\n\n");
-	outputText("\"<i>“That Bitch. How big is she now?”</i> He grins at the news, however, a sickly satisfied smirk.   \"\n\n");
-	outputText("\"<i>“At least Fourteen feet. Tall.”</i> The voice from the other end is a mix between scared, impressed and lustful. The commander of the demons grins. <i>“So...It worked. Hah! Lethice will be pleased.”</i> Lethice?! Now you HAVE to know what’s going on, even if it wasn’t about who you think it is. But...Project Screwed Earth? What did those demons DO to her? The demons move out, and you stealthily follow them. Apparently, these are not the first demons to come after her today. You hear roars of anger, the clash of steel, and the moans of the debilitatingly aroused. You peer owlishly at the battleground, and what you see isn’t surprising, but it still takes you aback.   \"\n\n");
-	outputText("\" Over three dozen demons lie dead, in various states of dismemberment. Another two-dozen form a circle around their target, black magics on their fingertips. Even more roll around on the ground, masturbating feverishly as they can’t hold on.  \"\n\n");
-	outputText("\"Lust spills from the giant being in the center, in sickening black waves. A dick-shaped spear clutched in both hands, Tyrantia, her helmet gone, her scarred face splattered with blood, pants heavily. Thin trails of moisture drip from the armor-flap on her front, and her violet eyes are partly closed.   \"\n\n");
-	outputText("\"<i>“I must say, I’m impressed”</i>. The scientist walks slowly towards the ring. <i>“You’ve come a long way since the project’s start”</i>. He smiles. <i>“That aura, that corruption..and that strength. Truly a work of art!”</i>  \"\n\n");
-	outputText("\" <i>“Pr-project?”</i> Tyrantia’s eyes focus on the demon. <i>“N-no...Not you. Anyone but…”</i>  \"\n\n");
-	outputText("\"The demon commander grins lecherously, spreading his labcoat’s front and revealing what looks like a cross between a throbbing demon erection and a tail. He swings it like another limb, spreading pre-cum around him. <i>“So, you remember me? Not surprising. You and I had such fun together, remember?”</i>   \"\n\n");
-	outputText("\"<i>“No. You...You hurt me. You…”</i> Your Drider giantess is backing up, fear on her face.  \"\n\n");
-	outputText("\" <i>“And here I remember you asking for it...Begging for it. Do you still want it, Tyrantia?”</i> He pulls his pants down. Tyrantia licks her lips, the flap covering her pussy quivering, but snaps out of it. \"\n\n");
-	outputText("\" <i>“No! I broke free! Get away from me!”</i> Tyrantia backs up, her hands shaking. \"\n\n");
-	outputText("\" The demon scientist laughs at that. <i>“Oh, my dear, you think you broke free? Then why did you never stray far from the battleground? You think you were ever out of our grasp?”</i> The demon scientist smiles. We let you free, to see what you’d do. You performed exactly as we expected. You killed some schmucks, corrupted the landscape around you...And you even made some of Mareth’s pure-hearted champions feel sorry for you. Were they enough to satisfy that thirst we gave you? Even close?”</i>  \"\n\n");
-	outputText("\" The fire in your Drider friend’s eyes begins to die down. Her legs shake, and she looks down at the ground. Between the lust magic covering her, the cuts and bruises, she looks about to give up. Her arousal leaks down the sides of her frontmost legs in a near-constant stream.  \"\n\n");
-	outputText("\" <i>“That’s it, my pet. Return to your rightful place. You’ll get the reward you want, too”</i>.  \"\n\n");
-	outputText("\"  \"\n\n");
-	outputText("\"  \"\n\n");
-	menu();
-addButton(1, "JumpIn", TyrantiaSaveFight);
-addButton(2, "StayHidden", TyrantiaLetDieYouMonster);
-}
-
-public function TyrantiaSaveFight():void {
-		clearOutput();
-		outputText("With a roar of rage, you jump from hiding, bowling through the shocked demons. The commander turns, too late, as you draw your [weapon], striking him hard enough to snap his neck with a single blow. Shocked, the demons take a step back as their commanding officer falls, dead. You turn, putting your back to Tyrantia.  \n\n");
-		outputText("<i>“[name], what are you doing here?!”</i> She snaps back, alert once more. <i>“Leave me. I’m not worth your life. You...You heard what they said?”</i> You call her an idiot. You tell her that your life is yours to live, and yours to spend. You remind her that she has her mission as well, to find her sisters, and that she can’t do that from the end of a demon’s dick. She looks at you, five eyes focusing, and she grits her teeth in raw anger, her armour visibly rippling as she looks down at her fists. \n\n"); 
-		outputText("<i>“Argh!”</i> She punches the ground, sending tremors through it. Nearby demons lose their footing, but she punches again, cracking the stone of the battlefield and sending stone shards flying. Her cunt drools faster, and the black energy emitting from her stops, reversing its course and covering her body. <i>“Stupid!”</i> The earth shakes again as she slams her fist through a stone the size of your head. <i>“Weak-willed!”</i> She stands, shattering the stone by flexing her wrist. <i>“I’ve...Had...ENOUGH!”</i> Her roars of rage echo throughout the battlefield, and as you watch, in utter awe, her helmet flies from the ground, planting itself back on her head.  \n\n"); 
-		outputText("The aura that had once flowed from her, in pulsing waves, now clings tight to her body. Her violet eyes shine brighter, and her black armor pulses with brown light. Tyrantia motions with one hand, and the stones on the battleground form into more spears, complete with the crude phalluses on the tips. <i>“YOU WANNA GET FUCKED?!”</i> She roars, her new, odd aura flaring, the spears rotating, aiming at the demon horde. <i>“LETS FUCKING GO!”</i>  \n\n"); 
-		outputText("You notice that there are still a hundred or so demons left, but the one-woman army at your back looks like she could take on the whole damn horde...Something you find surprisingly arousing. You smile at the incoming demons, letting out your own, much quieter, less dramatic war cry, and you charge the demon horde together.  \n\n"); 
-//Tyrantia Save Fight here
-}
-
-public function TyrantiaLetDieYouMonster():void {
-	clearOutput();
-	outputText("You watch as the fiery light that was always in your Drider companion’s eyes leave them for good. The commander demon’s dick expands, moving like a third arm as it flicks aside the hatch covering her spider-pussy. He begins pistoning in and out, and as Tyrantia silently orgasms, her legs folding, a blackened piece of lethicite, nearly as large as one of her boobs, comes out with it. The commander demon sighs happily, taking it and swallowing the crystal. The demons walk away, leaving Tyrantia’s body lying there on the battleground. As you watch, her body turns jet-black, then begins to dissolve, fading into powder, blowing away in the breeze. \n\n"); 
-	TyraniaIsRemovedFromThewGame = true;
-	doNext(camp.returnToCampUseOneHour);
-}
-
 
 public function TyrantiaAfterMainFight():void {
 		clearOutput();

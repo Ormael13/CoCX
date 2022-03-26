@@ -1250,7 +1250,7 @@ use namespace CoC;
 		//Player have any party member with them
 		public function companionsInPCParty():Boolean
 		{
-			return flags[kFLAGS.PLAYER_COMPANION_1] != "" || flags[kFLAGS.PLAYER_COMPANION_2] != "" || flags[kFLAGS.PLAYER_COMPANION_3] != "";
+			return flags[kFLAGS.PLAYER_COMPANION_0] != "" || flags[kFLAGS.PLAYER_COMPANION_1] != "" || flags[kFLAGS.PLAYER_COMPANION_2] != "" || flags[kFLAGS.PLAYER_COMPANION_3] != "";
 		}
 		//PC can fly without natural wings
 		public function canFlyNoWings():Boolean
@@ -2332,8 +2332,9 @@ use namespace CoC;
 		}
 		public function manaShieldAbsorb(damage:Number, display:Boolean = false, magic:Boolean = false):Number{
 			var magicmult:Number = 1;
+			if (hasPerk(PerkLib.ImprovedManaShield)) magicmult *= 0.25;
 			// if magical damage, double efficiency
-			if (magic == true) magicmult *= 0.5;
+			if (magic == true) magicmult *= 0.2;
 			// defensive staff channeling
 			if (hasPerk(PerkLib.DefensiveStaffChanneling) && (isStaffTypeWeapon() || isPartiallyStaffTypeWeapon())) magicmult *= 0.5;
 			if (damage * magicmult <= mana) {
@@ -2406,8 +2407,11 @@ use namespace CoC;
 			if (damage>0){
 				if (henchmanBasedInvulnerabilityFrame()) henchmanBasedInvulnerabilityFrameTexts();
 				else if (hasStatusEffect(StatusEffects.ManaShield)) {
-					/*if (damagetype == 0) */damage = manaShieldAbsorb(damage, display);
-					//else damage = manaShieldAbsorbMagic(damage, display);
+					if (hasPerk(PerkLib.ArcaneShielding)) {
+						if (damagetype < 4) damage = manaShieldAbsorb(damage, display);
+						else damage = manaShieldAbsorbMagic(damage, display);
+					}
+					else damage = manaShieldAbsorb(damage, display);
 				}
 				else if (damage > 0 && hasStatusEffect(StatusEffects.BloodShield)) {
 					damage = bloodShieldAbsorb(damage, display);
@@ -3462,6 +3466,7 @@ use namespace CoC;
 				{name: 'scylla', score: scyllaScore(), minscore: 4},
 				{name: 'sea dragon', score: leviathanScore(), minscore: 20},
 				{name: 'shark', score: sharkScore(), minscore: 4},
+				{name: 'siren', score: sirenScore(), minscore: 10},
 				{name: 'sphinx', score: sphinxScore(), minscore: 14},
 				{name: 'spider', score: spiderScore(), minscore: 4},
 				{name: 'thunderbird', score: thunderbirdScore(), minscore: 12},

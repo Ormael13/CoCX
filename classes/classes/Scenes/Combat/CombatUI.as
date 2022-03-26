@@ -513,6 +513,12 @@ public class CombatUI extends BaseCombatContent {
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsPoison)) addButton(11, "Poison", combat.baseelementalattacks, Combat.POISON);
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsPurity)) addButton(12, "Purity", combat.baseelementalattacks, Combat.PURITY);
 			if (player.hasStatusEffect(StatusEffects.SummonedElementalsCorruption)) addButton(13, "Corruption", combat.baseelementalattacks, Combat.CORRUPTION);
+		} else if (flags[kFLAGS.PLAYER_COMPANION_0] != "" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_0_ACTION] != 1) {
+			clearOutput();
+			if (flags[kFLAGS.PLAYER_COMPANION_0] == "Tyrantia") {
+				combat.comfoll.tyrantiaCombatActions();
+				if (player.hasPerk(PerkLib.MotivationSu)) combat.comfoll.tyrantiaCombatActions();
+			}
 		} else if (flags[kFLAGS.PLAYER_COMPANION_1] != "" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1 && !player.hasStatusEffect(StatusEffects.MinoKing)) {
 			clearOutput();
 			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Alvina") {

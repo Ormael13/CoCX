@@ -351,6 +351,10 @@ public class Combat extends BaseContent {
         return magic.spellCostBlackImpl(mod);
     }
 
+    public function spellCostGrey(mod:Number):Number {
+        return magic.spellCostGreyImpl(mod);
+    }
+
     public function spellCostBlood(mod:Number):Number {
         return magic.spellCostBloodImpl(mod);
     }
@@ -948,6 +952,7 @@ public class Combat extends BaseContent {
         isBowDamageMDO = false;
         flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] = 0;
         if (newRound) {
+            flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_0_ACTION] = 0;
             flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] = 0;
             flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] = 0;
             flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] = 0;
@@ -8657,9 +8662,9 @@ public class Combat extends BaseContent {
 
     public static const USEMANA_NORMAL:int = 0;
     public static const USEMANA_MAGIC:int = 1;
-    //public static const USEMANA_PHYSICAL:int = 2;
+    public static const USEMANA_GREY:int = 2;
     public static const USEMANA_MAGIC_NOBM:int = 3;
-    //public static const USEMANA_BOW:int = 4;
+    public static const USEMANA_GREY_NOBM:int = 4;
     public static const USEMANA_WHITE:int = 5;
     public static const USEMANA_BLACK:int = 6;
     public static const USEMANA_WHITE_NOBM:int = 7;
@@ -8676,6 +8681,10 @@ public class Combat extends BaseContent {
             case USEMANA_MAGIC_NOBM:
                 mod = spellCost(mod);
                 break;
+			case USEMANA_GREY:
+			case USEMANA_GREY_NOBM:
+				mod = spellCostGrey(mod);
+				break;
             case USEMANA_WHITE:
             case USEMANA_WHITE_NOBM:
                 mod = spellCostWhite(mod);
@@ -8731,6 +8740,7 @@ public class Combat extends BaseContent {
 		if (player.hasPerk(PerkLib.GreyMage)) multi += 0.5;
         if (player.hasPerk(PerkLib.GreyArchmage)) multi += 0.75;
 		if (player.hasPerk(PerkLib.GrandGreyArchmage)) multi += 1;
+		if (player.hasPerk(PerkLib.GrandGreyArchmage2ndCircle)) multi += 1.5;
         if (player.hasPerk(PerkLib.ManaAffinityI)) multi += 0.25;
         if (player.hasPerk(PerkLib.ManaAffinityII)) multi += 0.25;
         if (player.hasPerk(PerkLib.ManaAffinityIII)) multi += 0.25;
@@ -14459,6 +14469,7 @@ public class Combat extends BaseContent {
     }
 	public function onlyZenjiRunnawayTrain():Boolean {
 		var partySize:Number = 1;
+		if (flags[kFLAGS.PLAYER_COMPANION_0] != "") partySize += 1;
 		if (flags[kFLAGS.PLAYER_COMPANION_1] != "") partySize += 1;
 		if (flags[kFLAGS.PLAYER_COMPANION_2] != "") partySize += 1;
 		if (flags[kFLAGS.PLAYER_COMPANION_3] != "") partySize += 1;
