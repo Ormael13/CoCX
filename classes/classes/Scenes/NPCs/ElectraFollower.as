@@ -418,7 +418,7 @@ public function ElectraSeXYesM():void {
 	outputText("’s lightning. The voltage is flowing out of her pussy straight to your dick! You moan as the current sets every one of your pleasure nerves into overdrive, causing you to reach orgasm almost instantly if not several times over and pump the raiju with your cum. The girl seems lost in the sensations of her pussy, tongue out and eyes rolling, as she gushes around your twitching cock. ");
 	outputText("This rapid fire set of orgasms lasts for a fair minute before the both of you fall on each other and lose consciousness.\n\nYou wake up with the raiju next to you. The ground is still a massive pool of cum but for some reason you feel satisfied.\n\n");
 	outputText("\"<i>Good morning, I was wondering when you would wake up. I must thank you, you helped me release all the stockpiled energy I had.</i>\"");
-	outputText("She slowly slides off your cock with a satisfied smile. ");
+	outputText(" She slowly slides off your cock with a satisfied smile. ");
 	if (flags[kFLAGS.ELECTRA_FOLLOWER] < 2) {
 		outputText("Where's the crazy girl from before?\n\n");
 		outputText("\"<i>I have to go but here, take this jewel and these gems for your trouble. I hope we see each other again.</i>\"");

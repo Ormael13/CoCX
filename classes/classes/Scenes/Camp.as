@@ -6663,7 +6663,7 @@ public function rebirthFromBadEnd():void {
     public function recallScenes():void {
         clearOutput();
         outputText("You close your eyes, remembering all this life put you through. All your fights, friends... lovers.\n\n");
-        outputText("Though many things are still easily reachable, you still remember some unique events of your life, and one question bothers you - what would happen if at the specific moment you were different? How would you and your companions look and behave right now?\n");
+        outputText("Though many things are still repeatable, you still remember some unique events of your life, and one question bothers you - what would happen if you were different at the moment? How would you and your companions look and behave right now?\n");
 		outputText("Falling asleep, you think about it, recalling the exact time and place...\n\n");
 		outputText("<i>I ask thee, eternal time...</i>\n");
 		outputText("\n\nThis part is WIP. You can add more scenes.");

@@ -2069,6 +2069,8 @@ public function interactWithMarbleAtCamp():void {
 	addButton(6, "Playtime", playtime);
 	addButton(7, "Break Up", breakUpWithMarble);
 	addButton(8, goEventString, marbleGoEvent);
+	if(flags[kFLAGS.SLEEP_WITH] != "Marble") addButton(9,"Sleep With",marbleSleepToggle);
+	else addButton(9,"Sleep Alone",marbleSleepToggle);
 	addButton(14, "Back", camp.campLoversMenu);
 }
 
@@ -2085,8 +2087,6 @@ private function marbleTalkOverhaul():void {
 	if (player.cor < 50 && player.statusEffectv4(StatusEffects.Marble) < 60) addButton(1, "Just Talk", talkWithMarbleAtCamp);
 	//if (player.level >= 10) addButton(3, "Her Hammer", hammerQuest); //Start hammer quest
 	addButton(14,"Back",interactWithMarbleAtCamp);
-	if(flags[kFLAGS.SLEEP_WITH] != "Marble") addButton(4,"Sleep With",marbleSleepToggle);
-	else addButton(4,"Sleep Alone",marbleSleepToggle);
 }
 
 private function marbleSleepToggle():void {
@@ -3671,7 +3671,7 @@ private function marbleNomNoms():void {
 		//no, you keep your head, for now
 		else {
 			outputText("The animalistic smell makes it a bit hard to think, but you manage to hold your thoughts together.  You steady yourself and lower your head, sticking out your tongue to lick the tip.  Marble moans approvingly and gently pushes on the back of your head, trying to push you down further.  You don't resist and open your mouth wide to take her swollen " + marbleCock() + " inside.\n\n");
-			outputText("\"<i>Oh sweetie, please keep going, this feels so good!</i>\"  It takes a moment for you to register that it was Marble that was just talking to you.  The taste of her " + marbleCock() + " in your mouth has an effect similar to her smell, and it takes more than a bit of concentration to keep your focus.  Despite this, you manage to start pumping her with your mouth, bringing out some very excited noises from above you.  It doesn't take long for Marble to be overwhelmed by the sensations, and she lets out her load of semen into your mouth.  You turn to the side and spit out the semen as Marble takes a moment to steady herself and take a few breaths.  ");
+			outputText("\"<i>Oh sweetie, please keep going, this feels so good!</i>\"  It takes a moment for you to register that it was Marble that was just talking to you.  The taste of her " + marbleCock() + " in your mouth has an effect similar to her smell, and it takes more than a bit of concentration to keep your focus.  Despite this, you manage to start pumping her with your mouth, bringing out some very excited noises from above you.  It doesn't take long for Marble to be overwhelmed by the sensations, and she lets out her load of semen into your mouth.  " + (player.cor > 33 ? "You swallow her cream to the last drop" : "You turn to the side and spit out the semen") + " as Marble takes a moment to steady herself and take a few breaths.  ");
 		}
 	} 
 	else {
