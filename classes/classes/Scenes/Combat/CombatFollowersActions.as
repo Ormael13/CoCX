@@ -5,6 +5,7 @@ package classes.Scenes.Combat
 {
 import classes.CoC;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.PerkLib;
 import classes.StatusEffects;
 
@@ -799,6 +800,65 @@ import classes.StatusEffects;
 			player.addStatusValue(StatusEffects.CombatFollowerZenji, 3, 1);
 			if (player.statusEffectv3(StatusEffects.CombatFollowerZenji) == 1) outputText(" Zenji remains weary, but he stands as if he were completely unaffected by the physical trauma he just endured.");
 			else outputText("Zenji seems much worse for wear after protecting you, \"<i>I’m fine.</i>\" he mumbles, but it’s apparent that he’s sustained heavy damage.");
+		}
+		
+		public function tyrantiaCombatActions():void {
+			clearOutput();
+			if (player.statusEffectv4(StatusEffects.CombatFollowerTyrantia) > 0) {
+				//if (TyrantiaFollower.TyraniaPostFinalKissScene) tyrantiaCombatActions5();
+				var choice1:Number = rand(20);
+				if (player.hasPerk(PerkLib.MotivationEx)) {
+					if (rand(100) == 0) tyrantiaCombatActions0();
+					else {
+						if (choice1 < 5) tyrantiaCombatActions1();
+						if (choice1 >= 5 && choice1 < 10) tyrantiaCombatActions2();
+						if (choice1 >= 10 && choice1 < 15) tyrantiaCombatActions3();
+						if (choice1 >= 15) tyrantiaCombatActions4();
+					}
+				}
+				else if (player.hasPerk(PerkLib.Motivation)) {
+					if (choice1 < 4) tyrantiaCombatActions0();
+					if (choice1 >= 4 && choice1 < 11) tyrantiaCombatActions1();
+					if (choice1 >= 11 && choice1 < 16) tyrantiaCombatActions2();
+					if (choice1 >= 16 && choice1 < 19) tyrantiaCombatActions3();
+					if (choice1 == 19) tyrantiaCombatActions4();
+				}
+				else {
+					if (choice1 < 10) tyrantiaCombatActions0();
+					if (choice1 >= 10 && choice1 < 14) tyrantiaCombatActions1();
+					if (choice1 >= 14 && choice1 < 17) tyrantiaCombatActions2();
+					if (choice1 == 17 || choice1 == 18) tyrantiaCombatActions3();
+					if (choice1 == 19) tyrantiaCombatActions4();
+				}
+			}
+			else {
+				outputText("You hold on as Tyrantia wheels about, facing [themonster] with a grin on her face. \"<i>You want to fight us?!</i>\" She brandishes her Dick, keeping her upper body between [themonster] and you. \"<i>Let’s GO!</i>\" ");
+				outputText("Her horns spill darkness, and you ready yourself for battle. Tyrantia instinctively shields you with her body, and you can’t help but feel a bit of affection for the giantess. You watch as several stone spears, duplicates of her Phalluspear, rise from the ground.\n\n");
+				player.addStatusValue(StatusEffects.CombatFollowerTyrantia, 4, 1);
+			}
+			if (flags[kFLAGS.PLAYER_COMPANION_0] == "Tyrantia" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_0_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_0_ACTION] = 1;
+			if (flags[kFLAGS.PLAYER_COMPANION_1] == "Tyrantia" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] = 1;
+			if (flags[kFLAGS.PLAYER_COMPANION_2] == "Tyrantia" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] = 1;
+			if (flags[kFLAGS.PLAYER_COMPANION_3] == "Tyrantia" && flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] != 1) flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] = 1;
+			if (monster.HP <= monster.minHP() || monster.lust >= monster.maxLust()) enemyAI();
+		}
+		public function tyrantiaCombatActions0():void {
+			outputText("Your Drider companion stares at the [enemy], making no movements towards them.\n\n");
+		}
+		public function tyrantiaCombatActions1():void {
+			outputText("Your Drider companion stares at the [enemy], making no movements towards them.\n\n");
+		}
+		public function tyrantiaCombatActions2():void {
+			outputText("Your Drider companion stares at the [enemy], making no movements towards them.\n\n");
+		}
+		public function tyrantiaCombatActions3():void {
+			outputText("Your Drider companion stares at the [enemy], making no movements towards them.\n\n");
+		}
+		public function tyrantiaCombatActions4():void {
+			outputText("Your Drider companion stares at the [enemy], making no movements towards them.\n\n");
+		}
+		public function tyrantiaCombatActions5():void {
+			outputText("Your Drider companion stares at the [enemy], making no movements towards them.\n\n");
 		}/*
 		
 		public function divaCombatActions():void {

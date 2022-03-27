@@ -112,10 +112,20 @@ package classes.Scenes
 			outputText("-New melee weapon (by Ormael): Nine-ringed Saber - buyable at Soul Equipment shop in He'Xin'Dao. Cost 1120 gems (112 spirit stones). Base atk is 14. It's normal sized weapon belonging to sword type with 10% chance to trigger bleed effect.\n");
 			outputText("-New melee weapon (by Ormael): Ruler - buyable at Soul Equipment shop in He'Xin'Dao. Cost 2560 gems (256 spirit stones). Base atk is 16. It's large sized weapon belonging to mace/hammer type with 10% chance to trigger stun effect. Additionally have Body's Cultivator (20%) perk.\n");
 			outputText("-New melee weapon (by Ormael): Storm Ruler - buyable at Kaiba shop in Tel'Adre. Cost 4800 gems. Base atk is 14. It's large sized weapon belonging to mace/hammer type with 10% chance to trigger stun effect. It deal lightning type of damage and 50% more damage to huge or larger enemies. Additionally have Body's Cultivator (20%) perk.\n");
+			outputText("-New melee weapon (by Lady Aeducan): Chaoseater - obtainable by giving big fucking two-handed sword to Corrupted Celess to corrupt. Increased by 5 base dmg, added scaling based on corruption (up to 50), deal bonus dmg to pure enemies, devour with attack a bit of enemy wrath and mana giving 50% of stolen amount to user and increase (sword) weapon mastery gains by 200%.\n");
+			outputText("-New melee weapon (by Lady Aeducan): Armageddon Blade - obtainable by giving big fucking two-handed sword to Pure Celess to purify. Increased by 5 base dmg, added scaling based on purity (up to 50), deal bonus dmg to corrupted enemies, each attack heal user by 2% of max HP and increase attacks dmg by ~25%.\n");
+			outputText("-New melee weapon (by Lady Aeducan): Moonlight Greatsword - buyable at Kaiba shop. Cost 3000 gems. Base atk is 25, it's Large type weapon, dealing magical dmg instead of physical (scale off int instead of str), using charge weapon will give 2x larger bonus and can use range attack in case there is no range weapon equipped (range attacks giving small amount of sword mastery exp).\n");
+			outputText("-New range weapon (by Lady Aeducan): Harkonnen - buyable at Tripxi shop in Tel'Adre. Cost 3,230 gems. Base atk is 160 and ammo clip size 1. Lowering range accuracy by 10%. It's 2H Firearm type range weapon dealing true damage.\n");
 			outputText("-New armor (by Ormael): Green Diving Suit - buyable at Pinchou shop. Cost 1800 gems, 25 armor, 5 magic resistance.\n");
 			outputText("-New armor (by Liadri): Battle maiden armor - obtainable by giving Lusty Maiden Armor to Pure Celess to purify. Increase armor by an additional 30 but grant no armor if the character is not virgin. No longer grant sex scenes or slutty seduction but reduce lust by 2% each round.\n");
 			outputText("-New armor (by Liadri): Succubus armor - obtainable by giving Lusty Maiden Armor to Corrupted Celess to corrupt. Same base stat as lusty maiden armor +10 but double the originally added armor bonus each time PC has sex. Base slutty seduction set to 10.\n");
 			outputText("-New head accesory (by Ormael): Kabuto & Mempo set - buyable at Yvonne Armor Shop. Cost 100 gems, 3 armor. When worn with Samurai armor will give additionaly 4 armor.\n");
+			outputText("-New Grey Spell: Water Ball - learned from Grey Book. Cost 40 mana and deal water dmg. Have cooldown of 3 turns. (spell text by Pyromania & slight different text when used in water/underwater)\n");
+			outputText("-New Grey Spell: Water Sphere - learned from Grey Book. Cost 200 mana and deal AoE water dmg. Have cooldown of 3 turns. (spell text by Pyromania & slight different text when used in water/underwater)\n");
+			outputText("-New Grey Spell: Wind Bullet - learned from Grey Book. Cost 40 mana and deal wind dmg. Have cooldown of 3 turns. (spell text by Pyromania)\n");
+			outputText("-New Grey Spell: Wind Blast - learned from Grey Book. Cost 200 mana and deal AoE wind dmg. Have cooldown of 3 turns. (spell text by Pyromania)\n");
+			outputText("-New Grey Spell: Stalagmite - learned from Grey Book. Cost 40 mana and deal earth dmg. Have cooldown of 3 turns. (spell text by Canadian Snas)\n");
+			outputText("-New Grey Spell: Shatterstone - learned from Grey Book. Cost 200 mana and deal AoE earth dmg. Have cooldown of 3 turns. (spell text by Canadian Snas)\n");
 			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
 			//outputText("-New tier 9 strength lvl-up perk: Prestige Job: Stalker. Req. Job: Warrior and Hunter perks, 150+ str/spe. Effect: +60 to str multi and +20 to spe multi (scalable with NG tiers), +20% damage and critical damage with thrown weapon.\n");
 			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
@@ -126,7 +136,7 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			outputText("-Added minor QoL option for minion using PC's to let those minions that can attack on their own (wisp or using simplified turn setup) even when PC itself is stunned or under fear effect. Cuz... well they had orders and pc been stunned not magicaly cause them to not able to follow orginal order to keep smashing enemy ^^\n");
 			outputText("-Diana and Luna forced partial/full body TF events won't proc if PC got TF immunity. As side effect it may cause their storyline progress to freeze.\n");
-			outputText("-Purity Blessing, Cold Blooded, Hot Blooded, Nymphomania perks, Omnibus' Gift, Luststick Adapted, Lycanthropy, Bimbo Body, Bro Body, Futa Form effects for rise/lower minimum lust been changed from flat values to % ones.\n");
+			outputText("-Purity Blessing, Cold Blooded, Hot Blooded, Nymphomania perks, Omnibus' Gift, Luststick Adapted, Lycanthropy, Bimbo Body, Bro Body, Futa Form, Pierced: Crimstone, Pierced: Icestone, Pent Up effects for rise/lower minimum lust been changed from flat values to % ones.\n");
 			outputText("-Bimbo Champagne, Blessing of Divine Agency - Fera, Anemone Arousal, Infested, Harpy Lipstick, Drunken Power, Shouldra that been left unsatisfied too long, cumOmeter (manticore), MilkOMeter (displacer beast), having (spider) eggs effects and lusty maiden's armor, tentacled bark armor also have minimumm lust increase turtned into % values from flat ones.\n");
 			outputText("-In Journey to the east appeared next weird person. Founded only at specific hours new npc can help limited time for any PC that feel too bloated with useless perk points (after getting all interesting stuff) and deeply lacking spare stat points. But be warned that this literal she-devil service not come cheap either... but what is few stones for such rich adventurer as your PC, right?\n");
 			outputText("-Some of minimum lust increase perks have lowered by half % values. Also manticore/displacer based 'hunger' will have % increase to min lust halfed.\n");
@@ -173,19 +183,9 @@ package classes.Scenes
 			outputText("-Listed perks would provide bonus to melee physical attacks multiplier: Thunderous Strikes / Brutal Blows / Furious strikes / Iron Fists I-III / Brute / Brawn (+5%), Iron Fists IV-VI / Unlimited rage / Improved Brute / Improved Brawn / Gigant's Grip (+10%), Thirst for blood / Gigant's Grip (Ex) / Greater Brute / Greater Brawn (+15%), ");
 			outputText("Epic Brute / Epic Brawn / War caster / Vampiric blade / Twin Riposte / Perfect strike (+20%), Legendary Brute / Legendary Brawn (+25%), Mythical Brute / Mythical Brawn (+30%) (Fuel for the Fire, Rage, Anger, Too Angry to Die, Endless Rage (+40% if wielding any large or massive weapon or +20% other weapons)\n");
 			outputText("-Listed perks would provide bonus to range physical attacks multiplier: Careful but Reckless Aim and Shooting / Sharpshooter / Power Shoot / Vital Shot / Deadly Aim / Alchemical cartridge (+5%), Cold Aim / Deadly Throw / Practiced Shot / Church of the gun / Explosive cartridge / Tainted Magazine (+10%), Anatomy expert / Eagle eye / Silver for monsters (+15%), Named Bullet / Elemental Arrows / Cupid (+20%)\n");
-			outputText("-New range weapon (by Lady Aeducan): Harkonnen - buyable at Tripxi shop in Tel'Adre. Cost 3,230 gems. Base atk is 160 and ammo clip size 1. Lowering range accuracy by 10%. It's 2H Firearm type range weapon dealing true damage.\n");
-			outputText("-New melee weapon (by Lady Aeducan): Chaoseater - obtainable by giving big fucking two-handed sword to Corrupted Celess to corrupt. Increased by 5 base dmg, added scaling based on corruption (up to 50), deal bonus dmg to pure enemies, devour with attack a bit of enemy wrath and mana giving 50% of stolen amount to user and increase (sword) weapon mastery gains by 200%.\n");
-			outputText("-New melee weapon (by Lady Aeducan): Armageddon Blade - obtainable by giving big fucking two-handed sword to Pure Celess to purify. Increased by 5 base dmg, added scaling based on purity (up to 50), deal bonus dmg to corrupted enemies, each attack heal user by 2% of max HP and increase attacks dmg by ~25%.\n");
 			outputText("-Bee-girl hypnotize scene trigger now will check for core value of libido stat not it total value. Also second trigger of been randomn 1/2 chance that can happen despite passing first check will now be req. along with passing first check to trigger this encounter variant (it also lowered to 1/3 chance).\n");
 			outputText("-Completing Deep Cave for questlog reward will no longer require to fix Vala. Also for Lethice Stronghold quest completetion either Mirror Demon or Basilisk King must be beaten not both.\n");
 			outputText("-Hinezumi mutation perks req. clarified that it req. PC been called Hinezumi (mouse 12+ score) and not just Mouse.\n");
-			outputText("-New Grey Spell: Water Ball - learned from Grey Book. Cost 40 mana and deal water dmg. Have cooldown of 3 turns. (spell text by Pyromania & slight different text when used in water/underwater)\n");
-			outputText("-New Grey Spell: Water Sphere - learned from Grey Book. Cost 200 mana and deal AoE water dmg. Have cooldown of 3 turns. (spell text by Pyromania & slight different text when used in water/underwater)\n");
-			outputText("-New Grey Spell: Wind Bullet - learned from Grey Book. Cost 40 mana and deal wind dmg. Have cooldown of 3 turns. (spell text by Pyromania)\n");
-			outputText("-New Grey Spell: Wind Blast - learned from Grey Book. Cost 200 mana and deal AoE wind dmg. Have cooldown of 3 turns. (spell text by Pyromania)\n");
-			outputText("-New Grey Spell: Stalagmite - learned from Grey Book. Cost 40 mana and deal earth dmg. Have cooldown of 3 turns. (spell text by Canadian Snas)\n");
-			outputText("-New Grey Spell: Shatterstone - learned from Grey Book. Cost 200 mana and deal AoE earth dmg. Have cooldown of 3 turns. (spell text by Canadian Snas)\n");
-			outputText("-New melee weapon (by Lady Aeducan): Moonlight Greatsword - buyable at Kaiba shop. Cost 3000 gems. Base atk is 25, it's Large type weapon, dealing magical dmg instead of physical (scale off int instead of str), using charge weapon will give 2x larger bonus and can use range attack in case there is no range weapon equipped (range attacks giving small amount of sword mastery exp).\n");
 			outputText("-Arcane Archer Elemental Arrows can be now enhanced with water, wind, earth dmg as long PC learn matching grey spell.\n");
 			outputText("-Convergence perk effect slight change - for single target will hit 2x more (it would mutliply any cases of multicast/omnicast), increase aoe grey spells dmg against smaller (+100%) and larger groups (+50%). Also it effect would not be disabling offensive staff channeling effect.\n");
 			outputText("-Twin Heart can be gained by drider PC's too.\n");
@@ -212,8 +212,21 @@ package classes.Scenes
 			outputText("-Added a button to disable 'Sleep With' to Ember. (Svalkash)\n");
 			outputText("-Sophie breastfeed scene properly restored, added bimbo hints and light corruption check. (Svalkash)\n");
 			outputText("-Siegweird soup menu improved and fixed (Svalkash)\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-HB Mech upgrade options includes: Armor Plating (+armor), Leather Insulation (+magic resistance), Agility (+base melee atk dmg), Rapid Reload (+base ranged atk dmg), Internal Systems (increase mech SF capacity and lower it consumption during high activity), Dragon's Breath Flamer (fire dmg special), Scatter Laser (lightning dmg special), ");
+			outputText("Camouflage Mode (allow to enter 1 turn long camouflage opening option to use Sneak Attack (melee & range) specials), Invisibility Mode (the same as Camouflage Mode but can last until PC run out of SF to keep it active or deactivate it manualy / upgrade to decrease SF consumption)\n");
+			outputText("-Grey Mage Apprentice perk req. now additional Job: Sorcerer perk.\n");
+			outputText("-All 4 new spells types (water, wind, earth, acid) can be used with Elemental Arrows / Swift Casting perks.\n");
+			outputText("-New tier 10 intelligence lvl-up perk: Grand Grey Archmage (2nd Circle). Req. Grand Grey Archmage perk and 275+ int. Effect: Increases grey spell strength by 50%, mana pool by 900, lust bar by 320, regain it 150% faster. Grey spells costs lowered by 20%.\n");
+			outputText("-New tier 0 intelligence lvl-up perk: Spellpower: Grey. Req. Grey Magic perk, 50+ int and lvl 3+. Effect: Increases grey spell strength by 15% and mana pool by 75.\n");
+			outputText("-New tier 4 intelligence lvl-up perk: Improved Mana Shield. Req. Arcane Shielding perk, 125+ int. Effect: Increasing fourfold amount of damage Mana Shield spell can withstand before deactivating. (1:4 ratio for physical attakcs and 1:20 ratio for magical attacks)\n");
+			outputText("-Convergence perk tier lowered by 2 and req. int decreased by 50.\n");
+			outputText("-Arcane Regeneration perks now can also be unlocked when PC have similar rank Grey Mage line perks instead of Mage perks line. (so the pure grey magic users will not be locked out of mana regen perks due to going grey path)\n");
+			outputText("-New tier 1 intelligence lvl-up perk: Arcane Shielding. Req. Grey Magic perk, Mana Shield spell, 75+ int. Effect: Improving by fivefold mana shield resistance to magical attacks. (1:5 ratio for mana to magic damage)\n");
+			outputText("-New tier 7 intelligence lvl-up perk: Super Convergence. Req. Convergence perk, 225+ int. Effect: Grey magic area of effect spells strike one more time (three times) against single targets. Against groups would deal 50-250% more dmg depending on size (250% for small groups, 100% for large groups).\n");
+			outputText("-You can't earn Sophie's forgiveness after forcefeeding her Bimbo Liqueur AFTER debimbo, then debimboing her again. Sophie now really leaves if irritated 5 times in a row (intended, but never implemented properly) (Svalkash)\n");
+			outputText("-Decreased Urta's passive affection loss. Increased Urta's 'hours since last cum' gains, fixed improper 'days without cum' counting for inflation BJ scene. Added talk options after most BJs for Urta, so you won't leave immediately after pleasing her. (Svalkash)\n");
+			outputText("-Minor Vapula fixes, new cock-finding function. Added chastity belt scene to sex menu (which was clearly intended from the beginning). (Svalkash)\n");
+			outputText("-Made Ted less annoying by disabling him after acquiring the talisman. (Svalkash) ((actualy i amde another change that makes him disabled/stop appearing after he is beaten once more after dropping jade talisman (Ormael)))\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -245,10 +258,19 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-Fixed Bugs: One of Ingnam Tavern food options having wrong price listed on menu, unique sex scenes accesable during Druid fusion, Wisp potentialy softlocking Mino King fight, selfsucking in masturbation menu restoring max 100 hunger, Swift Casting not usable when having Giant's Grip and Large weapon, White or Black magic buffs autocastable when having perk that disable use of white/black magic, ");
 			outputText("putting B. Sword after picking Ecalibur disabling option to pick sword at Temple, all 3 Hall of Blade soulskill variants dealing phys not magical dmg, Lightning Claw lowering phys dmg when used as part of feral style attack, using goblin Cum Reservoir not empting it out, Yuki Onna Transform scene not making sure to give proper genitalia setup, Archer's Stamina perks not giving fatigue related to ");
 			outputText("current Speed value, Half-Frost Wyrm or Half Spider-morph racial bonus been attained super easy, Mysterious Seed not causing for misc items menu appear as inventory submenu, unable to add arcane circuits to 5th arcane circle, doppleganger fight won't drag unnecessary due to getting messly 1k lust after 5th round in fight, Gazer Eyes mutation not keeping True seeing perk, Magical Eye Drops as item ");
-			outputText("find in Caves instead of Eye Drops, raiju tf removing/humanizing raiju paws, picking no elemental during minions turn skipping many following up phases of the turn, epic/legendary/mythical perks for stats not affecting monsters\n");/*ostatni punkt changelogu
+			outputText("find in Caves instead of Eye Drops, raiju tf removing/humanizing raiju paws, picking no elemental during minions turn skipping many following up phases of the turn, epic/legendary/mythical perks for stats not affecting monsters, harpy wings not setting shark score to 0, Siren been excluded form races list for appearance screen\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
@@ -259,6 +281,7 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -350,7 +373,9 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
+			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
+			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -391,18 +416,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");

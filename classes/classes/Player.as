@@ -1250,7 +1250,7 @@ use namespace CoC;
 		//Player have any party member with them
 		public function companionsInPCParty():Boolean
 		{
-			return flags[kFLAGS.PLAYER_COMPANION_1] != "" || flags[kFLAGS.PLAYER_COMPANION_2] != "" || flags[kFLAGS.PLAYER_COMPANION_3] != "";
+			return flags[kFLAGS.PLAYER_COMPANION_0] != "" || flags[kFLAGS.PLAYER_COMPANION_1] != "" || flags[kFLAGS.PLAYER_COMPANION_2] != "" || flags[kFLAGS.PLAYER_COMPANION_3] != "";
 		}
 		//PC can fly without natural wings
 		public function canFlyNoWings():Boolean
@@ -2332,8 +2332,9 @@ use namespace CoC;
 		}
 		public function manaShieldAbsorb(damage:Number, display:Boolean = false, magic:Boolean = false):Number{
 			var magicmult:Number = 1;
+			if (hasPerk(PerkLib.ImprovedManaShield)) magicmult *= 0.25;
 			// if magical damage, double efficiency
-			if (magic == true) magicmult *= 0.5;
+			if (magic == true) magicmult *= 0.2;
 			// defensive staff channeling
 			if (hasPerk(PerkLib.DefensiveStaffChanneling) && (isStaffTypeWeapon() || isPartiallyStaffTypeWeapon())) magicmult *= 0.5;
 			if (damage * magicmult <= mana) {
@@ -2406,8 +2407,11 @@ use namespace CoC;
 			if (damage>0){
 				if (henchmanBasedInvulnerabilityFrame()) henchmanBasedInvulnerabilityFrameTexts();
 				else if (hasStatusEffect(StatusEffects.ManaShield)) {
-					/*if (damagetype == 0) */damage = manaShieldAbsorb(damage, display);
-					//else damage = manaShieldAbsorbMagic(damage, display);
+					if (hasPerk(PerkLib.ArcaneShielding)) {
+						if (damagetype < 4) damage = manaShieldAbsorb(damage, display);
+						else damage = manaShieldAbsorbMagic(damage, display);
+					}
+					else damage = manaShieldAbsorb(damage, display);
 				}
 				else if (damage > 0 && hasStatusEffect(StatusEffects.BloodShield)) {
 					damage = bloodShieldAbsorb(damage, display);
@@ -3462,6 +3466,7 @@ use namespace CoC;
 				{name: 'scylla', score: scyllaScore(), minscore: 4},
 				{name: 'sea dragon', score: leviathanScore(), minscore: 20},
 				{name: 'shark', score: sharkScore(), minscore: 4},
+				{name: 'siren', score: sirenScore(), minscore: 10},
 				{name: 'sphinx', score: sphinxScore(), minscore: 14},
 				{name: 'spider', score: spiderScore(), minscore: 4},
 				{name: 'thunderbird', score: thunderbirdScore(), minscore: 12},
@@ -7691,10 +7696,9 @@ use namespace CoC;
 			if (hasPerk(PerkLib.AscensionCruelChimerasThesis) && harpy >= 8)
 				harpy += 1;
 			if (isGargoyle()) harpy = 0;
-			if (tailType == Tail.SHARK || tailType == Tail.SALAMANDER || lowerBody == LowerBody.SALAMANDER || faceType == Face.SHARK_TEETH)
+			if (tailType == Tail.SHARK || tailType == Tail.SALAMANDER || lowerBody == LowerBody.SALAMANDER || faceType == Face.SHARK_TEETH || wings.type == Wings.FEATHERED_PHOENIX || tail.type == Tail.THUNDERBIRD)
 				harpy = 0;
 			if (hasPerk(PerkLib.ElementalBody)) harpy = 0;
-			if (wings.type == Wings.FEATHERED_PHOENIX || tail.type == Tail.THUNDERBIRD) harpy = 0;
 			harpy = finalRacialScore(harpy, Race.HARPY);
 			End("Player","racialScore");
 			return harpy;
@@ -7761,6 +7765,12 @@ use namespace CoC;
 				sharkCounter++;
 			if (hasPerk(MutationsLib.SharkOlfactorySystemEvolved))
 				sharkCounter++;
+			if (hasPerk(MutationsLib.SharkOlfactorySystem) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
+				sharkCounter++;
+			if (hasPerk(MutationsLib.SharkOlfactorySystemPrimitive) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
+				sharkCounter++;
+			if (hasPerk(MutationsLib.SharkOlfactorySystemEvolved) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
+				sharkCounter++;
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				sharkCounter += 50;
 			if (hasPerk(PerkLib.AscensionHybridTheory) && sharkCounter >= 4)
@@ -7768,6 +7778,8 @@ use namespace CoC;
 			if (hasPerk(PerkLib.AscensionCruelChimerasThesis) && sharkCounter >= 8)
 				sharkCounter += 1;
 			if (isGargoyle()) sharkCounter = 0;
+			if (wings.type == Wings.FEATHERED_LARGE)
+				sharkCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) sharkCounter = 0;
 			sharkCounter = finalRacialScore(sharkCounter, Race.SHARK);
 			End("Player","racialScore");
@@ -10163,7 +10175,7 @@ use namespace CoC;
 			if (lowerBody == LowerBody.SHARK || lowerBody == LowerBody.HARPY)
 				sirenCounter++;
 			if (skinType == Skin.AQUA_SCALES && (InCollection(coatColor, ["rough gray", "orange", "dark gray", "grayish-blue", "iridescent gray", "ashen grayish-blue", "gray"])))
-				sirenCounter++;
+				sirenCounter += 2;
 			if (gills.type == Gills.FISH)
 				sirenCounter++;
 			if (eyes.type == Eyes.HUMAN)
@@ -10181,6 +10193,12 @@ use namespace CoC;
 			if (hasPerk(MutationsLib.SharkOlfactorySystemPrimitive))
 				sirenCounter++;
 			if (hasPerk(MutationsLib.SharkOlfactorySystemEvolved))
+				sirenCounter++;
+			if ((hasPerk(MutationsLib.HarpyHollowBones) || hasPerk(MutationsLib.SharkOlfactorySystem)) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
+				sirenCounter++;
+			if ((hasPerk(MutationsLib.HarpyHollowBonesPrimitive) || hasPerk(MutationsLib.SharkOlfactorySystemPrimitive)) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
+				sirenCounter++;
+			if ((hasPerk(MutationsLib.HarpyHollowBonesEvolved) || hasPerk(MutationsLib.SharkOlfactorySystemEvolved)) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
 				sirenCounter++;
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				sirenCounter += 50;
@@ -12023,10 +12041,10 @@ use namespace CoC;
 			if (hasPerk(PerkLib.LuststickAdapted)) min += Math.round(minCap * 0.1);
 			if (hasStatusEffect(StatusEffects.Infested)) min += min += Math.round(minCap * 0.5);
 			//Add points for Crimstone
-			min += perkv1(PerkLib.PiercedCrimstone);
+			min += Math.round(minCap * perkv1(PerkLib.PiercedCrimstone) * 0.01);
 			//Subtract points for Icestone!
-			min -= perkv1(PerkLib.PiercedIcestone);
-			min += perkv1(PerkLib.PentUp);
+			min -= Math.round(minCap * perkv1(PerkLib.PiercedIcestone) * 0.01);
+			min += Math.round(minCap * perkv1(PerkLib.PentUp) * 0.01);
 			//Cold blooded perk reduces min lust, to a minimum of 20! Takes effect after piercings.
 			if (hasPerk(PerkLib.ColdBlooded)) {
 				if (min >= Math.round(minCap * 0.2)) min -= Math.round(minCap * 0.2);

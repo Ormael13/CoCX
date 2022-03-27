@@ -47,6 +47,7 @@ use namespace CoC;
 			//Lily
 			if (LilyFollower.LilyFollowerState == false && rand(5) == 0) {
 				SceneLib.lily.lilyEncounter();
+				return;
 			}
 			//KIHA X HEL THREESOME!
 			if (!SceneLib.kihaFollower.followerKiha() && player.cor < 60 && flags[kFLAGS.KIHA_AFFECTION_LEVEL] >= 1 && flags[kFLAGS.HEL_FUCKBUDDY] > 0 && player.hasCock() && flags[kFLAGS.KIHA_AND_HEL_WHOOPIE] == 0) {

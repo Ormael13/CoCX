@@ -7,6 +7,7 @@ package classes.Scenes.NPCs
 import classes.*;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
+import classes.Items.UndergarmentLib;
 import classes.Scenes.Camp;
 import classes.Scenes.NPCs.Lily;
 import classes.internals.SaveableState;
@@ -129,11 +130,17 @@ import classes.display.SpriteDb;
 			addButton(0, "Leave", cleanupAfterCombat);
 			addButton(1, "Talk", LilyTalk);
 			if (LilyAffectionMeter >= 20) {
-				if (player.lust >= 33) addButton(2, "Sex", LilySex);
+				if (player.lust >= 33) {
+					if (player.gender > 0) addButton(2, "Sex", LilySex);
+					else addButtonDisabled(2, "Sex", "Not for genderless.");
+				}
 				else addButtonDisabled(2, "Sex", "Your lust is too low.");
 			}
 			else addButtonDisabled(2, "Sex", "Req. 20%+ affection.");
-			if (player.lust >= 33) addButton(3, "Rape", LilyRape);
+			if (player.lust >= 33) {
+				if (player.gender > 0) addButton(3, "Rape", LilyRape);
+				else addButtonDisabled(3, "Rape", "Not for genderless.");
+			}
 			else addButtonDisabled(3, "Rape", "Your lust is too low.");
 			if (LilySubmissivenessMeter >= 80) addButton(5, "DomHome", LilySubComeCamp);
 			else addButtonDisabled(5, "???", "Req. 80%+ submissiveness.");
@@ -321,11 +328,8 @@ import classes.display.SpriteDb;
 			menu();
 			//if (player.hasCock()) addButton(1, "Fuck", name);
 			//if (player.hasVagina()) addButton(2, "LickYou", name);
-			if (player.gender > 0) {
-				if (LilySubmissivenessMeter >= 40) addButton(3, "Bondage", LilyBondage);
-				else addButtonDisabled(3, "Bondage", "Req. 40%+ submissiveness.");
-			}
-			else addButtonDisabled(3, "Bondage", "Not for genderless.");
+			if (LilySubmissivenessMeter >= 40) addButton(3, "Bondage", LilyBondage);
+			else addButtonDisabled(3, "Bondage", "Req. 40%+ submissiveness.");
 			addButton(4, "M.Her", LilyJillOff);
 			addButton(5, "R.Play", LilyRape);
 			//addButton(6, "3Somes", Lily3Somes);
@@ -336,7 +340,7 @@ import classes.display.SpriteDb;
 			clearOutput();
 			outputText("Angered slightly by the Drider, you grab several globs of her webbing, left on the ground during your fight. As you stride towards her, she looks around into the trees. <i>\"W-wait, what are you-\"</i> You slap her on the cheek, knocking her off her spider legs and onto her side. <i>\"Oh...Oh no.\"</i>\n\n");
 			outputText("You grab her wrist, wrenching the bow from her hand. Unstringing it, you roughly wrap the string around her wrists, binding them together. You move quickly as she tries to rise, using her own webbing to stick her legs together. Now trussed up, hands behind her back and legs bound, Lily stares up at you, speechless.\n\n");
-			outputText("You strip off your [armor] and [lowergarment], revealing your [genitalia], and the Drider begins to writhe, struggling to undo the bindings on her legs.\n\n");
+			outputText("You strip off your [armor]"+(player.lowerGarment != UndergarmentLib.NOTHING?" and [lowergarment]":"")+", revealing your "+(player.hasCock()?"[cock]":"")+(player.gender == 3 ? " and " : "")+(player.hasVagina()?"[pussy]":"")+", and the Drider begins to writhe, struggling to undo the bindings on her legs.\n\n");
 			outputText("Smirking, you rest your [leg] on her hip. You tell her that she’s going to be a good girl, or bad things will happen. To emphasize your point, you bring your [leg] to her thorax and rest your weight on her flank, slowly indenting the chitin. Lily cries out in what you assume is pain, and you let go. She falls limp, nodding once, and you take that as your go-ahead. You prop her up against a nearby tree, then start to pull on her titty-chain. She instinctively sticks her chest out, lessening the pain, and you look down at your conquest. What to do with this one?\n\n");
 			menu();
 			if (player.hasCock()) addButton(1, "ThrFuck", LilyThroatFuck);
@@ -704,30 +708,38 @@ import classes.display.SpriteDb;
 			menu();
 			//appearance
 			addButton(1, "Talk", LilyTalk);
-			//addButton(2, "Sex", LilyFollowerSex);
+			if (player.lust >= 33) {
+				if (player.gender > 0) addButton(2, "Sex", LilyFollowerSex);
+				else addButtonDisabled(2, "Sex", "Not for genderless.");
+			}
+			else addButtonDisabled(2, "Sex", "Your lust is too low.");
 			//addButton(3, "House", LilyHouse);
 			//addButton(4, "Spar", LilySpar);
 			addButton(14, "Leave", camp.campLoversMenu);
 		}
-		/*
+		
 		public function LilyFollowerSex():void {
 			clearOutput();
 			outputText("You give Lily a waggle of your eyebrows, before stepping in, grabbing the chain crossing her chest and pulling. Lily gives you a moan, but says nothing. Her body, however, is honest. Lily's cunt begins drooling almost immediately, and her back legs tap rapidly. \n\n");
 			outputText("What do you want to do with your eager Drider-Slut, now that you have her?\n\n");
 			menu();
-			addButton(1, "Bondage", LilyBondage);
+			//addButton(1, "Bondage", LilyBondage);
 			addButton(2, "Roleplay", LilyRape);
-			addButton(3, "3Some", Lily3Somes);
+			//addButton(3, "3Some", Lily3Somes);
 			addButton(4, "Back",LilyCampBack);
 		}
-		*/
+		
 		public function LilyCampBack():void {
 			clearOutput();
 			outputText("<i>\"Yes, [name], what did you need?\"</i>\n\n");
 			menu();
 			//appearance
 			addButton(1, "Talk", LilyTalk);
-			//addButton(2, "Sex", LilyFollowerSex);
+			if (player.lust >= 33) {
+				if (player.gender > 0) addButton(2, "Sex", LilyFollowerSex);
+				else addButtonDisabled(2, "Sex", "Not for genderless.");
+			}
+			else addButtonDisabled(2, "Sex", "Your lust is too low.");
 			//addButton(3, "House", LilyHouse);
 			//addButton(4, "Spar", LilySpar);
 			addButton(14, "Leave", camp.campLoversMenu);

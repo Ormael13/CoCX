@@ -1977,8 +1977,8 @@ public static const UNKNOWN_FLAG_NUMBER_01968:int                               
 public static const UNKNOWN_FLAG_NUMBER_01969:int                                   = 1969;
 public static const UNKNOWN_FLAG_NUMBER_01970:int                                   = 1970;
 public static const UNKNOWN_FLAG_NUMBER_01971:int                                   = 1971;
-public static const UNKNOWN_FLAG_NUMBER_01972:int                                   = 1972;
-public static const UNKNOWN_FLAG_NUMBER_01973:int                                   = 1973;
+public static const PLAYER_COMPANION_0:int                                   		= 1972;
+public static const IN_COMBAT_PLAYER_COMPANION_0_ACTION:int                         = 1973;
 public static const TRUE_DEMONS_KILLED:int                                   		= 1974;
 public static const WRATH_GIANT_SLAYER_GOBLIN_MECH:int                              = 1975;
 public static const AUTO_FLIGHT:int                                   				= 1976;
