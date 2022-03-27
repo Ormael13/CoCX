@@ -378,33 +378,6 @@ public function winAgainstMarae():void {
 		inventory.takeItem(useables.DBAPLAT, camp.returnToCampUseOneHour);
 	}
 }
-public function winAgainstMarae2ndRound():void {
-	clearOutput();
-	outputText(images.showImage("marae-defeated"));
-	if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2) {
-
-	}
-	else {
-
-	}
-}
-public function winAgainstMarae3rdRound():void {
-	clearOutput();
-	outputText(images.showImage("marae-defeated"));
-	if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2) {
-		if (player.hasStatusEffect(StatusEffects.KnowsWhitefire) || player.hasPerk(PerkLib.FireLord) || player.hasPerk(PerkLib.Hellfire) || player.hasPerk(PerkLib.DragonFireBreath)) outputText("You summon your magical fire and finish off Marae for the last time. You can hear her screaming as she's withering and shriveling up. While she's on fire, you turn your attention elsewhere.");
-		else outputText("You raise your [weapon] and finish off Marae at last. The corrupted goddess is no more. All the tentacles shrivel up and die. Afterwards, you turn your attention elsewhere.");
-		if (!player.hasKeyItem("Marae's Lethicite") >= 0) {
-			outputText("\n\nSomething shiny catches your eye. Clearly, this has to be Marae's lethicite!");
-			outputText("\n<b>(Key Item Gained: Marae's Lethicite!)</b>");
-			player.createKeyItem("Marae's Lethicite", 3, 0, 0, 0);
-		}
-		outputText("\n\nAfter the death of a corrupted physical goddess, you see something odd. There is a pile of intact shards of bark. They looks large and thick enough to be workable. You give it an experiment punch. ");
-	}
-	else {
-
-	}
-}
 
 private function maraeBadEnd():void {
 	spriteSelect(SpriteDb.s_marae);
