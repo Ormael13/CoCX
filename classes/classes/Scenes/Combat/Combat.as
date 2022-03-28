@@ -15776,6 +15776,10 @@ public class Combat extends BaseContent {
         if (flags[kFLAGS.PLAYER_COMPANION_1] == "Neisa") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerNeisa);
         if (flags[kFLAGS.PLAYER_COMPANION_2] == "Neisa") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerNeisa);
         if (flags[kFLAGS.PLAYER_COMPANION_3] == "Neisa") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerNeisa);
+        if (flags[kFLAGS.PLAYER_COMPANION_0] == "Tyrantia") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerTyrantia);
+        if (flags[kFLAGS.PLAYER_COMPANION_1] == "Tyrantia") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerTyrantia);
+        if (flags[kFLAGS.PLAYER_COMPANION_2] == "Tyrantia") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerTyrantia);
+        if (flags[kFLAGS.PLAYER_COMPANION_3] == "Tyrantia") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerTyrantia);
         if (flags[kFLAGS.PLAYER_COMPANION_1] == "Zenji") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerZenji);
         if (flags[kFLAGS.PLAYER_COMPANION_2] == "Zenji") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerZenji);
         if (flags[kFLAGS.PLAYER_COMPANION_3] == "Zenji") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerZenji);
@@ -15828,6 +15832,10 @@ public class Combat extends BaseContent {
         if (flags[kFLAGS.PLAYER_COMPANION_1] == "Alvina") ghostRealInteCompanion += player.statusEffectv2(StatusEffects.CombatFollowerAlvina);
         if (flags[kFLAGS.PLAYER_COMPANION_2] == "Alvina") ghostRealInteCompanion += player.statusEffectv2(StatusEffects.CombatFollowerAlvina);
         if (flags[kFLAGS.PLAYER_COMPANION_3] == "Alvina") ghostRealInteCompanion += player.statusEffectv2(StatusEffects.CombatFollowerAlvina);
+        if (flags[kFLAGS.PLAYER_COMPANION_0] == "Tyrantia") ghostRealInteCompanion += player.statusEffectv3(StatusEffects.CombatFollowerTyrantia);
+        if (flags[kFLAGS.PLAYER_COMPANION_1] == "Tyrantia") ghostRealInteCompanion += player.statusEffectv3(StatusEffects.CombatFollowerTyrantia);
+        if (flags[kFLAGS.PLAYER_COMPANION_2] == "Tyrantia") ghostRealInteCompanion += player.statusEffectv3(StatusEffects.CombatFollowerTyrantia);
+        if (flags[kFLAGS.PLAYER_COMPANION_3] == "Tyrantia") ghostRealInteCompanion += player.statusEffectv3(StatusEffects.CombatFollowerTyrantia);
         return ghostRealInteCompanion;
     }
 

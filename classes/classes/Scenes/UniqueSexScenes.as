@@ -43,7 +43,6 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 			outputText(" of you scream your defeat together as your stamens explode, filling each others wombs to the brim. There’s so much liquid pollen pumped into you and you can feel your bloated stomach groan under the pressure. You can’t help but cup it with your hand in motherly delight. Holli isn't looking any better, it will probably take hours for her belly to deflate.\n\n");
 			outputText("\"<i>I... want a rematch...No way I'll stop at a tie!</i>\"\n\n");
 			outputText("That won’t be today though. You're so packed up with plant cum that without even checking your odds, you're pretty sure you are pregnant. You doubt Holli can hold any more of your pollen either, so you dress back up, highly satisfied and somewhat smug, leaving Holli to her personal frustration.");
-
 			player.sexReward("cum","Vaginal");
 			player.sexReward("cum","Anal");
 			player.sexReward("cum","Lips");
