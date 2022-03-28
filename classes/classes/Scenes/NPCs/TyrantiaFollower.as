@@ -326,7 +326,7 @@ public function repeatEncounterBattlefieldTalkHer():void {
 	//4 - Goblin
 	//5 - Izumi
 	//6 - Kids
-	if (TyraniaPostFinalKissScene) addButton(13, "LiveWithMe", repeatEncounterBattlefieldTalkHerLiveWithMe);
+	if (TyraniaPostFinalKissScene) addButton(13, "LiveWithMe", TyrantiaLiveWithMe).hint("Take the Spooder home. Do it NOW ^^");
 	else addButtonDisabled(13, "???", "Req. special scene after reaching 40%+ affection.");
 	addButton(14, "Back", repeatEncounterBattlefieldTalk);
 }
@@ -431,13 +431,6 @@ public function repeatEncounterBattlefieldTalkHerKids():void {
 	//affection gains
 	doNext(camp.returnToCampUseOneHour);
 }
-public function repeatEncounterBattlefieldTalkHerLiveWithMe():void {
-	clearOutput();
-	outputText("\"<i></i>\"\n\n");
-	TyrantiaFollowerStage = 4;
-	doNext(camp.returnToCampUseOneHour);
-}
-
 public function TyrantiaLiveWithMe():void {
 	clearOutput();
 	outputText("You ask her about the life she has on the Battlefield. She tells you the usual, mentioning the ‘cave’ you two found, and how she’s taken to living there.\n\n");
