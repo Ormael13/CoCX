@@ -7,12 +7,11 @@ package classes.Scenes.Areas.GlacialRift
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.CoC;
-	import classes.Scenes.UniqueSexScenes;
+	import classes.Scenes.SceneLib;
 	
 	public class WinterWolfScene extends BaseContent 
 	{
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		
+				
 		public function WinterWolfScene() 
 		{
 		}
@@ -33,9 +32,8 @@ package classes.Scenes.Areas.GlacialRift
 					addButton(0, "RideHisCock", rideWinterWolfsCock);
 				}
 				addButton(14, "Leave", cleanupAfterCombat);
-				uniquuuesexscene.pcUSSPreChecksV2(winAgainstWinterWolf);
-				//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(20);
-			}
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(winAgainstWinterWolf);
+							}
 			else {
 				cleanupAfterCombat();
 			}

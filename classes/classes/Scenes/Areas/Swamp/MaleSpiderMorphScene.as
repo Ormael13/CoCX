@@ -9,13 +9,11 @@ import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
 import classes.Items.Armors.SuccubusArmor;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 public class MaleSpiderMorphScene extends BaseContent
 	{
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-
 		public function MaleSpiderMorphScene()
 		{
 		}
@@ -98,9 +96,8 @@ public class MaleSpiderMorphScene extends BaseContent
 			}
 			addButton(3, "B.Titfuck", bikiniTits);
 			addButton(14, "Leave", cleanupAfterCombat);
-			uniquuuesexscene.pcUSSPreChecksV2(defeatSpiderBoy);
-			//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(41);
-		}
+			SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatSpiderBoy);
+					}
 
 //Loss selector
 		public function loseToMaleSpiderMorph():void

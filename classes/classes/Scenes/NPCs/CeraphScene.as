@@ -8,13 +8,11 @@ import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
 import classes.Items.Armors.SuccubusArmor;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 public class CeraphScene extends NPCAwareContent
 	{
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-
 		public function CeraphScene()
 		{
 		}
@@ -676,9 +674,8 @@ public class CeraphScene extends NPCAwareContent
 						else addButton(3, "B.Titfuck", createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,monster));
 					}
 				}
-				uniquuuesexscene.pcUSSPreChecksV2(winRapeChoices);
-				//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(53);
-				addButton(14, "Leave", leave);
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(winRapeChoices);
+								addButton(14, "Leave", leave);
 			}
 			else {
                 if (CoC.instance.inCombat)

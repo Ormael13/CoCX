@@ -5,7 +5,7 @@ import classes.BodyParts.Butt;
 import classes.BodyParts.Hips;
 import classes.GlobalFlags.*;
 import classes.Scenes.SceneLib;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 public class FetishCultist extends Monster

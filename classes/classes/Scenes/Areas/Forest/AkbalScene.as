@@ -9,13 +9,11 @@ import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
 import classes.Items.Armors.SuccubusArmor;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 public class AkbalScene extends BaseContent
 	{
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-
 		public function AkbalScene()
 		{
 		}
@@ -115,9 +113,8 @@ public class AkbalScene extends BaseContent
 						else bikiniTits = (player.armor as LustyMaidensArmor).lustyMaidenPaizuri;
 						addButton(3, "B.Titfuck", bikiniTits);
 					}
-					uniquuuesexscene.pcUSSPreChecksV2(akbalDefeated2);
-					//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(11);
-					//Rape / Don't Rape
+					SceneLib.uniqueSexScene.pcUSSPreChecksV2(akbalDefeated2);
+										//Rape / Don't Rape
 					//EngineCore.simpleChoices("Butt-fuck", buttFuck, "Take Vaginally", vagoo, "Force Lick", vagooLick, "B.Titfuck", bikiniTits, );
 					return;
 				}
@@ -149,9 +146,8 @@ public class AkbalScene extends BaseContent
 					else bikiniTits = (player.armor as LustyMaidensArmor).lustyMaidenPaizuri;
 					addButton(3, "B.Titfuck", bikiniTits);
 				}
-				uniquuuesexscene.pcUSSPreChecksV2(akbalDefeated2);
-				//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(11);
-				//Rape / Don't Rape
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(akbalDefeated2);
+								//Rape / Don't Rape
 			//EngineCore.simpleChoices("Butt-fuck", buttFuck, "Take Vaginally", vagoo, "Force Lick", vagooLick, "B.Titfuck", bikiniTits, );
 				return;
 			}

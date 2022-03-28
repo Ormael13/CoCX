@@ -6,12 +6,11 @@ import classes.BodyParts.Tail;
 import classes.GlobalFlags.*;
 import classes.Items.Armors.LustyMaidensArmor;
 import classes.Items.Armors.SuccubusArmor;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 
 public class LizanRogueScene extends BaseContent
 	{
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		
+				
 		public function LizanRogueScene() 
 		{
 			
@@ -92,9 +91,8 @@ public class LizanRogueScene extends BaseContent
 						else addButton(2, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
 					}
 					addButton(14, "Leave", cleanupAfterCombat);
-					uniquuuesexscene.pcUSSPreChecksV2(winAgainstLizan);
-					//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(8);
-					return;
+					SceneLib.uniqueSexScene.pcUSSPreChecksV2(winAgainstLizan);
+										return;
 				}
 				else {
 					outputText("You rummage through his bag for something valuable.");
@@ -108,9 +106,8 @@ public class LizanRogueScene extends BaseContent
 					outputText("<b>You could have sex with him if you like to.</b> ");
 					addButton(0, "Sex", haveSexWithLizan).hint("Have some fun with the oh-so-sexy lizan.");
 					addButton(14, "Leave", leaveLizanAfterCombat);
-					uniquuuesexscene.pcUSSPreChecksV2(winAgainstLizan);
-					//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(8);
-					return;
+					SceneLib.uniqueSexScene.pcUSSPreChecksV2(winAgainstLizan);
+										return;
 				}
 				else leaveLizanAfterCombat();
 			}

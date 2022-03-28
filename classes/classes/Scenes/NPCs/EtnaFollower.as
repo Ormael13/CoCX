@@ -10,12 +10,11 @@ package classes.Scenes.NPCs
 	import classes.Scenes.Areas.HighMountains.MinotaurMob;
 	import classes.Scenes.Monsters.Manticore;
 import classes.display.SpriteDb;
-	import classes.Scenes.UniqueSexScenes;
+	import classes.Scenes.SceneLib;
 	
 	public class EtnaFollower extends NPCAwareContent
 	{
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		
+				
 		public function EtnaFollower() 
 		{}
 
@@ -198,9 +197,8 @@ public function etnaRapeIntro():void
 	if (player.lust >= 33 && player.hasVagina()) addButton(1, "Yes (F)", etnaRapeYesF);
 	addButton(2, "No", etnaRapeNo);
 	if (player.lust >= 33 && player.isAlraune()) addButton(3, "Fill her up!", EtnaFillHerUp);
-	uniquuuesexscene.pcUSSPreChecksV2(etnaRapeIntro);
-	//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(55);
-}
+	SceneLib.uniqueSexScene.pcUSSPreChecksV2(etnaRapeIntro);
+	}
 
 public function etnaRapeYesM():void
 {
@@ -373,9 +371,8 @@ public function etnaRape3rdWin():void
 	if (player.lust >= 33 && player.hasCock()) addButton(0, "Yes (M)", etnaRapeYesM);
 	if (player.lust >= 33 && player.hasVagina()) addButton(1, "Yes (F)", etnaRapeYesF);
 	addButton(2, "No", etnaRapeNo);
-	uniquuuesexscene.pcUSSPreChecksV2(etnaRape3rdWin);
-	//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(56);
-}
+	SceneLib.uniqueSexScene.pcUSSPreChecksV2(etnaRape3rdWin);
+	}
 
 public function etnaReady2Come2Camp():void
 {

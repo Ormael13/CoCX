@@ -10,7 +10,7 @@ import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 public class BeeGirlScene extends BaseContent
@@ -24,8 +24,6 @@ public class BeeGirlScene extends BaseContent
 		private static const BEE_GIRL_PLAYER_VOLUNTARY_EGGING:int	=          5; //End of the afraid chain, from now on player gets egged when they meet her
 		private static const BEE_GIRL_PLAYER_DISGUSTED:int			=          6;
 		private static const BEE_GIRL_PLAYER_DUTY:int				=          7;
-
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
 
 		public function BeeGirlScene() {}
 
@@ -505,16 +503,14 @@ public class BeeGirlScene extends BaseContent
 				if (player.hasKeyItem("Deluxe Dildo") >= 0) addButton(1, "Dildo Rape", beeGirlsGetsDildoed);
 				if (player.hasStatusEffect(StatusEffects.Feeder)) addButton(2, "B. Feed", milkAndHoneyAreKindaFunny);
 				addButton(14, "Leave", leaveAfterDefeating);
-				uniquuuesexscene.pcUSSPreChecksV2(afterfightoptionswithBeeGirl);
-				//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(15);
-			}
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(afterfightoptionswithBeeGirl);
+							}
 			if (player.hasStatusEffect(StatusEffects.Feeder) && flags[kFLAGS.SFW_MODE] <= 0) { //Genderless can still breastfeed
 				menu();
 				addButton(2, "B. Feed", milkAndHoneyAreKindaFunny);
 				addButton(14, "Leave", leaveAfterDefeating);
-				uniquuuesexscene.pcUSSPreChecksV2(afterfightoptionswithBeeGirl);
-				//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(15);
-			}
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(afterfightoptionswithBeeGirl);
+							}
 		}
 
 		private function leaveAfterDefeating():void {

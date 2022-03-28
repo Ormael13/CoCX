@@ -11,15 +11,14 @@ import classes.Items.Armors.LustyMaidensArmor;
 import classes.Items.Armors.SuccubusArmor;
 import classes.Scenes.Camp.CampMakeWinions;
 import classes.Scenes.Camp.ImpGang;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 use namespace CoC;
 
 	public class ImpScene extends BaseContent
 	{
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		public var campwinions:CampMakeWinions = new CampMakeWinions();
+				public var campwinions:CampMakeWinions = new CampMakeWinions();
 
 		public function ImpScene()
 		{
@@ -79,16 +78,15 @@ use namespace CoC;
 			addButton(6, "Kill Him", killImp);
 			if (player.canOvipositBee()) addButton(7, "Oviposit", putBeeEggsInAnImpYouMonster);
 			addButton(14, "Leave", cleanupAfterCombat);
-			uniquuuesexscene.pcUSSPreChecksV2(impVictory);
-			//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(50);
-
+			SceneLib.uniqueSexScene.pcUSSPreChecksV2(impVictory);
+			
 		}
 		public function impVictory2():void {
 			if (flags[kFLAGS.FERAL_EXTRAS] == 4) outputText("The feral imps fall to the ground, still panting and growling in anger. Despite their efforts, they quickly submit. Most of the feral imps leave, scurrying away in desperate flight. That leaves only the weakest among the pack, trampled by his brethren. As you walk towards the imp, he tries to carry himself only to fall into unconsciousness.");
 			else outputText("The feral imp falls to the ground panting and growling in anger.  He quickly submits however, the thoroughness of his defeat obvious.  You walk towards the imp who gives one last defiant snarl before slipping into unconsciousness.");
 			menu();
 			addButton(0, "Kill Him", killFeralImp);
-			if (player.tailType == Tail.MANTICORE_PUSSYTAIL) addButton(2, "Tail Rape", uniquuuesexscene.manticoreTailRapeScene);
+			if (player.tailType == Tail.MANTICORE_PUSSYTAIL) addButton(2, "Tail Rape", SceneLib.uniqueSexScene.manticoreTailRapeScene);
 			if (flags[kFLAGS.GALIA_LVL_UP] > 0 && flags[kFLAGS.GALIA_LVL_UP] < 0.5) {
 				if (flags[kFLAGS.GALIA_AFFECTION] > 0) addButtonDisabled(3, "Capture", "You need to turn in already captured imp before you can capture another one.");
 				else addButton(3, "Capture", captureFeralImp);
@@ -1662,9 +1660,8 @@ use namespace CoC;
 			}
 			if (player.lust >= 33) {
 				addButton(0, "Sex", sexAnImpLord);
-				uniquuuesexscene.pcUSSPreChecksV2(defeatImpLord);
-				//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(51);
-			} else {
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatImpLord);
+							} else {
 				outputText("\n\nYou are not aroused enough to rape him.");
 			}
 			addButton(1, "Kill Him", killImp);

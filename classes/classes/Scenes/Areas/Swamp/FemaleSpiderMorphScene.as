@@ -7,14 +7,13 @@ import classes.*;
 import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInterface
 	{
 
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		public var pregnancy:PregnancyStore;
+				public var pregnancy:PregnancyStore;
 
 		public function FemaleSpiderMorphScene()
 		{
@@ -491,15 +490,14 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 				var analFuck:Function =null;
 				if (player.hasVagina()) scissor = fSpiderMorphRape;
 				var temp3:Function =null;
-				if (uniquuuesexscene.pcCanUseUniqueSexScenev2(true, null) > 0) temp3 = curry(uniquuuesexscene.pcCanUseUniqueSexScenev2, false, defeatASpiderBitch);
-				//if (player.pcCanUseUniqueSexScene()) temp3 = curry(uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 40);
 				if (player.hasCock()) {
 					if (player.cockThatFits(monster.vaginalCapacity()) != -1) pussyFuck = fSpiderMorphRapeDude;
 					else outputText("  <b>You don't have a dick small enough to fuck her vagina.</b>");
 					if (player.cockThatFits(monster.analCapacity()) != -1) analFuck = evilSpiderGirlVictoryAnal;
 					else outputText("  <b>Her ass is too tight for you to fit inside.</b>");
 				}
-				simpleChoices("Fuck Ass", analFuck, "Fuck Pussy", pussyFuck, "Scissor", scissor, "U. Sex Scenes", temp3, "Leave", cleanupAfterCombat);
+				simpleChoices("Fuck Ass", analFuck, "Fuck Pussy", pussyFuck, "Scissor", scissor, "", null, "Leave", cleanupAfterCombat);
+                SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatASpiderBitch);
 			}
 			else cleanupAfterCombat();
 		}

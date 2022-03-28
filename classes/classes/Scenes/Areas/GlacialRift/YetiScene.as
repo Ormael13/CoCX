@@ -7,13 +7,11 @@ import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
 import classes.Items.Armors.SuccubusArmor;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 import classes.Scenes.SceneLib;
 
 public class YetiScene extends BaseContent
 	{
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-
 		public function YetiScene()
 		{
 		}
@@ -129,9 +127,8 @@ public class YetiScene extends BaseContent
 				if (player.armor == armors.S_ARMOR) addButton(2, "B.Titfuck", (player.armor as SuccubusArmor).succubusPaizuri);
 				else addButton(2, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
 			}
-			uniquuuesexscene.pcUSSPreChecksV2(winAgainstYeti);
-			//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(21);
-			addButton(14, "Leave", cleanupAfterCombat);
+			SceneLib.uniqueSexScene.pcUSSPreChecksV2(winAgainstYeti);
+						addButton(14, "Leave", cleanupAfterCombat);
 		}
 
 		private function fuckYetiInTheAss():void {

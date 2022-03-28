@@ -4,7 +4,7 @@ package classes.Scenes.Dungeons
 import classes.EventParser;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Dungeons.DenOfDesire.*;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 //import classes.Scenes.NPCs.;
@@ -16,8 +16,7 @@ public class DenOfDesire extends DungeonAbstractContent
 		private static const DUNGEON_DEN_OF_DESIRE_HERO_SLAYER_OMNIBUS:int  = 67;
 		
 		public function DenOfDesire() { }
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		
+				
 		public function enterDungeon():void {
 			inDungeon = true;
 			dungeonLoc = 64;
@@ -68,7 +67,7 @@ public class DenOfDesire extends DungeonAbstractContent
 			clearOutput();
 			if (player.isAlraune())
 			{
-				uniquuuesexscene.AlrauneDungeonBadEnd();
+				SceneLib.uniqueSexScene.AlrauneDungeonBadEnd();
 			}
 			else {
 				outputText("<b>Several years later</b>\n\n");

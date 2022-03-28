@@ -3,12 +3,10 @@ import classes.*;
 import classes.BodyParts.Ears;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 public class BunnyGirl extends BaseContent{
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-
 		public function isItEaster():Boolean {
 			return (date.date >= 30 && date.date <= 31 && date.month == 2) || (date.month == 3 && date.date <= 1);
 		}
@@ -163,8 +161,7 @@ private function rapeBunBun():void {
 			addButton(3, "69",bunbun69);
 			outputText("  Sixty-nine her?");
 		}
-		uniquuuesexscene.pcUSSPreChecksV2(rapeBunBun2);
-		//if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 35).hint("Other non typical sex scenes.");
+		SceneLib.uniqueSexScene.pcUSSPreChecksV2(rapeBunBun2);
 		addButton(14, "Leave", camp.returnToCampUseOneHour);
 	}
 }
@@ -186,8 +183,7 @@ public function rapeBunBun2():void {
 		addButton(3, "69",bunbun69);
 		outputText("  Sixty-nine her?");
 	}
-	uniquuuesexscene.pcUSSPreChecksV2(rapeBunBun2);
-	//if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 35).hint("Other non typical sex scenes.");
+	SceneLib.uniqueSexScene.pcUSSPreChecksV2(rapeBunBun2);
 	addButton(14, "Leave", camp.returnToCampUseOneHour);
 }
 

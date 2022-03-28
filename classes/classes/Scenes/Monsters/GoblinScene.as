@@ -9,7 +9,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.SceneLib;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 import coc.xxc.BoundStory;
@@ -17,9 +17,7 @@ import coc.xxc.Story;
 
 public class GoblinScene extends BaseContent
 	{
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-
-		public function GoblinScene()
+				public function GoblinScene()
 		{
 			onGameInit(init);
 		}
@@ -361,9 +359,8 @@ public class GoblinScene extends BaseContent
 				}
 				addButton(10, "Kill", killGoblin);
 				addButton(14, "Leave", cleanupAfterCombat);
-				uniquuuesexscene.pcUSSPreChecksV2(gobboRapeIntro);
-				//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(47);
-			}
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(gobboRapeIntro);
+							}
 			else {
 				//If cant rape or breastfeed
 				addButton(10, "Kill", killGoblin);

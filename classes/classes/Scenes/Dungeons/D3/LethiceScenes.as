@@ -7,7 +7,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
 import classes.Items.WeaponLib;
 import classes.Scenes.SceneLib;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 import classes.StatusEffects;
 
 import flash.net.SharedObject;
@@ -22,8 +22,6 @@ public class LethiceScenes extends BaseContent
 		public static const GAME_END_CONQUER_LOW:uint = 6;
 		public static const GAME_END_CONQUER_MED:uint = 7;
 		public static const GAME_END_CONQUER_HIGH:uint = 8;
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-
 		private function saveExport():void
 		{
 			clearOutput();
@@ -798,7 +796,7 @@ public class LethiceScenes extends BaseContent
 			clearOutput();
 			if (player.isAlraune())
 			{
-				uniquuuesexscene.AlrauneDungeonBadEnd();
+				SceneLib.uniqueSexScene.AlrauneDungeonBadEnd();
 			}
 			else {
 

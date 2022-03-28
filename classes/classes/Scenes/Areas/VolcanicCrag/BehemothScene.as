@@ -6,12 +6,11 @@ import classes.BodyParts.Tail;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 
 public class BehemothScene extends BaseContent
 	{
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		
+				
 		public function BehemothScene() 
 		{
 		}
@@ -197,9 +196,8 @@ public class BehemothScene extends BaseContent
 			menu();
 			if (player.lust >= 33) addButton(0, "Sex", behemothSexMenu, true, null, null, "Initiate sexy time with the Behemoth.");
 			addButton(14, "Leave", cleanupAfterCombat);
-			uniquuuesexscene.pcUSSPreChecksV2(winAgainstBehemoth);
-			//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(43);
-		}
+			SceneLib.uniqueSexScene.pcUSSPreChecksV2(winAgainstBehemoth);
+					}
 		
 		public function loseToBehemoth():void {
 			clearOutput();
@@ -272,7 +270,7 @@ public class BehemothScene extends BaseContent
 				if (timesSexed() >= 3) addButton(5, "Watersports", watersportsWithBehemoth).hint("Do some urine activity with him.");
 				else addButtonDisabled(5, "Watersports", "Have sex with the behemoth enough times to unlock this!");
 			}
-			if (player.lowerBody == LowerBody.PLANT_FLOWER) addButton(6, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
+			if (player.lowerBody == LowerBody.PLANT_FLOWER) addButton(6, "Get Pollinated", SceneLib.uniqueSexScene.alrauneGetPollinatedScene);
 			if (!CoC.instance.inCombat) addButton(14, "Nevermind", camp.returnToCampUseOneHour);
 			else addButton(14, "Nevermind", cleanupAfterCombat);
 		}

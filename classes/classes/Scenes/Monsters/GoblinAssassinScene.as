@@ -10,13 +10,12 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.SceneLib;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 public class GoblinAssassinScene extends BaseContent
 	{
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		
+				
 		public function GoblinAssassinScene()
 		{
 		}
@@ -299,9 +298,8 @@ public class GoblinAssassinScene extends BaseContent
 				if (mindbreak != null) addButton(9, "Mind break", mindbreak);
 				addButton(10, "Kill", killGoblin);
 				addButton(14, "Leave", cleanupAfterCombat);
-				uniquuuesexscene.pcUSSPreChecksV2(gobboAssassinRapeIntro);
-				//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(45);
-			}
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(gobboAssassinRapeIntro);
+							}
 			else if (feeder!=null || eggs!=null) {
 				outputText("\n\n<b>You aren't horny enough to rape her, but ");
 				if (feeder!=null) outputText("your nipples ache with the desire to feed her your milk.  Do you feed her milk or leave?</b>");
