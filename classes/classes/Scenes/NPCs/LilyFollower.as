@@ -319,7 +319,7 @@ import classes.display.SpriteDb;
 		
 		private function LilyComeCampConclusion():void {
 			LilyFollowerState = true;
-			doNext(camp.returnToCampUseOneHour);
+			cleanupAfterCombat(camp.returnToCampUseOneHour);
 		}
 		
 		public function LilySex():void {
