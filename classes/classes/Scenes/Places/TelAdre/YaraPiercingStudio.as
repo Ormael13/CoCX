@@ -128,7 +128,7 @@ public class YaraPiercingStudio extends TelAdreAbstractContent {
         return locChoices;
     }
 
-    private function buildLocChoices2(fun:Function, pierce:Boolean):Boolean{
+    private function buildLocChoices2(fun:Function, pierce:Boolean, check:Boolean = false):*{
         var locChoices:Array = [];
         var pDesc:Array;
         if (pierce){
@@ -155,13 +155,19 @@ public class YaraPiercingStudio extends TelAdreAbstractContent {
             locChoices.push("Labia", ((!player.hasVagina() || player.vaginas[0].labiaPierced == TYPE_NONE) ? false: curry (fun, LOC_VULVA)), pDesc);
         }
 
-        var result:int = menuGen(locChoices,0, piercingStudio, false);
-        if (pierce){
-            return result < 9;
+        if (check){
+            var result:int = menuGen(locChoices,0, piercingStudio, false, check);
+            if (pierce){
+                return (result < 9);
+            }
+            else{
+                return (result > 0);
+            }
         }
         else{
-            return result > 0;
+            menuGen(locChoices,0, piercingStudio, false, check);
         }
+
     }
 
     private function pierceMenu():void {
@@ -169,10 +175,13 @@ public class YaraPiercingStudio extends TelAdreAbstractContent {
         hideUpDown();
         clearOutput();
         outputText("Yara asks, \"<i>Ok then, what would you like pierced " + player.mf("sir", "cutie") + "?  Just keep in mind my piercings are special - they're permanent and CAN'T be removed.</i>\"");
-        var spaceAvailable:Boolean = buildLocChoices2(chooseLoc, true);
+        var spaceAvailable:Boolean = buildLocChoices2(chooseLoc, true, true);
         if (!spaceAvailable) {
             outputText("\n\nYou give yourself a quick once-over and realize there's nowhere left for her to pierce you.  Oh well.");
             doNext(piercingStudio);
+        }
+        else{
+            buildLocChoices2(chooseLoc, true, false);
         }
     }
 
@@ -563,21 +572,24 @@ public class YaraPiercingStudio extends TelAdreAbstractContent {
         hideUpDown();
         clearOutput();
         outputText("\"<i>Really?</i>\" asks Yara, \"<i>I told you those piercings are permanent!  Well, I suppose they CAN be removed, but you're gonna hurt like hell afterwards.  If you really want me to, I can remove something, but it'll cost you 100 gems for the painkillers and labor.</i>\"");
-        var hasPiercings:Boolean = buildLocChoices2(doRemove, false);
+        var hasPiercings:Boolean = buildLocChoices2(doRemove, false, true);
         if (!hasPiercings) {
             outputText("\n\n\"Although... \" Yara giggles, \"<i>You don't have any piercings, silly!</i>\"");
             doNext(piercingStudio);
             return;
         }
-        if (player.gems < 100) {
+        else if (player.gems < 100) {
             outputText("\n\n<b>You do not have enough gems.</b>");
             doNext(piercingStudio);
             return;
         }
-        if (player.tou <= 5.5) {
+        else if (player.tou <= 5.5) {
             outputText("Yara looks you up and down before refusing you outright, \"<i>You don't look so good [name].  I don't think your body could handle it right now.</i>\"");
             doNext(piercingStudio);
             return;
+        }
+        else{
+            buildLocChoices2(doRemove, false, false);
         }
 
         function doRemove(loc:int):void {
