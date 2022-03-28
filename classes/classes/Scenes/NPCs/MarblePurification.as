@@ -983,7 +983,7 @@ public class MarblePurification extends NPCAwareContent{
 		if(player.cockThatFits(20) >= 0)
 			addButton(1, "FuckHer", threesomeFuckHer, next).hint("Use your cock, Marble uses vagina");
 		if(flags[kFLAGS.MARBLE_DICK_TYPE] > 0)
-			addButton(2, "FuckHer", threesomeFuckHer, next).hint("Let Marble do everything herself");
+			addButton(2, "LetHer", threesomeLetMarble, next).hint("Let Marble do everything herself");
 		addButton(3, "Lesbo", threesomeLesbo, next).hint("Engage in lesbo fun");
 	}
 	
