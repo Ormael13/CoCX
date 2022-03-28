@@ -940,7 +940,7 @@ public class MarblePurification extends NPCAwareContent{
 		addButton(0,"Spank",murbleSpanksCowCunt, next);
 		if((player.hasCock() && player.cockThatFits(20) >= 0) || player.hasVagina()) addButton(1,"Threesome",pcAndMurbleDoubleTeamCowButt, next);
 		if((player.hasCock() && player.cockThatFits(marbleScene.marbleCuntCapacity()) >= 0) || player.hasVagina()) addButton(2,"NTR",NTRIsClearlyTheWorstFetishWhyWouldYouWriteThisOMG, next);
-		if (flags[kFLAGS.MARBLE_DICK_TYPE] > 0) addButton(3, "Marble Cock", futaMarbleIsAHugeCowToCowCuntAndStuffsCowCuntsCuntFullOfCowCock, next);
+		if (flags[kFLAGS.MARBLE_DICK_TYPE] > 0) addButton(3, "Marble Cock", futaMarbleIsAHugeCowToCowCuntAndStuffsCowCuntsCuntFullOfCowCock);
 		if (!recall)
 			addButton(4,"Calm Down",calmMurblesFatAssDown);
 	}
@@ -983,7 +983,7 @@ public class MarblePurification extends NPCAwareContent{
 		if(player.cockThatFits(20) >= 0)
 			addButton(1, "FuckHer", threesomeFuckHer, next).hint("Use your cock, Marble uses vagina");
 		if(flags[kFLAGS.MARBLE_DICK_TYPE] > 0)
-			addButton(2, "FuckHer", threesomeFuckHer, next).hint("Let Marble do everything herself");
+			addButton(2, "LetHer", threesomeLetMarble, next).hint("Let Marble do everything herself");
 		addButton(3, "Lesbo", threesomeLesbo, next).hint("Engage in lesbo fun");
 	}
 	
