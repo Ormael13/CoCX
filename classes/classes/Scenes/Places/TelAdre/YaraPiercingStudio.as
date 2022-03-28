@@ -155,7 +155,7 @@ public class YaraPiercingStudio extends TelAdreAbstractContent {
             locChoices.push("Labia", ((!player.hasVagina() || player.vaginas[0].labiaPierced == TYPE_NONE) ? false: curry (fun, LOC_VULVA)), pDesc);
         }
 
-        var result:int = menuGen(locChoices,0, piercingStudio, false);
+        var result:int = menuGen(locChoices,0, piercingStudio, false,true);
         if (pierce){
             return result < 9;
         }

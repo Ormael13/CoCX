@@ -895,7 +895,7 @@ private function analRapuzulaKiha():void {
 			clearOutput();
 			outputText("With your word, the chest clicks.  You start  to lift the lid,  when it does so of its own will. Gleaming, brilliant light floods the room. From within the chest lifts a tome, pages swishing as if caught in an invisible gust. As you reach out to touch it, the pages stop turning as the tome closes. You reach out and grab the book. After taking a moment to admire the rich scarlet leather and gold stitching of the cover, you undo the clasp and begin to read. This book holds the story of the fall of Mareth, a highly detailed account of the demon wars. But… as you flip through the pages, you notice some words are misspelled. Some grammar is improper. A cipher! ");
 			outputText("The forbidden knowledge the message mentioned, it’s concealed in this book! Encoded, so the unworthy cannot find it. You’ll need a great deal of time to puzzle this out. In the meantime, what information you’ve read so far is detailed and consistent with what you already know, so perhaps this book is useful in more ways than one.");
-			if(player.findPerk(PerkLib.JobSorcerer) >= 0) outputText(" Beyond that, the book pulses with magic, something you could certainly make use of. Power from... blood? Some sort of blood magic.");
+			if(player.hasPerk(PerkLib.JobSorcerer)) outputText(" Beyond that, the book pulses with magic, something you could certainly make use of. Power from... blood? Some sort of blood magic.");
 			outputText("\n\n");
 			//[Player receives: 1x Inquisitor's Tome]
 			flags[kFLAGS.GOTTEN_INQUISITOR_ARMOR] = 2;
