@@ -14234,7 +14234,15 @@ public class Combat extends BaseContent {
 		if (monster.short == "training dummy") {
 			outputText("As you retreat the training dummy just stands there in it usual spot. ");
 		}
-		else if (player.canFly()) outputText("Gritting your teeth with effort, you beat your wings quickly and lift off!  ");
+		else if (player.canFly()) {
+            if(player.wings.type != Wings.ETHEREAL || player.wings.type != Wings.LEVITATION || player.wings.type != Wings.THUNDEROUS_AURA){
+                outputText("Gritting your teeth with effort, you beat your wings quickly and lift off!  ");
+            }
+            else{
+                outputText("You leap into the air, and hover in the sky!  ");
+            }
+        }
+
         //Nonflying PCs
         else {
             //In prison!
