@@ -202,7 +202,7 @@ public function postFightOptionsKiss():void {
 	outputText("You lean in, and kiss the Drider full on the lips. Her eyes widen in shock, but she returns the gesture with surprising gentleness.\n\n");
 	if (TyrantiaAffectionMeter > 40) {
 		outputText("\"<i>...[name]...</i>\" She greedily kisses you back, her fangs scraping your cheeks, cool against the warmth of her lips, and for a moment, she smiles, almost happy. As you smile back, her horse ears flick, and she leans back, looking away.\n\n");
-		outputText("\"<i></i>\"\n\n");
+		//outputText("\"<i></i>\"\n\n");
 		
 	}
 	else if (TyrantiaAffectionMeter > 20) {
@@ -274,7 +274,7 @@ public function repeatEncounterBattlefieldRe():void {
 }
 public function repeatEncounterBattlefieldTalk():void {
 	clearOutput();
-	outputText("\"<i></i>\"\n\n");
+	//outputText("\"<i></i>\"\n\n");
 	menu();
 	//0 - Lab
 	addButton(1, "Self", repeatEncounterBattlefieldTalkSelf);
@@ -709,7 +709,7 @@ public function TyrantiaTitJob():void {
 	outputText("You look at your Drider lover’s chest, and she gives a smirk, crossing an arm over each pair of her gargantuan breasts. You smile up at her as she flicks her bras, her massive, G-cups popping free. You feel yourself stiffen, blood rushing to your oversized [cock]. This doesn’t escape Tyrantia’s notice, and she saunters over. She reaches down, between your legs, and she smiles.\n\n");
 	outputText("\"<i>Did I do that?</i>\" She asks, low and smoldering. She knows full well what you want, however, and she wastes no more time, quickly freeing your [cock] from your gear. Your glorious rod springs free, and she blinks twice.\n\n");
 	outputText("\"<i>Nice.</i>\" She says, a giant hand wrapping around your glans. Her fingers are warm, but dry, and she slowly moves the hand down your shaft, tickling the sensitive skin.\n\n");
-	outputText("\"<i></i>\"\n\n");
+	//outputText("\"<i></i>\"\n\n");
 	doNext(camp.returnToCampUseOneHour);
 }
 
