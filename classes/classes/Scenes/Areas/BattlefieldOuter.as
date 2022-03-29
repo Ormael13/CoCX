@@ -32,8 +32,8 @@ use namespace CoC;
 			}*/
 			//Tyrania
 			if (rand(3) == 0 && player.level >= 45 && TyrantiaFollower.TyrantiaFollowerStage < 5 && !TyrantiaFollower.TyraniaIsRemovedFromThewGame) {
-				if (TyrantiaFollower.TyraniaPostFinalKissScene) SceneLib.tyrania.encounterBattlefieldAfterFinalKiss();
-				else if (TyrantiaFollower.TyrantiaAffectionMeter > 40) SceneLib.tyrania.encounterBattlefieldAfter40Affection();
+				if (TyrantiaFollower.TyrantiaFollowerStage > 2) SceneLib.tyrania.repeatEncounterBattlefield();
+				else if (TyrantiaFollower.TyrantiaAffectionMeter > 40 && TyrantiaFollower.TyrantiaFollowerStage > 1) SceneLib.tyrania.encounterBattlefieldAfter40Affection();
 				else if (TyrantiaFollower.TyrantiaFollowerStage > 0) SceneLib.tyrania.repeatEncounterBattlefield();
 				else SceneLib.tyrania.firstEncounter();
 				return;
