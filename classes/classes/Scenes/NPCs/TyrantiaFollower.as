@@ -202,8 +202,10 @@ public function postFightOptionsKiss():void {
 	outputText("You lean in, and kiss the Drider full on the lips. Her eyes widen in shock, but she returns the gesture with surprising gentleness.\n\n");
 	if (TyrantiaAffectionMeter > 40) {
 		outputText("\"<i>...[name]...</i>\" She greedily kisses you back, her fangs scraping your cheeks, cool against the warmth of her lips, and for a moment, she smiles, almost happy. As you smile back, her horse ears flick, and she leans back, looking away.\n\n");
-		//outputText("\"<i></i>\"\n\n");
-		
+		outputText("\"<i>[name]...I…</i>\" Her voice is surprisingly soft, almost affectionate. \"<i>Why do you do this?</i>\" She clenches her fists. \"<i>I can’t do this. I just can’t.</i>\" She forces herself to her feet. ");
+		outputText("\"<i>[name]...You’re great and all...But I can’t be what you want me to be...Not without hurting you.</i>\" She stands, groaning from her injured legs. \"<i>Just...Stop torturing me with what can’t be.</i>\" You call out to your spider-lady, but she flees,faster than you’ve ever seen her move before. You pick yourself up, try to run after her, but Tyrantia’s gone.\n\n");
+		TyrantiaFollowerStage = 1.5;
+		doNext(camp.returnToCampUseOneHour);
 	}
 	else if (TyrantiaAffectionMeter > 20) {
 		outputText("\"<i>Look...This is cute and all, but I’ve got...things to do.</i>\" She doesn’t push you away, though, and you hold on, slipping your finger underneath her metal plates. A clasp gives way, and she blushes bright red, too weak to pull away, but clearly uncomfortable.\n\n");
@@ -251,11 +253,16 @@ public function repeatEncounterBattlefield():void {
 	outputText("You raise one eyebrow, asking her if she really eats that shit, and she makes a barfing noise, tossing the arm over one shoulder. \"<i>Hell no. They taste like burnt silk that’s been out in the sun.</i>\"\n\n");
 	outputText("You ask how she knows that, and she blushes, waving it off. \"<i>I don’t, I just have an imagination.</i>\" You say nothing, and she blushes more. \"<i>Okay, okay. I tried catching bugs as a kid, took a match to it by accident, and got hungry. It was natural curiosity!</i>\"\n\n");
 	outputText("You smile, chuckling at her embarrassment. \"<i>Sure, laugh it up, chucklehead.</i>\" Despite her words, she smiles, fangs out. As intimidating as her visage is, her smile is strangely wholesome, in a weird way. \"<i>Okay, what did you want, [name]? Don’t think you came out here for nothing.</i>\"\n\n");
+	if (TyrantiaFollowerStage > 2 && !TyraniaPostFinalKissScene) TyraniaPostFinalKissScene = true;
 	menu();
-	addButton(0, "Talk", repeatEncounterBattlefieldTalk);
-	//1 - Spar
+	if (TyrantiaAffectionMeter > 40) {
+		if (TyraniaPostFinalKissScene) addButtonDisabled(0, "KISS", "Maybe time to think on making your base a bit more crowded? ;)");
+		else addButton(0, "KISS", postFightOptionsKiss);
+	}
+	else addButton(0, "Kiss", postFightOptionsKiss);
+	addButton(1, "Talk", repeatEncounterBattlefieldTalk);
+	//2 - Spar
 	//Training and Sex where?
-	addButton(3, "Kiss", postFightOptionsKiss);
 	if (TyraniaPostFinalKissScene) addButton(4, "Sex", TyrantiaSexMenu);
 	else addButtonDisabled(4, "Sex", "Req. special scene after reaching 40%+ affection.");
 	addButton(14, "Leave", camp.returnToCampUseOneHour);
@@ -264,10 +271,14 @@ public function repeatEncounterBattlefieldRe():void {
 	clearOutput();
 	outputText("The giant Drider laughs. <i>\"Changed your mind, did ya?\"</i> She shrugs, leaning down a little. <i>\"What did you want then?\"</i>\n\n");
 	menu();
-	addButton(0, "Talk", repeatEncounterBattlefieldTalk);
-	//1 - Spar
+	if (TyrantiaAffectionMeter > 40) {
+		if (TyraniaPostFinalKissScene) addButtonDisabled(0, "KISS", "Maybe time to think on making your base a bit more crowded? ;)");
+		else addButton(0, "KISS", postFightOptionsKiss);
+	}
+	else addButton(0, "Kiss", postFightOptionsKiss);
+	addButton(1, "Talk", repeatEncounterBattlefieldTalk);
+	//2 - Spar
 	//addButton(2, "Training", repeatEncounterBattlefieldTrain);
-	addButton(3, "Kiss", postFightOptionsKiss);
 	if (TyraniaPostFinalKissScene) addButton(4, "Sex", TyrantiaSexMenu);
 	else addButtonDisabled(4, "Sex", "Req. special scene after reaching 40%+ affection.");
 	addButton(14, "Leave", camp.returnToCampUseOneHour);
@@ -282,7 +293,8 @@ public function repeatEncounterBattlefieldTalk():void {
 	addButton(3, "Kiha", repeatEncounterBattlefieldTalkKiha);
 	addButton(4, "Diva", repeatEncounterBattlefieldTalkDiva);
 	addButton(5, "Her", repeatEncounterBattlefieldTalkHer);
-	addButton(14, "Back", repeatEncounterBattlefieldRe);
+	if (TyrantiaFollowerStage >= 4) addButton(14, "Back", TyrantiaAtCamp);
+	else addButton(14, "Back", repeatEncounterBattlefieldRe);
 }
 public function repeatEncounterBattlefieldTalkLab():void {
 	clearOutput();
@@ -645,13 +657,6 @@ public function TyrantiaCantmakeitRN():void {
 	addButton(1, "Next", TyrantiaLovinCave);
 }
 
-public function encounterBattlefieldAfterFinalKiss():void {
-	clearOutput();
-	outputText("\"<i></i>\"\n\n");
-	//affection gains
-	doNext(camp.returnToCampUseOneHour);
-}
-
 public function TyrantiaSexMenu():void {
 	clearOutput();
 	if (TyraniaPostFinalKissScene) outputText("The Drider woman eyes you up and down, a poorly disguised smile on her face. <i>“Well...Since you asked nicely, I guess I wouldn’t mind.”</i> Her spider half bobs from side to side, and she runs her hands along the outside of her armor...rubbing where the nipples are in an obvious attempt to draw your gaze to her massive pairs of jugs. <i>“What are you thinking?”</i>\n\n");
@@ -673,7 +678,8 @@ public function TyrantiaSexMenu():void {
 			addButton(4, "C.Fuck", TyrantiaCavFuck);
 		}
 	}
-	if (player.hasVagina()) addButton(5, "P.Spear",GetPhallustuffed);
+	if (player.hasVagina()) addButton(5, "P.Spear", GetPhallustuffed);
+	if (TyrantiaFollowerStage >= 4) addButton(14, "Back", TyrantiaAtCamp);
 }
 
 public function TyrantiaFuck():void {
@@ -823,18 +829,18 @@ public function GetPhallustuffed():void {
 
 public function TyrantiaAtCamp():void {
 	clearOutput();
-	outputText("\n\n");
+	outputText("You decide to go see your Drider Giantess. As you walk over to her hutch, Tyrantia comes out from her dwelling, her phallic spear over one shoulder. She looks down at you, arching her back and sending the soft scraping of steel up your spine.\n\n");
+	outputText("\"<i>Oh, hey.</i>\" She rests her spider-half on the ground, so you don’t have to look up"+(player.tallness < 108 ? "" : " as much")+" (if playerheight < 9ft). \"<i>Do you need something? Or did you just come over to see me?</i>\"\n\n");
 	menu();
-	addButton(0, "Talk", repeatEncounterBattlefieldTalk);
-	//1 - Spar addButton(1, "Spar", TyrantiaSpar);
+	addButton(0, "Looks", TyrantiaAppearance);
+	addButton(1, "Talk", repeatEncounterBattlefieldTalk);
+	//2 - Spar addButton(1, "Spar", TyrantiaSpar);
 	//Training and Sex where?
 	/*if (TyrantiaTrainingSessions > 0){
-		addButton(2, "Training", TyrantiaTraining);
+		addButton(3, "Training", TyrantiaTraining);
 	}*/
-	addButton(3, "Kiss", postFightOptionsKiss);
 	addButton(4, "Sex", TyrantiaSexMenu);
 	//5 - JoinMe addButton(2, "JoinMe", TyrantiaFollowerOptions);
-	addButton(10, "Looks", TyrantiaAppearance);
 	addButton(14, "Leave", camp.campLoversMenu);
 }
 

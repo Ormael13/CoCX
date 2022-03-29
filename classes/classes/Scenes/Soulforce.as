@@ -2838,8 +2838,8 @@ public class Soulforce extends BaseContent
 	}
 	public function FightTyrantia():void {
 		clearOutput();
-		if (TyrantiaFollower.TyraniaPostFinalKissScene) SceneLib.tyrania.encounterBattlefieldAfterFinalKiss();
-		else if (TyrantiaFollower.TyrantiaAffectionMeter > 40) SceneLib.tyrania.encounterBattlefieldAfter40Affection();
+		if (TyrantiaFollower.TyrantiaFollowerStage > 2) SceneLib.tyrania.repeatEncounterBattlefield();
+		else if (TyrantiaFollower.TyrantiaAffectionMeter > 40 && TyrantiaFollower.TyrantiaFollowerStage > 1) SceneLib.tyrania.encounterBattlefieldAfter40Affection();
 		else if (TyrantiaFollower.TyrantiaFollowerStage > 0) SceneLib.tyrania.repeatEncounterBattlefield();
 		else SceneLib.tyrania.firstEncounter();
 	}

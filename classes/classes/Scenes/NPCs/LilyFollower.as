@@ -447,7 +447,6 @@ import classes.display.SpriteDb;
 			addButton(2, "Sure", LilyReward);
 		}
 		
-		
 		public function LilyDenied():void {
 			clearOutput();
 			outputText("You laugh, saying that if she’s a good girl and isn’t so needy next time, you’ll consider it. She wails, flailing angrily against the restraints as you redress and walk away. \n\n");
@@ -706,7 +705,7 @@ import classes.display.SpriteDb;
 			outputText("<i>\"Hello,\"</i> she says from the tree, a smile on her face and one hand over her mouth at the naughty prank she just played.. <i>\"How are things," + (LilySubmissivenessMeter >= 80)? player.mf("master", "mistress"): "Champ?" + "\"</i>\n\n");
 			outputText("You motion for her to join you on the ground, and she tilts her head, taking a silken rope. She jumps down from the tree, holding the rope, and ties it off. She smiles, bow on her back. <i>\"What brings you to my section of camp?\"</i>\n\n");
 			menu();
-			//appearance
+			addButton(0, "Apperance", LilyAppearance);
 			addButton(1, "Talk", LilyTalk);
 			if (player.lust >= 33) {
 				if (player.gender > 0) addButton(2, "Sex", LilyFollowerSex);
@@ -733,7 +732,7 @@ import classes.display.SpriteDb;
 			clearOutput();
 			outputText("<i>\"Yes, [name], what did you need?\"</i>\n\n");
 			menu();
-			//appearance
+			addButton(0, "Apperance", LilyAppearance);
 			addButton(1, "Talk", LilyTalk);
 			if (player.lust >= 33) {
 				if (player.gender > 0) addButton(2, "Sex", LilyFollowerSex);
@@ -743,6 +742,15 @@ import classes.display.SpriteDb;
 			//addButton(3, "House", LilyHouse);
 			//addButton(4, "Spar", LilySpar);
 			addButton(14, "Leave", camp.campLoversMenu);
+		}
+		
+		public function LilyAppearance():void {
+			clearOutput();
+			outputText("Lily is a Drider, at first glance not that different from the others in the swamp. Her six eyes are violet, glowing slightly when it’s dark. Her dark lips shimmer, with twin fangs poking out from the upper lips. Her " + LilySkinTone + " skin is smooth, and her nakedness lets you see all of it, from her forehead down to her waist, where the supple skin smoothly transitions into shining black chitin. Her human hands transition into the same black chitin at her forearms, then back at her shoulders, almost like she’s wearing chitin bracers.\n\n");
+			outputText("Below her slender neck, four E-cup breasts cover her chest, bound only by a set of fetishistic golden chains. Each of her nipples are pierced, with a thin rod of gold through each, keeping the chains in place.\n\n");
+			outputText("Her Spider-half has eight spindly legs, and her spinnerets are visibly active. Lily occasionally leans back, using her fingers to pull silk from her spinnerets, quickly braiding the strands into crude, yet serviceable rope.\n\n");
+			outputText("As she sees you looking at her, Lily gives you a sly three-eyed wink, sliding a hand down her waist, making eye contact with you as she rubs her rapidly swelling ebony pussy lips with one hand.\n\n");
+			doNext(LilyCampBack);
 		}
 	}
 }
