@@ -53,8 +53,8 @@ public class SceneHunter extends BaseContent {
         }
         outputText("\nNPCs with MutEx scenes: Lottie, Whitney...");
         //Scene list link
-        addButton(3, "Printing", toggle, kFLAGS.SCENEHUNTER_PRINT_CHECKS);
-        outputText("\n\n<b>Check printing</b>: ");
+        addButton(3, "PrintChecks", toggle, kFLAGS.SCENEHUNTER_PRINT_CHECKS);
+        outputText("\n\n<b>Print Checks:</b>: ");
         if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) {
             outputText("<b><font color=\"#008000\">ENABLED</font></b>");
             outputText("\nSome race, dick size and other attributes (failed) checks are explicitly printed in the middle of the scene.");
@@ -80,7 +80,133 @@ public class SceneHunter extends BaseContent {
 		flags[flag] = !flags[flag];
 		settingsPage();
 	}
+
+    public function get uniHerms():Boolean {
+        return flags[kFLAGS.SCENEHUNTER_UNI_HERMS];
+    }
+
+    public function get dickSelect():Boolean {
+        return flags[kFLAGS.SCENEHUNTER_DICK_SELECT];
+    }
+
+    public function get mutExScenes():Boolean {
+        return flags[kFLAGS.SCENEHUNTER_MUTEX_SCENES];
+    }
+
+    public function get printChecks():Boolean {
+        return flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS];
+    }
     
+    //--------------------------------------------------------------------------------------------------
+    // UniHerms
+    //--------------------------------------------------------------------------------------------------
+
+    /**
+    * Prints the dialogue to select the part to use in the scene. Automatically checks if the part exists.
+    * If only one option is available, goes with it.
+    * @param    dickPriority    Used if uniHerms are disabled. If true, selects dick option (if possible). False - vag or ass.
+                                Vag is always "better" than ass.
+    * @param    dickF           Functions to call for dick, vag, ass buttons. Buttons are not displayed when "null"
+    * @param    vagF
+    * @param    assF
+    * @param    dickActive      If false, "dick" button will be disabled.
+    * @param    dickDisabledMsg The message to write on the disabled dick button
+    */
+    public function selectPart(dickF:Function, vagF:Function, assF:Function = null, dickActive:Boolean = true, dickDisabledMsg:String = "", dickPriority:Boolean = true):void {
+        var beforeText:String = CoC.instance.currentText;
+        //Auto-calls. No auto call when dick is just inactive - player should know!
+        if (!(dickF && player.hasCock() && dickActive) && !(vagF && player.hasVagina()) && !assF) { //sanity checks
+            if (dickF && player.hasCock() && !dickActive)
+                outputText("<b><u>SceneHunter.selectPart() was called, but the ONLY option - dick - is disabled. Please report this.</b></u>");
+            else
+                outputText("<b><u>SceneHunter.selectPart() was called in a wrong way. Please report this.</b></u>");
+            goNext(true);
+            return;
+        }
+        /* if ONLY dick is available  - no "active" checks in the first part, should be failsafe
+        or if !uniHerms:
+            - dick active and higher priority than vag (always higher than ass!!)
+            - dick active and no vag */
+        if ((dickF && player.hasCock()) && (!(vagF && player.hasVagina()) && !assF || !uniHerms && dickActive && (dickPriority || !player.hasVagina()))) {
+            dickF();
+            return;
+        }
+        // for !uniHerms: if dick should be called, it was ALREADY called. So call vag anyway, vag > ass
+        if ((vagF && player.hasVagina()) && (!(dickF && player.hasCock()) && !assF || !uniHerms))) {
+            vagF();
+            return;
+        }
+        // with !uniHerms reached only when dick/vag are impossible, call it
+        if (!(dickF && player.hasCock()) && !(vagF && player.hasVagina()) && assF || !uniHerms) {
+            assF();
+            return;
+        }
+        //Dialogue
+        outputText("\n\n<b>Which part of your body do you want to use?</b>")
+        menu();
+        if (dickF) {
+            if (player.hasCock()) {
+                if (dickActive)
+                    addButton(0, "Dick", sh_continue, dickF, beforeText);
+                else
+                    addButtonDisabled(0, "Dick", dickDisabledMsg);
+            }
+            else
+                addButtonDisabled(0, "Dick", "You don't have any.");
+        }
+        if (vagF) {
+            if (player.hasVagina())
+                    addButton(1, "Vagina", sh_continue, vagF, beforeText);
+            else
+                addButtonDisabled(1, "Vagina", "You don't have any.");
+        }
+        if (assF)
+            addButton(2, "Ass", sh_continue, assF, beforeText);
+    }
+
+    //restore the previous text and start the next function
+    public function sh_continue(fun:Function, textToRestore:String = ""):void {
+        CoC.instance.currentText = textToRestore;
+        fun();
+    }
+
+    //--------------------------------------------------------------------------------------------------
+    // DickSelect
+    //--------------------------------------------------------------------------------------------------
+    /**
+    * Prints the dialogue to select the dick to use in the scene.
+    * If only one option is available, goes with it.
+    * @param    fitF   Functio
+    * @param    
+    * @param    assF
+    * @param    dickActive          If false, "dick" button will be disabled.
+    * @param    dickDisabledMsg     The message to write on the disabled dick button
+    */
+    /*
+    public function selectDickFit(dickF:Function, vagF:Function, assF:Function = null, dickActive:Boolean = true, dickDisabledMsg:String = ""):void {
+        var beforeText:String = CoC.instance.currentText;
+        outputText("\n\n<b>Which part of your body do you want to use?</b>")
+        menu();
+        if (dickF) {
+            if (player.hasCock()) {
+                if (dickActive)
+                    addButton(0, "Dick", uh_continue, dickF, beforeText);
+                else
+                    addButtonDisabled(0, "Dick", dickDisabledMsg);
+            }
+            else
+                addButtonDisabled(0, "Dick", "You don't have any.");
+        }
+        if (vagF) {
+            if (player.hasVagina())
+                    addButton(1, "Vagina", uh_continue, vagF, beforeText);
+            else
+                addButtonDisabled(1, "Vagina", "You don't have any.");
+        }
+        if (assF)
+            addButton(2, "Ass", uh_continue, assF, beforeText);
+    }
+*/
 }
 }
 //CHARVIEW_ARMOR_HIDDEN
