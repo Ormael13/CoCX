@@ -39,7 +39,8 @@ public class SceneHunter extends BaseContent {
         outputText("\n\n<b>Mutually exclusive scenes</b>: ");
         if (flags[kFLAGS.SCENEHUNTER_MUTEX_SCENES]) {
             outputText("<b><font color=\"#008000\">ENABLED</font></b>");
-            outputText("\nSome originally mutually exclusive scenes (when you've selected one scene, you'll never access the other one in this playthrough) are no longer mutually exclusive.");
+            outputText("\nSome originally mutually exclusive scenes (when you've selected one scene, you'll never access the other one in this playthrough) are no longer mutually exclusive. Full list of the changes:");
+            outputText("\nChristmas elf - enabled sex even when corrupt.");
             outputText("\n<i>This opens up more scenes, but <b>some</b> of them may look off. They are still explained in the game, but be warned that the original writers intended otherwise.</i>");
         }
         else {
@@ -47,7 +48,6 @@ public class SceneHunter extends BaseContent {
             outputText("\n...stay mutually exclusive, as intended by the writers...");
             outputText("\n<i>Some one-time scenes with different options can still be replayed using 'Camp Actions -> Spend Time -> Recall'.</i>");
         }
-        outputText("\nNPCs with MutEx scenes: Lottie, Whitney...");
         //Scene list link
         addButton(3, "PrintChecks", toggle, kFLAGS.SCENEHUNTER_PRINT_CHECKS);
         outputText("\n\n<b>Print Checks:</b>: ");
@@ -95,21 +95,23 @@ public class SceneHunter extends BaseContent {
     /**
     * Prints the dialogue to select the part to use in the scene. Automatically checks if the part exists.
     * If only one option is available, goes with it.
-    * @param    dickPriority    Used if uniHerms are disabled. If true, selects dick option (if possible). False - vag or ass.
-                                Vag is always "better" than ass.
-    * @param    dickF           Functions to call for dick, vag, ass buttons. Buttons are not displayed when "null"
-    * @param    vagF
-    * @param    assF
+    * If disabled: herm > (cock/vag) > ass
+    * @param    dickPriority    Used if uniHerms are disabled. 1 - cock over vag, -1 - vag over cock. 0 - rand. 
+    * @param    dickF           Dick button
+    * @param    vagF            Vagina button
+    * @param    assF            Ass button
+    * @param    hermF            Herm button
     * @param    dickActive      If false, "dick" button will be disabled.
     * @param    dickDisabledMsg The message to write on the disabled dick button
     */
-    public function selectGender(dickF:Function, vagF:Function, assF:Function = null, dickActive:Boolean = true, dickDisabledMsg:String = "", dickPriority:Boolean = true):void {
+    public function selectGender(dickF:Function, vagF:Function, assF:Function = null, hermF:Function = null, dickActive:Boolean = true, dickDisabledMsg:String = "", dickPriority:int = 0):void {
+        var dickB:Boolean = dickF != null && player.hasCock();
+        var vagB:Boolean = vagF != null && player.hasVagina();
+        var assB:Boolean = assF != null;
+        var hermB:Boolean = hermF != null && player.hasCock() && player.hasVagina();
         //Auto-calls. No auto call when dick is just inactive - player should know!
-        if (!(dickF != null && player.hasCock() && dickActive) && !(vagF != null && player.hasVagina()) && assF == null) { //sanity checks
-            if (dickF && player.hasCock() && !dickActive)
-                outputText("<b><u>SceneHunter.selectGender() was called, but the ONLY option - dick - is disabled. Please report this.</b></u>");
-            else
-                outputText("<b><u>SceneHunter.selectGender() was called in a wrong way. Please report this.</b></u>");
+        if (!(dickB && dickActive) && !vagB && !assB && !(hermB && dickActive)) { //sanity checks
+            outputText("<b><u>SceneHunter.selectGender() was called in a wrong way. Please report this.</b></u>");
             goNext(true);
             return;
         }
@@ -117,17 +119,21 @@ public class SceneHunter extends BaseContent {
         or if !uniHerms:
             - dick active and higher priority than vag (always higher than ass!!)
             - dick active and no vag */
-        if ((dickF != null && player.hasCock()) && (!(vagF != null && player.hasVagina()) && assF == null || !uniHerms && dickActive && (dickPriority || !player.hasVagina()))) {
+        if (hermB && (!dickB && !vagB && !assB || !uniHerms) && dickActive) { //!uniherms - auto
+            hermF();
+            return;
+        }
+        if (dickB && (!hermB && !vagB && !assB || !uniHerms && (!player.hasVagina() || dickPriority == 1 || dickPriority == 0 && rand(2) == 0)) && dickActive) { //!uniherms - if priority
             dickF();
             return;
         }
         // for !uniHerms: if dick should be called, it was ALREADY called. So call vag anyway, vag > ass
-        if ((vagF != null && player.hasVagina()) && (!(dickF != null && player.hasCock()) && assF == null || !uniHerms)) {
+        if (vagB && (!hermB && !dickB && !assB || !uniHerms)) {
             vagF();
             return;
         }
         // with !uniHerms reached only when dick/vag are impossible, call it
-        if (!(dickF != null && player.hasCock()) && !(vagF != null && player.hasVagina()) && assF != null || !uniHerms) {
+        if (assB && (!hermB && !dickB && !vagB || !uniHerms)) {
             assF();
             return;
         }
@@ -153,6 +159,16 @@ public class SceneHunter extends BaseContent {
         }
         if (assF != null)
             addButton(2, "Ass", restoreText, beforeText, assF);
+        if (hermF != null) {
+            if (player.hasCock() && player.hasVagina()) {
+                if (dickActive) //checking the size here too... though not sure if it should work this way
+                    addButton(3, "Herm", restoreText, beforeText, hermF);
+                else
+                    addButtonDisabled(3, "Herm", dickDisabledMsg);
+            }
+            else
+                addButtonDisabled(3, "Herm", "Not a herm.");
+        }
     }
 
     //--------------------------------------------------------------------------------------------------
@@ -267,7 +283,7 @@ public class SceneHunter extends BaseContent {
 
     public function print(text:String):void {
         if (printChecks)
-            outputText("\n\n<b>" + text + "</b>\n\n");
+            outputText("\n<b>" + text + "</b>\n");
     }
 
     //Some common checks for easier access

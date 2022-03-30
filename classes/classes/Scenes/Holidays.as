@@ -20,6 +20,7 @@ import classes.StatusEffects;
 import classes.VaginaClass;
 import classes.internals.Utils;
 import classes.display.SpriteDb;
+import classes.SceneHunter;
 
 public class Holidays {
     public function Holidays() {
@@ -36,6 +37,11 @@ public class Holidays {
     private static function get consumables():ConsumableLib{
         return CoC.instance.consumables;
     }
+    //fuck, this trash-file should be rewritten to be a part of the baseContent... but I'll let someone else do that ;)
+    private static function get sceneHunter():SceneHunter {
+        return CoC.instance.gameSettings.sceneHunter_inst;
+    }
+
     public static function pumpkinFuckEncounter():void {
         EngineCore.awardAchievement("Pump-kin-kin-kin", kACHIEVEMENTS.HOLIDAY_HALLOWEEN_I);
         EngineCore.clearOutput();
@@ -153,8 +159,8 @@ public class Holidays {
             if (!player.hasPerk(PerkLib.FerasBoonAlpha)) {
                 EngineCore.outputText("\n\n(<b>Perk Gained: Fera's Boon - Alpha</b>)");
                 player.createPerk(PerkLib.FerasBoonAlpha, 0, 0, 0, 0);
+                player.dynStats("cor", 30);
             }
-            player.dynStats("cor", 30);
             EngineCore.doNext(SceneLib.camp.returnToCampUseOneHour);
         }
 
@@ -229,8 +235,8 @@ public class Holidays {
             if (!player.hasPerk(PerkLib.FerasBoonBreedingBitch)) {
                 EngineCore.outputText("\n\n(<b>Perk Gained: Fera's Boon - Breeding Bitch</b>)");
                 player.createPerk(PerkLib.FerasBoonBreedingBitch, 0, 0, 0, 0);
+                player.dynStats("cor", 30);
             }
-            player.dynStats("cor", 30);
             EngineCore.doNext(SceneLib.camp.returnToCampUseOneHour);
         }
     }
@@ -805,10 +811,10 @@ public class Holidays {
 
         //Let her Approach
         function letZeTurkeyApproach():void {
-            if (player.gender == 2 || (player.gender == 3 && Utils.rand(2) == 0)) {
-                femaleLetZeTurkeyGalApproach();
-                return;
-            }
+            sceneHunter.selectGender(maleLetZeTurkeyApproach, femaleLetZeTurkeyGalApproach);
+        }
+
+        function maleLetZeTurkeyApproach():void {
             EngineCore.clearOutput();
             EngineCore.outputText("Considering her ponderous form, the girl obviously poses no threat.  You wave her over, telling her to come on into camp.  With a huge grin, the turkey-girl wobbles over, her gigantic breasts swaying underneath her moccasins until she plops down beside you.  You try saying hello and introducing yourself, but the girl simply cocks her head to the side and murmurs, \"<i>Gobble?</i>\""
                     +"\n\nYou raise an eyebrow.  Is that all she can say?"
@@ -1909,7 +1915,8 @@ public class Holidays {
         }
         EngineCore.awardAchievement("Naughty or Nice", kACHIEVEMENTS.HOLIDAY_CHRISTMAS_I);
         EngineCore.outputText("You wonder out loud, \"<i>So this... present is mine?</i>\"\n\n");
-        if (player.cor >= 90 || JojoScene.monk >= 5 || player.hasStatusEffect(StatusEffects.Exgartuan) || SceneLib.amilyScene.amilyCorrupt() || flags[kFLAGS.SOPHIE_DISABLED] > 0 || flags[kFLAGS.SOPHIE_BIMBO_ACCEPTED] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0) {
+        //still can fuck if mutex
+        if ((player.cor >= 90 || JojoScene.monk >= 5 || player.hasStatusEffect(StatusEffects.Exgartuan) || SceneLib.amilyScene.amilyCorrupt() || flags[kFLAGS.SOPHIE_DISABLED] > 0 || flags[kFLAGS.SOPHIE_BIMBO_ACCEPTED] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0) && !sceneHunter.mutExScenes) {
             EngineCore.outputText("She nods, bouncing up and down in excitement and flushing slightly, \"<i>Yup, just tear the lid off and get your gift!</i>\"\n\n");
             if (flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] > 0) EngineCore.outputText("Here we go again...\n\n");
             //[Open Present] [Unwrap Elf] [Decline]
@@ -2006,48 +2013,51 @@ public class Holidays {
 
         function dickXmasElfGo():void {
             //(Dickfuck)
-            if (player.biggestCockArea() < 80) {
-                EngineCore.outputText("She pushes you down onto your bedroll and whispers, \"<i>Time to enjoy your present.</i>\"\n\n"
-                        +"She mounts you without pretense, straddling and inserting your [cock] in one smooth motion.  The sudden change from cool, night air to hot, tight pussy sends shockwaves of pleasure into your skull.  You master yourself before your eyes roll the whole way back and close your mouth before you start drooling.   Her vise-like tightness is inhuman, but somehow not so tight as to be uncomfortable.   The internal muscles clench and squeeze around you with an uncommon degree of control.  She's so hot, wet, and tight that you shiver.  You start rocking underneath her, giving in completely to the pleasure of her hole.\n\n"
-                        +"You grunt, pistoning into her over and over.  She clears her throat as she's bouncing atop of you, and you look back up, suddenly reminded that there's more to the world than the cunt milking your [cock].  The elf explains, \"<i>Don't be ashamed.  We elves have magical cunts.  Once something is inside it'll feel so good that it never wants to leave.  Judging from the look on your face I don't think you ever want to leave, do you?  I'm the best present you've ever had, aren't I?  Go ahead, cum for me, show me what a great gift I am.</i>\"\n\n"
-                        +"She's absolutely right – there's some indescribably pleasurable thing about the heat radiating into your dick that makes it feel like it's about to melt and pass into heaven.  The elf giggles and the vibrations of her laugh somehow radiate into you, and it's just too much.  You cum for your present, submitting to her pleasure as your spooge boils up into her.   It squelches wetly as it pumps into her, sounding absolutely perverse.");
-                if (player.cumQ() >= 250) EngineCore.outputText("  The spunk quickly fills her womb and flows back out her entrance, frothing and bubbling as it drips over your " + Appearance.hipDescription(player) + ".  ");
-                if (player.cumQ() >= 1000) EngineCore.outputText("  It begins to splatter everywhere as you pour out more and more, the elf looking on with amusement as her cunt turns into a cum-spraying fountain.  ");
-                EngineCore.outputText("\n\n"
-                        +"Once your orgasm ends the elf begins gyrating her hips again, her pussy frothing and dripping a mixed batch of creamy cum.   You don't go soft.  If anything you get even harder and more sensitive.  Brain blasting pressure squeezes up your rod from the elf's cunt as she starts bouncing again, fucking you in earnest, \"<i>I told you my cunt was magical.  You'll never go soft inside me – your cum fuels my magic and makes you feel even better.</i>\"\n\n"
-                        +"Aside from your [cock], your body has gone completely numb from the waist down.  You glance down and see your [legs] twitching and convulsing under the elf's assault.   She's so hot inside, it's like her pussy's candy-coated in liquid pleasure.   You fuck her harder and harder, squeezing her hips tightly and roughly fucking her magical pussy.   Somehow you're on the edge again, about to unload.  You start counting in your head, trying to resist another orgasm.  You know if you do you'll never be able to stop.  You doubt you'll even be able to think.\n\n"
-                        +"Your effort at holding out totally fails – you start counting in time with each thrust, tying the numbers into the feel of the velvet cock-sleeve as it massages your [cock].   The elf smiles condescendingly and taunts, \"<i>I can see you've already lost the ability to resist the pleasure.  Just give in, and enjoy the night.  I'll be riding you 'til morning.</i>\"\n\n"
-                        +"It's too hot, oh gods it's too hot.  You cum again, splattering her womb with more seed.  The elf's skin flushes as you pump more into her, squirting more and more into her overfull entrance.  Miraculously, you cum just as much as before, ");
-                if (player.cumQ() >= 250) EngineCore.outputText("dumping out more and more waves of jizm until you're lying in a deep puddle of it, ");
-                EngineCore.outputText("and somehow the orgasm lasts on even after you've emptied.   Your eyes roll back for a moment as you nearly lose consciousness.\n\n"
-                        +"You snap out of it and the elf is smirking down at you, stationary.  You feel totally numb – your [cock] has all of your sensation, all of your sense of touch.   On their own, your " + Appearance.hipDescription(player) + " continually rise and fall, pumping into her with noisy explosions of pleasure that leave you gasping and writhing.  Every time you start to think something, the vise-like tunnel slides down you and squeezes your [cock], interrupting any attempt at thought.  You give up on thinking and start drooling all over yourself, your world fading into a heaven of constant pleasure and repeated orgasms.\n\n"
-                        +"The elf fucks you relentlessly for hours, forcing you to cum over and over.  Somehow you never go dry, and each time feels better than the last.  Your bedroll is soaked with cum, your body is exhausted, and the elf FINALLY cums with a high-pitched cry of orgasmic pleasure.  Her body quakes, and you cum again, squirting messily inside her again.  The vise of pleasure on you quivers and squeezes, growing hotter by the second as the elf's orgasm drags on and on, milking you of every drop and setting you in a feedback loop of infinite pleasure.  You blackout.");
-            }
-            else {
-                //(TOO BIG)
-                EngineCore.outputText("She pushes you down onto your bedroll and whispers, \"<i>Time to enjoy your present.</i>\"\n\n"
-                        +"The elf grabs ahold of your [cock] with both hands and cuddles against it as if it were a person, planting kisses along the edge of its [cockhead].  She laughs, \"<i>Oh my, you're so big!  I almost wish I was big enough to take this bad boy.  Believe me, you haven't lived until you've been milked by an elf's cunt.</i>\"\n\n"
-                        +"She wraps her arms around it and begins licking it, squatting down and standing up, jerking you off with her whole body.  Each time her cute bottom bumps your [allbreasts] ");
-                if (player.biggestTitSize() >= 2) EngineCore.outputText("making them jiggle");
-                else EngineCore.outputText("making her tight butt give a tiny jiggle");
-                EngineCore.outputText(".  She hums happily as she works at the task, slathering it in spit, pressing her moist cunt against you.   Her warm body sliding along you feels fantastic, and feeling a bit daring, you give her a light slap on the ass-cheek.\n\n"
-                        +"The elf looks over her shoulder and laughs, \"<i>Someone is feeling a bit naughty.  Well, I guess I'll have to help you drain out all that naughty energy.</i>\"\n\n"
-                        +"Before you can puzzle out her meaning, she takes a big gulp of air, grabs your [cockhead] with both hands, and presses her lips into your urethra.  She blows into it with a look of intense concentration.  You can feel your urethra filling, expanding with something, but it feels more like liquid than air, tingling as it slides deep into your shaft towards your ");
-                if (player.balls > 0) EngineCore.outputText("balls");
-                else if (player.hasSheath()) EngineCore.outputText("sheath");
-                else EngineCore.outputText("body");
-                EngineCore.outputText(".   She blows and blows, seemingly filling you with an inexhaustible supply of whatever magical substance she's forcing inside you. The tingling grows stronger and stronger, and then changes to warmth as a pleasurable heat centers itself in your midsection.\n\n"
-                        +"The magic-using elf pulls back with a knowing grin and resumes stroking you, ignoring a dribble of pink fluid that squirts from your tip.   The warmth inside builds higher and you start sweating, even in the cool night air. The uncomfortable heat churns inside you");
-                if (player.balls > 0) EngineCore.outputText("r " + Appearance.ballsDescription(true, true, player));
-                EngineCore.outputText(", a gentle pressure that builds higher and higher until you feel about to explode.  You need to cum, and you squirm in the elf's grasp, trembling and shuddering as one of her hands slips over a particularly sensitive spot. A bead of pre-cum rolls out of your [cockhead] and starts sliding down the shaft, followed by another, and another, and another.\n\n"
-                        +"Your 'present' asks with gradually rising authority, \"<i>Do you feel the naughtyness leaking out?  It feels good doesn't it?  Yes it does, but that's just the start.  You've got a lot of pent up naughty that needs to come out so you'll be good and see me next year.  So be a good boy and cum out all those bad thoughts for me please.</i>\"\n\n"
-                        +"She flips around to the far side of your dick and hugs it tightly, squeezing it from base to tip in a fluid motion makes your abdominals clench with unexpected orgasm.   The first 'squirt' of cum is more like a geyser going off.  ");
-                if (player.cumQ() < 500) EngineCore.outputText("You recoil from shooting out so much – it's far and away more than you're normally capable of.  ");
-                EngineCore.outputText("The elf hugs it and squeezes tightly while whispering, \"<i>Naughty naughty.</i>\"\n\n"
-                        +"Thick ropes of your orgasmic goop splatter into her hair, and each successive blast comes out with less and less force, until you're leaking a steady stream of cum that rolls down your [cock] and soaks the pointy-eared woman completely.   As you release your prodigious load the scent of cinnamon fills the air, and you dumbly wonder if it's some side effect of the magic she used on you.  Regardless, cum keeps leaking out over the elf and onto you, and you eventually lose consciousness from perpetual orgasm.");
-            }
-            //(Go to followup for fucking scene)
-            //[Next]
+            sceneHunter.selectFitNofit(dickXmasElfGo_fits, dickXmasElfGo_nofit, 80);
+        }
+
+        function dickXmasElfGo_fits():void {
+            EngineCore.outputText("She pushes you down onto your bedroll and whispers, \"<i>Time to enjoy your present.</i>\"\n\n"
+                    +"She mounts you without pretense, straddling and inserting your [cock] in one smooth motion.  The sudden change from cool, night air to hot, tight pussy sends shockwaves of pleasure into your skull.  You master yourself before your eyes roll the whole way back and close your mouth before you start drooling.   Her vise-like tightness is inhuman, but somehow not so tight as to be uncomfortable.   The internal muscles clench and squeeze around you with an uncommon degree of control.  She's so hot, wet, and tight that you shiver.  You start rocking underneath her, giving in completely to the pleasure of her hole.\n\n"
+                    +"You grunt, pistoning into her over and over.  She clears her throat as she's bouncing atop of you, and you look back up, suddenly reminded that there's more to the world than the cunt milking your [cock].  The elf explains, \"<i>Don't be ashamed.  We elves have magical cunts.  Once something is inside it'll feel so good that it never wants to leave.  Judging from the look on your face I don't think you ever want to leave, do you?  I'm the best present you've ever had, aren't I?  Go ahead, cum for me, show me what a great gift I am.</i>\"\n\n"
+                    +"She's absolutely right – there's some indescribably pleasurable thing about the heat radiating into your dick that makes it feel like it's about to melt and pass into heaven.  The elf giggles and the vibrations of her laugh somehow radiate into you, and it's just too much.  You cum for your present, submitting to her pleasure as your spooge boils up into her.   It squelches wetly as it pumps into her, sounding absolutely perverse.");
+            if (player.cumQ() >= 250) EngineCore.outputText("  The spunk quickly fills her womb and flows back out her entrance, frothing and bubbling as it drips over your " + Appearance.hipDescription(player) + ".  ");
+            if (player.cumQ() >= 1000) EngineCore.outputText("  It begins to splatter everywhere as you pour out more and more, the elf looking on with amusement as her cunt turns into a cum-spraying fountain.  ");
+            EngineCore.outputText("\n\n"
+                    +"Once your orgasm ends the elf begins gyrating her hips again, her pussy frothing and dripping a mixed batch of creamy cum.   You don't go soft.  If anything you get even harder and more sensitive.  Brain blasting pressure squeezes up your rod from the elf's cunt as she starts bouncing again, fucking you in earnest, \"<i>I told you my cunt was magical.  You'll never go soft inside me – your cum fuels my magic and makes you feel even better.</i>\"\n\n"
+                    +"Aside from your [cock], your body has gone completely numb from the waist down.  You glance down and see your [legs] twitching and convulsing under the elf's assault.   She's so hot inside, it's like her pussy's candy-coated in liquid pleasure.   You fuck her harder and harder, squeezing her hips tightly and roughly fucking her magical pussy.   Somehow you're on the edge again, about to unload.  You start counting in your head, trying to resist another orgasm.  You know if you do you'll never be able to stop.  You doubt you'll even be able to think.\n\n"
+                    +"Your effort at holding out totally fails – you start counting in time with each thrust, tying the numbers into the feel of the velvet cock-sleeve as it massages your [cock].   The elf smiles condescendingly and taunts, \"<i>I can see you've already lost the ability to resist the pleasure.  Just give in, and enjoy the night.  I'll be riding you 'til morning.</i>\"\n\n"
+                    +"It's too hot, oh gods it's too hot.  You cum again, splattering her womb with more seed.  The elf's skin flushes as you pump more into her, squirting more and more into her overfull entrance.  Miraculously, you cum just as much as before, ");
+            if (player.cumQ() >= 250) EngineCore.outputText("dumping out more and more waves of jizm until you're lying in a deep puddle of it, ");
+            EngineCore.outputText("and somehow the orgasm lasts on even after you've emptied.   Your eyes roll back for a moment as you nearly lose consciousness.\n\n"
+                    +"You snap out of it and the elf is smirking down at you, stationary.  You feel totally numb – your [cock] has all of your sensation, all of your sense of touch.   On their own, your " + Appearance.hipDescription(player) + " continually rise and fall, pumping into her with noisy explosions of pleasure that leave you gasping and writhing.  Every time you start to think something, the vise-like tunnel slides down you and squeezes your [cock], interrupting any attempt at thought.  You give up on thinking and start drooling all over yourself, your world fading into a heaven of constant pleasure and repeated orgasms.\n\n"
+                    +"The elf fucks you relentlessly for hours, forcing you to cum over and over.  Somehow you never go dry, and each time feels better than the last.  Your bedroll is soaked with cum, your body is exhausted, and the elf FINALLY cums with a high-pitched cry of orgasmic pleasure.  Her body quakes, and you cum again, squirting messily inside her again.  The vise of pleasure on you quivers and squeezes, growing hotter by the second as the elf's orgasm drags on and on, milking you of every drop and setting you in a feedback loop of infinite pleasure.  You blackout.");
+            EngineCore.doNext(xmasFuckFollowup);
+            player.orgasm();
+        }
+        
+        function dickXmasElfGo_nofit():void {
+            //(TOO BIG)
+            EngineCore.outputText("She pushes you down onto your bedroll and whispers, \"<i>Time to enjoy your present.</i>\"\n\n"
+                    +"The elf grabs ahold of your [cock] with both hands and cuddles against it as if it were a person, planting kisses along the edge of its [cockhead].  She laughs, \"<i>Oh my, you're so big!  I almost wish I was big enough to take this bad boy.  Believe me, you haven't lived until you've been milked by an elf's cunt.</i>\"\n\n"
+                    +"She wraps her arms around it and begins licking it, squatting down and standing up, jerking you off with her whole body.  Each time her cute bottom bumps your [allbreasts] ");
+            if (player.biggestTitSize() >= 2) EngineCore.outputText("making them jiggle");
+            else EngineCore.outputText("making her tight butt give a tiny jiggle");
+            EngineCore.outputText(".  She hums happily as she works at the task, slathering it in spit, pressing her moist cunt against you.   Her warm body sliding along you feels fantastic, and feeling a bit daring, you give her a light slap on the ass-cheek.\n\n"
+                    +"The elf looks over her shoulder and laughs, \"<i>Someone is feeling a bit naughty.  Well, I guess I'll have to help you drain out all that naughty energy.</i>\"\n\n"
+                    +"Before you can puzzle out her meaning, she takes a big gulp of air, grabs your [cockhead] with both hands, and presses her lips into your urethra.  She blows into it with a look of intense concentration.  You can feel your urethra filling, expanding with something, but it feels more like liquid than air, tingling as it slides deep into your shaft towards your ");
+            if (player.balls > 0) EngineCore.outputText("balls");
+            else if (player.hasSheath()) EngineCore.outputText("sheath");
+            else EngineCore.outputText("body");
+            EngineCore.outputText(".   She blows and blows, seemingly filling you with an inexhaustible supply of whatever magical substance she's forcing inside you. The tingling grows stronger and stronger, and then changes to warmth as a pleasurable heat centers itself in your midsection.\n\n"
+                    +"The magic-using elf pulls back with a knowing grin and resumes stroking you, ignoring a dribble of pink fluid that squirts from your tip.   The warmth inside builds higher and you start sweating, even in the cool night air. The uncomfortable heat churns inside you");
+            if (player.balls > 0) EngineCore.outputText("r " + Appearance.ballsDescription(true, true, player));
+            EngineCore.outputText(", a gentle pressure that builds higher and higher until you feel about to explode.  You need to cum, and you squirm in the elf's grasp, trembling and shuddering as one of her hands slips over a particularly sensitive spot. A bead of pre-cum rolls out of your [cockhead] and starts sliding down the shaft, followed by another, and another, and another.\n\n"
+                    +"Your 'present' asks with gradually rising authority, \"<i>Do you feel the naughtyness leaking out?  It feels good doesn't it?  Yes it does, but that's just the start.  You've got a lot of pent up naughty that needs to come out so you'll be good and see me next year.  So be a good boy and cum out all those bad thoughts for me please.</i>\"\n\n"
+                    +"She flips around to the far side of your dick and hugs it tightly, squeezing it from base to tip in a fluid motion makes your abdominals clench with unexpected orgasm.   The first 'squirt' of cum is more like a geyser going off.  ");
+            if (player.cumQ() < 500) EngineCore.outputText("You recoil from shooting out so much – it's far and away more than you're normally capable of.  ");
+            EngineCore.outputText("The elf hugs it and squeezes tightly while whispering, \"<i>Naughty naughty.</i>\"\n\n"
+                    +"Thick ropes of your orgasmic goop splatter into her hair, and each successive blast comes out with less and less force, until you're leaking a steady stream of cum that rolls down your [cock] and soaks the pointy-eared woman completely.   As you release your prodigious load the scent of cinnamon fills the air, and you dumbly wonder if it's some side effect of the magic she used on you.  Regardless, cum keeps leaking out over the elf and onto you, and you eventually lose consciousness from perpetual orgasm.");
             EngineCore.doNext(xmasFuckFollowup);
             player.orgasm();
         }
@@ -3424,9 +3434,11 @@ public class Holidays {
             //Double-Dick Fuck (requires at least 2 cocks)
             EngineCore.menu();
             if (player.hasCock() && player.cockThatFits(70) >= 0) EngineCore.addButton(0, "Give Anal", giveKamiTheChristmasRooAnal);
+            else EngineCore.addButtonDisabled(0, "Give Anal", "Req. cock with area < 70");
             EngineCore.addButton(1, "Receive Anal", takeItRooButtStyle);
             EngineCore.addButton(2, "Give BJ", KamiBlowJob);
             if (player.cockTotal() > 1 && player.cockThatFits(70) >= 0 && player.cockThatFits2(70) >= 0) EngineCore.addButton(3, "Doube-Fuck", KamiDoubleDickFuck);
+            else EngineCore.addButtonDisabled(3, "Doube-Fuck", "Req. 2 cocks with area < 70");
         }
         else {
             EngineCore.outputText("You summon the buxom waitress over, getting a much better view of her gentle face now that she's found the time to sit and talk with you.  With hazelnut-brown eyes, a gorgeous set of lips and tousled blonde hair, her faux-rebellious look is the icing on the festive cake for this busty waitress, her cute little santa hat being the strawberry on top.  Smooth, olive skin runs halfway down her meaty thighs before fading into soft fur, while her frail forearms follow the same pattern. Her huge kangaroo tail wags idly throughout your conversation, and you've gained a pretty good rhythm whilst engaging her in it. Determined to make things go well, you pause to pull out a charming one-liner when her index finger meets your ");
@@ -3917,18 +3929,23 @@ public class Holidays {
             EngineCore.menu();
             if (flags[kFLAGS.NIEVE_GENDER] == 2) EngineCore.addButton(0, "Lick Her", lickNieve);
             if (flags[kFLAGS.NIEVE_GENDER] == 1) EngineCore.addButton(0, "Suck Him", suckNieveOff);
-            //Fuck Her
-            //Female Nieve
-            //Must have a penis or at least a 3.5 inch clit
-            //Nieve's capacity is about 130.
-            if ((player.hasCock() || (player.hasVagina() && player.clitLength >= 3.5)) && player.lust >= 33) {
-                if (flags[kFLAGS.NIEVE_GENDER] == 2) EngineCore.addButton(1, "Fuck Her", fuckNieve);
+            if (player.lust >= 33) {
+                //Fuck Her
+                //Female Nieve
+                //Must have a penis or at least a 3.5 inch clit
+                //Nieve's capacity is about 130.
+                if (flags[kFLAGS.NIEVE_GENDER] == 2) {
+                    if ((player.cockThatFits(130) >= 0 || player.hasVagina() && player.clitLength >= 3.5))
+                        EngineCore.addButton(1, "Fuck Her", fuckNieve_router);
+                    else
+                        EngineCore.addButtonDisabled(1, "Fuck Her", "Req dick area < 130 or clit length > 3.5");
+                }
+                //Get Fucked by Gurumash
+                //Male Nieve
+                //Any Gender
+                //Nieve's cock is 9x1.5
+                if (flags[kFLAGS.NIEVE_GENDER] == 1) EngineCore.addButton(1, "Get Fucked", nieveFucksYou);
             }
-            //Get Fucked by Gurumash
-            //Male Nieve
-            //Any Gender
-            //Nieve's cock is 9x1.5
-            if (flags[kFLAGS.NIEVE_GENDER] == 1 && player.lust >= 33) EngineCore.addButton(1, "Get Fucked", nieveFucksYou);
             EngineCore.addButton(14, "Back", SceneLib.camp.campLoversMenu);
 
             //Lick Her
@@ -3991,20 +4008,33 @@ public class Holidays {
                 EngineCore.doNext(SceneLib.camp.returnToCampUseOneHour);
             }
 
+            function fuckNieve_router():void {
+                var x:int = player.cockThatFits(130);
+                //no SceneHunter check here - it worked like shit anyway
+                EngineCore.menu();
+                //select dick
+                //hascock
+                if (x >= 0)
+                    EngineCore.addButton(0, "Dick", Utils.curry(fuckNieve, x));
+                else
+                    EngineCore.addButtonDisabled(0, "Dick", "Req. dick area < 130");
+                //clit
+                if (player.hasVagina() && player.clitLength >= 3.5)
+                    EngineCore.addButton(1, "Clit", Utils.curry(fuckNieve, -1));
+                else
+                    EngineCore.addButtonDisabled(1, "Clit", "Req. vagina and clit length > 3.5'");
+            }
+
             //Fuck Her
             //Female Nieve
             //Must have a penis or at least a 3.5 inch clit
             //Nieve's capacity is about 130.
             //Note for fen/gats: In the interest of fairness, I just wanna say that this scene was unfinished at the time the contest closed.
-            function fuckNieve():void {
+            //x - dick num or -1 for clitfuck
+            function fuckNieve(x:int):void {
                 EngineCore.clearOutput();
-                var x:int = -1;
-                if (player.hasCock()) {
-                    x = player.cockThatFits(130);
-                    if (x <= 0 && player.hasVagina() && player.clitLength >= 3.5 && Utils.rand(2) == 0) {
-                        x = -1;
-                    } else x = player.smallestCockIndex();
-                }
+                sceneHunter.print("Options for knots, human, horse, dog, demon, tenta, cat, lizard, anemone and kanga dicks here.");
+                
                 EngineCore.outputText("You look your naked, icy lover up and down, thinking of all the things you could do to her.  She raises a white eyebrow at you curiously while you take in her statuesque form.  A thin layer of frost covers her flesh, giving her pale blue skin a sparkling, shimmering appearance.  You find yourself getting aroused at all the potentialities.  Your " + cockClit(x) + " rises to attention as you ponder it, and with a smirk, you finally settle on something.");
 
                 EngineCore.outputText("\n\nFirst you disrobe, tossing your clothes aside, and order Nieve onto her knees.  She does so immediately, and without needing to be told what to do, she leans in and grasps your " + cockClit(x) + " with one hand.  Like the rest of her, Nieve's hands are freezing cold, and though it's a strange sensation at first, it's not at all painful or uncomfortable.  \"<i>Allow me, [Master],</i>\" she says, licking the tip of your " + cockClit(x) + " with a wet, cold \"<i>schlick</i>\" that makes you shiver.");

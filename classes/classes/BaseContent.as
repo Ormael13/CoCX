@@ -235,28 +235,6 @@ import coc.xxc.StoryContext;
 			EngineCore.hideUpDown();
 		}
 
-		/* This class extends Utils, no need for a non-static version of this function
-		protected function curry(func:Function,...args):Function
-		{
-			return Utils.curry.apply(null,[func].concat(args));
-		}
-		*/
-
-		/* None of these functions are called anymore
-		protected function lazyIndex(obj:*,...args):Function
-		{
-			return Utils.lazyIndex.apply(null,[obj].concat(args));
-		}
-		protected function lazyCallIndex(func:Function,...args):Function
-		{
-			return Utils.lazyCallIndex.apply(null,[func].concat(args));
-		}
-		protected function lazyCallIndexCall(func:Function,...args):Function
-		{
-			return Utils.lazyCallIndexCall.apply(null,[func].concat(args));
-		}
-		*/
-
 		protected function createCallBackFunction(func:Function, arg:*):Function
 		{
 			return EngineCore.createCallBackFunction(func,arg);
