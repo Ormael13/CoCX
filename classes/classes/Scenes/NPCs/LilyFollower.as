@@ -702,7 +702,7 @@ import classes.display.SpriteDb;
 		public function LilyCampFollower():void {
 			clearOutput();
 			outputText("As you approach Lily’s silken treehouse, you see a golden chain dangling from the tree. You look up, and get splashed on the head by your Drider-lover’s pussy juice.\n\n");
-			outputText("<i>\"Hello,\"</i> she says from the tree, a smile on her face and one hand over her mouth at the naughty prank she just played.. <i>\"How are things," + ((LilySubmissivenessMeter >= 80)? player.mf("master", "mistress"): "Champ?") + "\"</i>\n\n");
+			outputText("<i>\"Hello,\"</i> she says from the tree, a smile on her face and one hand over her mouth at the naughty prank she just played.. <i>\"How are things, " + ((LilySubmissivenessMeter >= 80)? player.mf("Master", "Mistress"): "Champ") + "?\"</i>\n\n");
 			outputText("You motion for her to join you on the ground, and she tilts her head, taking a silken rope. She jumps down from the tree, holding the rope, and ties it off. She smiles, bow on her back. <i>\"What brings you to my section of camp?\"</i>\n\n");
 			menu();
 			addButton(0, "Appearance", LilyAppearance);
