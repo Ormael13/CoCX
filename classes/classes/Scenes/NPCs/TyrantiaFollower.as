@@ -830,7 +830,7 @@ public function GetPhallustuffed():void {
 public function TyrantiaAtCamp():void {
 	clearOutput();
 	outputText("You decide to go see your Drider Giantess. As you walk over to her hutch, Tyrantia comes out from her dwelling, her phallic spear over one shoulder. She looks down at you, arching her back and sending the soft scraping of steel up your spine.\n\n");
-	outputText("\"<i>Oh, hey.</i>\" She rests her spider-half on the ground, so you don’t have to look up"+(player.tallness < 108 ? "" : " as much")+" (if playerheight < 9ft). \"<i>Do you need something? Or did you just come over to see me?</i>\"\n\n");
+	outputText("\"<i>Oh, hey.</i>\" She rests her spider-half on the ground, so you don’t have to look up"+(player.tallness < 108 ? "" : " as much")+". \"<i>Do you need something? Or did you just come over to see me?</i>\"\n\n");
 	menu();
 	addButton(0, "Looks", TyrantiaAppearance);
 	addButton(1, "Talk", repeatEncounterBattlefieldTalk);
