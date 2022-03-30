@@ -291,10 +291,12 @@ public function repeatEncounterBattlefieldTalk():void {
 	//0 - Lab
 	addButton(1, "Self", repeatEncounterBattlefieldTalkSelf);
 	//2 - Fighting Style
-	if (flags[kFLAGS.TIMES_MET_KIHA] > 0) addButton(3, "Kiha", repeatEncounterBattlefieldTalkKiha);
-	else addButtonDisabled(3, "???", "Perhaps if you look around the swamps, you might find someone she might also know...");
-	if (DivaScene.instance.status > 0) addButton(4, "Diva", repeatEncounterBattlefieldTalkDiva);
-	else addButtonDisabled(4,"???", "Perhaps if you look around the mountains, you might find someone she might also know...");
+	if (TyrantiaFollowerStage >= 4){
+		if (flags[kFLAGS.TIMES_MET_KIHA] > 0) addButton(3, "Kiha", repeatEncounterBattlefieldTalkKiha);
+		else addButtonDisabled(3, "???", "Perhaps if you look around the swamps, you might find someone she might also know...");
+		if (DivaScene.instance.status > 0) addButton(4, "Diva", repeatEncounterBattlefieldTalkDiva);
+		else addButtonDisabled(4,"Diva", "Perhaps if you look around the mountains, you might find someone she might also know...");
+	}
 	addButton(5, "Her", repeatEncounterBattlefieldTalkHer);
 	if (TyrantiaFollowerStage >= 4) addButton(14, "Back", TyrantiaAtCamp);
 	else addButton(14, "Back", repeatEncounterBattlefieldRe);
