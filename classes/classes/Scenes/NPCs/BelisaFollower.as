@@ -318,10 +318,10 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		outputText("Belisa looks up at you, sighing. \"<i>Thank you for listening…It’s not something I like to revisit…But sometimes I don’t really have a choice.</i>\"\n\n");
 		BelisaAffection(5);
 		if (LilyFollower.LilyTalked > 0) {
-			outputText("Lily…You recognize that name! A drider named Lily, an archer and huntress? She fits the description perfectly!\n\n");
+			outputText("Lily…You recognize that name! A drider named Lily, an archer and huntress? She fits the description perfectly! Do you tell her about your discovery?\n\n");
 			menu();
-			addButton(1, "Don't", BelisaTalkHerFamilyDont).hint("Don’t Tell her");
-			addButton(3, "Do", BelisaTalkHerFamilyDo).hint("If you tell her");
+			addButton(1, "Don't", BelisaTalkHerFamilyDont).hint("Don’t tell her");
+			addButton(3, "Do", BelisaTalkHerFamilyDo).hint("Tell her");
 		}
 		else {
 			eachMinuteCount(15);
