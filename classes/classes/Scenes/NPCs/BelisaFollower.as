@@ -224,7 +224,7 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 			BelisaShopOpen = true;
 		}
 		menu();
-		addButton(0, "Apperance", BelisaAppearance);
+		addButton(0, "Appearance", BelisaAppearance);
 		addButton(1, "Talk", BelisaTalk);
 		addButton(2, "Hang", BelisaHang);
 		if (BelisaShopOpen) addButton(3, "Shop", BelisaShop);
@@ -235,7 +235,7 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		clearOutput();
 		outputText("<i>\"Well, what is it you want then?\"</i>\n\n");
 		menu();
-		addButton(0, "Apperance", BelisaAppearance);
+		addButton(0, "Appearance", BelisaAppearance);
 		addButton(1, "Talk", BelisaTalk);
 		addButton(2, "Hang", BelisaHang);
 		if (BelisaShopOpen) addButton(3, "Shop", BelisaShop);
@@ -253,7 +253,8 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		if (BelisaAffectionMeter >= 50 && !BelisaQuestComp) addButton(6, "Injuries", BelisaTalkInjuries);
 		else if (BelisaQuestComp) addButtonDisabled(6, "Injuries", "You've already solved her tooth problem!");
 		else  addButtonDisabled(6, "???", "Req. 50+ affection.");
-		if (BelisaQuestComp && BelisaAffectionMeter >= 80 && player.statusEffectv1(StatusEffects.TelAdre) >= 1 && flags[kFLAGS.HEXINDAO_UNLOCKED] >= 1 && player.hasStatusEffect(StatusEffects.MetWhitney) && player.statusEffectv1(StatusEffects.MetWhitney) > 1) addButton(7, "ComeW/Me", BelisaComeCamp);
+		if (!BelisaInCamp && BelisaQuestComp && BelisaAffectionMeter >= 80 && player.statusEffectv1(StatusEffects.TelAdre) >= 1 && flags[kFLAGS.HEXINDAO_UNLOCKED] >= 1 && player.hasStatusEffect(StatusEffects.MetWhitney) && player.statusEffectv1(StatusEffects.MetWhitney) > 1) addButton(7, "ComeW/Me", BelisaComeCamp);
+		else if (BelisaInCamp) addButtonDisabled(7,"ComeW/Me", "She's already at your camp!");
 		else addButtonDisabled(7, "???", "Req. 80+ affection, healing her tooth injury and finding: Farm, Tel'Adre, He'Xin'Dao.");
 		addButton(8, "Back", Encounterback);
 	}
@@ -672,7 +673,9 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		if (BelisaConfessed) outputText("<i>\"...Anything I can help you with?\"</i> When she thinks you aren’t looking, she takes a glance down, beads of drool forming on her fangs.");
 		outputText("\n\n");
 		menu();
-		addButton(0, "Apperance", BelisaAppearance);
+		addButton(0, "Appearance", BelisaAppearance);
+		addButton(1, "Talk", BelisaTalk);
+		addButton(2, "Hang", BelisaHang);
 		addButton(3, "Shop", BelisaShop);
 		addButton(4, "Sex", BelisaSex);
 		addButton(14, "Leave", camp.campLoversMenu);
