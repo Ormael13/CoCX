@@ -1161,7 +1161,7 @@ import classes.Items.*;
 
 			player.createPerk(PerkLib.MessyOrgasms, 1.5, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PastLifeScholar)) player.createPerk(PerkLib.HistoryScholar, 0, 0, 0, 0);
-			//Apperance: Cat Ears, Large Bat Like Wings, 3 Rows of breasts (C cub, 0,2 nipples)
+			//Appearance: Cat Ears, Large Bat Like Wings, 3 Rows of breasts (C cub, 0,2 nipples)
 			player.ears.type = Ears.CAT;
 			player.wings.type = Wings.BAT_LIKE_LARGE;
 			player.wings.desc = "large, bat-like";
