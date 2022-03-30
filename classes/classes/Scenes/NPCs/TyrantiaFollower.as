@@ -8,6 +8,7 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.BlightRidge.DemonPackBlightRidge;
 import classes.Scenes.Areas.DefiledRavine.DemonPackDefiledRavine;
+import classes.Scenes.SceneLib;
 import classes.internals.SaveableState;
 
 	public class TyrantiaFollower extends NPCAwareContent implements SaveableState
@@ -290,8 +291,10 @@ public function repeatEncounterBattlefieldTalk():void {
 	//0 - Lab
 	addButton(1, "Self", repeatEncounterBattlefieldTalkSelf);
 	//2 - Fighting Style
-	addButton(3, "Kiha", repeatEncounterBattlefieldTalkKiha);
-	addButton(4, "Diva", repeatEncounterBattlefieldTalkDiva);
+	if (flags[kFLAGS.TIMES_MET_KIHA] > 0) addButton(3, "Kiha", repeatEncounterBattlefieldTalkKiha);
+	else addButtonDisabled(3, "???", "Perhaps if you look around the swamps, you might find someone she might also know...");
+	if (DivaScene.instance.status > 0) addButton(4, "Diva", repeatEncounterBattlefieldTalkDiva);
+	else addButtonDisabled(4,"???", "Perhaps if you look around the mountains, you might find someone she might also know...");
 	addButton(5, "Her", repeatEncounterBattlefieldTalkHer);
 	if (TyrantiaFollowerStage >= 4) addButton(14, "Back", TyrantiaAtCamp);
 	else addButton(14, "Back", repeatEncounterBattlefieldRe);
