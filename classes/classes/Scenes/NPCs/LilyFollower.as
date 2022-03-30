@@ -319,7 +319,7 @@ import classes.display.SpriteDb;
 		
 		private function LilyComeCampConclusion():void {
 			LilyFollowerState = true;
-			doNext(camp.returnToCampUseOneHour);
+			cleanupAfterCombat(camp.returnToCampUseOneHour);
 		}
 		
 		public function LilySex():void {
@@ -366,7 +366,7 @@ import classes.display.SpriteDb;
 			outputText("Taking calm strides around your trussed up spider-slut, you drop your hands between your own legs. Gently, you rub your [clit], giving your captive a nice, long look at your pussy. You ask the Drider if she can see what’s wrong.  \n\n");
 			outputText("<i>\"Wha-no?\"</i> Lily pulls at her bonds, but gets nowhere. Her four massive mammaries jiggle enticingly, but she’s unable to move much. You growl, striding in and taking hold of the golden chain linking her pierced aerolae, and pull her down. The Drider falls onto her back, all six eyes wide as you loom over her. You stand over her head and diddle your twat, dripping your first drops of arousal onto her face. She closes one of her left eyes as it splashes down, and she struggles again. You shake your head, planting your feet on either side of her upper body, and lean forward, putting your quivering pussy above her mouth.  \n\n");
 			outputText("You smirk, telling her that if she doesn’t understand what’s wrong, that she’ll suffocate. Dropping your [ass] down onto Lily’s nose, you order your Drider-slut to get to work, your lower-lips firmly placed on top of Lily’s mouth. You force her head roughly to the ground, grinding your pussy on Lily’s face.  \n\n");
-			outputText("Almost immediately, you feel a slick, long muscle find the rim of your lips. Your Drider-slut has a knack for this! Her tongue flicks your clit, and you rest your weight on her head, your [asscheeks] covering her eyes.  \n\n");
+			outputText("Almost immediately, you feel a slick, long muscle find the rim of your lips. Your Drider-slut has a knack for this! Her tongue flicks your clit, and you rest your weight on her head, your [ass] covering her eyes.  \n\n");
 			outputText("Now properly ‘motivated’, the Drider-woman underneath you latches onto you, sinking her tongue in as deep as she can. Her plump lips lock with your folds, and you can’t help but let out a little moan as you feel her fangs press against you, flat on either side of your button. You sit back, shaking your [ass] slightly as Lily’s tongue sinks into you. \n\n");
 			outputText("You sink into a low, slow grind, your muff dripping onto Lily’s face as she laps at your cunt. Her lips, puffy and sticky, her nose poking ever-so-slightly at your backdoor, and the simple pleasure of watching your Drider-slut squirm are surprisingly arousing. Lily begins to cry out, her voice shaking your lower body.  \n\n");
 			outputText("You raise your [ass] for a few seconds, your Drider-toy gasping for air. As her tongue slides out of you, you shiver, your walls trying to clamp down, but the slippery muscle is too narrow. You grin, commenting on her lack of stamina. Before she can do more than inhale for a response, you sit on her face again, rubbing your lips all over her face, and feeling the slick warmth as it spreads, covering both her face and your thighs. Laughing a little, sadistic laugh, you tell Lily to keep licking if she wants to keep breathing. \n\n");
@@ -446,7 +446,6 @@ import classes.display.SpriteDb;
 			addButton(1, "Lolno", LilyDenied);
 			addButton(2, "Sure", LilyReward);
 		}
-		
 		
 		public function LilyDenied():void {
 			clearOutput();
@@ -706,7 +705,7 @@ import classes.display.SpriteDb;
 			outputText("<i>\"Hello,\"</i> she says from the tree, a smile on her face and one hand over her mouth at the naughty prank she just played.. <i>\"How are things," + (LilySubmissivenessMeter >= 80)? player.mf("master", "mistress"): "Champ?" + "\"</i>\n\n");
 			outputText("You motion for her to join you on the ground, and she tilts her head, taking a silken rope. She jumps down from the tree, holding the rope, and ties it off. She smiles, bow on her back. <i>\"What brings you to my section of camp?\"</i>\n\n");
 			menu();
-			//appearance
+			addButton(0, "Apperance", LilyAppearance);
 			addButton(1, "Talk", LilyTalk);
 			if (player.lust >= 33) {
 				if (player.gender > 0) addButton(2, "Sex", LilyFollowerSex);
@@ -733,7 +732,7 @@ import classes.display.SpriteDb;
 			clearOutput();
 			outputText("<i>\"Yes, [name], what did you need?\"</i>\n\n");
 			menu();
-			//appearance
+			addButton(0, "Apperance", LilyAppearance);
 			addButton(1, "Talk", LilyTalk);
 			if (player.lust >= 33) {
 				if (player.gender > 0) addButton(2, "Sex", LilyFollowerSex);
@@ -743,6 +742,15 @@ import classes.display.SpriteDb;
 			//addButton(3, "House", LilyHouse);
 			//addButton(4, "Spar", LilySpar);
 			addButton(14, "Leave", camp.campLoversMenu);
+		}
+		
+		public function LilyAppearance():void {
+			clearOutput();
+			outputText("Lily is a Drider, at first glance not that different from the others in the swamp. Her six eyes are violet, glowing slightly when it’s dark. Her dark lips shimmer, with twin fangs poking out from the upper lips. Her " + LilySkinTone + " skin is smooth, and her nakedness lets you see all of it, from her forehead down to her waist, where the supple skin smoothly transitions into shining black chitin. Her human hands transition into the same black chitin at her forearms, then back at her shoulders, almost like she’s wearing chitin bracers.\n\n");
+			outputText("Below her slender neck, four E-cup breasts cover her chest, bound only by a set of fetishistic golden chains. Each of her nipples are pierced, with a thin rod of gold through each, keeping the chains in place.\n\n");
+			outputText("Her Spider-half has eight spindly legs, and her spinnerets are visibly active. Lily occasionally leans back, using her fingers to pull silk from her spinnerets, quickly braiding the strands into crude, yet serviceable rope.\n\n");
+			outputText("As she sees you looking at her, Lily gives you a sly three-eyed wink, sliding a hand down her waist, making eye contact with you as she rubs her rapidly swelling ebony pussy lips with one hand.\n\n");
+			doNext(LilyCampBack);
 		}
 	}
 }

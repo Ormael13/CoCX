@@ -246,6 +246,12 @@ public class Camp extends NPCAwareContent{
 				return;
 			}
 		}
+		if ((model.time.hours >= 7 && model.time.hours <= 9) && TyrantiaFollower.TyrantiaFollowerStage >= 4 && BelisaFollower.BelisaFollowerStage >= 5 && BelisaFollower.BelisaEncounternum >= 5 && BelisaFollower.BelisaAffectionMeter >= 80 && !BelisaFollower.BelisaConfessed) {
+			SceneLib.belisa.BelisaConfession();
+		}
+		if ((model.time.hours >= 7 && model.time.hours <= 9) && TyrantiaFollower.TyrantiaFollowerStage >= 4 && BelisaFollower.BelisaFollowerStage >= 4 && BelisaFollower.BelisaEncounternum < 5) {
+			SceneLib.belisa.BelisaAndTyrantia();
+		}
 		if (marbleScene.marbleFollower()) {
 			//Cor < 50
 			//No corrupt: Jojo, Amily, or Vapula
@@ -1167,7 +1173,7 @@ public class Camp extends NPCAwareContent{
 		if (arianScene.arianFollower()) counter++;
 		if (BelisaFollower.BelisaInCamp) counter++;
 		if (LilyFollower.LilyFollowerState) counter++;
-		//tyrantia
+		if (TyrantiaFollower.TyrantiaFollowerStage >= 4) counter++;
 		if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2 && flags[kFLAGS.CHI_CHI_FOLLOWER] != 5 && !player.hasStatusEffect(StatusEffects.ChiChiOff)) counter++;
 		if (flags[kFLAGS.CEANI_FOLLOWER] > 0) counter++;
 		if (flags[kFLAGS.DIANA_FOLLOWER] >= 6 && !player.hasStatusEffect(StatusEffects.DianaOff)) counter++;
@@ -1198,7 +1204,7 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.ALVINA_FOLLOWER] > 12) counter++;
 		//if (BelisaFollower.BelisaInCamp) counter++;
 		//if (LilyFollower.LilyFollowerState) counter++;
-		//tyrantia
+		//if (TyrantiaFollower.TyrantiaFollowerStage >= 4) counter++;
 		if (emberScene.followerEmber()) counter++;
 		if (sophieFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) counter++;
 		if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) counter++;
@@ -1578,19 +1584,15 @@ public class Camp extends NPCAwareContent{
 						case 0:
 							outputText("Marble herself has gone off to Whitney's farm to get milked right now.");
 							break;
-
 						case 1:
 							outputText("Marble herself has gone off to Whitney's farm to do some chores right now.");
 							break;
-
 						case 2:
 							outputText("Marble herself isn't at the [camp] right now; she is probably off getting supplies, though she'll be back soon enough.");
 							break;
-
 						case 3:
 							outputText("Marble herself is resting on her bedroll right now.");
 							break;
-
 						case 4:
 							outputText("Marble herself is wandering around the [camp] right now.");
 							break;
@@ -1599,7 +1601,6 @@ public class Camp extends NPCAwareContent{
 						outputText("  You're sure she'd be back in moments if you needed her.");
 					}
 				}
-
 				//Out getting family
 				//else outputText("Marble is out in the wilderness right now, searching for a relative.");
 				outputText("\n\n");
@@ -1620,6 +1621,12 @@ public class Camp extends NPCAwareContent{
 			if (flags[kFLAGS.SAMIRAH_FOLLOWER] > 9) {
 				outputText("Samirah is quietly sunbathing on a rock, her long tail wrapped around on itself. She looks like she is very busy having a hissing conversation with a common snake which, considering her way of speech, isn’t really that strange.\n\n");
 				buttons.add("Samirah", SceneLib.samirah.samirahMainCampMenu);
+			}
+			//Tyrantia
+			if (TyrantiaFollower.TyrantiaFollowerStage >= 4) {
+				outputText("A decent distance away from your camp, in between the river and some trees, a hut’s been erected. Constructed mostly from stone and logs, with odd, goopy webbing as a crude mortar, the dwelling is nonetheless huge. ");
+				outputText("Tyrantia occasionally walks into the dwelling, coming out with a different tool or material. She’s keeping herself busy, if the line of demon skulls around the house are any indication.\n\n");
+				buttons.add("Tyrantia", SceneLib.tyrania.TyrantiaAtCamp).hint("Visit Tyrantia.");
 			}
 			//Zenji
 			if (flags[kFLAGS.ZENJI_PROGRESS] == 11 && TrollVillage.ZenjiVillageStage != 2) {

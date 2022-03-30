@@ -91,7 +91,12 @@ package classes.Scenes
 			outputText("Angst Daggers not been equippable with dual wield perk, some of combat debuffs not clearing up after combat, Dinah been in false training mode when Luna is actualy training/leveling herself, error in map display for one of Den of Desire rooms, Bee Hive entrance skipping bee guards andf afterwards showing wrong desc of the room until clearing dungeon, button on 2nd page of ");
 			outputText("unique sex scenes not leading to 1st page, Mysterious Seed missing from Unequip/Misc menu\n\n");
 			outputText("<b>Version 0.8s4:</b>\n\n");
+			outputText("-New tier 0 intelligence lvl-up perk: Spellpower: Grey. Req. Grey Magic perk, 50+ int and lvl 3+. Effect: Increases grey spell strength by 15% and mana pool by 75.\n");
+			outputText("-New tier 1 intelligence lvl-up perk: Arcane Shielding. Req. Grey Magic perk, Mana Shield spell, 75+ int. Effect: Improving by fivefold mana shield resistance to magical attacks. (1:5 ratio for mana to magic damage)\n");
 			outputText("-New tier 3 intelligence lvl-up perk: Offensive Staff Channeling. Req. Staff Channeling and Grey Magic perks, knowing any attack spell, 120+ int. Effect: Allow to cast splited offensive spell without increased mana cost when using staff (3 parts at 70% power) or partial staff (2 parts at 80% power) as focus. (Effect will not activate if you already have ways to multicast spells at reduced power)\n");
+			outputText("-New tier 4 intelligence lvl-up perk: Improved Mana Shield. Req. Arcane Shielding perk, 125+ int. Effect: Increasing fourfold amount of damage Mana Shield spell can withstand before deactivating. (1:4 ratio for physical attacks and 1:20 ratio for magical attacks)\n");
+			outputText("-New tier 7 intelligence lvl-up perk: Super Convergence. Req. Convergence perk, 225+ int. Effect: Grey magic area of effect spells strike one more time (three times) against single targets. Against groups would deal 50-250% more dmg depending on size (250% for small groups, 100% for large groups).\n");
+			outputText("-New tier 10 intelligence lvl-up perk: Grand Grey Archmage (2nd Circle). Req. Grand Grey Archmage perk and 275+ int. Effect: Increases grey spell strength by 50%, mana pool by 900, lust bar by 320, regain it 150% faster. Grey spells costs lowered by 20%.\n");
 			outputText("-New tier 12 wisdom lvl-up perk: Greater shared power. Req. Elemental touch perk. Effect: Double the effect of Shared power.\n");
 			outputText("-New tier 13 wisdom lvl-up perk: Ecliptic Infusion. Req. Greater shared power perk. Effect: Your Infuse ability allows you to add and combine a corrupted or a purity normal elemental with a water, fire, earth or wind epic elemental. Doing so adds a purity or corruption scaling to your abilities.\n");
 			outputText("-New tier 13 strength lvl-up perk: Too Angry to Die. Req. Anger perk. Effect: When you under berserk-like state it will prevent HP defeat as long it last. Additionaly increase limit of negative HP you can reach by amount of max wrath. (+10% melee physical attacks multiplier, 2x for been under berzerk type state and another 2x when using large or masive weapon(s)) (+3000 max Wrath)\n");
@@ -126,6 +131,10 @@ package classes.Scenes
 			outputText("-New Grey Spell: Wind Blast - learned from Grey Book. Cost 200 mana and deal AoE wind dmg. Have cooldown of 3 turns. (spell text by Pyromania)\n");
 			outputText("-New Grey Spell: Stalagmite - learned from Grey Book. Cost 40 mana and deal earth dmg. Have cooldown of 3 turns. (spell text by Canadian Snas)\n");
 			outputText("-New Grey Spell: Shatterstone - learned from Grey Book. Cost 200 mana and deal AoE earth dmg. Have cooldown of 3 turns. (spell text by Canadian Snas)\n");
+			outputText("-New Grey Spell: Acid Spray - learned from Grey Book. Cost 40 mana and deal acid dmg and apply DoT (similar to acid spit/hydra breath ones but ~half weaker). Have cooldown of 3 turns. (spell text by Canadian Snas)\n");
+			outputText("-New Grey Spell: Corrosive Wave - learned from Grey Book. Cost 200 mana and deal AoE acid dmg. Have cooldown of 3 turns and apply DoT (similar to acid spit/hydra breath ones but ~half weaker). (spell text by Canadian Snas)\n");
+			outputText("-New Grey Spell: Hydro Acid - learned from Grey Book. Cost 100 mana and deal acid dmg and apply DoT (similar to acid spit/hydra breath ones). Have cooldown of 6 turns. It's Tier 2 spell. (spell text by Canadian Snas)\n");
+			outputText("-New Grey Spell: Acid Rain - learned from Grey Book. Cost 500 mana and deal AoE acid dmg. Have cooldown of 6 turns and apply DoT (similar to acid spit/hydra breath ones). It's Tier 2 spell. (spell text by Canadian Snas)\n");
 			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
 			//outputText("-New tier 9 strength lvl-up perk: Prestige Job: Stalker. Req. Job: Warrior and Hunter perks, 150+ str/spe. Effect: +60 to str multi and +20 to spe multi (scalable with NG tiers), +20% damage and critical damage with thrown weapon.\n");
 			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
@@ -189,8 +198,6 @@ package classes.Scenes
 			outputText("-Arcane Archer Elemental Arrows can be now enhanced with water, wind, earth dmg as long PC learn matching grey spell.\n");
 			outputText("-Convergence perk effect slight change - for single target will hit 2x more (it would mutliply any cases of multicast/omnicast), increase aoe grey spells dmg against smaller (+100%) and larger groups (+50%). Also it effect would not be disabling offensive staff channeling effect.\n");
 			outputText("-Twin Heart can be gained by drider PC's too.\n");
-			outputText("-New Grey Spell: Acid Spray - learned from Grey Book. Cost 40 mana and deal acid dmg and apply DoT (similar to acid spit/hydra breath ones but ~half weaker). Have cooldown of 3 turns. (spell text by Canadian Snas)\n");
-			outputText("-New Grey Spell: Corrosive Wave - learned from Grey Book. Cost 200 mana and deal AoE acid dmg. Have cooldown of 3 turns and apply DoT (similar to acid spit/hydra breath ones but ~half weaker). (spell text by Canadian Snas)\n");
 			outputText("-Added 'Back' buttons for Konstantin. (Svalkash)\n");
 			outputText("-Rearranged dragon face mutations - fangs first, then full muzzle. Just like the scales. (Svalkash)\n");
 			outputText("-Fixed weird skinCoat inheritance - now the coat inherits skin/hair type only once and needs to be dyed separately afterwards. Non-fur coatings inherit the skin color. (Svalkash)\n");
@@ -202,8 +209,6 @@ package classes.Scenes
 			outputText("-Moved buttons to skip golem/elemental pre-PC rounds to fist button. Added mana cost of golems attacks in tooltips.\n");
 			outputText("-Buffed stat-boosting jewelry: now it increases stat multiplier. Still useless trash compared to resistances in the late game. Maybe one day someone will balance all this stuff properly... (Svalkash)\n");
 			outputText("-Fixes: Diana last encounter repeating after recruiting her, body lotions not working (at all), Phylla dick checks comparing area instead of length and vice versa (Svalkash)\n");
-			outputText("-New Grey Spell: Hydro Acid - learned from Grey Book. Cost 100 mana and deal acid dmg and apply DoT (similar to acid spit/hydra breath ones). Have cooldown of 6 turns. It's Tier 2 spell. (spell text by Canadian Snas)\n");
-			outputText("-New Grey Spell: Acid Rain - learned from Grey Book. Cost 500 mana and deal AoE acid dmg. Have cooldown of 6 turns and apply DoT (similar to acid spit/hydra breath ones). It's Tier 2 spell. (spell text by Canadian Snas)\n");
 			outputText("-Added: Grey Spellpower, Tier 1 & 2 cooldown info to Stats > Combat subpage.\n");
 			outputText("-Kitsune 2nd tier thyroid gland mutation would now give +20 mana regen and boost by 50% foxfire fire dmg at 9 tails as it says.\n");
 			outputText("-New underwear (upper) (by Canadian Snas): Silky Drider-Weave Bra - buyable at Belisa shop. Cost 1200 gems, +20% spellpower.\n");
@@ -216,17 +221,18 @@ package classes.Scenes
 			outputText("Camouflage Mode (allow to enter 1 turn long camouflage opening option to use Sneak Attack (melee & range) specials), Invisibility Mode (the same as Camouflage Mode but can last until PC run out of SF to keep it active or deactivate it manualy / upgrade to decrease SF consumption)\n");
 			outputText("-Grey Mage Apprentice perk req. now additional Job: Sorcerer perk.\n");
 			outputText("-All 4 new spells types (water, wind, earth, acid) can be used with Elemental Arrows / Swift Casting perks.\n");
-			outputText("-New tier 10 intelligence lvl-up perk: Grand Grey Archmage (2nd Circle). Req. Grand Grey Archmage perk and 275+ int. Effect: Increases grey spell strength by 50%, mana pool by 900, lust bar by 320, regain it 150% faster. Grey spells costs lowered by 20%.\n");
-			outputText("-New tier 0 intelligence lvl-up perk: Spellpower: Grey. Req. Grey Magic perk, 50+ int and lvl 3+. Effect: Increases grey spell strength by 15% and mana pool by 75.\n");
-			outputText("-New tier 4 intelligence lvl-up perk: Improved Mana Shield. Req. Arcane Shielding perk, 125+ int. Effect: Increasing fourfold amount of damage Mana Shield spell can withstand before deactivating. (1:4 ratio for physical attakcs and 1:20 ratio for magical attacks)\n");
 			outputText("-Convergence perk tier lowered by 2 and req. int decreased by 50.\n");
 			outputText("-Arcane Regeneration perks now can also be unlocked when PC have similar rank Grey Mage line perks instead of Mage perks line. (so the pure grey magic users will not be locked out of mana regen perks due to going grey path)\n");
-			outputText("-New tier 1 intelligence lvl-up perk: Arcane Shielding. Req. Grey Magic perk, Mana Shield spell, 75+ int. Effect: Improving by fivefold mana shield resistance to magical attacks. (1:5 ratio for mana to magic damage)\n");
-			outputText("-New tier 7 intelligence lvl-up perk: Super Convergence. Req. Convergence perk, 225+ int. Effect: Grey magic area of effect spells strike one more time (three times) against single targets. Against groups would deal 50-250% more dmg depending on size (250% for small groups, 100% for large groups).\n");
 			outputText("-You can't earn Sophie's forgiveness after forcefeeding her Bimbo Liqueur AFTER debimbo, then debimboing her again. Sophie now really leaves if irritated 5 times in a row (intended, but never implemented properly) (Svalkash)\n");
 			outputText("-Decreased Urta's passive affection loss. Increased Urta's 'hours since last cum' gains, fixed improper 'days without cum' counting for inflation BJ scene. Added talk options after most BJs for Urta, so you won't leave immediately after pleasing her. (Svalkash)\n");
 			outputText("-Minor Vapula fixes, new cock-finding function. Added chastity belt scene to sex menu (which was clearly intended from the beginning). (Svalkash)\n");
 			outputText("-Made Ted less annoying by disabling him after acquiring the talisman. (Svalkash) ((actualy i amde another change that makes him disabled/stop appearing after he is beaten once more after dropping jade talisman (Ormael)))\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -239,12 +245,6 @@ package classes.Scenes
 			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

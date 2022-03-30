@@ -313,7 +313,7 @@ public class MutationsLib
 				".");
 		public static const RatatoskrSmarts:PerkType = mk("Ratatoskr smarts", "Ratatoskr smarts",
 				"Allows to perma Weird words.").withBuffs({'int.mult':0.05});
-		public static const RatatoskrSmartsPrimitive:PerkType = mk("Ratatoskr smarts ()", "Ratatoskr smarts (Evolved)",
+		public static const RatatoskrSmartsPrimitive:PerkType = mk("Ratatoskr smarts ()", "Ratatoskr smarts (Primitive)",
 				"Increase the damage of Weird words by 20%. Lower cooldown of Knowledge overload by 1 turn.").withBuffs({'int.mult':0.10});
 		public static const RatatoskrSmartsEvolved:PerkType = mk("Ratatoskr smarts (Evolved)", "Ratatoskr smarts (Evolved)",
 				"Increase the damage of Weird words by another 30%. Lower cooldowns of ratatoskr specials by 1 turn. Knowledge is power is now three times as effective.").withBuffs({'int.mult':0.20});
@@ -498,7 +498,7 @@ public class MutationsLib
 				MutationsList.push([NekomataThyroidGlandFinalForm, HellcatParathyroidGlandsFinalForm, CaveWyrmLungsFinalForm, KitsuneParathyroidGlandsFinalForm, ArachnidBookLungFinalForm, BlackHeartFinalForm, CatlikeNimblenessFinalForm, DraconicBonesFinalForm, DraconicHeartFinalForm, DraconicLungsFinalForm, DrakeLungsFinalForm, EasterBunnyEggBagFinalForm,
 				EclipticMindFinalForm, ElvishPeripheralNervSysFinalForm, FeyArcaneBloodstreamFinalForm, FloralOvariesFinalForm, FrozenHeartFinalForm, GazerEyeFinalForm, GorgonsEyesFinalForm, HarpyHollowBonesFinalForm, HeartOfTheStormFinalForm, HinezumiBurningBloodFinalForm, HollowFangsFinalForm, KitsuneThyroidGlandFinalForm, LactaBovinaOvariesFinalForm,
 				LizanMarrowFinalForm, MantislikeAgilityFinalForm, MelkieLungFinalForm, MinotaurTesticlesFinalForm, NukiNutsFinalForm, ObsidianHeartFinalForm, OniMusculatureFinalForm, OrcAdrenalGlandsFinalForm, PigBoarFatFinalForm, RaijuCathodeFinalForm, RatatoskrSmartsFinalForm, SalamanderAdrenalGlandsFinalForm, ScyllaInkGlandsPrimitive, ScyllaInkGlandsEvolved,
-				TwinHeartFinalForm, VampiricBloodsteamFinalForm, VenomGlandsFinalForm, WhaleFatFinalForm, YetiFatFinalForm]);
+				TwinHeartFinalForm, VampiricBloodsteamFinalForm, VenomGlandsFinalForm, WhaleFatFinalForm, YetiFatFinalForm, CatlikeNimblenessFinalForm]);
 			}
 
 			switch(spec){

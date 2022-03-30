@@ -29,6 +29,11 @@ public class Boat extends AbstractLakeContent
 		public function boatExplore():void
 		{
 			player.addStatusValue(StatusEffects.BoatDiscovery, 1, 1);
+			//Belisa
+			if (BelisaFollower.BelisaInGame == true && BelisaFollower.BelisaEncounternum == 1) {
+				SceneLib.belisa.secondEncounter();
+				return;
+			}
 			//Helia monogamy fucks
 			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !SceneLib.helScene.followerHel()) {
 				SceneLib.helScene.helSexualAmbush();
@@ -37,11 +42,6 @@ public class Boat extends AbstractLakeContent
 			//Etna
 			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && !player.hasStatusEffect(StatusEffects.EtnaOff) && rand(5) == 0 && (player.level >= 20)) {
 				SceneLib.etnaScene.repeatYandereEnc();
-				return;
-			}
-			//Belisa
-			if (BelisaFollower.BelisaInGame == true && BelisaFollower.BelisaEncounternum == 1 && rand(5) == 0) {
-				SceneLib.belisa.secondEncounter();
 				return;
 			}
 			clearOutput();

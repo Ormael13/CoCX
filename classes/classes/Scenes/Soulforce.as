@@ -1793,7 +1793,7 @@ public class Soulforce extends BaseContent
 			addButton(3, "SuccGard", FightSuccubusGardener).hint("Test fight with Succubus Gardener. (Also it will glitch right after fight so not start this fight if you got unsaved progress that you not wanna loose as only way to handle post fight glitch is restarting game)");
 			addButton(4, "The Dummy", FightTheDummy).hint("Fight with The Dummy.");
 			addButton(5, "M.WSeaver", FightBelisa).hint("Test fight with Mana Weaver.");
-			if (player.level >= 45 && TyrantiaFollower.TyrantiaFollowerStage < 4 && !TyrantiaFollower.TyraniaIsRemovedFromThewGame) addButton(6, "D.Giantess", FightTyrantia).hint("Test fight with Drider Giantess.");
+			if (player.level >= 45 && TyrantiaFollower.TyrantiaFollowerStage < 5 && !TyrantiaFollower.TyraniaIsRemovedFromThewGame) addButton(6, "D.Giantess", FightTyrantia).hint("Test fight with Drider Giantess.");
 			addButton(7, "Zenji", FightZenji).hint("Test fight with Zenji.");
 			addButton(8, "Sonya", FightSonya).hint("Test fight with Sonya.");
 			addButton(9, "RyuBi", FightRyuBi).hint("Test fight with RyuBi.");
@@ -2838,8 +2838,8 @@ public class Soulforce extends BaseContent
 	}
 	public function FightTyrantia():void {
 		clearOutput();
-		if (TyrantiaFollower.TyraniaPostFinalKissScene) SceneLib.tyrania.encounterBattlefieldAfterFinalKiss();
-		else if (TyrantiaFollower.TyrantiaAffectionMeter > 40) SceneLib.tyrania.encounterBattlefieldAfter40Affection();
+		if (TyrantiaFollower.TyrantiaFollowerStage > 2) SceneLib.tyrania.repeatEncounterBattlefield();
+		else if (TyrantiaFollower.TyrantiaAffectionMeter > 40 && TyrantiaFollower.TyrantiaFollowerStage > 1) SceneLib.tyrania.encounterBattlefieldAfter40Affection();
 		else if (TyrantiaFollower.TyrantiaFollowerStage > 0) SceneLib.tyrania.repeatEncounterBattlefield();
 		else SceneLib.tyrania.firstEncounter();
 	}

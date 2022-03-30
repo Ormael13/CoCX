@@ -799,9 +799,9 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					else flags[kFLAGS.CHI_CHI_LVL_UP]++;
 				}
 				//Belisa Confession event
-				if ((model.time.hours >= 7 && model.time.hours <= 9) && TyrantiaFollower.TyrantiaFollowerStage == 1 && BelisaFollower.BelisaFollowerStage == 3 && BelisaFollower.BelisaAffectionMeter >= 80 && !BelisaFollower.BelisaConfessed) {
-					SceneLib.belisa.BelisaConfession();
-				}
+				if (TyrantiaFollower.TyrantiaFollowerStage >= 4 && BelisaFollower.BelisaFollowerStage > 2 && BelisaFollower.BelisaFollowerStage < 6) {
+					BelisaFollower.BelisaFollowerStage += 1;
+				}				
 				
 				//Excellia fixing counter
 				if (flags[kFLAGS.EXCELLIA_RECRUITED] > 2 && flags[kFLAGS.EXCELLIA_RECRUITED] < 30) flags[kFLAGS.EXCELLIA_RECRUITED]++;
@@ -911,6 +911,8 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 					}
 					ZenjiScenes.ZenjiFood = false;
 				}
+				//Neisa counter to payment
+				if (flags[kFLAGS.NEISA_FOLLOWER] >= 7 && flags[kFLAGS.NEISA_FOLLOWER] < 17) flags[kFLAGS.NEISA_FOLLOWER]++;
 				//Kaiba daily buy limit refresh
 				if (player.hasStatusEffect(StatusEffects.KaibaDailyLimit)) player.removeStatusEffect(StatusEffects.KaibaDailyLimit);
 				//Daily reset on finding blessed ittem(s) at the lake
