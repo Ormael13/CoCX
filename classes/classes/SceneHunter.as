@@ -39,7 +39,7 @@ public class SceneHunter extends BaseContent {
             outputText("\nThe biggest <b>fitting</b> dick is always used.");
         }
 
-        addButton(2, "MutEx Scenes", toggle, kFLAGS.SCENEHUNTER_MUTEX_SCENES);
+        addButton(2, "MutExScenes", toggle, kFLAGS.SCENEHUNTER_MUTEX_SCENES);
         outputText("\n\n<b>Mutually exclusive scenes</b>: ");
         if (flags[kFLAGS.SCENEHUNTER_MUTEX_SCENES]) {
             outputText("<b><font color=\"#008000\">ENABLED</font></b>");
@@ -81,25 +81,20 @@ public class SceneHunter extends BaseContent {
 		settingsPage();
 	}
 
-    public function get uniHerms():Boolean {
-        return flags[kFLAGS.SCENEHUNTER_UNI_HERMS];
-    }
-
-    public function get dickSelect():Boolean {
-        return flags[kFLAGS.SCENEHUNTER_DICK_SELECT];
-    }
-
-    public function get mutExScenes():Boolean {
-        return flags[kFLAGS.SCENEHUNTER_MUTEX_SCENES];
-    }
-
-    public function get printChecks():Boolean {
-        return flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS];
+    //restore the previous text and start the next function
+    public function restoreText(textToRestore:String = "", fun:Function = null):void {
+        CoC.instance.currentText = textToRestore;
+        if (fun)
+            fun();
     }
     
     //--------------------------------------------------------------------------------------------------
     // UniHerms
     //--------------------------------------------------------------------------------------------------
+
+    public function get uniHerms():Boolean {
+        return flags[kFLAGS.SCENEHUNTER_UNI_HERMS];
+    }
 
     /**
     * Prints the dialogue to select the part to use in the scene. Automatically checks if the part exists.
@@ -113,7 +108,6 @@ public class SceneHunter extends BaseContent {
     * @param    dickDisabledMsg The message to write on the disabled dick button
     */
     public function selectPart(dickF:Function, vagF:Function, assF:Function = null, dickActive:Boolean = true, dickDisabledMsg:String = "", dickPriority:Boolean = true):void {
-        var beforeText:String = CoC.instance.currentText;
         //Auto-calls. No auto call when dick is just inactive - player should know!
         if (!(dickF && player.hasCock() && dickActive) && !(vagF && player.hasVagina()) && !assF) { //sanity checks
             if (dickF && player.hasCock() && !dickActive)
@@ -142,12 +136,13 @@ public class SceneHunter extends BaseContent {
             return;
         }
         //Dialogue
-        outputText("\n\n<b>Which part of your body do you want to use?</b>")
+        var beforeText:String = CoC.instance.currentText;
+        outputText("\n\n<b>Which part of your body do you want to use?</b>");
         menu();
         if (dickF) {
             if (player.hasCock()) {
                 if (dickActive)
-                    addButton(0, "Dick", sh_continue, dickF, beforeText);
+                    addButton(0, "Dick", restoreText, beforeText, dickF);
                 else
                     addButtonDisabled(0, "Dick", dickDisabledMsg);
             }
@@ -156,57 +151,149 @@ public class SceneHunter extends BaseContent {
         }
         if (vagF) {
             if (player.hasVagina())
-                    addButton(1, "Vagina", sh_continue, vagF, beforeText);
+                    addButton(1, "Vagina", restoreText, beforeText, vagF);
             else
                 addButtonDisabled(1, "Vagina", "You don't have any.");
         }
         if (assF)
-            addButton(2, "Ass", sh_continue, assF, beforeText);
-    }
-
-    //restore the previous text and start the next function
-    public function sh_continue(fun:Function, textToRestore:String = ""):void {
-        CoC.instance.currentText = textToRestore;
-        fun();
+            addButton(2, "Ass", restoreText, beforeText, assF);
     }
 
     //--------------------------------------------------------------------------------------------------
     // DickSelect
     //--------------------------------------------------------------------------------------------------
-    /**
-    * Prints the dialogue to select the dick to use in the scene.
-    * If only one option is available, goes with it.
-    * @param    fitF   Functio
-    * @param    
-    * @param    assF
-    * @param    dickActive          If false, "dick" button will be disabled.
-    * @param    dickDisabledMsg     The message to write on the disabled dick button
-    */
-    /*
-    public function selectDickFit(dickF:Function, vagF:Function, assF:Function = null, dickActive:Boolean = true, dickDisabledMsg:String = ""):void {
-        var beforeText:String = CoC.instance.currentText;
-        outputText("\n\n<b>Which part of your body do you want to use?</b>")
-        menu();
-        if (dickF) {
-            if (player.hasCock()) {
-                if (dickActive)
-                    addButton(0, "Dick", uh_continue, dickF, beforeText);
-                else
-                    addButtonDisabled(0, "Dick", dickDisabledMsg);
-            }
-            else
-                addButtonDisabled(0, "Dick", "You don't have any.");
-        }
-        if (vagF) {
-            if (player.hasVagina())
-                    addButton(1, "Vagina", uh_continue, vagF, beforeText);
-            else
-                addButtonDisabled(1, "Vagina", "You don't have any.");
-        }
-        if (assF)
-            addButton(2, "Ass", uh_continue, assF, beforeText);
+
+    public function get dickSelect():Boolean { 
+        return flags[kFLAGS.SCENEHUNTER_DICK_SELECT];
     }
-*/
+
+    /**
+    * The dialogue to select fitting or not fitting dick. If dickSelect is disabled, tries to call "fitting" function
+    * If doesn't fit, selects the biggest one because HELL WHY NOT.
+    * When disabled, overrides "tentacle always fit" behavior.
+    * @param    fitF        Function to call when fits
+    * @param    nofitF      Function to call when doesn't
+    * @param    maxSize     Maximum fitting size
+    * @param    compareBy   (Optional) Measurement to compare
+    */
+    public function selectFitNofit(fitF:Function, nofitF:Function, maxSize:Number, compareBy:String = "area"):void {
+        //Auto-calls
+        if (!dickSelect) {
+            if (findCock(1, -1, maxSize, compareBy, false) >= 0)
+                fitF();
+            else
+                nofitF();
+            return;
+        }
+        //Dialogue
+        var beforeText:String = CoC.instance.currentText;
+        outputText("\n\n<b>Will you use the dick that will certainly fit, or press your luck and try to use a bigger 'tool'?</b>");
+        menu();
+        //fitting cocks
+        if (findCock(1, -1, maxSize, compareBy, true) >= 0)
+            addButton(0, "Fitting", restoreText, beforeText, fitF);
+        else
+            addButtonDisabled(0, "Fitting", "Requires dick " + compareBy + " less than " + maxSize);
+        //too big
+        if (findCock(1, maxSize, -1, compareBy, true) >= 0)
+            addButton(1, "Too big", restoreText, beforeText, nofitF);
+        else
+            addButtonDisabled(1, "Fitting", "Requires dick " + compareBy + " greater than " + maxSize);
+    }
+    /**
+    * The dialogue to select one of 3 dick sizes. There's no points in the game when more are used.
+    * When disabled, selects the biggest one.
+    * Always overrides "tentacles always fit" behavior for 'smaller' options - your 3-foot-long tentacle is not SMALL in any way :)
+    * Assumes that you have any fitting dick - no max size for "Big"
+    * @param    bigF, mediumF, smallF   Function for "Big", "Medium", "Small" buttons respectively. 
+    * @param    bigMin, smallMax       Borderline sizes for "Big"-"Medium" and "Medium"-"Small"
+    * @param    compareBy               (Optional) Measurement to compare
+    */
+    public function selectBigSmall(bigF:Function, bigMin:Number, mediumF:Function, smallMax:Number = -1, smallF:Function = null, compareBy:String = "area"):void {
+        var smallProvided:Boolean = smallMax >= 0 && smallF;
+        //Auto-calls
+        if (!dickSelect) {
+            if (findCock(1, bigMin, -1, compareBy) >= 0)
+                bigF();
+            else if (findCock(1, smallProvided ? smallMax : -1, bigMin, compareBy, false) >= 0) //called even if mediumMin is not provived (-1 = no minimum)
+                mediumF();
+            else
+                smallF(); //if smallMax is provided, smallF MUST be provided too
+            return;
+        }
+        //Dialogue
+        var beforeText:String = CoC.instance.currentText;
+        outputText("\n\n<b>Will you use a big" + (smallProvided ? ", medium") + " or small sized dick?</b>");
+        menu();
+        //big cocks
+        if (findCock(1, bigMin, -1, compareBy) >= 0)
+            addButton(0, "Big", restoreText, beforeText, bigF);
+        else
+            addButtonDisabled(0, "Fitting", "Requires dick " + compareBy + " greater than " + bigMin);
+        //medium-small
+        if (smallProvided) {
+            //medium cocks
+            if (findCock(1, smallMax, bigMin, compareBy, false) >= 0) //tentacles don't fit
+                addButton(1, "Medium", restoreText, beforeText, mediumF);
+            else
+                addButtonDisabled(1, "Medium", "Requires dick " + compareBy + " greater than " + smallMax + " and less than " + bigMin);
+            //small cocks
+            if (findCock(1, -1, smallMax, compareBy, false) >= 0) //tentacles don't fit
+                addButton(2, "Small", restoreText, beforeText, smallF);
+            else
+                addButtonDisabled(2, "Small", "Requires dick " + compareBy + " less than " + smallMax);
+        }
+        else {
+            //replaced "Medium" text with "Small" to avoid player confusion
+            if (findCock(1, -1, bigMin, compareBy, false) >= 0) //tentacles don't fit
+                addButton(1, "Small", restoreText, beforeText, mediumF);
+            else
+                addButtonDisabled(1, "Small", "Requires dick " + compareBy + " less than " + bigMin);
+        }
+    }
+    
+    //--------------------------------------------------------------------------------------------------
+    // MutExScenes
+    //--------------------------------------------------------------------------------------------------
+
+    public function get mutExScenes():Boolean {
+        return flags[kFLAGS.SCENEHUNTER_MUTEX_SCENES];
+    }
+    //nothing more here for now... Will it just check the value, or new next will be here too?
+    
+    //--------------------------------------------------------------------------------------------------
+    // PrintChecks
+    //--------------------------------------------------------------------------------------------------
+
+    public function get printChecks():Boolean {
+        return flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS];
+    }
+
+    //Some common checks for easier access
+    
+    //Prints dick requirements if not found
+    public function check_dick(type:CockTypesEnum, minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", moreText:String = ""):void {
+        if (printChecks && findCockWithType(type, 1, minSize, maxSize, compareBy) < 0) {
+            outputText("\n\n<b>FAILED DICK CHECK:")
+            if (type != CockTypesEnum.UNDEFINED)
+                outputText("\n    Type: " + cockNoun(type));
+            if (minSize != -1)
+                outputText("\n    Min " + compareBy + ": " + minSize);
+            if (maxSize != -1)
+                outputText("\n    Max " + compareBy + ": " + maxSize);
+            if (moreText)
+                outputText("\n" + moreText);
+            outputText("</b>\n\n")
+        }
+    }
+    
+    //Prints dick requirements if not found
+    public function check_race(race:String):void {
+        if (printChecks && player.race() != race) {
+            outputText("\n\n<b>FAILED RACE CHECK:")
+            outputText("\n    Expected: " + race);
+            outputText("</b>\n\n")
+        }
+    }
 }
 }
-//CHARVIEW_ARMOR_HIDDEN

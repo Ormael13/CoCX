@@ -809,7 +809,7 @@ public class GameSettings extends BaseContent {
     private function hideControls():void
     {
         CoC.instance.inputManager.HideBindingPane();
-        CoC.instance.gameSettings.settingsScreenMain();
+        settingsScreenMain();
     }
 
     private function resetControls():void
