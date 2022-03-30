@@ -339,7 +339,7 @@ public function repeatEncounterBattlefieldTalkHer():void {
 	//5 - Izumi
 	//6 - Kids
 	if (TyraniaPostFinalKissScene && TyrantiaFollowerStage < 4) addButton(13, "LiveWithMe", TyrantiaLiveWithMe).hint("Take the Spooder home. Do it NOW ^^");
-	else if (TyrantiaFollowerStage >= 4) outputText("She's already in your camp!");
+	else if (TyrantiaFollowerStage >= 4) addButtonDisabled(13, "LiveWithMe","She's already in your camp!");
 	else addButtonDisabled(13, "???", "Req. special scene after reaching 40%+ affection.");
 	addButton(14, "Back", repeatEncounterBattlefieldTalk);
 }
