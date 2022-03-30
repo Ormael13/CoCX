@@ -8,6 +8,7 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.BlightRidge.DemonPackBlightRidge;
 import classes.Scenes.Areas.DefiledRavine.DemonPackDefiledRavine;
+import classes.Scenes.SceneLib;
 import classes.internals.SaveableState;
 
 	public class TyrantiaFollower extends NPCAwareContent implements SaveableState
@@ -290,8 +291,12 @@ public function repeatEncounterBattlefieldTalk():void {
 	//0 - Lab
 	addButton(1, "Self", repeatEncounterBattlefieldTalkSelf);
 	//2 - Fighting Style
-	addButton(3, "Kiha", repeatEncounterBattlefieldTalkKiha);
-	addButton(4, "Diva", repeatEncounterBattlefieldTalkDiva);
+	if (TyrantiaFollowerStage >= 4){
+		if (flags[kFLAGS.TIMES_MET_KIHA] > 0) addButton(3, "Kiha", repeatEncounterBattlefieldTalkKiha);
+		else addButtonDisabled(3, "???", "Perhaps if you look around the swamps, you might find someone she might also know...");
+		if (DivaScene.instance.status > 0) addButton(4, "Diva", repeatEncounterBattlefieldTalkDiva);
+		else addButtonDisabled(4,"Diva", "Perhaps if you look around the mountains, you might find someone she might also know...");
+	}
 	addButton(5, "Her", repeatEncounterBattlefieldTalkHer);
 	if (TyrantiaFollowerStage >= 4) addButton(14, "Back", TyrantiaAtCamp);
 	else addButton(14, "Back", repeatEncounterBattlefieldRe);
@@ -338,7 +343,8 @@ public function repeatEncounterBattlefieldTalkHer():void {
 	//4 - Goblin
 	//5 - Izumi
 	//6 - Kids
-	if (TyraniaPostFinalKissScene) addButton(13, "LiveWithMe", TyrantiaLiveWithMe).hint("Take the Spooder home. Do it NOW ^^");
+	if (TyraniaPostFinalKissScene && TyrantiaFollowerStage < 4) addButton(13, "LiveWithMe", TyrantiaLiveWithMe).hint("Take the Spooder home. Do it NOW ^^");
+	else if (TyrantiaFollowerStage >= 4) addButtonDisabled(13, "LiveWithMe","She's already in your camp!");
 	else addButtonDisabled(13, "???", "Req. special scene after reaching 40%+ affection.");
 	addButton(14, "Back", repeatEncounterBattlefieldTalk);
 }
@@ -849,7 +855,7 @@ public function GetPhallustuffed():void {
 public function TyrantiaAtCamp():void {
 	clearOutput();
 	outputText("You decide to go see your Drider Giantess. As you walk over to her hutch, Tyrantia comes out from her dwelling, her phallic spear over one shoulder. She looks down at you, arching her back and sending the soft scraping of steel up your spine.\n\n");
-	outputText("\"<i>Oh, hey.</i>\" She rests her spider-half on the ground, so you don’t have to look up"+(player.tallness < 108 ? "" : " as much")+" (if playerheight < 9ft). \"<i>Do you need something? Or did you just come over to see me?</i>\"\n\n");
+	outputText("\"<i>Oh, hey.</i>\" She rests her spider-half on the ground, so you don’t have to look up"+(player.tallness < 108 ? "" : " as much")+". \"<i>Do you need something? Or did you just come over to see me?</i>\"\n\n");
 	menu();
 	addButton(0, "Looks", TyrantiaAppearance);
 	addButton(1, "Talk", repeatEncounterBattlefieldTalk);
