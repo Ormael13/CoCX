@@ -5,13 +5,12 @@ package classes.Scenes.Areas.Bog
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.UniqueSexScenes;
+	import classes.Scenes.SceneLib;
     import classes.display.SpriteDb;
 
 	public class ChameleonGirlScene extends BaseContent
 	{
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		
+				
 		public function ChameleonGirlScene()
 		{
 		}
@@ -201,9 +200,8 @@ package classes.Scenes.Areas.Bog
 			if (player.gender == 3) addButton(2, "Herm Style", fuckDatChameleonAsACoolGuyGirlHerm);
 			if ((player.hasItem(consumables.SUCMILK) || player.hasItem(consumables.P_S_MLK)) && player.hasCock()) addButton(3, "Use Item", useAnItemOnTheChamcham);
 			else if (player.hasItem(consumables.SENSDRF) && (player.hasItem(consumables.L_DRAFT) || player.hasItem(consumables.F_DRAFT))) addButton(3, "Use Item", useAnItemOnTheChamcham);
-			uniquuuesexscene.pcUSSPreChecksV2(defeatChameleonGirl);
-			//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(7);
-			addButton(14, "Leave", cleanupAfterCombat);
+			SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatChameleonGirl);
+						addButton(14, "Leave", cleanupAfterCombat);
 		}
 
 		//-Herm Victory (Z edited)

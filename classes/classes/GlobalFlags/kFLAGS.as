@@ -2961,10 +2961,10 @@ public static const UNKNOWN_FLAG_NUMBER_02952:int                               
 public static const UNKNOWN_FLAG_NUMBER_02953:int                                   = 2953;
 public static const UNKNOWN_FLAG_NUMBER_02954:int                                   = 2954;
 public static const UNKNOWN_FLAG_NUMBER_02955:int                                   = 2955;
-public static const UNKNOWN_FLAG_NUMBER_02956:int                                   = 2956;
-public static const UNKNOWN_FLAG_NUMBER_02957:int                                   = 2957;
-public static const UNKNOWN_FLAG_NUMBER_02958:int                                   = 2958;
-public static const UNKNOWN_FLAG_NUMBER_02959:int                                   = 2959;
+public static const SCENEHUNTER_PRINT_CHECKS:int                                    = 2956; //SceneHunter settings
+public static const SCENEHUNTER_MUTEX_SCENES:int                                    = 2957;
+public static const SCENEHUNTER_DICK_SELECT:int                                     = 2958;
+public static const SCENEHUNTER_UNI_HERMS:int                                       = 2959;
 public static const APEX_SELECTED_RACE:int                                   		= 2960;
 public static const UNKNOWN_FLAG_NUMBER_02961:int                                   = 2961;
 public static const NEWPERKSDISPLAY:int                                   			= 2962;//Perks Display cleanup
@@ -2981,7 +2981,7 @@ public static const INTELLIGENCE_SCALING:int                                   	
 public static const NO_GORE_MODE:int                                   				= 2973;
 public static const SPARRABLE_NPCS_TRAINING:int                                     = 2974;
 public static const STAT_GAIN_MODE:int                                              = 2975;
-public static const CHARVIEW_ARMOR_HIDDEN:int                                              = 2976; // Toogles armor display
+public static const CHARVIEW_ARMOR_HIDDEN:int                                       = 2976; // Toogles armor display
 public static const CHARVIEW_STYLE:int                                              = 2977; // 0 for in text, 1 for sidebar, 2 for sidebar always visible
 public static const CHARVIEWER_ENABLED:int                                          = 2978;
 public static const NEW_GAME_PLUS_LEVEL:int                                         = 2979; // Current intensity of New Game+. Each ascension increments this counter by 1.

@@ -5,13 +5,12 @@ import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
 import classes.Items.Armors.SuccubusArmor;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 public class SatyrScene extends BaseContent{
 
-	public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-	
+		
 	public function SatyrScene()
 	{
 	}
@@ -277,9 +276,8 @@ internal function defeatASatyr():void {
 		if (player.armor == armors.S_ARMOR) addButton(2, "B.Titfuck", (player.armor as SuccubusArmor).succubusPaizuri);
 		else addButton(2, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
 	}
-	uniquuuesexscene.pcUSSPreChecksV2(defeatASatyr2);
-	//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(38);
-	addButton(14, "Leave", cleanupAfterCombat);
+	SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatASatyr2);
+		addButton(14, "Leave", cleanupAfterCombat);
 }
 public function defeatASatyr2():void {
 	menu();
@@ -289,9 +287,8 @@ public function defeatASatyr2():void {
 		if (player.armor == armors.S_ARMOR) addButton(2, "B.Titfuck", (player.armor as SuccubusArmor).succubusPaizuri);
 		else addButton(2, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
 	}
-	uniquuuesexscene.pcUSSPreChecksV2(defeatASatyr2);
-	//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(38);
-	addButton(14, "Leave", cleanupAfterCombat);
+	SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatASatyr2);
+		addButton(14, "Leave", cleanupAfterCombat);
 }
 //Female (Z)
 private function femaleTakesAdvantageOfSatyr():void {

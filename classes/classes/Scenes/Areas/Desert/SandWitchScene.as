@@ -3,7 +3,7 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
 import classes.Scenes.SceneLib;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 public class SandWitchScene extends BaseContent implements TimeAwareInterface {
@@ -12,8 +12,7 @@ public class SandWitchScene extends BaseContent implements TimeAwareInterface {
 //const EGG_WITCH_COUNTER:int = 588;
 
 		public var pregnancy:PregnancyStore;
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		public static var rapedBefore:Boolean = false;
+				public static var rapedBefore:Boolean = false;
 		
 		
 		public function SandWitchScene()
@@ -219,7 +218,7 @@ private function sandWitchBadEnd():void {
 	clearOutput();
 	if (player.isAlraune())
 	{
-		uniquuuesexscene.AlrauneDungeonBadEnd();
+		SceneLib.uniqueSexScene.AlrauneDungeonBadEnd();
 	}
 	else{
 		outputText("You awaken in a candlelit stone shrine of some sort, resting naked and facedown on some warm, comfortable body pillows. Remembering your fight against the witch, you hurriedly try to get up, only to gasp with surprise when a painful weight pulls on your chest. Glancing down to find the source of the weight, you blink with shock, then fight rising panic – the \"pillows\" that you are lying on are your own breasts, swollen to such a size that you cannot possibly lift them!\n\n");
@@ -636,9 +635,8 @@ internal function beatSandwitch():void {
 	if (player.gender > 0 && player.canOviposit()) addButton(4, "Lay Eggs", ovipositSandWitches);
 	addButton(5, "Taunt Her", sandwitchSpanking);
 	addButton(14, "Leave", cleanupAfterCombat);
-	uniquuuesexscene.pcUSSPreChecksV2(beatSandwitch2);
-	//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(14);
-}
+	SceneLib.uniqueSexScene.pcUSSPreChecksV2(beatSandwitch2);
+	}
 public function beatSandwitch2():void {
 	menu();
 	addButton(0, "Yes", sandwitchRaped);
@@ -648,9 +646,8 @@ public function beatSandwitch2():void {
 	if (player.gender > 0 && player.canOviposit()) addButton(4, "Lay Eggs", ovipositSandWitches);
 	addButton(5, "Taunt Her", sandwitchSpanking);
 	addButton(14, "Leave", cleanupAfterCombat);
-	uniquuuesexscene.pcUSSPreChecksV2(beatSandwitch2);
-	//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(14);
-}
+	SceneLib.uniqueSexScene.pcUSSPreChecksV2(beatSandwitch2);
+	}
     //RAEP SAND-WITCH!
     private function sandwitchGetsDildoed():void {
         EngineCore.clearOutput();

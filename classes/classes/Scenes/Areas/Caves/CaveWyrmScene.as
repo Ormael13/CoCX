@@ -8,12 +8,11 @@ package classes.Scenes.Areas.Caves
 import classes.Stats.Buff;
 import classes.internals.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.UniqueSexScenes;
+	import classes.Scenes.SceneLib;
 
 	public class CaveWyrmScene extends BaseContent
 	{
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		
+				
 		public function CaveWyrmScene() 
 		{
 		}
@@ -46,9 +45,8 @@ public function winningOverCaveWyrm():void {
 			outputText("... then again, maybe you don't. It's definitely a risk- but since when have you ever played it safe in Mareth? The Wyrm's eyes light up curiously as she sees you eyeing her wet genitals, and something about the twisted grin on her face tells her she'd like you to try. Her scaly thighs part a little as she sizes-up your torso and, of course, your own sex.\n\n");
 			addButton(1, "Fuck Her", winningOverCaveWyrmDMelting);
 		}
-		uniquuuesexscene.pcUSSPreChecksV2(winningOverCaveWyrm);
-		//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(10);
-	}
+		SceneLib.uniqueSexScene.pcUSSPreChecksV2(winningOverCaveWyrm);
+			}
 	else {
 		outputText("You approach the defeated lizard girl intending to punish her for her assault but the drop of precum fuming on the ground like acid next to her cunt tells you that it's a VERY bad idea. Who knows what your ");
 		if (player.hasVagina()) outputText("pussy "); //not sure why I bothered keeping this.
@@ -56,9 +54,8 @@ public function winningOverCaveWyrm():void {
 		//if (player.hasCock()) outputText("cock");	//Explictly checks if has this before this else occurs. What is the point of this?
 		outputText(" might end up like if any of these fluids gets in contact with them. Deciding against it you smash the " + (flags[kFLAGS.HERM_CAVE_WYRM] > 0 ?"herm":"female") + " unconscious instead and get your spoils. The locals will better use her then you would.");
 		addButton(0, "Leave", cleanupAfterCombat);
-		uniquuuesexscene.pcUSSPreChecksV2(winningOverCaveWyrm);
-		//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(10);
-	}
+		SceneLib.uniqueSexScene.pcUSSPreChecksV2(winningOverCaveWyrm);
+			}
 }	
 public function winningOverCaveWyrmDMelting():void {
 	clearOutput();

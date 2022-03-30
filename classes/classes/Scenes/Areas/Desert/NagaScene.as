@@ -5,7 +5,7 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Skin;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 public class NagaScene extends BaseContent{
@@ -13,9 +13,7 @@ public class NagaScene extends BaseContent{
         private var location:String = "desert";
 		private var isGorgon:Boolean=false;
 
-        public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-
-		public function NagaScene(gorgon:Boolean = false) {
+    public function NagaScene(gorgon:Boolean = false) {
             if (gorgon) {
 				isGorgon=gorgon;
                 gorgonOrNaga = "gorgon";
@@ -895,9 +893,8 @@ public function nagaRapeChoice():void {
 		if (player.lowerBody == LowerBody.GOO) addButton(11, "Gooey Rape", gooNagaRape);
 		addButton(12, "Lay Eggs", eggs);
 		addButton(14, "Leave", cleanupAfterCombat);
-		uniquuuesexscene.pcUSSPreChecksV2(nagaRapeChoice);
-		//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(13);
-	}
+		SceneLib.uniqueSexScene.pcUSSPreChecksV2(nagaRapeChoice);
+			}
 	if (player.lust < 33) {
 		outputText("You aren't aroused enough to fuck her.");
 		menu();

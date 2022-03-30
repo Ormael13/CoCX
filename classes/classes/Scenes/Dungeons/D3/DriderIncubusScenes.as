@@ -8,7 +8,7 @@ import classes.Items.WeaponLib;
 import classes.PerkLib;
 import classes.PregnancyStore;
 import classes.Scenes.SceneLib;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 import classes.StatusEffects;
 
 public class DriderIncubusScenes extends BaseContent
@@ -17,9 +17,7 @@ public class DriderIncubusScenes extends BaseContent
 		{
 
 		}
-
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		
+				
 		public function encounterDriderIncbutt():void
 		{
 			clearOutput();
@@ -193,7 +191,7 @@ public class DriderIncubusScenes extends BaseContent
 			clearOutput();
 			if (player.isAlraune())
 			{
-				uniquuuesexscene.AlrauneDungeonBadEnd();
+				SceneLib.uniqueSexScene.AlrauneDungeonBadEnd();
 			}
 			else {
 				outputText("True to " + player.mf("his", "her") + " words, Lethice conquered Tel’Adre that same year, and the rest of Mareth fell in short order. The Champion came to understand the truth of Lethice’s words");

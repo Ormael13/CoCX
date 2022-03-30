@@ -34,8 +34,11 @@ public class MinervaScene extends BaseContent implements TimeAwareInterface {
 	public function minervaACapacity():Number {
 		return 100;
 	}
+    public function get minervaPurified():Boolean {
+        return flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] >= 10;
+    }
 	public function minervaSprite():void {
-		if (flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] >= 10) spriteSelect(SpriteDb.s_minerva_pure);
+		if (minervaPurified) spriteSelect(SpriteDb.s_minerva_pure);
 		else if (flags[kFLAGS.MINERVA_CORRUPTION_PROGRESS] >= 10) spriteSelect(SpriteDb.s_minerva_corrupt);
 		else spriteSelect(SpriteDb.s_minerva);
 	}
@@ -440,8 +443,7 @@ private function repeatableMinervaRomanceScene():void {
 }
 
 
-private function minervaTalkSelect(bath:Boolean = true):void {
-	var choices:Array = [talkingToMinervaAboutBackstory];
+public function minervaTalkSelect(bath:Boolean = true):void {
 	if(flags[kFLAGS.MINERVA_BACKSTORY_LEARNED] == 0) {
         talkingToMinervaAboutBackstory();
         return;
@@ -453,32 +455,39 @@ private function minervaTalkSelect(bath:Boolean = true):void {
 		return;
 	}
     clearOutput();
-	if(bath && minervaRomanced() && rand(2) == 0) choices[choices.length] = bathTimeTalkWithMinerva;
+    //Minerva asks you to join
+	if(bath && minervaRomanced() && rand(2) == 0) {
+        bathTimeTalkWithMinerva();
+        return;
+    }
     //no bath
     outputText("What do you want to ask her about?")
     menu();
 	//3-2 Talk Scene 2 - talks about the spring
 	//-repeatable
-    addButton(0, "Spring", talkAboutTheSpringWithMinerva);
+    addButton(0, "Spring", minervaPurified ? minervaPurification.talkToMinervaAboutSpring : talkAboutTheSpringWithMinerva);
 	//- requires that backstory has been told
 	//- if already romanced Minerva shamefully confesses she may have fathered a granddaughter with her first daughter -repeatable
 	//3-3 Talking Scene 3 - talks about her shark girl daughter
 	if(minervaRomanced() && flags[kFLAGS.MINERVA_BACKSTORY_LEARNED] > 0)
-        addButton(2, "Daughter", talkWithMinervaAboutSharkGirlDaughter);
+        addButton(2, "Daughter", minervaPurified ? minervaPurification.talkToMinervaAboutSharkgirl : talkWithMinervaAboutSharkGirlDaughter);
     else
         addButtonDisabled(2, "???", "You need to know her better.");
 	//3-4 Talk Scene 4 - talks about her corruption
 	//- romance yes only or if you trick her into thinking you love her. - Repeatable until Minerva is purified or corrupted
-	if(minervaRomanced() && flags[kFLAGS.MINERVA_BACKSTORY_LEARNED] == 2)
-        addButton(3, "Corruption", talkToMinervaAboutHerCorruption);
-    else
-        addButtonDisabled(3, "???", "You need to know her better.");
+    if (!minervaPurified) {
+        if(minervaRomanced() && flags[kFLAGS.MINERVA_BACKSTORY_LEARNED] == 2)
+            addButton(3, "Corruption", talkToMinervaAboutHerCorruption);
+        else
+            addButtonDisabled(3, "???", "You need to know her better.");
+    }
+    else if (flags[kFLAGS.MINERVA_TOWER_TREE])
+        addButton(3, "Tree", minervaPurification.talkToMinervaAboutTree);
 
 	//3-5 Motherhood
 	//-talks about how she wishes to be a real mother, have an actual loving family and not made from being raped- repeatable
-    addButton(1, "Motherhood", minervaMotherhood);
-	//3-6 Bath Time - romance only
-	//Needs an option to be disabled.
+    addButton(1, "Motherhood", minervaPurified ? minervaPurification.talkToMinervaAboutMotherhood : minervaMotherhood);
+    addButton(4, "Back", genericMenu);
 }
 
 //Talking scenes
@@ -553,7 +562,8 @@ private function talkingToMinervaAboutBackstory():void {
 		//Romance:
 		else outputText("  \"<i>You're a wonderful lover, you know.  I couldn't be happier that you found me.</i>\"");
 		// PC returns to camp.
-		flags[kFLAGS.MINERVA_BACKSTORY_LEARNED] = 1;
+        if (flags[kFLAGS.MINERVA_BACKSTORY_LEARNED] == 0)
+		    flags[kFLAGS.MINERVA_BACKSTORY_LEARNED] = 1;
 	}
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -598,7 +608,8 @@ private function talkWithMinervaAboutSharkGirlDaughter():void {
     outputText("\n\n\"<i>Once she seduced me, I couldn't hold back.  She sucked me off, rode me, I plowed her so hard in my lustful haze, and I had to have cum inside her at least half a dozen times that night.  With how needy and fertile those shark girls are, I know I got her pregnant.  How shameful is that?!  I knocked up my own daughter and probably have a granddaughter that I fathered!</i>\" the siren declares sorely, her voice lined with regret and shame for her actions.  \"<i>I'm sorry for yelling, love, I just miss her.  I wish we hadn't parted on those terms.  One day though, I'll see her again... maybe get another chance at being a proper mother,</i>\" she says with a final sigh before looking you in the eyes and hugging you.");
     outputText("\n\n\"<i>Thank you for listening to me, hun, I'm so happy to have someone like you in my life,</i>\" Minerva whispers to you with a genuine smile on her black lips.");
     outputText("\n\nThe two of you stay like this for a while, just spending a little time together before you decide you must return to camp and your quest.  Saying your goodbyes, you give Minerva a kiss before heading home.");
-    flags[kFLAGS.MINERVA_BACKSTORY_LEARNED] = 2;
+    if (flags[kFLAGS.MINERVA_BACKSTORY_LEARNED] == 1)
+        flags[kFLAGS.MINERVA_BACKSTORY_LEARNED] = 2;
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -702,7 +713,7 @@ private function bathTimeWithMinerva():void {
 	outputText("\n\nTurning around, you catch the peeping herm in her voyeuristic act, making her jump back and turn away from you.  \"<i>I... I'm sorry!  I couldn't help it... you just... you're... you look really good, is all...</i>\" she says with a stammer, you can't see it, but you're sure her face must be on fire by now.");
 	
 	outputText("\n\nStepping forward, you slide your arms around the tall, curvy herm and pull her against you, telling her not to worry about it, and to just enjoy the bath.  Your touch seems to work its usual magic, calming her nerves and making Minerva relax against you.  \"<i>Thanks, love... I just can't help myself when it's you...  You're rather sexy, if you didn't know,</i>\" she says playfully before turning around and pushing you back a little, giving you a sharky grin as she makes room for herself to strip.  Pulling her tight white tube top off, her short shorts come off right after, the skimpy clothes tossed to the shore and leaving her just as naked as you are.");
-	outputText("\n\nWith both of you ready, you take the siren's hand and sit in the water with her.  It's cool and refreshing, though you could do with a hot bath instead.  As if sensing your thoughts, Minerva moves close to you.  \"<i>Watch this, hun, the spring reacts funny when I cast a white fire spell on it.  Makes for a lovely hot bath,</i>\" she says before focusing, casting an incantation into the water.");
+	outputText("\n\nWith both of you ready, you take the siren's hand and sit in the water with her.  It's cool and refreshing, though you could do with a hot bath instead.  As if sensing your thoughts, Minerva moves close to you.  \"<i>Watch this, hun, the spring reacts funny when I cast a Whitefire spell on it.  Makes for a lovely hot bath,</i>\" she says before focusing, casting an incantation into the water.");
 	outputText("\n\nWhen no fire appears, you look at her and wonder if she made a mistake, however, your thoughts are interrupted when a deep warmth flows all around you.  The pure spring water grows lukewarm, then a gentle, pleasant warmth, before reaching the temperature of a hot, relaxing bath.");
 	outputText("\n\nGrinning at her work, Minerva cuddles up against you in the now steaming water, and you certainly can't say you're not impressed with that little trick of hers.  Letting out a small moan of approval, both of you lay back and rest in the temporarily hot spring, just relaxing peacefully together, a simple affectionate pastime shared between two lovers.  Minerva holds onto you gently, and her bare breasts presses against your arm as one of her hands tenderly stroke your form, drawing a relaxed sigh from you.");
 	outputText("\n\nEventually though, the heat fades and it's time for both of you to get out of the spring.  The affectionate siren helps you out of the warm water, even going to get you something to dry off with and helping dry you off.  As soon as you're dry, you find yourself wrapped up in a tight, squeezing hug, the blue and gray siren cuddling you tightly.  \"<i>That was nice, my love... really, it was wonderful,</i>\" she says as she looks at you, eyes locked on yours, clearly very happy to have shared that tender moment with you.");

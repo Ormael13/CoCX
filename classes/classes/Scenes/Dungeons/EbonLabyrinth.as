@@ -10,7 +10,7 @@ import classes.CockTypesEnum;
 import classes.EventParser;
 import classes.PerkLib;
 import classes.PerkLib;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 import classes.VaginaClass;
 import classes.GlobalFlags.kFLAGS;
 import classes.GlobalFlags.kACHIEVEMENTS;
@@ -42,8 +42,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 		
 		public var elDisplacerbeast:DisplacerBeastScene = new DisplacerBeastScene();
 		public var ancientTentacleBeast:TentacleBeastScene = new TentacleBeastScene();
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		
+				
 		public function EbonLabyrinth() {}
 		
 		public function ebonlabyrinthdiscovery():void {
@@ -115,7 +114,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 		public function defeatedByStrayDemon():void {
 			clearOutput();//succubus, incibus or omnibus
 			if (player.isAlraune()) {
-				uniquuuesexscene.AlrauneDungeonBadEnd();
+				SceneLib.uniqueSexScene.AlrauneDungeonBadEnd();
 			} else {
 				outputText("Defeated you fall to the ground and look up just in time to see a mace coming for your head. When you wake up you're standing on a podium somewhere else. There's demon everywhere around you screaming numbers. Those demons are brandishing gems around for some reasons.\n\n");
 				outputText("\"<i>One hundred did I hear one hundred for this ");
@@ -165,7 +164,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 		public function defeatedByMindBreaker():void {
 			clearOutput();
 			if (player.isAlraune()) {
-				uniquuuesexscene.AlrauneDungeonBadEnd();
+				SceneLib.uniqueSexScene.AlrauneDungeonBadEnd();
 			} else {
 				outputText("\n\n");
 				//[GAME OVER]

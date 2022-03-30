@@ -699,7 +699,7 @@ public class MarblePurification extends NPCAwareContent{
 		//Proceed to either the has fitted cock, no fitted cock, or has not cock variants.
 		menu();
 		if(!player.hasCock()) addButton(0,"Next",cocklessPCsGetAbusedByCowCunts);
-		else if(player.cockThatFits(20) < 0) addButton(0,"Next",cockTooBigForCowCuntageBadEndage);
+		else if(player.cockThatFits(56) < 0) addButton(0,"Next",cockTooBigForCowCuntageBadEndage);
 		else addButton(0,"Next",badEndDickThatFitsClara);
 	}
 
@@ -711,7 +711,7 @@ public class MarblePurification extends NPCAwareContent{
 	public function badEndDickThatFitsClara():void
 	{
 		clearOutput();
-		var x:int = player.cockThatFits(20);
+		var x:int = player.cockThatFits(56);
 		if(x < 0) x = player.smallestCockIndex();
 
 		//if (PC does not have: dick has more than 40 area, or breasts bigger then HHH cup, or centaur lower body, or naga lower body, or slime lower body, or drider lower body)
@@ -926,7 +926,7 @@ public class MarblePurification extends NPCAwareContent{
 	 	outputText("\n\nClara doesn't stand a chance.  In a matter of moments, she's brought to the ground once more, tightly bound up in a thick rope.  \"<i>Time to teach you a lesson!</i>\"  Marble yells with a look of rage in her eyes.");
 	 	outputText("\n\nHow should you punish Clara?  You could let Marble spank Clara, ");
 		//(if PC either has a cock with an area under 20 or a vagina)
-		if((player.hasCock() && player.cockThatFits(20) >= 0) || player.hasVagina()) outputText("use Marble's unstable state of mind to get her into a forceful threesome with Clara, ");
+		if((player.hasCock() && player.cockThatFits(56) >= 0) || player.hasVagina()) outputText("use Marble's unstable state of mind to get her into a forceful threesome with Clara, ");
 		//(if PC either has a cock that will fit Marble, or has a vagina)
 		if((player.hasCock() && player.cockThatFits(marbleScene.marbleCuntCapacity()) >= 0) || player.hasVagina()) outputText("have sex in front of Clara so she can see what your love really is, ");
 		//(if Marble is a futa)
@@ -938,9 +938,9 @@ public class MarblePurification extends NPCAwareContent{
 		var next:Function = recall ? camp.recallScenes : calmMurblesFatAssDown;
 		//options are: Spank (can always do), Threesome (if the PC has a cock that is under 20 area, or a vagina), "NTR" (if PC has a cock that will fit Marble, or a vagina), Marble cock (if Marble has a cock), and Calm down (always possible).
 		addButton(0,"Spank",murbleSpanksCowCunt, next);
-		if((player.hasCock() && player.cockThatFits(20) >= 0) || player.hasVagina()) addButton(1,"Threesome",pcAndMurbleDoubleTeamCowButt, next);
+		if((player.hasCock() && player.cockThatFits(56) >= 0) || player.hasVagina()) addButton(1,"Threesome",pcAndMurbleDoubleTeamCowButt, next);
 		if((player.hasCock() && player.cockThatFits(marbleScene.marbleCuntCapacity()) >= 0) || player.hasVagina()) addButton(2,"NTR",NTRIsClearlyTheWorstFetishWhyWouldYouWriteThisOMG, next);
-		if (flags[kFLAGS.MARBLE_DICK_TYPE] > 0) addButton(3, "Marble Cock", futaMarbleIsAHugeCowToCowCuntAndStuffsCowCuntsCuntFullOfCowCock);
+		if (flags[kFLAGS.MARBLE_DICK_TYPE] > 0) addButton(3, "Marble Cock", futaMarbleIsAHugeCowToCowCuntAndStuffsCowCuntsCuntFullOfCowCock, next);
 		if (!recall)
 			addButton(4,"Calm Down",calmMurblesFatAssDown);
 	}
@@ -967,32 +967,30 @@ public class MarblePurification extends NPCAwareContent{
 	}
 	//PC and Marble rape Clara
 	//Double team Clara, will be rough forceful sex.
-	public function pcAndMurbleDoubleTeamCowButt(next:Function):void
-	//does not work with centaur, naga, drider, or goo bodies.  However, I don't particularly want to just say you can't do this scene if you have them.
-	{
+	public function pcAndMurbleDoubleTeamCowButt(next:Function):void {
 		clearOutput();
-		var x:int = player.cockThatFits(20);
+		var x:int = player.cockThatFits(56);
 	 	outputText("You step forward and suggest to Marble that the two of you should work together to punish Clara.  She nods and asks what you have in mind.  Well, you were thinking that a sexual punishment from the two of you would be appropriate.");
 	 	outputText("\n\n\"<i>What?  I don't want to have a threesome with my sister!  Only [name] should be able to touch me!</i>\"");
 	 	outputText("\n\nThat outburst from the younger sibling seems to have been enough to convince your lover to go along with it.  If it wasn't for her current mood, you doubt that she'd ever have agreed.");
 	 	outputText("\n\nThe two of you strip yourselves and the bound malefactor down.  Then, you both consider the naked tied-up girl, deciding how to go about this...");
 		//menu
 		menu();
-		if (player.cockThatFits(20) >= 0 && flags[kFLAGS.MARBLE_DICK_TYPE] > 0)
+		if (player.cockThatFits(56) >= 0 && flags[kFLAGS.MARBLE_DICK_TYPE] > 0)
 			addButton(0, "DoubleTeam", threesomeDoubleTeam, next).hint("Use both your dicks to fuck Clara");
-		if(player.cockThatFits(20) >= 0)
+		if(player.cockThatFits(56) >= 0)
 			addButton(1, "FuckHer", threesomeFuckHer, next).hint("Use your cock, Marble uses vagina");
 		if(flags[kFLAGS.MARBLE_DICK_TYPE] > 0)
-			addButton(2, "LetHer", threesomeLetMarble, next).hint("Let Marble do everything herself");
+			addButton(2, "LetMarble", threesomeLetMarble, next).hint("Let Marble do everything herself");
 		addButton(3, "Lesbo", threesomeLesbo, next).hint("Engage in lesbo fun");
 	}
 	
 	public function threesomeDoubleTeam(next:Function):void {
-		var x:int = player.cockThatFits(20);
+		var x:int = player.cockThatFits(56);
 		clearOutput();
 		outputText("Eventually you pull her up and sandwich her between your bodies.  Marble expresses an aversion to anal, so you take the backside while she takes the front.  \"<i>Hey, you can't do this to me!  I don't want to lose my virginity to my sister!</i>\" Clara cries out indignantly.");
 		outputText("\n\n\"<i>Well, are you saying you've learned your lesson?  Are you going to apologize for trying to take my sweetie away from me?</i>\"");
-		outputText("\n\n\"<i>What?  Fuck noo, your </i>sweetie<i> should be mine.</i>\"");
+		outputText("\n\n\"<i>What?  Fuck noo, your 'sweetie' should be mine.</i>\"");
 		outputText("\n\nMarble looks to the side of her sister's head, and gives you a solemn nod.  You take that as an invitation to begin the violation and grab a good grip of Clara's expansive rear.  Then you prod your " + cockDescript(x) + " at the entrance to her anus, prompting a gasp and plea from the woman you're about to penetrate to stop.  Her sister doesn't heed her begging, and neither do you.");
 		outputText("\n\nThere is a sharp gasp from the girls in front of you as you push into Clara's ass while Marble takes her vagina.  \"<i>Nooo,</i>\" comes a cross between a whimper and a moan in front of you, \"<i>It wasn't suppose to be this way....</i>\"  You ignore that and instead start to push and pull inside the young cow-girl's back entrance, while enjoying the feeling of Marble's member moving in an out of the other opening against your own.  It isn't often you get to double team someone like this.");
 		outputText("\n\nYou wipe a trickle of sweat off of your face and continue to revel in the feeling of filling up a cow-girl's wide bum, with dual stimulation from both her contractions against your member and the other shaft so close you can feel it sliding against you through the cow-girl.  At the same time, you can hear loud moaning coming from the two girls.  The familiar earthy 'ahhs' and subdued moos from Marble, along with the sharp gasps, 'oohs', and long loud moos from her younger sister.  Clara hasn't actually protested the situation for some time now, the dual penetration clearly too much for her virgin mind to endure.");
@@ -1004,7 +1002,7 @@ public class MarblePurification extends NPCAwareContent{
 		doNext(next);
 	}
 	public function threesomeFuckHer(next:Function):void {
-		var x:int = player.cockThatFits(20);
+		var x:int = player.cockThatFits(56);
 		clearOutput();
 		outputText("Eventually you push her down on all fours.  You stand behind her, while Marble stands in front of her sister's face.  \"<i>Wait, do you actually think I'll service yoou?</i>\" Clara asks indignantly.");
 		outputText("\n\n\"<i>You will if you don't want me to twist your ears,</i>\" comes the response.  You prod your " + cockDescript(x) + " up against her tight asshole and suggest that you might be taking a different entrance if she doesn't cooperate for her punishment.  \"<i>Of course, if you're sorry for what you tried to do to [name]...</i>\" Marble suggests.");
@@ -1098,7 +1096,7 @@ public class MarblePurification extends NPCAwareContent{
 	
 	//Futa Marble rapes Clara
 	//Similar to the threesome, but Marble is the only participant.
-	public function futaMarbleIsAHugeCowToCowCuntAndStuffsCowCuntsCuntFullOfCowCock():void
+	public function futaMarbleIsAHugeCowToCowCuntAndStuffsCowCuntsCuntFullOfCowCock(next:Function):void
 	{
 		clearOutput();
 	 	outputText("You call out to Marble and suggest that she should use her new \"appendage\" to punish Clara.  She hesitates for a moment, then nods.  You doubt that you could have ever gotten her to do something like that if she wasn't as worked up as she is.");
@@ -1113,9 +1111,9 @@ public class MarblePurification extends NPCAwareContent{
 	 	outputText("\n\nA loud, \"<i>MOOOO!</i>\" abruptly rises in crescendo out of the random moans, gasps, and gibbering mess that use to be Clara.  However, her sister doesn't stop with that orgasm and continues to pound away, bringing back the babbling wreck for a few more moments.  Then, Marble's own orgasm rises out in her characteristic gasp and long low moan.  A much more subdued moo then the younger sister's.");
 	 	outputText("\n\nThe futa in this equation pants for a few moments, then asks, \"<i>Have... you, ha... learned your lesson now?</i>\"  When the answer comes in an incoherent moan, it looks like Marble might be about to start round two!");
 	 	dynStats("lus",20);
-		//proceed to Calm Marble down
+		//round two!
 		menu();
-		addButton(0,"Next",calmMurblesFatAssDown);
+		addButton(0, "Next", pcAndMurbleDoubleTeamCowButt, next);
 	}
 	//Calm Marble down
 	//The end to all other punishment scenes, or if the player doesn't want to punish Clara.

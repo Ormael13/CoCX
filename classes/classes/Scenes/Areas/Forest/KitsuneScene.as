@@ -12,14 +12,12 @@ import classes.Items.Armors.LustyMaidensArmor;
 import classes.Items.Armors.SuccubusArmor;
 import classes.Scenes.Monsters.Imp;
 import classes.Scenes.SceneLib;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 import classes.Stats.Buff;
 import classes.display.SpriteDb;
 
 public class KitsuneScene extends BaseContent
 	{
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-
 		public function KitsuneScene()
 		{
 		}
@@ -1255,8 +1253,7 @@ public class KitsuneScene extends BaseContent
 				removeButton(7);
 				removeButton(8);
 			}
-			uniquuuesexscene.pcUSSPreChecksV2(defeatTheKitsunes);
-			//if (player.pcCanUseUniqueSexScene() && flags[kFLAGS.SFW_MODE] <= 0) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 16).hint("Other non typical sex scenes.");
+			SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatTheKitsunes);
 			addButton(14, "Leave", leaveKitsune);
 		}
 

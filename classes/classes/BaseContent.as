@@ -235,28 +235,6 @@ import coc.xxc.StoryContext;
 			EngineCore.hideUpDown();
 		}
 
-		/* This class extends Utils, no need for a non-static version of this function
-		protected function curry(func:Function,...args):Function
-		{
-			return Utils.curry.apply(null,[func].concat(args));
-		}
-		*/
-
-		/* None of these functions are called anymore
-		protected function lazyIndex(obj:*,...args):Function
-		{
-			return Utils.lazyIndex.apply(null,[obj].concat(args));
-		}
-		protected function lazyCallIndex(func:Function,...args):Function
-		{
-			return Utils.lazyCallIndex.apply(null,[func].concat(args));
-		}
-		protected function lazyCallIndexCall(func:Function,...args):Function
-		{
-			return Utils.lazyCallIndexCall.apply(null,[func].concat(args));
-		}
-		*/
-
 		protected function createCallBackFunction(func:Function, arg:*):Function
 		{
 			return EngineCore.createCallBackFunction(func,arg);
@@ -953,6 +931,10 @@ import coc.xxc.StoryContext;
 			CoC.instance.achievements = val;
 		}
 
+        protected function get sceneHunter():SceneHunter {
+            return CoC.instance.gameSettings.sceneHunter_inst;
+        }
+
 		protected function showStatDown(arg:String):void
 		{
 			CoC.instance.mainView.statsView.showStatDown(arg);
@@ -1003,68 +985,63 @@ import coc.xxc.StoryContext;
 			}
 			if (back != null) button(14).show("Back",back);
 		}
+        
 		/**Returns an autocreated menu.
 		 * Structure for menuItems array is: ["Button name", function/false/"ignore", ["Available desc", "Not available desc"]/ ""].
 		 * function/false/"ignore" = addbtn, addbtndisabled, no button.
 		 * btnStat returns how many buttons are active.
+         * isChecking - only check if the menu is non-empty?
 		 */
-		protected function menuGen(menuItems:Array, page:int, back:Function=null, sort:Boolean=false, isChecking:Boolean=false):*{
+		protected function menuGen(menuItems:Array, page:int, back:Function=null, sort:Boolean=false):void {
 			var bList:Array = [];
 			var total:int = menuItems.length;
-			var next:Boolean = false;
-			if(sort){
+            var multipage:Boolean = menuItems.length > 14 * 3;
+			if(sort)
 				menuItems = menuItems.sort();
-			}
-			if(total/3 > 12){
-				for (var h:int = (page * 12) * 3, j:int = Math.min((h + 35), total - 1); h <= j; h++){ // Page 0 - array 0-36. Page 1 - array 37 -?
+			if(multipage)
+				for (var h:int = (page * 12) * 3; h <= Math.min((h + 35), menuItems.length - 1); h++) // Page 0 - array 0-36. Page 1 - array 37 -?
 					bList.push(menuItems[h]);
-					if(j != total - 1) next = true;
-				}
-			}
-			else{
+			else
 				bList = menuItems;
-			}
-			if (!isChecking){
-				menu();
-			}
-			var btnval:int = 0;
+            menu();
 			var btnsActive: int = 0;
-			for (var i:int = 0; i < bList.length; i++){
-				if (i % 3 == 0){
-					if (!bList[i + 1]){
-						if (!isChecking){
-							addButtonDisabled(btnval, bList[i],(bList[i + 2] is Array) ? bList[i+2][1]: bList[i+2]);
-						}else{
-							continue;
-						}
-					}
-					else if (bList[i + 1] == "ignore") { //Not sure when this would ever be used, but in case.
-						continue;
-					}
-					else{
-						if (!isChecking){
-							addButton(btnval,bList[i],bList[i + 1], null, null, null,(bList[i + 2] is Array) ? bList[i+2][0]: bList[i+2]);
-							btnsActive++;
-						}
-						else{
-							btnsActive++
-							continue;
-						}
-					}
-					btnval++;
-				}
+			for (var i:int = 0; i < bList.length; i += 3){
+                if (!bList[i + 1])
+                    addButtonDisabled(i/3, bList[i],(bList[i + 2] is Array) ? bList[i+2][1]: bList[i+2]);
+                else if (bList[i + 1] == "ignore") //Not sure when this would ever be used, but in case.
+                    continue;
+                else if (bList[i + 1] is Function) //hope it works
+                    addButton(i/3,bList[i],bList[i + 1]).hint(bList[i + 2] is Array ? bList[i+2][0]: bList[i+2]);
+                else
+                    CoC_Settings.error("Non-function in menuGen!")
 			}
-			if (!isChecking){
-				if (total/3 > 12) {
-					addButton(12,"Prev Page", curry(menuGen, menuItems,page - 1,  back, sort, isChecking));
-					if (page == 0) addButtonDisabled(12, "Prev Page","This is the first page.");
-					addButton(13, "Next Page", curry(menuGen, menuItems,page + 1,  back, sort, isChecking));
-					if (!next) addButtonDisabled(13, "Next Page", "This is the last page.");
-				}
-				if (back != null) button(14).show("Back",back);
-			}
-			if (isChecking) return btnsActive;
+            if (multipage) {
+                if (page > 0)
+                    addButton(12,"Prev Page", curry(menuGen, menuItems,page - 1, back, sort));
+                else
+                    addButtonDisabled(12, "Prev Page","This is the first page.");
+                if (menuItems.length > (page + 1) * 12 * 3)
+                    addButton(13, "Next Page", curry(menuGen, menuItems,page + 1, back, sort));
+                else
+                    addButtonDisabled(13, "Next Page", "This is the last page.");
+            }
+            if (back != null) addButton(14, "Back", back);
 		}
+
+		/**Counts active buttons inside of the menu.
+		 * Structure for menuItems array is: ["Button name", function/false/"ignore", ["Available desc", "Not available desc"]/ ""].
+		 * function/false/"ignore" = addbtn, addbtndisabled, no button.
+		 * btnStat returns how many buttons are active.
+         * isChecking - only check if the menu is non-empty?
+		 */
+        protected function menuActiveButtons(menuItems:Array):int {
+            //just check actives, that's all
+			var btnsActive: int = 0;
+            for (var i:int = 0; i < menuItems.length; i += 3)
+                if (menuItems[i + 1] && menuItems[i + 1] != "ignore") //count even non-functions, let's make it explode!
+                    ++btnsActive;
+            return btnsActive;
+        }
 	}
 
 }

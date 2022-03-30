@@ -4,12 +4,11 @@ package classes.Scenes.Areas.GlacialRift
 	import classes.GlobalFlags.kFLAGS;
 	import classes.CoC;
 	import classes.GlobalFlags.kACHIEVEMENTS;
-	import classes.Scenes.UniqueSexScenes;
+	import classes.Scenes.SceneLib;
 	
 	public class FrostGiantScene extends BaseContent
 	{
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		
+				
 		public function FrostGiantScene() 
 		{
 		}
@@ -28,9 +27,8 @@ package classes.Scenes.Areas.GlacialRift
 				if (player.hasVagina()) addButton(1, "RideVaginally", rideVaginally);
 				addButton(2, "Ride Anally", rideAnally);
 				addButton(14, "Leave", cleanupAfterCombat);
-				uniquuuesexscene.pcUSSPreChecksV2(winAgainstGiant);
-				//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(18);
-			}
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(winAgainstGiant);
+							}
 			else {
 				cleanupAfterCombat();
 			}
@@ -46,9 +44,8 @@ package classes.Scenes.Areas.GlacialRift
 				if (player.hasVagina()) addButton(1, "RideVaginally", rideVaginally);
 				addButton(2, "Ride Anally", rideAnally);
 				addButton(14, "Leave", cleanupAfterCombat);
-				uniquuuesexscene.pcUSSPreChecksV2(winAgainstYoungGiant);
-				//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(19);
-			}
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(winAgainstYoungGiant);
+							}
 			else {
 				cleanupAfterCombat();
 			}

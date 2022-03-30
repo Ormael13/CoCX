@@ -104,10 +104,6 @@ import coc.view.MainView;
 			mainView.hideMenuButton( MainView.MENU_PERKS );
 			//Hide perk boxes
 			mainView.hideComboBox();
-			//If first PC, track status of EZ mode and other such nonsense.
-			var silly:Boolean = flags[kFLAGS.SILLY_MODE_ENABLE_FLAG];
-			var easy:Boolean = flags[kFLAGS.EASY_MODE_ENABLE_FLAG];
-			var sprite:Boolean = flags[kFLAGS.SHOW_SPRITES_FLAG];
 			mainView.setButtonText(0, "Newgame"); // b1Text.text = "Newgame";
 			//flags[kFLAGS.CUSTOM_PC_ENABLED] = 0;
 
@@ -411,10 +407,40 @@ import coc.view.MainView;
 			}
 			//player.perkPoints = player.level - 1;
 			var newFlags:DefaultDict = new DefaultDict();
+            //keep settings flags
 			if (player.hasKeyItem("Ascension") >= 0) {
-				for each(var flag:int in [kFLAGS.NEW_GAME_PLUS_LEVEL, kFLAGS.HUNGER_ENABLED, kFLAGS.HARDCORE_MODE, kFLAGS.HARDCORE_SLOT, kFLAGS.GAME_DIFFICULTY, kFLAGS.EASY_MODE_ENABLE_FLAG, kFLAGS.NO_GORE_MODE, kFLAGS.WISDOM_SCALING, kFLAGS.INTELLIGENCE_SCALING, kFLAGS.STRENGTH_SCALING, kFLAGS.SPEED_SCALING, kFLAGS.SECONDARY_STATS_SCALING, kFLAGS.WATERSPORTS_ENABLED, 
-				kFLAGS.SILLY_MODE_ENABLE_FLAG, kFLAGS.LOW_STANDARDS_FOR_ALL, kFLAGS.HYPER_HAPPY, kFLAGS.SFW_MODE, kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM, kFLAGS.MELEE_DAMAGE_OVERHAUL, kFLAGS.LVL_UP_FAST, kFLAGS.MUTATIONS_SPOILERS, kFLAGS.INVT_MGMT_TYPE, kFLAGS.NEWPERKSDISPLAY, kFLAGS.CHARVIEW_STYLE, kFLAGS.CHARVIEW_ARMOR_HIDDEN, kFLAGS.SPIRIT_STONES]) {
-					newFlags[flag] = flags[flag];
+				for each(var flag:int in [
+                    kFLAGS.NEW_GAME_PLUS_LEVEL,
+                    kFLAGS.HUNGER_ENABLED,
+                    kFLAGS.HARDCORE_MODE,
+                    kFLAGS.HARDCORE_SLOT,
+                    kFLAGS.GAME_DIFFICULTY,
+                    kFLAGS.EASY_MODE_ENABLE_FLAG,
+                    kFLAGS.NO_GORE_MODE,
+                    kFLAGS.WISDOM_SCALING,
+                    kFLAGS.INTELLIGENCE_SCALING,
+                    kFLAGS.STRENGTH_SCALING,
+                    kFLAGS.SPEED_SCALING,
+                    kFLAGS.SECONDARY_STATS_SCALING,
+                    kFLAGS.WATERSPORTS_ENABLED, 
+				    kFLAGS.SILLY_MODE_ENABLE_FLAG,
+                    kFLAGS.SCENEHUNTER_PRINT_CHECKS,
+                    kFLAGS.SCENEHUNTER_MUTEX_SCENES,
+                    kFLAGS.SCENEHUNTER_DICK_SELECT,
+                    kFLAGS.SCENEHUNTER_UNI_HERMS,
+                    kFLAGS.LOW_STANDARDS_FOR_ALL,
+                    kFLAGS.HYPER_HAPPY,
+                    kFLAGS.SFW_MODE,
+                    kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM,
+                    kFLAGS.MELEE_DAMAGE_OVERHAUL,
+                    kFLAGS.LVL_UP_FAST,
+                    kFLAGS.MUTATIONS_SPOILERS,
+                    kFLAGS.INVT_MGMT_TYPE,
+                    kFLAGS.NEWPERKSDISPLAY,
+                    kFLAGS.CHARVIEW_STYLE,
+                    kFLAGS.CHARVIEW_ARMOR_HIDDEN,
+                    kFLAGS.SPIRIT_STONES]) {
+					    newFlags[flag] = flags[flag];
 				}
 			}
 			//Clear plot storage array!
@@ -3144,4 +3170,4 @@ import coc.view.MainView;
 			return (statusEffect == StatusEffects.KnowsWereBeast || statusEffects.value4 == 9000);	//na razie jest tu tylko werebeast
 		}	//ale potem zamienić to na specialne soulskills z każdego z klanów
 	} // what the fuck are those weird comments here? ^
-}
+}

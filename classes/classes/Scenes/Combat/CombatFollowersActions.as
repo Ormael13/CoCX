@@ -624,7 +624,7 @@ import classes.StatusEffects;
 			outputText("\n\n");
 		}
 		public function amilyCombatActions2():void {
-			outputText("Amily peeks out from her cover, taking careful aim as she shoots a blow dart at [opponent]’s eyes. ");
+			outputText("Amily peeks out from her cover, taking careful aim as she shoots a blow dart at [themonster]’s eyes. ");
 			monster.createStatusEffect(StatusEffects.Blind, 2, 0, 0, 0);
 			if (rand(3) == 0 || monster.hasPerk(PerkLib.Resolute)) outputText("[Themonster] shakes off the blow, but they’re still blinded from the impact.\n\n");
 			else {

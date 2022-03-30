@@ -202,7 +202,7 @@ private function frostyPoints(arg:int = 0):int {
 	return flags[kFLAGS.FROSTY_POINTS];
 }
 
-//[Hands]
+//hands
 public function frostysHandsAreColdHolyShitWhyDontYouWarmTHoseMitsUp():void
 {
 	clearOutput();

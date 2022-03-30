@@ -457,7 +457,7 @@ public class MinervaPurification extends BaseContent
 			if (chooser == 0) outputText("\n\nAs you walk along the trail you start to hear something. At first it's quiet, like a whisper on the wind, but as you draw closer to Minerva's tower it becomes clear that the sound is singing, a voice like an angelic hymn being sung by a pure and gentle being.");
 			if (flags[kFLAGS.MINERVA_TOWER_REPAIRED] <= 0) {
 				outputText("\n\nThe very familiar route hasn't changed since Minerva's purification but you could swear that the area has brightened a little, the slightly foreboding air that used to hang around the tower seeming to have dissipated with a parasite infesting her soul. As you reach the large door to the tower, you notice that what was once a crumbling archway now has a door and looks to be in a much-improved state of repair. It seems Minerva has been busy in her tower.");
-				outputText("\n\nPushing open the door you look around the interior. It's not just the outside, but the inside as well has changed. The broken bits of stone that once littered the floor are now gone, some of it even looks to have been painstakingly pieced back together, though what now holds it together, who knows? Your siren lover has been very busy; by the way she acts now it's likely she wants her home looking respectable for when she has all the babies she has always hinted at wanting. Grinning and shaking your head you enter the tower, your eyes beholding the sight of the pure oasis and your siren lover.");
+				outputText("\n\nPushing open the door you look around the interior. It's not just the outside, but the inside as well has changed. The broken bits of stone that once littered the floor are now gone, some of it even looks to have been painstakingly pieced back together, though what now holds it together, who knows? Grinning and shaking your head you enter the tower, your eyes beholding the sight of the pure oasis and your siren lover.");
 				flags[kFLAGS.MINERVA_TOWER_REPAIRED] = 1;
 			}
 			else outputText("Once again, you arrive at the tower and push open the door and enter the interior.");
@@ -528,7 +528,7 @@ public class MinervaPurification extends BaseContent
 				outputText(" and have her bear your offspring.");
 			}
 			if (player.hasCock() && player.hasVagina()) outputText(" Also, ");
-			if (player.hasVagina()) outputText("what a virile and pleasurable breeder this gorgeous herm is and that she would bring you other worldly pleasures as she impregnates you so thoroughly.");
+			if (player.hasVagina()) outputText("what a virile and pleasurable breeder this gorgeous herm is and that she would bring you otherworldly pleasures as she impregnates you so thoroughly.");
 
 			outputText("\n\nA golden eye catches yours and an amorous smile spreads across Minerva's face, a sharky grin soon forming as she turns to face you, not even bothering to cover her full bare breasts to you. \"<i>Like what you see? You've been staring at me for a while. Do you think I am so enticing?</i>\" She teases before wading through the water to you. \"<i>I was just cleaning up; perhaps you want to join me for a bath? Maybe take a closer look at this new body of mine you so enjoy?</i>\" She croons with a teasing grin.");
 		}
@@ -658,7 +658,7 @@ public class MinervaPurification extends BaseContent
 			menu();
 			SceneLib.highMountains.minervaScene.minervaSprite();
 			addButton(0, "Appearance", pureMinervaAppearance);
-			addButton(1, "Talk", minervaTalkSelect);
+			addButton(1, "Talk", SceneLib.highMountains.minervaScene.minervaTalkSelect);
 			if (player.lust >= 33) addButton(2, "Sex", pureMinervaSexMenu);
 			addButton(3, "Eat", SceneLib.highMountains.minervaScene.eatSomethingYouCunt);
 			addButton(4, "Drink", SceneLib.highMountains.minervaScene.getADrinkYouBitch);
@@ -689,38 +689,6 @@ public class MinervaPurification extends BaseContent
 				else if (SceneLib.highMountains.minervaScene.pregnancy.incubation < 72) outputText("<b>It's impossible to not notice her pregnancy. She is about to give birth soon.</b>");
 			}
 			doNext(pureMinervaMenu);
-		}
-		
-		//------------------
-		//  TALKIE TALKIE
-		//------------------
-		private function minervaTalkSelect():void {
-			var talkChooser:int = rand(5);
-			if (flags[kFLAGS.MINERVA_TOWER_TREE] > 0) talkChooser = rand(6);
-			if (talkChooser == 0) {
-				talkingToMinervaAboutBackstory();
-				return;
-			}
-			else if (talkChooser == 1) {
-				talkToMinervaAboutSpring();
-				return;
-			}
-			else if (talkChooser == 2) {
-				talkToMinervaAboutSharkgirl();
-				return;
-			}
-			else if (talkChooser == 3) {
-				talkToMinervaAboutMotherhood();
-				return;
-			}
-			else if (talkChooser == 4) {
-				SceneLib.highMountains.minervaScene.bathTimeTalkWithMinerva();
-				return;
-			}
-			else if (talkChooser == 5) {
-				talkToMinervaAboutTree();
-				return;
-			}
 		}
 		
 		//Some placeholder
@@ -781,7 +749,8 @@ public class MinervaPurification extends BaseContent
 
 				outputText("\n\nWith the peach in hand you blow a kiss to Minerva before heading back home to your camp.");
 				// PC returns to camp.
-				flags[kFLAGS.MINERVA_BACKSTORY_LEARNED] = 1;
+                if (flags[kFLAGS.MINERVA_BACKSTORY_LEARNED] == 0)
+                    flags[kFLAGS.MINERVA_BACKSTORY_LEARNED] = 1;
 				dynStats("cor", -1);
 				inventory.takeItem(consumables.PURPEAC, camp.returnToCampUseOneHour);
 				return;
@@ -790,7 +759,7 @@ public class MinervaPurification extends BaseContent
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
-		private function talkToMinervaAboutSpring():void {
+		public function talkToMinervaAboutSpring():void {
 			clearOutput();
 			outputText(images.showImage("minerva-talk-spring-pure"));
 			outputText("Informing Minerva that you want to sit down and talk with her seems to surprise her but a gentle smile quickly dawns on her face and she leads you over to a soft patch of moss. \"<i>Really, you want to talk to me? I thought we knew each other pretty well but if you wanted to talk I'd be happy to talk to you. What would you like to know, my love?</i>\" Looking over at the spring, you wonder about it, Minerva has been here for a while so perhaps she knows something about it.");
@@ -814,7 +783,7 @@ public class MinervaPurification extends BaseContent
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
-		private function talkToMinervaAboutSharkgirl():void {
+		public function talkToMinervaAboutSharkgirl():void {
 			clearOutput();
 			outputText(images.showImage("minerva-talk-sharkgirl-pure"));
 			outputText("Informing Minerva that you want to sit down and talk with her seems to surprise her but a gentle smile quickly dawns on her face and she leads you over to a soft patch of moss. \"<i>Really, you want to talk to me? I thought we knew each other pretty well but if you wanted to talk I'd be happy to talk to you. What would you like to know, my love?</i>\" remembering your past conversations with Minerva you remember her mentioning her mentioning that she had birthed a shark girl daughter at one point in her life, it seemed like a sensitive topic with her though. Really wanting to know more you ask to know more about this daughter of Minerva's");
@@ -829,11 +798,13 @@ public class MinervaPurification extends BaseContent
 			outputText("\n\n\"<i>It's my own fault for not doing enough, for not being strong enough to resist her and teach her properly at the least I should have been more gentle with her. We had sex... a lot of sweaty, passionate sex. Once she seduced me I just couldn't hold back, she sucked me off, rode me, I plowed her so hard in my lustful haze, I came inside her half a dozen times that night, she made me feel so good for the first time in ages, I couldn't help myself.</i>\" shaking her head Minerva runs a hand through her hair.</i>\"With how needy and fertile those shark-girls are, I know I had to have gotten her pregnant. How crazy is that? That I knocked up my own daughter and have a grandchild that I personally fathered...</i>\" The siren says with some regret in her voice, but it seems like she has made peace with what she did in the past. \"<i>I miss her, I really do. I wish we hadn't parted like that, I wish I could have taken her with me. One day though, I'll see her again, maybe get another chance at being a proper mother for my daughter and granddaughter.</i>\"");
 			outputText("\n\nShe says with a final sigh before looking to you and hugging you. \"<i>Thank you listening to me darling; I'm so happy to have someone like you in my life.</i>\" Minerva whispers to you with a genuine smile on her luscious black lips.");
 			outputText("\n\nThe two of you stay like this for a while, just spending a little time together before you decide you must return to camp and your quest. Saying your goodbyes you give Minerva a kiss before heading home.");
+            if (flags[kFLAGS.MINERVA_BACKSTORY_LEARNED] == 1)
+                flags[kFLAGS.MINERVA_BACKSTORY_LEARNED] = 2;
 			dynStats("cor", -1);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
-		private function talkToMinervaAboutMotherhood():void {
+		public function talkToMinervaAboutMotherhood():void {
 			clearOutput();
 			outputText(images.showImage("minerva-talk-motherhood-pure"));
 			outputText("Telling Minerva that you want to sit down and talk with her seems to surprise her; she certainly didn't expect you to want to just talk with her. After her surprise, she smiled pleasantly. \"<i>Really, you want to talk to me? Alright, well what do you want to know?</i>\" She asks as she sits down cross-legged on the soft pillowy moss across from you. You rack your brain trying to think of what to talk about. Unable to really think about anything important to talk about you lean back and relax, Deciding to that you could talk for once instead of just listen about random things you have seen, creatures you have encountered, things that tried to sexually assault you, knock you up and try and force you to impregnate them.");
@@ -855,10 +826,10 @@ public class MinervaPurification extends BaseContent
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
-		private function talkToMinervaAboutTree():void {
+		public function talkToMinervaAboutTree():void {
 			clearOutput();
 			outputText(images.showImage("minerva-talk-tree-pure"));
-			outputText("Telling Minerva that you want to talk with her brings a bright smile onto her face, Her eyes seem to sparkle as she grabs your hand and starts pulling you over to Marae's oak tree that stands at the center of the spring \"<i>Love! Come here! I have something to show you!</i>\" The redhead says with a grin");
+			outputText("Telling Minerva that you want to talk with her brings a bright smile onto her face, Her eyes seem to sparkle as she grabs your hand and starts pulling you over to Marae's oak tree that stands at the center of the spring \"<i>Love! Come here! I have something to show you!</i>\" - the redhead says with a grin.");
 			outputText("\n\nCurious as to her current excitement you step into the pool and wade over to Marae's oak tree and take your place next to Minerva's white and gold form. Looking around the tree curiously before looking at Minerva, inquiring as to why she is so excited. \"<i>Well after the purification I got a tiny bit lonely at one point and started talking to the tree, I wasn't sure if Marae would come out of the tree again so I just started talking. She may not have come out of the tree but Marae did respond to me.</i>\" She said happily even as you look at her skeptically, it could be possible, after all Marae did herself did come out from the tree when she purified Minerva, so it couldn't be too farfetched.");
 			outputText("\n\n\"<i>She and I have been chatting a lot, I think she likes having some form of company since she is by herself on that island. Isn't that right Marae?</i>\" Minerva asked as she strokes the side of the tree. You don't have to wait long for an answer as the tree's surface warps and shifts. a face seeming to stretch out from the bark and become the face of Marae.");
 			outputText("\n\n\"<i>Indeed we have Minerva. You ");

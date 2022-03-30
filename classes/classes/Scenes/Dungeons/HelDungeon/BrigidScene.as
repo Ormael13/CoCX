@@ -6,15 +6,13 @@ package classes.Scenes.Dungeons.HelDungeon
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 
 public class BrigidScene extends BaseContent
 	{
 		public function BrigidScene()
 		{
 		}
-
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
 
 		//Brigid the Jailer -- PC Victorious
 		public function pcDefeatsBrigid():void {
@@ -56,7 +54,7 @@ public class BrigidScene extends BaseContent
 		private function brigitPostQueenDeathBadEndII():void {
 			clearOutput();
 			if (player.isAlraune()) {
-				uniquuuesexscene.AlrauneDungeonBadEnd();
+				SceneLib.uniqueSexScene.AlrauneDungeonBadEnd();
 			} else {
 				//[(if M, U, or visibly pregnant F/H)
 				if (player.gender <= 1 || player.pregnancyIncubation > 0) {

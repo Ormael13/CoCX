@@ -6,13 +6,11 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
 import classes.Items.Armors.SuccubusArmor;
 import classes.Scenes.SceneLib;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.display.SpriteDb;
 
 public class MinotaurScene extends BaseContent {
-
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
 
 		public function MinotaurScene()
 		{
@@ -131,9 +129,8 @@ private function postfightoptions():void {
 	addButton(14, "Leave", cleanupAfterCombat);
 	if(x < 0 && player.hasCock()) outputText("\nSadly, you're too well endowed to penetrate the minotaur.");
 	if(player.gender == 3 && player.isTaur()) outputText("\nIf you had a different body type you might be able to penetrate him while taking him, but as a centaur that's not an option.");
-	uniquuuesexscene.pcUSSPreChecksV2(minoVictoryRapeChoices);
-	//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(33);
-}
+	SceneLib.uniqueSexScene.pcUSSPreChecksV2(minoVictoryRapeChoices);
+	}
 
 private function killMinotaur():void {
 	clearOutput();

@@ -14,15 +14,13 @@ import classes.Items.Armors.LustyMaidensArmor;
 import classes.Items.Armors.SuccubusArmor;
 import classes.Items.MutationsHelper;
 import classes.Scenes.Areas.Ashlands.HellCat;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 import classes.CoC;
 
 public class HellCatScene extends BaseContent
 	{
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-
-		public var mutations:MutationsHelper = new MutationsHelper();
+				public var mutations:MutationsHelper = new MutationsHelper();
 
 		public function HellCatScene()
 		{
@@ -53,9 +51,8 @@ public function DefeatedHellCat():void {
 		if (player.armor == armors.S_ARMOR) addButton(3, "B.Titfuck", (player.armor as SuccubusArmor).succubusPaizuri);
 		else addButton(3, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
 	}
-	uniquuuesexscene.pcUSSPreChecksV2(DefeatedHellCat);
-	//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(1);
-}
+	SceneLib.uniqueSexScene.pcUSSPreChecksV2(DefeatedHellCat);
+	}
 
 public function DefeatedHellCatPussycat():void {
 	if (player.gender == 3) outputText("You ain’t gonna get any close to that feline penis of hers. " + (flags[kFLAGS.CODEX_ENTRY_HELLHOUNDS] > 0 ? "If your hunch is good it’s likely even worse than that of the hellhounds. " : "") + "");

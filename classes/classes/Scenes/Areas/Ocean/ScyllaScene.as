@@ -7,13 +7,12 @@ package classes.Scenes.Areas.Ocean
 	import classes.*;
 	import classes.internals.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.UniqueSexScenes;
+	import classes.Scenes.SceneLib;
     import classes.display.SpriteDb;
 
 	public class ScyllaScene extends BaseContent
 	{
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		
+				
 		public function ScyllaScene() 
 		{
 		}
@@ -42,9 +41,8 @@ public function oceanScyllaWin():void {
 		addButton(0, "No", oceanScyllaWin2);
 		if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 			addButton(1, "Fuck Her", oceanScyllaWin3);
-			uniquuuesexscene.pcUSSPreChecksV2(oceanScyllaWin);
-			//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(34);
-		}
+			SceneLib.uniqueSexScene.pcUSSPreChecksV2(oceanScyllaWin);
+					}
 	}
 	else {
 		outputText("You could rape her but, sadly, you would have trouble fucking anything underwater without drowning in the first place. Therefore, you head back to your boat and row back to the beach.");
