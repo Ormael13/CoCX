@@ -232,7 +232,7 @@ public function postFightOptionsKissStop():void {
 public function postFightOptionsKissKeepGoing():void {
 	outputText("You tell her that whatever’s wrong, she can tell you. You kiss her again, and she pushes you away, this time strong enough to dislodge you. She tries to stand, to stagger away, roaring in anger. \"<i>Weak! Stupid!</i>\" She falls again, staying down. ");
 	outputText("\"<i>Just LEAVE ME BE!</i>\" She blindly fires a black web at you, missing by a mile. You decide it’s time to leave, and the sobbing giant’s tears fade away behind you as you walk back towards camp.\n\n");
-	tyraniaAffection(-2);
+	tyraniaAffection(-5);
 	if (combat.inCombat) cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
@@ -407,7 +407,7 @@ public function repeatEncounterBattlefieldTalkHerNoHerm():void {
 	outputText("\"<i>...Herms were almost unheard of before the Demons came.</i>\" She looks down at herself. \"<i>I...of all the insane shit I’ve had to deal with...At least I didn’t become one of them.</i>\" \"<i>Not that there’s anything wrong with that, but...I like not having a second head, y’know?</i>\" She looks at her spear, rolling her eyes. \"<i>Well...A third head.</i>\"\n\n");
 	outputText("You grin, cracking a joke about how she still waves her Dick around, and she gives you a laugh, her eyes glistening. \"<i>Okay, ya got me there.</i>\" She rubs the shaft with one finger, the hair on her arms standing up. \"<i>Demons and imps run more often if you run at them screaming ‘I’m gonna shove m’dick down your throat!’, then if you threaten to kill them. Fucking Crazy, the lot of them!</i>\"\n\n");
 	outputText("She laughs, but you notice that the laughter doesn’t quite reach her eyes. You idly chat with your Drider comrade for a while, and when you leave, she seems a bit happier than before.\n\n");
-	tyraniaAffection(2);
+	tyraniaAffection(5);
 	doNext(camp.returnToCampUseOneHour);
 }
 public function repeatEncounterBattlefieldTalkHerLifeOnTheBattlefield():void {
@@ -433,14 +433,25 @@ public function repeatEncounterBattlefieldTalkHerGoblin():void {
 }
 public function repeatEncounterBattlefieldTalkHerIzumi():void {
 	clearOutput();
-	outputText("<i>“Oh, Flitzy? She’s one of the Salon Bitch’s many daughters. Found her wandering around the mountains. ‘Taur tried to rape her, she didn’t want it, and I...Well, you know what I do.”</i> Tyrantia looks mildly embarrassed. <i>“Saved her ass, and we’ve kinda become friends. Gobbos don’t usually care about...Anything besides getting knocked up, but whatever, y’know?”</i> You get the feeling she was going to say something else, but you decide to leave it alone. You thank her for the time, and head back to camp.\n\n");
+	outputText("<i> “Oh, her? Yeah, she’s a blast! Go up to the mountains sometimes to get eggs if I feel in the mood, and ran into her beating the shit out of a Taur. We hit it off, and she’s the best kind of mate to party with.”</i> She shrugs her massive shoulders. <i>“Sometimes you need a friend to beat the crap out of you, or to lean on, y’know? And there aren’t many people I can lean on.”</i> She smiles. <i>“Some more than others.”</i> She brings a single finger down, touching the tip of your nose. <i>“Boop.”</i>\n\n");
 	tyraniaAffection(5);
 	doNext(camp.returnToCampUseOneHour);
 }
 public function repeatEncounterBattlefieldTalkHerKids():void {
 	clearOutput();
-	outputText("\"<i></i>\"\n\n");
-	//affection gains
+	outputText("\"You ask your giantess if she’d ever thought about having a family. She looks down at you, her expression a mix between sadness, amusement, and annoyance. Tyrantia tilts her head, bringing one hand to her chin. You wait patiently for her answer, but you don’t have to wait long. </i>\"\n\n");
+	outputText("“...Yeah, I have.” She admits. “Honestly, I’ve thought about it a lot, the last little while.” She smiles sadly down at you. “It’s all your fault, really.” The giantess sits down on the ground, folding her spider-legs underneath her massive frame. You instinctively hug the giant Drider-girl, and she lets out her little “Tk-tk-tk” laugh that she shares with her sisters. \n\n");
+	outputText("“...Look, [name]. I love you...I’d love nothing more than to lay your eggs, watch over them till they hatch, and bring up a new generation of Driders with you”. Evidently she’s thought about this a lot. “...I’d really like that”. Her voice is a bare whisper, and bitter tears begin to fall from her eyes. “...But I can’t allow it”.  \n\n");
+	outputText("Surprised, you ask her why not, and she shakes her head, pointing at her horns. “Look at these, look at me, and then ask yourself why I wouldn’t be willing to have kids”. You blink, sighing as it clicks.  \n\n");
+	outputText("“Yeah. I have a hard enough time dealing with my own shit, [name]. I’m not gonna force that situation on a kid. They…don’t deserve that.” You reluctantly agree, then a thought occurs to you. You ask Tyrantia about her eggs, how they are specifically. The giantess blushes. “Well...They’re squishy and soft, not like the Lizans or Harpies. Our people’s eggs were way more susceptible to corruption. That’s why we ended up corrupt in the first place.” She closes her eyes. “[name], when I told you I couldn’t be what you wanted me to be, what did you think I meant?” You hold her close, and you promise Tyrantia that you’ll try to make this work. You tell her that even if you can’t have a family, that you’ll stay with her.  \n\n");
+	outputText("She sniffles, wrapping her furry arms around you. “Thank you”. She gives you a brave smile. “Hey, if anyone can make this work, it’ll be you, ‘champ’”. You mock protest at the jab, but you know she’s just kidding. Walking away from your Drider lover, you think of a few people you could see.  \n\n");
+	//if you have Ralthazul
+	outputText("Ralthazul, the mousey alchemist, is one. \n\n");
+	//If you have Jojo
+	outputText("Jojo could be of some assistance, perhaps. \n\n");
+	//If you have Arian
+	outputText("Arian has purification powers. \n\n");
+	tyraniaAffection(5);
 	doNext(camp.returnToCampUseOneHour);
 }
 public function TyrantiaLiveWithMe():void {
@@ -694,6 +705,7 @@ public function TyrantiaFuck():void {
 	outputText("You buck your hips, and as your Drider lover arches her back, she lets out a much higher moan. Her walls wriggle, massaging your [cock] inside her. Finally, truly lost in the moment, Tyrantia slams herself down onto you, gasping for air like a drowning woman. Her walls clamp down, and you feel a gush of warmth hit your legs as she cums hard, her weight almost painful on your pelvis.\n\n");
 	outputText("<i>“Cmon, [name], I can’t just feel good myself.”</i> The giantess comes down from her high quickly, but her walls are just as tight as before. You can feel your [cock] twitch inside her, but you hold on, slamming yourself as deep into the Drider as you can.\n\n");
 	outputText("<i>“Come for me.”</i> Her low, smoky voice, followed by her tightening her furry grip on you, brings your face to one of her jugs. <i>“[name], do it. Fuck me. Cum for me.”</i> Her gentle urging finally pushes you over the edge. You roar, slamming yourself in as you cum, almost violently. She slams down onto you, pinning you to the floor as you buck, spurting your seed into her thirsty cunt.\n\n");
+	//output below needs a player.hasVagina check
 	outputText("You come down from your orgasmic high, only to see the giantess still leaning on you, grinding her hips as your [cock] deflates inside her. <i>“Not a bad first round, lover.”</i> She whispers seductively, running a finger down your chest. <i>“But...After all that...I’m not quite satisfied.”</i> She leans in, kissing your shoulder, then running a trail of them up to your neck. There, she stops, pulling her mouth back. <i>“You trust me, right?”</i> You tell her that you do, and she chuckles. You feel twin pricks on your neck, and you know that she’s bitten you. It isn’t painful, she hasn’t sunken her fangs in far at all...Blood rushes to your [cock], (if vagina) and your cooter begins to drool once more. Lurid pink thoughts fill your mind, and you eye her cunt greedily, taking in the lubricants covering your lower body.\n\n");
 	outputText("You get your [legs] underneath you, and you slide out from underneath your Drider lover. Your [cock] slides most of the way out, and she gasps, but you stand, bringing your meaty shaft back in with a loud slap. The giantess, her front legs bent, gives you a gasp and a moan as you wrap your arms as far around her as they’ll go, using them as leverage as you fuck her standing up.\n\n");
 	outputText("You lose track of how many times you and Tyrantia change positions and bring each other to orgasm, but even with the venom keeping you aroused, the Drider woman is insatiable. Eventually, you fall to the cave floor with a wet splat, your Drider lover staying with you as you fall. Your eyes begin to close, your [cock] still erect as she pumps herself on it. Your back is soaked with your mixed love juices, but you’re too tired to care, passing out.\n\n");
@@ -715,7 +727,14 @@ public function TyrantiaTitJob():void {
 	outputText("You look at your Drider lover’s chest, and she gives a smirk, crossing an arm over each pair of her gargantuan breasts. You smile up at her as she flicks her bras, her massive, G-cups popping free. You feel yourself stiffen, blood rushing to your oversized [cock]. This doesn’t escape Tyrantia’s notice, and she saunters over. She reaches down, between your legs, and she smiles.\n\n");
 	outputText("\"<i>Did I do that?</i>\" She asks, low and smoldering. She knows full well what you want, however, and she wastes no more time, quickly freeing your [cock] from your gear. Your glorious rod springs free, and she blinks twice.\n\n");
 	outputText("\"<i>Nice.</i>\" She says, a giant hand wrapping around your glans. Her fingers are warm, but dry, and she slowly moves the hand down your shaft, tickling the sensitive skin.\n\n");
-	//outputText("\"<i></i>\"\n\n");
+	outputText("\"She leans in, planting her front two legs on either side of you, and as she brings her fingers back up your shaft, she pushes herself forward, one leg against the back of your [legs]. She gently bends you backwards, and you let her guide you to the ground. Your drider lover licks her lips, fangs and eyes shining, as she wraps your shaft in both sets of soft, G-cup titflesh. \"\n\n");
+	outputText("\"<i>“Not many are big enough for this.” </i>She comments, smiling as she uses both arms to squeeze her massive mammaries. She begins moving, and you shudder, letting your muscles relax. Her breasts are sublime, warm and soft, and the slow pace is relaxing. You close your eyes, letting your [cock] twitch in Tyrantia’s warm embrace. \"\n\n");
+	outputText("\"She begins to pick up the pace, and you let a soft groan escape your mouth as the tip of your rod enters something warm and wet. You open one eye, to see your [cockhead] poking out from the top of Tyrantia’s breasts, and your Drider lover’s lips around the tip. She gives you a wink, tongue lolling out from her mouth and down your shaft as she starts moving again. \"\n\n");
+	outputText("\"With your eyes closed, you can hear your lover’s flesh on yours, the scrape of her legs…and her soft gasp, the air cool on your [cockhead] for a moment as Tyrantia inhales a deep breath. Suddenly, she tightens her grip, picking up the pace as she brings her mouth down, fangs scraping the underside of your shaft as she throats the top five inches. Groaning, you open your eyes to see her lips suckered around your rod, and you can’t help but buck your hips as she picks up the pace. \"\n\n");
+	outputText("\"It doesn’t take long for your cock to start twitching, and you moan, trying to hold your orgasm back. As your rod starts twitching, Tyrantia lets go of her tits, bringing her hands to your tool. She lunges down, taking a full foot of your length into her throat, gagging as her hands jerk off the rest of your manhood. \"\n\n");
+	outputText("\"You can’t hold it back any longer! With a groan, your mast throbs, your aching balls twitching as you cum, spurting your load down your Drider lover’s throat. \"\n\n");
+	outputText("\"Tyrantia, to your shock, barely even gags as she slides herself down all the way, her fangs now touching your sack. Her throat works, tightening around you, and with this extra stimulation, your orgasm keeps going…and going… Your lover gulps it down, her five eyes looking up at your face, half-closed. Finally, your orgasm ends, and she slowly pulls her head back, your sensitive [cock] still twitching. As your [cockhead] passes her lips, she gently takes your tool in her hands, kissing your head before gently letting your cock rest. \"\n\n");
+	outputText("\"<i>“Good to the last drop, lover.”</i>She says, breathing heavily. <i>“I’d ask if you enjoyed it…but I think we both know you did.” Once you’ve recovered, you thank Tyrantia for the titjob. She waves it off, smiling. You redress and head your separate ways, but you make a note to come back (if camp) to Tyrantia’s part of camp more often. (If Battlefield) To the Battlefield more frequently. This was definitely worth the trip. </i>\"\n\n");
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -877,8 +896,6 @@ public function TyrantiaPreg():void {
 	outputText("You get back to camp, and you see your giantess lover. She stands near your [tent/cabin], and as she sees you, the giantess puts a hand on her slightly swollen belly.\n\n");
 	outputText("<i>“Oh...Hey [name].”</i> She fidgets. <i>“Look...There’s something I need to tell you.”</i> She walks towards you, taking your hands and bringing them to her slightly swollen belly. <i>“I’m...My eggs were fertilized. By you.”</i> She blinks, wincing. <i>“Not that I would...You’re the only one I love, [name].”</i> She wraps her arms around you, hugging you close. <i>“Tomorrow, I’ll lay the eggs. Can you be there?”</i> You nod, and Tyrantia exhales, relieved.\n\n");
 	outputText("<i>“I love you.”</i> She lets go of you, going back to her hutch. <i>“Even though you made it so I can’t fight for another day.”</i> She rubs the top of your head. <i>“Asshole.”</i> Her smile takes the sting entirely out of those words. You can tell that, despite everything, your Drider giantess is very happy.\n\n");
-	outputText("\n\n");
-	outputText("\n\n");
 	doNext(camp.returnToCamp);
 }
 
