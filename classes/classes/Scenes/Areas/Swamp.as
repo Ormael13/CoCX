@@ -40,12 +40,12 @@ use namespace CoC;
 			flags[kFLAGS.TIMES_EXPLORED_SWAMP]++;
 			/*  SPECIAL SCENE OVERWRITES */
 			//Belisa
-			if (!player.hasStatusEffect(StatusEffects.BelisaOff) && BelisaFollower.BelisaEncounternum == 0 && rand(5) == 0) {
+			if (!player.hasStatusEffect(StatusEffects.BelisaOff) && BelisaFollower.BelisaEncounternum == 0 && rand(2) == 0) {
 				SceneLib.belisa.firstEncounter();
 				return;
 			}
 			//Lily
-			if (LilyFollower.LilyFollowerState == false && rand(5) == 0) {
+			if (LilyFollower.LilyFollowerState == false && rand(3) == 0) {
 				SceneLib.lily.lilyEncounter();
 				return;
 			}
@@ -64,6 +64,7 @@ use namespace CoC;
 				SceneLib.etnaScene.repeatYandereEnc();
 				return;
 			}
+			//Ember
 			if (flags[kFLAGS.TOOK_EMBER_EGG] == 0 && flags[kFLAGS.EGG_BROKEN] == 0 && flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0 && (flags[kFLAGS.TIMES_EXPLORED_SWAMP] % 40 == 0)) {
 				SceneLib.emberScene.findEmbersEgg();
 				return;

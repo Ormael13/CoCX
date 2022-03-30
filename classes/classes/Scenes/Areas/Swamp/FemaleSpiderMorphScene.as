@@ -117,7 +117,10 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 			}
 			//*Try to Talk - Aggressive Variant
 			else {
-				outputText("You hold your hands up non-threateningly and ask the spider-girl why she's trying to sneak up on you.\n\n");
+				outputText("You hold your hands up non-threateningly and ask the spider-girl why she's trying to sneak up on you. " +
+						"However, she instead launches a web at your face, giving her enough time to move to a better position.\n");
+				if (player.cor >= 50) outputText("You grin, and likewise prepare to knock some sense into her.");	//Perhaps this should check wrath instead....
+				else outputText("You sigh, and prepare for combat as you wonder why everyone's first instinct is just to fight.");
 				//(Start combat and immediately call a web attack)
 				var femaleSpiderMorph:FemaleSpiderMorph = new FemaleSpiderMorph();
 				startCombat(femaleSpiderMorph);

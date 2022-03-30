@@ -396,7 +396,8 @@ import classes.StatusEffects;
 			outputText("Alvina slices at [themonster] with her scythe, leaving deep wounds. ");
 			doDamage(dmg1, true, true);
 			outputText("\n\n");
-			monster.createStatusEffect(StatusEffects.Hemorrhage2, 3, 0.1, 0, 0);
+			if (monster.hasStatusEffect(StatusEffects.Hemorrhage2)) monster.addStatusValue(StatusEffects.Hemorrhage2, 1, 1);
+			else monster.createStatusEffect(StatusEffects.Hemorrhage2, 3, 0.1, 0, 0);
 		}
 		public function alvinaCombatActions4():void {
 			var damage2:Number = player.statusEffectv2(StatusEffects.CombatFollowerAlvina);
@@ -645,7 +646,8 @@ import classes.StatusEffects;
 			outputText(" ");
 			doPoisonDamage(((player.statusEffectv2(StatusEffects.CombatFollowerAmily)/4)+20), true, true);
 			outputText("\n\n");
-			monster.createStatusEffect(StatusEffects.Hemorrhage2, 3, 0.1, 0, 0);
+			if (monster.hasStatusEffect(StatusEffects.Hemorrhage2)) monster.addStatusValue(StatusEffects.Hemorrhage2, 1, 1);
+			else monster.createStatusEffect(StatusEffects.Hemorrhage2, 3, 0.1, 0, 0);
 			if (monster.hasStatusEffect(StatusEffects.PoisonDoTH)) monster.addStatusValue(StatusEffects.PoisonDoTH,1,1);
 			else monster.createStatusEffect(StatusEffects.PoisonDoTH,4,0.02,0,0);
 		}
@@ -806,29 +808,32 @@ import classes.StatusEffects;
 			clearOutput();
 			if (player.statusEffectv4(StatusEffects.CombatFollowerTyrantia) > 0) {
 				//if (TyrantiaFollower.TyraniaPostFinalKissScene) tyrantiaCombatActions5();
-				var choice1:Number = rand(20);
-				if (player.hasPerk(PerkLib.MotivationEx)) {
-					if (rand(100) == 0) tyrantiaCombatActions0();
-					else {
-						if (choice1 < 5) tyrantiaCombatActions1();
-						if (choice1 >= 5 && choice1 < 10) tyrantiaCombatActions2();
-						if (choice1 >= 10 && choice1 < 15) tyrantiaCombatActions3();
-						if (choice1 >= 15) tyrantiaCombatActions4();
-					}
-				}
-				else if (player.hasPerk(PerkLib.Motivation)) {
-					if (choice1 < 4) tyrantiaCombatActions0();
-					if (choice1 >= 4 && choice1 < 11) tyrantiaCombatActions1();
-					if (choice1 >= 11 && choice1 < 16) tyrantiaCombatActions2();
-					if (choice1 >= 16 && choice1 < 19) tyrantiaCombatActions3();
-					if (choice1 == 19) tyrantiaCombatActions4();
-				}
+				if (monster.hasStatusEffect(StatusEffects.PouncedByCompanion)) tyrantiaCombatActions1();
 				else {
-					if (choice1 < 10) tyrantiaCombatActions0();
-					if (choice1 >= 10 && choice1 < 14) tyrantiaCombatActions1();
-					if (choice1 >= 14 && choice1 < 17) tyrantiaCombatActions2();
-					if (choice1 == 17 || choice1 == 18) tyrantiaCombatActions3();
-					if (choice1 == 19) tyrantiaCombatActions4();
+					var choice1:Number = rand(20);
+					if (player.hasPerk(PerkLib.MotivationEx)) {
+						if (rand(100) == 0) tyrantiaCombatActions0();
+						else {
+							if (choice1 < 5) tyrantiaCombatActions1();
+							if (choice1 >= 5 && choice1 < 10) tyrantiaCombatActions2();
+							if (choice1 >= 10 && choice1 < 15) tyrantiaCombatActions3();
+							if (choice1 >= 15) tyrantiaCombatActions4();
+						}
+					}
+					else if (player.hasPerk(PerkLib.Motivation)) {
+						if (choice1 < 4) tyrantiaCombatActions0();
+						if (choice1 >= 4 && choice1 < 11) tyrantiaCombatActions1();
+						if (choice1 >= 11 && choice1 < 16) tyrantiaCombatActions2();
+						if (choice1 >= 16 && choice1 < 19) tyrantiaCombatActions3();
+						if (choice1 == 19) tyrantiaCombatActions4();
+					}
+					else {
+						if (choice1 < 10) tyrantiaCombatActions0();
+						if (choice1 >= 10 && choice1 < 14) tyrantiaCombatActions1();
+						if (choice1 >= 14 && choice1 < 17) tyrantiaCombatActions2();
+						if (choice1 == 17 || choice1 == 18) tyrantiaCombatActions3();
+						if (choice1 == 19) tyrantiaCombatActions4();
+					}
 				}
 			}
 			else {
@@ -843,19 +848,60 @@ import classes.StatusEffects;
 			if (monster.HP <= monster.minHP() || monster.lust >= monster.maxLust()) enemyAI();
 		}
 		public function tyrantiaCombatActions0():void {
-			outputText("Your Drider companion stares at the [enemy], making no movements towards them.\n\n");
+			outputText("Your Drider companion stares at the [themonster], making no movements towards them.\n\n");
 		}
 		public function tyrantiaCombatActions1():void {
-			outputText("Your Drider companion stares at the [enemy], making no movements towards them.\n\n");
+			outputText("Tyrantia’s Dick is thrust into the [themonster]. ");
+			var dmg14:Number = player.statusEffectv1(StatusEffects.CombatFollowerTyrantia);
+			var weaponTyrantia:Number = player.statusEffectv2(StatusEffects.CombatFollowerTyrantia);
+			var lustDmg:Number = Math.round(25 + monster.lib / 5 + monster.sens / 5 + monster.cor / 5);
+			dmg14 += scalingBonusStrengthCompanion() * 1.5;
+			weaponTyrantia *= 3;
+			if (weaponTyrantia < 51) dmg14 *= (1 + (weaponTyrantia * 0.03));
+			else if (weaponTyrantia >= 51 && weaponTyrantia < 101) dmg14 *= (2.5 + ((weaponTyrantia - 50) * 0.025));
+			else if (weaponTyrantia >= 101 && weaponTyrantia < 151) dmg14 *= (3.75 + ((weaponTyrantia - 100) * 0.02));
+			else if (weaponTyrantia >= 151 && weaponTyrantia < 201) dmg14 *= (4.75 + ((weaponTyrantia - 150) * 0.015));
+			else dmg14 *= (5.5 + ((weaponTyrantia - 200) * 0.01));
+			dmg14 = Math.round(dmg14 * increasedEfficiencyOfAttacks());
+			doDamage(dmg14, true, true);
+			doDamage(dmg14, true, true);
+			doDamage(dmg14, true, true);
+			monster.teased(lustDmg);
+			outputText("\n\n");
 		}
 		public function tyrantiaCombatActions2():void {
-			outputText("Your Drider companion stares at the [enemy], making no movements towards them.\n\n");
+			var dmg15:Number = player.statusEffectv1(StatusEffects.CombatFollowerTyrantia);
+			dmg15 += scalingBonusStrengthCompanion() * 2;
+			outputText("Tyrantia bowls over [themonster] with a mighty roar, then slams her steel-coated front legs down into the [themonster]’s luckless frame, pinning them in place as they bleed profusely. ");
+			if (rand(2) == 0) {
+				outputText("Tyrantia’s front limbs are brought up and back down, getting a cry of pain from [themonster]. She lets loose a cheerful war cry, stabbing down again. [Themonster] is pinned for now.");
+				monster.createStatusEffect(StatusEffects.PouncedByCompanion,2+rand(2),0,0,0);
+			}
+			else outputText("To your surprise, Tyrantia flinches, backing off from [themonster]. They fight their way to their feet, and take a fighting stance.");
+			if (monster.hasStatusEffect(StatusEffects.Hemorrhage2)) monster.addStatusValue(StatusEffects.Hemorrhage2, 1, 1);
+			else monster.createStatusEffect(StatusEffects.Hemorrhage2, 3, 0.1, 0, 0);
+			doDamage(dmg15, true, true);
+			outputText("\n\n");
 		}
 		public function tyrantiaCombatActions3():void {
-			outputText("Your Drider companion stares at the [enemy], making no movements towards them.\n\n");
+			var dmg16:Number = player.statusEffectv3(StatusEffects.CombatFollowerTyrantia);
+			dmg16 += scalingBonusIntelligenceCompanion() * 1.5;
+			dmg16 = Math.round(dmg16 * increasedEfficiencyOfAttacks());
+			if (monster.hasStatusEffect(StatusEffects.AcidDoT)) {
+				monster.addStatusValue(StatusEffects.AcidDoT,1,1);
+				monster.addStatusValue(StatusEffects.AcidDoT,3,1);
+			}
+			else monster.createStatusEffect(StatusEffects.AcidDoT,4,0.02,1,0);
+			outputText("Tyrantia turns her body around, spraying her acidic goop at the enemy. ");
+			doAcidDamage(dmg16, true, true);
+			outputText("\n\n");
 		}
 		public function tyrantiaCombatActions4():void {
-			outputText("Your Drider companion stares at the [enemy], making no movements towards them.\n\n");
+			var lustDmg:Number = Math.round((25 + monster.lib / 5 + monster.sens / 5 + monster.cor / 5) * 4);
+			monster.statStore.addBuffObject({spe:-20}, "Web",{text:"Web"});
+			outputText("Tyrantia rushes forward, biting [themonster] and sinking her fangs into it. [Themonster] manages to get loose, but not before their blood coats her fangs. [Themonster] looks woozy, and slightly horny. ");
+			monster.teased(lustDmg);
+			outputText("\n\n");
 		}
 		public function tyrantiaCombatActions5():void {
 			outputText("Your Drider companion stares at the [enemy], making no movements towards them.\n\n");

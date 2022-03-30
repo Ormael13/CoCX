@@ -484,7 +484,7 @@ public class Pregnancy extends NPCAwareContent {
                     displayedUpdate = true;
                 }
                 if(player.pregnancyIncubation == 48) {
-                    EngineCore.outputText("\n<b>You rub your hands over your bulging belly, lost in the sensations of motherhood.  Whatever child is inside your overstretched womb seems to appreciate the attention, and stops its incessant squirming.\n");
+                    EngineCore.outputText("\n<b>You rub your hands over your bulging belly, lost in the sensations of motherhood.  Whatever child is inside your overstretched womb seems to appreciate the attention, and stops its incessant squirming.</b>\n");
                     displayedUpdate = true;
                 }
                 if(player.pregnancyIncubation == 32  || player.pregnancyIncubation == 150) {

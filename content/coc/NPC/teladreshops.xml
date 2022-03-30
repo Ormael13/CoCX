@@ -285,7 +285,7 @@
             <if test="player.cockArea(x) lt 20"> runt
             <elseif test="player.cockArea(x) lt 40"><output> player.mf("boy", "girl")</output>
                 <elseif test="player.cockArea(x) lt 60">big <output>player.mf("boy", "girl")</output>
-                    <else> player.mf("stud", "breeder")</else>
+                    <else> <output>player.mf("stud", "breeder")</output></else>
                 </elseif></elseif></if>
             .</i>"
 
