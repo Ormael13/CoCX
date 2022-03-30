@@ -1600,36 +1600,32 @@ public class Creature extends Utils
 			return this._statusEffects.addStatusValue(stype, statusValueNum, bonus);
 		}
 
-		public function statusEffectv1(stype:StatusEffectType):Number
+		public function getStatusValue(stype:StatusEffectType, statusValueNum:int):Number
 		{
 			if (this._statusEffects.hasStatusEffect(stype)) {
-				return this._statusEffects.getStatusValue(stype, 1);
+				return this._statusEffects.getStatusValue(stype, statusValueNum);
 			}
 			return 0;
+		}
+
+		public function statusEffectv1(stype:StatusEffectType):Number
+		{
+            return getStatusValue(stype, 1);
 		}
 
 		public function statusEffectv2(stype:StatusEffectType):Number
 		{
-			if (this._statusEffects.hasStatusEffect(stype)) {
-				return this._statusEffects.getStatusValue(stype, 2);
-			}
-			return 0;
+            return getStatusValue(stype, 2);
 		}
 
 		public function statusEffectv3(stype:StatusEffectType):Number
 		{
-			if (this._statusEffects.hasStatusEffect(stype)) {
-				return this._statusEffects.getStatusValue(stype, 3);
-			}
-			return 0;
+            return getStatusValue(stype, 3);
 		}
 
 		public function statusEffectv4(stype:StatusEffectType):Number
 		{
-			if (this._statusEffects.hasStatusEffect(stype)) {
-				return this._statusEffects.getStatusValue(stype, 4);
-			}
-			return 0;
+            return getStatusValue(stype, 4);
 		}
 
 		public function cleanAllBuffs():void
@@ -1854,45 +1850,63 @@ public class Creature extends Utils
 			return findCock(3, -1, -1, "area");
 		}
 
-        /*
-        Returns the count of cocks, meeting the requirements
+        //Checks if the cock is tentacle/stamen
+        private function cockIsTentacle(num:int):Boolean {
+            return cocks[num].cockType == CockTypesEnum.STAMEN || cocks[num].cockType == CockTypesEnum.TENTACLE;
+        }
+
+        /**
+        * Returns the count of the cocks which meet the requirements
+        * Assumes that TENTACLE type is the same as STAMEN (because it's the same, isn't it?)
+        * @param    type        Cock type, UNDEFINED = "any"
+        * @param    minSize     Minimum size, 0/-1 = no checking
+        * @param    maxSize     Maximum size, -1 = no checking
+        * @param    compareBy   The measurement to compare by, "area", "length" or "thickness"
+        * @param    tentUnlim   If true, doesn't check the maximum size for tentacle cocks (you can twist them, makes sense?)
+        * @return   The count of matching dicks
         */
-        public function countCocksWithType(type:CockTypesEnum, minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", tentaEQstamen:Boolean = true):int {
+        public function countCocksWithType(type:CockTypesEnum, minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", tentUnlim:Boolean = true):int {
+            if (compareBy != "area" && compareBy != "length" && compareBy != "thickness") //sanity check
+                throw new Error("Wrong compareBy value!");
             var cnt:int = 0;
-            var tEQs:Boolean = (type == CockTypesEnum.STAMEN || type == CockTypesEnum.TENTACLE) && tentaEQstamen;
+            var tent:Boolean = (type == CockTypesEnum.STAMEN || type == CockTypesEnum.TENTACLE);
             for (var i:int = 0; i < cocks.length; ++i) {
                 var isize:Number = compareBy == "length" ? cocks[i].cockLength :
                                 compareBy == "thickness" ? cocks[i].cockThickness :
                                 cockArea(i);
-                if ((isize >= minSize || minSize <= 0) && (isize <= maxSize || maxSize <= 0)
-                && (cocks[i].cockType == type || tEQs && (cocks[i].cockType == CockTypesEnum.STAMEN || cocks[i].cockType == CockTypesEnum.TENTACLE) || type == CockTypesEnum.UNDEFINED))
+                if ((isize >= minSize || minSize < 0) && (isize < maxSize || maxSize < 0 || tentUnlim && cockIsTentacle(i))
+                && (cocks[i].cockType == type || tent && cockIsTentacle(i) || type == CockTypesEnum.UNDEFINED))
                     ++cnt;
             }
             return cnt;
         }
 		
-		public function countCocks(minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", tentaEQstamen:Boolean = true):int {
-			return countCocksWithType(CockTypesEnum.UNDEFINED, minSize, maxSize, compareBy, tentaEQstamen);
+		public function countCocks(minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", tentUnlim:Boolean = true):int {
+			return countCocksWithType(CockTypesEnum.UNDEFINED, minSize, maxSize, compareBy, tentUnlim);
 		}
 
-        /*
-        Finds biggest/smallest/any cock, meeting the requirements. Returns its index.
-        "biggest":
-        >0 - counted from max size (1 = biggest, 2 = second biggest)
-        <0 - counted from min size (-1 = smallest, -2 = second smallest)
-        0 - biggest, why not
-        value - 
+        /**
+        * Returns number of the biggest cock that meets the requirements
+        * Assumes that TENTACLE type is the same as STAMEN (because it's the same, isn't it?)
+        * @param    biggest     "0/1" = biggest, "-1" = smallest, "2" = second biggest, "-2" = second smallest, ...
+        * @param    type        Cock type, UNDEFINED = "any"
+        * @param    minSize     Minimum size, 0/-1 = no checking
+        * @param    maxSize     Maximum size, -1 = no checking
+        * @param    compareBy   The measurement to compare by, "area", "length" or "thickness"
+        * @return   The number of the biggest (comparing by 'compareBy') matching dick, -1 if no any
         */
-        public function findCockWithType(type:CockTypesEnum, biggest:int = 0, minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", tentaEQstamen:Boolean = true):int {
+        public function findCockWithType(type:CockTypesEnum, biggest:int = 1, minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", tentUnlim:Boolean = true):int {
+            if (compareBy != "area" && compareBy != "length" && compareBy != "thickness") //sanity check
+                throw new Error("Wrong compareBy value!");
             var sorted:Array = new Array();
-            var tEQs:Boolean = (type == CockTypesEnum.STAMEN || type == CockTypesEnum.TENTACLE) && tentaEQstamen;
+            var tent:Boolean = (type == CockTypesEnum.STAMEN || type == CockTypesEnum.TENTACLE);
             //create an array of fitting cocks, sorted descending
             for (var num:int = 0; num < cocks.length; ++num) {
                 var nsize:Number = compareBy == "length" ? cocks[num].cockLength :
                                 compareBy == "thickness" ? cocks[num].cockThickness :
                                 cockArea(num);
-                if ((nsize >= minSize || minSize <= 0) && (nsize <= maxSize || maxSize <= 0)
-                && (cocks[num].cockType == type || tEQs && (cocks[num].cockType == CockTypesEnum.STAMEN || cocks[num].cockType == CockTypesEnum.TENTACLE) || type == CockTypesEnum.UNDEFINED)) {
+                if ((nsize >= minSize || minSize < 0) && (nsize < maxSize || maxSize < 0 || tentUnlim && cockIsTentacle(num))
+                && (cocks[num].cockType == type || tent && cockIsTentacle(num) || type == CockTypesEnum.UNDEFINED)) {
                     var j:int;
                     for (j = 0; j < sorted.length; ++j) {
                         var jsize:Number = compareBy == "length" ? cocks[sorted[j]].cockLength :
@@ -1917,8 +1931,32 @@ public class Creature extends Utils
 			return sorted[0];
         }
 		
-		public function findCock(biggest:int = 0, minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", tentaEQstamen:Boolean = true):int {
-			return findCockWithType(CockTypesEnum.UNDEFINED, biggest, minSize, maxSize, compareBy, tentaEQstamen);
+		public function findCock(biggest:int = 1, minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", tentUnlim:Boolean = true):int {
+			return findCockWithType(CockTypesEnum.UNDEFINED, biggest, minSize, maxSize, compareBy, tentUnlim);
+		}
+
+        public function findCockWithTypeNotIn(arr:Array, type:CockTypesEnum, biggest:int = 1, minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", tentUnlim:Boolean = true):int {
+            var ret:int = -1;
+            var sign:int = (biggest >= 0) ? 1 : -1;
+            var cnt:int = sign;
+            var biggest_cnt:int = sign;
+            //correct 'biggest' value to account for zeros
+            if (biggest == 0) biggest = 1;
+            do {
+                ret = findCockWithType(type, cnt, minSize, maxSize, compareBy, tentUnlim); //find n-th cock
+                if (ret >= 0 && arr.indexOf(ret) == -1) { //count those outside of the array
+                    if (biggest_cnt == biggest) //if found b-th cock, return it
+                        return ret;
+                    else
+                        biggest_cnt += sign;
+                }
+                cnt += sign;
+            } while (ret >= 0);
+            return -1;
+        }
+
+		public function findCockNotIn(arr:Array, biggest:int = 1, minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", tentUnlim:Boolean = true):int {
+			return findCockWithTypeNotIn(arr, CockTypesEnum.UNDEFINED, biggest, minSize, maxSize, compareBy, tentUnlim);
 		}
 
 		public function cockDescript(cockIndex:int = 0):String
@@ -2074,14 +2112,6 @@ public class Creature extends Utils
 		{
 			if (hasStatusEffect(StatusEffects.LactationReduction))
 				changeStatusValue(StatusEffects.LactationReduction, 1, 0);
-			if (hasStatusEffect(StatusEffects.LactationReduc0))
-				removeStatusEffect(StatusEffects.LactationReduc0);
-			if (hasStatusEffect(StatusEffects.LactationReduc1))
-				removeStatusEffect(StatusEffects.LactationReduc1);
-			if (hasStatusEffect(StatusEffects.LactationReduc2))
-				removeStatusEffect(StatusEffects.LactationReduc2);
-			if (hasStatusEffect(StatusEffects.LactationReduc3))
-				removeStatusEffect(StatusEffects.LactationReduc3);
 			if (hasPerk(PerkLib.Feeder))
 			{
 				//You've now been milked, reset the timer for that
@@ -2089,7 +2119,7 @@ public class Creature extends Utils
 				changeStatusValue(StatusEffects.Feeder, 2, 0);
 			}
 		}
-		public function boostLactation(todo:Number):Number
+		public function boostLactation(todo:Number, directIncrease:Boolean = false):Number
 		{
 			if (breastRows.length == 0)
 				return 0;
@@ -2098,38 +2128,31 @@ public class Creature extends Utils
 			var changes:Number = 0;
 			var temp2:Number = 0;
 			//Prevent lactation decrease if lactating.
-			if (todo >= 0)
-			{
-				if (hasStatusEffect(StatusEffects.LactationReduction))
+			if (todo >= 0 && hasStatusEffect(StatusEffects.LactationReduction))
 					changeStatusValue(StatusEffects.LactationReduction, 1, 0);
-				if (hasStatusEffect(StatusEffects.LactationReduc0))
-					removeStatusEffect(StatusEffects.LactationReduc0);
-				if (hasStatusEffect(StatusEffects.LactationReduc1))
-					removeStatusEffect(StatusEffects.LactationReduc1);
-				if (hasStatusEffect(StatusEffects.LactationReduc2))
-					removeStatusEffect(StatusEffects.LactationReduc2);
-				if (hasStatusEffect(StatusEffects.LactationReduc3))
-					removeStatusEffect(StatusEffects.LactationReduc3);
-			}
 			if (todo > 0)
 			{
 				while (todo > 0)
 				{
 					counter = breastRows.length;
-					todo -= .1;
+                    //select breast row with the lowest lactation
 					while (counter > 0)
 					{
 						counter--;
 						if (breastRows[index].lactationMultiplier > breastRows[counter].lactationMultiplier)
 							index = counter;
 					}
-					temp2 = .1;
-					if (breastRows[index].lactationMultiplier > 1.5)
-						temp2 /= 2;
-					if (breastRows[index].lactationMultiplier > 2.5)
-						temp2 /= 2;
-					if (breastRows[index].lactationMultiplier > 3)
-						temp2 /= 2;
+					temp2 = todo > .1 ? .1 : todo;
+					todo -= temp2;
+                    //diminishing increase - NOT INCLUDING LACTAID, IT WORKS WELL
+                    if (!directIncrease) {
+                        if (breastRows[index].lactationMultiplier > 1.5)
+                            temp2 /= 2;
+                        if (breastRows[index].lactationMultiplier > 2.5)
+                            temp2 /= 2;
+                        if (breastRows[index].lactationMultiplier > 3)
+                            temp2 /= 2;
+                    }
 					changes += temp2;
 					breastRows[index].lactationMultiplier += temp2;
 				}
@@ -2140,35 +2163,20 @@ public class Creature extends Utils
 				{
 					counter = breastRows.length;
 					index = 0;
-					if (todo > -.1)
-					{
-						while (counter > 0)
-						{
-							counter--;
-							if (breastRows[index].lactationMultiplier < breastRows[counter].lactationMultiplier)
-								index = counter;
-						}
-						//trace(biggestLactation());
-						breastRows[index].lactationMultiplier += todo;
-						if (breastRows[index].lactationMultiplier < 0)
-							breastRows[index].lactationMultiplier = 0;
-						todo = 0;
-					}
-					else
-					{
-						todo += .1;
-						while (counter > 0)
-						{
-							counter--;
-							if (breastRows[index].lactationMultiplier < breastRows[counter].lactationMultiplier)
-								index = counter;
-						}
-						temp2 = todo;
-						changes += temp2;
-						breastRows[index].lactationMultiplier += temp2;
-						if (breastRows[index].lactationMultiplier < 0)
-							breastRows[index].lactationMultiplier = 0;
-					}
+                    //select breast row with the lowest lactation
+                    while (counter > 0)
+                    {
+                        counter--;
+                        if (breastRows[index].lactationMultiplier < breastRows[counter].lactationMultiplier)
+                            index = counter;
+                    }
+                    temp2 = todo < -.1 ? -.1 : todo;
+                    todo -= temp2;
+                    //normal decrease
+                    changes += temp2;
+                    breastRows[index].lactationMultiplier += temp2;
+                    if (breastRows[index].lactationMultiplier < 0)
+                        breastRows[index].lactationMultiplier = 0;
 				}
 			}
 			return changes;

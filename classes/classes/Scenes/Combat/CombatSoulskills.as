@@ -1613,6 +1613,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			if (player.findPerk(PerkLib.GreyMage) >= 0 && player.inte >= 125) TranceBoost += 15;
 			if (player.findPerk(PerkLib.GreyArchmage) >= 0 && player.inte >= 175) TranceBoost += 20;
 			if (player.findPerk(PerkLib.GrandGreyArchmage) >= 0 && player.inte >= 225) TranceBoost += 25;
+			if (player.findPerk(PerkLib.GrandGreyArchmage2ndCircle) >= 0 && player.inte >= 275) TranceBoost += 30;
 			if (player.findPerk(PerkLib.JobEnchanter) >= 0 && player.inte >= 50) TranceBoost += 5;
 			if (player.findPerk(PerkLib.Battleflash) >= 0 && player.inte >= 50) TranceBoost += 15;
 			if (player.findPerk(PerkLib.JobSwordsman) >= 0) TranceBoost -= 10;

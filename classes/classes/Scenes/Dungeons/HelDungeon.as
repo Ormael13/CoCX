@@ -9,7 +9,7 @@ import classes.Items.Armor;
 import classes.Scenes.Dungeons.HelDungeon.*;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.SceneLib;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 use namespace CoC;
@@ -24,8 +24,7 @@ use namespace CoC;
 		private static const DUNGEON_HEL_THRONE_ROOM:int	= 22;
 		
 		public function HelDungeon() {}
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		
+				
 		//EVENTS
 		//-HelAffection -- A score measuring Hel's general fondness for the Player Character, measured on a scale of 0 - 100, with \"<i>0</i>\" being immediately after achieving \"<i>Fuckbuddy</i>\" status. Increases by 5 each time you fuck (not Corrupt!Rape) Hel, and 10 each time you engage in one of her threesomes. When HelAffection equals 70 points, the number freezes and Expansion 2 content triggers.
 		// HEL_AFFECTION_FOLLOWER:int = 478;
@@ -862,7 +861,7 @@ use namespace CoC;
 			clearOutput();
 			if (player.isAlraune())
 			{
-				uniquuuesexscene.AlrauneDungeonBadEnd();
+				SceneLib.uniqueSexScene.AlrauneDungeonBadEnd();
 			}
 			else {
 				//(Go to \"<i>Harpy Breeding Slut</i>\" Bad End)

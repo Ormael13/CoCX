@@ -555,8 +555,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 		}
 		if (player.vehicles == vehicles.HB_MECH) {
 			if (player.hasKeyItem("HB Stealth System") >= 0) {
-				bd = buttons.add("Camouflage", StealthMode).hint("Turn your mech invisible for 1 turn. \n\nWould drain 100 SF from mech reserves or your own SF pool.");
-				if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] < 100 || player.soulforce < 100) bd.disable("<b>You are too low on SF reserves to use this option.</b>\n\n");
+				if (player.keyItemv1("HB Stealth System") >= 1) bd = buttons.add("Invisibility", StealthModeActivate).hint("Turn your mech invisible. \n\nWould drain "+combat.StealthModeMechCost()+" SF from mech reserves or your own SF pool per turn.");// Will not use combat action.
+				else bd = buttons.add("Camouflage", StealthModeActivate).hint("Turn your mech invisible for 1 turn. \n\nWould drain "+combat.StealthModeMechCost()+" SF from mech reserves or your own SF pool.");
+				if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] < combat.StealthModeMechCost() || player.soulforce < combat.StealthModeMechCost()) bd.disable("<b>You are too low on SF reserves to use this option.</b>\n\n");
 				if (monster.hasStatusEffect(StatusEffects.InvisibleOrStealth) || monster.hasStatusEffect(StatusEffects.Stunned) || monster.hasStatusEffect(StatusEffects.FrozenSolid) || monster.hasStatusEffect(StatusEffects.StunnedTornado)
 					|| monster.hasStatusEffect(StatusEffects.Blind) || monster.hasStatusEffect(StatusEffects.InkBlind) || monster.hasStatusEffect(StatusEffects.Distracted)) {
 					bd = buttons.add("SneakAttack (M)", sneakAttackMech).hint("Strike the vitals of a stunned, blinded or distracted opponent for heavy damage. (Melee variant)");
@@ -570,6 +571,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					else if (!player.isUsingHowlingBansheeMechFriendlyRangeWeapons()) bd.disable("Your range weapon is not compatibile to be used in this special attack.");
 					else if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] < 100 || player.soulforce < 100) bd.disable("<b>You are too low on SF reserves to use this option.</b>");
 				}
+				if (player.keyItemv1("HB Stealth System") >= 1 && monster.hasStatusEffect(StatusEffects.InvisibleOrStealth)) bd = buttons.add("Visibility", StealthModeDeactivate).hint("Turn your mech visible.");// Will not use combat action.
 			}
 			if (player.hasKeyItem("HB Dragon's Breath Flamer") >= 0) {
 				bd = buttons.add("DB Flamer", mechWhitefireBeamCannon).hint("Shoot with Dragon's Breath Flamer at enemy burning him. \n\nWould drain 100 SF from mech reserves or your own SF pool.");
@@ -6156,14 +6158,20 @@ public class PhysicalSpecials extends BaseCombatContent {
 		return dmgBarrage;
 	}
 	
-	public function StealthMode():void {
+	public function StealthModeActivate():void {
 		clearOutput();
-		if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] >= 100) flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= 100;
-		else player.soulforce -= 100;
+		if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] >= combat.StealthModeMechCost()) flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= combat.StealthModeMechCost();
+		else player.soulforce -= combat.StealthModeMechCost();
 		outputText("Your mech form shimmers for a second as you vanish into thin air. Your opponent starts looking for you, annoyed.\n\n");
 		var DurationIncrease:Number = 0;
-		//if (player.hasPerk(PerkLib.FairyQueenRegalia)) DurationIncrease = 1;
-		monster.createStatusEffect(StatusEffects.InvisibleOrStealth,1+DurationIncrease,0,0,0);
+		if (player.keyItemv1("HB Stealth System") >= 1) DurationIncrease += 1;
+		monster.createStatusEffect(StatusEffects.InvisibleOrStealth, 1, DurationIncrease, 0, 0);
+		enemyAI();
+	}
+	public function StealthModeDeactivate():void {
+		clearOutput();
+		outputText("Depowering system you cause mech form to become visible.\n\n");
+		monster.removeStatusEffect(StatusEffects.InvisibleOrStealth);
 		enemyAI();
 	}
 
@@ -6607,4 +6615,4 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function PhysicalSpecials() {
 	}
 }
-}
+}

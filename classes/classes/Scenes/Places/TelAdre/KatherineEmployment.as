@@ -8,10 +8,10 @@ import classes.Scenes.SceneLib;
 public class KatherineEmployment extends TelAdreAbstractContent {
 		//This class holds all the employment quest specific content for Katherine. It's split off to reduce the size of Katherine.as
 
-		private static const KBIT_TRAINING_TALK_EDRYN:int	=    4;
-		private static const KBIT_TRAINING_TALK_URTA:int	=    8;
-		private static const KBIT_TRAINING_TALK_KATH:int	=   16;
-		private static const KBIT_TRAINING_URTA_HELP:int	=   32;
+		public static const KBIT_TRAINING_TALK_EDRYN:int	=    4;
+		public static const KBIT_TRAINING_TALK_URTA:int	=    8;
+		public static const KBIT_TRAINING_TALK_KATH:int	=   16;
+		public static const KBIT_TRAINING_URTA_HELP:int	=   32;
 
 		public function KatherineEmployment() {}
 
@@ -657,30 +657,32 @@ public class KatherineEmployment extends TelAdreAbstractContent {
 			outputText("\"<i>It looks like a dump,</i>\" Katherine points out.  \"<i>And I used to live in a dump.  This is worse.</i>\"\n\n");
 			outputText("You can’t help commenting that you were surprised when you saw Urta’s apartment as being, well, a lot less glamorous then you’d expect for someone of her rank, but if all the Watch’s properties are so run down...\n\n");
 			outputText("\"<i>We just get whatever places the Council assigns us, okay?</i>\" Urta snaps, bristling with hurt pride.  \"<i>Do you want to get a job or not, pussy cat?  Believe me, it’s a lot sturdier than it looks, and a lot better kept inside.</i>\"");
-			if (silly()) {
+			if (silly())
 				outputText("You joke that maybe you should get your ghostbusting gear?  Just in case?\n\n");
-				outputText("\"<i>There’s no such thing as ghosts!</i>\" Urta snaps.");
-				if (SceneLib.shouldraFollower.followerShouldra()) {
-					outputText("You would beg to differ, you happen to not only know one... but is also carrying one right at this instant...\n\n");
-					outputText("\"<i>Oh? So why doesn’t he come out and say hello, huh?</i>\" Urta snarks, clearly feeling very put out.\n\n");
-					outputText("\"<i>Don’t mind if I do!</i>\" an ethereal voice replies out of your chest.  A familiar face emerges, grinning widely.  \"<i>Boo,</i>\" Shouldra states, simply.\n\n");
-					outputText("Urta and Kath’s jaws drop in unision, both staring dumbfoundedly at Shouldra.  Looks like they’ve never seen a ghost before.  \"<i>I can see at least two bodies I wouldn’t mind getting to know better... but first, let’s see what you’re packing...</i>\"  Shouldra’s hand emerges from your chest and she makes a few arcane gestures, aimed at both Kath and Urta.  At once, the two’s outfits tent as their mismatched dicks swell as erect as they can between the ghost’s magic and their restraining garments.  Urta yelps in that way she has and tries to cover herself up; Kath just looks surprised, but doesn’t make any effort, figuring that it must be harmless.\n\n");
-					outputText("\"<i>Wow, jackpot!  Come here my swollen-dicked morsels, let’s have some fun!</i>\"  Shouldra lunges after both Kath and Urta, who promptly scamper, not happy with the idea of becoming a ghost’s plaything.  You just watch the spectacle unfold and both the herms and Shouldra vanish from your sight...\n\n");
-					outputText("A few minutes later, both Urta and Kath return... panting and with their respective tents visibly absent...\n\n");
-					outputText("\"<i>Oh, dear sweet Marae’s mercy, we finally lost that freaky ghoulie,</i>\" Urta pants, tongue lolling out in a very canine fashion.\n\n");
-					outputText("\"<i>That’s not funny, [name]!</i>\" Kath shouts at you, tail jutting out like someone stuck a broom up her ass and swollen twice its usual girth with bristling hair.\n\n");
-					outputText("You just shrug and tell them that - unfortunately - that one is out of your control.  \"<i>So why do you put up with her?</i>\" they promptly ask, even as they recompose themselves.  You shrug once more, replying that even you don’t know that...");
-				}
-				else if (flags[kFLAGS.TIMES_MET_SHOULDRA] > 0) {
-					outputText("You would beg to differ... you happen to know one actually...\n\n");
-					outputText("\"<i>...Have you been spending too much time out in the sun, [name]?</i>\"  Urta's the one who said it, but Katherine nods her head in agreement, looking just as concerned that you’ve lost it.\n\n");
-					outputText("You just shrug... telling them that if they don’t believe you, maybe you should take them to meet her someday?\n\n");
-					outputText("\"<i>...Yeah, maybe.</i>\"  Is the again-mutual sentiment of both herms.");
-				}
-				else {
-					outputText("You just snicker.");
-				}
-			}
+            else
+				outputText("You joke that maybe you should be ready to defend yourself against ghosts here? Just in case?\n\n");
+            //it's not THAT silly. It's normal for Shouldra :) Left ghostbusting joke in silly cause it's still a reference
+            outputText("\"<i>There’s no such thing as ghosts!</i>\" Urta snaps.");
+            if (SceneLib.shouldraFollower.followerShouldra()) {
+                outputText("You would beg to differ, you happen to not only know one... but is also carrying one right at this instant...\n\n");
+                outputText("\"<i>Oh? So why doesn’t he come out and say hello, huh?</i>\" Urta snarks, clearly feeling very put out.\n\n");
+                outputText("\"<i>Don’t mind if I do!</i>\" an ethereal voice replies out of your chest.  A familiar face emerges, grinning widely.  \"<i>Boo,</i>\" Shouldra states, simply.\n\n");
+                outputText("Urta and Kath’s jaws drop in unision, both staring dumbfoundedly at Shouldra.  Looks like they’ve never seen a ghost before.  \"<i>I can see at least two bodies I wouldn’t mind getting to know better... but first, let’s see what you’re packing...</i>\"  Shouldra’s hand emerges from your chest and she makes a few arcane gestures, aimed at both Kath and Urta.  At once, the two’s outfits tent as their mismatched dicks swell as erect as they can between the ghost’s magic and their restraining garments.  Urta yelps in that way she has and tries to cover herself up; Kath just looks surprised, but doesn’t make any effort, figuring that it must be harmless.\n\n");
+                outputText("\"<i>Wow, jackpot!  Come here my swollen-dicked morsels, let’s have some fun!</i>\"  Shouldra lunges after both Kath and Urta, who promptly scamper, not happy with the idea of becoming a ghost’s plaything.  You just watch the spectacle unfold and both the herms and Shouldra vanish from your sight...\n\n");
+                outputText("A few minutes later, both Urta and Kath return... panting and with their respective tents visibly absent...\n\n");
+                outputText("\"<i>Oh, dear sweet Marae’s mercy, we finally lost that freaky ghoulie,</i>\" Urta pants, tongue lolling out in a very canine fashion.\n\n");
+                outputText("\"<i>That’s not funny, [name]!</i>\" Kath shouts at you, tail jutting out like someone stuck a broom up her ass and swollen twice its usual girth with bristling hair.\n\n");
+                outputText("You just shrug and tell them that - unfortunately - that one is out of your control.  \"<i>So why do you put up with her?</i>\" they promptly ask, even as they recompose themselves.  You shrug once more, replying that even you don’t know that...");
+            }
+            else if (flags[kFLAGS.TIMES_MET_SHOULDRA] > 0) {
+                outputText("You would beg to differ... you happen to know one actually...\n\n");
+                outputText("\"<i>...Have you been spending too much time out in the sun, [name]?</i>\"  Urta's the one who said it, but Katherine nods her head in agreement, looking just as concerned that you’ve lost it.\n\n");
+                outputText("You just shrug... telling them that if they don’t believe you, maybe you should take them to meet her someday?\n\n");
+                outputText("\"<i>...Yeah, maybe.</i>\"  Is the again-mutual sentiment of both herms.");
+            }
+            else {
+                outputText("You just snicker.");
+            }
 			outputText("You suggest that Urta just open the gate so the three of you can get in and get started... if Urta says the building won’t collapse, then you trust her... and Kath should too.\n\n");
 			outputText("Urta huffs and, trying to salve her wounded dignity, removes a key from a belt pouch, opening the padlock and then pulling the doors open before heading inside, leaving you and Kath to follow.\n\n");
 			outputText("The interior is, much as Urta promised, in far better condition than the exterior.  It’s a large and mostly empty space; a small kitchen in one corner, with a large table, some seats and a few bedrolls close by, an assortment of training dummies scattered around the periphery of the single room that dominates the building, and what looks like a maze built out of translucent glass panels.\n\n");

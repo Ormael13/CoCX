@@ -6,7 +6,7 @@ import classes.EventParser;
 import classes.GlobalFlags.kFLAGS;
 import classes.PerkLib;
 import classes.PregnancyStore;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 import classes.StatusEffects;
 import classes.Scenes.Dungeons.Factory.IncubusMechanic;
 import classes.Scenes.SceneLib;
@@ -23,8 +23,7 @@ import classes.Scenes.SceneLib;
 			
 		}
 
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		
+				
 		// There's nothing to track if you just enter the Incubus' room in D1 and didn't approach him.
 		// IF you approach him, then we can track that (either you fight, or you talk and give him an item)
 		private function metIncubusMechanicInD1():Boolean
@@ -694,7 +693,7 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 		private function maleLossToMechanicIII():void {
 			clearOutput();
 			if (player.isAlraune()) {
-				uniquuuesexscene.AlrauneDungeonBadEnd();
+				SceneLib.uniqueSexScene.AlrauneDungeonBadEnd();
 			} else {
 				outputText("The champion finally got to cum once Lethice had her turn, but by that point, pussy was all " + player.mf("he", "she") + " could think about. Release came more frequently with the demon queen's permission. It didn't really matter, though. The champion was addicted to riding on the edge of climax, broken into nothing more than a demonic vibrator.");
 
@@ -707,7 +706,7 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 		{
 			clearOutput();
 			if (player.isAlraune()) {
-				uniquuuesexscene.AlrauneDungeonBadEnd();
+				SceneLib.uniqueSexScene.AlrauneDungeonBadEnd();
 			} else {
 				//Get turned into girl-lube pot.
 				//Genderless Lust Loss

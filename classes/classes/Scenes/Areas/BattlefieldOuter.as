@@ -30,6 +30,14 @@ use namespace CoC;
 				partsofTwinGrakaturd();
 				return;
 			}*/
+			//Tyrania
+			if (rand(3) == 0 && player.level >= 45 && TyrantiaFollower.TyrantiaFollowerStage < 5 && !TyrantiaFollower.TyraniaIsRemovedFromThewGame) {
+				if (TyrantiaFollower.TyrantiaFollowerStage > 2) SceneLib.tyrania.repeatEncounterBattlefield();
+				else if (TyrantiaFollower.TyrantiaAffectionMeter > 40 && TyrantiaFollower.TyrantiaFollowerStage > 1) SceneLib.tyrania.encounterBattlefieldAfter40Affection();
+				else if (TyrantiaFollower.TyrantiaFollowerStage > 0) SceneLib.tyrania.repeatEncounterBattlefield();
+				else SceneLib.tyrania.firstEncounter();
+				return;
+			}
 			//Helia monogamy fucks
 			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !SceneLib.helFollower.followerHel()) {
 				SceneLib.helScene.helSexualAmbush();
@@ -48,18 +56,8 @@ use namespace CoC;
 				    SceneLib.dianaScene.repeatEnc();
 				return;
 			}
-			//Tyrania
-			if (rand(5) == 0 && (player.level >= 45)) {
-				SceneLib.tyrania.firstEncounter();
-				return;
-			}
-			if (rand(5) == 0 && TyrantiaFollower.TyrantiaFollowerStage == 1) {
-				if (TyrantiaFollower.TyraniaPostFinalKissScene) SceneLib.tyrania.encounterBattlefieldAfterFinalKiss();
-				else SceneLib.tyrania.repeatEncounterBattlefield();
-				return;
-			}
 			//Ted
-			if (flags[kFLAGS.TED_LVL_UP] >= 1 && flags[kFLAGS.TED_LVL_UP] < 4 && !player.hasStatusEffect(StatusEffects.TedOff) && player.statusEffectv1(StatusEffects.CampSparingNpcsTimers4) < 1 && rand(10) == 0) {
+			if (flags[kFLAGS.TED_LVL_UP] >= 1 && flags[kFLAGS.TED_LVL_UP] < 2 && !player.hasStatusEffect(StatusEffects.TedOff) && player.statusEffectv1(StatusEffects.CampSparingNpcsTimers4) < 1 && rand(10) == 0) {
 				SceneLib.tedScene.introPostHiddenCave();
 				return;
 			}

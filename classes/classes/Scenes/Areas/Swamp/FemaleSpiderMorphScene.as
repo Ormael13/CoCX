@@ -7,14 +7,13 @@ import classes.*;
 import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInterface
 	{
 
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		public var pregnancy:PregnancyStore;
+				public var pregnancy:PregnancyStore;
 
 		public function FemaleSpiderMorphScene()
 		{
@@ -118,7 +117,10 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 			}
 			//*Try to Talk - Aggressive Variant
 			else {
-				outputText("You hold your hands up non-threateningly and ask the spider-girl why she's trying to sneak up on you.\n\n");
+				outputText("You hold your hands up non-threateningly and ask the spider-girl why she's trying to sneak up on you. " +
+						"However, she instead launches a web at your face, giving her enough time to move to a better position.\n");
+				if (player.cor >= 50) outputText("You grin, and likewise prepare to knock some sense into her.");	//Perhaps this should check wrath instead....
+				else outputText("You sigh, and prepare for combat as you wonder why everyone's first instinct is just to fight.");
 				//(Start combat and immediately call a web attack)
 				var femaleSpiderMorph:FemaleSpiderMorph = new FemaleSpiderMorph();
 				startCombat(femaleSpiderMorph);
@@ -491,15 +493,14 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 				var analFuck:Function =null;
 				if (player.hasVagina()) scissor = fSpiderMorphRape;
 				var temp3:Function =null;
-				if (uniquuuesexscene.pcCanUseUniqueSexScenev2(true, null) > 0) temp3 = curry(uniquuuesexscene.pcCanUseUniqueSexScenev2, false, defeatASpiderBitch);
-				//if (player.pcCanUseUniqueSexScene()) temp3 = curry(uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 40);
 				if (player.hasCock()) {
 					if (player.cockThatFits(monster.vaginalCapacity()) != -1) pussyFuck = fSpiderMorphRapeDude;
 					else outputText("  <b>You don't have a dick small enough to fuck her vagina.</b>");
 					if (player.cockThatFits(monster.analCapacity()) != -1) analFuck = evilSpiderGirlVictoryAnal;
 					else outputText("  <b>Her ass is too tight for you to fit inside.</b>");
 				}
-				simpleChoices("Fuck Ass", analFuck, "Fuck Pussy", pussyFuck, "Scissor", scissor, "U. Sex Scenes", temp3, "Leave", cleanupAfterCombat);
+				simpleChoices("Fuck Ass", analFuck, "Fuck Pussy", pussyFuck, "Scissor", scissor, "", null, "Leave", cleanupAfterCombat);
+                SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatASpiderBitch);
 			}
 			else cleanupAfterCombat();
 		}

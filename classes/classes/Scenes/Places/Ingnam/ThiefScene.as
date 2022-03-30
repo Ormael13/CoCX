@@ -13,7 +13,7 @@ package classes.Scenes.Places.Ingnam
 		
 		public function encounterThief():void {
 			clearOutput();
-			outputText("You wander the village for Ingnam until you feel something pressing against your shoulder and you look around to see the thief. \"<i>Your money or your life,</i>\" he demands.");
+			outputText("You wander the village of Ingnam until you feel something pressing against your shoulder and you look around to see the thief. \"<i>Your money or your life,</i>\" he demands.");
 			menu();
 			addButton(0, "Fight", startCombatImmediate, new Thief);
 			addButton(1, "Give Gems", giveGems);

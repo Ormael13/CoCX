@@ -5,13 +5,12 @@ import classes.BodyParts.Face;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.NPCs.JojoScene;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 public class GoblinElderScene extends BaseContent
 	{
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		
+				
 		public function GoblinElderScene()
 		{
 		}
@@ -313,9 +312,8 @@ public class GoblinElderScene extends BaseContent
 				if (player.hasVagina()) addButton(7, "Pussies", cuntFuck);
 				if (player.canOvipositSpider()) addButton(8, "Lay Eggs", eggs);
 				addButton(14, "Leave", cleanupAfterCombat);
-				uniquuuesexscene.pcUSSPreChecksV2(goblinElderRapeIntro2);
-				//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(46);
-			}
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(goblinElderRapeIntro2);
+							}
 			else if (feeder!=null || eggs!=null) {
 				outputText("\n\n<b>You aren't horny enough to rape her, but ");
 				if (feeder!=null) outputText("your nipples ache with the desire to feed her your milk.  Do you feed her milk or leave?</b>");
@@ -324,9 +322,8 @@ public class GoblinElderScene extends BaseContent
 				if (player.hasStatusEffect(StatusEffects.Feeder)) addButton(5, "Breastfeed", feeder);
 				if (player.canOvipositSpider()) addButton(8, "Lay Eggs", eggs);
 				addButton(14, "Leave", cleanupAfterCombat);
-				uniquuuesexscene.pcUSSPreChecksV2(goblinElderRapeIntro2);
-				//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(46);
-			}
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(goblinElderRapeIntro2);
+							}
 			else 
 			{
 				cleanupAfterCombat();
@@ -387,9 +384,8 @@ public class GoblinElderScene extends BaseContent
 				if (player.hasVagina()) addButton(7, "Pussies", cuntFuck);
 				if (player.canOvipositSpider()) addButton(8, "Lay Eggs", eggs);
 				addButton(14, "Leave", cleanupAfterCombat);
-				uniquuuesexscene.pcUSSPreChecksV2(goblinElderRapeIntro2);
-				//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(46);
-			}
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(goblinElderRapeIntro2);
+							}
 			else if (feeder!=null || eggs!=null) {
 				outputText("\n\n<b>You aren't horny enough to rape her, but ");
 				if (feeder!=null) outputText("your nipples ache with the desire to feed her your milk.  Do you feed her milk or leave?</b>");
@@ -398,9 +394,8 @@ public class GoblinElderScene extends BaseContent
 				if (player.hasStatusEffect(StatusEffects.Feeder)) addButton(5, "Breastfeed", feeder);
 				if (player.canOvipositSpider()) addButton(8, "Lay Eggs", eggs);
 				addButton(14, "Leave", cleanupAfterCombat);
-				uniquuuesexscene.pcUSSPreChecksV2(goblinElderRapeIntro2);
-				//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(46);
-			}
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(goblinElderRapeIntro2);
+							}
 			else 
 			{
 				cleanupAfterCombat();

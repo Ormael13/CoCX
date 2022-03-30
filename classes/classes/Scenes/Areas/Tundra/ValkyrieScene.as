@@ -3,12 +3,11 @@ package classes.Scenes.Areas.Tundra
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.UniqueSexScenes;
+	import classes.Scenes.SceneLib;
 	
 	public class ValkyrieScene extends BaseContent
 	{
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		
+				
 		public function ValkyrieScene() 
 		{
 		}
@@ -72,9 +71,8 @@ package classes.Scenes.Areas.Tundra
 					addButton(3, "Scissor", valkyrieScissor);
 				}
 				addButton(14, "Leave", cleanupAfterCombat);
-				uniquuuesexscene.pcUSSPreChecksV2(winAgainstValkyrie);
-				//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(42);
-			}
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(winAgainstValkyrie);
+							}
 			else {
 				cleanupAfterCombat();
 			}

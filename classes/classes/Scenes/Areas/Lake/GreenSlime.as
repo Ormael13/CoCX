@@ -7,22 +7,19 @@ import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Dungeons.RiverDungeon;
 import classes.Scenes.SceneLib;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 public class GreenSlime extends Monster
 	{
 		public var floor1:RiverDungeon = new RiverDungeon();
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		
+				
 		override public function defeated(hpVictory:Boolean):void
 		{
 			outputText("You smile in satisfaction as the " + short + " collapses, unable to continue fighting.");
 			if (player.hasStatusEffect(StatusEffects.RiverDungeonA)) SceneLib.combat.cleanupAfterCombatImpl();//doNext(SceneLib.combat.cleanupAfterCombatImpl)
 			else {
 				var temp3:Function = null;
-				if (uniquuuesexscene.pcCanUseUniqueSexScenev2(true, null) > 0) temp3 = curry(uniquuuesexscene.pcCanUseUniqueSexScenev2, false, SceneLib.lake.greenSlimeScene.defeatGS);
-				//if (player.pcCanUseUniqueSexScene()) temp3 = curry(uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 31);
 				//Boobfeed.
 				if (player.hasStatusEffect(StatusEffects.Feeder) && flags[kFLAGS.SFW_MODE] <= 0) {
 					//Eligable to rape
@@ -39,7 +36,8 @@ public class GreenSlime extends Monster
 				//Not a breastfeeder
 				else if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 					outputText("  Sadly you realize your own needs have not been met.  Of course, you could always play with the poor thing... Do you rape it?");
-					EngineCore.simpleChoices("Rape",SceneLib.lake.greenSlimeScene.slimeVictoryRape,"",null,"",null,"U. Sex Scenes",temp3,"Leave",SceneLib.combat.cleanupAfterCombatImpl);
+					EngineCore.simpleChoices("Rape",SceneLib.lake.greenSlimeScene.slimeVictoryRape,"",null,"",null,"",null,"Leave",SceneLib.combat.cleanupAfterCombatImpl);
+                    SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeated);
 				}
 				else SceneLib.combat.cleanupAfterCombatImpl();//doNext(SceneLib.combat.cleanupAfterCombatImpl)
 			}

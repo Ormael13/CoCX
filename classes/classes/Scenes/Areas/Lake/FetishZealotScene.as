@@ -7,15 +7,14 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.SceneLib;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 import classes.Items.Armors.LustyMaidensArmor;
 import classes.Items.Armors.SuccubusArmor;
 import classes.display.SpriteDb;
 
 public class FetishZealotScene extends AbstractLakeContent
 	{
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		
+				
 		public function FetishZealotScene()
 		{
 		}
@@ -272,9 +271,8 @@ public class FetishZealotScene extends AbstractLakeContent
 				}
 				if (Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_ISMB) addButton(2, "Mindbreak", mindbreakMaleCultist).hint("Toy with the cultist brain.");
 				addButton(14, "Leave", cleanupAfterCombat);
-				uniquuuesexscene.pcUSSPreChecksV2(zealotDefeated);
-				//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(29);
-			}
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(zealotDefeated);
+							}
 			else cleanupAfterCombat();
 		}
 

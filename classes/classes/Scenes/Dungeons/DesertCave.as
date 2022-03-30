@@ -8,7 +8,7 @@ import classes.Scenes.Areas.Desert.CumWitch;
 import classes.Scenes.Dungeons.DesertCave.*;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.SceneLib;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 public class DesertCave extends DungeonAbstractContent
@@ -30,8 +30,7 @@ public class DesertCave extends DungeonAbstractContent
 		private static const DUNGEON_WITCH_SACRIFICIAL_ALTAR:int	= 37;
 		private static const DUNGEON_WITCH_THRONE_ROOM:int			= 38;
 		
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		
+				
 		public function DesertCave() {}
 		
 		// SANURA_DISABLED:int = 833;
@@ -214,7 +213,7 @@ public class DesertCave extends DungeonAbstractContent
 			}
 			if (player.isAlraune())
 			{
-				uniquuuesexscene.AlrauneDungeonBadEnd();
+				SceneLib.uniqueSexScene.AlrauneDungeonBadEnd();
 			}
 			else {
 				//[Bad end for small cocks]
@@ -315,7 +314,7 @@ public class DesertCave extends DungeonAbstractContent
 		public function sandWitchMobBadEnd():void {
 			clearOutput();
 			if (player.isAlraune()) {
-				uniquuuesexscene.AlrauneDungeonBadEnd();
+				SceneLib.uniqueSexScene.AlrauneDungeonBadEnd();
 			} else {
 				outputText("When your mind finally starts straightening things out, you wake up on a bed with your ass, cunt, and more sore than you can remember.  You rub the achy bits as you notice a cloaked figured with a wide-brimmed pointy hat sitting by your bedside, reading a white book.  When the figure sees you've awaken from your slumber, she places a bookmark in the volume and sets it on the nearby nightstand.");
 				outputText("\n\n\"<i>Good morning sister, did you have a nice nap?</i>\"");
@@ -437,7 +436,7 @@ public class DesertCave extends DungeonAbstractContent
 		public function memeberedFolksFindTrueWuv3():void {
 			clearOutput();
 			if (player.isAlraune()) {
-				uniquuuesexscene.AlrauneDungeonBadEnd();
+				SceneLib.uniqueSexScene.AlrauneDungeonBadEnd();
 			} else {
 				outputText("You wake from your stupor in a room full of sex toys, some of them being used by the busty witches.  It doesn't take long for one of them to see your state, offer you food and a drink, and present her sopping cunts to you.  You note that these women are both pregnant, but their libidos have obviously gone through the roof.  Thrusting inside her immediately, you gorge yourself on the proffered nourishment and do your duty as a captive love-slave, pleasing their holes again and again until they're so full of your cum that it slops from their lips in lewd waves with every virile ejaculation.");
 				outputText("\n\nSometimes, when you seem unhappy, they let you spend the night with Ophelia.  She's as attentive and caring as when you first met, even if she has grown larger and more powerful.  Her sweet personality shines through despite her inhuman appearance, and she'll tenderly milk you all night long while the two of you share stories of your lives.");
@@ -711,7 +710,7 @@ public class DesertCave extends DungeonAbstractContent
 		public function chicksLoseToSandWitchesBadEndFinale():void {
 			clearOutput();
 			if (player.isAlraune()) {
-				uniquuuesexscene.AlrauneDungeonBadEnd();
+				SceneLib.uniqueSexScene.AlrauneDungeonBadEnd();
 			} else {
 				outputText("<b>Some time later...</b>");
 
@@ -849,7 +848,7 @@ public class DesertCave extends DungeonAbstractContent
 		public function cumPumpVolumeThree():void {
 			clearOutput();
 			if (player.isAlraune()) {
-				uniquuuesexscene.AlrauneDungeonBadEnd();
+				SceneLib.uniqueSexScene.AlrauneDungeonBadEnd();
 			} else {
 				outputText("With the champion brainwashed into a little more than a loyal cum-pump for the sand witches, they grow in number and strength with alarming speed.  In the space of eight years, the desert is transformed into a verdant forest.  For better or for worse, the witches finally rival the demons in power.  They spread their influence wider, eventually ");
 				if(flags[kFLAGS.FACTORY_SHUTDOWN] == 2) outputText("destroying");
@@ -1139,9 +1138,8 @@ public class DesertCave extends DungeonAbstractContent
 			if(player.tentacleCocks() >= 3 || player.stamenCocks() > 2) addButton(2,"Tentacles",tentacleVictoryGangbangCumWitch).hint("Fuck the Cum Witch with your tentacle cocks.");
 			//Female Victory Sex
 			if(player.hasVagina()) addButton(3,"Ladysex",ladyVictorySex).hint("Ride the Cum Witch's cock until she cums!");
-			uniquuuesexscene.pcUSSPreChecksV2(cumWitchDefeated);
-			//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(44);
-			if (CoC.instance.inCombat) {
+			SceneLib.uniqueSexScene.pcUSSPreChecksV2(cumWitchDefeated);
+						if (CoC.instance.inCombat) {
                 if(monster.HP >= 1) addButton(14,"Leave",declineSandWitch);
 				else addButton(14,"Leave",cleanupAfterCombat);
 			}
@@ -2723,7 +2721,7 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 		public function menLoseToQueenMotherVolI():void {
 			clearOutput();
 			if (player.isAlraune()) {
-				uniquuuesexscene.AlrauneDungeonBadEnd();
+				SceneLib.uniqueSexScene.AlrauneDungeonBadEnd();
 			} else {
 				outputText("The champion woke to a body changed.  " + player.mf("He", "She") + " now looked every bit the mirror image of the Cum Witch - a thick, girthy cock, two swollen balls, a pair of pendulous breasts, and skin as dark as the blackest night.  She had become one of them, a futanari witch with an insatiable libido.  As best as she could remember, she had been born a scant ten years earlier, and aged to maturity in five.  She volunteered to be a cum witch when the call went out and beat out over two dozen of her lusty sisters for the vaunted position.  Now, the elder Cum Witch was her best friend, and the two gleefully spent their days dick-deep in double-cunts, knocking up their sisters with reckless abandon.  In their free time, they studied spells and practiced stuffing each other with increasingly large seminal deposits.");
 
@@ -2827,7 +2825,7 @@ if (CoC.instance.inCombat) cleanupAfterCombat();
 		public function sandMotherBadEndsLadiesEpilogue():void {
 			clearOutput();
 			if (player.isAlraune()) {
-				uniquuuesexscene.AlrauneDungeonBadEnd();
+				SceneLib.uniqueSexScene.AlrauneDungeonBadEnd();
 			} else {
 				outputText("The Champion awoke to a body changed. " + player.mf("His", "Her") + " body had been transformed in to that of a Sand Witch's.");
 				//if player had six breasts

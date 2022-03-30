@@ -5,13 +5,12 @@ package classes.Scenes.Areas.Bog
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.UniqueSexScenes;
+	import classes.Scenes.SceneLib;
     import classes.display.SpriteDb;
 
 	public class ChameleonGirlScene extends BaseContent
 	{
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		
+				
 		public function ChameleonGirlScene()
 		{
 		}
@@ -43,7 +42,6 @@ package classes.Scenes.Areas.Bog
 		public function encounterChameleon():void
 		{
 			clearOutput();
-			startCombat(new ChameleonGirl());
 			spriteSelect(SpriteDb.s_chameleon);
 			if (flags[kFLAGS.TIMES_MET_CHAMELEON] == 0) {
 				outputText("You work your way through the dense foliage of the bog, pushing aside branches and slogging through the thick mud in search of something new.  Feeling exhausted, you slow down and look for a place to rest; finding a small clearing with shallow water no more than a couple inches deep and firmer ground, you sit back against a tree to catch your breath.  You're so soaked by now that you hardly notice the murky water beneath you and the slick mud on the trunk seeping into your [armor].  You lean your head back and close your eyes, enjoying a few moments of peace.");
@@ -64,6 +62,7 @@ package classes.Scenes.Areas.Bog
 				outputText("\n\nA sudden scrape sounds behind you!  You spin around in time to see the familiar shape of a chameleon girl peeling off the trees.  She approaches you with a menacing glare in her eyes, growling \"<i>This is my bog!  Get out now or... or face the consequences!</i>\"  You raise your [weapon] and prepare to defend yourself.");
 			}
 			flags[kFLAGS.TIMES_MET_CHAMELEON]++;
+			startCombat(new ChameleonGirl());
 			doNext(playerMenu);
 		}//LOSS SCENES (Intro) (Z edited)
 		public function loseToChameleonGirl():void
@@ -201,9 +200,8 @@ package classes.Scenes.Areas.Bog
 			if (player.gender == 3) addButton(2, "Herm Style", fuckDatChameleonAsACoolGuyGirlHerm);
 			if ((player.hasItem(consumables.SUCMILK) || player.hasItem(consumables.P_S_MLK)) && player.hasCock()) addButton(3, "Use Item", useAnItemOnTheChamcham);
 			else if (player.hasItem(consumables.SENSDRF) && (player.hasItem(consumables.L_DRAFT) || player.hasItem(consumables.F_DRAFT))) addButton(3, "Use Item", useAnItemOnTheChamcham);
-			uniquuuesexscene.pcUSSPreChecksV2(defeatChameleonGirl);
-			//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(7);
-			addButton(14, "Leave", cleanupAfterCombat);
+			SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatChameleonGirl);
+						addButton(14, "Leave", cleanupAfterCombat);
 		}
 
 		//-Herm Victory (Z edited)

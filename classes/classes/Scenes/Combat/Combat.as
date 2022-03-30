@@ -351,6 +351,10 @@ public class Combat extends BaseContent {
         return magic.spellCostBlackImpl(mod);
     }
 
+    public function spellCostGrey(mod:Number):Number {
+        return magic.spellCostGreyImpl(mod);
+    }
+
     public function spellCostBlood(mod:Number):Number {
         return magic.spellCostBloodImpl(mod);
     }
@@ -948,6 +952,7 @@ public class Combat extends BaseContent {
         isBowDamageMDO = false;
         flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] = 0;
         if (newRound) {
+            flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_0_ACTION] = 0;
             flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_1_ACTION] = 0;
             flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_2_ACTION] = 0;
             flags[kFLAGS.IN_COMBAT_PLAYER_COMPANION_3_ACTION] = 0;
@@ -6416,7 +6421,24 @@ public class Combat extends BaseContent {
                     CombatAbilities.LightningBolt.perform();
                 }
                 if (flags[kFLAGS.ELEMENTAL_MELEE] == 4 && CombatAbilities.DarknessShard.isUsable) {
+                    outputText("\n\n");
                     CombatAbilities.DarknessShard.perform();
+                }
+                if (flags[kFLAGS.ELEMENTAL_MELEE] == 5 && CombatAbilities.WaterBall.isUsable) {
+                    outputText("\n\n");
+                    CombatAbilities.WaterBall.perform();
+                }
+                if (flags[kFLAGS.ELEMENTAL_MELEE] == 6 && CombatAbilities.WindBullet.isUsable) {
+                    outputText("\n\n");
+                    CombatAbilities.WindBullet.perform();
+                }
+                if (flags[kFLAGS.ELEMENTAL_MELEE] == 7 && CombatAbilities.Stalagmite.isUsable) {
+                    outputText("\n\n");
+                    CombatAbilities.Stalagmite.perform();
+                }
+                if (flags[kFLAGS.ELEMENTAL_MELEE] == 8 && CombatAbilities.AcidSpray.isUsable) {
+                    outputText("\n\n");
+                    CombatAbilities.AcidSpray.perform();
                 }
             }
             if (player.hasPerk(PerkLib.LifeLeech) && player.isFistOrFistWeapon()) {
@@ -6502,7 +6524,7 @@ public class Combat extends BaseContent {
             }
         } else { //MISSED THE TARGET THUS DAMAGE = 0;
             if (monster is DisplacerBeast) outputText("The displacer beast teleports, dodging your attack.\n");
-            else outputText("You swing your [weapon] ferociously, confident that you can strike a crushing blow. In the end you fails to actually hit anything.\n");
+            else outputText("You swing your [weapon] ferociously, confident that you can strike a crushing blow. In the end, you fail to actually hit anything.\n");
         }
 
         if (monster.HP <= monster.minHP()) {
@@ -8640,9 +8662,9 @@ public class Combat extends BaseContent {
 
     public static const USEMANA_NORMAL:int = 0;
     public static const USEMANA_MAGIC:int = 1;
-    //public static const USEMANA_PHYSICAL:int = 2;
+    public static const USEMANA_GREY:int = 2;
     public static const USEMANA_MAGIC_NOBM:int = 3;
-    //public static const USEMANA_BOW:int = 4;
+    public static const USEMANA_GREY_NOBM:int = 4;
     public static const USEMANA_WHITE:int = 5;
     public static const USEMANA_BLACK:int = 6;
     public static const USEMANA_WHITE_NOBM:int = 7;
@@ -8659,6 +8681,10 @@ public class Combat extends BaseContent {
             case USEMANA_MAGIC_NOBM:
                 mod = spellCost(mod);
                 break;
+			case USEMANA_GREY:
+			case USEMANA_GREY_NOBM:
+				mod = spellCostGrey(mod);
+				break;
             case USEMANA_WHITE:
             case USEMANA_WHITE_NOBM:
                 mod = spellCostWhite(mod);
@@ -8714,6 +8740,7 @@ public class Combat extends BaseContent {
 		if (player.hasPerk(PerkLib.GreyMage)) multi += 0.5;
         if (player.hasPerk(PerkLib.GreyArchmage)) multi += 0.75;
 		if (player.hasPerk(PerkLib.GrandGreyArchmage)) multi += 1;
+		if (player.hasPerk(PerkLib.GrandGreyArchmage2ndCircle)) multi += 1.5;
         if (player.hasPerk(PerkLib.ManaAffinityI)) multi += 0.25;
         if (player.hasPerk(PerkLib.ManaAffinityII)) multi += 0.25;
         if (player.hasPerk(PerkLib.ManaAffinityIII)) multi += 0.25;
@@ -11079,6 +11106,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(MutationsLib.FeyArcaneBloodstream)) manaregen += 5;
         if (player.hasPerk(MutationsLib.FeyArcaneBloodstream)) manaregen += 10;
         if (player.hasPerk(MutationsLib.FeyArcaneBloodstream)) manaregen += 15;
+		if (player.hasPerk(MutationsLib.KitsuneThyroidGlandPrimitive)) manaregen += 20;
         if (player.hasPerk(MutationsLib.KitsuneThyroidGlandEvolved) && player.hasPerk(PerkLib.StarSphereMastery)) manaregen += (player.perkv1(PerkLib.StarSphereMastery) * 2);
         if (player.miscJewelry == miscjewelries.DMAGETO || player.miscJewelry2 == miscjewelries.DMAGETO) manaregen += Math.round(player.maxMana()*0.02);
         return manaregen;
@@ -14206,7 +14234,15 @@ public class Combat extends BaseContent {
 		if (monster.short == "training dummy") {
 			outputText("As you retreat the training dummy just stands there in it usual spot. ");
 		}
-		else if (player.canFly()) outputText("Gritting your teeth with effort, you beat your wings quickly and lift off!  ");
+		else if (player.canFly()) {
+            if(player.wings.type != Wings.ETHEREAL || player.wings.type != Wings.LEVITATION || player.wings.type != Wings.THUNDEROUS_AURA){
+                outputText("Gritting your teeth with effort, you beat your wings quickly and lift off!  ");
+            }
+            else{
+                outputText("You leap into the air, and hover in the sky!  ");
+            }
+        }
+
         //Nonflying PCs
         else {
             //In prison!
@@ -14441,6 +14477,7 @@ public class Combat extends BaseContent {
     }
 	public function onlyZenjiRunnawayTrain():Boolean {
 		var partySize:Number = 1;
+		if (flags[kFLAGS.PLAYER_COMPANION_0] != "") partySize += 1;
 		if (flags[kFLAGS.PLAYER_COMPANION_1] != "") partySize += 1;
 		if (flags[kFLAGS.PLAYER_COMPANION_2] != "") partySize += 1;
 		if (flags[kFLAGS.PLAYER_COMPANION_3] != "") partySize += 1;
@@ -15222,6 +15259,14 @@ public class Combat extends BaseContent {
 		menu();
 		addButton(0, "Next", combatMenu, false);
 	}
+	
+	public function StealthModeMechCost():Number {
+		var SMMC:Number = 100;
+		if (player.keyItemv1("HB Stealth System") >= 2) SMMC -= 20;
+		//if (player.keyItemv1("HB Stealth System") >= 3) SMMC -= 20;
+		//SMMC -= 10;
+		return SMMC;
+	}
 
 	public function fireDamageBoostedByDao():Number {
 		var boostF:Number = 1;
@@ -15739,6 +15784,10 @@ public class Combat extends BaseContent {
         if (flags[kFLAGS.PLAYER_COMPANION_1] == "Neisa") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerNeisa);
         if (flags[kFLAGS.PLAYER_COMPANION_2] == "Neisa") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerNeisa);
         if (flags[kFLAGS.PLAYER_COMPANION_3] == "Neisa") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerNeisa);
+        if (flags[kFLAGS.PLAYER_COMPANION_0] == "Tyrantia") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerTyrantia);
+        if (flags[kFLAGS.PLAYER_COMPANION_1] == "Tyrantia") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerTyrantia);
+        if (flags[kFLAGS.PLAYER_COMPANION_2] == "Tyrantia") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerTyrantia);
+        if (flags[kFLAGS.PLAYER_COMPANION_3] == "Tyrantia") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerTyrantia);
         if (flags[kFLAGS.PLAYER_COMPANION_1] == "Zenji") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerZenji);
         if (flags[kFLAGS.PLAYER_COMPANION_2] == "Zenji") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerZenji);
         if (flags[kFLAGS.PLAYER_COMPANION_3] == "Zenji") ghostRealStrCompanion += player.statusEffectv1(StatusEffects.CombatFollowerZenji);
@@ -15791,6 +15840,10 @@ public class Combat extends BaseContent {
         if (flags[kFLAGS.PLAYER_COMPANION_1] == "Alvina") ghostRealInteCompanion += player.statusEffectv2(StatusEffects.CombatFollowerAlvina);
         if (flags[kFLAGS.PLAYER_COMPANION_2] == "Alvina") ghostRealInteCompanion += player.statusEffectv2(StatusEffects.CombatFollowerAlvina);
         if (flags[kFLAGS.PLAYER_COMPANION_3] == "Alvina") ghostRealInteCompanion += player.statusEffectv2(StatusEffects.CombatFollowerAlvina);
+        if (flags[kFLAGS.PLAYER_COMPANION_0] == "Tyrantia") ghostRealInteCompanion += player.statusEffectv3(StatusEffects.CombatFollowerTyrantia);
+        if (flags[kFLAGS.PLAYER_COMPANION_1] == "Tyrantia") ghostRealInteCompanion += player.statusEffectv3(StatusEffects.CombatFollowerTyrantia);
+        if (flags[kFLAGS.PLAYER_COMPANION_2] == "Tyrantia") ghostRealInteCompanion += player.statusEffectv3(StatusEffects.CombatFollowerTyrantia);
+        if (flags[kFLAGS.PLAYER_COMPANION_3] == "Tyrantia") ghostRealInteCompanion += player.statusEffectv3(StatusEffects.CombatFollowerTyrantia);
         return ghostRealInteCompanion;
     }
 

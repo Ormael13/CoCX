@@ -15,16 +15,15 @@ import classes.Scenes.Areas.DefiledRavine.CowSuccubus;
 import classes.Scenes.Areas.DefiledRavine.MinoIncubus;
 import classes.Scenes.Camp.CampMakeWinions;
 import classes.Scenes.Dungeons.Factory;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 
 //use namespace CoC;
 	
 	public class DemonScene extends BaseContent
 	{
 		public var FactoryScene:Factory = new Factory();
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
 		public var campwinions:CampMakeWinions = new CampMakeWinions();
-		
+                
 		public function DemonScene() 
 		{}
 		
@@ -46,8 +45,7 @@ import classes.Scenes.UniqueSexScenes;
 				if (player.armor == armors.S_ARMOR) addButton(7, "B.Titfuck", (player.armor as SuccubusArmor).succubusPaizuri);
 				else addButton(7, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
 			}
-			uniquuuesexscene.pcUSSPreChecksV2(defeatMinoIncubus);
-			//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(2);
+			SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatMinoIncubus);
 			addButton (14, "Leave", cleanupAfterCombat);
 		}
 		
@@ -84,8 +82,7 @@ import classes.Scenes.UniqueSexScenes;
 				}
 			}
 			if (monster.HP < 1) addButton (5, "Kill Him", killDemon);
-			uniquuuesexscene.pcUSSPreChecksV2(defeatIncubus);
-			//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(3);
+			SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatIncubus);
 			addButton (14, "Leave", cleanupAfterCombat);
 		}
 		
@@ -339,8 +336,7 @@ import classes.Scenes.UniqueSexScenes;
 				}
 			}
 			if (monster.HP < 1) addButton (5, "Kill Her", killDemon);
-			uniquuuesexscene.pcUSSPreChecksV2(defeatOmnibus);
-			//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(4);
+			SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatOmnibus);
 			addButton (14, "Leave", cleanupAfterCombat);
 		}
 		
@@ -588,8 +584,7 @@ import classes.Scenes.UniqueSexScenes;
 			menu();
 			outputText("You smile in satisfaction as the cow succubus collapses, unable to continue fighting.");
 			if (monster.HP < 1) addButton (5, "Kill Her", killDemon);
-			//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(5);
-			uniquuuesexscene.pcUSSPreChecksV2(defeatCowSuccubus);
+			SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatCowSuccubus);
 			addButton (14, "Leave", cleanupAfterCombat);
 		}
 		
@@ -617,11 +612,9 @@ import classes.Scenes.UniqueSexScenes;
 					addButton (0, "M. Fuck", SuccubusGetsRapedByMale);
 					addButton (1, "F. Fuck", SuccubusGetsRapedByFemale);
 				}
-				//if (player.lowerBody == LowerBody.PLANT_FLOWER) addButton(2, "Seeding", uniquuuesexscene.alrauneSeedingScene);
 			}
 			if (monster.HP < 1) addButton (5, "Kill Her", killDemon);
-			uniquuuesexscene.pcUSSPreChecksV2(defeatSuccubus);
-			//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(6);
+			SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatSuccubus);
 			addButton (14, "Leave", cleanupAfterCombat);
 		}
 		

@@ -188,6 +188,8 @@ public class SceneLib {
     public static var konstantin:Konstantin = new Konstantin();
 
     public static var latexGirl:LatexGirl = new LatexGirl();
+    
+    public static var lily:LilyFollower = new LilyFollower();
 
     public static var lunaFollower:LunaFollower = new LunaFollower();
 
@@ -304,6 +306,8 @@ public class SceneLib {
 	public static var adventureGuild:AdventurerGuild = new AdventurerGuild();
 	
 	public static var fleshGolemScenes:FleshGolemScene = new FleshGolemScene();
+
+    public static var uniqueSexScene:UniqueSexScenes = new UniqueSexScenes();
 
     public function SceneLib() {
     }

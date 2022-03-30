@@ -120,7 +120,7 @@ public class Ingnam extends BaseContent
 			hideMenus();
 			clearOutput();
 			if (rand(4) == 0) {
-				outputText("You explore the village of Ingnam for a while but you don't find anything intersting.");
+				outputText("You explore the village of Ingnam for a while but you don't find anything interesting.");
 				eachMinuteCount(15);
 				doNext(camp.doCamp);
 			}
@@ -143,7 +143,7 @@ public class Ingnam extends BaseContent
 		
 		public function shopBlacksmith():void {
 			clearOutput();
-			outputText("You enter the armor shop, noting the sign depicting armors. Some armor is proudly displayed on racks. You can hear the sound of hammering although it stops shortly after you enter. The local blacksmith, Ben, comes from the rear door and steps up to the counter and wipes away sweat from his face flushed red by the forge, \"<i>Welcome to my shop. In a need of protection? Or something sharp?</i>\"");
+			outputText("You enter the armor shop, noting the sign depicting armors. Some armor is proudly displayed on racks. You can hear the sound of hammering although it stops shortly after you enter. The local blacksmith, Ben, comes from the rear door, stepping up to the counter as he wipes the sweat from his brow, face red from the heat of his forge. \"<i>Welcome to my shop. Are you in need of protection? Or something sharp?</i>\"");
 			if (flags[kFLAGS.INGNAM_WEAPONSMITH_TALKED] <= 0 && flags[kFLAGS.INGNAM_PROLOGUE_COMPLETE] <= 0) {
 				outputText("\n\n\Before you can get a word in Ben lets out an exasperated sigh \"<i>Ah, just forget about…</i>\"");
 				outputText("\n\nYou crook an eyebrow questioningly at the blacksmith. Ben then realizes his blunder.");
@@ -200,14 +200,14 @@ public class Ingnam extends BaseContent
 		public function shopAlchemist():void {
 			clearOutput();
 			if (flags[kFLAGS.INGNAM_ALCHEMIST_TALKED] <= 0) {
-				outputText("As you approach the stone building the overpowering smell of herbs and plants being brewed hits your nose. The crimson banner over the heavy wooden door indicates that this is where the potions are made. You enter what appears to be the place where the alchemist works on his famed remedies.");
-				outputText("\n\nYou open the door and enter. Despite the establishment being dimly lit by candlelight you can make out the vast multicolored rows of countless potions, elixirs and tonics. Fragrant drying herbs are hanging from the rafters and various strange-looking equipment is set up in a variety of locations in the store.");
+				outputText("As you approach the stone building, the overpowering smell of herbs and plants being brewed hits your nose. The crimson banner over the heavy wooden door indicates that this is where the potions are made. You enter what appears to be the place where the alchemist works on his famed remedies.");
+				outputText("\n\nYou open the door and enter. Despite the establishment being dimly lit by candlelight, you can make out the vast multicolored rows of countless potions, elixirs and tonics. Fragrant drying herbs are hanging from the rafters and various strange-looking equipment is set up in a variety of locations in the store.");
 				outputText("\n\nAn ancient-looking man in a much-singed pair of robes is working on something volatile in the corner until he hears your presence. He stops and shuffles up to the timber counter, drumming it under his stained fingers. \"<i>What can I do for you, young master?</i>\" he says from under his frayed hood.");
 				flags[kFLAGS.INGNAM_ALCHEMIST_TALKED] = 1;
 			}
 			else {
 				outputText("Once again, you return to the alchemist, letting the overpowering smell of herbs and plants being brewed hits your nose.");
-				outputText("\n\nThe alchemist senses your presences and he steps up to the counter and says, \"<i>How may I help you?</i>\"");
+				outputText("\n\nThe alchemist senses your presence as he steps up to the counter before speaking up, \"<i>How may I help you?</i>\"");
 			}
 			outputText("\n\n<b><u>Alchemy shop pricings</u></b>");
 			menu();
@@ -232,7 +232,7 @@ public class Ingnam extends BaseContent
 		
 		public function shopTradingPost():void {
 			clearOutput();
-			outputText("The trading post is one of the larger buildings in the village with its porch covered in barrels filled with pickled goods, preserved delicacies and dried goods from the humble local farm to exotic faraway lands. The interior is packed with crowded shelves that boast a variety of goods, all arranged neatly on shelves.");
+			outputText("The trading post is one of the larger buildings in the village, with its porch covered in barrels filled with pickled goods, preserved delicacies and dried goods, from the humble local farm to exotic faraway lands. The interior is packed with crowded shelves that boast a variety of goods, all arranged neatly on shelves.");
 			outputText("\n\nYou suspect you could buy or sell some imported goods here.");
 			outputText("\n\n<b><u>Trading post pricings</u></b>");
 			menu();
@@ -249,7 +249,7 @@ public class Ingnam extends BaseContent
 		private function sellAtTradingPost(page:int = 1):void {
 			var slot:int;
 			clearOutput();
-			outputText("The trading post is one of the larger buildings in the village with its porch covered in barrels filled with pickled goods, preserved delicacies and dried goods from the humble local farm to exotic faraway lands. The interior is packed with crowded shelves that boast a variety of goods, all arranged neatly on shelves.");
+			outputText("The trading post is one of the larger buildings in the village, with its porch covered in barrels filled with pickled goods, preserved delicacies and dried goods, from the humble local farm to exotic faraway lands. The interior is packed with crowded shelves that boast a variety of goods, all arranged neatly on shelves.");
 			outputText("\n\nYou suspect you could buy or sell some imported goods here.\n\n");
 			menu();
 			var totalItems:int = 0;
@@ -297,7 +297,7 @@ public class Ingnam extends BaseContent
 				else outputText("You hand over " + player.itemSlots[slot].itype.longName + " to trader.  He nervously pulls out " + num2Text(itemValue) + " gems and drops them into your waiting hand.");
 				player.itemSlots[slot].removeOneItem();
 				if (itemValue != 0 && player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for double the amount.");
-				if (itemValue != 0 && player.hasPerk(PerkLib.Greedy) && player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for four time the amount.");
+				if (itemValue != 0 && player.hasPerk(PerkLib.Greedy) && player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for four times the amount.");
 				player.gems += itemValue;
 			}
 			statScreenRefresh();
@@ -317,7 +317,7 @@ public class Ingnam extends BaseContent
 			if (player.hasPerk(PerkLib.TravelingMerchantOutfit)) itemValue *= 2;
 			outputText("You lay out all the items you're carrying on the counter in front of trader.  He examines them all and nods.  Nervously, he pulls out " + num2Text(itemValue) + " gems and drops them into your waiting hand.");
 			if (player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for double the amount.");
-			if (player.hasPerk(PerkLib.Greedy) && player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for four time the amount.");
+			if (player.hasPerk(PerkLib.Greedy) && player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for four times the amount.");
 			player.gems += itemValue;
 			statScreenRefresh();
 			doNext(sellAtTradingPost);
@@ -328,9 +328,9 @@ public class Ingnam extends BaseContent
 			if (flags[kFLAGS.INGNAM_BLACKMARKET_TALKED] <= 0) {
 				outputText("You walk into an alley you swear you have never explored before. You stifle your fear as you walk into the dingy looking alley.");
 				outputText("\n\nUnease creeps over you until you hear a raspy voice whisper from the darkness of the alley. You look around to see a hooded figure skulk from the shadows to approach you.");
-				outputText("\n\n\"<i>Greetings. I know you. You’re going to be the new Champion, right?</i>\" The hooded figure croaks. His face is mostly concealed by the shade of his hood. Slightly unnerved by the prowling figure you tell him that yes, you’re going to be the Champion of Ingnam.");
+				outputText("\n\n\"<i>Greetings. I know you. You’re going to be the new Champion, right?</i>\" The hooded figure croaks. His face is mostly concealed by the shade of his hood. Slightly unnerved by the prowling figure, you tell him that yes, you’re going to be the Champion of Ingnam.");
 				outputText("\n\nHe pulls his hood down, quickly looking for the all-clear and rasps, \"<i>I’ve managed to sneak into the portal at the mountains. There is extraordinary stuff that can transform you! It takes me years of planning as the portal is only open for a short window of time before it closes for the rest of the year.</i>\"");
-				outputText("\n\nWith a skin-crawling chuckle he opens up his coat and shows you the array of goods and says, \"<i>I’ve managed to smuggle these in. They aren’t cheap but I guarantee you, they’re the real deal! See anything you like?</i>\"");
+				outputText("\n\nWith a skin-crawling chuckle, he opens up his coat and shows you the array of goods and says, \"<i>I’ve managed to smuggle these in. They aren’t cheap but I guarantee you, they’re the real deal! See anything you like?</i>\"");
 				flags[kFLAGS.INGNAM_BLACKMARKET_TALKED] = 1;
 			}
 			else {
@@ -412,7 +412,7 @@ public class Ingnam extends BaseContent
 			hideMenus();
 			clearOutput();
 			outputText(images.showImage("location-ingnam-temple"));
-			outputText("The village’s temple appears humble looking from its stony exterior but the interior of temple is truly a marvel to behold - intricately decorated wooden arches adorned with complex patterns of arcane runes of the Old World, walls adorned with majestic tapestries depicting the Gods and their most valiant of feats and, to the end of the temple stands an incredibly designed shrine to the All-Giving, the mother of all Gods.");
+			outputText("The village’s temple appears humble looking from its stony exterior but the interior of the temple is truly a marvel to behold - intricately decorated wooden arches adorned with complex patterns of arcane runes of the Old World, walls adorned with majestic tapestries depicting the Gods and their most valiant of feats and, to the end of the temple stands an incredibly designed shrine to the All-Giving, the mother of all Gods.");
 			outputText("\n\nIncense languorously wafts from the alcoves where offerings of fruit are left out for the Gods. Monks passively move amongst the parishioners, offering solace to those in need, food or drink to those who are weary, or in meditation.");
 			outputText("\n\nThere are several soft mats on the floor to provide soft areas for people to pray on.");
 			menu();
@@ -436,7 +436,7 @@ public class Ingnam extends BaseContent
 			menu();
 			addButton(0, "Order Drink", orderDrink).hint("Buy some refreshing beverages.");
 			addButton(1, "Order Food", orderFood).hint("Buy some food" + (flags[kFLAGS.HUNGER_ENABLED] > 0 && player.hunger < 50 ? " and curb that hunger of yours!": ".") + "");
-			if (flags[kFLAGS.INGNAM_RUMORS] < 3) addButton(2, "Stories", hearRumors).hint("Hear the story the innkeeper has to offer.");
+			if (flags[kFLAGS.INGNAM_RUMORS] < 3) addButton(2, "Stories", hearRumors).hint("Hear the stories the innkeeper has to offer.");
 			//if (player.findPerk(PerkLib.HistoryWhore) >= 0) addButton(5, "Prostitute", whoreForGems).hint("Seek someone who's willing to have sex with you for profit.");
 			addButton(14, "Leave", menuIngnam);
 		}
@@ -661,20 +661,20 @@ public class Ingnam extends BaseContent
 			outputText("You ask the innkeeper if he has anything special to tell you.");
 			if (flags[kFLAGS.INGNAM_RUMORS] == 0) {
 				outputText("\n\nHe nods and says, \"<i>Let me tell you. You know what happens to the so-called 'champions'?</i>\" ");
-				outputText("\n\nYou nod in response and he continues, \"<i>Well... Nobody ever came. I've seen twenty people departing over the course of my career. Twenty years. None of them ever returned. Who knows what happened to them? Some say they're abducted by an evil presence as soon as they set foot into the portal.</i>\"");
+				outputText("\n\nYou nod in response and he continues, \"<i>Well... Nobody ever came back. I've seen twenty people depart over the course of my career. Twenty years. None of them ever returned. Who knows what happened to them? Some say they're abducted by an evil presence as soon as they set foot into the portal.</i>\"");
 				outputText("\n\nHe looks at you and sniffles. \"<i>Truth be told, you're going to be the Champion of Ingnam. You will be sent to the so-called 'portal' that is supposedly located in Mount Ilgast. I will miss your patronage at the inn. You're still welcome anytime.</i>\"");
 				flags[kFLAGS.INGNAM_RUMORS] = 1;
 			}
 			else if (flags[kFLAGS.INGNAM_RUMORS] == 1) {
 				outputText("\n\nHe nods and says, \"<i>You know Mount Ilgast?</i>\" ");
-				outputText("\n\nYou nod in response and he continues, \"<i>Before I began my work as an innkeeper, I was an adventurer. I've explored Mount Ilgast once. There was something glowing. It's a portal but it's no ordinary portal. Even strange was that there was something stirring in my groin. Honestly, I swear I never felt that sensation before. I winded up masturbating at the cave entrance just because of that warmth. As soon as I go near the portal, the warm sensation came back again. It's just strange, really strange. So I've hurried back to Ingnam and never visited the mountain again.</i>\"");
+				outputText("\n\nYou nod in response and he continues, \"<i>Before I began my work as an innkeeper, I was an adventurer. I've explored Mount Ilgast once. There was something glowing. It's a portal but it's no ordinary portal. Even stranger was that there was something stirring in my groin. Honestly, I swear I never felt that sensation before. I winded up masturbating at the cave entrance just because of that warmth. As soon as I go near the portal, the warm sensation came back again. It's just strange, really strange. So I've hurried back to Ingnam and never visited the mountain again.</i>\"");
 				outputText("\n\nYou thank him for telling you.");
 				flags[kFLAGS.INGNAM_RUMORS] = 2;
 			}
 			else if (flags[kFLAGS.INGNAM_RUMORS] == 2) {
-				outputText("\n\nHe nods and says, \"<i>Would you really like to know something special?</i>\" You nod in response and he continues, \"<i>One time I've seen a man with cat ears and a tail. I thought they were just accessories but he insisted it was real. So I tugged on his ears and it was... real. I thought he used a lot of glue but he insisted that it's real. His ears do feel real. His tail even swished from side to side like it's an actual cat tail. He told me about something called 'Whisker Fruit' or something. So my guess is that the food in the so-called 'demon realm' can change you.</i>\"");
-				outputText("\n\nYou tell him if he has some tips for you. He says, \"<i>Yes. If I were you, I would eat them only as last resort. Even a food that could transform you can make the difference betweeen life and death.</i>\" You thank him for the advice.");
-				outputText("\n\n\"<i>You're welcome. I have nothing left to tell you but you're always welcome,</i>\" he says.");
+				outputText("\n\n\"He nods and says, \"<i>Do you want to know something special?</i>\" You nod in response before he continues, \"<i>One time I saw a man with cat ears and a tail. I thought they were just accessories, but he insisted it was real. I tugged on his ears, and it was... real. I thought he used a lot of glue, but he insisted that it was real. His ears do feel real. His tail even swished from side to side like it was an actual cat tail. He told me about something called 'Whisker Fruit' or something. So I guess that the food in the so-called 'demon realm' can change you.</i>");
+				outputText("\n\nYou ask him if he has some tips for you. He nods as he speaks, \"<i>Yes. If I were you, I would eat them only as last resort. Even food that could transform you can make the difference between life and death.</i>\" You thank him for the advice.");
+				outputText("\n\n\"<i>You're welcome. I have nothing left to tell you but you're always welcome,</i>\" he replies.");
 				flags[kFLAGS.INGNAM_RUMORS] = 3; //Finished
 			}
 			doNext(camp.returnToCampUseOneHour);

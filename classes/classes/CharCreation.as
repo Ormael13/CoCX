@@ -104,10 +104,6 @@ import coc.view.MainView;
 			mainView.hideMenuButton( MainView.MENU_PERKS );
 			//Hide perk boxes
 			mainView.hideComboBox();
-			//If first PC, track status of EZ mode and other such nonsense.
-			var silly:Boolean = flags[kFLAGS.SILLY_MODE_ENABLE_FLAG];
-			var easy:Boolean = flags[kFLAGS.EASY_MODE_ENABLE_FLAG];
-			var sprite:Boolean = flags[kFLAGS.SHOW_SPRITES_FLAG];
 			mainView.setButtonText(0, "Newgame"); // b1Text.text = "Newgame";
 			//flags[kFLAGS.CUSTOM_PC_ENABLED] = 0;
 
@@ -411,10 +407,40 @@ import coc.view.MainView;
 			}
 			//player.perkPoints = player.level - 1;
 			var newFlags:DefaultDict = new DefaultDict();
+            //keep settings flags
 			if (player.hasKeyItem("Ascension") >= 0) {
-				for each(var flag:int in [kFLAGS.NEW_GAME_PLUS_LEVEL, kFLAGS.HUNGER_ENABLED, kFLAGS.HARDCORE_MODE, kFLAGS.HARDCORE_SLOT, kFLAGS.GAME_DIFFICULTY, kFLAGS.EASY_MODE_ENABLE_FLAG, kFLAGS.NO_GORE_MODE, kFLAGS.WISDOM_SCALING, kFLAGS.INTELLIGENCE_SCALING, kFLAGS.STRENGTH_SCALING, kFLAGS.SPEED_SCALING, kFLAGS.SECONDARY_STATS_SCALING, kFLAGS.WATERSPORTS_ENABLED, 
-				kFLAGS.SILLY_MODE_ENABLE_FLAG, kFLAGS.LOW_STANDARDS_FOR_ALL, kFLAGS.HYPER_HAPPY, kFLAGS.SFW_MODE, kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM, kFLAGS.MELEE_DAMAGE_OVERHAUL, kFLAGS.LVL_UP_FAST, kFLAGS.MUTATIONS_SPOILERS, kFLAGS.INVT_MGMT_TYPE, kFLAGS.NEWPERKSDISPLAY, kFLAGS.CHARVIEW_STYLE, kFLAGS.CHARVIEW_ARMOR_HIDDEN, kFLAGS.SPIRIT_STONES]) {
-					newFlags[flag] = flags[flag];
+				for each(var flag:int in [
+                    kFLAGS.NEW_GAME_PLUS_LEVEL,
+                    kFLAGS.HUNGER_ENABLED,
+                    kFLAGS.HARDCORE_MODE,
+                    kFLAGS.HARDCORE_SLOT,
+                    kFLAGS.GAME_DIFFICULTY,
+                    kFLAGS.EASY_MODE_ENABLE_FLAG,
+                    kFLAGS.NO_GORE_MODE,
+                    kFLAGS.WISDOM_SCALING,
+                    kFLAGS.INTELLIGENCE_SCALING,
+                    kFLAGS.STRENGTH_SCALING,
+                    kFLAGS.SPEED_SCALING,
+                    kFLAGS.SECONDARY_STATS_SCALING,
+                    kFLAGS.WATERSPORTS_ENABLED, 
+				    kFLAGS.SILLY_MODE_ENABLE_FLAG,
+                    kFLAGS.SCENEHUNTER_PRINT_CHECKS,
+                    kFLAGS.SCENEHUNTER_MUTEX_SCENES,
+                    kFLAGS.SCENEHUNTER_DICK_SELECT,
+                    kFLAGS.SCENEHUNTER_UNI_HERMS,
+                    kFLAGS.LOW_STANDARDS_FOR_ALL,
+                    kFLAGS.HYPER_HAPPY,
+                    kFLAGS.SFW_MODE,
+                    kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM,
+                    kFLAGS.MELEE_DAMAGE_OVERHAUL,
+                    kFLAGS.LVL_UP_FAST,
+                    kFLAGS.MUTATIONS_SPOILERS,
+                    kFLAGS.INVT_MGMT_TYPE,
+                    kFLAGS.NEWPERKSDISPLAY,
+                    kFLAGS.CHARVIEW_STYLE,
+                    kFLAGS.CHARVIEW_ARMOR_HIDDEN,
+                    kFLAGS.SPIRIT_STONES]) {
+					    newFlags[flag] = flags[flag];
 				}
 			}
 			//Clear plot storage array!
@@ -521,9 +547,9 @@ import coc.view.MainView;
 
 			outputText("<b>" + selectedItem.data[0] + ":</b> " + selectedItem.data[3]);
 			if(selectedItem.data[2])
-				outputText("\n\nThis character have pre-defined history.");
+				outputText("\n\nThis character has a pre-defined history.");
 			else
-				outputText("\n\nThis character have no pre-defined history.");
+				outputText("\n\nThis character has no pre-defined history.");
 
 			flushOutputTextToGUI();
 			mainView.nameBox.text = selectedItem.data[0];
@@ -1579,7 +1605,7 @@ import coc.view.MainView;
 		//-----------------
 		private function chooseModeNormal():void {
 			clearOutput();
-			outputText("You have chosen Normal Mode. This is a classic gameplay mode. Accumulated wrath will not affect ability to spellcast or use magical specials. Internal mutation negative effects will be triggered after accumulating 11 points in internal mutation score.\n\n<b>Difficulty can be adjusted at any time.</b>");
+			outputText("You have chosen Normal Mode. This is a classic gameplay mode. Accumulated wrath will not affect your ability to spellcast or use magical specials. Internal mutation negative effects will be triggered after accumulating 11 points in internal mutation score.\n\n<b>Difficulty can be adjusted at any time.</b>");
 			flags[kFLAGS.HARDCORE_MODE] = 0;
 			flags[kFLAGS.HUNGER_ENABLED] = 0;
 			flags[kFLAGS.GAME_DIFFICULTY] = 0;
@@ -1588,7 +1614,7 @@ import coc.view.MainView;
 
 		private function chooseModeSurvival():void {
 			clearOutput();
-			outputText("You have chosen Survival Mode. This is similar to the normal mode but with hunger enabled. Accumulated wrath will not affect ability to spellcast or use magical specials. Internal mutation negative effects will be triggered after accumulating 11 points in internal mutation score.\n\n<b>Difficulty can be adjusted at any time.</b>");
+			outputText("You have chosen Survival Mode. This is similar to the normal mode but with hunger enabled. Accumulated wrath will not affect your ability to spellcast or use magical specials. Internal mutation negative effects will be triggered after accumulating 11 points in internal mutation score.\n\n<b>Difficulty can be adjusted at any time.</b>");
 			flags[kFLAGS.HARDCORE_MODE] = 0;
 			flags[kFLAGS.HUNGER_ENABLED] = 0.5;
 			flags[kFLAGS.GAME_DIFFICULTY] = 0;
@@ -1618,7 +1644,7 @@ import coc.view.MainView;
 
 		private function chooseModeNightmare():void {
 			clearOutput();
-			outputText("You have chosen Nightmare Mode. Hunger would be all time active so go get that food or your gonna starve... to death. If you want to spellcast or use magic specials you have to pay attention to your accumulated wrath. Also negative effects of internal mutations starts right away. You have been warned: it not gonna be walk in park anymore...\n\n<b>Difficulty is locked to <i>NIGHTMARE</i>.</b>");
+			outputText("You have chosen Nightmare Mode. Hunger is constantly draining, so go get that food or perish from starvation. If you want to spellcast or use magic specials, you have to pay attention to your accumulated wrath. Additionally, the negative effects of internal mutations begin immediately. You have been warned: this difficulty is not meant for the weak of body and mind.\n\n<b>Difficulty is locked to <i>NIGHTMARE</i>.</b>");
 			flags[kFLAGS.HARDCORE_MODE] = 0;
 			flags[kFLAGS.HUNGER_ENABLED] = 1;
 			flags[kFLAGS.GAME_DIFFICULTY] = 2;
@@ -1629,7 +1655,7 @@ import coc.view.MainView;
 
 		private function chooseModeExtreme():void {
 			clearOutput();
-			outputText("You have chosen EXTREME Mode. So you feel that neither death from starvation, nor accumulated wrath blocking your bright path of mage and not even internal mutation can stop you? Fine then let take it to next level. Game forces autosave and if you encounter a Bad End, your save file is <b>DELETED</b>! \n\nDebug Mode and Easy Mode are disabled in this game mode. \n\nPlease choose a slot to save in. You may not make multiple copies of saves. \n\n<b>Difficulty is locked to <i>EXTREME</i>.</b>");
+			outputText("You have chosen EXTREME Mode. And so... neither death from starving, accumulated wrath inhibiting spellcasting nor internal mutations will stop you? Now, let's take things to the next level. The game will constantly autosave, and Bad Ends will result in the <b><i>deletion of your file</i></b>.\n\nDebug Mode and Easy mode are disabled here as well.\n\nPlease choose a slot to save in. You cannot make multiple copies of this save.\n\n<b>Difficulty is locked to <i>EXTREME</i></b>");
 			flags[kFLAGS.HARDCORE_MODE] = 1;
 			flags[kFLAGS.HUNGER_ENABLED] = 1;
 			flags[kFLAGS.GAME_DIFFICULTY] = 3;
@@ -1643,7 +1669,7 @@ import coc.view.MainView;
 
 		private function chooseModeXianxia():void {
 			clearOutput();
-			outputText("You have chosen Xianxia MC Mode. Since you feel all previous difficulty setting was too easy you can try this one option. Sure it would be rough but you came here to suffe...err feeling like a true XIANXIA MC, right? \n\n<b>Difficulty is locked to <i>XIANXIA</i>.</b>");
+			outputText("You have chosen Xianxia MC Mode. Since all previous difficulty settings were seemingly deemed insufficient, this is the next option. It will be rough, tedious, strenuous... but you came here to suff- Feel like a true XIANXIA MC, correct?\n\n<b>Difficulty is locked to <i>XIANXIA</i>.</b>");
 			flags[kFLAGS.HARDCORE_MODE] = 1;
 			flags[kFLAGS.HUNGER_ENABLED] = 1;
 			flags[kFLAGS.GAME_DIFFICULTY] = 4;
@@ -1670,7 +1696,7 @@ import coc.view.MainView;
 			outputText("<b>Realistic mode:</b> You get hungry from time to time and cum production is capped. In addition, it's a bad idea to have oversized parts. \n");
 			outputText("<b>Hard mode:</b> In addition to Realistic mode, the game forces save and if you get a Bad End, your save file is deleted. For not sunday (CoC) players.\n");
 			outputText("<b>Hardcore mode:</b> In addition to Realistic mode, the game forces save and if you get a Bad End, your save file is deleted. For the veteran CoC players only.\n");
-			outputText("<b>Brutal Hardcore mode:</b> The hardest game mode ever. Like hardcore mode, but the difficulty is locked to extreme! How long can you survive?\n");
+			outputText("<b>Extreme Hardcore mode:</b> The hardest game mode ever. Like hardcore mode, but the difficulty is locked to extreme! How long can you survive?\n");
 			outputText("<b>Xianxia MC mode:</b> The game mode for anyone that wants to feel like an Xianxia MC. Hunger is always waiting behind a corner and enemies are always stronger than you! How long will take to you to reach the top?\n");
 			menu();
 			addButton(0, "Normal", chooseModeNormal);
@@ -3144,4 +3170,4 @@ import coc.view.MainView;
 			return (statusEffect == StatusEffects.KnowsWereBeast || statusEffects.value4 == 9000);	//na razie jest tu tylko werebeast
 		}	//ale potem zamienić to na specialne soulskills z każdego z klanów
 	} // what the fuck are those weird comments here? ^
-}
+}

@@ -9,7 +9,7 @@ import classes.BodyParts.Face;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.RearBody;
 import classes.BodyParts.Tail;
-import classes.Mutations.*;
+import classes.IMutations.*;
 
 public class MutationsLib
 	{
@@ -212,7 +212,7 @@ public class MutationsLib
 		public static const KitsuneThyroidGland:PerkType = mk("Kitsune Thyroid Gland", "Kitsune Thyroid Gland",
 				"Kitsune Thyroid Gland lower cooldowns for Illusion and Terror by three turns and increase speed of the recovery after using magic.").withBuffs({'spe.mult':0.05});
 		public static const KitsuneThyroidGlandPrimitive:PerkType = mk("Kitsune Thyroid Gland (Primitive)", "Kitsune Thyroid Gland (Primitive)",
-				"Kitsune Thyroid Gland (Primitive) increase the mana recovery after using magic and make fox fire specials 50% stronger when having 9 tails (both fire and lust damage).").withBuffs({'spe.mult':0.05,'wis.mult':0.05});
+				"Kitsune Thyroid Gland (Primitive) increase the mana recovery and make fox fire specials 50% stronger when having 9 tails (both fire and lust damage).").withBuffs({'spe.mult':0.05,'wis.mult':0.05});
 		public static const KitsuneThyroidGlandEvolved:PerkType = mk("Kitsune Thyroid Gland (Evolved)", "Kitsune Thyroid Gland (Evolved)",
 				"Kitsune Thyroid Gland (Evolved) grant bonus soulforce/mana regeneration depending on your Star Sphere rank, increase max Star Sphere rank to 20. Increase speed debuff of Terror to 50, increase evasion boost from Illusion to 20%.").withBuffs({'spe.mult':0.05,'int.mult':0.05,'wis.mult':0.05});
 		public static const KitsuneThyroidGlandFinalForm:PerkType = mk("Kitsune Thyroid Gland (Final Form)", "Kitsune Thyroid Gland (Final Form)",
@@ -313,7 +313,7 @@ public class MutationsLib
 				".");
 		public static const RatatoskrSmarts:PerkType = mk("Ratatoskr smarts", "Ratatoskr smarts",
 				"Allows to perma Weird words.").withBuffs({'int.mult':0.05});
-		public static const RatatoskrSmartsPrimitive:PerkType = mk("Ratatoskr smarts ()", "Ratatoskr smarts (Evolved)",
+		public static const RatatoskrSmartsPrimitive:PerkType = mk("Ratatoskr smarts ()", "Ratatoskr smarts (Primitive)",
 				"Increase the damage of Weird words by 20%. Lower cooldown of Knowledge overload by 1 turn.").withBuffs({'int.mult':0.10});
 		public static const RatatoskrSmartsEvolved:PerkType = mk("Ratatoskr smarts (Evolved)", "Ratatoskr smarts (Evolved)",
 				"Increase the damage of Weird words by another 30%. Lower cooldowns of ratatoskr specials by 1 turn. Knowledge is power is now three times as effective.").withBuffs({'int.mult':0.20});
@@ -321,11 +321,11 @@ public class MutationsLib
 				".");
 		public static const RaijuCathode:PerkType = mk("Raiju Cathode", "Raiju Cathode",
 				"Your Raiju Cathode provides an increase in speed by 10% and increase lust damage from weapons and natural weapons by 50%.").withBuffs({'spe.mult':0.10});
-		public static const RaijuCathodePrimitive:PerkType = mk("Raiju Cathode (Primitive)", "Salamander Adrenal Glands (Primitive)",
+		public static const RaijuCathodePrimitive:PerkType = mk("Raiju Cathode (Primitive)", "Raiju Cathode (Primitive)",
 				"Your Raiju Cathode provides an increase in speed by 15% and increase lust damage from weapons and natural weapons by another 50%. All lightning damage is increased by 20%.").withBuffs({'spe.mult':0.15});
-		public static const RaijuCathodeEvolved:PerkType = mk("Raiju Cathode (Evolved)", "Salamander Adrenal Glands (Evolved)",
+		public static const RaijuCathodeEvolved:PerkType = mk("Raiju Cathode (Evolved)", "Raiju Cathode (Evolved)",
 				"Your Raiju Cathode provides an increase in speed by 25% and increase lust damage from weapons and natural weapons by 100%. Supercharged bonuses are twice as strong.").withBuffs({'spe.mult':0.25});
-		public static const RaijuCathodeFinalForm:PerkType = mk("Raiju Cathode (Final Form)", " Cathode (Final Form)",
+		public static const RaijuCathodeFinalForm:PerkType = mk("Raiju Cathode (Final Form)", "Raiju Cathode (Final Form)",
 				".");
 		public static const SalamanderAdrenalGlands:PerkType = mk("Salamander Adrenal Glands", "Salamander Adrenal Glands",
 				"Your Salamander adrenal glands are giving you slight boost to your natural stamina and libido.").withBuffs({'tou.mult':0.05,'lib.mult':0.05});
@@ -495,7 +495,10 @@ public class MutationsLib
 				MutationsList.push([TwinHeart, TwinHeartPrimitive, TwinHeartEvolved]);
 			}
 			function mutationsDeprecated():void{
-				MutationsList.push([NekomataThyroidGlandFinalForm, HellcatParathyroidGlandsFinalForm, CaveWyrmLungsFinalForm, KitsuneParathyroidGlandsFinalForm, ArachnidBookLungFinalForm, BlackHeartFinalForm, CatlikeNimblenessFinalForm, DraconicBonesFinalForm, DraconicHeartFinalForm, DraconicLungsFinalForm, DrakeLungsFinalForm, EasterBunnyEggBagFinalForm, EclipticMindFinalForm, ElvishPeripheralNervSysFinalForm, FeyArcaneBloodstreamFinalForm, FloralOvariesFinalForm, FrozenHeartFinalForm, GazerEyeFinalForm, GorgonsEyesFinalForm, HarpyHollowBonesFinalForm, HeartOfTheStormFinalForm, HinezumiBurningBloodFinalForm, HollowFangsFinalForm, KitsuneThyroidGlandFinalForm, LactaBovinaOvariesFinalForm, LizanMarrowFinalForm, MantislikeAgilityFinalForm, MelkieLungFinalForm, MinotaurTesticlesFinalForm, NukiNutsFinalForm, ObsidianHeartFinalForm, OniMusculatureFinalForm, OrcAdrenalGlandsFinalForm, PigBoarFatFinalForm, RatatoskrSmartsFinalForm, SalamanderAdrenalGlandsFinalForm, ScyllaInkGlandsPrimitive, ScyllaInkGlandsEvolved, TwinHeartFinalForm, VampiricBloodsteamFinalForm, VenomGlandsFinalForm, WhaleFatFinalForm, YetiFatFinalForm]);
+				MutationsList.push([NekomataThyroidGlandFinalForm, HellcatParathyroidGlandsFinalForm, CaveWyrmLungsFinalForm, KitsuneParathyroidGlandsFinalForm, ArachnidBookLungFinalForm, BlackHeartFinalForm, CatlikeNimblenessFinalForm, DraconicBonesFinalForm, DraconicHeartFinalForm, DraconicLungsFinalForm, DrakeLungsFinalForm, EasterBunnyEggBagFinalForm,
+				EclipticMindFinalForm, ElvishPeripheralNervSysFinalForm, FeyArcaneBloodstreamFinalForm, FloralOvariesFinalForm, FrozenHeartFinalForm, GazerEyeFinalForm, GorgonsEyesFinalForm, HarpyHollowBonesFinalForm, HeartOfTheStormFinalForm, HinezumiBurningBloodFinalForm, HollowFangsFinalForm, KitsuneThyroidGlandFinalForm, LactaBovinaOvariesFinalForm,
+				LizanMarrowFinalForm, MantislikeAgilityFinalForm, MelkieLungFinalForm, MinotaurTesticlesFinalForm, NukiNutsFinalForm, ObsidianHeartFinalForm, OniMusculatureFinalForm, OrcAdrenalGlandsFinalForm, PigBoarFatFinalForm, RaijuCathodeFinalForm, RatatoskrSmartsFinalForm, SalamanderAdrenalGlandsFinalForm, ScyllaInkGlandsPrimitive, ScyllaInkGlandsEvolved,
+				TwinHeartFinalForm, VampiricBloodsteamFinalForm, VenomGlandsFinalForm, WhaleFatFinalForm, YetiFatFinalForm, CatlikeNimblenessFinalForm]);
 			}
 
 			switch(spec){

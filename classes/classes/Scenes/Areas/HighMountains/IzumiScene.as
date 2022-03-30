@@ -3,7 +3,7 @@ package classes.Scenes.Areas.HighMountains
 import classes.*;
 import classes.BodyParts.Horns;
 import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 import classes.Stats.Buff;
 
 /**
@@ -15,8 +15,7 @@ import classes.Stats.Buff;
 	 */
 	public class IzumiScene extends BaseContent
 	{
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		
+				
 		public function IzumiScene() 
 		{
 		}
@@ -1600,9 +1599,8 @@ import classes.Stats.Buff;
 				addButton(4, "RevengeOral", sayThatsAPrettyFaceBeAShameIfSomebodyJizzedAllOverIt);
 				if (player.tentacleCocks() >= 8 || player.stamenCocks() >= 8) addButton(5, "Tentacruel", tentacruelRevengeFux);
 			}
-			uniquuuesexscene.pcUSSPreChecksV2(touchThatFluffyHorn2);
-			//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(24);
-		}
+			SceneLib.uniqueSexScene.pcUSSPreChecksV2(touchThatFluffyHorn2);
+					}
 		public function touchThatFluffyHorn2():void {
 			menu();
 			addButton(0, "Let Go", letGoAndLeaveYouSillyFuck);
@@ -1614,9 +1612,8 @@ import classes.Stats.Buff;
 				addButton(4, "RevengeOral", sayThatsAPrettyFaceBeAShameIfSomebodyJizzedAllOverIt);
 				if (player.tentacleCocks() >= 8 || player.stamenCocks() >= 8) addButton(5, "Tentacruel", tentacruelRevengeFux);
 			}
-			uniquuuesexscene.pcUSSPreChecksV2(touchThatFluffyHorn2);
-			//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(24);
-		}
+			SceneLib.uniqueSexScene.pcUSSPreChecksV2(touchThatFluffyHorn2);
+					}
 
 		// Pfft, nofux
 		protected function letGoAndLeaveYouSillyFuck():void

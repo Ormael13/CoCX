@@ -2,7 +2,7 @@
 import classes.*;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 public class MinotaurMobScene extends BaseContent implements TimeAwareInterface {
@@ -12,8 +12,6 @@ public class MinotaurMobScene extends BaseContent implements TimeAwareInterface 
 //326 Number of sons grown
 //327 Number of sons pending
 //328 growup countdown
-
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
 
 		public function MinotaurMobScene()
 		{
@@ -625,9 +623,8 @@ internal function victoryMinotaurGang():void {
 	if (player.hasVagina()) addButton(3, "Get Licked", createCallBackFunction(forceMinitaurToGiveOral, 0));
 	if (player.hasCock()) addButton(4, "Get Sucked", createCallBackFunction(forceMinitaurToGiveOral, 1));
 	addButton(5, "Discipline", disciplineEldestMinotaurSon);
-	uniquuuesexscene.pcUSSPreChecksV2(victoryMinotaurGang2);
-	//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(25);
-	addButton(14, "Leave", cleanupAfterCombat);
+	SceneLib.uniqueSexScene.pcUSSPreChecksV2(victoryMinotaurGang2);
+		addButton(14, "Leave", cleanupAfterCombat);
 }
 public function victoryMinotaurGang2():void {
 	menu();
@@ -638,9 +635,8 @@ public function victoryMinotaurGang2():void {
 	if (player.hasCock()) addButton(4, "Get Sucked", createCallBackFunction(forceMinitaurToGiveOral, 1));
 	addButton(5, "Discipline", disciplineEldestMinotaurSon);
 	addButton(14, "Leave", cleanupAfterCombat);
-	uniquuuesexscene.pcUSSPreChecksV2(victoryMinotaurGang2);
-	//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(25);
-}
+	SceneLib.uniqueSexScene.pcUSSPreChecksV2(victoryMinotaurGang2);
+	}
 //*[Victory Tit-Fuck] (for only the fattest of fat bitch titties)
 private function victoryMinotaurGangTitFuck():void {
 	clearOutput();

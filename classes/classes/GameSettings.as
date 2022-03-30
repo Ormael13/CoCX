@@ -7,11 +7,15 @@ import coc.view.StatsView;
 import flash.display.StageQuality;
 import flash.text.TextFormat;
 
+import classes.SceneHunter;
+
 /**
  * ...
  * @author ...
  */
 public class GameSettings extends BaseContent {
+
+    public var sceneHunter_inst:SceneHunter = new SceneHunter();
 
 	public function GameSettings() {}
 
@@ -31,6 +35,7 @@ public class GameSettings extends BaseContent {
 		addButton(3, "Font Size", fontSettingsMenu);
 		addButton(4, "Controls", displayControls);		
 		addButton(5, "Gameplay(2)", settingsScreenGameSettings2);
+		addButton(6, "Scenes", sceneHunter_inst.settingsPage);
 		addButton(14, "Back", CoC.instance.mainMenu.mainMenu);
         if (flags[kFLAGS.HARDCORE_MODE] > 0) {
 			debug                               = false;
@@ -804,7 +809,7 @@ public class GameSettings extends BaseContent {
     private function hideControls():void
     {
         CoC.instance.inputManager.HideBindingPane();
-        CoC.instance.gameSettings.settingsScreenMain();
+        settingsScreenMain();
     }
 
     private function resetControls():void

@@ -10,7 +10,7 @@ import classes.Items.Armors.LustyMaidensArmor;
 import classes.Items.Armors.SuccubusArmor;
 import classes.Items.Weapon;
 import classes.Scenes.Areas.Ocean.SeaAnemone;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 public class AnemoneScene extends BaseContent implements TimeAwareInterface
@@ -56,8 +56,6 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 		//  KID_A_XP:int = 756;
 		//  KID_SITTER:int = 757; //0 = no sitter, 1 = possible, 2 = doing dat shit
 		//  HAD_KID_A_DREAM:int = 758;
-
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
 
 		public function AnemoneScene()
 		{
@@ -189,10 +187,9 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 					if (player.armor is SuccubusArmor) bikiniTits = (player.armor as SuccubusArmor).succubusPaizuri;
 					else bikiniTits = (player.armor as LustyMaidensArmor).lustyMaidenPaizuri;
 				}
-				if (uniquuuesexscene.pcCanUseUniqueSexScenev2(true, null) > 0) temp3 = curry(uniquuuesexscene.pcCanUseUniqueSexScenev2, false, defeatAnemone);
-				//if (player.pcCanUseUniqueSexScene()) temp3 = curry(uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 52);
 				choices("Your Ass", victoryButtholeRape, "Your Cock", cockRape, "Your Vagina", vaginaRape, "Her Butt", anal, "Lay Egg", eggs,
-					"", null, "", null, "B.Titfuck", bikiniTits, "U. Sex Scenes", temp3, "Leave", cleanupAfterCombat);
+					"", null, "", null, "B.Titfuck", bikiniTits, "", null, "Leave", cleanupAfterCombat);
+                SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatAnemone);
 			}
 			else cleanupAfterCombat();
 		}

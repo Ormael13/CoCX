@@ -479,7 +479,10 @@ public class AbstractSpell extends CombatAbility {
 				damageFn = doDamage;
 		}
 		var repeats:int = omnicasterRepeat ? omnicasterRepeatCount() : 1;
-		if (convergenceRepeat && player.hasPerk(PerkLib.Convergence) && !monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType)) repeats *= 2;
+		if (convergenceRepeat && player.hasPerk(PerkLib.Convergence) && !monster.hasPerk(PerkLib.EnemyGroupType) && !monster.hasPerk(PerkLib.EnemyLargeGroupType) && !monster.hasPerk(PerkLib.Enemy300Type)) {
+			if (player.hasPerk(PerkLib.SuperConvergence)) repeats *= 3;
+			else repeats *= 2;
+		}
 		var i:int = repeats;
 		while (i-->0) {
 			damageFn(damage, true, display || displayDamageOnly);

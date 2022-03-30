@@ -33,9 +33,6 @@ public function timeChange():Boolean
 			return true;
 		}
 	}*/
-	if (model.time.hours > 23) {
-		if (flags[kFLAGS.NEISA_FOLLOWER] >= 7 && flags[kFLAGS.NEISA_FOLLOWER] < 17) flags[kFLAGS.NEISA_FOLLOWER]++;
-	}
 	return false;
 }
 public function timeChangeLarge():Boolean {

@@ -5,14 +5,12 @@ package classes.Scenes.Areas.Plains
 {
 	import classes.*;
 	import classes.GlobalFlags.*;
-	import classes.Scenes.UniqueSexScenes;
+	import classes.Scenes.SceneLib;
     import classes.display.SpriteDb;
 
 	public class GnollScene extends BaseContent
 	{
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-
-		public function GnollScene()
+				public function GnollScene()
 		{
 		}
 
@@ -123,9 +121,8 @@ package classes.Scenes.Areas.Plains
 					addButton(2, "TakeHerClit", takeGnollClit).hint("Put your vagina to use and ride the gnoll's clit.", "Take Her Clit");
 				}
 				addButton(3, "SuckHerClit", suckGnollClit).hint("Suck the gnoll's clit.", "Suck Her Clit");
-				uniquuuesexscene.pcUSSPreChecksV2(defeatHyena);
-				//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(36);
-				addButton(14, "Leave", cleanupAfterCombat);
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatHyena);
+								addButton(14, "Leave", cleanupAfterCombat);
 			}
 			else cleanupAfterCombat();
 		}

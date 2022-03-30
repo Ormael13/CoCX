@@ -7,13 +7,11 @@ import classes.*;
 import classes.BodyParts.Face;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 
 public class HarpyScene extends BaseContent
 	{
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-
-		public function HarpyScene()
+				public function HarpyScene()
 		{
 		}
 
@@ -49,9 +47,8 @@ public class HarpyScene extends BaseContent
 				}
 				if (player.canOvipositSpider() && (player.faceType == Face.SNAKE_FANGS || player.faceType == Face.SPIDER_FANGS)) addButton(5, "Lay Eggs", spoidahsLegEggsInHarpeis).hint("Use your ovipositor to lay the eggs into harpy.");
 				addButton(14, "Leave", cleanupAfterCombat);
-				uniquuuesexscene.pcUSSPreChecksV2(harpyVictoryuuuuu);
-				//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(23);
-			}
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(harpyVictoryuuuuu);
+							}
 			//Not horny?  Iz over
 			else cleanupAfterCombat();
 		}

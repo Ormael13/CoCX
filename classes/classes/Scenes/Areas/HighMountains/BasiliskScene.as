@@ -7,13 +7,11 @@ import classes.*;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 public class BasiliskScene extends BaseContent
 	{
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-
 		public function BasiliskScene()
 		{
 		}
@@ -80,9 +78,8 @@ public class BasiliskScene extends BaseContent
 				if (player.canOvipositSpider() || player.canOvipositMantis()) addButton(2, "Lay Eggs", driderPCEggLaysBasilisk);
 				if (player.canOvipositBee() && player.gender > 0) addButton(2, "Lay Eggs", layBeeEggsInABasilisk);
 				addButton(14, "Leave", cleanupAfterCombat);
-				uniquuuesexscene.pcUSSPreChecksV2(defeatBasilisk);
-				//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(22);
-			}
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatBasilisk);
+							}
 			else cleanupAfterCombat();
 		}
 

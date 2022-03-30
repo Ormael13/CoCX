@@ -1,7 +1,7 @@
 ﻿package classes.Scenes.Areas.Lake{
 	import classes.*;
 	import classes.GlobalFlags.*;
-	import classes.Scenes.UniqueSexScenes;
+	import classes.Scenes.SceneLib;
 
 	public class GreenSlimeScene extends AbstractLakeContent{
 //serviceLowCorruption();
@@ -11,7 +11,6 @@
 //oozeButtRapesYou();
 //oozeRapesYouOrally();
 //oozeRapesYouVaginally();
-public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
 public function defeatGS():void {
 	menu();
 	//Boobfeed.
@@ -21,7 +20,7 @@ public function defeatGS():void {
 			outputText("\n\nYou're horny enough to try and rape it, though you'd rather see how much milk you can squirt into it.  What do you do?");
 			addButton(0,"B.Feed",rapeOozeWithMilk);
 			addButton(1,"Rape",slimeVictoryRape);
-			uniquuuesexscene.pcUSSPreChecksV2(defeatGS);
+			SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatGS);
 			addButton(14, "Leave",cleanupAfterCombat);
 		}
 		//Rapes not on the table.
@@ -34,7 +33,7 @@ public function defeatGS():void {
 	else if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 		outputText("  Sadly you realize your own needs have not been met.  Of course, you could always play with the poor thing... Do you rape it?");
 		addButton(0,"Rape",slimeVictoryRape);
-		uniquuuesexscene.pcUSSPreChecksV2(defeatGS);
+		SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatGS);
 		addButton(14,"Leave",cleanupAfterCombat);
 	}
 }

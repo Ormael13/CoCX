@@ -213,6 +213,9 @@ public class BaseCombatContent extends BaseContent {
 	protected function spellCostBlack(mod:Number):Number {
 		return combat.magic.spellCostBlackImpl(mod);
 	}
+	protected function spellCostGrey(mod:Number):Number {
+		return combat.magic.spellCostGreyImpl(mod);
+	}
 	protected function healCost(mod:Number):Number {
 		return combat.magic.healCostImpl(mod);
 	}

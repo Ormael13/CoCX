@@ -16,6 +16,7 @@ import classes.PerkLib;
 import classes.StatusEffects;
 import classes.VaginaClass;
 import classes.Scenes.NPCs.BelisaFollower;
+import classes.Scenes.SceneLib;
 import classes.StatusEffects.Combat.WebDebuff;
 import classes.internals.WeightedDrop;
 
@@ -50,7 +51,7 @@ public class Belisa extends Monster
 			dmg0 += this.str;
 			dmg0 += eBaseStrengthDamage();
 			dmg0 += this.weaponAttack;
-			dmg0 = Math.round(dmg0);
+			dmg0 = Math.round(dmg0 * 0.8);
 			player.takePhysDamage(dmg0, true);
 			player.takePhysDamage(dmg0, true);
 			player.takePhysDamage(dmg0, true);
@@ -58,12 +59,11 @@ public class Belisa extends Monster
 			player.takePhysDamage(dmg0, true);
 			player.takePhysDamage(dmg0, true);
 			if (player.hasStatusEffect(StatusEffects.Hemorrhage)) player.addStatusValue(StatusEffects.Hemorrhage, 1, 1);
-			else player.createStatusEffect(StatusEffects.Hemorrhage,2+rand(2),0.2,0,0);
+			else player.createStatusEffect(StatusEffects.Hemorrhage,2+rand(2),0.05,0,0);
 		}
 		
-		private function belisaWebAttack():void
-		{
-			outputText("\"<i>Leave me alone!</i>\" She yells in her high-pitched voice, spraying a wide swathe of webbing at you. It sticks to your [skin.type] like glue.");
+		private function belisaWebAttack():void {
+			outputText("\"<i>"+(player.hasStatusEffect(StatusEffects.SparingBelisa)?"Slow down":"Leave me alone")+"!</i>\" She yells in her high-pitched voice, spraying a wide swathe of webbing at you. It sticks to your [skin.type] like glue.");
 			//Blind dodge change
 			if (hasStatusEffect(StatusEffects.Blind) && rand(3) < 2) {
 				outputText("She misses completely due to their blindness.");
@@ -102,13 +102,14 @@ public class Belisa extends Monster
 		}
 		
 		private function belisaWhitefire():void {
-			outputText("\"<i>Corruption? Burn!</i>\" She squeaks, and a sudden burst of white fire engulfs you. You hold your breath, turning your [face] away and closing your [eyes]. ");
-			if (player.cor < 33) {
+			outputText("\"<i>"+(player.hasStatusEffect(StatusEffects.SparingBelisa)?"Eat flames!":"Corruption? Burn")+"!</i>\" She squeaks, and a sudden burst of white fire engulfs you. You hold your breath, turning your [face] away and closing your [eyes]. ");
+			if (player.cor < 15) {
 				outputText("You take no damage from the cleansing flame, and she stares at you, absolutely baffled. \"<i>Wh-what? H-how?! You’re Pure?!</i>\"");
+				if (BelisaFollower.BelisaEncounternum == 2) BelisaFollower.BelisaEncounternum = 3;
 			}
 			else {
 				outputText("The fire burns your flesh, but you remain standing afterward. The spider-girl in front of you takes a half-step back, bringing one hand to her breast. \"<i>You...You’re still standing?</i>\"");
-				var damage:int = 2 * inteligencescalingbonus() * SpellMod();
+				var damage:int = 4 * inteligencescalingbonus() * SpellMod();
 				if (player.hasStatusEffect(StatusEffects.Blizzard)) {
 					player.addStatusValue(StatusEffects.Blizzard, 1, -1);
 					outputText("Luckly protective ice maelstorm still surrounding you lessening amount of damage.  ");
@@ -132,7 +133,7 @@ public class Belisa extends Monster
 		private function belisaHeal():void {
 			outputText("She puts her hands together, and you notice the telltale sign of holy magic coursing through her body. The injuries you left on her chitin begin to close, and an aura of health surrounds Belisa’s body. The light from within lights up the silk, temporarily letting you see right through it. Your eyes are drawn to her petite breasts, pressed gently together by her folding arms, and she opens her eyes, realizing what you can see. \"<i>Pervert!</i>\" She yells, letting the light fade.");
 			var temp:Number = 0;
-			temp += inteligencescalingbonus();
+			temp += inteligencescalingbonus() * 2;
 			temp *= HealMod();
 			temp = Math.round(temp);
 			addHP(temp);
@@ -144,6 +145,7 @@ public class Belisa extends Monster
 		
 		override protected function performCombatAction():void
 		{
+			if (BelisaFollower.BelisaEncounternum == 3 && flags[kFLAGS.IN_COMBAT_USE_PLAYER_WAITED_FLAG] == 1) SceneLib.belisa.postFightOptionsWhitefireWait();
 			var choice0:Number = rand(4);
 			switch (choice0) {
 				case 0:
@@ -157,7 +159,7 @@ public class Belisa extends Monster
 					else belisaBasicAttack();
 					break;
 				case 3:
-					if (HPRatio() < .2 && (mana >= spellCostHeal()) && !hasStatusEffect(StatusEffects.AbilityCooldown2)) belisaHeal();
+					if (HPRatio() < .8 && (mana >= spellCostHeal()) && !hasStatusEffect(StatusEffects.AbilityCooldown2)) belisaHeal();
 					else belisaWebAttack();
 					break;
 				default:
@@ -165,21 +167,24 @@ public class Belisa extends Monster
 			}
 		}
 		
+		override public function defeated(hpVictory:Boolean):void
+		{
+			SceneLib.belisa.BelisaHangSparWon(hpVictory);
+		}
+		
 		override public function get long():String
 		{
 			var str:String = "";
-			str += "Facing you is "+(BelisaFollower.BelisaFollowerStage > 0 ? "Belisa":"a slender Drider-woman")+": in a silk robe and Sunhat. Her backmost legs are off the ground, rubbing together nervously, but the ornate daggers in her hands smell like blood, and her abdomen is raised, ready to spit string.";
-			/*if (BelisaFollower.BelisaQuestOn) str += " Her fangs glint dangerously in the light, and she smiles despite her situation. She seems eager to bite.";
-			else */str += " The one fang of hers you can see is dripping a clear venom, but her sunhat covers most of her face, hiding her eyes from you.";
+			str += "Facing you is Belisa in a silk robe and Sunhat. Her backmost legs are off the ground, rubbing together nervously, but the ornate daggers in her hands smell like blood, and her abdomen is raised, ready to spit string.";
+			if (BelisaFollower.BelisaQuestComp) str += " Her fangs glint dangerously in the light, and she smiles despite her situation. She seems eager to bite.";
+			else str += " The one fang of hers you can see is dripping a clear venom, but her sunhat covers most of her face, hiding her eyes from you.";
 			return str;
 		}
 		
 		public function Belisa() 
 		{
-			this.a = "a";
-			this.short = "slender Drider-woman";
-			//this.a = "";
-			//this.short = "Belisa";
+			this.a = "";
+			this.short = "Belisa";
 			this.imageName = "puredrider";
 			this.long = "";
 			// this.plural = false;
@@ -197,25 +202,28 @@ public class Belisa extends Monster
 			this.hairLength = 24;
 			initStrTouSpeInte(80, 90, 100, 250);
 			initWisLibSensCor(100, 80, 100, 0);
-			this.weaponName = "Daggers";
+			this.weaponName = "daggers";
 			this.weaponVerb="slash";
 			this.weaponAttack = 60;
 			this.armorName = "silken robe";
 			this.armorDef = 60;
 			this.armorMDef = 200;
-			this.bonusHP = 100;
-			this.bonusLust = 197;
+			this.bonusHP = 200;
+			this.bonusLust = 200;
 			this.lustVuln = .2;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
-			this.level = 17;
+			this.level = 20;
 			this.gems = rand(10) + 20;
 			this.drop = new WeightedDrop().add(consumables.B_GOSSR,1)
 					.add(useables.T_SSILK,3)
 					.add(null,5);
 			this.ears.type = Ears.HUMAN;
 			this.lowerBody = LowerBody.DRIDER;
+			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
+			this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.JobSorcerer, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Spellpower, 0, 0, 0, 0);
+			this.createPerk(PerkLib.Channeling, 0, 0, 0, 0);
 			this.createPerk(PerkLib.JobHealer, 0, 0, 0, 0);
 			this.createPerk(PerkLib.BasicSpirituality, 0, 0, 0, 0);
 			checkMonster();	

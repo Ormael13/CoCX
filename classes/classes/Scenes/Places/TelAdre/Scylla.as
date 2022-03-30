@@ -79,18 +79,18 @@ public function scyllaBarSelectAction():void {
 		}
 		//All the following conditions are needed to see if she's fucking Urta
 		if (flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] < 3) return; //Minimum Scylla meetings for Urta to fuck her
-		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00147] == 1 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00145] == 1) return; //Together these are the 'No more Scylla' flag
+		if (flags[kFLAGS.URTA_NO_MORE_SCYLLA] == 1 && flags[kFLAGS.URTA_TALKED_ABOUT_SCYLLA] == 1) return; //Together these are the 'No more Scylla' flag
         if (!SceneLib.urta.urtaAtBar() || flags[kFLAGS.URTA_ANGRY_AT_PC_COUNTDOWN] > 0) return;
         if (flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] > 0 || flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] <= 2 || flags[kFLAGS.TIMES_FUCKED_URTA] == 0) return;
 			//She only fucks Scylla if she's horny and you've fucked her enough to make her comfortable
-		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00143] == 0) { //Never fucked Scylla before
+		if (flags[kFLAGS.URTA_SCYLLA_TIMES_CAUGHT] == 0) { //Never fucked Scylla before
             if (!SceneLib.urta.urtaDrunk()) return; //So she has to be drunk
         }
         else if (SceneLib.urta.urtaDrunk() && player.balls == 0) return; //Otherwise she has to be sober and you need to have balls (I'm not sure why, but it is so)
         if (telAdre.katherine.needIntroductionFromScylla()) return;
 		if (rand(3) == 0) scyllaAction = SCYLLA_ACTION_FUCKING_URTA; //And after all that there's still just a 1/3 chance it will happen
 		//Yay, Foursomes! - unless you're Scylla special
-		if (rand(2) == 0 && flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] >= 3 && player.hasKeyItem("Opal Ring") < 0 && SceneLib.urta.urtaAtBar() && player.longestCockLength() >= 8 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00143] > 0) scyllaAction = SCYLLA_ACTION_FURRY_FOURSOME;
+		if (rand(2) == 0 && flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] >= 3 && player.hasKeyItem("Opal Ring") < 0 && SceneLib.urta.urtaAtBar() && player.longestCockLength() >= 8 && flags[kFLAGS.URTA_SCYLLA_TIMES_CAUGHT] > 0) scyllaAction = SCYLLA_ACTION_FURRY_FOURSOME;
 	}
 }
 

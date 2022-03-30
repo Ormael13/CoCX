@@ -4,14 +4,12 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.Ocean.UnderwaterSharkGirl;
 import classes.Scenes.Areas.Ocean.UnderwaterTigersharkGirl;
 import classes.Scenes.Areas.Ocean.UnderwaterSharkGirlsPack;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 public class SharkGirlScene extends AbstractBoatContent{
 
-	public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-
-	public function SharkGirlScene()
+		public function SharkGirlScene()
 	{
 	}
 
@@ -131,18 +129,17 @@ internal function sharkWinChoices():void {
 		outputText("  Do you have your way with her or leave?");
         var dildo:Function = (player.hasKeyItem("Deluxe Dildo") >= 0 ? sharkGirlGetsDildoed : null);
 		var temp3:Function =null;
-		if (uniquuuesexscene.pcCanUseUniqueSexScenev2(true, null) > 0) temp3 = curry(uniquuuesexscene.pcCanUseUniqueSexScenev2, false, sharkWinChoices2);
-		//if (player.pcCanUseUniqueSexScene()) temp3 = curry(uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 58);
-        if (player.gender == 1)
-			simpleChoices("Use Dick", sharkgirlDickFuck, "Pussy w/69", null, "Dildo Rape", dildo, "U. Sex Scenes", temp3, "Leave", cleanupAfterCombat);
+		if (player.gender == 1)
+			simpleChoices("Use Dick", sharkgirlDickFuck, "Pussy w/69", null, "Dildo Rape", dildo, "", null, "Leave", cleanupAfterCombat);
 		else if (player.gender == 2) {
-			simpleChoices("Yes", sharkgirlSixtyNine, "", null, "Dildo Rape", dildo, "U. Sex Scenes", temp3, "Leave", cleanupAfterCombat);
+			simpleChoices("Yes", sharkgirlSixtyNine, "", null, "Dildo Rape", dildo, "", null, "Leave", cleanupAfterCombat);
 		}
 		else if (player.gender == 3) {
 			if (player.isNaga())
-				simpleChoices("Use Dick", sharkgirlDickFuck, "Pussy Oral", sharkgirlSixtyNine, "Dildo Rape", dildo, "U. Sex Scenes", temp3, "Leave", cleanupAfterCombat);
-			else simpleChoices("Use Dick", sharkgirlDickFuck, "Pussy w/69", sharkgirlSixtyNine, "Dildo Rape", dildo, "U. Sex Scenes", temp3, "Leave", cleanupAfterCombat);
+				simpleChoices("Use Dick", sharkgirlDickFuck, "Pussy Oral", sharkgirlSixtyNine, "Dildo Rape", dildo, "", null, "Leave", cleanupAfterCombat);
+			else simpleChoices("Use Dick", sharkgirlDickFuck, "Pussy w/69", sharkgirlSixtyNine, "Dildo Rape", dildo, "", null, "Leave", cleanupAfterCombat);
 		}
+        SceneLib.uniqueSexScene.pcUSSPreChecksV2(sharkWinChoices2);
 	}
 	else cleanupAfterCombat();
 }
@@ -150,18 +147,17 @@ public function sharkWinChoices2():void{
 	outputText("  Do you have your way with her or leave?");
        var dildo:Function = (player.hasKeyItem("Deluxe Dildo") >= 0 ? sharkGirlGetsDildoed : null);
 	var temp3:Function =null;
-	if (uniquuuesexscene.pcCanUseUniqueSexScenev2(true, null) > 0) temp3 = curry(uniquuuesexscene.pcCanUseUniqueSexScenev2, false, sharkWinChoices2);
-	//if (player.pcCanUseUniqueSexScene()) temp3 = curry(uniquuuesexscene.pcUniqueSexScenesChoiceMenu, 58);
-    if (player.gender == 1)
-		simpleChoices("Use Dick", sharkgirlDickFuck, "Pussy w/69", null, "Dildo Rape", dildo, "U. Sex Scenes", temp3, "Leave", cleanupAfterCombat);
+	if (player.gender == 1)
+		simpleChoices("Use Dick", sharkgirlDickFuck, "Pussy w/69", null, "Dildo Rape", dildo, "", null, "Leave", cleanupAfterCombat);
 	else if (player.gender == 2) {
-		simpleChoices("Yes", sharkgirlSixtyNine, "", null, "Dildo Rape", dildo, "U. Sex Scenes", temp3, "Leave", cleanupAfterCombat);
+		simpleChoices("Yes", sharkgirlSixtyNine, "", null, "Dildo Rape", dildo, "", null, "Leave", cleanupAfterCombat);
 	}
 	else if (player.gender == 3) {
 		if (player.isNaga())
-			simpleChoices("Use Dick", sharkgirlDickFuck, "Pussy Oral", sharkgirlSixtyNine, "Dildo Rape", dildo, "U. Sex Scenes", temp3, "Leave", cleanupAfterCombat);
-		else simpleChoices("Use Dick", sharkgirlDickFuck, "Pussy w/69", sharkgirlSixtyNine, "Dildo Rape", dildo, "U. Sex Scenes", temp3, "Leave", cleanupAfterCombat);
+			simpleChoices("Use Dick", sharkgirlDickFuck, "Pussy Oral", sharkgirlSixtyNine, "Dildo Rape", dildo, "", null, "Leave", cleanupAfterCombat);
+		else simpleChoices("Use Dick", sharkgirlDickFuck, "Pussy w/69", sharkgirlSixtyNine, "Dildo Rape", dildo, "", null, "Leave", cleanupAfterCombat);
 	}
+        SceneLib.uniqueSexScene.pcUSSPreChecksV2(sharkWinChoices2);
 }
 public function oceanSharkWinChoices():void {
 	spriteSelect(SpriteDb.s_sharkgirl);
@@ -172,9 +168,8 @@ public function oceanSharkWinChoices():void {
 	if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 		if (player.hasCock()) addButton(1, "Fuck Her", sharkgirlOceanDickFuck1);
 		if (player.hasVagina()) addButton(2, "Sixty nine", sharkgirlOceanSixtyNine1);
-		uniquuuesexscene.pcUSSPreChecksV2(oceanSharkWinChoices);
-		//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(59);
-	}
+		SceneLib.uniqueSexScene.pcUSSPreChecksV2(oceanSharkWinChoices);
+			}
 }
 public function oceanTigerSharkWinChoices():void {
 	spriteSelect(SpriteDb.s_izma);
@@ -185,9 +180,8 @@ public function oceanTigerSharkWinChoices():void {
 	if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 		if (player.hasCock()) addButton(1, "Fuck Her", sharkgirlOceanDickFuck2);
 		if (player.hasVagina()) addButton(2, "Sixty nine", sharkgirlOceanSixtyNine2);
-		uniquuuesexscene.pcUSSPreChecksV2(oceanTigerSharkWinChoices);
-		//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(60);
-	}
+		SceneLib.uniqueSexScene.pcUSSPreChecksV2(oceanTigerSharkWinChoices);
+			}
 }
 public function oceanSharkspackWinChoices():void {
 	spriteSelect(SpriteDb.s_izma);
@@ -198,9 +192,8 @@ public function oceanSharkspackWinChoices():void {
 	if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
 		if (player.hasCock()) addButton(1, "Fuck Her", sharkgirlOceanDickFuck2);
 		if (player.hasVagina()) addButton(2, "Sixty nine", sharkgirlOceanSixtyNine2);
-		uniquuuesexscene.pcUSSPreChecksV2(oceanSharkspackWinChoices);
-		//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(61);
-	}
+		SceneLib.uniqueSexScene.pcUSSPreChecksV2(oceanSharkspackWinChoices);
+			}
 }
 
 //Male and Herm:

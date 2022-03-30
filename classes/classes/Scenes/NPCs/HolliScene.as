@@ -2,12 +2,11 @@
 import classes.*;
 import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 
 public class HolliScene extends NPCAwareContent {
 
-	public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-	
+		
 	public function HolliScene()
 	{
 	}
@@ -159,7 +158,7 @@ public function treeMenu(output:Boolean = true):void {
 		} else {
 			addButtonDisabled(2, "TentacleBone");
 		}
-		if (player.isAlraune()) addButton(3, "TentacleDuel", uniquuuesexscene.alrauneExtraSceneWithHollicyntiaTentacleDuel).hint("There's no way you wont end up getting pluged in all of your holes from this.");
+		if (player.isAlraune()) addButton(3, "TentacleDuel", SceneLib.uniqueSexScene.alrauneExtraSceneWithHollicyntiaTentacleDuel).hint("There's no way you wont end up getting pluged in all of your holes from this.");
 		else addButtonDisabled(3, "TentacleDuel", "This scene requires to be an alraune of some kind.");
 		addButton(5,"Drink Sap", haveAMapleSyrupSnack);
 		if(flags[kFLAGS.HOLLI_FRUIT] > 0) addButton(6,"Eat A Fruit", eatHolliFruit);
@@ -640,7 +639,7 @@ private function stayQuietWhileAmilyBitchesAboutFuckingArborday():void {
 	flags[kFLAGS.AMILY_FOLLOWER] = 0;
 	//Set - amily flipped her shit
 	flags[kFLAGS.AMILY_TREE_FLIPOUT] = 1;
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00173] = 0;
+	flags[kFLAGS.AMILY_WARNING] = 0;
 	//Enable village encounters
 	flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 0;
 	//Change to plain mouse birth!

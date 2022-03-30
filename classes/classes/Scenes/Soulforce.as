@@ -37,14 +37,17 @@ import classes.Scenes.NPCs.Alvina;
 import classes.Scenes.NPCs.Aria;
 import classes.Scenes.NPCs.Aurora;
 import classes.Scenes.NPCs.Belisa;
+import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.NPCs.CelessScene;
 import classes.Scenes.NPCs.Diana;
 import classes.Scenes.NPCs.DivaScene;
 import classes.Scenes.NPCs.Electra;
+import classes.Scenes.NPCs.LilyFollower;
 import classes.Scenes.NPCs.Neisa;
 import classes.Scenes.NPCs.RyuBiDragon;
 import classes.Scenes.NPCs.Sonya;
 import classes.Scenes.NPCs.Tyrantia;
+import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.NPCs.Zenji;
 import classes.Scenes.NPCs.ZenjiScenes;
 import classes.Scenes.Places.Boat.Marae;
@@ -141,7 +144,7 @@ public class Soulforce extends BaseContent
 		if (player.hasPerk(PerkLib.EnergyDependent)) addButtonDisabled(0, "Cultivate", "You're unable to recover soulforce by cultivating.");
 		else addButton(0, "Cultivate", SoulforceRegeneration).hint("Spend some time on restoring some of the used soulforce.");
 		if (player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) addButton(1, "Contemplate", DaoContemplations).hint("Dao Contemplations");
-		else addButtonDisabled(1, "???", "Req. to successfully survive 1st Tribulation.");
+		else addButtonDisabled(1, "???", "Req.  successfully surviving 1st Tribulation.");
 		if (flags[kFLAGS.DAILY_SOULFORCE_USE_LIMIT] < dailySoulforceUsesLimit) {
 			addButton(2, "Self-sustain", SelfSustain).hint("Spend some soulforce on suppresing hunger for a while."); //zamiana soulforce na satiety w stosunku 1:5
 			addButton(3, "Repres. Lust", RepresLust).hint("Spend some soulforce on calming your sexual urges."); //używanie soulforce do zmniejszania lust w stosunku 1:2
@@ -247,9 +250,11 @@ public class Soulforce extends BaseContent
 		menuItems.push("Enemies", EnemiesMenu, "For spawning various enemies to test fight them.");
 		menuItems.push("Camp NPC's", FasterOrInstantCampNPCRecruitment, "Menu to speed up recruitment of camp npc's due to testing needs.");
 		menuItems.push("Body State", BodyStateMenu, "For more precisely adjusting a few other body values or parts than Stats Adj option.");
-		menuItems.push("MetamorphFull", (player.hasPerk(PerkLib.Metamorph))? AllMetamorphOptionsUnlock: false, "Unlock all Metamorph options.");
-		menuItems.push("FixJiangshi", jiangshiBuggedItemsCleanUpCrew0, "Shit! Here we go Again! Fixing Jiangshi! (better use it only once or may be some bugs i not plan to account for in case of using this more than once - i not blocked using it more than once so belive ppl will be reasonable to not click like mad this)");
 		menuItems.push("Test dynamic stat", TestDynamicStats, "Test Dynamic stats.");
+		menuItems.push("MetamorphFull", (player.hasPerk(PerkLib.Metamorph))? AllMetamorphOptionsUnlock: false, "Unlock all Metamorph options.");
+		menuItems.push("BelisaTest", (BelisaFollower.BelisaInGame && BelisaFollower.BelisaFollowerStage < 3 && BelisaFollower.BelisaEncounternum >= 1) ? belisatest : false, "Belisa Trigger");
+		menuItems.push("LilyTest", (LilyFollower.LilyFollowerState == false) ? lilytest : false, "Lily Trigger");
+		menuItems.push("FixJiangshi", jiangshiBuggedItemsCleanUpCrew0, "Shit! Here we go Again! Fixing Jiangshi! (better use it only once or may be some bugs i not plan to account for in case of using this more than once - i not blocked using it more than once so belive ppl will be reasonable to not click like mad this)");
 		menuItems.push("Atlach Test", AddMaxBackpack6, "Trigger Atlach scenes.");
 		menuItems.push("BodyPartEditor", SceneLib.debugMenu.bodyPartEditorRoot, "");
 		menuItems.push("ClickItTwice", AddMaxBackpack00, "Golem Army and Ascension: Additional Organ Mutation/Prestige perks correction pre global save upgrade on new public build.");
@@ -275,6 +280,12 @@ public class Soulforce extends BaseContent
 		menuGen(menuItems, page, accessSoulforceMenu, false);
 	}
 
+	public function lilytest():void{
+		SceneLib.lily.lilyEncounter();
+	}
+	public function belisatest():void{
+		SceneLib.belisa.subsequentEncounters();
+	}
 	public function resetMutations():void{
 		clearOutput();
 		player.removePerk(MutationsLib.KitsuneThyroidGland);
@@ -1782,7 +1793,7 @@ public class Soulforce extends BaseContent
 			addButton(3, "SuccGard", FightSuccubusGardener).hint("Test fight with Succubus Gardener. (Also it will glitch right after fight so not start this fight if you got unsaved progress that you not wanna loose as only way to handle post fight glitch is restarting game)");
 			addButton(4, "The Dummy", FightTheDummy).hint("Fight with The Dummy.");
 			addButton(5, "M.WSeaver", FightBelisa).hint("Test fight with Mana Weaver.");
-			addButton(6, "D.Giantess", FightTyrantia).hint("Test fight with Drider Giantess.");
+			if (player.level >= 45 && TyrantiaFollower.TyrantiaFollowerStage < 5 && !TyrantiaFollower.TyraniaIsRemovedFromThewGame) addButton(6, "D.Giantess", FightTyrantia).hint("Test fight with Drider Giantess.");
 			addButton(7, "Zenji", FightZenji).hint("Test fight with Zenji.");
 			addButton(8, "Sonya", FightSonya).hint("Test fight with Sonya.");
 			addButton(9, "RyuBi", FightRyuBi).hint("Test fight with RyuBi.");
@@ -2827,8 +2838,10 @@ public class Soulforce extends BaseContent
 	}
 	public function FightTyrantia():void {
 		clearOutput();
-		outputText("Entering battle with Drider Giantess! Enjoy ^^");
-		startCombat(new Tyrantia());
+		if (TyrantiaFollower.TyrantiaFollowerStage > 2) SceneLib.tyrania.repeatEncounterBattlefield();
+		else if (TyrantiaFollower.TyrantiaAffectionMeter > 40 && TyrantiaFollower.TyrantiaFollowerStage > 1) SceneLib.tyrania.encounterBattlefieldAfter40Affection();
+		else if (TyrantiaFollower.TyrantiaFollowerStage > 0) SceneLib.tyrania.repeatEncounterBattlefield();
+		else SceneLib.tyrania.firstEncounter();
 	}
 	public function FightZenji():void {
 		clearOutput();

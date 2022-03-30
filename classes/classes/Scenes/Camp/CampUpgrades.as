@@ -1652,9 +1652,9 @@ public function buildFirstElementalEnergyConduit():void {
 private function doBuildFirstElementalEnergyConduit():void {
 	flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 3;
 	clearOutput();
-	outputText("You decide to upgrade your first arcane circle in order to better utilise elemental shards. You reach into the shards, enfusing them with your mana and changing them from the inside. You liquify the crystals, pouring them into a stone bowl. You then engrave an intricate series of runes onto three flat stones, carefully pouring the liquid crystal into the engravings, making them shine with power. All three stones are then placed in a triangular formation inside your circle, runes lining up to form veins of magic, conduits pulsing with elemental energy. Each stone is now an elemental node!");
+	outputText("You decide to upgrade your first arcane circle in order to better utilise elemental shards. You reach into the shards, enfusing them with your mana and changing them from the inside. You liquify the crystals, pouring them into a stone bowl. You then engrave an intricate series of runes onto three flat stones, carefully pouring the liquid crystal into the engravings, making them shine with power. All three stones are then placed in a triangular formation inside your circle, runes lining up to form veins of magic, conduits pulsing with elemental energy. Each stone is now an elemental node! You can feel that the power is now directly stored in the arcane circle, ready to use.");
 	player.createStatusEffect(StatusEffects.ElementalEnergyConduits,0,600,1,0);
-	outputText(" \"<b>You can now convert elemental shards into pure elemental energy. You can feel that the power is directly stored in the arcane circle, ready to use.</b>\"");
+	outputText("\n\n<b>You can now convert elemental shards into pure elemental energy.</b>");
 	//Gain fatigue.
 	var fatigueAmount:int = 50;
 	if (player.hasPerk(PerkLib.IronMan)) fatigueAmount -= 20;
@@ -1684,7 +1684,7 @@ private function doUpgradeFirstElementalEnergyConduit():void {
 	outputText("You decide that you need more elemental energy on hand, and for that, you need to expand your first energy conduit. You reach into the shards, enfusing them with your mana and changing them from the inside. You liquify the crystals, pouring them into a stone bowl. You then engrave an intricate series of runes onto three flat stones, carefully pouring the liquid crystal into the engravings, making them shine with power. All three stones are then placed around one of your pre-existing nodes, runes lining up to form veins of magic, conduits pulsing with elemental energy. One of your basic nodes has been enhanced, and can now store more power.");
 	player.addStatusValue(StatusEffects.ElementalEnergyConduits,2,600);
 	player.addStatusValue(StatusEffects.ElementalEnergyConduits,3,1);
-	outputText(" \"<b>Your arcane circles can store now more elemental energy! (+600)</b>\"");
+	outputText("\n\n<b>Your arcane circles can store now more elemental energy! (+600)</b>");
 	//Gain fatigue.
 	var fatigueAmount:int = 50;
 	if (player.hasPerk(PerkLib.IronMan)) fatigueAmount -= 20;
@@ -1714,7 +1714,7 @@ private function doBuildSecondElementalEnergyConduit():void {
 	outputText("You decide to engrave conduict in second circle. You draw complicated engraving on prepared stones using liquidified with help of mana elemental shards. Then you place all four prepared nodes in the second circle forming basic elemental conduit in it.");
 	player.addStatusValue(StatusEffects.ElementalEnergyConduits,2,800);
 	player.addStatusValue(StatusEffects.ElementalEnergyConduits,3,1);
-	outputText(" \"<b>Your arcane circles can store now more elemental energy! (+800)</b>\"");
+	outputText("\n\n<b>Your arcane circles can store now more elemental energy! (+800)</b>");
 	//Gain fatigue.
 	var fatigueAmount:int = 50;
 	if (player.hasPerk(PerkLib.IronMan)) fatigueAmount -= 20;
@@ -1744,7 +1744,7 @@ private function doUpgradeSecondElementalEnergyConduit():void {
 	outputText("You decide to expand your second energy conduit in order to store more elementals energy in circle until it will be needed. You draw complicated engraving on prepared stones using liquidified with help of mana elemental shards. Then you place all four prepared nodes in the second circle changing basic one elemental conduit into advanced.");
 	player.addStatusValue(StatusEffects.ElementalEnergyConduits,2,800);
 	player.addStatusValue(StatusEffects.ElementalEnergyConduits,3,1);
-	outputText(" \"<b>Your arcane circles can store now more elemental energy! (+800)</b>\"");
+	outputText("\n\n<b>Your arcane circles can store now more elemental energy! (+800)</b>");
 	//Gain fatigue.
 	var fatigueAmount:int = 50;
 	if (player.hasPerk(PerkLib.IronMan)) fatigueAmount -= 20;
@@ -1774,7 +1774,7 @@ private function doBuildThirdElementalEnergyConduit():void {
 	outputText("You decide to engrave conduict in third circle. You draw complicated engraving on prepared stones using liquidified with help of mana elemental shards. Then you place all five prepared nodes in the third circle forming basic elemental conduit in it.");
 	player.addStatusValue(StatusEffects.ElementalEnergyConduits,2,1000);
 	player.addStatusValue(StatusEffects.ElementalEnergyConduits,3,1);
-	outputText(" \"<b>Your arcane circles can store now more elemental energy! (+1,000)</b>\"");
+	outputText("\n\n<b>Your arcane circles can store now more elemental energy! (+1,000)</b>");
 	//Gain fatigue.
 	var fatigueAmount:int = 50;
 	if (player.hasPerk(PerkLib.IronMan)) fatigueAmount -= 20;
@@ -1804,7 +1804,7 @@ private function doUpgradeThirdElementalEnergyConduit():void {
 	outputText("You decide to expand your third energy conduit in order to store more elementals energy in circle until it will be needed. You draw complicated engraving on prepared stones using liquidified with help of mana elemental shards. Then you place all five prepared nodes in the third circle changing basic one elemental conduit into advanced.");
 	player.addStatusValue(StatusEffects.ElementalEnergyConduits,2,1000);
 	player.addStatusValue(StatusEffects.ElementalEnergyConduits,3,1);
-	outputText(" \"<b>Your arcane circles can store now more elemental energy! (+1,000)</b>\"");
+	outputText("\n\n<b>Your arcane circles can store now more elemental energy! (+1,000)</b>");
 	//Gain fatigue.
 	var fatigueAmount:int = 50;
 	if (player.hasPerk(PerkLib.IronMan)) fatigueAmount -= 20;
@@ -1834,7 +1834,7 @@ private function doBuildFourthElementalEnergyConduit():void {
 	outputText("You decide to engrave conduict in fourth circle. You draw complicated engraving on prepared stones using liquidified with help of mana elemental shards. Then you place all six prepared nodes in the fourth circle forming basic elemental conduit in it.");
 	player.addStatusValue(StatusEffects.ElementalEnergyConduits,2,1200);
 	player.addStatusValue(StatusEffects.ElementalEnergyConduits,3,1);
-	outputText(" \"<b>Your arcane circles can store now more elemental energy! (+1,200)</b>\"");
+	outputText("\n\n<b>Your arcane circles can store now more elemental energy! (+1,200)</b>");
 	//Gain fatigue.
 	var fatigueAmount:int = 50;
 	if (player.hasPerk(PerkLib.IronMan)) fatigueAmount -= 20;
@@ -1864,7 +1864,7 @@ private function doUpgradeFourthElementalEnergyConduit():void {
 	outputText("You decide to expand your fourth energy conduit in order to store more elementals energy in circle until it will be needed. You draw complicated engraving on prepared stones using liquidified with help of mana elemental shards. Then you place all six prepared nodes in the fourth circle changing basic one elemental conduit into advanced.");
 	player.addStatusValue(StatusEffects.ElementalEnergyConduits,2,1200);
 	player.addStatusValue(StatusEffects.ElementalEnergyConduits,3,1);
-	outputText(" \"<b>Your arcane circles can store now more elemental energy! (+1,200)</b>\"");
+	outputText("\n\n<b>Your arcane circles can store now more elemental energy! (+1,200)</b>");
 	//Gain fatigue.
 	var fatigueAmount:int = 50;
 	if (player.hasPerk(PerkLib.IronMan)) fatigueAmount -= 20;
@@ -1894,7 +1894,7 @@ private function doBuildFifthElementalEnergyConduit():void {
 	outputText("You decide to engrave conduict in fifth circle. You draw complicated engraving on prepared stones using liquidified with help of mana elemental shards. Then you place all seven prepared nodes in the fifth circle forming basic elemental conduit in it.");
 	player.addStatusValue(StatusEffects.ElementalEnergyConduits,2,1400);
 	player.addStatusValue(StatusEffects.ElementalEnergyConduits,3,1);
-	outputText(" \"<b>Your arcane circles can store now more elemental energy! (+1,400)</b>\"");
+	outputText("\n\n<b>Your arcane circles can store now more elemental energy! (+1,400)</b>");
 	//Gain fatigue.
 	var fatigueAmount:int = 50;
 	if (player.hasPerk(PerkLib.IronMan)) fatigueAmount -= 20;
@@ -1924,7 +1924,7 @@ private function doUpgradeFifthElementalEnergyConduit():void {
 	outputText("You decide to expand your fifth energy conduit in order to store more elementals energy in circle until it will be needed. You draw complicated engraving on prepared stones using liquidified with help of mana elemental shards. Then you place all seven prepared nodes in the fifth circle changing basic one elemental conduit into advanced.");
 	player.addStatusValue(StatusEffects.ElementalEnergyConduits,2,1400);
 	player.addStatusValue(StatusEffects.ElementalEnergyConduits,3,1);
-	outputText(" \"<b>Your arcane circles can store now more elemental energy! (+1,400)</b>\"");
+	outputText("\n\n<b>Your arcane circles can store now more elemental energy! (+1,400)</b>");
 	//Gain fatigue.
 	var fatigueAmount:int = 50;
 	if (player.hasPerk(PerkLib.IronMan)) fatigueAmount -= 20;

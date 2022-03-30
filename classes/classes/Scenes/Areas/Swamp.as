@@ -8,6 +8,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
 import classes.Scenes.Areas.Swamp.*;
 import classes.Scenes.NPCs.BelisaFollower;
+import classes.Scenes.NPCs.LilyFollower;
 import classes.Scenes.SceneLib;
 
 use namespace CoC;
@@ -39,8 +40,13 @@ use namespace CoC;
 			flags[kFLAGS.TIMES_EXPLORED_SWAMP]++;
 			/*  SPECIAL SCENE OVERWRITES */
 			//Belisa
-			if (BelisaFollower.BelisaEncounternum == 0 && rand(5) == 0) {
+			if (!player.hasStatusEffect(StatusEffects.BelisaOff) && BelisaFollower.BelisaEncounternum == 0 && rand(2) == 0) {
 				SceneLib.belisa.firstEncounter();
+				return;
+			}
+			//Lily
+			if (LilyFollower.LilyFollowerState == false && rand(3) == 0) {
+				SceneLib.lily.lilyEncounter();
 				return;
 			}
 			//KIHA X HEL THREESOME!
@@ -58,6 +64,7 @@ use namespace CoC;
 				SceneLib.etnaScene.repeatYandereEnc();
 				return;
 			}
+			//Ember
 			if (flags[kFLAGS.TOOK_EMBER_EGG] == 0 && flags[kFLAGS.EGG_BROKEN] == 0 && flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0 && (flags[kFLAGS.TIMES_EXPLORED_SWAMP] % 40 == 0)) {
 				SceneLib.emberScene.findEmbersEgg();
 				return;

@@ -1,11 +1,9 @@
 /*
  CoC Main File - This is what loads when the game begins. If you want
-import classes.EngineCore;to start understanding the structure of CoC,
- this is the place to start.
- First, we import all the classes from many different files across the codebase. It would be wise not t
-import classes.Scenes.NPCs.JojoScene;o alter the
- order of th
-import classes.Scenes.SceneLib;ese imports until more is known about what needs to load and when.
+ to start understanding the structure of CoC, this is the place to start.
+ First, we import all the classes from many different files across the codebase.
+ It would be wise not to alter the
+ order of these imports until more is known about what needs to load and when.
 */
 
 package classes

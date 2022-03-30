@@ -7,7 +7,7 @@ import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
 import classes.Items.Armors.SuccubusArmor;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 public class SandTrapScene extends BaseContent{
@@ -15,8 +15,7 @@ public class SandTrapScene extends BaseContent{
 			return monster as SandTrap;
 		}
 
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		
+				
 		public function SandTrapScene()
 		{
 		}
@@ -172,9 +171,8 @@ internal function pcBeatsATrap():void {
 		if (player.hasCock() && player.str >= 60) addButton(1, "UseYourCock", stickWangInSandgina);
 		addButton(2, "RideVaginal", rideDatSandTarpLikeIts1999);
 		addButton(3, "Handjob", useSandTarpsHands);
-		uniquuuesexscene.pcUSSPreChecksV2(pcBeatsATrap2);
-		//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(12);
-		if (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armorName == "lusty maiden's armor" || player.armorName == "Succubus armor")) {
+		SceneLib.uniqueSexScene.pcUSSPreChecksV2(pcBeatsATrap2);
+				if (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armorName == "lusty maiden's armor" || player.armorName == "Succubus armor")) {
 			if (player.armorName == "Succubus armor") addButton(8, "B.Titfuck", createCallBackFunction2((player.armor as SuccubusArmor).succubusPaizuri,player,monster));
 			else addButton(8, "B.Titfuck", createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,monster));
 		}
@@ -188,9 +186,8 @@ public function pcBeatsATrap2():void {
 	if (player.hasCock() && player.str >= 60) addButton(1, "UseYourCock", stickWangInSandgina);
 	addButton(2, "RideVaginal", rideDatSandTarpLikeIts1999);
 	addButton(3, "Handjob", useSandTarpsHands);
-	uniquuuesexscene.pcUSSPreChecksV2(pcBeatsATrap2);
-	//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(12);
-	if (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armorName == "lusty maiden's armor" || player.armorName == "Succubus armor")) {
+	SceneLib.uniqueSexScene.pcUSSPreChecksV2(pcBeatsATrap2);
+		if (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armorName == "lusty maiden's armor" || player.armorName == "Succubus armor")) {
 		if (player.armorName == "Succubus armor") addButton(8, "B.Titfuck", createCallBackFunction2((player.armor as SuccubusArmor).succubusPaizuri,player,monster));
 		else addButton(8, "B.Titfuck", createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,monster));
 	}

@@ -10,12 +10,11 @@ package classes.Scenes.NPCs
 	import classes.Scenes.Areas.HighMountains.MinotaurMob;
 	import classes.Scenes.Monsters.Manticore;
 import classes.display.SpriteDb;
-	import classes.Scenes.UniqueSexScenes;
+	import classes.Scenes.SceneLib;
 	
 	public class EtnaFollower extends NPCAwareContent
 	{
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		
+				
 		public function EtnaFollower() 
 		{}
 
@@ -198,9 +197,8 @@ public function etnaRapeIntro():void
 	if (player.lust >= 33 && player.hasVagina()) addButton(1, "Yes (F)", etnaRapeYesF);
 	addButton(2, "No", etnaRapeNo);
 	if (player.lust >= 33 && player.isAlraune()) addButton(3, "Fill her up!", EtnaFillHerUp);
-	uniquuuesexscene.pcUSSPreChecksV2(etnaRapeIntro);
-	//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(55);
-}
+	SceneLib.uniqueSexScene.pcUSSPreChecksV2(etnaRapeIntro);
+	}
 
 public function etnaRapeYesM():void
 {
@@ -214,7 +212,7 @@ public function etnaRapeYesM():void
 	else outputText("the manticore");
 	outputText(" likes milk, as that would fit with the whole cat aspect. She cuts your thoughts short as she slides your [cock] between her large breasts, carefully squishing them together with her paws. You moan at the cat girl’s ministration as she proceeds to pump your [cock] up and down with her breasts, still licking your tip. Her titfuck feels wonderful and the way she licks your tip is clearly that of an expert whore, ");
 	if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1 && !player.hasStatusEffect(StatusEffects.WildManticore)) outputText("Etna");
-	else outputText("the manticore");
+	else outputText(" the manticore");
 	outputText("seems to go into a frenzy as a drop of precum drools down your [cock] right on to her tongue. She starts to pump faster in an effort to force the cum out.\n\n");
 	outputText("\"<i>Nyaaaaa yes, that’s it! Give it all to me.</i>\"\n\n");
 	outputText("Accidentally, in her excitement, her tail slap against your flank injecting your side with a dash of her lewd venom but this only get your penis to swell even more. Whatever is coming out is gonna be one hell of a mess. Soon you can’t hold it any longer and paint her entire face with your man milk, to which she answers by methodically licking the cum clean like a cat drinking milk. Her expression and the way she grooms her paws licking them clean of your cum with a sensual \"<i>Nyaaaaaa</i>\" is so cute you idly ponder if she’s more cat than human.\n\n");
@@ -223,7 +221,7 @@ public function etnaRapeYesM():void
 	if (player.cumQ() < 2000) player.cumMultiplier += 4;
 	if (player.cumQ() < 10000) player.cumMultiplier += 2;
 	if (player.hasStatusEffect(StatusEffects.WildManticore)) player.removeStatusEffect(StatusEffects.WildManticore);
-	etnaAffection(10);
+	else etnaAffection(10);
 	player.sexReward("vaginalFluids","Dick");
 	cleanupAfterCombat();
 }
@@ -268,6 +266,7 @@ public function etnaRapeYesF2():void
 	if (flags[kFLAGS.ETNA_FEMALE_WIN_PUSSYTAIL_PLAY] < 1) flags[kFLAGS.ETNA_FEMALE_WIN_PUSSYTAIL_PLAY] = 1;
 	if (flags[kFLAGS.ETNA_FEMALE_WIN_PUSSYTAIL_PLAY] == 2) flags[kFLAGS.ETNA_FEMALE_WIN_PUSSYTAIL_PLAY] = 3;
 	if (player.hasStatusEffect(StatusEffects.WildManticore)) player.removeStatusEffect(StatusEffects.WildManticore);
+	else etnaAffection(10);
 	player.sexReward("vaginalFluids");
 }
 
@@ -335,7 +334,7 @@ public function EtnaFillHerUp():void
 	if (flags[kFLAGS.ETNA_FEMALE_WIN_PUSSYTAIL_PLAY] < 1) flags[kFLAGS.ETNA_FEMALE_WIN_PUSSYTAIL_PLAY] = 1;
 	if (flags[kFLAGS.ETNA_FEMALE_WIN_PUSSYTAIL_PLAY] == 2) flags[kFLAGS.ETNA_FEMALE_WIN_PUSSYTAIL_PLAY] = 3;
 	if (player.hasStatusEffect(StatusEffects.WildManticore)) player.removeStatusEffect(StatusEffects.WildManticore);
-	etnaAffection(10);
+	else etnaAffection(10);
 	player.sexReward("vaginalFluids","Dick");
 	player.sexReward("vaginalFluids","Dick");
 	player.sexReward("vaginalFluids","Dick");
@@ -356,7 +355,8 @@ public function etnaRapeNo():void
 {
 	clearOutput();
 	outputText("You decline and proceed to walk away back to your camp but she holds you back, handing over what looks to be a vial. \"<i>Take this. I think you should have it. Be careful. It's quite a strong drink.</i>\"");
-	etnaAffection(10);
+	if (player.hasStatusEffect(StatusEffects.WildManticore)) player.removeStatusEffect(StatusEffects.WildManticore);
+	else etnaAffection(10);
 	cleanupAfterCombat();
 }
 
@@ -371,9 +371,8 @@ public function etnaRape3rdWin():void
 	if (player.lust >= 33 && player.hasCock()) addButton(0, "Yes (M)", etnaRapeYesM);
 	if (player.lust >= 33 && player.hasVagina()) addButton(1, "Yes (F)", etnaRapeYesF);
 	addButton(2, "No", etnaRapeNo);
-	uniquuuesexscene.pcUSSPreChecksV2(etnaRape3rdWin);
-	//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(56);
-}
+	SceneLib.uniqueSexScene.pcUSSPreChecksV2(etnaRape3rdWin);
+	}
 
 public function etnaReady2Come2Camp():void
 {
@@ -392,6 +391,7 @@ private function etnaRapesYesCome2Camp():void
 {
 	spriteSelect(SpriteDb.s_etna);
 	clearOutput();
+    outputText("The girl clearly seems to be in love and after doing it so many times with her, you can’t deny having similar feelings towards the manticore. You express to her your accord to which she responds by kissing you passionately as you both begin to undress.\n\n");
 	flags[kFLAGS.ETNA_FOLLOWER] = 1;
 	if (player.hasCock()) {
 		outputText("You proceed to undress with deliberate slowness, presenting your penis to Etna, who is almost shaking out of control as she eyes it.\n\n");
@@ -400,7 +400,7 @@ private function etnaRapesYesCome2Camp():void
 		outputText("Soon you can’t hold it any longer and paint her entire face with your man milk, to which she answers by methodically licking the cum clean like a cat drinking milk. Her expression and the way she grooms her paws licking them clean of your cum with a sensual \"<i>Nyaaaaaa</i>\" is so cute you idly ponder if she’s more cat than human.\n\n");
 		outputText("Having taken your tribute you dismiss her and proceed to head back to camp.");
 	}
-	if (player.hasVagina()) {
+	else if (player.hasVagina()) {
 		outputText("You slowly remove any impeding equipment as you order the girl to make you feel good, double time! She does so and soon her entire tongue length is fully in your pussy, licking in a way reminiscent of a cat grooming her kitten. You moan appreciatively and to reward the slut for her efforts you finger her in return. ");
 		if (flags[kFLAGS.ETNA_FEMALE_WIN_PUSSYTAIL_PLAY] < 1) outputText("Her tail tip suddenly opens to reveal what looks like a dripping pussy and to drive her even crazier you take it upon yourself to insert your entire fist inside.\n\n");
 		else outputText("Her tail pussy blossoms out of her arousal and you insert your entire fist inside to help increase her stimulation.\n\n");
@@ -617,8 +617,8 @@ public function etnaAppearance():void
 {
 	clearOutput();
 	outputText("Etna is a manticore. Her flowing, red hair is tied up in a spiky ponytail, which only accentuates her wild appearance. Her red, cat-like eyes are always sparkling maliciously like she was planning something and her not-so-innocent cat toothed smirk only serves to make her look all the more the naughtier. Her lion ears are alert to sound, twitching as she hears you approaching. Currently, she is laying down on her carpet in a position quite reminiscent of a classic housecat.\n\n");
-	outputText("Her arms and legs end in powerful, feline paws, allowing her to move either on two or four legs. The bluish-black fur on her limbs climbs up to the middle of her thighs and shoulders turning white at the tip and contrasting with her light skin. Funnily, despite their feral appearance her hands armed with claws can hold and manipulate objects like human hands would including, of course, a man’s pole. Her neck is hidden by a fluffy collar of white fur, not unlike that of a lion. ");
-	outputText("The comparison to a lion ends there as a pair of large bat-like wings that can stretch up to 13 feet wide rest on her shoulders. From her well-shaped ass surges a scorpion-like tail covered in armor like chitin. At her tail tip is a large bulb covered with venomous spikes from which venom drips off. She can open her tail tip at will which expands into a star-shaped tail pussy of accommodating size that’s always ready to devour a man’s tool and is constantly drooling with moisture.\n\n");
+	outputText("Her arms and legs end in powerful, feline paws, allowing her to move either on two or four legs. The bluish-black fur on her limbs climbs up to the middle of her thighs and shoulders turning white at the tip and contrasting with her light skin. Funnily, despite their feral appearance her hands armed with claws can hold and manipulate objects like human hands would, including, of course, a man’s pole. Her neck is hidden by a fluffy collar of white fur, not unlike that of a lion. ");
+	outputText("The comparison to a lion ends there, as a pair of large bat-like wings that can stretch up to 13 feet wide rest on her shoulders. From her well-shaped ass surges a scorpion-like tail covered in armor like chitin. At her tail tip is a large bulb covered with venomous spikes from which venom drips off. She can open her tail tip at will which expands into a star-shaped tail pussy of accommodating size that’s always ready to devour a man’s tool and is constantly drooling with moisture.\n\n");
 	outputText("As her nature of a sexual predator would tell, she is endowed with a pair of pert breasts easily reaching E cup and her perfect hourglass shape could make many succubi jealous.\n\n");
 	outputText("Her main pussy, funnily enough, is the only thing about her that doesn’t look perpetually ready for sex. She likely doesn't use it often.");
 	menu();

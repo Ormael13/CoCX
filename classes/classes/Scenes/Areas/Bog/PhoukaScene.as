@@ -6,7 +6,7 @@ package classes.Scenes.Areas.Bog
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 
 public class PhoukaScene extends BaseContent implements TimeAwareInterface {
 
@@ -16,8 +16,7 @@ public class PhoukaScene extends BaseContent implements TimeAwareInterface {
 		internal static const PHOUKA_FORM_GOAT:int = 2;
 		internal static const PHOUKA_FORM_HORSE:int = 3;
 
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		
+				
 		public function PhoukaScene() 
 		{
 			EventParser.timeAwareClassAdd(this);
@@ -461,9 +460,8 @@ public class PhoukaScene extends BaseContent implements TimeAwareInterface {
 					addButton(0, "Leave", phoukaLeaveOnLustWin);
 					addButton(1, "Anal Ride", phoukaSexFaeriePostCombat); //Works for all
 					if (player.hasCock()) addButton(2, "Fuck Faerie", phoukaSexFaerieFemalePostCombat); //Male or Herm Only
-					uniquuuesexscene.pcUSSPreChecksV2(phoukaPlayerWins2);
-					//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(9);
-				}
+					SceneLib.uniqueSexScene.pcUSSPreChecksV2(phoukaPlayerWins2);
+									}
 			}
 		}
 		public function phoukaPlayerWins2():void {
@@ -471,9 +469,8 @@ public class PhoukaScene extends BaseContent implements TimeAwareInterface {
 			addButton(0, "Leave", phoukaLeaveOnLustWin);
 			addButton(1, "Anal Ride", phoukaSexFaeriePostCombat); //Works for all
 			if (player.hasCock()) addButton(2, "Fuck Faerie", phoukaSexFaerieFemalePostCombat); //Male or Herm Only
-			uniquuuesexscene.pcUSSPreChecksV2(phoukaPlayerWins2);
-			//if (player.pcCanUseUniqueSexScene()) uniquuuesexscene.checkIfPcRapeOnVictory(9);
-		}
+			SceneLib.uniqueSexScene.pcUSSPreChecksV2(phoukaPlayerWins2);
+					}
 
 		public function phoukaPregBirth():void
 		{
