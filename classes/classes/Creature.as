@@ -1865,7 +1865,7 @@ public class Creature extends Utils
         * @param    tentUnlim   If true, doesn't check the maximum size for tentacle cocks (you can twist them, makes sense?)
         * @return   The count of matching dicks
         */
-        public function countCocksWithType(type:CockTypesEnum, minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", tentUnlim = true):int {
+        public function countCocksWithType(type:CockTypesEnum, minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", tentUnlim:Boolean = true):int {
             if (compareBy != "area" && compareBy != "length" && compareBy != "thickness") //sanity check
                 throw new Error("Wrong compareBy value!");
             var cnt:int = 0;
@@ -1881,7 +1881,7 @@ public class Creature extends Utils
             return cnt;
         }
 		
-		public function countCocks(minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", tentUnlim = true):int {
+		public function countCocks(minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", tentUnlim:Boolean = true):int {
 			return countCocksWithType(CockTypesEnum.UNDEFINED, minSize, maxSize, compareBy, tentUnlim);
 		}
 
@@ -1895,7 +1895,7 @@ public class Creature extends Utils
         * @param    compareBy   The measurement to compare by, "area", "length" or "thickness"
         * @return   The number of the biggest (comparing by 'compareBy') matching dick, -1 if no any
         */
-        public function findCockWithType(type:CockTypesEnum, biggest:int = 1, minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", tentUnlim = true):int {
+        public function findCockWithType(type:CockTypesEnum, biggest:int = 1, minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", tentUnlim:Boolean = true):int {
             if (compareBy != "area" && compareBy != "length" && compareBy != "thickness") //sanity check
                 throw new Error("Wrong compareBy value!");
             var sorted:Array = new Array();
@@ -1905,7 +1905,7 @@ public class Creature extends Utils
                 var nsize:Number = compareBy == "length" ? cocks[num].cockLength :
                                 compareBy == "thickness" ? cocks[num].cockThickness :
                                 cockArea(num);
-                if ((nsize >= minSize || minSize < 0) && (nsize < maxSize || maxSize < 0 || tentUnlim && cockIsTentacle(i))
+                if ((nsize >= minSize || minSize < 0) && (nsize < maxSize || maxSize < 0 || tentUnlim && cockIsTentacle(num))
                 && (cocks[num].cockType == type || tent && cockIsTentacle(num) || type == CockTypesEnum.UNDEFINED)) {
                     var j:int;
                     for (j = 0; j < sorted.length; ++j) {
@@ -1931,11 +1931,11 @@ public class Creature extends Utils
 			return sorted[0];
         }
 		
-		public function findCock(biggest:int = 1, minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", tentUnlim = true):int {
+		public function findCock(biggest:int = 1, minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", tentUnlim:Boolean = true):int {
 			return findCockWithType(CockTypesEnum.UNDEFINED, biggest, minSize, maxSize, compareBy, tentUnlim);
 		}
 
-        public function findCockWithTypeNotIn(arr:Array, type:CockTypesEnum, biggest:int = 1, minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", tentUnlim = true):int {
+        public function findCockWithTypeNotIn(arr:Array, type:CockTypesEnum, biggest:int = 1, minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", tentUnlim:Boolean = true):int {
             var ret:int = -1;
             var sign:int = (biggest >= 0) ? 1 : -1;
             var cnt:int = sign;
@@ -1955,7 +1955,7 @@ public class Creature extends Utils
             return -1;
         }
 
-		public function findCockNotIn(arr:Array, biggest:int = 1, minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", tentUnlim = true):int {
+		public function findCockNotIn(arr:Array, biggest:int = 1, minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", tentUnlim:Boolean = true):int {
 			return findCockWithTypeNotIn(arr, CockTypesEnum.UNDEFINED, biggest, minSize, maxSize, compareBy, tentUnlim);
 		}
 

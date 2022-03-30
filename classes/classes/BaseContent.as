@@ -953,8 +953,8 @@ import coc.xxc.StoryContext;
 			CoC.instance.achievements = val;
 		}
 
-        protected function get sceneHunter():void {
-            return CoC.instance.gameSettings.sceneHunter;
+        protected function get sceneHunter():SceneHunter {
+            return CoC.instance.gameSettings.sceneHunter_inst;
         }
 
 		protected function showStatDown(arg:String):void

@@ -1,11 +1,7 @@
 package classes {
 
-import classes.GlobalFlags.*;
-import coc.view.MainView;
-import coc.view.StatsView;
-import flash.display.StageQuality;
-import flash.text.TextFormat;
-import classes.internals.SaveableState;
+import classes.GlobalFlags.kFLAGS;
+import classes.Appearance;
 
 public class SceneHunter extends BaseContent {
     public function settingsPage():void {
@@ -84,7 +80,7 @@ public class SceneHunter extends BaseContent {
     //restore the previous text and start the next function
     public function restoreText(textToRestore:String = "", fun:Function = null):void {
         CoC.instance.currentText = textToRestore;
-        if (fun)
+        if (fun != null)
             fun();
     }
     
@@ -107,13 +103,13 @@ public class SceneHunter extends BaseContent {
     * @param    dickActive      If false, "dick" button will be disabled.
     * @param    dickDisabledMsg The message to write on the disabled dick button
     */
-    public function selectPart(dickF:Function, vagF:Function, assF:Function = null, dickActive:Boolean = true, dickDisabledMsg:String = "", dickPriority:Boolean = true):void {
+    public function selectGender(dickF:Function, vagF:Function, assF:Function = null, dickActive:Boolean = true, dickDisabledMsg:String = "", dickPriority:Boolean = true):void {
         //Auto-calls. No auto call when dick is just inactive - player should know!
-        if (!(dickF && player.hasCock() && dickActive) && !(vagF && player.hasVagina()) && !assF) { //sanity checks
+        if (!(dickF != null && player.hasCock() && dickActive) && !(vagF != null && player.hasVagina()) && assF == null) { //sanity checks
             if (dickF && player.hasCock() && !dickActive)
-                outputText("<b><u>SceneHunter.selectPart() was called, but the ONLY option - dick - is disabled. Please report this.</b></u>");
+                outputText("<b><u>SceneHunter.selectGender() was called, but the ONLY option - dick - is disabled. Please report this.</b></u>");
             else
-                outputText("<b><u>SceneHunter.selectPart() was called in a wrong way. Please report this.</b></u>");
+                outputText("<b><u>SceneHunter.selectGender() was called in a wrong way. Please report this.</b></u>");
             goNext(true);
             return;
         }
@@ -121,17 +117,17 @@ public class SceneHunter extends BaseContent {
         or if !uniHerms:
             - dick active and higher priority than vag (always higher than ass!!)
             - dick active and no vag */
-        if ((dickF && player.hasCock()) && (!(vagF && player.hasVagina()) && !assF || !uniHerms && dickActive && (dickPriority || !player.hasVagina()))) {
+        if ((dickF != null && player.hasCock()) && (!(vagF != null && player.hasVagina()) && assF == null || !uniHerms && dickActive && (dickPriority || !player.hasVagina()))) {
             dickF();
             return;
         }
         // for !uniHerms: if dick should be called, it was ALREADY called. So call vag anyway, vag > ass
-        if ((vagF && player.hasVagina()) && (!(dickF && player.hasCock()) && !assF || !uniHerms))) {
+        if ((vagF != null && player.hasVagina()) && (!(dickF != null && player.hasCock()) && assF == null || !uniHerms)) {
             vagF();
             return;
         }
         // with !uniHerms reached only when dick/vag are impossible, call it
-        if (!(dickF && player.hasCock()) && !(vagF && player.hasVagina()) && assF || !uniHerms) {
+        if (!(dickF != null && player.hasCock()) && !(vagF != null && player.hasVagina()) && assF != null || !uniHerms) {
             assF();
             return;
         }
@@ -139,7 +135,7 @@ public class SceneHunter extends BaseContent {
         var beforeText:String = CoC.instance.currentText;
         outputText("\n\n<b>Which part of your body do you want to use?</b>");
         menu();
-        if (dickF) {
+        if (dickF != null) {
             if (player.hasCock()) {
                 if (dickActive)
                     addButton(0, "Dick", restoreText, beforeText, dickF);
@@ -149,13 +145,13 @@ public class SceneHunter extends BaseContent {
             else
                 addButtonDisabled(0, "Dick", "You don't have any.");
         }
-        if (vagF) {
+        if (vagF != null) {
             if (player.hasVagina())
                     addButton(1, "Vagina", restoreText, beforeText, vagF);
             else
                 addButtonDisabled(1, "Vagina", "You don't have any.");
         }
-        if (assF)
+        if (assF != null)
             addButton(2, "Ass", restoreText, beforeText, assF);
     }
 
@@ -179,7 +175,7 @@ public class SceneHunter extends BaseContent {
     public function selectFitNofit(fitF:Function, nofitF:Function, maxSize:Number, compareBy:String = "area"):void {
         //Auto-calls
         if (!dickSelect) {
-            if (findCock(1, -1, maxSize, compareBy, false) >= 0)
+            if (player.findCock(1, -1, maxSize, compareBy, false) >= 0)
                 fitF();
             else
                 nofitF();
@@ -190,15 +186,15 @@ public class SceneHunter extends BaseContent {
         outputText("\n\n<b>Will you use the dick that will certainly fit, or press your luck and try to use a bigger 'tool'?</b>");
         menu();
         //fitting cocks
-        if (findCock(1, -1, maxSize, compareBy, true) >= 0)
+        if (player.findCock(1, -1, maxSize, compareBy, true) >= 0)
             addButton(0, "Fitting", restoreText, beforeText, fitF);
         else
             addButtonDisabled(0, "Fitting", "Requires dick " + compareBy + " less than " + maxSize);
         //too big
-        if (findCock(1, maxSize, -1, compareBy, true) >= 0)
+        if (player.findCock(1, maxSize, -1, compareBy, true) >= 0)
             addButton(1, "Too big", restoreText, beforeText, nofitF);
         else
-            addButtonDisabled(1, "Fitting", "Requires dick " + compareBy + " greater than " + maxSize);
+            addButtonDisabled(1, "Too big", "Requires dick " + compareBy + " greater than " + maxSize);
     }
     /**
     * The dialogue to select one of 3 dick sizes. There's no points in the game when more are used.
@@ -210,12 +206,12 @@ public class SceneHunter extends BaseContent {
     * @param    compareBy               (Optional) Measurement to compare
     */
     public function selectBigSmall(bigF:Function, bigMin:Number, mediumF:Function, smallMax:Number = -1, smallF:Function = null, compareBy:String = "area"):void {
-        var smallProvided:Boolean = smallMax >= 0 && smallF;
+        var smallProvided:Boolean = smallMax >= 0 && smallF != null;
         //Auto-calls
         if (!dickSelect) {
-            if (findCock(1, bigMin, -1, compareBy) >= 0)
+            if (player.findCock(1, bigMin, -1, compareBy) >= 0)
                 bigF();
-            else if (findCock(1, smallProvided ? smallMax : -1, bigMin, compareBy, false) >= 0) //called even if mediumMin is not provived (-1 = no minimum)
+            else if (player.findCock(1, smallProvided ? smallMax : -1, bigMin, compareBy, false) >= 0) //called even if mediumMin is not provived (-1 = no minimum)
                 mediumF();
             else
                 smallF(); //if smallMax is provided, smallF MUST be provided too
@@ -223,29 +219,29 @@ public class SceneHunter extends BaseContent {
         }
         //Dialogue
         var beforeText:String = CoC.instance.currentText;
-        outputText("\n\n<b>Will you use a big" + (smallProvided ? ", medium") + " or small sized dick?</b>");
+        outputText("\n\n<b>Will you use a big" + (smallProvided ? ", medium": "") + " or small sized dick?</b>");
         menu();
         //big cocks
-        if (findCock(1, bigMin, -1, compareBy) >= 0)
+        if (player.findCock(1, bigMin, -1, compareBy) >= 0)
             addButton(0, "Big", restoreText, beforeText, bigF);
         else
             addButtonDisabled(0, "Fitting", "Requires dick " + compareBy + " greater than " + bigMin);
         //medium-small
         if (smallProvided) {
             //medium cocks
-            if (findCock(1, smallMax, bigMin, compareBy, false) >= 0) //tentacles don't fit
+            if (player.findCock(1, smallMax, bigMin, compareBy, false) >= 0) //tentacles don't fit
                 addButton(1, "Medium", restoreText, beforeText, mediumF);
             else
                 addButtonDisabled(1, "Medium", "Requires dick " + compareBy + " greater than " + smallMax + " and less than " + bigMin);
             //small cocks
-            if (findCock(1, -1, smallMax, compareBy, false) >= 0) //tentacles don't fit
+            if (player.findCock(1, -1, smallMax, compareBy, false) >= 0) //tentacles don't fit
                 addButton(2, "Small", restoreText, beforeText, smallF);
             else
                 addButtonDisabled(2, "Small", "Requires dick " + compareBy + " less than " + smallMax);
         }
         else {
             //replaced "Medium" text with "Small" to avoid player confusion
-            if (findCock(1, -1, bigMin, compareBy, false) >= 0) //tentacles don't fit
+            if (player.findCock(1, -1, bigMin, compareBy, false) >= 0) //tentacles don't fit
                 addButton(1, "Small", restoreText, beforeText, mediumF);
             else
                 addButtonDisabled(1, "Small", "Requires dick " + compareBy + " less than " + bigMin);
@@ -269,14 +265,19 @@ public class SceneHunter extends BaseContent {
         return flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS];
     }
 
+    public function print(text:String):void {
+        if (printChecks)
+            outputText("\n\n<b>" + text + "</b>\n\n");
+    }
+
     //Some common checks for easier access
     
     //Prints dick requirements if not found
-    public function check_dick(type:CockTypesEnum, minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", moreText:String = ""):void {
-        if (printChecks && findCockWithType(type, 1, minSize, maxSize, compareBy) < 0) {
+    public function check_dick_typed(type:CockTypesEnum, minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", moreText:String = ""):void {
+        if (printChecks && player.findCockWithType(type, 1, minSize, maxSize, compareBy) < 0) {
             outputText("\n\n<b>FAILED DICK CHECK:")
             if (type != CockTypesEnum.UNDEFINED)
-                outputText("\n    Type: " + cockNoun(type));
+                outputText("\n    Type: " + Appearance.cockNoun(type));
             if (minSize != -1)
                 outputText("\n    Min " + compareBy + ": " + minSize);
             if (maxSize != -1)
@@ -285,6 +286,9 @@ public class SceneHunter extends BaseContent {
                 outputText("\n" + moreText);
             outputText("</b>\n\n")
         }
+    }
+    public function check_dick(minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", moreText:String = ""):void {
+        check_dick_typed(CockTypesEnum.UNDEFINED, minSize, maxSize, compareBy, moreText);
     }
     
     //Prints dick requirements if not found
