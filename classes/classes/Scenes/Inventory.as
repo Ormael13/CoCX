@@ -517,6 +517,30 @@ use namespace CoC;
 			addButton(14, "Back", inventoryMenu);
 		}
 
+		public function SkyPoisonPearlMenuv2():void{
+			//clearOutput();
+			hideMenus();
+			spriteSelect(null);
+			var pLvl:int = Math.floor(player.level/6);
+			menu();
+			addButton(0, "Store In", SPPStoreItems).hint("Put your items into the Sky Poison Pearl.");
+			if (player.itemSlots.length == 0 || pLvl * 14 == pearlStorage.length) addButtonDisabled(0, "Store In", "You either don't have anything to store, or can't store any more currently!");
+			addButton(1, "Take out", SPPTakeOut).hint("Take Items out of your Sky Poison Pearl.")
+			if (pearlStorage.length == 0) addButtonDisabled(1, "Take Out", "You have nothing in your Pearl to take out!");
+
+		}
+
+		private function SPPStoreItems():void{
+			clearOutput();
+			outputText("What do you want to put into storage?");
+			var pLvl:int = Math.floor(player.level/6);
+			outputText("You have "+ 14 * pLvl + " slots total, of which " + pearlStorage.length + " slots are used.");
+			menu();
+			pickItemToPlaceInStorage2(placeInSkyPoisonPearl5, allAcceptable, "sky poison pearl", false)
+		}
+
+		private function SPPTakeOut():void{}
+
 		public function stash():void {
 			/*Hacked in cheat to enable shit
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00254] = 1;
