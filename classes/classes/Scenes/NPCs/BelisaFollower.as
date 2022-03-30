@@ -224,7 +224,7 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 			BelisaShopOpen = true;
 		}
 		menu();
-		addButton(0, "Apperance", BelisaAppearance);
+		addButton(0, "Appearance", BelisaAppearance);
 		addButton(1, "Talk", BelisaTalk);
 		addButton(2, "Hang", BelisaHang);
 		if (BelisaShopOpen) addButton(3, "Shop", BelisaShop);
@@ -235,7 +235,7 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		clearOutput();
 		outputText("<i>\"Well, what is it you want then?\"</i>\n\n");
 		menu();
-		addButton(0, "Apperance", BelisaAppearance);
+		addButton(0, "Appearance", BelisaAppearance);
 		addButton(1, "Talk", BelisaTalk);
 		addButton(2, "Hang", BelisaHang);
 		if (BelisaShopOpen) addButton(3, "Shop", BelisaShop);
@@ -672,7 +672,9 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		if (BelisaConfessed) outputText("<i>\"...Anything I can help you with?\"</i> When she thinks you aren’t looking, she takes a glance down, beads of drool forming on her fangs.");
 		outputText("\n\n");
 		menu();
-		addButton(0, "Apperance", BelisaAppearance);
+		addButton(0, "Appearance", BelisaAppearance);
+		addButton(1, "Talk", BelisaTalk);
+		addButton(2, "Hang", BelisaHang);
 		addButton(3, "Shop", BelisaShop);
 		addButton(4, "Sex", BelisaSex);
 		addButton(14, "Leave", camp.campLoversMenu);
