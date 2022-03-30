@@ -181,7 +181,7 @@ import coc.view.ButtonDataList;
 			outputText("He struggles a moment before he tumbles away, nowhere to be seen.\n\n");
 			zenjiPerspectiveOnPlayer(4);
 			menu();
-			if (player.cor >= 50) addButton(1, "Hunt him", part1TrollEncounterFightZenjiDefeatedHuntHim).hint("He’s not getting away that easily!");
+			if (player.cor >= 50 - player.corruptionTolerance()) addButton(1, "Hunt him", part1TrollEncounterFightZenjiDefeatedHuntHim).hint("He’s not getting away that easily!");
 			else addButtonDisabled(1, "???", "Need 50+ corruption.");
 			addButton(3, "Leave", cleanupAfterCombat);
 		}
@@ -214,7 +214,7 @@ import coc.view.ButtonDataList;
 			clearOutput();
 			if (player.HP <= player.minHP()) {
 				outputText("You fall to the ground, bruised and beaten, wounds too severe for you to walk off right now.\n\n");
-				if (player.cor < 90) {
+				if (player.cor < 90 + player.corruptionTolerance()) {
 					outputText("\"<i>Qué lástima,</i>\" he growls, \"<i>Not even worth my time.</i>\"\n\n");
 					outputText("He walks off, nowhere to be seen. The world grows hazy as you pass out from exhaustion.\n\n");
 					cleanupAfterCombat();
@@ -553,7 +553,7 @@ import coc.view.ButtonDataList;
 			outputText("\"<i>Ahaha! It’s you again! Welcome, welcome!</i>\" A male voice rings through the thicket and a familiar troll leaps down from the trees, \"<i>Me temo que no nos hemos presentado adecuadamente.</i>\"\n\n");
 			outputText("He holds a hand over his chest. \"<i>Me llamo Zenji, and who am I gifted ta meet again once more?</i>\" he says leaning close and raising an eyebrow toward you.\n\n");
 			outputText("You state your name.\n\n");
-			if (player.cor >= 50) outputText("enji gives you a sideways glance, almost as if he doesn't trust you. \"<i>If dat is de truth, it's nice ta meet you, [name]</i>\"\n\n");
+			if (player.cor >= 50 + player.corruptionTolerance()) outputText("enji gives you a sideways glance, almost as if he doesn't trust you. \"<i>If dat is de truth, it's nice ta meet you, [name]</i>\"\n\n");
 			else outputText("\"<i>Ahah, [name], so dat is your name, a pleasure ta get to really know ya.</i>\" He replies.\n\n");
 			outputText("\"<i>So, you've been around here a lot, I see, what really brings ya here? Why do you like de bog enough ta come here all de time?</i>\" He asks the question, seeking a response, but before you can even answer he's already cut you off. \"<i>It don' really matta, it's been a while since I had some good company, ya know? I mean, I know you know dat I am not de only troll out here, but dey don't come dis far from de outskirts of our land like I do.</i>\" ");
 			outputText("He states, \"<i>Dey're all a buncha cowards and liars. Afraid of what really is out der, afraid of competition, but I like a good challenge, ya see?</i>\"\n\n");

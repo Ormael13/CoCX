@@ -128,7 +128,7 @@ public class TrollVillage extends BaseContent implements SaveableState{
             addButton(0, "Enter Village",EnterTheVillage,true);
         }
         else{
-            if (player.cor > 50){
+            if (player.cor > 66 + player.corruptionTolerance()){
                 outputText("His brow furrows, \"You corrupted don’t belong here… Leave now.\"\n" +
                         "\n" +
                         "You look around, there are far too many trolls for you to handle. More and more trolls turn their attention to you as you decide to take your leave.\n");
@@ -152,7 +152,7 @@ public class TrollVillage extends BaseContent implements SaveableState{
             outputText("You emerge at the troll village, the guard gives you a stern look but doesn’t obstruct you as you enter.\n");
         }
         else{
-            if (player.cor > 50){
+            if (player.cor > 66 + player.corruptionTolerance()){
                 outputText("You emerge at the troll village once again, the guard jabs his spear in your direction. \"Get back!\" he shouts \"You are outnumbered, leave this place!\"\n" +
                         "\n" +
                         "Not wanting to provoke the wrath of the entire village, you decide that the best course of action is to leave.\n");
