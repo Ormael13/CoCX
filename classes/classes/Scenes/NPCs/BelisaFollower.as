@@ -480,6 +480,10 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 				outputText("\n\nYou ask her if she’s okay, and she pouts up at you, sheepishly stuffing her fingers into her dripping pussy. <i>\"No, I’m not. You...You’re fighting like a demon, [name], and it’s not fair!\"</i> You remind her that many demons fight this way, and that her white magic won’t always protect her.");
 				outputText(" <i>\"I know...And now I can’t cast for the rest of the day\"</i> She looks up at you, somewhat annoyed, but also giving you a nice view of her drooling cunt. When she sees you looking, she blushes, putting a hand over her honeypot to block your view. ");
 			}
+			if (BelisaInCamp) {
+				outputText("She looks up at you, still blushing, her gaze dropping to your nethers. <i>\"W-well, if you’re going to get me all riled up, the least you could do is help me deal with it after.\"</i>");
+				BelisaSexPostSpar();
+			}
 		}
 		cleanupAfterCombat();
 	}
@@ -694,6 +698,19 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		else doNext(Encounterback);
 	}
 	
+	public function BelisaSexPostSpar():void {
+		menu();
+		if (player.hasCock()) {
+			addButton(1, "Fuck", BelisaFuck);
+			addButton(2, "Anal", BelisaAnal);
+			//addButton(3, "Silkjob", BelisaSilkjob);
+		}
+		if (player.hasVagina()) {
+			//addButton(5, "69", BelisaFunnyNumber);
+			addButton(6, "Dildo Fun", BelisaDildo);
+		}
+		addButton(14, "Back", cleanupAfterCombat);
+	}
 	public function BelisaSex():void {
 		clearOutput();
 		if (BelisaAffectionMeter >= 80 && BelisaConfessed) {
@@ -993,6 +1010,7 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		outputText("You give Belisa a chaste kiss on the cheek, and as you get dressed, you tell Belisa that you’ll always return. No demon’s going to get the best of you. She shakes her head, but doesn’t say anything. You dress and come back, ruffling her long, black hair roughly. <i>\"Headpats for luck!\"</i> You yell, stopping just short of giving Belisa a noogie.\n\n");
 		outputText("<i>\"H-hey!\"</i> She yells, and you laugh, tossing the door open and leaving back to camp. Belisa sticks her head out the door, then looks down, realizing she’s naked…and she almost joined you outside. <i>\"Eep!\"</i> She slams the door shut, and you head back to camp.\n\n");
 		//if (preg) ;//pregnancy chance 100%
+		if (CoC.instance.inCombat) cleanupAfterCombat();
 		doNext(camp.returnToCampUseOneHour);
 	}
 	public function BelisaAfterSex2():void {
@@ -1004,6 +1022,7 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		outputText("<i>\"Well...I mean, I wouldn’t mind at all. They’re yours, and more of you is a good thing.\"</i> She blushes, seemingly embarrassed by that declaration. You smile, putting your palms on her cheeks. You remind Belisa that they’d also be half her, which makes her smile.\n\n");
 		outputText("You cuddle in the afterglow with your Drider lover, but after a while, you gently pull yourself from her arms.\n\n");
 		outputText("<i>\"You’ve got to go, huh?\"</i> Belisa asks, somewhat saddened. <i>\"Come back soon, [name].\"</i>\n\n");
+		if (CoC.instance.inCombat) cleanupAfterCombat();
 		doNext(camp.returnToCampUseOneHour);
 	}
 	
