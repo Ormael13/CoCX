@@ -79,7 +79,6 @@ use namespace CoC;
 			else outputText("The feral imp falls to the ground panting and growling in anger.  He quickly submits however, the thoroughness of his defeat obvious.  You walk towards the imp who gives one last defiant snarl before slipping into unconsciousness.");
 			menu();
 			addButton(0, "Kill Him", killFeralImp);
-			if (player.tailType == Tail.MANTICORE_PUSSYTAIL) addButton(2, "Tail Rape", SceneLib.uniqueSexScene.manticoreTailRapeScene);
 			if (flags[kFLAGS.GALIA_LVL_UP] > 0 && flags[kFLAGS.GALIA_LVL_UP] < 0.5) {
 				if (flags[kFLAGS.GALIA_AFFECTION] > 0) addButtonDisabled(3, "Capture", "You need to turn in already captured imp before you can capture another one.");
 				else addButton(3, "Capture", captureFeralImp);
@@ -1443,84 +1442,93 @@ use namespace CoC;
             else doNext(playerMenu);
 		}
 
+        public function impRapesAlraune():void {
+            outputText("You sink to the ground, too overcome by lust and desire to fight. The imp smiles, a wicked look glinting in his eyes. He drops his loincloth to reveal a hardening cock. Your eyes bulge a bit as it grows...and grows...and grows! That imp has a twelve-inch cock... and he’s walking towards you.");
+            if (player.isLiliraune()){ outputText(" Your twin sister can’t help but rub her pussy in anticipation the moment she sees this.\n\n" +
+
+                    "\"<i>Woah sis, he looks well equipped. You get fucked or I get fucked?</i>\"\n\n" +
+
+                    "\"<i>What are you saying we obviously BOTH get fucked, there’s no way I’m missing on this!</i>\"\n\n");
+            }
+            outputText("Your ");
+            if (player.isLiliraune()) outputText("two muffs ");
+            else outputText("muff ");
+            outputText("practically ");
+            if (player.isLiliraune()) outputText("juice themselves ");
+            else outputText("juices itself ");
+            outputText("in anticipation, and you find yourself spreading away your 12 vine-like tentacle stamens in preparation so to properly give enough space for the tiny walking cumpump to jump into your ");
+            if (player.isLiliraune()) outputText("communal ");
+            outputText("bath.\n\n");
+
+            if (player.isLiliraune()) outputText("At first he’s unsure who to fuck first then ");
+            else outputText("He ");
+            outputText("smiles as he presses his cock against your twat. Your lust-driven mind is speechless, leaving you panting and moaning like a whore. He plunges in violently, ramming his demonic dong into the hilt, leaving you gasping in pain and surprise. He leaves it there, giving you a second to get used to him, and then begins fucking you hard, slapping your ass every few thrusts to remind you who is in charge.");
+            if (player.isLiliraune()) outputText("Your frustrated twin, unable to join in on the action, sticks to masturbating to the show until it’s her turn.");
+            outputText("\n\n" +
+                    "The rough fucking becomes more and more pleasurable as time passes and ");
+            if (player.isLiliraune()) outputText("your twin finally gets an idea as she begins");
+            else outputText("you begin");
+            outputText(" to also stroke your pre-slicked, squirming cock-stamens along with each plunge he takes in your fuck-hole, in order to increase the pleasure." +
+                    " You feel yourself clench around him as your many sexual organs achieve release, erupting spurts of cum as your cunt gets to milking the demon’s cock like your life depended on it." +
+                    " The imp’s unholy cock explodes inside you, pumping huge loads of hot demon-seed inside you with each eruption." +
+                    " You swoon, feeling it fill your womb and distend your belly as the imp’s orgasm fills you with an unnatural quantity of corrupted semen.");
+            if (player.isLiliraune()) outputText("Your twin seeing a signal there, grabs him and takes her turn.");
+            outputText("\n\n");
+            if (player.isLiliraune()) outputText("Several minutes of fucking later, he");
+            else outputText("He");
+            outputText(" pulls his dick free, and you");
+            if (player.isLiliraune()) outputText("r sister");
+            outputText(" flop");
+            if (player.isLiliraune()) outputText("s");
+            outputText(" back on");
+            if (player.isLiliraune()) outputText(" her");
+            else outputText(" your");
+            outputText(" back, cum flowing out into the nectar from");
+            if (player.isLiliraune()) outputText(" your");
+            else outputText(" her");
+            outputText(" well-fucked hole.");
+            if (player.isLiliraune()) outputText(" You’ve been masturbating your vine all the while and cum has splashed everywhere.");
+            outputText(" You hope you will ");
+            if (player.isLiliraune()) outputText(" both");
+            outputText(" become pregnant but promptly lose consciousness before you can contemplate the prospect any further.");
+            player.knockUp(PregnancyStore.PREGNANCY_ALRAUNE, PregnancyStore.INCUBATION_ALRAUNE);
+            player.sexReward("cum","Vaginal");
+            if (player.isLiliraune()){
+                player.sexReward("cum","Vaginal");
+            }
+            player.sexReward("Default","Dick");
+            dynStats("lib", 1, "sen", 1, "cor", 1);
+            cleanupAfterCombat();
+        }
+        
+        public function impRapesBimbo():void {
+            outputText(images.showImage("imp-loss-female-fuck"));
+            outputText("You sink to the ground, assuming a position that feels all too natural to you now, leaning forward to let your [allbreasts] hang down slightly. The imp looks you up and down, wickedly eyeing your ready, slightly open lips. He drops his loin-cloth to reveal a hardening cock. Your eyes bulge as it grows larger... and larger... and larger! The imp's cock finally bulges to a full twelve inches... and it's moving closer. You struggle to think... but you just can't! You want that in your mouth, like, so bad!\n\n");
+            outputText("Your " + vaginaDescript(0) + " drips in anticipation, and you find yourself involuntarily moving your knees farther apart to prepare yourself to be filled. He smiles and presses his cock against your " + vaginaDescript(0) + ", pushing you back to get a better angle. You try to make words, but your brain can only think of so much at once! Right now, it's thinking of cock, which, naturally, makes you open your mouth and let out a slutty moan.\n\n");
+            outputText("The imp pushes into you violently, ramming his cock in to the hilt, leaving you gasping in pain and surprise. He leaves it in your slutty pussy, giving you a second to... oh who is he kidding... he can tell by your air-headed look that you've done nothing but take cocks your whole life. He fucks you hard, slapping your [butt] to remind you who is in charge. You can't help but think about, like, how you just love it when a man takes charge. Less thinking!");
+            player.cuntChange(12,true,true,false);
+            outputText("\n\n");
+            outputText("The rough fucking becomes more and more pleasurable as time goes on. You moan air-headedly with each thrust, hips squeezing around the demon-cock- loving the feeling of his fullness. Before long you can't help but cum all over him, your vagina locking around his cock like a vice, muscles rippling, milking him for his cum. The imp's prick explodes inside you, pumping huge loads of hot demon-seed inside you with each eruption. You swoon, feeling it fill your womb and distend your belly as the imp's orgasm fills you with insane amounts of cum.\n\n");
+            outputText("With a sigh, he pulls his dick free, and you flop down, cum leaking out onto the ground from your well-fucked hole. If you could, like, focus at all, you'd totally be worrying about being, like, pregnant or whatever. But you lose consciousness.");
+            if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 14); //Bigger imp means faster pregnancy
+            player.sexReward("cum");
+            dynStats("lib", 1, "sen", 1, "cor", 1);
+            cleanupAfterCombat();
+        }
+
 		public function impRapesYou():void {
 			clearOutput();
 			if (doSFWloss()) return;
 			if (player.isAlraune()){
-				outputText(images.showImage("imp-loss-female-fuck"));
-				outputText("You sink to the ground, too overcome by lust and desire to fight. The imp smiles, a wicked look glinting in his eyes. He drops his loincloth to reveal a hardening cock. Your eyes bulge a bit as it grows...and grows...and grows! That imp has a twelve-inch cock... and he’s walking towards you.");
-				if (player.isLiliraune()){ outputText(" Your twin sister can’t help but rub her pussy in anticipation the moment she sees this.\n\n" +
-
-						"\"<i>Woah sis, he looks well equipped. You get fucked or I get fucked?</i>\"\n\n" +
-
-						"\"<i>What are you saying we obviously BOTH get fucked, there’s no way I’m missing on this!</i>\"\n\n");
-				}
-				outputText("Your ");
-				if (player.isLiliraune()) outputText("two muffs ");
-				else outputText("muff ");
-				outputText("practically ");
-				if (player.isLiliraune()) outputText("juice themselves ");
-				else outputText("juices itself ");
-				outputText("in anticipation, and you find yourself spreading away your 12 vine-like tentacle stamens in preparation so to properly give enough space for the tiny walking cumpump to jump into your ");
-				if (player.isLiliraune()) outputText("communal ");
-				outputText("bath.\n\n");
-
-				if (player.isLiliraune()) outputText("At first he’s unsure who to fuck first then ");
-				else outputText("He ");
-				outputText("smiles as he presses his cock against your twat. Your lust-driven mind is speechless, leaving you panting and moaning like a whore. He plunges in violently, ramming his demonic dong into the hilt, leaving you gasping in pain and surprise. He leaves it there, giving you a second to get used to him, and then begins fucking you hard, slapping your ass every few thrusts to remind you who is in charge.");
-				if (player.isLiliraune()) outputText("Your frustrated twin, unable to join in on the action, sticks to masturbating to the show until it’s her turn.");
-				outputText("\n\n" +
-						"The rough fucking becomes more and more pleasurable as time passes and ");
-				if (player.isLiliraune()) outputText("your twin finally gets an idea as she begins");
-				else outputText("you begin");
-				outputText(" to also stroke your pre-slicked, squirming cock-stamens along with each plunge he takes in your fuck-hole, in order to increase the pleasure." +
-						" You feel yourself clench around him as your many sexual organs achieve release, erupting spurts of cum as your cunt gets to milking the demon’s cock like your life depended on it." +
-						" The imp’s unholy cock explodes inside you, pumping huge loads of hot demon-seed inside you with each eruption." +
-						" You swoon, feeling it fill your womb and distend your belly as the imp’s orgasm fills you with an unnatural quantity of corrupted semen.");
-				if (player.isLiliraune()) outputText("Your twin seeing a signal there, grabs him and takes her turn.");
-				outputText("\n\n");
-				if (player.isLiliraune()) outputText("Several minutes of fucking later, he");
-				else outputText("He");
-				outputText(" pulls his dick free, and you");
-				if (player.isLiliraune()) outputText("r sister");
-				outputText(" flop");
-				if (player.isLiliraune()) outputText("s");
-				outputText(" back on");
-				if (player.isLiliraune()) outputText(" her");
-				else outputText(" your");
-				outputText(" back, cum flowing out into the nectar from");
-				if (player.isLiliraune()) outputText(" your");
-				else outputText(" her");
-				outputText(" well-fucked hole.");
-				if (player.isLiliraune()) outputText(" You’ve been masturbating your vine all the while and cum has splashed everywhere.");
-				outputText(" You hope you will ");
-				if (player.isLiliraune()) outputText(" both");
-				outputText(" become pregnant but promptly lose consciousness before you can contemplate the prospect any further.");
-				player.knockUp(PregnancyStore.PREGNANCY_ALRAUNE, PregnancyStore.INCUBATION_ALRAUNE);
-				player.sexReward("cum","Vaginal");
-				if (player.isLiliraune()){
-					player.sexReward("cum","Vaginal");
-				}
-				player.sexReward("Default","Dick");
-				dynStats("lib", 1, "sen", 1, "cor", 1);
-				cleanupAfterCombat();
+				impRapesAlraune();
 				return;
 			}
+            sceneHunter.print("Failed check: Alraune/Liliraune race");
 			if ((player.hasPerk(PerkLib.BimboBrains) || player.hasPerk(PerkLib.FutaFaculties)) && !player.isTaur() && player.hasVagina()) {
-				outputText(images.showImage("imp-loss-female-fuck"));
-				outputText("You sink to the ground, assuming a position that feels all too natural to you now, leaning forward to let your [allbreasts] hang down slightly. The imp looks you up and down, wickedly eyeing your ready, slightly open lips. He drops his loin-cloth to reveal a hardening cock. Your eyes bulge as it grows larger... and larger... and larger! The imp's cock finally bulges to a full twelve inches... and it's moving closer. You struggle to think... but you just can't! You want that in your mouth, like, so bad!\n\n");
-				outputText("Your " + vaginaDescript(0) + " drips in anticipation, and you find yourself involuntarily moving your knees farther apart to prepare yourself to be filled. He smiles and presses his cock against your " + vaginaDescript(0) + ", pushing you back to get a better angle. You try to make words, but your brain can only think of so much at once! Right now, it's thinking of cock, which, naturally, makes you open your mouth and let out a slutty moan.\n\n");
-				outputText("The imp pushes into you violently, ramming his cock in to the hilt, leaving you gasping in pain and surprise. He leaves it in your slutty pussy, giving you a second to... oh who is he kidding... he can tell by your air-headed look that you've done nothing but take cocks your whole life. He fucks you hard, slapping your [butt] to remind you who is in charge. You can't help but think about, like, how you just love it when a man takes charge. Less thinking!");
-				player.cuntChange(12,true,true,false);
-				outputText("\n\n");
-				outputText("The rough fucking becomes more and more pleasurable as time goes on. You moan air-headedly with each thrust, hips squeezing around the demon-cock- loving the feeling of his fullness. Before long you can't help but cum all over him, your vagina locking around his cock like a vice, muscles rippling, milking him for his cum. The imp's prick explodes inside you, pumping huge loads of hot demon-seed inside you with each eruption. You swoon, feeling it fill your womb and distend your belly as the imp's orgasm fills you with insane amounts of cum.\n\n");
-				outputText("With a sigh, he pulls his dick free, and you flop down, cum leaking out onto the ground from your well-fucked hole. If you could, like, focus at all, you'd totally be worrying about being, like, pregnant or whatever. But you lose consciousness.");
-				if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 14); //Bigger imp means faster pregnancy
-				player.sexReward("cum");
-				dynStats("lib", 1, "sen", 1, "cor", 1);
-				cleanupAfterCombat();
+				impRapesBimbo();
 				return;
 			}
+            sceneHunter.print("Failed check: Bimbo/Futa, non-taur, vagina");
 			//Lust loss
 			if(player.lust >= player.maxLust()) {
 				//25% chance of sprocket rape for super-thick people.
@@ -1813,8 +1821,10 @@ use namespace CoC;
 		public function loseToAnImpLord():void {
 			clearOutput();
 			if (player.isAlraune()){
-				impRapesYou();
+				impRapesAlraune();
+                return;
 			}
+            sceneHunter.print("Failed check: Alraune/Liliraune race");
 			if(player.hasVagina() && (player.gender == 2 || rand(2) == 0) && flags[kFLAGS.SFW_MODE] <= 0) getRapedAsAGirl();
 			else if(player.hasCock() && flags[kFLAGS.SFW_MODE] <= 0) loseToImpLord();
 			else {
@@ -1835,14 +1845,16 @@ use namespace CoC;
 			menu();
 			//Continues in, Male Anal, Female Vaginal, or Breastfeed
 			if(player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
-				if(player.hasCock() && player.cockThatFits(monster.analCapacity()) >= 0) addButton(0,"FuckHisAss",impLordBumPlug);
-				if(player.hasCock()) addButton(1,"Get Blown",getBlownByAnImpLord);
-				if(player.hasVagina()) addButton(2,"Ride Cock",femaleVagRape);
+                addButtonIfTrue(0,"FuckHisAss", impLordBumPlug, "Req. cock with area < " + monster.analCapacity(), player.cockThatFits(monster.analCapacity()) >= 0);
+                addButtonIfTrue(1,"Get Blown", getBlownByAnImpLord, "Req. cock", player.hasCock());
+                addButtonIfTrue(2,"Ride Cock", femaleVagRape, "Req. vagina", player.hasVagina());
 				if(player.findPerk(PerkLib.Feeder) >= 0 && monster.short != "imp overlord" && monster.short != "imp warlord") addButton(3,"Breastfeed",feederBreastfeedRape);
+                else addButtonDisabled(3,"Breastfeed", "Req. Feeder perk");
 				if (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armor is LustyMaidensArmor || player.armor is SuccubusArmor)) {
 					if (player.armor is SuccubusArmor) addButton(4, "B.Titfuck", (player.armor as SuccubusArmor).succubusPaizuri);
 					else addButton(4, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
 				}
+                else addButtonDisabled(4,"B.Titfuck", "Req. L.M.Armor");
 			}
 			addButton(14,"Leave",cleanupAfterCombat);
 		}
@@ -2249,7 +2261,8 @@ use namespace CoC;
 		public function loseToAnImpOverlord():void {
 			clearOutput();
 			if (player.isAlraune()){
-				impRapesYou();
+				impRapesAlraune();
+                return;
 			}
 			if(player.hasVagina() && (player.gender == 2 || rand(2) == 0) && flags[kFLAGS.SFW_MODE] <= 0) getRapedAsAGirlByImpOverlord();
 			else if(player.hasCock() && flags[kFLAGS.SFW_MODE] <= 0) loseToImpOverlord();
