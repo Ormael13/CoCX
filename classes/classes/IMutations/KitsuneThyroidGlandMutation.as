@@ -4,7 +4,8 @@
  */
 package classes.IMutations
 {
-    import classes.MutationsLib;
+import classes.BodyParts.Tail;
+import classes.MutationsLib;
     import classes.PerkClass;
     import classes.PerkType;
     import classes.PerkLib;
@@ -70,23 +71,21 @@ package classes.IMutations
             var pTier:int = player.perkv1(MutationsLib.KitsuneThyroidGland);
             switch (pTier){
                 case 0:
-                    MutationsLib.KitsuneThyroidGland.requireThyroidGlandMutationSlot()
-                            .requireAnyPerk(PerkLib.EnlightenedKitsune, PerkLib.CorruptedKitsune)
-                            .requireCustomFunction(function (player:Player):Boolean {
-                        return player.kitsuneScore() >= 5;
-                    }, "Kitsune Score >= 5");
+                    MutationsLib.KitsuneThyroidGland.requireThyroidGlandMutationSlot().requireAnyPerk(PerkLib.EnlightenedKitsune, PerkLib.CorruptedKitsune).requireCustomFunction(function (player:Player):Boolean {
+                        return player.tailType == Tail.FOX && player.tailCount >= 2;
+                    }, "2+ fox tails");
                     break;
                 case 1:
                     MutationsLib.KitsuneThyroidGland.requireLevel(30)
                             .requireCustomFunction(function (player:Player):Boolean {
-                                return player.kitsuneScore() >= 8;
-                            }, "Kitsune Score >= 8");
+                                return player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) == 1;
+                            }, "Previous perk tier required.");
                     break;
                 case 2:
                     MutationsLib.KitsuneThyroidGland.requireLevel(60)
                             .requireCustomFunction(function (player:Player):Boolean {
-                                return player.kitsuneScore() >= 12;
-                            }, "Kitsune race");
+                                return player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) == 2;
+                            }, "Previous perk tier required.");
                     break;
             }
         }
