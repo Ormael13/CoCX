@@ -199,7 +199,7 @@ public class Halkano extends TrollVillageAbstractContent{
                     "\n" +
                     "She takes a deep sigh, \"<i>You know what? I don’t get paid enough for this. That is not my job.</i>\" She mutters before leaving.\n\n");
         }
-        outputText("You feel drops of precum emerge from the tip of Halkano’s manhood, the salty, savory taste tingles your taste buds as he thrusts into you. You wrap your [arm] around Halkano for support, doing your best to fit more of his length into your mouth as you suck him off to the best of your abilities.\n" +
+        outputText("You feel drops of precum emerge from the tip of Halkano’s manhood, the salty, savory taste tingles your taste buds as he thrusts into you. You wrap your arm around Halkano for support, doing your best to fit more of his length into your mouth as you suck him off to the best of your abilities.\n" +
                 "\n" +
                 "It’s so difficult to concentrate on anything as Zenji is simultaneously fucking your brains out. You clench your sphincter around his length, his girthy cock presses deeper into your backdoor, filling you so deliciously, you lose control of yourself as you’re completely held by the two of them.\n" +
                 "\n" +
