@@ -1109,7 +1109,7 @@ private function InternalMutations0(page:int = 0):void {
 	menuItems.push("Thyroid Gland", InternalMutationsThyroidGlands, "Thyroid Mutations");
 	menuItems.push("Parathyroid Gland", InternalMutationsParathyroid, "Parathyroid Mutations");
 	menuItems.push("Adaptations", InternalMutationsAdaptations, "Adaptation Mutations");
-	menuGen(menuItems, page, meetEvangeline, false);
+	menuGen(menuItems, page, meetEvangeline);
 
 	function InternalMutationsHeart():void{
 		var btnNum:int = 0

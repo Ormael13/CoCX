@@ -631,7 +631,6 @@ import classes.Scenes.SceneLib;
 			if(monster.lust > 99) outputText("Panting hotly, the succubus staggers towards you, her eyes fixated on the bulge in your crotch.  Dark viscous liquid drips from her dusky folds as her hips undulate hypnotically.  Blue fingers smear the corrupted lubricants over the smooth outer folds of her sex as she lies back enticingly, giving up on anything but bedding you.  In moments your [armor] are on the floor and you approach your prize.\n\n");
 			//(HP) 
 			else outputText("The succubus collapses on the floor, groaning in pain.  Most of her rags have been destroyed by the combat and her blue skin is marked with deep purple bruises and bloody lacerations.  You undress, straddling your conquest and gazing down on her helpless, curvaceous form.  She looks up at you and forces a smile, licking the blood from a cracked lip and beginning to masturbate for you.\n\n");
-			;
 			//((TOO BIG))
 			sceneHunter.selectFitNofit(SGRBM_fits, SGRBM_toobig, monster.vaginalCapacity());
 		}

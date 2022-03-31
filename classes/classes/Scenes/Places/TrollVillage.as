@@ -181,7 +181,7 @@ public class TrollVillage extends BaseContent implements SaveableState{
             menuItems.push((JabalaUnlocked && !ZenjiBerated)?"Jabala's Hut":"???", ((JabalaUnlocked && !ZenjiBerated)?SceneLib.trollVillage.jabala.JabalaHome:false), ["Look for Zenji's Parents", "You don't want to disturb the nice couple."]);
             menuItems.push((YenzaUnlocked > 0)?"Yenza's Hut":"???", ((YenzaUnlocked > 0)?SceneLib.trollVillage.yenza.YenzaHome:false), ["Look for Yenza","You don't know who lives there."]);
             menuItems.push((KaljiUnlocked == 5)?"Kalji's Hut":"???", ((KaljiUnlocked == 5)?SceneLib.trollVillage.kalji.KaljiHome:false), ["",""]);
-            menuGen(menuItems,0, camp.returnToCampUseOneHour, false);
+            menuGen(menuItems,0, camp.returnToCampUseOneHour);
 
         }
     }

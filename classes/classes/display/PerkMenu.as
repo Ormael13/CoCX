@@ -1077,7 +1077,7 @@ public class PerkMenu extends BaseContent {
 		menuItems.push("Adaptations", mutationsDBAdaptations, "Adaptation Mutations");
 		menuItems.push("Dragons", mutationsDBDragon, "Dragon Mutations");
 		menuItems.push("Kitsunes", mutationsDBKitsune, "Kitsune Mutations");
-		menuGen(menuItems, page, displayPerks, false);
+		menuGen(menuItems, page, displayPerks);
 	}
 
 	//Mutations check helper. Cloned + stripped requirements logic from PerkMenuDB.

@@ -995,14 +995,12 @@ import coc.xxc.StoryContext;
 		 * btnStat returns how many buttons are active.
          * isChecking - only check if the menu is non-empty?
 		 */
-		protected function menuGen(menuItems:Array, page:int, back:Function=null, sort:Boolean=false):void {
+		protected function menuGen(menuItems:Array, page:int, back:Function=null):void {
 			var bList:Array = [];
 			var total:int = menuItems.length;
             var multipage:Boolean = menuItems.length > 14 * 3;
-			if(sort)
-				menuItems = menuItems.sort();
 			if(multipage)
-				for (var h:int = (page * 12) * 3; h <= Math.min((h + 35), menuItems.length - 1); h++) // Page 0 - array 0-36. Page 1 - array 37 -?
+				for (var h:int = page * (12*3); h <= Math.min((page+1) * (12*3), menuItems.length - 1); h++) // Page 0 - array 0-36. Page 1 - array 37 -?
 					bList.push(menuItems[h]);
 			else
 				bList = menuItems;
@@ -1010,21 +1008,21 @@ import coc.xxc.StoryContext;
 			var btnsActive: int = 0;
 			for (var i:int = 0; i < bList.length; i += 3){
                 if (!bList[i + 1])
-                    addButtonDisabled(i/3, bList[i],(bList[i + 2] is Array) ? bList[i+2][1]: bList[i+2]);
+                    addButtonDisabled(i/3, bList[i], (bList[i + 2] is Array) ? bList[i+2][1]: bList[i+2]);
                 else if (bList[i + 1] == "ignore") //Not sure when this would ever be used, but in case.
                     continue;
                 else if (bList[i + 1] is Function) //hope it works
-                    addButton(i/3,bList[i],bList[i + 1]).hint(bList[i + 2] is Array ? bList[i+2][0]: bList[i+2]);
+                    addButton(i/3, bList[i], bList[i + 1]). hint(bList[i + 2] is Array ? bList[i+2][0]: bList[i+2]);
                 else
                     CoC_Settings.error("Non-function in menuGen!")
 			}
             if (multipage) {
                 if (page > 0)
-                    addButton(12,"Prev Page", curry(menuGen, menuItems,page - 1, back, sort));
+                    addButton(12,"Prev Page", curry(menuGen, menuItems,page - 1, back));
                 else
                     addButtonDisabled(12, "Prev Page","This is the first page.");
                 if (menuItems.length > (page + 1) * 12 * 3)
-                    addButton(13, "Next Page", curry(menuGen, menuItems,page + 1, back, sort));
+                    addButton(13, "Next Page", curry(menuGen, menuItems,page + 1, back));
                 else
                     addButtonDisabled(13, "Next Page", "This is the last page.");
             }
