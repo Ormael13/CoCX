@@ -6,6 +6,7 @@ package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.Scenes.NPCs.BelisaFollower;
 	
 	public class DianaFollower extends NPCAwareContent
 	{
@@ -629,6 +630,7 @@ public function mainCampMenu():void {
 		addButtonDisabled(6, "C.C.(Base)", "You not have any curses to cure. (Type A)");
 		addButtonDisabled(7, "C.C.(Mult)", "You not have any curses to cure. (Type B)");
 	}
+	//if (BelisaFollower.BelisaQuestOn && !BelisaFollower.BelisaQuestComp) addButton(13, "ToothacheQ", BelisaDianaTalk);
 	addButton(14, "Back", camp.campLoversMenu);
 }
 
@@ -873,6 +875,14 @@ public function SexMenuTitsfuck():void {
 	//}
 	player.sexReward("Default","Dick", true,false);
 	doNext(camp.returnToCampUseOneHour);
+}
+
+private function BelisaDianaTalk():void {
+	clearOutput();
+	outputText("You decide to ask your resident Unicorn about healing cursed injuries, since she’s been able to cure such maladies in the past.\n\n");
+	outputText("\"<i>Hmm…Perhaps. Maybe if you describe the injury, I can get a better sense of what I’m dealing with?</i>\"  \"<i></i>\"\n\n");
+	doNext(mainCampMenu);
+	eachMinuteCount(5);
 }
 	}
 }

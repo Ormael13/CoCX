@@ -416,7 +416,7 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		outputText("<i>\"Demons...They attacked my village\"</i>, she whispers this, her arms wrapped tightly around your torso. <i>\"They took my sisters, corrupted my people...I ran, like my sisters told me to, but...some of them found me. They caught me, took my head and…\"</i> She begins to cry. <i>\"They took a sheet of metal, made me bite down on it, then threw my face into a stone!\"</i> She nuzzles your shoulder, trying to wipe her tears away. <i>\"I got them with some whitefire...but…There was a succubus with them. She cursed me, took my mouth in her hands and made sure it wouldn’t heal.\"</i>\n\n");
 		outputText("You take her cheeks in your hands, looking into the drider’s eyes. You promise her that you’ll do what you can to make her smile whole again. <i>\"Okay...I’ll be waiting here for you.\"</i>\n\n");
 		outputText("You think to yourself, who could help you figure this out?\n\n");
-		outputText("The old alchemist is an obvious choice\n\n");
+		outputText("The old alchemist is an obvious choice.\n\n");
 		if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) outputText("Ayane can heal curses. She'd be more than willing to help if she could.\n\n");
 		if (flags[kFLAGS.DIANA_FOLLOWER] >= 6 && !player.hasStatusEffect(StatusEffects.DianaOff)) outputText("Diana should be able to heal such a curse. You make a note to ask her.\n\n");
 		BelisaAffection(5);
@@ -563,12 +563,12 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		outputText("You ask the petite Drider about the holy energy you feel coming off of the leftmost box. \"O-oh!\" She seems happy you asked about that.\n\n");
 		outputText("\"Those are bands, made from my silk, and imbued with holy magic! I made the enchantments myself, and I’ve been able to produce a few different effects!\" She bobs up and down on her Drider legs, and her eyes sparkle with holy light. \"I hope you like them!\n\n");
 		menu();
-		addButton(0, "Crimson", BuyCrimsonBand);
-		addButton(1, "Pink",BuyPinkBand);
-		addButton(2, "Yellow",BuyYellowBand);
+		//addButton(0, "Crimson", BuyCrimsonBand);
+		//addButton(1, "Pink",BuyPinkBand);
+		//addButton(2, "Yellow",BuyYellowBand);
 		//addButton(3, "Turqouise", BuyTurquoiseBand);
-		addButton(4, "Crossed", BuyCrossedBand);
-		addButton(5, "R.Blue", BuyBlueBand);
+		//addButton(4, "Crossed", BuyCrossedBand);
+		//addButton(5, "R.Blue", BuyBlueBand);
 		addButton(14, "Back", BelisaShop);
 	}
 	public function BuyCrimsonBand():void {

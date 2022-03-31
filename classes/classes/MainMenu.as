@@ -150,6 +150,7 @@ public class MainMenu extends BaseContent {
 		outputText("<li> Liadri</li>");
 		outputText("<li> Pyromania</li>");
 		outputText("<li> Jtecx</li>");
+		outputText("<li> Svalkash</li>");
 		outputText("<li> Zetta</li>\n");
 		outputText("<li> Zavos/Zevos</li>");
 		outputText("<li> Xana</li>");
@@ -179,11 +180,12 @@ public class MainMenu extends BaseContent {
 		 outputText("<li> Prisoner416</li>");
 		 outputText("<li> Chibodee</li>");
 		 outputText("");*/
-		outputText("<b>Graphical Prettiness:</b>");
+		outputText("<b>Graphical & Code Prettiness:</b>");
 		outputText("<ul>");
         outputText("<li> Dasutin (Background Images)</li>");
 		outputText("<li> Invader (Button Graphics, Font, and Other Hawtness)</li>");
 		outputText("<li> Jtecx (Menu Reworks - PerkSimplified, MutationsDB, InvMgmt(Mobile), FastLvl, SFMenu, ElemMenu)</li>");
+		outputText("<li> Svalkash ()</li>");
 		outputText("</ul>");
 		outputText("<b>Supplementary Events:</b>");
 		outputText("<ul>");
