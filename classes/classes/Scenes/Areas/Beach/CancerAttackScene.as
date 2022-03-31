@@ -89,7 +89,7 @@ public class CancerAttackScene extends BaseContent
 					"<i>\"I’m going to enjoy this…\"</i>\n\n" +
 					"He grabs you in his pincer and pulls you closer. The mandibula at the junction between his human and cancer body parting away to reveal a literal foaming penis. " +
 					"Wow you didn’t expect from the look of his face that he was getting off already, or maybe it's how he is at all times?");
-			if (!player.hasVagina()) {
+			if (!player.hasVagina() || rand(2) == 0 && sceneHunter.uniHerms) {
 				outputText("He move you all the way to him");
 				if (!player.isNaga() && !player.lowerBody != LowerBody.MELKIE && !player.lowerBody != LowerBody.GOO) outputText(" and proceeds to pull one of your leg away with his free pincer");
 				outputText("  slowly and forcefully shoving you into his cock like a sleeve. You gasp as he begins to use you like a sex toy denying your movement in favor of simply sliding you up and down his cock. " +
@@ -131,7 +131,7 @@ public class CancerAttackScene extends BaseContent
 						"Wow you didn’t expect from the look of her face that she was this wet already. " +
 						"She pulls you all the way to her and proceeds to hug your body with her human arms as she forcefully shoves your nethers against her wet soaping hole. " +
 						"You consider for a moment to deny her then realise she's still holding you in her pincer which means you could probably crush you at a moment's notice if she wanted.");
-				if (player.hasVagina()) {
+				if (player.hasVagina() && (!player.hasCock() || !sceneHunter.uniHerms || rand(2) == 0)) {
 					outputText(" You gently begin to rub your pussy against the girl's bubbling mess making her gasp in delight. " +
 							"She thankfully control her pincers well enough not to squeeze you to death while in the middle of a mating session something you are very relieved off. " +
 							"Her pussy keeps on gushing everytime you rub yourself against her and to be honest you have begun to enjoy yourself as well despite your predicament.\n\n" +

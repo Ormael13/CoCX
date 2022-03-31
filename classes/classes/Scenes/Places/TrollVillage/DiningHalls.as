@@ -133,7 +133,7 @@ public class DiningHalls extends TrollVillageAbstractContent{
         menuItems.push("Yenza", ((rand(4) == 1 && TrollVillage.YenzaUnlocked == 0|| (TrollVillage.YenzaUnlocked && !TrollVillage.ZenjiFollowing))? SceneLib.trollVillage.yenza.YenzaChecks:"ignore"), "Talk to Yenza");
         menuItems.push("Elder(M)", (rand(4) == 1? SceneLib.trollVillage.kalji.TalkWithKalji:"ignore"), "Talk to Kalji");
         menuItems.push("Elder(F)", (rand(4) == 1? SceneLib.trollVillage.yubi.TalkWithYubi:"ignore"), "Talk to Yubi");
-        menuGen(menuItems, 0, LeaveTheHalls2, false);
+        menuGen(menuItems, 0, LeaveTheHalls2);
 
         function LeaveTheHalls2():void{
             outputText("You decide that you’ve spent enough time in the dining hall and take your leave.\n");
