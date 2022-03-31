@@ -307,10 +307,6 @@ use namespace CoC;
 		private function centaurOnImpMale(vape:Boolean = false):void {
 			if(vape) clearOutput();
 			outputText("As your shadow falls over the imp, it looks between your [legs] with a hint of fear.  ");
-            //for peasants
-            if (!sceneHunter.dickSelect)
-                centaurOnImpMale_old();
-            //for me
             menu();
             if (player.cockThatFits(15) >= 0)
                 addButton(0, "Small", cOIM_small);
@@ -462,51 +458,6 @@ use namespace CoC;
             player.sexReward("Default", "Dick",true,false);
             cleanupAfterCombat();
         }
-
-		//Player has a cock}}
-		private function centaurOnImpMale_old(vape:Boolean = false):void {
-			var x:Number = player.cockThatFits(monster.analCapacity());
-			if(x < 0) x = 0;
-			if(vape) clearOutput();
-			if(player.cockArea(x) <= 15) {
-				cOIM_small();
-                return;
-			}
-			else {
-				//<<Cock: large, Cor <50>>
-				if(player.cor < 50) {
-					cOIM_lowCor();
-					return;
-				}
-				//<<Cock: large, Cor 50+>>
-				else {
-					cOIM_hiCor();
-					return;
-				}
-			}
-			//Tentacledicks!
-			//{{Player has 1+ very long (smallest 2+ feet) tentacle cocks}}
-			if(player.cockTotal() > 1 && player.cocks[player.biggestCockIndex()].cockLength >= 24) {
-				
-				//<< Cor <50>>
-				if(player.cor < 50) {
-                    cOIM_tenta_1();
-					return;
-				}
-				//<< 1 or 2 cocks, Cor 50+>>
-				else if(player.cockTotal() == 2) {
-					cOIM_tenta_2();
-                    return;
-				}
-				//<< 3+ cocks, Cor 80+>>
-				else {
-					cOIM_tenta_3();
-					return;
-				}
-			}
-			player.sexReward("Default", "Dick",true,false);
-			cleanupAfterCombat();
-		}
         
 		//CUNTS
 		private function centaurOnImpFemale(vape:Boolean = false):void {
