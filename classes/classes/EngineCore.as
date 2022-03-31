@@ -635,6 +635,13 @@ public class EngineCore {
         return btn;
     }
 
+    public static function addButtonIfTrue(pos:int, text:String, func1:Function, toolTipText:String, condition:Boolean):CoCButton {
+        if (condition)
+            return addButton(pos, text, func1, null, null, null, toolTipText);
+        else
+            return addButtonDisabled(pos, text, toolTipText);
+    }
+
     public static function button(pos:int):CoCButton {
         return CoC.instance.mainView.bottomButtons[pos];
     }

@@ -277,7 +277,7 @@ public class Soulforce extends BaseContent
 		menuItems.push("Remove Shard", cheatRemoveShard, "Remove 1 radiant shard");
 		menuItems.push("ZenjiQ", ZenjiQ, "Zenji Expac 2 debug tool");
 		//menuItems.push("Mutation test reset", resetMutations, "Reset Mutations");
-		menuGen(menuItems, page, accessSoulforceMenu, false);
+		menuGen(menuItems, page, accessSoulforceMenu);
 	}
 
 	public function lilytest():void{
