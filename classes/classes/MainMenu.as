@@ -146,10 +146,11 @@ public class MainMenu extends BaseContent {
 		outputText("</ul>");
 		outputText("<b>Game Mod Angels:</b>\n");
 		outputText("<ul>");
-		outputText("<li> Aimong</li>");
+		outputText("<li> Aimozg</li>");
 		outputText("<li> Liadri</li>");
 		outputText("<li> Pyromania</li>");
 		outputText("<li> Jtecx</li>");
+		outputText("<li> Svalkash</li>");
 		outputText("<li> Zetta</li>\n");
 		outputText("<li> Zavos/Zevos</li>");
 		outputText("<li> Xana</li>");
@@ -184,6 +185,7 @@ public class MainMenu extends BaseContent {
         outputText("<li> Dasutin (Background Images)</li>");
 		outputText("<li> Invader (Button Graphics, Font, and Other Hawtness)</li>");
 		outputText("<li> Jtecx (Menu Reworks - PerkSimplified, MutationsDB, InvMgmt(Mobile), FastLvl, SFMenu, ElemMenu)</li>");
+		outputText("<li> Svalkash (SceneHunter)</li>");
 		outputText("</ul>");
 		outputText("<b>Supplementary Events:</b>");
 		outputText("<ul>");

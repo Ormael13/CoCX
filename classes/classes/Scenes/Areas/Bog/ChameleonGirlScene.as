@@ -195,13 +195,17 @@ package classes.Scenes.Areas.Bog
 			}
 			//(Display Options: [Fuck Her Face] [Pussy Rub] [Herm Style Pussyrub] [Incubi Draft] [Succubi Milk] [Lust&Sens Drafts])
 			menu();
-			if (player.hasCock()) addButton(0, "Use Dick", manFucksChameleonWithBiggishWang);
-			if (player.hasVagina()) addButton(1, "Use Pussy", femaleHasWinSexWithChamCham);
-			if (player.gender == 3) addButton(2, "Herm Style", fuckDatChameleonAsACoolGuyGirlHerm);
-			if ((player.hasItem(consumables.SUCMILK) || player.hasItem(consumables.P_S_MLK)) && player.hasCock()) addButton(3, "Use Item", useAnItemOnTheChamcham);
-			else if (player.hasItem(consumables.SENSDRF) && (player.hasItem(consumables.L_DRAFT) || player.hasItem(consumables.F_DRAFT))) addButton(3, "Use Item", useAnItemOnTheChamcham);
+            addButtonIfTrue(0, "Use Dick", manFucksChameleonWithBiggishWang, "Req. dick area < " + monster.vaginalCapacity(),
+                player.cockThatFits(monster.vaginalCapacity()) >= 0);
+            addButtonIfTrue(1, "Use Pussy", femaleHasWinSexWithChamCham, "", player.hasVagina());
+            addButtonIfTrue(2, "Use Pussy", fuckDatChameleonAsACoolGuyGirlHerm, "", player.gender == 3);
+            //items
+            addButtonIfTrue(3, "Suc.Milk", giveTheChameleonASuccubiMilk, "Req. Suc.(P.S.) Milk and fitting cock",
+                (player.hasItem(consumables.SUCMILK) || player.hasItem(consumables.P_S_MLK)) && player.cockThatFits(monster.vaginalCapacity()) >= 0);
+            addButtonIfTrue(4, "LustnSensD", giveTheChameleonASuccubiMilk, "Req. LustDraft + Sens./Fuck Draft",
+                player.hasItem(consumables.SENSDRF) && (player.hasItem(consumables.L_DRAFT) || player.hasItem(consumables.F_DRAFT)));
 			SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatChameleonGirl);
-						addButton(14, "Leave", cleanupAfterCombat);
+            addButton(14, "Leave", cleanupAfterCombat);
 		}
 
 		//-Herm Victory (Z edited)
@@ -286,25 +290,6 @@ package classes.Scenes.Areas.Bog
 			cleanupAfterCombat();
 		}
 
-		//Item Use Scenes Intro (Victory) (Z edited)
-		private function useAnItemOnTheChamcham():void
-		{
-			clearOutput();
-			spriteSelect(SpriteDb.s_chameleon);
-			outputText("Looking at the poor girl kneeling pathetically before you, you almost feel sorry for her.  But, she did try to rape you and claim that you were on 'her' territory.  You rummage through your bags, trying to find a fun way to punish her.  Fun for you, at least.");
-
-			//player must have either a purified or unpurified Succubi Milk (also requires cock,) Incubus Draft, or Lust & Sens Draft (both) in inventory
-			//also incubi draft and succubi milk should probably have something of a corruption requirement
-			//(Display Options: [Incubus Draft] [Succubi Milk](PC must have cock) [Lust&SensDrafts]
-			//optionz go herez
-			var milk:Function =null;
-			var drafts:Function =null;
-			if ((player.hasItem(consumables.SUCMILK) || player.hasItem(consumables.P_S_MLK)) && player.hasCock()) milk = giveTheChameleonASuccubiMilk;
-			if (player.hasItem(consumables.SENSDRF) && (player.hasItem(consumables.L_DRAFT) || player.hasItem(consumables.F_DRAFT))) drafts = doseDatChameleonWithLustAndSensitivityDrafts;
-
-			simpleChoices("SuccMilk", milk, "LustnSensD.", drafts, "", null, "", null, "Back", defeatChameleonGirl);
-		}
-
 		//-P. Succubi Milk or Succubi Milk (Z edited)
 		//Prerequisite: at least one dick
 		private function giveTheChameleonASuccubiMilk():void
@@ -343,19 +328,16 @@ package classes.Scenes.Areas.Bog
 			outputText("\n\nYou decide to push her a little bit further, and start playing with her naked breasts.  A light tug on one of her small nipples makes her yelp and arch her back, and you use the opportunity to take more of her flesh in your hands and squeeze; she shouts as the flood of sensation rushes over her.  It looks like the light has gone out of her eyes, and she's a babbling mess.  Clearly she's reached her breaking point and passed it, rolling from side to side thoughtlessly.  You chuckle to yourself and run your hand down her smooth abdomen, tracing the outlines of her hipbones, brushing lightly across her flesh.  When you reach her thigh, you rotate your hand around to the inside of her leg and rub in small circles with the tips of your fingers, and she moans with need between her heavy breaths.");
 			outputText("\n\nYou keep going down her leg, though, teasing her along the length of her calf.  Reaching her foot, you bend her leg to give you better access to its sole.  You tickle her across her wide sole with just the lightest touch of your fingertips, and she shudders, too assaulted to even manage a proper giggle.  You play with her foot for a minute; she tries to kick back against your hand and her sole curls around and grips your fingers as though trying to milk them for their touch.  She seems to almost go limp below you, crazed by your tortuous wanderings over her hypersensitive flesh.  Deciding that she's finally had enough, you put her leg down and run your hand back up it, moving towards her waist.");
 			//(if no cock or cock is too damn big)
-			if (!player.hasCock() || player.cockArea(player.smallestCockIndex()) > monster.vaginalCapacity()) {
+            var x:int = player.cockThatFits(monster.vaginalCapacity());
+            if (x <= 0)
+                sceneHunter.print("Failed dick size check");
+			if (x <= 0 || sceneHunter.uniHerms && rand(3) == 0) {
 				outputText("\n\nYou reach under her thong and toy with her clit for just a moment.  She nearly jumps, almost managing to sit up before collapsing back down into the water, and you slip a couple fingers into her slick cunt to be immediately met with a gush of her fluids.  She cries out loudly and her pussy clenches around your fingers as she cums, getting off quickly after all her waiting; then curls up on her side as her tail thrashes wildly while orgasm slowly melts her painful nerves down to normal levels.  After a minute she slackens and spreads out on the ground, panting heavily as she recovers.  Smiling down at the tired chameleon girl, you wish her luck with her new nerves and untie her hands.  She's too exhausted to get up, though, and you leave her lying there to sleep in the swampy water.");
 				//player.lust+=30;
 				dynStats("lus", 30);
 			}
 			//(else if at least one cock of appropriate size)
 			else {
-				var x:int = player.cockThatFits(monster.vaginalCapacity());
-				if (x < 0) {
-					outputText("COCK ERROR");
-					cleanupAfterCombat();
-					return;
-				}
 				outputText("\n\nYou gently tug at the knot of her thong, and the fabric easily slips away from her wide hips.  Her arousal is obvious; she's practically drooling lubricant.  The sight is just too enticing; you hastily shed your [armor] and position your " + cockDescript(x) + " in front of her needy fuck-hole.  She gasps sharply and arches her back as you press the head of your erect member against her slick lips; her hands shoot out and grab at your arms, trying desperately to pull you in to her.  With a smile you oblige, pushing deep into her pussy.  Already too far gone with your earlier teasing, she immediately cries out in orgasm, the walls of her cunt squeezing your cock with all they've got.  Though you expect her to relax into a stupor after the release, she's clearly not satisfied with just cumming once while you're still inside her, gripping you tightly with her hands and beginning to slide her hips up and down your cock.");
 				outputText("\n\nYou trace one finger lightly up and down her belly again, and she squirms as the powerful chemicals and sensations you've given her make her cum again and again.  Her eyes roll up and she pants openly, her mind completely broken by the overwhelming pleasure.  You start to notice that she feels almost a bit <i>too</i> good around you, and you wonder if the magic of the tainted liquids might also be affecting you to some extent, seeping into your system as her sexual fluids bathe your " + cockDescript(x) + ".  The squeezes of her hands on your skin feel as crisp as pinches but lack the pain, and you can feel the warm, wet folds of her pussy pressing against every inch of your prick.  Your thrusting intensifies as your whole body aches with need, and she wriggles and squeals as you push deeper into her, as if to outdistance your own orgasm building inside of you.  Her legs wrap around your back and hold you deep inside as you cum, and so much erupts from your " + cockDescript(x) + " that not even her vise-like wringing can prevent it from gushing back out and dripping down to the base of your cock.  Her grip on you loosens as she feels the proof of your lovemaking inside her.  You run a hand along her skin and she shudders, though your presence barely registers with her at this point.  Doubtful that this one will try to assert her dominance over you again any time soon, you pull your softening member out of the blissed-out chameleon-girl and stand up, donning your [armor] and leaving the semi-conscious girl there in the bog to recover.  The chemicals that you've gotten a contact high from leave you feeling somewhat aroused as you make your way back to camp.");
 				//player.lust = base + 20;
