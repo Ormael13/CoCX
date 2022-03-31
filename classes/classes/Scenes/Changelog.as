@@ -228,8 +228,8 @@ package classes.Scenes
 			outputText("-Minor Vapula fixes, new cock-finding function. Added chastity belt scene to sex menu (which was clearly intended from the beginning). (Svalkash)\n");
 			outputText("-Made Ted less annoying by disabling him after acquiring the talisman. (Svalkash) ((actualy i made another change that makes him disabled/stop appearing after he is beaten once more after dropping jade talisman (Ormael)))\n");
 			outputText("-USS optimization (changed menuGen, so touched Yara too. If she's broken, I'm the one to blame). Moved USS to SceneLib - please don't create MORE instances of it in every class. (Svalkash)\n");
-			outputText("-SceneHunter (new settings page) added. Checks are currently added only to Holidays. (Svalkash)\n");
-			outputText("-\n");
+			outputText("-SceneHunter (new settings page) added. Checks are currently added only to Holidays, male and female cancers and demons from BlightRidge. (Svalkash)\n");
+			outputText("-Implemented 3 new scenes for regular imp. Implemented tentacle cock branch for centaur fuck (also imp). Reworked sex menu for imps. (Svalkash)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
