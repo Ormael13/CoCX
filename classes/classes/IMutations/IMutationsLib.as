@@ -18,6 +18,9 @@ public class IMutationsLib
 		public function get game():CoC{
 			return CoC.instance;
 		}
+		//Example -v
+		public static const MutationsTemplateIM:PerkType = new MutationTemplate().withBuffs(MutationTemplate.perkBuffs());
+		//Mutations start here.
 		public static const KitsuneThyroidGlandIM:PerkType = new KitsuneThyroidGlandMutation().withBuffs(KitsuneThyroidGlandMutation.perkBuffs());
 
 
@@ -33,7 +36,7 @@ public class IMutationsLib
 		*This feeds the Perks/Mutations DB and Evangeline's Mutations information.
 		*/
 		public static function mutationsArray(spec:String = "", merge:Boolean = false):Array {
-
+			//Mutations, Mutation Tier Max. Wanted to tie with v2/3/4, but no good way to keep updated short of constant save updates.
 			var MutationsList:Array = []
 			function mutationsHeart():void{
 
@@ -175,10 +178,11 @@ public class IMutationsLib
 
 		private static function initMutations():void{
 			try {
-				//Phoenix Thorax czy jakiś inny związany z morphami perk ub coś związane z gardłem - dla ras mogących używać ultradźwieki jako atak lub kogoś typu banshee atak wyciem
-				//Perk związany ze skórą
+				//Example. Doesn't actually do anything.v
+				MutationTemplate.mutationReqs();
 				//Tier 1
 				KitsuneThyroidGlandMutation.mutationReqs();
+
 				} catch (e:Error) {
 					trace(e.getStackTrace());
 				}
