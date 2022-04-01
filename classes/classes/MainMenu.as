@@ -107,6 +107,8 @@ public class MainMenu extends BaseContent {
 			outputText("\n\n<b>Eternal holiday enabled.</b>");
 		if (isEaster())
 			outputText("\n\n<b>It's Easter!  Enjoy the eggs!</b>");
+		if (isAprilFools())
+			outputText("\n\n<b>It's April Fools!</b>");
 		if (isValentine())
 			outputText("\n\n<b>It's Valentine's!</b>");
 		if (isHalloween())
@@ -146,7 +148,7 @@ public class MainMenu extends BaseContent {
 		outputText("</ul>");
 		outputText("<b>Game Mod Angels:</b>\n");
 		outputText("<ul>");
-		outputText("<li> Aimong</li>");
+		outputText("<li> Aimozg</li>");
 		outputText("<li> Liadri</li>");
 		outputText("<li> Pyromania</li>");
 		outputText("<li> Jtecx</li>");
@@ -185,7 +187,7 @@ public class MainMenu extends BaseContent {
         outputText("<li> Dasutin (Background Images)</li>");
 		outputText("<li> Invader (Button Graphics, Font, and Other Hawtness)</li>");
 		outputText("<li> Jtecx (Menu Reworks - PerkSimplified, MutationsDB, InvMgmt(Mobile), FastLvl, SFMenu, ElemMenu)</li>");
-		outputText("<li> Svalkash ()</li>");
+		outputText("<li> Svalkash (SceneHunter)</li>");
 		outputText("</ul>");
 		outputText("<b>Supplementary Events:</b>");
 		outputText("<ul>");

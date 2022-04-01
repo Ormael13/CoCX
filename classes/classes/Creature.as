@@ -1767,14 +1767,14 @@ public class Creature extends Utils
 			return thick;
 		}
 
-		public function thickestCock():Number
+		public function thickestCockIndex():Number
 		{
 			return findCock(1, -1, -1, "thickness");
 		}
 
 		public function thickestCockThickness():Number
 		{
-			return cocks[thickestCock()].cockThickness;
+			return cocks[thickestCockIndex()].cockThickness;
 		}
 
 		public function thinnestCockIndex():Number
@@ -1823,11 +1823,6 @@ public class Creature extends Utils
 			return cockArea(smallestCockIndex());
 		}
 
-		public function smallestCock():Number
-		{
-			return cockArea(smallestCockIndex());
-		}
-
 		public function biggestCockIndex():Number
 		{
 			return findCock(1, -1, -1, "area");
@@ -1851,7 +1846,7 @@ public class Creature extends Utils
 		}
 
         //Checks if the cock is tentacle/stamen
-        private function cockIsTentacle(num:int):Boolean {
+        public function cockIsTentacle(num:int):Boolean {
             return cocks[num].cockType == CockTypesEnum.STAMEN || cocks[num].cockType == CockTypesEnum.TENTACLE;
         }
 

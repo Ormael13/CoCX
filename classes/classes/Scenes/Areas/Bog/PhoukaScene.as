@@ -355,6 +355,7 @@ public class PhoukaScene extends BaseContent implements TimeAwareInterface {
 						outputText(", your [vagina] starting to moisten.");
 					else outputText("and you feel your sphincter twitch as your brain thinks about what you could do with this phouka now."); //Genderless
 				}
+                sceneHunter.print("Most scenes have variations for Nagas and Taurs.");
 				menu();
 				addButton(0, "Leave", phoukaDrinkLeave);
 				if (player.lust >= 33) {
@@ -545,6 +546,7 @@ public class PhoukaScene extends BaseContent implements TimeAwareInterface {
 
 		protected function phoukaSexAddStandardMenuChoices():void
 		{ //This happens several times so it's broken out here in case additional options get added later
+            sceneHunter.print("Most scenes have variations for Nagas and Taurs.");
 			if (player.hasVagina()) {
 				addButton(1, "Bunny", phoukaSexBunnyChoice);
 				addButton(2, "Horse", phoukaSexHorseChoice);

@@ -353,7 +353,8 @@ public class EbonLabyrinth extends DungeonAbstractContent
 		private function encountersFountainOfPurity():void {
 			player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
 			player.addStatusValue(StatusEffects.RathazulAprilFool, 3, 1);
-			outputText("As you explore the labyrinth you stumble upon what appears to be a room with fountain of purity.\n\nYou collected a vial of the fountain of purity. It's time to bring it back to Rathazul.\n\n");
+			outputText("As you explore the labyrinth you stumble upon what appears to be a room with fountain of purity.\n\n");
+            outputText("<b>You've collected a vial from the fountain of purity.</b> It's time to bring it back to Rathazul.\n\n");
 		}
 		private function encountersLootChest():void {
 			player.createStatusEffect(StatusEffects.ThereCouldBeOnlyOne, 0, 0, 0, 0);
@@ -988,7 +989,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 				player.addStatusValue(StatusEffects.EbonLabyrinthA, 1, 10);
 				encountersRuletteBossesEL3();
 			}*/
-			else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) == 295 && player.hasStatusEffect(StatusEffects.RathazulAprilFool) && player.statusEffectv1(StatusEffects.RathazulAprilFool) == 0 && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
+			else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) >= 295 && player.hasStatusEffect(StatusEffects.RathazulAprilFool) && player.statusEffectv3(StatusEffects.RathazulAprilFool) == 0 && !player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) {
 				player.addStatusValue(StatusEffects.EbonLabyrinthA, 1, 10);
 				encountersFountainOfPurity();
 			}

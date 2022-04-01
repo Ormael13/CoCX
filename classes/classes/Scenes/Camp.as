@@ -575,17 +575,18 @@ public class Camp extends NPCAwareContent{
 			SceneLib.excelliaFollower.ExcelliaAndJojoCampScene();
 			return;
 		}
-		//Rathazul april fool
-		if (isAprilFools() && player.hasStatusEffect(StatusEffects.CampRathazul) && rand(5) == 0) {
-			if (player.hasStatusEffect(StatusEffects.RathazulAprilFool) && player.statusEffectv2(StatusEffects.RathazulAprilFool) < 5) {
-				if (player.statusEffectv3(StatusEffects.RathazulAprilFool) == 1) SceneLib.rathazul.rathazulAprilFoolPart3();
-				if (date.fullYear > player.statusEffectv1(StatusEffects.RathazulAprilFool)) SceneLib.rathazul.rathazulAprilFool();
-				return;
-			} else if (!player.hasStatusEffect(StatusEffects.RathazulAprilFool)) {
-				SceneLib.rathazul.rathazulAprilFool();
-				return;
-			}
-		}
+		/*Rathazul april fool:
+            - aprel fools, no effect, OR max stage and a year passed since the beginning, BUT limited at 5 elixirs
+            - second stage. No checking for fools.
+        */
+        if (player.hasStatusEffect(StatusEffects.CampRathazul) && isAprilFools() && (!player.hasStatusEffect(StatusEffects.RathazulAprilFool) ||
+        player.statusEffectv3(StatusEffects.RathazulAprilFool) == 2
+        && player.statusEffectv2(StatusEffects.RathazulAprilFool) < 5
+        && date.fullYear > player.statusEffectv1(StatusEffects.RathazulAprilFool))) {
+            SceneLib.rathazul.rathazulAprilFool();
+            hideMenus();
+            return;
+        }
 		//Cotton preg freakout
 		if (player.pregnancyIncubation <= 280 && player.pregnancyType == PregnancyStore.PREGNANCY_COTTON &&
 				flags[kFLAGS.COTTON_KNOCKED_UP_PC_AND_TALK_HAPPENED] == 0 && (model.time.hours == 6 || model.time.hours == 7)) {

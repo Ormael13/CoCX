@@ -162,7 +162,7 @@ public class Phouka extends Monster
 				doNext(SceneLib.combat.endLustLoss);
 			}
 			else {
-				if (player.hasVagina()) { //Phouka prefer vaginal if they can get it
+				if (player.hasVagina() && (!sceneHunter.uniHerms || rand(3) > 0)) { //Phouka prefer vaginal if they can get it
 					if (player.isTaur() || rand(2) == 0)
 						SceneLib.bog.phoukaScene.phoukaSexHorse(true, !hpVictory); //And they love mating with female or herm centaurs in their horse form
 					else SceneLib.bog.phoukaScene.phoukaSexBunny(true, !hpVictory);

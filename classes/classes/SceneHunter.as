@@ -16,7 +16,8 @@ public class SceneHunter extends BaseContent {
         if (flags[kFLAGS.SCENEHUNTER_UNI_HERMS]) {
             outputText("<b><font color=\"#008000\">ENABLED</font></b>");
             outputText("\nMakes scenes unique to male/female PCs accessible to herms. Allows the player to choose the scene when the sex is led by the PC, randomly selects it in rape scenes.");
-            outputText("\n<i>New scenes lack the description of herm's other genitalia. Some scenes may look slightly off (rare).</i>");
+            outputText("\nAlso adjusted some genderless (anal/oral only) scenes so they will look fitting - no genderless mentions or jokes.");
+            outputText("\n<i>New scenes may lack the description of herm's other genitalia. Some scenes may look slightly off (rare).</i>");
         }
         else {
             outputText("<b><font color=\"#800000\">DISABLED</font></b>");
@@ -27,27 +28,26 @@ public class SceneHunter extends BaseContent {
         outputText("\n\n<b>Dick Select</b>: ");
         if (flags[kFLAGS.SCENEHUNTER_DICK_SELECT]) {
             outputText("<b><font color=\"#008000\">ENABLED</font></b>");
-            outputText("\nWhen the scene presents different options for small/big/TOO big dick sizes, adds selectors for the player to choose the exact 'tool' if different options are available. The dick is selected randomly in rape scenes.");
+            outputText("\nWhen the scene presents different options for small/big/ dick sizes, adds selectors for the player to choose the exact 'tool' if different options are available. The dick is selected randomly in rape scenes. Also in scenes with options for multicocks and single cock, sometimes lets you choose if you want to use only one.");
             outputText("\n<i>Well, you can change which dick will be used now. Yay. Though some rare scenes (especially small dick femdom) may look slightly weird if you have a bigger cock.</i>");
         }
         else {
             outputText("<b><font color=\"#800000\">DISABLED</font></b>");
-            outputText("\nThe biggest <b>fitting</b> dick is always used.");
+            outputText("\nThe biggest <b>fitting</b> dick is always used. Multicocks too.");
         }
 
-        addButton(2, "MutExScenes", toggle, kFLAGS.SCENEHUNTER_MUTEX_SCENES);
-        outputText("\n\n<b>Mutually exclusive scenes</b>: ");
-        if (flags[kFLAGS.SCENEHUNTER_MUTEX_SCENES]) {
+        addButton(2, "Other", toggle, kFLAGS.SCENEHUNTER_OTHER);
+        outputText("\n\n<b>Other changes</b>: ");
+        if (flags[kFLAGS.SCENEHUNTER_OTHER])
             outputText("<b><font color=\"#008000\">ENABLED</font></b>");
-            outputText("\nSome originally mutually exclusive scenes (when you've selected one scene, you'll never access the other one in this playthrough) are no longer mutually exclusive. Full list of the changes:");
-            outputText("\nChristmas elf - enabled sex even when corrupt.");
-            outputText("\n<i>This opens up more scenes, but <b>some</b> of them may look off. They are still explained in the game, but be warned that the original writers intended otherwise.</i>");
-        }
-        else {
+        else
             outputText("<b><font color=\"#800000\">DISABLED</font></b>");
-            outputText("\n...stay mutually exclusive, as intended by the writers...");
-            outputText("\n<i>Some one-time scenes with different options can still be replayed using 'Camp Actions -> Spend Time -> Recall'.</i>");
-        }
+        outputText("\nTweaks which didn't fit into the previous categories. Full list goes here.");
+        outputText("\nChristmas elf: enabled sex option even when corrupt.");
+        outputText("\nLizan Rogue: medium-corrupt PCs now can persuade Lizan Rogue.");
+        outputText("\nNaga <b>after</b> Samirah recruitment: enabled scenes. They're too good to miss.");
+        outputText("\n<i>This opens up more scenes. They are lore-accurate and still explained in the game (so you won't get Amily living with corrupt Jojo or other nonsense), but be warned that the original writers intended some details to work the other way.</i>");
+        outputText("\n<i>Some one-time scenes with many options and checks can be replayed using 'Camp Actions -> Spend Time -> Recall'.</i>");
         //Scene list link
         addButton(3, "PrintChecks", toggle, kFLAGS.SCENEHUNTER_PRINT_CHECKS);
         outputText("\n\n<b>Print Checks:</b>: ");
@@ -99,12 +99,18 @@ public class SceneHunter extends BaseContent {
     * @param    dickPriority    Used if uniHerms are disabled. 1 - cock over vag, -1 - vag over cock. 0 - rand. 
     * @param    dickF           Dick button
     * @param    vagF            Vagina button
-    * @param    assF            Ass button
+    * @param    assA            Ass button function. Can be an array, then [0] is the text, and [1] is the function
     * @param    hermF            Herm button
     * @param    dickActive      If false, "dick" button will be disabled.
     * @param    dickDisabledMsg The message to write on the disabled dick button
     */
-    public function selectGender(dickF:Function, vagF:Function, assF:Function = null, hermF:Function = null, dickActive:Boolean = true, dickDisabledMsg:String = "", dickPriority:int = 0):void {
+    public function selectGender(dickF:Function, vagF:Function, assA:* = null, hermF:Function = null, dickPriority:int = 0, dickActive:Boolean = true, dickDisabledMsg:String = ""):void {
+        //decomposing ass
+        var assText:String = (assA is Array) ? assA[0] : "Ass";
+        var assF:Function = (assA is Function)  ? assA as Function :
+                            (assA is Array)     ? assA[1] :
+                            null;
+        //booleans
         var dickB:Boolean = dickF != null && player.hasCock();
         var vagB:Boolean = vagF != null && player.hasVagina();
         var assB:Boolean = assF != null;
@@ -158,7 +164,7 @@ public class SceneHunter extends BaseContent {
                 addButtonDisabled(1, "Vagina", "You don't have any.");
         }
         if (assF != null)
-            addButton(2, "Ass", restoreText, beforeText, assF);
+            addButton(2, assText, restoreText, beforeText, assF);
         if (hermF != null) {
             if (player.hasCock() && player.hasVagina()) {
                 if (dickActive) //checking the size here too... though not sure if it should work this way
@@ -212,20 +218,36 @@ public class SceneHunter extends BaseContent {
         else
             addButtonDisabled(1, "Too big", "Requires dick " + compareBy + " greater than " + maxSize);
     }
+
+    //Calls the 'fun' function, finding the biggest cock index in selected limits
+    public function callFitNofit(fun:Function, max:Number, compareBy:String = "area"):void {
+        if (!dickSelect) {
+            var x:int = player.cockThatFits(max, compareBy);
+            if (x < 0) x = player.smallestCockIndex(); //selecting smallest here, not biggest. Because you disabled me. Ass.
+            fun(x);
+            return;
+        }
+        //Invalid calls may be created, but must NEVER be called.
+        var fitF:Function   = curry(fun, player.findCock(1, -1, max, compareBy));
+        var nofitF:Function = curry(fun, player.findCock(1, max , -1, compareBy)); //selecting bigger here, because you're cool.
+        selectFitNofit(fitF, nofitF, max, compareBy);
+    }
+
     /**
     * The dialogue to select one of 3 dick sizes. There's no points in the game when more are used.
     * When disabled, selects the biggest one.
     * Always overrides "tentacles always fit" behavior for 'smaller' options - your 3-foot-long tentacle is not SMALL in any way :)
     * Assumes that you have any fitting dick - no max size for "Big"
-    * @param    bigF, mediumF, smallF   Function for "Big", "Medium", "Small" buttons respectively. 
-    * @param    bigMin, smallMax       Borderline sizes for "Big"-"Medium" and "Medium"-"Small"
+    * @param    bigF, mediumF, smallF   Function for "Big", "Medium", "Small" buttons respectively.
+    * @param    bigMin, smallMax        Borderline sizes for "Big"-"Medium" and "Medium"-"Small"
     * @param    compareBy               (Optional) Measurement to compare
+    * @param    totalMax                Global maximum size - for bigF limitting
     */
-    public function selectBigSmall(bigF:Function, bigMin:Number, mediumF:Function, smallMax:Number = -1, smallF:Function = null, compareBy:String = "area"):void {
+    public function selectBigSmall(bigF:Function, bigMin:Number, mediumF:Function, smallMax:Number = -1, smallF:Function = null, compareBy:String = "area", totalMax:Number = -1):void {
         var smallProvided:Boolean = smallMax >= 0 && smallF != null;
         //Auto-calls
         if (!dickSelect) {
-            if (player.findCock(1, bigMin, -1, compareBy) >= 0)
+            if (player.findCock(1, bigMin, totalMax, compareBy) >= 0)
                 bigF();
             else if (player.findCock(1, smallProvided ? smallMax : -1, bigMin, compareBy, false) >= 0) //called even if mediumMin is not provived (-1 = no minimum)
                 mediumF();
@@ -238,10 +260,10 @@ public class SceneHunter extends BaseContent {
         outputText("\n\n<b>Will you use a big" + (smallProvided ? ", medium": "") + " or small sized dick?</b>");
         menu();
         //big cocks
-        if (player.findCock(1, bigMin, -1, compareBy) >= 0)
+        if (player.findCock(1, bigMin, totalMax, compareBy) >= 0)
             addButton(0, "Big", restoreText, beforeText, bigF);
         else
-            addButtonDisabled(0, "Fitting", "Requires dick " + compareBy + " greater than " + bigMin);
+            addButtonDisabled(0, "Big", "Requires dick " + compareBy + " greater than " + bigMin + (totalMax != -1 ? (" but less than " + totalMax) : ""));
         //medium-small
         if (smallProvided) {
             //medium cocks
@@ -263,13 +285,83 @@ public class SceneHunter extends BaseContent {
                 addButtonDisabled(1, "Small", "Requires dick " + compareBy + " less than " + bigMin);
         }
     }
+
+    //Calls the 'fun' function, finding the biggest cock index in selected limits
+    public function callBigSmall(fun:Function, bigMin:Number, smallMax:Number = -1, compareBy:String = "area", totalMax:Number = -1):void {
+        if (!dickSelect) {
+            fun(player.findCock(1, -1, totalMax, compareBy));
+            return;
+        }
+        //Invalid calls may be created, but must NEVER be called.
+        var bigF:Function   = curry(fun, player.findCock(1, bigMin, totalMax, compareBy));
+        var mediumF:Function= curry(fun, player.findCock(1, smallMax , bigMin, compareBy));
+        var smallF:Function = smallMax > 0 ? curry(fun, player.findCock(1, -1 , smallMax, compareBy)) : null;
+        selectBigSmall(bigF, bigMin, mediumF, smallMax, smallF, compareBy, totalMax);
+    }
+
+    /**
+    * The dialogue to select single cock or multicocks
+    * If doesn't fit, selects the biggest one because HELL WHY NOT.
+    * When disabled, overrides "tentacle always fit" behavior.
+    * @param    singleF     Single cock
+    * @param    twoF        Multicock / Two cocks (or more)
+    * @param    threeF      (Optional) Three (or more)
+    * @param    fourF       (Optional) Four (or more)
+    * @param    moreF       (Optional) More (5, 10)
+    */
+    public function selectSingleMulti(singleF:Function, twoF:Function, threeF:Function = null, fourF:Function = null, compareBy:String = "area", totalMax:Number = -1):void {
+        var cnt:int = player.countCocks(-1, totalMax, compareBy);
+        //Auto-calls
+        if (!dickSelect) {
+            if (fourF  != null && cnt >= 4)
+                fourF();
+            else if (threeF != null && cnt >= 3)
+                threeF();
+            else if (twoF   != null && cnt >= 2)
+                fourF();
+            else if (singleF != null)
+                singleF();
+            return;
+        }
+        //If single, no bother
+        if (cnt == 1) {
+            print("Failed: multicock check");
+            singleF();
+            return;
+        }
+        //Dialogue
+        var beforeText:String = CoC.instance.currentText;
+        outputText("\n\n<b>Since you have several cocks, will you use more at the same time to get more pleasure, or try to use less hoping for a better treatment?</b>");
+        //menu
+        menu();
+        if (singleF != null)
+            addButton(1, "Single", restoreText, beforeText, singleF);
+        if (twoF != null) {
+            if (cnt >= 2)
+                addButton(2, "Two", restoreText, beforeText, twoF);
+            else
+                addButtonDisabled(2, "Two", "Not enough.");
+        }
+        if (threeF != null) {
+            if (cnt >= 3)
+                addButton(2, "Three", restoreText, beforeText, threeF);
+            else
+                addButtonDisabled(2, "Three", "Not enough.");
+        }
+        if (fourF != null) {
+            if (cnt >= 4)
+                addButton(3, "Four", restoreText, beforeText, fourF);
+            else
+                addButtonDisabled(3, "Four", "Not enough.");
+        }
+    }
     
     //--------------------------------------------------------------------------------------------------
-    // MutExScenes
+    // Other
     //--------------------------------------------------------------------------------------------------
 
-    public function get mutExScenes():Boolean {
-        return flags[kFLAGS.SCENEHUNTER_MUTEX_SCENES];
+    public function get other():Boolean {
+        return flags[kFLAGS.SCENEHUNTER_OTHER];
     }
     //nothing more here for now... Will it just check the value, or new next will be here too?
     

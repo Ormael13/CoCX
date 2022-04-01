@@ -7,9 +7,6 @@ import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 public class BunnyGirl extends BaseContent{
-		public function isItEaster():Boolean {
-			return (date.date >= 30 && date.date <= 31 && date.month == 2) || (date.month == 3 && date.date <= 1);
-		}
 
 //Easter Bunny
 //5'4", small B cup breasts.

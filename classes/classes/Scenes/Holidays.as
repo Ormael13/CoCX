@@ -1916,7 +1916,7 @@ public class Holidays {
         EngineCore.awardAchievement("Naughty or Nice", kACHIEVEMENTS.HOLIDAY_CHRISTMAS_I);
         EngineCore.outputText("You wonder out loud, \"<i>So this... present is mine?</i>\"\n\n");
         //still can fuck if mutex
-        if ((player.cor >= 90 || JojoScene.monk >= 5 || player.hasStatusEffect(StatusEffects.Exgartuan) || SceneLib.amilyScene.amilyCorrupt() || flags[kFLAGS.SOPHIE_DISABLED] > 0 || flags[kFLAGS.SOPHIE_BIMBO_ACCEPTED] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0) && !sceneHunter.mutExScenes) {
+        if ((player.cor >= 90 || JojoScene.monk >= 5 || player.hasStatusEffect(StatusEffects.Exgartuan) || SceneLib.amilyScene.amilyCorrupt() || flags[kFLAGS.SOPHIE_DISABLED] > 0 || flags[kFLAGS.SOPHIE_BIMBO_ACCEPTED] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0) && !sceneHunter.other) {
             EngineCore.outputText("She nods, bouncing up and down in excitement and flushing slightly, \"<i>Yup, just tear the lid off and get your gift!</i>\"\n\n");
             if (flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] > 0) EngineCore.outputText("Here we go again...\n\n");
             //[Open Present] [Unwrap Elf] [Decline]
@@ -4356,8 +4356,61 @@ public class Holidays {
         }
     }
 
+    //[0] - month, [1] - day
+    // https://www.geeksforgeeks.org/how-to-calculate-the-easter-date-for-a-given-year-using-gauss-algorithm/
+    public static function gaussEaster(Y:int):Array{
+        var A:Number, B:Number, C:Number, P:Number, Q:Number,
+            M:Number, N:Number, D:Number, E:Number;
+        // All calculations done
+        // on the basis of
+        // Gauss Easter Algorithm
+        A = Y % 19;
+        B = Y % 4;
+        C = Y % 7;
+        P = Math.floor(Y / 100);
+        Q = Math.floor(
+            (13 + 8 * P) / 25);
+        M = (15 - Q + P - P / 4) % 30;
+        N = (4 + P - P / 4) % 7;
+        D = (19 * A + M) % 30;
+        E = (2 * B + 4 * C + 6 * D + N) % 7;
+        var days:int = (22 + D + E);
+ 
+        // A corner case,
+        // when D is 29
+        if (D == 29 && E == 6) 
+            return [4, 19];
+        // Another corner case,
+        // when D is 28
+        else if (D == 28 && E == 6)
+            return [4, 18];
+        else {
+            // If days > 31, move to April
+            // April = 4th Month
+            if (days > 31) 
+                return [4, days - 31];
+            // Otherwise, stay on March
+            // March = 3rd Month
+            else
+                return [3, days];
+        }
+    }
+
     public static function isEaster():Boolean {
-        return SceneLib.plains.bunnyGirl.isItEaster();
+        var easter:Array = gaussEaster(date.fullYear);
+        var maxDate:Array = [];
+        //give a week for holidays
+        if (easter[1] > 31 - 6) {
+            maxDate[0] = easter[0] + 1;
+            maxDate[1] += easter[1] - 31 + 6;
+        }
+        else {
+            maxDate[0] = easter[0];
+            maxDate[1] += easter[1] + 6;
+        }
+        return  (date.month == easter[0] && date.date >= easter[1] || date.month > easter[0]) && //min
+                (date.month ==maxDate[0] && date.date <=maxDate[1] || date.month <maxDate[0]); //max
+        //bounds from http://mbednarek.byethost7.com/easter.php?i=1
     }
 
     public static function isHalloween():Boolean {

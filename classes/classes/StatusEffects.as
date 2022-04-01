@@ -571,7 +571,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const PostAnemoneBeatdown:StatusEffectType            = mk("Post Anemone Beatdown");
 		public static const PureCampJojo:StatusEffectType                   = mk("PureCampJojo");
 		public static const RaijuLightningStatus:StatusEffectType           = mk("Raiju lightning status");
-		public static const RathazulAprilFool:StatusEffectType              = mk("RathazulAprilFool");
+		public static const RathazulAprilFool:StatusEffectType              = mk("RathazulAprilFool"); // 1 - last encounter year, 2 - elixir count (received), 3 - quest stage
 		public static const RathazulArmor:StatusEffectType                  = mk("RathazulArmor");
 		public static const RepeatSuccubi:StatusEffectType                  = mk("repeatSuccubi");
 		public static const ResourceNode1:StatusEffectType                  = mk("Resource Node 1");
