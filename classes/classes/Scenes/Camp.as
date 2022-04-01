@@ -1020,6 +1020,7 @@ public class Camp extends NPCAwareContent{
 				}
 			}
 			flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = 0;
+			flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] = 0;
 		}
 
 		//Menu
