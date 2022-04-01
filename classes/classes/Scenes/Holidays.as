@@ -1916,7 +1916,7 @@ public class Holidays {
         EngineCore.awardAchievement("Naughty or Nice", kACHIEVEMENTS.HOLIDAY_CHRISTMAS_I);
         EngineCore.outputText("You wonder out loud, \"<i>So this... present is mine?</i>\"\n\n");
         //still can fuck if mutex
-        if ((player.cor >= 90 || JojoScene.monk >= 5 || player.hasStatusEffect(StatusEffects.Exgartuan) || SceneLib.amilyScene.amilyCorrupt() || flags[kFLAGS.SOPHIE_DISABLED] > 0 || flags[kFLAGS.SOPHIE_BIMBO_ACCEPTED] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0) && !sceneHunter.mutExScenes) {
+        if ((player.cor >= 90 || JojoScene.monk >= 5 || player.hasStatusEffect(StatusEffects.Exgartuan) || SceneLib.amilyScene.amilyCorrupt() || flags[kFLAGS.SOPHIE_DISABLED] > 0 || flags[kFLAGS.SOPHIE_BIMBO_ACCEPTED] > 0 || flags[kFLAGS.NIAMH_STATUS] > 0) && !sceneHunter.other) {
             EngineCore.outputText("She nods, bouncing up and down in excitement and flushing slightly, \"<i>Yup, just tear the lid off and get your gift!</i>\"\n\n");
             if (flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE] > 0) EngineCore.outputText("Here we go again...\n\n");
             //[Open Present] [Unwrap Elf] [Decline]

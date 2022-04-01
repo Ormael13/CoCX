@@ -3294,7 +3294,7 @@ import classes.display.SpriteDb;
 			if (cockI == 0)
 			{
 				tooBig = true;
-				cockI = player.smallestCock() + 1;
+				cockI = player.smallestCockIndex() + 1;
 			}
 
 			if (tooBig)

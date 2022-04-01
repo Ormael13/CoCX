@@ -26,7 +26,7 @@ public class LizanRogueScene extends BaseContent
 				}
 				menu();
 				addButton(0, "Fight", fightLizan, false, null, null, "Fight the lizan!");
-                if (sceneHunter.mutExScenes)
+                if (sceneHunter.other)
                     addButtonIfTrue(1, "Talk", shTalk_medCor, "You're too corrupt for this!", player.cor < 66 + player.corruptionTolerance());
                 else if (player.cor < 66 + player.corruptionTolerance())
                     addButtonDisabled(1, "???", "SceneHunter feature");
@@ -179,7 +179,7 @@ public class LizanRogueScene extends BaseContent
 			outputText("\n\nYou tell him you want his ass, making sure to assert your dominance. He doesn't seem to mind as he turns away and peels off his loincloth, exposing his tight little toned ass with a lift of his glistening " + monster.skinTone + " tail. After he has discarded the meager clothing he turns back around to face you, displaying dual bumpy purple lizan dicks, neither of which are small.");
 			outputText("\n\nTaking charge of the situation you take him by the shoulders and push him down to his knees. He doesn't seem to mind the gentle reminder of your dominance. From the way he begins flicking his tongue at [eachCock] you feel that he is actually quite turned on by the gesture.");
             //select size first
-            sceneHunter.callWithCock(consButt_multiSel, 12, 7, "length");
+            sceneHunter.callBigSmall(consButt_multiSel, 12, 7, "length");
 
             function consButt_multiSel(cock:int):void {
                 sceneHunter.selectSingleMulti(

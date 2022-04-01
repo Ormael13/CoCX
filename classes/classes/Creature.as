@@ -1767,14 +1767,14 @@ public class Creature extends Utils
 			return thick;
 		}
 
-		public function thickestCock():Number
+		public function thickestCockIndex():Number
 		{
 			return findCock(1, -1, -1, "thickness");
 		}
 
 		public function thickestCockThickness():Number
 		{
-			return cocks[thickestCock()].cockThickness;
+			return cocks[thickestCockIndex()].cockThickness;
 		}
 
 		public function thinnestCockIndex():Number
@@ -1820,11 +1820,6 @@ public class Creature extends Utils
 		{
 			if (cockTotal() == 0)
 				return -1;
-			return cockArea(smallestCockIndex());
-		}
-
-		public function smallestCock():Number
-		{
 			return cockArea(smallestCockIndex());
 		}
 

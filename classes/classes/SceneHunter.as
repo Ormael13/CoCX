@@ -35,20 +35,18 @@ public class SceneHunter extends BaseContent {
             outputText("\nThe biggest <b>fitting</b> dick is always used. Multicocks too.");
         }
 
-        addButton(2, "MutExScenes", toggle, kFLAGS.SCENEHUNTER_MUTEX_SCENES);
-        outputText("\n\n<b>Mutually exclusive scenes</b>: ");
-        if (flags[kFLAGS.SCENEHUNTER_MUTEX_SCENES]) {
+        addButton(2, "Other", toggle, kFLAGS.SCENEHUNTER_OTHER);
+        outputText("\n\n<b>Other changes</b>: ");
+        if (flags[kFLAGS.SCENEHUNTER_OTHER])
             outputText("<b><font color=\"#008000\">ENABLED</font></b>");
-            outputText("\nSome originally mutually exclusive scenes (when you've selected one scene, you'll never access the other one in this playthrough) are no longer mutually exclusive. Full list of the changes:");
-            outputText("\nChristmas elf - enabled sex option even when corrupt.");
-            outputText("\nLizan Rogue - medium-corrupt PCs now can persuade Lizan Rogue.");
-            outputText("\n<i>This opens up more scenes, but <b>some</b> of them may look off. They are mostly lore-accurate and still explained in the game (so you won't get Amily living with corrupt Jojo or other nonsense), but be warned that the original writers intended some details to work the other way.</i>");
-        }
-        else {
+        else
             outputText("<b><font color=\"#800000\">DISABLED</font></b>");
-            outputText("\n...stay mutually exclusive, as intended by the writers...");
-            outputText("\n<i>Some one-time scenes with different options can still be replayed using 'Camp Actions -> Spend Time -> Recall'.</i>");
-        }
+        outputText("\nTweaks which didn't fit into the previous categories. Full list goes here.");
+        outputText("\nChristmas elf: enabled sex option even when corrupt.");
+        outputText("\nLizan Rogue: medium-corrupt PCs now can persuade Lizan Rogue.");
+        outputText("\nNaga <b>after</b> Samirah recruitment: enabled scenes. They're too good to miss.");
+        outputText("\n<i>This opens up more scenes. They are lore-accurate and still explained in the game (so you won't get Amily living with corrupt Jojo or other nonsense), but be warned that the original writers intended some details to work the other way.</i>");
+        outputText("\n<i>Some one-time scenes with many options and checks can be replayed using 'Camp Actions -> Spend Time -> Recall'.</i>");
         //Scene list link
         addButton(3, "PrintChecks", toggle, kFLAGS.SCENEHUNTER_PRINT_CHECKS);
         outputText("\n\n<b>Print Checks:</b>: ");
@@ -100,12 +98,18 @@ public class SceneHunter extends BaseContent {
     * @param    dickPriority    Used if uniHerms are disabled. 1 - cock over vag, -1 - vag over cock. 0 - rand. 
     * @param    dickF           Dick button
     * @param    vagF            Vagina button
-    * @param    assF            Ass button
+    * @param    assA            Ass button function. Can be an array, then [0] is the text, and [1] is the function
     * @param    hermF            Herm button
     * @param    dickActive      If false, "dick" button will be disabled.
     * @param    dickDisabledMsg The message to write on the disabled dick button
     */
-    public function selectGender(dickF:Function, vagF:Function, assF:Function = null, hermF:Function = null, dickActive:Boolean = true, dickDisabledMsg:String = "", dickPriority:int = 0):void {
+    public function selectGender(dickF:Function, vagF:Function, assA:* = null, hermF:Function = null, dickPriority:int = 0, dickActive:Boolean = true, dickDisabledMsg:String = ""):void {
+        //decomposing ass
+        var assText:String = (AssA is Array) ? assA[0] : "Ass";
+        var assF:Function = (assA is Function)  ? assA as Function :
+                            (assA is Array)     ? assA[1] :
+                            null;
+        //booleans
         var dickB:Boolean = dickF != null && player.hasCock();
         var vagB:Boolean = vagF != null && player.hasVagina();
         var assB:Boolean = assF != null;
@@ -159,7 +163,7 @@ public class SceneHunter extends BaseContent {
                 addButtonDisabled(1, "Vagina", "You don't have any.");
         }
         if (assF != null)
-            addButton(2, "Ass", restoreText, beforeText, assF);
+            addButton(2, assText, restoreText, beforeText, assF);
         if (hermF != null) {
             if (player.hasCock() && player.hasVagina()) {
                 if (dickActive) //checking the size here too... though not sure if it should work this way
@@ -212,6 +216,20 @@ public class SceneHunter extends BaseContent {
             addButton(1, "Too big", restoreText, beforeText, nofitF);
         else
             addButtonDisabled(1, "Too big", "Requires dick " + compareBy + " greater than " + maxSize);
+    }
+
+    //Calls the 'fun' function, finding the biggest cock index in selected limits
+    public function callFitNofit(fun:Function, max:Number, compareBy:String = "area"):void {
+        if (!dickSelect) {
+            var x:int = player.cockThatFits(max, compareBy);
+            if (x < 0) x = player.smallestCockIndex(); //selecting smallest here, not biggest. Because you disabled me. Ass.
+            fun(x);
+            return;
+        }
+        //Invalid calls may be created, but must NEVER be called.
+        var fitF:Function   = curry(fun, player.findCock(1, -1, max, compareBy));
+        var nofitF:Function = curry(fun, player.findCock(1, max , -1, compareBy)); //selecting bigger here, because you're cool.
+        selectFitNofit(fitF, nofitF, max, compareBy);
     }
 
     /**
@@ -268,11 +286,12 @@ public class SceneHunter extends BaseContent {
     }
 
     //Calls the 'fun' function, finding the biggest cock index in selected limits
-    public function callWithCock(fun:Function, bigMin:Number, smallMax:Number = -1, compareBy:String = "area", totalMax:Number = -1):void {
+    public function callBigSmall(fun:Function, bigMin:Number, smallMax:Number = -1, compareBy:String = "area", totalMax:Number = -1):void {
         if (!dickSelect) {
             fun(player.findCock(1, -1, totalMax, compareBy));
             return;
         }
+        //Invalid calls may be created, but must NEVER be called.
         var bigF:Function   = curry(fun, player.findCock(1, bigMin, totalMax, compareBy));
         var mediumF:Function= curry(fun, player.findCock(1, smallMax , bigMin, compareBy));
         var smallF:Function = smallMax > 0 ? curry(fun, player.findCock(1, -1 , smallMax, compareBy)) : null;
@@ -289,8 +308,8 @@ public class SceneHunter extends BaseContent {
     * @param    fourF       (Optional) Four (or more)
     * @param    moreF       (Optional) More (5, 10)
     */
-    public function selectSingleMulti(singleF:Function, twoF:Function, threeF:Function = null, fourF:Function = null):void {
-        var cnt:int = player.cocks.length;
+    public function selectSingleMulti(singleF:Function, twoF:Function, threeF:Function = null, fourF:Function = null, compareBy:String = "area", totalMax:Number = -1):void {
+        var cnt:int = player.countCocks(-1, totalMax, compareBy);
         //Auto-calls
         if (!dickSelect) {
             if (fourF  != null && cnt >= 4)
@@ -337,11 +356,11 @@ public class SceneHunter extends BaseContent {
     }
     
     //--------------------------------------------------------------------------------------------------
-    // MutExScenes
+    // Other
     //--------------------------------------------------------------------------------------------------
 
-    public function get mutExScenes():Boolean {
-        return flags[kFLAGS.SCENEHUNTER_MUTEX_SCENES];
+    public function get other():Boolean {
+        return flags[kFLAGS.SCENEHUNTER_OTHER];
     }
     //nothing more here for now... Will it just check the value, or new next will be here too?
     
