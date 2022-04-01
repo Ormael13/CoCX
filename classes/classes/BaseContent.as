@@ -997,7 +997,6 @@ import coc.xxc.StoryContext;
 		 */
 		protected function menuGen(menuItems:Array, page:int, back:Function=null):void {
 			var bList:Array = [];
-			var total:int = menuItems.length;
             var multipage:Boolean = menuItems.length > 14 * 3;
 			if(multipage)
 				for (var h:int = page * (12*3); h <= Math.min((page+1) * (12*3), menuItems.length - 1); h++) // Page 0 - array 0-36. Page 1 - array 37 -?
@@ -1005,7 +1004,6 @@ import coc.xxc.StoryContext;
 			else
 				bList = menuItems;
             menu();
-			var btnsActive: int = 0;
 			for (var i:int = 0; i < bList.length; i += 3){
                 if (!bList[i + 1])
                     addButtonDisabled(i/3, bList[i], (bList[i + 2] is Array) ? bList[i+2][1]: bList[i+2]);
