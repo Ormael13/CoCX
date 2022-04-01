@@ -96,6 +96,10 @@ private function rathazulMoveDecline():void {
 public function campRathazul():void {
 	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
+    if (player.hasStatusEffect(StatusEffects.RathazulAprilFool) && player.statusEffectv3(StatusEffects.RathazulAprilFool) == 1) {
+        rathazulAprilFoolPart3();
+        return;
+    }
 	if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 2 && player.hasStatusEffect(StatusEffects.MetRathazul)) {
 		marblePurification.visitRathazulToPurifyMarbleAfterLaBovaStopsWorkin();
 		return;
@@ -1049,25 +1053,31 @@ public function rathazulAprilFool():void {
 	addButton(11, "Next", rathazulAprilFoolPart2);
 	addButton(13, "Next", rathazulAprilFoolPart2);
 }
+
 private function rathazulAprilFoolPart2():void {
 	spriteSelect(SpriteDb.s_rathazul);
 	outputText("he suddenly pulls a single vial he was hiding in a pocket on the inside of his pants before putting them back on.\n\n");
 	outputText("\"<i>Oh please don't tell me you thought I would ever ask for something like that, I'm way too old! No obviously all I need is for you to go grab water from a fountain of purity somewhere around Mareth. Maybe even deep underground, or in some sort of ancient labyrinth... With this I should be able to create the Purity elixir, my ultimate creation. A concoction that I recall could reverse and undo any corruption. Imagine… this could even perhaps fix any damage the demons did to the world. All I need is a sample to study and I could create as many vials as is necessary.\"</i>\n\n");
 	if (player.hasStatusEffect(StatusEffects.RathazulAprilFool)) {
-		player.addStatusValue(StatusEffects.RathazulAprilFool, 1, 1);
+		player.changeStatusValue(StatusEffects.RathazulAprilFool, 1, date.fullYear);
 		player.addStatusValue(StatusEffects.RathazulAprilFool, 3, -2);
 	}
 	else player.createStatusEffect(StatusEffects.RathazulAprilFool, date.fullYear, 0, 0, 0);
 	doNext(returnToRathazulMenu);
 }
+
 public function rathazulAprilFoolPart3():void {
 	spriteSelect(SpriteDb.s_rathazul);
 	clearOutput();
 	outputText("Rathazul almost steals the vial from your hands and get to work mixing it into a potion.\n\n");
-	outputText("\"<i>Here's your purity elixir. Use it with wisdom because it's the only one you will get until I get enough materials to create a second one which considering the rarity of the components is easily going to take me a full year. I definitively need to find a way to mass produce these...\"</i>\n\n");
+	outputText("\"<i>Here's your purity elixir. Use it with wisdom because it's the only one you will get until I get enough materials to create a second one which considering the rarity of the components is easily going to take me a full year. I definitively need to find a way to mass produce these...\"</i>");
+    outputText("\n\n<b>Gained Key Item: Rathazul's Purity Elixir</b>");
 	player.addStatusValue(StatusEffects.RathazulAprilFool, 2, 1);
 	player.addStatusValue(StatusEffects.RathazulAprilFool, 3, 1);
-	player.createKeyItem("Rathazul's Purity Elixir", 0, 0, 0, 0);
+    if (player.hasKeyItem("Rathazul's Purity Elixir") < 0)
+	    player.createKeyItem("Rathazul's Purity Elixir", 1, 0, 0, 0);
+    else
+        player.addKeyValue("Rathazul's Purity Elixir", 1, 1);
 	doNext(returnToRathazulMenu);
 }
 }

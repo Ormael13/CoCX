@@ -300,10 +300,21 @@ use namespace CoC;
 		}
 
 		private function PurityElixir():void {
-			outputText("You feel something unlock within you as you drink the elixir, some of the veil of corruption being washed out of you as the liquid undo and counteract some of the vile demonic changes your body was afflicted with.");
-			if (player.hasPerk(PerkLib.PurityElixir)) player.addPerkValue(PerkLib.PurityElixir, 1, 1);
-			else player.createPerk(PerkLib.PurityElixir, 1, 0, 0, 0);
-			player.removeKeyItem("Rathazul's Purity Elixir");
+            clearOutput();
+            if (player.getAllMinStats().cor == 0) {
+                outputText("You take out the elixir, but reconsider. ");
+                if (player.cor > 0) outputText("All of your corruption can be removed using simpler methods.");
+                else outputText("You're completely pure!");
+                outputText("\n\nYou decide to leave the elixir for worse times.");
+            }
+            else {
+                outputText("You feel something unlock within you as you drink the elixir, some of the veil of corruption being washed out of you as the liquid undo and counteract some of the vile demonic changes your body was afflicted with.");
+                outputText("\n\n<b>Minimum corruption lowered!</b>");
+                if (player.keyItemv1("Rathazul's Purity Elixir") > 1) player.addKeyValue("Rathazul's Purity Elixir", 1, -1);
+                else player.removeKeyItem("Rathazul's Purity Elixir");
+                if (player.hasPerk(PerkLib.PurityElixir)) player.addPerkValue(PerkLib.PurityElixir, 1, 1);
+                else player.createPerk(PerkLib.PurityElixir, 1, 0, 0, 0);
+            }
 			doNext(inventoryMenu);
 		}
 		
