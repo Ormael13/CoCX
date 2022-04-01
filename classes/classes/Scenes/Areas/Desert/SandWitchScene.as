@@ -135,7 +135,7 @@ internal function sandwitchRape():void {
 	if(player.lust >= player.maxLust()) {
 		//BAD END START
 		clearOutput();
-		if(player.biggestTitSize() >= 9 && player.biggestLactation() >= 3 && player.cor >= 25) {
+		if(player.biggestTitSize() >= 9 && player.biggestLactation() >= 3) {
 			outputText("Overwhelmed by the intense pleasure caused by the vibrating sphere inside your body, you fall to your knees.\n\nYou whimper pathetically, desperate to cum, as the Sand Witch steps nearer to you and gently strokes your face. She smiles cruelly and lets her hands drop down to your chest, then tears your top away, letting your huge breasts bounce free. The mysterious woman firmly rubs and kneads them, making you gasp and writhe, until she starts lightly flicking your painfully hard nipples. You edge closer and closer to orgasm, panting like a whore while the witch teases you with her hands and magic.\n\n");
 			outputText("Just before you cum, she leans down to whisper to you, tickling your ear with her warm breath: \"<i>Evals klim ym emoceb llahs uoy.</i>\"\n\nA familiar pressure builds in your chest, but it's far stronger than ever before. You feel your breasts swell rapidly, and milk sprays from your nipples, splattering you and the witch with white droplets. Your eyes roll back and your tongue hangs out as you cum, mind nearly breaking from the world-shattering orgasm that thunders through you.\n\nYou black out.");
 			doNext(sandWitchBadEnd);
@@ -202,7 +202,7 @@ internal function sandwitchRape():void {
 	}
 	//HP DEFEAT
 	else { 
-		if(player.biggestTitSize() >= 9 && player.biggestLactation() >= 3 && player.cor >= 25) {
+		if(player.biggestTitSize() >= 9 && player.biggestLactation() >= 3) {
 			clearOutput();
 			outputText("You stagger and fall to one knee, too overcome by pain to keep fighting.\n\nAs your vision wavers with exhaustion, the witch strides towards you, seeming to glide across the sand. Your consciousness starts to fade, and you see the exotic woman lick her lips and smile cruelly, staring at your generous breasts.\n\nThe last thing you hear before passing out is a mysterious spell, murmured right into your ear in a low, throaty whisper: \"<i>Evals klim ym emoceb llahs uoy.</i>\"\n\nYou dream of walking proudly through the desert, enormous rack jiggling shamelessly with every step, and of tempting nubile young champions to wrap their lips around your nipples and drink. Your sleep becomes fevered as your dreams grow more and more corrupt - you dream of using dark magic to lactate succubus milk, and of your former friends from Ingnam greedily drinking your enhanced milk until their bellies strain to contain it all, then going wide-eyed as pound after pound of breast-flesh suddenly swells upon their chests...");
 			//BAD END.
@@ -946,8 +946,11 @@ public function sammitchBirthsDriders():void {
 	outputText("\n\nYou can guess that without such help the babies she'll give birth to will wither and die in such a hostile climate.");
 	
 	//corr < 60 goes to Help her!, else go to Must I really?
-	if(player.cor < 60) helpZeWithBirfBabies();
-	else reluctantlyHelpZeWitch();
+    menu();
+    if (player.cor < 66 + player.corruptionTolerance())
+        addButton(0, "Help her!", helpZeWithBirfBabies);
+    if (player.cor > 66 - player.corruptionTolerance())
+        addButton(1, "Must I?", reluctantlyHelpZeWitch);
 }
 
 //[Help her!] (corr < 60)
@@ -973,7 +976,7 @@ private function helpZeWithBirfBabies():void {
 	}
 	//PC is everything else: 
 	else outputText("\n\nEasing a hand under her armpit, you give her the support she needs to hobble along the hot desert sand.  Which direction to hobble in gives you cause for concern though; you don't really know where you are at this point.  Making the only choice you can, you concentrate on the camp.  With the rough picture in mind you tell the sand witch to hold on, before the two of you slowly make your way across the dry desert sea...");
-	doNext(sandwitchBirthsYourMonstrosities);
+	doNext(curry(sandwitchBirthsYourMonstrosities, false));
 }
 
 //[Must I really?] (corr >=60)
@@ -994,13 +997,13 @@ private function reluctantlyHelpZeWitch():void {
 	}
 	//PC is everything else:  
 	else outputText("\n\nEasing a hand under her armpit, you give her the support she needs to hobble along the hot desert sand.  Which direction to hobble in gives you cause for concern though; you don't really know where you are at this point.  Making the only choice you can, you concentrate on the camp.  With the rough picture in mind you tell the sand witch to hold on, before the two of you slowly make your way across the dry desert sea...");
-	doNext(sandwitchBirthsYourMonstrosities);
+	doNext(curry(sandwitchBirthsYourMonstrosities, true));
 }
 
 
 //all shapes and personalities come to:
 //prompt with --Next-- button
-private function sandwitchBirthsYourMonstrosities():void {
+private function sandwitchBirthsYourMonstrosities(reluctantly:int):void {
 	clearOutput();
 	outputText("After what seems like forever, you finally reach the outskirts of camp, stopping just outside of the perimeter to lay the sand witch on the cool dirt.  \"<i>H-here they come!</i>\" she cries out, before wincing in agony.  Splaying her legs, she finally relaxes and allows the birthing process to continue unhindered, the tell-tale signs slowly flowing out of her as green goop.  The pained expression on her face suddenly turns euphoric as the birthing fluids escape from her, acting as an numbing agent and aphrodisiac in the process.  Before long your newly hatched children emerge from their mother's body, covered in all sorts of liquids.  One by one they scurry out, amazed and awestruck by this strange new world they've finally entered into.  That soon gives way to hunger; the children are obviously thirsty and starved from the whole ordeal.  Clamoring up their mother, the fruits of your union quickly ascend to the sand witch's two pairs of breasts, minimizing any infighting for feeding rights.");
 	
@@ -1009,11 +1012,10 @@ private function sandwitchBirthsYourMonstrosities():void {
 	outputText("\n\nAs you turn to the spellcaster, she shoots you a look of appreciation... even longing.  \"<i>Thank you.  Perhaps... we could try this again sometime?</i>\" she inquires, her voice filled with the hope that she'll see you again.");
 	
 	outputText("\n\nYou aren't ruling anything out; it's almost a guarantee that she will run into you one of these days... but perhaps she could just skip the whole spell casting bit next time?  The loud din of snoring cuts through the air in response and elicits a sigh from you.  No doubt her ordeal was exhausting.  You lean down and");
-	if(player.cor < 60) outputText(", with a quick kiss on the lips");
-	outputText(", whisper in her ear that you'll see her again...");
+	if(!reluctantly) outputText(", with a quick kiss on the lips,");
+	outputText(" whisper in her ear that you'll see her again...");
 	
-	//[(corr >= 60)
-	if (player.cor >= 60) outputText("\n\n\"<i>Just, use your common sense next time.</i>\"");
+	if (reluctantly) outputText("\n\n\"<i>Just, use your common sense next time.</i>\"");
 	pregnancy.knockUpForce(); //Clear Pregnancy
 	doNext(camp.returnToCampUseOneHour);
 }
