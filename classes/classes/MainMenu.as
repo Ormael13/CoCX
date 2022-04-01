@@ -107,6 +107,8 @@ public class MainMenu extends BaseContent {
 			outputText("\n\n<b>Eternal holiday enabled.</b>");
 		if (isEaster())
 			outputText("\n\n<b>It's Easter!  Enjoy the eggs!</b>");
+		if (isAprilFools())
+			outputText("\n\n<b>It's April Fools!</b>");
 		if (isValentine())
 			outputText("\n\n<b>It's Valentine's!</b>");
 		if (isHalloween())
