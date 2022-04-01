@@ -397,26 +397,26 @@ private function centaurTF():void {
         player.breastRows[0].breastRating = 3;
         if(player.breastRows[0].nipplesPerBreast < 1) player.breastRows[0].nipplesPerBreast = 1;
         dynStats("sen", 2, "lus", 1);
-        return false;
+        return;
     }
     //Grow tits bigger
     if(player.biggestTitSize() < 3) {
         outputText("\n\n(Your breasts suddenly balloon outwards, stopping as they reach a perfectly rounded C-cup.)");
         player.breastRows[0].breastRating = 3;
         dynStats("sen", 1, "lus", 1);
-        return false;
+        return;
     }
     if(player.biggestLactation() == 0) {
         outputText("\n\n(Your breasts now lactate.)");
         player.boostLactation(1);
         dynStats("lib", .5, "sen", 1, "lus", 10);
-        return false;
+        return;
     }
     //Make lactation happen
     if(player.biggestLactation() < 3) {
         player.boostLactation(.7);
         outputText("\n\n(Your breasts feel fuller... riper... milkier...)");
-        return false;
+        return;
     }
     //Libido boost if nothing else
     dynStats("lib", 4);
@@ -604,34 +604,34 @@ public function sexMenu():void {
     outputText("\n\n<b>SceneHunter: Taur scenes reworked too - more options with UniHerms!</b>");
     //menu
     //because corrupt scenes are REALLY rough here. 2/3 is fair IMO
-    var lowCor:int = 66 + player.corruptionTolerance(); 
-    var hiCor:int = 66 - player.corruptionTolerance();
+    var lowCor:Boolean = player.cor < 66 + player.corruptionTolerance(); 
+    var hiCor:Boolean = player.cor >= 66 - player.corruptionTolerance();
     //pure options
-    addButtonIfTrue(0, "Sex", sandwitchSex, "Req. cock and low-med corruption", player.cor < lowCor && player.hasCock());
-    addButtonIfTrue(1, "Breasts", sandwitchBewbs, "Req. low-med corruption", player.cor < lowCor);
+    addButtonIfTrue(0, "Sex", sandwitchSex, "Req. cock and low corruption", lowCor && player.hasCock());
+    addButtonIfTrue(1, "Breasts", sandwitchBewbs, "Req. low corruption", lowCor);
     //Check knots
     var knotDick:int = -1;
     var normalDick:int = -1;
     //I hope it's unique here - find knotted dicks and normal ones
-    for (i:int = 0; i < player.cocks.length) {
+    for (var i:int = 0; i < player.cocks.length; ++i) {
         if (player.cocks[i].knotMultiplier > 1.4) {
-            if (knotDick < 0 || player.cockArea(i) > player.cockArea(knotDick)))
+            if (knotDick < 0 || player.cockArea(i) > player.cockArea(knotDick))
                 knotDick = i;
         }
         else {
-            if (normalDick < 0 || player.cockArea(i) > player.cockArea(normalDick)))
+            if (normalDick < 0 || player.cockArea(i) > player.cockArea(normalDick))
                 normalDick = i;
         }
     }
-    addButtonIfTrue(2, "Rough Fuck", curry(rapeSingleNoKnot, normalDick), "Req. cock without knot and high corruption", player.cor >= hiCor && normalDick >= 0);
-    addButtonIfTrue(3, "Knot Her", curry(knotSandwitch, knotDick), "Req. big knot and high corruption", player.cor >= hiCor && knotDick >= 0);
-    addButtonIfTrue(4, "Multi Rape", rapeMulticock, "Req. multi cocks and high corruption", player.cor >= hiCor && player.cocks.length > 1);
+    addButtonIfTrue(2, "Rough Fuck", curry(rapeSingleNoKnot, normalDick), "Req. cock without knot and high corruption", hiCor && normalDick >= 0);
+    addButtonIfTrue(3, "Knot Her", curry(knotSandwitch, knotDick), "Req. big knot and high corruption", hiCor && knotDick >= 0);
+    addButtonIfTrue(4, "Multi Rape", rapeMulticock, "Req. multi cocks and high corruption", hiCor && player.cocks.length > 1);
 	addButtonIfTrue(5, "Dildo Rape", sandwitchGetsDildoed, "Req. Deluxe Dildo", player.hasKeyItem("Deluxe Dildo") >= 0);
     if (SceneLib.shouldraFollower.followerShouldra())
-        addButtonIfTrue(6, "Use Shouldra", SceneLib.shouldraFollower.sandWitchGetsGhostly, "Not for genderless..." player.gender > 0);
+        addButtonIfTrue(6, "Use Shouldra", SceneLib.shouldraFollower.sandWitchGetsGhostly, "Not for genderless...", player.gender != 0);
     else addButtonDisabled(6, "???", "Req. to be posessed by some ghost");
-    addButtonIfTrue(7, "Ride", centaurRide, "Req. low-med corruption and centaur lower body", player.cor < lowCor && player.isTaur());
-    addButtonIfTrue(8, "Taur Rape", centaurRide, "Req. high corruption and centaur lower body", player.cor > hiCor && player.isTaur());
+    addButtonIfTrue(7, "Ride", centaurRide, "Req. low corruption and centaur lower body", lowCor && player.isTaur());
+    addButtonIfTrue(8, "Taur Rape", centaurRide, "Req. high corruption and centaur lower body", hiCor && player.isTaur());
 	addButtonIfTrue(9, "Lay Eggs", ovipositSandWitches, "Req. oviposition", player.gender > 0 && player.canOviposit());
     
 	SceneLib.uniqueSexScene.pcUSSPreChecksV2(sexMenu);

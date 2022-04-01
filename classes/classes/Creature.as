@@ -1846,7 +1846,7 @@ public class Creature extends Utils
 		}
 
         //Checks if the cock is tentacle/stamen
-        private function cockIsTentacle(num:int):Boolean {
+        public function cockIsTentacle(num:int):Boolean {
             return cocks[num].cockType == CockTypesEnum.STAMEN || cocks[num].cockType == CockTypesEnum.TENTACLE;
         }
 

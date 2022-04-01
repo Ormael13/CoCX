@@ -16,7 +16,8 @@ public class SceneHunter extends BaseContent {
         if (flags[kFLAGS.SCENEHUNTER_UNI_HERMS]) {
             outputText("<b><font color=\"#008000\">ENABLED</font></b>");
             outputText("\nMakes scenes unique to male/female PCs accessible to herms. Allows the player to choose the scene when the sex is led by the PC, randomly selects it in rape scenes.");
-            outputText("\n<i>New scenes lack the description of herm's other genitalia. Some scenes may look slightly off (rare).</i>");
+            outputText("\nAlso adjusted some genderless (anal/oral only) scenes so they will look fitting - no genderless mentions or jokes.");
+            outputText("\n<i>New scenes may lack the description of herm's other genitalia. Some scenes may look slightly off (rare).</i>");
         }
         else {
             outputText("<b><font color=\"#800000\">DISABLED</font></b>");
@@ -105,7 +106,7 @@ public class SceneHunter extends BaseContent {
     */
     public function selectGender(dickF:Function, vagF:Function, assA:* = null, hermF:Function = null, dickPriority:int = 0, dickActive:Boolean = true, dickDisabledMsg:String = ""):void {
         //decomposing ass
-        var assText:String = (AssA is Array) ? assA[0] : "Ass";
+        var assText:String = (assA is Array) ? assA[0] : "Ass";
         var assF:Function = (assA is Function)  ? assA as Function :
                             (assA is Array)     ? assA[1] :
                             null;
