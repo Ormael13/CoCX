@@ -498,7 +498,7 @@ public class MutationsLib
 				MutationsList.push([NekomataThyroidGlandFinalForm, HellcatParathyroidGlandsFinalForm, CaveWyrmLungsFinalForm, KitsuneParathyroidGlandsFinalForm, ArachnidBookLungFinalForm, BlackHeartFinalForm, CatlikeNimblenessPrimitive, DraconicBonesFinalForm, DraconicHeartFinalForm, DraconicLungsFinalForm, DrakeLungsFinalForm, EasterBunnyEggBagFinalForm,
 				EclipticMindFinalForm, ElvishPeripheralNervSysFinalForm, FeyArcaneBloodstreamFinalForm, FloralOvariesFinalForm, FrozenHeartFinalForm, GazerEyeFinalForm, GorgonsEyesFinalForm, HarpyHollowBonesFinalForm, HeartOfTheStormFinalForm, HinezumiBurningBloodFinalForm, HollowFangsFinalForm, KitsuneThyroidGlandFinalForm, LactaBovinaOvariesFinalForm,
 				LizanMarrowFinalForm, MantislikeAgilityFinalForm, MelkieLungFinalForm, MinotaurTesticlesFinalForm, NukiNutsFinalForm, ObsidianHeartFinalForm, OniMusculatureFinalForm, OrcAdrenalGlandsFinalForm, PigBoarFatFinalForm, RaijuCathodeFinalForm, RatatoskrSmartsFinalForm, SalamanderAdrenalGlandsFinalForm, ScyllaInkGlandsPrimitive,
-				TwinHeartFinalForm, VampiricBloodsteamFinalForm, VenomGlandsFinalForm, WhaleFatFinalForm, YetiFatFinalForm, CatlikeNimblenessFinalForm, ScyllaInkGlandsEvolved]);
+				TwinHeartFinalForm, VampiricBloodsteamFinalForm, VenomGlandsFinalForm, WhaleFatFinalForm, YetiFatFinalForm, CatlikeNimblenessFinalForm, ScyllaInkGlandsEvolved, ScyllaInkGlandsPrimitive]);
 			}
 
 			switch(spec){
