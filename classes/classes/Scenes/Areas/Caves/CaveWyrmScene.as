@@ -43,6 +43,7 @@ public function winningOverCaveWyrm():void {
 		else {
 			outputText("Defeated, the Cave Wyrm reels back and falls shoulders-first into the ground. There's a dull smack where she strikes the earth... followed by an odd 'hiss' sound between her legs. Your eyes drop down the busty but fearsome Wyrm's figure to her glistening vagina just in time to see discolored vapors rising from the ground in front of it: she's got acid femcum, and it's turning even the stone under her sex to smoke...! You quickly reconsider trying to fuck her...\n\n");
 			outputText("... then again, maybe you don't. It's definitely a risk- but since when have you ever played it safe in Mareth? The Wyrm's eyes light up curiously as she sees you eyeing her wet genitals, and something about the twisted grin on her face tells her she'd like you to try. Her scaly thighs part a little as she sizes-up your torso and, of course, your own sex.\n\n");
+            sceneHunter.print("Maybe cavewyrm dick will solve the issue?");
 			addButton(1, "Fuck Her", winningOverCaveWyrmDMelting);
 		}
 		SceneLib.uniqueSexScene.pcUSSPreChecksV2(winningOverCaveWyrm);
@@ -131,7 +132,7 @@ public function losingToHermCaveWyrm():void {
 	outputText("You fall to the ground defeated and look for a way to escape the she-maniac but a jet of blue fire on your right reminds you that if you attempt anything she will roast you alive, so you turn back to face your assailant.\n\n");
 	outputText("The lizard-herm grins as her 13 inch cock, already erect, begins to dribble precum. You are keenly aware of what is about to happen as she casually walks to you and begins to remove her gear.\n\n");
 	outputText("\"<i>You know what happens to losers down in these caves? Because you are about to find out the hard way. I have been looking for someone to fuck with for hours.</i>\"\n\n");
-	if (player.hasVagina()) {
+	if (player.hasVagina() && (!sceneHunter.uniHerms || rand(2) == 0)) {
 		outputText("Before you can do anything, the lizard herm forces you to the ground, stripping you of your gear as she grabs your arms and pulls your legs apart. You try and keep them closed but she is already blocking them with her body. She however swiftly reminds you who is in charge.\n\n");
 		outputText("\"<i>Don’t resist and I perhaps won't need to scorch your face, got it bitch?</i>\"\n\n");
 		outputText("You comply, horrified, as she begins to slowly tease your pussy with her tip. Before you get any chance to react she shoves her entire length in, making your eyes go wide. Warm precum slowly leak from her cock into your cunt and to your surprise you vaginal walls begins to mold and accomodate the reptilian prick as the warm fluid smears against them. You look down to your pussy in time to notice the lips have taken on a weird blue glow. Warmth spreads from it to the rest of your body");

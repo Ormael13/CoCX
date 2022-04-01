@@ -2962,7 +2962,7 @@ public static const UNKNOWN_FLAG_NUMBER_02953:int                               
 public static const UNKNOWN_FLAG_NUMBER_02954:int                                   = 2954;
 public static const UNKNOWN_FLAG_NUMBER_02955:int                                   = 2955;
 public static const SCENEHUNTER_PRINT_CHECKS:int                                    = 2956; //SceneHunter settings
-public static const SCENEHUNTER_MUTEX_SCENES:int                                    = 2957;
+public static const SCENEHUNTER_OTHER:int                                    = 2957;
 public static const SCENEHUNTER_DICK_SELECT:int                                     = 2958;
 public static const SCENEHUNTER_UNI_HERMS:int                                       = 2959;
 public static const APEX_SELECTED_RACE:int                                   		= 2960;

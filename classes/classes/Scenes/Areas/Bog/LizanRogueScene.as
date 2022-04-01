@@ -26,7 +26,7 @@ public class LizanRogueScene extends BaseContent
 				}
 				menu();
 				addButton(0, "Fight", fightLizan, false, null, null, "Fight the lizan!");
-                if (sceneHunter.mutExScenes)
+                if (sceneHunter.other)
                     addButtonIfTrue(1, "Talk", shTalk_medCor, "You're too corrupt for this!", player.cor < 66 + player.corruptionTolerance());
                 else if (player.cor < 66 + player.corruptionTolerance())
                     addButtonDisabled(1, "???", "SceneHunter feature");

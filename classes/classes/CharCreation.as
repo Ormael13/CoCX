@@ -425,7 +425,7 @@ import coc.view.MainView;
                     kFLAGS.WATERSPORTS_ENABLED, 
 				    kFLAGS.SILLY_MODE_ENABLE_FLAG,
                     kFLAGS.SCENEHUNTER_PRINT_CHECKS,
-                    kFLAGS.SCENEHUNTER_MUTEX_SCENES,
+                    kFLAGS.SCENEHUNTER_OTHER,
                     kFLAGS.SCENEHUNTER_DICK_SELECT,
                     kFLAGS.SCENEHUNTER_UNI_HERMS,
                     kFLAGS.LOW_STANDARDS_FOR_ALL,

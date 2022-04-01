@@ -35,20 +35,17 @@ public class SceneHunter extends BaseContent {
             outputText("\nThe biggest <b>fitting</b> dick is always used. Multicocks too.");
         }
 
-        addButton(2, "MutExScenes", toggle, kFLAGS.SCENEHUNTER_MUTEX_SCENES);
-        outputText("\n\n<b>Mutually exclusive scenes</b>: ");
-        if (flags[kFLAGS.SCENEHUNTER_MUTEX_SCENES]) {
+        addButton(2, "Other", toggle, kFLAGS.SCENEHUNTER_OTHER);
+        outputText("\n\n<b>Other changes</b>: ");
+        if (flags[kFLAGS.SCENEHUNTER_OTHER])
             outputText("<b><font color=\"#008000\">ENABLED</font></b>");
-            outputText("\nSome originally mutually exclusive scenes (when you've selected one scene, you'll never access the other one in this playthrough) are no longer mutually exclusive. Full list of the changes:");
-            outputText("\nChristmas elf - enabled sex option even when corrupt.");
-            outputText("\nLizan Rogue - medium-corrupt PCs now can persuade Lizan Rogue.");
-            outputText("\n<i>This opens up more scenes, but <b>some</b> of them may look off. They are mostly lore-accurate and still explained in the game (so you won't get Amily living with corrupt Jojo or other nonsense), but be warned that the original writers intended some details to work the other way.</i>");
-        }
-        else {
+        else
             outputText("<b><font color=\"#800000\">DISABLED</font></b>");
-            outputText("\n...stay mutually exclusive, as intended by the writers...");
-            outputText("\n<i>Some one-time scenes with different options can still be replayed using 'Camp Actions -> Spend Time -> Recall'.</i>");
-        }
+        outputText("\nTweaks which didn't fit into the previous categories. Full list goes here.");
+        outputText("\nChristmas elf - enabled sex option even when corrupt.");
+        outputText("\nLizan Rogue - medium-corrupt PCs now can persuade Lizan Rogue.");
+        outputText("\n<i>This opens up more scenes. They are lore-accurate and still explained in the game (so you won't get Amily living with corrupt Jojo or other nonsense), but be warned that the original writers intended some details to work the other way.</i>");
+        outputText("\n<i>Some one-time scenes with many options and checks can be replayed using 'Camp Actions -> Spend Time -> Recall'.</i>");
         //Scene list link
         addButton(3, "PrintChecks", toggle, kFLAGS.SCENEHUNTER_PRINT_CHECKS);
         outputText("\n\n<b>Print Checks:</b>: ");
@@ -105,7 +102,7 @@ public class SceneHunter extends BaseContent {
     * @param    dickActive      If false, "dick" button will be disabled.
     * @param    dickDisabledMsg The message to write on the disabled dick button
     */
-    public function selectGender(dickF:Function, vagF:Function, assF:Function = null, hermF:Function = null, dickActive:Boolean = true, dickDisabledMsg:String = "", dickPriority:int = 0):void {
+    public function selectGender(dickF:Function, vagF:Function, assF:Function = null, hermF:Function = null, dickPriority:int = 0, dickActive:Boolean = true, dickDisabledMsg:String = ""):void {
         var dickB:Boolean = dickF != null && player.hasCock();
         var vagB:Boolean = vagF != null && player.hasVagina();
         var assB:Boolean = assF != null;
@@ -337,11 +334,11 @@ public class SceneHunter extends BaseContent {
     }
     
     //--------------------------------------------------------------------------------------------------
-    // MutExScenes
+    // Other
     //--------------------------------------------------------------------------------------------------
 
-    public function get mutExScenes():Boolean {
-        return flags[kFLAGS.SCENEHUNTER_MUTEX_SCENES];
+    public function get other():Boolean {
+        return flags[kFLAGS.SCENEHUNTER_OTHER];
     }
     //nothing more here for now... Will it just check the value, or new next will be here too?
     
