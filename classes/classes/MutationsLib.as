@@ -489,8 +489,8 @@ public class MutationsLib
 			}
 			function mutationsAdaptations():void{
 				MutationsList.push([ArachnidBookLung, ArachnidBookLungPrimitive, ArachnidBookLungEvolved]);
-				MutationsList.push([CatlikeNimbleness, CatlikeNimblenessEvolved, CatlikeNimblenessFinalForm]);
-				MutationsList.push([ScyllaInkGlands, ScyllaInkGlandsEvolved]);
+				MutationsList.push([CatlikeNimbleness, CatlikeNimblenessPrimitive, CatlikeNimblenessEvolved]);
+				MutationsList.push([ScyllaInkGlands]);
 				MutationsList.push([TrachealSystem, TrachealSystemPrimitive, TrachealSystemEvolved, TrachealSystemFinalForm]);
 				MutationsList.push([TwinHeart, TwinHeartPrimitive, TwinHeartEvolved]);
 			}
@@ -498,7 +498,7 @@ public class MutationsLib
 				MutationsList.push([NekomataThyroidGlandFinalForm, HellcatParathyroidGlandsFinalForm, CaveWyrmLungsFinalForm, KitsuneParathyroidGlandsFinalForm, ArachnidBookLungFinalForm, BlackHeartFinalForm, CatlikeNimblenessPrimitive, DraconicBonesFinalForm, DraconicHeartFinalForm, DraconicLungsFinalForm, DrakeLungsFinalForm, EasterBunnyEggBagFinalForm,
 				EclipticMindFinalForm, ElvishPeripheralNervSysFinalForm, FeyArcaneBloodstreamFinalForm, FloralOvariesFinalForm, FrozenHeartFinalForm, GazerEyeFinalForm, GorgonsEyesFinalForm, HarpyHollowBonesFinalForm, HeartOfTheStormFinalForm, HinezumiBurningBloodFinalForm, HollowFangsFinalForm, KitsuneThyroidGlandFinalForm, LactaBovinaOvariesFinalForm,
 				LizanMarrowFinalForm, MantislikeAgilityFinalForm, MelkieLungFinalForm, MinotaurTesticlesFinalForm, NukiNutsFinalForm, ObsidianHeartFinalForm, OniMusculatureFinalForm, OrcAdrenalGlandsFinalForm, PigBoarFatFinalForm, RaijuCathodeFinalForm, RatatoskrSmartsFinalForm, SalamanderAdrenalGlandsFinalForm, ScyllaInkGlandsPrimitive,
-				TwinHeartFinalForm, VampiricBloodsteamFinalForm, VenomGlandsFinalForm, WhaleFatFinalForm, YetiFatFinalForm]);
+				TwinHeartFinalForm, VampiricBloodsteamFinalForm, VenomGlandsFinalForm, WhaleFatFinalForm, YetiFatFinalForm, CatlikeNimblenessFinalForm, ScyllaInkGlandsEvolved]);
 			}
 
 			switch(spec){
@@ -793,7 +793,7 @@ public class MutationsLib
 				BlackHeartPrimitive.requireLevel(30)
 						.requirePerk(BlackHeart)
 						.requireCor(100);
-				CatlikeNimblenessEvolved.requireLevel(30)
+				CatlikeNimblenessPrimitive.requireLevel(30)
 						.requirePerk(CatlikeNimbleness);
 				DisplacerMetabolismPrimitive.requireLevel(30)
 						.requirePerk(DisplacerMetabolism);
@@ -862,7 +862,7 @@ public class MutationsLib
 						.requirePerk(RatatoskrSmarts);
 				SalamanderAdrenalGlandsPrimitive.requireLevel(30)
 						.requirePerk(SalamanderAdrenalGlands);
-				ScyllaInkGlandsEvolved.requireLevel(30)
+				ScyllaInkGlandsPrimitive.requireLevel(30)
 						.requirePerk(ScyllaInkGlands);
 				SharkOlfactorySystemPrimitive.requireLevel(30)
 						.requirePerk(SharkOlfactorySystem);
@@ -884,8 +884,8 @@ public class MutationsLib
 				BlackHeartEvolved.requireLevel(60)
 						.requirePerk(BlackHeartPrimitive)
 						.requireCor(100);
-				CatlikeNimblenessFinalForm.requireLevel(60)
-					.requirePerk(CatlikeNimblenessEvolved);
+				CatlikeNimblenessEvolved.requireLevel(60)
+					.requirePerk(CatlikeNimblenessPrimitive);
 				DraconicBonesEvolved.requireLevel(60)
 						.requirePerk(DraconicBonesPrimitive);
 				DraconicHeartEvolved.requireLevel(60)
