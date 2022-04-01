@@ -630,7 +630,7 @@ public function mainCampMenu():void {
 		addButtonDisabled(6, "C.C.(Base)", "You not have any curses to cure. (Type A)");
 		addButtonDisabled(7, "C.C.(Mult)", "You not have any curses to cure. (Type B)");
 	}
-	//if (BelisaFollower.BelisaQuestOn && !BelisaFollower.BelisaQuestComp) addButton(13, "ToothacheQ", BelisaDianaTalk);
+	if (BelisaFollower.BelisaQuestOn && !BelisaFollower.BelisaQuestComp) addButton(13, "ToothacheQ", BelisaDianaTalk);
 	addButton(14, "Back", camp.campLoversMenu);
 }
 
@@ -880,9 +880,20 @@ public function SexMenuTitsfuck():void {
 private function BelisaDianaTalk():void {
 	clearOutput();
 	outputText("You decide to ask your resident Unicorn about healing cursed injuries, since she’s been able to cure such maladies in the past.\n\n");
-	outputText("\"<i>Hmm…Perhaps. Maybe if you describe the injury, I can get a better sense of what I’m dealing with?</i>\"  \"<i></i>\"\n\n");
-	doNext(mainCampMenu);
-	eachMinuteCount(5);
+	outputText("\"<i>Hmm…Perhaps. Maybe if you describe the injury, I can get a better sense of what I’m dealing with?</i>\" You describe the problem, and Diana gives you an odd look. \"<i>One would need to have both a potent healing ability and curse removal, otherwise it would just come back. I have dealt with such injuries before…Demons sometimes use those kinds of things on people they can’t quite finish off.</i>\" Diana seems genuinely saddened by Belisa’s plight. \"<i>You care about this person, don’t you?</i>\"\n\n");
+	outputText("You nod, and she claps her hands together. \"<i>Well, what are we waiting for?</i>\" You give Diana a surprised look, and she rolls her eyes, grabbing a bag. \"<i>No time like the present, is there, my Stallion? Lead me to the patient, please.</i>\"\n\n");
+	outputText("You bring Diana to the lake, and she slows, a small smile on her face. \"<i>Ah…I missed being able to stroll safely around here.</i>\" She follows as you walk over to the beach, looking down for Belisa’s silky bubble. You find it, and look around for a rock. Diana watches you, confused, and you give your Unicorn a wink, tossing the rock down. Belisa looks up and sees you, and Diana, still oblivious, gasps as your shy Drider friend pops her head up. ");
+	outputText("Stunned by Belisa’s appearance, she sees the silky bubble rise a moment later, breaching the water like a whale.\n\n");
+	outputText("Diana’s eyes are like dinner plates. \"<i>Wait…She’s a…Drider and…What is that thing? Is it a giant egg?</i>\"\n\n");
+	outputText("Belisa blinks. \"<i>A Unicorn?! You know a surviving Unicorn?!</i>\" She looks at you, a little annoyed. \"<i>...But you led her right to me.</i>\"\n\n");
+	outputText("Holding out your hands, you assure Diana that yes, this is the friend you told her about, with the cursed injury. You tell her that Belisa’s survived as long as she has by hiding in her silky bubble, which she can live mostly underwater in. You assure Belisa that Diana is here to help her, and she’s cured curses before.\n\n");
+	outputText("Belisa averts her gaze, cheeks red. \"<i>...Sorry I doubted you…I just…Wish you had warned me you were bringing someone.</i>\"\n\n");
+	outputText("Diana walks up to Belisa, slowly, and puts a hand on the shy woman’s shoulder. \"<i>Don’t worry, sweetheart. [Name] told me about your injury.</i>\" She looks back at you. \"<i>Do you want to take this inside? I’m sure it’ll be more comfortable.</i>\" Belisa nods, and the two women enter Belisa’s silky bubble. \"<i>Wait here please, my stallion.</i>\" Diana calls back to you. \"<i>This should take a half-hour or so.</i>\"\n\n");
+	outputText("You sit down, and Belisa’s home begins to sink beneath the waves.\n\n");
+	outputText("Nearly an hour later, Belisa’s home bobs to the surface, and Diana walks up onto the beach, a smile on her face. You ask her how it went, and she nods once.\n\n");
+	outputText("\"<i>Your friend is going to be just fine. She’s going to be very sore in the mouth for a few days, but the curse is gone, and her fang has been regrown.</i>\" Diana sighs. \"<i>Please take me back to camp, my stallion…That curse was quite draining on me. Whoever did it wasn’t skilled at all, but had a lot of power behind them.</i>\" You half-carry your mare back to camp, and she’s out cold once she hits her bed. You make a mental note to thank Diana sometime soon.\n\n");
+	BelisaFollower.BelisaQuestComp = true;
+	doNext(camp.returnToCampUseOneHour);
 }
 	}
 }

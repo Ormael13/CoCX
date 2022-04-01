@@ -211,8 +211,8 @@ package classes.Scenes
 			outputText("-Fixes: Diana last encounter repeating after recruiting her, body lotions not working (at all), Phylla dick checks comparing area instead of length and vice versa (Svalkash)\n");
 			outputText("-Added: Grey Spellpower, Tier 1 & 2 cooldown info to Stats > Combat subpage.\n");
 			outputText("-Kitsune 2nd tier thyroid gland mutation would now give +20 mana regen and boost by 50% foxfire fire dmg at 9 tails as it says.\n");
-			outputText("-New underwear (upper) (by Canadian Snas): Silky Drider-Weave Bra - buyable at Belisa shop. Cost 1200 gems, +20% spellpower.\n");
-			outputText("-New underwear (lower) (by Canadian Snas): Silky Drider-Weave Panties - buyable at Belisa shop. Cost 1400 gems, +20% spellpower.\n");
+			outputText("-New underwear (upper) (by Canadian Snas): Silky Drider-Weave Bra - buyable at Belisa shop. Cost 1200 gems, +2 to sexiness, +20% spellpower.\n");
+			outputText("-New underwear (lower) (by Canadian Snas): Silky Drider-Weave Panties - buyable at Belisa shop. Cost 1400 gems, +2 to sexiness, +20% spellpower.\n");
 			outputText("-Added option to manualy toogle on/off Shift on attribute menu during level-up (mainly to make apk users live bit easier)\n");
 			outputText("-Added a button to disable 'Sleep With' to Ember. (Svalkash)\n");
 			outputText("-Sophie breastfeed scene properly restored, added bimbo hints and light corruption check. (Svalkash)\n");

@@ -114,6 +114,8 @@ import classes.PerkLib;
 				case "ebonweave thong":
 				case "ebonweave jockstrap":
 				case "stockings and garters":
+				case "drider bra":
+				case "drider panties":
 					return 2;
 				case "rune thong":
 				case "rune jock":
