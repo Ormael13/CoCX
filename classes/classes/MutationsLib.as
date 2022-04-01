@@ -489,16 +489,16 @@ public class MutationsLib
 			}
 			function mutationsAdaptations():void{
 				MutationsList.push([ArachnidBookLung, ArachnidBookLungPrimitive, ArachnidBookLungEvolved]);
-				MutationsList.push([CatlikeNimbleness, CatlikeNimblenessPrimitive, CatlikeNimblenessEvolved]);
-				MutationsList.push([ScyllaInkGlands]);
+				MutationsList.push([CatlikeNimbleness, CatlikeNimblenessEvolved, CatlikeNimblenessFinalForm]);
+				MutationsList.push([ScyllaInkGlands, ScyllaInkGlandsEvolved]);
 				MutationsList.push([TrachealSystem, TrachealSystemPrimitive, TrachealSystemEvolved, TrachealSystemFinalForm]);
 				MutationsList.push([TwinHeart, TwinHeartPrimitive, TwinHeartEvolved]);
 			}
 			function mutationsDeprecated():void{
-				MutationsList.push([NekomataThyroidGlandFinalForm, HellcatParathyroidGlandsFinalForm, CaveWyrmLungsFinalForm, KitsuneParathyroidGlandsFinalForm, ArachnidBookLungFinalForm, BlackHeartFinalForm, CatlikeNimblenessFinalForm, DraconicBonesFinalForm, DraconicHeartFinalForm, DraconicLungsFinalForm, DrakeLungsFinalForm, EasterBunnyEggBagFinalForm,
+				MutationsList.push([NekomataThyroidGlandFinalForm, HellcatParathyroidGlandsFinalForm, CaveWyrmLungsFinalForm, KitsuneParathyroidGlandsFinalForm, ArachnidBookLungFinalForm, BlackHeartFinalForm, CatlikeNimblenessPrimitive, DraconicBonesFinalForm, DraconicHeartFinalForm, DraconicLungsFinalForm, DrakeLungsFinalForm, EasterBunnyEggBagFinalForm,
 				EclipticMindFinalForm, ElvishPeripheralNervSysFinalForm, FeyArcaneBloodstreamFinalForm, FloralOvariesFinalForm, FrozenHeartFinalForm, GazerEyeFinalForm, GorgonsEyesFinalForm, HarpyHollowBonesFinalForm, HeartOfTheStormFinalForm, HinezumiBurningBloodFinalForm, HollowFangsFinalForm, KitsuneThyroidGlandFinalForm, LactaBovinaOvariesFinalForm,
-				LizanMarrowFinalForm, MantislikeAgilityFinalForm, MelkieLungFinalForm, MinotaurTesticlesFinalForm, NukiNutsFinalForm, ObsidianHeartFinalForm, OniMusculatureFinalForm, OrcAdrenalGlandsFinalForm, PigBoarFatFinalForm, RaijuCathodeFinalForm, RatatoskrSmartsFinalForm, SalamanderAdrenalGlandsFinalForm, ScyllaInkGlandsPrimitive, ScyllaInkGlandsEvolved,
-				TwinHeartFinalForm, VampiricBloodsteamFinalForm, VenomGlandsFinalForm, WhaleFatFinalForm, YetiFatFinalForm, CatlikeNimblenessFinalForm]);
+				LizanMarrowFinalForm, MantislikeAgilityFinalForm, MelkieLungFinalForm, MinotaurTesticlesFinalForm, NukiNutsFinalForm, ObsidianHeartFinalForm, OniMusculatureFinalForm, OrcAdrenalGlandsFinalForm, PigBoarFatFinalForm, RaijuCathodeFinalForm, RatatoskrSmartsFinalForm, SalamanderAdrenalGlandsFinalForm, ScyllaInkGlandsPrimitive,
+				TwinHeartFinalForm, VampiricBloodsteamFinalForm, VenomGlandsFinalForm, WhaleFatFinalForm, YetiFatFinalForm]);
 			}
 
 			switch(spec){
