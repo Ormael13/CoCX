@@ -551,24 +551,6 @@ private function centaurAss():void {
     cleanupAfterCombat();
 }
 
-private function SWCentaurMore(argument:Number):Boolean {
-	spriteSelect(SpriteDb.s_sandwich);
-	//{ GoTo results }}
-	//[SW_1]
-	if(argument == 1) {
-		
-		return false;
-	}
-	//[SW_2: Split chances of occurrence between % categories as % are available]
-	if(argument == 2) {
-		
-	}
-	//[SW_3]
-	if(argument == 3) {
-	}
-	return false;
-}
-
 //Knot sand witch
 private function knotSandwitch(x:int):void {
 	outputText("You press the tip of your " + player.cockDescript(x) + " at the entrance of her fragent flower.  It slides in, thanks to the pre already dribbling from your cock, your eyes rolling back in your head from the touch of her slippery folds.  You can't help but suddenly stab the length of your " + player.cockDescript(x) + " to the hilt within her, moaning as the tip pushes against her cervix.\n\n");
