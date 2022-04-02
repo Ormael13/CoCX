@@ -257,6 +257,10 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		else if (BelisaInCamp) addButtonDisabled(7,"ComeW/Me", "She's already at your camp!");
 		else addButtonDisabled(7, "???", "Req. 80+ affection, healing her tooth injury and finding: Farm, Tel'Adre, He'Xin'Dao.");
 		addButton(8, "Back", Encounterback);
+		if (BelisaInCamp && BelisaConfessed && BelisaAffectionMeter >= 80) {
+			if (flags[kFLAGS.SLEEP_WITH] != "Belisa") addButton(12, "Sleep With", BelisaSleepToggle);
+			else addButton(12, "Sleep Alone", BelisaSleepToggle);
+		}
 	}
 	
 	public function BelisaTalkYou():void {
@@ -428,6 +432,25 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		outputText("You say nothing, but turn away quickly. Belisa closes her mouth, nervous. <i>\"I-i’m sorry.\"</i> She sounds crestfallen at your reaction. You make small talk, then leave, but Belisa seems very saddened by your reaction.\n\n");
 		BelisaAffection(-20);
 		doNext(camp.returnToCampUseOneHour);
+	}
+	
+	public function BelisaSleepToggle():void {
+		//spriteSelect(SpriteDb.s_electra);
+		clearOutput();
+		if(flags[kFLAGS.SLEEP_WITH] != "Belisa") {
+			outputText("You ask Belisa if there’s room on her hammock for you. She looks at you, slowly realizing what you’re asking.\n\n");
+			outputText("\"<i>You want to sleep with me? Like...Overnight? Not just sex, but...</i>\" You nod, and Belisa grins from ear to ear. \"<i>Of course there is, [name]. I’d love to have you with me.</i>\"\n\n");
+			flags[kFLAGS.SLEEP_WITH] = "Belisa";
+		}
+		else {
+			outputText("You tell Belisa that you feel like sleeping on your own tonight. She winces a little, but nods.\n\n");
+			flags[kFLAGS.SLEEP_WITH] = "";
+		}
+		menu();
+		addButton(0,"Next", BelisaTalk);
+	}
+	private function sleepWith(arg:String = ""):void {
+		flags[kFLAGS.SLEEP_WITH] = arg;
 	}
 	
 	public function BelisaHang():void {
