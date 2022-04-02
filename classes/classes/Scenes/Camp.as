@@ -3036,7 +3036,7 @@ public class Camp extends NPCAwareContent{
 		if (player.hasStatusEffect(StatusEffects.EtnaOff)) outputText("\nEtna: <font color=\"#800000\"><b>Disabled</b></font>");
 		if (player.hasStatusEffect(StatusEffects.LunaOff)) outputText("\nLuna: <font color=\"#800000\"><b>Disabled</b></font>");
 		if (player.hasStatusEffect(StatusEffects.TedOff)) outputText("\nDragon Boi: <font color=\"#800000\"><b>Disabled</b></font>");
-		if (player.hasStatusEffect(StatusEffects.BelisaOff)) outputText("\nBelisa: <font color=\"#800000\"><b>Disabled</b></font>");
+		if (player.hasStatusEffect(StatusEffects.SpoodersOff)) outputText("\Spooders: <font color=\"#800000\"><b>Disabled</b></font>");
 		menu();
 		if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) {
 			if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] < 2) addButton(10, "Train", NPCsTrain);
@@ -3050,7 +3050,7 @@ public class Camp extends NPCAwareContent{
 		addButton(5, "Luna", toggleLunaMenu).hint("Enable or Disable Luna. This will remove her from enc table and if already in [camp] disable access to her.");
 		addButton(6, "DragonBoi", toggleTedMenu).hint("Enable or Disable Dragon Boi. This will remove him from enc table.");
 		//since this section is WIP anyway, let her be here too, lol
-        addButton(7, "Belisa", toggleBelisaMenu).hint("Enable or Disable Belisa. This will remove her ONLY from enc table.");
+        addButton(7, "Spooders", toggleSpoodersMenu).hint("Enable or Disable spooder followers. This will remove them ONLY from enc table.");
 		addButton(14, "Back", campActions);
 	}
 
@@ -3111,9 +3111,9 @@ public class Camp extends NPCAwareContent{
 		SparrableNPCsMenu();
 	}
 
-	private function toggleBelisaMenu():void {
-		if (player.hasStatusEffect(StatusEffects.BelisaOff)) player.removeStatusEffect(StatusEffects.BelisaOff);
-		else player.createStatusEffect(StatusEffects.BelisaOff, 0, 0, 0, 0);
+	private function toggleSpoodersMenu():void {
+		if (player.hasStatusEffect(StatusEffects.SpoodersOff)) player.removeStatusEffect(StatusEffects.SpoodersOff);
+		else player.createStatusEffect(StatusEffects.SpoodersOff, 0, 0, 0, 0);
 		SparrableNPCsMenu();
 	}
 
