@@ -1837,8 +1837,9 @@ public class PlayerInfo extends BaseContent {
 	public function mutationsClear(perks:Array):Array{
 		var temp:Array = [];
 		var compMutate:Array = MutationsLib.mutationsArray("", true);
+		var compMutate2:Array = MutationsLib.mutationsArray("Deprecated");
 		for each (var playerPerk:PerkType in perks){
-			if (!(compMutate.indexOf(playerPerk) >= 0)){
+			if (!(compMutate.indexOf(playerPerk) >= 0) && !(compMutate2.indexOf(playerPerk) >= 0)){
 				temp.push(playerPerk);
 			}
 		}
