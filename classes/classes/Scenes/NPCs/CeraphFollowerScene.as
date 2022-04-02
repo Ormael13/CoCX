@@ -169,7 +169,7 @@ public class CeraphFollowerScene extends NPCAwareContent
 			var dominika:Function =null;
 			if (flags[kFLAGS.TIMES_FUCKED_URTA] > 0 && (player.hasCock() || player.hasVagina()) && player.lust >= 33) urta = ceraphUrtaRoleplay;
 			if (player.hasCock() && player.cockThatFits(70) >= 0 && player.hasStatusEffect(StatusEffects.Marble) && player.lust >= 33) marbles = sweetieNOOOO;
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00150] > 0 && player.lust >= 33 && player.hasCock()) dominika = cerminika;
+			if (flags[kFLAGS.DOMINIKA_MET] > 0 && player.lust >= 33 && player.hasCock()) dominika = cerminika;
 			if (player.lust < 33) outputText("\n\n<b>You aren't turned on enough for sex.</b>");
 			menu();
 			if (player.gender > 0) addButton(8, "Be A Pet", sumissivenessToCeraphFollower);

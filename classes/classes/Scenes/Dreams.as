@@ -70,7 +70,7 @@ public class Dreams {
             choices[choices.length] = 11;
         }
         //Dom + Scylla
-        if(CoC.instance.flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] > 0 && CoC.instance.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00150] > 0) {
+        if(CoC.instance.flags[kFLAGS.NUMBER_OF_TIMES_MET_SCYLLA] > 0 && CoC.instance.flags[kFLAGS.DOMINIKA_MET] > 0) {
             choices[choices.length] = 12;
             choices[choices.length] = 12;
             choices[choices.length] = 12;
