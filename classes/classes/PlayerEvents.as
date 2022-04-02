@@ -2855,31 +2855,29 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		private var LunaFullMoonScene: Boolean = false;
 
 		public function timeChangeLarge():Boolean {
-            if (rand(4) == 0 && Holidays.isHolidays() && player.gender > 0 && camp.IsSleeping && flags[kFLAGS.XMAS_CHICKEN_YEAR] < CoC.instance.date.fullYear) {
-                Holidays.getAChristmasChicken();
-                return true;
-			}
-            if (camp.IsSleeping && Holidays.isHolidays() && CoC.instance.date.fullYear > flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE]) { //XMAS ELF
-                Holidays.xmasBitchEncounter(); //Set it to remember the last year encountered
-                return true;
-			}
-            if (checkedTurkey++ == 0 && (rand(5) == 0 && (CoC.instance.model.time.hours == 18 || CoC.instance.model.time.hours == 19)) && (CoC.instance.date.fullYear > flags[kFLAGS.TURKEY_FUCK_YEAR_DONE] || flags[kFLAGS.MORE_TURKEY] > 0) && Holidays.isThanksgiving() && player.gender > 0 && flags[kFLAGS.IN_INGNAM] <= 0) {
-                Holidays.datTurkeyRumpMeeting(); //TURKEY SURPRISE
-                return true;
-			}
+            if (!prison.inPrison && !ingnam.inIngnam) {
+                if (rand(4) == 0 && Holidays.isHolidays() && player.gender > 0 && camp.IsSleeping && flags[kFLAGS.XMAS_CHICKEN_YEAR] < CoC.instance.date.fullYear) {
+                    Holidays.getAChristmasChicken();
+                    return true;
+                }
+                if (camp.IsSleeping && Holidays.isHolidays() && CoC.instance.date.fullYear > flags[kFLAGS.PC_ENCOUNTERED_CHRISTMAS_ELF_BEFORE]) { //XMAS ELF
+                    Holidays.xmasBitchEncounter(); //Set it to remember the last year encountered
+                    return true;
+                }
+                if (checkedTurkey++ == 0 && (rand(5) == 0 && (CoC.instance.model.time.hours == 18 || CoC.instance.model.time.hours == 19)) && (CoC.instance.date.fullYear > flags[kFLAGS.TURKEY_FUCK_YEAR_DONE] || flags[kFLAGS.MORE_TURKEY] > 0) && Holidays.isThanksgiving() && player.gender > 0 && flags[kFLAGS.IN_INGNAM] <= 0) {
+                    Holidays.datTurkeyRumpMeeting(); //TURKEY SURPRISE
+                    return true;
+                }
 
-			if (LunaFullMoonScene){
-				if (camp.IsSleeping)
-				{
-					SceneLib.lunaFollower.fullMoonEvent();
-				}
-				else
-				{
-					SceneLib.lunaFollower.fullMoonEvent(true);
-				}
-				LunaFullMoonScene = false;
-				return true;
-			}
+                if (LunaFullMoonScene){
+                    if (camp.IsSleeping)
+                        SceneLib.lunaFollower.fullMoonEvent();
+                    else
+                        SceneLib.lunaFollower.fullMoonEvent(true);
+                    LunaFullMoonScene = false;
+                    return true;
+                }
+            }
             if (checkedDream++ == 0 && camp.IsSleeping && camp.CanDream) { //You can only have one dream each night (NEEDS TO BE FIXED)
 				camp.CanDream = false;
                 if (player.gender > 0 && CoC.instance.model.time.days == 10) { //Day 10 dream - since this can happen only once it takes priority over all other dreams
