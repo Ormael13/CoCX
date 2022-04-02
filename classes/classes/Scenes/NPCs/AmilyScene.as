@@ -3238,7 +3238,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				if(player.wetness() >= 5) outputText(" audibly squelching and slurpring thanks to the wetness of your pussy,");
 				outputText(" doing her best to make you buck and writhe under her, a job you think she's doing just fine at.\n\n");
 
-				outputText("Together you thresh and thrust, hips pounding together furiously, until Amily grunts suddenly, loudly and deeply, as her hot futa essence wells up from deep inside of her and begins gushing into you. At that, you lose it yourself, your own fluids pouring forth to mingle with hers and run out of your " + vaginaDescript() + "");
+				outputText("Together you thrash and thrust, hips pounding together furiously, until Amily grunts suddenly, loudly and deeply, as her hot futa essence wells up from deep inside of her and begins gushing into you. At that, you lose it yourself, your own fluids pouring forth to mingle with hers and run out of your " + vaginaDescript() + "");
 				//if herm: your (cockdescript cocknumber)
 				if(player.hasCock()) outputText(", " + sMultiCockDesc() + " spraying jism to fall upon you both like sex-scented rain");
 				outputText(". Panting with your mutual release, Amily slides wetly from your sex and falls upon your belly, to rest there for a moment.\n\n");
@@ -7962,7 +7962,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			if(flags[kFLAGS.IZMA_NO_COCK] > 0) outputText("former-");
 			outputText("hermaphrodite giggles, and whispers, \"<i>I didn't need them anyway.</i>\"");
 
-			outputText("\n\nAmily's big, fuzzy ears tickle your head as she nuzzles at the nape of her neck.  Her arm falls across your torso onto the far side of your [chest] to gently cup ");
+			outputText("\n\nAmily's big, fuzzy ears tickle your head as she nuzzles at the nape of your neck.  Her arm falls across your torso onto the far side of your [chest] to gently cup ");
 			if(player.averageNipplesPerBreast() <= 1) outputText("one of your nipples");
 			else outputText("at your multitude of nipples");
 			outputText(".  Panting eagerly, she licks up the underside of your chin, eventually cresting your jawline.  Her lips meet yours, their supple, slippery pressure heavenly on your own, and a slim tongue sides across the paired puckers to delve inside your maw.  You return the gesture in kind, slithering around your flexible organ to taste her mouth... her lips... her everything.  You make love to her mouth the way you imagine you'll be making love to her nethers in a few moments.");
