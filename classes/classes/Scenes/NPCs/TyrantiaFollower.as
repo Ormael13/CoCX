@@ -294,7 +294,7 @@ public function repeatEncounterBattlefieldTalk():void {
 	if (TyrantiaFollowerStage >= 4){
 		if (flags[kFLAGS.TIMES_MET_KIHA] > 0) addButton(3, "Kiha", repeatEncounterBattlefieldTalkKiha);
 		else addButtonDisabled(3, "???", "Perhaps if you look around the swamps, you might find someone she might also know...");
-		if (DivaScene.instance.status == -1) addButton(4, "Diva", repeatEncounterBattlefieldTalkDiva);
+		if (DivaScene.instance.status != 0) addButton(4, "Diva", repeatEncounterBattlefieldTalkDiva);
 		else addButtonDisabled(4,"???", "Perhaps if you look around the mountains, you might find someone she might also know...");
 	}
 	addButton(5, "Her", repeatEncounterBattlefieldTalkHer);
