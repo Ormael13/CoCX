@@ -14265,7 +14265,7 @@ public final class Mutations extends MutationsHelper {
         }
 
         //Ink spray attack
-        if ((type == 0 && player.gender == 2 || type == 2 && player.gender == 1) && (player.lowerBody == LowerBody.SCYLLA || player.lowerBody == LowerBody.KRAKEN) && !player.hasPerk(PerkLib.InkSpray)) {
+        if ((type == 0 && player.gender == 2 || type == 2 && player.gender == 1) && player.lowerBody == LowerBody.KRAKEN && !player.hasPerk(PerkLib.InkSpray)) {
             if (type == 0) {
                 outputText("[pg]Your pussy suddenly start gushing around and you squirt so much your tentacle are drenched. Blushing red in embarrassment you examine the damage lifting a tentacle and suddenly a jet black shot of girl juice shoot out of your pussy like a spray dying a nearby tree black.");
                 outputText(" You smell the liquid and discover your girl juice turned into actual ink! Thinking about octopus behing able to spray ink you point your pussy at a random tree and take aim. As your relax the newly discovery organ a gush of ink splatter the tree.");
