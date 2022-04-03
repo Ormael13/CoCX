@@ -45,7 +45,7 @@ use namespace CoC;
 				return;
 			}
 			//Lily
-			if (LilyFollower.LilyFollowerState == false && rand(3) == 0) {
+			if (!player.hasStatusEffect(StatusEffects.SpoodersOff) && LilyFollower.LilyFollowerState == false && rand(3) == 0) {
 				SceneLib.lily.lilyEncounter();
 				return;
 			}

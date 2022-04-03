@@ -353,8 +353,8 @@ public class PerkLib
 				"You may keep 2 undead powers active at all times.",
 				"You've chosen the 'Cursed Tag' perk. You may keep 2 undead powers active at all times.");
 		public static const ImprovedManaShield:PerkType = mk("Improved Mana Shield", "Improved Mana Shield",
-				"Increasing fourfold amount of damage Mana Shield spell can withstand before deactivating. (1:4 ratio for physical attakcs and 1:20 ratio for magical attacks)",
-				"You've chosen the 'Improved Mana Shield' perk, increasing fourfold amount of damage Mana Shield spell can withstand before deactivating. (1:4 ratio for physical attakcs and 1:20 ratio for magical attacks)");
+				"Increasing fourfold amount of damage Mana Shield spell can withstand before deactivating. (1:4 ratio for physical attacks and 1:20 ratio for magical attacks)",
+				"You've chosen the 'Improved Mana Shield' perk, increasing fourfold amount of damage Mana Shield spell can withstand before deactivating. (1:4 ratio for physical attacks and 1:20 ratio for magical attacks)");
 		public static const KnightlySword:PerkType = mk("Knightly sword", "Knightly sword",
 				"Regular swords increases parry chance by 15% and grants an extra +10% damage reduction when paired with a shield.",
 				"You've chosen the 'Knightly sword' perk. Regular swords increases parry chance by 15% and grants an extra +10% damage reduction when paired with a shield.");

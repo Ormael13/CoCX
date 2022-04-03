@@ -1467,7 +1467,7 @@ public function isabellaXHelThreeSomeCampStart():void {
 
 	outputText("You certainly do feel thirsty, and Isabella's invitation is certainly... enticing, and is made all the more exciting by the busty salamander you'll be sharing a meal with.");
 	//(Display Options: [Drink] [Leave])
-	simpleChoices("Drink", nomOnIzzyTitWithSallyMancer, "", null, "", null, "", null, "Leave", playerMenu);
+	simpleChoices("Drink", nomOnIzzyTitWithSallyMancer, "", null, "", null, "", null, "Leave", leaveIsabellaSallyBehind);
 }
 
 //[Leave]
@@ -1575,7 +1575,7 @@ private function stuffIzzyAndSalamanderWithDicks():void {
 	//(IF MULTICOCK and second cock is under 9 inches:
 	if(y >= 0) outputText("Meanwhile, your " + cockDescript(y) + " slides easily into Isabella's pussy, making the cow-girl gasp at the sudden and unexpected penetration.  ");
 	outputText("You grab Hel's hips and push in, reveling in the incredible heat and tightness of her pussy as your " + cockDescript(x) + " slides into her until you've bottomed out");
-	if(y >= 0) outputText(" with your " + cockDescript(y) + " similarly coming to a rest inside Isabella's depths; you're able to feel the cow's rapid heartbeat hammering through her, causing her already tight cunt to contract rhythmically around your girth");
+	if(y >= 0) outputText(", with your " + cockDescript(y) + " similarly coming to a rest inside Isabella's depths; you're able to feel the cow's rapid heartbeat hammering through her, causing her already tight cunt to contract rhythmically around your girth");
 	outputText(".\n\n");
 
 	outputText("Now bottomed out deep inside ");
