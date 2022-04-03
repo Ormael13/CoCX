@@ -211,8 +211,8 @@ package classes.Scenes
 			outputText("-Fixes: Diana last encounter repeating after recruiting her, body lotions not working (at all), Phylla dick checks comparing area instead of length and vice versa (Svalkash)\n");
 			outputText("-Added: Grey Spellpower, Tier 1 & 2 cooldown info to Stats > Combat subpage.\n");
 			outputText("-Kitsune 2nd tier thyroid gland mutation would now give +20 mana regen and boost by 50% foxfire fire dmg at 9 tails as it says.\n");
-			outputText("-New underwear (upper) (by Canadian Snas): Silky Drider-Weave Bra - buyable at Belisa shop. Cost 1200 gems, +20% spellpower.\n");
-			outputText("-New underwear (lower) (by Canadian Snas): Silky Drider-Weave Panties - buyable at Belisa shop. Cost 1400 gems, +20% spellpower.\n");
+			outputText("-New underwear (upper) (by Canadian Snas): Silky Drider-Weave Bra - buyable at Belisa shop. Cost 1200 gems, +2 to sexiness, +20% spellpower.\n");
+			outputText("-New underwear (lower) (by Canadian Snas): Silky Drider-Weave Panties - buyable at Belisa shop. Cost 1400 gems, +2 to sexiness, +20% spellpower.\n");
 			outputText("-Added option to manualy toogle on/off Shift on attribute menu during level-up (mainly to make apk users live bit easier)\n");
 			outputText("-Added a button to disable 'Sleep With' to Ember. (Svalkash)\n");
 			outputText("-Sophie breastfeed scene properly restored, added bimbo hints and light corruption check. (Svalkash)\n");
@@ -228,8 +228,14 @@ package classes.Scenes
 			outputText("-Minor Vapula fixes, new cock-finding function. Added chastity belt scene to sex menu (which was clearly intended from the beginning). (Svalkash)\n");
 			outputText("-Made Ted less annoying by disabling him after acquiring the talisman. (Svalkash) ((actualy i made another change that makes him disabled/stop appearing after he is beaten once more after dropping jade talisman (Ormael)))\n");
 			outputText("-USS optimization (changed menuGen, so touched Yara too. If she's broken, I'm the one to blame). Moved USS to SceneLib - please don't create MORE instances of it in every class. (Svalkash)\n");
-			outputText("-SceneHunter (new settings page) added. Checks are currently added only to Holidays, male and female cancers and demons from BlightRidge. (Svalkash)\n");
+			outputText("-SceneHunter (new settings page) added. Checks are currently added only to Holidays, male and female cancers and demons from BlightRidge, Phouka, SandWitch, CumWitch, Naga, Chameleon, LizanRogue, Troll, Cavewyrm. (Svalkash)\n");
 			outputText("-Implemented 3 new scenes for regular imp. Implemented tentacle cock branch for centaur fuck (also imp). Reworked sex menu for imps. (Svalkash)\n");
+			outputText("-Improved isEaster() calculation - now it counts the first Easter day using some complicated Gaussian function, and gives a 7 days window after it. (Svalkash)\n");
+			outputText("-Reworked Sand Witch and Naga scene menus, adding more buttons instead of random routers and hidden checks. Added corruptionTolerance to their checks. Adapted Naga (and SandWitch) genderless scenes for non-genderless PCs. (Svalkash)\n");
+			outputText("-Grey Ink/Abyssal Ink would now be able to give Ink Spray perk too.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -245,12 +251,6 @@ package classes.Scenes
 			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

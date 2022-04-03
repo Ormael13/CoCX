@@ -498,7 +498,7 @@ public class MutationsLib
 				MutationsList.push([NekomataThyroidGlandFinalForm, HellcatParathyroidGlandsFinalForm, CaveWyrmLungsFinalForm, KitsuneParathyroidGlandsFinalForm, ArachnidBookLungFinalForm, BlackHeartFinalForm, CatlikeNimblenessPrimitive, DraconicBonesFinalForm, DraconicHeartFinalForm, DraconicLungsFinalForm, DrakeLungsFinalForm, EasterBunnyEggBagFinalForm,
 				EclipticMindFinalForm, ElvishPeripheralNervSysFinalForm, FeyArcaneBloodstreamFinalForm, FloralOvariesFinalForm, FrozenHeartFinalForm, GazerEyeFinalForm, GorgonsEyesFinalForm, HarpyHollowBonesFinalForm, HeartOfTheStormFinalForm, HinezumiBurningBloodFinalForm, HollowFangsFinalForm, KitsuneThyroidGlandFinalForm, LactaBovinaOvariesFinalForm,
 				LizanMarrowFinalForm, MantislikeAgilityFinalForm, MelkieLungFinalForm, MinotaurTesticlesFinalForm, NukiNutsFinalForm, ObsidianHeartFinalForm, OniMusculatureFinalForm, OrcAdrenalGlandsFinalForm, PigBoarFatFinalForm, RaijuCathodeFinalForm, RatatoskrSmartsFinalForm, SalamanderAdrenalGlandsFinalForm, ScyllaInkGlandsPrimitive,
-				TwinHeartFinalForm, VampiricBloodsteamFinalForm, VenomGlandsFinalForm, WhaleFatFinalForm, YetiFatFinalForm, CatlikeNimblenessFinalForm, ScyllaInkGlandsEvolved, ScyllaInkGlandsPrimitive]);
+				TwinHeartFinalForm, VampiricBloodsteamFinalForm, VenomGlandsFinalForm, WhaleFatFinalForm, YetiFatFinalForm, CatlikeNimblenessFinalForm, ScyllaInkGlandsEvolved]);
 			}
 
 			switch(spec){
@@ -862,8 +862,8 @@ public class MutationsLib
 						.requirePerk(RatatoskrSmarts);
 				SalamanderAdrenalGlandsPrimitive.requireLevel(30)
 						.requirePerk(SalamanderAdrenalGlands);
-				ScyllaInkGlandsPrimitive.requireLevel(30)
-						.requirePerk(ScyllaInkGlands);
+				//ScyllaInkGlandsPrimitive.requireLevel(30)
+				//		.requirePerk(ScyllaInkGlands);
 				SharkOlfactorySystemPrimitive.requireLevel(30)
 						.requirePerk(SharkOlfactorySystem);
 				TrachealSystemPrimitive.requireLevel(30)

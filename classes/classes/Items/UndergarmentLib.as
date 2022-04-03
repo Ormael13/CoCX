@@ -22,6 +22,8 @@ package classes.Items
 		//Upper
 		public const C_BRA  :Undergarment = new Undergarment("C. Bra ", "C. Bra", "comfortable bra", "a pair of comfortable bra", TYPE_UPPERWEAR, DEFAULT_VALUE, "A generic pair of bra. \n\nType: Undergarment (Upper)");
 		public const C_SHIRT:Undergarment = new Undergarment("C.Shirt", "C. Shirt", "comfortable shirt", "a comfortable shirt", TYPE_UPPERWEAR, DEFAULT_VALUE, "A generic shirt. \n\nType: Undergarment (Upper)");
+		public const COW_BRA:Undergarment = new Undergarment("Cow Bra", "Cow Bra", "cow girl bra", "a cow girl bra", TYPE_UPPERWEAR, 1000, "This bra look like ordinary panty at a first glance save for the cow fur like motif. They increase lacta bovina lactation rate as well as the efficiency of Milk blast. Comes with the bonus of accomodating just any breast size and letting milk flow through! \n\nType: Undergarment (Upper)");
+		public const DRI_BRA:DriderBra = new DriderBra();
 		public const DS_BRA :Undergarment = new Undergarment("DS. Bra", "D.Scale Bra", "dragonscale bra", "a pair of dragonscale bra", TYPE_UPPERWEAR, 600, "This bra appears to be made of dragon scale. It's held together with leather straps for flexibility. Great for those on the primal side! \n\nType: Undergarment (Upper)");
 		public const DS_VEST:Undergarment = new Undergarment("DS.Vest", "D.Scale Vest", "dragonscale vest", "a dragonscale vest", TYPE_UPPERWEAR, 600, "This sleeveless vest is made of dragonscale, treated until it is as light and comfortable as cloth.  However, these treatments have reduced the defensive properties of the dragonscale. \n\nType: Undergarment (Upper)");
 		public const EW_CORS:Undergarment = new Undergarment("EW.Cors", "E.W. Corset", "ebonweave corset", "an ebonweave corset", TYPE_UPPERWEAR, 900, "This corset is ebonweave, created using refined ebonbloom petals. The ebonweave is elastic, making the corset surprisingly comfortable to wear, while displaying your bust down to the most subtle curves. \n\nType: Undergarment (Upper)");
@@ -34,11 +36,11 @@ package classes.Items
 		public const SSSHIRT:Undergarment = new Undergarment("SSShirt", "S.Silk Shirt", "spider-silk shirt", "a spider-silk shirt", TYPE_UPPERWEAR, 1000, "A comfortable undershirt.  It's as white as snow and woven with hundreds of strands of fine spider silk. \n\nType: Undergarment (Upper)");
 		public const STSHIRT:Undergarment = new Undergarment("STShirt", "S.T.Shirt", "soul training shirt", "a soul training shirt", TYPE_UPPERWEAR, 200, "A shirt made from fabric capable to help train soulforce. \n\nType: Undergarment (Upper)");
 		public const TECHBRA:TechnomancerBra = new TechnomancerBra();
-		public const COW_BRA:Undergarment = new Undergarment("Cow Bra", "Cow Bra", "cow girl bra", "a cow girl bra", TYPE_UPPERWEAR, 1000, "This bra look like ordinary panty at a first glance save for the cow fur like motif. They increase lacta bovina lactation rate as well as the efficiency of Milk blast. Comes with the bonus of accomodating just any breast size and letting milk flow through! \n\nType: Undergarment (Upper)");
-		public const DRI_BRA:DriderBra = new DriderBra();
 		//Lower
 		public const C_LOIN :Undergarment = new Undergarment("C. Loin", "C. Loin", "comfortable loincloth", "a pair of comfortable loincloth", TYPE_LOWERWEAR, DEFAULT_VALUE, "A generic pair of loincloth. \n\nType: Undergarment (Lower)", "NagaWearable");
 		public const C_PANTY:Undergarment = new Undergarment("C.Panty", "C. Panties", "comfortable panties", "a pair of comfortable panties", TYPE_LOWERWEAR, DEFAULT_VALUE, "A generic pair of panties. \n\nType: Undergarment (Lower)");
+		public const COW_PANTY:Undergarment = new Undergarment("Cow Panty", "Cow Panty", "cow girl panties", "a pair of Cow girl panties", TYPE_LOWERWEAR, 1000, "These panties look like ordinary panty at a first glance save for the cow fur like motif. They increase lacta bovina lactation rate. \n\nType: Undergarment (Lower)");
+		public const DRI_PANTY:DriderPanties = new DriderPanties();
 		public const DS_LOIN:Undergarment = new Undergarment("DS.Loin", "D.Scale Loin", "dragonscale loincloth", "a pair of dragonscale loincloth", TYPE_LOWERWEAR, 600, "This loincloth appears to be made of dragonscale and held together with a leather strap that goes around your waist. Great for those on the wild side! \n\nType: Undergarment (Lower)", "NagaWearable");
 		public const DSTHONG:Undergarment = new Undergarment("DSPanty", "D.Scale Thong", "dragonscale thong", "a pair of dragonscale thong", TYPE_LOWERWEAR, 600, "This thong appears to be made of dragonscale and held together with a leather strap that goes around your waist. Great for those on the wild side! \n\nType: Undergarment (Lower)");
 		public const EW_JOCK:Undergarment = new Undergarment("EW.Jock", "E.W. Jock", "ebonweave jockstrap", "an ebonweave jockstrap", TYPE_LOWERWEAR, 900, "This jock is ebonweave, made from refined ebonbloom petals. This jock is comfortable and elastic, providing support while comfortably containing assets of any size. \n\nType: Undergarment (Lower)");
@@ -56,8 +58,6 @@ package classes.Items
 		public const SSPANTY:Undergarment = new Undergarment("SSPanty", "S.Silk Panty", "spider-silk panties", "a pair of spider-silk panties", TYPE_LOWERWEAR, 1000, "These panties look incredibly comfortable. It's as white as snow and finely woven with hundreds of strands of spider silk. \n\nType: Undergarment (Lower)");
 		public const STPANTY:Undergarment = new Undergarment("STPanty", "S.T.Panties", "soul training panties", "a pair of soul training panties", TYPE_LOWERWEAR, 200, "A pair of panties made from fabric capable to help train soulforce. \n\nType: Undergarment (Lower)");
 		public const T_PANTY:TechnomancerPanties = new TechnomancerPanties();
-		public const COW_PANTY:Undergarment = new Undergarment("Cow Panty", "Cow Panty", "cow girl panties", "a pair of Cow girl panties", TYPE_LOWERWEAR, 1000, "These panties look like ordinary panty at a first glance save for the cow fur like motif. They increase lacta bovina lactation rate. \n\nType: Undergarment (Lower)");
-		public const DRI_PANTY:DriderPanties = new DriderPanties();
 		public function UndergarmentLib() 
 		{
 		}
