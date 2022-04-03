@@ -657,7 +657,7 @@ public function TyrantiaTraining2():void {
 			player.createStatusEffect(StatusEffects.KnowsTyrantState,0,0,0,0);
 		}
 		if (TyrantiaTrainingSessions == 9) outputText("<b>Tyrant State bonus to melee damage increased by 20%.</b>\n\n");
-		if (TyrantiaTrainingSessions == 14) outputText("<b>You have gained new magic special: False Weapon - costs 10% of your max Lust and 100 Fatigue, and lasts until the end of combat.</b>\n\n");
+		if (TyrantiaTrainingSessions == 14) outputText("<b>You have gained new magic special: False Weapon - costs 10% of your max Lust and 100 Fatigue and lasts until the end of combat.</b>\n\n");
 		if (TyrantiaTrainingSessions == 19) outputText("<b>You can now use toggle to turn on/off auto-cast of Tyrant State at the combat start.</b>\n\n");
 		//if (TyrantiaTrainingSessions == 24) outputText("<b></b>\n\n");
 		//if (TyrantiaTrainingSessions == 29) outputText("<b></b>\n\n");

@@ -232,7 +232,7 @@ package classes.Scenes
 			outputText("-Implemented 3 new scenes for regular imp. Implemented tentacle cock branch for centaur fuck (also imp). Reworked sex menu for imps. (Svalkash)\n");
 			outputText("-Improved isEaster() calculation - now it counts the first Easter day using some complicated Gaussian function, and gives a 7 days window after it. (Svalkash)\n");
 			outputText("-Reworked Sand Witch and Naga scene menus, adding more buttons instead of random routers and hidden checks. Added corruptionTolerance to their checks. Adapted Naga (and SandWitch) genderless scenes for non-genderless PCs. (Svalkash)\n");
-			outputText("-\n");
+			outputText("-Grey Ink/Abyssal Ink would now be able to give Ink Spray perk too.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
