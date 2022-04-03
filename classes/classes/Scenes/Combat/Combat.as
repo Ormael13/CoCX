@@ -408,7 +408,7 @@ public class Combat extends BaseContent {
     }
 
     public function spellModGrey():Number {
-        return magic.spellModGrey();
+        return magic.spellModGreyImpl();
     }
 
     public function spellGreyCooldown():Number {
@@ -1019,7 +1019,7 @@ public class Combat extends BaseContent {
         buttons.add("Surrender(H)", combat.surrenderByHP, "Stop defending up to the point enemy would beat you down to minimal HP.");
         buttons.add("Surrender(L)", combat.surrenderByLust, "Fantasize about your opponent in a sexual way so much it would fill up your lust you'll end up getting raped.");
         if (player.hasPerk(PerkLib.DoubleAttack) || player.hasPerk(PerkLib.DoubleAttackLarge) || player.hasPerk(PerkLib.DoubleAttackSmall) || player.hasPerk(PerkLib.Combo) || (player.hasPerk(PerkLib.JobBeastWarrior) && (player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon())) ||
-                ((player.hasPerk(PerkLib.Berzerker) || player.hasPerk(PerkLib.Lustzerker)) && player.hasPerk(MutationsLib.SalamanderAdrenalGlandsEvolved)) || player.hasPerk(PerkLib.Poisoning) || player.hasPerk(PerkLib.SwiftCasting) || player.hasStatusEffect(StatusEffects.SoulDrill1)) {
+            ((player.hasPerk(PerkLib.Berzerker) || (player.hasPerk(PerkLib.Lustzerker)) && player.hasPerk(MutationsLib.SalamanderAdrenalGlandsEvolved))) || player.hasPerk(PerkLib.Poisoning) || player.hasPerk(PerkLib.SwiftCasting) || player.hasStatusEffect(StatusEffects.SoulDrill1) || player.hasStatusEffect(StatusEffects.ThePhalluspear1)) {
             buttons.add("Melee Opt", CoC.instance.perkMenu.doubleAttackOptions, "You can adjust your melee attack settings.");
         }
         if (player.hasPerk(PerkLib.DoubleStrike) || player.hasPerk(PerkLib.ElementalArrows) || player.hasPerk(PerkLib.Cupid) || player.hasPerk(PerkLib.EnvenomedBolt) || player.hasPerk(PerkLib.AmateurGunslinger)) {
@@ -1049,6 +1049,9 @@ public class Combat extends BaseContent {
         }
         if (player.hasStatusEffect(StatusEffects.SoulDrill1)) {
             buttons.add("Soul Drill", soul1Drill).hint("Menu to adjust your Soul Drill spinning speed.");
+        }
+        if (player.hasStatusEffect(StatusEffects.ThePhalluspear1)) {
+            buttons.add("ThePhalluspear", the1Phalluspear).hint("Menu to toggle The Phalluspear lust to normal damage ratio.");
         }
 		if (player.weaponFlyingSwordsName != "nothing") {
 			bd = buttons.add("Flying Sword", attackFlyingSword).hint("Attack the enemy with your " + player.weaponFlyingSwordsName + ".  Damage done is determined by your wisdom and weapon.\n\nSoulforce cost per attack: "+flyingSwordAttackCost()+"");
@@ -1534,41 +1537,52 @@ public class Combat extends BaseContent {
         }
         addButton(14, "Back", combat.combatMenu, false);
     }
-
     public function soul1Drill00():void {
         player.removeStatusEffect(StatusEffects.SoulDrill1);
         player.createStatusEffect(StatusEffects.SoulDrill1, 0, 0, 0, 0);
         doNext(soul1Drill);
     }
-
     public function soul1Drill01():void {
         player.removeStatusEffect(StatusEffects.SoulDrill1);
         player.createStatusEffect(StatusEffects.SoulDrill1, 1, 0, 0, 0);
         doNext(soul1Drill);
     }
-
     public function soul1Drill02():void {
         player.removeStatusEffect(StatusEffects.SoulDrill1);
         player.createStatusEffect(StatusEffects.SoulDrill1, 2, 0, 0, 0);
         doNext(soul1Drill);
     }
-
     public function soul1Drill03():void {
         player.removeStatusEffect(StatusEffects.SoulDrill1);
         player.createStatusEffect(StatusEffects.SoulDrill1, 3, 0, 0, 0);
         doNext(soul1Drill);
     }
-
     public function soul1Drill04():void {
         player.removeStatusEffect(StatusEffects.SoulDrill1);
         player.createStatusEffect(StatusEffects.SoulDrill1, 4, 0, 0, 0);
         doNext(soul1Drill);
     }
-
     public function soul1Drill05():void {
         player.removeStatusEffect(StatusEffects.SoulDrill1);
         player.createStatusEffect(StatusEffects.SoulDrill1, 5, 0, 0, 0);
         doNext(soul1Drill);
+    }
+	
+	public function the1Phalluspear():void {
+		menu();
+		if (player.statusEffectv1(StatusEffects.ThePhalluspear1) != 0) addButton(0, "25%", the1Phalluspear00).hint("Deal 25% dmg as lust damage.");
+		else addButtonDisabled(0, "25%", "Phalluspear deal currently 25% of dmg as lust dmg.");
+        if (player.statusEffectv1(StatusEffects.ThePhalluspear1) != 1) addButton(1, "100%", the1Phalluspear01).hint("Deal 100% dmg as lust damage.");
+		else addButtonDisabled(1, "100%", "Phalluspear deal currently 100% of dmg as lust dmg.");
+		addButton(14, "Back", combat.combatMenu, false);
+	}
+    public function the1Phalluspear00():void {
+        player.addStatusValue(StatusEffects.ThePhalluspear1, 1, -1);
+        doNext(the1Phalluspear);
+    }
+    public function the1Phalluspear01():void {
+       player.addStatusValue(StatusEffects.ThePhalluspear1, 1, 1);
+       doNext(the1Phalluspear);
     }
 
     internal function teaseAttack():void {
@@ -6148,8 +6162,8 @@ public class Combat extends BaseContent {
                     }
                 }
 				if (player.hasStatusEffect(StatusEffects.FalseWeapon)) {
-					/*if () doPhysicalDamage(damage, true, true);
-					else */doPhysicalDamage(Math.round(damage * 0.2), true, true);
+					if (player.weapon == weapons.PHALLUS) doPhysicalDamage((damage * 2), true, true);
+					else doPhysicalDamage(Math.round(damage * 0.2), true, true);
 				}
 				if (player.weapon == weapons.PRURUMI && player.spe >= 150) {
 					if (player.spe >= 300) damage += damage * 3;

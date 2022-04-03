@@ -11,13 +11,13 @@ public class IceSpikeSpell extends AbstractBlackSpell {
 	
 	public function IceSpikeSpell(ex:Boolean = false) {
 		super(
-				ex ? "Ice Spike (Ex)" : "Ice Spike",
-				ex ?
-						"Drawning your own lust and wrath to concentrate it into chilling spike of ice that will attack your enemies."
-						: "Drawning your own lust to concentrate it into chilling spike of ice that will attack your enemies.",
-				TARGET_ENEMY,
-				TIMING_INSTANT,
-				[TAG_DAMAGING, TAG_ICE]
+			ex ? "Ice Spike (Ex)" : "Ice Spike",
+			ex ?
+				"Drawning your own lust and wrath to concentrate it into chilling spike of ice that will attack your enemies."
+				: "Drawning your own lust to concentrate it into chilling spike of ice that will attack your enemies.",
+			TARGET_ENEMY,
+			TIMING_INSTANT,
+			[TAG_DAMAGING, TAG_ICE]
 		);
 		baseManaCost = 40;
 		if (ex) baseWrathCost = 100;

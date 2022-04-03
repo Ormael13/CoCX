@@ -6,11 +6,11 @@ import classes.StatusEffects;
 public class TearsOfDenialSpell extends AbstractDivineSpell {
 	public function TearsOfDenialSpell() {
 		super(
-				"Tears of Denial",
-				"When hit by an ability that would put you to min hit points or be filled with lust instead heal you to full health and wash your desire away.  ",
-				TARGET_SELF,
-				TIMING_LASTING,
-				[TAG_BUFF]
+			"Tears of Denial",
+			"When hit by an ability that would put you to min hit points or be filled with lust instead heal you to full health and wash your desire away.  ",
+			TARGET_SELF,
+			TIMING_LASTING,
+			[TAG_BUFF]
 		);
 		baseManaCost = 3000;
 	}

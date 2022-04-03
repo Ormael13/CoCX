@@ -10,10 +10,10 @@ import classes.StatusEffects;
 public class WaveOfEcstasySpell extends AbstractBlackSpell {
 	public function WaveOfEcstasySpell() {
 		super("Wave of Ecstasy",
-				"The arouse spell draws on your own inner lust in order to enflame the enemies passions.",
-				TARGET_ENEMY,
-				TIMING_INSTANT,
-				[TAG_LUSTDMG, TAG_AOE]);
+			"The arouse spell draws on your own inner lust in order to enflame the enemies passions.",
+			TARGET_ENEMY,
+			TIMING_INSTANT,
+			[TAG_LUSTDMG, TAG_AOE]);
 		baseManaCost = 100;
 	}
 	

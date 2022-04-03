@@ -9,11 +9,11 @@ import classes.StatusEffects;
 public class CurseOfWeepingSpell extends AbstractHexSpell {
 	public function CurseOfWeepingSpell() {
 		super(
-				"Curse of Weeping",
-				"Draw your own blood and inflict on your target a terrible curse, dealing high damage for 6 rounds.",
-				TARGET_ENEMY,
-				TIMING_LASTING,
-				[TAG_DAMAGING]
+			"Curse of Weeping",
+			"Draw your own blood and inflict on your target a terrible curse, dealing high damage for 6 rounds.",
+			TARGET_ENEMY,
+			TIMING_LASTING,
+			[TAG_DAMAGING]
 		);
 		baseManaCost = 300;
 		useManaType = Combat.USEMANA_BLACK;

@@ -6,11 +6,11 @@ import classes.StatusEffects;
 public class ChargeWeaponSpell extends AbstractWhiteSpell {
 	public function ChargeWeaponSpell() {
 		super(
-				"Charge Weapon",
-				"The Charge Weapon spell will surround your weapons in electrical energy, causing them to do even more damage.  The effect lasts for a few combat turns.",
-				TARGET_SELF,
-				TIMING_LASTING,
-				[TAG_BUFF]
+			"Charge Weapon",
+			"The Charge Weapon spell will surround your weapons in electrical energy, causing them to do even more damage.  The effect lasts for a few combat turns.",
+			TARGET_SELF,
+			TIMING_LASTING,
+			[TAG_BUFF]
 		);
 		baseManaCost = 60;
 	}

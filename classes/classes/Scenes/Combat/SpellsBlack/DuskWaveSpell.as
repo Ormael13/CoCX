@@ -11,13 +11,13 @@ public class DuskWaveSpell extends AbstractBlackSpell {
 	
 	public function DuskWaveSpell(ex:Boolean = false) {
 		super(
-				ex ? "Dusk Wave (Ex)" : "Dusk Wave",
-				ex ?
-						"This spell draws your own lust to condense part of the the ambivalent darkness into a wave to attack your enemies."
-						: "This spell draws your own lust and wrath to condense part of the the ambivalent darkness into a wave to attack your enemies.",
-				TARGET_ENEMY,
-				TIMING_INSTANT,
-				[TAG_DAMAGING, TAG_DARKNESS, TAG_AOE]
+			ex ? "Dusk Wave (Ex)" : "Dusk Wave",
+			ex ?
+				"This spell draws your own lust to condense part of the the ambivalent darkness into a wave to attack your enemies."
+				: "This spell draws your own lust and wrath to condense part of the the ambivalent darkness into a wave to attack your enemies.",
+			TARGET_ENEMY,
+			TIMING_INSTANT,
+			[TAG_DAMAGING, TAG_DARKNESS, TAG_AOE]
 		);
 		baseManaCost = 200;
 		if (ex) baseWrathCost = 100;

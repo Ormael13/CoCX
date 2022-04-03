@@ -1,6 +1,6 @@
 /**
  * ...
- * @author Ormael
+ * @author Canadian Snas
  */
 package classes.Scenes.NPCs 
 {
@@ -788,4 +788,4 @@ import classes.display.SpriteDb;
 			doNext(LilyCampBack);
 		}
 	}
-}
+}

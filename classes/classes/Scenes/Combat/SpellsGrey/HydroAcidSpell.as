@@ -7,11 +7,11 @@ import classes.StatusEffects;
 public class HydroAcidSpell extends AbstractGreySpell {
 	public function HydroAcidSpell() {
 		super(
-				"Hydro Acid",
-				"Condense part of the the ambivalent moisture into acid spray to attack your enemy.",
-				TARGET_ENEMY,
-				TIMING_INSTANT,
-				[TAG_DAMAGING, TAG_ACID]
+			"Hydro Acid",
+			"Condense part of the the ambivalent moisture into acid spray to attack your enemy.",
+			TARGET_ENEMY,
+			TIMING_INSTANT,
+			[TAG_DAMAGING, TAG_ACID]
 		);
 		baseManaCost = 100;
 	}

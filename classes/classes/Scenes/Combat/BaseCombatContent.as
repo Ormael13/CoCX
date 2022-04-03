@@ -237,6 +237,9 @@ public class BaseCombatContent extends BaseContent {
 	protected function spellModWhite():Number {
 		return combat.magic.spellModWhiteImpl();
 	}
+	protected function spellModGrey():Number {
+		return combat.magic.spellModGreyImpl();
+	}
 	protected function spellModBlood():Number {
 		return combat.magic.spellModBloodImpl();
 	}

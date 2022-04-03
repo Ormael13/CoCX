@@ -11,13 +11,13 @@ public class DarknessShardSpell extends AbstractBlackSpell {
 	
 	public function DarknessShardSpell(ex:Boolean = false) {
 		super(
-				ex ? "Darkness Shard (Ex)" : "Darkness Shard",
-				ex ?
-						"Drawing your own lust and wrath to condense part of the the ambivalent darkness into a shard to attack your enemies."
-						: "Drawing your own lust to condense part of the the ambivalent darkness into a shard to attack your enemies.",
-				TARGET_ENEMY,
-				TIMING_INSTANT,
-				[TAG_DAMAGING, TAG_DARKNESS]
+			ex ? "Darkness Shard (Ex)" : "Darkness Shard",
+			ex ?
+				"Drawing your own lust and wrath to condense part of the the ambivalent darkness into a shard to attack your enemies."
+				: "Drawing your own lust to condense part of the the ambivalent darkness into a shard to attack your enemies.",
+			TARGET_ENEMY,
+			TIMING_INSTANT,
+			[TAG_DAMAGING, TAG_DARKNESS]
 		);
 		baseManaCost = 40;
 		if (ex) baseWrathCost = 100;

@@ -147,7 +147,8 @@ use namespace CoC;
 						chance: 0.20
 					}, {
 						name  : "truffle",
-						call  : findTruffle
+						call  : findTruffle,
+						chance: 0.20
 					}, {
 						name  : "chitin",
 						call  : findChitin,
@@ -267,7 +268,7 @@ use namespace CoC;
 						name  : "tentaBeast",
 						call  : tentacleBeastEncounterFn,
 						when  : fn.ifLevelMin(3),
-						chance: 0.5
+						chance: 0.80
 					}, {
 						name  : "corrGlade",
 						call  : corruptedGladeFn,
@@ -284,7 +285,7 @@ use namespace CoC;
 					}, {
 						name  : "WoodElf",
 						call  : SceneLib.woodElves.findElves,
-						chance: 0.50,
+						chance: 0.5,
 						when  : function ():Boolean {
 							return WoodElves.WoodElvesQuest == WoodElves.QUEST_STAGE_NOT_STARTED && player.level >= 10 && !player.blockingBodyTransformations()
 						}
@@ -298,7 +299,7 @@ use namespace CoC;
 					}, {
 						name  : "chitin",
 						call  : findChitin,
-						chance: 0.05
+						chance: 0.10
 					}, {
 						name  : "healpill",
 						call  : findHPill,
@@ -510,12 +511,10 @@ use namespace CoC;
 				}
 			}, {
 				name: "tentabeast",
-				call: tentacleBeastDeepwoodsEncounterFn,
-				when: Encounters.fn.ifLevelMin(2)
+				call: tentacleBeastDeepwoodsEncounterFn
 			}, {
 				name: "alraune",
-				call: alrauneEncounterFn,
-				when: Encounters.fn.ifLevelMin(3)
+				call: alrauneEncounterFn
 			}, {
 				name: "lilirauneIngrediant",
 				call  : lilirauneIngrediantEvent,

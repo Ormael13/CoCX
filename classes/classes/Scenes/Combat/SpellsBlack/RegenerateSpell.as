@@ -7,11 +7,11 @@ import classes.StatusEffects;
 public class RegenerateSpell extends AbstractBlackSpell {
 	public function RegenerateSpell() {
 		super(
-				"Regenerate",
-				"Regenerate will attempt to trigger health recovery over time, however like all black magic used on yourself, it has a chance of backfiring and greatly arousing you.  ",
-				TARGET_SELF,
-				TIMING_LASTING,
-				[TAG_BUFF, TAG_HEALING]
+			"Regenerate",
+			"Regenerate will attempt to trigger health recovery over time, however like all black magic used on yourself, it has a chance of backfiring and greatly arousing you.  ",
+			TARGET_SELF,
+			TIMING_LASTING,
+			[TAG_BUFF, TAG_HEALING]
 		);
 		baseManaCost           = 50;
 		canBackfire            = true;

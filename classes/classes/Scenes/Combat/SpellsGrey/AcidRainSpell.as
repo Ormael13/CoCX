@@ -7,11 +7,11 @@ import classes.StatusEffects;
 public class AcidRainSpell extends AbstractGreySpell {
 	public function AcidRainSpell() {
 		super(
-				"Acid Rain",
-				"This spell causes a radical change in your surroundings. You can call forth an Acid Rain that will strike enemies in a wide area.",
-				TARGET_ENEMY,
-				TIMING_INSTANT,
-				[TAG_DAMAGING, TAG_ACID, TAG_AOE]
+			"Acid Rain",
+			"This spell causes a radical change in your surroundings. You can call forth an Acid Rain that will strike enemies in a wide area.",
+			TARGET_ENEMY,
+			TIMING_INSTANT,
+			[TAG_DAMAGING, TAG_ACID, TAG_AOE]
 		);
 		baseManaCost = 500;
 	}

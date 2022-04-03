@@ -8,11 +8,11 @@ import classes.StatusEffects;
 public class BloodExplosionSpell extends AbstractBloodSpell {
 	public function BloodExplosionSpell() {
 		super(
-				"Blood Explosion",
-				"Blood Explosion will attack foe with blood orb.",
-				TARGET_ENEMY,
-				TIMING_INSTANT,
-				[TAG_DAMAGING,TAG_AOE]
+			"Blood Explosion",
+			"Blood Explosion will attack foe with blood orb.",
+			TARGET_ENEMY,
+			TIMING_INSTANT,
+			[TAG_DAMAGING,TAG_AOE]
 		);
 		baseHpCost = 200;
 	}

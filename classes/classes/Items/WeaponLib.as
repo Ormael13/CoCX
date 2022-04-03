@@ -104,6 +104,7 @@ package classes.Items
 		public const NORTHIP:NorthernerIcePicks = new NorthernerIcePicks();
 		public const NPHBLDE:NephilimBlade = new NephilimBlade();
 		public const OTETSU :OniTetsubo = new OniTetsubo();
+		public const PHALLUS:ThePhalluspear = new ThePhalluspear();
 		public const PIPE   :Weapon = new Weapon("Pipe   ","Pipe","pipe","a pipe","smash",2,80,"This is a simple rusted pipe of unknown origins.  It's hefty and could probably be used as an effective bludgeoning tool.","", "Mace/Hammer");
 		public const POCDEST:PurifiedOniChieftainDestroyer = new PurifiedOniChieftainDestroyer();
 		public const PRURUMI:PrithvirajUrumi = new PrithvirajUrumi();

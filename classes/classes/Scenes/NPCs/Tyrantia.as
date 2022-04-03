@@ -10,6 +10,7 @@ import classes.BodyParts.Ears;
 import classes.BodyParts.Hips;
 import classes.BodyParts.Horns;
 import classes.BodyParts.LowerBody;
+import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects.Combat.BasiliskSlowDebuff;
 import classes.internals.*;
@@ -177,7 +178,7 @@ public class Tyrantia extends Monster
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if (player.hasStatusEffect(StatusEffects.SparingTyrantia)) cleanupAfterCombat();
+			if (player.hasStatusEffect(StatusEffects.SparingTyrantia)) SceneLib.tyrania.TyrantiaLostSparring();
 			else SceneLib.tyrania.postFightOptions(hpVictory);
 		}
 		
@@ -194,7 +195,7 @@ public class Tyrantia extends Monster
 		
 		public function Tyrantia() 
 		{
-			//if () {
+			if (flags[kFLAGS.TYRANTIA_LVL_UP] < 2) {
 				initStrTouSpeInte(295, 310, 190, 150);
 				initWisLibSensCor(100, 280, 100, 100);
 				this.weaponAttack = 150;
@@ -203,7 +204,37 @@ public class Tyrantia extends Monster
 				this.bonusHP = 2000;
 				this.bonusLust = 438;
 				this.level = 58;
-			//}
+			}
+			if (flags[kFLAGS.TYRANTIA_LVL_UP] == 2) {
+				initStrTouSpeInte(315, 335, 205, 160);
+				initWisLibSensCor(105, 300, 120, 100);
+				this.weaponAttack = 160;
+				this.armorDef = 320;
+				this.armorMDef = 320;
+				this.bonusHP = 3000;
+				this.bonusLust = 484;
+				this.level = 64;
+			}
+			if (flags[kFLAGS.TYRANTIA_LVL_UP] == 3) {
+				initStrTouSpeInte(335, 360, 220, 170);
+				initWisLibSensCor(110, 320, 140, 100);
+				this.weaponAttack = 170;
+				this.armorDef = 340;
+				this.armorMDef = 340;
+				this.bonusHP = 4000;
+				this.bonusLust = 530;
+				this.level = 70;
+			}
+			if (flags[kFLAGS.TYRANTIA_LVL_UP] == 4) {
+				initStrTouSpeInte(355, 385, 235, 180);
+				initWisLibSensCor(115, 340, 160, 100);
+				this.weaponAttack = 180;
+				this.armorDef = 360;
+				this.armorMDef = 360;
+				this.bonusHP = 5000;
+				this.bonusLust = 576;
+				this.level = 76;
+			}
 			this.a = "";
 			this.short = "Tyrantia";
 			this.imageName = "corrupteddrider";
@@ -239,7 +270,9 @@ public class Tyrantia extends Monster
 			this.createPerk(PerkLib.EnemyHugeType,0,0,0,0);
 			this.createPerk(PerkLib.TankI,0,0,0,0);
 			this.createPerk(PerkLib.GoliathI,0,0,0,0);
-			this.createPerk(PerkLib.CheetahI,0,0,0,0);
+			this.createPerk(PerkLib.CheetahI, 0, 0, 0, 0);
+			//if (flags[kFLAGS.TYRANTIA_LVL_UP] >= 2) this.createPerk(PerkLib.,0,0,0,0);
+			//if (flags[kFLAGS.TYRANTIA_LVL_UP] >= 3) this.createPerk(PerkLib.,0,0,0,0);
 			checkMonster();
 		}
 		

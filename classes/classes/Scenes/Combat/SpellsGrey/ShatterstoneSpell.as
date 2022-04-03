@@ -13,15 +13,15 @@ public class ShatterstoneSpell extends AbstractGreySpell {
 		super(
 			ex ? "Shatterstone (Ex)" : "Shatterstone",
 			ex ?
-					"Harden part of the the ground into many wrath-enpowered earth spike to attack your enemies."
-					: "Harden part of the the ground into many earth spike to attack your enemies.",
+				"Harden part of the the ground into many wrath-enpowered earth spike to attack your enemies."
+				: "Harden part of the the ground into many earth spike to attack your enemies.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
 			[TAG_DAMAGING, TAG_EARTH, TAG_AOE]
-	);
-	baseManaCost = 200;
-	if (ex) baseWrathCost = 100;
-	this.ex = ex;
+		);
+		baseManaCost = 200;
+		if (ex) baseWrathCost = 100;
+		this.ex = ex;
 	}
 	
 	override public function get buttonName():String {

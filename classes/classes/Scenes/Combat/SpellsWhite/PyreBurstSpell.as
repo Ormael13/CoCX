@@ -11,13 +11,13 @@ public class PyreBurstSpell extends AbstractWhiteSpell {
 	private var ex:Boolean;
 	public function PyreBurstSpell(ex:Boolean=false) {
 		super(
-				ex ? "Pyre Burst(Ex)" : "Pyre Burst",
-				ex ?
-						"Teach your foes a lesson with the strength of a wrath-empowered firestorm."
-						: "Teach your foes a lesson with the strength of a firestorm.",
-				TARGET_ENEMY,
-				TIMING_INSTANT,
-				[TAG_DAMAGING, TAG_AOE, TAG_FIRE]
+			ex ? "Pyre Burst(Ex)" : "Pyre Burst",
+			ex ?
+				"Teach your foes a lesson with the strength of a wrath-empowered firestorm."
+				: "Teach your foes a lesson with the strength of a firestorm.",
+			TARGET_ENEMY,
+			TIMING_INSTANT,
+			[TAG_DAMAGING, TAG_AOE, TAG_FIRE]
 		);
 		baseManaCost = 200;
 		baseWrathCost = ex ? 100 : 0;

@@ -8,11 +8,11 @@ import classes.StatusEffects;
 public class BoneshatterSpell extends AbstractNecroSpell {
 	public function BoneshatterSpell() {
 		super(
-				"Boneshatter",
-				"Strike at the target ossature causing it to explode from the inside and causing serious internal damage and weakening its blow. Single target only (does not work on boneless creatures, Monster take 20% strength drain from this effect which stacks).",
-				TARGET_ENEMY,
-				TIMING_INSTANT,
-				[TAG_DAMAGING]
+			"Boneshatter",
+			"Strike at the target ossature causing it to explode from the inside and causing serious internal damage and weakening its blow. Single target only (does not work on boneless creatures, Monster take 20% strength drain from this effect which stacks).",
+			TARGET_ENEMY,
+			TIMING_INSTANT,
+			[TAG_DAMAGING]
 		)
 	}
 	

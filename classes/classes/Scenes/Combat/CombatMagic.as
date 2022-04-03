@@ -228,7 +228,7 @@ public class CombatMagic extends BaseCombatContent {
 	internal function spellCostGreyImpl(mod:Number):Number {
 		var costPercent:Number = 100 + costChange_all() + costChange_spell() + costChange_grey();
 		//Addiditive mods
-		if (spellModGrey() > 1) costPercent += Math.round(spellModGrey() - 1) * 10;
+		if (spellModGreyImpl() > 1) costPercent += Math.round(spellModGreyImpl() - 1) * 10;
 		//Limiting it and multiplicative mods
 		if (player.hasPerk(PerkLib.BloodMage) && costPercent < 50) costPercent = 50;
 		mod *= costPercent / 100;
@@ -428,7 +428,7 @@ public class CombatMagic extends BaseCombatContent {
 		return mod;
 	}
 	
-	public function spellModGrey():Number {
+	internal function spellModGreyImpl():Number {
 		var mod:Number = 1;
 		if (player.hasPerk(PerkLib.SpellpowerGrey) && player.inte >= 50) mod += .15;
 		if (player.hasPerk(PerkLib.GreyMageApprentice) && player.inte >= 75) mod += .1;
