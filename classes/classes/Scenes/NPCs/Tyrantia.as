@@ -145,7 +145,7 @@ public class Tyrantia extends Monster
 					removeStatusEffect(StatusEffects.Lustzerking);
 				}
 			}
-			tyrantiaLustAura();
+			if (TyrantiaFollower.TyrantiaFollowerStage < 2 || (player.hasStatusEffect(StatusEffects.SparingTyrantia) && player.statusEffectv1(StatusEffects.SparingTyrantia) > 0)) tyrantiaLustAura();
 			//if () 
 			//else {
 				var choice0:Number = rand(6);
@@ -177,7 +177,8 @@ public class Tyrantia extends Monster
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			SceneLib.tyrania.postFightOptions(hpVictory);
+			if (player.hasStatusEffect(StatusEffects.SparingTyrantia)) cleanupAfterCombat();
+			else SceneLib.tyrania.postFightOptions(hpVictory);
 		}
 		
 		override public function get long():String
@@ -193,6 +194,16 @@ public class Tyrantia extends Monster
 		
 		public function Tyrantia() 
 		{
+			//if () {
+				initStrTouSpeInte(295, 310, 190, 150);
+				initWisLibSensCor(100, 280, 100, 100);
+				this.weaponAttack = 150;
+				this.armorDef = 300;
+				this.armorMDef = 300;
+				this.bonusHP = 2000;
+				this.bonusLust = 438;
+				this.level = 58;
+			//}
 			this.a = "";
 			this.short = "Tyrantia";
 			this.imageName = "corrupteddrider";
@@ -211,19 +222,11 @@ public class Tyrantia extends Monster
 			this.skinTone = "brown";
 			this.hairColor = "black";
 			this.hairLength = 24;
-			initStrTouSpeInte(295, 310, 190, 150);
-			initWisLibSensCor(100, 280, 100, 100);
 			this.weaponName = "Dick";
 			this.weaponVerb="piercing stab";
-			this.weaponAttack = 150;
 			this.armorName = "carapace";
-			this.armorDef = 300;
-			this.armorMDef = 300;
-			this.bonusHP = 2000;
-			this.bonusLust = 438;
 			this.lustVuln = .2;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
-			this.level = 58;
 			this.gems = rand(10) + 40;
 			this.drop = new WeightedDrop().add(consumables.B_GOSSR,1)
 					.add(consumables.UNICORN,1)

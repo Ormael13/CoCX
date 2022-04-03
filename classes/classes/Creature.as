@@ -26,6 +26,7 @@ import classes.Items.ItemTags;
 import classes.Items.JewelryLib;
 import classes.PerkType;
 import classes.Scenes.Places.TelAdre.UmasShop;
+import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Stats.Buff;
 import classes.Stats.BuffBuilder;
 import classes.Stats.BuffableStat;
@@ -762,6 +763,7 @@ public class Creature extends Utils
 			if (game.player.demonScore() >= 5) maxmult += 0.2;
 			if (game.player.demonScore() >= 11) maxmult += 0.4;
 			if (game.player.demonScore() >= 16) maxmult += 0.6;
+			if (TyrantiaFollower.TyrantiaTrainingSessions > 0.5) maxmult += 0.01 * TyrantiaFollower.TyrantiaTrainingSessions;
 			return 1;
 		}
 		public function maxLust():Number {
