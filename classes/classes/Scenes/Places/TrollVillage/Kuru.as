@@ -32,7 +32,8 @@ public class Kuru extends TrollVillageAbstractContent{
                     "\n" +
                     "You tell the waitress that she seemed like a pleasant person, and you just wanted to talk to her.\n" +
                     "\n" +
-                    "The waitress glances around the hall, before turning her attention to you. \"<i>Alright, I have some time to spare, what did you want to talk about?</i>\"");
+                    "The waitress glances around the hall, before turning her attention to you. \"<i>Alright, I have some time to spare, what did you want to talk about?</i>\"\n" +
+                    "\n");
             menu();
             addButton(0, "Herself", KuruSelfIntro);
             addButton(1, "Her Job", KuruJob);

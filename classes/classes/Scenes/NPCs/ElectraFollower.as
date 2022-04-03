@@ -109,6 +109,7 @@ public function ElectraRecruiting():void {
 	addButton(3, "Nah", ElectraRecruitingNah);
 }
 public function ElectraRecruitingSure():void {
+    clearOutput();
 	outputText("You help up Electra to your camp. Ironically or perhaps luckily enemies stay clear from you during the travel, Electra acting as a natural repellent. You finally arrive at camp, the weasel insisting on wanting to see everything"+(camp.hasCompanions() ? " and meeting everyone" : "")+".\n\n");
 	if (player.hasStatusEffect(StatusEffects.PureCampJojo)) {
 		outputText("Jojo notices her quite fast, waving a warm welcome.\n\n");
@@ -143,6 +144,7 @@ public function ElectraRecruitingSure():void {
 	doNext(playerMenu);
 }
 public function ElectraRecruitingNah():void {
+    clearOutput();
 	outputText("You apologizes to her but for now you aren't exactly ready to make space for someone in your life. Electra nods, she's on the verge of tears but accepts your decision to turn her down, walking away.\n\n");
 	flags[kFLAGS.ELECTRA_FOLLOWER] = 1;
 	electraAffection(-100);

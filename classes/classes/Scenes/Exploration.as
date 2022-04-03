@@ -852,10 +852,12 @@ public class Exploration extends BaseContent
 		public function tryDiscoverLL():void {
 			clearOutput();
 			if (rand(3) == 0) {
-				outputText("You're walking in the woods\n\n");
-				outputText("There's no one around\n\n");
-				outputText("And your phone is dead\n\n");
-				outputText("Out of the corner of your eye you spot her\n\n");
+                if (silly()) {
+                    outputText("You're walking in the woods\n\n");
+                    outputText("There's no one around\n\n");
+                    outputText("And your phone is dead\n\n");
+                    outputText("Out of the corner of your eye you spot her\n\n");
+                }
 				outputText("<b>A Wasp Girl...</b>");
 				startCombat(new WaspGirl());//lvl 33
 				return;
@@ -867,10 +869,12 @@ public class Exploration extends BaseContent
 				return;
 			}
 			else {
-				outputText("You're walking in the woods\n\n");
-				outputText("There's no one around\n\n");
-				outputText("And your phone is dead\n\n");
-				outputText("Out of the corner of your eye you spot her\n\n");
+                if (silly()) {
+                    outputText("You're walking in the woods\n\n");
+                    outputText("There's no one around\n\n");
+                    outputText("And your phone is dead\n\n");
+                    outputText("Out of the corner of your eye you spot her\n\n");
+                }
 				outputText("<b>A Wasp Huntress...</b>");
 				startCombat(new WapsHuntress());//lvl 48
 				return;
@@ -886,11 +890,13 @@ public class Exploration extends BaseContent
 				return;
 			}
 			else if (rand(3) == 0) {
-				outputText("You're walking in the woods\n\n");
-				outputText("There's no one around\n\n");
-				outputText("And your phone is dead\n\n");
-				outputText("Out of the corner of your eye you spot her\n\n");
-				outputText("<b>An Alraune Maiden...</b>");
+                if (silly()) {
+                    outputText("You're walking in the woods\n\n");
+                    outputText("There's no one around\n\n");
+                    outputText("And your phone is dead\n\n");
+                    outputText("Out of the corner of your eye you spot her\n\n");
+                    outputText("<b>An Alraune Maiden...</b>");
+                }
 				startCombat(new AlrauneMaiden());//lvl 54
 				return;
 			}
@@ -901,10 +907,12 @@ public class Exploration extends BaseContent
 				return;
 			}
 			else {
-				outputText("You're walking in the woods\n\n");
-				outputText("There's no one around\n\n");
-				outputText("And your phone is dead\n\n");
-				outputText("Out of the corner of your eye you spot her\n\n");
+                if (silly()) {
+                    outputText("You're walking in the woods\n\n");
+                    outputText("There's no one around\n\n");
+                    outputText("And your phone is dead\n\n");
+                    outputText("Out of the corner of your eye you spot her\n\n");
+                }
 				outputText("<b>A Wasp Assassin...</b>");
 				startCombat(new WaspAssassin());//lvl 63
 				return;

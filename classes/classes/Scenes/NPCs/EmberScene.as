@@ -250,6 +250,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 				if (flags[kFLAGS.EMBER_AFFECTION] < 75) addButton(7, "Sleep With?", sleepWithEmber).hint("Try to spend the night with Ember.");
 				else addButton(7, "Sleep With", sleepWithEmber).hint("Spend the night with Ember.");
 			}
+			if (flags[kFLAGS.SLEEP_WITH] == "Ember") addButton(8, "NoSleepWith", noSleepWith);
 			addButton(14, "Back", camp.campFollowers);
 		}
 

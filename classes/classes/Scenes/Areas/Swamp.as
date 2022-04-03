@@ -40,12 +40,12 @@ use namespace CoC;
 			flags[kFLAGS.TIMES_EXPLORED_SWAMP]++;
 			/*  SPECIAL SCENE OVERWRITES */
 			//Belisa
-			if (!player.hasStatusEffect(StatusEffects.BelisaOff) && BelisaFollower.BelisaEncounternum == 0 && rand(2) == 0) {
+			if (!player.hasStatusEffect(StatusEffects.SpoodersOff) && BelisaFollower.BelisaEncounternum == 0 && rand(2) == 0) {
 				SceneLib.belisa.firstEncounter();
 				return;
 			}
 			//Lily
-			if (LilyFollower.LilyFollowerState == false && rand(3) == 0) {
+			if (!player.hasStatusEffect(StatusEffects.SpoodersOff) && LilyFollower.LilyFollowerState == false && rand(3) == 0) {
 				SceneLib.lily.lilyEncounter();
 				return;
 			}

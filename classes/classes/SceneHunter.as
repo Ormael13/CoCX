@@ -12,7 +12,7 @@ public class SceneHunter extends BaseContent {
         outputText("\nAll these features blend into the game (almost) seamlessly, are lore-accurate and don't change anything gameplay-related.");
         
         addButton(0, "UniHerms", toggle, kFLAGS.SCENEHUNTER_UNI_HERMS);
-        outputText("\n\n<b>Universal Herms</b>: ");
+        outputText("\n\n<b>Universal Herms:</b> ");
         if (flags[kFLAGS.SCENEHUNTER_UNI_HERMS]) {
             outputText("<b><font color=\"#008000\">ENABLED</font></b>");
             outputText("\nMakes scenes unique to male/female PCs accessible to herms. Allows the player to choose the scene when the sex is led by the PC, randomly selects it in rape scenes.");
@@ -25,7 +25,7 @@ public class SceneHunter extends BaseContent {
         }
 
         addButton(1, "DickSelect", toggle, kFLAGS.SCENEHUNTER_DICK_SELECT);
-        outputText("\n\n<b>Dick Select</b>: ");
+        outputText("\n\n<b>Dick Select:</b> ");
         if (flags[kFLAGS.SCENEHUNTER_DICK_SELECT]) {
             outputText("<b><font color=\"#008000\">ENABLED</font></b>");
             outputText("\nWhen the scene presents different options for small/big/ dick sizes, adds selectors for the player to choose the exact 'tool' if different options are available. The dick is selected randomly in rape scenes. Also in scenes with options for multicocks and single cock, sometimes lets you choose if you want to use only one.");
@@ -37,7 +37,7 @@ public class SceneHunter extends BaseContent {
         }
 
         addButton(2, "Other", toggle, kFLAGS.SCENEHUNTER_OTHER);
-        outputText("\n\n<b>Other changes</b>: ");
+        outputText("\n\n<b>Other changes:</b> ");
         if (flags[kFLAGS.SCENEHUNTER_OTHER])
             outputText("<b><font color=\"#008000\">ENABLED</font></b>");
         else
@@ -50,7 +50,7 @@ public class SceneHunter extends BaseContent {
         outputText("\n<i>Some one-time scenes with many options and checks can be replayed using 'Camp Actions -> Spend Time -> Recall'.</i>");
         //Scene list link
         addButton(3, "PrintChecks", toggle, kFLAGS.SCENEHUNTER_PRINT_CHECKS);
-        outputText("\n\n<b>Print Checks:</b>: ");
+        outputText("\n\n<b>Print Checks:</b> ");
         if (flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS]) {
             outputText("<b><font color=\"#008000\">ENABLED</font></b>");
             outputText("\nSome failed race, dick size and other attribute checks are explicitly printed in the middle of the scene.");

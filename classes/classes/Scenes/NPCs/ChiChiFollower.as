@@ -149,8 +149,8 @@ public function WonSparringFight():void {
 	else outputText("the remaining greater demons");
 	outputText(".</i>\"\n\nYou nod, saying that she did good to. Chi Chi blushes and babbles something akin to a thank you.\n\n");
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] < 4) {
-		outputText(" She then realises what she is doing and vehemently shakes her head.\n\n");
-		outputText("\"<i>It's not like I wanted to be praised! Yeah, as if! Even after all this time, your stance is still shaky.. BAAAKA!\"</i>\"\n\n");
+		outputText("She then realises what she is doing and vehemently shakes her head.\n\n");
+		outputText("\"<i>It's not like I wanted praise you! Yeah, as if! Even after all this time, your stance is still shaky.. BAAAKA!\"</i>\"\n\n");
 		outputText("Chi Chi kicks a rock away in anger and heads back to her training ground.\n\n");
 	}
 	if (flags[kFLAGS.CHI_CHI_LVL_UP] < 5) {
