@@ -10720,7 +10720,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (player.eyes.type != Eyes.MONOEYE && changes < changeLimit && rand(3) == 0) {
             if (transformations.EyesHuman.isPresent()) {
-                outputText("[pg]");
+                outputText("[pg]You gasp in discomfort as your vision troubles and blurr for a moment. You pass your hand to feel for your face and discover to your absolute surprise you can't feel your nose ridge heck as you poke yourself in the eye and recoil back in surprise. Seems your eyes merged together into one single all encompassing eye like that of some cyclopean creature.\n");
 			transformations.EyesMonoeye.applyEffect();
             }
 			else {
@@ -10745,7 +10745,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
 		if (player.wings.type == Wings.NONE && player.lowerBody == LowerBody.HUMAN && player.lowerBody != LowerBody.GAZER && player.rearBody.type == RearBody.TENTACLE_EYESTALKS && player.statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 2 && changes < changeLimit && rand(3) == 0 && type == 1) {
-            outputText("[pg]");
+            outputText("[pg]You feel so tired you could fall on your knees but to your surprise you don't. Instead of actually hitting the ground you simply float in the air. Your legs begin to sweat and drip at high rate until they cover in some kind of oily black fluids just like those of a gazer. You are now naturally levitating.");
 			transformations.WingsLevitation.applyEffect();
             outputText("[pg]");
             transformations.LowerBodyGazer.applyEffect();
@@ -10757,7 +10757,7 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
 		if (changes < changeLimit && player.lowerBody == LowerBody.GAZER && player.arms.type == Arms.HUMAN && player.arms.type != Arms.GAZER && rand(3) == 0 && type == 1) {
-            outputText("[pg]");
+            outputText("[pg]Your arms begin to sweat and drip at high rate until they cover in some kind of oily ink black mucus. It drops from your hands down to the ground oozing like tar. You would say ew but for some reason it doesn't smell so bad, heck taking a whiff it almost smells like perfume or rather aphrodisiacs. Heck thinking on it now from a far glance it looks like you are wearing sleeved gloves. Your arms are now covered from the forearm to the digits into tar like fluids.");
 			transformations.ArmsGazer.applyEffect();
             changes++;
         }
