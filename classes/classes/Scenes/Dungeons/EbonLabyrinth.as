@@ -33,11 +33,6 @@ import classes.display.SpriteDb;
 
 public class EbonLabyrinth extends DungeonAbstractContent
 	{
-		private static const DUNGEON_EBON_LABYRINTH_0:int	= 131;
-		private static const DUNGEON_EBON_LABYRINTH_1:int	= 132;
-		private static const DUNGEON_EBON_LABYRINTH_2:int	= 133;
-		private static const DUNGEON_EBON_LABYRINTH_3:int	= 134;
-		
 		private var _cuteScene:int = 1;
 		
 		public var elDisplacerbeast:DisplacerBeastScene = new DisplacerBeastScene();
@@ -55,7 +50,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 		}
 		public function enterDungeon():void {
 			inDungeon = true;
-			dungeonLoc = 131;
+			dungeonLoc = DUNGEON_EBON_LABYRINTH_0;
 			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss);
 			player.createStatusEffect(StatusEffects.EbonLabyrinthBoss, 65, 0, 0, 0);
 			player.createStatusEffect(StatusEffects.EbonLabyrinthA, 10, 0, 0, 0);
@@ -104,7 +99,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 		public function defeatedByDarkSlimeLetHer():void {
 			SceneLib.caves.darkslimeScene.LetzRape();
 			cleanupAfterCombatTFEvent();
-			dungeonLoc = 131;
+			dungeonLoc = DUNGEON_EBON_LABYRINTH_0;
 			if (flags[kFLAGS.EBON_LABYRINTH_RECORD] < player.statusEffectv1(StatusEffects.EbonLabyrinthB)) flags[kFLAGS.EBON_LABYRINTH_RECORD] = player.statusEffectv1(StatusEffects.EbonLabyrinthB);
 			player.removeStatusEffect(StatusEffects.EbonLabyrinthB);
 			player.createStatusEffect(StatusEffects.EbonLabyrinthB, 0, 0, 0, 0);
@@ -185,7 +180,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 				outputText("You have no knowledge of what happened next but when you woke up you're at the labyrinth entrance, still alive. You can only guess after having its way with you, the Chimera had no interest in keeping you here. It seems you will have to start over.\n\n");
 				player.HP = player.maxHP();
 				//(gain 20 intakes - for goo crawling)
-				dungeonLoc = 131;
+				dungeonLoc = DUNGEON_EBON_LABYRINTH_0;
 				if (flags[kFLAGS.EBON_LABYRINTH_RECORD] < player.statusEffectv1(StatusEffects.EbonLabyrinthB)) flags[kFLAGS.EBON_LABYRINTH_RECORD] = player.statusEffectv1(StatusEffects.EbonLabyrinthB);
 				player.removeStatusEffect(StatusEffects.EbonLabyrinthB);
 				player.createStatusEffect(StatusEffects.EbonLabyrinthB, 0, 0, 0, 0);
@@ -906,7 +901,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 		
 		//Rooms
 		public function roomAAA():void {
-			dungeonLoc = 131;
+			dungeonLoc = DUNGEON_EBON_LABYRINTH_0;
 			clearOutput();
 			checkingTodayMenu();
 			if (CoC.instance.inCombat || _cuteScene == 2) return;
@@ -917,7 +912,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			dungeons.setDungeonButtonsEL(roomDDD, roomDDD, roomBBB, roomBBB, roomCCC, roomCCC);
 		}
 		public function roomBBB():void {
-			dungeonLoc = 132;
+			dungeonLoc = DUNGEON_EBON_LABYRINTH_1;
 			clearOutput();
 			checkingTodayMenu();
 			if (CoC.instance.inCombat || _cuteScene == 2) return;
@@ -928,7 +923,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			dungeons.setDungeonButtonsEL(roomCCC, roomCCC, roomAAA, roomAAA, roomDDD, roomDDD);
 		}
 		public function roomCCC():void {
-			dungeonLoc = 133;
+			dungeonLoc = DUNGEON_EBON_LABYRINTH_2;
 			clearOutput();
 			checkingTodayMenu();
 			if (CoC.instance.inCombat || _cuteScene == 2) return;
@@ -939,7 +934,7 @@ public class EbonLabyrinth extends DungeonAbstractContent
 			dungeons.setDungeonButtonsEL(roomBBB, roomBBB, roomDDD, roomDDD, roomAAA, roomAAA);
 		}
 		public function roomDDD():void {
-			dungeonLoc = 134;
+			dungeonLoc = DUNGEON_EBON_LABYRINTH_3;
 			clearOutput();
 			checkingTodayMenu();
 			if (CoC.instance.inCombat || _cuteScene == 2) return;

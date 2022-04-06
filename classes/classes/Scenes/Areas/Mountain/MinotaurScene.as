@@ -689,7 +689,7 @@ if (doSFWloss() && CoC.instance.inCombat) { //No rape in SFW mode.
 			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss1)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss1);
 			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss2)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss2);
 			minoCumAddiction(100);
-			DungeonAbstractContent.dungeonLoc = 0;
+		    DungeonAbstractContent.inDungeon = false;
 		}
 		cleanupAfterCombat();
 	}
@@ -738,7 +738,7 @@ private function getOralRapedByMinotaur():void {
 			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss1)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss1);
 			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss2)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss2);
 			minoCumAddiction(100);
-			DungeonAbstractContent.dungeonLoc = 0;
+		    DungeonAbstractContent.inDungeon = false;
 		}
 		cleanupAfterCombat();
 	}
@@ -1193,7 +1193,7 @@ private function getMinoHawtDawged():void {
 		if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss1)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss1);
 		if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss2)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss2);
 		minoCumAddiction(100);
-		DungeonAbstractContent.dungeonLoc = 0;
+		DungeonAbstractContent.inDungeon = false;
 	}
 	else minoCumAddiction(5);
 	cleanupAfterCombat();

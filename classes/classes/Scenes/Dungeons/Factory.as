@@ -17,17 +17,6 @@ use namespace CoC;
 
 	public class Factory extends DungeonAbstractContent
 	{
-		private static const DUNGEON_FACTORY_FOYER:int				= 0;
-		private static const DUNGEON_FACTORY_PUMP_ROOM:int			= 1;
-		private static const DUNGEON_FACTORY_BREAK_ROOM:int			= 2;
-		private static const DUNGEON_FACTORY_FURNACE_ROOM:int		= 3;
-		private static const DUNGEON_FACTORY_REPAIR_CLOSET:int		= 4;
-		private static const DUNGEON_FACTORY_MAIN_CHAMBER:int		= 5;
-		private static const DUNGEON_FACTORY_FOREMANS_OFFICE:int	= 6;
-		private static const DUNGEON_FACTORY_PUMP_CONTROL:int		= 7;
-		private static const DUNGEON_FACTORY_STORE_ROOM:int			= 8;
-		private static const DUNGEON_FACTORY_BATHROOM:int			= 9;
-
 		public function Factory() {}
 
 		//EVENTS
@@ -35,6 +24,7 @@ use namespace CoC;
 			clearOutput();
 			outputText(images.showImage("dungeon-entrance-factory"));
 			inDungeon = true;
+            dungeonLoc = DUNGEON_FACTORY_FOYER; //set it explicitly since I removed resets
 			//Shutdown state
 			if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2) outputText("Rounding a bend in the mountainous foothills, you stumble upon a large, rusted and eerily silent iron structure with a number of tall gray smokestacks.  A bevy of green-tinged copper pipes stem from the rear of the building, climbing up the steep mountainside toward a jagged hole in its face.  Most of these are cracked open along their seams and both the pipes and mountainside are glazed with pink tinted runoff.");
 			else if (flags[kFLAGS.FACTORY_SHUTDOWN] == 1) outputText("Rounding a bend in the mountainous foothills, you stumble upon a large, rusted and eerily silent iron structure with a number of tall gray smokestacks.  A bevy of green-tinged copper pipes stem from the rear of the building, climbing up the steep mountainside and disappearing into a hole in its face.");
@@ -1630,7 +1620,7 @@ use namespace CoC;
 
 		//ROOMS
 		public function roomLobby():void {
-			dungeonLoc = 0;
+		    inDungeon = false;
 			clearOutput();
 			outputText("<b><u>The Factory Foyer</u></b>\n");
 			outputText("The door swings shut behind you with an ominous 'creeeeeaaaaaaak' followed by a loud 'SLAM'.  Glancing around, you find yourself in some kind of stylish foyer, complete with works of art and a receptionist's desk.  Looking closer at the paintings on the wall quickly reveals their tainted and demonic nature: One appears at first to be a painting of a beautiful smiling woman, except you notice dripping tentacles coiling around the hem of her dress.  Behind the receptionist's desk, the second painting is even less discreet, openly depicting a number of imps gang-raping a vaguely familiar-looking woman.  Luckily, whatever demon is employed as the receptionist is away at the moment.  Behind the desk on the northern wall stands a secure-looking iron door.  On the western wall, is a door. A sign on the door indicates that it leads to the factory restroom.  On the eastern wall is a simple wooden door, though the color of the wood itself is far darker and redder than any of the hard woods from your homeland.  Behind you to the south is the rusty iron entry door.");
@@ -1639,7 +1629,7 @@ use namespace CoC;
 		}
 
 		public function roomBreakRoom():void {
-			dungeonLoc = 1;
+			dungeonLoc = DUNGEON_FACTORY_BREAK_ROOM;
 			clearOutput();
 			outputText("<b><u>Break Room</u></b>\n");
 			outputText("Stepping through the dark red doorway, you wander into an expansive break room. Tables surrounded by crude wooden chairs fill most of the floor space. Along the far eastern wall sits a small counter, complete with a strange ebony sculpture of a busty woman with 'Mrs. Coffee' printed on the side. Below the sculpture is a pot of steaming hot coffee, giving off an invigoratingly rich smell.");
@@ -1701,7 +1691,7 @@ use namespace CoC;
 		}
 
 		public function roomPumpRoom():void {
-			dungeonLoc = 2;
+			dungeonLoc = DUNGEON_FACTORY_PUMP_ROOM;
 			clearOutput();
 			outputText("<u><b>Pump Room</b></u>\n");
 			if(flags[kFLAGS.FACTORY_SHUTDOWN] < 1) {
@@ -1712,7 +1702,7 @@ use namespace CoC;
 		}
 
 		public function roomFurnaceRoom():void {
-			dungeonLoc = 3;
+			dungeonLoc = DUNGEON_FACTORY_FURNACE_ROOM;
 			clearOutput();
 			outputText("<b><u>Furnace Room</u></b>\n");
 			if(flags[kFLAGS.FACTORY_SHUTDOWN] <= 0) {
@@ -1740,7 +1730,7 @@ use namespace CoC;
 		}
 
 		public function roomRepairCloset():void {
-			dungeonLoc = 4;
+			dungeonLoc = DUNGEON_FACTORY_REPAIR_CLOSET;
 			clearOutput();
 			outputText("<b><u>Repair Closet</u></b>\n");
 			outputText("As you carefully slip inside the room, you note with some relief that it seems to be an empty storage closet. The room is tiny, barely 6' by 8' and almost entirely empty.  The one piece of furniture inside the closet is a simple wooden cabinet, placed against the far wall.  ");
@@ -1764,7 +1754,7 @@ use namespace CoC;
 		}
 
 		public function roomMainChamber():void {
-			dungeonLoc = 5;
+			dungeonLoc = DUNGEON_FACTORY_MAIN_CHAMBER;
 			clearOutput();
 			outputText("<b><u>Main Chamber</u></b>\n");
 			dungeons.setDungeonButtons(null, null, null, roomPumpRoom);
@@ -1784,7 +1774,7 @@ use namespace CoC;
 		}
 
 		public function roomForemanOffice():void {
-			dungeonLoc = 6;
+			dungeonLoc = DUNGEON_FACTORY_FOREMANS_OFFICE;
 			//Foreman's Office
 			clearOutput();
 			outputText("<b><u>Foreman's Office</u></b>\n");
@@ -1809,7 +1799,7 @@ use namespace CoC;
 		}
 
 		public function roomControlRoom():void {
-			dungeonLoc = 7;
+			dungeonLoc = DUNGEON_FACTORY_PUMP_CONTROL;
 			clearOutput();
 			outputText("<b><u>Pump Control Room</u></b>\n");
 			outputText("This room is little more than a closet in reality.  There is a simple set of mechanical controls on a finely crafted terminal against the far wall.  ");
@@ -1833,7 +1823,7 @@ use namespace CoC;
 		}
 
 		public function roomPremiumStorage():void {
-			dungeonLoc = 8;
+			dungeonLoc = DUNGEON_FACTORY_STORE_ROOM;
 			clearOutput();
 			outputText("<b><u>Premium Products</u></b>\n");
 			outputText("This store room is filled with a few opened crates, meant to store the various substances in the factory.  It looks as if the current overseer has allowed supplies to run low, as there is not much to be gleaned from this meager stash.\n\n");
@@ -1862,7 +1852,7 @@ use namespace CoC;
 		}
 
 		public function roomBathroom():void {
-			dungeonLoc = 9;
+			dungeonLoc = DUNGEON_FACTORY_BATHROOM;
 			clearOutput();
 			outputText("<b><u>Washroom</u></b>\n");
 			outputText("This room is fairly clean. At one of the walls, there is a row of four sinks. Opposite side, there are few bathroom stalls. Three urinals are mounted against one of the walls. You'd guess even the demons need to use the bathroom.");

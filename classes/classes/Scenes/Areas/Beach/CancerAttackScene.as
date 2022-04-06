@@ -23,7 +23,7 @@ public class CancerAttackScene extends BaseContent
 
 		public function encounter():void {
 			clearOutput();
-			var isFemale:Boolean = rand(2);
+			var isFemale:Boolean = rand(2) == 0;
 			monster = new CancerAttack(isFemale);
 			sprite();
 			if (player.lowerBody == LowerBody.CANCER) {
@@ -83,9 +83,9 @@ public class CancerAttackScene extends BaseContent
             clearOutput();
             // the scene
             if (monster.hasCock())
-                cancerMaleRape();
+                maleRape();
             else
-                cancerFemaleRape();
+                femaleRape();
             //
 			cleanupAfterCombat();
 

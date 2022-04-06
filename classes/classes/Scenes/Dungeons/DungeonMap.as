@@ -1,9 +1,11 @@
 package classes.Scenes.Dungeons {
-import classes.*;
-import classes.GlobalFlags.*;
+import classes.Scenes.Dungeons.DungeonAbstractContent;
+import classes.StatusEffects;
+import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 
-public class DungeonMap extends BaseContent
+//derived to make access easier
+public class DungeonMap extends DungeonAbstractContent
 	{
 		
 		public function DungeonMap() 
@@ -36,9 +38,9 @@ public class DungeonMap extends BaseContent
 		}
 		
 		public function chooseRoomToDisplay():void {
-			if (DungeonAbstractContent.dungeonLoc >= 0 && DungeonAbstractContent.dungeonLoc < 10) { //Factory
-				outputText("Factory, " + (DungeonAbstractContent.dungeonLoc >= 6 && DungeonAbstractContent.dungeonLoc < 9 ? "2": "1") + "F");
-				if (DungeonAbstractContent.dungeonLoc == 0) {
+			if (dungeonLoc >= DUNGEON_FACTORY_FOYER && dungeonLoc < DUNGEON_CAVE_ENTRANCE) { //Factory
+				outputText("Factory, " + (dungeonLoc >= DUNGEON_FACTORY_FOREMANS_OFFICE && dungeonLoc < DUNGEON_FACTORY_BATHROOM ? "2": "1") + "F");
+				if (dungeonLoc == DUNGEON_FACTORY_FOYER) {
 					rawOutputText("\n    [ ]    ");
 					rawOutputText("\n     |     ");
 					rawOutputText("\n[S]—[ ]—[ ]");
@@ -46,7 +48,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n[ ]—[P]—[ ]");
 					rawOutputText("\n     |     ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 1) {
+				else if (dungeonLoc == DUNGEON_FACTORY_BREAK_ROOM) {
 					rawOutputText("\n    [ ]    ");
 					rawOutputText("\n     |     ");
 					rawOutputText("\n[S]—[ ]—[ ]");
@@ -54,7 +56,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n[ ]—[ ]—[P]");
 					rawOutputText("\n     |     ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 2) {
+				else if (dungeonLoc == DUNGEON_FACTORY_PUMP_ROOM) {
 					rawOutputText("\n    [ ]    ");
 					rawOutputText("\n     |     ");
 					rawOutputText("\n[S]—[P]—[ ]");
@@ -62,7 +64,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n[ ]—[ ]—[ ]");
 					rawOutputText("\n     |     ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 3) {
+				else if (dungeonLoc == DUNGEON_FACTORY_FURNACE_ROOM) {
 					rawOutputText("\n    [ ]    ");
 					rawOutputText("\n     |     ");
 					rawOutputText("\n[S]—[ ]—[P]");
@@ -70,7 +72,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n[ ]—[ ]—[ ]");
 					rawOutputText("\n     |     ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 4) {
+				else if (dungeonLoc == DUNGEON_FACTORY_REPAIR_CLOSET) {
 					rawOutputText("\n    [P]    ");
 					rawOutputText("\n     |     ");
 					rawOutputText("\n[S]—[ ]—[ ]");
@@ -78,7 +80,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n[ ]—[ ]—[ ]");
 					rawOutputText("\n     |     ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 5) {
+				else if (dungeonLoc == DUNGEON_FACTORY_MAIN_CHAMBER) {
 					rawOutputText("\n    [ ]    ");
 					rawOutputText("\n     |     ");
 					rawOutputText("\n[P]—[ ]—[ ]");
@@ -86,22 +88,22 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n[ ]—[ ]—[ ]");
 					rawOutputText("\n     |     ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 6) {
+				else if (dungeonLoc == DUNGEON_FACTORY_FOREMANS_OFFICE) {
 					rawOutputText("\n[P]—[ ]    ");
 					findLockedDoor2();
 					rawOutputText("\n[ ]        ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 7) {
+				else if (dungeonLoc == DUNGEON_FACTORY_PUMP_CONTROL) {
 					rawOutputText("\n[S]—[P]    ");
 					findLockedDoor2();
 					rawOutputText("\n[ ]        ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 8) {
+				else if (dungeonLoc == DUNGEON_FACTORY_STORE_ROOM) {
 					rawOutputText("\n[S]—[ ]    ");
 					findLockedDoor2();
 					rawOutputText("\n[P]        ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 9) {
+				else if (dungeonLoc == DUNGEON_FACTORY_BATHROOM) {
 					rawOutputText("\n    [ ]    ");
 					rawOutputText("\n     |     ");
 					rawOutputText("\n[S]—[ ]—[ ]");
@@ -110,9 +112,9 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n     |     ");
 				}
 			}
-			else if (DungeonAbstractContent.dungeonLoc >= 10 && DungeonAbstractContent.dungeonLoc < 17) { //Zetaz's Lair
+			else if (dungeonLoc >= DUNGEON_CAVE_ENTRANCE && dungeonLoc < DUNGEON_HEL_GUARD_HALL) { //Zetaz's Lair
 				rawOutputText("Zetaz's Lair");
-				if (DungeonAbstractContent.dungeonLoc == 10) {
+				if (dungeonLoc == DUNGEON_CAVE_ENTRANCE) {
 					rawOutputText("\n    [ ]—[ ]");
 					findLockedDoor3();
 					rawOutputText("\n[ ]—[ ]—[ ]");
@@ -122,7 +124,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n    [P]    ");
 					rawOutputText("\n     |     ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 11) {
+				else if (dungeonLoc == DUNGEON_CAVE_TUNNEL) {
 					rawOutputText("\n    [ ]—[ ]");
 					findLockedDoor3();
 					rawOutputText("\n[ ]—[ ]—[ ]");
@@ -132,7 +134,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n    [ ]    ");
 					rawOutputText("\n     |     ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 12) {
+				else if (dungeonLoc == DUNGEON_CAVE_GATHERING_HALL) {
 					rawOutputText("\n    [ ]—[ ]");
 					findLockedDoor3();
 					rawOutputText("\n[ ]—[P]—[ ]");
@@ -142,7 +144,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n    [ ]    ");
 					rawOutputText("\n     |     ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 13) {
+				else if (dungeonLoc == DUNGEON_CAVE_FUNGUS_CAVERN) {
 					rawOutputText("\n    [ ]—[ ]");
 					findLockedDoor3();
 					rawOutputText("\n[P]—[ ]—[ ]");
@@ -152,7 +154,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n    [ ]    ");
 					rawOutputText("\n     |     ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 14) {
+				else if (dungeonLoc == DUNGEON_CAVE_TORTURE_ROOM) {
 					rawOutputText("\n    [ ]—[ ]");
 					findLockedDoor3();
 					rawOutputText("\n[ ]—[ ]—[P]");
@@ -162,7 +164,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n    [ ]    ");
 					rawOutputText("\n     |     ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 15) {
+				else if (dungeonLoc == DUNGEON_CAVE_SECRET_TUNNEL) {
 					rawOutputText("\n    [ ]—[P]");
 					findLockedDoor3();
 					rawOutputText("\n[ ]—[ ]—[ ]");
@@ -172,7 +174,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n    [ ]    ");
 					rawOutputText("\n     |     ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 16) {
+				else if (dungeonLoc == DUNGEON_CAVE_ZETAZ_CHAMBER) {
 					rawOutputText("\n    [P]—[ ]");
 					findLockedDoor3();
 					rawOutputText("\n[ ]—[ ]—[ ]");
@@ -183,9 +185,9 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n     |     ");
 				}
 			}
-			else if (DungeonAbstractContent.dungeonLoc >= 17 && DungeonAbstractContent.dungeonLoc < 23) { //Tower of the Phoenix
+			else if (dungeonLoc >= DUNGEON_HEL_GUARD_HALL && dungeonLoc < DUNGEON_WITCH_ENTRANCE_GATEWAY) { //Tower of the Phoenix
 				rawOutputText("Tower of the Phoenix");
-				if (DungeonAbstractContent.dungeonLoc == 17) {
+				if (dungeonLoc == DUNGEON_HEL_GUARD_HALL) {
 					rawOutputText(", 1F");
 					rawOutputText("\n    [S]    ");
 					rawOutputText("\n     |     ");
@@ -195,7 +197,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n           ");
 					rawOutputText("\n           ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 18) {
+				else if (dungeonLoc == DUNGEON_HEL_WINE_CELLAR) {
 					rawOutputText(", B1");
 					rawOutputText("\n    [S]    ");
 					rawOutputText("\n           ");
@@ -205,7 +207,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n           ");
 					rawOutputText("\n           ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 19) {
+				else if (dungeonLoc == DUNGEON_HEL_STAIR_WELL) {
 					rawOutputText(", 1F");
 					rawOutputText("\n    [P]    ");
 					rawOutputText("\n     |     ");
@@ -215,7 +217,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n           ");
 					rawOutputText("\n           ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 20) {
+				else if (dungeonLoc == DUNGEON_HEL_DUNGEON) {
 					rawOutputText(", B1");
 					rawOutputText("\n    [P]    ");
 					rawOutputText("\n           ");
@@ -225,7 +227,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n           ");
 					rawOutputText("\n           ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 21) {
+				else if (dungeonLoc == DUNGEON_HEL_MEZZANINE) {
 					rawOutputText(", 2F");
 					rawOutputText("\n    [P]    ");
 					rawOutputText("\n           ");
@@ -235,7 +237,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n           ");
 					rawOutputText("\n           ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 22) {
+				else if (dungeonLoc == DUNGEON_HEL_THRONE_ROOM) {
 					rawOutputText(", 3F");
 					rawOutputText("\n    [P]    ");
 					rawOutputText("\n           ");
@@ -246,9 +248,9 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n           ");
 				}
 			}
-			else if (DungeonAbstractContent.dungeonLoc >= 23 && DungeonAbstractContent.dungeonLoc < 39) {
+			else if (dungeonLoc >= DUNGEON_WITCH_ENTRANCE_GATEWAY && dungeonLoc < DUNGEON_HIDDEN_CAVE_ENTRANCE) {
 				rawOutputText("Cave of the Sand Witches");
-				if (DungeonAbstractContent.dungeonLoc == 23) {
+				if (dungeonLoc == DUNGEON_WITCH_ENTRANCE_GATEWAY) {
 					rawOutputText("\n        [ ]        ");
 					rawOutputText("\n         |         ");
 					rawOutputText("\n[ ] [ ] [ ] [ ]—[ ]");
@@ -258,7 +260,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n[ ] [ ] [P] [ ]—[ ]");
 					rawOutputText("\n         |         ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 24) {
+				else if (dungeonLoc == DUNGEON_WITCH_CAVERNOUS_COMMONS) {
 					rawOutputText("\n        [ ]        ");
 					rawOutputText("\n         |         ");
 					rawOutputText("\n[ ] [ ] [ ] [ ]—[ ]");
@@ -268,7 +270,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n[ ] [ ] [ ] [ ]—[ ]");
 					rawOutputText("\n         |         ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 25) {
+				else if (dungeonLoc == DUNGEON_WITCH_WEST_WARRENS_MAIN) {
 					rawOutputText("\n        [ ]        ");
 					rawOutputText("\n         |         ");
 					rawOutputText("\n[ ] [ ] [ ] [ ]—[ ]");
@@ -278,7 +280,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n[ ] [ ] [ ] [ ]—[ ]");
 					rawOutputText("\n         |         ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 26) {
+				else if (dungeonLoc == DUNGEON_WITCH_CHILDRENS_PLAYROOM) {
 					rawOutputText("\n        [ ]        ");
 					rawOutputText("\n         |         ");
 					rawOutputText("\n[ ] [P] [ ] [ ]—[ ]");
@@ -288,7 +290,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n[ ] [ ] [ ] [ ]—[ ]");
 					rawOutputText("\n         |         ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 27) {
+				else if (dungeonLoc == DUNGEON_WITCH_PREGNANT_LUST_ROOM) {
 					rawOutputText("\n        [ ]        ");
 					rawOutputText("\n         |         ");
 					rawOutputText("\n[ ] [ ] [ ] [ ]—[ ]");
@@ -298,7 +300,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n[ ] [P] [ ] [ ]—[ ]");
 					rawOutputText("\n         |         ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 28) {
+				else if (dungeonLoc == DUNGEON_WITCH_WEST_WARRENS_WEST) {
 					rawOutputText("\n        [ ]        ");
 					rawOutputText("\n         |         ");
 					rawOutputText("\n[ ] [ ] [ ] [ ]—[ ]");
@@ -308,7 +310,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n[ ] [ ] [ ] [ ]—[ ]");
 					rawOutputText("\n         |         ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 29) {
+				else if (dungeonLoc == DUNGEON_WITCH_NURSERY) {
 					rawOutputText("\n        [ ]        ");
 					rawOutputText("\n         |         ");
 					rawOutputText("\n[P] [ ] [ ] [ ]—[ ]");
@@ -318,7 +320,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n[ ] [ ] [ ] [ ]—[ ]");
 					rawOutputText("\n         |         ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 30) {
+				else if (dungeonLoc == DUNGEON_WITCH_PHARMACY) {
 					rawOutputText("\n        [ ]        ");
 					rawOutputText("\n         |         ");
 					rawOutputText("\n[ ] [ ] [ ] [ ]—[ ]");
@@ -328,7 +330,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n[P] [ ] [ ] [ ]—[ ]");
 					rawOutputText("\n         |         ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 31) {
+				else if (dungeonLoc == DUNGEON_WITCH_EAST_WARRENS_MAIN) {
 					rawOutputText("\n        [ ]        ");
 					rawOutputText("\n         |         ");
 					rawOutputText("\n[ ] [ ] [ ] [ ]—[ ]");
@@ -338,7 +340,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n[ ] [ ] [ ] [ ]—[ ]");
 					rawOutputText("\n         |         ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 32) {
+				else if (dungeonLoc == DUNGEON_WITCH_SLEEPING_CHAMBER) {
 					rawOutputText("\n        [ ]        ");
 					rawOutputText("\n         |         ");
 					rawOutputText("\n[ ] [ ] [ ] [P]—[ ]");
@@ -348,7 +350,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n[ ] [ ] [ ] [ ]—[ ]");
 					rawOutputText("\n         |         ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 33) {
+				else if (dungeonLoc == DUNGEON_WITCH_BATH_ROOM) {
 					rawOutputText("\n        [ ]        ");
 					rawOutputText("\n         |         ");
 					rawOutputText("\n[ ] [ ] [ ] [ ]—[P]");
@@ -358,7 +360,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n[ ] [ ] [ ] [ ]—[ ]");
 					rawOutputText("\n         |         ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 34) {
+				else if (dungeonLoc == DUNGEON_WITCH_EAST_WARRENS_EAST) {
 					rawOutputText("\n        [ ]        ");
 					rawOutputText("\n         |         ");
 					rawOutputText("\n[ ] [ ] [ ] [ ]—[ ]");
@@ -368,7 +370,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n[ ] [ ] [ ] [ ]—[ ]");
 					rawOutputText("\n         |         ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 35) {
+				else if (dungeonLoc == DUNGEON_WITCH_CUM_WITCH_BEDROOM) {
 					rawOutputText("\n        [ ]        ");
 					rawOutputText("\n         |         ");
 					rawOutputText("\n[ ] [ ] [ ] [ ]—[ ]");
@@ -378,7 +380,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n[ ] [ ] [ ] [ ]—[P]");
 					rawOutputText("\n         |         ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 36) {
+				else if (dungeonLoc == DUNGEON_WITCH_CUM_WITCH_OFFICE) {
 					rawOutputText("\n        [ ]        ");
 					rawOutputText("\n         |         ");
 					rawOutputText("\n[ ] [ ] [ ] [ ]—[ ]");
@@ -388,7 +390,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n[ ] [ ] [ ] [P]—[ ]");
 					rawOutputText("\n         |         ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 37) {
+				else if (dungeonLoc == DUNGEON_WITCH_SACRIFICIAL_ALTAR) {
 					rawOutputText("\n        [ ]        ");
 					rawOutputText("\n         |         ");
 					rawOutputText("\n[ ] [ ] [P] [ ]—[ ]");
@@ -398,7 +400,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n[ ] [ ] [ ] [ ]—[ ]");
 					rawOutputText("\n         |         ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 38) {
+				else if (dungeonLoc == DUNGEON_WITCH_THRONE_ROOM) {
 					rawOutputText("\n        [P]        ");
 					rawOutputText("\n         |         ");
 					rawOutputText("\n[ ] [ ] [ ] [ ]—[ ]");
@@ -409,9 +411,9 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n         |         ");
 				}
 			}
-			else if (DungeonAbstractContent.dungeonLoc >= 39 && DungeonAbstractContent.dungeonLoc < 64) { //Hidden Cave
+			else if (dungeonLoc >= DUNGEON_HIDDEN_CAVE_ENTRANCE && dungeonLoc < DUNGEON_DEN_OF_DESIRE_ENTRANCE) { //Hidden Cave
 				rawOutputText("Hidden Cave");
-				if (DungeonAbstractContent.dungeonLoc == 39) {
+				if (dungeonLoc == DUNGEON_HIDDEN_CAVE_ENTRANCE) {
 					rawOutputText(", Entrance");
 					rawOutputText("\n[ ]—[ ]                ");
 					rawOutputText("\n |                     ");
@@ -423,7 +425,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n         |           | ");
 					rawOutputText("\n    [S]—[ ]            ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 40) {
+				else if (dungeonLoc == DUNGEON_HIDDEN_CAVE_SE_UP) {
 					rawOutputText(", SE Underground Passage");
 					rawOutputText("\n[ ]—[ ]                ");
 					rawOutputText("\n |                     ");
@@ -435,7 +437,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n         |           | ");
 					rawOutputText("\n    [S]—[ ]            ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 41) {
+				else if (dungeonLoc == DUNGEON_HIDDEN_CAVE_E_UP) {
 					rawOutputText(", E Underground Passage");
 					rawOutputText("\n[ ]—[ ]                ");
 					rawOutputText("\n |                     ");
@@ -447,7 +449,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n         |           | ");
 					rawOutputText("\n    [S]—[ ]            ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 42) {
+				else if (dungeonLoc == DUNGEON_HIDDEN_CAVE_NE_UP) {
 					rawOutputText(", NE Underground Passage");
 					rawOutputText("\n[ ]—[ ]                ");
 					rawOutputText("\n |                     ");
@@ -459,7 +461,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n         |           | ");
 					rawOutputText("\n    [S]—[ ]            ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 43) {
+				else if (dungeonLoc == DUNGEON_HIDDEN_CAVE_N_UP) {
 					rawOutputText(", N Underground Passage");
 					rawOutputText("\n[ ]—[ ]                ");
 					rawOutputText("\n |                     ");
@@ -471,7 +473,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n         |           | ");
 					rawOutputText("\n    [S]—[ ]            ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 44) {
+				else if (dungeonLoc == DUNGEON_HIDDEN_CAVE_S_STAIRCASE) {
 					rawOutputText(", Stone Staircase");
 					rawOutputText("\n[ ]—[ ]                ");
 					rawOutputText("\n |                     ");
@@ -483,7 +485,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n         |           | ");
 					rawOutputText("\n    [P]—[ ]            ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 45) {
+				else if (dungeonLoc == DUNGEON_HIDDEN_CAVE_S_UP) {
 					rawOutputText(", S Underground Passage");
 					rawOutputText("\n[ ]—[ ]                ");
 					rawOutputText("\n |                     ");
@@ -495,7 +497,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n         |           | ");
 					rawOutputText("\n    [S]—[ ]            ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 46) {
+				else if (dungeonLoc == DUNGEON_HIDDEN_CAVE_S_STORAGE) {
 					rawOutputText(", Small Storage");
 					rawOutputText("\n[ ]—[ ]                ");
 					rawOutputText("\n |                     ");
@@ -507,7 +509,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n         |           | ");
 					rawOutputText("\n    [S]—[P]            ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 47) {
+				else if (dungeonLoc == DUNGEON_HIDDEN_CAVE_NW_UP) {
 					rawOutputText(", NW Underground Passage");
 					rawOutputText("\n[ ]—[ ]                ");
 					rawOutputText("\n |                     ");
@@ -519,7 +521,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n         |           | ");
 					rawOutputText("\n    [S]—[ ]            ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 48) {
+				else if (dungeonLoc == DUNGEON_HIDDEN_CAVE_W_UP) {
 					rawOutputText(", W Underground Passage");
 					rawOutputText("\n[ ]—[ ]                ");
 					rawOutputText("\n |                     ");
@@ -531,7 +533,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n         |           | ");
 					rawOutputText("\n    [S]—[ ]            ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 49) {
+				else if (dungeonLoc == DUNGEON_HIDDEN_CAVE_SW_UP) {
 					rawOutputText(", SW Underground Passage");
 					rawOutputText("\n[ ]—[ ]                ");
 					rawOutputText("\n |                     ");
@@ -543,7 +545,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n         |           | ");
 					rawOutputText("\n    [S]—[ ]            ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 50) {
+				else if (dungeonLoc == DUNGEON_HIDDEN_CAVE_NARROW_T_E) {
 					rawOutputText(", Narrow Tunnel (E)");
 					rawOutputText("\n[ ]—[ ]                ");
 					rawOutputText("\n |                     ");
@@ -555,7 +557,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n         |           | ");
 					rawOutputText("\n    [S]—[ ]            ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 51) {
+				else if (dungeonLoc == DUNGEON_HIDDEN_CAVE_NARROW_T  ) {
 					rawOutputText(", Narrow Tunnel");
 					rawOutputText("\n[ ]—[ ]                ");
 					rawOutputText("\n |                     ");
@@ -567,7 +569,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n         |           | ");
 					rawOutputText("\n    [S]—[ ]            ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 52) {
+				else if (dungeonLoc == DUNGEON_HIDDEN_CAVE_NARROW_T_N) {
 					rawOutputText(", Narrow Tunnel (N)");
 					rawOutputText("\n[ ]—[ ]                ");
 					rawOutputText("\n |                     ");
@@ -579,7 +581,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n         |           | ");
 					rawOutputText("\n    [S]—[ ]            ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 53) {
+				else if (dungeonLoc == DUNGEON_HIDDEN_CAVE_L_STORAGE_W) {
 					rawOutputText(", Large Storage (W)");
 					rawOutputText("\n[P]—[ ]                ");
 					rawOutputText("\n |                     ");
@@ -591,7 +593,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n         |           | ");
 					rawOutputText("\n    [S]—[ ]            ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 54) {
+				else if (dungeonLoc == DUNGEON_HIDDEN_CAVE_L_STORAGE_E) {
 					rawOutputText(", Large Storage (E)");
 					rawOutputText("\n[ ]—[P]                ");
 					rawOutputText("\n |                     ");
@@ -604,31 +606,31 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n    [S]—[ ]            ");
 				}
 				else if (flags[kFLAGS.HIDDEN_CAVE_2ND_FLOOR] < 1) {
-					if (DungeonAbstractContent.dungeonLoc == 55) {
+					if (dungeonLoc == DUNGEON_HIDDEN_CAVE_S_STAIRCASE_B) {
 						rawOutputText(", Stone Staircase Basement");
 						rawOutputText("\n[ ]—[ ]—[ ]");
 						rawOutputText("\n |       | ");
 						rawOutputText("\n[ ]     [P]");
 					}
-					else if (DungeonAbstractContent.dungeonLoc == 56) {
+					else if (dungeonLoc == DUNGEON_HIDDEN_CAVE_TUNNEL_00) {
 						rawOutputText(", Tunnel");
 						rawOutputText("\n[ ]—[ ]—[P]");
 						rawOutputText("\n |       | ");
 						rawOutputText("\n[ ]     [S]");
 					}
-					else if (DungeonAbstractContent.dungeonLoc == 57) {
+					else if (dungeonLoc == DUNGEON_HIDDEN_CAVE_TUNNEL_01) {
 						rawOutputText(", Tunnel");
 						rawOutputText("\n[ ]—[P]—[ ]");
 						rawOutputText("\n |       | ");
 						rawOutputText("\n[ ]     [S]");
 					}
-					else if (DungeonAbstractContent.dungeonLoc == 58) {
+					else if (dungeonLoc == DUNGEON_HIDDEN_CAVE_TUNNEL_02) {
 						rawOutputText(", Tunnel");
 						rawOutputText("\n[P]—[ ]—[ ]");
 						rawOutputText("\n |       | ");
 						rawOutputText("\n[ ]     [S]");
 					}
-					else if (DungeonAbstractContent.dungeonLoc == 59) {
+					else if (dungeonLoc == DUNGEON_HIDDEN_CAVE_TEDS_LAIR) {
 						rawOutputText(", Ted's Lair");
 						rawOutputText("\n[ ]—[ ]—[ ]");
 						rawOutputText("\n |       | ");
@@ -636,7 +638,7 @@ public class DungeonMap extends BaseContent
 					}
 				}
 				else if (flags[kFLAGS.HIDDEN_CAVE_2ND_FLOOR] > 0) {
-					if (DungeonAbstractContent.dungeonLoc == 55) {
+					if (dungeonLoc == DUNGEON_HIDDEN_CAVE_S_STAIRCASE_B) {
 						rawOutputText(", Stone Staircase Basement");
 						rawOutputText("\n    [ ]    ");
 						rawOutputText("\n     |     ");
@@ -646,7 +648,7 @@ public class DungeonMap extends BaseContent
 						rawOutputText("\n |       | ");
 						rawOutputText("\n[ ]     [P]");
 					}
-					else if (DungeonAbstractContent.dungeonLoc == 56) {
+					else if (dungeonLoc == DUNGEON_HIDDEN_CAVE_TUNNEL_00) {
 						rawOutputText(", Tunnel");
 						rawOutputText("\n    [ ]    ");
 						rawOutputText("\n     |     ");
@@ -656,7 +658,7 @@ public class DungeonMap extends BaseContent
 						rawOutputText("\n |       | ");
 						rawOutputText("\n[ ]     [S]");
 					}
-					else if (DungeonAbstractContent.dungeonLoc == 57) {
+					else if (dungeonLoc == DUNGEON_HIDDEN_CAVE_TUNNEL_01) {
 						rawOutputText(", Tunnel");
 						rawOutputText("\n    [ ]    ");
 						rawOutputText("\n     |     ");
@@ -666,7 +668,7 @@ public class DungeonMap extends BaseContent
 						rawOutputText("\n |       | ");
 						rawOutputText("\n[ ]     [S]");
 					}
-					else if (DungeonAbstractContent.dungeonLoc == 58) {
+					else if (dungeonLoc == DUNGEON_HIDDEN_CAVE_TUNNEL_02) {
 						rawOutputText(", Tunnel");
 						rawOutputText("\n    [ ]    ");
 						rawOutputText("\n     |     ");
@@ -676,7 +678,7 @@ public class DungeonMap extends BaseContent
 						rawOutputText("\n |       | ");
 						rawOutputText("\n[ ]     [S]");
 					}
-					else if (DungeonAbstractContent.dungeonLoc == 59) {
+					else if (dungeonLoc == DUNGEON_HIDDEN_CAVE_TEDS_LAIR) {
 						rawOutputText(", Ted's Lair");
 						rawOutputText("\n    [ ]    ");
 						rawOutputText("\n     |     ");
@@ -686,7 +688,7 @@ public class DungeonMap extends BaseContent
 						rawOutputText("\n |       | ");
 						rawOutputText("\n[P]     [S]");
 					}
-					else if (DungeonAbstractContent.dungeonLoc == 60) {
+					else if (dungeonLoc == DUNGEON_HIDDEN_CAVE_SMALL_CAVE_W) {
 						rawOutputText(", Small Cave (W)");
 						rawOutputText("\n    [ ]    ");
 						rawOutputText("\n     |     ");
@@ -696,7 +698,7 @@ public class DungeonMap extends BaseContent
 						rawOutputText("\n |       | ");
 						rawOutputText("\n[ ]     [S]");
 					}
-					else if (DungeonAbstractContent.dungeonLoc == 61) {
+					else if (dungeonLoc == DUNGEON_HIDDEN_CAVE_MEDIUM_CAVE) {
 						rawOutputText(", Medium Cave");
 						rawOutputText("\n    [ ]    ");
 						rawOutputText("\n     |     ");
@@ -706,7 +708,7 @@ public class DungeonMap extends BaseContent
 						rawOutputText("\n |       | ");
 						rawOutputText("\n[ ]     [S]");
 					}
-					else if (DungeonAbstractContent.dungeonLoc == 62) {
+					else if (dungeonLoc == DUNGEON_HIDDEN_CAVE_SMALL_CAVE_E) {
 						rawOutputText(", Small Cave (E)");
 						rawOutputText("\n    [ ]    ");
 						rawOutputText("\n     |     ");
@@ -716,7 +718,7 @@ public class DungeonMap extends BaseContent
 						rawOutputText("\n |       | ");
 						rawOutputText("\n[ ]     [S]");
 					}
-					else if (DungeonAbstractContent.dungeonLoc == 63) {
+					else if (dungeonLoc == DUNGEON_HIDDEN_CAVE_SMALL_CAVE_N) {
 						rawOutputText(", Small Cave (N)");
 						rawOutputText("\n    [P]    ");
 						rawOutputText("\n     |     ");
@@ -728,9 +730,9 @@ public class DungeonMap extends BaseContent
 					}
 				}
 			}
-			else if (DungeonAbstractContent.dungeonLoc >= 64 && DungeonAbstractContent.dungeonLoc < 68) { //Den of Desire
+			else if (dungeonLoc >= DUNGEON_DEN_OF_DESIRE_ENTRANCE && dungeonLoc < DUNGEON_RIVER_FLOOR_01_ROOM_01) { //Den of Desire
 				rawOutputText("Den of Desire");
-				if (DungeonAbstractContent.dungeonLoc == 64) {
+				if (dungeonLoc == DUNGEON_DEN_OF_DESIRE_ENTRANCE) {
 					rawOutputText(", Entrance");
 					rawOutputText("\n    [ ]    ");
 					rawOutputText("\n     |     ");
@@ -741,7 +743,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n    [P]    ");
 					rawOutputText("\n     |     ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 65) {
+				else if (dungeonLoc == DUNGEON_DEN_OF_DESIRE_GREAT_HALL_AREA) {
 					rawOutputText(", Great Hall");
 					rawOutputText("\n    [ ]    ");
 					rawOutputText("\n     |     ");
@@ -752,7 +754,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n    [ ]    ");
 					rawOutputText("\n     |     ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 66) {
+				else if (dungeonLoc == DUNGEON_DEN_OF_DESIRE_LABORATORY) {
 					rawOutputText(", Laboratory");
 					rawOutputText("\n    [ ]    ");
 					rawOutputText("\n     |     ");
@@ -763,7 +765,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n    [ ]    ");
 					rawOutputText("\n     |     ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 67) {
+				else if (dungeonLoc == DUNGEON_DEN_OF_DESIRE_HERO_SLAYER_OMNIBUS) {
 					rawOutputText(", Hero slayer omnibus room");
 					rawOutputText("\n    [P]    ");
 					rawOutputText("\n     |     ");
@@ -775,9 +777,9 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n     |     ");
 				}
 			}
-			else if (DungeonAbstractContent.dungeonLoc >= 68 && DungeonAbstractContent.dungeonLoc < 88) { //River Dungeon: Floor 1
+			else if (dungeonLoc >= DUNGEON_RIVER_FLOOR_01_ROOM_01 && dungeonLoc < DUNGEON_ANZU_OUTSIDE) { //River Dungeon: Floor 1
 				rawOutputText("River Dungeon");
-				if (DungeonAbstractContent.dungeonLoc == 68) {
+				if (dungeonLoc == DUNGEON_RIVER_FLOOR_01_ROOM_01) {
 					rawOutputText(", Floor 1");
 					rawOutputText("\n        [ ]    ");
 					rawOutputText("\n |       |     ");
@@ -787,7 +789,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n     |       | ");
 					rawOutputText("\n[P]-[ ]     [S]");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 69) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_01_ROOM_02) {
 					rawOutputText(", Floor 1");
 					rawOutputText("\n        [ ]    ");
 					rawOutputText("\n |       |     ");
@@ -797,7 +799,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n     |       | ");
 					rawOutputText("\n[S]-[P]     [S]");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 70) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_01_ROOM_03) {
 					rawOutputText(", Floor 1");
 					rawOutputText("\n        [ ]    ");
 					rawOutputText("\n |       |     ");
@@ -807,7 +809,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n     |       | ");
 					rawOutputText("\n[S]-[ ]     [S]");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 71) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_01_ROOM_04) {
 					rawOutputText(", Floor 1");
 					rawOutputText("\n        [ ]    ");
 					rawOutputText("\n |       |     ");
@@ -817,7 +819,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n     |       | ");
 					rawOutputText("\n[S]-[ ]     [S]");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 72) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_01_ROOM_05) {
 					rawOutputText(", Floor 1");
 					rawOutputText("\n        [ ]    ");
 					rawOutputText("\n |       |     ");
@@ -827,7 +829,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n     |       | ");
 					rawOutputText("\n[S]-[ ]     [S]");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 73) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_01_ROOM_06) {
 					rawOutputText(", Floor 1");
 					rawOutputText("\n        [ ]    ");
 					rawOutputText("\n |       |     ");
@@ -837,7 +839,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n     |       | ");
 					rawOutputText("\n[S]-[ ]     [P]");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 74) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_01_ROOM_07) {
 					rawOutputText(", Floor 1");
 					rawOutputText("\n        [ ]    ");
 					rawOutputText("\n |       |     ");
@@ -847,7 +849,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n     |       | ");
 					rawOutputText("\n[S]-[ ]     [S]");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 75) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_01_ROOM_08) {
 					rawOutputText(", Floor 1");
 					rawOutputText("\n        [ ]    ");
 					rawOutputText("\n |       |     ");
@@ -857,7 +859,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n     |       | ");
 					rawOutputText("\n[S]-[ ]     [S]");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 76) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_01_ROOM_09) {
 					rawOutputText(", Floor 1");
 					rawOutputText("\n        [ ]    ");
 					rawOutputText("\n |       |     ");
@@ -867,7 +869,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n     |       | ");
 					rawOutputText("\n[S]-[ ]     [S]");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 77) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_01_ROOM_10) {
 					rawOutputText(", Floor 1");
 					rawOutputText("\n        [P]    ");
 					rawOutputText("\n |       |     ");
@@ -877,7 +879,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n     |       | ");
 					rawOutputText("\n[S]-[ ]     [S]");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 78) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_01_ROOM_11) {
 					rawOutputText(", Floor 1");
 					rawOutputText("\n    [ ]    ");
 					rawOutputText("\n     |     ");
@@ -886,7 +888,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n        [P]");
 					rawOutputText("\n         | ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 79) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_01_ROOM_12) {
 					rawOutputText(", Floor 1");
 					rawOutputText("\n    [ ]    ");
 					rawOutputText("\n     |     ");
@@ -895,7 +897,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n        [ ]");
 					rawOutputText("\n         | ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 80) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_01_ROOM_13) {
 					rawOutputText(", Floor 1");
 					rawOutputText("\n    [ ]    ");
 					rawOutputText("\n     |     ");
@@ -904,7 +906,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n        [ ]");
 					rawOutputText("\n         | ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 81) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_01_ROOM_14) {
 					rawOutputText(", Floor 1");
 					rawOutputText("\n    [ ]    ");
 					rawOutputText("\n     |     ");
@@ -913,7 +915,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n        [ ]");
 					rawOutputText("\n         | ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 82) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_01_ROOM_15) {
 					rawOutputText(", Floor 1");
 					rawOutputText("\n    [P]    ");
 					rawOutputText("\n     |     ");
@@ -922,7 +924,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n        [ ]");
 					rawOutputText("\n         | ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 83) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_01_ROOM_16) {
 					rawOutputText(", Floor 1");
 					rawOutputText("\n    [ ]    ");
 					rawOutputText("\n     |     ");
@@ -931,7 +933,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n[P]        ");
 					rawOutputText("\n |         ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 84) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_01_ROOM_17) {
 					rawOutputText(", Floor 1");
 					rawOutputText("\n    [ ]    ");
 					rawOutputText("\n     |     ");
@@ -940,7 +942,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n[ ]        ");
 					rawOutputText("\n |         ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 85) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_01_ROOM_18) {
 					rawOutputText(", Floor 1");
 					rawOutputText("\n    [ ]    ");
 					rawOutputText("\n     |     ");
@@ -949,7 +951,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n[ ]        ");
 					rawOutputText("\n |         ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 86) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_01_ROOM_19) {
 					rawOutputText(", Floor 1");
 					rawOutputText("\n    [ ]    ");
 					rawOutputText("\n     |     ");
@@ -958,7 +960,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n[ ]        ");
 					rawOutputText("\n |         ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 87) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_01_ROOM_20) {
 					rawOutputText(", Floor 1");
 					rawOutputText("\n    [P]    ");
 					rawOutputText("\n     |     ");
@@ -968,9 +970,9 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |         ");
 				}
 			}
-			else if (DungeonAbstractContent.dungeonLoc >= 88 && DungeonAbstractContent.dungeonLoc < 104) { //Anzu's Palace
+			else if (dungeonLoc >= DUNGEON_ANZU_OUTSIDE && dungeonLoc < DUNGEON_RIVER_FLOOR_02_ROOM_01) { //Anzu's Palace
 				rawOutputText("Anzu's Palace");
-				if (DungeonAbstractContent.dungeonLoc == 88) {
+				if (dungeonLoc == DUNGEON_ANZU_OUTSIDE) {
 					rawOutputText(", Palace Grounds");
 					rawOutputText("\n[ ]     [ ]");
 					rawOutputText("\n |       | ");
@@ -979,7 +981,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n    [P]    ");
 					rawOutputText("\n     |     ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 89) {
+				else if (dungeonLoc == DUNGEON_ANZU_HALL_FLOOR1) {
 					rawOutputText(", Hall, Floor 1");
 					rawOutputText("\n[ ]     [ ]");
 					rawOutputText("\n |       | ");
@@ -988,7 +990,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n    [ ]    ");
 					rawOutputText("\n     |     ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 90) {
+				else if (dungeonLoc == DUNGEON_ANZU_LIVING_ROOM) {
 					rawOutputText(", Living Room");
 					rawOutputText("\n[ ]     [ ]");
 					rawOutputText("\n |       | ");
@@ -997,7 +999,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n    [ ]    ");
 					rawOutputText("\n     |     ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 91) {
+				else if (dungeonLoc == DUNGEON_ANZU_BATHROOM) {
 					rawOutputText(", Bathroom");
 					rawOutputText("\n[P]     [ ]");
 					rawOutputText("\n |       | ");
@@ -1006,7 +1008,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n    [ ]    ");
 					rawOutputText("\n     |     ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 92) {
+				else if (dungeonLoc == DUNGEON_ANZU_DINING_ROOM) {
 					rawOutputText(", Dining Room");
 					rawOutputText("\n[ ]     [ ]");
 					rawOutputText("\n |       | ");
@@ -1015,7 +1017,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n    [ ]    ");
 					rawOutputText("\n     |     ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 93) {
+				else if (dungeonLoc == DUNGEON_ANZU_KITCHEN) {
 					rawOutputText(", Kitchen");
 					rawOutputText("\n[ ]     [P]");
 					rawOutputText("\n |       | ");
@@ -1024,70 +1026,70 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n    [ ]    ");
 					rawOutputText("\n     |     ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 94) {
+				else if (dungeonLoc == DUNGEON_ANZU_HALL_FLOOR2) {
 					rawOutputText(", Hall, Floor 2");
 					rawOutputText("\n    [ ]    ");
 					rawOutputText("\n     |     ");
 					rawOutputText("\n[ ]—[P]—[ ]");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 95) {
+				else if (dungeonLoc == DUNGEON_ANZU_BEDROOM) {
 					rawOutputText(", Bedroom");
 					rawOutputText("\n    [ ]    ");
 					rawOutputText("\n     |     ");
 					rawOutputText("\n[P]—[ ]—[ ]");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 96) {
+				else if (dungeonLoc == DUNGEON_ANZU_LIBRARY) {
 					rawOutputText(", Library");
 					rawOutputText("\n    [ ]    ");
 					rawOutputText("\n     |     ");
 					rawOutputText("\n[ ]—[ ]—[P]");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 97) {
+				else if (dungeonLoc == DUNGEON_ANZU_MULTIUSE_ROOM) {
 					rawOutputText(", Multi-use Room");
 					rawOutputText("\n    [P]    ");
 					rawOutputText("\n     |     ");
 					rawOutputText("\n[ ]—[ ]—[ ]");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 98) {
+				else if (dungeonLoc == DUNGEON_ANZU_HALL_FLOOR3) {
 					rawOutputText(", Hall, Floor 3");
 					rawOutputText("\n           ");
 					rawOutputText("\n[ ]—[P]—[ ]");
 					rawOutputText("\n           ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 99) {
+				else if (dungeonLoc == DUNGEON_ANZU_PALACE_VAULTS) {
 					rawOutputText(", Vault");
 					rawOutputText("\n           ");
 					rawOutputText("\n[P]—[ ]—[ ]");
 					rawOutputText("\n           ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 100) {
+				else if (dungeonLoc == DUNGEON_ANZU_ALCHEMY_ROOM) {
 					rawOutputText(", Alchemy Room");
 					rawOutputText("\n           ");
 					rawOutputText("\n[ ]—[ ]—[P]");
 					rawOutputText("\n           ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 101) {
+				else if (dungeonLoc == DUNGEON_ANZU_ROOF) {
 					rawOutputText(", Roof");
 					rawOutputText("\n           ");
 					rawOutputText("\n    [P]    ");
 					rawOutputText("\n           ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 102) {
+				else if (dungeonLoc == DUNGEON_ANZU_BASEMENT) {
 					rawOutputText(", Basement");
 					rawOutputText("\n           ");
 					rawOutputText("\n[ ]—[P]    ");
 					rawOutputText("\n           ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 103) {
+				else if (dungeonLoc == DUNGEON_ANZU_ARMORY) {
 					rawOutputText(", Armory");
 					rawOutputText("\n           ");
 					rawOutputText("\n[P]—[ ]    ");
 					rawOutputText("\n           ");
 				}
 			}
-			else if (DungeonAbstractContent.dungeonLoc >= 104 && DungeonAbstractContent.dungeonLoc < 131) { //River Dungeon: Floor 2
+			else if (dungeonLoc >= DUNGEON_RIVER_FLOOR_02_ROOM_01 && dungeonLoc < DUNGEON_EBON_LABYRINTH_0) { //River Dungeon: Floor 2
 				rawOutputText("River Dungeon");
-				if (DungeonAbstractContent.dungeonLoc == 104) {
+				if (dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_01) {
 					rawOutputText(", Floor 2");
 					rawOutputText("\n            [ ]-   ");
 					rawOutputText("\n |           |     ");
@@ -1099,7 +1101,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n     |           | ");
 					rawOutputText("\n   -[ ]            ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 105) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_02) {
 					rawOutputText(", Floor 2");
 					rawOutputText("\n            [ ]-   ");
 					rawOutputText("\n |           |     ");
@@ -1111,7 +1113,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n     |           | ");
 					rawOutputText("\n   -[ ]            ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 106) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_03) {
 					rawOutputText(", Floor 2");
 					rawOutputText("\n            [ ]-   ");
 					rawOutputText("\n |           |     ");
@@ -1123,7 +1125,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n     |           | ");
 					rawOutputText("\n   -[P]            ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 107) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_04) {
 					rawOutputText(", Floor 2");
 					rawOutputText("\n            [ ]-   ");
 					rawOutputText("\n |           |     ");
@@ -1135,7 +1137,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n     |           | ");
 					rawOutputText("\n   -[ ]            ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 108) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_05) {
 					rawOutputText(", Floor 2");
 					rawOutputText("\n            [ ]-   ");
 					rawOutputText("\n |           |     ");
@@ -1147,7 +1149,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n     |           | ");
 					rawOutputText("\n   -[ ]            ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 109) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_06) {
 					rawOutputText(", Floor 2");
 					rawOutputText("\n            [ ]-   ");
 					rawOutputText("\n |           |     ");
@@ -1159,7 +1161,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n     |           | ");
 					rawOutputText("\n   -[ ]            ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 110) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_07) {
 					rawOutputText(", Floor 2");
 					rawOutputText("\n            [ ]-   ");
 					rawOutputText("\n |           |     ");
@@ -1171,7 +1173,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n     |           | ");
 					rawOutputText("\n   -[ ]            ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 111) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_08) {
 					rawOutputText(", Floor 2");
 					rawOutputText("\n            [ ]-   ");
 					rawOutputText("\n |           |     ");
@@ -1183,7 +1185,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n     |           | ");
 					rawOutputText("\n   -[ ]            ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 112) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_09) {
 					rawOutputText(", Floor 2");
 					rawOutputText("\n            [ ]-   ");
 					rawOutputText("\n |           |     ");
@@ -1195,7 +1197,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n     |           | ");
 					rawOutputText("\n   -[ ]            ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 113) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_10) {
 					rawOutputText(", Floor 2");
 					rawOutputText("\n            [ ]-   ");
 					rawOutputText("\n |           |     ");
@@ -1207,7 +1209,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n     |           | ");
 					rawOutputText("\n   -[ ]            ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 114) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_11) {
 					rawOutputText(", Floor 2");
 					rawOutputText("\n            [ ]-   ");
 					rawOutputText("\n |           |     ");
@@ -1219,7 +1221,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n     |           | ");
 					rawOutputText("\n   -[ ]            ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 115) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_12) {
 					rawOutputText(", Floor 2");
 					rawOutputText("\n            [ ]-   ");
 					rawOutputText("\n |           |     ");
@@ -1231,7 +1233,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n     |           | ");
 					rawOutputText("\n   -[ ]            ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 116) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_13) {
 					rawOutputText(", Floor 2");
 					rawOutputText("\n            [P]-   ");
 					rawOutputText("\n |           |     ");
@@ -1243,7 +1245,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n     |           | ");
 					rawOutputText("\n   -[ ]            ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 117) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_14) {
 					rawOutputText(", Floor 2");
 					rawOutputText("\n            [ ]-   ");
 					rawOutputText("\n |           |     ");
@@ -1255,7 +1257,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n     |           | ");
 					rawOutputText("\n   -[ ]            ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 118) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_15) {
 					rawOutputText(", Floor 2");
 					rawOutputText("\n            [ ]-   ");
 					rawOutputText("\n |           |     ");
@@ -1267,82 +1269,82 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n     |           | ");
 					rawOutputText("\n   -[ ]            ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 119) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_16) {
 					rawOutputText(", Floor 2");
 					rawOutputText("\n[ ]—[P]");
 					rawOutputText("\n |   | ");
 					rawOutputText("\n[ ]    ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 120) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_17) {
 					rawOutputText(", Floor 2");
 					rawOutputText("\n[P]—[ ]");
 					rawOutputText("\n |   | ");
 					rawOutputText("\n[ ]    ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 121) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_18) {
 					rawOutputText(", Floor 2");
 					rawOutputText("\n[ ]—[ ]");
 					rawOutputText("\n |   | ");
 					rawOutputText("\n[P]    ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 122) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_19) {
 					rawOutputText(", Floor 2");
 					rawOutputText("\n[ ]—[ ]");
 					rawOutputText("\n     | ");
 					rawOutputText("\n   —[P]");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 123) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_20) {
 					rawOutputText(", Floor 2");
 					rawOutputText("\n[ ]—[P]");
 					rawOutputText("\n     | ");
 					rawOutputText("\n   —[ ]");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 124) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_21) {
 					rawOutputText(", Floor 2");
 					rawOutputText("\n[P]—[ ]");
 					rawOutputText("\n     | ");
 					rawOutputText("\n   —[ ]");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 125) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_22) {
 					rawOutputText(", Floor 2");
 					rawOutputText("\n    [ ]");
 					rawOutputText("\n |   | ");
 					rawOutputText("\n[P]—[ ]");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 126) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_23) {
 					rawOutputText(", Floor 2");
 					rawOutputText("\n    [ ]");
 					rawOutputText("\n |   | ");
 					rawOutputText("\n[ ]—[P]");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 127) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_24) {
 					rawOutputText(", Floor 2");
 					rawOutputText("\n    [P]");
 					rawOutputText("\n |   | ");
 					rawOutputText("\n[ ]—[ ]");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 128) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_25) {
 					rawOutputText(", Floor 2");
 					rawOutputText("\n[P]—   ");
 					rawOutputText("\n |     ");
 					rawOutputText("\n[ ]—[ ]");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 129) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_26) {
 					rawOutputText(", Floor 2");
 					rawOutputText("\n[ ]—   ");
 					rawOutputText("\n |     ");
 					rawOutputText("\n[P]—[ ]");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 130) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_27) {
 					rawOutputText(", Floor 2");
 					rawOutputText("\n[ ]—   ");
 					rawOutputText("\n |     ");
 					rawOutputText("\n[ ]—[P]");
 				}
 			}
-			else if (DungeonAbstractContent.dungeonLoc >= 131 && DungeonAbstractContent.dungeonLoc < 135) { //Ebon Labyrinth
+			else if (dungeonLoc >= DUNGEON_EBON_LABYRINTH_0 && dungeonLoc < DUNGEON_RIVER_FLOOR_03_ROOM_01) { //Ebon Labyrinth
 				rawOutputText("Ebon Labyrinth");
-				if (DungeonAbstractContent.dungeonLoc == 131) {
+				if (dungeonLoc == DUNGEON_EBON_LABYRINTH_0) {
 					rawOutputText(", Corridor");
 					rawOutputText("\n   |   |   ");
 					rawOutputText("\n —[P]—[ ]— ");
@@ -1350,7 +1352,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n —[ ]—[ ]— ");
 					rawOutputText("\n   |   |   ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 132) {
+				else if (dungeonLoc == DUNGEON_EBON_LABYRINTH_1) {
 					rawOutputText(", Corridor");
 					rawOutputText("\n   |   |   ");
 					rawOutputText("\n —[ ]—[P]— ");
@@ -1358,7 +1360,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n —[ ]—[ ]— ");
 					rawOutputText("\n   |   |   ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 133) {
+				else if (dungeonLoc == DUNGEON_EBON_LABYRINTH_2) {
 					rawOutputText(", Corridor");
 					rawOutputText("\n   |   |   ");
 					rawOutputText("\n —[ ]—[ ]— ");
@@ -1366,7 +1368,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n —[ ]—[P]— ");
 					rawOutputText("\n   |   |   ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 134) {
+				else if (dungeonLoc == DUNGEON_EBON_LABYRINTH_3) {
 					rawOutputText(", Corridor");
 					rawOutputText("\n   |   |   ");
 					rawOutputText("\n —[ ]—[ ]— ");
@@ -1375,9 +1377,9 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n   |   |   ");
 				}
 			}
-			else if (DungeonAbstractContent.dungeonLoc >= 135 && DungeonAbstractContent.dungeonLoc < 169) { //River Dungeon: Floor 3
+			else if (dungeonLoc >= DUNGEON_RIVER_FLOOR_03_ROOM_01 && dungeonLoc < DUNGEON_BEE_HIVE_1) { //River Dungeon: Floor 3
 				rawOutputText("River Dungeon");
-				if (DungeonAbstractContent.dungeonLoc == 135) {
+				if (dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_01) {
 					rawOutputText(", Floor 3");
 					rawOutputText("\n                [P]        ");
 					rawOutputText("\n         |       |         ");
@@ -1389,7 +1391,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |       |       |         ");
 					rawOutputText("\n[S]     [ ]-[ ]-[ ]-[ ]    ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 136) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_02) {
 					rawOutputText(", Floor 3");
 					rawOutputText("\n                [S]        ");
 					rawOutputText("\n         |       |         ");
@@ -1401,7 +1403,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |       |       |         ");
 					rawOutputText("\n[S]     [ ]-[ ]-[ ]-[ ]    ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 137) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_03) {
 					rawOutputText(", Floor 3");
 					rawOutputText("\n                [S]        ");
 					rawOutputText("\n         |       |         ");
@@ -1413,7 +1415,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |       |       |         ");
 					rawOutputText("\n[S]     [ ]-[ ]-[ ]-[ ]    ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 138) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_04) {
 					rawOutputText(", Floor 3");
 					rawOutputText("\n                [S]        ");
 					rawOutputText("\n         |       |         ");
@@ -1425,7 +1427,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |       |       |         ");
 					rawOutputText("\n[S]     [ ]-[ ]-[ ]-[ ]    ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 139) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_05) {
 					rawOutputText(", Floor 3");
 					rawOutputText("\n                [S]        ");
 					rawOutputText("\n         |       |         ");
@@ -1437,7 +1439,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |       |       |         ");
 					rawOutputText("\n[S]     [ ]-[ ]-[ ]-[ ]    ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 140) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_06) {
 					rawOutputText(", Floor 3");
 					rawOutputText("\n                [S]        ");
 					rawOutputText("\n         |       |         ");
@@ -1449,7 +1451,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |       |       |         ");
 					rawOutputText("\n[S]     [ ]-[ ]-[ ]-[ ]    ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 141) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_07) {
 					rawOutputText(", Floor 3");
 					rawOutputText("\n                [S]        ");
 					rawOutputText("\n         |       |         ");
@@ -1461,7 +1463,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |       |       |         ");
 					rawOutputText("\n[S]     [ ]-[ ]-[ ]-[ ]    ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 142) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_08) {
 					rawOutputText(", Floor 3");
 					rawOutputText("\n                [S]        ");
 					rawOutputText("\n         |       |         ");
@@ -1473,7 +1475,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |       |       |         ");
 					rawOutputText("\n[S]     [ ]-[ ]-[ ]-[ ]    ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 143) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_09) {
 					rawOutputText(", Floor 3");
 					rawOutputText("\n                [S]        ");
 					rawOutputText("\n         |       |         ");
@@ -1485,7 +1487,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |       |       |         ");
 					rawOutputText("\n[S]     [ ]-[ ]-[ ]-[ ]    ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 144) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_10) {
 					rawOutputText(", Floor 3");
 					rawOutputText("\n                [S]        ");
 					rawOutputText("\n         |       |         ");
@@ -1497,7 +1499,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |       |       |         ");
 					rawOutputText("\n[S]     [ ]-[ ]-[ ]-[ ]    ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 145) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_11) {
 					rawOutputText(", Floor 3");
 					rawOutputText("\n                [S]        ");
 					rawOutputText("\n         |       |         ");
@@ -1509,7 +1511,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |       |       |         ");
 					rawOutputText("\n[S]     [ ]-[ ]-[ ]-[ ]    ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 146) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_12) {
 					rawOutputText(", Floor 3");
 					rawOutputText("\n                [S]        ");
 					rawOutputText("\n         |       |         ");
@@ -1521,7 +1523,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |       |       |         ");
 					rawOutputText("\n[S]     [ ]-[ ]-[ ]-[ ]    ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 147) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_13) {
 					rawOutputText(", Floor 3");
 					rawOutputText("\n                [S]        ");
 					rawOutputText("\n         |       |         ");
@@ -1533,7 +1535,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |       |       |         ");
 					rawOutputText("\n[S]     [ ]-[ ]-[ ]-[ ]    ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 148) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_14) {
 					rawOutputText(", Floor 3");
 					rawOutputText("\n                [S]        ");
 					rawOutputText("\n         |       |         ");
@@ -1545,7 +1547,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |       |       |         ");
 					rawOutputText("\n[S]     [ ]-[ ]-[ ]-[ ]    ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 149) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_15) {
 					rawOutputText(", Floor 3");
 					rawOutputText("\n                [S]        ");
 					rawOutputText("\n         |       |         ");
@@ -1557,7 +1559,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |       |       |         ");
 					rawOutputText("\n[S]     [ ]-[ ]-[ ]-[ ]    ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 150) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_16) {
 					rawOutputText(", Floor 3");
 					rawOutputText("\n                [S]        ");
 					rawOutputText("\n         |       |         ");
@@ -1569,7 +1571,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |       |       |         ");
 					rawOutputText("\n[S]     [ ]-[ ]-[ ]-[P]    ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 151) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_17) {
 					rawOutputText(", Floor 3");
 					rawOutputText("\n                [S]        ");
 					rawOutputText("\n         |       |         ");
@@ -1581,7 +1583,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |       |       |         ");
 					rawOutputText("\n[S]     [ ]-[ ]-[P]-[ ]    ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 152) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_18) {
 					rawOutputText(", Floor 3");
 					rawOutputText("\n                [S]        ");
 					rawOutputText("\n         |       |         ");
@@ -1593,7 +1595,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |       |       |         ");
 					rawOutputText("\n[S]     [ ]-[P]-[ ]-[ ]    ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 153) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_19) {
 					rawOutputText(", Floor 3");
 					rawOutputText("\n                [S]        ");
 					rawOutputText("\n         |       |         ");
@@ -1605,7 +1607,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |       |       |         ");
 					rawOutputText("\n[S]     [P]-[ ]-[ ]-[ ]    ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 154) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_20) {
 					rawOutputText(", Floor 3");
 					rawOutputText("\n                [S]        ");
 					rawOutputText("\n         |       |         ");
@@ -1617,7 +1619,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n |       |       |         ");
 					rawOutputText("\n[P]     [ ]-[ ]-[ ]-[ ]    ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 155) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_21) {
 					rawOutputText(", Floor 3");
 					rawOutputText("\n[ ]-[ ]-[ ]-[ ]");
 					rawOutputText("\n |   |   |   | ");
@@ -1628,7 +1630,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n[ ]         [P]");
 					rawOutputText("\n             | ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 156) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_22) {
 					rawOutputText(", Floor 3");
 					rawOutputText("\n[ ]-[ ]-[ ]-[ ]");
 					rawOutputText("\n |   |   |   | ");
@@ -1639,7 +1641,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n[ ]         [ ]");
 					rawOutputText("\n             | ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 157) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_23) {
 					rawOutputText(", Floor 3");
 					rawOutputText("\n[ ]-[ ]-[ ]-[ ]");
 					rawOutputText("\n |   |   |   | ");
@@ -1650,7 +1652,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n[ ]         [ ]");
 					rawOutputText("\n             | ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 158) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_24) {
 					rawOutputText(", Floor 3");
 					rawOutputText("\n[ ]-[ ]-[ ]-[P]");
 					rawOutputText("\n |   |   |   | ");
@@ -1661,7 +1663,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n[ ]         [ ]");
 					rawOutputText("\n             | ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 159) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_25) {
 					rawOutputText(", Floor 3");
 					rawOutputText("\n[ ]-[ ]-[ ]-[ ]");
 					rawOutputText("\n |   |   |   | ");
@@ -1672,7 +1674,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n[ ]         [ ]");
 					rawOutputText("\n             | ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 160) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_26) {
 					rawOutputText(", Floor 3");
 					rawOutputText("\n[ ]-[ ]-[ ]-[ ]");
 					rawOutputText("\n |   |   |   | ");
@@ -1683,7 +1685,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n[ ]         [ ]");
 					rawOutputText("\n             | ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 161) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_27) {
 					rawOutputText(", Floor 3");
 					rawOutputText("\n[ ]-[ ]-[P]-[ ]");
 					rawOutputText("\n |   |   |   | ");
@@ -1694,7 +1696,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n[ ]         [ ]");
 					rawOutputText("\n             | ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 162) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_28) {
 					rawOutputText(", Floor 3");
 					rawOutputText("\n[ ]-[ ]-[ ]-[ ]");
 					rawOutputText("\n |   |   |   | ");
@@ -1705,7 +1707,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n[ ]         [ ]");
 					rawOutputText("\n             | ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 163) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_29) {
 					rawOutputText(", Floor 3");
 					rawOutputText("\n[ ]-[ ]-[ ]-[ ]");
 					rawOutputText("\n |   |   |   | ");
@@ -1716,7 +1718,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n[ ]         [ ]");
 					rawOutputText("\n             | ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 164) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_30) {
 					rawOutputText(", Floor 3");
 					rawOutputText("\n[ ]-[P]-[ ]-[ ]");
 					rawOutputText("\n |   |   |   | ");
@@ -1727,7 +1729,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n[ ]         [ ]");
 					rawOutputText("\n             | ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 165) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_31) {
 					rawOutputText(", Floor 3");
 					rawOutputText("\n[ ]-[ ]-[ ]-[ ]");
 					rawOutputText("\n |   |   |   | ");
@@ -1738,7 +1740,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n[P]         [ ]");
 					rawOutputText("\n             | ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 166) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_32) {
 					rawOutputText(", Floor 3");
 					rawOutputText("\n[ ]-[ ]-[ ]-[ ]");
 					rawOutputText("\n |   |   |   | ");
@@ -1749,7 +1751,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n[ ]         [ ]");
 					rawOutputText("\n             | ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 167) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_33) {
 					rawOutputText(", Floor 3");
 					rawOutputText("\n[ ]-[ ]-[ ]-[ ]");
 					rawOutputText("\n |   |   |   | ");
@@ -1760,7 +1762,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n[ ]         [ ]");
 					rawOutputText("\n             | ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 168) {
+				else if (dungeonLoc == DUNGEON_RIVER_FLOOR_03_ROOM_34) {
 					rawOutputText(", Floor 3");
 					rawOutputText("\n[P]-[ ]-[ ]-[ ]");
 					rawOutputText("\n |   |   |   | ");
@@ -1772,9 +1774,9 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n             | ");
 				}
 			}
-			else if (DungeonAbstractContent.dungeonLoc >= 169 && DungeonAbstractContent.dungeonLoc < 174) { //Bee Hive
+			else if (dungeonLoc >= DUNGEON_BEE_HIVE_1 && dungeonLoc < 174) { //Bee Hive
 				rawOutputText("Bee Hive");
-				if (DungeonAbstractContent.dungeonLoc == 169) {
+				if (dungeonLoc == DUNGEON_BEE_HIVE_1) {
 					rawOutputText(", Entrance");
 					rawOutputText("\n    [ ]    ");
 					rawOutputText("\n     |     ");
@@ -1783,7 +1785,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n    [P]    ");
 					rawOutputText("\n     |     ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 170) {
+				else if (dungeonLoc == DUNGEON_BEE_HIVE_2) {
 					rawOutputText(", Princess cells");
 					rawOutputText("\n    [ ]    ");
 					rawOutputText("\n     |     ");
@@ -1792,7 +1794,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n    [ ]    ");
 					rawOutputText("\n     |     ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 171) {
+				else if (dungeonLoc == DUNGEON_BEE_HIVE_3) {
 					rawOutputText(", Honey Brewers halls");
 					rawOutputText("\n    [ ]    ");
 					rawOutputText("\n     |     ");
@@ -1801,7 +1803,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n    [ ]    ");
 					rawOutputText("\n     |     ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 172) {
+				else if (dungeonLoc == DUNGEON_BEE_HIVE_4) {
 					rawOutputText(", Library");
 					rawOutputText("\n    [ ]    ");
 					rawOutputText("\n     |     ");
@@ -1810,7 +1812,7 @@ public class DungeonMap extends BaseContent
 					rawOutputText("\n    [ ]    ");
 					rawOutputText("\n     |     ");
 				}
-				else if (DungeonAbstractContent.dungeonLoc == 173) {
+				else if (dungeonLoc == DUNGEON_BEE_HIVE_5) {
 					rawOutputText(", Far corridor towards the throne room");
 					rawOutputText("\n    [P]    ");
 					rawOutputText("\n     |     ");
@@ -1825,7 +1827,7 @@ public class DungeonMap extends BaseContent
 			
 		}
 		/* - layout for future dungeon use
-					if (CoC.instance.dungeonLoc == 55) {
+					if (CoC.instance.dungeonLoc == DUNGEON_HIDDEN_CAVE_S_STAIRCASE_B) {
 						rawOutputText(", Stone Staircase Basement<");
 						rawOutputText("\n    [ ]             [ ]    ");
 						rawOutputText("\n     |               |     ");
@@ -2247,4 +2249,4 @@ else if (SceneLib.d3._currentRoom == "southwestcourtyard") {
 		
 	}
 
-}
+}

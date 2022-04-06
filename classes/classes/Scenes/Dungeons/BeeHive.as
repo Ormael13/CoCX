@@ -16,13 +16,7 @@ import classes.Scenes.Dungeons.BeeHive.DemonicBee;
 import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 
 	public class BeeHive extends DungeonAbstractContent
-	{
-		private static const DUNGEON_BEE_HIVE_1:int	= 169;
-		private static const DUNGEON_BEE_HIVE_2:int	= 170;
-		private static const DUNGEON_BEE_HIVE_3:int	= 171;
-		private static const DUNGEON_BEE_HIVE_4:int	= 172;
-		private static const DUNGEON_BEE_HIVE_5:int	= 173;
-		
+	{		
 		public function BeeHive() {}
 		
 		public function enterDungeon():void {
@@ -40,7 +34,7 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 		
 		private function room1Pass():void {
 			clearOutput();
-			dungeonLoc = 169;
+			dungeonLoc = DUNGEON_BEE_HIVE_1;
 			outputText("As vague as the directions from that bee-girl were, you still managed to find the path she was indicating, and now you find yourself staring at the \"Hive\" she was talking about. It's quite an impressive sight, an edifice of wax built around the trees of the Deepwoods, it's almost the size of a small hill, it’s top reaching for the canopy and its sides vanishing into the gloom on either side of your vision. ");
 			outputText("Fortunately, there are no battles being fought in your path, despite the mental image of her usage of the word \"siege\" had invoked, and you can see an entrance into the hive. Unfortunately, it's not unguarded.\n\n");
 			outputText("There are two creatures standing in your way, and they could be identical twin sisters. They look like the bee-girls you have seen in the Forest... and yet they couldn't be more different. They're huge, easily seven feet tall and while their breasts aren't exactly small, their physiques can only be described as amazonian, with muscles visibly rippling under their tanned yellow skin even from here. ");
@@ -262,7 +256,7 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 		}
 		
 		public function room1South():void {
-			dungeonLoc = 169;
+			dungeonLoc = DUNGEON_BEE_HIVE_1;
 			clearOutput();
 			outputText("<b><u></u>Entrance</b>\n");
 			if (flags[kFLAGS.TIFA_FOLLOWER] > 5) {
@@ -275,7 +269,7 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 			addButton(11, "Leave", exitDungeon);
 		}
 		public function room4East():void {
-			dungeonLoc = 170;
+			dungeonLoc = DUNGEON_BEE_HIVE_2;
 			clearOutput();
 			if (flags[kFLAGS.TIFA_FOLLOWER] < 2) room4();
 			if (CoC.instance.inCombat) return;
@@ -284,7 +278,7 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 			dungeons.setDungeonButtons(null, null, room2Center, null);
 		}
 		public function room2Center():void {
-			dungeonLoc = 171;
+			dungeonLoc = DUNGEON_BEE_HIVE_3;
 			clearOutput();
 			outputText("<b><u></u>Honey Brewers halls</b>\n");
 			if (flags[kFLAGS.TIFA_FOLLOWER] > 5) {
@@ -298,7 +292,7 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 			}
 		}
 		public function room3West():void {
-			dungeonLoc = 172;
+			dungeonLoc = DUNGEON_BEE_HIVE_4;
 			clearOutput();
 			outputText("<b><u></u>The Library</b>\n");
 			room3();
@@ -308,7 +302,7 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 			}
 		}
 		public function room5North(first:Boolean = true):void {
-			dungeonLoc = 173;
+			dungeonLoc = DUNGEON_BEE_HIVE_5;
 			clearOutput();
 			outputText("<b><u></u>Far corridor towards the throne room</b>\n");
 			if (flags[kFLAGS.TIFA_FOLLOWER] > 4) outputText("The way to the throne room is open.");

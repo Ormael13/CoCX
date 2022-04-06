@@ -140,23 +140,10 @@ import coc.xxc.StoryContext;
 			return CoC.instance.date;
 		}
 
-/*
-		protected function inCombat():Boolean
-		{
-			return CoC.instance.inCombat();
-		}
-*/
-		//Curse you, CoC updates!
 		protected function get inDungeon():Boolean
 		{
 			return DungeonAbstractContent.inDungeon;
 		}
-/* inDungeon is now read only
-		protected function set inDungeon(v:Boolean):void
-		{
-			CoC.instance.inDungeon = v;
-		}
-*/
 
 		protected function get inRoomedDungeon():Boolean
 		{

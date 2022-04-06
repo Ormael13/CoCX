@@ -12,7 +12,7 @@ public class YourCabin extends DungeonAbstractContent
 		
 		public function enterCabin():void {
 			inDungeon = true;
-			dungeonLoc = dungeons.DUNGEON_CABIN;
+			dungeonLoc = DUNGEON_CABIN;
 			menu();
 			clearOutput();
 			outputText("<b><u>Your Cabin</u></b>\n");
@@ -98,7 +98,6 @@ public class YourCabin extends DungeonAbstractContent
 		
 		private function exitCabin():void {
 			inDungeon = false;
-			dungeonLoc = -1;
 			playerMenu();
 		}
 		

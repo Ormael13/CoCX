@@ -1572,9 +1572,7 @@ private function unFuckSaveDataBeforeLoading(data:Object):void {
 public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 {
     var game:CoC = CoC.instance;
-    DungeonAbstractContent.dungeonLoc = 0;
-	//Not needed, dungeonLoc = 0 does this:	game.inDungeon = false;
-	DungeonAbstractContent.inDungeon = false; //Needed AGAIN because fuck includes folder. If it ain't broke, don't fix it!
+	DungeonAbstractContent.inDungeon = false;
 	DungeonAbstractContent.inRoomedDungeon = false;
 	DungeonAbstractContent.inRoomedDungeonResume = null;
 

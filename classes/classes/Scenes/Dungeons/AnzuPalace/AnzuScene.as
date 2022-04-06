@@ -16,23 +16,6 @@ use namespace CoC;
 
 	public class AnzuScene extends DungeonAbstractContent// implements TimeAwareInterface
 	{
-		private static const DUNGEON_ANZU_OUTSIDE:int			= 88;
-		private static const DUNGEON_ANZU_HALL_FLOOR1:int 		= 89;
-		private static const DUNGEON_ANZU_LIVING_ROOM:int 		= 90;
-		private static const DUNGEON_ANZU_BATHROOM:int 			= 91;
-		private static const DUNGEON_ANZU_DINING_ROOM:int 		= 92;
-		private static const DUNGEON_ANZU_KITCHEN:int 			= 93;
-		private static const DUNGEON_ANZU_HALL_FLOOR2:int		= 94;
-		private static const DUNGEON_ANZU_BEDROOM:int 			= 95;
-		private static const DUNGEON_ANZU_LIBRARY:int 			= 96;
-		private static const DUNGEON_ANZU_MULTIUSE_ROOM:int 	= 97;
-		private static const DUNGEON_ANZU_HALL_FLOOR3:int 		= 98;
-		private static const DUNGEON_ANZU_PALACE_VAULTS:int 	= 99;
-		private static const DUNGEON_ANZU_ALCHEMY_ROOM:int 		= 100;
-		private static const DUNGEON_ANZU_ROOF:int 				= 101;
-		private static const DUNGEON_ANZU_BASEMENT:int 			= 102;
-		private static const DUNGEON_ANZU_ARMORY:int 			= 103;
-		
 		public function AnzuScene()
 		{}
 		
@@ -289,7 +272,7 @@ use namespace CoC;
 			addButton(1, "Talk", anzuTalkMenu).hint("Get to know Anzu better.");
 			if (flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] >= 3) addButton(2, "Sex", anzuSexMenu).hint("Have some sexy times with the sexy avian deity.");
 			else addButtonDisabled(2, "Sex", "Maybe if Anzu likes you better, he will let you do that.");
-			if (dungeonLoc == 101) {
+			if (dungeonLoc == DUNGEON_ANZU_ROOF) {
 				if (player.canFly()) {
 					if (flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] >= 4) addButton(3, "Race Him", null).hint("Challenge Anzu to a race and have some fun!");
 					else addButtonDisabled(3, "Race Him", "Maybe if Anzu likes you better, he'll consider letting you race against him.");
@@ -1070,7 +1053,7 @@ use namespace CoC;
 				}*/
 				flags[kFLAGS.ANZU_TIMES_DINED_DINNER]++;
 			}
-			dungeonLoc = 92;
+			dungeonLoc = DUNGEON_ANZU_DINING_ROOM;
 			doNext(camp.returnToCampUseOneHour);
 		}
 		private function dontEatFoodWithAnzu():void {
@@ -1209,7 +1192,6 @@ use namespace CoC;
 			clearOutput();
 			outputText("Not in the mood of getting your " + player.skin.desc + " wet (and sticky) at this time of day, you thanks him for his offer but explain that you’re not exactly in the mood to get wet. Bidding him farewell, you leave him to his own matters and return to your camp.");
 			inDungeon = false;
-			dungeonLoc = -1;
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -1234,7 +1216,6 @@ use namespace CoC;
 			outputText("Tired as you are, a task is a task. You answer the avian that sadly, you have to keep guard tonight on the portal, so it will be on another time. Though a bit disappointed, the avian quickly cheers up and nuzzles your neck playfully, then he hugs you again and helps you to stand up. Gathering your things, you make it to the door, not without getting another playful nibble as you leave.");
 			outputText("\n\n\"<i>Be careful on your way to the camp, little friend</i>\" he says from the door while waving you. Waving him back you cross the Rift and return to your camp.");
 			inDungeon = false;
-			dungeonLoc = -1;
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -1330,7 +1311,6 @@ use namespace CoC;
 			else player.refillHunger(player.maxHunger() + 10 - player.hunger);
 			sleepWithAnzuHeal();
 			inDungeon = false;
-			dungeonLoc = -1;
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
