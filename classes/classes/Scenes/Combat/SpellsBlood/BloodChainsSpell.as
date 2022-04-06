@@ -8,11 +8,11 @@ import classes.StatusEffects;
 public class BloodChainsSpell extends AbstractBloodSpell {
 	public function BloodChainsSpell() {
 		super(
-				"Blood Chains",
-				"Blood Chains will immobilize foe briefly.",
-				TARGET_ENEMY,
-				TIMING_LASTING,
-				[TAG_DEBUFF]
+			"Blood Chains",
+			"Blood Chains will immobilize foe briefly.",
+			TARGET_ENEMY,
+			TIMING_LASTING,
+			[TAG_DEBUFF]
 		);
 		baseHpCost = 100;
 	}

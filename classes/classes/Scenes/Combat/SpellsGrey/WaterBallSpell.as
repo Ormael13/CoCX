@@ -13,15 +13,15 @@ public class WaterBallSpell extends AbstractGreySpell {
 		super(
 			ex ? "Water Ball (Ex)" : "Water Ball",
 			ex ?
-					"Condense part of the the ambivalent moisture into wrath-enpowered water sphere to attack your enemy."
-					: "Condense part of the the ambivalent moisture into sphere water to attack your enemy.",
+				"Condense part of the the ambivalent moisture into wrath-enpowered water sphere to attack your enemy."
+				: "Condense part of the the ambivalent moisture into sphere water to attack your enemy.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
 			[TAG_DAMAGING, TAG_WATER]
-	);
-	baseManaCost = 40;
-	if (ex) baseWrathCost = 100;
-	this.ex = ex;
+		);
+		baseManaCost = 40;
+		if (ex) baseWrathCost = 100;
+		this.ex = ex;
 	}
 	
 	override public function get buttonName():String {

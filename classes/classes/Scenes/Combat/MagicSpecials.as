@@ -2988,13 +2988,13 @@ public class MagicSpecials extends BaseCombatContent {
 
 	public function activaterTyrantState():void {
 		clearOutput();
-		outputText("You stare at your foe, letting your Lust build and bubble within you. Sweet release is in front of you…But first… You feel the heat building in your loins, and you let out a roar,\n\n");// .
+		outputText("You stare at your foe, letting your Lust build and bubble within you. Sweet release is in front of you…But first… You feel the heat building in your loins, and you let out a roar, the heat spreading through your body. You face your opponent with an unsettling grin. Let’s Dance!\n\n");
 		player.createStatusEffect(StatusEffects.TyrantState, 0, 0, 0, 0);
 		enemyAI();
 	}
 	public function deactivaterTyrantState():void {
 		clearOutput();
-		outputText("\n\n");//.
+		outputText("Breathing heavily, you focus your mind. The heat through your body isn’t going away yet, but at the very least, you aren’t generating more. With a lot of mental effort, you reign in your lusty thoughts.\n\n");
 		player.removeStatusEffect(StatusEffects.TyrantState);
 		enemyAI();
 	}
@@ -3002,7 +3002,7 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		fatigue(100, USEFATG_PHYSICAL);
 		player.lust -= Math.round(player.maxLust() * 0.1);
-		outputText("\n\n");// .
+		outputText("You focus on the heat in your body, and with your mind focused, you send your heat down, into the ground. The ground cracks under your [legs], and from the crack emerges a stone, shaped nearly perfectly into the shape of your [weapon].\n\n");
 		player.createStatusEffect(StatusEffects.FalseWeapon, 0, 0, 0, 0);
 		enemyAI();
 	}

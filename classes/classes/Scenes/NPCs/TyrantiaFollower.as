@@ -89,6 +89,8 @@ public function firstEncounterYes():void {
 	outputText("\"<i>Okay, Tyrantia, stop playing around with your food. Find that demon cunt who’s been summoning them.</i>\" As she turns towards you, you see the first indication of organic life under all that steel. She wears a half-helm, and her fangs gleam in the sunlight. ");
 	outputText("Five purple eyes shine under the helm, wary and alert. Twin horns poke out from holes in her helmet, black as night. She’s clearly heard you move, but as she looks back and forth, she doesn’t seem to know where you are yet.\n\n");
 	TyrantiaFollowerStage = 1;
+	flags[kFLAGS.TYRANTIA_LVL_UP] = 1;
+	flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] = 0;
 	menu();
 	addButton(1, "Hide", firstEncounterYesHide);
 	addButton(3, "No Hiding", firstEncounterYesNoHiding);
@@ -166,6 +168,7 @@ public function postFightOptions(hpVictory:Boolean):void {
 		outputText("Tyrantia’s shaking legs finally give out, and she drops her phallic spear, both of her meaty hands dropping to her cunt-flap. Ignoring you entirely, she begins to grab at the flap, pulling the steel up and revealing a large-labed, drooling cunny. Wasting no time, she begins jilling herself off, breathing heavily from both exhaustion and arousal.\n\n");
 		outputText("\"<i>Fuck, no. Not now, you…</i>\" She moans, her armored chest heaving. Her black aura is nearly gone, but you can see a pink glow coming from her eyes. \"<i>What do you want?</i>\"\n\n");
 	}
+	//if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) LevelingHerself();
 	tyraniaAffection(5);
 	menu();
 	//addButton(0, "Rape", postFightOptionsRape);
@@ -264,7 +267,7 @@ public function repeatEncounterBattlefield():void {
 	addButton(1, "Talk", repeatEncounterBattlefieldTalk);
 	if (TyrantiaAffectionMeter >= 15) addButton(2, "Spar", TyrantiaSpar);
 	else addButtonDisabled(2, "???", "Req. 15%+ affection.");
-	if (TyrantiaTrainingSessions >= 20) addButtonDisabled(3, "Training", "You finished all training session with her.");
+	if (TyrantiaTrainingSessions >= 25) addButtonDisabled(3, "Training", "You finished all training session with her.");
 	else addButton(3, "Training", TyrantiaTraining);
 	if (TyraniaPostFinalKissScene) addButton(4, "Sex", TyrantiaSexMenu);
 	else addButtonDisabled(4, "Sex", "Req. special scene after reaching 40%+ affection.");
@@ -282,7 +285,7 @@ public function repeatEncounterBattlefieldRe():void {
 	addButton(1, "Talk", repeatEncounterBattlefieldTalk);
 	if (TyrantiaAffectionMeter >= 15) addButton(2, "Spar", TyrantiaSpar);
 	else addButtonDisabled(2, "???", "Req. 15%+ affection.");
-	if (TyrantiaTrainingSessions >= 20) addButtonDisabled(3, "Training", "You finished all training session with her.");
+	if (TyrantiaTrainingSessions >= 25) addButtonDisabled(3, "Training", "You finished all training session with her.");
 	else addButton(3, "Training", TyrantiaTraining);
 	if (TyraniaPostFinalKissScene) addButton(4, "Sex", TyrantiaSexMenu);
 	else addButtonDisabled(4, "Sex", "Req. special scene after reaching 40%+ affection.");
@@ -620,6 +623,47 @@ public function TyrantiaAllOut():void {
 	doNext(playerMenu);
 }
 
+public function TyrantiaLostSparring():void {
+	clearOutput();
+	//outputText(".");
+	//if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) LevelingHerself();
+	cleanupAfterCombat();
+}
+private function LevelingHerself():void {
+	if (flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] >= 1) flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER]++;
+	else flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] = 1;
+	if (flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] == 10 && flags[kFLAGS.TYRANTIA_LVL_UP] == 1) {
+		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 10));
+		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction), 0, 0);
+		flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] = 0;
+		flags[kFLAGS.TYRANTIA_LVL_UP] = 2;
+	}
+	if (flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] == 11 && flags[kFLAGS.TYRANTIA_LVL_UP] == 2) {
+		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 11));
+		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 2), 0, 0);
+		flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] = 0;
+		flags[kFLAGS.TYRANTIA_LVL_UP] = 3;
+	}/*
+	if (flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] == 12 && flags[kFLAGS.TYRANTIA_LVL_UP] == 3) {
+		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 12));
+		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 3), 0, 0);
+		flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] = 0;
+		flags[kFLAGS.TYRANTIA_LVL_UP] = 4;
+	}
+	if (flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] == 13 && flags[kFLAGS.TYRANTIA_LVL_UP] == 4) {
+		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 13));
+		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 4), 0, 0);
+		flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] = 0;
+		flags[kFLAGS.TYRANTIA_LVL_UP] = 5;
+	}
+	if (flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] == 14 && flags[kFLAGS.TYRANTIA_LVL_UP] == 5) {
+		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 14));
+		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 5), 0, 0);
+		flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] = 0;
+		flags[kFLAGS.TYRANTIA_LVL_UP] = 6;
+	}*/
+}
+
 public function TyrantiaTraining():void {
 	clearOutput();
 	outputText("You ask Tyrantia to teach you more of her odd mental training. She nods, lowering her spider back-half to the ground and beckoning you over.\n\n");
@@ -659,7 +703,7 @@ public function TyrantiaTraining2():void {
 		if (TyrantiaTrainingSessions == 9) outputText("<b>Tyrant State bonus to melee damage increased by 20%.</b>\n\n");
 		if (TyrantiaTrainingSessions == 14) outputText("<b>You have gained new magic special: False Weapon - costs 10% of your max Lust and 100 Fatigue and lasts until the end of combat.</b>\n\n");
 		if (TyrantiaTrainingSessions == 19) outputText("<b>You can now use toggle to turn on/off auto-cast of Tyrant State at the combat start.</b>\n\n");
-		//if (TyrantiaTrainingSessions == 24) outputText("<b></b>\n\n");
+		if (TyrantiaTrainingSessions == 24) outputText("<b>You have gained ability to take less physical and lust damage the closer you're to the maximum lust. (20% at 50% Max Lust, up to 70% at max)</b>\n\n");
 		//if (TyrantiaTrainingSessions == 29) outputText("<b></b>\n\n");
 		//if (TyrantiaTrainingSessions == 34) outputText("<b></b>\n\n");
 		//if (TyrantiaTrainingSessions == 39) outputText("<b></b>\n\n");

@@ -7,11 +7,11 @@ import classes.StatusEffects;
 public class EnergyDrainSpell extends AbstractGreySpell {
 	public function EnergyDrainSpell() {
 		super(
-				"Energy Drain",
-				"Fatigue the target (-20% damage for 7 rounds) and recover mana by draining the target's mana (up to 4x of spell cost).",
-				TARGET_ENEMY,
-				TIMING_LASTING,
-				[TAG_DEBUFF,TAG_RECOVERY]
+			"Energy Drain",
+			"Fatigue the target (-20% damage for 7 rounds) and recover mana by draining the target's mana (up to 4x of spell cost).",
+			TARGET_ENEMY,
+			TIMING_LASTING,
+			[TAG_DEBUFF,TAG_RECOVERY]
 		);
 		baseManaCost = 350;
 	}

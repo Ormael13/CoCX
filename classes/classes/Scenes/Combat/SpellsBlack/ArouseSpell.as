@@ -9,10 +9,10 @@ import classes.VaginaClass;
 public class ArouseSpell extends AbstractBlackSpell {
 	public function ArouseSpell() {
 		super("Arouse",
-				"The arouse spell draws on your own inner lust in order to enflame the enemy's passions.",
-				TARGET_ENEMY,
-				TIMING_INSTANT,
-				[TAG_LUSTDMG]);
+			"The arouse spell draws on your own inner lust in order to enflame the enemy's passions.",
+			TARGET_ENEMY,
+			TIMING_INSTANT,
+			[TAG_LUSTDMG]);
 		baseManaCost = 20;
 	}
 	

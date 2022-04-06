@@ -8,11 +8,11 @@ import classes.StatusEffects;
 public class LifeSiphonSpell extends AbstractHexSpell {
 	public function LifeSiphonSpell() {
 		super(
-				"Life Siphon",
-				"Create a funnel between you and your target, forcefully stealing its vitality to recover your own.",
-				TARGET_ENEMY,
-				TIMING_LASTING,
-				[TAG_DAMAGING, TAG_HEALING]
+			"Life Siphon",
+			"Create a funnel between you and your target, forcefully stealing its vitality to recover your own.",
+			TARGET_ENEMY,
+			TIMING_LASTING,
+			[TAG_DAMAGING, TAG_HEALING]
 		);
 		baseManaCost = 750;
 		useManaType = Combat.USEMANA_MAGIC_HEAL;

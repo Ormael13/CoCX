@@ -139,6 +139,8 @@ public class AbstractSpell extends CombatAbility {
 				return spellModWhite();
 			case CAT_SPELL_BLACK:
 				return spellModBlack();
+			case CAT_SPELL_GREY:
+				return spellModGrey();
 			case CAT_SPELL_BLOOD:
 				return spellModBlood();
 			case CAT_SPELL_HEX:

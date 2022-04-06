@@ -8,12 +8,12 @@ import classes.StatusEffects;
 public class PolarMidnightSpell extends AbstractBlackSpell {
 	public function PolarMidnightSpell() {
 		super(
-				"Polar Midnight",
-				"Cause a massive temperature drop which freezes the air solid in an area. Opponents caught in this spell take the cold damage and are stunned for 5 round.  " +
-				"\n<b>Req. 1 turn channeling. Cooldown: 12 turns</b>",
-				TARGET_ENEMY,
-				TIMING_INSTANT,
-				[TAG_DAMAGING, TAG_ICE, TAG_AOE]
+			"Polar Midnight",
+			"Cause a massive temperature drop which freezes the air solid in an area. Opponents caught in this spell take the cold damage and are stunned for 5 round.  " +
+			"\n<b>Req. 1 turn channeling. Cooldown: 12 turns</b>",
+			TARGET_ENEMY,
+			TIMING_INSTANT,
+			[TAG_DAMAGING, TAG_ICE, TAG_AOE]
 		);
 		baseManaCost = 1250;
 	}

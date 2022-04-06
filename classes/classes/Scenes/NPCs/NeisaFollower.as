@@ -101,11 +101,11 @@ public function neisaCampMenu():void {
 	outputText("Neisa noticing your approach slashes the dummy a final time before stopping her training. She sits on a nearby wooden log and looks straight at you.\n\n");
 	outputText("\"<i>Well what's up [name] how can I help you?</i>\"\n\n");
 	menu();
-	addButton(0, "Appearance", neisaAppearance).hint("Examine Neisa appearance.");
+	addButton(0, "Appearance", neisaAppearance).hint("Examine Neisa appearance.");/*
 	if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) {
 		if (flags[kFLAGS.PLAYER_COMPANION_1] == "Neisa") addButtonDisabled(1, "Spar", "You can't fight against her as long she's in your team.");
 		else addButton(1, "Spar", neisaSpar).hint("Do a quick battle with Neisa!");
-	}
+	}*/
 	//addButton(2, "Talk", talkWithValeria).hint("Discuss with Valeria.");
 	//if (player.lust >= 33) addButton(3, "Sex", followersValeriaSex).hint("Initiate sexy time with the armor-goo.");
 	if (player.hasPerk(PerkLib.BasicLeadership)) {

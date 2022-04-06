@@ -11,13 +11,13 @@ public class ArcticGaleSpell extends AbstractBlackSpell {
 	
 	public function ArcticGaleSpell(ex:Boolean = false) {
 		super(
-				ex ? "Arctic Gale (Ex)" : "Arctic Gale",
-				ex ?
-						"Devastate the enemy ranks with a barrage of wrath-enpowered steely ice daggers, driven by the cold northern winds."
-						: "Devastate the enemy ranks with a barrage of steely ice daggers, driven by the cold northern winds.",
-				TARGET_ENEMY,
-				TIMING_INSTANT,
-				[TAG_DAMAGING, TAG_ICE, TAG_AOE]
+			ex ? "Arctic Gale (Ex)" : "Arctic Gale",
+			ex ?
+				"Devastate the enemy ranks with a barrage of wrath-enpowered steely ice daggers, driven by the cold northern winds."
+				: "Devastate the enemy ranks with a barrage of steely ice daggers, driven by the cold northern winds.",
+			TARGET_ENEMY,
+			TIMING_INSTANT,
+			[TAG_DAMAGING, TAG_ICE, TAG_AOE]
 		);
 		baseManaCost = 200;
 		if (ex) baseWrathCost = 100;

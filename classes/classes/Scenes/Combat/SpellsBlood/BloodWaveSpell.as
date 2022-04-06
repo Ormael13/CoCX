@@ -8,11 +8,11 @@ import classes.StatusEffects;
 public class BloodWaveSpell extends AbstractBloodSpell {
 	public function BloodWaveSpell() {
 		super(
-				"Blood Wave",
-				"Blood Wave will attack all surrounding foes with a wave of blood.  It deals more damage when used against larger than average sized group of enemies.",
-				TARGET_ENEMY,
-				TIMING_INSTANT,
-				[TAG_DAMAGING,TAG_AOE]
+			"Blood Wave",
+			"Blood Wave will attack all surrounding foes with a wave of blood.  It deals more damage when used against larger than average sized group of enemies.",
+			TARGET_ENEMY,
+			TIMING_INSTANT,
+			[TAG_DAMAGING,TAG_AOE]
 		);
 		baseHpCost = 400;
 	}

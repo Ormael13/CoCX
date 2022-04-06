@@ -233,7 +233,7 @@ package classes.Scenes
 			outputText("-Improved isEaster() calculation - now it counts the first Easter day using some complicated Gaussian function, and gives a 7 days window after it. (Svalkash)\n");
 			outputText("-Reworked Sand Witch and Naga scene menus, adding more buttons instead of random routers and hidden checks. Added corruptionTolerance to their checks. Adapted Naga (and SandWitch) genderless scenes for non-genderless PCs. (Svalkash)\n");
 			outputText("-Grey Ink/Abyssal Ink would now be able to give Ink Spray perk too.\n");
-			outputText("-\n");
+			outputText("-Bit increased Tentacle beast enc chances and lowered truffle find chance in forest.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -271,7 +271,7 @@ package classes.Scenes
 			outputText("putting B. Sword after picking Ecalibur disabling option to pick sword at Temple, all 3 Hall of Blade soulskill variants dealing phys not magical dmg, Lightning Claw lowering phys dmg when used as part of feral style attack, using goblin Cum Reservoir not empting it out, Yuki Onna Transform scene not making sure to give proper genitalia setup, Archer's Stamina perks not giving fatigue related to ");
 			outputText("current Speed value, Half-Frost Wyrm or Half Spider-morph racial bonus been attained super easy, Mysterious Seed not causing for misc items menu appear as inventory submenu, unable to add arcane circuits to 5th arcane circle, doppleganger fight won't drag unnecessary due to getting messly 1k lust after 5th round in fight, Gazer Eyes mutation not keeping True seeing perk, Magical Eye Drops as item ");
 			outputText("find in Caves instead of Eye Drops, raiju tf removing/humanizing raiju paws, picking no elemental during minions turn skipping many following up phases of the turn, epic/legendary/mythical perks for stats not affecting monsters, harpy wings not setting shark score to 0, Siren been excluded form races list for appearance screen, Minor Minerva and parsertag, Encaps. pod multicockdescript, ");
-			outputText("Elf hair mutation\n");/*ostatni punkt changelogu
+			outputText("Elf hair mutation, holiday events appearing in Ingnam/prison\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD

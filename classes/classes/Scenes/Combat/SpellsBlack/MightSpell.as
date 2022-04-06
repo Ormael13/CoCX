@@ -7,11 +7,11 @@ import classes.StatusEffects;
 public class MightSpell extends AbstractBlackSpell {
 	public function MightSpell() {
 		super(
-				"Might",
-				"The Might spell draws upon your lust and uses it to fuel a temporary increase in muscle size and power.  It does carry the risk of backfiring and raising lust, like all black magic used on oneself.",
-				TARGET_SELF,
-				TIMING_LASTING,
-				[TAG_BUFF]
+			"Might",
+			"The Might spell draws upon your lust and uses it to fuel a temporary increase in muscle size and power.  It does carry the risk of backfiring and raising lust, like all black magic used on oneself.",
+			TARGET_SELF,
+			TIMING_LASTING,
+			[TAG_BUFF]
 		);
 		baseManaCost = 50;
 		canBackfire  = true;

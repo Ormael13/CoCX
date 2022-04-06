@@ -9,11 +9,11 @@ public class ExorciseSpell extends AbstractDivineSpell {
 	
 	function ExorciseSpell() {
 		super(
-				"Exorcise",
-				"Smite your opponent with your weapon, inflicting damage based on the weapon’s damage and your magical power. Highly effective against the corrupt.  ",
-				TARGET_ENEMY,
-				TIMING_INSTANT,
-				[TAG_DAMAGING]
+			"Exorcise",
+			"Smite your opponent with your weapon, inflicting damage based on the weapon’s damage and your magical power. Highly effective against the corrupt.  ",
+			TARGET_ENEMY,
+			TIMING_INSTANT,
+			[TAG_DAMAGING]
 		);
 		baseManaCost = 400;
 	}

@@ -680,6 +680,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const TF2:StatusEffectType                            = mk("TF2");
 		public static const TFDealer1:StatusEffectType                      = mk("TF Dealer 1");
 		public static const TFDealer2:StatusEffectType                      = mk("TF Dealer 2");
+		public static const ThePhalluspear1:StatusEffectType                = mk("The Phalluspear 1");
 		public static const TookBlessedBow:StatusEffectType               	= mk("Took Blessed Bow");
 		public static const TookBlessedShield:StatusEffectType              = mk("Took Blessed Shield");
 		public static const TookBlessedStaff:StatusEffectType               = mk("Took Blessed Staff");
@@ -1227,4 +1228,4 @@ import classes.StatusEffects.VampireThirstEffect;
 		}
 	}
 }
-
+

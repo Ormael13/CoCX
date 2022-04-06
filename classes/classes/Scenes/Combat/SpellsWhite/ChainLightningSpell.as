@@ -12,13 +12,13 @@ public class ChainLightningSpell extends AbstractWhiteSpell {
 	
 	public function ChainLightningSpell(ex:Boolean =false) {
 		super(
-				ex ? "Chain Lighting (Ex)":"Chain Lighting",
-				ex ?
-						"Chain Lighting (Ex) is a wrath-empowered lightning attack that will electrocute your foes with a chain bolts of lightning."
-						: "Chain Lighting is a lightning attack that will electrocute your foes with a chain bolts of lightning.",
-				TARGET_ENEMY,
-				TIMING_INSTANT,
-				[TAG_DAMAGING, TAG_AOE, TAG_LIGHTNING]
+			ex ? "Chain Lighting (Ex)":"Chain Lighting",
+			ex ?
+				"Chain Lighting (Ex) is a wrath-empowered lightning attack that will electrocute your foes with a chain bolts of lightning."
+				: "Chain Lighting is a lightning attack that will electrocute your foes with a chain bolts of lightning.",
+			TARGET_ENEMY,
+			TIMING_INSTANT,
+			[TAG_DAMAGING, TAG_AOE, TAG_LIGHTNING]
 		);
 		baseManaCost = 200;
 		baseWrathCost = ex ? 100 : 0;

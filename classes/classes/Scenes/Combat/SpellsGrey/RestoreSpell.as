@@ -6,11 +6,11 @@ import classes.StatusEffects;
 public class RestoreSpell extends AbstractGreySpell {
 	public function RestoreSpell() {
 		super(
-				"Restore",
-				"Heal for a decent amount of health and regenerate a little over time.  ",
-				TARGET_SELF,
-				TIMING_LASTING,
-				[TAG_HEALING]
+			"Restore",
+			"Heal for a decent amount of health and regenerate a little over time.  ",
+			TARGET_SELF,
+			TIMING_LASTING,
+			[TAG_HEALING]
 		);
 		baseManaCost = 80;
 	}

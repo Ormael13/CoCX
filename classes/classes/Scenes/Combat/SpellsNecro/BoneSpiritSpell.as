@@ -8,11 +8,11 @@ import classes.StatusEffects;
 public class BoneSpiritSpell extends AbstractNecroSpell {
 	public function BoneSpiritSpell() {
 		super(
-				"Bone spirit",
-				"Turn an ordinary set of bones into a vengeance mad apparition that will charge at your target. Upon contact it will explode dealing massive true damage.",
-				TARGET_ENEMY,
-				TIMING_INSTANT,
-				[TAG_DAMAGING]
+			"Bone spirit",
+			"Turn an ordinary set of bones into a vengeance mad apparition that will charge at your target. Upon contact it will explode dealing massive true damage.",
+			TARGET_ENEMY,
+			TIMING_INSTANT,
+			[TAG_DAMAGING]
 		)
 	}
 	

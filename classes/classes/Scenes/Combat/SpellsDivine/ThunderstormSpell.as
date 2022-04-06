@@ -8,11 +8,11 @@ import classes.StatusEffects;
 public class ThunderstormSpell extends AbstractDivineSpell {
 	public function ThunderstormSpell() {
 		super(
-				"Thunderstorm",
-				"Call upon the heavenly thunder, starting a lightning storm that will systematically zap your opponents every turn for up to 30 rounds.  ",
-				TARGET_ENEMY,
-				TIMING_LASTING,
-				[TAG_DAMAGING, TAG_LIGHTNING]
+			"Thunderstorm",
+			"Call upon the heavenly thunder, starting a lightning storm that will systematically zap your opponents every turn for up to 30 rounds.  ",
+			TARGET_ENEMY,
+			TIMING_LASTING,
+			[TAG_DAMAGING, TAG_LIGHTNING]
 		);
 		baseManaCost = 1200;
 	}

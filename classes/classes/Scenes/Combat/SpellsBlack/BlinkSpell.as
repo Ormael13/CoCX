@@ -7,11 +7,11 @@ import classes.StatusEffects;
 public class BlinkSpell extends AbstractBlackSpell {
 	public function BlinkSpell() {
 		super(
-				"Blink",
-				"The Blink spell draws upon your lust and uses it to fuel a temporary increase in moving speed. Some naturally quick mages seem like they can teleport, moving faster than the eye can track. It does carry the risk of backfiring and raising lust, like all black magic used on oneself. ",
-				TARGET_SELF,
-				TIMING_LASTING,
-				[TAG_BUFF]
+			"Blink",
+			"The Blink spell draws upon your lust and uses it to fuel a temporary increase in moving speed. Some naturally quick mages seem like they can teleport, moving faster than the eye can track. It does carry the risk of backfiring and raising lust, like all black magic used on oneself. ",
+			TARGET_SELF,
+			TIMING_LASTING,
+			[TAG_BUFF]
 		);
 		baseManaCost = 40;
 		canBackfire  = true;

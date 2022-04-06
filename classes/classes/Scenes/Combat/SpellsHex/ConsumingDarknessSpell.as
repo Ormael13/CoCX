@@ -9,11 +9,11 @@ import classes.StatusEffects;
 public class ConsumingDarknessSpell extends AbstractHexSpell {
 	public function ConsumingDarknessSpell() {
 		super(
-				"Consuming Darkness",
-				"For the next 7 round the target is devoured by living shadow trying to tear its body apart deals good damage on each round.",
-				TARGET_ENEMY,
-				TIMING_LASTING,
-				[TAG_DAMAGING, TAG_DARKNESS]
+			"Consuming Darkness",
+			"For the next 7 round the target is devoured by living shadow trying to tear its body apart deals good damage on each round.",
+			TARGET_ENEMY,
+			TIMING_LASTING,
+			[TAG_DAMAGING, TAG_DARKNESS]
 		);
 		baseManaCost = 350;
 		useManaType = Combat.USEMANA_MAGIC_HEAL;

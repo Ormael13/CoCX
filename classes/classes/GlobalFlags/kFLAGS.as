@@ -1935,8 +1935,8 @@ public static const UNKNOWN_FLAG_NUMBER_01926:int                               
 public static const UNKNOWN_FLAG_NUMBER_01927:int                                   = 1927;
 public static const UNKNOWN_FLAG_NUMBER_01928:int                                   = 1928;
 public static const UNKNOWN_FLAG_NUMBER_01929:int                                   = 1929;
-public static const UNKNOWN_FLAG_NUMBER_01930:int                                   = 1930;
-public static const UNKNOWN_FLAG_NUMBER_01931:int                                   = 1931;
+public static const TYRANTIA_DEFEATS_COUNTER:int                                   	= 1930;
+public static const TYRANTIA_LVL_UP:int                                   			= 1931;
 public static const KITSUNES_DEFEATS_COUNTER:int                                   	= 1932;
 public static const CAMP_CABIN_ENERGY_CORE_RESOURCES:int                            = 1933;
 public static const CAMP_CABIN_MECHANISM_RESOURCES:int                              = 1934;

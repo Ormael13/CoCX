@@ -13,15 +13,15 @@ public class StalagmiteSpell extends AbstractGreySpell {
 		super(
 			ex ? "Stalagmite (Ex)" : "Stalagmite",
 			ex ?
-					"Harden part of the the ground into wrath-enpowered earth spike to attack your enemy."
-					: "Harden part of the the ground into earth spike to attack your enemy.",
+				"Harden part of the the ground into wrath-enpowered earth spike to attack your enemy."
+				: "Harden part of the the ground into earth spike to attack your enemy.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
 			[TAG_DAMAGING, TAG_EARTH]
-	);
-	baseManaCost = 40;
-	if (ex) baseWrathCost = 100;
-	this.ex = ex;
+		);
+		baseManaCost = 40;
+		if (ex) baseWrathCost = 100;
+		this.ex = ex;
 	}
 	
 	override public function get buttonName():String {

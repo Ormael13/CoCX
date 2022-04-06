@@ -7,11 +7,11 @@ import classes.StatusEffects;
 public class BalanceOfLifeSpell extends AbstractGreySpell {
 	public function BalanceOfLifeSpell() {
 		super(
-				"Balance of Life",
-				"Heals for 5% of your hp when dealing spell damage.",
-				TARGET_SELF,
-				TIMING_LASTING,
-				[TAG_HEALING,TAG_BUFF]
+			"Balance of Life",
+			"Heals for 5% of your hp when dealing spell damage.",
+			TARGET_SELF,
+			TIMING_LASTING,
+			[TAG_HEALING,TAG_BUFF]
 		);
 		baseManaCost = 500;
 	}

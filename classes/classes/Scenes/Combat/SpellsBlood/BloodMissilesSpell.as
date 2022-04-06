@@ -8,11 +8,11 @@ import classes.StatusEffects;
 public class BloodMissilesSpell extends AbstractBloodSpell {
 	public function BloodMissilesSpell() {
 		super(
-				"Blood Missiles",
-				"Blood Missiles will attack foe with five blood spheres.",
-				TARGET_ENEMY,
-				TIMING_INSTANT,
-				[TAG_DAMAGING]
+			"Blood Missiles",
+			"Blood Missiles will attack foe with five blood spheres.",
+			TARGET_ENEMY,
+			TIMING_INSTANT,
+			[TAG_DAMAGING]
 		);
 		baseHpCost = 50;
 	}
