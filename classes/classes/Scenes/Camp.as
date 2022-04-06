@@ -6680,8 +6680,16 @@ public function rebirthFromBadEnd():void {
 		outputText("\n\nThis part is WIP. You can add more scenes.");
 		outputText("\nThe idea behind is to try unique scenes with different ways or options or body parts.");
         menu();
+        //Marble scene
 		if (flags[kFLAGS.MARBLE_PURIFIED] == 1)
 			addButton(0, "Marble & Clara", SceneLib.marblePurification.defeatClaraCuntInAFight, false, true);
+        else
+			addButtonDisabled(0, "M & C", "Requires completing Marble's purification quest.");
+        //Excellia slave first scene
+		if (flags[kFLAGS.EXCELLIA_RECRUITED] == 2)
+			addButton(1, "Excellia Slv", SceneLib.excelliaFollower.ExcelliaPathChoiceMakeSlave, true);
+        else
+			addButtonDisabled(1, "E Slv", "Requires recruiting Excellia as a slave.");
 		addButtonDisabled(13, "BadEnds", "SH is too lazy to add them too right now, but if anyone wants...");
         addButton(14, "Wake Up", campSpendTimeActions);
     }	
@@ -6695,4 +6703,4 @@ public function rebirthFromBadEnd():void {
         }
         */
 	}
-}
+}
