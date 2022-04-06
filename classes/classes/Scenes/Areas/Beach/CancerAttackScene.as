@@ -103,8 +103,8 @@ public class CancerAttackScene extends BaseContent
                     outputText("  slowly and forcefully shoving you into his cock like a sleeve. You gasp as he begins to use you like a sex toy denying your movement in favor of simply sliding you up and down his cock. " +
                             "Its still sex albeit not on your own terms this guy is controlling the entire event spearing you at his leisure.");
                     if (player.looseness() < 2) outputText(" Thankfully his rod isn’t too small or you wouldn’t be getting off at all from this, to be honest you have begun to enjoy yourself as well despite your predicament.");
-                    outputText("\n\n<i>\"Ahhh… cuming…\"</i>\n\n" +
-                            "Unsurprisingly even his orgasmic expression is barely different from his normal pleasured one but you can feel in his bodily movement and the massive bubbling splash in your hole that he's enjoying himself. " +
+                    outputText("\n\n<i>\"Ahhh… cumming…\"</i>\n\n" +
+                            "Unsurprisingly, even his orgasmic expression is barely different from his normal pleasured one but you can feel in his bodily movement and the massive bubbling splash in your hole that he's enjoying himself. " +
                             "Your pussy also did achieve orgasm through yours was way louder than his. " +
                             "Satisfied with this he simply drops you on the sand still in the afterglow and dig himself back into the hole he came from. " +
                             "Still panting, you proceed to slowly redress as you make your way back to camp.");
@@ -113,8 +113,8 @@ public class CancerAttackScene extends BaseContent
                 else {
                     outputText("He turns you over and pulls you all the way to him slowly and forcefully shoving his cock into your butt hole. You gasp as he begins to use you like a sex toy denying your movement in favor of simply sliding you up and down his cock. " +
                             "This guy is controlling the entire event, spearing and stretching you at his leisure. He barely relent a minute later so to speak.\n\n" +
-                            "<i>\"Ahhh… cuming…\"</i>\n\n" +
-                            "Unsurprisingly even his orgasmic tone is barely different from his normal pleasured one but you can feel in his bodily movement and the massive bubbling splash in your hole that he's enjoying himself. Satisfied with this he simply let you fall prone on the sand and dig himself back into the hole he came from. Ugh what a bugger. " +
+                            "<i>\"Ahhh… cumming…\"</i>\n\n" +
+                            "Unsurprisingly, even his orgasmic tone is barely different from his normal pleasured one but you can feel in his bodily movement and the massive bubbling splash in your hole that he's enjoying himself. Satisfied with this he simply let you fall prone on the sand and dig himself back into the hole he came from. Ugh what a bugger. " +
                             "You proceed to slowly redress as you make your way back to camp.\n");
                     player.sexReward("cum","Anal");
                 }
@@ -125,7 +125,7 @@ public class CancerAttackScene extends BaseContent
                 if (!player.hasVagina() && !player.hasCock()){
                     outputText("The cancer looks at you for a full minute and considers your body for a moment before shrugging." +
                             "<i>\"Know what? I’m not interested anymore. See ya.\"</i>\n\n" +
-                            "Wait seriously, [monster he] let you off like that? [monster He]’s gives this little of a fuck that [monster he] won't even bother raping you? " +
+                            "Wait... seriously, [monster he] let you off like that? [monster He]’s gives this little of a fuck that [monster he] won't even bother raping you? " +
                             "Something tells you this luck won’t last and so you hurry and scram");
                     if (silly()) outputText(" while the cancer discusses with a man in a black suit how [monster he]'s not paid enough by producer Liadri to perform a proper raping job");
                     outputText(".")
@@ -141,7 +141,7 @@ public class CancerAttackScene extends BaseContent
                         outputText(" You gently begin to rub your pussy against the girl's bubbling mess making her gasp in delight. " +
                                 "She thankfully control her pincers well enough not to squeeze you to death while in the middle of a mating session something you are very relieved off. " +
                                 "Her pussy keeps on gushing everytime you rub yourself against her and to be honest you have begun to enjoy yourself as well despite your predicament.\n\n" +
-                                "<i>\"Ahhh… cuming…\"</i>\n\n" +
+                                "<i>\"Ahhh… cumming…\"</i>\n\n" +
                                 "Unsurprisingly even her orgasmic expression is barely different from her normal pleasured one but you can feel in her bodily movement and the massive bubbling splash on your bottom half that she's enjoying herself. " +
                                 "Your own pussy also did achieve orgasm through yours was way louder than hers. " +
                                 "Satisfied with this she simply drops you on the sand still in the afterglow and dig herself back into the hole she came from. " +

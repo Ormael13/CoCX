@@ -12,7 +12,7 @@ public class YourCabin extends DungeonAbstractContent
 		
 		public function enterCabin():void {
 			inDungeon = true;
-			dungeonLoc = -10;
+			dungeonLoc = dungeons.DUNGEON_CABIN;
 			menu();
 			clearOutput();
 			outputText("<b><u>Your Cabin</u></b>\n");
