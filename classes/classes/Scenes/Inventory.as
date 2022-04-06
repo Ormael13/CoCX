@@ -159,35 +159,7 @@ use namespace CoC;
 					}
 				}
 				addButton(13, "Prev", inventoryMenu, page - 1);
-			}/*
-			if (!CoC.instance.inCombat && inDungeon == false && inRoomedDungeon == false && flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0) {
-                var miscNieve:Boolean = Holidays.nieveHoliday() && flags[kFLAGS.NIEVE_STAGE] > 0 && flags[kFLAGS.NIEVE_STAGE] < 5;
-                var miscHolli:Boolean         = flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 1 && flags[kFLAGS.FUCK_FLOWER_LEVEL] < 4 || flags[kFLAGS.FLOWER_LEVEL] >= 1 && flags[kFLAGS.FLOWER_LEVEL] < 4);
-				if (miscNieve
-					|| miscHolli
-					|| player.hasKeyItem("Dragon Egg") >= 0
-					|| flags[kFLAGS.ANEMONE_KID] > 0
-					|| flags[kFLAGS.ALRAUNE_SEEDS] > 0
-					|| (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] > 1 && flags[kFLAGS.CHRISTMAS_TREE_LEVEL] < 8)) {
-					if (miscNieve) {
-						if (flags[kFLAGS.NIEVE_STAGE] == 1)
-							outputText("\nThere's some odd snow here that you could do something with...\n");
-                        else outputText("\nYou have a snow" + Holidays.nieveMF("man", "woman") + " here that seems like it could use a little something...\n");
-                    }
-					if (player.hasKeyItem("Dragon Egg") >= 0) {
-                        SceneLib.emberScene.emberCampDesc();
-					}
-					if (flags[kFLAGS.ANEMONE_KID] > 0) {
-						SceneLib.anemoneScene.anemoneBarrelDescription();
-					}
-					if (flags[kFLAGS.ALRAUNE_SEEDS] > 0) {
-						outputText("\nYou have " + flags[kFLAGS.ALRAUNE_SEEDS] + " alraune seeds planted in your garden.");
-						if (flags[kFLAGS.ALRAUNE_GROWING] > 14) outputText(" Some have already grown to adulthood.");
-						outputText("\n");
-					}
-					addButton(13, "Misc.", miscitemsMenu);
-				}
-			}*/
+			}
             if (!CoC.instance.inCombat) {
                 addButton(10, "Unequip/Misc", manageEquipmentmiscitemsMenu);
 				if (player.hasKeyItem("Bag of Cosmos") >= 0) {

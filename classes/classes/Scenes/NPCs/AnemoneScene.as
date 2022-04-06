@@ -67,8 +67,8 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 		{
 			var needNext:Boolean = false;
 			if (flags[kFLAGS.ANEMONE_KID] > 0) {
-				//if (flags[kFLAGS.KID_ITEM_FIND_HOURS] < 20) flags[kFLAGS.KID_ITEM_FIND_HOURS]++;
-				if (flags[kFLAGS.KID_SITTER] == 0 && flags[kFLAGS.MARBLE_KIDS] >= 5 && model.time.hours > 10 && model.time.hours < 18 && rand(4) == 0) {
+				//weapon check to avoid errors in scene
+				if (flags[kFLAGS.KID_SITTER] == 0 && flags[kFLAGS.MARBLE_KIDS] >= 5 && flags[kFLAGS.ANEMONE_WEAPON_ID] != 0 && model.time.hours > 10 && model.time.hours < 18 && rand(4) == 0) {
 					kidABabysitsCows();
 					needNext = true;
 				}

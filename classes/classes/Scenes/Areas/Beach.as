@@ -110,7 +110,7 @@ import classes.Scenes.SceneLib;
 				name: "cancer ambush",
 				call: function ():void {
 					player.createStatusEffect(StatusEffects.NearWater, 0, 0, 0, 0);
-					cancerScene.CancerEncounter();
+					cancerScene.encounter();
 				},
 				chance: 1
 			}, {

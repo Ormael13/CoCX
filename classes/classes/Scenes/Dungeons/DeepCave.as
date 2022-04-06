@@ -17,16 +17,6 @@ use namespace CoC;
 
 	public class DeepCave extends DungeonAbstractContent
 	{
-		private static const DUNGEON_CAVE_ENTRANCE:int			= 10;
-		private static const DUNGEON_CAVE_TUNNEL:int			= 11;
-		private static const DUNGEON_CAVE_GATHERING_HALL:int	= 12;
-		private static const DUNGEON_CAVE_FUNGUS_CAVERN:int		= 13;
-		private static const DUNGEON_CAVE_TORTURE_ROOM:int		= 14;
-		private static const DUNGEON_CAVE_SECRET_TUNNEL:int		= 15;
-		private static const DUNGEON_CAVE_ZETAZ_CHAMBER:int		= 16;
-
-		public var shouldraFollower:ShouldraFollower = new ShouldraFollower();
-
 		public function DeepCave() {}
 
 		public function enterDungeon():void {
@@ -1071,7 +1061,7 @@ use namespace CoC;
 		}
 		//ROOMS
 		public function roomEntrance():void {
-			dungeonLoc = 10;
+			dungeonLoc = DUNGEON_CAVE_ENTRANCE;
 			clearOutput();
 			outputText("<b><u>The Cave Entrance</u></b>\n");
 			outputText("The entrance to this cave is far bigger than the cave itself.  It looks to be a totally natural formation.  Outside, to the south, is a veritable jungle of plant-life.  There are massive trees, vines, and ferns everywhere.  The cave grows narrower the further north you go, until it's little more than a claustrophobic tunnel burrowing deep into the earth.");
@@ -1091,7 +1081,7 @@ use namespace CoC;
 		}
 
 		public function roomTunnel():void {
-			dungeonLoc = 11;
+			dungeonLoc = DUNGEON_CAVE_TUNNEL;
 			clearOutput();
 			outputText("<b><u>Cave Tunnel</u></b>\n");
 			outputText("This cave tunnel slants downwards to the north, and upwards to the south.  You can see sunlight and feel a fresh breeze from the latter direction, though the walls and air around you are damp with moisture.  You realize that the floor of this cave is fairly smooth and even, as if some attempt had been made to level it out.  You can see a bricked up wall along the north end of the tunnel.  It has a crudely fashioned wooden door in the center of it.");
@@ -1099,7 +1089,7 @@ use namespace CoC;
 		}
 
 		public function roomGatheringHall():void {
-			dungeonLoc = 12;
+			dungeonLoc = DUNGEON_CAVE_GATHERING_HALL;
 			clearOutput();
 			outputText("<b><u>Gathering Hall</u></b>\n");
 			outputText("This room is clearly some kind of dining or gathering hall.  The chamber's shape has been hewn from the surrounding stone, and judging by the visible tool-marks, it wasn't done with a great deal of care.  Two long wooden tables fill out the room.  They're surprisingly well made, though it appears that part of their legs were hacked off with axes to lower their overall height.  You can't help but wonder where they were stolen from.  The tables haven't been cleaned in ages, as evidenced by their many stains and a number of half-rotten bones that still rest on their battered surfaces.  Two rows of crudely crafted chairs flank their better-made brethren, made to accommodate very short beings.");
@@ -1116,7 +1106,7 @@ use namespace CoC;
 		}
 
 		public function roomFungusCavern():void {
-			dungeonLoc = 13;
+			dungeonLoc = DUNGEON_CAVE_FUNGUS_CAVERN;
 			clearOutput();
 			outputText("<b><u>Fungus Cavern</u></b>\n");
 			outputText("This cavern is huge!  Though you can see the edge of a large stalactite to the west, the rest of the cave disappears into darkness beyond twenty or thirty feet away.  The floor is covered in spongy, leaf-shaped fungus.  They're huge, shiny, and purple, and they cover the cavern floor for as far as the illumination will reach.  ");
@@ -1141,7 +1131,7 @@ use namespace CoC;
 		}
 
 		public function roomTortureRoom():void {
-			dungeonLoc = 14;
+			dungeonLoc = DUNGEON_CAVE_TORTURE_ROOM;
 			clearOutput();
 			outputText("<b><u>Filthy Torture Room</u></b>\n");
 			outputText("You step into a dank room, outfitted somewhere between a prison cell and a torture chamber. The ceiling of the sulfur-lined room is hung with an inventive variety of shackles, chains, and devices whose intent are not clear to you. Against the north wall, there appears to be an alchemy lab, laden with a dizzying collection of vials, flasks, and beakers. Against the south, there is a long, sinister-looking wooden rack bearing a sequence of progressively larger and thicker devices, carved to resemble monstrous cocks.  ");
@@ -1160,8 +1150,8 @@ use namespace CoC;
 					if (player.gender > 0) {
 						addButton(0, "Free", SceneLib.vala.freeValazLooseCoochie)
 					}
-					if (player.lust >= 33 && shouldraFollower.followerShouldra()) {
-						addButton(1, "ShouldraVala", shouldraFollower.shouldraMeetsCorruptVala);
+					if (player.lust >= 33 && SceneLib.shouldraFollower.followerShouldra()) {
+						addButton(1, "ShouldraVala", SceneLib.shouldraFollower.shouldraMeetsCorruptVala);
 					}
 				}
 				//Zetaz defeated
@@ -1177,7 +1167,7 @@ use namespace CoC;
 		}
 
 		public function roomSecretPassage():void {
-			dungeonLoc = 15;
+			dungeonLoc = DUNGEON_CAVE_SECRET_TUNNEL;
 			clearOutput();
 			outputText("<b><u>Secret Tunnel</u></b>\n");
 			outputText("This passage is the least livable area that you've seen out of the entire cave.  The walls and floor are little more than dirt and rocks, and explosions of dust burst from the ceiling with each tentative movement you make.  For a moment, a wave of claustrophobia threatens to rob you of your nerve, but you blink the pervasive particles from your eyes and focus on why you're here.  ");
@@ -1194,7 +1184,7 @@ use namespace CoC;
 		}
 
 		public function roomZetazChamber():void {
-			dungeonLoc = 16;
+			dungeonLoc = DUNGEON_CAVE_ZETAZ_CHAMBER;
 			clearOutput();
 			spriteSelect(SpriteDb.s_zetaz);
 			outputText("<b><u>Zetaz's Chambers</u></b>\n");

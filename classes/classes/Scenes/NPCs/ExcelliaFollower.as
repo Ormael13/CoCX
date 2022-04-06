@@ -80,12 +80,15 @@ public function ExcelliaPathChoiceFixHer():void {
 	flags[kFLAGS.EXCELLIA_RECRUITED] = 3;
 	doNext(camp.returnToCampUseFourHours);
 }
-public function ExcelliaPathChoiceMakeSlave():void {
+public function ExcelliaPathChoiceMakeSlave(recall:Boolean = false):void {
 	//spriteSelect(SpriteDb.s_electra);
 	clearOutput();
 	outputText("It’s hard to resist a cowslut presenting herself to you begging to be fucked and you’re more willing to oblige.\n\n");
-	if (player.hasCock()) {
-		outputText("You waste no time "+(player.isNaked() ? "":"stripping off your gear and ")+"stepping up behind the ex-cow queen then grabbing her hips. You grind your [cock] between her large jiggly ass cheeks. Her tail swishes back and forth as she eagerly waits for her treat. She looks back over her shoulder at you, a deep blush present on her face. She pushes back against you every time your rock hard cock rubs against her pussy.\n\n");
+	sceneHunter.selectGender(curry(maleF, recall), curry(femF, recall), null, null, 1);
+    //PARTS
+    //==================================================================================================
+    function maleF(recall:Boolean):void {
+        outputText("You waste no time "+(player.isNaked() ? "":"stripping off your gear and ")+"stepping up behind the ex-cow queen then grabbing her hips. You grind your [cock] between her large jiggly ass cheeks. Her tail swishes back and forth as she eagerly waits for her treat. She looks back over her shoulder at you, a deep blush present on her face. She pushes back against you every time your rock hard cock rubs against her pussy.\n\n");
 		outputText("\"<i>P-Please my " + player.mf("Lord", "Lady") + "! I can't wait any longer. My pussy needs your cock!</i>\"\n\n");
 		outputText("You deliver a sharp smack across her ass. You're the one who will decide when she's granted the pleasure of receiving your dick. She whimpers and lets out a needy moan as you continue to fuck her fat cheeks. Her massive milky mammaries slowly leak their euphoric sweet cream onto your "+(flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 ? "bed":"bedroll")+". The huge soft orbs jiggling freely with every breath their owner takes. ");
 		outputText("The bovine slut moos pleadingly for your [cock] inside her. You slide your dick across her entrance, coating yourself in her slick lubricants in preparation. With little warning, you slip your shaft into her, stretching her big pussy lips into a warm embrace. Rearing back, you slam your groin into Excellia's needy cunt, grinning as she sprays fem lube around your [cock]. She lets out a fulfilled moo as you finally penetrate her.\n\n");
@@ -95,20 +98,32 @@ public function ExcelliaPathChoiceMakeSlave():void {
 		outputText("You pull out, jerking off the last of your seed onto her ass and back. You grin as the slutty cow-girl collapses in the pool of spunk, femcum, and milk you’ve made beneath, her exhausted and panting. You roll her onto her back, laughing at her blissed expression. Her eyes are rolled back into her head and her tongue lolls out.\n\n");
 		outputText("\"<i>T-Thank you my " + player.mf("Lord", "Lady") + "... I… am always… here to serve you…</i>\"\n\n");
 		outputText("You pat your new cum receptacle on the head and tell her that you'll be sure to make great use of her. She lets out a tired moo before drifting off to sleep again. Your grin widens as you think of more ways to use her.\n\n");
-	}
-	else {
-		outputText("You waste no time "+(player.isNaked() ? "":"stripping off your gear and ")+"stepping up to the ex-cow queen then turn her around. You tell her to get to it then lower her head down to your pussy. Excellia lifts her head and begins desperately licking and slurping your pussy. She blows on your clit, causing you to gasp in pleasure. The cow slut licks you until your first orgasm rocks you, drenching her face and mouth with femcum. ");
+        //
+        if (!recall) player.sexReward("vaginalFluids","Dick");
+        sharedEnd(recall);
+    }
+    function femF(recall:Boolean):void {
+        outputText("You waste no time "+(player.isNaked() ? "":"stripping off your gear and ")+"stepping up to the ex-cow queen then turn her around. You tell her to get to it then lower her head down to your pussy. Excellia lifts her head and begins desperately licking and slurping your pussy. She blows on your clit, causing you to gasp in pleasure. The cow slut licks you until your first orgasm rocks you, drenching her face and mouth with femcum. ");
 		outputText("She quickly slurps down your juices, not wasting a single drop.\n\n\"<i>P-Please my Lady… M-More…</i>\"\n\n");
 		outputText("Now with such a slutty look on her face, who are you to deny your new fuckpet? She pushes her mouth against your snatch, tightly sealing her mouth around your dripping snatch before diving her tongue back in. You moan and grip her horns tightly, mashing her face further into your pussy. The cow slut is eager to lap every little drop of femcum that spills from you. Her tongue pushes you closer and closer to the edge. ");
 		outputText("When she sucks your clit into her mouth, a body rocking orgasm tears through you. Your juices floods her mouth as she greedily gulps it all down. You keep feeding her more of your femcum, your orgasm seemingly lasting an eternity. Excellia rubs her growing belly as it rounds out from the amount she's drinking. Her pussy and milk filled jugs leaks like a running faucet, adding to the growing puddle beneath her.\n\n");
 		outputText("With a satisfied sigh, you let go of her and get up. The ex-cow queen slumps down with a dreamy expression on her face.\n\n");
 		outputText("\"<i>T-Thank you my Lady… I'm always… willing to serve you…</i>\"\n\n");
 		outputText("After that she sinks down then drift off into sleep. You pat the sleeping cow slut on the head. You grin thinking of new ways to use your new fuckpet.\n\n");
-	}
-	outputText("(<b>Excellia has been added to the Slaves menu!</b>)\n\n");
-	flags[kFLAGS.EXCELLIA_RECRUITED] = 2;
-	player.orgasm();
-	doNext(camp.returnToCampUseFourHours);
+        //
+        if (!recall) player.sexReward("saliva","Vaginal");
+        sharedEnd(recall);
+    }
+    function sharedEnd(recall:Boolean):void {
+        player.orgasm();
+        if (!recall) {
+            outputText("(<b>Excellia has been added to the Slaves menu!</b>)\n\n");
+            flags[kFLAGS.EXCELLIA_RECRUITED] = 2;
+            doNext(camp.returnToCampUseFourHours);
+        }
+        else
+            doNext(camp.recallScenes);
+    }
 }
 
 public function ExcelliaCampMainMenuFixHer():void {
@@ -351,8 +366,12 @@ public function ExcelliaCampFixHerSexFuckHer():void {
 	if (flags[kFLAGS.EXCELLIA_RECRUITED] > 32) outputText("\"<i>A-Ah please [name]... I want you…</i>\"\n\n");
 	else outputText("\"<i>P-Please my " + player.mf("Lord", "Lady") + "... I can’t wait any longer!</i>\"\n\n");
 	outputText("Well, you can hardly keep the cowgirl waiting too much longer. You’re eager to get a piece of her too. You pull away from her and reposition yourself.\n\n");
-	if (player.hasCock()) {
-		outputText("You gently caress her thighs, urging her to spread her legs for you. She complies, opening up her legs revealing her soaked slick snatch. Her plump lips gape slightly as beads of moisture drips down her curvaceous ass. It’s too hard to resist. You press up against her, grinding your [cock] against her wet vulva. She groans and whines, wanting you inside her. You grind your dick"+(player.cockTotal() > 1 ? "s":"")+" against her soaked pussy until "+(player.cockTotal() > 1 ? "they're":"it’s")+" thoroughly coated in her slick juices. ");
+    
+	sceneHunter.selectGender(maleF, femF, null, null, 1);
+    //PARTS
+    //==================================================================================================
+    function maleF():void {
+        outputText("You gently caress her thighs, urging her to spread her legs for you. She complies, opening up her legs revealing her soaked slick snatch. Her plump lips gape slightly as beads of moisture drips down her curvaceous ass. It’s too hard to resist. You press up against her, grinding your [cock] against her wet vulva. She groans and whines, wanting you inside her. You grind your dick"+(player.cockTotal() > 1 ? "s":"")+" against her soaked pussy until "+(player.cockTotal() > 1 ? "they're":"it’s")+" thoroughly coated in her slick juices. ");
 		outputText("You press the head against her entrance"+(player.cockTotal() > 1 ? " and tight backdoor":"")+", sinking in a couple inches. You almost gasp and shudder as her warm and slick walls pull you in with relative ease. Her heavenly tunnel"+(player.cockTotal() > 1 ? "s":"")+" squeezes and hugs you tightly drawing you in further until you’re fully hilted inside her. She moos out feeling you deep inside her.\n\n");
 		if (flags[kFLAGS.EXCELLIA_RECRUITED] > 32) outputText("\"<i>Mmm yes, [name]... I’m all yours...</i>\"\n\n");
 		else outputText("\"<i>Oooo my " + player.mf("Lord", "Lady") + " please fuck me! I-I can take it!</i>\"\n\n");
@@ -364,9 +383,13 @@ public function ExcelliaCampFixHerSexFuckHer():void {
 		if (flags[kFLAGS.EXCELLIA_RECRUITED] > 32) outputText("\"<i>Oh [name]... That was just amazing… Oooo, I’m still tingling!</i>\"\n\n");
 		else outputText("\"<i>A-Ah thanking you my " + player.mf("Lord", "Lady") + "... You truly are amazing...</i>\"\n\n");
 		if (flags[kFLAGS.EXCELLIA_RECRUITED] >= 33) excelliaPreg();
-	}
-	else {
-		outputText("You smirk as you slip a hand down to her soaked pussy. She lets out a tiny gasp when your fingers roam over her soft vulva. You rub your thumb over her big pleasure button. You can feel it grow and harden from its hood to a full 1.5 inches. You pinch it gently between your fingers, making the cowgirl moo lowly. You smirk slipping one of your digits inside with ease. She shudders, feeling your finger rubbing against her sensitive walls. ");
+        player.sexReward("vaginalFluids","Dick");
+        //
+        sharedEnd();
+
+    }
+    function femF():void {
+        outputText("You smirk as you slip a hand down to her soaked pussy. She lets out a tiny gasp when your fingers roam over her soft vulva. You rub your thumb over her big pleasure button. You can feel it grow and harden from its hood to a full 1.5 inches. You pinch it gently between your fingers, making the cowgirl moo lowly. You smirk slipping one of your digits inside with ease. She shudders, feeling your finger rubbing against her sensitive walls. ");
 		outputText("You decide to slip another finger inside her, exploring her innermost depths. She lets out a moan when you brush over her sweet spot. You continue rubbing over it, watching the cowgirl squirm and moan as your skillful digits take advantage of her most sensitive area.\n\n");
 		if (flags[kFLAGS.EXCELLIA_RECRUITED] > 32) outputText("\"<i>[name] please! K-ah-Keep going!</i>\"\n\n");
 		else outputText("\"<i>A-Ah yes! Right there m-my Lady!</i>\"\n\n");
@@ -375,12 +398,17 @@ public function ExcelliaCampFixHerSexFuckHer():void {
 		outputText("You're both left panting and gasping as you fall over onto your sides. She giggles, pulling you close into her arms.\n\n");
 		if (flags[kFLAGS.EXCELLIA_RECRUITED] > 32) outputText("\"<i>[name] please! K-ah-Keep going!</i>\"\n\n");
 		else outputText("\"<i>A-Ah yes! Right there m-my Lady!</i>\"\n\n");
-	}
-	outputText("You can’t help but feel the same way. You lay next to the cowgirl nuzzling into her arms for a rest. After a quick nap, you help her get cleaned up and say your goodbyes to her as you prepare to head back out.\n\n");
-	if (flags[kFLAGS.EXCELLIA_RECRUITED] < 32) flags[kFLAGS.EXCELLIA_RECRUITED]++;
-	player.orgasm();
-	doNext(camp.returnToCampUseOneHour);
+        player.sexReward("Default","Default", true, false);
+        //
+        sharedEnd();
+    }
+    function sharedEnd():void {
+        outputText("You can’t help but feel the same way. You lay next to the cowgirl nuzzling into her arms for a rest. After a quick nap, you help her get cleaned up and say your goodbyes to her as you prepare to head back out.\n\n");
+        if (flags[kFLAGS.EXCELLIA_RECRUITED] < 32) flags[kFLAGS.EXCELLIA_RECRUITED]++;
+        doNext(camp.returnToCampUseOneHour);
+    }
 }
+
 public function ExcelliaCampFixHerSexOralFun():void {
 	//spriteSelect(SpriteDb.s_electra);
 	clearOutput();
@@ -397,7 +425,7 @@ public function ExcelliaCampFixHerSexOralFun():void {
 	else outputText("\"<i>Thank you my " + player.mf("Lord", "Lady") + "! I love it when you do that to me!</i>\"\n\n");
 	outputText("You wouldn't mind doing it again but it's about time for you to get going. So much to do, so little time. Excellia pouts but nods in understanding. She helps you get cleaned up and prepared to head back out.\n\n");
 	if (flags[kFLAGS.EXCELLIA_RECRUITED] < 32) flags[kFLAGS.EXCELLIA_RECRUITED]++;
-	player.orgasm();
+    player.sexReward("Default","Default");
 	doNext(camp.returnToCampUseOneHour);
 }
 public function ExcelliaCampFixHerSexSuckleFuck():void {
@@ -415,7 +443,7 @@ public function ExcelliaCampFixHerSexSuckleFuck():void {
 	outputText("You cough a bit telling the cowgirl that it's okay. You might've gotten a bit carried away yourself to be honest. You untangle yourself from her taking note of your bulging stomach. It sloshes and groans from the amount of milk you drank. At least you won't be hungry for a while and you feel more refreshed than ever. You kiss Excellia thanking her for such a wonderful meal. She smiles, glad you aren't upset over the near boob suffocation. She helps you get cleaned up as you get ready to head back out.\n\n");
 	if (flags[kFLAGS.EXCELLIA_RECRUITED] < 32) flags[kFLAGS.EXCELLIA_RECRUITED]++;
 	if (flags[kFLAGS.EXCELLIA_RECRUITED] >= 33) excelliaPreg();
-	player.orgasm();
+    player.sexReward("Default","Default");
 	doNext(camp.returnToCampUseOneHour);
 }
 public function excelliaHenchmanOption():void {
@@ -612,7 +640,11 @@ public function ExcelliaCampMakeSlaveSexFuckHer():void {
 	outputText("explore her mouth. "+(player.hasCock() ? "Her aphrodisiac laced lipstick has a profound effect on your body, your [cock] quickly hardening and poking against her thigh":"You're more than excited to have a taste of your delectable cowslut, your pussy becoming wetter by the second")+". Your hands roam along her body discovering her most sensitive areas. She moans into your mouth from your light touches. You break the kiss, a small string of saliva connecting your mouths. She pants harder, the needy lust in her eyes becoming more apparent.\n\n");
 	outputText("\"<i>P-Please my " + player.mf("Lord", "Lady") + "... Take me! Use me your loyal slut to your heart's content!</i>\"\n\n");
 	outputText("Well, you lick your lips eager to fuck your needy dairy cow. You pull away from her and reposition yourself.\n\n");
-	if (player.hasCock()) {
+    //
+    sceneHunter.selectGender(maleF, femF, null, null, 1);
+    //PARTS
+    //==================================================================================================
+    function maleF():void {
 		outputText("You smack her thighs making her spread her legs for you. She complies, opening up her legs, revealing her soaked slick snatch. Her plump lips gape slightly as beads of moisture drips down her curvaceous ass. It’s too hard to resist. You press up against her, grinding your [cock] against her wet vulva. She groans and whines, wanting you inside her. You grind your dick"+(player.cockTotal() > 1 ? "s":"")+" against her soaked pussy until "+(player.cockTotal() > 1 ? "they're":"it’s")+" thoroughly coated in her slick juices. ");
 		outputText("With little warning, you slam into her entrance"+(player.cockTotal() > 1 ? " and tight backdoor":"")+", sinking in several inches. You almost gasp and shudder as her warm and slick walls pull you in with relative ease. Her heavenly tunnel"+(player.cockTotal() > 1 ? "s":"")+" squeezes and hugs you tightly drawing you in further until you’re fully hilted inside her. She moos out feeling you deep inside her.\n\n");
 		outputText("\"<i>Oooo my " + player.mf("Lord", "Lady") + " please fuck me harder! I like it rough!</i>\"\n\n");
@@ -624,8 +656,10 @@ public function ExcelliaCampMakeSlaveSexFuckHer():void {
 		outputText("\"<i>A-Ah thanking you my " + player.mf("Lord", "Lady") + "... I hope my cummy hole was to your liking. I just love it when you feel me up!</i>\"\n\n");
 		outputText("You smirk patting your loyal slave on the head telling her she performed adequately. You lay next to the cowgirl as she nuzzles against you for a rest. After a quick nap, you get cleaned up and leave the still sleeping dairy cow as you prepare to head back out.\n\n");
 		excelliaPreg();
-	}
-	else {
+        player.sexReward("vaginalFluids","Dick");
+	    doNext(camp.returnToCampUseOneHour);
+    }
+    function femF():void {
 		outputText("You grin as you slip a hand down to her soaked pussy. She lets out a tiny gasp when your fingers roam over her soft vulva. You rub your thumb over her big pleasure button. You can feel it grow and harden from its hood to a full 1.5 inches. You pinch it between your fingers making the cowslut moo lowly. You smirk slipping one of your digits inside with ease. She shudders, feeling your finger rubbing against her sensitive walls. ");
 		outputText("You decide to slip another finger inside her exploring her innermost depths. She lets out a moan when brush over her sweet spot. You continue rubbing over it watching the cowslut squirm and moan as your skillful digits take advantage of her most sensitive area.\n\n");
 		outputText("\"<i>A-Ah yes! Right there m-my Lady! Please give me more!</i>\"\n\n");
@@ -634,9 +668,9 @@ public function ExcelliaCampMakeSlaveSexFuckHer():void {
 		outputText("You're both left panting and gasping as you fall over onto your sides. She giggles, pulling you into a boob crushing hug.\n\n");
 		outputText("\"<i>W-Wow my Lady… That was truly amazing! I'm so happy to serve you!</i>\"\n\n");
 		outputText("You smirk, patting your loyal slave on the head, telling her she performed adequately. You lay next to the cowgirl as she nuzzles up next to you for a rest. After a quick nap, you clean up leaving the still sleeping ex-cow queen to as you prepare to head back out.\n\n");
-	}
-	player.orgasm();
-	doNext(camp.returnToCampUseOneHour);
+        player.sexReward("Default","Default");
+	    doNext(camp.returnToCampUseOneHour);
+    }
 }
 public function ExcelliaCampMakeSlaveSexOralFun():void {
 	//spriteSelect(SpriteDb.s_electra);
@@ -651,7 +685,7 @@ public function ExcelliaCampMakeSlaveSexOralFun():void {
 	outputText("You're both left panting as your bodies slowly calm down from the exertion. You untangle yourself from her letting out a content sigh. She giggles then pulls you into a passionate kiss. You can faintly taste yourself on her tongue. She pulls back looking at you with nothing but joy in her eyes.\n\n");
 	outputText("\"<i>Thank you my " + player.mf("Lord", "Lady") + "! I love it when you do that to me! I hope you found me yummy!</i>\"\n\n");
 	outputText("You wouldn't mind doing it again but it's about time for you to get going. So much to do, so little time. Excellia pouts but nods in understanding. She helps you get cleaned up and prepared to head back out.\n\n");
-	player.orgasm();
+    player.sexReward("Default","Default");
 	doNext(camp.returnToCampUseOneHour);
 }
 public function ExcelliaCampMakeSlaveSexMilkyMassage():void {
@@ -668,7 +702,7 @@ public function ExcelliaCampMakeSlaveSexMilkyMassage():void {
 	outputText("You shudder as the pleasure slowly passes. Your body feels more relaxed than ever before. The cowslut moos quietly on top of you, leaning in and giving you a deep kiss. "+(player.hasCock() ? "Your [cock] surges back to hardness as her aphrodisiac laced lips begin to have an effect on you. ":"")+"She climbs off of you, allowing you to get up. You stretch, all the aches and knots in your body are completely gone.\n\n");
 	outputText("\"<i>Oh my " + player.mf("Lord", "Lady") + " you look positively stunning! I hope my creamy massage helped!</i>\"\n\n");
 	outputText("It certainly did. You might even reward the ex-cow queen later if you're feeling generous enough. She nearly squeals at the promise of a reward, her tail swishing behind her excitedly. You clean and gather your things, telling her that you may be back later. Giving her a pat on the head you turn to go back to your business for the time being\n\n");
-	player.orgasm();
+    player.sexReward("Default","Default");
 	doNext(camp.returnToCampUseOneHour);
 }
 

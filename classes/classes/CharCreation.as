@@ -150,7 +150,6 @@ import coc.view.MainView;
 
 			//RESET DUNGEON
 			DungeonAbstractContent.inDungeon = false;
-			DungeonAbstractContent.dungeonLoc = 0;
 			DungeonAbstractContent.inRoomedDungeon = false;
 			DungeonAbstractContent.inRoomedDungeonResume = null;
 			//Hold onto old data for NG+

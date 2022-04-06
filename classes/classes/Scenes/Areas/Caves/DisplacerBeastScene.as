@@ -80,7 +80,7 @@ public function displacerBeastDefeat():void {
 		player.removeStatusEffect(StatusEffects.EbonLabyrinthB);
 		if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss1)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss1);
 		if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss2)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss2);
-		DungeonAbstractContent.dungeonLoc = 0;
+		DungeonAbstractContent.inDungeon = false;
 	}
 	player.sexReward("Default", "Nipples", true, false);
 	cleanupAfterCombat();
