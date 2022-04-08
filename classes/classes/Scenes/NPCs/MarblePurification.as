@@ -1609,10 +1609,9 @@ public class MarblePurification extends NPCAwareContent{
             outputText(" and that of your child");
         else if (flags[kFLAGS.MARBLE_KIDS] > 1)
             outputText(" and those of your children");
-        //fixing fork. Second one still makes sense.
-        if (player.cor <= 40)
-            outputText(" just outside the camp.  She must have somehow found out about your purification.");
+        outputText(" just outside the camp." + (player.cor <= 40 ? "  She must have somehow found out about your purification." : ""));
         outputText("\n\nShe excitedly runs up to you and gives you a big hug, holding you very tightly to her chest.  After several moment of embracing you, Marble gently whispers in your ear, \"<i>");
+        //fixing fork. Second one still makes sense.
         if (player.cor <= 40)
             outputText("I'm so glad you managed to free yourself from the worst of the taint.");
         else {

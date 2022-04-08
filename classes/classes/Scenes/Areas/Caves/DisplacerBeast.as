@@ -17,14 +17,10 @@ use namespace CoC;
 	{	
 		public function moveDisplacerBeastPhaseStrike():void {
 			outputText("The displacer beast blinks out and appears right behind you as it begins mauling you with its claws.");
-			outputText("\n\nThe displacer beast claws you! ");
-			phasestrikeDmg();
-			outputText("\n\nThe displacer beast claws you! ");
-			phasestrikeDmg();
-			outputText("\n\nThe displacer beast claws you! ");
-			phasestrikeDmg();
-			outputText("\n\nThe displacer beast claws you! ");
-			phasestrikeDmg();
+            for (i:int = 1; i < 4; ++i) {
+                outputText("\n\nThe displacer beast claws you! ");
+                phasestrikeDmg();
+            }
 		}
 		private function phasestrikeDmg():void {
 			var damage:Number = 0;
@@ -44,11 +40,9 @@ use namespace CoC;
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) SceneLib.dungeons.ebonlabyrinth.defeatedByDisplacerBeast();
-			else {
-				if (flags[kFLAGS.DISPLACER_BEAST_WINS] < 1) flags[kFLAGS.DISPLACER_BEAST_WINS] = 1;
-				SceneLib.displacerbeastScene.displacerBeastDefeat();
-			}
+            if (inDungeon) inDungeon = false; //EL check
+            if (flags[kFLAGS.DISPLACER_BEAST_WINS] < 1) flags[kFLAGS.DISPLACER_BEAST_WINS] = 1;
+			SceneLib.displacerbeastScene.displacerBeastDefeat();
 		}
 		
 		override public function get long():String {

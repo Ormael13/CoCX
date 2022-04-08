@@ -207,10 +207,7 @@ public class DungeonEngine extends DungeonAbstractContent {
             case DUNGEON_ANZU_BASEMENT:         return anzupalace.roomBasement;
             case DUNGEON_ANZU_ARMORY:           return anzupalace.roomArmory;
             //Ebon Labyrinth
-            case DUNGEON_EBON_LABYRINTH_0: return ebonlabyrinth.roomAAA;
-            case DUNGEON_EBON_LABYRINTH_1: return ebonlabyrinth.roomBBB;
-            case DUNGEON_EBON_LABYRINTH_2: return ebonlabyrinth.roomCCC;
-            case DUNGEON_EBON_LABYRINTH_3: return ebonlabyrinth.roomDDD;
+            case DUNGEON_EBON_LABYRINTH: return ebonlabyrinth.roomStatic;
             //Beehive
             case DUNGEON_BEE_HIVE_1: return beehive.room1South;
             case DUNGEON_BEE_HIVE_2: return beehive.room4East;

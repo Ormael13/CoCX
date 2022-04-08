@@ -1087,7 +1087,7 @@ public class DungeonMap extends DungeonAbstractContent
 					rawOutputText("\n           ");
 				}
 			}
-			else if (dungeonLoc >= DUNGEON_RIVER_FLOOR_02_ROOM_01 && dungeonLoc < DUNGEON_EBON_LABYRINTH_0) { //River Dungeon: Floor 2
+			else if (dungeonLoc >= DUNGEON_RIVER_FLOOR_02_ROOM_01 && dungeonLoc < DUNGEON_EBON_LABYRINTH) { //River Dungeon: Floor 2
 				rawOutputText("River Dungeon");
 				if (dungeonLoc == DUNGEON_RIVER_FLOOR_02_ROOM_01) {
 					rawOutputText(", Floor 2");
@@ -1342,40 +1342,15 @@ public class DungeonMap extends DungeonAbstractContent
 					rawOutputText("\n[ ]—[P]");
 				}
 			}
-			else if (dungeonLoc >= DUNGEON_EBON_LABYRINTH_0 && dungeonLoc < DUNGEON_RIVER_FLOOR_03_ROOM_01) { //Ebon Labyrinth
-				rawOutputText("Ebon Labyrinth");
-				if (dungeonLoc == DUNGEON_EBON_LABYRINTH_0) {
-					rawOutputText(", Corridor");
-					rawOutputText("\n   |   |   ");
-					rawOutputText("\n —[P]—[ ]— ");
-					rawOutputText("\n   |   |   ");
-					rawOutputText("\n —[ ]—[ ]— ");
-					rawOutputText("\n   |   |   ");
-				}
-				else if (dungeonLoc == DUNGEON_EBON_LABYRINTH_1) {
-					rawOutputText(", Corridor");
-					rawOutputText("\n   |   |   ");
-					rawOutputText("\n —[ ]—[P]— ");
-					rawOutputText("\n   |   |   ");
-					rawOutputText("\n —[ ]—[ ]— ");
-					rawOutputText("\n   |   |   ");
-				}
-				else if (dungeonLoc == DUNGEON_EBON_LABYRINTH_2) {
-					rawOutputText(", Corridor");
-					rawOutputText("\n   |   |   ");
-					rawOutputText("\n —[ ]—[ ]— ");
-					rawOutputText("\n   |   |   ");
-					rawOutputText("\n —[ ]—[P]— ");
-					rawOutputText("\n   |   |   ");
-				}
-				else if (dungeonLoc == DUNGEON_EBON_LABYRINTH_3) {
-					rawOutputText(", Corridor");
-					rawOutputText("\n   |   |   ");
-					rawOutputText("\n —[ ]—[ ]— ");
-					rawOutputText("\n   |   |   ");
-					rawOutputText("\n —[P]—[ ]— ");
-					rawOutputText("\n   |   |   ");
-				}
+			else if (dungeonLoc == DUNGEON_EBON_LABYRINTH) { //Ebon Labyrinth
+				rawOutputText("Ebon Labyrinth, corridor");
+                if (silly())
+                    rawOutputText("\nDid you <i>REALLY</i> expect a to get a <b>map</b> of the <b>labyrinth</b>? Why didn't you bring some threads with you?");
+                else {
+                    rawOutputText("\n   |  ");
+                    rawOutputText("\n —[P]—");
+                    rawOutputText("\n   |  ");
+                }
 			}
 			else if (dungeonLoc >= DUNGEON_RIVER_FLOOR_03_ROOM_01 && dungeonLoc < DUNGEON_BEE_HIVE_1) { //River Dungeon: Floor 3
 				rawOutputText("River Dungeon");

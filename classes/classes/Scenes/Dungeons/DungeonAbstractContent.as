@@ -159,10 +159,8 @@ public class DungeonAbstractContent extends BaseContent
     public static const DUNGEON_RIVER_FLOOR_02_ROOM_26:int = 129;
     public static const DUNGEON_RIVER_FLOOR_02_ROOM_27:int = 130;
     
-    public static const DUNGEON_EBON_LABYRINTH_0:int	= 131;
-    public static const DUNGEON_EBON_LABYRINTH_1:int	= 132;
-    public static const DUNGEON_EBON_LABYRINTH_2:int	= 133;
-    public static const DUNGEON_EBON_LABYRINTH_3:int	= 134;
+    public static const DUNGEON_EBON_LABYRINTH:int = 131;
+    //132-134 empty
     
     public static const DUNGEON_RIVER_FLOOR_03_ROOM_01:int = 135;
     public static const DUNGEON_RIVER_FLOOR_03_ROOM_02:int = 136;

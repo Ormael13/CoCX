@@ -14237,7 +14237,6 @@ public class Combat extends BaseContent {
                 outputText("You run as fast as you can, taking random corridors and running past the confused enemies all the way back to the labyrinth entrance. Of course the slug thing can't follow you she's way too slow however as a result you lose all the progression you made in the maze!\n\n");
                 player.removeStatusEffect(StatusEffects.EbonLabyrinthB);
                 player.createStatusEffect(StatusEffects.EbonLabyrinthB, 0, 0, 0, 0);
-                DungeonAbstractContent.dungeonLoc = DungeonAbstractContent.DUNGEON_EBON_LABYRINTH_0;
                 doNext(playerMenu);
             } else {
                 outputText("You're trapped in your foe's home turf - there is nowhere to run!\n\n");

@@ -136,7 +136,7 @@ use namespace CoC;
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			SceneLib.dungeons.ebonlabyrinth.defeatedByDarkSlime();
+			SceneLib.caves.darkslimeScene.defeatedByDarkSlime();
 		}
 
 		public function DarkSlime()

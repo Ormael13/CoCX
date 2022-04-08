@@ -31,80 +31,167 @@ import classes.CoC;
 import classes.StatusEffects;
 import classes.display.SpriteDb;
 
-public class EbonLabyrinth extends DungeonAbstractContent
-	{
-		private var _cuteScene:int = 1;
-		
-		public var elDisplacerbeast:DisplacerBeastScene = new DisplacerBeastScene();
-		public var ancientTentacleBeast:TentacleBeastScene = new TentacleBeastScene();
-				
-		public function EbonLabyrinth() {}
-		
-		public function ebonlabyrinthdiscovery():void {
-			flags[kFLAGS.EBON_LABYRINTH] = 1;
-			clearOutput();
-			outputText("You find the entrance to what appears to be a tunnel made of stone. This place looks man made as if carved by humanoid hands yet sports no decoration. Just empty linear corridors and corners dimly lit by magical torches. On a wall you find a sign reading ");
-			outputText("-Woe to who seeketh the black rose. Thy who enter beware, while riches you may find, death lurks in the Labyrinth deepest reaches. It ever hungers.- how charming. The ruin of an old campfire is all that's left of the previous adventurers to come here.\n\n");
-			outputText("<b>You found the Ebon Labyrinth.</b>\n\n");
-			doNext(enterDungeon);
-		}
-		public function enterDungeon():void {
-			inDungeon = true;
-			dungeonLoc = DUNGEON_EBON_LABYRINTH_0;
-			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss);
-			player.createStatusEffect(StatusEffects.EbonLabyrinthBoss, 65, 0, 0, 0);
-			player.createStatusEffect(StatusEffects.EbonLabyrinthA, 10, 0, 0, 0);
-			player.createStatusEffect(StatusEffects.EbonLabyrinthB, 1, 0, 0, 0);
-			playerMenu();
-		}
-		public function exitDungeon():void {
-			inDungeon = false;
-			clearOutput();
-			outputText("You leave the Ebon Labyrinth behind and take off back towards the camp.");
-			if (player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.removeStatusEffect(StatusEffects.ThereCouldBeOnlyOne);
-			if (flags[kFLAGS.EBON_LABYRINTH_RECORD] < player.statusEffectv1(StatusEffects.EbonLabyrinthB)) flags[kFLAGS.EBON_LABYRINTH_RECORD] = player.statusEffectv1(StatusEffects.EbonLabyrinthB);
-			player.removeStatusEffect(StatusEffects.EbonLabyrinthA);
-			player.removeStatusEffect(StatusEffects.EbonLabyrinthB);
-			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss1)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss1);
-			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss2)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss2);
-			doNext(camp.returnToCampUseOneHour);
-		}
-		//Monsters
-		public function defeatedByDisplacerBeast():void {
-			inDungeon = false;
-			player.removeStatusEffect(StatusEffects.EbonLabyrinthA);
-			elDisplacerbeast.displacerBeastDefeat();
-		}
-		public function defeatedByDarkSlime():void {
-			clearOutput();
-			spriteSelect(SpriteDb.s_darkgoogirlsprite_16bit);
-			menu();
-			outputText("As the dark slime approaches, it occurs to you that the only thing she is after are your fluids. You can either let her or struggle. What will you do?\n\n");
-			addButton(0, "Let her", defeatedByDarkSlimeLetHer);
-			addButton(1, "Struggle", defeatedByDarkSlimeStruggle);
-			//var test:Number = player.hasKeyItem("Torch");
-			if (player.hasKeyItem("Torch") < 0) {
-				addButtonDisabled(1, "Struggle", "You have nothing to hold her at bay!")
-			}
-		}
+import classes.internals.SaveableState;
 
-		public function defeatedByDarkSlimeStruggle():void {
-			clearOutput();
-			spriteSelect(SpriteDb.s_darkgoogirlsprite_16bit);
-			outputText("You refuse to end up as a meal to a slime and, unable to pose a decent fight, you keep the thing at bay using a torch.\n\n");
-			outputText("\"<i>Not fair! Put that out, damn thing hurts like a bitch. Fucking knew I should have put more work on my fire wards!</i>\"\n\n");
-			outputText("Aha! So she can’t stand fire, huh? Well too bad for her, as you proceed to crawl away from the slime keeping the torch between you and her so she can’t approach. Eventually, you manage to stand up and begin running from the, somewhat disappointed, slime girl.\n\n");
-			cleanupAfterCombatTFEvent();
-		}
-		public function defeatedByDarkSlimeLetHer():void {
-			SceneLib.caves.darkslimeScene.LetzRape();
-			cleanupAfterCombatTFEvent();
-			dungeonLoc = DUNGEON_EBON_LABYRINTH_0;
-			if (flags[kFLAGS.EBON_LABYRINTH_RECORD] < player.statusEffectv1(StatusEffects.EbonLabyrinthB)) flags[kFLAGS.EBON_LABYRINTH_RECORD] = player.statusEffectv1(StatusEffects.EbonLabyrinthB);
-			player.removeStatusEffect(StatusEffects.EbonLabyrinthB);
-			player.createStatusEffect(StatusEffects.EbonLabyrinthB, 0, 0, 0, 0);
-			playerMenu();
-		}
+public class EbonLabyrinth extends DungeonAbstractContent //implements SaveableState
+{
+    /*
+    //==================================================================================================
+    //Saveable properties
+    //==================================================================================================
+
+    //==================================================================================================
+    //SaveableState interface
+    //==================================================================================================
+	public function EbonLabyrinth() {
+        Saves.registerSaveableState(this);
+    }
+
+    public function stateObjectName():String {
+        return "EbonLabyrinth";
+    }
+
+    public function resetState():void {
+        Nursed = false;
+        NursedCooldown = 0;
+        Sated = false;
+        SatedCooldown = 0;
+    }
+
+    public function saveToObject():Object {
+        return {
+            "LunaNursed": Nursed,
+            "LunaNursedCooldown": NursedCooldown,
+            "LunaSated": Sated,
+            "LunaSatedCooldown": SatedCooldown
+        };
+    }
+
+    public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
+        if (o) {
+            Nursed = o["LunaNursed"];
+            Sated = o["LunaSated"];
+            if ("LunaNursedCooldown" in o) {
+                // new save, can load
+                NursedCooldown = o["LunaNursedCooldown"];
+            } else {
+                // old save, still need to set NursedCooldown  to something
+                NursedCooldown = 0;
+            }
+            if ("LunaSatedCooldown" in o) {
+                // new save, can load
+                SatedCooldown = o["LunaSatedCooldown"];
+            } else {
+                // old save, still need to set NursedCooldown  to something
+                SatedCooldown = 0;
+            }
+        } else {
+            // loading from old save
+            resetState();
+    }
+    */
+
+    //==================================================================================================
+    //Other properties
+    //==================================================================================================
+
+    //FLAGS:
+    //EBON_LABYRINTH_RECORD - max reached level. Used for achievements only.
+    //EBON_LABYRINTH_ENDLESS - endless mode unlocked. Enables up/down buttons.
+
+    //Current floor
+    public var floor:int = 1;
+
+    //Minimum enemy level. Depends on the current floor.
+    // I made all enemies equal - it makes calculations easier, and improves the balance.
+    // If you want, you can add offsets to enemy constructors, it's not that hard.
+    // Also, enemies now scale evenly with the bosses (though bosses are always 5LVL higher). Otherwise, formulae would be messy.
+    // If you want, you can move calculations into constructors (passing only the offset)
+    // Or just pass different values from here.
+    // CURRENT LEVEL FORMULAE: 60 + (floor/50) * 5
+    public var minLevel:int = 60;
+    // Current enemy level. Can be changed by the player
+    public var enemyLevel:int = 60;
+    public function get bossLevel():int { return enemyLevel + 5; }
+
+    //Encounter chance, base = 10. Increased each time for an empty room / boss, peaceful encounters, also after...defeats?
+    // Reset after "peaceful" encounters (Atlach after TF), exit / bad-end,  after "regular" encounters.
+    public var encChance:int = 10;
+
+    //Direction constants
+    public static const DIR_INIT    :int = 0; //for start/up/down
+    public static const DIR_NORTH   :int = 0;
+    public static const DIR_WEST    :int = 1;
+    public static const DIR_SOUTH   :int = 2;
+    public static const DIR_EAST    :int = 3;
+    //Current direction. Used only for the text
+    public var direction:int  = DIR_INIT;
+
+    //Boss bits
+    public static const bossesTotal:int  = 6; //not including Alvina's chimera
+    //---tier 1
+    public static const BIT_EMPRESS :int = 0;
+    public static const BIT_HYDRA   :int = 0;
+    public static const BIT_SNAIL   :int = 0;
+    //---tier 2
+    public static const BIT_GAZER   :int = 0;
+    public static const BIT_ATLACH  :int = 0;
+    public static const BIT_FAILURE :int = 0; //???
+    //Boss tracker. Makes boss encounters pseudo-random.
+    //Please, learn what is binary encoding and use it.
+    public var bossTracker:int  = DIR_INIT;
+
+    //Only one?
+    //Cute scene?
+    //Reuse flag?
+
+    //Scene instances
+    public var elDisplacerbeast:DisplacerBeastScene = new DisplacerBeastScene();
+    public var ancientTentacleBeast:TentacleBeastScene = new TentacleBeastScene();
+
+    //==================================================================================================
+    //Methods
+    //==================================================================================================
+
+    //First encounter
+    public function ebonlabyrinthdiscovery():void {
+        flags[kFLAGS.EBON_LABYRINTH] = 1;
+        clearOutput();
+        outputText("You find the entrance to what appears to be a tunnel made of stone. This place looks man made as if carved by humanoid hands yet sports no decoration. Just empty linear corridors and corners dimly lit by magical torches. On a wall you find a sign reading ");
+        outputText("-Woe to who seeketh the black rose. Thy who enter beware, while riches you may find, death lurks in the Labyrinth deepest reaches. It ever hungers.- how charming. The ruin of an old campfire is all that's left of the previous adventurers to come here.\n\n");
+        outputText("<b>You found the Ebon Labyrinth.</b>\n\n");
+        doNext(enterDungeon);
+    }
+
+    //Init - resets all flags
+    public function enterDungeon():void {
+        inDungeon = true;
+        dungeonLoc = DUNGEON_EBON_LABYRINTH; //one 'room' for all directions. Make things simpler!
+        //reset all
+        floor = 1;
+        minLevel = 60;
+        enemyLevel = 60;
+        bossTracker = 0;
+        playerMenu(); //calls checkRoom -> roomStatic
+    }
+
+    public function exitDungeon():void {
+        inDungeon = false;
+        clearOutput();
+        outputText("You leave the Ebon Labyrinth behind and take off back towards the camp.");
+        if (flags[kFLAGS.EBON_LABYRINTH_RECORD] < floor) flags[kFLAGS.EBON_LABYRINTH_RECORD] = floor;
+        doNext(camp.returnToCampUseOneHour);
+    }
+
+	
+				
+		
+		
+		
+		
+
+		
+		
 
 		public function defeatedByStrayDemon():void {
 			clearOutput();//succubus, incibus or omnibus
