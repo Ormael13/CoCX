@@ -239,8 +239,7 @@ public class Camp extends NPCAwareContent{
 			ZenjiScenes.ZenjiLoverDaysTracker = time.days;
 		}
 		if (TrollVillage.ZenjiMoneyHelp > 0) TrollVillage.ZenjiMoneyHelp -= 1;
-		if (!marbleScene.marbleFollower()) {
-			if (flags[kFLAGS.MARBLE_LEFT_OVER_CORRUPTION] == 1 && player.cor <= 40) {
+		if (!marbleScene.marbleFollower() && flags[kFLAGS.MARBLE_LEFT_OVER_CORRUPTION] == 1/* && player.cor <= 40*/) { //Removed the check to make her return to everyone
 				hideMenus();
 				marblePurification.pureMarbleDecidesToBeLessOfABitch();
 				return;
@@ -263,6 +262,7 @@ public class Camp extends NPCAwareContent{
 				marblePurification.BLUHBLUH();
 				return;
 			}
+            /* Marble flipouts are disabled because they made no sense
 			if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] >= 5) {
 				if (flags[kFLAGS.MARBLE_WARNED_ABOUT_CORRUPTION] == 0 && player.cor >= 50 + player.corruptionTolerance()) {
 					hideMenus();
@@ -275,6 +275,7 @@ public class Camp extends NPCAwareContent{
 					return;
 				}
 			}
+            */
 			if (flags[kFLAGS.MARBLE_RATHAZUL_COUNTER_1] == 1 && (time.hours == 6 || time.hours == 7)) {
 				hideMenus();
 				marblePurification.rathazulsMurbelReport();
