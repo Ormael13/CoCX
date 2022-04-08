@@ -220,7 +220,7 @@ public class Masturbation extends BaseContent {
 					outputText("casting seductive looks around, hoping someone or something is nearby to fuck you.\n\n");
 				}
 			}
-			else if (prison.inPrison || (inDungeon && DungeonAbstractContent.dungeonLoc != -10 && player.companionsInPCParty())) {
+			else if (prison.inPrison || (inDungeon && DungeonAbstractContent.dungeonLoc != DungeonAbstractContent.DUNGEON_CABIN && player.companionsInPCParty())) {
 				outputText("You walk to a secluded corner" + player.clothedOrNakedLower(", remove your [lowergarment]") + " and sit down. ");
 			}
 			//In cabin
@@ -296,7 +296,7 @@ public class Masturbation extends BaseContent {
 				doNext(playerMenu);
 				return;
 			}
-			if (inDungeon && DungeonAbstractContent.dungeonLoc != -10 && flags[kFLAGS.PLAYER_COMPANION_1] == "" && flags[kFLAGS.PLAYER_COMPANION_2] == "" && flags[kFLAGS.PLAYER_COMPANION_3] == "") {
+			if (inDungeon && DungeonAbstractContent.dungeonLoc != DungeonAbstractContent.DUNGEON_CABIN && flags[kFLAGS.PLAYER_COMPANION_1] == "" && flags[kFLAGS.PLAYER_COMPANION_2] == "" && flags[kFLAGS.PLAYER_COMPANION_3] == "") {
 				outputText("There is no way you could get away with masturbating in a place like this!  You'd better find your way back to camp if you want to take care of that. Or find someone to guard you during the deed.");
 				doNext(playerMenu);
 				return;
@@ -328,7 +328,7 @@ public class Masturbation extends BaseContent {
 				gildedCockTurbate();
 				return;
 			}
-			if (inDungeon && DungeonAbstractContent.dungeonLoc != -10 && player.companionsInPCParty()) {
+			if (inDungeon && DungeonAbstractContent.dungeonLoc != DungeonAbstractContent.DUNGEON_CABIN && player.companionsInPCParty()) {
 				outputText("You go to the side, asking ");
 				if (flags[kFLAGS.PLAYER_COMPANION_3] != "" && rand(2) == 0) outputText("" + flags[kFLAGS.PLAYER_COMPANION_3] + "");
 				else if (flags[kFLAGS.PLAYER_COMPANION_2] != "" && rand(2) == 0) outputText("" + flags[kFLAGS.PLAYER_COMPANION_2] + "");
@@ -866,7 +866,7 @@ public class Masturbation extends BaseContent {
 					else outputText("You sigh and drift off to sleep."); //Genderless ending
 				}
 			}
-			if (inDungeon && DungeonAbstractContent.dungeonLoc != -10 && player.companionsInPCParty()) {
+			if (inDungeon && DungeonAbstractContent.dungeonLoc != DungeonAbstractContent.DUNGEON_CABIN && player.companionsInPCParty()) {
 				eachMinuteCount(60);
 				doNext(playerMenu);
 			}

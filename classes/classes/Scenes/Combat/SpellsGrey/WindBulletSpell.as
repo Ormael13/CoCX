@@ -13,15 +13,15 @@ public class WindBulletSpell extends AbstractGreySpell {
 		super(
 			ex ? "Wind Bullet (Ex)" : "Wind Bullet",
 			ex ?
-					"Devastate the enemy ranks with a barrage of wrath-enpowered wind bullets."
-					: "Devastate the enemy ranks with a barrage of wind bullets.",
+				"Devastate the enemy ranks with a barrage of wrath-enpowered wind bullets."
+				: "Devastate the enemy ranks with a barrage of wind bullets.",
 			TARGET_ENEMY,
 			TIMING_INSTANT,
 			[TAG_DAMAGING, TAG_WIND]
-	);
-	baseManaCost = 40;
-	if (ex) baseWrathCost = 100;
-	this.ex = ex;
+		);
+		baseManaCost = 40;
+		if (ex) baseWrathCost = 100;
+		this.ex = ex;
 	}
 	
 	override public function get buttonName():String {

@@ -7,11 +7,11 @@ import classes.StatusEffects;
 public class FireStormSpell extends AbstractWhiteSpell{
 	public function FireStormSpell() {
 		super(
-				"Fire Storm",
-				"Drawning your own force of the willpower to fuel radical change in the surrounding you can call forth an Fire Storm that will attack enemies in a wide area.",
-				TARGET_ENEMY,
-				TIMING_INSTANT,
-				[TAG_DAMAGING,TAG_AOE,TAG_FIRE]
+			"Fire Storm",
+			"Drawning your own force of the willpower to fuel radical change in the surrounding you can call forth an Fire Storm that will attack enemies in a wide area.",
+			TARGET_ENEMY,
+			TIMING_INSTANT,
+			[TAG_DAMAGING,TAG_AOE,TAG_FIRE]
 		);
 		baseManaCost = 500;
 	}

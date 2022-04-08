@@ -408,7 +408,7 @@ public class Combat extends BaseContent {
     }
 
     public function spellModGrey():Number {
-        return magic.spellModGrey();
+        return magic.spellModGreyImpl();
     }
 
     public function spellGreyCooldown():Number {
@@ -962,7 +962,7 @@ public class Combat extends BaseContent {
 			if (player.hasPerk(PerkLib.MyBloodForBloodPuppies)) flags[kFLAGS.IN_COMBAT_PLAYER_BLOOD_PUPPIES_ATTACKED] = 0;
 			if (player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn) && player.statusEffectv1(StatusEffects.SimplifiedNonPCTurn) == 1) player.addStatusValue(StatusEffects.SimplifiedNonPCTurn, 1, -1);
 			if (player.armor == armors.BMARMOR) dynStats("lus", -(Math.round(player.maxLust() * 0.02)));
-
+			if (player.hasStatusEffect(StatusEffects.TyrantState)) dynStats("lus", (Math.round(player.maxLust() * 0.05)));
         }
         mainView.hideMenuButton(MainView.MENU_DATA);
         mainView.hideMenuButton(MainView.MENU_APPEARANCE);
@@ -1019,7 +1019,7 @@ public class Combat extends BaseContent {
         buttons.add("Surrender(H)", combat.surrenderByHP, "Stop defending up to the point enemy would beat you down to minimal HP.");
         buttons.add("Surrender(L)", combat.surrenderByLust, "Fantasize about your opponent in a sexual way so much it would fill up your lust you'll end up getting raped.");
         if (player.hasPerk(PerkLib.DoubleAttack) || player.hasPerk(PerkLib.DoubleAttackLarge) || player.hasPerk(PerkLib.DoubleAttackSmall) || player.hasPerk(PerkLib.Combo) || (player.hasPerk(PerkLib.JobBeastWarrior) && (player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon())) ||
-                ((player.hasPerk(PerkLib.Berzerker) || player.hasPerk(PerkLib.Lustzerker)) && player.hasPerk(MutationsLib.SalamanderAdrenalGlandsEvolved)) || player.hasPerk(PerkLib.Poisoning) || player.hasPerk(PerkLib.SwiftCasting) || player.hasStatusEffect(StatusEffects.SoulDrill1)) {
+            ((player.hasPerk(PerkLib.Berzerker) || (player.hasPerk(PerkLib.Lustzerker)) && player.hasPerk(MutationsLib.SalamanderAdrenalGlandsEvolved))) || player.hasPerk(PerkLib.Poisoning) || player.hasPerk(PerkLib.SwiftCasting) || player.hasStatusEffect(StatusEffects.SoulDrill1) || player.hasStatusEffect(StatusEffects.ThePhalluspear1)) {
             buttons.add("Melee Opt", CoC.instance.perkMenu.doubleAttackOptions, "You can adjust your melee attack settings.");
         }
         if (player.hasPerk(PerkLib.DoubleStrike) || player.hasPerk(PerkLib.ElementalArrows) || player.hasPerk(PerkLib.Cupid) || player.hasPerk(PerkLib.EnvenomedBolt) || player.hasPerk(PerkLib.AmateurGunslinger)) {
@@ -1049,6 +1049,9 @@ public class Combat extends BaseContent {
         }
         if (player.hasStatusEffect(StatusEffects.SoulDrill1)) {
             buttons.add("Soul Drill", soul1Drill).hint("Menu to adjust your Soul Drill spinning speed.");
+        }
+        if (player.hasStatusEffect(StatusEffects.ThePhalluspear1)) {
+            buttons.add("ThePhalluspear", the1Phalluspear).hint("Menu to toggle The Phalluspear lust to normal damage ratio.");
         }
 		if (player.weaponFlyingSwordsName != "nothing") {
 			bd = buttons.add("Flying Sword", attackFlyingSword).hint("Attack the enemy with your " + player.weaponFlyingSwordsName + ".  Damage done is determined by your wisdom and weapon.\n\nSoulforce cost per attack: "+flyingSwordAttackCost()+"");
@@ -1534,41 +1537,52 @@ public class Combat extends BaseContent {
         }
         addButton(14, "Back", combat.combatMenu, false);
     }
-
     public function soul1Drill00():void {
         player.removeStatusEffect(StatusEffects.SoulDrill1);
         player.createStatusEffect(StatusEffects.SoulDrill1, 0, 0, 0, 0);
         doNext(soul1Drill);
     }
-
     public function soul1Drill01():void {
         player.removeStatusEffect(StatusEffects.SoulDrill1);
         player.createStatusEffect(StatusEffects.SoulDrill1, 1, 0, 0, 0);
         doNext(soul1Drill);
     }
-
     public function soul1Drill02():void {
         player.removeStatusEffect(StatusEffects.SoulDrill1);
         player.createStatusEffect(StatusEffects.SoulDrill1, 2, 0, 0, 0);
         doNext(soul1Drill);
     }
-
     public function soul1Drill03():void {
         player.removeStatusEffect(StatusEffects.SoulDrill1);
         player.createStatusEffect(StatusEffects.SoulDrill1, 3, 0, 0, 0);
         doNext(soul1Drill);
     }
-
     public function soul1Drill04():void {
         player.removeStatusEffect(StatusEffects.SoulDrill1);
         player.createStatusEffect(StatusEffects.SoulDrill1, 4, 0, 0, 0);
         doNext(soul1Drill);
     }
-
     public function soul1Drill05():void {
         player.removeStatusEffect(StatusEffects.SoulDrill1);
         player.createStatusEffect(StatusEffects.SoulDrill1, 5, 0, 0, 0);
         doNext(soul1Drill);
+    }
+	
+	public function the1Phalluspear():void {
+		menu();
+		if (player.statusEffectv1(StatusEffects.ThePhalluspear1) != 0) addButton(0, "25%", the1Phalluspear00).hint("Deal 25% dmg as lust damage.");
+		else addButtonDisabled(0, "25%", "Phalluspear deal currently 25% of dmg as lust dmg.");
+        if (player.statusEffectv1(StatusEffects.ThePhalluspear1) != 1) addButton(1, "100%", the1Phalluspear01).hint("Deal 100% dmg as lust damage.");
+		else addButtonDisabled(1, "100%", "Phalluspear deal currently 100% of dmg as lust dmg.");
+		addButton(14, "Back", combat.combatMenu, false);
+	}
+    public function the1Phalluspear00():void {
+        player.addStatusValue(StatusEffects.ThePhalluspear1, 1, -1);
+        doNext(the1Phalluspear);
+    }
+    public function the1Phalluspear01():void {
+       player.addStatusValue(StatusEffects.ThePhalluspear1, 1, 1);
+       doNext(the1Phalluspear);
     }
 
     internal function teaseAttack():void {
@@ -3800,6 +3814,8 @@ public class Combat extends BaseContent {
 			if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
 			if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
 			if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+			if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
+			if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
 			if (player.hasPerk(PerkLib.HistoryFighter) || player.hasPerk(PerkLib.PastLifeFighter)) damage *= historyFighterBonus();
 			if (player.hasPerk(PerkLib.DemonSlayer) && monster.hasPerk(PerkLib.EnemyTrueDemon)) damage *= 1 + player.perkv1(PerkLib.DemonSlayer);
 			if (player.hasPerk(PerkLib.FeralHunter) && monster.hasPerk(PerkLib.EnemyFeralType)) damage *= 1 + player.perkv1(PerkLib.FeralHunter);
@@ -3816,6 +3832,7 @@ public class Combat extends BaseContent {
 			if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
 			if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
 			if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+			if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
 			damage *= meleePhysicalForce();
 			//Determine if critical hit!
             critChance += 10;
@@ -3856,6 +3873,7 @@ public class Combat extends BaseContent {
 			if (player.jewelryEffectId == JewelryLib.MODIFIER_R_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
 			if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
 			if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+			if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
 			if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
 				if (player.statusEffectv1(StatusEffects.Kelt) < 100) damage *= 1 + (0.01 * player.statusEffectv1(StatusEffects.Kelt));
 				else {
@@ -3984,6 +4002,7 @@ public class Combat extends BaseContent {
                 if (player.jewelryEffectId == JewelryLib.MODIFIER_R_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
                 if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
                 if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+				if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
                 if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
                     if (player.statusEffectv1(StatusEffects.Kelt) < 100) damage *= 1 + (0.01 * player.statusEffectv1(StatusEffects.Kelt));
                     else {
@@ -4149,6 +4168,7 @@ public class Combat extends BaseContent {
             if (player.jewelryEffectId == JewelryLib.MODIFIER_R_ATTACK_POWER) damage *= 1 + (player.jewelryEffectMagnitude / 100);
             if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
             if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+			if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
             if (player.statusEffectv1(StatusEffects.Kelt) > 0) {
                 if (player.statusEffectv1(StatusEffects.Kelt) < 100) damage *= 1 + (0.01 * player.statusEffectv1(StatusEffects.Kelt));
                 else {
@@ -5856,6 +5876,7 @@ public class Combat extends BaseContent {
 		if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
 		if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+		if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
 		if (player.hasPerk(PerkLib.LifeLeech) && player.isFistOrFistWeapon()) {
 			if (player.hasStatusEffect(StatusEffects.AlterBindScroll2)) damage *= 1.1;
 			else damage *= 1.05;
@@ -5878,6 +5899,7 @@ public class Combat extends BaseContent {
 		if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
 		if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+		if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
 		if (SceneLib.urtaQuest.isUrta()) damage *= 2;
 		damage *= meleePhysicalForce();
 		return damage;
@@ -5991,6 +6013,7 @@ public class Combat extends BaseContent {
                     if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
                     if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
                     if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+					if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
                     if (damage > 0) doPhysicalDamage(damage, false);
                     (monster as Doppleganger).mirrorAttack(damage);
                     return;
@@ -6137,10 +6160,16 @@ public class Combat extends BaseContent {
                         doPhysicalDamage(damage, true, true);
                         if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) doLightingDamage(Math.round(damage * 0.3), true, true);
                     }
-                    damage += damage;
-                    if (player.spe >= 225) damage += damage;
-                    if (player.spe >= 300) damage += damage;
                 }
+				if (player.hasStatusEffect(StatusEffects.FalseWeapon)) {
+					if (player.weapon == weapons.PHALLUS) doPhysicalDamage((damage * 2), true, true);
+					else doPhysicalDamage(Math.round(damage * 0.2), true, true);
+				}
+				if (player.weapon == weapons.PRURUMI && player.spe >= 150) {
+					if (player.spe >= 300) damage += damage * 3;
+                    else if (player.spe >= 225) damage += damage * 2;
+					else damage += damage;
+				}
                 JabbingStyleIncrement();
                 if (player.hasStatusEffect(StatusEffects.AlchemicalThunderBuff)) damage += Math.round(damage * 0.3);
 				var meleeMasteryEXPgains:Number = 1;
@@ -6659,6 +6688,7 @@ public class Combat extends BaseContent {
             if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
             if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
             if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+			if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
             //One final round
             damage = Math.round(damage);
             if (SpecialEffect == "KamaitachiScythe"){
@@ -6691,6 +6721,7 @@ public class Combat extends BaseContent {
                     if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
                     if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
                     if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+					if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
                     if (damage > 0) doPhysicalDamage(damage, false);
                     (monster as Doppleganger).mirrorAttack(damage);
                     return;
@@ -6718,6 +6749,7 @@ public class Combat extends BaseContent {
                 if (player.countCockSocks("red") > 0) damage *= (1 + player.countCockSocks("red") * 0.02);
                 if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
                 if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+				if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
 
                 else if (MDODialogs) {
 
@@ -9438,7 +9470,7 @@ public class Combat extends BaseContent {
                 if (crit) outputText(" <b>*Critical Hit!*</b>");
                 outputText("\n\n");
             } else {
-                outputText("Your opponent seems not to be affected by the cleansing flames of your aura of purity. Probably because [monster he] has no corruption within [monster his] body.");
+                outputText("Your opponent seems not to be affected by the cleansing flames of your aura of purity. Probably because [monster he] has no corruption within [monster his] body.\n\n");
             }
         }
         //Bicorn
@@ -11946,6 +11978,7 @@ public class Combat extends BaseContent {
             if (player.necklace == necklaces.OBNECK) damage *= 1.2;
             if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
             if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+			if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
             if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
             if (monster.statusEffectv1(StatusEffects.OrcaHasSmashed) >= 1) {
                 damage *= 1.50;
@@ -12039,6 +12072,7 @@ public class Combat extends BaseContent {
             if (player.necklace == necklaces.OBNECK) damage *= 1.2;
             if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
             if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+			if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
             if (monster.statusEffectv1(StatusEffects.OrcaHasSmashed) >= 1) {
                 damage *= 1.50;
                 monster.addStatusValue(StatusEffects.OrcaHasSmashed, 1, -1);
@@ -12090,6 +12124,7 @@ public class Combat extends BaseContent {
             if (player.necklace == necklaces.OBNECK) damage *= 1.2;
             if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
             if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+			if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
             if (monster.statusEffectv1(StatusEffects.OrcaHasSmashed) >= 1) {
                 damage *= 1.50;
                 monster.addStatusValue(StatusEffects.OrcaHasSmashed, 1, -1);
@@ -12150,6 +12185,7 @@ public class Combat extends BaseContent {
             if (player.necklace == necklaces.OBNECK) damage *= 1.2;
             if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
             if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+			if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
             if (monster.statusEffectv1(StatusEffects.OrcaHasSmashed) >= 1) {
                 damage *= 1.50;
                 monster.addStatusValue(StatusEffects.OrcaHasSmashed, 1, -1);
@@ -12346,6 +12382,7 @@ public class Combat extends BaseContent {
         damage *= scalingBonusStrength() * 0.5;
         if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
         if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+		if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
         if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
         if (monster.plural) damage *= 5;
         damage = Math.round(damage);
@@ -12846,6 +12883,7 @@ public class Combat extends BaseContent {
         damage *= scalingBonusToughness()*0.2;
         if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
         if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+		if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
         if (player.hasPerk(PerkLib.VladimirRegalia)) damage *= 2;
         if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
         if (player.hasPerk(PerkLib.KrakenBlackDress)) damage *= 2;
@@ -12888,6 +12926,7 @@ public class Combat extends BaseContent {
         }
         if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
         if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+		if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
         if (player.hasPerk(PerkLib.VladimirRegalia)) damage *= 2;
         if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
         if (monster.plural) damage *= 5;
@@ -13097,6 +13136,7 @@ public class Combat extends BaseContent {
 		var damage:int = monster.maxHP() * (.10 + rand(15) / 100);
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
 		if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+		if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
 		if (player.hasPerk(PerkLib.VladimirRegalia)) damage *= 2;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
 		if (player.hasPerk(PerkLib.UnbreakableBind)) damage *= 2;
@@ -14197,7 +14237,7 @@ public class Combat extends BaseContent {
                 outputText("You run as fast as you can, taking random corridors and running past the confused enemies all the way back to the labyrinth entrance. Of course the slug thing can't follow you she's way too slow however as a result you lose all the progression you made in the maze!\n\n");
                 player.removeStatusEffect(StatusEffects.EbonLabyrinthB);
                 player.createStatusEffect(StatusEffects.EbonLabyrinthB, 0, 0, 0, 0);
-                DungeonAbstractContent.dungeonLoc = 131;
+                DungeonAbstractContent.dungeonLoc = DungeonAbstractContent.DUNGEON_EBON_LABYRINTH_0;
                 doNext(playerMenu);
             } else {
                 outputText("You're trapped in your foe's home turf - there is nowhere to run!\n\n");
@@ -14611,6 +14651,7 @@ public class Combat extends BaseContent {
         }
         if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= oniRampagePowerMulti();
         if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+		if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
         if (player.hasPerk(MutationsLib.HarpyHollowBones)) damage *= 1.2;
         if (player.hasPerk(MutationsLib.HarpyHollowBonesPrimitive)) damage *= 1.5;
         if (player.hasPerk(MutationsLib.HarpyHollowBonesEvolved)) damage *= 2;
@@ -15102,6 +15143,7 @@ public class Combat extends BaseContent {
 		if (player.necklace == necklaces.OBNECK) damage *= 1.2;
 		if (player.hasStatusEffect(StatusEffects.OniRampage)) damage *= combat.oniRampagePowerMulti();
 		if (player.hasStatusEffect(StatusEffects.Overlimit)) damage *= 2;
+		if (player.hasStatusEffect(StatusEffects.TyrantState)) damage *= tyrantStagePowerMulti();
 		damage *= (1 + SFoDMulti);
 		var crit:Boolean = false;
 		var critChance:int = 65;
@@ -15403,6 +15445,12 @@ public class Combat extends BaseContent {
         if (player.hasPerk(MutationsLib.OniMusculaturePrimitive)) oniRampagePowerMulti += 1;
         if (player.hasPerk(MutationsLib.OniMusculatureEvolved)) oniRampagePowerMulti += 2;
         return oniRampagePowerMulti;
+    }
+
+    public function tyrantStagePowerMulti():Number {
+        var tyrantStagePowerMulti:Number = 1.5;
+        if (TyrantiaFollower.TyrantiaTrainingSessions >= 10) tyrantStagePowerMulti += 0.2;
+        return tyrantStagePowerMulti;
     }
 
 	public function meleePhysicalForce():Number {

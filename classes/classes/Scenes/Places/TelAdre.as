@@ -479,7 +479,7 @@ public function barTelAdre():void {
 		button = anotherButton(button,"Ask4Amily",SceneLib.followerInteractions.askAboutAmily);
 	}
 	//DOMINIKA
-	if(model.time.hours > 17 && model.time.hours < 20 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00150] != -1) {
+	if(model.time.hours > 17 && model.time.hours < 20 && flags[kFLAGS.DOMINIKA_MET] != -1) {
 		button = anotherButton(button,"Dominika",dominika.fellatrixBarApproach);
 	}
 	//EDRYN!

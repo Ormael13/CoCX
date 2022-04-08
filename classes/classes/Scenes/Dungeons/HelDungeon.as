@@ -16,13 +16,6 @@ use namespace CoC;
 	
 	public class HelDungeon extends DungeonAbstractContent
 	{
-		private static const DUNGEON_HEL_GUARD_HALL:int		= 17;
-		private static const DUNGEON_HEL_WINE_CELLAR:int	= 18;
-		private static const DUNGEON_HEL_STAIR_WELL:int		= 19;
-		private static const DUNGEON_HEL_DUNGEON:int		= 20;
-		private static const DUNGEON_HEL_MEZZANINE:int		= 21;
-		private static const DUNGEON_HEL_THRONE_ROOM:int	= 22;
-		
 		public function HelDungeon() {}
 				
 		//EVENTS
@@ -226,7 +219,6 @@ use namespace CoC;
 		public function exitHelTower():void {
 			clearOutput();
 			outputText("You slip out the door, leaving the tower behind. You make your way back to your camp.");
-			dungeonLoc = -1;
 			inDungeon = false;
 			doNext(camp.returnToCampUseOneHour);			
 		}

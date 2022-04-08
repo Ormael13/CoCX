@@ -24,16 +24,16 @@ package classes.Scenes.Areas.GlacialRift
 		public function winAgainstWinterWolf():void {
 			menu();
 			if (player.lust >= 33) {
-				if (player.hasCock()) {
-					clearOutput();
-					outputText("You don't see anything interesting to do with the defeated wolf and decide to simply leave him be.");
-				}
 				if (player.hasVagina()) {
 					addButton(0, "RideHisCock", rideWinterWolfsCock);
 				}
+                else {
+					clearOutput();
+					outputText("You don't see anything interesting to do with the defeated wolf and decide to simply leave him be.");
+				}
 				addButton(14, "Leave", cleanupAfterCombat);
 				SceneLib.uniqueSexScene.pcUSSPreChecksV2(winAgainstWinterWolf);
-							}
+			}
 			else {
 				cleanupAfterCombat();
 			}

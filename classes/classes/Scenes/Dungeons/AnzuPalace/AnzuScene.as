@@ -16,23 +16,6 @@ use namespace CoC;
 
 	public class AnzuScene extends DungeonAbstractContent// implements TimeAwareInterface
 	{
-		private static const DUNGEON_ANZU_OUTSIDE:int			= 88;
-		private static const DUNGEON_ANZU_HALL_FLOOR1:int 		= 89;
-		private static const DUNGEON_ANZU_LIVING_ROOM:int 		= 90;
-		private static const DUNGEON_ANZU_BATHROOM:int 			= 91;
-		private static const DUNGEON_ANZU_DINING_ROOM:int 		= 92;
-		private static const DUNGEON_ANZU_KITCHEN:int 			= 93;
-		private static const DUNGEON_ANZU_HALL_FLOOR2:int		= 94;
-		private static const DUNGEON_ANZU_BEDROOM:int 			= 95;
-		private static const DUNGEON_ANZU_LIBRARY:int 			= 96;
-		private static const DUNGEON_ANZU_MULTIUSE_ROOM:int 	= 97;
-		private static const DUNGEON_ANZU_HALL_FLOOR3:int 		= 98;
-		private static const DUNGEON_ANZU_PALACE_VAULTS:int 	= 99;
-		private static const DUNGEON_ANZU_ALCHEMY_ROOM:int 		= 100;
-		private static const DUNGEON_ANZU_ROOF:int 				= 101;
-		private static const DUNGEON_ANZU_BASEMENT:int 			= 102;
-		private static const DUNGEON_ANZU_ARMORY:int 			= 103;
-		
 		public function AnzuScene()
 		{}
 		
@@ -120,9 +103,9 @@ use namespace CoC;
 				outputText("\n\nYou thank him, and introduce yourself. The sight of the building’s interior surprises you. Far more extravagant than anything which you would've expected. A fireplace warms the interior. There are several shelves, filled with antique-looking books. The furniture has a particular appearance, decorated with patterns and designs you have not seen anywhere else in Mareth. Decorations in linen and silk cover the walls, while velvet covered armchairs provide a comfy place for rest, and the floor is decorated with numerous rugs. A staircase leads to the upper floors, where the avian was probably resting before you knocked on the door.");
 				outputText("\n\n\"<i>Take a seat here, " + player.mf("boy", "girl") + "</i>\" The avian says, pointing at one armchair near the fireplace.. \"<i>If you want to get warm, sit there. You’ll recover from the cold air faster.</i>\"");
 				outputText("\n\nYou thank him and realize that you don’t know his name yet.");
-				outputText("\n\n\"<i>My name? Well I suppose I can give it</i>\" \"<i>Name’s Anzu, god of fire and storms, and all those things</i>\" He says, waving his hands exaggeratedly.");
+				outputText("\n\n\"<i>My name? Well I suppose I can give it. Name’s Anzu, god of fire and storms, and all those things</i>\" He says, waving his hands exaggeratedly.");
 				outputText("\n\nA god? Besides Marae " + (flags[kFLAGS.URTA_QUEST_STATUS] >= 1 ? "and Taoth" : "") + ", you haven’t known any deity in Mareth. Incredulous, you ask him again.");
-				outputText("\n\n\"<i>An almost empty shell of what once was a mighty god, but technically, I’m still a god</i>\"");
+				outputText("\n\n\"<i>An almost empty shell of what once was a mighty god, but technically, I’m still a god.</i>\"");
 				outputText("\n\nThat answer was more depressing than you expected. You ask him if he wants to talk for a while. ");
 				outputText("\n\n\"<i>I usually don’t have guests.</i>\" Anzu suspires. \"<i>Well, after all this time, a little chat would mean no harm for me.</i>\"");
 				outputText("\n\nYou and Anzu talk for a little while. You explain to him you’re the Champion of Ingnam, and your mission in Mareth. Although a little cold and distant. He begins to open up after a few questions. Anzu explains that his full name is Anzu Annuna, and how he was the protective god of an ancient city called Mittani in a realm very different to Mareth. He was forced to leave his realm after getting into trouble with the rest of the gods in his former home.");
@@ -289,7 +272,7 @@ use namespace CoC;
 			addButton(1, "Talk", anzuTalkMenu).hint("Get to know Anzu better.");
 			if (flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] >= 3) addButton(2, "Sex", anzuSexMenu).hint("Have some sexy times with the sexy avian deity.");
 			else addButtonDisabled(2, "Sex", "Maybe if Anzu likes you better, he will let you do that.");
-			if (dungeonLoc == 101) {
+			if (dungeonLoc == DUNGEON_ANZU_ROOF) {
 				if (player.canFly()) {
 					if (flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] >= 4) addButton(3, "Race Him", null).hint("Challenge Anzu to a race and have some fun!");
 					else addButtonDisabled(3, "Race Him", "Maybe if Anzu likes you better, he'll consider letting you race against him.");
@@ -1070,7 +1053,7 @@ use namespace CoC;
 				}*/
 				flags[kFLAGS.ANZU_TIMES_DINED_DINNER]++;
 			}
-			dungeonLoc = 92;
+			dungeonLoc = DUNGEON_ANZU_DINING_ROOM;
 			doNext(camp.returnToCampUseOneHour);
 		}
 		private function dontEatFoodWithAnzu():void {
@@ -1209,7 +1192,6 @@ use namespace CoC;
 			clearOutput();
 			outputText("Not in the mood of getting your " + player.skin.desc + " wet (and sticky) at this time of day, you thanks him for his offer but explain that you’re not exactly in the mood to get wet. Bidding him farewell, you leave him to his own matters and return to your camp.");
 			inDungeon = false;
-			dungeonLoc = -1;
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -1234,7 +1216,6 @@ use namespace CoC;
 			outputText("Tired as you are, a task is a task. You answer the avian that sadly, you have to keep guard tonight on the portal, so it will be on another time. Though a bit disappointed, the avian quickly cheers up and nuzzles your neck playfully, then he hugs you again and helps you to stand up. Gathering your things, you make it to the door, not without getting another playful nibble as you leave.");
 			outputText("\n\n\"<i>Be careful on your way to the camp, little friend</i>\" he says from the door while waving you. Waving him back you cross the Rift and return to your camp.");
 			inDungeon = false;
-			dungeonLoc = -1;
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -1330,7 +1311,6 @@ use namespace CoC;
 			else player.refillHunger(player.maxHunger() + 10 - player.hunger);
 			sleepWithAnzuHeal();
 			inDungeon = false;
-			dungeonLoc = -1;
 			doNext(camp.returnToCampUseOneHour);
 		}
 		

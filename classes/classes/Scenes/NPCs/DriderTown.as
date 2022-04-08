@@ -1,3 +1,7 @@
+/**
+* ...
+* @author Canadian Snas
+*/
 package classes.Scenes.NPCs 
 {
 import classes.*;
@@ -13,7 +17,7 @@ import classes.display.SpriteDb;
 	
 	use namespace CoC;
 	
-	public class DriderTown extends NPCAwareContent implements SaveableState {
+	public class DriderTown extends NPCAwareContent implements SaveableState {/*
 		public static var SisterBangEnabled:Boolean;
 		
 
@@ -309,6 +313,5 @@ public function TriFuckta():void {
 }
 
 
-
+*/
 }
-

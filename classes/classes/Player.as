@@ -48,6 +48,7 @@ import classes.Scenes.Combat.CombatAbility;
 import classes.Scenes.NPCs.AetherTwinsFollowers;
 import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.NPCs.Forgefather;
+import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.Pregnancy;
@@ -2247,6 +2248,11 @@ use namespace CoC;
 			//Berseking reduces lust gains by 10%
 			if (hasStatusEffect(StatusEffects.Berzerking)) lust *= 0.9;
 			if (hasStatusEffect(StatusEffects.Overlimit)) lust *= 0.9;
+			if (TyrantiaFollower.TyrantiaTrainingSessions >= 25 && lust100 >= 50) {
+				if (lust100 >= 100) lust *= 0.3; 
+				else if (lust100 >= 51) lust *= (1 - ((lust100 - 30) * 0.01));
+				else lust *= 0.8;
+			}
 			//Items
 			if (jewelryEffectId == JewelryLib.PURITY) lust *= 1 - (jewelryEffectMagnitude / 100);
 			if (armor == game.armors.DBARMOR) lust *= 0.9;
@@ -2579,6 +2585,14 @@ use namespace CoC;
 			}
 			if (CoC.instance.monster.statusEffectv1(StatusEffects.EnemyLoweredDamageH) > 0) {
 				mult -= CoC.instance.monster.statusEffectv2(StatusEffects.EnemyLoweredDamageH);
+			}
+			if (hasStatusEffect(StatusEffects.TyrantState)) mult += 20;
+			if (TyrantiaFollower.TyrantiaTrainingSessions >= 25 && lust100 >= 50) {
+				mult -= 20;
+				if (lust100 >= 51) {
+					if (lust100 >= 100) mult -= 50;
+					else mult -= (lust100 - 50);
+				}
 			}
 			if (jewelryEffectId == JewelryLib.MODIFIER_PHYS_R) mult -= jewelryEffectMagnitude;
 			if (jewelryEffectId2 == JewelryLib.MODIFIER_PHYS_R) mult -= jewelryEffectMagnitude2;

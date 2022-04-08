@@ -7,11 +7,11 @@ import classes.StatusEffects;
 public class IceRainSpell extends AbstractBlackSpell {
 	public function IceRainSpell() {
 		super(
-				"Ice Rain",
-				"This spell causes a radical change in your surroundings. You can call forth an Ice Rain that will strike enemies in a wide area. Fueled by your own desires, this spell can backfire, making the user wet instead.",
-				TARGET_ENEMY,
-				TIMING_INSTANT,
-				[TAG_DAMAGING, TAG_ICE, TAG_AOE]
+			"Ice Rain",
+			"This spell causes a radical change in your surroundings. You can call forth an Ice Rain that will strike enemies in a wide area. Fueled by your own desires, this spell can backfire, making the user wet instead.",
+			TARGET_ENEMY,
+			TIMING_INSTANT,
+			[TAG_DAMAGING, TAG_ICE, TAG_AOE]
 		);
 		baseManaCost = 500;
 	}

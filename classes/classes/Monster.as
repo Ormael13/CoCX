@@ -48,6 +48,7 @@ import classes.internals.EnumValue;
 import classes.internals.RandomDrop;
 import classes.internals.Utils;
 import classes.internals.WeightedDrop;
+import classes.SceneHunter;
 
 import flash.utils.getQualifiedClassName;
 
@@ -57,7 +58,9 @@ import flash.utils.getQualifiedClassName;
 	 */
 	public class Monster extends Creature
 	{
-
+        protected function get sceneHunter():SceneHunter {
+            return CoC.instance.gameSettings.sceneHunter_inst;
+        }
 		protected final function get player():Player
 		{
 			return game.player;

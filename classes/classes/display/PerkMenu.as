@@ -14,6 +14,7 @@ import classes.MutationsLib;
 import classes.PerkTree;
 import classes.PerkType;
 import classes.Scenes.NPCs.EvangelineFollower;
+import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects;
 import flash.utils.Dictionary;
@@ -60,8 +61,8 @@ public class PerkMenu extends BaseContent {
 		addButton(3, "Mutations DB", mutationsDatabase, 0, true);
 		addButton(4, "Perks Database", perkDatabase);
 		if (player.hasPerk(PerkLib.DoubleAttack) || player.hasPerk(PerkLib.DoubleAttackLarge) || player.hasPerk(PerkLib.DoubleAttackSmall) || player.hasPerk(PerkLib.Combo) || combat.canSpearDance() ||player.hasPerk(PerkLib.Poisoning) || player.hasPerk(PerkLib.SwiftCasting) ||
-			(player.hasPerk(PerkLib.JobBeastWarrior) && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon())) || player.hasPerk(PerkLib.NaturalInstincts) || player.hasPerk(PerkLib.WayOfTheWarrior) || player.hasPerk(PerkLib.LikeAnAsuraBoss) ||
-			player.jiangshiScore() >= 20) {
+			(player.hasPerk(PerkLib.JobBeastWarrior) && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon())) || player.hasPerk(PerkLib.NaturalInstincts) || player.hasPerk(PerkLib.WayOfTheWarrior) || player.hasPerk(PerkLib.Berzerker) ||
+			((player.hasPerk(PerkLib.Lustzerker)) && player.hasPerk(MutationsLib.SalamanderAdrenalGlandsEvolved)) || player.hasPerk(PerkLib.LikeAnAsuraBoss) || TyrantiaFollower.TyrantiaTrainingSessions >= 20 || player.jiangshiScore() >= 20) {
 			outputText("\n<b>You can adjust your melee attack settings.</b>");
 			addButton(5, "Melee Opt",doubleAttackOptions);
 		}
@@ -195,6 +196,13 @@ public class PerkMenu extends BaseContent {
 			if (flags[kFLAGS.WARRIORS_RAGE_COMBAT_MODE] == 0) outputText("Manual");
 			outputText("</b>");
 		}
+		if (TyrantiaFollower.TyrantiaTrainingSessions >= 20) {
+			outputText("\n\nYou can choose between starting fight with Tyrant State active or not.");
+			outputText("\n\nTyrant State: <b>");
+			if (flags[kFLAGS.TYRANT_STATE_COMBAT_MODE] == 1) outputText("Autocast");
+			if (flags[kFLAGS.TYRANT_STATE_COMBAT_MODE] == 0) outputText("Manual");
+			outputText("</b>");
+		}
 		if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) {
 			outputText("\n\nYou can choose between starting fight with Asura form active or not. (If Crinos Shape toggle is set on Autocast this one toggle will be ignored and only crinos Shape would be autocasted)");//"+(player.hasPerk(PerkLib.)?"":"")+"
 			outputText("\n\nAsura Form: <b>");
@@ -274,7 +282,6 @@ public class PerkMenu extends BaseContent {
 	public function doubleAttackOptions2():void {
 		var toggleflag:Function = curry(toggleFlag, doubleAttackOptions2);
 		var zerkingStyle:Function = curry(setFlag, doubleAttackOptions2, kFLAGS.ZERKER_COMBAT_MODE);
-		var poisoningStyle:Function = curry(setFlag, doubleAttackOptions2, kFLAGS.ENVENOMED_MELEE_ATTACK);
 		menu();
 		if (player.hasPerk(PerkLib.NaturalInstincts)) {
 			if (flags[kFLAGS.CRINOS_SHAPE_COMBAT_MODE] != 0) addButton(0, "Manual", toggleflag,kFLAGS.CRINOS_SHAPE_COMBAT_MODE,false);
@@ -284,20 +291,14 @@ public class PerkMenu extends BaseContent {
 			if (flags[kFLAGS.WARRIORS_RAGE_COMBAT_MODE] != 0) addButton(1, "Manual", toggleflag,kFLAGS.WARRIORS_RAGE_COMBAT_MODE,false);
 			if (flags[kFLAGS.WARRIORS_RAGE_COMBAT_MODE] != 1) addButton(6, "Autocast", toggleflag,kFLAGS.WARRIORS_RAGE_COMBAT_MODE,true);
 		}
+		if (TyrantiaFollower.TyrantiaTrainingSessions >= 20) {
+			if (flags[kFLAGS.TYRANT_STATE_COMBAT_MODE] != 0) addButton(2, "Manual", toggleflag,kFLAGS.TYRANT_STATE_COMBAT_MODE,false);
+			if (flags[kFLAGS.TYRANT_STATE_COMBAT_MODE] != 1) addButton(7, "Autocast", toggleflag,kFLAGS.TYRANT_STATE_COMBAT_MODE,true);
+		}
 		if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) {
-			if (flags[kFLAGS.ASURA_FORM_COMBAT_MODE] != 0) addButton(2, "Manual", toggleflag,kFLAGS.ASURA_FORM_COMBAT_MODE,false);
-			if (flags[kFLAGS.ASURA_FORM_COMBAT_MODE] != 1) addButton(7, "Autocast", toggleflag,kFLAGS.ASURA_FORM_COMBAT_MODE,true);
+			if (flags[kFLAGS.ASURA_FORM_COMBAT_MODE] != 0) addButton(3, "Manual", toggleflag,kFLAGS.ASURA_FORM_COMBAT_MODE,false);
+			if (flags[kFLAGS.ASURA_FORM_COMBAT_MODE] != 1) addButton(8, "Autocast", toggleflag,kFLAGS.ASURA_FORM_COMBAT_MODE,true);
 		}
-		if (player.hasPerk(PerkLib.Poisoning)
-			&& (player.tailType == Tail.BEE_ABDOMEN
-			|| player.tailType == Tail.SCORPION
-			|| player.tailType == Tail.MANTICORE_PUSSYTAIL
-			|| player.faceType == Face.SNAKE_FANGS
-			|| player.faceType == Face.SPIDER_FANGS)
-			&& flags[kFLAGS.ENVENOMED_MELEE_ATTACK] != 1) {
-            addButton(3, "Venom", toggleflag,kFLAGS.ENVENOMED_MELEE_ATTACK,true);
-		}
-		if (player.hasPerk(PerkLib.Poisoning) && flags[kFLAGS.ENVENOMED_MELEE_ATTACK] != 0) addButton(9, "None", toggleflag,kFLAGS.ENVENOMED_MELEE_ATTACK,false);
 		if (player.hasPerk(PerkLib.JobBeastWarrior) || player.jiangshiScore() >= 20) {
 			if (flags[kFLAGS.FERAL_COMBAT_MODE] != 0) addButton(4, "Normal", toggleflag, kFLAGS.FERAL_COMBAT_MODE, false);
 			if (((player.weaponName == "fists" && player.hasNaturalWeapons()) || player.haveNaturalClawsTypeWeapon()) && flags[kFLAGS.FERAL_COMBAT_MODE] != 1) addButton(9, "Feral", toggleflag , kFLAGS.FERAL_COMBAT_MODE, true);
@@ -323,6 +324,7 @@ public class PerkMenu extends BaseContent {
 		const ACID:int = 8;
 		var toggleflag:Function = curry(toggleFlag, doubleAttackOptions3);
         var elementalMelee:Function = curry(setFlag, doubleAttackOptions3, kFLAGS.ELEMENTAL_MELEE);
+		var poisoningStyle:Function = curry(setFlag, doubleAttackOptions3, kFLAGS.ENVENOMED_MELEE_ATTACK);
 		menu();
 		if (player.hasPerk(PerkLib.SwiftCasting) && flags[kFLAGS.ELEMENTAL_MELEE] != 0) addButton(0, "None", elementalMelee,NONE);
 		if (player.hasPerk(PerkLib.SwiftCasting) && player.hasStatusEffect(StatusEffects.KnowsWhitefire) && flags[kFLAGS.ELEMENTAL_MELEE] != 1) addButton(1, "Fire", elementalMelee,FIRE);
@@ -333,6 +335,16 @@ public class PerkMenu extends BaseContent {
 		if (player.hasPerk(PerkLib.SwiftCasting) && player.hasStatusEffect(StatusEffects.KnowsWindBullet) && flags[kFLAGS.ELEMENTAL_MELEE] != 6) addButton(6, "Wind", elementalMelee, WIND);
 		if (player.hasPerk(PerkLib.SwiftCasting) && player.hasStatusEffect(StatusEffects.KnowsStalagmite) && flags[kFLAGS.ELEMENTAL_MELEE] != 7) addButton(7, "Earth", elementalMelee, EARTH);
 		if (player.hasPerk(PerkLib.SwiftCasting) && player.hasStatusEffect(StatusEffects.KnowsAcidSpray) && flags[kFLAGS.ELEMENTAL_MELEE] != 8) addButton(8, "Acid", elementalMelee, ACID);
+		if (player.hasPerk(PerkLib.Poisoning)
+			&& (player.tailType == Tail.BEE_ABDOMEN
+			|| player.tailType == Tail.SCORPION
+			|| player.tailType == Tail.MANTICORE_PUSSYTAIL
+			|| player.faceType == Face.SNAKE_FANGS
+			|| player.faceType == Face.SPIDER_FANGS)
+			&& flags[kFLAGS.ENVENOMED_MELEE_ATTACK] != 1) {
+            addButton(12, "Venom", toggleflag,kFLAGS.ENVENOMED_MELEE_ATTACK,true);
+		}
+		if (player.hasPerk(PerkLib.Poisoning) && flags[kFLAGS.ENVENOMED_MELEE_ATTACK] != 0) addButton(13, "None", toggleflag,kFLAGS.ENVENOMED_MELEE_ATTACK,false);
 		addButton(14, "Back", doubleAttackOptions);
 	}
 
@@ -1077,7 +1089,7 @@ public class PerkMenu extends BaseContent {
 		menuItems.push("Adaptations", mutationsDBAdaptations, "Adaptation Mutations");
 		menuItems.push("Dragons", mutationsDBDragon, "Dragon Mutations");
 		menuItems.push("Kitsunes", mutationsDBKitsune, "Kitsune Mutations");
-		menuGen(menuItems, page, displayPerks, false);
+		menuGen(menuItems, page, displayPerks);
 	}
 
 	//Mutations check helper. Cloned + stripped requirements logic from PerkMenuDB.
@@ -1294,7 +1306,8 @@ public class PerkMenu extends BaseContent {
 			//function pSpecialRem = No Ascension/History/Bloodline/PastLife Perks
 			var pList5:Array = MutationsLib.mutationsArray("Deprecated");
 			for each (var perkTrue:PerkType in perkDict){
-				if (!(pList1.indexOf(perkTrue) >= 0) && !(pList2.indexOf(perkTrue) >= 0) && !(pList3.indexOf(perkTrue) >= 0) && !(pList4.indexOf(perkTrue) >= 0) && !(pList5.indexOf(perkTrue) >= 0) && pSpecialRem(perkTrue)){					tPerkList.push(perkTrue);
+				if (!(pList1.indexOf(perkTrue) >= 0) && !(pList2.indexOf(perkTrue) >= 0) && !(pList3.indexOf(perkTrue) >= 0) && !(pList4.indexOf(perkTrue) >= 0) && !(pList5.indexOf(perkTrue) >= 0) && pSpecialRem(perkTrue)){
+					tPerkList.push(perkTrue);
 				}
 			}
 			//trace(pList1.length + " < 1 - 2 > " + pList2.length + "\n");

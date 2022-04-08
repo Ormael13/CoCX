@@ -575,17 +575,18 @@ public class Camp extends NPCAwareContent{
 			SceneLib.excelliaFollower.ExcelliaAndJojoCampScene();
 			return;
 		}
-		//Rathazul april fool
-		if (isAprilFools() && player.hasStatusEffect(StatusEffects.CampRathazul) && rand(5) == 0) {
-			if (player.hasStatusEffect(StatusEffects.RathazulAprilFool) && player.statusEffectv2(StatusEffects.RathazulAprilFool) < 5) {
-				if (player.statusEffectv3(StatusEffects.RathazulAprilFool) == 1) SceneLib.rathazul.rathazulAprilFoolPart3();
-				if (date.fullYear > player.statusEffectv1(StatusEffects.RathazulAprilFool)) SceneLib.rathazul.rathazulAprilFool();
-				return;
-			} else if (!player.hasStatusEffect(StatusEffects.RathazulAprilFool)) {
-				SceneLib.rathazul.rathazulAprilFool();
-				return;
-			}
-		}
+		/*Rathazul april fool:
+            - aprel fools, no effect, OR max stage and a year passed since the beginning, BUT limited at 5 elixirs
+            - second stage. No checking for fools.
+        */
+        if (player.hasStatusEffect(StatusEffects.CampRathazul) && isAprilFools() && (!player.hasStatusEffect(StatusEffects.RathazulAprilFool) ||
+        player.statusEffectv3(StatusEffects.RathazulAprilFool) == 2
+        && player.statusEffectv2(StatusEffects.RathazulAprilFool) < 5
+        && date.fullYear > player.statusEffectv1(StatusEffects.RathazulAprilFool))) {
+            SceneLib.rathazul.rathazulAprilFool();
+            hideMenus();
+            return;
+        }
 		//Cotton preg freakout
 		if (player.pregnancyIncubation <= 280 && player.pregnancyType == PregnancyStore.PREGNANCY_COTTON &&
 				flags[kFLAGS.COTTON_KNOCKED_UP_PC_AND_TALK_HAPPENED] == 0 && (model.time.hours == 6 || model.time.hours == 7)) {
@@ -1019,6 +1020,7 @@ public class Camp extends NPCAwareContent{
 				}
 			}
 			flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = 0;
+			flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] = 0;
 		}
 
 		//Menu
@@ -1489,7 +1491,7 @@ public class Camp extends NPCAwareContent{
 					outputText("\n\n");
 					buttons.add("Izmael", izmaScene.izmaelScene.izmaelMenu);
 				} else {
-					outputText("Neatly laid near the base of your own is a worn bedroll belonging to Izma, your tigershark lover. It's a snug fit for her toned body, though it has some noticeable cuts and tears in the fabric. Close to her bed is her old trunk, almost as if she wants to have it at arms length if anyone tries to rob her in her sleep.\n\n");
+					outputText("Neatly laid near the base of your own is a worn bedroll belonging to Izma, your tigershark lover. It's a snug fit for her toned body, though it has some noticeable cuts and tears in the fabric. Close to her bed is her old trunk, almost as if she wants to have it at arms length if anyone tries to rob her in her sleep. ");
 					switch (rand(3)) {
 						case 0:
 							outputText("Izma's lazily sitting on the trunk beside her bedroll, reading one of the many books from inside it. She smiles happily when your eyes linger on her, and you know full well she's only half-interested in it.");
@@ -1728,7 +1730,7 @@ public class Camp extends NPCAwareContent{
 				buttons.add("Vapula", vapula.callSlaveVapula);
 			}
 			//Galia
-			if (flags[kFLAGS.GALIA_LVL_UP] >= 1) {
+			if (flags[kFLAGS.GALIA_LVL_UP] >= 1 && EvangelineFollower.EvangelineFollowerStage >= 1) {
 				if (flags[kFLAGS.GALIA_AFFECTION] < 10) outputText("Near the [camp] edge nearly next to Evangeline bedroll sits a large wooden cage for keeping female imp brought back from Adventure Guild. Despite been one of those more feral she most of the time spend sitting motionlessly and gazing into the horizon.\n\n");
 				else outputText("Nothing to see here yet.\n\n");
 			}
@@ -3035,7 +3037,7 @@ public class Camp extends NPCAwareContent{
 		if (player.hasStatusEffect(StatusEffects.EtnaOff)) outputText("\nEtna: <font color=\"#800000\"><b>Disabled</b></font>");
 		if (player.hasStatusEffect(StatusEffects.LunaOff)) outputText("\nLuna: <font color=\"#800000\"><b>Disabled</b></font>");
 		if (player.hasStatusEffect(StatusEffects.TedOff)) outputText("\nDragon Boi: <font color=\"#800000\"><b>Disabled</b></font>");
-		if (player.hasStatusEffect(StatusEffects.BelisaOff)) outputText("\nBelisa: <font color=\"#800000\"><b>Disabled</b></font>");
+		if (player.hasStatusEffect(StatusEffects.SpoodersOff)) outputText("\Spooders: <font color=\"#800000\"><b>Disabled</b></font>");
 		menu();
 		if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) {
 			if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] < 2) addButton(10, "Train", NPCsTrain);
@@ -3049,7 +3051,7 @@ public class Camp extends NPCAwareContent{
 		addButton(5, "Luna", toggleLunaMenu).hint("Enable or Disable Luna. This will remove her from enc table and if already in [camp] disable access to her.");
 		addButton(6, "DragonBoi", toggleTedMenu).hint("Enable or Disable Dragon Boi. This will remove him from enc table.");
 		//since this section is WIP anyway, let her be here too, lol
-        addButton(7, "Belisa", toggleBelisaMenu).hint("Enable or Disable Belisa. This will remove her ONLY from enc table.");
+        addButton(7, "Spooders", toggleSpoodersMenu).hint("Enable or Disable spooder followers. This will remove them ONLY from enc table.");
 		addButton(14, "Back", campActions);
 	}
 
@@ -3110,9 +3112,9 @@ public class Camp extends NPCAwareContent{
 		SparrableNPCsMenu();
 	}
 
-	private function toggleBelisaMenu():void {
-		if (player.hasStatusEffect(StatusEffects.BelisaOff)) player.removeStatusEffect(StatusEffects.BelisaOff);
-		else player.createStatusEffect(StatusEffects.BelisaOff, 0, 0, 0, 0);
+	private function toggleSpoodersMenu():void {
+		if (player.hasStatusEffect(StatusEffects.SpoodersOff)) player.removeStatusEffect(StatusEffects.SpoodersOff);
+		else player.createStatusEffect(StatusEffects.SpoodersOff, 0, 0, 0, 0);
 		SparrableNPCsMenu();
 	}
 
@@ -3721,6 +3723,9 @@ public class Camp extends NPCAwareContent{
 				outputText("As you both head to sleep, Samirah slithers to you and coils her tail around " + ((player.lowerBody == 3)? "yours" : "your lower half") + ", wrapping her arms around your torso as she rests her head on your shoulder. Her body is cold and she looks at you as if in a daze.");
 				if (player.isNaga()) outputText(" She’s not alone either. It indeed took you a while to realise that you are also cold blooded now. The cold night air sure puts you in a similar state as of late.");
 				outputText("\n\n\"<i>Sweet dreams [name], till morning and sunshine come.</i>\"\n");
+			} else if (flags[kFLAGS.SLEEP_WITH] == "Belisa" && BelisaFollower.BelisaInCamp) {
+				outputText("You decide to sleep with Belisa tonight. You help her close up her shop, packing the bands away, and climb into her hammock/bed, putting a hand on her cheek. Belisa pulls you towards her, resting one of her pillows under each of your heads. She hugs your arm, head on your shoulder, and you can’t help but feel safe as she expertly pulls a light blanket over the two of you. ");
+				outputText("She whispers a sweet \"<i>good night</i>\" to you, and you drift into sleep, a soft, sweet scent of cinnamon in your nostrils.");
 			} else if (flags[kFLAGS.SLEEP_WITH] == "Ember" && flags[kFLAGS.EMBER_AFFECTION] >= 75 && followerEmber()) {
 				if (flags[kFLAGS.TIMES_SLEPT_WITH_EMBER] > 3) {
 					outputText("You curl up next to Ember, planning to sleep for " + num2Text(timeQ) + " hour. Ember drapes one of " + emberScene.emberMF("his", "her") + " wing over you, keeping you warm.");
@@ -3760,7 +3765,6 @@ public class Camp extends NPCAwareContent{
 				outputText("\n");
 			} else if (flags[kFLAGS.SLEEP_WITH] == "Helia" && SceneLib.helScene.followerHel()) {
 				outputText("You curl up next to Helia, planning to sleep for " + num2Text(timeQ) + " ");
-
 			} else {
 				//Normal sleep message
 				if (player.isGargoyle()) {
@@ -6676,8 +6680,16 @@ public function rebirthFromBadEnd():void {
 		outputText("\n\nThis part is WIP. You can add more scenes.");
 		outputText("\nThe idea behind is to try unique scenes with different ways or options or body parts.");
         menu();
+        //Marble scene
 		if (flags[kFLAGS.MARBLE_PURIFIED] == 1)
 			addButton(0, "Marble & Clara", SceneLib.marblePurification.defeatClaraCuntInAFight, false, true);
+        else
+			addButtonDisabled(0, "M & C", "Requires completing Marble's purification quest.");
+        //Excellia slave first scene
+		if (flags[kFLAGS.EXCELLIA_RECRUITED] == 2)
+			addButton(1, "Excellia Slv", SceneLib.excelliaFollower.ExcelliaPathChoiceMakeSlave, true);
+        else
+			addButtonDisabled(1, "E Slv", "Requires recruiting Excellia as a slave.");
 		addButtonDisabled(13, "BadEnds", "SH is too lazy to add them too right now, but if anyone wants...");
         addButton(14, "Wake Up", campSpendTimeActions);
     }	
@@ -6691,4 +6703,4 @@ public function rebirthFromBadEnd():void {
         }
         */
 	}
-}
+}

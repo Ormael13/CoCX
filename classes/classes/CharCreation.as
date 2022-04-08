@@ -150,7 +150,6 @@ import coc.view.MainView;
 
 			//RESET DUNGEON
 			DungeonAbstractContent.inDungeon = false;
-			DungeonAbstractContent.dungeonLoc = 0;
 			DungeonAbstractContent.inRoomedDungeon = false;
 			DungeonAbstractContent.inRoomedDungeonResume = null;
 			//Hold onto old data for NG+
@@ -425,7 +424,7 @@ import coc.view.MainView;
                     kFLAGS.WATERSPORTS_ENABLED, 
 				    kFLAGS.SILLY_MODE_ENABLE_FLAG,
                     kFLAGS.SCENEHUNTER_PRINT_CHECKS,
-                    kFLAGS.SCENEHUNTER_MUTEX_SCENES,
+                    kFLAGS.SCENEHUNTER_OTHER,
                     kFLAGS.SCENEHUNTER_DICK_SELECT,
                     kFLAGS.SCENEHUNTER_UNI_HERMS,
                     kFLAGS.LOW_STANDARDS_FOR_ALL,
@@ -3170,4 +3169,4 @@ import coc.view.MainView;
 			return (statusEffect == StatusEffects.KnowsWereBeast || statusEffects.value4 == 9000);	//na razie jest tu tylko werebeast
 		}	//ale potem zamienić to na specialne soulskills z każdego z klanów
 	} // what the fuck are those weird comments here? ^
-}
+}

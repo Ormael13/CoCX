@@ -6,11 +6,11 @@ import classes.StatusEffects;
 public class ChargeArmorSpell extends AbstractWhiteSpell {
 	public function ChargeArmorSpell() {
 		super(
-				"Charge Armor",
-				"The Charge Armor spell will surround your armor with electrical energy, causing it to do provide additional protection.  The effect lasts for a few combat turns.",
-				TARGET_SELF,
-				TIMING_LASTING,
-				[TAG_BUFF]
+			"Charge Armor",
+			"The Charge Armor spell will surround your armor with electrical energy, causing it to do provide additional protection.  The effect lasts for a few combat turns.",
+			TARGET_SELF,
+			TIMING_LASTING,
+			[TAG_BUFF]
 		);
 		baseManaCost = 40;
 	}

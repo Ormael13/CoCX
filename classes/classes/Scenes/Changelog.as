@@ -211,8 +211,8 @@ package classes.Scenes
 			outputText("-Fixes: Diana last encounter repeating after recruiting her, body lotions not working (at all), Phylla dick checks comparing area instead of length and vice versa (Svalkash)\n");
 			outputText("-Added: Grey Spellpower, Tier 1 & 2 cooldown info to Stats > Combat subpage.\n");
 			outputText("-Kitsune 2nd tier thyroid gland mutation would now give +20 mana regen and boost by 50% foxfire fire dmg at 9 tails as it says.\n");
-			outputText("-New underwear (upper) (by Canadian Snas): Silky Drider-Weave Bra - buyable at Belisa shop. Cost 1200 gems, +20% spellpower.\n");
-			outputText("-New underwear (lower) (by Canadian Snas): Silky Drider-Weave Panties - buyable at Belisa shop. Cost 1400 gems, +20% spellpower.\n");
+			outputText("-New underwear (upper) (by Canadian Snas): Silky Drider-Weave Bra - buyable at Belisa shop. Cost 1200 gems, +2 to sexiness, +20% spellpower.\n");
+			outputText("-New underwear (lower) (by Canadian Snas): Silky Drider-Weave Panties - buyable at Belisa shop. Cost 1400 gems, +2 to sexiness, +20% spellpower.\n");
 			outputText("-Added option to manualy toogle on/off Shift on attribute menu during level-up (mainly to make apk users live bit easier)\n");
 			outputText("-Added a button to disable 'Sleep With' to Ember. (Svalkash)\n");
 			outputText("-Sophie breastfeed scene properly restored, added bimbo hints and light corruption check. (Svalkash)\n");
@@ -228,7 +228,13 @@ package classes.Scenes
 			outputText("-Minor Vapula fixes, new cock-finding function. Added chastity belt scene to sex menu (which was clearly intended from the beginning). (Svalkash)\n");
 			outputText("-Made Ted less annoying by disabling him after acquiring the talisman. (Svalkash) ((actualy i made another change that makes him disabled/stop appearing after he is beaten once more after dropping jade talisman (Ormael)))\n");
 			outputText("-USS optimization (changed menuGen, so touched Yara too. If she's broken, I'm the one to blame). Moved USS to SceneLib - please don't create MORE instances of it in every class. (Svalkash)\n");
-			outputText("-SceneHunter (new settings page) added. Checks are currently added only to Holidays. (Svalkash)\n");
+			outputText("-SceneHunter (new settings page) added. Checks are currently added only to Holidays, male and female cancers and demons from BlightRidge, Phouka, SandWitch, CumWitch, Naga, Chameleon, LizanRogue, Troll, Cavewyrm, Excelia (first slave scene). (Svalkash)\n");
+			outputText("-Implemented 3 new scenes for regular imp. Implemented tentacle cock branch for centaur fuck (also imp). Reworked sex menu for imps. (Svalkash)\n");
+			outputText("-Improved isEaster() calculation - now it counts the first Easter day using some complicated Gaussian function, and gives a 7 days window after it. (Svalkash)\n");
+			outputText("-Reworked Sand Witch and Naga scene menus, adding more buttons instead of random routers and hidden checks. Added corruptionTolerance to their checks. Adapted Naga (and SandWitch) genderless scenes for non-genderless PCs. (Svalkash)\n");
+			outputText("-Grey Ink/Abyssal Ink would now be able to give Ink Spray perk too.\n");
+			outputText("-Bit increased Tentacle beast enc chances and lowered truffle find chance in forest.\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -261,17 +267,11 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Fixed Bugs: One of Ingnam Tavern food options having wrong price listed on menu, unique sex scenes accesable during Druid fusion, Wisp potentialy softlocking Mino King fight, selfsucking in masturbation menu restoring max 100 hunger, Swift Casting not usable when having Giant's Grip and Large weapon, White or Black magic buffs autocastable when having perk that disable use of white/black magic, ");
 			outputText("putting B. Sword after picking Ecalibur disabling option to pick sword at Temple, all 3 Hall of Blade soulskill variants dealing phys not magical dmg, Lightning Claw lowering phys dmg when used as part of feral style attack, using goblin Cum Reservoir not empting it out, Yuki Onna Transform scene not making sure to give proper genitalia setup, Archer's Stamina perks not giving fatigue related to ");
 			outputText("current Speed value, Half-Frost Wyrm or Half Spider-morph racial bonus been attained super easy, Mysterious Seed not causing for misc items menu appear as inventory submenu, unable to add arcane circuits to 5th arcane circle, doppleganger fight won't drag unnecessary due to getting messly 1k lust after 5th round in fight, Gazer Eyes mutation not keeping True seeing perk, Magical Eye Drops as item ");
 			outputText("find in Caves instead of Eye Drops, raiju tf removing/humanizing raiju paws, picking no elemental during minions turn skipping many following up phases of the turn, epic/legendary/mythical perks for stats not affecting monsters, harpy wings not setting shark score to 0, Siren been excluded form races list for appearance screen, Minor Minerva and parsertag, Encaps. pod multicockdescript, ");
-			outputText("Elf hair mutation\n");/*ostatni punkt changelogu
+			outputText("Elf hair mutation, holiday events appearing in Ingnam/prison\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD

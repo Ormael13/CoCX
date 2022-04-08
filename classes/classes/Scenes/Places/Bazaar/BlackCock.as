@@ -677,7 +677,7 @@ import classes.CoC;
 			}
 			else if (player.hasVagina()) { //Female
 				outputText("\n\nAs his hand slowly slides down your body you watch his face. Eyes bright with an eagerness to please are locked onto your [vagina] as he bites his lip. Then he rubs a single digit across your [clit]. Then he looks up and catches you watching him and, for some reason, you both burst into laughter. You can't help but wonder at the pure elation coming from the happy fog in your lungs.");
-				outputText("\n\nAfter the laughing has died down, and with your hand still firmly wrapped around his cock, he goes for your [pussy] again. Again he uses his fingers to stimulate your clit, handling the sensitive protruding gland with confidence as he brings a shuddering sensation of trembling ecstasy crashing through your mind and body. You look over and he catches your eye. For some reason, probably the drugs, the two of you are suddenly laughing as he maintains a firm grip on your [cock]. Once the joke is over he hands you the pipe and tells you to take a deep hit. As you do this, soft fingers begin moving around inside you, dipping into your moistened lady parts with a single questing finger.");
+				outputText("\n\nAfter the laughing has died down, and with your hand still firmly wrapped around his cock, he goes for your [pussy] again. Again he uses his fingers to stimulate your clit, handling the sensitive protruding gland with confidence as he brings a shuddering sensation of trembling ecstasy crashing through your mind and body. You look over and he catches your eye. For some reason, probably the drugs, the two of you are suddenly laughing as he maintains a firm grip on your [clit]. Once the joke is over he hands you the pipe and tells you to take a deep hit. As you do this, soft fingers begin moving around inside you, dipping into your moistened lady parts with a single questing finger.");
 				if (player.vaginas[0].vaginalLooseness >= 2) {
 					outputText("\n\nAnother finger slides alongside the first, and then another until you're groaning from the feeling of multiple wiggling fingers playing around inside of you.");
 				}
@@ -1232,7 +1232,7 @@ import classes.CoC;
 			}
 			else {
 				outputText("Frida smiles at you as you take a seat in one of the barstools.");
-				if (flags[kFLAGS.BLACK_COCK_FRIDAS_CAKE_EATEN_COUNTER] > 0) outputText("\n\n\"</i>You come here for another piece of cake?<i>\"");
+				if (flags[kFLAGS.BLACK_COCK_FRIDAS_CAKE_EATEN_COUNTER] > 0) outputText("\n\n\"</i>You come here for another piece of cake?</i>\"");
 				else outputText("\n\n\"<i>You ready for a piece of cake now, hun?</i>\"");
 			}
 			if (flags[kFLAGS.CODEX_ENTRY_ECHIDNAS] <= 0) {

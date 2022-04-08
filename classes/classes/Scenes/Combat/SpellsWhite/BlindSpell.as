@@ -9,10 +9,10 @@ import classes.StatusEffects;
 public class BlindSpell extends AbstractWhiteSpell{
 	public function BlindSpell() {
 		super("Blind",
-				"Blind is a fairly self-explanatory spell.  It will create a bright flash just in front of the victim's eyes, blinding them for a time.  However if they blink it will be wasted.",
-				TARGET_ENEMY,
-				TIMING_LASTING,
-				[TAG_DEBUFF]);
+			"Blind is a fairly self-explanatory spell.  It will create a bright flash just in front of the victim's eyes, blinding them for a time.  However if they blink it will be wasted.",
+			TARGET_ENEMY,
+			TIMING_LASTING,
+			[TAG_DEBUFF]);
 		baseManaCost = 30;
 	}
 	

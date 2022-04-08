@@ -148,21 +148,21 @@ public static const RAPHAEL_DISGUSTED_BY_PC_APPEARANCE:int                      
 public static const RAPHAEL_SECOND_DATE:int                                         =  140; // Raphael 2nd Date Happen?
 public static const HELLHOUND_MASTER_PROGRESS:int                                   =  141; // Hellhound Progression
 public static const UNKNOWN_FLAG_NUMBER_00142:int                                   =  142; // Can buy minotaur cum from goblins?
-public static const URTA_SCYLLA_TIMES_CAUGHT:int                                   =  143; // How Many Times Have You Caught Urta + Scylla?
+public static const URTA_SCYLLA_TIMES_CAUGHT:int                                    =  143; // How Many Times Have You Caught Urta + Scylla?
 public static const UNKNOWN_FLAG_NUMBER_00144:int                                   =  144; // Multitake Scylla meeting take advantage ever done?
-public static const URTA_TALKED_ABOUT_SCYLLA:int                                   =  145; // Urta confrontation about Scylla ever done?
-public static const URTA_DRINK_TOOGLE:int                                   =  146; // Urta drink toggle = 0 is same, 1 is more, -1 is less.
-public static const URTA_NO_MORE_SCYLLA:int                                   =  147; // Is Urta banned from Scylla?  1 = yes.
-public static const REPORTED_RAPHAEL_TO_URTA:int                                   =  148; // Has Urta paid out Raphael's Bounty? (1 = yes)
-public static const UNKNOWN_FLAG_NUMBER_00149:int                                   =  149; // Did you bone Raphael?
-public static const UNKNOWN_FLAG_NUMBER_00150:int                                   =  150; // Dominika Stage - 0=unknown, 1=met, 2=received, -1=blocked
-public static const UNKNOWN_FLAG_NUMBER_00151:int                                   =  151; // Times Dominika Sucked off Smaller dicks
-public static const UNKNOWN_FLAG_NUMBER_00152:int                                   =  152; // Times Dominika sucked off bigger dicks
-public static const UNKNOWN_FLAG_NUMBER_00153:int                                   =  153; // Times received vaginal oral from fellatrix
-public static const UNKNOWN_FLAG_NUMBER_00154:int                                   =  154; // Has fellatrix been embarassed about your magic knowledge yet?
-public static const UNKNOWN_FLAG_NUMBER_00155:int                                   =  155; // Dominika learning cooldown
-public static const UNKNOWN_FLAG_NUMBER_00156:int                                   =  156; // Fellatrix - times sucked dogcock
-public static const UNKNOWN_FLAG_NUMBER_00157:int                                   =  157; // Fellatrix - Special followup happen? (1 = agree, 2 = eh, 3 disagree, add 3 for post-dream)
+public static const URTA_TALKED_ABOUT_SCYLLA:int                                    =  145; // Urta confrontation about Scylla ever done?
+public static const URTA_DRINK_TOOGLE:int                                           =  146; // Urta drink toggle = 0 is same, 1 is more, -1 is less.
+public static const URTA_NO_MORE_SCYLLA:int                                         =  147; // Is Urta banned from Scylla?  1 = yes.
+public static const REPORTED_RAPHAEL_TO_URTA:int                                    =  148; // Has Urta paid out Raphael's Bounty? (1 = yes)
+public static const RAPHAEL_FUCKED:int                                              =  149; // Did you bone Raphael?
+public static const DOMINIKA_MET:int                                                =  150; // Dominika Stage - 0=unknown, 1=met, 2=received, -1=blocked
+public static const DOMINIKA_SUCKED_SMALL:int                                       =  151; // Times Dominika Sucked off Smaller dicks
+public static const DOMINIKA_SUCKED_BIG:int                                         =  152; // Times Dominika sucked off bigger dicks
+public static const DOMINIKA_LICKED_VAGINA:int                                      =  153; // Times received vaginal oral from fellatrix
+public static const DOMINIKA_MAGIC_FAIL:int                                         =  154; // Has fellatrix been embarassed about your magic knowledge yet?
+public static const DOMINIKA_MAGIC_COOLDOWN:int                                     =  155; // Dominika learning cooldown
+public static const DOMINIKA_SUCKED_KNOT:int                                        =  156; // Fellatrix - times sucked dogcock
+public static const DOMINIKA_FOLLOWUP:int                                           =  157; // Fellatrix - Special followup happen? (1 = agree, 2 = eh, 3 disagree, add 3 for post-dream)
 public static const AMILY_MET_AS:int                                                =  158; // Amily remembers PC's gender at first meeting. Amily_Met_As:Int=158;
 public static const AMILY_CONFESSED_LESBIAN:int                                     =  159; //  1=yes,2=and accepted1=Yes,2=And Accepted
 public static const AMILY_TIMES_FUCKED_FEMPC:int                                    =  160; //
@@ -179,7 +179,7 @@ public static const UNKNOWN_FLAG_NUMBER_00170:int                               
 public static const AMILY_HAS_BALLS_AND_SIZE:int                                    =  171; // Amily's Balls: 1 = yes, higher numbers = bigger balls.
 public static const AMILY_VAGINAL_WETNESS:int                                       =  172; // Amily's Wetness
 public static const AMILY_WARNING:int                                   =  173; // In camp amily warns you!  DUN DUN DUN! - Amily Freaked out about your corruption.    0=Not freaked out, 1=Freaked out
-public static const UNKNOWN_FLAG_NUMBER_00174:int                                   =  174; // Times Dominika Sucked off horsecocks
+public static const DOMINIKA_SUCKED_HORSE:int                                   =  174; // Times Dominika Sucked off horsecocks
 public static const UNKNOWN_FLAG_NUMBER_00175:int                                   =  175; // Dominidrama - 1 = yes, 2 = no
 public static const TIMES_HAD_YOGA:int                                              =  176; // Cotton - TIMES HAD YOGA
 public static const COTTON_MET_FUCKED:int                                           =  177; // FUCKED - 0 = never met.  1 = met but not fucked. 2 = fucked
@@ -1935,8 +1935,8 @@ public static const UNKNOWN_FLAG_NUMBER_01926:int                               
 public static const UNKNOWN_FLAG_NUMBER_01927:int                                   = 1927;
 public static const UNKNOWN_FLAG_NUMBER_01928:int                                   = 1928;
 public static const UNKNOWN_FLAG_NUMBER_01929:int                                   = 1929;
-public static const UNKNOWN_FLAG_NUMBER_01930:int                                   = 1930;
-public static const UNKNOWN_FLAG_NUMBER_01931:int                                   = 1931;
+public static const TYRANTIA_DEFEATS_COUNTER:int                                   	= 1930;
+public static const TYRANTIA_LVL_UP:int                                   			= 1931;
 public static const KITSUNES_DEFEATS_COUNTER:int                                   	= 1932;
 public static const CAMP_CABIN_ENERGY_CORE_RESOURCES:int                            = 1933;
 public static const CAMP_CABIN_MECHANISM_RESOURCES:int                              = 1934;
@@ -2757,7 +2757,7 @@ public static const UNKNOWN_FLAG_NUMBER_02748:int                               
 public static const UNKNOWN_FLAG_NUMBER_02749:int                                   = 2749;
 public static const UNKNOWN_FLAG_NUMBER_02750:int                                   = 2750;
 public static const UNKNOWN_FLAG_NUMBER_02751:int                                   = 2751;
-public static const UNKNOWN_FLAG_NUMBER_02752:int                                   = 2752;
+public static const TYRANT_STATE_COMBAT_MODE:int                                    = 2752;
 public static const ASURA_FORM_COMBAT_MODE:int                                   	= 2753;
 public static const CRINOS_SHAPE_COMBAT_MODE:int                                   	= 2754;
 public static const WARRIORS_RAGE_COMBAT_MODE:int                                   = 2755;
@@ -2962,7 +2962,7 @@ public static const UNKNOWN_FLAG_NUMBER_02953:int                               
 public static const UNKNOWN_FLAG_NUMBER_02954:int                                   = 2954;
 public static const UNKNOWN_FLAG_NUMBER_02955:int                                   = 2955;
 public static const SCENEHUNTER_PRINT_CHECKS:int                                    = 2956; //SceneHunter settings
-public static const SCENEHUNTER_MUTEX_SCENES:int                                    = 2957;
+public static const SCENEHUNTER_OTHER:int                                    = 2957;
 public static const SCENEHUNTER_DICK_SELECT:int                                     = 2958;
 public static const SCENEHUNTER_UNI_HERMS:int                                       = 2959;
 public static const APEX_SELECTED_RACE:int                                   		= 2960;

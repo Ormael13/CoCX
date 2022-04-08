@@ -8,11 +8,11 @@ import classes.StatusEffects;
 public class BloodShieldSpell extends AbstractBloodSpell {
 	public function BloodShieldSpell() {
 		super(
-				"Blood Shield",
-				"Blood Shield will form blood shield to block enemy attacks.",
-				TARGET_SELF,
-				TIMING_TOGGLE,
-				[TAG_BUFF]
+			"Blood Shield",
+			"Blood Shield will form blood shield to block enemy attacks.",
+			TARGET_SELF,
+			TIMING_TOGGLE,
+			[TAG_BUFF]
 		);
 	}
 	

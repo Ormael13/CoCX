@@ -257,6 +257,10 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		else if (BelisaInCamp) addButtonDisabled(7,"ComeW/Me", "She's already at your camp!");
 		else addButtonDisabled(7, "???", "Req. 80+ affection, healing her tooth injury and finding: Farm, Tel'Adre, He'Xin'Dao.");
 		addButton(8, "Back", Encounterback);
+		if (BelisaInCamp && BelisaConfessed && BelisaAffectionMeter >= 80) {
+			if (flags[kFLAGS.SLEEP_WITH] != "Belisa") addButton(12, "Sleep With", BelisaSleepToggle);
+			else addButton(12, "Sleep Alone", BelisaSleepToggle);
+		}
 	}
 	
 	public function BelisaTalkYou():void {
@@ -416,7 +420,7 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		outputText("<i>\"Demons...They attacked my village\"</i>, she whispers this, her arms wrapped tightly around your torso. <i>\"They took my sisters, corrupted my people...I ran, like my sisters told me to, but...some of them found me. They caught me, took my head and…\"</i> She begins to cry. <i>\"They took a sheet of metal, made me bite down on it, then threw my face into a stone!\"</i> She nuzzles your shoulder, trying to wipe her tears away. <i>\"I got them with some whitefire...but…There was a succubus with them. She cursed me, took my mouth in her hands and made sure it wouldn’t heal.\"</i>\n\n");
 		outputText("You take her cheeks in your hands, looking into the drider’s eyes. You promise her that you’ll do what you can to make her smile whole again. <i>\"Okay...I’ll be waiting here for you.\"</i>\n\n");
 		outputText("You think to yourself, who could help you figure this out?\n\n");
-		outputText("The old alchemist is an obvious choice\n\n");
+		outputText("The old alchemist is an obvious choice.\n\n");
 		if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) outputText("Ayane can heal curses. She'd be more than willing to help if she could.\n\n");
 		if (flags[kFLAGS.DIANA_FOLLOWER] >= 6 && !player.hasStatusEffect(StatusEffects.DianaOff)) outputText("Diana should be able to heal such a curse. You make a note to ask her.\n\n");
 		BelisaAffection(5);
@@ -428,6 +432,25 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		outputText("You say nothing, but turn away quickly. Belisa closes her mouth, nervous. <i>\"I-i’m sorry.\"</i> She sounds crestfallen at your reaction. You make small talk, then leave, but Belisa seems very saddened by your reaction.\n\n");
 		BelisaAffection(-20);
 		doNext(camp.returnToCampUseOneHour);
+	}
+	
+	public function BelisaSleepToggle():void {
+		//spriteSelect(SpriteDb.s_electra);
+		clearOutput();
+		if(flags[kFLAGS.SLEEP_WITH] != "Belisa") {
+			outputText("You ask Belisa if there’s room on her hammock for you. She looks at you, slowly realizing what you’re asking.\n\n");
+			outputText("\"<i>You want to sleep with me? Like...Overnight? Not just sex, but...</i>\" You nod, and Belisa grins from ear to ear. \"<i>Of course there is, [name]. I’d love to have you with me.</i>\"\n\n");
+			flags[kFLAGS.SLEEP_WITH] = "Belisa";
+		}
+		else {
+			outputText("You tell Belisa that you feel like sleeping on your own tonight. She winces a little, but nods.\n\n");
+			flags[kFLAGS.SLEEP_WITH] = "";
+		}
+		menu();
+		addButton(0,"Next", BelisaTalk);
+	}
+	private function sleepWith(arg:String = ""):void {
+		flags[kFLAGS.SLEEP_WITH] = arg;
 	}
 	
 	public function BelisaHang():void {
@@ -563,12 +586,12 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		outputText("You ask the petite Drider about the holy energy you feel coming off of the leftmost box. \"O-oh!\" She seems happy you asked about that.\n\n");
 		outputText("\"Those are bands, made from my silk, and imbued with holy magic! I made the enchantments myself, and I’ve been able to produce a few different effects!\" She bobs up and down on her Drider legs, and her eyes sparkle with holy light. \"I hope you like them!\n\n");
 		menu();
-		addButton(0, "Crimson", BuyCrimsonBand);
-		addButton(1, "Pink",BuyPinkBand);
-		addButton(2, "Yellow",BuyYellowBand);
+		//addButton(0, "Crimson", BuyCrimsonBand);
+		//addButton(1, "Pink",BuyPinkBand);
+		//addButton(2, "Yellow",BuyYellowBand);
 		//addButton(3, "Turqouise", BuyTurquoiseBand);
-		addButton(4, "Crossed", BuyCrossedBand);
-		addButton(5, "R.Blue", BuyBlueBand);
+		//addButton(4, "Crossed", BuyCrossedBand);
+		//addButton(5, "R.Blue", BuyBlueBand);
 		addButton(14, "Back", BelisaShop);
 	}
 	public function BuyCrimsonBand():void {

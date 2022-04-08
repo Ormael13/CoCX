@@ -89,6 +89,8 @@ public function firstEncounterYes():void {
 	outputText("\"<i>Okay, Tyrantia, stop playing around with your food. Find that demon cunt who’s been summoning them.</i>\" As she turns towards you, you see the first indication of organic life under all that steel. She wears a half-helm, and her fangs gleam in the sunlight. ");
 	outputText("Five purple eyes shine under the helm, wary and alert. Twin horns poke out from holes in her helmet, black as night. She’s clearly heard you move, but as she looks back and forth, she doesn’t seem to know where you are yet.\n\n");
 	TyrantiaFollowerStage = 1;
+	flags[kFLAGS.TYRANTIA_LVL_UP] = 1;
+	flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] = 0;
 	menu();
 	addButton(1, "Hide", firstEncounterYesHide);
 	addButton(3, "No Hiding", firstEncounterYesNoHiding);
@@ -166,6 +168,7 @@ public function postFightOptions(hpVictory:Boolean):void {
 		outputText("Tyrantia’s shaking legs finally give out, and she drops her phallic spear, both of her meaty hands dropping to her cunt-flap. Ignoring you entirely, she begins to grab at the flap, pulling the steel up and revealing a large-labed, drooling cunny. Wasting no time, she begins jilling herself off, breathing heavily from both exhaustion and arousal.\n\n");
 		outputText("\"<i>Fuck, no. Not now, you…</i>\" She moans, her armored chest heaving. Her black aura is nearly gone, but you can see a pink glow coming from her eyes. \"<i>What do you want?</i>\"\n\n");
 	}
+	//if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) LevelingHerself();
 	tyraniaAffection(5);
 	menu();
 	//addButton(0, "Rape", postFightOptionsRape);
@@ -262,8 +265,10 @@ public function repeatEncounterBattlefield():void {
 	}
 	else addButton(0, "Kiss", postFightOptionsKiss);
 	addButton(1, "Talk", repeatEncounterBattlefieldTalk);
-	//2 - Spar
-	//Training and Sex where?
+	if (TyrantiaAffectionMeter >= 15) addButton(2, "Spar", TyrantiaSpar);
+	else addButtonDisabled(2, "???", "Req. 15%+ affection.");
+	if (TyrantiaTrainingSessions >= 25) addButtonDisabled(3, "Training", "You finished all training session with her.");
+	else addButton(3, "Training", TyrantiaTraining);
 	if (TyraniaPostFinalKissScene) addButton(4, "Sex", TyrantiaSexMenu);
 	else addButtonDisabled(4, "Sex", "Req. special scene after reaching 40%+ affection.");
 	addButton(14, "Leave", camp.returnToCampUseOneHour);
@@ -278,8 +283,10 @@ public function repeatEncounterBattlefieldRe():void {
 	}
 	else addButton(0, "Kiss", postFightOptionsKiss);
 	addButton(1, "Talk", repeatEncounterBattlefieldTalk);
-	//2 - Spar
-	//addButton(2, "Training", repeatEncounterBattlefieldTrain);
+	if (TyrantiaAffectionMeter >= 15) addButton(2, "Spar", TyrantiaSpar);
+	else addButtonDisabled(2, "???", "Req. 15%+ affection.");
+	if (TyrantiaTrainingSessions >= 25) addButtonDisabled(3, "Training", "You finished all training session with her.");
+	else addButton(3, "Training", TyrantiaTraining);
 	if (TyraniaPostFinalKissScene) addButton(4, "Sex", TyrantiaSexMenu);
 	else addButtonDisabled(4, "Sex", "Req. special scene after reaching 40%+ affection.");
 	addButton(14, "Leave", camp.returnToCampUseOneHour);
@@ -290,11 +297,12 @@ public function repeatEncounterBattlefieldTalk():void {
 	menu();
 	//0 - Lab
 	addButton(1, "Self", repeatEncounterBattlefieldTalkSelf);
-	//2 - Fighting Style
+	if (TyrantiaTrainingSessions > 0) addButtonDisabled(2, "FightStyle", "You already can train with her.");
+	else addButton(2, "FightStyle", repeatEncounterBattlefieldTalkFightingStyle);
 	if (TyrantiaFollowerStage >= 4){
 		if (flags[kFLAGS.TIMES_MET_KIHA] > 0) addButton(3, "Kiha", repeatEncounterBattlefieldTalkKiha);
 		else addButtonDisabled(3, "???", "Perhaps if you look around the swamps, you might find someone she might also know...");
-		if (DivaScene.instance.status > 0) addButton(4, "Diva", repeatEncounterBattlefieldTalkDiva);
+		if (DivaScene.instance.status != 0) addButton(4, "Diva", repeatEncounterBattlefieldTalkDiva);
 		else addButtonDisabled(4,"???", "Perhaps if you look around the mountains, you might find someone she might also know...");
 	}
 	addButton(5, "Her", repeatEncounterBattlefieldTalkHer);
@@ -315,10 +323,22 @@ public function repeatEncounterBattlefieldTalkSelf():void {
 }
 public function repeatEncounterBattlefieldTalkFightingStyle():void {
 	clearOutput();
-	outputText("\"<i>“Honestly, I was wondering when you’d ask about that.”</i> Tyrantia scratches at her manelike hair with one hand. <i>“Honestly, it’s pretty hard to explain...but I’ll try.”</i>\"\n\n");
-	outputText("\n\n");
-	//affection gains (5)
-	doNext(camp.returnToCampUseOneHour);
+	outputText("You ask Tyrantia about her...unique method of fighting. You note that while fighting, she seems to be even stronger than you’ve come to expect from her.\n\n");
+	if (TyrantiaAffectionMeter > 30) {
+		outputText("\"<i>“Honestly, I was wondering when you’d ask about that.”</i> Tyrantia scratches at her manelike hair with one hand. <i>“Honestly, it’s pretty hard to explain...but I’ll try.”</i>\"\n\n");
+		outputText("She takes a fighting stance, holding her Dick out in front of her. \"<i>Ever since I became like this, it’s been a struggle to contain my libido. You know what it’s like around here.</i>\" You nod, and she smiles, swinging her Dick \"<i>One of the ways I’ve found to...reduce the effects of it on my mind...is to indulge...But it’s not the only way.</i>\" Her black aura flares, and she narrows her eyes. \"<i>Taking that lust, that need, and diverting it elsewhere...That’s the key.</i>\" ");
+		outputText("She clenches her fists hard, sending quivers up her spear’s length. \"<i>Not ignoring the need in your loins, not trying to let it slide off you...But taking that lust and channeling it into your arms, your legs…</i>\" She takes two steps, punching a rock with her bare hand. The boulder splinters, shattering into shards. \"<i>Do it right, and you’ll be much stronger.</i>\"\n\n");
+		outputText("Tyrantia looks down at you, and smiles. \"<i>Did that clear it up for you?</i>\"\n\n");
+		outputText("You ask her if the mental training she went through could be used to enhance those not in her unique circumstances. She puts a hand on her chin, humming slightly.\n\n");
+		outputText("\"<i>Maybe. Might not be as effective for you as me, but hey, why not?</i>\" She shrugs her shoulders. \"<i>Alright...The first thing you need to do is think dirty...and think</i> really <i>dirty. You need to be able to sustain that for a while...and during fights as well.</i>\" Tyrantia runs you through a series of mental exercises more akin to mental porn than meditation, but taken with the same meticulous, organized manner.\n\n");
+		outputText("You thank Tyrantia for her time, and excuse yourself, heading back to camp.\n\n");
+		TyrantiaTrainingSessions = 0.5;
+		doNext(camp.returnToCampUseOneHour);
+	}
+	else {
+		outputText("\"<i>No offense [name], but I don’t really want to talk about it. My fighting style is...Odd. Can we talk about something else?</i>\"\n\n");
+		doNext(repeatEncounterBattlefieldTalk);
+	}
 }
 public function repeatEncounterBattlefieldTalkKiha():void {
 	clearOutput();
@@ -552,6 +572,155 @@ public function MakeTheSpoodLeaveYouMotherFucker():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 
+public function TyrantiaSpar():void {
+	clearOutput();
+	outputText("Tyrantia looks down at you in mild disbelief. She seems to take a few seconds to understand what you’ve just asked.\n\n");
+	outputText("<i>“Look, [name]...Look at me.”</i> She gives you a stare, somewhat concerned, as she spreads her arms wide. The fur on her arms can’t fully conceal the massive muscles you know are there. Her metal leg-spikes, still on, leave indents in the ground where she moves. Tyrantia stands over fourteen feet tall, and the twin horns on her head buzz with the corrupt aura you know she keeps suppressed. Despite her intimidating stature, her five purple eyes are soft, unsure. <i>“...I don’t want to hurt you. I know you can handle yourself against those demon filth, but...They made me stronger, and…”</i> Tyrantia closes her eyes. <i>“Are you sure you want me to fight you?”</i>\n\n");
+	menu();
+	if (TyrantiaFollowerStage >= 4) {
+		addButton(1, "Yes", TyrantiaSparYes);
+		addButton(2, "No", TyrantiaAtCamp);
+	}
+	else {
+		addButton(1, "Yes", TyrantiaSparYes);
+		addButton(2, "No", repeatEncounterBattlefieldRe);
+	}
+}
+
+public function TyrantiaSparYes():void {
+	clearOutput();
+	outputText("You tell her that you want to get stronger, and if that means fighting someone like her, then so be it. She glances down, and you smile up at her, adding that you trust her more than she realizes.\n\n");
+	outputText("<i>“Very well…But one more question. I can fight you like we’re sparring…or if you really feel like you can take it…We can go all out.”</i> Tyrantia really doesn’t seem to like the second option, but she offers it, nonetheless.\n\n");
+	menu();
+	addButton(1, "Spar", TyrantiaHoldsBack);
+	addButton(2, "Fight", TyrantiaAllOut);
+}
+
+public function TyrantiaHoldsBack():void {
+	clearOutput();
+	if (TyrantiaFollowerStage >= 4) {
+		outputText("Tyrantia nods, her full lips set into a line. She strides over to her hutch, and comes back out carrying her Dick. Her quadruple tits are hidden once more behind a layer of thick black steel, and she levels the phallic spear at you. You can see the pinkish venom pooling on the tip, and she brandishes the weapon with smooth, swift movements.\n\n");
+		outputText("<i>“Come on then, [name], show me what you’re made of!”</i>\n\n");
+	}
+	else {
+		outputText("Tyrantia points to a nearby flat area, the rocks swept aside. You join her there, and her eyes glow as she levels her spear, spreading her legs out into a wide stance. You notice she isn’t putting much weight on her front legs, and you suspect she’s just as ready to strike with those as with her Phallic Spear.\n\n");
+		outputText("<i>“Show me what you’ve got!”</i>\n\n");
+	}
+	player.createStatusEffect(StatusEffects.SparingTyrantia,0,0,0,0);
+	startCombat(new Tyrantia());
+	doNext(playerMenu);
+}
+
+public function TyrantiaAllOut():void {
+	clearOutput();
+	if (TyrantiaFollowerStage >= 4) outputText("Your Drider companion sighs heavily. <i>“Well…Don’t say I didn’t warn you.”</i> She leads you out of camp, back to the battlefield, not far from where you’d first met her.\n\n");
+	else {
+		outputText("Tyrantia points to a nearby flat area, the rocks swept aside. You join her there, and her eyes glow as she levels her spear, spreading her legs out into a wide stance. You notice she isn’t putting much weight on her front legs, and you suspect she’s just as ready to strike with those as with her Phallic Spear.\n\n");
+		outputText("<i>“Show me what you’ve got!”</i>\n\n");
+	}
+	player.createStatusEffect(StatusEffects.SparingTyrantia,1,0,0,0);
+	startCombat(new Tyrantia());
+	doNext(playerMenu);
+}
+
+public function TyrantiaLostSparring():void {
+	clearOutput();
+	//outputText(".");
+	//if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) LevelingHerself();
+	cleanupAfterCombat();
+}
+private function LevelingHerself():void {
+	if (flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] >= 1) flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER]++;
+	else flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] = 1;
+	if (flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] == 10 && flags[kFLAGS.TYRANTIA_LVL_UP] == 1) {
+		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 10));
+		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction), 0, 0);
+		flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] = 0;
+		flags[kFLAGS.TYRANTIA_LVL_UP] = 2;
+	}
+	if (flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] == 11 && flags[kFLAGS.TYRANTIA_LVL_UP] == 2) {
+		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 11));
+		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 2), 0, 0);
+		flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] = 0;
+		flags[kFLAGS.TYRANTIA_LVL_UP] = 3;
+	}/*
+	if (flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] == 12 && flags[kFLAGS.TYRANTIA_LVL_UP] == 3) {
+		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 12));
+		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 3), 0, 0);
+		flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] = 0;
+		flags[kFLAGS.TYRANTIA_LVL_UP] = 4;
+	}
+	if (flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] == 13 && flags[kFLAGS.TYRANTIA_LVL_UP] == 4) {
+		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 13));
+		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 4), 0, 0);
+		flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] = 0;
+		flags[kFLAGS.TYRANTIA_LVL_UP] = 5;
+	}
+	if (flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] == 14 && flags[kFLAGS.TYRANTIA_LVL_UP] == 5) {
+		if (player.hasStatusEffect(StatusEffects.CampSparingNpcsTimers4)) player.addStatusValue(StatusEffects.CampSparingNpcsTimers4, 2, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 14));
+		else player.createStatusEffect(StatusEffects.CampSparingNpcsTimers4, 0, (player.statusEffectv1(StatusEffects.TrainingNPCsTimersReduction) * 5), 0, 0);
+		flags[kFLAGS.TYRANTIA_DEFEATS_COUNTER] = 0;
+		flags[kFLAGS.TYRANTIA_LVL_UP] = 6;
+	}*/
+}
+
+public function TyrantiaTraining():void {
+	clearOutput();
+	outputText("You ask Tyrantia to teach you more of her odd mental training. She nods, lowering her spider back-half to the ground and beckoning you over.\n\n");
+	outputText("\"<i>Alright...So here’s what we’re going to do.</i>\" Tyrantia hefts a massive rock in each of her meaty palms. \"<i>You’re going to take these, and follow me, holding your arms out like this.</i>\" She holds her arms out to the sides, and you mimic the motion. Satisfied, the giantess puts her rocks down, rummaging about for a moment.\n\n");
+	outputText("She puts two smaller rocks into your hands, and you immediately begin to feel your arms burn. \"<i>Now, you’re going to close your eyes. Start in your head, the image of a perfect sex partner.</i>\" You hear Tyrantia’s steel-clad feet scuttling in closer. \"<i>The look on their face is clear what they want from you.</i>\" You nod, eyes still closed. \"<i>They have no intention of letting you leave…</i>\"\n\n");
+	if (player.gender == 3) {
+		outputText("\"<i>As they get closer to you...Which do they go for?</i>\"\n\n");
+		menu();
+		addButton(1, "Dick", TyrantiaTrainingDick);
+		addButton(3, "Pussy", TyrantiaTrainingPussy);
+	}
+	else {
+		if (player.hasCock()) TyrantiaTrainingDick();
+		else TyrantiaTrainingPussy();
+	}
+}
+public function TyrantiaTrainingDick():void {
+	outputText("\"<i>Your partner kneels in front of you, lowering your [armor] to the floor. They take your mighty tool...Gripping it in both hands...Wait…</i>\" You open your eyes, to see Tyrantia, hands on your [cock].\n\n");
+	outputText("\"<i>Part of the training,</i>\" she says sheepishly. \"<i>Easier to keep your mind in the gutter.</i>\"You suspect that Tyrantia just wanted to get some action, but you mentally shrug, closing your eyes again. Almost immediately, you feel your [cock] being pumped, slowly but firmly. Your mental image pops back into place...but the burning in your arms blurs your partner, making it extremely hard to concentrate. You begin to go flaccid, the pain in your arms overwhelming, but Tyrantia’s lips wrap around your [cockhead].\n\n");
+	outputText("Your mental image all but lost, you grunt, struggling to keep your arms up and your [cock] hard, but even with your Drider-trainer’s lips running up and down you, the pink haze in your mind is quickly overwhelmed by the red of pain. You gasp, snapping back to reality, dropping the rocks and gasping for air.\n\n");
+	outputText("As you open your eyes, Tyrantia lets out a disappointed groan around your [cock], pulling her lips off you. Clear pre oozes from your [cockhead], but no release.\n\n");
+	TyrantiaTraining2();
+}
+public function TyrantiaTrainingPussy():void {
+	outputText("\"<i>Your partner gives you a wicked smirk, eyes smoldering. You feel them yank your [armor] down, and you feel their head slide between your [legs], finding your [pussy]. You feel them slide a long tongue past your labia, your clit trembling at the moist entrance…</i>\" You open your eyes. Did Tyrantia just go down on you? You look down, and to your surprise, you can see her shoulders rubbing gently against your thighs.\n\n");
+	outputText("\"<i>Stay standing.</i>\" Tyrantia says firmly. \"<i>This is part of the training.</i>\"You can feel her tongue move inside you, and you shudder, closing your eyes again. Your arms, still held out, are burning...but so is your pussy, as Tyrantia nibbles your clit. Your knees shake, and your breathing quickens, but Tyrantia grabs your thighs, holding them as she ravages your cunt with her tongue. Your mental image all but shattered, you groan, trying to remain standing, the rocks on your arms slowly forcing them down. You let out a girly cry, arms finally dropping, and Tyrantia immediately stops eating you out.\n\n");
+	outputText("You lean against a nearby rock, breathing heavily, and Tyrantia stands back up, clear fluid on her lips. She licks it off, but her expression isn’t lustful, it’s...almost clinical.\n\n");
+	TyrantiaTraining2();
+}
+public function TyrantiaTraining2():void {
+	if (TyrantiaTrainingSessions == 4 || TyrantiaTrainingSessions == 9 || TyrantiaTrainingSessions == 14 || TyrantiaTrainingSessions == 19 || TyrantiaTrainingSessions == 24 || TyrantiaTrainingSessions == 29 || TyrantiaTrainingSessions == 34 || TyrantiaTrainingSessions == 39) {
+		outputText("Tyrantia nods approvingly. \"<i>Good job. I think you’re ready for the next technique.</i>\" Tyrantia sits down with you, the two of you both activating your Overlust. She takes you through several drills, and focusing on them and not her is extremely difficult. At the end, however, you notice your black and pink aura has thickened a bit.\n\n");
+		if (TyrantiaTrainingSessions == 4) {
+			outputText("<b>You have learned: Tyrant State ability.</b>\n\n");
+			player.createStatusEffect(StatusEffects.KnowsTyrantState,0,0,0,0);
+		}
+		if (TyrantiaTrainingSessions == 9) outputText("<b>Tyrant State bonus to melee damage increased by 20%.</b>\n\n");
+		if (TyrantiaTrainingSessions == 14) outputText("<b>You have gained new magic special: False Weapon - costs 10% of your max Lust and 100 Fatigue and lasts until the end of combat.</b>\n\n");
+		if (TyrantiaTrainingSessions == 19) outputText("<b>You can now use toggle to turn on/off auto-cast of Tyrant State at the combat start.</b>\n\n");
+		if (TyrantiaTrainingSessions == 24) outputText("<b>You have gained ability to take less physical and lust damage the closer you're to the maximum lust. (20% at 50% Max Lust, up to 70% at max)</b>\n\n");
+		//if (TyrantiaTrainingSessions == 29) outputText("<b></b>\n\n");
+		//if (TyrantiaTrainingSessions == 34) outputText("<b></b>\n\n");
+		//if (TyrantiaTrainingSessions == 39) outputText("<b></b>\n\n");
+	}
+	else {
+		outputText("Tyrantia considers your state, shaking her head.\n\n");
+		outputText("\"<i>It’s a good effort, [name], but you’re having trouble keeping yourself centered.</i>\" She smiles. \"<i>I’m sure you’ll get it soon...but I’d also get that lust seen to. It doesn’t pay to go around pent up.</i>\"\n\n");
+	}
+	if (TyrantiaTrainingSessions == 0.5) TyrantiaTrainingSessions = 1;
+	else TyrantiaTrainingSessions += 1;
+	player.lust += Math.round(player.maxLust() * 0.3);
+	player.dynStats("sen", -1);
+	player.dynStats("cor", 1);
+	statScreenRefresh();
+	doNext(camp.returnToCampUseOneHour);
+}
+
 public function encounterBattlefieldAfter40Affection():void {
 	clearOutput();
 	outputText("You walk to the battlefield, heart heavy. It’s been a while, but the battlefield is even more quiet than usual, clouds hanging low in the sky. You sit down inside one of the ruined slabs of odd stone, taking a break from your walk, when you hear footsteps. A lot of footsteps. You instinctively hide under one of the slabs of ruined stone.\n\n");
@@ -746,9 +915,9 @@ public function TyrantiaTitJob():void {
 public function TyrantiaHugFuck():void {
 	clearOutput();
 	tyraniaAffection(5);
-	outputText("You tell the giantess that you want to have some fun, but you want to mix it up a bit. Tyrantia tilts her head, nodding appreciatively as you strip. Your [cock] is already upright, raring to go, (if herm) your damp cooter drips with arousal.\n\n");
+	outputText("You tell the giantess that you want to have some fun, but you want to mix it up a bit. Tyrantia tilts her head, nodding appreciatively as you strip. Your [cock] is already upright, raring to go "+(player.hasVagina()?", your cooter dripping with arousal":"")+".\n\n");
 	outputText("<i>“So, what’s on your pretty brain, lover?”</i> You leer as Tyrantia returns the favor, peeling her armor off, and wiggling her hips as she peels her bras off. Her sizable pussy isn’t just damp, it’s positively dripping with lust, and she blushes, covering herself. <i>“H-hey, I can’t help it, okay? They...Made me like this.”</i> You decide to distract your suddenly bashful giant lover, running at her naked, full speed. You yell at her to catch you, leaping up and wrapping your arms around her, burying your [face] into her love-pillows.\n\n");
-	outputText("You feel her warm, furry arms wrap around you, below your shoulders, and pull you up. She smiles, her eyes shining as she rubs her nose into yours. <i>“What was that?”</i> She asks as you wrap your [legs] (or coils) around her waist, rubbing your [cock] against her (slick/furry) chitin-covered leg.\n\n");
+	outputText("You feel her warm, furry arms wrap around you, below your shoulders, and pull you up. She smiles, her eyes shining as she rubs her nose into yours. <i>“What was that?”</i> She asks as you wrap your [legs] around her waist, rubbing your [cock] against her chitin-covered leg.\n\n");
 	outputText("You tell Tyrantia that it’s funny, and kind of arousing, her being so bashful. She freezes, and you kiss her cheek, telling her that you’re happy that she’s so wet for you. The red fills her face, and Tyrantia’s voice gets husky. She brings her lips to your ears, running the side of her fangs against your vulnerable neck as she whispers. <i>“Are you going to stick that [cock] of yours into me, or what?”</i>\n\n");
 	outputText("At that, you’re more than happy to oblige. Trusting Tyrantia’s massive, fuzzy arms to support you, you take one hand from around her, guiding your [cock] past her blackened folds and deep into Tyrantia’s sopping depths. Tyrantia shudders as you begin to move, using your [legs] to give you leverage as you rub your [cockhead] into her folds. <i>“Ngh...Where to now, my little [race]?”</i>\n\n");
 	outputText("You tell Tyrantia that you don’t particularly care, as long as you get to keep yourself inside her. She gives you a warm smile, biting her lower lip as you begin moving again. You sink your [face] into Tyrantia’s massive breasts, nicking the pillowy mounds with your teeth, paddling them with your nose, and pulling on her nipples as your lover’s fuzzy arms rub alongside your [skin] back, warm and soft...and comforting. You build up to a slightly quicker pace as she runs faster, and are rewarded by a low moan as your Drider-lover arches her back slightly.\n\n");
@@ -756,7 +925,7 @@ public function TyrantiaHugFuck():void {
 	outputText("<i>“Thanks...Didn’t want to drop you...and I don’t want to end this yet.”</i> Tyrantia stops, and you look up, somewhat reluctantly, from her bountiful breasts. She ducks, and you recognize the place as the cavelike structure in the Battlefield, where you first made love to your giantess.\n\n");
 	outputText("<i>“...I just...Wanted to have you here.”</i> The giantess explains. <i>“[name], I’ve fucked a lot of things, a lot of people...But I love you. Here was where...You made me feel special.”</i> Still holding you close, she walks to the very back of the cave, supporting your [ass] between the wall and her front Drider legs. Tyrantia looks into your eyes, and you wonder, for a moment, why you ever found this beautiful woman scary. <i>“Well, [name]...Make me feel that way again, would you please?”</i> She leans in to kiss you, slowly. <i>“Remind me of the night that made my life worth living.”</i>\n\n");
 	outputText("Her lips and yours lock, beads of her bittersweet venom mixing with her sugary saliva. You greedily swallow the mixture, your erection hardening back up within her slippery pussy. Her hands drop to the curve of your [ass], fingers prodding at the entrance to your pucker as you buck your hips, sinking your [cock] balls-deep into your Drider lover. You’re rewarded by a surprisingly high-pitched moan, Tyrantia bringing one of her furry hands to support your head as she slams you into the wall.\n\n");
-	outputText("You keep your [legs] wrapped firmly around Tyrantia, the two of you howling together in shared pleasure. Her depths contract, the slick folds trying desperately to tighten, to keep you in, but you piston in and out, your [cockhead] heating up, despite the rather absurd amount of lubricant dripping from your lover’s cunt. Her fuzzy arms, one hand on the back of your head, run along your back. You bury your [face] intowintoweđ her breasts, pulling at the flesh as you lick her cross-shaped cleavage, burying your face in titty heaven. You motorboat her, bringing yet another tone higher out of Tyrantia’s tortured voice.\n\n");
+	outputText("You keep your [legs] wrapped firmly around Tyrantia, the two of you howling together in shared pleasure. Her depths contract, the slick folds trying desperately to tighten, to keep you in, but you piston in and out, your [cockhead] heating up, despite the rather absurd amount of lubricant dripping from your lover’s cunt. Her fuzzy arms, one hand on the back of your head, run along your back. You bury your [face] into her breasts, pulling at the flesh as you lick her cross-shaped cleavage, burying your face in titty heaven. You motorboat her, bringing yet another tone higher out of Tyrantia’s tortured voice.\n\n");
 	outputText("<i>“Oh...Fuck...Yes! Yes! [Name], you horny fucking beast!”</i> She howls, legs shaking underneath you as she clamps down on your shaft, pussy walls milking you for all they’re worth. <i>“Cumming!”</i> As her juices flow, you reach up with one hand, pulling her head down into a passionate french kiss. You pick up the pace, her legs shaking uncontrollably as you pound her sensitive quim.\n\n");
 	outputText("Tyrantia’s legs begin to collapse, and you barely get your [legs] underneath you in time, now holding her upper body up. Her eyes wide, tongue lolling out of her mouth, Tyrantia bucks her hips like a beast, arms still latched onto you as your [cock] twitches inside her, begging for release. Your Drider lover squeals with delight as you slam your [hips] into hers, bottoming out inside her.\n\n");
 	outputText("<i>“Yes. Yes, yesyesyesYES!”</i> Drowning in pleasure, the Drider’s barely focused eyes roll around wildly. <i>“[name], do it. Cum for me.”</i> She slides up and down you recklessly, pinning you down against the ground. You hold on as long as you can, but sadly, all things must come to an end. You howl, your [cock] shaking madly inside her, spraying your baby batter into Tyrantia’s needy cunt. She slides up and down your shaft, tongue lolling out, and your vision blackens around the edges as your [cock] spurts again, then again. Your orgasm just seems to roll on, and eventually, your eyes are too heavy for you to keep open. The last thing you feel is a crushing weight as Tyrantia’s upper half collapses on top of you.\n\n");
@@ -764,7 +933,7 @@ public function TyrantiaHugFuck():void {
 	outputText("<i>“Mine.”</i> She whispers in her sleep. You sigh, content, shifting slightly, so that you’re a bit more comfortable. You rest your head on her fuzzy hand, closing your eyes again.\n\n");
 	outputText("You wake as Tyrantia shifts around you. <i>“...aw…”</i> She seems disappointed as you wake up. <i>“You’re cute when you’re asleep.”</i> She sits up, pulling your [cock] out of her with a sticky Schlurp sound. You look at her lower body, soaked and sticky with the results of your lovemaking.\n\n");
 	outputText("Reluctantly, you tell Tyrantia that you need to get back to camp. She nods, picking you up in her arms. <i>“I love you.”</i> This is a bare whisper, a lot more vulnerable than you’d expect from a woman who’s literally picked you up like it’s nothing. You tell Tyrantia that you love her back, and this gets you another happy little noise from your giantess.\n\n");
-	outputText("<i>“Umm...I just realized something.”</i> She says, blushing. You tilt your head, confused, and she scratches her head. <i>“...We left our clothes back at camp. You facepalm, realizing that neither of you thought about the aftermath of your little sexcapade.\n\n");
+	outputText("<i>“Umm...I just realized something.”</i> She says, blushing. You tilt your head, confused, and she scratches her head. <i>“...We left our clothes back at camp.\" </i> You facepalm, realizing that neither of you thought about the aftermath of your little sexcapade.\n\n");
 	outputText("<i>“Well...I know how we could keep ourselves...Kind of covered.”</i> She grins, putting you down. <i>“But it might be a bit...Stimulating.”</i>\n\n");
 	menu();
 	addButton(1, "Yes", TyrantiaHugFuckCover);
@@ -859,11 +1028,9 @@ public function TyrantiaAtCamp():void {
 	menu();
 	addButton(0, "Looks", TyrantiaAppearance);
 	addButton(1, "Talk", repeatEncounterBattlefieldTalk);
-	//2 - Spar addButton(1, "Spar", TyrantiaSpar);
-	//Training and Sex where?
-	/*if (TyrantiaTrainingSessions > 0){
-		addButton(3, "Training", TyrantiaTraining);
-	}*/
+	addButton(2, "Spar", TyrantiaSpar);
+	if (TyrantiaTrainingSessions >= 20) addButtonDisabled(3, "Training", "You finished all training session with her.");
+	else addButton(3, "Training", TyrantiaTraining);
 	addButton(4, "Sex", TyrantiaSexMenu);
 	//5 - JoinMe addButton(2, "JoinMe", TyrantiaFollowerOptions);
 	addButton(14, "Leave", camp.campLoversMenu);
@@ -945,46 +1112,6 @@ public function JojoReaction():void {
 		outputText("You tell Jojo that Tyrantia is a person, not a demon. You inform Jojo that despite her corruption, Tyrantia’s proven herself to be a valuable warrior against the demon hordes many times over, a caring friend...and a surprisingly gentle soul, despite appearances. You tell Jojo that his meditation and holy practices may prove helpful to someone like her. Your words seem to hit a chord within Jojo and the monk nods.\n\n");
 		outputText("<i>“Ah...It seems that I misjudged her. My apologies''. He bows his head, looking towards Tyrantia’s hutch. <i>“I...Will attempt to make amends''. He walks quickly towards the hutch, catching Tyrantia as she’s about to leave. You see her back up a step, but as Jojo talks to her, she smiles, looking back up towards you for a second. You nod, and she scratches the back of her head as Jojo talks. You’re too far away to make out the conversation, but Jojo and Tyrantia head off towards the woods together, and appear to be making small talk.\n\n");
 doNext(camp.returnToCamp);
-}
-
-public function TyrantiaSpar():void {
-	clearOutput();
-	outputText("Tyrantia looks down at you in mild disbelief. She seems to take a few seconds to understand what you’ve just asked.\n\n");
-	outputText("<i>“Look, [name]...Look at me.”</i> She gives you a stare, somewhat concerned, as she spreads her arms wide. The fur on her arms can’t fully conceal the massive muscles you know are there. Her metal leg-spikes, still on, leave indents in the ground where she moves. Tyrantia stands over fourteen feet tall, and the twin horns on her head buzz with the corrupt aura you know she keeps suppressed. Despite her intimidating stature, her five purple eyes are soft, unsure. <i>“...I don’t want to hurt you. I know you can handle yourself against those demon filth, but...They made me stronger, and…”</i> Tyrantia closes her eyes. <i>“Are you sure you want me to fight you?”</i>\n\n");
-	menu();
-	addButton(1, "Yes", TyrantiaSparYes);
-	addButton(2, "No", TyrantiaSparNo);
-}
-
-public function TyrantiaSparYes():void {
-	clearOutput();
-	outputText("You tell her that you want to get stronger, and if that means fighting someone like her, then so be it. She glances down, and you smile up at her, adding that you trust her more than she realizes.\n\n");
-	outputText("<i>“Very well…But one more question. I can fight you like we’re sparring…or if you really feel like you can take it…We can go all out.”</i> Tyrantia really doesn’t seem to like the second option, but she offers it, nonetheless.\n\n");
-	menu();
-	addButton(1, "Spar", TyrantiaHoldsBack);
-	addButton(2, "Fight", TyrantiaAllOut);
-}
-
-public function TyrantiaHoldsBack():void {
-	clearOutput();
-	if (TyrantiaFollowerStage > 0) {
-	outputText("Tyrantia nods, her full lips set into a line. She strides over to her hutch, and comes back out carrying her Dick. Her quadruple tits are hidden once more behind a layer of thick black steel, and she levels the phallic spear at you. You can see the pinkish venom pooling on the tip, and she brandishes the weapon with smooth, swift movements.\n\n");
-	outputText("<i>“Come on then, [name], show me what you’re made of!”</i>\n\n");
-	}
-	else {
-	outputText("Tyrantia points to a nearby flat area, the rocks swept aside. You join her there, and her eyes glow as she levels her spear, spreading her legs out into a wide stance. You notice she isn’t putting much weight on her front legs, and you suspect she’s just as ready to strike with those as with her Phallic Spear.\n\n");
-	outputText("<i>“Show me what you’ve got!”</i>\n\n");
-//Tyrantia Fight here
-}
-
-public function TyrantiaAllOut():void {
-	clearOutput();
-	if (TyrantiaFollowerStage > 0) {
-	outputText("Your Drider companion sighs heavily. <i>“Well…Don’t say I didn’t warn you.”</i> She leads you out of camp, back to the battlefield, not far from where you’d first met her.\n\n");
-	}
-	outputText("Tyrantia points to a nearby flat area, the rocks swept aside. You join her there, and her eyes glow as she levels her spear, spreading her legs out into a wide stance. You notice she isn’t putting much weight on her front legs, and you suspect she’s just as ready to strike with those as with her Phallic Spear.\n\n");
-	outputText("<i>“Show me what you’ve got!”</i>\n\n");
-//Tyrantia Fight, with her corruption aura
 }*/
 }
 }

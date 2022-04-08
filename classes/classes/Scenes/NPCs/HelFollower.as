@@ -69,6 +69,7 @@ public function isHeliaBirthday():Boolean {
 //The Pale Flame Lingers: Introduction -McGirt
 //(The first time the Champion goes to sleep when all the above conditions are met, display the following, occurring after ALL other night effects):
 public function heliaFollowerIntro():void {
+    helScene.helSprite();
 	outputText(images.showImage("helia-follower-intro"));
 	outputText("\nYou awake from your slumber to a gentle shake.  Eyes fluttering open, your gaze falls upon the cloaked, hooded figure that looms over you, a rough, hard hand grasping your shoulder. You're assaulted by the smell of ale and fire, and nearly cough, but the figure places another hand over your mouth, surprisingly gentle.  You try to struggle, but the stranger is surprisingly strong.");
 	
@@ -258,8 +259,8 @@ public function helFollowersIntro():void {
 			
 			outputText("\n\nA dopey smile spreads across your face as Hel offers Isabella her hand.  Warily, the cow-girl shakes it.  The girls increase the tempo of the handshake competitively until both their pairs of massive tits are jiggling.");
 			
-			if(isabellaAccent()) outputText("\n\n<i>\"Oh... und here,\"</i> Isabella says, breaking the (milk)shake to pull the blue bow from her tail and hand it over to Hel.  With a happy gasp, Hel grabs it and ties it around her forehead - making herself look like some kind of half-naked commando in the process - though it's quickly hidden under her long red hair.");
-			else outputText("\n\n<i>\"Oh... and here,\"</i> Isabella says, breaking the (milk)shake to pull the blue bow from her tail and hand it over to Hel.  With a happy gasp, Hel grabs it and ties it around her forehead - making herself look like some kind of half-naked commando in the process - though it's quickly hidden under her long red hair.");
+			if(isabellaAccent()) outputText("\n\n<i>\"Oh... und here,\"</i> Isabella says, breaking the " + (silly() ? "(milk)" : "") + "shake to pull the blue bow from her tail and hand it over to Hel.  With a happy gasp, Hel grabs it and ties it around her forehead - making herself look like some kind of half-naked commando in the process - though it's quickly hidden under her long red hair.");
+			else outputText("\n\n<i>\"Oh... and here,\"</i> Isabella says, breaking the " + (silly() ? "(milk)" : "") + "shake to pull the blue bow from her tail and hand it over to Hel.  With a happy gasp, Hel grabs it and ties it around her forehead - making herself look like some kind of half-naked commando in the process - though it's quickly hidden under her long red hair.");
 			
 			outputText("\n\n<i>\"Yeah.  You're alright.\"</i>  Hel says, finally sheathing her sword.  <i>\"Thanks for giving me my mom's bandana back.\"</i>");
 		
@@ -464,8 +465,8 @@ public function angryHelAndIzzyCampHelHereFirst():void {
 	
 	outputText("\n\nA dopey smile spreads across your face as Hel offers Isabella her hand.  Warily, the cow-girl shakes it.  The girls increase the tempo of the handshake competitively until both their pairs of massive tits are jiggling.");
 	
-	if(isabellaAccent()) outputText("\n\n<i>\"Oh... und here,\"</i> Isabella says, breaking the (milk)shake to pull the blue bow from her tail and hand it over to Hel.  With a happy gasp, Hel grabs it and ties it around her forehead - making herself look like some kind of half-naked commando in the process - though it's quickly hidden under her long red hair.");
-	else outputText("\n\n<i>\"Oh... and here,\"</i> Isabella says, breaking the (milk)shake to pull the blue bow from her tail and hand it over to Hel.  With a happy gasp, Hel grabs it and ties it around her forehead - making herself look like some kind of half-naked commando in the process - though it's quickly hidden under her long red hair.");
+	if(isabellaAccent()) outputText("\n\n<i>\"Oh... und here,\"</i> Isabella says, breaking the " + (silly() ? "(milk)" : "") + "shake to pull the blue bow from her tail and hand it over to Hel.  With a happy gasp, Hel grabs it and ties it around her forehead - making herself look like some kind of half-naked commando in the process - though it's quickly hidden under her long red hair.");
+	else outputText("\n\n<i>\"Oh... and here,\"</i> Isabella says, breaking the " + (silly() ? "(milk)" : "") + "shake to pull the blue bow from her tail and hand it over to Hel.  With a happy gasp, Hel grabs it and ties it around her forehead - making herself look like some kind of half-naked commando in the process - though it's quickly hidden under her long red hair.");
 	
 	outputText("\n\n<i>\"Yeah.  You're alright.\"</i>  Hel says, finally sheathing her sword.  <i>\"Thanks for giving me my mom's bandana back.\"</i>");
 

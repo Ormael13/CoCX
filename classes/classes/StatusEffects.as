@@ -493,6 +493,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const KnowsNonupleThrust:StatusEffectType             = mk("Knows Nonuple Thrust");
 		public static const KnowsNosferatu:StatusEffectType                 = mk("Knows Nosferatu");
 		public static const KnowsOverlimit:StatusEffectType                 = mk("Knows Overlimit");
+		public static const KnowsTyrantState:StatusEffectType               = mk("Knows Tyrant State");
 		public static const KnowsPolarMidnight:StatusEffectType             = mk("Knows Polar Midnight");
 		public static const KnowsPunishingKick:StatusEffectType	            = mk("Knows Punishing Kick");
 		public static const KnowsPyreBurst:StatusEffectType                 = mk("Knows Pyre Burst");
@@ -571,7 +572,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const PostAnemoneBeatdown:StatusEffectType            = mk("Post Anemone Beatdown");
 		public static const PureCampJojo:StatusEffectType                   = mk("PureCampJojo");
 		public static const RaijuLightningStatus:StatusEffectType           = mk("Raiju lightning status");
-		public static const RathazulAprilFool:StatusEffectType              = mk("RathazulAprilFool");
+		public static const RathazulAprilFool:StatusEffectType              = mk("RathazulAprilFool"); // 1 - last encounter year, 2 - elixir count (received), 3 - quest stage
 		public static const RathazulArmor:StatusEffectType                  = mk("RathazulArmor");
 		public static const RepeatSuccubi:StatusEffectType                  = mk("repeatSuccubi");
 		public static const ResourceNode1:StatusEffectType                  = mk("Resource Node 1");
@@ -679,6 +680,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const TF2:StatusEffectType                            = mk("TF2");
 		public static const TFDealer1:StatusEffectType                      = mk("TF Dealer 1");
 		public static const TFDealer2:StatusEffectType                      = mk("TF Dealer 2");
+		public static const ThePhalluspear1:StatusEffectType                = mk("The Phalluspear 1");
 		public static const TookBlessedBow:StatusEffectType               	= mk("Took Blessed Bow");
 		public static const TookBlessedShield:StatusEffectType              = mk("Took Blessed Shield");
 		public static const TookBlessedStaff:StatusEffectType               = mk("Took Blessed Staff");
@@ -723,7 +725,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const EtnaOff:StatusEffectType             = mk("Etna Off");
 		public static const LunaOff:StatusEffectType             = mk("Luna Off");
 		public static const TedOff:StatusEffectType              = mk("Ted Off");
-		public static const BelisaOff:StatusEffectType           = mk("Belisa Off");
+		public static const SpoodersOff:StatusEffectType           = mk("Belisa Off");
 		public static const ThereCouldBeOnlyOne:StatusEffectType = mk("There Could Be Only One");
 		public static const UmasMassage:StatusEffectType         = mk("Uma's Massage"); //v1 = bonus index; v2 = bonus value; v3 = remaining time
 		public static const Uniball:StatusEffectType             = mk("Uniball");
@@ -956,6 +958,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const EnergyDrain:StatusEffectType               = mkCombat("Energy Drain");
 		public static const EverywhereAndNowhere:StatusEffectType      = mkCombat("Everywhere and nowhere");
 		public static const EzekielCurse:StatusEffectType              = mkCombat("Ezekiel Curse");
+		public static const FalseWeapon:StatusEffectType               = mkCombat("False Weapon");
 		public static const Fascinated:StatusEffectType                = mkCombat("Fascinated");
 		public static const FirePunchBurnDoT:StatusEffectType          = mkCombat("Fire Punch Burn DoT");
 		public static const FirstAttack:StatusEffectType               = mkCombat("FirstAttack");
@@ -1056,6 +1059,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const Snow:StatusEffectType                      = mkCombat("Snow");
 		public static const Snowstorms:StatusEffectType                = mkCombat("Snowstorms");
 		public static const SparingBelisa:StatusEffectType             = mkCombat("SparingBelisa");
+		public static const SparingTyrantia:StatusEffectType           = mkCombat("SparingTyrantia");
 		public static const StoneLust:StatusEffectType                 = mkCombat("Stone Lust");
 		public static const StoneSkin:StatusEffectType                 = mkCombat("Stone Skin");
 		public static const Stunned:StatusEffectType                   = mkCombat("Stunned");
@@ -1071,6 +1075,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const TooAngryTooDie:StatusEffectType            = mkCombat("Too Angry Too Die");
 		public static const TranceTransformation:StatusEffectType      = mkCombat("Trance Transformation");
 		public static const TrollHold:StatusEffectType                 = mkCombat("Troll Hold");
+		public static const TyrantState:StatusEffectType               = mkCombat("Tyrant State");
 		public static const UBERWEB:StatusEffectType                   = mkCombat("UBERWEB");
 		public static const UnderwaterAndIgnis:StatusEffectType        = mkCombat("UnderwaterAndIgnis");
 		public static const UnderwaterCombatBoost:StatusEffectType     = mkCombat("UnderwaterCombatBoost");
@@ -1223,4 +1228,4 @@ import classes.StatusEffects.VampireThirstEffect;
 		}
 	}
 }
-
+

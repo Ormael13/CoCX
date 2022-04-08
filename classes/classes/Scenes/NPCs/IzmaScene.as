@@ -1762,7 +1762,7 @@ private function sendToFishery():void
 	outputText("\n\n\"<i>Sure anything for you Alpha. I will fill barrels worth of food.</i>\"");
 	outputText("\n\n<b>Izma will now start bringing fish back to camp.</b>");
 	flags[kFLAGS.FOLLOWER_AT_FISHERY_IZMA] = 1;
-	doNext(camp.returnToCampUseOneHour);
+	doNext(playerMenu);
 }
 
 private function sendToFarm():void
@@ -1780,7 +1780,7 @@ private function sendToFarm():void
 
 	flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] = 1;
 
-	doNext(camp.returnToCampUseOneHour);
+	doNext(playerMenu);
 }
 
 private function backToCamp():void

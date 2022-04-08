@@ -12,13 +12,13 @@ public class LightningBoltSpell extends AbstractWhiteSpell {
 	
 	public function LightningBoltSpell(ex:Boolean=false) {
 		super(
-				ex ? "Lightning Bolt (Ex)":"Lightning Bolt",
-				ex ?
-						"Lightning Bolt (Ex) is a basic wrath-empowered lightning attack that will electrocute your foe with a single bolt of lightning."
-						:"Lightning Bolt is a basic lightning attack that will electrocute your foe with a single bolt of lightning.",
-				TARGET_ENEMY,
-				TIMING_INSTANT,
-				[TAG_DAMAGING, TAG_LIGHTNING]
+			ex ? "Lightning Bolt (Ex)":"Lightning Bolt",
+			ex ?
+				"Lightning Bolt (Ex) is a basic wrath-empowered lightning attack that will electrocute your foe with a single bolt of lightning."
+				:"Lightning Bolt is a basic lightning attack that will electrocute your foe with a single bolt of lightning.",
+			TARGET_ENEMY,
+			TIMING_INSTANT,
+			[TAG_DAMAGING, TAG_LIGHTNING]
 		);
 		baseManaCost = 40;
 		baseWrathCost = ex ? 100 : 0;

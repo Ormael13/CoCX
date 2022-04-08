@@ -26,6 +26,7 @@ import classes.Items.ItemTags;
 import classes.Items.JewelryLib;
 import classes.PerkType;
 import classes.Scenes.Places.TelAdre.UmasShop;
+import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Stats.Buff;
 import classes.Stats.BuffBuilder;
 import classes.Stats.BuffableStat;
@@ -762,6 +763,7 @@ public class Creature extends Utils
 			if (game.player.demonScore() >= 5) maxmult += 0.2;
 			if (game.player.demonScore() >= 11) maxmult += 0.4;
 			if (game.player.demonScore() >= 16) maxmult += 0.6;
+			if (TyrantiaFollower.TyrantiaTrainingSessions > 0.5) maxmult += 0.01 * TyrantiaFollower.TyrantiaTrainingSessions;
 			return 1;
 		}
 		public function maxLust():Number {
@@ -1767,14 +1769,14 @@ public class Creature extends Utils
 			return thick;
 		}
 
-		public function thickestCock():Number
+		public function thickestCockIndex():Number
 		{
 			return findCock(1, -1, -1, "thickness");
 		}
 
 		public function thickestCockThickness():Number
 		{
-			return cocks[thickestCock()].cockThickness;
+			return cocks[thickestCockIndex()].cockThickness;
 		}
 
 		public function thinnestCockIndex():Number
@@ -1823,11 +1825,6 @@ public class Creature extends Utils
 			return cockArea(smallestCockIndex());
 		}
 
-		public function smallestCock():Number
-		{
-			return cockArea(smallestCockIndex());
-		}
-
 		public function biggestCockIndex():Number
 		{
 			return findCock(1, -1, -1, "area");
@@ -1851,7 +1848,7 @@ public class Creature extends Utils
 		}
 
         //Checks if the cock is tentacle/stamen
-        private function cockIsTentacle(num:int):Boolean {
+        public function cockIsTentacle(num:int):Boolean {
             return cocks[num].cockType == CockTypesEnum.STAMEN || cocks[num].cockType == CockTypesEnum.TENTACLE;
         }
 

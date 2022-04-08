@@ -19,6 +19,7 @@ import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.Dungeons.D3.LivingStatue;
 import classes.Scenes.Dungeons.DeepCave.EncapsulationPod;
 import classes.Scenes.NPCs.Holli;
+import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.Codex;
@@ -79,6 +80,10 @@ public class MagicSpecials extends BaseCombatContent {
 			player.wrath -= 50;
 			outputText("<b>Warrior's rage was used successfully.</b>\n\n");
 			warriorsrage007();
+		}
+		if (player.hasStatusEffect(StatusEffects.KnowsTyrantState) && flags[kFLAGS.TYRANT_STATE_COMBAT_MODE] == 1) {
+			outputText("<b>Tyrant State was used successfully.</b>\n\n");
+			player.createStatusEffect(StatusEffects.TyrantState, 0, 0, 0, 0);
 		}
 	}
 	//------------
@@ -557,6 +562,22 @@ public class MagicSpecials extends BaseCombatContent {
 				}
 				if (player.statStore.hasBuff("AsuraForm")) {// && !player.hasPerk(PerkLib.HiddenJobAsura)
 					bd.disable("You are under transformantion effect incompatibile with Crinos Shape!");
+				}
+			}
+		}
+		if (player.hasStatusEffect(StatusEffects.KnowsTyrantState)) {
+			var boost:Number = 50;
+			if (TyrantiaFollower.TyrantiaTrainingSessions >= 10) boost += 20;
+			if (player.hasStatusEffect(StatusEffects.TyrantState)) {
+				bd = buttons.add("TyrantState(Off)", deactivaterTyrantState).hint("Deactivate Tyrant State.");
+			} else {
+				bd = buttons.add("TyrantState(On)", activaterTyrantState).hint("Strain your body to its limit to increase melee damage dealt by "+boost+"% at the cost of getting horny. This also decrease physical resistance.");
+			}
+			if (TyrantiaFollower.TyrantiaTrainingSessions >= 15) {
+				bd = buttons.add("False Weapon", activaterFalseWeapon).hint("Create False weapon based on currently wielded melee weapon to attack each time you attack with it. Deals 20% dmg (Phalluspear False Weapon deals 100%).");
+				bd.requireFatigue(physicalCost(100));
+				if (player.lust < Math.round(player.maxLust() * 0.1)) {
+					bd.disable("Your lust is too low!");
 				}
 			}
 		}
@@ -2962,6 +2983,27 @@ public class MagicSpecials extends BaseCombatContent {
 		clearOutput();
 		outputText("Gathering all you willpower you forcefully subduing your inner beast and returning to your normal shape.");
 		player.statStore.removeBuffs("CrinosShape");
+		enemyAI();
+	}
+
+	public function activaterTyrantState():void {
+		clearOutput();
+		outputText("You stare at your foe, letting your Lust build and bubble within you. Sweet release is in front of you…But first… You feel the heat building in your loins, and you let out a roar, the heat spreading through your body. You face your opponent with an unsettling grin. Let’s Dance!\n\n");
+		player.createStatusEffect(StatusEffects.TyrantState, 0, 0, 0, 0);
+		enemyAI();
+	}
+	public function deactivaterTyrantState():void {
+		clearOutput();
+		outputText("Breathing heavily, you focus your mind. The heat through your body isn’t going away yet, but at the very least, you aren’t generating more. With a lot of mental effort, you reign in your lusty thoughts.\n\n");
+		player.removeStatusEffect(StatusEffects.TyrantState);
+		enemyAI();
+	}
+	public function activaterFalseWeapon():void {
+		clearOutput();
+		fatigue(100, USEFATG_PHYSICAL);
+		player.lust -= Math.round(player.maxLust() * 0.1);
+		outputText("You focus on the heat in your body, and with your mind focused, you send your heat down, into the ground. The ground cracks under your [legs], and from the crack emerges a stone, shaped nearly perfectly into the shape of your [weapon].\n\n");
+		player.createStatusEffect(StatusEffects.FalseWeapon, 0, 0, 0, 0);
 		enemyAI();
 	}
 
