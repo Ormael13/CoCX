@@ -294,9 +294,13 @@ public class Soulforce extends BaseContent
 		outputText("Reset done!");
 		doNext(curry(SoulforceCheats1,2));
 	}
-	public function cheatFixShards():void {
-		var cnt:int = 0;
+    public function cheatFixShards():void { //wrapper for fixShards to use it in cheat menu
 		clearOutput();
+        fixShards();
+		doNext(curry(SoulforceCheats1,2));
+    }
+	public function fixShards():void {
+		var cnt:int = 0;
 		player.removeKeyItem("Radiant shard");
 		outputText("Received shards for: ")
 		if (flags[kFLAGS.AYANE_FOLLOWER] == 2) {
@@ -341,7 +345,6 @@ public class Soulforce extends BaseContent
 		}
 		else
 			outputText("\nNo shards, go complete quests :(");
-		doNext(curry(SoulforceCheats1,2));
 	}
 
 	public function ZenjiQ():void{

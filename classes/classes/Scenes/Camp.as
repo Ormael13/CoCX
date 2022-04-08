@@ -1073,6 +1073,7 @@ public class Camp extends NPCAwareContent{
 			promptSaveUpdate();
 			return;
 		}
+        modSaveSubver
 		//Massive Balls Bad End (Realistic Mode only)
 		if (flags[kFLAGS.HUNGER_ENABLED] >= 1 && player.ballSize > (18 + (player.str / 2) + (player.tallness / 4))) {
 			badEndGIANTBALLZ();
@@ -6048,11 +6049,12 @@ public function rebirthFromBadEnd():void {
 			doNext(doCamp);
 			return;
 		}
-		/*
+        /*
 		if (flags[kFLAGS.MOD_SAVE_VERSION] == 35) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 36;
 			clearOutput();
 			outputText("Text.");
+            //Jtecx fixes
 			if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1)) {
 				if (player.hasPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX)) player.setPerkValue(PerkLib.AscensionTrancendentalGeneticMemoryStageX, 1,1);
 				else player.createPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX, 1, 0, 0, 1);
@@ -6084,6 +6086,11 @@ public function rebirthFromBadEnd():void {
 				player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage6);
 			}
 			if (player.hasPerk(PerkLib.AscensionHerosLineage)) player.ascensionPerkPoints -= 5;
+            //Shards fix
+            if (player.hasKeyItem("Radiant shard") < 0) {
+                outputText("\n\nNow legendary weapon is crafted from radiant shards. You deserve these!\n");
+                soulforce.fixShards();
+            }
 			doNext(doCamp);
 			return;
 		}
@@ -6237,6 +6244,8 @@ public function rebirthFromBadEnd():void {
 		doNext(doCamp);
 	}
 
+//Seems like it's unused now.
+/*
 //Updates save. Done to ensure your save doesn't get screwed up.
 	private function updateSaveFlags():void {
 		flags[kFLAGS.MOD_SAVE_VERSION] = CoC.instance.modSaveVersion;
@@ -6269,6 +6278,7 @@ public function rebirthFromBadEnd():void {
 		outputText("Don't worry. Just save the game and you're good to go. We, Ormael/Aimozg, will work out the bugs from time to time, while also bringing in cool new stuff!");
 		doNext(doCamp);
 	}
+*/
 
 	private function updateAchievements():void {
 		//Story
@@ -6381,7 +6391,7 @@ public function rebirthFromBadEnd():void {
 		if (SceneLib.dungeons.checkPhoenixTowerClear()) {
 			awardAchievement("Fall of the Phoenix", kACHIEVEMENTS.DUNGEON_PHOENIX_FALL);
 			dungeonsCleared++;
-			if (flags[kFLAGS.TIMES_ORGASMED] <= 0 && flags[kFLAGS.MOD_SAVE_VERSION] == CoC.instance.modSaveVersion) awardAchievement("Extremely Chaste Delver", kACHIEVEMENTS.DUNGEON_EXTREMELY_CHASTE_DELVER);
+			if (flags[kFLAGS.TIMES_ORGASMED] <= 0) awardAchievement("Extremely Chaste Delver", kACHIEVEMENTS.DUNGEON_EXTREMELY_CHASTE_DELVER);
 		}
 		if (SceneLib.dungeons.checkBeeHiveClear()) {
 			awardAchievement("Victory, Sweet like honey", kACHIEVEMENTS.DUNGEON_VICTORY_SWEET_LIKE_HONEY);
