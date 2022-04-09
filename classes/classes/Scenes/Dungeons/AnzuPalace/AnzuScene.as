@@ -16,23 +16,6 @@ use namespace CoC;
 
 	public class AnzuScene extends DungeonAbstractContent// implements TimeAwareInterface
 	{
-		private static const DUNGEON_ANZU_OUTSIDE:int			= 88;
-		private static const DUNGEON_ANZU_HALL_FLOOR1:int 		= 89;
-		private static const DUNGEON_ANZU_LIVING_ROOM:int 		= 90;
-		private static const DUNGEON_ANZU_BATHROOM:int 			= 91;
-		private static const DUNGEON_ANZU_DINING_ROOM:int 		= 92;
-		private static const DUNGEON_ANZU_KITCHEN:int 			= 93;
-		private static const DUNGEON_ANZU_HALL_FLOOR2:int		= 94;
-		private static const DUNGEON_ANZU_BEDROOM:int 			= 95;
-		private static const DUNGEON_ANZU_LIBRARY:int 			= 96;
-		private static const DUNGEON_ANZU_MULTIUSE_ROOM:int 	= 97;
-		private static const DUNGEON_ANZU_HALL_FLOOR3:int 		= 98;
-		private static const DUNGEON_ANZU_PALACE_VAULTS:int 	= 99;
-		private static const DUNGEON_ANZU_ALCHEMY_ROOM:int 		= 100;
-		private static const DUNGEON_ANZU_ROOF:int 				= 101;
-		private static const DUNGEON_ANZU_BASEMENT:int 			= 102;
-		private static const DUNGEON_ANZU_ARMORY:int 			= 103;
-		
 		public function AnzuScene()
 		{}
 		
@@ -120,9 +103,9 @@ use namespace CoC;
 				outputText("\n\nYou thank him, and introduce yourself. The sight of the building’s interior surprises you. Far more extravagant than anything which you would've expected. A fireplace warms the interior. There are several shelves, filled with antique-looking books. The furniture has a particular appearance, decorated with patterns and designs you have not seen anywhere else in Mareth. Decorations in linen and silk cover the walls, while velvet covered armchairs provide a comfy place for rest, and the floor is decorated with numerous rugs. A staircase leads to the upper floors, where the avian was probably resting before you knocked on the door.");
 				outputText("\n\n\"<i>Take a seat here, " + player.mf("boy", "girl") + "</i>\" The avian says, pointing at one armchair near the fireplace.. \"<i>If you want to get warm, sit there. You’ll recover from the cold air faster.</i>\"");
 				outputText("\n\nYou thank him and realize that you don’t know his name yet.");
-				outputText("\n\n\"<i>My name? Well I suppose I can give it</i>\" \"<i>Name’s Anzu, god of fire and storms, and all those things</i>\" He says, waving his hands exaggeratedly.");
+				outputText("\n\n\"<i>My name? Well I suppose I can give it. Name’s Anzu, god of fire and storms, and all those things</i>\" He says, waving his hands exaggeratedly.");
 				outputText("\n\nA god? Besides Marae " + (flags[kFLAGS.URTA_QUEST_STATUS] >= 1 ? "and Taoth" : "") + ", you haven’t known any deity in Mareth. Incredulous, you ask him again.");
-				outputText("\n\n\"<i>An almost empty shell of what once was a mighty god, but technically, I’m still a god</i>\"");
+				outputText("\n\n\"<i>An almost empty shell of what once was a mighty god, but technically, I’m still a god.</i>\"");
 				outputText("\n\nThat answer was more depressing than you expected. You ask him if he wants to talk for a while. ");
 				outputText("\n\n\"<i>I usually don’t have guests.</i>\" Anzu suspires. \"<i>Well, after all this time, a little chat would mean no harm for me.</i>\"");
 				outputText("\n\nYou and Anzu talk for a little while. You explain to him you’re the Champion of Ingnam, and your mission in Mareth. Although a little cold and distant. He begins to open up after a few questions. Anzu explains that his full name is Anzu Annuna, and how he was the protective god of an ancient city called Mittani in a realm very different to Mareth. He was forced to leave his realm after getting into trouble with the rest of the gods in his former home.");
@@ -289,7 +272,7 @@ use namespace CoC;
 			addButton(1, "Talk", anzuTalkMenu).hint("Get to know Anzu better.");
 			if (flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] >= 3) addButton(2, "Sex", anzuSexMenu).hint("Have some sexy times with the sexy avian deity.");
 			else addButtonDisabled(2, "Sex", "Maybe if Anzu likes you better, he will let you do that.");
-			if (dungeonLoc == 101) {
+			if (dungeonLoc == DUNGEON_ANZU_ROOF) {
 				if (player.canFly()) {
 					if (flags[kFLAGS.ANZU_RELATIONSHIP_LEVEL] >= 4) addButton(3, "Race Him", null).hint("Challenge Anzu to a race and have some fun!");
 					else addButtonDisabled(3, "Race Him", "Maybe if Anzu likes you better, he'll consider letting you race against him.");
@@ -360,7 +343,7 @@ use namespace CoC;
 			outputText("\n\nNow, to the right side of the hall, is the dining room. I kept most of the furniture that the valkyries left behind. Behind the dining room is the kitchen. The staircase at the end of the hall leads to the basement and another, near the entrance, leads to the second floor. The door near the end of the hall leads to the bathroom. With the cold, a warm bath is always appreciated.</i> ");
 			outputText("\n\n\"<i>What’s in the basement?</i>\" You ask.");
 			outputText("\n\n\"<i>Come and see it yourself</i>\" Anzu answers.");
-			outputText("\n\nBoth of you go downstairs to the basement, and the first thing which catches your attention is a chariot. You ask Anzu if this is the chariot in which he arrived on when he travelled to Mareth.");
+			outputText("\n\nBoth of you go downstairs to the basement, and the first thing which catches your attention is a chariot. You ask Anzu if this is the chariot in which he arrived on when he traveled to Mareth.");
 			outputText("\n\n\"<i>Yes, I kept the chariot I stole from Ninurta here. It stays here most of the time as I have very little use for it</i>\" Anzu explains, and proceed to point to a door located behind the chariot.");
 			outputText("\n\n\"<i>Behind this door is the armory. Name a kind of weapon, and you’ll find it inside: swords, bows, axes, spears, halberds, and...I’m starting to sound like a weapon seller. Maybe I’ll show you the weapons in more detail later, for now, follow me to the second floor.</i>\"");
 			outputText("\n\nAfter returning to the first floor, you go upstairs to the second floor. The floor is shaped in a U like disposition. There are three rooms, two to the sides and one located at the end, with the hall connecting the three rooms and the staircases.");
@@ -895,9 +878,9 @@ use namespace CoC;
 			//outputText(images.showImage("anzu-racing-intro"));
 			if (flags[kFLAGS.ANZU_TIMES_RACED] == 0) {
 				outputText("Standing on the roof, you see Anzu again, looking thoughtfully at the snowed hills that surround the place. Judging by the way he flexes his quartet of wings, he is about to depart, probably to exercise his otherwise idle wings. While at a first though he seems oblivious at your arrival, when you get a bit closer, he turns back and greets you with a friendly smile.");
-				outputText("\n\n“Hey, little friend. You caught me just in time. I was about to go out on a little trip across the Rift. Being stuck in a single place every day ends up being a bit… stressing. Besides, the exercise helps me to keep these on good shape” He says, pointing at the four huge appendages.");
+				outputText("\n\n\"Hey, little friend. You caught me just in time. I was about to go out on a little trip across the Rift. Being stuck in a single place every day ends up being a bit… stressing. Besides, the exercise helps me to keep these on good shape\" He says, pointing at the four huge appendages.");
 				outputText("\n\nActually, that isn’t hard to understand. After you’d grown your own pair of wings, you’ve had the necessity of flying around as an exercise to keep them healthy and ready to fly when the situation calls.");
-				outputText("\n\n“Oh, that reminded me. You got yourself a pair after arriving at this place.” Anzu says, while looking at your [wings].  “If you want, you could keep me company. Traveling across the Rift is nice and relaxing, but after hours of wandering the skies, I feel a bit… lonely”");
+				outputText("\n\n\"Oh, that reminded me. You got yourself a pair after arriving at this place.\" Anzu says, while looking at your [wings].  \"If you want, you could keep me company. Traveling across the Rift is nice and relaxing, but after hours of wandering the skies, I feel a bit… lonely\"");
 				outputText("\n\nSeems like your avian companion is asking you for a trip across the Rift.");
 				flags[kFLAGS.ANZU_TIMES_RACED] = 0.5;
 			}
@@ -911,7 +894,7 @@ use namespace CoC;
 		private function racingWithAnzuDecline():void {
 			clearOutput();
 			outputText("Letting him know that you’re pretty tired now, you tell him that you’ll have to pass this time. Next time maybe, with a little luck.");
-			outputText("\n\n“No problem. I understand. Flying tired isn’t exactly a relaxing activity ,”Anzu answers “Maybe, when you feel alright you could came here again...if you want, of course.” he continues “I usually fly at this hour almost every day.”");
+			outputText("\n\n\"No problem. I understand. Flying tired isn’t exactly a relaxing activity ,\"Anzu answers \"Maybe, when you feel alright you could came here again...if you want, of course.\" he continues \"I usually fly at this hour almost every day.\"");
 			outputText("\n\nAnswering him that you’ll think about it one of these days, you leave him to his exercise routine, while you return to the safety of your camp.");
 		}
 		private function racingWithAnzuAccept():void {
@@ -920,10 +903,10 @@ use namespace CoC;
 			outputText("Well, a bit of extra exercise would certainly help your body. Telling Anzu that you agree on his offer, you stand next to him on the border of the roof. Thankfully, it seems like he keeps the place where you’re standing clear of snow, otherwise you’ll probably trip and end up falling from the—now you realize, somewhat frightening—height of the palace.");
 			outputText("\n\nFocusing again on the thought of flying, you give a nod to the avian, saying that you’re ready to start.");
 			outputText("\n\nSeeing you ready, Anzu spreads his wings wide, forcing you to stand away a couple of feet, and soon he launches himself to the sky. The wind propelled by the beating of his wings almost makes you stumble, but you manage to keep yourself on your feet.");
-			outputText("\n\n“Sorry for that” Anzu yell from above. “Seems like I miscalculated the force of my takeoff.”");
+			outputText("\n\n\"Sorry for that\" Anzu yell from above. \"Seems like I miscalculated the force of my takeoff.\"");
 			outputText("\n\nAfter telling him that you’re fine, you spread your [wings] and fly next to him. Even in the air, where the wind makes it less potent, the stream generated by his wings is somewhat noticeable. For a while, you hover above the palace and the snowed hill surrounding it.");
-			outputText("\n\n“So, where do you usually go?” you ask him.");
-			outputText("\n\n“Well, [name]. I have a couple of places that I’d like to show you” Anzu says, motioning you to follow him.");
+			outputText("\n\n\"So, where do you usually go?\" you ask him.");
+			outputText("\n\n\"Well, [name]. I have a couple of places that I’d like to show you\" Anzu says, motioning you to follow him.");
 			outputText("\n\n<b>A long good while later...</b>");
 			outputText("\n\nWell... isn't he supposed to take you someplace interesting?");
 			outputText("\n\n\"<i>Unfortunately, my writer hasn't even added places for me to show you. Sorry.</i>\"");
@@ -973,21 +956,21 @@ use namespace CoC;
 				//outputText(images.showImage("anzu-prep-dinner"));
 				if (flags[kFLAGS.ANZU_TIMES_DINED_DINNER] == 0) {
 					outputText("The noises of someone moving things is heard even from the hall. When you approach to the kitchen, you manage to hear the voice of an irritated Anzu. Dressed only in his usual set of shirt and pants, covered with an apron instead of his robes, he goes around the kitchen searching for something desperately.");
-					outputText("\n\n“Where in hell I put those damn blueberries?! Raspberries, strawberries, cloudberries, but no trace of blueberries!”");
+					outputText("\n\n\"Where in hell I put those damn blueberries?! Raspberries, strawberries, cloudberries, but no trace of blueberries!\"");
 					outputText("\n\nWhat could be doing Anzu with blueberries? Whatever that is, the fact of he can’t find them don’t makes him happy. Maybe this isn’t the best time for showing yourself. Your feelings are proven right when a dish flies over your head, smashing to pieces in a nearby wall. You’re about to leave when he stops you.");
-					outputText("\n\n“[name], excuse me. I’m a little frustrated.”");
+					outputText("\n\n\"[name], excuse me. I’m a little frustrated.\"");
 					outputText("\n\nHis frustration has something to do with blueberries?");
-					outputText("\n\n“Yeah. Actually, I was trying to cook a cheesecake with blueberries for dinner, but I can’t find the damn fruits anywhere.”");
+					outputText("\n\n\"Yeah. Actually, I was trying to cook a cheesecake with blueberries for dinner, but I can’t find the damn fruits anywhere.\"");
 					outputText("\n\nTrying to calm him down, you tell that you’ll help him to find the blueberries. Looking around the kitchen with attention, after a short inspection, you manage to find them on the table where Anzu has put some eggs and flour, partially hidden by the other ingredients. You let out a little laugh at your discover, and then reveal him where the blueberries were all the time.");
-					outputText("\n\n“Oh, they are there!” He says, visibly embarrassed. “I probably was too busy looking in the cabinets that I don’t realize that I already had put them with the rest of the ingredients.”  “Now, since you’re here, maybe you could help me to finish this faster. I’ve lost many time searching for those fruits.");
+					outputText("\n\n\"Oh, they are there!\" He says, visibly embarrassed. \"I probably was too busy looking in the cabinets that I don’t realize that I already had put them with the rest of the ingredients.\"  \"Now, since you’re here, maybe you could help me to finish this faster. I’ve lost many time searching for those fruits.");
 					outputText("\n\nSeeing how he is a little stressed, the best of you can do is leave him for a while, because it could turn into a dangerous situation if he can’t find another ingredient.");
-					outputText("\n\n“No, no. Sorry, my friend. I have all the remaining ingredients there.” He says, pointing to the table, where sugar, butter and a bottle of milk lies. “I promise to not get mad with you, even if you burn half of the kitchen.”");
+					outputText("\n\n\"No, no. Sorry, my friend. I have all the remaining ingredients there.\" He says, pointing to the table, where sugar, butter and a bottle of milk lies. \"I promise to not get mad with you, even if you burn half of the kitchen.\"");
 					outputText("\n\nLooks like he’s asking you for help to finish the cake, and have a nice dinner after that.");
 				}
 				else {
 					outputText("Coming again to the kitchen, a much calmer Anzu is mixing the ingredients for another cake. Like the last time, he’s using the usual apron over his shirt and pants.");
 					outputText("\n\nYou ask him if he lose the blueberries again.");
-					outputText("\n\n“No, I’m not losing the damn fruits again.” He says, pointing a quite visible and labeled flash with one hand. “Just when you arrived, I was preparing myself to make a cake with some of them. Do you want to join me?");
+					outputText("\n\n\"No, I’m not losing the damn fruits again.\" He says, pointing a quite visible and labeled flash with one hand. \"Just when you arrived, I was preparing myself to make a cake with some of them. Do you want to join me?");
 					outputText("\n\nLooks like he’s asking you for help to finish the cake, and have a nice dinner after that.");
 				}
 				doYesNo(eatFoodWithAnzu, dontEatFoodWithAnzu);
@@ -1021,25 +1004,25 @@ use namespace CoC;
 			else if (model.time.hours < 16) {
 				//outputText(images.showImage("anzu-dining-lunch"));
 				outputText("With your appetite open by the wonderful smell of the steaks, you accept Anzu’s offer.");
-				outputText("\n\n“We must start now, then. There are some dishes that still need be finished.”");
+				outputText("\n\n\"We must start now, then. There are some dishes that still need be finished.\"");
 				outputText("\n\nAsking him about what you should do, he instructs you about how make the second dish. Taking a pot from one cabinet, you shred the chunks of cheese inside it, and mix them. After that, you place the pot on a burner until all the cheese on it melts. You put the pot with the burner on a plate next to a bowl with some pieces of bread and two large forks. It’s a little difficult to carry those things to the dining room, specially with the melted cheese, but you manage to arrive to the table with the food safe.");
 				outputText("\n\nMeanwhile, Anzu has already left the plates with the roasted steaks on the table and now he’s busy washing the grapes in the sink, and after assuring that all of them are clean, he puts them on a bowl. He proceeds lo leave them in the dining room with the rest of the dishes, and hurries to the cellar. A few minutes after, he comes back with a two glasses and a bottle of wine.");
-				outputText("\n\n“Hope you like the white wine. It’s the only one that the reindeers have to sell me.”");
+				outputText("\n\n\"Hope you like the white wine. It’s the only one that the reindeers have to sell me.\"");
 				outputText("\n\nSure. A glass of wine is a luxury which, even on Ingnam, you rarely had. He serves one glass for you and another of him.");
 				outputText("\n\nWhile you dip the bread in the cheese, you start finding increasingly amusing the way of Anzu and you spend your time. There has been a while since your had another opportunity to make a decent homemade meal. But for now you have things more important to attend, like the roasted steak in front of who is making your mouth water. After both of you finish your food, you chat with Anzu for a while. ");
 				player.refillHunger(hungerRefillAmount);
-				outputText("\n\n“And [name], what’s going on that city in the desert. Tolk, no Toll, Tel’Adre was its name, right? “ he asks “I’ve had few opportunities to going beyond the Rift limits, let alone exploring a zone so far as the desert, and for the things you’ve said me, I wonder how big it is, how they keep themselves safe, and things like that .”");
+				outputText("\n\n\"And [name], what’s going on that city in the desert. Tolk, no Toll, Tel’Adre was its name, right? \" he asks \"I’ve had few opportunities to going beyond the Rift limits, let alone exploring a zone so far as the desert, and for the things you’ve said me, I wonder how big it is, how they keep themselves safe, and things like that .\"");
 				outputText("\n\nHmm, how to start. You explain him that the city is protected by a kind of magical barrier that prevent demons to find it. The city itself if pretty big, as far as compared to the rest of settlements of you’ve found in Mareth. Great part of the city are formed by the housing complexes, most of them are unoccupied, though, and in the center the city the principal building are the bakery, the bar, the gym, the shops on the market, a mostly abandoned park, the mage’s tower and the Watch headquarters.");
 				outputText("\n\nYou give him more details about the bakery and its particular workers, especially its chef. The gym isn’t less strange either, especially with the additional exercise programs that some trainers are willing to teach. The mage’s tower is the heavily protected plate where most mages reside, keeping the barrier stable. Not much is what can you say about the park, little more than a patch of neglected dirt and grass between the city’s blocks. In the center are some restaurants too, while the market has a pawn shop, and some others specialized in selling construction materials, weapons, armours, clothes. An acupuncture treatment clinic and a tattoo parlor have their places on the market too. Finally, you explain all you know about the Watch and how the protect the city from both the inside as from the outside menaces.");
 				//if (anzuRelationshipLevel() < 3) {
 					outputText("After chatting about this this and that with Anzu for some time, you thank him for the meal, say your goodbyes and return to your camp.");
 				/*}
 				else {
-					outputText("\n\n“And how about the bar?” Anzu asks “You’ve mentioned a bar before. Is there some good wine there?”");
+					outputText("\n\n\"And how about the bar?\" Anzu asks \"You’ve mentioned a bar before. Is there some good wine there?\"");
 					outputText("\n\nOh, the Wet Bitch, how you could forget it!");
-					outputText("\n\n“Wet Bitch, what a name. It’s only me or that’s a little unimaginative. At least, I know what I could find inside with only reading its name on the front.”");
+					outputText("\n\n\"Wet Bitch, what a name. It’s only me or that’s a little unimaginative. At least, I know what I could find inside with only reading its name on the front.\"");
 					outputText("\n\nNot exactly. Well, not at all. Besides its name, it has most of the things who a normal bar has. Chairs, tables, drinks, people chatting and laughing, and given the uninhibited air from Mareth, people having sex in the back rooms or even in front of all.");
-					outputText("\n\n“You must know that by experience, Am I right?”");
+					outputText("\n\n\"You must know that by experience, Am I right?\"");
 					outputText("\n\nYou admit that you’ve had your romps here and there.");
 					outputText("\n\n");
 					outputText("\n\n");
@@ -1060,7 +1043,7 @@ use namespace CoC;
 				//if (anzuRelationshipLevel() < 3) {
 					outputText("\n\nEnjoying the sweet taste of the cheesecake with your friend, both of you talk a little about your adventures. While talking, both of you indulge in more slices of the delicious cake. Soon enough the plate with the cake is empty.");
 					player.refillHunger(hungerRefillAmount);
-					outputText("\n\n“I think the cake for tonight was a total success.” Anzu says proudly.");
+					outputText("\n\n\"I think the cake for tonight was a total success.\" Anzu says proudly.");
 					outputText("\n\nYou can’t agree more. But, seeing how late is, the better is that you return to your camp. After thanking the avian for the dinner, you wave off and return to your camp.");
 				/*}
 				else {
@@ -1070,7 +1053,7 @@ use namespace CoC;
 				}*/
 				flags[kFLAGS.ANZU_TIMES_DINED_DINNER]++;
 			}
-			dungeonLoc = 92;
+			dungeonLoc = DUNGEON_ANZU_DINING_ROOM;
 			doNext(camp.returnToCampUseOneHour);
 		}
 		private function dontEatFoodWithAnzu():void {
@@ -1089,7 +1072,7 @@ use namespace CoC;
 			}
 			else {
 				outputText("Telling him that, for the moment, you don’t want to have dinner, you thank him anyways.");
-				outputText("\n\n“Well, friend, I’ll be here is you change your mind” he answers.");
+				outputText("\n\n\"Well, friend, I’ll be here is you change your mind\" he answers.");
 				outputText("\n\nLeaving Anzu with the cake, you wave off him and return to your camp.");
 			}
 			clearOutput();
@@ -1209,7 +1192,6 @@ use namespace CoC;
 			clearOutput();
 			outputText("Not in the mood of getting your " + player.skin.desc + " wet (and sticky) at this time of day, you thanks him for his offer but explain that you’re not exactly in the mood to get wet. Bidding him farewell, you leave him to his own matters and return to your camp.");
 			inDungeon = false;
-			dungeonLoc = -1;
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -1234,7 +1216,6 @@ use namespace CoC;
 			outputText("Tired as you are, a task is a task. You answer the avian that sadly, you have to keep guard tonight on the portal, so it will be on another time. Though a bit disappointed, the avian quickly cheers up and nuzzles your neck playfully, then he hugs you again and helps you to stand up. Gathering your things, you make it to the door, not without getting another playful nibble as you leave.");
 			outputText("\n\n\"<i>Be careful on your way to the camp, little friend</i>\" he says from the door while waving you. Waving him back you cross the Rift and return to your camp.");
 			inDungeon = false;
-			dungeonLoc = -1;
 			doNext(camp.returnToCampUseOneHour);
 		}
 		
@@ -1330,7 +1311,6 @@ use namespace CoC;
 			else player.refillHunger(player.maxHunger() + 10 - player.hunger);
 			sleepWithAnzuHeal();
 			inDungeon = false;
-			dungeonLoc = -1;
 			doNext(camp.returnToCampUseOneHour);
 		}
 		

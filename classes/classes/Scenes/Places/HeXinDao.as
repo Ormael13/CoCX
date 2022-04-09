@@ -40,7 +40,7 @@ public class HeXinDao extends BaseContent
     public function HeXinDao() {}
 	
 	public function riverislandVillageStuff0():void {
-		spriteSelect(-1);
+		spriteSelect(null);
         clearOutput();
 		if (isLunarNewYear()) {
 			outputText("As you enter the town you notice something out of the norm. It would seem the citizens are celebrating something. There are red drapes everywhere and even a giant snake-like Muppet parading in the streets. What is going on in He’Xin’Dao? Maybe you should attend?");
@@ -154,7 +154,7 @@ public class HeXinDao extends BaseContent
 	}
 
     public function riverislandVillageStuff():void {
-        spriteSelect(-1);
+        spriteSelect(null);
         clearOutput();
         outputText("He'Xin'Dao is a large village connected and assembled between many smaller islands in the middle of large river that flows from the east to the west. Aside from bridges connecting each of the islands together, two larger ones connects them as a whole to both sides of the river serving as the only points of access to the village.  The village is strategically laid out, preventing anyone from entering by swimming directly from the river to any of the islands, forcing people to use the bridges if they wish to enter.\n");
         outputText("\n\nNear one of major briges is located merchant area with various smaller or larger places where all visitors can buy or sell various items. Among then two attracts most attention with first been largest stall here and other largest shop. On almost opposite side of village near other brige is located medium sized shop with sign indicating it govern local exchanges and transformation items market.");
@@ -196,7 +196,7 @@ public class HeXinDao extends BaseContent
         menu();
         var buyItem1:Function = curry(confirmBuy1,golemmerchant,"Golem",1);
         var buyItem2:Function = curry(confirmBuy2,golemmerchant,"Golem",0.2);
-        var introText:String = "\"When you reach towards one of the items on the display, the golem says, \\\"<i>";
+        var introText:String = "\"When you reach towards one of the items on the display, the golem says, \"<i>";
         var costText:String = " Interested?  It is <b>";
         var endText1:String = " gems</b></i>.\"";
         var endText2:String = " spirit stones</b></i>.\"";
@@ -564,7 +564,7 @@ public class HeXinDao extends BaseContent
         addButton(6, "Shelf 4", soulequipmentshelf4).hint("Flying Swords");
         addButton(7, "Shelf 5", soulequipmentshelf5).hint("Consumables");
         addButton(8, "Shelf 6", soulequipmentshelf6).hint("Misc");
-		//addButton(7, weapons.MACE.shortName, weaponBuy, weapons.MACE);//awl - wymagać bedzie możliwość lewitacji czy coś od PC aby to używać
+		//addButton(7, weapons.MACE.shortName, weaponBuy, weapons.MACE);//(?magically enchanced?) awl - wymagać bedzie możliwość lewitacji czy coś od PC aby to używać
         //addButton(12, "Talk", ).hint("Tak with .");
         addButton(14, "Back", riverislandVillageStuff);
         statScreenRefresh();
@@ -594,13 +594,12 @@ public class HeXinDao extends BaseContent
         addButton(4, weapons.SCLAYMO.shortName, weaponBuy2, weapons.SCLAYMO);
         addButton(5, weapons.S_GAUNT.shortName, weaponBuy2, weapons.S_GAUNT);
         addButton(6, weapons.CLAWS.shortName, weaponBuy2, weapons.CLAWS);
-        addButton(7, weapons.RIBBON.shortName, weaponBuy2, weapons.RIBBON);
+        addButton(7, weapons.DAISHO.shortName, weaponBuy2, weapons.DAISHO);
         addButton(8, weapons.TCLAYMO.shortName, weaponBuy2, weapons.TCLAYMO);
         addButton(9, weapons.ACLAYMO.shortName, weaponBuy2, weapons.ACLAYMO);
         addButton(10, weapons.WHIP.shortName, weaponBuy2, weapons.WHIP);
         addButton(11, weapons.PWHIP.shortName, weaponBuy2, weapons.PWHIP);
         addButton(12, weapons.ZWNDER.shortName, weaponBuy2, weapons.ZWNDER);
-        addButton(13, weapons.PRURUMI.shortName, weaponBuy2, weapons.PRURUMI);
         addButton(14, "Back", serenamerchant);
     }
     public function soulequipmentshelf3():void {
@@ -655,14 +654,19 @@ public class HeXinDao extends BaseContent
     }
     public function soulequipmentshelf6():void {
         menu();
-		addButton(5, weapons.W_STAFF.shortName, weaponBuy6, weapons.W_STAFF);
+		addButton(1, weapons.W_STAFF.shortName, weaponBuy6, weapons.W_STAFF);
+		addButton(2, weapons.AWL_.shortName, weaponBuy6, weapons.AWL_);
+		addButton(3, weapons.RULER.shortName, weaponBuy6, weapons.RULER);
+		addButton(4, weapons.NRSABER.shortName, weaponBuy6, weapons.NRSABER);
+		addButton(5, weapons.RIBBON.shortName, weaponBuy6, weapons.RIBBON);
         addButton(6, weapons.GUANDAO.shortName, weaponBuy6, weapons.GUANDAO);
         addButton(7, weapons.HSWORDS.shortName, weaponBuy6, weapons.HSWORDS);
 		addButton(8, weapons.SNAKESW.shortName, weaponBuy6, weapons.SNAKESW);
 		//addButton(9, Changdao
         addButton(10, weapons.FLYWHIS.shortName, weaponBuy6, weapons.FLYWHIS);
-        addButton(11, weapons.CHAKRAM.shortName, weaponBuy6, weapons.CHAKRAM);
-        addButton(12, shields.MABRACE.shortName, weaponBuy6, shields.MABRACE);
+        addButton(11, weapons.PRURUMI.shortName, weaponBuy6, weapons.PRURUMI);
+        addButton(12, weapons.CHAKRAM.shortName, weaponBuy6, weapons.CHAKRAM);
+        addButton(13, shields.MABRACE.shortName, weaponBuy6, shields.MABRACE);
         addButton(14, "Back", serenamerchant);
     }
 
@@ -1257,14 +1261,12 @@ public function soularena():void {
     private function orderFood(str:int,spe:int,inte:int,tou:int=5):void{
         outputText("\n\nShe notes your order on a piece of paper.");
         outputText("\n\n\"<i>How spicy would you like it to be?</i>\"");
-        if (player.statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff1) < 25) {
-            player.removeStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff1);
-            player.createStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff1, 25, 0, 0, 0);
-        }
-        else player.createStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff1, 25, 0, 0, 0);
-
-        if (player.statStore.hasBuff("ShiraOfTheEastFoodBuff")) player.statStore.removeBuffs("ShiraOfTheEastFoodBuff");
-        player.statStore.addBuffObject({str:str, spe:spe, inte:inte, tou:tou},"ShiraOfTheEastFoodBuff",{text:"Restorant meals"})
+        player.removeStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff1);
+        player.createStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff1, 25, 0, 0, 0);
+        player.buff("ShiraOfTheEastFoodBuff").remove();
+        player.buff("ShiraOfTheEastFoodBuff")
+            .setStats( { "str": str, "spe": spe, "int": inte, "tou": tou })
+            .withText("Restaurant meals!"); //no timer - removed in events with the status effect
 
         menu();
         addButton(0, "Mild", restaurantSpicing,"mild");

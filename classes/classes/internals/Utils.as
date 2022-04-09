@@ -17,6 +17,16 @@ public class Utils extends Object
 		{
 		}
 
+        //returns n-th bit of the integer
+        public static function getBit(x:int, bit:int):Boolean {
+            return Boolean(x & (1 << bit));
+        }
+
+        //sets n-th bit of the integer
+        public static function setBit(x:int, bit:int, setTo:Boolean):int {
+            return x & ~(1 << bit) | (int(setTo) << bit);
+        }
+
 		// curryFunction(f,args1)(args2)=f(args1.concat(args2))
 		// e.g. curryFunction(f,x,y)(z,w) = f(x,y,z,w)
 		public static function curry(func:Function,...args):Function

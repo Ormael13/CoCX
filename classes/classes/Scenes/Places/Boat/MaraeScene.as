@@ -6,6 +6,7 @@ import classes.BodyParts.Wings;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.EventParser;
+import classes.display.SpriteDb;
 
 public class MaraeScene extends AbstractBoatContent implements TimeAwareInterface {
 
@@ -42,7 +43,7 @@ public class MaraeScene extends AbstractBoatContent implements TimeAwareInterfac
 		//End of Interface Implementation
 
 public function encounterMarae():void {
-	spriteSelect(40);
+	spriteSelect(SpriteDb.s_marae);
 	outputText(images.showImage("marae-first-encounter"));
 	outputText("Like a hidden emerald jewel, a small island appears in the distance.  You wager that you're somewhere near the center of this lake.  How coincidental.   You row closer, eager to get out of the boat and stretch your [legs].  The rowboat grounds itself in the moist earth of the island, coming to a dead stop.   You climb out, noting that this island is little more than a raised mound of earth and grass, with a small tree perched atop its apex.  ");
 	//Dungeon operational
@@ -158,7 +159,7 @@ public function encounterMarae():void {
 }
 
 public function alraunezeMe():void {
-	spriteSelect(40);
+	spriteSelect(SpriteDb.s_marae);
 	outputText(images.showImage("marae-first-encounter"));
 	outputText("For some weird reason, you feel a growing need to visit Marae. Perhaps it’s a natural calling for plant morphs like yourself, tuned to the earth's voice as you have become, or perhaps there is a greater calling to it. Perhaps it’s just that getting into the good graces of the local plant goddess while being a plant yourself is common sense. You use the boat as usual and row to the island where Marae resides. It doesn’t take long for the goddess to notice your presence.\n\n");
 	if (flags[kFLAGS.FACTORY_SHUTDOWN] == 1) {
@@ -348,7 +349,7 @@ public function winAgainstMarae():void {
 	clearOutput();
 	outputText(images.showImage("marae-defeated"));
 	if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2) {
-		outputText("\"<i>NO! How can a mortal defeat me?! That's IMPOSSIBLE!</i>\" Marae yells. You tell her that just because she's a goddess doesn't mean a mortal can't defeat her.");
+		outputText("\"<i>NO! How can a mortal defeat me?! That's IMPOSSIBLE!</i>\" Marae yells. All gods are fallible, even a determined mortal can stand against something like her. It's time you slay this one.");
 		if (silly()) outputText("\n\n<b>Did you just punch out Cthulhu? Or in this case, Marae?</b>\n\n");
 		if (player.hasStatusEffect(StatusEffects.KnowsWhitefire) || player.hasPerk(PerkLib.FireLord) || player.hasPerk(PerkLib.Hellfire) || player.hasPerk(PerkLib.DragonFireBreath)) outputText("You summon your magical fire and finish off Marae for the last time. You can hear her screaming as she's withering and shriveling up. While she's on fire, you turn your attention elsewhere.");
 		else outputText("You raise your [weapon] and finish off Marae at last. The corrupted goddess is no more. All the tentacles shrivel up. Afterwards, you turn your attention elsewhere.");
@@ -377,36 +378,9 @@ public function winAgainstMarae():void {
 		inventory.takeItem(useables.DBAPLAT, camp.returnToCampUseOneHour);
 	}
 }
-public function winAgainstMarae2ndRound():void {
-	clearOutput();
-	outputText(images.showImage("marae-defeated"));
-	if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2) {
-
-	}
-	else {
-
-	}
-}
-public function winAgainstMarae3rdRound():void {
-	clearOutput();
-	outputText(images.showImage("marae-defeated"));
-	if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2) {
-		if (player.hasStatusEffect(StatusEffects.KnowsWhitefire) || player.hasPerk(PerkLib.FireLord) || player.hasPerk(PerkLib.Hellfire) || player.hasPerk(PerkLib.DragonFireBreath)) outputText("You summon your magical fire and finish off Marae for the last time. You can hear her screaming as she's withering and shriveling up. While she's on fire, you turn your attention elsewhere.");
-		else outputText("You raise your [weapon] and finish off Marae at last. The corrupted goddess is no more. All the tentacles shrivel up and die. Afterwards, you turn your attention elsewhere.");
-		if (!player.hasKeyItem("Marae's Lethicite") >= 0) {
-			outputText("\n\nSomething shiny catches your eye. Clearly, this has to be Marae's lethicite!");
-			outputText("\n<b>(Key Item Gained: Marae's Lethicite!)</b>");
-			player.createKeyItem("Marae's Lethicite", 3, 0, 0, 0);
-		}
-		outputText("\n\nAfter the death of a corrupted physical goddess, you see something odd. There is a pile of intact shards of bark. They looks large and thick enough to be workable. You give it an experiment punch. ");
-	}
-	else {
-
-	}
-}
 
 private function maraeBadEnd():void {
-	spriteSelect(40);
+	spriteSelect(SpriteDb.s_marae);
 	clearOutput();
 	outputText(images.showImage("marae-bad-end"));
 	if(flags[kFLAGS.MET_MARAE_CORRUPTED] <= 0) outputText("The goddess flows out of the tree, stepping away from it as a living woman, curvy and nude.\n\n");
@@ -441,7 +415,7 @@ private function maraeBadEnd():void {
 }
 
 private function maraeStealLethicite(deliberate:Boolean = false):void {
-	spriteSelect(40);
+	spriteSelect(SpriteDb.s_marae);
 	clearOutput();
 	//(SUCCESS)
 	if ((player.spe > 35 && (rand(player.spe / 3 + 30) > 20) || player.spe > 35 && player.findPerk(PerkLib.Evade) >= 0 && rand(3) < 2) && !deliberate) {
@@ -507,7 +481,7 @@ private function maraeStealLethicite(deliberate:Boolean = false):void {
 }
 
 public function level2MaraeEncounter():void {
-	spriteSelect(40);
+	spriteSelect(SpriteDb.s_marae);
 	flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] = 1;
 	clearOutput();
 	outputText(images.showImage("marae-second-encounter"));
@@ -561,7 +535,7 @@ public function level2MaraeEncounter():void {
 }
 
 private function MaraeIIStageII():void {
-	spriteSelect(40);
+	spriteSelect(SpriteDb.s_marae);
 	clearOutput();
 	outputText(images.showImage("marae-second-encounter-pt-two"));
 	flags[kFLAGS.CORRUPT_MARAE_FOLLOWUP_ENCOUNTER_STATE] = 2;
@@ -655,7 +629,7 @@ private function MaraeIIStageII():void {
 		outputText("You swoon, your head buzzing with desire for more of this buzzing goddess' embrace.  The urge to kneel before her and worship her cunt rocks you to the core, blasting away the last of your feeble resistance, but before you can do so, Marae grabs you by the chin and commands, \"<i>No my child.  You can serve me better by breeding.</i>\"  Her fingers pull apart the petals of her flowery fuck-hole while she continues, \"<i>Go ahead, put it inside.  I'll show you how to practice the new faith of Marae.</i>\"\n\n");
 
 		outputText("She's easy to push down into the soft grasses of the island, and her legs part to allow you better access.  Your [cock] doesn't need to be told what to do, and it slips into her waiting wetness as if it was made for her.  ");
-		if(player.cocks[0].cockThickness > 5 || player.cockArea(0) > 100) outputText("With how big you are, there's no way it should be able to fit, but her body isn't even distorted by your girth.  Perhaps she changed you to fit her?  You pull back and your thickness seems unchanged.  You shake your head to clear the unwelcome thoughts and ram yourself back into her.  Fucking is what's important.  ");
+		if(player.cocks[0].cockThickness > 5 || player.biggestCockArea() > 100) outputText("With how big you are, there's no way it should be able to fit, but her body isn't even distorted by your girth.  Perhaps she changed you to fit her?  You pull back and your thickness seems unchanged.  You shake your head to clear the unwelcome thoughts and ram yourself back into her.  Fucking is what's important.  ");
 		else outputText("She feels perfect.  A velvet vice of hot, slippery wetness clutches tightly around your [cock].  It almost feels like it's actually gripping you, cradling your cock in her ambrosia-slicked box.");
 		if(player.cockTotal() > 1) {
 			if(player.cockTotal() > 2) outputText("  Another ");
@@ -703,7 +677,7 @@ private function MaraeIIStageII():void {
 }
 
 private function MaraePt2RoundIIIPrizes():void {
-	spriteSelect(40);
+	spriteSelect(SpriteDb.s_marae);
 	clearOutput();
 	//[EPILOGUE]
 	//[Dudes]
@@ -824,7 +798,7 @@ private function MaraePt2RoundIIIPrizes():void {
 }
 
 private function MaraeIIFlyAway():void {
-	spriteSelect(40);
+	spriteSelect(SpriteDb.s_marae);
 	clearOutput();
 	outputText("You launch into the air and beat your wings, taking to the skies.  The tentacle-tree lashes at you, but comes up short.  You've escaped!  Something large whooshes by, and you glance up to see your boat sailing past you.  She must have hurled it at you!  It lands with a splash near the mooring, somehow surviving the impact.  You dive down and drag it back to the dock before you return to camp.  That was close!");
 	doNext(camp.returnToCampUseOneHour);
@@ -855,14 +829,15 @@ private function runFromPervertedGoddess():void {
 }
 
 public function talkToMaraeAboutMinervaPurification():void {
-	spriteSelect(40);
+    clearOutput();
+	spriteSelect(SpriteDb.s_marae);
 	outputText("As you step into the boat and sail it out into the depths of the lake, you focus on trying to find Marae. She may be Minerva’s best chance of being healed. Thankfully, luck is with you and you soon find yourself pulling ashore at the lushly forested island where the nature goddess dwells. In response to your presence, Marae herself materializes from the vegetation, looking at you in a concerned manner.");
 
 	outputText("\n\n\"<i>You return to my island, champion? What brings you here? Is there something troubling you?</i>\" the deity gently asks you.");
 
-	outputText("\n\nMaking whatever gesture of respect feels most appropriate to you, you explain to her about Minerva and her condition, elaborating that you have come to ask Marae if she can possibly help you to cure her.");
+	outputText("\n\nMaking a gesture of respect, you explain to her about Minerva and her condition, elaborating that you have come to ask Marae if she can possibly help you to cure her.");
 
-	outputText("\n\nAt this, Marae’s expression falls. \"<i>I am sorry, champion, but I cannot do what you ask.</i>\" When you demand to know why, she quickly explains herself. \"<i>It is not that I am ungrateful or unwilling, it is that I am unable. Though you have stopped the assault on my soul by the demon factory, my powers are still vastly diminished from what they were. I fear I would not be able to help her...</i>\" Marae suddenly trails off, looking thoughtful, then gives you an intent expression. \"<i>Explain to me again, the ruins in which you say your friend has been living?</i>\" she requests.");
+	outputText("\n\nAt this, Marae’s expression falls. \"<i>I am sorry, champion, but I cannot do what you ask.</i>\" When you demand to know why, she quickly explains herself. \"<i>It is not that I am ungrateful or unwilling, it is that I am unable. Though you have stopped the assault on my soul by the demon factory, my powers are still vastly diminished from what they were. I fear I would not be able to help her...</i>\" Marae suddenly trails off, looking thoughtful, then gives you an intent expression. \"<i>Explain to me again, in which ruins you say your friend is living?</i>\" she requests.");
 
 	outputText("\n\nPuzzled, you repeat your description, watching with bemusement as Marae’s face lights up. \"<i>I hadn’t dared to hope... a nexus! An untainted nexus, still hidden from the demons! Yes, yes I can help your friend, and you both can help me at the same time!</i>\" she declares joyfully. \"<i>Your friend’s home is a nexus, a place of concentrated holy energies. If I can connect myself to it, I can increase my own powers and help heal her.</i>\" Focusing, she holds her hands only slightly apart from each other as a strange green light begins forming between them. It swells in intensity until you are forced to look away, shielding your eyes. When it fades and you can look back without blinding yourself, you see a gently glowing seed resting between her hands. \"<i>Take this seed, champion, and plant it in the fertile soil at the spring you speak of. Do so and I will be able to help your friend overcome her affliction.</i>\"");
 
@@ -874,7 +849,7 @@ public function talkToMaraeAboutMinervaPurification():void {
 }
 
 public function encounterPureMaraeEndgame():void {
-	spriteSelect(40);
+	spriteSelect(SpriteDb.s_marae);
 	clearOutput();
 	outputText("As you step into the boat and sail it out into the depths of the lake, you focus on trying to find Marae. After all, you need a good challenge. Thankfully, luck is with you and you soon find yourself pulling ashore at the lushly forested island where the nature goddess dwells. In response to your presence, Marae herself materializes from the vegetation, looking at you in a concerned manner.");
 	if (flags[kFLAGS.PURE_MARAE_ENDGAME] == 0) {

@@ -8,11 +8,11 @@ import classes.StatusEffects;
 public class MeteorShowerSpell extends AbstractWhiteSpell{
 	public function MeteorShowerSpell() {
 		super(
-				"Meteor Shower",
-				"Call down a rain of meteors on your opponents, stunning them for 1 round and dealing area damage. Hits 12 times.\n<b>Req. 1 turn channeling. Cooldown: 12 turns.</b>",
-				TARGET_ENEMY,
-				TIMING_INSTANT,
-				[TAG_DAMAGING,TAG_FIRE,TAG_AOE]
+			"Meteor Shower",
+			"Call down a rain of meteors on your opponents, stunning them for 1 round and dealing area damage. Hits 12 times.\n<b>Req. 1 turn channeling. Cooldown: 12 turns.</b>",
+			TARGET_ENEMY,
+			TIMING_INSTANT,
+			[TAG_DAMAGING,TAG_FIRE,TAG_AOE]
 		);
 		baseManaCost = 1250;
 	}
@@ -56,15 +56,19 @@ public class MeteorShowerSpell extends AbstractWhiteSpell{
 	}
 	
 	override public function describeEffectVs(target:Monster):String {
-		return "~" + calcDamage(target,false)+ "(x12) fire damage."
+		return "~" + calcDamage(target,false, false)+ "(x12) fire damage."
 	}
 	
-	public function calcDamage(target:Monster, randomize:Boolean=true):Number {
+	public function calcDamage(target:Monster, randomize:Boolean=true, casting:Boolean = true):Number {
+		var baseDamage:Number = scalingBonusIntelligence(randomize)*2;
+		if (player.weaponRangeName == "Artemis") baseDamage *= 1.5;
 		return adjustSpellDamage(
-				scalingBonusIntelligence(randomize)*2,
+				baseDamage,
 				DamageType.FIRE,
 				CAT_SPELL_WHITE,
-				target
+				target,
+                true,
+                casting
 		);
 	}
 	
@@ -79,7 +83,7 @@ public class MeteorShowerSpell extends AbstractWhiteSpell{
 		var meteor:Number = 12;
 		var totalDamage:Number = 0;
 		while (meteor-->0){
-			var damage:Number = calcDamage(monster);
+			var damage:Number = calcDamage(monster, true, true);
 			totalDamage += critAndRepeatDamage(false, damage, DamageType.FIRE, true);
 		}
 		if (display) {

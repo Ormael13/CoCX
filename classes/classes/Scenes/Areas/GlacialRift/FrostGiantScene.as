@@ -4,12 +4,11 @@ package classes.Scenes.Areas.GlacialRift
 	import classes.GlobalFlags.kFLAGS;
 	import classes.CoC;
 	import classes.GlobalFlags.kACHIEVEMENTS;
-	import classes.Scenes.UniqueSexScenes;
+	import classes.Scenes.SceneLib;
 	
 	public class FrostGiantScene extends BaseContent
 	{
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		
+				
 		public function FrostGiantScene() 
 		{
 		}
@@ -27,9 +26,9 @@ package classes.Scenes.Areas.GlacialRift
 				if (player.hasCock()) addButton(0, "Nosefuck", noseJob);
 				if (player.hasVagina()) addButton(1, "RideVaginally", rideVaginally);
 				addButton(2, "Ride Anally", rideAnally);
-				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 				addButton(14, "Leave", cleanupAfterCombat);
-			}
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(winAgainstGiant);
+							}
 			else {
 				cleanupAfterCombat();
 			}
@@ -44,9 +43,9 @@ package classes.Scenes.Areas.GlacialRift
 				if (player.hasCock()) addButton(0, "Nosefuck", noseJob);
 				if (player.hasVagina()) addButton(1, "RideVaginally", rideVaginally);
 				addButton(2, "Ride Anally", rideAnally);
-				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 				addButton(14, "Leave", cleanupAfterCombat);
-			}
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(winAgainstYoungGiant);
+							}
 			else {
 				cleanupAfterCombat();
 			}

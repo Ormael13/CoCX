@@ -3,6 +3,7 @@ import classes.*;
 import classes.BodyParts.Skin;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 public class TamainsDaughtersScene extends BaseContent implements TimeAwareInterface {
 
@@ -100,7 +101,7 @@ private function tdCup():String {
 
 //ENCOUNTER:
 public function encounterTamanisDaughters():void {
-	spriteSelect(57);
+	spriteSelect(SpriteDb.s_tamani_s_daughters);
 	flags[kFLAGS.TIMES_ENCOUNTED_TAMANIS_DAUGHTERS]++;
 	clearOutput();
 	if (player.hasPerk(PerkLib.SoulSense) && flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] < 2) flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS]++;
@@ -166,7 +167,7 @@ public function encounterTamanisDaughters():void {
 
 //[Play Dumb]
 private function playDumbToTamanisDaughters():void {
-	spriteSelect(57);
+	spriteSelect(SpriteDb.s_tamani_s_daughters);
 	clearOutput();
 	outputText("You shrug and ask, \"<i>What exactly is it you want again?  I'm not sure you have the right " + player.mf("guy","person") + ".</i>\"\n\n");
 	//approx 33% chance at 0 int, going up the smarter you are.
@@ -197,7 +198,7 @@ private function fightTamanisDaughters():void {
 	clearOutput();
 	outputText("You whirl around threateningly, intent on putting Tamani's wayward brood back in their place.\n\n");
 	startCombat(new TamanisDaughters());
-	spriteSelect(57);
+	spriteSelect(SpriteDb.s_tamani_s_daughters);
 	if (tamaniPresent) {
 		//(+5 mob strength)
 		monster.strStat.core.value += 25;
@@ -217,7 +218,7 @@ private function fightTamanisDaughters():void {
 
 //[Fuck them]
 private function fuckYoDaughtersHomie():void {
-	spriteSelect(57);
+	spriteSelect(SpriteDb.s_tamani_s_daughters);
 	flags[kFLAGS.TIMES_FUCKED_TAMANIS_DAUGHTERS]++;
 	var cocks:Number = player.cockTotal();
 	var daughters:Number = int(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] * 0.75);
@@ -397,7 +398,7 @@ private function fuckYoDaughtersHomie():void {
 
 //[Let them]
 private function legTamanisDaughtersRAEPYou():void {
-	spriteSelect(57);
+	spriteSelect(SpriteDb.s_tamani_s_daughters);
 	flags[kFLAGS.TIMES_FUCKED_TAMANIS_DAUGHTERS]++;
 	var cocks:Number = player.cockTotal();
 	var daughters:Number = int(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 2);
@@ -750,7 +751,7 @@ private function legTamanisDaughtersRAEPYou():void {
 
 //[Lose Combat, Get Your Dick DRAINED]
 private function tamaniDaughtersCombatLossDrain():void {
-	spriteSelect(57);
+	spriteSelect(SpriteDb.s_tamani_s_daughters);
 	flags[kFLAGS.TIMES_FUCKED_TAMANIS_DAUGHTERS]++;
 	clearOutput();
 
@@ -788,7 +789,7 @@ private function tamaniDaughtersCombatLossDrain():void {
 	}
 
 	outputText("A goblin with lustrous blue hair pulls a lever on the side of the chair, shifting your position to further expose you.  She assures, ");
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00058] == 0) outputText("\"<i>Stop worrying.  I invented this while I was waiting on mom to bring me back more of your cum, just in case we ever got our hands on you.  I promise, after you've had a taste of my chair you'll never want to leave.</i>\"\n\n");
+	if(flags[kFLAGS.TAMANI_DAUGHTERS_TIMES_LOST] == 0) outputText("\"<i>Stop worrying.  I invented this while I was waiting on mom to bring me back more of your cum, just in case we ever got our hands on you.  I promise, after you've had a taste of my chair you'll never want to leave.</i>\"\n\n");
 	else outputText("\"<i>Stop worrying!  We both know you love my little love-seat.  Just lie back and you'll be cumming too hard to care before long.</i>\"\n\n");
 
 
@@ -817,7 +818,7 @@ private function tamaniDaughtersCombatLossDrain():void {
 	outputText("Unable to fight back in any way, you shrug and begin suckling the purplish nipple, tasting the creamy goblin milk as it easily fills your mouth.  You gulp it down, slowly relaxing between the mechanized cock-sucking and gentle breast-feeding.  Your daughter was right, it's almost like paradise. Unfortunately, the pleasure is interrupted by something probing at your backside.  Unable to look with your mouth full of delicious tit, you can only gurgle and dribble in protest as a lubricated tube is inserted into your " + assholeDescript() + ".\n\n");
 
 	outputText("The familiar voice of the machine's inventor whispers, \"<i>");
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00058] == 0) outputText("Time for your medicine!  We need you to cum enough for each of us, and maybe have a little left over to play with, so suck up the medicine, okay?  Just relax and let it fill you so that you give us all that yummy cummy!</i>\"\n\n");
+	if(flags[kFLAGS.TAMANI_DAUGHTERS_TIMES_LOST] == 0) outputText("Time for your medicine!  We need you to cum enough for each of us, and maybe have a little left over to play with, so suck up the medicine, okay?  Just relax and let it fill you so that you give us all that yummy cummy!</i>\"\n\n");
 	else outputText("Relax Dad, we're just giving you your cummy medicine.  I know you're a sexy, virile " + player.mf("stud","slut") + "and all, but take your medicine and you'll have more than enough cum for us!</i>\"\n\n");
 
 	outputText("You blush, ");
@@ -855,11 +856,11 @@ private function tamaniDaughtersCombatLossDrain():void {
 	outputText("Trapped in a constant orgasm by cruel machinery and a steady flow of specially tailored drugs, you start to smile uncontrollably.  True, you're utterly incapable of thinking by this point, but your body and mind are too pleased with the situation not to grin.  The situation in the corner of the scene repeats over and over as your daughters enjoy your 'milk'.  After they've had their fill they fall on each other, filling the room with orgiastic moans as any sense of order is blown away by a tide of female lust.\n\n");
 
 	//// Chance of tamani saving you
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00058] < 4) {
+	if(flags[kFLAGS.TAMANI_DAUGHTERS_TIMES_LOST] < 4) {
 		outputText("You lose consciousness a few hours into the ordeal, still cumming with no sign of stopping, your body sustained by the fluids pouring into your backside.  The dreams are a constant barrage of sexual situations, flitting between various incongruous orgasmic acts.  Were you capable of comprehending your situation, you probably wouldn't even want to wake up.  Alas, the pleasure does end, and you settle into a deeper slumber.  A gentle rocking and the exhaustion of your crotch keep you snoring soundly for hours.\n\n");
 
 		outputText("When you do wake, you find yourself alone in a forest clearing, with a note taped to your face:\n\n");
-		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00058] == 0) {
+		if(flags[kFLAGS.TAMANI_DAUGHTERS_TIMES_LOST] == 0) {
 			outputText("<i>   " + player.mf("Husband","Baby") + ",\n");
 			outputText("      Do you have any idea how hard it is for Tamani to drag you out here all by herself?  If you weren't my favorite breeder, I would've let my daughters keep you.  Next time stand up to the little twats or Tamani might look the other way while you're being milked!\n\n");
 			outputText("   Hugs & cums,\n");
@@ -879,7 +880,7 @@ private function tamaniDaughtersCombatLossDrain():void {
 		doNext(tamaniDaughtersBadEndChoice);
 	}
 	//Needz variable to track how many times PC has been 'chaired'
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00058]++;
+	flags[kFLAGS.TAMANI_DAUGHTERS_TIMES_LOST]++;
 	//moar daughters, increment 'times milked' by the daughters.
 	knockUpDaughters();
 	//boost cum production slightly.
@@ -890,7 +891,7 @@ private function tamaniDaughtersCombatLossDrain():void {
 }
 
 private function tamaniDaughtersBadEndChoice():void {
-	spriteSelect(57);
+	spriteSelect(SpriteDb.s_tamani_s_daughters);
 	outputText("The next morning your unfocused eyes blink open, and you find yourself in the same situation as before.  Thankfully your orgasm has been allowed to end, though you still feel dopey and unfocused from whatever is flowing into you.  You manage to twist your head around to get a better look at the situation and discover a pair of IV's lodged in your arms.  Twisting your body, you realize you can still feel the drug-enema tube lodged in your " + assholeDescript() + ".  Oddly, it's hard to feel worried or concerned about the situation.\n\n");
 
 	outputText("A goblin leans over your face and hugs her jiggling breasts against you as she gushes, \"<i>Thank you so much daddy!   You probably can't see with all the straps holding you down, but you got me and my sisters totally pregnant.  There's even enough of your spunk left over to knock us up a few more times!  We decided that even though we don't need you to cum right now, we'd let you keep coming forever.  Do you want that?</i>\"\n\n");
@@ -903,7 +904,7 @@ private function tamaniDaughtersBadEndChoice():void {
 
 //[Yes]
 private function tamaniDaughtersYesBadEndMePlease():void {
-	spriteSelect(57);
+	spriteSelect(SpriteDb.s_tamani_s_daughters);
 	clearOutput();
 	outputText("\"<i>Wonderful!</i>\" cries the excited pregnant slut.   She gives you a quick peck on the cheek as she prances back over to the machine.  You brace yourself in anticipation, eager to lose yourself to an eternal orgasm.  A switch clicks, and a dial whirs as it's turned up to the maximum.  The fluids pumping into your backside and directly into your veins suddenly jump in pressure, stinging painfully for a moment before the pleasure returns.  Your eyes slowly roll back, your jaw goes slack, and your [cocks] spew");
 	if(player.cockTotal() == 1) outputText("s");
@@ -916,7 +917,7 @@ private function tamaniDaughtersYesBadEndMePlease():void {
 
 //[NO]
 private function tamaniDaughtersDeclineBadEnd():void {
-	spriteSelect(57);
+	spriteSelect(SpriteDb.s_tamani_s_daughters);
 	clearOutput();
 	outputText("\"<i>Seriously!?</i>\" exclaims the pregnant slut, \"<i>What kind of person wouldn't want to cum all the time?  Fuck, just the idea of it is making me drip!</i>\"\n\n");
 
@@ -929,7 +930,7 @@ private function tamaniDaughtersDeclineBadEnd():void {
 }
 //[Rather Fill Individually]
 private function tamanisDaughtersFillIndividuallyBADEND():void {
-	spriteSelect(57);
+	spriteSelect(SpriteDb.s_tamani_s_daughters);
 	clearOutput();
 	outputText("\"<i>Really?</i>\" asks the pregnant goblin before she exclaims, \"<i>You do love us!  Oh Dad, once mom comes home will you fuck all of us?  I want to feel you make love to my drippy, pregnant pussy while she watches!</i>\"\n\n");
 
@@ -953,7 +954,7 @@ private function tamanisDaughtersFillIndividuallyBADEND():void {
 
 //[Lose to Daughters With Tamani There]
 private function loseToDaughtersWithTamaniThere():void {
-	spriteSelect(57);
+	spriteSelect(SpriteDb.s_tamani_s_daughters);
 	clearOutput();
 	flags[kFLAGS.TIMES_FUCKED_TAMANIS_DAUGHTERS]++;
 	//Find a dick that fits
@@ -1089,7 +1090,7 @@ private function knockUpDaughters():void {
 }
 
 internal function combatWinAgainstDaughters():void {
-	spriteSelect(57);
+	spriteSelect(SpriteDb.s_tamani_s_daughters);
 	clearOutput();
 	if(monster.HP <= monster.minHP()) {
 		outputText("You smile in satisfaction as [themonster] collapses, unable to continue fighting.");
@@ -1113,7 +1114,7 @@ internal function combatWinAgainstDaughters():void {
 }
 
 internal function loseToDaughters():void {
-	spriteSelect(57);
+	spriteSelect(SpriteDb.s_tamani_s_daughters);
 	if(player.lust >= player.maxLust()) {
 		//worms r gross mmmmkay?
 		if(player.hasStatusEffect(StatusEffects.Infested)) {

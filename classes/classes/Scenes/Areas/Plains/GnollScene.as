@@ -5,20 +5,19 @@ package classes.Scenes.Areas.Plains
 {
 	import classes.*;
 	import classes.GlobalFlags.*;
-	import classes.Scenes.UniqueSexScenes;
+	import classes.Scenes.SceneLib;
+    import classes.display.SpriteDb;
 
 	public class GnollScene extends BaseContent
 	{
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-
-		public function GnollScene()
+				public function GnollScene()
 		{
 		}
 
 //Gnoll Entrance
 		public function gnollEncounter():void
 		{
-			spriteSelect(11);
+			spriteSelect(SpriteDb.s_club_gnoll);
 			clearOutput();
 			outputText("The sound of distant laughter comes across the plains, then seems to die off suddenly.  A moment later, a gnoll comes bounding from the nearest scrap of cover and barrels into you.  The monstrous thing giggles as it bounces back and forth before you, looking for an opening to exploit.");
 			startCombat(new Gnoll());
@@ -55,28 +54,28 @@ package classes.Scenes.Areas.Plains
 			}
 			//(if cockTotal>0 AND
 			if (player.cockTotal() > 0) {
-				//thickestCock()>2")
+				//thickestCockIndex()>2")
 				if (player.thickestCockThickness() > 2) {
 					//(if cockTotal>1)
 					if (player.cockTotal() > 1) outputText("The gnoll fishes into your [cocks] and quickly snaps up the thickest one.  ");
 					//(if cockTotal=1)
 					else outputText("The gnoll's hands dart down to your crotch and grabs [cock].  ");
-					outputText("\"<i>Yes, this will do nicely,</i>\" she says with relish, pumping your " + Appearance.cockNoun(player.cocks[player.thickestCock()].cockType) + " until it plumps up, filling with blood.  She cantilevers her body over yours, knees bent sharply, and brings the tip of her massive clitoris up against the head of your dick.  The moment a dollop of pre forms at your urethra, her hips surge forward, sinking her giant clit down the length of your " + Appearance.cockNoun(player.cocks[player.thickestCock()].cockType) + ".  ");
+					outputText("\"<i>Yes, this will do nicely,</i>\" she says with relish, pumping your " + Appearance.cockNoun(player.cocks[player.thickestCockIndex()].cockType) + " until it plumps up, filling with blood.  She cantilevers her body over yours, knees bent sharply, and brings the tip of her massive clitoris up against the head of your dick.  The moment a dollop of pre forms at your urethra, her hips surge forward, sinking her giant clit down the length of your " + Appearance.cockNoun(player.cocks[player.thickestCockIndex()].cockType) + ".  ");
 					outputText("You gasp at the feeling of her hot skin rippling down the interior of your dick, and all she can do is laugh as she plunges it deeper and deeper into you.\n\n");
 				}
-				//(if cockTotal>0 AND thickestCock()<2")
+				//(if cockTotal>0 AND thickestCockIndex()<2")
 				else {
 					//(if cockTotal>1)
 					if (player.cockTotal() > 1) outputText("\"<i>This will have to do,</i>\" she says with the barest trace of disappointment as she grabs your thickest cock.  ");
 					//(if cockTotal=1)
 					else outputText("\"<i>This will have to do,</i>\" she says as she grabs your cock.  ");
-					outputText("She runs her rough hand up and down its length until it begins to plump up.  She cantilevers her body over yours, knees bent sharply, and brings the tip of her massive clitoris up against the head of your dick.  The moment a dollop of pre forms at your urethra, her hips surge forward, sinking her giant clit down the length of your " + Appearance.cockNoun(player.cocks[player.thickestCock()].cockType) + ".  ");
+					outputText("She runs her rough hand up and down its length until it begins to plump up.  She cantilevers her body over yours, knees bent sharply, and brings the tip of her massive clitoris up against the head of your dick.  The moment a dollop of pre forms at your urethra, her hips surge forward, sinking her giant clit down the length of your " + Appearance.cockNoun(player.cocks[player.thickestCockIndex()].cockType) + ".  ");
 					outputText("You scream in pain as she forces her bizarre pseudo-penis down the length of your dick.  In horror, you watch as the bulge of her anatomy's invasion of yours slowly descends towards your ");
 					if (player.balls > 0) outputText("balls");
 					else outputText("groin");
 					outputText(".  All she can do is laugh as she plunges it deeper and deeper into you.\n\n");
-					//(increase thickness of thickestCock())
-					player.cocks[player.thickestCock()].cockThickness += .25;
+					//(increase thickness of thickestCockIndex())
+					player.cocks[player.thickestCockIndex()].cockThickness += .25;
 				}
 			}
 			outputText("In no time whatsoever she falls into an easy rhythm, pistoning her obscene girl-dick in and out of you.  At first, you can do little more than gurgle and squirm under the assault, but all too soon you feel the telltale signs of your own arousal building.  You find yourself moving in sympathy with her thrusts, at least as best you can given the circumstances.");
@@ -122,8 +121,8 @@ package classes.Scenes.Areas.Plains
 					addButton(2, "TakeHerClit", takeGnollClit).hint("Put your vagina to use and ride the gnoll's clit.", "Take Her Clit");
 				}
 				addButton(3, "SuckHerClit", suckGnollClit).hint("Suck the gnoll's clit.", "Suck Her Clit");
-				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
-				addButton(14, "Leave", cleanupAfterCombat);
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatHyena);
+								addButton(14, "Leave", cleanupAfterCombat);
 			}
 			else cleanupAfterCombat();
 		}

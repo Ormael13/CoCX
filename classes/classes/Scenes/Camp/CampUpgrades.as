@@ -128,8 +128,8 @@ public function buildmisc1Menu():void {
 	if (player.hasPerk(PerkLib.JobElementalConjurer) && flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] < 8) addButton(5, "Arcane Circle", arcaneCircle).hint("Build an arcane circle at the camp OR add another circle to it. (Unlock elementals summons/rank up related options)(Req. 50 fatigue, enough stones, mana and blood)");
 	if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 1) addButton(6, "Elemental E. C.", arcaneCircleUpgrade).hint("Add Elemental Energy Conduits to your arcane circle to store in them elemental energy stored in elementals shards for more easy use. (Allowing to replace mana and reduce fatigue usage when summoning/ranking up normal tier elementals. Allowing to rank up elementals of tiers above normal tier.)(Req. 50 fatigue, enough stones, mana and elemental shards)");
 	if (player.inte >= 50 && flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] == 1) addButton(7, "Magic Ward", magicWard).hint("Set up a Magic Ward around the camp. (Req. 200 fatigue)");
-	if (flags[kFLAGS.CAMP_UPGRADES_DAM] < 1) addButton(8, "Dam", dam).hint("Build up a dam on the steam next to the camp. (Req. 200 fatigue * tier of built dam)");
-	if (flags[kFLAGS.CAMP_UPGRADES_DAM] >= 1 && flags[kFLAGS.CAMP_UPGRADES_FISHERY] < 1) addButton(9, "Fishery", fishery).hint("Build up a fishery on the steam next to the camp. (Req. 200 fatigue)");
+	if (flags[kFLAGS.CAMP_UPGRADES_DAM] < 1) addButton(8, "Dam", dam).hint("Build up a dam on the stream next to the camp. (Req. 200 fatigue * tier of built dam)");
+	if (flags[kFLAGS.CAMP_UPGRADES_DAM] >= 1 && flags[kFLAGS.CAMP_UPGRADES_FISHERY] < 1) addButton(9, "Fishery", fishery).hint("Build up a fishery on the stream next to the camp. (Req. 200 fatigue)");
 	addButton(14, "Back", playerMenu);
 }
 public function buildCampMembersCabinsMenu():void {
@@ -1567,7 +1567,7 @@ public function arcaneCircleUpgrade():void {
 					return;
 				}
 				if (player.statusEffectv3(StatusEffects.ElementalEnergyConduits) == 2) {
-					if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 2) {
+					if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 2) {
 						buildSecondElementalEnergyConduit();
 						return;
 					}
@@ -1581,7 +1581,7 @@ public function arcaneCircleUpgrade():void {
 					return;
 				}
 				if (player.statusEffectv3(StatusEffects.ElementalEnergyConduits) == 4) {
-					if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 3) {
+					if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 3) {
 						buildThirdElementalEnergyConduit();
 						return;
 					}
@@ -1595,7 +1595,7 @@ public function arcaneCircleUpgrade():void {
 					return;
 				}
 				if (player.statusEffectv3(StatusEffects.ElementalEnergyConduits) == 6) {
-					if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 4) {
+					if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 4) {
 						buildFourthElementalEnergyConduit();
 						return;
 					}
@@ -1609,7 +1609,7 @@ public function arcaneCircleUpgrade():void {
 					return;
 				}
 				if (player.statusEffectv3(StatusEffects.ElementalEnergyConduits) == 8) {
-					if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] == 4) {
+					if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 5) {
 						buildFifthElementalEnergyConduit();
 						return;
 					}
@@ -1652,9 +1652,9 @@ public function buildFirstElementalEnergyConduit():void {
 private function doBuildFirstElementalEnergyConduit():void {
 	flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 3;
 	clearOutput();
-	outputText("You decide to upgrade your first arcane circle in order to better utilise elemental shards. You reach into the shards, enfusing them with your mana and changing them from the inside. You liquify the crystals, pouring them into a stone bowl. You then engrave an intricate series of runes onto three flat stones, carefully pouring the liquid crystal into the engravings, making them shine with power. All three stones are then placed in a triangular formation inside your circle, runes lining up to form veins of magic, conduits pulsing with elemental energy. Each stone is now an elemental node!");
+	outputText("You decide to upgrade your first arcane circle in order to better utilise elemental shards. You reach into the shards, enfusing them with your mana and changing them from the inside. You liquify the crystals, pouring them into a stone bowl. You then engrave an intricate series of runes onto three flat stones, carefully pouring the liquid crystal into the engravings, making them shine with power. All three stones are then placed in a triangular formation inside your circle, runes lining up to form veins of magic, conduits pulsing with elemental energy. Each stone is now an elemental node! You can feel that the power is now directly stored in the arcane circle, ready to use.");
 	player.createStatusEffect(StatusEffects.ElementalEnergyConduits,0,600,1,0);
-	outputText(" \"<b>You can now convert elemental shards into pure elemental energy. You can feel that the power is directly stored in the arcane circle, ready to use.</b>\"");
+	outputText("\n\n<b>You can now convert elemental shards into pure elemental energy.</b>");
 	//Gain fatigue.
 	var fatigueAmount:int = 50;
 	if (player.hasPerk(PerkLib.IronMan)) fatigueAmount -= 20;
@@ -1684,7 +1684,7 @@ private function doUpgradeFirstElementalEnergyConduit():void {
 	outputText("You decide that you need more elemental energy on hand, and for that, you need to expand your first energy conduit. You reach into the shards, enfusing them with your mana and changing them from the inside. You liquify the crystals, pouring them into a stone bowl. You then engrave an intricate series of runes onto three flat stones, carefully pouring the liquid crystal into the engravings, making them shine with power. All three stones are then placed around one of your pre-existing nodes, runes lining up to form veins of magic, conduits pulsing with elemental energy. One of your basic nodes has been enhanced, and can now store more power.");
 	player.addStatusValue(StatusEffects.ElementalEnergyConduits,2,600);
 	player.addStatusValue(StatusEffects.ElementalEnergyConduits,3,1);
-	outputText(" \"<b>Your arcane circles can store now more elemental energy! (+600)</b>\"");
+	outputText("\n\n<b>Your arcane circles can store now more elemental energy! (+600)</b>");
 	//Gain fatigue.
 	var fatigueAmount:int = 50;
 	if (player.hasPerk(PerkLib.IronMan)) fatigueAmount -= 20;
@@ -1714,7 +1714,7 @@ private function doBuildSecondElementalEnergyConduit():void {
 	outputText("You decide to engrave conduict in second circle. You draw complicated engraving on prepared stones using liquidified with help of mana elemental shards. Then you place all four prepared nodes in the second circle forming basic elemental conduit in it.");
 	player.addStatusValue(StatusEffects.ElementalEnergyConduits,2,800);
 	player.addStatusValue(StatusEffects.ElementalEnergyConduits,3,1);
-	outputText(" \"<b>Your arcane circles can store now more elemental energy! (+800)</b>\"");
+	outputText("\n\n<b>Your arcane circles can store now more elemental energy! (+800)</b>");
 	//Gain fatigue.
 	var fatigueAmount:int = 50;
 	if (player.hasPerk(PerkLib.IronMan)) fatigueAmount -= 20;
@@ -1744,7 +1744,7 @@ private function doUpgradeSecondElementalEnergyConduit():void {
 	outputText("You decide to expand your second energy conduit in order to store more elementals energy in circle until it will be needed. You draw complicated engraving on prepared stones using liquidified with help of mana elemental shards. Then you place all four prepared nodes in the second circle changing basic one elemental conduit into advanced.");
 	player.addStatusValue(StatusEffects.ElementalEnergyConduits,2,800);
 	player.addStatusValue(StatusEffects.ElementalEnergyConduits,3,1);
-	outputText(" \"<b>Your arcane circles can store now more elemental energy! (+800)</b>\"");
+	outputText("\n\n<b>Your arcane circles can store now more elemental energy! (+800)</b>");
 	//Gain fatigue.
 	var fatigueAmount:int = 50;
 	if (player.hasPerk(PerkLib.IronMan)) fatigueAmount -= 20;
@@ -1774,7 +1774,7 @@ private function doBuildThirdElementalEnergyConduit():void {
 	outputText("You decide to engrave conduict in third circle. You draw complicated engraving on prepared stones using liquidified with help of mana elemental shards. Then you place all five prepared nodes in the third circle forming basic elemental conduit in it.");
 	player.addStatusValue(StatusEffects.ElementalEnergyConduits,2,1000);
 	player.addStatusValue(StatusEffects.ElementalEnergyConduits,3,1);
-	outputText(" \"<b>Your arcane circles can store now more elemental energy! (+1,000)</b>\"");
+	outputText("\n\n<b>Your arcane circles can store now more elemental energy! (+1,000)</b>");
 	//Gain fatigue.
 	var fatigueAmount:int = 50;
 	if (player.hasPerk(PerkLib.IronMan)) fatigueAmount -= 20;
@@ -1804,7 +1804,7 @@ private function doUpgradeThirdElementalEnergyConduit():void {
 	outputText("You decide to expand your third energy conduit in order to store more elementals energy in circle until it will be needed. You draw complicated engraving on prepared stones using liquidified with help of mana elemental shards. Then you place all five prepared nodes in the third circle changing basic one elemental conduit into advanced.");
 	player.addStatusValue(StatusEffects.ElementalEnergyConduits,2,1000);
 	player.addStatusValue(StatusEffects.ElementalEnergyConduits,3,1);
-	outputText(" \"<b>Your arcane circles can store now more elemental energy! (+1,000)</b>\"");
+	outputText("\n\n<b>Your arcane circles can store now more elemental energy! (+1,000)</b>");
 	//Gain fatigue.
 	var fatigueAmount:int = 50;
 	if (player.hasPerk(PerkLib.IronMan)) fatigueAmount -= 20;
@@ -1834,7 +1834,7 @@ private function doBuildFourthElementalEnergyConduit():void {
 	outputText("You decide to engrave conduict in fourth circle. You draw complicated engraving on prepared stones using liquidified with help of mana elemental shards. Then you place all six prepared nodes in the fourth circle forming basic elemental conduit in it.");
 	player.addStatusValue(StatusEffects.ElementalEnergyConduits,2,1200);
 	player.addStatusValue(StatusEffects.ElementalEnergyConduits,3,1);
-	outputText(" \"<b>Your arcane circles can store now more elemental energy! (+1,200)</b>\"");
+	outputText("\n\n<b>Your arcane circles can store now more elemental energy! (+1,200)</b>");
 	//Gain fatigue.
 	var fatigueAmount:int = 50;
 	if (player.hasPerk(PerkLib.IronMan)) fatigueAmount -= 20;
@@ -1864,7 +1864,7 @@ private function doUpgradeFourthElementalEnergyConduit():void {
 	outputText("You decide to expand your fourth energy conduit in order to store more elementals energy in circle until it will be needed. You draw complicated engraving on prepared stones using liquidified with help of mana elemental shards. Then you place all six prepared nodes in the fourth circle changing basic one elemental conduit into advanced.");
 	player.addStatusValue(StatusEffects.ElementalEnergyConduits,2,1200);
 	player.addStatusValue(StatusEffects.ElementalEnergyConduits,3,1);
-	outputText(" \"<b>Your arcane circles can store now more elemental energy! (+1,200)</b>\"");
+	outputText("\n\n<b>Your arcane circles can store now more elemental energy! (+1,200)</b>");
 	//Gain fatigue.
 	var fatigueAmount:int = 50;
 	if (player.hasPerk(PerkLib.IronMan)) fatigueAmount -= 20;
@@ -1894,7 +1894,7 @@ private function doBuildFifthElementalEnergyConduit():void {
 	outputText("You decide to engrave conduict in fifth circle. You draw complicated engraving on prepared stones using liquidified with help of mana elemental shards. Then you place all seven prepared nodes in the fifth circle forming basic elemental conduit in it.");
 	player.addStatusValue(StatusEffects.ElementalEnergyConduits,2,1400);
 	player.addStatusValue(StatusEffects.ElementalEnergyConduits,3,1);
-	outputText(" \"<b>Your arcane circles can store now more elemental energy! (+1,400)</b>\"");
+	outputText("\n\n<b>Your arcane circles can store now more elemental energy! (+1,400)</b>");
 	//Gain fatigue.
 	var fatigueAmount:int = 50;
 	if (player.hasPerk(PerkLib.IronMan)) fatigueAmount -= 20;
@@ -1924,7 +1924,7 @@ private function doUpgradeFifthElementalEnergyConduit():void {
 	outputText("You decide to expand your fifth energy conduit in order to store more elementals energy in circle until it will be needed. You draw complicated engraving on prepared stones using liquidified with help of mana elemental shards. Then you place all seven prepared nodes in the fifth circle changing basic one elemental conduit into advanced.");
 	player.addStatusValue(StatusEffects.ElementalEnergyConduits,2,1400);
 	player.addStatusValue(StatusEffects.ElementalEnergyConduits,3,1);
-	outputText(" \"<b>Your arcane circles can store now more elemental energy! (+1,400)</b>\"");
+	outputText("\n\n<b>Your arcane circles can store now more elemental energy! (+1,400)</b>");
 	//Gain fatigue.
 	var fatigueAmount:int = 50;
 	if (player.hasPerk(PerkLib.IronMan)) fatigueAmount -= 20;
@@ -1969,8 +1969,8 @@ private function setUpMagicWard2():void {
 	flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 30;
 	clearOutput();
 	outputText("You flip through the tome, and begin to sketch copies of the required glyphs in the dirt.  Yes, this is definitely possible.  You have something ");
-	if (player.statusEffectv1(StatusEffects.TelAdre) >= 1) outputText("Tel’Adre doesn’t");
-	else outputText("most mages wouldn’t");
+	if (player.statusEffectv1(StatusEffects.TelAdre) >= 1) outputText("Tel’Adre doesn’t;");
+	else outputText("most mages wouldn’t;");
 	outputText(" the portal.  The ambient energy radiating from it could power the ward, as long as you get the web of magic working properly.  It takes hours, a great deal of stress and a lot of channeling to get the stones to their positions, carved into shape and infused with the requisite runes.  ");
 	flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] += 1;
 	if (model.time.hours >= 12) outputText("By the time you’re done, it's already dark.");
@@ -2063,7 +2063,7 @@ private function buildUpWoodDam2():void {
 	flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 250;
 	flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 375;
 	clearOutput();
-	outputText("You get down to work expanding the dam plank by plank starting from sides. At first it goes slowly but you eventualy speed up, to slow down again near end of the work. New taller and wider dam starts to accumulative water to form something between steam and miniature narrow shaped lake.");
+	outputText("You get down to work expanding the dam plank by plank starting from sides. At first it goes slowly but you eventualy speed up, to slow down again near end of the work. New taller and wider dam starts to accumulative water to form something between stream and miniature narrow shaped lake.");
 	flags[kFLAGS.CAMP_UPGRADES_DAM] = 2;
 	//Gain fatigue.
 	var fatigueAmount:int = 400;
@@ -2094,7 +2094,7 @@ private function buildUpMajorWoodDam2():void {
 	flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= 300;
 	flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= 450;
 	clearOutput();
-	outputText("You get down to work on expanding the dam for the second time like the last time putting planks on the sides first. It progress slowly until you put last ones on the top of dam. Tired but satisfied with your work you look how previous widened steam due to higher water accumulation turn into proper miniature yet very narrow mini lake.");
+	outputText("You get down to work on expanding the dam for the second time like the last time putting planks on the sides first. It progress slowly until you put last ones on the top of dam. Tired but satisfied with your work you look how previous widened stream due to higher water accumulation turn into proper miniature yet very narrow mini lake.");
 	flags[kFLAGS.CAMP_UPGRADES_DAM] = 3;
 	//Gain fatigue.
 	var fatigueAmount:int = 600;
@@ -2244,7 +2244,7 @@ public function checkMaterials():void {
 // button 7 - cabin for camp cow-morphs (Marble+Izzy?+Clara?)
 // button 8 - ...
 // button 10 - living place for Kiha+Sophie?+Vapula?
-// button 11 - using wood making small dam on steam near camp to form small pond/pool/mini lake for camp members users - using later stones to make dam better increasing amount of gathered water
+// button 11 - using wood making small dam on stream near camp to form small pond/pool/mini lake for camp members users - using later stones to make dam better increasing amount of gathered water
 // button 12 - ...
 // button 13 - ...
 // button 14 - Back

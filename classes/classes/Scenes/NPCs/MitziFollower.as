@@ -6,7 +6,7 @@ package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.display.SpriteDb;
+import classes.display.SpriteDb;
 	
 	public class MitziFollower extends NPCAwareContent implements TimeAwareInterface
 	{
@@ -126,7 +126,7 @@ public function mitziCamp():void {
 	}
 	if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1) outputText("\"<i>I'm surprised she hasn’t eaten you yet [name]. I've seen a group of those shark girls tear a Minotaur to shreds before. You must really have her under control.</i>\"\n\n");
 	if (player.hasStatusEffect(StatusEffects.CampMarble)) outputText("\"<i>Hmph, that Marble chick almost took my fucking head off when I was still living in the forest with that big ass hammer of hers. I haven't forgotten that…</i>\"\n\n");
-	if (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] < 3) outputText("\"<i>You have a really cute little mouse boy there. Can't say that I'm into that meditation thing he keeps encouraging me to do.</i>\"\n\n");
+	if (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3) outputText("\"<i>You have a really cute little mouse boy there. Can't say that I'm into that meditation thing he keeps encouraging me to do.</i>\"\n\n");
 	if (amilyScene.amilyFollower()) {
 		outputText("\"<i>That Amily girl seems to somewhat know her way around the alchemy table though it's pretty lackluster. Maybe I can help her spice up her poisons a bit. Then the real fun can begin.</i>\"\n\n");
 		outputText("She gives you a devious wink.\n\n");
@@ -310,7 +310,7 @@ private function mitziPreg():void {
 	}
 }
 private function MitziPoopsBabies():void {
-	//spriteSelect(32);
+	//spriteSelect(SpriteDb.s_izma);
 	clearOutput();
 	outputText("As you're strolling through camp, you hear a high pitched squeal catch your attention. You look to see Mitzi doubled over holding her belly. She staggers over to you, clutching her swollen belly with a heavy blush on her face.\n\n");
 	outputText("\"<i>Ooooo [name]! I-It's time! They're coming!</i>\"\n\n");

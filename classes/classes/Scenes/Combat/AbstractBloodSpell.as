@@ -33,7 +33,7 @@ public class AbstractBloodSpell extends AbstractSpell {
 			return "You cannot use blood spells if you not have blood at all.";
 		}
 		if (player.HP - player.minHP() - 1 < hpCost()) {
-			return "YOUr hp is too low to cast this spell."
+			return "Your hp is too low to cast this spell."
 		}
 		
 		return "";

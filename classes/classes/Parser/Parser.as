@@ -774,7 +774,7 @@ public class Parser
          * You pass in the string you want parsed, and the parsed result is returned as a string.
 		 *
          * @param contents String to parse
-         * @param prettyQuotes true to convert "x" to “x” and -- to —
+         * @param prettyQuotes true to convert "x" to \"x\" and -- to —
          * @return Parsed string
          */
 		public static function recursiveParser(contents:String, prettyQuotes:Boolean = true):String

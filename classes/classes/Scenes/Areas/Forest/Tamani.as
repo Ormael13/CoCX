@@ -6,14 +6,14 @@ import classes.BodyParts.Hips;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Monsters.Goblin;
 import classes.Scenes.SceneLib;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
+import classes.Scenes.SceneLib;
 import classes.internals.*;
 
 public class Tamani extends Goblin
 	{
 
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		
+				
 		override protected function goblinTeaseAttack():void
 		{
 			if(flags[kFLAGS.TAMANI_TIMES_HYPNOTISED] > 0) {
@@ -95,8 +95,8 @@ public class Tamani extends Goblin
 				var temp2:Function = null;
 				var temp3:Function = null;
 				if (player.hasCock() && player.cockThatFits(analCapacity()) >= 0) temp = SceneLib.forest.tamaniScene.tamaniAnalShits;
-				if (player.pcCanUseUniqueSexScene()) temp3 = uniquuuesexscene.pcUniqueSexScenesChoiceMenu;
-				//NOT PREGGERS
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(SceneLib.forest.tamaniScene.TamaniDefeated2);
+								//NOT PREGGERS
 				if (!SceneLib.forest.tamaniScene.pregnancy.isPregnant && player.canOvipositSpider()) {
 					temp2 = SceneLib.forest.tamaniScene.tamaniBeaten;
 				}

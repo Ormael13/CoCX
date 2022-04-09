@@ -6,6 +6,7 @@ package classes.Scenes.Places
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.Lake.*;
+import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.Places.Boat.*;
 import classes.Scenes.SceneLib;
 
@@ -28,6 +29,11 @@ public class Boat extends AbstractLakeContent
 		public function boatExplore():void
 		{
 			player.addStatusValue(StatusEffects.BoatDiscovery, 1, 1);
+			//Belisa
+			if (BelisaFollower.BelisaInGame == true && BelisaFollower.BelisaEncounternum == 1) {
+				SceneLib.belisa.secondEncounter();
+				return;
+			}
 			//Helia monogamy fucks
 			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !SceneLib.helScene.followerHel()) {
 				SceneLib.helScene.helSexualAmbush();

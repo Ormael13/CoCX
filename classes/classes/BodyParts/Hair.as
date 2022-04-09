@@ -245,6 +245,11 @@ public class Hair extends BodyPart {
 		adjective: "long fourwind"
 	});
 
+	public static const TAURPONYTAIL:int  = 9;
+	EnumValue.add(Styles, TAURPONYTAIL, "TAURPONYTAIL", {
+		adjective: "centaur ponytail"
+	});
+
 
 	public var color:String = "no";
 	public var length:Number = 0.0;
@@ -342,9 +347,7 @@ public class Hair extends BodyPart {
 
 	public static function getHairLength (creature: *): String {
 		var options:Array;
-		var hairscale:Number;
-
-		hairscale = int((creature.hairLength/creature.tallness)*100)/100
+		var hairscale:Number = creature.hairLength / creature.tallness;
 		if (hairscale == 0) {
 			options = ["shaved", "bald", "smooth", "hairless", "glabrous"];
 			return randomChoice(options);

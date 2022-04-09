@@ -15,6 +15,7 @@ import classes.Items.Consumables.SimpleConsumable;
 import classes.Scenes.Areas.Forest.WoodElvesHuntingParty;
 import classes.Scenes.Areas.HighMountains.TempleOfTheDivine;
 import classes.Scenes.Places.Mindbreaker;
+import classes.Scenes.Places.TrollVillage;
 import classes.Scenes.Places.WoodElves;
 import classes.Scenes.Camp.*;
 import classes.Scenes.Dungeons.*;
@@ -49,20 +50,8 @@ public class Camp extends NPCAwareContent{
 		return SceneLib.inventory.hasItemInStorage(itype);
 	}
 
-	/*
-		protected function hasItemsInStorage():Boolean
-		{
-			return CoC.instance.inventory.hasItemsInStorage();
-		}
-		protected function hasItemsInRacks(armor:Boolean = false):Boolean
-		{
-			return CoC.instance.inventory.hasItemsInRacks(type);
-		}
-*/
-
-	public function Camp(/*campInitialize:Function*/) {
+	public function Camp() {
 		EventParser.doCamp = doCamp;
-		//campInitialize(doCamp); //Pass the doCamp function up to CoC. This way doCamp is private but the CoC class itself can call it.
 	}
 
 	public var cabinProgress:CabinProgress = new CabinProgress();
@@ -73,15 +62,6 @@ public class Camp extends NPCAwareContent{
 	public var codex:Codex = new Codex();
 	public var questlog:Questlog = new Questlog();
 	public var soulforce:Soulforce = new Soulforce();
-	public var dungeon1:Factory = new Factory();
-	public var dungeon2:DeepCave = new DeepCave();
-	public var dungeonS:DesertCave = new DesertCave();
-	public var dungeonH:HelDungeon = new HelDungeon();
-	public var dungeonHC:HiddenCave = new HiddenCave();
-	public var dungeonDD:DenOfDesire = new DenOfDesire();
-	public var dungeonAP:AnzuPalace = new AnzuPalace();
-	public var dungeonEL:EbonLabyrinth = new EbonLabyrinth();
-	public var dungeonBH:BeeHive = new BeeHive();
 	public var Magnolia:MagnoliaFollower = new MagnoliaFollower();
 	public var HolliPure:HolliPureScene = new HolliPureScene();
 	public var templeofdivine:TempleOfTheDivine = new TempleOfTheDivine();
@@ -100,12 +80,6 @@ public class Camp extends NPCAwareContent{
 		}
 	}
 
-	/* Replaced with calls to playerMenu
-		public function campMenu():void {
-			CoC.instance.playerMenu();
-		}
-*/
-
 	public function campAfterMigration():void {
 		clearOutput();
 		doCamp();
@@ -116,7 +90,7 @@ public class Camp extends NPCAwareContent{
 		if (timeUsed == 1)
 			outputText("An hour passes...\n");
 		else outputText(Num2Text(timeUsed) + " hours pass...\n");
-		if (!CoC.instance.inCombat) spriteSelect(-1);
+		if (!CoC.instance.inCombat) spriteSelect(null);
 		hideMenus();
 		timeQ = timeUsed;
 		goNext(false);
@@ -150,8 +124,6 @@ public class Camp extends NPCAwareContent{
 	public function returnToCampUseSixteenHours():void {
 		returnToCamp(16);
 	}
-
-//  SLEEP_WITH:int = 701;
 
 	//Used to determine scenes if you choose to play joke on them. Should the variables be moved to flags?
 	protected var izmaJoinsStream:Boolean;
@@ -195,14 +167,7 @@ public class Camp extends NPCAwareContent{
 			HPChange(Math.round(player.maxHP() / 2), false);
 			player.removeStatusEffect(StatusEffects.PostAnemoneBeatdown);
 		}
-		/* Can't happen - playerMenu will call dungeon appropriate menu instead of doCamp while inDungeon is true
-	if (CoC.instance.inDungeon) {
-		mainView.showMenuButton( MainView.MENU_DATA );
-		mainView.showMenuButton( MainView.MENU_APPEARANCE );
-		CoC.instance.playerMenu();
-		return;
-	}
-*/
+        
 		//Clear out Izma's saved loot status
 		flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = "";
 		//History perk backup
@@ -228,12 +193,26 @@ public class Camp extends NPCAwareContent{
 			campUniqueScenes.playsRathazulAndSoulgemScene();
 			return;
 		}
-		if (!marbleScene.marbleFollower()) {
-			if (flags[kFLAGS.MARBLE_LEFT_OVER_CORRUPTION] == 1 && player.cor <= 40) {
-				hideMenus();
-				marblePurification.pureMarbleDecidesToBeLessOfABitch();
-				return;
-			}
+		if (TrollVillage.ZenjiVillageStage == 2 && TrollVillage.ZenjiTrollVillageTimeChk == time.days && time.hours >= 8) {
+			hideMenus();
+			SceneLib.trollVillage.yenza.YenzaBeratePart2();
+			return;
+		}
+		if (flags[kFLAGS.ZENJI_PROGRESS] >= 11 && time.days != ZenjiScenes.ZenjiLoverDaysTracker){
+			ZenjiScenes.ZenjiLoverDays++;
+			ZenjiScenes.ZenjiLoverDaysTracker = time.days;
+		}
+		if (TrollVillage.ZenjiMoneyHelp > 0) TrollVillage.ZenjiMoneyHelp -= 1;
+		if (!marbleScene.marbleFollower() && flags[kFLAGS.MARBLE_LEFT_OVER_CORRUPTION] == 1/* && player.cor <= 40*/) { //Removed the check to make her return to everyone
+			hideMenus();
+			marblePurification.pureMarbleDecidesToBeLessOfABitch();
+			return;
+		}
+		if ((model.time.hours >= 7 && model.time.hours <= 9) && TyrantiaFollower.TyrantiaFollowerStage >= 4 && BelisaFollower.BelisaFollowerStage >= 5 && BelisaFollower.BelisaEncounternum >= 5 && BelisaFollower.BelisaAffectionMeter >= 80 && !BelisaFollower.BelisaConfessed) {
+			SceneLib.belisa.BelisaConfession();
+		}
+		if ((model.time.hours >= 7 && model.time.hours <= 9) && TyrantiaFollower.TyrantiaFollowerStage >= 4 && BelisaFollower.BelisaFollowerStage >= 4 && BelisaFollower.BelisaEncounternum < 5) {
+			SceneLib.belisa.BelisaAndTyrantia();
 		}
 		if (marbleScene.marbleFollower()) {
 			//Cor < 50
@@ -246,6 +225,7 @@ public class Camp extends NPCAwareContent{
 				marblePurification.BLUHBLUH();
 				return;
 			}
+            /* Marble flipouts are disabled because they made no sense
 			if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] >= 5) {
 				if (flags[kFLAGS.MARBLE_WARNED_ABOUT_CORRUPTION] == 0 && player.cor >= 50 + player.corruptionTolerance()) {
 					hideMenus();
@@ -258,6 +238,7 @@ public class Camp extends NPCAwareContent{
 					return;
 				}
 			}
+            */
 			if (flags[kFLAGS.MARBLE_RATHAZUL_COUNTER_1] == 1 && (time.hours == 6 || time.hours == 7)) {
 				hideMenus();
 				marblePurification.rathazulsMurbelReport();
@@ -284,10 +265,14 @@ public class Camp extends NPCAwareContent{
 			arianScene.arianLaysEggs();
 			return;
 		}
-		if (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3 && flags[kFLAGS.JOY_NIGHT_FUCK] == 1) {
+		if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3 && flags[kFLAGS.JOY_NIGHT_FUCK] == 1) {
 			joyScene.wakeUpWithJoyPostFuck();
 			return;
 		}
+        if (flags[kFLAGS.JOJO_BIMBO_STATE] == 4 && flags[kFLAGS.TALKED_TO_JOJO_ABOUT_JOY] == 0) { //post-debimbo conversation
+            jojoScene.afterDebimboTalk();
+            return;
+        }
 		if (flags[kFLAGS.EMBER_MORNING] > 0 && ((flags[kFLAGS.BENOIT_CLOCK_BOUGHT] > 0 && model.time.hours >= flags[kFLAGS.BENOIT_CLOCK_ALARM]) || (flags[kFLAGS.BENOIT_CLOCK_BOUGHT] <= 0 && model.time.hours >= 6))) {
 			hideMenus();
 			emberScene.postEmberSleep();
@@ -490,7 +475,7 @@ public class Camp extends NPCAwareContent{
 			}
 		}
 		//Jojo treeflips!
-		if (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4 && flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] < 3) {
+		if (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 4 && flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3) {
 			holliScene.JojoTransformAndRollOut();
 			hideMenus();
 			return;
@@ -554,17 +539,18 @@ public class Camp extends NPCAwareContent{
 			SceneLib.excelliaFollower.ExcelliaAndJojoCampScene();
 			return;
 		}
-		//Rathazul april fool
-		if (isAprilFools() && player.hasStatusEffect(StatusEffects.CampRathazul) && rand(5) == 0) {
-			if (player.hasStatusEffect(StatusEffects.RathazulAprilFool) && player.statusEffectv2(StatusEffects.RathazulAprilFool) < 5) {
-				if (player.statusEffectv3(StatusEffects.RathazulAprilFool) == 1) SceneLib.rathazul.rathazulAprilFoolPart3();
-				if (date.fullYear > player.statusEffectv1(StatusEffects.RathazulAprilFool)) SceneLib.rathazul.rathazulAprilFool();
-				return;
-			} else if (!player.hasStatusEffect(StatusEffects.RathazulAprilFool)) {
-				SceneLib.rathazul.rathazulAprilFool();
-				return;
-			}
-		}
+		/*Rathazul april fool:
+            - aprel fools, no effect, OR max stage and a year passed since the beginning, BUT limited at 5 elixirs
+            - second stage. No checking for fools.
+        */
+        if (player.hasStatusEffect(StatusEffects.CampRathazul) && isAprilFools() && (!player.hasStatusEffect(StatusEffects.RathazulAprilFool) ||
+        player.statusEffectv3(StatusEffects.RathazulAprilFool) == 2
+        && player.statusEffectv2(StatusEffects.RathazulAprilFool) < 5
+        && date.fullYear > player.statusEffectv1(StatusEffects.RathazulAprilFool))) {
+            SceneLib.rathazul.rathazulAprilFool();
+            hideMenus();
+            return;
+        }
 		//Cotton preg freakout
 		if (player.pregnancyIncubation <= 280 && player.pregnancyType == PregnancyStore.PREGNANCY_COTTON &&
 				flags[kFLAGS.COTTON_KNOCKED_UP_PC_AND_TALK_HAPPENED] == 0 && (model.time.hours == 6 || model.time.hours == 7)) {
@@ -579,7 +565,7 @@ public class Camp extends NPCAwareContent{
 			return;
 		}
 		//Amily + Urta freakout!
-		if (!SceneLib.urtaQuest.urtaBusy() && flags[kFLAGS.AMILY_VISITING_URTA] == 0 && rand(10) == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00146] >= 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00147] == 0 && flags[kFLAGS.AMILY_NEED_TO_FREAK_ABOUT_URTA] == 1 && amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1 && !amilyScene.pregnancy.isPregnant) {
+		if (!SceneLib.urtaQuest.urtaBusy() && flags[kFLAGS.AMILY_VISITING_URTA] == 0 && rand(10) == 0 && flags[kFLAGS.URTA_DRINK_TOOGLE] >= 0 && flags[kFLAGS.URTA_NO_MORE_SCYLLA] == 0 && flags[kFLAGS.AMILY_NEED_TO_FREAK_ABOUT_URTA] == 1 && amilyScene.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1 && !amilyScene.pregnancy.isPregnant) {
 			finter.amilyUrtaReaction();
 			hideMenus();
 			return;
@@ -603,7 +589,7 @@ public class Camp extends NPCAwareContent{
 			return;
 		}
 		//Joy gives birth!
-		if (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3 && jojoScene.pregnancy.type == PregnancyStore.PREGNANCY_PLAYER && jojoScene.pregnancy.incubation == 0) {
+		if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3 && jojoScene.pregnancy.type == PregnancyStore.PREGNANCY_PLAYER && jojoScene.pregnancy.incubation == 0) {
 			joyScene.joyGivesBirth();
 			return;
 		}
@@ -731,28 +717,28 @@ public class Camp extends NPCAwareContent{
 				outputText("set up perfectly, and in good repair.  ");
 			}
 		}
-		if (model.time.days >= 20) outputText("You've even managed to carve some artwork into the rocks around the [camp]'s perimeter.\n\n");
-		if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 7) outputText("There's an unfinished wooden structure. As of right now, it's just frames nailed together.\n\n");
-		if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 8) outputText("There's an unfinished cabin. It's currently missing windows and door.\n\n");
-		if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 9) outputText("There's a nearly-finished cabin. It looks complete from the outside but inside, it's missing flooring.\n\n");
+		if (model.time.days >= 20) outputText("You've even managed to carve some artwork into the rocks around the [camp] perimeter.\n\n");
+		if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 7) outputText("There's an unfinished wooden structure. As of right now, it's little more than wooden frames nailed together.\n\n");
+		if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 8) outputText("There's an unfinished cabin. It's currently missing both windows and a door.\n\n");
+		if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 9) outputText("There's a nearly-finished cabin. It looks complete from the outside, but inside, the floors are still bare earth.\n\n");
 		if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 10) outputText("Your cabin is situated near the edge of [camp].\n\n");
-		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 0 || flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 1) outputText("In the middle of the distance between portal and [camp] edge is set place where you will store piles of wood or stones used for constructions. ");
-		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 3) outputText("In the middle of the distance between portal and [camp] edge is a medium sized wood platform, which you use to store wood and next to it is place for storing stones. ");
-		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) outputText("In the middle of the distance between portal and [camp] edge is a long and wide wood platform with protective barriers at the three sided of it. Inside of it you could safely store large amounts of wood and stone. ");
+		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 0 || flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 1) outputText("Halfway between portal and [camp] edge is set place where you will store piles of wood or stones used for constructions. ");
+		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] == 3) outputText("Halfway between portal and [camp] edge rests a medium sized wood platform, which you use to store wood and next to it is place for storing stones. ");
+		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) outputText("Halfway between portal and [camp] edge rests a long and wide wood platform with protective barriers at the edges. Inside it, you can safely store large amounts of wood and stone. ");
 		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 1) outputText("There's a half finished warehouse construction near the east edge of your campsite.\n\n");
-		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 2) outputText("There's warehouse located in the east section of your campsite.\n\n");
-		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 3) outputText("There's warehouse and connected to it half finished granary construction located in the east section of your campsite.\n\n");
-		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 4) outputText("There's warehouse and connected to it granary located in the east section of your campsite.\n\n");
-		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 5) outputText("There's warehouse and second one warehouse half finished construction connected by granary located in the east section of your campsite.\n\n");
-		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 6) outputText("There's two warehouses and granary connecting them located in the east section of your campsite.\n\n");
+		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 2) outputText("There's a warehouse located in the east section of your campsite.\n\n");
+		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 3) outputText("There's a warehouse and connected to it half finished granary construction located in the east section of your campsite.\n\n");
+		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 4) outputText("There's a warehouse and connected to it granary located in the east section of your campsite.\n\n");
+		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 5) outputText("There's a warehouse and second one warehouse half finished construction connected by granary located in the east section of your campsite.\n\n");
+		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 6) outputText("There are two warehouses and granary connecting them located in the east section of your campsite.\n\n");
 		if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) {
-			outputText("Some of your friends are currently sparring on ");
+			outputText("Some of your friends are currently sparring at the ");
 			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 4) outputText("massive");
 			else if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] == 3) outputText("large");
 			else outputText("small");
-			outputText(" ring at the side of your [camp].");
-			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 3) outputText(" Due to large enough space even largest people living in [camp] can freely spar.");
-			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 4) outputText(" On one sides of it there is small stand to let others spectacle fight on the ring with more comofrt.");
+			outputText(" ring toward side of your [camp].");
+			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 3) outputText(" Given how large the sparring ring, maybe it's a little excessive for even the largest of people around..");
+			if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 4) outputText(" A small stand rests adjacent, allowing spectators to cheer on any duels taking place.");
 			outputText("\n\n");
 		}
 		if (flags[kFLAGS.CAMP_UPGRADES_ARCANE_CIRCLE] >= 1) {
@@ -767,9 +753,9 @@ public class Camp extends NPCAwareContent{
 			outputText(" written at the edge of your [camp]. Their runes regularly glow with impulse of power.\n\n");
 		}
 		if (flags[kFLAGS.CAMP_UPGRADES_DAM] >= 1) {
-			if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 3) outputText("A big wooden dam increase the width of the nearby stream up to the point of creating very narrow miniature lake");
-			else if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 2) outputText("A woden dam help increase noticably the width of the nearby stream slowing the passage of water");
-			else outputText("A small wooden dam help increase the width of the nearby stream slowing the passage of water");
+			if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 3) outputText("A big, wooden dam noticably increases the width of the nearby stream, slowing the water to a near still. It's created a small bay next to camp.");
+			else if (flags[kFLAGS.CAMP_UPGRADES_DAM] == 2) outputText("A wooden dam noticably increases the width of the nearby stream, slowing the passage of water");
+			else outputText("A small wooden dam drapes across the stream, slowing the passage of water");
 			outputText(".\n\n");
 		}
 		if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] >= 1) {
@@ -778,10 +764,10 @@ public class Camp extends NPCAwareContent{
 			if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] == 2) outputText("medium-sized");
 			if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] == 3) outputText("big");
 			if (flags[kFLAGS.CAMP_UPGRADES_FISHERY] == 4) outputText("large");
-			outputText(" fishery. You can see several barrel possibly full of freshly caught fish next to it.\n\n");
+			outputText(" fishery. You can see several barrels at its side to store any fish that are caught.\n\n");
 		}
 		if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] >= 2 && flags[kFLAGS.CHRISTMAS_TREE_LEVEL] < 8) {
-			if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 2) outputText("At the corner of camp where you planted a seed, sapling has grown. It has dozens of branches and bright green leaves.\n\n");
+			if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 2) outputText("At the corner of camp where you planted a seed, a sapling has grown. It has dozens of branches and bright green leaves.\n\n");
 			else if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 3) outputText("At the corner of camp, the tree like sapling has grown bigger having grown more branches and leaves.\n\n");
 			else if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 4) outputText("At the corner of camp, a small tree has grown. The bright green leaves gently sway with the blowing wind.\n\n");
 			else outputText("At the corner of camp sits a rather large tree. It's leafy canopy sways with the wind and the thick trunk is covered in sturdy bark." + (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 7 ? " The tree is covered in colorful ornaments and lights for the season." : "") + "\n\n");
@@ -801,7 +787,7 @@ public class Camp extends NPCAwareContent{
 			//Rookery Descriptions (Short)
 			//Small (1 mature daughter)
 			if (flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] == 1) {
-				outputText("There's a smallish harpy nest that your daughter has built up with rocks piled high near the fringes of your [camp].  It's kind of pathetic, but she seems proud of her accomplishment.  ");
+				outputText("There's a small harpy nest that your daughter has built up, made from rocks near the fringes of your [camp].  It's kind of pathetic, but she seems proud of her accomplishment.  ");
 			}
 			//Medium (2-3 mature daughters)
 			else if (flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] <= 3) {
@@ -833,30 +819,29 @@ public class Camp extends NPCAwareContent{
 		if (player.hasStatusEffect(StatusEffects.DefenseCanopy)) {
 			outputText("A thorny tree has sprouted near the center of the [camp], growing a protective canopy of spiky vines around the portal and your [camp].  ");
 		}
+        //Wall
 		if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 10 && flags[kFLAGS.CAMP_WALL_PROGRESS] < 100) {
-			if (flags[kFLAGS.CAMP_WALL_PROGRESS] / 10 == 1) outputText("A thick wooden wall has been erected to provide a small amount of defense.  ");
-			else outputText("Thick wooden walls have been erected to provide some defense.  ");
-			if (flags[kFLAGS.CAMP_WALL_SKULLS] == 1) outputText("A single imp skull has been mounted on the wall segments");
-			else if (flags[kFLAGS.CAMP_WALL_SKULLS] >= 2 && flags[kFLAGS.CAMP_WALL_SKULLS] < 5) outputText("Few imp skulls have been mounted on the wall segments");
-			else if (flags[kFLAGS.CAMP_WALL_SKULLS] >= 5 && flags[kFLAGS.CAMP_WALL_SKULLS] < 15) outputText("Several imp skulls have been mounted on the wall segments");
-			else outputText("Many imp skulls decorate the wall, some even impaled on wooden spikes");
-			outputText(" to serve as deterrence.  ");
-			if (flags[kFLAGS.CAMP_WALL_SKULLS] == 1) outputText("There is currently one skull.  ");
-			else outputText("There are currently " + num2Text(flags[kFLAGS.CAMP_WALL_SKULLS]) + " skulls.  ");
+			if (flags[kFLAGS.CAMP_WALL_PROGRESS] / 10 == 1) outputText("A thick wooden wall has been erected. Incomplete as it is, it provides only a small amount of defense.  ");
+			else outputText("Thick wooden walls have been erected around your camp.  ");
 		} else if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100) {
-			outputText("Thick wooden walls have been erected; they surround one half of your [camp] perimeter and provide good defense, leaving the another half open for access to the stream.  ");
+			outputText("Thick wooden walls have been erected; they surround half of your [camp] perimeter and provide sound defense, leaving the the open half for access to the stream.  ");
 			if (flags[kFLAGS.CAMP_WALL_GATE] > 0) outputText("A gate has been constructed in the middle of the walls; it gets closed at night to keep any invaders out.  ");
-			if (flags[kFLAGS.CAMP_WALL_SKULLS] > 0) {
-				if (flags[kFLAGS.CAMP_WALL_SKULLS] == 1) outputText("A single imp skull has been mounted near the gateway");
-				else if (flags[kFLAGS.CAMP_WALL_SKULLS] >= 2 && flags[kFLAGS.CAMP_WALL_SKULLS] < 5) outputText("Few imp skulls have been mounted near the gateway");
-				else if (flags[kFLAGS.CAMP_WALL_SKULLS] >= 5 && flags[kFLAGS.CAMP_WALL_SKULLS] < 15) outputText("Several imp skulls have been mounted near the gateway");
-				else outputText("Many imp skulls decorate the gateway and wall, some even impaled on wooden spikes");
-				outputText(" to serve as deterrence.  ");
-				if (flags[kFLAGS.CAMP_WALL_SKULLS] == 1) outputText("There is currently one skull.  ");
-				else outputText("There are currently " + num2Text(flags[kFLAGS.CAMP_WALL_SKULLS]) + " skulls.  ");
-			}
-			outputText("\n\n");
 		}
+        //Imp Skulls
+        if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 10 && flags[kFLAGS.CAMP_WALL_SKULLS] > 0) {
+            if (flags[kFLAGS.CAMP_WALL_SKULLS] == 1)
+                outputText("A single imp skull has been mounted " + (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100 ? "near the gateway" : "on the wall segments"));
+            else if (flags[kFLAGS.CAMP_WALL_SKULLS] >= 2 && flags[kFLAGS.CAMP_WALL_SKULLS] < 5)
+                outputText("Few imp skulls have been mounted " + (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100 ? "near the gateway" : "on the wall segments"));
+            else if (flags[kFLAGS.CAMP_WALL_SKULLS] >= 5 && flags[kFLAGS.CAMP_WALL_SKULLS] < 15)
+                outputText("Several imp skulls have been mounted " + (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100 ? "near the gateway" : "on the wall segments"));
+            else
+                outputText("Innumerable imp skulls decorate the " + (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100 ? "gateway and " : "") + "wall, some are even impaled on wooden spikes");
+            outputText(" to serve as a deterrence.  ");
+            if (flags[kFLAGS.CAMP_WALL_SKULLS] == 1) outputText("There is currently one skull.  ");
+            else outputText("There are currently " + num2Text(flags[kFLAGS.CAMP_WALL_SKULLS]) + " skulls.  ");
+        }
+			outputText("\n\n");
 		//Magic Ward
 		if (flags[kFLAGS.CAMP_UPGRADES_MAGIC_WARD] >= 2) {
 			if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 100) outputText("Just within the wall are the");
@@ -960,7 +945,7 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.CAMP_CABIN_PROGRESS] <= 0 && model.time.days >= 7) {
 			flags[kFLAGS.CAMP_CABIN_PROGRESS] = 1;
 			clearOutput();
-			outputText("You realize that you have spent week sleeping in tent every night. You think of something so you can sleep nicely and comfortably. Perhaps a cabin will suffice?");
+			outputText("You realize that you have spent a whole week sleeping in tent every night. You need to make something so you can sleep better, long-term. Perhaps a cabin will suffice?");
 			doNext(playerMenu);
 			return;
 		}
@@ -999,6 +984,7 @@ public class Camp extends NPCAwareContent{
 				}
 			}
 			flags[kFLAGS.PLAYER_DISARMED_WEAPON_ID] = 0;
+			flags[kFLAGS.PLAYER_DISARMED_WEAPON_R_ID] = 0;
 		}
 
 		//Menu
@@ -1008,20 +994,20 @@ public class Camp extends NPCAwareContent{
 		addButton(1, "Places", placesEvent).hint("Visit any places you have discovered so far.");
 		addButton(2, "Inventory", inventory.inventoryMenu).hint("The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.");
 		if (inventory.showStash()) addButton(3, "Stash", inventory.stash).hint("The stash allows you to store your items safely until you need them later.");
-		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] >= 2) addButton(4, "Warehouse", inventory.warehouse).hint("The warehouse and granary allows you to store your items in larger amounts and more organized way than stash before.");
+		if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] >= 2) addButton(4, "Warehouse", inventory.warehouse).hint("The warehouse and granary allow you to store your items in a more organized manner.");
 		if (followersCount() > 0) addButton(5, "Followers", campFollowers).hint("Check up on any followers or companions who are joining you in or around your [camp].  You'll probably just end up sleeping with them.");
-		if (loversCount() > 0) addButton(6, "Lovers", campLoversMenu).hint("Check up on any lovers you have invited so far to your [camp] and interact with them.");
+		if (loversCount() > 0) addButton(6, "Lovers", campLoversMenu).hint("Check up on any lovers you have invited to your [camp] so far and interact with them.");
 		if (slavesCount() > 0) addButton(7, "Slaves", campSlavesMenu).hint("Check up on any slaves you have received and interact with them.");
-		addButton(8, "Camp Actions", campActions).hint("Interact with the [camp] surroundings and also read your codex or questlog.");
+		addButton(8, "Camp Actions", campActions).hint("Read your codex, questlog or interact with the [camp] surroundings.");
 		if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 10 || flags[kFLAGS.CAMP_BUILT_CABIN] >= 1) addButton(9, "Enter Cabin", cabinProgress.initiateCabin).hint("Enter your cabin."); //Enter cabin for furnish.
-		if (player.hasPerk(PerkLib.JobSoulCultivator) || debug) addButton(10, "Soulforce", soulforce.accessSoulforceMenu).hint("Spend some time on the cultivation or spend some of the soulforce.");
+		if (player.hasPerk(PerkLib.JobSoulCultivator) || debug) addButton(10, "Soulforce", soulforce.accessSoulforceMenu).hint("Spend some time on the cultivation, or spend some of the soulforce.");
 		else if (!player.hasPerk(PerkLib.JobSoulCultivator) && player.hasPerk(PerkLib.Metamorph)) addButton(10, "Metamorph", SceneLib.metamorph.openMetamorph).hint("Use your soulforce to mold your body.");
 		var canFap:Boolean = !player.hasStatusEffect(StatusEffects.Dysfunction) && (flags[kFLAGS.UNABLE_TO_MASTURBATE_BECAUSE_CENTAUR] == 0 && !player.isTaur());
 		if (player.lust >= 30) {
 			addButton(11, "Masturbate", SceneLib.masturbation.masturbateMenu);
 			if ((((player.hasPerk(PerkLib.HistoryReligious) || player.hasPerk(PerkLib.PastLifeReligious)) && player.cor <= 66) || (player.hasPerk(PerkLib.Enlightened) && player.cor < 10)) && !(player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0) || flags[kFLAGS.SFW_MODE] >= 1) addButton(11, "Meditate", SceneLib.masturbation.masturbateMenu);
 		}
-		addButton(12, "Wait", doWaitMenu).hint("Wait for one to eigth hours. Or until the night comes.");
+		addButton(12, "Wait", doWaitMenu).hint("Wait for one to eight hours. Or until the night comes.");
 		if (player.fatigue > 40 || player.HP / player.maxHP() <= .9) addButton(12, "Rest", restMenu).hint("Rest for one to eight hours. Or until fully healed / night comes.");
 		if(((model.time.hours <= 5 || model.time.hours >= 21) && !canExploreAtNight) || (!isNightTime && canExploreAtNight)) {
 			addButton(12, "Sleep", doSleep).hint("Turn yourself in for the night.");
@@ -1151,9 +1137,12 @@ public class Camp extends NPCAwareContent{
 		var counter:Number = 0;
 		if (flags[kFLAGS.ALVINA_FOLLOWER] > 19) counter++;
 		if (arianScene.arianFollower()) counter++;
+		if (BelisaFollower.BelisaInCamp) counter++;
+		if (LilyFollower.LilyFollowerState) counter++;
+		if (TyrantiaFollower.TyrantiaFollowerStage >= 4) counter++;
 		if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2 && flags[kFLAGS.CHI_CHI_FOLLOWER] != 5 && !player.hasStatusEffect(StatusEffects.ChiChiOff)) counter++;
 		if (flags[kFLAGS.CEANI_FOLLOWER] > 0) counter++;
-		if (flags[kFLAGS.DIANA_FOLLOWER] > 5 && !player.hasStatusEffect(StatusEffects.DianaOff)) counter++;
+		if (flags[kFLAGS.DIANA_FOLLOWER] >= 6 && !player.hasStatusEffect(StatusEffects.DianaOff)) counter++;
 		if (flags[kFLAGS.ELECTRA_FOLLOWER] > 1 && !player.hasStatusEffect(StatusEffects.ElectraOff)) counter++;
 		if (flags[kFLAGS.ETNA_FOLLOWER] > 0 && !player.hasStatusEffect(StatusEffects.EtnaOff)) counter++;
 		if (flags[kFLAGS.EXCELLIA_RECRUITED] >= 33) counter++;
@@ -1179,12 +1168,15 @@ public class Camp extends NPCAwareContent{
 	public function loversHotBathCount():Number {
 		var counter:Number = 0;
 		if (flags[kFLAGS.ALVINA_FOLLOWER] > 12) counter++;
+		//if (BelisaFollower.BelisaInCamp) counter++;
+		//if (LilyFollower.LilyFollowerState) counter++;
+		//if (TyrantiaFollower.TyrantiaFollowerStage >= 4) counter++;
 		if (emberScene.followerEmber()) counter++;
 		if (sophieFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) counter++;
 		if (flags[kFLAGS.AYANE_FOLLOWER] >= 2) counter++;
 		if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 2 && flags[kFLAGS.CHI_CHI_FOLLOWER] != 5 && !player.hasStatusEffect(StatusEffects.ChiChiOff)) counter++;
 		if (flags[kFLAGS.CEANI_FOLLOWER] > 0) counter++;
-		if (flags[kFLAGS.DIANA_FOLLOWER] > 5 && !player.hasStatusEffect(StatusEffects.DianaOff)) counter++;
+		if (flags[kFLAGS.DIANA_FOLLOWER] >= 6 && !player.hasStatusEffect(StatusEffects.DianaOff)) counter++;
 		if (flags[kFLAGS.ELECTRA_FOLLOWER] > 1 && !player.hasStatusEffect(StatusEffects.ElectraOff)) counter++;
 		if (flags[kFLAGS.ETNA_FOLLOWER] > 0 && !player.hasStatusEffect(StatusEffects.EtnaOff)) counter++;
 		if (flags[kFLAGS.LUNA_FOLLOWER] >= 4 && !player.hasStatusEffect(StatusEffects.LunaOff)) counter++;
@@ -1209,7 +1201,7 @@ public class Camp extends NPCAwareContent{
 
 	public function maleNpcsHotBathCount():Number {
 		var counter:Number = 0;
-		if (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] < 3) counter++;
+		if (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3) counter++;
 		if (player.hasStatusEffect(StatusEffects.CampRathazul)) counter++;
 		if (arianScene.arianFollower() && flags[kFLAGS.ARIAN_VAGINA] < 1 && flags[kFLAGS.ARIAN_COCK_SIZE] > 0) counter++;
 		if (flags[kFLAGS.IZMA_BROFIED] == 1) counter++;
@@ -1266,7 +1258,7 @@ public class Camp extends NPCAwareContent{
 		var buttons:ButtonDataList = new ButtonDataList();
 		if (!descOnly) {
 			hideMenus();
-			spriteSelect(-1);
+			spriteSelect(null);
 			clearOutput();
 			CoC.instance.inCombat = false;
 			menu();
@@ -1322,6 +1314,11 @@ public class Camp extends NPCAwareContent{
 				outputText("Arian's tent is here, if you'd like to go inside.\n\n");
 				buttons.add("Arian", arianScene.visitAriansHouse);
 			}
+			//Belisa
+			if (BelisaFollower.BelisaInCamp) {
+				outputText("On the water, Belisa anchored her silk dome. However, since you’ve seen it, the dwelling has changed. Instead of a fully submerged bubble-like structure, it’s got a silky curtain for a door, and a solid wooden dock’s been added to anchor the odd building to the ground. Outside the dwelling, a small stall’s been set up, and Belisa’s wares are on display.\n\n");
+				buttons.add("Belisa", SceneLib.belisa.BelisaMainCampMenu).hint("Visit Belisa.");
+			}
 			//Cai'Lin
 //	buttons.add("???").disable("Look into my eyes and answer me: Am I beautiful?");
 			//Ceani
@@ -1336,7 +1333,7 @@ public class Camp extends NPCAwareContent{
 				else buttons.add("Chi Chi", SceneLib.chichiScene.ChiChiCampMainMenu2).disableIf(player.statusEffectv2(StatusEffects.CampSparingNpcsTimers2) > 0, "Training.");
 			}
 			//Diana
-			if (flags[kFLAGS.DIANA_FOLLOWER] > 5 && !player.hasStatusEffect(StatusEffects.DianaOff)) {
+			if (flags[kFLAGS.DIANA_FOLLOWER] >= 6 && !player.hasStatusEffect(StatusEffects.DianaOff)) {
 				outputText("Diana is resting next to her many medical tools and medicines.\n\n");
 				buttons.add("Diana", SceneLib.dianaScene.mainCampMenu).disableIf(player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) > 0, "Training.");
 			}
@@ -1458,7 +1455,7 @@ public class Camp extends NPCAwareContent{
 					outputText("\n\n");
 					buttons.add("Izmael", izmaScene.izmaelScene.izmaelMenu);
 				} else {
-					outputText("Neatly laid near the base of your own is a worn bedroll belonging to Izma, your tigershark lover. It's a snug fit for her toned body, though it has some noticeable cuts and tears in the fabric. Close to her bed is her old trunk, almost as if she wants to have it at arms length if anyone tries to rob her in her sleep.\n\n");
+					outputText("Neatly laid near the base of your own is a worn bedroll belonging to Izma, your tigershark lover. It's a snug fit for her toned body, though it has some noticeable cuts and tears in the fabric. Close to her bed is her old trunk, almost as if she wants to have it at arms length if anyone tries to rob her in her sleep. ");
 					switch (rand(3)) {
 						case 0:
 							outputText("Izma's lazily sitting on the trunk beside her bedroll, reading one of the many books from inside it. She smiles happily when your eyes linger on her, and you know full well she's only half-interested in it.");
@@ -1498,9 +1495,14 @@ public class Camp extends NPCAwareContent{
 				if (player.statusEffectv3(StatusEffects.CampLunaMishaps1) > 0) buttons.add("Kiha", kihaScene.encounterKiha2).disableIf(player.statusEffectv3(StatusEffects.CampLunaMishaps1) > 0, "Cleaning burnt meat.");
 				else buttons.add("Kiha", kihaScene.encounterKiha2).disableIf(player.statusEffectv3(StatusEffects.CampSparingNpcsTimers1) > 0, "Training.");
 			}
+			//Lily
+			if (LilyFollower.LilyFollowerState) {
+				outputText("A line of targets have been set up along the river and a small house of silk has been constructed in one of the trees. You hear the occasional whizz of arrows, or rustling in the trees.\n\n");
+				buttons.add("Lily", SceneLib.lily.LilyCampFollower).hint("Visit Lily.");
+			}
 			//MARBLE
 			if (player.hasStatusEffect(StatusEffects.CampMarble) && flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] == 0) {
-				outputText("A second bedroll rests next to yours; a large two handed hammer sometimes rests against it, depending on whether or not its owner needs it at the time.  ");
+				outputText((flags[kFLAGS.CAMP_BUILT_CABIN] > 0 ? "A bedroll rests next to your cabin" : "A second bedroll rests next to yours") + "; a large two handed hammer sometimes rests against it, depending on whether or not its owner needs it at the time.  ");
 				//Normal Murbles
 				if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] == 4) outputText("Marble isn’t here right now; she’s still off to see her family.");
 				//requires at least 1 kid, time is just before sunset, this scene always happens at this time if the PC has at least one kid.
@@ -1548,19 +1550,15 @@ public class Camp extends NPCAwareContent{
 						case 0:
 							outputText("Marble herself has gone off to Whitney's farm to get milked right now.");
 							break;
-
 						case 1:
 							outputText("Marble herself has gone off to Whitney's farm to do some chores right now.");
 							break;
-
 						case 2:
 							outputText("Marble herself isn't at the [camp] right now; she is probably off getting supplies, though she'll be back soon enough.");
 							break;
-
 						case 3:
 							outputText("Marble herself is resting on her bedroll right now.");
 							break;
-
 						case 4:
 							outputText("Marble herself is wandering around the [camp] right now.");
 							break;
@@ -1569,7 +1567,6 @@ public class Camp extends NPCAwareContent{
 						outputText("  You're sure she'd be back in moments if you needed her.");
 					}
 				}
-
 				//Out getting family
 				//else outputText("Marble is out in the wilderness right now, searching for a relative.");
 				outputText("\n\n");
@@ -1591,8 +1588,14 @@ public class Camp extends NPCAwareContent{
 				outputText("Samirah is quietly sunbathing on a rock, her long tail wrapped around on itself. She looks like she is very busy having a hissing conversation with a common snake which, considering her way of speech, isn’t really that strange.\n\n");
 				buttons.add("Samirah", SceneLib.samirah.samirahMainCampMenu);
 			}
+			//Tyrantia
+			if (TyrantiaFollower.TyrantiaFollowerStage >= 4) {
+				outputText("A decent distance away from your camp, in between the river and some trees, a hut’s been erected. Constructed mostly from stone and logs, with odd, goopy webbing as a crude mortar, the dwelling is nonetheless huge. ");
+				outputText("Tyrantia occasionally walks into the dwelling, coming out with a different tool or material. She’s keeping herself busy, if the line of demon skulls around the house are any indication.\n\n");
+				buttons.add("Tyrantia", SceneLib.tyrania.TyrantiaAtCamp).hint("Visit Tyrantia.");
+			}
 			//Zenji
-			if (flags[kFLAGS.ZENJI_PROGRESS] == 11) {
+			if (flags[kFLAGS.ZENJI_PROGRESS] == 11 && TrollVillage.ZenjiVillageStage != 2) {
 				if (model.time.hours >= 7 && model.time.hours <= 18) {
 					if (slavesCount() > 0 && rand(5) == 0) outputText("Zenji is keeping a close eye on some of your more corrupt camp members, ensuring that they don’t cause any harm.");
 					else if (player.statusEffectv2(StatusEffects.ZenjiModificationsList) >= 998700 && rand(5) == 0) outputText("Zenji is around your [camp], it’s impossible to miss him as he strokes his length as cascades of cum leak from his erection.");
@@ -1662,7 +1665,7 @@ public class Camp extends NPCAwareContent{
 		var buttons:ButtonDataList = new ButtonDataList();
 		if (!descOnly) {
 			hideMenus();
-			spriteSelect(-1);
+			spriteSelect(null);
 			clearOutput();
 			CoC.instance.inCombat = false;
 			menu();
@@ -1691,7 +1694,7 @@ public class Camp extends NPCAwareContent{
 				buttons.add("Vapula", vapula.callSlaveVapula);
 			}
 			//Galia
-			if (flags[kFLAGS.GALIA_LVL_UP] >= 1) {
+			if (flags[kFLAGS.GALIA_LVL_UP] >= 1 && EvangelineFollower.EvangelineFollowerStage >= 1) {
 				if (flags[kFLAGS.GALIA_AFFECTION] < 10) outputText("Near the [camp] edge nearly next to Evangeline bedroll sits a large wooden cage for keeping female imp brought back from Adventure Guild. Despite been one of those more feral she most of the time spend sitting motionlessly and gazing into the horizon.\n\n");
 				else outputText("Nothing to see here yet.\n\n");
 			}
@@ -1735,7 +1738,7 @@ public class Camp extends NPCAwareContent{
 		var buttons:ButtonDataList = new ButtonDataList();
 		if (!descOnly) {
 			hideMenus();
-			spriteSelect(-1);
+			spriteSelect(null);
 			clearOutput();
 			CoC.instance.inCombat = false;
 			//ADD MENU FLAGS/INDIVIDUAL FOLLOWER TEXTS
@@ -1772,7 +1775,7 @@ public class Camp extends NPCAwareContent{
 				else if (rand(4) == 0) outputText("Sophie is sitting in her nest, idly brushing out her feathers.  Occasionally, she looks up from her work to give you a sultry wink and a come-hither gaze.\n\n");
 				else if (rand(3) == 0) outputText("Sophie is fussing around in her nest, straightening bits of straw and grass, trying to make it more comfortable.  After a few minutes, she flops down in the middle and reclines, apparently satisfied for the moment.\n\n");
 				else if (rand(2) == 0 || flags[kFLAGS.SOPHIE_ADULT_KID_COUNT] == 0) {
-					if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0) outputText("Your platinum-blonde harpy, Sophie, is currently reading a book - a marked change from her bimbo-era behavior.  Occasionally, though, she glances up from the page and gives you a lusty look.  Some things never change....\n\n");
+					if (flags[kFLAGS.SOPHIE_BIMBO_ACCEPTED] > 0) outputText("Your platinum-blonde harpy, Sophie, is currently reading a book - a marked change from her bimbo-era behavior.  Occasionally, though, she glances up from the page and gives you a lusty look.  Some things never change....\n\n");
 					else outputText("Your pink harpy, Sophie, is currently reading a book.  She seems utterly absorbed in it, though you question how she obtained it.  Occasionally, though, she'll glance up from the pages to shoot you a lusty look.\n\n");
 				} else {
 					outputText("Sophie is sitting in her nest, ");
@@ -1789,7 +1792,7 @@ public class Camp extends NPCAwareContent{
 			}
 			//Pure Jojo
 			if (player.hasStatusEffect(StatusEffects.PureCampJojo)) {
-				if (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3) {
+				if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3) {
 					outputText("Joy's tent is set up in a quiet corner of the [camp], close to a boulder. Inside the tent, you can see a chest holding her belongings, as well as a few clothes and books spread about her bedroll. ");
 					if (flags[kFLAGS.JOJO_LITTERS] > 0 && model.time.hours >= 16 && model.time.hours < 19) outputText("You spot the little mice you had with Joy playing about close to her tent.");
 					else outputText("Joy herself is nowhere to be found, she's probably out frolicking about or sitting atop the boulder.");
@@ -1808,8 +1811,8 @@ public class Camp extends NPCAwareContent{
 			if (EvangelineFollower.EvangelineFollowerStage >= 1 && flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] <= 0) {
 				outputText("There is a small bedroll for Evangeline near the [camp] edge");
 				if (!(model.time.hours > 4 && model.time.hours < 23)) outputText(" and she's sleeping on it right now.");
-				else outputText(", though she probably wander somewhere near [camp] looking for more ingredients to make her potions.");
-				outputText(" Next to it stands a small chest with her personal stuff.\n\n");
+				else outputText(". Though, she probably wandered off not far from [camp], looking for more ingredients to make her potions.");
+				outputText(" Next to it lies a small chest with her personal stuff.\n\n");
 				buttons.add("Evangeline", SceneLib.evangelineFollower.meetEvangeline).hint("Visit Evangeline.");
 			}
 			else if (EvangelineFollower.EvangelineFollowerStage >= 1 && flags[kFLAGS.EVANGELINE_WENT_OUT_FOR_THE_ITEMS] >= 1) {
@@ -1824,7 +1827,7 @@ public class Camp extends NPCAwareContent{
 			}
 			//Dinah
 			if (flags[kFLAGS.DINAH_LVL_UP] >= 1) {
-				outputText("You can see a cart with various vials standing next to bedroll. Dinah must be somewhere nearby.\n\n");
+				outputText("You can see a cart with various vials standing next to a bedroll. Dinah must be somewhere nearby.\n\n");
 				buttons.add("Dinah", SceneLib.dinahScene.DinahIntro2).hint("Visit Dinah the cat chimera merchant.").disableIf(player.statusEffectv3(StatusEffects.CampSparingNpcsTimers3) > 0, "Training.");
 			}
 			//Neisa
@@ -1832,8 +1835,8 @@ public class Camp extends NPCAwareContent{
 				outputText("Neisa is hanging by a tree next to the [camp] practicing her swordplay on a makeshift dummy for the next expedition.\n\n");
 				buttons.add("Neisa", SceneLib.neisaFollower.neisaCampMenu).hint("Visit Neisa the shield maiden.");
 			}
-			//Zenji folower
-			if (flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9) {
+			//Zenji follower
+			if ((flags[kFLAGS.ZENJI_PROGRESS] == 8 || flags[kFLAGS.ZENJI_PROGRESS] == 9) && TrollVillage.ZenjiVillageStage != 2) {
 				if (model.time.hours >= 7 && model.time.hours <= 18) {
 					if (rand(3) == 0) outputText("Zenji is around your [camp], you see him currently relaxing atop a tree.");
 					else {
@@ -1960,7 +1963,7 @@ public class Camp extends NPCAwareContent{
 			}
 			//Sidonie
 			if (flags[kFLAGS.SIDONIE_FOLLOWER] == 1) {
-				if (model.time.hours >= 6 && model.time.hours <= 8) outputText("Sidonie has taken a table out to have breakfast outside. By you can see, she’s munching a large bowl filled with oath, milk and strawberries.");
+				if (model.time.hours >= 6 && model.time.hours <= 8) outputText("Sidonie has taken a table out to have breakfast outside. From what you can see, she’s eating from a bowl filled with oats, milk and strawberries.");
 				else if (model.time.hours <= 9) outputText("On a far part of the [camp], you can distinguish Sidonie’s figure. Seems like she’s using the early morning to cut some long planks into smaller ones, as the unmistakable sound of saw on wood makes evident.");
 				else if (model.time.hours <= 10) outputText("The equine carpenter is looking at a book containing some furniture designs. She’s probably looking for ideas for her next piece.");
 				else if (model.time.hours <= 12) outputText("Near her tent, your equine friend is busy at work, currently sanding some pieces.");
@@ -2042,6 +2045,7 @@ public class Camp extends NPCAwareContent{
 			addButtonDisabled(2, "Watch Sky", "The option to watch sunset is available at 7pm.");
 		}
 		addButton(3, "Read Codex", codex.accessCodexMenu).hint("Read any codex entries you have unlocked.");
+		addButton(4, "Recall", recallScenes).hint("Recall some of the unique events happened during your adventure.");
 		if (player.hasKeyItem("Gryphon Statuette") >= 0) addButton(9, "Gryphon", useGryphonStatuette);
 		if (player.hasKeyItem("Peacock Statuette") >= 0) addButton(9, "Peacock", usePeacockStatuette);
 		addButton(14, "Back", campActions);
@@ -2072,7 +2076,7 @@ public class Camp extends NPCAwareContent{
 		}
 		if (flags[kFLAGS.CAMP_CABIN_PROGRESS] > 0 && flags[kFLAGS.CAMP_CABIN_PROGRESS] < 10) addButton(2, "Build Cabin", cabinProgress.initiateCabin).hint("Work on your cabin."); //Work on cabin.
 		else if (flags[kFLAGS.CAMP_CABIN_PROGRESS] == 0) addButtonDisabled(2, "Build Cabin", "You need to wait until 7th day.");
-		else addButtonDisabled(2, "Build Cabin", "Cabin is alreadfy built.");
+		else addButtonDisabled(2, "Build Cabin", "Looking at your cabin, it's evidently already built.");
 		if (flags[kFLAGS.CAMP_WALL_PROGRESS] >= 10) {
 			if (player.hasItem(useables.IMPSKLL, 1)) {
 				addButton(10, "AddImpSkull", promptHangImpSkull).hint("Add an imp skull to decorate the wall and to serve as deterrent for imps.", "Add Imp Skull");
@@ -2445,13 +2449,30 @@ public class Camp extends NPCAwareContent{
 
 	public function Seed3(ItemID:SimpleConsumable):void{
 		clearOutput();
-		outputText("FANCY FARMING TEXT RIGHT HERE! WOOOOOOO! AND GAIN HERB EXPERIANCE!");
+		outputText("You begin carefully planting the");
 		player.destroyItems(ItemID, 1);
-		if (ItemID == CoC.instance.consumables.HEALHERB) HarvestMoonScenes.harvestmoonstageHH = HarvestMoonScenes.HARVESTMOONPENDINGHH;
-		if (ItemID == CoC.instance.consumables.MOONGRASS) HarvestMoonScenes.harvestmoonstageMG = HarvestMoonScenes.HARVESTMOONPENDINGMG;
-		if (ItemID == CoC.instance.consumables.SNAKEBANE) HarvestMoonScenes.harvestmoonstageSB = HarvestMoonScenes.HARVESTMOONPENDINGSB;
-		if (ItemID == CoC.instance.consumables.IRONWEED) HarvestMoonScenes.harvestmoonstageIW = HarvestMoonScenes.HARVESTMOONPENDINGIW;
-		if (ItemID == CoC.instance.consumables.BLADEFERN) HarvestMoonScenes.harvestmoonstageBF = HarvestMoonScenes.HARVESTMOONPENDINGBF;
+		if (ItemID == CoC.instance.consumables.HEALHERB){
+			HarvestMoonScenes.harvestmoonstageHH = HarvestMoonScenes.HARVESTMOONPENDINGHH;
+			outputText("healing herb");
+		}
+		if (ItemID == CoC.instance.consumables.MOONGRASS){
+			HarvestMoonScenes.harvestmoonstageMG = HarvestMoonScenes.HARVESTMOONPENDINGMG;
+			outputText("moon grass");
+		}
+		if (ItemID == CoC.instance.consumables.SNAKEBANE) {
+			HarvestMoonScenes.harvestmoonstageSB = HarvestMoonScenes.HARVESTMOONPENDINGSB;
+			outputText("snakebane");
+		}
+		if (ItemID == CoC.instance.consumables.IRONWEED){
+			HarvestMoonScenes.harvestmoonstageIW = HarvestMoonScenes.HARVESTMOONPENDINGIW;
+			outputText("ironweed");
+		}
+		if (ItemID == CoC.instance.consumables.BLADEFERN){
+			HarvestMoonScenes.harvestmoonstageBF = HarvestMoonScenes.HARVESTMOONPENDINGBF;
+			outputText("bladefern");
+		}
+		outputText("into the fertile soil. It should grow back into several or more plants within a few days." +
+				" Sometime you ponder if you shouldve just became a farmer back home you definitively have a knack for this.");
 		var HE:Number = 20 + player.level;
 		if (player.hasPerk(PerkLib.PlantKnowledge)) HE *= 2;
 		if (player.hasPerk(PerkLib.NaturalHerbalism)) HE *= 2;
@@ -2463,7 +2484,7 @@ public class Camp extends NPCAwareContent{
 		hideMenus();
 		clearOutput();
 		menu();
-		outputText("You survey your crops for readied harvests.");
+		outputText("You take a tour of your garden and survey your crops for readied harvests.");
 		if (!HealingHerb && !MoonGrass && !Snakebane && !Ironweed && !BladeFern) outputText("\n\n There is no crops left to harvest you will need to plan new seeds.");
 		if (HealingHerb)
 		{
@@ -2537,7 +2558,8 @@ public class Camp extends NPCAwareContent{
 		menu();
 		outputText("Refine "+IngrediantName+" into a "+CraftingResult.name+"?");
 		addButton(0, "Craft", HerbalismCraftItem2, ItemID, IngrediantName, CraftingResult);
-		addButton(1, "Cancel", HerbalismMenu);
+		addButton(1, "Craft All", HerbalismCraftItem3, ItemID, IngrediantName, CraftingResult);
+		addButton(2, "Cancel", HerbalismMenu);
 	}
 
 	public function HerbalismCraftItem2(ItemID:SimpleConsumable, IngrediantName:String, CraftingResult:PotionType):void {
@@ -2548,10 +2570,29 @@ public class Camp extends NPCAwareContent{
 		}
 		outputText("You spend the better part of the next hour refining the "+IngrediantName+" into a "+CraftingResult.name+" adding it to your bag.");
 		if (player.hasPerk(PerkLib.NaturalHerbalism)) {
-			outputText("Your natural knowledge of herbalism allowed you two craft two additionnal "+CraftingResult.name+".");
+			outputText("Your natural knowledge of herbalism allowed you to craft two additionnal "+CraftingResult.name+".");
 		}
 		player.destroyItems(ItemID, 1);
 		var HE:Number = 20 + player.level;
+		if (player.hasPerk(PerkLib.PlantKnowledge)) HE *= 2;
+		if (player.hasPerk(PerkLib.NaturalHerbalism)) HE *= 2;
+		player.herbXP(HE);
+		doNext(HerbalismMenu);
+	}
+
+	public function HerbalismCraftItem3(ItemID:SimpleConsumable, IngrediantName:String, CraftingResult:PotionType):void {
+		clearOutput();
+
+		player.changeNumberOfPotions(CraftingResult,player.itemCount(ItemID));
+		if (player.hasPerk(PerkLib.NaturalHerbalism)){
+			player.changeNumberOfPotions(CraftingResult,2*player.itemCount(ItemID));
+		}
+		outputText("You spend the better part of the next hour refining the "+IngrediantName+" into multiple "+CraftingResult.name+" adding them to your bag.");
+		if (player.hasPerk(PerkLib.NaturalHerbalism)) {
+			outputText("Your natural knowledge of herbalism allowed you to craft tice as many "+CraftingResult.name+".");
+		}
+		player.destroyItems(ItemID, player.itemCount(ItemID));
+		var HE:Number = (20 + player.level)*player.itemCount(ItemID);
 		if (player.hasPerk(PerkLib.PlantKnowledge)) HE *= 2;
 		if (player.hasPerk(PerkLib.NaturalHerbalism)) HE *= 2;
 		player.herbXP(HE);
@@ -2960,6 +3001,7 @@ public class Camp extends NPCAwareContent{
 		if (player.hasStatusEffect(StatusEffects.EtnaOff)) outputText("\nEtna: <font color=\"#800000\"><b>Disabled</b></font>");
 		if (player.hasStatusEffect(StatusEffects.LunaOff)) outputText("\nLuna: <font color=\"#800000\"><b>Disabled</b></font>");
 		if (player.hasStatusEffect(StatusEffects.TedOff)) outputText("\nDragon Boi: <font color=\"#800000\"><b>Disabled</b></font>");
+		if (player.hasStatusEffect(StatusEffects.SpoodersOff)) outputText("\Spooders: <font color=\"#800000\"><b>Disabled</b></font>");
 		menu();
 		if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) {
 			if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] < 2) addButton(10, "Train", NPCsTrain);
@@ -2972,6 +3014,8 @@ public class Camp extends NPCAwareContent{
 		addButton(4, "Etna", toggleEtnaMenu).hint("Enable or Disable Etna. This will remove her from enc table and if already in [camp] disable access to her.");
 		addButton(5, "Luna", toggleLunaMenu).hint("Enable or Disable Luna. This will remove her from enc table and if already in [camp] disable access to her.");
 		addButton(6, "DragonBoi", toggleTedMenu).hint("Enable or Disable Dragon Boi. This will remove him from enc table.");
+		//since this section is WIP anyway, let her be here too, lol
+        addButton(7, "Spooders", toggleSpoodersMenu).hint("Enable or Disable spooder followers. This will remove them ONLY from enc table.");
 		addButton(14, "Back", campActions);
 	}
 
@@ -3029,6 +3073,12 @@ public class Camp extends NPCAwareContent{
 	private function toggleTedMenu():void {
 		if (player.hasStatusEffect(StatusEffects.TedOff)) player.removeStatusEffect(StatusEffects.TedOff);
 		else player.createStatusEffect(StatusEffects.TedOff, 0, 0, 0, 0);
+		SparrableNPCsMenu();
+	}
+
+	private function toggleSpoodersMenu():void {
+		if (player.hasStatusEffect(StatusEffects.SpoodersOff)) player.removeStatusEffect(StatusEffects.SpoodersOff);
+		else player.createStatusEffect(StatusEffects.SpoodersOff, 0, 0, 0, 0);
 		SparrableNPCsMenu();
 	}
 
@@ -3416,13 +3466,8 @@ public class Camp extends NPCAwareContent{
 		addButton(1, "2 Hours", doWait2).hint("Wait two hours.");
 		addButton(2, "4 Hours", doWait4).hint("Wait four hours.");
 		addButton(3, "8 Hours", doWait8).hint("Wait eight hours.");
-		if (player.isNightCreature())
-		{
-			addButton(4, "Till Dawn", doWaitTillDawn).hint("Wait until the dawn comes.");
-		}
-		else{
-			addButton(4, "Till Dusk", doWaitTillDusk).hint("Wait until the night comes.");
-		}
+		if (player.isNightCreature()) addButton(4, "Till Dawn", doWaitTillDawn).hint("Wait until the dawn comes.");
+		else addButton(4, "Till Dusk", doWaitTillDusk).hint("Wait until the night comes.");
 		addButton(14, "Back", playerMenu);
 	}
 
@@ -3480,8 +3525,8 @@ public class Camp extends NPCAwareContent{
 		if (timeQ == 0) {
 			timeQ = waitingORresting;
 
-			if (player.lowerBody == LowerBody.PLANT_FLOWER) outputText("You lie down in your pitcher, closing off your petals as you get comfortable for " + num2Text(timeQ) + " hours...\n");
-			else outputText("You wait " + num2Text(timeQ) + " hours...\n");
+			if (player.lowerBody == LowerBody.PLANT_FLOWER) outputText("You lie down in your pitcher, closing off your petals as you get comfortable for " + num2Text(timeQ) + " hour" + (timeQ % 10 == 1 ? "" : "s") + "...\n");
+			else outputText("You wait " + num2Text(timeQ) + " hour" + (timeQ % 10 == 1 ? "" : "s") + "...\n");
 			//Marble withdrawl
 			if (player.hasStatusEffect(StatusEffects.MarbleWithdrawl)) {
 				outputText("\nYour time spent waiting is very troubled, and you aren't able to settle down.  You get up feeling tired and unsatisfied, always thinking of Marble's milk.\n");
@@ -3639,9 +3684,14 @@ public class Camp extends NPCAwareContent{
 					return;
 				} else outputText("Luna hugs you tightly, almost possessively so as you both doze off to sleep.");
 			} else if (flags[kFLAGS.SLEEP_WITH] == "Samirah" && flags[kFLAGS.SAMIRAH_FOLLOWER] > 9) {
-				outputText("As you both head to sleep, Samirah slithers to you and coils her tail around your legs, wrapping her arms around your torso as she rests her head on your shoulder. Her body is cold and she looks at you as if in a daze.");
+				outputText("As you both head to sleep, Samirah slithers to you and coils her tail around " + ((player.lowerBody == 3)? "yours" : "your lower half") + ", wrapping her arms around your torso as she rests her head on your shoulder. Her body is cold and she looks at you as if in a daze.");
 				if (player.isNaga()) outputText(" She’s not alone either. It indeed took you a while to realise that you are also cold blooded now. The cold night air sure puts you in a similar state as of late.");
 				outputText("\n\n\"<i>Sweet dreams [name], till morning and sunshine come.</i>\"\n");
+			} else if (flags[kFLAGS.SLEEP_WITH] == "Belisa" && BelisaFollower.BelisaInCamp) {
+				outputText("You decide to sleep with Belisa tonight. You help her close up her shop, packing the bands away, and climb into her hammock/bed, putting a hand on her cheek. Belisa pulls you towards her, resting one of her pillows under each of your heads. She hugs your arm, head on your shoulder, and you can’t help but feel safe as she expertly pulls a light blanket over the two of you. ");
+				outputText("She whispers a sweet \"<i>good night</i>\" to you, and you drift into sleep, a soft, sweet scent of cinnamon in your nostrils.");
+			} else if (flags[kFLAGS.SLEEP_WITH] == "Tyrantia" && TyrantiaFollower.TyrantiaFollowerStage >= 4) {
+				outputText("You decide to lie down next to Tyrantia, in her hutch. She wraps her muscular, fluffy arms around you, and you rest your head on one of her massive breasts. The soft tit is better than most pillows, and as Tyrantia pulls a massive, crudely made quilt over you both, you quickly warm up, sinking into a deep sleep.");
 			} else if (flags[kFLAGS.SLEEP_WITH] == "Ember" && flags[kFLAGS.EMBER_AFFECTION] >= 75 && followerEmber()) {
 				if (flags[kFLAGS.TIMES_SLEPT_WITH_EMBER] > 3) {
 					outputText("You curl up next to Ember, planning to sleep for " + num2Text(timeQ) + " hour. Ember drapes one of " + emberScene.emberMF("his", "her") + " wing over you, keeping you warm.");
@@ -3649,7 +3699,7 @@ public class Camp extends NPCAwareContent{
 					emberScene.sleepWithEmber();
 					return;
 				}
-			} else if (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3 && jojoScene.pregnancy.isPregnant && jojoScene.pregnancy.event == 4 && player.hasCock() && flags[kFLAGS.SLEEP_WITH] == 0) {
+			} else if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3 && jojoScene.pregnancy.isPregnant && jojoScene.pregnancy.event == 4 && player.hasCock() && flags[kFLAGS.SLEEP_WITH] == 0) {
 				joyScene.hornyJoyIsPregnant();
 				return;
 			} else if (flags[kFLAGS.SLEEP_WITH] == "Sophie" && (bimboSophie() || sophieFollower()) && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) {
@@ -3681,7 +3731,6 @@ public class Camp extends NPCAwareContent{
 				outputText("\n");
 			} else if (flags[kFLAGS.SLEEP_WITH] == "Helia" && SceneLib.helScene.followerHel()) {
 				outputText("You curl up next to Helia, planning to sleep for " + num2Text(timeQ) + " ");
-
 			} else {
 				//Normal sleep message
 				if (player.isGargoyle()) {
@@ -3881,7 +3930,7 @@ public class Camp extends NPCAwareContent{
 	}
 
 	public function allNaturalSelfStimulationBeltBadEnd():void {
-		spriteSelect(23);
+		spriteSelect(SpriteDb.s_giacomo);
 		clearOutput();
 		outputText("Whatever the belt is, whatever it does, it no longer matters to you.  The only thing you want is to feel the belt and its creature fuck the hell out of you, day and night.  You quickly don the creature again and it begins working its usual lustful magic on your insatiable little box.  An endless wave of orgasms take you.  All you now know is the endless bliss of an eternal orgasm.\n\n");
 		outputText("Your awareness hopelessly compromised by the belt and your pleasure, you fail to notice a familiar face approach your undulating form.  It is the very person who sold you this infernal toy.  The merchant, Giacomo.\n\n");
@@ -3969,7 +4018,7 @@ public class Camp extends NPCAwareContent{
 		if (dungeonFound()) addButton(0, "Dungeons", dungeons).hint("Delve into dungeons.");
 		else addButtonDisabled(0, "???", "Find at least one dungeon.");
 		//1 - ???
-		if (flags[kFLAGS.MARAE_ISLAND] > 0) addButton(2, "Marae", maraeIsland).hint("Visit the Marae's Island in middle of the Lake.");
+		if (flags[kFLAGS.MARAE_ISLAND] > 0) addButton(2, "Marae", maraeIsland).hint("Visit Marae's Island in middle of the Lake.");
 		else addButtonDisabled(2, "???", "Search the lake on the boat.");
 		if (player.hasStatusEffect(StatusEffects.BoatDiscovery)) addButton(3, "Boat", SceneLib.boat.boatExplore).hint("Get on the boat and explore the lake. \n\nRecommended level: 12");
 		else addButtonDisabled(3, "???", "Search the lake.");
@@ -3981,10 +4030,11 @@ public class Camp extends NPCAwareContent{
 		else addButtonDisabled(6, "???", "Search the plains.");
 		if (flags[kFLAGS.OWCA_UNLOCKED] == 1) addButton(7, "Owca", SceneLib.owca.gangbangVillageStuff).hint("Visit the sheep village of Owca, known for its pit where a person is hung on the pole weekly to be gang-raped by the demons.");
 		else addButtonDisabled(7, "???", "Search the plains.");
-		//8 - ???
+		if (TrollVillage.ZenjiVillageStage > 0) addButton(8, "Troll Village", SceneLib.trollVillage.EnterTheVillage).hint("Visit the Troll Village.");
+		else addButtonDisabled(8, "???", "Clear the factory first.");
 		//9 - ???
 
-		if (flags[kFLAGS.HEXINDAO_UNLOCKED] >= 1) addButton(10, "He'Xin'Dao", SceneLib.hexindao.riverislandVillageStuff0).hint("Visit the village of He'Xin'Dao, place where all greenhorn soul cultivators come together.");
+		if (flags[kFLAGS.HEXINDAO_UNLOCKED] >= 1) addButton(10, "He'Xin'Dao", SceneLib.hexindao.riverislandVillageStuff0).hint("Visit the village of He'Xin'Dao, a place where all greenhorn soul cultivators come together.");
 		else addButtonDisabled(10, "???", "Explore the realm.");
 		if (flags[kFLAGS.TIMES_MET_CHICKEN_HARPY] > 1) {
 			if (player.hasItem(consumables.OVIELIX)) addButton(11, "Chicken Harpy", SceneLib.highMountains.chickenHarpy).hint("Visit Chicken Harpy in the High Mountains.");
@@ -4065,28 +4115,28 @@ public class Camp extends NPCAwareContent{
 	private function dungeons():void {
 		menu();
 		//Main story dungeons
-		if (flags[kFLAGS.FACTORY_FOUND] > 0) addButton(0, "Factory", dungeon1.enterDungeon).hint("Visit the demonic factory in the mountains." + (flags[kFLAGS.FACTORY_SHUTDOWN] > 0 ? "\n\nYou've managed to shut down the factory." : "The factory is still running. Marae wants you to shut down the factory!") + (SceneLib.dungeons.checkFactoryClear() ? "\n\nCLEARED!" : ""));
+		if (flags[kFLAGS.FACTORY_FOUND] > 0) addButton(0, "Factory", SceneLib.dungeons.factory.enterDungeon).hint("Visit the demonic factory in the mountains." + (flags[kFLAGS.FACTORY_SHUTDOWN] > 0 ? "\n\nYou've managed to shut down the factory." : "The factory is still running. Marae wants you to shut down the factory!") + (SceneLib.dungeons.checkFactoryClear() ? "\n\nCLEARED!" : ""));
 		else addButtonDisabled(0, "???", "???");
-		if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0) addButton(1, "Deep Cave", dungeon2.enterDungeon).hint("Visit the cave you've found in the Deepwoods." + (flags[kFLAGS.DEFEATED_ZETAZ] > 0 ? "\n\nYou've defeated Zetaz, your old rival." : "") + (SceneLib.dungeons.checkDeepCaveClear() ? "\n\nCLEARED!" : ""));
+		if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0) addButton(1, "Deep Cave", SceneLib.dungeons.deepcave.enterDungeon).hint("Visit the cave you've found in the Deepwoods." + (flags[kFLAGS.DEFEATED_ZETAZ] > 0 ? "\n\nYou've defeated Zetaz, your old rival." : "") + (SceneLib.dungeons.checkDeepCaveClear() ? "\n\nCLEARED!" : ""));
 		else addButtonDisabled(1, "???", "???");
 		if (flags[kFLAGS.D3_DISCOVERED] > 0) addButton(2, "Stronghold", SceneLib.d3.enterD3).hint("Visit the stronghold in the high mountains that belongs to Lethice, the demon queen." + ((flags[kFLAGS.LETHICE_DEFEATED] > 0) ? "\n\nYou have slain Lethice and put an end to the demonic threats. Congratulations, you've beaten the main story!" : "") + (SceneLib.dungeons.checkLethiceStrongholdClear() ? "\n\nCLEARED!" : ""));
 		else addButtonDisabled(2, "???", "???");
 		//Side dungeons
-		if (flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) addButton(5, "Desert Cave", dungeonS.enterDungeon).hint("Visit the cave you've found in the desert." + (flags[kFLAGS.SAND_WITCHES_COWED] + flags[kFLAGS.SAND_WITCHES_FRIENDLY] > 0 ? "\n\nFrom what you've known, this is the source of the Sand Witches." : "") + (SceneLib.dungeons.checkSandCaveClear() ? "\n\nCLEARED!" : ""));
+		if (flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) addButton(5, "Desert Cave", SceneLib.dungeons.desertcave.enterDungeon).hint("Visit the cave you've found in the desert." + (flags[kFLAGS.SAND_WITCHES_COWED] + flags[kFLAGS.SAND_WITCHES_FRIENDLY] > 0 ? "\n\nFrom what you've known, this is the source of the Sand Witches." : "") + (SceneLib.dungeons.checkSandCaveClear() ? "\n\nCLEARED!" : ""));
 		else addButtonDisabled(5, "???", "???");
-		if (flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] > 0) addButton(6, "Bee Hive", dungeonBH.enterDungeon).hint("Visit the bee hive you've found in the forest." + (flags[kFLAGS.TIFA_FOLLOWER] > 5 ? "\n\nYou've defeated all corrupted bees." : "") + (SceneLib.dungeons.checkBeeHiveClear() ? "\n\nCLEARED!" : ""));
+		if (flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] > 0) addButton(6, "Bee Hive", SceneLib.dungeons.beehive.enterDungeon).hint("Visit the bee hive you've found in the forest." + (flags[kFLAGS.TIFA_FOLLOWER] > 5 ? "\n\nYou've defeated all corrupted bees." : "") + (SceneLib.dungeons.checkBeeHiveClear() ? "\n\nCLEARED!" : ""));
 		else addButtonDisabled(6, "???", "???");
-		if (SceneLib.dungeons.checkPhoenixTowerClear()) addButton(7, "Phoenix Tower", dungeonH.returnToHeliaDungeon).hint("Re-visit the tower you went there as part of Helia's quest." + (SceneLib.dungeons.checkPhoenixTowerClear() ? "\n\nYou've helped Helia in the quest and resolved the problems. \n\nCLEARED!" : ""));
+		if (SceneLib.dungeons.checkPhoenixTowerClear()) addButton(7, "Phoenix Tower", SceneLib.dungeons.heltower.returnToHeliaDungeon).hint("Re-visit the tower you went there as part of Helia's quest." + (SceneLib.dungeons.checkPhoenixTowerClear() ? "\n\nYou've helped Helia in the quest and resolved the problems. \n\nCLEARED!" : ""));
 		else addButtonDisabled(7, "???", "???");
-		if (flags[kFLAGS.EBON_LABYRINTH] > 0) addButton(9, "EbonLabyrinth", dungeonEL.enterDungeon).hint("Visit Ebon Labyrinth." + (SceneLib.dungeons.checkEbonLabyrinthClear() ? "\n\nSEMI-CLEARED!" : ""));
+		if (flags[kFLAGS.EBON_LABYRINTH] > 0) addButton(9, "EbonLabyrinth", SceneLib.dungeons.ebonlabyrinth.enterDungeon).hint("Visit Ebon Labyrinth." + (SceneLib.dungeons.checkEbonLabyrinthClear() ? "\n\nSEMI-CLEARED!" : ""));
 		else addButtonDisabled(9, "???", "???");
-		if (flags[kFLAGS.HIDDEN_CAVE_FOUND] > 0) addButton(10, "Hidden Cave", dungeonHC.enterDungeon).hint("Visit the hidden cave in the hills." + (SceneLib.dungeons.checkHiddenCaveClear() ? "\n\nCLEARED!" : ""));
+		if (flags[kFLAGS.HIDDEN_CAVE_FOUND] > 0) addButton(10, "Hidden Cave", SceneLib.dungeons.hiddencave.enterDungeon).hint("Visit the hidden cave in the hills." + (SceneLib.dungeons.checkHiddenCaveClear() ? "\n\nCLEARED!" : ""));
 		else addButtonDisabled(10, "???", "???");
-		if (flags[kFLAGS.DEN_OF_DESIRE_BOSSES] > 0) addButton(11, "Den of Desire", dungeonDD.enterDungeon).hint("Visit the den in blight ridge." + (SceneLib.dungeons.checkDenOfDesireClear() ? "\n\nCLEARED!" : ""));
+		if (flags[kFLAGS.DEN_OF_DESIRE_BOSSES] > 0) addButton(11, "Den of Desire", SceneLib.dungeons.denofdesire.enterDungeon).hint("Visit the den in blight ridge." + (SceneLib.dungeons.checkDenOfDesireClear() ? "\n\nCLEARED!" : ""));
 		else addButtonDisabled(11, "???", "???");
 		if (flags[kFLAGS.LUMI_MET] > 0) addButton(12, "Lumi's Lab", SceneLib.lumi.lumiEncounter).hint("Visit Lumi's laboratory.");
 		else addButtonDisabled(12, "???", "???");
-		if (flags[kFLAGS.ANZU_PALACE_UNLOCKED] > 0) addButton(13, "Anzu's Palace", dungeonAP.enterDungeon).hint("Visit the palace in the Glacial Rift where Anzu the avian deity resides.");
+		if (flags[kFLAGS.ANZU_PALACE_UNLOCKED] > 0) addButton(13, "Anzu's Palace", SceneLib.dungeons.anzupalace.enterDungeon).hint("Visit the palace in the Glacial Rift where Anzu the avian deity resides.");
 		else addButtonDisabled(13, "???", "???");
 		addButton(14, "Back", places);
 	}
@@ -4157,17 +4207,13 @@ public function wakeFromBadEnd():void {
 	camp.sleepRecovery(true);
 	CoC.instance.timeQ = 0;
 	//Set so you're in camp.
-	DungeonAbstractContent.inDungeon = false;
+	inDungeon = false;
 	inRoomedDungeon = false;
 	inRoomedDungeonResume = null;
     CoC.instance.inCombat = false;
 	player.removeStatusEffect(StatusEffects.RiverDungeonA);
 	if (player.hasStatusEffect(StatusEffects.RivereDungeonIB)) player.removeStatusEffect(StatusEffects.RivereDungeonIB);
 	if (player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.removeStatusEffect(StatusEffects.ThereCouldBeOnlyOne);
-	player.removeStatusEffect(StatusEffects.EbonLabyrinthA);
-	player.removeStatusEffect(StatusEffects.EbonLabyrinthB);
-	if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss1)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss1);
-	if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss2)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss2);
     //Restore stats
 	player.HP = player.maxOverHP();
 	player.fatigue = 0;
@@ -4202,17 +4248,13 @@ public function rebirthFromBadEnd():void {
 	if (flags[kFLAGS.BENOIT_CLOCK_BOUGHT] > 0) model.time.hours = flags[kFLAGS.BENOIT_CLOCK_ALARM];
 	else model.time.hours = 6;
 	//Set so you're in camp.
-	DungeonAbstractContent.inDungeon = false;
+	inDungeon = false;
 	inRoomedDungeon = false;
 	inRoomedDungeonResume = null;
     CoC.instance.inCombat = false;
 	player.removeStatusEffect(StatusEffects.RiverDungeonA);
 	if (player.hasStatusEffect(StatusEffects.RivereDungeonIB)) player.removeStatusEffect(StatusEffects.RivereDungeonIB);
 	if (player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.removeStatusEffect(StatusEffects.ThereCouldBeOnlyOne);
-	player.removeStatusEffect(StatusEffects.EbonLabyrinthA);
-	player.removeStatusEffect(StatusEffects.EbonLabyrinthB);
-	if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss1)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss1);
-	if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss2)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss2);
     //Restore stats
 	player.HP = player.maxOverHP();
 	player.fatigue = 0;
@@ -4416,7 +4458,7 @@ public function rebirthFromBadEnd():void {
 			doNext(doCamp);
 			return;
 		} else if (flags[kFLAGS.CAMP_WALL_SKULLS] >= 100 && flags[kFLAGS.CAMP_WALL_PROGRESS] == 100) {
-			outputText("There is no room; you have already hung a total of 100 imp skulls! No imp shall dare approaching you at night!");
+			outputText("There is no room; you have already hung a total of 100 imp skulls! With such a macabre display, no imp would dare approach you within the veil of night, now.");
 			doNext(doCamp);
 			return;
 		}
@@ -4608,6 +4650,7 @@ public function rebirthFromBadEnd():void {
 					mana += 12;
 					soulforce += 6;
 				}
+				if (player.hasPerk(PerkLib.AscensionAdvTrainingX)) statpoints += player.perkv1(PerkLib.AscensionAdvTrainingX);
 				if (player.hasPerk(PerkLib.UnlockBody)) hp += 60;
 				if (player.hasPerk(PerkLib.UnlockBody2ndStage)) hp += 60;
 				if (player.hasPerk(PerkLib.UnlockBody3rdStage)) hp += 60;
@@ -4633,10 +4676,10 @@ public function rebirthFromBadEnd():void {
 				if (player.hasPerk(PerkLib.UnlockArdor3rdStage)) lust += 3;
 				if (player.hasPerk(PerkLib.UnlockArdor4thStage)) lust += 3;
 				if (player.level < 6) {
-					statpoints += 5;
-					perkpoints += 1;
+					statpoints *= 2;
+					perkpoints *= 2;
 				}
-				mainView.levelButton.toolTipText = "Level up to increase your maximum: HP by " + hp + ", Lust by " + lust + ", Wrath by " + wrath + ", Fatigue by " + fatigue + ", Mana by " + mana + " and Soulforce by " + soulforce + "; gain " + statpoints + " attribute points and " + perkpoints + " perk points.";
+				mainView.levelButton.toolTipText = "Level up to increase your maximum: HP by " + hp + ", Lust by " + lust + ", Wrath by " + wrath + ", Fatigue by " + fatigue + ", Mana by " + mana + " and Soulforce by " + soulforce + "; gain " + statpoints + " attribute points and " + perkpoints + " perk point"+(perkpoints>1?"s":"")+".";
 				if (flags[kFLAGS.AUTO_LEVEL] > 0 && allowAutoLevelTransition) {
 					CoC.instance.playerInfo.levelUpGo();
 					return true; //True indicates that you should be routed to level-up.
@@ -5963,11 +6006,39 @@ public function rebirthFromBadEnd():void {
 			doNext(doCamp);
 			return;
 		}
-		/*
-		if (flags[kFLAGS.MOD_SAVE_VERSION] == 35) {
+        
+		if (int(flags[kFLAGS.MOD_SAVE_VERSION]) == 35) { //now using float to store versions!
+			clearOutput();
+            if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.001) {
+                //Labyrinth reward fix
+                if (flags[kFLAGS.EBON_LABYRINTH] >= 11)
+                    flags[kFLAGS.EBON_LABYRINTH] = 600;
+                else if (flags[kFLAGS.EBON_LABYRINTH] >= 9)
+                    flags[kFLAGS.EBON_LABYRINTH] = 450;
+                else if (flags[kFLAGS.EBON_LABYRINTH] >= 7)
+                    flags[kFLAGS.EBON_LABYRINTH] = 300;
+                else if (flags[kFLAGS.EBON_LABYRINTH] >= 5)
+                    flags[kFLAGS.EBON_LABYRINTH] = 150;
+                else if (flags[kFLAGS.EBON_LABYRINTH] >= 3)
+                    flags[kFLAGS.EBON_LABYRINTH] = 50;
+                else if (flags[kFLAGS.EBON_LABYRINTH] > 0)
+                    flags[kFLAGS.EBON_LABYRINTH] = 1;
+                //radiant shard fix - now for everyone!
+                if (player.hasKeyItem("Radiant shard") < 0) {
+                    outputText("\n\nNow legendary weapon is crafted from radiant shards. You deserve these!\n");
+                    outputText("\n\n(if you already had some, please remove them, heh)\n");
+                    soulforce.fixShards();
+                }
+                flags[kFLAGS.MOD_SAVE_VERSION] = 35.001;
+            }
+            outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
+            doNext(doCamp);
+            return;
+            /*
 			flags[kFLAGS.MOD_SAVE_VERSION] = 36;
 			clearOutput();
 			outputText("Text.");
+            //Jtecx fixes
 			if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1)) {
 				if (player.hasPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX)) player.setPerkValue(PerkLib.AscensionTrancendentalGeneticMemoryStageX, 1,1);
 				else player.createPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX, 1, 0, 0, 1);
@@ -5998,24 +6069,9 @@ public function rebirthFromBadEnd():void {
 				else player.createPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX,6,0,0,1);
 				player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage6);
 			}
-			doNext(doCamp);
-			return;
-		}
-		/*
-		if (flags[kFLAGS.MOD_SAVE_VERSION] == 36) {
-			flags[kFLAGS.MOD_SAVE_VERSION] = 37;
-			clearOutput();
-			outputText("Text.");
-			doNext(doCamp);
-			return;
-		}
-		if (flags[kFLAGS.MOD_SAVE_VERSION] == 37) {
-			flags[kFLAGS.MOD_SAVE_VERSION] = 38;
-			clearOutput();
-			outputText("Text.");
-			doNext(doCamp);
-			return;
-		}*/
+			if (player.hasPerk(PerkLib.AscensionHerosLineage)) player.ascensionPerkPoints -= 5;
+            */
+        }
 		doCamp();
 	}
 	
@@ -6151,6 +6207,8 @@ public function rebirthFromBadEnd():void {
 		doNext(doCamp);
 	}
 
+//Seems like it's unused now.
+/*
 //Updates save. Done to ensure your save doesn't get screwed up.
 	private function updateSaveFlags():void {
 		flags[kFLAGS.MOD_SAVE_VERSION] = CoC.instance.modSaveVersion;
@@ -6183,6 +6241,7 @@ public function rebirthFromBadEnd():void {
 		outputText("Don't worry. Just save the game and you're good to go. We, Ormael/Aimozg, will work out the bugs from time to time, while also bringing in cool new stuff!");
 		doNext(doCamp);
 	}
+*/
 
 	private function updateAchievements():void {
 		//Story
@@ -6295,7 +6354,7 @@ public function rebirthFromBadEnd():void {
 		if (SceneLib.dungeons.checkPhoenixTowerClear()) {
 			awardAchievement("Fall of the Phoenix", kACHIEVEMENTS.DUNGEON_PHOENIX_FALL);
 			dungeonsCleared++;
-			if (flags[kFLAGS.TIMES_ORGASMED] <= 0 && flags[kFLAGS.MOD_SAVE_VERSION] == CoC.instance.modSaveVersion) awardAchievement("Extremely Chaste Delver", kACHIEVEMENTS.DUNGEON_EXTREMELY_CHASTE_DELVER);
+			if (flags[kFLAGS.TIMES_ORGASMED] <= 0) awardAchievement("Extremely Chaste Delver", kACHIEVEMENTS.DUNGEON_EXTREMELY_CHASTE_DELVER);
 		}
 		if (SceneLib.dungeons.checkBeeHiveClear()) {
 			awardAchievement("Victory, Sweet like honey", kACHIEVEMENTS.DUNGEON_VICTORY_SWEET_LIKE_HONEY);
@@ -6314,12 +6373,8 @@ public function rebirthFromBadEnd():void {
 			awardAchievement("Slain the Heroslayer", kACHIEVEMENTS.DUNGEON_SLAIN_THE_HEROSLAYER);
 			dungeonsCleared++;
 		}
-		if (SceneLib.dungeons.checkEbonLabyrinthClear()) {
-			awardAchievement("Honorary Minotaur", kACHIEVEMENTS.DUNGEON_HONORARY_MINOTAUR);
-			dungeonsCleared++;
-		}
 		//bee hive clear
-		if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) >= 50 && flags[kFLAGS.EBON_LABYRINTH] == 2) dungeonsCleared++;
+		if (SceneLib.dungeons.checkEbonLabyrinthClear()) dungeonsCleared++;
 		if (dungeonsCleared >= 1) awardAchievement("Delver", kACHIEVEMENTS.DUNGEON_DELVER);
 		if (dungeonsCleared >= 2) awardAchievement("Delver Apprentice", kACHIEVEMENTS.DUNGEON_DELVER_APPRENTICE);
 		if (dungeonsCleared >= 4) awardAchievement("Delver Expert", kACHIEVEMENTS.DUNGEON_DELVER_MASTER);
@@ -6361,6 +6416,8 @@ public function rebirthFromBadEnd():void {
 		if (player.jewelry.value >= 1000) awardAchievement("Bling Bling", kACHIEVEMENTS.FASHION_BLING_BLING);
 		if (player.necklace.value >= 5000) awardAchievement("Ka-Ching!", kACHIEVEMENTS.FASHION_KA_CHING);
 		if (player.headJewelry.value >= 4000) awardAchievement("Royalty", kACHIEVEMENTS.FASHION_ROYALTY);
+		if (player.armor == armors.G_DIVES && player.weapon == weapons.SDRILL && player.shield == ShieldLib.NOTHING && player.hasPerk(PerkLib.PrestigeJobSpellKnight)) awardAchievement("Subject Delta", kACHIEVEMENTS.FASHION_SUBJECT_DELTA);
+		if (player.armor == armors.SAMUARM && player.weapon == weapons.DAISHO && player.headJewelry == headjewelries.KABUMEMP) awardAchievement("Bushido - the way of the warrior", kACHIEVEMENTS.FASHION_BUSHIDO_THE_WAY_OF_THE_WARRIOR);
 
 		//Wealth
 		if (player.gems >= 1000) awardAchievement("Rich", kACHIEVEMENTS.WEALTH_RICH);
@@ -6582,6 +6639,29 @@ public function rebirthFromBadEnd():void {
 			player.removeStatusEffect(StatusEffects.AchievementsNormalShadowTotal);
 		}
 	}
+
+    public function recallScenes():void {
+        clearOutput();
+        outputText("You close your eyes, remembering all this life put you through. All your fights, friends... lovers.\n\n");
+        outputText("Though many things are still repeatable, you still remember some unique events of your life, and one question bothers you - what would happen if you were different at the moment? How would you and your companions look and behave right now?\n");
+		outputText("Falling asleep, you think about it, recalling the exact time and place...\n\n");
+		outputText("<i>I ask thee, eternal time...</i>\n");
+		outputText("\n\nThis part is WIP. You can add more scenes.");
+		outputText("\nThe idea behind is to try unique scenes with different ways or options or body parts.");
+        menu();
+        //Marble scene
+		if (flags[kFLAGS.MARBLE_PURIFIED] == 1)
+			addButton(0, "Marble & Clara", SceneLib.marblePurification.defeatClaraCuntInAFight, false, true);
+        else
+			addButtonDisabled(0, "M & C", "Requires completing Marble's purification quest.");
+        //Excellia slave first scene
+		if (flags[kFLAGS.EXCELLIA_RECRUITED] == 2)
+			addButton(1, "Excellia Slv", SceneLib.excelliaFollower.ExcelliaPathChoiceMakeSlave, true);
+        else
+			addButtonDisabled(1, "E Slv", "Requires recruiting Excellia as a slave.");
+		addButtonDisabled(13, "BadEnds", "SH is too lazy to add them too right now, but if anyone wants...");
+        addButton(14, "Wake Up", campSpendTimeActions);
+    }	
 
 	/*
         private function fixHistory():void {

@@ -6,13 +6,12 @@ package classes.Scenes.Areas.Mountain
 import classes.*;
 import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 public class HellHoundScene extends BaseContent
 	{
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-
-		public function HellHoundScene()
+				public function HellHoundScene()
 		{
 		}
 
@@ -38,7 +37,7 @@ public class HellHoundScene extends BaseContent
 				outputText("\n\n<b>New codex entry unlocked: Hellhounds!</b>")
 			}
 			startCombat(new HellHound());
-			spriteSelect(27);
+			spriteSelect(SpriteDb.s_hellhound);
 		}
 
 
@@ -105,9 +104,9 @@ public class HellHoundScene extends BaseContent
 			}
 			if (player.isLiliraune()) addButton(2, "TakeBothIn", takeBothIn);
 			if (monster.HP < 1) addButton (12, "Slay", killHellhound);
-			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 			addButton(14, "Leave", cleanupAfterCombat);
-		}
+			SceneLib.uniqueSexScene.pcUSSPreChecksV2(hellHoundPostFightSexScenes);
+					}
 		public function hellHoundGetsRaped():void
 		{
 			clearOutput();

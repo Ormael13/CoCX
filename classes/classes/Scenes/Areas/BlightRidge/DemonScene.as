@@ -9,20 +9,21 @@ import classes.*;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
+import classes.Items.Armors.LustyMaidensArmor;
+import classes.Items.Armors.SuccubusArmor;
 import classes.Scenes.Areas.DefiledRavine.CowSuccubus;
 import classes.Scenes.Areas.DefiledRavine.MinoIncubus;
 import classes.Scenes.Camp.CampMakeWinions;
 import classes.Scenes.Dungeons.Factory;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 
 //use namespace CoC;
 	
 	public class DemonScene extends BaseContent
 	{
 		public var FactoryScene:Factory = new Factory();
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
 		public var campwinions:CampMakeWinions = new CampMakeWinions();
-		
+                
 		public function DemonScene() 
 		{}
 		
@@ -40,7 +41,11 @@ import classes.Scenes.UniqueSexScenes;
 			menu();
 			outputText("You smile in satisfaction as the mino incubus collapses, unable to continue fighting.");
 			if (monster.HP < 1) addButton (5, "Kill Him", killDemon);
-			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+			if (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armor == armors.LMARMOR || player.armor == armors.S_ARMOR)) {
+				if (player.armor == armors.S_ARMOR) addButton(7, "B.Titfuck", (player.armor as SuccubusArmor).succubusPaizuri);
+				else addButton(7, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
+			}
+			SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatMinoIncubus);
 			addButton (14, "Leave", cleanupAfterCombat);
 		}
 		
@@ -64,7 +69,7 @@ import classes.Scenes.UniqueSexScenes;
 					addButton (3, "Catch Anal", FactoryScene.doRideIncubusAnally);
 				}
 				if (player.gender == 2) {
-					if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor == armors.LMARMOR) addButton(0, "B.Titfuck", lustyPaizuri);
+					if (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armor == armors.LMARMOR || player.armor == armors.S_ARMOR)) addButton(0, "B.Titfuck", lustyPaizuri);
 					addButton (1, "F. Fuck", IncubusGetsRapedByFemale);
 					addButton (2, "Service Him", GiveIncubusOral);
 					addButton (3, "Catch Anal", FactoryScene.doRideIncubusAnally);
@@ -75,10 +80,9 @@ import classes.Scenes.UniqueSexScenes;
 					addButton (2, "Service Him", GiveIncubusOral);
 					addButton (3, "Catch Anal", FactoryScene.doRideIncubusAnally);
 				}
-				//if (player.lowerBody == LowerBody.PLANT_FLOWER) addButton(7, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
 			}
 			if (monster.HP < 1) addButton (5, "Kill Him", killDemon);
-			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+			SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatIncubus);
 			addButton (14, "Leave", cleanupAfterCombat);
 		}
 		
@@ -126,6 +130,7 @@ import classes.Scenes.UniqueSexScenes;
 		}
 		
 		public function IncubusGetsRapedByMale():void {
+            var x:int = player.biggestCockIndex();
 			clearOutput();
 			outputText("With a few deft motions, you shift your [armor] to expose your ");
 			if(player.gender == 3) {
@@ -138,11 +143,11 @@ import classes.Scenes.UniqueSexScenes;
 			}
 			outputText(".  Having resolved to take the demon's backdoor, you approach his weakened form with brimming confidence.  He looks up, clearly hoping your plan is to squat on his throbbing member.  You dispel his misguided notion when you grab him by the horns and shove his face against the ground. He struggles weakly until you press down harder, making it clear he is to stay in position - on his knees with his head down and his ass in the air.  Circling your prey, you inspect his flawless body and carefully note that the hole at his crotch actually exposes a fair portion of his very supple and surprisingly feminine-looking backside.\n\n");
 			outputText("You don't waste any time, gripping your [cock] in one hand and ");
-			if(player.cocks[0].cockType == CockTypesEnum.HORSE) outputText("pressing your thick flare ");
-			if(player.cocks[0].cockType == CockTypesEnum.DOG) outputText("pressing your pointed tip ");
-			if(player.cocks[0].cockType == CockTypesEnum.HUMAN || player.cocks[0].cockType.Index > 2) outputText("pressing your head ");
+			if(player.cocks[x].cockType == CockTypesEnum.HORSE) outputText("pressing your thick flare ");
+			if(player.cocks[x].cockType == CockTypesEnum.DOG) outputText("pressing your pointed tip ");
+			if(player.cocks[x].cockType == CockTypesEnum.HUMAN) outputText("pressing your head ");
 			outputText("between the incubus' cheeks towards his inhumanly smooth rear-passage.  You gasp in delight at the tight ribbed texture of his asshole as you slide ");
-			if(player.cocks[0].cockLength > 10) outputText("deep inside ");
+			if(player.cocks[x].cockLength > 10) outputText("deep inside ");
 			else outputText("inside ");
 			outputText(".  The demon underneath you grunts in an attempt to sound displeased, but it's plain to see the pre-cum he's dripping all over the ground.  What a slut!  You slap his ass and begin roughly butt-fucking him, panting with each plunge into the depths of his ridged passage, gradually increasing your tempo until your " + hipDescript() + " fill the surrounding area with loud slapping noises.");
 			if(player.balls > 0) outputText("  Your [balls] swing freely, smacking into the demon's own and making both of you squeal and dribble more pre-cum.");
@@ -210,7 +215,7 @@ import classes.Scenes.UniqueSexScenes;
 			player.slimeFeed();
 			clearOutput();
 			//Nipplefuck city
-			if(player.hasFuckableNipples() && player.lust >= player.maxLust()) {
+			if(player.hasFuckableNipples() && player.lust >= player.maxLust() && (!sceneHunter.uniHerms || rand(4) > 0)) {
 				outputText("Molten arousal pumps through your veins, burning away your reason with an unquenchable desire to mate.  You drop your top, exposing your [allbreasts] to your foe in a submissive display. Lowering your eyes, you hope you can tempt him to plug your " + nippleDescript(0) + " with his demonic prick.  You roughly squeeze each sensitive tit, trailing your fingers down the sensitive breast-flesh towards your rapidly dampening fuck-holes.\n\n");
 				outputText("Your eyes relax as pure sensation overwhelms your already over-excited body.  Your fingers find your nipple-holes, locking around them while tugging and squeezing, stretching them tight with pleasure and pain.  You cast a seductive glance to the incubus' groin, noting that he's been taken in by your wanton display.  He takes a step, his cock rippling and twisting as it shifts and changes before your eyes. It divides it half, splitting into two full-sized pricks.");
 				if(player.totalNipples() > 2) outputText("  Each of those divides again, splitting into four prehensile penises.");
@@ -325,99 +330,105 @@ import classes.Scenes.UniqueSexScenes;
 			if (player.lust>=33 && player.gender > 0) {
 				outputText("\nNow would be the perfect opportunity to taste the fruits of her sex-ready form...\n\nDo you fuck her?");
 				if (player.gender == 1 || player.gender == 3) addButton (0, "M. Fuck", OmnibusGetsRapedByMale);
-				if (player.gender == 2 || player.gender == 3) addButton (1, "F. Fuck", OmnibusGetsRapedByFemale);/*
-				if (player.lowerBody == LowerBody.PLANT_FLOWER) {
-					addButton(2, "Seeding", uniquuuesexscene.alrauneSeedingScene);
-					addButton(3, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
-				}*/
+				if (player.gender == 2 || player.gender == 3) addButton (1, "F. Fuck", OmnibusGetsRapedByFemale);
+				if (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armor == armors.LMARMOR || player.armor == armors.S_ARMOR)) {
+					if (player.armor == armors.S_ARMOR) addButton(2, "B.Titfuck", (player.armor as SuccubusArmor).succubusPaizuri);
+					else addButton(2, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
+				}
 			}
 			if (monster.HP < 1) addButton (5, "Kill Her", killDemon);
-			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+			SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatOmnibus);
 			addButton (14, "Leave", cleanupAfterCombat);
 		}
 		
 		public function OmnibusGetsRapedByMale():void {
 			clearOutput();
+			sceneHunter.selectFitNofit(OGRBM_fits, OGRBM_toobig, monster.vaginalCapacity());
+		}
+
+        public function OGRBM_fits():void {
 			var x:Number = player.cockThatFits(monster.vaginalCapacity());
-			if (x < 0) x = 0;
-			if (player.cockArea(x) <= monster.vaginalCapacity()) {
-				//[Male] Fuck 'Dat Pussah
-				//[lust]
-				if (monster.lust > 99) {
-					outputText("Ignoring her squeals of pleasure, you force omnibus onto her back, oogling her perky breasts, indecent cock, and soaked cunt.  She looks up at you hungrily, and you have the feeling that on some level you're still giving her what she wants.  Mindful of her demonic wiles, you pull her hands together and use a few tattered strips of cloth to bind them over her head.  Moaning with helpless desire, the demon grinds her crotch against your [leg], spreading her thighs apart into a near split and giving you a world-class view of her juicy purple cunt.\n\n");
-				}
-				//[hp]
-				else {
-					outputText("Ignoring her grunts of pain, you force omnibus onto her back, oogling her perky breasts, limp cock, and hairless cunt.  She looks up at you with disdain, growling at you from the back of her throat.  Wary of the demon's abilities, you tie up her hands with a few tattered strips of cloth.  She seems to like it, judging by her tenting erection and now-glistening gash.  The slut even goes so far as to begin grinding her crotch against you, spreading her thighs wider and wider as she gets off on being restrained.  You're given a perfect view of her enticing purple cunt.\n\n");
-				}
-				outputText("Omnibus licks her lips and gazes up at you, begging with a voice that drips with seductive intent, \"<i>Please don't rape me, champion!  Don't tie me down and rape me like a helpless village-girl!</i>\"\n\n");
-				if (player.cor < 33) outputText("Her words shame you.  Have you really sunk this low?  You wonder just how much this world has already corrupted you as you ready yourself to rape a sex-demon.");
-				else if (player.cor < 66) outputText("Her words confuse you.  You never would've done this when you first came here, but you're horny and you know demons don't really mind.");
-				else outputText("Her dishonest words anger you, and you slap her in the face.  Both of you know that she wants this almost as much as she wanted to rape you, and any pretense at disliking this act is a deceitful sham.");
-				outputText("  It's too late for her to have any hope of swaying you anyway.  You strip off your [armor] ");
-				outputText("and begin stroking ");
-				if (player.cockTotal() > 1) outputText("each of ");
-				outputText("your stiff [cocks], preparing to penetrate her.\n\n");
-				outputText("Omnibus squirms in the dirt as you bring your [cock] closer and closer to her female hole, her cock twitching with need like some kind of perverse, mutant clit.  Her hips twitch at you, as if eager to devour your maleness.  You don't keep her waiting, ");
-				if (player.cockArea(x) < 40) {
-					outputText("and with a forceful thrust, you sheath yourself inside the demon's unholy pussy");
-				}
-				else outputText("and with a mighty effort, you force your over-sized cock inside her.  For a moment all you can do is stare in awe as it distorts her body – the fact that such a thing is possible puzzles you");
-				outputText(".  Her interior is inhumanly hot and covered with thousands of slippery protrusions, each rubbing against your dick's flesh.  The orgy of sensation is incredible, and you immediately begin fucking your bound, demonic captive as the need to orgasm rises within you.\n\n");
-				outputText("The defeated omnibus mewls in mock protest, \"<i>Oh, don't cum in my demonic twat, dear champion!  If you do, you'll never want any other pussy ever again!</i>\"\n\n");
-				outputText("You grunt, pounding her harder and faster than before, knowing you couldn't pull out of her vise-like pleasure-hole if you wanted to.  It feels too good to hold out or resist, and you drop down, adjusting your angle as you rape the beautiful omnibus.  You're grunting like an animal, humping her as fast as your body will let you, but she lies under you with a serene and enticing expression, as if she's greatly enjoying the situation and awaiting your orgasm.  You pinch her nipple roughly, irritated by her superior air, but it only makes her wriggling pussy get even wetter.  It clamps down on you, wringing your [cock] dry as it erupts in a powerful orgasm.\n\n");
-				outputText("Omnibus squeals happily, her sultry visage fracturing into an uninhibited expression of pleasure as she cries, \"<i>Fill me with your seed, champion!  Dominate the demon with your mighty spear!</i>\"\n\n");
-				outputText("Her purple-hued pussy spasms around you, its oddly textured interior rippling and sucking in time with your ejaculations, drinking down your cum.  Omnibus squirms happily while her body absorbs your jizz with her impossibly pleasurable hole.");
-				if (player.cumQ() >= 500 && player.cumQ() < 1000) outputText("  Her belly begins to rise with the volume of cum she's absorbed, and you finish your orgasm with a mildly pregnant demon underneath you.");
-				else if (player.cumQ() >= 1000) outputText("  Her belly rises quickly from the volume of cum you're pumping into her, swelling up until she looks ready to give birth, but her taut purple body seems to handle the strain quite well, save for her belly-button turning into an outtie with an abrupt 'pop'.");
-				outputText("  The omnibus' nubby shaft twitches happily and squirts out tiny dribbles of demon-semen, too left out by the sex to achieve a truly enjoyable orgasm, but more than willing to leak cum.\n\n");
-				outputText("Omnibus exhales with exhaustion and rubs her hands over her belly, cooing, \"<i>So, you really did give up all your semen to me.  I guess I'll have to name the first imp I birth from this after you, won't I?</i>\"\n\n");
-				if (player.cor < 33) outputText("You groan, just wishing she would stop reminding you of the consequences of this little tryst.  In a hurry to leave the demon behind, you get dressed and take off for camp.\n\n");
-				else if (player.cor < 66) outputText("You groan, wondering why she just won't get over her little act.  Even though this wasn't your best idea, it isn't nearly as bad as she makes it out to be.  You get dressed and leave, eager to be rid of her.\n\n");
-				else outputText("You bend over, rub her belly softly and whisper into her ear, \"<i>I'll be sure to spit him on my cock first chance I get, dear.</i>\"\n\n");
-				outputText("As you leave, you don't bother to spare a glance at the confused omnibus.  She isn't worth your time.");
-			}
-			else {
-				//[MALE TOO DAMN BIGGA WIGGA]
-				//[lust] 
-				if (monster.lust > 99) outputText("Ignoring her squeals of pleasure, you force omnibus onto her back, oogling her perky breasts, indecent cock, and soaked cunt.  She looks up at you hungrily, and you have the feeling that on some level you're still giving her what she wants.  Wary of the demon's wiles, you pull her hands together and use some scraps of cloth to bind them up.  Moaning with helpless desire, the demon grinds her crotch against your [leg], spreading her thighs apart into a near split and giving you a world-class view of her juicy purple cunt.\n\n");
-				//[hp] 
-				else outputText("Ignoring her grunts of pain, you force omnibus onto her back, oogling her perky breasts, limp cock, and hairless cunt.  She looks up at you with disdain, growling at you from the back of her throat. Wary of the demon's abilities, you tie up her hands with a few pieces of tattered cloth.  She seems to like it, judging by her tenting erection and now-glistening gash.  The slut even goes so far as to begin grinding her crotch against you, spreading her thighs wider and wider as she gets off on being restrained.  You're given a perfect view of her enticing purple cunt.\n\n");
-				outputText("Omnibus licks her lips and gazes up at you, begging with a voice that drips with seductive intent, \"<i>Please, don't rape me Champion!  Don't tie me down and rape me like a helpless village-girl!</i>\"\n\n");
-				if (player.cor < 33) outputText("Her words shame you.  Have you really sunk this low?  You wonder just how much this world has already corrupted you as you ready yourself to rape a sex-demon.");
-				else if (player.cor < 66) outputText("Her words confuse you.  You never would've done this when you first came here, but you're horny and you know demons don't really mind.");
-				else outputText("Her dishonest words anger you, and you slap her in the face.  Both of you know that she wants this almost as much as she wanted to rape you, and any pretense at disliking this act is a deceitful sham.");
-				outputText("  It's too late for her to have any hope of swaying you anyway.  You strip off your [armor] ");
-				outputText("and begin stroking ");
-				if (player.cockTotal() > 1) outputText("each of ");
-				outputText("your stiff [cocks], preparing to penetrate her.\n\n");
-				outputText("The [cockhead] of your [cock] squishes flat against her twat, too big for her prodigious demon-cunt to swallow.  Spurred by frustrated desires, you lift her legs and wrap her girlcum-slicked thighs about your ");
-				if (player.cockTotal() > 1) outputText("primary ");
-				outputText(cockDescript(x) + ". Omnibus' smooth skin and soft thigh-flesh form a comfortably tight masturbation tube.  Starting slowly, you begin rocking back and forth, sawing your prodigious cock-flesh over her body.  The demoness swivels her hips underneath your [cock], her slippery gash and near-crushed member feverishly rubbing into you.  Though you didn't get to truly violate her, her thighs and unblemished skin are more than good enough to bring you to the brink of orgasm.\n\n");
-				outputText("The defeated omnibus wraps her arms around your [cock] and whines lustily, \"<i>No, please!  You'll cover me in seed and despoil my face!  Please don't glaze me in that awful stuff!</i>\"\n\n");
-				outputText("You grunt, hold the captive by her ankles, and use her like a disposable sex-toy.  The slap of your " + hipDescript() + " slapping into her thighs echoes loudly, nearly drowning out the wet squishing of your [cock] with each violent brush against her cuntlips.  ");
-				if (player.cocks[x].cockLength < 18) outputText("Your [cockhead] crests between her breasts with every stroke, bumping against her chin.  It grows larger as the pleasure of the act intensifies to orgasmic levels.\n\n");
-				else if (player.cocks[x].cockLength < 24) outputText("Your [cockhead] slides over her cheek with every stroke, leaving a trail of pre-cum on her face.  The smudges of glistening pre grow larger and larger as the pleasure of the act nears orgasmic levels.\n\n");
-				else outputText("Your [cock] slides over her face with every stroke, smearing the demon's hair with your thick pre-seed before you pull back and dribble it on her face.  The pleasure of the act is incredible, and you feel yourself getting harder as the sensation nears orgasmic levels.\n\n");
-				outputText("Omnibus squeals and blubbers incoherently for a moment as she cums, eventually managing to scream out, \"<i>Yes, splatter me with seed!  Punish this lowly demon with your powerful spunk.  Dominaaaaate meeee~</i>\"\n\n");
-				outputText("Underneath your own mammoth erection, you can feel omnibus's smaller cock twisting and squirming, unloading its own hot fluids onto her sweat-slicked belly.  She wriggles and twitches under you, her thigh muscles clenching and releasing in time with her spurts as they push you beyond your limit.  You watch your [cock] as it strains and squirts, dumping your thick load into the demon's ");
-				if (player.cocks[x].cockLength < 18) outputText("tits");
-				else if (player.cocks[x].cockLength < 24) outputText("face");
-				else outputText("long hair");
-				outputText(".  The orgasming demonette continues to squirt underneath you, drenching and smearing herself with even more cum and her entire mid-section looks glazed in thick whitish goo.");
-				if (player.cumQ() >= 1000) outputText("  Your prodigious fertility quickly forms a puddle around her, leaving the deceptive seductress practically submerged in cum.");
-				outputText("\n\n");
-				outputText("You sigh, feeling immense relief, and remove your softening bulk from atop her form.  Omnibus exhales in exhaustion and smears the mixture of cum over her belly, cooing, \"<i>So you really did give me a huge load.  I'll be sure to scoop a few batches of it into my womb so we can have lots of imps together.</i>\"\n\n");
-				if (player.cor < 33) outputText("You groan, just wishing she would stop reminding you of the consequences of this little tryst.  In a hurry to leave the demon behind, you get dressed and take off for camp.\n\n");
-				else if (player.cor < 66) outputText("You groan, wondering why she just won't get over her little act.  Even though this wasn't your best idea, it isn't nearly as bad as she makes it out to be.  You get dressed and leave, eager to be rid of her.\n\n");
-				else outputText("You bend over, rub her belly softly and whisper into her ear, \"<i>I'll be sure to spit them on my cock first chance I get, dear.</i>\"\n\n");
-				outputText("As you leave, you don't bother to spare a glance at the confused omnibus; she isn't worth your time.");
-			}
+
+            if (monster.lust > 99) {
+                outputText("Ignoring her squeals of pleasure, you force omnibus onto her back, oogling her perky breasts, indecent cock, and soaked cunt.  She looks up at you hungrily, and you have the feeling that on some level you're still giving her what she wants.  Mindful of her demonic wiles, you pull her hands together and use a few tattered strips of cloth to bind them over her head.  Moaning with helpless desire, the demon grinds her crotch against your [leg], spreading her thighs apart into a near split and giving you a world-class view of her juicy purple cunt.\n\n");
+            }
+            //[hp]
+            else {
+                outputText("Ignoring her grunts of pain, you force omnibus onto her back, oogling her perky breasts, limp cock, and hairless cunt.  She looks up at you with disdain, growling at you from the back of her throat.  Wary of the demon's abilities, you tie up her hands with a few tattered strips of cloth.  She seems to like it, judging by her tenting erection and now-glistening gash.  The slut even goes so far as to begin grinding her crotch against you, spreading her thighs wider and wider as she gets off on being restrained.  You're given a perfect view of her enticing purple cunt.\n\n");
+            }
+            outputText("Omnibus licks her lips and gazes up at you, begging with a voice that drips with seductive intent, \"<i>Please don't rape me, champion!  Don't tie me down and rape me like a helpless village-girl!</i>\"\n\n");
+            if (player.cor < 33) outputText("Her words shame you.  Have you really sunk this low?  You wonder just how much this world has already corrupted you as you ready yourself to rape a sex-demon.");
+            else if (player.cor < 66) outputText("Her words confuse you.  You never would've done this when you first came here, but you're horny and you know demons don't really mind.");
+            else outputText("Her dishonest words anger you, and you slap her in the face.  Both of you know that she wants this almost as much as she wanted to rape you, and any pretense at disliking this act is a deceitful sham.");
+            outputText("  It's too late for her to have any hope of swaying you anyway.  You strip off your [armor] ");
+            outputText("and begin stroking ");
+            if (player.cockTotal() > 1) outputText("each of ");
+            outputText("your stiff [cocks], preparing to penetrate her.\n\n");
+            outputText("Omnibus squirms in the dirt as you bring your [cock] closer and closer to her female hole, her cock twitching with need like some kind of perverse, mutant clit.  Her hips twitch at you, as if eager to devour your maleness.  You don't keep her waiting, ");
+            if (player.cockArea(x) < 40) {
+                outputText("and with a forceful thrust, you sheath yourself inside the demon's unholy pussy");
+            }
+            else outputText("and with a mighty effort, you force your over-sized cock inside her.  For a moment all you can do is stare in awe as it distorts her body – the fact that such a thing is possible puzzles you");
+            outputText(".  Her interior is inhumanly hot and covered with thousands of slippery protrusions, each rubbing against your dick's flesh.  The orgy of sensation is incredible, and you immediately begin fucking your bound, demonic captive as the need to orgasm rises within you.\n\n");
+            outputText("The defeated omnibus mewls in mock protest, \"<i>Oh, don't cum in my demonic twat, dear champion!  If you do, you'll never want any other pussy ever again!</i>\"\n\n");
+            outputText("You grunt, pounding her harder and faster than before, knowing you couldn't pull out of her vise-like pleasure-hole if you wanted to.  It feels too good to hold out or resist, and you drop down, adjusting your angle as you rape the beautiful omnibus.  You're grunting like an animal, humping her as fast as your body will let you, but she lies under you with a serene and enticing expression, as if she's greatly enjoying the situation and awaiting your orgasm.  You pinch her nipple roughly, irritated by her superior air, but it only makes her wriggling pussy get even wetter.  It clamps down on you, wringing your [cock] dry as it erupts in a powerful orgasm.\n\n");
+            outputText("Omnibus squeals happily, her sultry visage fracturing into an uninhibited expression of pleasure as she cries, \"<i>Fill me with your seed, champion!  Dominate the demon with your mighty spear!</i>\"\n\n");
+            outputText("Her purple-hued pussy spasms around you, its oddly textured interior rippling and sucking in time with your ejaculations, drinking down your cum.  Omnibus squirms happily while her body absorbs your jizz with her impossibly pleasurable hole.");
+            if (player.cumQ() >= 500 && player.cumQ() < 1000) outputText("  Her belly begins to rise with the volume of cum she's absorbed, and you finish your orgasm with a mildly pregnant demon underneath you.");
+            else if (player.cumQ() >= 1000) outputText("  Her belly rises quickly from the volume of cum you're pumping into her, swelling up until she looks ready to give birth, but her taut purple body seems to handle the strain quite well, save for her belly-button turning into an outtie with an abrupt 'pop'.");
+            outputText("  The omnibus' nubby shaft twitches happily and squirts out tiny dribbles of demon-semen, too left out by the sex to achieve a truly enjoyable orgasm, but more than willing to leak cum.\n\n");
+            outputText("Omnibus exhales with exhaustion and rubs her hands over her belly, cooing, \"<i>So, you really did give up all your semen to me.  I guess I'll have to name the first imp I birth from this after you, won't I?</i>\"\n\n");
+            if (player.cor < 33) outputText("You groan, just wishing she would stop reminding you of the consequences of this little tryst.  In a hurry to leave the demon behind, you get dressed and take off for camp.\n\n");
+            else if (player.cor < 66) outputText("You groan, wondering why she just won't get over her little act.  Even though this wasn't your best idea, it isn't nearly as bad as she makes it out to be.  You get dressed and leave, eager to be rid of her.\n\n");
+            else outputText("You bend over, rub her belly softly and whisper into her ear, \"<i>I'll be sure to spit him on my cock first chance I get, dear.</i>\"\n\n");
+            outputText("As you leave, you don't bother to spare a glance at the confused omnibus.  She isn't worth your time.");
 			player.sexReward("Default","Dick");
 			player.orgasm();
 			dynStats("lib", 3, "sen", 3, "cor", 1);
 			cleanupAfterCombat();
-		}
+
+        }
+        public function OGRBM_toobig():void {
+			var x:Number = player.biggestCockIndex();
+            //[MALE TOO DAMN BIGGA WIGGA]
+            //[lust] 
+            if (monster.lust > 99) outputText("Ignoring her squeals of pleasure, you force omnibus onto her back, oogling her perky breasts, indecent cock, and soaked cunt.  She looks up at you hungrily, and you have the feeling that on some level you're still giving her what she wants.  Wary of the demon's wiles, you pull her hands together and use some scraps of cloth to bind them up.  Moaning with helpless desire, the demon grinds her crotch against your [leg], spreading her thighs apart into a near split and giving you a world-class view of her juicy purple cunt.\n\n");
+            //[hp] 
+            else outputText("Ignoring her grunts of pain, you force omnibus onto her back, oogling her perky breasts, limp cock, and hairless cunt.  She looks up at you with disdain, growling at you from the back of her throat. Wary of the demon's abilities, you tie up her hands with a few pieces of tattered cloth.  She seems to like it, judging by her tenting erection and now-glistening gash.  The slut even goes so far as to begin grinding her crotch against you, spreading her thighs wider and wider as she gets off on being restrained.  You're given a perfect view of her enticing purple cunt.\n\n");
+            outputText("Omnibus licks her lips and gazes up at you, begging with a voice that drips with seductive intent, \"<i>Please, don't rape me Champion!  Don't tie me down and rape me like a helpless village-girl!</i>\"\n\n");
+            if (player.cor < 33) outputText("Her words shame you.  Have you really sunk this low?  You wonder just how much this world has already corrupted you as you ready yourself to rape a sex-demon.");
+            else if (player.cor < 66) outputText("Her words confuse you.  You never would've done this when you first came here, but you're horny and you know demons don't really mind.");
+            else outputText("Her dishonest words anger you, and you slap her in the face.  Both of you know that she wants this almost as much as she wanted to rape you, and any pretense at disliking this act is a deceitful sham.");
+            outputText("  It's too late for her to have any hope of swaying you anyway.  You strip off your [armor] ");
+            outputText("and begin stroking ");
+            if (player.cockTotal() > 1) outputText("each of ");
+            outputText("your stiff [cocks], preparing to penetrate her.\n\n");
+            outputText("The [cockhead] of your [cock] squishes flat against her twat, too big for her prodigious demon-cunt to swallow.  Spurred by frustrated desires, you lift her legs and wrap her girlcum-slicked thighs about your ");
+            if (player.cockTotal() > 1) outputText("primary ");
+            outputText(cockDescript(x) + ". Omnibus' smooth skin and soft thigh-flesh form a comfortably tight masturbation tube.  Starting slowly, you begin rocking back and forth, sawing your prodigious cock-flesh over her body.  The demoness swivels her hips underneath your [cock], her slippery gash and near-crushed member feverishly rubbing into you.  Though you didn't get to truly violate her, her thighs and unblemished skin are more than good enough to bring you to the brink of orgasm.\n\n");
+            outputText("The defeated omnibus wraps her arms around your [cock] and whines lustily, \"<i>No, please!  You'll cover me in seed and despoil my face!  Please don't glaze me in that awful stuff!</i>\"\n\n");
+            outputText("You grunt, hold the captive by her ankles, and use her like a disposable sex-toy.  The slap of your " + hipDescript() + " slapping into her thighs echoes loudly, nearly drowning out the wet squishing of your [cock] with each violent brush against her cuntlips.  ");
+            if (player.cocks[x].cockLength < 18) outputText("Your [cockhead] crests between her breasts with every stroke, bumping against her chin.  It grows larger as the pleasure of the act intensifies to orgasmic levels.\n\n");
+            else if (player.cocks[x].cockLength < 24) outputText("Your [cockhead] slides over her cheek with every stroke, leaving a trail of pre-cum on her face.  The smudges of glistening pre grow larger and larger as the pleasure of the act nears orgasmic levels.\n\n");
+            else outputText("Your [cock] slides over her face with every stroke, smearing the demon's hair with your thick pre-seed before you pull back and dribble it on her face.  The pleasure of the act is incredible, and you feel yourself getting harder as the sensation nears orgasmic levels.\n\n");
+            outputText("Omnibus squeals and blubbers incoherently for a moment as she cums, eventually managing to scream out, \"<i>Yes, splatter me with seed!  Punish this lowly demon with your powerful spunk.  Dominaaaaate meeee~</i>\"\n\n");
+            outputText("Underneath your own mammoth erection, you can feel omnibus's smaller cock twisting and squirming, unloading its own hot fluids onto her sweat-slicked belly.  She wriggles and twitches under you, her thigh muscles clenching and releasing in time with her spurts as they push you beyond your limit.  You watch your [cock] as it strains and squirts, dumping your thick load into the demon's ");
+            if (player.cocks[x].cockLength < 18) outputText("tits");
+            else if (player.cocks[x].cockLength < 24) outputText("face");
+            else outputText("long hair");
+            outputText(".  The orgasming demonette continues to squirt underneath you, drenching and smearing herself with even more cum and her entire mid-section looks glazed in thick whitish goo.");
+            if (player.cumQ() >= 1000) outputText("  Your prodigious fertility quickly forms a puddle around her, leaving the deceptive seductress practically submerged in cum.");
+            outputText("\n\n");
+            outputText("You sigh, feeling immense relief, and remove your softening bulk from atop her form.  Omnibus exhales in exhaustion and smears the mixture of cum over her belly, cooing, \"<i>So you really did give me a huge load.  I'll be sure to scoop a few batches of it into my womb so we can have lots of imps together.</i>\"\n\n");
+            if (player.cor < 33) outputText("You groan, just wishing she would stop reminding you of the consequences of this little tryst.  In a hurry to leave the demon behind, you get dressed and take off for camp.\n\n");
+            else if (player.cor < 66) outputText("You groan, wondering why she just won't get over her little act.  Even though this wasn't your best idea, it isn't nearly as bad as she makes it out to be.  You get dressed and leave, eager to be rid of her.\n\n");
+            else outputText("You bend over, rub her belly softly and whisper into her ear, \"<i>I'll be sure to spit them on my cock first chance I get, dear.</i>\"\n\n");
+            outputText("As you leave, you don't bother to spare a glance at the confused omnibus; she isn't worth your time.");
+			player.sexReward("Default","Dick");
+			player.orgasm();
+			dynStats("lib", 3, "sen", 3, "cor", 1);
+			cleanupAfterCombat();
+        }
 		
 		public function OmnibusGetsRapedByFemale():void {
 			player.slimeFeed();
@@ -464,7 +475,7 @@ import classes.Scenes.UniqueSexScenes;
 			player.slimeFeed();
 			clearOutput();
 			//Nipplefuck city
-			if(player.hasFuckableNipples() && player.lust >= player.maxLust()) {
+			if(player.hasFuckableNipples() && player.lust >= player.maxLust() && (!sceneHunter.uniHerms || rand(2) == 0)) {
 				outputText("Molten arousal pumps through your veins, burning away your reason with an unquenchable desire to mate.  You drop your top, exposing your [allbreasts] to your foe in a submissive display. Lowering your eyes, you hope you can tempt her to plug your " + nippleDescript(0) + " with her demonic prick.  You roughly squeeze each sensitive tit, trailing your fingers down the sensitive breast-flesh towards your rapidly dampening fuck-holes.\n\n");
 				outputText("Your eyes relax as pure sensation overwhelms your already over-excited body.  Your fingers find your nipple-holes, locking around them while tugging and squeezing, stretching them tight with pleasure and pain.  You cast a seductive glance to the omnibus' groin, noting that she's been taken in by your wanton display.  She takes a step, her cock rippling and twisting as it shifts and changes before your eyes. It divides it half, splitting into two full-sized pricks.");
 				if(player.totalNipples() > 2) outputText("  Each of those divides again, splitting into four prehensile penises.");
@@ -580,7 +591,7 @@ import classes.Scenes.UniqueSexScenes;
 			menu();
 			outputText("You smile in satisfaction as the cow succubus collapses, unable to continue fighting.");
 			if (monster.HP < 1) addButton (5, "Kill Her", killDemon);
-			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+			SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatCowSuccubus);
 			addButton (14, "Leave", cleanupAfterCombat);
 		}
 		
@@ -608,10 +619,9 @@ import classes.Scenes.UniqueSexScenes;
 					addButton (0, "M. Fuck", SuccubusGetsRapedByMale);
 					addButton (1, "F. Fuck", SuccubusGetsRapedByFemale);
 				}
-				//if (player.lowerBody == LowerBody.PLANT_FLOWER) addButton(2, "Seeding", uniquuuesexscene.alrauneSeedingScene);
 			}
 			if (monster.HP < 1) addButton (5, "Kill Her", killDemon);
-			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+			SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatSuccubus);
 			addButton (14, "Leave", cleanupAfterCombat);
 		}
 		
@@ -621,76 +631,88 @@ import classes.Scenes.UniqueSexScenes;
 			if(monster.lust > 99) outputText("Panting hotly, the succubus staggers towards you, her eyes fixated on the bulge in your crotch.  Dark viscous liquid drips from her dusky folds as her hips undulate hypnotically.  Blue fingers smear the corrupted lubricants over the smooth outer folds of her sex as she lies back enticingly, giving up on anything but bedding you.  In moments your [armor] are on the floor and you approach your prize.\n\n");
 			//(HP) 
 			else outputText("The succubus collapses on the floor, groaning in pain.  Most of her rags have been destroyed by the combat and her blue skin is marked with deep purple bruises and bloody lacerations.  You undress, straddling your conquest and gazing down on her helpless, curvaceous form.  She looks up at you and forces a smile, licking the blood from a cracked lip and beginning to masturbate for you.\n\n");
-			//START ZE RAEP CANNONZ
+			//((TOO BIG))
+			sceneHunter.selectFitNofit(SGRBM_fits, SGRBM_toobig, monster.vaginalCapacity());
+		}
+
+        private function SGRBM_start(x:int):void {
+            //START ZE RAEP CANNONZ
 			outputText("While pondering the best way to take your horny prize, her complexion begins to change, the marks of combat disappearing from her toned body.  The demonic horns crowning her perfect visage begin withdrawing into her head, and her hair ");
 			if(player.hairLength > monster.hairLength) outputText("lengthens");
 			else outputText("shortens");
-			outputText(", shifting to [haircolor].  The bone structures of her cheeks, nose, and face shift ever so slightly, and you suddenly realize you are looking down at a slutty version of yourself!  You aren't sure if it's the growing pool of succubus fluid below you or how hot your female twin is, but your [cock] is as hard as a rock.\n\n");
-			outputText("Well, you DID decide to rape her, and now you know that you ARE smoking hot.  You shrug and shove your fem-double's legs apart, exposing her glistening fuck-target.  You bend down and bite her nipple as you position yourself at her entrance, allowing her to grasp your [cock] and coat it with her slick dark fluids.  It tingles as the tainted cunt-juices wick up into your dick like the oil from a lantern back home. At first it burns painfully, as if badly sunburned, but you adjust to the discomfort and marvel as your skin turns blackish-purple. Midnight-colored nodules sprout along the upper and lower portions of your [cock], perfectly shaped to tease clits.  Just under its head, a ring of larger growths emerge, somewhat pointy, but flexible, rubbery and incredibly sensitive.  Your [cock] gets harder and harder as it grows slightly beyond its normal size.  It tugs your groin forwards, practically leaping towards its demonic mate on its own volition.  You cave in and press forwards, parting her folds and submerging your crown in corruptive bliss.\n\n");
-			//((TOO BIG))
-			if(player.cockArea(0) > monster.vaginalCapacity()) {
-				outputText("But the pleasure is short-lived, as even her altered physiology can't accommodate your massive tool. With a grunt of frustration you yank your hungry demonic cock away from your goal.  She smiles knowingly and massages her breasts, releasing streams of the same black fluid from her tumescent nipples. It coats the valley of her pornstar-sized breasts, allowing the fluid to flow down and pool in her tight little belly button.\n\n");
-				outputText("\"<i>This will, like, be even better anyways stud!</i>\" coos a higher pitched you, smashing her tits together wetly for emphasis.  Viscous strings of lubricants form a mesmerizing lattice between her mountainous tits as she puts on a show for you.  Entirely of its own accord, your [cock] drags you into her web of corruption, plopping itself firmly into the river of desire that fountains from the peaks on either side. With a steady rhythm, you rock your " + hipDescript() + " back and forwards, plunging into her delicious fuckpillows without abandon. With an inhuman strength, she pushes them together, forcing them to completely encircle your over-sized pole with a tight ring of corruption-dripping tit-flesh.\n\n");
-				player.cocks[0].cockType = CockTypesEnum.DEMON;
-				//[normal]
-				if(player.cumQ() < 50) outputText("Droplets of pre begin to escape your cock-slit every time your sensitive nodules pass between your fem-clone's wondrous pleasure-tits.  You fuck harder, no longer caring if it's your choice or your cock's, mashing your purplish head against her lips with every stroke.  The flash-fire of an orgasm sweeps over you, over-engorging the nodules all over your cock and doubling their size.  Your hips resort to tiny rocking motions as you rub your cock-slit into your fem-self's open mouth, blasting thick ropes of tainted black cum into her mouth. Though you quickly empty of cum and collapse onto her, your " + hipDescript() + " continue to fuck like a machine.  All you can do is hang on to your meat and try to stay conscious as your demonic prick feasts on your double.\n\n");
-				//[high]
-				if(player.cumQ() >= 50 && player.cumQ() < 500) {
-					outputText("A steady stream of pre begins to escape your cock-slit, drooling over your double's face and tits as you pound away at her bouncing ring of titflesh.  Every new bump and nodule seems as sensitive as your entire maleness used to be.  Every thrust into the dark wet prison only makes your pre-cum drool faster and your [cock]'s new adornments grow fuller and even more tender.  In a flash, the fire of orgasm overwhelms your body's new taint-saturated cock.  Like a kinky 'wave', each nodule from the base to the pointy ring at your crown grows larger as your muscles clench.  ");
-					if(player.balls > 0) outputText("Your [balls] practically glow with relief as they begin contracting.  Their entire surface is covered with black veins that radiate from your demonic prick, sharing the corruption with your sperm factories.  ");
-					outputText("You throw back your head as the first wave of release pours from your tip, splattering your female clone with inky black cum!  The color startles you for a moment before the next blast moves down your shaft, visibly distending your urethra until it bursts free to coat her hair.  Your hips keep moving of their own accord, massaging the crown-ring with tits during each thrust forwards and accompanying cumshot.  By the fourth load, your double is opening her soaked lips wide and guzzling it down.  By the sixth she's sputtering and coughing as the black sex juice sloughs off her.  By the ninth she's managed to clamp her lips over your cock-tip, and her throat bulges ludicrously with the effort of taking each load.  Thankfully, your orgasm finally winds down.  As the last few globs of inky jism escape from you, you realize your hips are still moving, plunging your massive possessed tool into its new favorite place.  Sighing, you hang onto your endowment and try to stay conscious in spite of your exhaustion and the overwhelming feelings coming from your groin.\n\n");
-				}
-				//[ultrahigh]
-				if(player.cumQ() >= 500) {
-					outputText("A river of pre-cum begins pouring from your cock-tip's slit, soaking your slutty double's face and tits as it mixes with the corruptive fluids already smeared about.  The alien bumps and nodules upon your [cock] flex and twitch at every pass through the fuck-able foe's soft tits, slowly growing as they absorb more of your slut-self's taint.  The tight squeeze around your newly retextured [cock] overwhelms any sense of control you may have had as your arousal-soaked groin takes over completely.  You begin pounding the tit-pussy as if your life depended on it, jack-hammering  your [cock] forward and back hard enough to make the mountains of breast ripple and shake like jello during an earthquake.  The ring of pointed nodules around your crown continues to swell and grow with every pass through the inky passage, soaking up more and more of the corruption until they are each nearly two inches long.  Overwhelmed by the pleasure, your eyes roll back and a mighty orgasm comes to boil in your groin.  ");
-					if(player.balls > 0) outputText("Your " + ballsDescript() + " twitch and shake, the veiny surface of your sack darkening as the corruption begins to fill them.  ");
-				}
-				outputText("Still, your possessed maleness is far from finished as it continues to slide along her belly and between her still-dripping tits, and before long you feel another orgasm building.  You hang on for dear life, hoping just to stay conscious through the ordeal...\n\nHour later you pull away, sated.  For now.");
-			}
-			//((IT FITS))
-			else {
-				outputText("You plunge in to her velvety depths and feel her rippling cunt-muscles contract tightly around you for a perfect fit.  She gasps as each cock-distorting nodule bounces her two-inch clitty, making your mirror image moan like a bitch in heat.  The corrupted fluids dripping from her snatch squelch loudly, making your groin burn with pleasure.  ");
-				if(player.balls > 0) outputText("Looking down, you even see the veins on your sack darkening to solid black as the corruption begins tainting your sperm-factories.  ");
-				outputText("You pull back, letting the ring of pointed fleshy barbs spring free before plunging them back in. The pleasure makes you swoon, nearly forcing you to orgasm on the spot.  ");
-				if(player.biggestTitSize() > 0) outputText("Your female double reaches down to pinch your nipple, spurring you on, \"<i>Please, could you like, cum for me?</i>\"");
-				//New PG
-				outputText("\n\n");
-				player.cocks[0].cockType = CockTypesEnum.DEMON;
-				outputText("The succubus bucks her hips weakly, still clearly defeated, but egging on your orgasm as dark fluids squelch free from her quim.  \"<i>Please... can't you see how hot you're making me?  I've made your cock perfect, so please make me cum!</i>\" she begs as she quivers with delight.  ");
-				outputText("You pause to think about it, not noticing that your groin is pounding away with furious energy, splattering cum and pre over her thighs as your new cock's instincts take control from your waist down.  Gasping with sudden pleasure, you feel a flash of heat pass through your tainted meatstick as an orgasm builds.");
-				//New PG
-				outputText("Each of the new bumps and rounded spines of your [cock] flood with blood, doubling in size as orgasm overtakes you.  ");
-				outputText("Your hips bury your entire length inside her, acting on their own as your [cock] clenches, pouring more and more spunk inside her");
-				if(player.balls > 0) outputText(" as your balls empty their load queue");
-				outputText(".  ");
-				//Big cum
-				if(player.cumQ() >= 50 && player.cumQ() < 400) outputText("You inhale as black cum spatters from her entrance, her belly distending slightly as you empty what feels like a gallon inside her.  ");
-				//((Ginormohuge)) 
-				if(player.cumQ() >= 400) outputText("Gasping in pleasure and surprise, you marvel as her belly visibly expands with each eruption of your dark load.  At first it looks like a tiny belly, but by the time the orgasm finishes, your girlish double looks like a woman in her ninth month of pregnancy – with twins.");
-				outputText("\n\nYou pant with exertion and pull back, only to have your [cock] plunge right back in. Beginning another rough fucking session, your hips force-fuck her beyond your control.  Exhausted, you lean over her, figuring you may as well enjoy your double's wondrous breasts until your demonic cock has finally sated itself.  You just hope you don't black out from the waves of pleasure each of your new nubs radiates.\n\n\nHours later you pull away, sated.  For now.");
-			}
-			outputText("\n\nThe succubus licks her fingers clean, looking totally recovered.  In the blink of an eye, she dashes out and disappearing in the distance.");
+			outputText(", shifting to [haircolor].  The bone structures of her cheeks, nose, and face shift ever so slightly, and you suddenly realize you are looking down at a slutty version of yourself!  You aren't sure if it's the growing pool of succubus fluid below you or how hot your female twin is, but your " + player.cockDescript(x) + " is as hard as a rock.\n\n");
+			outputText("Well, you DID decide to rape her, and now you know that you ARE smoking hot.  You shrug and shove your fem-double's legs apart, exposing her glistening fuck-target.  You bend down and bite her nipple as you position yourself at her entrance, allowing her to grasp your " + player.cockDescript(x) + " and coat it with her slick dark fluids.  It tingles as the tainted cunt-juices wick up into your dick like the oil from a lantern back home. At first it burns painfully, as if badly sunburned, but you adjust to the discomfort and marvel as your skin turns blackish-purple. Midnight-colored nodules sprout along the upper and lower portions of your " + player.cockDescript(x) + ", perfectly shaped to tease clits.  Just under its head, a ring of larger growths emerge, somewhat pointy, but flexible, rubbery and incredibly sensitive.  Your " + player.cockDescript(x) + " gets harder and harder as it grows slightly beyond its normal size.  It tugs your groin forwards, practically leaping towards its demonic mate on its own volition.  You cave in and press forwards, parting her folds and submerging your crown in corruptive bliss.\n\n")
+        }
+
+        public function SGRBM_toobig():void {
+            var x:int = player.findCock(1, monster.vaginalCapacity(), -1);
+            SGRBM_start(x);
+            outputText("But the pleasure is short-lived, as even her altered physiology can't accommodate your massive tool. With a grunt of frustration you yank your hungry demonic cock away from your goal.  She smiles knowingly and massages her breasts, releasing streams of the same black fluid from her tumescent nipples. It coats the valley of her pornstar-sized breasts, allowing the fluid to flow down and pool in her tight little belly button.\n\n");
+            outputText("\"<i>This will, like, be even better anyways stud!</i>\" coos a higher pitched you, smashing her tits together wetly for emphasis.  Viscous strings of lubricants form a mesmerizing lattice between her mountainous tits as she puts on a show for you.  Entirely of its own accord, your " + player.cockDescript(x) + " drags you into her web of corruption, plopping itself firmly into the river of desire that fountains from the peaks on either side. With a steady rhythm, you rock your " + hipDescript() + " back and forwards, plunging into her delicious fuckpillows without abandon. With an inhuman strength, she pushes them together, forcing them to completely encircle your over-sized pole with a tight ring of corruption-dripping tit-flesh.\n\n");
+            player.cocks[x].cockType = CockTypesEnum.DEMON;
+            //[normal]
+            if(player.cumQ() < 50) outputText("Droplets of pre begin to escape your cock-slit every time your sensitive nodules pass between your fem-clone's wondrous pleasure-tits.  You fuck harder, no longer caring if it's your choice or your cock's, mashing your purplish head against her lips with every stroke.  The flash-fire of an orgasm sweeps over you, over-engorging the nodules all over your cock and doubling their size.  Your hips resort to tiny rocking motions as you rub your cock-slit into your fem-self's open mouth, blasting thick ropes of tainted black cum into her mouth. Though you quickly empty of cum and collapse onto her, your " + hipDescript() + " continue to fuck like a machine.  All you can do is hang on to your meat and try to stay conscious as your demonic prick feasts on your double.\n\n");
+            //[high]
+            if(player.cumQ() >= 50) {
+                if (player.cumQ() < 500) {
+                    outputText("A steady stream of pre begins to escape your cock-slit, drooling over your double's face and tits as you pound away at her bouncing ring of titflesh.  Every new bump and nodule seems as sensitive as your entire maleness used to be.  Every thrust into the dark wet prison only makes your pre-cum drool faster and your " + player.cockDescript(x) + "'s new adornments grow fuller and even more tender.  In a flash, the fire of orgasm overwhelms your body's new taint-saturated cock.  Like a kinky 'wave', each nodule from the base to the pointy ring at your crown grows larger as your muscles clench.  ");
+                    if(player.balls > 0) outputText("Your " + ballsDescript() + " twitch and shake, the veiny surface of your sack darkening as the corruption begins to fill them.  ");
+                }
+                else {
+                    outputText("A river of pre-cum begins pouring from your cock-tip's slit, soaking your slutty double's face and tits as it mixes with the corruptive fluids already smeared about.  The alien bumps and nodules upon your " + player.cockDescript(x) + " flex and twitch at every pass through the fuck-able foe's soft tits, slowly growing as they absorb more of your slut-self's taint.  The tight squeeze around your newly retextured " + player.cockDescript(x) + " overwhelms any sense of control you may have had as your arousal-soaked groin takes over completely.  You begin pounding the tit-pussy as if your life depended on it, jack-hammering  your " + player.cockDescript(x) + " forward and back hard enough to make the mountains of breast ripple and shake like jello during an earthquake.  The ring of pointed nodules around your crown continues to swell and grow with every pass through the inky passage, soaking up more and more of the corruption until they are each nearly two inches long.  Overwhelmed by the pleasure, your eyes roll back and a mighty orgasm comes to boil in your groin.  ");
+                    if(player.balls > 0) outputText("Your [balls] practically glow with relief as they begin contracting.  Their entire surface is covered with black veins that radiate from your demonic prick, sharing the corruption with your sperm factories.  ");
+                }
+                outputText("You throw back your head as the first wave of release pours from your tip, splattering your female clone with inky black cum!  The color startles you for a moment before the next blast moves down your shaft, visibly distending your urethra until it bursts free to coat her hair.  Your hips keep moving of their own accord, massaging the crown-ring with tits during each thrust forwards and accompanying cumshot.  By the fourth load, your double is opening her soaked lips wide and guzzling it down.  By the sixth she's sputtering and coughing as the black sex juice sloughs off her.  By the ninth she's managed to clamp her lips over your cock-tip, and her throat bulges ludicrously with the effort of taking each load.  Thankfully, your orgasm finally winds down.  As the last few globs of inky jism escape from you, you realize your hips are still moving, plunging your massive possessed tool into its new favorite place.  Sighing, you hang onto your endowment and try to stay conscious in spite of your exhaustion and the overwhelming feelings coming from your groin.\n\n");
+            }
+            outputText("Still, your possessed maleness is far from finished as it continues to slide along her belly and between her still-dripping tits, and before long you feel another orgasm building.  You hang on for dear life, hoping just to stay conscious through the ordeal...\n\nHour later you pull away, sated.  For now.");
+            //common
+            outputText("\n\nThe succubus licks her fingers clean, looking totally recovered.  In the blink of an eye, she dashes out and disappearing in the distance.");
 			player.orgasm();
 			player.sexReward("vaginalFluids","Dick");
 			dynStats("cor", 5);
 			cleanupAfterCombat();
-		}
+        }
+
+        public function SGRBM_fits():void {
+            var x:int = player.findCock(1, -1, monster.vaginalCapacity());
+            SGRBM_start(x);
+            outputText("You plunge in to her velvety depths and feel her rippling cunt-muscles contract tightly around you for a perfect fit.  She gasps as each cock-distorting nodule bounces her two-inch clitty, making your mirror image moan like a bitch in heat.  The corrupted fluids dripping from her snatch squelch loudly, making your groin burn with pleasure.  ");
+            if(player.balls > 0) outputText("Looking down, you even see the veins on your sack darkening to solid black as the corruption begins tainting your sperm-factories.  ");
+            outputText("You pull back, letting the ring of pointed fleshy barbs spring free before plunging them back in. The pleasure makes you swoon, nearly forcing you to orgasm on the spot.  ");
+            if(player.biggestTitSize() > 0) outputText("Your female double reaches down to pinch your nipple, spurring you on, \"<i>Please, could you like, cum for me?</i>\"");
+            //New PG
+            outputText("\n\n");
+            player.cocks[x].cockType = CockTypesEnum.DEMON;
+            outputText("The succubus bucks her hips weakly, still clearly defeated, but egging on your orgasm as dark fluids squelch free from her quim.  \"<i>Please... can't you see how hot you're making me?  I've made your cock perfect, so please make me cum!</i>\" she begs as she quivers with delight.  ");
+            outputText("You pause to think about it, not noticing that your groin is pounding away with furious energy, splattering cum and pre over her thighs as your new cock's instincts take control from your waist down.  Gasping with sudden pleasure, you feel a flash of heat pass through your tainted meatstick as an orgasm builds.");
+            //New PG
+            outputText("Each of the new bumps and rounded spines of your " + player.cockDescript(x) + " flood with blood, doubling in size as orgasm overtakes you.  ");
+            outputText("Your hips bury your entire length inside her, acting on their own as your " + player.cockDescript(x) + " clenches, pouring more and more spunk inside her");
+            if(player.balls > 0) outputText(" as your balls empty their load queue");
+            outputText(".  ");
+            //Big cum
+            if(player.cumQ() >= 50 && player.cumQ() < 400) outputText("You inhale as black cum spatters from her entrance, her belly distending slightly as you empty what feels like a gallon inside her.");
+            //((Ginormohuge)) 
+            if(player.cumQ() >= 400) outputText("Gasping in pleasure and surprise, you marvel as her belly visibly expands with each eruption of your dark load.  At first it looks like a tiny belly, but by the time the orgasm finishes, your girlish double looks like a woman in her ninth month of pregnancy – with twins.");
+            outputText("\n\nYou pant with exertion and pull back, only to have your " + player.cockDescript(x) + " plunge right back in. Beginning another rough fucking session, your hips force-fuck her beyond your control.  Exhausted, you lean over her, figuring you may as well enjoy your double's wondrous breasts until your demonic cock has finally sated itself.  You just hope you don't black out from the waves of pleasure each of your new nubs radiates.\n\n\nHours later you pull away, sated.  For now.");
+			//common
+            outputText("\n\nThe succubus licks her fingers clean, looking totally recovered.  In the blink of an eye, she dashes out and disappearing in the distance.");
+			player.orgasm();
+			player.sexReward("vaginalFluids","Dick");
+			dynStats("cor", 5);
+			cleanupAfterCombat();
+        }
 		
 		public function SuccubusGetsRapedByFemale():void {
 			clearOutput();
 			if(monster.HP <= monster.minHP()) outputText("Your foe staggers and falls hard on her ass, utterly defeated.  Her bruises and lacerations slowly fade and heal, regenerating with the aid of her demonic powers.  You easily tear through her clothes. It doesn't take much to force her down on her back and straddle her as you disrobe, ready to take your pleasure.\n\n");
 			else outputText("Your foe drops to her knees, stuffing three digits into her greedy snatch as arousal overcomes her desire to subdue you.  With great care, you approach your insensible enemy and tear off her clothes as you force her down on her back.  As if possessing a will of their own, her legs lewdly spread as you disrobe.\n\n");
 			outputText("Her budding clit rises from between her folds, hardening like a tiny three inch dick.\n\n");
-			if(player.biggestLactation() > 1) {
-				menu();
-				outputText("<b>You could scissor with her, or maybe force-feed her some of the milk you've backed up.  Which will it be?</b>");
-				addButton (0, "Scissor", ScissorSuccubus);
-				addButton (1, "Force Feed", ForcefeedSuccubus);
-			}
-			//No choices if not lactating...
-			else {
-				ScissorSuccubus();
-			}
+            menu();
+            if (player.biggestLactation() > 1)
+                outputText("<b>You could scissor with her, or maybe force-feed her some of the milk you've backed up.  Which will it be?</b>");
+            addButton (0, "Scissor", ScissorSuccubus);
+            addButtonIfTrue(1, "Force Feed", ForcefeedSuccubus, "Req. higher lactation", player.biggestLactation() > 1);
 		}
 		
 		public function ScissorSuccubus():void {
@@ -757,12 +779,12 @@ import classes.Scenes.UniqueSexScenes;
 		
 		public function loseToASuccubus():void {
 			clearOutput();
-			if(player.cocks.length > 0) {
+			if(player.cocks.length > 0 && (!sceneHunter.uniHerms || rand(2) == 0)) {
 				if(player.lust >= player.maxLust()) outputText("Driven half mad with lust, you drop to your knees. Your fingers fly over your body as you pry off every last piece of your [armor], displaying just how hard your alluring opponent has gotten you.  The succubus saunters over, every sinuous step radiating the inhuman sexuality that pours off her skin like heat from a bonfire.\n\n");
 				else outputText("Exhausted, you collapse before the succubus.  She effortlessly slices away your [armor], peeling your possessions away with practiced ease.  In moments you are stark naked and wholly exposed to your captor.  In spite of yourself, your body begins to respond to her sultry aura, displaying the hardness of your desire and shame immediately.\n\n");
 				outputText("\"<i>Awww, did I get you all <b>HOT</b> and bothered?</i>\" She croons, poising foot above you as her high-heels seem to fade away.  Warm skin begins to press against your groin as slender toes curl around the head of your throbbing maleness, your foe having her way with your desire-saturated form.  You mewl pitifully at the sensation, your hips twitching involuntarily against her demonic sole. The slippery surface of her foot squeezes as she expertly strokes you with her foot, delighting in her complete dominance over your easily controlled member.\n\n");
 				//balls or pussy play
-				if(player.balls > 0) {
+				if(player.balls > 0 && (!sceneHunter.uniHerms || rand(2) == 0)) {
 					//[[balls]]
 					if(player.ballSize < 6) outputText("Your sultry captor leans low over you, her luscious tits wobbling enticingly as she reaches down and caresses your [balls] with soft touches.  Almost immediately you feel them clench with boiling heat, growing heavy and churning with a load big enough to satisfy a thirsty succubus.");
 					//[[huge balls]]

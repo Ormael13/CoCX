@@ -9,24 +9,14 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Dungeons.DeepCave.*;
 import classes.Scenes.NPCs.ShouldraFollower;
 import classes.Scenes.SceneLib;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 import classes.internals.Utils;
+import classes.display.SpriteDb;
 
 use namespace CoC;
 
 	public class DeepCave extends DungeonAbstractContent
 	{
-		private static const DUNGEON_CAVE_ENTRANCE:int			= 10;
-		private static const DUNGEON_CAVE_TUNNEL:int			= 11;
-		private static const DUNGEON_CAVE_GATHERING_HALL:int	= 12;
-		private static const DUNGEON_CAVE_FUNGUS_CAVERN:int		= 13;
-		private static const DUNGEON_CAVE_TORTURE_ROOM:int		= 14;
-		private static const DUNGEON_CAVE_SECRET_TUNNEL:int		= 15;
-		private static const DUNGEON_CAVE_ZETAZ_CHAMBER:int		= 16;
-
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		public var shouldraFollower:ShouldraFollower = new ShouldraFollower();
-
 		public function DeepCave() {}
 
 		public function enterDungeon():void {
@@ -82,7 +72,7 @@ use namespace CoC;
 
 		//Sean the Incubus
 		private function investigate():void {
-			spriteSelect(52);
+			spriteSelect(SpriteDb.s_sean);
 			clearOutput();
 			outputText("You try to sneak closer to get a closer look at him, but the demon immediately stops what he's doing and stares straight at you.  He laughs, \"<i>Well now I know what happened to all the demons inside.  I really would've expected a bunch of renegades like them to put up a better fight.</i>\"\n\n");
 			outputText("Caught, you stand up and ready your [weapon], taking up a defensive stance to ready yourself for whatever new attacks this demon has.  Strangely, he just starts laughing again, and he has to stop to wipe tears from the corners of his eyes before he talks, \"<i>Oh that's rich!  I'm not here to fight you, Champion.  I doubt I'd stand much of a chance anyways.  I heard there were some renegades around this area, so I thought I'd show up to offer my services.  You see, I'm a procurer of strange and rare alchemical solutions.  Of course you beat down everyone before I got here, but I thought I'd stick around and see if some scouts were still around before I high-tailed it out of here.</i>\"\n\n");
@@ -92,7 +82,7 @@ use namespace CoC;
 		}
 
 		private function seanDeal():void {
-			spriteSelect(52);
+			spriteSelect(SpriteDb.s_sean);
 			clearOutput();
 			outputText("\"<i>Excellent!  Give me a few moments to gather my things and I'll be open for business!</i>\" exclaims the strange demon.  If his story is true it's no wonder he doesn't get along with the rest of his kind.");
 
@@ -101,21 +91,21 @@ use namespace CoC;
 			doNext(roomEntrance);
 		}
 		private function seanNoDeal():void {
-			spriteSelect(52);
+			spriteSelect(SpriteDb.s_sean);
 			clearOutput();
 			flags[kFLAGS.ZETAZ_LAIR_DEMON_VENDOR_PRESENT] = -1;
 			outputText("Sean nods, grabs a pack, and takes off running before you have a chance to kill him.");
 			doNext(roomEntrance);
 		}
 		private function seanNotNow():void {
-			spriteSelect(52);
+			spriteSelect(SpriteDb.s_sean);
 			clearOutput();
 			outputText("\"<i>Very well. Come back when you've changed your mind,</i>\" Sean sighs.");
 			doNext(roomEntrance);
 		}
 
 		public function incubusShop():void {
-			spriteSelect(52);
+			spriteSelect(SpriteDb.s_sean);
 			if(flags[kFLAGS.NIAMH_SEAN_BREW_BIMBO_LIQUEUR_COUNTER] == 1) {
 				SceneLib.telAdre.niamh.getBimboozeFromSean();
 				return;
@@ -146,7 +136,7 @@ use namespace CoC;
 
 		private function buyItem(item:Number = 0):void
 		{
-			spriteSelect(52);
+			spriteSelect(SpriteDb.s_sean);
 			if (item == 0) incubusBuy(consumables.NUMBROX);
 			if (item == 1) incubusBuy(consumables.SENSDRF);
 			if (item == 2) incubusBuy(consumables.REDUCTO);
@@ -161,7 +151,7 @@ use namespace CoC;
 		}
 
 		public function incubusBuy(itype:ItemType):void {
-			spriteSelect(52);
+			spriteSelect(SpriteDb.s_sean);
 			clearOutput();
 			outputText("The incubus lifts " + itype.longName + " from his shelves and says, \"<i>That will be " + (itype.value * 3) + " gems.  Are you sure you want to buy it?</i>\"");
 			if(player.gems < (itype.value * 3)) {
@@ -173,7 +163,7 @@ use namespace CoC;
 		}
 
 		public function incubusTransact(itype:ItemType):void {
-			spriteSelect(52);
+			spriteSelect(SpriteDb.s_sean);
 			clearOutput();
 			player.gems -= itype.value * 3;
 			statScreenRefresh();
@@ -225,7 +215,7 @@ use namespace CoC;
 
 		//Vala
 		public function loseToVala():void {
-			spriteSelect(85);
+			spriteSelect(SpriteDb.s_valaSlave);
 			if(player.gender == 3) loseToValaAsHerm();
 			if(player.gender == 1) loseToValaAsMale();
 			if(player.gender == 2) loseToValaFemale();
@@ -239,7 +229,7 @@ use namespace CoC;
 		//Fight Loss-
 		//(Herm)
 		public function loseToValaAsHerm():void {
-			spriteSelect(85);
+			spriteSelect(SpriteDb.s_valaSlave);
 			clearOutput();
 			outputText("You collapse, no longer able to stand, and gasp weakly. The fairy took entirely too much delight in the fight, and her wet pussy is practically squirting with every heartbeat as she hovers over you, rubbing herself in anticipation. \"<i>The masters' will be happy. They will reward their Bitch with cum.</i>\" Her mouth drools as much as her slavering snatch. \"<i>Oh so much cum, and all for their good little pet.</i>\"\n\n");
 			outputText("With a strength that seems out of place for the girl's rail-thin arms, she drags you to the center of the room and lifts your arms into the air. Licking up and down your [skin.type], she grabs a pair of dangling manacles from the ceiling and claps them around your wrists with a metallic snap that seems horribly final to you. Responding to the sudden weight, the device the manacles are attached to begins to haul upward, pulling your chain into the air and lifting you by your arms into a slouched heap, dangling helplessly. The girl licks down your ribs, over your abdomen, and slathers your " + hipDescript() + " in her saliva. More clapping irons puncture your weakened awareness and you jerk your body to find that she's bound your [legs] to the floor. You shiver, hanging in the rusty fetters, fearing what must surely be coming.\n\n");
@@ -249,7 +239,7 @@ use namespace CoC;
 			doNext(loseToValaAsHermPartII);
 		}
 		public function loseToValaAsHermPartII():void {
-			spriteSelect(85);
+			spriteSelect(SpriteDb.s_valaSlave);
 			clearOutput();
 			outputText("It proves to be so much worse than you thought. Even though the nozzle is at its lowest setting, you can feel hot spunk flowing into your cunt and colon, the hose jerking as globs of the jizz begin to ooze into your recesses. The fairy laughs with a voice that is all the more wicked from the pure, clean, crystal tones it carries. \"<i>The masters' love is so sweet inside us. More future masters for us to birth and so many orgasms.</i>\" She begins to tweak her clit and turns up the crank a notch, the trickle of slimy goo becoming a regular pumping. If not for the coldness of the metal inside you, the heat of the cum would be unbearable. You have the horrible realization that imps must be filling the hidden reservoir even as their fairy slave guides it into you. You scream in disgust and wriggle your [butt], trying to get the cursed toy out of you.\n\n");
 			outputText("The fairy is too aroused by your bondage and she can't help herself from joining in. She pulls the cum pump from your sopping holes and flutters against your chest. Slamming herself on your [cock], she twists the hooking tubes so that one plugs back into your spunk-drooling " + vaginaDescript(0) + " and the other into her ass. The girl screams right along with you, her mindless joy drowning out your dismay as she bucks against your " + hipDescript() + " in time to the cum flooding the two of you. \"<i>We're good sluts,</i>\" she gurgles. \"<i>Maybe- ah- Bitch will keep you secret from t-t-the masters for a while longer. Prepare you- ooo- for them. You will be so o-O-OBEDIENT. You'll learn to love Vala,</i>\" she whispers, a gleam of intellect shining through her broken mind for an instant. She grips the iron shafts and jams them deeper into your bodies, her bloated labia squeezing your [cock] all the tighter. The hooked glans at the tip of the pump drive her wild and she begins hard-fucking the two of you with it, parting your cervix even as you slam into hers.\n\n");
@@ -260,7 +250,7 @@ use namespace CoC;
 		}
 		//Fight Loss-
 		public function loseToValaAsMale():void {
-			spriteSelect(85);
+			spriteSelect(SpriteDb.s_valaSlave);
 			outputText("You collapse, no longer able to stand, and gasp weakly. The fairy took entirely too much delight in the fight, and her wet pussy is practically squirting with every heartbeat as she hovers over you, rubbing herself in anticipation. \"<i>Bitch will show you the masters' pleasures. They will reward it with cum.</i>\" Her mouth drools as much as her slavering snatch. \"<i>Oh so much cum, and all for their good little slut.</i>\"\n\n");
 			outputText("You are powerless to stop the fairy as she drags you to the south wall and up to the wooden rail secured a couple of feet off the ground. \"<i>When she was still growing, Bitch was too small and tight for the masters,</i>\" your captor tells you. \"<i>They blessed her with this ladder to make us big enough. You will feel their generosity.</i>\" Gripping you under the arms, the fairy's lust-fuelled strength lifts you off the ground and flies you directly over the bristling peg ladder.\n\n");
 			//[Next]
@@ -270,7 +260,7 @@ use namespace CoC;
 			else doNext(loseToValaMaleIIGape);
 		}
 		public function loseToValaAsMaleIITight():void {
-			spriteSelect(85);
+			spriteSelect(SpriteDb.s_valaSlave);
 			clearOutput();
 			//(tight ass)
 		//	if(player.ass.analLooseness <= 1) {
@@ -281,7 +271,7 @@ use namespace CoC;
 			doNext(loseToValaMaleIILoose);
 		}
 		public function loseToValaMaleIILoose():void {
-			spriteSelect(85);
+			spriteSelect(SpriteDb.s_valaSlave);
 			clearOutput();
 			//(loose ass)
 			outputText("\"<i>Sluts are trained well,</i>\" she sighs, happily. \"<i>This one knows only the pleasures of the masters, now.</i>\" The peg under you would be above average on a normal human- easily 7 inches long and two inches wide. Your " + assholeDescript() + " clenches and you writhe in the fairy's arms, but she lets gravity do her dirty work, lowering you onto the human-sized wooden cock, the varnished surface pulling apart your [butt] and sliding into your nethers with an uncomfortable tight sensation. Despite the humiliation of the rape, the pressure on your prostate begins pumping blood into your [cock], turning your body into a traitor. You don't dare try to pull off, for fear of the damage it might do to your anus, and you are forced to sit in shame on the wooden erection. The girl flutters down and laps at your stiffening cock, trying as hard as she can not to mount you then and there. Her hungry tongue takes some of the building pain from you. Finally, she decides you've had enough and lifts you into the air, but to your dismay, she takes you another few notches down the line.");
@@ -292,7 +282,7 @@ use namespace CoC;
 		}
 		//(Very loose ass)
 		public function loseToValaMaleIIVeryLoose():void {
-			spriteSelect(85);
+			spriteSelect(SpriteDb.s_valaSlave);
 			clearOutput();
 			outputText("The fairy suspends you over a bulbous cock, at least a foot long and three inches wide, carved to resemble an imp's barbed, demonic shaft. \"<i>The masters are very kind,</i>\" the girl promises, \"<i>They know a slut's limits and gladly help it exceed them. They will rebuild you to their liking.</i>\" The memory of her own training has overwhelmed her dulled expression and she can't help but mount you in the air, swinging her legs around your waist and guiding her slavering pussy to your [cock]. Just as your head slides into her cunt, however, she loses her grip and you fall from her arms, landing atop the imp dick, drawing an agonized scream of pain. The twelve inches of wood worn down to a polished gleam vanish up your " + assholeDescript() + " and distort your intestines. You are so full that you feel like you've been speared through the gut, but your prostate does not care about your misery. Full penetration drives your cock wild and it surges to life, pulsing with every heartbeat. You can feel an orgasm building, but all you care about is the crushing pressure in your nethers. Just before you can cum, the fairy lifts you off the terrible prong and you actually sigh in relief, despite being denied release. Your cock twitches in the open air and it feels like a weight has been lifted from your chest. She giggles and flies you all the way to the last prong.\n\n");
 			//[Player's ass widens and go to last]
@@ -302,7 +292,7 @@ use namespace CoC;
 		}
 		//(Gaping asshole)
 		public function loseToValaMaleIIGape():void {
-			spriteSelect(85);
+			spriteSelect(SpriteDb.s_valaSlave);
 			clearOutput();
 			outputText("The fairy takes you to the final peg along the rail. It is a nightmarish mix of horse, dog, and minotaur cock. It has a flared head, to make the initial penetration all the more painful, a bulging knot on the end to utterly destroy your spincter, and the whole thing stands a foot and a half tall, nearly five inches wide at the tip. You beg the fairy. You plead. There is no way you can go onto that, you say, it will kill you. All dignity flees as you pitifully sob up to her. You'll do whatever the imps want- whatever the Masters want, you correct yourself. You'll be their toy and cum dump, you'll drink every last bit of your masters' love until you can't taste anything else. You will surrender yourself to them, body and soul. Whatever it takes, you implore, just not that peg! The fairy doesn't respond, her pupil-less eyes unchanging and unmoved by your agony, just swirling with pink lust and trained obedience. She lowers you just enough for you to feel the hard, flared tip of the monstrous thing press against your " + assholeDescript() + " and your resolve fails you. You promise the fairy everything. She lifts you up off the terrible final peg and you laugh in relief.\n\n");
 			outputText("Turning you around in her arms, the fairy lets you see the full depths of mindless depravity in her empty gaze. She strokes your [cock], bringing it just shy of climax before mounting you, her sopping cunny softer and warmer than anything you can remember. \"<i>Silly toy,</i>\" she whispers to you. \"<i>It has nothing to give. The masters possess everything already.</i>\" She gives you a peck on the cheek and stops flapping her dragon-fly wings, letting the two of you plummet toward the monstrosity. Your world explodes into pain and your cock erupts with a mind-breaking orgasm inside the girl before your vision fails and the merciful oblivion of unconsciousness rushes over you.");
@@ -312,7 +302,7 @@ use namespace CoC;
 		//Fight Loss-
 		//(Female)
 		public function loseToValaFemale():void {
-			spriteSelect(85);
+			spriteSelect(SpriteDb.s_valaSlave);
 			clearOutput();
 			outputText("You collapse, no longer able to stand, and gasp weakly. The fairy took entirely too much delight in the fight, and her wet pussy is practically squirting with every heartbeat as she hovers over you, rubbing herself in anticipation. \"<i>It will show you the masters' pleasures. They will reward it with cum.</i>\" Her mouth drools as much as her slavering snatch. \"<i>Oh so much cum, and all for their good little Bitch.</i>\"\n\n");
 			outputText("The fairy paces around you, a look of false sympathy running across her face like a mask. \"<i>Does it hurt? Come, Bitch will make you feel better.</i>\" She loops one of your arms around her slim shoulders and lifts you with an ease that makes you shudder. With surprising strength, she flies you to a corner of the room and carefully sets you down atop a dingy, cum-stained pillow. Despite the disgusting conditions, it is more comfort than you expected at the mad girl's hands and you allow yourself a sigh as you gather your thoughts, trying to think of a way out of this predicament. You are startled when a loud clank breaks your reprieve and you try to rise, only to be jerked back down to your [butt]. You claw at your neck and find that the fairy has slapped a steel collar around you, with barely two feet of chain keeping it off the ground.\n\n");
@@ -323,7 +313,7 @@ use namespace CoC;
 			doNext(loseToValueFemalePtII);
 		}
 		public function loseToValueFemalePtII():void {
-			spriteSelect(85);
+			spriteSelect(SpriteDb.s_valaSlave);
 			clearOutput();
 			outputText("You shiver uncontrollably and hug yourself like a wounded animal. Your " + nippleDescript(0) + " and " + clitDescript() + " burn under the pale goop, rock hard and pulsing with demands for stimulation. The fairy bitch happily places a new bucket next to you, this one fuller than the first. \"<i>It wants a meal?</i>\" she inquires doubtfully, perhaps hoping to keep it for herself. You reluctantly reach for the bucket, nearly lunging when it looks like the fairy is about to pull the lever again. You look into the bucket and shiver as the stench of the spooge assails your nostrils, even more potent than the jizz bath rolling down your bare skin in cream bulbs. You reluctantly take a glob between your fingers and thumb and with a timid motion, you raise your fistful of the odious syrup and spread it over your lips like a soapy lather. Rubbing the vile goo so close to your nose makes you nearly convulse at the reek and you hug at your slime-soaked body, trying to curl up, away from the reeking bucket. Your lower torso becomes a sloppy mess of pale, nearly clear fluid rolling off of your curves in blobby clumps.");
 
@@ -336,7 +326,7 @@ use namespace CoC;
 		}
 		//Fight Win-
 		public function fightValaVictory():void {
-			spriteSelect(85);
+			spriteSelect(SpriteDb.s_valaSlave);
 			clearOutput();
 			outputText("The fairy girl collapses, well-drilled obedience robbing her limbs of their fight. She squirms to a crouching bow, fully accepting you as her new " + player.mf("Master","Mistress") + ". The warped fae's empty eyes look up at you, her face a mask of rapture as she anxiously awaits her punishment, wagging her butt in the air as lubrication gushes down her thighs. It seems being defeated has excited the broken creature to a breeding frenzy. Her endurance must be incredible to be this frisky after your battle.");
 			flags[kFLAGS.TIMES_PC_DEFEATED_VALA]++;
@@ -492,9 +482,10 @@ use namespace CoC;
 		//[IMP GANGBANG VOL 2]
 		public function loseToImpMobII():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_zetaz);
 			if (player.isAlraune())
 			{
-				uniquuuesexscene.AlrauneDungeonBadEnd();
+				SceneLib.uniqueSexScene.AlrauneDungeonBadEnd();
 			}
 			else{
 				outputText("You wake up, sore from the previous activity and a bit groggy.  You try to move, but find yourself incapable.  Struggling futilely, you thrash around until you realize your arms and legs are strapped down with heavy iron restraints.  You gasp out loud when you look down and discover your ");
@@ -920,11 +911,11 @@ use namespace CoC;
 		}
 		//BAD ENDS
 		public function badEndValaNumber1():void {
-			spriteSelect(85);
+			spriteSelect(SpriteDb.s_valaSlave);
 			clearOutput();
 			if (player.isAlraune())
 			{
-				uniquuuesexscene.AlrauneDungeonBadEnd();
+				SceneLib.uniqueSexScene.AlrauneDungeonBadEnd();
 			}
 			else {
 				outputText("When you regain your senses, you're no longer in the cavernous dungeon you passed out in. You blink, trying to adjust to the bright light around you, but it doesn't help. Every sense is aflame and it's impossible for you to move without exciting some nerve ending, sending a thrill of pleasure radiating along your sensitive regions. You try to think, to reason out where you are, but holding a thought in your head for longer than a minute is extremely difficult, as if your mind was muffled by thick wool. You try to remember what happened, but that too is just out of your reach. All this mental exercise is giving you a headache, so you give up, and just drink in the sensations around your body. A shimmering, spritely face comes into view and a thought blazes a clear, white-hot path through your groggy brain. Recognition clears all your doubts and worries away. Your Mistress. This is your Mistress.\n\n");
@@ -936,7 +927,7 @@ use namespace CoC;
 			}
 		}
 		public function badEndValaNumber2():void {
-			spriteSelect(85);
+			spriteSelect(SpriteDb.s_valaSlave);
 			//(Imp)
 			clearOutput();
 			outputText("You come to with a splitting headache and the taste of something foul in your mouth. You struggle, but find that your limbs have been chained up and your [legs] bound by a thick, rubber coating, squeezing your lower body painfully. You've been fitted with several rubber pieces of the same sort, in fact- the most notable is the black corset that makes breathing difficult and binds your waist to a hyper-feminine fantasy. You've also been fitted with large, rubber fairy wings attached by straps around your shoulders that pull your chest forward, painfully. An O-ring gag has been latched around your face, connected to a long, clear tube that's been fed a foot or two down your throat. You try to shake it loose, but it's far too deep for you to have a hope of removing it without help.\n\n");
@@ -946,11 +937,11 @@ use namespace CoC;
 			doNext(badEndValaNumber2Pt2);
 		}
 		public function badEndValaNumber2Pt2():void {
-			spriteSelect(85);
+			spriteSelect(SpriteDb.s_valaSlave);
 			clearOutput();
 			if (player.isAlraune())
 			{
-				uniquuuesexscene.AlrauneDungeonBadEnd();
+				SceneLib.uniqueSexScene.AlrauneDungeonBadEnd();
 			}
 			else {
 				outputText("\"<i>When we captured Vala, I entertained the thought of breaking her on my dick like a crystalline condom, but I'm rather glad I chose to raise her to be my pet instead.</i>\" The imp's voice is familiar and your mind lurches to the memory of that first violation you suffered when you stepped through the portal to this world. Zetaz. He said never to forget the name Zetaz. You eyes roll in panic, but he holds your chin, his leering face filling your vision. \"<i>As a reward to obedient little Vala, I've decided to remake you in her image. We'll crush all that fatty flesh from your waist, keep your torso bound until you're too weak to walk, and pump you so full of drugs and cum that even seeing your name will be painful,</i>\" he taps the bronze plaque he's prepared for you, a mirror to the fairy's. \"<i>Why, in a few months, we'll be hard pressed to tell the two of you apart.</i>\" A fresh wave of fairy-lubricated imp-seed pumps into your abdomen and the rubber girdle strains, but holds, washing the spunk back up, into your throat, until it feels like you might drown in the frothing cream.\n\n");
@@ -1040,7 +1031,7 @@ use namespace CoC;
 			clearOutput();
 			if (player.isAlraune())
 			{
-				uniquuuesexscene.AlrauneDungeonBadEnd();
+				SceneLib.uniqueSexScene.AlrauneDungeonBadEnd();
 			}
 			else {
 				if (player.gender == 2) {
@@ -1070,7 +1061,7 @@ use namespace CoC;
 		}
 		//ROOMS
 		public function roomEntrance():void {
-			dungeonLoc = 10;
+			dungeonLoc = DUNGEON_CAVE_ENTRANCE;
 			clearOutput();
 			outputText("<b><u>The Cave Entrance</u></b>\n");
 			outputText("The entrance to this cave is far bigger than the cave itself.  It looks to be a totally natural formation.  Outside, to the south, is a veritable jungle of plant-life.  There are massive trees, vines, and ferns everywhere.  The cave grows narrower the further north you go, until it's little more than a claustrophobic tunnel burrowing deep into the earth.");
@@ -1090,7 +1081,7 @@ use namespace CoC;
 		}
 
 		public function roomTunnel():void {
-			dungeonLoc = 11;
+			dungeonLoc = DUNGEON_CAVE_TUNNEL;
 			clearOutput();
 			outputText("<b><u>Cave Tunnel</u></b>\n");
 			outputText("This cave tunnel slants downwards to the north, and upwards to the south.  You can see sunlight and feel a fresh breeze from the latter direction, though the walls and air around you are damp with moisture.  You realize that the floor of this cave is fairly smooth and even, as if some attempt had been made to level it out.  You can see a bricked up wall along the north end of the tunnel.  It has a crudely fashioned wooden door in the center of it.");
@@ -1098,12 +1089,13 @@ use namespace CoC;
 		}
 
 		public function roomGatheringHall():void {
-			dungeonLoc = 12;
+			dungeonLoc = DUNGEON_CAVE_GATHERING_HALL;
 			clearOutput();
 			outputText("<b><u>Gathering Hall</u></b>\n");
 			outputText("This room is clearly some kind of dining or gathering hall.  The chamber's shape has been hewn from the surrounding stone, and judging by the visible tool-marks, it wasn't done with a great deal of care.  Two long wooden tables fill out the room.  They're surprisingly well made, though it appears that part of their legs were hacked off with axes to lower their overall height.  You can't help but wonder where they were stolen from.  The tables haven't been cleaned in ages, as evidenced by their many stains and a number of half-rotten bones that still rest on their battered surfaces.  Two rows of crudely crafted chairs flank their better-made brethren, made to accommodate very short beings.");
 			//[Imp Mob Fight]
 			if(flags[kFLAGS.ZETAZ_IMP_HORDE_DEFEATED] == 0) {
+				spriteSelect(SpriteDb.s_impMob);
 				outputText("\n\nThe place is swarming with two dozen imps, and none of them look happy to see you.  A number of them take flight while the rest form a ring around you, trapping you!  It looks like you'll have to fight your way out!");
 				menu();
 				addButton(0, "FIGHT!", fightImpHorde);
@@ -1114,7 +1106,7 @@ use namespace CoC;
 		}
 
 		public function roomFungusCavern():void {
-			dungeonLoc = 13;
+			dungeonLoc = DUNGEON_CAVE_FUNGUS_CAVERN;
 			clearOutput();
 			outputText("<b><u>Fungus Cavern</u></b>\n");
 			outputText("This cavern is huge!  Though you can see the edge of a large stalactite to the west, the rest of the cave disappears into darkness beyond twenty or thirty feet away.  The floor is covered in spongy, leaf-shaped fungus.  They're huge, shiny, and purple, and they cover the cavern floor for as far as the illumination will reach.  ");
@@ -1139,14 +1131,14 @@ use namespace CoC;
 		}
 
 		public function roomTortureRoom():void {
-			dungeonLoc = 14;
+			dungeonLoc = DUNGEON_CAVE_TORTURE_ROOM;
 			clearOutput();
 			outputText("<b><u>Filthy Torture Room</u></b>\n");
 			outputText("You step into a dank room, outfitted somewhere between a prison cell and a torture chamber. The ceiling of the sulfur-lined room is hung with an inventive variety of shackles, chains, and devices whose intent are not clear to you. Against the north wall, there appears to be an alchemy lab, laden with a dizzying collection of vials, flasks, and beakers. Against the south, there is a long, sinister-looking wooden rack bearing a sequence of progressively larger and thicker devices, carved to resemble monstrous cocks.  ");
 			dungeons.setDungeonButtons(roomSecretPassage, null, roomGatheringHall, null);
 			//Vala here?
 			if(flags[kFLAGS.FREED_VALA] == 0) {
-				spriteSelect(85);
+				spriteSelect(SpriteDb.s_valaSlave);
 				//Not yet defeated zetaz
 				if(flags[kFLAGS.DEFEATED_ZETAZ] == 0) {
 					//Intro:
@@ -1158,8 +1150,8 @@ use namespace CoC;
 					if (player.gender > 0) {
 						addButton(0, "Free", SceneLib.vala.freeValazLooseCoochie)
 					}
-					if (player.lust >= 33 && shouldraFollower.followerShouldra()) {
-						addButton(1, "ShouldraVala", shouldraFollower.shouldraMeetsCorruptVala);
+					if (player.lust >= 33 && SceneLib.shouldraFollower.followerShouldra()) {
+						addButton(1, "ShouldraVala", SceneLib.shouldraFollower.shouldraMeetsCorruptVala);
 					}
 				}
 				//Zetaz defeated
@@ -1175,7 +1167,7 @@ use namespace CoC;
 		}
 
 		public function roomSecretPassage():void {
-			dungeonLoc = 15;
+			dungeonLoc = DUNGEON_CAVE_SECRET_TUNNEL;
 			clearOutput();
 			outputText("<b><u>Secret Tunnel</u></b>\n");
 			outputText("This passage is the least livable area that you've seen out of the entire cave.  The walls and floor are little more than dirt and rocks, and explosions of dust burst from the ceiling with each tentative movement you make.  For a moment, a wave of claustrophobia threatens to rob you of your nerve, but you blink the pervasive particles from your eyes and focus on why you're here.  ");
@@ -1192,8 +1184,9 @@ use namespace CoC;
 		}
 
 		public function roomZetazChamber():void {
-			dungeonLoc = 16;
+			dungeonLoc = DUNGEON_CAVE_ZETAZ_CHAMBER;
 			clearOutput();
+			spriteSelect(SpriteDb.s_zetaz);
 			outputText("<b><u>Zetaz's Chambers</u></b>\n");
 			outputText("You've stepped into the most lavish room in the entire cave system, and marvel at the difference between this magnificent abode and your own crudely constructed campsite.  The stone walls are covered in stolen tapestries that each look to have been liberated from a unique source.  Judging by the variety of depictions and art styles in this one room, you've barely met a fraction of the races that once inhabited the lands of Mareth.  A pair of bright, smokeless lanterns hang from each wall, lit from within by obviously magical spheres of luminescence.  Various pieces of stolen furniture decorate the room, surrounding a four-post bed decorated with masterfully done carvings of various carnal acts.");
 			if(flags[kFLAGS.ZETAZ_DOOR_UNLOCKED] == 0) {

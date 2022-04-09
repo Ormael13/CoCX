@@ -30,6 +30,18 @@ public class DamageType {
 	public static const TRUE:int = 7;
 	EnumValue.add(Types, TRUE, "TRUE", {name: "true"});
 	
+	public static const WATER:int = 8;
+	EnumValue.add(Types, WATER, "WATER", {name: "water"});
+	
+	public static const WIND:int = 9;
+	EnumValue.add(Types, WIND, "WIND", {name: "wind"});
+	
+	public static const EARTH:int = 10;
+	EnumValue.add(Types, EARTH, "EARTH", {name: "earth"});
+	
+	public static const ACID:int = 11;
+	EnumValue.add(Types, ACID, "ACID", {name: "acid"});
+	
 	function DamageType() {
 	}
 }

@@ -8,6 +8,7 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 /**
 	 * ...
@@ -19,7 +20,7 @@ import classes.Scenes.SceneLib;
 			var teased:Boolean = false;
 			var damage:Number = 0;
 			var oldLust:Number = player.lust;
-			game.spriteSelect(94);
+			game.spriteSelect(SpriteDb.s_minotaurSons);
 			//(Big taur pre-cum tease)
 			if(rand(2) == 0) {
 				teased = true;
@@ -99,7 +100,7 @@ import classes.Scenes.SceneLib;
 
 		//Grope
 		private function minotaurGangGropeAttack():void {
-			game.spriteSelect(94);
+			game.spriteSelect(SpriteDb.s_minotaurSons);
 			outputText("Strong hands come from behind and slide under your equipment to squeeze your " + chestDesc() + ".  The brutish fingers immediately locate and pinch at your " + nippleDescript(0) + "s, the sensitive flesh on your chest lighting up with pain and pleasure.  You arch your back in surprise, utterly stunned by the violation of your body.  After a moment you regain your senses and twist away, but the damage is already done.  You're breathing a bit quicker now");
 			if(player.lust >= 80) outputText(", and your pussy is absolutely soaking wet");
 			outputText(".");
@@ -107,19 +108,19 @@ import classes.Scenes.SceneLib;
 		}
 		//Gang Grope
 		private function minotaurGangGangGropeAttack():void {
-			game.spriteSelect(94);
+			game.spriteSelect(SpriteDb.s_minotaurSons);
 			outputText("Before you can react, hands reach out from multiple angles and latch onto your body.  One pair squeezes at your " + Appearance.buttDescription(player) + ", the strong grip massaging your cheeks with loving touches.  Another set of hands are sliding along your tummy, reaching down for, but not quite touching, the juicy delta below.  Palms encircle your [chest] and caress them, gently squeezing in spite of the brutish hands holding you.  You wriggle and squirm in the collective grip of the many minotaurs for a few moments, growing more and more turned on by the treatment.  At last, you shake out of their hold and stand free, panting hard from exertion and desire.");
 			player.dynStats("lus", (15 + player.effectiveSensitivity()/10));
 		}
 		//Waste  a turn
 		private function minotaurGangWaste():void {
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00329] = 1;
-			game.spriteSelect(94);
+			game.spriteSelect(SpriteDb.s_minotaurSons);
 			outputText("\"<i>Oh man I can't wait to go hilt-deep in that pussy... I'm going to wreck " + player.mf("him", "her") + ",</i>\" promises one bull to his brother.  The other laughs and snorts, telling him how he'll have to do the deed during sloppy seconds.  It quickly escalates, and soon, every single one of the beast-men is taunting the others, bickering over how and when they'll get to have you.  While they're wasting their time, it's your chance to act!");
 		}
 		//
 		private function minosPheromones():void {
-			game.spriteSelect(94);
+			game.spriteSelect(SpriteDb.s_minotaurSons);
 			outputText("The minotaurs smiles at you and lifts their loincloth, flicking them at you.  Thick ropes of pre-cum fly through the air, ");
 			//sometimes get hit with the pre for stronger effect!
 			if(rand(3) == 0) {
@@ -144,7 +145,7 @@ import classes.Scenes.SceneLib;
 		}
 		//This is sparta
 		private function minotaurThisIsSparta():void {
-			game.spriteSelect(94);
+			game.spriteSelect(SpriteDb.s_minotaurSons);
 			outputText("One of the minotaurs in golden armor with a helmet, a round shield and a gladius jumps out of the lot and kicks you in the face throwing you to the ground screaming.\n\n");
 			outputText("\"<i>This.. is… <b>MY FUUUUCK!!!!</b></i>\"");
 			player.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
@@ -152,7 +153,7 @@ import classes.Scenes.SceneLib;
 
 		override protected function performCombatAction():void
 		{
-			game.spriteSelect(94);
+			game.spriteSelect(SpriteDb.s_minotaurSons);
 			if (flags[kFLAGS.ETNA_FOLLOWER] == 3) {
 				var select1:Number = rand(5);
 				if(select1 <= 2) eAttack();

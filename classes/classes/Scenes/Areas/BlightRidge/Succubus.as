@@ -19,91 +19,34 @@ use namespace CoC;
 	
 	public class Succubus extends AbstractSuccubus
 	{
-		public var TrueDemons:DemonScene = new DemonScene();
-		
 		override public function defeated(hpVictory:Boolean):void
 		{
 			game.flags[kFLAGS.DEMONS_DEFEATED]++;
-			TrueDemons.defeatSuccubus();
+			SceneLib.defiledravine.demonScene.defeatSuccubus();
 		}
 		
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
 		{
-			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) SceneLib.dungeons.ebonlabyrinth.defeatedByStrayDemon();
-			else TrueDemons.loseToASuccubus();
+			if (inDungeon) SceneLib.dungeons.ebonlabyrinth.defeatedByStrayDemon();
+			else SceneLib.defiledravine.demonScene.loseToASuccubus();
 		}
 		
 		public function Succubus()
 		{
-			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) {
+			if (inDungeon) {
 				this.short = "stray succubus";
-				if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 250) {
-					initStrTouSpeInte(265, 220, 245, 230);
-					initWisLibSensCor(230, 230, 130, 100);
-					this.weaponAttack = 47;
-					this.armorDef = 66;
-					this.armorMDef = 11;
-					this.bonusHP = 5760;
-					this.bonusLust = 442;
-					this.level = 82;
-					this.additionalXP = 1750;
-				}
-				else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 200) {
-					initStrTouSpeInte(260, 210, 235, 220);
-					initWisLibSensCor(220, 220, 122, 100);
-					this.weaponAttack = 44;
-					this.armorDef = 60;
-					this.armorMDef = 10;
-					this.bonusHP = 4800;
-					this.bonusLust = 420;
-					this.level = 78;
-					this.additionalXP = 1500;
-				}
-				else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 150) {
-					initStrTouSpeInte(255, 200, 225, 210);
-					initWisLibSensCor(210, 210, 114, 100);
-					this.weaponAttack = 41;
-					this.armorDef = 54;
-					this.armorMDef = 9;
-					this.bonusHP = 3840;
-					this.bonusLust = 398;
-					this.level = 74;
-					this.additionalXP = 1250;
-				}
-				else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 100) {
-					initStrTouSpeInte(250, 190, 215, 200);
-					initWisLibSensCor(200, 200, 106, 100);
-					this.weaponAttack = 38;
-					this.armorDef = 48;
-					this.armorMDef = 8;
-					this.bonusHP = 2880;
-					this.bonusLust = 376;
-					this.level = 70;
-					this.additionalXP = 1000;
-				}
-				else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 50) {
-					initStrTouSpeInte(245, 180, 205, 190);
-					initWisLibSensCor(190, 190, 98, 100);
-					this.weaponAttack = 35;
-					this.armorDef = 42;
-					this.armorMDef = 7;
-					this.bonusHP = 1920;
-					this.bonusLust = 354;
-					this.level = 66;
-					this.additionalXP = 750;
-				}
-				else {
-					initStrTouSpeInte(240, 170, 195, 180);
-					initWisLibSensCor(180, 180, 90, 100);
-					this.weaponAttack = 32;
-					this.armorDef = 36;
-					this.armorMDef = 6;
-					this.bonusHP = 960;
-					this.bonusLust = 332;
-					this.level = 62;
-					this.additionalXP = 500;
-				}
-			}
+                var mod:int = SceneLib.dungeons.ebonlabyrinth.enemyLevelMod;
+                initStrTouSpeInte(240 + 5*mod, 170 + 10*mod, 195 + 10*mod, 180 + 10*mod);
+                initWisLibSensCor(180 + 10*mod, 180 + 10*mod, 90 + 8*mod, 100);
+                this.weaponAttack = 32 + 3*mod;
+                this.armorDef = 36 + 6*mod;
+                this.armorMDef = 6 + mod;
+                this.bonusHP = 960 + 960*mod;
+                this.bonusLust = 332 + 22*mod;
+                this.level = 62 + 5*mod;
+                this.additionalXP = 500 + 250*mod;
+                this.gems = (60 + rand(30)) * (1.0 + 0.5*mod);
+            }
 			else {
 				this.short = "succubus";
 				initStrTouSpeInte(140, 100, 110, 115);
@@ -115,6 +58,7 @@ use namespace CoC;
 				this.bonusLust = 206;
 				this.level = 26;
 				this.additionalXP = 50;
+			    this.gems = rand(30)+15;
 			}
 			this.a = "the ";
 			this.imageName = "succubus";
@@ -140,7 +84,6 @@ use namespace CoC;
 			this.lust = 30;
 			this.lustVuln = .5;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
-			this.gems = rand(30)+15;
 			this.drop = new WeightedDrop().
 					add(consumables.BIMBOLQ, 1).
 					add(weapons.WHIP, 2).

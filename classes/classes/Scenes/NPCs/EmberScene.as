@@ -250,8 +250,16 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 				if (flags[kFLAGS.EMBER_AFFECTION] < 75) addButton(7, "Sleep With?", sleepWithEmber).hint("Try to spend the night with Ember.");
 				else addButton(7, "Sleep With", sleepWithEmber).hint("Spend the night with Ember.");
 			}
+			if (flags[kFLAGS.SLEEP_WITH] == "Ember") addButton(8, "NoSleepWith", noSleepWith);
 			addButton(14, "Back", camp.campFollowers);
 		}
+
+        private function noSleepWith():void {
+            clearOutput();
+            outputText("You decide to spend the next night alone and tell this to Ember. She tries to look indifferent, but there's a hint of disappointment in her eyes.")
+            flags[kFLAGS.SLEEP_WITH] = "";
+            doNext(emberCampMenu);
+        }
 
 //Approach for sex - initial output when selecting [Sex] menu (Z)
 		private function emberSexMenu(output:Boolean = true):void
@@ -408,7 +416,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("\n\n\"<i>What is this?  An egg?  Eggs aren't much good for armor, cutie, no matter how big.  One good blow and POW!</i>\"  To demonstrate, she raises her hand, then strikes the shell with the blade of her palm - and pulls it away, smarting.  \"<i>My gods!  It's so hard!  Ok... maybe we can do this.</i>\"");
 			outputText("\n\nShe turns the cracked shell over in her hands, then puts it into the fire and whacks at it with a pair of tongs, attempting to bend and break it.  \"<i>Ist not softening.  Tch, cannot make armor if I cannot shape it.  Vell, it iz nice und curved, ja?  It vill make a decent small-shield to deflect blows, if I sand ze edges down und fit some straps.</i>\"");
 			outputText("\n\nYou tell the armorsmith that a shield will be fine, and she sets to work smoothing the edges.  After nearly an hour of idle browsing through armor you don't really care about, she attracts your attention.  \"<i>It's done, cutie.  Payment up front.</i>\"");
-			outputText("\n\nHanding over the gems, you take the white shell back from her; true to her word, she's rounded it into a proper shield and fitted adjustable straps to the back.  Its hardness is indisputable, but you can only wonder if its liquid absorption properties are still intact.  Worth a test, right?");
+			outputText("\n\nHanding over the gems, you take the white shell back from her; true to her word, she's rounded it into a proper shield and fitted adjustable straps to the back.  Its hardness is indisputable, but you can only wonder if its liquid absorption properties are still intact.  Worth a test, right?\n\n");
 			//this is where the Dragonshell Shield lives, git you one!
 			player.gems -= 200;
 			statScreenRefresh();
@@ -1060,7 +1068,7 @@ public class EmberScene extends NPCAwareContent implements TimeAwareInterface
 				if (flags[kFLAGS.EMBER_GENDER] >= 2) outputText("  The inviting lips of a human-looking pussy purse between her legs; some moisture seems to have gathered on her labia, giving it a slick look that just begs for attention.");
 
 				outputText("\n\nEmber's legs themselves are somewhat human-like in appearance, but they're covered in the thick protective scales that don most of " + emberMF("his", "her") + " extremities.  Only the feet look like anything but normal human anatomy; the clawed feet of a predator decorate " + emberMF("him", "her") + " instead, capped with talons meant for gripping at the ground... or at prey.");
-				outputText("\n\nHaving drawn the dragon's attention with your examination of " + emberMF("his", "her") + " body, Ember darts a reptilian tongue out from " + emberMF("his", "her") + " lips, as if to entice you.");
+				outputText("\n\nYou've drawn the dragon's attention with your examination of " + emberMF("his", "her") + " body - Ember darts a reptilian tongue out from " + emberMF("his", "her") + " lips, as if to entice you.");
 			}
 			doNext(emberCampMenu);
 		}

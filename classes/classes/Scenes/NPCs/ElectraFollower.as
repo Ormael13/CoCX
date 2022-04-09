@@ -6,13 +6,12 @@ package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.display.SpriteDb;
-	import classes.Scenes.UniqueSexScenes;
+    import classes.display.SpriteDb;
+	import classes.Scenes.SceneLib;
 	
 	public class ElectraFollower extends NPCAwareContent
 	{
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		
+				
 		public function ElectraFollower() 
 		{}
 		
@@ -110,6 +109,7 @@ public function ElectraRecruiting():void {
 	addButton(3, "Nah", ElectraRecruitingNah);
 }
 public function ElectraRecruitingSure():void {
+    clearOutput();
 	outputText("You help up Electra to your camp. Ironically or perhaps luckily enemies stay clear from you during the travel, Electra acting as a natural repellent. You finally arrive at camp, the weasel insisting on wanting to see everything"+(camp.hasCompanions() ? " and meeting everyone" : "")+".\n\n");
 	if (player.hasStatusEffect(StatusEffects.PureCampJojo)) {
 		outputText("Jojo notices her quite fast, waving a warm welcome.\n\n");
@@ -132,7 +132,11 @@ public function ElectraRecruitingSure():void {
 		outputText("Electra responds with middle annoyance.\n\n");
 		outputText("\"<i>Nothing about taming here Etna, I'm not some wild beast you can hold on a leash. [name] just happened to be on my path when I needed "+player.mf("him","her")+" the most, willing to help of "+player.mf("his","her")+" own volition.</i>\"\n\n");
 	}
-	outputText("(<b>Electra has been added to the Lovers menu!</b>)\n\n");
+	outputText("<b>Before setting in, as if remembering something Electra pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
+	if (player.hasKeyItem("Radiant shard") >= 0){
+		player.addKeyValue("Radiant shard",1,+1);
+	}
+	outputText("\n\n(<b>Electra has been added to the Lovers menu!</b>)\n\n");
 	flags[kFLAGS.ELECTRA_FOLLOWER] = 2;
 	flags[kFLAGS.ELECTRA_LVL_UP] = 1;
 	flags[kFLAGS.ELECTRA_DEFEATS_COUNTER] = 0;
@@ -140,6 +144,7 @@ public function ElectraRecruitingSure():void {
 	doNext(playerMenu);
 }
 public function ElectraRecruitingNah():void {
+    clearOutput();
 	outputText("You apologizes to her but for now you aren't exactly ready to make space for someone in your life. Electra nods, she's on the verge of tears but accepts your decision to turn her down, walking away.\n\n");
 	flags[kFLAGS.ELECTRA_FOLLOWER] = 1;
 	electraAffection(-100);
@@ -267,7 +272,6 @@ public function electraSex():void {
 	}
 	addButton(2, "Headpat", ElectraSeXHeadpat);
 	addButton(3, "Lets just fuck", ElectraSeXYes);
-	//if (player.tailType == 28)  addButton(4, "Share a Drink", etnaShareDrink);
 	addButton(14, "Back", ElectraCampMainMenu);
 }
 
@@ -386,8 +390,8 @@ public function PlayerSexElectra():void {
 	if (player.lust >= 33) addButton(0, "Yea Sure", ElectraSeXYes);
 	addButton(1, "No Way", ElectraSeXNo);
 	addButton(2, "Headpat", ElectraSeXHeadpat);
-	if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
-}
+	SceneLib.uniqueSexScene.pcUSSPreChecksV2(PlayerSexElectra);
+	}
 public function ElectraSeXYes():void {
 	spriteSelect(SpriteDb.s_electra);
 	clearOutput();
@@ -414,7 +418,7 @@ public function ElectraSeXYesM():void {
 	outputText("’s lightning. The voltage is flowing out of her pussy straight to your dick! You moan as the current sets every one of your pleasure nerves into overdrive, causing you to reach orgasm almost instantly if not several times over and pump the raiju with your cum. The girl seems lost in the sensations of her pussy, tongue out and eyes rolling, as she gushes around your twitching cock. ");
 	outputText("This rapid fire set of orgasms lasts for a fair minute before the both of you fall on each other and lose consciousness.\n\nYou wake up with the raiju next to you. The ground is still a massive pool of cum but for some reason you feel satisfied.\n\n");
 	outputText("\"<i>Good morning, I was wondering when you would wake up. I must thank you, you helped me release all the stockpiled energy I had.</i>\"");
-	outputText("She slowly slides off your cock with a satisfied smile. ");
+	outputText(" She slowly slides off your cock with a satisfied smile. ");
 	if (flags[kFLAGS.ELECTRA_FOLLOWER] < 2) {
 		outputText("Where's the crazy girl from before?\n\n");
 		outputText("\"<i>I have to go but here, take this jewel and these gems for your trouble. I hope we see each other again.</i>\"");

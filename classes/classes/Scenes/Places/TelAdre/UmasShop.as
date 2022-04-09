@@ -1853,7 +1853,7 @@ import classes.Scenes.SceneLib;
 			outputText("\n\nUma arches an eyebrow, \"<i>Sorry, [name], but when it comes to cocks, my pussy and ass are both off-limits... I suppose that, for you, though, I could give you a blowjob - just because you’re my little Loppe’s special someone, though.</i>\"");
 			outputText("\n\nYou ");
 			if(player.lust >= 75) outputText("eagerly ");
-			outputText("tell her that would be plenty, and thank her for her consideration.  \"<i>Okay, follow me then.</i>\"  The mare leads you away, out her office and down the corridor towards the far back of the clinic. Her enticing equine tail swishes lazily side to side the entire way, an organic magnet for your roving eyes.  You follow closely in her wake, looking forward to her “special treatment” with such ardor that you give up on concealing the tenting mass under your [armor]. It makes walking a little more difficult, but the feeling of your length");
+			outputText("tell her that would be plenty, and thank her for her consideration.  \"<i>Okay, follow me then.</i>\"  The mare leads you away, out her office and down the corridor towards the far back of the clinic. Her enticing equine tail swishes lazily side to side the entire way, an organic magnet for your roving eyes.  You follow closely in her wake, looking forward to her \"special treatment\" with such ardor that you give up on concealing the tenting mass under your [armor]. It makes walking a little more difficult, but the feeling of your length");
 			if(player.cockTotal() > 1) outputText("s");
 			outputText(" grinding and growing is well-worth the obvious discomfort.");
 

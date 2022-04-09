@@ -20,6 +20,8 @@ import classes.Scenes.Areas.Ocean;
 import classes.Scenes.Dungeons.HiddenCave;
 import classes.Scenes.Explore.ExploreDebug;
 import classes.Scenes.Explore.RNGod;
+import classes.Scenes.Places.TrollVillage;
+import classes.Scenes.Places.TrollVillage;
 import classes.Scenes.Monsters.*;
 import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.NPCs.RyuBiDragon;
@@ -28,6 +30,7 @@ import classes.Scenes.Explore.KitsuneAncestor;
 import classes.Scenes.Explore.SeabedAlrauneBoss;
 import classes.Scenes.Areas.DeepSea.Kraken;
 import classes.Scenes.Areas.Ocean.Scylla;
+import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 //import classes.Scenes.Areas.nazwa lokacji;
@@ -36,7 +39,6 @@ public class Exploration extends BaseContent
 	{
 		public var exploreDebug:ExploreDebug = new ExploreDebug();
 		public var hiddencave:HiddenCave = new HiddenCave();
-		public var TrueDemons:DemonScene = new DemonScene();
 
 		public function Exploration()
 		{
@@ -253,7 +255,7 @@ public class Exploration extends BaseContent
 						if (rand(4) == 0) SceneLib.impScene.impLordFeralEncounter();
 						else SceneLib.impScene.impLordEncounter();
 					}
-					spriteSelect(29);
+					spriteSelect(SpriteDb.s_imp);
 					return;
 				}
 				//Imp Warlord
@@ -266,13 +268,13 @@ public class Exploration extends BaseContent
 						if (rand(4) == 0) SceneLib.impScene.impWarlordFeralEncounter();
 						else SceneLib.impScene.impWarlordEncounter();
 					}
-					spriteSelect(125);
+					spriteSelect(SpriteDb.s_impWarlord);
 					return;
 				}
 				//Imp Overlord (Rare!)
 				else if (impChooser >= 90) {
 					SceneLib.impScene.impOverlordEncounter();
-					spriteSelect(126);
+					spriteSelect(SpriteDb.s_impOverlord);
 					return;
 				}
 				else {
@@ -315,7 +317,7 @@ public class Exploration extends BaseContent
 							startCombat(new Imp());
 						}
 					}
-					spriteSelect(29);
+					spriteSelect(SpriteDb.s_imp);
 				}
 				return;
 			}
@@ -433,18 +435,18 @@ public class Exploration extends BaseContent
 					//Goblin warrior! (Equal chance with Goblin Shaman)
 					else if (goblinChooser >= 50 && goblinChooser < 75) {
 						SceneLib.goblinWarriorScene.goblinWarriorEncounter();
-						spriteSelect(123);
+						spriteSelect(SpriteDb.s_goblinWarrior);
 						return;
 					}
 					//Goblin shaman OR elder!
 					else if (goblinChooser >= 75) {
 						if (flags[kFLAGS.SOUL_SENSE_PRISCILLA] < 3 && rand(2) == 0) {
 							SceneLib.goblinElderScene.goblinElderEncounter();
-							spriteSelect(122);
+							spriteSelect(SpriteDb.s_goblinElder);
 						}
 						else {
 							SceneLib.goblinShamanScene.goblinShamanEncounter();
-							spriteSelect(124);
+							spriteSelect(SpriteDb.s_goblinShaman);
 						}
 						return;
 					}
@@ -456,7 +458,7 @@ public class Exploration extends BaseContent
 							outputText("\n\n<b>New codex entry unlocked: Goblins!</b>")
 						}
 						startCombat(new Goblin());
-						spriteSelect(24);
+						spriteSelect(SpriteDb.s_goblin);
 						return;
 					}
 					else {
@@ -467,7 +469,7 @@ public class Exploration extends BaseContent
 							outputText("\n\n<b>New codex entry unlocked: Goblins!</b>")
 						}
 						startCombat(new Goblin());
-						spriteSelect(24);
+						spriteSelect(SpriteDb.s_goblin);
 						return;
 					}
 				}
@@ -486,13 +488,13 @@ public class Exploration extends BaseContent
 			if (impChooser >= 50 && impChooser < 75) {
 				if (rand(4) == 0) SceneLib.impScene.impWarlordFeralEncounter();
 				else SceneLib.impScene.impWarlordEncounter();
-				spriteSelect(125);
+				spriteSelect(SpriteDb.s_impWarlord);
 				return;
 			}
 			//Imp Overlord
 			else if (impChooser >= 75) {
 				SceneLib.impScene.impOverlordEncounter();
-				spriteSelect(126);
+				spriteSelect(SpriteDb.s_impOverlord);
 				return;
 			}
 			//Pack of Imps
@@ -507,17 +509,17 @@ public class Exploration extends BaseContent
 			var demonChooser:int = rand(100);
 			//Succubus
 			if (demonChooser >= 40 && demonChooser < 70) {
-				TrueDemons.SuccubusEncounter();
+				SceneLib.defiledravine.demonScene.SuccubusEncounter();
 				return;
 			}
 			//Incubus
 			else if (demonChooser >= 70) {
-				TrueDemons.IncubusEncounter();
+				SceneLib.defiledravine.demonScene.IncubusEncounter();
 				return;
 			}
 			//Omnibus
 			else {
-				TrueDemons.OmnibusEncounter();
+				SceneLib.defiledravine.demonScene.OmnibusEncounter();
 				return;
 			}
 		}
@@ -590,7 +592,7 @@ public class Exploration extends BaseContent
 			if (gobimpChooser >= 30) {
 				if (flags[kFLAGS.TIMES_ENCOUNTERED_GOBLIN_WARRIOR] >= 1) {
 					SceneLib.goblinWarriorScene.goblinWarriorsEncounter();
-					spriteSelect(123);
+					spriteSelect(SpriteDb.s_goblinWarrior);
 				}
 				else SceneLib.impScene.impPackEncounter();
 				return;
@@ -599,7 +601,7 @@ public class Exploration extends BaseContent
 			else {
 				if (flags[kFLAGS.TIMES_ENCOUNTERED_GOBLIN_ASSASSIN] >= 1) {
 					SceneLib.goblinAssassinScene.goblinAdventurersEncounter();
-					spriteSelect(24);
+					spriteSelect(SpriteDb.s_goblin);
 				}
 				else SceneLib.impScene.impPackEncounter2();
 				return;
@@ -627,6 +629,10 @@ public class Exploration extends BaseContent
 			}
 			if (player.level > 5 && flags[kFLAGS.HIDDEN_CAVE_FOUND] < 1 && rand(10) == 0) {
 				hiddencavediscovery();
+				return;
+			}
+			if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && TrollVillage.ZenjiVillageStage == 0 && rand(10) == 0){
+				SceneLib.trollVillage.FirstEncountersoftheTrollKind();
 				return;
 			}
 /*			if (player.level > 5 && flags[kFLAGS.RYUBI_LVL_UP] < 1 && rand(4) == 0) {
@@ -675,7 +681,7 @@ public class Exploration extends BaseContent
 					return;
 				}
 				//Discover Battlefield Boundary
-				if (player.exploredDesert >= 1 && flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] <= 0 && ((rand(3) == 0 && player.level >= 5) || player.level >= 10)) {
+				if (player.exploredDesert >= 1 && flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] <= 0 && (player.level + combat.playerLevelAdjustment()) >= 5) {
 					flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] = 1;
 					player.explored++;
 					clearOutput();
@@ -683,14 +689,14 @@ public class Exploration extends BaseContent
 					doNext(camp.returnToCampUseOneHour);
 					return;
 				}
-				if (flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] > 0 && player.exploredMountain <= 0 && ((rand(3) == 0 && player.level >= 5) || player.level >= 10)) {
+				if (flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY] > 0 && player.exploredMountain <= 0 && (player.level + combat.playerLevelAdjustment()) >= 5) {
 					outputText("Thunder booms overhead, shaking you out of your thoughts.  High above, dark clouds encircle a distant mountain peak.  You get an ominous feeling in your gut as you gaze up at it.\n\n<b>You've discovered the Mountain!</b>");
 					player.explored++;
 					player.exploredMountain = 1;
 					doNext(camp.returnToCampUseOneHour);
 					return;
 				}
-				if (player.exploredMountain >= 1 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] <= 0 && ((rand(3) == 0 && player.level >= 9) || player.level >= 15)) {
+				if (player.exploredMountain >= 1 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] <= 0 && (player.level + combat.playerLevelAdjustment()) >= 9) {
 					flags[kFLAGS.TIMES_EXPLORED_PLAINS] = 1;
 					player.explored++;
 					outputText("You find yourself standing in knee-high grass, surrounded by flat plains on all sides.  Though the mountain, forest, and lake are all visible from here, they seem quite distant.\n\n<b>You've discovered the plains!</b>");
@@ -698,7 +704,7 @@ public class Exploration extends BaseContent
 					return;
 				}
 				//EXPLOOOOOOORE
-				if (flags[kFLAGS.TIMES_EXPLORED_SWAMP] <= 0 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0 && ((rand(3) <= 0 && player.level >= 13) || player.level >= 18)) {
+				if (flags[kFLAGS.TIMES_EXPLORED_SWAMP] <= 0 && flags[kFLAGS.TIMES_EXPLORED_PLAINS] > 0 && (player.level + combat.playerLevelAdjustment()) >= 13) {
 					flags[kFLAGS.TIMES_EXPLORED_SWAMP] = 1;
 					player.explored++;
 					clearOutput();
@@ -709,7 +715,7 @@ public class Exploration extends BaseContent
 					return;
 				}
 				//Discover Blight Ridge
-				if (flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] <= 0 && flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0 && ((rand(3) == 0 && player.level >= 21) || player.level >= 26)) {
+				if (flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] <= 0 && flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0 && (player.level + combat.playerLevelAdjustment()) >= 21) {
 					flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] = 1;
 					player.explored++;
 					clearOutput();
@@ -732,7 +738,7 @@ public class Exploration extends BaseContent
 					return;
 				}
 				//Discover Beach / Ocean / Deep Sea
-				if (flags[kFLAGS.DISCOVERED_BEACH] <= 0 && flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] > 0 && ((rand(3) == 0 && player.level >= 25) || player.level >= 30)) {
+				if (flags[kFLAGS.DISCOVERED_BEACH] <= 0 && flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] > 0 && (player.level + combat.playerLevelAdjustment()) >= 25) {
 					flags[kFLAGS.DISCOVERED_BEACH] = 1;
 					player.explored++;
 					clearOutput();
@@ -743,7 +749,7 @@ public class Exploration extends BaseContent
 					return;
 				}
 				//Discover Caves!
-				if (flags[kFLAGS.DISCOVERED_CAVES] <= 0 && flags[kFLAGS.DISCOVERED_BEACH] > 0 && ((rand(3) == 0 && player.level >= 30) || player.level >= 35)) {
+				if (flags[kFLAGS.DISCOVERED_CAVES] <= 0 && flags[kFLAGS.DISCOVERED_BEACH] > 0 && (player.level + combat.playerLevelAdjustment()) >= 30) {
 					flags[kFLAGS.DISCOVERED_CAVES] = 1;
 					player.explored++;
 					clearOutput();
@@ -753,7 +759,7 @@ public class Exploration extends BaseContent
 					return;
 				}/*
 				//Discover Abyss
-				if (flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] > 0 && flags[kFLAGS.] <= 0 && ((rand(3) == 0 && player.level >= 10) || player.level >= 15)) {
+				if (flags[kFLAGS.DISCOVERED_BLIGHT_RIDGE] > 0 && flags[kFLAGS.] <= 0 && (player.level + combat.playerLevelAdjustment()) >= 10) {
 					flags[kFLAGS.] = 1;
 					player.explored++;
 					clearOutput();
@@ -845,10 +851,12 @@ public class Exploration extends BaseContent
 		public function tryDiscoverLL():void {
 			clearOutput();
 			if (rand(3) == 0) {
-				outputText("You're walking in the woods\n\n");
-				outputText("There's no one around\n\n");
-				outputText("And your phone is dead\n\n");
-				outputText("Out of the corner of your eye you spot her\n\n");
+                if (silly()) {
+                    outputText("You're walking in the woods\n\n");
+                    outputText("There's no one around\n\n");
+                    outputText("And your phone is dead\n\n");
+                    outputText("Out of the corner of your eye you spot her\n\n");
+                }
 				outputText("<b>A Wasp Girl...</b>");
 				startCombat(new WaspGirl());//lvl 33
 				return;
@@ -860,10 +868,12 @@ public class Exploration extends BaseContent
 				return;
 			}
 			else {
-				outputText("You're walking in the woods\n\n");
-				outputText("There's no one around\n\n");
-				outputText("And your phone is dead\n\n");
-				outputText("Out of the corner of your eye you spot her\n\n");
+                if (silly()) {
+                    outputText("You're walking in the woods\n\n");
+                    outputText("There's no one around\n\n");
+                    outputText("And your phone is dead\n\n");
+                    outputText("Out of the corner of your eye you spot her\n\n");
+                }
 				outputText("<b>A Wasp Huntress...</b>");
 				startCombat(new WapsHuntress());//lvl 48
 				return;
@@ -879,11 +889,13 @@ public class Exploration extends BaseContent
 				return;
 			}
 			else if (rand(3) == 0) {
-				outputText("You're walking in the woods\n\n");
-				outputText("There's no one around\n\n");
-				outputText("And your phone is dead\n\n");
-				outputText("Out of the corner of your eye you spot her\n\n");
-				outputText("<b>An Alraune Maiden...</b>");
+                if (silly()) {
+                    outputText("You're walking in the woods\n\n");
+                    outputText("There's no one around\n\n");
+                    outputText("And your phone is dead\n\n");
+                    outputText("Out of the corner of your eye you spot her\n\n");
+                    outputText("<b>An Alraune Maiden...</b>");
+                }
 				startCombat(new AlrauneMaiden());//lvl 54
 				return;
 			}
@@ -894,10 +906,12 @@ public class Exploration extends BaseContent
 				return;
 			}
 			else {
-				outputText("You're walking in the woods\n\n");
-				outputText("There's no one around\n\n");
-				outputText("And your phone is dead\n\n");
-				outputText("Out of the corner of your eye you spot her\n\n");
+                if (silly()) {
+                    outputText("You're walking in the woods\n\n");
+                    outputText("There's no one around\n\n");
+                    outputText("And your phone is dead\n\n");
+                    outputText("Out of the corner of your eye you spot her\n\n");
+                }
 				outputText("<b>A Wasp Assassin...</b>");
 				startCombat(new WaspAssassin());//lvl 63
 				return;

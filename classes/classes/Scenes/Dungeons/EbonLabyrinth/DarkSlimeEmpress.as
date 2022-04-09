@@ -36,18 +36,12 @@ use namespace CoC;
 		private function gooSlimeBarrage():void
 		{
 			outputText("The slimes suddenly create bows and arrows out of their body, shooting at you with a volley of slimy aphrodisiac bolts!\n");
-			gooSlimeBarrageD();
-			gooSlimeBarrageD();
-			gooSlimeBarrageD();
-			gooSlimeBarrageD();
-			if (player.spe < ((160 * (player.newGamePlusMod() + 1)) + rand(80))) gooSlimeBarrageD();
-			if (player.spe < ((160 * (player.newGamePlusMod() + 1)) + rand(80))) gooSlimeBarrageD();
-			if (player.spe < ((140 * (player.newGamePlusMod() + 1)) + rand(70))) gooSlimeBarrageD();
-			if (player.spe < ((140 * (player.newGamePlusMod() + 1)) + rand(70))) gooSlimeBarrageD();
-			if (player.spe < ((120 * (player.newGamePlusMod() + 1)) + rand(60))) gooSlimeBarrageD();
-			if (player.spe < ((120 * (player.newGamePlusMod() + 1)) + rand(60))) gooSlimeBarrageD();
-			if (player.spe < ((100 * (player.newGamePlusMod() + 1)) + rand(50))) gooSlimeBarrageD();
-			if (player.spe < ((100 * (player.newGamePlusMod() + 1)) + rand(50))) gooSlimeBarrageD();
+            //4 attacks for all
+            for (var i:int = 0; i < 4; ++i)
+			    gooSlimeBarrageD();
+            //up to 8 more, but smoother now
+            for (var r:int = 50; r <= 85; r += 5)
+			    if (player.spe < ((2*r * (player.newGamePlusMod() + 1)) + rand(r))) gooSlimeBarrageD();
 			outputText("\n");
 		}
 		private function gooSlimeBarrageD():void {
@@ -64,7 +58,7 @@ use namespace CoC;
 		private function gooGroupGrapple():void
 		{
 			outputText("The slime girls suddenly attempt to grapple you one after another to restrict your movements!");
-			if((player.findPerk(PerkLib.Evade) && rand(6) == 0) || (player.spe > ((this.spe * 1.5) + rand(200)))) outputText("You barely manage to break out of their clingy bodies!");
+			if((player.hasPerk(PerkLib.Evade) && rand(6) == 0) || (player.spe > ((this.spe * 1.5) + rand(200)))) outputText("You barely manage to break out of their clingy bodies!");
 			else {
 				outputText("Before you know it you’re covered and pulled down by their combined bodies.");
 				if (!player.hasStatusEffect(StatusEffects.GooBind)) player.createStatusEffect(StatusEffects.GooBind, 0, 0, 0, 0);
@@ -81,48 +75,28 @@ use namespace CoC;
 		}
 
 
-				override public function defeated(hpVictory:Boolean):void
+		override public function defeated(hpVictory:Boolean):void
 		{
-			SceneLib.dungeons.ebonlabyrinth.defeatDarkSlimeEmpress();
+			SceneLib.dungeons.ebonlabyrinth.darkSlimeEmpressScene.defeat();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			SceneLib.dungeons.ebonlabyrinth.defeatedByDarkSlimeEmpress();
+			SceneLib.dungeons.ebonlabyrinth.darkSlimeEmpressScene.defeatedBy();
 		}
 
 		public function DarkSlimeEmpress()
 		{
-			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss) == 65) {
-				initStrTouSpeInte(120, 240, 160, 150);
-				initWisLibSensCor(150, 240, 200, 10);
-				this.armorDef = 60;
-				this.armorMDef = 180;
-				this.bonusHP = 10000;
-				this.bonusLust = 505;
-				this.level = 65;
-				this.gems = 200 + rand(80);
-			}
-			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss) == 70) {
-				initStrTouSpeInte(140, 290, 200, 180);
-				initWisLibSensCor(180, 290, 210, 10);
-				this.armorDef = 80;
-				this.armorMDef = 240;
-				this.bonusHP = 20000;
-				this.bonusLust = 570;
-				this.level = 70;
-				this.gems = 250 + rand(90);
-			}
-			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss) == 75) {
-				initStrTouSpeInte(160, 340, 240, 210);
-				initWisLibSensCor(210, 340, 220, 10);
-				this.armorDef = 100;
-				this.armorMDef = 300;
-				this.bonusHP = 30000;
-				this.bonusLust = 635;
-				this.level = 75;
-				this.gems = 300 + rand(100);
-			}
+			var mod:int = inDungeon ? SceneLib.dungeons.ebonlabyrinth.enemyLevelMod : 3;
+            initStrTouSpeInte(120 + 20*mod, 240 + 50*mod, 160 + 40*mod, 150 + 30*mod);
+            initWisLibSensCor(150 + 30*mod, 240 + 50*mod, 200 + 10*mod, 10);
+            this.armorDef = 60 + 20*mod;
+            this.armorMDef = 180 + 60*mod;
+            this.bonusHP = 10000 + 2500*mod;
+            this.bonusLust = 505 + 65*mod;
+            this.level = 65 + 5*mod;
+            this.gems = (200 + 50*mod) + rand(80 + 10*mod);
+            
 			this.a = "";
 			this.short = "Dark Slime Empress";
 			this.imageName = "googirl";

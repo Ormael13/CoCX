@@ -14,7 +14,6 @@ import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.*;
 import classes.Scenes.Areas.Desert.SandWitchScene;
-import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.NPCs.XXCNPC;
 import classes.Scenes.SceneLib;
@@ -621,7 +620,11 @@ public function savePermObject(isFile:Boolean):void {
 
 		saveFile.data.flags[kFLAGS.SHOW_SPRITES_FLAG] = flags[kFLAGS.SHOW_SPRITES_FLAG];
 		saveFile.data.flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] = flags[kFLAGS.SILLY_MODE_ENABLE_FLAG];
-		saveFile.data.flags[kFLAGS.WATERSPORTS_ENABLED] = flags[kFLAGS.WATERSPORTS_ENABLED];
+		saveFile.data.flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS] = flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS];
+		saveFile.data.flags[kFLAGS.SCENEHUNTER_OTHER] = flags[kFLAGS.SCENEHUNTER_OTHER];
+		saveFile.data.flags[kFLAGS.SCENEHUNTER_DICK_SELECT] = flags[kFLAGS.SCENEHUNTER_DICK_SELECT];
+		saveFile.data.flags[kFLAGS.SCENEHUNTER_UNI_HERMS] = flags[kFLAGS.SCENEHUNTER_UNI_HERMS];
+        saveFile.data.flags[kFLAGS.WATERSPORTS_ENABLED] = flags[kFLAGS.WATERSPORTS_ENABLED];
 
 		saveFile.data.flags[kFLAGS.LVL_UP_FAST] = flags[kFLAGS.LVL_UP_FAST];
 		saveFile.data.flags[kFLAGS.MUTATIONS_SPOILERS] = flags[kFLAGS.MUTATIONS_SPOILERS];
@@ -629,6 +632,7 @@ public function savePermObject(isFile:Boolean):void {
 		saveFile.data.flags[kFLAGS.INVT_MGMT_TYPE] = flags[kFLAGS.INVT_MGMT_TYPE];
 		saveFile.data.flags[kFLAGS.CHARVIEWER_ENABLED] = flags[kFLAGS.CHARVIEWER_ENABLED];
 		saveFile.data.flags[kFLAGS.CHARVIEW_STYLE] = flags[kFLAGS.CHARVIEW_STYLE];
+		saveFile.data.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] = flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN];
 		saveFile.data.flags[kFLAGS.USE_OLD_INTERFACE] = flags[kFLAGS.USE_OLD_INTERFACE];
 		saveFile.data.flags[kFLAGS.USE_OLD_FONT] = flags[kFLAGS.USE_OLD_FONT];
 		saveFile.data.flags[kFLAGS.BACKGROUND_STYLE] = flags[kFLAGS.BACKGROUND_STYLE];
@@ -684,6 +688,10 @@ public function loadPermObject():void {
 
 			if (saveFile.data.flags[kFLAGS.SHOW_SPRITES_FLAG] != undefined) flags[kFLAGS.SHOW_SPRITES_FLAG] = saveFile.data.flags[kFLAGS.SHOW_SPRITES_FLAG];
 			if (saveFile.data.flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] != undefined) flags[kFLAGS.SILLY_MODE_ENABLE_FLAG] = saveFile.data.flags[kFLAGS.SILLY_MODE_ENABLE_FLAG];
+            if (saveFile.data.flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS] != undefined) flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS] = saveFile.data.flags[kFLAGS.SCENEHUNTER_PRINT_CHECKS];
+            if (saveFile.data.flags[kFLAGS.SCENEHUNTER_OTHER] != undefined) flags[kFLAGS.SCENEHUNTER_OTHER] = saveFile.data.flags[kFLAGS.SCENEHUNTER_OTHER];
+            if (saveFile.data.flags[kFLAGS.SCENEHUNTER_DICK_SELECT] != undefined) flags[kFLAGS.SCENEHUNTER_DICK_SELECT] = saveFile.data.flags[kFLAGS.SCENEHUNTER_DICK_SELECT];
+            if (saveFile.data.flags[kFLAGS.SCENEHUNTER_UNI_HERMS] != undefined) flags[kFLAGS.SCENEHUNTER_UNI_HERMS] = saveFile.data.flags[kFLAGS.SCENEHUNTER_UNI_HERMS];
 
 			if (saveFile.data.flags[kFLAGS.MUTATIONS_SPOILERS] != undefined) flags[kFLAGS.MUTATIONS_SPOILERS] = saveFile.data.flags[kFLAGS.MUTATIONS_SPOILERS];
 			if (saveFile.data.flags[kFLAGS.NEWPERKSDISPLAY] != undefined) flags[kFLAGS.NEWPERKSDISPLAY] = saveFile.data.flags[kFLAGS.NEWPERKSDISPLAY];
@@ -691,6 +699,7 @@ public function loadPermObject():void {
 			if (saveFile.data.flags[kFLAGS.INVT_MGMT_TYPE] != undefined) flags[kFLAGS.INVT_MGMT_TYPE] = saveFile.data.flags[kFLAGS.INVT_MGMT_TYPE];
 			if (saveFile.data.flags[kFLAGS.CHARVIEWER_ENABLED] != undefined) flags[kFLAGS.CHARVIEWER_ENABLED] = saveFile.data.flags[kFLAGS.CHARVIEWER_ENABLED];
 			if (saveFile.data.flags[kFLAGS.CHARVIEW_STYLE] != undefined) flags[kFLAGS.CHARVIEW_STYLE] = saveFile.data.flags[kFLAGS.CHARVIEW_STYLE];
+			if (saveFile.data.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] != undefined) flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] = saveFile.data.flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN];
 			if (saveFile.data.flags[kFLAGS.USE_OLD_INTERFACE] != undefined) flags[kFLAGS.USE_OLD_INTERFACE] = saveFile.data.flags[kFLAGS.USE_OLD_INTERFACE];
 			if (saveFile.data.flags[kFLAGS.USE_OLD_FONT] != undefined) flags[kFLAGS.USE_OLD_FONT] = saveFile.data.flags[kFLAGS.USE_OLD_FONT];
 			if (saveFile.data.flags[kFLAGS.BACKGROUND_STYLE] != undefined) flags[kFLAGS.BACKGROUND_STYLE] = saveFile.data.flags[kFLAGS.BACKGROUND_STYLE];
@@ -1562,11 +1571,9 @@ private function unFuckSaveDataBeforeLoading(data:Object):void {
 public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 {
     var game:CoC = CoC.instance;
-    DungeonAbstractContent.dungeonLoc = 0;
-	//Not needed, dungeonLoc = 0 does this:	game.inDungeon = false;
-	DungeonAbstractContent.inDungeon = false; //Needed AGAIN because fuck includes folder. If it ain't broke, don't fix it!
-	DungeonAbstractContent.inRoomedDungeon = false;
-	DungeonAbstractContent.inRoomedDungeonResume = null;
+	inDungeon = false;
+	inRoomedDungeon = false;
+	inRoomedDungeonResume = null;
 
 	//Autosave stuff
 	if(player){

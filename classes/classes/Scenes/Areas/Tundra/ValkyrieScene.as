@@ -3,12 +3,11 @@ package classes.Scenes.Areas.Tundra
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.UniqueSexScenes;
+	import classes.Scenes.SceneLib;
 	
 	public class ValkyrieScene extends BaseContent
 	{
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		
+				
 		public function ValkyrieScene() 
 		{
 		}
@@ -71,9 +70,9 @@ package classes.Scenes.Areas.Tundra
 					addButton(2, "Get Licked", valkyrieLicksYou);
 					addButton(3, "Scissor", valkyrieScissor);
 				}
-				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 				addButton(14, "Leave", cleanupAfterCombat);
-			}
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(winAgainstValkyrie);
+							}
 			else {
 				cleanupAfterCombat();
 			}
@@ -87,7 +86,7 @@ package classes.Scenes.Areas.Tundra
 			outputText("Suddenly, you realize that without letting go of the girl, you aren’t liable to get your dick inside her. Well, shit. You lock eyes with the valkyrie, who gives you a shy smile and, to your surprise, wraps her arms tightly around you. You decide to trust her, and free one of your hands from her. You grab your [cock] and lift her skirt, guiding it smoothly into her wet and waiting cunt. She gasps as you enter her tight passage, and you quickly grab her again before she can forget to hold onto you.\n\n");
 			outputText("Now inside her, you command the valkyrie to fly as fast as she can to wherever she’d like to go. She smiles and nods, giving her wings a mighty thrust toward the ocean. When she does, her vaginal muscles contract hard around your cock, squeezing you wonderfully with each beat of her powerful wings. You hold onto the valkyrie for dear life, kissing and caressing her soft neck and cheeks as she flies, letting each of her graceful motions gently massaging your dick.\n\n");
 			outputText("She seems to be taking no little pleasure from flying full, either, and is soon moaning lewdly into your neck, abandoning her once-proud visage for that of a lusty maid. She wraps her legs around your waist, burying just a little more of your cock inside her until ");
-			if (player.cockArea(0) >= 16) outputText("she can take no more of you.  ");
+			if (player.biggestCockArea() >= 16) outputText("she can take no more of you.  ");
 			else outputText("there is no more of you to take.  ");
 			outputText("You return the favor, starting to buck your hips into her contracting passage, fucking her with quick, short strokes that keep the two of you close together.\n\n");
 			outputText("\"<i>I... Gotta land,</i>\" she moans. Her muscles are contracting harder and faster now, and you can feel her slick fem-juice now leaking out around your prick. You give her a little nod, already close to the edge yourself, but it looks like it’s too late! The girl screams, clamping down hard on your cock as she cums, squirting her juices onto her thighs and yours. The mid-air orgasm, however, causes her to forget her wings, and soon you’re plummeting toward the earth!\n\n");
@@ -107,12 +106,12 @@ package classes.Scenes.Areas.Tundra
 			outputText("You grab her hips and start to thrust upwards and back, slowly hotdogging the defeated girl’s ass, stopping only to slather a bit of her drooling cunt juices onto your shaft for some much-needed lubricant. You give her ass a quick, playful slap, making her reflexively squeeze down on your cock. Laughing, you get into a nice rhythm, spanking her once every few thrusts to get a little extra thrill out of her.\n\n");
 			outputText("To your surprise, the valkyrie looks over her shoulder and, face flush with anxious lust, whispers, \"<i>Well. . . What are you waiting for, huh? Just. . . stick it in already!</i>\"\n\n");
 			outputText("Well, if she’s so eager. You lean back and thrust in, slamming your [cock] into her tight pucker. She had already tried to relax, but your sudden and forceful intrusion makes her clamp down hard, squeezing your shaft like a wet silken vice. You moan as you shove more and more of your shaft into her blessedly warm depths, feeding her ass your cock one inch at a time until ");
-			if (player.cockArea(0) >= 16) outputText("you bottom out.  ");
+			if (player.biggestCockArea() >= 16) outputText("you bottom out.  ");
 			else outputText("hilt the valkyrie.  ");
 			outputText("She screams in pleasure and pain as you hammer into her backdoor, but settles down once you’ve stopped your advance, unable to continue. Slowly, you begin to rock your hips into her, fucking her ass slow and gentle.\n\n");
-			outputText("You smile as she begins to moan and wiggle her hips, finally getting into the assfuck you’re giving her. Now that she’s settled, you pick up the pace, starting to thrust faster and more forcefully. You keep your increase gradual, letting the valkyrie keep up so that by the time you’re roughly pounding her ass, she’s groping herself and yelling “Fuck me harder! Fuck me harder!” You oblige her, ramming her ass and resuming your spanking, abusing her tush until she’s screaming.\n\n");
+			outputText("You smile as she begins to moan and wiggle her hips, finally getting into the assfuck you’re giving her. Now that she’s settled, you pick up the pace, starting to thrust faster and more forcefully. You keep your increase gradual, letting the valkyrie keep up so that by the time you’re roughly pounding her ass, she’s groping herself and yelling \"Fuck me harder! Fuck me harder!\" You oblige her, ramming her ass and resuming your spanking, abusing her tush until she’s screaming.\n\n");
 			outputText("With such a tight, eager partner, you manage to last quite some time. Yet, all good things come to an end. With a mighty roar, you slam your cock as far into her as it will go and cum, painting her insides with your seed. She, too, climaxes as you fill her, her pucker squeezing you for everything you’re worth as her unused cunny squirts a bit of femcum onto her thighs and legs. Laughing gaily, you keep on pounding her ass until you’re utterly spent and deflating, and your partner has collapsed, her face buried in the snow.\n\n");
-			outputText("You withdraw with a wet “POP!”, and watch with a grin as your seed trickles out of her now-gaping anus, pooling with her own juices beneath her. You give her bruised, bright-red butt a gentle pat as you sheathe your cock back in your armor and head on back to camp, leaving your insensate lover in a cun-soaked heap on the ice.");
+			outputText("You withdraw with a wet \"POP!\", and watch with a grin as your seed trickles out of her now-gaping anus, pooling with her own juices beneath her. You give her bruised, bright-red butt a gentle pat as you sheathe your cock back in your armor and head on back to camp, leaving your insensate lover in a cun-soaked heap on the ice.");
 			player.sexReward("Default","Dick",true,false);
 			cleanupAfterCombat();
 		}

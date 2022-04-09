@@ -13,37 +13,11 @@ import classes.Scenes.NPCs.Ted;
 
 public class HiddenCave extends DungeonAbstractContent
 	{
-		private static const DUNGEON_HIDDEN_CAVE_ENTRANCE:int		= 39;
-		private static const DUNGEON_HIDDEN_CAVE_SE_UP:int			= 40;
-		private static const DUNGEON_HIDDEN_CAVE_E_UP:int			= 41;
-		private static const DUNGEON_HIDDEN_CAVE_NE_UP:int			= 42;
-		private static const DUNGEON_HIDDEN_CAVE_N_UP:int			= 43;
-		private static const DUNGEON_HIDDEN_CAVE_S_STAIRCASE:int	= 44;
-		private static const DUNGEON_HIDDEN_CAVE_S_UP:int			= 45;
-		private static const DUNGEON_HIDDEN_CAVE_S_STORAGE:int		= 46;
-		private static const DUNGEON_HIDDEN_CAVE_NW_UP:int			= 47;
-		private static const DUNGEON_HIDDEN_CAVE_W_UP:int			= 48;
-		private static const DUNGEON_HIDDEN_CAVE_SW_UP:int			= 49;
-		private static const DUNGEON_HIDDEN_CAVE_NARROW_T_E:int		= 50;
-		private static const DUNGEON_HIDDEN_CAVE_NARROW_T  :int		= 51;
-		private static const DUNGEON_HIDDEN_CAVE_NARROW_T_N:int		= 52;
-		private static const DUNGEON_HIDDEN_CAVE_L_STORAGE_W:int	= 53;
-		private static const DUNGEON_HIDDEN_CAVE_L_STORAGE_E:int	= 54;
-		private static const DUNGEON_HIDDEN_CAVE_S_STAIRCASE_B:int	= 55;
-		private static const DUNGEON_HIDDEN_CAVE_TUNNEL_00:int  	= 56;
-		private static const DUNGEON_HIDDEN_CAVE_TUNNEL_01:int  	= 57;
-		private static const DUNGEON_HIDDEN_CAVE_TUNNEL_02:int  	= 58;
-		private static const DUNGEON_HIDDEN_CAVE_TEDS_LAIR:int   	= 59;
-		private static const DUNGEON_HIDDEN_CAVE_SMALL_CAVE_W:int  	= 60;
-		private static const DUNGEON_HIDDEN_CAVE_MEDIUM_CAVE:int  	= 61;
-		private static const DUNGEON_HIDDEN_CAVE_SMALL_CAVE_E:int  	= 62;
-		private static const DUNGEON_HIDDEN_CAVE_SMALL_CAVE_N:int  	= 63;
-		
 		public function HiddenCave() {}
 		
 		public function enterDungeon():void {
 			inDungeon = true;
-			dungeonLoc = 39;
+			dungeonLoc = DUNGEON_HIDDEN_CAVE_ENTRANCE;
 			playerMenu();
 		}
 		public function exitDungeon():void {
@@ -80,7 +54,7 @@ public class HiddenCave extends DungeonAbstractContent
 		
 		//Rooms
 		public function roomEntrance():void {
-			dungeonLoc = 39;
+			dungeonLoc = DUNGEON_HIDDEN_CAVE_ENTRANCE;
 			clearOutput();
 			outputText("<b><u>Entrance</u></b>\n");
 			outputText("The entrance of this old cave is decorated with torches. Someone seems to like the idea of decorating his lair with fancy lights.");
@@ -88,7 +62,7 @@ public class HiddenCave extends DungeonAbstractContent
 			addButton(11, "Leave", exitDungeon);
 		}
 		public function roomSEUP():void {
-			dungeonLoc = 40;
+			dungeonLoc = DUNGEON_HIDDEN_CAVE_SE_UP;
 			clearOutput();
 			outputText("<b><u>SE Underground Passage</u></b>\n");
 			if(flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] < 1) {
@@ -102,14 +76,14 @@ public class HiddenCave extends DungeonAbstractContent
 			dungeons.setDungeonButtons(roomEUP, null, roomSUP, roomEntrance);
 		}
 		public function roomEUP():void {
-			dungeonLoc = 41;
+			dungeonLoc = DUNGEON_HIDDEN_CAVE_E_UP;
 			clearOutput();
 			outputText("<b><u>E Underground Passage</u></b>\n");
 			outputText("This corridor is decorated with many silent statue. You somehow have the impression that they are watching you.");
 			dungeons.setDungeonButtons(roomNEUP, roomSEUP, null, null);
 		}
 		public function roomNEUP():void {
-			dungeonLoc = 42;
+			dungeonLoc = DUNGEON_HIDDEN_CAVE_NE_UP;
 			clearOutput();
 			outputText("<b><u>NE Underground Passage</u></b>\n");
 			if(flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] == 1) {
@@ -123,14 +97,14 @@ public class HiddenCave extends DungeonAbstractContent
 			dungeons.setDungeonButtons(null, roomEUP, roomNUP, null);
 		}
 		public function roomNUP():void {
-			dungeonLoc = 43;
+			dungeonLoc = DUNGEON_HIDDEN_CAVE_N_UP;
 			clearOutput();
 			outputText("<b><u>N Underground Passage</u></b>\n");
 			outputText("Various shattered humanoid skeletons litter the floor in this corridor. They look demonic in origin. Whatever lives heres kills demon in cold blood.");
 			dungeons.setDungeonButtons(null, null, roomNWUP, roomNEUP);
 		}
 		public function roomSStaircase():void {
-			dungeonLoc = 44;
+            dungeonLoc = DUNGEON_HIDDEN_CAVE_S_STAIRCASE;
 			clearOutput();
 			outputText("<b><u>Stone Staircase</u></b>\n");
 			outputText("This room was hidden by a secret passage. It leads down below.");
@@ -138,14 +112,15 @@ public class HiddenCave extends DungeonAbstractContent
 			addButton(7, "Downstairs", roomSStaircaseB);
 		}
 		public function roomSUP():void {
-			dungeonLoc = 45;
+			dungeonLoc = DUNGEON_HIDDEN_CAVE_S_UP;
 			clearOutput();
 			outputText("<b><u>S Underground Passage</u></b>\n");
 			outputText("This corridor is decorated with many silent statue. You somehow have the impression that they are watching you.");
 			dungeons.setDungeonButtons(null, null, roomSWUP, roomSEUP);
 		}
 		public function roomSStorage():void {
-			dungeonLoc = 46;
+            var beatmore:int = 8 - flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] - flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS];
+			dungeonLoc = DUNGEON_HIDDEN_CAVE_S_STORAGE;
 			clearOutput();
 			outputText("<b><u></u>Small Storage</b>\n");
 			if(flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] < 1) {
@@ -158,7 +133,7 @@ public class HiddenCave extends DungeonAbstractContent
 			outputText("This room is filled with storage crates.");
 			dungeons.setDungeonButtons(roomSWUP, null, null, null);
 			if (flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] > 4 && flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] > 2) addButton(10, "West", roomSStaircase);
-			else addButtonDisabled(10, "West", "You still need to beat "+8-flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS]-flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS]+" enemies to deactivate restriction formation from this hidden passage.");
+			else addButtonDisabled(10, "West", "You still need to beat " + beatmore + " enemies to deactivate restriction formation from this hidden passage.");
 			if (flags[kFLAGS.HIDDEN_CAVE_TAKEN_SOULPILLS] > 0) {
 				if(flags[kFLAGS.HIDDEN_CAVE_TAKEN_SOULPILLS] < 5) {
 					outputText("\n\nThere is a crate with " + num2Text(5 - flags[kFLAGS.HIDDEN_CAVE_TAKEN_SOULPILLS]) + " pill bottles inside.\n\n");
@@ -171,7 +146,7 @@ public class HiddenCave extends DungeonAbstractContent
 			}
 		}
 		public function roomNWUP():void {
-			dungeonLoc = 47;
+			dungeonLoc = DUNGEON_HIDDEN_CAVE_NW_UP;
 			clearOutput();
 			outputText("<b><u>NW Underground Passage</u></b>\n");
 			if(flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] == 3) {
@@ -185,16 +160,18 @@ public class HiddenCave extends DungeonAbstractContent
 			dungeons.setDungeonButtons(null, roomWUP, null, roomNUP);
 		}
 		public function roomWUP():void {
-			dungeonLoc = 48;
+			var beatmore:int = 5 - flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] - flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS];
+            dungeonLoc = DUNGEON_HIDDEN_CAVE_W_UP;
 			clearOutput();
 			outputText("<b><u>W Underground Passage</u></b>\n");
 			outputText("Various shattered humanoid skeletons litter the floor in this corridor. They look demonic in origin. Whatever lives heres kills demon in cold blood.");
 			dungeons.setDungeonButtons(roomNWUP, roomSWUP, null, null);
 			if (flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] > 3 && flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] > 0) addButton(10, "West", roomNTE);
-			else addButtonDisabled(10, "West", "You still need to beat "+5-flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS]-flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS]+" enemies to deactivate restriction formation from this passage.");
+			else addButtonDisabled(10, "West", "You still need to beat "+ beatmore +" enemies to deactivate restriction formation from this passage.");
 		}
 		public function roomSWUP():void {
-			dungeonLoc = 49;
+            var beatmore:int = 4 - flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS];
+			dungeonLoc = DUNGEON_HIDDEN_CAVE_SW_UP;
 			clearOutput();
 			outputText("<b><u>SW Underground Passage</u></b>\n");
 			if(flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] == 2) {
@@ -207,17 +184,17 @@ public class HiddenCave extends DungeonAbstractContent
 			outputText("The corridor in front of you is covered with crystal formation that glow eerily in the dark. Every now and then, you spot a shadow from the corner of your eyes but clearly this must only be your imagination.");
 			dungeons.setDungeonButtons(roomWUP, null, null, roomSUP);
 			if (flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] > 3) addButton(11, "South", roomSStorage);
-			else addButtonDisabled(11, "South", "You still need to beat "+4-flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS]+" enemies to deactivate restriction formation from this passage.");
+			else addButtonDisabled(11, "South", "You still need to beat "+ beatmore +" enemies to deactivate restriction formation from this passage.");
 		}
 		public function roomNTE():void {
-			dungeonLoc = 50;
+			dungeonLoc = DUNGEON_HIDDEN_CAVE_NARROW_T_E;
 			clearOutput();
 			outputText("<b><u>Narrow Tunnel (E)</u></b>\n");
 			outputText("Various shattered humanoid skeletons litter the floor in this corridor. They look demonic in origin. Whatever lives heres kills demon in cold blood.");
 			dungeons.setDungeonButtons(null, null, roomNT, roomWUP);
 		}
 		public function roomNT():void {
-			dungeonLoc = 51;
+			dungeonLoc = DUNGEON_HIDDEN_CAVE_NARROW_T  ;
 			clearOutput();
 			outputText("<b><u>Narrow Tunnel</u></b>\n");
 			if(flags[kFLAGS.HIDDEN_CAVE_LOLI_BAT_GOLEMS] == 4) {
@@ -231,14 +208,14 @@ public class HiddenCave extends DungeonAbstractContent
 			dungeons.setDungeonButtons(roomNTN, null, null, roomNTE);
 		}
 		public function roomNTN():void {
-			dungeonLoc = 52;
+			dungeonLoc = DUNGEON_HIDDEN_CAVE_NARROW_T_N;
 			clearOutput();
 			outputText("<b><u>Narrow Tunnel (N)</u></b>\n");
 			outputText("This corridor is decorated with many silent statue. You somehow have the impression that they are watching you.");
 			dungeons.setDungeonButtons(roomLStorageW, roomNT, null, null);
 		}
 		public function roomLStorageW():void {
-			dungeonLoc = 53;
+			dungeonLoc = DUNGEON_HIDDEN_CAVE_L_STORAGE_W;
 			clearOutput();
 			outputText("<b><u>Large Storage (W)</u></b>\n");
 			if(flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] == 1) {
@@ -264,7 +241,7 @@ public class HiddenCave extends DungeonAbstractContent
 			}
 		}
 		public function roomLStorageE():void {
-			dungeonLoc = 54;
+			dungeonLoc = DUNGEON_HIDDEN_CAVE_L_STORAGE_E;
 			clearOutput();
 			outputText("<b><u>Large Storage (E)</u></b>\n");
 			if(flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] == 2) {
@@ -318,7 +295,7 @@ public class HiddenCave extends DungeonAbstractContent
 			}
 		}
 		public function roomSStaircaseB():void {
-			dungeonLoc = 55;
+			dungeonLoc = DUNGEON_HIDDEN_CAVE_S_STAIRCASE_B;
 			clearOutput();
 			outputText("<b><u>Stone Staircase (Basement)</u></b>\n");
 			outputText("In front of you is a stairway leading back to the upper level.");
@@ -329,14 +306,14 @@ public class HiddenCave extends DungeonAbstractContent
 			}
 		}
 		public function roomTunnel00():void {
-			dungeonLoc = 56;
+			dungeonLoc = DUNGEON_HIDDEN_CAVE_TUNNEL_00;
 			clearOutput();
 			outputText("<b><u>Tunnel</u></b>\n");
 			outputText("Various shattered humanoid skeletons litter the floor in this corridor. They look demonic in origin. Whatever lives heres kills demon in cold blood.");
 			dungeons.setDungeonButtons(null, roomSStaircaseB, roomTunnel01, null);
 		}
 		public function roomTunnel01():void {
-			dungeonLoc = 57;
+			dungeonLoc = DUNGEON_HIDDEN_CAVE_TUNNEL_01;
 			clearOutput();
 			outputText("<b><u>Tunnel</u></b>\n");
 			outputText("Various shattered humanoid skeletons litter the floor in this corridor. They look demonic in origin. Whatever lives heres kills demon in cold blood.");
@@ -344,7 +321,7 @@ public class HiddenCave extends DungeonAbstractContent
 			if (flags[kFLAGS.HIDDEN_CAVE_2ND_FLOOR] > 0) addButton(6, "North", roomMediumCave);
 		}
 		public function roomTunnel02():void {
-			dungeonLoc = 58;
+			dungeonLoc = DUNGEON_HIDDEN_CAVE_TUNNEL_02;
 			clearOutput();
 			outputText("<b><u>Tunnel</u></b>\n");
 			if(flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] == 3) {
@@ -358,7 +335,7 @@ public class HiddenCave extends DungeonAbstractContent
 			dungeons.setDungeonButtons(null, roomTedsLair, null, roomTunnel01);
 		}
 		public function roomTedsLair():void {
-			dungeonLoc = 59;
+			dungeonLoc = DUNGEON_HIDDEN_CAVE_TEDS_LAIR;
 			clearOutput();
 			outputText("<b><u>Ted's Lair</u></b>\n");
 			if(flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] == 4) {
@@ -381,7 +358,7 @@ public class HiddenCave extends DungeonAbstractContent
 			}
 		}
 		public function roomSmallCaveW():void {
-			dungeonLoc = 60;
+			dungeonLoc = DUNGEON_HIDDEN_CAVE_SMALL_CAVE_W;
 			clearOutput();
 			outputText("<b><u>Small Cave (W)</u></b>\n");
 			if (flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] == 5) {
@@ -411,7 +388,7 @@ public class HiddenCave extends DungeonAbstractContent
 			}
 		}
 		public function roomMediumCave():void {
-			dungeonLoc = 61;
+			dungeonLoc = DUNGEON_HIDDEN_CAVE_MEDIUM_CAVE;
 			clearOutput();
 			outputText("<b><u>Medium Cave</u></b>\n");
 			outputText("This medium sized cave is decorated with many silent statues. You somehow have the impression that they are watching you or maybe watching... ");
@@ -426,7 +403,7 @@ public class HiddenCave extends DungeonAbstractContent
 			}
 		}
 		public function roomSmallCaveE():void {
-			dungeonLoc = 62;
+			dungeonLoc = DUNGEON_HIDDEN_CAVE_SMALL_CAVE_E;
 			clearOutput();
 			outputText("<b><u>Small Cave (E)</u></b>\n");
 			if(flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] == 6) {
@@ -456,7 +433,7 @@ public class HiddenCave extends DungeonAbstractContent
 			}
 		}
 		public function roomSmallCaveN():void {
-			dungeonLoc = 63;
+			dungeonLoc = DUNGEON_HIDDEN_CAVE_SMALL_CAVE_N;
 			clearOutput();
 			outputText("<b><u>Small Cave (N)</u></b>\n");
 			if(flags[kFLAGS.HIDDEN_CAVE_GOLEM_GROUPS] == 7) {

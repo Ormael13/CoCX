@@ -2,12 +2,11 @@
 import classes.*;
 import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 
 public class HolliScene extends NPCAwareContent {
 
-	public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-	
+		
 	public function HolliScene()
 	{
 	}
@@ -159,7 +158,7 @@ public function treeMenu(output:Boolean = true):void {
 		} else {
 			addButtonDisabled(2, "TentacleBone");
 		}
-		if (player.isAlraune()) addButton(3, "TentacleDuel", uniquuuesexscene.alrauneExtraSceneWithHollicyntiaTentacleDuel).hint("There's no way you wont end up getting pluged in all of your holes from this.");
+		if (player.isAlraune()) addButton(3, "TentacleDuel", SceneLib.uniqueSexScene.alrauneExtraSceneWithHollicyntiaTentacleDuel).hint("There's no way you wont end up getting pluged in all of your holes from this.");
 		else addButtonDisabled(3, "TentacleDuel", "This scene requires to be an alraune of some kind.");
 		addButton(5,"Drink Sap", haveAMapleSyrupSnack);
 		if(flags[kFLAGS.HOLLI_FRUIT] > 0) addButton(6,"Eat A Fruit", eatHolliFruit);
@@ -191,18 +190,18 @@ private function helpWithFarm():void
 	
 	outputText("You ask if a plant goddess might not be able to help the farm you recently acquired.");
 
-	outputText("\n\n“<i>Ah yes,</i>” Holli breathes. “<i>The patch of verdant orderliness between me and mother. It feels bright and cold to me... the life that grows there so starchy and dull. Empty calories.</i>” You wait as she hums to herself absently.");
+	outputText("\n\n\"<i>Ah yes,</i>\" Holli breathes. \"<i>The patch of verdant orderliness between me and mother. It feels bright and cold to me... the life that grows there so starchy and dull. Empty calories.</i>\" You wait as she hums to herself absently.");
 
 	// PC not had sex with Holli that day:
 	if (flags[kFLAGS.HOLLI_FUCKED_TODAY] == 0)
 	{
-		outputText("\n\n“<i>I could help with your little patch of boringness,</i>” Holli smirks eventually, before closing her eyes and beginning to slowly paw at her flower. “<i>But oh... it’s been so long since you properly fertilised me. How can you expect a goddess to bless your crops if she has not been showered with worship?</i>” You roll your eyes. You can guess what you have to do in order to get this being’s help.");
+		outputText("\n\n\"<i>I could help with your little patch of boringness,</i>\" Holli smirks eventually, before closing her eyes and beginning to slowly paw at her flower. \"<i>But oh... it’s been so long since you properly fertilised me. How can you expect a goddess to bless your crops if she has not been showered with worship?</i>\" You roll your eyes. You can guess what you have to do in order to get this being’s help.");
 
 		treeMenu(false);
 	}
 	else
 	{
-		outputText("\n\n“<i>I can help you with it,</i>” she says eventually. “<i>But nourishing such dullness will take effort. I can give your produce a boost, but only once, and it won’t last forever. Would you like that?</i>”");
+		outputText("\n\n\"<i>I can help you with it,</i>\" she says eventually. \"<i>But nourishing such dullness will take effort. I can give your produce a boost, but only once, and it won’t last forever. Would you like that?</i>\"");
 
 		menu();
 		addButton(0, "Yes", doFarmFuckery);
@@ -215,7 +214,7 @@ private function doFarmFuckery():void
 	clearOutput();
 	outputText("Holli closes her eyes and hums. The sound seems to reverberate in your bones, and you feel the ground move uneasily below you. Holli’s roots shift ponderously, and you hear new growth crackling, burying eagerly through the soil, moisture being taken in. The tree woman opens her eyes to lazily grin at you as the portentous sounds below you continue.");
 
-	outputText("\n\n“<i>It’s happening. I hope you and your doggie enjoy what I have done!</i>”");
+	outputText("\n\n\"<i>It’s happening. I hope you and your doggie enjoy what I have done!</i>\"");
 
 	flags[kFLAGS.FOLLOWER_AT_FARM_HOLLI] = 1;
 	
@@ -226,7 +225,7 @@ private function noPlzDontFuckWithFarm():void
 {
 	clearOutput();
 	
-	outputText("“<i>Such a fickle mortal,</i>” she sighs. “<i>But I am a kind goddess. Ask me for it anytime, assuming you’ve... performed the rites.</i>”");
+	outputText("\"<i>Such a fickle mortal,</i>\" she sighs. \"<i>But I am a kind goddess. Ask me for it anytime, assuming you’ve... performed the rites.</i>\"");
 	
 	treeMenu(false);
 }
@@ -297,7 +296,7 @@ private function destroyDatFukkinTree2():void {
 private function letZeFuckingSproutLive2():void {
 	clearOutput();
 	outputText("You tell Zenji that he shouldn’t destroy the plant, neither of you knows what exactly it’s here for or even if it’s corrupted.\n\n");
-	outputText("Zenji peers at the plant suspiciously. \"<i>I know danger when I see it, [name], and dis plant is up to no good.” He takes a deep breath, “But if you tink you can handle whatever it grows up to be, den so be it. But don’ say I didn’ warn you…</i>\"\n\n");
+	outputText("Zenji peers at the plant suspiciously. \"<i>I know danger when I see it, [name], and dis plant is up to no good.\" He takes a deep breath, \"But if you tink you can handle whatever it grows up to be, den so be it. But don’ say I didn’ warn you…</i>\"\n\n");
 	ZenjiScenes.ZenjiHolli = true;
 	doNext(playerMenu);
 }
@@ -640,7 +639,7 @@ private function stayQuietWhileAmilyBitchesAboutFuckingArborday():void {
 	flags[kFLAGS.AMILY_FOLLOWER] = 0;
 	//Set - amily flipped her shit
 	flags[kFLAGS.AMILY_TREE_FLIPOUT] = 1;
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00173] = 0;
+	flags[kFLAGS.AMILY_WARNING] = 0;
 	//Enable village encounters
 	flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 0;
 	//Change to plain mouse birth!

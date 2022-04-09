@@ -13,15 +13,13 @@ import classes.PerkLib;
 import classes.MutationsLib;
 import classes.PerkTree;
 import classes.PerkType;
-import classes.Perks.AscensionOrganMutationX;
 import classes.Scenes.NPCs.EvangelineFollower;
+import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects;
 import flash.utils.Dictionary;
 import flash.events.TextEvent;
 
-
-import coc.view.ButtonDataList;
 import flash.events.MouseEvent;
 
 public class PerkMenu extends BaseContent {
@@ -63,8 +61,8 @@ public class PerkMenu extends BaseContent {
 		addButton(3, "Mutations DB", mutationsDatabase, 0, true);
 		addButton(4, "Perks Database", perkDatabase);
 		if (player.hasPerk(PerkLib.DoubleAttack) || player.hasPerk(PerkLib.DoubleAttackLarge) || player.hasPerk(PerkLib.DoubleAttackSmall) || player.hasPerk(PerkLib.Combo) || combat.canSpearDance() ||player.hasPerk(PerkLib.Poisoning) || player.hasPerk(PerkLib.SwiftCasting) ||
-			(player.hasPerk(PerkLib.JobBeastWarrior) && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon())) || player.hasPerk(PerkLib.NaturalInstincts) || player.hasPerk(PerkLib.WayOfTheWarrior) || player.hasPerk(PerkLib.LikeAnAsuraBoss) ||
-			player.jiangshiScore() >= 20) {
+			(player.hasPerk(PerkLib.JobBeastWarrior) && (player.haveNaturalClaws() || player.haveNaturalClawsTypeWeapon())) || player.hasPerk(PerkLib.NaturalInstincts) || player.hasPerk(PerkLib.WayOfTheWarrior) || player.hasPerk(PerkLib.Berzerker) ||
+			((player.hasPerk(PerkLib.Lustzerker)) && player.hasPerk(MutationsLib.SalamanderAdrenalGlandsEvolved)) || player.hasPerk(PerkLib.LikeAnAsuraBoss) || TyrantiaFollower.TyrantiaTrainingSessions >= 20 || player.jiangshiScore() >= 20) {
 			outputText("\n<b>You can adjust your melee attack settings.</b>");
 			addButton(5, "Melee Opt",doubleAttackOptions);
 		}
@@ -146,6 +144,10 @@ public class PerkMenu extends BaseContent {
 		const ICE :int = 2;
 		const LIGHTNING:int = 3;
 		const DARKNESS:int = 4;
+		const WATER:int = 5;
+		const WIND:int = 6;
+		const EARTH:int = 7;
+		const ACID:int = 8;
         var elementalMelee:Function = curry(setFlag, doubleAttackOptions2, kFLAGS.ELEMENTAL_MELEE);
 		var toggleflag:Function = curry(toggleFlag,doubleAttackOptions);
 		clearOutput();
@@ -194,6 +196,13 @@ public class PerkMenu extends BaseContent {
 			if (flags[kFLAGS.WARRIORS_RAGE_COMBAT_MODE] == 0) outputText("Manual");
 			outputText("</b>");
 		}
+		if (TyrantiaFollower.TyrantiaTrainingSessions >= 20) {
+			outputText("\n\nYou can choose between starting fight with Tyrant State active or not.");
+			outputText("\n\nTyrant State: <b>");
+			if (flags[kFLAGS.TYRANT_STATE_COMBAT_MODE] == 1) outputText("Autocast");
+			if (flags[kFLAGS.TYRANT_STATE_COMBAT_MODE] == 0) outputText("Manual");
+			outputText("</b>");
+		}
 		if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) {
 			outputText("\n\nYou can choose between starting fight with Asura form active or not. (If Crinos Shape toggle is set on Autocast this one toggle will be ignored and only crinos Shape would be autocasted)");//"+(player.hasPerk(PerkLib.)?"":"")+"
 			outputText("\n\nAsura Form: <b>");
@@ -215,6 +224,10 @@ public class PerkMenu extends BaseContent {
 				case ICE : outputText("Ice Spike") ;break;
 				case LIGHTNING: outputText("Lightning Bolt");break;
 				case DARKNESS: outputText("Darkness Shard");break;
+				case WATER: outputText("Water Ball");break;
+				case WIND: outputText("Wind Bullet");break;
+				case EARTH: outputText("Darkness Shard");break;
+				case ACID: outputText("Darkness Shard");break;
 			}
 			outputText("</b>");
 		}
@@ -267,31 +280,25 @@ public class PerkMenu extends BaseContent {
         else addButton(14, "Back", displayPerks);
 	}
 	public function doubleAttackOptions2():void {
-		const NONE:int = 0;
-		const FIRE:int = 1;
-		const ICE :int = 2;
-		const LIGHTNING:int = 3;
-		const DARKNESS:int = 4;
 		var toggleflag:Function = curry(toggleFlag, doubleAttackOptions2);
 		var zerkingStyle:Function = curry(setFlag, doubleAttackOptions2, kFLAGS.ZERKER_COMBAT_MODE);
-		var poisoningStyle:Function = curry(setFlag, doubleAttackOptions2, kFLAGS.ENVENOMED_MELEE_ATTACK);
-        var elementalMelee:Function = curry(setFlag, doubleAttackOptions2, kFLAGS.ELEMENTAL_MELEE);
 		menu();
-		if (player.hasPerk(PerkLib.SwiftCasting) && flags[kFLAGS.ELEMENTAL_MELEE] != 0) addButton(0, "None", elementalMelee,NONE);
-		if (player.hasPerk(PerkLib.SwiftCasting) && player.hasStatusEffect(StatusEffects.KnowsWhitefire) && flags[kFLAGS.ELEMENTAL_MELEE] != 1) addButton(1, "Fire", elementalMelee,FIRE);
-		if (player.hasPerk(PerkLib.SwiftCasting) && player.hasStatusEffect(StatusEffects.KnowsIceSpike) && flags[kFLAGS.ELEMENTAL_MELEE] != 2) addButton(2, "Ice", elementalMelee,ICE);
-		if (player.hasPerk(PerkLib.SwiftCasting) && player.hasStatusEffect(StatusEffects.KnowsLightningBolt) && flags[kFLAGS.ELEMENTAL_MELEE] != 3) addButton(6, "Lightning", elementalMelee,LIGHTNING);
-		if (player.hasPerk(PerkLib.SwiftCasting) && player.hasStatusEffect(StatusEffects.KnowsDarknessShard) && flags[kFLAGS.ELEMENTAL_MELEE] != 4) addButton(7, "Darkness", elementalMelee,DARKNESS);
-		if (player.hasPerk(PerkLib.Poisoning)
-			&& (player.tailType == Tail.BEE_ABDOMEN
-			|| player.tailType == Tail.SCORPION
-			|| player.tailType == Tail.MANTICORE_PUSSYTAIL
-			|| player.faceType == Face.SNAKE_FANGS
-			|| player.faceType == Face.SPIDER_FANGS)
-			&& flags[kFLAGS.ENVENOMED_MELEE_ATTACK] != 1) {
-            addButton(3, "Venom", toggleflag,kFLAGS.ENVENOMED_MELEE_ATTACK,true);
+		if (player.hasPerk(PerkLib.NaturalInstincts)) {
+			if (flags[kFLAGS.CRINOS_SHAPE_COMBAT_MODE] != 0) addButton(0, "Manual", toggleflag,kFLAGS.CRINOS_SHAPE_COMBAT_MODE,false);
+			if (flags[kFLAGS.CRINOS_SHAPE_COMBAT_MODE] != 1) addButton(5, "Autocast", toggleflag,kFLAGS.CRINOS_SHAPE_COMBAT_MODE,true);
 		}
-		if (player.hasPerk(PerkLib.Poisoning) && flags[kFLAGS.ENVENOMED_MELEE_ATTACK] != 0) addButton(9, "None", toggleflag,kFLAGS.ENVENOMED_MELEE_ATTACK,false);
+		if (player.hasPerk(PerkLib.WayOfTheWarrior)) {
+			if (flags[kFLAGS.WARRIORS_RAGE_COMBAT_MODE] != 0) addButton(1, "Manual", toggleflag,kFLAGS.WARRIORS_RAGE_COMBAT_MODE,false);
+			if (flags[kFLAGS.WARRIORS_RAGE_COMBAT_MODE] != 1) addButton(6, "Autocast", toggleflag,kFLAGS.WARRIORS_RAGE_COMBAT_MODE,true);
+		}
+		if (TyrantiaFollower.TyrantiaTrainingSessions >= 20) {
+			if (flags[kFLAGS.TYRANT_STATE_COMBAT_MODE] != 0) addButton(2, "Manual", toggleflag,kFLAGS.TYRANT_STATE_COMBAT_MODE,false);
+			if (flags[kFLAGS.TYRANT_STATE_COMBAT_MODE] != 1) addButton(7, "Autocast", toggleflag,kFLAGS.TYRANT_STATE_COMBAT_MODE,true);
+		}
+		if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) {
+			if (flags[kFLAGS.ASURA_FORM_COMBAT_MODE] != 0) addButton(3, "Manual", toggleflag,kFLAGS.ASURA_FORM_COMBAT_MODE,false);
+			if (flags[kFLAGS.ASURA_FORM_COMBAT_MODE] != 1) addButton(8, "Autocast", toggleflag,kFLAGS.ASURA_FORM_COMBAT_MODE,true);
+		}
 		if (player.hasPerk(PerkLib.JobBeastWarrior) || player.jiangshiScore() >= 20) {
 			if (flags[kFLAGS.FERAL_COMBAT_MODE] != 0) addButton(4, "Normal", toggleflag, kFLAGS.FERAL_COMBAT_MODE, false);
 			if (((player.weaponName == "fists" && player.hasNaturalWeapons()) || player.haveNaturalClawsTypeWeapon()) && flags[kFLAGS.FERAL_COMBAT_MODE] != 1) addButton(9, "Feral", toggleflag , kFLAGS.FERAL_COMBAT_MODE, true);
@@ -306,20 +313,38 @@ public class PerkMenu extends BaseContent {
 		addButton(14, "Back", doubleAttackOptions);
 	}
 	public function doubleAttackOptions3():void {
+		const NONE:int = 0;
+		const FIRE:int = 1;
+		const ICE :int = 2;
+		const LIGHTNING:int = 3;
+		const DARKNESS:int = 4;
+		const WATER:int = 5;
+		const WIND:int = 6;
+		const EARTH:int = 7;
+		const ACID:int = 8;
 		var toggleflag:Function = curry(toggleFlag, doubleAttackOptions3);
+        var elementalMelee:Function = curry(setFlag, doubleAttackOptions3, kFLAGS.ELEMENTAL_MELEE);
+		var poisoningStyle:Function = curry(setFlag, doubleAttackOptions3, kFLAGS.ENVENOMED_MELEE_ATTACK);
 		menu();
-		if (player.hasPerk(PerkLib.NaturalInstincts)) {
-			if (flags[kFLAGS.CRINOS_SHAPE_COMBAT_MODE] != 0) addButton(0, "Manual", toggleflag,kFLAGS.CRINOS_SHAPE_COMBAT_MODE,false);
-			if (flags[kFLAGS.CRINOS_SHAPE_COMBAT_MODE] != 1) addButton(1, "Autocast", toggleflag,kFLAGS.CRINOS_SHAPE_COMBAT_MODE,true);
+		if (player.hasPerk(PerkLib.SwiftCasting) && flags[kFLAGS.ELEMENTAL_MELEE] != 0) addButton(0, "None", elementalMelee,NONE);
+		if (player.hasPerk(PerkLib.SwiftCasting) && player.hasStatusEffect(StatusEffects.KnowsWhitefire) && flags[kFLAGS.ELEMENTAL_MELEE] != 1) addButton(1, "Fire", elementalMelee,FIRE);
+		if (player.hasPerk(PerkLib.SwiftCasting) && player.hasStatusEffect(StatusEffects.KnowsIceSpike) && flags[kFLAGS.ELEMENTAL_MELEE] != 2) addButton(2, "Ice", elementalMelee,ICE);
+		if (player.hasPerk(PerkLib.SwiftCasting) && player.hasStatusEffect(StatusEffects.KnowsLightningBolt) && flags[kFLAGS.ELEMENTAL_MELEE] != 3) addButton(3, "Lightning", elementalMelee,LIGHTNING);
+		if (player.hasPerk(PerkLib.SwiftCasting) && player.hasStatusEffect(StatusEffects.KnowsDarknessShard) && flags[kFLAGS.ELEMENTAL_MELEE] != 4) addButton(4, "Darkness", elementalMelee, DARKNESS);
+		if (player.hasPerk(PerkLib.SwiftCasting) && player.hasStatusEffect(StatusEffects.KnowsWaterBall) && flags[kFLAGS.ELEMENTAL_MELEE] != 5) addButton(5, "Water", elementalMelee, WATER);
+		if (player.hasPerk(PerkLib.SwiftCasting) && player.hasStatusEffect(StatusEffects.KnowsWindBullet) && flags[kFLAGS.ELEMENTAL_MELEE] != 6) addButton(6, "Wind", elementalMelee, WIND);
+		if (player.hasPerk(PerkLib.SwiftCasting) && player.hasStatusEffect(StatusEffects.KnowsStalagmite) && flags[kFLAGS.ELEMENTAL_MELEE] != 7) addButton(7, "Earth", elementalMelee, EARTH);
+		if (player.hasPerk(PerkLib.SwiftCasting) && player.hasStatusEffect(StatusEffects.KnowsAcidSpray) && flags[kFLAGS.ELEMENTAL_MELEE] != 8) addButton(8, "Acid", elementalMelee, ACID);
+		if (player.hasPerk(PerkLib.Poisoning)
+			&& (player.tailType == Tail.BEE_ABDOMEN
+			|| player.tailType == Tail.SCORPION
+			|| player.tailType == Tail.MANTICORE_PUSSYTAIL
+			|| player.faceType == Face.SNAKE_FANGS
+			|| player.faceType == Face.SPIDER_FANGS)
+			&& flags[kFLAGS.ENVENOMED_MELEE_ATTACK] != 1) {
+            addButton(12, "Venom", toggleflag,kFLAGS.ENVENOMED_MELEE_ATTACK,true);
 		}
-		if (player.hasPerk(PerkLib.WayOfTheWarrior)) {
-			if (flags[kFLAGS.WARRIORS_RAGE_COMBAT_MODE] != 0) addButton(2, "Manual", toggleflag,kFLAGS.WARRIORS_RAGE_COMBAT_MODE,false);
-			if (flags[kFLAGS.WARRIORS_RAGE_COMBAT_MODE] != 1) addButton(3, "Autocast", toggleflag,kFLAGS.WARRIORS_RAGE_COMBAT_MODE,true);
-		}
-		if (player.hasPerk(PerkLib.LikeAnAsuraBoss)) {
-			if (flags[kFLAGS.ASURA_FORM_COMBAT_MODE] != 0) addButton(10, "Manual", toggleflag,kFLAGS.ASURA_FORM_COMBAT_MODE,false);
-			if (flags[kFLAGS.ASURA_FORM_COMBAT_MODE] != 1) addButton(11, "Autocast", toggleflag,kFLAGS.ASURA_FORM_COMBAT_MODE,true);
-		}
+		if (player.hasPerk(PerkLib.Poisoning) && flags[kFLAGS.ENVENOMED_MELEE_ATTACK] != 0) addButton(13, "None", toggleflag,kFLAGS.ENVENOMED_MELEE_ATTACK,false);
 		addButton(14, "Back", doubleAttackOptions);
 	}
 
@@ -329,6 +354,10 @@ public class PerkMenu extends BaseContent {
 		const ICE :int = 2;
 		const LIGHTNING:int = 3;
 		const DARKNESS:int = 4;
+		const WATER:int = 5;
+		const WIND:int = 6;
+		const EARTH:int = 7;
+		const ACID:int = 8;
 		var toggleflag:Function = curry(toggleFlag,doubleStrikeOptions);
         var doubleStrikeStyle:Function = curry(setFlag,doubleStrikeOptions,kFLAGS.DOUBLE_STRIKE_STYLE);
         var elementalArrows:Function = curry(setFlag,doubleStrikeOptions,kFLAGS.ELEMENTAL_ARROWS);
@@ -356,6 +385,10 @@ public class PerkMenu extends BaseContent {
 				case ICE : outputText("Ice") ;break;
 				case LIGHTNING: outputText("Lightning");break;
 				case DARKNESS: outputText("Darkness");break;
+				case WATER: outputText("Water");break;
+				case WIND: outputText("Wind");break;
+				case EARTH: outputText("Earth");break;
+				case ACID: outputText("Acid");break;
 			}
 			outputText("</b>");
 		}
@@ -408,6 +441,10 @@ public class PerkMenu extends BaseContent {
 		const ICE :int = 2;
 		const LIGHTNING:int = 3;
 		const DARKNESS:int = 4;
+		const WATER:int = 5;
+		const WIND:int = 6;
+		const EARTH:int = 7;
+		const ACID:int = 8;
 		var toggleflag:Function = curry(toggleFlag,doubleStrikeOptions2);
         var doubleStrikeStyle:Function = curry(setFlag,doubleStrikeOptions2,kFLAGS.DOUBLE_STRIKE_STYLE);
         var elementalArrows:Function = curry(setFlag,doubleStrikeOptions2,kFLAGS.ELEMENTAL_ARROWS);
@@ -415,8 +452,12 @@ public class PerkMenu extends BaseContent {
 		if (player.hasPerk(PerkLib.ElementalArrows) && flags[kFLAGS.ELEMENTAL_ARROWS] != 0) addButton(0, "None", elementalArrows,NONE);
 		if (player.hasPerk(PerkLib.ElementalArrows) && player.hasStatusEffect(StatusEffects.KnowsWhitefire) && flags[kFLAGS.ELEMENTAL_ARROWS] != 1) addButton(1, "Fire", elementalArrows,FIRE);
 		if (player.hasPerk(PerkLib.ElementalArrows) && player.hasStatusEffect(StatusEffects.KnowsIceSpike) && flags[kFLAGS.ELEMENTAL_ARROWS] != 2) addButton(2, "Ice", elementalArrows,ICE);
-		if (player.hasPerk(PerkLib.ElementalArrows) && player.hasStatusEffect(StatusEffects.KnowsLightningBolt) && flags[kFLAGS.ELEMENTAL_ARROWS] != 3) addButton(6, "Lightning", elementalArrows,LIGHTNING);
-		if (player.hasPerk(PerkLib.ElementalArrows) && player.hasStatusEffect(StatusEffects.KnowsDarknessShard) && flags[kFLAGS.ELEMENTAL_ARROWS] != 4) addButton(7, "Darkness", elementalArrows,DARKNESS);
+		if (player.hasPerk(PerkLib.ElementalArrows) && player.hasStatusEffect(StatusEffects.KnowsLightningBolt) && flags[kFLAGS.ELEMENTAL_ARROWS] != 3) addButton(3, "Lightning", elementalArrows,LIGHTNING);
+		if (player.hasPerk(PerkLib.ElementalArrows) && player.hasStatusEffect(StatusEffects.KnowsDarknessShard) && flags[kFLAGS.ELEMENTAL_ARROWS] != 4) addButton(4, "Darkness", elementalArrows,DARKNESS);
+		if (player.hasPerk(PerkLib.ElementalArrows) && player.hasStatusEffect(StatusEffects.KnowsWaterBall) && flags[kFLAGS.ELEMENTAL_ARROWS] != 5) addButton(5, "Water", elementalArrows,WATER);
+		if (player.hasPerk(PerkLib.ElementalArrows) && player.hasStatusEffect(StatusEffects.KnowsWindBullet) && flags[kFLAGS.ELEMENTAL_ARROWS] != 6) addButton(6, "Wind", elementalArrows,WIND);
+		if (player.hasPerk(PerkLib.ElementalArrows) && player.hasStatusEffect(StatusEffects.KnowsStalagmite) && flags[kFLAGS.ELEMENTAL_ARROWS] != 7) addButton(7, "Earth", elementalArrows,EARTH);
+		if (player.hasPerk(PerkLib.ElementalArrows) && player.hasStatusEffect(StatusEffects.KnowsAcidSpray) && flags[kFLAGS.ELEMENTAL_ARROWS] != 8) addButton(8, "Acid", elementalArrows,ACID);
 		if (player.hasPerk(PerkLib.Cupid) && flags[kFLAGS.CUPID_ARROWS] != 0) addButton(10, "None", toggleflag,kFLAGS.CUPID_ARROWS,false);
 		if (player.hasPerk(PerkLib.Cupid) && player.hasStatusEffect(StatusEffects.KnowsArouse) && flags[kFLAGS.CUPID_ARROWS] != 1) addButton(11, "Arouse", toggleflag,kFLAGS.CUPID_ARROWS,true);
 		if (player.hasPerk(PerkLib.EnvenomedBolt) && flags[kFLAGS.ENVENOMED_BOLTS] != 0) addButton(12, "None", toggleflag,kFLAGS.ENVENOMED_BOLTS,false);
@@ -802,13 +843,14 @@ public class PerkMenu extends BaseContent {
 					"\nNote: Not all body parts will use all available slots.\n\n");
 
 			outputText("<b><i><u>Mutations used per bodypart:</u></i></b>\n");
-			var bPartlist:Array = ["Heart", "Muscle", "Mouth", "Adrenals", "Bloodstream", "FaT", "Lungs", "Metabolism", "Ovaries", "Testicles", "Eyes", "Nerv/Sys", "Bone", "Thyroid"]//, "PThyroid"
+			var bPartlist:Array = ["Heart", "Muscle", "Mouth", "Adrenals", "Bloodstream", "FaT", "Lungs", "Metabolism", "Ovaries", "Testicles", "Eyes", "Bone", "Nerv/Sys", "Thyroid", "PThyroid", "Adaptations"]
 			for each (var bodyPart:String in bPartlist){
 				var mCount:int = 0
-				var mPerkarray:Array = MutationsLib.mutationsArray(bodyPart)
+				var mPerkarray:Array = MutationsLib.mutationsArray(bodyPart);
 				for each (var pPerk:Array in mPerkarray){
 					if (player.hasPerk(pPerk[0])){
 						mCount++;
+						if (bodyPart == "Adaptations") mutationCount++;
 					}
 				}
 				outputText(bodyPart + " mutations obtained: ");
@@ -951,21 +993,21 @@ public class PerkMenu extends BaseContent {
 			mutationsDatabase();
 		}
 
-		function mutationsDBPNervSys():void{
-			clearOutput();
-			//Peripheral/NervSys Mutations
-			displayHeader("Peripheral Nervous System Mutations");
-			for each (var mutate:Array in MutationsLib.mutationsArray("Nerv/Sys")){
-				mutationsDatabaseVerify(mutate);
-			}
-			mutationsDatabase();
-		}
-
 		function mutationsDBBoneMarrow():void{
 			clearOutput();
 			//Bones and Marrow Mutations
 			displayHeader("Bones and Marrow Mutations");
 			for each (var mutate:Array in MutationsLib.mutationsArray("Bone")){
+				mutationsDatabaseVerify(mutate);
+			}
+			mutationsDatabase();
+		}
+
+		function mutationsDBPNervSys():void{
+			clearOutput();
+			//Peripheral/NervSys Mutations
+			displayHeader("Peripheral Nervous System Mutations");
+			for each (var mutate:Array in MutationsLib.mutationsArray("Nerv/Sys")){
 				mutationsDatabaseVerify(mutate);
 			}
 			mutationsDatabase(1);
@@ -986,6 +1028,16 @@ public class PerkMenu extends BaseContent {
 			//ParaThyroid Glands Mutations.
 			displayHeader("ParaThyroid Glands Mutations");
 			for each (var mutate:Array in MutationsLib.mutationsArray("PThyroid")){
+				mutationsDatabaseVerify(mutate);
+			}
+			mutationsDatabase(1);
+		}
+
+		function mutationsDBAdaptations():void{
+			clearOutput();
+			//Adaptation Mutations.
+			displayHeader("Adaptation Mutations");
+			for each (var mutate:Array in MutationsLib.mutationsArray("Adaptations")){
 				mutationsDatabaseVerify(mutate);
 			}
 			mutationsDatabase(1);
@@ -1027,16 +1079,17 @@ public class PerkMenu extends BaseContent {
 		menuItems.push("Ovaries", mutationsDBOvaries, "Ovaries Mutations");
 		menuItems.push("Testicles", mutationsDBTesticles, "Testicle Mutations");
 		menuItems.push("Eyes", mutationsDBEyes, "Eyes Mutations");
-		menuItems.push("Nerv/Sys", mutationsDBPNervSys, "PNerv-Sys Mutations");
+		menuItems.push("Bone/Marrow", mutationsDBBoneMarrow, "Bone Mutations");
 		// Due to not being able to return which page I am at in submenu,
 		// I cannot keep the menu to be at a specific page beyond this.
 		// Thus, hardcoded into the function.
-		menuItems.push("Bone/Marrow", mutationsDBBoneMarrow, "Bone Mutations");
+		menuItems.push("Nerv/Sys", mutationsDBPNervSys, "Nerv-Sys Mutations");
 		menuItems.push("Thyroid Gland", mutationsDBThyroidGlands, "Thyroid Mutations");
-		//menuItems.push("Parathyroid Gland", mutationsDBParathyroid);
+		menuItems.push("Parathyroid Gland", mutationsDBParathyroid, "Parathyroid Mutations");
+		menuItems.push("Adaptations", mutationsDBAdaptations, "Adaptation Mutations");
 		menuItems.push("Dragons", mutationsDBDragon, "Dragon Mutations");
 		menuItems.push("Kitsunes", mutationsDBKitsune, "Kitsune Mutations");
-		menuGen(menuItems, page, displayPerks, false);
+		menuGen(menuItems, page, displayPerks);
 	}
 
 	//Mutations check helper. Cloned + stripped requirements logic from PerkMenuDB.
@@ -1121,6 +1174,67 @@ public class PerkMenu extends BaseContent {
 		outputText("\n");
 	}
 
+	public function mutationsDatabaseVerify2(perks:Array, acquireReq:String = ""):void {
+		var perkCount:int = player.perkv1(perks[0]);
+		if (flags[kFLAGS.MUTATIONS_SPOILERS]) { //Help On
+			if (player.hasPerk(perks[0])) {	//Just checking if you have the base.
+				outputText("\n" + perks.name() + ": <font color=\"#008000\">Acquired.</font>");
+			} else {
+				outputText("\n" + perks.name() + ": <font color=\"#800000\">Missing.</font>");
+			}
+			outputText("\nPerk Rank: " + String(perkCount) + ".");
+			if (acquireReq == "") {	//In case manual information dump required, e.g. mutation handled in different way.
+				var reqs:Array = [];
+				for each (var cond:Object in perks[0].requirements) {
+					var reqStr:String = cond.text;
+					var color:String = "";
+					if (!(reqStr.indexOf("Mutation") >= 0)) { //Ignores the "free mutation slot" note.
+						if (cond.fn(player)) {
+							color = "#008000";
+						} else {
+							color = "#800000";
+						}
+						reqs.push("<font color='" + color + "'>" + cond.text + "</font>");
+					} else if (perkCount == perks[1]){
+						outputText("\"You already have the highest tier.\"")
+					}
+					else {	//Information not available.
+						reqs.push("Missing data. Perhaps Unacquirable?");
+					}
+					outputText("\nRequirements for next tier: " + reqs.join(", "));
+				}
+			}
+			else {	//Manual done this way.
+				outputText("\nRequirements for next tier: " + acquireReq + ".");
+			}
+			outputText("\nDescription: ");
+			if(perks[0].desc().length <= 1) {	//Some desc. contains only "."
+				outputText("No description available.");
+			}
+			else{
+				outputText(perks[0].desc());
+			}
+		}
+		else { //Help Off
+			if (player.hasPerk(perks[0])) {
+				outputText("\n" + perks.name() + ": <font color=\"#008000\">Acquired.</font>");
+				outputText("\nTier: " + player.perkv1(perks[0]));
+				outputText("\nDescription: ");
+				if(perks[0].desc().length <= 1) {	//Some desc. contains only "."
+					outputText("No description available.");
+				}
+				else{
+					outputText(perks[0].desc());
+				}
+			}
+			else {
+				outputText("\n???" + "\n Tier: ?" + "\nDescription: ???");
+			}
+		}
+		outputText("\n");
+	}
+
+
 	public function perkDatabase(page:int=0, count:int=50):void {
 		var allPerks:Array = PerkTree.obtainablePerks().sort();
 		var mutationList:Array = MutationsLib.mutationsArray("",true);
@@ -1192,7 +1306,8 @@ public class PerkMenu extends BaseContent {
 			//function pSpecialRem = No Ascension/History/Bloodline/PastLife Perks
 			var pList5:Array = MutationsLib.mutationsArray("Deprecated");
 			for each (var perkTrue:PerkType in perkDict){
-				if (!(pList1.indexOf(perkTrue) >= 0) && !(pList2.indexOf(perkTrue) >= 0) && !(pList3.indexOf(perkTrue) >= 0) && !(pList4.indexOf(perkTrue) >= 0) && !(pList5.indexOf(perkTrue) >= 0) && pSpecialRem(perkTrue)){					tPerkList.push(perkTrue);
+				if (!(pList1.indexOf(perkTrue) >= 0) && !(pList2.indexOf(perkTrue) >= 0) && !(pList3.indexOf(perkTrue) >= 0) && !(pList4.indexOf(perkTrue) >= 0) && !(pList5.indexOf(perkTrue) >= 0) && pSpecialRem(perkTrue)){
+					tPerkList.push(perkTrue);
 				}
 			}
 			//trace(pList1.length + " < 1 - 2 > " + pList2.length + "\n");

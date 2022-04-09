@@ -17,7 +17,7 @@ package classes.Scenes.Places{
 	import classes.Items.Armors.Nothing;
 	import classes.Scenes.Areas.Forest.WoodElvesHuntingParty;
 	import classes.Scenes.SceneLib;
-import classes.display.SpriteDb;
+    import classes.display.SpriteDb;
 import classes.internals.SaveableState;
 	import classes.CoC;
 
@@ -188,7 +188,7 @@ import classes.internals.SaveableState;
 					" presumably from the tree; you feel it even more than you might have expected, because somehow the vines grappling you stripped you naked! As if galvanized by the warm" +
 					", golden ooze now covering you the vines begin swirling and slithering over your body, teasing and tickling you until you begin to feel sensitive and aroused despite your situation." +
 					" You clench in anticipation as one explores between the cheeks of your "+player.assDescript()+", then pushes its way into your "+player.assholeDescript()+"" +
-					", its tapered end swirling about provocatively inside. The vine already gagging you stifles your cry of indignation as it works its way into your mouth, acting much the same way. As it does it begins releasing a sticky, faintly sweet sap that trickles down your throat and coats your tongue, making you feel dizzy and flushed.");
+					", its tapered end swirling about provocatively inside. The vine already gagging you stifles your cry of indignation as it works its way into your mouth, acting much the same way.\n\n As it does, it begins releasing a sticky, faintly sweet sap that trickles down your throat and coats your tongue, making you feel dizzy and flushed.");
 			if (player.hasVagina()) outputText("You continue to thrash helplessly as a third tentacle winds its way into your "+player.vaginaDescript()+", and despite yourself your hips start to twitch and buck as it eagerly explores your wet cavity, tickling your sensitive places and slowly filling you with  more sticky fluid; it clings to your walls and makes them feel warm and tingly, and before long your slit is engorged and drooling with a mixture of the plant’s secretions and your own feminine fluids.");
 			outputText("With a muffled gasp of terror and arousal you realize yet another tentacle is pressing against your belly-button, and you squeal against the tentacle invading your throat as it actually penetrates through you and begins, impossibly, to move about inside your stomach, tickling and teasing you from inside. Insanely, rather than the pain of your stomach being impaled it brings a feeling of soothing warmth - almost relief. ");
 			if (player.hasCoat()) outputText("With a shock you look down at your body to see your "+player.coatType()+" melting away and washing off, replaced by smooth, silky skin. ");
@@ -196,24 +196,24 @@ import classes.internals.SaveableState;
 			if (player.hasCoat() || player.tailType != Tail.NONE || player.wings.type != Wings.NONE || player.legCount != 2) outputText("despite the radical changes your form is undergoing, ");
 			else outputText("Despite being violated in every hole you have, and some you don’t, ");
 			outputText("a wave of peace and well-being comes over you, dispelling your panic and all sense of urgency as it does. How can this be a violation when it feels so <b>good</b>? ");
-			if (player.cocks.length > 0){
+			if (player.cocks.length >= 1){
 				outputText("You sigh in pleasure as you feel a vine wrapping slowly about the base of your male organ");
-				if (player.cocks.length > 1) outputText("s");
+				if (player.cocks.length >= 2) outputText("s");
 				outputText(", and don’t even flinch as it pulls ");
 				if (player.cocks.length == 1) outputText("it ");
-				if (player.cocks.length > 1) outputText("them ");
+				if (player.cocks.length >= 2) outputText("them ");
 				outputText("off as easily as one might pluck a ripe fruit from a tree. You never needed ");
 				if (player.cocks.length == 1) outputText("it ");
-				if (player.cocks.length > 1) outputText("them ");
+				if (player.cocks.length >= 2) outputText("them ");
 				outputText("anyway, ridiculous, ugly thing");
-				if (player.cocks.length > 1) outputText("s");
+				if (player.cocks.length >= 2) outputText("s");
 				outputText("; you’re much better off without ");
 				if (player.cocks.length == 1) outputText("it.");
-				if (player.cocks.length > 1) outputText("them.");
+				if (player.cocks.length >= 2) outputText("them.");
 				if (!player.hasVagina()) {
 					outputText(" Instead you feel a rising sense of ecstatic rightness as a new slit forms where ");
 					if (player.cocks.length == 1) outputText("it");
-					if (player.cocks.length > 1) outputText("they");
+					if (player.cocks.length >= 2 ) outputText("they");
 					outputText(" once hideously stuck out of you. Ah, this is much more fitting! And <b>so</b> much more pleasurable!");
 				}
 			}
@@ -237,6 +237,9 @@ import classes.internals.SaveableState;
 			CoC.instance.transformations.HairSilky.applyEffect(false);
 			player.wings.type = Wings.NONE;
 			CoC.instance.transformations.EyesChangeColor(["light green"]).applyEffect(false);
+			if (player.skin.base.pattern != Skin.PATTERN_NONE) {
+				CoC.instance.transformations.SkinPatternNone.applyEffect(false);
+			}
 			player.skin.base.color = "light";
 			player.skinAdj = "flawless";
 			player.skinType = Skin.PLAIN;
@@ -312,7 +315,7 @@ import classes.internals.SaveableState;
 					"\n\nAlyssa whispers in your ear. \"<i>That lovely thing is made from the very sap of the tree you fell from. With its help, everything will go even faster. Just lay still, and let the tree’s sap work its magic, little sis. You’re going to <b>love</b> it.</i>\"\n\n" +
 					"Even if you wanted to resist, you’re much too far gone; the pleasure has paralyzed your mind and body and all you can do is writhe in ecstasy as Allyssa pins you under her." +
 					" Her pert palm-sized breasts and stiff nipples press against your own as Elenwen inserts one end of the toy into her own welcoming slit then pushes the other tip of the golden length between your pink," +
-					" dripping lips. For a moment the entire world seems to pause in anticipation, then you gasp and let your mouth gape open as Elenwen fully slides the toy in, the blonde color running higher up your hair strands. Why does it feel so <b>good</b>?" +
+					" dripping lips. For a moment the entire world seems to pause in anticipation, then you gasp and let your mouth gape open as Elenwen fully slides the toy in, the blonde color running higher up your hair strands. Why does it feel so <b>good</b>? " +
 					"You didn’t think anything could feel this good! You lose yourself entirely in the experience as Elenwen thrusts into you again and again, moaning as with each shock of pleasure your "+player.hairColor+" hair becomes a little more blonde. Just before you reach orgasm, the last of the "+player.hairColor+" fades, leaving your hair fully golden blonde." +
 					" Elenwen stops her thrusting and  whispers sweetly in your sensitive ear as your juices run freely down the toy, twitching with each spasm of your drenched pussy around it as it begs for your impending climax." +
 					"\n\n\"<i>Tell me, little sister, what is it that you want right now? Is it something cute, fun, or pleasurable? Whatever it is we'll do it for you, as much as you like, as often as you like, from now on. All you have to do… is… ask<b>~♥</b></i>\" She punctuates the end of her sultry proposal by brushing her fingers against your clitoris, making you jump.\n\n" +
@@ -757,7 +760,7 @@ import classes.internals.SaveableState;
 			outputText("This tent only really gets used for one thing, and it’s just what you want right now. Alyssa and Elenwen notice you entering, and you smile as they glance at each other and leave off their work to follow you in." +
 					" Before long, the three of you are stripped naked and laying together on the bed, already feeling each other up and preparing for the fun you’re about to have." +
 					"\n\n\"<i>This brings back memories, doesn’t it, [name]?</i>\"says Elenwen, smiling nostalgically." +
-					"\n\n\"<i>I… I hope they’re good ones…</i>\" Alyssa says, with a hint of guilt or nervousness in your voice. Considering the circumstances of your “welcome” here that’s understandable, but you smile at the dainty Elf and pull her into an embrace, assuring her that you have no regrets about how things went that day. She smiles and gives you a kiss." +
+					"\n\n\"<i>I… I hope they’re good ones…</i>\" Alyssa says, with a hint of guilt or nervousness in your voice. Considering the circumstances of your \"welcome\" here that’s understandable, but you smile at the dainty Elf and pull her into an embrace, assuring her that you have no regrets about how things went that day. She smiles and gives you a kiss." +
 					"\n\n\"<i>Hey, I’m here too!</i>\" Elenwen interjects, pouting. \"<i>Don’t just create a mood between the two of you.</i>\"" +
 					"\n\nShe punctuates her teasing complaint by nibbling at the sensitive tips of your pointy ears, just as she always does. Not one to just watch, Alyssa begins licking and cleaning your left breast with her soft, pink tongue." +
 					" Elenwen moves from your eartip, licking a delightful trail to your neck and taking hold of your mouth before gently kissing you. Perhaps moved by their memories of that first sweet meeting, they’re retracing their old movements to pleasure you," +
@@ -853,7 +856,7 @@ import classes.internals.SaveableState;
 			if (player.statusEffectv2(StatusEffects.FletchingTable) > 1) addButtonDisabled(1, "Ebonbloom", "You already used this for improving bow string.");
 			else {
 				if (player.hasItem(useables.EBONBLO, 1)) {
-					if (player.statusEffectv2(StatusEffects.FletchingTable) == 1) addButtonDisabled(1, "Ebonbloom", "You need to imprpve string with spider silk first.");
+					if (player.statusEffectv2(StatusEffects.FletchingTable) != 1) addButtonDisabled(1, "Ebonbloom", "You need to imprpve string with spider silk first.");
 					else addButton(1, "Ebonbloom", FletchingAdjustString2, useables.EBONBLO);
 				}
 				else addButtonDisabled(1, "Ebonbloom", "You need to have ebonbloom.");

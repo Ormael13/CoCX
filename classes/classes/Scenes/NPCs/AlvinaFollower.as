@@ -26,19 +26,18 @@ public function alvinaFirstEncounter():void
 {
 	spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2Concealed_16bit);
 	clearOutput();
-
-	outputText("Along your travels, you meet a woman in robes with black hair. You didn’t expect to see a fellow human around in Mareth, which is a relief. Perhaps you aren’t alone in this quest. You ask if she could give you directions, as you have no idea what to expect in this realm. As a champion, your job is to fight the demons, but you can’t fight them if you have no idea where to look.\n\n");
+	outputText("Along your travels, you meet a woman in robes with black hair. You expected to find at least a few humans in Mareth, if nothing else, the previous champions, so to find another human in this realm is a relief. You ask if she could give you directions, as you have no idea what to expect in this realm. As a champion, your job is to fight the demons, but you can’t fight them if you have no idea where to look.\n\n");
 	outputText("\"<i>Directions and demons, hm? There are many places you could visit. If I were you, I would go to the lake and look for a peculiar island at its center. That said, be respectful of whomever you meet there.</i>\"");
 	outputText("You nod and prepare to leave, but ask her who she is in case you should ever see her again.\n\n");
 	outputText("\"<i>Me? I am a person of no consequence.</i>\"");
-	outputText("As you turn over to question her on her wording, you find out she is no longer there. Well, that was a strange encounter.\n\n");
+	outputText("As you turn back to question her, you notice that she's vanished without a trace. You're not sure whether to be relieved...or concerned by this.\n\n");
 	flags[kFLAGS.ALVINA_FOLLOWER] = 1;
 	doNext(camp.returnToCampUseOneHour);
 }
 
 public function alvinaSecondEncounter():void
 {
-	//spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2_16bit);
+	spriteSelect(SpriteDb.s_archmage_alvina_shadowmantle2Concealed_16bit);
 	clearOutput();
 	outputText("As you pass by the road you spot the woman from before sitting on a nearby wooden log. You sit right next to her, and she closes her book in response. You thank her for the information regarding Marae’s whereabouts");
 	if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2) outputText(" though it ended in disaster, thanks to your actions");
@@ -589,7 +588,7 @@ public function alvinaMainCampSexMenuBlasphemeOfBaphomet():void
 	outputText("She doesn’t have to tell you twice, diving head first towards her infernal cunt, you begin to lick her lunchbox, tasting the juices of your girl-fiend, delivering the pleasure she desires. Indulging in more of her infernal juices has stirred something deep within, now an unquenchable desire for her pleasure plagues your mind, clouding your thoughts in a thick haze of lust. ");
 	outputText("You ravenously attack her cunt, your tongue darting around near sporadically as you try to hit every sensitive spot to bring the naughty devil to orgasm. Her girl juice ignites fires along your tongue, pleasure courses through your form.");
 	if (player.tongue.type == Tongue.DEMONIC) outputText(" That said, your demon tongue is perfectly capable of bringing the both of you to orgasm and you ravenously play with her cunt using your unique appendage, easily able to stimulate every sensitive area, your prowess aptly exemplified. From above,  you can hear Alvina gasp in delight.");
-	outputText("\n\n\"<i>OHHhhh yes [name] keep it up I feel the magic building…!”</i>\"\n\n");
+	outputText("\n\n\"<i>OHHhhh yes [name] keep it up I feel the magic building…!\"</i>\"\n\n");
 	outputText("Her pussy gushes with juices, coating your gluttonous maw in her infernal ichor.  To your surprise, her clit begins to pulse as it engorges and grows, flecks of violet demonic energy dances across the engorged flesh. Her enlarging clit notably becomes...sweeter, juicier. Your continued attention enriching the sudden growth, and enthralling you. The unholy, addicting taste ");
 	outputText("of her growing appendage pulls your mind away, stealing your will and conforming it to her own demands for pleasure. Growing longer and thicker, her clit occasionally pulses with energy until it turns into something that might as well be a cock. The 15.6 inches long beast of demonic flesh rests happily between her pussy lips, as if jutting out of a sheath, the tip flared ");
 	outputText("like that of a horse.\n\nAn intoxicating smell rises from Alvina’s newly grown equine cock, a dollop of pre-cum emerging from the slit. You can’t help but lurch forwards, gripping her new tool between your hands and pulling it to your mouth, vehemently devouring her meaty crown, savoring the flavor of the corrupting fluid. Hells under, her clitcock tastes so good! You need ");

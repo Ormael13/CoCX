@@ -16,7 +16,6 @@ import classes.internals.WeightedDrop;
 
 public class CancerAttack extends Monster
 	{
-		public var cancerScene:CancerAttackScene = new CancerAttackScene();
 
 		override protected function performCombatAction():void {
 			if (player.hasStatusEffect(StatusEffects.MonsterDig)) {
@@ -39,17 +38,12 @@ public class CancerAttack extends Monster
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			doNext(cancerScene.CancerDefeat);
+			SceneLib.beach.cancerScene.defeat();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if (this.hasCock()){
-				cancerScene.CancerMaleRape();
-			}
-			if (this.hasVagina()){
-				cancerScene.CancerFemaleRape();
-			}
+            SceneLib.beach.cancerScene.rape();
 		}
 
 		private function Dig():void {

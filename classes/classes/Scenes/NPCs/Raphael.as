@@ -4,6 +4,7 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
+import classes.display.SpriteDb;
 
 public class Raphael extends NPCAwareContent implements TimeAwareInterface {
 
@@ -16,80 +17,80 @@ public class Raphael extends NPCAwareContent implements TimeAwareInterface {
 //- Player has C,D,DD or E breasts, at least girly/ample thighs, no humongous ass, is between 4 and 6 feet and has a bipedal lower body.
 //- Player does not have a cock or balls, for now
 
-		public function Raphael() {
-			EventParser.timeAwareClassAdd(this);
-		}
+public function Raphael() {
+    EventParser.timeAwareClassAdd(this);
+}
 
-		private var checkedRussetRogue:int;
+private var checkedRussetRogue:int;
 
-		//Implementation of TimeAwareInterface
-		public function timeChange():Boolean {
-			checkedRussetRogue = 0; //Make sure we test just once in timeChangeLarge
-			if (flags[kFLAGS.RAPHAEL_DRESS_TIMER] > 1 && player.gems >= 5) flags[kFLAGS.RAPHAEL_DRESS_TIMER]--;
-			if (flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] > 1 && player.gems >= 5) flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER]--;
-			//Fix 'hangs' - PC is at the bottom of the dress countdown
-			if (flags[kFLAGS.RAPHAEL_DRESS_TIMER] == 1 && flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] == 0 && RaphaelLikes()) flags[kFLAGS.RAPHAEL_DRESS_TIMER] = 4;
-			return false;
-		}
+//Implementation of TimeAwareInterface
+public function timeChange():Boolean {
+    checkedRussetRogue = 0; //Make sure we test just once in timeChangeLarge
+    if (flags[kFLAGS.RAPHAEL_DRESS_TIMER] > 1 && player.gems >= 5) flags[kFLAGS.RAPHAEL_DRESS_TIMER]--;
+    if (flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] > 1 && player.gems >= 5) flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER]--;
+    //Fix 'hangs' - PC is at the bottom of the dress countdown
+    if (flags[kFLAGS.RAPHAEL_DRESS_TIMER] == 1 && flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] == 0 && RaphaelLikes()) flags[kFLAGS.RAPHAEL_DRESS_TIMER] = 4;
+    return false;
+}
 
-		public function timeChangeLarge():Boolean {
-			if (checkedRussetRogue++ == 0 && model.time.hours == 6 && flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] >= 0 && player.hasKeyItem("Camp - Chest") >= 0 && player.gems >= 5 && player.statusEffectv1(StatusEffects.TelAdre) >= 1 && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
-				/*trace("RAPHAEL FINAL COUNTDOWN: " + flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER]);
-				trace("RAPHAEL MET: " + flags[kFLAGS.RAPHAEL_MET]);
-				trace("RAPHAEL DRESS TIMER: " + flags[kFLAGS.RAPHAEL_DRESS_TIMER]);
-				trace("RAPHAEL DISGUSTED: " + flags[kFLAGS.RAPHAEL_DISGUSTED_BY_PC_APPEARANCE]);*/
-				if (flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] <= 0) { //Countdown to finale not currently engaged!
-					//If the PC meets his criteria!
-					if (RaphaelLikes()) { //Not yet met!  MEETING TIEM!
-						if (flags[kFLAGS.RAPHAEL_MET] == 0) {
-							outputText("<b>\nSomething unusual happens that morning...</b>\n");
-							doNext(meetRaphael);
-							return true;
-						}
-						else { //Already met!
-							if (flags[kFLAGS.RAPHAEL_DRESS_TIMER] == 0 && flags[kFLAGS.RAPHAEL_SECOND_DATE] == 0) { //Not given dress yet
-								outputText("<b>\nSomething unusual happens that morning...</b>\n");
-								doNext(RaphaelDress);
-								return true;
-							}
-							//Dress followup - Call picnic date prologue!
-							if (player.armor == armors.R_BDYST && (flags[kFLAGS.RAPHAEL_DRESS_TIMER] > 1 && flags[kFLAGS.RAPHAEL_DRESS_TIMER] <= 4 || flags[kFLAGS.RAPHAEL_DRESS_TIMER] == -1)) {
-								outputText("<b>\nSomething unusual happens that morning...</b>\n");
-								doNext(RaphaelEncounterIIDressFollowup);
-								return true;
-							}
-						}
-					}
-					else { //If the PC does not currently meet his criteria
-						if (flags[kFLAGS.RAPHAEL_MET] == 0 && rand(10) == 0 && model.time.days >= 15) {
-							outputText("<b>\nSomething unusual happens that morning...</b>\n");
-							doNext(meetRaphael);
-							return true;
-						}
-						//Dress countdown - if pc isn't wearing it yet, kick out to
-						//Finale!
-						if (flags[kFLAGS.RAPHAEL_DRESS_TIMER] == 1) {
-							flags[kFLAGS.RAPHAEL_DRESS_TIMER] = -1;
-							flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] = 7;
-						}
-						//PC get ready for the 2nd encounter and hasn't been
-						//shot down yet?
-						if (player.armor == armors.R_BDYST && flags[kFLAGS.RAPHAEL_DISGUSTED_BY_PC_APPEARANCE] == 0) {
-							outputText("<b>\nSomething unusual happens that morning...</b>\n");
-							doNext(RaphaelEncounterIIDressFollowup);
-							return true;
-						}
-					}
-				}
-				else if (flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] == 1) { //FINALE
-					outputText("<b>\nSomething unusual happens that morning...</b>\n");
-					doNext(quiksilverFawkesEndGame);
-					return true;
-				}
-			}
-			return false;
-		}
-		//End of Interface Implementation
+public function timeChangeLarge():Boolean {
+    if (checkedRussetRogue++ == 0 && model.time.hours == 6 && flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] >= 0 && player.hasKeyItem("Camp - Chest") >= 0 && player.gems >= 5 && player.statusEffectv1(StatusEffects.TelAdre) >= 1 && (flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0)) {
+        /*trace("RAPHAEL FINAL COUNTDOWN: " + flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER]);
+        trace("RAPHAEL MET: " + flags[kFLAGS.RAPHAEL_MET]);
+        trace("RAPHAEL DRESS TIMER: " + flags[kFLAGS.RAPHAEL_DRESS_TIMER]);
+        trace("RAPHAEL DISGUSTED: " + flags[kFLAGS.RAPHAEL_DISGUSTED_BY_PC_APPEARANCE]);*/
+        if (flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] <= 0) { //Countdown to finale not currently engaged!
+            //If the PC meets his criteria!
+            if (RaphaelLikes()) { //Not yet met!  MEETING TIEM!
+                if (flags[kFLAGS.RAPHAEL_MET] == 0) {
+                    outputText("<b>\nSomething unusual happens that morning...</b>\n");
+                    doNext(meetRaphael);
+                    return true;
+                }
+                else { //Already met!
+                    if (flags[kFLAGS.RAPHAEL_DRESS_TIMER] == 0 && flags[kFLAGS.RAPHAEL_SECOND_DATE] == 0) { //Not given dress yet
+                        outputText("<b>\nSomething unusual happens that morning...</b>\n");
+                        doNext(RaphaelDress);
+                        return true;
+                    }
+                    //Dress followup - Call picnic date prologue!
+                    if (player.armor == armors.R_BDYST && (flags[kFLAGS.RAPHAEL_DRESS_TIMER] > 1 && flags[kFLAGS.RAPHAEL_DRESS_TIMER] <= 4 || flags[kFLAGS.RAPHAEL_DRESS_TIMER] == -1)) {
+                        outputText("<b>\nSomething unusual happens that morning...</b>\n");
+                        doNext(RaphaelEncounterIIDressFollowup);
+                        return true;
+                    }
+                }
+            }
+            else { //If the PC does not currently meet his criteria
+                if (flags[kFLAGS.RAPHAEL_MET] == 0 && rand(10) == 0 && model.time.days >= 15) {
+                    outputText("<b>\nSomething unusual happens that morning...</b>\n");
+                    doNext(meetRaphael);
+                    return true;
+                }
+                //Dress countdown - if pc isn't wearing it yet, kick out to
+                //Finale!
+                if (flags[kFLAGS.RAPHAEL_DRESS_TIMER] == 1) {
+                    flags[kFLAGS.RAPHAEL_DRESS_TIMER] = -1;
+                    flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] = 7;
+                }
+                //PC get ready for the 2nd encounter and hasn't been
+                //shot down yet?
+                if (player.armor == armors.R_BDYST && flags[kFLAGS.RAPHAEL_DISGUSTED_BY_PC_APPEARANCE] == 0) {
+                    outputText("<b>\nSomething unusual happens that morning...</b>\n");
+                    doNext(RaphaelEncounterIIDressFollowup);
+                    return true;
+                }
+            }
+        }
+        else if (flags[kFLAGS.RAPHEAL_COUNTDOWN_TIMER] == 1) { //FINALE
+            outputText("<b>\nSomething unusual happens that morning...</b>\n");
+            doNext(quiksilverFawkesEndGame);
+            return true;
+        }
+    }
+    return false;
+}
+//End of Interface Implementation
 
 override public function RaphaelLikes():Boolean {
 	if (flags[kFLAGS.LOW_STANDARDS_FOR_ALL])
@@ -128,6 +129,7 @@ override public function RaphaelLikes():Boolean {
 //{First encounter}
 private function meetRaphael():void {
 	clearOutput();
+    spriteSelect(SpriteDb.s_raphael);
 	if (camp.IsSleeping){
 		outputText("You stir in your sleep, bothered by a noise. It's the familiar creaking of your camp's storage chest, as if you've just opened it up to fill it with freshly found loot. Groaning, you hog your blankets and twist. Nothing to worry about then. You soon drift back into a pleasant dream about all the spoils you've accumulated over the time here. Life is good.\n\n");
 		outputText("Suddenly, you sit up straight and something occurs to you. If you're sleeping, then who's opening the chest?\n\n");
@@ -159,7 +161,7 @@ private function meetRaphaelPtII():void {
 
 	outputText("\"<i>Here I thought I had searched the entire camp, found every treasure, pilfered every gem...</i>\" He states while sauntering towards you in a disarming, wide stride. ");
 	if (RaphaelLikes()) outputText("\"<i>... but it seems I've overlooked the greatest jewel of all!</i>\" Raphael kneels before you, taking you by the hand and planting a kiss upon it. \"<i>Can you ever forgive me for my blindness, my fair lady?</i>\" He takes your hand in both his paws, while looking deeply into your eyes. His own are a deep emerald green, contrasting sharply with his bright red coat. They are set below a sturdy brow that gives him playful maturity and a rough regal elegance.\n\n");
-	else outputText("\"<i>My apologies. I didn't notice you! I thought you were a lady but you're not. Can you forgive me for not noticing you, my fair friend?</i>\" He takes your hand in both his paws, while looking deeply into your eyes. His own are a deep emerald green, contrasting sharply with his bright red coat. They are set below a sturdy brow that gives him playful maturity and a rough regal elegance.");
+	else outputText("\"<i>My apologies. I didn't notice you! I thought you were a lady, but you're not. Can you forgive me for not noticing you, my fair friend?</i>\" He takes your hand in both his paws, while looking deeply into your eyes. His own are a deep emerald green, contrasting sharply with his bright red coat. They are set below a sturdy brow that gives him playful maturity and a rough regal elegance.");
 
 	outputText("What do you do?");
 	//[Talk] [Slap] [Swoon]
@@ -273,7 +275,8 @@ private function rapeRaphael():void {
 	outputText("\n\nRaphael gasps as your [cock] meets the star of his pucker. Despite Raphael yelling at you, you're determined to teach him a lesson. You slide your [cock] right into his butthole, revelling in his virgin tightness. <b>Raphael has lost his anal virginity!</b>");
 	outputText("\n\n\"<i>No! Your cock! Get it out of my butt! It's not normal! Sex is supposed to be about one man and one woman!</i>\" Raphael yells. You whisper into his ears and tell him that here in Mareth, anal sex is perfectly normal and it's a common occurrence. He's just too vanilla for his tastes! Time to spice things up.");
 	outputText("\n\nYou shove him on the ground, grab him by the legs and push your [cock] as deep as you can. Deeming the depth sufficient, you begin to piston in and out, picking up the speed until you're practically ravaging his ass. The russet rogue yelps in mixed pain and pleasure, his vulpine cock sliding out of its sheath and inflates to full erection. You continue to fuck him like there's no tomorrow.");
-	if (player.tentacleCocks() > 0 || player.stamenCocks() > 0) outputText("You push your tentacle cock in all the way through. You can feel it snaking its way through his intestines and stomach before finally comes out of his mouth! The fox looks down, unable to speak. You laugh at the poor fox-thief and pull your cock so you're just fucking his anus.");
+	if (player.findCockWithType(CockTypesEnum.TENTACLE, 1, 48, -1, "length")) //you CAN'T do all-way through with 1-inch dick :)
+        outputText("You push your tentacle cock in all the way through. You can feel it snaking its way through his intestines and stomach before finally comes out of his mouth! The fox looks down, unable to speak. You laugh at the poor fox-thief and pull your cock so you're just fucking his anus.");
 	outputText("\n\nEventually, you can hold back no more and empty your seed into his bowels. Raphael cums as well, shooting ropes of fox-jizz. With your orgasmic high complete, you pull your cock out of his ass, cum still dripping from his abused butthole. You give him a naughty grin and take his gems and rapier while he's still dazed. To the victor go the spoils after all! ");
 	player.gems += 100 + rand(20);
 	player.sexReward("Default","Default",true,false);
@@ -290,6 +293,7 @@ private function rapeRaphaelII():void {
 //Again at bedtime
 private function RaphaelDress():void {
 	clearOutput();
+    spriteSelect(SpriteDb.s_raphael);
 	if (camp.IsSleeping){
 		outputText("A small pebble hits the ground near you, waking you up. When a second one hits, you're sure someone is trying to draw your attention.\n\n");
 		outputText("Rubbing your eyes, you pull yourself out of bed, wondering what's going on. Sticking your head through the front wall of your " + camp.homeDesc() + ", you take a curious peek outside, but find no one around.\n\n");
@@ -348,6 +352,7 @@ private function RaphaelEncounterIIDressFollowup():void {
 	//Clear dress countdown.  Its over and done with.
 	flags[kFLAGS.RAPHAEL_DRESS_TIMER] = -1;
 	clearOutput();
+    spriteSelect(SpriteDb.s_raphael);
 	if (camp.IsSleeping){
 		outputText("You awake to the soft patter of footsteps moving away from you. For a second you think nothing of it, but soon awake to the realization you might have been robbed again. When you sit up and notice a weight off your chest, you realize someone has made off with the priceless ruby pendant Raphael gifted you earlier. They swiped it straight off your neck!\n\n");
 	}
@@ -490,7 +495,7 @@ private function RaphaelChooseFrisk():void {
 		//Reject] [Accept]
 		simpleChoices("Reject", friskRejectChoice, "Accept", friskAcceptChoice, "", null, "", null, "", null);
 	}
-	//{If player's corruption is higher than 19 and higher than Intelligence.}
+	//{If player's corruption is higher than 35 and higher than Intelligence.}
 	else {
 		outputText("You don't quite manage to follow where Raphael keeps the pendant, but you're certain it's somewhere on his body and you intend to find out where! With more eagerness than the fox had expected, you paw across his lean body. You slip into his leather clothes and run the hairs of his fur through scraping fingers. It makes Raphael gasp slightly as you trace down his body, eventually discovering that the bulge in front of his tight leather pants has become larger than you noticed it to be earlier!\n\n");
 
@@ -601,7 +606,7 @@ private function RaphaelPicnicII():void {
 
 	outputText("Curious and certain he has a great deal of knowledge on Mareth, you begin asking Raphael questions about his craft and his experiences. Soon enough, two distinct subjects come up as possible topics. Then again, the wine goes straight to your head and this seems like the perfect time to enjoy more leisurely activities and simply enjoy yourself.\n\n");
 	//[Discuss] [Skill] [Flirt]
-	simpleChoices("Fencing", RaphaelPicnicSkill, "Thieving", RaphaelPicnicChooseThieving, "Flirt", null, "", null, "", null);
+	simpleChoices("Fencing", RaphaelPicnicSkill, "Thieving", RaphaelPicnicChooseThieving, "", null, "", null, "", null);
 }
 private function RaphaelPicnicEnd():void {
 	clearOutput();
@@ -885,7 +890,7 @@ private function RaphaelPostFenceSex():void {
 
 private function postRaphaelCoitus():void {
 	clearOutput();
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00149] = 1;
+	flags[kFLAGS.RAPHAEL_FUCKED] = 1;
 	outputText("When you wake up on a bed of soft moss, Raphael has disappeared completely.\n\n");
 
 	//({When player had reached the SPE fencing apex}
@@ -1170,6 +1175,7 @@ private function RaphaelThieverySmexPtII():void {
 //[Quicksilver scene]
 private function quiksilverFawkesEndGame():void {
 	clearOutput();
+    spriteSelect(SpriteDb.s_raphael);
 	outputText("You wake up to the sound of an ominous cry in the distance, like that of a howling wolf.  It can only mean trouble and you jump out of bed.\n\n");
 
 	outputText("It is an eerily misty morning outside, with banks of fog covering your campsite.  It only makes the second howl more haunting as the danger appears to draw closer to camp.  You stand still and prepare yourself to face this menace, peering into the fog.  When a shadow creeps closer, you prime for combat.  However, its posture suggests it is weary and tired, slumping against a tree. When it struggles forward, it almost comes falling out of the curtaining mist.  It is only then that you notice the redness of its fur and the fineness of its clothes.  It is the fox and russet rogue, Raphael!\n\n");
@@ -1181,7 +1187,7 @@ private function quiksilverFawkesEndGame():void {
 		outputText("You're immediately confused and you ask him what's going on, but the fox is out of breath.  What's more, a similar howl now calls out from the opposite direction too!  Whatever these sounds are or this fog is, they have the camp surrounded!\n\n");
 	}
 	//({If player had an INT or SPE ending with him earlier}
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00149] == 1) {
+	if(flags[kFLAGS.RAPHAEL_FUCKED] == 1) {
 		outputText("You're a bit miffed at the fox.  You haven't heard from him for more than a week after he slept with you, and now he only shows up because he's looking for help.  The fox however, is out of breath.  What's more; a similar howl now calls out from the opposite direction too!  Whatever these sounds are or this fog is, they have the camp surrounded!\n\n");
 	}
 
@@ -1323,6 +1329,7 @@ private function betrayRaphael():void {
 //Intro
 public function orphanageIntro():void {
 	clearOutput();
+    spriteSelect(SpriteDb.s_raphael);
 	if(RaphaelLikes()) {
 		if(flags[kFLAGS.TIMES_ORPHANAGED_WITH_RAPHAEL] == 0) {
 			outputText("You spend some time around Tel'Adre looking for the orphanage Raphael mentioned, but you can't seem to find a building that looks like one.  Instead you resort to asking the locals, but their reactions are weird. Upstanding citizens, friendly and polite, turn away from you at the merest notion of it.  Young men get excited but dare not speak of it, women blush and turn away like you've just solicited them and, strangest of all, most children have never even heard of it.");
@@ -1443,12 +1450,16 @@ private function evenMoreRaphaelIntro():void {
 	addButton(0,"Next",kissRaphaelFirstTimeOrphanage);
 }
 
+//seems unused
+/*
 private function getTheFuckOutOfDodge():void {
 	clearOutput();
+    spriteSelect(SpriteDb.s_raphael);
 	outputText("You politely inform Raphael that you have to go, and though he seems crestfallen, he demurs, \"<i>Very well then, ma chère.  I shall await you in the hours of late evening, in case you change your mind.</i>\"");
 	outputText("\n\nWell, that went well.");
 	doNext(camp.returnToCampUseOneHour);
 }
+*/
 
 //RaphSex
 //Sex1

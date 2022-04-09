@@ -46,7 +46,7 @@ public class BeeHoney extends Consumable
 
 		override public function canUse():Boolean {
             if (value == SPECIAL_HONEY_VALUE && CoC.instance.player.statusEffectv1(StatusEffects.Exgartuan) == 1) { //Exgartuan doesn't like the special honey
-                outputText("You uncork the bottle only to hear Exgartuan suddenly speak up.  <i>“Hey kid, this beautiful cock here doesn’t need any of that special bee shit.  Cork that bottle up right now or I’m going to make it so that you can’t drink anything but me.”</i>  You give an exasperated sigh and put the cork back in the bottle.");
+                outputText("You uncork the bottle only to hear Exgartuan suddenly speak up.  <i>\"Hey kid, this beautiful cock here doesn’t need any of that special bee shit.  Cork that bottle up right now or I’m going to make it so that you can’t drink anything but me.\"</i>  You give an exasperated sigh and put the cork back in the bottle.");
 				return false;
 			}
 			return true;
@@ -117,8 +117,7 @@ public class BeeHoney extends Consumable
 			}
 			//(removes tentacle hair status, restarts hair growth if not prevented by reptile status)
 			//Intelligence Boost
-			if (changes < changeLimit && Utils.rand(2) == 0) {
-				player.MutagenBonus("int", 1);
+			if (changes < changeLimit && Utils.rand(2) == 0 && player.MutagenBonus("int", 1)) {
 				outputText("\n\nYou spend a few moments analyzing the taste and texture of the honey's residue, feeling awfully smart.");
 				changes++;
 			}

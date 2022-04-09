@@ -5,12 +5,12 @@ import classes.BodyParts.Face;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.NPCs.JojoScene;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 public class GoblinShamanScene extends BaseContent
 	{
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		
+				
 		public function GoblinShamanScene()
 		{
 		}
@@ -74,7 +74,7 @@ public class GoblinShamanScene extends BaseContent
 				outputText("\n\nThe goblin shaman watches impassively for a moment, but as your need intensifies, her attitude softens while your member hardens.  \"<i>Oh, I think I’m gonna regret this, but ");
 				if(player.cockTotal() == 1) outputText("that thing");
 				else outputText("those things");
-				outputText(" look mighty tasty.  You don’t mind if I sample just a little bit of your seed do you?</i>\"  The crimson-maned beauty kneels down next to you and lets her tiny, delicate digits dance across the underside of [oneCock], drawing a lurid moan from your lips as she wonders out loud, “I don’t hear a no, " + player.mf("stud","sexy") + ".  That’s good... I’m just going to take a little bit of cum... just a few squirts.  Surely a ");
+				outputText(" look mighty tasty.  You don’t mind if I sample just a little bit of your seed do you?</i>\"  The crimson-maned beauty kneels down next to you and lets her tiny, delicate digits dance across the underside of [oneCock], drawing a lurid moan from your lips as she wonders out loud, \"I don’t hear a no, " + player.mf("stud","sexy") + ".  That’s good... I’m just going to take a little bit of cum... just a few squirts.  Surely a ");
 				if(player.tallness >= 60) outputText("big, ");
 				outputText(player.mf("strapping young man","sexy breeder") + " will have enough jizz to pay for " + player.mf("his","her") + " trespass?</i>\"");
 				outputText("  Those delightful, dancing fingers pirouette down to your ");
@@ -119,7 +119,7 @@ public class GoblinShamanScene extends BaseContent
 			{
 				x = player.biggestCockIndex();
 				outputText("You tear through your [armor] in a rush, anything to release [eachCock] from its hellish confinement.  You’re so aroused, so horny.  Any passing thoughts of modesty are immediately discarded and forgotten, washed away under the wave of your all-consuming lust as your fingers slide home around [oneCock] and begin to play with the turgid tool.  You immediately buck from the sensation of incredible, pent-up need, nearly cumming on the spot.  Looking up, you meet the emerald-skinned woman’s eyes pleadingly.");
-				outputText("\n\nThe shaman sighs and grumbles, \"<i>Another one with a fucking tree-trunk for a cock.</i>\"  She begrudgingly slips out of her straps, perky, dark-green nipples popping free from their confinement to jut proudly from her chest.  “The downside of being a goblin,” explains the athletic green-skinned beauty, \'<i>is that around a dick like that... a heaving, pulsating tower of cock-flesh like that... I’ve just gotta TRY it.</i>\"  Now nude, your captor saunters up, wide hips shaking from side to side with every step.  \"<i>Being a size-queen is suffering,</i>\" she finishes with a wry smile.");
+				outputText("\n\nThe shaman sighs and grumbles, \"<i>Another one with a fucking tree-trunk for a cock.</i>\"  She begrudgingly slips out of her straps, perky, dark-green nipples popping free from their confinement to jut proudly from her chest.  \"The downside of being a goblin,\" explains the athletic green-skinned beauty, \'<i>is that around a dick like that... a heaving, pulsating tower of cock-flesh like that... I’ve just gotta TRY it.</i>\"  Now nude, your captor saunters up, wide hips shaking from side to side with every step.  \"<i>Being a size-queen is suffering,</i>\" she finishes with a wry smile.");
 				outputText("\n\nYou watch her tirade with confused indifference, comprehending little beyond the petite slut’s desire to mount your member.  Tracing your hands over the pulsating veins on your " + cockDescript(x) + ", your body continues on autopilot, masturbating hard and fast for the emerald beauty as she climbs atop you.  Her juicy gash spreads over the bulge of your urethra as the goblin sinks down atop you, her legs splaying to the sides obscenely.  She commands, \"<i>Hands off bub.  You lost to a goblin, and that means you get to be a dad, whether you want to or not.</i>\"");
 				outputText("\n\nThe puffy emerald curtains drape your dick in elastic goblin pussy and brush your feverishly pumping fingers away.  Your captor lets a lewd moan slip through her lips as she begins grinding along your mammoth pole, dragging dark-hued genetalia back and forth on your massive dong.  A perky, hard little clit pops out of the top of the goblin’s glittery pussy-folds, visibly twitching in a display of supreme enjoyment.  Driven by your own insatiable desire, you shift under her, trying to slide your " + cockDescript(x) + " even faster through her pussy.");
 				if(player.biggestCockLength() > player.tallness/2) outputText("  Your incredibly long phallus blocks your view of the sultry goblin, and you never see the blow coming.");
@@ -185,7 +185,7 @@ public class GoblinShamanScene extends BaseContent
 //[WIN RAEPZ]
 		public function goblinShamanRapeIntro():void
 		{
-			spriteSelect(124);
+			spriteSelect(SpriteDb.s_goblinShaman);
 			clearOutput();
 			outputText("The shaman falls to her feet, smashing her titties against the ground. She looks up at you and sniffles.");
 			//If cant rape or breastfeed
@@ -247,9 +247,9 @@ public class GoblinShamanScene extends BaseContent
 				if (player.hasVagina()) addButton(7, "Pussies", cuntFuck);
 				if (player.canOvipositSpider()) addButton(8, "Lay Eggs", eggs);
 				addButton(10, "Kill", killGoblin);
-				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 				addButton(14, "Leave", cleanupAfterCombat);
-			}
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(goblinShamanRapeIntro);
+							}
 			else if (feeder!=null || eggs!=null) {
 				outputText("\n\n<b>You aren't horny enough to rape her, but ");
 				if (feeder!=null) outputText("your nipples ache with the desire to feed her your milk.  Do you feed her milk or leave?</b>");
@@ -278,7 +278,7 @@ public class GoblinShamanScene extends BaseContent
 		}
 		private function gobboButtSecks():void
 		{
-			spriteSelect(124);
+			spriteSelect(SpriteDb.s_goblinShaman);
 			var x:Number = player.cockThatFits(monster.analCapacity());
 			if (x < 0) x = 0;
 			clearOutput();
@@ -305,7 +305,7 @@ public class GoblinShamanScene extends BaseContent
 //[FEMSAUCE]
 		private function gobboGetsRapedFem():void
 		{
-			spriteSelect(124);
+			spriteSelect(SpriteDb.s_goblinShaman);
 			clearOutput();
 			if (player.isTaur()) {
 				outputText(images.showImage("goblin-win-female-taur-rapedfem"));
@@ -416,7 +416,7 @@ public class GoblinShamanScene extends BaseContent
 		{
 			var x:Number = player.biggestCockIndex();
 			clearOutput();
-			spriteSelect(124);
+			spriteSelect(SpriteDb.s_goblinShaman);
 			outputText(images.showImage("goblin-win-male-corruptedfuck"));
 			outputText("You begin to remove your [armor], looking down on your helpless would-be-attacker and soon-to-be victim while licking your lips hungrily. Your " + multiCockDescriptLight());
 			if (player.cockTotal() == 1) outputText(" is");
@@ -496,7 +496,7 @@ public class GoblinShamanScene extends BaseContent
 			clearOutput();
 			outputText(images.showImage("goblin-win-male-corruptedbj"));
 			var x:Number = player.biggestCockIndex();
-			spriteSelect(124);
+			spriteSelect(SpriteDb.s_goblinShaman);
 			outputText("You whip out your stiffening maleness, revealing its ");
 			if (player.cockArea(x) < 80) outputText("nearly ");
 			outputText(" absurd size to your victim.  The goblin-girl's eyes grow to the size of dinner plates in shock as she takes in the view.   Knowing you'll try regardless of the size-mismatch, she spreads her legs and settles herself more comfortably on the ground.\n\n");
@@ -530,19 +530,19 @@ public class GoblinShamanScene extends BaseContent
 //[DUDEGASM]
 		private function gobboGetsRapedMaleFits():void
 		{
-			spriteSelect(124);
+			spriteSelect(SpriteDb.s_goblinShaman);
 			var x:Number = player.cockThatFits(monster.vaginalCapacity());
 			if (x < 0) x = player.biggestCockIndex();
 			clearOutput();
 			outputText(images.showImage("goblin-win-male-getridden"));
 			//(FITS( barley) – Get ridden)
 			if (player.cockArea(x) > monster.vaginalCapacity() * .8) {
-				outputText("You pick up the defeated goblin, looking her over. She crosses her arms across her chest pitifully and asks, \"<i>What now?</i>\" with her eyes darting down when she thinks you won't notice. A grimace temporarily crossing her face at the size of your " + cockDescript(x) + ". You get the idea of giving her more cock than she can handle, and lower her down towards your " + cockDescript(x) + ". The tip slips between her moist and folds, stretching her and taking some of her weight off your arms. She winces slightly, wrapping her legs as far around your " + hipDescript() + " as possible.\n\n");
-				outputText("You start walking, letting your movements work with gravity, allowing you to penetrate her with little difficulty. Those puffy wet walls clench you tightly as she slides down, ");
+				outputText("You pick up the defeated goblin, looking her over. She crosses her arms across her chest pitifully before asking, \"<i>What now?</i>\" with her eyes darting down when she thinks you won't notice. A grimace temporarily crossing her face at the size of your " + cockDescript(x) + ". You get the idea of giving her more cock than she can handle as you lower her towards your " + cockDescript(x) + ". The tip slips between her moist and folds, stretching her and taking some of her weight off your arms. She winces slightly, wrapping her legs as far around your " + hipDescript() + " as possible.\n\n");
+				outputText("You start walking, letting your movements work with gravity, allowing you to penetrate her with little difficulty. Her puffy, wet walls clench you tightly as she slides down, ");
 				if (player.cocks[0].cockType == CockTypesEnum.DEMON) outputText("rubbing painfully against your demonic nubs");
 				else if (player.hasKnot(0)) outputText("stretching painfully around your knot");
 				else if (player.cocks[0].cockType == CockTypesEnum.HORSE || player.cocks[0].cockType.Index > 3) outputText("feeling painfully tight around you");
-				outputText(". With each and every step she slides down further, stretching her to capacity, until she sits almost completely impaled on you, grabbing your ");
+				outputText(". With every step, she slides down further, stretching her to capacity, until she sits almost completely impaled on you, grabbing your ");
 				if (player.biggestTitSize() >= 1) outputText(player.allBreastsDescript());
 				else outputText("torso");
 				outputText(" to help support herself.  A steady pulse of motion massages you in time with the green girl's breathing.  You realize just how much of her body must be devoted to accommodating monstrous members, no wonder goblins are so fragile in a fight!\n\n");
@@ -569,7 +569,7 @@ public class GoblinShamanScene extends BaseContent
 			}
 			//(FITS – Get ridden)
 			else {
-				outputText("You pick up the defeated goblin, looking her over.  She crosses her arms across her chest pitifully and asks, \"<i>What now?</i>\" with her eyes darting down when she thinks you won't notice.  You muse to yourself 'great minds think alike' and lower her down towards your " + cockDescript(x) + ".  The tip slips between her moist and parted folds, brushing against her entrance and taking some of her weight for you.  She goes cross-eyed and smiles happily, wrapping her legs as far around your " + hipDescript() + " as possible.\n\n");
+				outputText("You pick up the defeated goblin, looking her over.  She crosses her arms across her chest pitifully before asking, \"<i>What now?</i>\" with her eyes darting down when she thinks you won't notice.  You muse to yourself 'great minds think alike' and lower her towards your " + cockDescript(x) + ".  The tip slips between her moist and parted folds, brushing against her entrance and taking some of her weight for you.  She goes cross-eyed and smiles happily, wrapping her legs as far around your " + hipDescript() + " as possible.\n\n");
 				outputText("You start walking, letting the movements work with gravity to allow you to effortlessly penetrate her.  Those puffy wet walls clench you tightly as she slides down ");
 				if (player.cocks[0].cockType == CockTypesEnum.DEMON) outputText("rubbing perfectly against your demonic nubs");
 				else if (player.hasKnot(0)) outputText("stretching tightly around your knot");
@@ -611,7 +611,7 @@ public class GoblinShamanScene extends BaseContent
 //Spider goblin condom
 		private function goblinCondomed(mode:Number = 0):void
 		{
-			spriteSelect(124);
+			spriteSelect(SpriteDb.s_goblinShaman);
 			var x:Number = player.cockThatFits(monster.vaginalCapacity());
 			clearOutput();
 			outputText(images.showImage("goblin-win-male-goblincondomed"));

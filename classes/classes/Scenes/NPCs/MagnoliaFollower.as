@@ -6,7 +6,7 @@ package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.display.SpriteDb;
+    import classes.display.SpriteDb;
 	
 	public class MagnoliaFollower extends NPCAwareContent
 	{
@@ -47,7 +47,7 @@ public function treeMenu():void {
 		if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 7 && player.hasKeyItem("Decorations") >= 0) {
 			outputText("You bring the package of holiday decorations over to your newly grown tree. You feel it could be 'dressed' for the season too. You open the package then begin the long process of hanging ornaments on the branches and lining it with lights and garland.");
 			if (camp.hasCompanions()) outputText(" Some of the camp residents come over to see what you're doing.");
-			if (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] < 3) outputText("\"<i>Oh? Are you decorating the tree? I would like to assist too if you don't mind.</i>\" Says Jojo.\n\n");
+			if (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3) outputText("\"<i>Oh? Are you decorating the tree? I would like to assist too if you don't mind.</i>\" Says Jojo.\n\n");
 			if (amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) outputText("\"<i>[name] there's no way you're decorating that alone. Let me lend a hand.</i>\" Comments Amily.\n\n");
 			if (flags[kFLAGS.ETNA_FOLLOWER] > 0 && !player.hasStatusEffect(StatusEffects.EtnaOff)) outputText("\"<i>Oooo, that looks like fun! Maybe I can fly up and decorate the harder to reach areas.</i>\" Etna suggests.\n\n");
 			if (DivaScene.instance.isCompanion()) outputText("\"<i>Tis the season already? I suppose I could lend my services.</i>\" Diva speaks with overdramatic voice.\n\n");

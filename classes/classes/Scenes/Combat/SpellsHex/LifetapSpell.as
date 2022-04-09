@@ -8,11 +8,11 @@ import classes.StatusEffects;
 public class LifetapSpell extends AbstractHexSpell {
 	public function LifetapSpell() {
 		super(
-				"Lifetap",
-				"Sacrifice a quarter of your hp to recover a quarter of your mana.",
-				TARGET_SELF,
-				TIMING_INSTANT,
-				[TAG_RECOVERY]
+			"Lifetap",
+			"Sacrifice a quarter of your hp to recover a quarter of your mana.",
+			TARGET_SELF,
+			TIMING_INSTANT,
+			[TAG_RECOVERY]
 		);
 		isBloodMagicApplicable = false;
 		isLastResortApplicable = false;

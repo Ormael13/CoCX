@@ -6,12 +6,11 @@ import classes.BodyParts.Tail;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 
 public class BehemothScene extends BaseContent
 	{
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		
+				
 		public function BehemothScene() 
 		{
 		}
@@ -77,7 +76,7 @@ public class BehemothScene extends BaseContent
 			}
 			if (flags[kFLAGS.DEFEATED_ZETAZ] > 0) {
 				outputText("\n\nYou tell the behemoth about how you've managed to find and defeat Zetaz, the original imp who tried to rape you in the first place after you've entered the portal. ");
-				outputText("\n\nThe behemoth remarks and says, \"<i>That's great! I had a similar story. I had a rival who bullied and mocked me from my childhood. Years later, I've finally got my revenge on him and literally ripped him apart with my bare hands.</i>\" Your jaws drop when he mentions being able to rip someone apart with his strength. He says, \"<i>Yes, seriously. I actully did it. After that, I've had his meat." + (silly() ? " Besides, I wouldn't want to traumatize the player reading whatever we're saying or make the player squick.</i>\"": "") + " "); //Fourth wall breaker
+				outputText("\n\nThe behemoth remarks and says, \"<i>That's great! I had a similar story. I had a rival who bullied and mocked me from my childhood. Years later, I've finally got my revenge on him and literally ripped him apart with my bare hands.</i>\" Your jaws drop when he mentions being able to rip someone apart with his strength. He says, \"<i>Yes, seriously. I actully did it. After that, I've had his meat." + (silly() ? " Besides, I wouldn't want to traumatize the player reading whatever we're saying or make the player squick.": "") + "</i>\" "); //Fourth wall breaker
 				if (silly()) outputText("Did he just break the fourth wall?");
 			}
 			if (flags[kFLAGS.LETHICE_DEFEATED] > 0) {
@@ -196,9 +195,9 @@ public class BehemothScene extends BaseContent
 			}
 			menu();
 			if (player.lust >= 33) addButton(0, "Sex", behemothSexMenu, true, null, null, "Initiate sexy time with the Behemoth.");
-			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 			addButton(14, "Leave", cleanupAfterCombat);
-		}
+			SceneLib.uniqueSexScene.pcUSSPreChecksV2(winAgainstBehemoth);
+					}
 		
 		public function loseToBehemoth():void {
 			clearOutput();
@@ -271,7 +270,7 @@ public class BehemothScene extends BaseContent
 				if (timesSexed() >= 3) addButton(5, "Watersports", watersportsWithBehemoth).hint("Do some urine activity with him.");
 				else addButtonDisabled(5, "Watersports", "Have sex with the behemoth enough times to unlock this!");
 			}
-			if (player.lowerBody == LowerBody.PLANT_FLOWER) addButton(6, "Get Pollinated", uniquuuesexscene.alrauneGetPollinatedScene);
+			if (player.lowerBody == LowerBody.PLANT_FLOWER) addButton(6, "Get Pollinated", SceneLib.uniqueSexScene.alrauneGetPollinatedScene);
 			if (!CoC.instance.inCombat) addButton(14, "Nevermind", camp.returnToCampUseOneHour);
 			else addButton(14, "Nevermind", cleanupAfterCombat);
 		}
@@ -364,7 +363,7 @@ public class BehemothScene extends BaseContent
 			//Sorry, no centaur variant.
 			outputText("You definitely want that " + (silly() ? "dig bick": "big dick") + " in your [vagina]. ");
 			outputText("" + player.clothedOrNaked("You strip out of your [armor] until you're naked. You make sure to toss your [armor] into a neat pile. ") + "You present your naked body and more importantly, your [vagina] to the behemoth.  You notice that his erection is tenting under his loincloth. He shifts it aside to expose his large pecker and says excitedly, \"<i>Now that's some wonderful pussy you've got there! I'll go gentle on you and make sure you enjoy the experience.</i>\"");
-			outputText("\n\nThe behemoth guides you to his bed and instructs you to lie down on the bed, which you follows obediently. You spread your [legs] to expose your womanhood" + (player.hasCock() ? " and manhood": "") + ". The Behemoth gives you a smile and slowly slides his long, prehensile tongue into your muff. \"<i>Gotta loosen you up first. Learned that the hard way with those goblins. Poor gals never stood a chance.</i>\" Ecstasy floods your system as he licks your [pussy]. Behemoth’s rough tongue slowly inches its way in, rubbing in all your pleasure spots. You end up cumming when the tongue forces it way into your womb. Behemoth slowly stands up and removes his femcum covered tongue out of your [pussy]. He licks his lips and says, “<i>Delicious... that should do it. Now for the main course.</i>” Behemoth holds his massive cock in his hand and positions it right outside your vagina. You can’t take it anymore and yell \"<i>Stop teasing me and fuck me with your ginormous cock already!</i>\" That was all the motivation Behemoth needed. In one quick stroke he penetrates your cooter and pushes it in all the way to your womb.");
+			outputText("\n\nThe behemoth guides you to his bed and instructs you to lie down on the bed, which you follows obediently. You spread your [legs] to expose your womanhood" + (player.hasCock() ? " and manhood": "") + ". The Behemoth gives you a smile and slowly slides his long, prehensile tongue into your muff. \"<i>Gotta loosen you up first. Learned that the hard way with those goblins. Poor gals never stood a chance.</i>\" Ecstasy floods your system as he licks your [pussy]. Behemoth’s rough tongue slowly inches its way in, rubbing in all your pleasure spots. You end up cumming when the tongue forces it way into your womb. Behemoth slowly stands up and removes his femcum covered tongue out of your [pussy]. He licks his lips and says, \"<i>Delicious... that should do it. Now for the main course.</i>\" Behemoth holds his massive cock in his hand and positions it right outside your vagina. You can’t take it anymore and yell \"<i>Stop teasing me and fuck me with your ginormous cock already!</i>\" That was all the motivation Behemoth needed. In one quick stroke he penetrates your cooter and pushes it in all the way to your womb.");
 			player.cuntChange(45, true, true);
 			if (isVirgin) outputText("\n\n\"<i>I'm so glad you've saved your virginity for me. By the time people reached the endgame levels, none of them are virgin,</i>\" the behemoth says with a smile. ");
 			outputText("\n\nThe Behemoth starts to piston inside and out of your [pussy] and picks up the pace gradually. ");

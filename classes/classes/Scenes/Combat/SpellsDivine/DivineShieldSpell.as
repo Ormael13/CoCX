@@ -6,11 +6,11 @@ import classes.StatusEffects;
 public class DivineShieldSpell extends AbstractDivineSpell {
 	public function DivineShieldSpell() {
 		super(
-				"Divine Shield",
-				"Increase magic resistance by 40%.",
-				TARGET_SELF,
-				TIMING_LASTING,
-				[TAG_BUFF]
+			"Divine Shield",
+			"Increase magic resistance by 40%.",
+			TARGET_SELF,
+			TIMING_LASTING,
+			[TAG_BUFF]
 		);
 		baseManaCost = 600;
 	}

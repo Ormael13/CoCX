@@ -466,7 +466,7 @@ public function aethertwinsFollowersEvolutionsMain():void {
 	else if (AetherTwinsTalkMenu > 0) addButtonDisabled(0, "HtGauntl", "They already unlocked Human-tier Gauntlets form.");
 	else addButtonDisabled(0, "HtGauntl", "They not yet ate enough nutriments to evolve into this shape.");
 	if (AetherTwinsFoodMenuSpikeLShield && AetherTwinsFoodMenuHGaunt && AetherTwinsFoodMenuBFGauntlets && AetherTwinsFoodMenuLustyClaws && AetherTwinsFoodMenuTin == 2 && AetherTwinsFoodMenuCopper == 2 && AetherTwinsFoodMenuIron == 2 && AetherTwinsFoodMenuSilver == 2 && AetherTwinsFoodMenuGold == 2 && AetherTwinsFoodMenu1 == false) addButton(1, "StGauntl", aethertwinsFollowersEvolutionsToSkyTierGaunlets);
-	else if (AetherTwinsFoodMenu1 = true) addButtonDisabled(1, "StGauntl", "They already unlocked Sky-tier Gauntlets form.");
+	else if (AetherTwinsFoodMenu1) addButtonDisabled(1, "StGauntl", "They already unlocked Sky-tier Gauntlets form.");
 	else addButtonDisabled(1, "StGauntl", "They not yet ate enough nutriments to evolve into this shape.");
 	addButton(14, "Back", aethertwinsFollowers);
 }

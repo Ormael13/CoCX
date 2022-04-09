@@ -7,9 +7,11 @@ import classes.*;
 import classes.BodyParts.Antennae;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
+import classes.Items.Armors.SuccubusArmor;
 import classes.Items.Weapon;
 import classes.Scenes.Areas.Ocean.SeaAnemone;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 public class AnemoneScene extends BaseContent implements TimeAwareInterface
 	{
@@ -55,8 +57,6 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 		//  KID_SITTER:int = 757; //0 = no sitter, 1 = possible, 2 = doing dat shit
 		//  HAD_KID_A_DREAM:int = 758;
 
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-
 		public function AnemoneScene()
 		{
 			EventParser.timeAwareClassAdd(this);
@@ -67,8 +67,8 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 		{
 			var needNext:Boolean = false;
 			if (flags[kFLAGS.ANEMONE_KID] > 0) {
-				//if (flags[kFLAGS.KID_ITEM_FIND_HOURS] < 20) flags[kFLAGS.KID_ITEM_FIND_HOURS]++;
-				if (flags[kFLAGS.KID_SITTER] == 0 && flags[kFLAGS.MARBLE_KIDS] >= 5 && model.time.hours > 10 && model.time.hours < 18 && rand(4) == 0) {
+				//weapon check to avoid errors in scene
+				if (flags[kFLAGS.KID_SITTER] == 0 && flags[kFLAGS.MARBLE_KIDS] >= 5 && flags[kFLAGS.ANEMONE_WEAPON_ID] != 0 && model.time.hours > 10 && model.time.hours < 18 && rand(4) == 0) {
 					kidABabysitsCows();
 					needNext = true;
 				}
@@ -113,7 +113,7 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 
 		public function mortalAnemoneeeeee():void
 		{
-			spriteSelect(4);
+			spriteSelect(SpriteDb.s_anemone);
 			clearOutput();
 			if (flags[kFLAGS.TIMES_MET_ANEMONE] == 0 || player.hasItem(consumables.MINOCUM)) {
 				flags[kFLAGS.TIMES_MET_ANEMONE]++;
@@ -183,10 +183,13 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 				if (player.hasVagina()) vaginaRape = rapeAnemoneWithPussy;
 				var bikiniTits:Function =null;
 				var temp3:Function =null;
-				if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) bikiniTits = (player.armor as LustyMaidensArmor).lustyMaidenPaizuri;
-				if (player.pcCanUseUniqueSexScene()) temp3 = uniquuuesexscene.pcUniqueSexScenesChoiceMenu;
+				if (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armor is LustyMaidensArmor || player.armor is SuccubusArmor)) {
+					if (player.armor is SuccubusArmor) bikiniTits = (player.armor as SuccubusArmor).succubusPaizuri;
+					else bikiniTits = (player.armor as LustyMaidensArmor).lustyMaidenPaizuri;
+				}
 				choices("Your Ass", victoryButtholeRape, "Your Cock", cockRape, "Your Vagina", vaginaRape, "Her Butt", anal, "Lay Egg", eggs,
-					"", null, "", null, "B.Titfuck", bikiniTits, "U. Sex Scenes", temp3, "Leave", cleanupAfterCombat);
+					"", null, "", null, "B.Titfuck", bikiniTits, "", null, "Leave", cleanupAfterCombat);
+                SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatAnemone);
 			}
 			else cleanupAfterCombat();
 		}
@@ -194,7 +197,7 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 //anal: -requires butthole
 		private function victoryButtholeRape():void
 		{
-			spriteSelect(4);
+			spriteSelect(SpriteDb.s_anemone);
 			clearOutput();
 			outputText(images.showImage("anemone-getanal"));
 			outputText("You look over the anemone in front of you.  Your attention focuses on her blue shaft; those smaller tentacles should have plenty of pleasing venom in them as well.  Stripping off your [armor], you approach her and push her backwards.  Her gills slide off her breasts and float at her sides. revealing a pair of cute nipples.  You take the opportunity to stroke the shaft of her penis and rub her vagina a bit, soaking up some venom and making your hands tingle.\n\n");
@@ -240,7 +243,7 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 
 		private function rapeAnemoneWithDick():void
 		{
-			spriteSelect(4);
+			spriteSelect(SpriteDb.s_anemone);
 			clearOutput();
 			outputText(images.showImage("anemone-male-fuck"));
 			if (player.cockThatFits(36) >= 0) {
@@ -349,7 +352,7 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 //using pussy:
 		private function rapeAnemoneWithPussy():void
 		{
-			spriteSelect(4);
+			spriteSelect(SpriteDb.s_anemone);
 			clearOutput();
 			outputText(images.showImage("anemone-female-fuck"));
 			outputText("As you review your handiwork, the stirrings in your feminine side focus your attention on the anemone's penis.  Those smaller tentacles on it should have plenty of pleasing venom in them as well.  You make up your mind to put them to use for you.\n\n");
@@ -422,7 +425,7 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 //loss rapes:
 		public function loseToAnemone():void
 		{
-			spriteSelect(4);
+			spriteSelect(SpriteDb.s_anemone);
 			var x:Number = player.cockThatFits(36);
 			clearOutput();
 			//loss via hp (only possible if PC engages her while already being at zero or kills himself with Akbal powers):
@@ -641,7 +644,7 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 //(if PC has 1 or more Mino Cum, replaces last paragraph of initial encounter)
 		private function minoCumForAnemonieeeeez():void
 		{
-			spriteSelect(4);
+			spriteSelect(SpriteDb.s_anemone);
 			outputText("The initial surprise subsides to wooly-headedness and a feeling of mild arousal as the stingers in her tentacles find exposed flesh.  In panic of drowning you pull free of the ropy mass and backpaddle away from the girl until your [feet] reassuringly touch the shallows of the ");
 			if (flags[kFLAGS.ANEMONE_OR_SEA_ANEMONE] == 1) outputText("lake");
 			if (flags[kFLAGS.ANEMONE_OR_SEA_ANEMONE] == 2) outputText("ocean");
@@ -672,7 +675,7 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 //'Don't Give':
 		private function dontGiveMino():void
 		{
-			spriteSelect(4);
+			spriteSelect(SpriteDb.s_anemone);
 			clearOutput();
 			outputText("You look sternly at the blue girl and hold out your hand.  As she realizes you don't intend to let her have the bottle, her face changes to a half-pout, half-frown.  When you don't react, she throws the bottle at your feet and shouts, \"<i>Mean!</i>\"  You bend down to pick it, and the other items, up, and when you straighten back up, she looks quite angry and her tentacles are waving all over the place.  Uh-oh.  You raise your weapon as the anemone giggles sadistically and attacks!\n\n");
 			//(proceed to combat)
@@ -686,7 +689,7 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 //'Give':
 		private function giveMino():void
 		{
-			spriteSelect(4);
+			spriteSelect(SpriteDb.s_anemone);
 			clearOutput();
 			player.consumeItem(consumables.MINOCUM);
 			outputText("You nod at the girl and she smiles and responds with a very quiet \"<i>Yay.</i>\"  As you pick up the rest of your stuff, she takes the top off of the bottle and chugs it like a champ, without even stopping to breathe.  Her eyes widen a bit as the drug hits her system, then narrow into a heavy-lidded stare.  Dropping the bottle with a splash, she falls to her knees with another.  She looks at you and licks her lips as she begins playing with her nipples. Obviously, she's feelin' good.  ");
@@ -732,7 +735,7 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 			outputText("ou circle around behind her.  The anemone looks over her shoulder at you as you size her up.  There... that's what you wanted to see.  Tilting the girl forward with a hand on her shoulder, you lower yourself to get a better look at her backside.");
 
 			outputText("\n\nThe rounded blue cheeks stick out as you slide your hand up her back and press gently to lean her over further.  You rub your other hand over them, giving a squeeze and, eventually, a smack.  She lets out a cute yelp at the blow and shakes her backside at you, as if to tempt you further.  It works; ");
-			if (player.hasCock() && player.cockThatFits(48) >= 0) {
+			if (player.hasCock() && player.cockThatFits(48) >= 0 && rand(2)) {
 				if (!player.isTaur()) outputText("you fish your [cockFit 48] out of your garments and rub it");
 				else outputText("you rub your [cockFit 48]");
 				outputText(" between the smooth blue curves");
@@ -1105,7 +1108,7 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 		public function anemoneKidBirthPtII():void
 		{
 			clearOutput();
-			spriteSelect(71);
+			spriteSelect(SpriteDb.s_kida);
 			outputText("You awake and look skyward to the sun for a hint at the time.  What greets you is more of an eclipse; a shape impedes your view.  As your eyes adjust to the light, it resolves into an upside-down blue-eyed, blue-skinned face wreathed with snubby, shoulder-length tentacles of purple and green hue.  The silence continues as you stare into it, until you move to push yourself off the hard ground.  At the first sign of activity, the head disappears into the water barrel with a sloshing sound.  You push yourself to your [feet] and look back toward it; the eyes, now right side-up, peek over the rim bashfully atop a set of blue fingers.");
 			outputText("\n\n\"<i>Um... hi,</i>\" you venture.");
 			outputText("\n\nThe eyes raise up and a smile appears beneath.  \"<i>Um... hi!</i>\"");
@@ -1126,7 +1129,7 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 		private function getRidOfAnemone():void
 		{
 			clearOutput();
-			spriteSelect(71);
+			spriteSelect(SpriteDb.s_kida);
 			outputText("Enough of this.  Summoning your backbone, you grasp the anemone's upper arm and pull her to her feet; she's light as a decorative feather and twice as blue once she grasps your intention and her camouflage reflex takes over.  Putting one arm under her, you carry her legs out from underneath and lift her bodily out of the barrel, then set her down on the hard ground.  She turns a teary pout on you, but you look away.  Picking up the nearly-empty container and setting it atop your shoulder, you begin the walk to the stream.  The girl stumbles along behind you, unsteady on her feet.");
 			outputText("\n\nUpon reaching your destination, you dump the contents of the anemone's erstwhile apartment into the babbling brook, then point down-current toward the lake and set your jaw.  Glancing at your stony demeanor, the blue girl steps into the water, moistens her gills, and then begins the long trek to her ancestral home.");
 			//(set Kidswag to -1)
@@ -1138,7 +1141,7 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 		private function keepAnemoneKid():void
 		{
 			clearOutput();
-			spriteSelect(71);
+			spriteSelect(SpriteDb.s_kida);
 			outputText("You frown as you stare into the opaque eyes.  You can't think of any way to get her out of the barrel, short of manhandling her into the wilderness where she'll flourish or expire depending on fate, and you haven't the heart for such endeavors.  Ah... she looks so happy sitting there with her head resting on her hands, too.  Well, worse things could happen - but probably not stranger.");
 			outputText("\n\n\"<i>So... what do I call you, then?</i>\" you ask; she looks at you quizzically.  You continue to muse, wondering aloud what you would even name a kid anemone.");
 			outputText("\n\n\"<i>Kid... ?</i>\" starts the girl, attempting to duplicate your speech.  You try to clarify, but, seeming not to hear, she continues to sound out the words and get the shape of them.");
@@ -1176,7 +1179,7 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 			var weaponT:String = "Give Weapon";
 			var weaponB:Function = giveAnemoneWeapon;
 			clearOutput();
-			spriteSelect(71);
+			spriteSelect(SpriteDb.s_kida);
 			outputText("You walk over to the barrel.  ");
 			//[(display if hourssinceKiditem >= 16)
 			if (flags[kFLAGS.KID_ITEM_FIND_HOURS] != model.time.days) {
@@ -1232,7 +1235,7 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 		private function getAnemoneItem():void
 		{
 			clearOutput();
-			spriteSelect(71);
+			spriteSelect(SpriteDb.s_kida);
 			var itype:ItemType;
 			outputText("You reach down and pick up her present.  Today, she's left you ");
 			if (kidAXP() == 0) itype = consumables.DRYTENT;
@@ -1269,7 +1272,7 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 //[Give Weapon]
 		private function giveAnemoneWeapon():void {
 			clearOutput();
-			spriteSelect(71);
+			spriteSelect(SpriteDb.s_kida);
 			outputText("What do you want to give her?");
 			function giveableToAnemone(item:ItemType):Boolean {
 				return item == consumables.W__BOOK || item == consumables.B__BOOK || item == consumables.W_STICK || item is Weapon;
@@ -1290,7 +1293,7 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 		private function placeInAnemone(slot:int):void {
 			clearOutput();
 			outputText("You leave the item by her barrel.");
-			spriteSelect(71);
+			spriteSelect(SpriteDb.s_kida);
 			//(set Kidweapon to item name, remove from inventory)
 			flags[kFLAGS.ANEMONE_WEAPON_ID] = player.itemSlots[slot].itype.id;
 			player.itemSlots[slot].removeOneItem();
@@ -1301,7 +1304,7 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 		private function takeOutOfAnemone():void
 		{
 			clearOutput();
-			spriteSelect(71);
+			spriteSelect(SpriteDb.s_kida);
 			outputText("You take the item back.  ");
 			var itype:ItemType = ItemType.lookupItem(flags[kFLAGS.ANEMONE_WEAPON_ID]);
 			if (flags[kFLAGS.ANEMONE_WATCH] > 0) {
@@ -1317,7 +1320,7 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 		private function anemoneWatchToggle():void
 		{
 			clearOutput();
-			spriteSelect(71);
+			spriteSelect(SpriteDb.s_kida);
 			//toggles Kid A's night watch; unusuable unless she's armed
 			//if Kid A is unarmed when PC tries to turn on, output:
 			if (flags[kFLAGS.ANEMONE_WATCH] > 0) {
@@ -1748,7 +1751,7 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 		{
 			clearOutput();
 			outputText("Really evict the anemone?");
-			spriteSelect(71);
+			spriteSelect(SpriteDb.s_kida);
 			//[Yes][No]
 			doYesNo(reallyEvictDaAnemone, approachAnemoneBarrel);
 		}
@@ -1757,7 +1760,7 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 		private function reallyEvictDaAnemone():void
 		{
 			clearOutput();
-			spriteSelect(71);
+			spriteSelect(SpriteDb.s_kida);
 			outputText("Time to reclaim your barrel.  Gesturing to get her attention, you grab the anemone by her upper arm and lift her to her feet.  She looks at you in confusion, but you set your face and drag her along with you as you make your way to the lake.");
 			outputText("\n\nReaching the shore, you push Kid A into the water and point out toward the center of the lake as she falls to her knees in the surf.  She looks absolutely miserable... until a green and purple swirl bobs to the surface next to her.  The new arrival greets your former tenant with cheer, squeezing her waist from behind and eliciting a gasp of surprise.");
 			outputText("\n\nKid A turns her head to face the stranger.  \"<i>Um... hi?</i>\" she offers, hesitantly.");
@@ -1907,67 +1910,5 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 
 			outputText("\n\n\"<i>Don't think this is over, you blue freak!</i>\" she shouts, turning away.  \"<i>We'll be back!  Let's go, you greedy bitches.</i>\"  With much grumbling, the glob forms up around her and begins to move off.  Kid A watches them go for a while, then turns back to you, her face the picture of confusion.  You smile gratefully and head back to bed.\n");
 		}
-
-
-		/*
-		 TF item - shriveled tentacle
-		 tooltip: A dried tentacle from one of the lake anemones.  It's probably edible, but the stingers are still a little active.
-
-		 use effects: toughness up 1 and speed/str down 1 when consumed; corruption increases by 1 up to low threshold (~20); always increases lust by a function of sensitivity; may cause physical change
-
-		 physical changes:
-		 - may randomly remove bee abdomen, if present; always checks and does so when any changes to hair might happen
-		 "As the gentle tingling of the tentacle's remaining venom spreads through your body, it begins to collect and intensify above the crack of your butt.  Looking back, you notice your abdomen shivering and contracting; with a snap, the chitinous appendage parts smoothly from your backside and falls to the ground.  <b>You no longer have a bee abdomen!</b>
-
-		 -may randomly remove bee wings:
-		 "Your wings twitch and flap involuntarily.  You crane your neck to look at them as best you are able; from what you can see, they seem to be shriveling and curling up.  They're starting to look a lot like they did when they first popped out, wet and new.  <b>As you watch, they shrivel all the way, then recede back into your body.</b>"
-
-		 -[aphotic] skin tone (blue-black)
-		 "You absently bite down on the last of the tentacle, then pull your hand away, wincing in pain.  How did you bite your finger so hard?  Looking down, the answer becomes obvious; <b>your hand, along with the rest of your skin, is now the same aphotic color as the dormant tentacle was!</b>"
-
-		 -feathery gills sprout from chest and drape sensually over nipples (cumulative swimming power boost with fin, if swimming is implemented)
-		 "You feel a pressure in your lower esophageal region and pull your garments down to check the area.  <b>Before your eyes a pair of feathery gills start to push out of the center of your chest, just below your neckline, parting sideways and draping over your " + nippleDescript(0) + "s.</b>  They feel a bit uncomfortable in the open air at first, but soon a thin film of mucus covers them and you hardly notice anything at all.  You redress carefully."
-		 Appearance Screen: "A pair of feathery gills is growing out just below your neck, spreading out horizontally and draping down your chest.  They allow you to stay in the water for quite a long time."
-
-		 -hair morphs to anemone tentacles, retains color, hair shrinks back to med-short('shaggy') and stops growing, lengthening treatments don't work and goblins won't cut it, but more anemone items can lengthen it one level at a time
-		 "Your balance slides way off and you plop down on the ground as mass concentrates on your head.  Reaching up, you give a little shriek as you feel a disturbingly thick, squirming thing where your hair should be.  Pulling it down in front of your eyes, you notice it's still attached to your head; what's more it's the same color as your hair used to be.  <b>You now have squirming tentacles in place of hair!</b>  As you gaze at it a gentle heat starts to suffuse your hand.  The tentacles must be developing their characteristic stingers!  You quickly let go; you'll have to take care to keep them from rubbing on your skin at all hours.  On the other hand, they're quite short and you find you can now flex and extend them as you would any other muscle, so that shouldn't be too hard.  You settle on a daring, windswept look for now.
-
-		 (Your hair has stopped growing.)"
-		 (reset hair to 'shaggy', add tentacle hair status, stop hair growth)
-
-		 -asking for a lengthening treatment with tentacle hair:
-		 Lynnette looks dubiously at you when you ask for a lengthening treatment.  <i>"No offense hon, but that stuff is basically like an arm or an organ, not hair.  I'm not a goblin chirurgeon, and I wouldn't try to lengthen it even if one of my disobedient daughters were here to donate some parts.  Sorry to make you shoot and scoot, but I can't help you.  Try checking with whoever you caught it from."</i>
-
-		 -trying to get a goblin to cut tentacle hair:
-		 Lynnette stares at you when you ask for a cut.  <i>"Nothing doing, hon; that stuff looks alive and I don't want blood all over my nice floor.  Thanks for the contributing to the white file, though; maybe we can do something nice for you next time?"</i>
-
-		 -eat more, grow more 'hair':
-		 As you laboriously chew the rubbery dried anemone, your head begins to feel heavier.  Using your newfound control, you snake one of your own tentacles forward; holding it out where you can see it, the first thing you notice is that it appears quite a bit longer.  <b>Your hair is now [old length + 1 level]!</b>
-		 (add one level of hairlength)
-
-		 -sting with hair (combines both bee-sting effects, but weaker than either one separately):
-		 "You rush " + monster.short + ", whipping your hair around like a genie, and manage to land a few swipes with your tentacles.  As the venom infiltrates [monster his] body, [monster he] twitches and begins to move more slowly, hampered half by paralysis and half by arousal."
-		 (decrease speed/str, increase lust)
-
-		 -miss a sting
-		 "You rush " + monster.short + ", whipping your hair around to catch it with your tentacles, but [monster he] easily dodges.  Oy, you hope you didn't just give yourself whiplash."
-
-		 -venom capacity determined by hair length, 2-3 stings per level of length
-
-		 -generic hp boost if no other consumption effect
-
-
-		 bee item corrolary:
-		 -insert anemone hair removal into them under whatever criteria you like, though hair removal should precede abdomen growth; here's some sample text:
-		 "As you down the sticky-sweet honey, your head begins to feel heavier.  Reaching up, you notice your tentacles becoming soft and somewhat fibrous.  Pulling one down reveals that it feels and smells like the honey you just ate; you watch as it dissolves into many thin strands coated in the sugary syrup.  <b>Your hair is back to normal (well, once you wash the honey out)!</b>"
-		 (removes tentacle hair status, restarts hair growth if not prevented by reptile status)
-
-
-		 to do, if interest merits:
-		 -scene where anemones and slimes are established as natural opponents, with slimes feeding off anemones they can catch by surprise and vice versa
-		 -may eventually unlock hairjob scenes with the PC using the venom in sex/masturbation; very long hair allowing hairjob and regular sex at same time
-		 -minor cosmetic changes to vag one day if code allows
-
-		 */
 	}
 }

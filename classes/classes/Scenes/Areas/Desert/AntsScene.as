@@ -11,6 +11,7 @@ import classes.Scenes.Areas.Forest.TentacleBeast;
 import classes.Scenes.Areas.Mountain.Minotaur;
 import classes.Scenes.Areas.Plains.Gnoll;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 public class AntsScene extends BaseContent implements TimeAwareInterface
 	{
@@ -26,7 +27,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 //  ANTS_PC_LOST_TO_GNOLL:int = 475;
 //  MET_ANT_ARENA_GNOLL:int = 476;
 
-//  PHYLLA_CAPACITY:int = 873;
+//  PHYLLA_MAXLEN:int = 873;
 //  ANT_KIDS:int = 874;
 //  ANT_WAIFU:int = 875;
 //  PHYLLA_STAY_HOME:int = 876;
@@ -85,6 +86,14 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 			return flags[kFLAGS.ANT_WAIFU] > 0;
 		}
 
+		public function phyllaSprite(nude:Boolean = false):void {
+			if (flags[kFLAGS.PHYLLA_EGG_LAYING] == 0) {
+				if (nude) spriteSelect(SpriteDb.s_phylla_nude);
+				else spriteSelect(SpriteDb.s_phylla);
+			}
+			else spriteSelect(SpriteDb.s_phylla_preg);
+		}
+
 		public function antColonyEncounter():void
 		{
 			//WAIFU GET!
@@ -100,9 +109,9 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 			else firstAntColonyEncounter();
 		}
 
-		private function phyllaCapacity():Number
+		private function phyllaMaxLen():Number
 		{
-			return flags[kFLAGS.PHYLLA_CAPACITY];
+			return flags[kFLAGS.PHYLLA_MAXLEN];
 		}
 
 
@@ -111,6 +120,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 		private function firstAntColonyEncounter():void
 		{
 			clearOutput();
+            phyllaSprite();
 			outputText("While traversing an unfamiliar part of this desert wasteland, ");
 			if (player.cor > 75 && player.lust > 50) outputText(" looking for something to slake your unquenchable lusts, ");
 			outputText("you come across an abandoned merchant's cart.  The cart looks eerily disheveled, with a majority of its contents strewn about the sand.  Whoever or whatever deserted this thing did so in a hurry, and for seemingly no reason. Curious, you decide to inspect it for anything worthwhile.");
@@ -217,6 +227,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 //►[Play Hero]
 		private function playHero():void
 		{
+			spriteSelect(SpriteDb.s_antguards);
 			clearOutput();
 			//►Introduction to Combat
 			outputText("As the demons bear down on the ant-girl, you burst from your hiding place, raising your [weapon] to the air and uttering an impressive war cry.  Nobody, ant or otherwise, is getting raped if you have any say in the matter!");
@@ -251,6 +262,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 		private function enterTheColony():void
 		{
 			clearOutput();
+			spriteSelect(SpriteDb.s_antguards);
 			outputText("Wandering in the desert with your new, strangely eidetic memory, it's not long until you come across the large anthill.  If it hadn't been for the visions that were projected into your mind, you'd never have guessed anything like it could be hidden in such a harsh environment.  As you approach the hill, you get the familiar feeling you're being watched.");
 			outputText("\n\nNearing the crest, you're taken by surprise as three large ants burst out of the sand via a cleverly-concealed trapdoor.  They're much bigger than the girl you saved but seem just as muscular and, except for their large almond shaped eyes and smaller noses, appear roughly human.  They have narrow jaw lines and much sharper cheek structures, making for very masculine faces.  Where the female's abdomen was skin-toned and seemed to have large angular plates, these ants have completely smooth black abdomens.  Two of them hold makeshift spears with obsidian tips in all four hands, while the other is using a very old and very blunt short sword.  These two quickly surround you, holding you at spear-point. The one with the short sword steps forward, almost pressing his face into yours as he sniffs you.  Over his shoulder, the spear-carrying ant in front of you makes a series of clicking noises to the others.  They appear annoyed, but lower their weapons.  All three walk over to the trapdoor and the two spear-bearing ants lift it.  The one with the short sword beckons you to follow him as he descends.");
 			outputText("\n\nAs you climb down into the crepuscular cave system after your escort, the only light seems to be emitted from some kind of bioluminescent fungus that coats the walls. Your journey into the vast caverns and twisted caves of the colony leaves you very disoriented.  Luckily for you, your guide seems to know exactly where he's going; as you turn a sharp corner, you enter a massive excavated cave.  What you see therein is a complex network of tunnels in almost every direction and ants of all shapes and sizes going about their daily routine.  You would guess this is the central hub of this colony.");
@@ -278,6 +290,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 		private function antColonyChallenge():void
 		{
 			clearOutput();
+			spriteSelect(SpriteDb.s_antguards);
 			//(Random Encounter in the Desert)
 			//Leads to - Introduction First Time
 			//Leads to - Introduction Subsequent Times
@@ -351,6 +364,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 //(Tentacle Beast - Win) Standard Tentacle Beast Win Scene. (Again we're going to need to adapt the ending so the PC does not go back to camp.)
 		public function phyllaTentacleDefeat():void
 		{
+			spriteSelect(SpriteDb.s_antguards);
 			outputText("\n\nAs you leave the arena, you are met by Princess Phylla and a large group of warrior ants; the princess is looking at the ground and twiddling her lower set of thumbs.  As you clear your throat to announce yourself she jumps and makes a strange noise that sounds like a mix between a click and 'EEP!'.  She blushes and looks at the ground again, searching for something to say.");
 			outputText("\n\n\"<i>I'm happy you won,</i>\" she finally manages, more to the rocky earth than to you.  \"<i>Let me help you recover, I mean, if you want...</i>\"");
 			outputText("\n\nYou give her a nod and she sets to work. She nervously dresses your wounds by using some strange paste and strips of cloth.  You try to make small talk but find it awkward under heavy guard.  Clearly you're still not welcome here.  Once Phylla's done, all but one of the guards disappear with her into the tunnels.");
@@ -366,6 +380,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 		public function phyllaTentaclePCLoss():void
 		{
 			clearOutput();
+			spriteSelect(SpriteDb.s_antguards);
 			outputText("After your defeat in the arena, you set off to leave but are stopped.  Princess Phylla is standing with a troupe of armed guards by the exit, holding a vial of clear liquid.  She doesn't look like she wants to give it to you but she extends it to you all the same.");
 			outputText("\n\n\"<i>You lost... so you have to drink this.  I mean... I'm sorry.</i>\"");
 			outputText("\n\nYou look at the vial inquisitively but the warriors don't look like they're going to budge until you consume the liquid.  You uncork the bottle and drink the whole thing, like a shot.  Remarkably it doesn't taste like anything.  The clear liquid is a little more viscous than water, but doesn't have much else in the way of texture.  Though you were expecting something awful to happen to you, you don't even feel any different.  As you hand back the empty bottle, the guards part to let you leave.  Although, oddly, you find yourself not really wanting to, you shake your head and return to camp.");
@@ -381,6 +396,8 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 //►(Minotaur- Win)
 		public function phyllaBeatAMino():void
 		{
+			clearOutput();
+			spriteSelect(SpriteDb.s_antguards);
 			outputText("As you exit the arena, amidst the cheers and roars of the crowd, you are met by Princess Phylla and slightly fewer guards than the last time.  She sees you coming and her face lights up, then runs over to you and starts doting over you. You smile and let her do her thing.  Once she's done, she looks deep into your eyes.");
 			outputText("\n\n\"<i>I... I w-was wondering... I mean...</i>\"  She raises her head to yours and just as you assume she's about to kiss you, one of the guards grunts loudly, interrupting the moment.  He then motions her to follow him into the tunnels.");
 			outputText("\n\nYou hear someone else clear their throat behind you, and turn to see your guide, his trusty rusty blade at his side.  He simply shows you to the exit of the arena before turning and walking away.  Apparently he trusts you enough to see yourself out?  You follow the lit tunnel back to the surface.");
@@ -394,6 +411,8 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 //►(Minotaur- Loss)
 		public function phyllaPCLostToMino():void
 		{
+			clearOutput();
+			spriteSelect(SpriteDb.s_antguards);
 			outputText("After your staggering defeat and subsequent humiliation in the arena two guards approach you as you try to leave.  One of them holds out a small vial.  Princess Phylla is off in the corner of the room crying, and you try to move closer to her but one of the guards steps in front of you.  \"<i>Drink!</i>\" he commands, uncorking the vial.");
 			outputText("\n\nIt's strange... you don't care for the idea of being commanded by an ant, but you find yourself indifferent now that you smell the liquid.  You drink the whole thing in one go; it has no taste or texture and afterwards you don't feel any different.  The guards tell you to leave again, though you don't really want to.  Looking around you, you muse that you would be completely contented with staying underground here for a while... maybe forever, if you had to!  One of the guards, however, pushes you towards the exit, causing you to stumble a bit until you catch yourself.  Before you leave, you glance at where Princess Phylla was watching you, but she's already been removed by the other dutiful guards.  You head up the path to the surface, and from there back to camp.");
 			//(+1 Loss Score)
@@ -408,6 +427,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 		public function phyllaPCBeatsGnoll():void
 		{
 			clearOutput();
+			spriteSelect(SpriteDb.s_antguards);
 			//►(Gnoll - Win First Time)
 			if (flags[kFLAGS.ANTS_PC_BEAT_GNOLL] == 0) {
 				outputText("As you stand over your defeated opponent and the red mist of combat fades, you finally become conscious of the crowd.  Everyone is cheering, and some are even throwing gems into the arena at your feet.  You hold your [weapon] up to the sky proudly, only making them erupt in greater roars and whistles.  As you make your way out, Phylla greets you, doting over every cut and scrape, as maternal as always.  You smile and let her do her thing.  The usual guards don't seem to be around, but you suppose they're lurking just out of sight.");
@@ -432,6 +452,8 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 
 		public function phyllaGnollBeatsPC():void
 		{
+			clearOutput();
+			spriteSelect(SpriteDb.s_antguards);
 			//►(Gnoll - Loss First Time) Standard Gnoll Loss Scene. +
 			if (flags[kFLAGS.ANTS_PC_LOST_TO_GNOLL] == 0) {
 				flags[kFLAGS.ANTS_PC_LOST_TO_GNOLL]++;
@@ -455,6 +477,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 		private function antastrophyBadEnd():void
 		{
 			clearOutput();
+			spriteSelect(SpriteDb.s_antguards);
 			outputText("As you go to leave the arena queen Chylla and four bodyguards approach you.");
 			outputText("\n\n\"<i>Come with me, it's time you join our colony.</i>\" Chylla states dismissively.  You want to leave but at the same time, the idea of being underground helping the colony grow is something you never considered to be an option.");
 
@@ -478,7 +501,8 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 		private function antGirlGoodEnd():void
 		{
 			clearOutput();
-			flags[kFLAGS.PHYLLA_CAPACITY] = 50;
+            phyllaSprite();
+			flags[kFLAGS.PHYLLA_MAXLEN] = 50;
 			outputText("As you turn to leave, something is different; the crowd seems unusually silent. Phylla swiftly climbs down from her seat and jumps into the arena.  You glance warily at the gnoll but it's already being dragged out.  Phylla runs to you, and gives you a massive hug, wrapping all four of her arms around you and squeezing as hard as she can.  Her open display of affection leaves you more than a little shocked, given the creaking and soft cracking of bone in your body.  Interlocking her fingers with yours, she turns and raises your hands in the air, proclaiming your victory to every ant in the colony.  The awed crowd suddenly erupts, filling the stadium with cheers for your victory.  She turns towards the exit and tugs on your sleeve.");
 			outputText("\n\nPhylla drags you blindly through myriads of unlit tunnels until you reach the Queen's chamber, where Chylla seems to be awaiting you. Though, something is different than the last time you saw her; she's dressed just as regally as Phylla is, but it appears more...  formal.");
 			outputText("\n\n\"<i>Phylla seems to have been right about you. You are as smart as you are strong.  Though I had my doubts, you are truly something special.  You have my blessing to start your own colony with Phylla, should you choose to.</i>\" Chylla turns to her daughter and nods some kind of silent message.  You're not sure if the Ant-Queen has really warmed up to you, or she's just saying it because she must in her role as Queen, bestowing a great honor on someone she detests.  Whatever the reason, Phylla seems ecstatic about what's to come next.");
@@ -491,7 +515,6 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 			outputText("\n\nAs you look into her eyes and your lips lock together, you feel as if you're a single mind. It's one of the strangest feelings; you can feel... what she's feeling.  As you run your hands over her body you feel your own motions as if you were the recipient.  It's almost thrilling in a way, knowing exactly how your touch feels on another.  You smile wickedly as you lay her down on the cushioned pillows.");
 			//Use Penis - Male Continuation
 			//Use Vagina - Female Continuation
-			//simpleChoices("UseYourPenis",0,"UseYourVagina",0,"",0,"",0,"",0);
 			menu();
 			if (player.hasCock()) addButton(0, "Use Penis", gigititigitigitigitigityAntGirl);
 			if (player.hasVagina()) addButton(1, "Use Vagina", femalePhyllaFirstFuckGooooo);
@@ -512,8 +535,9 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 		private function gigititigitigitigitigityAntGirl():void
 		{
 			clearOutput();
+            phyllaSprite(true);
 			outputText("Sporting a painfully obvious tent, your body betrays its desire for sexual gratification and it causes Phylla to smile with interest.  \"<i>I-I didn't think I had that ability to... to...  I mean I'm not like you, so I thought...</i>\" she begins, but trails off as she takes in the rough, obscured shape given off by your bulge.");
-			var x:int = player.cockThatFits(phyllaCapacity());
+			var x:int = player.findCock(1, -1, phyllaMaxLen(), "length");
 			if (x < 0) x = player.smallestCockIndex();
 			//***Dick(s) size less than 36 inches:
 			if (player.cockArea(x) < 36) {
@@ -567,7 +591,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 			}
 			menu();
 			//If PC has dick(s) that will fit: Jump to - Regular Male Scene Continuation
-			if (player.cockArea(x) <= phyllaCapacity()) {
+			if (player.cockArea(x) <= phyllaMaxLen()) {
 				addButton(0, "Next", malePhyllaContinuation,x);
 			}
 			//If PC has dick(s) that won't fit: Jump to - Cunnilingus Scene Continuation
@@ -632,7 +656,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 		private function phyllaFirstTimePureBabiesFuckEnding():void
 		{
 			clearOutput();
-			var x:int = player.cockThatFits(phyllaCapacity());
+			var x:int = player.findCock(1, -1, phyllaMaxLen(), "length");
 			if (x < 0) x = player.smallestCockIndex();
 			outputText("For a while, you allow Phylla to slowly adapt to your presence inside of her and the stretching of her vaginal walls; something she reacts to with soft moans of pleasurable appreciation.  She wears her obvious discomfort at being forcefully stretched by your " + cockDescript(x) + ", but you see she can hardly complain as her body cradles yours in an attempt to keep you where you are.  Once you feel she's comfortable you start slowly pumping away at her, gradually building your own rut.");
 			outputText("\n\nYou feel the smaller set of her hands move between your [legs] and start to fondle your ");
@@ -702,7 +726,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 			else outputText("belly");
 			outputText(", but it will only serve to help you.  You will need a brace for what you're about to pull and her rigid abdomen will do just fine.  Phylla makes a confused noise, glancing over her shoulder with a look of concern growing on her face.");
 			outputText("\n\n\"<i>W-What are you doing?</i>\" she asks nervously. \"<i>This isn't how I imag~</i>\"");
-			var x:int = player.cockThatFits(phyllaCapacity());
+			var x:int = player.findCock(1, -1, phyllaMaxLen(), "length");
 			if (x < 0) x = player.smallestCockIndex();
 
 			outputText("\n\nWithout letting her finish, you plunge your " + cockDescript(x) + " into her, causing her to yell out in sheer surprise and discomfort.  \"<i>This is how <b>I</b> mate!</i>\" you inform her, telling her that she won't EVER forget her first time with you.  Her mouth goes open slightly before your subsequent gyrations put an end to whatever she was going to sputter out.  Smirking like a mad jester at the position you have Phylla in, you begin to work your hips as you dominate her from behind.  You hear your ");
@@ -713,7 +737,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 			if (player.isGoo()) outputText("  Perhaps the poor dear could use some tender attention, you ponder to yourself.  Reducing the solidity of your body, you work her abdomen deep into your sticky, goopy body, re-solidifying once she's firmly in there and lowering your hands down to her nipples, pinching them hard as you continue your pumping of her rump.");
 			outputText("\n\nPoor Phylla can only grasp at her cushions as she struggles to maintain her comfort.  The brutish drilling of her pussy forces her to lift her rear further and further towards an acute angle. Try as she might, her efforts are no match for your barbaric tactics as you pound her love hole into oblivion.  All her attempts at maintaining a comfortable position quickly evaporate, and she resigns herself to being roughly taken from behind.  You watch as she buries her head into her cushions to muffle her howls of painful ecstasy.");
 			//PC has more than one cock that is suitable:
-			var y:int = player.cockThatFits2(phyllaCapacity());
+			var y:int = player.cockThatFits2(phyllaMaxLen());
 			if (player.cockTotal() < 2) y = -1;
 			if (y >= 0) {
 				outputText("\n\nIntent on increasing your own pleasures, you decide to work ");
@@ -723,7 +747,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 				outputText("\n\n\"<i>No... P-please, you can't... I mean...</i>\" she manages to protest between moans of ecstasy and cries of pain as your cock works its way deeper with each thrust.  Scoffing at her plea, you guide your other cock into her anus.  It was never her choice to make in the first place, you tell her.  You feel the tightness of her muscular butt squeeze around your shaft - it's not as tight as her cunt is but it'll do!  You continue to thrust your hips as your cocks fill both of her holes.  You hear more muffled, painful moaning as you pound away along her anus.");
 				outputText("\n\n<b>You have taken Phylla's anal virginity! And you love every second of it.</b>");
 				//PC has more than one cock that is over 25 inches that's not in Phylla's butt or vag:
-				if (player.biggestCockArea() > phyllaCapacity()) {
+				if (player.biggestCockArea() > phyllaMaxLen()) {
 					outputText("\n\nSeeing as how her hands aren't busy and she's certainly not using that mouth for anything useful; you reach down and guide one of your cocks so it presses against her down turned stomach.  You tell her to press it between her breasts and start sucking at the head.  Though this doesn't stop you from pounding away at her backside. She quickly grabs your [cock biggest] with her smaller hands and guides for a better position between her breasts.  She uses her upper hands to press her breasts together.  You immediately feel the effect of her B-Cups as with each thrust they warm the shaft of your long cock.");
 				}
 			}
@@ -877,7 +901,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 			outputText("\n\nThen a sudden image, and sensation of shock fires into your mind;  Her whole body seems to tense up and with a sudden hip grinding pulse, she orgasms; moaning so loud it seems to echo off the walls.  Well toned legs squeeze tightly against your head, and then relax with a hearty groan as she squirts her girl cum all over you. Your hand and face are utterly drenched with her warm love juices and you try to drink up what you can... but there's just too much!");
 			outputText("\n\nShe rolls off of you in a state of absolute euphoria. You sit up on your elbows and make eye contact with her for a moment, causing her to giggle as she admires her comedic handiwork.  Of course, the once shy Ant Morph now eyes your own drooling pussy.  She looks as though she's about to continue stimulating you, but then you think of a better idea.  It's time you take control.");
 			//(If dick(s) (is/are) huge, length unknown - Jump to - Dick(s) too Big)
-			if (player.smallestCockArea() > phyllaCapacity()) {
+			if (player.smallestCockArea() > phyllaMaxLen()) {
 				//Dicks too Big:
 				outputText("\n\nDespite your best efforts to try and get into a comfortable position to scissor, your painfully erect  [cocks] prevent you from doing so, given that they are now compressed against the ceiling.  While the display of rainbows is pretty to watch on your [cocks], the crushing pain and the unyielding nature of your [cocks] is too much.  ");
 
@@ -901,7 +925,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 			//(If applicable transitions to - Freakishly huge dick(s))
 			//(If not applicable transition to - Scissoring w/ Dick(s))
 			//Freakishly huge dick(s):
-			if (player.smallestCockArea() > phyllaCapacity()) {
+			if (player.smallestCockArea() > phyllaMaxLen()) {
 				outputText("\n\nYou start rocking your hips and your pussies kiss, fluids mixing harmoniously together as shots of pleasure pass through both of you.  Her clit seems to penetrate further and further into yours with every push, and though it's not enough to fully enter you, the sensation on the inside sends wave after wave of euphoric bliss over the both of you.");
 				//(Leads to - Scissoring w/ Dick(s))
 			}
@@ -933,7 +957,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 				}
 				else {
 					//PC has one/two dick(s) not exceeding 4 inches in width total:
-					if (player.cockTotal() == 2 && (player.cockArea(player.smallestCockIndex2()) + player.cockArea(player.smallestCockIndex()) <= phyllaCapacity()))
+					if (player.cockTotal() == 2 && (player.cockArea(player.smallestCockIndex2()) + player.cockArea(player.smallestCockIndex()) <= phyllaMaxLen()))
 						outputText("two of your [cocks], stroking them apologetically as she scissors you.  You feel her almost insatiable appetite for all parts of your body.  You feel Phylla's mind slowly becoming lost in pleasure.");
 					//TODO: "player.cocks[player.smallestCockIndex()] < 4" changed to cockLength. Not sure if it is the appropriate attribute.
 					else if (player.cocks[player.smallestCockIndex()].cockLength < 4) outputText("your " + cockDescript(player.smallestCockIndex()) + ", stroking it apologetically as she scissors you.  You feel her almost insatiable appetite for all parts of your body.  You feel Phylla's mind slowly becoming lost in pleasure.");
@@ -960,6 +984,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 		private function waifuQuestOver():void
 		{
 			clearOutput();
+            phyllaSprite();
 			outputText("You wake but are unsure of how long you've been asleep; hours or maybe a day, it's hard to tell in this place.  Trying to stand was a mistake... you feel like your brain has just gone through three rounds of boxing with a minotaur.  The world spins around as you stagger to gain balance. Whatever Phylla has done to you seems to be wearing off, and it leaves you with an emptiness in your mind.");
 			outputText("\n\nYou look over at Phylla, noticing that she's completely passed out in a very cute fetal position. You can see the indent you were making next to her before you stood up.  It's odd, but you can still feel that \"link\" you two shared; her thoughts and emotions like the whisper of wind around you. Just looking at her sleeping seems to make your worries melt away.  Your lack of presence in bed causes her to stir and wake, and she rubs her eyes in an effort to fully drag herself into consciousness. You can tell from her body language that she's experiencing the same withdrawals you are.  As you start to gather your things, your sleepy lover groggily says, \"<i>I can join you at camp if you want, I don't take up much space.  Above ground!  I mean, I'll be underground, I mean, I won't bother anyone.  I-I'll be good...</i>\"");
 			//[Come to Camp] [Stay Here]
@@ -994,6 +1019,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 		private function bumpIntoTheAntColonyAfterStayHomePhylla():void
 		{
 			clearOutput();
+            phyllaSprite();
 			outputText("You make your way down a strangely familiar path that leads to Phylla's room.  Her head quickly snaps around upon seeing your shadow in her doorway.");
 			outputText("\n\n\"<i>Eeep!</i>\" she clicks - clearly you startled her out of some daydream.");
 
@@ -1012,12 +1038,13 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 
 		public function introductionToPhyllaFollower():void
 		{
-			if (flags[kFLAGS.PHYLLA_CAPACITY] < 50) flags[kFLAGS.PHYLLA_CAPACITY] = 50;
+			if (flags[kFLAGS.PHYLLA_MAXLEN] < 50) flags[kFLAGS.PHYLLA_MAXLEN] = 50;
 			clearOutput();
 			if (pregnancy.isPregnant && pregnancy.incubation == 0) {
 				phyllaLaysSomeDriderEggs();
 				return;
 			}
+            phyllaSprite();
 			//[Follower > Phylla Intro (First Time)]
 			if (flags[kFLAGS.PHYLLA_CAMP_VISITS] == 0) {
 				outputText("Gazing into the distance, you see a small dirt hill you can only assume is the beginning of Phylla's colony.  Every now and then you see Phylla's silhouette pop out of the hole then immediately dive back into it.  You smile to yourself as you walk along the unfamiliar path towards the growing anthill.  Not very long after you start down the path, you end your journey at the base of her colony's entrance.  It's pretty impressive that Phylla has moved so much earth in such a small amount of time given that she is alone and 'royalty.'  Then again, she has four arms.  You cautiously make your way down through the threshold of the colony's entrance.  As you walk down the tunnel, you can't help but see the contrast between this single tunnel and her mother's massive, bewildering, colony.");
@@ -1384,6 +1411,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 		private function phyllaBeeeJays():void
 		{
 			clearOutput();
+            phyllaSprite(true);
 			flags[kFLAGS.PHYLLA_BLOWJOBS]++;
 			if (flags[kFLAGS.PHYLLA_BLOWJOBS] == 1) {
 				outputText("Turning to Phylla, you can't help but smile as you flash her a seductive look, making sure you have her undivided attention before glancing down at the bulge in your pants.  Raising a hand to her mouth in sultry intrigue, Phylla giggles and shoots you a devilish look back.  Turning towards the bed, Phylla presumptuously begins to disrobe...  close!  But not what you had in mind.");
@@ -1685,8 +1713,50 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 //\"<i>Use Dick</i>\"
 		private function dickPhylla():void
 		{
-			var x:int = player.biggestCockIndex();
+            //shitty implementation, but sounds logical
+            var cockVag:int = -1, cockMouth:int = -1, cockHand1:int = -1, cockHand2:int = -1;
+            var cockTmp:int = -1;
+            var cMcnt:int = -1;
+            var mouthTent:Boolean = false;
+            //pick one for vag
+            cockVag = player.findCock(1, -1, phyllaMaxLen(), "length");
+			if (cockVag < 0) cockVag = player.smallestCockIndex();
+            if (player.cockTotal() >= 2) {
+                //try to pick non-tentacle for mouth
+                while (true) {
+                    cockMouth = player.findCock(cMcnt, 20, 30, "length");
+                    if (cockMouth == -1)
+                        break;
+                    if (cockMouth != cockVag && player.cocks[cockMouth].cockType != CockTypesEnum.TENTACLE && player.cocks[cockMouth].cockType != CockTypesEnum.STAMEN)
+                        break;
+                    ++cMcnt;
+                }
+                //pick tentacles - no max size, they can wiggle
+                if (player.countCocksWithType(CockTypesEnum.TENTACLE, 20, -1, "length") > 0) {
+                    cMcnt = -1;
+                    while (true) {
+                        cockTmp = player.findCock(cMcnt, 20, -1, "length");
+                        if (cockTmp == -1)
+                            break;
+                        if (cockTmp == cockVag || cockTmp == cockMouth || cockTmp == cockHand1 || cockTmp == cockHand2) {
+                            if (cockMouth == -1) {
+                                cockMouth = cockTmp;
+                                mouthTent = true;
+                            }
+                            else if (cockHand1 == -1)
+                                cockHand1 = cockTmp;
+                            else if (cockHand2 == -1) {
+                                cockHand2 = cockTmp;
+                                break;
+                            }
+                        }
+                        ++cMcnt;
+                    }
+                }
+            }
+            //start
 			clearOutput();
+            phyllaSprite(true);
 			outputText("You give Phylla a devious look that denotes you didn't come here to just talk.  She looks a little surprised and embarrassed for you as you start removing your [armor].  Noticing her watching, you pull each article of clothing off a little slower, letting her lust build.  You seductively drop your armor, completely revealing yourself to her.  You can see her eyes widen as she visibly feasts on your features.");
 			//(NO BJ experience)
 			if (flags[kFLAGS.PHYLLA_BLOWJOBS] == 0) {
@@ -1718,7 +1788,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 			if (flags[kFLAGS.PHYLLA_FUCKS] >= 3) outputText("\n\nShe seems like she's losing some of her shyness, or at the very least feels comfortable enough around you to assert more of her personality.");
 
 			outputText("\n\nYou watch as she spreads herself apart for you and guides your cock into her.  As the head of your penis enters her, she lets out a weak moan.  Then in a wicked attempt to make her cum, because you know it's so easy, you thrust your hips upwards forcing as much as you can into her.");
-			outputText("\n\nHer eyes widen in surprise as your " + cockDescript(x) + " fills her.  She howls a blissful scream as she drools forth her girl fluids, coating your cock ");
+			outputText("\n\nHer eyes widen in surprise as your " + cockDescript(cockVag) + " fills her.  She howls a blissful scream as she drools forth her girl fluids, coating your cock ");
 			if (player.balls > 0) outputText("and balls ");
 			outputText("in her sexual liquids.");
 
@@ -1775,20 +1845,16 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 
 			outputText("\n\nTaking her \"<i>hint,</i>\" you slam your cock into her pussy, making sure to get as deep as you can. Your initial thrust makes a very loud, squishy noise as your cock enters her soaked canal.  Your mind almost blacks out from the sheer sensual overload you both feel as a shared consciousness, unable to handle both hers and your own.  Phylla's head collapses into her hands as she releases a series of stammering moans.  Her hips twitch slightly with euphoria as she starts to slowly move up and down, her body desperately begging for more cock.");
 
-			//If PC only has the two non TD dicks (greater than 42 inches):
-			if (player.tentacleCocks() == 2 || player.stamenCocks() == 2) {
-				outputText("\n\nNow content with her efforts, Phylla's body sucks in your long cock as your other is deep inside her. You feel her warm breath escape the seal she's made around the head of your cock when you hit the right spots inside her that cause her to moan.");
-			}
-			//(Transitions to Doggy style Phylla or If PC has TD)
-			//PC has more than two Tentacle dicks (greater than 42 inches):
-			else if (player.tentacleCocks() > 2 || player.stamenCocks() > 2) {
-				outputText("\n\nNot content with just a little oral attention, you slither your other tentacle cocks up to her hands and give them a hard smack, soliciting a surprised hum from Phylla.  Seeing her lover's tentacle penile appendages caressing the back of her hand helps to clue her in that she still has some \"<i>capacity</i>\" to service you.  Propping herself upwards with a pillow, Phylla takes to leaning on her elbows as she begins to stroke and tease your cocks, coaxing a small flow of pre-cum in the process.");
-				//(Transitions to Doggy style Phylla)
-			}
-			//PC has one-two dicks 42 to 48 inches in length:
-			//if(player.cockTotal() >= 2)
-			//outputText("\n\nWell, if she wants more dick, then maybe she can be persuaded to put her mouth to use?  Expertly positioning your prick(s), you give her a quick jab in the chin in order to get her attention, causing her to look up at your over her shoulder.  You give her a knowing look and shoot a glance down at what poked her in the chin; she follows your gaze.  \"<i>Well, you did want more of them,</i>\" you convey to her with a wickedly playful grin, as though you're a kid in candy shop.  Phylla takes to your  " + cockDescript(a/ & b) + " with a zeal you've never seen before, especially in a woman so shy and uncertain. (Transitions to Doggy style Phylla)
-
+            //PC has one-two dicks 42 to 48 inches in length:
+			if(cockMouth >= 0) {
+                outputText("\n\nWell, if she wants more dick, then maybe she can be persuaded to put her mouth to use?  Expertly positioning your pricks, you give her a quick jab in the chin in order to get her attention, causing her to look up at your over her shoulder.  You give her a knowing look and shoot a glance down at what poked her in the chin; she follows your gaze.  \"<i>Well, you did want more of them,</i>\" you convey to her with a wickedly playful grin, as though you're a kid in candy shop.  Phylla takes your  " + cockDescript(cockMouth) + " with a zeal you've never seen before, especially in a woman so shy and uncertain.");
+                //and only then
+                if (cockHand1 >= 0)
+                    outputText("\n\nNot content with just a little oral attention, you slither your" + (mouthTent ? " other" : "") + " tentacle cock" + (cockHand2 >= 0 ? "s" : "") + " up to her hands and give them a hard smack, soliciting a surprised hum from Phylla.  Seeing her lover's tentacle penile appendage" + (cockHand2 >= 0 ? "s" : "") + " caressing the back of her hands helps to clue her in that she still has some \"<i>capacity</i>\" to service you.  Propping herself upwards with a pillow, Phylla takes to leaning on her elbows as she begins to stroke and tease your cock" + (cockHand2 >= 0 ? "s" : "") + ", coaxing a small flow of pre-cum in the process.");
+                //shared
+                outputText("\n\nTrying to please you as much as she can, Phylla diligently sucks on your long cock" + (cockHand1 >= 0 ? " and pleasures your flexible tentacle dick" + (cockHand2 >= 0 ? "s" : "") + " with her hands" : "") + " as your other cock is deep inside her. You feel her warm breath escape the seal she's made around the head of your cock when you hit the right spots inside her that cause her to moan.");
+            }
+			
 			//Doggy style Phylla:
 			outputText("\n\nYou give her body what it wants as you start humping her; using her abdomen as a brace, you reach a very staccato rhythm with your thrusts as she spreads out all four of her arms in front of her to hold herself in place.  With almost every other pump you feel her mind and her body building to orgasm, flooding your mind with thoughts of doing the same.  Her cunt seems to be calling upon you to fill it as it clamps down tighter with each plunge of your cock.");
 
@@ -1798,6 +1864,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 
 			outputText("\n\nPhylla stirs next to you, and groggily says, \"<i>You should come down more often.  I mean...  I miss you sometimes...</i>\"  Her shyness returns as she slowly recovers from the small sex-coma you placed each other in.  You say you'll think about it and wink at her as you get dressed and head back to camp, leaving her to eagerly await the next time you come to take her once again.");
 			player.sexReward("Default","Dick",true,false);
+            flags[kFLAGS.PHYLLA_FUCKS]++;
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -1806,7 +1873,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 		{
 			clearOutput();
 			outputText("You give Phylla a seductive smile as you start to remove your armor; you came here for something all right, but the surprised look on your lover's face shows she hasn't quite caught on yet.  Her eyes dart back and forth between watching you disrobe and staring at the stony ground in a confused manner, as if torn between modesty and desire.  Flirtatiously, you toss your underwear on the ground in front of where Phylla's eyes seem locked.  Her head snaps up in surprise; you're not sure what she was expecting, but clearly seeing you in your birthday suit wasn't it.  You strut over to her, putting on your best version of a succubus's sway in your step.  Once you reach Phylla, you take a seat on the edge of her raised stone bed and slowly cross your legs.");
-			outputText("\n\nYou ask Phylla to look at you.  As she does, you tantalizingly uncross your legs, spreading them open so Phylla can glimpse your exposed body.  You even decide to go as far as to grab one of your breasts and caress your nipple playfully.");
+			outputText("\n\nYou ask Phylla to look at you.  As she does, you tantalizingly uncross your legs, spreading them open so Phylla can glimpse your exposed body. You even decide to go as far as to " + (player.hasBreasts() ? "grab one of your breasts and " : "") + "caress your nipple playfully.");
 			outputText("\n\n\"<i>Do you... want me to... I mean, you know...</i>\" she says shyly as she blushes.");
 			outputText("\n\nWithout saying a word, you extend your hand and beckon her over to you with a hooked finger. Raising your eyebrows seductively, you make your intent crystal clear for her.  She quickly scampers off the bed and kneels in between your [hips].  Her upper two hands hold your legs apart, resting on your inner knees.  Her smaller set of hands gently begin to massage your inner [legs] right on the sides of your pussy lips, driving pleasure through your thighs.  It's not long before beads of lubricant start to flow out of your quickly moistening labia, a slight moan of sexual excitement slipping past your lips as Phylla's tongue starts to lick the lubricant coming out of you, pausing only briefly to taste your juices in her mouth like a fine wine.  You fall forward as her mouth finds your cilt, wrapping your hands around her head to encourage her to continue.  Your legs attempt to wrap around her head but her upper arms' tremendous strength prevents them, leaving you \"<i>hopelessly</i>\" wide open for her assault.  Her lower hands stop massaging you, and for a moment leave you to wonder what's going on down there.  As you're about to ask why she stopped, her mouth plays erotically with your clit and one of her smaller hands spreads you wide open.");
 
@@ -1819,7 +1886,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 
 			outputText("\n\nHer mouth releases from your cilt and her fingers slip out of you, sending a pleasing shiver down your spine.  You look between your legs as Phylla looks hungrily up at you, her mouth covered in your juices.  She runs her tongue along her upper and lower lips then starts to gracefully suck your nectar off of each of her fingers that were inside you, making sure not to miss any.");
 
-			outputText("\n\nOnce she's done cleaning herself she starts to kiss her way up your body, making weak but cute sounds as she steadily climbs.  She runs all four of her hands across the most sensitive parts of your flesh as her small kisses make their way from your wet cunt up your stomach, in between your breasts, up the side of your neck, nibbling on your earlobe, and finally coming to rest on your own lips.  Your lips lock as she cups your breasts with her large hands and pinches your pair of nipples with her smaller hands.  You begin to moan but Phylla's tongue enters your mouth and cuts off your attempt at vocalizing your euphoria, seemingly wanting you to show her your pleasure instead.");
+			outputText("\n\nOnce she's done cleaning herself she starts to kiss her way up your body, making weak but cute sounds as she steadily climbs.  She runs all four of her hands across the most sensitive parts of your flesh as her small kisses make their way from your wet cunt up your stomach, in between your breasts, up the side of your neck, nibbling on your earlobe, and finally coming to rest on your own lips.  Your lips lock as she " + (player.hasBreasts() ? "cups your breasts with her large hands and " : "") + "pinches your pair of nipples with her smaller hands.  You begin to moan but Phylla's tongue enters your mouth and cuts off your attempt at vocalizing your euphoria, seemingly wanting you to show her your pleasure instead.");
 
 			outputText("\n\nYour minds instantly synchronize with each other.  Sudden warmth is felt, an almost uncomfortable heat coming from between Phylla's legs.  As tongues entwine, you reach a hand down between Phylla's legs to feel the \"<i>flame</i>\" of lust right above her pussy.  Phylla's mind reaches out, begging for your touch, asking you to please her, to make love to her.  Knowing she's probably soaked, you reach up to touch the slick slit between her legs and are pleased to find you were right on the money.  Feeling her long stiff clit rub against your palm, she gasps as an unforeseen wave of pleasure shoots up her body.  Knowing the link is made, you break the kiss and grin.");
 
@@ -1846,6 +1913,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 		private function dudesFuckEggLayingBitches():void
 		{
 			clearOutput();
+            phyllaSprite(true);
 			outputText("Phylla looks completely taken aback when you suggest you want to have sex with her.  Obviously self conscious about how she looks right now, she covers her enlarged breasts with all four of her hands as she sits back in her seat.");
 			outputText("\n\n\"<i>Are you sure... I mean I could change... to be smaller.  It won't take long...</i>\"  She glances behind her at her engorged abdomen.  \"<i>Ummm... yeah, it won't ta-AHH!</i>\"");
 
@@ -1945,6 +2013,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 		private function birfingSexWithAntsForDasLadies():void
 		{
 			clearOutput();
+            phyllaSprite(true);
 			outputText("Phylla looks completely taken aback when you suggest that you want to have sex with her.  You can tell she is self conscious about the way she looks right now by the way she covers her enlarged breasts with all four of her hands as she sits back in her seat.");
 			outputText("\n\n\"<i>I... look, we could wait until I've given birth... Wouldn't you want that?</i>\"  She glances behind her at her engorged abdomen.  \"<i>I... It won't ta-AHH!</i>\"");
 			outputText("\n\nShe stops mid-sentence as a contraction shoots through her body, making the entirety of it tense up.  Then with an almost sexual moan she shudders as all her muscles relax and the contraction pushes a cyclentrial egg out from the birthing slit at the tip of her abdomen. As if on cue, one of your many children quickly runs in from the shadows and scoops up the egg to remove it and take it somewhere deeper into the colony.  Clearly there's some kind of greater system going on here.");
@@ -2124,6 +2193,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 		{
 			flags[kFLAGS.TIMES_CORRUPT_MALE_ANT_ORGY]++;
 			clearOutput();
+            phyllaSprite(true);
 
 			outputText("You tell Phylla to call in your strongest and most virile children for 'inspection.'");
 
@@ -2207,7 +2277,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 			//Repeat:
 			else outputText("\n\nYou knew this moment would come and you're mentally prepared for it.  Feeling your mind link to everyone in the room is still overwhelming at first, but you quickly get over it as your mind finds balance.");
 
-			var x:int = player.cockThatFits(phyllaCapacity());
+			var x:int = player.findCock(1, -1, phyllaMaxLen(), "length");
 			if (x < 0) x = player.smallestCockIndex();
 			outputText("\n\nWhen you've felt your mind completely sync up with everyone else in the room, it's like being drunk on sexual euphoria.  You almost lose yourself in it for a moment, but focusing your mind, you snap your eyes open. You see Phylla in front of you looking like a drugged slut; she runs all four of her hands over your " + cockDescript(x) + " at the entrance of her flooded cunt while her children play with her nipples and suck each other off.  Aggressively, you grab her arms and pin her down while simultaneously shoving your cock into her.");
 
@@ -2247,6 +2317,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 		private function antColonyOrgy4Ladies():void
 		{
 			clearOutput();
+            phyllaSprite(true);
 			flags[kFLAGS.TIMES_CORRUPT_FEMALE_ANT_ORGY]++;
 			//(First Time)
 			if (flags[kFLAGS.TIMES_CORRUPT_FEMALE_ANT_ORGY] == 1) {
@@ -2369,6 +2440,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 			clearOutput();
 			//(Lay Eggs)
 			if (flags[kFLAGS.PHYLLA_EGG_LAYING] == 0) {
+                phyllaSprite(true);
 				flags[kFLAGS.PHYLLA_EGG_LAYING] = 1;
 				outputText("Phylla seems confused as to what you're thinking as you gaze deeply into her eyes.  You gather all four of her hands between the two of yours and tell her that children are wanted.  Not just one or two; you want as many as she can muster.");
 				//If you've talked to her about history:
@@ -2459,6 +2531,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 		private function phyllaLaysSomeDriderEggs():void
 		{
 			clearOutput();
+            phyllaSprite(true);
 			pregnancy.knockUpForce(); //Clear Pregnancy
 			outputText("As you near Phylla's bedchamber you can hear an 'Eeep!' of surprise and worry. Thinking she might be in trouble you burst into the room.  Glancing around for any immediate danger you only see Phylla's vagina drooling a green, slimy mucus.  The way she holds her very pregnant stomach and splays her legs out on the bedspread suggests that your recently laid spawn are ready to hatch.  \"<i>[name], it's time!  UGH!  I don't... have to words to express how weird this feels!</i>\"  Phylla cries out, somewhat scared at the green ooze that trickled out of her.");
 
@@ -2705,6 +2778,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 		private function eggDatBitch():void
 		{
 			clearOutput();
+            phyllaSprite(true);
 			//PC is a Female/Herm Drider:
 			if (player.canOvipositSpider()) outputText("While Phylla appears to be sexually sated, the heaviness in your spider abdomen begs for release.\n\n");
 			//First Time:

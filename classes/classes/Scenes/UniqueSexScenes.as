@@ -8,8 +8,8 @@ package classes.Scenes
 	import classes.BodyParts.Arms;
 	import classes.BodyParts.LowerBody;
 	import classes.BodyParts.Tail;
-import classes.Perks.MindBreakerBrain;
-import classes.Scenes.Areas.Mountain.HellHound;
+	import classes.Perks.MindBreakerBrain;
+	import classes.Scenes.Areas.Mountain.HellHound;
 	import classes.Scenes.Areas.Mountain.InfestedHellhound;
 	import classes.Scenes.Areas.Mountain.Minotaur;
 	import classes.Scenes.Areas.Ocean.SeaAnemone;
@@ -43,7 +43,6 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 			outputText(" of you scream your defeat together as your stamens explode, filling each others wombs to the brim. There’s so much liquid pollen pumped into you and you can feel your bloated stomach groan under the pressure. You can’t help but cup it with your hand in motherly delight. Holli isn't looking any better, it will probably take hours for her belly to deflate.\n\n");
 			outputText("\"<i>I... want a rematch...No way I'll stop at a tie!</i>\"\n\n");
 			outputText("That won’t be today though. You're so packed up with plant cum that without even checking your odds, you're pretty sure you are pregnant. You doubt Holli can hold any more of your pollen either, so you dress back up, highly satisfied and somewhat smug, leaving Holli to her personal frustration.");
-
 			player.sexReward("cum","Vaginal");
 			player.sexReward("cum","Anal");
 			player.sexReward("cum","Lips");
@@ -201,76 +200,254 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 			EventParser.gameOver();
 		}
 
-		public function pcUniqueSexScenesChoiceMenu():void {
-			menu();
-			if (player.tailType == Tail.MANTICORE_PUSSYTAIL && monster.hasCock()) addButton(0, "Tail Rape", manticoreTailRapeScene);
-			else addButtonDisabled(0, "Tail Rape", "Req. to have Pussytail and enemy with cock.");
-			if (player.tailType == Tail.HINEZUMI || player.tailType == Tail.SALAMANDER) {
-				if (monster is Anemone || monster is SeaAnemone || monster is HellHound || monster is InfestedHellhound) addButtonDisabled(1, "Tailpeg", "Req. enemy to have anus.");
-				else addButton(1, "Tailpeg", hinezumiTailpegScene);
-			}
-			else addButtonDisabled(1, "Tailpeg", "Req. to have Hinezumi Tail.");
-			if ((player.gender == 1 || player.gender == 2) && (player.tailType == Tail.HINEZUMI || player.tailType == Tail.MOUSE || player.tailType == Tail.DEMONIC)) addButton(2, "Strangle and rape", strangleAndRapeScene);
-			else addButtonDisabled(2, "Strangle and rape", "Req. to be male or female with hinezumi, mouse or demon tail.");
-			if ((player.raijuScore() >= 10 || player.thunderbirdScore() >= 12) && !monster.hasPerk(PerkLib.EnemyHugeType) && !monster.hasPerk(PerkLib.EnemyGigantType) && !monster.hasPerk(PerkLib.EnemyColossalType) && !monster.isAlraune() && !monster.isDrider() && !monster.isGoo() && !monster.isNaga() && !monster.isScylla() && !monster.isTaur()) addButton(3, "Volt Transfer", raijuVoltTransfer);
-			else addButtonDisabled(3, "Volt Transfer", "Req. to be Raiju and enemy must be non-gigant humanoid.");
-			//Overheat fire species
-			if (player.hasStatusEffect(StatusEffects.Overheat) && !monster.hasPerk(PerkLib.EnemyHugeType) && !monster.hasPerk(PerkLib.EnemyGigantType) && !monster.hasPerk(PerkLib.EnemyColossalType)) addButton(4, "Heat transfer", hinezumiHeatTransferScene);
-			else addButtonDisabled(4, "Heat transfer", "Req. to have Hinezumi Coat, over 50% of max lust, enemy must be humanoid and not giant.");
-			if (player.hasStatusEffect(StatusEffects.Overheat) && monster.hasPerk(PerkLib.IceNature) && player.hasVagina() && monster.hasCock()) addButton(5, "Cooldown", Cooldown);
-			addButtonDisabled(5, "Cooldown", "Req. a cold type creatures with a cock, the overheat perk and a vagina.");
-			//Yuki onna
-			if (player.yukiOnnaScore() >= 14 && monster.hasCock() && !monster.hasPerk(PerkLib.UniqueNPC) && !monster.hasPerk(PerkLib.EnemyHugeType) && !monster.hasPerk(PerkLib.EnemyGigantType) && !monster.hasPerk(PerkLib.EnemyColossalType) && !monster.isAlraune() && !monster.isDrider() && !monster.isGoo() && !monster.isNaga() && !monster.isScylla() && !monster.isTaur()) addButton(6, "Steal warmth", yukionnaStealWarmthScene);
-			else addButtonDisabled(6, "Steal warmth", "Req. to be Yuki Onna and enemy must be: non-gigant, humanoid, with cock, non-unique npc.");
-			if (player.isInGoblinMech() && player.hasKeyItem("Cum Reservoir") >= 0 && monster.hasCock()) {
-				if (player.keyItemv1("Cum Reservoir") == 4) addButtonDisabled(7, "Fill the reservoir", "Reservoir is already full. You need to use all this stored cum before you harvest new one.");
-				else addButton(7, "Fill the reservoir", gobomechFillTheReservoir);
-			}
-			else addButtonDisabled(7, "Fill the reservoir", "Req. to be in goblin mech, having Cum Reservoir upgrade instaled on it and enemy with cock.");
-			if (Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_ISMB) addButton(8, "Brain Melt", brainMelt);
-			else addButtonDisabled(8, "Brain Melt", "Req. to be a mindbreaker.");
-			addButton(13, "-2-", pcUniqueSexScenesChoiceMenu2nd).hint("2nd page of options.");
-			addButton(14, "Leave", cleanupAfterCombat);
+        public function get sceneMenu():Array {
+			var menuItems:Array = [];
+			menuItems.push.apply(this, USSTailRape());
+			menuItems.push.apply(this, USSTailpeg());
+			menuItems.push.apply(this, USSSnRape());
+			menuItems.push.apply(this, USSVoltTsf());
+			menuItems.push.apply(this, USSHeatTsf());
+			menuItems.push.apply(this, USSCooldown());
+			menuItems.push.apply(this, USSStlWmth());
+			menuItems.push.apply(this, USSGobMech());
+			menuItems.push.apply(this, USSBrainMlt());
+			menuItems.push.apply(this, USSAlrauneSS());
+			menuItems.push.apply(this, USSEastrBny());
+			menuItems.push.apply(this, USSTentRape());
+			menuItems.push.apply(this, USSLiveDildo());
+			menuItems.push.apply(this, USSJiangshiDrn());
+            return menuItems;
+        }
+
+		public function pcUSSPreChecksV2(backFunc:Function, btnPos:int = 13):void{
+            //uncomment if it's REALLY needed
+			if (pcCanUseUniqueSexScenes())
+				addButton(btnPos, "U.Sex Scenes", openUSSmenu, backFunc).hint("Other non-typical sex scenes.");
+			else
+				addButtonDisabled(btnPos,"U.Sex Scenes", "You don't qualify for any Unique Sex Scenes.");
 		}
-		public function pcUniqueSexScenesChoiceMenu2nd():void {
+
+        public function pcCanUseUniqueSexScenes():Boolean {
+			if (player.hasPerk(PerkLib.ElementalBody)) return false;
+            if (RaijuOverLust() != null) return true; //special for supercharged Raiju
+            else return menuActiveButtons(sceneMenu) > 0;
+        }
+
+		//Use above for special cases.
+		public function openUSSmenu(backFunc:Function = null):void{
+			//special for supercharged Raiju
+            if (RaijuOverLust() != null)
+				RaijuOverLust();
+			//normal menu
+			var menuItems:Array = sceneMenu;
+			if (backFunc == null) backFunc = camp.returnToCampUseOneHour;
+			menuGen(menuItems, 0, backFunc);
+        }
+
+        //checking functions ===========================================================================
+        private function RaijuOverLust():Function{
+            if (player.statStore.hasBuff("Supercharged") && !monster.hasPerk(PerkLib.LightningAffinity) && !monster.hasPerk(PerkLib.LightningNature)){
+                if(!player.hasVagina() && !player.hasCock()) return raijuVoltTransfer;
+                else return RaijuRapeSupercharged;
+            }
+            else return null;
+        }
+        private function USSTailRape():Array{
+            var btnSet:Array = ["Tail Rape"];
+            if (player.tailType == Tail.MANTICORE_PUSSYTAIL && monster.hasCock()) btnSet.push(manticoreTailRapeScene,"");
+            else btnSet.push(false,"Req. to have Pussytail and enemy with cock.");
+            return btnSet;
+        }
+        private function USSTailpeg():Array{
+            var btnSet:Array = ["TailPeg"];
+            if (player.tailType == Tail.HINEZUMI || player.tailType == Tail.SALAMANDER) {
+                if (monster is Anemone || monster is SeaAnemone || monster is HellHound || monster is InfestedHellhound) btnSet.push(false, "Req. enemy to have anus.");
+                else btnSet.push(hinezumiTailpegScene, "");
+            }
+            else btnSet.push(false, "Req. to have Hinezumi Tail.");
+            return btnSet;
+        }
+        private function USSSnRape():Array{
+            var btnSet:Array = ["Strangle and Rape"];
+            if ((player.gender == 1 || player.gender == 2) && (player.tailType == Tail.HINEZUMI || player.tailType == Tail.MOUSE || player.tailType == Tail.DEMONIC)) btnSet.push(strangleAndRapeScene, "");
+            else btnSet.push(false, "Req. to be male or female with hinezumi, mouse or demon tail.");
+            return btnSet;
+        }
+        private function USSVoltTsf():Array{
+            var btnSet:Array = ["Volt Transfer"];
+            if ((player.raijuScore() >= 10 || player.thunderbirdScore() >= 12) && !monster.hasPerk(PerkLib.EnemyHugeType) && !monster.hasPerk(PerkLib.EnemyGigantType) && !monster.hasPerk(PerkLib.EnemyColossalType) && !monster.isAlraune() && !monster.isDrider() && !monster.isGoo() && !monster.isNaga() && !monster.isScylla() && !monster.isTaur()) btnSet.push(raijuVoltTransfer, "");
+            else btnSet.push(false, "Req. to be Raiju and enemy must be non-gigant humanoid.");
+            return btnSet;
+        }
+        //OverHeat Species (?)
+        private function USSHeatTsf():Array{
+            var btnSet:Array = ["Heat Transfer"];
+            if (player.hasStatusEffect(StatusEffects.Overheat) && !monster.hasPerk(PerkLib.EnemyHugeType) && !monster.hasPerk(PerkLib.EnemyGigantType) && !monster.hasPerk(PerkLib.EnemyColossalType)) btnSet.push(hinezumiHeatTransferScene, "");
+            else btnSet.push(false, "Req. to have Hinezumi Coat, over 50% of max lust, enemy must be humanoid and not giant.");
+            return btnSet;
+        }
+        private function USSCooldown():Array{
+            var btnSet:Array = ["Cooldown"];
+            if (player.hasStatusEffect(StatusEffects.Overheat) && monster.hasPerk(PerkLib.IceNature) && player.hasVagina() && monster.hasCock()) btnSet.push(Cooldown, "");
+            else btnSet.push(false, "Req. a cold type creatures with a cock, the overheat perk and a vagina.");
+            return btnSet;
+        }
+        //YukiOnna
+        private function USSStlWmth():Array{
+            var btnSet:Array = ["Steal Warmth"];
+            if (player.yukiOnnaScore() >= 14 && monster.hasCock() && !monster.hasPerk(PerkLib.UniqueNPC) && !monster.hasPerk(PerkLib.EnemyHugeType) && !monster.hasPerk(PerkLib.EnemyGigantType) && !monster.hasPerk(PerkLib.EnemyColossalType) && !monster.isAlraune() && !monster.isDrider() && !monster.isGoo() && !monster.isNaga() && !monster.isScylla() && !monster.isTaur()) btnSet.push(yukionnaStealWarmthScene, "");
+            else btnSet.push(false, "Req. to be Yuki Onna and enemy must be: non-gigant, humanoid, with cock, non-unique npc.");
+            return btnSet;
+        }
+        private function USSGobMech():Array{
+            var btnSet:Array = [player.keyItemv1("Cum Reservoir")?"Cum Reservoir":"Fill the reservoir"];
+            if (player.isInGoblinMech() && player.hasKeyItem("Cum Reservoir") >= 0 && monster.hasCock()) {
+                if (player.keyItemv1("Cum Reservoir") == 4) btnSet.push(false, "Reservoir is already full. You need to use all this stored cum before you harvest new one.");
+                else btnSet.push(gobomechFillTheReservoir, "");
+            }
+            else btnSet.push(false, "Req. to be in goblin mech, having Cum Reservoir upgrade instaled on it and enemy with cock.");
+            return btnSet;
+        }
+        private function USSBrainMlt():Array{
+            var btnSet:Array = ["Brain Melt"];
+            if (Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_ISMB) btnSet.push(brainMelt, "");
+            else btnSet.push(false, "Req. to be a mindbreaker.");
+            return btnSet;
+        }
+        private function USSAlrauneSS():Array{
+            var btnSet:Array = [];
+            if (player.isAlraune()) {
+                if (player.isLiliraune()){
+                    if (monster.hasCock()) btnSet.push("Tag Team", TagTeam, "");
+                    else btnSet.push("Tag Team", false, "You need to be two person against a male to use this scene.");
+                    if (monster.hasVagina()) btnSet.push("Triple Girl Fun", TreeWayRapeLiliraune, "");
+                    else btnSet.push("Triple Girl Fun", false, "You need to be two person against a female to use this scene.");
+                }
+                else {
+                    if (player.lowerBody == LowerBody.PLANT_FLOWER && monster.hasCock()) btnSet.push("Get Pollinated", alrauneGetPollinatedScene, "");	//Isn't Alraune supposed to have LowerBody.PLANT_FLOWER to even pass isAlraune?
+                    else btnSet.push("Get Pollinated", false, "Req. to have Alraune lower body and enemy with cock.");
+                    if (player.lowerBody == LowerBody.PLANT_FLOWER && monster.hasVagina()) btnSet.push("Seeding", alrauneSeedingScene, "");
+                    else btnSet.push( "Seeding", false, "Req. to have Alraune lower body and enemy with vagina.");
+                }
+                if (player.isAlraune() && player.cor >= 50 && monster.hasVagina() && !monster.hasPerk(PerkLib.UniqueNPC)) btnSet.push("Convert", Convert, "");
+                else btnSet.push("Convert", false, "You need to be a very corrupted alraune against a non unique female character to use this scene.");
+            }
+            else btnSet.push("Alraune", false, "You need to be an Alraune.");
+            return btnSet;
+        }
+        //easter bunneh
+        private function USSEastrBny():Array{
+            var btnSet:Array = ["EGGS!!"];
+            if (player.hasPerk(PerkLib.EasterBunnyBalls) && player.hasCock() && player.ballSize > 3) btnSet.push(EasterBunnyLayEggsRape, "");
+            else btnSet.push(false, "Req. to be a Easter Bunny.");
+            return btnSet;
+        }
+        private function USSTentRape():Array{
+            var btnSet:Array = ["Tentacle Rape!"];
+            if (monster.hasVagina() && (player.isKraken() || player.isScylla())) btnSet.push(TentacleRape, "");
+            else btnSet.push(false, "You need scylla or kraken tentacles to do this. Only works on female foes.");
+            return btnSet;
+        }
+        private function USSLiveDildo():Array{
+            var btnSet:Array = ["Living Dildo"];
+            if (player.hasVagina() && (((player.isKraken() || player.lowerBody == LowerBody.HYDRA) && player.tallness*3/2 > monster.tallness) || player.tallness > monster.tallness*2) ) btnSet.push(HumanDildo, "");
+            else btnSet.push(false, "To be way taller then your opponent in order to even use this scene.");
+            return btnSet;
+        }
+        private function USSJiangshiDrn():Array{
+            var btnSet:Array = [];
+            if (player.jiangshiScore() >= 20) {
+                if (monster.hasPerk(PerkLib.EnemyTrueDemon)) {
+                    if (monster.hasCock()) btnSet.push("Drain him", jiangshiDrainHimTrueDemons, "");
+                    else btnSet.push("Drain him", false, "Only male/herm true demon enemies.");
+                    if (monster.hasVagina()) btnSet.push("Drain her", jiangshiDrainHerTrueDemons, "");
+                    else btnSet.push("Drain her", false, "Only female/herm true demon enemies.");
+                }
+                if (monster is Minotaur || monster is MinotaurLord) btnSet.push("Drain him", jiangshiDrainHimMinotaurs, "");
+                else btnSet.push("Drain him", false, "Only minotaur enemies.");
+            }
+            else btnSet.push("Jiangshi", false, "You need to be a Jiangshi.");
+            return btnSet;
+        }
+        //==============================================================================================
+
+		/*
+		public function checkIfPcRapeOnVictory(re:Number):void{
+			//Repeat this for different automatic scenes and trigger and use this function as a result instead of pcUniqueSexScenesChoiceMenu when called in places where it would make senses for it to proc
+			if (player.statStore.hasBuff("Supercharged") && !monster.hasPerk(PerkLib.LightningAffinity) && !monster.hasPerk(PerkLib.LightningNature)){
+				if(!player.hasVagina() && !player.hasCock()) raijuVoltTransfer();
+				else RaijuRapeSupercharged();
+			}
+			else{
+				addButton(13, "U. Sex Scenes", pcUniqueSexScenesChoiceMenu, re).hint("Other non typical sex scenes.");
+			}
+		}
+		*/
+
+		public function RaijuRapeSupercharged():void {
+			clearOutput();
 			menu();
-			if (player.isAlraune()) {
-				if (player.isLiliraune()){
-					if (player.isLiliraune() && monster.hasCock()) addButton(0, "Tag Team", TagTeam);
-					else addButtonDisabled(0, "Tag Team", "You need to be two person against a male to use this scene.");
-					if (player.isLiliraune() && monster.hasVagina()) addButton(1, "Triple Girl Fun", TreeWayRapeLiliraune);
-					else addButtonDisabled(1, "Triple Girl Fun", "You need to be two person against a female to use this scene.");
+			outputText("As [themonster] is defeated, you lose any remaining restraint or shred of rationality you previously had, "+ player.clothedOrNaked("jumping out of your equipment and ", "") + "pouncing on your opponent with your");
+			var maleOrFemale:Number = rand(100)
+			if ((maleOrFemale < 51 && player.isHerm()) || (!player.isHerm() && player.hasCock())){ //male part
+				outputText(" plasma dripping cock already rock hard at the thought of FINALLY finding a hole to plug. Your body is overflowing with latent electricity. Your [dick] throbs in eager anticipation at the thought of pumping your victim with every volt of energy you have.\n\n" +
+						"[He] pleads for you to stop, yet in your lust-addled state, the only reply you can manage to give them is an intense stare of unbridled lust. There is nothing to hold you back now, rain would be more likely to flow back into the sky at their command.\n\n" +
+						"This poor, unfortunate soul is your long-awaited outlet, and nothing can hold you from unloading every ounce of seed into them. Your presence was warning enough, they had time to run.\n\n" +
+						"Before [he] can make any further protest, you plug yourself into [his] "+monster.assholeOrPussy()+", thrusting with wanton abandon as your charge quickly builds up within you. In a moment, you quickly begin unloading surge after surge of electricity into them. The air crackles around you with latent, lustful shocks. You can't help but growl in pleasure.\n\n" +
+						"Your poor victim's hole reflexively tightens around you as you continue bucking into them eagerly, the sheer force of your electricity causing them to spasm and quiver beneath your presence. You bring more of your weight upon them as you can feel yourself getting closer to the release that you so crave. Your eyes roll back, causing your vision to white out as you continue unloading all your charge into the make-shift lightning rod.\n\n" +
+						"[themonster] continues clenching against you as a familiar pressure and heat builds up within your loins. You let loose a loud grunt as you finally release your load into [him]. Shot after shot of raiju plasma fills up your hapless victim as you steadily regain your senses and your erection deflates.\n\n" +
+						"Finally, you slowly unplug yourself from them, cum slowly seeping out of the broken, twitching mess you've left the [monster] in. Your partner will be a fumbling mess for a while with all that lingering charge in them. Electricity courses around their form as [he] clenches [his] body, still cumming.\n\n" +
+						"You no longer have any need to stick around now that your vision is cleared and your mind is no longer stuck in a fog. You decide to head back to your camp, satisfied.");
+				if (monster.hasVagina()){
+					player.sexReward("vaginalFluids","Dick");
 				}
 				else {
-					if (player.lowerBody == LowerBody.PLANT_FLOWER && monster.hasCock()) addButton(0, "Get Pollinated", alrauneGetPollinatedScene);
-					else addButtonDisabled(0, "Get Pollinated", "Req. to have Alraune lower body and enemy with cock.");
-					if (player.lowerBody == LowerBody.PLANT_FLOWER && monster.hasVagina()) addButton(1, "Seeding", alrauneSeedingScene);
-					else addButtonDisabled(1, "Seeding", "Req. to have Alraune lower body and enemy with vagina.");
+					player.sexReward("default","Dick",true,false);
 				}
-				if (player.isAlraune() && player.cor >= 50 && monster.hasVagina() && !monster.hasPerk(PerkLib.UniqueNPC)) addButton(2, "Convert", Convert);
-				else addButtonDisabled(2, "Convert", "You need to be a very corrupted alraune against a non unique female character to use this scene.");
 			}
-			//easter bunny
-			if (player.hasPerk(PerkLib.EasterBunnyBalls) && player.hasCock() && player.ballSize > 3) addButton(3, "EGGS!!", EasterBunnyLayEggsRape);
-			else addButtonDisabled(3, "EGGS!!", "Req. to be a Easter Bunny.");
-			//Giantess and tentacle rape
-			if (monster.hasVagina() && (player.isKraken() || player.isScylla())) addButton(4, "Tentacle rape!", TentacleRape);
-			else addButtonDisabled(4, "Tentacle rape!", "You need scylla or kraken tentacles to do this. Only works on female foes.");
-			if (player.hasVagina() && (((player.isKraken() || player.lowerBody == LowerBody.HYDRA) && player.tallness*3/2 > monster.tallness) || player.tallness > monster.tallness*2) ) addButton(5, "Living Dildo", HumanDildo);
-			else addButtonDisabled(5, "Living Dildo", "To be way taller then your opponent in order to even use this scene.");
-			//jiangshi
-			if (player.jiangshiScore() >= 20) {
-				if (monster.hasPerk(PerkLib.EnemyTrueDemon)) {
-					if (monster.hasCock()) addButton(6, "Drain him", jiangshiDrainHimTrueDemons);
-					else addButtonDisabled(6, "Drain him", "Only male/herm true demon enemies.");
-					if (monster.hasVagina()) addButton(7, "Drain her", jiangshiDrainHerTrueDemons);
-					else addButtonDisabled(7, "Drain her", "Only female/herm true demon enemies.");
+			if ((maleOrFemale >= 51 && player.isHerm()) || (!player.isHerm() && player.hasVagina())){ //female part
+				outputText(" plasma dripping pussy juicing itself at the thought of FINALLY getting plugged! Your body is literally overflowing with electricity, and you're about all too eager to unload every last volt into your hapless victim.\n\n" +
+						"[He] pleads for you to stop, yet in your lust-addled state, the only reply you can manage to give them is an intense stare of unbridled lust. There is nothing to hold you back now, rain would be more likely to flow back into the sky at their command.\n\n" +
+						"This poor, unfortunate soul is your long-awaited plug, and nothing can hold you from dissipating all of your volts in them. Your presence was warning enough, they had time to run.");
+				if (monster.hasCock()){
+					outputText("Before [he] can make any further protest, you force [his] plug into your overloaded outlet pumping with wanton abandon as your charge quickly builds up within you.");
+					if(player.vaginalCapacity() < monster.cockArea(0)) outputText(" Damn, [his] plug is massive. You barely manage to force [him] in, but there's no helping it. It's that or going about a few extra hours as a lust crazed lunatic and you'd prefer the former.");
+					player.cuntChange(monster.cockArea(0), true);
+					outputText(" In a moment, you quickly begin unloading surge after surge of electricity into them. The air crackles around you with latent, lustful shocks. You can't help but growl in pleasure.\n\n" +
+							"Your poor victim's cock reflexively twitches around your walls as you continue pumping it eagerly, the sheer force of your electricity causing them to spasm and quiver beneath your presence." +
+							" You bring more of your weight upon them as you can feel yourself getting closer to the release that you so crave." +
+							" Your eyes roll back, causing your vision to white out as you continue unloading all your charge into the make-shift lightning rod.\n\n" +
+							"[themonster] continues clenching against you as a familiar pressure and heat builds up within your loins. You let loose a loud grunt as you finally achieve release, shooting all the remaining voltage into your victim's dick as a pool of raiju plasma floods beneath you." +
+							" Emptied from your overwhelming lust, you steadily regain your senses as your orgasm ebbs down.\n\n" +
+							"Finally, you slowly unplug yourself from them, cum mixed with plasma slowly seeping out of your outlet as you give one last glance at the broken, twitching mess you've left the [monster] in." +
+							" Your unwilling partner will be a fumbling mess for a while with all that lingering charge in them." +
+							" Electricity courses around their form as [he] clenches [his] body, still cumming.\n\n" +
+							"You no longer have any need to stick around now that your vision is cleared and your mind is no longer stuck in a fog. You decide to head back to your camp, satisfied.");
+					player.sexReward("cum","Vaginal");
 				}
-				if (monster is Minotaur || monster is MinotaurLord) addButton(8, "Drain him", jiangshiDrainHimMinotaurs);
-				else addButtonDisabled(8, "Drain him", "Only minotaur enemies.");
+				else {
+					outputText("Before [he] can make any further protest, you force your overloaded outlet into [his] face almost asphyxiating [him]." +
+							" Immediately you shoot your first bolt causing [his] mouth to open and [his] tongue to flail wildly right into your box." +
+							" You moan in delight as the charge quickly builds up within you. In a moment, you quickly begin unloading surge after surge of electricity into them." +
+							" The air crackles around you with latent, lustful shocks. You can't help but growl in pleasure.\n\n" +
+							"Your poor victim's overstimulated tongue just twitches around your walls, the sheer force of your electricity causing their entire body to spasm and quiver beneath your presence." +
+							" You bring more of your weight upon them as you can feel yourself getting closer to the release that you so crave." +
+							" Your eyes roll back, causing your vision to white out as you continue unloading all your charge into the make-shift lightning rod.\n\n" +
+							"[themonster] continues flailing randomly as a familiar pressure and heat builds up within your loins." +
+							" You let loose a loud grunt as you finally achieve release, shooting all the remaining voltage into your victim's body as a pool of raiju plasma floods into [his] open mouth." +
+							" Emptied from your overwhelming lust, you steadily regain your senses as your orgasm ebbs down and that of your victim heads up.\n\n" +
+							"Finally, you slowly unplug yourself from them plasma slowly dripping out of your outlet as you give one last glance at the broken, twitching mess you've left the [monster] in." +
+							" Your unfortunate partner will be a fumbling mess for a while with all that lingering charge in them, let alone you're not sure they are going to be able to speak again for a while." +
+							" Electricity courses around their form as [he] clenches [his] body, still cumming.\n\n" +
+							"You no longer have any need to stick around now that your vision is cleared and your mind is no longer stuck in a fog. You decide to head back to your camp, satisfied.");
+					player.sexReward("saliva","Vaginal");
+				}
 			}
-			addButton(13, "-1-", pcUniqueSexScenesChoiceMenu).hint("1st page of options.");
-			addButton(14, "Leave", cleanupAfterCombat);
+			player.sexReward("default");
+			player.statStore.removeBuffs('Supercharged');
+			player.lust = 0;
+			statScreenRefresh();
+			cleanupAfterCombat();
 		}
 
 		public function manticoreTailRapeScene():void {
@@ -384,7 +561,11 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 			if (player.hasCock()) outputText("While you mentaly rape your victim of everything that used to make its sense of self you push your needy cock through the now welcoming hole that is your half broken toy butt thrusting to bring yourself to new heights of pleasant delirium.");
 			outputText("\n\nYou cum green, your fluids dripping from your partner and tainting the ground beneath into a small pool of defiled fluid as you draw in whatever remains of your victim's now empty brain.");
 
-
+			if (player.buff("Brain melt").getValueOfStatBuff("int.mult") < (player.perkv1(PerkLib.MindbreakerBrain1toX)*2)){
+				player.buff("Brain melt").addStat("int.mult",0.01);
+				CoC.instance.mainView.statsView.refreshStats(CoC.instance);
+				CoC.instance.mainView.statsView.showStatUp("int");
+			}
 
 			player.sexReward("Default", "Default", true, false);
 			statScreenRefresh();
@@ -451,7 +632,7 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 			outputText("As your opponent falls defeated on the ground, it dawns on your prey is in desperate need of some punishment. " +
 					"She wanted to rape you? Well, you're going to open her vocabulary to an entirely new definiton of the term.\n\n" +
 					"You pick up the defeated woman, easily lifting her by the leg with one of your tentacles as she's helplessly held upside down.\n\n" +
-					"She quickly cries out in protest, <i>”Wait, what are you doing?! Stop!”</i>\n\n" +
+					"She quickly cries out in protest, <i>\"Wait, what are you doing?! Stop!\"</i>\n\n" +
 					"You pull her to you, smiling widely as you begin to return her question with mockery.\n\n" +
 					"Were she not so eager to fuck you just a second ago? Is this not what she wanted? It's not like she's going to back now, is she?" +
 					" Not that she has a choice in this matter anymore.\n\n" +
@@ -493,7 +674,7 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 					"[monster he] eyes widen in terror as [monster he] realizes that from predator [monster he] became the prey. You grab that ass and smack it a few times for good measure forcing a moan or two out of your partner before grabbing your victims tight as you prepare for the mating." +
 					" [themonster] eyes are almost begging for mercy by now but you’re too far gone in your lust to care.\n\n");
 			outputText("You gasp in delight as your bunny cock slides into that sweet hole the walls tighten around you. Using your powerful bunny legs you begin to jump in and out of this rabbit hole your unwilling partner groaning as you use his/her/its backside to sate your bottomless lust.\n\n");
-			outputText("<i>”Eggs…!!!! EGGS!!!”</i> You finally scream, eye crossed in delight as your two/four heavy eggs finally slide out of your balls, moving through your urethra and into your victim's spacious bowels.\n\n");
+			outputText("<i>\"Eggs…!!!! EGGS!!!\"</i> You finally scream, eye crossed in delight as your two/four heavy eggs finally slide out of your balls, moving through your urethra and into your victim's spacious bowels.\n\n");
 			outputText("Your [cock] still hard, you keep bucking inside -opponent- name relentlessly until you cum not once not twice but three times, tongues out, caring little for the destroyed hole of your partner. Only caring for your own satisfaction you stop fucking only once [themonster] faint from exhaustion. " +
 					"Well you still got plenty of energy left but might as well fuck something that's awake. You unplug your still hard cock from [monster his] asshole gasping as your cock sensitive flesh is exposed to the air again." +
 					" Without anything to plug it the excessive load of cum stashed in your victim's stomach surges out and dye the ground beneath [monster his] white. For good measure you clean your dripping penis on [themonster] ass and hops off back to camp.\n\n");

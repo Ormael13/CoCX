@@ -6,6 +6,7 @@ package classes.Scenes.Areas.Beach
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+    import classes.display.SpriteDb;
 
 	public class DemonPackBeachScene extends BaseContent
 	{
@@ -15,7 +16,7 @@ package classes.Scenes.Areas.Beach
 		}
 
 public function demonspackEncounter():void {
-	spriteSelect(46);
+	spriteSelect(SpriteDb.s_oasis_demons);
 	clearOutput();
 	outputText("You wander in the beach for what seems like hours, sweating profusely in the sweltering heat. Eventually you come across a small bay surrounded by scrappy trees and shrubs. It would be foolish not to take this opportunity to rest for a moment and paddle your [legs] in the cooling water, so you settle into what little shade you can find for a quick break.\n\n");
 	outputText("After a while sitting in the sparse shade provided by one of the bushes around the bay you see figures shimmering into view across the beach sands.  As you watch the figures they grow more defined and more numerous until finally a group of vaguely humanoid shapes emerges from the heat haze.  The closer these figures become the more detail they take on, and as they near the edge of your small bay you are able to make out most of their features.\n\n");
@@ -28,13 +29,13 @@ public function demonspackEncounter():void {
 
 private function chooseToFight():void{
 	startCombat(new DemonPackBeach());
-	spriteSelect(46);
+	spriteSelect(SpriteDb.s_oasis_demons);
 	playerMenu();
 }
 
 private function beachRunAway():void {
 	clearOutput();
-	spriteSelect(46);
+	spriteSelect(SpriteDb.s_oasis_demons);
 	//Run away successfully if fast enough.  160 speed = autosuccess.
 	if(player.spe > 30 && player.spe/2 > rand(80)) {
 		outputText("You bolt out from under your bush and scramble away over the sand. Before long the swishing sounds of pursuit fade away and looking back you see the few demons with the gusto to follow you tramping back to the bay.");

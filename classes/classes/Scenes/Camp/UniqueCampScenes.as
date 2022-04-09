@@ -6,6 +6,7 @@ package classes.Scenes.Camp
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+    import classes.display.SpriteDb;
 	
 	public class UniqueCampScenes extends BaseContent
 	{
@@ -38,14 +39,14 @@ public function playwithyourplantdaughters():void
 	clearOutput();
 	outputText("You decide to set some time aside to play with your sprouts. You tell them as much while you pull water toys you bought in Tel'Adre out of your pack. The happiness on their little faces warms your heart.\n\n");
 	outputText("\"<i>Wow, really mom? You are the best!</i>\"\n\n");
-	outputText("Your daughters all cheer up as they pick up the toys and rush to the rivers to fill them up. Soon you’re all splashing each other. The experience is refreshing and soothing. You never thought you would appreciate having children this much. Perhaps parenting comes included in the whole “being a child of a fertility goddess” deal, you ponder, before being splashed in the face by one of your daughters, breaking you out of your reverie, and dragging you back into the game.\n\n");
+	outputText("Your daughters all cheer up as they pick up the toys and rush to the rivers to fill them up. Soon you’re all splashing each other. The experience is refreshing and soothing. You never thought you would appreciate having children this much. Perhaps parenting comes included in the whole \"being a child of a fertility goddess\" deal, you ponder, before being splashed in the face by one of your daughters, breaking you out of your reverie, and dragging you back into the game.\n\n");
 	doNext(camp.returnToCampUseOneHour);
 }
 
 public function playsRathazulAndSoulgemScene():void
 {
 	clearOutput();
-	spriteSelect(49);
+	spriteSelect(SpriteDb.s_rathazul);
 	outputText("As you pass by Rathazul considers you, then asks \"<i>May I ask what you’re planning to do with that soul gem of yours? Because yes I know exactly what this dangerous crystal you’re carrying is</i>\"\n\n");
 	outputText("When you mention you want to create a golem, Rathazul seems to lose himself in thought, as if trying to remember something.\n\n");
 	outputText("\"<i>Years ago, when I was younger, I knew a woman who specialised in such constructs. She was obsessed with creating the perfect servant. However when the demons came, hungry for power, she embraced them instead of fleeing and became one of those aberrations. Her laboratory is likely still located in the same area as before - hidden somewhere in the place now called the blighted ridges. If you go there, be careful. ");

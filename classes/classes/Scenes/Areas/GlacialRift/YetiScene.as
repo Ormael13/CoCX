@@ -5,13 +5,13 @@ import classes.*;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.UniqueSexScenes;
+import classes.Items.Armors.LustyMaidensArmor;
+import classes.Items.Armors.SuccubusArmor;
+import classes.Scenes.SceneLib;
 import classes.Scenes.SceneLib;
 
 public class YetiScene extends BaseContent
 	{
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-
 		public function YetiScene()
 		{
 		}
@@ -123,8 +123,12 @@ public class YetiScene extends BaseContent
 					addButton(1, "RideHisCock", rideYetisCock);
 				}
 			}
-			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
-			addButton(14, "Leave", cleanupAfterCombat);
+			if (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armor == armors.LMARMOR || player.armor == armors.S_ARMOR)) {
+				if (player.armor == armors.S_ARMOR) addButton(2, "B.Titfuck", (player.armor as SuccubusArmor).succubusPaizuri);
+				else addButton(2, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
+			}
+			SceneLib.uniqueSexScene.pcUSSPreChecksV2(winAgainstYeti);
+						addButton(14, "Leave", cleanupAfterCombat);
 		}
 
 		private function fuckYetiInTheAss():void {

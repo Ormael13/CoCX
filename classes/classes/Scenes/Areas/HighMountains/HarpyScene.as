@@ -7,13 +7,11 @@ import classes.*;
 import classes.BodyParts.Face;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 
 public class HarpyScene extends BaseContent
 	{
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-
-		public function HarpyScene()
+				public function HarpyScene()
 		{
 		}
 
@@ -48,9 +46,9 @@ public class HarpyScene extends BaseContent
 					if (player.clitLength >= 3.5) addButton(4, "Clit Fuck", clitFuckAHarpy).hint("Fuck the harpy with your big clit.");
 				}
 				if (player.canOvipositSpider() && (player.faceType == Face.SNAKE_FANGS || player.faceType == Face.SPIDER_FANGS)) addButton(5, "Lay Eggs", spoidahsLegEggsInHarpeis).hint("Use your ovipositor to lay the eggs into harpy.");
-				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 				addButton(14, "Leave", cleanupAfterCombat);
-			}
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(harpyVictoryuuuuu);
+							}
 			//Not horny?  Iz over
 			else cleanupAfterCombat();
 		}

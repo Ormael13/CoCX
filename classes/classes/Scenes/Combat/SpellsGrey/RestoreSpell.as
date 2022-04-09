@@ -6,11 +6,11 @@ import classes.StatusEffects;
 public class RestoreSpell extends AbstractGreySpell {
 	public function RestoreSpell() {
 		super(
-				"Restore",
-				"Heal for a decent amount of health and regenerate a little over time.  ",
-				TARGET_SELF,
-				TIMING_LASTING,
-				[TAG_HEALING]
+			"Restore",
+			"Heal for a decent amount of health and regenerate a little over time.  ",
+			TARGET_SELF,
+			TIMING_LASTING,
+			[TAG_HEALING]
 		);
 		baseManaCost = 80;
 	}
@@ -28,7 +28,9 @@ public class RestoreSpell extends AbstractGreySpell {
 	}
 	
 	override public function calcCooldown():int {
-		return 8;
+		var calcC:int = 8;
+		if (player.weapon == weapons.U_STAFF) calcC -= 2;
+		return calcC;
 	}
 	
 	public function calcDuration():int {

@@ -10,7 +10,7 @@ package classes.Scenes.NPCs
 	import classes.CoC;
 	import classes.Scenes.Monsters.OniIncubus;
 	import classes.Scenes.SceneLib;
-	import classes.display.SpriteDb;
+    import classes.display.SpriteDb;
 
 use namespace CoC;
 	
@@ -26,10 +26,10 @@ public function EnterOfTheChiChi():void {
 	outputText("You step into the arena once more, but this time your opponent is slightly different. While of small stature like other mice you’ve met in He’Xin’Dao, this mouse morph has pinkish red hair and oriental clothes. She wears a pair of spiked gloves, her fists are clenched slightly at her sides, and she clearly sports a pair of C cup breasts under her clothes. The announcer screams out the participant's names as usual, their enthusiastic introductions is something you’ve grown used to.\n\n");
 	outputText("\"<i>In the left corner, coming from another world, [name], Champion of Ingnam! And in the right corner, from a land far away to the east, the martial arts master, Chi Chi of the four winds!</i>\"\n\n");
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 0) {
-		outputText("Hey that's the waitress of the exotic food restaurant. Chi Chi adopts a battle stance as she catches fire, turning into a living inferno.\n\n");
-		outputText("\"<i>Get ready for this one dishes will be EXTRA spicy! You prefer inferno or Hell? Because I’m about to leave you with fifth-degree burns!!!</i>\"");
+		outputText("You recognize her from the exotic restaraunt here in town. Chi Chi adopts a battle stance as she catches fire, turning into a living inferno.\n\n");
+		outputText("\"<i>Today's dishes will be EXTRA spicy. I hope you're used to the heat [name], because I’m about to leave you with fifth-degree burns!!!</i>\"");
 	}
-	else outputText("Chi Chi, as it’s obviously her name, adopts a battle stance. Her fists, tail and legs suddenly light aflame! Gosh a fire mouse? Something tells you this is going to hurt.");
+	else outputText("Chi Chi, as it’s obviously her name, adopts a battle stance. Her fists, tail and legs suddenly light aflame. You blink in surprise as the heat washes over you. Something tells you this is going to hurt.");
 	flags[kFLAGS.CHI_CHI_AFFECTION] = 0;
 	flags[kFLAGS.CHI_CHI_LVL_UP] = 1;
 	startCombat(new ChiChi());
@@ -51,12 +51,12 @@ public function LostFirstFight():void {
 	spriteSelect(SpriteDb.s_chichi);
 	clearOutput();
 	if (player.HP < 1) {
-		outputText("\"<i>Is that all you’ve got? How dare you even call yourself a champion? You barely know how to fight! You tried well, albeit, not well enough. If you intend to actually call yourself a warrior, perhaps someday you should seek me out in town, I could teach you...  if you have knowledge of the basics that is, I don’t teach my skill to just anyone.</i>\"\n\n");
+		outputText("\"<i>Is that all you’ve got? How dare you even call yourself a champion? You barely know how to fight! You tried but that was <i>not</i> enough. If you intend to call yourself a true warrior, you should seek me out in town. I could teach you...  if you already know the basics. I don’t have time for complete novices.</i>\"\n\n");
 		outputText("The mouse girl leaves you half conscious on the arena sand as the medics come to your rescue.\n\n");
 	}
 	else {
 		outputText("Declared the winner, the burning mouse approaches you. She looks angry and it's likely because you forfeited.\n\n");
-		outputText("\"<i>I’m disappointed. You pretend to be a champion, yet you seem to consider battles a kid’s game. Do you have any idea what would have happened in a real fight? You tried well, albeit, not well enough because obviously you cowered down. I’m interested in you however, so perhaps someday you should seek me out in town. I could teach you how to fight better than that...  if you have knowledge of the basics that is, I don’t teach my skill to just anyone.</i>\"\n\n");
+		outputText("\"<i>I’m disappointed. You pretend to be a champion, yet you seem to consider battles a kid’s game. Do you have any idea what would have happened in a real fight? No demon would back off like this. You seem to have some potential at least, so perhaps someday you should seek me out. I could teach you...  if you already know the basics. I don’t have time for complete novices</i>\"\n\n");
 		outputText("The fiery mouse girl leaves you there as she heads out of the ring.\n\n");
 	}
 	flags[kFLAGS.CHI_CHI_AFFECTION] = 20;
@@ -102,7 +102,7 @@ public function WonSecondFightYes():void {
 		outputText("\"<i>I didn’t get to appreciate it during your training, I hope you will allow me to see what I was missing out on.</i>\"\n\n");
 		outputText("You return the feeling by slowly fingering her pussy, her wetness soon coating your fingers. Once the both of you are suitably aroused, you begin to align your cock with her mouse pussy. Still remembering Jojo’s vow of chastity, you ask her if this really what she wants.\n\n");
 		outputText("\"<i>I’m a monk only by name and trade, not by philosophy. It’s a part of me I’m willing to give up to you... if you would accept to take responsibility.</i>\"\n\n");
-		outputText("Of course you would. You had made up your mind the moment you started nursing her and won’t go back on your choice. Chi Chi sighs in relief as you slowly insert your [cock] into her waiting pussy. She hugs you tight as you gently start to piston in and out of her. Chi Chi seems to enjoy herself and makes it obvious as she kisses you and draw her tongue in. The sex is calm and soothing unlike most of that you have experienced so far with Mareth denizens, ");
+		outputText("Of course you would. You had made up your mind the moment you started nursing her and won’t go back on your choice. Chi Chi sighs in relief as you slowly insert your [cock] into her waiting pussy. She hugs you tight as you gently start to piston in and out of her. Chi Chi seems to enjoy herself and makes it obvious as she kisses you and draws her tongue in. The sex is calm and soothing unlike most of that you have experienced so far with Mareth denizens, ");
 		outputText("who tend to prefer different trends or wilder kinks, making this slow and vanilla experience something you cherish. Right now, you take great care not to hurt her, as she has not yet fully recovered from her battle wounds, Chi Chi only breaks the kiss in order to whisper a sweet nothing to you.\n\n");
 		outputText("\"<i>When I’m close to you, I feel safe and warm... like a relaxing bath in the hotsprings of my homeland. I hope we can stay like this for a while.</i>\"\n\n");
 		outputText("You slowly keep working her hole, the mouse moaning every now and then, panting as her body prepares for climax. You are not so far from yours either as you feel your cock twitching and soon you cum in Chi Chi’s pussy, the mouse reaching her peak at about the same time with a delighted squeak. The two of you bask in the afterglow for a moment and you stay locked with Chi Chi kissing and whispering sweet nothings to you for several minutes. Eventually time runs out and you prepare to leave, but Chi Chi weakly holds your arm.\n\n");
@@ -149,8 +149,8 @@ public function WonSparringFight():void {
 	else outputText("the remaining greater demons");
 	outputText(".</i>\"\n\nYou nod, saying that she did good to. Chi Chi blushes and babbles something akin to a thank you.\n\n");
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] < 4) {
-		outputText(" She then realises what she is doing and vehemently shakes her head.\n\n");
-		outputText("\"<i>It's not like I wanted to be praised! Yeah, as if! Even after all this time, your stance is still shaky.. BAAAKA!”</i>\"\n\n");
+		outputText("She then realises what she is doing and vehemently shakes her head.\n\n");
+		outputText("\"<i>It's not like I wanted praise you! Yeah, as if! Even after all this time, your stance is still shaky.. BAAAKA!\"</i>\"\n\n");
 		outputText("Chi Chi kicks a rock away in anger and heads back to her training ground.\n\n");
 	}
 	if (flags[kFLAGS.CHI_CHI_LVL_UP] < 5) {
@@ -206,6 +206,7 @@ public function MeetingChiChiInHeXinDao():void {
 		if (flags[kFLAGS.TIMES_TRAINED_WITH_JOJO] < 16 && player.findPerk(PerkLib.Enlightened) < 0) {
 			outputText("\"<i>Sadly, you barely have an understanding of the discipline to begin with. You will need to train with a less experienced master first. I heard a mouse fancying himself a monk wanders the woods, I suggest you seek him out and learn what you can from him first. Once you are done, come back to me.</i>\"\n\n");
 			doNext(camp.returnToCampUseOneHour);
+            return;
 		}
 		else {
 			outputText("\"<i>I see you’ve had some novice training in the art of the lotus. Not bad but the lotus were pacifists to begin with, what I’m about to teach you is an entirely new discipline, forged in the fire of the demon war. Are you ready?</i>\"\n\n");
@@ -575,7 +576,7 @@ public function chichiSex():void {
 	spriteSelect(SpriteDb.s_chichi);
 	clearOutput();
 	if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 3) {
-		outputText("Chi Chi blushes then gives a categorical “No”, causing you to ask her why.\n\n");
+		outputText("Chi Chi blushes then gives a categorical \"No\", causing you to ask her why.\n\n");
 		outputText("\"<i>Sorry, but I won’t. While the first time was fine, I want our relationship to proceed to the next level before we truly move to that step. And yes, unlike most monks, I can actually marry. Also, you would need to show your strength by defeating an oni first, I ain't going out with a nobody… well, at least not officially.</i>\"\n\n");
 		menu();
 		if (player.hasStatusEffect(StatusEffects.ChiChiWeddingS)) addButton(1, "Wedding", chichiSex1);
@@ -586,8 +587,8 @@ public function chichiSex():void {
 	else {
 		outputText("\"<i>That does not count! Arghhh be gone, I got training to do!</i>\"\n\n");
 		menu();
-		//if (model.time.hours > 18) addButton(0, "Until dawn", chichiSexUntilDawn);
-		//else addButtonDisabled(0, "Until dawn", "It's too early for this. Wait till 7 pm.");
+		if (model.time.hours > 18) addButton(0, "Until dawn", chichiSexUntilDawn);
+		else addButtonDisabled(0, "Until dawn", "It's too early for this. Wait till 7 pm.");
 		if (player.hasCock()) addButton(1, "Gentle fuck", chichiSexGentleFuck);
 		else addButtonDisabled(1, "Gentle fuck", "Get a dick bro.");
 		if (player.hasVagina()) addButton(2, "Hinezumi Yuri", chichiSexHinezumiYuri);
@@ -626,7 +627,7 @@ public function chichiSex3():void {
 	spriteSelect(SpriteDb.s_chichi);
 	clearOutput();
 	outputText("You suddenly drop to your knees before Chi Chi, who gives you a confused stare as you open a small box containing the ruby ring. This begins in the same way as every love tale. You gather the courage and, to her astonishment, propose right then and there.\n\n");
-	outputText("\"<i>A..are you serious???!!! You idiot! Y..you're...really?!”</i>\"\n\n");
+	outputText("\"<i>A..are you serious???!!! You idiot! Y..you're...really?!\"</i>\"\n\n");
 	outputText("Chi Chi is at a loss for words. It takes her an entire minute to come back from the shock of your proposal, but she finally answers in the clearest manner she can.\n\n");
 	outputText("\"<i>Yes…I will.</i>\"\n\n");
 	player.destroyItems(jewelries.ENDGRNG, 1);

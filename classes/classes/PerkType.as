@@ -390,8 +390,8 @@ public class PerkType extends BaseContent
 				fn  : function(player:Player):Boolean {
 					return player.maxPeripheralNervSysMutations() > 0;
 				},
-				text: "Free Peripheral NervSys Mutation Slot",
-				type: "peripheralnervsysmutation"
+				text: "Free NervSys Mutation Slot",
+				type: "nervsysmutation"
 			});
 			return this;
 		}
@@ -422,6 +422,16 @@ public class PerkType extends BaseContent
 				},
 				text: "Free Parathyroid Gland Mutation Slot",
 				type: "parathyroidglandmutation"
+			});
+			return this;
+		}
+		public function requireAdaptationsMutationSlot():PerkType {
+			requirements.push({
+				fn  : function(player:Player):Boolean {
+					return player.maxAdaptationsMutations() > 0;
+				},
+				text: "Free Adaptations Mutation Slot",
+				type: "adaptationsmutation"
 			});
 			return this;
 		}

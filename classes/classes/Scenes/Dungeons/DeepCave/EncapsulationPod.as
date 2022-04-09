@@ -59,7 +59,7 @@ import classes.internals.*;
 				if(player.cockTotal() > 1) {
 					outputText("Your other ");
 					if(player.cockTotal() == 2) outputText(cockDescript(1) + " gets the same treatment, and soon both of your [cocks] are quite happy to be here.  ");
-					else outputText(multiCockDescriptLight() + " get the same treatment and soon feel quite happy to be here.  ");
+					else outputText(player.multiCockDescriptLight() + " get the same treatment and soon feel quite happy to be here.  ");
 				}
 				if(player.hasVagina()) {
 					outputText("The violation of your [vagina] is swift and painless.  The fungus' slippery lubricants make it quite easy for it to slip inside, and you find your [vagina] engorging with pleasure in spite of your need to escape.  The tentacle folds up so that it can rub its stalk over your [clit], ");

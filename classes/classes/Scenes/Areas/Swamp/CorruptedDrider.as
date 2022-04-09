@@ -111,7 +111,6 @@ import classes.internals.*;
 
 		override protected function performCombatAction():void
 		{
-			game.spriteSelect(77);
 			if (lust > 70 && rand(4) == 0) driderMasturbate();
 			//1/4 chance of silence if pc knows spells
 			else if (player.hasSpells() && !player.hasStatusEffect(StatusEffects.WebSilence) && rand(4) == 0) {

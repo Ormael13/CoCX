@@ -10,13 +10,12 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.SceneLib;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 public class GoblinAssassinScene extends BaseContent
 	{
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		
+				
 		public function GoblinAssassinScene()
 		{
 		}
@@ -124,7 +123,7 @@ public class GoblinAssassinScene extends BaseContent
 				outputText("\n\nThe goblin assassin watches impassively for a moment, but as your need intensifies, her attitude softens while your member hardens.  \"<i>Oh, I think I’m gonna regret this, but ");
 				if(player.cockTotal() == 1) outputText("that thing");
 				else outputText("those things");
-				outputText(" look mighty tasty.  You don’t mind if I sample just a little bit of your seed do you?</i>\"  The sapphire-maned beauty kneels down next to you and lets her tiny, delicate digits dance across the underside of [oneCock], drawing a lurid moan from your lips as she wonders out loud, “I don’t hear a no, " + player.mf("stud","sexy") + ".  That’s good... I’m just going to take a little bit of cum... just a few squirts.  Surely a ");
+				outputText(" look mighty tasty.  You don’t mind if I sample just a little bit of your seed do you?</i>\"  The sapphire-maned beauty kneels down next to you and lets her tiny, delicate digits dance across the underside of [oneCock], drawing a lurid moan from your lips as she wonders out loud, \"I don’t hear a no, " + player.mf("stud","sexy") + ".  That’s good... I’m just going to take a little bit of cum... just a few squirts.  Surely a ");
 				if(player.tallness >= 60) outputText("big, ");
 				outputText(player.mf("strapping young man","sexy breeder") + " will have enough jizz to pay for " + player.mf("his","her") + " trespass?</i>\"");
 				outputText("  Those delightful, dancing fingers pirouette down to your ");
@@ -167,7 +166,7 @@ public class GoblinAssassinScene extends BaseContent
 			{
 				x = player.biggestCockIndex();
 				outputText("You tear through your [armor] in a rush, anything to release [eachCock] from its hellish confinement.  You’re so aroused, so horny.  Any passing thoughts of modesty are immediately discarded and forgotten, washed away under the wave of your all-consuming lust as your fingers slide home around [oneCock] and begin to play with the turgid tool.  You immediately buck from the sensation of incredible, pent-up need, nearly cumming on the spot.  Looking up, you meet the emerald-skinned woman’s eyes pleadingly.");
-				outputText("\n\nThe assassin sighs and grumbles, \"<i>Another one with a fucking tree-trunk for a cock.</i>\"  She begrudgingly slips out of her straps, perky, dark-green nipples popping free from their confinement to jut proudly from her chest.  “The downside of being a goblin,” explains the athletic green-skinned beauty, \'<i>is that around a dick like that... a heaving, pulsating tower of cock-flesh like that... I’ve just gotta TRY it.</i>\"  Now nude, your captor saunters up, wide hips shaking from side to side with every step.  \"<i>Being a size-queen is suffering,</i>\" she finishes with a wry smile.");
+				outputText("\n\nThe assassin sighs and grumbles, \"<i>Another one with a fucking tree-trunk for a cock.</i>\"  She begrudgingly slips out of her straps, perky, dark-green nipples popping free from their confinement to jut proudly from her chest.  \"The downside of being a goblin,\" explains the athletic green-skinned beauty, \'<i>is that around a dick like that... a heaving, pulsating tower of cock-flesh like that... I’ve just gotta TRY it.</i>\"  Now nude, your captor saunters up, wide hips shaking from side to side with every step.  \"<i>Being a size-queen is suffering,</i>\" she finishes with a wry smile.");
 				outputText("\n\nYou watch her tirade with confused indifference, comprehending little beyond the petite slut’s desire to mount your member.  Tracing your hands over the pulsating veins on your " + cockDescript(x) + ", your body continues on autopilot, masturbating hard and fast for the emerald beauty as she climbs atop you.  Her juicy gash spreads over the bulge of your urethra as the goblin sinks down atop you, her legs splaying to the sides obscenely.  She commands, \"<i>Hands off bub.  You lost to a goblin, and that means you get to be a dad, whether you want to or not.</i>\"");
 				outputText("\n\nThe puffy emerald curtains drape your dick in elastic goblin pussy and brush your feverishly pumping fingers away.  Your captor lets a lewd moan slip through her lips as she begins grinding along your mammoth pole, dragging dark-hued genetalia back and forth on your massive dong.  A perky, hard little clit pops out of the top of the goblin’s glittery pussy-folds, visibly twitching in a display of supreme enjoyment.  Driven by your own insatiable desire, you shift under her, trying to slide your " + cockDescript(x) + " even faster through her pussy.");
 				if(player.biggestCockLength() > player.tallness/2) outputText("  Your incredibly long phallus blocks your view of the sultry goblin, and you never see the blow coming.");
@@ -230,7 +229,7 @@ public class GoblinAssassinScene extends BaseContent
 		public function gobboAssassinRapeIntro2():void {
 			spriteSelect(SpriteDb.s_goblinAssassin);
 			clearOutput();
-			outputText("The adventurers falls on the ground, desperately trying to regain their composure but ultimately caving in to the exhaustion of defeat. The leather belt that was once wrapped around their pillowy breasts now hangs unfastened around waist, the syringes once adorning it now littered around them. Some of shattered needles emits a sweet-smelling vapor that soon reaches their nose, causing girls to blush furiously as lust begins to overcome their senses. Still most of them somehow managed to run away leaving one most affected by lustfull vapor.");
+			outputText("The adventurers fall on the ground, desperately trying to regain their composure but ultimately caving into the exhaustion of defeat. The leather belt wrapped around their pillowy breasts now hangs unfastened around their waist. The syringes once adorning it are now littered around them. Several shattered needles emit a sweet-smelling vapor that soon reaches their nose, causing the goblins to blush fervently as lust quickly overcomes their senses. Still, most of them manage to run away, leaving only a single goblin that has quaffed too much of the vapor.");
 			dynStats("lus", 20);
 			gobboAssassinRapeIntro();
 		}
@@ -298,9 +297,9 @@ public class GoblinAssassinScene extends BaseContent
 				if (player.canOvipositSpider()) addButton(8, "Lay Eggs", eggs);
 				if (mindbreak != null) addButton(9, "Mind break", mindbreak);
 				addButton(10, "Kill", killGoblin);
-				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 				addButton(14, "Leave", cleanupAfterCombat);
-			}
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(gobboAssassinRapeIntro);
+							}
 			else if (feeder!=null || eggs!=null) {
 				outputText("\n\n<b>You aren't horny enough to rape her, but ");
 				if (feeder!=null) outputText("your nipples ache with the desire to feed her your milk.  Do you feed her milk or leave?</b>");

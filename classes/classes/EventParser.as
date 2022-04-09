@@ -29,7 +29,7 @@ public class EventParser {
     public static function playerMenu():void {
         CoC.instance.mainViewManager.updateCharviewIfNeeded();
         if (!CoC.instance.inCombat) {
-            CoC.instance.spriteSelect(-1);
+            CoC.instance.spriteSelect(null);
         }
         CoC.instance.mainView.setMenuButton(MainView.MENU_NEW_MAIN, "New Game", CoC.instance.charCreation.newGameGo);
         CoC.instance.mainView.nameBox.visible = false;
@@ -84,15 +84,7 @@ public class EventParser {
             gameOverMenuOverride();
         }
         CoC.instance.inCombat = false;
-        DungeonAbstractContent.dungeonLoc = 0; //Replaces inDungeon = false;
-		if (CoC.instance.player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) {
-			if (CoC.instance.player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) CoC.instance.player.removeStatusEffect(StatusEffects.ThereCouldBeOnlyOne);
-			if (CoC.instance.flags[kFLAGS.EBON_LABYRINTH_RECORD] < CoC.instance.player.statusEffectv1(StatusEffects.EbonLabyrinthB)) CoC.instance.flags[kFLAGS.EBON_LABYRINTH_RECORD] = CoC.instance.player.statusEffectv1(StatusEffects.EbonLabyrinthB);
-			CoC.instance.player.removeStatusEffect(StatusEffects.EbonLabyrinthA);
-			CoC.instance.player.removeStatusEffect(StatusEffects.EbonLabyrinthB);
-			if (CoC.instance.player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss1)) CoC.instance.player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss1);
-			if (CoC.instance.player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss2)) CoC.instance.player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss2);
-		}
+		DungeonAbstractContent.inDungeon = false;
 		if (CoC.instance.player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
 			if (CoC.instance.flags[kFLAGS.NEISA_FOLLOWER] == 3) CoC.instance.flags[kFLAGS.PLAYER_COMPANION_1] = "";
 			if (CoC.instance.player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) CoC.instance.player.removeStatusEffect(StatusEffects.ThereCouldBeOnlyOne);
@@ -367,7 +359,7 @@ public class EventParser {
             return true;
         }
         //Unequip shield if you're wielding a large weapon.
-        if (((player.weaponSpecials("Large") && !player.hasPerk(PerkLib.GigantGrip)) || player.weaponSpecials("Dual") || player.weaponSpecials("Dual Large")) && player.shield != ShieldLib.NOTHING) {
+        if (((player.weaponSpecials("Large") && !player.hasPerk(PerkLib.GigantGrip)) || player.weaponSpecials("Dual") || player.weaponSpecials("Dual Large") || player.weapon == CoC.instance.weapons.DAISHO) && player.shield != ShieldLib.NOTHING) {
             EngineCore.outputText("Your current weapon requires the use of two hands. As such, your shield has been unequipped automatically. ");
             SceneLib.inventory.takeItem(player.setShield(ShieldLib.NOTHING), playerMenu);
             return true;

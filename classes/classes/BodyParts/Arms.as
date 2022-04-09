@@ -76,8 +76,9 @@ public class Arms extends BodyPart {
 
 	public static const GARGOYLE:int = 9;
 	EnumValue.add(Types, GARGOYLE, "GARGOYLE", {
-		name:"gargoyle", armSlam: true,
-		appearanceDesc: "Your [gargoylematerial] arms end in stone sharp clawed hands."
+		name:"gargoyle",
+		appearanceDesc: "Your [gargoylematerial] arms end in stone sharp clawed hands.",
+		claw: true
 	});
 
 	public static const WOLF:int = 10;
@@ -182,7 +183,7 @@ public class Arms extends BodyPart {
 	EnumValue.add(Types, GARGOYLE_2, "GARGOYLE_2", {
 		name:"gargoyle",
 		appearanceDesc: "Your [gargoylematerial] arms end in normal human like hands.",
-		claw: true
+		armSlam: true
 	});
 
 	public static const CAT:int = 25;

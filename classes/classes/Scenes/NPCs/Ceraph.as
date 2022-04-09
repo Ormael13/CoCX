@@ -6,6 +6,7 @@ import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 public class Ceraph extends Monster
 	{
@@ -14,7 +15,7 @@ public class Ceraph extends Monster
 //[SPECIAL 1] – Ubercharge!
 		private function ceraphSpecial1():void
 		{
-			game.spriteSelect(7);
+			game.spriteSelect(SpriteDb.s_ceraph);
 			if (!hasStatusEffect(StatusEffects.Uber)) {
 				if (rand(2) == 0) {
 					outputText("Ceraph winks and says, \"<i>Have you ever cum without being touched? You will.</i>\"\n\n");

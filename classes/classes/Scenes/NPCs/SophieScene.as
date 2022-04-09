@@ -3,6 +3,7 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.HighMountains.Harpy;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 public class SophieScene extends BaseContent implements TimeAwareInterface {
 
@@ -21,9 +22,14 @@ public class SophieScene extends BaseContent implements TimeAwareInterface {
 		//Implementation of TimeAwareInterface
 		public function timeChange():Boolean
 		{
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] > 0) return false; //Nothing can happen if she's been kicked out or disappeared off into the mountains
+			if (flags[kFLAGS.SOPHIE_DISABLED] > 0) return false; //Nothing can happen if she's been kicked out or disappeared off into the mountains
 			var needNext:Boolean = false;
 			checkedSophie = 0;
+            //first of all, check her leaving
+            if (flags[kFLAGS.SOPHIE_FOLLOWER_IRRITATION] == 8) { //you fucked up -> she leaves
+                sophieFollowerScene.sophieLeft();
+                return true;
+            }
 			pregnancy.pregnancyAdvance();
 			if (flags[kFLAGS.SOPHIE_ANGRY_AT_PC_COUNTER] > 0) flags[kFLAGS.SOPHIE_ANGRY_AT_PC_COUNTER]--;
 			if (flags[kFLAGS.SOPHIES_DAUGHTERS_DEBIMBOED] == 1 && sophieFollowerScene.sophieFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] == 0) {
@@ -167,9 +173,9 @@ Lasts 4-8 hours.
 		}
 
 		public function sophieAtCamp():Boolean { //Whether she's a bimbo or not
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00283] > 0) return false;
+			if (flags[kFLAGS.SOPHIE_DISABLED] > 0) return false;
 			if (flags[kFLAGS.FOLLOWER_AT_FARM_SOPHIE] != 0) return false;
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] > 0) return true;
+			if (flags[kFLAGS.SOPHIE_BIMBO_ACCEPTED] > 0) return true;
 			if (flags[kFLAGS.SOPHIE_RECRUITED_PURE] > 0) return true;
 			return false;
 		}
@@ -269,6 +275,7 @@ public function meetSophieRepeat():void {
 	}
 	//(Has dick)
 	if(player.cockTotal() > 0) {
+        var milk:Function = null;
 		//(Random Rape)
 		if(rand(2) == 0 && !pregnancy.isPregnant) {
 			outputText("During your exploration of the mountains you wind up passing close to the harpy nests again, and Sophie flaps her way over to you.  Her breasts jiggle pleasantly and she hooks her talons through the belt you use to hold your pouches before you can stop her.  The force of her flapping wings pulls you off the mountain, suspending you hundreds of feet above the ground as she flies you back towards her nest.  ");
@@ -299,6 +306,10 @@ public function meetSophieRepeat():void {
 			if (pregnancy.isPregnant) outputText("I still haven't laid your egg, but if you want it might be fun to take care of your naughty little urges.");
 			else outputText("I already laid your last egg, so why don't you come over her and give momma some sugar?");
 			outputText("</i>\"  Her thighs spread apart, inviting you back for more of her pleasure.\n\n");
+            if (player.biggestLactation() >= 1) {
+                outputText("\"<i>Or maybe you wish to climb over here and share some of your milk?  I've worked up quite a craving for cute girl-milk.</i>\"\n\n");
+                milk = repeatBreastFeeding;
+            }
 		}
 		//(Haven't sexed)
 		else {
@@ -307,7 +318,7 @@ public function meetSophieRepeat():void {
 		outputText("(Her words sink into you, and a desire to go with her threatens to overcome your self-control.  You take a deep breath and clear your head.  Do you go with her, turn her down, or try to take control and be the dominant one?  You'll probably have to fight her in order to dominate her...)");
 		dynStats("lus", 20);
 		//[Yes – consentacle sex] [No – sad harpy]
-		simpleChoices("Yes", consensualSexSelector, "No", shootDownSophieSex, "Dominate", fightSophie, "", null, "", null);
+		simpleChoices("Yes", consensualSexSelector, "No", shootDownSophieSex, "Feed Her", milk, "Dominate", fightSophie, "", null);
 		return;
 	}
 	//(NO DICK)
@@ -357,7 +368,7 @@ private function PCIgnoresSophieAndHarpyIsFought():void {
 	clearOutput();
 	outputText("A harpy wings out of the sky and attacks!");
 	startCombat(new Harpy());
-	spriteSelect(26);
+	spriteSelect(SpriteDb.s_harpy);
 }
 
 
@@ -878,7 +889,7 @@ public function luststickApplication(hours:Number = 4):void {
 	//Immune to luststick?
 	if(player.findPerk(PerkLib.LuststickAdapted) >= 0) return;
 	//Increment luststick resistance
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00285] += Math.floor(hours/2);
+	flags[kFLAGS.LUSTSTICK_RESISTANCE] += Math.floor(hours/2);
 	if(!player.hasCock()) return;
 	//Max of 20.
 	if(hours > 20) hours = 20;
@@ -911,34 +922,40 @@ internal function sophieLostCombat():void {
 	outputText("Sophie is down!  ");
 	if(monster.HP <= monster.minHP()) outputText("She's too wounded to fight, and she lies in a miserable heap in the nest.");
 	else outputText("She's too turned on to be a threat and is happily masturbating.");
-	//RAEP OPTIONS
-	if(player.gender != 0) {
-		var dickRape:Function = null;
-		var clitFuck:Function = null;
-		var cuntFuck:Function = null;
-		var bimbo:Function = null;
-		if(player.lust >= 33 && player.cockTotal() > 0) {
-			//Set dick rape to correct scene.
-			//Too big
-			if(player.cockThatFits(232) == -1) {dickRape = maleVictorySophieRapeHUGE;}
-			//Fits
-			else dickRape = maleVictorySophieRape;
-		}
-		//Girl options!
-		if(player.lust >= 33 && player.hasVagina()) {
-			//All girls get cuntfuck
-			cuntFuck = sophieVictoryPussyGrind;
-			//big clit girls
-			if(player.clitLength >= 5) clitFuck = fuckDatClit;
-		}
-		if(player.hasItem(consumables.BIMBOLQ)) bimbo = sophieBimbo.bimbotizeMeCaptainSophie;
-	}
-	if(dickRape != null || cuntFuck != null || clitFuck != null || bimbo != null) {
-		outputText("  What do you do to her?");
-		simpleChoices("Use Dick",dickRape,"Scissor",cuntFuck,"Fuck wClit",clitFuck,"Bimbo Her",bimbo,"Leave",cleanupAfterCombat);
-	}
-	else cleanupAfterCombat();
+    //init
+    menu();
+    //bimbo hint and option
+    if(player.cor > 33 - player.corruptionTolerance()) { //added cor check - normal people won't think of that
+        if (player.hasItem(consumables.BIMBOLQ)) {
+            outputText("\n\nYou can feed her Bimbo Liqueur to make the poor harpy your bitch.");
+            addButton(5, "Bimbo Her", sophieBimbo.bimbotizeMeCaptainSophie);
+        }
+        else
+            outputText("\n\nMassive tits, exquisite feathery body, always craving for sex... She can make a perfect bimbo if you had some liqueur for the conversion...");
+    }
+    //check min lust and gender
+    if (player.gender == 0)
+        outputText("\n\nYou miss the required parts to rape her.");
+    else if (player.lust < 33)
+        outputText("\n\nYou're not aroused enough to rape her.");
+    else {
+		outputText("\n\nWhat will you do to her?");
+        //RAEP OPTIONS
+        //going to remove the override in SceneHunter updates
+        if(player.hasCock()) {
+            if(player.cockThatFits(232) == -1) addButton(0, "Use Dick", maleVictorySophieRapeHUGE);
+            else addButton(0, "Use Dick", maleVictorySophieRape);
+        }
+        if (player.hasVagina()) {
+            addButton(1, "Scissor", sophieVictoryPussyGrind);
+            if(player.clitLength >= 5) addButton(2, "Fuck wClit", fuckDatClit);
+        }
+        if (player.biggestLactation() >= 1)
+            addButton(3, "Forcefeed", cramANippleInIt);
+    }
+    addButton(4, "Leave", cleanupAfterCombat);
 }
+
 internal function sophieWonCombat():void {
 	sophieBimbo.sophieSprite();
 	flags[kFLAGS.SOPHIE_FOLLOWER_PROGRESS] = 0;

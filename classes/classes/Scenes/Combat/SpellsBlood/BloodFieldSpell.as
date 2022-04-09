@@ -8,11 +8,11 @@ import classes.StatusEffects;
 public class BloodFieldSpell extends AbstractBloodSpell {
 	public function BloodFieldSpell() {
 		super(
-				"Blood Field",
-				"Blood Field will coat the ground in tacky-wet blood infused with your mana. The mass will slow down enemies, drain their health and heal the caster.",
-				TARGET_ENEMY,
-				TIMING_LASTING,
-				[TAG_DEBUFF]
+			"Blood Field",
+			"Blood Field will coat the ground in tacky-wet blood infused with your mana. The mass will slow down enemies, drain their health and heal the caster.",
+			TARGET_ENEMY,
+			TIMING_LASTING,
+			[TAG_DEBUFF]
 		);
 		baseHpCost = 600;
 	}

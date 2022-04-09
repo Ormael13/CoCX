@@ -7,7 +7,7 @@ package classes.Scenes.NPCs
 	import classes.*;
 	//import classes.GlobalFlags.kFLAGS;
 	import classes.Scenes.Monsters.Malikore;
-	import classes.display.SpriteDb;
+	
 	
 	public class BashemathFollower extends NPCAwareContent
 	{

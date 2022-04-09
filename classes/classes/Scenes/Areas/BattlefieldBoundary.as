@@ -23,7 +23,7 @@ use namespace CoC;
 		public function exploreBattlefieldBoundary():void {
 			flags[kFLAGS.DISCOVERED_BATTLEFIELD_BOUNDARY]++;
 			//Discover Outer Battlefield
-			if (flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] <= 0 && player.level >= 19) {
+			if (flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] <= 0 && (player.level + combat.playerLevelAdjustment()) >= 19) {
 				flags[kFLAGS.DISCOVERED_OUTER_BATTLEFIELD] = 1;
 				player.explored++;
 				clearOutput();
@@ -48,11 +48,14 @@ use namespace CoC;
 			}
 			//Diana
 			if (flags[kFLAGS.DIANA_FOLLOWER] < 6 && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff) && rand(5) == 0) {
-				SceneLib.dianaScene.repeatBattlefieldEnc();
+                if ((flags[kFLAGS.DIANA_FOLLOWER] < 3 || flags[kFLAGS.DIANA_FOLLOWER] == 5) && flags[kFLAGS.DIANA_LVL_UP] >= 8)
+                    SceneLib.dianaScene.postNameEnc();
+                else
+				    SceneLib.dianaScene.repeatEnc();
 				return;
 			}
 			//Ted
-			if (flags[kFLAGS.TED_LVL_UP] >= 1 && flags[kFLAGS.TED_LVL_UP] < 4 && !player.hasStatusEffect(StatusEffects.TedOff) && player.statusEffectv1(StatusEffects.CampSparingNpcsTimers4) < 1 && rand(10) == 0) {
+			if (flags[kFLAGS.TED_LVL_UP] >= 1 && flags[kFLAGS.TED_LVL_UP] < 2 && !player.hasStatusEffect(StatusEffects.TedOff) && player.statusEffectv1(StatusEffects.CampSparingNpcsTimers4) < 1 && rand(10) == 0) {
 				SceneLib.tedScene.introPostHiddenCave();
 				return;
 			}

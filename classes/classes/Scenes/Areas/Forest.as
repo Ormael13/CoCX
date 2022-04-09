@@ -17,6 +17,7 @@ import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.Places.WoodElves;
 import classes.Scenes.SceneLib;
 import classes.lists.Gender;
+import classes.display.SpriteDb;
 
 import coc.xxc.BoundStory;
 import coc.xxc.stmts.ZoneStmt;
@@ -146,7 +147,8 @@ use namespace CoC;
 						chance: 0.20
 					}, {
 						name  : "truffle",
-						call  : findTruffle
+						call  : findTruffle,
+						chance: 0.20
 					}, {
 						name  : "chitin",
 						call  : findChitin,
@@ -217,7 +219,7 @@ use namespace CoC;
 						name  : "deepwoods",
 						call  : discoverDeepwoods,
 						when  : function ():Boolean {
-							return (player.level >= 7) && !deepwoodsDiscovered();
+							return ((player.level + combat.playerLevelAdjustment()) >= 7) && !deepwoodsDiscovered();
 						},
 						chance: Encounters.ALWAYS
 					},  {
@@ -265,7 +267,8 @@ use namespace CoC;
 					}, {
 						name  : "tentaBeast",
 						call  : tentacleBeastEncounterFn,
-						when  : fn.ifLevelMin(3)
+						when  : fn.ifLevelMin(3),
+						chance: 0.80
 					}, {
 						name  : "corrGlade",
 						call  : corruptedGladeFn,
@@ -278,11 +281,11 @@ use namespace CoC;
 					}, {
 						name  : "beegirl",
 						call  : beeGirlScene.beeEncounter,
-						chance: 0.50
+						chance: 1.0
 					}, {
 						name  : "WoodElf",
 						call  : SceneLib.woodElves.findElves,
-						chance: 0.50,
+						chance: 0.5,
 						when  : function ():Boolean {
 							return WoodElves.WoodElvesQuest == WoodElves.QUEST_STAGE_NOT_STARTED && player.level >= 10 && !player.blockingBodyTransformations()
 						}
@@ -296,7 +299,7 @@ use namespace CoC;
 					}, {
 						name  : "chitin",
 						call  : findChitin,
-						chance: 0.05
+						chance: 0.10
 					}, {
 						name  : "healpill",
 						call  : findHPill,
@@ -321,10 +324,17 @@ use namespace CoC;
 					}, {
 						name: "diana",
 						when: function():Boolean {
-							return flags[kFLAGS.DIANA_FOLLOWER] == 5 && flags[kFLAGS.DIANA_AFFECTION] == 100 && !player.hasStatusEffect(StatusEffects.DianaOff);
+							return flags[kFLAGS.DIANA_FOLLOWER] < 6 && !(flags[kFLAGS.DIANA_FOLLOWER] != 3 && flags[kFLAGS.DIANA_LVL_UP] >= 8) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff);
 						},
 						chance: 0.5,
-						call: SceneLib.dianaScene.postNameForestEnc
+						call: SceneLib.dianaScene.repeatEnc
+					}, {
+						name: "dianaName",
+						when: function():Boolean {
+							return ((flags[kFLAGS.DIANA_FOLLOWER] < 3 || flags[kFLAGS.DIANA_FOLLOWER] == 5) && flags[kFLAGS.DIANA_LVL_UP] >= 8) && !player.hasStatusEffect(StatusEffects.DianaOff) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1;
+						},
+						chance: 0.5,
+						call: SceneLib.dianaScene.postNameEnc
 					}, {
 						name: "walk",
 						call: forestWalkFn
@@ -501,12 +511,10 @@ use namespace CoC;
 				}
 			}, {
 				name: "tentabeast",
-				call: tentacleBeastDeepwoodsEncounterFn,
-				when: Encounters.fn.ifLevelMin(2)
+				call: tentacleBeastDeepwoodsEncounterFn
 			}, {
 				name: "alraune",
-				call: alrauneEncounterFn,
-				when: Encounters.fn.ifLevelMin(3)
+				call: alrauneEncounterFn
 			}, {
 				name: "lilirauneIngrediant",
 				call  : lilirauneIngrediantEvent,
@@ -528,12 +536,12 @@ use namespace CoC;
 			}, {
 				name: "ted",
 				when: function():Boolean {
-					return flags[kFLAGS.TED_LVL_UP] >= 1 && flags[kFLAGS.TED_LVL_UP] < 4 && !player.hasStatusEffect(StatusEffects.TedOff) && player.statusEffectv1(StatusEffects.CampSparingNpcsTimers4) < 1;
+					return flags[kFLAGS.TED_LVL_UP] >= 1 && flags[kFLAGS.TED_LVL_UP] < 2 && !player.hasStatusEffect(StatusEffects.TedOff) && player.statusEffectv1(StatusEffects.CampSparingNpcsTimers4) < 1;
 				},
 				call: SceneLib.tedScene.introPostHiddenCave
 			},{
 				name: "dungeon",
-				call: SceneLib.dungeons.enterDeepCave,
+				call: SceneLib.dungeons.deepcave.enterDungeon,
 				when: SceneLib.dungeons.canFindDeepCave
 			}, {
 				name  : "walk",
@@ -726,7 +734,7 @@ use namespace CoC;
 		//Will be standalone
 		private function trappedSatyr():void {
 			clearOutput();
-			spriteSelect(99);
+			spriteSelect(SpriteDb.s_stuckSatyr);
 			outputText("As you wander through the woods, you find yourself straying into yet another corrupt glade.  However, this time the perverse grove isn't unoccupied; loud bleatings and brayings of pleasure split the air, and as you push past a bush covered in dripping, glans-shaped berries, you spot the source.\n\n");
 			outputText("A humanoid figure with a set of goat-like horns and legs - a satyr - is currently buried balls-deep in one of the vagina-flowers that scatter the grove, whooping in delight as he hungrily pounds into its ravenously sucking depths.  He stops on occasion to turn and take a slobbering suckle from a nearby breast-like growth; evidently, he doesn't care that he's stuck there until the flower's done with him.");
 			if (flags[kFLAGS.CODEX_ENTRY_SATYRS] <= 0) {
@@ -750,7 +758,7 @@ use namespace CoC;
 		//[=No=]
 		private function ignoreSatyr():void {
 			clearOutput();
-			spriteSelect(99);
+			spriteSelect(SpriteDb.s_stuckSatyr);
 			outputText("You shake your head, " +
 					((player.cor < 50)
 							? "disgusted by the strange thoughts this place seems to put into your mind"
@@ -762,7 +770,7 @@ use namespace CoC;
 		//Player returns to camp
 		private function rapeSatyr():void {
 			clearOutput();
-			spriteSelect(99);
+			spriteSelect(SpriteDb.s_stuckSatyr);
 			var x:Number = player.biggestCockIndex();
 			if (player.cor < 33) {
 				outputText("For a moment you hesitate... taking someone from behind without their consent seems wrong... but then again you doubt a satyr would pass on the opportunity if you were in his position.")
@@ -807,7 +815,7 @@ use namespace CoC;
 		//[=Leave=]
 		private function dontRepeatFuckSatyr():void {
 			clearOutput();
-			spriteSelect(99);
+			spriteSelect(SpriteDb.s_stuckSatyr);
 			outputText("You've had your fun, and you don't really want to fool around in the forest all day, so you grab your [armor] and leave the rutting satyr behind.");
 			doNext(camp.returnToCampUseOneHour);
 		}

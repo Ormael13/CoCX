@@ -7,13 +7,14 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.SceneLib;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 import classes.Items.Armors.LustyMaidensArmor;
+import classes.Items.Armors.SuccubusArmor;
+import classes.display.SpriteDb;
 
 public class FetishZealotScene extends AbstractLakeContent
 	{
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		
+				
 		public function FetishZealotScene()
 		{
 		}
@@ -68,7 +69,7 @@ public class FetishZealotScene extends AbstractLakeContent
 			}
 			//next button, go to zealot fight
 			startCombat(new FetishZealot());
-			spriteSelect(20);
+			spriteSelect(SpriteDb.s_fetish_zealot);
 		}
 
 //Regular encounter
@@ -78,7 +79,7 @@ public class FetishZealotScene extends AbstractLakeContent
 			clearOutput();
 			outputText("While exploring, you hear someone cry out behind you \"<i>This is sacred land!  You WILL be punished for trespassing!</i>\"  It seems you've managed to stumble upon whatever land this zealot has been tasked to guard, and now you must fight him.");
 			startCombat(new FetishZealot());
-			spriteSelect(20);
+			spriteSelect(SpriteDb.s_fetish_zealot);
 		}
 
 //Raping the player
@@ -264,11 +265,14 @@ public class FetishZealotScene extends AbstractLakeContent
 				outputText("\n\nDo you want to take advantage of his vulnerable state to sate your lusts?");
 				menu();
 				addButton(0, "Yes", zealotWinRape);
-				if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") addButton(1, "B.Titfuck", createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,monster));
+				if (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armorName == "lusty maiden's armor" || player.armorName == "Succubus armor")) {
+					if (player.armorName == "Succubus armor") addButton(1, "B.Titfuck", createCallBackFunction2((player.armor as SuccubusArmor).succubusPaizuri,player,monster));
+					else addButton(1, "B.Titfuck", createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,monster));
+				}
 				if (Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_ISMB) addButton(2, "Mindbreak", mindbreakMaleCultist).hint("Toy with the cultist brain.");
-				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 				addButton(14, "Leave", cleanupAfterCombat);
-			}
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(zealotDefeated);
+							}
 			else cleanupAfterCombat();
 		}
 

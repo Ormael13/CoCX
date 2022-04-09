@@ -9,16 +9,15 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.SceneLib;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 import coc.xxc.BoundStory;
 import coc.xxc.Story;
 
 public class GoblinScene extends BaseContent
 	{
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-
-		public function GoblinScene()
+				public function GoblinScene()
 		{
 			onGameInit(init);
 		}
@@ -58,7 +57,7 @@ public class GoblinScene extends BaseContent
 		//RAEP TEXT 1
 		public function goblinRapesPlayer():void
 		{
-			spriteSelect(24);
+			spriteSelect(SpriteDb.s_goblin);
 			clearOutput();
 			if (player.isAlraune()){
 				outputText(images.showImage("goblin-loss-female-bimbodildo"));
@@ -141,7 +140,7 @@ public class GoblinScene extends BaseContent
 				//[Female Bimbo Loss Against Goblin]
 				if (player.hasVagina()) {
 					outputText(images.showImage("goblin-loss-female-bimbodildo"));
-					outputText("The goblin saunters up to you, wiggling her hips with a needy, sexual sway. She opens a small pouch, the sight of which instantly bombards your easy mind with thoughts of your lower lips being opened similarly, and pulls out a tube of lipstick, pausing to apply it to her lips. She caps off the tube and blows you a kiss with a wet smacking sound as she steps up to your trembling form. Your breath is knocked from your body as she drops all her weight onto your middle, making her ass and well-rounded tits jiggle just like yours do when you are bouncing on a cock. She reaches up to twist her nipple-studs, grinding the wetness of her crotch up and down your belly. You can't help but envy her piercings. Like, they totally turn you on!\n\n");
+					outputText("The goblin saunters up to you, wiggling her hips with a sensual desire. She opens a small pouch, the sight of which instantly bombards your easy mind with thoughts of your lower lips being opened similarly, and pulls out a tube of lipstick, pausing to apply it to her lips. She caps off the tube and blows you a kiss with a wet smacking sound as she steps up to your trembling form. Your breath is knocked from your body as she drops all her weight onto your middle, making her ass and well-rounded tits jiggle just like yours do when you are bouncing on a cock. She reaches up to twist her nipple-studs, grinding the wetness of her crotch up and down your belly. You can't help but envy her piercings. Like, they totally turn you on!\n\n");
 					outputText("Your body is already hot and your " + nippleDescript(0) + "s harden involuntarily in response to the tiny slut's totally understandable display of desire. Your " + vaginaDescript(0) + " leaks enough girl-juice to form a puddle beneath you, doing its best to show your fellow slut how ready you are. You 'subtly' (at least in your little mind) push your chest forward, making your " + nippleDescript(0) + "s easy targets for the goblin. She grabs hold of your breasts");
 					//--[If nipplecunts]
 					if (player.hasFuckableNipples()) outputText(", fingering your wet nipplecunts and pinching the now-puffy areolas tightly, sending uncontrollable waves of pleasure from your chest to your groin.");
@@ -209,7 +208,7 @@ public class GoblinScene extends BaseContent
 			//[DICK VERSION]
 			if (player.cockTotal() > 0 && (!player.hasVagina() || rand(2) == 0)) {
 				//[TOO BIG]
-				if (player.cockArea(0) > monster.vaginalCapacity()) {
+				if (player.biggestCockArea() > monster.vaginalCapacity()) {
 					outputText("She lifts her body up high, grabbing your [cock] with both her petite hands.  Your mind somehow makes note of the shiny black of her fingernails as she struggles to part her dripping wet womanhood around your massive member.  Though her body stretches to an absurd degree, she just can't get you inside. She pouts and drops your tool back onto you, promising you, \"<i>I'll find a way to get every ounce of your cum inside me, don't you worry.</i>\"\n\n");
 					outputText("The little slut jumps back onto you, wrapping her arms and legs tightly around your member.  Her tongue slithers over ");
 					if (player.balls > 0) outputText("your " + ballsDescriptLight());
@@ -287,7 +286,7 @@ public class GoblinScene extends BaseContent
 
 		//[WIN RAEPZ]
 		public function gobboRapeIntro():void {
-			spriteSelect(24);
+			spriteSelect(SpriteDb.s_goblin);
 			clearOutput();
 			menu();
 			story.display("strings/defeated/intro");
@@ -359,9 +358,9 @@ public class GoblinScene extends BaseContent
 				//addButton(14, "Leave", cleanupAfterCombat);
 				}
 				addButton(10, "Kill", killGoblin);
-				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 				addButton(14, "Leave", cleanupAfterCombat);
-			}
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(gobboRapeIntro);
+							}
 			else {
 				//If cant rape or breastfeed
 				addButton(10, "Kill", killGoblin);
@@ -378,7 +377,7 @@ public class GoblinScene extends BaseContent
 		}
 		private function gobboButtSecks():void
 		{
-			spriteSelect(24);
+			spriteSelect(SpriteDb.s_goblin);
 			var x:Number = player.cockThatFits(monster.analCapacity());
 			if (x < 0) x = 0;
 			clearOutput();
@@ -391,7 +390,7 @@ public class GoblinScene extends BaseContent
 //[FEMSAUCE]
 		private function gobboGetsRapedFem():void
 		{
-			spriteSelect(24);
+			spriteSelect(SpriteDb.s_goblin);
 			clearOutput();
 			if (player.isTaur()) {
 				outputText(images.showImage("goblin-win-female-taur-rapedfem"));
@@ -419,7 +418,7 @@ public class GoblinScene extends BaseContent
 		{
 			var x:Number = player.biggestCockIndex();
 			clearOutput();
-			spriteSelect(24);
+			spriteSelect(SpriteDb.s_goblin);
 			outputText(images.showImage("goblin-win-male-corruptedfuck"));
 			story.display("strings/CorruptDick");
 			player.sexReward("Default", "Dick",true,false);
@@ -431,7 +430,7 @@ public class GoblinScene extends BaseContent
 		private function manRapesGoblinTooBig():void
 		{
 			clearOutput();
-			spriteSelect(24);
+			spriteSelect(SpriteDb.s_goblin);
 			outputText(images.showImage("goblin-win-male-corruptedbj"));
 			story.display("strings/DickTooBig");
 			player.sexReward("Default", "Dick",true,false);
@@ -441,7 +440,7 @@ public class GoblinScene extends BaseContent
 //[DUDEGASM]
 		private function gobboGetsRapedMaleFits():void
 		{
-			spriteSelect(24);
+			spriteSelect(SpriteDb.s_goblin);
 			var x:Number = player.cockThatFits(monster.vaginalCapacity());
 			if (x < 0) x = player.biggestCockIndex();
 			clearOutput();
@@ -455,7 +454,7 @@ public class GoblinScene extends BaseContent
 //Spider goblin condom
 		private function goblinCondomed(mode:Number = 0):void
 		{
-			spriteSelect(24);
+			spriteSelect(SpriteDb.s_goblin);
 			var x:Number = player.cockThatFits(monster.vaginalCapacity());
 			clearOutput();
 			outputText(images.showImage("goblin-win-male-goblincondomed"));

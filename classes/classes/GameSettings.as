@@ -7,11 +7,15 @@ import coc.view.StatsView;
 import flash.display.StageQuality;
 import flash.text.TextFormat;
 
+import classes.SceneHunter;
+
 /**
  * ...
  * @author ...
  */
 public class GameSettings extends BaseContent {
+
+    public var sceneHunter_inst:SceneHunter = new SceneHunter();
 
 	public function GameSettings() {}
 
@@ -31,6 +35,7 @@ public class GameSettings extends BaseContent {
 		addButton(3, "Font Size", fontSettingsMenu);
 		addButton(4, "Controls", displayControls);		
 		addButton(5, "Gameplay(2)", settingsScreenGameSettings2);
+		addButton(6, "Scenes", sceneHunter_inst.settingsPage);
 		addButton(14, "Back", CoC.instance.mainMenu.mainMenu);
         if (flags[kFLAGS.HARDCORE_MODE] > 0) {
 			debug                               = false;
@@ -541,8 +546,13 @@ public class GameSettings extends BaseContent {
 				outputText("<font color=\"#008000\"><b>NEW</b></font>\n Viewer is inline with text");
 				break;
 		}
-		outputText("\n\n");
-
+		outputText("\nChar View Armor: ");
+		if (flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN])
+            outputText("<font color=\"#800000\"><b>OFF</b></font>\n Armor is hidden - enjoy your naked look!");
+		else
+            outputText("<font color=\"#008000\"><b>ON</b></font>\n Armor is shown (some body parts may be hidden or displayed wrongly)");
+		
+        outputText("\n\n");
 		if (flags[kFLAGS.IMAGEPACK_OFF] == 0) {
 			outputText("Image Pack: <font color=\"#008000\"><b>ON</b></font>\n Image pack is enabled.");
 		}
@@ -597,6 +607,7 @@ public class GameSettings extends BaseContent {
 		addButton(7, "Measurements", toggleMeasurements).hint("Switch between imperial and metric measurements.  \n\nNOTE: Only applies to your appearance screen.");
 		addButton(8, "Toggle CharView", toggleCharViewer).hint("Turn PC visualizer on/off.");
 		addButton(9, "Charview Style",toggleCharViewerStyle).hint("Change between in text and sidebar display");
+		addButton(10, "Charview Armor",toggleCharViewerArmor).hint("Turn PC armor and underwear display on/off");
 		addButton(14, "Back", settingsScreenMain);
 	}
 	public function menuMainBackground():void {
@@ -641,6 +652,12 @@ public class GameSettings extends BaseContent {
 		flags[kFLAGS.CHARVIEW_STYLE] = (flags[kFLAGS.CHARVIEW_STYLE]+1)%3;
 		settingsScreenInterfaceSettings();
 	}
+
+	public function toggleCharViewerArmor():void {
+		flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] = flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] ? 0 : 1;
+		settingsScreenInterfaceSettings();
+	}
+    
 
 	public function toggleInterface():void {
 		if (flags[kFLAGS.USE_OLD_INTERFACE] < 1) flags[kFLAGS.USE_OLD_INTERFACE] = 1;
@@ -792,7 +809,7 @@ public class GameSettings extends BaseContent {
     private function hideControls():void
     {
         CoC.instance.inputManager.HideBindingPane();
-        CoC.instance.gameSettings.settingsScreenMain();
+        settingsScreenMain();
     }
 
     private function resetControls():void

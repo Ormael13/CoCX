@@ -278,7 +278,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  return new SimpleTransformation("Fur Skin",
 	    // apply effect
 	    function (doOutput: Boolean): void {
-	      options = skinFormatOptions(options);
+	      options = skinFormatOptions(options, true);
 
 	      const color: String = options.color;
 
@@ -331,7 +331,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	          break;
 	        case Skin.PATTERN_RED_PANDA_UNDERBODY:
 	          if (!options.color2) options.color2 = "black";
-	          desc += "\n\nA ripple spreads through your fur as your underside changes colors, becoming " + options.color2 + " rather than " + color + ". <b>Now your underside fur is " + options.color2 + ".";
+	          desc += "\n\nA ripple spreads through your fur as your underside changes colors, becoming " + options.color2 + " rather than " + color + ". <b>Now your underside fur is " + options.color2 + ".</b>";
 	          break;
 	        }
 	      }
@@ -343,7 +343,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    },
 	    // is present
 	    function (): Boolean {
-	      options = skinFormatOptions(options);
+	      options = skinFormatOptions(options, true);
 
 	      return player.hasCoatOfType(Skin.FUR) && InCollection(player.coatColor, options.colors) && player.skin.coverage == coverage;
 	    }
@@ -354,7 +354,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  return new SimpleTransformation("Scales Skin",
 	    // apply effect
 	    function (doOutput: Boolean): void {
-	      options = skinFormatOptions(options);
+	      options = skinFormatOptions(options, false);
 
 	      const color: String = options.color;
 
@@ -403,7 +403,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    },
 	    // is present
 	    function (): Boolean {
-	      options = skinFormatOptions(options);
+	      options = skinFormatOptions(options, false);
 
 	      return player.hasCoatOfType(Skin.SCALES) && InCollection(player.coatColor, options.colors) && player.skin.coverage == coverage;
 	    }
@@ -414,7 +414,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  return new SimpleTransformation("Dragon Scales Skin",
 	    // apply effect
 	    function (doOutput: Boolean): void {
-	      options = skinFormatOptions(options);
+	      options = skinFormatOptions(options, false);
 
 	      const color: String = options.color;
 
@@ -455,7 +455,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    },
 	    // is present
 	    function (): Boolean {
-	      options = skinFormatOptions(options);
+	      options = skinFormatOptions(options, false);
 
 	      return player.hasCoatOfType(Skin.DRAGON_SCALES) && InCollection(player.coatColor, options.colors) && player.skin.coverage == coverage;
 	    }
@@ -466,7 +466,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  return new SimpleTransformation("Chitin Skin",
 	    // apply effect
 	    function (doOutput: Boolean): void {
-	      options = skinFormatOptions(options);
+	      options = skinFormatOptions(options, false);
 
 	      const color: String = options.color;
 
@@ -518,30 +518,32 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    },
 	    // is present
 	    function (): Boolean {
-	      options = skinFormatOptions(options);
+	      options = skinFormatOptions(options, false);
 
 	      return player.hasCoatOfType(Skin.CHITIN) && InCollection(player.coatColor, options.colors) && player.skin.coverage == coverage;
 	    }
 	  )
 	};
 
-	private function skinFormatOptions(options: * ): * {
-	  if (!options) options = {};
+	private function skinFormatOptions(options: *, hairy:Boolean = false): * {
+        if (!options) options = {};
+        if (!options.adj) options.adj = "";
+        if (!options.pattern) options.pattern == "";
+        if (!options.color && !options.colors)
+            if (player.coatColor == "" || (!player.skin.isHairy() && hairy) || (player.skin.isHairy() && !hairy)) {
+                //WHY THE F*** DOESN'T THIS TRASH LANGUAGE HAVE LOGICAL XOR?!
+                //the third condition - if need fur, and skin is NOT hairy, reset to hair color, and vice versa
+                options.color = hairy ? player.hairColor : player.skin.base.color;
+                options.colors = [options.color];
+            }
+            else {
+                options.color = player.coatColor;
+                options.colors = [options.color];
+            }
+        else if (!options.color && options.colors)
+            options.color = randomChoice(options.colors);
 
-	  if (player.coatColor == "" || player.skinType === Skin.PLAIN) player.coatColor = player.hairColor;
-
-	  if (!options.adj) options.adj = "";
-
-		if (!options.pattern) options.pattern == "";
-
-	  if (!options.color && !options.colors) {
-	    options.color = player.coatColor;
-	    options.colors = [options.color];
-	  } else if (!options.color && options.colors) {
-	    options.color = randomChoice(options.colors);
-	  }
-
-	  return options;
+        return options;
 	}
   /*
 */
@@ -935,7 +937,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    var desc: String = "";
 
 	    TransformationUtils.applyTFIfNotPresent(transformations.HornsDraconicDual, doOutput);
-
+        desc += "\n\n";
 	    if (player.horns.type == Horns.DEMON && player.horns.count > 4) {
 	      desc += "Your horns condense, twisting around each other and merging into larger, pointed protrusions. By the time they finish <b>you have four draconic-looking horns, each about twelve inches long.</b>"
 	    } else {
@@ -959,9 +961,9 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    var desc: String = "";
 
 	    if (player.horns.type === Horns.NONE) {
-	      desc += "With painful pressure, the skin on the sides of your forehead splits around two tiny nub-like horns. They're angled back in such a way as to resemble those you saw on the dragons in your village's legends. A few inches of horns sprout from your head before stopping. <b>You have about four inches of dragon-like horns.</b>";
+	      desc += "\n\nWith painful pressure, the skin on the sides of your forehead splits around two tiny nub-like horns. They're angled back in such a way as to resemble those you saw on the dragons in your village's legends. A few inches of horns sprout from your head before stopping. <b>You have about four inches of dragon-like horns.</b>";
 	    } else {
-	      desc += "You feel your horns changing and warping, and reach back to touch them. They have a slight curve and a gradual taper. They must look something like the horns the dragons in your village's legends always had.";
+	      desc += "\n\nYou feel your horns changing and warping, and reach back to touch them. They have a slight curve and a gradual taper. They must look something like the horns the dragons in your village's legends always had.";
 
 	      if (player.horns.count > 13) {
 	        desc += " The change seems to have shrunken the horns, they're about a foot long now.";
@@ -1169,10 +1171,10 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    var desc: String = "";
 
 	    if (player.horns.type === Horns.NONE) {
-	      desc += "You writhe in pain as two bony extrusions begin to push out of the side of your head. As a skull-splitting headache wracks through you, in an instant, the pain subsides as you feel two large, scale-colored horns on your head. They are as sensitive as they are sturdy.\n\nA quick look at a puddle also reveals they radiate several specks of bioluminescent light along the horns accompanied by red tips. <b>You have about twelve inches of sea dragon-like horns!</b>";
+	      desc += "\n\nYou writhe in pain as two bony extrusions begin to push out of the side of your head. As a skull-splitting headache wracks through you, in an instant, the pain subsides as you feel two large, scale-colored horns on your head. They are as sensitive as they are sturdy.\n\nA quick look at a puddle also reveals they radiate several specks of bioluminescent light along the horns accompanied by red tips. <b>You have about twelve inches of sea dragon-like horns!</b>";
 	    } else {
 	      if (player.horns.type == Horns.DEMON && player.horns.count > 4) {
-	        desc += "Your horns condense, twisting around each other and merging into larger, pointed protrusions. By the time they finish you have two sea dragon horns, each about twelve inches long.";
+	        desc += "\n\nYour horns condense, twisting around each other and merging into larger, pointed protrusions. By the time they finish you have two sea dragon horns, each about twelve inches long.";
 	        player.horns.count = 12;
 	      } else {
 	        desc += "\n\nYou feel your horns changing and warping, and reach back to touch them. They have a slight curve and a gradual taper. They look must look like the horns of a sea dragon.";
@@ -2849,8 +2851,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  function (doOutput: Boolean): void {
 	    var desc: String = "";
 
-	    TransformationUtils.applyTFIfNotPresent(transformations.HairHuman, doOutput);
-
 	    desc += "Your throat starts to ache and your tongue tingles. You try to gasp for air, your eyes opening wide in surprise as the voice that exits your throat is entirely changed. Your words are notes, your sentence a melody. Your voice is like music to your ears and you realize it is because your body became closer to that of an elf, adapting even your tongue and voice. <b>You now have the beautiful voice of the elves.</b>";
 	    player.tongue.type = Tongue.ELF;
 	    if (doOutput) outputText(desc);
@@ -3552,13 +3552,12 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    desc += "Your ears twitch as jolts of lightning flows through them, replacing all sound with crackling pops. You moan as the lightning arcs up to the top of your head before fanning out to the side. Hearing suddenly returns as you run your hands across your <b>new raiju ears!</b>";
 
-	    player.ears.type = Ears.WEASEL;
+	    player.ears.type = Ears.RAIJU;
 	    if (doOutput) outputText(desc);
-	    Metamorph.unlockMetamorph(EarsMem.getMemory(EarsMem.WEASEL));
 	  },
 	  // is present
 	  function (): Boolean {
-	    return player.ears.type === Ears.WEASEL;
+	    return player.ears.type === Ears.RAIJU;
 	  }
 	);
 
@@ -4008,6 +4007,24 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  }
 	);
 
+	public const EyesSnakeFiendish: Transformation = new SimpleTransformation("Fiendish Snake Eyes",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += "You suddenly feel your vision shifting. It takes a moment for you to adapt to the weird sensory changes but once you recover you go to a puddle and notice your eyes now have a slitted pupil like that of a snake with sinister black schlera that reflect the sorry state of your soul. <b>You now have fiendish snake eyes!</b>.";
+
+				player.eyes.type = Eyes.SNAKEFIENDISH;
+				player.eyes.colour = "yellow";
+				if (doOutput) outputText(desc);
+				//Metamorph.unlockMetamorph(EyesMem.getMemory(EyesMem.SNAKEFIENDISH));
+			},
+			// is present
+			function (): Boolean {
+				return player.eyes.type === Eyes.SNAKEFIENDISH;
+			}
+	);
+
 	public const EyesSpider: Transformation = new SimpleTransformation("Spider Eyes",
 	  // apply effect
 	  function (doOutput: Boolean): void {
@@ -4425,11 +4442,11 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	public const EyesRaijuColors: Transformation = new SimpleTransformation("Raiju Eye Colors",
 	  // apply effect
 	  function (doOutput: Boolean): void {
-	    transformations.EyesChangeColor(["blue", "green", "turquoise"]).applyEffect(doOutput);
+	    transformations.EyesChangeColor(["blue", "green", "turquoise", "light green"]).applyEffect(doOutput);
 	  },
 	  // is present
 	  function (): Boolean {
-	    return InCollection(player.eyes.colour, ["blue", "green", "turquoise"]);
+	    return InCollection(player.eyes.colour, ["blue", "green", "turquoise", "light green"]);
 	  }
 	);
 
@@ -5986,6 +6003,26 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    return player.rearBody.type === RearBody.ATLACH_NACHA
 	  }
 	);
+
+	public const rearBodyCobraHood: Transformation = new SimpleTransformation("Cobra Hood",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				TransformationUtils.applyTFIfNotPresent(transformations.WingsNone, doOutput);
+
+				desc += "Pain lances through your neck as your [skin.type] flesh begins to ondulate and change. It hurts but thankfully the pain is short lived and as soon as you are relieved from it you press a hand behind your neck to check for the changes. It would appear the behind of your head all the way to the middle of your back is covered with one large fleshy hood not unlike that of a cobra. You will likely be able to intimidate your foes into submission with your brand new <b>Cobra hood!</b>";
+				player.rearBody.type = RearBody.COBRA_HOOD;
+
+				if (doOutput) outputText(desc);
+				player.rearBody.type = RearBody.COBRA_HOOD;
+				//Metamorph.unlockMetamorph(WingsMem.getMemory(RearBodyMem.COBRA_HOOD));
+			},
+			// is present
+			function (): Boolean {
+				return player.rearBody.type === RearBody.COBRA_HOOD
+			}
+	);
   /*
 */
 
@@ -6216,6 +6253,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      if (!legCount) legCount = player.legCount;
 	      var desc: String = "";
 
+            desc += "\n\n";
 	      // Case 1: Morph Taur legs without changing leg count
 	      if (player.isTaur() && legCount === 4) {
 	        if (player.lowerBody == LowerBody.HOOFED) {
@@ -6430,6 +6468,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      if (!legCount) legCount = player.legCount;
 	      var desc: String = "";
 
+            desc += "\n\n";
 	      // Case 1: Morph Taur legs without changing leg count
 	      if (player.isTaur() && legCount === 4) {
 	        desc += "You scream in agony as you feel the bones in your [feet] suddenly break and restructure themselves. When the pain is over, you realize that your [feet] have become like those of some bipedal reptilian killer, with powerful claws meant for gripping the ground. <b>You now have dragon [feet].</b>";
@@ -6917,6 +6956,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      if (!legCount) legCount = player.legCount;
 	      var desc: String = "";
 
+            desc += "\n\n";
 	      // Case 1: Morph Taur legs without changing leg count
 	      if (player.isTaur() && legCount === 4) {
 	        desc += "You scream in agony as you feel the bones in your [feet] break and rearrange into bestial paws. Soon your legs cover up with fur from the waist down. The fur is cold to the touch and yet you feel warm and comfortable under it. <b>You now have wolf paws.</b>";
@@ -9549,7 +9589,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    TransformationUtils.applyTFIfNotPresent(transformations.WingsNone, doOutput);
 
-	    desc += "Pressure is building in multiple spots on your upper back. It feels more like several over-eager erections trapped in incredibly tight undies. You can’t help but groan with relief when finally the pressure peaks and many thick protrusions burst impatiently out of your [skin.type]. The hot, thick, vine-like growths thrust their way into being, feet of oily green tentacles, alarmingly energetic and prehensile, thrashing around your [hips]. After a moment of concentration you cause one of these growths to rear around into your hand to take a closer look at it. It feels unmistakably dick-like - bulging, tender flesh under the fibrous skin, with quite a bit of flexible, able to bend all along its length and dart its wet, distended head in any direction you wish. <b>You now have cockvine wings.";
+	    desc += "Pressure is building in multiple spots on your upper back. It feels more like several over-eager erections trapped in incredibly tight undies. You can’t help but groan with relief when finally the pressure peaks and many thick protrusions burst impatiently out of your [skin.type]. The hot, thick, vine-like growths thrust their way into being, feet of oily green tentacles, alarmingly energetic and prehensile, thrashing around your [hips]. After a moment of concentration you cause one of these growths to rear around into your hand to take a closer look at it. It feels unmistakably dick-like - bulging, tender flesh under the fibrous skin, with quite a bit of flexible, able to bend all along its length and dart its wet, distended head in any direction you wish. <b>You now have cockvine wings.</b>";
 
 	    player.wings.desc = "cockvine";
 	    player.wings.type = Wings.PLANT;

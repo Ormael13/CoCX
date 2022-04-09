@@ -8,6 +8,7 @@ package classes.Scenes.Areas
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.Ashlands.*;
+import classes.Scenes.NPCs.Forgefather;
 import classes.Scenes.Areas.Forest.AlrauneScene;
 import classes.Scenes.Areas.HighMountains.PhoenixScene;
 import classes.Scenes.SceneLib;
@@ -37,7 +38,10 @@ use namespace CoC;
 			choice[choice.length] = 2; //Hellcat (lvl 46)
 			choice[choice.length] = 3; //Cinderbloom (lvl 40)
 			choice[choice.length] = 4; //Fire Golem (lvl 64)
-			choice[choice.length] = 5; //Find nothing!
+            if (player.hasKeyItem("Old Pickaxe") > 0 && Forgefather.materialsExplained)
+			    choice[choice.length] = 5; //Granite Mine
+            if (rand(4) == 0)
+			    choice[choice.length] = 6; //Find nothing!
 			
 			//Double barreled dragon gun
 			if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1) && player.statusEffectv3(StatusEffects.TelAdreTripxiGuns1) == 0 && player.hasKeyItem("Double barreled dragon gun") < 0 && rand(2) == 0) {
@@ -45,7 +49,7 @@ use namespace CoC;
 				return;
 			}
 			//Volcanic Crag
-			if (flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] <= 0 && player.level >= 65) {
+			if (flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] <= 0 && (player.level + combat.playerLevelAdjustment()) >= 65) {
 				flags[kFLAGS.DISCOVERED_VOLCANO_CRAG] = 1;
 				clearOutput();
 				outputText("You walk for some time, roaming the ashlands. As you progress, you can feel the air getting warm. It gets hotter as you progress until you finally stumble across a blackened landscape. You reward yourself with a sight of the endless series of a volcanic landscape. Crags dot the landscape.\n\n");
@@ -87,6 +91,14 @@ use namespace CoC;
 					outputText("As you take a stroll, from behind nearby ash pile emerge huge golem. Looks like you have encountered 'true fire golem'! You ready your [weapon] for a fight!");
 					startCombat(new GolemTrueFire());
 					break;
+				case 5: //Find Granite
+					clearOutput();
+                    outputText("You stumble across a vein of Granite, this looks like suitable material for your gargoyle form.\n");
+                    outputText("Do you wish to mine it?");
+                    menu();
+                    addButton(0, "Yes", ahslandsSiteMine);
+                    addButton(1, "No", camp.returnToCampUseOneHour);
+					break;
 				default:
 					clearOutput();
 					outputText("You spend one hour exploring ashlands but you don't manage to find anything interesting.");
@@ -106,6 +118,24 @@ use namespace CoC;
 			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
 			player.createKeyItem("Double barreled dragon gun", 0, 0, 0, 0);
 			doNext(camp.returnToCampUseOneHour);
+		}
+		
+		private function ahslandsSiteMine():void {
+			if (Forgefather.materialsExplained != 1) doNext(camp.returnToCampUseOneHour);
+			else {
+				clearOutput();
+				if (player.fatigue > player.maxFatigue() - 50) {
+					outputText("\n\n<b>You are too tired to consider mining. Perhaps some rest will suffice?</b>");
+					doNext(camp.returnToCampUseOneHour);
+					return;
+				}
+				outputText("\n\nYou begin slamming your pickaxe against the granite, spending the better part of the next two hours mining. This done, you bring back your prize to camp. ");
+				var minedStones:Number = 13 + Math.floor(player.str / 20);
+				minedStones = Math.round(minedStones);
+				fatigue(50, USEFATG_PHYSICAL);
+				SceneLib.forgefatherScene.incrementGraniteSupply(minedStones);
+				doNext(camp.returnToCampUseTwoHours);
+			}
 		}
 	}
 }

@@ -4,13 +4,13 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
+import classes.Items.Armors.SuccubusArmor;
 import classes.Scenes.SceneLib;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 import classes.Scenes.Dungeons.DungeonAbstractContent;
+import classes.display.SpriteDb;
 
 public class MinotaurScene extends BaseContent {
-
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
 
 		public function MinotaurScene()
 		{
@@ -24,7 +24,7 @@ private function minotaurNeed():Boolean {
 }
  */
 public function minoVictoryRapeChoices():void {
-	spriteSelect(44);
+	spriteSelect(SpriteDb.s_minotaur);
 	var feedposit:String = "B. Feed";
 	clearOutput();
 	if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 1 || player.hasPerk(PerkLib.LactaBovineImmunity) || player.hasPerk(PerkLib.ManticoreCumAddict)) {
@@ -48,7 +48,7 @@ public function minoVictoryRapeChoices():void {
 	postfightoptions();
 }
 private function postfightoptions():void {
-	spriteSelect(44);
+	spriteSelect(SpriteDb.s_minotaur);
 	//Determine if PC can rape with a dick!
 	var x:Number = player.cockThatFits(monster.analCapacity());
 	var dickRape:Function = null;
@@ -83,9 +83,10 @@ private function postfightoptions():void {
 		feedposit = "Lay Eggs";
 		temp2 = layEggsInAMinotaurSpiderLike;
 	}
-	if((temp2 == null || rand(2) == 0) && player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) {
+	if((temp2 == null || rand(2) == 0) && player.hasVagina() && player.biggestTitSize() >= 4 && (player.armor is LustyMaidensArmor || player.armor is SuccubusArmor)) {
 		feedposit = "B.Titfuck";
-		temp2 = (player.armor as LustyMaidensArmor).lustyMaidenPaizuri;
+		if (player.armor is SuccubusArmor) temp2 = (player.armor as SuccubusArmor).succubusPaizuri;
+		else temp2 = (player.armor as LustyMaidensArmor).lustyMaidenPaizuri;
 	}
 /*	//Used for tracking prostate milking and injection
 	var tempText:String = "";
@@ -117,16 +118,20 @@ private function postfightoptions():void {
 		}
 		if (bj != null) addButton(7, "MakeHimSuck", minotaurBlowjob);
 		if (player.canOvipositSpider() || (player.canOvipositBee() && player.gender > 0)) addButton(8, "Lay Eggs", layEggsInAMinotaurSpiderLike);
-		if ((temp2 == null || rand(2) == 0) && player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) addButton(9, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
+		if ((temp2 == null || rand(2) == 0) && player.hasVagina() && player.biggestTitSize() >= 4 && (player.armor is LustyMaidensArmor || player.armor is SuccubusArmor)) {
+			if (player.armor is SuccubusArmor) addButton(9, "B.Titfuck", (player.armor as SuccubusArmor).succubusPaizuri);
+			else addButton(9, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
+		}
 		if (player.hasPerk(PerkLib.Feeder)) addButton(10, "Nurse", minotaurDrinksMilkNewsAtEleven);
 		if (player.isAlraune()) addButton(11, "Vine in Butt", alrauneVineInButtScene);
 	}
 	addButton(12, "Kill", killMinotaur);
-	if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 	addButton(14, "Leave", cleanupAfterCombat);
 	if(x < 0 && player.hasCock()) outputText("\nSadly, you're too well endowed to penetrate the minotaur.");
 	if(player.gender == 3 && player.isTaur()) outputText("\nIf you had a different body type you might be able to penetrate him while taking him, but as a centaur that's not an option.");
-}
+	SceneLib.uniqueSexScene.pcUSSPreChecksV2(minoVictoryRapeChoices);
+	}
+
 private function killMinotaur():void {
 	clearOutput();
 	flags[kFLAGS.MINOTAURS_KILLED]++;
@@ -138,7 +143,7 @@ private function killMinotaur():void {
 //Tentacle scenes require multi dicks at minimum
 //(dicks > 1 && tentacledicks > 0)
 private function rapeMinotaurTentacles():void {
-	spriteSelect(44);
+	spriteSelect(SpriteDb.s_minotaur);
 	//multicock but single tentalce rape scene
 	if(player.cocks.length > 1 && (player.tentacleCocks() == 1 || player.stamenCocks() == 1)) {
 		rapeMinotaurTentacle();
@@ -213,7 +218,7 @@ private function rapeMinotaurTentacles():void {
 }
 
 private function rapeMinotaurTentacle():void {
-	spriteSelect(44);
+	spriteSelect(SpriteDb.s_minotaur);
 	minoRapeIntro();
 	var x:Number = 0;
 	var counter:Number = 0;
@@ -286,7 +291,7 @@ private function rapeMinotaurTentacle():void {
 }
 
 private function AddictNagaOnMinotaur():void {
-	spriteSelect(44);
+	spriteSelect(SpriteDb.s_minotaur);
 	clearOutput();
 	//[if(monster.lust >= 99)
 	if(monster.lust >= monster.maxLust()) outputText("You slither towards the fallen monster, wishing to taste his addictive semen.  He's currently engaged in stroking his enormous shaft up and down with both of his hands, but offers little resistance when you push him over to a sitting position.  You pull his hands away and replace them with yours, running your fingers up and down along his thickness, working yourself up with anticipation.  He leans back and exhales loudly, clearly appreciative.\n\n");
@@ -310,7 +315,7 @@ private function AddictNagaOnMinotaur():void {
 }
 
 private function minoUrethralPen():void {
-	spriteSelect(44);
+	spriteSelect(SpriteDb.s_minotaur);
 	minoRapeIntro();
 	var counter:Number = 0;
 	var x:Number = 0;
@@ -367,7 +372,7 @@ private function minoUrethralPen():void {
 }
 
 private function minoRapeIntro():void {
-	spriteSelect(44);
+	spriteSelect(SpriteDb.s_minotaur);
 	clearOutput();
 	//Monster got ass whupped
 	if(monster.HP <= 0) {
@@ -389,7 +394,7 @@ private function minoRapeIntro():void {
 }
 //Man buttrapes a minotaur butt.
 private function bumRapeaMinotaur():void {
-	spriteSelect(44);
+	spriteSelect(SpriteDb.s_minotaur);
 	var x:Number = player.cockThatFits(monster.analCapacity());
 	minoRapeIntro();
 	outputText("\n\nYou droop your ");
@@ -455,7 +460,7 @@ private function alrauneVineInButtScene():void
 	return;
 }
 private function girlRapeAMinotaur():void {
-	spriteSelect(44);
+	spriteSelect(SpriteDb.s_minotaur);
 	minoRapeIntro();
 	player.slimeFeed();
 	minoCumAddiction(5);
@@ -499,7 +504,7 @@ private function girlRapeAMinotaur():void {
 	cleanupAfterCombat();
 }
 private function minotaurGetsRapedByHerms():void {
-	spriteSelect(44);
+	spriteSelect(SpriteDb.s_minotaur);
 	minoRapeIntro();
 	minoCumAddiction(5);
 	player.slimeFeed();
@@ -520,7 +525,7 @@ private function minotaurGetsRapedByHerms():void {
 }
 
 public function minoPheromones():void {
-	spriteSelect(44);
+	spriteSelect(SpriteDb.s_minotaur);
 	outputText("The minotaur smiles at you and lifts his loincloth, flicking it at you.  Thick ropes of pre-cum fly through the air, ");
 	//sometimes get hit with the pre for stronger effect!
 	if(rand(3) == 0) {
@@ -548,7 +553,7 @@ public function minoPheromones():void {
     else doNext(SceneLib.combat.combatMenu);
 }
 public function getRapedByMinotaur(autoRape:Boolean = false):void {
-	spriteSelect(44);
+	spriteSelect(SpriteDb.s_minotaur);
 	player.slimeFeed();
 	clearOutput();
 	//BY BUTTS MCGEE
@@ -677,15 +682,8 @@ if (doSFWloss() && CoC.instance.inCombat) { //No rape in SFW mode.
 	if(player.hasVagina()) outputText("pussy.");
 	else outputText("asshole.");
     if (CoC.instance.inCombat) {
-		if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) {
-			outputText("\n\nUnsatisfied with fucking you silly the beast forcefeeds you a full vial of his cum. You feel something in you flip as you acquire an addiction for the nefarious compound! <b>You are now addicted to minotaur cum!</b>");
-			if (flags[kFLAGS.EBON_LABYRINTH_RECORD] < player.statusEffectv1(StatusEffects.EbonLabyrinthB)) flags[kFLAGS.EBON_LABYRINTH_RECORD] = player.statusEffectv1(StatusEffects.EbonLabyrinthB);
-			player.removeStatusEffect(StatusEffects.EbonLabyrinthB);
-			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss1)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss1);
-			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss2)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss2);
-			minoCumAddiction(100);
-			DungeonAbstractContent.dungeonLoc = 0;
-		}
+		if (inDungeon) 
+            rapeEndingEL();
 		cleanupAfterCombat();
 	}
     else doNext(camp.returnToCampUseFourHours);
@@ -693,7 +691,7 @@ if (doSFWloss() && CoC.instance.inCombat) { //No rape in SFW mode.
 
 
 private function getOralRapedByMinotaur():void {
-	spriteSelect(44);
+	spriteSelect(SpriteDb.s_minotaur);
 	clearOutput();
 	outputText("The huge bull-man grabs you around the waist with one hand and flips you over. You hang upside down in his grip, your [legs] splayed in the air.  The minotaur rubs your face across his sweat-slick balls, smearing his musk into your skin. Each of the minotaur's testicles is bigger than a man's head, and the skin of his sack is pulled taut over his cum-filled balls.\n\n");
 	outputText("The minotaur traps your [legs] in one hand and slams your back against the cold cave wall. You gasp, spraying drops of musky sweat from your lips. Dragging you against the rough stone, the minotaur lifts you higher and bends your [legs] back over a rock ledge. You are pinned against the cave wall, [legs] held in one of the minotaur's hands while his other roughly gropes your stretched-out body.");
@@ -726,22 +724,15 @@ private function getOralRapedByMinotaur():void {
 	dynStats("sen", 1);
 	minoCumAddiction(10);
     if (CoC.instance.inCombat) {
-		if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) {
-			outputText("\n\nUnsatisfied with fucking you silly the beast forcefeed you a full vial of his cum. You feel something in you flip as you acquire an addiction for the nefarious compound! <b>You are now addicted to minotaur cum!</b>");
-			if (flags[kFLAGS.EBON_LABYRINTH_RECORD] < player.statusEffectv1(StatusEffects.EbonLabyrinthB)) flags[kFLAGS.EBON_LABYRINTH_RECORD] = player.statusEffectv1(StatusEffects.EbonLabyrinthB);
-			player.removeStatusEffect(StatusEffects.EbonLabyrinthB);
-			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss1)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss1);
-			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss2)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss2);
-			minoCumAddiction(100);
-			DungeonAbstractContent.dungeonLoc = 0;
-		}
+		if (inDungeon) 
+            rapeEndingEL();
 		cleanupAfterCombat();
 	}
     else doNext(camp.returnToCampUseFourHours);
 }
 
 private function minoGetsTitFucked():void {
-	spriteSelect(44);
+	spriteSelect(SpriteDb.s_minotaur);
 	if(player.isNaga()) {
 		AddictNagaOnMinotaur();
 		return;
@@ -778,7 +769,7 @@ private function minoGetsTitFucked():void {
 
 //(Direct Injection) – GIGITY!
 private function takeMinoCumDirectly():void {
-	spriteSelect(44);
+	spriteSelect(SpriteDb.s_minotaur);
 	clearOutput();
 	outputText("Relishing your victory, you breathe deeply, shivering and stretching.  ");
 	if(monster.HP <= monster.minHP()) outputText("The beast-man has fallen on his back, comatose and insensate, though his shaft has risen to full erectness, displacing his loincloth.");
@@ -917,7 +908,7 @@ public function minoCumUpdate():Boolean {
 }
 
 public function minoAddictionFuck():void {
-	spriteSelect(44);
+	spriteSelect(SpriteDb.s_minotaur);
 	clearOutput();
 	outputText("While exploring the mountains, a familiar musky scent works its way into your nostrils.   Sniffing hungrily, you begin shaking, nearly convulsing with need.   You don't think, you act, sprinting heedlessly around the rock obstructions that litter the jagged mountain-side, chasing down your need.  Rounding a sharp bend, you sigh happily as the smell noticably increases in strength.  A few feet away is a minotaur, covered in shaggy fur and snacking on fruit.  Ecstatic, you scrabble forwards, sending tiny rocks everywhere.   The minotaur looks up, at first with a frown, then with a gradually widening grin as he recognizes the look in your eyes.\n\n");
 
@@ -932,7 +923,7 @@ public function minoAddictionFuck():void {
 
 //[Optional Bad-End For Uber-Addicted]
 public function minoAddictionBadEndEncounter():void {
-	spriteSelect(44);
+	spriteSelect(SpriteDb.s_minotaur);
 	clearOutput();
 	outputText("While exploring the mountains you catch a strong whiff of your favorite scent.  Tipping your head to the side, you take in a few deep lungfuls and sigh.   Judging by the strength of the smell, there must be MANY minotaurs gathered together.   Immediate visions of being surrounded by the muscly monsters fill your mind.   In your fantasy your holes are plugged and you're soaked in their wondrous stuff.  You desperately want it to be a reality, and all you need to do is follow your nose...\n\n");
 
@@ -951,7 +942,7 @@ public function minoAddictionBadEndEncounter():void {
 }
 
 private function minoAddictionBadEnd2():void {
-	spriteSelect(44);
+	spriteSelect(SpriteDb.s_minotaur);
 	clearOutput();
 	outputText("You grin and stumble up the mountain, inhaling deep breaths from moment to moment to make sure you're on the right track.  The scent gets stronger and stronger, making you ");
 	if(player.hasVagina()) {
@@ -984,7 +975,7 @@ private function minoAddictionBadEnd2():void {
 }
 //[PAGE 2]
 private function minoCumAddictBadEnd3():void {
-	spriteSelect(44);
+	spriteSelect(SpriteDb.s_minotaur);
 	hideUpDown();
 	clearOutput();
 	outputText("Days and weeks pass in a half-remembered haze.  You're violated countless time, and after the first day they don't even bother to keep you on a leash.  Why would they need to restrain such an eager slave?  You're tossed to the side whenever you're not needed as a cum-dump, but as soon as you start to come out of your daze, you crawl back, gaping, dripping, and ready for another dose.  For their part, your new masters seem happy to take care of your needs.  The only time you aren't drugged is when the minotaurs are sleeping, but the minitaurs seem all too happy to let you suckle the pre from their tiny horse-cocks in the huddled slave-pile.\n\n");
@@ -994,7 +985,7 @@ private function minoCumAddictBadEnd3():void {
 }
 
 private function minotaurDrinksMilkNewsAtEleven():void {
-	spriteSelect(44);
+	spriteSelect(SpriteDb.s_minotaur);
 	clearOutput();
 	outputText("You kneel next to the exhausted minotaur, lifting his head up to your " + breastDescript(0) + ". He turns his muzzle away from them, still trying to defy you. You force his head back toward your chest and push your " + nippleDescript(0) + " against his mouth, but he keeps his lips tightly shut. You pound your fist on his stomach, forcing a gasp of air out of his mouth as you cram your nipple inside. The minotaur is trying to shake his head to free up his mouth but you're holding his fur too firmly for him to wriggle free. His struggling only causes sips of milk to trickle down into his mouth. You squeeze your breast and send streams of milk down his throat. He soon stops fighting and just starts nursing. He's sucking hard, pulling the milk out of you, and stopping every few minutes to take a deep breath. He soon empties that teat and you put the other one up to his mouth. He obediently begins to nurse on that one, but he's a bit winded from the other, so his suckling is gentle and soothing. It takes him a bit longer for him to empty this nipple, but having such a strong minotaur reduced to a weak, suckling calf pleases you greatly for some reason.\n\n");
 	outputText("You pop your " + nippleDescript(0) + " from the dazed minotaur's mouth and leave him there to enjoy the afteraffects of his meal.");
@@ -1011,7 +1002,7 @@ private function minotaurDrinksMilkNewsAtEleven():void {
 
 //should be restricted to PCs with 36" cocks or less (arm length-ish) since you're holding the minotaur's horns; centaur addition matches to same length because you're welcome
 private function minotaurBlowjob():void {
-	spriteSelect(44);
+	spriteSelect(SpriteDb.s_minotaur);
 	clearOutput();
 	var x:Number = player.cockThatFits(80);
 	outputText("You step towards the minotaur, ");
@@ -1181,17 +1172,17 @@ private function getMinoHawtDawged():void {
 	//{Loss message 'when you wake up you'll be missing gems' blah blah}
 	dynStats("lus", 15+rand(player.lib/2));
 	player.sexReward("cum","Anal");
-	if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) {
-		outputText("\n\nUnsatisfied with fucking you silly the beast forcefeed you a full vial of his cum. You feel something in you flip as you acquire an addiction for the nefarious compound! <b>You are now addicted to minotaur cum!</b>");
-		if (flags[kFLAGS.EBON_LABYRINTH_RECORD] < player.statusEffectv1(StatusEffects.EbonLabyrinthB)) flags[kFLAGS.EBON_LABYRINTH_RECORD] = player.statusEffectv1(StatusEffects.EbonLabyrinthB);
-		player.removeStatusEffect(StatusEffects.EbonLabyrinthB);
-		if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss1)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss1);
-		if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss2)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss2);
-		minoCumAddiction(100);
-		DungeonAbstractContent.dungeonLoc = 0;
-	}
+	if (inDungeon)
+        rapeEndingEL();
 	else minoCumAddiction(5);
 	cleanupAfterCombat();
 }
+
+private function rapeEndingEL():void {
+    outputText("\n\nUnsatisfied with fucking you silly the beast forcefeed you a full vial of his cum. You feel something in you flip as you acquire an addiction for the nefarious compound! <b>You are now addicted to minotaur cum!</b>");
+    minoCumAddiction(100);
+    inDungeon = false;
+}
+
 }
 }

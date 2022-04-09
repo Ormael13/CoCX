@@ -2,30 +2,35 @@ package classes.Scenes.Areas.HighMountains
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.Items.Armors.LustyMaidensArmor;
+import classes.Items.Armors.SuccubusArmor;
 import classes.Scenes.Areas.Ashlands.PhoenixSquadAshland;
 import classes.Scenes.Areas.VolcanicCrag.PhoenixPlatoon;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 public class PhoenixScene extends BaseContent
 	{
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		
+				
 		//" + (player.cocks.length == 1 ? "": "") + "
 		public function PhoenixScene() 
 		{
 		}
 		
 		public function encounterPhoenix1():void {
+            spriteSelect(SpriteDb.s_phoenix);
 			if (flags[kFLAGS.PHOENIX_ENCOUNTERED] <= 0) encounterPhoenixFirstTime1();
 			else encounterPhoenixRepeat1();
 		}
 		
 		public function encounterPhoenix2():void {
+            spriteSelect(SpriteDb.s_phoenix);
 			if (flags[kFLAGS.PHOENIX_ENCOUNTERED] <= 0) encounterPhoenixFirstTime2();
 			else encounterPhoenixRepeat2();
 		}
 		
 		public function encounterPhoenix3():void {
+            spriteSelect(SpriteDb.s_phoenix);
 			if (flags[kFLAGS.PHOENIX_ENCOUNTERED] <= 0) encounterPhoenixFirstTime3();
 			else encounterPhoenixRepeat3();
 		}
@@ -79,6 +84,7 @@ public class PhoenixScene extends BaseContent
 		}
 		
 		public function encounterPhoenixRepeat1():void {
+            clearOutput();
 			outputText("Strolling along the mountain path, you spot the familiar Phoenix. You ready your [weapon].");
 			if (flags[kFLAGS.PHOENIX_ENCOUNTERED] == 1) outputText("\n\n\"<i>Back again?</i>\" The phoenix says with a glare. \"<i>But... I guess you're a worthy opponent. Let's see what you're made of!</i>\" The phoenix yells as she readies her scimitar and shield. You assume a combat stance.");
 			else outputText("\n\n\"<i>Back again?</i>\" The phoenix says with a glare. \"<i>Get ready for a rematch!</i>\" The phoenix yells as she readies her scimitar and shield. You assume a combat stance.");
@@ -87,6 +93,7 @@ public class PhoenixScene extends BaseContent
 		}
 		
 		public function encounterPhoenixRepeat2():void {
+            clearOutput();
 			outputText("Strolling along the ashlands, you spot the familiar Phoenix squad. You ready your [weapon].");
 			if (flags[kFLAGS.PHOENIX_ENCOUNTERED] == 1) outputText("\n\n\"<i>Back again?</i>\" The leading phoenix says with a glare. \"<i>But... I guess you're a worthy opponent. Let's see what you're made of!</i>\" The phoenix yells as whole squad readies their scimitars and shields. You assume a combat stance.");
 			else outputText("\n\n\"<i>Back again?</i>\" The leading phoenix says with a glare. \"<i>Get ready for a rematch!</i>\" The phoenix yells as whole squad readies their scimitars and shields. You assume a combat stance.");
@@ -95,6 +102,7 @@ public class PhoenixScene extends BaseContent
 		}
 		
 		public function encounterPhoenixRepeat3():void {
+            clearOutput();
 			outputText("Strolling along the vulcanic crag, you spot the familiar Phoenix platoon. You ready your [weapon].");
 			if (flags[kFLAGS.PHOENIX_ENCOUNTERED] == 1) outputText("\n\n\"<i>Back again?</i>\" The leading phoenix says with a glare. \"<i>But... I guess you're a worthy opponent. Let's see what you're made of!</i>\" The phoenix yells as whole platoon readies their scimitars and shields. You assume a combat stance.");
 			else outputText("\n\n\"<i>Back again?</i>\" The leading phoenix says with a glare. \"<i>Get ready for a rematch!</i>\" The phoenix yells as whole platoon readies their scimitars and shields. You assume a combat stance.");
@@ -119,8 +127,12 @@ public class PhoenixScene extends BaseContent
 				addButton(3, "Ride Anal", rideAnal);
 				if (player.hasVagina()) addButton(4, "Ride Vaginal", rideVaginal);
 				//addButton(5, "Suck Her Dick", rideAnal);
-				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
-				addButton(14, "Leave", cleanupAfterCombat);
+				if (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armor == armors.LMARMOR || player.armor == armors.S_ARMOR)) {
+					if (player.armor == armors.S_ARMOR) addButton(7, "B.Titfuck", (player.armor as SuccubusArmor).succubusPaizuri);
+					else addButton(7, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
+				}
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(winAgainstPhoenix);
+								addButton(14, "Leave", cleanupAfterCombat);
 			}
 			else cleanupAfterCombat();
 		}
@@ -140,9 +152,9 @@ public class PhoenixScene extends BaseContent
 				addButton(3, "Ride Anal", rideAnal);
 				if (player.hasVagina()) addButton(4, "Ride Vaginal", rideVaginal);
 				//addButton(5, "Suck Her Dick", rideAnal);
-				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 				addButton(14, "Leave", cleanupAfterCombat);
-			}
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(winAgainstPhoenix1);
+							}
 			else cleanupAfterCombat();
 		}
 		
@@ -319,7 +331,7 @@ public class PhoenixScene extends BaseContent
 			outputText("\n\nThe phoenix's seed starts to seep between her tail and your sphincter, easing its passage ever so slightly. As if she was waiting for this extra give, she pushes hard and her tail suddenly shifts with no warning, jumping deep into you and stretching your walls.");
 			player.buttChange(30, true, true, true);
 			outputText("The tip of her flexing limb flicks against your prostate and you whine, unable to move your lower body to escape the sensation, your [cock] too tightly held to let you release.");
-			outputText("\n\nAs she continues you insult you her hand leaves her chest and snakes down her body, stroking and squeezing whenever she feels your ass spasm around her tail. Bending as she follows her leg down to where it holds you in place, her fingers slide through the mess of precum that has built up from her unstoppable teasing. She splays her hand around your member, foot sliding downwards and away from you as she gets a grip just as tight as before, never once giving you enough of an opportunity to let yourself climax. She smirks at you again as she starts to move over you, every twitch of her hips shifting the thick length inside you, your overly sensitive ass clenching at every tiny sensation.");
+			outputText("\n\nAs she continues to insult you, her hand leaves her chest and snakes down her body, stroking and squeezing whenever she feels your ass spasm around her tail. Bending as she follows her leg down to where it holds you in place, her fingers slide through the mess of precum that has built up from her unstoppable teasing. She splays her hand around your member, foot sliding downwards and away from you as she gets a grip just as tight as before, never once giving you enough of an opportunity to let yourself climax. She smirks at you again as she starts to move over you, every twitch of her hips shifting the thick length inside you, your overly sensitive ass clenching at every tiny sensation.");
 			outputText("\n\nHer hips move into position above yours and she lowers herself, crouching so that she can just brush your [cock] against her soaked pussy, mixing her own juices with your pre as she runs your tip up and down the cleft between her legs. She keeps her other hand firmly fixed on her own dick, smearing some precum along its length as she rubs herself in sync with her gentle teasing of you. You groan as she wiggles her hips, parting her lips slightly and letting you dip tantalizingly inside her as she presses her tail against your prostate again. ");
 			outputText("\n\nWith your body so desperate for release, you can barely recall that she's only using you to breed more of her dangerous, half-breed race, much less summon the will to care about such a thing. At this point you'd willingly help her father an entire generation if she'd just let you finish this one time. Your mind urges you to try and beg her, plead with her to give release to your aching shaft, but all that comes from your mouth is another agonizingly pleasure-filled moan.");
 			outputText("\n\nHer mouth twists into a sideways smile as your drawn out cry fills the air. She seems to get the message though, apparently satisfied that she's displayed exactly how weak you are in comparison to her. Her body starts to descend, lips spreading so slowly over your [cock] that you fear that your mind will explode with desire if she keeps you on edge any longer. As if on cue, her hand relents around the base of your manhood and she slams herself down, gasping as you fill her utterly. Her hot, wet depths are utter bliss to your abused member, the sweet tightness a welcome change to the painful, vice-like grip that had held you previously. Unable to even consider containing yourself, your balls tighten and your shaft spasms wildly within her even as you feel her tip thrash wildly inside you, repeatedly smacking against your prostate in an attempt to force every drop out of you. ");

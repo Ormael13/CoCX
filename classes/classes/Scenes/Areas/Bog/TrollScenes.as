@@ -6,6 +6,8 @@ package classes.Scenes.Areas.Bog
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.Items.Armors.LustyMaidensArmor;
+	import classes.Items.Armors.SuccubusArmor;
 	import classes.Scenes.Areas.GlacialRift.GlacialFemaleTroll;
 	import classes.Scenes.Areas.GlacialRift.GlacialMaleTroll;
 	import classes.Scenes.SceneLib;
@@ -34,6 +36,10 @@ package classes.Scenes.Areas.Bog
 			if (player.hasCock()) addButton(2, "Anal Rape", encounterAdultMaleTrollLostAnalRape);
 			else addButtonDisabled(2, "Anal Rape", "You need a penis for this scene.");
 			addButton(3, "Leave", encounterAdultMaleTrollLostLeave);
+			if (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armor == armors.LMARMOR || player.armor == armors.S_ARMOR)) {
+				if (player.armor == armors.S_ARMOR) addButton(7, "B.Titfuck", (player.armor as SuccubusArmor).succubusPaizuri);
+				else addButton(7, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
+			}
 		}
 		public function encounterAdultMaleTrollLostFemaleRape():void {
 			clearOutput();
@@ -93,7 +99,7 @@ package classes.Scenes.Areas.Bog
 				EventParser.gameOver();
                 return;
 			}
-			else if (player.statusEffectv1(StatusEffects.TrollDefeatsCounter) > 3) {
+			else if (player.statusEffectv1(StatusEffects.TrollDefeatsCounter) > 4) {
 				outputText("The troll looks at you closely, gritting his teeth. He looks almost strained, what’s going on..?\n\n");
 				outputText("He clicks his tongue, \"<i>Tsk, tsk, tsk. You… You, you, you…</i>\" He slowly approaches with long pauses in between each word. \"<i>You’re… so... familia’...</i>\"\n\n");
 				outputText("His height towers over you, you grow concerned with what he’s about to do, what does he want from you now? He rubs his tusks with his hands, seemingly lost in thought before staring at you intensely.\n\n");
@@ -105,7 +111,7 @@ package classes.Scenes.Areas.Bog
 				player.sexReward("cum","Lips");
 			}
 			else {
-				if (player.hasVagina()) {
+				if (player.hasVagina() && (!sceneHunter.uniHerms || rand(2) == 0)) {
 					outputText("You look up as the troll approaches you, making quick work of your [armor], quickly tearing it off of you and inspecting your body. Upon seeing your vagina he gives you a taunting grin as he pins you to the ground, grabbing hold onto your wrists, keeping you locked within his grasp, unable to escape from beneath him.\n\n");
 					outputText("He places his torso against your body, you squirm beneath him but to no avail, he’s far too strong. His prick has been erect for some time now, he wastes no time aligning himself with your sex before penetrating you. His manhood presses into your tight snatch, gently stretching out your walls. He feels so big inside you as he presses deeper, bucking into you.\n\n");
 					player.cuntChange(18,true,true,false);
@@ -225,6 +231,10 @@ package classes.Scenes.Areas.Bog
 			if (player.hasCock()) addButton(2, "Anal Rape", encounterAdultGlacialMaleTrollLostAnalRape);
 			else addButtonDisabled(2, "Anal Rape", "You need a penis for this scene.");
 			addButton(3, "Leave", encounterAdultGlacialMaleTrollLostLeave);
+			if (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armor == armors.LMARMOR || player.armor == armors.S_ARMOR)) {
+				if (player.armor == armors.S_ARMOR) addButton(7, "B.Titfuck", (player.armor as SuccubusArmor).succubusPaizuri);
+				else addButton(7, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
+			}
 		}
 		public function encounterAdultGlacialMaleTrollLostFemaleRape():void {
 			clearOutput();

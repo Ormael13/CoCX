@@ -486,7 +486,7 @@
 	 * 
 	 * 8	-- Backspace		-- Go to "Main" menu if in game
 	 * 68	-- d				-- Open saveload if in game
-	 * 65	-- a				-- Open apperance if in game
+	 * 65	-- a				-- Open Appearance if in game
 	 * 78	-- n				-- "no" if button index 1 displays no		<--
 	 * 89	-- y				-- "yes" if button index 0 displays yes		<-- These two seem akward
 	 * 80	-- p				-- display perks if in game

@@ -8,13 +8,12 @@ import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.SceneLib;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 public class FetishCultistScene extends AbstractLakeContent
 	{
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-
-		public function FetishCultistScene()
+				public function FetishCultistScene()
 		{
 		}
 
@@ -37,7 +36,7 @@ public class FetishCultistScene extends AbstractLakeContent
 				outputText("\n\n<b>New codex entry unlocked: Followers of the Fetish!</b>")
 			}
 			startCombat(new FetishCultist());
-			spriteSelect(19);
+			spriteSelect(SpriteDb.s_fetish_cultist);
 			doNext(playerMenu);
 		}
 
@@ -519,9 +518,9 @@ public class FetishCultistScene extends AbstractLakeContent
 				addButton(0, "Yes", playerRapesCultist);
 				if (player.hasStatusEffect(StatusEffects.Feeder)) addButton(2, "B.Feed", fetishCultistHasAMilkFetish).hint("Empty your heavy jugs.");
 				if (Mindbreaker.MindBreakerQuest == Mindbreaker.QUEST_STAGE_ISMB) addButton(3, "Mindbreak", mindbreakFemaleCultist).hint("Toy with the cultist brain.");
-				if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 				addButton(14, "Leave", cleanupAfterCombat);
-			}
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(cultistDefeated);
+							}
 			else cleanupAfterCombat();
 		}
 

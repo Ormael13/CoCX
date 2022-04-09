@@ -2,6 +2,7 @@
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 public class IzmaScene extends NPCAwareContent implements TimeAwareInterface
 	{
@@ -45,7 +46,7 @@ public class IzmaScene extends NPCAwareContent implements TimeAwareInterface
 			if (izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0 && flags[kFLAGS.IZMA_FEEDING_VALERIA] == 1 && flags[kFLAGS.VALARIA_AT_CAMP] > 0) {
 				flags[kFLAGS.VALERIA_FLUIDS] = 100;
 			}
-			if (model.time.hours > 23 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00246] > 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00246] = 0;
+			if (model.time.hours > 23 && flags[kFLAGS.GOT_STOOTH_FROM_IZMA_TODAY] > 0) flags[kFLAGS.GOT_STOOTH_FROM_IZMA_TODAY] = 0;
 			return false;
 		}
 
@@ -69,7 +70,7 @@ override public function izmaFollower():Boolean {
 
 public function izmaSprite():void
 {
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 }
 
 public function totalIzmaChildren():int {
@@ -77,7 +78,7 @@ public function totalIzmaChildren():int {
 }
 
 public function meetIzmaAtLake():void {
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	clearOutput();
 	//(PC scared Izma off with worms) (Izmacounter = 0)
 	if(flags[kFLAGS.IZMA_WORMS_SCARED] == 1) {
@@ -190,7 +191,7 @@ public function meetIzmaAtLake():void {
 
 //[Trade]
 private function tradeWithFuckingSharkBitches():void {
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	clearOutput();
 	outputText("Izma opens up her wooden trunk, and lays out some old books for you to look at.  An interesting and varied selection, if a small one; they've evidently been used before with their turned up corners and worn-looking pages.  Still good, of course.\n\n");
 	//[C.Manual] [E.Guide] [Porn][Back]
@@ -206,7 +207,7 @@ private function tradeWithFuckingSharkBitches():void {
 
 //[C.Manual]
 private function readSharkCuntManual():void {
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 //Use only 10w30 jism.
 	clearOutput();
 	outputText("You point to a pile of books which has a note on top declaring them to be combat manuals, feeling any combat tips you can get will be invaluable in this land.  \"<i>Those?</i>\" the shark asks.  \"<i>They're okay, I guess.  Mostly for beginners, but there are a few worthwhile tricks in each one.  20 gems to borrow one.</i>\"");
@@ -220,7 +221,7 @@ private function readSharkCuntManual():void {
 }
 
 private function readSharkCuntManual2():void {
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	clearOutput();
 
 	outputText("Handing Izma the gems she asked for, you pick up one of the many issues of 'Combat Manual'. Izma takes a moment to count and store the gems you've given her, while you move over to a nearby rock to have a quick read of the volume.\n\n");
@@ -258,7 +259,7 @@ private function readSharkCuntManual2():void {
 
 private function buyBookCombatManual():void {
 	clearOutput();
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	outputText("You ask Izma if she's willing to part with the book so you can have an additional book for your bookshelf.  \"<i>I don't know.  These books are rare.  However, I DO have multiple copies of this type of book.  I'm willing to let go for 400 gems.</i>\"");
 	if (player.gems >= 400) {
 		outputText("\n\nDo you buy it?");
@@ -282,7 +283,7 @@ private function confirmBuyCombatManual():void {
 
 //[E.Guide]
 private function sharkEdgingGuideLOL():void {
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	//durhur
 	clearOutput();
 	outputText("You pick up a book titled 'Etiquette Guide' from its pile; the subtitle reads 'A handbook to society for the modern Lady or Gentleman'.  A little cheesy, but you suppose learning how to keep your mind on chastity and decorum might come in handy someday.  \"<i>Not a bad read.  Though, it's more or less useless for a shark girl like me,</i>\" Izma says of it, before holding her hand out to you.  \"<i>Hard to find more, so... 25 gems if you wanna borrow it.</i>\"");
@@ -296,7 +297,7 @@ private function sharkEdgingGuideLOL():void {
 }
 
 private function readSharkEdgingGuideLOL():void {
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	player.gems -= 25;
 	statScreenRefresh();
 	clearOutput();
@@ -317,7 +318,7 @@ private function readSharkEdgingGuideLOL():void {
 
 private function buyBookEtiquetteGuide():void {
 	clearOutput();
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	outputText("You ask Izma if she's willing to part with the book so you can have an additional book for your bookshelf.  \"<i>I don't know.  These books are hard to come by.  However, I DO have multiple copies of this type of book.  I'm willing to let go for 500 gems.</i>\"");
 	if (player.gems >= 500) {
 		outputText("\n\nDo you buy it?");
@@ -341,7 +342,7 @@ private function confirmBuyEtiquetteGuide():void {
 
 //[Porn]
 private function sharkgirlPronz():void {
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	clearOutput();
 	outputText("Izma seems exceedingly embarassed as you turn this book up from under a pile of the others.  It seems to be a series of erotic images made in this land itself, detailing various creatures of all different genders caught up in sexual situations.  You raise a questioning eyebrow to her.  \"<i>Ah, that... it's good material, I-I suppose,</i>\" she stammers, trying to cover her embarrassment at having mislaid it among the others.  \"<i>Uh... 20 gems if you want to look?</i>\"");
 	if(player.gems < 20) {
@@ -354,7 +355,7 @@ private function sharkgirlPronz():void {
 }
 
 private function readSharkgirlPornzYouFuckingPervertAsshole():void {
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	player.gems -= 20;
 	statScreenRefresh();
 	clearOutput();
@@ -386,7 +387,7 @@ private function readSharkgirlPornzYouFuckingPervertAsshole():void {
 
 private function buyBookPorn():void {
 	clearOutput();
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	outputText("You ask Izma if she's willing to part with the book so you can have an additional book for your bookshelf.  \"<i>I don't know.  This type of book is quite the fine type and I normally don't let go of this book.  However, I DO have multiple copies of this type of book.  I'm willing to let go for 400 gems.</i>\"");
 	if (player.gems >= 400) {
 		outputText("\n\nDo you buy it?");
@@ -410,7 +411,7 @@ private function confirmBuyPorn():void {
 
 //[Talk]
 private function talkToASharkCoochie():void {
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	clearOutput();
 	//(first chat)
 	if(flags[kFLAGS.IZMA_TALKED_AT_LAKE] == 0) {
@@ -437,7 +438,7 @@ private function talkToASharkCoochie():void {
 }
 //[Leave]
 private function leaveSumSharkPussyOnTheBeach():void {
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	clearOutput();
 	outputText("Having no business with Izma for the time being, you head off back to your camp.");
 
@@ -463,7 +464,7 @@ private function fightSharkCunt():void {
 	else outputText("Izma laughs slightly and shakes her head.  \"<i>If you insist.  At least TRY this time, will ya?</i>\"");
 	player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
 	startCombat(new Izma());
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 }
 
 
@@ -1046,7 +1047,7 @@ private function chooseYourIzmaWeapon():void {
 }
 //[no-fight Sex: use penus]
 private function nonFightIzmaSmexPAINUS():void {
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	clearOutput();
 	outputText("Hearing that her offer is being accepted, Izma smiles brightly and sheds what little clothing she has on.  The top half of her black bikini goes first; her DD-cup breasts jiggle about from the motions, and she sighs happily now that she's free of the restricting garments.  She then gets to work undoing the well-crafted grass skirt, and props it on her oak chest as gently as possible so as not to damage it.  Her monstrous cock swings heavily between her knees, slowly hardening at the prospect of sweet release.  She's a rather magnificent specimen all things considered, and you find yourself ogling every curve on her well-toned body.\n\n");
 
@@ -1112,7 +1113,7 @@ private function nonFightIzmaSmexPAINUS():void {
 
 //[no-fight sex: get your ass in the car]
 private function nonFightIzmaSmexASS():void {
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	clearOutput();
 	outputText("Once you strip down and reveal your nude form to Izma, she purses her lips in thought.  \"<i>Well, this is a problem....</i>\"  You raise an eyebrow as she stalks around you.  \"<i>How, uh... how are we gonna do this?  I mean... I'm NOT putting my mouth there, you can get those thoughts out of your head!</i>\" she says indignantly; you frown slightly, feeling dejected because of your odd condition.\n\n");
 
@@ -1128,7 +1129,7 @@ private function nonFightIzmaSmexASS():void {
 }
 //[no-fight sex: use vagino]
 private function nonFightIzmaSmexCUNTPUSSYSNATCHQUIM():void {
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	clearOutput();
 	outputText("Izma grins in response, and her hands move behind her back, undoing the strings on her black bikini top.  She flings the garment to the rocks, exposing her large, juicy breasts.  As if deciding to tease you, she turns around and grabs the hem of her skirt, pulling it down slowly and letting you get a good view of her firm ass.  She slowly faces you again, her massive 15-inch cock and balls swinging around with her.  You don't even realize that you've been unconsciously touching yourself throughout the whole thing, earning an uncharacteristic giggle from Izma.\n\n");
 
@@ -1157,7 +1158,7 @@ private function nonFightIzmaSmexCUNTPUSSYSNATCHQUIM():void {
 
 //Decline Izma moving in
 private function IzmaStayAtTheLakeBitch():void {
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	//[Izma stays at the lake]
 	clearOutput();
 	outputText("You smile warmly and tightly grip both her hands.  You tell her that she's certainly a worthy opponent and mate, but right now just isn't the right time for her to move in with you.  She frowns and looks disappointed, but she seems to be holding back a lot of her emotions.  \"<i>Okay, I'll stay here for now then... but I'll always be willing to join you.  Whenever you need me,</i>\" she replies.\n\n");
@@ -1169,7 +1170,7 @@ private function IzmaStayAtTheLakeBitch():void {
 }
 //Accept
 private function acceptIzmaAsYourBitch():void {
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	clearOutput();
 	//[If Pure Amily is in the camp first]
 	if(flags[kFLAGS.IZMA_AMILY_FREAKOUT_STATUS] == 0 && flags[kFLAGS.AMILY_FOLLOWER] == 1) {
@@ -1229,7 +1230,7 @@ private function acceptIzmaAsYourBitch():void {
 
 		outputText("Izma looks to you curiously once you return to her.  \"<i>So what's your story with her?</i>\" she asks.  You give a sigh and tell Izma how you met Marble at Whitney's farm and how a relationship formed between you over time.  Then you go on about how, sadly, you became addicted to her milk without even realizing its corrupt nature.  ");
 		//(If the player is fatally addicted)
-		if(player.findPerk(PerkLib.MarblesMilk) >= 0) outputText("You couldn't break your addiction, and now you'll die without a steady supply of her milk.");
+		if(player.hasPerk(PerkLib.MarblesMilk)) outputText("You couldn't break your addiction, and now you'll die without a steady supply of her milk.");
 		//(If the player broke their addiction)
 		else outputText("Thankfully, though you were able to break her milk's hold, and you realized you love Marble despite all that transpired between you, letting her move in with you.");
 		outputText("\n\n");
@@ -1254,12 +1255,17 @@ private function acceptIzmaAsYourBitch():void {
 	}
 	//Set 'camp Izma' flag
 	flags[kFLAGS.IZMA_FOLLOWER_STATUS] = 1;
+	if (player.hasKeyItem("Radiant shard") >= 0){
+		player.addKeyValue("Radiant shard",1,+1);
+	}
+	else player.createKeyItem("Radiant shard", 1,0,0,0);
+	outputText("\n\n<b>Before fully settling in your camp as if remembering something Izma pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
 	doNext(camp.returnToCampUseOneHour);
 }
 
 //[Amily arrives: Izma is at camp first]
 public function newAmilyMeetsIzma():void {
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	clearOutput();
 	outputText("You and Amily seem to talk non-stop on the way back, both excited at the prospect of living together.  Then she realizes you're not alone, once she sees Izma seated on her trunk, and looks puzzled. \"<i>[name]... there's a shark-girl in your camp!</i>\" she hisses, looking ready to fight or flee if the situation warrants.\n\n");
 
@@ -1289,7 +1295,7 @@ public function newAmilyMeetsIzma():void {
 
 //[Marble: Izma is at camp first]
 public function newMarbleMeetsIzma():void {
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	clearOutput();
 	outputText("You and Marble are deep in conversation all the way to your camp, mainly inconsequential things to pass the time.  Marble enjoys the talk all the same, but she comes to a halt once she sees Izma sitting around your camp.  \"<i>Ah... who's that, sweetie?</i>\" she asks.\n\n");
 
@@ -1335,7 +1341,7 @@ Bleed effect; target has a 50% chance to be bleeding, causing them to lose 2-7% 
 
 //[=Sex=]
 private function izmaLakeTurnedDownCampSex():void {
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	clearOutput();
 	outputText("You give Izma a smirk and tell her that, if she's in the mood, you could use a little 'relief'.\n\n");
 	outputText("The tigershark grins right back at you, carefully undoing her skirt and letting her impressive, rapidly-growing erection free.  \"<i>Sounds great to me, lover.  So, what are you in the mood for?  A little equal time?  Exerting your place as alpha?</i>\"  She gives you a very wicked grin.  \"<i>Or... do you want to let your beta have her wicked way with you, hmm?</i>\"  She growls lustfully at the thought.");
@@ -1345,7 +1351,7 @@ private function izmaLakeTurnedDownCampSex():void {
 
 //[Equals]
 private function izmaLakeSexAsEquals():void {
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	clearOutput();
 	outputText("You tell Izma that you would like to have sex as equals; you and she.  She smiles and asks you what part you'd like to use.\n\n");
 	//((If player is Genderless)
@@ -1359,7 +1365,7 @@ private function izmaLakeSexAsEquals():void {
 }
 //[=Dominate=]
 private function izmaLakeDominate():void {
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	clearOutput();
 	outputText("Izma blushes fiercely and a lewd smile comes over her face at the suggestion.  \"<i>O-okay,</i>\" she says, stripping off her bikini top and gently removing her grass skirt, allowing her breasts and monster cock to pop free.  She sits down and smiles at you.  \"<i>After you...</i>\"\n\n");
 	var x:Number = player.cockThatFits(65);
@@ -1427,7 +1433,7 @@ private function izmaLakeDominate():void {
 
 private function izmaLakeDominateContinueVanilla(vanilla:Boolean = true) :void
 {
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	var cockIndex:Number = player.cockThatFits(65);
 	if(cockIndex < 0) cockIndex = 0;
 
@@ -1472,7 +1478,7 @@ private function izmaLakeDominateContinueVanilla(vanilla:Boolean = true) :void
 //[No]
 private function noWankingForIzmaRadarSaysSo():void {
 	clearOutput();
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	//var cockIndex:Number = player.cockThatFits(65);
 	//if(x < 0) cockIndex = 0;
 	outputText("Opting not to jerk her member off, you continue your gyrations against the tigershark's twat, brutally slamming the head of your cock against the feelers in her pussy and battering them around like tree branches in a wind storm.  Izma, sensing that you will not be giving her member the attention it \"deserves\", reaches down with one hand and takes hold of her cock, jerking it impetuously as she struggles to pleasure herself in between thrusts of your cock.  Raising an eyebrow, you contemplate whether she should be allowed to just start masturbating without permission...");
@@ -1482,7 +1488,7 @@ private function noWankingForIzmaRadarSaysSo():void {
 //[Let her masturbate]
 private function letIzmaWankLikeABitch():void {
 	clearOutput();
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	//var cockIndex:Number = player.cockThatFits(65);
 	//if(cockIndex < 0) cockIndex = 0;
 	outputText("Grinning at her sudden need for penile release, you dart in for an intimate kiss and further inflame her passion, soliciting a series of sated moans as she reciprocates while increasing the speed of her stroking.\n\n");
@@ -1492,7 +1498,7 @@ private function letIzmaWankLikeABitch():void {
 //[Remove her hands]
 private function noWankingForIzma():void {
 	clearOutput();
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	//var cockIndex:Number = player.cockThatFits(65);
 	//if(cockIndex < 0) cockIndex = 0;
 	outputText("Grunting in disapproval, you slap her hand away from her cock, drawing a surprised gasp in between moans of pleasure from your partner; she stares up at you pleadingly to let her finish herself off.  Calmly, you tell Izma that she didn't ask for permission and has lost that \"privilege\", as you take hold of her hands and grasp them firmly on the ground, trapping her in a lover's embrace.  Izma groans pathetically out of frustration and a need for forgiveness, but you know that she needs to be \"punished\" for masturbating without asking.  With renewed vigor as the feeling of utter dominance and control floods your body, you savagely fuck Izma's moist cunt, slapping against her so ferociously that you might as well be spanking her with your [if (balls > 0) [balls]|thighs]; the force of your efforts resonates in her moans as they rise and taper off in volume with every thrust against her.  Confidently, you whisper in Izma's ear that if she's lucky, she'll release her sticky load without even being touched, the thought of which causes her cock to bob like a raven hopping on the ground after prey.  \"<i>Good girl!  Do that for your Alpha</i>\".\n\n");
@@ -1509,7 +1515,7 @@ private function izmaCumsAfterRadarStuffHere(denied:Boolean):void {
 
 //[=Submit=] (more copypasta – bring the vino! -Z)
 private function submitToLakeIzma():void {
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	clearOutput();
 	//(starter -all sexes)
 	outputText("You give Izma a smile and begin to slowly, sensuously remove your [armor], littering the sand around you.  As the tigershark watches, you strike a few poses, and then sink onto your hands and knees with your rear facing towards her.  You twist around to look at her over your shoulder, ");
@@ -1668,7 +1674,7 @@ public function izmaFollowerMenu2():void {
 // tion camp
 //[Follower options]
 public function izmaFollowerMenu():void {
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	clearOutput();
 
 	if (flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0)
@@ -1704,7 +1710,7 @@ public function izmaFollowerMenu():void {
 	{
 		outputText("Izma smiles and puts away her book at your approach.");
 
-		outputText("\n\n“<i>What can I do for you, Alpha?</i>”");
+		outputText("\n\n\"<i>What can I do for you, Alpha?</i>\"");
 	}
 	if (flags[kFLAGS.IZMA_BROFIED] > 0) {
 		izmaelScene.izmaelMenu();
@@ -1753,10 +1759,10 @@ private function sendToFishery():void
 	clearOutput();
 	izmaSprite();
 	outputText("You ask Izma if she wouldn’t mind working at the newly made fishery to bring back some food to camp.");
-	outputText("\n\n“<i>Sure anything for you Alpha. I will fill barrels worth of food.</i>”");
+	outputText("\n\n\"<i>Sure anything for you Alpha. I will fill barrels worth of food.</i>\"");
 	outputText("\n\n<b>Izma will now start bringing fish back to camp.</b>");
 	flags[kFLAGS.FOLLOWER_AT_FISHERY_IZMA] = 1;
-	doNext(camp.returnToCampUseOneHour);
+	doNext(playerMenu);
 }
 
 private function sendToFarm():void
@@ -1766,15 +1772,15 @@ private function sendToFarm():void
 
 	outputText("You tell your beta that she is to head towards the lake, find a farm, present herself to the lady who works there and do as she says. Izma’s brow furrows as she takes this in.");
 
-	outputText("\n\n“<i>If you say so, alpha. It’ll be nice to be near the lake again, but... have I done something wrong?</i>”");
+	outputText("\n\n\"<i>If you say so, alpha. It’ll be nice to be near the lake again, but... have I done something wrong?</i>\"");
 
-	outputText("\n\n“<i>Not at all,</i>” you reply. “<i>I just need someone I can trust down there helping out. I’ll visit often though, don’t worry.</i>” This seems to content the tiger shark. She packs up her chest, waves at you, and then begins to haul it in the direction of the lake.");
+	outputText("\n\n\"<i>Not at all,</i>\" you reply. \"<i>I just need someone I can trust down there helping out. I’ll visit often though, don’t worry.</i>\" This seems to content the tiger shark. She packs up her chest, waves at you, and then begins to haul it in the direction of the lake.");
 
 	outputText("\n\nIzma might be strong, you think, but she is completely unused to manual labor and taking orders from anyone but yourself; you doubt she will help Whitney much. On the other hand, there’s no doubt you’ve just given the farm a powerful protector.");
 
 	flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] = 1;
 
-	doNext(camp.returnToCampUseOneHour);
+	doNext(playerMenu);
 }
 
 private function backToCamp():void
@@ -1784,7 +1790,7 @@ private function backToCamp():void
 
 	outputText("You tell her to head back to camp; she will be more use to her alpha there.");
 
-	outputText("\n\n“<i>Whatever you say.</i>” She grins and wrinkles her nose. “<i>It was nice to be by the lake again, but I’m glad to get out of here: farm work isn't exactly stimulating.</i>” You leave Izma to pack up her things and go.");
+	outputText("\n\n\"<i>Whatever you say.</i>\" She grins and wrinkles her nose. \"<i>It was nice to be by the lake again, but I’m glad to get out of here: farm work isn't exactly stimulating.</i>\" You leave Izma to pack up her things and go.");
 
 	flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] = 0;
 
@@ -1793,21 +1799,21 @@ private function backToCamp():void
 
 //Get a tiger shark tooth
 public function gatASharkTooth():void {
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	clearOutput();
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00246] > 1) {
+	if(flags[kFLAGS.GOT_STOOTH_FROM_IZMA_TODAY] > 1) {
 		outputText("Izma smiles apologetically and says, \"<i>I'm sorry, but I won't be able to get my hands on one of those until tomorrow.</i>\"");
 		doNext(izmaFollowerMenu);
 	}
 	else {
 		outputText("Izma smiles as she pulls a tooth from her chest.  She hands it to you with a pleased expression.  \"<i>Anything for you, my Alpha.</i>\"  ");
-		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00246]++;
+		flags[kFLAGS.GOT_STOOTH_FROM_IZMA_TODAY]++;
 		inventory.takeItem(consumables.TSTOOTH, playerMenu);
 	}
 }
 //[Appearance]
 private function izmaPearance():void {
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	clearOutput();
 	outputText("Izma is a 6-foot 2-inch tall tigershark, with a very toned athletic build; her muscles are covered by coarse red sharkskin, marked with black stripes across her body.  She is currently wearing a bikini top with a grass skirt");
 
@@ -1829,7 +1835,7 @@ private function izmaPearance():void {
 	doNext(izmaFollowerMenu);
 }
 private function izmaSexMenu():void {
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	//[Get Anal] [Her Vag] [69] [Izma Mounts PC]
 	menu();
 	if (flags[kFLAGS.IZMA_NO_COCK] == 0) {
@@ -1850,7 +1856,7 @@ private function izmaSexMenu():void {
 }
 //[Izma mounts the PC]
 private function followerIzmaMountsPC(lastHalf:Boolean = false):void {
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	clearOutput();
 	var x:Number = player.cockThatFits(65);
 	if(x < 0) x = 0;
@@ -1925,7 +1931,7 @@ private function izmaPreg():void {
 
 
 private function RadarIzmaLeaveHerWangUnWingWanged():void {
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	clearOutput();
 	outputText("As much as you think Izma would enjoy a handjob, you are not too keen on stimulating her member right now.  Izma notices your momentary stare at her rather large cock and grins mischievously at you.  \"<i>Come on, bitch! Pleasure your \"Alpha\"; you know you want to!</i>\" she chimes.  You stare back at her, and kindly inform her that her Alpha isn't keen on doing that; your reasons are your own, but you simply don't want to do that.  Her confident smirk almost immediately evaporates.  \"<i>Oh... sorry. I was caught up in the moment. If it's okay with you, I'll just jerk my cock while I dominate my Alpha,</i>\" she purrs.  Smiling back at her, you nod and give her a slap on the ass, giving her the message to giddy up.  With complete abandon, your tigershark lover giggles and bounces against your lap, manhandling your cock with those pussy feelers.  Moaning in appreciation, you dart your hands up to her rump and grasp it in your hands.  Driven by pleasure and sexual instinct, Izma fiercely strokes her member, moaning blissfully as her closed eyelids twitch from the dual pleasures of ravaging her cunt with your cock and jerking her prick in her hand.  She tries hard to contain the force of her sexual euphoria, but her expression ultimately betrays her escalating passion as she grits her teeth and physically opens her mouth to let out a hardy moan; dead silence is the only thing that escapes from her wide open mouth for a few briefs moments, before she releases a prolonged, erratic series of wails.");
 	outputText("\n\nIzma bites her lip in response, clearly wanting to enjoy her time on top just a little bit longer.  But the grunts and moans of ecstasy make it clear that the tigershark can't hold back much longer.  Her vaginal walls clamp down hard against your cock.  She squeals loudly as thick ropes of jizz launch from her cock, her hands cupping her cockhead to keep the cum from streaming onto your face or body.");
@@ -1956,7 +1962,7 @@ private function RadarIzmaLeaveHerWangUnWingWanged():void {
 
 //[Get Anal]
 private function followerIzmaTakesItInPooper():void {
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	clearOutput();
 	outputText("When you tell Izma you want her to screw you this time, she exclaims, \"<i>Ooh! It's my turn to be alpha!</i>\"  Her look of deviant joy fades into a blush of fondness for a moment, and she holds you and whispers into your ear, \"<i>It's really nice that you let me take charge, too.  Thanks for thinking of it.</i>\"\n\n");
 
@@ -2093,7 +2099,7 @@ private function followerIzmaTakesItInPooper():void {
 
 //[Vag fuck]
 private function followerIzmaTakesItInVagoo():void {
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	if(flags[kFLAGS.IZMA_NO_COCK] == 0) player.slimeFeed();
 	clearOutput();
 	outputText("Admiring the view of the tigershark's ornamented crotch, you lower the bottoms of your [armor] and reveal the base of your [cocks], something that instantly draws Izma's eyes.  You ask how she'd like her alpha to tend to her oft-neglected pussy.  Izma smiles eagerly and spreads her legs");
@@ -2159,7 +2165,7 @@ private function followerIzmaTakesItInVagoo():void {
 //[Deny her]
 private function radarIzmaXpackDenyHer():void {
 	clearOutput();
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	outputText("Resolving that she needs to understand that your desires will be sated before her own, you quickly seize her by the wrists and forcefully push them past her head, pinning them hard against the ground.  Izma whines pathetically as her efforts to stimulate her cock are utterly denied by her Alpha; her cock twitches hungrily against your stomach as you lay against her prone body. With pleading eyes and without uttering a single word, she begs you to let her tend to her member; her non-verbal cries for sexual mercy are quashed as you plant a forceful kiss on her lips, still pinning her arms against the ground as you thrust in her moist cunt. With a mix of pleasure and frustration, she releases a series of moans into your mouth and resigns herself to you as you passionately dominate her.");
 	//(leads to Where's it going?)
 	wheresItGoing(true);
@@ -2169,7 +2175,7 @@ private function radarIzmaXpackDenyHer():void {
 //[Let her]
 private function radarIzmaXPackLetHer():void {
 	clearOutput();
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	outputText("You reach up to caress and fondle her breasts, gently tugging and rubbing her stiff nipples and giving them the occasional soft pinch.  The pretty tigershark responds well to your movements, moaning and gasping from pleasure.  She bites her lip, thankfully with her human teeth, and gains speed as she jerks her meat pole.\n\n");
 
 	outputText("Seeing that she is speeding up, you accelerate your own thrusts, trying to match her pace.  The tendrils inside her vagina writhe and flex, an experience unlike anything you've had before - you don't think any creature other than a succubus could give you this sort of pleasure!");
@@ -2177,7 +2183,7 @@ private function radarIzmaXPackLetHer():void {
 	wheresItGoing();
 }
 private function wheresItGoing(denied:Boolean = false):void {
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	outputText("\n\nIzma continues to moan and groan loudly, and starts to mash her own hips against yours, trying to work in as many inches of your " + Appearance.cockNoun(player.cocks[0].cockType) + " as she can.  As she ");
 	if(!denied) outputText("jerks off ");
 	else outputText("moans fiercely ");
@@ -2188,7 +2194,7 @@ private function wheresItGoing(denied:Boolean = false):void {
 }
 //[facial] Scene follows vanilla scripting from Jokester
 private function facialWhereItGoesRadarIzmaXpack():void {
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	clearOutput();
 	outputText("This sends a shudder through Izma's whole body.  She cries loudly as she orgasms");
 	outputText(", a hot jet of spunk going straight into your mouth, and several subsequent shots hitting you in the lips and face.  ");
@@ -2212,7 +2218,7 @@ private function facialWhereItGoesRadarIzmaXpack():void {
 }
 //[Your chest]
 private function RadarIzmaCumInYourChest():void {
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	clearOutput();
 	outputText("Taking a firm hold of her, you angle her lengthy member towards your chest and close your eyes in anticipation for her orgasmic release.  She doesn't disappoint as the smell of sweet, salty sperm rushes into your nostrils, signaling your body to receive her hot cum. Before you can truly relish inhaling your lover's scent, her load slaps forcefully ");
 	if(player.biggestTitSize() >= 1) outputText("in between your " +  chestDesc() + " and coats ");
@@ -2243,7 +2249,7 @@ private function RadarIzmaCumInYourChest():void {
 }
 
 private function IzmaSelfFacialWheeRadar():void {
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	clearOutput();
 	outputText("Opting to direct her impending orgasm away from you entirely, you slap Izma's hands away, grabbing her dick and angling it towards her face.  With one last savage thrust, you bore your dick deep into her love canal and unleash a vicious flood of semen into her womb, which causes the tigershark to scream out in her own orgasm.  Fierce ropes of her cum soar out into the open air and speedily land on her blissed out face; some of it lands in her mouth between passionate groans and cries of euphoria.");
 	outputText("\n\nYour own seed ");
@@ -2261,7 +2267,7 @@ private function IzmaSelfFacialWheeRadar():void {
 }
 //[69]
 private function followerIzmaTakesIt69():void {
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	player.slimeFeed();
 	clearOutput();
 	outputText("Izma smiles and nods, swinging her hips from side to side as she makes her way over to you, as if to tease you further. She positions her head at your groin, rubbing her own crotch against your head.  \"<i>Alright, let's do this,</i>\" Izma says happily, and wastes no time ");
@@ -2313,7 +2319,7 @@ private function followerIzmaTakesIt69():void {
 
 //[Talk]
 private function talkWivIzma():void {
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	clearOutput();
 	//(option 1)
 	if(flags[kFLAGS.IZMA_TALK_LEVEL] == 0) {
@@ -2443,14 +2449,14 @@ private function talkWivIzma():void {
 }
 //[Leave]
 private function chooseNotToFlirtWithIzma():void {
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	clearOutput();
 	outputText("You thank Izma for the interesting conversation, even if it did end up meandering a bit, and then walk away, leaving her to her private thoughts.\n\n");
 	doNext(camp.returnToCampUseOneHour);
 }
 //Flirt]
 private function chooseToFlirtWithIzma():void {
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	clearOutput();
 	outputText("You smile at Izma and tell her you appreciate the offer and that you think she'll be beautiful whether she becomes a mommy or a daddy.  In fact, the mental image of her heavily pregnant, ");
 	if (flags[kFLAGS.IZMA_NO_COCK] == 0) outputText("her huge cock barely able to poke past her baby-filled belly, ");
@@ -2478,7 +2484,7 @@ private function chooseToFlirtWithIzma():void {
 //(The four 'Mount' and 'Ride' sex scenes mentioned as appearing once Izma goes off her meds have not been included, and therefore this content cannot be implemented as written. As it stands, I suggest excluding those menus entirely, rerouting players back to the normal sex menu, and adding pregnancy checks to the existing sex scenes where applicable (follower vag sex and Izma mounts, and pre-follower victory vag sex with no herb). Unless they were omitted by accident, or you ask someone to write them, make a placeholder, or copypasta new scenes together from her old scenes -- again. -Z)
 
 private function childToggle():void {
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	//This scene is only available for one time; once it has been played through, the "Children" button is replaced by the No Kids/Make Kids button, as appropriate/ (This scene could be cut to save a flag, if necessary. Though, you have thousands, don't you? -Z)
 	clearOutput();
 	if(flags[kFLAGS.IZMA_PREGNANCY_DISCUSSED] == 0) {
@@ -2517,7 +2523,7 @@ private function childToggle():void {
 
 //[=No=]
 private function firstTimeDeclineIzmasKdiddlezlijfhdjkfhslkfbsjkhfbs():void {
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	clearOutput();
 	outputText("You tell Izma, with a shake of your head, that you aren't ready to be a parent yet.  The tigershark looks a little disappointed, but she gives a soft sigh and nods in understanding.  \"<i>You're the boss.  So, what did you want to do?</i>\" she asks.\n\n");
 	//Default Izma interaction options are displayed/
@@ -2540,7 +2546,7 @@ private function IzmaPoopsBabies():void {
 		prison.prisonLetter.letterFromIzma();
 		return;
 	}
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	clearOutput();
 	outputText("You hear the sounds of splashing and cursing coming from the part of the stream where Izma, by neccessity, keeps her private mini-camp, and immediately you set off running. When you come tearing to a halt there, you find Izma, wading in the stream well up to her waist, and cursing as she holds her gravid belly, her tail angrily flailing through the water behind her. She still manages to smile when she sees it's you who's come to see her. No words are neccessary; you plunge into the water and head to her side.\n\n");
 
@@ -2604,7 +2610,7 @@ public function pcPopsOutASharkTot():void {
 		//(Take some fucking melancholy. TAKE IT. -Z)
 	}
 	else {
-		spriteSelect(32);
+		spriteSelect(SpriteDb.s_izma);
 		//Player Gives Birth (Izma in camp): (For the reason given above, this scene currently has a very high chance of being useless, so I wouldn't waste time on it yet. Also, it's a bit of a turd. Orgasm despite the pain of childbirth exists but the clumsy handling here wouldn't convince you even if you'd already seen it live. Oh, the pain is so intense I can't walk... but wait, she's touching my junk over and over in a vague manner so it becomes pretty great. Thank you, Shark Herm Jesus! I advise cutting the 'sexual' content and keeping a normal childbirth unless you want it rewritten from the foundations. But you've got time to decide. -Z)
 		outputText("You wake up suddenly to strong pains and pressures in your gut.  As your eyes shoot wide open, you look down to see your belly absurdly full and distended.  ");
 		if(player.vaginas.length == 0) {
@@ -2669,7 +2675,7 @@ public function pcPopsOutASharkTot():void {
 //Children Interaction Sequences: (increment childcounters only for births after Izma joins)
 //Children
 public function izmaKidsPlaytime():void {
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	clearOutput();
 	var choices:Array = [];
 	//Build an array of the possible scenes
@@ -2769,7 +2775,7 @@ public function izmaKidsPlaytime():void {
 }
 
 private function inCampRideIzmasDickDongTheWitchIsDead():void {
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	clearOutput();
 	outputText("You direct a flushed look at Izma and rub your ");
 	if(player.wetness() > 3) outputText("dripping ");
@@ -2859,7 +2865,7 @@ private function inCampRideIzmasDickDongTheWitchIsDead():void {
 //[Using Izma's books in camp]
 ///[Books] appears as a tab when interacting with Izma.
 public function IzmaCampBooks():void {
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	clearOutput();
 	if(flags[kFLAGS.IZMA_TIME_TILL_NEW_BOOK_AVAILABLE] > 0) {
 		tooSoonExecutus();
@@ -2876,7 +2882,7 @@ public function IzmaCampBooks():void {
 
 //[C.Manual]
 private function campCuntManual():void {
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	clearOutput();
 	outputText("You ask Izma if she'd like to read one of the many issues of the 'Combat Manual' with you.  She gives a snigger and grabs a random issue. \"<i>Of course.  But I honestly never thought someone as good as you would need any more tips in combat,</i>\" she teases, getting comfy on a rock.  You sit beside her to read, and retort that, if anything, you're using the chance to give her combat tips.  Izma shoots you a half-hearted dirty look in response, but you think she knows you're teasing her.\n\n");
  	flags[kFLAGS.IZMA_TIME_TILL_NEW_BOOK_AVAILABLE] = 11;
@@ -2904,7 +2910,7 @@ private function campCuntManual():void {
 }
 //[E.Guide]
 private function entropyGuideByStephenHawking():void {
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	clearOutput();
 	outputText("You point to Izma's many copies of the 'Etiquette Guide' series and ask her if she'd like to read one of those. Izma shrugs in response and picks up one issue.  \"<i>Yeah, I suppose.  You certainly need to learn how to be mannerly,</i>\" she teases, opening up on the table of contents.  You lightly consider whether that makes her a hypocrite before giving it up and starting to read with her.  That way lies madness.\n\n");
 	flags[kFLAGS.IZMA_TIME_TILL_NEW_BOOK_AVAILABLE] = 11;
@@ -2918,7 +2924,7 @@ private function entropyGuideByStephenHawking():void {
 }
 //[Porn]
 private function stephenHawkingPorn():void {
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	clearOutput();
 	outputText("A wicked smirk crosses your face and you point to the small bundle of porn that Izma has in her trunk. Izma looks nervous and pulls out one stack of the illustrations. \"<i>Ah-hah... really?</i>\" she asks, her face a rictus of embarrassment.  You nod in response and sit down on a rock, gesturing for Izma to join you.  She has some color on her face, though whether it be more or less than usual you can't decide, not knowing enough about her biology yet, and she sits down and starts to examine the porn with you, bumping your legs with hers as she adjusts her posture ");
 	if(flags[kFLAGS.IZMA_NO_COCK] == 0) outputText("continuously to keep the beast in her skirt pinned down.\n\n");
@@ -2933,7 +2939,7 @@ private function stephenHawkingPorn():void {
 }
 //(Trying to use another book inside the span of 6 hours)
 private function tooSoonExecutus():void {
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	clearOutput();
 	outputText("You tell Izma that you want to read a book with her again, and she gives you a petulant look.  \"<i>Really?   I mean, I love books, but even I get tired of them.  I was about to go do something else after cleaning up a bit.  We-ell... I don't feel like reading any more right now, but... if you were to pay me our usual arrangement I could let you borrow one for a while.  You know I trust you, but books do wear out even with the best of care, and there are a few new ones I'd like to get.</i>\"  Do you pay Izma to lend you a book?");
 
@@ -3079,7 +3085,7 @@ private function izmaDickToggle():void {
 //[Fuck her pussy-Dominant]
 private function fuckIzmasPussyDominate():void {
 	clearOutput();
-	spriteSelect(32);
+	spriteSelect(SpriteDb.s_izma);
 	var x:Number = player.cockThatFits(65);
 	if(x < 0) x = 0;
 	var y:Number = x + 1;
