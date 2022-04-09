@@ -17,19 +17,17 @@ import classes.internals.*;
 use namespace CoC;
 	
 	public class Incubus extends Monster
-	{
-		public var TrueDemons:DemonScene = new DemonScene();
-		
+	{		
 		override public function defeated(hpVictory:Boolean):void
 		{
 			game.flags[kFLAGS.DEMONS_DEFEATED]++;
-			TrueDemons.defeatIncubus();
+			SceneLib.defiledravine.demonScene.defeatIncubus();
 		}
 		
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
 		{
 			if (inDungeon) SceneLib.dungeons.ebonlabyrinth.defeatedByStrayDemon();
-			else TrueDemons.loseToAIncubus();
+			else SceneLib.defiledravine.demonScene.loseToAIncubus();
 		}
 		
 		private function cockTripAttack():void {

@@ -19,18 +19,16 @@ use namespace CoC;
 	
 	public class Succubus extends AbstractSuccubus
 	{
-		public var TrueDemons:DemonScene = new DemonScene();
-		
 		override public function defeated(hpVictory:Boolean):void
 		{
 			game.flags[kFLAGS.DEMONS_DEFEATED]++;
-			TrueDemons.defeatSuccubus();
+			SceneLib.defiledravine.demonScene.defeatSuccubus();
 		}
 		
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
 		{
 			if (inDungeon) SceneLib.dungeons.ebonlabyrinth.defeatedByStrayDemon();
-			else TrueDemons.loseToASuccubus();
+			else SceneLib.defiledravine.demonScene.loseToASuccubus();
 		}
 		
 		public function Succubus()

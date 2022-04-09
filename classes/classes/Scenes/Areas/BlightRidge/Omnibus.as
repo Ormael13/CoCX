@@ -20,18 +20,16 @@ use namespace CoC;
 	
 	public class Omnibus extends AbstractSuccubus
 	{
-		public var TrueDemons:DemonScene = new DemonScene();
-		
 		override public function defeated(hpVictory:Boolean):void
 		{
 			game.flags[kFLAGS.DEMONS_DEFEATED]++;
-			TrueDemons.defeatOmnibus();
+			SceneLib.defiledravine.demonScene.defeatOmnibus();
 		}
 		
 		override public function won(hpVictory:Boolean,pcCameWorms:Boolean):void
 		{
 			if (inDungeon) SceneLib.dungeons.ebonlabyrinth.defeatedByStrayDemon();
-			else TrueDemons.loseToAOmnibus();
+			else SceneLib.defiledravine.demonScene.loseToAOmnibus();
 		}
 		
 		public function Omnibus()
