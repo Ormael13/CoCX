@@ -541,7 +541,7 @@ use namespace CoC;
 				call: SceneLib.tedScene.introPostHiddenCave
 			},{
 				name: "dungeon",
-				call: SceneLib.dungeons.enterDeepCave,
+				call: SceneLib.dungeons.deepcave.enterDungeon,
 				when: SceneLib.dungeons.canFindDeepCave
 			}, {
 				name  : "walk",

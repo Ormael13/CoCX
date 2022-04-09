@@ -17,7 +17,7 @@ use namespace CoC;
 	{	
 		public function moveDisplacerBeastPhaseStrike():void {
 			outputText("The displacer beast blinks out and appears right behind you as it begins mauling you with its claws.");
-            for (i:int = 1; i < 4; ++i) {
+            for (var i:int = 1; i < 4; ++i) {
                 outputText("\n\nThe displacer beast claws you! ");
                 phasestrikeDmg();
             }
@@ -54,67 +54,17 @@ use namespace CoC;
 		
 		public function DisplacerBeast() 
 		{
-			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) {
-				if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 250) {
-					initStrTouSpeInte(217, 247, 360, 126);
-					initWisLibSensCor(126, 220, 110, 30);
-					this.weaponAttack = 70;
-					this.armorDef = 55;
-					this.armorMDef = 55;
-					this.bonusHP = 600;
-					this.bonusLust = 404;
-					this.level = 80;
-				}
-				else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 200) {
-					initStrTouSpeInte(206, 226, 330, 116);
-					initWisLibSensCor(116, 200, 100, 30);
-					this.weaponAttack = 64;
-					this.armorDef = 52;
-					this.armorMDef = 52;
-					this.bonusHP = 500;
-					this.bonusLust = 372;
-					this.level = 76;
-				}
-				else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 150) {
-					initStrTouSpeInte(195, 205, 300, 106);
-					initWisLibSensCor(06, 180, 90, 30);
-					this.weaponAttack = 58;
-					this.armorDef = 49;
-					this.armorMDef = 49;
-					this.bonusHP = 400;
-					this.bonusLust = 340;
-					this.level = 72;
-				}
-				else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 100) {
-					initStrTouSpeInte(184, 184, 270, 96);
-					initWisLibSensCor(96, 160, 80, 30);
-					this.weaponAttack = 52;
-					this.armorDef = 46;
-					this.armorMDef = 46;
-					this.bonusHP = 300;
-					this.bonusLust = 308;
-					this.level = 68;
-				}
-				else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 50) {
-					initStrTouSpeInte(173, 173, 240, 86);
-					initWisLibSensCor(86, 140, 70, 30);
-					this.weaponAttack = 46;
-					this.armorDef = 43;
-					this.armorMDef = 43;
-					this.bonusHP = 200;
-					this.bonusLust = 274;
-					this.level = 64;
-				}
-				else {
-					initStrTouSpeInte(152, 152, 210, 76);
-					initWisLibSensCor(76, 120, 60, 30);
-					this.weaponAttack = 40;
-					this.armorDef = 40;
-					this.armorMDef = 40;
-					this.bonusHP = 100;
-					this.bonusLust = 240;
-					this.level = 60;
-				}
+			if (inDungeon) { //EL check
+                var mod:int = SceneLib.dungeons.ebonlabyrinth.enemyLevelMod;
+                initStrTouSpeInte(162 + 11*mod, 142 + 21*mod, 210 + 30*mod, 76 + 10*mod);
+                initWisLibSensCor(76 + 10*mod, 120 + 20*mod, 60 + 10*mod, 30);
+                this.weaponAttack = 40 + 6*mod;
+                this.armorDef = 40 + 3*mod;
+                this.armorMDef = 40 + 3*mod;
+                this.bonusHP = 100 + 50*mod;
+                this.bonusLust = 240 + 34*mod;
+                this.level = 60 + 5*mod;
+                this.gems = (120 + rand(60)) * (1.0 + 0.5*mod);
 			}
 			else {
 				initStrTouSpeInte(152, 152, 210, 76);
@@ -125,6 +75,7 @@ use namespace CoC;
 				this.bonusHP = 100;
 				this.bonusLust = 240;
 				this.level = 60;
+			    this.gems = rand(20) + 80;
 			}
 			this.a = "the ";
 			this.short = "displacer beast";
@@ -146,7 +97,6 @@ use namespace CoC;
 			this.wrath = 130;
 			this.lustVuln = .35;
 			this.lust = 30;
-			this.gems = rand(20) + 70;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.drop = new ChainedDrop().
 					add(useables.EBONBLO,1/20).

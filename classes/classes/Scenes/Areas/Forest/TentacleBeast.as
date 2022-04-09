@@ -15,7 +15,7 @@ public class TentacleBeast extends Monster
 		private function tentaclePhysicalAttack():void {
 			outputText("The shambling horror throws its tentacles at you with a murderous force.\n");
 			var temp:int = int((str + weaponAttack) - Math.random() * (player.tou) - player.armorDef);
-			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) temp += str + weaponAttack;
+			if (inDungeon) temp += str + weaponAttack;
 			if(temp < 0) temp = 0;
 			//Miss
 			if(temp == 0 || (player.spe - spe > 0 && int(Math.random()*(((player.spe-spe)/4)+80)) > 80)) {
@@ -65,7 +65,7 @@ public class TentacleBeast extends Monster
 				removeStatusEffect(StatusEffects.PhyllaFight);
 				SceneLib.desert.antsScene.phyllaTentacleDefeat();
 			}
-			else if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) cleanupAfterCombat();
+			else if (inDungeon) cleanupAfterCombat(); //EL check
 			else if (flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] < 1 && rand(4) == 0) {// && rand(10) == 0-na razie zamiast 10% szansa podniesiona do 25%		move to diff stronger variant of tentacle beast later on?
 				outputText("\n\nAs the tentacle beast runs away in defeat you discover to your surprise it left behind a somewhat passed out bee girl. At first, you are worried that she might be dead but, as she thankfully regains consciousness, she crawls to you, grabbing your leg for a plea.\n\n");
 				outputText("\"<i>Y..you ought to help uzz, our hive is under siege by corrupted sisterzzz if no one does anything my queen will… she…</i>\"\n\n");
@@ -88,7 +88,7 @@ public class TentacleBeast extends Monster
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) SceneLib.dungeons.ebonlabyrinth.defeatedByAncientTentacleBeast();
+			if (inDungeon) SceneLib.forest.tentacleBeastScene.defeatedByAncientTentacleBeast(); //EL check
 			else {
 				if (hpVictory) {
 					outputText("Overcome by your wounds, you turn to make a last desperate attempt to run...\n\n");
@@ -113,75 +113,20 @@ public class TentacleBeast extends Monster
 		public function TentacleBeast()
 		{
 			trace("TentacleBeast Constructor!");
-			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) {
+			if (inDungeon) { //EL check
+                var mod:int = SceneLib.dungeons.ebonlabyrinth.enemyLevelMod;
 				this.short = "ancient tentacle beast";
 				this.long = "You see the titanic, shambling form of the tentacle beast before you.  Appearing as a massive shrub, it shifts its bulbous mass and reveals a collection of thorny tendrils and cephalopodic limbs.";
-				if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 250) {
-					initStrTouSpeInte(447, 520, 200, 145);
-					initWisLibSensCor(125, 270, 85, 100);
-					this.weaponAttack = 100;
-					this.armorDef = 315;
-					this.armorMDef = 70;
-					this.bonusHP = 24000;
-					this.bonusLust = 435;
-					this.level = 80;
-					this.additionalXP = 750;
-				}
-				else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 200) {
-					initStrTouSpeInte(416, 480, 190, 140);
-					initWisLibSensCor(120, 270, 80, 100);
-					this.weaponAttack = 90;
-					this.armorDef = 270;
-					this.armorMDef = 60;
-					this.bonusHP = 20000;
-					this.bonusLust = 426;
-					this.level = 76;
-					this.additionalXP = 650;
-				}
-				else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 150) {
-					initStrTouSpeInte(385, 440, 180, 135);
-					initWisLibSensCor(115, 270, 75, 100);
-					this.weaponAttack = 80;
-					this.armorDef = 225;
-					this.armorMDef = 50;
-					this.bonusHP = 16000;
-					this.bonusLust = 417;
-					this.level = 72;
-					this.additionalXP = 550;
-				}
-				else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 100) {
-					initStrTouSpeInte(354, 400, 170, 130);
-					initWisLibSensCor(110, 270, 70, 100);
-					this.weaponAttack = 70;
-					this.armorDef = 180;
-					this.armorMDef = 40;
-					this.bonusHP = 12000;
-					this.bonusLust = 408;
-					this.level = 68;
-					this.additionalXP = 450;
-				}
-				else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 50) {
-					initStrTouSpeInte(323, 360, 160, 125);
-					initWisLibSensCor(105, 270, 65, 100);
-					this.weaponAttack = 60;
-					this.armorDef = 135;
-					this.armorMDef = 30;
-					this.bonusHP = 8000;
-					this.bonusLust = 399;
-					this.level = 64;
-					this.additionalXP = 350;
-				}
-				else {
-					initStrTouSpeInte(292, 320, 150, 120);
-					initWisLibSensCor(100, 270, 60, 100);
-					this.weaponAttack = 50;
-					this.armorDef = 90;
-					this.armorMDef = 20;
-					this.bonusHP = 4000;
-					this.bonusLust = 390;
-					this.level = 60;
-					this.additionalXP = 250;
-				}
+				initStrTouSpeInte(292 + 31*mod, 320 + 40*mod, 150 + 10*mod, 120 + 5*mod);
+                initWisLibSensCor(100 + 5*mod, 270, 60 + 5*mod, 100);
+                this.weaponAttack = 50 + 10*mod;
+                this.armorDef = 90 + 45*mod;
+                this.armorMDef = 30 + 10*mod;
+                this.bonusHP = 4000 + 4000*mod;
+                this.bonusLust = 390 + 9*mod;
+                this.level = 60 + 5*mod;
+                this.additionalXP = 250 + 100*mod;
+                this.gems = (rand(50)+25) * (1.0 + 0.5*mod);
 			}
 			else {
 				this.short = "tentacle beast";
@@ -194,6 +139,7 @@ public class TentacleBeast extends Monster
 				this.bonusHP = 400;
 				this.bonusLust = 122;
 				this.level = 11;
+			    this.gems = rand(25)+10;
 			}
 			this.a = "the ";
 			this.imageName = "tentaclebeast";
@@ -225,7 +171,6 @@ public class TentacleBeast extends Monster
 			this.lust = 10;
 			this.lustVuln = 0.8;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
-			this.gems = rand(25)+10;
 			this.drop = new WeightedDrop().addMany(1,consumables.HEALHERB,
 					consumables.HEALHERB,
 					consumables.HEALHERB,

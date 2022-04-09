@@ -173,10 +173,6 @@ internal function tentacleVictoryRape():void {
 	cleanupAfterCombat();
 }
 
-public function futaTentacleBadEndEL():void {
-	futaTentacleBadEnd2();
-}
-
 //Spoiler for Bad End-Tentacle Monster: 
 //[CONDITIONS: Futa/Herm, Corruption > 50, Lust Defeat Only, Obtained 3 previous Lust Defeats to Tentacle Monster.]
 private function futaTentacleBadEnd():void {
@@ -858,5 +854,43 @@ private function killTentacleBeast():void {
 	if (player.cor < 25) dynStats("cor", -0.5);
 	inventory.takeItem(useables.SEVTENT, cleanupAfterCombat);
 }
+
+//Special scene for Ebon Labyrinth.
+public function defeatedByAncientTentacleBeast():void {
+        clearOutput();
+        outputText("Upon your defeat the tentacled fiends draws an appendage ending with a nasty needle and forces it in your left side pouring transformative fluid into you.");
+        outputText(" Your chest begins to puff up, growing up in size");
+        if (player.biggestTitSize() < 1) outputText(" from nothing");
+        player.growTits(1 + rand(3), 1, false, 3);
+        outputText("! Milks churns inside ready for the harvest.");
+        player.boostLactation(1.5);
+        if (player.cocks.length == 0) {
+            outputText(" Just as you were thinking about your breasts you feel a bump of flesh between your legs growing steadily until it breaks out standing erect. This… this thing is a penis!");
+            player.createCock();
+            player.cocks[0].cockLength = 6;
+            player.cocks[0].cockThickness = 1.5;
+            player.cocks[0].cockType = CockTypesEnum.HUMAN;
+            player.clitLength = .25;
+            if (player.hasVagina()) outputText(" Oh no your a full herm now!");
+        }
+        if (player.balls == 0) outputText(" Underneath your [cock] a large sack has formed. You feel nauseous as balls drops in churching with fresh cum.");
+        if (!player.hasVagina()) {
+            outputText(" Just underneath your ballsack you feel flesh parting wetly as your acquire a brand new pussy, one the tentacle beast will be eager to dive in.");
+            player.createVagina();
+            player.vaginas[0].vaginalLooseness = VaginaClass.LOOSENESS_TIGHT;
+            player.vaginas[0].vaginalWetness = VaginaClass.WETNESS_NORMAL;
+            player.vaginas[0].virgin = true;
+            player.clitLength = .25;
+            if (player.hasCock()) outputText(" Oh no you’re a full herm now!");
+        }
+        outputText("\n\nWhile you attempt to resist the abomination, its raw muscle mass is too much. It pins you to the ground easily. You immediately feel a sharp, horrible pain at the base of your ample cock. You look down to see the end of a thorny tendril impaled in your pelvic region. Fiery pain courses through your veins as you feel ");
+        outputText("the creature inject you with some sort of liquid. As the pain sears through you, your member immediately becomes fully erect and pre-cum leaks liberally from your tip. Two thorny tentacles pierce your nipples and you feel as if someone shot acid into your tits, which immediately begin to swell.\n\n");
+        outputText("Realizing what is about to happen, you try to struggle. The beast responds by slamming you to the ground a few times, stunning you. In your daze you see a monstrous, hollow tentacle poised over your furious cock. You scream in shock and protest, but your cries fall upon deaf ears. ");
+        outputText("The tentacle descends upon your nice cock, now begging for release, and clamps down upon your pubic mound, fully encapsulating your member.\n\n");
+        futaTentacleBadEnd2();
+    }
+
+
+
 }
 }

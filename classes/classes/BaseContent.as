@@ -145,6 +145,11 @@ import coc.xxc.StoryContext;
 			return DungeonAbstractContent.inDungeon;
 		}
 
+		protected function set inDungeon(v:Boolean):void
+		{
+			DungeonAbstractContent.inDungeon = v;
+		}
+
 		protected function get inRoomedDungeon():Boolean
 		{
 			return DungeonAbstractContent.inRoomedDungeon;

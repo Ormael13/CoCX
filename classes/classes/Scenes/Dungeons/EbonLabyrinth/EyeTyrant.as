@@ -55,46 +55,27 @@ use namespace CoC;
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			SceneLib.dungeons.ebonlabyrinth.defeatEyeTyrant();
+			SceneLib.dungeons.ebonlabyrinth.eyeTyrantScene.defeat();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			SceneLib.dungeons.ebonlabyrinth.defeatedByEyeTyrant();
+			SceneLib.dungeons.ebonlabyrinth.eyeTyrantScene.defeatedBy();
 		}
 		
 		public function EyeTyrant()
 		{
-			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss) == 80) {
-				initStrTouSpeInte(134, 342, 157, 390);
-				initWisLibSensCor(175, 250, 150, 60);
-				this.armorDef = 80;
-				this.armorMDef = 300;
-				this.bonusHP = 5000;
-				this.bonusLust = 480;
-				this.level = 80;
-				this.gems = 350 + rand(110);
-			}
-			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss) == 85) {
-				initStrTouSpeInte(168, 363, 184, 430);
-				initWisLibSensCor(196, 280, 190, 60);
-				this.armorDef = 100;
-				this.armorMDef = 350;
-				this.bonusHP = 7500;
-				this.bonusLust = 555;
-				this.level = 85;
-				this.gems = 400 + rand(120);
-			}
-			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss) == 90) {
-				initStrTouSpeInte(204, 384, 211, 470);
-				initWisLibSensCor(217, 310, 230, 60);
-				this.armorDef = 120;
-				this.armorMDef = 400;
-				this.bonusHP = 10000;
-				this.bonusLust = 630;
-				this.level = 90;
-				this.gems = 450 + rand(130);
-			}
+            //scaled from 65 now, reduced base stats to compensate
+			var mod:int = inDungeon ? SceneLib.dungeons.ebonlabyrinth.enemyLevelMod : 3;
+            initStrTouSpeInte(32 + 34*mod, 279 + 21*mod, 76 + 27*mod, 270 + 40*mod);
+            initWisLibSensCor(112 + 21*mod, 160 + 30*mod, 30 + 40*mod, 60);
+            this.armorDef = 20 + 20*mod;
+            this.armorMDef = 150 + 50*mod;
+            this.bonusHP = mod == 0 ? 0 : 2500*(mod-1);
+            this.bonusLust = 255 + 75*mod;
+            this.level = 65 + 5*mod;
+            this.gems = (200 + 50*mod) + rand(80 + 10*mod);
+            
 			this.a = "";
 			this.short = "Eye Tyrant";
 			this.imageName = "gazer";

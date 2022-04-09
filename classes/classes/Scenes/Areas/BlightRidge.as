@@ -50,7 +50,7 @@ use namespace CoC;
 				outputText("Do you enter?");
 				flags[kFLAGS.DEN_OF_DESIRE_BOSSES] = 1;
 				menu();
-				addButton(0, "Yes", SceneLib.dungeons.enterDenOfDesire);
+				addButton(0, "Yes", SceneLib.dungeons.denofdesire.enterDungeon);
 				addButton(1, "No", camp.returnToCampUseOneHour);
 				return;
 			}

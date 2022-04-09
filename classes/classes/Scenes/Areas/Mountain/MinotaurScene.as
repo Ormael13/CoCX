@@ -682,15 +682,8 @@ if (doSFWloss() && CoC.instance.inCombat) { //No rape in SFW mode.
 	if(player.hasVagina()) outputText("pussy.");
 	else outputText("asshole.");
     if (CoC.instance.inCombat) {
-		if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) {
-			outputText("\n\nUnsatisfied with fucking you silly the beast forcefeeds you a full vial of his cum. You feel something in you flip as you acquire an addiction for the nefarious compound! <b>You are now addicted to minotaur cum!</b>");
-			if (flags[kFLAGS.EBON_LABYRINTH_RECORD] < player.statusEffectv1(StatusEffects.EbonLabyrinthB)) flags[kFLAGS.EBON_LABYRINTH_RECORD] = player.statusEffectv1(StatusEffects.EbonLabyrinthB);
-			player.removeStatusEffect(StatusEffects.EbonLabyrinthB);
-			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss1)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss1);
-			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss2)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss2);
-			minoCumAddiction(100);
-		    DungeonAbstractContent.inDungeon = false;
-		}
+		if (inDungeon) 
+            rapeEndingEL();
 		cleanupAfterCombat();
 	}
     else doNext(camp.returnToCampUseFourHours);
@@ -731,15 +724,8 @@ private function getOralRapedByMinotaur():void {
 	dynStats("sen", 1);
 	minoCumAddiction(10);
     if (CoC.instance.inCombat) {
-		if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) {
-			outputText("\n\nUnsatisfied with fucking you silly the beast forcefeed you a full vial of his cum. You feel something in you flip as you acquire an addiction for the nefarious compound! <b>You are now addicted to minotaur cum!</b>");
-			if (flags[kFLAGS.EBON_LABYRINTH_RECORD] < player.statusEffectv1(StatusEffects.EbonLabyrinthB)) flags[kFLAGS.EBON_LABYRINTH_RECORD] = player.statusEffectv1(StatusEffects.EbonLabyrinthB);
-			player.removeStatusEffect(StatusEffects.EbonLabyrinthB);
-			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss1)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss1);
-			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss2)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss2);
-			minoCumAddiction(100);
-		    DungeonAbstractContent.inDungeon = false;
-		}
+		if (inDungeon) 
+            rapeEndingEL();
 		cleanupAfterCombat();
 	}
     else doNext(camp.returnToCampUseFourHours);
@@ -1186,17 +1172,17 @@ private function getMinoHawtDawged():void {
 	//{Loss message 'when you wake up you'll be missing gems' blah blah}
 	dynStats("lus", 15+rand(player.lib/2));
 	player.sexReward("cum","Anal");
-	if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) {
-		outputText("\n\nUnsatisfied with fucking you silly the beast forcefeed you a full vial of his cum. You feel something in you flip as you acquire an addiction for the nefarious compound! <b>You are now addicted to minotaur cum!</b>");
-		if (flags[kFLAGS.EBON_LABYRINTH_RECORD] < player.statusEffectv1(StatusEffects.EbonLabyrinthB)) flags[kFLAGS.EBON_LABYRINTH_RECORD] = player.statusEffectv1(StatusEffects.EbonLabyrinthB);
-		player.removeStatusEffect(StatusEffects.EbonLabyrinthB);
-		if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss1)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss1);
-		if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss2)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss2);
-		minoCumAddiction(100);
-		DungeonAbstractContent.inDungeon = false;
-	}
+	if (inDungeon)
+        rapeEndingEL();
 	else minoCumAddiction(5);
 	cleanupAfterCombat();
 }
+
+private function rapeEndingEL():void {
+    outputText("\n\nUnsatisfied with fucking you silly the beast forcefeed you a full vial of his cum. You feel something in you flip as you acquire an addiction for the nefarious compound! <b>You are now addicted to minotaur cum!</b>");
+    minoCumAddiction(100);
+    inDungeon = false;
+}
+
 }
 }

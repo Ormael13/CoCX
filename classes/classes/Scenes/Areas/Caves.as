@@ -22,11 +22,8 @@ use namespace CoC;
 		public var cavewyrmScene:CaveWyrmScene = new CaveWyrmScene();
 		public var displacerbeastScene:DisplacerBeastScene = new DisplacerBeastScene();
 		public var darkslimeScene:DarkSlimeScene = new DarkSlimeScene();
-		public var dungeonEL:EbonLabyrinth = new EbonLabyrinth();
 		
-		public function Caves() 
-		{
-		}
+		public function Caves() {}
 		
 		public function exploreCaves():void {
 			flags[kFLAGS.DISCOVERED_CAVES]++;
@@ -51,7 +48,7 @@ use namespace CoC;
 			}
 			//Ebon Labyrinth
 			if (flags[kFLAGS.EBON_LABYRINTH] < 1 && rand(3) == 0) {
-				dungeonEL.ebonlabyrinthdiscovery();
+				SceneLib.dungeons.ebonlabyrinth.ebonlabyrinthdiscovery();
 				return;
 			}
 			//Ashlands

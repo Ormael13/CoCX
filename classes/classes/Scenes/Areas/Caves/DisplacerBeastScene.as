@@ -6,13 +6,13 @@ package classes.Scenes.Areas.Caves
 {
 
 import classes.Scenes.Combat.Combat;
-import classes.internals.*;
+import classes.BaseContent;
 import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.display.SpriteDb;
+import classes.PerkLib;
+import classes.StatusEffects;
 	
-public class DisplacerBeastScene extends BaseContent
-{
+public class DisplacerBeastScene extends BaseContent {
 		
     public function DisplacerBeastScene() {}
 
@@ -77,8 +77,8 @@ public class DisplacerBeastScene extends BaseContent
         outputText(" in accordance with your breastgasm.\n\nThankfully the beast finally unplugs her tentacles from your tortured breasts, licking her lips in delight and done with her meal, teleports away from your view. You lay there still lost in the feeling of your heaving chest as you lose consciousness.\n\n");
         
         player.sexReward("Default", "Nipples", true, false);
-        if (DungeonAbstractContent.inDungeon) //EL check
-            DungeonAbstractContent.inDungeon = false;
+        if (inDungeon) //EL check
+            inDungeon = false;
         cleanupAfterCombat();
     }
 }

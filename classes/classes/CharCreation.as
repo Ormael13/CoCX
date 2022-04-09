@@ -149,9 +149,9 @@ import coc.view.MainView;
 			}
 
 			//RESET DUNGEON
-			DungeonAbstractContent.inDungeon = false;
-			DungeonAbstractContent.inRoomedDungeon = false;
-			DungeonAbstractContent.inRoomedDungeonResume = null;
+			inDungeon = false;
+			inRoomedDungeon = false;
+			inRoomedDungeonResume = null;
 			//Hold onto old data for NG+
 			var oldPlayer:Player = player;
 			//Reset all standard stats
@@ -311,7 +311,7 @@ import coc.view.MainView;
 			SceneLib.isabellaScene.isabellaOffspringData = []; //CLEAR!
 			//Lets get this bitch started
 			CoC.instance.inCombat = false;
-			DungeonAbstractContent.inDungeon = false;
+			inDungeon = false;
 			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 0) {
 				//Clothes clear
 				player.setArmor(armors.C_CLOTH);
