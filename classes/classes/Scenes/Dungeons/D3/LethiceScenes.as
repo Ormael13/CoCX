@@ -70,19 +70,9 @@ public class LethiceScenes extends BaseContent
 		private function postEndingReturn():void {
 			clearOutput();
 			outputText("You may have defeated Lethice and completed the main story but the fun isn't over! It's time for you to return to the game and begin a new era of Mareth.");
-			//outputText("\n\n<b>You can now ascend if you like. Search for the book in the ruined cathedral and perform the ritual at your camp.</b>");
 			awardAchievement("Demon Slayer", kACHIEVEMENTS.STORY_FINALBOSS, true, true, false);
-			//if (player.level <= 1) awardAchievement("Ultimate Noob", kACHIEVEMENTS.CHALLENGE_ULTIMATE_NOOB, true, true, false); //Lethice beaten at level 1!
-			//inDungeon = false;
-			//inRoomedDungeon = false;
-			//player.HP = player.maxHP();
-			//player.lust = player.minLust();
-			//player.fatigue = 0;
-			//player.hunger = player.maxHunger();
-			//model.time.hours = 23;
 			cleanupAfterCombat();
 			if (flags[kFLAGS.LETHICE_DEFEATED] <= 0) flags[kFLAGS.LETHICE_DEFEATED] = 1;
-			//doNext(camp.returnToCampUseOneHour);
 			inventory.takeItem(weapons.L_WHIP, camp.returnToCampUseOneHour);
 		}
 		
