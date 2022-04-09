@@ -164,20 +164,31 @@ public function siegweirdMainCampMenu():void
 	if (!soupMaxLevel()) addButton(9, "Add an ingredient", addIngredientMenu);
 	if (player.hasStatusEffect(StatusEffects.SiegweirdTraining)) addButtonDisabled(10, "Study", "You already completed basic Study.");
 	else addButton(10, "Study", siegweirdCampStudy);
-	if (player.hasStatusEffect(StatusEffects.SiegweirdTraining) && !player.hasStatusEffect(StatusEffects.SiegweirdTraining2)) addButton(11, "Advanced Study", siegweirdAdvancedCampStudy);
-	if (player.hasStatusEffect(StatusEffects.SiegweirdTraining2)) {
-		if (player.statusEffectv1(StatusEffects.SiegweirdTraining2) == 0 && player.hasItem(useables.DIAMOND, 1) && player.hasItem(useables.S_INGOT, 1) && (player.hasItem(useables.DBAPLAT, 1) || player.hasItem(useables.TBAPLAT, 1))) addButton(11, "Advanced Study", siegweirdAdvancedCampStudy);
-		else addButtonDisabled(11, "Advanced Study", "You need to gather a perfect Diamond, Silver ingot and a piece of bark from oldest tree (Marae) before you can progress.");
-		if (player.statusEffectv1(StatusEffects.SiegweirdTraining2) == 1) {
-			if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] < 10) addButtonDisabled(11, "Advanced Study", "You need to wait until Siegweird ends his work. (It may take around three days)");
-			else addButton(11, "Advanced Study", siegweirdAdvancedCampStudy);
+    //Advanced study checks
+	if (player.hasStatusEffect(StatusEffects.SiegweirdTraining) && !player.hasStatusEffect(StatusEffects.SiegweirdTraining2))
+        addButton(11, "Advanced Study", siegweirdAdvancedStudy_0);
+    else if (player.hasStatusEffect(StatusEffects.SiegweirdTraining2)) {
+        if (player.cor > 0)
+            addButtonDisabled(11, "Advanced Study", "You need to be perfectly pure to continue training.");
+        else if (player.statusEffectv1(StatusEffects.SiegweirdTraining2) == 0) {
+            if (player.hasItem(useables.DIAMOND, 1) && player.hasItem(useables.S_INGOT, 1) && (player.hasItem(useables.DBAPLAT, 1) || player.hasItem(consumables.P_PEARL, 1)))
+                addButton(11, "Advanced Study", siegweirdAdvancedStudy_1_choose);
+            else
+                addButtonDisabled(11, "Advanced Study", "You need to gather a perfect Diamond, silver ingot and a piece of <u>pure</u> bark <b>OR</b> a pure pearl from Marae before you can progress.");
+        }
+        else if (player.statusEffectv1(StatusEffects.SiegweirdTraining2) == 1) {
+			if (flags[kFLAGS.SIEGWEIRD_FOLLOWER] < 10)
+                addButtonDisabled(11, "Advanced Study", "You need to wait until Siegweird ends his work. (It may take around three days)");
+			else
+                addButton(11, "Advanced Study", siegweirdAdvancedStudy_2);
 		}
-		if (player.statusEffectv1(StatusEffects.SiegweirdTraining2) == 2) {
-			if (player.hasKeyItem("Alvina's Shattered Phylactery") >= 0) addButton(11, "Advanced Study", siegweirdAdvancedCampStudy);
-			else addButtonDisabled(11, "Advanced Study", "You need to go kill a certain dangerous devil in Defiled Ravine.");
+		else if (player.statusEffectv1(StatusEffects.SiegweirdTraining2) == 2) {
+			if (player.hasKeyItem("Alvina's Shattered Phylactery") >= 0)
+                addButton(11, "Advanced Study", siegweirdAdvancedStudy_3);
+			else
+                addButtonDisabled(11, "Advanced Study", "You need to go kill a certain dangerous devil in Defiled Ravine.");
 		}
-		if (player.statusEffectv1(StatusEffects.SiegweirdTraining2) == 3) addButtonDisabled(11, "Advanced Study", "You already completed Advanced Study.");
-	}
+    }
 	addButton(14, "Back", camp.campFollowers);
 }
 
@@ -334,64 +345,92 @@ public function siegweirdCampStudy():void
 	}
 }
 
-public function siegweirdAdvancedCampStudy():void
-{
+//Alvina reward
+public function siegweirdAdvancedStudy_3():void {
     clearOutput();
-	spriteSelect(SpriteDb.s_siegweird);
-	if (player.hasStatusEffect(StatusEffects.SiegweirdTraining2)) {
-		if (player.statusEffectv1(StatusEffects.SiegweirdTraining2) == 2) {
-			player.removeKeyItem("Alvina's Shattered Phylactery");
-			outputText("Siegweird notices that you have the pendant as soon as you come near him, giving you a cheerful smile.\n\n");
-			outputText("\"<i>[name]..! You… You did it! Something I know I could never do... You have helped the cause of purity more than you might think. We now have one less threat to deal with, thank you [name].</i>\"\n\n");
-			outputText("Siegweird pulls you in for a fierce hug. He retracts before pulling something from his knapsack,");
-			outputText("\"<i>Here, this tome is for you. I have mastered the ability in my own way, and now I want you to learn it by your own accord.</i>");
-			outputText("<b>You gained a tome of Meteor Shower.</b>\n\n");
-			player.addStatusValue(StatusEffects.SiegweirdTraining2, 1, 1);
-			inventory.takeItem(consumables.MET_SHO, camp.campFollowers);
-			eachMinuteCount(5);
-		}
-		else if (player.statusEffectv1(StatusEffects.SiegweirdTraining2) == 1 && flags[kFLAGS.SIEGWEIRD_FOLLOWER] == 10) {
-			outputText("Siegweird notices your presence and stops hammering on his portable anvil to look at you with a cheerful smile… or at least what you can see through the small hole in his helmet.\n\n");
-			outputText("\"<i>Hey hello [name]!I finished your holy symbol, it should empower your white magic ability further. Consider this your graduation gift.</i>\"\n\n");
-			outputText("He brings over the fruits of his labor and hands it to you. The holy symbol shines with an inner light that simply cannot be snuffed out. You feel serene and safe with this item on you and thank Siegweird for it.\n\n");
-			outputText("\"<i>No need to thank me friend. Say I think I will stay in your camp a little longer. There's enough imps around here to keep me working for weeks! Also I will prepare a curative soup every day, so feel free to come by and take a bowl.</i>\"\n\n");
-			outputText("<b>You gained a Holy Symbol. +20% to white spells and white healing magic spellpower.</b>\n\n");
-			player.createKeyItem("Holy Symbol", 0, 0, 0, 0);
-			player.addStatusValue(StatusEffects.SiegweirdTraining2, 1, 1);
-			doNext(camp.campFollowers);
-			eachMinuteCount(5);
-		}
-		else {
-			player.destroyItems(useables.DIAMOND, 1);
-			player.destroyItems(useables.S_INGOT, 1);
-			if (player.hasItem(useables.DBAPLAT, 1)) player.destroyItems(useables.DBAPLAT, 1);
-			else player.destroyItems(useables.TBAPLAT, 1);
-			outputText("You bring the ingredients to Siegweird, he inspects them carefully before nodding his head,");
-			outputText("\"<i>Amazing! This’ll take me about a day to complete... I need you to do a favor for me in the meantime. See, I wasn’t wandering the blight ridges for no reason, I was hunting a very specific demoness.</i>\"\n\n");
-			outputText("He sighs softly, \"<i>I was unable to find her during my endeavors... Her name is Alvina, rumored to be the creator of black magic and perhaps even the source of demonic corruption, but these are only rumors. I don’t know her full story but what I am sure about is that even the other demons whisper her name in hushed tones, so she ought to be fearsome even by their standards. I would request that you find and slay her. Only then would I know you are ready, and I assure you that your efforts will be rewarded.</i>\"\n\n");
-			outputText("Seigweird pauses for a moment before inspecting all of the ingredients within his paw before setting it on the ground.\n\n");
-			outputText("\"<i>Hmm, this’ll be a little more difficult than I thought… You go ahead, [name]...</i>\"\n\n");
-			outputText("His hands begin glowing as he gets to work with making you the holy amulet.\n\n");
-			player.addStatusValue(StatusEffects.SiegweirdTraining2, 1, 1);
-			doNext(camp.campFollowers);
-			eachMinuteCount(5);
-		}
-	}
-	else {
-		if (player.cor > 0) {
-			outputText("You ask Siegweird about those extra lessons.\n\n");
-			outputText("\"<i>Sorry, such teachings cannot be learned by someone with even a sliver of corruption in their being.</i>\"\n\n");
-		}
-		else {
-			outputText("You ask Siegweird about those extra lessons.\n\n");
-			outputText("\"<i>Yes, you look about ready to me, so let’s begin with the facts. To channel white magic to its fullest you will also need a holy symbol. While white magic was created by mortals, its origin lies deeper in the roots of divine magic, this belonging to the gods. ");
-			outputText("Making a holy symbol is as easy as carving a cross out of wood. However, the material will increase the potency of the item. Marae is among these deities, her bark has the greatest potency, I wish you well in retrieving it from her. You also need to find a silver ingot, the material would serve as the casing. ");
-			outputText("Finally, a perfect diamond will be the ornament. You should get going and start looking for these items, they are somewhat rare.</i>\"\n\n");
-			player.createStatusEffect(StatusEffects.SiegweirdTraining2, 0, 0, 0, 0);
-		}
-		doNext(camp.campFollowers);
-		eachMinuteCount(5);
-	}
+    player.removeKeyItem("Alvina's Shattered Phylactery");
+    outputText("Siegweird notices that you have the pendant as soon as you come near him, giving you a cheerful smile.\n\n");
+    outputText("\"<i>[name]..! You… You did it! Something I know I could never do... You have helped the cause of purity more than you might think. We now have one less threat to deal with, thank you [name].</i>\"\n\n");
+    outputText("Siegweird pulls you in for a fierce hug. He retracts before pulling something from his knapsack,");
+    outputText("\"<i>Here, this tome is for you. I have mastered the ability in my own way, and now I want you to learn it by your own accord.</i>");
+    outputText("<b>You gained a tome of Meteor Shower.</b>\n\n");
+    player.addStatusValue(StatusEffects.SiegweirdTraining2, 1, 1);
+    inventory.takeItem(consumables.MET_SHO, camp.campFollowers);
+    eachMinuteCount(5);
 }
+
+//Holy symbol
+public function siegweirdAdvancedStudy_2():void {
+    clearOutput();
+    outputText("Siegweird notices your presence and stops hammering on his portable anvil to look at you with a cheerful smile… or at least what you can see through the small hole in his helmet.\n\n");
+    outputText("\"<i>Hey hello [name]!I finished your holy symbol, it should empower your white magic ability further. Consider this your graduation gift.</i>\"\n\n");
+    outputText("He brings over the fruits of his labor and hands it to you. The holy symbol shines with an inner light that simply cannot be snuffed out. You feel serene and safe with this item on you and thank Siegweird for it.\n\n");
+    outputText("\"<i>No need to thank me friend. Say I think I will stay in your camp a little longer. There's enough imps around here to keep me working for weeks! Also I will prepare a curative soup every day, so feel free to come by and take a bowl.</i>\"\n\n");
+    outputText("<b>You gained a Holy Symbol. +20% to white spells and white healing magic spellpower.</b>\n\n");
+    player.createKeyItem("Holy Symbol", 0, 0, 0, 0);
+    player.addStatusValue(StatusEffects.SiegweirdTraining2, 1, 1);
+    doNext(camp.campFollowers);
+    eachMinuteCount(5);
+}
+
+public function siegweirdAdvancedStudy_1_choose():void {
+    clearOutput();
+    outputText("You recall that Siegweird mentioned too options - the symbol can be made of Marae's divine bark, or a regular wood and a pure pearl. Which do you want to use?");
+    if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2)
+        outputText("\n\n<b>Marae is corrupted - you can't get anything 'pure' from her anymore.</b>");
+    else
+        outputText("\n\n<b>Both materials are unique, but Marae's bark will be available much later than the pearl. Choose wisely.</b>");
+    menu();
+    addButtonIfTrue(0, "D. Bark", curry(siegweirdAdvancedStudy_1, false), "You don't have any.", player.hasItem(useables.DBAPLAT, 1));
+    addButtonIfTrue(1, "P. Pearl", curry(siegweirdAdvancedStudy_1, true), "You don't have any.", player.hasItem(consumables.P_PEARL, 1));
+    addButton(4, "Back", siegweirdMainCampMenu);
+}
+
+//Meterials gathered, Alvina request
+public function siegweirdAdvancedStudy_1(usePearl:Boolean):void {
+    clearOutput();
+    if (usePearl) player.destroyItems(consumables.P_PEARL, 1);
+    else player.destroyItems(useables.DBAPLAT, 1);
+    player.destroyItems(useables.DIAMOND, 1);
+    player.destroyItems(useables.S_INGOT, 1);
+    outputText("You bring the ingredients to Siegweird, he inspects them carefully before nodding his head,");
+    outputText("\"<i>Amazing! This’ll take me about a day to complete... I need you to do a favor for me in the meantime. See, I wasn’t wandering the blight ridges for no reason, I was hunting a very specific demoness.</i>\"\n\n");
+    outputText("He sighs softly, \"<i>I was unable to find her during my endeavors... Her name is Alvina, rumored to be the creator of black magic and perhaps even the source of demonic corruption, but these are only rumors. I don’t know her full story but what I am sure about is that even the other demons whisper her name in hushed tones, so she ought to be fearsome even by their standards. I would request that you find and slay her. Only then would I know you are ready, and I assure you that your efforts will be rewarded.</i>\"\n\n");
+    outputText("Seigweird pauses for a moment before inspecting all of the ingredients within his paw before setting it on the ground.\n\n");
+    outputText("\"<i>Hmm, this’ll be a little more difficult than I thought… You go ahead, [name]...</i>\"\n\n");
+    outputText("His hands begin glowing as he gets to work with making you the holy amulet.\n\n");
+    player.addStatusValue(StatusEffects.SiegweirdTraining2, 1, 1);
+    doNext(camp.campFollowers);
+    eachMinuteCount(5);
+}
+
+//Starting part - corruption check & materials request
+public function siegweirdAdvancedStudy_0():void {
+    clearOutput();
+    if (player.cor > 0) {
+        outputText("You ask Siegweird about those extra lessons.\n\n");
+        outputText("\"<i>Sorry, such teachings cannot be learned by someone with even a sliver of corruption in their being.</i>\"\n\n");
+    }
+    else {
+        outputText("You ask Siegweird about those extra lessons.\n\n");
+
+        outputText("\"<i>Yes, you look about ready to me, so let’s begin with the facts. To channel white magic to its fullest you will also need a holy symbol. While white magic was created by mortals, its origin lies deeper in the roots of divine magic, this belonging to the gods.\n");
+        outputText("Making a holy symbol is as easy as carving a cross out of wood. However, the material will increase the potency of the item.")
+        outputText("In the old days, wood enchanted with divine energy was used for such symbols. Now, where the demons conquer and taint everything they see, it's hard to find any. But I've heard that Marae showed up recently, and I feel her breath of life.\n\n");
+        outputText("If you somehow manage to stumble upon her pure, divine bark, that would be an excellent material for the cross. Deities usually don't give such things away too easily, but there is another option. Any wood will suffice if you somehow manage to obtain some item containing some of her divine energy. A long time ago, pearls were used for that.\n\n");
+        if (flags[kFLAGS.MET_MARAE] <= 0) outputText("But be wary that it won't work unless she's still pure. And since the lake where she lived is tainted too... the chance of that is low.");
+        else {
+            outputText("</i>You tell him that you have already found Marae, and describe her state when you met her.\n\n<i>");
+            if (flags[kFLAGS.FACTORY_SHUTDOWN] == 0) outputText("She's still alive... but to finish her purification, you must shut down the factory. There are no other options.");
+            else if (flags[kFLAGS.MARAE_QUEST_COMPLETE] == 1) outputText("You have disabled the factory? Excellent! And that pearl you mentioned will be an excellent replacement for the bark!");
+            else if (flags[kFLAGS.MET_MARAE_CORRUPTED] == 2) outputText("So... she's fallen to it too. Forget about it then. Even if you manage to obtain her bark, it will probably be tainted too... Unless you've got some <b>before</b> she'd become corrupted. But I don't think it's possible...");
+        }
+        outputText("\n\nYou also need to find a silver ingot; the material would serve as the casing. Finally, a perfect diamond will be the ornament. You should get going and start looking for these items, I wish you good luck in that.</i>\"\n\n");
+        player.createStatusEffect(StatusEffects.SiegweirdTraining2, 0, 0, 0, 0);
+    }
+    doNext(camp.campFollowers);
+    eachMinuteCount(5);
+}
+
 	}
 }

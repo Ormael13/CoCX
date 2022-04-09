@@ -198,6 +198,16 @@ public final class Mutations extends MutationsHelper {
         } else player.createStatusEffect(StatusEffects.Airweed, 24, 0, 0, 0);
     }
 
+    public function purePearlConfirm(player:Player):void {
+        clearOutput();
+        outputText("Are you sure you want to just eat the pearl?\n\n");
+        if (!player.hasStatusEffect(StatusEffects.SiegweirdTraining2) && flags[kFLAGS.SIEGWEIRD_FOLLOWER] < 3
+        && (!player.hasStatusEffect(StatusEffects.AlvinaTraining2) || player.statusEffectv1(StatusEffects.AlvinaTraining2) < 3)
+        || flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] < 1)
+            outputText("<i>You have a feeling that you might find more important uses for itin future.</i>")
+        doYesNo(curry(purePearl, player), playerMenu);
+    }
+
     public function purePearl(player:Player):void {
         clearOutput();
         outputText("You cram the pearl in your mouth and swallow it like a giant pill with some difficulty.  Surprisingly there is no discomfort, only a cool calming sensation that springs up from your core.");
