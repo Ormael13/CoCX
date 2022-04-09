@@ -679,9 +679,8 @@ import classes.CoC;
 			if (game.player.dragonScore() >= 24) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.dragonScore() >= 32) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.foxScore() >= 7) max += (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (game.player.kitsuneScore() >= 5) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.kitsuneScore() >= 9 && game.player.tailType == 13 && game.player.tailCount >= 2) {
-				max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 				if (game.player.kitsuneScore() >= 16 && game.player.tailCount == 9) {
 					max += (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 					if (game.player.kitsuneScore() >= 21 && hasPerk(PerkLib.NinetailsKitsuneOfBalance)) {
@@ -690,7 +689,7 @@ import classes.CoC;
 					}
 				}
 			}
-			if (game.player.lizardScore() >= 4) max += (30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (game.player.lizardScore() >= 8) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.unicornScore() >= 10) max += (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.EromancyBeginner)) max += Math.round(lib);
 			if (hasPerk(PerkLib.EromancyExpert)) max += Math.round(lib*2);
@@ -768,13 +767,10 @@ import classes.CoC;
 			max += level * maxSfPerLevelStat.value;
 			if (level <= 6) max += level * 5;
 			if (game.player.alicornScore() >= 12) multimax += 0.2;
-			if (game.player.angelScore() >= 5) multimax += 0.5;
 			if (game.player.angelScore() >= 11) multimax += 1;
-			if (game.player.demonScore() >= 5) multimax -= 0.4;
 			if (game.player.demonScore() >= 11) multimax -= 0.8;
-			if (game.player.kitsuneScore() >= 5) multimax += 0.1;
 			if (game.player.kitsuneScore() >= 9 && game.player.tailType == 13 && game.player.tailCount >= 2) {
-				multimax += 0.1;
+				multimax += 0.2;
 				if (game.player.kitsuneScore() >= 16 && game.player.tailCount == 9) {
 					multimax += 0.2;
 					if (game.player.kitsuneScore() >= 21 && hasPerk(PerkLib.NinetailsKitsuneOfBalance)) {
@@ -847,13 +843,11 @@ import classes.CoC;
 			if (level <= 6) max += level * 5;
 			else max += 30;
 			//~194,455
-			if (game.player.angelScore() >= 5) multimax += 0.2;
-			if (game.player.angelScore() >= 11) multimax += 0.4;
-			if (game.player.demonScore() >= 5) multimax -= 0.15;
+			if (game.player.angelScore() >= 11) multimax += 0.6;
+			if (game.player.angelScore() >= 16) multimax += 0.2;
 			if (game.player.demonScore() >= 11) multimax -= 0.3;
-			if (game.player.demonScore() >= 16 && hasPerk(PerkLib.Phylactery)) multimax -= 0.45;
-			if (game.player.orcScore() >= 5) multimax += 0.1;
-			if (game.player.orcScore() >= 11) multimax += 0.1;
+			if (game.player.demonScore() >= 16 && hasPerk(PerkLib.Phylactery)) multimax -= 0.15;
+			if (game.player.orcScore() >= 11) multimax += 0.2;
 			if (vehiclesName == "Giant Slayer Mech") {
 				multimax += 0.1;
 				//if (upgrade mecha) multimax += 0.1;
@@ -947,11 +941,9 @@ import classes.CoC;
 			if (hasPerk(PerkLib.EromancyBeginner)) max += Math.round(inte*3);
 			if (hasPerk(PerkLib.EromancyExpert)) max += Math.round(inte*3);
 			if (hasPerk(PerkLib.EromancyMaster)) max += Math.round(inte*6);
-			if (game.player.angelScore() >= 5) multimax -= 0.4;
 			if (game.player.angelScore() >= 11) multimax -= 0.8;
-			if (game.player.demonScore() >= 5) multimax += 0.5;
-			if (game.player.demonScore() >= 11) multimax += 1;
-			if (game.player.demonScore() >= 16 && hasPerk(PerkLib.Phylactery)) multimax += 1.5;
+			if (game.player.demonScore() >= 11) multimax += 0.8;
+			if (game.player.demonScore() >= 16 && hasPerk(PerkLib.Phylactery)) multimax += 0.4;
 			if (game.player.elfScore() >= 5) multimax += 0.1;
 			if (game.player.elfScore() >= 11) multimax += 0.1;
 			if (game.player.woodElfScore() >= 22) multimax += 0.1;
@@ -1082,11 +1074,9 @@ import classes.CoC;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 46) max += 12 * (flags[kFLAGS.SOUL_CULTIVATION] - 45);//Soul Immortal
 			if (game.player.dragonScore() >= 16) max += 50;
 			if (game.player.dragonScore() >= 24) max += 50;
-			if (game.player.pigScore() >= 5) max += 10;
-			if (game.player.pigScore() >= 10) max += 15;
+			if (game.player.pigScore() >= 10) max += 25;
 			if (game.player.pigScore() >= 15) max += 20;
-			if (game.player.orcaScore() >= 6) max += 15;
-			if (game.player.orcaScore() >= 14) max += 20;
+			if (game.player.orcaScore() >= 14) max += 35;
 			if (game.player.orcaScore() >= 20) max += 25;
 			if (hasPerk(PerkLib.EzekielBlessing)) max += 50;
 			if (hasPerk(MutationsLib.DisplacerMetabolismPrimitive)) max += 50;
