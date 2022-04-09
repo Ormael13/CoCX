@@ -104,6 +104,7 @@ public class Race {
     public static const PEACOCK:Race = new Race("Peacock",98, "peacockScore");
     public static const ANGEL:Race = new Race("Angel",99, "angelScore");
     public static const APOPHIS:Race = new Race("Apophis",100, "apophisScore");
+    public static const CYCLOP:Race = new Race("Cyclop",101, "cyclopScore");
 
     public var name:String;
     public var id:int;
