@@ -637,7 +637,7 @@ public class EngineCore {
 
     public static function addButtonIfTrue(pos:int, text:String, func1:Function, toolTipText:String, condition:Boolean):CoCButton {
         if (condition)
-            return addButton(pos, text, func1, null, null, null, toolTipText);
+            return addButton(pos, text, func1);
         else
             return addButtonDisabled(pos, text, toolTipText);
     }

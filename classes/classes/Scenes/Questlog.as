@@ -158,11 +158,11 @@ public class Questlog extends BaseContent
         public function reward(perkPoints:int = 0, statPoints:int = 0):void {
 			clearOutput();
 			outputText("Your contribution in changing Mareth have been noticed.\n\n");
-			outputText("<b>Gained 2 perk points and 10 stat points</b>");
+			outputText("<b>Gained");
             if (perkPoints > 0) outputText(" " + perkPoints + "perk point" + (perkPoints > 1 ? "s" : ""));
             if (perkPoints > 0 && statPoints > 0) outputText(" and");
-            if (statPoints > 0) outputText(" " + perkPoints + "stat point" + (statPoints > 1 ? "s" : ""));
-            outputText((perkPoints == 0 && statPoints == 0) ? " nothing." : ".");
+            if (statPoints > 0) outputText(" " + perstatPointskPoints + "stat point" + (statPoints > 1 ? "s" : ""));
+            outputText((perkPoints == 0 && statPoints == 0) ? " nothing.</b>" : ".</b>");
             player.perkPoints += perkPoints;
             player.statPoints += statPoints;
 			statScreenRefresh();

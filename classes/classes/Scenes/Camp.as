@@ -6004,8 +6004,35 @@ public function rebirthFromBadEnd():void {
 			doNext(doCamp);
 			return;
 		}
-        /*
-		if (flags[kFLAGS.MOD_SAVE_VERSION] == 35) {
+        
+		if (int(flags[kFLAGS.MOD_SAVE_VERSION]) == 35) { //now using float to store versions!
+			clearOutput();
+            if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.001) {
+                //Labyrinth reward fix
+                if (flags[kFLAGS.EBON_LABYRINTH] >= 11)
+                    flags[kFLAGS.EBON_LABYRINTH] = 600;
+                else if (flags[kFLAGS.EBON_LABYRINTH] >= 9)
+                    flags[kFLAGS.EBON_LABYRINTH] = 450;
+                else if (flags[kFLAGS.EBON_LABYRINTH] >= 7)
+                    flags[kFLAGS.EBON_LABYRINTH] = 300;
+                else if (flags[kFLAGS.EBON_LABYRINTH] >= 5)
+                    flags[kFLAGS.EBON_LABYRINTH] = 150;
+                else if (flags[kFLAGS.EBON_LABYRINTH] >= 3)
+                    flags[kFLAGS.EBON_LABYRINTH] = 50;
+                else if (flags[kFLAGS.EBON_LABYRINTH] > 0)
+                    flags[kFLAGS.EBON_LABYRINTH] = 1;
+                //radiant shard fix - now for everyone!
+                if (player.hasKeyItem("Radiant shard") < 0) {
+                    outputText("\n\nNow legendary weapon is crafted from radiant shards. You deserve these!\n");
+                    outputText("\n\n(if you already had some, please remove them, heh)\n");
+                    soulforce.fixShards();
+                }
+                flags[kFLAGS.MOD_SAVE_VERSION] = 35.001;
+            }
+            outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
+            doNext(doCamp);
+            return;
+            /*
 			flags[kFLAGS.MOD_SAVE_VERSION] = 36;
 			clearOutput();
 			outputText("Text.");
@@ -6041,42 +6068,8 @@ public function rebirthFromBadEnd():void {
 				player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage6);
 			}
 			if (player.hasPerk(PerkLib.AscensionHerosLineage)) player.ascensionPerkPoints -= 5;
-            //Shards fix
-            if (player.hasKeyItem("Radiant shard") < 0) {
-                outputText("\n\nNow legendary weapon is crafted from radiant shards. You deserve these!\n");
-                soulforce.fixShards();
-            }
-            //Labyrinth reward fix
-            if (flags[kFLAGS.EBON_LABYRINTH] >= 11)
-                flags[kFLAGS.EBON_LABYRINTH] = 600;
-            else if (flags[kFLAGS.EBON_LABYRINTH] >= 9)
-                flags[kFLAGS.EBON_LABYRINTH] = 450;
-            else if (flags[kFLAGS.EBON_LABYRINTH] >= 7)
-                flags[kFLAGS.EBON_LABYRINTH] = 300;
-            else if (flags[kFLAGS.EBON_LABYRINTH] >= 5)
-                flags[kFLAGS.EBON_LABYRINTH] = 150;
-            else if (flags[kFLAGS.EBON_LABYRINTH] >= 3)
-                flags[kFLAGS.EBON_LABYRINTH] = 50;
-            else if (flags[kFLAGS.EBON_LABYRINTH] > 0)
-                flags[kFLAGS.EBON_LABYRINTH] = 1;
-            doNext(doCamp);
-			return;
-		}
-		/*
-		if (flags[kFLAGS.MOD_SAVE_VERSION] == 36) {
-			flags[kFLAGS.MOD_SAVE_VERSION] = 37;
-			clearOutput();
-			outputText("Text.");
-			doNext(doCamp);
-			return;
-		}
-		if (flags[kFLAGS.MOD_SAVE_VERSION] == 37) {
-			flags[kFLAGS.MOD_SAVE_VERSION] = 38;
-			clearOutput();
-			outputText("Text.");
-			doNext(doCamp);
-			return;
-		}*/
+            */
+        }
 		doCamp();
 	}
 	
