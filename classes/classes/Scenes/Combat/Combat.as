@@ -6144,6 +6144,13 @@ public class Combat extends BaseContent {
 					doDarknessDamage(damage, true, true);
 				}
 				else if (player.weapon == weapons.MGSWORD) doMagicDamage(damage, true, true);
+				else if (player.weapon == weapons.PHALLUS) {
+					if (player.statusEffectv1(StatusEffects.ThePhalluspear1) == 1) monster.teased(monster.lustVuln * Math.round(damage * 0.1));
+					else {
+						doPhysicalDamage(Math.round(damage * 0.75), true, true);
+						monster.teased(monster.lustVuln * Math.round(damage * 0.025));
+					}
+				}
                 else {
                     doPhysicalDamage(damage, true, true);
                     if (player.weapon == weapons.DAISHO) doPhysicalDamage(Math.round(damage * 0.5), true, true);

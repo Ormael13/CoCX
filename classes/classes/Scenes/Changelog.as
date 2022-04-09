@@ -119,7 +119,7 @@ package classes.Scenes
 			outputText("-New melee weapon (by Ormael): Storm Ruler - buyable at Kaiba shop in Tel'Adre. Cost 4800 gems. Base atk is 14. It's large sized weapon belonging to mace/hammer type with 10% chance to trigger stun effect. It deal lightning type of damage and 50% more damage to huge or larger enemies. Additionally have Body's Cultivator (20%) perk.\n");
 			outputText("-New melee weapon (by Lady Aeducan): Chaoseater - obtainable by giving big fucking two-handed sword to Corrupted Celess to corrupt. Increased by 5 base dmg, added scaling based on corruption (up to 50), deal bonus dmg to pure enemies, devour with attack a bit of enemy wrath and mana giving 50% of stolen amount to user and increase (sword) weapon mastery gains by 200%.\n");
 			outputText("-New melee weapon (by Lady Aeducan): Armageddon Blade - obtainable by giving big fucking two-handed sword to Pure Celess to purify. Increased by 5 base dmg, added scaling based on purity (up to 50), deal bonus dmg to corrupted enemies, each attack heal user by 2% of max HP and increase attacks dmg by ~25%.\n");
-			outputText("-New melee weapon (by Lady Aeducan): Moonlight Greatsword - buyable at Kaiba shop. Cost 3000 gems. Base atk is 25, it's Large type weapon, dealing magical dmg instead of physical (scale off int instead of str), using charge weapon will give 2x larger bonus and can use range attack in case there is no range weapon equipped (range attacks giving small amount of sword mastery exp).\n");
+			outputText("-New melee weapon (by Lady Aeducan): Moonlight Greatsword - buyable at Kaiba shop. Cost 3000 gems. Base atk is 25, it's Large sword type weapon, dealing magical dmg instead of physical (scale off int instead of str), using charge weapon will give 2x larger bonus and can use range attack in case there is no range weapon equipped (range attacks giving small amount of sword mastery exp).\n");
 			outputText("-New range weapon (by Lady Aeducan): Harkonnen - buyable at Tripxi shop in Tel'Adre. Cost 3,230 gems. Base atk is 160 and ammo clip size 1. Lowering range accuracy by 10%. It's 2H Firearm type range weapon dealing true damage.\n");
 			outputText("-New armor (by Ormael): Green Diving Suit - buyable at Pinchou shop. Cost 1800 gems, 25 armor, 5 magic resistance.\n");
 			outputText("-New armor (by Liadri): Battle maiden armor - obtainable by giving Lusty Maiden Armor to Pure Celess to purify. Increase armor by an additional 30 but grant no armor if the character is not virgin. No longer grant sex scenes or slutty seduction but reduce lust by 2% each round.\n");
@@ -228,13 +228,13 @@ package classes.Scenes
 			outputText("-Minor Vapula fixes, new cock-finding function. Added chastity belt scene to sex menu (which was clearly intended from the beginning). (Svalkash)\n");
 			outputText("-Made Ted less annoying by disabling him after acquiring the talisman. (Svalkash) ((actualy i made another change that makes him disabled/stop appearing after he is beaten once more after dropping jade talisman (Ormael)))\n");
 			outputText("-USS optimization (changed menuGen, so touched Yara too. If she's broken, I'm the one to blame). Moved USS to SceneLib - please don't create MORE instances of it in every class. (Svalkash)\n");
-			outputText("-SceneHunter (new settings page) added. Checks are currently added only to Holidays, male and female cancers and demons from BlightRidge, Phouka, SandWitch, CumWitch, Naga, Chameleon, LizanRogue, Troll, Cavewyrm. (Svalkash)\n");
+			outputText("-SceneHunter (new settings page) added. Checks are currently added only to Holidays, male and female cancers and demons from BlightRidge, Phouka, SandWitch, CumWitch, Naga, Chameleon, LizanRogue, Troll, Cavewyrm, Excelia (first slave scene). (Svalkash)\n");
 			outputText("-Implemented 3 new scenes for regular imp. Implemented tentacle cock branch for centaur fuck (also imp). Reworked sex menu for imps. (Svalkash)\n");
 			outputText("-Improved isEaster() calculation - now it counts the first Easter day using some complicated Gaussian function, and gives a 7 days window after it. (Svalkash)\n");
 			outputText("-Reworked Sand Witch and Naga scene menus, adding more buttons instead of random routers and hidden checks. Added corruptionTolerance to their checks. Adapted Naga (and SandWitch) genderless scenes for non-genderless PCs. (Svalkash)\n");
 			outputText("-Grey Ink/Abyssal Ink would now be able to give Ink Spray perk too.\n");
 			outputText("-Bit increased Tentacle beast enc chances and lowered truffle find chance in forest.\n");
-			outputText("-\n");
+			outputText("-New melee weapon (by Canadian Snas): The Phalluspear - craftable by Konstantine after PC have Tyrantia in camp and gather needed materials. Cost 2800 gems. Base atk is 70, it's Massive spear type weapon. Can toggle between dealing 25% and 100% as lust dmg.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
