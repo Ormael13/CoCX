@@ -345,30 +345,30 @@ public function siegweirdCampStudy():void
 	}
 }
 
-//Alvina reward
-public function siegweirdAdvancedStudy_3():void {
+//Starting part - corruption check & materials request
+public function siegweirdAdvancedStudy_0():void {
     clearOutput();
-    player.removeKeyItem("Alvina's Shattered Phylactery");
-    outputText("Siegweird notices that you have the pendant as soon as you come near him, giving you a cheerful smile.\n\n");
-    outputText("\"<i>[name]..! You… You did it! Something I know I could never do... You have helped the cause of purity more than you might think. We now have one less threat to deal with, thank you [name].</i>\"\n\n");
-    outputText("Siegweird pulls you in for a fierce hug. He retracts before pulling something from his knapsack,");
-    outputText("\"<i>Here, this tome is for you. I have mastered the ability in my own way, and now I want you to learn it by your own accord.</i>");
-    outputText("<b>You gained a tome of Meteor Shower.</b>\n\n");
-    player.addStatusValue(StatusEffects.SiegweirdTraining2, 1, 1);
-    inventory.takeItem(consumables.MET_SHO, camp.campFollowers);
-    eachMinuteCount(5);
-}
+    if (player.cor > 0) {
+        outputText("You ask Siegweird about those extra lessons.\n\n");
+        outputText("\"<i>Sorry, such teachings cannot be learned by someone with even a sliver of corruption in their being.</i>\"\n\n");
+    }
+    else {
+        outputText("You ask Siegweird about those extra lessons.\n\n");
 
-//Holy symbol
-public function siegweirdAdvancedStudy_2():void {
-    clearOutput();
-    outputText("Siegweird notices your presence and stops hammering on his portable anvil to look at you with a cheerful smile… or at least what you can see through the small hole in his helmet.\n\n");
-    outputText("\"<i>Hey hello [name]!I finished your holy symbol, it should empower your white magic ability further. Consider this your graduation gift.</i>\"\n\n");
-    outputText("He brings over the fruits of his labor and hands it to you. The holy symbol shines with an inner light that simply cannot be snuffed out. You feel serene and safe with this item on you and thank Siegweird for it.\n\n");
-    outputText("\"<i>No need to thank me friend. Say I think I will stay in your camp a little longer. There's enough imps around here to keep me working for weeks! Also I will prepare a curative soup every day, so feel free to come by and take a bowl.</i>\"\n\n");
-    outputText("<b>You gained a Holy Symbol. +20% to white spells and white healing magic spellpower.</b>\n\n");
-    player.createKeyItem("Holy Symbol", 0, 0, 0, 0);
-    player.addStatusValue(StatusEffects.SiegweirdTraining2, 1, 1);
+        outputText("\"<i>Yes, you look about ready to me, so let’s begin with the facts. To channel white magic to its fullest you will also need a holy symbol. While white magic was created by mortals, its origin lies deeper in the roots of divine magic, this belonging to the gods.\n");
+        outputText("Making a holy symbol is as easy as carving a cross out of wood. However, the material will increase the potency of the item.")
+        outputText("In the old days, wood enchanted with divine energy was used for such symbols. Now, where the demons conquer and taint everything they see, it's hard to find any. But I've heard that Marae showed up recently, and I feel her breath of life.\n\n");
+        outputText("If you somehow manage to stumble upon her pure, divine bark, that would be an excellent material for the cross. Deities usually don't give such things away too easily, but there is another option. Any wood will suffice if you somehow manage to obtain some item containing some of her divine energy. A long time ago, pearls were used for that.\n\n");
+        if (flags[kFLAGS.MET_MARAE] <= 0) outputText("But be wary that it won't work unless she's still pure. And since the lake where she lived is tainted too... the chance of that is low.");
+        else {
+            outputText("</i>You tell him that you have already found Marae, and describe her state when you met her.\n\n<i>");
+            if (flags[kFLAGS.FACTORY_SHUTDOWN] == 0) outputText("She's still alive... but to finish her purification, you must shut down the factory. There are no other options.");
+            else if (flags[kFLAGS.MARAE_QUEST_COMPLETE] == 1) outputText("You have disabled the factory? Excellent! And that pearl you mentioned will be an excellent replacement for the bark!");
+            else if (flags[kFLAGS.MET_MARAE_CORRUPTED] == 2) outputText("So... she's fallen to it too. Forget about it then. Even if you manage to obtain her bark, it will probably be tainted too... Unless you've got some <b>before</b> she'd become corrupted. But I don't think it's possible...");
+        }
+        outputText("\n\nYou also need to find a silver ingot; the material would serve as the casing. Finally, a perfect diamond will be the ornament. You should get going and start looking for these items, I wish you good luck in that.</i>\"\n\n");
+        player.createStatusEffect(StatusEffects.SiegweirdTraining2, 0, 0, 0, 0);
+    }
     doNext(camp.campFollowers);
     eachMinuteCount(5);
 }
@@ -404,31 +404,31 @@ public function siegweirdAdvancedStudy_1(usePearl:Boolean):void {
     eachMinuteCount(5);
 }
 
-//Starting part - corruption check & materials request
-public function siegweirdAdvancedStudy_0():void {
+//Holy symbol
+public function siegweirdAdvancedStudy_2():void {
     clearOutput();
-    if (player.cor > 0) {
-        outputText("You ask Siegweird about those extra lessons.\n\n");
-        outputText("\"<i>Sorry, such teachings cannot be learned by someone with even a sliver of corruption in their being.</i>\"\n\n");
-    }
-    else {
-        outputText("You ask Siegweird about those extra lessons.\n\n");
-
-        outputText("\"<i>Yes, you look about ready to me, so let’s begin with the facts. To channel white magic to its fullest you will also need a holy symbol. While white magic was created by mortals, its origin lies deeper in the roots of divine magic, this belonging to the gods.\n");
-        outputText("Making a holy symbol is as easy as carving a cross out of wood. However, the material will increase the potency of the item.")
-        outputText("In the old days, wood enchanted with divine energy was used for such symbols. Now, where the demons conquer and taint everything they see, it's hard to find any. But I've heard that Marae showed up recently, and I feel her breath of life.\n\n");
-        outputText("If you somehow manage to stumble upon her pure, divine bark, that would be an excellent material for the cross. Deities usually don't give such things away too easily, but there is another option. Any wood will suffice if you somehow manage to obtain some item containing some of her divine energy. A long time ago, pearls were used for that.\n\n");
-        if (flags[kFLAGS.MET_MARAE] <= 0) outputText("But be wary that it won't work unless she's still pure. And since the lake where she lived is tainted too... the chance of that is low.");
-        else {
-            outputText("</i>You tell him that you have already found Marae, and describe her state when you met her.\n\n<i>");
-            if (flags[kFLAGS.FACTORY_SHUTDOWN] == 0) outputText("She's still alive... but to finish her purification, you must shut down the factory. There are no other options.");
-            else if (flags[kFLAGS.MARAE_QUEST_COMPLETE] == 1) outputText("You have disabled the factory? Excellent! And that pearl you mentioned will be an excellent replacement for the bark!");
-            else if (flags[kFLAGS.MET_MARAE_CORRUPTED] == 2) outputText("So... she's fallen to it too. Forget about it then. Even if you manage to obtain her bark, it will probably be tainted too... Unless you've got some <b>before</b> she'd become corrupted. But I don't think it's possible...");
-        }
-        outputText("\n\nYou also need to find a silver ingot; the material would serve as the casing. Finally, a perfect diamond will be the ornament. You should get going and start looking for these items, I wish you good luck in that.</i>\"\n\n");
-        player.createStatusEffect(StatusEffects.SiegweirdTraining2, 0, 0, 0, 0);
-    }
+    outputText("Siegweird notices your presence and stops hammering on his portable anvil to look at you with a cheerful smile… or at least what you can see through the small hole in his helmet.\n\n");
+    outputText("\"<i>Hey hello [name]!I finished your holy symbol, it should empower your white magic ability further. Consider this your graduation gift.</i>\"\n\n");
+    outputText("He brings over the fruits of his labor and hands it to you. The holy symbol shines with an inner light that simply cannot be snuffed out. You feel serene and safe with this item on you and thank Siegweird for it.\n\n");
+    outputText("\"<i>No need to thank me friend. Say I think I will stay in your camp a little longer. There's enough imps around here to keep me working for weeks! Also I will prepare a curative soup every day, so feel free to come by and take a bowl.</i>\"\n\n");
+    outputText("<b>You gained a Holy Symbol. +20% to white spells and white healing magic spellpower.</b>\n\n");
+    player.createKeyItem("Holy Symbol", 0, 0, 0, 0);
+    player.addStatusValue(StatusEffects.SiegweirdTraining2, 1, 1);
     doNext(camp.campFollowers);
+    eachMinuteCount(5);
+}
+
+//Alvina reward
+public function siegweirdAdvancedStudy_3():void {
+    clearOutput();
+    player.removeKeyItem("Alvina's Shattered Phylactery");
+    outputText("Siegweird notices that you have the pendant as soon as you come near him, giving you a cheerful smile.\n\n");
+    outputText("\"<i>[name]..! You… You did it! Something I know I could never do... You have helped the cause of purity more than you might think. We now have one less threat to deal with, thank you [name].</i>\"\n\n");
+    outputText("Siegweird pulls you in for a fierce hug. He retracts before pulling something from his knapsack,");
+    outputText("\"<i>Here, this tome is for you. I have mastered the ability in my own way, and now I want you to learn it by your own accord.</i>");
+    outputText("<b>You gained a tome of Meteor Shower.</b>\n\n");
+    player.addStatusValue(StatusEffects.SiegweirdTraining2, 1, 1);
+    inventory.takeItem(consumables.MET_SHO, camp.campFollowers);
     eachMinuteCount(5);
 }
 
