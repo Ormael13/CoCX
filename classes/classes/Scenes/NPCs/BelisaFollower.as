@@ -925,6 +925,7 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		outputText("<i>\"D-does that mean yes?\"</i> Belisa asks nervously. You nod once, getting a girlish squeal from the inexperienced Spider-girl. She brings her hands to her cheeks, holding them there, and you step in, wrapping one arm around her slender waist. Belisa blushes as you sneak a hand under her robe, rubbing the small of her back as she shivers, letting out little <i>tk-tk-tk-tk</i> noises.\n\n");
 		outputText("<i>\"Uh...As much as I want this...You...Can we take this somewhere a bit more private?\"</i> You nod, and she takes your hand, walking off towards her little silk home. You gamely let her lead you in, and you smile, closing the silk and wood door-curtain behind you. Belisa wastes no time, pulling at two spools of silk ropes. To your astoundment, she pulls, revealing a thick silk-cotton sheet. She ties the ropes to the other side of the silky orb, and tosses a few fluffy objects up into the newly erected...Bed? Second Floor? It takes her only a few seconds, and she smiles at you. <i>\"W-well?\"</i> She shrugs her shoulders, trying to emphasise her cleavage, and she flicks her wrist, lighting her robe up and revealing that she’s not currently wearing anything under it.\n\n");
 		outputText("Belisa’s womanly upper body is effectively bare, and you take it all in. Her dusky nipples are pert, and as she fidgets, her breasts bounce pleasantly. Her hourglass figure is less pronounced than some women across Mareth, but right above the spot where her smooth, pale skin gives way to warm-brown chitin, her blushing pussy is on clear display. Her gash is small, but already drooling little orbs of moisture. Belisa lets you get a nice, long look, but eventually the magic fades. Her cheeks are bright red, and she’s beginning to drool from her fanged mouth as well as she stares at your [breasts]. You realize that Belisa is entirely too horny to focus on White Magic right now, and the thought arouses you more than you thought it would.\n\n");
+		BelisaConfessed = true;
 		menu();
 		addButton(1, "TakeCharge", BelisaFTTakeCharge);
 		addButton(2, "Gentle", BelisaFTGentle);
@@ -934,7 +935,6 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		outputText("You shake your head silently. Belisa looks down, fidgeting. You tell Belisa that you’re still trying to figure out what’s going on in Mareth, that you don’t want to pursue a relationship. You tell the Drider-girl that you don’t feel that way about her right now.\n\n");
 		outputText("<i>\"O-oh...I guess I shouldn’t be that surprised.\"</i> Her eyes are wide, shining as if with unshed tears. <i>\"...If you...Need anything silk-wise, or...A band…\"</i> She hiccups, and turns her back on you. <i>\"I’ll be...Around.\"</i> Belisa runs back to her silk home before you can say anything else, and you watch as she closes the door behind her. Tyrantia sees this, looks up at you with some anger in her gaze, and goes into her own hutch.\n\n");
 		BelisaAffection(-30);
-		BelisaConfessed = true;
 		doNext(playerMenu);
 	}
 	public function BelisaFTTakeCharge():void {

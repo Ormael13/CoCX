@@ -106,6 +106,8 @@ package classes.Scenes
 			outputText("-New rare ascension perk -> Ascension: Bloodline Heritage. Req. Ascension: Hero's Legacy and be at fourth ascension. It costs 75 asc points and will give 1 perk point, 1 super perk point and 5 stat points (scalable with NG tiers, for super perk it's reduced by 3) at the start of each new game. Also would increase racial score bonus from any descendant's/bloodline perks by 2.\n");
 			outputText("-New Ascension perk: One Race To Rule Them All. Your racial paragon boost is increased. +(2x rank) to each stat per level and increase racial skill power by (25x rank)%. Max Rank: 5.\n");
 			outputText("-New Ascension perk: Advanced Training. Your gain as many as perk rank more stat points at each level up. Max Rank: 5.\n");
+			outputText("-New Ascension perk: Killing Intent. It works same way like Spiritual Enlightenment but affecting melee physical attacks multiplier instead of soulskills. Max Rank: 30.\n");
+			outputText("-New Ascension perk: Bloodlust. It works same way like Spiritual Enlightenment but affecting range physical attacks multiplier instead of soulskills. Max Rank: 30.\n");
 			outputText("-New melee weapon (by Ormael): Amphyst/Ruby/Sapphire/Topaz Staff - buyable in Tel'Adre Tower. 2 atk, costs 240 gems, increase matching type of element attacks (sapphire > ice and etc.) by 40%, Wizard's Focus (20%), staff type weapon.\n");
 			outputText("-New melee weapon (by Ormael): Dual Katana - dropped by corrupted flesh golems. Cost 1200 gems. Base atk is 15. It's Dual Large weapon belonging to dueling sword type.\n");
 			outputText("-New melee weapon (by Ormael): Dual Lance - dropped by corrupted flesh golems. Cost 960 gems. Base atk is 12. It's Dual Normal weapon belonging to spear type. When used in Charge special would hit twice.\n");
@@ -182,8 +184,6 @@ package classes.Scenes
 			outputText("-Improved Adrenaline perk increase now wrath generation by 2% not 1%.\n");
 			outputText("-Combat code for melee multiattacks been refined to cause less lag on builds that use large amount (~16+) attacks per turn. Also attacking with melee weapon when under winter claw / flame blade or similar buffs would deal elemental damage instead of physical.\n");
 			outputText("-Added modifier to melee and range attacks similar to spell power or soulskill power. That include some of physical specials too.\n");
-			outputText("-New Ascension perk: Killing Intent. It works same way like Spiritual Enlightenment but affecting melee physical attacks multiplier instead of soulskills. Max Rank: 30.\n");
-			outputText("-New Ascension perk: Bloodlust. It works same way like Spiritual Enlightenment but affecting range physical attacks multiplier instead of soulskills. Max Rank: 30.\n");
 			outputText("-Spiritual Enlightenment & Mysticality ascension perks gained 10 more ranks.\n");
 			outputText("-Listed job perks would provide bonus to melee physical attacks multiplier: Warrior (+10%); Brawler / Swordsman / Dervish / Rogue / Monk / Beast Warrior (+20%); Berserker (+80%); Spell-Knight / Tempest / Soul Art Master (+40%)\n");
 			outputText("-Listed job perks would provide bonus to range physical attacks multiplier: Ranger (+10%); Hunter / Gunslinger (+20%); Arcane Archer (+40%)\n");
@@ -245,7 +245,13 @@ package classes.Scenes
 			outputText("3. Adjusted treasure rewards to scale with enemy levels.\n");
 			outputText("4. Adjusted gem drops from enemies. (increased)\n");
 			outputText("5. Slightly decreased DarkSlimeEmpress' HP scaling (it was MUCH faster than Lust scaling)\n");
-			outputText("-Aside few cases all the races half-stages was removed. Yopu now either is sokme race or not, no half-race stage.\n");
+			outputText("-Aside few cases all the races half-stages was removed. You now either is some race or not, no half-race stage.\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -256,12 +262,6 @@ package classes.Scenes
 			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
 			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
 			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

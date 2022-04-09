@@ -514,7 +514,7 @@ public function TyrantiaSleepToggle():void {
 		flags[kFLAGS.SLEEP_WITH] = "Tyrantia";
 	}
 	else {
-		outputText("You tell Tyrantia that you feel like sleeping on your own tonight.\n\n");
+		outputText("You tell your Drider Giantess that you feel like sleeping alone for now. She gives you a saddened look, nodding once. \"<i>If that’s what you want, [name].</i>\" You thank her for understanding.\n\n");
 		flags[kFLAGS.SLEEP_WITH] = "";
 	}
 	menu();
