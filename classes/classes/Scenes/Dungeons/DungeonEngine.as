@@ -207,10 +207,7 @@ public class DungeonEngine extends DungeonAbstractContent {
             case DUNGEON_ANZU_BASEMENT:         return anzupalace.roomBasement;
             case DUNGEON_ANZU_ARMORY:           return anzupalace.roomArmory;
             //Ebon Labyrinth
-            case DUNGEON_EBON_LABYRINTH_0: return ebonlabyrinth.roomAAA;
-            case DUNGEON_EBON_LABYRINTH_1: return ebonlabyrinth.roomBBB;
-            case DUNGEON_EBON_LABYRINTH_2: return ebonlabyrinth.roomCCC;
-            case DUNGEON_EBON_LABYRINTH_3: return ebonlabyrinth.roomDDD;
+            case DUNGEON_EBON_LABYRINTH: return ebonlabyrinth.roomStatic;
             //Beehive
             case DUNGEON_BEE_HIVE_1: return beehive.room1South;
             case DUNGEON_BEE_HIVE_2: return beehive.room4East;
@@ -222,8 +219,7 @@ public class DungeonEngine extends DungeonAbstractContent {
         }
     }
 
-    public function checkRoom():void
-    {
+    public function checkRoom():void {
         getRoomFunc(dungeonLoc)(); //no null-checking - error will be already thrown
     }
     
@@ -263,25 +259,35 @@ public class DungeonEngine extends DungeonAbstractContent {
     public function checkRiverDungeon3rdFloorClear():Boolean {
         return (flags[kFLAGS.RIVER_DUNGEON_FLOORS_PROGRESS] > 8);//8 - otwarcie drzwi boss room-u, 9 - pokonanie bossa
     }
+
+    //returns the room required for clearing
+    public function clearRoomEL():int {
+        return 300;
+    }
+    //returns the room required for the next award
+    public function nextAwardEL():int {
+        //Using the original award pattern - for first 50 and each 150 rooms.
+        if (flags[kFLAGS.EBON_LABYRINTH] < 50) return 50;
+        else return (int(flags[kFLAGS.EBON_LABYRINTH] / 150) + 1) * 150;
+    }
     public function checkEbonLabyrinthClear():Boolean {
-        return (flags[kFLAGS.EBON_LABYRINTH] > 1);//exploracja 50 pokoi bez porażki
+        //Now the dungeon contains different bosses up to floor 300. Let's give people a hint?
+        return (flags[kFLAGS.EBON_LABYRINTH_RECORD] >= clearRoomEL());
+        //return (flags[kFLAGS.EBON_LABYRINTH] > 1);//exploracja 50 pokoi bez porażki
+    }
+    //returns true if there are any pending awards
+    public function checkEbonLabyrinthNotAwarded():Boolean {
+        return flags[kFLAGS.EBON_LABYRINTH_RECORD] >= nextAwardEL();
+        //return (flags[kFLAGS.EBON_LABYRINTH] > 1);//exploracja 50 pokoi bez porażki
     }
     
-    public function enterFactory():void {
-        factory.enterDungeon();
-    }
+    
     public function canFindDeepCave():Boolean {
         return flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] == 0
                 && flags[kFLAGS.FACTORY_SHUTDOWN] > 0;
     }
-    public function enterDeepCave():void {
-        deepcave.enterDungeon();
-    }
     public function canFindDenOfDesire():Boolean {
         return flags[kFLAGS.GAR_NAME] != 0;
-    }
-    public function enterDenOfDesire():void {
-        denofdesire.enterDungeon();
     }
     
     public function navigateToRoom(room:Function = null):void {
@@ -291,12 +297,6 @@ public class DungeonEngine extends DungeonAbstractContent {
     public function navigateToRoomRD(room:Function = null):void {
         if (player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.removeStatusEffect(StatusEffects.ThereCouldBeOnlyOne);
         eachMinuteCount(5);
-        room();
-    }
-    public function navigateToRoomEL(room:Function = null):void {
-        if (player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.removeStatusEffect(StatusEffects.ThereCouldBeOnlyOne);
-        player.addStatusValue(StatusEffects.EbonLabyrinthB, 1, 1);
-        eachMinuteCount(15);
         room();
     }
     
@@ -333,41 +333,33 @@ public class DungeonEngine extends DungeonAbstractContent {
         addButton(14, "Map", map.displayMap).hint("View the map of this dungeon.");
         setTopButtons();
     }
-    
+
+    //Stop copying the code!!!
     public function setDungeonButtonsRD(northFunction:Function = null, southFunction:Function = null, westFunction:Function = null, eastFunction:Function = null):void {
-        statScreenRefresh();
-        hideUpDown();
-        spriteSelect(null);
-        menu();
-        if (northFunction != null) addButton(6, "North", navigateToRoomRD, northFunction);
-        if (southFunction != null) addButton(11, "South", navigateToRoomRD, southFunction);
-        if (westFunction != null) addButton(10, "West", navigateToRoomRD, westFunction);
-        if (eastFunction != null) addButton(12, "East", navigateToRoomRD, eastFunction);
-        if (player.lust >= 30) addButton(8, "Masturbate", SceneLib.masturbation.masturbateGo);
-        else addButtonDisabled(8, "Masturbate", "Req. 30+ lust.");
-        addButton(13, "Inventory", inventory.inventoryMenu).hint("The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.");
-        addButton(14, "Map", map.displayMap2).hint("View the map of this dungeon.");
-        setTopButtons();
+        setDungeonButtons (
+            northFunction   == null ? null : curry(navigateToRoomRD, northFunction),
+            southFunction   == null ? null : curry(navigateToRoomRD, southFunction),
+            westFunction    == null ? null : curry(navigateToRoomRD, westFunction),
+            eastFunction    == null ? null : curry(navigateToRoomRD, eastFunction)
+        );
+        addButton(14, "Map", map.displayMapOnlyOne).hint("View the map of this dungeon."); //replace map button with this "only one" thing
     }
 
     public function setDungeonButtonsRD3D(northFunction:Function = null, southFunction:Function = null, westFunction:Function = null, eastFunction:Function = null, upFunction:Function = null, downFunction:Function = null):void {
-        statScreenRefresh();
-        hideUpDown();
-        spriteSelect(null);
-        menu();
-        if (northFunction != null) addButton(6, "North", navigateToRoomRD, northFunction);
-        if (southFunction != null) addButton(11, "South", navigateToRoomRD, southFunction);
-        if (westFunction != null) addButton(10, "West", navigateToRoomRD, westFunction);
-        if (eastFunction != null) addButton(12, "East", navigateToRoomRD, eastFunction);
+        setDungeonButtonsRD(northFunction, southFunction, westFunction, eastFunction);
+        //add Up/Down buttons
         if (upFunction != null) addButton(5, "Up", navigateToRoomRD, upFunction);
         if (downFunction != null) addButton(7, "Down", navigateToRoomRD, downFunction);
-        if (player.lust >= 30) addButton(8, "Masturbate", SceneLib.masturbation.masturbateGo);
-        else addButtonDisabled(8, "Masturbate", "Req. 30+ lust.");
-        addButton(13, "Inventory", inventory.inventoryMenu).hint("The inventory allows you to use an item.  Be careful as this leaves you open to a counterattack when in combat.");
-        addButton(14, "Map", map.displayMap2).hint("View the map of this dungeon.");
-        setTopButtons();
     }
 
+    //Old button function here. The function itself was moved into EL, but can be brought back for new dungeons.
+    /*
+    public function navigateToRoomEL(room:Function = null):void {
+        if (player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.removeStatusEffect(StatusEffects.ThereCouldBeOnlyOne);
+        player.addStatusValue(StatusEffects.EbonLabyrinthB, 1, 1);
+        eachMinuteCount(15);
+        room();
+    }
     public function setDungeonButtonsEL(northFunction:Function = null, southFunction:Function = null, westFunction:Function = null, eastFunction:Function = null, upFunction:Function = null, downFunction:Function = null):void {
         statScreenRefresh();
         hideUpDown();
@@ -394,6 +386,7 @@ public class DungeonEngine extends DungeonAbstractContent {
         addButton(1, "No", playerMenu);
         addButton(3, "Yes", ebonlabyrinth.exitDungeon);
     }
+    */
     
 }
 }

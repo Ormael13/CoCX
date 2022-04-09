@@ -142,28 +142,37 @@ use namespace CoC;
 				else if (!hasStatusEffect(StatusEffects.AbilityCooldown1)) Dragonbreath();
 				else FlybyAttack();
 			}
-			var choice:Number = rand(7);
-			if (choice == 0) PentaAttack();
-			if (choice == 1) SnakeBite();
-			if (choice == 2 || choice == 3) {
-				if (!hasStatusEffect(StatusEffects.AbilityCooldown1)) Dragonbreath();
-				else SnakeBite();
-			}
-			if (choice == 4 || choice == 5) {
-				if (!player.hasStatusEffect(StatusEffects.Sealed)) Curse();
-				else PentaAttack();
-			}
-			if (choice == 6) TakeFlight();
+            else switch(rand(7)) {
+                case 0:
+                    PentaAttack();
+                    break;
+                case 1:
+                    SnakeBite();
+                    break;
+                case 2:
+                case 3:
+                    if (!hasStatusEffect(StatusEffects.AbilityCooldown1)) Dragonbreath();
+				    else SnakeBite();
+                    break;
+                case 4:
+                case 5:
+                    if (!player.hasStatusEffect(StatusEffects.Sealed)) Curse();
+				    else PentaAttack();
+                    break;
+                case 6:
+                    TakeFlight();
+                    break;
+            }
 		}
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			SceneLib.dungeons.ebonlabyrinth.defeatChaosChimera();
+			SceneLib.dungeons.ebonlabyrinth.chaosChimeraScene.defeat();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			SceneLib.dungeons.ebonlabyrinth.defeatedByChaosChimera();
+			SceneLib.dungeons.ebonlabyrinth.chaosChimeraScene.defeatedBy();
 		}
 		
 		public function ChaosChimera() 

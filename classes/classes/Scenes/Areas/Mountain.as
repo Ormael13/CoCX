@@ -158,7 +158,7 @@ public class Mountain extends BaseContent
 						when:function():Boolean {
 							return flags[kFLAGS.MARAE_QUEST_START] >= 1 && flags[kFLAGS.FACTORY_FOUND] <= 0;
 						},
-						call: SceneLib.dungeons.enterFactory
+						call: SceneLib.dungeons.factory.enterDungeon
 					},{
 						name:"ceraph",
 						chance:0.7,

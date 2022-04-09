@@ -1558,6 +1558,7 @@ public class MarblePurification extends NPCAwareContent{
 		}
 	}
 
+    /* Marble flipouts are disabled because they make no sense. She loves you!
 	//Marble leaves because you’re too corrupted (above 60)
 	//Happens during the purification quest once Marble's corruption is under 30.  If a corrupt follower has been recruited at this point, she will also leave.
 	//Marble will warn the PC if their corruption is getting too high (over 50), and leaves when at 60.
@@ -1594,6 +1595,9 @@ public class MarblePurification extends NPCAwareContent{
 		player.removeStatusEffect(StatusEffects.CampMarble);
 		doNext(camp.returnToCampUseOneHour);
 	}
+    */
+
+    //Since flipouts are disabled, triggered without corruption checking
 	//Marble comes back after your corruption drops below 40
 	public function pureMarbleDecidesToBeLessOfABitch():void
 	{
@@ -1601,12 +1605,21 @@ public class MarblePurification extends NPCAwareContent{
 		clearOutput();
 	 	outputText("While checking your traps to ensure that they're still working, you hear a voice call out from outside the camp, \"<i>Sweetie!</i>\"  You look up and see the smiling face of Marble");
 		//if (PC has at least one child with Marble)
-		if(flags[kFLAGS.MARBLE_KIDS] > 0) outputText(" and that of your child");
-		//if (PC has two or more children with Marble)
-		if(flags[kFLAGS.MARBLE_KIDS] > 1) outputText("ren");
-	 	outputText(" just outside the camp.  She must have somehow found out about your purification.");
-
-	 	outputText("\n\nShe excitedly runs up to you and gives you a big hug, holding you very tightly to her chest.  After several moment of embracing you, Marble gently whispers in your ear, \"<i>I'm so glad you managed to free yourself from the worst of the taint.</i>\"  She pulls back from you and asks if you mind if she moves back into the camp.  How could you say no to her?");
+		if (flags[kFLAGS.MARBLE_KIDS] == 1)
+            outputText(" and that of your child");
+        else if (flags[kFLAGS.MARBLE_KIDS] > 1)
+            outputText(" and those of your children");
+        outputText(" just outside the camp." + (player.cor <= 40 ? "  She must have somehow found out about your purification." : ""));
+        outputText("\n\nShe excitedly runs up to you and gives you a big hug, holding you very tightly to her chest.  After several moment of embracing you, Marble gently whispers in your ear, \"<i>");
+        //fixing fork. Second one still makes sense.
+        if (player.cor <= 40)
+            outputText("I'm so glad you managed to free yourself from the worst of the taint.");
+        else {
+            outputText("I'm... sorry. I'm still afraid of how this taint will affect you, but... you didn't leave me after you'd got rid of the addiction, and even helped me to free myself from all of my corruption. I should't have left you alone, too. And I can't live without you, [name].");
+            outputText("\nIf it's still possible to purify you too, we'll do it together. If not... I hope you'll stay yourself.");
+        }
+        outputText("</i>\" She pulls back from you and asks if you mind if she moves back into the camp.  How could you say no to her?");
+        
 		//re-add Marble and her kids to the camp and farm
 		player.createStatusEffect(StatusEffects.CampMarble,0,0,0,0);
 		flags[kFLAGS.MARBLE_LEFT_OVER_CORRUPTION] = 0;
@@ -1614,6 +1627,7 @@ public class MarblePurification extends NPCAwareContent{
 		flags[kFLAGS.FOLLOWER_AT_FARM_MARBLE] = 0;
 		doNext(camp.returnToCampUseOneHour);
 	}
+
 	//Clara prison camp descriptions
 	//displayed in the camp description if Clara was imprisoned in camp.
 	public function claraCampAddition():void

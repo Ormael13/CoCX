@@ -21,8 +21,6 @@ import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.Dungeons.D3.SuccubusGardener;
 import classes.Scenes.Dungeons.DenOfDesire.HeroslayerOmnibus;
 import classes.Scenes.Dungeons.DenOfDesire.ObsidianGargoyle;
-import classes.Scenes.Dungeons.EbonLabyrinth;
-import classes.Scenes.Dungeons.EbonLabyrinth.*;
 import classes.Scenes.Dungeons.RiverDungeon.QuatroElementalBoss;
 import classes.Scenes.Explore.Pierce;
 import classes.Scenes.Explore.TheDummy;
@@ -57,6 +55,7 @@ import classes.Items.*;
 import classes.Scenes.Places.TrollVillage;
 import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 import classes.Stats.Buff;
+import classes.Scenes.Dungeons.EbonLabyrinth.*;
 
 import classes.Scenes.Metamorph;
 import classes.GeneticMemories.*;
@@ -255,7 +254,6 @@ public class Soulforce extends BaseContent
 		menuItems.push("BelisaTest", (BelisaFollower.BelisaInGame && BelisaFollower.BelisaFollowerStage < 3 && BelisaFollower.BelisaEncounternum >= 1) ? belisatest : false, "Belisa Trigger");
 		menuItems.push("LilyTest", (LilyFollower.LilyFollowerState == false) ? lilytest : false, "Lily Trigger");
 		menuItems.push("FixJiangshi", jiangshiBuggedItemsCleanUpCrew0, "Shit! Here we go Again! Fixing Jiangshi! (better use it only once or may be some bugs i not plan to account for in case of using this more than once - i not blocked using it more than once so belive ppl will be reasonable to not click like mad this)");
-		menuItems.push("Atlach Test", AddMaxBackpack6, "Trigger Atlach scenes.");
 		menuItems.push("BodyPartEditor", SceneLib.debugMenu.bodyPartEditorRoot, "");
 		menuItems.push("ClickItTwice", AddMaxBackpack00, "Golem Army and Ascension: Additional Organ Mutation/Prestige perks correction pre global save upgrade on new public build.");
 		menuItems.push("Instant-house", AddMaxBackpack01, "Instant-house + bed");
@@ -294,9 +292,13 @@ public class Soulforce extends BaseContent
 		outputText("Reset done!");
 		doNext(curry(SoulforceCheats1,2));
 	}
-	public function cheatFixShards():void {
-		var cnt:int = 0;
+    public function cheatFixShards():void { //wrapper for fixShards to use it in cheat menu
 		clearOutput();
+        fixShards();
+		doNext(curry(SoulforceCheats1,2));
+    }
+	public function fixShards():void {
+		var cnt:int = 0;
 		player.removeKeyItem("Radiant shard");
 		outputText("Received shards for: ")
 		if (flags[kFLAGS.AYANE_FOLLOWER] == 2) {
@@ -341,7 +343,6 @@ public class Soulforce extends BaseContent
 		}
 		else
 			outputText("\nNo shards, go complete quests :(");
-		doNext(curry(SoulforceCheats1,2));
 	}
 
 	public function ZenjiQ():void{
@@ -618,13 +619,6 @@ public class Soulforce extends BaseContent
 		outputText("Rewind Evangeline ^^");
 		doNext(curry(SoulforceCheats1, 1));
 	}
-	public function AddMaxBackpack6():void {
-		var floor:Number = rand(3);
-		floor *= 5;
-		floor += 80;
-		player.createStatusEffect(StatusEffects.EbonLabyrinthBoss, floor, 0, 0, 0);
-		SceneLib.ebonLabyrinth.encountersRuletteBossesEL2AtlachNachaDBUG();
-	}
 	public function TestDynamicStats():void {
 		player.statStore.addBuff('sens',+10,'tag',{text:'Debug buff!', rate: Buff.RATE_HOURS, tick: 1});
 		statScreenRefresh();
@@ -663,31 +657,16 @@ public class Soulforce extends BaseContent
 	public function FightDarkSlimeEmpress():void {
 		clearOutput();
 		outputText("Entering battle with Dark Slime Empress! Enjoy ^^");
-		if (rand(2) == 0) player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,65,0,0,0);
-		else {
-			if (rand(2) == 0) player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,70,0,0,0);
-			else player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,75,0,0,0);
-		}
 		startCombat(new DarkSlimeEmpress());
 	}
 	public function FightHydra():void {
 		clearOutput();
 		outputText("Entering battle with Hydra! Enjoy ^^");
-		if (rand(2) == 0) player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,65,0,0,0);
-		else {
-			if (rand(2) == 0) player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,70,0,0,0);
-			else player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,75,0,0,0);
-		}
 		startCombat(new Hydra());
 	}
 	public function FightHellfireSnail():void {
 		clearOutput();
 		outputText("Entering battle with Hellfire Snail! Enjoy ^^");
-		if (rand(2) == 0) player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,65,0,0,0);
-		else {
-			if (rand(2) == 0) player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,70,0,0,0);
-			else player.createStatusEffect(StatusEffects.EbonLabyrinthBoss,75,0,0,0);
-		}
 		startCombat(new HellfireSnail());
 	}
 	public function ChimeraBodyUltimateStage():void {

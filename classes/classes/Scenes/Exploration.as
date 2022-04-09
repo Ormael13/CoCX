@@ -39,7 +39,6 @@ public class Exploration extends BaseContent
 	{
 		public var exploreDebug:ExploreDebug = new ExploreDebug();
 		public var hiddencave:HiddenCave = new HiddenCave();
-		public var TrueDemons:DemonScene = new DemonScene();
 
 		public function Exploration()
 		{
@@ -510,17 +509,17 @@ public class Exploration extends BaseContent
 			var demonChooser:int = rand(100);
 			//Succubus
 			if (demonChooser >= 40 && demonChooser < 70) {
-				TrueDemons.SuccubusEncounter();
+				SceneLib.defiledravine.demonScene.SuccubusEncounter();
 				return;
 			}
 			//Incubus
 			else if (demonChooser >= 70) {
-				TrueDemons.IncubusEncounter();
+				SceneLib.defiledravine.demonScene.IncubusEncounter();
 				return;
 			}
 			//Omnibus
 			else {
-				TrueDemons.OmnibusEncounter();
+				SceneLib.defiledravine.demonScene.OmnibusEncounter();
 				return;
 			}
 		}

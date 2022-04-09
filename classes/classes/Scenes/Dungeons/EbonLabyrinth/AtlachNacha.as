@@ -117,12 +117,12 @@ use namespace CoC;
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			SceneLib.dungeons.ebonlabyrinth.defeatAtlachNacha();
+			SceneLib.dungeons.ebonlabyrinth.atlachNachaScene.defeat();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			SceneLib.dungeons.ebonlabyrinth.defeatedByAtlachNacha();
+			SceneLib.dungeons.ebonlabyrinth.atlachNachaScene.defeatedBy();
 		}
 		
 		override public function get long():String
@@ -135,36 +135,17 @@ use namespace CoC;
 		
 		public function AtlachNacha()
 		{
-			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss) == 80) {
-				initStrTouSpeInte(130, 380, 184, 150);
-				initWisLibSensCor(150, 370, 190, 100);
-				this.armorDef = 300;
-				this.armorMDef = 300;
-				this.bonusHP = 4000;
-				this.bonusLust = 640;
-				this.level = 80;
-				this.gems = 340 + rand(110);
-			}
-			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss) == 85) {
-				initStrTouSpeInte(160, 420, 211, 173);
-				initWisLibSensCor(173, 400, 230, 100);
-				this.armorDef = 375;
-				this.armorMDef = 375;
-				this.bonusHP = 6000;
-				this.bonusLust = 715;
-				this.level = 85;
-				this.gems = 390 + rand(120);
-			}
-			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss) == 90) {
-				initStrTouSpeInte(190, 460, 238, 196);
-				initWisLibSensCor(196, 430, 270, 100);
-				this.armorDef = 450;
-				this.armorMDef = 450;
-				this.bonusHP = 8000;
-				this.bonusLust = 790;
-				this.level = 90;
-				this.gems = 440 + rand(130);
-			}
+			//scaled from 65 now, reduced base stats to compensate
+			var mod:int = inDungeon ? SceneLib.dungeons.ebonlabyrinth.enemyLevelMod : 3;
+            initStrTouSpeInte(40 + 30*mod, 260 + 40*mod, 103 + 27*mod, 81 + 23*mod);
+            initWisLibSensCor(81 + 23*mod, 280 + 30*mod, 70 + 40*mod, 100);
+            this.armorDef = 75 + 75*mod;
+            this.armorMDef = 75 + 75*mod;
+            this.bonusHP = mod == 0 ? 0 : 2000*(mod-1);
+            this.bonusLust = 415 + 75*mod;
+            this.level = 65 + 5*mod;
+            this.gems = (190 + 50*mod) + rand(80 + 10*mod);
+            
 			this.a = " ";
 			this.short = "Atlach Nacha";
 			this.long = "";

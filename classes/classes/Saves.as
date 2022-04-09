@@ -14,7 +14,6 @@ import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.*;
 import classes.Scenes.Areas.Desert.SandWitchScene;
-import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.NPCs.XXCNPC;
 import classes.Scenes.SceneLib;
@@ -1572,9 +1571,9 @@ private function unFuckSaveDataBeforeLoading(data:Object):void {
 public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 {
     var game:CoC = CoC.instance;
-	DungeonAbstractContent.inDungeon = false;
-	DungeonAbstractContent.inRoomedDungeon = false;
-	DungeonAbstractContent.inRoomedDungeonResume = null;
+	inDungeon = false;
+	inRoomedDungeon = false;
+	inRoomedDungeonResume = null;
 
 	//Autosave stuff
 	if(player){

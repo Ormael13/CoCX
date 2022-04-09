@@ -34,6 +34,7 @@ import classes.Scenes.Combat.Combat;
 import classes.Scenes.Combat.CombatAbilities;
 import classes.Scenes.Combat.CombatAbility;
 import classes.Scenes.Combat.CombatMagic;
+import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.Dungeons.DenOfDesire.HeroslayerOmnibus;
 import classes.Scenes.Dungeons.EbonLabyrinth.Hydra;
 import classes.Scenes.Dungeons.Factory.OmnibusOverseer;
@@ -129,6 +130,14 @@ import flash.utils.getQualifiedClassName;
 		}
 		protected function get undergarments():UndergarmentLib{
 			return game.undergarments;
+		}
+		protected function get inDungeon():Boolean
+		{
+			return DungeonAbstractContent.inDungeon;
+		}
+		protected function set inDungeon(v:Boolean):void
+		{
+			DungeonAbstractContent.inDungeon = v;
 		}
 		//For enemies
 		public var bonusHP:Number = 0;

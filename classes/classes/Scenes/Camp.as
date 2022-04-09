@@ -50,20 +50,8 @@ public class Camp extends NPCAwareContent{
 		return SceneLib.inventory.hasItemInStorage(itype);
 	}
 
-	/*
-		protected function hasItemsInStorage():Boolean
-		{
-			return CoC.instance.inventory.hasItemsInStorage();
-		}
-		protected function hasItemsInRacks(armor:Boolean = false):Boolean
-		{
-			return CoC.instance.inventory.hasItemsInRacks(type);
-		}
-*/
-
-	public function Camp(/*campInitialize:Function*/) {
+	public function Camp() {
 		EventParser.doCamp = doCamp;
-		//campInitialize(doCamp); //Pass the doCamp function up to CoC. This way doCamp is private but the CoC class itself can call it.
 	}
 
 	public var cabinProgress:CabinProgress = new CabinProgress();
@@ -74,15 +62,6 @@ public class Camp extends NPCAwareContent{
 	public var codex:Codex = new Codex();
 	public var questlog:Questlog = new Questlog();
 	public var soulforce:Soulforce = new Soulforce();
-	public var dungeon1:Factory = new Factory();
-	public var dungeon2:DeepCave = new DeepCave();
-	public var dungeonS:DesertCave = new DesertCave();
-	public var dungeonH:HelDungeon = new HelDungeon();
-	public var dungeonHC:HiddenCave = new HiddenCave();
-	public var dungeonDD:DenOfDesire = new DenOfDesire();
-	public var dungeonAP:AnzuPalace = new AnzuPalace();
-	public var dungeonEL:EbonLabyrinth = new EbonLabyrinth();
-	public var dungeonBH:BeeHive = new BeeHive();
 	public var Magnolia:MagnoliaFollower = new MagnoliaFollower();
 	public var HolliPure:HolliPureScene = new HolliPureScene();
 	public var templeofdivine:TempleOfTheDivine = new TempleOfTheDivine();
@@ -100,12 +79,6 @@ public class Camp extends NPCAwareContent{
 			_campFollowers.splice(i, 1);
 		}
 	}
-
-	/* Replaced with calls to playerMenu
-		public function campMenu():void {
-			CoC.instance.playerMenu();
-		}
-*/
 
 	public function campAfterMigration():void {
 		clearOutput();
@@ -152,8 +125,6 @@ public class Camp extends NPCAwareContent{
 		returnToCamp(16);
 	}
 
-//  SLEEP_WITH:int = 701;
-
 	//Used to determine scenes if you choose to play joke on them. Should the variables be moved to flags?
 	protected var izmaJoinsStream:Boolean;
 	protected var marbleJoinsStream:Boolean;
@@ -196,14 +167,7 @@ public class Camp extends NPCAwareContent{
 			HPChange(Math.round(player.maxHP() / 2), false);
 			player.removeStatusEffect(StatusEffects.PostAnemoneBeatdown);
 		}
-		/* Can't happen - playerMenu will call dungeon appropriate menu instead of doCamp while inDungeon is true
-	if (CoC.instance.inDungeon) {
-		mainView.showMenuButton( MainView.MENU_DATA );
-		mainView.showMenuButton( MainView.MENU_APPEARANCE );
-		CoC.instance.playerMenu();
-		return;
-	}
-*/
+        
 		//Clear out Izma's saved loot status
 		flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = "";
 		//History perk backup
@@ -239,12 +203,10 @@ public class Camp extends NPCAwareContent{
 			ZenjiScenes.ZenjiLoverDaysTracker = time.days;
 		}
 		if (TrollVillage.ZenjiMoneyHelp > 0) TrollVillage.ZenjiMoneyHelp -= 1;
-		if (!marbleScene.marbleFollower()) {
-			if (flags[kFLAGS.MARBLE_LEFT_OVER_CORRUPTION] == 1 && player.cor <= 40) {
-				hideMenus();
-				marblePurification.pureMarbleDecidesToBeLessOfABitch();
-				return;
-			}
+		if (!marbleScene.marbleFollower() && flags[kFLAGS.MARBLE_LEFT_OVER_CORRUPTION] == 1/* && player.cor <= 40*/) { //Removed the check to make her return to everyone
+			hideMenus();
+			marblePurification.pureMarbleDecidesToBeLessOfABitch();
+			return;
 		}
 		if ((model.time.hours >= 7 && model.time.hours <= 9) && TyrantiaFollower.TyrantiaFollowerStage >= 4 && BelisaFollower.BelisaFollowerStage >= 5 && BelisaFollower.BelisaEncounternum >= 5 && BelisaFollower.BelisaAffectionMeter >= 80 && !BelisaFollower.BelisaConfessed) {
 			SceneLib.belisa.BelisaConfession();
@@ -263,6 +225,7 @@ public class Camp extends NPCAwareContent{
 				marblePurification.BLUHBLUH();
 				return;
 			}
+            /* Marble flipouts are disabled because they made no sense
 			if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] >= 5) {
 				if (flags[kFLAGS.MARBLE_WARNED_ABOUT_CORRUPTION] == 0 && player.cor >= 50 + player.corruptionTolerance()) {
 					hideMenus();
@@ -275,6 +238,7 @@ public class Camp extends NPCAwareContent{
 					return;
 				}
 			}
+            */
 			if (flags[kFLAGS.MARBLE_RATHAZUL_COUNTER_1] == 1 && (time.hours == 6 || time.hours == 7)) {
 				hideMenus();
 				marblePurification.rathazulsMurbelReport();
@@ -4151,28 +4115,28 @@ public class Camp extends NPCAwareContent{
 	private function dungeons():void {
 		menu();
 		//Main story dungeons
-		if (flags[kFLAGS.FACTORY_FOUND] > 0) addButton(0, "Factory", dungeon1.enterDungeon).hint("Visit the demonic factory in the mountains." + (flags[kFLAGS.FACTORY_SHUTDOWN] > 0 ? "\n\nYou've managed to shut down the factory." : "The factory is still running. Marae wants you to shut down the factory!") + (SceneLib.dungeons.checkFactoryClear() ? "\n\nCLEARED!" : ""));
+		if (flags[kFLAGS.FACTORY_FOUND] > 0) addButton(0, "Factory", SceneLib.dungeons.factory.enterDungeon).hint("Visit the demonic factory in the mountains." + (flags[kFLAGS.FACTORY_SHUTDOWN] > 0 ? "\n\nYou've managed to shut down the factory." : "The factory is still running. Marae wants you to shut down the factory!") + (SceneLib.dungeons.checkFactoryClear() ? "\n\nCLEARED!" : ""));
 		else addButtonDisabled(0, "???", "???");
-		if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0) addButton(1, "Deep Cave", dungeon2.enterDungeon).hint("Visit the cave you've found in the Deepwoods." + (flags[kFLAGS.DEFEATED_ZETAZ] > 0 ? "\n\nYou've defeated Zetaz, your old rival." : "") + (SceneLib.dungeons.checkDeepCaveClear() ? "\n\nCLEARED!" : ""));
+		if (flags[kFLAGS.DISCOVERED_DUNGEON_2_ZETAZ] > 0) addButton(1, "Deep Cave", SceneLib.dungeons.deepcave.enterDungeon).hint("Visit the cave you've found in the Deepwoods." + (flags[kFLAGS.DEFEATED_ZETAZ] > 0 ? "\n\nYou've defeated Zetaz, your old rival." : "") + (SceneLib.dungeons.checkDeepCaveClear() ? "\n\nCLEARED!" : ""));
 		else addButtonDisabled(1, "???", "???");
 		if (flags[kFLAGS.D3_DISCOVERED] > 0) addButton(2, "Stronghold", SceneLib.d3.enterD3).hint("Visit the stronghold in the high mountains that belongs to Lethice, the demon queen." + ((flags[kFLAGS.LETHICE_DEFEATED] > 0) ? "\n\nYou have slain Lethice and put an end to the demonic threats. Congratulations, you've beaten the main story!" : "") + (SceneLib.dungeons.checkLethiceStrongholdClear() ? "\n\nCLEARED!" : ""));
 		else addButtonDisabled(2, "???", "???");
 		//Side dungeons
-		if (flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) addButton(5, "Desert Cave", dungeonS.enterDungeon).hint("Visit the cave you've found in the desert." + (flags[kFLAGS.SAND_WITCHES_COWED] + flags[kFLAGS.SAND_WITCHES_FRIENDLY] > 0 ? "\n\nFrom what you've known, this is the source of the Sand Witches." : "") + (SceneLib.dungeons.checkSandCaveClear() ? "\n\nCLEARED!" : ""));
+		if (flags[kFLAGS.DISCOVERED_WITCH_DUNGEON] > 0) addButton(5, "Desert Cave", SceneLib.dungeons.desertcave.enterDungeon).hint("Visit the cave you've found in the desert." + (flags[kFLAGS.SAND_WITCHES_COWED] + flags[kFLAGS.SAND_WITCHES_FRIENDLY] > 0 ? "\n\nFrom what you've known, this is the source of the Sand Witches." : "") + (SceneLib.dungeons.checkSandCaveClear() ? "\n\nCLEARED!" : ""));
 		else addButtonDisabled(5, "???", "???");
-		if (flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] > 0) addButton(6, "Bee Hive", dungeonBH.enterDungeon).hint("Visit the bee hive you've found in the forest." + (flags[kFLAGS.TIFA_FOLLOWER] > 5 ? "\n\nYou've defeated all corrupted bees." : "") + (SceneLib.dungeons.checkBeeHiveClear() ? "\n\nCLEARED!" : ""));
+		if (flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] > 0) addButton(6, "Bee Hive", SceneLib.dungeons.beehive.enterDungeon).hint("Visit the bee hive you've found in the forest." + (flags[kFLAGS.TIFA_FOLLOWER] > 5 ? "\n\nYou've defeated all corrupted bees." : "") + (SceneLib.dungeons.checkBeeHiveClear() ? "\n\nCLEARED!" : ""));
 		else addButtonDisabled(6, "???", "???");
-		if (SceneLib.dungeons.checkPhoenixTowerClear()) addButton(7, "Phoenix Tower", dungeonH.returnToHeliaDungeon).hint("Re-visit the tower you went there as part of Helia's quest." + (SceneLib.dungeons.checkPhoenixTowerClear() ? "\n\nYou've helped Helia in the quest and resolved the problems. \n\nCLEARED!" : ""));
+		if (SceneLib.dungeons.checkPhoenixTowerClear()) addButton(7, "Phoenix Tower", SceneLib.dungeons.heltower.returnToHeliaDungeon).hint("Re-visit the tower you went there as part of Helia's quest." + (SceneLib.dungeons.checkPhoenixTowerClear() ? "\n\nYou've helped Helia in the quest and resolved the problems. \n\nCLEARED!" : ""));
 		else addButtonDisabled(7, "???", "???");
-		if (flags[kFLAGS.EBON_LABYRINTH] > 0) addButton(9, "EbonLabyrinth", dungeonEL.enterDungeon).hint("Visit Ebon Labyrinth." + (SceneLib.dungeons.checkEbonLabyrinthClear() ? "\n\nSEMI-CLEARED!" : ""));
+		if (flags[kFLAGS.EBON_LABYRINTH] > 0) addButton(9, "EbonLabyrinth", SceneLib.dungeons.ebonlabyrinth.enterDungeon).hint("Visit Ebon Labyrinth." + (SceneLib.dungeons.checkEbonLabyrinthClear() ? "\n\nSEMI-CLEARED!" : ""));
 		else addButtonDisabled(9, "???", "???");
-		if (flags[kFLAGS.HIDDEN_CAVE_FOUND] > 0) addButton(10, "Hidden Cave", dungeonHC.enterDungeon).hint("Visit the hidden cave in the hills." + (SceneLib.dungeons.checkHiddenCaveClear() ? "\n\nCLEARED!" : ""));
+		if (flags[kFLAGS.HIDDEN_CAVE_FOUND] > 0) addButton(10, "Hidden Cave", SceneLib.dungeons.hiddencave.enterDungeon).hint("Visit the hidden cave in the hills." + (SceneLib.dungeons.checkHiddenCaveClear() ? "\n\nCLEARED!" : ""));
 		else addButtonDisabled(10, "???", "???");
-		if (flags[kFLAGS.DEN_OF_DESIRE_BOSSES] > 0) addButton(11, "Den of Desire", dungeonDD.enterDungeon).hint("Visit the den in blight ridge." + (SceneLib.dungeons.checkDenOfDesireClear() ? "\n\nCLEARED!" : ""));
+		if (flags[kFLAGS.DEN_OF_DESIRE_BOSSES] > 0) addButton(11, "Den of Desire", SceneLib.dungeons.denofdesire.enterDungeon).hint("Visit the den in blight ridge." + (SceneLib.dungeons.checkDenOfDesireClear() ? "\n\nCLEARED!" : ""));
 		else addButtonDisabled(11, "???", "???");
 		if (flags[kFLAGS.LUMI_MET] > 0) addButton(12, "Lumi's Lab", SceneLib.lumi.lumiEncounter).hint("Visit Lumi's laboratory.");
 		else addButtonDisabled(12, "???", "???");
-		if (flags[kFLAGS.ANZU_PALACE_UNLOCKED] > 0) addButton(13, "Anzu's Palace", dungeonAP.enterDungeon).hint("Visit the palace in the Glacial Rift where Anzu the avian deity resides.");
+		if (flags[kFLAGS.ANZU_PALACE_UNLOCKED] > 0) addButton(13, "Anzu's Palace", SceneLib.dungeons.anzupalace.enterDungeon).hint("Visit the palace in the Glacial Rift where Anzu the avian deity resides.");
 		else addButtonDisabled(13, "???", "???");
 		addButton(14, "Back", places);
 	}
@@ -4243,17 +4207,13 @@ public function wakeFromBadEnd():void {
 	camp.sleepRecovery(true);
 	CoC.instance.timeQ = 0;
 	//Set so you're in camp.
-	DungeonAbstractContent.inDungeon = false;
+	inDungeon = false;
 	inRoomedDungeon = false;
 	inRoomedDungeonResume = null;
     CoC.instance.inCombat = false;
 	player.removeStatusEffect(StatusEffects.RiverDungeonA);
 	if (player.hasStatusEffect(StatusEffects.RivereDungeonIB)) player.removeStatusEffect(StatusEffects.RivereDungeonIB);
 	if (player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.removeStatusEffect(StatusEffects.ThereCouldBeOnlyOne);
-	player.removeStatusEffect(StatusEffects.EbonLabyrinthA);
-	player.removeStatusEffect(StatusEffects.EbonLabyrinthB);
-	if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss1)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss1);
-	if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss2)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss2);
     //Restore stats
 	player.HP = player.maxOverHP();
 	player.fatigue = 0;
@@ -4288,17 +4248,13 @@ public function rebirthFromBadEnd():void {
 	if (flags[kFLAGS.BENOIT_CLOCK_BOUGHT] > 0) model.time.hours = flags[kFLAGS.BENOIT_CLOCK_ALARM];
 	else model.time.hours = 6;
 	//Set so you're in camp.
-	DungeonAbstractContent.inDungeon = false;
+	inDungeon = false;
 	inRoomedDungeon = false;
 	inRoomedDungeonResume = null;
     CoC.instance.inCombat = false;
 	player.removeStatusEffect(StatusEffects.RiverDungeonA);
 	if (player.hasStatusEffect(StatusEffects.RivereDungeonIB)) player.removeStatusEffect(StatusEffects.RivereDungeonIB);
 	if (player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) player.removeStatusEffect(StatusEffects.ThereCouldBeOnlyOne);
-	player.removeStatusEffect(StatusEffects.EbonLabyrinthA);
-	player.removeStatusEffect(StatusEffects.EbonLabyrinthB);
-	if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss1)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss1);
-	if (player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss2)) player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss2);
     //Restore stats
 	player.HP = player.maxOverHP();
 	player.fatigue = 0;
@@ -6050,11 +6006,39 @@ public function rebirthFromBadEnd():void {
 			doNext(doCamp);
 			return;
 		}
-		/*
-		if (flags[kFLAGS.MOD_SAVE_VERSION] == 35) {
+        
+		if (int(flags[kFLAGS.MOD_SAVE_VERSION]) == 35) { //now using float to store versions!
+			clearOutput();
+            if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.001) {
+                //Labyrinth reward fix
+                if (flags[kFLAGS.EBON_LABYRINTH] >= 11)
+                    flags[kFLAGS.EBON_LABYRINTH] = 600;
+                else if (flags[kFLAGS.EBON_LABYRINTH] >= 9)
+                    flags[kFLAGS.EBON_LABYRINTH] = 450;
+                else if (flags[kFLAGS.EBON_LABYRINTH] >= 7)
+                    flags[kFLAGS.EBON_LABYRINTH] = 300;
+                else if (flags[kFLAGS.EBON_LABYRINTH] >= 5)
+                    flags[kFLAGS.EBON_LABYRINTH] = 150;
+                else if (flags[kFLAGS.EBON_LABYRINTH] >= 3)
+                    flags[kFLAGS.EBON_LABYRINTH] = 50;
+                else if (flags[kFLAGS.EBON_LABYRINTH] > 0)
+                    flags[kFLAGS.EBON_LABYRINTH] = 1;
+                //radiant shard fix - now for everyone!
+                if (player.hasKeyItem("Radiant shard") < 0) {
+                    outputText("\n\nNow legendary weapon is crafted from radiant shards. You deserve these!\n");
+                    outputText("\n\n(if you already had some, please remove them, heh)\n");
+                    soulforce.fixShards();
+                }
+                flags[kFLAGS.MOD_SAVE_VERSION] = 35.001;
+            }
+            outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
+            doNext(doCamp);
+            return;
+            /*
 			flags[kFLAGS.MOD_SAVE_VERSION] = 36;
 			clearOutput();
 			outputText("Text.");
+            //Jtecx fixes
 			if (player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1)) {
 				if (player.hasPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX)) player.setPerkValue(PerkLib.AscensionTrancendentalGeneticMemoryStageX, 1,1);
 				else player.createPerk(PerkLib.AscensionTrancendentalGeneticMemoryStageX, 1, 0, 0, 1);
@@ -6086,24 +6070,8 @@ public function rebirthFromBadEnd():void {
 				player.removePerk(PerkLib.AscensionTranscendentalGeneticMemoryStage6);
 			}
 			if (player.hasPerk(PerkLib.AscensionHerosLineage)) player.ascensionPerkPoints -= 5;
-			doNext(doCamp);
-			return;
-		}
-		/*
-		if (flags[kFLAGS.MOD_SAVE_VERSION] == 36) {
-			flags[kFLAGS.MOD_SAVE_VERSION] = 37;
-			clearOutput();
-			outputText("Text.");
-			doNext(doCamp);
-			return;
-		}
-		if (flags[kFLAGS.MOD_SAVE_VERSION] == 37) {
-			flags[kFLAGS.MOD_SAVE_VERSION] = 38;
-			clearOutput();
-			outputText("Text.");
-			doNext(doCamp);
-			return;
-		}*/
+            */
+        }
 		doCamp();
 	}
 	
@@ -6239,6 +6207,8 @@ public function rebirthFromBadEnd():void {
 		doNext(doCamp);
 	}
 
+//Seems like it's unused now.
+/*
 //Updates save. Done to ensure your save doesn't get screwed up.
 	private function updateSaveFlags():void {
 		flags[kFLAGS.MOD_SAVE_VERSION] = CoC.instance.modSaveVersion;
@@ -6271,6 +6241,7 @@ public function rebirthFromBadEnd():void {
 		outputText("Don't worry. Just save the game and you're good to go. We, Ormael/Aimozg, will work out the bugs from time to time, while also bringing in cool new stuff!");
 		doNext(doCamp);
 	}
+*/
 
 	private function updateAchievements():void {
 		//Story
@@ -6383,7 +6354,7 @@ public function rebirthFromBadEnd():void {
 		if (SceneLib.dungeons.checkPhoenixTowerClear()) {
 			awardAchievement("Fall of the Phoenix", kACHIEVEMENTS.DUNGEON_PHOENIX_FALL);
 			dungeonsCleared++;
-			if (flags[kFLAGS.TIMES_ORGASMED] <= 0 && flags[kFLAGS.MOD_SAVE_VERSION] == CoC.instance.modSaveVersion) awardAchievement("Extremely Chaste Delver", kACHIEVEMENTS.DUNGEON_EXTREMELY_CHASTE_DELVER);
+			if (flags[kFLAGS.TIMES_ORGASMED] <= 0) awardAchievement("Extremely Chaste Delver", kACHIEVEMENTS.DUNGEON_EXTREMELY_CHASTE_DELVER);
 		}
 		if (SceneLib.dungeons.checkBeeHiveClear()) {
 			awardAchievement("Victory, Sweet like honey", kACHIEVEMENTS.DUNGEON_VICTORY_SWEET_LIKE_HONEY);
@@ -6402,12 +6373,8 @@ public function rebirthFromBadEnd():void {
 			awardAchievement("Slain the Heroslayer", kACHIEVEMENTS.DUNGEON_SLAIN_THE_HEROSLAYER);
 			dungeonsCleared++;
 		}
-		if (SceneLib.dungeons.checkEbonLabyrinthClear()) {
-			awardAchievement("Honorary Minotaur", kACHIEVEMENTS.DUNGEON_HONORARY_MINOTAUR);
-			dungeonsCleared++;
-		}
 		//bee hive clear
-		if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) >= 50 && flags[kFLAGS.EBON_LABYRINTH] == 2) dungeonsCleared++;
+		if (SceneLib.dungeons.checkEbonLabyrinthClear()) dungeonsCleared++;
 		if (dungeonsCleared >= 1) awardAchievement("Delver", kACHIEVEMENTS.DUNGEON_DELVER);
 		if (dungeonsCleared >= 2) awardAchievement("Delver Apprentice", kACHIEVEMENTS.DUNGEON_DELVER_APPRENTICE);
 		if (dungeonsCleared >= 4) awardAchievement("Delver Expert", kACHIEVEMENTS.DUNGEON_DELVER_MASTER);
@@ -6705,4 +6672,4 @@ public function rebirthFromBadEnd():void {
         }
         */
 	}
-}
+}
