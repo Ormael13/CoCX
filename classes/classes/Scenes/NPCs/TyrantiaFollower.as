@@ -20,6 +20,8 @@ import classes.internals.SaveableState;
 		public static var TyrantiaAffectionMeter:Number;
 		public static var TyrantiaFollowerStage:Number;
 		public static var TyrantiaTrainingSessions:Number;
+		public static var TyraniaThePhalluspear:Boolean;
+		public static var TyraniaDriderJuggernautPlate:Boolean;
 
 		public function stateObjectName():String {
 			return "TyrantiaFollower";
@@ -33,6 +35,8 @@ import classes.internals.SaveableState;
 			TyrantiaAffectionMeter = 0;
 			TyrantiaFollowerStage = 0;
 			TyrantiaTrainingSessions = 0;
+			TyraniaThePhalluspear = false;
+			TyraniaDriderJuggernautPlate = false;
 		}
 
 		public function saveToObject():Object {
@@ -43,7 +47,9 @@ import classes.internals.SaveableState;
 				"TyraniaAndIzumi": TyraniaAndIzumi,
 				"TyrantiaAffectionMeter": TyrantiaAffectionMeter,
 				"TyrantiaFollowerStage": TyrantiaFollowerStage,
-				"TyrantiaTrainingSessions": TyrantiaTrainingSessions
+				"TyrantiaTrainingSessions": TyrantiaTrainingSessions,
+				"TyraniaThePhalluspear": TyraniaThePhalluspear,
+				"TyraniaDriderJuggernautPlate": TyraniaDriderJuggernautPlate
 			};
 		}
 
@@ -56,6 +62,8 @@ import classes.internals.SaveableState;
 				TyrantiaAffectionMeter = o["TyrantiaAffectionMeter"];
 				TyrantiaFollowerStage = o["TyrantiaFollowerStage"];
 				TyrantiaTrainingSessions = o["TyrantiaTrainingSessions"];
+				TyraniaThePhalluspear = o["TyraniaThePhalluspear"];
+				TyraniaDriderJuggernautPlate = o["TyraniaDriderJuggernautPlate"];
 			} else {
 				// loading from old save
 				resetState();
@@ -299,13 +307,18 @@ public function repeatEncounterBattlefieldTalk():void {
 	addButton(1, "Self", repeatEncounterBattlefieldTalkSelf);
 	if (TyrantiaTrainingSessions > 0) addButtonDisabled(2, "FightStyle", "You already can train with her.");
 	else addButton(2, "FightStyle", repeatEncounterBattlefieldTalkFightingStyle);
-	if (TyrantiaFollowerStage >= 4){
+	if (TyrantiaFollowerStage >= 4) {
 		if (flags[kFLAGS.TIMES_MET_KIHA] > 0) addButton(3, "Kiha", repeatEncounterBattlefieldTalkKiha);
 		else addButtonDisabled(3, "???", "Perhaps if you look around the swamps, you might find someone she might also know...");
 		if (DivaScene.instance.status != 0) addButton(4, "Diva", repeatEncounterBattlefieldTalkDiva);
 		else addButtonDisabled(4,"???", "Perhaps if you look around the mountains, you might find someone she might also know...");
 	}
 	addButton(5, "Her", repeatEncounterBattlefieldTalkHer);
+	if (!TyraniaThePhalluspear && flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2) addButton(10, "ThePhalluspear", talkThePhalluspear);
+	if (TyrantiaFollowerStage >= 4) {
+		if (flags[kFLAGS.SLEEP_WITH] != "Tyrantia") addButton(12, "Sleep With", TyrantiaSleepToggle);
+		else addButton(12, "Sleep Alone", TyrantiaSleepToggle);
+	}
 	if (TyrantiaFollowerStage >= 4) addButton(14, "Back", TyrantiaAtCamp);
 	else addButton(14, "Back", repeatEncounterBattlefieldRe);
 }
@@ -442,7 +455,7 @@ public function repeatEncounterBattlefieldTalkHerLifeOnTheBattlefield():void {
 	if (TyraniaPostFinalKissScene) outputText("\"<i>Things have slowed down a lot lately…Apparently keeping me busy was their goal.</i>\" She shudders at the thought. \"<i>Now they’re not constantly coming at me, I have…too much time to think.</i>\"\n\n");
 	else outputText("Tyrantia rolls her shoulders. \"<i>I don’t even know why the demons come here. There’s stuff to salvage, sure, but nothing worth sending people to die.</i>\" She taps her back legs against the ground. \"<i>At least it keeps me busy, eh?</i>\"\n\n");
 	//affection gains
-	doNext(camp.returnToCampUseOneHour);//outputText("\"<i></i>\"\n\n");
+	doNext(camp.returnToCampUseOneHour);
 }
 public function repeatEncounterBattlefieldTalkHerDifferentParts():void {
 	clearOutput();
@@ -479,6 +492,36 @@ public function repeatEncounterBattlefieldTalkHerKids():void {
 	outputText("Arian has purification powers. \n\n");
 	tyraniaAffection(5);
 	doNext(camp.returnToCampUseOneHour);
+}
+public function talkThePhalluspear():void {
+	clearOutput();
+	outputText("You ask Tyrantia about her weapon. She takes it in both hands, giving it a once-over. \"<i>Honestly, I hadn’t thought about it that much. I kinda stole it from the demons when I escaped.</i>\" She chuckles. \"<i>Why? Were you interested in trying it out or something?</i>\"\n\n");
+	outputText("You tell her that you were interested in obtaining your own Phalluspear. Noting the weapon’s potential for both pain and pleasure, you note it’s a very flexible weapon to have in Mareth.\n\n");
+	outputText("\"<i>Well…Normally I wouldn’t encourage people to take after me…But in this case, I kinda get it.</i>\" She looks over towards camp, where Konstantine sits, idly grinding a sword. \"<i>I have no idea how to remake this thing…But maybe he could?</i>\"\n\n");
+	outputText("You nod, and the two of you head over to where your resident blacksmith sits. As you approach, Konstantine looks up at the two of you. \"<i>Oh, Tyrantia! How have you been?</i>\"\n\n");
+	outputText("She explains that this isn’t a social call, and that the two of you had been looking for a way to recreate her Phalluspear. Konstantine holds his hand out, and your giant lover hands him the weapon.\n\n");
+	outputText("\"<i>Ah. This weapon is quite interesting!</i>\" Konstantine declares. \"<i>Yes, I can make it for you…But I’ll need some materials and assistance to do so.</i>\" He ponders for a moment. \"<i>I’ll need 5 LustDrafts, to start. The basis of this weapon’s poison is the same.</i>\" He flicks the weapon’s head, and he nods. \"<i>Two…No…Three metal plates, and some tough silk to make the mechanism. I’ll also need a base to work with. A simple spear should do the trick.</i>\"\n\n");
+	TyraniaThePhalluspear = true;
+	doNext(camp.returnToCampUseOneHour);
+}
+public function TyrantiaSleepToggle():void {
+	//spriteSelect(SpriteDb.s_electra);
+	clearOutput();
+	if(flags[kFLAGS.SLEEP_WITH] != "Tyrantia") {
+		outputText("You ask Tyrantia if she enjoys your hugs. She doesn’t say anything, simply stepping in, wrapping her warm, fuzzy tree trunk-sized arms around you, holding you against her breast.\n\n");
+		outputText("\"<i>That good enough answer for ya?</i>\" She asks playfully. You smile, hugging her back, and you ask if she’d be willing to share her bedroll with you. She blinks, one eye at a time, and you smile, asking her if she’d like to wrap her warm arms around you and fall asleep at night.\n\n");
+		outputText("You tell Tyrantia that you’d love to wake up and see her face in the morning. This actually gets a blush from the giantess, and she puts you down. \"<i>I...Gosh, that’d be awesome, [name]. Just come by my hutch when you’re feeling sleepy. My door’s always open for my favorite [race].</i>\"\n\n");
+		flags[kFLAGS.SLEEP_WITH] = "Tyrantia";
+	}
+	else {
+		outputText("You tell Tyrantia that you feel like sleeping on your own tonight.\n\n");
+		flags[kFLAGS.SLEEP_WITH] = "";
+	}
+	menu();
+	addButton(0,"Next", repeatEncounterBattlefieldTalk);
+}
+private function sleepWith(arg:String = ""):void {
+	flags[kFLAGS.SLEEP_WITH] = arg;
 }
 public function TyrantiaLiveWithMe():void {
 	clearOutput();
@@ -915,9 +958,9 @@ public function TyrantiaTitJob():void {
 public function TyrantiaHugFuck():void {
 	clearOutput();
 	tyraniaAffection(5);
-	outputText("You tell the giantess that you want to have some fun, but you want to mix it up a bit. Tyrantia tilts her head, nodding appreciatively as you strip. Your [cock] is already upright, raring to go, (if herm) your damp cooter drips with arousal.\n\n");
+	outputText("You tell the giantess that you want to have some fun, but you want to mix it up a bit. Tyrantia tilts her head, nodding appreciatively as you strip. Your [cock] is already upright, raring to go "+(player.hasVagina()?", your cooter dripping with arousal":"")+".\n\n");
 	outputText("<i>“So, what’s on your pretty brain, lover?”</i> You leer as Tyrantia returns the favor, peeling her armor off, and wiggling her hips as she peels her bras off. Her sizable pussy isn’t just damp, it’s positively dripping with lust, and she blushes, covering herself. <i>“H-hey, I can’t help it, okay? They...Made me like this.”</i> You decide to distract your suddenly bashful giant lover, running at her naked, full speed. You yell at her to catch you, leaping up and wrapping your arms around her, burying your [face] into her love-pillows.\n\n");
-	outputText("You feel her warm, furry arms wrap around you, below your shoulders, and pull you up. She smiles, her eyes shining as she rubs her nose into yours. <i>“What was that?”</i> She asks as you wrap your [legs] (or coils) around her waist, rubbing your [cock] against her (slick/furry) chitin-covered leg.\n\n");
+	outputText("You feel her warm, furry arms wrap around you, below your shoulders, and pull you up. She smiles, her eyes shining as she rubs her nose into yours. <i>“What was that?”</i> She asks as you wrap your [legs] around her waist, rubbing your [cock] against her chitin-covered leg.\n\n");
 	outputText("You tell Tyrantia that it’s funny, and kind of arousing, her being so bashful. She freezes, and you kiss her cheek, telling her that you’re happy that she’s so wet for you. The red fills her face, and Tyrantia’s voice gets husky. She brings her lips to your ears, running the side of her fangs against your vulnerable neck as she whispers. <i>“Are you going to stick that [cock] of yours into me, or what?”</i>\n\n");
 	outputText("At that, you’re more than happy to oblige. Trusting Tyrantia’s massive, fuzzy arms to support you, you take one hand from around her, guiding your [cock] past her blackened folds and deep into Tyrantia’s sopping depths. Tyrantia shudders as you begin to move, using your [legs] to give you leverage as you rub your [cockhead] into her folds. <i>“Ngh...Where to now, my little [race]?”</i>\n\n");
 	outputText("You tell Tyrantia that you don’t particularly care, as long as you get to keep yourself inside her. She gives you a warm smile, biting her lower lip as you begin moving again. You sink your [face] into Tyrantia’s massive breasts, nicking the pillowy mounds with your teeth, paddling them with your nose, and pulling on her nipples as your lover’s fuzzy arms rub alongside your [skin] back, warm and soft...and comforting. You build up to a slightly quicker pace as she runs faster, and are rewarded by a low moan as your Drider-lover arches her back slightly.\n\n");
@@ -925,7 +968,7 @@ public function TyrantiaHugFuck():void {
 	outputText("<i>“Thanks...Didn’t want to drop you...and I don’t want to end this yet.”</i> Tyrantia stops, and you look up, somewhat reluctantly, from her bountiful breasts. She ducks, and you recognize the place as the cavelike structure in the Battlefield, where you first made love to your giantess.\n\n");
 	outputText("<i>“...I just...Wanted to have you here.”</i> The giantess explains. <i>“[name], I’ve fucked a lot of things, a lot of people...But I love you. Here was where...You made me feel special.”</i> Still holding you close, she walks to the very back of the cave, supporting your [ass] between the wall and her front Drider legs. Tyrantia looks into your eyes, and you wonder, for a moment, why you ever found this beautiful woman scary. <i>“Well, [name]...Make me feel that way again, would you please?”</i> She leans in to kiss you, slowly. <i>“Remind me of the night that made my life worth living.”</i>\n\n");
 	outputText("Her lips and yours lock, beads of her bittersweet venom mixing with her sugary saliva. You greedily swallow the mixture, your erection hardening back up within her slippery pussy. Her hands drop to the curve of your [ass], fingers prodding at the entrance to your pucker as you buck your hips, sinking your [cock] balls-deep into your Drider lover. You’re rewarded by a surprisingly high-pitched moan, Tyrantia bringing one of her furry hands to support your head as she slams you into the wall.\n\n");
-	outputText("You keep your [legs] wrapped firmly around Tyrantia, the two of you howling together in shared pleasure. Her depths contract, the slick folds trying desperately to tighten, to keep you in, but you piston in and out, your [cockhead] heating up, despite the rather absurd amount of lubricant dripping from your lover’s cunt. Her fuzzy arms, one hand on the back of your head, run along your back. You bury your [face] intowintoweđ her breasts, pulling at the flesh as you lick her cross-shaped cleavage, burying your face in titty heaven. You motorboat her, bringing yet another tone higher out of Tyrantia’s tortured voice.\n\n");
+	outputText("You keep your [legs] wrapped firmly around Tyrantia, the two of you howling together in shared pleasure. Her depths contract, the slick folds trying desperately to tighten, to keep you in, but you piston in and out, your [cockhead] heating up, despite the rather absurd amount of lubricant dripping from your lover’s cunt. Her fuzzy arms, one hand on the back of your head, run along your back. You bury your [face] into her breasts, pulling at the flesh as you lick her cross-shaped cleavage, burying your face in titty heaven. You motorboat her, bringing yet another tone higher out of Tyrantia’s tortured voice.\n\n");
 	outputText("<i>“Oh...Fuck...Yes! Yes! [Name], you horny fucking beast!”</i> She howls, legs shaking underneath you as she clamps down on your shaft, pussy walls milking you for all they’re worth. <i>“Cumming!”</i> As her juices flow, you reach up with one hand, pulling her head down into a passionate french kiss. You pick up the pace, her legs shaking uncontrollably as you pound her sensitive quim.\n\n");
 	outputText("Tyrantia’s legs begin to collapse, and you barely get your [legs] underneath you in time, now holding her upper body up. Her eyes wide, tongue lolling out of her mouth, Tyrantia bucks her hips like a beast, arms still latched onto you as your [cock] twitches inside her, begging for release. Your Drider lover squeals with delight as you slam your [hips] into hers, bottoming out inside her.\n\n");
 	outputText("<i>“Yes. Yes, yesyesyesYES!”</i> Drowning in pleasure, the Drider’s barely focused eyes roll around wildly. <i>“[name], do it. Cum for me.”</i> She slides up and down you recklessly, pinning you down against the ground. You hold on as long as you can, but sadly, all things must come to an end. You howl, your [cock] shaking madly inside her, spraying your baby batter into Tyrantia’s needy cunt. She slides up and down your shaft, tongue lolling out, and your vision blackens around the edges as your [cock] spurts again, then again. Your orgasm just seems to roll on, and eventually, your eyes are too heavy for you to keep open. The last thing you feel is a crushing weight as Tyrantia’s upper half collapses on top of you.\n\n");
@@ -933,7 +976,7 @@ public function TyrantiaHugFuck():void {
 	outputText("<i>“Mine.”</i> She whispers in her sleep. You sigh, content, shifting slightly, so that you’re a bit more comfortable. You rest your head on her fuzzy hand, closing your eyes again.\n\n");
 	outputText("You wake as Tyrantia shifts around you. <i>“...aw…”</i> She seems disappointed as you wake up. <i>“You’re cute when you’re asleep.”</i> She sits up, pulling your [cock] out of her with a sticky Schlurp sound. You look at her lower body, soaked and sticky with the results of your lovemaking.\n\n");
 	outputText("Reluctantly, you tell Tyrantia that you need to get back to camp. She nods, picking you up in her arms. <i>“I love you.”</i> This is a bare whisper, a lot more vulnerable than you’d expect from a woman who’s literally picked you up like it’s nothing. You tell Tyrantia that you love her back, and this gets you another happy little noise from your giantess.\n\n");
-	outputText("<i>“Umm...I just realized something.”</i> She says, blushing. You tilt your head, confused, and she scratches her head. <i>“...We left our clothes back at camp. You facepalm, realizing that neither of you thought about the aftermath of your little sexcapade.\n\n");
+	outputText("<i>“Umm...I just realized something.”</i> She says, blushing. You tilt your head, confused, and she scratches her head. <i>“...We left our clothes back at camp.\" </i> You facepalm, realizing that neither of you thought about the aftermath of your little sexcapade.\n\n");
 	outputText("<i>“Well...I know how we could keep ourselves...Kind of covered.”</i> She grins, putting you down. <i>“But it might be a bit...Stimulating.”</i>\n\n");
 	menu();
 	addButton(1, "Yes", TyrantiaHugFuckCover);

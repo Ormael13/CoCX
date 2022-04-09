@@ -159,7 +159,7 @@
             <color name="midnight black">#171622</color>
 			<color name="midnight purple">#47314b</color>
             <color name="milky white">#f4dfdc</color>
-            <color name="pale white">#ffeac7</color>
+            <color name="pale white">#fff4eb</color>
             <color name="pale yellow">#eeecaa</color>
             <color name="platinum blonde">#f7f3e8</color>
             <color name="platinum crimson">#ff745c</color>
@@ -1354,7 +1354,7 @@
         <cell rect="339,350,168,139" name="wings/wraith" dx="27" dy="39"/>
         <cell rect="508,350,168,139" name="wings/ghost" dx="21" dy="27"/>
         <cell rect="170,350,168,139" name="rearbody/displacertentacle" dx="24" dy="20"/>
-        <cell rect="1,630,248,139" name="wings_bg/vampire_bg" dx="20" dy="28"/>
+        <cell rect="1,630,248,139" name="wings_bg/vampire_bg" dx="-3" dy="30"/>
         <cell rect="254,630,168,139" name="overclothe/vampire" dx="20" dy="28"/>
         <cell rect="677,350,83,139" name="wings_bg/atlach" dx="17" dy="-3"/>
         <cell rect="747,350,83,139" name="wings/atlach" dx="87" dy="-3"/>
@@ -2620,61 +2620,67 @@
 		<!-- ARMS AREA -->
         <switch value="arms.type">
             <case values="Arms.HUMAN,Arms.KITSUNE,Arms.ELF,Arms.RAIJU,Arms.CENTIPEDE">
-				<if test="PlayerHasViewableOutfit">
-					<if test="armStanceNonBannedList">
-						<if test="femininity &gt;=40">
-							<if test="cor &gt;=50">
-								<if test="skin.coverage==Skin.COVERAGE_NONE">
-									<hide part="hands/*"/>
-									<hide part="arms/*"/>
-									<if test="PlayerHasAWeapon">
-										<show part="arms_bg/human"/>
-										<else>
-											<hide part="arms_bg/*"/>
-											<hide part="hands_bg/*"/>
-											<show part="arms_bg/demonlewd"/>
-										</else>
-									</if>
-									<if test="PlayerHasAShield or PlayerHasADualWeapon">
-										<show part="arms/human"/>
-										<else>
-											<hide part="arms/*"/>
-											<hide part="hands/*"/>
-											<show part="arms/demonlewd"/>
-											<show part="arms_fg/demonlewd"/>
-										</else>
-									</if>
-								</if>
-							</if>
-						</if>
-					</if>
+				<if test="wings.type==Wings.VAMPIRE">
+					<show part="arms_bg/human"/>
+					<show part="arms/human"/>
 					<else>
-						<if test="femininity &gt;=40">
-							<if test="cor &gt;=50">
-								<if test="skin.coverage==Skin.COVERAGE_NONE">
-									<if test="showClothing">
-										<hide part="hands/*"/>
-										<hide part="arms/*"/>
-										<if test="PlayerHasAWeapon">
-											<show part="arms_bg/human"/>
-											<else>
-												<hide part="arms_bg/*"/>
-												<hide part="hands_bg/*"/>
-												<show part="arms_bg/demonlewd"/>
-											</else>
-										</if>
-										<if test="PlayerHasAShield or PlayerHasADualWeapon">
-											<show part="arms/human"/>
-											<else>
-												<hide part="arms/*"/>
-												<hide part="hands/*"/>
-												<show part="arms/demonlewd"/>
-												<show part="arms_fg/demonlewd"/>
-											</else>
+						<if test="PlayerHasViewableOutfit">
+							<if test="armStanceNonBannedList">
+								<if test="femininity &gt;=40">
+									<if test="cor &gt;=50">
+										<if test="skin.coverage==Skin.COVERAGE_NONE">
+											<hide part="hands/*"/>
+											<hide part="arms/*"/>
+											<if test="PlayerHasAWeapon">
+												<show part="arms_bg/human"/>
+												<else>
+													<hide part="arms_bg/*"/>
+													<hide part="hands_bg/*"/>
+													<show part="arms_bg/demonlewd"/>
+												</else>
+											</if>
+											<if test="PlayerHasAShield or PlayerHasADualWeapon">
+												<show part="arms/human"/>
+												<else>
+													<hide part="arms/*"/>
+													<hide part="hands/*"/>
+													<show part="arms/demonlewd"/>
+													<show part="arms_fg/demonlewd"/>
+												</else>
+											</if>
 										</if>
 									</if>
 								</if>
 							</if>
+							<else>
+								<if test="femininity &gt;=40">
+									<if test="cor &gt;=50">
+										<if test="skin.coverage==Skin.COVERAGE_NONE">
+											<if test="showClothing">
+												<hide part="hands/*"/>
+												<hide part="arms/*"/>
+												<if test="PlayerHasAWeapon">
+													<show part="arms_bg/human"/>
+													<else>
+														<hide part="arms_bg/*"/>
+														<hide part="hands_bg/*"/>
+														<show part="arms_bg/demonlewd"/>
+													</else>
+												</if>
+												<if test="PlayerHasAShield or PlayerHasADualWeapon">
+													<show part="arms/human"/>
+													<else>
+														<hide part="arms/*"/>
+														<hide part="hands/*"/>
+														<show part="arms/demonlewd"/>
+														<show part="arms_fg/demonlewd"/>
+													</else>
+												</if>
+											</if>
+										</if>
+									</if>
+								</if>
+							</else>
 						</if>
 					</else>
 				</if>

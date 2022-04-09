@@ -38,12 +38,12 @@ public class CancerAttack extends Monster
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			doNext(SceneLib.beach.cancerScene.defeat);
+			SceneLib.beach.cancerScene.defeat();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-            doNext(SceneLib.beach.cancerScene.rape);
+            SceneLib.beach.cancerScene.rape();
 		}
 
 		private function Dig():void {
