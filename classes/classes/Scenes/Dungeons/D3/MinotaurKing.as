@@ -103,7 +103,7 @@ public class MinotaurKing extends Monster
 				return;
 			}
             player.removeStatusEffect(StatusEffects.MinoKing);
-			SceneLib.d3.minotaurKing.theKingIsDeadLongLiveTheKing(hpVictory);
+			SceneLib.d3.minotaurKing.theKingIsDeadLongLiveTheKing();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
