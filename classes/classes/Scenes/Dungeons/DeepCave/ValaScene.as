@@ -933,9 +933,9 @@ public class ValaScene extends BaseContent implements SaveableState
 			player.skin.coverage = Skin.COVERAGE_NONE;
 			var growth:int = 1 + rand(3);
 			if (player.breastRows.length > 0) {
-				if (player.breastRows[0].breastRating < 2 && rand(3) == 0) growth++;
-				if (player.breastRows[0].breastRating < 5 && rand(4) == 0) growth++;
-				if (player.breastRows[0].breastRating < 6 && rand(5) == 0) growth++;
+				if (player.breastRows[0].breastRating < 2) growth++;
+				if (player.breastRows[0].breastRating < 3 && rand(2) == 0) growth++;
+				if (player.breastRows[0].breastRating < 4 && rand(3) == 0) growth++;
 			}
 			player.createPerk(PerkLib.TransformationImmunityFairy,0,0,0,0)
 			player.removeAllRacialMutation();

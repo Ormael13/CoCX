@@ -3717,12 +3717,10 @@ use namespace CoC;
 			}
 			if (TopRace == "fairy") {
 				if (TopScore >= 23) {
-					if (TopScore >= 26) {
-						race = "fairy queen";
-					}
-					else{
-						race = "great fairy";
-					}
+					if (TopScore >= 29) race = "Titania";
+					else if (TopScore >= 29) race = "fairy queen";
+					else if (TopScore >= 26) race = "noble fairy";
+					else race = "great fairy";
 				}
 			}
 			if (TopRace == "ferret") {
@@ -5679,9 +5677,11 @@ use namespace CoC;
 			Begin("Player","racialScore","fairy");
 			var fairyCounter:Number = 0;
 			if (faceType == Face.FAIRY)
-				fairyCounter++;
+				fairyCounter += 2;
 			if (eyes.type == Eyes.FAIRY)
-				fairyCounter++;
+				fairyCounter += 2;
+			if (hairType == Hair.FAIRY)
+				fairyCounter += 2;
 			if (ears.type == Ears.ELVEN)
 				fairyCounter++;
 			if (tailType == Tail.NONE)
@@ -5693,16 +5693,10 @@ use namespace CoC;
 			if (tongue.type == Tongue.ELF)
 				fairyCounter++;
 			if (wings.type == Wings.FAIRY)
-				fairyCounter+=4;
-			if (hairType == Hair.FAIRY)
+				fairyCounter += 3;
+			if (breastRows.length > 0)
 				fairyCounter++;
 			if (!hasCock() && fairyCounter > 0)
-				fairyCounter++;
-			if (breastRows.length > 1 && fairyCounter > 0)
-				fairyCounter++;
-			if (breastRows.length == 3 && fairyCounter > 0)
-				fairyCounter++;
-			if (breastRows.length == 4 && fairyCounter > 0)
 				fairyCounter++;
 			if (!hasCoat() && fairyCounter > 0)
 				fairyCounter++;
