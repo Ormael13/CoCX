@@ -348,8 +348,12 @@ public class EbonLabyrinth extends DungeonAbstractContent {
             encountersLootChest();
             return true;
         }
-        //Special encounter
-        else if (roomN > 295 && player.hasStatusEffect(StatusEffects.RathazulAprilFool) && player.statusEffectv3(StatusEffects.RathazulAprilFool) == 0) {
+        //Special encounters
+        else if (roomN >= 49 && flags[kFLAGS.ALVINA_FOLLOWER] == 17) {
+            chaosChimeraScene.encounter();
+            return true;
+        }
+        else if (roomN >= 295 && player.hasStatusEffect(StatusEffects.RathazulAprilFool) && player.statusEffectv3(StatusEffects.RathazulAprilFool) == 0) {
             incEncChance();
             encountersFountainOfPurity();
             return true;
@@ -386,11 +390,6 @@ public class EbonLabyrinth extends DungeonAbstractContent {
 
     //Selects the boss. Tier (1,2) selects the boss pool. 0 - includes ALL tiers
     private function bossSelector(tier:int = 0):void {
-        //Alvina's chimera overrides everything
-        if (flags[kFLAGS.ALVINA_FOLLOWER] == 17) {
-            chaosChimeraScene.encounter();
-            return;
-        }
         //Make the pool of encounters
         var choices:Array = [];
         for (var boss:int = 0; boss < bossPool[tier].length; ++boss) //[bit_num, function]

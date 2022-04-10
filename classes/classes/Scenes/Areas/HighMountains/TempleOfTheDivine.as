@@ -459,7 +459,7 @@ use namespace CoC;
 		}
 		public function takingPurePearlFromAltair():void {
 			clearOutput();
-			outputText("You recover the pearl from the Altar the temple power dimming slightly.");
+			outputText("You recover the pearl from the Altar. The temple's power dimms slightly.");
 			player.addStatusValue(StatusEffects.TempleOfTheDivineTracker,3,-2);
 			inventory.takeItem(consumables.P_PEARL, templemainmenu);
 		}

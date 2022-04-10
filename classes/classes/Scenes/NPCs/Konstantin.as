@@ -805,7 +805,7 @@ package classes.Scenes.NPCs
 			player.destroyItems(useables.T_SSILK, 1);
 			flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 3;
 			outputText("You bring the materials to Konstantine, and the smith nods, his face serious.\n\n");
-			outputText("\"<i>I will have it for you by the end of the day,</i>\" he says simply. \"<i>Give me the materials, and I’ll craft this for you.</i>\" You hand Konstantine the materials, and he smiles wryly. \"<i>Honestly, I’m not entirely comfortable with this…kind of weapon.</i>\" He admits. \"<i>But I won’t deny the value of it in today’s world.</i>\"\n\n");
+			outputText("\"<i>I’ll need a few hours,</i>\" he says simply. \"<i>Give me the materials, and I’ll craft this for you.</i>\" You hand Konstantine the materials, and he smiles wryly. \"<i>Honestly, I’m not entirely comfortable with this…kind of weapon.</i>\" He admits. \"<i>But I won’t deny the value of it in today’s world.</i>\"\n\n");
 			outputText("The tip glistens with a pink sheen, and you can tell that the blade poking out is razor-sharp. \"<i>Here it is,</i>\" he declares. \"<i>A Phalluspear. Freshly made. I hope you enjoy wielding it more than I did making it.</i>\" An odd thing to say, but you can hardly complain with the results!\n\n");
 			inventory.takeItem(weapons.PHALLUS, camp.returnToCampUseOneHour);
 		}

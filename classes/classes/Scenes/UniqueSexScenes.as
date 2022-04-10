@@ -229,29 +229,38 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 
         public function pcCanUseUniqueSexScenes():Boolean {
 			if (player.hasPerk(PerkLib.ElementalBody)) return false;
-            if (RaijuOverLust() != null) return true; //special for supercharged Raiju
+            if (RaijuOverLust(true)) return true; //special for supercharged Raiju
             else return menuActiveButtons(sceneMenu) > 0;
         }
 
 		//Use above for special cases.
 		public function openUSSmenu(backFunc:Function = null):void{
 			//special for supercharged Raiju
-            if (RaijuOverLust() != null)
+			if(RaijuOverLust(true)) {
 				RaijuOverLust();
-			//normal menu
-			var menuItems:Array = sceneMenu;
-			if (backFunc == null) backFunc = camp.returnToCampUseOneHour;
-			menuGen(menuItems, 0, backFunc);
+			}
+			else{	//normal menu
+				var menuItems:Array = sceneMenu;
+				if (backFunc == null) backFunc = camp.returnToCampUseOneHour;
+				menuGen(menuItems, 0, backFunc);
+			}
+
         }
 
         //checking functions ===========================================================================
-        private function RaijuOverLust():Function{
+        private function RaijuOverLust(check:Boolean = false):*{
             if (player.statStore.hasBuff("Supercharged") && !monster.hasPerk(PerkLib.LightningAffinity) && !monster.hasPerk(PerkLib.LightningNature)){
-                if(!player.hasVagina() && !player.hasCock()) return raijuVoltTransfer;
-                else return RaijuRapeSupercharged;
+                if(check) return true;
+				else{
+					clearOutput();
+					menu();
+					if(!player.hasVagina() || !player.hasCock()) raijuVoltTransfer();
+					else RaijuRapeSupercharged();
+				}
             }
-            else return null;
+			else if(check) return false;
         }
+
         private function USSTailRape():Array{
             var btnSet:Array = ["Tail Rape"];
             if (player.tailType == Tail.MANTICORE_PUSSYTAIL && monster.hasCock()) btnSet.push(manticoreTailRapeScene,"");
@@ -390,7 +399,7 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 			outputText("As [themonster] is defeated, you lose any remaining restraint or shred of rationality you previously had, "+ player.clothedOrNaked("jumping out of your equipment and ", "") + "pouncing on your opponent with your");
 			var maleOrFemale:Number = rand(100)
 			if ((maleOrFemale < 51 && player.isHerm()) || (!player.isHerm() && player.hasCock())){ //male part
-				outputText(" plasma dripping cock already rock hard at the thought of FINALLY finding a hole to plug. Your body is overflowing with latent electricity. Your [dick] throbs in eager anticipation at the thought of pumping your victim with every volt of energy you have.\n\n" +
+				outputText(" plasma dripping cock already rock hard at the thought of FINALLY finding a hole to plug. Your body is overflowing with latent electricity. Your [cock] throbs in eager anticipation at the thought of pumping your victim with every volt of energy you have.\n\n" +
 						"[He] pleads for you to stop, yet in your lust-addled state, the only reply you can manage to give them is an intense stare of unbridled lust. There is nothing to hold you back now, rain would be more likely to flow back into the sky at their command.\n\n" +
 						"This poor, unfortunate soul is your long-awaited outlet, and nothing can hold you from unloading every ounce of seed into them. Your presence was warning enough, they had time to run.\n\n" +
 						"Before [he] can make any further protest, you plug yourself into [his] "+monster.assholeOrPussy()+", thrusting with wanton abandon as your charge quickly builds up within you. In a moment, you quickly begin unloading surge after surge of electricity into them. The air crackles around you with latent, lustful shocks. You can't help but growl in pleasure.\n\n" +
