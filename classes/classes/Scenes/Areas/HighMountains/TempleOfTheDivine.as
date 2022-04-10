@@ -1127,8 +1127,8 @@ use namespace CoC;
 			outputText("As you chant the last word, the gem seems to be assimilated directly into the "+(Forgefather.material)+" body, disappearing without a trace. The statue's eyes start to dimly glow with a pale purple light as the new gargoyle awakens with a surprised expression. \"<i>What happened...? I was dead, finally destroyed by your hands and at rest. But now I’m alive again. My thoughts free of the constant plague of sexual desires, and in a new body. Am I to be given a second chance?</i>\"\n\n");
 			outputText("You start by asking the gargoyle for its name, not desiring to force it into the role of a slave again.\n\n");
 			outputText("\"<i>My name?... While I used to be one soul, I am now many. Since I'm a living statue and I’m closer to a ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("Female");
-			if (flags[kFLAGS.ONYX_GENDER] == 3) outputText("Male");
+			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("female");
+			if (flags[kFLAGS.ONYX_GENDER] == 3) outputText("male");
 			outputText(" being, I guess I’ll name myself ");
 			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) {
 				outputText("Krystal");

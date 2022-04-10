@@ -134,7 +134,8 @@ use namespace CoC;
             this.bonusHP = mod == 0 ? 0 : 2000*(mod-1);
             this.bonusLust = 395 + 75*mod;
             this.level = 65 + 5*mod;
-            this.gems = (90 + 50*mod) + rand(80 + 10*mod);
+            this.gems = int((1200 + rand(200)) * Math.exp(0.2*mod));
+            this.additionalXP = int(4000 * Math.exp(0.2*mod));
 			
 			this.a = " ";
 			this.short = "Living Failure";

@@ -184,6 +184,7 @@ public function alvinaThirdEncounterYesNever():void
 }
 public function alvinaThirdEncounterYesNeverWon():void
 {
+    clearOutput();
 	outputText("This is a battle you cannot win. This woman is likely stronger than Lethice herself, and sports godlike power you have no chance to stand against! As you look for a possible way to flee, you notice a detail that has escaped your attention up till now. While Alvina has not taken even a single apparent wound, ");
 	outputText("she has been actively protecting a crystalline pendant around her neck. Alvina suddenly looks worried, realizing that you are staring at her necklace.\n\n");
 	outputText("\"<i>Hey, why are you looking at my breasts you idiot?! Look me in the face before you die!</i>\"\n\n");
