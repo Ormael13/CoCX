@@ -808,4 +808,4 @@ import classes.display.SpriteDb;
 			doNext(LilyCampBack);
 		}
 	}
-}
+}
