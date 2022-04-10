@@ -62,19 +62,21 @@ public class MinotaurKing extends Monster
 			{
 				var str:String = "Still standing between you and the Demon Queen, the Minotaur King is breathing heavily. His cock is slathered with the residue of his own potent orgasm. His immense, 14 foot tall form hunches slightly as he stares at you, one hand still clutching to his axe. Driving him back to his peak would undoubtedly push him even beyond his considerable endurance. The only problem is that alluring <i>aroma</i> that surrounds him, suffusing the air with the scent of sweaty bedroom romps and sizzling pleasure. You better finish him quick.";
 				
-				// I have no idea what this variation is keyed from 9999
-				if (lust < 40)
-				{
-					str += "\n\nBeneath his legs is a favorite slut, Excellia by name. She stays just out of his way, showcasing the curvaceous nature of her figure and the ripeness of her sex, occasionally running her fingers across a strange tattoo laid upon her belly. You’d best keep your attentions on the fight ahead.";
-				}
-				else if (lust < 80)
-				{
-					str += "\n\nBeneath his legs is the fallen form of his favored slut, Excellia. He steps carefully around the insensate cow-girl but never lets her out of arm’s reach, his eyes flicking to the moistness of her sex from time to time.";
-				}
-				else
-				{
-					str += "\n\nBeneath his legs is the creampied form of his favored slut, Excellia. Milk-white cum puddles between her spread legs, matched only by the sheen of leaking lactose on her lewdly-jutting nipples. Her lord never lets her fallen form out of arm’s reach, just in case he needs a drink.";
-				}
+				//Excellia description
+                if (!player.hasStatusEffect(StatusEffects.MinoKing)) { 
+                    if (lust < 40)
+                    {
+                        str += "\n\nBeneath his legs is a favorite slut, Excellia by name. She stays just out of his way, showcasing the curvaceous nature of her figure and the ripeness of her sex, occasionally running her fingers across a strange tattoo laid upon her belly. You’d best keep your attentions on the fight ahead.";
+                    }
+                    else if (lust < 80)
+                    {
+                        str += "\n\nBeneath his legs is the fallen form of his favored slut, Excellia. He steps carefully around the insensate cow-girl but never lets her out of arm’s reach, his eyes flicking to the moistness of her sex from time to time.";
+                    }
+                    else
+                    {
+                        str += "\n\nBeneath his legs is the creampied form of his favored slut, Excellia. Milk-white cum puddles between her spread legs, matched only by the sheen of leaking lactose on her lewdly-jutting nipples. Her lord never lets her fallen form out of arm’s reach, just in case he needs a drink.";
+                    }
+                }
 				
 				// milkdrinks
 				if (_milkDrinks == 0)
@@ -91,20 +93,22 @@ public class MinotaurKing extends Monster
 		{
 			if (_orgasms == 0 && !hpVictory && !player.hasStatusEffect(StatusEffects.MinoKing)) {
 				lustDump();
-				SceneLib.combat.combatRoundOver();
+                SceneLib.combat.combatMenu(false);
 				return;
 			}
 			if (hpVictory && !player.hasStatusEffect(StatusEffects.MinoKing)) {
 				hpRestore();
 				if (flags[kFLAGS.WILL_O_THE_WISP] == 0) flags[kFLAGS.WILL_O_THE_WISP] = 1;
-				SceneLib.combat.combatRoundOver();
+                SceneLib.combat.combatMenu(false);
 				return;
 			}
+            player.removeStatusEffect(StatusEffects.MinoKing);
 			SceneLib.d3.minotaurKing.theKingIsDeadLongLiveTheKing(hpVictory);
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
+            player.removeStatusEffect(StatusEffects.MinoKing);
 			if (player.isGargoyle()) SceneLib.d3.gargoyleBadEndD3();
 			else SceneLib.d3.minotaurKing.hailToTheKingBaby(hpVictory, pcCameWorms);
 		}
@@ -115,37 +119,27 @@ public class MinotaurKing extends Monster
 		private var _lastRoundStun:Boolean = false;
 		private var _lastSpellCastCount:int;
 		
+		private var atks:Array = [backhand, battleaxe, minoPheromones];
 		override protected function performCombatAction():void
 		{
 			// Attempt dickslap if the player was stunned in the last round
-			if (_lastRoundStun)
-			{
+			if (_lastRoundStun) {
 				_lastRoundStun = false;
 				// If the player is still stunned, use dickslap ohterwise fall through to regular AI.
-				if (player.hasStatusEffect(StatusEffects.Stunned))
-				{
+				if (player.hasStatusEffect(StatusEffects.Stunned)) {
 					dickslap();
 					return;
 				}
 			}
-			if (_lastSpellCastCount != flags[kFLAGS.SPELLS_CAST])
-			{
+            if (!player.hasStatusEffect(StatusEffects.MinoKing) && player.hasCock() && rand(2) == 0) {
+                cowslutTeaseCocks();
+                outputText("\n\n");
+            }
+			if (_lastSpellCastCount != flags[kFLAGS.SPELLS_CAST]) {
 				_lastSpellCastCount = flags[kFLAGS.SPELLS_CAST];
-				if (rand(2) == 0) {
-                    cowslutTeaseCocks();
-                    outputText("\n\n");
-                }
 				headbutt();
 			}
-			else
-			{
-				if (rand(2) == 0 && !player.hasStatusEffect(StatusEffects.MinoKing)) {
-                    cowslutTeaseCocks();
-                    outputText("\n\n");
-                }
-				var atks:Array = [backhand, battleaxe, minoPheromones];
-				atks[rand(atks.length)]();
-			}
+			else atks[rand(atks.length)]();
 		}
 
 		private function backhand():void
@@ -277,26 +271,21 @@ public class MinotaurKing extends Monster
 
 		private function cowslutTeaseCocks():void
 		{
-			if (player.hasCock())
-			{
-				var sel:int = rand(3);
-				if (sel == 0)
-				{
-					outputText("\n\nExcellia crawls over to you while you’re distracted with her lord and wraps her arms around your waist, crushing her milk-swollen tits against your crotch. You can feel their warmth through your [armor], promising nothing but bliss in their embrace. When you push her away, you become aware of the rivers of milk she poured down your");
-					if (player.isNaga()) outputText(" [leg]");
-					else outputText(" [legs]");
-					outputText(", a reminder of the woman’s insane fuckability.");
-				}
-				else if (sel == 1)
-				{
-					outputText("\n\nTurning about, the cow-slave aims her bubbly ass in your direction and lifts her tail, revealing both her dripping delta and the puckered star of her asshole. She looks back over her shoulder and sensuously slides her tongue across her gold-gilt lips, blowing you a pouty kiss once her mouth is suitably shiny. If she meant to distract you, she was at least partially successful.");
-				}
-				else
-				{
-					outputText("\n\nExcellia rises up onto her knees and arches her back to display her monumental mammaries, letting their chocolatey nipples jut accusingly in your direction. Her fingers travel to them, squeezing out thin flows of milk that she gathers and smears across each orb in turn, rubbing it into her skin like high-grade massage oil. When she’s finished, her tits are shining, and you’re a little hotter under the collar.");
-				}
-				player.dynStats("lus", 10+rand(player.lib/20));
-			}
+            switch(rand(3)) {
+            case 0:
+                outputText("Excellia crawls over to you while you’re distracted with her lord and wraps her arms around your waist, crushing her milk-swollen tits against your crotch. You can feel their warmth through your [armor], promising nothing but bliss in their embrace. When you push her away, you become aware of the rivers of milk she poured down your");
+                if (player.isNaga()) outputText(" [leg]");
+                else outputText(" [legs]");
+                outputText(", a reminder of the woman’s insane fuckability.");
+                break;
+            case 1:
+                outputText("Turning about, the cow-slave aims her bubbly ass in your direction and lifts her tail, revealing both her dripping delta and the puckered star of her asshole. She looks back over her shoulder and sensuously slides her tongue across her gold-gilt lips, blowing you a pouty kiss once her mouth is suitably shiny. If she meant to distract you, she was at least partially successful.");
+                break;
+            case 2:
+                outputText("Excellia rises up onto her knees and arches her back to display her monumental mammaries, letting their chocolatey nipples jut accusingly in your direction. Her fingers travel to them, squeezing out thin flows of milk that she gathers and smears across each orb in turn, rubbing it into her skin like high-grade massage oil. When she’s finished, her tits are shining, and you’re a little hotter under the collar.");
+                break;
+            }
+            player.dynStats("lus", 10+rand(player.lib/20));
 		}
 
 		override protected function handleStun():Boolean

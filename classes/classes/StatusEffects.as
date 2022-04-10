@@ -1013,7 +1013,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const MentalShield:StatusEffectType              = mkCombat("Mental Shield");
 		public static const MetalSkin:StatusEffectType                 = mkCombat("Metal Skin");
 		public static const Minimise:StatusEffectType                  = mkCombat("Minimise");
-		public static const MinoKing:StatusEffectType                  = mkCombat("MinoKing");
+		public static const MinoKing:StatusEffectType                  = mkCombat("MinoKing"); //MinoKing helper disabled
 		public static const MirrorImage:StatusEffectType               = mkCombat("MirrorImage");
 		public static const MonsterAttacksDisabled:StatusEffectType    = mkCombat("Monster Attacks Disabled");
 		public static const MonsterDig:StatusEffectType        		   = mkCombat("Monster Dig");
