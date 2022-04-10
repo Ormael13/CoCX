@@ -13,7 +13,6 @@ import classes.Items.*;
 import classes.Items.ConsumableLib;
 import classes.Items.Consumables.SimpleConsumable;
 import classes.Scenes.Areas.Forest.WoodElvesHuntingParty;
-import classes.Scenes.Areas.HighMountains.TempleOfTheDivine;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.Places.TrollVillage;
 import classes.Scenes.Places.WoodElves;
@@ -64,7 +63,6 @@ public class Camp extends NPCAwareContent{
 	public var soulforce:Soulforce = new Soulforce();
 	public var Magnolia:MagnoliaFollower = new MagnoliaFollower();
 	public var HolliPure:HolliPureScene = new HolliPureScene();
-	public var templeofdivine:TempleOfTheDivine = new TempleOfTheDivine();
 	public var marae:MaraeScene = new MaraeScene();
 
 	private static var _campFollowers:Vector.<XXCNPC> = new Vector.<XXCNPC>;
@@ -4073,7 +4071,7 @@ public class Camp extends NPCAwareContent{
 		else addButtonDisabled(5, "???", "Search the deepwoods.");
 		if (flags[kFLAGS.MET_MINERVA] >= 4) addButton(6, "Oasis Tower", SceneLib.highMountains.minervaScene.encounterMinerva).hint("Visit the ruined tower in the high mountains where Minerva resides.");
 		else addButtonDisabled(6, "???", "Search the high mountains.");
-		if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] > 0) addButton(7, "Temple", templeofdivine.repeatvisitintro).hint("Visit the temple in the high mountains where Sapphire resides.");
+		if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] > 0) addButton(7, "Temple", SceneLib.highMountains.templeofdivine.repeatvisitintro).hint("Visit the temple in the high mountains where Sapphire resides.");
 		else addButtonDisabled(7, "???", "Search the high mountains.");
 		if (flags[kFLAGS.YU_SHOP] == 2) addButton(8, "Winter Gear", SceneLib.glacialYuShop.YuIntro).hint("Visit the Winter gear shop.");
 		else addButtonDisabled(8, "???", "Search the (outer) glacial rift.");
