@@ -498,7 +498,7 @@ use namespace CoC;
 			clearOutput();
 			spriteSelect(SpriteDb.s_sapphire);
 			if (flags[kFLAGS.SAPPHIRE_TALKS] == 2 || flags[kFLAGS.SAPPHIRE_TALKS] == 6) {
-				outputText("Now that some time has passed you ask her if she is ready to tell you more about the events she foreshadowed in your previous discussion.\n\n");
+				outputText("Now, that some time has passed, you ask her if she is ready to tell you more about the events she foreshadowed in your previous discussion.\n\n");
 				outputText("\"<i>It pains me to even think about the events of that day, the day the demons appeared. They poured into the cities below us like a tidal wave, devouring souls and corrupting everything in their path. Eventually they began climbing the mountain, and we knew they would be on our doorstep within hours. To prevent them from destroying this holy ground we devised a plan. No matter what the cost to us, the temple had to be protected. ");
 				outputText("As such one by one, we sacrificed ourselves in a ritual to create from us everlasting guardians. I was the last one to be put on the altar. They finished the ritual just as the demons started pouring in. Many desperate enchantments and prayers were put into the creation of each of us, hoping to create a combination by chance that would correctly dispatch the demons. The other gargoyles didn't receive the protections required to face the demons as I did, thus they were destroyed one by one. ");
 				outputText("Amidst the chaos, the altars were damaged extensively and rendered useless. As I kept killing more and more of them, they retreated. Satisfied with their dirty work, they just ran away, like the cowards they are, to prevent further casualties.</i>\"\n\n");
@@ -718,7 +718,7 @@ use namespace CoC;
 			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
 			else outputText("his");
 			outputText(" interest.\n\n");
-			outputText("\n\n\"<i>You're my savior and hero! How could I refuse such a request?");
+			outputText("\"<i>You're my savior and hero! How could I refuse such a request?");
 			if (player.isGargoyle()) outputText(" There’s even a water source nearby to use as lube if necessary.");
 			outputText("</i>\"\n\n");
 			outputText("Being sure of what you both want, you proceed to a private room in the temple. You undress under the lusty gaze of " + flags[kFLAGS.ONYX_NAME] + ", who seems to devour you with ");

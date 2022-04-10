@@ -349,7 +349,7 @@ private function milkBathTime():void {
 	
 	outputText("\n\n" + flags[kFLAGS.MILK_NAME] + " pulls back, licking her puffy lips and smelling strongly of female arousal, though obviously satisfied.  She whimpers, \"<i>I love bath time,</i>\" before ");
 	if(flags[kFLAGS.MILK_SIZE] == 0) outputText("starting to shift her breasts' bulk toward a comfortable spot for a nap");
-	else outputText("struggling to her feet, legs shaky with the afterglow of a might boobgasm");
+	else outputText("struggling to her feet, legs shaky with the afterglow of a mighty boobgasm");
 	outputText(".");
 	if(player.lust >= 33) outputText("  You could probably masturbate in the tub if you wanted to, or maybe pull the dusky milk-maid in for company.");
 	//If PC has Sophie, Hel, Isabella, Izma, Ember, or Amily:

@@ -192,6 +192,17 @@ public class ParserTags {
         "breasts": function ():String {return SceneLib.telAdre.rubi.rubiBreasts();}
 
     };
+
+    /**
+     * provides lookups for subject: "exc" (Excellia)
+     * note that these are only used in doubleArgLookups
+     */
+    internal static var excelliaLookups:Object = {
+        "race"  : function ():String {return SceneLib.excelliaFollower.girlRacial(); },
+        "moo"   : function ():String {return SceneLib.excelliaFollower.humanCow("moan", "moo"); },
+        "slut"   : function ():String {return SceneLib.excelliaFollower.humanCow("slut", "cow"); }
+    };
+
     /** PC ASCII Aspect lookups for subject: "cock"*/
     internal static var cockLookups:Object = {
         "all"      : function ():* { return CoC.instance.player.multiCockDescriptLight(); },
@@ -436,6 +447,8 @@ public class ParserTags {
         // NPCs:
         "rubi"   : rubiLookups,
         "arian"  : arianLookups,
+        "exc"  : excelliaLookups,
+
         "monster": monsterLookups,
 
         // PC Attributes:
