@@ -698,7 +698,7 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		}
 		outputText("<i>\"Oh, hello!\"</i> Belisa says brightly, her lower-half bobbing slightly. <i>\"What’s brought you over here?\"</i>");
 		if (BelisaConfessed) outputText("<i>\"...Anything I can help you with?\"</i> When she thinks you aren’t looking, she takes a glance down, beads of drool forming on her fangs.");
-		outputText("\n\n");
+		outputText("\n\n");outputText("Follower Stage: "+BelisaFollowerStage+"\n\n");outputText("Encounternum: "+BelisaEncounternum+"\n\n");
 		menu();
 		addButton(0, "Appearance", BelisaAppearance);
 		addButton(1, "Talk", BelisaTalk);

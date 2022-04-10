@@ -85,7 +85,7 @@ public function tyraniaAffection(changes:Number = 0):Number {
 public function firstEncounter():void {
 	clearOutput();
 	outputText("You decide to visit the ruined battlefield. The great, ruined land is much quieter than normal, and you take the opportunity to look around more than usual. Iron pipes, remains of arcane-looking devices, and bodies...Lots of bodies. This place reminds you of ghost stories from Ignam: Two gods fighting in a God’s battleground, equally matched. They kill each other, and all the spirits of their dead followers remain to settle the score.\n\n");
-	outputText("A harsh laugh rings through the air, coupled with the screech of shattering stone.Instinctively, you crouch behind the remains of a shattered wall. Do you investigate?");
+	outputText("A harsh laugh rings through the air, coupled with the screech of shattering stone. Instinctively, you crouch behind the remains of a shattered wall. Do you investigate?");
 	menu();
 	addButton(1, "Yes", firstEncounterYes);
 	addButton(3, "No", firstEncounterNo);
@@ -279,6 +279,9 @@ public function repeatEncounterBattlefield():void {
 	else addButton(3, "Training", TyrantiaTraining);
 	if (TyraniaPostFinalKissScene) addButton(4, "Sex", TyrantiaSexMenu);
 	else addButtonDisabled(4, "Sex", "Req. special scene after reaching 40%+ affection.");
+	if (TyraniaPostFinalKissScene && TyrantiaFollowerStage < 4) addButton(9, "LiveWithMe", TyrantiaLiveWithMe).hint("Take the Spooder home. Do it NOW ^^");
+	else if (TyrantiaFollowerStage >= 4) addButtonDisabled(9, "LiveWithMe","She's already in your camp!");
+	else addButtonDisabled(9, "???", "Req. special scene after reaching 40%+ affection.");
 	addButton(14, "Leave", camp.returnToCampUseOneHour);
 }
 public function repeatEncounterBattlefieldRe():void {
@@ -297,6 +300,9 @@ public function repeatEncounterBattlefieldRe():void {
 	else addButton(3, "Training", TyrantiaTraining);
 	if (TyraniaPostFinalKissScene) addButton(4, "Sex", TyrantiaSexMenu);
 	else addButtonDisabled(4, "Sex", "Req. special scene after reaching 40%+ affection.");
+	if (TyraniaPostFinalKissScene && TyrantiaFollowerStage < 4) addButton(9, "LiveWithMe", TyrantiaLiveWithMe).hint("Take the Spooder home. Do it NOW ^^");
+	else if (TyrantiaFollowerStage >= 4) addButtonDisabled(9, "LiveWithMe","She's already in your camp!");
+	else addButtonDisabled(9, "???", "Req. special scene after reaching 40%+ affection.");
 	addButton(14, "Leave", camp.returnToCampUseOneHour);
 }
 public function repeatEncounterBattlefieldTalk():void {
@@ -314,7 +320,7 @@ public function repeatEncounterBattlefieldTalk():void {
 		else addButtonDisabled(4,"???", "Perhaps if you look around the mountains, you might find someone she might also know...");
 	}
 	addButton(5, "Her", repeatEncounterBattlefieldTalkHer);
-	if (!TyraniaThePhalluspear && flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2) addButton(10, "ThePhalluspear", talkThePhalluspear);
+	if (TyrantiaFollowerStage >= 4 && !TyraniaThePhalluspear && flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2) addButton(10, "ThePhalluspear", talkThePhalluspear);
 	if (TyrantiaFollowerStage >= 4) {
 		if (flags[kFLAGS.SLEEP_WITH] != "Tyrantia") addButton(12, "Sleep With", TyrantiaSleepToggle);
 		else addButton(12, "Sleep Alone", TyrantiaSleepToggle);
@@ -376,16 +382,13 @@ public function repeatEncounterBattlefieldTalkHer():void {
 	//4 - Izumi
 	//5 - Kids
 	if (TyrantiaFollowerStage < 4) addButton(6, "LotB", repeatEncounterBattlefieldTalkHerLifeOnTheBattlefield).hint("Life on the Battlefield");
-	if (TyraniaPostFinalKissScene && TyrantiaFollowerStage < 4) addButton(13, "LiveWithMe", TyrantiaLiveWithMe).hint("Take the Spooder home. Do it NOW ^^");
-	else if (TyrantiaFollowerStage >= 4) addButtonDisabled(13, "LiveWithMe","She's already in your camp!");
-	else addButtonDisabled(13, "???", "Req. special scene after reaching 40%+ affection.");
 	addButton(14, "Back", repeatEncounterBattlefieldTalk);
 }
 public function repeatEncounterBattlefieldTalkHerLifeBeforeDemons():void {
 	clearOutput();
 	if (TyrantiaAffectionMeter < 30) {
 		outputText("\"<i>...Look. I’d rather not talk about that. It’s...A touchy subject.</i>\" Her hands twitch, and she holds them together. \"<i>Can we talk about literally anything else?</i>\"\n\n");
-		doNext(camp.returnToCampUseOneHour);
+		doNext(repeatEncounterBattlefieldTalk);
 	}
 	else {
 		outputText("\"<i>...I had a family. Look...I don’t like talking about it, cuz I get all sappy...and sappy makes you weak, and...I can’t afford to be weak. Not anymore.</i>\" Her eyes are full of unshed tears. \"<i>[name], You get it, right?</i>\"\n\n");
@@ -419,6 +422,7 @@ public function repeatEncounterBattlefieldTalkHerLifeBeforeDemonsNo():void {
 	if (TyrantiaFollowerStage > 1) {
 		outputText("Tyrantia shakes herself, armor pieces clattering loudly. \"<i>But anyways, that’s in the past. Now I’m here…With you.</i>\" She gives you a grin.\n\n");
 		eachMinuteCount(15);
+		doNext(camp.returnToCampUseOneHour);
 	}
 	else {
 		outputText("She looks at you, tears in her eyes. \"<i>[name], they...did such terrible things.</i>\" She finally breaks down, and you comfort the desolate Drider any way you can. Ultimately, you can only wait out the tears. After it dies down, and Tyrantia sinks into a shallow, sad sleep, you untie yourself from her grip, intent on going home...until a whisper comes from the ground where you left her.\n\n");
@@ -568,6 +572,7 @@ public function TyrantiaReactions2():void {
 		outputText("Tyrantia shrugs out of her armor, undoing the clasps of her massive steel plates and letting her black carapace, spider-legs and most interesting to you, her massive quadruple breasts and enticing hole, show to the world. She rolls her shoulders, looking at the river in front of her, the sizable silk orb, and she surveys the camp, her five working eyes glittering with hope.\n\n");
 		outputText("<i>“Yeah…”</i> She looks back at you, her eyes shining. <i>“I’m gonna need a bit of time, love...But...This is so much better than I could have dreamed.”</i> She turns back to her sister, wrapping one fuzzy arm around her head, and drags her knuckles along the smaller Drider’s scalp.\n\n");
 		outputText("<i>“Gah! Sis! Stop that! Stop the noogie! No! Bad sis!”</i> Despite the words, both sisters are doing little tap-dances with their back spider legs, and they walk off towards the river, hand in hand. It’s moments like these that make you truly feel like a champion.\n\n");
+		BelisaFollower.BelisaEncounternum = 5;
 	}
 	TyrantiaFollowerStage = 4;
 	outputText("<b>Tyrantia has joined you as a lover.</b>\n\n");

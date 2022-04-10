@@ -209,10 +209,14 @@ public class Camp extends NPCAwareContent{
 			return;
 		}
 		if ((model.time.hours >= 7 && model.time.hours <= 9) && TyrantiaFollower.TyrantiaFollowerStage >= 4 && BelisaFollower.BelisaFollowerStage >= 5 && BelisaFollower.BelisaEncounternum >= 5 && BelisaFollower.BelisaAffectionMeter >= 80 && !BelisaFollower.BelisaConfessed) {
+			hideMenus();
 			SceneLib.belisa.BelisaConfession();
+			return;
 		}
 		if ((model.time.hours >= 7 && model.time.hours <= 9) && TyrantiaFollower.TyrantiaFollowerStage >= 4 && BelisaFollower.BelisaFollowerStage >= 4 && BelisaFollower.BelisaEncounternum < 5) {
+			hideMenus();
 			SceneLib.belisa.BelisaAndTyrantia();
+			return;
 		}
 		if (marbleScene.marbleFollower()) {
 			//Cor < 50
