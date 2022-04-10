@@ -595,6 +595,7 @@ public class CombatUI extends BaseCombatContent {
 			} else if (monster is MinotaurKing) {
 				var minoking:MinotaurKing = monster as MinotaurKing;
 				if (!player.hasStatusEffect(StatusEffects.MinoKing) && player.companionsInPCParty()) btnSpecial1.show("Dish Helper", minoking.dishHelper);
+                else btnSpecial1.showDisabled("Dish Helper", "You don't have anyone to take care of Excellia!");
 			} else if (monster is Lethice) {
 				var lethice:Lethice = monster as Lethice;
 				if (player.hasStatusEffect(StatusEffects.LethicesRapeTentacles)) {
