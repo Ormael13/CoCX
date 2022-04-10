@@ -612,7 +612,7 @@ public function chichiSex1():void {
 		outputText(" You ");
 		if (flags[kFLAGS.SAPPHIRE_TALKS] < 4) {
 			if (!player.hasItem(jewelries.ENDGRNG, 1)) outputText("also realize to your annoyance that not only are you missing a wedding ring but the two of you will need a holy place to recite your vows, one with a still working altar of Marae and active priestess. Come to think of it her favorite color was red maybe a ruby ring would do.");
-			outputText("realise to your annoyance that the two of you will need a holy place to recite your vows, one with a still working altar of Marae and active priestess likely.");
+			else outputText("realise to your annoyance that the two of you will need a holy place to recite your vows, one with a still working altar of Marae and active priestess likely.");
 		}
 		else outputText("realize however that to properly propose to her, you would need an engagement ring, preferably a ruby one.");
 		outputText("\n\n");

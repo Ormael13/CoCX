@@ -131,12 +131,18 @@ public class MinotaurKing extends Monster
 			if (_lastSpellCastCount != flags[kFLAGS.SPELLS_CAST])
 			{
 				_lastSpellCastCount = flags[kFLAGS.SPELLS_CAST];
-				if (rand(2) == 0) cowslutTeaseCocks();
+				if (rand(2) == 0) {
+                    cowslutTeaseCocks();
+                    outputText("\n\n");
+                }
 				headbutt();
 			}
 			else
 			{
-				if (rand(2) == 0 && !player.hasStatusEffect(StatusEffects.MinoKing)) cowslutTeaseCocks();
+				if (rand(2) == 0 && !player.hasStatusEffect(StatusEffects.MinoKing)) {
+                    cowslutTeaseCocks();
+                    outputText("\n\n");
+                }
 				var atks:Array = [backhand, battleaxe, minoPheromones];
 				atks[rand(atks.length)]();
 			}

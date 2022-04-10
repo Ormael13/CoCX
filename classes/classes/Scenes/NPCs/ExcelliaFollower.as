@@ -213,7 +213,7 @@ public function ExcelliaCampFixHerHerself():void {
 		outputText("She looks down, visibly upset when you mention it. She lets out a sigh before looking back at you.\n\n");
 		outputText("\"<i>I can remember a little bit of who I used to be before becoming a slave to the Minotaur King...</i>\"\n\n");
 		outputText("She sits on the ground in front of you. You sit with her as she begins her tale.\n\n");
-		outputText("\"<i>Well, I didn't actually come from Mareth for starters. I used to be a highly praised warrior where I came from. I took on any challenge that was thrown my way. Sometimes I went to take on the challenge myself. One day I made the mistake of stumbling upon a portal that led to this world. I didn't know when I crossed through it that I would not be able to return...</i>\"\n\n");
+		outputText("\"<i>Well, I didn't actually come from Mareth for starters. I used to be a highly praised warrior where I came from. I took on any challenge that was thrown my way. Sometimes I went to take on the challenge myself. One day I made the mistake of stumbling upon a portal that led to this world. I didn't know that I would not be able to return when I crossed through it...</i>\"\n\n");
 		outputText("So she came from another world just like you and she used to be a warrior too. "+(isabellaFollower() ? "Almost reminds you of another certain cowgirl living with you. ":"")+"You wonder if her cow like features are natural or did she gain those after arriving in Mareth. She shakes her head.\n\n");
 		outputText("\"<i>I was actually a human before I came to Mareth. Seeing as I couldn't return to my home, I had to brave this new world to survive. I've traveled all over and defeated many creatures… That is until my travels took me to the mountains. I had heard they were home to Minotaurs. I had originally thought that the supposed brutes would provide a true test to my skills. That was my biggest mistake...</i>\"\n\n");
 		outputText("You can assume that her ventures to fight the bovine beasts didn't go accordingly. She shivers then hugs herself as old memories come back to her.\n\n");
@@ -380,8 +380,6 @@ public function ExcelliaCampFixHerSexFuckHer():void {
 		outputText("The dual sensation of drinking her milk and pounding away at her pussy "+(player.cockTotal() > 1 ? "and ass ":"")+"becomes too much for the cowgirl. She pulls you up into a tongue filled kiss mooing into your mouth as she cums. Her pussy "+(player.cockTotal() > 1 ? "and ass ":"")+"clamps down on your dick"+(player.cockTotal() > 1 ? "s":"")+" like a vice as a gush of femcum gushes out around your [cock] drenching your crotch. You can’t help but moan out when your orgasm tears through you. ");
 		outputText("Your dick"+(player.cockTotal() > 1 ? "s":"")+" twitches and erupts inside the still orgasming cowgirl. Your hot seed fills her utterly as some dribbles back out and drips down into the growing puddle beneath her. Excellia doesn’t let you go until you empty the last of your spunk inside her.\n\n");
 		outputText("Spent, you pull out of the panting cowgirl, shivering as you leave her silky confines. She moos lowly when a stream of your cum drools from her well used snatch"+(player.cockTotal() > 1 ? " and ass":"")+". She looks up at you with a tired smile.\n\n");
-		if (flags[kFLAGS.EXCELLIA_RECRUITED] > 32) outputText("\"<i>Oh [name]... That was just amazing… Oooo, I’m still tingling!</i>\"\n\n");
-		else outputText("\"<i>A-Ah thanking you my " + player.mf("Lord", "Lady") + "... You truly are amazing...</i>\"\n\n");
 		if (flags[kFLAGS.EXCELLIA_RECRUITED] >= 33) excelliaPreg();
         player.sexReward("vaginalFluids","Dick");
         //
@@ -396,13 +394,13 @@ public function ExcelliaCampFixHerSexFuckHer():void {
 		outputText("Your thumb rubs against her hard button making her squeal in pleasure. Creamy milk leaks from her large teats dripping down the curve of her perky breasts. You lean down and lap at the sweet cream, letting your tongue swipe over her nipples. You gasp in surprise when you feel her reach down and rub her soft fingers against your wet nether lips and pleasure button. You moan when her fingers slip past your slick folds. Her other hand gropes at your [chest] and flickers her fingers over your nipples. ");
 		outputText("You lean up and kiss her, letting her lap at the taste of her own milk from your tongue. You moan into each other's mouths as you're both pushed over the edge. Excellia moos loudly as her pussy clenches tightly around your intruding digits, drenching them in femcum. You gasp in pleasure when you cum around the cowgirl's fingers. Her milk streams out, coating the both of you in sweet cream adding to the growing puddle beneath you.\n\n");
 		outputText("You're both left panting and gasping as you fall over onto your sides. She giggles, pulling you close into her arms.\n\n");
-		if (flags[kFLAGS.EXCELLIA_RECRUITED] > 32) outputText("\"<i>[name] please! K-ah-Keep going!</i>\"\n\n");
-		else outputText("\"<i>A-Ah yes! Right there m-my Lady!</i>\"\n\n");
-        player.sexReward("Default","Default", true, false);
+		player.sexReward("Default","Default", true, false);
         //
         sharedEnd();
     }
     function sharedEnd():void {
+        if (flags[kFLAGS.EXCELLIA_RECRUITED] > 32) outputText("\"<i>Oh [name]... That was just amazing… Oooo, I’m still tingling!</i>\"\n\n");
+		else outputText("\"<i>A-Ah thanking you my " + player.mf("Lord", "Lady") + "... You truly are amazing...</i>\"\n\n");
         outputText("You can’t help but feel the same way. You lay next to the cowgirl nuzzling into her arms for a rest. After a quick nap, you help her get cleaned up and say your goodbyes to her as you prepare to head back out.\n\n");
         if (flags[kFLAGS.EXCELLIA_RECRUITED] < 32) flags[kFLAGS.EXCELLIA_RECRUITED]++;
         doNext(camp.returnToCampUseOneHour);
