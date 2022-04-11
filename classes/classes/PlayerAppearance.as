@@ -1065,7 +1065,7 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.bearpandaScore() >= 1) outputText("\n<font color=\"#008000\">Half Bear/Panda-morph: " + player.bearpandaScore() + "</font>");
 		else if (player.bearpandaScore() < 1) outputText("\n<font color=\"#ff0000\">Half Bear/Panda-morph: 0</font>");
 		//Bee
-		if (player.beeScore() >= 14) outputText("\n<font color=\"#0000a0\">Bee-morph: " + player.beeScore() + " (+80% to Tou racial multi, +80% to Spe racial multi, +50% to Int racial multi, +20% to Lib racial multi & +20 to min Lib)</font>");
+		if (player.beeScore() >= 16) outputText("\n<font color=\"#0000a0\">Bee-morph: " + player.beeScore() + " (+80% to Tou racial multi, +80% to Spe racial multi, +50% to Int racial multi, +50% to Lib racial multi & +20 to min Lib)</font>");
 		else if (player.beeScore() >= 7) outputText("\n<font color=\"#0000a0\">Half Bee-morph: " + player.beeScore() + " (+40% to Tou racial multi, +40% to Spe racial multi, +25% to Int racial multi)</font>");
 		else if (player.beeScore() >= 1) outputText("\n<font color=\"#008000\">Half Bee-morph: " + player.beeScore() + "</font>");
 		else if (player.beeScore() < 1) outputText("\n<font color=\"#ff0000\">Half Bee-morph: 0</font>");

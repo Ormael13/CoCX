@@ -5708,7 +5708,7 @@ use namespace CoC;
 			if (wings.type == Wings.BEE_SMALL)
 				beeCounter++;
 			if (wings.type == Wings.BEE_LARGE)
-				beeCounter += 2;
+				beeCounter += 4;
 			if (rearBody.type == RearBody.NONE)
 				beeCounter++;
 			//chitin + correct color of it +1
@@ -12663,11 +12663,11 @@ use namespace CoC;
 				}
 			}
 		*/	if (beeScore() >= 7) {
-				if (beeScore() >= 14) {
+				if (beeScore() >= 16) {
 					maxTouCap2 += 80;
 					maxSpeCap2 += 80;
 					maxIntCap2 += 50;
-					maxLibCap2 += 20;
+					maxLibCap2 += 50;
 				}
 				else {
 					maxTouCap2 += 40;
