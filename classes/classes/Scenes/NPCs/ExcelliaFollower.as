@@ -104,7 +104,7 @@ public function ExcelliaPathChoiceMakeSlave(recall:Boolean = false):void {
 	//spriteSelect(SpriteDb.s_electra);
 	clearOutput();
 	outputText("It’s hard to resist a cowslut presenting herself to you begging to be fucked and you’re more willing to oblige.\n\n");
-	sceneHunter.selectGender(curry(maleF, recall), curry(femF, recall), null, null, 1);
+	sceneHunter.selectGender(curry(maleF, recall), curry(femF, recall));
     //PARTS
     //==================================================================================================
     function maleF(recall:Boolean):void {
@@ -391,7 +391,7 @@ public function ExcelliaCampFixHerSexFuckHer():void {
 	else outputText("\"<i>P-Please my " + player.mf("Lord", "Lady") + "... I can’t wait any longer!</i>\"\n\n");
 	outputText("Well, you can hardly keep the [exc race] waiting too much longer. You’re eager to get a piece of her too. You pull away from her and reposition yourself.\n\n");
     
-	sceneHunter.selectGender(maleF, femF, null, null, 1);
+	sceneHunter.selectGender(maleF, femF);
     //PARTS
     //==================================================================================================
     function maleF():void {
@@ -666,7 +666,7 @@ public function ExcelliaCampMakeSlaveSexFuckHer():void {
 	outputText("\"<i>P-Please my " + player.mf("Lord", "Lady") + "... Take me! Use me your loyal slut to your heart's content!</i>\"\n\n");
 	outputText("Well, you lick your lips eager to fuck your needy dairy [exc slut]. You pull away from her and reposition yourself.\n\n");
     //
-    sceneHunter.selectGender(maleF, femF, null, null, 1);
+    sceneHunter.selectGender(maleF, femF);
     //PARTS
     //==================================================================================================
     function maleF():void {
