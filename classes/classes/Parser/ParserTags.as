@@ -192,6 +192,39 @@ public class ParserTags {
         "breasts": function ():String {return SceneLib.telAdre.rubi.rubiBreasts();}
 
     };
+
+    /**
+     * provides lookups for subject: "exc" (Excellia)
+     * note that these are only used in doubleArgLookups
+     */
+    internal static var excelliaLookups:Object = {
+        "race"  : function ():String {return SceneLib.excelliaFollower.girlRacial(); },
+        "moo"   : function ():String {return SceneLib.excelliaFollower.humanCow("moan", "moo"); },
+        "slut"   : function ():String {return SceneLib.excelliaFollower.humanCow("slut", "cow"); }
+    };
+
+    /**
+     * provides lookups for subject: "onyx" (Onyx/Krystal, second gargoyle in the TempleOfTheDivine)
+     * note that these are only used in doubleArgLookups
+     *
+     * unhandled terms (I have not decided how to support them yet):
+     * arianMF("mas","mis")
+     * arianMF("master","mistress")
+     * arianMF("male","girly")
+     */
+    internal static var onyxLookups:Object = {
+        "man": function ():String {SceneLib.highMountains.templeofdivine.onyxMF("man", "woman"); },
+        // argh! "Man" is the mass-noun for humanity, and I'm loathe to choose an even more esoteric variant.
+        // Elverson/Spivak terminology is already esoteric enough, and it lacks a ungendered mass noun.
+
+        "ey"    : function ():String {return SceneLib.highMountains.templeofdivine.onyxMF("he", "she"); },
+        "em"    : function ():String {return SceneLib.highMountains.templeofdivine.onyxMF("him", "her"); },
+        "eir"   : function ():String {return SceneLib.highMountains.templeofdivine.onyxMF("his", "her"); },
+        "eirs"  : function ():String {return SceneLib.highMountains.templeofdivine.onyxMF("his", "hers"); },
+        "emself": function ():String {return SceneLib.highMountains.templeofdivine.onyxMF("himself", "herself"); },
+        "name"  : function ():String {return SceneLib.highMountains.templeofdivine.onyxName(); }
+    };
+
     /** PC ASCII Aspect lookups for subject: "cock"*/
     internal static var cockLookups:Object = {
         "all"      : function ():* { return CoC.instance.player.multiCockDescriptLight(); },
@@ -434,8 +467,11 @@ public class ParserTags {
      */
     internal static var twoWordTagsLookup:Object = {
         // NPCs:
-        "rubi"   : rubiLookups,
-        "arian"  : arianLookups,
+        "rubi"  : rubiLookups,
+        "arian" : arianLookups,
+        "exc"   : excelliaLookups,
+        "onyx"  : onyxLookups,
+
         "monster": monsterLookups,
 
         // PC Attributes:

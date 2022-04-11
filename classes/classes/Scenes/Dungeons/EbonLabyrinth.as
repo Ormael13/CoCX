@@ -379,8 +379,8 @@ public class EbonLabyrinth extends DungeonAbstractContent {
     private function encountersLootChest():void {
         clearOutput();
         //adjusting rewards to enemy level. Sounds fair to me
-		var exp:int = Math.round(20 * ((60 + enemyLevelMod * 5) + 1) * (1 + rand(2)));
-		var gems:int = 500 * (1 + (roomN + (enemyLevelMod - minLevelMod) * 50) * 0.01);
+		var exp:int = int(2000 * Math.exp(0.2*enemyLevelMod));
+		var gems:int = int(500 * Math.exp(0.2*enemyLevelMod));
         player.XP += exp;
         player.gems += gems;
         outputText("As you explore the labyrinth you stumble upon what appears to be a room filled with gems and a pillar upon which sits a single jewel. Grabbing the jewel, you see green mist swirl out of the stone then around you before entering your body. Memories not your own flash through your mind. ");

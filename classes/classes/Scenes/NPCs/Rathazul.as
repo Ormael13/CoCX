@@ -538,7 +538,7 @@ private function cureMitzi():void {
 	outputText("You turn over the items Rathazul requested. He takes them and pours the tea, tinctures, and spring water into a mixing bowl. He stirs it together then adds in just a few drops of pure honey, turning the brew a bright purple.\n\n");
 	outputText("\"<i>Let's hope this will be enough...</i>\"\n\n");
 	outputText("He picks up the bowl then takes it over to Mitzi. You lean over the drugged up goblin and help her sit up. The elder rat holds the bowl to her lips. Mitzi unconsciously gulps down the bowl's contents until it's all gone. Not even a moment after she finishes the brew, her body convulses and shakes. She clutches her head and groans as the brew works to expel the demonic concoction from her system. You hold her close as the tremors in her body slowly wind down until she's just left breathing heavily in your grip. Once she finally calms down, she looks up at you, confused. Her eyes noticeably have a spark of clarity. Seems the brew did the trick.\n\n");
-	outputText("\"<i>W-What... where am I</i>\"\n\n");
+	outputText("\"<i>W-What... where am I?</i>\"\n\n");
 	outputText("You let her go and explain to the goblin girl her situation. As you go on you notice that she's shivering a bit. You ask her if she's alright.\n\n");
 	outputText("\"<i>Y-Yeah… It's just… after so long… Thank you.</i>\"\n\n");
 	outputText("Mitzi is grateful for you saving her though you can't help but notice that her breasts seem to have grown to a hefty G cup and her hips more waspish. Even her lips seem even more plump with a long purple tongue slicking out from between them. Rathazul hums in thought.\n\n");
@@ -553,6 +553,7 @@ private function cureMitzi():void {
 	addButton(3,"Stay",cureMitziStay);
 }
 private function cureMitziMakeLeave():void {
+    clearOutput();
 	outputText("You may have saved the goblin but you certainly don't want her to stay here. Mitzi looks shocked with tears starting to well up in her eyes.\n\n");
 	outputText("\"<i>B-But I thought since you saved me…</i>\"\n\n");
 	outputText("Her shock turns to sadness as she hops off the cot.\n\n");
@@ -563,6 +564,7 @@ private function cureMitziMakeLeave():void {
 	addButton(0,"Next",campRathazul);
 }
 private function cureMitziStay():void {
+    clearOutput();
 	outputText("Well, since she doesn't have anywhere to go, she can always stay here in your camp. She looks up at you in shock.\n\n");
 	outputText("\"<i>You mean it? I can really stay here with you?</i>\"\n\n");
 	outputText("You nod your head, ensuring her it's okay with the promise that she doesn't make a nuisance of herself. Her smile widens as she leaps from her cot and "+(player.tallness > 48 ? "tries to wrap her arms around you to hug, squishing her large breast against you":"tackles you into a hug")+".\n\n");

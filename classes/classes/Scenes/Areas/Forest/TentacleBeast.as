@@ -126,7 +126,7 @@ public class TentacleBeast extends Monster
                 this.bonusLust = 390 + 9*mod;
                 this.level = 60 + 5*mod;
                 this.additionalXP = 250 + 100*mod;
-                this.gems = (rand(50)+25) * (1.0 + 0.5*mod);
+                this.gems = (rand(50)+25) * (1+mod);
 			}
 			else {
 				this.short = "tentacle beast";

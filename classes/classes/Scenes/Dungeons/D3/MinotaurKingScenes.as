@@ -37,68 +37,58 @@ public class MinotaurKingScenes extends BaseContent
 			startCombat(new MinotaurKing());
 		}
 
-		public function theKingIsDeadLongLiveTheKing(hpVictory:Boolean):void
+		public function theKingIsDeadLongLiveTheKing():void
 		{
 			flags[kFLAGS.MINOTAURKING_DEFEATED] = 1;
-			
 			//Cannot be defeated by HP loss, so only writing lust win texts.
 			clearOutput();
 			outputText("The King’s axe clatters on noisily on the ground. A gasp runs through the corrupt host as one of their mightiest champions drops to his knees, staring at his dick and furiously pumping it with both hands. Nearly insensate with need, he topples over, humping his own hands with so much enthusiasm that he’s lost interest in anything but immediate sexual gratification.");
 			outputText("\n\nA slow, quiet clap begins from the rear of the room. <i>\"Well done, Champion... quite well done.\"</i> The Queen herself is smiling at you, though her eyes are as cold as dark ice on a winter’s eve. <i>\"Avail yourself of your prizes. It wouldn’t be sporting to take you on while you’re all worked up. My underling’s loyal retainers might get the wrong idea about my strength.\"</i> Her eyes flash dangerously.");
 			outputText("\n\nOf course. If she preyed on you while you were still recovering from the minotaur, her subordinates might think her weak or afraid. You have a semi-conscious royal and his cow-slut to use as you will. Or you could just put them out of their misery.");
 			if (player.cor <= 33) outputText(" The poor things are so corrupted.");
+            if (flags[kFLAGS.EXCELLIA_RECRUITED])
+                outputText("\n\n<b>Excellia will be recruited after the final fight.</b>");
+            //menu
 			menu();
-			addButton(0, "Kill Them", murderhobo);
-			var smallCockIdx:int = -1;
-			for (var i:int = 0; i < player.cocks.length; i++)
-			{
-				if (player.cocks[i].cockLength <= 12)
-				{
-					if (smallCockIdx != -1 && player.cocks[smallCockIdx].cockLength < player.cocks[i].cockLength)
-					{
-						smallCockIdx = i;
-					}
-				}
-			}
-			if (smallCockIdx != -1) addButton(1, "Docking", dockucocku, smallCockIdx);
-			if (player.hasCock())
-			{
+			addButton(0, flags[kFLAGS.EXCELLIA_RECRUITED] ? "Kingslayer" : "Kill Them", murderhobo);
+			var smallCockIdx:int = player.findCock(-1, -1, 12, "length"); //smallest cock with length <12
+			addButtonIfTrue(1, "Docking", curry(dockucocku, smallCockIdx), "Req. cock shorter than 12 inches", smallCockIdx >= 0);
+			if (player.hasCock()) {
 				addButton(2, "Buttfuck", buttufucku);
 				addButton(3, "Titfuck", titfuckCowslut);
 				addButton(4, "SloppySeconds", sloppySeconds);
 			}
 			if (player.hasVagina()) addButton(5, "Ride Him", mechanicalbullhue);
-			addButton(14, "TouchCow", touchTheCowDoItNow).hint("Touch the Cow. Do it Now. (Or maybe it was to keep her after you deal with the Lethice? Who cares?)");
+			addButton(14, "RecruitHer", recruitExcellia).hint("Keep Excellia after you deal with the Lethice.");
 		}
 
-		private function touchTheCowDoItNow():void
-		{
-			flags[kFLAGS.EXCELLIA_RECRUITED] = 1;
-			menu();
-			addButton(0, "Kingslayer", murderhobo);
-			var smallCockIdx:int = -1;
-			for (var i:int = 0; i < player.cocks.length; i++)
-			{
-				if (player.cocks[i].cockLength <= 12)
-				{
-					if (smallCockIdx != -1 && player.cocks[smallCockIdx].cockLength < player.cocks[i].cockLength)
-					{
-						smallCockIdx = i;
-					}
-				}
-			}
-			if (smallCockIdx != -1) addButton(1, "Docking", dockucocku, smallCockIdx);
-			if (player.hasCock())
-			{
-				addButton(2, "Buttfuck", buttufucku);
-				addButton(3, "Titfuck", titfuckCowslut);
-				addButton(4, "SloppySeconds", sloppySeconds);
-			}
-			if (player.hasVagina()) addButton(5, "Ride Him", mechanicalbullhue);
-		}
+        private function recruitExcellia():void {
+            flags[kFLAGS.EXCELLIA_RECRUITED] = 1;
+            theKingIsDeadLongLiveTheKing();
+        }
 	
 		private function murderhobo():void
 		{
+            clearOutput();
+            if (flags[kFLAGS.EXCELLIA_RECRUITED]) {
+                if (SceneLib.shouldraFollower.followerShouldra()) {
+                    outputText("You ask your ghostly partner to take care of the cow slut and help her find her way to the camp. This place will become a huge mess soon.");
+                    outputText("\n\n<i>\"But... I wanted to watch your fight with Lettice! Maybe you'll even got a chance to... ah, nevermind.\"</i>");
+                    outputText("\n\nShouldra clearly doesn't want to leave you, but you insist - someone has to show the way to the poor cowgirl. And you obviously can't do it right now.\n\n");
+					if (SceneLib.marbleScene.marbleFollower())
+                            outputText("\n\n<i>\"But... How will I explain this to Marble? 'Hey, look, there's another cow who will live here. And she's aso a mindless milk-leaking corrupted bitch. Deal with it.'\"</i> The ghost girl even exits your body to imitate your lover.");
+					else if (SceneLib.helScene.followerHel() || SceneLib.kihaScene.followerKiha())
+						outputText("\n\n<i>\"But... I won't be able to even enter your camp without getting her killed! She smells of corruption for miles!\"</i>");
+                    else if (camp.followersCount() > 1) {
+                        outputText("\n\n<i>\"But... How will I explain this to others? You handle the talking most of the time, not me!\"</i>");
+                    }
+                    outputText("  You bicker for several minutes. Lethice is so amazed by the situation that she doesn't even interrupt you, smiling from her throne.");
+                    outputText("\n\n...\n<i>Look at her, this slut can't even talk properly! Why do you need to take everyone to your camp... Uh, fine. At least she's got these funny milk-udders. Come back soon until I get bored, Champ!</i>");
+                }
+                else
+                    outputText("You quickly throw the disoriented cowgirl away from her king - you don't have time to help her right now, but can't allow her to stay in your way and get hurt.");
+                outputText("\n\nAfter dealing with Excellia, you return your attention to the beaten minotaur.  ");
+            }
 			flags[kFLAGS.MINOTAURKING_KILLED] = 1;
 			clearOutput();
 			outputText("You make it quick, then straighten to stare Lethice in the eye. You’ll purge every single ounce of corruption from this world by any means necessary.");

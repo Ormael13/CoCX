@@ -146,8 +146,8 @@ use namespace CoC;
                 this.bonusHP = 1000 + 1000*mod;
                 this.bonusLust = 332 + 22*mod;
                 this.level = 62 + 5*mod;
-                this.additionalXP = 500 + 250*mod;
-			    this.gems = (60 + rand(30)) * (1.0 + 0.5*mod);
+                this.additionalXP = int(500 * Math.exp(0.2*mod));
+			    this.gems = int((60 + rand(30)) * Math.exp(0.2*mod));
 			}
 			else {
 				this.short = "incubus";

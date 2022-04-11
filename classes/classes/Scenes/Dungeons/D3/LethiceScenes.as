@@ -7,7 +7,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
 import classes.Items.WeaponLib;
 import classes.Scenes.SceneLib;
-import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 import classes.StatusEffects;
 
 import flash.net.SharedObject;
@@ -439,6 +439,7 @@ public class LethiceScenes extends BaseContent
 		private function redemptionII():void
 		{
 			clearOutput();
+            spriteSelect(SpriteDb.s_marae);
 
 			outputText("<b>A day of travel later...</b>");
 			
@@ -506,8 +507,8 @@ public class LethiceScenes extends BaseContent
 		{
 			clearOutput();
 
-			outputText("What name do you give the new woman you and Marae have made?");
-			mainView.nameBox.text = "";
+			outputText("\n\nWhat name do you give the new woman you and Marae have made?"); // \n\n for offset under input
+			mainView.nameBox.text = "Lethice"; //hint
 			mainView.nameBox.visible = true;
 			mainView.nameBox.width = 165;
 			mainView.nameBox.x = mainView.mainText.x + 5;
