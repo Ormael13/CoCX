@@ -145,7 +145,7 @@ public class LowerBody extends SaveableBodyPart {
 	public static const BEE:int = 7;
 	EnumValue.add(Types, BEE, "BEE", {
 		name: "bee",
-		appearanceDesc: "Your {legCount} legs are covered in a shimmering insectile carapace up to mid-thigh, looking more like a set of 'fuck-me-boots' than an exoskeleton. A bit of downy yellow and black fur fuzzes your upper thighs, just like a bee."
+		appearanceDesc: "Your {legCount} legs are covered in a [skin coat.color] shimmering insectile carapace up to mid-thigh, looking more like a set of 'fuck-me-boots' than an exoskeleton. A bit of downy [skin coat.color2] fur fuzzes your upper thighs, just like a bee."
 	});
 
 	public static const GOO:int = 8;
