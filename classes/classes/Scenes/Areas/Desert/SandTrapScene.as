@@ -359,18 +359,18 @@ private function useSandTarpsHands():void {
     function dickF():void {
         var x:Array = []; //longest cocks
         for (var i:int = 0; i < 3; ++i)
-            x[i] = player.cockFind(i+1, -1, -1, "length");
+            x[i] = player.findCock(i+1, -1, -1, "length");
         sceneHunter.print("Details for different cock lengths and multicock up to 5");
         outputText("\n\nOne pair of the creature's hands slowly brush up your inner thighs whilst the other two feel around your [armor], clumsily loosening clasps and belts as it finds them.  One hand locates [oneCock] and, after pausing for a split second, slides its fingers around your shaft and begins to slowly rub up and down.  You sigh as you quickly harden in the creature's smooth, dry, enveloping grasp.  You look into the sandtrap's face as it works; blushing, it looks down from your gaze and concentrates upon what it is doing.  It begins to pump you faster and you hiss slightly at the abrasion this causes.  The sandtrap makes a throaty sound.  Curiously you look down in time to see it bring its other pair of hands up to its mouth and deposit a great dollop of clear ooze into its cupped palms.  Your disgust turns to delight as it swaps its hands and begins to massage its oil into your length, the warm lubricant allowing the creatures' fingers to glide around your shaft and head like they were made of silk.  Tentatively the creature uses its other hands to cup your [butt] and really gets to work on you.");
 		//Cock less than 6 inches: 
-		if(player.cockLength(x[0]) < 6) {
+		if(player.cocks[0].cockLength < 6) {
 			// balls:
 			if(player.balls == 0) outputText("\n\nThe sandtrap only needs one hand to pump your diminutive cock; it barely moves its wrist as it jerks you, occasionally wriggling its oily fingers along the bottom of your [cock "+x[0]+"] to stimulate you even further.");
 			else outputText("\n\nThe sandtrap only needs one hand to pump your diminutive cock; it barely moves its wrist as it jerks you, occasionally wriggling its oily fingers along the bottom of your [cock "+x[0]+"] to incite you even further, whilst it uses its free hand to gently cup your [balls].");
 			outputText("  Your small size doesn't seem to bother it; if anything, judging from the red rising in its thin cheeks and its shortening breath, the girliness of your cock actually seems to excite it.  It pauses and, whilst you are both panting lightly, it slowly and gently circles your head with its index finger whilst it still holds the entirety of your cock with the rest of its hand.");
 		}
 		//Cock 6-16 inches: 
-		else if(player.cockLength(x[0]) < 16) {
+		else if(player.cocks[0].cockLength < 16) {
 			//[no balls:
 			if(player.balls == 0) outputText("\n\nThe sandtrap glides its hand up and down your [cock "+x[0]+"], picking up a warm smooth rhythm.");
 			//Balls:
@@ -419,18 +419,18 @@ private function useSandTarpsHands():void {
     function hermF():void {
         var x:Array = []; //longest cocks
         for (var i:int = 0; i < 3; ++i)
-            x[i] = player.cockFind(i+1, -1, -1, "length");
+            x[i] = player.findCock(i+1, -1, -1, "length");
         sceneHunter.print("Details for different cock lengths and multicock up to 4");
         outputText("\n\nOne pair of the creature's hands slowly brush up your inner thighs whilst the other two feel around your \"<i>armor</i>\", clumsily loosening clasps and belts as it finds them.  One hand finds your [cock "+x[0]+"] and, after pausing for a split second, slides its fingers around your shaft and begins to slowly rub up and down.  You sigh as you quickly harden in the creature's smooth, dry, enveloping grasp.  You look into the sandtrap's face as it works; blushing, it looks down from your gaze and concentrates upon what it is doing.  It begins to pump you faster and you hiss slightly at the abrasion this causes.  At this the sandtrap makes a throaty sound.  Curiously you look down in time to see it bring its other pair of hands up to its mouth and deposit a great dollop of clear ooze into its cupped palms.  Your disgust turns to delight as it swaps its hands and begins to massage its oil into your length, the warm lubricant allowing the creatures' fingers to glide around your shaft and head like they were made of silk.  As it moves its first hand up and down, it tentatively moves its second further between your legs.  It finds your [vagina] and, after pausing for a split second, slides its slender fingers into your moistness.  Although it is clumsy at first, the oil which coats its digits make them glide over your shaft and labia as if they were entirely frictionless.  It quickly gains confidence and begins to gently frig you as it slides its warm, slippery grasp up and down your [cock "+x[0]+"], circling your [clit] whilst occasionally dipping into your dripping hole.  You sigh and begin to lose yourself in the wet, silky sensation.");
 		//Cock less than 6 inches:  
-		if(longestCockLength() < 6) {
+		if(player.longestCockLength() < 6) {
 			//[no balls: 
 			if(player.balls == 0) outputText("\n\nThe sandtrap only needs one hand to pump your diminutive cock; it barely moves its wrist as it jerks you, occasionally wriggling its oily fingers along the bottom of your [cock "+x[0]+"] to stimulate you even further.");
 			else outputText("\n\nThe sandtrap only needs one hand to pump your diminutive cock; it barely moves its wrist as it jerks you, occasionally wriggling its oily fingers along the bottom of your [cock "+x[0]+"] to incite you even further, whilst it uses its free hand to gently cup your [balls].");
 			outputText("  Your small size doesn't seem to bother it; if anything, judging from the red rising in its thin cheeks and its shortening breath, the girliness of your cock actually seems to excite it.  It pauses and, while you are both panting lightly, it slowly and gently circles your head with its index finger, still holding the entirety of your cock with the rest of its hand.");
 		}
 		//Cock 6-16 inches: 
-		else if(longestCockLength() < 16) {
+		else if (player.longestCockLength() < 16) {
 			if(player.balls == 0) outputText("\n\nThe sandtrap glides its hand up and down your [cock "+x[0]+"], picking up a warm smooth rhythm.");
 			else outputText("\n\nThe sandtrap glides its hand up and down your [cock "+x[0]+"], picking up a warm smooth rhythm as it gently cups your [balls] with its free hand.]  It slows down intermittently to move its fingers around your length, letting every inch of your dick feel the tips of its delicate fingers.");
 		}
@@ -566,7 +566,7 @@ private function nagaThreesomeWithSandTrap():void {
 	outputText("\n\n\"<i>Shush now, prey creature.</i>\"  The naga has wrapped one coil around its abdomen and has positioned itself so her face and genital slit confront the sandtrap's own.  You lie on your own coils and watch.  The naga looks into the sandtrap's black eyes and then slowly and sinuously begins to move her lean body backwards and forwards, backwards and forwards, dancing like a flowing ribbon whilst keeping her head still, staring flatly into the sandtrap's face.");
 	outputText("\n\n\"<i>That's it, prey creature, deeper and deeper you go... you are feeling so soft and helpless, and it feels so good to let go and sink, deeper and deeper... I am so much bigger than you, so much more powerful, and that feels right, so soft and warm and right for me to tower above you and move you as I wish,</i>\" she hisses huskily as she dances, her pert breasts palpitating gently.  You doubt the sandtrap can understand her - it occurs to you that this display is as much for your benefit as it is for the trap - but you see the fear bleed out of the creature's eyes, its sculpted jaw gently sagging as an expression of dozy serenity creeps over it.  The naga smiles and then, still staring into its eyes, hisses a long, wet, intimate sound whilst gently touching the creature's genital slit.  The sandtrap moans softly and lies back onto the sand, sliding its black, oily sex out of its hiding place.  Soon its ten inch pheromone cock prong is gently poked against the naga's skin.  The sandtrap makes no attempt to guide it into the naga's own genital slit, nor makes any needy movements or sounds; its eyes are miles away, its will subsumed entirely by the naga's.  Your lover smiles a pleased smile, gently stroking her victim's jaw line.");
 	outputText("\n\n\"<i>Good,</i>\" she says.  \"<i>Now, prey creature, whilst I take my satisfaction from you, you will give the best sex your mouth is capable of to my friend here.  Perform well and who knows... perhaps we will show mercy and let you go.</i>\"  You know a cue when you hear one, and work your reptilian body around the sandtrap again, this time from the other end.  Balancing your upper half above its head on the coils you don't use to curl around the creature's chest, slithering down its face, sighing as you open your own slit and expose yourself to the warm desert air.");
-    selectGender(dickF, vagF);
+    sceneHunter.selectGender(dickF, vagF);
 
     //PARTS
     //==================================================================================================

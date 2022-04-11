@@ -6667,7 +6667,7 @@ public function rebirthFromBadEnd():void {
 		if (flags[kFLAGS.ANT_COLONY_KEPT_HIDDEN] || flags[kFLAGS.PHYLLA_SAVED]) {
             if (player.cor >= 66 - player.corruptionTolerance() && player.gender > 0)
                 addButton(2, "PhyllaCart", SceneLib.desert.antsScene.demonsFuckAntgirl);
-            else addButton(2, "PhyllaCart", "You must be corrupted and not genderless to recall this.");
+            else addButtonDisabled(2, "PhyllaCart", "You must be corrupted and not genderless to recall this.");
         }
         else addButtonDisabled(2, "P. Cart", "Requires saving one ant-girl.");
         //bruh

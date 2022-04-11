@@ -2018,7 +2018,7 @@ public class Combat extends BaseContent {
         //Determine if critical hit!
         var crit:Boolean = false;
         var critChance:int = 5;
-        var critChanceMulti:int = 1.75;
+        var critChanceMulti:Number = 1.75;
         critChance += combatMagicalCritical();
         //dodać tu nieco szans na wyższą % szans crita - jak zwykle to z perków efekty
         if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;

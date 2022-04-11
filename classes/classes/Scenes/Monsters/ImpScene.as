@@ -35,7 +35,7 @@ use namespace CoC;
 					outputText("  Sadly you realize your own needs have not been met.  Of course you could always rape the poor thing, but it might be more fun to force it to guzzle your breast-milk.\n\nWhat do you do?");
 				else outputText("  You're not really turned on enough to rape it, but it might be fun to force it to guzzle your breast-milk.\n\nDo you breastfeed it?");
 			}
-			else if (player.lust >= 33 || canBikiniTits || player.canOvipositBee()) {
+			else if (player.lust >= 33 || player.canOvipositBee()) {
 				outputText("  Sadly you realize your own needs have not been met.  Of course you could always rape the poor thing...\n\nDo you rape him?");
 			}
             //buttons
@@ -64,7 +64,6 @@ use namespace CoC;
                 addButtonIfTrue(7, "NippleFuck", noogaisNippleRape, "Req. nipplecunts", player.hasFuckableNipples());
                 addButtonIfTrue(8, "NipFuckBig", nipFuckBig, "Req. nipplecunts and boobs > E-cups", player.hasFuckableNipples() && player.biggestTitSize() >= Appearance.breastCupInverse("E"));
                 LustyMaidensArmor.addTitfuckButton(9);
-                else addButtonDisabled(9, "B.Titfuck", "Requires L.M.Armor");
                 addButtonIfTrue(10, "Breastfeed", areImpsLactoseIntolerant, "Req. Feeder status", canFeed);
 			addButtonIfTrue(11, "Oviposit", putBeeEggsInAnImpYouMonster, "Req. bee ovipositor", player.canOvipositBee());
             }
@@ -1847,7 +1846,6 @@ use namespace CoC;
 				if(player.findPerk(PerkLib.Feeder) >= 0 && monster.short != "imp overlord" && monster.short != "imp warlord") addButton(3,"Breastfeed",feederBreastfeedRape);
                 else addButtonDisabled(3,"Breastfeed", "Req. Feeder perk");
 				LustyMaidensArmor.addTitfuckButton(4);
-                else addButtonDisabled(4,"B.Titfuck", "Req. L.M.Armor");
 			}
 			addButton(14,"Leave",cleanupAfterCombat);
 		}
