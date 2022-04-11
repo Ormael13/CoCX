@@ -148,7 +148,7 @@ package classes.Scenes
 			outputText("-Added minor QoL option for minion using PC's to let those minions that can attack on their own (wisp or using simplified turn setup) even when PC itself is stunned or under fear effect. Cuz... well they had orders and pc been stunned not magicaly cause them to not able to follow orginal order to keep smashing enemy ^^\n");
 			outputText("-Diana and Luna forced partial/full body TF events won't proc if PC got TF immunity. As side effect it may cause their storyline progress to freeze.\n");
 			outputText("-Purity Blessing, Cold Blooded, Hot Blooded, Nymphomania perks, Omnibus' Gift, Luststick Adapted, Lycanthropy, Bimbo Body, Bro Body, Futa Form, Pierced: Crimstone, Pierced: Icestone, Pent Up effects for rise/lower minimum lust been changed from flat values to % ones.\n");
-			outputText("-Bimbo Champagne, Blessing of Divine Agency - Fera, Anemone Arousal, Infested, Harpy Lipstick, Drunken Power, Shouldra that been left unsatisfied too long, cumOmeter (manticore), MilkOMeter (displacer beast), having (spider) eggs effects and lusty maiden's armor, tentacled bark armor also have minimumm lust increase turtned into % values from flat ones.\n");
+			outputText("-Bimbo Champagne, Blessing of Divine Agency - Fera, Anemone Arousal, Infested, Harpy Lipstick, Drunken Power, Shouldra that been left unsatisfied too long, cumOmeter (manticore), MilkOMeter (displacer beast), having (spider) eggs effects and lusty maiden's armor, tentacled bark armor also have minimumm lust increase turned into % values from flat ones.\n");
 			outputText("-In Journey to the east appeared next weird person. Founded only at specific hours new npc can help limited time for any PC that feel too bloated with useless perk points (after getting all interesting stuff) and deeply lacking spare stat points. But be warned that this literal she-devil service not come cheap either... but what is few stones for such rich adventurer as your PC, right?\n");
 			outputText("-Some of minimum lust increase perks have lowered by half % values. Also manticore/displacer based 'hunger' will have % increase to min lust halfed.\n");
 			outputText("-Displacer feeding special can be now used after PC used Pounce on enemy and won't take combat turn then letting to pick one more action. (still can proc during Stranddle)\n");
@@ -245,9 +245,10 @@ package classes.Scenes
 			outputText("3. Adjusted treasure rewards to scale with enemy levels.\n");
 			outputText("4. Adjusted gem drops from enemies. (increased)\n");
 			outputText("5. Slightly decreased DarkSlimeEmpress' HP scaling (it was MUCH faster than Lust scaling)\n");
+			outputText("6. Increased EL rewards scaling to match challenge at the late floors. Now it's weak exponential, and for high-level PCs it's more rewarding than kicking golems around in the crag/rift.\n");
 			outputText("-Aside few cases all the races half-stages was removed. You now either is some race or not, no half-race stage.\n");
 			outputText("-Soul Sense ??? submenu helps to find some otherwise hard to repeadly meet npc's before they come to camp.\n");
-			outputText("-\n");
+			outputText("-Minor text fixes, Excellia racial inconsistencies. (Svalkash)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -276,7 +277,7 @@ package classes.Scenes
 			outputText("putting B. Sword after picking Ecalibur disabling option to pick sword at Temple, all 3 Hall of Blade soulskill variants dealing phys not magical dmg, Lightning Claw lowering phys dmg when used as part of feral style attack, using goblin Cum Reservoir not empting it out, Yuki Onna Transform scene not making sure to give proper genitalia setup, Archer's Stamina perks not giving fatigue related to ");
 			outputText("current Speed value, Half-Frost Wyrm or Half Spider-morph racial bonus been attained super easy, Mysterious Seed not causing for misc items menu appear as inventory submenu, unable to add arcane circuits to 5th arcane circle, doppleganger fight won't drag unnecessary due to getting messly 1k lust after 5th round in fight, Gazer Eyes mutation not keeping True seeing perk, Magical Eye Drops as item ");
 			outputText("find in Caves instead of Eye Drops, raiju tf removing/humanizing raiju paws, picking no elemental during minions turn skipping many following up phases of the turn, epic/legendary/mythical perks for stats not affecting monsters, harpy wings not setting shark score to 0, Siren been excluded form races list for appearance screen, Minor Minerva and parsertag, Encaps. pod multicockdescript, ");
-			outputText("Elf hair mutation, holiday events appearing in Ingnam/prison\n");/*ostatni punkt changelogu
+			outputText("Elf hair mutation, holiday events appearing in Ingnam/prison, Minotaur-Dormammu bug for all damage sources\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
