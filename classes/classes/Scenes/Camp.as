@@ -2750,6 +2750,7 @@ public class Camp extends NPCAwareContent{
 		if (AdventurerGuild.Slot02Cap > 0) outputText("<b>Feral Imp Skulls:</b> "+AdventurerGuild.Slot02+" / "+AdventurerGuild.Slot02Cap+"\n");
 		if (AdventurerGuild.Slot03Cap > 0) outputText("<b>Minotaur Horns:</b> "+AdventurerGuild.Slot03+" / "+AdventurerGuild.Slot03Cap+"\n");
 		if (AdventurerGuild.Slot04Cap > 0) outputText("<b>Demon Skulls:</b> "+AdventurerGuild.Slot04+" / "+AdventurerGuild.Slot04Cap+"\n");
+		if (AdventurerGuild.Slot05Cap > 0) outputText("<b>Severed Tentacles:</b> "+AdventurerGuild.Slot05+" / "+AdventurerGuild.Slot05Cap+"\n");
 		menu();
 		if (AdventurerGuild.Slot01 < AdventurerGuild.Slot01Cap) {
 			if (player.hasItem(useables.IMPSKLL, 1)) addButton(0, "ImpSkull", questItemsBagImpSkull1UP);
@@ -2779,6 +2780,13 @@ public class Camp extends NPCAwareContent{
 		else addButtonDisabled(7, "DemonSkull", "You can't store more demon skulls in your bag.");
 		if (AdventurerGuild.Slot04 > 0) addButton(8, "DemonSkull", questItemsBagDemonSkull1Down);
 		else addButtonDisabled(8, "DemonSkull", "You not have any demon skulls in your bag.");
+		if (AdventurerGuild.Slot05 < AdventurerGuild.Slot05Cap) {
+			if (player.hasItem(useables.SEVTENT, 1)) addButton(10, "SeveredTent", questItemsBagSeveredTentacle1Up);
+			else addButtonDisabled(10, "SeveredTent", "You not have any severed tentacles to store.");
+		}
+		else addButtonDisabled(10, "DemonSkull", "You can't store more severed tentacles in your bag.");
+		if (AdventurerGuild.Slot05 > 0) addButton(11, "SeveredTent", questItemsBagSeveredTentacle1Down);
+		else addButtonDisabled(11, "SeveredTent", "You not have any severed tentacles in your bag.");
 		addButton(14, "Back", campMiscActions);
 	}
 	private function questItemsBagImpSkull1UP():void {
@@ -2820,6 +2828,16 @@ public class Camp extends NPCAwareContent{
 		outputText("\n");
 		AdventurerGuild.Slot04 -= 1;
 		inventory.takeItem(useables.DEMSKLL, questItemsBag);
+	}
+	private function questItemsBagSeveredTentacle1Up():void {
+		player.destroyItems(useables.SEVTENT, 1);
+		AdventurerGuild.Slot05 += 1;
+		doNext(questItemsBag);
+	}
+	private function questItemsBagSeveredTentacle1Down():void {
+		outputText("\n");
+		AdventurerGuild.Slot05 -= 1;
+		inventory.takeItem(useables.SEVTENT, questItemsBag);
 	}
 
 	private function VisitClone():void {

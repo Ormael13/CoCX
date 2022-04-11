@@ -249,7 +249,7 @@ package classes.Scenes
 			outputText("-Aside few cases all the races half-stages was removed. You now either is some race or not, no half-race stage.\n");
 			outputText("-Soul Sense ??? submenu helps to find some otherwise hard to repeadly meet npc's before they come to camp.\n");
 			outputText("-Minor text fixes, Excellia racial inconsistencies. (Svalkash)\n");
-			outputText("-\n");
+			outputText("-Bag from Adventure guild for Iron Plate adventures can store now additionaly up to 10 severed tentaclers in 5th slot.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

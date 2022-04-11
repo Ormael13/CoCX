@@ -937,7 +937,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		else if (!player.inRut && player.goIntoRut(false)) {	//This is based on the original.xml source.
 			outputText("\nYou are now in Rut!");
 		}
-		doNext(camp.returnToCampUseOneHour);
+		//doNext(camp.returnToCampUseOneHour);
 	}
 
 	private function celessChildAppearance():void{
