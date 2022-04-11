@@ -811,7 +811,7 @@ public class Holidays {
 
         //Let her Approach
         function letZeTurkeyApproach():void {
-            sceneHunter.selectGender(maleLetZeTurkeyApproach, femaleLetZeTurkeyGalApproach);
+            sceneHunter.selectGender(maleLetZeTurkeyApproach, femaleLetZeTurkeyGalApproach, null, null, 0);
         }
 
         function maleLetZeTurkeyApproach():void {

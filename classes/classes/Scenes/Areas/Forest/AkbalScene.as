@@ -108,11 +108,7 @@ public class AkbalScene extends BaseContent
 						addButton(1, "Take Vaginally", vagoo);
 						addButton(2, "Force Lick", vagooLick);
 					}
-					if (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armor is LustyMaidensArmor || player.armor is SuccubusArmor)) {
-						if (player.armor is SuccubusArmor) bikiniTits = (player.armor as SuccubusArmor).succubusPaizuri;
-						else bikiniTits = (player.armor as LustyMaidensArmor).lustyMaidenPaizuri;
-						addButton(3, "B.Titfuck", bikiniTits);
-					}
+					LustyMaidensArmor.addTitfuckButton(3);
 					SceneLib.uniqueSexScene.pcUSSPreChecksV2(akbalDefeated2);
 										//Rape / Don't Rape
 					//EngineCore.simpleChoices("Butt-fuck", buttFuck, "Take Vaginally", vagoo, "Force Lick", vagooLick, "B.Titfuck", bikiniTits, );
@@ -141,11 +137,7 @@ public class AkbalScene extends BaseContent
 					addButton(1, "Take Vaginally", vagoo);
 					addButton(2, "Force Lick", vagooLick);
 			}
-				if (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armor is LustyMaidensArmor || player.armor is SuccubusArmor)) {
-					if (player.armor is SuccubusArmor) bikiniTits = (player.armor as SuccubusArmor).succubusPaizuri;
-					else bikiniTits = (player.armor as LustyMaidensArmor).lustyMaidenPaizuri;
-					addButton(3, "B.Titfuck", bikiniTits);
-				}
+				LustyMaidensArmor.addTitfuckButton(3);
 				SceneLib.uniqueSexScene.pcUSSPreChecksV2(akbalDefeated2);
 								//Rape / Don't Rape
 			//EngineCore.simpleChoices("Butt-fuck", buttFuck, "Take Vaginally", vagoo, "Force Lick", vagooLick, "B.Titfuck", bikiniTits, );
