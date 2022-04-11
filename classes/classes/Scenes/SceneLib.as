@@ -51,8 +51,6 @@ public class SceneLib {
 
     public static var defiledravine:DefiledRavine = new DefiledRavine();
 
-    public static var ebonLabyrinth:EbonLabyrinth = new EbonLabyrinth();
-
     public static var bog:Bog = new Bog();
 
     public static var deepsea:DeepSea = new DeepSea();

@@ -7,7 +7,7 @@ import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
 import classes.Items.WeaponLib;
 import classes.Scenes.SceneLib;
-import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 import classes.StatusEffects;
 
 import flash.net.SharedObject;
@@ -70,19 +70,9 @@ public class LethiceScenes extends BaseContent
 		private function postEndingReturn():void {
 			clearOutput();
 			outputText("You may have defeated Lethice and completed the main story but the fun isn't over! It's time for you to return to the game and begin a new era of Mareth.");
-			//outputText("\n\n<b>You can now ascend if you like. Search for the book in the ruined cathedral and perform the ritual at your camp.</b>");
 			awardAchievement("Demon Slayer", kACHIEVEMENTS.STORY_FINALBOSS, true, true, false);
-			//if (player.level <= 1) awardAchievement("Ultimate Noob", kACHIEVEMENTS.CHALLENGE_ULTIMATE_NOOB, true, true, false); //Lethice beaten at level 1!
-			//inDungeon = false;
-			//inRoomedDungeon = false;
-			//player.HP = player.maxHP();
-			//player.lust = player.minLust();
-			//player.fatigue = 0;
-			//player.hunger = player.maxHunger();
-			//model.time.hours = 23;
 			cleanupAfterCombat();
 			if (flags[kFLAGS.LETHICE_DEFEATED] <= 0) flags[kFLAGS.LETHICE_DEFEATED] = 1;
-			//doNext(camp.returnToCampUseOneHour);
 			inventory.takeItem(weapons.L_WHIP, camp.returnToCampUseOneHour);
 		}
 		
@@ -449,6 +439,7 @@ public class LethiceScenes extends BaseContent
 		private function redemptionII():void
 		{
 			clearOutput();
+            spriteSelect(SpriteDb.s_marae);
 
 			outputText("<b>A day of travel later...</b>");
 			
@@ -516,8 +507,8 @@ public class LethiceScenes extends BaseContent
 		{
 			clearOutput();
 
-			outputText("What name do you give the new woman you and Marae have made?");
-			mainView.nameBox.text = "";
+			outputText("\n\nWhat name do you give the new woman you and Marae have made?"); // \n\n for offset under input
+			mainView.nameBox.text = "Lethice"; //hint
 			mainView.nameBox.visible = true;
 			mainView.nameBox.width = 165;
 			mainView.nameBox.x = mainView.mainText.x + 5;

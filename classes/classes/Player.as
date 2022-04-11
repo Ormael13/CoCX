@@ -640,14 +640,13 @@ use namespace CoC;
 				else if (dragonScore() >= 24) armorDef += (4 * newGamePlusMod);
 				else armorDef += (1 * newGamePlusMod);
 			}
-			if (frostWyrmScore() >= 20) {
-				if (frostWyrmScore() >= 30) armorDef += (10 * newGamePlusMod);
-				else if (frostWyrmScore() >= 24) armorDef += (4 * newGamePlusMod);
+			if (frostWyrmScore() >= 18) {
+				/*if (frostWyrmScore() >= 30) armorDef += (10 * newGamePlusMod);
+				else */if (frostWyrmScore() >= 26) armorDef += (4 * newGamePlusMod);
 				else armorDef += (1 * newGamePlusMod);
 			}
 			if (leviathanScore() >= 20) {
 				if (leviathanScore() >= 30) armorDef += (5 * newGamePlusMod);
-				else if (leviathanScore() >= 24) armorDef += (2 * newGamePlusMod);
 				else armorDef += (1 * newGamePlusMod);
 			}
 			//Bonus defense
@@ -882,6 +881,15 @@ use namespace CoC;
 				else if (dragonScore() >= 24) armorMDef += (4 * newGamePlusMod);
 				else armorMDef += (1 * newGamePlusMod);
 			}
+			if (frostWyrmScore() >= 18) {
+				/*if (frostWyrmScore() >= 30) armorMDef += (10 * newGamePlusMod);
+				else */if (frostWyrmScore() >= 26) armorMDef += (4 * newGamePlusMod);
+				else armorMDef += (1 * newGamePlusMod);
+			}
+			if (leviathanScore() >= 20) {
+				if (leviathanScore() >= 30) armorMDef += (5 * newGamePlusMod);
+				else armorMDef += (1 * newGamePlusMod);
+			}
 			//Bonus defense
 			if (arms.type == Arms.YETI) armorMDef += (1 * newGamePlusMod);
 			if (arms.type == Arms.SPIDER || arms.type == Arms.MANTIS || arms.type == Arms.BEE || arms.type == Arms.SALAMANDER) armorMDef += (2 * newGamePlusMod);
@@ -1071,7 +1079,7 @@ use namespace CoC;
 		public function hasTentacleAttacks():Boolean{return LowerBody.hasTentacles(this) || hasPerk(PerkLib.MorphicWeaponry);}
 		public function hasNaturalWeapons():Boolean { return (haveNaturalClaws() || hasABiteAttack() || hasAWingAttack() || hasAGoreAttack() || hasATailSlapAttack() || hasTalonsAttack || hasTentacleAttacks || isAlraune() || isTaur());}
 		//Some other checks
-		public function isGoblinoid():Boolean { return (goblinScore() > 9 || gremlinScore() > 12); }
+		public function isGoblinoid():Boolean { return (goblinScore() > 9 || gremlinScore() > 14); }
 		public function isSlime():Boolean { return (hasPerk(PerkLib.DarkSlimeCore) || hasPerk(PerkLib.SlimeCore)); }
 		public function isHarpy():Boolean { return (harpyScore() > 10 || thunderbirdScore() > 15 || phoenixScore() > 15); }
 		public function isWerewolf():Boolean { return (werewolfScore() >= 12); }
@@ -3398,103 +3406,103 @@ use namespace CoC;
 				{name: 'alicornkin', score: alicornkinScore(), minscore: 12},
 				{name: 'alraune', score: alrauneScore(), minscore: 13},
 				{name: 'atlach nacha', score: atlachNachaScore(), minscore: 10},
-				{name: 'angel', score: angelScore(), minscore: 5},
-				{name: 'avian', score: avianScore(), minscore: 4},
-				{name: 'bunny', score: bunnyScore(), minscore: 5},
+				{name: 'angel', score: angelScore(), minscore: 11},
+				{name: 'avian', score: avianScore(), minscore: 9},
+				{name: 'bunny', score: bunnyScore(), minscore: 10},
 				{name: 'banshee', score: bansheeScore(), minscore: 4},
-				{name: 'bat', score: batScore(), minscore: 6},
-				{name: 'bear and panda', score: bearpandaScore(), minscore: 5},
-				{name: 'bee', score: beeScore(), minscore: 7},
-				{name: 'cancer', score: cancerScore(), minscore: 8},
-				{name: 'cat', score: catScore(), minscore: 4},
-				{name: 'cave wyrm', score: cavewyrmScore(), minscore: 5},
+				{name: 'bat', score: batScore(), minscore: 10},
+				{name: 'bear and panda', score: bearpandaScore(), minscore: 10},
+				{name: 'bee', score: beeScore(), minscore: 14},
+				{name: 'cancer', score: cancerScore(), minscore: 13},
+				{name: 'cat', score: catScore(), minscore: 8},
+				{name: 'cave wyrm', score: cavewyrmScore(), minscore: 10},
 				{name: 'centaur', score: centaurScore(), minscore: 8},
-				{name: 'centipede', score: centipedeScore(), minscore: 4},
+				{name: 'centipede', score: centipedeScore(), minscore: 8},
 				{name: 'cheshire', score: cheshireScore(), minscore: 11},
 				{name: 'couatl', score: couatlScore(), minscore: 11},
-				{name: 'cow', score: cowScore(), minscore: 4},
-				{name: 'cyclop', score: cyclopScore(), minscore: 6},
-				{name: 'darkgoo', score: darkgooScore(), minscore: 6},
+				{name: 'cow', score: cowScore(), minscore: 10},
+				{name: 'cyclop', score: cyclopScore(), minscore: 12},
+				{name: 'darkgoo', score: darkgooScore(), minscore: 13},
 				{name: 'deer', score: deerScore(), minscore: 4},
-				{name: 'demon', score: demonScore(), minscore: 5},
-				{name: 'devil', score: devilkinScore(), minscore: 7},
+				{name: 'demon', score: demonScore(), minscore: 11},
+				{name: 'devil', score: devilkinScore(), minscore: 11},
 				{name: 'displacer beast', score: displacerbeastScore(), minscore: 14},
 				{name: 'dog', score: dogScore(), minscore: 4},
-				{name: 'dragon', score: dragonScore(), minscore: 8},
+				{name: 'dragon', score: dragonScore(), minscore: 16},
 				{name: 'dragonne', score: dragonneScore(), minscore: 6},
 				{name: 'easter bunny', score: easterbunnyScore(), minscore: 12},
 				{name: 'echidna', score: echidnaScore(), minscore: 4},
 				{name: 'elemental fusion', score: fusedElementalScore(), minscore: 5},
-				{name: 'elf', score: elfScore(), minscore: 5},
+				{name: 'elf', score: elfScore(), minscore: 11},
 				{name: 'fairy', score: fairyScore(), minscore: 23},
 				{name: 'female mindbreaker', score: femaleMindbreakerScore(), minscore: 20},
 				{name: 'ferret', score: ferretScore(), minscore: 4},
 				{name: 'fire snail', score: firesnailScore(), minscore: 15},
-				{name: 'fox', score: foxScore(), minscore: 4},
-				{name: 'frost wyrm', score: frostWyrmScore(), minscore: 10},
+				{name: 'fox', score: foxScore(), minscore: 7},
+				{name: 'frost wyrm', score: frostWyrmScore(), minscore: 18},
 				{name: 'gargoyle', score: gargoyleScore(), minscore: 22},
-				{name: 'gazer', score: gazerScore(), minscore: 7},
+				{name: 'gazer', score: gazerScore(), minscore: 14},
 				{name: 'goblin', score: goblinScore(), minscore: 10},
-				{name: 'goo', score: gooScore(), minscore: 5},
+				{name: 'goo', score: gooScore(), minscore: 11},
 				{name: 'gorgon', score: gorgonScore(), minscore: 11},
-				{name: 'gremlin', score: gremlinScore(), minscore: 10},
+				{name: 'gremlin', score: gremlinScore(), minscore: 15},
 				{name: 'gryphon', score: gryphonScore(), minscore: 4},
-				{name: 'harpy', score: harpyScore(), minscore: 4},
+				{name: 'harpy', score: harpyScore(), minscore: 8},
 				{name: 'hellcat', score: hellcatScore(), minscore: 10},
-				{name: 'horse', score: horseScore(), minscore: 4},
+				{name: 'horse', score: horseScore(), minscore: 7},
 				{name: 'hydra', score: hydraScore(), minscore: 14},
 				{name: 'jabberwocky', score: jabberwockyScore(), minscore: 10},
 				{name: 'jiangshi', score: jiangshiScore(), minscore: 20},
-				{name: 'kamaitachi', score: kamaitachiScore(), minscore: 7},
+				{name: 'kamaitachi', score: kamaitachiScore(), minscore: 14},
 				{name: 'kangaroo', score: kangaScore(), minscore: 4},
-				{name: 'kitsune', score: kitsuneScore(), minscore: 5},
+				{name: 'kitsune', score: kitsuneScore(), minscore: 9},
 				{name: 'kitshoo', score: kitshooScore(), minscore: 6},
-				{name: 'lizard', score: lizardScore(), minscore: 4},
+				{name: 'lizard', score: lizardScore(), minscore: 8},
 				{name: 'male mindbreaker', score: maleMindbreakerScore(), minscore: 20},
-				{name: 'magmagoo', score: magmagooScore(), minscore: 6},
-				{name: 'manticore', score: manticoreScore(), minscore: 7},
-				{name: 'mantis', score: mantisScore(), minscore: 6},
-				{name: 'melkie', score: melkieScore(), minscore: 8},
-				{name: 'minotaur', score: minotaurScore(), minscore: 4},
-				{name: 'mouse', score: mouseScore(), minscore: 4},
-				{name: 'naga', score: nagaScore(), minscore: 4},
+				{name: 'magmagoo', score: magmagooScore(), minscore: 13},
+				{name: 'manticore', score: manticoreScore(), minscore: 15},
+				{name: 'mantis', score: mantisScore(), minscore: 12},
+				{name: 'melkie', score: melkieScore(), minscore: 18},
+				{name: 'minotaur', score: minotaurScore(), minscore: 10},
+				{name: 'mouse', score: mouseScore(), minscore: 8},
+				{name: 'naga', score: nagaScore(), minscore: 8},
 				{name: 'apophis', score: apophisScore(), minscore: 23},
 				{name: 'nekomata', score: nekomataScore(), minscore: 10},
-				{name: 'oni', score: oniScore(), minscore: 6},
+				{name: 'oni', score: oniScore(), minscore: 12},
 				{name: 'oomukade', score: oomukadeScore(), minscore: 15},
-				{name: 'orc', score: orcScore(), minscore: 5},
-				{name: 'orca', score: orcaScore(), minscore: 6},
+				{name: 'orc', score: orcScore(), minscore: 11},
+				{name: 'orca', score: orcaScore(), minscore: 14},
 				{name: 'peacock', score: peacockScore(), minscore: 4},
 				{name: 'phoenix', score: phoenixScore(), minscore: 10},
-				{name: 'pig', score: pigScore(), minscore: 5},
+				{name: 'pig', score: pigScore(), minscore: 10},
 				{name: 'plant', score: plantScore(), minscore: 4},
 				{name: 'poltergeist', score: poltergeistScore(), minscore: 6},
-				{name: 'raccoon', score: raccoonScore(), minscore: 4},
-				{name: 'raiju', score: raijuScore(), minscore: 5},
-				{name: 'ratatoskr', score: ratatoskrScore(), minscore: 6},
-				{name: 'red panda', score: redpandaScore(), minscore: 4},
+				{name: 'raccoon', score: raccoonScore(), minscore: 8},
+				{name: 'raiju', score: raijuScore(), minscore: 10},
+				{name: 'ratatoskr', score: ratatoskrScore(), minscore: 12},
+				{name: 'red panda', score: redpandaScore(), minscore: 8},
 				{name: 'rhino', score: rhinoScore(), minscore: 4},
-				{name: 'salamander', score: salamanderScore(), minscore: 4},
+				{name: 'salamander', score: salamanderScore(), minscore: 7},
 				{name: 'satyr', score: satyrScore(), minscore: 4},
 				{name: 'scorpion', score: scorpionScore(), minscore: 4},
-				{name: 'scylla', score: scyllaScore(), minscore: 4},
+				{name: 'scylla', score: scyllaScore(), minscore: 7},
 				{name: 'sea dragon', score: leviathanScore(), minscore: 20},
-				{name: 'shark', score: sharkScore(), minscore: 4},
+				{name: 'shark', score: sharkScore(), minscore: 10},
 				{name: 'siren', score: sirenScore(), minscore: 10},
 				{name: 'sphinx', score: sphinxScore(), minscore: 14},
-				{name: 'spider', score: spiderScore(), minscore: 4},
-				{name: 'thunderbird', score: thunderbirdScore(), minscore: 12},
-				{name: 'troll', score: trollScore(), minscore: 5},
+				{name: 'spider', score: spiderScore(), minscore: 7},
+				{name: 'thunderbird', score: thunderbirdScore(), minscore: 16},
+				{name: 'troll', score: trollScore(), minscore: 10},
 				{name: 'ushi-oni', score: ushionnaScore(), minscore: 11},
 				{name: 'unicorn', score: unicornScore(), minscore: 8},
 				{name: 'unicornkin', score: unicornkinScore(), minscore: 12},
-				{name: 'vampire', score: vampireScore(), minscore: 6},
+				{name: 'vampire', score: vampireScore(), minscore: 10},
 				{name: 'vouivre', score: vouivreScore(), minscore: 11},
 				{name: 'wendigo', score: wendigoScore(), minscore: 10},
 				{name: 'werewolf', score: werewolfScore(), minscore: 12},
 				{name: 'wood elf', score: woodElfScore(), minscore: 22},
-				{name: 'wolf', score: wolfScore(), minscore: 4},
-				{name: 'yeti', score: yetiScore(), minscore: 7},
+				{name: 'wolf', score: wolfScore(), minscore: 8},
+				{name: 'yeti', score: yetiScore(), minscore: 14},
 				{name: 'yggdrasil', score: yggdrasilScore(), minscore: 10},
 				{name: 'yuki onna', score: yukiOnnaScore(), minscore: 14},
 			];
@@ -3534,39 +3542,20 @@ use namespace CoC;
 				}
 			}
 			if (TopRace == "cancer") {
-				if (TopScore >= 8) {
-					if (TopScore >= 20) {
-						race = "cancer";
-					}
-					else if (TopScore >= 13) {
-						race = "lesser cancer";
-					}
-					else{
-						race = "half cancer";
-					}
+				if (TopScore >= 20) {
+					race = "cancer";
+				}
+				else {
+					race = "lesser cancer";
 				}
 			}
 			if (TopRace == "cat") {
-				if (TopScore >= 4) {
-					if (TopScore >= 8) {
-						if (isTaur() && lowerBody == LowerBody.CAT) {
-							race = "cat-taur";
-						} else {
-							race = "cat-morph";
-							if (faceType == Face.HUMAN)
-								race = "cat-" + mf("boy", "girl");
-						}
-					} else {
-						if (isTaur() && lowerBody == LowerBody.CAT) {
-							race = "half cat-taur";
-							if (faceType == Face.HUMAN)
-								race = "half sphinx-morph"; // no way to be fully feral anyway
-						} else {
-							race = " half cat-morph";
-							if (faceType == Face.HUMAN)
-								race = "half cat-" + mf("boy", "girl");
-						}
-					}
+				if (isTaur() && lowerBody == LowerBody.CAT) {
+					race = "cat-taur";
+				} else {
+					race = "cat-morph";
+				if (faceType == Face.HUMAN)
+					race = "cat-" + mf("boy", "girl");
 				}
 			}
 			if (TopRace == "nekomata") {
@@ -3616,13 +3605,7 @@ use namespace CoC;
 				}
 			}
 			if (TopRace == "centipede") {
-				if (TopScore >= 4) {
-					if (TopScore >= 8) {
-						race = "half centipede-" + mf("man", "girl");
-					} else {
-						race = "centipede-" + mf("man", "girl");
-					}
-				}
+				race = "centipede-" + mf("man", "girl");
 			}
 			if (TopRace == "oomukade") {
 				if (TopScore >= 15) {
@@ -3635,49 +3618,32 @@ use namespace CoC;
 				}
 			}
 			if (TopRace == "lizard") {
-				if (TopScore >= 4) {
-					if (TopScore >= 8) {
-						if (isTaur()) race = "lizan-taur";
-						else race = "lizan";
-					}
-					else {
-						if (isTaur()) race = "half lizan-taur";
-						else race = "half lizan";
-					}
-				}
+				if (isTaur()) race = "lizan-taur";
+				else race = "lizan";
 			}
 			if (TopRace == "dragon") {
-				if (TopScore >= 8) {
-					if (TopScore >= 32) {
-						if (isTaur()) race = "ancient dragon-taur";
-						else {
-							race = "ancient dragon";
-							if (faceType == Face.HUMAN)
-								race = "ancient dragon-" + mf("man", "girl");
-						}
-					}
-					else if (TopScore >= 24) {
-						if (isTaur()) race = " elder dragon-taur";
-						else {
-							race = "elder dragon";
-							if (faceType == Face.HUMAN)
-								race = "elder dragon-" + mf("man", "girl");
-						}
-					}
-					else if (TopScore >= 16) {
-						if (isTaur()) race = "dragon-taur";
-						else {
-							race = "dragon";
-							if (faceType == Face.HUMAN)
-								race = "dragon-" + mf("man", "girl");
-						}
-					}
+				if (TopScore >= 32) {
+					if (isTaur()) race = "ancient dragon-taur";
 					else {
-						if (isTaur()) race = "half-dragon-taur";
-						else {
-							race = "half-dragon";
-							if (faceType == Face.HUMAN) race = "half-dragon-" + mf("man", "girl");
-						}
+						race = "ancient dragon";
+						if (faceType == Face.HUMAN)
+							race = "ancient dragon-" + mf("man", "girl");
+					}
+				}
+				else if (TopScore >= 24) {
+					if (isTaur()) race = " elder dragon-taur";
+					else {
+						race = "elder dragon";
+						if (faceType == Face.HUMAN)
+							race = "elder dragon-" + mf("man", "girl");
+					}
+				}
+				else {
+					if (isTaur()) race = "dragon-taur";
+					else {
+						race = "dragon";
+						if (faceType == Face.HUMAN)
+							race = "dragon-" + mf("man", "girl");
 					}
 				}
 			}
@@ -3698,22 +3664,11 @@ use namespace CoC;
 				}
 			}
 			if (TopRace == "cyclop") {
-				if (TopScore >= 6) {
-					if (TopScore >= 12)
-						race = "cyclop";
-					else
-						race = "half-cyclop"
-				}
+				race = "cyclop";
 			}
 			if (TopRace == "gazer") {
-				if (TopScore >= 7) {
-					if (TopScore >= 21 && statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10)
-						race = "Eye Tyrant";
-					else if (TopScore >= 14 && statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 6)
-						race = "gazer";
-					else
-						race = "half-gazer";
-				}
+				if (TopScore >= 21 && statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) race = "Eye Tyrant";
+				else race = "gazer";
 			}
 			if (TopRace == "raccoon") {
 				if (TopScore >= 4) {
@@ -3735,18 +3690,16 @@ use namespace CoC;
 				}
 			}
 			if (TopRace == "wolf") {
-				if (TopScore >= 4) {
-					if (isTaur() && lowerBody == LowerBody.WOLF)
-						race = "wolf-taur";
-					else if (TopScore >= 20)
-						race = "Fenrir";
-					else if (TopScore >= 7 && hasFur() && coatColor == "glacial white")
-						race = "winter wolf";
-					else if (TopScore >= 6)
-						race = "wolf-morph";
-					else
-						race = "wolf-" + mf("boy", "girl");
-				}
+				if (isTaur() && lowerBody == LowerBody.WOLF)
+					race = "wolf-taur";
+				else if (TopScore >= 21)
+					race = "Fenrir";
+				else if (TopScore >= 10 && hasFur() && coatColor == "glacial white")
+					race = "winter wolf";
+				else if (TopScore >= 8)
+					race = "wolf-morph";
+				else
+					race = "wolf-" + mf("boy", "girl");
 			}
 			if (TopRace == "werewolf") {
 				if (TopScore >= 12) {
@@ -3757,23 +3710,17 @@ use namespace CoC;
 				}
 			}
 			if (TopRace == "fox") {
-				if (TopScore >= 4) {
-					if (TopScore >= 7 && isTaur() && lowerBody == LowerBody.FOX)
-						race = "fox-taur";
-					else if (TopScore >= 7)
-						race = "fox-morph";
-					else
-						race = "half fox";
-				}
+				if (TopScore >= 7 && isTaur() && lowerBody == LowerBody.FOX)
+					race = "fox-taur";
+				else
+					race = "fox-morph";
 			}
 			if (TopRace == "fairy") {
 				if (TopScore >= 23) {
-					if (TopScore >= 26) {
-						race = "fairy queen";
-					}
-					else{
-						race = "great fairy";
-					}
+					if (TopScore >= 29) race = "Titania";
+					else if (TopScore >= 29) race = "fairy queen";
+					else if (TopScore >= 26) race = "noble fairy";
+					else race = "great fairy";
 				}
 			}
 			if (TopRace == "ferret") {
@@ -3785,39 +3732,35 @@ use namespace CoC;
 				}
 			}
 			if (TopRace == "kitsune") {
-				if (TopScore >= 5) {
-					if (tailType == 13 && tailCount >= 2 && kitsuneScore() >= 9) {
-						if (TopScore >= 16 && tailCount == 9) {
-							if (TopScore >= 21 && hasPerk(PerkLib.NinetailsKitsuneOfBalance)) {
-								if (TopScore >= 26 && tailCount >= 9) {
-									if (isTaur()) {
-										race = "Inari-taur";
-									} else {
-										race = "Inari";
-									}
+				if (tailType == 13 && tailCount >= 2 && kitsuneScore() >= 9) {
+					if (TopScore >= 16 && tailCount == 9) {
+						if (TopScore >= 21 && hasPerk(PerkLib.NinetailsKitsuneOfBalance)) {
+							if (TopScore >= 26 && tailCount >= 9) {
+								if (isTaur()) {
+									race = "Inari-taur";
 								} else {
-									if (isTaur()) {
-										race = "nine tailed kitsune-taur of balance";
-									} else {
-										race = "nine tailed kitsune of balance";
-									}
+									race = "Inari";
 								}
 							} else {
 								if (isTaur()) {
-									race = "nine tailed kitsune-taur";
+									race = "nine tailed kitsune-taur of balance";
 								} else {
-									race = "nine tailed kitsune";
+									race = "nine tailed kitsune of balance";
 								}
 							}
 						} else {
 							if (isTaur()) {
-								race = "kitsune-taur";
+								race = "nine tailed kitsune-taur";
 							} else {
-								race = "kitsune";
+								race = "nine tailed kitsune";
 							}
 						}
 					} else {
-						race = "half kitsune";
+						if (isTaur()) {
+							race = "kitsune-taur";
+						} else {
+							race = "kitsune";
+						}
 					}
 				}
 			}
@@ -3830,20 +3773,10 @@ use namespace CoC;
 				}
 			}
 			if (TopRace == "troll") {
-				if (TopScore >= 5) {
-					if (TopScore >= 10)
-						race = "troll";
-					else
-						race = "half troll";
-				}
+				race = "troll";
 			}
 			if (TopRace == "horse") {
-				if (TopScore >= 4) {
-					if (TopScore >= 7)
-						race = "equine-morph";
-					else
-						race = "half equine-morph";
-				}
+				race = "equine-morph";
 			}
 			if (TopRace == "unicorn") {
 				if (TopScore >= 8) {
@@ -3916,33 +3849,25 @@ use namespace CoC;
 			//if (mutantScore() >= 5 && race == "human")
 			//	race = "corrupted mutant";
 			if (TopRace == "minotaur") {
-				if (TopScore >= 4)
-					if (TopScore >= 10) race = "elder minotaur";
-					else if (TopScore >= 10) race = "minotaur";
-					else race = "half-minotaur";
+				if (TopScore >= 15) {
+					race = "Minotaur";
+				}
+				else {
+					race = "bull-";
+					race += mf("morph", "boy");
+				}
 			}
 			if (TopRace == "cow") {
-				if (TopScore >= 4) {
-					if (TopScore >= 15) {
-						race = "Lacta Bovine";
-					}
-					else if (TopScore >= 10) {
-						race = "cow-";
-						race += mf("morph", "girl");
-					} else {
-						race = "half cow-";
-						race += mf("morph", "girl");
-					}
+				if (TopScore >= 15) {
+					race = "Lacta Bovine";
+				}
+				else {
+					race = "cow-";
+					race += mf("morph", "girl");
 				}
 			}
 			if (TopRace == "bee") {
-				if (TopScore >= 5) {
-					if (TopScore >= 9) {
-						race = "bee-morph";
-					} else {
-						race = "half bee-morph";
-					}
-				}
+				race = "bee-morph";
 			}
 			if (TopRace == "goblin") {
 				if (TopScore >= 10)
@@ -3957,95 +3882,53 @@ use namespace CoC;
 			//if (humanScore() >= 5 && race == "corrupted mutant")
 			//	race = "somewhat human mutant";
 			if (TopRace == "demon") {
-				if (TopScore >= 5) {
-					if (TopScore >= 16 && hasPerk(PerkLib.Phylactery)) {
-						if (isTaur()) {
-							race = "";
-							race += mf("incubi-taur", "succubi-taur");
-						} else {
-							race = "";
-							race += mf("incubus", "succubus");
-						}
-					} else if (TopScore >= 11) {
-						if (isTaur()) {
-							race = "";
-							race += mf("incubi-kintaur", "succubi-kintaur");
-						} else {
-							race = "";
-							race += mf("incubi-kin", "succubi-kin");
-						}
-					} else {
-						if (isTaur()) {
-							race = "half ";
-							race += mf("incubus-taur", "succubus-taur");
-						} else {
-							race = "half ";
-							race += mf("incubus", "succubus");
-						}
-					}
+				if (TopScore >= 16 && hasPerk(PerkLib.Soulless)) {
+					if (isTaur()) race += mf("incubi-taur", "succubi-taur");
+					else race += mf("incubus", "succubus");
+				} else if (TopScore >= 11) {
+					if (isTaur()) race += mf("incubi-kintaur", "succubi-kintaur");
+					else race += mf("incubi-kin", "succubi-kin");
 				}
 			}
 			if (TopRace == "devil") {
-				if (TopScore >= 7) {
-					if (TopScore >= 11) {
-						if (TopScore >= 16 && hasPerk(PerkLib.Phylactery)) {
-							if (TopScore >= 21) {
-								if (isTaur()) race = "archdevil-taur";
-								else race = "archdevil";
-							} else {
-								if (isTaur()) race = "devil-taur";
-								else race = "devil";
-							}
-						} else {
-							if (isTaur()) race = "devilkin-taur";
-							else race = "devilkin";
-						}
+				if (TopScore >= 16 && hasPerk(PerkLib.Phylactery)) {
+					if (TopScore >= 21) {
+						if (isTaur()) race = "archdevil-taur";
+						else race = "archdevil";
 					} else {
-						if (isTaur()) race = "half fiend-taur";
-						else race = "half fiend";
+						if (isTaur()) race = "devil-taur";
+						else race = "devil";
 					}
+				} else {
+					if (isTaur()) race = "devilkin-taur";
+					else race = "devilkin";
 				}
 			}
 			if (TopRace == "shark") {
-				if (TopScore >= 4) {
-					if (TopScore >= 9 && vaginas.length > 0 && cocks.length > 0) {
-						if (isTaur()) race = "tigershark-taur";
-						else {
-							race = "tigershark-morph";
-						}
-					} else if (TopScore >= 8) {
-						if (isTaur()) race = "shark-taur";
-						else {
-							race = "shark-morph";
-						}
-					} else {
-						if (isTaur()) race = "half shark-taur";
-						else {
-							race = "half shark-morph";
-						}
+				if (TopScore >= 9 && vaginas.length > 0 && cocks.length > 0) {
+					if (isTaur()) race = "tigershark-taur";
+					else {
+						race = "tigershark-morph";
+					}
+				} else if (TopScore >= 8) {
+					if (isTaur()) race = "shark-taur";
+					else {
+						race = "shark-morph";
 					}
 				}
 			}
 			if (TopRace == "orca") {
-				if (TopScore >= 6) {
-					if (TopScore >= 20) {
-						if (isTaur()) race = "great orca-taur";
-						else {
-							race = "great orca-";
-							race += mf("boy", "girl");
-						}
-					} else if (TopScore >= 17) {
-						if (isTaur()) race = "orca-taur";
-						else {
-							race = "orca-";
-							race += mf("boy", "girl");
-						}
-					} else {
-						if (isTaur()) race = "half orca-taur";
-						else {
-							race = "half orca-";
-							race += mf("boy", "girl");
-						}
+				if (TopScore >= 20) {
+					if (isTaur()) race = "great orca-taur";
+					else {
+						race = "great orca-";
+						race += mf("boy", "girl");
+					}
+				} else {
+					if (isTaur()) race = "orca-taur";
+					else {
+						race = "orca-";
+						race += mf("boy", "girl");
 					}
 				}
 			}
@@ -4067,51 +3950,24 @@ use namespace CoC;
 				}
 			}
 			if (TopRace == "bunny") {
-				if (TopScore >= 5) {
-					if (TopScore >= 10) race = "bunny-" + mf("boy", "girl");
-					else race = "half bunny-" + mf("boy", "girl");
-				}
+				if (TopScore >= 10) race = "bunny-" + mf("boy", "girl");
 			}
 			if (TopRace == "easter bunny") {
-				if (TopScore >= 12)
-				{
+				if (TopScore >= 12) {
 					if (TopScore >= 15) race = "true easter bunny-" + mf("boy", "girl");
 					else race = "easter bunny-" + mf("boy", "girl");
 				}
 			}
 			if (TopRace == "harpy") {
-				if (TopScore >= 4) {
-					if (TopScore >= 8) {
-						if (gender >= 2) {
-							race = "harpy";
-						} else {
-							race = "avian";
-						}
-					} else {
-						if (gender >= 2) {
-							race = "half harpy";
-						} else {
-							race = "half avian";
-						}
-					}
-				}
+				if (gender >= 2) race = "harpy";
+				else race = "avian";
 			}
 			if (TopRace == "spider") {
-				if (TopScore >= 4) {
-					if (TopScore >= 7) {
-						race = "spider-morph";
-						if (mf("no", "yes") == "yes")
-							race = "spider-girl";
-						if (isDrider())
-							race = "drider";
-					} else {
-						race = "half spider-morph";
-						if (mf("no", "yes") == "yes")
-							race = "half spider-girl";
-						if (isDrider())
-							race = "half drider";
-					}
-				}
+				race = "spider-morph";
+				if (mf("no", "yes") == "yes")
+					race = "spider-girl";
+				if (isDrider())
+					race = "drider";
 			}
 			if (TopRace == "kangaroo") {
 				if (TopScore >= 4) race = "kangaroo-morph";
@@ -4134,66 +3990,34 @@ use namespace CoC;
 				}
 			}
 			if (TopRace == "scorpion") {
-				if (TopScore >= 4) {
-					if (isTaur()) race = "scorpion-taur";
-					else {
-						race = "scorpion-morph";
-					}
-				}
+				if (isTaur()) race = "scorpion-taur";
+				else race = "scorpion-morph";
 			}
 			if (TopRace == "mantis") {
-				if (TopScore >= 6) {
-					if (TopScore >= 12) {
-						if (isTaur()) race = "mantis-taur";
-						else {
-							race = "mantis-morph";
-						}
-					} else {
-						if (isTaur()) race = "half mantis-taur";
-						else {
-							race = "half mantis-morph";
-						}
-					}
-				}
+				if (isTaur()) race = "mantis-taur";
+				else race = "mantis-morph";
 			}
 			if (TopRace == "salamander") {
-				if (TopScore >= 4) {
-					if (TopScore >= 16) {
-						if (isTaur()) race = "primordial salamander-taur";
-						else race = "primordial salamander";
-					} else if (TopScore >= 7) {
-						if (isTaur()) race = "salamander-taur";
-						else race = "salamander";
-					} else {
-						if (isTaur()) race = "half salamander-taur";
-						else race = "half salamander";
-					}
+				if (TopScore >= 16) {
+					if (isTaur()) race = "primordial salamander-taur";
+					else race = "primordial salamander";
+				} else {
+					if (isTaur()) race = "salamander-taur";
+					else race = "salamander";
 				}
 			}
 			if (TopRace == "cave wyrm") {
-				if (TopScore >= 5) {
-					if (TopScore >= 10) {
-						if (isTaur()) race = "cave wyrm-taur";
-						else race = "cave wyrm";
-					} else {
-						if (isTaur()) race = "half cave wyrm-taur";
-						else race = "half cave wyrm";
-					}
-				}
+				if (isTaur()) race = "cave wyrm-taur";
+				else race = "cave wyrm";
 			}
 			if (TopRace == "yeti") {
-				if (TopScore >= 7) {
-					if (TopScore >= 17) {
-						if (isTaur()) race = "true yeti-taur";
-						else race = "true yeti";
-					}
-					else if (TopScore >= 14) {
-						if (isTaur()) race = "yeti-taur";
-						else race = "yeti";
-					} else {
-						if (isTaur()) race = "half yeti-taur";
-						else race = "half yeti";
-					}
+				if (TopScore >= 17) {
+					if (isTaur()) race = "true yeti-taur";
+					else race = "true yeti";
+				}
+				else {
+					if (isTaur()) race = "yeti-taur";
+					else race = "yeti";
 				}
 			}
 			if (TopRace == "yuki onna") {
@@ -4202,13 +4026,8 @@ use namespace CoC;
 				}
 			}
 			if (TopRace == "melkie") {
-				if (TopScore >= 8) {
-					if (TopScore >= 21) race = "elder melkie";
-					else {
-						if (TopScore >= 18) race = "melkie";
-						else race = "half melkie";
-					}
-				}
+				if (TopScore >= 21) race = "elder melkie";
+				else race = "melkie";
 			}
 			if (TopRace == "couatl") {
 				if (TopScore >= 11) {
@@ -4246,10 +4065,7 @@ use namespace CoC;
 				}
 			}
 			if (TopRace == "naga") {
-				if (lowerBody == 3 && TopScore >= 4) {
-					if (TopScore >= 8) race = "naga";
-					else race = "half-naga";
-				}
+				race = "naga";
 			}
 			if (TopRace == "apophis") {
 				if (lowerBody == 3 && TopScore >= 23) {
@@ -4275,12 +4091,9 @@ use namespace CoC;
 				}
 			}
 			if (TopRace == "scylla") {
-				if (TopScore >= 4) {
-					if (TopScore >= 17) race = "elder kraken";
-					else if (TopScore >= 12) race = "kraken";
-					else if (TopScore >= 7) race = "scylla";
-					else race = "half scylla";
-				}
+				if (TopScore >= 17) race = "elder kraken";
+				else if (TopScore >= 12) race = "kraken";
+				else race = "scylla";
 			}
 			if (TopRace == "plant") {
 				if (TopScore >= 4) {
@@ -4307,31 +4120,18 @@ use namespace CoC;
 				}
 			}
 			if (TopRace == "oni") {
-				if (TopScore) {
-					if (TopScore >= 18) {
-						if (isTaur()) race = "elder oni-taur";
-						else race = "elder oni";
-					}
-					else if (TopScore >= 12) {
-						if (isTaur()) race = "oni-taur";
-						else race = "oni";
-					}
-					else {
-						if (isTaur()) race = "half oni-taur";
-						else race = "half oni";
-					}
+				if (TopScore >= 18) {
+					if (isTaur()) race = "elder oni-taur";
+					else race = "elder oni";
+				}
+				else {
+					if (isTaur()) race = "oni-taur";
+					else race = "oni";
 				}
 			}
 			if (TopRace == "elf") {
-				if (TopScore >= 5) {
-					if (TopScore >= 11) {
-						if (isTaur()) race = "elf-taur";
-						else race = "elf";
-					} else {
-						if (isTaur()) race = "half elf-taur";
-						else race = "half elf";
-					}
-				}
+				if (isTaur()) race = "elf-taur";
+				else race = "elf";
 			}
 			if (TopRace == "wood elf") {
 				if (TopScore >= 17) {
@@ -4345,53 +4145,29 @@ use namespace CoC;
 				}
 			}
 			if (TopRace == "frost wyrm") {
-				if (TopScore >= 10) {
-					if (TopScore >= 29) {
-						race = "greater frost wyrm";
-					} else if (TopScore >= 20){
-						race = "frost wyrm";
-					} else {
-						race = "half frost wyrm";
-					}
-				}
+				if (TopScore >= 29) race = "greater frost wyrm";
+				else race = "frost wyrm";
 			}
 			if (TopRace == "orc") {
-				if (TopScore >= 5) {
-					if (TopScore >= 11) {
-						if (isTaur()) race = "orc-taur";
-						else race = "orc";
-					} else {
-						if (isTaur()) race = "half orc-taur";
-						else race = "half orc";
-					}
-				}
+				if (isTaur()) race = "orc-taur";
+				else race = "orc";
 			}
 			if (TopRace == "kamaitachi") {
-				if (TopScore >= 7) {
-					if (TopScore >= 18) {
-						if (isTaur()) race = "greater kamaitachi-taur";
-						else race = "greater kamaitachi";
-					} else if (TopScore >= 14) {
-						if (isTaur()) race = "kamaitachi-taur";
-						else race = "kamaitachi";
-					} else {
-						if (isTaur()) race = "half kamaitachi-taur";
-						else race = "half kamaitachi";
-					}
+				if (TopScore >= 18) {
+					if (isTaur()) race = "greater kamaitachi-taur";
+					else race = "greater kamaitachi";
+				} else {
+					if (isTaur()) race = "kamaitachi-taur";
+					else race = "kamaitachi";
 				}
 			}
 			if (TopRace == "ratatoskr") {
-				if (TopScore >= 6) {
-					if (TopScore >= 18) {
-						if (isTaur()) race = "ratatoskr-taur";
-						else race = "ratatoskr";
-					} else if (TopScore >= 12) {
-						if (isTaur()) race = "squirrel-taur";
-						else race = "squirrel morph";
-					} else {
-						if (isTaur()) race = "half squirrel-taur";
-						else race = "half squirrel morph";
-					}
+				if (TopScore >= 18) {
+					if (isTaur()) race = "ratatoskr-taur";
+					else race = "ratatoskr";
+				} else {
+					if (isTaur()) race = "squirrel-taur";
+					else race = "squirrel morph";
 				}
 			}
 			if (TopRace == "wendigo") {
@@ -4401,37 +4177,25 @@ use namespace CoC;
 				}
 			}
 			if (TopRace == "raiju") {
-				if (TopScore >= 5) {
-					if (TopScore >= 19) {
-						if (isTaur()) race = "greater raiju-taur";
-						else race = "greater raiju";
-					}
-					else if (TopScore >= 10) {
+				if (TopScore >= 19) {
+					if (isTaur()) race = "greater raiju-taur";
+					else race = "greater raiju";
+				}
+				else {
 						if (isTaur()) race = "raiju-taur";
-						else race = "raiju";
-					} else {
-						if (isTaur()) race = "half raiju-taur";
-						else race = "half raiju";
-					}
+					else race = "raiju";
 				}
 			}
 			if (TopRace == "thunderbird") {
-				if (TopScore >= 12) {
-					if (TopScore >= 21) race = "greater thunderbird";
-					else if (TopScore >= 16) race = "thunderbird";
-					else race = "half thunderbird";
-				}
+				if (TopScore >= 21) race = "greater thunderbird";
+				else race = "thunderbird";
 			}
 			//<mod>
 			if (TopRace == "pig") {
-				if (TopScore >= 5) {
-					if (TopScore >= 15) {
-						race = "boar-morph";
-					} else if (TopScore >= 10) {
-						race = "pig-morph";
-					} else {
-						race = "half pig-morph";
-					}
+				if (TopScore >= 15) {
+					race = "boar-morph";
+				} else {
+					race = "pig-morph";
 				}
 			}
 			if (TopRace == "satyr") {
@@ -4479,50 +4243,27 @@ use namespace CoC;
 				}
 			}
 			if (TopRace == "manticore") {
-				if (TopScore >= 7) {
-					if (isTaur() && lowerBody == LowerBody.LION) {
-						if (TopScore >= 22)
-							race = "true manticore-taur";
-						else if (TopScore >= 15)
-							race = "manticore-taur";
-						else
-							race = "half manticore-taur";
-					}
-					else if (TopScore >= 22)
-						race = "true manticore";
-					else if (TopScore >= 15)
-						race = "manticore";
+				if (isTaur() && lowerBody == LowerBody.LION) {
+					if (TopScore >= 22)
+						race = "true manticore-taur";
 					else
-						race = "half manticore";
+						race = "manticore-taur";
 				}
+				else if (TopScore >= 22)
+					race = "true manticore";
+				else
+					race = "manticore";
 			}
 			if (TopRace == "red panda") {
-				if (TopScore >= 4) {
-					if (TopScore >= 8) {
-						race = "red-panda-morph";
-						if (faceType == Face.HUMAN)
-							race = "red-panda-" + mf("boy", "girl");
-						if (isTaur())
-							race = "red-panda-taur";
-					} else {
-						race = "half red-panda-morph";
-						if (faceType == Face.HUMAN)
-							race = "half red-panda-" + mf("boy", "girl");
-						if (isTaur())
-							race = "half red-panda-taur";
-					}
-				}
+				race = "red-panda-morph";
+				if (faceType == Face.HUMAN)
+					race = "red-panda-" + mf("boy", "girl");
+				if (isTaur())
+					race = "red-panda-taur";
 			}
 			if (TopRace == "bear and panda") {
-				if (TopScore >= 5) {
-					if (TopScore >= 10) {
-						if (faceType == Face.PANDA) race = "panda-morph";
-						else race = "bear-morph";
-					} else {
-						if (faceType == Face.PANDA) race = "half panda-morph";
-						else race = "half bear-morph";
-					}
-				}
+				if (faceType == Face.PANDA) race = "panda-morph";
+				else race = "bear-morph";
 			}
 			if (TopRace == "siren") {
 				if (TopScore >= 10) {
@@ -4542,25 +4283,17 @@ use namespace CoC;
 				}
 			}
 			if (TopRace == "bat") {
-				if (TopScore >= 6) {
-					race = TopScore >= 10 ? "bat" : "half bat";
-					race += mf("boy", "girl");
-				}
+				race = "bat ";
+				race += mf("boy", "girl");
 			}
 			if (TopRace == "vampire") {
-				if (TopScore >= 6) {
+				if (TopScore >= 10) {
 					if (TopScore >= 20) race = "pureblood vampire";
-					else if (TopScore >= 10) race = "vampire";
-					else race = "dhampir";
+					else race = "vampire";
 				}
 			}
 			if (TopRace == "avian") {
-				if (TopScore >= 4) {
-					if (TopScore >= 9)
-						race = "avian-morph";
-					else
-						race = "half avian-morph";
-				}
+				race = "avian-morph";
 			}
 			if (TopRace == "poltergeist") {
 				if (TopScore >= 6) {
@@ -4575,37 +4308,28 @@ use namespace CoC;
 			//if (lowerBody == LowerBody.PONY)
 			//	race = "pony-kin";
 			if (TopRace == "goo") {
-				if (TopScore >= 5) {
+				if (TopScore >= 11) {
 					if (TopScore >= 15) race = "slime queen";
-					else if (TopScore >= 11) {
+					else {
 						race = "slime ";
-						race += mf("boi", "girl");
-					} else {
-						race = "half slime ";
 						race += mf("boi", "girl");
 					}
 				}
 			}
 			if (TopRace == "magmagoo") {
-				if (TopScore >= 6) {
+				if (TopScore >= 13) {
 					if (TopScore >= 17) race = "magma slime queen";
-					else if (TopScore >= 13) {
+					else {
 						race = "magma slime ";
-						race += mf("boi", "girl");
-					} else {
-						race = "half magma slime ";
 						race += mf("boi", "girl");
 					}
 				}
 			}
 			if (TopRace == "darkgoo") {
-				if (TopScore >= 6) {
+				if (TopScore >= 13) {
 					if (TopScore >= 17) race = "dark slime queen";
-					else if (TopScore >= 13) {
+					else {
 						race = "dark slime ";
-						race += mf("boi", "girl");
-					} else {
-						race = "half dark slime ";
 						race += mf("boi", "girl");
 					}
 				}
@@ -5045,13 +4769,13 @@ use namespace CoC;
 				chimeraCounter++;
 			if (dragonScore() >= 16)
 				chimeraCounter++;
-			if (raccoonScore() >= 4)
+			if (raccoonScore() >= 8)
 				chimeraCounter++;
-/*			if (dogScore() >= 4)
+//			if (dogScore() >= 4)
+//				chimeraCounter++;
+            if (wolfScore() >= 8)
                 chimeraCounter++;
-            if (wolfScore() >= 6)
-                chimeraCounter++;
-*/			if (werewolfScore() >= 12)
+			if (werewolfScore() >= 12)
 				chimeraCounter++;
 			if (foxScore() >= 7)
 				chimeraCounter++;
@@ -5071,6 +4795,8 @@ use namespace CoC;
 				chimeraCounter++;
 			if (cowScore() >= 10)
 				chimeraCounter++;
+			if (cancerScore() >= 13)
+				chimeraCounter++;
 			if (beeScore() >= 14)
 				chimeraCounter++;
 			if (goblinScore() >= 10)
@@ -5081,7 +4807,7 @@ use namespace CoC;
 				chimeraCounter++;
 			if (devilkinScore() >= 11)
 				chimeraCounter++;
-			if (sharkScore() >= 8)
+			if (sharkScore() >= 10)
 				chimeraCounter++;
 			if (orcaScore() >= 14)
 				chimeraCounter++;
@@ -5095,7 +4821,7 @@ use namespace CoC;
 				chimeraCounter++;
 			if (raijuScore() >= 10)
 				chimeraCounter++;
-			if (thunderbirdScore() >= 12)
+			if (thunderbirdScore() >= 16)
 				chimeraCounter++;
 			if (bunnyScore() >= 10)
 				chimeraCounter++;
@@ -5210,21 +4936,19 @@ use namespace CoC;
 				grandchimeraCounter++;
 			if (jabberwockyScore() >= 20)
 				grandchimeraCounter++;
-			if (wolfScore() >= 10)
+			if (wolfScore() >= 10 && hasFur() && coatColor == "glacial white")
 				grandchimeraCounter++;
 //			if (werewolfScore() >= 12)
 //				grandchimeraCounter++;
-			if (foxScore() >= 7)
-				grandchimeraCounter++;
-			if (ferretScore() >= 4)
-				grandchimeraCounter++;
+//			if (ferretScore() >= 4)
+//				grandchimeraCounter++;
 			if (kitsuneScore() >= 16 && tailType == 13 && tailCount == 9)
 				grandchimeraCounter++;
 			if (demonScore() >= 16 && hasPerk(PerkLib.Phylactery))
 				grandchimeraCounter++;
 			if (devilkinScore() >= 16 && hasPerk(PerkLib.Phylactery))
 				grandchimeraCounter++;
-			if (sharkScore() >= 9 && vaginas.length > 0 && cocks.length > 0)
+			if (sharkScore() >= 11 && vaginas.length > 0 && cocks.length > 0)
 				grandchimeraCounter++;
 			if (lowerBody == 51 && hydraScore() >= 19)
 				grandchimeraCounter++;
@@ -5236,7 +4960,7 @@ use namespace CoC;
 				grandchimeraCounter++;
 			if (orcScore() >= 11)
 				grandchimeraCounter++;
-*/			if (thunderbirdScore() >= 16)
+*/			if (thunderbirdScore() >= 21)
 				grandchimeraCounter++;
 			if (mouseScore() >= 12 && arms.type == Arms.HINEZUMI && lowerBody == LowerBody.HINEZUMI)
 				grandchimeraCounter++;
@@ -5259,6 +4983,8 @@ use namespace CoC;
 			if (kamaitachiScore() >= 18)
 				grandchimeraCounter++;
 			if (ratatoskrScore() >= 18)
+				grandchimeraCounter++;
+			if (cancerScore() >= 20)
 				grandchimeraCounter++;
 
 			End("Player","racialScore");
@@ -5951,9 +5677,11 @@ use namespace CoC;
 			Begin("Player","racialScore","fairy");
 			var fairyCounter:Number = 0;
 			if (faceType == Face.FAIRY)
-				fairyCounter++;
+				fairyCounter += 2;
 			if (eyes.type == Eyes.FAIRY)
-				fairyCounter++;
+				fairyCounter += 2;
+			if (hairType == Hair.FAIRY)
+				fairyCounter += 2;
 			if (ears.type == Ears.ELVEN)
 				fairyCounter++;
 			if (tailType == Tail.NONE)
@@ -5965,16 +5693,10 @@ use namespace CoC;
 			if (tongue.type == Tongue.ELF)
 				fairyCounter++;
 			if (wings.type == Wings.FAIRY)
-				fairyCounter+=4;
-			if (hairType == Hair.FAIRY)
+				fairyCounter += 3;
+			if (breastRows.length > 0)
 				fairyCounter++;
 			if (!hasCock() && fairyCounter > 0)
-				fairyCounter++;
-			if (breastRows.length > 1 && fairyCounter > 0)
-				fairyCounter++;
-			if (breastRows.length == 3 && fairyCounter > 0)
-				fairyCounter++;
-			if (breastRows.length == 4 && fairyCounter > 0)
 				fairyCounter++;
 			if (!hasCoat() && fairyCounter > 0)
 				fairyCounter++;
@@ -6114,7 +5836,7 @@ use namespace CoC;
 				nekomataCounter += 1;
 			if (hasPerk(PerkLib.AscensionCruelChimerasThesis) && nekomataCounter >= 8)
 				nekomataCounter += 1;
-			if (catScore() >= 4 || (hairColor == "lilac and white striped" && coatColor == "lilac and white striped") || eyes.type == Eyes.INFERNAL || hairType == Hair.BURNING || tailType == Tail.BURNING || eyes.type == Eyes.DISPLACER || ears.type == Ears.DISPLACER || arms.type == Arms.DISPLACER || rearBody.type == RearBody.DISPLACER_TENTACLES) nekomataCounter = 0;
+			if (catScore() >= 8 || (hairColor == "lilac and white striped" && coatColor == "lilac and white striped") || eyes.type == Eyes.INFERNAL || hairType == Hair.BURNING || tailType == Tail.BURNING || eyes.type == Eyes.DISPLACER || ears.type == Ears.DISPLACER || arms.type == Arms.DISPLACER || rearBody.type == RearBody.DISPLACER_TENTACLES) nekomataCounter = 0;
 			if (isGargoyle()) nekomataCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) nekomataCounter = 0;
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
@@ -6164,7 +5886,7 @@ use namespace CoC;
 				cheshireCounter += 1;
 			if (hasPerk(PerkLib.AscensionCruelChimerasThesis) && cheshireCounter >= 8)
 				cheshireCounter += 1;
-			if (catScore() >= 4 || tailType == Tail.NEKOMATA_FORKED_1_3 || tailType == Tail.NEKOMATA_FORKED_2_3 || (tailType == Tail.CAT && tailCount > 1) || eyes.type == Eyes.INFERNAL || hairType == Hair.BURNING || tailType == Tail.BURNING || tailType == Tail.TWINKASHA
+			if (catScore() >= 8 || tailType == Tail.NEKOMATA_FORKED_1_3 || tailType == Tail.NEKOMATA_FORKED_2_3 || (tailType == Tail.CAT && tailCount > 1) || eyes.type == Eyes.INFERNAL || hairType == Hair.BURNING || tailType == Tail.BURNING || tailType == Tail.TWINKASHA
 			 || eyes.type == Eyes.DISPLACER || ears.type == Ears.DISPLACER || arms.type == Arms.DISPLACER || rearBody.type == RearBody.DISPLACER_TENTACLES) cheshireCounter = 0;
 			if (isGargoyle()) cheshireCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) cheshireCounter = 0;
@@ -6221,7 +5943,7 @@ use namespace CoC;
 				hellcatCounter += 1;
 			if (hasPerk(PerkLib.AscensionCruelChimerasThesis) && hellcatCounter >= 8)
 				hellcatCounter += 1;
-			if (catScore() >= 4 || tailType == Tail.NEKOMATA_FORKED_1_3 || tailType == Tail.NEKOMATA_FORKED_2_3 || (tailType == Tail.CAT && tailCount > 1) || (hairColor == "lilac and white striped" && coatColor == "lilac and white striped") || eyes.type != Eyes.INFERNAL || hairType != Hair.BURNING || (tailType != Tail.BURNING && tailType != Tail.TWINKASHA)
+			if (catScore() >= 8 || tailType == Tail.NEKOMATA_FORKED_1_3 || tailType == Tail.NEKOMATA_FORKED_2_3 || (tailType == Tail.CAT && tailCount > 1) || (hairColor == "lilac and white striped" && coatColor == "lilac and white striped") || eyes.type != Eyes.INFERNAL || hairType != Hair.BURNING || (tailType != Tail.BURNING && tailType != Tail.TWINKASHA)
 			 || eyes.type == Eyes.DISPLACER || ears.type == Ears.DISPLACER || arms.type == Arms.DISPLACER || rearBody.type == RearBody.DISPLACER_TENTACLES) hellcatCounter = 0;
 			if (isGargoyle()) hellcatCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) hellcatCounter = 0;
@@ -6280,7 +6002,7 @@ use namespace CoC;
 				displacerbeastCounter += 1;
 			if (hasPerk(PerkLib.AscensionCruelChimerasThesis) && displacerbeastCounter >= 8)
 				displacerbeastCounter += 1;
-			if (catScore() >= 4 || tailType == Tail.NEKOMATA_FORKED_1_3 || tailType == Tail.NEKOMATA_FORKED_2_3 || (tailType == Tail.CAT && tailCount > 1) || rearBody.type == RearBody.LION_MANE || (hairColor == "lilac and white striped" && coatColor == "lilac and white striped") || eyes.type == Eyes.INFERNAL || hairType == Hair.BURNING || tailType == Tail.BURNING) displacerbeastCounter = 0;
+			if (catScore() >= 8 || tailType == Tail.NEKOMATA_FORKED_1_3 || tailType == Tail.NEKOMATA_FORKED_2_3 || (tailType == Tail.CAT && tailCount > 1) || rearBody.type == RearBody.LION_MANE || (hairColor == "lilac and white striped" && coatColor == "lilac and white striped") || eyes.type == Eyes.INFERNAL || hairType == Hair.BURNING || tailType == Tail.BURNING) displacerbeastCounter = 0;
 			if (isGargoyle()) displacerbeastCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) displacerbeastCounter = 0;
 			if (arms.type != Arms.DISPLACER || rearBody.type != RearBody.DISPLACER_TENTACLES) displacerbeastCounter = 0;
@@ -8642,7 +8364,7 @@ use namespace CoC;
 				cyclopCounter += 1;
 			if (isGargoyle()) cyclopCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) cyclopCounter = 0;
-			cyclopCounter = finalRacialScore(cyclopCounter, Race.GAZER);
+			cyclopCounter = finalRacialScore(cyclopCounter, Race.CYCLOP);
 			End("Player","racialScore");
 			return cyclopCounter;
 		}
@@ -12153,7 +11875,7 @@ use namespace CoC;
 			var maxLibCap2:Number = 0;
 			var currentSen:Number = 0;
 			//Alter max stats depending on race (+15 za pkt)
-			if (cowScore() >= 4) {
+			if (cowScore() >= 10) {
 				if (cowScore() >= 15) {
 					maxStrCap2 += 170;
 					maxTouCap2 += 45;
@@ -12161,22 +11883,15 @@ use namespace CoC;
 					maxIntCap2 -= 20;
 					maxLibCap2 += 70;
 				}
-				else if (cowScore() >= 10) {
+				else {
 					maxStrCap2 += 120;
 					maxTouCap2 += 45;
 					maxSpeCap2 -= 40;
 					maxIntCap2 -= 20;
 					maxLibCap2 += 45;
 				}
-				else {
-					maxStrCap2 += 60;
-					maxTouCap2 += 10;
-					maxSpeCap2 -= 20;
-					maxIntCap2 -= 10;
-					maxLibCap2 += 20;
-				}
 			}//+20/10-20
-			if (minotaurScore() >= 4) {
+			if (minotaurScore() >= 10) {
 				if (minotaurScore() >= 15) {
 					maxStrCap2 += 170;
 					maxTouCap2 += 45;
@@ -12184,32 +11899,19 @@ use namespace CoC;
 					maxIntCap2 -= 40;
 					maxLibCap2 += 70;
 				}
-				else if (minotaurScore() >= 10) {
+				else {
 					maxStrCap2 += 120;
 					maxTouCap2 += 45;
 					maxSpeCap2 -= 20;
 					maxIntCap2 -= 40;
 					maxLibCap2 += 45;
 				}
-				else {
-					maxStrCap2 += 60;
-					maxTouCap2 += 10;
-					maxSpeCap2 -= 10;
-					maxIntCap2 -= 20;
-					maxLibCap2 += 20;
-				}
 			}//+20/10-20
-			if (lizardScore() >= 4) {
-				if (lizardScore() >= 8) {
-					maxTouCap2 += 70;
-					maxIntCap2 += 50;
-				}
-				else {
-					maxTouCap2 += 40;
-					maxIntCap2 += 20;
-				}
+			if (lizardScore() >= 8) {
+				maxTouCap2 += 70;
+				maxIntCap2 += 50;
 			}//+10/10-20
-			if (dragonScore() >= 8) {
+			if (dragonScore() >= 16) {
 				if (dragonScore() >= 32) {
 					maxStrCap2 += 100;
 					maxTouCap2 += 100;
@@ -12228,7 +11930,7 @@ use namespace CoC;
 					maxLibCap2 += 40;
 					currentSen += 30;
 				}
-				else if (dragonScore() >= 16) {
+				else {
 					maxStrCap2 += 50;
 					maxTouCap2 += 50;
 					maxSpeCap2 += 50;
@@ -12236,15 +11938,6 @@ use namespace CoC;
 					maxWisCap2 += 40;
 					maxLibCap2 += 30;
 					currentSen += 20;
-				}
-				else {
-					maxStrCap2 += 25;
-					maxTouCap2 += 25;
-					maxSpeCap2 += 25;
-					maxIntCap2 += 20;
-					maxWisCap2 += 20;
-					maxLibCap2 += 20;
-					currentSen += 15;
 				}
 			}
 			if (jabberwockyScore() >= 10) {
@@ -12277,7 +11970,7 @@ use namespace CoC;
 				maxSpeCap2 += 15;
 				maxIntCap2 -= 5;
 			}//+10/10-20
-			if (mouseScore() >= 4) {
+			if (mouseScore() >= 8) {
 				if (mouseScore() >= 15 && arms.type == Arms.HINEZUMI && lowerBody == LowerBody.HINEZUMI) {
 					maxStrCap2 += 75;
 					maxTouCap2 -= 10;
@@ -12290,39 +11983,29 @@ use namespace CoC;
 					maxSpeCap2 += 80;
 					maxWisCap2 += 50;
 				}
-				else if (mouseScore() >= 8) {
+				else {
 					maxTouCap2 -= 10;
 					maxSpeCap2 += 80;
 					maxWisCap2 += 50;
 				}
-				else {
-					maxTouCap2 -= 10;
-					maxSpeCap2 += 40;
-					maxWisCap2 += 30;
-				}
 			}
-			if (wolfScore() >= 4) {
-				if (wolfScore() >= 23) {
-					maxStrCap2 += 135;
+			if (wolfScore() >= 8) {
+				if (wolfScore() >= 21) {
+					maxStrCap2 += 145;
 					maxTouCap2 += 80;
 					maxSpeCap2 += 100;
 					maxIntCap2 -= 10;
 				}
-				else if (wolfScore() >= 7 && hasFur() && coatColor == "glacial white") {
-					maxStrCap2 += 30;
-					maxTouCap2 += 20;
-					maxSpeCap2 += 30;
-					maxIntCap2 -= 10;
-				}
-				else if (wolfScore() >= 6) {
-					maxStrCap2 += 30;
-					maxTouCap2 += 10;
-					maxSpeCap2 += 30;
+				else if (wolfScore() >= 10 && hasFur() && coatColor == "glacial white") {
+					maxStrCap2 += 65;
+					maxTouCap2 += 40;
+					maxSpeCap2 += 55;
 					maxIntCap2 -= 10;
 				}
 				else {
-					maxStrCap2 += 15;
-					maxSpeCap2 += 10;
+					maxStrCap2 += 50;
+					maxTouCap2 += 30;
+					maxSpeCap2 += 50;
 					maxIntCap2 -= 10;
 				}
 			}//+15(60)((70))(((140))) / 10 - 20(50 - 60)((70 - 80))(((130 - 140)))
@@ -12340,19 +12023,12 @@ use namespace CoC;
 					maxIntCap2 -= 20;
 				//}
 			}
-			if (foxScore() >= 4) {
-				if (foxScore() >= 7) {
-					maxStrCap2 -= 30;
-					maxSpeCap2 += 80;
-					maxIntCap2 += 55;
-				}
-				else {
-					maxStrCap2 -= 5;
-					maxSpeCap2 += 40;
-					maxIntCap2 += 25;
-				}
+			if (foxScore() >= 7) {
+				maxStrCap2 -= 30;
+				maxSpeCap2 += 80;
+				maxIntCap2 += 55;
 			}
-			if (cancerScore() >= 8) {
+			if (cancerScore() >= 13) {
 				if (cancerScore() >= 20) {
 					maxStrCap2 += 125;
 					maxSpeCap2 += 105;
@@ -12360,31 +12036,18 @@ use namespace CoC;
 					maxIntCap2 -= 30;
 					maxWisCap2 -= 15;
 				}
-				else if (cancerScore() >= 13) {
+				else {
 					maxStrCap2 += 105;
 					maxSpeCap2 += 55;
 					maxTouCap2 += 80;
 					maxIntCap2 -= 30;
 					maxWisCap2 -= 15;
 				}
-				else {
-					maxStrCap2 += 60;
-					maxSpeCap2 += 20;
-					maxTouCap2 += 55;
-					maxWisCap2 -= 15;
-				}
 			}//+10 / 10 - 20
-			if (catScore() >= 4) {
-				if (catScore() >= 8) {
-					if (hasPerk(PerkLib.Flexibility)) maxSpeCap2 += 70;
-					else maxSpeCap2 += 60;
-					maxLibCap2 += 60;
-				}
-				else {
-					if (hasPerk(PerkLib.Flexibility)) maxSpeCap2 += 50;
-					else maxSpeCap2 += 40;
-					maxLibCap2 += 20;
-				}
+			if (catScore() >= 8) {
+				if (hasPerk(PerkLib.Flexibility)) maxSpeCap2 += 70;
+				else maxSpeCap2 += 60;
+				maxLibCap2 += 60;
 			}//+10 / 10 - 20
 			if (sphinxScore() >= 14) {
 				if (sphinxScore() >= 30) {
@@ -12470,29 +12133,22 @@ use namespace CoC;
 					maxSpeCap2 += 90;
 					maxLibCap2 += 90;
 			}
-			if (bunnyScore() >= 5 && hasPerk(PerkLib.EasterBunnyBalls)) {
+			if (easterbunnyScore() >= 12 && hasPerk(PerkLib.EasterBunnyBalls)) {
 				if (easterbunnyScore() >= 15) {
 					maxStrCap2 -= 20;
 					maxTouCap2 -= 10;
 					maxSpeCap2 += 105;
 					maxLibCap2 += 150;
 				}
-				else if (easterbunnyScore() >= 12 && easterbunnyScore() < 15) {
+				else {
 					maxStrCap2 -= 20;
 					maxTouCap2 -= 10;
 					maxSpeCap2 += 90;
 					maxLibCap2 += 120;
 				}
-				else {
-					maxStrCap2 -= 10;
-					maxTouCap2 -= 5;
-					maxSpeCap2 += 55;
-					maxLibCap2 += 35;
-				}
-			}
-			//-20/-10+105+150
-			if (raccoonScore() >= 4) {
-				if (raccoonScore() >= 17){
+			}//-20/-10+105+150
+			if (raccoonScore() >= 8) {
+				if (raccoonScore() >= 17) {
 					maxSpeCap2 += 105;
 					maxIntCap2 += 150;
 				}
@@ -12501,18 +12157,13 @@ use namespace CoC;
 					maxIntCap2 += 120;
 				}
 				else {
-					maxSpeCap2 += 60;
+					maxSpeCap2 += 90;
+					maxIntCap2 += 30;
 				}
 			}//+15/10-20
-			if (horseScore() >= 4) {
-				if (horseScore() >= 7) {
-					maxSpeCap2 += 70;
-					maxTouCap2 += 35;
-				}
-				else {
-					maxSpeCap2 += 40;
-					maxTouCap2 += 20;
-				}
+			if (horseScore() >= 7) {
+				maxSpeCap2 += 70;
+				maxTouCap2 += 35;
 			}//+15/10-20
 			if (goblinScore() >= 10) {
 				maxStrCap2 -= 50;
@@ -12520,7 +12171,7 @@ use namespace CoC;
 				maxIntCap2 += 100;
 				maxLibCap2 += 25;
 			}
-			if (gremlinScore() >= 13) {
+			if (gremlinScore() >= 15) {
 				if (gremlinScore() >= 18) {
 					maxStrCap2 -= 50;
 					maxSpeCap2 += 90;
@@ -12538,109 +12189,82 @@ use namespace CoC;
 					//minCor += 10;
 				}
 			}
-			if (gooScore() >= 5) {
+			if (gooScore() >= 11) {
 				if (gooScore() >= 15) {
 					maxTouCap2 += 115;
 					maxSpeCap2 -= 50;
 					maxLibCap2 += 160;
 				}
-				else if (gooScore() >= 11) {
+				else {
 					maxTouCap2 += 100;
 					maxSpeCap2 -= 40;
 					maxLibCap2 += 105;
 				}
-				else {
-					maxTouCap2 += 45;
-					maxSpeCap2 -= 20;
-					maxLibCap2 += 50;
-				}
 			}//+20/10-20
-			if (magmagooScore() >= 6) {
+			if (magmagooScore() >= 13) {
 				if (magmagooScore() >= 17) {
 					maxStrCap2 += 45;
 					maxTouCap2 += 115;
 					maxSpeCap2 -= 50;
 					maxLibCap2 += 145;
 				}
-				else if (magmagooScore() >= 13) {
+				else {
 					maxStrCap2 += 35;
 					maxTouCap2 += 100;
 					maxSpeCap2 -= 40;
 					maxLibCap2 += 100;
 				}
-				else {
-					maxStrCap2 += 15;
-					maxTouCap2 += 45;
-					maxSpeCap2 -= 20;
-					maxLibCap2 += 50;
-				}
 			}//+20/10-20
-			if (darkgooScore() >= 6) {
+			if (darkgooScore() >= 13) {
 				if (darkgooScore() >= 17) {
 					maxTouCap2 += 115;
 					maxSpeCap2 -= 50;
 					maxIntCap2 += 45;
 					maxLibCap2 += 145;
 				}
-				else if (darkgooScore() >= 13) {
+				else {
 					maxTouCap2 += 90;
 					maxSpeCap2 -= 40;
 					maxIntCap2 += 45;
 					maxLibCap2 += 100;
 				}
-				else {
-					maxTouCap2 += 45;
-					maxSpeCap2 -= 20;
-					maxIntCap2 += 15;
-					maxLibCap2 += 50;
-				}
 			}//+20/10-20
-			if (kitsuneScore() >= 5) {
-				if (kitsuneScore() >= 9 && tailType == 13 && tailCount >= 2) {
-					if (kitsuneScore() >= 16 && tailCount == 9) {
-						if (kitsuneScore() >= 21 && hasPerk(PerkLib.NinetailsKitsuneOfBalance)) {
-							if (kitsuneScore() >= 26) {
-								maxStrCap2 -= 50;
-								maxSpeCap2 += 50;
-								maxIntCap2 += 140;
-								maxWisCap2 += 200;
-								maxLibCap2 += 110;
-								currentSen += 60;
-							}
-							else {
-								maxStrCap2 -= 45;
-								maxSpeCap2 += 40;
-								maxIntCap2 += 125;
-								maxWisCap2 += 160;
-								maxLibCap2 += 80;
-								currentSen += 45;
-							}
+			if (kitsuneScore() >= 9 && tailType == 13 && tailCount >= 2) {
+				if (kitsuneScore() >= 16 && tailCount == 9) {
+					if (kitsuneScore() >= 21 && hasPerk(PerkLib.NinetailsKitsuneOfBalance)) {
+						if (kitsuneScore() >= 26) {
+							maxStrCap2 -= 50;
+							maxSpeCap2 += 50;
+							maxIntCap2 += 140;
+							maxWisCap2 += 200;
+							maxLibCap2 += 110;
+							currentSen += 60;
 						}
 						else {
-							maxStrCap2 -= 40;
-							maxSpeCap2 += 30;
-							maxIntCap2 += 110;
-							maxWisCap2 += 125;
-							maxLibCap2 += 45;
-							currentSen += 30;
+							maxStrCap2 -= 45;
+							maxSpeCap2 += 40;
+							maxIntCap2 += 125;
+							maxWisCap2 += 160;
+							maxLibCap2 += 80;
+							currentSen += 45;
 						}
 					}
 					else {
-						maxStrCap2 -= 35;
-						maxSpeCap2 += 25;
-						maxIntCap2 += 60;
-						maxWisCap2 += 75;
-						maxLibCap2 += 30;
-						currentSen += 20;
+						maxStrCap2 -= 40;
+						maxSpeCap2 += 30;
+						maxIntCap2 += 110;
+						maxWisCap2 += 125;
+						maxLibCap2 += 45;
+						currentSen += 30;
 					}
 				}
 				else {
-					maxStrCap2 -= 30;
-					maxSpeCap2 += 20;
-					maxIntCap2 += 35;
-					maxWisCap2 += 40;
-					maxLibCap2 += 25;
-					currentSen += 15;
+					maxStrCap2 -= 35;
+					maxSpeCap2 += 25;
+					maxIntCap2 += 60;
+					maxWisCap2 += 75;
+					maxLibCap2 += 30;
+					currentSen += 20;
 				}
 			}//+50/50-60
 		/*	if (kitshooScore() >= 6) {
@@ -12662,69 +12286,46 @@ use namespace CoC;
 					}
 				}
 			}
-		*/	if (beeScore() >= 7) {
-				if (beeScore() >= 16) {
-					maxTouCap2 += 80;
-					maxSpeCap2 += 80;
-					maxIntCap2 += 50;
-					maxLibCap2 += 50;
-				}
-				else {
-					maxTouCap2 += 40;
-					maxSpeCap2 += 40;
-					maxIntCap2 += 25;
-				}
+		*/	if (beeScore() >= 16) {
+				maxTouCap2 += 80;
+				maxSpeCap2 += 80;
+				maxIntCap2 += 50;
+				maxLibCap2 += 50;
 			}//+40/30-40
-			if (spiderScore() >= 4) {
-				if (spiderScore() >= 7) {
-					maxStrCap2 -= 20;
-					maxTouCap2 += 50;
-					maxIntCap2 += 75;
-				}
-				else {
-					maxStrCap2 -= 10;
-					maxTouCap2 += 30;
-					maxIntCap2 += 40;
-				}
+			if (spiderScore() >= 7) {
+				maxStrCap2 -= 20;
+				maxTouCap2 += 50;
+				maxIntCap2 += 75;
 			}//+10/10-20
 			if (kangaScore() >= 4) {
 				maxTouCap2 += 5;
 				maxSpeCap2 += 15;
 			}//+20/10-20
-			if (sharkScore() >= 4) {
+			if (sharkScore() >= 10) {
 				if (sharkScore() >= 11 && vaginas.length > 0 && cocks.length > 0) {
 					maxStrCap2 += 60;
 					maxSpeCap2 += 100;
 					maxLibCap2 += 20;
 				}
-				else if (sharkScore() >= 10) {
+				else {
 					maxStrCap2 += 40;
 					maxSpeCap2 += 100;
 					maxLibCap2 += 10;
 				}
-				else {
-					maxStrCap2 += 20;
-					maxSpeCap2 += 40;
-				}
 			}//+10/10-20
-			if (harpyScore() >= 4) {
+			if (harpyScore() >= 8) {
 				if (harpyScore() >= 15) {
 					maxTouCap2 -= 30;
 					maxSpeCap2 += 150;
 					maxLibCap2 += 105;
 				}
-				else if (harpyScore() >= 8) {
+				else {
 					maxTouCap2 -= 20;
 					maxSpeCap2 += 80;
 					maxLibCap2 += 60;
 				}
-				else {
-					maxTouCap2 -= 10;
-					maxSpeCap2 += 40;
-					maxLibCap2 += 30;
-				}
 			}//+10/10-20
-			if (kamaitachiScore() >= 7) {
+			if (kamaitachiScore() >= 14) {
 				if (kamaitachiScore() >= 18) {
 					maxStrCap2 -= 35;
 					maxSpeCap2 += 200;
@@ -12732,66 +12333,42 @@ use namespace CoC;
 					maxWisCap2 += 100;
 					currentSen += 50;
 				}
-				else if (kamaitachiScore() >= 14) {
+				else {
 					maxStrCap2 -= 20;
 					maxSpeCap2 += 140;
 					maxIntCap2 += 45;
 					maxWisCap2 += 70;
 					currentSen += 25;
 				}
-				else {
-					maxStrCap2 -= 10;
-					maxSpeCap2 += 65;
-					maxIntCap2 += 20;
-					maxWisCap2 += 40;
-					currentSen += 10;
-				}
 			}
-			if (cyclopScore() >= 6) {
-				if (cyclopScore() >= 12) {
-					maxStrCap2 += 90;
-					maxTouCap2 += 90;
-				}
-				else {
-					maxStrCap2 += 45;
-					maxTouCap2 += 45;
-				}
+			if (cyclopScore() >= 12) {
+				maxStrCap2 += 90;
+				maxTouCap2 += 90;
 			}
-			if (gazerScore() >= 7) {
+			if (gazerScore() >= 14 && statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 6) {
 				if (gazerScore() >= 21 && statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10) {
 					maxTouCap2 += 80;
 					maxSpeCap2 -= 75;
 					maxIntCap2 += 180;
 					maxLibCap2 += 130;
 				}
-				else if (gazerScore() >= 14 && statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 6) {
+				else {
 					maxTouCap2 += 55;
 					maxSpeCap2 -= 65;
 					maxIntCap2 += 130;
 					maxLibCap2 += 90;
 				}
-				else {
-					maxTouCap2 += 30;
-					maxSpeCap2 -= 55;
-					maxIntCap2 += 80;
-					maxLibCap2 += 50;
-				}
 			}
-			if (ratatoskrScore() >= 6) {
+			if (ratatoskrScore() >= 12) {
 				if (ratatoskrScore() >= 18) {
 					maxStrCap2 -= 25;
 					maxSpeCap2 += 140;
 					maxIntCap2 += 155;
 				}
-				else if (ratatoskrScore() >= 12) {
+				else {
 					maxStrCap2 -= 20;
 					maxSpeCap2 += 95;
 					maxIntCap2 += 105;
-				}
-				else {
-					maxStrCap2 -= 10;
-					maxSpeCap2 += 60;
-					maxIntCap2 += 40;
 				}
 			}
 			if (sirenScore() >= 10) {
@@ -12806,21 +12383,16 @@ use namespace CoC;
 					maxLibCap2 += 30;
 				}
 			}//+20/10-20
-			if (orcaScore() >= 6) {
+			if (orcaScore() >= 14) {
 				if (orcaScore() >= 20) {
 					maxStrCap2 += 140;
 					maxTouCap2 += 70;
 					maxSpeCap2 += 100;
 				}
-				else if (orcaScore() >= 14) {
+				else {
 					maxStrCap2 += 100;
 					maxTouCap2 += 40;
 					maxSpeCap2 += 70;
-				}
-				else {
-					maxStrCap2 += 35;
-					maxTouCap2 += 20;
-					maxSpeCap2 += 35;
 				}
 			}//+10/10-20
 			if (leviathanScore() >= 20) {
@@ -12836,42 +12408,27 @@ use namespace CoC;
 					maxIntCap2 += 50;
 				}
 			}//+60/50-60
-			if (oniScore() >= 6) {
+			if (oniScore() >= 12) {
 				if (oniScore() >= 18) {
 					maxStrCap2 += 150;
 					maxTouCap2 += 90;
 					maxIntCap2 -= 30;
 					maxWisCap2 += 60;
 				}
-				else if (oniScore() >= 12) {
+				else {
 					maxStrCap2 += 100;
 					maxTouCap2 += 60;
 					maxIntCap2 -= 20;
 					maxWisCap2 += 40;
 				}
-				else {
-					maxStrCap2 += 50;
-					maxTouCap2 += 30;
-					maxIntCap2 -= 10;
-					maxWisCap2 += 20;
-				}
 			}//+10/10-20
-			if (elfScore() >= 5) {
-				if (elfScore() >= 11) {
-					maxStrCap2 -= 10;
-					maxTouCap2 -= 15;
-					maxSpeCap2 += 80;
-					maxIntCap2 += 80;
-					maxWisCap2 += 60;
-					currentSen += 30;
-				} else {
-					maxStrCap2 -= 5;
-					maxTouCap2 -= 10;
-					maxSpeCap2 += 45;
-					maxIntCap2 += 45;
-					maxWisCap2 += 30;
-					currentSen += 15;
-				}
+			if (elfScore() >= 11) {
+				maxStrCap2 -= 10;
+				maxTouCap2 -= 15;
+				maxSpeCap2 += 80;
+				maxIntCap2 += 80;
+				maxWisCap2 += 60;
+				currentSen += 30;
 			}
 			if (woodElfScore() >= 22) {
 				if (woodElfScore() >= 31) {
@@ -12922,28 +12479,22 @@ use namespace CoC;
 				maxWisCap2 -= 30;
 				currentSen += 50;
 			}
-			if (frostWyrmScore() >= 10) {
-				if (frostWyrmScore() >= 29) {
-					maxStrCap2 += 200;
+			if (frostWyrmScore() >= 18) {
+				if (frostWyrmScore() >= 26) {
+					maxStrCap2 += 180;
 					maxSpeCap2 += 90;
-					maxTouCap2 += 160;
-					maxIntCap2 -= 90;
-					maxLibCap2 += 75;
-				} else if (frostWyrmScore() >= 20) {
-					maxStrCap2 += 140;
-					maxSpeCap2 += 75;
-					maxTouCap2 += 125;
+					maxTouCap2 += 150;
+					maxIntCap2 -= 100;
+					maxLibCap2 += 70;
+				} else {
+					maxStrCap2 += 130;
+					maxSpeCap2 += 70;
+					maxTouCap2 += 110;
 					maxIntCap2 -= 90;
 					maxLibCap2 += 50;
-				} else {
-					maxStrCap2 += 90;
-					maxSpeCap2 += 60;
-					maxTouCap2 += 60;
-					maxIntCap2 -= 90;
-					maxLibCap2 += 30;
 				}
 			}
-			if (orcScore() >= 5) {
+			if (orcScore() >= 11) {
 				/*if (orcScore() >= 12 && tailType == Tail.NONE) {
 					maxStrCap2 += 130;
 					maxTouCap2 += 30;
@@ -12951,84 +12502,61 @@ use namespace CoC;
 					maxIntCap2 -= 30;
 					maxLibCap2 += 25;
 				}
-				else */if (orcScore() >= 11) {
+				else {*/
 					maxStrCap2 += 130;
 					maxTouCap2 += 30;
 					maxSpeCap2 += 10;
 					maxIntCap2 -= 30;
 					maxLibCap2 += 25;
-				} else {
-					maxStrCap2 += 60;
-					maxTouCap2 += 15;
-					maxSpeCap2 += 5;
-					maxIntCap2 -= 15;
-					maxLibCap2 += 10;
-				}
+				//}
 			}//+10/10-20
-			if (raijuScore() >= 5) {
+			if (raijuScore() >= 10) {
 				if (raijuScore() >= 20) {
 					maxSpeCap2 += 150;
 					maxIntCap2 += 50;
 					maxLibCap2 += 160;
 					currentSen += 60;
-				} else if (raijuScore() >= 10) {
+				} else {
 					maxSpeCap2 += 70;
 					maxIntCap2 += 50;
 					maxLibCap2 += 80;
 					currentSen += 50;
-				} else {
-					maxSpeCap2 += 35;
-					maxIntCap2 += 25;
-					maxLibCap2 += 40;
-					currentSen += 25;
 				}
 			}//+10/10-20
-			if (thunderbirdScore() >= 12) {
+			if (thunderbirdScore() >= 16) {
 				if (thunderbirdScore() >= 21) {
 					maxTouCap2 -= 25;
 					maxSpeCap2 += 155;
 					maxLibCap2 += 185;
-				} else if (thunderbirdScore() >= 16) {
+				} else {
 					maxTouCap2 -= 20;
 					maxSpeCap2 += 120;
 					maxLibCap2 += 140;
-				} else {
-					maxTouCap2 -= 15;
-					maxSpeCap2 += 95;
-					maxLibCap2 += 100;
 				}
 			}//+10/10-20
-			if (angelScore() >= 5) {
+			if (angelScore() >= 11) {
 				/*if (angelScore() >= 16 && hasPerk(PerkLib.Phylactery)) {
 					maxStrCap2 += 40;
 					maxTouCap2 += 60;
 					maxWisCap2 += 140;
-				} else */if (angelScore() >= 11) {
+				} else {*/
 					maxStrCap2 += 30;
 					maxTouCap2 += 35;
 					maxWisCap2 += 100;
-				} else {
-					maxStrCap2 += 15;
-					maxTouCap2 += 15;
-					maxWisCap2 += 45;
-				}
+				//}
 			}//+60/50-60
-			if (demonScore() >= 5) {
-				if (demonScore() >= 16 && hasPerk(PerkLib.Phylactery)) {
+			if (demonScore() >= 11) {
+				if (demonScore() >= 16 && hasPerk(PerkLib.Soulless)) {
 					maxSpeCap2 += 40;
 					maxIntCap2 += 60;
 					maxLibCap2 += 140;
-				} else if (demonScore() >= 11) {
+				} else {
 					maxSpeCap2 += 30;
 					maxIntCap2 += 35;
 					maxLibCap2 += 100;
-				} else {
-					maxSpeCap2 += 15;
-					maxIntCap2 += 15;
-					maxLibCap2 += 45;
 				}
 			}//+60/50-60
-			if (devilkinScore() >= 7) {
+			if (devilkinScore() >= 11) {
 				if (devilkinScore() >= 16 && hasPerk(PerkLib.Phylactery)) {
 					if (devilkinScore() >= 21) {
 						maxStrCap2 += 95;
@@ -13043,18 +12571,12 @@ use namespace CoC;
 						maxLibCap2 += 100;
 						currentSen += 40;
 					}
-				} else if (devilkinScore() >= 11) {
+				} else {
 					maxStrCap2 += 55;
 					maxSpeCap2 -= 20;
 					maxIntCap2 += 80;
 					maxLibCap2 += 65;
 					currentSen += 15;
-				} else {
-					maxStrCap2 += 35;
-					maxSpeCap2 -= 10;
-					maxIntCap2 += 50;
-					maxLibCap2 += 40;
-					currentSen += 10;
 				}
 			}//+60/50-60
 			if (rhinoScore() >= 4) {
@@ -13067,89 +12589,54 @@ use namespace CoC;
 				maxStrCap2 += 5;
 				maxSpeCap2 += 5;
 			}//+10/10-20
-			if (manticoreScore() >= 7) {
+			if (manticoreScore() >= 15) {
 				if (manticoreScore() >= 22) {
 					maxSpeCap2 += 160;
 					maxIntCap2 += 90;
 					maxLibCap2 += 140;
 					currentSen += 60;
-				} else if (manticoreScore() >= 15) {
+				} else {
 					maxSpeCap2 += 110;
 					maxIntCap2 += 70;
 					maxLibCap2 += 90;
 					currentSen += 45;
-				} else {
-					maxSpeCap2 += 65;
-					maxIntCap2 += 30;
-					maxLibCap2 += 40;
-					currentSen += 30;
 				}
 			}//+60/50-60
-			if (redpandaScore() >= 4) {
-				if (redpandaScore() >= 8) {
-					maxStrCap2 += 15;
-					maxSpeCap2 += 75;
-					maxIntCap2 += 30;
-				} else {
-					maxSpeCap2 += 45;
-					maxIntCap2 += 15;
-				}
+			if (redpandaScore() >= 8) {
+				maxStrCap2 += 15;
+				maxSpeCap2 += 75;
+				maxIntCap2 += 30;
 			}
-			if (bearpandaScore() >= 5) {
-				if (bearpandaScore() >= 10) {
-					maxStrCap2 += 100;
-					maxTouCap2 += 70;
-					maxIntCap2 -= 20;
-				} else {
-					maxStrCap2 += 50;
-					maxTouCap2 += 30;
-					maxIntCap2 -= 5;
-				}
+			if (bearpandaScore() >= 10) {
+				maxStrCap2 += 100;
+				maxTouCap2 += 70;
+				maxIntCap2 -= 20;
 			}
-			if (pigScore() >= 5) {
+			if (pigScore() >= 10) {
 				if (pigScore() >= 15) {
 					maxStrCap2 += 125;
 					maxTouCap2 += 125;
 					maxSpeCap2 -= 15;
 					maxIntCap2 -= 10;
-				} else if (pigScore() >= 10) {
+				} else {
 					maxStrCap2 += 60;
 					maxTouCap2 += 120;
 					maxSpeCap2 -= 15;
 					maxIntCap2 -= 10;
 					maxWisCap2 -= 5;
-				} else {
-					maxStrCap2 += 30;
-					maxTouCap2 += 60;
-					maxSpeCap2 -= 10;
-					maxIntCap2 -= 5;
 				}
 			}
-			if (trollScore() >= 5) {
-				if (trollScore() >= 10) {//150
-					maxStrCap2 += 50;
-					maxSpeCap2 += 70;
-					maxIntCap2 += 50;
-					maxWisCap2 += 100;
-				} else {//75
-					maxStrCap2 += 25;
-					maxSpeCap2 += 35;
-					maxIntCap2 += 25;
-					maxWisCap2 += 50;
-				}
+			if (trollScore() >= 10) {
+				maxStrCap2 += 30;
+				maxSpeCap2 += 40;
+				maxIntCap2 += 30;
+				maxWisCap2 += 50;
 			}
-			if (mantisScore() >= 6) {
-				if (mantisScore() >= 12) {
-					maxStrCap2 -= 40;
-					maxTouCap2 += 60;
-					maxSpeCap2 += 140;
-					maxIntCap2 += 20;
-				} else {
-					maxStrCap2 -= 20;
-					maxTouCap2 += 30;
-					maxSpeCap2 += 70;
-					maxIntCap2 += 10;
-				}
+			if (mantisScore() >= 12) {
+				maxStrCap2 -= 40;
+				maxTouCap2 += 60;
+				maxSpeCap2 += 140;
+				maxIntCap2 += 20;
 			}//+35/30-40
 			if (hasPerk(MutationsLib.MantislikeAgility)) {
 				if (hasCoatOfType(Skin.CHITIN) && hasPerk(PerkLib.ThickSkin)) maxSpeCap2 += 15;
@@ -13166,34 +12653,23 @@ use namespace CoC;
 				if ((skinType == Skin.SCALES && hasPerk(PerkLib.ThickSkin)) || hasCoatOfType(Skin.CHITIN)) maxSpeCap2 += 30;
 				if (skinType == Skin.SCALES || hasPerk(PerkLib.ThickSkin)) maxSpeCap2 += 15;
 			}
-			if (salamanderScore() >= 4) {
+			if (salamanderScore() >= 7) {
 				if (salamanderScore() >= 16) {
 					maxStrCap2 += 105;
 					maxTouCap2 += 80;
 					maxLibCap2 += 130;
 					currentSen += 75;
-				} else if (salamanderScore() >= 7) {
+				} else {
 					maxStrCap2 += 25;
 					maxTouCap2 += 25;
 					maxLibCap2 += 40;
-				} else {
-					maxStrCap2 += 15;
-					maxTouCap2 += 15;
-					maxLibCap2 += 30;
 				}
 			}//+15/10-20
-			if (cavewyrmScore() >= 5) {
-				if (cavewyrmScore() >= 10) {
-					maxStrCap2 += 60;
-					maxTouCap2 += 70;
-					maxWisCap2 -= 30;
-					maxLibCap2 += 50;
-				} else {
-					maxStrCap2 += 30;
-					maxTouCap2 += 35;
-					maxWisCap2 -= 15;
-					maxLibCap2 += 25;
-				}
+			if (cavewyrmScore() >= 10) {
+				maxStrCap2 += 60;
+				maxTouCap2 += 70;
+				maxWisCap2 -= 30;
+				maxLibCap2 += 50;
 			}//+15/10-20
 			if (unicornScore() >= 8) {
 				if (unicornScore() >= 27) {
@@ -13250,7 +12726,7 @@ use namespace CoC;
 					maxLibCap2 += 40;
 				}
 			}//+30/30-40
-			if (scyllaScore() >= 4 && (isScylla() || isKraken())) {
+			if (scyllaScore() >= 7 && (isScylla() || isKraken())) {
 				if (scyllaScore() >= 12 && isKraken()) {
 					if (scyllaScore() >= 17) {
 						maxStrCap2 += 135;
@@ -13260,12 +12736,9 @@ use namespace CoC;
 						maxStrCap2 += 120;
 						maxIntCap2 += 60;
 					}
-				} else if (scyllaScore() >= 7) {
+				} else {
 					maxStrCap2 += 65;
 					maxIntCap2 += 40;
-				} else {
-					maxStrCap2 += 40;
-					maxIntCap2 += 20;
 				}
 			}//+30/30-40
 			if (plantScore() >= 4) {
@@ -13314,25 +12787,19 @@ use namespace CoC;
 				maxWisCap2 -= 40;
 				maxLibCap2 += 95;
 			}//+20/10-20
-			if (yetiScore() >= 7) {
+			if (yetiScore() >= 14) {
 				if (yetiScore() >= 17) {
 					maxStrCap2 += 130;
 					maxTouCap2 += 100;
 					maxSpeCap2 += 65;
 					maxIntCap2 -= 90;
 					maxLibCap2 += 50;
-				} else if (yetiScore() >= 14) {
+				} else {
 					maxStrCap2 += 100;
 					maxTouCap2 += 80;
 					maxSpeCap2 += 50;
 					maxIntCap2 -= 70;
 					maxLibCap2 += 50;
-				} else {
-					maxStrCap2 += 50;
-					maxTouCap2 += 40;
-					maxSpeCap2 += 25;
-					maxIntCap2 -= 35;
-					maxLibCap2 += 25;
 				}
 			}
 			if (yukiOnnaScore() >= 14) {
@@ -13358,22 +12825,17 @@ use namespace CoC;
 					currentSen += 50;
 				}
 			}
-			if (melkieScore() >= 8) {
+			if (melkieScore() >= 18) {
 				if (melkieScore() >= 21) {
 					maxSpeCap2 += 140;
 					maxIntCap2 += 140;
 					maxLibCap2 += 100;
 					currentSen += 65;
-				} else if (melkieScore() >= 18) {
+				} else {
 					maxSpeCap2 += 120;
 					maxIntCap2 += 120;
 					maxLibCap2 += 80;
 					currentSen += 50;
-				} else {
-					maxSpeCap2 += 55;
-					maxIntCap2 += 55;
-					maxLibCap2 += 35;
-					currentSen += 25;
 				}
 			}
 
@@ -13472,15 +12934,10 @@ use namespace CoC;
 					maxSpeCap2 += 70;
 				}
 			}//+30/30-40
-			if (nagaScore() >= 4) {
-				if (nagaScore() >= 8) {
-					maxStrCap2 += 40;
-					maxTouCap2 += 20;
-					maxSpeCap2 += 60;
-				} else {
-					maxStrCap2 += 20;
-					maxSpeCap2 += 40;
-				}
+			if (nagaScore() >= 8) {
+				maxStrCap2 += 40;
+				maxTouCap2 += 20;
+				maxSpeCap2 += 60;
 			}
 			if (apophisScore() >= 23) {
 				if (apophisScore() >= 26) {
@@ -13499,14 +12956,9 @@ use namespace CoC;
 				maxTouCap2 += 80;
 				maxSpeCap2 += 40;
 			}//+40/30-40
-			if (centipedeScore() >= 4) {
-				if (centipedeScore() >= 8) {
-					maxStrCap2 += 60;
-					maxSpeCap2 += 80;
-				} else {
-					maxStrCap2 += 30;
-					maxSpeCap2 += 40;
-				}
+			if (centipedeScore() >= 8) {
+				maxStrCap2 += 60;
+				maxSpeCap2 += 80;
 			}
 			if (oomukadeScore() >= 15) {
 				if (oomukadeScore() >= 18) {
@@ -13523,16 +12975,10 @@ use namespace CoC;
 					maxWisCap2 -= 50;
 				}
 			}
-			if (avianScore() >= 4) {
-				if (avianScore() >= 9) {
-					maxStrCap2 += 30;
-					maxSpeCap2 += 75;
-					maxIntCap2 += 30;
-				} else {
-					maxStrCap2 += 15;
-					maxSpeCap2 += 30;
-					maxIntCap2 += 15;
-				}
+			if (avianScore() >= 9) {
+				maxStrCap2 += 30;
+				maxSpeCap2 += 75;
+				maxIntCap2 += 30;
 			}
 			if (isNaga()) {
 				if (lowerBody == LowerBody.FROSTWYRM) {
@@ -13572,32 +13018,23 @@ use namespace CoC;
 				maxTouCap2 += 15;
 				maxLibCap2 += 15;
 			}
-			if (batScore() >= 6) {
-				var mod:int = batScore() >= 10 ? 35 : 20;
-				maxStrCap2 += mod;
-				maxSpeCap2 += mod;
-				maxIntCap2 += mod;
-				maxLibCap2 += (10 + mod);
+			if (batScore() >= 10) {
+				maxStrCap2 += 35;
+				maxSpeCap2 += 35;
+				maxIntCap2 += 35;
+				maxLibCap2 += 45;
 			}
-			if (vampireScore() >= 6) {
+			if (vampireScore() >= 10) {
 				if (vampireScore() >= 20) {
-					mod = 70;
-					maxStrCap2 += mod;
-					maxSpeCap2 += mod;
-					maxIntCap2 += mod;
-					maxLibCap2 += (20 + mod);
-				} else if (vampireScore() >= 10) {
-					mod = 35;
-					maxStrCap2 += mod;
-					maxSpeCap2 += mod;
-					maxIntCap2 += mod;
-					maxLibCap2 += (10 + mod);
+					maxStrCap2 += 70;
+					maxSpeCap2 += 70;
+					maxIntCap2 += 70;
+					maxLibCap2 += 90;
 				} else {
-					mod = 20;
-					maxStrCap2 += mod;
-					maxSpeCap2 += mod;
-					maxIntCap2 += mod;
-					maxLibCap2 += (10 + mod);
+					maxStrCap2 += 35;
+					maxSpeCap2 += 35;
+					maxIntCap2 += 35;
+					maxLibCap2 += 45;
 				}
 			}
 			if (internalChimeraScore() >= 1 && !hasPerk(PerkLib.RacialParagon)) {
@@ -15819,14 +15256,11 @@ use namespace CoC;
 			}
 			if (gorgonScore() >= 11) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (gorgonScore() >= 17) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (horseScore() >= 4) max += (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (horseScore() >= 7) max += (35 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (manticoreScore() >= 6) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (manticoreScore() >= 15) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (manticoreScore() >= 22) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (horseScore() >= 7) max += (70 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (manticoreScore() >= 15) max += (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (manticoreScore() >= 22) max += (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (rhinoScore() >= 4) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (scyllaScore() >= 4) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (scyllaScore() >= 7) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (scyllaScore() >= 7) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (scyllaScore() >= 12) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (unicornScore() >= 12) max += (250 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.ElementalBondFlesh) && statusEffectv1(StatusEffects.SummonedElementals) >= 2) max += maxHP_ElementalBondFleshMulti() * statusEffectv1(StatusEffects.SummonedElementals);
@@ -15834,18 +15268,15 @@ use namespace CoC;
 		}
 		protected override function maxLust_base():Number {
 			var max:Number = super.maxLust_base();
-			if (cowScore() >= 4) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (cowScore() >= 10) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (devilkinScore() >= 7) max += (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (devilkinScore() >= 11) max += (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (cowScore() >= 10) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (devilkinScore() >= 11) max += (150 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (devilkinScore() >= 16) max += (80 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (devilkinScore() >= 21) max += (90 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (dragonScore() >= 24) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (dragonScore() >= 32) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (minotaurScore() >= 4) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (minotaurScore() >= 9) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (minotaurScore() >= 10) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (phoenixScore() >= 5) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (salamanderScore() >= 4) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+			if (salamanderScore() >= 7) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (sharkScore() >= 9 && vaginas.length > 0 && cocks.length > 0) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.ElementalBondUrges) && statusEffectv1(StatusEffects.SummonedElementals) >= 2) max += maxLust_ElementalBondUrgesMulti() * statusEffectv1(StatusEffects.SummonedElementals);
 			if (hasPerk(MutationsLib.LactaBovinaOvaries)) max += (10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
@@ -16055,14 +15486,13 @@ use namespace CoC;
 			if (dlust != 0){
 				raijuSuperchargedCheck();
 			}
-			if (raijuScore() < 7 && statStore.hasBuff('Supercharged')) statStore.removeBuffs('Supercharged');
-
+			if (raijuScore() < 10 && statStore.hasBuff('Supercharged')) statStore.removeBuffs('Supercharged');
 			EngineCore.showUpDown();
 			EngineCore.statScreenRefresh();
 		}
 
 		public function raijuSuperchargedCheck():void{
-			if (raijuScore() >= 7 && lust100>=75){
+			if (raijuScore() >= 10 && lust100>=75){
 				if (!statStore.hasBuff("Supercharged")){
 					var buff:Number = 1;
 					if (hasPerk(MutationsLib.RaijuCathodeEvolved)) buff *= 2

@@ -106,6 +106,8 @@ package classes.Scenes
 			outputText("-New rare ascension perk -> Ascension: Bloodline Heritage. Req. Ascension: Hero's Legacy and be at fourth ascension. It costs 75 asc points and will give 1 perk point, 1 super perk point and 5 stat points (scalable with NG tiers, for super perk it's reduced by 3) at the start of each new game. Also would increase racial score bonus from any descendant's/bloodline perks by 2.\n");
 			outputText("-New Ascension perk: One Race To Rule Them All. Your racial paragon boost is increased. +(2x rank) to each stat per level and increase racial skill power by (25x rank)%. Max Rank: 5.\n");
 			outputText("-New Ascension perk: Advanced Training. Your gain as many as perk rank more stat points at each level up. Max Rank: 5.\n");
+			outputText("-New Ascension perk: Killing Intent. It works same way like Spiritual Enlightenment but affecting melee physical attacks multiplier instead of soulskills. Max Rank: 30.\n");
+			outputText("-New Ascension perk: Bloodlust. It works same way like Spiritual Enlightenment but affecting range physical attacks multiplier instead of soulskills. Max Rank: 30.\n");
 			outputText("-New melee weapon (by Ormael): Amphyst/Ruby/Sapphire/Topaz Staff - buyable in Tel'Adre Tower. 2 atk, costs 240 gems, increase matching type of element attacks (sapphire > ice and etc.) by 40%, Wizard's Focus (20%), staff type weapon.\n");
 			outputText("-New melee weapon (by Ormael): Dual Katana - dropped by corrupted flesh golems. Cost 1200 gems. Base atk is 15. It's Dual Large weapon belonging to dueling sword type.\n");
 			outputText("-New melee weapon (by Ormael): Dual Lance - dropped by corrupted flesh golems. Cost 960 gems. Base atk is 12. It's Dual Normal weapon belonging to spear type. When used in Charge special would hit twice.\n");
@@ -119,7 +121,7 @@ package classes.Scenes
 			outputText("-New melee weapon (by Ormael): Storm Ruler - buyable at Kaiba shop in Tel'Adre. Cost 4800 gems. Base atk is 14. It's large sized weapon belonging to mace/hammer type with 10% chance to trigger stun effect. It deal lightning type of damage and 50% more damage to huge or larger enemies. Additionally have Body's Cultivator (20%) perk.\n");
 			outputText("-New melee weapon (by Lady Aeducan): Chaoseater - obtainable by giving big fucking two-handed sword to Corrupted Celess to corrupt. Increased by 5 base dmg, added scaling based on corruption (up to 50), deal bonus dmg to pure enemies, devour with attack a bit of enemy wrath and mana giving 50% of stolen amount to user and increase (sword) weapon mastery gains by 200%.\n");
 			outputText("-New melee weapon (by Lady Aeducan): Armageddon Blade - obtainable by giving big fucking two-handed sword to Pure Celess to purify. Increased by 5 base dmg, added scaling based on purity (up to 50), deal bonus dmg to corrupted enemies, each attack heal user by 2% of max HP and increase attacks dmg by ~25%.\n");
-			outputText("-New melee weapon (by Lady Aeducan): Moonlight Greatsword - buyable at Kaiba shop. Cost 3000 gems. Base atk is 25, it's Large type weapon, dealing magical dmg instead of physical (scale off int instead of str), using charge weapon will give 2x larger bonus and can use range attack in case there is no range weapon equipped (range attacks giving small amount of sword mastery exp).\n");
+			outputText("-New melee weapon (by Lady Aeducan): Moonlight Greatsword - buyable at Kaiba shop. Cost 3000 gems. Base atk is 25, it's Large sword type weapon, dealing magical dmg instead of physical (scale off int instead of str), using charge weapon will give 2x larger bonus and can use range attack in case there is no range weapon equipped (range attacks giving small amount of sword mastery exp).\n");
 			outputText("-New range weapon (by Lady Aeducan): Harkonnen - buyable at Tripxi shop in Tel'Adre. Cost 3,230 gems. Base atk is 160 and ammo clip size 1. Lowering range accuracy by 10%. It's 2H Firearm type range weapon dealing true damage.\n");
 			outputText("-New armor (by Ormael): Green Diving Suit - buyable at Pinchou shop. Cost 1800 gems, 25 armor, 5 magic resistance.\n");
 			outputText("-New armor (by Liadri): Battle maiden armor - obtainable by giving Lusty Maiden Armor to Pure Celess to purify. Increase armor by an additional 30 but grant no armor if the character is not virgin. No longer grant sex scenes or slutty seduction but reduce lust by 2% each round.\n");
@@ -146,7 +148,7 @@ package classes.Scenes
 			outputText("-Added minor QoL option for minion using PC's to let those minions that can attack on their own (wisp or using simplified turn setup) even when PC itself is stunned or under fear effect. Cuz... well they had orders and pc been stunned not magicaly cause them to not able to follow orginal order to keep smashing enemy ^^\n");
 			outputText("-Diana and Luna forced partial/full body TF events won't proc if PC got TF immunity. As side effect it may cause their storyline progress to freeze.\n");
 			outputText("-Purity Blessing, Cold Blooded, Hot Blooded, Nymphomania perks, Omnibus' Gift, Luststick Adapted, Lycanthropy, Bimbo Body, Bro Body, Futa Form, Pierced: Crimstone, Pierced: Icestone, Pent Up effects for rise/lower minimum lust been changed from flat values to % ones.\n");
-			outputText("-Bimbo Champagne, Blessing of Divine Agency - Fera, Anemone Arousal, Infested, Harpy Lipstick, Drunken Power, Shouldra that been left unsatisfied too long, cumOmeter (manticore), MilkOMeter (displacer beast), having (spider) eggs effects and lusty maiden's armor, tentacled bark armor also have minimumm lust increase turtned into % values from flat ones.\n");
+			outputText("-Bimbo Champagne, Blessing of Divine Agency - Fera, Anemone Arousal, Infested, Harpy Lipstick, Drunken Power, Shouldra that been left unsatisfied too long, cumOmeter (manticore), MilkOMeter (displacer beast), having (spider) eggs effects and lusty maiden's armor, tentacled bark armor also have minimumm lust increase turned into % values from flat ones.\n");
 			outputText("-In Journey to the east appeared next weird person. Founded only at specific hours new npc can help limited time for any PC that feel too bloated with useless perk points (after getting all interesting stuff) and deeply lacking spare stat points. But be warned that this literal she-devil service not come cheap either... but what is few stones for such rich adventurer as your PC, right?\n");
 			outputText("-Some of minimum lust increase perks have lowered by half % values. Also manticore/displacer based 'hunger' will have % increase to min lust halfed.\n");
 			outputText("-Displacer feeding special can be now used after PC used Pounce on enemy and won't take combat turn then letting to pick one more action. (still can proc during Stranddle)\n");
@@ -182,8 +184,6 @@ package classes.Scenes
 			outputText("-Improved Adrenaline perk increase now wrath generation by 2% not 1%.\n");
 			outputText("-Combat code for melee multiattacks been refined to cause less lag on builds that use large amount (~16+) attacks per turn. Also attacking with melee weapon when under winter claw / flame blade or similar buffs would deal elemental damage instead of physical.\n");
 			outputText("-Added modifier to melee and range attacks similar to spell power or soulskill power. That include some of physical specials too.\n");
-			outputText("-New Ascension perk: Killing Intent. It works same way like Spiritual Enlightenment but affecting melee physical attacks multiplier instead of soulskills. Max Rank: 30.\n");
-			outputText("-New Ascension perk: Bloodlust. It works same way like Spiritual Enlightenment but affecting range physical attacks multiplier instead of soulskills. Max Rank: 30.\n");
 			outputText("-Spiritual Enlightenment & Mysticality ascension perks gained 10 more ranks.\n");
 			outputText("-Listed job perks would provide bonus to melee physical attacks multiplier: Warrior (+10%); Brawler / Swordsman / Dervish / Rogue / Monk / Beast Warrior (+20%); Berserker (+80%); Spell-Knight / Tempest / Soul Art Master (+40%)\n");
 			outputText("-Listed job perks would provide bonus to range physical attacks multiplier: Ranger (+10%); Hunter / Gunslinger (+20%); Arcane Archer (+40%)\n");
@@ -234,9 +234,21 @@ package classes.Scenes
 			outputText("-Reworked Sand Witch and Naga scene menus, adding more buttons instead of random routers and hidden checks. Added corruptionTolerance to their checks. Adapted Naga (and SandWitch) genderless scenes for non-genderless PCs. (Svalkash)\n");
 			outputText("-Grey Ink/Abyssal Ink would now be able to give Ink Spray perk too.\n");
 			outputText("-Bit increased Tentacle beast enc chances and lowered truffle find chance in forest.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New melee weapon (by Canadian Snas): The Phalluspear - craftable by Konstantine after PC have Tyrantia in camp and gather needed materials. Cost 2800 gems. Base atk is 70, it's Massive spear type weapon. Can toggle between dealing 25% and 100% as lust dmg.\n");
+			outputText("-Raccoon-morph min. score for bonuses increased to 8 and stat boosts to 90% to Spe racial multi, 30% to Int racial multi.\n");
+			outputText("-Wolf and Winter wolf min. scores was rised to 8 and 10 with matching inc to stat bonuses (+50% to Str racial multi, +30% to Tou racial multi, +50% to Spe racial multi, -10% to Int racial multi / +65% to Str racial multi, +40% to Tou racial multi, +55% to Spe racial multi, -10% to Int racial multi)\n");
+			outputText("-Lizard morphs will recieve +100 fatigue as race bonus (up from +30).\n");
+			outputText("-Disabled purified Marble corruption flipouts. If she hass already left, she will return. (Svalkash)\n");
+			outputText("-EbonLabyrinth rework (Svalkash):\n");
+			outputText("1. Added enemy progression after LVL300. Bosses are random.\n");
+			outputText("2. After clearing the dungeon once, you can manually increase/decrease enemy level to adjust your difficulty. But the further you go, the higher the minimum level will be!\n");
+			outputText("3. Adjusted treasure rewards to scale with enemy levels.\n");
+			outputText("4. Adjusted gem drops from enemies. (increased)\n");
+			outputText("5. Slightly decreased DarkSlimeEmpress' HP scaling (it was MUCH faster than Lust scaling)\n");
+			outputText("6. Increased EL rewards scaling to match challenge at the late floors. Now it's weak exponential, and for high-level PCs it's more rewarding than kicking golems around in the crag/rift.\n");
+			outputText("-Aside few cases all the races half-stages was removed. You now either is some race or not, no half-race stage.\n");
+			outputText("-Soul Sense ??? submenu helps to find some otherwise hard to repeadly meet npc's before they come to camp.\n");
+			outputText("-Minor text fixes, Excellia racial inconsistencies. (Svalkash)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -261,17 +273,11 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
 			outputText("-Fixed Bugs: One of Ingnam Tavern food options having wrong price listed on menu, unique sex scenes accesable during Druid fusion, Wisp potentialy softlocking Mino King fight, selfsucking in masturbation menu restoring max 100 hunger, Swift Casting not usable when having Giant's Grip and Large weapon, White or Black magic buffs autocastable when having perk that disable use of white/black magic, ");
 			outputText("putting B. Sword after picking Ecalibur disabling option to pick sword at Temple, all 3 Hall of Blade soulskill variants dealing phys not magical dmg, Lightning Claw lowering phys dmg when used as part of feral style attack, using goblin Cum Reservoir not empting it out, Yuki Onna Transform scene not making sure to give proper genitalia setup, Archer's Stamina perks not giving fatigue related to ");
 			outputText("current Speed value, Half-Frost Wyrm or Half Spider-morph racial bonus been attained super easy, Mysterious Seed not causing for misc items menu appear as inventory submenu, unable to add arcane circuits to 5th arcane circle, doppleganger fight won't drag unnecessary due to getting messly 1k lust after 5th round in fight, Gazer Eyes mutation not keeping True seeing perk, Magical Eye Drops as item ");
 			outputText("find in Caves instead of Eye Drops, raiju tf removing/humanizing raiju paws, picking no elemental during minions turn skipping many following up phases of the turn, epic/legendary/mythical perks for stats not affecting monsters, harpy wings not setting shark score to 0, Siren been excluded form races list for appearance screen, Minor Minerva and parsertag, Encaps. pod multicockdescript, ");
-			outputText("Elf hair mutation, holiday events appearing in Ingnam/prison\n");/*ostatni punkt changelogu
+			outputText("Elf hair mutation, holiday events appearing in Ingnam/prison, Minotaur-Dormammu bug for all damage sources\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD
@@ -570,7 +576,7 @@ package classes.Scenes
 			outputText("-New event perk: Affinity (Ignis). Gained by fusing with epic fire elemental. Effects: +100% fire damage dealt +100% ice damage taken, takes massive damage (5% max HP) per round while underwater.\n");
 			outputText("-New event perk: Affinity (Sylph). Gained by fusing with epic air elemental. Effects: When outdoors you are considered to be permanently flying, allowing you to use great dive and flying skills at will. Useless underwater.\n");
 			outputText("-New event perk: Affinity (Undine). Gained by fusing with epic water elemental. Effects: Can breath underwater and gain +50 to speed and spell power while underwater. Weak to electricity (-100% resistance).\n");
-			outputText("-New super perk: Munchkin@Gym. Gained by having merely 1 super perk, having 'Deity Job: Munchkin' super munchkin perk, lvl 105+. Effect: +25% to multi Str/Tou/Spe/Inte/Wis/Lib multi, +100 to Sens, increase by 5% caps for mutagen, alchemic, knowledge multi.\n");
+			outputText("-New super perk: Munchkin@Gym. Gained by having merely 1 super perk, having 'Deity Job: Munchkin' super munchkin perk, lvl 105+. Effect: +25% to Str/Tou/Spe/Inte/Wis/Lib multi, +100 to Sens, increase by 5% caps for mutagen, alchemic, knowledge multi.\n");
 			outputText("-New head jewelery (by Liadri): Jiangshi Curse Tag - Given after PC became Jiangshi. Cost 400 gems. +20% to Strength, Toughness, Libido and +80 Sensitivity.\n");
 			outputText("-New enemies: Ice/Lightning/Darkness Elementals. Elementals are lvl 26/29/32/35 and could be found in 3rd strata of River Dungeon.\n");
 			outputText("-New camp structure: Arcane Circle Elemental Energy Conduits Upgrade. Req. at least 1st arcane circle, 3 stones, 3 elemental shards, 150 mana. PC adds basic elemental energy conduit to arcane circle allowing to convert elemental shards into energy stored directly into circle(s). After this there are next upgrade stages that futher expand cap of stopred energy. It can be used to rank up epic tier elementals.\n");

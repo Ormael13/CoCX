@@ -61,28 +61,18 @@ public class MinotaurKing extends Monster
 			else
 			{
 				var str:String = "Still standing between you and the Demon Queen, the Minotaur King is breathing heavily. His cock is slathered with the residue of his own potent orgasm. His immense, 14 foot tall form hunches slightly as he stares at you, one hand still clutching to his axe. Driving him back to his peak would undoubtedly push him even beyond his considerable endurance. The only problem is that alluring <i>aroma</i> that surrounds him, suffusing the air with the scent of sweaty bedroom romps and sizzling pleasure. You better finish him quick.";
-				
-				// I have no idea what this variation is keyed from 9999
-				if (lust < 40)
-				{
-					str += "\n\nBeneath his legs is a favorite slut, Excellia by name. She stays just out of his way, showcasing the curvaceous nature of her figure and the ripeness of her sex, occasionally running her fingers across a strange tattoo laid upon her belly. You’d best keep your attentions on the fight ahead.";
-				}
-				else if (lust < 80)
-				{
-					str += "\n\nBeneath his legs is the fallen form of his favored slut, Excellia. He steps carefully around the insensate cow-girl but never lets her out of arm’s reach, his eyes flicking to the moistness of her sex from time to time.";
-				}
-				else
-				{
-					str += "\n\nBeneath his legs is the creampied form of his favored slut, Excellia. Milk-white cum puddles between her spread legs, matched only by the sheen of leaking lactose on her lewdly-jutting nipples. Her lord never lets her fallen form out of arm’s reach, just in case he needs a drink.";
-				}
-				
+				//Excellia description
+                if (!player.hasStatusEffect(StatusEffects.MinoKing)) { 
+                    if (lust < 40)
+                        str += "\n\nBeneath his legs is a favorite slut, Excellia by name. She stays just out of his way, showcasing the curvaceous nature of her figure and the ripeness of her sex, occasionally running her fingers across a strange tattoo laid upon her belly. You’d best keep your attentions on the fight ahead.";
+                    else if (lust < 80)
+                        str += "\n\nBeneath his legs is the fallen form of his favored slut, Excellia. He steps carefully around the insensate cow-girl but never lets her out of arm’s reach, his eyes flicking to the moistness of her sex from time to time.";
+                    else
+                        str += "\n\nBeneath his legs is the creampied form of his favored slut, Excellia. Milk-white cum puddles between her spread legs, matched only by the sheen of leaking lactose on her lewdly-jutting nipples. Her lord never lets her fallen form out of arm’s reach, just in case he needs a drink.";
+                }
 				// milkdrinks
-				if (_milkDrinks == 0)
-				{
-				}
-				else if (_milkDrinks == 1) str += "\n\n<b>The King has been glancing appreciatively in your direction ever since he took a drink from his slave-slut’s nipples. Perhaps he’s more vulnerable to baser needs...</b>";
-				else str += "\n\n<b>The King’s nostrils flare as he stares at you. It’s clear that with every drink he takes from his slave-slut’s nipples, he becomes more receptive to your advances.</b>";
-				
+				if (_milkDrinks == 1) str += "\n\n<b>The King has been glancing appreciatively in your direction ever since he took a drink from his slave-slut’s nipples. Perhaps he’s more vulnerable to baser needs...</b>";
+				else if (_milkDrinks > 1) str += "\n\n<b>The King’s nostrils flare as he stares at you. It’s clear that with every drink he takes from his slave-slut’s nipples, he becomes more receptive to your advances.</b>";
 				return str;
 			}
 		}
@@ -91,20 +81,22 @@ public class MinotaurKing extends Monster
 		{
 			if (_orgasms == 0 && !hpVictory && !player.hasStatusEffect(StatusEffects.MinoKing)) {
 				lustDump();
-				SceneLib.combat.combatRoundOver();
+                SceneLib.combat.combatMenu(false);
 				return;
 			}
 			if (hpVictory && !player.hasStatusEffect(StatusEffects.MinoKing)) {
 				hpRestore();
 				if (flags[kFLAGS.WILL_O_THE_WISP] == 0) flags[kFLAGS.WILL_O_THE_WISP] = 1;
-				SceneLib.combat.combatRoundOver();
+                SceneLib.combat.combatMenu(false);
 				return;
 			}
-			SceneLib.d3.minotaurKing.theKingIsDeadLongLiveTheKing(hpVictory);
+            player.removeStatusEffect(StatusEffects.MinoKing);
+			SceneLib.d3.minotaurKing.theKingIsDeadLongLiveTheKing();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
+            player.removeStatusEffect(StatusEffects.MinoKing);
 			if (player.isGargoyle()) SceneLib.d3.gargoyleBadEndD3();
 			else SceneLib.d3.minotaurKing.hailToTheKingBaby(hpVictory, pcCameWorms);
 		}
@@ -115,31 +107,27 @@ public class MinotaurKing extends Monster
 		private var _lastRoundStun:Boolean = false;
 		private var _lastSpellCastCount:int;
 		
+		private var atks:Array = [backhand, battleaxe, minoPheromones];
 		override protected function performCombatAction():void
 		{
 			// Attempt dickslap if the player was stunned in the last round
-			if (_lastRoundStun)
-			{
+			if (_lastRoundStun) {
 				_lastRoundStun = false;
 				// If the player is still stunned, use dickslap ohterwise fall through to regular AI.
-				if (player.hasStatusEffect(StatusEffects.Stunned))
-				{
+				if (player.hasStatusEffect(StatusEffects.Stunned)) {
 					dickslap();
 					return;
 				}
 			}
-			if (_lastSpellCastCount != flags[kFLAGS.SPELLS_CAST])
-			{
+            if (!player.hasStatusEffect(StatusEffects.MinoKing) && player.hasCock() && rand(2) == 0) {
+                cowslutTeaseCocks();
+                outputText("\n\n");
+            }
+			if (_lastSpellCastCount != flags[kFLAGS.SPELLS_CAST]) {
 				_lastSpellCastCount = flags[kFLAGS.SPELLS_CAST];
-				if (rand(2) == 0) cowslutTeaseCocks();
 				headbutt();
 			}
-			else
-			{
-				if (rand(2) == 0 && !player.hasStatusEffect(StatusEffects.MinoKing)) cowslutTeaseCocks();
-				var atks:Array = [backhand, battleaxe, minoPheromones];
-				atks[rand(atks.length)]();
-			}
+			else atks[rand(atks.length)]();
 		}
 
 		private function backhand():void
@@ -169,15 +157,12 @@ public class MinotaurKing extends Monster
 		{
 			outputText("<i>\"Settle down,\"</i> the brute growls, moments before attempting to slam his forehead into your own.");
 			var damage:Number = ((str + weaponAttack) / 2) - rand(player.tou);
-			if (damage <= 0 || combatMiss() || player.findPerk(PerkLib.Flexibility) >= 0) {
+			if (damage <= 0 || combatMiss() || player.findPerk(PerkLib.Flexibility) >= 0)
 				outputText(" Luckily, you dodge aside.");
-			}
-			else if (player.findPerk(PerkLib.Evade) >= 0) {
+			else if (player.findPerk(PerkLib.Evade) >= 0)
 				outputText(" Luckily, you evade.");
-			}
-			else if (player.findPerk(PerkLib.Misdirection) >= 0) {
+			else if (player.findPerk(PerkLib.Misdirection) >= 0)
 				outputText(" Luckily, you misdirect his attack.");
-			}
 			else {
 				_lastRoundStun = true;
 				damage = player.takePhysDamage(damage);
@@ -211,11 +196,8 @@ public class MinotaurKing extends Monster
 			outputText("The Minotaur King carries his axe as if it weighed no more than a feather, brandishing it back and forth with such casual movements that you barely register his swing");
 			var damage:Number = (str + weaponAttack) - rand(player.tou);
 			if (damage <= 0 || combatMiss() || player.findPerk(PerkLib.Evade) >= 0 || player.findPerk(PerkLib.Flexibility) >= 0 || player.findPerk(PerkLib.Misdirection) >= 0)
-			{
 				outputText(" in time to avoid it.");
-			}
-			else
-			{
+			else {
 				damage = player.takePhysDamage(damage);
 				outputText(". By the time you notice, it’s too late. ("+damage+")");
 			}
@@ -229,6 +211,7 @@ public class MinotaurKing extends Monster
 			//Full HP restore.
 			outputText("Staggering back, the King wastes no time in appropriating his willing slave, lifting her up to his face as easily as one might heft a stein of fresh-brewed beer. One of her huge tits easily fits against the oversized minotaur’s lips, and you see him noisily gulping down a quick, milky pick-me-up. By the time he finishes, his wounds are closing, but his cock is twitching and leaking pre-cum like water from a sieve.");
 			outputText("\n\n<b>He looks like he’d be easier to arouse. Whatever’s in her milk may restore his wounds, but leave him vulnerable to his animalistic needs.</b>");
+			outputText("\n\n<i>Dealing with the King would be much easier if someone distracted his slut.</i>");
 		}
 		
 		// copypasta I dun even give a fuck ¯\_(ツ)_/¯
@@ -271,33 +254,27 @@ public class MinotaurKing extends Monster
 
 		private function cowslutTeaseCocks():void
 		{
-			if (player.hasCock())
-			{
-				var sel:int = rand(3);
-				if (sel == 0)
-				{
-					outputText("\n\nExcellia crawls over to you while you’re distracted with her lord and wraps her arms around your waist, crushing her milk-swollen tits against your crotch. You can feel their warmth through your [armor], promising nothing but bliss in their embrace. When you push her away, you become aware of the rivers of milk she poured down your");
-					if (player.isNaga()) outputText(" [leg]");
-					else outputText(" [legs]");
-					outputText(", a reminder of the woman’s insane fuckability.");
-				}
-				else if (sel == 1)
-				{
-					outputText("\n\nTurning about, the cow-slave aims her bubbly ass in your direction and lifts her tail, revealing both her dripping delta and the puckered star of her asshole. She looks back over her shoulder and sensuously slides her tongue across her gold-gilt lips, blowing you a pouty kiss once her mouth is suitably shiny. If she meant to distract you, she was at least partially successful.");
-				}
-				else
-				{
-					outputText("\n\nExcellia rises up onto her knees and arches her back to display her monumental mammaries, letting their chocolatey nipples jut accusingly in your direction. Her fingers travel to them, squeezing out thin flows of milk that she gathers and smears across each orb in turn, rubbing it into her skin like high-grade massage oil. When she’s finished, her tits are shining, and you’re a little hotter under the collar.");
-				}
-				player.dynStats("lus", 10+rand(player.lib/20));
-			}
+            switch(rand(3)) {
+            case 0:
+                outputText("Excellia crawls over to you while you’re distracted with her lord and wraps her arms around your waist, crushing her milk-swollen tits against your crotch. You can feel their warmth through your [armor], promising nothing but bliss in their embrace. When you push her away, you become aware of the rivers of milk she poured down your");
+                if (player.isNaga()) outputText(" [leg]");
+                else outputText(" [legs]");
+                outputText(", a reminder of the woman’s insane fuckability.");
+                break;
+            case 1:
+                outputText("Turning about, the cow-slave aims her bubbly ass in your direction and lifts her tail, revealing both her dripping delta and the puckered star of her asshole. She looks back over her shoulder and sensuously slides her tongue across her gold-gilt lips, blowing you a pouty kiss once her mouth is suitably shiny. If she meant to distract you, she was at least partially successful.");
+                break;
+            case 2:
+                outputText("Excellia rises up onto her knees and arches her back to display her monumental mammaries, letting their chocolatey nipples jut accusingly in your direction. Her fingers travel to them, squeezing out thin flows of milk that she gathers and smears across each orb in turn, rubbing it into her skin like high-grade massage oil. When she’s finished, her tits are shining, and you’re a little hotter under the collar.");
+                break;
+            }
+            player.dynStats("lus", 10+rand(player.lib/20));
 		}
 
 		override protected function handleStun():Boolean
 		{
-			if (hasStatusEffect(StatusEffects.MonsterAttacksDisabled)) {
+			if (hasStatusEffect(StatusEffects.MonsterAttacksDisabled))
 				return super.handleStun();
-			}
 			else {
 				outputText("It only takes the muscled monarch a moment to recover from the stun. It looks like he’s too much of a juggernaught to be stopped by those kinds of hits.");
 				return true;

@@ -85,14 +85,6 @@ public class EventParser {
         }
         CoC.instance.inCombat = false;
 		DungeonAbstractContent.inDungeon = false;
-		if (CoC.instance.player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) {
-			if (CoC.instance.player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) CoC.instance.player.removeStatusEffect(StatusEffects.ThereCouldBeOnlyOne);
-			if (CoC.instance.flags[kFLAGS.EBON_LABYRINTH_RECORD] < CoC.instance.player.statusEffectv1(StatusEffects.EbonLabyrinthB)) CoC.instance.flags[kFLAGS.EBON_LABYRINTH_RECORD] = CoC.instance.player.statusEffectv1(StatusEffects.EbonLabyrinthB);
-			CoC.instance.player.removeStatusEffect(StatusEffects.EbonLabyrinthA);
-			CoC.instance.player.removeStatusEffect(StatusEffects.EbonLabyrinthB);
-			if (CoC.instance.player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss1)) CoC.instance.player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss1);
-			if (CoC.instance.player.hasStatusEffect(StatusEffects.EbonLabyrinthBoss2)) CoC.instance.player.removeStatusEffect(StatusEffects.EbonLabyrinthBoss2);
-		}
 		if (CoC.instance.player.hasStatusEffect(StatusEffects.RiverDungeonA)) {
 			if (CoC.instance.flags[kFLAGS.NEISA_FOLLOWER] == 3) CoC.instance.flags[kFLAGS.PLAYER_COMPANION_1] = "";
 			if (CoC.instance.player.hasStatusEffect(StatusEffects.ThereCouldBeOnlyOne)) CoC.instance.player.removeStatusEffect(StatusEffects.ThereCouldBeOnlyOne);

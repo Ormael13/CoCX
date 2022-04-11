@@ -43,7 +43,6 @@ import classes.VaginaClass;
 
 				outputText("\n\n\"<i>Try again, [name],</i>\" the doppelganger sneers, derisively miming your falter. \"<i>C’mon. Really test yourself.</i>\"");
 			}
-			addTalkShit();
 		}
 		
 		public function mirrorTease(damage:Number, successful:Boolean):void
@@ -67,7 +66,6 @@ import classes.VaginaClass;
 				
 				player.dynStats("lus", damage + (rand(7) - 3));
 			}
-			addTalkShit();
 		}
 		
 		private function addTalkShit():void
@@ -102,20 +100,20 @@ import classes.VaginaClass;
 			{
 				case 0:
 					outputText("\n\n\"<i>You feel it, don’t you?</i>\" The doppelganger whispers, crooking your mouth into a vicious grin. \"<i>The transfer. The mirror is a vacuum without a being inside it; it reaches out for someone to complete it. Your being, to be exact. Mine wants to be free a lot more than yours. Ten years more, to be exact.</i>\"");
-					outputText("\n\n[He] goes on in a dull croon as [he] continues to circle you, moving with the odd, syncopated jerks of a creature in a body that has only existed for a couple of minutes. \"<i>Just let it happen, [name]. You can’t beat me. I am you, only with the knowledge and powers of a demon. Accept your fate.</i>\"");
+					outputText("\n\n" + player.mf("He", "She") + " goes on in a dull croon as " + player.mf("he", "she") + " continues to circle you, moving with the odd, syncopated jerks of a creature in a body that has only existed for a couple of minutes. \"<i>Just let it happen, [name]. You can’t beat me. I am you, only with the knowledge and powers of a demon. Accept your fate.</i>\"");
 					outputText("\n\nA weird fluttering feeling runs up your arm, and with a cold chill you look down to see it shimmer slightly, as if you were looking at it through running water.");
 					outputText("\n\n<b>You need to finish this as fast as you can.</b>");
 					break;
 				case 1:
-					outputText("\n\n\"<i>Do you know, I can’t even remember what gender I was before I got stuck in that mirror?</i>\" the doppelganger says, as [he] slides a hand between your thighs’ mirror counterparts thoughtfully. \"<i>I loved changing all the time. Being stuck as one gender seemed so boring when the tools to shift from one shape to the next were always there. That’s why this was my punishment. Forced to change all the time, at the unthinking behest of whoever happened to look into this cursed thing. You have to give Lethice credit, she’s not just cruel, she’s got imagination too. It’s a hell of a combination. I’d hate to see what she had in store for you.</i>\"");
+					outputText("\n\n\"<i>Do you know, I can’t even remember what gender I was before I got stuck in that mirror?</i>\" the doppelganger says, as " + player.mf("he", "she") + " slides a hand between your thighs’ mirror counterparts thoughtfully. \"<i>I loved changing all the time. Being stuck as one gender seemed so boring when the tools to shift from one shape to the next were always there. That’s why this was my punishment. Forced to change all the time, at the unthinking behest of whoever happened to look into this cursed thing. You have to give Lethice credit, she’s not just cruel, she’s got imagination too. It’s a hell of a combination. I’d hate to see what she had in store for you.</i>\"");
 					break;
 					
 				case 2:
-					outputText("\n\n\"<i>This, though... this I like, [name].</i>\" [He] closes [his] eyes and");
-					if (player.hasCock()) outputText(" strokes [his] [cock]");
-					else if (player.hasVagina()) outputText(" slides two fingers into [his] [vagina] and gently frigs [himself]");
+					outputText("\n\n\"<i>This, though... this I like, [name].</i>\" " + player.mf("He", "She") + " closes " + player.mf("his", "her") + " eyes and");
+					if (player.hasCock()) outputText(" strokes " + player.mf("his", "her") + " [cock]");
+					else if (player.hasVagina()) outputText(" slides two fingers into " + player.mf("his", "her") + " [vagina] and gently frigs [himself]");
 					else outputText(" slips a hand ");
-					outputText(" underneath [his] " + this.armorName +". The sheer bizarreness of seeing yourself masturbate gives you pause; again the unreality intensifies, and you feel yourself shimmer uncertainly. \"<i>Once I’m out of here, I’m going to hang onto this. Revel in not changing my form for once, as a tribute to the kind soul who gave me it!</i>\"");
+					outputText(" underneath " + player.mf("his", "her") + " " + this.armorName +". The sheer bizarreness of seeing yourself masturbate gives you pause; again the unreality intensifies, and you feel yourself shimmer uncertainly. \"<i>Once I’m out of here, I’m going to hang onto this. Revel in not changing my form for once, as a tribute to the kind soul who gave me it!</i>\"");
 					outputText("\n\nIt’s getting harder to ignore the way your body shimmers and bleeds contrast at the edges, whilst your reflection only becomes more and more sharply defined.");
 					outputText("\n\n<b>This is something, you realize with a growing horror, which is really going to happen if you don’t stop it.</b>");
 					break;
@@ -125,8 +123,8 @@ import classes.VaginaClass;
 					break;
 					
 				case 4:
-					outputText("\n\n\"<i>Did you really think you could defeat Lethice, peasant?</i>\" the doppelganger roars. [He] moves and speaks with confidence now, [his] old twitchiness gone, revelling and growing into [his] new form.");
-					outputText("\n\nYou don’t dare open your mouth to hear what pale imitation of that voice comes out. \"<i>Oh, by grit, crook and luck you’ve gotten this far, but defeat the demon queen? You, who still cling onto your craven, simple soul and thus know nothing of demonhood, of its powers, of its sacrifices? I am doing you and the world a favor here, [name]-that-was, because I am not just taking this fine body but also the mantel it so clumsily carried. With my knowledge and your brute physicality, I will have my revenge on Lethice, and the world will be free of her and her cruelty!</i>\" [He] screams with laughter. The ringing insanity of it sounds increasingly muffled to you, as if it were coming through a pane of glass.");
+					outputText("\n\n\"<i>Did you really think you could defeat Lethice, peasant?</i>\" the doppelganger roars. " + player.mf("He", "She") + " moves and speaks with confidence now, " + player.mf("his", "her") + " old twitchiness gone, revelling and growing into " + player.mf("his", "her") + " new form.");
+					outputText("\n\nYou don’t dare open your mouth to hear what pale imitation of that voice comes out. \"<i>Oh, by grit, crook and luck you’ve gotten this far, but defeat the demon queen? You, who still cling onto your craven, simple soul and thus know nothing of demonhood, of its powers, of its sacrifices? I am doing you and the world a favor here, [name]-that-was, because I am not just taking this fine body but also the mantel it so clumsily carried. With my knowledge and your brute physicality, I will have my revenge on Lethice, and the world will be free of her and her cruelty!</i>\" " + player.mf("He", "She") + " screams with laughter. The ringing insanity of it sounds increasingly muffled to you, as if it were coming through a pane of glass.");
 					outputText("\n\n<b>You have time and strength for one last gambit...</b>");
 					break;
 				case 5:
@@ -163,8 +161,8 @@ import classes.VaginaClass;
 		
 		public function handleSpellResistance(spell:String):void
 		{
-			outputText("The mirror demon barely even flinches as your fierce, puissant fire washes over [him].");
-			outputText("\n\n\"<i>Picked up a few things since you’ve been here, then?</i>\" [he] yawns. Flickers of flame cling to [his] fingers, its radiance sputtering and burning away, replaced by a livid black color. \"<i>Serf magic. Easy to pick up, easy to use, difficult to impress with. Let me show you how it’s really done!</i>\" [He] thrusts [his] hands out and hurls a pitiless black fireball straight at you, a negative replica of the one you just shot at [him].");
+			outputText("The mirror demon barely even flinches as your fierce, puissant fire washes over " + player.mf("him", "her") + ".");
+			outputText("\n\n\"<i>Picked up a few things since you’ve been here, then?</i>\" " + player.mf("he", "she") + " yawns. Flickers of flame cling to " + player.mf("his", "her") + " fingers, its radiance sputtering and burning away, replaced by a livid black color. \"<i>Serf magic. Easy to pick up, easy to use, difficult to impress with. Let me show you how it’s really done!</i>\" " + player.mf("He", "She") + " thrusts " + player.mf("his", "her") + " hands out and hurls a pitiless black fireball straight at you, a negative replica of the one you just shot at " + player.mf("him", "her") + ".");
 			if (spell == "fireball")
 			{
 				var damage:Number = player.level * 10 + 45 + rand(10);
@@ -177,13 +175,11 @@ import classes.VaginaClass;
 				damage2 = Math.round(damage2);
 				player.takeFireDamage(damage2, true);
 			}
-			addTalkShit();
 		}
 		
 		public function handlePlayerWait():void
 		{
 			outputText("Your doppleganger similarly opts to take a momentary break from the ebb and flow of combat.");
-			addTalkShit();
 		}
 		
 		override public function doAI():void
@@ -293,9 +289,9 @@ import classes.VaginaClass;
 				tbr.milkFullness = sbr.milkFullness;
 				tbr.nipplesPerBreast = sbr.nipplesPerBreast;
 			}
-			this.pronoun1 = "[he]";
-			this.pronoun2 = "[him]";
-			this.pronoun3 = "[his]";
+			this.pronoun1 = "" + player.mf("he", "she") + "";
+			this.pronoun2 = "" + player.mf("him", "her") + "";
+			this.pronoun3 = "" + player.mf("his", "her") + "";
 			this.drop = NO_DROP;
 			checkMonster();
 		}

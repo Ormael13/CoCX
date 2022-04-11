@@ -514,11 +514,11 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (player.gems < 100) {
-				outputText("\n\nGiacomo sighs, indicating you need 100 gems to purchase this item.");
+				outputText("Giacomo sighs, indicating you need 100 gems to purchase this item.");
 				doNext(bookMenu);
 			}
 			else {
-				outputText("\n\nThe crazy merchant nods satisfied when you hand him over a hundred gems and in exchange gives you a white book.");
+				outputText("The crazy merchant nods satisfied when you hand him over a hundred gems and in exchange gives you a white book.");
 				player.gems -= 100;
 				statScreenRefresh();
 				inventory.takeItem(consumables.W__BOOK, bookMenu);
@@ -536,11 +536,11 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (player.gems < 500) {
-				outputText("\n\nGiacomo sighs, indicating you need 500 gems to purchase this item.");
+				outputText("Giacomo sighs, indicating you need 500 gems to purchase this item.");
 				doNext(bookMenu);
 			}
 			else {
-				outputText("\n\nThe crazy merchant nods satisfied when you hand him over five hundred gems and in exchange gives you a grey book.");
+				outputText("The crazy merchant nods satisfied when you hand him over five hundred gems and in exchange gives you a grey book.");
 				player.gems -= 500;
 				statScreenRefresh();
 				inventory.takeItem(consumables.G__BOOK, bookMenu);
@@ -558,11 +558,11 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (player.gems < 100) {
-				outputText("\n\nGiacomo sighs, indicating you need 100 gems to purchase this item.");
+				outputText("Giacomo sighs, indicating you need 100 gems to purchase this item.");
 				doNext(bookMenu);
 			}
 			else {
-				outputText("\n\nThe crazy merchant nods satisfied when you hand him over a hundred gems and in exchange gives you a black book.");
+				outputText("The crazy merchant nods satisfied when you hand him over a hundred gems and in exchange gives you a black book.");
 				player.gems -= 100;
 				statScreenRefresh();
 				inventory.takeItem(consumables.B__BOOK, bookMenu);
@@ -580,11 +580,11 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (player.gems < 125) {
-				outputText("\n\nGiacomo sighs, indicating you need 125 gems to purchase this item.");
+				outputText("Giacomo sighs, indicating you need 125 gems to purchase this item.");
 				doNext(bookMenu);
 			}
 			else {
-				outputText("\n\nThe crazy merchant nods satisfied when you hand him over a one hundred twenty five gems and in exchange gives you a red manuscript.");
+				outputText("The crazy merchant nods satisfied when you hand him over a one hundred twenty five gems and in exchange gives you a red manuscript.");
 				player.gems -= 125;
 				statScreenRefresh();
 				inventory.takeItem(consumables.RMANUSC, bookMenu);
@@ -602,11 +602,11 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (player.gems < 125) {
-				outputText("\n\nGiacomo sighs, indicating you need 125 gems to purchase this item.");
+				outputText("Giacomo sighs, indicating you need 125 gems to purchase this item.");
 				doNext(bookMenu);
 			}
 			else {
-				outputText("\n\nThe crazy merchant nods satisfied when you hand him over a one hundred twenty five gems and in exchange gives you a red manuscript.");
+				outputText("The crazy merchant nods satisfied when you hand him over a one hundred twenty five gems and in exchange gives you a red manuscript.");
 				player.gems -= 125;
 				statScreenRefresh();
 				inventory.takeItem(consumables.CRIMS_J, bookMenu);
@@ -624,11 +624,11 @@ public class Giacomo extends BaseContent implements TimeAwareInterface {
 			spriteSelect(SpriteDb.s_giacomo);
 			clearOutput();
 			if (player.gems < 1000) {
-				outputText("\n\nGiacomo sighs, indicating you need 1,000 gems to purchase this item.");
+				outputText("Giacomo sighs, indicating you need 1,000 gems to purchase this item.");
 				doNext(bookMenu);
 			}
 			else {
-				outputText("\n\nThe crazy merchant nods satisfied when you hand him over thousand gems and in exchange gives you an Elementalist’s Tome.");
+				outputText("The crazy merchant nods satisfied when you hand him over thousand gems and in exchange gives you an Elementalist’s Tome.");
 				player.gems -= 1000;
 				statScreenRefresh();
 				inventory.takeItem(weaponsrange.E_TOME_, bookMenu);

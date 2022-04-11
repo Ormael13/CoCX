@@ -18,7 +18,7 @@ use namespace CoC;
 
 	public class DefiledRavine extends BaseContent
 	{
-		public var TrueDemons:DemonScene = new DemonScene();
+		public var demonScene:DemonScene = new DemonScene();
 		
 		public function DefiledRavine() 
 		{
@@ -63,8 +63,8 @@ use namespace CoC;
 					SceneLib.exploration.genericImpEncounters2();
 					break;*/
 				case 0:
-					if (rand(2) == 0) TrueDemons.CowSuccubusEncounter();
-					else TrueDemons.MinoIncubusEncounter();
+					if (rand(2) == 0) demonScene.CowSuccubusEncounter();
+					else demonScene.MinoIncubusEncounter();
 					break;
 				/*case 2:
 					SceneLib.exploration.();

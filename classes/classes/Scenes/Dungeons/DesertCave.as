@@ -4344,4 +4344,4 @@ public class DesertCave extends DungeonAbstractContent
 			addButton(0, "Approach", sandMotherStuffGOA).hint("Approach the Sand Mother.");
 		}
 	}
-}
+}

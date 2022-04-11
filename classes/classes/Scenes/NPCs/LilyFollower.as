@@ -218,7 +218,7 @@ import classes.display.SpriteDb;
 		public function LilyTalkDriderPods():void {
 			clearOutput();
 			outputText("You ask Lily what she means by ‘pod mates’. You tell her that you understand that it’s the Drider equivalent of siblings, but you want her to go into more detail.\n\n");
-			outputText("\"<i>Ah, yes. I suppose you being human "+((player.humanScore() < player.humanMaxScore() - 9) ? "once ":"")+"would leave you a little confused on the matter.” Lily crosses her arms in front of her top pair of breasts. “Well, to be precise, Driders lay eggs, rather than live birth like those who have more mammalian roots. those born in different clutches, but to the same parents, rarely have the same sense of “family” as those born in the same clutch of eggs.</i>\" ");
+			outputText("\"<i>Ah, yes. I suppose you being human "+((player.humanScore() < player.humanMaxScore() - 9) ? "once ":"")+"would leave you a little confused on the matter.”</i> Lily crosses her arms in front of her top pair of breasts. <i>“Well, to be precise, Driders lay eggs, rather than live birth like those who have more mammalian roots. those born in different clutches, but to the same parents, rarely have the same sense of “family” as those born in the same clutch of eggs.</i>\" ");
 			outputText("She rolls a hand. \"<i>Otherwise, most Driders would share familial feelings with half the village, being half-siblings, or whatnot.</i>\"\n\n");
 			outputText("This makes sense to you, and you thank your kinky drider for clarifying.\n\n");
 			outputText("\"<i>Oh, it’s no problem.</i>\" She gives you a little smirk. \"<i>Besides, there’s only a few reasons you’d be asking about such a topic, after all.</i>\" She gives you a knowing smile, running her finger from her hip down to her moist muff. She catches you looking, and her smile grows, showing her fangs. \"<i>Interested in making some, I assume?</i>\"\n\n");
@@ -312,7 +312,6 @@ import classes.display.SpriteDb;
 			outputText("You tell her that she’s going to stay at your camp from now on, and she’s going to like it. Lily trembles, her lower lips trembling and her six eyes lit up.\n\n");
 			outputText("<i>\"Truly "+ player.mf("master", "mistress") +"? You want your toy around?\"</i> Lily shakes her upper body at you, making sure her chain rattles. <i>\"What naughty things are you going to do to me?\"</i> She gives you a rather lascivious smile. <i>\"On second thought...Don’t tell me. Make it a surprise...MMmmm!!\"</i> Lily charges off, setting her sights on a tree near the river. <i>\"I’ll make myself a little nest, and then we’ll...Oh, I am going to love it here!\"</i>\n\n");
 			outputText("You give Lily a gentle shove, and she nods, understanding what you mean. She runs towards a tree near the river, not far from camp. You head back into camp, and as you turn back towards Lily’s Tree, you can already see her spinning out threads.\n\n");
-			outputText("<b>Lily has joined you as a lover.</b>\n\n");
 			LilyComeCampConclusion();
 		}
 		
@@ -326,11 +325,32 @@ import classes.display.SpriteDb;
 			outputText("As you near the camp, Lily gives you a nod of approval. <i>\"Honestly, I’m impressed. Very few people have a permanent residence right now.\"</i> She points to a nearby willow tree, just outside your campgrounds. <i>\"Would you mind if I made my own dwelling over there?\"</i>\n\n");
 			outputText("You nod, unable to see a reason not to let her, and as you near the tree, she gives it an approving nod. <i>\"Lots of anchor points there…I can cut here…\"</i> She visibly shakes herself, giving you a nod. <i>\"This will do.\"</i> Lily gives you a smile, twirling her fingers idly. <i>\"I’ll start immediately, and once I’m finished…I’ll finally have somewhere better than the old stashes.\"</i>\n\n");
 			outputText("You leave Lily to her own devices, as she begins to spin her thread, scuttling up the trunk and weaving lines between the branches. You know from experience it won’t take her long to finish her construction, if her thread-volume before is anything to judge by.\n\n");
-			outputText("<b>Lily has joined you as a lover.</b>\n\n");
 			LilyComeCampConclusion();
 		}
 		
 		private function LilyComeCampConclusion():void {
+			if (amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) {
+				outputText("As you watch Lily leave to make her house, your mousey lover pokes her head out from a nearby rock. <i>\"Uh…Hey.\"</i> Amily comes out, keeping one eye on Lily. <i>\"Can I talk with you for a second?\"</i> You nod, and she sits down.\n\n");
+				outputText("<i>\"You…You know what that is, right?\"</i> Amily has one hand on her dagger. You tell her that you do. <i>\"Then you know she’s extremely dangerous! Driders are almost universally corrupt nowadays, and the swamp’s damn near impossible to navigate because if you go near, they tie you up and rape you!\"</i>\n\n");
+				outputText("You give Amily a small chuckle, telling her that she shouldn’t worry so much. You assure your mousey lover that Lily is rather unlike most Driders in that respect.\n\n");
+				outputText("<i>\"What is so funny to you?\"</i> Amily demands, folding her arms over her chest. You tell her that if Amily’s worried about the big bad spider dominating her…That Lily wouldn’t get much out of that. Amily looks at you, then back at Lily, then back at you. Her mouth opens in a small ‘o’, and she leans in.\n\n");
+				outputText("<i>\"So she…Uses that silk on…herself, and…\"</i> You nod, and make a ‘shh’ gesture. Amily doesn’t protest, but she gives you an odd look as she walks away.\n\n");
+			}
+			if (BelisaFollower.BelisaInCamp) {
+				outputText("As Lily begins working on her home, your small Drider friend pokes her head out of the water, cautiously watching your newest addition to the camp. Noticing this, Lily waves you over.\n\n");
+				outputText("<i>\"[name], I have a question.\"</i> Lily says. <i>\"Who is that in the water? She’s been staring at me, and while I’m flattered, it’s a little odd.\"</i>\n\n");
+				outputText("You look over, and Belisa, her head poking just out of the water, eyes Lily suspiciously. You tell Lily that she isn’t the only Drider in camp, and that Belisa’s pretty shy. Lily freezes, a deer in the headlights, and slowly turns herself away from the water. <i>\"D-d-did you just say…Belisa?!\"</i> She fidgets nervously, and you take your Drider-lover’s hands.\n\n");
+				outputText("You nod, and say that you’ll bring her over. Lily stands, frozen in place, as you walk over to the water. It takes you a few minutes, but you coax Belisa out from the water. As she stands, shaking the droplets from her chitin, Lily gasps, putting a hand over her mouth.\n\n");
+				outputText("<i>\"It really is you…\"</i> Lily whispers, eyes widening. She looks down at her chest, as if for once wishing she had something covering it. <i>\"...I can’t believe it.\"</i>\n\n");
+				outputText("Belisa approaches cautiously, seeing the tears on Lily’s face. <i>\"...Are you okay?\"</i> She stays just out of reach, looking concerned.\n\n");
+				outputText("<i>\"Belisa…You look the same as before.\"</i> Lily says, tears dripping from her eyes. <i>\"The same as the night we fell.\"</i> Shocked, Belisa backs up a step, putting a hand on a knife-hilt.\n\n");
+				outputText("<i>\"...Lily?\"</i> Belisa asks, fear and hope warring on her face. <i>\"...Is that you?\"</i>\n\n");
+				outputText("<i>\"You’re…Unchanged.\"</i> Lily slowly steps towards her sister. <i>\"...They didn’t get you.\"</i>\n\n");
+				outputText("Belisa throws herself forward, wrapping her arms around her larger sister’s shoulders. <i>\"It is you.\"</i> She blinks at the chains, and blushes slightly. <i>\"Do I want to know, sister?\"</i>\n\n");
+				outputText("<i>\"Know what?\"</i> Lily seems confused, then follows Belisa’s gaze down to her own chest. <i>\"Oh…Right. No. Probably not.\"</i> She shudders. <i>\"I wasn’t as lucky as you, little one.\"</i>\n\n");
+				outputText("<i>\"Lucky? No.\"</i> Belisa says, anger in her gaze. <i>\"I had two strong sisters who taught me how to hide, to use my gifts.\"</i> She breaks into tears, leaning on Lily. <i>\"Who stayed behind in the village, fought to the bitter end…So that I had a fighting chance to live.\"</i> She puts a palm on Lily’s pale cheek, a smile on her face. <i>\"And now, I have you back.\"</i>\n\n");
+			}
+			outputText("<b>Lily has joined you as a lover.</b>\n\n");
 			LilyFollowerState = true;
 			cleanupAfterCombat(camp.returnToCampUseOneHour);
 		}
