@@ -3412,7 +3412,7 @@ use namespace CoC;
 				{name: 'banshee', score: bansheeScore(), minscore: 4},
 				{name: 'bat', score: batScore(), minscore: 10},
 				{name: 'bear and panda', score: bearpandaScore(), minscore: 10},
-				{name: 'bee', score: beeScore(), minscore: 14},
+				{name: 'bee', score: beeScore(), minscore: 17},
 				{name: 'cancer', score: cancerScore(), minscore: 13},
 				{name: 'cat', score: catScore(), minscore: 8},
 				{name: 'cave wyrm', score: cavewyrmScore(), minscore: 10},
@@ -4797,7 +4797,7 @@ use namespace CoC;
 				chimeraCounter++;
 			if (cancerScore() >= 13)
 				chimeraCounter++;
-			if (beeScore() >= 14)
+			if (beeScore() >= 17)
 				chimeraCounter++;
 			if (goblinScore() >= 10)
 				chimeraCounter++;
@@ -5415,6 +5415,8 @@ use namespace CoC;
 			Begin("Player","racialScore","bee");
 			var beeCounter:Number = 0;
 			if (InCollection(hairColor, BeeGirlScene.beeHair)) //TODO if hairColor2 == yellow && hairColor == black
+				beeCounter++;
+			if (InCollection(skin.coat.color, "yellow") && InCollection(skin.coat.color2, "black","ebony"))
 				beeCounter++;
 			if (eyes.type == Eyes.BLACK_EYES_SAND_TRAP)
 				beeCounter += 2;//po dodaniu bee tongue wróci do +1
@@ -11703,7 +11705,7 @@ use namespace CoC;
 			if (this.hasPerk(PerkLib.GargoyleCorrupted)) {
 				minSen += 15;
 			}
-			if (beeScore() >= 14) minLib += 20;
+			if (beeScore() >= 17) minLib += 20;
 			//Factory Perks
 			if (this.hasPerk(PerkLib.DemonicLethicite)) {minCor+=10;minLib+=10;}
 			if (this.hasPerk(PerkLib.ProductivityDrugs)) {minLib+=this.perkv1(PerkLib.ProductivityDrugs);minCor+=10;}
@@ -12286,11 +12288,11 @@ use namespace CoC;
 					}
 				}
 			}
-		*/	if (beeScore() >= 16) {
+		*/	if (beeScore() >= 17) {
 				maxTouCap2 += 80;
 				maxSpeCap2 += 80;
 				maxIntCap2 += 50;
-				maxLibCap2 += 50;
+				maxLibCap2 += 65;
 			}//+40/30-40
 			if (spiderScore() >= 7) {
 				maxStrCap2 -= 20;
