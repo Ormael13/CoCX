@@ -296,7 +296,7 @@ public static const CERAPH_FOLLOWER_CARRY:int                                   
 public static const CERAPH_HIDING_DICK:int                                          =  288; // Ceraph Cock Hidden (1 = yes, 0 = cock floppin') - Ceraph's Demon Dong status 0=Visible, 1=Not visible
 public static const UNKNOWN_FLAG_NUMBER_00289:int                                   =  289; // Times Ceraph Licked You Out
 public static const UNKNOWN_FLAG_NUMBER_00290:int                                   =  290; // Punished Ceraph?
-public static const UNKNOWN_FLAG_NUMBER_00291:int                                   =  291; // Times Beaten Ceraph And Raped Her Without Losing
+public static const TIMES_BEATEN_SERAPH_WITHOUT_LOSING:int                                   =  291; // Times Beaten Ceraph And Raped Her Without Losing
 public static const UNKNOWN_FLAG_NUMBER_00292:int                                   =  292; // Times listened in on demons
 public static const UNKNOWN_FLAG_NUMBER_00293:int                                   =  293; // Disabled Ceraph Faux Corruption - Ceraph Corruption Scene
 public static const UNKNOWN_FLAG_NUMBER_00294:int                                   =  294; // Times Done 'SWEETIE NO!' Ceraph Marble RP

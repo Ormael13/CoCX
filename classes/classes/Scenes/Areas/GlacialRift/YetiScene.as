@@ -123,10 +123,7 @@ public class YetiScene extends BaseContent
 					addButton(1, "RideHisCock", rideYetisCock);
 				}
 			}
-			if (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armor == armors.LMARMOR || player.armor == armors.S_ARMOR)) {
-				if (player.armor == armors.S_ARMOR) addButton(2, "B.Titfuck", (player.armor as SuccubusArmor).succubusPaizuri);
-				else addButton(2, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
-			}
+			LustyMaidensArmor.addTitfuckButton(2);
 			SceneLib.uniqueSexScene.pcUSSPreChecksV2(winAgainstYeti);
 						addButton(14, "Leave", cleanupAfterCombat);
 		}

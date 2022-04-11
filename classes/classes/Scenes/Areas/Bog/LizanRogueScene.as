@@ -111,10 +111,7 @@ public class LizanRogueScene extends BaseContent
 					outputText("You wonder what you should do to the lizan.");
 					if (player.hasCock()) addButton(0, "Use Dick", rapeLizanInTheAss).hint("Anally penetrate him with your " + player.multiCockDescriptLight() + ".");
 					if (player.hasVagina()) addButton(1, "Use Pussy", rapeLizanWithPussy).hint("Get on top of the lizan and stuff his cock into your [pussy].");
-					if (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armor == armors.LMARMOR || player.armor == armors.S_ARMOR)) {
-						if (player.armor == armors.S_ARMOR) addButton(2, "B.Titfuck", (player.armor as SuccubusArmor).succubusPaizuri);
-						else addButton(2, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
-					}
+					LustyMaidensArmor.addTitfuckButton(2);
 					addButton(14, "Leave", cleanupAfterCombat);
 					SceneLib.uniqueSexScene.pcUSSPreChecksV2(winAgainstLizan);
 										return;
@@ -166,10 +163,7 @@ public class LizanRogueScene extends BaseContent
 			addButton(2, "Use Ass", consensualGetButtFucked).hint("Have him take you anally.");
 			if (player.hasVagina()) addButton(3, "Dbl.Penetration", consensualDoublePenetration).hint("Have him stuff both your holes with his dual cocks.", "Double Penetration");
 			if (flags[kFLAGS.WATERSPORTS_ENABLED] > 0 && flags[kFLAGS.LIZAN_ROGUE_SEX_COUNTER] >= 3 && !continuation) addButton(4, "Watersports", consensualWatersports).hint("Participate into urine activity with him. \n\nNOTE: Contains watersports!");
-			if (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armor == armors.LMARMOR || player.armor == armors.S_ARMOR)) {
-				if (player.armor == armors.S_ARMOR) addButton(5, "B.Titfuck", (player.armor as SuccubusArmor).succubusPaizuri);
-				else addButton(5, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
-			}
+			LustyMaidensArmor.addTitfuckButton(5);
 		}
 
 		public function consensualButtfuck():void {

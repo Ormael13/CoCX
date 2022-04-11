@@ -42,10 +42,7 @@ public class IncubusMechanic extends Monster {
 				else {
 					outputText("  Now would be the perfect opportunity to put his tool to use...\n\nWhat do you do?");
 					if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && flags[kFLAGS.FACTORY_INCUBUS_BRIBED] == 0) outputText("\n\n<b>You swear you can hear a clicking sound coming from the west.</b>");
-					if (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armor == armors.LMARMOR || player.armor == armors.S_ARMOR)) {
-						if (player.armor == armors.S_ARMOR) EngineCore.addButton(3, "B.Titfuck", (player.armor as SuccubusArmor).succubusPaizuri, player, this);
-						else EngineCore.addButton(3, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri, player, this);
-					}
+					LustyMaidensArmor.addTitfuckButton(3);
 				}
 				EngineCore.addButton(0, "Rape", SceneLib.dungeons.factory.doRapeIncubus).hint(player.hasCock() ? "Fuck his butt." : "Ride him vaginally.");
 				EngineCore.addButton(1, "Service Him", SceneLib.dungeons.factory.doOralIncubus).hint("Service the incubus orally.");

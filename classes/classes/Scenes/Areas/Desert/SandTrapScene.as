@@ -150,8 +150,8 @@ public function sandtrapmentLoss(clear:Boolean = false):void {
 	//PC lust loss: 
 	else outputText("You feel as radiant and molten as the sun above you... you just want to sink into the warm sand surrounding you forever.  Why are you struggling against it again?  You can't remember; with a sigh, you fall backwards onto the soft powder and allow yourself to be carried right down to the bottom.  The sandtrap chuckles softly as it envelopes you in its waiting arms.  \"<i>Good " + player.mf("boy","girl") + "...</i>\"");
 	
-	if(player.hasCock()) doNext(dickwieldersLoseToSandTarps);
-	else if(player.hasVagina()) doNext(chicksLoseToSandTarp);
+	if(player.hasCock() && (!sceneHunter.uniHerms || rand(2) == 0)) doNext(dickwieldersLoseToSandTarps);
+	else if(player.hasVagina() && (!sceneHunter.uniHerms || rand(2) == 0)) doNext(chicksLoseToSandTarp);
 	else doNext(genderlessLoss);
 }
 
@@ -167,15 +167,14 @@ internal function pcBeatsATrap():void {
 	if (player.lust >= 33) {
 		outputText("\n\nBefore you go, you take in the helpless body of your would-be ambusher.  What do you do?");
 		menu();
-		if (player.isNaga() && player.hasStatusEffect(StatusEffects.Naga) && player.gender > 0 && player.faceType == Face.SNAKE_FANGS) addButton(0, "Naga3Some", nagaThreesomeWithSandTrap);
-		if (player.hasCock() && player.str >= 60) addButton(1, "UseYourCock", stickWangInSandgina);
-		addButton(2, "RideVaginal", rideDatSandTarpLikeIts1999);
+		if (player.isNaga() && player.hasStatusEffect(StatusEffects.Naga) && player.gender > 0 && player.faceType == Face.SNAKE_FANGS) 
+            addButton(0, "Naga3Some", nagaThreesomeWithSandTrap);
+        else    addButtonDisabled(0, "???", "Requires naga lower body, naga fangs, and to have a certain Naga lover. (not genderless)")
+		addButtonIfTrue(1, "UseYourCock", stickWangInSandgina, "Req. to be strong enough (>60) and have a dick", player.hasCock() && player.str >= 60);
+		addButtonIfTrue(2, "RideVaginal", rideDatSandTarpLikeIts1999, "", player.hasVagina());
 		addButton(3, "Handjob", useSandTarpsHands);
 		SceneLib.uniqueSexScene.pcUSSPreChecksV2(pcBeatsATrap2);
-				if (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armorName == "lusty maiden's armor" || player.armorName == "Succubus armor")) {
-			if (player.armorName == "Succubus armor") addButton(8, "B.Titfuck", createCallBackFunction2((player.armor as SuccubusArmor).succubusPaizuri,player,monster));
-			else addButton(8, "B.Titfuck", createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,monster));
-		}
+		LustyMaidensArmor.addTitfuckButton(8);
 		addButton(9, "Leave", cleanupAfterCombat);
 	}
 	else cleanupAfterCombat();
@@ -187,10 +186,7 @@ public function pcBeatsATrap2():void {
 	addButton(2, "RideVaginal", rideDatSandTarpLikeIts1999);
 	addButton(3, "Handjob", useSandTarpsHands);
 	SceneLib.uniqueSexScene.pcUSSPreChecksV2(pcBeatsATrap2);
-		if (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armorName == "lusty maiden's armor" || player.armorName == "Succubus armor")) {
-		if (player.armorName == "Succubus armor") addButton(8, "B.Titfuck", createCallBackFunction2((player.armor as SuccubusArmor).succubusPaizuri,player,monster));
-		else addButton(8, "B.Titfuck", createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,monster));
-	}
+	LustyMaidensArmor.addTitfuckButton(8);
 	addButton(9, "Leave", cleanupAfterCombat);
 }
 
@@ -281,11 +277,12 @@ private function genderlessLoss():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_sandtrap);
 	outputText("\n\nThe sandtrap holds your hands whilst it pushes you further down with its other set of arms, until only your head is above the sand.  Below the surface you try to weakly move your limbs, try to work yourself out of this situation but it is impossible; the sand feels impossibly heavy and is packed against you.  The sandtrap seems to have no such difficulty.  It towers above you, moving with sinuous grace.  You feel something wet touch your thigh and you try to flinch, but aside from flexing your muscles you cannot move.");
-	outputText("\n\n\"<i>Hwhat a strange creature you arrrhe,</i>\" says the sandtrap, looking at you with vague bafflement as it gently strokes your face.  It seems the more excited it gets and the less it feels the need to pretend, the more fluttery and broken its voice becomes; it is like you are listening to a hive of bees that just happens to be forming words.  ");
-
-	//(Trap has fertilised eggs: 
-	if(monster.hasStatusEffect(StatusEffects.Fertilized)) outputText("\"<i>Not a worker OR a drone! Wwwell, that isz ok.  Even ants who hhhave nothing can be someone for somebody.  And hhyou can be mommy for my childrrhen!</i>\"");
-	else outputText("\"<i>Not a worker OR a drone! Wwwell, that isz ok.  Hwwe can still have fun, can't we?</i>\"");
+    if (player.gender == 0) {
+        outputText("\n\n\"<i>Hwhat a strange creature you arrrhe,</i>\" says the sandtrap, looking at you with vague bafflement as it gently strokes your face.  It seems the more excited it gets and the less it feels the need to pretend, the more fluttery and broken its voice becomes; it is like you are listening to a hive of bees that just happens to be forming words.  ");
+        //(Trap has fertilised eggs: 
+        if(monster.hasStatusEffect(StatusEffects.Fertilized)) outputText("\"<i>Not a worker OR a drone! Wwwell, that isz ok.  Even ants who hhhave nothing can be someone for somebody.  And hhyou can be mommy for my childrrhen!</i>\"");
+        else outputText("\"<i>Not a worker OR a drone! Wwwell, that isz ok.  Hwwe can still have fun, can't we?</i>\"");
+    }
 	
 	outputText("\n\nYou are helpless to ignore the fact it has a genital slit where its human cock would be, particularly as the sandtrap places its hands behind your head and proceeds to rub your face into it.  Its smooth, supple human flesh trades with its rough, leathery insect hide against your cheeks and forehead, and as its excitement grows you feel the slit slide open and something long, warm, and oily presses insistently into your face.  The creature pulls back momentarily, and with a feeling of deep trepidation you take it in... a black ten-inch insect cock prong, thicker at the base than its dull tip, dripping with a clear, viscous fluid.  Smiling tenderly, it presses the tip of its gleaming black prong against your lips.  \"<i>Drink.  It will make thingsz so much easier for hwyou if hwyou do.</i>\" The creature is not exactly giving you much choice in the matter.  Packed tightly inside its sand and incapable of resisting, you steel yourself, close your eyes, open your mouth and accept it.");
 	

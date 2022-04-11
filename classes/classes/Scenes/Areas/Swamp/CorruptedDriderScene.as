@@ -93,11 +93,6 @@ use namespace CoC;
 			}
 			var rideCock:Function =null;
 			var rideOvi:Function =null;
-			var bikiniTits:Function =null;
-			if (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armor is LustyMaidensArmor || player.armor is SuccubusArmor)) {
-				if (player.armor is SuccubusArmor) bikiniTits = (player.armor as SuccubusArmor).succubusPaizuri;
-				else bikiniTits = (player.armor as LustyMaidensArmor).lustyMaidenPaizuri;
-			}
 			var temp3:Function =null;
 			if (player.hasVagina() && player.lust >= 33) {
 				rideCock = winVSDriderTakeItsCockInCunt;
@@ -114,7 +109,8 @@ use namespace CoC;
 			if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
 				outputText("\n\nWhat do you do?");
 				choices("Butt Fuck", buttFuckBUTTFUCKBUTTTFUCKBUTTFUCK, "Fuck Pussy", vagFuck, "Bondage Fuck", careful, "FuckSpinner", fuckSpinner, "Ride Cock", rideCock,
-					"Ride Ovi", rideOvi, "RideOviAnal", rideOviAss, "B.Titfuck", bikiniTits, "", null, "Leave", cleanupAfterCombat);
+					"Ride Ovi", rideOvi, "RideOviAnal", rideOviAss, "B.Titfuck", null/*placeholder*/, "", null, "Leave", cleanupAfterCombat);
+                LustyMaidensArmor.addTitfuckButton(7);
                 SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatDriderIntro);
             }
 			else cleanupAfterCombat();

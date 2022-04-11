@@ -27,7 +27,6 @@ use namespace CoC;
 		public function impVictory():void {
 			clearOutput();
 			var canFeed:Boolean = player.hasStatusEffect(StatusEffects.Feeder);
-			var canBikiniTits:Boolean = (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armor is LustyMaidensArmor || player.armor is SuccubusArmor));
             clearOutput();
             //text
 			outputText("You smile in satisfaction as [themonster] collapses " + (monster.HP <= 0 ? "from his injuries." : "and begins masturbating feverishly.\n"));
@@ -64,10 +63,7 @@ use namespace CoC;
                 addButton(3, "AnalReceive", analReceive);
                 addButtonIfTrue(7, "NippleFuck", noogaisNippleRape, "Req. nipplecunts", player.hasFuckableNipples());
                 addButtonIfTrue(8, "NipFuckBig", nipFuckBig, "Req. nipplecunts and boobs > E-cups", player.hasFuckableNipples() && player.biggestTitSize() >= Appearance.breastCupInverse("E"));
-                if (canBikiniTits) {
-                    if (player.armor is SuccubusArmor) addButton(9, "B.Titfuck", (player.armor as SuccubusArmor).succubusPaizuri);
-                    else addButton(9, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
-                }
+                LustyMaidensArmor.addTitfuckButton(9);
                 else addButtonDisabled(9, "B.Titfuck", "Requires L.M.Armor");
                 addButtonIfTrue(10, "Breastfeed", areImpsLactoseIntolerant, "Req. Feeder status", canFeed);
 			addButtonIfTrue(11, "Oviposit", putBeeEggsInAnImpYouMonster, "Req. bee ovipositor", player.canOvipositBee());
@@ -1850,10 +1846,7 @@ use namespace CoC;
                 addButtonIfTrue(2,"Ride Cock", femaleVagRape, "Req. vagina", player.hasVagina());
 				if(player.findPerk(PerkLib.Feeder) >= 0 && monster.short != "imp overlord" && monster.short != "imp warlord") addButton(3,"Breastfeed",feederBreastfeedRape);
                 else addButtonDisabled(3,"Breastfeed", "Req. Feeder perk");
-				if (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armor is LustyMaidensArmor || player.armor is SuccubusArmor)) {
-					if (player.armor is SuccubusArmor) addButton(4, "B.Titfuck", (player.armor as SuccubusArmor).succubusPaizuri);
-					else addButton(4, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
-				}
+				LustyMaidensArmor.addTitfuckButton(4);
                 else addButtonDisabled(4,"B.Titfuck", "Req. L.M.Armor");
 			}
 			addButton(14,"Leave",cleanupAfterCombat);
