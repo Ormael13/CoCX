@@ -46,7 +46,7 @@ public class Arms extends BodyPart {
 	public static const BEE:int = 4;
 	EnumValue.add(Types, BEE, "BEE", {
 		name:"bee",
-		appearanceDesc: "A shining [skin coat.color] exoskeleton covers your arms from the biceps down, resembling a pair of long black gloves ending with a [skin coat.color2] fuzz from a distance."
+		appearanceDesc: "A shining [skin coat.color2] exoskeleton covers your arms from the biceps down, resembling a pair of long [skin coat.color2] gloves ending with a [skin coat.color] fuzz from a distance."
 	});
 
 	public static const SALAMANDER:int = 5;
