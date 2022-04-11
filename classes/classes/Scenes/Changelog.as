@@ -246,7 +246,7 @@ package classes.Scenes
 			outputText("4. Adjusted gem drops from enemies. (increased)\n");
 			outputText("5. Slightly decreased DarkSlimeEmpress' HP scaling (it was MUCH faster than Lust scaling)\n");
 			outputText("-Aside few cases all the races half-stages was removed. You now either is some race or not, no half-race stage.\n");
-			outputText("-\n");
+			outputText("-Soul Sense ??? submenu helps to find some otherwise hard to repeadly meet npc's before they come to camp.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

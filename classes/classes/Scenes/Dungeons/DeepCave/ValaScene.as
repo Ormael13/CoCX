@@ -880,8 +880,7 @@ public class ValaScene extends BaseContent implements SaveableState
 			spriteSelect(SpriteDb.s_vala);
 			clearOutput();
 			menu();
-			if (player.isFemaleOrHerm && (player.humanScore() >= (player.humanMaxScore() - player.internalChimeraScore())) || player.elfScore() >= 11)
-			{
+			if (player.isFemaleOrHerm() && (player.humanScore() >= (player.humanMaxScore() - player.internalChimeraScore())) || player.elfScore() >= 11) {
 				outputText("Vala spots you from a distance and flies to you right away.\n\n" +
 						"\"<i>[name] I have great news! The new fairy queen has finally been chosen!</i>\"\n\n" +
 						"You idly ask if you could meet her.\n\n" +
@@ -920,13 +919,13 @@ public class ValaScene extends BaseContent implements SaveableState
 			//Turn pc into a proper fairy
 			CoC.instance.transformations.FaceFairy.applyEffect(false);
 			player.eyes.type = Eyes.FAIRY;
+			CoC.instance.transformations.HairFairy.applyEffect(false);
 			player.ears.type = Ears.ELVEN;
 			player.tailType = Tail.NONE;
 			player.arms.type = Arms.ELF;
 			player.lowerBody = LowerBody.ELF;
 			player.tongue.type = Tongue.ELF;
 			player.wings.type = Wings.FAIRY;
-			CoC.instance.transformations.HairFairy.applyEffect(false);
 			player.skinType = Skin.PLAIN;
 			player.skinAdj = "flawless";
 			player.removeCock(0, player.cockTotal());
@@ -937,7 +936,7 @@ public class ValaScene extends BaseContent implements SaveableState
 				if (player.breastRows[0].breastRating < 3 && rand(2) == 0) growth++;
 				if (player.breastRows[0].breastRating < 4 && rand(3) == 0) growth++;
 			}
-			player.createPerk(PerkLib.TransformationImmunityFairy,0,0,0,0)
+			player.createPerk(PerkLib.TransformationImmunityFairy, 0, 0, 0, 0);
 			player.removeAllRacialMutation();
 			outputText("\n\n");
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
