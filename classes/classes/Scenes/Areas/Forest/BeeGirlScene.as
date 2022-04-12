@@ -43,7 +43,7 @@ public class BeeGirlScene extends BaseContent
 
 		private function set conversation(value:int):void { flags[kFLAGS.BEE_GIRL_STATUS] = (flags[kFLAGS.BEE_GIRL_STATUS] & BEE_GIRL_ATTITUDE) + (value << 16); }
 		
-		public static var beeHair:Array = ["shiny black", "black and yellow", "brown and yellow", "brown"];
+		public static var beeHair:Array = ["shiny black", "brown", "yellow"]; //"black and yellow", "brown and yellow"
 
 		//The Queen Bee
 		//location: Forest

@@ -756,12 +756,20 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 			TransformationUtils.applyTFIfNotPresent(transformations.SkinChitin(Skin.COVERAGE_LOW, { color: "yellow" }), doOutput);
 			var desc:String = desc += "A ripple spreads through your chitin as some patches change in color. After a few moments you're left with a yellow and black striped pattern, like a bee's! <b>You've got striped chitin!</b>";
 			player.skin.base.pattern = Skin.PATTERN_BEE_STRIPES;
-			player.coatColor2 = "black";
+			if (!InCollection(player.coatColor2, "black","ebony"))
+				player.coatColor2 = randomChoice("black","ebony");
+			if (player.coatColor2 != "yellow")
+				player.coatColor = "yellow";
 			if (doOutput) outputText(desc);
 			Metamorph.unlockMetamorph(SkinPatternMem.getMemory(SkinPatternMem.BEE_STRIPES));
 		},
-		// is present
 		function ():Boolean {
+		  	
+	    if (doOutput) outputText(desc);
+	  	Metamorph.unlockMetamorph(SkinPatternMem.getMemory(SkinPatternMem.BEE_STRIPES));
+	  },
+	  // is present
+	  function (): Boolean {
 			return player.skin.base.pattern === Skin.PATTERN_BEE_STRIPES;
 		}
 	);
@@ -5045,6 +5053,12 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      desc += "You watch, spellbound, while your forearms gradually become shiny. The entire outer structure of your arms tingles while it divides into segments, <b>turning the " + player.skinFurScales() + " into a shiny black carapace</b>. A moment later the pain fades and you are able to turn your gaze down to your beautiful new arms, covered in shining black chitin from the upper arm down, and downy yellow fuzz along your upper arm.";
 	    }
 	    player.arms.type = Arms.BEE;
+		if (!InCollection(player.coatColor2, "black","ebony")){
+			player.coatColor2 = randomChoice("black","ebony");
+		}
+		if (player.coatColor2 != "yellow"){
+			player.coatColor = "yellow";
+		}
 
 	    if (doOutput) outputText(desc);
 	    Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.BEE));
@@ -6230,6 +6244,12 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    player.lowerBody = LowerBody.BEE;
 	    player.legCount = 2;
+		if (!InCollection(player.coatColor2, "black","ebony")){
+			player.coatColor2 = randomChoice("black","ebony");
+		}
+		if (player.coatColor2 != "yellow"){
+			player.coatColor = "yellow";
+		}
 	    if (doOutput) outputText(desc);
 	    Metamorph.unlockMetamorph(LowerBodyMem.getMemory(LowerBodyMem.BEE));
 	  },
@@ -8372,6 +8392,12 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	    player.tailVenom = 10;
 	    player.tailRecharge = 5;
 	    player.tailType = Tail.BEE_ABDOMEN;
+		if (!InCollection(player.coatColor2, "black","ebony")){
+			player.coatColor2 = randomChoice("black","ebony");
+		}
+		if (player.coatColor2 != "yellow"){
+			player.coatColor = "yellow";
+		}
 	    player.tailCount = 1;
 
 	    if (doOutput) outputText(desc);

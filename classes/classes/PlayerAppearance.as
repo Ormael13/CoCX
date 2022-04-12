@@ -1066,7 +1066,7 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.bearpandaScore() >= 1) outputText("\n<font color=\"#008000\">Bear/Panda-morph: " + player.bearpandaScore() + "</font>");
 		else if (player.bearpandaScore() < 1) outputText("\n<font color=\"#ff0000\">Bear/Panda-morph: 0</font>");
 		//Bee
-		if (player.beeScore() >= 14) outputText("\n<font color=\"#0000a0\">Bee-morph: " + player.beeScore() + " (+80% to Tou racial multi, +80% to Spe racial multi, +50% to Int racial multi, +20% to Lib racial multi & +20 to min Lib)</font>");
+		if (player.beeScore() >= 17) outputText("\n<font color=\"#0000a0\">Bee-morph: " + player.beeScore() + " (+80% to Tou racial multi, +80% to Spe racial multi, +50% to Int racial multi, +65% to Lib racial multi & +20 to min Lib)</font>");
 		else if (player.beeScore() >= 1) outputText("\n<font color=\"#008000\">Bee-morph: " + player.beeScore() + "</font>");
 		else if (player.beeScore() < 1) outputText("\n<font color=\"#ff0000\">Bee-morph: 0</font>");
 		//Bunny
