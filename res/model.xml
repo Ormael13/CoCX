@@ -404,6 +404,7 @@
         <cell rect="201,270,49,59" name="hands_bg/alraune" dx="56" dy="64"/>
         <cell rect="251,270,49,59" name="hands_bg/chitin" dx="56" dy="64"/>
         <cell rect="301,270,49,59" name="hands_bg/chitin2" dx="56" dy="64"/>
+		<cell rect="951,270,49,59" name="hands_bg/beeglove" dx="56" dy="64"/>
         <cell rect="351,270,49,59" name="hands_bg/fire" dx="56" dy="64"/>
         <cell rect="401,270,49,59" name="hands_bg/scales" dx="56" dy="64"/>
 		<cell rect="401,270,49,59" name="hands_bg/dscales" dx="56" dy="64"/>
@@ -426,6 +427,7 @@
         <cell rect="201,330,49,59" name="hands/alraune" dx="104" dy="64"/>
         <cell rect="251,330,49,59" name="hands/chitin" dx="104" dy="64"/>
         <cell rect="301,330,49,59" name="hands/chitin2" dx="104" dy="64"/>
+		<cell rect="951,330,49,59" name="hands/beeglove" dx="104" dy="64"/>
         <cell rect="401,330,49,59" name="hands/scales" dx="104" dy="64"/>
 		<cell rect="401,330,49,59" name="hands/dscales" dx="104" dy="64"/>
         <cell rect="451,330,49,59" name="hands/human" dx="104" dy="64"/>
@@ -1282,10 +1284,10 @@
         <cell rect="255,491,83,69" name="tail/bear_taur" dx="141" dy="97"/>
         <cell rect="339,491,83,69" name="tail/panda" dx="95" dy="90"/>
         <cell rect="339,491,83,69" name="tail/panda_taur" dx="141" dy="97"/>
-        <cell rect="170,561,83,139" name="tail/bee_abdomen" dx="95" dy="40"/>
-        <cell rect="170,561,83,139" name="tail/bee_taur" dx="136" dy="48"/>
-        <cell rect="675,561,83,139" name="tail/mantis" dx="95" dy="40"/>
-        <cell rect="675,561,83,139" name="tail/mantis_taur" dx="135" dy="50"/>
+        <cell rect="170,561,83,139" name="tail_bg/bee_abdomen" dx="95" dy="40"/>
+        <cell rect="170,561,83,139" name="tail_bg/bee_taur" dx="136" dy="48"/>
+        <cell rect="675,561,83,139" name="tail_bg/mantis" dx="95" dy="40"/>
+        <cell rect="675,561,83,139" name="tail_bg/mantis_taur" dx="135" dy="50"/>
         <cell rect="339,561,83,139" name="tail/weasel" dx="95" dy="40"/>
         <cell rect="339,561,83,139" name="tail/weasel_taur" dx="144" dy="49"/>
         <cell rect="423,561,168,139" name="tail/thunderbird" dx="19" dy="46"/>
@@ -2748,11 +2750,14 @@
                 <show part="overhands/ratatoskrLeft"/>
             </case>
             <case values="Arms.BEE">
-                <hide part="arms/*"/>
-                <hide part="arms_bg/*"/>
-				<hide part="hands_bg/*"/>
-                <show part="arms/bee"/>
-                <show part="arms_bg/bee"/>
+				<show part="hands_bg/beeglove"/>
+                <show part="hands/beeglove"/>
+				<if test="hasFullCoatOfType(Skin.CHITIN)">
+					<hide part="arms/*"/>
+					<hide part="arms_bg/*"/>
+					<show part="arms/bee"/>
+					<show part="arms_bg/bee"/>
+				</if>
             </case>
             <case values="Arms.SALAMANDER,Arms.CAVE_WYRM">
                 <hide part="arms/*"/>
@@ -3755,17 +3760,17 @@
             </case>
             <case values="Tail.BEE_ABDOMEN">
 				<if test="isTaur()">
-					<show part="tail/bee_abdomen_taur"/>
+					<show part="tail_bg/bee_abdomen_taur"/>
 					<else>
-						<show part="tail/bee_abdomen"/>
+						<show part="tail_bg/bee_abdomen"/>
 					</else>
 				</if>
             </case>
 			<case values="Tail.MANTIS_ABDOMEN">
 				<if test="isTaur()">
-					<show part="tail/mantis_taur"/>
+					<show part="tail_bg/mantis_taur"/>
 					<else>
-						<show part="tail/mantis"/>
+						<show part="tail_bg/mantis"/>
 					</else>
 				</if>
             </case>

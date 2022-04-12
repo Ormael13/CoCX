@@ -22,7 +22,7 @@ package classes.Scenes.Places.HeXinDao
 		public static var Slot04Cap:Number;//demon skulls
 		//Iron plate
 		public static var Slot05:Number;
-		public static var Slot05Cap:Number;
+		public static var Slot05Cap:Number;//feral tentacle beasts
 		public static var Slot06:Number;
 		public static var Slot06Cap:Number;
 		//Bronze plate
@@ -292,6 +292,7 @@ package classes.Scenes.Places.HeXinDao
 				// || player.hasKeyItem("Adventurer Guild: Mithril plate") >= 0|| player.hasKeyItem("Adventurer Guild: Orichalcum plate") >= 0 || player.hasKeyItem("Adventurer Guild: Adamantite plate") >= 0
 				outputText("Yang the handler looks at you, her arms crossed in front of her chest. She taps her foot impatiently. Has she been here all day?\n\n");
 				outputText("\"<i>So [name], how can I help you today? Here to talk jobs or something else?</i>\"");
+				if (player.hasKeyItem("Adventurer Guild: Iron plate") >= 0 && Slot05Cap < 10) Slot05Cap = 10;
 				menu();
 				addButton(0, "Quest", BoardkeeperYangQuest);
 				addButton(1, "Talk", BoardkeeperYangTalk);
@@ -970,6 +971,7 @@ package classes.Scenes.Places.HeXinDao
 					flags[kFLAGS.SPIRIT_STONES] -= 10;
 					Slot03Cap = 10;
 					Slot04Cap = 10;
+					Slot05Cap = 10;
 				}
 				else {
 					outputText("Yeah sure, you will get promoted. Or rather, you would like to but you lack the required spirit stones for the promotion fee.\n\n");
@@ -983,8 +985,8 @@ package classes.Scenes.Places.HeXinDao
 					player.removeKeyItem("Adventurer Guild: Iron plate");
 					player.createKeyItem("Adventurer Guild: Bronze plate", 0, 0, 0, 0);
 					flags[kFLAGS.SPIRIT_STONES] -= 15;
-					Slot05Cap = 10;
 					Slot06Cap = 10;
+					Slot07Cap = 10;
 				}
 				else {
 					outputText("Yeah sure, you will get promoted. Or rather you would like to but you lack the required spirit stones for the promotion fee.\n\n");
