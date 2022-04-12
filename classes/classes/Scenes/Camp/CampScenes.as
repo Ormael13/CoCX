@@ -22,9 +22,9 @@ public function KitsuneShrine():void {
     var tailz:int = SceneLib.kitsuneScene.meditateAtKitsuneShrine();
     if (tailz == 9 && flags[kFLAGS.AYANE_FOLLOWER == 0]) {
 		outputText("\n\nYou see a form surging from the shadow of the shrine. It’s Ayane and you ponder how she found your camp.");
-		outputText("\n\nThe kitsune approaches and bows to you in reverence. \"<i>You have acquired a near deific status [name], as a priestess of Taoth it would be an honor to serve as your attendant. That is, if you would allow me to follow and assist you.</i>\"");
+		outputText("\n\nThe kitsune approaches and bows to you in reverence. \"<i>You have acquired a near deific status [name]. As a priestess of Taoth it would be an honor to serve as your attendant. That is, if you would allow me to follow and assist you.</i>\"");
 		outputText("\n\nA little surprised, you ask Ayane why she wants to serve you.");
-		outputText("\n\n\"<i>Nine-tailed kitsunes are, in every aspect, divine messengers of Taoth in the mortal world. By serving you I follow the fox god's teachings and uphold his will. It would be an honor with no equal for me.</i>\"");
+		outputText("\n\n\"<i>Nine-tailed kitsunes are, in every aspect, divine messengers of Taoth in the mortal world. By serving you I follow the fox god's teachings and uphold his will. It would be the highest honor for me.</i>\"");
 		outputText("\n\nDo you take her as your attendant?");
 		doYesNo(AyaneStayAtCamp, AyaneGoBackToShrine);
 	}
@@ -35,8 +35,8 @@ public function KitsuneShrine():void {
 
 private function AyaneStayAtCamp():void {
 	clearOutput();
-	outputText("\"<i>Thank you " + player.mf("lord", "lady") + " [name] please allow me to tend to your every need from now on.</i>\"");
-	outputText("\n\nAyane nod then head back to the forest to gather her things in a weird bag that seems to never be fuller or emptier and starts to follow you around.");
+	outputText("\"<i>Thank you " + player.mf("lord", "lady") + " [name]. Please allow me to tend to your every need from now on.</i>\"");
+	outputText("\n\nAyane bows her head, then heads back to the forest to gather her things. You follow, and she packs up her possessions in a weird bag. As you watch, she packs her bedroll up and puts it in...And the bag doesn't seem to change at all. She smiles at your surprise. \"<i> Surprised? This bag is much larger on the inside. Convienient, is it not?\"</i> She finishes, and you lead your new acolyte back to camp.");
 	outputText("\n\n(<b>Ayane has been added to the Followers menu!</b>)\n\n");
 	flags[kFLAGS.AYANE_FOLLOWER] = 2;
 	doNext(camp.returnToCampUseOneHour);
@@ -269,18 +269,18 @@ public function HaveAGirlBath():void {
 
 public function HeavenTribulationThunderDoom():void {
 	clearOutput();
-	outputText("You failed. And not even in a fancy style but been defeated by merely tribulation strike. Heavenly thunder curse throu your body wrecking untold destruction on your five viscera and six bowels.\n\n");
+	outputText("You failed. It wasn't even a struggle, having been defeated by a simple heavenly strike. Lightning courses through your body, wrecking untold destruction on your five viscera and six bowels.\n\n");
 	outputText("Whatever was the reason you not passed this tribulation you may have chance to correct them if you ever reincarnate to have second chance.\n\n");
 	//[GAME OVER]
 	EventParser.gameOver();
 }
 public function HclassHTintro():void {
-	outputText("\nAn expanse of dark clouds that are jet black like ink suddenly surged over in the sky, and it roiled without end while enveloping the sky above you. Crimson red bolts of lightning that were dazzling like fireworks interweave with each other within the dark cloud, and it emits a destructive force that cause one’s heart to palpitate.\n");
+	outputText("\nAn expanse of ink-black clouds form from nowhere, engulfing the land in near-total darkness. You stand, looking up into the artificial night. You see a part of the clouds, directly above you, and from it, crimson lightning splits the sky, carving a trench in the ground in front of you. The unnatural lightning spreads, jagged webs across the black sky, the thunder roaring constantly in your ears. Your heart beats faster, your [skin] crawling with each crack.\n");
 	startCombat(new HclassHeavenTribulation());
 }
 public function HclassHTbeaten():void {
 	clearOutput();
-	outputText("After your attack clouds starts to disperce. Not from sending all their attacks against but due to been forcefully scattered by your counterattacks. Looking upward with contempt and haunty arrogance toward dispering tribulation clouds feeling few of blockages in your body have been broken throu.\n\n");
+	outputText("After your attack, the clouds part, the clear sky showing through. The hole widens, clouds scattered every which way by your counterattacks. Looking upward with contempt, you feel pride welling up within you. Your body feels lighter, stronger, your SoulForce pumping like blood through you. You've broken your limits.\n\n");
 	outputText("<b>You can now cultivate Daos of Elements.\n");
 	if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 0) {
 		var BTB:Number = 1;
@@ -296,19 +296,19 @@ public function HclassHTbeaten():void {
 }
 public function HclassHTsurvived():void {
 	clearOutput();
-	outputText("You survived, albeit in rough shape, but things could be worse. The Tribulations clouds disperse now that your trial has ended.\n\n");
+	outputText("You survived. You can feel the shocks coursing through you, your ears ringing with heavenly thunder, but things could've gone much worse. The Tribulations clouds disperse. You're battered and bruised, but your trial has ended.\n\n");
 	outputText("<b>You can now cultivate Daos of Elements.\n");
 	outputText("(Gained Perk: H class Heaven Tribulation Survivor)</b>\n");
 	player.createPerk(PerkLib.HclassHeavenTribulationSurvivor, 0, 0, 0, 0);
 	cleanupAfterCombat();
 }
 public function GclassHTintro():void {
-	outputText("\nAn expanse of dark clouds that are jet black like ink suddenly surged over in the sky, and it roiled without end while enveloping the sky above you. Crimson red bolts of lightning that were dazzling like fireworks interweave with each other within the dark cloud, and it emits a destructive force that cause one’s heart to palpitate. Your second tribulation starts now.\n");
+	outputText("\nAn expanse of ink-black clouds form from nowhere, engulfing the land in near-total darkness. You stand, looking up into the artificial night. You see a part of the clouds, directly above you, and from it, crimson lightning splits the sky, carving a trench in the ground in front of you. The unnatural lightning spreads, jagged webs across the black sky, the thunder roaring constantly in your ears. Your heart beats faster, your [skin] crawling with each crack. The wind howls, and you break into a cold sweat. Your second tribulation starts now.\n");
 	startCombat(new GclassHeavenTribulation());
 }
 public function GclassHTbeaten():void {
 	clearOutput();
-	outputText("After your attack clouds starts to disperce. Not from sending all their attacks against but due to been forcefully scattered by your counterattacks. Looking upward with contempt and haunty arrogance toward dispering tribulation clouds feeling few of blockages in your body"+(player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 3 ? " and soul":"")+" have been broken throu.\n\n");
+	outputText("After your attack, the clouds part, the clear sky showing through. The hole widens, clouds scattered every which way by your counterattacks. Looking upward with contempt, you feel pride welling up within you. Your body feels lighter, stronger, your SoulForce pumping like blood through you. You kneel, feeling your SoulForce breaking through blockages in your body"+(player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 3 ? " and soul":"")+"\n\n");
 	outputText("<b>You can now freely fly.\n");
 	if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 0) {
 		var BTB:Number = 1;
@@ -316,7 +316,7 @@ public function GclassHTbeaten():void {
 		if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 2) BTB += 3;
 		if (player.statusEffectv1(StatusEffects.HeavenTribulationCR) > 3) BTB += 4;
 		if (player.hasPerk(PerkLib.BodyTempering)) {
-			outputText("Your Body Tempering have progressed.\n");
+			outputText("Your Body Tempering has progressed.\n");
 			player.addPerkValue(PerkLib.BodyTempering, 1, BTB);
 		}
 		else {
@@ -342,7 +342,7 @@ public function GclassHTsurvived():void {
 	cleanupAfterCombat();
 }
 public function FclassHTintro():void {
-	outputText("\nAn expanse of dark clouds that are jet black like ink suddenly surged over in the sky, and it roiled without end while enveloping the sky above you. Crimson red bolts of lightning that were dazzling like fireworks interweave with each other within the dark cloud, and it emits a destructive force that cause one’s heart to palpitate. Your third tribulation starts now.\n");
+	outputText("\n An expanse of ink-black clouds form from nowhere, engulfing the land in near-total darkness. You stand, looking up into the artificial night. You see a part of the clouds, directly above you, and from it, crimson lightning splits the sky, carving a trench in the ground in front of you. The unnatural lightning spreads, jagged webs across the black sky, the thunder roaring constantly in your ears. Your heart beats faster, your [skin] crawling with each crack. The wind howls, and you break into a cold sweat. Your third tribulation starts now.\n");
 	startCombat(new FclassHeavenTribulation());
 }
 public function FclassHTbeaten():void {
@@ -401,7 +401,7 @@ public function goblinsBirthScene():void {
 	outputText("The pleasure only increase as your delivery continues... Arousal spikes through you as the contractions intensify, and as you feel something begin to pass you have a tiny orgasm. Yet this is only the beginning, and the contractions spike again, pushing you to orgasm as your daughter keeps moving forward. It repeats, over and over, nearly a dozen times she causes you to orgasm... this is even better then getting fucked! ");
 	if (daughtersCount > 1) outputText("Each new baby you pop is a new orgasm and by the end of it your tongue is panting out from pleasure, bet you look wonderful right now. ");
 	outputText("After an eternity of procreation and pleasure, you sense your ordeal is over and look for your newborn daughter"+(daughtersCount > 1 ? "s":"")+". ");
-	outputText(""+(daughtersCount > 1 ? "One of t":"T")+"he green skinned cutie is thankfully right there between your leg and by instinct you grab and cradle her against your breast. ");
+	outputText(""+(daughtersCount > 1 ? "One of t":"T")+"he green skinned cutie is thankfully right there between your legs. You grab the newborn and cradle her against your breast. ");
 	if (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] == 0) {
 		outputText("Still, since she is your firstborn, how will you name her?\n\n");
 		mainView.nameBox.text = "";
@@ -439,14 +439,14 @@ private function goblinsBirthScene2():void {
 		outputText("\"<i>Morning Mom. Hey, say I was considering your setup here and decided, instead of running about aimlessly in the wild I might as well stay around your camp. You might actually need my help to get your work running.</i>\"\n\n");
 		if (camp.maleNpcsHotBathCount() > 0 && !player.hasStatusEffect(StatusEffects.PureCampJojo)) {
 			outputText("She licks her lips glancing sideways at your camp.\n\n");
-			outputText("\"<i>Also because you have a "+(camp.maleNpcsHotBathCount() > 1 ? "few studs":"stud")+" available in the place which will help me breed a brood of my own when I’m ready to go.</i>\"\n\n");
+			outputText("\"<i>Also because you have a "+(camp.maleNpcsHotBathCount() > 1 ? "few studs":"stud")+" available in the place. Gotta think ahead, y'know? Once I'm ready to set out...</i>\" She licks her lips. <i>\"Pretty smart of you to keep them around you like this</i>\" \n\n");
 		}
 	}
 	else {
 		outputText("Your new daughter is looking at you with an adoring gaze.\n\n");
-		outputText("\"<i>Morning Mom. Hey, say I might as well stay around the camp with everyone. Big sister " + flags[kFLAGS.ELDEST_GOBLIN_DAUGHTER] + " is here too and I think I might progress better along my goal in life by staying close to you"+((camp.maleNpcsHotBathCount() > 0 && !player.hasStatusEffect(StatusEffects.PureCampJojo)) ? ". Not to mention the "+(camp.maleNpcsHotBathCount() > 1 ? "many studs":"stud")+" available around the place":"")+".</i>\"\n\n");
+		outputText("\"<i>Morning Mom. Hey, say I might as well stay around the camp with everyone. Big sister " + flags[kFLAGS.ELDEST_GOBLIN_DAUGHTER] + " is here too. Pretty sure I'm better off staying close to you"+((camp.maleNpcsHotBathCount() > 0 && !player.hasStatusEffect(StatusEffects.PureCampJojo)) ? ". Not to mention the "+(camp.maleNpcsHotBathCount() > 1 ? "many studs":"stud")+" available around the place":"")+".</i>\"\n\n");
 	}
-	outputText("Aw she’s fully grown up now but hey having more hands to get the work done only helps, right?\n\n");
+	outputText("Aw... She’s fully grown up now but hey, that's another pair of hands around the workshop, right?\n\n");
 	if (player.vaginas[0].vaginalWetness == VaginaClass.WETNESS_DRY) player.vaginas[0].vaginalWetness++;
 	if (player.breastRows.length == 0) {
 		player.createBreastRow();
@@ -470,16 +470,16 @@ private function goblinsBirthScene2():void {
 public function PCGoblinDaughters():void {
 	clearOutput();
 	if (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] > 9 && player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) {
-		outputText("You check up on your goblin daughters at the workshop. " + flags[kFLAGS.ELDEST_GOBLIN_DAUGHTER] + " noticing you, screams some directive at her younger sisters and comes over to greet you.\n\n");
+		outputText("You check up on your goblin daughters at the workshop. " + flags[kFLAGS.ELDEST_GOBLIN_DAUGHTER] + " sees you approaching, and screams an order at her younger sisters. They scramble, and she comes over to greet you.\n\n");
 		outputText("\"<i>Sup Mom, how ya doin. Can I interest you into our newest projects? Or are you looking for something else?</i>\"\n\n");
 	}
 	else if (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] > 1) {
 		outputText("You check up on your goblin daughters. " + flags[kFLAGS.ELDEST_GOBLIN_DAUGHTER] + " comes over to greet you.\n\n");
-		outputText("\"<i>Sup mom, how ya doin. Can I interest you into our newest projects? You know… if there were more of us we could actually build a workshop.</i>\"\n\n");
+		outputText("\"<i>Sup Mom, how ya doin. Can I interest you into our newest projects? You know… if there were more of us we could actually build a workshop.</i>\"\n\n");
 	}
 	else {
 		outputText("You check up on what " + flags[kFLAGS.ELDEST_GOBLIN_DAUGHTER] + " is doing.\n\n");
-		outputText("\"<i>Sup Mom! How ya doin? I’m designing a new invention project, wanna have a look?</i>\"\n\n");
+		outputText("\"<i>Sup Mom! How ya doin? I’m designing somethin' new, wanna have a look?</i>\"\n\n");
 	}
 	menu();
 	if (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] > 9 && player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) {
@@ -492,9 +492,9 @@ public function PCGoblinDaughters():void {
 }
 public function PCGoblinDaughtersBuilingWorkshop():void {
 	clearOutput();
-	outputText("You wake up this morning and notice a new structure in your camp you didn’t see before. You can hear sounds of hammering and drilling inside and come over to notice your daughters finally built that workshop they were talking about. Your daughters inside are all busy tinkering with inventions and " + flags[kFLAGS.ELDEST_GOBLIN_DAUGHTER] + " comes over to greet you.\n\n");
-	outputText("\"<i>Good morning Ma! we finally built that workshop we were all dreaming of! Look it’s already full of activity. We all run our own private projects here but sometimes come over with spare parts so feel free to dig in, you deserve as much.</i>\"\n\n");
-	outputText("Well, how nice of them! You sure will dig in for spare parts every now and then, not to mention this atelier will provide a clean and productive area to build your own many inventions. You make sure to thank your eldest for setting this up for everyone.\n\n");
+	outputText("You wake up this morning and notice a new structure in your camp you didn’t see before. You can hear the sounds of hammering and drilling inside. Upon closer inspection, you realise your daughters finally built that workshop they were talking about. Inside, your daughters are busy, tinkering with inventions or disassembling scrap metal. " + flags[kFLAGS.ELDEST_GOBLIN_DAUGHTER] + " looks up from a nearby workbench, and she walks over to greet you.\n\n");
+	outputText("\"<i>Good morning Ma! we finally built that workshop we were all dreaming of! Heh, it didn't take long, once we all pitched in. We all run our own private projects here. You see that scrap pile there? Any parts you want, you can take some. It's the least we can do. </i>\"\n\n");
+	outputText("Well, how nice of them! You sure will dig in for spare parts every now and then, not to mention, this place is a clean and productive area to work on your own projects. You make sure to thank your eldest for setting this up for everyone.\n\n");
 	player.createStatusEffect(StatusEffects.PCDaughtersWorkshop, 0, 0, 0, 0);
 	doNext(playerMenu);
 }

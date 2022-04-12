@@ -125,7 +125,7 @@
             <color name="tawny">#b97f27</color>
             <color name="turquoise">#1ed9dc</color>
             <color name="white">#e6e6eb</color>
-            <color name="yellow">#edef6b</color>
+            <color name="yellow">#fff70f</color>
             <color name="aphotic blue-black">#08155e</color>
 			<color name="bluish black">#22263a</color>
             <color name="ashen grayish-blue">#93b6c8</color>
@@ -248,10 +248,12 @@
         <key src="#223322" base="scales2" transform="darken(50)"/>
         <key src="#88FFFF" base="chitin" transform="lighten(25)"/>
         <key src="#44CCFF" base="chitin"/>
+		<key src="#42bbe9" base="chitin" transform="darken(15)"/>
         <key src="#0099CC" base="chitin" transform="darken(25)"/>
         <key src="#006666" base="chitin" transform="darken(50)"/>
         <key src="#AACCDD" base="chitin2" transform="lighten(25)"/>
         <key src="#77AACC" base="chitin2"/>
+		<key src="#6294bc" base="chitin2" transform="darken(15)"/>
         <key src="#4477AA" base="chitin2" transform="darken(25)"/>
         <key src="#114477" base="chitin2" transform="darken(50)"/>
         <key src="#FFE9CC" base="skin" transform="lighten(25)"/>
