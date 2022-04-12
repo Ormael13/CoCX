@@ -1234,32 +1234,23 @@ public class KitsuneScene extends BaseContent
 				//[Ride] - requires vagina & redheadIsFuta
 				if (player.hasVagina() && flags[kFLAGS.redheadIsFuta] > 0)
 					button = kitsuneButton(button, "RideHerCock", rideDatRedheadKitsuneCockIntoTheSkyDiamonds);
-				if (flags[kFLAGS.redheadIsFuta] > 0 && player.hasVagina() && player.biggestTitSize() >= 4 && (player.armorName == "lusty maiden's armor" || player.armorName == "Succubus armor"))
-					if (player.armorName == "Succubus armor") button = kitsuneButton(button, "B.Titfuck", (player.armor as SuccubusArmor).succubusPaizuri);
-					else button = kitsuneButton(button, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
+				if (flags[kFLAGS.redheadIsFuta] > 0)
+                    LustyMaidensArmor.addTitfuckButton(12);
 			}
 			//[Feeder]
 			if (player.hasPerk(PerkLib.Feeder))
 				button = kitsuneButton(button, "Breastfeed", feederTheKitsunes);
-			//Remove buttons in SFW mode. No rapes!
-			if (flags[kFLAGS.SFW_MODE] > 0) {
-				removeButton(0);
-				removeButton(1);
-				removeButton(2);
-				removeButton(3);
-				removeButton(4);
-				removeButton(5);
-				removeButton(6);
-				removeButton(7);
-				removeButton(8);
-			}
 			SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatTheKitsunes);
+			//Remove buttons in SFW mode. No rapes!
+			if (flags[kFLAGS.SFW_MODE] > 0)
+                for (var i:int = 0; i < 14; ++i)
+                    removeButton(i);
 			addButton(14, "Leave", leaveKitsune);
 		}
 
 		private function kitsuneButton(button:int, nam:String, func:Function):int
 		{
-			if (button > 8) return 9;
+			if (button > 11) return 11;
 			addButton(button, nam, func);
 			button++;
 			return button;

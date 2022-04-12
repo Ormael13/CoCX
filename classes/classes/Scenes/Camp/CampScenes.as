@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.Camp 
+package classes.Scenes.Camp
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
@@ -11,7 +11,7 @@ import classes.Scenes.NPCs.*;
 import classes.Scenes.SceneLib;
 
 use namespace CoC;
-	
+
 public class CampScenes extends NPCAwareContent{
 
 public static var elderKitsuneColors:Array = ["metallic golden", "golden blonde", "metallic silver", "silver blonde", "snow white", "iridescent gray"];
@@ -50,17 +50,50 @@ private function AyaneGoBackToShrine():void {
 
 public function HotSpring():void {
 	menu();
-	if (!player.hasCock()) addButton(0, "Bath (F)", HaveAGirlBath).hint("Have a bath.");
-	if (player.hasCock()) {
-		addButton(1, "Bath (M)", HaveABoysBath).hint("Have at bath.");
-		if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] >= 5) addButton(2, "PeepingTom", PeepingTom2).hint("Peep at bath.");
+	switch(player.gender) {
+		case 0:
+		case 2:
+			addButton(0, "Bath (F)", HaveAGirlBath).hint("Have a bath.");
+			break;
+		case 1:
+			addButton(1, "Bath (M)", HaveABoysBath).hint("Have a bath.");
+			if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] >= 5) addButton(2, "Peep", PeepingTom2).hint("Peep at bathing girls.");
+			break;
+		case 3:
+			//girls
+			if (player.femininity >= 60 || player.femininity >= 30 && player.breastRows[0].breastRating > 1
+				|| player.breastRows[0].breastRating >= Appearance.breastCupInverse("D"))
+				addButton(0, "Bath (F)", HaveABoysBath).hint("Have a bath with girls.");
+			else addButtonDisabled(0, "Bath (F)", "You're too masculine to count as a female. Perhaps, if you have big enough rack, they'll reconsider?");
+            //boys
+			if (player.femininity <= 30 || player.femininity <= 60 && player.breastRows[0].breastRating < 2 || player.longestCockLength() > 20)
+				addButton(1, "Bath (M)", HaveABoysBath).hint("Have a bath with boys.");
+			else addButtonDisabled(1, "Bath (M)", "You're too feminine. Maybe having a big enough dick to shadow them all will make them reconsider?");
+			if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] >= 5) addButton(2, "Peep", PeepingTom2).hint("Peep at bathing girls.");
+			break;
 	}
 	addButton(14, "Back", playerMenu);
-} 
+}
 
 public function HaveABoysBath():void {
 	clearOutput();
 	outputText("You decide to take a bath to rest your weary body.\n\n");
+	if (player.gender == 3) {
+		outputText("Although you have some 'parts' unusual for males ");
+		if (player.femininity >= 60)
+			outputText("and <i>clearly</i> look like a girl");
+		if (player.breastRows[0].breastRating > 0)
+			outputText(", not to mention your noticeable [breasts]");
+        if (player.longestCockLength() > 20)
+		    outputText(", your [cock biggest] makes it clear that you have the right to be amongst them.\n");
+        else
+            outputText(", they allow you to stay.\n")
+		outputText("\n\nThe bath didn't start yet, but you already bath in their glances. Some boys look slightly ucomfortable, others sneakily eye your treasures.");
+		if (player.cor < 33)
+			outputText("  You feel slightly nervous yourself under their hungry gazes, but try not to show your nervousness.\n\n");
+		else
+			outputText("You quickly notice their looks and even by chance show off your [breasts] and [butt].\n\n");
+	}
 	if (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3) outputText("Jojo isn’t exactly what you would call muscular, but his size and lean frame fits his mouse appearance.\n\n");
 	if (player.hasStatusEffect(StatusEffects.CampRathazul)) outputText("You're almost glad you don’t see any part of Rathazul’s body beyond the hip level. Though, you’re not particularly interested anyway.\n\n");
 	if (arianScene.arianFollower() && flags[kFLAGS.ARIAN_VAGINA] < 1 && flags[kFLAGS.ARIAN_COCK_SIZE] > 0) outputText("Arian doesn’t seem to hate the water. He's likely cold blooded and is probably enjoying it.\n\n");
@@ -134,7 +167,7 @@ public function PeepingTom3():void {
 	if (flags[kFLAGS.DIANA_FOLLOWER] >= 6 && !player.hasStatusEffect(StatusEffects.DianaOff)) outputText("Diana is resting next to a set of medicinal and aromatic oils she regularly spray in the bath.\n\n");
 	//if (flags[kFLAGS.MICHIKO_FOLLOWER] >= 1) Michiko
 	if (flags[kFLAGS.MITZI_RECRUITED] >= 4) outputText("Your resident goblin Mitzi saunters over, looking excited. She strips what little clothing she wears then climbs into the warm waters. Her large tits help her stay afloat as she lays back and relaxes, letting out a sigh of relief.\n\n");
-	if (flags[kFLAGS.EXCELLIA_RECRUITED] >= 33) outputText("Excellia comes over to enjoy the soothing waters. She climbs in, letting out a content moo as she lays back letting the warm waters wash over her.\n\n");
+	if (flags[kFLAGS.EXCELLIA_RECRUITED] >= 33) outputText("Excellia comes over to enjoy the soothing waters. She climbs in, letting out a content [exc moo] as she lays back letting the warm waters wash over her.\n\n");
 	if (flags[kFLAGS.LUNA_FOLLOWER] >= 4 && !player.hasStatusEffect(StatusEffects.LunaOff)) outputText("Luna is enjoying a break relaxing for once as she is not on duty" + (flags[kFLAGS.LUNA_FOLLOWER] > 6 ? ", though for a few split second you imagined her doing doggy paddle in the water" : "") + ".\n\n");
 	if (arianScene.arianFollower() && flags[kFLAGS.ARIAN_VAGINA] > 0 && flags[kFLAGS.ARIAN_COCK_SIZE] == 0) outputText("Arian while formerly a male seems to get along with the other girls.\n\n");
 	if (flags[kFLAGS.SIDONIE_FOLLOWER] >= 1) {
@@ -164,6 +197,22 @@ public function PeepingTom3():void {
 public function HaveAGirlBath():void {
 	clearOutput();
 	outputText("You sigh in relief as you remove your clothes and head to the bath along with the other girls.\n\n");
+    if (player.gender == 3) {
+        outputText("Although you have an extra endowment ");
+        if (player.femininity <= 30)
+            outputText("and <i>clearly</i> look like a male");
+        if (player.breastRows[0].breastRating < 0)
+            outputText(", not to mention your small [breasts]");
+		if (player.breastRows[0].breastRating >= Appearance.breastCupInverse("D"))
+        	outputText(", the sheer size of your [breasts] makes it clear your can stay with them.\n");
+		else
+			outputText(", nobody objects.\n")
+        outputText("\n\nWhile relaxing in warm water, you notice that girls pay <i>really</i> close attention to your [cock].");
+        if (player.cor < 33)
+            outputText("  You feel shy under their hungry gazes, but try not to show your stress, trying to cover your dick with your hands.\n\n");
+        else
+            outputText("  You quickly notice their looks and even give a few occasional strokes to your dick to make it rise to its full mast. Your efforts pay off — some girls stopped chatting to each other to openly stare at you.\n\n");
+    }
 	if (amilyScene.amilyFollower() && !amilyScene.amilyCorrupt()) outputText("Amily is sitting in the left corner. Naturally, she’s a little shy about her modest breasts.\n\n");
 	if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3 && flags[kFLAGS.JOY_COCK_SIZE] < 1) outputText("Joy is quite silent for once, you expected her to constantly blabber lewd comments about everyone's nudity.\n\n");
 	if (followerKiha()) outputText("Kiha definitely doesn’t have a size complex, with her huge breasts leaving most of the other girls in the shade.\n\n");
@@ -189,7 +238,7 @@ public function HaveAGirlBath():void {
 	if (flags[kFLAGS.DIANA_FOLLOWER] >= 6 && !player.hasStatusEffect(StatusEffects.DianaOff)) outputText("Diana is resting next to a set of medicinal and aromatic oils she regularly spray in the bath. Can’t say this is not welcome.\n\n");
 	//if (flags[kFLAGS.MICHIKO_FOLLOWER] >= 1) Michiko
 	if (flags[kFLAGS.MITZI_RECRUITED] >= 4) outputText("Your resident goblin Mitzi saunters over, looking excited. She strips what little clothing she wears then climbs into the warm waters. Her large tits help her stay afloat as she lays back and relaxes, letting out a sigh of relief.\n\n");
-	if (flags[kFLAGS.EXCELLIA_RECRUITED] >= 33) outputText("Excellia comes over to enjoy the soothing waters. She climbs in, letting out a content moo as she lays back letting the warm waters wash over her.\n\n");
+	if (flags[kFLAGS.EXCELLIA_RECRUITED] >= 33) outputText("Excellia comes over to enjoy the soothing waters. She climbs in, letting out a content [exc moo] as she lays back letting the warm waters wash over her.\n\n");
 	if (flags[kFLAGS.LUNA_FOLLOWER] >= 4 && !player.hasStatusEffect(StatusEffects.LunaOff)) outputText("Luna is enjoying a break relaxing for once as she is not on duty" + (flags[kFLAGS.LUNA_FOLLOWER] > 6 ? ", though for a few split second you imagined her doing doggy paddle in the water" : "") + ".\n\n");
 	if (flags[kFLAGS.IZMA_FOLLOWER_STATUS] == 1 && flags[kFLAGS.FOLLOWER_AT_FARM_IZMA] == 0) {
 		if (flags[kFLAGS.IZMA_NO_COCK] == 0) outputText("While not entirely a girl, Izma is womanly enough that she was still accepted in the bath, her crotch well hidden behind a cloth.\n\n");

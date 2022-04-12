@@ -104,7 +104,7 @@ public class SceneHunter extends BaseContent {
     * @param    dickActive      If false, "dick" button will be disabled.
     * @param    dickDisabledMsg The message to write on the disabled dick button
     */
-    public function selectGender(dickF:Function, vagF:Function, assA:* = null, hermF:Function = null, dickPriority:int = 0, dickActive:Boolean = true, dickDisabledMsg:String = ""):void {
+    public function selectGender(dickF:Function, vagF:Function, assA:* = null, hermF:Function = null, dickPriority:int = 1, dickActive:Boolean = true, dickDisabledMsg:String = ""):void {
         //decomposing ass
         var assText:String = (assA is Array) ? assA[0] : "Ass";
         var assF:Function = (assA is Function)  ? assA as Function :
@@ -364,6 +364,10 @@ public class SceneHunter extends BaseContent {
         return flags[kFLAGS.SCENEHUNTER_OTHER];
     }
     //nothing more here for now... Will it just check the value, or new next will be here too?
+
+    //Recalling is 'technically' still a SceneHunter feature, so we're storing its flag here.
+    //Set to true to disable everything but text in recalled scenes
+    public var recalling:Boolean = false; //set to true when a scene is recalled.
     
     //--------------------------------------------------------------------------------------------------
     // PrintChecks

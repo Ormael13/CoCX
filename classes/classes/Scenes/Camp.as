@@ -6668,20 +6668,35 @@ public function rebirthFromBadEnd():void {
 		outputText("<i>I ask thee, eternal time...</i>\n");
 		outputText("\n\nThis part is WIP. You can add more scenes.");
 		outputText("\nThe idea behind is to try unique scenes with different ways or options or body parts.");
+        sceneHunter.recalling = true; //Setting the flag to disable everything but text
         menu();
         //Marble scene
 		if (flags[kFLAGS.MARBLE_PURIFIED] == 1)
-			addButton(0, "Marble & Clara", SceneLib.marblePurification.defeatClaraCuntInAFight, false, true);
+			addButton(0, "Marble & Clara", SceneLib.marblePurification.defeatClaraCuntInAFight, false);
         else
 			addButtonDisabled(0, "M & C", "Requires completing Marble's purification quest.");
         //Excellia slave first scene
 		if (flags[kFLAGS.EXCELLIA_RECRUITED] == 2)
-			addButton(1, "Excellia Slv", SceneLib.excelliaFollower.ExcelliaPathChoiceMakeSlave, true);
+			addButton(1, "Excellia Slv", SceneLib.excelliaFollower.ExcelliaPathChoiceMakeSlave);
         else
-			addButtonDisabled(1, "E Slv", "Requires recruiting Excellia as a slave.");
-		addButtonDisabled(13, "BadEnds", "SH is too lazy to add them too right now, but if anyone wants...");
-        addButton(14, "Wake Up", campSpendTimeActions);
-    }	
+			addButtonDisabled(1, "E. Slv", "Requires enslaving a certain cow-slut.");
+        
+        //Excellia slave first scene
+		if (flags[kFLAGS.ANT_COLONY_KEPT_HIDDEN] || flags[kFLAGS.PHYLLA_SAVED]) {
+            if (player.cor >= 66 - player.corruptionTolerance() && player.gender > 0)
+                addButton(2, "PhyllaCart", SceneLib.desert.antsScene.demonsFuckAntgirl);
+            else addButtonDisabled(2, "PhyllaCart", "You must be corrupted and not genderless to recall this.");
+        }
+        else addButtonDisabled(2, "P. Cart", "Requires saving one ant-girl.");
+        //bruh
+		addButtonDisabled(13, "BadEnds", "SH is too lazy to add them");
+        addButton(14, "Wake Up", recallWakeUp);
+    }
+
+    public function recallWakeUp():void {
+        sceneHunter.recalling = false; //EVERY recall scene must return here to clear the flag.
+        campSpendTimeActions();
+    }
 
 	/*
         private function fixHistory():void {

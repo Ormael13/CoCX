@@ -750,32 +750,23 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  }
 	);
 
-	public const SkinPatternBeeStripes: Transformation = new SimpleTransformation("Bee Stripes Skin Pattern",
-	  // apply effect
-	  function (doOutput: Boolean): void {
-	    var desc: String = "";
-
-			var coverage: int = player.skin.coverage;
-			if (coverage === Skin.COVERAGE_NONE) coverage = Skin.COVERAGE_LOW;
-
-			TransformationUtils.applyTFIfNotPresent(transformations.SkinChitin(coverage, {color: "yellow"}), doOutput);
-
-			desc += "A ripple spreads through your chitin as some patches change in color. After a few moments you're left with a yellow and black striped pattern, like a bee's! <b>You've got striped chitin!</b>";
-
+	public const SkinPatternBeeStripes:Transformation = new SimpleTransformation("Bee Stripes Skin Pattern",
+		// apply effect
+		function (doOutput:Boolean):void {
+			TransformationUtils.applyTFIfNotPresent(transformations.SkinChitin(Skin.COVERAGE_LOW, { color: "yellow" }), doOutput);
+			var desc:String = desc += "A ripple spreads through your chitin as some patches change in color. After a few moments you're left with a yellow and black striped pattern, like a bee's! <b>You've got striped chitin!</b>";
 			player.skin.base.pattern = Skin.PATTERN_BEE_STRIPES;
-		  	if (!InCollection(player.coatColor2, "black","ebony")){
-			  	player.coatColor2 = randomChoice("black","ebony");
-		  	}
-		  	if (player.coatColor2 != "yellow"){
-			  	player.coatColor = "yellow";
-		  	}
-	    if (doOutput) outputText(desc);
-	  	Metamorph.unlockMetamorph(SkinPatternMem.getMemory(SkinPatternMem.BEE_STRIPES));
-	  },
-	  // is present
-	  function (): Boolean {
+			if (!InCollection(player.coatColor2, "black", "ebony"))
+				player.coatColor2 = randomChoice("black", "ebony");
+			if (player.coatColor2 != "yellow")
+				player.coatColor = "yellow";
+			if (doOutput) outputText(desc);
+			Metamorph.unlockMetamorph(SkinPatternMem.getMemory(SkinPatternMem.BEE_STRIPES));
+		},
+		// is present
+		function ():Boolean {
 			return player.skin.base.pattern === Skin.PATTERN_BEE_STRIPES;
-	  }
+		}
 	);
   /*
 */

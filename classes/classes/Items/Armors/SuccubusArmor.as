@@ -14,6 +14,7 @@ import classes.Player;
 import classes.Scenes.Areas.HighMountains.MinotaurMob;
 import classes.Scenes.Areas.Mountain.Minotaur;
 import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
+import classes.Scenes.NPCs.Ceraph;
 import classes.Scenes.SceneLib;
 import classes.lists.BreastCup;
 
@@ -128,7 +129,7 @@ import classes.lists.BreastCup;
 			if(player.hasVirginVagina()) game.player.dynStats("cor", -1);
 			//If minotaur, increase addiction slightly.
 			if(monster is Minotaur || monster is MinotaurLord || monster is MinotaurMob) player.minoCumAddiction(3);
-			if(monster.short == "Ceraph") game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00291]++;
+			if(monster is Ceraph) game.flags[kFLAGS.TIMES_BEATEN_SERAPH_WITHOUT_LOSING]++;
 			//Usable on: Imps, Minotaurs, Satyrs, Incubus Mechanic, Anemones, Spider Guys, Akbal, Drider, Fetish Zealot, Sand Trap, Very Corrupt Jojo (Maybe slight decorruption to him), Ceraph, Red Kitsune if cock out.
 			if (game.inCombat)
 				SceneLib.combat.cleanupAfterCombatImpl();

@@ -13,8 +13,13 @@ import classes.Player;
 import classes.Scenes.Areas.HighMountains.MinotaurMob;
 import classes.Scenes.Areas.Mountain.Minotaur;
 import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
+import classes.Scenes.NPCs.Ceraph;
 import classes.Scenes.SceneLib;
 import classes.lists.BreastCup;
+import coc.view.CoCButton;
+import classes.CoC;
+
+import classes.Items.Armors.SuccubusArmor
 
 public final class LustyMaidensArmor extends Armor {
 		
@@ -132,11 +137,20 @@ public final class LustyMaidensArmor extends Armor {
 			if(player.hasVirginVagina()) game.player.dynStats("cor", -1);
 			//If minotaur, increase addiction slightly.
 			if(monster is Minotaur || monster is MinotaurLord || monster is MinotaurMob) player.minoCumAddiction(3);
-			if(monster.short == "Ceraph") game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00291]++;
+			if(monster is Ceraph) game.flags[kFLAGS.TIMES_BEATEN_SERAPH_WITHOUT_LOSING]++;
 			//Usable on: Imps, Minotaurs, Satyrs, Incubus Mechanic, Anemones, Spider Guys, Akbal, Drider, Fetish Zealot, Sand Trap, Very Corrupt Jojo (Maybe slight decorruption to him), Ceraph, Red Kitsune if cock out.
 			if (game.inCombat)
 				SceneLib.combat.cleanupAfterCombatImpl();
 			else EngineCore.doNext(SceneLib.camp.returnToCampUseOneHour);
 		}
+
+        public static function addTitfuckButton(btn:int, player:Player = null, monster:Monster = null):CoCButton {
+			if (player == null) player = CoC.instance.player;
+            if (player.armor is LustyMaidensArmor)
+                return EngineCore.addButton(btn, "B.Titfuck", curry((player.armor as LustyMaidensArmor).lustyMaidenPaizuri, player, monster));
+            else if (player.armor is SuccubusArmor)
+                return EngineCore.addButton(btn, "B.Titfuck", curry((player.armor as SuccubusArmor).succubusPaizuri, player, monster));
+            else return EngineCore.addButtonDisabled(btn, "B.Titfuck", "Req. to have Lusty Maiden's or Succubus armor equipped.")
+        }
 	}
 }

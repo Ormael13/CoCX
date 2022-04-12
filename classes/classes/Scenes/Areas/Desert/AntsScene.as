@@ -123,40 +123,61 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
             phyllaSprite();
 			outputText("While traversing an unfamiliar part of this desert wasteland, ");
 			if (player.cor > 75 && player.lust > 50) outputText(" looking for something to slake your unquenchable lusts, ");
-			outputText("you come across an abandoned merchant's cart.  The cart looks eerily disheveled, with a majority of its contents strewn about the sand.  Whoever or whatever deserted this thing did so in a hurry, and for seemingly no reason. Curious, you decide to inspect it for anything worthwhile.");
-			outputText("\n\nSuddenly a loud crash erupts from inside the cart.  Instinctually you dive behind some large rocks, quickly re-evaluating the cart's dereliction.  The crash is followed by a clattering of sounds as if someone is stumbling around from within.");
-			outputText("\n\nYou watch as a creature awkwardly climbs out the back of the wooden mess. As you've never seen anything like her before, you hold your position, deciding to watch before assessing the potential threat.  Quietly and stealthily, you shift position to get a better view of this ransacker.");
-			outputText("\n\nYour eyes widen and your mouth hangs agape when you realize she has four arms!  Her two primary arms are attached at her shoulders, where you would expect, but a smaller set is attached to the sides of what you assume is her ribcage, just below the armpit.  All of her arms and legs are covered in shiny black chitin; the joints of her body seem to interlock with each other, giving her a very insectile appearance.");
-			outputText("\n\nShe has an extremely lean and muscular frame, albeit one with wide, girly hips.  The muscles on her torso are clearly visible, though the coverings on her appendages make it impossible to assess the underlying body.  You feel safe in assuming she's fairly strong, however - judging by how she upturns the cart with ease to look under it!  She sports a slightly feminine face with thin lips and two completely emerald-green eyes.  You watch as she holds up trinkets and knick-knacks; curiously examining them at first, then indifferently discarding them.");
-			outputText("\n\nHer abdomen seems to bend and bob with her hips as she rummages through the broken cart.  Every now and then she pulls a crude sundial from a carrying pouch about her hips and checks it laboriously against a flat surface, as if she's on some kind of deadline.");
-			outputText("\n\nHer second set of arms blocks you from getting a full view of her chest, preventing determination of her cup size.  Though, you do get several pleasing partial views while she ransacks the cart...  Wearing almost no clothing probably isn't uncommon for her, judging how open she is with her nudity.  Her tan skin looks smooth as the sun glints off her black chitin plates. A small loincloth does its best to cover her genitalia, but with the gusting desert wind, the small garment is nearly useless.  The lips of her vagina appear to be as smooth as the rest of her skin, with no signs of hair - not surprising, when you consider her insect-like appearance.");
-			outputText("\n\nHer short sandy-brown hair seems to be unkempt and in tangles, although a tarnished golden tiara with dangling gems catches the sunlight and gives the hair some style.  You wonder if she found the tiara while searching the cart, or if she had it before.");
-			outputText("\n\nAs you consider your options, a group of demons crests the sand dune directly across from you.  Like you, they seem just as confused at the sight of the strange girl.  Unlike you, they make no effort to hide.  Once they see the ant-girl is alone, they quickly descend on the cart; the poor girl is taken completely by surprise.  Clearly she's never faced such a large group of demons before. The cracked flower vase she's holding her in hands shakes visibly as horror etches itself on her face.");
-			outputText("\n\nYou could watch from where you're hiding, or you could play the hero and step in.");
-			//[Keep Hidden]
-			//[Play Hero]
-			simpleChoices("Play Hero", playHero, "Keep Hidden", keepHidden, "", null, "", null, "", null);
+			outputText("you come across an abandoned merchant's cart.  The cart looks eerily disheveled, with a majority of its contents strewn about the sand.  Whoever or whatever deserted this thing did so in a hurry, and for seemingly no reason.")
+            //add button to avoid savescumming
+            outputText("Do you want to approach the cart <i>right now</i>, risking to attact demon's attention, or leave?\n\n");
+            menu();
+            addButton(0, "Inspect", later);
+            addButton(1, "Later", approach).hint("Maybe later? You have other business right now.");
+
+            //options
+            function later():void {
+                outputText("The cart is standing in the middle of the desert, and still nobody has looted it? It's clearly a trap. And you're not ready to risk your life for any rubbish inside it right now. You return to your camp, hoping that the time you'll be strong enough.");
+                camp.returnToCampUseOneHour();
+            }
+
+            function approach():void {
+                outputText("Curious, you decide to inspect it for anything worthwhile.");
+                outputText("\n\nSuddenly a loud crash erupts from inside the cart.  Instinctually you dive behind some large rocks, quickly re-evaluating the cart's dereliction.  The crash is followed by a clattering of sounds as if someone is stumbling around from within.");
+                outputText("\n\nYou watch as a creature awkwardly climbs out the back of the wooden mess. As you've never seen anything like her before, you hold your position, deciding to watch before assessing the potential threat.  Quietly and stealthily, you shift position to get a better view of this ransacker.");
+                outputText("\n\nYour eyes widen and your mouth hangs agape when you realize she has four arms!  Her two primary arms are attached at her shoulders, where you would expect, but a smaller set is attached to the sides of what you assume is her ribcage, just below the armpit.  All of her arms and legs are covered in shiny black chitin; the joints of her body seem to interlock with each other, giving her a very insectile appearance.");
+                outputText("\n\nShe has an extremely lean and muscular frame, albeit one with wide, girly hips.  The muscles on her torso are clearly visible, though the coverings on her appendages make it impossible to assess the underlying body.  You feel safe in assuming she's fairly strong, however - judging by how she upturns the cart with ease to look under it!  She sports a slightly feminine face with thin lips and two completely emerald-green eyes.  You watch as she holds up trinkets and knick-knacks; curiously examining them at first, then indifferently discarding them.");
+                outputText("\n\nHer abdomen seems to bend and bob with her hips as she rummages through the broken cart.  Every now and then she pulls a crude sundial from a carrying pouch about her hips and checks it laboriously against a flat surface, as if she's on some kind of deadline.");
+                outputText("\n\nHer second set of arms blocks you from getting a full view of her chest, preventing determination of her cup size.  Though, you do get several pleasing partial views while she ransacks the cart...  Wearing almost no clothing probably isn't uncommon for her, judging how open she is with her nudity.  Her tan skin looks smooth as the sun glints off her black chitin plates. A small loincloth does its best to cover her genitalia, but with the gusting desert wind, the small garment is nearly useless.  The lips of her vagina appear to be as smooth as the rest of her skin, with no signs of hair - not surprising, when you consider her insect-like appearance.");
+                outputText("\n\nHer short sandy-brown hair seems to be unkempt and in tangles, although a tarnished golden tiara with dangling gems catches the sunlight and gives the hair some style.  You wonder if she found the tiara while searching the cart, or if she had it before.");
+                outputText("\n\nAs you consider your options, a group of demons crests the sand dune directly across from you.  Like you, they seem just as confused at the sight of the strange girl.  Unlike you, they make no effort to hide.  Once they see the ant-girl is alone, they quickly descend on the cart; the poor girl is taken completely by surprise.  Clearly she's never faced such a large group of demons before. The cracked flower vase she's holding her in hands shakes visibly as horror etches itself on her face.");
+                outputText("\n\nYou could watch from where you're hiding, or you could play the hero and step in.");
+                simpleChoices("Play Hero", playHero, "Keep Hidden", keepHidden, "", null, "", null, "", null);
+            }
 		}
 
 //►[Keep Hidden]
-		private function keepHidden():void
-		{
+		private function keepHidden():void {
 			flags[kFLAGS.ANT_COLONY_KEPT_HIDDEN] = 1;
 			//If Male/Female/Herm and Corruption & Libido Under 40 OR If Unsexed Leads to - If Under 40
 			//If Male/[Use Dick - Herm] and Corruption & Libido Over 41 Leads to - If Over 41 - Male
 			//If Female/[Use Vagina - Herm] and Corruption & Libido Over 41 Leads to - If  Over 41 - Female
-			clearOutput();
 			//If Under 40
-			if ((player.lib < 41 && player.lust < 50) || player.cor < 66 || player.gender == 0) {
+			if ((player.lib < 41 && player.lust < 50) || player.cor < 66 - player.corruptionTolerance() || player.gender == 0) {
+			    clearOutput();
+                sceneHunter.print("Failed check: High libido/lust, high corruption, not genderless");
 				outputText("After seeing the large pack of demons you decide it's best not to act.  You yourself are in no condition to help the poor creature, and knowing full well what comes after demons 'subdue' their prey, you don't want to stick around either.  You glance over and realize the skirmish has already started.  It's too late to really help her anyway, you argue to yourself, plus she's covered in muscle.");
 				outputText("\n\nAssuring yourself that she'll be fine, you take the opportunity to flee while the demons are distracted, heading back to camp.  Leaving the ant-girl to her fate.");
 				//[End of Event]
 				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
-			//►(If Over 41 - Male)
-			else if (player.hasCock()) {
-				outputText(images.showImage("ants-desert-male-firstencounter"));
+            else demonsFuckAntgirl();
+        }
+
+        public function demonsFuckAntgirl():void {
+			clearOutput();
+			outputText(images.showImage("ants-desert-male-firstencounter"));
+
+            sceneHunter.selectGender(dickF, vagF);
+            //PARTS
+            //==========================================================================================
+            function dickF():void {
 				outputText("You know exactly what's going to happen once the demons 'subdue' their prey.  The growing throbbing in your loins begs for release, and you quickly and quietly take off your [armor], making sure the demons don't notice you.  You might as well watch the show as you're not gonna be able to leave unnoticed until the demons are done anyways.");
 				outputText("\n\nWatching from your hiding spot you start to stroke your [cock].");
 				//Start Dick Size Check
@@ -191,12 +212,9 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 				outputText(" load.  Once you can refocus your eyes, you see the hermaphrodite pull out, and as it does a burst of cum sprays out of the ant-morph's vagina as her stomach deflates slightly.  She's been filled with so much corrupt seed that it's stretched her belly to the point it resembles a third-trimester pregnancy.");
 				outputText("\n\nYour body satisfied, you drift off.  When you awaken much later, the demons and the ant seem to have moved on, thankfully without noticing you.  You put your armor back on and return to camp.");
 				//[End of Event]
-				//maybe lower libido and raise corruption, huh
-				player.sexReward("Default","Dick",true,false);
-				dynStats("sen", -1,  "cor", 3);
-			}
-			//►If Over 41 - Female
-			else {
+                sharedEnd();
+            }
+			function vagF():void {
 				outputText(images.showImage("ants-desert-female-firstencounter"));
 				outputText("Watching from your hiding spot, you consider what's going to happen and feel your pussy immediately moisten.  Your practiced hands move with deftness, slipping into your [armor].");
 				outputText("\n\nFeeling your heat through your [armor], you quickly and quietly strip, every now and then glancing down to make sure you're not seen.  Once you're completely nude, you find a nice vantage point to view the impending rape.  By the time you've gotten yourself ready, you realize the demons have already started.");
@@ -217,11 +235,15 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 				outputText("\n\nWhen the next demon lines its cock up with the ant's vagina, you slip your fingers deep inside yourself.  Watching as the demon pumps, slowly at first but with mounting passion, you mimic his rhythm, imagining him inside you instead.  Your other hand's experienced fingers work quickly over your clit.  As your thoughts focus on your own fantasy, you see the demon throw back his head and give one final powerful thrust.  In answer, you pound your own fingers deep into your pussy, hitting your g-spot by sheerest luck.  Together you and the demon climax in blissful moans.  He yields his place to the next, while you yield your consciousness to the glow of sexual satisfaction and fall asleep.");
 				outputText("\n\nWhen you awaken from the refreshing doze, you sit up and look from your hiding spot.  You must have been out longer than you thought, because the demons seem to have moved on.  All that's left is the ant-morph, lying in and still oozing a puddle of tainted semen, with hymen and possibly mind broken by the demonic orgy.  You quickly get dressed and head back to camp.");
 				//[End of Event]
-				//lib down, corr up
-				player.sexReward("Default","Default",true,false);
-				dynStats("sen", -1,  "cor", 3);
+                sharedEnd();
 			}
-			doNext(camp.returnToCampUseOneHour);
+            function sharedEnd():void {
+                if (!sceneHunter.recalling) {
+                    player.sexReward("Default","Default",true,false);
+                    dynStats("sen", -1,  "cor", 3);
+                }
+                doNext(sceneHunter.recalling ? camp.recallScenes : camp.returnToCampUseOneHour);
+            }
 		}
 
 //►[Play Hero]
@@ -230,6 +252,10 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 			spriteSelect(SpriteDb.s_antguards);
 			clearOutput();
 			//►Introduction to Combat
+            if (player.cor >= 66 - player.corruptionTolerance()) {
+                outputText("You hesitate for a moment, fighting the urge to just sit there and watch the demons rape the poor ant.");
+                outputText("\n<b>Alt scene is unlocked in 'Recall' menu!</b>\n\n");
+            }
 			outputText("As the demons bear down on the ant-girl, you burst from your hiding place, raising your [weapon] to the air and uttering an impressive war cry.  Nobody, ant or otherwise, is getting raped if you have any say in the matter!");
 			outputText("\n\nYou are now fighting demons!");
 			startCombat(new DemonPackDesert());
