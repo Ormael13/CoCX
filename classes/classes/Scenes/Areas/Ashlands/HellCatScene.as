@@ -47,10 +47,7 @@ public function DefeatedHellCat():void {
 	addButton(0, "Back", cleanupAfterCombat);
 	if (player.hasCock()) addButton(1, "Pussycat", DefeatedHellCatPussycat);
 	if (player.hasVagina()) addButton(2, "Catcock", DefeatedHellCatCatcock);
-	if (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armor == armors.LMARMOR || player.armor == armors.S_ARMOR)) {
-		if (player.armor == armors.S_ARMOR) addButton(3, "B.Titfuck", (player.armor as SuccubusArmor).succubusPaizuri);
-		else addButton(3, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
-	}
+    LustyMaidensArmor.addTitfuckButton(3);
 	SceneLib.uniqueSexScene.pcUSSPreChecksV2(DefeatedHellCat);
 	}
 

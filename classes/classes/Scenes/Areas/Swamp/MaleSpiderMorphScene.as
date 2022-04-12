@@ -67,19 +67,6 @@ public class MaleSpiderMorphScene extends BaseContent
 		{
 			clearOutput();
 			spriteSelect(SpriteDb.s_spiderguy);
-		/*	var mount:Function =null;
-			var buttfuck:Function =null;
-			var frot:Function =null;
-			if (player.hasVagina()) mount = victoryCowgirlRidingOnSpiderBoi;
-			if (player.hasCock()) {
-				if (player.cockThatFits(monster.analCapacity()) != -1) buttfuck = victoryButtFuck;
-				if (player.biggestCockArea() > monster.analCapacity()) frot = victoryFrotTheSpoidah;
-			}
-		*/	var bikiniTits:Function = null;
-			if (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armorName == "lusty maiden's armor" || player.armorName == "Succubus armor")) {
-				if (player.armorName == "Succubus armor") bikiniTits = createCallBackFunction2((player.armor as SuccubusArmor).succubusPaizuri,player,monster);
-				else bikiniTits = createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,monster);
-			}
 			outputText("The male spider-morph collapses onto his hands and knees, ");
 			if (monster.lust >= monster.maxLust()) outputText("masturbating with furious abandon, working his ebon dick with such vigor that the spider's pre-cum-slicked dick-skin noisily slides itself back and forth over his fattened glans; it becomes apparent just how much foreskin he truly has at this point, as even with his frenzied rubbing his glans remains shrouded in the thick excess skin while his fist slaps lewdly against his groin.  Dribbles of pre-cum leak from between his fingers to spill on the ground.");
 			else outputText("wobbling back and forth as he tries to stay up and fight.  There's no way he can oppose you, as beaten as he is now.");
@@ -94,7 +81,7 @@ public class MaleSpiderMorphScene extends BaseContent
 				if (player.cockThatFits(monster.analCapacity()) != -1) addButton(1, "FuckHisButt", victoryButtFuck);
 				if (player.biggestCockArea() > monster.analCapacity()) addButton(2, "Frot", victoryFrotTheSpoidah);
 			}
-			addButton(3, "B.Titfuck", bikiniTits);
+			LustyMaidensArmor.addTitfuckButton(3);
 			addButton(14, "Leave", cleanupAfterCombat);
 			SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatSpiderBoy);
 					}

@@ -127,10 +127,7 @@ public class PhoenixScene extends BaseContent
 				addButton(3, "Ride Anal", rideAnal);
 				if (player.hasVagina()) addButton(4, "Ride Vaginal", rideVaginal);
 				//addButton(5, "Suck Her Dick", rideAnal);
-				if (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armor == armors.LMARMOR || player.armor == armors.S_ARMOR)) {
-					if (player.armor == armors.S_ARMOR) addButton(7, "B.Titfuck", (player.armor as SuccubusArmor).succubusPaizuri);
-					else addButton(7, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
-				}
+				LustyMaidensArmor.addTitfuckButton(7);
 				SceneLib.uniqueSexScene.pcUSSPreChecksV2(winAgainstPhoenix);
 								addButton(14, "Leave", cleanupAfterCombat);
 			}

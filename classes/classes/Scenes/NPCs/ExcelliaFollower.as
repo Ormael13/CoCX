@@ -100,14 +100,14 @@ public function ExcelliaPathChoiceFixHer():void {
 	flags[kFLAGS.EXCELLIA_RECRUITED] = 3;
 	doNext(camp.returnToCampUseFourHours);
 }
-public function ExcelliaPathChoiceMakeSlave(recall:Boolean = false):void {
+public function ExcelliaPathChoiceMakeSlave():void {
 	//spriteSelect(SpriteDb.s_electra);
 	clearOutput();
 	outputText("It’s hard to resist a cowslut presenting herself to you begging to be fucked and you’re more willing to oblige.\n\n");
-	sceneHunter.selectGender(curry(maleF, recall), curry(femF, recall), null, null, 1);
+	sceneHunter.selectGender(maleF, femF);
     //PARTS
     //==================================================================================================
-    function maleF(recall:Boolean):void {
+    function maleF():void {
         outputText("You waste no time "+(player.isNaked() ? "":"stripping off your gear and ")+"stepping up behind the ex-cow queen then grabbing her hips. You grind your [cock] between her large jiggly ass cheeks. Her tail swishes back and forth as she eagerly waits for her treat. She looks back over her shoulder at you, a deep blush present on her face. She pushes back against you every time your rock hard cock rubs against her pussy.\n\n");
 		outputText("\"<i>P-Please my " + player.mf("Lord", "Lady") + "! I can't wait any longer. My pussy needs your cock!</i>\"\n\n");
 		outputText("You deliver a sharp smack across her ass. You're the one who will decide when she's granted the pleasure of receiving your dick. She whimpers and lets out a needy moan as you continue to fuck her fat cheeks. Her massive milky mammaries slowly leak their euphoric sweet cream onto your "+(flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 ? "bed":"bedroll")+". The huge soft orbs jiggling freely with every breath their owner takes. ");
@@ -119,10 +119,10 @@ public function ExcelliaPathChoiceMakeSlave(recall:Boolean = false):void {
 		outputText("\"<i>T-Thank you my " + player.mf("Lord", "Lady") + "... I… am always… here to serve you…</i>\"\n\n");
 		outputText("You pat your new cum receptacle on the head and tell her that you'll be sure to make great use of her. She lets out a tired moo before drifting off to sleep again. Your grin widens as you think of more ways to use her.\n\n");
         //
-        if (!recall) player.sexReward("vaginalFluids","Dick");
-        sharedEnd(recall);
+        if (!sceneHunter.recalling) player.sexReward("vaginalFluids","Dick");
+        sharedEnd();
     }
-    function femF(recall:Boolean):void {
+    function femF():void {
         outputText("You waste no time "+(player.isNaked() ? "":"stripping off your gear and ")+"stepping up to the ex-cow queen then turn her around. You tell her to get to it then lower her head down to your pussy. Excellia lifts her head and begins desperately licking and slurping your pussy. She blows on your clit, causing you to gasp in pleasure. The cow slut licks you until your first orgasm rocks you, drenching her face and mouth with femcum. ");
 		outputText("She quickly slurps down your juices, not wasting a single drop.\n\n\"<i>P-Please my Lady… M-More…</i>\"\n\n");
 		outputText("Now with such a slutty look on her face, who are you to deny your new fuckpet? She pushes her mouth against your snatch, tightly sealing her mouth around your dripping snatch before diving her tongue back in. You moan and grip her horns tightly, mashing her face further into your pussy. The cow slut is eager to lap every little drop of femcum that spills from you. Her tongue pushes you closer and closer to the edge. ");
@@ -131,12 +131,12 @@ public function ExcelliaPathChoiceMakeSlave(recall:Boolean = false):void {
 		outputText("\"<i>T-Thank you my Lady… I'm always… willing to serve you…</i>\"\n\n");
 		outputText("After that she sinks down then drift off into sleep. You pat the sleeping cow slut on the head. You grin thinking of new ways to use your new fuckpet.\n\n");
         //
-        if (!recall) player.sexReward("saliva","Vaginal");
-        sharedEnd(recall);
+        if (!sceneHunter.recalling) player.sexReward("saliva","Vaginal");
+        sharedEnd();
     }
-    function sharedEnd(recall:Boolean):void {
+    function sharedEnd():void {
         player.orgasm();
-        if (!recall) {
+        if (!sceneHunter.recalling) {
             outputText("(<b>Excellia has been added to the Slaves menu!</b>)\n\n");
             flags[kFLAGS.EXCELLIA_RECRUITED] = 2;
             doNext(camp.returnToCampUseFourHours);
@@ -391,7 +391,7 @@ public function ExcelliaCampFixHerSexFuckHer():void {
 	else outputText("\"<i>P-Please my " + player.mf("Lord", "Lady") + "... I can’t wait any longer!</i>\"\n\n");
 	outputText("Well, you can hardly keep the [exc race] waiting too much longer. You’re eager to get a piece of her too. You pull away from her and reposition yourself.\n\n");
     
-	sceneHunter.selectGender(maleF, femF, null, null, 1);
+	sceneHunter.selectGender(maleF, femF);
     //PARTS
     //==================================================================================================
     function maleF():void {
@@ -666,7 +666,7 @@ public function ExcelliaCampMakeSlaveSexFuckHer():void {
 	outputText("\"<i>P-Please my " + player.mf("Lord", "Lady") + "... Take me! Use me your loyal slut to your heart's content!</i>\"\n\n");
 	outputText("Well, you lick your lips eager to fuck your needy dairy [exc slut]. You pull away from her and reposition yourself.\n\n");
     //
-    sceneHunter.selectGender(maleF, femF, null, null, 1);
+    sceneHunter.selectGender(maleF, femF);
     //PARTS
     //==================================================================================================
     function maleF():void {

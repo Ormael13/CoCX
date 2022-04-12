@@ -181,14 +181,10 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 				//Normal male: -requires dick of area < 36
 				if (player.cockTotal() > 0) cockRape = rapeAnemoneWithDick;
 				if (player.hasVagina()) vaginaRape = rapeAnemoneWithPussy;
-				var bikiniTits:Function =null;
 				var temp3:Function =null;
-				if (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armor is LustyMaidensArmor || player.armor is SuccubusArmor)) {
-					if (player.armor is SuccubusArmor) bikiniTits = (player.armor as SuccubusArmor).succubusPaizuri;
-					else bikiniTits = (player.armor as LustyMaidensArmor).lustyMaidenPaizuri;
-				}
 				choices("Your Ass", victoryButtholeRape, "Your Cock", cockRape, "Your Vagina", vaginaRape, "Her Butt", anal, "Lay Egg", eggs,
-					"", null, "", null, "B.Titfuck", bikiniTits, "", null, "Leave", cleanupAfterCombat);
+					"", null, "", null, "B.Titfuck", null/*placeholder*/, "", null, "Leave", cleanupAfterCombat);
+                LustyMaidensArmor.addTitfuckButton(7);
                 SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatAnemone);
 			}
 			else cleanupAfterCombat();

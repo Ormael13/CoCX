@@ -919,7 +919,7 @@ private function eggsInButtStart(eggButt:Boolean):void {
 		outputText("\n\nJoey gathers up another dollop of the chocolatey cum and smears it across your butthole. Then he takes two fingers and gently prods inwards, sinking in knuckle-by-knuckle.  He works the two fingers in, pumping and sliding them around, coating your walls with his jizz.  When the bunny-boy retracts his fingers, you find yourself aching for his touch, wanting something, anything, inside you.  You don't want for long, of course, as Joey retrieves the giant painted egg and presses it up against your empty asshole.  He pushes it forward, your cum-lubed ass parting to make way.  It stretches you further and further outwards, nearing discomfort levels, but then you round the widest point and your [asshole] devours it with a wet <i>schluck</i>.");
 		outputText("\n\nJoey rubs your asshole some more, working his little masseuse fingers all over, helping it to relax once more.  You feel so deliciously full with that egg inside you, like you have a giant cock constantly fucking you.  It gives you a little thrill to know that both of you are packing this monster of an egg inside of you, and that he's feeling the same things you are.  You lower your legs and ass marveling at the sensations of the egg shifting around.\n\n");
 	}
-    sceneHunter.selectGender(curry(eggsInButt, 0), curry(eggsInButt, 1), curry(eggsInButt, 2), null, 1);
+    sceneHunter.selectGender(curry(eggsInButt, 0), curry(eggsInButt, 1), curry(eggsInButt, 2));
 }
 
 //dick - 0, vag - 1, ass - 2
