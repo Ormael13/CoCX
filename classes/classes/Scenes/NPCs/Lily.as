@@ -153,12 +153,24 @@ import classes.internals.*;
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			SceneLib.lily.LilyAfterBattle();
+			if (LilyFollower.LilyFollowerState) cleanupAfterCombat();
+			else SceneLib.lily.LilyAfterBattle();
 		}
 		
 		public function Lily() 
 		{
 			if (flags[kFLAGS.LILY_LVL_UP] < 2) {
+				initStrTouSpeInte(70, 75, 110, 100);
+				initWisLibSensCor(100, 80, 50, 90);
+				this.weaponAttack = 3;
+				this.weaponRangeAttack = 30;
+				this.armorDef = 60;
+				this.armorMDef = 6;
+				this.bonusHP = 400;
+				this.bonusLust = 152;
+				this.level = 22;
+			}
+			if (flags[kFLAGS.LILY_LVL_UP] == 2) {
 				initStrTouSpeInte(70, 75, 110, 100);
 				initWisLibSensCor(100, 80, 50, 90);
 				this.weaponAttack = 3;
