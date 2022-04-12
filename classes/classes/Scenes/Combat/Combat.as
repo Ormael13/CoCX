@@ -2018,7 +2018,7 @@ public class Combat extends BaseContent {
         //Determine if critical hit!
         var crit:Boolean = false;
         var critChance:int = 5;
-        var critChanceMulti:Number = 1.75;
+        var critChanceMulti:int = 1.75;
         critChance += combatMagicalCritical();
         //dodać tu nieco szans na wyższą % szans crita - jak zwykle to z perków efekty
         if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
@@ -6145,10 +6145,10 @@ public class Combat extends BaseContent {
 				}
 				else if (player.weapon == weapons.MGSWORD) doMagicDamage(damage, true, true);
 				else if (player.weapon == weapons.PHALLUS) {
-					if (player.statusEffectv1(StatusEffects.ThePhalluspear1) == 1) monster.teased(monster.lustVuln * Math.round(damage * 0.1));
+					if (player.statusEffectv1(StatusEffects.ThePhalluspear1) == 1) monster.teased(monster.lustVuln * Math.round(damage * 0.05));
 					else {
 						doPhysicalDamage(Math.round(damage * 0.75), true, true);
-						monster.teased(monster.lustVuln * Math.round(damage * 0.025));
+						monster.teased(monster.lustVuln * Math.round(damage * 0.0125));
 					}
 				}
                 else {

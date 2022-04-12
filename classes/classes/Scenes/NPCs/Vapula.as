@@ -1186,4 +1186,3 @@ public class Vapula extends NPCAwareContent implements TimeAwareInterface
 		}
 	}
 }
-

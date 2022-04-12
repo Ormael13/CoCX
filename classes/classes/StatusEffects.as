@@ -1223,4 +1223,4 @@ import classes.StatusEffects.VampireThirstEffect;
 		}
 	}
 }
-
+

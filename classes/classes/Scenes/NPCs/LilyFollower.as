@@ -790,7 +790,7 @@ import classes.display.SpriteDb;
 			}
 			else addButtonDisabled(2, "Sex", "Your lust is too low.");
 			//addButton(3, "House", LilyHouse);
-			//addButton(4, "Spar", LilySpar);
+			addButton(4, "Spar", LilySpar);
 			addButton(14, "Leave", camp.campLoversMenu);
 		}
 		
@@ -799,7 +799,7 @@ import classes.display.SpriteDb;
 			outputText("You give Lily a waggle of your eyebrows, before stepping in, grabbing the chain crossing her chest and pulling. Lily gives you a moan, but says nothing. Her body, however, is honest. Lily's cunt begins drooling almost immediately, and her back legs tap rapidly.\n\n");
 			outputText("What do you want to do with your eager Drider-Slut, now that you have her?\n\n");
 			menu();
-			//addButton(1, "Bondage", LilyBondage);
+			addButton(1, "Bondage", LilyBondage);
 			addButton(2, "Roleplay", LilyRape);
 			//addButton(3, "3Some", Lily3Somes);
 			addButton(4, "Back",LilyCampBack);
@@ -817,7 +817,7 @@ import classes.display.SpriteDb;
 			}
 			else addButtonDisabled(2, "Sex", "Your lust is too low.");
 			//addButton(3, "House", LilyHouse);
-			//addButton(4, "Spar", LilySpar);
+			addButton(4, "Spar", LilySpar);
 			addButton(14, "Leave", camp.campLoversMenu);
 		}
 		
@@ -828,6 +828,14 @@ import classes.display.SpriteDb;
 			outputText("Her Spider-half has eight spindly legs, and her spinnerets are visibly active. Lily occasionally leans back, using her fingers to pull silk from her spinnerets, quickly braiding the strands into crude, yet serviceable rope.\n\n");
 			outputText("As she sees you looking at her, Lily gives you a sly three-eyed wink, sliding a hand down her waist, making eye contact with you as she rubs her rapidly swelling ebony pussy lips with one hand.\n\n");
 			doNext(LilyCampBack);
+		}
+		
+		public function LilySpar():void {
+			spriteSelect(SpriteDb.s_drider);
+			clearOutput();
+			outputText("You tell your kinky Drider to get her bow and follow you. Lily is slightly confused, but as you lead her just outside of camp, she smiles slightly.\n\n");
+			outputText("\"<i>Oh, just like before, huh?</i>\" Lily stretches, drawing an arrow from her quiver. \"<i>I hope you’re prepared for what happens after~</i>\" Lily sinks into a shooter’s stance.\n\n");
+			startCombat(new Lily());
 		}
 	}
 }
