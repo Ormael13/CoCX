@@ -63,7 +63,7 @@ public function HotSpring():void {
 			//girls
 			if (player.femininity >= 60 || player.femininity >= 30 && player.breastRows[0].breastRating > 1
 				|| player.breastRows[0].breastRating >= Appearance.breastCupInverse("D"))
-				addButton(0, "Bath (F)", HaveABoysBath).hint("Have a bath with girls.");
+				addButton(0, "Bath (F)", HaveAGirlBath).hint("Have a bath with girls.");
 			else addButtonDisabled(0, "Bath (F)", "You're too masculine to count as a female. Perhaps, if you have big enough rack, they'll reconsider?");
             //boys
 			if (player.femininity <= 30 || player.femininity <= 60 && player.breastRows[0].breastRating < 2 || player.longestCockLength() > 20)
