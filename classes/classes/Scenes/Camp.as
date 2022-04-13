@@ -2784,7 +2784,7 @@ public class Camp extends NPCAwareContent{
 			if (player.hasItem(useables.SEVTENT, 1)) addButton(10, "SeveredTent", questItemsBagSeveredTentacle1Up);
 			else addButtonDisabled(10, "SeveredTent", "You not have any severed tentacles to store.");
 		}
-		else addButtonDisabled(10, "DemonSkull", "You can't store more severed tentacles in your bag.");
+		else addButtonDisabled(10, "SeveredTent", "You can't store more severed tentacles in your bag.");
 		if (AdventurerGuild.Slot05 > 0) addButton(11, "SeveredTent", questItemsBagSeveredTentacle1Down);
 		else addButtonDisabled(11, "SeveredTent", "You not have any severed tentacles in your bag.");
 		addButton(14, "Back", campMiscActions);

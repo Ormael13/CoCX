@@ -260,9 +260,8 @@ import classes.display.SpriteDb;
 		
 		public function LilyTyrantia3some():void {
 			clearOutput();
-			outputText("You leave Lily tied up at a small tree, not far from camp, and come back in, getting your giantess lover’s attention. You ask her if she’d like to have some family bonding time with you and her little sister. Tyrantia grabs her Dick, giving you a thumbs up. She follows you out to the tree, whistling in appreciation at the sight of her little sister, bound, gagged and blindfolded.  \n\n");
-			outputText("<i>“So…How do you want to play this out, lover?”</i> Tyrantia whispers, dropping a hand to her slick, black quim. You gaze at the giantess thoughtfully.  \n\n");
-	
+			outputText("You leave Lily tied up at a small tree, not far from camp, and come back in, getting your giantess lover’s attention. You ask her if she’d like to have some family bonding time with you and her little sister. Tyrantia grabs her Dick, giving you a thumbs up. She follows you out to the tree, whistling in appreciation at the sight of her little sister, bound, gagged and blindfolded.\n\n");
+			outputText("<i>“So…How do you want to play this out, lover?”</i> Tyrantia whispers, dropping a hand to her slick, black quim. You gaze at the giantess thoughtfully.\n\n");
 			menu();
 			if (player.hasCock()) addButton(1, "Fuck", LilyTyrantia3Fuck);
 			if (player.hasVagina()) addButton(2, "LickYou", LilyTyrantia3Lick);
@@ -282,12 +281,8 @@ import classes.display.SpriteDb;
 			outputText("Pulling at Lily’s chain, you run your teeth on her neck, and as you let out a groan, your [cock] finally spilling over, Lily wails for a third time, her walls clamping down on you hard. Finally, this sends you over the edge, and you slam your [cock] in as far as it’ll go, spurting your load into her innermost depths. As you fill her, your cum leaking out from her tight fuckhole, Tyrantia groans, a smile on her face as she wipes her love juices off on Lily’s chitinous backside. You let Lily fall, and her eyes are closed. Her breathing is ragged, and you give your fucktoy time to recover from her ordeal.\n\n");
 			outputText("A full fifteen minutes later, Lily opens one of her eyes, moaning slightly. <i>\"Wow…[name], I…Didn’t expect that. Without a doubt, that was the best I’ve had in…well…A LONG time.\"</i> She seems to realize that there was someone else, and she whirls around, catching sight of Tyrantia. <i>\"Oh, hey sis.\"</i> Tyrantia says, waving her Dick cheekily. <i>\"Fancy meeting you here.\"</i>\n\n");
 			player.sexReward("saliva","Dick");
-			if (LilyFollowerState = false) {
-			LilyTyrantiaAfterFirst();
-			}
-			else {
-			LilyTyrantiaAfterSex();
-			}
+			if (LilyFollowerState == false) LilyTyrantiaAfterFirst();
+			else LilyTyrantiaAfterSex();
 		}
 		public function LilyTyrantia3Lick():void {
 			clearOutput();
@@ -296,14 +291,10 @@ import classes.display.SpriteDb;
 			outputText("The three of you sink into a slow grind, your folds dripping into Lily’s mouth, forcing her to push your leavings aside to breathe. You grind your folds into Lily’s face, wrapping your legs around her as she begins to buck underneath you.\n\n");
 			outputText("Your bigger lover pulls her head back. <i>\"Lover, would you mind it if I tended to your toy?\"</i> Tyrantia asks sweetly. <i>\"I think the poor thing’s just about out of energy\".</i> You nod, and Tyrantia pulls out of your embrace, her cunt drooling as your hand leaves. Tyrantia grabs her Dick, slowly, teasingly dragging the tip of it down Lily’s upper body, whacking her jiggly breasts before rubbing it against Lily’s sopping passage. Under you, Lily’s Spider-legs curl, not unlike a dead spider you saw on the windowsill, and she screams into your needy quim as Tyrantia slips her Dick into Lily’s box.\n\n");
 			outputText("<i>\"Oh, this little bitch likes it, huh?\"</i> Tyrantia asks, gripping the shaft with both hands. <i>\"Good\"</i>. She sinks her Dick in, nearly a foot at once. Lily sprays Tyrantia’s lower body with her fluids, but this just makes Tyrantia sink it in a little more, twisting before she pulls back and out. Without the Dick inside her, Lily’s legs spasm, and she nearly falls over.\n\n");
-			outputText("<i>\"Oh, oh my.\"</i> Lily breathes heavily, her face covered in your femcum. You climb off of your well-fucked toy, and she gasps for air. \n\n");
+			outputText("<i>\"Oh, oh my.\"</i> Lily breathes heavily, her face covered in your femcum. You climb off of your well-fucked toy, and she gasps for air.\n\n");
 			player.sexReward("saliva","Pussy");
-			if (LilyFollowerState = false) {
-			LilyTyrantiaAfterFirst();
-			}
-			else {
-			LilyTyrantiaAfterSex();
-			}
+			if (LilyFollowerState == false) LilyTyrantiaAfterFirst();
+			else LilyTyrantiaAfterSex();
 		}
 		
 		public function LilyTyrantiaAfterFirst():void {
@@ -319,13 +310,12 @@ import classes.display.SpriteDb;
 		}
 		
 		public function LilyTyrantiaAfterSex():void {
-		clearOutput();
-		outputText("Tyrantia unbinds her little sister, who simply stares up at her, tongue out and eyes glazed over. “Good girl”, your giantess says simply, patting Lily’s head. The smaller Drider looks over at you, a blissed out look on her face.  \n\n"); 
-		outputText("“" + player.mf("master", "mistress") + ", that…was…” Lily shakes, and you reach to her face, cupping her cheek in your palm. You tell your pet she did well, and Lily smiles, eyes closing as she flops the rest of the way to the ground.  \n\n");
-		outputText("“We gotta do this again sometime”, your giantess says, and you’re inclined to agree. But for now, you redress, heading back to your part of camp.  \n\n");
-		
-		doNext(camp.returnToCampUseOneHour);
-}
+			clearOutput();
+			outputText("Tyrantia unbinds her little sister, who simply stares up at her, tongue out and eyes glazed over. <i>\"Good girl,\"</i> your giantess says simply, patting Lily’s head. The smaller Drider looks over at you, a blissed out look on her face.\n\n"); 
+			outputText("<i>\"" + player.mf("master", "mistress") + ", that…was…\"</i> Lily shakes, and you reach to her face, cupping her cheek in your palm. You tell your pet she did well, and Lily smiles, eyes closing as she flops the rest of the way to the ground.\n\n");
+			outputText("<i>\"We gotta do this again sometime,\"</i> your giantess says, and you’re inclined to agree. But for now, you redress, heading back to your part of camp.\n\n");
+			doNext(camp.returnToCampUseOneHour);
+		}
 
 		
 		public function LilyEnterCamp():void {
@@ -463,7 +453,7 @@ import classes.display.SpriteDb;
 			outputText("Suddenly, you grab her arms. She struggles, but you quickly wrap the strands around her slender, smooth limbs, tying the Drider’s hands behind her back. More strands go around her head, blocking her vision, and for good measure, you gag her.\n\n");
 			outputText("Now blind, gagged and her hands bound, the Drider woman spins her head around, letting out muffled distressed sounds. You take her ear again, whispering for her not to worry, that you’re still there. You explain that this is part of the reward, and rub her sopping wet pussy for good measure. You pull back, letting her muffled cries of protest fill your ears as you decide what to do with her, now that you’ve got her all tied up properly.\n\n");
 			menu();
-			if (LilyFollowerState = true) {
+			if (LilyFollowerState) {
 				addButton(1, "Cabin", LilyBondageCabin);/*
 				if (LilySubmissiveness == 100) addButton(3, "Exhibition", LilyExhibition);
 				else addButtonDisabled(3, "???", "Req. 100% submissiveness.");*/
@@ -642,15 +632,15 @@ import classes.display.SpriteDb;
 			outputText("\"Oh, now for the fun part.\" Lily whispers. She sinks her teeth into the side of your neck. Heat rushes to your now-throbbing clit, and you gasp, looking up at Sidonie, who now leans over you, cream-gold fur matted with various fluids. Lily’s legs slide up, forcing your [legs] apart. Sidonie licks her finger, then runs the moist digit down your thigh, then slowly back up, her other hand groping your [breasts]. She seems content, but you need her. Between the foreplay, the massive cock in front of you, and the venom coursing through your veins, you need this. Now. You try to break Lily’s hold, but the Spider-bitch just tightens her grip, giggling at the thin trail of lubricant running down your [legs] You look up at Sidonie, but your horsey lover is smirking, clearly enjoying your plight.\n\n");
 			outputText("\"Oh, you really like what you see, don’t you slut?\" Sidonie drawls, slapping her flared cockhead against your thigh. \"I mean, look at all this.\" She cups some of your pre in her hand, rubbing it on your stomach. \"You’re a slut, [name]. A bitch for my cock.\" Sidonie rubs her flared tip against your pussy lips. \"Aren’t you?\" You nod, but she tuts, pulling back.\n\n");
 			outputText("\"Close, but not what I want.\" She slaps your thigh, sending ripples down into the Drider below you. \"I want you to admit it, ‘champion.\" Your breathing quickens, and Sidonie slaps her cock against your clit. \"Well?\" You need her, you can’t hold on anymore! Your voice comes out, high and needy. You beg Sidonie to fuck you, to fill your needy pussy. Right now, you’re not a champion, a warrior...no, you’re just a bitch in heat who needs to get fucked.\n\n");
-			outputText("Sidonie leans in, resting her soft tits against Lily’s back. She thrusts forward, flared tip forcing your lips aside, slowly, torturously easing into you. Pinned under Lily’s warm carapace, you’re unable to move. Sidonie’s flared horsecock pushes deeper into you, spreading your folds wide and touching the tip of your womb. You gasp, feeling her flared tip, and she grins, pulling nearly her entire length out from your cunt.   \n\n");
-			outputText("Trapped between your two lovers, you gasp as one of Lily’s legs reaches up your thigh, tickling your [skin] before rubbing the tip of her leg against your clit. Sidonie’s horsecock slides down your folds, tip pressing against your womb. it doesn’t take long for your breathing to get ragged, each movement sending silver shocks of pleasure up your spine. Lily’s aphrodisiac venom fills your head with pink, and you buck your hips into each motion, getting a warm hum of approval from Sidonie.  \n\n");
-			outputText("Her horse cock begins to twitch, and as Lily moans, sinking the tip of her leg into your ass, you can’t hold back any longer. Slamming your hips up, sinking Sidonie balls-deep into your quim, you clamp down, wailing as your femspunk squirts around her throbbing cock and out, spraying your equine lover’s chest with your leavings. You feel her throb, her flared tip burying itself into you, poking the entrance to your womb as she cums, filling your thirsty cunt. She thrusts a final few times, burying her baby-batter deep inside you.  \n\n");
-			outputText("Sidonie collapses backwards, pulling you down with her. She’s still inside you, and you moan at the rough final thrust, rolling to one side. Sidonie lies on her back, and as you roll, her flared tip leaving your folds, she pulls you back in, your head resting on her shoulder. Lily joins you, on the other side of Sidonie, and the horse-girl wraps an arm around Lily’s neck. The three of you lie there, breathing heavily.  \n\n");
-			outputText("“Damn, you two.” Sidonie gasps, breathless. “You’re a pair of damn fine sluts.” She kisses Lily, then you before letting her head rest on the floor. “This was fucking great.”  \n\n");
-			outputText("Lily lets her “tk-tk-tk” laugh, and sighs happily, sticking her fingers into her cum-sticky cunt. “You said it.”  \n\n");
-			outputText("You rest there on the floor for a while, before Sidonie’s eyes widen. “Oh, shit! I need to sand out that lumber before tomorrow!” She gently extracts herself from you and Lily, tossing her clothing on before running out the door.  \n\n");
-			outputText("“Y’know…We could be carrying half-siblings”, Lily whispers. “Hmm?” You look down at your own cunt, Sidonie’s spooge dripping down your thigh. You reluctantly agree, and embrace Lily. You cuddle together for a little bit, but you need to leave as well. \n\n");
-			outputText("Lily gives you a wink as you leave. “Don’t keep me waiting, please?”  \n\n");
+			outputText("Sidonie leans in, resting her soft tits against Lily’s back. She thrusts forward, flared tip forcing your lips aside, slowly, torturously easing into you. Pinned under Lily’s warm carapace, you’re unable to move. Sidonie’s flared horsecock pushes deeper into you, spreading your folds wide and touching the tip of your womb. You gasp, feeling her flared tip, and she grins, pulling nearly her entire length out from your cunt.\n\n");
+			outputText("Trapped between your two lovers, you gasp as one of Lily’s legs reaches up your thigh, tickling your [skin] before rubbing the tip of her leg against your clit. Sidonie’s horsecock slides down your folds, tip pressing against your womb. it doesn’t take long for your breathing to get ragged, each movement sending silver shocks of pleasure up your spine. Lily’s aphrodisiac venom fills your head with pink, and you buck your hips into each motion, getting a warm hum of approval from Sidonie.\n\nn");
+			outputText("Her horse cock begins to twitch, and as Lily moans, sinking the tip of her leg into your ass, you can’t hold back any longer. Slamming your hips up, sinking Sidonie balls-deep into your quim, you clamp down, wailing as your femspunk squirts around her throbbing cock and out, spraying your equine lover’s chest with your leavings. You feel her throb, her flared tip burying itself into you, poking the entrance to your womb as she cums, filling your thirsty cunt. She thrusts a final few times, burying her baby-batter deep inside you.\n\nn");
+			outputText("Sidonie collapses backwards, pulling you down with her. She’s still inside you, and you moan at the rough final thrust, rolling to one side. Sidonie lies on her back, and as you roll, her flared tip leaving your folds, she pulls you back in, your head resting on her shoulder. Lily joins you, on the other side of Sidonie, and the horse-girl wraps an arm around Lily’s neck. The three of you lie there, breathing heavily.\n\nn");
+			outputText("“Damn, you two.” Sidonie gasps, breathless. “You’re a pair of damn fine sluts.” She kisses Lily, then you before letting her head rest on the floor. “This was fucking great.”\n\nn");
+			outputText("Lily lets her “tk-tk-tk” laugh, and sighs happily, sticking her fingers into her cum-sticky cunt. “You said it.”\n\nn");
+			outputText("You rest there on the floor for a while, before Sidonie’s eyes widen. “Oh, shit! I need to sand out that lumber before tomorrow!” She gently extracts herself from you and Lily, tossing her clothing on before running out the door.\n\nn");
+			outputText("“Y’know…We could be carrying half-siblings”, Lily whispers. “Hmm?” You look down at your own cunt, Sidonie’s spooge dripping down your thigh. You reluctantly agree, and embrace Lily. You cuddle together for a little bit, but you need to leave as well\n\nn");
+			outputText("Lily gives you a wink as you leave. “Don’t keep me waiting, please?”\n\nn");
 			LilyAffectionMeter += 10;
 			player.sexReward("vaginalFluids");
 			doNext(camp.returnToCampUseOneHour);
@@ -839,3 +829,4 @@ import classes.display.SpriteDb;
 		}
 	}
 }
+
