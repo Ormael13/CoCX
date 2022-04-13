@@ -957,7 +957,7 @@
         <cell rect="301,396,59,65" name="horns_overclothe/deer" dx="74" dy="-5"/>
         <cell rect="1,470,59,65" name="antennae/bee" dx="75" dy="4"/>
         <cell rect="61,470,88,65" name="neck/seaDragonWhisker" dx="63" dy="57"/>
-		<cell rect="151,470,29,30" name="neck/jabberwockyWhisker" dx="63" dy="57"/>
+		<cell rect="151,470,29,30" name="neck/jabberwockyWhisker" dx="90" dy="59"/>
         <cell rect="301,70,29,32" name="faceShading/faceShading" dx="90" dy="37"/>
     </spritemap>
     <spritemap file="lewd.png">
