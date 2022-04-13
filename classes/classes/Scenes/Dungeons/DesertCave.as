@@ -8,7 +8,6 @@ import classes.Scenes.Areas.Desert.CumWitch;
 import classes.Scenes.Dungeons.DesertCave.*;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.SceneLib;
-import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 public class DesertCave extends DungeonAbstractContent
@@ -2831,10 +2830,10 @@ public class DesertCave extends DungeonAbstractContent
 				if (player.biggestTitSize() >= 22) outputText("  She was unrivaled in her ability to produce milk thanks to the natural enormity of her breasts that her other sisters couldn't come close to.  They were so large that they often impeded her movement, which she admittedly didn't mind so much.");
 				outputText("\n\nAs best as she could remember, her life had begun only a decade ago, aging quickly to become ready for service in her Sand Mother's coven at the age of five.  She'd been eager to give her milk and use her two wombs to breed as many new sisters as possible.");
 				//if player had the broodmother perk
-				if (player.findPerk(PerkLib.BroodMother) >= 0) outputText("  She'd immediately shown a unique propensity for rapid pregnancies, birthing new sisters at twice the rate of any other Sand Witch.  Her surprisingly fertile wombs helped give an extra edge to the Sand Mother's plans.");
+				if (player.hasPerk(PerkLib.BroodMother)) outputText("  She'd immediately shown a unique propensity for rapid pregnancies, birthing new sisters at twice the rate of any other Sand Witch.  Her surprisingly fertile wombs helped give an extra edge to the Sand Mother's plans.");
 
 				//if player had broodmother and gigantic breasts
-				if (player.findPerk(PerkLib.BroodMother) >= 0 && player.biggestTitSize() >= 22) outputText("  As a result, the champion who could no longer remember her true past became little more than a giant pregnant belly surrounded by " + num2Text(player.bRows()) + " breasts so massive that the other sand witches often used her tits as comfortable cushions to sit upon, their thighs tightly gripping each giant nipple against their aching cunts for pleasure.");
+				if (player.hasPerk(PerkLib.BroodMother) && player.biggestTitSize() >= 22) outputText("  As a result, the champion who could no longer remember her true past became little more than a giant pregnant belly surrounded by " + num2Text(player.bRows()) + " breasts so massive that the other sand witches often used her tits as comfortable cushions to sit upon, their thighs tightly gripping each giant nipple against their aching cunts for pleasure.");
 
 				outputText("\n\nTwo years later, at the call of the Great Mother, the sand witches went to war.  ");
 				if (flags[kFLAGS.HEL_HARPY_QUEEN_DEFEATED] == 0) outputText("Their harpy and phoenix allies allowed them to approach Lethice's fortress unhindered, and i");
@@ -3419,7 +3418,7 @@ public class DesertCave extends DungeonAbstractContent
 			outputText(" that reminds you that you got exactly you asked for, even if she made you like it a little bit more than you would have liked...");
 			outputText("<b>");
 			if(virility) {
-				if (player.findPerk(PerkLib.MagicalVirility) < 0) {
+				if (!player.hasPerk(PerkLib.MagicalVirility)) {
 					outputText("\n\n(Perk Unlocked: Magical Virility - 200 mLs more cum per orgasm and enhanced virility.)");
 					player.createPerk(PerkLib.MagicalVirility,0,0,0,0);
 				}
@@ -3429,7 +3428,7 @@ public class DesertCave extends DungeonAbstractContent
 				}
 			}
 			else {
-				if (player.findPerk(PerkLib.MagicalFertility) < 0) {
+				if (!player.hasPerk(PerkLib.MagicalFertility)) {
 					outputText("\n\n(Perk Unlocked: Magical Fertility - 10% higher chance of pregnancy and increased pregnancy speed.)");
 					player.createPerk(PerkLib.MagicalFertility,0,0,0,0);
 				}

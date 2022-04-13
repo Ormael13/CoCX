@@ -77,7 +77,7 @@ public class IsabellaScene extends NPCAwareContent implements TimeAwareInterface
 		}
 
 		public function timeChangeLarge():Boolean {
-			if (checkedIsabella++ == 0 && model.time.hours == 6 && isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0 && flags[kFLAGS.ISABELLA_BLOWJOBS_DISABLED] == 0 && player.hasCock() && (model.time.days % 2 == 0 || player.findPerk(PerkLib.MarblesMilk) < 0) && player.shortestCockLength() <= 9 && !prison.inPrison) {
+			if (checkedIsabella++ == 0 && model.time.hours == 6 && isabellaFollowerScene.isabellaFollower() && flags[kFLAGS.FOLLOWER_AT_FARM_ISABELLA] == 0 && flags[kFLAGS.ISABELLA_BLOWJOBS_DISABLED] == 0 && player.hasCock() && (model.time.days % 2 == 0 || !player.hasPerk(PerkLib.MarblesMilk)) && player.shortestCockLength() <= 9 && !prison.inPrison) {
 				spriteSelect(SpriteDb.s_isabella);
 				isabellaFollowerScene.isabellaMorningWakeupCall();
 				return true;
@@ -685,9 +685,9 @@ public function IsabellaWinsAndSpanks():void {
 		outputText("  A hand grabs hold of the back of your [armor] and lifts you up, placing you firmly over the cow-girl's fur-covered knee.  You can feel the transition from fur to skin underneath your belly, at the midpoint of her thigh.  ");
 		if(player.lust >= player.maxLust()) outputText("You start trying to hump and grind, but the angry cow will have none of it.  ");
 		outputText("SMACK!  A powerful impact slams into your [ass], making you gasp out in pain");
-		if(player.findPerk(PerkLib.Masochist) >= 0) outputText(" and pleasure");
+		if(player.hasPerk(PerkLib.Masochist)) outputText(" and pleasure");
 		outputText(".  The next blow follows shortly after, equally hard but placed upon your other, yet-unbruised butt-cheek.");
-		if(player.findPerk(PerkLib.Masochist) >= 0) {
+		if(player.hasPerk(PerkLib.Masochist)) {
 			outputText("  You gasp and ");
 			if(player.hasCock()) outputText("squirt pre-cum ");
 			else if(player.hasVagina()) outputText("slick your thighs ");
@@ -698,14 +698,14 @@ public function IsabellaWinsAndSpanks():void {
 
 		if (isabellaAccent()) outputText("Isabella grunts, \"<i>Look at you, acting like one of ze demons!  Now Izabella vill have to beat ze corruption out of you!</i>\"  You groan ");
 		else outputText("Isabella grunts, \"<i>Look at you, acting like one of the demons!  Now I will have to beat the corruption out of you!</i>\"  You groan ");
-		if(player.findPerk(PerkLib.Masochist) >= 0) outputText("excitedly, wondering just how many more smacks you'll get to take");
+		if(player.hasPerk(PerkLib.Masochist)) outputText("excitedly, wondering just how many more smacks you'll get to take");
 		else outputText("piteously");
 		outputText(" while Isabella cocks her elbow for another spank.  SLAP!  It hits hard enough to send ripples through every soft part of your body.  A bird takes flight somewhere in the distance");
-		if(player.findPerk(PerkLib.Masochist) >= 0) outputText(" while you swoon and moan, wiggling your rump");
+		if(player.hasPerk(PerkLib.Masochist)) outputText(" while you swoon and moan, wiggling your rump");
 		outputText(".  The cow-girl picks up the pace, scolding you in between each heavy-handed hit to your bottom.\n\n");
 
 		outputText("\"<i>Bad <SMACK> " + player.mf("boy","girl") + "! <CRACK> Learn <SLAP> your <SWAT> lesson!</i>\"  Her sentence is punctuated with one bone-jarring blow that ");
-		if(player.findPerk(PerkLib.Masochist) < 0) outputText("draws a scream from your lips, pushing you past the bounds of consciousness.  Isabella hefts your limp form like a wet noodle and grasses sway behind you as you're carried off.");
+		if(!player.hasPerk(PerkLib.Masochist)) outputText("draws a scream from your lips, pushing you past the bounds of consciousness.  Isabella hefts your limp form like a wet noodle and grasses sway behind you as you're carried off.");
 		else {
 			outputText("pushes you past your limit.");
 			if(player.hasCock()) {
@@ -737,7 +737,7 @@ public function IsabellaWinsAndSpanks():void {
 		player.refillHunger(30);
 		fatigue(-40);
 		dynStats("sen", 4);
-		if(player.findPerk(PerkLib.Masochist) >= 0) player.orgasm();
+		if(player.hasPerk(PerkLib.Masochist)) player.orgasm();
 	}
 	//[Lose And Get Spanked – Tall]
 	else {
@@ -747,9 +747,9 @@ public function IsabellaWinsAndSpanks():void {
 		if(player.lust >= player.maxLust()) outputText("You start trying to masturbate yourself, but the angry cow will have none of it.  ");
 		outputText("SMACK!  A powerful impact slams into your [ass], making you gasp out in pain");
 
-		if(player.findPerk(PerkLib.Masochist) >= 0) outputText(" and pleasure");
+		if(player.hasPerk(PerkLib.Masochist)) outputText(" and pleasure");
 		outputText(".  The next blow follows shortly after, equally hard but placed upon your other, yet-unbruised butt-cheek.");
-		if(player.findPerk(PerkLib.Masochist) >= 0) {
+		if(player.hasPerk(PerkLib.Masochist)) {
 			outputText("  You gasp and ");
 			if(player.hasCock()) outputText("squirt pre-cum");
 			else if(player.hasVagina()) outputText("slick your thighs");
@@ -760,14 +760,14 @@ public function IsabellaWinsAndSpanks():void {
 
 		if (isabellaAccent()) outputText("Isabella grunts, \"<i>Look at you, acting like one of ze demons!  Now Izabella vill have to beat ze corruption out of you!</i>\"  You groan ");
 		else outputText("Isabella grunts, \"<i>Look at you, acting like one of thee demons!  Now I will have to beat the corruption out of you!</i>\"  You groan ");
-		if(player.findPerk(PerkLib.Masochist) < 0) outputText("piteously");
+		if(!player.hasPerk(PerkLib.Masochist)) outputText("piteously");
 		else outputText("excitedly, wondering just how many more smacks you'll get to take");
 		outputText(" while Isabella cocks her elbow for another spank.  SLAP!  It hits hard enough to send ripples through every soft part of your body and grind your chin into the dirt.  A bird takes flight somewhere in the distance");
-		if(player.findPerk(PerkLib.Masochist) >= 0) outputText(" while you swoon and moan, wiggling your rump");
+		if(player.hasPerk(PerkLib.Masochist)) outputText(" while you swoon and moan, wiggling your rump");
 		outputText(".  The cow-girl picks up the pace, scolding you in between each heavy-handed hit to your bottom.\n\n");
 
 		outputText("\"<i>Bad <SMACK> " + player.mf("boy","girl") + "! <CRACK> Learn <SLAP> your <SWAT> lesson!</i>\"  Her sentence is punctuated with one bone-jarring blow that");
-		if(player.findPerk(PerkLib.Masochist) >= 0) outputText(" draws a scream from your lips, pushing you past the bounds of consciousness.  Isabella hefts your limp form heavily, dragging you through the dirt as your eyes close.");
+		if(player.hasPerk(PerkLib.Masochist)) outputText(" draws a scream from your lips, pushing you past the bounds of consciousness.  Isabella hefts your limp form heavily, dragging you through the dirt as your eyes close.");
 		else {
 			outputText(" pushes you past your limit.");
 			if(player.hasCock()) {
@@ -799,7 +799,7 @@ public function IsabellaWinsAndSpanks():void {
 		player.refillHunger(30);
 		fatigue(-40);
 		dynStats("sen", 4);
-		if(player.findPerk(PerkLib.Masochist) >= 0) player.orgasm();
+		if(player.hasPerk(PerkLib.Masochist)) player.orgasm();
 	}
 	isabellaFollowerScene.isabellaAffection(4); //not like you're redeemed, but she had her fun
 	flags[kFLAGS.ISABELLA_ANGRY_AT_PC_COUNTER] = 0; //She's already nice to you.

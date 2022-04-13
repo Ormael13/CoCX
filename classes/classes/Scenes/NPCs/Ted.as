@@ -20,7 +20,7 @@ use namespace CoC;
 			if (hasStatusEffect(StatusEffects.Blind)) {
 				outputText((flags[kFLAGS.TED_LVL_UP] >= 3 ?"Ted":"Dragon-boy")+" makes a wide sweeping attack with his hammer, which is difficult to avoid even from a blinded opponent.\n");//Ted
 			}
-			if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
+			if (player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
 				outputText("You barely manage to avoid a wide sweeping attack from dragon-boy by rolling under it.");//Ted's
 				return;
 			}
@@ -44,7 +44,7 @@ use namespace CoC;
 				outputText("You manage to roll out of the way of a massive overhand swing.");
 				return;
 			}
-			if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 60) {
+			if (player.hasPerk(PerkLib.Evade) && rand(100) < 60) {
 				outputText("You easily sidestep as dragon-boy tries to deliver a huge overhand blow.");//Ted
 				return;
 			}

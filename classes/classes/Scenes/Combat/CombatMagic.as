@@ -541,10 +541,10 @@ public class CombatMagic extends BaseCombatContent {
 
 	public function getWhiteMagicLustCap():Number {
 		var whiteLustCap:int = player.maxLust() * 0.75;
-		if (player.hasPerk(PerkLib.Enlightened) && player.cor < (10 + player.corruptionTolerance())) whiteLustCap += (player.maxLust() * 0.1);
+		if (player.hasPerk(PerkLib.Enlightened) && player.cor < (10 + player.corruptionTolerance)) whiteLustCap += (player.maxLust() * 0.1);
 		if (player.hasPerk(PerkLib.FocusedMind) && !player.hasPerk(PerkLib.GreyMage)) whiteLustCap += (player.maxLust() * 0.1);
 		if (player.hasPerk(PerkLib.GreyMage)) {
-			if (player.hasPerk(PerkLib.Enlightened) && player.cor < (10 + player.corruptionTolerance())) whiteLustCap = (player.maxLust() - 15);
+			if (player.hasPerk(PerkLib.Enlightened) && player.cor < (10 + player.corruptionTolerance)) whiteLustCap = (player.maxLust() - 15);
 			else whiteLustCap = (player.maxLust() - 45);
 		}
 		return whiteLustCap;

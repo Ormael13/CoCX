@@ -229,12 +229,12 @@ public class Camp extends NPCAwareContent{
 			}
             /* Marble flipouts are disabled because they made no sense
 			if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] >= 5) {
-				if (flags[kFLAGS.MARBLE_WARNED_ABOUT_CORRUPTION] == 0 && player.cor >= 50 + player.corruptionTolerance()) {
+				if (flags[kFLAGS.MARBLE_WARNED_ABOUT_CORRUPTION] == 0 && player.cor >= 50 + player.corruptionTolerance) {
 					hideMenus();
 					marblePurification.marbleWarnsPCAboutCorruption();
 					return;
 				}
-				if (flags[kFLAGS.MARBLE_WARNED_ABOUT_CORRUPTION] == 1 && flags[kFLAGS.MARBLE_LEFT_OVER_CORRUPTION] == 0 && player.cor >= 60 + player.corruptionTolerance()) {
+				if (flags[kFLAGS.MARBLE_WARNED_ABOUT_CORRUPTION] == 1 && flags[kFLAGS.MARBLE_LEFT_OVER_CORRUPTION] == 0 && player.cor >= 60 + player.corruptionTolerance) {
 					hideMenus();
 					marblePurification.marbleLeavesThePCOverCorruption();
 					return;
@@ -6668,7 +6668,7 @@ public function rebirthFromBadEnd():void {
 		outputText("<i>I ask thee, eternal time...</i>\n");
 		outputText("\n\nThis part is WIP. You can add more scenes.");
 		outputText("\nThe idea behind is to try unique scenes with different ways or options or body parts.");
-        sceneHunter.recalling = true; //Setting the flag to disable everything but text
+        recalling = true; //Setting the flag to disable everything but text
         menu();
         //Marble scene
 		if (flags[kFLAGS.MARBLE_PURIFIED] == 1)
@@ -6681,20 +6681,24 @@ public function rebirthFromBadEnd():void {
         else
 			addButtonDisabled(1, "E. Slv", "Requires enslaving a certain cow-slut.");
         
-        //Excellia slave first scene
+        //Phylla demon fuck
 		if (flags[kFLAGS.ANT_COLONY_KEPT_HIDDEN] || flags[kFLAGS.PHYLLA_SAVED]) {
-            if (player.cor >= 66 - player.corruptionTolerance() && player.gender > 0)
+            if (player.cor >= 66 - player.corruptionTolerance && player.gender > 0)
                 addButton(2, "PhyllaCart", SceneLib.desert.antsScene.demonsFuckAntgirl);
             else addButtonDisabled(2, "PhyllaCart", "You must be corrupted and not genderless to recall this.");
         }
         else addButtonDisabled(2, "P. Cart", "Requires saving one ant-girl.");
+		//Phylla keks
+		if (flags[kFLAGS.ANT_WAIFU] || flags[kFLAGS.PHYLLA_STAY_HOME])
+			addButton(3, "PhyFirstTime", SceneLib.desert.antsScene.antGirlGoodEnd);
+		else addButtonDisabled(3, "P. First", "Requires winning in the coliseum.");
         //bruh
 		addButtonDisabled(13, "BadEnds", "SH is too lazy to add them");
         addButton(14, "Wake Up", recallWakeUp);
     }
 
     public function recallWakeUp():void {
-        sceneHunter.recalling = false; //EVERY recall scene must return here to clear the flag.
+        recalling = false; //EVERY recall scene must return here to clear the flag.
         campSpendTimeActions();
     }
 

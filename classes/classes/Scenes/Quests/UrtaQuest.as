@@ -1082,7 +1082,7 @@ public function urtaMSpecials():void {
 		return;
 	}
 	menu();
-	if (player.findPerk(PerkLib.Berzerker) >= 0) {
+	if (player.hasPerk(PerkLib.Berzerker)) {
 		addButton(0, "Berserk", berzerk).hint("Throw yourself into a rage!  Greatly increases the strength of your weapon and increases lust resistance, but your armor defense is reduced to zero!");
 	}
 	addButton(14, "Back", combat.combatMenu, false);
@@ -1181,7 +1181,7 @@ private function urtaComboAttack():void {
 	critChance += combat.combatPhysicalCritical();
 	if (player.hasPerk(PerkLib.WeaponMastery)) critChance += 10;
 	if (player.hasPerk(PerkLib.WeaponGrandMastery)) critChance += 10;
-	if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
+	if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 	if (rand(100) < critChance) {
 		crit = true;
 		damage *= 2;
@@ -1189,8 +1189,8 @@ private function urtaComboAttack():void {
 	//One final round
 	damage = Math.round(damage);
 	if (damage > 0) {
-		if(player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
-		if(player.findPerk(PerkLib.JobWarrior) >= 0) damage *= 1.05;
+		if(player.hasPerk(PerkLib.HistoryFighter)) damage *= 1.1;
+		if(player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
 		damage = SceneLib.combat.doDamage(damage);
 	}
 	if (damage <= 0) {
@@ -1201,7 +1201,7 @@ private function urtaComboAttack():void {
 		outputText("You hit [themonster]! (" + damage + ")");
 		if(crit) outputText(" <b>*CRIT*</b>");
 	}
-	if (player.findPerk(PerkLib.BrutalBlows) >= 0 && player.str > 75) {
+	if (player.hasPerk(PerkLib.BrutalBlows) && player.str > 75) {
 		if(monster.armorDef > 0) outputText("\nYour hits are so brutal that you damage [themonster]'s defenses!");
 		if(monster.armorDef - 10 > 0) monster.armorDef -= 10;
 		else monster.armorDef = 0;
@@ -1291,7 +1291,7 @@ private function urtaSidewinder():void {
 	critChance += combat.combatPhysicalCritical();
 	if (player.hasPerk(PerkLib.WeaponMastery)) critChance += 10;
 	if (player.hasPerk(PerkLib.WeaponGrandMastery)) critChance += 10;
-	if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
+	if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 	if (rand(100) < critChance) {
 		crit = true;
 		damage *= 1.75;
@@ -1299,8 +1299,8 @@ private function urtaSidewinder():void {
 	//One final round
 	damage = Math.round(damage);
 	if (damage > 0) {
-		if(player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
-		if(player.findPerk(PerkLib.JobWarrior) >= 0) damage *= 1.05;
+		if(player.hasPerk(PerkLib.HistoryFighter)) damage *= 1.1;
+		if(player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
 		damage = SceneLib.combat.doDamage(damage);
 	}
 	if (damage <= 0) {
@@ -1311,16 +1311,16 @@ private function urtaSidewinder():void {
 		outputText("You hit [themonster]! (" + damage + ")");
 		if(crit) outputText(" <b>*CRIT*</b>");
 	}
-	if (player.findPerk(PerkLib.BrutalBlows) >= 0 && player.str > 75) {
+	if (player.hasPerk(PerkLib.BrutalBlows) && player.str > 75) {
 		if(monster.armorDef > 0) outputText("\nYour hits are so brutal that you damage [themonster]'s defenses!");
 		if(monster.armorDef - 10 > 0) monster.armorDef -= 10;
 		else monster.armorDef = 0;
 	}
-	if (!monster.hasStatusEffect(StatusEffects.Stunned) && monster.findPerk(PerkLib.Resolute) < 0 && damage > 0 && rand(5) > 0) {
+	if (!monster.hasStatusEffect(StatusEffects.Stunned) && !monster.hasPerk(PerkLib.Resolute) && damage > 0 && rand(5) > 0) {
 		outputText("\n<b>[Themonster] is stunned!</b>");
 		monster.createStatusEffect(StatusEffects.Stunned,1,0,0,0);
 	}
-	else if (monster.findPerk(PerkLib.Resolute) >= 0) outputText("\nWhile it should have some chance of stunning, your foe seems far too resolute to be affected by such an ailment.");
+	else if (monster.hasPerk(PerkLib.Resolute)) outputText("\nWhile it should have some chance of stunning, your foe seems far too resolute to be affected by such an ailment.");
 	outputText("\n");
 	//Kick back to main if no damage occured!
 	if(monster.HP >= 1 && monster.lust <= 99) {
@@ -1386,7 +1386,7 @@ private function urtaVaultAttack():void {
 	critChance += combat.combatPhysicalCritical();
 	if (player.hasPerk(PerkLib.WeaponMastery)) critChance += 10;
 	if (player.hasPerk(PerkLib.WeaponGrandMastery)) critChance += 10;
-	if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
+	if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 	if (monster.monsterIsStunned()) critChance = 100;
 	if (rand(100) < critChance) {
 		crit = true;
@@ -1395,8 +1395,8 @@ private function urtaVaultAttack():void {
 	//One final round
 	damage = Math.round(damage);
 	if (damage > 0) {
-		if(player.findPerk(PerkLib.HistoryFighter) >= 0) damage *= 1.1;
-		if(player.findPerk(PerkLib.JobWarrior) >= 0) damage *= 1.05;
+		if(player.hasPerk(PerkLib.HistoryFighter)) damage *= 1.1;
+		if(player.hasPerk(PerkLib.JobWarrior)) damage *= 1.05;
 		damage = SceneLib.combat.doDamage(damage);
 	}
 	if (damage <= 0) {
@@ -1407,7 +1407,7 @@ private function urtaVaultAttack():void {
 		outputText("You hit [themonster]! (" + damage + ")");
 		if (crit) outputText(" <b>*CRIT*</b>");
 	}
-	if (player.findPerk(PerkLib.BrutalBlows) >= 0 && player.str > 75) {
+	if (player.hasPerk(PerkLib.BrutalBlows) && player.str > 75) {
 		if(monster.armorDef > 0) outputText("\nYour hits are so brutal that you damage [themonster]'s defenses!");
 		if(monster.armorDef - 10 > 0) monster.armorDef -= 10;
 		else monster.armorDef = 0;

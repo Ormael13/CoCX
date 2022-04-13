@@ -34,14 +34,14 @@ public class Belisa extends Monster
 		
 		private function HealMod():Number {
 			var mod1:Number = 1;
-			if (findPerk(PerkLib.SpellpowerHealing) >= 0) mod1 += .2;
+			if (hasPerk(PerkLib.SpellpowerHealing)) mod1 += .2;
 			return mod1;
 		}
 		private function SpellMod():Number {
 			var mod2:Number = 1;
-			if (findPerk(PerkLib.Spellpower) >= 0) mod2 += .1;
-			if (findPerk(PerkLib.Channeling) >= 0) mod2 += .2;
-			if (findPerk(PerkLib.JobSorcerer) >= 0) mod2 += .1;
+			if (hasPerk(PerkLib.Spellpower)) mod2 += .1;
+			if (hasPerk(PerkLib.Channeling)) mod2 += .2;
+			if (hasPerk(PerkLib.JobSorcerer)) mod2 += .1;
 			return mod2;
 		}
 		

@@ -126,7 +126,7 @@ public class CombatTeases extends BaseCombatContent {
 		damage += scalingBonusLibido() * 0.2;
 		if (player.hasPerk(PerkLib.JobSeducer)) damage += player.teaseLevel * 3;
 		else damage += player.teaseLevel * 2;
-		if (player.hasPerk(PerkLib.JobCourtesan) && monster.findPerk(PerkLib.EnemyBossType) >= 0) damage *= 1.2;
+		if (player.hasPerk(PerkLib.JobCourtesan) && monster.hasPerk(PerkLib.EnemyBossType)) damage *= 1.2;
 		switch (player.coatType()) {
 			case Skin.FUR:
 				damage += (2 * (1 + player.newGamePlusMod()));
@@ -345,7 +345,7 @@ public class CombatTeases extends BaseCombatContent {
 			if (player.pregnancyIncubation <= 24) choices[choices.length] = 13;
 		}
 		//14 Brood Mother
-		if (monster.hasCock() && player.hasVagina() && player.findPerk(PerkLib.BroodMother) >= 0 && (player.pregnancyIncubation <= 0 || player.pregnancyIncubation > 216)) {
+		if (monster.hasCock() && player.hasVagina() && player.hasPerk(PerkLib.BroodMother) && (player.pregnancyIncubation <= 0 || player.pregnancyIncubation > 216)) {
 			choices[choices.length] = 14;
 			choices[choices.length] = 14;
 			choices[choices.length] = 14;
@@ -444,7 +444,7 @@ public class CombatTeases extends BaseCombatContent {
 			choices[choices.length] = 26;
 		}
 		//27 FEEDER
-		if (player.findPerk(PerkLib.Feeder) >= 0 && player.biggestTitSize() >= 4) {
+		if (player.hasPerk(PerkLib.Feeder) && player.biggestTitSize() >= 4) {
 			choices[choices.length] = 27;
 			choices[choices.length] = 27;
 			choices[choices.length] = 27;
@@ -674,7 +674,7 @@ public class CombatTeases extends BaseCombatContent {
 						if (player.cocks.length == 1) outputText(player.cockDescript(0));
 						if (player.cocks.length > 1) outputText(player.multiCockDescriptLight());
 						outputText(" and ");
-						if (player.findPerk(PerkLib.BulgeArmor) >= 0) {
+						if (player.hasPerk(PerkLib.BulgeArmor)) {
 							damage += 15;
 						}
 						penis = true;
@@ -688,7 +688,7 @@ public class CombatTeases extends BaseCombatContent {
 			case 3:
 				if (player.isTaur() && player.horseCocks() > 0) {
 					outputText("You let out a bestial whinny and stomp your hooves at your enemy.  They prepare for an attack, but instead you kick your front hooves off the ground, revealing the hefty horsecock hanging beneath your belly.  You let it flop around, quickly getting rigid and to its full erect length.  You buck your hips as if you were fucking a mare in heat, letting your opponent know just what's in store for them if they surrender to pleasure...");
-					if (player.findPerk(PerkLib.BulgeArmor) >= 0) damage += 5;
+					if (player.hasPerk(PerkLib.BulgeArmor)) damage += 5;
 				}
 				else {
 					outputText("You open your [armor], revealing your ");
@@ -696,7 +696,7 @@ public class CombatTeases extends BaseCombatContent {
 					if (player.cocks.length > 1) outputText(player.multiCockDescriptLight());
 					if (player.hasVagina()) outputText(" and ");
 					//Bulgy bonus!
-					if (player.findPerk(PerkLib.BulgeArmor) >= 0) {
+					if (player.hasPerk(PerkLib.BulgeArmor)) {
 						damage += 15;
 						chance += 3;
 					}
@@ -761,7 +761,7 @@ public class CombatTeases extends BaseCombatContent {
 				if (player.cockTotal() > 0) outputText("  Meanwhile, [eachcock] bobs back and forth with your gyrating hips, adding to the display.");
 				//BONUSES!
 				if (player.hasCock()) {
-					if (player.findPerk(PerkLib.BulgeArmor) >= 0) damage += 15;
+					if (player.hasPerk(PerkLib.BulgeArmor)) damage += 15;
 					penis = true;
 				}
 				vagina = true;
@@ -1503,7 +1503,7 @@ public class CombatTeases extends BaseCombatContent {
 				if (player.lib <= 100) critChance += player.lib / 4;
 				if (player.lib > 100) critChance += 25;
 			}
-			if (monster.isImmuneToCrits() && player.findPerk(PerkLib.EnableCriticals) < 0) critChance = 0;
+			if (monster.isImmuneToCrits() && !player.hasPerk(PerkLib.EnableCriticals)) critChance = 0;
 			if (rand(100) < critChance) {
 				crit = true;
 				damage *= 1.75;

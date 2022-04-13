@@ -763,10 +763,10 @@ private function scyllaPtVShare():void {
 	outputText("What addiction would you like to discuss?");
 	//Set choices
 	var milk:Function = null;
-	if((player.findPerk(PerkLib.MarblesMilk) >= 0 || player.statusEffectv3(StatusEffects.Marble) > 0) && player.findPerk(PerkLib.MarbleResistant) < 0)
+	if((player.hasPerk(PerkLib.MarblesMilk) || player.statusEffectv3(StatusEffects.Marble) > 0) && !player.hasPerk(PerkLib.MarbleResistant))
 		milk = scyllaPtVMilk;
 	var cum:Function = null;
-	if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] >= 50 || player.findPerk(PerkLib.MinotaurCumAddict) >= 0) cum = scyllaPtVCum;
+	if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] >= 50 || player.hasPerk(PerkLib.MinotaurCumAddict)) cum = scyllaPtVCum;
 	var sex:Function = null;
 	if(player.lib >= 85 || player.minLust() >= 20) sex = scyllaPtVSex;
 	var tentacles:Function = null;

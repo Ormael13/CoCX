@@ -347,13 +347,13 @@ public class HiddenCave extends DungeonAbstractContent
 				return;
 			}
 			outputText("The chamber you have entered is large.. At the center is an imposing throne with several shield like green scales littered around it. ");
-			if (player.findPerk(PerkLib.SoulSense) >= 0) {
+			if (player.hasPerk(PerkLib.SoulSense)) {
 				outputText("There is a small suspicious lever on the right next to a bed. ");
 				if (flags[kFLAGS.HIDDEN_CAVE_2ND_FLOOR] > 0) outputText("And you already pulled it. ");
 			}
 			outputText("On the left is a small tatami mat and incense, it's obviously used for meditation.");
 			dungeons.setDungeonButtons(roomTunnel02, null, null, null);
-			if (player.findPerk(PerkLib.SoulSense) >= 0 && flags[kFLAGS.HIDDEN_CAVE_2ND_FLOOR] == 0) {
+			if (player.hasPerk(PerkLib.SoulSense) && flags[kFLAGS.HIDDEN_CAVE_2ND_FLOOR] == 0) {
 				addButton(0, "Pull Lever", pullTheLever).hint("Pull the lever. You suspect that it might open some secret door.");
 			}
 		}

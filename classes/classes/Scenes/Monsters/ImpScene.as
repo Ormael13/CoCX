@@ -307,12 +307,12 @@ use namespace CoC;
             else
                 addButtonDisabled(0, "Small", "Req. area < 15");
 
-            if (player.cor <= 66 + player.corruptionTolerance())
+            if (player.cor <= 66 + player.corruptionTolerance)
                 addButton(1, "Soft", cOIM_lowCor);
             else
                 addButtonDisabled(1, "Soft", "Req. area > 15 and corruption < 66");
 
-            if (player.cor >= 66 - player.corruptionTolerance())
+            if (player.cor >= 66 - player.corruptionTolerance)
                 addButton(2, "Rough", cOIM_lowCor);
             else
                 addButtonDisabled(2, "Rough", "Req. area > 15 and corruption > 66");
@@ -1843,7 +1843,7 @@ use namespace CoC;
                 addButtonIfTrue(0,"FuckHisAss", impLordBumPlug, "Req. cock with area < " + monster.analCapacity(), player.cockThatFits(monster.analCapacity()) >= 0);
                 addButtonIfTrue(1,"Get Blown", getBlownByAnImpLord, "Req. cock", player.hasCock());
                 addButtonIfTrue(2,"Ride Cock", femaleVagRape, "Req. vagina", player.hasVagina());
-				if(player.findPerk(PerkLib.Feeder) >= 0 && monster.short != "imp overlord" && monster.short != "imp warlord") addButton(3,"Breastfeed",feederBreastfeedRape);
+				if(player.hasPerk(PerkLib.Feeder) && monster.short != "imp overlord" && monster.short != "imp warlord") addButton(3,"Breastfeed",feederBreastfeedRape);
                 else addButtonDisabled(3,"Breastfeed", "Req. Feeder perk");
 				LustyMaidensArmor.addTitfuckButton(4);
 			}

@@ -1054,7 +1054,7 @@ private function heliaRoughSex(output:Boolean = true):void {
 			buttons++;	
 		}
 	}
-	if(player.lust >= 33 && player.findPerk(PerkLib.Incorporeality) >= 0 && izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0 && buttons < 14) {
+	if(player.lust >= 33 && player.hasPerk(PerkLib.Incorporeality) && izmaFollower() && flags[kFLAGS.IZMA_NO_COCK] == 0 && buttons < 14) {
 		addButton(buttons,"Possess",heliaCampPossession);
 		buttons++;
 	}

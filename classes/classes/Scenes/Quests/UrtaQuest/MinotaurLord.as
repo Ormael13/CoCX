@@ -53,7 +53,7 @@ use namespace CoC;
 
 		private function minotaurDisarm():void
 		{
-			if (player.findPerk(PerkLib.ShieldWard) >= 0 && rand (2) == 0) {
+			if (player.hasPerk(PerkLib.ShieldWard) && rand (2) == 0) {
 				outputText("The giant of a minotaur raises his chain threateningly into the air, clearly intent on striking you down.  With your trained reflexes, you quickly move to block his blow with your [shield].  You recoil as the chain impacts your [shield] with a loud clang, bouncing off it.  You smile triumphantly at the minotaur, only to notice his smirk fading away.  ");
 			}
 			else {

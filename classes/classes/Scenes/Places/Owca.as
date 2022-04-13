@@ -383,7 +383,7 @@ public function defeetVapulasHorde():void {
 		else outputText("You grin wickedly as the demons give up the fight, too turned on to care about you.  One even has hopeful desperation glinting in her eyes as she attempts to entice you with her long, thick nipples and enormous, dripping gash.");
 	}
 	//[(requires genitals and and corr > 65)
-	if((player.cor > (65 - player.corruptionTolerance()) || flags[kFLAGS.MEANINGLESS_CORRUPTION] >= 1) && player.gender > 0) {
+	if((player.cor > (65 - player.corruptionTolerance) || flags[kFLAGS.MEANINGLESS_CORRUPTION] >= 1) && player.gender > 0) {
 		outputText("\n\nDo you take advantage of them?");
 		doYesNo(rapeZeVapula,noVapulaSex);
 	}
@@ -1015,7 +1015,7 @@ private function subdueVapula():void {
 	var fuck:Function = null;
 	if(player.gender > 0 && player.lust >= 33) fuck = rapeZeVapula;
 	var enslave:Function = null;
-	if(player.gender > 0 && (player.cor >= 66 - player.corruptionTolerance())) enslave = enslaveVapulaWithYourWang;
+	if(player.gender > 0 && (player.cor >= 66 - player.corruptionTolerance)) enslave = enslaveVapulaWithYourWang;
 	simpleChoices("Disband", disbandHorde, "EnslaveVapula", enslave, "JustFuckEm", fuck, "", null, "Skip Out", cleanupAfterCombat);
 }
 //Option: Disband (Z)

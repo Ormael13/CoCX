@@ -1,5 +1,4 @@
 package classes.Scenes.Dungeons {
-import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.StatusEffects;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;

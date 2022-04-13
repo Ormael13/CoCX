@@ -963,8 +963,8 @@ public function nagaRapeChoice():void {
 	}
     outputText("Your body aches for further satisfaction - do you rape the snake woman?");
     //Overhauled menu
-    var lowCor:Boolean = player.cor < 66 + player.corruptionTolerance(); 
-    var hiCor:Boolean = player.cor >= 66 - player.corruptionTolerance();
+    var lowCor:Boolean = player.cor < 66 + player.corruptionTolerance; 
+    var hiCor:Boolean = player.cor >= 66 - player.corruptionTolerance;
     menu();
     //male
     addButtonIfTrue(0, "Sex (Male)", victoryMale, "Req. cock, non-taur body and low corruption", !player.isTaur() && player.hasCock() && lowCor);

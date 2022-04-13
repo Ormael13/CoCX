@@ -24,7 +24,7 @@ use namespace CoC;
 			SimpleStrike();
 			SimpleStrike();
 			SimpleStrike();
-			if (player.findPerk(PerkLib.Resolute) < 0 && flags[kFLAGS.CHI_CHI_SAM_TRAINING] < 2) {
+			if (!player.hasPerk(PerkLib.Resolute) && flags[kFLAGS.CHI_CHI_SAM_TRAINING] < 2) {
 				outputText(" You stagger under the violent force of the consecutive impacts, unable to recover your balance.");
 				player.createStatusEffect(StatusEffects.Stunned, 0, 0, 0, 0);
 			}

@@ -1720,7 +1720,7 @@ public class PerkMenu extends BaseContent {
 	 clearOutput();
 	 menu();
 	 if (player.perkv2(PerkLib.AscensionTolerance) == 0){
-	 outputText("Corruption Tolerance is under effect, giving you " + player.corruptionTolerance() + " tolerance on most corruption events." +
+	 outputText("Corruption Tolerance is under effect, giving you " + player.corruptionTolerance + " tolerance on most corruption events." +
 	 "\n\nYou can disable this perk's effects at any time.<b>Some camp followers may leave you immediately after doing this. Save beforehand!</b>");
 	 addButton(0, "Disable", disableTolerance);
 	 }else addButtonDisabled(0, "Disable", "The perk is already disabled.");

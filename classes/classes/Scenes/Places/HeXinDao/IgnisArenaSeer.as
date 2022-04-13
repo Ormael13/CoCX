@@ -16,9 +16,10 @@ public class IgnisArenaSeer extends Monster
 		public var ignisfight:IgnisArenaSeerScene = new IgnisArenaSeerScene();
 		
 		public function IgnisCastsNuke():void {
+			var defended:Boolean = player.hasPerk(PerkLib.SoulSprite) > 0 || player.hasPerk(PerkLib.Archmage) > 0;
 			outputText("Ignis raises his palm, a orb of fire appearing above it.  Then without warning, the fire radiates out with the force of an explosion! You are buffeted by wave after wave of flames, burning hotter than you could have ever imagined. ");
-			if (player.findPerk(PerkLib.SoulSprite) > 0 || player.findPerk(PerkLib.Archmage) > 0) outputText("You try and cast makeshift defenses around yourself, with limited success. ");
-			outputText("You try and huddle down and take shelter from the infernal storm, but the fire is everywhere. Then, as suddenly as the flame came, they are gone.\n\n");
+			if (defended) outputText("You try and cast makeshift defenses around yourself, with limited success. ");
+			else outputText("You try and huddle down and take shelter from the infernal storm, but the fire is everywhere. Then, as suddenly as the flame came, they are gone.\n\n");
 			this.createStatusEffect(StatusEffects.IgnisCastedNuke, 0, 0, 0, 0);
 			var damage:Number = 5000;
 			damage += 2000 * flags[kFLAGS.NEW_GAME_PLUS_LEVEL];
@@ -27,8 +28,7 @@ public class IgnisArenaSeer extends Monster
 				damage *= 0.5;
 			}
 			damage = Math.round(damage);
-			if (player.findPerk(PerkLib.SoulSprite) > 0) player.takeFireDamage(damage, true);
-			if (player.findPerk(PerkLib.Archmage) > 0) player.takeFireDamage(damage, true);
+			if (!defended) player.takeFireDamage(damage, true);
 			player.takeMagicDamage(damage, true);
 		}
 		
