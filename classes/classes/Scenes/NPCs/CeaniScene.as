@@ -363,7 +363,7 @@ public function beachInteractionsDateUnderwater1():void
 
 public function beachInteractionsDateUnderwater2():void
 {
-	if (player.findPerk(PerkLib.AquaticAffinity) >= 0) {
+	if (player.hasPerk(PerkLib.AquaticAffinity)) {
 		outputText("You and Ceani dive into the waves, the both of you racing underwater and playing as you try to be the first to reach the coral barrier.\n\n");
 		outputText("Ceani is just as fast as you if not faster ");
 		if (player.spe >= 200) {

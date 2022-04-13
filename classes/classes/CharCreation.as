@@ -2212,43 +2212,43 @@ import coc.view.MainView;
 			else if (player.ascensionPerkPoints < 30 && !player.hasPerk(PerkLib.AscensionNaturalMetamorph)) addButtonDisabled(btn, "N.Metamorph", "You do not have enough ascension perk points!");
 			else addButtonDisabled(btn, "N.Metamorph", "You already bought Natural Metamorph perk.");
 			btn++;
-			if (player.findPerk(PerkLib.AscensionNaturalMetamorph) >= 0) {
-				if (player.ascensionPerkPoints >= 15 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1) < 0) addButton(btn, "T.G.M.(S1)", perkTranscendentalGeneticMemoryStage1).hint("Perk allowing to retain up to 15 unlocked options from Metamorph menu.\n\nCost: 15 points");
-				else if (player.ascensionPerkPoints < 15 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1) < 0) addButtonDisabled(btn, "T.G.M.(S1)", "You not have enough ascension perk points!");
+			if (player.hasPerk(PerkLib.AscensionNaturalMetamorph)) {
+				if (player.ascensionPerkPoints >= 15 && !player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1)) addButton(btn, "T.G.M.(S1)", perkTranscendentalGeneticMemoryStage1).hint("Perk allowing to retain up to 15 unlocked options from Metamorph menu.\n\nCost: 15 points");
+				else if (player.ascensionPerkPoints < 15 && !player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1)) addButtonDisabled(btn, "T.G.M.(S1)", "You not have enough ascension perk points!");
 				else addButtonDisabled(btn, "T.G.M.(S1)", "You already bought Transcendental Genetic Memory (Stage 1) perk.");
 			}
 			else addButtonDisabled(btn, "T.G.M.(S1)", "You need to buy Natural Metamorph perk first.");
 			btn++;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1) >= 0) {
-				if (player.ascensionPerkPoints >= 30 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage2) < 0) addButton(btn, "T.G.M.(S2)", perkTranscendentalGeneticMemoryStage2).hint("Perk allowing to retain up to 30(45) unlocked options from Metamorph menu.\n\nCost: 30 points");
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1)) {
+				if (player.ascensionPerkPoints >= 30 && !player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage2)) addButton(btn, "T.G.M.(S2)", perkTranscendentalGeneticMemoryStage2).hint("Perk allowing to retain up to 30(45) unlocked options from Metamorph menu.\n\nCost: 30 points");
 				else if (player.ascensionPerkPoints < 30) addButtonDisabled(btn, "T.G.M.(S2)", "You not have enough ascension perk points!");
 				else addButtonDisabled(btn, "T.G.M.(S2)", "You already bought Transcendental Genetic Memory (Stage 2) perk.");
 			}
-			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1) < 0) addButtonDisabled(btn, "T.G.M.(S2)", "You need to buy Transcendental Genetic Memory (Stage 1) perk first.");
+			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 1 && !player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage1)) addButtonDisabled(btn, "T.G.M.(S2)", "You need to buy Transcendental Genetic Memory (Stage 1) perk first.");
 			else addButtonDisabled(btn, "T.G.M.(S2)", "You need ascend more times to buy this perk.");
 			btn++;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage2) >= 0) {
-				if (player.ascensionPerkPoints >= 45 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage3) < 0) addButton(btn, "T.G.M.(S3)", perkTranscendentalGeneticMemoryStage3).hint("Perk allowing to retain up to 45(90) unlocked options from Metamorph menu.\n\nCost: 45 points");
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage2)) {
+				if (player.ascensionPerkPoints >= 45 && !player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage3)) addButton(btn, "T.G.M.(S3)", perkTranscendentalGeneticMemoryStage3).hint("Perk allowing to retain up to 45(90) unlocked options from Metamorph menu.\n\nCost: 45 points");
 				else if (player.ascensionPerkPoints < 45) addButtonDisabled(btn, "T.G.M.(S3)", "You not have enough ascension perk points!");
 				else addButtonDisabled(btn, "T.G.M.(S3)", "You already bought Transcendental Genetic Memory (Stage 3) perk.");
 			}
-			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage2) < 0) addButtonDisabled(btn, "T.G.M.(S3)", "You need to buy Transcendental Genetic Memory (Stage 2) perk first.");
+			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 2 && !player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage2)) addButtonDisabled(btn, "T.G.M.(S3)", "You need to buy Transcendental Genetic Memory (Stage 2) perk first.");
 			else addButtonDisabled(btn, "T.G.M.(S3)", "You need ascend more times to buy this perk.");
 			btn++;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage3) >= 0) {
-				if (player.ascensionPerkPoints >= 60 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage4) < 0) addButton(btn, "T.G.M.(S4)", perkTranscendentalGeneticMemoryStage4).hint("Perk allowing to retain up to 60(150) unlocked options from Metamorph menu.\n\nCost: 60 points");
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3 && player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage3)) {
+				if (player.ascensionPerkPoints >= 60 && !player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage4)) addButton(btn, "T.G.M.(S4)", perkTranscendentalGeneticMemoryStage4).hint("Perk allowing to retain up to 60(150) unlocked options from Metamorph menu.\n\nCost: 60 points");
 				else if (player.ascensionPerkPoints < 60) addButtonDisabled(btn, "T.G.M.(S4)", "You not have enough ascension perk points!");
 				else addButtonDisabled(btn, "T.G.M.(S4)", "You already bought Transcendental Genetic Memory (Stage 4) perk.");
 			}
-			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage3) < 0) addButtonDisabled(btn, "T.G.M.(S4)", "You need to buy Transcendental Genetic Memory (Stage 3) perk first.");
+			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 3 && !player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage3)) addButtonDisabled(btn, "T.G.M.(S4)", "You need to buy Transcendental Genetic Memory (Stage 3) perk first.");
 			else addButtonDisabled(btn, "T.G.M.(S4)", "You need ascend more times to buy this perk.");
 			btn++;
-			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 4 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage4) >= 0) {
-				if (player.ascensionPerkPoints >= 75 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage5) < 0) addButton(btn, "T.G.M.(S5)", perkTranscendentalGeneticMemoryStage5).hint("Perk allowing to retain up to 75(225) unlocked options from Metamorph menu.\n\nCost: 75 points");
+			if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 4 && player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage4)) {
+				if (player.ascensionPerkPoints >= 75 && !player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage5)) addButton(btn, "T.G.M.(S5)", perkTranscendentalGeneticMemoryStage5).hint("Perk allowing to retain up to 75(225) unlocked options from Metamorph menu.\n\nCost: 75 points");
 				else if (player.ascensionPerkPoints < 75) addButtonDisabled(btn, "T.G.M.(S5)", "You not have enough ascension perk points!");
 				else addButtonDisabled(btn, "T.G.M.(S5)", "You already bought Transcendental Genetic Memory (Stage 5) perk.");
 			}
-			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 4 && player.findPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage4) < 0) addButtonDisabled(btn, "T.G.M.(S5)", "You need to buy Transcendental Genetic Memory (Stage 4) perk first.");
+			else if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 4 && !player.hasPerk(PerkLib.AscensionTranscendentalGeneticMemoryStage4)) addButtonDisabled(btn, "T.G.M.(S5)", "You need to buy Transcendental Genetic Memory (Stage 4) perk first.");
 			else addButtonDisabled(btn, "T.G.M.(S5)", "You need ascend more times to buy this perk.");
 			btn++;
 			//End of deprecation.

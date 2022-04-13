@@ -101,15 +101,15 @@ import classes.StatusEffects.Combat.AmilyVenomDebuff;
 				dodged++;
 			}
 			//Determine if evaded
-			if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
+			if(player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
 				dodged++;
 			}
 			//("Misdirection"
-			if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
+			if(player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
 				dodged++;
 			}
 			//Determine if cat'ed
-			if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
+			if(player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
 				dodged++;
 			}
 			//Get hit!
@@ -154,15 +154,15 @@ import classes.StatusEffects.Combat.AmilyVenomDebuff;
 				dodged = 1;
 			}
 			//Determine if evaded
-			if (player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
+			if (player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
 				dodged = 2;
 			}
 			//("Misdirection"
-			if (player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 15 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
+			if (player.hasPerk(PerkLib.Misdirection) && rand(100) < 15 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
 				dodged = 3;
 			}
 			//Determine if cat'ed
-			if (player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 15) {
+			if (player.hasPerk(PerkLib.Flexibility) && rand(100) < 15) {
 				dodged = 4;
 			}
 			//Dodged

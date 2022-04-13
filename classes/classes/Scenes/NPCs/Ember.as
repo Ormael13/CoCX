@@ -125,7 +125,7 @@ public class Ember extends Monster
 			}
 			else {
 				outputText("Try as you might, you can't seem to protect yourself; and the blast hits you like a stone, throwing you to the ground. ");
-				if(player.findPerk(PerkLib.Resolute) < 0) {
+				if(!player.hasPerk(PerkLib.Resolute)) {
 					outputText("Your head swims - it'll take a moment before you can regain your balance. ");
 					player.createStatusEffect(StatusEffects.Stunned,0,0,0,0);
 				}

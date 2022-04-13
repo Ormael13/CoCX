@@ -69,7 +69,7 @@ package classes.Items.Weapons
 		}
 		
 		override public function canUse():Boolean {
-			if (game.player.cor < (33 + game.player.corruptionTolerance())) return super.canUse();
+			if (game.player.cor < (33 + game.player.corruptionTolerance)) return super.canUse();
 			outputText("You grab hold of the handle of the staff only to have it grow burning hot. You're forced to let it go lest you burn yourself. Something within the staff must be displeased.");
 			return false;
 		}

@@ -90,7 +90,7 @@ import classes.internals.*;
 			if (player.inte < (50+player.level)) resist = Math.round(player.inte/55*30);
 			else resist = 25;
 			if (player.hasPerk(PerkLib.Whispered)) resist += 15;
-			if (player.hasPerk(PerkLib.HistoryReligious) && player.cor <= 20) resist += 15 - player.corAdjustedDown();
+			if (player.hasPerk(PerkLib.HistoryReligious) && player.cor <= 20) resist += 15 - player.corAdjustedDown;
 			if (rand(100) < resist) {
 				outputText("As the world around you begins to twist, you push back the influence of her illusions with your mind! She lets out a small cry of pain, clutching her forehead, and curses audibly as she realizes that you resisted her magic.\n\n");
 				if (player.hasStatusEffect(StatusEffects.Illusion)) {
@@ -165,9 +165,9 @@ import classes.internals.*;
 			var resist:int = 0;
 			if (player.inte < (50+player.level)) resist = Math.round(player.inte/55*30);
 			else resist = 25;
-			if (player.findPerk(PerkLib.Whispered) >= 0) resist += 35;
+			if (player.hasPerk(PerkLib.Whispered)) resist += 35;
 			else outputText("Some small part of you knows this can’t be real, but you’re too terrified to act right now!");
-			if (player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 20) resist += 15 - player.corAdjustedDown();
+			if (player.hasPerk(PerkLib.HistoryReligious) && player.cor <= 20) resist += 15 - player.corAdjustedDown;
 			if (rand(100) < resist) {
 				outputText("\n\nAiko murmurs her incantation, but as the darkness begins to close in on you, you push back the influence of her illusions with your mind! She lets out a yelp of pain, clutching her forehead, but then grins madly. <i>\"Think you’re pretty clever, huh?\"</i>");
 				if (player.hasStatusEffect(StatusEffects.Fear))
@@ -382,8 +382,8 @@ import classes.internals.*;
 			var resist:int = 0;
 			if (player.inte < 30) resist = Math.round(player.inte);
 			else resist = 30;
-			if (player.findPerk(PerkLib.Whispered) >= 0) resist += 20;
-			if ((player.findPerk(PerkLib.HistoryReligious) >= 0 || player.findPerk(PerkLib.PastLifeReligious) >= 0) && player.cor < 20) resist += 20 - player.cor;
+			if (player.hasPerk(PerkLib.Whispered)) resist += 20;
+			if ((player.hasPerk(PerkLib.HistoryReligious) || player.hasPerk(PerkLib.PastLifeReligious)) && player.cor < 20) resist += 20 - player.cor;
 			var select:int = rand(5);
 			if (select == 0) {
 				outputText("The kitsune playfully darts around you, grinning coyly.  She somehow slips in under your reach, and before you can react, draws a small circle on your chest with her fingertip.  As you move to strike again, the flaming runic symbol she left on you glows brightly, and your movements are halted mid-swing.");
@@ -417,8 +417,8 @@ import classes.internals.*;
 			var resist:int = 0;
 			if (player.inte < 30) resist = Math.round(player.inte);
 			else resist = 30;
-			if (player.findPerk(PerkLib.Whispered) >= 0) resist += 20;
-			if ((player.findPerk(PerkLib.HistoryReligious) >= 0 || player.findPerk(PerkLib.PastLifeReligious) >= 0) && player.cor < 20) resist += 20 - player.cor;
+			if (player.hasPerk(PerkLib.Whispered)) resist += 20;
+			if ((player.hasPerk(PerkLib.HistoryReligious) || player.hasPerk(PerkLib.PastLifeReligious)) && player.cor < 20) resist += 20 - player.cor;
 			var select:int = rand(3);
 			if (select == 0) {
 				outputText("\"<i>Oh silly, trying to beat me at my own game are you?</i>\"  the kitsune says with a smirk, surprising you as she appears right in front of you.  She traces a small circle around your mouth, and you find yourself stricken mute!  You try to remember the arcane gestures to cast your spell and find that you've forgotten them too.  <b>The kitsune's spell has sealed your magic!</b>  You won't be able to cast any spells until it wears off.");

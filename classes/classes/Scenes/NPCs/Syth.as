@@ -59,17 +59,17 @@ public class Syth extends Monster
 				return;
 			}
 			//Determine if evaded
-			if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 5) {
+			if(player.hasPerk(PerkLib.Evade) && rand(100) < 5) {
 				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s tail-swipe.\n");
 				return;
 			}
 			//("Misdirection"
-			if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 5 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
+			if(player.hasPerk(PerkLib.Misdirection) && rand(100) < 5 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
 				outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' tail-swipe.\n");
 				return;
 			}
 			//Determine if cat'ed
-			if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 3) {
+			if(player.hasPerk(PerkLib.Flexibility) && rand(100) < 3) {
 				outputText("With your incredible flexibility, you squeeze out of the way of a tail-swipe!");
 				return;
 			}

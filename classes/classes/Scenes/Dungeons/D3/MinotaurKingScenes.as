@@ -359,7 +359,7 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			var x:int = player.biggestCockIndex() + 1;
 
 			outputText("Why resort to making use of the brutal minotaur when there’s a puddle of wet trollop so close at hand? It’s a good thing that all the spunk leaking from between her legs actually smells");
-			if (player.findPerk(PerkLib.MinotaurCumAddict) >= 0) outputText(" wonderful");
+			if (player.hasPerk(PerkLib.MinotaurCumAddict)) outputText(" wonderful");
 			else outputText(" sort of... nice... sexy even");
 			outputText(", or you might have had second thoughts. Her creampied honeypot ought to feel like teflon-treated silk against your [cock " + x + "]. It glitters in the flickering, bedroom light of Lethice’s throne room, beckoning you to plunge inside and see just how good it will feel.");
 			outputText("\n\n<i>\"Hrmmm, again?\"</i> Excellia dreamily coos, lifting her ass up into position. <i>\"...yes sir, I’m always rarin’ for a fuck.\"</i> She happily sighs and wiggles her ass in your direction, completely unaware that you’re the one advancing toward her ass with a aching cock");

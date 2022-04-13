@@ -64,7 +64,7 @@ private function checkBakeryMenu():void {
 	var minoCum:Function = null;
 	var gcupcake:Function = null;
 	//Turn on cum eclairs if PC is an addict!
-	if(player.findPerk(PerkLib.MinotaurCumAddict) >= 0 && flags[kFLAGS.MINOTAUR_CUM_ECLAIR_UNLOCKED] == 0) {
+	if(player.hasPerk(PerkLib.MinotaurCumAddict) && flags[kFLAGS.MINOTAUR_CUM_ECLAIR_UNLOCKED] == 0) {
 		flags[kFLAGS.MINOTAUR_CUM_ECLAIR_UNLOCKED]++;
 		outputText("While you're in line, a shaking centauress glances at you and whispers, \"<i>You need some too, don't ya hun?</i>\"  You look on in confusion, not really sure what she's insinuating.  Her eyes widen and she asks, \"<i>Aren't you addicted?</i>\" You nod, dumbly, and she smiles knowingly.  \"<i>There's a minotaur that works here with a bit of a fetish... just order a special eclair and he'll fix you right up.  Just keep it on the hush hush and hope there's some left after I get my dozen.</i>\"  The centaur licks her lips and prances around impatiently.\n\n");
 	}

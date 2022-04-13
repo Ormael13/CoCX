@@ -22,6 +22,8 @@ import classes.Scenes.Dungeons.DeepCave.ValaScene;
 import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.NPCs.CelessScene;
 import classes.Scenes.NPCs.DivaScene;
+import classes.Scenes.NPCs.DriderTown;
+import classes.Scenes.NPCs.LilyFollower;
 import classes.Scenes.NPCs.LunaFollower;
 import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.NPCs.ZenjiScenes;
@@ -802,7 +804,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (TyrantiaFollower.TyrantiaFollowerStage >= 4 && BelisaFollower.BelisaFollowerStage > 2 && BelisaFollower.BelisaFollowerStage < 6) {
 					BelisaFollower.BelisaFollowerStage += 1;
 				}				
-				
+				//DriderTown Construction
+				if (BelisaFollower.BelisaInCamp && LilyFollower.LilyFollowerState && TyrantiaFollower.TyrantiaFollowerStage >= 4) {
+					DriderTown.DriderTownComplete = true;
+				}
 				//Excellia fixing counter
 				if (flags[kFLAGS.EXCELLIA_RECRUITED] > 2 && flags[kFLAGS.EXCELLIA_RECRUITED] < 30) flags[kFLAGS.EXCELLIA_RECRUITED]++;
 				//Alvina timer

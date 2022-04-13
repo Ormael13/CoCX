@@ -106,6 +106,8 @@ public class SceneLib {
     public static var trollScene:TrollScenes = new TrollScenes();
 	
 	public static var displacerbeastScene:DisplacerBeastScene = new DisplacerBeastScene();
+    
+    public static var dridertown:DriderTown = new DriderTown();
 
     public static var aethertwins:AetherTwinsFollowers = new AetherTwinsFollowers();
 

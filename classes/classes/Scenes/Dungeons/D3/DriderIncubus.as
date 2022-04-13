@@ -188,15 +188,15 @@ this.HP -= (this.maxHP() * 0.08);
 			
 			var damage:Number = (str + weaponAttack) * 0.40;
 			
-			if (damage <= 0 || (combatMiss() || player.findPerk(PerkLib.Flexibility) >= 0))
+			if (damage <= 0 || (combatMiss() || player.hasPerk(PerkLib.Flexibility)))
 			{
 				outputText(" You barely slide out of the way.");
 			}
-			else if (player.findPerk(PerkLib.Evade) >= 0)
+			else if (player.hasPerk(PerkLib.Evade))
 			{
 				outputText(" You evade the strike.");
 			}
-			else if (player.findPerk(PerkLib.Misdirection) >= 0)
+			else if (player.hasPerk(PerkLib.Misdirection))
 			{
 				outputText(" Using your skills at misdirection, you avoid the strike.");
 			}
@@ -248,9 +248,9 @@ this.HP -= (this.maxHP() * 0.08);
 				outputText("Twisting over, the arachnid demon bares his fangs, attempting to bite you!");
 				
 				//Dodge
-				if (player.findPerk(PerkLib.Misdirection) >= 0) outputText(" You misdirect his venomous strike!");
-				else if (player.findPerk(PerkLib.Evade) >= 0) outputText(" You evade his venomous strike!");
-				else if (combatMiss() || player.findPerk(PerkLib.Flexibility) >= 0) outputText(" You avoid his venomous strike!");
+				if (player.hasPerk(PerkLib.Misdirection)) outputText(" You misdirect his venomous strike!");
+				else if (player.hasPerk(PerkLib.Evade)) outputText(" You evade his venomous strike!");
+				else if (combatMiss() || player.hasPerk(PerkLib.Flexibility)) outputText(" You avoid his venomous strike!");
 				else
 				{
 					//Hits
@@ -285,11 +285,11 @@ this.HP -= (this.maxHP() * 0.08);
 		{
 			outputText("While you’re busy with his spear, he nonchalantly snaps a kick in your direction!");
 			
-			if (player.findPerk(PerkLib.Misdirection) >= 0)
+			if (player.hasPerk(PerkLib.Misdirection))
 			{
 				outputText(" You twist out of the way at the last moment thanks to your misdirection.");
 			}
-			else if (combatMiss() || player.findPerk(PerkLib.Evade) >= 0 || player.findPerk(PerkLib.Flexibility) >= 0)
+			else if (combatMiss() || player.hasPerk(PerkLib.Evade) || player.hasPerk(PerkLib.Flexibility))
 			{
 				outputText(" You twist out of the way at the last moment, evading with ease.");
 			}
@@ -316,15 +316,15 @@ this.HP -= (this.maxHP() * 0.08);
 			outputText("Twirling his weapon until it appears a blurred disc, the drider pivots, bringing the haft around at your head!");
 			
 			//Dodge
-			if (combatMiss() || player.findPerk(PerkLib.Flexibility) >= 0)
+			if (combatMiss() || player.hasPerk(PerkLib.Flexibility))
 			{
 				outputText(" You duck in the nick of time.");
 			}
-			else if (player.findPerk(PerkLib.Misdirection) >= 0)
+			else if (player.hasPerk(PerkLib.Misdirection))
 			{
 				outputText(" You were already changing direction. You silently thank Raphael for his training.");
 			}
-			else if (player.findPerk(PerkLib.Evade) >= 0)
+			else if (player.hasPerk(PerkLib.Evade))
 			{
 				outputText(" You lean in the direction of the swing, letting gravity pull you down and away from the stunning blow.");
 			}
@@ -342,7 +342,7 @@ this.HP -= (this.maxHP() * 0.08);
 					// your outer membrane }
 					outputText(".");
 					
-					if (player.findPerk(PerkLib.Resolute) < 0)
+					if (!player.hasPerk(PerkLib.Resolute))
 					{
 						outputText(" <b>You’re left stunned by the blow!</b> It’ll be a moment before you can regain your wits.");
 						player.createStatusEffect(StatusEffects.Stunned, 0, 0, 0, 0);
@@ -366,15 +366,15 @@ this.HP -= (this.maxHP() * 0.08);
 			//Use hit/dodge messages from above.
 			var damage:Number = str + weaponAttack + 10 - rand(player.tou);
 			
-			if (damage <= 0 || (combatMiss() || player.findPerk(PerkLib.Flexibility) >= 0))
+			if (damage <= 0 || (combatMiss() || player.hasPerk(PerkLib.Flexibility)))
 			{
 				outputText(" You barely slide out of the way.");
 			}
-			else if (player.findPerk(PerkLib.Evade) >= 0)
+			else if (player.hasPerk(PerkLib.Evade))
 			{
 				outputText(" You evade the strike.");
 			}
-			else if (player.findPerk(PerkLib.Misdirection) >= 0)
+			else if (player.hasPerk(PerkLib.Misdirection))
 			{
 				outputText(" Using your skills at misdirection, you avoid the strike.");
 			}
@@ -423,7 +423,7 @@ this.HP -= (this.maxHP() * 0.08);
 			outputText("\n\nDisjointed, erotic thoughts claw at your mind’s defenses, worming their way in through what cracks they find, plunging sensuous fantasies of every shape and size in place of your own imaginings.");
 			
 			//Resist, no new line
-			if (player.findPerk(PerkLib.Resolute) >= 0)
+			if (player.hasPerk(PerkLib.Resolute))
 			{
 				_seenResolute = true;
 				outputText(" You marshal your mental discipline and discard the errant thoughts.");
@@ -446,9 +446,9 @@ this.HP -= (this.maxHP() * 0.08);
 			
 			//Avoid
 			// 9999, scale avoidance off lust/lib/corr?
-			if (player.findPerk(PerkLib.Resolute) >= 0 || rand(3) >= 0)
+			if (player.hasPerk(PerkLib.Resolute) || rand(3) >= 0)
 			{
-				if (player.findPerk(PerkLib.Resolute) >= 0) _seenResolute = true;
+				if (player.hasPerk(PerkLib.Resolute)) _seenResolute = true;
 				outputText(" You flex your considerable will and feel the concentrated mental filth slough off. Whatever his attack was, it failed!");
 			}
 			else

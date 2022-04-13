@@ -119,7 +119,7 @@ public function ExcelliaPathChoiceMakeSlave():void {
 		outputText("\"<i>T-Thank you my " + player.mf("Lord", "Lady") + "... I… am always… here to serve you…</i>\"\n\n");
 		outputText("You pat your new cum receptacle on the head and tell her that you'll be sure to make great use of her. She lets out a tired moo before drifting off to sleep again. Your grin widens as you think of more ways to use her.\n\n");
         //
-        if (!sceneHunter.recalling) player.sexReward("vaginalFluids","Dick");
+        if (!recalling) player.sexReward("vaginalFluids","Dick");
         sharedEnd();
     }
     function femF():void {
@@ -131,18 +131,18 @@ public function ExcelliaPathChoiceMakeSlave():void {
 		outputText("\"<i>T-Thank you my Lady… I'm always… willing to serve you…</i>\"\n\n");
 		outputText("After that she sinks down then drift off into sleep. You pat the sleeping cow slut on the head. You grin thinking of new ways to use your new fuckpet.\n\n");
         //
-        if (!sceneHunter.recalling) player.sexReward("saliva","Vaginal");
+        if (!recalling) player.sexReward("saliva","Vaginal");
         sharedEnd();
     }
     function sharedEnd():void {
         player.orgasm();
-        if (!sceneHunter.recalling) {
+        if (!recalling) {
             outputText("(<b>Excellia has been added to the Slaves menu!</b>)\n\n");
             flags[kFLAGS.EXCELLIA_RECRUITED] = 2;
             doNext(camp.returnToCampUseFourHours);
         }
         else
-            doNext(camp.recallScenes);
+            doNext(camp.recallWakeUp);
     }
 }
 
@@ -238,7 +238,7 @@ public function ExcelliaCampFixHerHerself():void {
 		outputText("\"<i>I was actually a human before I came to Mareth. Seeing as I couldn't return to my home, I had to brave this new world to survive. I've traveled all over and defeated many creatures… That is until my travels took me to the mountains. I had heard they were home to Minotaurs. I had originally thought that the supposed brutes would provide a true test to my skills. That was my biggest mistake...</i>\"\n\n");
 		outputText("You can assume that her ventures to fight the bovine beasts didn't go accordingly. She shivers then hugs herself as old memories come back to her.\n\n");
 		outputText("\"<i>I struck down many of them… and maybe indulged in the spoils of my victories a little too often. I didn't know about the addictive qualities of their spunk. After that it's really hazy… I was taken, used, and abused. I was pretty much their breeding slave to dump all their desires into. Especially when the Minotaur King took a liking to that. I can't tell you how long I was like that. Frankly I really wish I could forget it all...</i>\"\n\n");
-		outputText("You can't imagine what that was like for her. To be used and fucked by Minotaurs day in and day out as a mindless cumdump. "+(player.findPerk(PerkLib.MinotaurCumAddict) >= 0 ? "Though thinking about it again, maybe it wouldn't be as bad as you originally thought. ":"")+"The [exc race] gives you a sad smile.\n\n");
+		outputText("You can't imagine what that was like for her. To be used and fucked by Minotaurs day in and day out as a mindless cumdump. "+(player.hasPerk(PerkLib.MinotaurCumAddict) ? "Though thinking about it again, maybe it wouldn't be as bad as you originally thought. ":"")+"The [exc race] gives you a sad smile.\n\n");
 		outputText("\"<i>Well, I guess I should count myself lucky that a brave champion like you came along. If you hadn't come in and taken down the Minotaur King and Lethice, I probably would have still been nothing more than a simple minded cum slut to say the least.</i>\"\n\n");
 		outputText("She takes your hands into yours, her smile noticeably brightens and tears well up in her eyes.\n\n");
 		outputText("\"<i>I don't think I can ever thank you enough for what you've done for me. No matter what happens, I am eternally grateful from the bottom of my heart.</i>\"\n\n");

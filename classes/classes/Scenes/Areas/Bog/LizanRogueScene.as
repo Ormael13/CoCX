@@ -18,7 +18,7 @@ public class LizanRogueScene extends BaseContent
 		
 		public function lizanIntro():void {
 			clearOutput();
-			if (player.cor > 33 + player.corruptionTolerance()) {
+			if (player.cor > 33 + player.corruptionTolerance) {
 				outputText("As you walk through the bog you happen upon a lone lizan male covered in " + monster.skinTone + " scales. Upon hearing your approach he jumps back, your sudden appearance must have surprised him. After an initial moment of surprise the lizan tentatively sniffs the air between the two of you. Without warning he jumps back, flashing his claws and releasing a loud hiss. Apparently he smells something he doesn't like. You ready for an attack but he just sits there, making noise and puffing himself up. For all the ferocity he displays he doesn't attack and you realize he's waiting for you to back down. What will you do?");
 				if (flags[kFLAGS.CODEX_ENTRY_LIZANS] <= 0) {
 					flags[kFLAGS.CODEX_ENTRY_LIZANS] = 1;
@@ -27,8 +27,8 @@ public class LizanRogueScene extends BaseContent
 				menu();
 				addButton(0, "Fight", fightLizan, false, null, null, "Fight the lizan!");
                 if (sceneHunter.other)
-                    addButtonIfTrue(1, "Talk", shTalk_medCor, "You're too corrupt for this!", player.cor < 66 + player.corruptionTolerance());
-                else if (player.cor < 66 + player.corruptionTolerance())
+                    addButtonIfTrue(1, "Talk", shTalk_medCor, "You're too corrupt for this!", player.cor < 66 + player.corruptionTolerance);
+                else if (player.cor < 66 + player.corruptionTolerance)
                     addButtonDisabled(1, "???", "SceneHunter feature");
                 addButton(2, "Leave", leaveLizan, false);
 				return;
