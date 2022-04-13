@@ -298,6 +298,18 @@ public class Horns extends BodyPart {
 		}
 	});
 
+	public static const JABBERWOCKY: int = 22;
+	EnumValue.add(Types, JABBERWOCKY, "JABBERWOCKY", {
+		name:"jabberwocky",
+		appearanceDescFunc: function(player: *): String {
+			var desc: String = "";
+
+			if (player.horns.count > 0) desc += " Four large-sized dragon horns grow from the side of your head curved like those of a jabberwocky.";
+
+			return desc;
+		}
+	});
+
 	public function Horns() {
 		super(null, null);
 	}

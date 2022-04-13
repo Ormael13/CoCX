@@ -652,14 +652,14 @@ use namespace CoC;
 			//Bonus defense
 			if (arms.type == Arms.YETI) armorDef += (1 * newGamePlusMod);
 			if (arms.type == Arms.SPIDER || arms.type == Arms.MANTIS || arms.type == Arms.BEE || arms.type == Arms.SALAMANDER) armorDef += (2 * newGamePlusMod);
-			if (arms.type == Arms.DRACONIC || arms.type == Arms.FROSTWYRM || arms.type == Arms.SEA_DRAGON) armorDef += (3 * newGamePlusMod);
+			if (arms.type == Arms.DRACONIC || arms.type == Arms.JABBERWOCKY || arms.type == Arms.FROSTWYRM || arms.type == Arms.SEA_DRAGON) armorDef += (3 * newGamePlusMod);
 			if (arms.type == Arms.HYDRA) armorDef += (4 * newGamePlusMod);
 			if (tailType == Tail.SPIDER_ADBOMEN || tailType == Tail.MANTIS_ABDOMEN || tailType == Tail.BEE_ABDOMEN) armorDef += (2 * newGamePlusMod);
 			if (tailType == Tail.DRACONIC) armorDef += (3 * newGamePlusMod);
 			if (lowerBody == LowerBody.FROSTWYRM) armorDef += (6 * newGamePlusMod);
 			if (lowerBody == LowerBody.YETI) armorDef += (1 * newGamePlusMod);
 			if (lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS || lowerBody == LowerBody.BEE || lowerBody == LowerBody.MANTIS || lowerBody == LowerBody.SALAMANDER) armorDef += (2 * newGamePlusMod);
-			if (lowerBody == LowerBody.DRAGON || lowerBody == LowerBody.SEA_DRAGON) armorDef += (3 * newGamePlusMod);
+			if (lowerBody == LowerBody.DRAGON || lowerBody == LowerBody.JABBERWOCKY || lowerBody == LowerBody.SEA_DRAGON) armorDef += (3 * newGamePlusMod);
 			if (lowerBody == LowerBody.DRIDER || lowerBody == LowerBody.HYDRA) armorDef += (4 * newGamePlusMod);
 			if (rearBody.type == RearBody.YETI_FUR) armorDef += (4 * newGamePlusMod);
 			if (hasPerk(PerkLib.Lycanthropy)) armorDef += 10 * newGamePlusMod;
@@ -6402,7 +6402,7 @@ use namespace CoC;
 				jabberwockyCounter -= 10;
 			if (eyes.type == Eyes.DRACONIC)
 				jabberwockyCounter++;
-			if (ears.type == Ears.DRAGON)
+			if (ears.type == Ears.BUNNY)
 				jabberwockyCounter++;
 			if (tailType == Tail.DRACONIC)
 				jabberwockyCounter++;
@@ -6412,13 +6412,15 @@ use namespace CoC;
 				jabberwockyCounter += 4;
 			if (wings.type == Wings.DRACONIC_SMALL || wings.type == Wings.DRACONIC_LARGE || wings.type == Wings.DRACONIC_HUGE)
 				jabberwockyCounter -= 10;
-			if (lowerBody == LowerBody.DRAGON)
+			if (lowerBody == LowerBody.JABBERWOCKY)
 				jabberwockyCounter++;
-			if (arms.type == Arms.DRACONIC)
+			if (arms.type == Arms.JABBERWOCKY)
 				jabberwockyCounter++;
 			if (tallness > 120 && jabberwockyCounter >= 10)
 				jabberwockyCounter++;
 			if (hasPartialCoat(Skin.DRAGON_SCALES) || hasCoatOfType(Skin.DRAGON_SCALES))
+				jabberwockyCounter++;
+			if (InCollection(coatColor, ["pink"]))
 				jabberwockyCounter++;
 			if (horns.type == Horns.DRACONIC_X4_12_INCH_LONG)
 				jabberwockyCounter += 2;

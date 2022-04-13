@@ -1211,6 +1211,36 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  }
 	);
 
+	public const HornsJabberwocky: Transformation = new SimpleTransformation("Jabberwocky Horns",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				if (player.horns.type === Horns.NONE) {
+					desc += "\n\nYou writhe in pain as two bony extrusions begin to push out of the side of your head. As a skull-splitting headache wracks through you, in an instant, the pain subsides as you feel four large, horns on your head. They are as long and curvy.\n\n<b>You have twelve inches of bony jabberwocky horns!</b>";
+				} else {
+					if (player.horns.type == Horns.DEMON && player.horns.count > 4) {
+						desc += "\n\nYour horns condense, twisting around each other and merging into larger, pointed protrusions. By the time they finish you have two sea dragon horns, each about twelve inches long.";
+						player.horns.count = 12;
+					} else {
+						desc += "\n\nYou feel your horns changing and warping, and reach back to touch them. They have a slight curve and a gradual taper. They look must look like the horns of a jabberwocky.";
+						if (player.horns.count > 13) {
+							desc += " The change also seems to have shrunken the horns, they're about a foot long now.";
+							player.horns.count = 12;
+						}
+					}
+				}
+
+				player.horns.count = 4;
+				player.horns.type = Horns.JABBERWOCKY;
+				if (doOutput) outputText(desc);
+			},
+			// is present
+			function (): Boolean {
+				return player.horns.type === Horns.JABBERWOCKY;
+			}
+	);
+
 	public const HornsUshiOni: Transformation = new SimpleTransformation("Ushi-Oni Horns",
 	  // apply effect
 	  function (doOutput: Boolean): void {
@@ -1339,6 +1369,22 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  function (): Boolean {
 	    return player.antennae.type === Antennae.SEA_DRAGON;
 	  }
+	);
+
+	public const AntennaeJabberwocky: Transformation = new SimpleTransformation("Jabberwocky Antennae",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += "A strange feeling washes over you as something crawls along your neck. You reach your hand up as two large, thin strands of scale covered flesh suddenly shoot out from right beneath your ears.\n\nIt would almost resemble tentacles thought some could say they are dragon whiskers. <b>Just like a jabberwocky you got two neck tentacles!</b>";
+				player.antennae.type = Antennae.JABBERWOCKY;
+
+				if (doOutput) outputText(desc);
+			},
+			// is present
+			function (): Boolean {
+				return player.antennae.type === Antennae.JABBERWOCKY;
+			}
 	);
   /*
 */
@@ -5479,6 +5525,23 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  }
 	);
 
+	public const ArmsJabberwocky: Transformation = new SimpleTransformation("Jabberwocky Arms",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				desc += "Your arms and hands suddenly begins to get thicker and bigger, way beyond human size. Your entire forearms and now massive hands first cover with -scale color- scales then with white fur, giving them the appearance of fluffy padded gloves. From the fur however surges out what used to be your nails, now powerful claws capable of digging through solid rock and ice just like those of a jabberwocky. <b>You now have jabberwocky arms!</b>";
+
+				player.arms.type = Arms.JABBERWOCKY;
+				if (doOutput) outputText(desc);
+				Metamorph.unlockMetamorph(ArmsMem.getMemory(ArmsMem.JABBERWOCKY));
+			},
+			// is present
+			function (): Boolean {
+				return player.arms.type === Arms.JABBERWOCKY;
+			}
+	);
+
 	public const ArmsBear: Transformation = new SimpleTransformation("Bear Arms",
 	  // apply effect
 	  function (doOutput: Boolean): void {
@@ -7760,6 +7823,31 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  }
 	);
 
+	public const LowerBodyJabberwocky: Transformation = new SimpleTransformation("Jabberwocky Lower Body",
+			// apply effect
+			function (doOutput: Boolean): void {
+				var desc: String = "";
+
+				//Taurs
+				if (player.isTaur()) desc += "Your quadrupedal hind-quarters seizes, overbalancing your surprised front-end and causing you to stagger and fall to your side.  Pain lances throughout, contorting your body into a tightly clenched ball of pain while tendons melt and bones break, melt, and regrow.  When it finally stops, <b>you look down to behold your new pair of fur-covered rabbit feet</b>!";
+				//Non-taurs
+				else {
+					desc += "Numbness envelops your [legs] as they pull tighter and tighter.  You overbalance and drop on your " + assDescript();
+					if (player.tailType > Tail.NONE) desc += ", nearly smashing your tail flat";
+					else desc += " hard enough to sting";
+					desc += " while the change works its way through you.  Once it finishes, <b>you discover that you now have fuzzy bunny feet and legs tipped with deadly dragon claws just like a jabberwocky!</b>!";
+				}
+
+				player.legCount = 2;
+				player.lowerBody = LowerBody.JABBERWOCKY;
+				if (doOutput) outputText(desc);
+			},
+			// is present
+			function (): Boolean {
+				return player.lowerBody === LowerBody.JABBERWOCKY;
+			}
+	);
+
 	public const LowerBodyCrab: Transformation = new SimpleTransformation("Crab Lower Body",
 	  // apply effect
 	  function (doOutput: Boolean): void {
@@ -9583,9 +9671,12 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  // apply effect
 	  function (doOutput: Boolean): void {
 	    var desc: String = "";
-
-	    desc += "You ain't even noticing as something messed up happen in your wings. They shrivel and change taking on a delicate almost fairy like appearance and you flap them in awe as they not only feel strong but also agile. You now have a set of <b>fey dragon wings.</b>";
-
+		if ((player.wings.type == Wings.NONE)) {
+			desc += "You keel in pain as you feel something penetrating your back. No, nothing is stabbing your back. More so, something is about to burst from within you. The trauma subsides as large bones emerge. A thin yet sturdy layer of skin covers your wings are covered as they fall into place behind you.\n\nAs you examine the fleshy appendage, you realize it's webbed. It seems to resemble more of a giant aquatic flipper than wings. The insides are not only colorful but also display several minute light specks. Not unlike those of a deep-sea beast. <b>You can now fly and swim at great speed with your brand new sea dragon wings!</b>";
+		}
+		if ((player.wings.type != Wings.NONE)) {
+			desc += "You ain't even noticing as something messed up happen in your wings. They shrivel and change taking on a delicate almost fairy like appearance and you flap them in awe as they not only feel strong but also agile. You now have a set of <b>fey dragon wings.</b>";
+		}
 	    player.wings.desc = "large majestic fey draconic";
 	    player.wings.type = Wings.FEY_DRAGON;
 	    if (doOutput) outputText(desc);

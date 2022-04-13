@@ -15821,13 +15821,13 @@ public final class Mutations extends MutationsHelper {
         player.refillHunger(10);
         if (player.dragonScore() > 9 || player.dragonneScore() > 9) {
             outputText("You eat the scale expecting some kind of spectacular change and for a moment pretty much nothing happen. You begin to feel weird… like very weird. For some reason your situation as a whole is so funny you can’t help but laugh. Are you seriously eating some otherworldly dragon scale just so you can turn into a messed up rabbit dragon yourself? Aha yes you are and that's way to funny.");
-            changeLimit += 2;
+            changeLimit += 1;
         } else {
             outputText("You eat the scale expecting some kind of spectacular change strangely nothing happened. Maybe you should stop eating everything you find.");
         }
         if (player.blockingBodyTransformations()) changeLimit = 0;
         //-Jabberwocky face/bucktooth
-        if ((player.faceType == Face.DRAGON || player.faceType == Face.DRAGON_FANGS) && changes < changeLimit) {
+        if ((player.faceType == Face.DRAGON || player.faceType == Face.DRAGON_FANGS) && changeLimit > 0) {
             outputText("[pg]");
             if (player.faceType == Face.DRAGON_FANGS) {
                 transformations.FaceBucktooth.applyEffect();
@@ -15836,8 +15836,32 @@ public final class Mutations extends MutationsHelper {
             }
             changes++;
         }
-        //-Fea Dragon Wings
-        if ((player.wings.type == Wings.DRACONIC_SMALL || player.wings.type == Wings.DRACONIC_LARGE || player.wings.type == Wings.DRACONIC_HUGE) && changes < changeLimit) {
+        //-Existing horns become jabby'
+        if (player.horns.type != Horns.JABBERWOCKY && changeLimit > 0) {
+            outputText("[pg]");
+            transformations.HornsJabberwocky.applyEffect();
+            changes++;
+        }
+        //-Jabby Neck
+        if (player.antennae != Antennae.JABBERWOCKY && changeLimit > 0) {
+            outputText("[pg]");
+            transformations.AntennaeJabberwocky.applyEffect();
+            changes++;
+        }
+        //-Jabby Arms
+        if (player.arms.type != Arms.JABBERWOCKY && changeLimit > 0) {
+            outputText("[pg]");
+            transformations.ArmsJabberwocky.applyEffect();
+            changes++;
+        }
+        //-Jabby leg
+        if (player.lowerBody != LowerBody.JABBERWOCKY && changeLimit > 0) {
+            outputText("[pg]");
+            transformations.LowerBodyJabberwocky.applyEffect();
+            changes++;
+        }
+        //-Fey Dragon Wings
+        if ((player.wings.type != Wings.FEY_DRAGON) && changeLimit > 0) {
             outputText("[pg]");
             transformations.WingsFeyDragon.applyEffect();
             changes++;

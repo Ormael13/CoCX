@@ -732,6 +732,17 @@ public class LowerBody extends SaveableBodyPart {
 		appearanceDesc: "You stand bipedal, your feet are mostly human in shape though your toes are webbed, presumably to assist with swimming. They are fit enough to support the weight of yourself and someone else if they were to be on top of you."
 	});
 
+	public static const JABBERWOCKY:int = 73;
+	EnumValue.add(Types, JABBERWOCKY, "JABBERWOCKY", {
+		name: "bunny",
+		legsPrefixes: ["fuzzy bunny-like", "fur-covered", "furry", ""],
+		legPrefixes: ["fuzzy bunny-like", "fur-covered", "furry", ""],
+		feetPrefixes: ["large bunny-like", "rabbit-like", "large", ""],
+		footPrefixes: ["large bunny-like", "rabbit-like", "large", ""],
+		appearanceDesc: "Your {legCount} legs thicken below the waist as they turn into soft-furred rabbit-like legs. You even have large bunny feet that make hopping around a little easier than walking. Unlike a normal bunny thought your toe ends up with vicious dragon claws capable of rending about just anything.",
+		canTaur: true
+	});
+
 	override public function set type(value:int):void {
 		super.type = value;
 		// Reset leg count
