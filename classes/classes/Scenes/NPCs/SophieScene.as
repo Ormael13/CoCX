@@ -925,7 +925,7 @@ internal function sophieLostCombat():void {
     //init
     menu();
     //bimbo hint and option
-    if(player.cor > 33 - player.corruptionTolerance()) { //added cor check - normal people won't think of that
+    if(player.cor > 33 - player.corruptionTolerance) { //added cor check - normal people won't think of that
         if (player.hasItem(consumables.BIMBOLQ)) {
             outputText("\n\nYou can feed her Bimbo Liqueur to make the poor harpy your bitch.");
             addButton(5, "Bimbo Her", sophieBimbo.bimbotizeMeCaptainSophie);

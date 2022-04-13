@@ -90,7 +90,7 @@ import classes.internals.*;
 			if (player.inte < (50+player.level)) resist = Math.round(player.inte/55*30);
 			else resist = 25;
 			if (player.hasPerk(PerkLib.Whispered)) resist += 15;
-			if (player.hasPerk(PerkLib.HistoryReligious) && player.cor <= 20) resist += 15 - player.corAdjustedDown();
+			if (player.hasPerk(PerkLib.HistoryReligious) && player.cor <= 20) resist += 15 - player.corAdjustedDown;
 			if (rand(100) < resist) {
 				outputText("As the world around you begins to twist, you push back the influence of her illusions with your mind! She lets out a small cry of pain, clutching her forehead, and curses audibly as she realizes that you resisted her magic.\n\n");
 				if (player.hasStatusEffect(StatusEffects.Illusion)) {
@@ -167,7 +167,7 @@ import classes.internals.*;
 			else resist = 25;
 			if (player.findPerk(PerkLib.Whispered) >= 0) resist += 35;
 			else outputText("Some small part of you knows this can’t be real, but you’re too terrified to act right now!");
-			if (player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 20) resist += 15 - player.corAdjustedDown();
+			if (player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 20) resist += 15 - player.corAdjustedDown;
 			if (rand(100) < resist) {
 				outputText("\n\nAiko murmurs her incantation, but as the darkness begins to close in on you, you push back the influence of her illusions with your mind! She lets out a yelp of pain, clutching her forehead, but then grins madly. <i>\"Think you’re pretty clever, huh?\"</i>");
 				if (player.hasStatusEffect(StatusEffects.Fear))

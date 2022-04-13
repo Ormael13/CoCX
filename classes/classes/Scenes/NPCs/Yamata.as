@@ -64,7 +64,7 @@ import classes.internals.*;
 			else 
 				outputText("Some small part of you knows this can’t be real, but you’re too terrified to act right now! ");
 			if (player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 20)
-				resist += 15 - player.corAdjustedDown();
+				resist += 15 - player.corAdjustedDown;
 			if (rand(100) < resist) {
 				outputText("\n\nSummoning up every last ounce of courage you have, you push back the illusions with your mind! Yamata reels a bit, clutching her forehead in pain, but only grins at you. <i>\"That all you got, hero?\"</i>");				
 				if (player.hasStatusEffect(StatusEffects.Fear))

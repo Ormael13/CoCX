@@ -193,7 +193,7 @@ private function keltRequiresNakedness():void {
 	outputText("He slaps a hand on his bare chest proudly, and you realize that he means for you to strip down naked.  When you protest, his eyes narrow with irritation, and his sneer becomes more cruel.\r\r");
 	outputText("\"<i>Didn't know you were a coward, too.  That's fine... go fuck off, then.  You can't handle it, then go back to your camp and braid your hair, or something.  If you wait long enough, I'm sure a nice minotaur will come along to make you his bitch.  'Bout all you're good for, right?</i>\"\r\r");
 	outputText("Do you obey his demand?");
-	if(player.cor > 70 - player.corruptionTolerance() && player.inte > 40 && !player.isTaur()) {
+	if(player.cor > 70 - player.corruptionTolerance && player.inte > 40 && !player.isTaur()) {
 		outputText("\n\n<b>If you fight back and take him down a peg, you might never see him again...</b>");
 		simpleChoices("Reluctantly", keltReluctantlyGetNaked, "Eagerly", keltEagerlyGetNaked, "Fight Back", keltResistance, "", null, "Never", keltRefuseNakedness);
 		return;
@@ -351,7 +351,7 @@ private function keltRequiresBlowjobs():void {
 	}
 	simpleChoices("Shamefully", keltBlowjobRequirementShamefully, "Eagerly", keltBlowjobRequirementEagerly, "Never!", keltBlowjobRequirementNever, "", null, "FIGHT!", kelly.fightToBeatKelt);
 	//Never!			Shamefully			Eagerly
-	if(player.inte > 40 && player.cor > 70 - player.corruptionTolerance() && !player.isTaur()) {
+	if(player.inte > 40 && player.cor > 70 - player.corruptionTolerance && !player.isTaur()) {
 		outputText("\n\n<b>If you fight back and take him down a peg, you might never see him again...</b>");
 		addButton(3, "Fight Back", keltResistance);
 	}
@@ -488,7 +488,7 @@ private function keltMainEncounterAfterNakedReq():void {
 				//(Yes[+5 Submissive]			No[Never event])
 				//Link this to reluctant && never
 				simpleChoices("Yes", keltReluctantlyGetNaked, "No", keltRefuseNakedness, "", null, "", null, "FIGHT!", kelly.fightToBeatKelt);
-				if (player.inte > 40 && player.cor > 70 - player.corruptionTolerance() && !player.isTaur()) {
+				if (player.inte > 40 && player.cor > 70 - player.corruptionTolerance && !player.isTaur()) {
 					outputText("\n\n<b>If you fight back and take him down a peg, you might never see him again...</b>");
 					addButton(2, "Fight Back",keltResistance);
 				}

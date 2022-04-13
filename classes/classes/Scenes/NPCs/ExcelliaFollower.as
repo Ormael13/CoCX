@@ -119,7 +119,7 @@ public function ExcelliaPathChoiceMakeSlave():void {
 		outputText("\"<i>T-Thank you my " + player.mf("Lord", "Lady") + "... I… am always… here to serve you…</i>\"\n\n");
 		outputText("You pat your new cum receptacle on the head and tell her that you'll be sure to make great use of her. She lets out a tired moo before drifting off to sleep again. Your grin widens as you think of more ways to use her.\n\n");
         //
-        if (!sceneHunter.recalling) player.sexReward("vaginalFluids","Dick");
+        if (!recalling) player.sexReward("vaginalFluids","Dick");
         sharedEnd();
     }
     function femF():void {
@@ -131,18 +131,18 @@ public function ExcelliaPathChoiceMakeSlave():void {
 		outputText("\"<i>T-Thank you my Lady… I'm always… willing to serve you…</i>\"\n\n");
 		outputText("After that she sinks down then drift off into sleep. You pat the sleeping cow slut on the head. You grin thinking of new ways to use your new fuckpet.\n\n");
         //
-        if (!sceneHunter.recalling) player.sexReward("saliva","Vaginal");
+        if (!recalling) player.sexReward("saliva","Vaginal");
         sharedEnd();
     }
     function sharedEnd():void {
         player.orgasm();
-        if (!sceneHunter.recalling) {
+        if (!recalling) {
             outputText("(<b>Excellia has been added to the Slaves menu!</b>)\n\n");
             flags[kFLAGS.EXCELLIA_RECRUITED] = 2;
             doNext(camp.returnToCampUseFourHours);
         }
         else
-            doNext(camp.recallScenes);
+            doNext(camp.recallWakeUp);
     }
 }
 

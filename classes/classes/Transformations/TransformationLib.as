@@ -1,7 +1,4 @@
 package classes.Transformations {
-import classes.BaseContent;
-import classes.CoC;
-
 import classes.BodyParts.Antennae;
 import classes.BodyParts.Horns;
 import classes.BodyParts.Hair;
@@ -20,12 +17,10 @@ import classes.BodyParts.Tongue;
 import classes.GeneticMemories.*;
 
 import classes.Items.MutationsHelper;
-import classes.Perks.MetamorphPerk;
 import classes.StatusEffects;
 import classes.internals.EnumValue;
 import classes.Scenes.Metamorph;
 import classes.GlobalFlags.kFLAGS;
-import classes.Transformations.TransformationUtils;
 import classes.PerkLib;
 import classes.internals.Utils;
 import classes.lists.Gender;
@@ -348,7 +343,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      return player.hasCoatOfType(Skin.FUR) && InCollection(player.coatColor, options.colors) && player.skin.coverage == coverage;
 	    }
 	  )
-	};
+	}
 
 	public function SkinScales(coverage: int = Skin.COVERAGE_COMPLETE, options: * = null): Transformation {
 	  return new SimpleTransformation("Scales Skin",
@@ -408,7 +403,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      return player.hasCoatOfType(Skin.SCALES) && InCollection(player.coatColor, options.colors) && player.skin.coverage == coverage;
 	    }
 	  )
-	};
+	}
 
 	public function SkinDragonScales(coverage: int = Skin.COVERAGE_COMPLETE, options: * = null): Transformation {
 	  return new SimpleTransformation("Dragon Scales Skin",
@@ -460,7 +455,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      return player.hasCoatOfType(Skin.DRAGON_SCALES) && InCollection(player.coatColor, options.colors) && player.skin.coverage == coverage;
 	    }
 	  )
-	};
+	}
 
 	public function SkinChitin(coverage: int = Skin.COVERAGE_COMPLETE, options: * = null): Transformation {
 	  return new SimpleTransformation("Chitin Skin",
@@ -523,7 +518,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	      return player.hasCoatOfType(Skin.CHITIN) && InCollection(player.coatColor, options.colors) && player.skin.coverage == coverage;
 	    }
 	  )
-	};
+	}
 
 	private function skinFormatOptions(options: *, hairy:Boolean = false): * {
         if (!options) options = {};
@@ -765,7 +760,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		},
 		// is present
 		function ():Boolean {
-			return SkinChitin(coverage).isPresent() && player.skin.coat.pattern === Skin.PATTERN_BEE_STRIPES;
+			return SkinChitin(Skin.COVERAGE_LOW).isPresent() && player.skin.coat.pattern === Skin.PATTERN_BEE_STRIPES;
 		}
 	);
   /*
@@ -2503,7 +2498,6 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 	  // apply effect
 	  function (doOutput: Boolean): void {
 	    var desc: String = "";
-	    var choice: int;
 			var startsWithCheshireFace: Boolean = player.faceType === Face.CHESHIRE;
 
 			if (player.faceType !== Face.CAT_CANINES) {

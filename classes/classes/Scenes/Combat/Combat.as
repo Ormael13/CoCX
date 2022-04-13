@@ -8774,7 +8774,7 @@ public class Combat extends BaseContent {
 
     public function manaRecoveryMultiplier():Number {
         var multi:Number = 1;
-        if (player.hasPerk(PerkLib.ControlledBreath) && player.cor < (30 + player.corruptionTolerance())) multi += 0.2;
+        if (player.hasPerk(PerkLib.ControlledBreath) && player.cor < (30 + player.corruptionTolerance)) multi += 0.2;
 		if (player.hasPerk(PerkLib.GreyMageApprentice)) multi += 0.25;
 		if (player.hasPerk(PerkLib.GreyMage)) multi += 0.5;
         if (player.hasPerk(PerkLib.GreyArchmage)) multi += 0.75;
@@ -8856,7 +8856,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.Napping)) multi += 0.2;
         if (player.hasPerk(PerkLib.ZZZ)) multi += 0.2;
         if (player.hasPerk(PerkLib.Lazy)) multi += 0.2;
-        if (player.hasPerk(PerkLib.ControlledBreath) && player.cor < (30 + player.corruptionTolerance())) multi += 0.2;
+        if (player.hasPerk(PerkLib.ControlledBreath) && player.cor < (30 + player.corruptionTolerance)) multi += 0.2;
         if (player.hasPerk(PerkLib.SpeedyRecovery)) multi += 0.5;
         if (player.hasPerk(PerkLib.SpeedyRecuperation)) multi += 1;
         if (player.hasPerk(PerkLib.SpeedyRejuvenation)) multi += 2;
@@ -10864,8 +10864,8 @@ public class Combat extends BaseContent {
             if (player.armor == armors.GOOARMR) healingPercent += (SceneLib.valeria.valeriaFluidsEnabled() ? (flags[kFLAGS.VALERIA_FLUIDS] < 50 ? flags[kFLAGS.VALERIA_FLUIDS] / 25 : 2) : 2);
             if ((player.hasStatusEffect(StatusEffects.UnderwaterCombatBoost) || player.hasStatusEffect(StatusEffects.NearWater)) && (player.hasPerk(PerkLib.AquaticAffinity) || player.hasPerk(PerkLib.AffinityUndine)) && player.necklaceName == "Magic coral and pearl necklace") healingPercent += 1;
             if (player.statStore.hasBuff("CrinosShape") && player.hasPerk(PerkLib.ImprovingNaturesBlueprintsApexPredator)) healingPercent += 2;
-            if (player.perkv1(PerkLib.Sanctuary) == 1) healingPercent += ((player.corruptionTolerance() - player.cor) / (100 + player.corruptionTolerance()));
-            if (player.perkv1(PerkLib.Sanctuary) == 2) healingPercent += player.cor / (100 + player.corruptionTolerance());
+            if (player.perkv1(PerkLib.Sanctuary) == 1) healingPercent += ((player.corruptionTolerance - player.cor) / (100 + player.corruptionTolerance));
+            if (player.perkv1(PerkLib.Sanctuary) == 2) healingPercent += player.cor / (100 + player.corruptionTolerance);
             if (player.hasStatusEffect(StatusEffects.SecondWindRegen)) healingPercent += 5;
             if (player.hasStatusEffect(StatusEffects.Cauterize)) {
                 healingPercent += 1.5;
@@ -11079,7 +11079,7 @@ public class Combat extends BaseContent {
     public function soulforceRecoveryMultiplier():Number {
         var multi:Number = 1;
         if (player.hasPerk(PerkLib.DaoistCultivator)) multi += 0.5;
-        if (player.hasPerk(PerkLib.ControlledBreath) && player.cor < (30 + player.corruptionTolerance())) multi += 0.2;
+        if (player.hasPerk(PerkLib.ControlledBreath) && player.cor < (30 + player.corruptionTolerance)) multi += 0.2;
         if (player.alicornScore() >= 12) multi += 0.1;
         if (player.kitsuneScore() >= 5) {
             if (player.kitsuneScore() >= 10) multi += 1;

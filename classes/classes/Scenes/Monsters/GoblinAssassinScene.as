@@ -270,7 +270,7 @@ public class GoblinAssassinScene extends BaseContent
 					fitsFuck = gatsGoblinBoners;
 				}
 				//Buttsex toggle
-				if (player.cockThatFits(monster.analCapacity()) >= 0 && player.cor > 70 - player.corruptionTolerance()) buttseks = gobboButtSecks;
+				if (player.cockThatFits(monster.analCapacity()) >= 0 && player.cor > 70 - player.corruptionTolerance) buttseks = gobboButtSecks;
 				//Spidercondom
 				if (player.tailType == Tail.SPIDER_ADBOMEN && player.cockThatFits(monster.vaginalCapacity()) >= 0)
 					spiderCondom = goblinCondomed;

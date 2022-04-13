@@ -307,12 +307,12 @@ use namespace CoC;
             else
                 addButtonDisabled(0, "Small", "Req. area < 15");
 
-            if (player.cor <= 66 + player.corruptionTolerance())
+            if (player.cor <= 66 + player.corruptionTolerance)
                 addButton(1, "Soft", cOIM_lowCor);
             else
                 addButtonDisabled(1, "Soft", "Req. area > 15 and corruption < 66");
 
-            if (player.cor >= 66 - player.corruptionTolerance())
+            if (player.cor >= 66 - player.corruptionTolerance)
                 addButton(2, "Rough", cOIM_lowCor);
             else
                 addButtonDisabled(2, "Rough", "Req. area > 15 and corruption > 66");

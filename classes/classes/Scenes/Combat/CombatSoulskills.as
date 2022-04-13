@@ -31,7 +31,7 @@ public class CombatSoulskills extends BaseCombatContent {
 		var bd:ButtonData;
 		if (player.hasPerk(PerkLib.CleansingPalm)) {
 			bd = buttons.add("C.Palm", CleansingPalm).hint("Unleash the power of your cleansing aura! More effective against corrupted opponents. Doesn't work on the pure.  \n\n(PHYSICAL SOULSKILL)  \n\nSoulforce cost: " + Math.round(30 * soulskillCost() * soulskillcostmulti()));
-			if (player.cor >= (10 + player.corruptionTolerance())) {
+			if (player.cor >= (10 + player.corruptionTolerance)) {
 				bd.disable("You are too corrupt to use this ability!");
 			} else if ((player.soulforce < 30 * soulskillCost() * soulskillcostmulti()) && !player.hasStatusEffect(StatusEffects.BloodCultivator)) {
 				bd.disable("<b>Your current soulforce is too low.</b>");
