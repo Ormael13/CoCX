@@ -2400,7 +2400,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 
 	    TransformationUtils.applyTFIfNotPresent(transformations.FaceHuman, doOutput);
 
-	    desc += "You feel your two canines grow bigger and slightly sharper, not unlike those of a weasel or in your case a raiju. <b>You now have raiju canines.</b>";
+	    desc += "You feel your two canines grow bigger and slightly sharper, not unlike those of a weasel. <b>You now have weasel canines.</b>";
 
 	    if (doOutput) outputText(desc);
 	    player.faceType = Face.WEASEL;
