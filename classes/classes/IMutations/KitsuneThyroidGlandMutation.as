@@ -4,11 +4,11 @@
  */
 package classes.IMutations
 {
-    import classes.BodyParts.Tail;
     import classes.PerkClass;
     import classes.PerkType;
     import classes.PerkLib;
     import classes.Player;
+    import classes.BodyParts.Tail;
 
     public class KitsuneThyroidGlandMutation extends PerkType
     {
@@ -29,26 +29,9 @@ package classes.IMutations
             return descS;
         }
 
-        //Doesn't work.... for now.
-        /*
-        public function llongDesc(params:PerkClass = null):String{
-            var descS:String = ""
-            var pTier:int = player.perkv1(MutationsLib.KitsuneThyroidGland)
-            if (pTier >= 1){
-                descS = "Cooldowns for Illusion and Terror are lowered by three turns. ";
-            }
-            if (pTier >= 2){
-                descS += "Foxfire gains an additional 50% damage. ";
-            }
-            if (pTier >= 3){
-                descS += "Evasion from Illusion is increased by 20%, incur a further 50 speed debuff to terror target, increase SF/Mana regen based on Star Sphere Rank, and increases Star Sphere max rank to 20.";
-            }
-            return descS;
-        }*/
-
         override public function name(params:PerkClass=null):String {
             var sufval:String;
-            switch (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM)){
+            switch (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM)) {
                 case 2:
                     sufval = "(Primitive)";
                     break;
@@ -61,34 +44,24 @@ package classes.IMutations
             return "Kitsune Thyroid Gland " + sufval;
         }
 
-        public function KitsuneThyroidGlandMutation() {
-            super("Kitsune Thyroid Gland", "Kitsune Thyroid Gland", ".");
-        }
-
-        override public function keepOnAscension(respec:Boolean = false):Boolean {
-            return true;
+        public static function perkTier():int{
+            return 3;
         }
 
         public static function mutationReqs():void{
             var pTier:int = player.perkv1(IMutationsLib.KitsuneThyroidGlandIM);
-            switch (pTier){
-                case 0:
-                    IMutationsLib.KitsuneThyroidGlandIM.requireThyroidGlandMutationSlot().requireAnyPerk(PerkLib.EnlightenedKitsune, PerkLib.CorruptedKitsune).requireCustomFunction(function (player:Player):Boolean {
-                        return player.tailType == Tail.FOX && player.tailCount >= 2;
-                    }, "2+ fox tails");
-                    break;
-                case 1:
-                    IMutationsLib.KitsuneThyroidGlandIM.requireLevel(30)
-                            .requireCustomFunction(function (player:Player):Boolean {
-                                return player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) == 1;
-                            }, "Previous perk tier required.");
-                    break;
-                case 2:
-                    IMutationsLib.KitsuneThyroidGlandIM.requireLevel(60)
-                            .requireCustomFunction(function (player:Player):Boolean {
-                                return player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) == 2;
-                            }, "Previous perk tier required.");
-                    break;
+            if (pTier == 0){
+                IMutationsLib.KitsuneThyroidGlandIM.requireThyroidGlandMutationSlot()
+                        .requireAnyPerk(PerkLib.EnlightenedKitsune, PerkLib.CorruptedKitsune)
+                        .requireCustomFunction(function (player:Player):Boolean {
+                            return player.tailType == Tail.FOX && player.tailCount >= 2;
+                        }, "2+ fox tails");
+            }
+            else{
+                IMutationsLib.KitsuneThyroidGlandIM.requireLevel(30 * pTier)
+                        .requireCustomFunction(function (player:Player):Boolean {
+                            return player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) == pTier;
+                        }, "Previous perk tier required.");
             }
         }
 
@@ -99,6 +72,14 @@ package classes.IMutations
             if (pTier - 1 != 0) pBuffs['wis.mult'] = 0.05 * (pTier - 1);
             if (pTier - 2 != 0) pBuffs['int.mult'] = 0.05 * (pTier - 1);
             return pBuffs
+        }
+
+        public function KitsuneThyroidGlandMutation() {
+            super("Kitsune Thyroid Gland", "Kitsune Thyroid Gland", ".");
+        }
+
+        override public function keepOnAscension(respec:Boolean = false):Boolean {
+            return true;
         }
     }
 }

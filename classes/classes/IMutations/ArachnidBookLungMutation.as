@@ -6,30 +6,31 @@ package classes.IMutations
 {
     import classes.PerkClass;
     import classes.PerkType;
+    import classes.PerkLib;
     import classes.Player;
 
-    public class MutationTemplate extends PerkType
+    public class ArachnidBookLungMutation extends PerkType
     {
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
             var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.MutationsTemplateIM)
+            var pTier:int = player.perkv1(IMutationsLib.ArachnidBookLungIM)
             if (pTier >= 1){
-                descS += "";
+                descS += "Increase web and poison capacity by " + 100 * pTier + "%";
             }
             if (pTier >= 2){
-                descS += "";
+                descS += ", increases all Web abilities effectiveness by half ";
             }
             if (pTier >= 3){
-                descS += "";
+                descS += ", and gives them a 50% chance to immobilize opponents for 2 rounds when opponent tries to struggle out.";
             }
             if (descS != "")descS += ".";
             return descS;
         }
-        //Name. Need it say more?
+
         override public function name(params:PerkClass=null):String {
             var sufval:String;
-            switch (player.perkv1(IMutationsLib.MutationsTemplateIM)){
+            switch (player.perkv1(IMutationsLib.ArachnidBookLungIM)){
                 case 2:
                     sufval = "(Primitive)";
                     break;
@@ -39,37 +40,38 @@ package classes.IMutations
                 default:
                     sufval = "";
             }
-            return "PerkName Here" + sufval;
+            return "Arachnid Book Lung" + sufval;
         }
-        //returns max Perk Tier of specific perk
+
         public static function perkTier():int{
             return 3;
         }
-        //Mutation Requirements
+
         public static function mutationReqs():void{
-            var pTier:int = player.perkv1(IMutationsLib.MutationsTemplateIM);
+            var pTier:int = player.perkv1(IMutationsLib.ArachnidBookLungIM);
             if (pTier == 0){
-                IMutationsLib.MutationsTemplateIM.requireAdaptationsMutationSlot();
+                IMutationsLib.ArachnidBookLungIM.requireAdaptationsMutationSlot()
+                        .requireCustomFunction(function (player:Player):Boolean {
+                            return player.spiderScore() >= 5 || player.atlachNachaScore() >= 21;
+                        }, "Arachnid race");
             }
             else{
-                IMutationsLib.MutationsTemplateIM.requireLevel(30 * pTier)
+                IMutationsLib.ArachnidBookLungIM.requireLevel(30 * pTier)
                         .requireCustomFunction(function (player:Player):Boolean {
-                            return player.perkv1(IMutationsLib.MutationsTemplateIM) == pTier;
+                            return player.perkv1(IMutationsLib.ArachnidBookLungIM) == pTier;
                         }, "Previous perk tier required.");
             }
         }
-        //withBuffs handler
+
         public static function perkBuffs():Object {
             var pBuffs:Object = {};
-            var pTier:int = player.perkv1(IMutationsLib.MutationsTemplateIM)
-            pBuffs['spe.mult'] = 0.05 * pTier;
-            if (pTier - 1 != 0) pBuffs['wis.mult'] = 0.05 * (pTier - 1);
-            if (pTier - 2 != 0) pBuffs['int.mult'] = 0.05 * (pTier - 1);
+            var pTier:int = player.perkv1(IMutationsLib.ArachnidBookLungIM)
+            pBuffs['int.mult'] = 0.05 * pTier;
             return pBuffs
         }
 
-        public function MutationTemplate() {
-            super("PerkName Here", "PerkName Here", ".");
+        public function ArachnidBookLungMutation() {
+            super("Arachnid Book Lung", "Arachnid Book Lung", ".");
         }
 
         override public function keepOnAscension(respec:Boolean = false):Boolean {

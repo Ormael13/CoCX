@@ -19,15 +19,11 @@ public class IMutationsLib
 			return CoC.instance;
 		}
 		//Example -v
+		//This one does nothing, and is simply to showcase.
 		public static const MutationsTemplateIM:PerkType = new MutationTemplate().withBuffs(MutationTemplate.perkBuffs());
 		//Mutations start here.
 		public static const KitsuneThyroidGlandIM:PerkType = new KitsuneThyroidGlandMutation().withBuffs(KitsuneThyroidGlandMutation.perkBuffs());
-
-
-		//private static function mk(id:String, name:String, desc:String, longDesc:String = null, keepOnAscension:Boolean = false):PerkType
-		//{
-		//	return new PerkType(id, name, desc, longDesc, keepOnAscension);
-		//}
+		public static const ArachnidBookLungIM:PerkType = new ArachnidBookLungMutation().withBuffs(ArachnidBookLungMutation.perkBuffs())
 
 		/**
 		*Returns an array of arrays of mutation body parts in PerkType type.
@@ -36,7 +32,6 @@ public class IMutationsLib
 		*This feeds the Perks/Mutations DB and Evangeline's Mutations information.
 		*/
 		public static function mutationsArray(spec:String = "", merge:Boolean = false):Array {
-			//Mutations, Mutation Tier Max. Wanted to tie with v2/3/4, but no good way to keep updated short of constant save updates.
 			var MutationsList:Array = []
 			function mutationsHeart():void{
 
@@ -78,13 +73,13 @@ public class IMutationsLib
 
 			}
 			function mutationsThyroidGlands():void{
-				MutationsList.push([KitsuneThyroidGlandIM, 3]);
+				MutationsList.push([KitsuneThyroidGlandIM]);
 			}
 			function mutationsParaThyroidGlands():void{
 
 			}
 			function mutationsAdaptations():void{
-
+				MutationsList.push([ArachnidBookLungIM]);
 			}
 			function mutationsDeprecated():void{
 				MutationsList = MutationsLib.mutationsArray()
@@ -180,7 +175,7 @@ public class IMutationsLib
 			try {
 				//Example. Doesn't actually do anything.v
 				MutationTemplate.mutationReqs();
-				//Tier 1
+				ArachnidBookLungMutation.mutationReqs();
 				KitsuneThyroidGlandMutation.mutationReqs();
 
 				} catch (e:Error) {
