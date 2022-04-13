@@ -666,12 +666,10 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 				//Corruption more than 75:
 				else outputText("\n\nUndeterred, you soldier on and breach further into her depths, barely giving her any time whatsoever to prepare herself for the onslaught of hard dicking that is to come.  The loss of her cherry and innocence is not up on your list of concerns right now.");
 				outputText("\n\n\"<i>I'm okay- GUH! No, re-really I'm fine!</i>\" she stammers out behind half winced eyes.  You can tell she's trying to look past the obvious pain, eager to savor every moment of this ultimately fleeting \"first-time\".  You continue to touch all of her most sensitive spots, trying to replace the pain you're inflicting with softer pleasure.");
-
-				menu();
 				//(Jump to Corruption less than 75 - Pure Ending)
-				if (!rough) addButton(0, "Next", phyllaFirstTimePureBabiesFuckEnding);
+				if (!rough) doNext(phyllaFirstTimePureBabiesFuckEnding);
 				//(Jump to Corruption more than 75 - Corrupt Ending)
-				else addButton(0, "Next", phyllaCorruptMascEnding);
+				else doNext(phyllaCorruptMascEnding);
 			}
 		}
 

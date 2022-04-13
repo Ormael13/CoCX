@@ -1,7 +1,5 @@
 package classes {
-
 import classes.GlobalFlags.kFLAGS;
-import classes.Appearance;
 
 public class SceneHunter extends BaseContent {
     public function settingsPage():void {
