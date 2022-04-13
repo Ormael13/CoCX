@@ -878,7 +878,7 @@ public static const MILK_NAME:int                                               
 public static const MILK_SIZE:int                                                   =  870; //
 public static const MET_MILK_SLAVE:int                                              =  871; //
 public static const COUNTDOWN_TO_NIGHT_RAPE:int                                     =  872; //
-public static const PHYLLA_MAXLEN:int                                             =  873; //
+public static const PHYLLA_CAPACITY:int                                               =  873; //
 public static const ANT_KIDS:int                                                    =  874; //
 public static const ANT_WAIFU:int                                                   =  875; //
 public static const PHYLLA_STAY_HOME:int                                            =  876; //
