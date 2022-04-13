@@ -15817,7 +15817,6 @@ public final class Mutations extends MutationsHelper {
         clearOutput();
         var changes:Number = 0;
         var changeLimit:Number = 0;
-        clearOutput();
         player.refillHunger(10);
         if (player.dragonScore() > 9 || player.dragonneScore() > 9) {
             outputText("You eat the scale expecting some kind of spectacular change and for a moment pretty much nothing happen. You begin to feel weird… like very weird. For some reason your situation as a whole is so funny you can’t help but laugh. Are you seriously eating some otherworldly dragon scale just so you can turn into a messed up rabbit dragon yourself? Aha yes you are and that's way to funny.");
@@ -15846,6 +15845,18 @@ public final class Mutations extends MutationsHelper {
         if (player.antennae.type != Antennae.JABBERWOCKY && changeLimit > 0) {
             outputText("[pg]");
             transformations.AntennaeJabberwocky.applyEffect();
+            changes++;
+        }
+        //Gain Dragon Eyes
+        if (player.eyes.type != Eyes.DRACONIC && changeLimit > 0) {
+            outputText("[pg]");
+            transformations.EyesDraconic.applyEffect();
+            changes++;
+        }
+        //red eyes
+        if (!InCollection(player.eyes.colour, ("red")) && changeLimit > 0) {
+            outputText("[pg]");
+            transformations.EyesChangeColor(["red"]).applyEffect();
             changes++;
         }
         //Make sure pc is at least partialscaled
@@ -15896,6 +15907,18 @@ public final class Mutations extends MutationsHelper {
             outputText(" has changed to become ");
             player.skin.base.color = "caramel";
             outputText(player.skinTone + " colored.</b>");
+        }
+
+        outputText("\n\nYou feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself... covering the whole area in front of you with pinkish sweet smelling smoke.");
+        outputText("\n\nIt seems the scale has awaked some kind of power within you...  (<b>Gained Perk: Dragon poison breath!</b>)");
+        player.createPerk(PerkLib.DragonPoisonBreath, 0, 0, 0, 0);
+
+        //-Madness
+        if (!player.hasPerk(PerkLib.Insanity) && changeLimit > 0) {
+            outputText("[pg]");
+            outputText(" Suddenly as if catching on to a joke way to late you begin to laugh uncontrollably. Wow how stupid have you been acting until now. Reality has unfolded before your eyes in a whole new manner and as the magic of wonderland begins to fully seep into your formerly logical, short sighted, desperately stubborn mind you open to a whole new perspective of the world you didn't have access to, the diagonal one. See most people look up down left or right but what about the area in between or the area behind? People might say you make no sense, that you're crazy but at the end of the day they are just blind idiots trying to make sense of a reality they have no access to. You've seen it all and understand it all.");
+            player.createPerk(PerkLib.Insanity,0,0,0,0);
+            changes++;
         }
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
     }

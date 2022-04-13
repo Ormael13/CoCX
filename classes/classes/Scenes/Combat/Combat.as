@@ -3612,9 +3612,9 @@ public class Combat extends BaseContent {
 						damage1Ba *= 2;
 					}
                     monster.teased(monster.lustVuln * damage1B);
-                    if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
-                        monster.addStatusValue(StatusEffects.NagaVenom, 3, damage1Ba);
-                    } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, damage1Ba, 0);
+                    if (monster.hasStatusEffect(StatusEffects.BeeVenom)) {
+                        monster.addStatusValue(StatusEffects.BeeVenom, 3, damage1Ba);
+                    } else monster.createStatusEffect(StatusEffects.BeeVenom, 0, 0, damage1Ba, 0);
                     player.tailVenom -= player.VenomWebCost();
 					flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
                 }
@@ -5573,6 +5573,14 @@ public class Combat extends BaseContent {
                         player.tailVenom -= player.VenomWebCost();
                         flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
                     }
+                    var dBd1c:Number = 1;
+                    if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) dBd1c *= 2;
+                    monster.teased(monster.lustVuln * lustdamage * dBd1c, false);
+                    combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+                    monster.statStore.addBuffObject({spe:-(dBd1c*10)}, "Poison",{text:"Poison"});
+                    if (monster.hasStatusEffect(StatusEffects.ManticoreVenom)) monster.addStatusValue(StatusEffects.ManticoreVenom,3,(dBd1c*5));
+                    else monster.createStatusEffect(StatusEffects.ManticoreVenom, 0, 0, (dBd1c*5), 0);
+                    player.tailVenom -= player.VenomWebCost();
                 }
                 outputText(".")
                 ExtraNaturalWeaponAttack(0.5);
@@ -5587,6 +5595,22 @@ public class Combat extends BaseContent {
             else if (player.tail.type == Tail.SCORPION || player.tail.type == Tail.BEE_ABDOMEN ){
                 outputText("You ready your stinger and plunge it deep into your opponent delivering your poison in the process");
                 ExtraNaturalWeaponAttack(0.5);
+                var dBd1c:Number = 1;
+                //var venomType:StatusEffectType = StatusEffects.BeeVenom;
+                var lustdamage:Number = 35 + rand(player.lib / 10);
+                var lustDmg2:Number = 1;
+                if (player.level < 10) lustdamage += 20 + (player.level * 3);
+                else if (player.level < 20) lustdamage += 50 + (player.level - 10) * 2;
+                else if (player.level < 30) lustdamage += 70 + (player.level - 20) * 1;
+                else lustdamage += 80;
+                lustdamage *= 0.14;
+                if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) lustDmg2 *= 2;
+                lustdamage *= lustDmg2;
+                if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) dBd1c *= 2;
+                monster.teased(monster.lustVuln * lustdamage * dBd1c, false);
+                combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+                if (monster.hasStatusEffect(StatusEffects.BeeVenom)) monster.addStatusValue(StatusEffects.BeeVenom,3,(dBd1c*5));
+                else monster.createStatusEffect(StatusEffects.BeeVenom, 0, 0, (dBd1c*5), 0);
                 outputText("\n")
             }
 			if ((player.tail.type == (Tail.GARGOYLE || Tail.GARGOYLE_2))){
@@ -11655,6 +11679,64 @@ public class Combat extends BaseContent {
             monster.statStore.addBuffObject({str:-monster.statusEffectv1(StatusEffects.ApophisVenom)*2, spe:-monster.statusEffectv1(StatusEffects.ApophisVenom)*2, tou:-monster.statusEffectv1(StatusEffects.ApophisVenom)*2}, "Poison",{text:"Poison"});
 
             if (monster.statusEffectv3(StatusEffects.ApophisVenom) >= 1) monster.lust += monster.statusEffectv3(StatusEffects.ApophisVenom);
+            if (combatIsOver()) return;
+        }
+        //Bee Venom
+        if (monster.hasStatusEffect(StatusEffects.BeeVenom)) {
+            if (monster.plural) {
+                if (monster.statusEffectv1(StatusEffects.BeeVenom) <= 1) {
+                    outputText("You notice [monster he] are beginning to show signs of weakening, but there still appears to be plenty of fight left in [monster him].  ");
+                } else {
+                    outputText("You notice [monster he] are obviously affected by your venom, [monster his] movements become unsure, and [monster his] balance begins to fade. Sweat begins to roll on [monster his] skin. You wager [monster he] are probably beginning to regret provoking you.  ");
+                }
+            }
+            //Not plural
+            else {
+                if (monster.statusEffectv1(StatusEffects.BeeVenom) <= 1) {
+                    outputText("You notice [monster he] is beginning to show signs of weakening, but there still appears to be plenty of fight left in [monster him].  ");
+                } else {
+                    outputText("You notice [monster he] is obviously affected by your venom, [monster his] movements become unsure, and [monster his] balance begins to fade. Sweat is beginning to roll on [monster his] skin. You wager [monster he] is probably beginning to regret provoking you.  ");
+                }
+            }
+            damage1B = calculateBasicTeaseDamage();
+            if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
+                damage1B *= 2;
+            }
+            monster.teased(monster.lustVuln * damage1B);
+            combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+            monster.lustVuln += 0.05;
+            monster.statStore.addBuffObject({tou:-monster.statusEffectv1(StatusEffects.ManticoreVenom)*2}, "Poison",{text:"Poison"});
+
+            if (monster.statusEffectv3(StatusEffects.BeeVenom) >= 1) monster.lust += monster.statusEffectv3(StatusEffects.BeeVenom);
+            if (combatIsOver()) return;
+        }
+        //Jabberwocky Poison Breath
+        if (monster.hasStatusEffect(StatusEffects.JabberwockyVenom)) {
+            if (monster.plural) {
+                if (monster.statusEffectv1(StatusEffects.JabberwockyVenom) <= 1) {
+                    outputText("You notice [monster he] are beginning to show signs of weakening, but there still appears to be plenty of fight left in [monster him].  ");
+                } else {
+                    outputText("You notice [monster he] are obviously affected by your venom, [monster his] movements become unsure, and [monster his] balance begins to fade. Sweat begins to roll on [monster his] skin. You wager [monster he] are probably beginning to regret provoking you.  ");
+                }
+            }
+            //Not plural
+            else {
+                if (monster.statusEffectv1(StatusEffects.JabberwockyVenom) <= 1) {
+                    outputText("You notice [monster he] is beginning to show signs of weakening, but there still appears to be plenty of fight left in [monster him].  ");
+                } else {
+                    outputText("You notice [monster he] is obviously affected by your venom, [monster his] movements become unsure, and [monster his] balance begins to fade. Sweat is beginning to roll on [monster his] skin. You wager [monster he] is probably beginning to regret provoking you.  ");
+                }
+            }
+            damage1B = calculateBasicTeaseDamage();
+            if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
+                damage1B *= 2;
+            }
+            monster.teased(monster.lustVuln * damage1B);
+            combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+            monster.lustVuln += 0.05;
+            monster.statStore.addBuffObject({tou:-monster.statusEffectv1(StatusEffects.JabberwockyVenom)*2}, "Poison",{text:"Poison"});
+
+            if (monster.statusEffectv3(StatusEffects.JabberwockyVenom) >= 1) monster.lust += monster.statusEffectv3(StatusEffects.JabberwockyVenom);
             if (combatIsOver()) return;
         }
         //Manticore Venom

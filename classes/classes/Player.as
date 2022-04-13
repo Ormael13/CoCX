@@ -3649,11 +3649,11 @@ use namespace CoC;
 			}
 			if (TopRace == "jabberwocky") {
 				if (TopScore >= 10) {
-					if (TopScore >= 25) {
+					if (TopScore >= 30) {
 						if (isTaur()) race = "greater jabberwocky-taur";
 						else race = "greater jabberwocky";
 					}
-					else if (TopScore >= 20) {
+					else if (TopScore >= 24) {
 						if (isTaur()) race = "jabberwocky-taur";
 						else race = "jabberwocky";
 					}
@@ -6402,11 +6402,21 @@ use namespace CoC;
 				jabberwockyCounter -= 10;
 			if (eyes.type == Eyes.DRACONIC)
 				jabberwockyCounter++;
+			if (eyes.colour == "red")
+				jabberwockyCounter++;
+			if (InCollection(hairColor, ["purplish-pink"]))
+				jabberwockyCounter++;
+			if (InCollection(coatColor, ["magenta"]))
+				jabberwockyCounter++;
+			if (InCollection(skinTone, ["caramel"]))
+				jabberwockyCounter++;
 			if (ears.type == Ears.BUNNY)
 				jabberwockyCounter++;
 			if (tailType == Tail.DRACONIC)
 				jabberwockyCounter++;
 			if (tongue.type == Tongue.DRACONIC)
+				jabberwockyCounter++;
+			if (antennae.type == Antennae.JABBERWOCKY)
 				jabberwockyCounter++;
 			if (wings.type == Wings.FEY_DRAGON)
 				jabberwockyCounter += 4;
@@ -6422,20 +6432,14 @@ use namespace CoC;
 				jabberwockyCounter++;
 			if (InCollection(coatColor, ["pink"]))
 				jabberwockyCounter++;
-			if (horns.type == Horns.DRACONIC_X4_12_INCH_LONG)
+			if (horns.type == Horns.JABBERWOCKY)
 				jabberwockyCounter += 2;
-			if (horns.type == Horns.DRACONIC_X2)
+			if (dragonCocks() > 0 || hasVagina())
 				jabberwockyCounter++;
-		//	if (dragonCocks() > 0)
-		//		dragonCounter++;
-			if (jabberwockyCounter >= 5 && (hasPerk(PerkLib.DragonFireBreath) || hasPerk(PerkLib.DragonIceBreath) || hasPerk(PerkLib.DragonLightningBreath) || hasPerk(PerkLib.DragonDarknessBreath)))
+			if (jabberwockyCounter >= 5 && (hasPerk(PerkLib.DragonPoisonBreath)))
 				jabberwockyCounter++;
-			//if (hasPerk(PerkLib.Insanity))(Immune to insanity gains bonus)
-			//	jabberwockyCounter++;
-			//if (hasPerk(PerkLib.InsanityEvolved))(Immune to insanity gains bonus)
-			//	jabberwockyCounter++;
-			//if (hasPerk(PerkLib.InsanityFinalForm))(Immune to insanity gains bonus)
-			//	jabberwockyCounter++;
+			if (hasPerk(PerkLib.Insanity))
+				jabberwockyCounter++;
 			//if (hasPerk(PerkLib.JabberwockyMarrow)) (regeneration)
 			//	jabberwockyCounter++;
 			//if (hasPerk(PerkLib.JabberwockyMarrowEvolved)) (regeneration)
@@ -11945,21 +11949,21 @@ use namespace CoC;
 				}
 			}
 			if (jabberwockyScore() >= 10) {
-				if (jabberwockyScore() >= 25) {
+				if (jabberwockyScore() >= 30) {
 					maxStrCap2 += 125;
-					maxTouCap2 += 95;
-					maxSpeCap2 += 145;
-					maxIntCap2 += 40;
-					maxWisCap2 -= 50;
-					maxLibCap2 += 20;
-				}
-				if (jabberwockyScore() >= 20) {
-					maxStrCap2 += 95;
 					maxTouCap2 += 95;
 					maxSpeCap2 += 100;
 					maxIntCap2 += 40;
 					maxWisCap2 -= 50;
-					maxLibCap2 += 20;
+					maxLibCap2 += 140;
+				}
+				if (jabberwockyScore() >= 24) {
+					maxStrCap2 += 95;
+					maxTouCap2 += 80;
+					maxSpeCap2 += 95;
+					maxIntCap2 += 40;
+					maxWisCap2 -= 50;
+					maxLibCap2 += 100;
 				}
 				else {
 					maxStrCap2 += 50;

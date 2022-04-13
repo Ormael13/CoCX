@@ -311,6 +311,12 @@ public class PhysicalSpecials extends BaseCombatContent {
 					bd.disable("<b>You need more time before you can perform Tail Smack again.</b>\n\n");
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
+			if (player.hasPerk(PerkLib.DragonPoisonBreath)) {
+				bd = buttons.add("Poison Breath", dragonPoisonBreath).hint("Unleash a cloud of aphrodisiac poison. Particularly powerful against groups");
+				if (player.tailVenom < player.VenomWebCost() * 5) {
+					bd.disable("You do not have enough poison in your glands to breath a cloud right now! (Req. "+player.VenomWebCost()*5+"+)");
+				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
+			}
 			if (player.hasPerk(PerkLib.InkSpray) && player.gender > 0 && !player.hasPerk(PerkLib.ElementalBody)) {
 				var liftWhat:String = player.gender == 1 ? "your cock" : "your front tentacle";
 				var liftWha2:String = player.gender == 1 ? "Lift your cock and s" : "S";
@@ -4287,6 +4293,57 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (!combatIsOver()) enemyAI();
 	}
 
+	public function dragonPoisonBreath():void {
+		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
+		clearOutput();
+		if (combat.checkConcentration()) return; //Amily concentration
+		if (monster is LivingStatue)
+		{
+			outputText("This thing is just seldom immune to poison like come on its a statue!");
+			enemyAI();
+			return;
+		}
+		//Works similar to bee stinger, must be regenerated over time. Shares the same poison-meter
+		else {
+			outputText("You inhale deeply before releasing a cloud of aphrodisiacs poison on your foe!");
+			//Check weither its snakebite or apophis
+			var venomType:StatusEffectType = StatusEffects.JabberwockyVenom;
+			var d2Bdcc:Number = 2;
+			var lustDmg2:Number = 35 + rand(player.lib / 10);
+			var poisonScaling:Number = 1;
+			if (monster.plural){
+				d2Bdcc *=5;
+				lustDmg2 *=5
+			}
+			poisonScaling += player.lib/100;
+			poisonScaling += player.tou/100;
+			if (player.hasPerk(PerkLib.RacialParagon)) lustDmg2 *= combat.RacialParagonAbilityBoost();
+			if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg2 *= 1.50;
+			if (player.level < 10) lustDmg2 += 20 + (player.level * 3);
+			else if (player.level < 20) lustDmg2 += 50 + (player.level - 10) * 2;
+			else if (player.level < 30) lustDmg2 += 70 + (player.level - 20) * 1;
+			else lustDmg2 += 80;
+			lustDmg2 *= 0.2;
+			lustDmg2 *= d2Bdcc;
+			lustDmg2 *= 1+(poisonScaling/10);
+			poisonScaling *= d2Bdcc;
+			monster.teased(monster.lustVuln * lustDmg2, true);
+			combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+			if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) d2Bdcc *= 2;
+			monster.statStore.addBuffObject({tou:-d2Bdcc}, "Poison",{text:"Poison"});
+			if(monster.hasStatusEffect(venomType))
+			{
+				monster.addStatusValue(venomType,2,2);
+				monster.addStatusValue(venomType,1,d2Bdcc);
+			}
+			else monster.createStatusEffect(venomType,d2Bdcc,2,0,0);
+		}
+		outputText("\n\n");
+		player.tailVenom -= player.VenomWebCost() * 5;
+		flags[kFLAGS.VENOM_TIMES_USED] += 1;
+		if (!combatIsOver()) enemyAI();
+	}
+
 	public function spiderBiteAttack():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
@@ -4329,6 +4386,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					lustDmg2 *= 1+(poisonScaling/10);
 					poisonScaling *= d3Bdcc;
 					monster.teased(monster.lustVuln * lustDmg2, true);
+					combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 					monster.statStore.addBuffObject({tou:-poisonScaling}, "Poison",{text:"Poison"});
 					if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
 						monster.addStatusValue(StatusEffects.NagaVenom, 3, d3Bdcc);
@@ -4341,6 +4399,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg *= 1.50;
 					lustDmg *= d3Bdcc;
 					monster.teased(lustDmg, true);
+					combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 					if (monster.lustVuln > 0) {
 						monster.lustVuln += 0.05;
 						if (monster.lustVuln > 1) monster.lustVuln = 1;
@@ -4852,11 +4911,11 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (player.tailType == 20) {
 			monster.statStore.addBuffObject({spe:-(dBd3c*10)}, "Poison",{text:"Poison"});
 		}
-		if(monster.hasStatusEffect(StatusEffects.NagaVenom))
+		if(monster.hasStatusEffect(StatusEffects.BeeVenom))
 		{
-			monster.addStatusValue(StatusEffects.NagaVenom,3,(dBd3c*5));
+			monster.addStatusValue(StatusEffects.BeeVenom,3,(dBd3c*5));
 		}
-		else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, (dBd3c*5), 0);
+		else monster.createStatusEffect(StatusEffects.BeeVenom, 0, 0, (dBd3c*5), 0);
 		/*	if(!monster.hasStatusEffect(StatusEffects.lustvenom)) monster.createStatusEffect(StatusEffects.lustvenom, 0, 0, 0, 0);
 		 IT used to paralyze 50% of the time, this is no longer the case!
 		 Paralise the other 50%!
@@ -6632,4 +6691,4 @@ public class PhysicalSpecials extends BaseCombatContent {
 	public function PhysicalSpecials() {
 	}
 }
-}
+}
