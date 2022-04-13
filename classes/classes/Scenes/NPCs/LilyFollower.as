@@ -26,7 +26,6 @@ import classes.display.SpriteDb;
 		public static var Lily3SomeSidonie:Boolean;
 		public static var Lily3SomeIzma:Boolean;
 
-
 		public function stateObjectName():String {
 			return "LilyFollower";
 		}
@@ -377,7 +376,7 @@ import classes.display.SpriteDb;
 			else addButtonDisabled(3, "Bondage", "Req. 40%+ submissiveness.");
 			addButton(4, "M.Her", LilyJillOff);
 			addButton(5, "R.Play", LilyRape);
-			//addButton(6, "3Somes", Lily3Somes);
+			addButton(6, "3Somes", Lily3Somes);
 			//if (LilySubmissivenessMeter == 100) addButton(7, "Exhibition", LilyExhibition);
 		}
 
@@ -551,17 +550,17 @@ import classes.display.SpriteDb;
 			outputText("<i></i>\n\n");
 			
 		}
-		/*
+		
 		public function Lily3Somes():void {
 			clearOutput();
 			outputText("You grin at your submissive Drider-bitch, telling her to hold on a second. You know that she wants some fun, but you grin, telling her that she’s going to have some other company tonight. Lily’s eyes widen in excitement, and she rubs her hands together.\n\n");
 			outputText("\"Oh, "+ player.mf("master", "mistress") +", I love you!\" She cries, rushing over to your cabin. \"I’ll be trussed up for you before you get back! Please don’t keep me waiting…\" She closes the cabin door behind her, and you can all but hear the sound of her webbing being made. Who do you want to be your other partner tonight?\n\n");
 			menu();
-			addButton(1, "Sidonie",LilySidonie3Some);
+			//addButton(1, "Sidonie",LilySidonie3Some);
 			//addButton(2, "Izma",LilyIzma3Some);
 			//addButton(3, "Kiha",LilyKiha3Some);
-			addButton(4, "Tyrantia",LilyTyrantia3Some);
-		}
+			addButton(4, "Tyrantia", LilyTyrantia3some);
+		}/*
 		public function LilySidonie3Some():void {
 			clearOutput();
 			outputText("Making your way over to your horse-girl’s part of camp, you catch Sidonie taking an odd piece of rough paper to a table leg. As you approach, however, she stops, wiping some sweat off her brow. \"Oh, what brings you over here?\" Sidonie asks, her eyes glinting. She smiles, flapping her loose shirt to dispel some heat. \"Anything I can help you with?\"\n\n");
@@ -791,7 +790,7 @@ import classes.display.SpriteDb;
 			menu();
 			addButton(1, "Bondage", LilyBondage);
 			addButton(2, "Roleplay", LilyRape);
-			//addButton(3, "3Some", Lily3Somes);
+			addButton(3, "3Some", Lily3Somes);
 			addButton(4, "Back",LilyCampBack);
 		}
 		

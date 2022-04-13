@@ -1270,6 +1270,13 @@ public class Camp extends NPCAwareContent{
 				Holidays.DLCPrompt("Lovers DLC", "Get the Lovers DLC to be able to interact with them and have sex! Start families! The possibilities are endless!", "$4.99", doCamp);
 				return;
 			}
+			//Dridertown
+			if (DriderTown.DriderTownComplete) {
+				outputText("The Stone Hutch, Treehouse and Watery Orb have been changed and expanded. The Stone hutch has large swathes of silk hung off it, connecting to poles stuck deep into the ground and creating a large covered pavilion around it. ");
+				outputText("The extension is enclosed with wicker walls lined with stone. The treehouse hasn’t changed much, but there’s a rope bridge connecting the flat roof of Tyrantia’s hutch with the silken treehouse.\n\n");
+				outputText("Belisa’s Orb appears at first glance to have been punctured and dragged to shore. The three dwellings are connected by strings of more spider silk, with odd, dangling lamps lighting up the connected houses. Gravel paths have been constructed between the three houses.\n\n");
+				buttons.add("DriderTown", SceneLib.dridertown.DriderTownEnter).hint("Check up on Belisa, Lily & Tyrantia.");
+			}
 			//Alvina
 			if (flags[kFLAGS.ALVINA_FOLLOWER] > 19) {
 				outputText("Alvina isn’t so far from here, having made her [camp] in a corrupted plant groove she created so to have easy access to reagents.\n\n");
@@ -1317,7 +1324,7 @@ public class Camp extends NPCAwareContent{
 				buttons.add("Arian", arianScene.visitAriansHouse);
 			}
 			//Belisa
-			if (BelisaFollower.BelisaInCamp) {
+			if (BelisaFollower.BelisaInCamp && DriderTown.DriderTownComplete == false) {
 				outputText("On the water, Belisa anchored her silk dome. However, since you’ve seen it, the dwelling has changed. Instead of a fully submerged bubble-like structure, it’s got a silky curtain for a door, and a solid wooden dock’s been added to anchor the odd building to the ground. Outside the dwelling, a small stall’s been set up, and Belisa’s wares are on display.\n\n");
 				buttons.add("Belisa", SceneLib.belisa.BelisaMainCampMenu).hint("Visit Belisa.");
 			}
@@ -1498,7 +1505,7 @@ public class Camp extends NPCAwareContent{
 				else buttons.add("Kiha", kihaScene.encounterKiha2).disableIf(player.statusEffectv3(StatusEffects.CampSparingNpcsTimers1) > 0, "Training.");
 			}
 			//Lily
-			if (LilyFollower.LilyFollowerState) {
+			if (LilyFollower.LilyFollowerState && DriderTown.DriderTownComplete == false) {
 				outputText("A line of targets have been set up along the river and a small house of silk has been constructed in one of the trees. You hear the occasional whizz of arrows, or rustling in the trees.\n\n");
 				buttons.add("Lily", SceneLib.lily.LilyCampFollower).hint("Visit Lily.");
 			}
@@ -1591,7 +1598,7 @@ public class Camp extends NPCAwareContent{
 				buttons.add("Samirah", SceneLib.samirah.samirahMainCampMenu);
 			}
 			//Tyrantia
-			if (TyrantiaFollower.TyrantiaFollowerStage >= 4) {
+			if (TyrantiaFollower.TyrantiaFollowerStage >= 4 && DriderTown.DriderTownComplete == false) {
 				outputText("A decent distance away from your camp, in between the river and some trees, a hut’s been erected. Constructed mostly from stone and logs, with odd, goopy webbing as a crude mortar, the dwelling is nonetheless huge. ");
 				outputText("Tyrantia occasionally walks into the dwelling, coming out with a different tool or material. She’s keeping herself busy, if the line of demon skulls around the house are any indication.\n\n");
 				buttons.add("Tyrantia", SceneLib.tyrania.TyrantiaAtCamp).hint("Visit Tyrantia.");
