@@ -754,7 +754,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		// apply effect
 		function (doOutput:Boolean):void {
 			TransformationUtils.applyTFIfNotPresent(transformations.SkinChitin(Skin.COVERAGE_LOW, { color: "yellow" }), doOutput);
-			var desc:String = desc += "A ripple spreads through your chitin as some patches change in color. After a few moments you're left with a yellow and black striped pattern, like a bee's! <b>You've got striped chitin!</b>";
+			var desc:String = "A ripple spreads through your chitin as some patches change in color. After a few moments you're left with a yellow and black striped pattern, like a bee's! <b>You've got striped chitin!</b>";
 			player.skin.base.pattern = Skin.PATTERN_BEE_STRIPES;
 			if (!InCollection(player.coatColor2, "black", "ebony"))
 				player.coatColor2 = randomChoice("black", "ebony");
@@ -765,7 +765,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		},
 		// is present
 		function ():Boolean {
-			return player.skin.base.pattern === Skin.PATTERN_BEE_STRIPES;
+			return /*player.skin.coverage === Skin.COVERAGE_LOW && player.skin.coat.type === Skin.CHITIN &&*/ player.skin.base.pattern === Skin.PATTERN_BEE_STRIPES;
 		}
 	);
   /*
