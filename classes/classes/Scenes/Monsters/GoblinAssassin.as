@@ -32,7 +32,7 @@ public class GoblinAssassin extends Monster
 				else outputText("  There doesn't seem to be any effect.\n");
 			}
 			//Dodge chance!
-			if((player.findPerk(PerkLib.Evade) >= 0 && rand(10) <= 3) || (rand(100) < player.spe/5)) {
+			if((player.hasPerk(PerkLib.Evade) && rand(10) <= 3) || (rand(100) < player.spe/5)) {
 				outputText("\nYou narrowly avoid the gush of alchemic fluids!\n");
 			}
 			//Get hit!

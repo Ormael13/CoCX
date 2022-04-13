@@ -600,14 +600,14 @@ import classes.display.SpriteDb;
 			else { //High corruption
 				outputText("\n\n\"<i>Ew! Your aura's, like, totally covered in icky black stuff! You need to wash your soul! I can hardly bear to, like, look at you like this!</i>\"");
 			}
-			if (player.findPerk(PerkLib.PurityBlessing) >= 0) {
+			if (player.hasPerk(PerkLib.PurityBlessing)) {
 				outputText("\n\n\"<i>There's this shining light in your heart... Makes me feel all warm and fuzzy when I see you. I just wanna hold you close.</i>\"");
 			}
-			if (player.findPerk(PerkLib.MaraesGiftFertility) >= 0) {
+			if (player.hasPerk(PerkLib.MaraesGiftFertility)) {
 				if (joyHasCock()) outputText("\"<i>There's this funny green light sitting in your belly... It makes my funstick feel all hard and stiff. I just wanna stuff you full of cream and make lots and lots of little mousies with you!</i>\"");
 				else outputText("\"<i>There's this funny green light sitting in your belly... It makes me think of babies. Like you're gonna have lots of babies.</i>\"");
 			}
-			if (player.findPerk(PerkLib.MaraesGiftStud) >= 0) {
+			if (player.hasPerk(PerkLib.MaraesGiftStud)) {
 				outputText("\"<i>There's this funny green light shining from your [cock]... I feel funny just looking at it. My belly starts to get all cramped up, and I wanna have babies. I just wanna make babies with you all day long.</i>\"");
 			}
 			//Pregnancy check

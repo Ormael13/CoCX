@@ -11257,16 +11257,16 @@ use namespace CoC;
 			dynStats("lus", 0, "scale", false);
 		}
 
-		public function corruptionTolerance():int {
+		public function get corruptionTolerance():int {
 			var temp:int = perkv1(PerkLib.AscensionTolerance) * 5;
 			if (flags[kFLAGS.MEANINGLESS_CORRUPTION] > 0) temp += 100;
 			return temp;
 		}
-		public function corAdjustedUp():Number {
-			return boundFloat(0, cor + corruptionTolerance(), 100);
+		public function get corAdjustedUp():Number {
+			return boundFloat(0, cor + corruptionTolerance, 100);
 		}
-		public function corAdjustedDown():Number {
-			return boundFloat(0, cor - corruptionTolerance(), 100);
+		public function get corAdjustedDown():Number {
+			return boundFloat(0, cor - corruptionTolerance, 100);
 		}
 
 		public function playerMinionsCount():Number {

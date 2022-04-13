@@ -87,7 +87,7 @@ import classes.internals.*;
                 this.armorMDef = 15 + 5*mod;
                 this.bonusHP = 200 + 50*mod + rand(this.ballSize * (3 + mod));
                 this.bonusLust = 230 + 19*mod + this.ballSize * 2*(3 + mod) + rand(this.ballSize * (4 + mod));
-                this.level = 65 + 5*mod;
+                this.level = 64 + 5*mod;
 				this.drop = new ChainedDrop().add(necklaces.COWBELL, 1 / 12)
 						.add(weapons.DL_AXE_, 1 / 8)
 						.add(consumables.MINOCUM, 1 / 5)

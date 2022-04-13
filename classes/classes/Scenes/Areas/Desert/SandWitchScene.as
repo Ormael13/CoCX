@@ -604,8 +604,8 @@ public function sexMenu():void {
     outputText("\n\n<b>SceneHunter: Taur scenes reworked too - more options with UniHerms!</b>");
     //menu
     //because corrupt scenes are REALLY rough here. 2/3 is fair IMO
-    var lowCor:Boolean = player.cor < 66 + player.corruptionTolerance(); 
-    var hiCor:Boolean = player.cor >= 66 - player.corruptionTolerance();
+    var lowCor:Boolean = player.cor < 66 + player.corruptionTolerance; 
+    var hiCor:Boolean = player.cor >= 66 - player.corruptionTolerance;
     //pure options
     addButtonIfTrue(0, "Sex", sandwitchSex, "Req. cock and low corruption", lowCor && player.hasCock());
     addButtonIfTrue(1, "Breasts", sandwitchBewbs, "Req. low corruption", lowCor);
@@ -929,9 +929,9 @@ public function sammitchBirthsDriders():void {
 	
 	//corr < 60 goes to Help her!, else go to Must I really?
     menu();
-    if (player.cor < 66 + player.corruptionTolerance())
+    if (player.cor < 66 + player.corruptionTolerance)
         addButton(0, "Help her!", helpZeWithBirfBabies);
-    if (player.cor > 66 - player.corruptionTolerance())
+    if (player.cor > 66 - player.corruptionTolerance)
         addButton(1, "Must I?", reluctantlyHelpZeWitch);
 }
 

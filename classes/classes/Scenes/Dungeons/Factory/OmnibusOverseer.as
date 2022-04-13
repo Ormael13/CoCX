@@ -45,7 +45,7 @@ public class OmnibusOverseer extends Monster
 			if (rand(2) == 0)
 				outputText("The demoness grips her sizable breasts and squeezes, spraying milk at you.\n");
 			else outputText("Your foe curls up to pinch her nipples, tugging hard and squirting milk towards you.\n");
-			if ((player.spe > 50 && rand(4) == 0) || (player.findPerk(PerkLib.Evade) >= 0 && rand(3) == 0) || (player.findPerk(PerkLib.Misdirection) >= 0 && rand(4) == 0 && player.armorName == "red, high-society bodysuit")) {
+			if ((player.spe > 50 && rand(4) == 0) || (player.hasPerk(PerkLib.Evade) && rand(3) == 0) || (player.hasPerk(PerkLib.Misdirection) && rand(4) == 0 && player.armorName == "red, high-society bodysuit")) {
 				outputText("You sidestep the gushing fluids.");
 			}
 			//You didn't dodge

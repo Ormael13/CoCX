@@ -130,7 +130,7 @@ import classes.internals.ChainedDrop;
 			{
 				//Get hit
 				outputText(" It chits you square in the chest.");
-				if (player.findPerk(PerkLib.ShieldWard) >= 0 && rand (2) == 0) {
+				if (player.hasPerk(PerkLib.ShieldWard) && rand (2) == 0) {
 					outputText(" The momentum sends you flying through the air. You land with a crunch against a wall. <b>You'll have to run back to the giant to engage it in melee once more.</b> ");
 					player.createStatusEffect(StatusEffects.KnockedBack, 0, 0, 0, 0);
 					this.createStatusEffect(StatusEffects.KnockedBack, 0, 0, 0, 0); // Applying to mob as a "used ability" marker
@@ -161,7 +161,7 @@ import classes.internals.ChainedDrop;
 			outputText("The animated statue spins its hammer around, striking at your [weapon] with its haft.");
 	
 			//Avoid
-			if ((combatMiss() && combatMiss()) || player.getEvasionRoll(false) || (player.findPerk(PerkLib.ShieldWard) >= 0 && rand (2) == 0)) outputText(" You manage to hold onto your equipment, for now.");
+			if ((combatMiss() && combatMiss()) || player.getEvasionRoll(false) || (player.hasPerk(PerkLib.ShieldWard) && rand (2) == 0)) outputText(" You manage to hold onto your equipment, for now.");
 			//Oh noes!
 			else
 			{

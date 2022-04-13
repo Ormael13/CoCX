@@ -723,7 +723,7 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight);
 			if (flags[kFLAGS.PC_FETISH] < 1 || player.hasVirginVagina() || player.cor <= 33) outputText("n unexpectedly");
 			outputText(" wonderful feeling, getting to cum in front of an audience like this.");
 			outputText("\n\nYou ride the waves of ecstasy just as you ride the gnarly pussy-pleaser that gave gave them to you. The sweaty, orgasmically writhing whore that you’ve become may be a long way from the");
-			if (player.findPerk(PerkLib.HistorySlut) < 0 && player.findPerk(PerkLib.HistoryWhore) < 0) outputText(" chaste");
+			if (!player.hasPerk(PerkLib.HistorySlut) && !player.hasPerk(PerkLib.HistoryWhore)) outputText(" chaste");
 			else outputText(" determined");
 			outputText(" champion that entered Mareth so long ago, but it feels too good to stop, like your pussy is aflame and the only way to put it out is to hose it down with even more drider goo.");
 			outputText("\n\nIt’s only when your newly minted slut comes down that you follow suit. His dick must have finally gone dry, though not before his other one managed to significantly expand Mitzi’s belly. The goblin looks about at dazed as you feel, rubbing her tummy excitedly while half-heartedly trying to reach her master’s dick for a few more kisses.");

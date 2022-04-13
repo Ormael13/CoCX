@@ -1,7 +1,5 @@
 package classes {
-
 import classes.GlobalFlags.kFLAGS;
-import classes.Appearance;
 
 public class SceneHunter extends BaseContent {
     public function settingsPage():void {
@@ -10,7 +8,7 @@ public class SceneHunter extends BaseContent {
 		displayHeader("SceneHunter Settings - WIP");
         outputText("The following are QoL improvements meant to make some scenes (and their variations) easier to access.");
         outputText("\nAll these features blend into the game (almost) seamlessly, are lore-accurate and don't change anything gameplay-related.");
-        
+
         addButton(0, "UniHerms", toggle, kFLAGS.SCENEHUNTER_UNI_HERMS);
         outputText("\n\n<b>Universal Herms:</b> ");
         if (flags[kFLAGS.SCENEHUNTER_UNI_HERMS]) {
@@ -83,7 +81,7 @@ public class SceneHunter extends BaseContent {
         if (fun != null)
             fun();
     }
-    
+
     //--------------------------------------------------------------------------------------------------
     // UniHerms
     //--------------------------------------------------------------------------------------------------
@@ -96,7 +94,7 @@ public class SceneHunter extends BaseContent {
     * Prints the dialogue to select the part to use in the scene. Automatically checks if the part exists.
     * If only one option is available, goes with it.
     * If disabled: herm > (cock/vag) > ass
-    * @param    dickPriority    Used if uniHerms are disabled. 1 - cock over vag, -1 - vag over cock. 0 - rand. 
+    * @param    dickPriority    Used if uniHerms are disabled. 1 - cock over vag, -1 - vag over cock. 0 - rand.
     * @param    dickF           Dick button
     * @param    vagF            Vagina button
     * @param    assA            Ass button function. Can be an array, then [0] is the text, and [1] is the function
@@ -181,7 +179,7 @@ public class SceneHunter extends BaseContent {
     // DickSelect
     //--------------------------------------------------------------------------------------------------
 
-    public function get dickSelect():Boolean { 
+    public function get dickSelect():Boolean {
         return flags[kFLAGS.SCENEHUNTER_DICK_SELECT];
     }
 
@@ -355,7 +353,7 @@ public class SceneHunter extends BaseContent {
                 addButtonDisabled(3, "Four", "Not enough.");
         }
     }
-    
+
     //--------------------------------------------------------------------------------------------------
     // Other
     //--------------------------------------------------------------------------------------------------
@@ -365,10 +363,45 @@ public class SceneHunter extends BaseContent {
     }
     //nothing more here for now... Will it just check the value, or new next will be here too?
 
-    //Recalling is 'technically' still a SceneHunter feature, so we're storing its flag here.
+    //Recalling is 'technically' a SceneHunter feature, so I'll store its flag here.
     //Set to true to disable everything but text in recalled scenes
-    public var recalling:Boolean = false; //set to true when a scene is recalled.
-    
+    public var _recalling:Boolean = false; //set to true when a scene is recalled.
+
+    //No disabling flag for this one, but I'll leave it here for now in case I'll need to lock it..
+
+    /**
+     * The dialogue to select scene options based on corruption.
+     * When disabled, overrides "tentacle always fit" behavior.
+     * @param    pureButton Array ["Name", function, optional - "Description"] for the first button
+     * @param    corButton  Array ["Name", function, optional - "Description"] for the second button
+     * @param    maxForPure Max corruption for pure button
+     * @param    minForCor  Max corruption for pure button
+     * @param    tolerance  Whether or not corruption tolerance should be used in the check
+     */
+    public function selectPureCor(pureButton:Array, corButton:Array, maxForPure:int, minForCor:int = -1, tolerance:Boolean = true):void {
+        //Auto-calls - no (until Orm kicks my ass for changing the game too much)
+        //Dialogue
+        var beforeText:String = CoC.instance.currentText;
+        outputText("\n\n<b>What will you do?</b>");
+        menu();
+        //modify the values
+        if (minForCor < 0) minForCor = maxForPure;
+        if (tolerance) {
+            maxForPure += player.corruptionTolerance;
+            minForCor -= player.corruptionTolerance;
+        }
+        //good button
+        if (player.cor <= maxForPure)
+            addButton(0, pureButton[0], restoreText, beforeText, pureButton[1], null, pureButton.length > 2 ? pureButton[2] : "");
+        else
+            addButtonDisabled(0, pureButton[0], "You're too corrupted for it! (req. corruption less than " + maxForPure + ")");
+        //bad button
+        if (player.cor >= minForCor)
+            addButton(1, corButton[0], restoreText, beforeText, corButton[1], null, corButton.length > 2 ? corButton[2] : "");
+        else
+            addButtonDisabled(1, corButton[0], "You're too pure to even think of it! (req. corruption more than " + minForCor + ")");
+    }
+
     //--------------------------------------------------------------------------------------------------
     // PrintChecks
     //--------------------------------------------------------------------------------------------------
@@ -383,7 +416,7 @@ public class SceneHunter extends BaseContent {
     }
 
     //Some common checks for easier access
-    
+
     //Prints dick requirements if not found
     public function check_dick_typed(type:CockTypesEnum, minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", moreText:String = ""):void {
         if (printChecks && player.findCockWithType(type, 1, minSize, maxSize, compareBy) < 0) {
@@ -402,7 +435,7 @@ public class SceneHunter extends BaseContent {
     public function check_dick(minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", moreText:String = ""):void {
         check_dick_typed(CockTypesEnum.UNDEFINED, minSize, maxSize, compareBy, moreText);
     }
-    
+
     //Prints dick requirements if not found
     public function check_race(race:String):void {
         if (printChecks && player.race() != race) {

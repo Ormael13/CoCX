@@ -321,14 +321,14 @@ public class YaraPiercingStudio extends TelAdreAbstractContent {
                 break;
             case MAT_LETHITE:
                 shortP += "lethite ";
-                if (player.findPerk(PerkLib.PiercedLethite) < 0) {
+                if (!player.hasPerk(PerkLib.PiercedLethite)) {
                     player.createPerk(PerkLib.PiercedLethite, 0, 0, 0, 0);
                 }
                 longP += "Lethite ";
                 break;
             case MAT_FERRITE:
                 shortP += "fertite ";
-                if (player.findPerk(PerkLib.PiercedFertite) < 0) {
+                if (!player.hasPerk(PerkLib.PiercedFertite)) {
                     player.createPerk(PerkLib.PiercedFertite, 5, 0, 0, 0);
                 } else {
                     player.addPerkValue(PerkLib.PiercedFertite, 1, 5);
@@ -337,21 +337,21 @@ public class YaraPiercingStudio extends TelAdreAbstractContent {
                 break;
             case MAT_FURRITE:
                 shortP += "furrite ";
-                if (player.findPerk(PerkLib.PiercedFurrite) < 0) {
+                if (!player.hasPerk(PerkLib.PiercedFurrite)) {
                     player.createPerk(PerkLib.PiercedFurrite, 0, 0, 0, 0);
                 }
                 longP += "Furrite ";
                 break;
             case MAT_CRIMSTONE:
                 shortP += "crimstone ";
-                if (player.findPerk(PerkLib.PiercedIcestone) >= 0) {
+                if (player.hasPerk(PerkLib.PiercedIcestone)) {
                     player.addPerkValue(PerkLib.PiercedIcestone, 1, -5);
                     if (player.perkv1(PerkLib.PiercedIcestone) <= 0) {
                         player.removePerk(PerkLib.PiercedIcestone);
                     }
                 }
                 else {
-                    if (player.findPerk(PerkLib.PiercedCrimstone) <= 0) {
+                    if (player.hasPerk(PerkLib.PiercedCrimstone)) {
                         player.createPerk(PerkLib.PiercedCrimstone, 5, 0, 0, 0);
                     } else {
                         player.addPerkValue(PerkLib.PiercedCrimstone, 1, 5);
@@ -361,14 +361,14 @@ public class YaraPiercingStudio extends TelAdreAbstractContent {
                 break;
             case MAT_ICESTONE:
                 shortP += "icestone ";
-                if (player.findPerk(PerkLib.PiercedCrimstone) >= 0) {
+                if (player.hasPerk(PerkLib.PiercedCrimstone)) {
                     player.addPerkValue(PerkLib.PiercedCrimstone, 1, -5);
                     if (player.perkv1(PerkLib.PiercedCrimstone) <= 0) {
                         player.removePerk(PerkLib.PiercedCrimstone);
                     }
                 }
                 else {
-                    if (player.findPerk(PerkLib.PiercedIcestone) <= 0) {
+                    if (player.hasPerk(PerkLib.PiercedIcestone)) {
                         player.createPerk(PerkLib.PiercedIcestone, 5, 0, 0, 0);
                     } else {
                         player.addPerkValue(PerkLib.PiercedIcestone, 1, 5);

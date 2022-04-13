@@ -77,7 +77,7 @@ public class ImpHorde extends Monster
 					else if(damage == 3) outputText("You easily evade a blast of white fluid.\n");
 				}
 				//Determine if evaded
-				else if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 30) {
+				else if(player.hasPerk(PerkLib.Evade) && rand(100) < 30) {
 					damage = rand(4);
 					outputText("(Evade) ");
 					if(damage == 0) outputText("A wad of cum spatters into the floor as you narrowly sidestep it.\n");
@@ -85,7 +85,7 @@ public class ImpHorde extends Monster
 					else if(damage == 2) outputText("You duck a glob of spooge and it passes harmlessly by.  A muffled grunt of disgust can be heard from behind you.\n");
 					else if(damage == 3) outputText("You easily evade a blast of white fluid.\n");
 				}
-				else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
+				else if(player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
 					outputText("(Misdirection) ");
 					if(damage == 0) outputText("A wad of cum spatters into the floor as you narrowly sidestep it.\n");
 					else if(damage == 1) outputText("One of the imps launches his seed so hard it passes clean over you, painting the wall white.\n");
@@ -93,7 +93,7 @@ public class ImpHorde extends Monster
 					else if(damage == 3) outputText("You easily evade a blast of white fluid.\n");
 				}
 				//Determine if cat'ed
-				else if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 15) {
+				else if(player.hasPerk(PerkLib.Flexibility) && rand(100) < 15) {
 					damage = rand(4);
 					outputText("(Agility) ");
 					if(damage == 0) outputText("A wad of cum spatters into the floor as you narrowly sidestep it.\n");
@@ -141,14 +141,14 @@ public class ImpHorde extends Monster
 					else if(player.spe - spe >= 20) outputText("You deftly avoid " + a + short + "'s slow " + weaponVerb + ".\n");
 				}
 				//Determine if evaded
-				else if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
+				else if(player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
 					outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'s attack.\n");
 				}
-				else if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
+				else if(player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
 					outputText("With the easy movement afforded by your bodysuit and Raphael's teachings, you easily avoid " + a + short + "'s attack.\n");
 				}
 				//Determine if cat'ed
-				else if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
+				else if(player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
 					outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "");
 					if(plural) outputText("' attacks.\n");
 					else outputText("'s attack.\n");

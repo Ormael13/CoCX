@@ -7,8 +7,6 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Dungeons.DeepCave.*;
-import classes.Scenes.NPCs.ShouldraFollower;
-import classes.Scenes.SceneLib;
 import classes.Scenes.SceneLib;
 import classes.internals.Utils;
 import classes.display.SpriteDb;

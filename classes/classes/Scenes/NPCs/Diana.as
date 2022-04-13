@@ -43,59 +43,59 @@ package classes.Scenes.NPCs
 		public function spellCostHeal():Number {
 			var cost:Number = 30;
 			cost *= spellCostMultiplier();
-			if (findPerk(PerkLib.NaturalHealingMinor) >= 0) cost -= 3;
-			if (findPerk(PerkLib.NaturalHealingMajor) >= 0) cost -= 4.5;
-			if (findPerk(PerkLib.NaturalHealingEpic) >= 0) cost -= 5;
-			if (findPerk(PerkLib.NaturalHealingLegendary) >= 0) cost -= 6.5;
-			if (findPerk(PerkLib.WisenedHealer) >= 0) cost *= 2;
+			if (hasPerk(PerkLib.NaturalHealingMinor)) cost -= 3;
+			if (hasPerk(PerkLib.NaturalHealingMajor)) cost -= 4.5;
+			if (hasPerk(PerkLib.NaturalHealingEpic)) cost -= 5;
+			if (hasPerk(PerkLib.NaturalHealingLegendary)) cost -= 6.5;
+			if (hasPerk(PerkLib.WisenedHealer)) cost *= 2;
 			return cost;
 		}
 		public function spellCostRegenerate():Number {
 			var cost:Number = 50;
 			cost *= spellCostMultiplier();
-			if (findPerk(PerkLib.NaturalHealingMinor) >= 0) cost -= 5;
-			if (findPerk(PerkLib.NaturalHealingMajor) >= 0) cost -= 7.5;
-			if (findPerk(PerkLib.NaturalHealingEpic) >= 0) cost -= 10;
-			if (findPerk(PerkLib.NaturalHealingLegendary) >= 0) cost -= 12.5;
-			if (findPerk(PerkLib.WisenedHealer) >= 0) cost *= 2;
+			if (hasPerk(PerkLib.NaturalHealingMinor)) cost -= 5;
+			if (hasPerk(PerkLib.NaturalHealingMajor)) cost -= 7.5;
+			if (hasPerk(PerkLib.NaturalHealingEpic)) cost -= 10;
+			if (hasPerk(PerkLib.NaturalHealingLegendary)) cost -= 12.5;
+			if (hasPerk(PerkLib.WisenedHealer)) cost *= 2;
 			return cost;
 		}
 		public function soulskillCostManyBirds():Number {
 			var cost:Number = 10;
-			if (findPerk(PerkLib.DaoistCultivator) >= 0) cost -= 1;
+			if (hasPerk(PerkLib.DaoistCultivator)) cost -= 1;
 			return cost;
 		}
 		public function soulskillCostHailOfBlades1():Number {
 			var cost:Number = 50;
-			if (findPerk(PerkLib.DaoistCultivator) >= 0) cost -= 5;
+			if (hasPerk(PerkLib.DaoistCultivator)) cost -= 5;
 			return cost;
 		}
 		
 		public function HealMod():Number {
 			var mod1:Number = 1;
-			if (findPerk(PerkLib.WizardsFocus) >= 0) mod1 += .4;
-			if (findPerk(PerkLib.SpellpowerHealing) >= 0) mod1 += .2;
-			if (findPerk(PerkLib.NaturalHealingMinor) >= 0) mod1 += .3;
-			if (findPerk(PerkLib.NaturalHealingMajor) >= 0) mod1 += .4;
-			if (findPerk(PerkLib.NaturalHealingEpic) >= 0) mod1 += .5;
-			if (findPerk(PerkLib.NaturalHealingLegendary) >= 0) mod1 += .6;
+			if (hasPerk(PerkLib.WizardsFocus)) mod1 += .4;
+			if (hasPerk(PerkLib.SpellpowerHealing)) mod1 += .2;
+			if (hasPerk(PerkLib.NaturalHealingMinor)) mod1 += .3;
+			if (hasPerk(PerkLib.NaturalHealingMajor)) mod1 += .4;
+			if (hasPerk(PerkLib.NaturalHealingEpic)) mod1 += .5;
+			if (hasPerk(PerkLib.NaturalHealingLegendary)) mod1 += .6;
 			return mod1;
 		}
 		public function SpellMod():Number {
 			var mod2:Number = 1;
-			if (findPerk(PerkLib.Spellpower) >= 0) mod2 += .1;
-			if (findPerk(PerkLib.Channeling) >= 0) mod2 += .2;
-			if (findPerk(PerkLib.JobSorcerer) >= 0) mod2 += .1;
-			if (findPerk(PerkLib.WizardsFocus) >= 0) mod2 += .4;
+			if (hasPerk(PerkLib.Spellpower)) mod2 += .1;
+			if (hasPerk(PerkLib.Channeling)) mod2 += .2;
+			if (hasPerk(PerkLib.JobSorcerer)) mod2 += .1;
+			if (hasPerk(PerkLib.WizardsFocus)) mod2 += .4;
 			return mod2;
 		}
 		public function SoulskillMod():Number {
 			var mod3:Number = 1;
-			if (findPerk(PerkLib.DaoistCultivator) >= 0) mod3 += .2;
-			if (findPerk(PerkLib.DaoistApprenticeStage) >= 0) {
-				if (findPerk(PerkLib.SoulApprentice) >= 0) mod3 += .4;
-				if (findPerk(PerkLib.SoulPersonage) >= 0) mod3 += .4;
-				if (findPerk(PerkLib.SoulWarrior) >= 0) mod3 += .4;
+			if (hasPerk(PerkLib.DaoistCultivator)) mod3 += .2;
+			if (hasPerk(PerkLib.DaoistApprenticeStage)) {
+				if (hasPerk(PerkLib.SoulApprentice)) mod3 += .4;
+				if (hasPerk(PerkLib.SoulPersonage)) mod3 += .4;
+				if (hasPerk(PerkLib.SoulWarrior)) mod3 += .4;
 			}
 			return mod3;
 		}
@@ -184,7 +184,7 @@ package classes.Scenes.NPCs
 		public function usingRegenerateSpell():void {
 			outputText("She closes her eyes, taking a wide stance and holding her staff in front of her. Her cheeks flush red, and you can see her wounds closing. The magic sticks around, clinging to her body. She's regenerating!\n");
 			var hpChange2:int = inte;
-			if (findPerk(PerkLib.WisenedHealer) >= 0) hpChange2 += wis;
+			if (hasPerk(PerkLib.WisenedHealer)) hpChange2 += wis;
 			createStatusEffect(StatusEffects.MonsterRegen2, 7, hpChange2, 0, 0);
 			mana -= spellCostRegenerate();
 			flags[kFLAGS.DIANA_SPELLS_CASTED]++;
@@ -193,7 +193,7 @@ package classes.Scenes.NPCs
 		public function usingHealSpell():void {
 			var temp:Number = 0;
 			temp += inteligencescalingbonus();
-			if (findPerk(PerkLib.WisenedHealer) >= 0) temp += wisdomscalingbonus();
+			if (hasPerk(PerkLib.WisenedHealer)) temp += wisdomscalingbonus();
 			temp *= HealMod();
 			temp = Math.round(temp);
 			if (flags[kFLAGS.DIANA_LVL_UP] < 2) outputText("Horse-morph");
