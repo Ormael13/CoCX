@@ -194,7 +194,7 @@ public class Lethice extends Monster
 				outputText("\n\nYou laugh as you fly out of their reach, immune to their touches.");
 				player.createStatusEffect(StatusEffects.LethicesRapeTentacles, 4 + rand(2), 0, 0, 0);
 			}
-			else if (combatMiss() || player.findPerk(PerkLib.Flexibility) >= 0 || player.findPerk(PerkLib.Evade) >= 0)
+			else if (combatMiss() || player.hasPerk(PerkLib.Flexibility) || player.hasPerk(PerkLib.Evade))
 			{
 				outputText("\n\nYou manage to sidestep the grasping tentacles with ease.");
 				player.createStatusEffect(StatusEffects.LethicesRapeTentacles, 4 + rand(2), 0, 0, 0);
@@ -244,7 +244,7 @@ public class Lethice extends Monster
 		{
 			outputText("Lethice flutters toward a burning brazier and flaps her wings, causing the flames to flare and thick gusts of smoke to flow past the assembled demons, straight at you!");
 
-			if (combatMiss() || player.findPerk(PerkLib.Flexibility) >= 0)
+			if (combatMiss() || player.hasPerk(PerkLib.Flexibility))
 			{
 				outputText(" You manage to slide under the waves of smoke.");
 			}
@@ -267,15 +267,15 @@ public class Lethice extends Monster
 			{
 				outputText("You manage to dodge her slash!");
 			}
-			else if (player.findPerk(PerkLib.Misdirection) >= 0)
+			else if (player.hasPerk(PerkLib.Misdirection))
 			{
 				outputText(" Misdirecting her with your movements, you avoid the swipe.");
 			}
-			else if (player.findPerk(PerkLib.Flexibility) >= 0)
+			else if (player.hasPerk(PerkLib.Flexibility))
 			{
 				outputText(" With your feline flexibility, you bend double to avoid the swipe.");
 			}
-			else if (player.findPerk(PerkLib.Evade) >= 0)
+			else if (player.hasPerk(PerkLib.Evade))
 			{
 				outputText(" You evade her slash with a quick roll.");
 			}
@@ -415,15 +415,15 @@ public class Lethice extends Monster
 			{
 				outputText(" You deftly dodge out of the way!");
 			}
-			else if (player.findPerk(PerkLib.Misdirection) >= 0)
+			else if (player.hasPerk(PerkLib.Misdirection))
 			{
 				outputText(" At least, they try to! Too bad for them you’re already elsewhere in the crowd, well away from harm!");
 			}
-			else if (player.findPerk(PerkLib.Flexibility) >= 0)
+			else if (player.hasPerk(PerkLib.Flexibility))
 			{
 				outputText(" You contort and bend in ways a human never could, easily twisting between all the pairs of horns the demons can thrust at you. By the time they’re done, you’re sitting on top of a demon’s head, balanced on his antlers until with a furious howl he throws you back into the sea of maledicts.");
 			}
-			else if (player.findPerk(PerkLib.Evade) >= 0)
+			else if (player.hasPerk(PerkLib.Evade))
 			{
 				outputText(" You manage to duck down enough to avoid the worst of the horn-spikes, and your [armor] deflects the rest!");
 			}
@@ -438,7 +438,7 @@ public class Lethice extends Monster
 		private function crushingBodies():void
 		{
 			outputText("The sheer weight of a hundred demonic bodies crushing down on you is enough to make you cry out in discomfort, then pain. Are they just trying to crush you to death!?");
-			if (player.findPerk(PerkLib.Evade) >= 0)
+			if (player.hasPerk(PerkLib.Evade))
 			{
 				outputText("\n\nYou drop to the ground, squirming between several of their legs until you get somewhere you can stand again -- this time without breaking your ribs. Howls of frustration and anger echo through the hall, and the horde just comes barreling down on your again!");
 			}
@@ -458,15 +458,15 @@ public class Lethice extends Monster
 			{
 				outputText(" You grab the biggest incubus you can find and shove him in the way of the airborne bukkake, letting his burly back take the brunt of the demons’ load. He grunts in displeasure, giving you a rough shove back into the demonic gang-bang. <i>\"No escape!\"</i>");
 			}
-			else if (player.findPerk(PerkLib.Misdirection) >= 0)
+			else if (player.hasPerk(PerkLib.Misdirection))
 			{
 				outputText(" You duck under the nearest group of succubi, happily letting the demonic hussies get plastering with the wave of flying spooge. They seem to enjoy it, too, and quickly you’re surrounded by less demonic fighting and much, much more infernal cock-sucking. Seems they’re hungry!");
 			}
-			else if (player.findPerk(PerkLib.Flexibility) >= 0)
+			else if (player.hasPerk(PerkLib.Flexibility))
 			{
 				outputText(" You do a graceful backflip out of the way, making sure it’s a group of eager succubi who get painted white with cum rather than you!");
 			}
-			else if (player.findPerk(PerkLib.Evade) >= 0)
+			else if (player.hasPerk(PerkLib.Evade))
 			{
 				outputText(" You at least manage to close your eyes before the wave of spooge hits you, splattering all over your [armor].");
 				player.dynStats("lus", 5);
@@ -680,15 +680,15 @@ public class Lethice extends Monster
 			{
 				outputText(" The living throwing stars whistle by you, barely missing you.");
 			}
-			else if (player.findPerk(PerkLib.Evade) >= 0)
+			else if (player.hasPerk(PerkLib.Evade))
 			{
 				outputText(" You barely avoid the living throwing stars.");
 			}
-			else if (player.findPerk(PerkLib.Misdirection) >= 0)
+			else if (player.hasPerk(PerkLib.Misdirection))
 			{
 				outputText(" Your misdirecting movements allow you to avoid the living throwing stars.");
 			}
-			else if (player.findPerk(PerkLib.Flexibility) >= 0)
+			else if (player.hasPerk(PerkLib.Flexibility))
 			{
 				outputText(" You bend over backwards to avoid the living throwing stars.");
 			}
@@ -736,7 +736,7 @@ public class Lethice extends Monster
 				outputText(" You jump over it at the last second, the heat singing your [feet].");
 				minDamage = true;
 			}
-			else if (player.findPerk(PerkLib.Evade) >= 0)
+			else if (player.hasPerk(PerkLib.Evade))
 			{
 				outputText(" You evade her trip, but the heat pouring off the whip singes your [feet].");
 				minDamage = true;
@@ -745,7 +745,7 @@ public class Lethice extends Monster
 			{
 				outputText("You try to avoid it, but the burning weapon catches your [leg], simultaneously scorching your flesh and attempting to pull you off balance.");
 
-				if (player.findPerk(PerkLib.Resolute) < 0 && rand(player.tou) <= 25)
+				if (!player.hasPerk(PerkLib.Resolute) && rand(player.tou) <= 25)
 				{
 					outputText(" The ground rushes up at you awful fast. Lethice has tripped you, <b>stunning you!</b>");
 					player.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
@@ -785,15 +785,15 @@ public class Lethice extends Monster
 			{
 				outputText(" You barely avoid it.");
 			}
-			else if (player.findPerk(PerkLib.Evade) >= 0)
+			else if (player.hasPerk(PerkLib.Evade))
 			{
 				outputText(" You evade the targeted strike.");
 			}
-			else if (player.findPerk(PerkLib.Flexibility) >= 0)
+			else if (player.hasPerk(PerkLib.Flexibility))
 			{
 				outputText(" You twist aside at the last moment.");
 			}
-			else if (player.findPerk(PerkLib.Misdirection) >= 0)
+			else if (player.hasPerk(PerkLib.Misdirection))
 			{
 				outputText(" Raphael taught you well. Lethice failed to account for your misleading movements and swung wide.");
 			}

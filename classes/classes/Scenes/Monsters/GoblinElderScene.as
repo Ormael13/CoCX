@@ -69,7 +69,7 @@ public class GoblinElderScene extends BaseContent
 				flags[kFLAGS.CODEX_ENTRY_GOBLINS] = 1;
 				outputText("\n\n<b>New codex entry unlocked: Goblins!</b>")
 			}
-			if (player.findPerk(PerkLib.SoulSense) >= 0 && flags[kFLAGS.SOUL_SENSE_PRISCILLA] < 2) flags[kFLAGS.SOUL_SENSE_PRISCILLA]++;
+			if (player.hasPerk(PerkLib.SoulSense) && flags[kFLAGS.SOUL_SENSE_PRISCILLA] < 2) flags[kFLAGS.SOUL_SENSE_PRISCILLA]++;
 			if (flags[kFLAGS.SOUL_SENSE_PRISCILLA] == 2) {
 				flags[kFLAGS.SOUL_SENSE_PRISCILLA]++;
 				outputText("\n\n<b>You have meet her enough times to be able to find her in the future when using soul sense.</b>\n\n");

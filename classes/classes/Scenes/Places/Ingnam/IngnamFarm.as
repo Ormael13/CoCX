@@ -69,7 +69,7 @@ public class IngnamFarm extends BaseContent
 				dynStats("tou", 1);
 				player.trainStat("tou", 1, 25);
 			}
-			if (player.findPerk(PerkLib.HistorySlacker) >= 0 || player.findPerk(PerkLib.PastLifeSlacker) >= 0) fatigue(-2);
+			if (player.hasPerk(PerkLib.HistorySlacker) || player.hasPerk(PerkLib.PastLifeSlacker)) fatigue(-2);
 			outputText("\n\nYou walk back to Ingnam.");
 			if (player.HP > player.maxHP()) player.HP = player.maxHP();
 			player.gems += 10;

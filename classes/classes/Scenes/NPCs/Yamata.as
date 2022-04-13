@@ -59,11 +59,11 @@ import classes.internals.*;
 			//Resist: - successfully resisting deals small health & lust damage to Yamata
 			var resist:int = 0;
 			resist = (player.inte < 80 ? Math.round(player.inte/70*25) : 25);
-			if (player.findPerk(PerkLib.Whispered) >= 0) 
+			if (player.hasPerk(PerkLib.Whispered)) 
 				resist += 30;
 			else 
 				outputText("Some small part of you knows this can’t be real, but you’re too terrified to act right now! ");
-			if (player.findPerk(PerkLib.HistoryReligious) >= 0 && player.cor <= 20)
+			if (player.hasPerk(PerkLib.HistoryReligious) && player.cor <= 20)
 				resist += 15 - player.corAdjustedDown;
 			if (rand(100) < resist) {
 				outputText("\n\nSummoning up every last ounce of courage you have, you push back the illusions with your mind! Yamata reels a bit, clutching her forehead in pain, but only grins at you. <i>\"That all you got, hero?\"</i>");				
@@ -250,8 +250,8 @@ import classes.internals.*;
 			var resist:int = 0;
 			if (player.inte < 30) resist = Math.round(player.inte);
 			else resist = 30;
-			if (player.findPerk(PerkLib.Whispered) >= 0) resist += 20;
-			if ((player.findPerk(PerkLib.HistoryReligious) >= 0 || player.findPerk(PerkLib.PastLifeReligious) >= 0) && player.cor < 20) resist += 20 - player.cor;
+			if (player.hasPerk(PerkLib.Whispered)) resist += 20;
+			if ((player.hasPerk(PerkLib.HistoryReligious) || player.hasPerk(PerkLib.PastLifeReligious)) && player.cor < 20) resist += 20 - player.cor;
 			var select:int = rand(7);
 			//Attack:
 			if (select == 0) {

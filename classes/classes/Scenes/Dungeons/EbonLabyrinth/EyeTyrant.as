@@ -73,7 +73,7 @@ use namespace CoC;
             this.armorMDef = 150 + 50*mod;
             this.bonusHP = mod == 0 ? 0 : 2500*(mod-1);
             this.bonusLust = 255 + 75*mod;
-            this.level = 65 + 5*mod;
+            this.level = 60 + 5*mod; //starts from 65 due to EL levelMod calculations;
             this.gems = int((1300 + rand(260)) * Math.exp(0.2*mod));
             this.additionalXP = int(6000 * Math.exp(0.2*mod));
             

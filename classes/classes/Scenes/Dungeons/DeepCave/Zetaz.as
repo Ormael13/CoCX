@@ -62,10 +62,10 @@ public class Zetaz extends Monster
 				if(attackChoice == 0) {
 					//Chucks faux-heat draft ala goblins. - 
 					outputText("Zetaz grabs a bottle from a drawer and hurls it in your direction!  ");
-					if((player.findPerk(PerkLib.Evade) >= 0 && rand(4) == 0) ||
-						(player.findPerk(PerkLib.Flexibility) >= 0 && rand(6) == 0) ||
+					if((player.hasPerk(PerkLib.Evade) && rand(4) == 0) ||
+						(player.hasPerk(PerkLib.Flexibility) && rand(6) == 0) ||
 						(player.spe > 65 && rand(10) == 0) ||
-						(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 20 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia"))) {
+						(player.hasPerk(PerkLib.Misdirection) && rand(100) < 20 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia"))) {
 						outputText("You sidestep it a moment before it shatters on the wall, soaking the tapestries with red fluid!");
 					}
 					else {

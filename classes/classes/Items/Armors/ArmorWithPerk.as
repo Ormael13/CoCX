@@ -66,13 +66,13 @@ package classes.Items.Armors
 /*
 		override public function equipEffect(player:Player, output:Boolean):void
 		{
-			if(player.findPerk(playerPerk) < 0)
+			if(!player.hasPerk(playerPerk))
 				player.createPerk(playerPerk,playerPerkV1,playerPerkV2,playerPerkV3,playerPerkV4);
 		}
 
 		override public function unequipEffect(player:Player, output:Boolean):void
 		{
-			while(player.findPerk(playerPerk) >= 0) player.removePerk(playerPerk);
+			while(player.hasPerk(playerPerk)) player.removePerk(playerPerk);
 		}
 */
 	}

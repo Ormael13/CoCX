@@ -105,7 +105,7 @@ public class SophieScene extends BaseContent implements TimeAwareInterface {
 							else sophieFollowerScene.sophieFertilityExpired();
 							needNext = true;
 						}
-						if (model.time.hours == 10 && (player.findPerk(PerkLib.LuststickAdapted) < 0 || rand(3) == 0) && sophieBimbo.bimboSophie() && !sophieBimbo.sophieIsInSeason() && flags[kFLAGS.SOPHIE_CAMP_EGG_COUNTDOWN] == 0 && !prison.inPrison) {
+						if (model.time.hours == 10 && (!player.hasPerk(PerkLib.LuststickAdapted) || rand(3) == 0) && sophieBimbo.bimboSophie() && !sophieBimbo.sophieIsInSeason() && flags[kFLAGS.SOPHIE_CAMP_EGG_COUNTDOWN] == 0 && !prison.inPrison) {
 							sophieBimbo.bimboSophieLustStickSurprise();
 							needNext = true;
 						}
@@ -887,7 +887,7 @@ private function sophieFucked(dicked:Boolean = true):void {
 
 public function luststickApplication(hours:Number = 4):void {
 	//Immune to luststick?
-	if(player.findPerk(PerkLib.LuststickAdapted) >= 0) return;
+	if(player.hasPerk(PerkLib.LuststickAdapted)) return;
 	//Increment luststick resistance
 	flags[kFLAGS.LUSTSTICK_RESISTANCE] += Math.floor(hours/2);
 	if(!player.hasCock()) return;

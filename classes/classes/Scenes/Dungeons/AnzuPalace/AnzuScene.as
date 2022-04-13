@@ -510,7 +510,7 @@ use namespace CoC;
 			addButton(3, "Blow Him", suckOffDeitysCock).hint("Suck off that big cock. You have the hunch that it will get your belly stuffed.");
 			if (player.hasCock()) addButton(4, "Fuck Him", fuckGodlyBirdButt).hint("Put that cock of yours to a good use and fuck that divine ass!");
 			else addButtonDisabled(4, "Fuck Him", "You need to have a cock to fuck that divine butt.");
-			if (player.lactationQ() >= 100 || player.findPerk(PerkLib.Feeder) >= 0) addButton(5, "Feed Him", feedAnzu).hint("Anzu is certainly thirsty. Put those breasts of yours to a good use.");
+			if (player.lactationQ() >= 100 || player.hasPerk(PerkLib.Feeder)) addButton(5, "Feed Him", feedAnzu).hint("Anzu is certainly thirsty. Put those breasts of yours to a good use.");
 			else addButtonDisabled(5, "Feed Him", "This option is only available if you have lactating breasts.");
 			addButton(14, "Back", anzuMenus);
 		}

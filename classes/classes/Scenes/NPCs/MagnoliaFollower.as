@@ -26,21 +26,21 @@ public function treeMenu():void {
 		outputText("At the corner of camp where you planted a seed, sapling has grown. It has dozens of branches and bright green leaves.\n\n");
 		menu();
 		if (player.fatigue + 50 < player.maxFatigue()) addButton(1, "Water It", waterIt);
-		if (player.HP > 150 && player.soulforce>= 50 && player.findPerk(PerkLib.SoulApprentice) >= 0) addButton(2, "Use SFIB", useSouforceInfusedBlood);
+		if (player.HP > 150 && player.soulforce>= 50 && player.hasPerk(PerkLib.SoulApprentice)) addButton(2, "Use SFIB", useSouforceInfusedBlood);
 		addButton(14, "Back", inventory.inventoryMenu);
 	}
 	else if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 4) {
 		outputText("At the corner of camp, the tree like sapling has grown bigger having grown more branches and leaves.\n\n");
 		menu();
 		if (player.fatigue + 50 < player.maxFatigue()) addButton(1, "Water It", waterIt);
-		if (player.HP > 150 && player.soulforce>= 50 && player.findPerk(PerkLib.SoulApprentice) >= 0) addButton(2, "Use SFIB", useSouforceInfusedBlood);
+		if (player.HP > 150 && player.soulforce>= 50 && player.hasPerk(PerkLib.SoulApprentice)) addButton(2, "Use SFIB", useSouforceInfusedBlood);
 		addButton(14, "Back", inventory.inventoryMenu);
 	}
 	else if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 5) {
 		outputText("At the corner of camp, a small tree has grown. The bright green leaves gently sway with the blowing wind.\n\n");
 		menu();
 		if (player.fatigue + 50 < player.maxFatigue()) addButton(1, "Water It", waterIt);
-		if (player.HP > 150 && player.soulforce>= 50 && player.findPerk(PerkLib.SoulApprentice) >= 0) addButton(2, "Use SFIB", useSouforceInfusedBlood);
+		if (player.HP > 150 && player.soulforce>= 50 && player.hasPerk(PerkLib.SoulApprentice)) addButton(2, "Use SFIB", useSouforceInfusedBlood);
 		addButton(14, "Back", inventory.inventoryMenu);
 	}
 	else if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] >= 6 && flags[kFLAGS.CHRISTMAS_TREE_LEVEL] < 9) {

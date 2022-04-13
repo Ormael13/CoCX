@@ -1607,7 +1607,7 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 				addButton(0, "Gentle BJ", corruptJojoBJGentle);
 				addButton(5, "Cruel BJ", corruptJojoBJCruel);
 				addButton(3, "Gentle Anal", corruptJojoAnalGentle);
-				if (player.findPerk(PerkLib.Whispered) >= 0)
+				if (player.hasPerk(PerkLib.Whispered))
 					addButton(8, "Whisper", whisperJojobait);
 				else addButton(8, "Cruel Anal", corruptJojoAnalCruel); //Overrides Anal Smother - Herms don't smother, they fuck
 			}
@@ -2366,48 +2366,48 @@ public function jojoTalkYourOrigin():void // Prob tack on some interaction count
 	flags[kFLAGS.TIMES_TALKED_WITH_JOJO]++;
 	outputText("As you start up a conversation with Jojo, the two of you speak at length about nothing really important or noteworthy, just small talk.  That is until the monk brings up the subject of your background.  You tell him about Ingnam and your family there, and the tradition of sending a champion through the portal.  When he asks why anyone would choose to come here, you tell him how legends say that in years a champion wasn’t sent through the portal, terrible things happened to the village.\n\n");
 	outputText("\"<i>That portal?</i>\" Jojo asks, pointing to the very portal you stumbled through. You nod and he asks, \"<i>So... what were you like in Ingnam?</i>\"\n\n");
-	if (player.findPerk(PerkLib.HistoryAlchemist) >= 0) {
+	if (player.hasPerk(PerkLib.HistoryAlchemist)) {
 		outputText("You tell Jojo that you were the assistant to Riku, an alchemist residing in your village.  He asks questions about your time with the alchemist and how you family felt about you taking up alchemy.  You tell him that you were just about to go into advanced studies when it was announced that you were the next champion and all you really learned was how to increase the potency of certain types of items.\n\n");
 	}
-	else if (player.findPerk(PerkLib.HistoryCultivator) >= 0) {
+	else if (player.hasPerk(PerkLib.HistoryCultivator)) {
 		outputText("You tell Jojo about how you spent your time training to become a soul cultivator.  Hearing this little monk get slight more interested and asked you to say more about this cultivator and his chosen path, on which you gladly reply telling all you remembered.\n\n");
 	}
-	else if (player.findPerk(PerkLib.HistoryFighter) >= 0) {
+	else if (player.hasPerk(PerkLib.HistoryFighter)) {
 		outputText("You tell Jojo about how, growing up, you got into fights a lot.  You name names and tell him why and how each of those little brats had got what was coming to them. You tell him how you had planned to join the village guard, but that became a pipe dream when it was announced that you were the next champion.\n\n");
 	}
-	else if (player.findPerk(PerkLib.HistoryFortune) >= 0) {
+	else if (player.hasPerk(PerkLib.HistoryFortune)) {
 		outputText("You tell Jojo about how you're lucky and you've made quite a bit of money.  When the monk asks how, you shrug and tell him it's just plain luck.\n\n");
 	}
-	else if (player.findPerk(PerkLib.HistoryHealer) >= 0) {
+	else if (player.hasPerk(PerkLib.HistoryHealer)) {
 		outputText("You tell Jojo about how you spent a lot of your time at the side of Dende, the village healer. You talk about why you wanted to spend time with the older man as he looked after the sick and infirm and the skills you learned there. You let him know how you had just decided to train to become an official healer when you were announced to be the next champion.\n\n");
 	}
-	else if (player.findPerk(PerkLib.HistoryReligious) >= 0) {
+	else if (player.hasPerk(PerkLib.HistoryReligious)) {
 		outputText("You tell Jojo about how you spent most of your time in the temple. He seems to really like hearing about the differences in religious practices between the Celestial Lotus and your village. You tell him about the various clergy of your hometown and how Sister Esther took time to teach you about meditation.\n\n");
 	}
-	else if (player.findPerk(PerkLib.HistoryScholar) >= 0) {
+	else if (player.hasPerk(PerkLib.HistoryScholar)) {
 		outputText("You tell Jojo about your insatiable thirst for knowledge and how you spent a lot of time in school. You tell him the story about how you ‘convinced’ Mr. ");
 		if (EngineCore.silly()) outputText("Savin");
 		else outputText("Sellet");
 		outputText(" to let you read some of the rare books in his collection, skipping over how much begging and pleading was actually involved.\n\n");
 	}
-	else if (player.findPerk(PerkLib.HistoryScout) >= 0) {
+	else if (player.hasPerk(PerkLib.HistoryScout)) {
 		outputText("You tell Jojo about how you spent your time training with any bow you could find.  You tell him how you had planned to join the village hunters squad, but that became a pipe dream when it was announced that you were the next champion.\n\n");
 	}
-	else if (player.findPerk(PerkLib.HistorySlacker) >= 0) {
+	else if (player.hasPerk(PerkLib.HistorySlacker)) {
 		outputText("You tell Jojo about how you spent your time basically relaxing with your fiends.  You gloss over how big of a lazy bum you were with stories of the times you generally made a nuisance of yourself.  You don’t tell him that you’re pretty sure you were chosen as the next champion in order to be gotten rid of.\n\n");
 	}
-	else if (player.findPerk(PerkLib.HistorySlut) >= 0) {
+	else if (player.hasPerk(PerkLib.HistorySlut)) {
 		outputText("You tell Jojo about how you spent time... making friends.  Jojo looks at you weirdly and when you tell him you had a lot of friends....\n\n");
 		outputText("\"<i>That’s nice I guess [name] but didn’t you have aspirations beyond being, erm... popular?</i>\" he questions.\n\n");
 		outputText("You laugh and tell him that you were just really good and making friends, instead of the truth about how much of a slut you actually were.\n\n");
 	}
-	else if (player.findPerk(PerkLib.HistorySmith) >= 0) {
+	else if (player.hasPerk(PerkLib.HistorySmith)) {
 		outputText("You tell Jojo about how you spent your time training to become a blacksmith.  Not knowing much about smithing he asks questions about the things you learned and you answer them to the best of your ability.  To finish you describe the process of fitting armor in great detail and how you were going to start learning advanced techniques but were announced to be the next champion.\n\n");
 	}
-	else if (player.findPerk(PerkLib.HistoryTactician) >= 0) {
+	else if (player.hasPerk(PerkLib.HistoryTactician)) {
 		outputText("You tell Jojo about how you spent your time learning many different war tactics from a retired commander that lived in your village. Especially on making anyone under your following put more than 100% of their effort.\n\nJojo seems disinterested in the many violent tactics you have learned. Eventually, he changes the subject.\n\n");
 	}
-	else if (player.findPerk(PerkLib.HistoryWhore) >= 0) {
+	else if (player.hasPerk(PerkLib.HistoryWhore)) {
 		outputText("You tell Jojo about how you spent a lot of your time... making money.  When the naive little monk asks how, you just smile as you fondly remember the older whore, Poison, showing you the ropes and teaching the tricks of the trade.  Regardless of how it made people think of you, it was certainly good money.  In an attempt to hide some of the messier details of your past from the monk, you explain how you accepted... odd jobs for people, important work that not many others in the village would be willing to accept.  He seems confused but shrugs it off.\n\n");
 	}
 	else {
@@ -2583,7 +2583,7 @@ public function apparantlyJojoDOESlift():void
 	flags[kFLAGS.TIMES_TRAINED_WITH_JOJO]++;
 	trace(flags[kFLAGS.TIMES_TRAINED_WITH_JOJO]);
 	// {If everything is cool}
-	if (player.findPerk(PerkLib.ControlledBreath) < 0 && player.findPerk(PerkLib.CleansingPalm) < 0 && player.findPerk(PerkLib.Enlightened) < 0)
+	if (!player.hasPerk(PerkLib.ControlledBreath) && !player.hasPerk(PerkLib.CleansingPalm) && !player.hasPerk(PerkLib.Enlightened))
 	{
 		outputText("Jojo gives you a bright cheerful smile, \"<i>Alright [name]... let’s begin.</i>\"\n\n");
 		outputText("Jojo’s teaching style periodically switches between lecture and sparring.  When he explains a concept or a strike, he guides you through it before asking you to try it on him. He is patient but firm.  He doesn’t punish you when you make a mistake, instead, corrects you and asks you to try again.  He doesn’t allow you to give up, and his teaching style stops you from feeling frustrated.\n\n");
@@ -2604,7 +2604,7 @@ public function apparantlyJojoDOESlift():void
 		}
 	}
 	//{after the PC has gained the controlled breath perk}
-	else if (player.findPerk(PerkLib.ControlledBreath) >= 0 && player.findPerk(PerkLib.CleansingPalm) < 0 && player.findPerk(PerkLib.Enlightened) < 0)
+	else if (player.hasPerk(PerkLib.ControlledBreath) && !player.hasPerk(PerkLib.CleansingPalm) && !player.hasPerk(PerkLib.Enlightened))
 	{
 		outputText("Jojo gives you a big toothy grin, \"<i>Alright [name]... let’s begin.</i>\"\n\n");
 		outputText("Jojo switches up the way he is instructing you.  Largely due to your increased endurance, the two of you spend more time moving through forms together and practicing strikes and maneuvers.  When it comes time for a brief lecture, he breaks out one of the few scrolls he has from his order and tells you what he knows about the contents.\n\n");
@@ -2620,7 +2620,7 @@ public function apparantlyJojoDOESlift():void
 		}
 	}
 	//{after the PC has gained the Cleansing Palm attack}
-	else if (player.findPerk(PerkLib.ControlledBreath) >= 0 && player.findPerk(PerkLib.CleansingPalm) >= 0 && player.findPerk(PerkLib.Enlightened) < 0)
+	else if (player.hasPerk(PerkLib.ControlledBreath) && player.hasPerk(PerkLib.CleansingPalm) && !player.hasPerk(PerkLib.Enlightened))
 	{
 		outputText("Jojo gives you a big smile brimming with pride, \"<i>Alright [Name]... let’s begin.</i>\"\n\n");
 		outputText("Largely due to your increased endurance and improved technique the two of you spend more time sparring and dancing through the forms Jojo knows.  When it comes time for a brief lecture, Jojo pants as he sits with you, taking a minute to regain his breath.  Jojo’s lectures, instead of dealing with how to strike and defend oneself, deal with the nature of the soul.  You learn much about individuality, willpower and determination and after the lecture the two of you meditate on what you’ve learned for a few silent moments.\n\n");

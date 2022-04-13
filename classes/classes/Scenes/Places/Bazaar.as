@@ -171,7 +171,7 @@ private function theSlipperySqueeze():void {
 		//No scenes for Sara yet!
 		outputText("\"<i>I told you I'm not working until you give me a raise!  Do the damned massages yourself!</i>\"\n\nJoey blushes and apologies.  \"<i>I guess I'm the only one available for now.</i>\"\n\n");
 		outputText("The price list indicate it's 10 gems for a massage, though the gleefully illustrated 'oil' reminds you just what they plan to use on you.\n\n");
-		if(player.findPerk(PerkLib.Androgyny) < 0) {
+		if(!player.hasPerk(PerkLib.Androgyny)) {
 			outputText("There also appears to be an option for a special 'Androgyny Treatment' that costs 500 gems.  Joey catches you looking at it and mutters, \"<i>That treatment isn't fun like our massages.  It would unlock the full potential of your visage, allowing it to be as masculine or feminine as possible.</i>\"\n\n");
 			androgyny = joeyAndrogyny;
 		}
@@ -762,16 +762,16 @@ private function yesPutDatSockOnMe(target:int):void {
 
 	if(flags[kFLAGS.SOCK_HOLDING] == "cobalt") {
 		player.gems -= 250;
-		// if(player.findPerk(PerkLib.PhallicRestraint) < 0) player.createPerk(PerkLib.PhallicRestraint,0,0,0,0);
+		// if(!player.hasPerk(PerkLib.PhallicRestraint)) player.createPerk(PerkLib.PhallicRestraint,0,0,0,0);
 	}
 
 	if(flags[kFLAGS.SOCK_HOLDING] == "scarlet") {
-		//if(player.findPerk(PerkLib.PhallicPotential) < 0) player.createPerk(PerkLib.PhallicPotential,0,0,0,0);
+		//if(!player.hasPerk(PerkLib.PhallicPotential)) player.createPerk(PerkLib.PhallicPotential,0,0,0,0);
 		player.gems -= 250;
 	}
 
 	if(flags[kFLAGS.SOCK_HOLDING] == "viridian") {
-		if(player.findPerk(PerkLib.LustyRegeneration) < 0) {
+		if(!player.hasPerk(PerkLib.LustyRegeneration)) {
 			player.createPerk(PerkLib.LustyRegeneration,0,0,0,0);
 			player.gems -= 1000;
 		}
@@ -782,7 +782,7 @@ private function yesPutDatSockOnMe(target:int):void {
 
 	if(flags[kFLAGS.SOCK_HOLDING] == "cockring") {
 		player.gems -= 100;
-		if(player.findPerk(PerkLib.PentUp) < 0) player.createPerk(PerkLib.PentUp,10,0,0,0);
+		if(!player.hasPerk(PerkLib.PentUp)) player.createPerk(PerkLib.PentUp,10,0,0,0);
 		else player.addPerkValue(PerkLib.PentUp,1,5);
 	}
 

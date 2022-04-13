@@ -418,7 +418,7 @@ private function maraeStealLethicite(deliberate:Boolean = false):void {
 	spriteSelect(SpriteDb.s_marae);
 	clearOutput();
 	//(SUCCESS)
-	if ((player.spe > 35 && (rand(player.spe / 3 + 30) > 20) || player.spe > 35 && player.findPerk(PerkLib.Evade) >= 0 && rand(3) < 2) && !deliberate) {
+	if ((player.spe > 35 && (rand(player.spe / 3 + 30) > 20) || player.spe > 35 && player.hasPerk(PerkLib.Evade) && rand(3) < 2) && !deliberate) {
 		outputText("You dart to the side, diving into a roll that brings you up behind the tree.  You evade the gauntlet of grabbing tentacles that hang from the branches, snatch the large gem in both arms and run for the beach.  You do not hear the sounds of pursuit, only a disappointed sigh.");
 		player.createKeyItem("Marae's Lethicite", 3, 0, 0, 0);
 		doNext(camp.returnToCampUseOneHour);
@@ -451,7 +451,7 @@ private function maraeStealLethicite(deliberate:Boolean = false):void {
 			outputText("You feel warm, enclosed in comfort and pleasure.  Is this heaven?  No, your head is throbbing and your eyes are closed... you open them and discover you're still lying at the base of the tree.  That greedy tentacle is still locked around your [cock] pinning it in the throes of orgasm.  You watch thick bulges of cum pump up the tentacle, evidence of a truly garguantuan fluid output.  It goes on and on, and you realize the pleasure ought to drive you mad.\n\n");
 			outputText("Marae steps into your field of view, and pulls the tentacle free.  Your [cock] twitches pitifully, blasting a few massive loads onto your belly as your orgasm withers and dies from lack of stimulation.\n\n");
 			outputText("\"<i>Sorry about the pain, I had to tweak your body to make you a true breeder.  You can go now stud.  I expect the monsters ought to worry about you now, or they'll all have dripping twats and swollen bellies,</i>\" apologizes Marae.  She turns away from you, returning to the embrace of her tree's tentacles, sinking into debauchery.  You stagger into your boat and row away, oblivious to the stream to pre-cum dripping from your "+multiCockDescript()+".");
-			if (player.findPerk(PerkLib.MaraesGiftStud) < 0) {
+			if (!player.hasPerk(PerkLib.MaraesGiftStud)) {
 				outputText("<b>(New Perk Gained: Marae's Gift – Stud)</b>");
 				player.createPerk(PerkLib.MaraesGiftStud,0,0,0,0);
 			}
@@ -471,7 +471,7 @@ private function maraeStealLethicite(deliberate:Boolean = false):void {
 			outputText("Marae winks, \"<i>Sorry about making you look so pregnant my dear, it's a necessary part of the process.  All that sloshing seed is going to flow right into your tender little mortal ovaries, and remake them.  You'll be so fertile just looking at a hard cock could knock you up!</i>\"\n\n");
 			outputText("She giggles at your expression of horror, \"<i>No, not literally, but it won't take much to make you a mommy, and you'll find the gestation to be quite a bit... shorter.  Now get out of here before I change my mind and lock in an orgasm for the rest of your life.</i>\"\n\n");
 			outputText("You are dropped from the tree, and with little choice, you waddle to your boat, doing your best to cover up your violated " + vaginaDescript(0) + ".");
-			if (player.findPerk(PerkLib.MaraesGiftFertility) < 0) {
+			if (!player.hasPerk(PerkLib.MaraesGiftFertility)) {
 				outputText("<b>(New Perk Gained: Marae's Gift – Fertility)</b>");
 				player.createPerk(PerkLib.MaraesGiftFertility,0,0,0,0);
 			}
@@ -507,7 +507,7 @@ public function level2MaraeEncounter():void {
 		outputText("Welcome back, sneak-thief.  What kind of " + player.mf("gentleman","lady") + " is offered sex and then ransacks a god's soul?  Honestly, that right-right theeeeeree-oh yeah right there-is true depravity.</i>");
 	}
 	//(FAIL-STOLE)
-	else if(player.findPerk(PerkLib.MaraesGiftStud) >= 0 || player.findPerk(PerkLib.MaraesGiftFertility) >= 0) {
+	else if(player.hasPerk(PerkLib.MaraesGiftStud) || player.hasPerk(PerkLib.MaraesGiftFertility)) {
 		outputText("Hey there [name].  I didn't think I'd manage to snag you again so soon.  Are you enjoying my gifts?  I've been feeling kind of lonely without anyone around here to play with.</i>");
 	}
 	//(Left Like a Bitch)
@@ -517,7 +517,7 @@ public function level2MaraeEncounter():void {
 	outputText("\"\n\n");
 
 	outputText("Featureless white irises glare at you from the goddess' lust-lidded eyes.  She commands you, \"<i>Come here.  It's time for a ");
-	if(player.findPerk(PerkLib.MaraesGiftFertility) >= 0 || player.findPerk(PerkLib.MaraesGiftStud) >= 0) outputText("second ");
+	if(player.hasPerk(PerkLib.MaraesGiftFertility) || player.hasPerk(PerkLib.MaraesGiftStud)) outputText("second ");
 	outputText("dose of Marae's tender affections.</i>\"\n\n");
 	//Incase something breaks
 	doNext(playerMenu);
@@ -685,18 +685,18 @@ private function MaraePt2RoundIIIPrizes():void {
 		outputText("You awaken in the midst of a powerful orgasm.  Jism boils out of " + sMultiCockDesc() + ", pumping into the tight, sucking tentacle-hole.  Your eyes open wider, and your head clears while you rock your hips in bliss.  You're hanging upside down, suspended in the tentacle tree!  Marae isn't far from you, and she's busy deep-throating the fattest tentacle you've seen while another pair are working her openings.  She turns to you, aware of your wakefulness, and removes the oral intruder, though it manages to squirt a layer of spunk into her face in defiance.   The goddess smirks and slaps it, scolding it before she speaks, \"<i>");
 		//(FORK STUD vs NO STUD)
 		//(STUD)
-		if(player.findPerk(PerkLib.MaraesGiftStud) >= 0) outputText("Well, I see my gift is working out quite well for you, isn't it?  That's excellent.  It was an incomplete gift given by an incomplete goddess, but now that I've gotten my hands on you again, I was able to fix it.  You'll build up cum three times as fast as before, no more waiting for days just to build up a huge load for all the horny girls out there!</i>\"  ");
+		if(player.hasPerk(PerkLib.MaraesGiftStud)) outputText("Well, I see my gift is working out quite well for you, isn't it?  That's excellent.  It was an incomplete gift given by an incomplete goddess, but now that I've gotten my hands on you again, I was able to fix it.  You'll build up cum three times as fast as before, no more waiting for days just to build up a huge load for all the horny girls out there!</i>\"  ");
 		//(NON STUD)
 		else outputText("You might be a little sore.  I did some work to make sure you'll be a perfect breeding stud for me.  No tiny cum-shots for you!  You'll squirt out enough to knock up anyone, and I even touched up your seed so it'll get through most contraceptives.  Aren't I the nicest?</i>\"  ");
 		//(CONTINUED)
 		outputText("Her speech is broken by pauses for her to lick up the goo and swallow it, but still perfectly intelligible.  The entire time she was speaking, you were trapped in orgasm, milked by her tree with unthinking intensity.\n\n");
 
 		outputText("Breathless and panting, you give Marae a nod of thanks as her tentacles lower you back towards your equipment.  They plant you on shaky [feet] and uncoil slowly, stroking your body as they depart.  They must like you.  You get dressed in a hurry, but neither Marae nor the tree are paying you any attention any more.   The boat isn't far, and as you're climbing into it the goddess calls out her goodbyes, \"<i>Thanks for visiting and giving my tree so much of your sperm!  Once its fruit is ready I might come plant one at your camp!  Bye now, and don't forget to knock up all the prettiest girls!</i>\"\n\n");
-		if(player.findPerk(PerkLib.MaraesGiftStud) >= 0 && player.findPerk(PerkLib.MaraesGiftProfractory) < 0) {
+		if(player.hasPerk(PerkLib.MaraesGiftStud) && !player.hasPerk(PerkLib.MaraesGiftProfractory)) {
 			outputText("<b>(New Perk Gained: Marae's Gift – Profractory)</b>");
 			player.createPerk(PerkLib.MaraesGiftProfractory,0,0,0,0);
 		}
-		else if (player.findPerk(PerkLib.MaraesGiftStud) < 0) {
+		else if (!player.hasPerk(PerkLib.MaraesGiftStud)) {
 			outputText("<b>(New Perk Gained: Marae's Gift - Stud)</b>");
 			player.createPerk(PerkLib.MaraesGiftStud,0,0,0,0);
 		}
@@ -705,7 +705,7 @@ private function MaraePt2RoundIIIPrizes():void {
 	else if(player.gender == 2) {
 		outputText("You awaken in the midst of a powerful orgasm.   Jism is pumping into your clenching birth-canal, and you can feel it worming its way into your over-packed womb.  Your eyes open wider as the pleasure brings you to full wakefulness.  You're hanging upside down, suspended in the tentacle tree!  Marae isn't far from you, and she's busy deep-throating the fattest tentacle you've seen while another pair are working her openings.  She turns to you, aware of your wakefulness, and removes the oral intruder, though it manages to squirt a layer of spunk into her face in defiance.   The goddess smirks and slaps it, scolding it before she speaks, \"<i>");
 		//(BREEDER)
-		if(player.findPerk(PerkLib.MaraesGiftFertility) >= 0) {
+		if(player.hasPerk(PerkLib.MaraesGiftFertility)) {
 			outputText("Well, how do you like being my prize breeder?  Your womb is a thing of beauty.  Trust me, I remade it.  I was actually at a loss as to how to improve it, so I decided to take a peek at your other hole.  It was kind of dry, and I didn't want guys with multiple dicks to have to hump such a dry, uncomfortable asshole.  So now it's nice and wet for them!</i>\"\n\n");
 
 			outputText("Your eyes widen in shock.  You gasp, \"<i>You did WHAT!?</i>\"\n\n");
@@ -720,12 +720,12 @@ private function MaraePt2RoundIIIPrizes():void {
 
 		outputText("Breathless and panting, you give Marae a confused nod as her tentacles lower you back towards your equipment.  They plant you on shaky [feet] and uncoil slowly, stroking your body as they depart.  They must like you.  You get dressed in a hurry, but neither Marae nor the tree are paying you any attention any more.   The boat isn't far, and as you're climbing into it the goddess calls out her goodbyes, \"<i>Thanks for visiting and letting my little friend try out your pussy!  Once I get it to flower I might swing by and plant one for you at your camp!  Bye now, and don't forget to have lots of babies!</i>\"\n\n");
 
-		if(player.findPerk(PerkLib.MaraesGiftFertility) >= 0 && player.findPerk(PerkLib.MaraesGiftButtslut) < 0) {
+		if(player.hasPerk(PerkLib.MaraesGiftFertility) && !player.hasPerk(PerkLib.MaraesGiftButtslut)) {
 			outputText("<b>(New Perk Gained: Marae's Gift – Buttslut)</b>");
 			player.createPerk(PerkLib.MaraesGiftButtslut,0,0,0,0);
 			player.ass.analWetness = 2;
 		}
-		else if (player.findPerk(PerkLib.MaraesGiftFertility) < 0) {
+		else if (!player.hasPerk(PerkLib.MaraesGiftFertility)) {
 			outputText("<b>(New Perk Gained: Marae's Gift – Fertility)</b>");
 			player.createPerk(PerkLib.MaraesGiftFertility,0,0,0,0);
 		}
@@ -735,59 +735,59 @@ private function MaraePt2RoundIIIPrizes():void {
 		outputText("You awaken in the midst of a powerful orgasm.  Jism boils out of " + sMultiCockDesc() + ", pumping into the tight, sucking tentacle-hole.  Plant-spooge is pumping into your clenching birth-canal, and you can feel it worming its way into your over-packed womb.  Your eyes open wider, and your head clears while you rock your hips in bliss.  You're hanging upside down, suspended in the tentacle tree!  Marae isn't far from you, and she's busy deep-throating the fattest tentacle you've seen while another pair are working her openings.  She turns to you, aware of your wakefulness, and removes the oral intruder, though it manages to squirt a layer of spunk into her face in defiance.   The goddess smirks and slaps it, scolding it before she speaks, \"<i>");
 
 		//(HAZ NEITHER)
-		if(player.findPerk(PerkLib.MaraesGiftFertility) < 0 && player.findPerk(PerkLib.MaraesGiftStud) < 0) {
+		if(!player.hasPerk(PerkLib.MaraesGiftFertility) && !player.hasPerk(PerkLib.MaraesGiftStud)) {
 			//(RANDOM 1)
-			if(rand(2) == 0 && player.findPerk(PerkLib.MaraesGiftFertility) < 0) {
+			if(rand(2) == 0 && !player.hasPerk(PerkLib.MaraesGiftFertility)) {
 				outputText("You might feel a little sore.  I gave your little womb a makeover to make sure you'll be nice and fertile for all the boys out there.  You're going to serve me so well.  So many died fighting the demons, and you'll be popping out kids from every dick that gets anywhere near your little birth-hole.</i>\"  ");
 				player.createPerk(PerkLib.MaraesGiftFertility,0,0,0,0);
 
 			}
 			//(RANDOM 2)
-			else if (player.findPerk(PerkLib.MaraesGiftStud) < 0) {
+			else if (!player.hasPerk(PerkLib.MaraesGiftStud)) {
 				outputText("You might be a little sore.  I did some work to make sure you'll be a perfect breeding stud for me.  No tiny cum-shots for you!  You'll squirt out enough to knock up anyone, and I even touched up your seed so it'll get through most contraceptives.  Aren't I the nicest?</i>\"  ");
 				player.createPerk(PerkLib.MaraesGiftStud,0,0,0,0);
 			}
 			outputText("The entire time she was speaking, you were trapped in orgasm, milked by her tree with unthinking intensity.\n\n");
 
 			outputText("Breathless and panting, you give Marae a nod of thanks as her tentacles lower you back towards your equipment.  They plant you on shaky [feet] and uncoil slowly, stroking your body as they depart.  They must like you.  You get dressed in a hurry, but neither Marae nor the tree are paying you any attention any more.   The boat isn't far, and as you're climbing into it the goddess calls out her goodbyes, \"<i>Thanks for visiting and giving my tree so much of your sperm!  Once its fruit is ready I might come plant one at your camp!  Bye now, and don't forget to have lots of sex!</i>\"\n\n");
-			if (player.findPerk(PerkLib.MaraesGiftFertility) >= 0) {
+			if (player.hasPerk(PerkLib.MaraesGiftFertility)) {
 				outputText("<b>(New Perk Gained: Marae's Gift - Fertility)</b>");
 			}
-			else if (player.findPerk(PerkLib.MaraesGiftStud) >= 0) {
+			else if (player.hasPerk(PerkLib.MaraesGiftStud)) {
 				outputText("<b>New Perk Gained: Marae's Gift - Stud)</b>");
 			}
 		}
 			//Has both perks
-			else if (player.findPerk(PerkLib.MaraesGiftFertility) >= 0 && player.findPerk(PerkLib.MaraesGiftStud) >= 0) {
-				if (player.findPerk(PerkLib.MaraesGiftStud) >= 0 && player.findPerk(PerkLib.MaraesGiftProfractory) < 0) {
+			else if (player.hasPerk(PerkLib.MaraesGiftFertility) && player.hasPerk(PerkLib.MaraesGiftStud)) {
+				if (player.hasPerk(PerkLib.MaraesGiftStud) && !player.hasPerk(PerkLib.MaraesGiftProfractory)) {
 					outputText("<b>(New Perk Gained: Marae's Gift – Profractory)</b>");
 					player.createPerk(PerkLib.MaraesGiftProfractory, 0, 0, 0, 0);
 				}
-				else if (player.findPerk(PerkLib.MaraesGiftFertility) >= 0 && player.findPerk(PerkLib.MaraesGiftButtslut) < 0) {
+				else if (player.hasPerk(PerkLib.MaraesGiftFertility) && !player.hasPerk(PerkLib.MaraesGiftButtslut)) {
 					outputText("<b>(New Perk Gained: Marae's Gift – Buttslut)</b>");
 					player.createPerk(PerkLib.MaraesGiftButtslut, 0, 0, 0, 0);
 				}
 			}
 		//(HAZ BREEDER)
-			else if (player.findPerk(PerkLib.MaraesGiftFertility) >= 0) {
+			else if (player.hasPerk(PerkLib.MaraesGiftFertility)) {
 			outputText("I can't believe I didn't think to do this last time!  I mean, I spent so much time making you a great baby-birther that I didn't bother to make you a stud too!  I fixed that this time though – you'll be squirting huge loads that are sure to knock up any of the pretty girls out there.  It'll even punch its way through most birth-controlling herbs.  Aren't I nice?</i>\"  ");
 
 			outputText("The entire time she was speaking, you were trapped in orgasm, milked by her tree with unthinking intensity.\n\n");
 
 			outputText("Breathless and panting, you give Marae a nod of thanks as her tentacles lower you back towards your equipment.  They plant you on shaky [feet] and uncoil slowly, stroking your body as they depart.  They must like you.  You get dressed in a hurry, but neither Marae nor the tree are paying you any attention any more.   The boat isn't far, and as you're climbing into it the goddess calls out her goodbyes, \"<i>Thanks for visiting and giving my tree so much of your sperm!  Once its fruit is ready I might come plant one at your camp!  Bye now, and don't forget to have lots of sex!</i>\"\n\n");
-			if (player.findPerk(PerkLib.MaraesGiftStud) < 0) {
+			if (!player.hasPerk(PerkLib.MaraesGiftStud)) {
 				player.createPerk(PerkLib.MaraesGiftStud, 0, 0, 0, 0);
 				outputText("<b>(New Perk Gained: Marae's Gift - Stud)</b>");
 			}
 		}
 		//(HAZ STUD)
-			else if (player.findPerk(PerkLib.MaraesGiftStud) >= 0) {
+			else if (player.hasPerk(PerkLib.MaraesGiftStud)) {
 			outputText("I can't believe I didn't think of this last time!  I made you such a great stud that I didn't think to make you just as good at popping out your own kids!  Well I went ahead and fixed that while you were sleeping.  Your womb is nice and fertile, and you'll pop out kids a LOT quicker than before.  We'll be repopulating everything in Mareth in no time!  Just be sure to knock up the girls and let the boys fuck your pussy, okay?</i>\"  ");
 
 			outputText("The entire time she was speaking, you were trapped in orgasm, milked by her tree with unthinking intensity.\n\n");
 
 			outputText("Breathless and panting, you give Marae a nod of thanks as her tentacles lower you back towards your equipment.  They plant you on shaky [feet] and uncoil slowly, stroking your body as they depart.  They must like you.  You get dressed in a hurry, but neither Marae or the tree are paying you any attention any more.   The boat isn't far, and as you're climbing into it the goddess calls out her goodbyes, \"<i>Thanks for visiting and giving my tree so much of your sperm!  Once its fruit is ready I might come plant one at your camp!  Bye now, and don't forget to have lots of sex!</i>\"\n\n");
-			if (player.findPerk(PerkLib.MaraesGiftFertility) < 0) {
+			if (!player.hasPerk(PerkLib.MaraesGiftFertility)) {
 				player.createPerk(PerkLib.MaraesGiftFertility, 0, 0, 0, 0);
 				outputText("<b>(New Perk Gained: Marae's Gift - Fertility)</b>");
 			}

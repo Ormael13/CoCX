@@ -37,7 +37,7 @@ import classes.Scenes.Monsters.Goblin;
 				return;
 			}
 			//Dodge chance!
-			if((player.findPerk(PerkLib.Evade) >= 0 && rand(10) <= 3) || (rand(100) < player.spe/5)) {
+			if((player.hasPerk(PerkLib.Evade) && rand(10) <= 3) || (rand(100) < player.spe/5)) {
 				outputText("\nYou narrowly avoid the gush of alchemic fluids!\n");
 			}
 			else {
@@ -97,7 +97,7 @@ import classes.Scenes.Monsters.Goblin;
 			else {
 				outputText("Many of their shields hits you! ");
 				//Get hit
-				if (rand(100) < 40 && player.findPerk(PerkLib.Resolute) < 0) {
+				if (rand(100) < 40 && !player.hasPerk(PerkLib.Resolute)) {
 					outputText("The impact from the shields has left you with a concussion. <b>You are stunned.</b> ");
 					player.createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
 				}

@@ -20,26 +20,22 @@ import classes.Scenes.Areas.Mountain.Minotaur;
 import classes.Scenes.Dungeons.EbonLabyrinth.*;
 import classes.StatusEffects;
 import classes.display.SpriteDb;
-import classes.Scenes.Dungeons.DungeonAbstractContent;
-
-import classes.internals.SaveableState;
 
 public class EbonLabyrinth extends DungeonAbstractContent {
     //FLAGS:
     //EBON_LABYRINTH: 0 - not discovered, 1 - discovered, 50 / 150 / 300 / 150*x - AWARDED levels
-    //EBON_LABYRINTH_RECORD - max reached level. Used for achievements only.
+    //EBON_LABYRINTH_RECORD — max reached level. Used for achievements only.
 
     //Current room number
-    public var roomN:int = 1;
+    public var room:int = 1;
 
-    //Minimum enemy level MODIFIER. Depends on the current roomN.
-    // Enemies now scale evenly with the bosses (though bosses are always 5LVL higher). Otherwise, formulae would be messy.
+    //Minimum enemy level MODIFIER. Depends on the current room.
+    // Enemies now scale evenly with the bosses. Otherwise, formulae would be messy.
+    // Bosses are 5L stronger than regular enemies before them. This is intended.
     // It can be easily changed in constructors.
-    // Here is level MODIFIERS. Starting from 0. They are read by constructors (from  EL instance in DungeonEngine).
-    // Mods are used to calculate levels and stats.
-    public function get minLevelMod():int { return int(roomN / 50); }
-    // Current enemy level. Can be changed by the player
-    public var enemyLevelMod:int = 0;
+    // Here is level MODIFIERS. Starting from 0. They are read by constructors (from EL instance in DungeonEngine) to calculate levels and stats.
+    public var depth:int = 0; //controlled by the player
+    public function get enemyLevelMod():int { return int(room / 50) + depth; }
 
     //Encounter chance, base = 10. Increased each time for an empty room / boss, peaceful encounters, also after...defeats?
     // Reset after "peaceful" encounters (Atlach after TF), exit / bad-end,  after "regular" encounters.
@@ -86,7 +82,7 @@ public class EbonLabyrinth extends DungeonAbstractContent {
     
     public function EbonLabyrinth() {
         //init boss arrays.
-        bossPool = new Array();
+        bossPool = [];
         bossPool[1] = [
             [0, darkSlimeEmpressScene.encounter],
             [1, hydraScene.encounter],
@@ -120,8 +116,8 @@ public class EbonLabyrinth extends DungeonAbstractContent {
         dungeonLoc = DUNGEON_EBON_LABYRINTH; //one 'room' for all directions. Make things simpler!
         direction = DIR_NORTH;
         //reset all
-        roomN = 1;
-        enemyLevelMod = 0;
+        room = 1;
+        depth = 0;
         bossTracker = 0;
         playerMenu(); //calls checkRoom -> roomStatic
     }
@@ -144,11 +140,11 @@ public class EbonLabyrinth extends DungeonAbstractContent {
         addButton(6, "West",    navigateToRoomEL, DIR_WEST);
         addButton(8, "East",    navigateToRoomEL, DIR_EAST);
         if (dungeons.checkEbonLabyrinthClear()) {
-            if (enemyLevelMod > minLevelMod)
-                addButton(1, "Up", navigateToRoomEL, DIR_UP).hint("Return to higher floor (while you still can).");
+            if (depth > 0)
+                addButton(1, "Up", navigateToRoomEL, DIR_UP).hint("Return to higher floor.");
             else
                 addButtonDisabled(1, "Up", "Too late! Exit the dungeon, or descend deeper!");
-            addButton(13, "Down", navigateToRoomEL, DIR_DOWN).hint("Descend even deeper. The monsters will be tougher, but you'll be able to return (until the next boss, at least).");
+            addButton(13, "Down", navigateToRoomEL, DIR_DOWN).hint("Descend even deeper. The monsters will be tougher, but you'll always be able to climb back.");
         }
         if (model.time.hours >= 21 || model.time.hours < 6) addButton(0, "Sleep", doSleepEL).hint("Turn yourself in for the night. May result in monster ambush!");
         else addButtonDisabled(0, "Sleep", "It's still too early to go to sleep.");
@@ -171,8 +167,6 @@ public class EbonLabyrinth extends DungeonAbstractContent {
         clearOutput();
         //check achievements and highscore - so we can remove it from other places
         highScore();
-        //check enemy min level. Doing it HERE, not in 'navigate' - so every 50th encounter is calculated using old level, but enemies become stronger as soon as the player enters this menu
-        if (enemyLevelMod < minLevelMod) enemyLevelMod = minLevelMod;
         //text
         outputText("<b><u>Corridor</u></b>\n");
         if (!move) //called from player menu
@@ -195,24 +189,25 @@ public class EbonLabyrinth extends DungeonAbstractContent {
         else if (direction == DIR_UP)
             outputText("\n\n<b>The air here is cleaner. You hope that the monsters won't be too much of a problem anymore.</b>");
         //check if unlocked
-        if (roomN == dungeons.clearRoomEL()) {
+        if (room == dungeons.clearRoomEL()) {
             outputText("\n\nYou notice the familiar patterns in the corridors. Seems like there's nothing new to find here. Or not? The corridor slowly but inevitably leads you underground, and the monsters slowly become stronger.")
             outputText("\nInvestigating your surroundings, you notice a small ladder leading down. You're sure the room below is still a part of the labyrinth, but loud noices hint you that that part is much deeper. The ladder is durable though - you can always return back up... unless you go even deeper through these intertwined corridors.");
             outputText("\n\n<b>Labyrinth is (semi-)cleared. Endless mode unlocked!</b>");
         }
-        outputText("\n\nRooms Explored: " + roomN);
+        outputText("\n\nRooms explored: " + room);
+        outputText("\n\nCurrent depth : " + depth);
         setDungeonButtonsEL();
     }
 	
     //Navigation function. Increments the counter and checks the encounters.
     public function navigateToRoomEL(newDir:int):void {
-        ++roomN;
+        ++room;
         eachMinuteCount(15);
         //modify enemy level
         if (newDir == DIR_DOWN)
-            ++enemyLevelMod;
+            ++depth;
         else if (newDir == DIR_UP) //minLevel must be checked already
-            --enemyLevelMod;
+            --depth;
         //try to find the encounter
         if (selectEncounter()) {
             direction = newDir; //still save the direction.
@@ -224,8 +219,8 @@ public class EbonLabyrinth extends DungeonAbstractContent {
 
     //if a new highscore is set, checks achievements
     public function highScore():void {
-        if (flags[kFLAGS.EBON_LABYRINTH_RECORD] < roomN) {
-            flags[kFLAGS.EBON_LABYRINTH_RECORD] = roomN;
+        if (flags[kFLAGS.EBON_LABYRINTH_RECORD] < room) {
+            flags[kFLAGS.EBON_LABYRINTH_RECORD] = room;
             //achievements checking. Checks the flag only the
             switch(flags[kFLAGS.EBON_LABYRINTH_RECORD]) {
                 case 50:
@@ -279,13 +274,13 @@ public class EbonLabyrinth extends DungeonAbstractContent {
             fatRecovery += 10;
             hpRecovery += 10;
         }
-        if (player.findPerk(PerkLib.SpeedyRecovery) >= 0) fatRecovery += 5;
-        if (player.findPerk(PerkLib.SpeedyRecuperation) >= 0) fatRecovery += 10;
-        if (player.findPerk(PerkLib.SpeedyRejuvenation) >= 0) fatRecovery += 20;
-        if (player.findPerk(PerkLib.ControlledBreath) >= 0) fatRecovery *= 1.1;
+        if (player.hasPerk(PerkLib.SpeedyRecovery)) fatRecovery += 5;
+        if (player.hasPerk(PerkLib.SpeedyRecuperation)) fatRecovery += 10;
+        if (player.hasPerk(PerkLib.SpeedyRejuvenation)) fatRecovery += 20;
+        if (player.hasPerk(PerkLib.ControlledBreath)) fatRecovery *= 1.1;
         if (player.hasStatusEffect(StatusEffects.BathedInHotSpring)) fatRecovery *= 1.2;
-        if (player.findPerk(PerkLib.RecuperationSleep) >= 0) multiplier += 1;
-        if (player.findPerk(PerkLib.RejuvenationSleep) >= 0) multiplier += 2;
+        if (player.hasPerk(PerkLib.RecuperationSleep)) multiplier += 1;
+        if (player.hasPerk(PerkLib.RejuvenationSleep)) multiplier += 2;
         if (flags[kFLAGS.HUNGER_ENABLED] > 0) {
             if (player.hunger < 25) {
                 outputText("\nYou have difficulty sleeping as your stomach is growling loudly.\n");
@@ -315,8 +310,8 @@ public class EbonLabyrinth extends DungeonAbstractContent {
         fatigue( -(timeQ * fatRecovery * multiplier));
         model.time.hours += timeQ;
         SceneLib.combat.regeneration1(false);
-        if (player.findPerk(PerkLib.JobSoulCultivator) >= 0) SceneLib.combat.soulforceregeneration1(false);
-        if (player.findPerk(PerkLib.JobSorcerer) >= 0) SceneLib.combat.manaregeneration1(false);
+        if (player.hasPerk(PerkLib.JobSoulCultivator)) SceneLib.combat.soulforceregeneration1(false);
+        if (player.hasPerk(PerkLib.JobSorcerer)) SceneLib.combat.manaregeneration1(false);
         SceneLib.combat.wrathregeneration1(false);
         SceneLib.combat.fatigueRecovery1(false);
         if (model.time.hours > 23) {
@@ -333,27 +328,27 @@ public class EbonLabyrinth extends DungeonAbstractContent {
     //encounter selector. Returns true if started something, false if nothing (to fall back to 'static' room)
     public function selectEncounter():Boolean {
         //Every 50 levels - boss
-        if (roomN % 50 == 0) {
+        if (room % 50 == 0) {
             resetEncChance();
             //if not completed - select from tiers
             if (!dungeons.checkEbonLabyrinthClear())
-                bossSelector(roomN <= 150 ? 1 : 2);
+                bossSelector(room <= 150 ? 1 : 2);
             else//cleared - anything, but avoid making tier2 bosses too weak
                 bossSelector(enemyLevelMod < 3 ? 1 : 0);
             return true;
         }
         //Every 10 rooms (not boss) - chest
-        else if (roomN % 10 == 0) {
+        else if (room % 10 == 0) {
             incEncChance();
             encountersLootChest();
             return true;
         }
         //Special encounters
-        else if (roomN >= 49 && flags[kFLAGS.ALVINA_FOLLOWER] == 17) {
+        else if (room >= 49 && flags[kFLAGS.ALVINA_FOLLOWER] == 17) {
             chaosChimeraScene.encounter();
             return true;
         }
-        else if (roomN >= 295 && player.hasStatusEffect(StatusEffects.RathazulAprilFool) && player.statusEffectv3(StatusEffects.RathazulAprilFool) == 0) {
+        else if (room >= 295 && player.hasStatusEffect(StatusEffects.RathazulAprilFool) && player.statusEffectv3(StatusEffects.RathazulAprilFool) == 0) {
             incEncChance();
             encountersFountainOfPurity();
             return true;
@@ -399,7 +394,7 @@ public class EbonLabyrinth extends DungeonAbstractContent {
         if (choices.length == 0) {
             //reset the bits AND add them to the array
             for (var b:int = 0; b < bossPool[tier].length; ++b) { //[bit_num, function]
-                setBit(bossTracker, bossPool[tier][selected][0], false); //set the boss bit
+                setBit(bossTracker, bossPool[tier][b][0], false); //set the boss bit
                 choices.push(boss);
             }
         }
