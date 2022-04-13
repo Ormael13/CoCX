@@ -4934,7 +4934,7 @@ use namespace CoC;
 				grandchimeraCounter++;
 			if (dragonScore() >= 24)
 				grandchimeraCounter++;
-			if (jabberwockyScore() >= 20)
+			if (jabberwockyScore() >= 24)
 				grandchimeraCounter++;
 			if (wolfScore() >= 10 && hasFur() && coatColor == "glacial white")
 				grandchimeraCounter++;
