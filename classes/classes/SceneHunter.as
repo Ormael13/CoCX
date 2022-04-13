@@ -394,12 +394,12 @@ public class SceneHunter extends BaseContent {
         if (player.cor <= maxForPure)
             addButton(0, pureButton[0], restoreText, beforeText, pureButton[1], null, pureButton.length > 2 ? pureButton[2] : "");
         else
-            addButtonDisabled(0, pureButton[0], "You're too corrupted (>" + maxForPure + ") for it!");
+            addButtonDisabled(0, pureButton[0], "You're too corrupted for it! (req. corruption less than " + maxForPure + ")");
         //bad button
         if (player.cor >= minForCor)
             addButton(1, corButton[0], restoreText, beforeText, corButton[1], null, corButton.length > 2 ? corButton[2] : "");
         else
-            addButtonDisabled(1, corButton[0], "You're too pure (<" + minForCor + ") to even think of it");
+            addButtonDisabled(1, corButton[0], "You're too pure to even think of it! (req. corruption more than " + minForCor + ")");
     }
 
     //--------------------------------------------------------------------------------------------------
