@@ -563,71 +563,59 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 			clearOutput();
             phyllaSprite(true);
 			outputText("Sporting a painfully obvious tent, your body betrays its desire for sexual gratification and it causes Phylla to smile with interest.  \"<i>I-I didn't think I had that ability to... to...  I mean I'm not like you, so I thought...</i>\" she begins, but trails off as she takes in the rough, obscured shape given off by your bulge.");
-			var x:int = player.findCock(1, -1, phyllaCapacity());
-			if (x < 0) x = player.smallestCockIndex();
+			var x:int = player.biggestCockIndex();
 			//***Dick(s) size less than 36 inches:
-			if (player.cockArea(x) < 36) {
-				outputText("\n\nHer delicate face wears an expression of utmost curiosity.  She seems to be interested in your outline but unsure of what to do with it. As if she's never... then you recall her saying it's her first time; she's a virgin!");
-				//PC has more than one dick:
-				if (player.cockTotal() > 1) outputText("\n\nShe probably won't be able to handle ONE, let alone all of your [cocks]!");
-			}
-			//***Dick(s) size more than 36 inches, but less than 72 inches:
-			else if (player.cockArea(x) < 72) {
-				outputText("\n\nThe constant bobbing and twitching of your [cocks] is apparently not obvious enough to her that your trousers aren't built to accommodate the size of your loins.  You grimace in response as the fabric of your pants become painfully constrictive and unyielding. Snapping out of her inexperienced musings, the Ant Morph sees your obvious predicament.");
-				outputText("\n\nIn an effort to get your loins free she rushes in, all four of her arms working feverishly to help spring you free.  After a quick flurry of motions, your [cocks] snap out of your britches; the size of which apparently intimidates the Ant Morph, whose eyes go wide.  \"<i>H-Ho- How am I... wow...</i>\"");
-				//PC has more than one dick:
-				if (player.cockTotal() > 1) outputText("\n\nShe probably won't be able to handle ONE, let alone all of your [cocks]!");
-			}
-			//***Dick(s) size more than 72 inches:
-			else {
+            if (player.cockArea(x) < 72) {
+                if (player.cockArea(x) < 36) {
+                    outputText("\n\nHer delicate face wears an expression of utmost curiosity.  She seems to be interested in your outline but unsure of what to do with it. As if she's never... then you recall her saying it's her first time; she's a virgin!");
+                    //PC has more than one dick:
+                }
+                //***Dick(s) size more than 36 inches, but less than 72 inches:
+                else {
+                    outputText("\n\nThe constant bobbing and twitching of your [cocks] is apparently not obvious enough to her that your trousers aren't built to accommodate the size of your loins.  You grimace in response as the fabric of your pants become painfully constrictive and unyielding. Snapping out of her inexperienced musings, the Ant Morph sees your obvious predicament.");
+                    outputText("\n\nIn an effort to get your loins free she rushes in, all four of her arms working feverishly to help spring you free.  After a quick flurry of motions, your [cocks] snap out of your britches; the size of which apparently intimidates the Ant Morph, whose eyes go wide.  \"<i>H-Ho- How am I... wow...</i>\"");
+                    //PC has more than one dick:
+                    if (player.cockTotal() > 1) outputText("\n\nShe probably won't be able to handle ONE, let alone all of your [cocks]!");
+                }
+            } 
+			else { //***Dick(s) size more than 72 inches:
 				outputText("\n\nThe fabric of your pants simply cannot contain your [cocks] any longer as you frantically tug and yank at the button, trying to get your loins free before you injure yourself or ruin a good pair of trousers. Phylla's absent mindedness comes to an abrupt end when she sees your face flush with red and fury as you desperately work to free yourself.");
 				outputText("\n\n\"<i>I-I've never... is that... your...  I mean...</i>\"  You give her a quick, serious look as you continue to fidget with your trousers.  \"<i>Eeep! Let me help you!</i>\"");
-			}
-			outputText("\n\nToo late!  With a final groan and a rip, your pants give way to the force and power of your quickly hardening [cocks], sending a cursed button flying asunder from your waistline. The button connects with Phylla's forehead with a mighty 'thwack' and careens off her skull.  Fortunately for you, and her, she's more fixated on what's coming out of your pants rather than the pants themselves.");
-			//Dick Size huge:
-			if (player.cockArea(x) >= 72) {
-				outputText("\n\nDespite the early warning, [eachCock] bursts outward and slams into her shoulder blade. \"<i>Ahh~tk!</i>\" She clicks, more in surprise than pain.  She rubs at her bruised shoulder, somewhat shocked that someone could possess THAT kind of ability.  \"<i>Oops</i>\", you playfully apologize.  Phylla looks completely awestruck and doesn't seem hear you as her large eyes are fixated on your enormous member");
+                outputText("\n\nToo late!  With a final groan and a rip, your pants give way to the force and power of your quickly hardening [cocks], sending a cursed button flying asunder from your waistline. The button connects with Phylla's forehead with a mighty 'thwack' and careens off her skull.  Fortunately for you, and her, she's more fixated on what's coming out of your pants rather than the pants themselves.");
+				outputText("\n\nDespite the early warning, ");
+                //too big?
+                if (player.cockArea(x) > 100) outputText("[cock Biggest] swings downwards at her, causing her to unleash a surprised scream as she scrambles out of the way, narrowly avoiding being smashed by the brutish, fleshy cudgel as it swings downward in what arguably could have been a debilitating injury for Phylla.");
+                else outputText("[cock Biggest] bursts outward and slams into her shoulder blade. \"<i>Ahh~tk!</i>\" She clicks, more in surprise than pain.  She rubs at her bruised shoulder, somewhat shocked that someone could possess THAT kind of ability.  ");
+                //merge
+                outputText("\"<i>Oops</i>\", you playfully apologize.  Phylla looks completely awestruck and doesn't seem hear you as her large eyes are fixated on your enormous member");
 				if (player.cockTotal() > 1) outputText("s");
 				outputText(".");
-				//LOGIC FUNCTION
-				//Dick Size massive (first time male fuck, LF1): (It/They) swing downwards at her,
-				//causing her to unleash a surprised scream as she scrambles out of the way. Narrowly avoiding being smashed by the brutish, fleshy cudgel that is your loins as it swings downward in what arguably could have been a debilitating injury for Phylla.
+				//Dick Size massive (first time male fuck, LF1): 
 				//PC has more than one dick:
 				if (player.cockTotal() > 1) outputText("\n\nOverwhelmed by the sight of ONE of your members, Phylla arguably goes catatonic when she sees all of what your packing.  She probably won't be able to handle the one, let alone all of your [cocks]!");
 				//Tentacle dick check for Dick Size Huge and Massive
-				//One penis longer than 8 feet, or two or more dicks that are 5 feet long:
-				if (player.tentacleCocks() > 0 || player.stamenCocks() > 0) {
-					outputText("\n\nAt your whim, you command your tentacle dick");
+                if (player.countCocksWithType(CockTypesEnum.TENTACLE, 96, -1, "length") > 0 || player.countCocksWithType(CockTypesEnum.TENTACLE, 60, -1, "length") > 1) {
+                    outputText("\n\nAt your whim, you command your tentacle dick");
 					if (player.tentacleCocks() > 1 || player.stamenCocks() > 1) outputText("s");
 					outputText(" forward and wrap them tightly around Phylla, taking her hand and tugging her in close.");
-				}
-				//(****See these two options? One is where your dick isn't huge, one is where it is huge.****)
-				outputText("\n\nOpting to josh her a bit, you release your cock");
-				if (player.cockTotal() > 1) outputText("s");
-				outputText(" from around her and hang it in front of her face, grinning your antics on your face as Phylla stares at ");
-				if (player.cockTotal() == 1) outputText("it");
-				else outputText("them");
-				outputText(", slightly intimidated.");
-
+                    outputText("\n\nOpting to josh her a bit, you release your cock");
+                    if (player.cockTotal() > 1) outputText("s");
+                    outputText(" from around her and hang it in front of her face, grinning your antics on your face as Phylla stares at ");
+                    if (player.cockTotal() == 1) outputText("it");
+                    else outputText("them");
+                    outputText(", slightly intimidated.");
+                }
 				outputText("\n\n\"<i>W-What is that?  I m-mean... don't tell me you're THAT big!  There's gotta be something for you to... \"put\" in me, right?...</i>\"  You see her peek around your cock");
 				if (player.cockTotal() > 1) outputText("s");
 				outputText(" looking for something more sizeable.  You can tell Phylla is more scared of what might happen to her than what might happen to you.");
-
-				//END DICK CHECK
 			}
 			menu();
-			//If PC has dick(s) that will fit: Jump to - Regular Male Scene Continuation
-			if (player.cockArea(x) <= phyllaCapacity()) {
-				addButton(0, "Next", malePhyllaContinuation,x);
-			}
-			//If PC has dick(s) that won't fit: Jump to - Cunnilingus Scene Continuation
-			else {
-				addButton(0, "Next", cuntmuffinLingusPhyllaDickBig);
-			}
+            sceneHunter.selectFitNofit(malePhyllaContinuation, cuntmuffinLingusPhyllaDickBig);
 		}
 
-		private function malePhyllaContinuation(x:int):void
+		private function malePhyllaContinuation():void
 		{
+            var x:int = cockThatFits(phyllaCapacity);
 			clearOutput();
 			outputText("Phylla stares down at your [cocks] and starts nervously rubbing her hands together.  \"<i>It's my first time... I mean, I hope it isn't going to be bad for you...</i>\" she says, before trailing off; uncertain of her sexual prowess.");
 			//Corruption less than 75:
@@ -657,9 +645,6 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 			outputText("\n\nTrembling ever so slightly, her dripping ");
 			if (flags[kFLAGS.PHYLLA_EGG_LAYING] > 0) outputText("nipples and ");
 			outputText("wet vagina betray her timidness.  You move up along the bedding and brush your [skin.type] against her own tender flesh.  Finally, you come to rest in the perfect position for penetration, Phylla looking over her shoulder at you with longing eyes and eager lips.  As you slide your tongue inside her mouth, you feel her twitch at the foreign sensation.  Closing her eyes, Phylla instantly melts like butter as your tongue finds hers of its own volition; clearly a turn for the better for you.  Phylla finally relaxes her legs and spreads them apart; the foreign sense of humid heat from her genitals registering as it warms your nethers.");
-			//(Radar note:
-			//Because Phylla is a virgin, I wouldn't go past 2 inches total width for two dick penetration; you're taking her virginity, so that will be painful enough.
-			//@FEN: Please note the following coding calls for two dicks that are less than two inches in total width.)
 			outputText("\n\nSimply dragging your " + cockDescript(x) + " along the entrance her of moist pussy causes her to moan and wiggle under you. Parting her pink little lips with the head of your cock, you finally hit the sweet spot for penetration. With ");
 			if (player.cor < 75) outputText("a gentle amount of force, ");
 			else outputText("an uncaring, brutish amount of force, ");
@@ -682,8 +667,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 		private function phyllaFirstTimePureBabiesFuckEnding():void
 		{
 			clearOutput();
-			var x:int = player.findCock(1, -1, phyllaCapacity());
-			if (x < 0) x = player.smallestCockIndex();
+            var x:int = cockThatFits(phyllaCapacity);
 			outputText("For a while, you allow Phylla to slowly adapt to your presence inside of her and the stretching of her vaginal walls; something she reacts to with soft moans of pleasurable appreciation.  She wears her obvious discomfort at being forcefully stretched by your " + cockDescript(x) + ", but you see she can hardly complain as her body cradles yours in an attempt to keep you where you are.  Once you feel she's comfortable you start slowly pumping away at her, gradually building your own rut.");
 			outputText("\n\nYou feel the smaller set of her hands move between your [legs] and start to fondle your ");
 			if (player.balls > 0) outputText("[balls]");
@@ -719,26 +703,14 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 					//End of persuasion failure
 				}
 				//Persuasion success:
-				{
-					outputText("\n\nWith some hesitation and consideration, Phylla ponders for a bit on the idea of being a brood mother in more than one way.  With a shy smile, Phylla reluctantly agrees to house both of your children.  \"<i>H-How will we do this?  I mean, I've never seen or heard of anything mating with a Drider before... M-my eggs come out of my abdo~ ...</i>\"  She inquires.");
-					outputText("\n\nYou raise a finger to her lips and tell her to lie down against the bed and to relax.  You know exactly where her eggs come out of.  The image of Phylla dropping eggs out of both her vagina and her abdomen makes you want this all the more.");
-					//If PC corruption over X:
-					if (player.cor >= 75) outputText("  Little does poor Phylla know, you're going to just use her as a baby maker to ease the tension of your own sacks.");
-					outputText("\n\nIn uncertain anticipation, Phylla heeds your directions and lies down, her back on the bed with her abdomen in the air.  You help pose her in the right position; angling her pussy towards you as you clamber along the bed. Coming to rest on top of Phylla, you take her soft face in your hands and kiss her, firmly holding her against you as you work your ovipositor against her vagina.");
-					outputText("\n\nShe compresses her arms around you as you work your way into her and begin to release your lubricating fluids.  Phylla moans into your mouth as the secretions tickle her pleasure centers.  Through the link, you tell her to get ready as you feel the first of many eggs working their way down your ovipositor and into her pussy.");
-					outputText("\n\nShe squints and braces for the inevitable egg forcing its way into her, gasping as the oval mass finally makes contact and works its way into her.  You can feel the egg as it makes it way into Phylla, stretching her pussy out to accommodate future deposits as the frontrunner hits her cervix, and manages it to make its way inside.");
-					outputText("\n\n\"<i>UGH! It hurts... a little~ feels so strange... I-mea~ good!</i>\" she cries out.");
-					outputText("\n\nYou comfort her while telling her that you have a few more on the way; something that causes Phylla to beam with pride at the thought of being filled with so much new life that she will eventually birth.  Egg after egg slides into Phylla, causing her stomach to bulge bigger and bigger with your brood as you stuff more into her.  At last, the final egg is laid inside of Phylla, and with a loud pop, you  retract your ovipositor from her love hole;  you know it'll recover in time.  Phylla rubs her belly and gleams with delight, filled with her lover's future children that will help the colony to grow strong.");
-					player.dumpEggs();
-					if (!pregnancy.isPregnant) pregnancy.knockUpForce(PregnancyStore.PREGNANCY_DRIDER_EGGS, 8 * 24); //Supposed to be eight days, not eight hours
-				}
+				else ovipositionScene();
 				// (End Drider Continuation)
 			}
 			outputText("\n\nThe link fades not long after you both have settled down, and Phylla hums her approval as she kisses your neck lovingly.  You smile back, but never knew how strong one's maternal instincts could really be.  Hearing primal drives that are not your own was almost deafening.  Yet, you can't help but feel an appreciation for such an understanding that has been shown to you.");
 			//PC has other waifus:
 			if (camp.loversCount() > 1) outputText("\n\nSo this is what your other lovers must feel.");
 			outputText("\n\nYou drift off to sleep not long after, while Phylla demonstrates her appreciation for the intimacy you two just shared, kissing your body and rubbing you sensually as you doze off.");
-			player.sexReward("Default","Dick",true,false);
+			player.sexReward("Default","Dick");
 			menu();
 			addButton(0, "Next", waifuQuestOver);
 		}
@@ -764,7 +736,6 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 			outputText("\n\nPoor Phylla can only grasp at her cushions as she struggles to maintain her comfort.  The brutish drilling of her pussy forces her to lift her rear further and further towards an acute angle. Try as she might, her efforts are no match for your barbaric tactics as you pound her love hole into oblivion.  All her attempts at maintaining a comfortable position quickly evaporate, and she resigns herself to being roughly taken from behind.  You watch as she buries her head into her cushions to muffle her howls of painful ecstasy.");
 			//PC has more than one cock that is suitable:
 			var y:int = player.cockThatFits2(phyllaCapacity());
-			if (player.cockTotal() < 2) y = -1;
 			if (y >= 0) {
 				outputText("\n\nIntent on increasing your own pleasures, you decide to work ");
 				if (player.cockTotal() > 2) outputText("one of your free cocks");
@@ -776,7 +747,9 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 				if (player.biggestCockArea() > phyllaCapacity()) {
 					outputText("\n\nSeeing as how her hands aren't busy and she's certainly not using that mouth for anything useful; you reach down and guide one of your cocks so it presses against her down turned stomach.  You tell her to press it between her breasts and start sucking at the head.  Though this doesn't stop you from pounding away at her backside. She quickly grabs your [cock biggest] with her smaller hands and guides for a better position between her breasts.  She uses her upper hands to press her breasts together.  You immediately feel the effect of her B-Cups as with each thrust they warm the shaft of your long cock.");
 				}
+                else sceneHunter.print("Failed check: have one non-fitting dick");
 			}
+            else sceneHunter.print("Failed check: fitting second cock");
 			outputText("\n\nYou maintain your vice-like pressure on her abdomen as you press onward, forcing your member");
 			if (y >= 0) outputText("s");
 			outputText(" deep within her.  You further your power and control over Phylla, in a way that seems to convey to Phylla to let it all out, don't hold back, to have her completely resign herself to you.  The unconscious move unleashes a loud series of lust-filled gibberish from Phylla.  You feel her body fold to your will as she abandons her shyness and restraint, mashing her rump against you with the intent to rut along with you like two primal animals intertwined in savage mating.  You can't see it, but you taste her hunger to be bred; you can feel and visualize her attractive, beet red little face wearing her passion as she clenches her teeth, your instincts and consciousness completely taking her over and commanding her to hump and fuck your cock until she gets what her cunt hungers for.");
@@ -797,7 +770,7 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 			if (silly()) outputText("\n\nYou remember an old saying: \"<i>Those who fuck monsters are doomed to fuck monsters</i>\".  No, that's not right.  \"<i>Those who are monsters are doomed to fuck monsters?</i>\"  No, that's not it either.  Oh well.  You're sure it has something to do with something fucking something else.  A good analogy for your time here in Mareth.");
 			//Corruption is greater than 80:
 			outputText("\n\nPerhaps corrupting her is the best route; look how you turned out! You could live with that...!  Giggling, you smirk at the thought of Phylla's mother; how she was right about you the whole time.  The thought of what kinds of corruption you can inflict on Phylla fill your mind until you finally drift off, holding your unsuspecting victim in your arms.");
-			player.sexReward("Default","Dick",true,false);
+			player.sexReward("Default","Dick");
 			dynStats("cor", 1);
 			menu();
 			addButton(0, "Next", waifuQuestOver);
@@ -2822,40 +2795,45 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
 				if (pregnancy.isPregnant) outputText("\n\n\"<i>I just can't hold anything else inside me.  I'm sorry!  Please don't be mad... I mean, I will!  Just a-after... this batch.</i>\"");
 				//Else player has not impregnated:
 				else outputText("\n\n\"<i>I mean... I just, don't feel comfortable with that right now. Maybe later, though.</i>\"");
-				doNext(camp.returnToCampUseOneHour);
+				doNext(phyllaSexMenu);
 			}
 			//Persuasion Success
 			else {
-				outputText("\n\nWith some hesitation and consideration, Phylla ponders the idea of being a brood-mother in more than one way for a bit.  With a shy smile, Phylla reluctantly agrees to house both of your children.");
-				//First Time:
-				if (flags[kFLAGS.TIMES_EGG_IMPREGNATING_PHYLLA] == 0) {
-					outputText("\n\n\"<i>H-How will we do this?</i>\" She inquires. \"<i>I mean, I've never seen or heard of anything mating with a Drider before... M-my eggs come out of my abdo~</i>\"");
-					outputText("\n\nYou raise a finger to her lips and tell her to lie down against the bed and to relax.  You know exactly where her eggs come out of.  The image of Phylla dropping eggs out of both her vagina and her abdomen makes you want this all the more.  Though the link you send this image to her, and feel her well up with maternal pride.  In uncertain anticipation, Phylla heeds your directions and lies down, her back on the bed with her abdomen curled in the air.");
-				}
-				//Subsequent Times:
-				else {
-					outputText("\n\nPhylla quickly gets into position, although at first she looks uncertain of if what's she done is correct.");
-					//If PC corruption over 75:
-					if (player.cor < 75) outputText("  Little does poor Phylla know, you're going to just use her as a baby maker to ease the tension of your own sacks.");
-				}
-				outputText("\n\nYou help pose her in the right position; angling her pussy towards you as you clamber along the bed.  Finally coming to rest on top of Phylla, you take her soft face in your hands and kiss her. You hold her body firmly under yours as you work your ovipositor against her vagina.");
-
-				outputText("\n\nHer tongue probes your mouth seeking your tongue as Phylla compresses her arms around you. Knowing she's ready, you work your way into her and begin to release your lubricating fluids.  Phylla moans into your mouth as the secretions tickle her pleasure centers.  Through the link, you tell her to get ready; the ovipositor bottoming out deep in her womb, feeling the first of many eggs working their way down your perverted appendage.");
-				outputText("\n\nShe squints and braces for the inevitable egg forcing its way into her.  She breaks your long kiss; gasping as the oval mass finally makes contact and works its way into her.  You can feel your unborn children's shell as it makes it way into Phylla, stretching her cunt out to accommodate future deposits.  As the frontrunner hits her cervix she manages a small moan of discomfort.");
-				outputText("\n\n\"<i>UGH!  Its hurts... a little~ feels so strange... I-mea~ good!  Give me more!  Please!</i>\" She cries out, her maternal instincts kicking in as her desires to bear many young overtake her.  You comfort her while telling her that you have a few more on the way; something that causes Phylla's eyes to roll up in her head.  You feel the thoughts of being filled with so much new life that she will eventually birth to overwhelm her senses.");
-				outputText("\n\nEgg after egg slides into Phylla, causing her to moan louder and louder with each egg. Her stomach quickly starts to bulge bigger and bigger with your brood as you stuff more into her.");
-
-				//If PC corruption over 75:
-				if (player.cor >= 75) outputText("\n\nYou can feel her ask you to stop though the link as her body starts to pull away from you, stating that she's nice and full and that any more could hurt her. Not yet! You know she can fit at LEAST three or four more! You KNOW she can hold them safely, she just needs to \"<i>man up</i>\". Using your numerous legs and arms you pin Phylla to the ground. Completely stopping her pulling away. Phylla screams in pleasure or pain, you can't really tell but you continue to deposit your eggs into her.");
-				outputText("\n\nAt last, the final egg laid inside of Phylla, you retract your ovipositor from her love hole; it'll recover in time. Phylla rubs her belly and gleams with delight, filled with her lover's future children that will help the colony to grow strong.");
-				//PC Drider eggs will take 8 days regardless of where she houses them to hatch. (3
-				//through 8 children per pregnancy)
-				if (!pregnancy.isPregnant) pregnancy.knockUpForce(PregnancyStore.PREGNANCY_DRIDER_EGGS, 8 * 24); //Supposed to be eight days, not eight hours
-				flags[kFLAGS.TIMES_EGG_IMPREGNATING_PHYLLA]++;
-				player.sexReward("Default","Default",true,false);
-				player.dumpEggs();
+                ovipositionScene();
+                player.sexReward("Default","Default",true,false);
+			    doNext(camp.returnToCampUseOneHour);
 			}
-			doNext(camp.returnToCampUseOneHour);
 		}
+
+        private function ovipositionScene():void {
+            outputText("\n\nWith some hesitation and consideration, Phylla ponders the idea of being a brood-mother in more than one way for a bit.  With a shy smile, Phylla reluctantly agrees to house both of your children.");
+            //First Time:
+            if (flags[kFLAGS.TIMES_EGG_IMPREGNATING_PHYLLA] == 0) {
+                outputText("\n\n\"<i>H-How will we do this?</i>\" She inquires. \"<i>I mean, I've never seen or heard of anything mating with a Drider before... M-my eggs come out of my abdo~</i>\"");
+                outputText("\n\nYou raise a finger to her lips and tell her to lie down against the bed and to relax.  You know exactly where her eggs come out of.  The image of Phylla dropping eggs out of both her vagina and her abdomen makes you want this all the more.  Though the link you send this image to her, and feel her well up with maternal pride.  In uncertain anticipation, Phylla heeds your directions and lies down, her back on the bed with her abdomen curled in the air.");
+            }
+            //Subsequent Times:
+            else {
+                outputText("\n\nPhylla quickly gets into position, although at first she looks uncertain of if what's she done is correct.");
+                //If PC corruption over 75:
+                if (player.cor < 75) outputText("  Little does poor Phylla know, you're going to just use her as a baby maker to ease the tension of your own sacks.");
+            }
+            outputText("\n\nIn uncertain anticipation, Phylla heeds your directions and lies down, her back on the bed with her abdomen in the air.  You help pose her in the right position; angling her pussy towards you as you clamber along the bed. Finally coming to rest on top of Phylla, you take her soft face in your hands and kiss her, firmly holding her against you as you work your ovipositor against her vagina.");
+
+            outputText("\n\nHer tongue probes your mouth seeking your tongue as Phylla compresses her arms around you. Knowing she's ready, you work your way into her and begin to release your lubricating fluids.  Phylla moans into your mouth as the secretions tickle her pleasure centers.  Through the link, you tell her to get ready; the ovipositor bottoming out deep in her womb, feeling the first of many eggs working their way down your ovipositor and into her pussy.");
+            outputText("\n\nShe squints and braces for the inevitable egg forcing its way into her.  She breaks your long kiss; gasping as the oval mass finally makes contact and works its way into her.  You can feel the egg as it makes it way into Phylla, stretching her cunt out to accommodate future deposits.  As the frontrunner hits her cervix and manages it to make its way inside, she manages a small moan of discomfort.");
+            outputText("\n\n\"<i>UGH!  Its hurts... a little~ feels so strange... I-mea~ good!  Give me more!  Please!</i>\" She cries out, her maternal instincts kicking in as her desires to bear many young overtake her.");
+            outputText("\n\nYou comfort her while telling her that you have a few more on the way; something that causes Phylla's eyes to roll up in her head.  You feel the thoughts of being filled with so much new life that she will eventually birth to overwhelm her senses.");
+            outputText("\n\nEgg after egg slides into Phylla, causing her to moan louder and louder with each egg. Her stomach quickly starts to bulge bigger and bigger with your brood as you stuff more into her.");
+
+            //If PC corruption over 75:
+            if (player.cor >= 75) outputText("\n\nYou can feel her ask you to stop though the link as her body starts to pull away from you, stating that she's nice and full and that any more could hurt her. Not yet! You know she can fit at LEAST three or four more! You KNOW she can hold them safely, she just needs to \"<i>man up</i>\". Using your numerous legs and arms you pin Phylla to the ground. Completely stopping her pulling away. Phylla screams in pleasure or pain, you can't really tell but you continue to deposit your eggs into her.");
+            outputText("\n\nAt last, the final egg laid inside of Phylla, you retract your ovipositor from her love hole; it'll recover in time. Phylla rubs her belly and gleams with delight, filled with her lover's future children that will help the colony to grow strong.");
+            //PC Drider eggs will take 8 days regardless of where she houses them to hatch. (3
+            //through 8 children per pregnancy)
+            if (!pregnancy.isPregnant) pregnancy.knockUpForce(PregnancyStore.PREGNANCY_DRIDER_EGGS, 8 * 24); //Supposed to be eight days, not eight hours
+            flags[kFLAGS.TIMES_EGG_IMPREGNATING_PHYLLA]++;
+            player.dumpEggs();
+        }
 	}
 }
