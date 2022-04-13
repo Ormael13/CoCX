@@ -15843,9 +15843,23 @@ public final class Mutations extends MutationsHelper {
             changes++;
         }
         //-Jabby Neck
-        if (player.antennae != Antennae.JABBERWOCKY && changeLimit > 0) {
+        if (player.antennae.type != Antennae.JABBERWOCKY && changeLimit > 0) {
             outputText("[pg]");
             transformations.AntennaeJabberwocky.applyEffect();
+            changes++;
+        }
+        //Make sure pc is at least partialscaled
+        if (!player.hasCoatOfType(Skin.SCALES) && changeLimit > 0) {
+            outputText("[pg]");
+            transformations.SkinScales(Skin.COVERAGE_LOW, {colors: "magenta"}).applyEffect();
+            player.coatColor2 = "purplish black";
+            changes++;
+        }
+        // Scale color
+        if (!InCollection(player.coatColor, ("magenta")) && changeLimit > 0) {
+            outputText("[pg]");
+            player.coatColor = "magenta";
+            player.coatColor2 = "purplish black";
             changes++;
         }
         //-Jabby Arms
@@ -15865,6 +15879,23 @@ public final class Mutations extends MutationsHelper {
             outputText("[pg]");
             transformations.WingsFeyDragon.applyEffect();
             changes++;
+        }
+        // Hair color
+        if (!InCollection(player.hairColor, ("purplish-pink")) && changeLimit > 0) {
+            outputText("[pg]");
+            outputText("[pg]Your hair suddenly tingles as purplish-pink colored strands begins to cover your entire skalp and before long all of them are of same dark color.");
+            player.hairColorOnly = "purplish-pink";
+            changes++;
+        }
+        //Skin color
+        if (player.skin.base.color != "caramel" && changeLimit > 0) {
+            changes++;
+            outputText("[pg]It takes a while for you to notice, but <b>");
+            if (player.hasFur()) outputText("the skin under your [skin coat.color] " + player.skinDesc);
+            else outputText("your " + player.skinDesc);
+            outputText(" has changed to become ");
+            player.skin.base.color = "caramel";
+            outputText(player.skinTone + " colored.</b>");
         }
         flags[kFLAGS.TIMES_TRANSFORMED] += changes;
     }
