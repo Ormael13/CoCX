@@ -112,40 +112,28 @@ import classes.GlobalFlags.kFLAGS;
 			player.destroyItems(consumables.CHILLYP, 3);
 			outputText("You place the peppers in one of the bowls, and wait for a bit. A noise distracts you for half a moment, but when you turn back, the peppers are gone, ");
 			switch(rand(10)) {
-				case 0:
-					outputText("and nothing for your troubles. How disappointing.");
-					break;
 				case 1:
 					outputText("in the other bowl, a small, glowing syringe.");
 					inventory.takeItem(useables.E_ICHOR, westSection);
-					break;
-				case 2:
-					outputText("and nothing for your troubles. How disappointing.");
 					break;
 				case 3:
 					outputText("and a bottle of Nocello sitting in front of the statue.");
 					inventory.takeItem(consumables.NOCELIQ, westSection);
 					break;
-				case 4:
-					outputText("and nothing for your troubles. How disappointing.");
-					break;
 				case 5:
 					outputText("and a single Storm Seed rests in the other bowl.");
 					inventory.takeItem(consumables.SRMSEED, westSection);
-					break;
-				case 6:
-					outputText("and nothing for your troubles. How disappointing.");
 					break;
 				case 7:
 					outputText("replaced by a familiar looking bottle of Enigmanium.");
 					inventory.takeItem(consumables.ENIGMANIUM, westSection);
 					break;
-				case 8:
-					outputText("and nothing for your troubles. How disappointing.");
-					break;
 				case 9:
 					outputText("instead, a bottle of Infernal Wine sits before the statue.");
 					inventory.takeItem(consumables.INFWINE, westSection);
+					break;
+				default:
+					outputText("and nothing for your troubles. How disappointing.");
 					break;
 			}
 			outputText("\n\n")
