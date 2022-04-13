@@ -20,10 +20,10 @@ public class IMutationsLib
 		}
 		//Example -v
 		//This one does nothing, and is simply to showcase.
-		public static const MutationsTemplateIM:PerkType = new MutationTemplate().withBuffs(MutationTemplate.perkBuffs());
 		//Mutations start here.
 		public static const KitsuneThyroidGlandIM:PerkType = new KitsuneThyroidGlandMutation().withBuffs(KitsuneThyroidGlandMutation.perkBuffs());
 		public static const ArachnidBookLungIM:PerkType = new ArachnidBookLungMutation().withBuffs(ArachnidBookLungMutation.perkBuffs())
+		public static const MutationsTemplateIM:PerkType = new MutationTemplate().withBuffs(MutationTemplate.perkBuffs());
 
 		/**
 		*Returns an array of arrays of mutation body parts in PerkType type.

@@ -6,6 +6,7 @@ package classes.Scenes
 {
 import classes.*;
 import classes.BodyParts.*;
+import classes.IMutations.IMutationsLib;
 import classes.Scenes.NPCs.DivaScene;
 
 import classes.GlobalFlags.kFLAGS;
@@ -276,8 +277,28 @@ public class Soulforce extends BaseContent
 		menuItems.push("Remove Shard", cheatRemoveShard, "Remove 1 radiant shard");
 		menuItems.push("ZenjiQ", ZenjiQ, "Zenji Expac 2 debug tool");
 		menuItems.push("Fairy", FairyTest, "FairyTest");
+		//menuItems.push("Mutationtest", mutation3, "MutationTest")
 		//menuItems.push("Mutation test reset", resetMutations, "Reset Mutations");
 		menuGen(menuItems, page, accessSoulforceMenu);
+	}
+
+	public function mutation3():void{
+		clearOutput();
+		outputText(""+IMutationsLib.KitsuneThyroidGlandIM.name + " Perk Tier: " + player.perkv1(IMutationsLib.KitsuneThyroidGlandIM))
+		if (IMutationsLib.KitsuneThyroidGlandIM.available(player)){
+			addButton(0,IMutationsLib.KitsuneThyroidGlandIM.name(), getmutation)
+		}
+
+		function getmutation():void{
+			if (!player.hasPerk(IMutationsLib.KitsuneThyroidGlandIM)){
+				player.createPerk(IMutationsLib.KitsuneThyroidGlandIM, 1,0,0,0);
+			}
+			else{
+				player.setPerkValue(IMutationsLib.KitsuneThyroidGlandIM,1,player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) + 1);
+			}
+			outputText("Done");
+		}
+		doNext(SoulforceCheats1)
 	}
 
 	public function belisatest2():void{

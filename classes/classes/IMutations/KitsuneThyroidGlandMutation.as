@@ -69,8 +69,8 @@ package classes.IMutations
             var pBuffs:Object = {};
             var pTier:int = player.perkv1(IMutationsLib.KitsuneThyroidGlandIM)
             pBuffs['spe.mult'] = 0.05 * pTier;
-            if (pTier - 1 != 0) pBuffs['wis.mult'] = 0.05 * (pTier - 1);
-            if (pTier - 2 != 0) pBuffs['int.mult'] = 0.05 * (pTier - 1);
+            if (pTier - 1 >= 0) pBuffs['wis.mult'] = 0.05 * (pTier - 1);
+            if (pTier - 2 >= 0) pBuffs['int.mult'] = 0.05 * (pTier - 1);
             return pBuffs
         }
 
