@@ -12756,15 +12756,17 @@ public class Combat extends BaseContent {
     public function RandomTeaseJabberwocky():void {
         outputText("You inhale deeply before forcing in a kiss onto your opponent breathing poison directly down [monster His] throat!");
         var dam4Ba:Number = 1;
-        if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) dam4Ba *= 2;
-        if (player.hasPerk(MutationsLib.DrakeLungs)) dam4Ba *= 3;
-        if (player.hasPerk(MutationsLib.DrakeLungsPrimitive)) dam4Ba *= 3;
-        if (player.hasPerk(MutationsLib.DrakeLungsEvolved)) dam4Ba *= 3;
-        if (player.hasPerk(MutationsLib.DrakeLungsFinalForm)) dam4Ba *= 3;
-        if (player.hasPerk(PerkLib.RacialParagon)) dam4Ba *= 1.5;
-        if (player.hasPerk(PerkLib.Apex)) dam4Ba *= 1.5;
-        if (player.hasPerk(PerkLib.AlphaAndOmega)) dam4Ba *= 1.5;
-        if (player.hasPerk(PerkLib.NaturalArsenal)) dam4Ba *= 1.50;
+        var Multiplier:Number = 1;
+        if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) Multiplier += 1;
+        if (player.hasPerk(MutationsLib.DrakeLungs)) Multiplier += 2;
+        if (player.hasPerk(MutationsLib.DrakeLungsPrimitive)) Multiplier += 2;
+        if (player.hasPerk(MutationsLib.DrakeLungsEvolved)) Multiplier += 2;
+        if (player.hasPerk(MutationsLib.DrakeLungsFinalForm)) Multiplier += 2;
+        if (player.hasPerk(PerkLib.RacialParagon)) Multiplier += 0.5;
+        if (player.hasPerk(PerkLib.Apex)) Multiplier += 0.5;
+        if (player.hasPerk(PerkLib.AlphaAndOmega)) Multiplier += 0.5;
+        if (player.hasPerk(PerkLib.NaturalArsenal)) Multiplier += 0.5;
+        dam4Ba *= Multiplier;
         monster.statStore.addBuffObject({tou:-(dam4Ba*2)}, "Poison",{text:"Poison"});
         if (monster.hasStatusEffect(StatusEffects.JabberwockyVenom)) {
             monster.addStatusValue(StatusEffects.JabberwockyVenom, 3, dam4Ba);

@@ -4317,12 +4317,17 @@ public class PhysicalSpecials extends BaseCombatContent {
 			}
 			poisonScaling += player.lib/100;
 			poisonScaling += player.tou/100;
-			if (player.hasPerk(PerkLib.RacialParagon)) lustDmg2 *= combat.RacialParagonAbilityBoost();
-			if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg2 *= 1.50;
-			if (player.hasPerk(MutationsLib.DrakeLungs)) lustDmg2 *= 3;
-			if (player.hasPerk(MutationsLib.DrakeLungsPrimitive)) lustDmg2 *= 3;
-			if (player.hasPerk(MutationsLib.DrakeLungsEvolved)) lustDmg2 *= 3;
-			if (player.hasPerk(MutationsLib.DrakeLungsFinalForm)) lustDmg2 *= 3;
+			var Multiplier:Number = 1;
+			if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) Multiplier += 1;
+			if (player.hasPerk(MutationsLib.DrakeLungs)) Multiplier += 2;
+			if (player.hasPerk(MutationsLib.DrakeLungsPrimitive)) Multiplier += 2;
+			if (player.hasPerk(MutationsLib.DrakeLungsEvolved)) Multiplier += 2;
+			if (player.hasPerk(MutationsLib.DrakeLungsFinalForm)) Multiplier += 2;
+			if (player.hasPerk(PerkLib.RacialParagon)) Multiplier += 0.5;
+			if (player.hasPerk(PerkLib.Apex)) Multiplier += 0.5;
+			if (player.hasPerk(PerkLib.AlphaAndOmega)) Multiplier += 0.5;
+			if (player.hasPerk(PerkLib.NaturalArsenal)) Multiplier += 0.5;
+			lustDmg2 *= Multiplier;
 			if (player.level < 10) lustDmg2 += 20 + (player.level * 3);
 			else if (player.level < 20) lustDmg2 += 50 + (player.level - 10) * 2;
 			else if (player.level < 30) lustDmg2 += 70 + (player.level - 20) * 1;
