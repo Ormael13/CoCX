@@ -4306,10 +4306,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//Works similar to bee stinger, must be regenerated over time. Shares the same poison-meter
 		else {
 			outputText("You inhale deeply before releasing a cloud of aphrodisiacs poison on your foe!");
-			//Check weither its snakebite or apophis
 			var venomType:StatusEffectType = StatusEffects.JabberwockyVenom;
 			var d2Bdcc:Number = 2;
-			var lustDmg2:Number = 35 + rand(player.lib / 10);
+			var lustDmg2:Number = combat.calculateBasicTeaseDamage(20+rand(10));
 			var poisonScaling:Number = 1;
 			if (monster.plural){
 				d2Bdcc *=5;
