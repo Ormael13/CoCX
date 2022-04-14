@@ -6400,47 +6400,80 @@ use namespace CoC;
 		public function jabberwockyScore():Number {
 			Begin("Player","racialScore","jabberwocky");
 			var jabberwockyCounter:Number = 0;
-			if (faceType == Face.JABBERWOCKY || faceType == Face.BUCKTOOTH)
+			var jabberwockyCounter2:Number = 0;
+			if (faceType == Face.JABBERWOCKY || faceType == Face.BUCKTOOTH) {
 				jabberwockyCounter++;
+				jabberwockyCounter2++;
+			}
 			if (faceType == Face.DRAGON || faceType == Face.DRAGON_FANGS)
 				jabberwockyCounter -= 10;
-			if (eyes.type == Eyes.DRACONIC)
+			if (eyes.type == Eyes.DRACONIC) {
 				jabberwockyCounter++;
-			if (eyes.colour == "red")
+				jabberwockyCounter2++;
+			}
+			if (eyes.colour == "red") {
 				jabberwockyCounter++;
-			if (InCollection(hairColor, ["purplish-pink"]))
+				jabberwockyCounter2++;
+			}
+			if (InCollection(hairColor, ["purplish-pink"])) {
 				jabberwockyCounter++;
-			if (InCollection(coatColor, ["magenta"]))
+				jabberwockyCounter2++;
+			}
+			if (InCollection(coatColor, ["magenta"])) {
 				jabberwockyCounter++;
-			if (InCollection(skinTone, ["caramel"]))
+				jabberwockyCounter2++;
+			}
+			if (InCollection(skinTone, ["caramel"])) {
 				jabberwockyCounter++;
-			if (ears.type == Ears.BUNNY)
+				jabberwockyCounter2++;
+			}
+			if (ears.type == Ears.BUNNY) {
 				jabberwockyCounter++;
-			if (tailType == Tail.DRACONIC)
+				jabberwockyCounter2++;
+			}
+			if (tailType == Tail.DRACONIC) {
 				jabberwockyCounter++;
-			if (tongue.type == Tongue.DRACONIC)
+				jabberwockyCounter2++;
+			}
+			if (tongue.type == Tongue.DRACONIC) {
 				jabberwockyCounter++;
-			if (antennae.type == Antennae.JABBERWOCKY)
+				jabberwockyCounter2++;
+			}
+			if (antennae.type == Antennae.JABBERWOCKY) {
 				jabberwockyCounter++;
-			if (wings.type == Wings.FEY_DRAGON)
+				jabberwockyCounter2++;
+			}
+			if (wings.type == Wings.FEY_DRAGON) {
 				jabberwockyCounter += 4;
+				jabberwockyCounter2 += 4;
+			}
 			if (wings.type == Wings.DRACONIC_SMALL || wings.type == Wings.DRACONIC_LARGE || wings.type == Wings.DRACONIC_HUGE)
 				jabberwockyCounter -= 10;
-			if (lowerBody == LowerBody.JABBERWOCKY)
+			if (lowerBody == LowerBody.JABBERWOCKY) {
 				jabberwockyCounter++;
-			if (arms.type == Arms.JABBERWOCKY)
+				jabberwockyCounter2++;
+			}
+			if (arms.type == Arms.JABBERWOCKY) {
 				jabberwockyCounter++;
+				jabberwockyCounter2++;
+			}
 			if (tallness > 120 && jabberwockyCounter >= 10)
 				jabberwockyCounter++;
-			if (hasPartialCoat(Skin.DRAGON_SCALES) || hasCoatOfType(Skin.DRAGON_SCALES))
+			if (hasPartialCoat(Skin.DRAGON_SCALES) || hasCoatOfType(Skin.DRAGON_SCALES)) {
 				jabberwockyCounter++;
-			if (InCollection(coatColor, ["pink"]))
+				jabberwockyCounter2++;
+			}
+			if (InCollection(coatColor, ["pink"])) {
 				jabberwockyCounter++;
-			if (horns.type == Horns.JABBERWOCKY)
+				jabberwockyCounter2++;
+			}
+			if (horns.type == Horns.JABBERWOCKY) {
 				jabberwockyCounter += 2;
+				jabberwockyCounter2 += 2;
+			}
 			if (dragonCocks() > 0 || hasVagina())
 				jabberwockyCounter++;
-			if (jabberwockyCounter >= 5 && (hasPerk(PerkLib.DragonPoisonBreath)))
+			if (jabberwockyCounter >= 5 && (hasPerk(PerkLib.DragonLustPoisonBreath)))
 				jabberwockyCounter++;
 			if (hasPerk(PerkLib.Insanity))
 				jabberwockyCounter++;
@@ -6481,6 +6514,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.AscensionCruelChimerasThesis) && jabberwockyCounter >= 8)
 				jabberwockyCounter += 1;
 			if ((faceType != Face.JABBERWOCKY && faceType != Face.BUCKTOOTH) || wings.type != Wings.FEY_DRAGON || lowerBody == LowerBody.FROSTWYRM) jabberwockyCounter = 0;
+			if (jabberwockyCounter2 < 5) jabberwockyCounter = jabberwockyCounter2;
 			if (isGargoyle()) jabberwockyCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) jabberwockyCounter = 0;
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))

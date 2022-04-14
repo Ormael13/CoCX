@@ -15910,8 +15910,8 @@ public final class Mutations extends MutationsHelper {
         }
 
         outputText("\n\nYou feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself... covering the whole area in front of you with pinkish sweet smelling smoke.");
-        outputText("\n\nIt seems the scale has awaked some kind of power within you...  (<b>Gained Perk: Dragon poison breath!</b>)");
-        player.createPerk(PerkLib.DragonPoisonBreath, 0, 0, 0, 0);
+        outputText("\n\nIt seems the scale has awaked some kind of power within you...  (<b>Gained Perk: Dragon lust poison breath!</b>)");
+        player.createPerk(PerkLib.DragonLustPoisonBreath, 0, 0, 0, 0);
 
         //-Madness
         if (!player.hasPerk(PerkLib.Insanity) && changeLimit > 0) {
@@ -17539,4 +17539,4 @@ public final class Mutations extends MutationsHelper {
 		player.herbXP(HE);
     }
 }
-}
+}

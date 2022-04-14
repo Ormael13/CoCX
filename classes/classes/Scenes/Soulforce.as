@@ -276,7 +276,7 @@ public class Soulforce extends BaseContent
 		menuItems.push("Add Shard", cheatAddShard, "Add 1 radiant shard");
 		menuItems.push("Remove Shard", cheatRemoveShard, "Remove 1 radiant shard");
 		menuItems.push("ZenjiQ", ZenjiQ, "Zenji Expac 2 debug tool");
-		menuItems.push("Fairy", FairyTest, "FairyTest");
+		menuItems.push("LustBreath", (player.hasPerk(PerkLib.DragonPoisonBreath))? FairyTest: false, "Replacing 1 perk with another");
 		//menuItems.push("Mutationtest", mutation3, "MutationTest")
 		//menuItems.push("Mutation test reset", resetMutations, "Reset Mutations");
 		menuGen(menuItems, page, accessSoulforceMenu);
@@ -301,6 +301,11 @@ public class Soulforce extends BaseContent
 		doNext(SoulforceCheats1)
 	}
 
+	public function FairyTest():void {
+		player.removePerk(PerkLib.DragonPoisonBreath);
+		player.createPerk(PerkLib.DragonLustPoisonBreath, 0, 0, 0, 0);
+		doNext(curry(SoulforceCheats1, 0));
+	}
 	public function belisatest2():void{
 		BelisaFollower.BelisaConfessed = true;
 		doNext(curry(SoulforceCheats1,2));
@@ -2805,33 +2810,6 @@ public class Soulforce extends BaseContent
 		clearOutput();
 		outputText("Entering battle with Pierce! Enjoy ^^");
 		startCombat(new Pierce());
-	}
-	public function FairyTest():void {
-		clearOutput();
-		outputText("FAIRYTIME ^^");
-		CoC.instance.transformations.FaceFairy.applyEffect(false);
-		player.eyes.type = Eyes.FAIRY;
-		CoC.instance.transformations.HairFairy.applyEffect(false);
-		player.ears.type = Ears.ELVEN;
-		player.tailType = Tail.NONE;
-		player.arms.type = Arms.ELF;
-		player.lowerBody = LowerBody.ELF;
-		player.tongue.type = Tongue.ELF;
-		player.wings.type = Wings.FAIRY;
-		player.skinType = Skin.PLAIN
-		player.skinAdj = "flawless";
-		player.removeCock(0, player.cockTotal());
-		player.skin.coverage = Skin.COVERAGE_NONE;
-		var growth:int = 1 + rand(3);
-		if (player.breastRows.length > 0) {
-			if (player.breastRows[0].breastRating < 2) growth++;
-			if (player.breastRows[0].breastRating < 3 && rand(2) == 0) growth++;
-			if (player.breastRows[0].breastRating < 4 && rand(3) == 0) growth++;
-		}
-		player.createPerk(PerkLib.TransformationImmunityFairy, 0, 0, 0, 0);
-		player.removeAllRacialMutation();
-		CoC.instance.mainViewManager.updateCharviewIfNeeded();
-		doNext(curry(SoulforceCheats1, 0));
 	}
 	public function FightBelisa():void {
 		clearOutput();

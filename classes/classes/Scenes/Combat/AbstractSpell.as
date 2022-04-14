@@ -39,7 +39,9 @@ public class AbstractSpell extends CombatAbility {
 		
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 2;
 		
-		if (player.hasPerk(PerkLib.LastResort) && player.mana < realManaCost) {
+		if (isBloodMagicApplicable && player.hasStatusEffect(StatusEffects.BloodMage)) {
+			player.HP -= realManaCost;
+		} else if (isLastResortApplicable && player.hasPerk(PerkLib.LastResort) && player.mana < realManaCost) {
 			player.HP -= realManaCost;
 		} else {
 			useMana(realManaCost, useManaType);

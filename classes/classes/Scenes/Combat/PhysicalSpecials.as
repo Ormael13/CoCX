@@ -311,8 +311,8 @@ public class PhysicalSpecials extends BaseCombatContent {
 					bd.disable("<b>You need more time before you can perform Tail Smack again.</b>\n\n");
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
-			if (player.hasPerk(PerkLib.DragonPoisonBreath)) {
-				bd = buttons.add("Poison Breath", dragonPoisonBreath).hint("Unleash a cloud of aphrodisiac poison. Particularly powerful against groups");
+			if (player.hasPerk(PerkLib.DragonLustPoisonBreath)) {
+				bd = buttons.add("Poison Breath", DragonLustPoisonBreath).hint("Unleash a cloud of aphrodisiac poison. Particularly powerful against groups");
 				if (player.tailVenom < player.VenomWebCost() * 5) {
 					bd.disable("You do not have enough poison in your glands to breath a cloud right now! (Req. "+player.VenomWebCost()*5+"+)");
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
@@ -4293,7 +4293,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 		if (!combatIsOver()) enemyAI();
 	}
 
-	public function dragonPoisonBreath():void {
+	public function DragonLustPoisonBreath():void {
 		flags[kFLAGS.LAST_ATTACK_TYPE] = 4;
 		clearOutput();
 		if (combat.checkConcentration()) return; //Amily concentration
