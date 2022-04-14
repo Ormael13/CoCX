@@ -127,8 +127,8 @@ public class AntsScene extends BaseContent implements TimeAwareInterface
             //add button to avoid savescumming
             outputText("Do you want to approach the cart <i>right now</i>, risking to attact demon's attention, or leave?\n\n");
             menu();
-            addButton(0, "Inspect", later);
-            addButton(1, "Later", approach).hint("Maybe later? You have other business right now.");
+            addButton(0, "Inspect", approach);
+            addButton(1, "Later", later).hint("Maybe later? You have other business right now.");
 
             //options
             function later():void {
