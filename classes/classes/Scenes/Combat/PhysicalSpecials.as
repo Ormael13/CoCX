@@ -4327,14 +4327,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.AlphaAndOmega)) Multiplier += 0.5;
 			if (player.hasPerk(PerkLib.NaturalArsenal)) Multiplier += 0.5;
 			lustDmg2 *= Multiplier;
-			if (player.level < 10) lustDmg2 += 20 + (player.level * 3);
-			else if (player.level < 20) lustDmg2 += 50 + (player.level - 10) * 2;
-			else if (player.level < 30) lustDmg2 += 70 + (player.level - 20) * 1;
-			else lustDmg2 += 80;
-			lustDmg2 *= 0.2;
 			lustDmg2 *= d2Bdcc;
-			lustDmg2 *= 1+(poisonScaling/10);
-			poisonScaling *= d2Bdcc;
 			monster.teased(monster.lustVuln * lustDmg2, true);
 			combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 			if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) d2Bdcc *= 2;
