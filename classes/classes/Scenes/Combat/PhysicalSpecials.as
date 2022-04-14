@@ -4306,10 +4306,9 @@ public class PhysicalSpecials extends BaseCombatContent {
 		//Works similar to bee stinger, must be regenerated over time. Shares the same poison-meter
 		else {
 			outputText("You inhale deeply before releasing a cloud of aphrodisiacs poison on your foe!");
-			//Check weither its snakebite or apophis
 			var venomType:StatusEffectType = StatusEffects.JabberwockyVenom;
 			var d2Bdcc:Number = 2;
-			var lustDmg2:Number = 35 + rand(player.lib / 10);
+			var lustDmg2:Number = combat.calculateBasicTeaseDamage(20+rand(10));
 			var poisonScaling:Number = 1;
 			if (monster.plural){
 				d2Bdcc *=5;
@@ -4328,14 +4327,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 			if (player.hasPerk(PerkLib.AlphaAndOmega)) Multiplier += 0.5;
 			if (player.hasPerk(PerkLib.NaturalArsenal)) Multiplier += 0.5;
 			lustDmg2 *= Multiplier;
-			if (player.level < 10) lustDmg2 += 20 + (player.level * 3);
-			else if (player.level < 20) lustDmg2 += 50 + (player.level - 10) * 2;
-			else if (player.level < 30) lustDmg2 += 70 + (player.level - 20) * 1;
-			else lustDmg2 += 80;
-			lustDmg2 *= 0.2;
 			lustDmg2 *= d2Bdcc;
-			lustDmg2 *= 1+(poisonScaling/10);
-			poisonScaling *= d2Bdcc;
 			monster.teased(monster.lustVuln * lustDmg2, true);
 			combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
 			if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) d2Bdcc *= 2;
