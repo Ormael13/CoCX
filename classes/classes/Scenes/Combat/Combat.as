@@ -12757,10 +12757,18 @@ public class Combat extends BaseContent {
         outputText("You inhale deeply before forcing in a kiss onto your opponent breathing poison directly down [monster His] throat!");
         var dam4Ba:Number = 1;
         if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) dam4Ba *= 2;
-        monster.statStore.addBuffObject({tou:-(dam4Ba*6)}, "Poison",{text:"Poison"});
-        if (monster.hasStatusEffect(StatusEffects.ManticoreVenom)) {
-            monster.addStatusValue(StatusEffects.ManticoreVenom, 3, dam4Ba);
-        } else monster.createStatusEffect(StatusEffects.ManticoreVenom, 0, 0, dam4Ba, 0);
+        if (player.hasPerk(MutationsLib.DrakeLungs)) dam4Ba *= 3;
+        if (player.hasPerk(MutationsLib.DrakeLungsPrimitive)) dam4Ba *= 3;
+        if (player.hasPerk(MutationsLib.DrakeLungsEvolved)) dam4Ba *= 3;
+        if (player.hasPerk(MutationsLib.DrakeLungsFinalForm)) dam4Ba *= 3;
+        if (player.hasPerk(PerkLib.RacialParagon)) dam4Ba *= 1.5;
+        if (player.hasPerk(PerkLib.Apex)) dam4Ba *= 1.5;
+        if (player.hasPerk(PerkLib.AlphaAndOmega)) dam4Ba *= 1.5;
+        if (player.hasPerk(PerkLib.NaturalArsenal)) dam4Ba *= 1.50;
+        monster.statStore.addBuffObject({tou:-(dam4Ba*2)}, "Poison",{text:"Poison"});
+        if (monster.hasStatusEffect(StatusEffects.JabberwockyVenom)) {
+            monster.addStatusValue(StatusEffects.JabberwockyVenom, 3, dam4Ba);
+        } else monster.createStatusEffect(StatusEffects.JabberwockyVenom, 0, 0, dam4Ba, 0);
         player.tailVenom -= player.VenomWebCost();
         StraddleDamage *= 1+(scalingBonusToughness()*2/100);
         StraddleDamage *= 2;

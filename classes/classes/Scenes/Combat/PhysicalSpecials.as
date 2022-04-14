@@ -4319,6 +4319,10 @@ public class PhysicalSpecials extends BaseCombatContent {
 			poisonScaling += player.tou/100;
 			if (player.hasPerk(PerkLib.RacialParagon)) lustDmg2 *= combat.RacialParagonAbilityBoost();
 			if (player.hasPerk(PerkLib.NaturalArsenal)) lustDmg2 *= 1.50;
+			if (player.hasPerk(MutationsLib.DrakeLungs)) dam4Ba *= 3;
+			if (player.hasPerk(MutationsLib.DrakeLungsPrimitive)) dam4Ba *= 3;
+			if (player.hasPerk(MutationsLib.DrakeLungsEvolved)) dam4Ba *= 3;
+			if (player.hasPerk(MutationsLib.DrakeLungsFinalForm)) dam4Ba *= 3;
 			if (player.level < 10) lustDmg2 += 20 + (player.level * 3);
 			else if (player.level < 20) lustDmg2 += 50 + (player.level - 10) * 2;
 			else if (player.level < 30) lustDmg2 += 70 + (player.level - 20) * 1;
