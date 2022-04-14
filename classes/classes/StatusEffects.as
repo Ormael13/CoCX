@@ -894,6 +894,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const BasiliskSlow:StatusEffectType              = BasiliskSlowDebuff.TYPE;
 		public static const BathedInHotSpring:StatusEffectType         = mkCombat("Bathed In Hot Spring");
 		public static const BeatOfWar:StatusEffectType                 = mkCombat("Beat of War");
+		public static const BeeVenom:StatusEffectType                  = mkCombat("Bee Venom");
 		public static const Berzerking:StatusEffectType                = mkCombat("Berzerking");
 		public static const BladeDance:StatusEffectType                = mkCombat("Blade Dance");
 		public static const BlazingBattleSpirit:StatusEffectType       = mkCombat("Blazing battle spirit");
@@ -991,6 +992,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const InvisibleOrStealth:StatusEffectType        = mkCombat("Invisible or stealth");
 		public static const IsabellaStunned:StatusEffectType           = mkCombat("Isabella Stunned");
 		public static const IzmaBleed:StatusEffectType                 = mkCombat("Izma Bleed");
+		public static const JabberwockyVenom:StatusEffectType          = mkCombat("Jabberwocky Venom");
 		public static const JabbingStyle:StatusEffectType              = mkCombat("Jabbing Style");
 		public static const KamaitachiBleed:StatusEffectType           = mkCombat("Kamaitachi Bleed");
 		public static const KissOfDeath:StatusEffectType               = mkCombat("Kiss of Death");
@@ -1222,4 +1224,4 @@ import classes.StatusEffects.VampireThirstEffect;
 			return new StatusEffectType(id,CombatStatusEffect,1);
 		}
 	}
-}
+}

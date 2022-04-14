@@ -153,6 +153,7 @@
             <color name="light purple">#e4cdf3</color>
 			<color name="light pink">#ffbdcb</color>
             <color name="lime green">#73df72</color>
+			<color name="magenta">#470036</color>
             <color name="mediterranean-toned">#ac7339</color>
             <color name="metallic golden">#ddc469</color>
             <color name="metallic silver">#cfedfc</color>
@@ -165,6 +166,7 @@
             <color name="platinum crimson">#ff745c</color>
             <color name="platinum-blonde">#ffe5c7</color>
             <color name="purplish-black">#7d597a</color>
+			<color name="purplish-pink">#bc81ca</color>
             <color name="dark purple">#a700bd</color>
 			<color name="eldritch purple">#7a5f95</color>
             <color name="quartz white">#ffffff</color>
@@ -417,6 +419,7 @@
         <cell rect="301,1064,49,59" name="hand_bg/kumiho" dx="56" dy="56"/>
         <cell rect="851,150,49,59" name="hands_bg/wraithleft" dx="63" dy="75"/>
         <cell rect="651,270,49,59" name="hands_bg/frostWyrmleft" dx="62" dy="72"/>
+		<cell rect="1001,270,49,59" name="hands_bg/jabberwockyleft" dx="62" dy="72"/>
         <cell rect="801,270,49,59" name="hands_bg/blade-kamaitachiMantis" dx="56" dy="64"/>
         <cell rect="751,270,49,59" name="hands_bg/wendigo" dx="56" dy="64"/>
         <cell rect="901,270,49,59" name="hands_bg/mindbreaker" dx="61" dy="74"/>
@@ -440,6 +443,7 @@
         <cell rect="301,1124,49,59" name="hands/kumiho" dx="101" dy="56"/>
         <cell rect="901,210,49,59" name="hands/wraithright" dx="94" dy="75"/>
         <cell rect="651,330,49,59" name="hands/frostWyrmright" dx="98" dy="72"/>
+		<cell rect="1001,330,49,59" name="hands/jabberwockyright" dx="98" dy="72"/>
         <cell rect="801,330,49,59" name="hands/blade-kamaitachiMantis" dx="104" dy="64"/>
         <cell rect="751,330,49,59" name="hands/wendigo" dx="104" dy="64"/>
         <cell rect="1051,150,49,59" name="hands/gnomeLeft" dx="63" dy="42"/>
@@ -507,6 +511,7 @@
         <cell rect="751,390,49,59" name="feet/yeti" dx="79" dy="115"/>
         <cell rect="547,973,90,90" name="feet/kumiho" dx="62" dy="68"/>
         <cell rect="638,611,90,90" name="feet/bunny" dx="59" dy="92"/>
+		<cell rect="1184,611,90,90" name="feet/jabberwocky" dx="59" dy="92"/>
         <cell rect="1093,611,90,90" name="feet/gnome" dx="59" dy="100"/>
         <cell rect="701,450,49,59" name="feet/sylph" dx="82" dy="117"/>
         <cell rect="751,450,49,59" name="feet/ratatoskr" dx="79" dy="115"/>
@@ -946,11 +951,13 @@
         <cell rect="181,396,29,30" name="horns_bg/frostWyrm" dx="105" dy="23"/>
         <cell rect="181,429,29,30" name="horns_bg/frostWyrmLeft" dx="73" dy="23"/>
         <cell rect="481,330,59,65" name="horns_bg/seaDragon" dx="75" dy="20"/>
+		<cell rect="721,330,59,65" name="horns_bg/jabberwockycrown" dx="75" dy="20"/>
         <cell rect="241,396,59,65" name="horns_fg/balrog" dx="73" dy="25"/>
 		<cell rect="481,396,59,65" name="back_bg/cobraHood" dx="77" dy="32"/>
         <cell rect="301,396,59,65" name="horns_overclothe/deer" dx="74" dy="-5"/>
         <cell rect="1,470,59,65" name="antennae/bee" dx="75" dy="4"/>
         <cell rect="61,470,88,65" name="neck/seaDragonWhisker" dx="63" dy="57"/>
+		<cell rect="151,470,29,30" name="neck/jabberwockyWhisker" dx="90" dy="59"/>
         <cell rect="301,70,29,32" name="faceShading/faceShading" dx="90" dy="37"/>
     </spritemap>
     <spritemap file="lewd.png">
