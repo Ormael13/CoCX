@@ -3650,10 +3650,14 @@ use namespace CoC;
 			if (TopRace == "jabberwocky") {
 				if (TopScore >= 10) {
 					if (TopScore >= 30) {
+						if (isTaur()) race = "primal jabberwocky-taur";
+						else race = "primal jabberwocky";
+					}
+					else if (TopScore >= 25) {
 						if (isTaur()) race = "greater jabberwocky-taur";
 						else race = "greater jabberwocky";
 					}
-					else if (TopScore >= 24) {
+					else if (TopScore >= 20) {
 						if (isTaur()) race = "jabberwocky-taur";
 						else race = "jabberwocky";
 					}
@@ -4934,7 +4938,7 @@ use namespace CoC;
 				grandchimeraCounter++;
 			if (dragonScore() >= 24)
 				grandchimeraCounter++;
-			if (jabberwockyScore() >= 24)
+			if (jabberwockyScore() >= 20)
 				grandchimeraCounter++;
 			if (wolfScore() >= 10 && hasFur() && coatColor == "glacial white")
 				grandchimeraCounter++;
@@ -6446,6 +6450,18 @@ use namespace CoC;
 			//	jabberwockyCounter++;
 			//if (hasPerk(PerkLib.JabberwockyMarrowFinalForm)) (regeneration)
 			//	jabberwockyCounter++;
+			if (hasPerk(MutationsLib.DraconicBones))
+				jabberwockyCounter++;
+			if (hasPerk(MutationsLib.DraconicBonesPrimitive))
+				jabberwockyCounter++;
+			if (hasPerk(MutationsLib.DraconicBonesEvolved))
+				jabberwockyCounter++;
+			if (hasPerk(MutationsLib.DraconicHeart))
+				jabberwockyCounter++;
+			if (hasPerk(MutationsLib.DraconicHeartPrimitive))
+				jabberwockyCounter++;
+			if (hasPerk(MutationsLib.DraconicHeartEvolved))
+				jabberwockyCounter++;
 			if (hasPerk(MutationsLib.DrakeLungs))
 				jabberwockyCounter++;
 			if (hasPerk(MutationsLib.DrakeLungsPrimitive))
@@ -11957,13 +11973,21 @@ use namespace CoC;
 					maxWisCap2 -= 50;
 					maxLibCap2 += 140;
 				}
-				if (jabberwockyScore() >= 24) {
-					maxStrCap2 += 95;
+				else if (jabberwockyScore() >= 25) {
+					maxStrCap2 += 105;
 					maxTouCap2 += 80;
-					maxSpeCap2 += 95;
+					maxSpeCap2 += 90;
 					maxIntCap2 += 40;
-					maxWisCap2 -= 50;
+					maxWisCap2 -= 40;
 					maxLibCap2 += 100;
+				}
+				else if (jabberwockyScore() >= 20) {
+					maxStrCap2 += 90;
+					maxTouCap2 += 70;
+					maxSpeCap2 += 80;
+					maxIntCap2 += 30;
+					maxWisCap2 -= 30;
+					maxLibCap2 += 60;
 				}
 				else {
 					maxStrCap2 += 50;
