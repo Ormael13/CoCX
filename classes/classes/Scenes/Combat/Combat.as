@@ -12593,6 +12593,7 @@ public class Combat extends BaseContent {
         }
         if (player.countCocksOfType(CockTypesEnum.ANEMONE) > 0) TeaseFunctionList.push(RandomTeaseAnemone);
         if (player.hasPerk(PerkLib.ElectrifiedDesire)) TeaseFunctionList.push(RandomTeaseRaiju);
+        if (player.hasPerk(PerkLib.DragonPoisonBreath) && player.tailVenom >= player.VenomWebCost()) TeaseFunctionList.push(RandomTeaseJabberwocky);
         if (player.harpyScore() >= 8  || player.thunderbirdScore() >= 10 || player.phoenixScore() >= 10) TeaseFunctionList.push(RandomTeaseHarpy);
         if (player.kitsuneScore() >= 8) TeaseFunctionList.push(RandomTeaseKitsune);
         if (player.hasPerk(MutationsLib.BlackHeart)) TeaseFunctionList.push(RandomTeaseLustStrike);
@@ -12750,6 +12751,22 @@ public class Combat extends BaseContent {
         monster.createStatusEffect(StatusEffects.DisplacerPlug, DurationLeft + rand(3), 0, 0, 0);
         player.removeStatusEffect(StatusEffects.StraddleRoundLeft);
         monster.removeStatusEffect(StatusEffects.Straddle);
+    }
+
+    public function RandomTeaseJabberwocky():void {
+        outputText("You inhale deeply before forcing in a kiss onto your opponent breathing poison directly down [monster His] throat!");
+        var dam4Ba:Number = 1;
+        if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) dam4Ba *= 2;
+        monster.statStore.addBuffObject({tou:-(dam4Ba*6)}, "Poison",{text:"Poison"});
+        if (monster.hasStatusEffect(StatusEffects.ManticoreVenom)) {
+            monster.addStatusValue(StatusEffects.ManticoreVenom, 3, dam4Ba);
+        } else monster.createStatusEffect(StatusEffects.ManticoreVenom, 0, 0, dam4Ba, 0);
+        player.tailVenom -= player.VenomWebCost();
+        StraddleDamage *= 1+(scalingBonusToughness()*2/100);
+        StraddleDamage *= 2;
+        monster.teased(StraddleDamage, false);
+        if (Randomcrit) outputText(" <b>Critical!</b>");
+        monster.lustVuln += 0.50;
     }
 
     public function RandomTeaseRaiju():void {
