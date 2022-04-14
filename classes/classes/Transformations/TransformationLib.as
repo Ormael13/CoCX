@@ -760,7 +760,7 @@ public const NAME:PossibleEffect = new SimpleEffect("Effect name",
 		},
 		// is present
 		function ():Boolean {
-			return SkinChitin(Skin.COVERAGE_LOW).isPresent() && player.skin.coat.pattern === Skin.PATTERN_BEE_STRIPES;
+			return transformations.SkinChitin(Skin.COVERAGE_LOW).isPresent() && player.skin.coat.pattern === Skin.PATTERN_BEE_STRIPES;
 		}
 	);
   /*
