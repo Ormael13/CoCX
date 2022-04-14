@@ -5589,22 +5589,22 @@ public class Combat extends BaseContent {
             else if (player.tail.type == Tail.SCORPION || player.tail.type == Tail.BEE_ABDOMEN ){
                 outputText("You ready your stinger and plunge it deep into your opponent delivering your poison in the process");
                 ExtraNaturalWeaponAttack(0.5);
-                var dBd1c:Number = 1;
+                var dBd2c:Number = 1;
                 //var venomType:StatusEffectType = StatusEffects.BeeVenom;
-                var lustdamage:Number = 35 + rand(player.lib / 10);
-                var lustDmg2:Number = 1;
-                if (player.level < 10) lustdamage += 20 + (player.level * 3);
-                else if (player.level < 20) lustdamage += 50 + (player.level - 10) * 2;
-                else if (player.level < 30) lustdamage += 70 + (player.level - 20) * 1;
-                else lustdamage += 80;
-                lustdamage *= 0.14;
-                if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) lustDmg2 *= 2;
-                lustdamage *= lustDmg2;
-                if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) dBd1c *= 2;
-                monster.teased(monster.lustVuln * lustdamage * dBd1c, false);
+                var lustdamage2:Number = 35 + rand(player.lib / 10);
+                var lustDmg3:Number = 1;
+                if (player.level < 10) lustdamage2 += 20 + (player.level * 3);
+                else if (player.level < 20) lustdamage2 += 50 + (player.level - 10) * 2;
+                else if (player.level < 30) lustdamage2 += 70 + (player.level - 20) * 1;
+                else lustdamage2 += 80;
+                lustdamage2 *= 0.14;
+                if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) lustDmg3 *= 2;
+                lustdamage2 *= lustDmg3;
+                if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) dBd2c *= 2;
+                monster.teased(monster.lustVuln * lustdamage2 * dBd2c, false);
                 combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
-                if (monster.hasStatusEffect(StatusEffects.BeeVenom)) monster.addStatusValue(StatusEffects.BeeVenom,3,(dBd1c*5));
-                else monster.createStatusEffect(StatusEffects.BeeVenom, 0, 0, (dBd1c*5), 0);
+                if (monster.hasStatusEffect(StatusEffects.BeeVenom)) monster.addStatusValue(StatusEffects.BeeVenom,3,(dBd2c*5));
+                else monster.createStatusEffect(StatusEffects.BeeVenom, 0, 0, (dBd2c*5), 0);
                 outputText("\n")
             }
 			if ((player.tail.type == (Tail.GARGOYLE || Tail.GARGOYLE_2))){
@@ -16056,4 +16056,4 @@ public class Combat extends BaseContent {
         return inteWisLibScale(player.lib, randomize);
     }
 }
-}
+}
