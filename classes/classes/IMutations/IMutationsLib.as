@@ -21,9 +21,10 @@ public class IMutationsLib
 		//Example -v
 		//This one does nothing, and is simply to showcase.
 		//Mutations start here.
-		public static const KitsuneThyroidGlandIM:PerkType = new KitsuneThyroidGlandMutation().withBuffs(KitsuneThyroidGlandMutation.perkBuffs());
-		public static const ArachnidBookLungIM:PerkType = new ArachnidBookLungMutation().withBuffs(ArachnidBookLungMutation.perkBuffs())
-		public static const MutationsTemplateIM:PerkType = new MutationTemplate().withBuffs(MutationTemplate.perkBuffs());
+		public static const KitsuneThyroidGlandIM:PerkType = new KitsuneThyroidGlandMutation();
+		public static const ArachnidBookLungIM:PerkType = new ArachnidBookLungMutation();
+		public static const BlackHeartIM:PerkType = new BlackHeartMutation()
+		public static const MutationsTemplateIM:PerkType = new MutationTemplate();
 
 		/**
 		*Returns an array of arrays of mutation body parts in PerkType type.
@@ -73,7 +74,7 @@ public class IMutationsLib
 
 			}
 			function mutationsThyroidGlands():void{
-				MutationsList.push([KitsuneThyroidGlandIM]);
+				MutationsList.push([KitsuneThyroidGlandIM, 3, MBuffs.KTGM, KitsuneThyroidGlandMutation.mutationReqs]);
 			}
 			function mutationsParaThyroidGlands():void{
 
@@ -171,17 +172,18 @@ public class IMutationsLib
 			return MutationsList;
 		}
 
+		/*
 		private static function initMutations():void{
 			try {
 				//Example. Doesn't actually do anything.v
 				MutationTemplate.mutationReqs();
 				ArachnidBookLungMutation.mutationReqs();
+				BlackHeartMutation.mutationReqs();
 				KitsuneThyroidGlandMutation.mutationReqs();
-
 				} catch (e:Error) {
 					trace(e.getStackTrace());
 				}
 			}
-		initMutations();
+		initMutations();*/
 	}
 }

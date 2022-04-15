@@ -7,6 +7,8 @@ package classes.Scenes
 import classes.*;
 import classes.BodyParts.*;
 import classes.IMutations.IMutationsLib;
+import classes.IMutations.KitsuneThyroidGlandMutation;
+import classes.Scenes.Areas.Forest.Kitsune;
 import classes.Scenes.NPCs.DivaScene;
 
 import classes.GlobalFlags.kFLAGS;
@@ -284,22 +286,78 @@ public class Soulforce extends BaseContent
 
 	public function mutation3():void{
 		clearOutput();
-		outputText(""+IMutationsLib.KitsuneThyroidGlandIM.name + " Perk Tier: " + player.perkv1(IMutationsLib.KitsuneThyroidGlandIM))
-		if (IMutationsLib.KitsuneThyroidGlandIM.available(player)){
-			addButton(0,IMutationsLib.KitsuneThyroidGlandIM.name(), getmutation)
-		}
-
-		function getmutation():void{
-			if (!player.hasPerk(IMutationsLib.KitsuneThyroidGlandIM)){
-				player.createPerk(IMutationsLib.KitsuneThyroidGlandIM, 1,0,0,0);
+		menu();
+		for each (var pArray:Array in IMutationsLib.mutationsArray("Thyroid")){
+			var pPerk:PerkType = pArray[0];
+			var pLvl:int = player.perkv1(pPerk);
+			mutationFuncTrigger(pArray[3]);
+			trace("Requirements loaded in.");
+			outputText(""+pPerk.name() + " Perk Tier: " + pLvl);
+			var reqs:Array = [];
+			if (pPerk.available(player) && pArray[1] >= pLvl){
+				addButton(0,pPerk.name(), getMutation);
 			}
 			else{
-				player.setPerkValue(IMutationsLib.KitsuneThyroidGlandIM,1,player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) + 1);
+				trace("Unable to meet requirements/requirements borked.");
 			}
-			outputText("Done");
+			for each (var cond:Object in pPerk.requirements) {
+				var reqStr:String = cond.text;
+				var color:String = "";
+				if (!(reqStr.indexOf("Mutation") >= 0)) { //Ignores the "free mutation slot" note.
+					if (cond.fn(player)) {
+						color = "#008000";
+					}
+					else {
+						color = "#800000";
+					}
+					reqs.push("<font color='"+color+"'>"+cond.text+"</font>");
+				}
+			}
+			outputText("Requirements: " + reqs.join(", "));
+			addButton(4, "back",SoulforceCheats1,2);
 		}
-		doNext(SoulforceCheats1)
+
+		//Functions that need to be triggered externally go here. I.E. Requirements/Buffs due to circular dependency.
+		function mutationFuncTrigger(fTrigger:Function):*{
+			try{
+				fTrigger(pLvl);
+				trace("Success");
+			}
+			catch (e:Error){
+				trace("Failed. \n" + e.getStackTrace());
+			}
+		}
+
+		//Gives the player the actual mutation itself.
+		function getMutation():void{
+			if (!player.hasPerk(pPerk)){
+				player.createPerk(pPerk, 1,0,0,0);
+			}
+			else{
+				player.setPerkValue(pPerk,1,pLvl + 1);
+			}
+			setBuffs();
+			trace("Mutation applied.");
+			outputText("Done");
+			doNext(curry(SoulforceCheats1, 2));
+		}
+
+		//Sets up the buff for the perk.
+		function setBuffs():void{
+			var stname:String = "perk_" + pPerk.id;
+			var pBuff:Object = mutationFuncTrigger(pArray[2]);
+			if (player.statStore.hasBuff(stname)){
+				player.statStore.removeBuffs(stname);
+			}
+			player.statStore.addBuffObject(
+					pBuff,
+					stname,
+					{text:pPerk.name(), save:false}
+			);
+			trace("Buffs Applied.");
+		}
 	}
+
 
 	public function FairyTest():void {
 		player.removePerk(PerkLib.DragonPoisonBreath);
