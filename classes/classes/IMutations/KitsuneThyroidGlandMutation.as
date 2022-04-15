@@ -44,38 +44,28 @@ package classes.IMutations
             return "Kitsune Thyroid Gland " + sufval;
         }
 
-        public static function perkTier():int{
-            return 3;
-        }
-
-        public static function mutationReqs():void{
-            var pTier:int = player.perkv1(IMutationsLib.KitsuneThyroidGlandIM);
-            if (pTier == 0){
-                IMutationsLib.KitsuneThyroidGlandIM.requireThyroidGlandMutationSlot()
-                        .requireAnyPerk(PerkLib.EnlightenedKitsune, PerkLib.CorruptedKitsune)
-                        .requireCustomFunction(function (player:Player):Boolean {
-                            return player.tailType == Tail.FOX && player.tailCount >= 2;
-                        }, "2+ fox tails");
+        public static function mutationReqs(pTier:int = 0):void{
+            try{
+                if (pTier == 0){
+                    IMutationsLib.KitsuneThyroidGlandIM.requireThyroidGlandMutationSlot()
+                            .requireAnyPerk(PerkLib.EnlightenedKitsune, PerkLib.CorruptedKitsune)
+                            .requireCustomFunction(function (player:Player):Boolean {
+                                return player.tailType == Tail.FOX && player.tailCount >= 2;
+                            }, "2+ fox tails");
+                }
+                else{
+                    //This is not exactly required (v), but helps keep the requirements output clean..
+                    IMutationsLib.KitsuneThyroidGlandIM.requirements = [];
+                    var pLvl:int = pTier * 30
+                    IMutationsLib.KitsuneThyroidGlandIM.requireLevel(pLvl);
+                }
+            }catch(e:Error){
+                trace(e.getStackTrace());
             }
-            else{
-                IMutationsLib.KitsuneThyroidGlandIM.requireLevel(30 * pTier)
-                        .requireCustomFunction(function (player:Player):Boolean {
-                            return player.perkv1(IMutationsLib.KitsuneThyroidGlandIM) == pTier;
-                        }, "Previous perk tier required.");
-            }
-        }
-
-        public static function perkBuffs():Object {
-            var pBuffs:Object = {};
-            var pTier:int = player.perkv1(IMutationsLib.KitsuneThyroidGlandIM)
-            pBuffs['spe.mult'] = 0.05 * pTier;
-            if (pTier - 1 >= 0) pBuffs['wis.mult'] = 0.05 * (pTier - 1);
-            if (pTier - 2 >= 0) pBuffs['int.mult'] = 0.05 * (pTier - 1);
-            return pBuffs
         }
 
         public function KitsuneThyroidGlandMutation() {
-            super("Kitsune Thyroid Gland", "Kitsune Thyroid Gland", ".");
+            super("Kitsune Thyroid Gland IM", "Kitsune Thyroid Gland", ".");
         }
 
         override public function keepOnAscension(respec:Boolean = false):Boolean {

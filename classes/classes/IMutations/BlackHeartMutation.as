@@ -5,14 +5,16 @@
 package classes.IMutations
 {
     import classes.PerkClass;
+    import classes.PerkLib;
     import classes.PerkType;
+    import classes.Player;
 
-    public class MutationTemplate extends PerkType
+    public class BlackHeartMutation extends PerkType
     {
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
             var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.MutationsTemplateIM)
+            var pTier:int = player.perkv1(IMutationsLib.BlackHeartIM)
             if (pTier >= 1){
                 descS += "";
             }
@@ -28,7 +30,7 @@ package classes.IMutations
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
-            switch (player.perkv1(IMutationsLib.MutationsTemplateIM)){
+            switch (player.perkv1(IMutationsLib.BlackHeartIM)){
                 case 2:
                     sufval = "(Primitive)";
                     break;
@@ -38,28 +40,24 @@ package classes.IMutations
                 default:
                     sufval = "";
             }
-            return "PerkName Here" + sufval;
-        }
-        //returns max Perk Tier of specific perk
-        public static function perkTier():int{
-            return 3;
+            return "Black Heart" + sufval;
         }
         //Mutation Requirements
         public static function mutationReqs():void{
-            var pTier:int = player.perkv1(IMutationsLib.MutationsTemplateIM);
+            var pTier:int = player.perkv1(IMutationsLib.BlackHeartIM);
             if (pTier == 0){
-                IMutationsLib.MutationsTemplateIM.requireAdaptationsMutationSlot();
+                IMutationsLib.BlackHeartIM.requireHeartMutationSlot().requirePerk(PerkLib.DarkCharm).requireCor(100).requireCustomFunction(function (player:Player):Boolean {
+                    return player.demonScore() >= 11;
+                }, "Demon race");
             }
             else{
-                IMutationsLib.MutationsTemplateIM.requireLevel(30 * pTier)
-                        /*.requireCustomFunction(function (player:Player):Boolean {
-                            return player.perkv1(IMutationsLib.MutationsTemplateIM) == pTier;
-                        }, "Previous perk tier required.");*/
+                IMutationsLib.BlackHeartIM.requireLevel(30 * pTier)
+
             }
         }
 
-        public function MutationTemplate() {
-            super("PerkName Here", "PerkName Here", ".");
+        public function BlackHeartMutation() {
+            super("Black Heart IM", "Black Heart", ".");
         }
 
         override public function keepOnAscension(respec:Boolean = false):Boolean {

@@ -6,7 +6,6 @@ package classes.IMutations
 {
     import classes.PerkClass;
     import classes.PerkType;
-    import classes.PerkLib;
     import classes.Player;
 
     public class ArachnidBookLungMutation extends PerkType
@@ -43,10 +42,6 @@ package classes.IMutations
             return "Arachnid Book Lung" + sufval;
         }
 
-        public static function perkTier():int{
-            return 3;
-        }
-
         public static function mutationReqs():void{
             var pTier:int = player.perkv1(IMutationsLib.ArachnidBookLungIM);
             if (pTier == 0){
@@ -57,21 +52,11 @@ package classes.IMutations
             }
             else{
                 IMutationsLib.ArachnidBookLungIM.requireLevel(30 * pTier)
-                        .requireCustomFunction(function (player:Player):Boolean {
-                            return player.perkv1(IMutationsLib.ArachnidBookLungIM) == pTier;
-                        }, "Previous perk tier required.");
             }
         }
 
-        public static function perkBuffs():Object {
-            var pBuffs:Object = {};
-            var pTier:int = player.perkv1(IMutationsLib.ArachnidBookLungIM)
-            pBuffs['int.mult'] = 0.05 * pTier;
-            return pBuffs
-        }
-
         public function ArachnidBookLungMutation() {
-            super("Arachnid Book Lung", "Arachnid Book Lung", ".");
+            super("Arachnid Book Lung IM", "Arachnid Book Lung", ".");
         }
 
         override public function keepOnAscension(respec:Boolean = false):Boolean {
