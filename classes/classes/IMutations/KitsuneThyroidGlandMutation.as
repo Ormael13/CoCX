@@ -46,6 +46,7 @@ package classes.IMutations
 
         public static function mutationReqs(pTier:int = 0):void{
             try{
+                IMutationsLib.KitsuneThyroidGlandIM.requirements = [];
                 if (pTier == 0){
                     IMutationsLib.KitsuneThyroidGlandIM.requireThyroidGlandMutationSlot()
                             .requireAnyPerk(PerkLib.EnlightenedKitsune, PerkLib.CorruptedKitsune)
@@ -55,7 +56,6 @@ package classes.IMutations
                 }
                 else{
                     //This is not exactly required (v), but helps keep the requirements output clean..
-                    IMutationsLib.KitsuneThyroidGlandIM.requirements = [];
                     var pLvl:int = pTier * 30
                     IMutationsLib.KitsuneThyroidGlandIM.requireLevel(pLvl);
                 }
