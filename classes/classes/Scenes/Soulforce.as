@@ -7,8 +7,6 @@ package classes.Scenes
 import classes.*;
 import classes.BodyParts.*;
 import classes.IMutations.IMutationsLib;
-import classes.IMutations.KitsuneThyroidGlandMutation;
-import classes.Scenes.Areas.Forest.Kitsune;
 import classes.Scenes.NPCs.DivaScene;
 
 import classes.GlobalFlags.kFLAGS;

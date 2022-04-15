@@ -15862,7 +15862,7 @@ public final class Mutations extends MutationsHelper {
         //Make sure pc is at least partialscaled
         if (!player.hasCoatOfType(Skin.SCALES) && changeLimit > 0) {
             outputText("[pg]");
-            transformations.SkinScales(Skin.COVERAGE_LOW, {colors: "magenta"}).applyEffect();
+            transformations.SkinScales(Skin.COVERAGE_LOW, {color: "magenta"}).applyEffect();
             player.coatColor2 = "purplish black";
             changes++;
         }
@@ -15909,9 +15909,11 @@ public final class Mutations extends MutationsHelper {
             outputText(player.skinTone + " colored.</b>");
         }
 
-        outputText("\n\nYou feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself... covering the whole area in front of you with pinkish sweet smelling smoke.");
-        outputText("\n\nIt seems the scale has awaked some kind of power within you...  (<b>Gained Perk: Dragon lust poison breath!</b>)");
-        player.createPerk(PerkLib.DragonLustPoisonBreath, 0, 0, 0, 0);
+        if (!player.hasPerk(PerkLib.DragonLustPoisonBreath)){
+            outputText("\n\nYou feel something awakening within you... then a sudden sensation of choking grabs hold of your throat, sending you to your knees as you clutch and gasp for breath.  It feels like there's something trapped inside your windpipe, clawing and crawling its way up.  You retch and splutter and then, with a feeling of almost painful relief, you expel a bellowing roar from deep inside of yourself... covering the whole area in front of you with pinkish sweet smelling smoke.");
+            outputText("\n\nIt seems the scale has awaked some kind of power within you...  (<b>Gained Perk: Dragon lust poison breath!</b>)");
+            player.createPerk(PerkLib.DragonLustPoisonBreath, 0, 0, 0, 0);
+        }
 
         //-Madness
         if (!player.hasPerk(PerkLib.Insanity) && changeLimit > 0) {
@@ -17539,4 +17541,4 @@ public final class Mutations extends MutationsHelper {
 		player.herbXP(HE);
     }
 }
-}
+}
