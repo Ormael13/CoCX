@@ -36,7 +36,7 @@ package classes.Scenes.Camp
 			this.a = "the ";
 			this.short = "F class Heaven Tribulation";
 			this.imageName = "F class Heaven Tribulation";
-			this.long = "You're currently facing F class Heaven Tribulation. A gathering of jet black clouds that sends down thunders to test any soul cultivator dreaming to break to Soul King stage.";
+			this.long = "You're currently facing the F class Heavenly Tribulation: A gathering of jet black clouds that sends down a wrathful storm to test any soul cultivator dreaming to break to Soul King stage.";
 			this.plural = false;
 			initStrTouSpeInte(10, 10, 10, 10);
 			initWisLibSensCor(10, 10, 10, 50);

@@ -54,7 +54,7 @@ use namespace CoC;
 				if (flags[kFLAGS.ZENJI_PROGRESS] == -1) outputText(", he strikes you for ");
 				else outputText(". He strikes you for ");
 				damage = player.takePhysDamage(damage, true);
-				if (player.findPerk(PerkLib.Resolute) < 0 && rand(2) == 0) player.createStatusEffect(StatusEffects.Stunned, 0, 0, 0, 0);
+				if (!player.hasPerk(PerkLib.Resolute) && rand(2) == 0) player.createStatusEffect(StatusEffects.Stunned, 0, 0, 0, 0);
 			}
 			outputText(".");
 			statScreenRefresh();

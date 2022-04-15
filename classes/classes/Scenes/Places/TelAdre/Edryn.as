@@ -1187,4 +1187,4 @@ private function postEdrynEatOutRut():void {
 	doNext(camp.returnToCampUseFourHours);
 }
 }
-}
+}

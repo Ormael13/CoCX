@@ -276,7 +276,7 @@ import classes.internals.*;
 		override public function defeated(hpVictory:Boolean):void
 		{
 			cleanupAfterCombat();
-			SceneLib.alvinaFollower.alvinaThirdEncounterYesNeverWon();
+			doNext(SceneLib.alvinaFollower.alvinaThirdEncounterYesNeverWon);
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void

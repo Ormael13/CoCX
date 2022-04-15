@@ -88,22 +88,6 @@ private function postfightoptions():void {
 		if (player.armor is SuccubusArmor) temp2 = (player.armor as SuccubusArmor).succubusPaizuri;
 		else temp2 = (player.armor as LustyMaidensArmor).lustyMaidenPaizuri;
 	}
-/*	//Used for tracking prostate milking and injection
-	var tempText:String = "";
-	var temp:Function = null;
-	//Enable mino milking even if not in need
-	if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_STATE] >= 1 || player.findPerk(PerkLib.MinotaurCumAddict) >= 0) {
-		if(player.biggestTitSize() >= 5 && !player.isNaga()) {
-			temp = minoGetsTitFucked;
-			tempText = "Titfuck Him";
-		}
-		else if(player.isNaga()) {
-			temp = minoGetsTitFucked;
-			tempText = "ProstateMilk";
-		}
-		filled = takeMinoCumDirectly;
-	}
-*/	//Hungry for cum?  Grab a snickers.
 	menu();
 	if (player.lust >= 33) {
 		if (dickRape != null) addButton(0, "Use Cock", bumRapeaMinotaur);
@@ -122,6 +106,8 @@ private function postfightoptions():void {
 			if (player.armor is SuccubusArmor) addButton(9, "B.Titfuck", (player.armor as SuccubusArmor).succubusPaizuri);
 			else addButton(9, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
 		}
+        // what the sh*t
+        //TODO: replace with  LustyMaidensArmor.addTitfuckButton(9);
 		if (player.hasPerk(PerkLib.Feeder)) addButton(10, "Nurse", minotaurDrinksMilkNewsAtEleven);
 		if (player.isAlraune()) addButton(11, "Vine in Butt", alrauneVineInButtScene);
 	}

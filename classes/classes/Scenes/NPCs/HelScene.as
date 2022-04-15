@@ -414,7 +414,7 @@ private function helFuckMenu(isAmbush:Boolean = false):void {
 		}
 	}
 	//Possess crams in free spot or overlaps another.
-	if(player.findPerk(PerkLib.Incorporeality) >= 0) {
+	if(player.hasPerk(PerkLib.Incorporeality)) {
 		//Taurs or nagas with both scenes, replace 1!
 		if(bodyButt != null && bodyButt2 != null) {
 			if(rand(2) == 0) {

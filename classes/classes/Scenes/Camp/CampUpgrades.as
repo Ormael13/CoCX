@@ -6,14 +6,8 @@ package classes.Scenes.Camp
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.CoC;
-	import classes.GlobalFlags.kACHIEVEMENTS;
 	import classes.BaseContent;
-	
 	import classes.Scenes.NPCs.*;
-	import classes.Scenes.Camp;
-	
-	import coc.model.GameModel;
 	
 	public class CampUpgrades extends BaseContent {
 		

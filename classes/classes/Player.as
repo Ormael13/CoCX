@@ -652,14 +652,14 @@ use namespace CoC;
 			//Bonus defense
 			if (arms.type == Arms.YETI) armorDef += (1 * newGamePlusMod);
 			if (arms.type == Arms.SPIDER || arms.type == Arms.MANTIS || arms.type == Arms.BEE || arms.type == Arms.SALAMANDER) armorDef += (2 * newGamePlusMod);
-			if (arms.type == Arms.DRACONIC || arms.type == Arms.FROSTWYRM || arms.type == Arms.SEA_DRAGON) armorDef += (3 * newGamePlusMod);
+			if (arms.type == Arms.DRACONIC || arms.type == Arms.JABBERWOCKY || arms.type == Arms.FROSTWYRM || arms.type == Arms.SEA_DRAGON) armorDef += (3 * newGamePlusMod);
 			if (arms.type == Arms.HYDRA) armorDef += (4 * newGamePlusMod);
 			if (tailType == Tail.SPIDER_ADBOMEN || tailType == Tail.MANTIS_ABDOMEN || tailType == Tail.BEE_ABDOMEN) armorDef += (2 * newGamePlusMod);
 			if (tailType == Tail.DRACONIC) armorDef += (3 * newGamePlusMod);
 			if (lowerBody == LowerBody.FROSTWYRM) armorDef += (6 * newGamePlusMod);
 			if (lowerBody == LowerBody.YETI) armorDef += (1 * newGamePlusMod);
 			if (lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS || lowerBody == LowerBody.BEE || lowerBody == LowerBody.MANTIS || lowerBody == LowerBody.SALAMANDER) armorDef += (2 * newGamePlusMod);
-			if (lowerBody == LowerBody.DRAGON || lowerBody == LowerBody.SEA_DRAGON) armorDef += (3 * newGamePlusMod);
+			if (lowerBody == LowerBody.DRAGON || lowerBody == LowerBody.JABBERWOCKY || lowerBody == LowerBody.SEA_DRAGON) armorDef += (3 * newGamePlusMod);
 			if (lowerBody == LowerBody.DRIDER || lowerBody == LowerBody.HYDRA) armorDef += (4 * newGamePlusMod);
 			if (rearBody.type == RearBody.YETI_FUR) armorDef += (4 * newGamePlusMod);
 			if (hasPerk(PerkLib.Lycanthropy)) armorDef += 10 * newGamePlusMod;
@@ -3412,7 +3412,7 @@ use namespace CoC;
 				{name: 'banshee', score: bansheeScore(), minscore: 4},
 				{name: 'bat', score: batScore(), minscore: 10},
 				{name: 'bear and panda', score: bearpandaScore(), minscore: 10},
-				{name: 'bee', score: beeScore(), minscore: 14},
+				{name: 'bee', score: beeScore(), minscore: 17},
 				{name: 'cancer', score: cancerScore(), minscore: 13},
 				{name: 'cat', score: catScore(), minscore: 8},
 				{name: 'cave wyrm', score: cavewyrmScore(), minscore: 10},
@@ -3649,7 +3649,11 @@ use namespace CoC;
 			}
 			if (TopRace == "jabberwocky") {
 				if (TopScore >= 10) {
-					if (TopScore >= 25) {
+					if (TopScore >= 30) {
+						if (isTaur()) race = "primal jabberwocky-taur";
+						else race = "primal jabberwocky";
+					}
+					else if (TopScore >= 25) {
 						if (isTaur()) race = "greater jabberwocky-taur";
 						else race = "greater jabberwocky";
 					}
@@ -3717,12 +3721,10 @@ use namespace CoC;
 			}
 			if (TopRace == "fairy") {
 				if (TopScore >= 23) {
-					if (TopScore >= 26) {
-						race = "fairy queen";
-					}
-					else{
-						race = "great fairy";
-					}
+					if (TopScore >= 29) race = "Titania";
+					else if (TopScore >= 29) race = "fairy queen";
+					else if (TopScore >= 26) race = "noble fairy";
+					else race = "great fairy";
 				}
 			}
 			if (TopRace == "ferret") {
@@ -4799,7 +4801,7 @@ use namespace CoC;
 				chimeraCounter++;
 			if (cancerScore() >= 13)
 				chimeraCounter++;
-			if (beeScore() >= 14)
+			if (beeScore() >= 17)
 				chimeraCounter++;
 			if (goblinScore() >= 10)
 				chimeraCounter++;
@@ -5418,6 +5420,8 @@ use namespace CoC;
 			var beeCounter:Number = 0;
 			if (InCollection(hairColor, BeeGirlScene.beeHair)) //TODO if hairColor2 == yellow && hairColor == black
 				beeCounter++;
+			if (InCollection(skin.coat.color, "yellow") && InCollection(skin.coat.color2, "black","ebony"))
+				beeCounter++;
 			if (eyes.type == Eyes.BLACK_EYES_SAND_TRAP)
 				beeCounter += 2;//po dodaniu bee tongue wróci do +1
 			if (antennae.type == Antennae.BEE) {
@@ -5436,7 +5440,7 @@ use namespace CoC;
 			if (wings.type == Wings.BEE_SMALL)
 				beeCounter++;
 			if (wings.type == Wings.BEE_LARGE)
-				beeCounter += 2;
+				beeCounter += 4;
 			if (rearBody.type == RearBody.NONE)
 				beeCounter++;
 			//chitin + correct color of it +1
@@ -5679,9 +5683,11 @@ use namespace CoC;
 			Begin("Player","racialScore","fairy");
 			var fairyCounter:Number = 0;
 			if (faceType == Face.FAIRY)
-				fairyCounter++;
+				fairyCounter += 2;
 			if (eyes.type == Eyes.FAIRY)
-				fairyCounter++;
+				fairyCounter += 2;
+			if (hairType == Hair.FAIRY)
+				fairyCounter += 2;
 			if (ears.type == Ears.ELVEN)
 				fairyCounter++;
 			if (tailType == Tail.NONE)
@@ -5693,16 +5699,10 @@ use namespace CoC;
 			if (tongue.type == Tongue.ELF)
 				fairyCounter++;
 			if (wings.type == Wings.FAIRY)
-				fairyCounter+=4;
-			if (hairType == Hair.FAIRY)
+				fairyCounter += 3;
+			if (breastRows.length > 0)
 				fairyCounter++;
 			if (!hasCock() && fairyCounter > 0)
-				fairyCounter++;
-			if (breastRows.length > 1 && fairyCounter > 0)
-				fairyCounter++;
-			if (breastRows.length == 3 && fairyCounter > 0)
-				fairyCounter++;
-			if (breastRows.length == 4 && fairyCounter > 0)
 				fairyCounter++;
 			if (!hasCoat() && fairyCounter > 0)
 				fairyCounter++;
@@ -6400,50 +6400,101 @@ use namespace CoC;
 		public function jabberwockyScore():Number {
 			Begin("Player","racialScore","jabberwocky");
 			var jabberwockyCounter:Number = 0;
-			if (faceType == Face.JABBERWOCKY || faceType == Face.BUCKTOOTH)
+			var jabberwockyCounter2:Number = 0;
+			if (faceType == Face.JABBERWOCKY || faceType == Face.BUCKTOOTH) {
 				jabberwockyCounter++;
+				jabberwockyCounter2++;
+			}
 			if (faceType == Face.DRAGON || faceType == Face.DRAGON_FANGS)
 				jabberwockyCounter -= 10;
-			if (eyes.type == Eyes.DRACONIC)
+			if (eyes.type == Eyes.DRACONIC) {
 				jabberwockyCounter++;
-			if (ears.type == Ears.DRAGON)
+				jabberwockyCounter2++;
+			}
+			if (eyes.colour == "red") {
 				jabberwockyCounter++;
-			if (tailType == Tail.DRACONIC)
+				jabberwockyCounter2++;
+			}
+			if (InCollection(hairColor, ["purplish-pink"])) {
 				jabberwockyCounter++;
-			if (tongue.type == Tongue.DRACONIC)
+				jabberwockyCounter2++;
+			}
+			if (InCollection(coatColor, ["magenta"])) {
 				jabberwockyCounter++;
-			if (wings.type == Wings.FEY_DRAGON)
+				jabberwockyCounter2++;
+			}
+			if (InCollection(skinTone, ["caramel"])) {
+				jabberwockyCounter++;
+				jabberwockyCounter2++;
+			}
+			if (ears.type == Ears.BUNNY) {
+				jabberwockyCounter++;
+				jabberwockyCounter2++;
+			}
+			if (tailType == Tail.DRACONIC) {
+				jabberwockyCounter++;
+				jabberwockyCounter2++;
+			}
+			if (tongue.type == Tongue.DRACONIC) {
+				jabberwockyCounter++;
+				jabberwockyCounter2++;
+			}
+			if (antennae.type == Antennae.JABBERWOCKY) {
+				jabberwockyCounter++;
+				jabberwockyCounter2++;
+			}
+			if (wings.type == Wings.FEY_DRAGON) {
 				jabberwockyCounter += 4;
+				jabberwockyCounter2 += 4;
+			}
 			if (wings.type == Wings.DRACONIC_SMALL || wings.type == Wings.DRACONIC_LARGE || wings.type == Wings.DRACONIC_HUGE)
 				jabberwockyCounter -= 10;
-			if (lowerBody == LowerBody.DRAGON)
+			if (lowerBody == LowerBody.JABBERWOCKY) {
 				jabberwockyCounter++;
-			if (arms.type == Arms.DRACONIC)
+				jabberwockyCounter2++;
+			}
+			if (arms.type == Arms.JABBERWOCKY) {
 				jabberwockyCounter++;
+				jabberwockyCounter2++;
+			}
 			if (tallness > 120 && jabberwockyCounter >= 10)
 				jabberwockyCounter++;
-			if (hasPartialCoat(Skin.DRAGON_SCALES) || hasCoatOfType(Skin.DRAGON_SCALES))
+			if (hasPartialCoat(Skin.DRAGON_SCALES) || hasCoatOfType(Skin.DRAGON_SCALES)) {
 				jabberwockyCounter++;
-			if (horns.type == Horns.DRACONIC_X4_12_INCH_LONG)
+				jabberwockyCounter2++;
+			}
+			if (InCollection(coatColor, ["pink"])) {
+				jabberwockyCounter++;
+				jabberwockyCounter2++;
+			}
+			if (horns.type == Horns.JABBERWOCKY) {
 				jabberwockyCounter += 2;
-			if (horns.type == Horns.DRACONIC_X2)
+				jabberwockyCounter2 += 2;
+			}
+			if (dragonCocks() > 0 || hasVagina())
 				jabberwockyCounter++;
-		//	if (dragonCocks() > 0)
-		//		dragonCounter++;
-			if (jabberwockyCounter >= 5 && (hasPerk(PerkLib.DragonFireBreath) || hasPerk(PerkLib.DragonIceBreath) || hasPerk(PerkLib.DragonLightningBreath) || hasPerk(PerkLib.DragonDarknessBreath)))
+			if (jabberwockyCounter >= 5 && (hasPerk(PerkLib.DragonLustPoisonBreath)))
 				jabberwockyCounter++;
-			//if (hasPerk(PerkLib.Insanity))(Immune to insanity gains bonus)
-			//	jabberwockyCounter++;
-			//if (hasPerk(PerkLib.InsanityEvolved))(Immune to insanity gains bonus)
-			//	jabberwockyCounter++;
-			//if (hasPerk(PerkLib.InsanityFinalForm))(Immune to insanity gains bonus)
-			//	jabberwockyCounter++;
+			if (hasPerk(PerkLib.Insanity))
+				jabberwockyCounter++;
 			//if (hasPerk(PerkLib.JabberwockyMarrow)) (regeneration)
 			//	jabberwockyCounter++;
 			//if (hasPerk(PerkLib.JabberwockyMarrowEvolved)) (regeneration)
 			//	jabberwockyCounter++;
 			//if (hasPerk(PerkLib.JabberwockyMarrowFinalForm)) (regeneration)
 			//	jabberwockyCounter++;
+			if (hasPerk(MutationsLib.DraconicBones))
+				jabberwockyCounter++;
+			if (hasPerk(MutationsLib.DraconicBonesPrimitive))
+				jabberwockyCounter++;
+			if (hasPerk(MutationsLib.DraconicBonesEvolved))
+				jabberwockyCounter++;
+			if (hasPerk(MutationsLib.DraconicHeart))
+				jabberwockyCounter++;
+			if (hasPerk(MutationsLib.DraconicHeartPrimitive))
+				jabberwockyCounter++;
+			if (hasPerk(MutationsLib.DraconicHeartEvolved))
+				jabberwockyCounter++;
 			if (hasPerk(MutationsLib.DrakeLungs))
 				jabberwockyCounter++;
 			if (hasPerk(MutationsLib.DrakeLungsPrimitive))
@@ -6463,6 +6514,7 @@ use namespace CoC;
 			if (hasPerk(PerkLib.AscensionCruelChimerasThesis) && jabberwockyCounter >= 8)
 				jabberwockyCounter += 1;
 			if ((faceType != Face.JABBERWOCKY && faceType != Face.BUCKTOOTH) || wings.type != Wings.FEY_DRAGON || lowerBody == LowerBody.FROSTWYRM) jabberwockyCounter = 0;
+			if (jabberwockyCounter2 < 5) jabberwockyCounter = jabberwockyCounter2;
 			if (isGargoyle()) jabberwockyCounter = 0;
 			if (hasPerk(PerkLib.ElementalBody)) jabberwockyCounter = 0;
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
@@ -11261,16 +11313,16 @@ use namespace CoC;
 			dynStats("lus", 0, "scale", false);
 		}
 
-		public function corruptionTolerance():int {
+		public function get corruptionTolerance():int {
 			var temp:int = perkv1(PerkLib.AscensionTolerance) * 5;
 			if (flags[kFLAGS.MEANINGLESS_CORRUPTION] > 0) temp += 100;
 			return temp;
 		}
-		public function corAdjustedUp():Number {
-			return boundFloat(0, cor + corruptionTolerance(), 100);
+		public function get corAdjustedUp():Number {
+			return boundFloat(0, cor + corruptionTolerance, 100);
 		}
-		public function corAdjustedDown():Number {
-			return boundFloat(0, cor - corruptionTolerance(), 100);
+		public function get corAdjustedDown():Number {
+			return boundFloat(0, cor - corruptionTolerance, 100);
 		}
 
 		public function playerMinionsCount():Number {
@@ -11709,7 +11761,7 @@ use namespace CoC;
 			if (this.hasPerk(PerkLib.GargoyleCorrupted)) {
 				minSen += 15;
 			}
-			if (beeScore() >= 14) minLib += 20;
+			if (beeScore() >= 17) minLib += 20;
 			//Factory Perks
 			if (this.hasPerk(PerkLib.DemonicLethicite)) {minCor+=10;minLib+=10;}
 			if (this.hasPerk(PerkLib.ProductivityDrugs)) {minLib+=this.perkv1(PerkLib.ProductivityDrugs);minCor+=10;}
@@ -11947,21 +11999,29 @@ use namespace CoC;
 				}
 			}
 			if (jabberwockyScore() >= 10) {
-				if (jabberwockyScore() >= 25) {
+				if (jabberwockyScore() >= 30) {
 					maxStrCap2 += 125;
-					maxTouCap2 += 95;
-					maxSpeCap2 += 145;
-					maxIntCap2 += 40;
-					maxWisCap2 -= 50;
-					maxLibCap2 += 20;
-				}
-				if (jabberwockyScore() >= 20) {
-					maxStrCap2 += 95;
 					maxTouCap2 += 95;
 					maxSpeCap2 += 100;
 					maxIntCap2 += 40;
 					maxWisCap2 -= 50;
-					maxLibCap2 += 20;
+					maxLibCap2 += 140;
+				}
+				else if (jabberwockyScore() >= 25) {
+					maxStrCap2 += 105;
+					maxTouCap2 += 80;
+					maxSpeCap2 += 90;
+					maxIntCap2 += 40;
+					maxWisCap2 -= 40;
+					maxLibCap2 += 100;
+				}
+				else if (jabberwockyScore() >= 20) {
+					maxStrCap2 += 90;
+					maxTouCap2 += 70;
+					maxSpeCap2 += 80;
+					maxIntCap2 += 30;
+					maxWisCap2 -= 30;
+					maxLibCap2 += 60;
 				}
 				else {
 					maxStrCap2 += 50;
@@ -12292,11 +12352,11 @@ use namespace CoC;
 					}
 				}
 			}
-		*/	if (beeScore() >= 14) {
+		*/	if (beeScore() >= 17) {
 				maxTouCap2 += 80;
 				maxSpeCap2 += 80;
 				maxIntCap2 += 50;
-				maxLibCap2 += 20;
+				maxLibCap2 += 65;
 			}//+40/30-40
 			if (spiderScore() >= 7) {
 				maxStrCap2 -= 20;

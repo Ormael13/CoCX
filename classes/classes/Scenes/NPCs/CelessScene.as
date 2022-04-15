@@ -848,6 +848,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		"You suck on her cock until she finally orgasms, the sweet cum flooding your throat.\n\n"+
 		"Weirdly enough, you feel something change in you as the corrupted cum reaches your stomach.");
 		doHeatOrRut();
+		doNext(camp.returnToCampUseOneHour);
 	}
 
 	private function incestGetFucked():void{
@@ -867,6 +868,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		"By now you already figured this is a common thing among unicorns.");
 		outputText("You feel something change in you as the corrupted cum reaches your womb.");
 		doHeatOrRut();
+		doNext(camp.returnToCampUseOneHour);
 	}
 
 
@@ -920,6 +922,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		"As expected, nothing spills out of her pussy, even after the both of you lay down in the grass to rest.\n\n" +
 		"You snuggle for a time with "+ _name +" then head back to your daily routine. ");
 		doHeatOrRut();
+		doNext(camp.returnToCampUseOneHour);
 	}
 
 	private function incestCentaurToys():void{
@@ -937,7 +940,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		else if (!player.inRut && player.goIntoRut(false)) {	//This is based on the original.xml source.
 			outputText("\nYou are now in Rut!");
 		}
-		doNext(camp.returnToCampUseOneHour);
+		//doNext(camp.returnToCampUseOneHour);
 	}
 
 	private function celessChildAppearance():void{

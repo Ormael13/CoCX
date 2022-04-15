@@ -30,7 +30,7 @@ public class GoblinWarrior extends Goblin
 			else {
 				outputText("Her shield hits you! ");
 				//Get hit
-				if (rand(100) < 40 && player.findPerk(PerkLib.Resolute) < 0) {
+				if (rand(100) < 40 && !player.hasPerk(PerkLib.Resolute)) {
 					outputText("The impact from the shield has left you with a concussion. <b>You are stunned.</b> ");
 					player.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 				}

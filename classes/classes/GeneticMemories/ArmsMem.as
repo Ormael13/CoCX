@@ -393,6 +393,17 @@ package classes.GeneticMemories {
 			}
 		});
 
+	  	public static const JABBERWOCKY:int = 32;
+	  	EnumValue.add(Memories, JABBERWOCKY, "JABBERWOCKY", {
+		  id: "Jabberwocky Arms",
+		  name: "Jabberwocky Arms",
+		  cost: 100,
+		  title: "Jabberwocky",
+		  transformation: function(): Transformation {
+			  return CoC.instance.transformations.ArmsJabberwocky;
+		  }
+	  	});
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

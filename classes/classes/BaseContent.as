@@ -1,5 +1,4 @@
 ﻿package classes {
-import classes.CoC;
 import classes.Items.*;
 import classes.Scenes.Camp;
 import classes.Scenes.Combat.Combat;
@@ -929,6 +928,12 @@ import coc.xxc.StoryContext;
         protected function get sceneHunter():SceneHunter {
             return CoC.instance.gameSettings.sceneHunter_inst;
         }
+		protected function get recalling():Boolean {
+			return CoC.instance.gameSettings.sceneHunter_inst._recalling;
+		}
+		protected function set recalling(val:Boolean):void {
+			CoC.instance.gameSettings.sceneHunter_inst._recalling = val;
+		}
 
 		protected function showStatDown(arg:String):void
 		{

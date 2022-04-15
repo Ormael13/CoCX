@@ -181,14 +181,10 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 				//Normal male: -requires dick of area < 36
 				if (player.cockTotal() > 0) cockRape = rapeAnemoneWithDick;
 				if (player.hasVagina()) vaginaRape = rapeAnemoneWithPussy;
-				var bikiniTits:Function =null;
 				var temp3:Function =null;
-				if (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armor is LustyMaidensArmor || player.armor is SuccubusArmor)) {
-					if (player.armor is SuccubusArmor) bikiniTits = (player.armor as SuccubusArmor).succubusPaizuri;
-					else bikiniTits = (player.armor as LustyMaidensArmor).lustyMaidenPaizuri;
-				}
 				choices("Your Ass", victoryButtholeRape, "Your Cock", cockRape, "Your Vagina", vaginaRape, "Her Butt", anal, "Lay Egg", eggs,
-					"", null, "", null, "B.Titfuck", bikiniTits, "", null, "Leave", cleanupAfterCombat);
+					"", null, "", null, "B.Titfuck", null/*placeholder*/, "", null, "Leave", cleanupAfterCombat);
+                LustyMaidensArmor.addTitfuckButton(7);
                 SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatAnemone);
 			}
 			else cleanupAfterCombat();
@@ -281,7 +277,7 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 
 				outputText("The anemone's eyes roll back in her head as she reaches her climax first, hips shaking and penis squirting a glob of semen that drools down the side.  ");
 				//[(Flexibility cat perk)
-				if (player.findPerk(PerkLib.Flexibility) >= 0) outputText("You lean down and take the anemone's cock in your own mouth as she continues orgasming, swallowing the cool, slippery jism -- it tastes not salty and fishy as you'd hoped but somewhat faintly like algae.  The anemone, recovering her wits a bit, looks at you blankly, as though she can't fathom why anyone would want to drink <i>her</i> ejaculate instead of the other way around.  Your eyes twinkle mirthfully in response as you suck and swallow the last of her jizz.  ");
+				if (player.hasPerk(PerkLib.Flexibility)) outputText("You lean down and take the anemone's cock in your own mouth as she continues orgasming, swallowing the cool, slippery jism -- it tastes not salty and fishy as you'd hoped but somewhat faintly like algae.  The anemone, recovering her wits a bit, looks at you blankly, as though she can't fathom why anyone would want to drink <i>her</i> ejaculate instead of the other way around.  Your eyes twinkle mirthfully in response as you suck and swallow the last of her jizz.  ");
 				player.sexReward("cum","Vaginal");
 				outputText("Your orgasm takes a bit longer, but the convulsing walls of her pussy do their best to help you arrive and the feelers along her labia writhe against your [cocks] in the same tempo, injecting the last of their venom.  With a deep, final thrust, " + sMultiCockDesc() + " erupts in her pussy.  ");
 				//[(big skeet)

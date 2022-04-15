@@ -14,16 +14,13 @@ import classes.BodyParts.Wings;
 import classes.CoC;
 import classes.CoC_Settings;
 import classes.CockTypesEnum;
-import classes.Creature;
 import classes.EngineCore;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.ItemType;
 import classes.Items.JewelryLib;
-import classes.Items.ShieldLib;
 import classes.Items.Weapon;
 import classes.Items.WeaponLib;
-import classes.Items.WeaponsRange.LactoBlasters;
 import classes.Monster;
 import classes.MutationsLib;
 import classes.PerkLib;
@@ -44,10 +41,7 @@ import classes.Scenes.Areas.HighMountains.Harpy;
 import classes.Scenes.Areas.Mountain.Minotaur;
 import classes.Scenes.Areas.Ocean.SeaAnemone;
 import classes.Scenes.Areas.Tundra.YoungFrostGiant;
-import classes.Scenes.Combat.MagicSpecials;
-import classes.Scenes.Combat.SpellsWhite.WhitefireSpell;
 import classes.Scenes.Dungeons.DeepCave.EncapsulationPod;
-import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.Dungeons.D3.*;
 import classes.Scenes.Dungeons.EbonLabyrinth.ChaosChimera;
 import classes.Scenes.Dungeons.EbonLabyrinth.DarkSlimeEmpress;
@@ -3612,9 +3606,9 @@ public class Combat extends BaseContent {
 						damage1Ba *= 2;
 					}
                     monster.teased(monster.lustVuln * damage1B);
-                    if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
-                        monster.addStatusValue(StatusEffects.NagaVenom, 3, damage1Ba);
-                    } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, damage1Ba, 0);
+                    if (monster.hasStatusEffect(StatusEffects.BeeVenom)) {
+                        monster.addStatusValue(StatusEffects.BeeVenom, 3, damage1Ba);
+                    } else monster.createStatusEffect(StatusEffects.BeeVenom, 0, 0, damage1Ba, 0);
                     player.tailVenom -= player.VenomWebCost();
 					flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
                 }
@@ -5573,6 +5567,14 @@ public class Combat extends BaseContent {
                         player.tailVenom -= player.VenomWebCost();
                         flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
                     }
+                    var dBd1c:Number = 1;
+                    if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) dBd1c *= 2;
+                    monster.teased(monster.lustVuln * lustdamage * dBd1c, false);
+                    combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+                    monster.statStore.addBuffObject({spe:-(dBd1c*10)}, "Poison",{text:"Poison"});
+                    if (monster.hasStatusEffect(StatusEffects.ManticoreVenom)) monster.addStatusValue(StatusEffects.ManticoreVenom,3,(dBd1c*5));
+                    else monster.createStatusEffect(StatusEffects.ManticoreVenom, 0, 0, (dBd1c*5), 0);
+                    player.tailVenom -= player.VenomWebCost();
                 }
                 outputText(".")
                 ExtraNaturalWeaponAttack(0.5);
@@ -5587,6 +5589,22 @@ public class Combat extends BaseContent {
             else if (player.tail.type == Tail.SCORPION || player.tail.type == Tail.BEE_ABDOMEN ){
                 outputText("You ready your stinger and plunge it deep into your opponent delivering your poison in the process");
                 ExtraNaturalWeaponAttack(0.5);
+                var dBd2c:Number = 1;
+                //var venomType:StatusEffectType = StatusEffects.BeeVenom;
+                var lustdamage2:Number = 35 + rand(player.lib / 10);
+                var lustDmg3:Number = 1;
+                if (player.level < 10) lustdamage2 += 20 + (player.level * 3);
+                else if (player.level < 20) lustdamage2 += 50 + (player.level - 10) * 2;
+                else if (player.level < 30) lustdamage2 += 70 + (player.level - 20) * 1;
+                else lustdamage2 += 80;
+                lustdamage2 *= 0.14;
+                if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) lustDmg3 *= 2;
+                lustdamage2 *= lustDmg3;
+                if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) dBd2c *= 2;
+                monster.teased(monster.lustVuln * lustdamage2 * dBd2c, false);
+                combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+                if (monster.hasStatusEffect(StatusEffects.BeeVenom)) monster.addStatusValue(StatusEffects.BeeVenom,3,(dBd2c*5));
+                else monster.createStatusEffect(StatusEffects.BeeVenom, 0, 0, (dBd2c*5), 0);
                 outputText("\n")
             }
 			if ((player.tail.type == (Tail.GARGOYLE || Tail.GARGOYLE_2))){
@@ -6145,10 +6163,10 @@ public class Combat extends BaseContent {
 				}
 				else if (player.weapon == weapons.MGSWORD) doMagicDamage(damage, true, true);
 				else if (player.weapon == weapons.PHALLUS) {
-					if (player.statusEffectv1(StatusEffects.ThePhalluspear1) == 1) monster.teased(monster.lustVuln * Math.round(damage * 0.1));
+					if (player.statusEffectv1(StatusEffects.ThePhalluspear1) == 1) monster.teased(monster.lustVuln * Math.round(damage * 0.05));
 					else {
 						doPhysicalDamage(Math.round(damage * 0.75), true, true);
-						monster.teased(monster.lustVuln * Math.round(damage * 0.025));
+						monster.teased(monster.lustVuln * Math.round(damage * 0.0125));
 					}
 				}
                 else {
@@ -7794,10 +7812,6 @@ public class Combat extends BaseContent {
 		if (monster.hasPerk(PerkLib.EnemyGhostType)) damage = 0;
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
-            /* No monsters use this perk, so it's been removed for now
-		if(monster.hasPerk(PerkLib.LastStrike)) doNext(monster.perk(monster.findPerk(PerkLib.LastStrike)).value1);
-		else doNext(endHpVictory);
-		*/
             doNext(endHpVictory);
         }
         // Uma's Massage Bonuses
@@ -7887,10 +7901,6 @@ public class Combat extends BaseContent {
         damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
-            /* No monsters use this perk, so it's been removed for now
-		if(monster.hasPerk(PerkLib.LastStrike)) doNext(monster.perk(monster.findPerk(PerkLib.LastStrike)).value1);
-		else doNext(endHpVictory);
-		*/
             doNext(endHpVictory);
         }
         // Uma's Massage Bonuses
@@ -8060,10 +8070,6 @@ public class Combat extends BaseContent {
         damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
-            /* No monsters use this perk, so it's been removed for now
-		if(monster.hasPerk(PerkLib.LastStrike)) doNext(monster.perk(monster.findPerk(PerkLib.LastStrike)).value1);
-		else doNext(endHpVictory);
-		*/
             doNext(endHpVictory);
         }
         // Uma's Massage Bonuses
@@ -8229,10 +8235,6 @@ public class Combat extends BaseContent {
         damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
-            /* No monsters use this perk, so it's been removed for now
-		if(monster.hasPerk(PerkLib.LastStrike)) doNext(monster.perk(monster.findPerk(PerkLib.LastStrike)).value1);
-		else doNext(endHpVictory);
-		*/
             doNext(endHpVictory);
         }
         // Uma's Massage Bonuses
@@ -8371,10 +8373,6 @@ public class Combat extends BaseContent {
         damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
-            /* No monsters use this perk, so it's been removed for now
-		if(monster.hasPerk(PerkLib.LastStrike)) doNext(monster.perk(monster.findPerk(PerkLib.LastStrike)).value1);
-		else doNext(endHpVictory);
-		*/
             doNext(endHpVictory);
         }
         // Uma's Massage Bonuses
@@ -8513,10 +8511,6 @@ public class Combat extends BaseContent {
         damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
-            /* No monsters use this perk, so it's been removed for now
-		if(monster.hasPerk(PerkLib.LastStrike)) doNext(monster.perk(monster.findPerk(PerkLib.LastStrike)).value1);
-		else doNext(endHpVictory);
-		*/
             doNext(endHpVictory);
         }
         // Uma's Massage Bonuses
@@ -8584,10 +8578,6 @@ public class Combat extends BaseContent {
         damage = DamageOverhaul(damage);
         if (damage == 0) MSGControllForEvasion = true;
         if (monster.HP - damage <= monster.minHP()) {
-            /* No monsters use this perk, so it's been removed for now
-		if(monster.hasPerk(PerkLib.LastStrike)) doNext(monster.perk(monster.findPerk(PerkLib.LastStrike)).value1);
-		else doNext(endHpVictory);
-		*/
             doNext(endHpVictory);
         }
         // Uma's Massage Bonuses
@@ -8774,7 +8764,7 @@ public class Combat extends BaseContent {
 
     public function manaRecoveryMultiplier():Number {
         var multi:Number = 1;
-        if (player.hasPerk(PerkLib.ControlledBreath) && player.cor < (30 + player.corruptionTolerance())) multi += 0.2;
+        if (player.hasPerk(PerkLib.ControlledBreath) && player.cor < (30 + player.corruptionTolerance)) multi += 0.2;
 		if (player.hasPerk(PerkLib.GreyMageApprentice)) multi += 0.25;
 		if (player.hasPerk(PerkLib.GreyMage)) multi += 0.5;
         if (player.hasPerk(PerkLib.GreyArchmage)) multi += 0.75;
@@ -8856,7 +8846,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.Napping)) multi += 0.2;
         if (player.hasPerk(PerkLib.ZZZ)) multi += 0.2;
         if (player.hasPerk(PerkLib.Lazy)) multi += 0.2;
-        if (player.hasPerk(PerkLib.ControlledBreath) && player.cor < (30 + player.corruptionTolerance())) multi += 0.2;
+        if (player.hasPerk(PerkLib.ControlledBreath) && player.cor < (30 + player.corruptionTolerance)) multi += 0.2;
         if (player.hasPerk(PerkLib.SpeedyRecovery)) multi += 0.5;
         if (player.hasPerk(PerkLib.SpeedyRecuperation)) multi += 1;
         if (player.hasPerk(PerkLib.SpeedyRejuvenation)) multi += 2;
@@ -10864,8 +10854,8 @@ public class Combat extends BaseContent {
             if (player.armor == armors.GOOARMR) healingPercent += (SceneLib.valeria.valeriaFluidsEnabled() ? (flags[kFLAGS.VALERIA_FLUIDS] < 50 ? flags[kFLAGS.VALERIA_FLUIDS] / 25 : 2) : 2);
             if ((player.hasStatusEffect(StatusEffects.UnderwaterCombatBoost) || player.hasStatusEffect(StatusEffects.NearWater)) && (player.hasPerk(PerkLib.AquaticAffinity) || player.hasPerk(PerkLib.AffinityUndine)) && player.necklaceName == "Magic coral and pearl necklace") healingPercent += 1;
             if (player.statStore.hasBuff("CrinosShape") && player.hasPerk(PerkLib.ImprovingNaturesBlueprintsApexPredator)) healingPercent += 2;
-            if (player.perkv1(PerkLib.Sanctuary) == 1) healingPercent += ((player.corruptionTolerance() - player.cor) / (100 + player.corruptionTolerance()));
-            if (player.perkv1(PerkLib.Sanctuary) == 2) healingPercent += player.cor / (100 + player.corruptionTolerance());
+            if (player.perkv1(PerkLib.Sanctuary) == 1) healingPercent += ((player.corruptionTolerance - player.cor) / (100 + player.corruptionTolerance));
+            if (player.perkv1(PerkLib.Sanctuary) == 2) healingPercent += player.cor / (100 + player.corruptionTolerance);
             if (player.hasStatusEffect(StatusEffects.SecondWindRegen)) healingPercent += 5;
             if (player.hasStatusEffect(StatusEffects.Cauterize)) {
                 healingPercent += 1.5;
@@ -11079,7 +11069,7 @@ public class Combat extends BaseContent {
     public function soulforceRecoveryMultiplier():Number {
         var multi:Number = 1;
         if (player.hasPerk(PerkLib.DaoistCultivator)) multi += 0.5;
-        if (player.hasPerk(PerkLib.ControlledBreath) && player.cor < (30 + player.corruptionTolerance())) multi += 0.2;
+        if (player.hasPerk(PerkLib.ControlledBreath) && player.cor < (30 + player.corruptionTolerance)) multi += 0.2;
         if (player.alicornScore() >= 12) multi += 0.1;
         if (player.kitsuneScore() >= 5) {
             if (player.kitsuneScore() >= 10) multi += 1;
@@ -11655,6 +11645,64 @@ public class Combat extends BaseContent {
             monster.statStore.addBuffObject({str:-monster.statusEffectv1(StatusEffects.ApophisVenom)*2, spe:-monster.statusEffectv1(StatusEffects.ApophisVenom)*2, tou:-monster.statusEffectv1(StatusEffects.ApophisVenom)*2}, "Poison",{text:"Poison"});
 
             if (monster.statusEffectv3(StatusEffects.ApophisVenom) >= 1) monster.lust += monster.statusEffectv3(StatusEffects.ApophisVenom);
+            if (combatIsOver()) return;
+        }
+        //Bee Venom
+        if (monster.hasStatusEffect(StatusEffects.BeeVenom)) {
+            if (monster.plural) {
+                if (monster.statusEffectv1(StatusEffects.BeeVenom) <= 1) {
+                    outputText("You notice [monster he] are beginning to show signs of weakening, but there still appears to be plenty of fight left in [monster him].  ");
+                } else {
+                    outputText("You notice [monster he] are obviously affected by your venom, [monster his] movements become unsure, and [monster his] balance begins to fade. Sweat begins to roll on [monster his] skin. You wager [monster he] are probably beginning to regret provoking you.  ");
+                }
+            }
+            //Not plural
+            else {
+                if (monster.statusEffectv1(StatusEffects.BeeVenom) <= 1) {
+                    outputText("You notice [monster he] is beginning to show signs of weakening, but there still appears to be plenty of fight left in [monster him].  ");
+                } else {
+                    outputText("You notice [monster he] is obviously affected by your venom, [monster his] movements become unsure, and [monster his] balance begins to fade. Sweat is beginning to roll on [monster his] skin. You wager [monster he] is probably beginning to regret provoking you.  ");
+                }
+            }
+            damage1B = calculateBasicTeaseDamage();
+            if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
+                damage1B *= 2;
+            }
+            monster.teased(monster.lustVuln * damage1B);
+            combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+            monster.lustVuln += 0.05;
+            monster.statStore.addBuffObject({tou:-monster.statusEffectv1(StatusEffects.ManticoreVenom)*2}, "Poison",{text:"Poison"});
+
+            if (monster.statusEffectv3(StatusEffects.BeeVenom) >= 1) monster.lust += monster.statusEffectv3(StatusEffects.BeeVenom);
+            if (combatIsOver()) return;
+        }
+        //Jabberwocky Poison Breath
+        if (monster.hasStatusEffect(StatusEffects.JabberwockyVenom)) {
+            if (monster.plural) {
+                if (monster.statusEffectv1(StatusEffects.JabberwockyVenom) <= 1) {
+                    outputText("You notice [monster he] are beginning to show signs of weakening, but there still appears to be plenty of fight left in [monster him].  ");
+                } else {
+                    outputText("You notice [monster he] are obviously affected by your venom, [monster his] movements become unsure, and [monster his] balance begins to fade. Sweat begins to roll on [monster his] skin. You wager [monster he] are probably beginning to regret provoking you.  ");
+                }
+            }
+            //Not plural
+            else {
+                if (monster.statusEffectv1(StatusEffects.JabberwockyVenom) <= 1) {
+                    outputText("You notice [monster he] is beginning to show signs of weakening, but there still appears to be plenty of fight left in [monster him].  ");
+                } else {
+                    outputText("You notice [monster he] is obviously affected by your venom, [monster his] movements become unsure, and [monster his] balance begins to fade. Sweat is beginning to roll on [monster his] skin. You wager [monster he] is probably beginning to regret provoking you.  ");
+                }
+            }
+            damage1B = calculateBasicTeaseDamage();
+            if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
+                damage1B *= 2;
+            }
+            monster.teased(monster.lustVuln * damage1B);
+            combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
+            monster.lustVuln += 0.05;
+            monster.statStore.addBuffObject({tou:-monster.statusEffectv1(StatusEffects.JabberwockyVenom)*2}, "Poison",{text:"Poison"});
+
+            if (monster.statusEffectv3(StatusEffects.JabberwockyVenom) >= 1) monster.lust += monster.statusEffectv3(StatusEffects.JabberwockyVenom);
             if (combatIsOver()) return;
         }
         //Manticore Venom
@@ -12545,6 +12593,7 @@ public class Combat extends BaseContent {
         }
         if (player.countCocksOfType(CockTypesEnum.ANEMONE) > 0) TeaseFunctionList.push(RandomTeaseAnemone);
         if (player.hasPerk(PerkLib.ElectrifiedDesire)) TeaseFunctionList.push(RandomTeaseRaiju);
+        if (player.hasPerk(PerkLib.DragonLustPoisonBreath) && player.tailVenom >= player.VenomWebCost()) TeaseFunctionList.push(RandomTeaseJabberwocky);
         if (player.harpyScore() >= 8  || player.thunderbirdScore() >= 10 || player.phoenixScore() >= 10) TeaseFunctionList.push(RandomTeaseHarpy);
         if (player.kitsuneScore() >= 8) TeaseFunctionList.push(RandomTeaseKitsune);
         if (player.hasPerk(MutationsLib.BlackHeart)) TeaseFunctionList.push(RandomTeaseLustStrike);
@@ -12702,6 +12751,32 @@ public class Combat extends BaseContent {
         monster.createStatusEffect(StatusEffects.DisplacerPlug, DurationLeft + rand(3), 0, 0, 0);
         player.removeStatusEffect(StatusEffects.StraddleRoundLeft);
         monster.removeStatusEffect(StatusEffects.Straddle);
+    }
+
+    public function RandomTeaseJabberwocky():void {
+        outputText("You inhale deeply before forcing in a kiss onto your opponent breathing poison directly down [monster His] throat!");
+        var dam4Ba:Number = 1;
+        var Multiplier:Number = 1;
+        if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) Multiplier += 1;
+        if (player.hasPerk(MutationsLib.DrakeLungs)) Multiplier += 2;
+        if (player.hasPerk(MutationsLib.DrakeLungsPrimitive)) Multiplier += 2;
+        if (player.hasPerk(MutationsLib.DrakeLungsEvolved)) Multiplier += 2;
+        if (player.hasPerk(MutationsLib.DrakeLungsFinalForm)) Multiplier += 2;
+        if (player.hasPerk(PerkLib.RacialParagon)) Multiplier += 0.5;
+        if (player.hasPerk(PerkLib.Apex)) Multiplier += 0.5;
+        if (player.hasPerk(PerkLib.AlphaAndOmega)) Multiplier += 0.5;
+        if (player.hasPerk(PerkLib.NaturalArsenal)) Multiplier += 0.5;
+        dam4Ba *= Multiplier;
+        monster.statStore.addBuffObject({tou:-(dam4Ba*2)}, "Poison",{text:"Poison"});
+        if (monster.hasStatusEffect(StatusEffects.JabberwockyVenom)) {
+            monster.addStatusValue(StatusEffects.JabberwockyVenom, 3, dam4Ba);
+        } else monster.createStatusEffect(StatusEffects.JabberwockyVenom, 0, 0, dam4Ba, 0);
+        player.tailVenom -= player.VenomWebCost();
+        StraddleDamage *= 1+(scalingBonusToughness()*2/100);
+        StraddleDamage *= 2;
+        monster.teased(StraddleDamage, false);
+        if (Randomcrit) outputText(" <b>Critical!</b>");
+        monster.lustVuln += 0.50;
     }
 
     public function RandomTeaseRaiju():void {
@@ -14242,8 +14317,8 @@ public class Combat extends BaseContent {
             clearOutput();
             if (monster.short == "Hellfire Snail") {
                 outputText("You run as fast as you can, taking random corridors and running past the confused enemies all the way back to the labyrinth entrance. Of course the slug thing can't follow you she's way too slow however as a result you lose all the progression you made in the maze!\n\n");
-                SceneLib.dungeons.ebonlabyrinth.roomN = 1;
-                SceneLib.dungeons.ebonlabyrinth.enemyLevelMod = 0;
+                SceneLib.dungeons.ebonlabyrinth.room = 1;
+                SceneLib.dungeons.ebonlabyrinth.depth = 0;
                 doNext(playerMenu);
             } else {
                 outputText("You're trapped in your foe's home turf - there is nowhere to run!\n\n");
@@ -15981,4 +16056,4 @@ public class Combat extends BaseContent {
         return inteWisLibScale(player.lib, randomize);
     }
 }
-}
+}

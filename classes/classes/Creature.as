@@ -24,20 +24,12 @@ import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.ItemTags;
 import classes.Items.JewelryLib;
-import classes.PerkType;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.NPCs.TyrantiaFollower;
-import classes.Stats.Buff;
 import classes.Stats.BuffBuilder;
 import classes.Stats.BuffableStat;
 import classes.Stats.PrimaryStat;
-import classes.Stats.RawStat;
 import classes.Stats.StatStore;
-import classes.StatusEffects.Combat.CombatInteBuff;
-import classes.StatusEffects.Combat.CombatSpeBuff;
-import classes.StatusEffects.Combat.CombatStrBuff;
-import classes.StatusEffects.Combat.CombatTouBuff;
-import classes.StatusEffects.Combat.CombatWisBuff;
 import classes.internals.Utils;
 import classes.lists.BreastCup;
 import classes.lists.Gender;
@@ -910,6 +902,7 @@ public class Creature extends Utils
 			}
 			lust = Utils.boundFloat(mins.lust, lust + dlust, maxLust());
 			cor  = Utils.boundFloat(mins.cor, cor + dcor, 100);
+            if (cor < 1.0) cor = 0;//check [0,1] to avoid confusion
 
 			// old_hp / old_max = new_hp / new_max
 			HP = oldHPratio * maxHP();
@@ -1457,24 +1450,6 @@ public class Creature extends Utils
 		public function removePerk(ptype:PerkType):Boolean
 		{
 			return this._perks.remove(ptype);
-		}
-
-		/**
-		 * STOP USING THIS! Use Creature.hasPerk or Creature.getPerk instead!
-		 * Perks are no longer stored as an array this is an extremely slow compatibility measure.
-		 * @deprecated
-		 * @see Creature.hasPerk
-		 * @see Creature.getPerk
-		 * @param ptype
-		 * @return {Number} Index of perk in array if it exists. -1 if perk does not exist.
-		 */
-		public function findPerk(ptype:PerkType):Number
-		{
-			var perk:PerkClass = this._perks.get(ptype);
-			if (perk) {
-				return this._perks.asArray().indexOf(perk);
-			}
-			return -1;
 		}
 
 		/**

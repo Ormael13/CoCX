@@ -13,7 +13,6 @@ import classes.Items.*;
 import classes.Items.ConsumableLib;
 import classes.Items.Consumables.SimpleConsumable;
 import classes.Scenes.Areas.Forest.WoodElvesHuntingParty;
-import classes.Scenes.Areas.HighMountains.TempleOfTheDivine;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.Places.TrollVillage;
 import classes.Scenes.Places.WoodElves;
@@ -64,7 +63,6 @@ public class Camp extends NPCAwareContent{
 	public var soulforce:Soulforce = new Soulforce();
 	public var Magnolia:MagnoliaFollower = new MagnoliaFollower();
 	public var HolliPure:HolliPureScene = new HolliPureScene();
-	public var templeofdivine:TempleOfTheDivine = new TempleOfTheDivine();
 	public var marae:MaraeScene = new MaraeScene();
 
 	private static var _campFollowers:Vector.<XXCNPC> = new Vector.<XXCNPC>;
@@ -209,10 +207,14 @@ public class Camp extends NPCAwareContent{
 			return;
 		}
 		if ((model.time.hours >= 7 && model.time.hours <= 9) && TyrantiaFollower.TyrantiaFollowerStage >= 4 && BelisaFollower.BelisaFollowerStage >= 5 && BelisaFollower.BelisaEncounternum >= 5 && BelisaFollower.BelisaAffectionMeter >= 80 && !BelisaFollower.BelisaConfessed) {
+			hideMenus();
 			SceneLib.belisa.BelisaConfession();
+			return;
 		}
 		if ((model.time.hours >= 7 && model.time.hours <= 9) && TyrantiaFollower.TyrantiaFollowerStage >= 4 && BelisaFollower.BelisaFollowerStage >= 4 && BelisaFollower.BelisaEncounternum < 5) {
+			hideMenus();
 			SceneLib.belisa.BelisaAndTyrantia();
+			return;
 		}
 		if (marbleScene.marbleFollower()) {
 			//Cor < 50
@@ -227,12 +229,12 @@ public class Camp extends NPCAwareContent{
 			}
             /* Marble flipouts are disabled because they made no sense
 			if (flags[kFLAGS.MARBLE_PURIFICATION_STAGE] >= 5) {
-				if (flags[kFLAGS.MARBLE_WARNED_ABOUT_CORRUPTION] == 0 && player.cor >= 50 + player.corruptionTolerance()) {
+				if (flags[kFLAGS.MARBLE_WARNED_ABOUT_CORRUPTION] == 0 && player.cor >= 50 + player.corruptionTolerance) {
 					hideMenus();
 					marblePurification.marbleWarnsPCAboutCorruption();
 					return;
 				}
-				if (flags[kFLAGS.MARBLE_WARNED_ABOUT_CORRUPTION] == 1 && flags[kFLAGS.MARBLE_LEFT_OVER_CORRUPTION] == 0 && player.cor >= 60 + player.corruptionTolerance()) {
+				if (flags[kFLAGS.MARBLE_WARNED_ABOUT_CORRUPTION] == 1 && flags[kFLAGS.MARBLE_LEFT_OVER_CORRUPTION] == 0 && player.cor >= 60 + player.corruptionTolerance) {
 					hideMenus();
 					marblePurification.marbleLeavesThePCOverCorruption();
 					return;
@@ -1268,6 +1270,13 @@ public class Camp extends NPCAwareContent{
 				Holidays.DLCPrompt("Lovers DLC", "Get the Lovers DLC to be able to interact with them and have sex! Start families! The possibilities are endless!", "$4.99", doCamp);
 				return;
 			}
+			//Dridertown
+			if (DriderTown.DriderTownComplete) {
+				outputText("The Stone Hutch, Treehouse and Watery Orb have been changed and expanded. The Stone hutch has large swathes of silk hung off it, connecting to poles stuck deep into the ground and creating a large covered pavilion around it. ");
+				outputText("The extension is enclosed with wicker walls lined with stone. The treehouse hasn’t changed much, but there’s a rope bridge connecting the flat roof of Tyrantia’s hutch with the silken treehouse.\n\n");
+				outputText("Belisa’s Orb appears at first glance to have been punctured and dragged to shore. The three dwellings are connected by strings of more spider silk, with odd, dangling lamps lighting up the connected houses. Gravel paths have been constructed between the three houses.\n\n");
+				buttons.add("DriderTown", SceneLib.dridertown.DriderTownEnter).hint("Check up on Belisa, Lily & Tyrantia.");
+			}
 			//Alvina
 			if (flags[kFLAGS.ALVINA_FOLLOWER] > 19) {
 				outputText("Alvina isn’t so far from here, having made her [camp] in a corrupted plant groove she created so to have easy access to reagents.\n\n");
@@ -1315,7 +1324,7 @@ public class Camp extends NPCAwareContent{
 				buttons.add("Arian", arianScene.visitAriansHouse);
 			}
 			//Belisa
-			if (BelisaFollower.BelisaInCamp) {
+			if (BelisaFollower.BelisaInCamp && DriderTown.DriderTownComplete == false) {
 				outputText("On the water, Belisa anchored her silk dome. However, since you’ve seen it, the dwelling has changed. Instead of a fully submerged bubble-like structure, it’s got a silky curtain for a door, and a solid wooden dock’s been added to anchor the odd building to the ground. Outside the dwelling, a small stall’s been set up, and Belisa’s wares are on display.\n\n");
 				buttons.add("Belisa", SceneLib.belisa.BelisaMainCampMenu).hint("Visit Belisa.");
 			}
@@ -1496,7 +1505,7 @@ public class Camp extends NPCAwareContent{
 				else buttons.add("Kiha", kihaScene.encounterKiha2).disableIf(player.statusEffectv3(StatusEffects.CampSparingNpcsTimers1) > 0, "Training.");
 			}
 			//Lily
-			if (LilyFollower.LilyFollowerState) {
+			if (LilyFollower.LilyFollowerState && DriderTown.DriderTownComplete == false) {
 				outputText("A line of targets have been set up along the river and a small house of silk has been constructed in one of the trees. You hear the occasional whizz of arrows, or rustling in the trees.\n\n");
 				buttons.add("Lily", SceneLib.lily.LilyCampFollower).hint("Visit Lily.");
 			}
@@ -1589,7 +1598,7 @@ public class Camp extends NPCAwareContent{
 				buttons.add("Samirah", SceneLib.samirah.samirahMainCampMenu);
 			}
 			//Tyrantia
-			if (TyrantiaFollower.TyrantiaFollowerStage >= 4) {
+			if (TyrantiaFollower.TyrantiaFollowerStage >= 4 && DriderTown.DriderTownComplete == false) {
 				outputText("A decent distance away from your camp, in between the river and some trees, a hut’s been erected. Constructed mostly from stone and logs, with odd, goopy webbing as a crude mortar, the dwelling is nonetheless huge. ");
 				outputText("Tyrantia occasionally walks into the dwelling, coming out with a different tool or material. She’s keeping herself busy, if the line of demon skulls around the house are any indication.\n\n");
 				buttons.add("Tyrantia", SceneLib.tyrania.TyrantiaAtCamp).hint("Visit Tyrantia.");
@@ -2748,6 +2757,7 @@ public class Camp extends NPCAwareContent{
 		if (AdventurerGuild.Slot02Cap > 0) outputText("<b>Feral Imp Skulls:</b> "+AdventurerGuild.Slot02+" / "+AdventurerGuild.Slot02Cap+"\n");
 		if (AdventurerGuild.Slot03Cap > 0) outputText("<b>Minotaur Horns:</b> "+AdventurerGuild.Slot03+" / "+AdventurerGuild.Slot03Cap+"\n");
 		if (AdventurerGuild.Slot04Cap > 0) outputText("<b>Demon Skulls:</b> "+AdventurerGuild.Slot04+" / "+AdventurerGuild.Slot04Cap+"\n");
+		if (AdventurerGuild.Slot05Cap > 0) outputText("<b>Severed Tentacles:</b> "+AdventurerGuild.Slot05+" / "+AdventurerGuild.Slot05Cap+"\n");
 		menu();
 		if (AdventurerGuild.Slot01 < AdventurerGuild.Slot01Cap) {
 			if (player.hasItem(useables.IMPSKLL, 1)) addButton(0, "ImpSkull", questItemsBagImpSkull1UP);
@@ -2777,6 +2787,13 @@ public class Camp extends NPCAwareContent{
 		else addButtonDisabled(7, "DemonSkull", "You can't store more demon skulls in your bag.");
 		if (AdventurerGuild.Slot04 > 0) addButton(8, "DemonSkull", questItemsBagDemonSkull1Down);
 		else addButtonDisabled(8, "DemonSkull", "You not have any demon skulls in your bag.");
+		if (AdventurerGuild.Slot05 < AdventurerGuild.Slot05Cap) {
+			if (player.hasItem(useables.SEVTENT, 1)) addButton(10, "SeveredTent", questItemsBagSeveredTentacle1Up);
+			else addButtonDisabled(10, "SeveredTent", "You not have any severed tentacles to store.");
+		}
+		else addButtonDisabled(10, "SeveredTent", "You can't store more severed tentacles in your bag.");
+		if (AdventurerGuild.Slot05 > 0) addButton(11, "SeveredTent", questItemsBagSeveredTentacle1Down);
+		else addButtonDisabled(11, "SeveredTent", "You not have any severed tentacles in your bag.");
 		addButton(14, "Back", campMiscActions);
 	}
 	private function questItemsBagImpSkull1UP():void {
@@ -2818,6 +2835,16 @@ public class Camp extends NPCAwareContent{
 		outputText("\n");
 		AdventurerGuild.Slot04 -= 1;
 		inventory.takeItem(useables.DEMSKLL, questItemsBag);
+	}
+	private function questItemsBagSeveredTentacle1Up():void {
+		player.destroyItems(useables.SEVTENT, 1);
+		AdventurerGuild.Slot05 += 1;
+		doNext(questItemsBag);
+	}
+	private function questItemsBagSeveredTentacle1Down():void {
+		outputText("\n");
+		AdventurerGuild.Slot05 -= 1;
+		inventory.takeItem(useables.SEVTENT, questItemsBag);
 	}
 
 	private function VisitClone():void {
@@ -4069,7 +4096,7 @@ public class Camp extends NPCAwareContent{
 		else addButtonDisabled(5, "???", "Search the deepwoods.");
 		if (flags[kFLAGS.MET_MINERVA] >= 4) addButton(6, "Oasis Tower", SceneLib.highMountains.minervaScene.encounterMinerva).hint("Visit the ruined tower in the high mountains where Minerva resides.");
 		else addButtonDisabled(6, "???", "Search the high mountains.");
-		if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] > 0) addButton(7, "Temple", templeofdivine.repeatvisitintro).hint("Visit the temple in the high mountains where Sapphire resides.");
+		if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] > 0) addButton(7, "Temple", SceneLib.highMountains.templeofdivine.repeatvisitintro).hint("Visit the temple in the high mountains where Sapphire resides.");
 		else addButtonDisabled(7, "???", "Search the high mountains.");
 		if (flags[kFLAGS.YU_SHOP] == 2) addButton(8, "Winter Gear", SceneLib.glacialYuShop.YuIntro).hint("Visit the Winter gear shop.");
 		else addButtonDisabled(8, "???", "Search the (outer) glacial rift.");
@@ -6648,20 +6675,39 @@ public function rebirthFromBadEnd():void {
 		outputText("<i>I ask thee, eternal time...</i>\n");
 		outputText("\n\nThis part is WIP. You can add more scenes.");
 		outputText("\nThe idea behind is to try unique scenes with different ways or options or body parts.");
+        recalling = true; //Setting the flag to disable everything but text
         menu();
         //Marble scene
 		if (flags[kFLAGS.MARBLE_PURIFIED] == 1)
-			addButton(0, "Marble & Clara", SceneLib.marblePurification.defeatClaraCuntInAFight, false, true);
+			addButton(0, "Marble & Clara", SceneLib.marblePurification.defeatClaraCuntInAFight, false);
         else
 			addButtonDisabled(0, "M & C", "Requires completing Marble's purification quest.");
         //Excellia slave first scene
 		if (flags[kFLAGS.EXCELLIA_RECRUITED] == 2)
-			addButton(1, "Excellia Slv", SceneLib.excelliaFollower.ExcelliaPathChoiceMakeSlave, true);
+			addButton(1, "Excellia Slv", SceneLib.excelliaFollower.ExcelliaPathChoiceMakeSlave);
         else
-			addButtonDisabled(1, "E Slv", "Requires recruiting Excellia as a slave.");
-		addButtonDisabled(13, "BadEnds", "SH is too lazy to add them too right now, but if anyone wants...");
-        addButton(14, "Wake Up", campSpendTimeActions);
-    }	
+			addButtonDisabled(1, "E. Slv", "Requires enslaving a certain cow-slut.");
+        
+        //Phylla demon fuck
+		if (flags[kFLAGS.ANT_COLONY_KEPT_HIDDEN] || flags[kFLAGS.PHYLLA_SAVED]) {
+            if (player.cor >= 66 - player.corruptionTolerance && player.gender > 0)
+                addButton(2, "PhyllaCart", SceneLib.desert.antsScene.demonsFuckAntgirl);
+            else addButtonDisabled(2, "PhyllaCart", "You must be corrupted and not genderless to recall this.");
+        }
+        else addButtonDisabled(2, "P. Cart", "Requires saving one ant-girl.");
+		//Phylla keks
+		if (flags[kFLAGS.ANT_WAIFU] || flags[kFLAGS.PHYLLA_STAY_HOME])
+			addButton(3, "PhyFirstTime", SceneLib.desert.antsScene.antGirlGoodEnd);
+		else addButtonDisabled(3, "P. First", "Requires winning in the coliseum.");
+        //bruh
+		addButtonDisabled(13, "BadEnds", "SH is too lazy to add them");
+        addButton(14, "Wake Up", recallWakeUp);
+    }
+
+    public function recallWakeUp():void {
+        recalling = false; //EVERY recall scene must return here to clear the flag.
+        campSpendTimeActions();
+    }
 
 	/*
         private function fixHistory():void {

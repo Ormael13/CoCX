@@ -595,6 +595,7 @@ public class CombatUI extends BaseCombatContent {
 			} else if (monster is MinotaurKing) {
 				var minoking:MinotaurKing = monster as MinotaurKing;
 				if (!player.hasStatusEffect(StatusEffects.MinoKing) && player.companionsInPCParty()) btnSpecial1.show("Dish Helper", minoking.dishHelper);
+                else btnSpecial1.showDisabled("Dish Helper", "You don't have anyone to take care of Excellia!");
 			} else if (monster is Lethice) {
 				var lethice:Lethice = monster as Lethice;
 				if (player.hasStatusEffect(StatusEffects.LethicesRapeTentacles)) {
@@ -749,10 +750,10 @@ public class CombatUI extends BaseCombatContent {
 			addButton(1, "Wait", (monster as Lethice).grappleWait);
 
 			var whitefireLustCap:int = player.maxLust() * 0.75;
-			if (player.hasPerk(PerkLib.Enlightened) && player.cor < (10 + player.corruptionTolerance())) whitefireLustCap += (player.maxLust() * 0.1);
+			if (player.hasPerk(PerkLib.Enlightened) && player.cor < (10 + player.corruptionTolerance)) whitefireLustCap += (player.maxLust() * 0.1);
 			if (player.hasPerk(PerkLib.FocusedMind) && !player.hasPerk(PerkLib.GreyMage)) whitefireLustCap += (player.maxLust() * 0.1);
 			if (player.hasPerk(PerkLib.GreyMage)) whitefireLustCap = (player.maxLust() - 45);
-			if (player.hasPerk(PerkLib.GreyMage) && player.hasPerk(PerkLib.Enlightened) && player.cor < (10 + player.corruptionTolerance())) whitefireLustCap = (player.maxLust() - 15);
+			if (player.hasPerk(PerkLib.GreyMage) && player.hasPerk(PerkLib.Enlightened) && player.cor < (10 + player.corruptionTolerance)) whitefireLustCap = (player.maxLust() - 15);
 			var gotEnergy:Boolean = !player.hasPerk(PerkLib.BloodMage) && player.mana >= 30;
 			if (player.lust < whitefireLustCap && player.hasStatusEffect(StatusEffects.KnowsWhitefire) && gotEnergy) {
 				addButton(2, "Dispell", (monster as Lethice).dispellRapetacles);

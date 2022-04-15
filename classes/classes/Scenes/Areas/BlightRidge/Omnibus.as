@@ -44,9 +44,9 @@ use namespace CoC;
                 this.armorMDef = 8 + 2*mod;
                 this.bonusHP = 1150 + 1150*mod;
                 this.bonusLust = 336 + 18*mod;
-                this.level = 66 + 5*mod;
-                this.additionalXP = 700 + 350*mod;
-                this.gems = (80 + rand(40)) * (1.0 + 0.5*mod);
+                this.level = 63 + 5*mod;
+                this.additionalXP = int(700 * Math.exp(0.2*mod));
+                this.gems = int((80 + rand(40)) * Math.exp(0.2*mod));
 			}
 			else {
 				this.short = "omnibus";

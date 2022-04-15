@@ -697,7 +697,7 @@ import classes.Scenes.SceneLib;
 					PerkLib.ChiReflowMagic,
 					PerkLib.ChiReflowSpeed
 			]){
-				if (player.findPerk(perk) >= 0)
+				if (player.hasPerk(perk))
 				{
 					return perk;
 				}

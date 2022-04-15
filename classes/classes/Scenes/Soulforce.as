@@ -6,6 +6,9 @@ package classes.Scenes
 {
 import classes.*;
 import classes.BodyParts.*;
+import classes.IMutations.IMutationsLib;
+import classes.IMutations.KitsuneThyroidGlandMutation;
+import classes.Scenes.Areas.Forest.Kitsune;
 import classes.Scenes.NPCs.DivaScene;
 
 import classes.GlobalFlags.kFLAGS;
@@ -252,6 +255,7 @@ public class Soulforce extends BaseContent
 		menuItems.push("Test dynamic stat", TestDynamicStats, "Test Dynamic stats.");
 		menuItems.push("MetamorphFull", (player.hasPerk(PerkLib.Metamorph))? AllMetamorphOptionsUnlock: false, "Unlock all Metamorph options.");
 		menuItems.push("BelisaTest", (BelisaFollower.BelisaInGame && BelisaFollower.BelisaFollowerStage < 3 && BelisaFollower.BelisaEncounternum >= 1) ? belisatest : false, "Belisa Trigger");
+		menuItems.push("BeliConfFix", (TyrantiaFollower.TyrantiaFollowerStage >= 4 && BelisaFollower.BelisaFollowerStage >= 5 && BelisaFollower.BelisaEncounternum >= 5 && BelisaFollower.BelisaAffectionMeter >= 80 && !BelisaFollower.BelisaConfessed) ? belisatest2 : false, "Belisa Confession Fix");
 		menuItems.push("LilyTest", (LilyFollower.LilyFollowerState == false) ? lilytest : false, "Lily Trigger");
 		menuItems.push("FixJiangshi", jiangshiBuggedItemsCleanUpCrew0, "Shit! Here we go Again! Fixing Jiangshi! (better use it only once or may be some bugs i not plan to account for in case of using this more than once - i not blocked using it more than once so belive ppl will be reasonable to not click like mad this)");
 		menuItems.push("BodyPartEditor", SceneLib.debugMenu.bodyPartEditorRoot, "");
@@ -274,15 +278,95 @@ public class Soulforce extends BaseContent
 		menuItems.push("Add Shard", cheatAddShard, "Add 1 radiant shard");
 		menuItems.push("Remove Shard", cheatRemoveShard, "Remove 1 radiant shard");
 		menuItems.push("ZenjiQ", ZenjiQ, "Zenji Expac 2 debug tool");
+		menuItems.push("LustBreath", (player.hasPerk(PerkLib.DragonPoisonBreath))? FairyTest: false, "Replacing 1 perk with another");
+		//menuItems.push("Mutationtest", mutation3, "MutationTest")
 		//menuItems.push("Mutation test reset", resetMutations, "Reset Mutations");
 		menuGen(menuItems, page, accessSoulforceMenu);
 	}
 
-	public function lilytest():void{
-		SceneLib.lily.lilyEncounter();
+	public function mutation3():void{
+		clearOutput();
+		menu();
+		for each (var pArray:Array in IMutationsLib.mutationsArray("Thyroid")){
+			var pPerk:PerkType = pArray[0];
+			var pLvl:int = player.perkv1(pPerk);
+			mutationFuncTrigger(pArray[3]);
+			trace("Requirements loaded in.");
+			outputText(""+pPerk.name() + " Perk Tier: " + pLvl);
+			var reqs:Array = [];
+			if (pPerk.available(player) && pArray[1] >= pLvl){
+				addButton(0,pPerk.name(), getMutation);
+			}
+			else{
+				trace("Unable to meet requirements/requirements borked.");
+			}
+			for each (var cond:Object in pPerk.requirements) {
+				var reqStr:String = cond.text;
+				var color:String = "";
+				if (!(reqStr.indexOf("Mutation") >= 0)) { //Ignores the "free mutation slot" note.
+					if (cond.fn(player)) {
+						color = "#008000";
+					}
+					else {
+						color = "#800000";
+					}
+					reqs.push("<font color='"+color+"'>"+cond.text+"</font>");
+				}
+			}
+			outputText("Requirements: " + reqs.join(", "));
+			addButton(4, "back",SoulforceCheats1,2);
+		}
+
+		//Functions that need to be triggered externally go here. I.E. Requirements/Buffs due to circular dependency.
+		function mutationFuncTrigger(fTrigger:Function):*{
+			try{
+				fTrigger(pLvl);
+				trace("Success");
+			}
+			catch (e:Error){
+				trace("Failed. \n" + e.getStackTrace());
+			}
+		}
+
+		//Gives the player the actual mutation itself.
+		function getMutation():void{
+			if (!player.hasPerk(pPerk)){
+				player.createPerk(pPerk, 1,0,0,0);
+			}
+			else{
+				player.setPerkValue(pPerk,1,pLvl + 1);
+			}
+			setBuffs();
+			trace("Mutation applied.");
+			outputText("Done");
+			doNext(curry(SoulforceCheats1, 2));
+		}
+
+		//Sets up the buff for the perk.
+		function setBuffs():void{
+			var stname:String = "perk_" + pPerk.id;
+			var pBuff:Object = mutationFuncTrigger(pArray[2]);
+			if (player.statStore.hasBuff(stname)){
+				player.statStore.removeBuffs(stname);
+			}
+			player.statStore.addBuffObject(
+					pBuff,
+					stname,
+					{text:pPerk.name(), save:false}
+			);
+			trace("Buffs Applied.");
+		}
 	}
-	public function belisatest():void{
-		SceneLib.belisa.subsequentEncounters();
+
+
+	public function FairyTest():void {
+		player.removePerk(PerkLib.DragonPoisonBreath);
+		player.createPerk(PerkLib.DragonLustPoisonBreath, 0, 0, 0, 0);
+		doNext(curry(SoulforceCheats1, 0));
+	}
+	public function belisatest2():void{
+		BelisaFollower.BelisaConfessed = true;
+		doNext(curry(SoulforceCheats1,2));
 	}
 	public function resetMutations():void{
 		clearOutput();
@@ -1772,7 +1856,7 @@ public class Soulforce extends BaseContent
 			addButton(3, "SuccGard", FightSuccubusGardener).hint("Test fight with Succubus Gardener. (Also it will glitch right after fight so not start this fight if you got unsaved progress that you not wanna loose as only way to handle post fight glitch is restarting game)");
 			addButton(4, "The Dummy", FightTheDummy).hint("Fight with The Dummy.");
 			addButton(5, "M.WSeaver", FightBelisa).hint("Test fight with Mana Weaver.");
-			if (player.level >= 45 && TyrantiaFollower.TyrantiaFollowerStage < 5 && !TyrantiaFollower.TyraniaIsRemovedFromThewGame) addButton(6, "D.Giantess", FightTyrantia).hint("Test fight with Drider Giantess.");
+			if (player.level >= 45 && TyrantiaFollower.TyrantiaFollowerStage < 4 && !TyrantiaFollower.TyraniaIsRemovedFromThewGame) addButton(6, "D.Giantess", FightTyrantia).hint("Test fight with Drider Giantess.");
 			addButton(7, "Zenji", FightZenji).hint("Test fight with Zenji.");
 			addButton(8, "Sonya", FightSonya).hint("Test fight with Sonya.");
 			addButton(9, "RyuBi", FightRyuBi).hint("Test fight with RyuBi.");
@@ -2785,42 +2869,10 @@ public class Soulforce extends BaseContent
 		outputText("Entering battle with Pierce! Enjoy ^^");
 		startCombat(new Pierce());
 	}
-	public function FairyTest():void {
-		clearOutput();
-		outputText("FAIRYTIME ^^");
-		CoC.instance.transformations.FaceFairy.applyEffect(false);
-		player.tongue.type = Tongue.ELF;
-		player.eyes.type = Eyes.FAIRY
-		player.ears.type = Ears.ELVEN
-		CoC.instance.transformations.HairFairy.applyEffect(false);
-		player.tailType = Tail.NONE
-		player.arms.type = Arms.ELF
-		player.lowerBody = LowerBody.ELF;
-		player.wings.type = Wings.FAIRY;
-		player.skinType = Skin.PLAIN
-		player.skinAdj = "flawless";
-		player.removeCock(0, player.cockTotal());
-		player.skin.coverage = Skin.COVERAGE_NONE;
-		var growth:int = 1 + rand(3);
-		if (player.breastRows.length > 0) {
-			if (player.breastRows[0].breastRating < 2 && rand(3) == 0) growth++;
-			if (player.breastRows[0].breastRating < 5 && rand(4) == 0) growth++;
-			if (player.breastRows[0].breastRating < 6 && rand(5) == 0) growth++;
-		}
-		player.createPerk(PerkLib.TransformationImmunity, 0, 0, 0, 0);
-		doNext(curry(SoulforceCheats1, 0));
-	}
 	public function FightBelisa():void {
 		clearOutput();
 		outputText("Entering battle with Mana Weaver! Enjoy ^^");
 		startCombat(new Belisa());
-	}
-	public function FightTyrantia():void {
-		clearOutput();
-		if (TyrantiaFollower.TyrantiaFollowerStage > 2) SceneLib.tyrania.repeatEncounterBattlefield();
-		else if (TyrantiaFollower.TyrantiaAffectionMeter > 40 && TyrantiaFollower.TyrantiaFollowerStage > 1) SceneLib.tyrania.encounterBattlefieldAfter40Affection();
-		else if (TyrantiaFollower.TyrantiaFollowerStage > 0) SceneLib.tyrania.repeatEncounterBattlefield();
-		else SceneLib.tyrania.firstEncounter();
 	}
 	public function FightZenji():void {
 		clearOutput();
@@ -4364,20 +4416,53 @@ public class Soulforce extends BaseContent
 	public function theUnknown():void {
 		if (player.soulforce >= 100) {
 			player.soulforce -= 100;
-			statScreenRefresh();
+			menu();
+			/*statScreenRefresh();
 			if (rand(2) == 0) {
 				clearOutput();
 				outputText("A gigantic monkey and you. (placeholder text for now so not mind it and just kick the monkey ass)");
 				flags[kFLAGS.SAIYAN_ENEMY_NUMBER_COUNTER] = 1;
 				startCombat(new Oozaru());
 			}
-			else SceneLib.ryubi.RyuBiEnterTheDragon();
+			else SceneLib.ryubi.RyuBiEnterTheDragon();*/
+			if (BelisaFollower.BelisaInGame && BelisaFollower.BelisaFollowerStage < 3 && BelisaFollower.BelisaEncounternum >= 1 && !player.hasStatusEffect(StatusEffects.SpoodersOff)) addButton(0, "???", belisatest).hint("Shy Spooder");
+			if (LilyFollower.LilyFollowerState == false && !player.hasStatusEffect(StatusEffects.SpoodersOff)) addButton(1, "???", lilytest).hint("Lewd Spooder");
+			if (player.level >= 45 && TyrantiaFollower.TyrantiaFollowerStage < 4 && !TyrantiaFollower.TyraniaIsRemovedFromThewGame && !player.hasStatusEffect(StatusEffects.SpoodersOff)) addButton(2, "???", FightTyrantia).hint("Scary Spooder");
+			if (player.level >= 3 && flags[kFLAGS.IZMA_ENCOUNTER_COUNTER] > 0 && (flags[kFLAGS.IZMA_WORMS_SCARED] == 0 || !player.hasStatusEffect(StatusEffects.Infested)) && flags[kFLAGS.IZMA_FOLLOWER_STATUS] <= 0) addButton(3, "???", tigerSharkGal).hint("Tigershark Gal?");
+			if (player.level >= 3 && flags[kFLAGS.DIANA_FOLLOWER] < 6 && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff)) addButton(4, "???", shyHealer).hint("Shy Healer");
+			if (flags[kFLAGS.ISABELLA_PLAINS_DISABLED] == 0) addButton(5, "???", germanCow).hint("German Cow");
+			addButton(14, "Back", SoulSense);
 		}
 		else {
 			outputText("\n\nYour current soulforce is too low.");
 			doNext(SoulSense);
 		}
 	}
+	public function lilytest():void {
+		SceneLib.lily.lilyEncounter();
+	}
+	public function belisatest():void {
+		SceneLib.belisa.subsequentEncounters();
+	}
+	public function FightTyrantia():void {
+		clearOutput();
+		if (TyrantiaFollower.TyrantiaFollowerStage > 2) SceneLib.tyrania.repeatEncounterBattlefield();
+		else if (TyrantiaFollower.TyrantiaAffectionMeter > 40 && TyrantiaFollower.TyrantiaFollowerStage > 1) SceneLib.tyrania.encounterBattlefieldAfter40Affection();
+		else if (TyrantiaFollower.TyrantiaFollowerStage > 0) SceneLib.tyrania.repeatEncounterBattlefield();
+		else SceneLib.tyrania.firstEncounter();
+	}
+	public function tigerSharkGal():void {
+		player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
+		SceneLib.izmaScene.meetIzmaAtLake();
+	}
+	public function shyHealer():void {
+		if ((flags[kFLAGS.DIANA_FOLLOWER] < 3 || flags[kFLAGS.DIANA_FOLLOWER] == 5) && flags[kFLAGS.DIANA_LVL_UP] >= 8) SceneLib.dianaScene.postNameEnc();
+		else SceneLib.dianaScene.repeatEnc();
+	}
+	public function germanCow():void {
+		SceneLib.isabellaScene.isabellaGreeting();
+	}
+	
 	private function canfaceTribulation():Boolean {
 		if ((player.level >= 27 && player.hasPerk(PerkLib.SoulWarrior) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) ||
 				(player.level >= 54 && player.hasPerk(PerkLib.SoulElder) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) ||

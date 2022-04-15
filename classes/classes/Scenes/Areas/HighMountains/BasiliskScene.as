@@ -74,7 +74,7 @@ public class BasiliskScene extends BaseContent
 				outputText("  Certain that the creature won't dare try and turn its eyes on you again, you take your time to look the tall reptile over directly for the first time.  Perhaps you could use it to satisfy your baser urges. If so, what part of it do you choose?");
 				menu();
 				addButton(0, "Tongue", tongueBasiliskSmex);
-				if (player.cockThatFits(monster.analCapacity()) >= 0 && (player.cor >= 66 - player.corruptionTolerance() || flags[kFLAGS.MEANINGLESS_CORRUPTION] >= 1)) addButton(1, "Ass", defeatBasiliskAndAnal);
+				if (player.cockThatFits(monster.analCapacity()) >= 0 && (player.cor >= 66 - player.corruptionTolerance || flags[kFLAGS.MEANINGLESS_CORRUPTION] >= 1)) addButton(1, "Ass", defeatBasiliskAndAnal);
 				if (player.canOvipositSpider() || player.canOvipositMantis()) addButton(2, "Lay Eggs", driderPCEggLaysBasilisk);
 				if (player.canOvipositBee() && player.gender > 0) addButton(2, "Lay Eggs", layBeeEggsInABasilisk);
 				addButton(14, "Leave", cleanupAfterCombat);

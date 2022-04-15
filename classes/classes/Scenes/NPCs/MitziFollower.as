@@ -72,7 +72,7 @@ public function MitziCampMainMenu2():void {
 			else if (flags[kFLAGS.PLAYER_COMPANION_1] == "Mitzi") addButton(5, "Assist me", mitziHenchmanOption).hint("Ask Mitzi to stay in camp.");
 			else addButtonDisabled(5, "Assist me", "You already have other henchman accompany you. Ask him/her to stay at camp before you talk with Mitzi about accompaning you.");
 		}
-		else addButtonDisabled(5, "Assist me", "She not have enough daughters (6+) to accompaning you.");
+		else addButtonDisabled(5, "Assist me", "She don't have enough daughters (6+) to accompany you.");
 	}
 	else addButtonDisabled(5, "Assist me", "You need to have at least Basic Leadership to form a team with Mitzi.");
 	addButton(4, "Sex", mitziSexMenu);
@@ -223,10 +223,10 @@ public function mitziSexJogFuck():void {
 	outputText("You help the goblin strip her clothing then pick her up. The diminutive woman is fairly easy to hold in your grip. She hungrily eyes your [cock], eagerly wanting it inside her. You hold her over your dick, feeling her warm lubricant dripping down onto it then push her down. She bites her lower lip when the tip slips between her moist and parted folds, brushing against her entrance and taking some of her weight for you. She lets out a moan, ");
 	outputText("wrapping her legs as far around your [hips] as possible.\n\nYou walk towards the forest, letting the movements work with gravity along with her magical cooter allowing you to effortlessly penetrate her. Those tight purple wet walls clench you tightly as she slides down, rubbing perfectly against your [cock]. With each and every step you take she slides down further, until she sits fully impaled on you, ");
 	outputText("grabbing your torso to help support herself. She looks up at you with a sharp toothed grin. You can feel her inner wall muscles massage and squeeze your dick, showing off her masterful pussy control.\n\n");
-	outputText("She moans happily, her tongue lapping at your stomach and squishing her large breasts against you.\n\n");
+	outputText("She moans happily, lapping her tongue at your stomach and squishing her large breasts against you.\n\n");
 	outputText("\"<i>Oooh [name] go-ah-faster! I REALLY wanna bounce!</i>\"\n\n");
 	outputText("You're more than happy to oblige. You break into a run, feeling her lithe curvy form bounce on your [cock], drawing out a cacophony of happy wails and moans from the goblin woman. Her purple nails dig into your skin as she hangs on, clenching and smashing her wobbly tits against you. You run hard, feeling her bounce and wriggle as her cunt and rapid breathing begins squeezing and milking you like never before. ");
-	outputText("You’re sure if you could feel like this every time you took a jog, you’d be in great shape.\n\n\"<i>Ooh fuck [name], don't stop! I want you to fill me with your cum like this!</i>\"\n\n");
+	outputText("You’re sure: if you could feel like this every time you took a jog, you’d be in great shape.\n\n\"<i>Ooh fuck [name], don't stop! I want you to fill me with your cum like this!</i>\"\n\n");
 	outputText("The familiar tightness of a coming orgasm grows in your groin, tightening as you near release. You pick the pace, full out sprinting, letting Mitzi bounce and jiggle as she clings to you, supported entirely by your [cock]. Your [balls] tighten, releasing the seed of your orgasm. The howl of a powerful orgasm fills your ears as your cumming sets the goblin woman off. One of her hands lets go, and starts rubbing her belly while she kisses and licks your belly-button. ");
 	outputText("Your enhanced body easily stuffs her full of cream. "+(player.hasStatusEffect(StatusEffects.MitziPregnant) ? "Though with her womb blocked off most of it washes back out":"Rounding her belly out slightly")+" and dripping down your [balls]. The orgasm is so potent that by the time you wind down, she looks heavily pregnant but her vice like grip prevents your cum from squirting out.\n\n");
 	outputText("Eventually you grow tired and come to rest in a forest clearing with her. You slump against a tree with her leaning on your chest panting heavily. The combination of the brisk run and orgasm left you more than a little tired. Mitzi sits up, pulling you down into a tired kiss. You return it in kind. She pulls away looking more than a little flushed.\n\n");

@@ -42,6 +42,14 @@ use namespace CoC;
 			return flags[kFLAGS.SAPPHIRE_AFFECTION];
 		}
 
+        public function onyxMF(boy:String, girl:String):String {
+            return (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) ? girl : boy;
+        }
+
+        public function onyxName():String {
+            return onyxMF("Onyx", "Krystal");
+        }
+
 		public function firstvisitintro():void {
 			flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] = 1;
 			flags[kFLAGS.SAPPHIRE_TALKS] = 0;
@@ -100,7 +108,7 @@ use namespace CoC;
 				if (player.statusEffectv3(StatusEffects.TempleOfTheDivineTracker) == 2) addButton(3, "Pearl", takingPurePearlFromAltair);
 			}
 			addButton(5, "Sapphire", sapphiremenu).hint("Have a chat with the gargoyle.");
-			if (flags[kFLAGS.ONYX_PATH] > 0) addButton(6, "" + flags[kFLAGS.ONYX_NAME] + "", krystalonyxmenu).hint("Have a sex with " + flags[kFLAGS.ONYX_NAME] + ".");
+			if (flags[kFLAGS.ONYX_PATH] > 0) addButton(6, "[onyx name]", krystalonyxmenu).hint("Have a sex with [onyx name].");
 			addButton(7, "Basement", templeBasement).hint("Visit the temple basement.");
 			if (flags[kFLAGS.FORGEFATHER_MOVED_TO_TEMPLE] == 1) addButton(8, "Workshop", SceneLib.forgefatherScene.workshopMainMenu);
 			addButton(14,"Leave", camp.returnToCampUseOneHour);
@@ -398,7 +406,7 @@ use namespace CoC;
 				if (flags[kFLAGS.ONYX_PATH] < 1) outputText(" While Sapphire is the last living stony guardian of the temple, this still gives off the illusion of a platoon of guardians watching faithfully over this divine place.");
 				if (player.isGargoyle()) outputText(" Your own pedestal stands right next to Sapphire's, allowing you to keep close to her when you need to rest (using your pedestal allows you to sleep with Sapphire if your relation is high enough).");
 				if (flags[kFLAGS.ONYX_PATH] > 0) {
-					outputText(" On the opposite side stands " + flags[kFLAGS.ONYX_NAME] + "'s pedestal. ");
+					outputText(" On the opposite side stands [onyx name]'s pedestal. ");
 					if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("She");
 					else outputText("He");
 					outputText(" is looking at you expectantly.");
@@ -459,7 +467,7 @@ use namespace CoC;
 		}
 		public function takingPurePearlFromAltair():void {
 			clearOutput();
-			outputText("You recover the pearl from the Altar the temple power dimming slightly.");
+			outputText("You recover the pearl from the Altar. The temple's power dimms slightly.");
 			player.addStatusValue(StatusEffects.TempleOfTheDivineTracker,3,-2);
 			inventory.takeItem(consumables.P_PEARL, templemainmenu);
 		}
@@ -498,7 +506,7 @@ use namespace CoC;
 			clearOutput();
 			spriteSelect(SpriteDb.s_sapphire);
 			if (flags[kFLAGS.SAPPHIRE_TALKS] == 2 || flags[kFLAGS.SAPPHIRE_TALKS] == 6) {
-				outputText("Now that some time has passed you ask her if she is ready to tell you more about the events she foreshadowed in your previous discussion.\n\n");
+				outputText("Now, that some time has passed, you ask her if she is ready to tell you more about the events she foreshadowed in your previous discussion.\n\n");
 				outputText("\"<i>It pains me to even think about the events of that day, the day the demons appeared. They poured into the cities below us like a tidal wave, devouring souls and corrupting everything in their path. Eventually they began climbing the mountain, and we knew they would be on our doorstep within hours. To prevent them from destroying this holy ground we devised a plan. No matter what the cost to us, the temple had to be protected. ");
 				outputText("As such one by one, we sacrificed ourselves in a ritual to create from us everlasting guardians. I was the last one to be put on the altar. They finished the ritual just as the demons started pouring in. Many desperate enchantments and prayers were put into the creation of each of us, hoping to create a combination by chance that would correctly dispatch the demons. The other gargoyles didn't receive the protections required to face the demons as I did, thus they were destroyed one by one. ");
 				outputText("Amidst the chaos, the altars were damaged extensively and rendered useless. As I kept killing more and more of them, they retreated. Satisfied with their dirty work, they just ran away, like the cowards they are, to prevent further casualties.</i>\"\n\n");
@@ -583,20 +591,17 @@ use namespace CoC;
 		public function SapphireTripleTailOuroboros():void {
 			clearOutput();
 			spriteSelect(SpriteDb.s_sapphire);
-			outputText("You think it over then remember about " + flags[kFLAGS.ONYX_NAME] + " being there too. The third gargoyle must be starving for sex. Unable to decide which one you want to fuck or get fucked by you propose the lot of you tail fuck each other, something to which your two stony mates are more then happy to agree. You all sit in a perfect triangle, positioning your tails appropriately and smiling in anticipation for a threesome that will go down in history.\n\n");
-			outputText("You begin by kissing Sapphire then exchanging with " + flags[kFLAGS.ONYX_NAME] + " the tree of you taking turns in order to feel each other's properly. You are not surprised to discover that out of the three of you " + flags[kFLAGS.ONYX_NAME] + " is the best kisser. Once you all are suitably aroused you playfully insert your tail in Sapphire’s pussy as she position hers over ");
+			outputText("You think it over then remember about [onyx name] being there too. The third gargoyle must be starving for sex. Unable to decide which one you want to fuck or get fucked by you propose the lot of you tail fuck each other, something to which your two stony mates are more then happy to agree. You all sit in a perfect triangle, positioning your tails appropriately and smiling in anticipation for a threesome that will go down in history.\n\n");
+			outputText("You begin by kissing Sapphire then exchanging with [onyx name] the tree of you taking turns in order to feel each other's properly. You are not surprised to discover that out of the three of you [onyx name] is the best kisser. Once you all are suitably aroused you playfully insert your tail in Sapphire’s pussy as she position hers over ");
 			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("Krystal’s waiting cunt");
 			else outputText("Onyx’s rock hard dick");
-			outputText(". Not to be left unstimulated you welcome " + flags[kFLAGS.ONYX_NAME] + "’s tail ");
+			outputText(". Not to be left unstimulated you welcome [onyx name]’s tail ");
 			if (player.gender == 2 || player.gender == 3) outputText("in your ready snatch");
 			if (player.gender == 3) outputText(" and ");
 			if (player.gender == 1 || player.gender == 3) outputText("around your throbbing [cock]");
 			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText(". Krystal giggle");
 			else outputText(". Onyx chuckle");
-			outputText(" at the anticipation of ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("his");
-			outputText(" privates being played with.\n\n\"<i>Oh [name] this is gunna be so much fun!</i>\"\n\n");
+			outputText(" at the anticipation of [onyx eir] privates being played with.\n\n\"<i>Oh [name] this is gunna be so much fun!</i>\"\n\n");
 			outputText("You count to ten and the three of you begin tail teasing each other, making a chorus of moans sapphire tigh vagina gripping your tail.\n\n");
 			outputText("\"<i>Oh my gosh [name]!!... this feeling is aaahh...Aaaaaaahhhn!!! Fuck meee fuck my brain out!</i>\"\n\n");
 			outputText("This was an understatement, Sapphire’s cunt is pretty much eating your tail and although it does not produce any form of lubrication, her rough stone skin slides perfectly against yours, the friction creating heat ");
@@ -604,9 +609,7 @@ use namespace CoC;
 			outputText("inside her vagina like a wet stone and making you gasp at the caressing of your tail tip. Gosh your tail is feeling so good, you wouldn’t even mind it if the rest of your body was left unattended!");
 			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText(" Krystal seems to be locked in a blissful dreamy expression of her own");
 			else outputText(" Onyx seems to enjoy the feeling of his cock");
-			outputText(" as ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("she");
-			else outputText("he");
+			outputText(" as [onyx ey]");
 			if (player.gender == 1 || player.gender == 3) outputText(" jerks");
 			if (player.gender == 3) outputText(" and");
 			if (player.gender == 2 || player.gender == 3) outputText(" penetrates");
@@ -614,17 +617,14 @@ use namespace CoC;
 			if (player.gender == 2 || player.gender == 3) outputText("pussy is alight with pleasure");
 			if (player.gender == 3) outputText(" and your ");
 			if (player.gender == 1 || player.gender == 3) {
-				outputText("rock hard cock is pulsing from ");
-				if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-				else outputText("his");
-				outputText(" ministration");
+				outputText("rock hard cock is pulsing from [onyx eir] ministration");
 			}
 			outputText(" making you moan in complete bliss. Truth be told, you don’t know how long you will hold out until you reach your peak and lose control. Your tail is not any less sensible than your ");
 			if (player.gender == 2 || player.gender == 3) outputText("pussy");
 			if (player.gender == 3) outputText("or your ");
 			if (player.gender == 1 || player.gender == 3) outputText("cock");
 			outputText(", it quakes in Sapphire hot cunt from the constant pleasure of penetration and touch, squirming and feeling for Sapphire every hot spots just like a cock, only increasing Sapphire own delight. The tempo accelerate as the sound of rock grinding against rock and heavy panting assisted with moans fills the temple. Soon the three of you lock in a silent scream as you all orgasm together, ");
-			if (!player.isGargoyle()) outputText("Sapphire and " + flags[kFLAGS.ONYX_NAME] + " ");
+			if (!player.isGargoyle()) outputText("Sapphire and [onyx name] ");
 			outputText("freezing in the characteristic immobilism related to a gargoyle's stone form as you all lose consciousness from the intense fuck. ");
 			if (player.isGargoyle()) {
 				outputText("Anybody finding the three of you right now would think the artists of the temple were serious perverts carving a trio of statues fucking");
@@ -633,13 +633,13 @@ use namespace CoC;
 			}
 			else outputText("You regain your sense faster than your two stony friends. Mainly because you can’t petrify from pleasure like they do.\n\n");
 			if (player.isGargoyle()) {
-				outputText("The three of you come to way later, somewhat aware of having frozen for several hours. You proceed to break out from the other two as they do the same, still smiling after this incident. Sapphire and " + flags[kFLAGS.ONYX_NAME] + " nod as you propose that you should have that kind of bonding more often.\n\n");
+				outputText("The three of you come to way later, somewhat aware of having frozen for several hours. You proceed to break out from the other two as they do the same, still smiling after this incident. Sapphire and [onyx name] nod as you propose that you should have that kind of bonding more often.\n\n");
 				sapphireAffection(5);
 				player.sexReward("Default","Default",true,false);
 				doNext(camp.returnToCampUseFourHours);
 			}
 			else {
-				outputText("You proceed to break out from the other two still locked in their stone form. Sapphire and " + flags[kFLAGS.ONYX_NAME] + " are still frozen in time but you guess from their looks that they will want to do this again.\n\n");
+				outputText("You proceed to break out from the other two still locked in their stone form. Sapphire and [onyx name] are still frozen in time but you guess from their looks that they will want to do this again.\n\n");
 				sapphireAffection(5);
 				player.sexReward("Default","Default",true,false);
 				doNext(camp.returnToCampUseOneHour);
@@ -702,169 +702,45 @@ use namespace CoC;
 		public function krystalonyxmenu():void {
 			clearOutput();
 			spriteSelect(SpriteDb.s_sapphire);
-			outputText("Waving over at " + flags[kFLAGS.ONYX_NAME] + ", you ask ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("him");
-			outputText(" if ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("she");
-			else outputText("he");
-			outputText(" would feel like indulging in some quality time with you. ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("Her");
-			else outputText("His");
-			outputText(" eternal watch must get boring sometimes. ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("She");
-			else outputText("He");
-			outputText(" fawns over you, clearly showing ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("his");
-			outputText(" interest.\n\n");
-			outputText("\n\n\"<i>You're my savior and hero! How could I refuse such a request?");
+			outputText("Waving over at [onyx name], you ask [onyx em] if [onyx ey] would feel like indulging in some quality time with you. [onyx Eir] eternal watch must get boring sometimes. [onyx Ey] fawns over you, clearly showing [onyx eir] interest.\n\n");
+			outputText("\"<i>You're my savior and hero! How could I refuse such a request?");
 			if (player.isGargoyle()) outputText(" There’s even a water source nearby to use as lube if necessary.");
 			outputText("</i>\"\n\n");
-			outputText("Being sure of what you both want, you proceed to a private room in the temple. You undress under the lusty gaze of " + flags[kFLAGS.ONYX_NAME] + ", who seems to devour you with ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("his");
-			outputText(" eyes, glowing with an intense desire. Once you're done, " + flags[kFLAGS.ONYX_NAME] + " slowly proceeds to embrace you. Damn, ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("his");
-			outputText(" stone body is hot, and you can’t help but wonder if it's because ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("she");
-			else outputText("he");
-			outputText("'s horny, or if it's the sunshine under which ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("she");
-			else outputText("he");
-			outputText(" basks all day long. This only arouses you more, and ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("she");
-			else outputText("he");
-			outputText(" slowly proceeds to ");
-			if ((flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) && player.breastRows[0].breastRating >= 1) outputText("mash her breasts with yours and gently push you");
-			if ((flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) && player.breastRows[0].breastRating == 0) outputText("push her generous breasts on your chest and gently move you");
-			if (flags[kFLAGS.ONYX_GENDER] == 3) outputText("gently push you");
-			outputText(" to the stone floor as ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("she");
-			else outputText("he");
-			outputText(" lowers a hand to your ");
-			if (player.gender == 2 || player.gender == 3) outputText("[cunt]");
-			if (player.gender == 3) outputText(" and ");
-			if (player.gender == 1 || player.gender == 3) outputText("[cock]");
-			outputText(".\n\n");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("She");
-			else outputText("He");
-			outputText(" gently and slowly ");
-			if (player.hasVagina()) outputText("fingers");
-			else outputText("strokes");
-			outputText(" you until you're quite aroused and nearly as hot as ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("she");
-			else outputText("he");
-			outputText(" is, fawning over you for some time, wanting you to feel ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("his");
-			outputText(" appreciation and affection while getting you ready for what comes next.\n\n");
-			if (player.lust + 50 < player.maxLust()) player.lust += 50;
-			else player.lust = player.maxLust();
+			outputText("Being sure of what you both want, you proceed to a private room in the temple. You undress under the lusty gaze of [onyx name], who seems to devour you with [onyx eir] eyes, glowing with an intense desire. Once you're done, [onyx name] slowly proceeds to embrace you. Damn, [onyx eir] stone body is hot, and you can’t help but wonder if it's because [onyx ey]'s horny, or if it's the sunshine under which [onyx ey] basks all day long. This only arouses you more, and [onyx ey] slowly proceeds to ");
+			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2)
+                outputText(player.breastRows[0].breastRating > 0 ? "mash her breasts with yours and gently push you" : "push her generous breasts on your chest and gently move you");
+			else outputText("gently push you");
+			outputText(" to the stone floor as [onyx ey] lowers a hand to your " + (player.hasCock() ? "[cock]" : "[cunt]"));
+			outputText(".\n\n[onyx Ey] gently and slowly " + (player.hasCock() ? "strokes" : "fingers") + " you until you're quite aroused and nearly as hot as [onyx ey] is, fawning over you for some time, wanting you to feel [onyx eir] appreciation and affection while getting you ready for what comes next.\n\n");
+            player.dynStats("lus", 50);
+            //menu
 			menu();
-			if (player.hasVagina()) addButton(0, "Tail Fuck", KrystalOnyxTailFuck).hint("Let's put her/his lovely tail to good use.");
-			if (player.hasVagina() && (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2)) addButton(1, "Tribadism", KrystalTribadism).hint("Why not grind yourself on that lovely stone pussy.");
-			addButton(2, "69", KrystalOnyx69).hint("You wonder what her pussy/his cock tastes like, and if she/he will return the favor.");
-			if (player.hasVagina() && (flags[kFLAGS.ONYX_GENDER] == 2 || flags[kFLAGS.ONYX_GENDER] == 3)) addButton(3, "Get fucked", KrystalOnyxGetFucked).hint("You’ve been eyeing that rock hard cock for a while.");
-			if (player.hasCock() && (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2)) addButton(4, "Fuck Her", KrystalFuckHer).hint("How about a feel of that rocky hole?");
+			if (player.hasVagina()) addButton(0, "Tail Fuck", KrystalOnyxTailFuck).hint("Let's put [onyx eir] lovely tail to good use.");
+            else addButtonDisabled(0, "Tail Fuck", "Req. vagina");
+			addButton(2, "69", KrystalOnyx69).hint("You wonder what [onyx eir] " + (flags[kFLAGS.ONYX_GENDER] == 2 || flags[kFLAGS.ONYX_GENDER] == 3 ? "cock" : "pussy") +  "tastes like, and if [onyx ey] will return the favor.");
+            if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) {
+                if (player.hasVagina()) addButton(1, "Tribadism", KrystalTribadism).hint("Why not grind yourself on that lovely stone pussy.");
+                else addButtonDisabled(1, "Tribadism", "Req. vagina");
+                if (player.hasCock()) addButton(4, "Fuck Her", KrystalFuckHer).hint("How about a feel of that rocky hole?");
+                else addButtonDisabled(4, "Fuck Her", "Req. cock");
+            }
+            if (flags[kFLAGS.ONYX_GENDER] == 3 || flags[kFLAGS.ONYX_GENDER] == 2) {
+			    if (player.hasVagina()) addButton(3, "Get fucked", KrystalOnyxGetFucked).hint("You’ve been eyeing that rock hard cock for a while.");
+                else addButtonDisabled(3, "Get fucked", "Req. vagina");
+            }
 			addButton(14, "Back", templemainmenu);
 		}
 
 		public function KrystalOnyxTailFuck():void {
 			clearOutput();
 			spriteSelect(SpriteDb.s_sapphire);
-			outputText("Lying under ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("him");
-			outputText(" you ask if ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("she");
-			else outputText("he");
-			outputText(" would like to penetrate you with that lovely tail of ");
+			outputText("Lying under [onyx em] you ask if [onyx ey] would like to penetrate you with that lovely tail of ");
 			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("hers. She");
 			else outputText("his. He");
-			outputText(" blushes for a moment, but agrees and slowly retracts ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("his");
-			outputText(" spikes until ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("his");
-			outputText(" tail is smooth and ready. ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("She");
-			else outputText("He");
-			outputText(" lies on you, ");
+			outputText(" blushes for a moment, but agrees and slowly retracts [onyx eir] spikes until [onyx eir] tail is smooth and ready. [onyx Ey] lies on you, ");
 			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her stone breasts mashing against your chest as she");
 			else outputText("His rock hard cock across your chest as he");
-			outputText(" looks behind you both and slowly moves ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("his");
-			outputText(" tail toward your [cunt]. ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("She");
-			else outputText("He");
-			outputText(" tickles your entrance for a moment with ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("his");
-			outputText(" tip, giving you a cute smile and making you gasp as ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("she");
-			else outputText("he");
-			outputText(" slowly inserts ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("his");
-			outputText(" tail into your snatch. You grow more aroused as ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("she");
-			else outputText("he");
-			outputText(" proceeds deeper and deeper until ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("she");
-			else outputText("he");
-			outputText(" reaches your cervix. You're filled so perfectly by ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("his");
-			outputText(" tail, despite the fact ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("she");
-			else outputText("he");
-			outputText(" is not moving the warmth and girth of ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("his");
-			outputText(" stone tail alone is enough to make you gasp.\n\n");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("She");
-			else outputText("He");
-			outputText(" starts to slide ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("his");
-			outputText(" tail in and out of you, taking ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("his");
-			outputText(" time to tickle every sensitive spot inside your moist depths. ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("She");
-			else outputText("He");
-			outputText(" seems to enjoy this as well since ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("she");
-			else outputText("he");
-			outputText(" moans lustily, and you assume that it's very likely in ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("his");
-			outputText(" former form ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("she");
-			else outputText("he");
-			outputText(" had developed a fetish for tail fucking to the point ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("his");
-			outputText(" tail is as responsive as a man's penis.\n\nSince ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("she");
-			else outputText("he");
-			outputText(" seems to be getting off on ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("his");
-			outputText(" own, you allow yourself to focus your mind on your own pleasure as ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("she");
-			else outputText("he");
-			outputText(" slowly but certainly brings you to the edge. A few seconds later you are both orgasming in perfect synchronization as you squirt all along ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("his");
-			outputText(" tail length. With a content smile you doze off next to ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("him");
-			outputText(" in a scene of lovemaking fit for a master artist to paint in a fresco.\n\nYou wake up a while later and redress, heading back to camp.\n\n");
+			outputText(" looks behind you both and slowly moves [onyx eir] tail toward your [cunt]. [onyx Ey] tickles your entrance for a moment with [onyx eir] tip, giving you a cute smile and making you gasp as [onyx ey] slowly inserts [onyx eir] tail into your snatch. You grow more aroused as [onyx ey] proceeds deeper and deeper until [onyx ey] reaches your cervix. You're filled so perfectly by [onyx eir] tail, despite the fact [onyx ey] is not moving the warmth and girth of [onyx eir] stone tail alone is enough to make you gasp.\n\n[onyx Ey] starts to slide [onyx eir] tail in and out of you, taking [onyx eir] time to tickle every sensitive spot inside your moist depths. [onyx Ey] seems to enjoy this as well since [onyx ey] moans lustily, and you assume that it's very likely in [onyx eir] former form [onyx ey] had developed a fetish for tail fucking to the point [onyx eir] tail is as responsive as a man's penis.\n\nSince [onyx ey] seems to be getting off on [onyx eir] own, you allow yourself to focus your mind on your own pleasure as [onyx ey] slowly but certainly brings you to the edge. A few seconds later you are both orgasming in perfect synchronization as you squirt all along [onyx eir] tail length. With a content smile you doze off next to [onyx em] in a scene of lovemaking fit for a master artist to paint in a fresco.\n\nYou wake up a while later and redress, heading back to camp.\n\n");
 			player.sexReward("Default","Default",true,false);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -885,44 +761,32 @@ use namespace CoC;
 			outputText("Your eyes zero in on ");
 			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("Krystal's smoothly shaped pussy");
 			else outputText("Onyx's perfectly carved cock");
-			outputText(" and you start to ponder what a gargoyle tastes like. Determined to get the answer to this very important question, you tell " + flags[kFLAGS.ONYX_NAME] + " to lay on ");
+			outputText(" and you start to ponder what a gargoyle tastes like. Determined to get the answer to this very important question, you tell [onyx name] to lay on ");
 			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her back. She");
 			else outputText("his back. He");
-			outputText(" is quick to comply and you take your time to position your genitals right above ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("his");
-			outputText(" face and ");
+			outputText(" is quick to comply and you take your time to position your genitals right above [onyx eir] face and ");
 			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("give her pussy a quick lick. She");
 			else outputText("give his glans a quick lick. He");
 			outputText(" moans in appreciation and responds by firmly grabbing your ass ");
 			if (player.hasVagina()) {
-				outputText("and filling your [cunt] with ");
-				if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-				else outputText("his");
-				outputText(" stony tongue");
+				outputText("and filling your [cunt] with [onyx eir] stony tongue");
 			}
 			if (player.hasCock()) outputText("and suckling on your cockhead.");
-			outputText(" You moan in delight and proceed to reward ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("his");
-			outputText(" effort with");
+			outputText(" You moan in delight and proceed to reward [onyx eir] effort with");
 			if (player.hasVagina()) outputText(" pussy juices.");
-			if (player.hasCock()) outputText(" precum.");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("She");
-			else outputText("He");
-			outputText(" strangely doesn't have a bad taste, albeit very different from a creature of flesh and blood.\n\n");
+			if (player.hasCock()) outputText(" precum.[onyx Ey] strangely doesn't have a bad taste, albeit very different from a creature of flesh and blood.\n\n");
 			if (player.isGargoyle()) {
-				outputText("You pleasure each other for several minutes, both of your stone tails flailing wildly from the impending orgasm. Your moans get louder and louder until you finally freeze in place at your shared climax, prolonging this perfect moment for what looks like a passionate eternity. When you come to your mouth is where you left it and you decide to pull it off " + flags[kFLAGS.ONYX_NAME] + "'s genitals. " + flags[kFLAGS.ONYX_NAME] + " is still petrified in pleasure, ");
+				outputText("You pleasure each other for several minutes, both of your stone tails flailing wildly from the impending orgasm. Your moans get louder and louder until you finally freeze in place at your shared climax, prolonging this perfect moment for what looks like a passionate eternity. When you come to your mouth is where you left it and you decide to pull it off [onyx name]'s genitals. [onyx name] is still petrified in pleasure, ");
 				if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("she");
 				else outputText("he");
 				outputText(" likely will come to later.");
 			}
 			else {
 				outputText("You pleasure each other for several minutes as you try to match your tempo with that of your stony partner's. Soon you orgasm ");
-				if (player.hasCock()) outputText("blowing your load in " + flags[kFLAGS.ONYX_NAME] + "'s waiting mouth");
-				if (player.hasVagina()) outputText("" + flags[kFLAGS.ONYX_NAME] + " drinking the flood of your juices and licking your pussy clean");
+				if (player.hasCock()) outputText("blowing your load in [onyx name]'s waiting mouth");
+				if (player.hasVagina()) outputText("[onyx name] drinking the flood of your juices and licking your pussy clean");
 			}
-			outputText(" You doze off tired and wake up an hour later, your mouth still where you left it. You resolve to pull it off " + flags[kFLAGS.ONYX_NAME] + " who, still petrified in pleasure, will likely come to later.\n\n");
+			outputText(" You doze off tired and wake up an hour later, your mouth still where you left it. You resolve to pull it off [onyx name] who, still petrified in pleasure, will likely come to later.\n\n");
 			outputText("For now you proceed to redress and head back to camp.\n\n");
 			player.sexReward("Default","Default",true,false);
 			doNext(camp.returnToCampUseOneHour);
@@ -930,37 +794,16 @@ use namespace CoC;
 		public function KrystalOnyxGetFucked():void {
 			clearOutput();
 			spriteSelect(SpriteDb.s_sapphire);
-			outputText("The moment you made " + flags[kFLAGS.ONYX_NAME] + "'s perfectly defined shaft you knew you would use it! You begin to slide your hand against ");
-			if (flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("his");
-			outputText(" perfect pillar of maleness in order to wake it up. " + flags[kFLAGS.ONYX_NAME] + "'s reaction is immediate as ");
-			if (flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("his");
-			outputText(" cock grows erect within seconds, as hard as diamond and ready for your use");
+			outputText("The moment you made [onyx name]'s perfectly defined shaft you knew you would use it! You begin to slide your hand against [onyx ey] perfect pillar of maleness in order to wake it up. [onyx name]'s reaction is immediate as [onyx ey] cock grows erect within seconds, as hard as diamond and ready for your use");
 			if (!player.isGargoyle()) outputText(". Well not so ready yet... there's still the need for lubrication");
-			outputText(". You lower your head and proceed to suck on " + flags[kFLAGS.ONYX_NAME] + "'s perfect cock");
+			outputText(". You lower your head and proceed to suck on [onyx name]'s perfect cock");
 			if (!player.isGargoyle()) outputText(", liberally coating the entire length with your saliva");
-			outputText(". " + flags[kFLAGS.ONYX_NAME] + " shivers in delight at your expert cocksucking but you’re not done yet. You move yourself into position and slowly begin to insert the hard tool inside your [cunt] ");
+			outputText(". [onyx name] shivers in delight at your expert cocksucking but you’re not done yet. You move yourself into position and slowly begin to insert the hard tool inside your [cunt] ");
 			if (player.isGargoyle()) {
-				outputText(" moaning in delight at the perfect grinding of ");
-				if (flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-				else outputText("his");
-				outputText(" perfectly shaped stone dick in your stone pussy wich begins to heat up from the friction");
+				outputText(" moaning in delight at the perfect grinding of [onyx eir] perfectly shaped stone dick in your stone pussy wich begins to heat up from the friction");
 			}
 			else outputText("gasping as the cold hard stone enters you");
-			outputText(".\n\nIt’s obvious " + flags[kFLAGS.ONYX_NAME] + " had a lot of experience using a cock before, likely from ");
-			if (flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("his");
-			outputText(" past life as the Obsidian Gargoyle. ");
-			if (flags[kFLAGS.ONYX_GENDER] == 2) outputText("Her");
-			else outputText("His");
-			outputText(" talent at fucking rivals that of the demons, and soon you find yourself at the mercy of ");
-			if (flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("his");
-			outputText(" perfect gargoyle cock. ");
-			if (flags[kFLAGS.ONYX_GENDER] == 2) outputText("She");
-			else outputText("He");
-			outputText(" pushes you on your back and takes charge, fucking your pussy so well your eyes cross and your tongue falls out of your mouth as you pant in lust.");
+			outputText(".\n\nIt’s obvious [onyx name] had a lot of experience using a cock before, likely from [onyx ey] past life as the Obsidian Gargoyle. [onyx Eir] talent at fucking rivals that of the demons, and soon you find yourself at the mercy of [onyx ey] perfect gargoyle cock. [onyx Ey] pushes you on your back and takes charge, fucking your pussy so well your eyes cross and your tongue falls out of your mouth as you pant in lust.");
 			if (player.breastRows[0].breastRating >= 1) {
 				outputText(" You barely register ");
 				if (flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
@@ -969,44 +812,17 @@ use namespace CoC;
 			}
 			outputText("\n\n");
 			if (player.isGargoyle()) {
-				outputText("Soon ");
-				if (flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-				else outputText("his");
-				outputText(" skill proves to much for you, as you lose it entirely to pleasure. Your mind regressing to that of an animal in heat, reaching nirvana several times over, screeching your bliss to the heavens. Your mouth gapes wide open as " + flags[kFLAGS.ONYX_NAME] + " reaches ");
-				if (flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-				else outputText("his");
-				outputText(" peak, the both of you petrifying in a silent orgasmic scream. You stay there under ");
+				outputText("Soon [onyx eir] skill proves to much for you, as you lose it entirely to pleasure. Your mind regressing to that of an animal in heat, reaching nirvana several times over, screeching your bliss to the heavens. Your mouth gapes wide open as [onyx name] reaches [onyx eir] peak, the both of you petrifying in a silent orgasmic scream. You stay there under ");
 				if (flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
 				else outputText("him");
-				outputText(" for hours, untouched by time, until you recover mobility then push ");
-				if (flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-				else outputText("his");
-				outputText(" still frozen form off you. Wow, what a fuck! If you didn’t know any better, you think you might get addicted to ");
-				if (flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-				else outputText("his");
-				outputText(" dick.\n\n");
+				outputText(" for hours, untouched by time, until you recover mobility then push [onyx eir] still frozen form off you. Wow, what a fuck! If you didn’t know any better, you think you might get addicted to [onyx eir] dick.\n\n");
 				outputText("You head back to camp, giving the unconscious gargoyle a parting kiss.\n\n");
 			}
 			else {
-				outputText("Soon ");
-				if (flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-				else outputText("his");
-				outputText(" skill proves to much for you, as you lose it entirely to pleasure. Your mind regressing to that of an animal in heat, reaching nirvana several times over, you scream out your bliss, splattering Krystal's/Onyx's cock with a constant waterfall of girl cum which only serves to accelerate and ease ");
-				if (flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-				else outputText("his");
-				outputText(" pumping. You are still drooling on the ground as " + flags[kFLAGS.ONYX_NAME] + " reaches ");
-				if (flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-				else outputText("his");
-				outputText(" peak, petrifying in a silent orgasmic scream. You stay there under ");
+				outputText("Soon [onyx eir] skill proves to much for you, as you lose it entirely to pleasure. Your mind regressing to that of an animal in heat, reaching nirvana several times over, you scream out your bliss, splattering Krystal's/Onyx's cock with a constant waterfall of girl cum which only serves to accelerate and ease [onyx eir] pumping. You are still drooling on the ground as [onyx name] reaches [onyx eir] peak, petrifying in a silent orgasmic scream. You stay there under ");
 				if (flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
 				else outputText("him");
-				outputText(" for several minutes as you calm down and recover your senses, then push ");
-				if (flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-				else outputText("his");
-				outputText(" still frozen form off of you. Wow, what a fuck! If you didn’t know any better, you think you might get addicted to ");
-				if (flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-				else outputText("his");
-				outputText(" dick.\n\n");
+				outputText(" for several minutes as you calm down and recover your senses, then push [onyx eir] still frozen form off of you. Wow, what a fuck! If you didn’t know any better, you think you might get addicted to [onyx eir] dick.\n\n");
 				outputText("You head back to camp, giving the unconscious gargoyle a parting kiss.\n\n");
 			}
 			player.sexReward("Default","Default",true,false);
@@ -1127,31 +943,10 @@ use namespace CoC;
 			outputText("As you chant the last word, the gem seems to be assimilated directly into the "+(Forgefather.material)+" body, disappearing without a trace. The statue's eyes start to dimly glow with a pale purple light as the new gargoyle awakens with a surprised expression. \"<i>What happened...? I was dead, finally destroyed by your hands and at rest. But now I’m alive again. My thoughts free of the constant plague of sexual desires, and in a new body. Am I to be given a second chance?</i>\"\n\n");
 			outputText("You start by asking the gargoyle for its name, not desiring to force it into the role of a slave again.\n\n");
 			outputText("\"<i>My name?... While I used to be one soul, I am now many. Since I'm a living statue and I’m closer to a ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("Female");
-			if (flags[kFLAGS.ONYX_GENDER] == 3) outputText("Male");
-			outputText(" being, I guess I’ll name myself ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) {
-				outputText("Krystal");
-				flags[kFLAGS.ONYX_NAME] = "Krystal";
-			}
-			else {
-				outputText("Onyx");
-				flags[kFLAGS.ONYX_NAME] = "Onyx";
-			}
-			outputText(". Are you going to be my master from now on?</i>\"\n\n");
-			outputText("You have no intention of being such a thing, and you clearly state to " + flags[kFLAGS.ONYX_NAME] + " that the only order you'll ever give ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("him");
-			outputText(" is to help Sapphire guard this temple from potential corrupted influences such as demons and minotaurs. For the rest of ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("his");
-			outputText(" time, ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("she");
-			else outputText("he");
-			outputText(" is officially free to act and live as ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("she");
-			else outputText("he");
-			outputText(" wishes, without the constraints of obedience to a master. " + flags[kFLAGS.ONYX_NAME] + "'s face would shed tears if it could, after living for years as a slave to a demon master, the freedom you offer the gargoyle is something it only dared to dream of.\n\n");
+			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("female");
+			if (flags[kFLAGS.ONYX_GENDER] == 3) outputText("male");
+			outputText(" being, I guess I’ll name myself [onyx name]. Are you going to be my master from now on?</i>\"\n\n");
+			outputText("You have no intention of being such a thing, and you clearly state to [onyx name] that the only order you'll ever give [onyx em] is to help Sapphire guard this temple from potential corrupted influences such as demons and minotaurs. For the rest of [onyx eir] time, [onyx ey] is officially free to act and live as [onyx ey] wishes, without the constraints of obedience to a master. [onyx name]'s face would shed tears if it could, after living for years as a slave to a demon master, the freedom you offer the gargoyle is something it only dared to dream of.\n\n");
 			outputText("\"<i>If that's the condition, then I will do as you ask. Thank you so much for everything, and should you ever need anything special, I will be here in the temple for you. It feels so good to finally be able to make my own choices again.</i>\"\n\n");
 			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("She gives you an affectionate kiss on the cheek, surprising you, then flies to perch on a nearby pedestal and begins her watch.");
 			else outputText("He warmly hugs you to show his appreciation, then flies to perch on a nearby pedestal and begins his watch.");

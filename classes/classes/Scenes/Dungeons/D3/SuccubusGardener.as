@@ -227,7 +227,7 @@ import classes.StatusEffects.Combat.GardenerSapSpeedDebuff;
 					outputText(". You're intimately aware of the vegetative masses pressing down on you from every angle, lavishing you with attentions so forceful that they threaten to squeeze the very breathe from your body. It's impossible to ignore. You do your best to breathe and ignore the undulated affections, but even you can't deny the way that it makes your heart beat faster.");
 				}
 				player.addStatusValue(StatusEffects.Tentagrappled, 1, 1);
-				if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {
+				if (!player.hasPerk(PerkLib.Juggernaut) && armorPerk != "Heavy") {
 					player.takePhysDamage(0.75*this.str + rand(15));
 				}
 				player.dynStats("lus+", 3 + rand(3));
@@ -254,7 +254,7 @@ import classes.StatusEffects.Combat.GardenerSapSpeedDebuff;
 				outputText("You're intimately aware of the vegetative masses pressing down on you from every angle, lavishing you with attentions so forceful that they threaten to squeeze the very breathe from your body. It's impossible to ignore. You do your best to breathe and ignore the undulated affections, but even you can't deny the way that it makes your heart beat faster.");
 			}
 			player.addStatusValue(StatusEffects.Tentagrappled, 1, 1);
-			if (player.findPerk(PerkLib.Juggernaut) < 0 && armorPerk != "Heavy") {
+			if (!player.hasPerk(PerkLib.Juggernaut) && armorPerk != "Heavy") {
 				player.takePhysDamage(.75*this.str + rand(15));
 			}
 			player.dynStats("lus+", 3 + rand(3));

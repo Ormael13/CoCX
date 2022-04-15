@@ -87,13 +87,14 @@ import classes.internals.*;
                 this.armorMDef = 15 + 5*mod;
                 this.bonusHP = 200 + 50*mod + rand(this.ballSize * (3 + mod));
                 this.bonusLust = 230 + 19*mod + this.ballSize * 2*(3 + mod) + rand(this.ballSize * (4 + mod));
-                this.level = 65 + 5*mod;
+                this.level = 64 + 5*mod;
 				this.drop = new ChainedDrop().add(necklaces.COWBELL, 1 / 12)
 						.add(weapons.DL_AXE_, 1 / 8)
 						.add(consumables.MINOCUM, 1 / 5)
 						.add(consumables.MINOBLO, 1 / 2)
 						.elseDrop(null);
-			    this.gems = (rand(15) + 15) * (1.0 + 0.5*mod);
+			    this.gems = int((rand(15) + 85) * Math.exp(0.2*mod));
+                this.additionalXP = int(600 * Math.exp(0.2*mod));
 			}
 			else {
 				this.short = "minotaur";

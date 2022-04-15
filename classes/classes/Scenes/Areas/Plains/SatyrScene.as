@@ -272,10 +272,7 @@ internal function defeatASatyr():void {
 	menu();
 	if (player.hasCock() && player.cockThatFits(monster.analCapacity()) >= 0) addButton(0, "FuckHisButt", malesTakeAdvantageOfSatyrs);
 	if (player.hasVagina()) addButton(1, "Ride Face", femaleTakesAdvantageOfSatyr);
-	if (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armor == armors.LMARMOR || player.armor == armors.S_ARMOR)) {
-		if (player.armor == armors.S_ARMOR) addButton(2, "B.Titfuck", (player.armor as SuccubusArmor).succubusPaizuri);
-		else addButton(2, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
-	}
+	LustyMaidensArmor.addTitfuckButton(2);
 	SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatASatyr2);
 		addButton(14, "Leave", cleanupAfterCombat);
 }
@@ -283,10 +280,7 @@ public function defeatASatyr2():void {
 	menu();
 	if (player.hasCock() && player.cockThatFits(monster.analCapacity()) >= 0) addButton(0, "FuckHisButt", malesTakeAdvantageOfSatyrs);
 	if (player.hasVagina()) addButton(1, "Ride Face", femaleTakesAdvantageOfSatyr);
-	if (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armor == armors.LMARMOR || player.armor == armors.S_ARMOR)) {
-		if (player.armor == armors.S_ARMOR) addButton(2, "B.Titfuck", (player.armor as SuccubusArmor).succubusPaizuri);
-		else addButton(2, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
-	}
+	LustyMaidensArmor.addTitfuckButton(2);
 	SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatASatyr2);
 		addButton(14, "Leave", cleanupAfterCombat);
 }

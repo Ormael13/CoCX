@@ -36,7 +36,7 @@ private function followMinotaurIntoBackroom():void {
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00241] == 0) {
 		outputText("You follow the burly beast through the door, turning several times as he leads you through the blisteringly hot ovens.  The minotaur is sweating heavily by the time you reach his destination, and for that matter so are you.  With all the musk boiling off of him, you find yourself wondering if he was just setting up an elaborate ruse to lure you into a sexual situation.  He grabs a white, fluffy hat and drops it on his head, firmly dispelling that notion as he tries to explain in as few words as possible, \"<i>I am cook.  I make great éclairs, but making masterpiece now.  Need special ingredients.  You get to leave city.  Bring me lust draft and honey.  Not pure stuff, too strong. Go.</i>\"\n\n");
 		outputText("You get a chance to look over his work station, noting the many bowls of batter, hundreds of massive eclairs, and the largest onahole you've ever seen.  ");
-		if(player.findPerk(PerkLib.MinotaurCumAddict) >= 0) outputText("You lick your lips when you realize you're meeting the source of the 'special' éclairs.");
+		if(player.hasPerk(PerkLib.MinotaurCumAddict)) outputText("You lick your lips when you realize you're meeting the source of the 'special' éclairs.");
 		else outputText("You blush when you realize what he must be using for cream filling.");
 		//[Give Them] [Leave]
 		if (player.hasItem(consumables.BEEHONY) && player.hasItem(consumables.L_DRAFT))
@@ -73,14 +73,14 @@ public function handOverIngredientsItBeBakingTimeYo():void {
 	outputText("You hand the lust draft and bottled honey to the minotaur, doing your best to ignore his potent, lust-inducing pheromones as you watch him work.  He grabs the batch of dough he had been kneading and pours in the lust draft, snorting aggressively once the bubbling drug's smell reaches his bovine nostrils.  Next, the bull-like chef reaches over to grab a bottle marked 'P.S.M.', uncorking and pouring it in one practiced motion.   The white fluid froths dangerously on contact with the pink lust draft, and a second later the honey is in there too.  Finally, he flips up his loincloth and reaches for the onahole.\n\n");
 
 	outputText("The sex-toy drips with lubricant and twists in the minotaur's hands, indicating magical enhancement or goblin manufacture.  He slides in, sighing as his four, basketball-sized testes pull close to his body, twitching.  Two quick pumps later, he's howling, hips twitching as spurts of white leak from the onahole into the bowl.  With remarkable restraint, he stops himself after adding a cup of spunk, even though his balls are still huge and quivering.");
-	if(player.findPerk(PerkLib.MinotaurCumAddict) >= 0) outputText("  You lurch forward involuntarily, craving the rest of his jism, but he pushes you into the wall and grunts, \"<i>No,</i>\" in a tone that brooks no disagreement.  It actually shocks you out of your addicted haze.");
+	if(player.hasPerk(PerkLib.MinotaurCumAddict)) outputText("  You lurch forward involuntarily, craving the rest of his jism, but he pushes you into the wall and grunts, \"<i>No,</i>\" in a tone that brooks no disagreement.  It actually shocks you out of your addicted haze.");
 	outputText("\n\n");
 
 	outputText("Grabbing a whisk, the bull-man starts stirring the sex-filled dough with vigor, mixing the thickening blend hard enough to make his biceps ripple.  A moment later, he lifts the bowl one-handed and pulls out a giant, novelty cupcake mold from the counter. After filling the mold, the chef throws it onto his burly shoulder and grabs a sack of actual icing.  A terse grunt instructs, \"<i>Wait at tables.  You can try some when done.</i>\"  ");
-	if(player.findPerk(PerkLib.MinotaurCumAddict) >= 0) outputText("  Your mouth salivates at the thought.");
+	if(player.hasPerk(PerkLib.MinotaurCumAddict)) outputText("  Your mouth salivates at the thought.");
 	else outputText("You aren't sure you want to.");
 	outputText("\n\n");
-	if(player.findPerk(PerkLib.MinotaurCumAddict) >= 0) doNext(waitForSlutCake);
+	if(player.hasPerk(PerkLib.MinotaurCumAddict)) doNext(waitForSlutCake);
 	//[Wait] [Sneak Out]
 	else simpleChoices("Wait", waitForSlutCake, "Sneak Out", sneakAwayFromMaddie, "", null, "", null, "", null);
 }

@@ -121,7 +121,7 @@ package classes.Items
 
 		override public function unequip(player:Player, returnToInventory:Boolean, output:Boolean = false):void
 		{
-			while(player.findPerk(PerkLib.BulgeArmor) >= 0) player.removePerk(PerkLib.BulgeArmor);// TODO remove this Exgartuan hack
+			while(player.hasPerk(PerkLib.BulgeArmor)) player.removePerk(PerkLib.BulgeArmor);// TODO remove this Exgartuan hack
 			if (returnToInventory) {
 				var itype:ItemType = unequipReturnItem(player, output);
 				if (itype != null) {

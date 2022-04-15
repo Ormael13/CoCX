@@ -9,7 +9,6 @@ import classes.Items.Armor;
 import classes.Scenes.Dungeons.HelDungeon.*;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.SceneLib;
-import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 use namespace CoC;
@@ -823,7 +822,7 @@ use namespace CoC;
 
 			outputText("\n\n");
 			//[If Broodmother, not pregnant: 
-			if(player.findPerk(PerkLib.BroodMother) >= 0) outputText("You assure her she will be soon");
+			if(player.hasPerk(PerkLib.BroodMother)) outputText("You assure her she will be soon");
 			else outputText("You grin at her");
 			outputText(" and strip out of your [armor]. The phoenix, a bit more dominant than you might have liked, roughly grabs your [chest], pinching your nipples as she takes over wringing her cock from you. Oh well. You decide to roll with it and slide a hand down to your [vagina], stroking your pussy as your lover warms up.");
 

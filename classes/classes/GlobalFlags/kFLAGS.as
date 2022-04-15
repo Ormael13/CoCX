@@ -296,7 +296,7 @@ public static const CERAPH_FOLLOWER_CARRY:int                                   
 public static const CERAPH_HIDING_DICK:int                                          =  288; // Ceraph Cock Hidden (1 = yes, 0 = cock floppin') - Ceraph's Demon Dong status 0=Visible, 1=Not visible
 public static const UNKNOWN_FLAG_NUMBER_00289:int                                   =  289; // Times Ceraph Licked You Out
 public static const UNKNOWN_FLAG_NUMBER_00290:int                                   =  290; // Punished Ceraph?
-public static const UNKNOWN_FLAG_NUMBER_00291:int                                   =  291; // Times Beaten Ceraph And Raped Her Without Losing
+public static const TIMES_BEATEN_SERAPH_WITHOUT_LOSING:int                                   =  291; // Times Beaten Ceraph And Raped Her Without Losing
 public static const UNKNOWN_FLAG_NUMBER_00292:int                                   =  292; // Times listened in on demons
 public static const UNKNOWN_FLAG_NUMBER_00293:int                                   =  293; // Disabled Ceraph Faux Corruption - Ceraph Corruption Scene
 public static const UNKNOWN_FLAG_NUMBER_00294:int                                   =  294; // Times Done 'SWEETIE NO!' Ceraph Marble RP
@@ -878,7 +878,7 @@ public static const MILK_NAME:int                                               
 public static const MILK_SIZE:int                                                   =  870; //
 public static const MET_MILK_SLAVE:int                                              =  871; //
 public static const COUNTDOWN_TO_NIGHT_RAPE:int                                     =  872; //
-public static const PHYLLA_MAXLEN:int                                             =  873; //
+public static const PHYLLA_CAPACITY:int                                               =  873; //
 public static const ANT_KIDS:int                                                    =  874; //
 public static const ANT_WAIFU:int                                                   =  875; //
 public static const PHYLLA_STAY_HOME:int                                            =  876; //
@@ -2454,7 +2454,7 @@ public static const SAPPHIRE_TALKS:int                       			            = 24
 public static const SAPPHIRE_SEX:int                                   				= 2446;
 public static const SAPPHIRE_02447:int                                   = 2447;							//Not Yet Used Flag
 public static const ONYX_PATH:int                                   				= 2448;//slave or free
-public static const ONYX_NAME:int                                   				= 2449;
+public static const UNKNOWN_FLAG_NUMBER_02449:int                                   = 2449;
 public static const ONYX_GENDER:int                                   				= 2450;
 public static const ONYX_02451:int                                   = 2451;								//Not Yet Used Flag
 public static const NAGA_OR_GORGON:int                     			                = 2452;

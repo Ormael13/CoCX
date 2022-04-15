@@ -41,10 +41,7 @@ import classes.Scenes.SceneLib;
 			menu();
 			outputText("You smile in satisfaction as the mino incubus collapses, unable to continue fighting.");
 			if (monster.HP < 1) addButton (5, "Kill Him", killDemon);
-			if (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armor == armors.LMARMOR || player.armor == armors.S_ARMOR)) {
-				if (player.armor == armors.S_ARMOR) addButton(7, "B.Titfuck", (player.armor as SuccubusArmor).succubusPaizuri);
-				else addButton(7, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
-			}
+            LustyMaidensArmor.addTitfuckButton(7);
 			SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatMinoIncubus);
 			addButton (14, "Leave", cleanupAfterCombat);
 		}
@@ -331,10 +328,7 @@ import classes.Scenes.SceneLib;
 				outputText("\nNow would be the perfect opportunity to taste the fruits of her sex-ready form...\n\nDo you fuck her?");
 				if (player.gender == 1 || player.gender == 3) addButton (0, "M. Fuck", OmnibusGetsRapedByMale);
 				if (player.gender == 2 || player.gender == 3) addButton (1, "F. Fuck", OmnibusGetsRapedByFemale);
-				if (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armor == armors.LMARMOR || player.armor == armors.S_ARMOR)) {
-					if (player.armor == armors.S_ARMOR) addButton(2, "B.Titfuck", (player.armor as SuccubusArmor).succubusPaizuri);
-					else addButton(2, "B.Titfuck", (player.armor as LustyMaidensArmor).lustyMaidenPaizuri);
-				}
+                LustyMaidensArmor.addTitfuckButton(2);
 			}
 			if (monster.HP < 1) addButton (5, "Kill Her", killDemon);
 			SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatOmnibus);

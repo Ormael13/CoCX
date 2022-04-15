@@ -90,7 +90,7 @@ public class CeraphScene extends NPCAwareContent
 //Ceraph's fluids boost PC libido and sensitivity massively either way.
 		internal function maleFuckCeraphsPussy():void
 		{
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00291]++;
+			flags[kFLAGS.TIMES_BEATEN_SERAPH_WITHOUT_LOSING]++;
 			spriteSelect(SpriteDb.s_ceraph);
 			clearOutput();
 			var x:Number = player.cockThatFits(monster.vaginalCapacity());
@@ -207,7 +207,7 @@ public class CeraphScene extends NPCAwareContent
 //[Female] Ride 'Dat Cawk
 		internal function rideCeraphsCockLikeaBAWSSexclamation11eleven():void
 		{
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00291]++;
+			flags[kFLAGS.TIMES_BEATEN_SERAPH_WITHOUT_LOSING]++;
 			player.slimeFeed();
 			spriteSelect(SpriteDb.s_ceraph);
 			clearOutput();
@@ -650,7 +650,7 @@ public class CeraphScene extends NPCAwareContent
 				monster.HP = 2;
 				if (player.lust < 34) player.lust = 34;
 			}
-			else if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00291] >= 4) {
+			else if (flags[kFLAGS.TIMES_BEATEN_SERAPH_WITHOUT_LOSING] >= 4) {
 				ceraphFollowerScene.submissiveCeraphOffer();
 				return;
 			}
@@ -669,10 +669,7 @@ public class CeraphScene extends NPCAwareContent
 				}
 				if (player.hasVagina()) {
 					addButton(1, "Ride Her", rideCeraphsCockLikeaBAWSSexclamation11eleven);
-					if (player.hasVagina() && player.biggestTitSize() >= 4 && (player.armorName == "lusty maiden's armor" || player.armorName == "Succubus armor")) {
-						if (player.armorName == "Succubus armor") addButton(3, "B.Titfuck", createCallBackFunction2((player.armor as SuccubusArmor).succubusPaizuri,player,monster));
-						else addButton(3, "B.Titfuck", createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,monster));
-					}
+					LustyMaidensArmor.addTitfuckButton(3);
 				}
 				SceneLib.uniqueSexScene.pcUSSPreChecksV2(winRapeChoices);
 								addButton(14, "Leave", leave);
@@ -687,7 +684,7 @@ public class CeraphScene extends NPCAwareContent
 		public function loseFUCKME():void
 		{
 			//Reset rape count if lost
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00291] = 0;
+			flags[kFLAGS.TIMES_BEATEN_SERAPH_WITHOUT_LOSING] = 0;
 			spriteSelect(SpriteDb.s_ceraph);
 			if (flags[kFLAGS.PC_FETISH] == 0) loseToCeraphAndGetPiercingsInEarsOrSomethingSomehow();
 			else if (flags[kFLAGS.PC_FETISH] == 1) loseToCeraphAnGetPierced2();
@@ -747,7 +744,7 @@ public class CeraphScene extends NPCAwareContent
 //(REQ's – HUGE WANG, Exgartuan or Jojo corruption, and !centaur)
 		private function hugeCorruptionForceFuckCeraph():void
 		{
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00291] += 2;
+			flags[kFLAGS.TIMES_BEATEN_SERAPH_WITHOUT_LOSING] += 2;
 			clearOutput();
 			spriteSelect(SpriteDb.s_ceraph);
 			var x:Number = player.biggestCockIndex();
@@ -1395,7 +1392,7 @@ public class CeraphScene extends NPCAwareContent
 
 		internal function buttRapeCeraph():void
 		{
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00291]++;
+			flags[kFLAGS.TIMES_BEATEN_SERAPH_WITHOUT_LOSING]++;
 			spriteSelect(SpriteDb.s_ceraph);
 			var x:Number = player.cockThatFits(monster.analCapacity());
 			if (x < 0) x = 0;

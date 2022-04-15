@@ -145,7 +145,7 @@ public class LowerBody extends SaveableBodyPart {
 	public static const BEE:int = 7;
 	EnumValue.add(Types, BEE, "BEE", {
 		name: "bee",
-		appearanceDesc: "Your {legCount} legs are covered in a shimmering insectile carapace up to mid-thigh, looking more like a set of 'fuck-me-boots' than an exoskeleton. A bit of downy yellow and black fur fuzzes your upper thighs, just like a bee."
+		appearanceDesc: "Your {legCount} legs are covered in a [skin coat.color2] shimmering insectile carapace up to mid-thigh, looking more like a set of 'fuck-me-boots' than an exoskeleton. A bit of downy [skin coat.color] fur fuzzes your upper thighs, just like a bee."
 	});
 
 	public static const GOO:int = 8;
@@ -730,6 +730,17 @@ public class LowerBody extends SaveableBodyPart {
 	EnumValue.add(Types, MINDBREAKERMALE, "MINDBREAKERMALE", {
 		name: "mindbreaker",
 		appearanceDesc: "You stand bipedal, your feet are mostly human in shape though your toes are webbed, presumably to assist with swimming. They are fit enough to support the weight of yourself and someone else if they were to be on top of you."
+	});
+
+	public static const JABBERWOCKY:int = 73;
+	EnumValue.add(Types, JABBERWOCKY, "JABBERWOCKY", {
+		name: "bunny",
+		legsPrefixes: ["fuzzy bunny-like", "fur-covered", "furry", ""],
+		legPrefixes: ["fuzzy bunny-like", "fur-covered", "furry", ""],
+		feetPrefixes: ["large bunny-like", "rabbit-like", "large", ""],
+		footPrefixes: ["large bunny-like", "rabbit-like", "large", ""],
+		appearanceDesc: "Your {legCount} legs thicken below the waist as they turn into soft-furred rabbit-like legs. You even have large bunny feet that make hopping around a little easier than walking. Unlike a normal bunny thought your toe ends up with vicious dragon claws capable of rending about just anything.",
+		canTaur: true
 	});
 
 	override public function set type(value:int):void {
