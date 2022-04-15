@@ -279,7 +279,7 @@ public class Soulforce extends BaseContent
 		menuItems.push("Remove Shard", cheatRemoveShard, "Remove 1 radiant shard");
 		menuItems.push("ZenjiQ", ZenjiQ, "Zenji Expac 2 debug tool");
 		menuItems.push("LustBreath", (player.hasPerk(PerkLib.DragonPoisonBreath))? FairyTest: false, "Replacing 1 perk with another");
-		menuItems.push("Mutationtest", mutation3, "MutationTest")
+		//menuItems.push("Mutationtest", mutation3, "MutationTest")
 		//menuItems.push("Mutation test reset", resetMutations, "Reset Mutations");
 		menuGen(menuItems, page, accessSoulforceMenu);
 	}
@@ -289,7 +289,6 @@ public class Soulforce extends BaseContent
 		menu();
 		for each (var pArray:Array in IMutationsLib.mutationsArray("Thyroid")){
 			var pPerk:PerkType = pArray[0];
-			//Yes, this one below will trigger a null/ Error #1009 on first attempt of perk creation. This is expected.
 			var pLvl:int = player.perkv1(pPerk);
 			mutationFuncTrigger(pArray[3]);
 			trace("Requirements loaded in.");
@@ -299,7 +298,7 @@ public class Soulforce extends BaseContent
 				addButton(0,pPerk.name(), getMutation);
 			}
 			else{
-				trace("Fuck. Unable to meet requirements.");
+				trace("Unable to meet requirements/requirements borked.");
 			}
 			for each (var cond:Object in pPerk.requirements) {
 				var reqStr:String = cond.text;
@@ -318,6 +317,7 @@ public class Soulforce extends BaseContent
 			addButton(4, "back",SoulforceCheats1,2);
 		}
 
+		//Functions that need to be triggered externally go here. I.E. Requirements/Buffs due to circular dependency.
 		function mutationFuncTrigger(fTrigger:Function):*{
 			try{
 				fTrigger(pLvl);
@@ -328,6 +328,7 @@ public class Soulforce extends BaseContent
 			}
 		}
 
+		//Gives the player the actual mutation itself.
 		function getMutation():void{
 			if (!player.hasPerk(pPerk)){
 				player.createPerk(pPerk, 1,0,0,0);
@@ -341,6 +342,7 @@ public class Soulforce extends BaseContent
 			doNext(curry(SoulforceCheats1, 2));
 		}
 
+		//Sets up the buff for the perk.
 		function setBuffs():void{
 			var stname:String = "perk_" + pPerk.id;
 			var pBuff:Object = mutationFuncTrigger(pArray[2]);

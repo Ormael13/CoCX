@@ -172,19 +172,18 @@ public class IMutationsLib
 			return MutationsList;
 		}
 
+		/*
 		private static function initMutations():void{
 			try {
 				//Example. Doesn't actually do anything.v
-				/*
 				MutationTemplate.mutationReqs();
 				ArachnidBookLungMutation.mutationReqs();
 				BlackHeartMutation.mutationReqs();
-				KitsuneThyroidGlandMutation.mutationReqs();*/
+				KitsuneThyroidGlandMutation.mutationReqs();
 				} catch (e:Error) {
 					trace(e.getStackTrace());
 				}
 			}
-		initMutations();
-
+		initMutations();*/
 	}
 }

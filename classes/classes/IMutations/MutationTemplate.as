@@ -40,26 +40,25 @@ package classes.IMutations
             }
             return "PerkName Here" + sufval;
         }
-        //returns max Perk Tier of specific perk
-        public static function perkTier():int{
-            return 3;
-        }
         //Mutation Requirements
-        public static function mutationReqs():void{
-            var pTier:int = player.perkv1(IMutationsLib.MutationsTemplateIM);
-            if (pTier == 0){
-                IMutationsLib.MutationsTemplateIM.requireAdaptationsMutationSlot();
-            }
-            else{
-                IMutationsLib.MutationsTemplateIM.requireLevel(30 * pTier)
-                        /*.requireCustomFunction(function (player:Player):Boolean {
-                            return player.perkv1(IMutationsLib.MutationsTemplateIM) == pTier;
-                        }, "Previous perk tier required.");*/
+        public static function mutationReqs(pTier:int = 0):void{
+            try{
+                //This helps keep the requirements output clean.
+                IMutationsLib.BlackHeartIM.requirements = [];
+                if (pTier == 0){
+                    IMutationsLib.BlackHeartIM.requireHeartMutationSlot()
+                }
+                else{
+                    var pLvl:int = pTier * 30
+                    IMutationsLib.BlackHeartIM.requireLevel(pLvl)
+                }
+            }catch(e:Error){
+                trace(e.getStackTrace());
             }
         }
 
         public function MutationTemplate() {
-            super("PerkName Here", "PerkName Here", ".");
+            super("PerkName Here IM", "PerkName Here", ".");
         }
 
         override public function keepOnAscension(respec:Boolean = false):Boolean {

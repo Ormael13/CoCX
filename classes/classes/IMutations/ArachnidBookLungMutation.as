@@ -26,7 +26,7 @@ package classes.IMutations
             if (descS != "")descS += ".";
             return descS;
         }
-
+        //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
             switch (player.perkv1(IMutationsLib.ArachnidBookLungIM)){
@@ -41,17 +41,23 @@ package classes.IMutations
             }
             return "Arachnid Book Lung" + sufval;
         }
-
-        public static function mutationReqs():void{
-            var pTier:int = player.perkv1(IMutationsLib.ArachnidBookLungIM);
-            if (pTier == 0){
-                IMutationsLib.ArachnidBookLungIM.requireAdaptationsMutationSlot()
-                        .requireCustomFunction(function (player:Player):Boolean {
-                            return player.spiderScore() >= 5 || player.atlachNachaScore() >= 21;
-                        }, "Arachnid race");
-            }
-            else{
-                IMutationsLib.ArachnidBookLungIM.requireLevel(30 * pTier)
+        //Mutation Requirements
+        public static function mutationReqs(pTier:int = 0):void{
+            try{
+                //This helps keep the requirements output clean.
+                IMutationsLib.ArachnidBookLungIM.requirements = [];
+                if (pTier == 0){
+                    IMutationsLib.ArachnidBookLungIM.requireAdaptationsMutationSlot()
+                            .requireCustomFunction(function (player:Player):Boolean {
+                                return player.spiderScore() >= 5 || player.atlachNachaScore() >= 21;
+                            }, "Arachnid race");
+                }
+                else{
+                    var pLvl:int = pTier * 30
+                    IMutationsLib.ArachnidBookLungIM.requireLevel(pLvl)
+                }
+            }catch(e:Error){
+                trace(e.getStackTrace());
             }
         }
 

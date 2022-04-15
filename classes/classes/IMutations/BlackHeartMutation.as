@@ -43,16 +43,21 @@ package classes.IMutations
             return "Black Heart" + sufval;
         }
         //Mutation Requirements
-        public static function mutationReqs():void{
-            var pTier:int = player.perkv1(IMutationsLib.BlackHeartIM);
-            if (pTier == 0){
-                IMutationsLib.BlackHeartIM.requireHeartMutationSlot().requirePerk(PerkLib.DarkCharm).requireCor(100).requireCustomFunction(function (player:Player):Boolean {
-                    return player.demonScore() >= 11;
-                }, "Demon race");
-            }
-            else{
-                IMutationsLib.BlackHeartIM.requireLevel(30 * pTier)
-
+        public static function mutationReqs(pTier:int = 0):void{
+            try{
+                //This helps keep the requirements output clean.
+                IMutationsLib.BlackHeartIM.requirements = [];
+                if (pTier == 0){
+                    IMutationsLib.BlackHeartIM.requireHeartMutationSlot().requirePerk(PerkLib.DarkCharm).requireCor(100).requireCustomFunction(function (player:Player):Boolean {
+                        return player.demonScore() >= 11;
+                    }, "Demon race");
+                }
+                else{
+                    var pLvl:int = pTier * 30
+                    IMutationsLib.BlackHeartIM.requireLevel(pLvl)
+                }
+            }catch(e:Error){
+                trace(e.getStackTrace());
             }
         }
 

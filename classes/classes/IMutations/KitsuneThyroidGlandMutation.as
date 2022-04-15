@@ -28,7 +28,7 @@ package classes.IMutations
             if (descS != "")descS += ".";
             return descS;
         }
-
+        //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
             switch (player.perkv1(IMutationsLib.KitsuneThyroidGlandIM)) {
@@ -43,9 +43,10 @@ package classes.IMutations
             }
             return "Kitsune Thyroid Gland " + sufval;
         }
-
+        //Mutation Requirements
         public static function mutationReqs(pTier:int = 0):void{
             try{
+                //This helps keep the requirements output clean.
                 IMutationsLib.KitsuneThyroidGlandIM.requirements = [];
                 if (pTier == 0){
                     IMutationsLib.KitsuneThyroidGlandIM.requireThyroidGlandMutationSlot()
@@ -55,7 +56,6 @@ package classes.IMutations
                             }, "2+ fox tails");
                 }
                 else{
-                    //This is not exactly required (v), but helps keep the requirements output clean..
                     var pLvl:int = pTier * 30
                     IMutationsLib.KitsuneThyroidGlandIM.requireLevel(pLvl);
                 }
