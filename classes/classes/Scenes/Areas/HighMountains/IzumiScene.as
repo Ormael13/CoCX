@@ -1077,7 +1077,7 @@ import classes.Stats.Buff;
 			{
 				outputText("You fall to the ground, reeling from Izumi’s iron-hard muscles - and other parts besides.  Grinning widely, Izumi visibly relaxes, satisfied that you’re in no fit state to continue fighting.\n\n");
 			}
-			else if (player.lust >= player.maxLust())
+			else if (player.lust >= player.maxOverLust())
 			{
 				outputText("You fall to the ground, too horny to resist further against the Oni’s iron-hard muscles - and other parts beside.  Grinning widely, Izumi visibly relaxes, satisfied that you’re in no fit state to continue fighting.\n\n");
 			}

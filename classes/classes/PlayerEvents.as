@@ -2598,7 +2598,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				if (rand(5) == 0) {
 					outputText("\nYou keep licking your lips, blushing with the sexual pleasure it brings you.");
 					player.dynStats("lus", 2 + rand(15));
-					if (player.lust >= player.maxLust()) {
+					if (player.lust >= player.maxOverLust()) {
 						outputText("  Your knees lock from the pleasure, and you fall back in pleasure, twisting and moaning like a whore as you somehow orgasm from your mouth.  When it finishes, you realize your mouth feels even more sensitive than before.");
 						player.orgasm();
 						player.dynStats("sen", 2);

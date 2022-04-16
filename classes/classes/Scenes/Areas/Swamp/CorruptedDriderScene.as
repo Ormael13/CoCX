@@ -729,7 +729,7 @@ use namespace CoC;
 			spriteSelect(SpriteDb.s_drider);
 			//Poor males.  All the buttsexes. (yo this is an actual paragraph of the game text right)
 			clearOutput();
-			if (player.lust >= player.maxLust()) outputText("Unable to resist the desire coursing through your body, you strip off your [armor] and start stroking " + sMultiCockDesc() + ", displaying it in the hope that it will draw the drider's attention, while at the same time just trying to get yourself off and attain release.");
+			if (player.lust >= player.maxOverLust()) outputText("Unable to resist the desire coursing through your body, you strip off your [armor] and start stroking " + sMultiCockDesc() + ", displaying it in the hope that it will draw the drider's attention, while at the same time just trying to get yourself off and attain release.");
 			else {
 				outputText("You slump down, too beat up to mount an effective defense, let alone stay up on your [feet].  The drider skitters over to you and effortlessly peels you out of your [armor], exposing your ");
 				if (player.lust < 50) outputText("soft");

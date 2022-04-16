@@ -1307,7 +1307,7 @@ public class Prison extends BaseContent implements TimeAwareInterface
 			addButton(7, "Inventory", inventory.inventoryMenu);
 			//Check lust
 			if (player.lust >= 30) {
-				if (player.lust >= player.maxLust()) {
+				if (player.lust >= player.maxOverLust()) {
 					outputText("\n\n<b>You are debilitatingly aroused, and can think of doing nothing other than masturbating.</b>");
 					removeButton(0);
 					removeButton(4);

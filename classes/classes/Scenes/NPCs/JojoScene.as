@@ -1560,7 +1560,7 @@ public function jojoFollowerMeditate(doClear:Boolean = true):void {
 			}
 			else {
 				outputText("Jojo grins wickedly as he senses your defeat, " + monster.cockDescriptShort(0) + " throbbing hard.  ");
-				if (player.lust >= player.maxLust()) {
+				if (player.lust >= player.maxOverLust()) {
 					if (player.gender == 1) {
 						outputText("Too aroused to think, you just bend over, displaying your bum and letting your [cocks] dangle freely.  The mouse doesn't hesitate, and he thrusts his " + monster.cockDescriptShort(0) + " with painful force.  You stagger from the size and struggle to stay conscious as he fucks you like a mad beast, hammering your ass with incredible force.  ");
 						if (player.cockTotal() == 1) outputText("Pre and cum drip from your [cock], forced out of your prostate by the rough beating it's taking.  You feel a flash of warm wetness inside you, and realize Jojo is cumming.  A sense of relief washes over you as the last burst of cum squirts out from your cheeks, only to be replaced with a dawning sense of horror as he continues fucking you harder than ever.\n\nYou black out after a few dozen of his orgasms and one or two of your own, your gut painfully distended with semen.");

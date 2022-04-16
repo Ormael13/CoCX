@@ -4808,7 +4808,7 @@ public class MagicSpecials extends BaseCombatContent {
 		selflust = Math.round(selflust);
 		dynStats("lus", selflust);
 		monster.createStatusEffect(StatusEffects.Polymorphed, 3, 0, 0, 0);
-		if (player.lust >= player.maxLust()) doNext(endLustLoss);
+		if (player.lust >= player.maxOverLust()) doNext(endLustLoss);
 		else enemyAI();
 	}
 

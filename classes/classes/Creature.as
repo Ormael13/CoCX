@@ -695,7 +695,8 @@ public class Creature extends Utils
 			if (hasPerk(PerkLib.BloodDemonWisdom)) maxOver2 += 0.1;
 			//
 			if (hasPerk(PerkLib.BloodDemonIntelligence)) maxOver2 += 0.1;
-			maxOver *= maxOver2;//~170%
+			if (hasPerk(PerkLib.MunchkinAtWork)) maxOver2 += 0.1;
+			maxOver *= maxOver2;//~180%
 			maxOver = Math.round(maxOver);
 			return Math.min(19999999,maxOver);
 		}
@@ -765,9 +766,10 @@ public class Creature extends Utils
 		public function maxOverLust():Number {
 			var max1:Number = Math.round(maxLust_base()*maxLust_mult());
 			var max2:Number = 1;
-			max1 *= max2;//~170%
-			max1 = Math.round(max1);//~809 905,5
-			return Math.min(199999,max1);
+			if (hasPerk(PerkLib.MunchkinAtWork)) max2 += 0.1;
+			max1 *= max2;//~110%
+			max1 = Math.round(max1);
+			return Math.min(219999,max1);
 		}
 		public function maxFatigue():Number {
 			return 150;

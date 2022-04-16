@@ -97,7 +97,7 @@ import classes.StatusEffects.Combat.GardenerSapSpeedDebuff;
 			if (player.hasStatusEffect(StatusEffects.ShowerDotEffect))
 			{
 				showerDotEffect();
-				if (player.lust >= player.maxLust()) return;
+				if (player.lust >= player.maxOverLust()) return;
 			}
 			
 			if (this.HPRatio() <= 0.6 && fatigue < this.maxFatigue())

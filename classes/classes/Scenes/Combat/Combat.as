@@ -4832,10 +4832,10 @@ public class Combat extends BaseContent {
         if (lustChange >= 20) outputText("The fantasy is so vivid and pleasurable you wish it was happening now.  You wonder if [monster a] [monster name] can tell what you were thinking.\n\n");
         else outputText("\n");
         dynStats("lus", lustChange, "scale", false);
-        if (player.lust >= player.maxLust()) {
+        if (player.lust >= player.maxOverLust()) {
             if (monster is EncapsulationPod) {
                 outputText("<b>You nearly orgasm, but the terror of the situation reasserts itself, muting your body's need for release.  If you don't escape soon, you have no doubt you'll be too fucked up to ever try again!</b>\n\n");
-                player.lust = (player.maxLust() - 1);
+                player.lust = (player.maxOverLust() - 1);
                 dynStats("lus", -25);
             } else {
                 doNext(endLustLoss);
@@ -10822,7 +10822,7 @@ public class Combat extends BaseContent {
         if (player.hasStatusEffect(StatusEffects.ResonanceVolley)) player.removeStatusEffect(StatusEffects.ResonanceVolley);
         if (player.hasStatusEffect(StatusEffects.Defend)) player.removeStatusEffect(StatusEffects.Defend);
         regeneration1(true);
-        if (player.lust >= player.maxLust()) doNext(endLustLoss);
+        if (player.lust >= player.maxOverLust()) doNext(endLustLoss);
         if (player.HP <= player.minHP()) doNext(endHpLoss);
 		if (monster.lust >= monster.maxLust()) doNext(endLustVictory);
 		if (monster.HP <= monster.minHP()) doNext(endHpVictory);
@@ -11983,7 +11983,7 @@ public class Combat extends BaseContent {
             doNext(endHpLoss);
             return true;
         }
-        if (player.lust >= player.maxLust()) {
+        if (player.lust >= player.maxOverLust()) {
             doNext(endLustLoss);
             return true;
         }

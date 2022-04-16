@@ -906,7 +906,7 @@ public class Camp extends NPCAwareContent{
 		}
 
 		//The uber horny
-		if (player.lust >= player.maxLust()) {
+		if (player.lust >= player.maxOverLust()) {
 			if (player.hasStatusEffect(StatusEffects.Dysfunction)) {
 				outputText("<b>You are debilitatingly aroused, but your sexual organs are so numbed the only way to get off would be to find something tight to fuck or get fucked...</b>\n\n");
 			} else if (flags[kFLAGS.UNABLE_TO_MASTURBATE_BECAUSE_CENTAUR] > 0 && player.isTaur()) {

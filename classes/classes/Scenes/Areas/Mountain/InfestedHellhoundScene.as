@@ -44,7 +44,7 @@ public class InfestedHellhoundScene extends BaseContent
 			//[BOTH INFESTED]
 			if (player.cockTotal() > 0 && player.hasStatusEffect(StatusEffects.Infested)) {
 				//(LUST)
-				if (player.lust >= player.maxLust()) {
+				if (player.lust >= player.maxOverLust()) {
 					outputText("No amount of shame from the act of submitting to such a beast can overpower the furnace of lust raging in your loins.  ");
 					if (player.cor < 33) outputText("In spite of your revulsion ");
 					else if (player.cor < 66) outputText("In spite of your better sense ");
@@ -65,7 +65,7 @@ public class InfestedHellhoundScene extends BaseContent
 			//[PLAYER'S COCKS ARE BIG ENOUGH TO BE INFECTED]
 			else if (!player.hasStatusEffect(StatusEffects.Infested) && player.biggestCockArea() >= 40 && player.hasCock()) {
 				//(LUST)
-				if (player.lust >= player.maxLust()) {
+				if (player.lust >= player.maxOverLust()) {
 					outputText("No amount of shame from the act of submitting to such a beast can overpower the furnace of lust raging in your loins.  ");
 					if (player.cor < 33) outputText("In spite of your revulsion ");
 					else if (player.cor < 66) outputText("In spite of your better sense ");
@@ -122,7 +122,7 @@ public class InfestedHellhoundScene extends BaseContent
 			//[HAS PUSSY AND NO DICK BIG ENOUGH TO BE INFECTED]
 			else if (player.hasVagina() && player.biggestCockArea() < 40 && !player.isNaga()) {
 				//(LUST)
-				if (player.lust >= player.maxLust()) {
+				if (player.lust >= player.maxOverLust()) {
 					outputText("No amount of shame from the act of submitting to such a beast can overpower the furnace of lust raging in your loins.  ");
 					if (player.cor < 33) outputText("In spite of your revulsion ");
 					else if (player.cor < 66) outputText("In spite of your better sense ");
@@ -166,7 +166,7 @@ public class InfestedHellhoundScene extends BaseContent
 			//[GENDERLESS OR MALE WITH DICK TOO SMALL]
 			else {
 				//(LUST)
-				if (player.lust >= player.maxLust()) {
+				if (player.lust >= player.maxOverLust()) {
 					outputText("No amount of shame from the act of submitting to such a beast can overpower the furnace of lust raging in your loins.  ");
 					if (player.cor < 33) outputText("In spite of your revulsion ");
 					else if (player.cor < 66) outputText("In spite of your better sense ");

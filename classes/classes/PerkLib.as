@@ -3508,6 +3508,8 @@ public class PerkLib
 				});
 		public static const MunchkinAtGym:PerkType = mk("Munchkin @Gym", "Munchkin @Gym",
 				"Increase by 5% caps for mutagen, alchemic, knowledge multi.").withBuffs({'str.mult':0.25,'tou.mult':0.25,'spe.mult':0.25,"int.mult":0.25,'wis.mult':0.25,'lib.mult':0.25,'sens':100}, false);
+		public static const MunchkinAtWork:PerkType = mk("Munchkin @Work", "Munchkin @Work",
+				"+10% to OverMax HP / Lust / Wrath / Mana / Soulforce, +2 prestige job slots, +1 hidden job slot.");
 		public static const AsuraToughness:PerkType = mk("Asura Toughness", "Asura Toughness",
 				"X th Asura super perk. (+10% of OverMax Wrath/Base TOU Cap)");
 		public static const BloodDemonWisdom:PerkType = mk("Blood Demon Wisdom", "Blood Demon Wisdom",
@@ -3516,8 +3518,6 @@ public class PerkLib
 				"X th Asura super perk. (+10% of OverMax Wrath/Base SPE Cap)");
 		public static const BloodDemonIntelligence:PerkType = mk("Blood Demon Intelligence", "Blood Demon Intelligence",
 				"X th Blood demon super perk. (+10% of OverMax HP, -5% blood spells/soulskills cost, +10% blood spells/soulskills power/Base INT Cap)");
-		public static const MunchkinAtWork:PerkType = mk("Munchkin @Work", "Munchkin @Work",
-				"+2 prestige job slots, +1 hidden job slot.");//?increase to overmax HP/Wrath/Lust??
 		public static const HiddenJob4:PerkType = mk("Hidden Job: 4", "Hidden Job: 4",
 				".");
 		public static const HiddenJob3:PerkType = mk("Hidden Job: 3", "Hidden Job: 3",
@@ -7044,4 +7044,4 @@ public class PerkLib
 	}
 	initDependencies();
 }
-}
+}

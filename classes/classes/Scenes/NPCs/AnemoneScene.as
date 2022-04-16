@@ -302,7 +302,7 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 			else {
 				outputText("Rubbing yourself through your [armor], you look over the anemone; your attention wanders down her torso to the blue slit between her legs");
 				//[(lust victory)
-				if (player.lust >= player.maxLust()) outputText(", which she's currently diddling with the hand she's not using to stroke her cock");
+				if (player.lust >= player.maxOverLust()) outputText(", which she's currently diddling with the hand she's not using to stroke her cock");
 				outputText(".  Unfastening your garments, you stroke " + sMultiCockDesc() + " to full hardness and approach her.  The anemone looks up at you, still somewhat befogged; then, as you stand ");
 				if (player.tallness > 48) outputText("over");
 				else outputText("before");
@@ -1340,7 +1340,7 @@ public class AnemoneScene extends BaseContent implements TimeAwareInterface
 		{
 			clearOutput();
 			//(if lust > 99, output)
-			if (player.lust >= player.maxLust()) {
+			if (player.lust >= player.maxOverLust()) {
 				outputText("You're way too horny to focus on any sort of weapon instruction right now, and the anemone can see it in your expression as your gaze wanders over her body; she blushes a deep blue and shrinks into her barrel with a shy glance.");
 				doNext(camp.returnToCampUseOneHour);
 				return;
