@@ -48,6 +48,7 @@ package classes
 		public static const PREGNANCY_CELESS:int				=  39;
 		public static const PREGNANCY_GOBLIN:int				=  40;
 		public static const PREGNANCY_ZENJI:int                 =  41;
+		public static const PREGNANCY_AYANE:int                 =  42; //This is a placeholder for a future expansion.
 		
 		public static const PREG_NOT_PREGANT:int                =   0; //The PREG_* consts are returned by the size function
 		public static const PREG_NO_SIGNS_UNKNOWN:int           =   1; //NPC has conceived but doesn’t know she’s pregnant, no visible signs
@@ -80,6 +81,7 @@ package classes
 		public static const INCUBATION_DRIDER:int               = 400;
 		public static const INCUBATION_GOO_GIRL:int             =  85;
 		public static const INCUBATION_EMBER:int                = 336;
+		public static const INCUBATION_AYANE:int				= 336;
 		public static const INCUBATION_SATYR:int                = 160;
 		public static const INCUBATION_COTTON:int               = 350;
 		public static const INCUBATION_URTA:int                 = 515;
