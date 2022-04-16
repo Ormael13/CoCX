@@ -83,6 +83,13 @@ import classes.Scenes.SceneLib;
 		{
 			return SceneLib.emberScene.emberMF(man,woman);
 		}
+		// Ayayayane
+		protected function get ayaneFollower():AyaneFollower{
+			return SceneLib.ayaneFollower;
+		}
+		public function followerAyane():Boolean{
+			return SceneLib.ayaneFollower.followerAyane();
+		}
 		// Exgartuan
 		protected function get exgartuan():Exgartuan
 		{

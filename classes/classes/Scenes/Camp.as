@@ -1958,6 +1958,12 @@ public class Camp extends NPCAwareContent{
 				outputText("Ayane is tiddying your items to make sure everything is clean and well organised.\n\n");
 				buttons.add("Ayane", SceneLib.ayaneFollower.ayaneCampMenu).hint("Visit Ayane a kitsune priestess of Taoth.");
 			}
+			if (SceneLib.ayaneFollower.ayaneChildren() == 1){
+				outputText("You can see Ayane's child are playing around in the grass.\n\n");
+			}
+			if (SceneLib.ayaneFollower.ayaneChildren() >= 2){
+				outputText("You can see Ayane's children are playing around in the grass.\n\n");
+			}
 			//Pure/Corrupted Holli
 			if (flags[kFLAGS.FUCK_FLOWER_LEVEL] == 4) {
 				buttons.add("Holli", holliScene.treeMenu).hint("Holli is in her tree at the edges of your [camp].  You could go visit her if you want.");
@@ -4739,6 +4745,7 @@ public function rebirthFromBadEnd():void {
 		//Children check!
 		//Followers
 		if (followerEmber() && emberScene.emberChildren() > 0) pop += emberScene.emberChildren();
+		if (SceneLib.ayaneFollower.ayaneChildren() > 0) pop += SceneLib.ayaneFollower.ayaneChildren();
 		//Jojo's offsprings don't stay in your camp; they will join with Amily's litters as well.
 		if (sophieFollower()) {
 			if (flags[kFLAGS.SOPHIE_DAUGHTER_MATURITY_COUNTER] > 0) pop++;
