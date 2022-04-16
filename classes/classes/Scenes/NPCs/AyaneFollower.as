@@ -323,6 +323,14 @@ public function ayaneHermWorship():void
 	player.sexReward("saliva","Vaginal");
 	player.orgasm('Dick');
 	player.orgasm('vaginal');
+	if (!pregnancy.isPregnant) {
+		if (debug) outputText("\n\n<b>DEBUG: Ayane pregcheck.</b>");
+		doNext(breedayaneweneedallthefoxes);
+	}
+	else if (pregnancy.isPregnant) {
+		if (debug) outputText("\n\n<b>DEBUG: Ayane impregnation check skipped.</b>");
+		doNext(camp.returnToCampUseOneHour);
+	}
 	doNext(camp.returnToCampUseOneHour);
 }
 
@@ -377,7 +385,7 @@ public function ayaneGivesBirth():void {
 	outputText(" for stability as she waddles off in the direction of the stream.  You hasten along as quickly as you dare, doing your best to support your laboring lover.  The stream comes into sight with welcome quickness, and you gently help her into the water before pulling off her pants and tossing them onto the dirty shore with a wet <i>shlop</i>.  Positioning yourself behind her, where her huge belly won't obstruct you, you tell Ayane to get ready to push...");
 	outputText("\n\nLong minutes pass; though Ayane is clearly in pain, you can't help but note that this birth is honestly progressing much faster and smoother than it would for a normal human, and try to bolster Ayane's spirits by telling her this.");
 	outputText("\n\n\"<i>Hah~ This is,</i>\" she strains for a moment, \"<i>nothing.</i>\"  She looks up at you, clearly trying to gauge your reaction, and you can't help but notice that her expression has changed.  \"<i>I'm... I'm fine,</i>\" she says, \"<i>I'm just a little bit tired.  I'm going to be fine.</i>\"");
-	outputText("\n\nAssuring her that she's doing fine, you take a breath and duck back down under the water to closely examine her.  Your eyes and fingers quickly confirm the speed of her progress, and you excitedly surface to tell her that you can see the head; one or two more good pushes, and the baby will be out.  Seemingly strengthened by this, she nods, takes a few quick breaths and pushes as hard as she can.  The strain shows on her face, with her normal tan skin darkening to momentarily.");
+	outputText("\n\nAssuring her that she's doing fine, you take a breath and duck back down under the water to closely examine her.  Your eyes and fingers quickly confirm the speed of her progress, and you excitedly surface to tell her that you can see the head and ears; one or two more good pushes, and the baby will be out.  Seemingly strengthened by this, she nods, takes a few quick breaths and pushes as hard as she can.  The strain shows on her face, with her normal tan skin darkening to momentarily.");
 	outputText("\n\nYou plunge your hands into the water as Ayane lets out a strangled scream, muscles unclenching in the wake of her final push.  As you do so, you find Ayane's baby thrust fully from its former home in the kitsune's belly into your hands, and you hasten to pull it to the surface.  With a great splash, you bring the baby out of the water, which causes it to suck in its first breath and make its first cry.  You just stand there in the water, smiling stupidly at your newborn, holding it close to you.");
 	outputText("\n\nAyane tries to peer backwards.  \"<i>Is everything all right? Is it OK?</i>\" she asks, concern in her voice.");
 	outputText("\n\nEverything is just fine, you tell her, unable to look up.  The two of you are the parents of a new, healthy ");
