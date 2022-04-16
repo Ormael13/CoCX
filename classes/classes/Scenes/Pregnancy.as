@@ -484,7 +484,7 @@ public class Pregnancy extends NPCAwareContent {
                     displayedUpdate = true;
                 }
                 if(player.pregnancyIncubation == 48) {
-                    EngineCore.outputText("\n<b>You rub your hands over your bulging belly, lost in the sensations of motherhood.  Whatever child is inside your overstretched womb seems to appreciate the attention, and stops its incessant squirming.\n");
+                    EngineCore.outputText("\n<b>You rub your hands over your bulging belly, lost in the sensations of motherhood.  Whatever child is inside your overstretched womb seems to appreciate the attention, and stops its incessant squirming.</b>\n");
                     displayedUpdate = true;
                 }
                 if(player.pregnancyIncubation == 32  || player.pregnancyIncubation == 150) {
@@ -548,21 +548,21 @@ public class Pregnancy extends NPCAwareContent {
             if (player.pregnancyType == PregnancyStore.PREGNANCY_MOUSE || player.pregnancyType == PregnancyStore.PREGNANCY_JOJO) {
                 if (player.pregnancyIncubation == 336) {
                     EngineCore.outputText("\n<b>You realize your belly has gotten slightly larger.  Maybe you need to cut back on the strange food.</b>\n");
-                    if (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3) { //Bimbo Jojo, stage 1
+                    if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3) { //Bimbo Jojo, stage 1
                         EngineCore.outputText("\nJoy notices you examining your belly and strolls over, playfully poking it with her finger. \"<i>Somebody's getting chubby; maybe you and I need to have a little more fun-fun to help you work off those calories, hmm?" + joyScene.joyHasCockText(" Or maybe I'm just feeding you too much...") + "</i>\" She teases" + joyScene.joyHasCockText(", patting her " + joyScene.joyCockDescript()) + ".\n");
                     }
                     displayedUpdate = true;
                 }
                 if (player.pregnancyIncubation == 280) {
                     EngineCore.outputText("\n<b>Your belly is getting more noticeably distended and squirming around.  You are probably pregnant.</b>\n");
-                    if (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3 && player.pregnancyType == PregnancyStore.PREGNANCY_JOJO) { //Bimbo Jojo, stage 2
+                    if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3 && player.pregnancyType == PregnancyStore.PREGNANCY_JOJO) { //Bimbo Jojo, stage 2
                         EngineCore.outputText("\nA pair of arms suddenly wrap themselves around you, stroking your belly. \"<i>Like, don't worry, [name]; I love you even if you are getting fat. Actually... this little pot belly of yours is, like, kinda sexy, y'know?</i>\" Joy declares.\n");
                         EngineCore.outputText("\nYou roll your eyes at Joy's teasing but appreciate her support all the same.\n");
                     }
                     displayedUpdate = true;
                 }
                 if (player.pregnancyIncubation == 216) {
-                    if (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3 && player.pregnancyType == PregnancyStore.PREGNANCY_JOJO) { //Bimbo Jojo, stage 3
+                    if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3 && player.pregnancyType == PregnancyStore.PREGNANCY_JOJO) { //Bimbo Jojo, stage 3
                         EngineCore.outputText("\n<b>You have no doubt that you're pregnant now,</b> and from your recent urges to eat cheese and nuts, as well as the lusty thoughts that roam your head, you can already imagine who the father is...\n");
                         EngineCore.outputText("\nJoy shakes her head. \"<i>Wow, you just keep getting, like, fatter and fatter, don't you, [name]? S'funny, though... I never thought of myself as, like, a chubby chaser before, but that belly of yours really gets me, y'know, hot 'n' bothered.</i>\" She comments.\n");
                         EngineCore.outputText("\nYou sigh, almost laughing... sometimes Joy's inability to see the obvious is cute, sometimes it's just funny and sometimes both. You tell her to quit being silly, it's quite obvious by now that you're pregnant and she's the father, by the way.\n");
@@ -589,7 +589,7 @@ public class Pregnancy extends NPCAwareContent {
                     displayedUpdate = true;
                 }
                 if (player.pregnancyIncubation == 180) {
-                    if (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3 && player.pregnancyType == PregnancyStore.PREGNANCY_JOJO) { //Bimbo Jojo, stage 4
+                    if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3 && player.pregnancyType == PregnancyStore.PREGNANCY_JOJO) { //Bimbo Jojo, stage 4
                         EngineCore.outputText("\nIf there was ever any doubt you were carrying only one child before, it has long been forgotten. <b>Your belly is bigger than any woman's back in your village, and the children within are seemingly restless! They kick you all the time; it is clear they inherited Joy's energy, but it's starting to get bothersome.</b> You sigh as you take a seat to rest a bit as the babies inside you kick.\n");
                         EngineCore.outputText("\nThis would, of course, be less tiresome if you didn't have to lug around a third mouse as well... A smooch on your belly signals Joy's arrival into the scene.\n");
                         EngineCore.outputText("\nThe bimbo mouse smiles up at you, rubbing her cheek against your gravid midriff. \"<i>Aw... how are Joyjoy's little ones today? Are you being good to your mommy?</i>\" She coos.\n");
@@ -607,7 +607,7 @@ public class Pregnancy extends NPCAwareContent {
                     displayedUpdate = true;
                 }
                 if (player.pregnancyIncubation == 120) {
-                    if (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3 && player.pregnancyType == PregnancyStore.PREGNANCY_JOJO) { //Bimbo Jojo, stage 5
+                    if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3 && player.pregnancyType == PregnancyStore.PREGNANCY_JOJO) { //Bimbo Jojo, stage 5
                         EngineCore.outputText("\nYou're mildly annoyed at your squirming tummy, it seems your children have taken a liking to scurrying about inside you. The other mildly annoying thing, is Joy's attachment to your huge pregnant belly. It would seem that the bimbo mouse is as eager to see the children as the children inside you are eager to come out and play.\n");
                         EngineCore.outputText("\n\"<i>Like, [name], when are the babies gonna come out and play? I wanna hold my cute little squeakies already!</i>\" Joy pouts, stamping her foot in irritation at the wait for you to give birth.\n");
                         EngineCore.outputText("\nYou tell her that she'll just have to wait, you want them out too. It's getting heavy.\n");
@@ -2008,8 +2008,8 @@ public class Pregnancy extends NPCAwareContent {
             }
 
             //Main Text here
-            if (player.pregnancyType == PregnancyStore.PREGNANCY_JOJO && (monk < 0 || flags[kFLAGS.JOJO_BIMBO_STATE] >= 3) && !prison.inPrison) {
-                if (flags[kFLAGS.JOJO_BIMBO_STATE] >= 3) {
+            if (player.pregnancyType == PregnancyStore.PREGNANCY_JOJO && (monk < 0 || flags[kFLAGS.JOJO_BIMBO_STATE] == 3) && !prison.inPrison) {
+                if (flags[kFLAGS.JOJO_BIMBO_STATE] == 3) {
                     SceneLib.joyScene.playerGivesBirthToJoyBabies();
                     return true;
                 }

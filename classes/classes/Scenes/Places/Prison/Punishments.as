@@ -91,7 +91,7 @@ public class Punishments extends BaseContent
 					}
 					outputText("\n\n");
 					player.changeStatusValue(StatusEffects.PrisonCaptorEllyStatus,4, player.statusEffectv4(StatusEffects.PrisonCaptorEllyStatus) + 2);
-					player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
+					if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
 					player.slimeFeed();
 					player.refillHunger(25);
 					player.orgasm();
@@ -418,7 +418,7 @@ public class Punishments extends BaseContent
 			{
 				player.buttChange(1.7 * newVal,true,true,false);
 			}
-			if (player.findPerk(PerkLib.ElectrifiedDesire) >= 0 || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) player.orgasmRaijuStyle();
+			if (player.hasPerk(PerkLib.ElectrifiedDesire) || player.hasStatusEffect(StatusEffects.RaijuLightningStatus)) player.orgasmRaijuStyle();
 			else player.orgasm();
 			prison.changeEsteem(-5,prison.inPrison);
 			prison.changeObey(2,prison.inPrison);

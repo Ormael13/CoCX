@@ -8,7 +8,7 @@ package classes.Scenes.Areas.Forest
 	import classes.BodyParts.Horns;
 	import classes.BodyParts.Wings;
 	import classes.Scenes.NPCs.CelessScene;
-	import classes.display.SpriteDb;
+    import classes.display.SpriteDb;
 	import classes.CoC;
 
 public class NightmareScene extends BaseContent
@@ -21,12 +21,12 @@ public class NightmareScene extends BaseContent
 			clearOutput();
 			outputText("As you explore the deepwoods you come upon a particularly corrupted grove. At the center of it you see many demons busy fucking each other, some of them wearing armors and weapons. The demons could’ve been a concern if not for an even bigger threat looming at the epicenter of this scene of utter decadence. At the middle of a grove a centauress is busy fucking what seems to be a dog morph. ");
 			outputText("Her massive horsecock bulges clearly visible in the woman’s stomach and each thrust rocks the adventurer’s body as her features begin to change. The dog woman is begging but the centauress won’t stop, and you see the telltale sign of orgasm as her eyes roll, filling the woman with a massive amount of cum. The centauress screaming her delight.\n\n");
-			outputText("<i>“Yes this is it… abandon yourself to pleasure, feel it, live for it, Cum for me!”</i>\n\n");
+			outputText("<i>\"Yes this is it… abandon yourself to pleasure, feel it, live for it, Cum for me!\"</i>\n\n");
 			outputText("Under your horrified gaze the dog morph’s fur falls apart, her nuzzle transforming into a more human face as her entire body shifts into that of a lascivious succubus. The woman body twitches on the ground, caught between the endless bliss of corruption and orgasm.\n");
 			outputText("The centauress pulls her massive horsecock out of her last victim, cum flooding out of the former dog morph pussy mixed with purple fluids which swiftly crystallize into what is clearly lethicite!\n");
 			outputText("She uses her recent cocksleeve body to whip away the excess cum from her horse meat then looks straight in your direction, noticing you and giving you a better look at her features. She has a pair of large bat wings as black as her fur and her entire body exudes an unearthly grace and beauty that would make even the most beautiful woman jealous, however this creature, as beautiful as she is, clearly represents all that is lewd, corrupted and depraved.\n");
 			outputText("Beautiful yet corrupt like a fallen angel her entire body exudes an aura that would defile even the purest soul. If her outlook wasn’t enough the two parallel horns on her forehead clearly tells  everyone looking that she’s up to no good.\n\n");
-			outputText("<i>“Mmmm I thought I took good care of all the adventurers but I guess I forgot one. Don’t worry I will show you the depth of depravity and pleasure just like I did all the others. Just give up all hopes and abandon yourself to your desires, it will be sweet I assure you.”</i>\n\n");
+			outputText("<i>\"Mmmm I thought I took good care of all the adventurers but I guess I forgot one. Don’t worry I will show you the depth of depravity and pleasure just like I did all the others. Just give up all hopes and abandon yourself to your desires, it will be sweet I assure you.\"</i>\n\n");
 			outputText("She giggles then waves her hand seductively, her horsemeat hardening at the prospect of fucking again.\n\n");
 			startCombat(new Nightmare());
 		}
@@ -34,7 +34,7 @@ public class NightmareScene extends BaseContent
 		public function nightmareDefeat():void {
 			clearOutput();
 			outputText("The nightmare falls over in incredulity as you stand above her victorious. She looks at you in awe and fear.\n\n");
-			outputText("<i>“You... curse you! This is impossible, nobody should be able to resist the call of corruption! Have mercy! My body is decadent and seductive how can you simply destroy such beauty! Allow me to serve you I can be useful I can...”</i>\n\n");
+			outputText("<i>\"You... curse you! This is impossible, nobody should be able to resist the call of corruption! Have mercy! My body is decadent and seductive how can you simply destroy such beauty! Allow me to serve you I can be useful I can...\"</i>\n\n");
 			if (silly()) outputText("You step over her with clear intent to finish your work as all the demons turn to watch, and in a single voice, they cry out <b><i>FINISH HER!!!</i></b> Smirking at the vocal support, you declare sternly:");
 			else outputText("You step over her with clear intent to finish your work, but not without a little beration.\n\n");
 			outputText("Like a beautiful flower, a flora filled with vile poison. You know it's time to rid the forest of this pestilence ridden thing.\n\n");
@@ -134,7 +134,7 @@ public class NightmareScene extends BaseContent
 					outputText(" The nightmare gently slide out of your cunt leaving you with a feeling of emptiness as she guide you to the ground where you lay down to catch your breath.\n\n");
 					outputText("\"<i>Best mare I had in years. I’m definitely going to miss that one. That said, take care of our child, I won’t be there for her myself.</i>\"\n\n");
 					outputText("You nod weakly with a confused lust addled expression. Yea, whatever she says... You don’t care, you're in nirvana, trying to reconnect with your body right now, and so your vision fades to black.\n\n");
-					outputText("You wake up your alone in the clearing. Seems everyone left while you were sleeping. You feel horribly aroused by your newfound corruption and all the more by the powerful black magic your body is permeated with. Somehow the centauress permanently desecrated your body with her energy and you can feel this “blessing” resonating with your newfound corruption.\n\n");
+					outputText("You wake up your alone in the clearing. Seems everyone left while you were sleeping. You feel horribly aroused by your newfound corruption and all the more by the powerful black magic your body is permeated with. Somehow the centauress permanently desecrated your body with her energy and you can feel this \"blessing\" resonating with your newfound corruption.\n\n");
 				} else {
 					switch (rand(10)) {
 						case 0:
@@ -166,7 +166,7 @@ public class NightmareScene extends BaseContent
 					outputText("as you reach the end of your transformation but strangely, despite how defiled you are, your soul does not seem to be coming out. The nightmare pulls out of your body leaving you stranded on the ground trying to regain your composure.\n\n");
 					outputText("\"<i>You are a lucky girl... I feel generous and since you're such a cutie I actually stopped only short of making you cum out your soul. Demons can only give births to imps anyway and I need a strong body like yours to carry my offspring into the world. Do take care of her will you?</i>\"\n\n");
 					outputText("You nod weakly with a confused lust addled expression. Yea, whatever she says... You don’t care, you're in nirvana, trying to reconnect with your body right now, and so your vision fades to black.\n\n");
-					outputText("You wake up your alone in the clearing. Seems everyone left while you were sleeping. You feel horribly aroused by your newfound corruption and all the more by the powerful black magic your body is permeated with. Somehow the centauress permanently desecrated your body with her energy and you can feel this “blessing” resonating with your newfound corruption.\n\n");
+					outputText("You wake up your alone in the clearing. Seems everyone left while you were sleeping. You feel horribly aroused by your newfound corruption and all the more by the powerful black magic your body is permeated with. Somehow the centauress permanently desecrated your body with her energy and you can feel this \"blessing\" resonating with your newfound corruption.\n\n");
 
 					CoC.instance.transformations.WingsDemonicLarge.applyEffect(false);
 					CoC.instance.transformations.HornsDemonic.applyEffect(false);
@@ -219,7 +219,7 @@ public class NightmareScene extends BaseContent
 				outputText("The nightmare pulls out of your body leaving you stranded on the ground trying to regain your composure.\n\n");
 				outputText("\"<i>You are a lucky girl you know? Not many would have the chance to bear the offspring and while I can't fuck your damn soul out I can definitively fuck you pregnant. Demons can only give births to imps anyway and I need a strong body like yours to carry my offspring into the world. Do take care of her will you?</i>\"\n\n");
 				outputText("You nod weakly with a confused lust addled expression. Yea, whatever she says... You don’t care, you're in nirvana, trying to reconnect with your body right now, and so your vision fades to black.\n\n");
-				outputText("You wake up your alone in the clearing. Seems everyone left while you were sleeping. You feel horribly aroused by your defiled body and all the more by the powerful black magic you are permeated with. Somehow the centauress permanently desecrated your body with her energy and you can feel this “blessing” resonating with your newfound corruption.\n\n");
+				outputText("You wake up your alone in the clearing. Seems everyone left while you were sleeping. You feel horribly aroused by your defiled body and all the more by the powerful black magic you are permeated with. Somehow the centauress permanently desecrated your body with her energy and you can feel this \"blessing\" resonating with your newfound corruption.\n\n");
 				player.createPerk(PerkLib.BicornBlessing, 0, 0, 0, 0);
 				player.cor = 100;
 				player.sexReward("cum", "Vaginal");

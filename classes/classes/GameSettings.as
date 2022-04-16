@@ -7,11 +7,15 @@ import coc.view.StatsView;
 import flash.display.StageQuality;
 import flash.text.TextFormat;
 
+import classes.SceneHunter;
+
 /**
  * ...
  * @author ...
  */
 public class GameSettings extends BaseContent {
+
+    public var sceneHunter_inst:SceneHunter = new SceneHunter();
 
 	public function GameSettings() {}
 
@@ -31,6 +35,7 @@ public class GameSettings extends BaseContent {
 		addButton(3, "Font Size", fontSettingsMenu);
 		addButton(4, "Controls", displayControls);		
 		addButton(5, "Gameplay(2)", settingsScreenGameSettings2);
+		addButton(6, "Scenes", sceneHunter_inst.settingsPage);
 		addButton(14, "Back", CoC.instance.mainMenu.mainMenu);
         if (flags[kFLAGS.HARDCORE_MODE] > 0) {
 			debug                               = false;
@@ -192,16 +197,16 @@ public class GameSettings extends BaseContent {
 			outputText("Secondary Stats Modifier: <font color=\"#808000\"><b>Normal</b></font>\n No opponent secondary stats modifiers.");
 		}
 		else if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) {
-			outputText("Secondary Stats Modifier: <b><font color=\"#800000\">Hard</font></b>\n Opponent has 5x more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
+			outputText("Secondary Stats Modifier: <b><font color=\"#800000\">Hard</font></b>\n Opponent has 10x (bosses) and 5x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
 		}
 		else if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) {
-			outputText("Secondary Stats Modifier: <b><font color=\"#C00000\">Nightmare</font></b>\n Opponent has 10x more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
+			outputText("Secondary Stats Modifier: <b><font color=\"#C00000\">Nightmare</font></b>\n Opponent has 40x (bosses) and 10x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
 		}
 		else if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) {
-			outputText("Secondary Stats Modifier: <b><font color=\"#FF0000\">Extreme</font></b>\n Opponent has 25x more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
+			outputText("Secondary Stats Modifier: <b><font color=\"#FF0000\">Extreme</font></b>\n Opponent has 200x (bosses) and 25x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
 		}
 		else if (flags[kFLAGS.SECONDARY_STATS_SCALING] >= 4) {
-			outputText("Secondary Stats Modifier: <b><font color=\"#FF0000\">Xianxia</font></b>\n Opponent has 100x more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
+			outputText("Secondary Stats Modifier: <b><font color=\"#FF0000\">Xianxia</font></b>\n Opponent has 1600x (bosses) and 100x (rest) more HP/Lust/Wrath/Fatigue/Mana/Soulforce.");
 		}
 		outputText("\n\n");
 		if (flags[kFLAGS.STRENGTH_SCALING] >= 1) {
@@ -234,12 +239,6 @@ public class GameSettings extends BaseContent {
 		else
 			outputText("Damage Overhaul: <font color=\"#800000\"><b>Off</b></font>\n Damage uses old calculation system.");
 		outputText("\n\n");
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] >= 1) {
-			outputText("Spells Cooldowns: <font color=\"#008000\"><b>Off</b></font>\n Damage dealing spells do not have cooldowns and they keep their default power.");
-		}
-		else
-			outputText("Spells Cooldowns: <font color=\"#800000\"><b>On</b></font>\n Damage dealing spells have cooldowns and they deal more damage than their default cooldownless counterparts.");
-		outputText("\n\n");
 		if (flags[kFLAGS.ITS_EVERY_DAY]) {
 			outputText("Eternal Holiday Mode: <font color=\"#008000\"><b>ON</b></font>\n All holiday events like Eastern/X-mas and etc. can happen at any day of the year.");
 		}
@@ -254,13 +253,12 @@ public class GameSettings extends BaseContent {
 		menu();
 		addButton(0, "Eternal Holiday", toggleEternalHoliday).hint("Toggles eternal holiday mode. All holiday events like Eastern/X-mas and etc. can happen at any day of the year.");
 		addButton(1, "No Blood Toggle", toggleNOGORE).hint("Toggles No Blood Mode. If enabled, scenes could have more gruesome/bloody variants showed. Not for the weak of heart players.");
-		addButton(3, "Wis scaling", toggleWisScaling).hint("Toggles Wisdom scaling for all attacks using it. If enabled, wisdom scaling would be less random with big generally a bit higher values on average.");
-		addButton(4, "Int scaling", toggleIntScaling).hint("Toggles Intelligance scaling for all attacks using it. If enabled, intelligence scaling would be less random with values being a bit higher on average.");
-		addButton(5, "Damage Overhaul", toggleDamageOverhaul).hint("Toggles Damage Overhaul. If enabled, melee and range attacks would deal random damage between 15% to 115%. Int and Wis could increase both values.");
-		addButton(6, "Spells Cooldowns", toggleSpellsCooldowns).hint("Toggles Spells cooldowns. If enabled, spells would have cooldowns and they will be stronger.");
-		addButton(8, "Str scaling", toggleStrScaling).hint("Toggles Strength scaling for all attacks using it. If enabled, strength scaling would be less random with values being a bit higher on average.");
-		addButton(9, "Spe scaling", toggleSpeScaling).hint("Toggles Speed scaling for all attacks using it. If enabled, speed scaling would be less random with values being a bit higher on average.");
-		addButton(10, "Sec.Mon.Stat", difficultySelectionMenu2).hint("Adjusts monsters secondary stats multiplier to make game easier or harder.");
+		addButton(2, "Sec.Mon.Stat", difficultySelectionMenu2).hint("Adjusts monsters secondary stats multiplier to make game easier or harder.");
+		addButton(3, "Damage Overhaul", toggleDamageOverhaul).hint("Toggles Damage Overhaul. If enabled, melee and range attacks would deal random damage between 15% to 115%. Int and Wis could increase both values.");
+		addButton(5, "Wis scaling", toggleWisScaling).hint("Toggles Wisdom scaling for all attacks using it. If enabled, wisdom scaling would be less random with big generally a bit higher values on average.");
+		addButton(6, "Int scaling", toggleIntScaling).hint("Toggles Intelligance scaling for all attacks using it. If enabled, intelligence scaling would be less random with values being a bit higher on average.");
+		addButton(7, "Str scaling", toggleStrScaling).hint("Toggles Strength scaling for all attacks using it. If enabled, strength scaling would be less random with values being a bit higher on average.");
+		addButton(8, "Spe scaling", toggleSpeScaling).hint("Toggles Speed scaling for all attacks using it. If enabled, speed scaling would be less random with values being a bit higher on average.");
 		addButton(14, "Back", settingsScreenMain);
 	}
 
@@ -485,12 +483,6 @@ public class GameSettings extends BaseContent {
 		else flags[kFLAGS.MELEE_DAMAGE_OVERHAUL] = 0;
 		settingsScreenGameSettings2();
 	}
-
-	public function toggleSpellsCooldowns():void {
-		if (flags[kFLAGS.SPELLS_COOLDOWNS] < 1) flags[kFLAGS.SPELLS_COOLDOWNS] = 1;
-		else flags[kFLAGS.SPELLS_COOLDOWNS] = 0;
-		settingsScreenGameSettings2();
-	}
 	
 	public function difficultySelectionMenu2():void {
 		clearOutput();
@@ -554,8 +546,13 @@ public class GameSettings extends BaseContent {
 				outputText("<font color=\"#008000\"><b>NEW</b></font>\n Viewer is inline with text");
 				break;
 		}
-		outputText("\n\n");
-
+		outputText("\nChar View Armor: ");
+		if (flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN])
+            outputText("<font color=\"#800000\"><b>OFF</b></font>\n Armor is hidden - enjoy your naked look!");
+		else
+            outputText("<font color=\"#008000\"><b>ON</b></font>\n Armor is shown (some body parts may be hidden or displayed wrongly)");
+		
+        outputText("\n\n");
 		if (flags[kFLAGS.IMAGEPACK_OFF] == 0) {
 			outputText("Image Pack: <font color=\"#008000\"><b>ON</b></font>\n Image pack is enabled.");
 		}
@@ -586,10 +583,12 @@ public class GameSettings extends BaseContent {
 
 		outputText("\n\n");
 
-		if (flags[kFLAGS.USE_METRICS] > 0)
+		if (flags[kFLAGS.USE_METRICS] == 1)
 			outputText("Measurement: <b>Metric</b>\n Height and cock size will be measured in metres and centimetres.");
-		else
-			outputText("Measurement: <b>Imperial</b>\n Height and cock size will be measured in feet and inches.");
+		else if (flags[kFLAGS.USE_METRICS] == 0)
+			outputText("Measurement: <b>Imperial</b>\n Height and cock size will be measured in feet and inches. (Worded)");
+		else	//Yes, this is 2. Yes, this was added as an afterthought.
+			outputText("Measurement: <b>Imperial</b>\n Height and cock size will be measured in feet and inches. (Symbols)");
 		outputText("\n\n");
 
 		if (flags[kFLAGS.INVT_MGMT_TYPE] > 0)
@@ -608,6 +607,7 @@ public class GameSettings extends BaseContent {
 		addButton(7, "Measurements", toggleMeasurements).hint("Switch between imperial and metric measurements.  \n\nNOTE: Only applies to your appearance screen.");
 		addButton(8, "Toggle CharView", toggleCharViewer).hint("Turn PC visualizer on/off.");
 		addButton(9, "Charview Style",toggleCharViewerStyle).hint("Change between in text and sidebar display");
+		addButton(10, "Charview Armor",toggleCharViewerArmor).hint("Turn PC armor and underwear display on/off");
 		addButton(14, "Back", settingsScreenMain);
 	}
 	public function menuMainBackground():void {
@@ -652,6 +652,12 @@ public class GameSettings extends BaseContent {
 		flags[kFLAGS.CHARVIEW_STYLE] = (flags[kFLAGS.CHARVIEW_STYLE]+1)%3;
 		settingsScreenInterfaceSettings();
 	}
+
+	public function toggleCharViewerArmor():void {
+		flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] = flags[kFLAGS.CHARVIEW_ARMOR_HIDDEN] ? 0 : 1;
+		settingsScreenInterfaceSettings();
+	}
+    
 
 	public function toggleInterface():void {
 		if (flags[kFLAGS.USE_OLD_INTERFACE] < 1) flags[kFLAGS.USE_OLD_INTERFACE] = 1;
@@ -737,7 +743,7 @@ public class GameSettings extends BaseContent {
 	 }
 	 */
 	public function toggleMeasurements():void {
-		if (flags[kFLAGS.USE_METRICS] < 1) flags[kFLAGS.USE_METRICS] = 1;
+		if (flags[kFLAGS.USE_METRICS] < 2) flags[kFLAGS.USE_METRICS] += 1;
 		else flags[kFLAGS.USE_METRICS] = 0;
 		settingsScreenInterfaceSettings();
 	}
@@ -803,7 +809,7 @@ public class GameSettings extends BaseContent {
     private function hideControls():void
     {
         CoC.instance.inputManager.HideBindingPane();
-        CoC.instance.gameSettings.settingsScreenMain();
+        settingsScreenMain();
     }
 
     private function resetControls():void

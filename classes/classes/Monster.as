@@ -31,7 +31,10 @@ import classes.Scenes.Areas.Ocean.UnderwaterSharkGirlsPack;
 import classes.Scenes.Areas.Ocean.UnderwaterTigersharkGirl;
 import classes.Scenes.Camp;
 import classes.Scenes.Combat.Combat;
+import classes.Scenes.Combat.CombatAbilities;
+import classes.Scenes.Combat.CombatAbility;
 import classes.Scenes.Combat.CombatMagic;
+import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.Dungeons.DenOfDesire.HeroslayerOmnibus;
 import classes.Scenes.Dungeons.EbonLabyrinth.Hydra;
 import classes.Scenes.Dungeons.Factory.OmnibusOverseer;
@@ -46,6 +49,7 @@ import classes.internals.EnumValue;
 import classes.internals.RandomDrop;
 import classes.internals.Utils;
 import classes.internals.WeightedDrop;
+import classes.SceneHunter;
 
 import flash.utils.getQualifiedClassName;
 
@@ -55,7 +59,9 @@ import flash.utils.getQualifiedClassName;
 	 */
 	public class Monster extends Creature
 	{
-
+        protected function get sceneHunter():SceneHunter {
+            return CoC.instance.gameSettings.sceneHunter_inst;
+        }
 		protected final function get player():Player
 		{
 			return game.player;
@@ -124,6 +130,14 @@ import flash.utils.getQualifiedClassName;
 		}
 		protected function get undergarments():UndergarmentLib{
 			return game.undergarments;
+		}
+		protected function get inDungeon():Boolean
+		{
+			return DungeonAbstractContent.inDungeon;
+		}
+		protected function set inDungeon(v:Boolean):void
+		{
+			DungeonAbstractContent.inDungeon = v;
 		}
 		//For enemies
 		public var bonusHP:Number = 0;
@@ -230,6 +244,24 @@ import flash.utils.getQualifiedClassName;
 			_drop = value;
 			initedDrop = true;
 		}
+		
+		/**
+		 * Called when monster is targeted with player's ability after it started to cast (used mana etc) but before any text output. Can interrupt ability usage (return true);
+		 * @param ability
+		 * @return true if ability was intercepted and should not apply its effect, false if it should proceed as usual
+		 */
+		public function interceptPlayerAbility(ability:CombatAbility):Boolean {
+			// default - do nothing
+			return false;
+		}
+		
+		/**
+		 * Called after monster was affected by player's ability.
+		 * @param ability
+		 */
+		public function postPlayerAbility(ability:CombatAbility):void {
+			// default - do nothing
+		}
 
 		protected override function maxHP_base():Number {
 			//Base HP
@@ -259,38 +291,29 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.JobGuardian)) temp += 120;
 			if (hasPerk(PerkLib.BodyCultivator)) temp += (100 * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.FleshBodyApprenticeStage)) {
-				if (hasPerk(PerkLib.SoulApprentice)) temp += (200 * (1 + newGamePlusMod()));
-				if (hasPerk(PerkLib.SoulPersonage)) temp += (200 * (1 + newGamePlusMod()));
-				if (hasPerk(PerkLib.SoulWarrior)) temp += (200 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulApprentice)) temp += (250 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulPersonage)) temp += (250 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulWarrior)) temp += (250 * (1 + newGamePlusMod()));
 			}
 			if (hasPerk(PerkLib.FleshBodyWarriorStage)) {
-				if (hasPerk(PerkLib.SoulSprite)) temp += (300 * (1 + newGamePlusMod()));
-				if (hasPerk(PerkLib.SoulScholar)) temp += (300 * (1 + newGamePlusMod()));
-				if (hasPerk(PerkLib.SoulElder)) temp += (300 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulSprite)) temp += (400 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulScholar)) temp += (400 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulElder)) temp += (400 * (1 + newGamePlusMod()));
 			}
 			if (hasPerk(PerkLib.FleshBodyElderStage)) {
-				if (hasPerk(PerkLib.SoulExalt)) temp += (400 * (1 + newGamePlusMod()));
-				if (hasPerk(PerkLib.SoulOverlord)) temp += (400 * (1 + newGamePlusMod()));
-				if (hasPerk(PerkLib.SoulTyrant)) temp += (400 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulExalt)) temp += (600 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulOverlord)) temp += (600 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulTyrant)) temp += (600 * (1 + newGamePlusMod()));
 			}
 			if (hasPerk(PerkLib.FleshBodyOverlordStage)) {
-				if (hasPerk(PerkLib.SoulKing)) temp += (500 * (1 + newGamePlusMod()));
-				if (hasPerk(PerkLib.SoulEmperor)) temp += (500 * (1 + newGamePlusMod()));
-				if (hasPerk(PerkLib.SoulAncestor)) temp += (500 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulKing)) temp += (800 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulEmperor)) temp += (800 * (1 + newGamePlusMod()));
+				if (hasPerk(PerkLib.SoulAncestor)) temp += (800 * (1 + newGamePlusMod()));
 			}
 			if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) temp += (150 * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) temp += (225 * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) temp += (300 * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) temp += (375 * (1 + newGamePlusMod()));
-			var multimax:Number = 1;
-			if (hasPerk(PerkLib.RefinedBodyI)) multimax += (0.05 * (1 + newGamePlusMod()));
-			if (hasPerk(PerkLib.LimitBreakerBody1stStage)) multimax += 0.05;
-			if (hasPerk(PerkLib.LimitBreakerBody2ndStage)) multimax += 0.1;
-			if (hasPerk(PerkLib.DeityJobMunchkin)) multimax += 0.2;
-			if (statusEffectv2(StatusEffects.SaiyanNumber1a) > 0) multimax += statusEffectv2(StatusEffects.SaiyanNumber1a);
-			if (statusEffectv2(StatusEffects.SaiyanNumber2a) > 0) multimax += statusEffectv2(StatusEffects.SaiyanNumber2a);
-			if (statusEffectv2(StatusEffects.SaiyanNumber3a) > 0) multimax += statusEffectv2(StatusEffects.SaiyanNumber3a);
-			temp *= multimax;
 			if (hasPerk(PerkLib.ShieldWielder)) temp *= 1.2;
 			if (hasPerk(PerkLib.EnemyHugeType)) temp *= 1.5;
 			if (hasPerk(PerkLib.EnemyGigantType)) temp *= 2.25;
@@ -307,41 +330,35 @@ import flash.utils.getQualifiedClassName;
 			if (temp < (130 + 10 * this.level * (flags[kFLAGS.GAME_DIFFICULTY]+1) + (100 * newGamePlusMod()))) temp = (130 + 10 * this.level * (flags[kFLAGS.GAME_DIFFICULTY]+1) + (100 * newGamePlusMod()));
 			return temp;
 		}
+		private function maxHPmult():Number {
+			var maxHP_mult1:Number = 1;
+			if (hasPerk(PerkLib.RefinedBodyI)) maxHP_mult1 += (0.05 * (1 + newGamePlusMod()));
+			if (hasPerk(PerkLib.LimitBreakerBody1stStage)) maxHP_mult1 += 0.05;
+			if (hasPerk(PerkLib.LimitBreakerBody2ndStage)) maxHP_mult1 += 0.1;
+			if (hasPerk(PerkLib.DeityJobMunchkin)) maxHP_mult1 += 0.2;
+			if (statusEffectv2(StatusEffects.SaiyanNumber1a) > 0) maxHP_mult1 += statusEffectv2(StatusEffects.SaiyanNumber1a);
+			if (statusEffectv2(StatusEffects.SaiyanNumber2a) > 0) maxHP_mult1 += statusEffectv2(StatusEffects.SaiyanNumber2a);
+			if (statusEffectv2(StatusEffects.SaiyanNumber3a) > 0) maxHP_mult1 += statusEffectv2(StatusEffects.SaiyanNumber3a);
+			return maxHP_mult1;
+        }
 		public override function maxHP():Number {
-            return Math.round(maxHP_base()*maxHP_mult());
+            return Math.round(maxHP_base()*maxHPmult());
         }
 		public override function maxOverHP():Number {
 			var maxOver:Number = maxHP();
-			if (hasPerk(PerkLib.HiddenJobBloodDemon)) {
-				if (hasPerk(PerkLib.IcyFlesh)) maxOver += Math.round(this.inte * 10);
-				else maxOver += Math.round(this.tou*10);
-			}
-			if (hasPerk(PerkLib.WayOfTheBlood)) {
-				if (hasPerk(PerkLib.IcyFlesh)) maxOver += Math.round(this.inte * 10);
-				else maxOver += Math.round(this.tou*10);
-			}
-			if (hasPerk(PerkLib.YourPainMyPower)) {
-				if (hasPerk(PerkLib.IcyFlesh)) maxOver += Math.round(this.inte * 10);
-				else maxOver += Math.round(this.tou*10);
-			}
-			if (hasPerk(PerkLib.MyBloodForBloodPuppies)) {
-				if (hasPerk(PerkLib.IcyFlesh)) maxOver += Math.round(this.inte * 10);
-				else maxOver += Math.round(this.tou*10);
-			}
-			if (hasPerk(PerkLib.BloodDemonToughness)) {
-				if (hasPerk(PerkLib.IcyFlesh)) maxOver += Math.round(this.inte * 10);
-				else maxOver += Math.round(this.tou*10);
-			}
+			var maxOver2:Number = 1;
+			if (hasPerk(PerkLib.HiddenJobBloodDemon)) maxOver2 += 0.1;
+			if (hasPerk(PerkLib.WayOfTheBlood)) maxOver2 += 0.1;
+			if (hasPerk(PerkLib.YourPainMyPower)) maxOver2 += 0.1;
+			if (hasPerk(PerkLib.MyBloodForBloodPuppies)) maxOver2 += 0.1;
+			if (hasPerk(PerkLib.BloodDemonToughness)) maxOver2 += 0.1;
 			//
-			if (hasPerk(PerkLib.BloodDemonWisdom)) {
-				if (hasPerk(PerkLib.IcyFlesh)) maxOver += Math.round(this.inte * 10);
-				else maxOver += Math.round(this.tou*10);
-			}
+			if (hasPerk(PerkLib.BloodDemonWisdom)) maxOver2 += 0.1;
 			//
-			if (hasPerk(PerkLib.BloodDemonIntelligence)) {
-				if (hasPerk(PerkLib.IcyFlesh)) maxOver += Math.round(this.inte * 10);
-				else maxOver += Math.round(this.tou*10);
-			}
+			if (hasPerk(PerkLib.BloodDemonIntelligence)) maxOver2 += 0.1;
+			if (hasPerk(PerkLib.MunchkinAtWork)) maxOver2 += 0.1;
+			maxOver *= maxOver2;//~180%
+			maxOver = Math.round(maxOver);
 			return maxOver;
 		}
 		public override function minHP():Number {
@@ -362,10 +379,12 @@ import flash.utils.getQualifiedClassName;
 				min -= maxHP() * 0.08;
 				min -= (2400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}//nastepny diehard to 10% i 3000
-			if (hasPerk(PerkLib.Ferocity)) min -= maxHP() * 0.07;
-			if (hasPerk(MutationsLib.LizanMarrowFinalForm)) min -= maxHP() * 0.05;
+			if (hasPerk(MutationsLib.LizanMarrowEvolved)) min -= maxHP() * 0.05;
 			if (hasPerk(MutationsLib.OrcAdrenalGlands)) min -= maxHP() * 0.01;
-			if (hasPerk(MutationsLib.OrcAdrenalGlandsEvolved)) min -= maxHP() * 0.02;
+			if (hasPerk(MutationsLib.OrcAdrenalGlandsPrimitive)) min -= maxHP() * 0.02;
+			if (hasPerk(PerkLib.Ferocity)) min -= maxHP() * 0.07;
+			if (hasPerk(PerkLib.Rage)) min -= maxHP() * 0.05;
+			if (hasPerk(PerkLib.TooAngryToDie)) min -= this.maxWrath();
 			if (hasPerk(PerkLib.DeityJobMunchkin)) {
 				min -= str;
 				min -= tou;
@@ -431,6 +450,7 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.GreyMage)) temp += 40;
 			if (hasPerk(PerkLib.GreyArchmage)) temp += 80;
 			if (hasPerk(PerkLib.GrandGreyArchmage)) temp += 160;
+			if (hasPerk(PerkLib.GrandGreyArchmage2ndCircle)) temp += 320;
 			if (hasPerk(PerkLib.InhumanDesireI)) temp += Math.round(this.lib * 3 * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.JobCourtesan)) temp += 60;
 			if (hasPerk(PerkLib.JobSeducer)) temp += 30;
@@ -517,60 +537,57 @@ import flash.utils.getQualifiedClassName;
 		public override function maxSoulforce():Number {
 			//Base soulforce
 			var temp:Number = 50 + this.bonusSoulforce;
-			if (hasPerk(PerkLib.JobSoulCultivator)) {
-				if (this.level >= 2) temp += 25;
-				if (this.level >= 4) temp += 25;
-			}
+			if (hasPerk(PerkLib.JobSoulCultivator)) temp += 50;
 			if (hasPerk(PerkLib.SoulApprentice)) {
+				temp += 30;
+				if (this.level >= 3) temp += 30;
 				if (this.level >= 6) temp += 30;
-				if (this.level >= 8) temp += 30;
-				if (this.level >= 10) temp += 30;
 			}
 			if (hasPerk(PerkLib.SoulPersonage)) {
-				if (this.level >= 12) temp += 40;
-				if (this.level >= 14) temp += 40;
-				if (this.level >= 16) temp += 40;
+				if (this.level >= 9) temp += 45;
+				if (this.level >= 12) temp += 45;
+				if (this.level >= 15) temp += 45;
 			}
 			if (hasPerk(PerkLib.SoulWarrior)) {
-				if (this.level >= 18) temp += 50;
-				if (this.level >= 20) temp += 50;
-				if (this.level >= 22) temp += 50;
+				if (this.level >= 18) temp += 60;
+				if (this.level >= 21) temp += 60;
+				if (this.level >= 24) temp += 60;
 			}
 			if (hasPerk(PerkLib.SoulSprite)) {
-				if (this.level >= 24) temp += 60;
-				if (this.level >= 26) temp += 60;
-				if (this.level >= 28) temp += 60;
+				if (this.level >= 27) temp += 90;
+				if (this.level >= 30) temp += 90;
+				if (this.level >= 33) temp += 90;
 			}
 			if (hasPerk(PerkLib.SoulScholar)) {
-				if (this.level >= 30) temp += 70;
-				if (this.level >= 32) temp += 70;
-				if (this.level >= 34) temp += 70;
+				if (this.level >= 36) temp += 120;
+				if (this.level >= 39) temp += 120;
+				if (this.level >= 42) temp += 120;
 			}
 			if (hasPerk(PerkLib.SoulElder)) {
-				if (this.level >= 36) temp += 80;
-				if (this.level >= 38) temp += 80;
-				if (this.level >= 40) temp += 80;
+				if (this.level >= 45) temp += 150;
+				if (this.level >= 48) temp += 150;
+				if (this.level >= 51) temp += 150;
 			}
 			if (hasPerk(PerkLib.InsightfulResourcesI)) temp += Math.round((this.wis*5) * (1 + newGamePlusMod()));
 			if (hasPerk(PerkLib.DaoistApprenticeStage)) {
-				if (hasPerk(PerkLib.SoulApprentice)) temp += 30;
-				if (hasPerk(PerkLib.SoulPersonage)) temp += 30;
-				if (hasPerk(PerkLib.SoulWarrior)) temp += 30;
+				if (hasPerk(PerkLib.SoulApprentice)) temp += 40;
+				if (hasPerk(PerkLib.SoulPersonage)) temp += 40;
+				if (hasPerk(PerkLib.SoulWarrior)) temp += 40;
 			}
 			if (hasPerk(PerkLib.DaoistWarriorStage)) {
-				if (hasPerk(PerkLib.SoulSprite)) temp += 40;
-				if (hasPerk(PerkLib.SoulScholar)) temp += 40;
-				if (hasPerk(PerkLib.SoulElder)) temp += 40;
+				if (hasPerk(PerkLib.SoulSprite)) temp += 60;
+				if (hasPerk(PerkLib.SoulScholar)) temp += 60;
+				if (hasPerk(PerkLib.SoulElder)) temp += 60;
 			}
 			if (hasPerk(PerkLib.DaoistElderStage)) {
-				if (hasPerk(PerkLib.SoulExalt)) temp += 50;
-				if (hasPerk(PerkLib.SoulOverlord)) temp += 50;
-				if (hasPerk(PerkLib.SoulTyrant)) temp += 50;
+				if (hasPerk(PerkLib.SoulExalt)) temp += 100;
+				if (hasPerk(PerkLib.SoulOverlord)) temp += 100;
+				if (hasPerk(PerkLib.SoulTyrant)) temp += 100;
 			}
 			if (hasPerk(PerkLib.DaoistOverlordStage)) {
-				if (hasPerk(PerkLib.SoulKing)) temp += 60;
-				if (hasPerk(PerkLib.SoulEmperor)) temp += 60;
-				if (hasPerk(PerkLib.SoulAncestor)) temp += 60;
+				if (hasPerk(PerkLib.SoulKing)) temp += 150;
+				if (hasPerk(PerkLib.SoulEmperor)) temp += 150;
+				if (hasPerk(PerkLib.SoulAncestor)) temp += 150;
 			}
 			var multimax:Number = 1;
 			if (hasPerk(PerkLib.DeityJobMunchkin)) multimax += 0.1;
@@ -630,10 +647,11 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.ColdLust)) temp += 250;
 			if (hasPerk(PerkLib.ColderLust)) temp += 375;
 			if (hasPerk(PerkLib.PrestigeJobBerserker)) temp += 1000;
-			if (hasPerk(PerkLib.Rage)) temp += 1500;
-			if (hasPerk(PerkLib.Anger)) temp += 2000;
-			if (hasPerk(PerkLib.FuelForTheFire)) temp += 2500;
+			if (hasPerk(PerkLib.FuelForTheFire)) temp += 1500;
+			if (hasPerk(PerkLib.Rage)) temp += 2000;
+			if (hasPerk(PerkLib.Anger)) temp += 2500;
 			if (hasPerk(PerkLib.TooAngryToDie)) temp += 3000;
+			if (hasPerk(PerkLib.EndlessRage)) temp += 3500;
 			if (hasPerk(PerkLib.PrestigeJobTempest)) temp += 500;
 			if (hasPerk(PerkLib.WarMageNovice)) temp += 50;
 			if (hasPerk(PerkLib.WarMageApprentice)) temp += 50;
@@ -672,6 +690,7 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.AsuraToughness)) temp2 += 0.1;
 			//
 			if (hasPerk(PerkLib.AsuraSpeed)) temp2 += 0.1;
+			if (hasPerk(PerkLib.MunchkinAtWork)) temp2 += 0.1;
 			temp1 *= temp2;
 			return temp1;
 		}
@@ -707,6 +726,7 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.GrandArchmage2ndCircle) && inte >= 150) temp += 270;
 			if (hasPerk(PerkLib.GrandArchmage3rdCircle) && inte >= 175) temp += 315;
 			if (hasPerk(PerkLib.GrandGreyArchmage) && inte >= 225) temp += 600;
+			if (hasPerk(PerkLib.GrandGreyArchmage2ndCircle) && inte >= 275) temp += 900;
 			if (hasPerk(PerkLib.GrandMage) && inte >= 75) temp += 135;
 			if (hasPerk(PerkLib.GreyArchmage) && inte >= 175) temp += 450;
 			if (hasPerk(PerkLib.GreyMage) && inte >= 125) temp += 300;
@@ -715,6 +735,7 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.Spellpower) && inte >= 50) temp += 45;
 			if (hasPerk(PerkLib.JobSorcerer)) temp += 45;
 			if (hasPerk(PerkLib.JobHealer)) temp += 90;
+			if (hasPerk(PerkLib.SpellpowerGrey) && inte >= 50) temp += 75;
 			if (hasPerk(PerkLib.SpellpowerHealing) && wis >= 50) temp += 90;
 			if (hasPerk(PerkLib.EromancyBeginner)) temp += Math.round(this.inte * 3);
 			if (hasPerk(PerkLib.EromancyExpert)) temp += Math.round(this.inte * 3);
@@ -772,10 +793,19 @@ import flash.utils.getQualifiedClassName;
 				if (flags[kFLAGS.GAME_DIFFICULTY] == 2) temp *= 5;
 				if (flags[kFLAGS.GAME_DIFFICULTY] == 3) temp *= 10;
 				if (flags[kFLAGS.GAME_DIFFICULTY] == 4) temp *= 25;
-				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) temp *= 5;
-				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) temp *= 10;
-				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) temp *= 25;
-				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 4) temp *= 100;
+				if (hasPerk(PerkLib.EnemyBossType)) {
+					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) temp *= 10;
+					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) temp *= 40;
+					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) temp *= 200;
+					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 4) temp *= 1600;
+				}
+				else {
+					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) temp *= 5;
+					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) temp *= 10;
+					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) temp *= 25;
+					if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 4) temp *= 100;
+					
+				}
 				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 1) temp *= 2;
 				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 2) temp *= 3;
 				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 3) temp *= 4;
@@ -792,9 +822,12 @@ import flash.utils.getQualifiedClassName;
 			var armorMod:Number = armorDef;
 			//--BASE--
 			//Modify armor rating based on melee weapons
-			if (game.player.weapon == game.weapons.JRAPIER || game.player.weapon == game.weapons.Q_GUARD || game.player.weapon == game.weapons.B_WIDOW || game.player.weapon == game.weapons.SPEAR || game.player.weapon == game.weapons.SESPEAR || game.player.weapon == game.weapons.DSSPEAR || game.player.weapon == game.weapons.SKYPIER || game.player.weapon == game.weapons.LANCE
-			 || game.player.weapon == game.weapons.NORTHIP || (game.player.weaponName.indexOf("staff") != -1 && game.player.hasPerk(PerkLib.StaffChanneling) )) armorMod = 0;
-			if (game.player.weapon == game.weapons.KATANA) armorMod -= 5;
+			if (game.player.weapon == game.weapons.JRAPIER || game.player.weapon == game.weapons.Q_GUARD || game.player.weapon == game.weapons.B_WIDOW || game.player.weapon == game.weapons.SPEAR || game.player.weapon == game.weapons.SESPEAR || game.player.weapon == game.weapons.DSSPEAR || game.player.weapon == game.weapons.SKYPIER
+			 || game.player.weapon == game.weapons.LANCE || game.player.weapon == game.weapons.D_LANCE || game.player.weapon == game.weapons.NORTHIP || (game.player.weaponName.indexOf("staff") != -1 && game.player.hasPerk(PerkLib.StaffChanneling) )) armorMod = 0;
+			if (game.player.weapon == game.weapons.KATANA || game.player.weapon == game.weapons.DKATANA || game.player.weapon == game.weapons.DAISHO) {
+				if (armorMod < 100) armorMod -= 10;
+				else armorMod *= 0.9;
+			}
 			if (game.player.weapon == game.weapons.HALBERD) armorMod *= 0.6;
 			if (game.player.weapon == game.weapons.GUANDAO) armorMod *= 0.4;
 			if (game.player.hasPerk(PerkLib.LungingAttacks)) armorMod *= 0.5;
@@ -1088,7 +1121,10 @@ import flash.utils.getQualifiedClassName;
 			// 2) Bonuses for underlevel all the way to 20 lvl's below enemy! Above 20 lvl diff bonus is fixed at 300%! With underdog it increase to 40 lvl diff and caps at 900%!
 			// 3) Super high level folks (over 10 levels) only get 1 xp!
 			var difference:Number = 1;
-			var diff2:Number = this.level - playerLevel;
+			//var diff2:Number = this.level - playerLevel; - odkomentować jak nie bedzie potrzebne rozwiązanie poniżej ^^
+			var diff2:Number = this.level;
+			if (playerLevel > 90) playerLevel = 90;
+			diff2 -= playerLevel;
 			if (game.player.hasPerk(PerkLib.AscensionUnderdog)) {
 				if (diff2 >= 40) difference += 8;
 				if (diff2 >= 1 && diff2 < 40) difference += diff2 * 0.2;
@@ -1494,7 +1530,6 @@ import flash.utils.getQualifiedClassName;
 			this.touStat.core.value = tou;
 			this.speStat.core.value = spe;
 			this.intStat.core.value = inte;
-
 			initedStrTouSpeInte = true;
 		}
 
@@ -1684,74 +1719,97 @@ import flash.utils.getQualifiedClassName;
 
 		private function playerDodged():Boolean
 		{
-			//Determine if dodged!
-			var dodge:int = player.speedDodge(this);
-			if (dodge>0) {
-				outputPlayerDodged(dodge);
-				return true;
+			//Check if player has shadow clones or similar gimmick
+			var hasTargetedThePlayer:Boolean = false;
+			if (player.hasStatusEffect(StatusEffects.MirrorImage) && !hasPerk(PerkLib.TrueSeeing)) {
 			}
-			var evasionResult:String = player.getEvasionReason(false); // use separate function for speed dodge for expanded dodge description
-			//Determine if evaded
-			if (evasionResult == EVASION_EVADE) {
-				outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'");
-				if (!plural) outputText("s");
-				outputText(" attack.\n");
+			if (player.hasStatusEffect(StatusEffects.MirrorImage) && rand(1+player.statusEffectv1(StatusEffects.MirrorImage)) != 1){
+				outputText("Unable to determine the real one from the fake");
+				if (player.statusEffectv1(StatusEffects.MirrorImage) >= 2)outputText("s");
+				outputText(", your opponent");
+				if (plural)outputText("s");
+				outputText(" targets");
+				if (player.statusEffectv1(StatusEffects.MirrorImage) >= 2)outputText(" one of your many illusions");
+				else outputText(" your remaining illusion");
+				outputText(" instead causing the fake to vanish.");
+				player.addStatusValue(StatusEffects.MirrorImage, 1,-1);
+				if (player.statusEffectv1(StatusEffects.MirrorImage) >= 1) outputText(" You now have "+player.statusEffectv1(StatusEffects.MirrorImage)+" illusion left.")
+				if (player.statusEffectv1(StatusEffects.MirrorImage) == 0) {
+					player.removeStatusEffect(StatusEffects.MirrorImage);
+					outputText(" Your last illusion now destroyed, you will now have to be cautious of your opponent attacks.");
+				}
 				return true;
-			}
-			//("Misdirection"
-			if (evasionResult == EVASION_MISDIRECTION) {
-				outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' attacks.\n");
-				return true;
-			}
-			//Determine if cat'ed
-			if (evasionResult == EVASION_FLEXIBILITY) {
-				outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "");
-				if (plural) outputText("' attacks.\n");
-				else outputText("'s attack.\n");
-				return true;
-			}
-			if (evasionResult != null) { // Failsafe fur unhandled
-				outputText("Using your superior combat skills you manage to avoid attack completely.\n");
-				return true;
-			}
-			//Zenji parry enemy attack
-			if (player.hasStatusEffect(StatusEffects.CombatFollowerZenji)) {
-				var parryChance:Number = 25;
-				if (player.statusEffectv4(StatusEffects.CombatFollowerZenji) > 1) parryChance += 15;
-				if (rand(100) > parryChance) {
-					outputText("" + capitalA + short + " goes in for a strike, but Zenji is able to intervene, blocking any opening they have on you, leaving you safe behind him.\n\n");
-					outputText("\"<i>You’re gonna have ta try harda dan dat!</i>\" Zenji shouts.");
+			} else {
+				//Determine if dodged!
+				var dodge:int = player.speedDodge(this);
+				if (dodge>0) {
+					outputPlayerDodged(dodge);
 					return true;
 				}
-			}
-			//Parry with weapon
-			if (combatParry()) {
-				outputText("You manage to block " + a + short + "");
-				if (plural) outputText("' attacks ");
-				else outputText("'s attack ");
-				outputText("with your [weapon].\n");
-				if (game.player.hasPerk(PerkLib.TwinRiposte) && (game.player.weaponPerk == "Dual" || game.player.weaponPerk == "Dual Large") && game.player.wrath >= 2) {
-					player.createStatusEffect(StatusEffects.CounterAction,1,0,0,0);
-					SceneLib.combat.basemeleeattacks();
+				var evasionResult:String = player.getEvasionReason(false); // use separate function for speed dodge for expanded dodge description
+				//Determine if evaded
+				if (evasionResult == EVASION_EVADE) {
+					outputText("Using your skills at evading attacks, you anticipate and sidestep " + a + short + "'");
+					if (!plural) outputText("s");
+					outputText(" attack.\n");
+					return true;
 				}
-				if (game.player.hasPerk(PerkLib.Backlash) && game.player.isFistOrFistWeapon()) {
-					player.createStatusEffect(StatusEffects.CounterAction,1,0,0,0);
-					outputText("As you block the blow you exploit the opening in your opponent’s guard to deliver a vicious kick.");
-					SceneLib.combat.basemeleeattacks();
+				//("Misdirection"
+				if (evasionResult == EVASION_MISDIRECTION) {
+					outputText("Using Raphael's teachings, you anticipate and sidestep " + a + short + "' attacks.\n");
+					return true;
 				}
-				return true;
-			}
-			//Block with shield
-			if (combatBlock(true)) {
-				outputText("You block " + a + short + "'s " + weaponVerb + " with your [shield]! ");
-				if (game.player.hasPerk(PerkLib.ShieldCombat) && game.player.fatigue >= 20) {
-					player.createStatusEffect(StatusEffects.CounterAction,1,0,0,0);
-					SceneLib.combat.pspecials.shieldBash();
+				//Determine if cat'ed
+				if (evasionResult == EVASION_FLEXIBILITY) {
+					outputText("With your incredible flexibility, you squeeze out of the way of " + a + short + "");
+					if (plural) outputText("' attacks.\n");
+					else outputText("'s attack.\n");
+					return true;
 				}
-				SceneLib.combat.ShieldsStatusProcs();
-				return true;
+				if (evasionResult != null) { // Failsafe fur unhandled
+					outputText("Using your superior combat skills you manage to avoid attack completely.\n");
+					return true;
+				}
+				//Zenji parry enemy attack
+				if (player.hasStatusEffect(StatusEffects.CombatFollowerZenji)) {
+					var parryChance:Number = 25;
+					if (player.statusEffectv4(StatusEffects.CombatFollowerZenji) > 1) parryChance += 15;
+					if (rand(100) > parryChance) {
+						outputText("" + capitalA + short + " goes in for a strike, but Zenji is able to intervene, blocking any opening they have on you, leaving you safe behind him.\n\n");
+						outputText("\"<i>You’re gonna have ta try harda dan dat!</i>\" Zenji shouts.");
+						return true;
+					}
+				}
+
+				//Parry with weapon
+				if (combatParry()) {
+					outputText("You manage to block " + a + short + "");
+					if (plural) outputText("' attacks ");
+					else outputText("'s attack ");
+					outputText("with your [weapon].\n");
+					if (game.player.hasPerk(PerkLib.TwinRiposte) && (game.player.weaponSpecials("Dual") || game.player.weaponSpecials("Dual Large")) && game.player.wrath >= 2) {
+						player.createStatusEffect(StatusEffects.CounterAction,1,0,0,0);
+						SceneLib.combat.basemeleeattacks();
+					}
+					if (game.player.hasPerk(PerkLib.Backlash) && game.player.isFistOrFistWeapon()) {
+						player.createStatusEffect(StatusEffects.CounterAction,1,0,0,0);
+						outputText("As you block the blow you exploit the opening in your opponent’s guard to deliver a vicious kick.");
+						SceneLib.combat.basemeleeattacks();
+					}
+					return true;
+				}
+				//Block with shield
+				if (combatBlock(true)) {
+					outputText("You block " + a + short + "'s " + weaponVerb + " with your [shield]! ");
+					if (game.player.hasPerk(PerkLib.ShieldCombat) && game.player.fatigue >= 20) {
+						player.createStatusEffect(StatusEffects.CounterAction,1,0,0,0);
+						SceneLib.combat.pspecials.shieldBash();
+					}
+					SceneLib.combat.ShieldsStatusProcs();
+					return true;
+				}
+				return false;
 			}
-			return false;
 		}
 
 		public function monsterIsStunned():Boolean {
@@ -1821,8 +1879,8 @@ import flash.utils.getQualifiedClassName;
 			if (player.hasPerk(PerkLib.DarkenedKitsune)>0) {//&& rand(4) ==0){
 				if (SceneLib.darkenedKitsuneScene.darkKitsuneCombat()) EngineCore.outputText("\n\n")
 			}
-			if (hasStatusEffect(StatusEffects.ConstrictedWhip) || hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire) || hasStatusEffect(StatusEffects.Pounce)
-			|| hasStatusEffect(StatusEffects.GrabBear) || hasStatusEffect(StatusEffects.CancerGrab) || hasStatusEffect(StatusEffects.ManticorePlug) || hasStatusEffect(StatusEffects.MysticWeb)) {
+			if (hasStatusEffect(StatusEffects.ConstrictedWhip) || hasStatusEffect(StatusEffects.Constricted) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.ConstrictedScylla) || hasStatusEffect(StatusEffects.GooEngulf) || hasStatusEffect(StatusEffects.EmbraceVampire) || hasStatusEffect(StatusEffects.ManticorePlug)
+			|| hasStatusEffect(StatusEffects.Pounce) || hasStatusEffect(StatusEffects.PouncedByCompanion) || hasStatusEffect(StatusEffects.GrabBear) || hasStatusEffect(StatusEffects.CancerGrab) || hasStatusEffect(StatusEffects.MysticWeb)) {
 				if (!handleConstricted()) return;
 			}
 			if (hasStatusEffect(StatusEffects.OrcaPlay)) {
@@ -1891,9 +1949,19 @@ import flash.utils.getQualifiedClassName;
 				EngineCore.outputText("" + capitalA + short + " struggle to get free.");
 				if (statusEffectv1(StatusEffects.Pounce) <= 0) {
 					EngineCore.outputText("" + capitalA + short + " struggle to get free and manage to shove you off.");
+					if (hasStatusEffect(StatusEffects.DisplacerPlug)) removeStatusEffect(StatusEffects.DisplacerPlug);
 					removeStatusEffect(StatusEffects.Pounce);
 				}
 				addStatusValue(StatusEffects.Pounce, 1, -1);
+				return false;
+			}
+			if (hasStatusEffect(StatusEffects.PouncedByCompanion)) {
+				EngineCore.outputText("" + capitalA + short + " struggle to get free.");
+				if (statusEffectv1(StatusEffects.PouncedByCompanion) <= 0) {
+					EngineCore.outputText("" + capitalA + short + " struggle to get free and manage to shove your companion off.");
+					removeStatusEffect(StatusEffects.PouncedByCompanion);
+				}
+				addStatusValue(StatusEffects.PouncedByCompanion, 1, -1);
 				return false;
 			}
 			if (hasStatusEffect(StatusEffects.ManticorePlug)) {
@@ -1920,7 +1988,6 @@ import flash.utils.getQualifiedClassName;
 					} else {
 						EngineCore.outputText("You growl in annoyance at your denied meal.");
 					}
-					createStatusEffect(StatusEffects.Straddle, statusEffectv2(StatusEffects.DisplacerPlug),0,0,0);
 					removeStatusEffect(StatusEffects.DisplacerPlug);
 				}
 				addStatusValue(StatusEffects.DisplacerPlug, 1, -1);
@@ -2170,7 +2237,7 @@ import flash.utils.getQualifiedClassName;
 			if(temp > player.gems) temp = player.gems;
 			outputText("\n\nYou'll probably wake up in eight hours or so, missing " + temp + " gems.");
 			player.gems -= temp;
-			EngineCore.doNext(SceneLib.camp.returnToCampUseEightHours);
+			EngineCore.doNext(SceneLib.camp.returnToCampUseSixHours);
 		}
 
 		/**
@@ -2267,7 +2334,7 @@ import flash.utils.getQualifiedClassName;
 			outputText(" <b>(<font color=\"#ff00ff\">" + lustDelta + "</font>)</b>");
 		}
 
-		public function generateDebugDescription():String{
+		public function generateDebugDescription():String {
 			var result:String;
 			var be:String =plural?"are":"is";
 			var have:String = plural ? "have" : "has";
@@ -2314,7 +2381,6 @@ import flash.utils.getQualifiedClassName;
 			else result += wings.desc + " wings (type " + Object(Wings.Types[wings.type]||{}).name + "), ";
 			if (antennae.type == Antennae.NONE) result += "no antennae.type.\n\n";
 			else result += Object(Antennae.Types[antennae.type]||{}).name + " antennae.type.\n\n";
-
 			// GENITALS AND BREASTS
 			for (var i:int = 0; i<cocks.length; i++){
 				var cock:Cock = (cocks[i] as Cock);
@@ -2354,15 +2420,13 @@ import flash.utils.getQualifiedClassName;
 				result += "; anal capacity is increased by " + statusEffectv1(StatusEffects.BonusACapacity);
 			}
 			result +=".\n\n";
-
 			// COMBAT AND OTHER STATS
-			result += Hehas + "str=" + str + ", tou=" + tou + ", spe=" + spe +", inte=" + inte +", wis=" + wis +", lib=" + lib + ", sens=" + sens + ", cor=" + cor + ".\n";
+			result += Hehas + "str=" + this.strStat.core.value + ", tou=" + /*this.touStat.core.value*/this.touStat.max + ", spe=" + this.speStat.core.value +", inte=" + this.intStat.core.value +", wis=" + this.wisStat.core.value +", lib=" + this.libStat.core.value + ", sens=" + sens + ", cor=" + cor + ".\n";
 			result += Pronoun1 + " can " + weaponVerb + " you with  " + weaponPerk + " " + weaponName+" (attack " + weaponAttack + ", value " + weaponValue+").\n";
 			result += Pronoun1 + " is guarded with " + armorPerk + " " + armorName+" (phys defense " + armorDef + ", mag defense " + armorMDef + ", value " + armorValue+").\n";
 			result += Hehas + HP + "/" + maxHP() + " HP, " + lust + "/" + maxLust() + " lust, " + fatigue + "/" + maxFatigue() + " fatigue, " + wrath + "/" + maxWrath() + " wrath, " + soulforce + "/" + maxSoulforce() + " soulforce, " + mana + "/" + maxMana() + " mana. ";
 			result += Pronoun3 + " bonus HP=" + bonusHP + ", bonus lust=" + bonusLust + ", bonus wrath=" + bonusWrath + ", bonus mana=" + bonusMana + ", bonus soulforce=" + bonusSoulforce + ", and lust vulnerability=" + lustVuln + ".\n"
 			result += Heis + "level " + level + " and " + have+" " + gems + " gems. You will be awarded " + XP + " XP.\n";
-
 			var numSpec:int = (special1 != null ? 1 : 0) + (special2 != null ? 1 : 0) + (special3 != null ? 1 : 0);
 			if (numSpec > 0) {
 				result += Hehas + numSpec + " special attack" + (numSpec > 1 ? "s" : "") + ".\n";
@@ -2370,7 +2434,63 @@ import flash.utils.getQualifiedClassName;
 			else {
 				result += Hehas + "no special attacks.\n";
 			}
-
+			return result;
+		}
+		
+		public function scanningEnemy():String {
+			var result:String;
+			var be:String =plural?"are":"is";
+			var have:String = plural ? "have" : "has";
+			var Heis:String = Pronoun1+" "+be+" ";
+			var Hehas:String = Pronoun1 + " " + have + " ";
+			result = "You are inspecting "+a+short+" (imageName='"+imageName+"', class='"+getQualifiedClassName(this)+"'). You are fighting "+pronoun2+".\n\n";
+			result += Heis+(Appearance.DEFAULT_GENDER_NAMES[gender]||("gender#"+gender))+
+					" with "+Appearance.numberOfThings(cocks.length,"cock") +
+					", "+Appearance.numberOfThings(vaginas.length,"vagina")+
+					" and "+Appearance.numberOfThings(breastRows.length,"breast row")+".\n\n";
+			// APPEARANCE
+			result += Heis + Appearance.inchesAndFeetsAndInches(tallness) + " tall with " +
+			          Appearance.describeByScale(hips.type,Appearance.DEFAULT_HIP_RATING_SCALES,"thinner than","wider than") + " hips and " +
+			          Appearance.describeByScale(butt.type,Appearance.DEFAULT_BUTT_RATING_SCALES,"thinner than","wider than") + " butt.\n";
+			result += Pronoun3+" lower body is "+Object(LowerBody.Types[lowerBody]||{}).name;
+			result += ", "+pronoun3+" arms are "+Object(Arms.Types[arms.type]||{}).name;
+			result += ", "+pronoun1+" "+have+" "+skinTone+" "+skinAdj+" "+skinDesc+
+					  " (base "+Object(Skin.SkinTypes[skin.baseType()]||{}).id+")." +
+					  " (coat "+Object(Skin.SkinTypes[skin.coatType()]||{}).id+")." +
+					  "\n";
+			result += Hehas;
+			if (hairLength>0){
+				result += hairColor+" "+Appearance.inchesAndFeetsAndInches(hairLength)+" long "+Object(Hair.Types[hairType]||{}).name+" hair.\n";
+			} else {
+				result += "no hair.\n";
+			}
+			result += Hehas;
+			if (beardLength>0){
+				result += hairColor+" "+Appearance.inchesAndFeetsAndInches(beardLength)+" long "+Object(Beard.Types[beardStyle]||{}).name+" beard.\n";
+			} else {
+				result += "no beard.\n";
+			}
+			result += Hehas
+			          + Object(Face.Types[faceType]||{}).name + " face, "
+			          + Object(Ears.Types[ears.type]||{}).name + " ears, "
+			          + Object(Tongue.Types[tongue.type]||{}).name + " tongue and "
+			          + Object(Eyes.Types[eyes.type]||{}).name + " eyes.\n";
+			result += Hehas;
+			if (tailType == Tail.NONE) result += "no tail, ";
+			else result+=Object(Tail.Types[tailType]||{}).name+" "+tailCount+" tails with venom="+tailVenom+" and recharge="+tailRecharge+", ";
+			if (horns.type == Horns.NONE) result += "no horns, ";
+			else result += horns.count + " " + Object(Horns.Types[horns.type]||{}).name + " horns, ";
+			if (wings.type == Wings.NONE) result += "no wings, ";
+			else result += wings.desc + " wings (type " + Object(Wings.Types[wings.type]||{}).name + "), ";
+			if (antennae.type == Antennae.NONE) result += "no antennae.type.\n\n";
+			else result += Object(Antennae.Types[antennae.type]||{}).name + " antennae.type.\n\n";
+			// COMBAT AND OTHER STATS
+			result += Hehas + "str=" + str + ", tou=" + tou + ", spe=" + spe +", inte=" + inte +", wis=" + wis +", lib=" + lib + ", sens=" + sens + ", cor=" + cor + ".\n";
+			result += Pronoun1 + " can " + weaponVerb + " you with  " + weaponPerk + " " + weaponName+" (attack " + weaponAttack + ", value " + weaponValue+").\n";
+			result += Pronoun1 + " is guarded with " + armorPerk + " " + armorName+" (phys defense " + armorDef + ", mag defense " + armorMDef + ", value " + armorValue+").\n";
+			result += Hehas + HP + "/" + maxHP() + " HP, " + lust + "/" + maxLust() + " lust, " + fatigue + "/" + maxFatigue() + " fatigue, " + wrath + "/" + maxWrath() + " wrath, " + soulforce + "/" + maxSoulforce() + " soulforce, " + mana + "/" + maxMana() + " mana. ";
+			result += Pronoun3 + " bonus HP=" + bonusHP + ", bonus lust=" + bonusLust + ", bonus wrath=" + bonusWrath + ", bonus mana=" + bonusMana + ", bonus soulforce=" + bonusSoulforce + ", and lust vulnerability=" + lustVuln + ".\n"
+			result += Heis + "level " + level + " and " + have+" " + gems + " gems. You will be awarded " + XP + " XP.\n";
 			return result;
 		}
 
@@ -2392,23 +2512,24 @@ import flash.utils.getQualifiedClassName;
 		{
 
 			//regeneration perks for monsters
-			if (((hasPerk(PerkLib.Regeneration) || hasPerk(PerkLib.LizanRegeneration) || hasPerk(MutationsLib.LizanMarrow) || hasPerk(MutationsLib.LizanMarrowEvolved) || hasPerk(MutationsLib.LizanMarrowFinalForm) || hasPerk(MutationsLib.DraconicHeartFinalForm) || hasPerk(PerkLib.EnemyPlantType) || hasPerk(PerkLib.BodyCultivator) || hasPerk(PerkLib.MonsterRegeneration)
+			if (((hasPerk(PerkLib.Regeneration) || hasPerk(PerkLib.LizanRegeneration) || hasPerk(MutationsLib.LizanMarrow) || hasPerk(MutationsLib.LizanMarrowPrimitive) || hasPerk(MutationsLib.LizanMarrowEvolved) || hasPerk(MutationsLib.DraconicHeartEvolved) || hasPerk(PerkLib.EnemyPlantType) || hasPerk(PerkLib.BodyCultivator) || hasPerk(PerkLib.MonsterRegeneration)
 			|| hasPerk(PerkLib.HydraRegeneration) || hasPerk(PerkLib.Lifeline) || hasPerk(PerkLib.ImprovedLifeline) || hasPerk(PerkLib.GreaterLifeline) || hasPerk(PerkLib.EpicLifeline) || hasPerk(PerkLib.IcyFlesh) || hasPerk(PerkLib.HclassHeavenTribulationSurvivor) || hasPerk(PerkLib.GclassHeavenTribulationSurvivor)
 			|| hasPerk(PerkLib.FclassHeavenTribulationSurvivor) || hasPerk(PerkLib.EclassHeavenTribulationSurvivor) || hasStatusEffect(StatusEffects.MonsterRegen) || hasStatusEffect(StatusEffects.MonsterRegen2)) && this.HP < maxHP()) || (hasStatusEffect(StatusEffects.MonsterVPT) && (this.HP < maxOverHP()) && (this.HP > minHP()))) {
 				var healingPercent:Number = 0;
 				var temp2:Number = 0;
+				var temp3:Number = 0;
 				if (hasPerk(PerkLib.Regeneration)) healingPercent += (0.5 * (1 + newGamePlusMod()));
 				if (hasPerk(PerkLib.IceQueenGown) && player.yukiOnnaScore() >= 14) healingPercent += 5;
 				if (hasPerk(PerkLib.VladimirRegalia) && !isNightTime()) healingPercent -= 5;
 				if (hasPerk(PerkLib.VladimirRegalia) && isNightTime()) healingPercent += 5;
 				if (hasPerk(PerkLib.LizanRegeneration) && !hasStatusEffect(StatusEffects.RegenInhibitor)) healingPercent += 1.5;
 				if (hasPerk(MutationsLib.LizanMarrow) && !hasStatusEffect(StatusEffects.RegenInhibitor)) healingPercent += 0.5;
-				if (hasPerk(MutationsLib.LizanMarrowEvolved) && !hasStatusEffect(StatusEffects.RegenInhibitor)) healingPercent += 1;
-				if (hasPerk(MutationsLib.LizanMarrowFinalForm) && !hasStatusEffect(StatusEffects.RegenInhibitor)) {
+				if (hasPerk(MutationsLib.LizanMarrowPrimitive) && !hasStatusEffect(StatusEffects.RegenInhibitor)) healingPercent += 1;
+				if (hasPerk(MutationsLib.LizanMarrowEvolved) && !hasStatusEffect(StatusEffects.RegenInhibitor)) {
 					healingPercent += 1.5;
 					if (this.HP < (this.maxHP() * 0.25)) healingPercent += 4.5;
 				}
-				if (hasPerk(MutationsLib.DraconicHeartFinalForm)) healingPercent += 1;
+				if (hasPerk(MutationsLib.DraconicHeartEvolved)) healingPercent += 1;
 				if (hasPerk(PerkLib.HydraRegeneration) && !hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) healingPercent += 1 * perkv1(PerkLib.HydraRegeneration);
 				if (hasPerk(PerkLib.IcyFlesh)) healingPercent += 1;
 				if (hasPerk(PerkLib.BodyCultivator)) healingPercent += 0.5;
@@ -2421,12 +2542,27 @@ import flash.utils.getQualifiedClassName;
 				if (hasPerk(PerkLib.MonsterRegeneration) && !hasStatusEffect(StatusEffects.RegenInhibitor)) healingPercent += perkv1(PerkLib.MonsterRegeneration);
 				if (hasStatusEffect(StatusEffects.MonsterRegen)) healingPercent += statusEffectv2(StatusEffects.MonsterRegen);
 				if (hasPerk(PerkLib.Diehard) && !hasPerk(PerkLib.EpicDiehard) && this.HP < 1) healingPercent -= 1;
-				if (hasPerk(MutationsLib.LizanMarrowFinalForm) && this.HP < 1) healingPercent -= 1;
+				if (hasPerk(MutationsLib.LizanMarrowEvolved) && this.HP < 1) healingPercent -= 1;
 				if (hasStatusEffect(StatusEffects.BloodRequiem) && healingPercent > 0) {
 					if (hasPerk(PerkLib.EnemyConstructType) || hasPerk(PerkLib.EnemyElementalType) || hasPerk(PerkLib.EnemyFleshConstructType) || hasPerk(PerkLib.EnemyGhostType)) healingPercent *= 0.8;
 					else if (hasPerk(PerkLib.EnemyPlantType)) healingPercent *= 0.5;
 					else healingPercent *= 0.2;
 				}
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 1) temp3 += 0.55;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 2) temp3 += 0.25;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 3) temp3 += 0.15;
+				if (flags[kFLAGS.GAME_DIFFICULTY] == 4) temp3 += 0.08;
+				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 1) temp3 += 0.3;
+				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 2) temp3 += 0.2;
+				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 3) temp3 += 0.12;
+				if (flags[kFLAGS.SECONDARY_STATS_SCALING] == 4) temp3 += 0.05;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 1) temp3 += 0.6;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 2) temp3 += 0.47;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 3) temp3 += 0.4;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 4) temp3 += 0.36;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] == 5) temp3 += 0.34;
+				if (flags[kFLAGS.NEW_GAME_PLUS_LEVEL] >= 6) temp3 += 0.32;
+				if (temp3 > 0) healingPercent *= temp3;
 				temp2 = Math.round(maxHP() * healingPercent / 100);
 				if (hasPerk(PerkLib.Lifeline)) temp2 += (45 * (1 + newGamePlusMod()));
 				if (hasPerk(PerkLib.ImprovedLifeline)) temp2 += (60 * (1 + newGamePlusMod()));
@@ -2467,8 +2603,8 @@ import flash.utils.getQualifiedClassName;
 				if (hasPerk(PerkLib.SoulAncestor)) soulforceRecovery += 5;
 				if (hasPerk(PerkLib.DaoistCultivator)) soulforceRecoveryMulti += 0.5;
 				if (hasPerk(MutationsLib.DraconicHeart)) manaRecovery += 4;
+				if (hasPerk(MutationsLib.DraconicHeartPrimitive)) manaRecovery += 4;
 				if (hasPerk(MutationsLib.DraconicHeartEvolved)) manaRecovery += 4;
-				if (hasPerk(MutationsLib.DraconicHeartFinalForm)) manaRecovery += 4;
 				soulforceRecovery *= soulforceRecoveryMulti;
 				addSoulforce(soulforceRecovery);
 			}
@@ -2482,14 +2618,15 @@ import flash.utils.getQualifiedClassName;
 				if (hasPerk(PerkLib.ArcaneRegenerationLegendary)) manaRecovery += 40;
 				if (hasPerk(PerkLib.ArcaneRegenerationMythical)) manaRecovery += 50;
 				if (hasPerk(MutationsLib.DraconicHeart)) manaRecovery += 5;
+				if (hasPerk(MutationsLib.DraconicHeartPrimitive)) manaRecovery += 5;
 				if (hasPerk(MutationsLib.DraconicHeartEvolved)) manaRecovery += 5;
-				if (hasPerk(MutationsLib.DraconicHeartFinalForm)) manaRecovery += 5;
 				if (hasPerk(PerkLib.WarMageApprentice)) manaRecovery += 10;
 				if (hasPerk(PerkLib.WarMageAdept)) manaRecovery += 15;
 				if (hasPerk(PerkLib.GreyMageApprentice)) manaRecoveryMulti += 0.25;
 				if (hasPerk(PerkLib.GreyMage)) manaRecoveryMulti += 0.5;
 				if (hasPerk(PerkLib.GreyArchmage)) manaRecoveryMulti += 0.75;
 				if (hasPerk(PerkLib.GrandGreyArchmage)) manaRecoveryMulti += 1;
+				if (hasPerk(PerkLib.GrandGreyArchmage2ndCircle)) manaRecoveryMulti += 1.5;
 				if (hasPerk(PerkLib.ManaAffinityI)) manaRecoveryMulti += (0.2 * (1 + newGamePlusMod()));
 				manaRecovery *= manaRecoveryMulti;
 				addMana(manaRecovery);
@@ -2590,7 +2727,14 @@ import flash.utils.getQualifiedClassName;
 				else outputText("<b>" + capitalA + short + (plural ? " are" : " is") + " currently asleep!</b>\n\n");
 			}
 			if(hasStatusEffect(StatusEffects.InvisibleOrStealth)) {
-				addStatusValue(StatusEffects.InvisibleOrStealth,1,-1);
+				if (statusEffectv2(StatusEffects.InvisibleOrStealth) > 0) {
+					if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] < SceneLib.combat.StealthModeMechCost() || player.soulforce < SceneLib.combat.StealthModeMechCost()) addStatusValue(StatusEffects.InvisibleOrStealth,1,-1);
+					else {
+						if (flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] >= SceneLib.combat.StealthModeMechCost()) flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR] -= SceneLib.combat.StealthModeMechCost();
+						else player.soulforce -= SceneLib.combat.StealthModeMechCost();
+					}
+				}
+				else addStatusValue(StatusEffects.InvisibleOrStealth,1,-1);
 				if(statusEffectv1(StatusEffects.InvisibleOrStealth) <= 0) {
 					outputText("<b>" + capitalA + short + (plural ? " have" : " has") + " found you!</b>\n\n");
 					removeStatusEffect(StatusEffects.InvisibleOrStealth);
@@ -2686,6 +2830,9 @@ import flash.utils.getQualifiedClassName;
 				else {
 					var procentvalue:Number = (4 + rand(7));
 					if (game.player.hasPerk(PerkLib.ThirstForBlood)) procentvalue *= 1.5;
+					if (player.hasPerk(MutationsLib.SharkOlfactorySystem)) procentvalue *= 1.5;
+					if (player.hasPerk(MutationsLib.SharkOlfactorySystemPrimitive)) procentvalue *= 1.5;
+					if (player.hasPerk(MutationsLib.SharkOlfactorySystemEvolved)) procentvalue *= 1.5;
 					if (statusEffectv2(StatusEffects.IzmaBleed) > 0) procentvalue += statusEffectv2(StatusEffects.IzmaBleed);
 					procentvalue = Math.round(procentvalue);
 					var store:Number = maxHP() * (procentvalue) / 100;
@@ -2706,7 +2853,13 @@ import flash.utils.getQualifiedClassName;
 				//Deal damage if still wounded.
 				else {
 					var store3:Number = (player.str + player.spe) * 2;
-					if (game.player.hasPerk(PerkLib.ThirstForBlood)) store3 *= 1.5;
+					if (player.hasPerk(PerkLib.ThirstForBlood)) store3 *= 1.5;
+					if (player.hasPerk(MutationsLib.SharkOlfactorySystem)) store3 *= 1.5;
+					if (player.hasPerk(MutationsLib.SharkOlfactorySystemPrimitive)) store3 *= 1.5;
+					if (player.hasPerk(MutationsLib.SharkOlfactorySystemEvolved)) store3 *= 1.5;
+					if (player.hasPerk(PerkLib.RacialParagon)) store3 *= 1.5;
+					if (player.hasPerk(PerkLib.Apex)) store3 *= 1.5;
+					if (player.hasPerk(PerkLib.AlphaAndOmega)) store3 *= 1.5;
 					store3 = Math.round(store3);
 					if (statusEffectv2(StatusEffects.SharkBiteBleed) > 0) store3 *= statusEffectv2(StatusEffects.SharkBiteBleed);
 					store3 = SceneLib.combat.doDamage(store3);
@@ -2756,7 +2909,13 @@ import flash.utils.getQualifiedClassName;
 				//Deal damage if still wounded.
 				else {
 					var store5:Number = (player.str + player.spe) * 2;
-					if (game.player.hasPerk(PerkLib.ThirstForBlood)) store5 *= 1.5;
+					if (player.hasPerk(PerkLib.ThirstForBlood)) store5 *= 1.5;
+					if (player.hasPerk(MutationsLib.SharkOlfactorySystem)) store5 *= 1.5;
+					if (player.hasPerk(MutationsLib.SharkOlfactorySystemPrimitive)) store5 *= 1.5;
+					if (player.hasPerk(MutationsLib.SharkOlfactorySystemEvolved)) store5 *= 1.5;
+					if (player.hasPerk(PerkLib.RacialParagon)) store5 *= 1.5;
+					if (player.hasPerk(PerkLib.Apex)) store5 *= 1.5;
+					if (player.hasPerk(PerkLib.AlphaAndOmega)) store5 *= 1.5;
 					store5 = Math.round(store5);
 					store5 = SceneLib.combat.doDamage(store5);
 					if (plural) {
@@ -3180,62 +3339,10 @@ import flash.utils.getQualifiedClassName;
 				else addStatusValue(StatusEffects.FlameBlade,1,-1);
 			}
 
-			//Consuming darkness
-			if (hasStatusEffect(StatusEffects.ConsumingDarkness)) {
-				if (statusEffectv1(StatusEffects.ConsumingDarkness) <= 0) removeStatusEffect(StatusEffects.ConsumingDarkness);
-				else {
-					addStatusValue(StatusEffects.ConsumingDarkness, 1, -1);
-					outputText("Hungry darkness gnaw at your foe for ");
-					var store11:Number = 0;
-					store11 += statusEffectv2(StatusEffects.ConsumingDarkness);
-					store11 *= 0.2;
-					store11 = Math.round(store11 * SceneLib.combat.darknessDamageBoostedByDao());
-					store11 = SceneLib.combat.doDarknessDamage(store11, true, true);
-					outputText("\n\n");
-				}
-			}
-			//Curse of Desire
-			if (hasStatusEffect(StatusEffects.CurseOfDesire)) {
-				if (statusEffectv1(StatusEffects.CurseOfDesire) <= 0) {
-					if (statusEffectv3(StatusEffects.CurseOfDesire) > 0) lustVuln += statusEffectv3(StatusEffects.CurseOfDesire);
-					removeStatusEffect(StatusEffects.CurseOfDesire);
-				}
-				else {
-					addStatusValue(StatusEffects.CurseOfDesire, 1, -1);
-					var lustDmg3:Number = 0;
-					lustDmg3 += statusEffectv2(StatusEffects.CurseOfDesire);
-					lustDmg3 *= 0.2;
-					if (lustDmg3 < 1) lustDmg3 = 1;
-					else lustDmg3 = Math.round(lustDmg3);
-					outputText("The curse of desire slowly sap at your victim's resolve and countenance. ");
-					teased(lustDmg3, false);
-					outputText("\n\n");
-				}
-			}
-
-			//Curse of Weeping
-			if (hasStatusEffect(StatusEffects.CurseOfWeeping)) {
-				if (statusEffectv1(StatusEffects.CurseOfWeeping) <= 0) removeStatusEffect(StatusEffects.CurseOfWeeping);
-				else {
-					addStatusValue(StatusEffects.CurseOfWeeping, 1, -1);
-					outputText("Your foe is bleeding due to your curse. ");
-					var hemorrhage3Damage:Number = 0;
-					hemorrhage3Damage += statusEffectv2(StatusEffects.CurseOfWeeping);
-					hemorrhage3Damage *= 0.2;
-					hemorrhage3Damage = Math.round(hemorrhage3Damage);
-					hemorrhage3Damage = SceneLib.combat.doDamage(hemorrhage3Damage, true, true);
-					outputText("\n\n");
-				}
-			}
-
 			//lowered damage done by enemy attacks debuff
 			if (hasStatusEffect(StatusEffects.EnemyLoweredDamageH)) {
 				if (statusEffectv1(StatusEffects.EnemyLoweredDamageH) <= 0) removeStatusEffect(StatusEffects.EnemyLoweredDamageH);
 				else addStatusValue(StatusEffects.EnemyLoweredDamageH,1,-1);
-			}
-			if (hasStatusEffect(StatusEffects.EnergyDrain)) {
-				if (statusEffectv1(StatusEffects.EnergyDrain) <= 0) removeStatusEffect(StatusEffects.EnergyDrain);
-				else addStatusValue(StatusEffects.EnergyDrain,1,-1);
 			}
 		}
 
@@ -3257,7 +3364,7 @@ import flash.utils.getQualifiedClassName;
 			//This function doesn’t take the gems away from the player, it just provides the output text
 			if (SceneLib.prison.inPrison) {
 				SceneLib.prison.doPrisonEscapeFightLoss();
-				return 8;
+				return 6;
 			}
 			if (!inDungeon) {
 				if (SceneLib.prison.trainingFeed.prisonCaptorFeedingQuestTrainingExists()) {
@@ -3271,10 +3378,10 @@ import flash.utils.getQualifiedClassName;
 						SceneLib.prison.trainingFeed.prisonCaptorFeedingQuestTrainingProgress(1, 1);
 					}
 				}
-				outputText("\n\nYou'll probably come to your senses in eight hours or so");
-				if (player.gems > 1)
+				outputText("\n\nYou'll probably come to your senses in six hours or so");
+				if ((player.gems > 1) && gemsLost > 0)
 					outputText(", missing " + gemsLost + " gems.");
-				else if (player.gems == 1)
+				else if ((player.gems == 1) && gemsLost > 0)
 					outputText(", missing your only gem.");
 				else outputText(".");
 			}
@@ -3286,12 +3393,12 @@ import flash.utils.getQualifiedClassName;
 					outputText(", but after checking your gem pouch, you realize you're missing your only gem.");
 				else outputText(".");
 			}
-			return 8; //This allows different monsters to delay the player by different amounts of time after a combat loss. Normal loss causes an eight hour blackout
+			return 6; //This allows different monsters to delay the player by different amounts of time after a combat loss. Normal loss causes an six hour blackout
 		}
 		public function prepareForCombat():void {
 			var bonusStatsAmp:Number = 0.6;
 			if (hasPerk(MutationsLib.MantislikeAgility)) this.speStat.core.value += (10 * (1 + newGamePlusMod()));
-			if (hasPerk(MutationsLib.MantislikeAgilityEvolved)) this.speStat.core.value += (20 * (1 + newGamePlusMod()));
+			if (hasPerk(MutationsLib.MantislikeAgilityPrimitive)) this.speStat.core.value += (20 * (1 + newGamePlusMod()));
 			if (level > 25) bonusStatsAmp += 0.3*((int)(level-1)/25);
 			bonusAscStr += bonusStatsAmp * str * newGamePlusMod();
 			bonusAscTou += bonusStatsAmp * tou * newGamePlusMod();
@@ -3351,62 +3458,80 @@ import flash.utils.getQualifiedClassName;
 			}
 			if (hasPerk(PerkLib.FleshBodyWarriorStage)) {
 				if (hasPerk(PerkLib.SoulSprite)) {
-					armorDef += (3 * (1 + newGamePlusMod()));
-					armorMDef += (2 * (1 + newGamePlusMod()));
+					armorDef += (4 * (1 + newGamePlusMod()));
+					armorMDef += (3 * (1 + newGamePlusMod()));
 				}
 				if (hasPerk(PerkLib.SoulScholar)) {
-					armorDef += (3 * (1 + newGamePlusMod()));
-					armorMDef += (2 * (1 + newGamePlusMod()));
+					armorDef += (4 * (1 + newGamePlusMod()));
+					armorMDef += (3 * (1 + newGamePlusMod()));
 				}
 				if (hasPerk(PerkLib.SoulElder)) {
-					armorDef += (3 * (1 + newGamePlusMod()));
-					armorMDef += (2 * (1 + newGamePlusMod()));
+					armorDef += (4 * (1 + newGamePlusMod()));
+					armorMDef += (3 * (1 + newGamePlusMod()));
 				}
 			}
 			if (hasPerk(PerkLib.FleshBodyElderStage)) {
 				if (hasPerk(PerkLib.SoulExalt)) {
-					armorDef += (4 * (1 + newGamePlusMod()));
-					armorMDef += (3 * (1 + newGamePlusMod()));
+					armorDef += (6 * (1 + newGamePlusMod()));
+					armorMDef += (5 * (1 + newGamePlusMod()));
 				}
 				if (hasPerk(PerkLib.SoulOverlord)) {
-					armorDef += (4 * (1 + newGamePlusMod()));
-					armorMDef += (3 * (1 + newGamePlusMod()));
+					armorDef += (6 * (1 + newGamePlusMod()));
+					armorMDef += (5 * (1 + newGamePlusMod()));
 				}
 				if (hasPerk(PerkLib.SoulTyrant)) {
-					armorDef += (4 * (1 + newGamePlusMod()));
-					armorMDef += (3 * (1 + newGamePlusMod()));
+					armorDef += (6 * (1 + newGamePlusMod()));
+					armorMDef += (5 * (1 + newGamePlusMod()));
 				}
 			}
 			if (hasPerk(PerkLib.FleshBodyOverlordStage)) {
 				if (hasPerk(PerkLib.SoulKing)) {
-					armorDef += (5 * (1 + newGamePlusMod()));
-					armorMDef += (4 * (1 + newGamePlusMod()));
+					armorDef += (8 * (1 + newGamePlusMod()));
+					armorMDef += (7 * (1 + newGamePlusMod()));
 				}
 				if (hasPerk(PerkLib.SoulEmperor)) {
-					armorDef += (5 * (1 + newGamePlusMod()));
-					armorMDef += (4 * (1 + newGamePlusMod()));
+					armorDef += (8 * (1 + newGamePlusMod()));
+					armorMDef += (7 * (1 + newGamePlusMod()));
 				}
 				if (hasPerk(PerkLib.SoulAncestor)) {
-					armorDef += (5 * (1 + newGamePlusMod()));
-					armorMDef += (4 * (1 + newGamePlusMod()));
+					armorDef += (8 * (1 + newGamePlusMod()));
+					armorMDef += (7 * (1 + newGamePlusMod()));
 				}
 			}/*
 			if (hasPerk(PerkLib.FleshBodyTyrantStage)) {
 				if (hasPerk(PerkLib.soul)) {
-					armorDef += (2 * (1 + newGamePlusMod()));
-					armorMDef += (1 * (1 + newGamePlusMod()));
+					armorDef += (10 * (1 + newGamePlusMod()));
+					armorMDef += (9 * (1 + newGamePlusMod()));
 				}
 				if (hasPerk(PerkLib.)) {
-					armorDef += (2 * (1 + newGamePlusMod()));
-					armorMDef += (1 * (1 + newGamePlusMod()));
+					armorDef += (10 * (1 + newGamePlusMod()));
+					armorMDef += (9 * (1 + newGamePlusMod()));
 				}
 				if (hasPerk(PerkLib.)) {
-					armorDef += (2 * (1 + newGamePlusMod()));
-					armorMDef += (1 * (1 + newGamePlusMod()));
+					armorDef += (10 * (1 + newGamePlusMod()));
+					armorMDef += (9 * (1 + newGamePlusMod()));
 				}
 			}*/
 			armorDef += ((int)(1 + armorDef / 10)) * 3 * newGamePlusMod();
 			armorMDef += ((int)(1 + armorMDef / 10)) * 3 * newGamePlusMod();
+			if (hasPerk(PerkLib.EpicStrength)) this.strStat.core.value += Math.round(this.strStat.core.value * 0.35);
+			if (hasPerk(PerkLib.LegendaryStrength)) this.strStat.core.value += Math.round(this.strStat.core.value * 0.5);
+			if (hasPerk(PerkLib.MythicalStrength)) this.strStat.core.value += Math.round(this.strStat.core.value * 0.65);
+			if (hasPerk(PerkLib.EpicToughness)) this.touStat.core.value += Math.round(this.touStat.core.value * 0.35);
+			if (hasPerk(PerkLib.LegendaryToughness)) this.touStat.core.value += Math.round(this.touStat.core.value * 0.5);
+			if (hasPerk(PerkLib.MythicalToughness)) this.touStat.core.value += Math.round(this.touStat.core.value * 0.65);
+			if (hasPerk(PerkLib.EpicSpeed)) this.speStat.core.value += Math.round(this.speStat.core.value * 0.35);
+			if (hasPerk(PerkLib.LegendarySpeed)) this.speStat.core.value += Math.round(this.speStat.core.value * 0.5);
+			if (hasPerk(PerkLib.MythicalSpeed)) this.speStat.core.value += Math.round(this.speStat.core.value * 0.65);
+			if (hasPerk(PerkLib.EpicIntelligence)) this.intStat.core.value += Math.round(this.intStat.core.value * 0.35);
+			if (hasPerk(PerkLib.LegendaryIntelligence)) this.intStat.core.value += Math.round(this.intStat.core.value * 0.5);
+			if (hasPerk(PerkLib.MythicalIntelligence)) this.intStat.core.value += Math.round(this.intStat.core.value * 0.65);
+			if (hasPerk(PerkLib.EpicWisdom)) this.wisStat.core.value += Math.round(this.wisStat.core.value * 0.35);
+			if (hasPerk(PerkLib.LegendaryWisdom)) this.wisStat.core.value += Math.round(this.wisStat.core.value * 0.5);
+			if (hasPerk(PerkLib.MythicalWisdom)) this.wisStat.core.value += Math.round(this.wisStat.core.value * 0.65);
+			if (hasPerk(PerkLib.EpicLibido)) this.libStat.core.value += Math.round(this.libStat.core.value * 0.35);
+			if (hasPerk(PerkLib.LegendaryLibido)) this.libStat.core.value += Math.round(this.libStat.core.value * 0.5);
+			if (hasPerk(PerkLib.MythicalLibido)) this.libStat.core.value += Math.round(this.libStat.core.value * 0.65);
 			if (hasPerk(PerkLib.EnemyHugeType)) {
 				this.strStat.core.value += Math.round(this.strStat.core.value * 0.1);
 				this.touStat.core.value += Math.round(this.touStat.core.value * 0.1);

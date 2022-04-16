@@ -7,6 +7,8 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
 import classes.Scenes.Areas.Swamp.*;
+import classes.Scenes.NPCs.BelisaFollower;
+import classes.Scenes.NPCs.LilyFollower;
 import classes.Scenes.SceneLib;
 
 use namespace CoC;
@@ -22,8 +24,13 @@ use namespace CoC;
 		}
 		public function exploreSwamp():void
 		{
+			//M1 Cerberus
+			if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2) && player.statusEffectv1(StatusEffects.TelAdreTripxiGuns2) == 0 && player.hasKeyItem("M1 Cerberus") < 0 && rand(2) == 0) {
+				partsofM1Cerberus();
+				return;
+			}
 			//Discover 'Bog' at after 25 explores of swamp
-			if (player.level >= 23 && flags[kFLAGS.BOG_EXPLORED] == 0) {
+			if ((player.level + combat.playerLevelAdjustment()) >= 23 && flags[kFLAGS.BOG_EXPLORED] == 0) {
 				clearOutput();
 				outputText("While exploring the swamps, you find yourself into a particularly dark, humid area of this already fetid biome.  You judge that you could find your way back here pretty easily in the future, if you wanted to.  With your newfound discovery fresh in your mind, you return to camp.\n\n(<b>Bog exploration location unlocked!</b>)");
 				flags[kFLAGS.BOG_EXPLORED]++;
@@ -32,6 +39,16 @@ use namespace CoC;
 			}
 			flags[kFLAGS.TIMES_EXPLORED_SWAMP]++;
 			/*  SPECIAL SCENE OVERWRITES */
+			//Belisa
+			if (!player.hasStatusEffect(StatusEffects.SpoodersOff) && BelisaFollower.BelisaEncounternum == 0 && rand(2) == 0) {
+				SceneLib.belisa.firstEncounter();
+				return;
+			}
+			//Lily
+			if (!player.hasStatusEffect(StatusEffects.SpoodersOff) && LilyFollower.LilyFollowerState == false && rand(3) == 0) {
+				SceneLib.lily.lilyEncounter();
+				return;
+			}
 			//KIHA X HEL THREESOME!
 			if (!SceneLib.kihaFollower.followerKiha() && player.cor < 60 && flags[kFLAGS.KIHA_AFFECTION_LEVEL] >= 1 && flags[kFLAGS.HEL_FUCKBUDDY] > 0 && player.hasCock() && flags[kFLAGS.KIHA_AND_HEL_WHOOPIE] == 0) {
 				SceneLib.kihaFollower.kihaXSalamander();
@@ -47,6 +64,7 @@ use namespace CoC;
 				SceneLib.etnaScene.repeatYandereEnc();
 				return;
 			}
+			//Ember
 			if (flags[kFLAGS.TOOK_EMBER_EGG] == 0 && flags[kFLAGS.EGG_BROKEN] == 0 && flags[kFLAGS.TIMES_EXPLORED_SWAMP] > 0 && (flags[kFLAGS.TIMES_EXPLORED_SWAMP] % 40 == 0)) {
 				SceneLib.emberScene.findEmbersEgg();
 				return;
@@ -90,6 +108,14 @@ use namespace CoC;
 					doNext(playerMenu);
 					break;
 			}
+		}
+		public function partsofM1Cerberus():void {
+			clearOutput();
+			outputText("As you explore the swamp you run into what appears to be the half sunken remains of some old contraption. Wait this might just be what that gun vendor was talking about! You proceed to pull up the items releasing this to indeed be the remains of a broken firearm.\n\n");
+			outputText("You carefully put the pieces of the M1 Cerberus in your back and head back to your camp.\n\n");
+			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
+			player.createKeyItem("M1 Cerberus", 0, 0, 0, 0);
+			doNext(camp.returnToCampUseOneHour);
 		}
 	}
 }

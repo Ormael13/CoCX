@@ -136,10 +136,10 @@ public class StatUtils {
 		}
 	}
 	public static function isPlainNumberStat(statname:String):Boolean {
-		return statname in PlainNumberStats;
+		return !(statname in PlainNumberStats);
 	}
 	public static function isPercentageStat(statname:String):Boolean {
-		return statname in PlainNumberStats;
+		return statname in PercentageStats;
 	}
 	public static const PlainNumberStats:Object = Utils.createMapFromPairs([
 		// [StatNames.STR, 'Strength']
@@ -149,7 +149,43 @@ public class StatUtils {
 		["int", "Intelligence"],
 		["wis", "Wisdom"],
 		["lib", "Libido"],
-		["sens", "Sensitivity"]
+		["sens", "Sensitivity"],
+
+		["str.core", "Strength"],
+		["tou.core", "Toughness"],
+		["spe.core", "Speed"],
+		["int.core", "Intelligence"],
+		["wis.core", "Wisdom"],
+		["lib.core", "Libido"],
+		["sens.core", "Sensitivity"],
+
+		["str.bonus", "Strength"],
+		["tou.bonus", "Toughness"],
+		["spe.bonus", "Speed"],
+		["int.bonus", "Intelligence"],
+		["wis.bonus", "Wisdom"],
+		["lib.bonus", "Libido"],
+		["sens.bonus", "Sensitivity"],
+
+		["maxhp_base", "Max HP"],
+		['maxlust_base', "Max Lust"],
+		['maxwrath_base', "Max Wrath"],
+		['maxfatigue_base', "Max Fatigue"],
+		['maxmana_base', "Max Mana"],
+		['maxsf_base', "Max Soulforce"],
+		
+		['maxlust_perlib', "Max Lust per libido"],
+		['maxfatigue_perspe', "Max Fatigue per speed"],
+		['maxmana_perint', "Max Mana per intelligence"],
+		['maxmana_perwis', "Max Mana per wisdom"],
+		['maxsf_perwis', "Max Soulforce per wisdom"],
+
+		["maxhp_perlevel", "Max HP per level"],
+		['maxlust_perlevel', "Max Lust per level"],
+		['maxwrath_perlevel', "Max Wrath per level"],
+		['maxfatigue_perlevel', "Max Fatigue per level"],
+		['maxmana_perlevel', "Max Mana per level"],
+		['maxsf_perlevel', "Max Soulforce per level"],
 	]);
 	public static const PercentageStats:Object = Utils.createMapFromPairs([
 		// [StatNames.SPELLPOWER, 'Spellpower']
@@ -159,6 +195,15 @@ public class StatUtils {
 		["int.mult", "Intelligence"],
 		["wis.mult", "Wisdom"],
 		["lib.mult", "Libido"],
+		
+		["maxhp_mult", "Max HP"],
+		['maxlust_mult', "Max Lust"],
+		['maxwrath_mult', "Max Wrath"],
+		['maxfatigue_mult', "Max Fatigue"],
+		['maxmana_mult', "Max Mana"],
+		['maxsf_mult', "Max Soulforce"],
+		
+		['spellpower', "Spellpower"],
 	]);
 }
 }

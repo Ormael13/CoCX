@@ -34,11 +34,14 @@ use namespace CoC;
 			}
 			//Diana
 			if (flags[kFLAGS.DIANA_FOLLOWER] < 6 && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff) && rand(5) == 0) {
-				SceneLib.dianaScene.repeatBattlefieldEnc();
+                if ((flags[kFLAGS.DIANA_FOLLOWER] < 3 || flags[kFLAGS.DIANA_FOLLOWER] == 5) && flags[kFLAGS.DIANA_LVL_UP] >= 8)
+                    SceneLib.dianaScene.postNameEnc();
+                else
+				    SceneLib.dianaScene.repeatEnc();
 				return;
 			}
 			//Ted
-			if (flags[kFLAGS.TED_LVL_UP] >= 1 && flags[kFLAGS.TED_LVL_UP] < 4 && !player.hasStatusEffect(StatusEffects.TedOff) && player.statusEffectv1(StatusEffects.CampSparingNpcsTimers4) < 1 && rand(10) == 0) {
+			if (flags[kFLAGS.TED_LVL_UP] >= 1 && flags[kFLAGS.TED_LVL_UP] < 2 && !player.hasStatusEffect(StatusEffects.TedOff) && player.statusEffectv1(StatusEffects.CampSparingNpcsTimers4) < 1 && rand(10) == 0) {
 				SceneLib.tedScene.introPostHiddenCave();
 				return;
 			}
@@ -50,9 +53,9 @@ use namespace CoC;
 			choice[choice.length] = 0; //Golem group enemies
 			choice[choice.length] = 1; //Golem group enemies
 			choice[choice.length] = 2; //Golem group enemies
-			choice[choice.length] = 3; //Goblin/Imp group enemies
+			choice[choice.length] = 3; //
 			choice[choice.length] = 4; //Goblin/Imp group enemies
-			choice[choice.length] = 5; //Items
+			choice[choice.length] = 5; //Goblin/Imp group enemies
 			choice[choice.length] = 6; //Items
 			choice[choice.length] = 7; //Find nothing!
 			
@@ -65,38 +68,40 @@ use namespace CoC;
 					break;
 				case 3:
 				case 4:
-					SceneLib.exploration.genericGobImpEncounters1();
-					break;
 				case 5:
-					clearOutput();
-					outputText("You spot something on the ground among various items remains. Taking a closer look, it's ");
-					if (rand(2) == 0) {
-						if (player.level >= 48 && rand(3) == 0) {
-							outputText("a high-grade Soulforce Recovery Pill. ");
-							inventory.takeItem(consumables.HG_SFRP, camp.returnToCampUseOneHour);
-						}
-						else {
-							outputText("a mid-grade Soulforce Recovery Pill. ");
-							inventory.takeItem(consumables.MG_SFRP, camp.returnToCampUseOneHour);
-						}
-					}
-					else {
-						if (player.level >= 48 && rand(3) == 0) {
-							outputText("an Arcane Regen Concotion. ");
-							inventory.takeItem(consumables.AREGCON, camp.returnToCampUseOneHour);
-						}
-						else {
-							outputText("a diluted Arcane Regen Concotion. ");
-							inventory.takeItem(consumables.D_ARCON, camp.returnToCampUseOneHour);
-						}
-					}
+					SceneLib.exploration.genericGobImpEncounters1();
 					break;
 				case 6:
 					clearOutput();
-					outputText("While exploring the battlefield you find the remains of some metal scraps. At first you think you won't find anything useful there but a metal plate draws your attention, it could be useful later. You put the item in your backpack and head back to camp.\n\n");
-					outputText("<b>You found a metal plate.</b>");
-					flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES]++;
-					doNext(camp.returnToCampUseOneHour);
+					if (rand(2) == 0) {
+						outputText("While exploring the battlefield you find the remains of some metal scraps. At first you think you won't find anything useful there but a metal plate draws your attention, it could be useful later. You put the item in your backpack and head back to camp.\n\n");
+						outputText("<b>You found a metal plate.</b>");
+						flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES]++;
+						doNext(camp.returnToCampUseOneHour);
+					}
+					else {
+						outputText("You spot something on the ground among various items remains. Taking a closer look, it's ");
+						if (rand(2) == 0) {
+							if (player.level >= 48 && rand(3) == 0) {
+								outputText("a high-grade Soulforce Recovery Pill. ");
+								inventory.takeItem(consumables.HG_SFRP, camp.returnToCampUseOneHour);
+							}
+							else {
+								outputText("a mid-grade Soulforce Recovery Pill. ");
+								inventory.takeItem(consumables.MG_SFRP, camp.returnToCampUseOneHour);
+							}
+						}
+						else {
+							if (player.level >= 48 && rand(3) == 0) {
+								outputText("an Arcane Regen Concotion. ");
+								inventory.takeItem(consumables.AREGCON, camp.returnToCampUseOneHour);
+							}
+							else {
+								outputText("a diluted Arcane Regen Concotion. ");
+								inventory.takeItem(consumables.D_ARCON, camp.returnToCampUseOneHour);
+							}
+						}
+					}
 					break;
 				default:
 					clearOutput();

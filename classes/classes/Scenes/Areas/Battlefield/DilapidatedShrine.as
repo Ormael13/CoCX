@@ -96,14 +96,15 @@ import classes.GlobalFlags.kFLAGS;
 			outputText("Its eyes seem ordinarily human-like, with an x shaped cross for pupils.\n\n");
 			outputText("At the base of the statue lies a metallic plaque. Given the rust coating it, the text is hard to decipher You can only make out, 'E.e.ie.'.\n\n");
 			outputText("Below the plaque lies two ornate wooden bowls, presumably used to put offerings in a time when this was a place people actively visited.\n\n");
-			if (shinshoku()) {
-				outputText("A soft voice rings not far from behind you, \"<i>Sometimes all you need is a small token of goodwill to get a response. Perhaps a few chilly peppers would be enough...</i>\"\n\n");
-				outputText("You turn around, expecting to see the old monk you've seen before. As you peer about, nobody is around. Are you hearing voices or was he truly here moments prior?\n\n");
-			}
+            //The hint gives everything away. Remove it, and people won't understand what to do. Maybe no checks here?
+			//if (shinshoku()) {
+            outputText("A soft voice rings not far from behind you, \"<i>Sometimes all you need is a small token of goodwill to get a response. Perhaps a few chilly peppers would be enough...</i>\"\n\n");
+            outputText("You turn around, expecting to see the old monk you've seen before. As you peer about, nobody is around. Are you hearing voices or was he truly here moments prior?\n\n");
+			//}
 			//outputText("\n\n");
 			menu();
 			if (player.hasItem(consumables.CHILLYP, 3)) addButton(0, "Offering", westSectionOffering);
-			else addButtonDisabled(0, "???", "Perhaps if you came back with Chilly peppers, like the voice said...");
+			else addButtonDisabled(0, "???", "Perhaps if you came back with 3 Chilly peppers, like the voice said...");
 			addButton(14, "Back", shrinemainmenu);
 		}
 		private function westSectionOffering():void {
@@ -111,40 +112,28 @@ import classes.GlobalFlags.kFLAGS;
 			player.destroyItems(consumables.CHILLYP, 3);
 			outputText("You place the peppers in one of the bowls, and wait for a bit. A noise distracts you for half a moment, but when you turn back, the peppers are gone, ");
 			switch(rand(10)) {
-				case 0:
-					outputText("and nothing for your troubles. How disappointing.");
-					break;
 				case 1:
 					outputText("in the other bowl, a small, glowing syringe.");
 					inventory.takeItem(useables.E_ICHOR, westSection);
-					break;
-				case 2:
-					outputText("and nothing for your troubles. How disappointing.");
 					break;
 				case 3:
 					outputText("and a bottle of Nocello sitting in front of the statue.");
 					inventory.takeItem(consumables.NOCELIQ, westSection);
 					break;
-				case 4:
-					outputText("and nothing for your troubles. How disappointing.");
-					break;
 				case 5:
 					outputText("and a single Storm Seed rests in the other bowl.");
 					inventory.takeItem(consumables.SRMSEED, westSection);
-					break;
-				case 6:
-					outputText("and nothing for your troubles. How disappointing.");
 					break;
 				case 7:
 					outputText("replaced by a familiar looking bottle of Enigmanium.");
 					inventory.takeItem(consumables.ENIGMANIUM, westSection);
 					break;
-				case 8:
-					outputText("and nothing for your troubles. How disappointing.");
-					break;
 				case 9:
 					outputText("instead, a bottle of Infernal Wine sits before the statue.");
 					inventory.takeItem(consumables.INFWINE, westSection);
+					break;
+				default:
+					outputText("and nothing for your troubles. How disappointing.");
 					break;
 			}
 			outputText("\n\n")

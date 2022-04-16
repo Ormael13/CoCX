@@ -189,7 +189,7 @@ public function samirahMainCampMenu():void {
 		outputText("\"<i>What a nice girl, I really like her. What do you need me for?</i>\"\n\n");
 		doNext(samirahMainCampMenu2);
 	}
-	else if (rand(2) == 0 && flags[kFLAGS.CHI_CHI_FOLLOWER] > 2) {
+	else if (rand(2) == 0 && flags[kFLAGS.CHI_CHI_FOLLOWER] > 2 && !player.hasStatusEffect(StatusEffects.ChiChiOff)) {
 		outputText("As you were checking your camp and the people living in, you hear a shout from where Chi Chi usually leaves her dummies.\n\n");
 		outputText("\"<i>Stay back! I already know what your intentions are!</i>\"\n\n");
 		outputText("The fiery mouse is poised to attack Samirah, who only has eyes for the sources of heat.\n\n");
@@ -281,7 +281,7 @@ public function samirahTalkHer():void {
 		outputText("\"<i>Actually, yes. Albeit uncommon, it can happens to very gifted individuals. The few born within this rare breed have a gaze so strong it turns prey to stone. I guess the snake hair is just a symptom of it.</i>\"\n\n");
 	}*/
 	outputText("You thank Samirah for her time and go back to your things.\n\n");
-	cheatTime2(10);
+	eachMinuteCount(10);
 	doNext(samirahMainTalkMenu);
 }
 public function samirahTalkHomeworld():void {
@@ -290,7 +290,7 @@ public function samirahTalkHomeworld():void {
 	outputText("\"<i>I’m from Gobis, a world of sun and sand. Well it’s a large land of sandy dunes with an oasis every now and then. We travel between sandstorms for sustenance and resources, as not to despoil the land of everything. Even then, a naga can survive alone in the Gobis desert for several weeks before running out of water or food.</i>\"\n\n");
 	outputText("So, wait, they never experienced any cold weather there?\n\n");
 	outputText("\"<i>Of course not! Else we would spend our days hibernating. Nights in the world of Gobis are cold and us naga spend all of it sleeping, otherwise, we would be hunting night and day.</i>\"\n\n");
-	cheatTime2(10);
+	eachMinuteCount(10);
 	doNext(samirahMainTalkMenu);
 }
 public function samirahTalkHypnosis():void {
@@ -303,11 +303,11 @@ public function samirahTalkHypnosis():void {
 		outputText("Samirah gives you the ABC of proper hypnosis, starting with the gaze."+(player.isFemale() ? " You never thought a proper belly dance would help maintain an opponent captive of your gaze either, is the whole thing just about capturing the target attention?" : "")+"\n\n");
 		outputText("\"<i>The point is to give a show the target wants to see so to force its gaze toward you and capture it. Once its attention is caught it should be easy for you to maintain it for as long as you want. Once that is done you can do tons of things to your prey and even go so far as to have it do things to you.</i>\"\n\n");
 		flags[kFLAGS.SAMIRAH_HYPNOSIS] = 1;
-		cheatTime2(20);
+		eachMinuteCount(20);
 	}
 	else {
 		outputText("You nod, thanking her for the information.\n\n");
-		cheatTime2(10);
+		eachMinuteCount(10);
 	}
 	doNext(samirahMainTalkMenu);
 }
@@ -339,12 +339,12 @@ public function samirahTalkClothes():void {
 		}
 		else {
 			outputText(" Of course despite how nice it would look on you it was made with a snake tail in mind and your current body simply won’t allow you to wear it.");
-			cheatTime2(60);
+			eachMinuteCount(60);
 			doNext(samirahMainTalkMenu);
 		}
 	}
 	else {
-		cheatTime2(60);
+		eachMinuteCount(60);
 		doNext(samirahMainTalkMenu);
 	}
 }
@@ -354,7 +354,7 @@ public function samirahTalkScaleColor():void {
 	outputText("Unlike the last few times, she spots you from far away and slithers up to you.\n\n");
 	outputText("\"<i>I guess my grounds below to you now hunter. I will have to head out and hunt elsewhere...</i>\"\n\n");
 	outputText("Unlike the last few times, she spots you from far away and slithers up to you.\n\n");
-	cheatTime2(10);
+	eachMinuteCount(10);
 	doNext(samirahMainTalkMenu);
 }
 
@@ -379,7 +379,7 @@ public function samirahMainSexMenu():void {
 public function nagaDefaultSexScene():void {
 	if (flags[kFLAGS.SAMIRAH_FOLLOWER] >= 10) clearOutput();
 	if (player.gender == 1 || (player.gender == 3 && rand(2) == 0)) {
-		if (player.cockArea(0) > 35) {
+		if (player.biggestCockArea() > 35) {
 			outputText("The kiss continues as both of your bodies rub together sensually, your tails continuing to wrap around one another. There is a pulsing in your [cock] as it starts to grow hard against Samirah soft belly. Feeling this, Samirah gently pulls away, slowly letting your tongue out of her mouth as she does so. Her hands make their way over your shoulders, down your abs, and stop at your [cocks].\n\n"); 
 			outputText("\"<i>You're quite the big boy, aren't you?</i>\" she says as she wraps both of her hands around your now throbbing [cock]. She starts to slide her hands up and down your length. Sticking out her tongue, she wraps it around the tip and licks at the pre that is starting to leak out.\n\n");
 			outputText("A hiss of pleasure escapes your lips as Samirah strokes and licks at your [cock], her talented fingers and tongue bringing you into a further state of arousal. Samirah stops her caressing and brings your [cock] to her chest, pressing her breasts around it. She slowly starts to slide her body up and down your shaft, using her tongue to bring some of your pre and lubricate her body. Once she is satisfied with her body's slickness, she quickens her pace.\n\n");
@@ -441,7 +441,7 @@ public function nagaDefaultSexScene():void {
 		outputText("Samirah looks down and suddenly giggles at your stark lack of fun-bits. You turn away in embarrassment and start to head back to your camp.\n\n");
 		outputText("\"<i>Wait,</i>\" Samirah reaches out and places a hand on your shoulder. \"<i>I didn't mean to insult you. I've never seen anyone else quite like you.</i>\" She slides her hand down your body. \"<i>I wonder if you can show me just what a body like yours can do.</i>\"\n\n");
 		outputText("Enjoying this new shift in the conversation, you coil around her and position your head over the scaly covering over her pussy. A soft hiss escapes Samirah as you slide your tongue into her, twirling it around to caress every inch of her. Her hands make their way to your head and press you deeper into her.\n\n");
-		if (1 == 0) outputText("You move your tongue faster and deeper into her pussy, your forked tongue reaching deeper than any human tongue ever could. ");
+		if (player.hasLongTongue()) outputText("You move your tongue faster and deeper into her pussy, your forked tongue reaching deeper than any human tongue ever could. ");
 		else outputText("You move your tongue faster and faster into her pussy, reaching as far in as you possibly can. ");
 		outputText("Samirah grips your head tightly to her and suddenly thrusts her hips in orgasm, her girl cum coating your tongue and mouth.\n\n");
 		outputText("You uncoil yourself and slowly gather your things, Samirah lying on the sand panting.\n\n");

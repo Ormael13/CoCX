@@ -49,10 +49,10 @@ public function findBazaar():void {
 private function approachBazaarGuard():void {
 	clearOutput();
 	outputText("You step from concealment and walk up to the strange man, calling out in greeting.  He folds his arms across his chest and looks you up and down, peering at you with intense, black eyes.  They aren't solid onyx, but his irises are just as dark as the seemingly bottomless depths of his pupils.  His appraising gaze watches you, unblinking as second after second ticks by.  Just when you start to wonder if he speaks your language, he interrupts you by saying, \"<i>");
-	if(player.cor < 33 - player.corruptionTolerance() && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0) outputText("Leave at once.  You are not yet ready for the wonders of the Bazaar.");
+	if(player.cor < 33 - player.corruptionTolerance && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0) outputText("Leave at once.  You are not yet ready for the wonders of the Bazaar.");
 	else outputText("Welcome to the Bizarre Bazaar.  Enter, but be mindful of your actions within.");
 	outputText("</i>\"");
-	if(player.cor < 33 - player.corruptionTolerance() && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0) simpleChoices("FIGHT!",initiateFightGuard, "", null, "", null, "", null, "Leave",camp.returnToCampUseOneHour);
+	if(player.cor < 33 - player.corruptionTolerance && flags[kFLAGS.MEANINGLESS_CORRUPTION] <= 0) simpleChoices("FIGHT!",initiateFightGuard, "", null, "", null, "", null, "Leave",camp.returnToCampUseOneHour);
 	else simpleChoices("Enter",enterTheBazaar, "", null, "", null, "", null, "Leave",camp.returnToCampUseOneHour);
 }
 
@@ -83,7 +83,7 @@ public function winAgainstGuard():void {
 //[Enter]
 public function enterTheBazaarAndMenu(demons:Boolean = true):void {
 	clearOutput();
-	spriteSelect(-1);
+	spriteSelect(null);
 	outputText(images.showImage("location-bazaar"));
 	//Make sure flags to allow entrance is set.
 	if(flags[kFLAGS.BAZAAR_ENTERED] == 0) flags[kFLAGS.BAZAAR_ENTERED] = 1;
@@ -171,7 +171,7 @@ private function theSlipperySqueeze():void {
 		//No scenes for Sara yet!
 		outputText("\"<i>I told you I'm not working until you give me a raise!  Do the damned massages yourself!</i>\"\n\nJoey blushes and apologies.  \"<i>I guess I'm the only one available for now.</i>\"\n\n");
 		outputText("The price list indicate it's 10 gems for a massage, though the gleefully illustrated 'oil' reminds you just what they plan to use on you.\n\n");
-		if(player.findPerk(PerkLib.Androgyny) < 0) {
+		if(!player.hasPerk(PerkLib.Androgyny)) {
 			outputText("There also appears to be an option for a special 'Androgyny Treatment' that costs 500 gems.  Joey catches you looking at it and mutters, \"<i>That treatment isn't fun like our massages.  It would unlock the full potential of your visage, allowing it to be as masculine or feminine as possible.</i>\"\n\n");
 			androgyny = joeyAndrogyny;
 		}
@@ -762,16 +762,16 @@ private function yesPutDatSockOnMe(target:int):void {
 
 	if(flags[kFLAGS.SOCK_HOLDING] == "cobalt") {
 		player.gems -= 250;
-		// if(player.findPerk(PerkLib.PhallicRestraint) < 0) player.createPerk(PerkLib.PhallicRestraint,0,0,0,0);
+		// if(!player.hasPerk(PerkLib.PhallicRestraint)) player.createPerk(PerkLib.PhallicRestraint,0,0,0,0);
 	}
 
 	if(flags[kFLAGS.SOCK_HOLDING] == "scarlet") {
-		//if(player.findPerk(PerkLib.PhallicPotential) < 0) player.createPerk(PerkLib.PhallicPotential,0,0,0,0);
+		//if(!player.hasPerk(PerkLib.PhallicPotential)) player.createPerk(PerkLib.PhallicPotential,0,0,0,0);
 		player.gems -= 250;
 	}
 
 	if(flags[kFLAGS.SOCK_HOLDING] == "viridian") {
-		if(player.findPerk(PerkLib.LustyRegeneration) < 0) {
+		if(!player.hasPerk(PerkLib.LustyRegeneration)) {
 			player.createPerk(PerkLib.LustyRegeneration,0,0,0,0);
 			player.gems -= 1000;
 		}
@@ -782,7 +782,7 @@ private function yesPutDatSockOnMe(target:int):void {
 
 	if(flags[kFLAGS.SOCK_HOLDING] == "cockring") {
 		player.gems -= 100;
-		if(player.findPerk(PerkLib.PentUp) < 0) player.createPerk(PerkLib.PentUp,10,0,0,0);
+		if(!player.hasPerk(PerkLib.PentUp)) player.createPerk(PerkLib.PentUp,10,0,0,0);
 		else player.addPerkValue(PerkLib.PentUp,1,5);
 	}
 
@@ -913,49 +913,54 @@ private function joeySweetMassage():void {
 	addButton(1,"No",eggsInButt,false);
 }
 
-private function eggsInButt(eggButt:Boolean = false):void {
-	clearOutput();
-	if(eggButt) {
+private function eggsInButtStart(eggButt:Boolean):void {
+    if(eggButt) {
 		outputText("You nod your head to the little femboy, who jumps with joy, splattering a little string of chocolate cum across the floor.  He walks around behind you and asks you to raise your butt.  You do so, surprised to find you can move after that initial massage, raising your ass high into the air and positioning your knees under you.  You can't see what he's doing back there, but when you feel a warm splash of liquid against your [asshole], you let your mind's eye go to work.");
 		outputText("\n\nJoey gathers up another dollop of the chocolatey cum and smears it across your butthole. Then he takes two fingers and gently prods inwards, sinking in knuckle-by-knuckle.  He works the two fingers in, pumping and sliding them around, coating your walls with his jizz.  When the bunny-boy retracts his fingers, you find yourself aching for his touch, wanting something, anything, inside you.  You don't want for long, of course, as Joey retrieves the giant painted egg and presses it up against your empty asshole.  He pushes it forward, your cum-lubed ass parting to make way.  It stretches you further and further outwards, nearing discomfort levels, but then you round the widest point and your [asshole] devours it with a wet <i>schluck</i>.");
 		outputText("\n\nJoey rubs your asshole some more, working his little masseuse fingers all over, helping it to relax once more.  You feel so deliciously full with that egg inside you, like you have a giant cock constantly fucking you.  It gives you a little thrill to know that both of you are packing this monster of an egg inside of you, and that he's feeling the same things you are.  You lower your legs and ass marveling at the sensations of the egg shifting around.\n\n");
 	}
+    sceneHunter.selectGender(curry(eggsInButt, 0), curry(eggsInButt, 1), curry(eggsInButt, 2));
+}
+
+//dick - 0, vag - 1, ass - 2
+private function eggsInButt(dickVagAss:int):void {
+	clearOutput();
 	//(Continue Here)
 	outputText("The dainty little femboy hops back up onto the table, straddling your ass.  He gives his cock a few little strokes, pouring the warm chocolatey 'massage oil' right onto the small of your back.  Rivulets of the bunny-spunk cover your back, giving you goosebumps as they roll across you like velvety rivers.  His hands go to work once more, working the rich brown liquid into every pore, coating your back in chocolate.  He repeats his actions from before, his thumbs and knuckles working your flesh as though he were a master sculptor working clay.");
 	outputText("\n\nWithout bothering to get off of you, Joey asks, \"<i>You want to turn over for me?</i>\"  You oblige, rotating around while the masseuse remains straddling your lower body.  His little cock presses against your ");
-	if(player.hasCock()) outputText("own");
-	else if(player.hasVagina()) outputText("cunt");
+	if(dickVagAss == 0) outputText("own");
+	else if(dickVagAss == 1) outputText("cunt");
 	else outputText("pitifully empty mound");
 	outputText(", its candy-coated flesh slipping enticingly over yours.  To your surprise, Joey seems to be wearing some kind of cock ring for this massage.  It's multicolored, just like the eggs, encircling his small (by Mareth's standards) manhood.  As you watch his balls seem to twitch and inflate ever-so-slightly.  That thing is preventing him from cumming completely, whatever it is, everything coming out must be pre-cum!");
 
 	outputText("\n\nJoey catches your gaze, \"<i>Oh yes.  This would be your dessert, I'm saving all this sweet chocolate just for you.  The ring is candy too.  Melts in your mouth, not on my dick.  But that 'comes' later, now we have to work out all that tension in your body.</i>\" He giggles, letting his cock drool its candy payload all over your groin, stomach and chest before getting to work, his fingers working the goo into your skin.  As he works on your stomach, groin and hips, he actually flips around, so that his dripping package is right over your face.  Chocolate drips onto your face, and you can't help but to lick your lips to sample this confectionary cum.  It's sweet and rich, just like real chocolate, but it still has the salty-sweet tang of semen.  All in all, it's an interesting combination that you're eager to get more of.");
 
 	outputText("\n\nThe rabbit-eared boy's hands find your ");
-	if(player.hasCock()) outputText(multiCockDescriptLight());
-	else if(player.hasVagina()) outputText("[vagina]");
+	if(dickVagAss == 0) outputText(multiCockDescriptLight());
+	else if(dickVagAss == 1) outputText("[vagina]");
 	else outputText("[asshole]");
 	outputText(", spreading his sweet bounty all over.  His fingers to go work, rubbing up and down");
-	if(!player.hasCock()) outputText(", in and out");
+	if(!dickVagAss == 0) outputText(", in and out");
 	outputText(", removing all that pent up tension from inside you.  ");
-	if(player.hasCock()) outputText("[EachCock] begins leaking pre-cum, mixing with Joey's on your belly to create what looks like a chocolate-white chocolate marbled confection.");
-	else if(player.hasVagina()) outputText("Your cunt grows ever wetter, and not just because of the new chocolate coating.  Despite Joey's femboy appearance, you've got to hand it to him, he does know his way around a pussy.");
+	if(dickVagAss == 0) outputText("[EachCock] begins leaking pre-cum, mixing with Joey's on your belly to create what looks like a chocolate-white chocolate marbled confection.");
+	else if(dickVagAss == 1) outputText("Your cunt grows ever wetter, and not just because of the new chocolate coating.  Despite Joey's femboy appearance, you've got to hand it to him, he does know his way around a pussy.");
 	else outputText("Your asshole winks and clenches, aching for release that Joey is kind, and skilled, enough to give.");
 
 	outputText("\n\nIn no time at all, your body is arching on the bed under Joey's ministrations.  You gasp as his fingers twirl around your groin, expertly bringing you to the edge.  More of his chocolate-flavored cum drizzles into your open mouth; you can't help but gulp it down eagerly.  Every mouthful of that rich, sweet cum seems better than the last.  Sadly, Joey switches positions, straddling your waist, leaving your chocolate-smeared mouth empty once more.  He ");
-	if(player.hasCock()) outputText("takes hold of [oneCock] and strokes gently, rubbing his thumb against the head");
-	else if(player.hasVagina()) outputText("reaches between his legs, slipping two fingers inside you while his thumb gently rubs your clit");
+	if(dickVagAss == 0) outputText("takes hold of [oneCock] and strokes gently, rubbing his thumb against the head");
+	else if(dickVagAss == 1) outputText("reaches between his legs, slipping two fingers inside you while his thumb gently rubs your clit");
 	else outputText("reaches between his legs, slipping two fingers inside your ass while his thumb rubs against your perineum");
 	outputText(", and with his free hand he leans forward, tweaking a [nipple] softly.");
 
 	outputText("\n\nUnder his skilled hand, you're soon bucking and twitching, your candy-coated body aching for release.  \"<i>Let's... just... get all of this... naughty... tension... out,</i>\" he pants, emphasizing each word even though his voice barely rises above a whisper.  With one final twist of his fingers, you're sent over the edge.  Your body arches, lifting Joey up into the air with a gleeful shout, while ");
-	if(player.hasCock()) outputText("[eachCock] pulses and spasms, loosing rope after rope of white jizz through the air, splattering against the wall and floor messily");
-	else if(player.hasVagina()) outputText("your pussy tightens around his fingers, suddenly releasing a flood of femcum that splatters messily against the table");
+	if(dickVagAss == 0) outputText("[eachCock] pulses and spasms, loosing rope after rope of white jizz through the air, splattering against the wall and floor messily");
+	else if(dickVagAss == 1) outputText("your pussy tightens around his fingers, suddenly releasing a flood of femcum that splatters messily against the table");
 	else outputText("your asshole twitches and spasms, unable to do much more than grant you a vague half-orgasm");
 	outputText(".  Your entire body tingles as you slowly descend back to the table, practically melting into it as if you were nothing more than the bunny-spunk covering your skin.");
 
 	outputText("\n\nJoey giggles again, slipping off of you, landing on the floor with a wet slap.  The floor must be covered in various liquids by this point.  He raises his hand to his mouth, tasting the mixture of your juices on his fingertips.  You lean back on the bed, completely relaxed.  You try to raise a hand, but fail completely, your body is simply too loose to obey you right now.  Thankfully, you don't have to move for what Joey seems to have in mind.  He flips a lever on the headrest, lowering it down slightly so your head is almost hanging off the edge.  You see him upside down, his chocolate-glazed cock staring right down at you.  His sack, amazingly, has swelled up incredibly during the massage.  While he once sported an average set of balls, these are easily the size of basketballs now, filled with tasty candy goodness.");
 	outputText("\n\n\"<i>Mmm, this is my favorite part!</i>\" Joey laughs, stroking his dick, \"<i>dessert!</i>\"  You gladly open your mouth just as Joey pushes forward, taking his entire member into your mouth.  Considering what else lives in Mareth, Joey is practically tiny");
-	if(player.hasCock()) {
+	if(dickVagAss == 0) {
 		if(player.biggestCockArea() >= 30) outputText(", especially compared to you.");
 		else if(player.smallestCockArea() < 6) outputText(", of course, if he's considered tiny, what does that make you?");
 	}
@@ -1027,7 +1032,7 @@ private function assaultYoRapistYo():void {
 		//open options [Leave][Abuse ass(70 or more corruption)]
 		menu();
 		addButton(4,"Leave", assaultWinAndLeave);
-		if(player.cor >= 66 - player.corruptionTolerance() || flags[kFLAGS.MEANINGLESS_CORRUPTION] > 0) addButton(0,"Abuse Ass",abuseHisAss);
+		if(player.cor >= 66 - player.corruptionTolerance || flags[kFLAGS.MEANINGLESS_CORRUPTION] > 0) addButton(0,"Abuse Ass",abuseHisAss);
 	}
 }
 

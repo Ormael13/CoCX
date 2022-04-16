@@ -22,6 +22,8 @@ import classes.Scenes.Monsters.*;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.Places.*;
 import classes.Scenes.Places.Boat.SharkGirlScene;
+import classes.Scenes.Places.HeXinDao.AdventurerGuild;
+import classes.Scenes.Places.HeXinDao.JourneyToTheEast;
 import classes.Scenes.Quests.UrtaQuest;
 
 public class SceneLib {
@@ -39,6 +41,8 @@ public class SceneLib {
 
     public static var mutationsTable:Mutations = new Mutations();
 
+    public static var battlefiledboundary:BattlefieldBoundary = new BattlefieldBoundary();
+
     public static var battlefiledouter:BattlefieldOuter = new BattlefieldOuter();
 
     public static var beach:Beach = new Beach();
@@ -46,8 +50,6 @@ public class SceneLib {
     public static var blightridge:BlightRidge = new BlightRidge();
 
     public static var defiledravine:DefiledRavine = new DefiledRavine();
-
-    public static var ebonLabyrinth:EbonLabyrinth = new EbonLabyrinth();
 
     public static var bog:Bog = new Bog();
 
@@ -104,6 +106,8 @@ public class SceneLib {
     public static var trollScene:TrollScenes = new TrollScenes();
 	
 	public static var displacerbeastScene:DisplacerBeastScene = new DisplacerBeastScene();
+    
+    public static var dridertown:DriderTown = new DriderTown();
 
     public static var aethertwins:AetherTwinsFollowers = new AetherTwinsFollowers();
 
@@ -122,6 +126,8 @@ public class SceneLib {
     public static var ayaneFollower:AyaneFollower = new AyaneFollower();
 
     public static var bashemathScene:BashemathFollower = new BashemathFollower();
+    
+    public static var belisa:BelisaFollower = new BelisaFollower();
 
     public static var ceraphScene:CeraphScene = new CeraphScene();
 
@@ -148,6 +154,8 @@ public class SceneLib {
     public static var excelliaFollower:ExcelliaFollower = new ExcelliaFollower();
 
     public static var exgartuan:Exgartuan = new Exgartuan();
+	
+	public static var forgefatherScene:Forgefather = new Forgefather();
 
     public static var galiaFollower:GaliaFollower = new GaliaFollower();
 
@@ -160,8 +168,6 @@ public class SceneLib {
     public static var helSpawnScene:HelSpawnScene = new HelSpawnScene();
 
     public static var holliScene:HolliScene = new HolliScene();
-
-    public static var woodElves:WoodElves = new WoodElves();
 
     public static var isabellaScene:IsabellaScene = new IsabellaScene();
 
@@ -182,6 +188,8 @@ public class SceneLib {
     public static var konstantin:Konstantin = new Konstantin();
 
     public static var latexGirl:LatexGirl = new LatexGirl();
+    
+    public static var lily:LilyFollower = new LilyFollower();
 
     public static var lunaFollower:LunaFollower = new LunaFollower();
 
@@ -227,6 +235,8 @@ public class SceneLib {
 
     public static var tifaFollower:TifaFollower = new TifaFollower();
 
+    public static var tyrania:TyrantiaFollower = new TyrantiaFollower();
+
     public static var urta:Urta = new Urta();
 
     public static var urtaHeatRut:UrtaHeatRut = new UrtaHeatRut();
@@ -239,11 +249,19 @@ public class SceneLib {
 
     public static var vapula:Vapula = new Vapula();
 
+    //public static var waizabi:WaizAbiFollower = new WaizAbiFollower();
+
+    public static var woodElves:WoodElves = new WoodElves();
+
+    public static var mindbreaker:Mindbreaker = new Mindbreaker();
+
     public static var zenjiScene:ZenjiScenes = new ZenjiScenes();
 
     public static var sharkgirlScene:SharkGirlScene = new SharkGirlScene();
 
     public static var scyllaScene:ScyllaScene = new ScyllaScene();
+
+    public static var trollVillage:TrollVillage = new TrollVillage();
 
     public static var bazaar:Bazaar = new Bazaar();
 
@@ -283,7 +301,13 @@ public class SceneLib {
 	
 	public static var glacialYuShop:YuWinterGearShop = new YuWinterGearShop();
 	
+	public static var journeyToTheEast:JourneyToTheEast = new JourneyToTheEast();
+	
+	public static var adventureGuild:AdventurerGuild = new AdventurerGuild();
+	
 	public static var fleshGolemScenes:FleshGolemScene = new FleshGolemScene();
+
+    public static var uniqueSexScene:UniqueSexScenes = new UniqueSexScenes();
 
     public function SceneLib() {
     }

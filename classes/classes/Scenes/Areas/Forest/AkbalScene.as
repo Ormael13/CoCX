@@ -8,12 +8,12 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
-import classes.Scenes.UniqueSexScenes;
+import classes.Items.Armors.SuccubusArmor;
+import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 public class AkbalScene extends BaseContent
 	{
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-
 		public function AkbalScene()
 		{
 		}
@@ -108,17 +108,41 @@ public class AkbalScene extends BaseContent
 						addButton(1, "Take Vaginally", vagoo);
 						addButton(2, "Force Lick", vagooLick);
 					}
-					if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) {
-						bikiniTits = (player.armor as LustyMaidensArmor).lustyMaidenPaizuri;
-						addButton(3, "B.Titfuck", bikiniTits);
-					}
-					if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
-					//Rape / Don't Rape
+					LustyMaidensArmor.addTitfuckButton(3);
+					SceneLib.uniqueSexScene.pcUSSPreChecksV2(akbalDefeated2);
+										//Rape / Don't Rape
 					//EngineCore.simpleChoices("Butt-fuck", buttFuck, "Take Vaginally", vagoo, "Force Lick", vagooLick, "B.Titfuck", bikiniTits, );
 					return;
 				}
 			}
 			cleanupAfterCombat();
+		}
+		public function akbalDefeated2():void {
+			menu();
+			addButton(14, "Leave", cleanupAfterCombat);
+			if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
+				outputText("You walk around Akbal's beaten and lust crazed form with a smile on your face. The demon's growl continues as he awaits your judgment.");
+				outputText("\n\nDo you rape him?");
+				var vagoo:Function =null;
+				var vagooLick:Function =null;
+				var buttFuck:Function =null;
+				var bikiniTits:Function =null;
+				if (player.hasCock()) {
+					buttFuck = rapeAkbal;
+				addButton(0, "Butt-fuck", buttFuck);
+				}
+				if (player.hasVagina()) {
+					vagoo = girlsRapeAkbal;
+					vagooLick = rapeAkbalForcedFemaleOral;
+					addButton(1, "Take Vaginally", vagoo);
+					addButton(2, "Force Lick", vagooLick);
+			}
+				LustyMaidensArmor.addTitfuckButton(3);
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(akbalDefeated2);
+								//Rape / Don't Rape
+			//EngineCore.simpleChoices("Butt-fuck", buttFuck, "Take Vaginally", vagoo, "Force Lick", vagooLick, "B.Titfuck", bikiniTits, );
+				return;
+			}
 		}
 
 		public function akbalWon(hpVictory:Boolean,pcCameWorms:Boolean):void{
@@ -378,12 +402,12 @@ public class AkbalScene extends BaseContent
 				outputText(images.showImage("akbal-deepwoods-male-rapeakbal"));
 				outputText("Akbal grunts as you smash his face into the ground.  At your command he raises his hind quarters, allowing you a perfect view of his tight pucker.  From the looks of it, his tightly sealed rim would look at home on a virgin.\n\n");
 				//[Small penis (7 inches or less)]
-				if (player.cockArea(0) < 13)
+				if (player.biggestCockArea() < 13)
 				{
 					outputText("You first poke it with your finger, causing Akbal to flinch at the sensation.  Taking your [cock] in hand, you shove it in without hesitation or mercy.  The virgin-like hole clamps shut and Akbal hisses in pain as you force him open.  In no time at all you're sawing your [cock] in and out of the demon's tight hole, relishing in the way it quivers and squirms around your embedded [cock].\n\n");
 				}
 				//[Medium penis (8-12 inches)]
-				else if (player.cockArea(0) < 25)
+				else if (player.biggestCockArea() < 25)
 				{
 					outputText("A light tap of your finger causes the tiny hole to constrict and Akbal's entire body flinches in fear.  You grab your [cock] with a cruel smile.  As you shove yourself into his tight pucker, you aren't surprised to find that your [cock] is barely able to breach the tightly sealed walls.  Grunting with effort you slowly inch forward, Akbal howling and squirming beneath you as he is taken without regard for his own pleasure.\n\n");
 					outputText("After a dozen achingly slow thrusts, Akbal's asshole begins to loosen and you start sawing your [cock] in and out of his pucker with force. The demon cat's howls fluctuate between yelps of pain and moans of pleasure.\n\n");
@@ -555,7 +579,7 @@ public class AkbalScene extends BaseContent
 				outputText("Your body trembles as the demon sags down onto your lower back, clutching your equine hips lightly, as you want nothing more but to simply sag down with him, his weight oddly comfortable on your back. Shaking your head to clear it, you begin to turn round, careful not to dislodge Akbal from his obviously comfortable position as you feel him slowly start to shift back into his quadruped form, his dripping shaft slipping out of your pussy with an obscene slurping noise. Lowering your tail, you let the demon slip off, fumbling with the vines around his feet, releasing him as he sprawls on the ground in pure contentment. As you straighten up and start to head back to camp, you realize you feel the same way; perfectly content. Maybe it wouldn't be a bad idea to look out for the God in the future...");
 				//Imp pregnancy
 				//Preggers chance!
-				player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP, 101);
+				if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP, 101);
 				player.cuntChange(monster.cockArea(0), true, true, false);
 				player.sexReward("cum", "Dick");
 				dynStats("cor", 1);
@@ -651,7 +675,7 @@ public class AkbalScene extends BaseContent
 				dynStats("cor", 1);
 				//Imp pregnancy
 				//Preggers chance!
-				player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP, 101);
+				if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP, 101);
 			}
 			cleanupAfterCombat();
 		}
@@ -747,7 +771,7 @@ public class AkbalScene extends BaseContent
 		//[First Encounter]
 		public function supahAkabalEdition():void
 		{
-			spriteSelect(2);
+			spriteSelect(SpriteDb.s_akbal);
 			//Make sure that the buttchange is set correctly
 			//when submitting.  Gotta stretch em all!
 			monster.createCock();
@@ -793,7 +817,7 @@ public class AkbalScene extends BaseContent
 		//[Talk]
 		private function superAkbalioTalk():void
 		{
-			spriteSelect(2);
+			spriteSelect(SpriteDb.s_akbal);
 			clearOutput();
 			outputText("After a few moments of silence you ask, \"<i>What do you mean, 'submit'?</i>\" Akbal grins, revealing a row of wicked ivory teeth as he opens his mouth. You suddenly feel the demon's powerful body pinning you down, a wide tongue licking your neck and claws tickling your back in a way that is both horrifying and sensual. Yet after a moment of taking it in, you realize that he is still there in front of you, unmoved and grinning. You can guess what the image means: he wants you to become his mate for a day to make up for invading his territory.  What do you do?\n\n");
 
@@ -804,7 +828,7 @@ public class AkbalScene extends BaseContent
 		//[Encounter if previously submitted]
 		private function repeatAkbalPostSubmission():void
 		{
-			spriteSelect(2);
+			spriteSelect(SpriteDb.s_akbal);
 			clearOutput();
 			outputText("As you walk through the forest, you hear a purring coming from behind you.  Turning around reveals that Akbal has come to find you.  He uses his head to push you in the direction of his territory, obviously wanting to dominate you again.\n\n");
 			outputText("What do you do?");
@@ -815,7 +839,7 @@ public class AkbalScene extends BaseContent
 		//[Deny]
 		private function akbalDeny():void
 		{
-			spriteSelect(2);
+			spriteSelect(SpriteDb.s_akbal);
 			clearOutput();
 			outputText("You shake your head and rub the lust-filled jaguar behind the ear as you tell him you're busy.  The demon's eyes roll, and he licks your [leg] before his eyes find an imp in the trees above the two of you.\n\n");
 			outputText("Knowing he's found a new toy, Akbal allows you to leave unmolested.");
@@ -825,7 +849,7 @@ public class AkbalScene extends BaseContent
 		//[Encounter if previously fought and won/raped him]
 		private function ackbalRepeatAfterWin():void
 		{
-			spriteSelect(2);
+			spriteSelect(SpriteDb.s_akbal);
 			clearOutput();
 			outputText("As you walk through the forest, you hear a snarl and look up just in time to dodge a surprise attack by the jaguar demon, Akbal.  Your ");
 			if (player.isTaur())
@@ -839,7 +863,7 @@ public class AkbalScene extends BaseContent
 		//[Encounter if previously fought and lost]
 		private function ackbalRepeatAfterLoss():void
 		{
-			spriteSelect(2);
+			spriteSelect(SpriteDb.s_akbal);
 			clearOutput();
 			outputText("A chorus of laughter sounds inside your mind as the jaguar demon, Akbal, drops to the ground in front of you.  His masculine voice says, \"<i>Well, if it isn't the defiant welp who, in all their great idiocy, has wandered into my territory again.  Will you submit, or do I have to teach you another harsh lesson?</i>\"\n\n");
 
@@ -850,7 +874,7 @@ public class AkbalScene extends BaseContent
 		//[Fight]
 		private function startuAkabalFightomon():void
 		{
-			spriteSelect(2);
+			spriteSelect(SpriteDb.s_akbal);
 			clearOutput();
 			outputText("You ready your [weapon] and prepare to battle the demon jaguar.");
 			//[battle ensues]
@@ -861,7 +885,7 @@ public class AkbalScene extends BaseContent
 		//[Submit]
 		private function akbalSubmit():void
 		{
-			spriteSelect(2);
+			spriteSelect(SpriteDb.s_akbal);
 			player.slimeFeed();
 			flags[kFLAGS.AKBAL_SUBMISSION_COUNTER]++;
 			flags[kFLAGS.AKBAL_SUBMISSION_STATE] = 2;
@@ -1098,7 +1122,7 @@ public class AkbalScene extends BaseContent
 		//this before going to camp?
 		public function akbalSubmissionFollowup():void
 		{
-			spriteSelect(2);
+			spriteSelect(SpriteDb.s_akbal);
 			clearOutput();
 			if (flags[kFLAGS.AKBAL_SUBMISSION_COUNTER] < 4)
 			{
@@ -1466,7 +1490,7 @@ public class AkbalScene extends BaseContent
 			outputText("\n\nYou look back at your new bitch with a grin while he regains his senses.  As you leave the forest, you hear a promise from Akbal’s chorus of voices, \"<i>You will regret this... Champion.</i>\"");
 			player.sexReward("cum", "Vaginal");
 			dynStats("cor", 3);
-			if (player.hasVagina()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP, 101);
+			if (player.hasVagina() && !player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP, 101);
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -1593,7 +1617,7 @@ public class AkbalScene extends BaseContent
 				}
 				player.sexReward("cum", "Dick");
 				dynStats("cor", 3);
-				if (player.hasVagina()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP, 101);
+				if (player.hasVagina() && !player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP, 101);
 				doNext(camp.returnToCampUseOneHour);
 			}
 		}
@@ -1691,7 +1715,7 @@ public class AkbalScene extends BaseContent
 				if (player.gender == 0)
 					outputText("\n\nYour body begins to convulse as you call out. Your [ass] feels as though the demon’s dick is a lightning rod expelling a constant torrent of elation.");
 				outputText("\n\nYour [vagOrAss] is blissfully sore and crazy sensitive as you ease yourself off the demon’s wonderful dick.  With a smile on your [face] you gather your [armor] and turn to leave the forest.  Lost in giddy elation you walk, each movement sending an almost painful jolt of post orgasm pleasure through your [vagOrAss].  It isn’t until you hear the cackling of imps and goblins that you remember that you left Akbal bound and vulnerable... oops.");
-				if (player.hasVagina()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP, 101);
+				if (player.hasVagina() && !player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP, 101);
 			}
 			player.sexReward("cum");
 			dynStats("cor", 3);
@@ -1844,8 +1868,7 @@ public class AkbalScene extends BaseContent
 
 				outputText("\n\nWithout a backwards glance, you gather your [armor] and leave the forest with a big smile on your [face].");
 			}
-			if (player.hasVagina())
-				player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP, 101);
+			if (player.hasVagina() && !player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP, 101);
 			player.sexReward("cum");
 			dynStats("cor", 3);
 			doNext(camp.returnToCampUseOneHour);

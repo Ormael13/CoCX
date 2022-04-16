@@ -25,6 +25,7 @@ public class VolcanicCrag extends BaseContent
 		
 		public function exploreVolcanicCrag():void {
 			flags[kFLAGS.DISCOVERED_VOLCANO_CRAG]++;
+			if (!player.hasPerk(PerkLib.FireAffinity) && !player.hasPerk(PerkLib.AffinityIgnis)) ConstantHeatConditionsTick();
 			doNext(playerMenu);
 			
 			var choice:Array = [];
@@ -51,12 +52,23 @@ public class VolcanicCrag extends BaseContent
 			}
 			//Helia monogamy fucks
 			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !SceneLib.helScene.followerHel()) {
+				VolcanicCragConditions();
 				SceneLib.helScene.helSexualAmbush();
 				return;
 			}
 			//Etna
 			if (flags[kFLAGS.ETNA_FOLLOWER] < 1 && flags[kFLAGS.ETNA_TALKED_ABOUT_HER] == 2 && !player.hasStatusEffect(StatusEffects.EtnaOff) && rand(5) == 0 && (player.level >= 20)) {
+				VolcanicCragConditions();
 				SceneLib.etnaScene.repeatYandereEnc();
+				return;
+			}
+			//Forgefather
+			if (flags[kFLAGS.ONYX_PATH] > 0 && flags[kFLAGS.SAPPHIRE_AFFECTION] > 5 && (player.hasPerk(PerkLib.GargoylePure) || player.hasPerk(PerkLib.GargoyleCorrupted)) && flags[kFLAGS.FORGEFATHER_MOVED_TO_TEMPLE] != 1) {
+				VolcanicCragConditions();
+				if (flags[kFLAGS.MET_FORGEFATHER] == 0) {
+					SceneLib.forgefatherScene.meetForgefather();
+				}
+				else SceneLib.forgefatherScene.repeatForgefather();
 				return;
 			}
 			select = choice[rand(choice.length)];
@@ -65,7 +77,10 @@ public class VolcanicCrag extends BaseContent
 					behemothScene.behemothIntro();
 					break;
 				case 1:
-					if (flags[kFLAGS.HEL_PHOENIXES_DEFEATED] > 0) phoenixScene.encounterPhoenix3();
+					if (flags[kFLAGS.HEL_PHOENIXES_DEFEATED] > 0) {
+						VolcanicCragConditions();
+						phoenixScene.encounterPhoenix3();
+					}
 					else behemothScene.behemothIntro();
 					break;
 				case 2:
@@ -79,6 +94,7 @@ public class VolcanicCrag extends BaseContent
 				case 4: //True Fire Golems
 					clearOutput();
 					outputText("As you take a stroll, from nearby cracks emerge group of golems. Looks like you have encountered some true fire golems! You ready your [weapon] for a fight!");
+					VolcanicCragConditions();
 					startCombat(new GolemsTrueFire());
 					break;
 				case 5:
@@ -96,6 +112,19 @@ public class VolcanicCrag extends BaseContent
 					dynStats("spe", .5);
 					doNext(camp.returnToCampUseOneHour);
 			}
+		}
+
+		public function VolcanicCragConditions():void {
+			if (!player.hasPerk(PerkLib.FireAffinity) && !player.hasPerk(PerkLib.AffinityIgnis)) player.createStatusEffect(StatusEffects.ConstantHeatConditions,0,0,0,0);
+		}
+
+		public function ConstantHeatConditionsTick():void {
+			var HPD:Number = 0.05;
+			if (player.hasPerk(PerkLib.ColdAffinity)) HPD *= 2;
+			HPD *= player.maxHP();
+			HPD = Math.round(HPD);
+			outputText("Hot environment slowly seeps into your body. ");
+			player.takeFireDamage(HPD, true);
 		}
 		
 		public function partsofTripxiFatbilly():void {

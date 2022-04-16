@@ -3,14 +3,10 @@ import classes.*;
 import classes.BodyParts.Ears;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 public class BunnyGirl extends BaseContent{
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-
-		public function isItEaster():Boolean {
-			return (date.date >= 30 && date.date <= 31 && date.month == 2) || (date.month == 3 && date.date <= 1);
-		}
 
 //Easter Bunny
 //5'4", small B cup breasts.
@@ -19,7 +15,7 @@ public class BunnyGirl extends BaseContent{
 
 public function bunnbunbunMeet():void {
 	clearOutput();
-	spriteSelect(13);
+	spriteSelect(SpriteDb.s_easter_bunneh);
 	if(flags[kFLAGS.MET_BUNBUN] == 0) {
 		outputText("A ");
 		if(player.tallness > 64) outputText("short ");
@@ -86,7 +82,7 @@ public function bunnbunbunMeet():void {
 }
 //[Talk]
 private function talkToBunnyBunBun():void {
-	spriteSelect(13);
+	spriteSelect(SpriteDb.s_easter_bunneh);
 	flags[kFLAGS.MET_BUNBUN]++;
 	clearOutput();
 	outputText("You slowly introduce yourself, and let the bunny-girl know that you mean her no harm. She doesn't move until you finish, but as you conclude she visibly relaxes and nods.  It doesn't stop her tail from twitching, and if anything, her nose joins it in twitching, but she asks, \"<i>How is it you can see me?  I've got a lot of eggs to hide and normally no one sees me.</i>\"\n\n");
@@ -125,7 +121,7 @@ private function talkToBunnyBunBun():void {
 }
 //[Rape Her]
 private function rapeBunBun():void {
-	spriteSelect(13);
+	spriteSelect(SpriteDb.s_easter_bunneh);
 	clearOutput();
 	if(player.spe < 60) {
 		outputText("You lunge forward off your [feet], trying to tackle and pin the poor girl, but at the first sign of movement from you, she bounds off in the other direction!  She's hopping so fast there's no way you could possibly catch her, and in a matter of seconds you're left totally alone.  Well, perhaps not TOTALLY alone – there's one small egg nestled in the grass.  It fell from the bunny's basket in her haste to flee!");
@@ -162,14 +158,35 @@ private function rapeBunBun():void {
 			addButton(3, "69",bunbun69);
 			outputText("  Sixty-nine her?");
 		}
-		if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+		SceneLib.uniqueSexScene.pcUSSPreChecksV2(rapeBunBun2);
 		addButton(14, "Leave", camp.returnToCampUseOneHour);
 	}
+}
+public function rapeBunBun2():void {
+	menu();
+	//Dick requires one 40 area or smaller.
+	if (player.hasVagina()) {
+		addButton(0, "Your Vagina",bunbunFucksYourVag);
+		outputText("  Her dick in your vagina?");
+	}
+	outputText("  Her dick in your ass?)");
+	addButton(1, "Your Ass",bunbunFucksPCInAss);
+	if (player.cockThatFits(40) >= 0) {
+		addButton(2, "Her Vagina",bunbunGetsFucked);
+		outputText("  Fuck her vagina?");
+	}
+	else if (player.cockTotal() > 0) outputText("  <b>You're too big to fit inside her...</b>");
+	if (player.gender > 0) {
+		addButton(3, "69",bunbun69);
+		outputText("  Sixty-nine her?");
+	}
+	SceneLib.uniqueSexScene.pcUSSPreChecksV2(rapeBunBun2);
+	addButton(14, "Leave", camp.returnToCampUseOneHour);
 }
 
 //[Take Dick in Vag Fukked]
 private function bunbunFucksYourVag():void {
-	spriteSelect(13);
+	spriteSelect(SpriteDb.s_easter_bunneh);
 	clearOutput();
 	outputText("A anticipatory grin widens across your [face] as you speedily disrobe, discarding your " + player.armorName);
 
@@ -256,7 +273,7 @@ private function bunbunFucksYourVag():void {
 
 //[Take Dick In A]
 private function bunbunFucksPCInAss():void {
-	spriteSelect(13);
+	spriteSelect(SpriteDb.s_easter_bunneh);
 	clearOutput();
 	outputText("You get a very naughty idea and silently discard your [armor], tossing it aside as you turn around and present your [ass] to the bunny-girl.  With a lewd shake, you tease her and give her a good view of your " + assholeDescript() + " while it lowers closer and closer to the turgid bunny-cock, just inches away.  Drops of clear pre-cum roll down her shaft as it twitches eagerly, and the girl watches you through a gleam of sexual excitement while her shaft gets closer and closer to your rear entrance.  You let your [legs] relax a little until it's pressing tightly against your sphincter, feeling it slather pre-cum in preparation for the coming penetration.\n\n");
 
@@ -345,7 +362,7 @@ private function bunbunFucksPCInAss():void {
 
 //FUCK DAT BUNNYBUNBUNBUN.
 private function bunbunGetsFucked():void {
-	spriteSelect(13);
+	spriteSelect(SpriteDb.s_easter_bunneh);
 	clearOutput();
 	//Requires wang that fits
 	var x:Number = player.cockThatFits(40);
@@ -427,7 +444,7 @@ private function bunbunGetsFucked():void {
 }
 
 private function bunbun69():void {
-	spriteSelect(13);
+	spriteSelect(SpriteDb.s_easter_bunneh);
 	clearOutput();
 	//Centaur
 	if(player.isTaur()) {

@@ -119,7 +119,9 @@ private function fapArenaPageII():void {
 		//5% chance of losing no matter what.
 		//If that check fails,
 		//Let S be the PC's sensitivity
-		var s:Number = player.sens;
+		var s:Number = 0;
+		if (player.sens > 100) s = Math.round((player.effectiveSensitivity() / player.sens) * 100);
+		else s = player.sens;
 		//D the number of hours since he last came
 		var d:Number = player.hoursSinceCum;
 		var c:Number = 0;

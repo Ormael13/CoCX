@@ -6,17 +6,16 @@ package classes.Scenes.NPCs
 {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 
 public class TedScenes extends NPCAwareContent
 	{
 		
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		
+				
 		public function TedScenes() 
 		{
 		}
-		
+
 public function tedWrath(changes:Number = 0):Number {
 	flags[kFLAGS.TED_WRATH] += changes;
 	if (flags[kFLAGS.TED_WRATH] > 100) flags[kFLAGS.TED_WRATH] = 100;
@@ -59,14 +58,15 @@ public function introPostHiddenCave():void {
 	startCombat(new Ted());
 	doNext(playerMenu);
 }
+
 public function defeatedTedPostHiddenCave():void {
 	if (flags[kFLAGS.TED_LVL_UP] >= 3) {
 		outputText(".");
 		outputText("\n\n\"<i>My Dao Heart is firm.</i>\" he recite before escaping with help of smokescreen.\n\n");//WIP post combat version
 		menu();
-		if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 		addButton(14, "Leave", cleanupAfterCombat);
-	}
+		SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatedTedPostHiddenCave);
+			}
 	if (flags[kFLAGS.TED_LVL_UP] == 2) {
 		outputText(".");
 		outputText("\n\n\"<i>My Dao Heart is firm.</i>\" he recite before escaping with help of smokescreen.\n\n");//WIP post combat version

@@ -80,7 +80,7 @@ public class Imp extends Monster
 				}
 			}
 			outputText("\n");
-			if (player.lust >= player.maxLust())
+			if (player.lust >= player.maxOverLust())
 				doNext(SceneLib.combat.endLustLoss);
 			else doNext(EventParser.playerMenu);
 		}
@@ -121,7 +121,7 @@ public class Imp extends Monster
 				}
 			}
 			outputText("\n");
-			if (player.lust >= player.maxLust())
+			if (player.lust >= player.maxOverLust())
 				doNext(SceneLib.combat.endLustLoss);
 			else doNext(EventParser.playerMenu);
 		}

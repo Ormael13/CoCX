@@ -23,12 +23,12 @@ import classes.internals.*;
 				return;
 			}
 			//("Misdirection"
-			if(player.findPerk(PerkLib.Misdirection) >= 0 && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
+			if(player.hasPerk(PerkLib.Misdirection) && rand(100) < 10 && (player.armorName == "red, high-society bodysuit" || player.armorName == "Fairy Queen Regalia")) {
 				outputText("The girl wades in for a swing, but you deftly misdirect her and avoid the attack. She recovers quickly, spinning back at you.");
 				return;
 			}
 			//Determine if cat'ed
-			if(player.findPerk(PerkLib.Flexibility) >= 0 && rand(100) < 6) {
+			if(player.hasPerk(PerkLib.Flexibility) && rand(100) < 6) {
 				outputText("The girl wades in for a swing, but you deftly twist your flexible body out of the way. She recovers quickly, spinning back at you.");
 				return;
 			}
@@ -65,12 +65,22 @@ import classes.internals.*;
 		private function shouldraLustAttack():void {
 			if(rand(2) == 0) outputText("The girl spins away from one of your swings, her tunic flaring around her hips. The motion gives you a good view of her firm and moderately large butt. She notices your glance and gives you a little wink.\n");
 			else outputText("The girl's feet get tangled on each other and she tumbles to the ground. Before you can capitalize on her slip, she rolls with the impact and comes up smoothly. As she rises, however, you reel back and raise an eyebrow in confusion; are her breasts FILLING the normally-loose tunic? She notices your gaze and smiles, performing a small pirouette on her heel before squaring up to you again. Your confusion only heightens when her torso comes back into view, her breasts back to their normal proportions. A trick of the light, perhaps? You shake your head and try to fall into the rhythm of the fight.\n");
-			player.dynStats("lus", (8+player.lib/10));
+			player.dynStats("lus", (8+player.effectiveLibido()/10));
 		}
 		//(magic attack)
 		private function shouldraMagicLazers():void {
 			outputText("Falling back a step, the girl raises a hand and casts a small spell. From her fingertips shoot four magic missiles that slam against your skin and cause a surprising amount of discomfort. ");
-			var damage:Number = player.takeMagicDamage(this.inte + rand(10), true);
+			var damage:Number = this.inte + rand(11);
+			player.takeMagicDamage(damage, true);
+			player.takeMagicDamage(damage, true);
+			player.takeMagicDamage(damage, true);
+			player.takeMagicDamage(damage, true);
+			if (player.hasStatusEffect(StatusEffects.ChargeWeapon) || player.hasStatusEffect(StatusEffects.ChargeArmor) || player.statStore.hasBuff("Might") || player.statStore.hasBuff("Blink")) {
+				if (player.hasStatusEffect(StatusEffects.ChargeWeapon)) player.removeStatusEffect(StatusEffects.ChargeWeapon);
+				else if (player.hasStatusEffect(StatusEffects.ChargeArmor)) player.removeStatusEffect(StatusEffects.ChargeArmor);
+				else if (player.statStore.hasBuff("Might")) player.statStore.removeBuffs("Might");
+				else player.statStore.removeBuffs("Blink");
+			}
 			outputText("\n");
 		}
 

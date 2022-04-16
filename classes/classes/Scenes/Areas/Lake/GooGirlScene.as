@@ -7,14 +7,13 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.Beach.GooGirlBeach;
 import classes.Scenes.SceneLib;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 import classes.internals.SaveableState;
+import classes.display.SpriteDb;
 
 public class GooGirlScene extends AbstractLakeContent
 	{
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-
-		public static var GooLocation:String;
+				public static var GooLocation:String;
 
 		public function GooGirlScene()
 		{
@@ -40,7 +39,7 @@ public class GooGirlScene extends AbstractLakeContent
 		public function encounterGooGirl():void
 		{
 			clearOutput();
-			spriteSelect(69);
+			spriteSelect(SpriteDb.s_googirlsprite);
 			GooLocation = "lake";
 			outputText("As you walk around the "+GooLocation+", you notice a pale red light pulsing in the ");
 			if (!flags[kFLAGS.FACTORY_SHUTDOWN] == 2) outputText("sapphire ");
@@ -58,7 +57,7 @@ public class GooGirlScene extends AbstractLakeContent
 		public function encounterGooGirlBeach():void
 		{
 			clearOutput();
-			spriteSelect(69);
+			spriteSelect(SpriteDb.s_googirlsprite);
 			GooLocation = "beach";
 			outputText("As you walk around the "+GooLocation+", you notice a pale red light pulsing in the waters. You pause, trying to figure out what the shape might be. Just under the surface of the seawater, there appears to be a fist-sized heart shedding a crimson glow. Leaning closer, you gaze down into your reflection only to find your face rising up with pursed lips, trying to kiss you! You jerk backwards and the pseudo-head quivers, resolving its face into a gooey-looking girl, her ");
 			outputText(gooColor() + " slime body sculpting itself into a humanoid shape. The girl curiously tilts her head to one side, as if trying to figure out why you're backing away, before she happily surges forward!");
@@ -328,7 +327,6 @@ public class GooGirlScene extends AbstractLakeContent
 				var temp3:Function =null;
 				var valeria:Function = SceneLib.valeria.valeriaAndGooThreeStuff;
 				if (player.armorName != "goo armor" || player.isButtPregnant() || player.isPregnant()) valeria = null;
-				if (player.pcCanUseUniqueSexScene()) temp3 = uniquuuesexscene.pcUniqueSexScenesChoiceMenu;
 				var eggs:Function =null;
 				if (player.canOvipositBee()) eggs = layBeeEggsInGoo;
 				if (player.hasCock()) {
@@ -386,7 +384,8 @@ public class GooGirlScene extends AbstractLakeContent
 					if (flags[kFLAGS.TIMES_VALERIA_GOO_THREESOMED] == 0) outputText("Do you offer a threesome with the girl to Valeria? It could get a little weird....");
 					else outputText("Do you offer a threesome with the girl to Valeria? She'll likely try flood with you with more sloshing, shuddering pleasure than your body can handle.");
 				}
-				choices(sex1S, sex1N, sex2S, sex2N, sex3S, sex3N, sex4S, sex4N, "Lay Eggs", eggs, "", null, "Valeria", valeria, "Make Slave", gooTF, "U. Sex Scenes", temp3, "Leave", cleanupAfterCombat);
+				choices(sex1S, sex1N, sex2S, sex2N, sex3S, sex3N, sex4S, sex4N, "Lay Eggs", eggs, "", null, "Valeria", valeria, "Make Slave", gooTF, "", null, "Leave", cleanupAfterCombat);
+	            SceneLib.uniqueSexScene.pcUSSPreChecksV2(beatUpGoo);
 			}
 		}
 
@@ -452,7 +451,7 @@ public class GooGirlScene extends AbstractLakeContent
 			outputText("Quickly stripping, you let your [cocks] slap against her turbulent membrane, the warm muck gurgling wetly at your turgid stiffness. Sinking your fingers into the girl's yielding breasts, you push forward, pulsing flesh sliding into the " + gooColor2() + " depths of her expanded cleavage. The goo-girl's chest sucks eagerly at you, pliant slime drooling warm " + gooColor5() + " beads of unnecessary lubrication as you pick up your pace. Staring at your [cocks] moving in and out of the girl's chest through her transparent skin, you are surprised to see her body shifting further under your pounding. A vertical slit opens between her breasts and her membrane quickly folds itself in delicate petals around the edges. Your next thrust pushes into the new cavity and the organic texture confirms your suspicion: she's created a vagina between her breasts for you to fuck!\n\n");
 
 			outputText("Slowing yourself to enjoy the experience, you note that she seems to have made her new cunny too tight- every inch you push in displaces her mass, forming a bulge beneath her abdomen. Without even pausing, you lower yourself to sit atop the girl's lap and jam your " + cockDescript(x) + "  into her narrow tunnel. The bulge rises into your dripping pussy, her moist shaft conforming to your inner walls for a moment before stiffening into a replica of your own dick.  ");
-			player.cuntChange(player.cockArea(0), true, false, true);
+			player.cuntChange(player.biggestCockArea(), true, false, true);
 			outputText("Every time you withdraw from the squirming slime, she pulls out of you and every time you slam back in, your pussy fills with the aching delight of the gooey copy-cock. Through the girl's mimicking body, you've found a way to fuck yourself by proxy! The thought fuels your pace as you accelerate to a fevered pitch. Slamming the " + gooColor5() + " mirror of your " + cockDescript(x) + " into your sloppy cunt, you ride yourself with reckless abandon.  The force of your fucking is too much for the goo-girl and she silently cries out in ecstatic bliss before the pulsing scarlet heart in her chest is violently ejected from her body, splashing a hundred yards away in the "+GooLocation+"'s depths. With no core, the empty girl's face becomes wanton, little more than a lusty slut unable to sate her need to fuck, her tongue dangling out of the side of her mouth.\n\n");
 
 			outputText("Before long, you find yourself mimicking the heartless whore, eyes lidded heavily and mouth agape at the doubled sensations of the hard fucking you're giving yourself. You know your body's sensitive weaknesses too well, it seems, and you're unable to hold out for very long. The slime-duplicate cock that strokes every delicate inch of your drooling pussy blends into the slippery cunt between the goo's breasts, tightening in pulsing rings of lubricated, velvet muscle. When you cum, both organs twitch in orgasmic spree, the feeling of filling and being filled scrambling your mind with sensory overload. Thick globs of cum splurt into the slime girl's body, pushing equally huge bubbles of seething hot muck into your clenched lower lips, splooshing gunk plopping against your cervix and sloshing together into one gurgling blob of slime-ejaculate. Wrapping her arms around you in a big, cheerful hug, the mindless shell keeps you pinned down until your cunt aches and your dick begins to stiffen again. Before a second round, however, the goo loses her consistency, the lack of a nucleus melting her wobbling form into a seed-saturated sludge that wiggles back toward the water's edge. You rise, panting hotly, deciding it's time to move on.");

@@ -16,21 +16,23 @@ public class SkinLayer extends BodyPart {
 		return _color || creature.hairColor;
 	}
 	public function set color(value:String):void {
-		_color = value == creature.hairColor ? "" : value;
+		_color = value;
 	}
 	public function get color2():String {
 		return _color2 || color;
 	}
 	public function set color2(value:String):void {
-		_color2 = value == color ? "" : value;
+		_color2 = value;
 	}
 	public function get color2raw():String {
 		return _color2;
 	}
 	public function set color2raw(value:String):void {
-		_color2 = value == color ? "" : value;
+		_color2 = value;
 	}
 	public function defaultDesc():String {
+        //if it throws an error hear, it means Svalkash fucked up again.
+        // Add the check like "if (Skin.SkinTypes[type])" then to check for undefined        
 		return Skin.SkinTypes[type].name || "skin";
 	}
 	public function defaultAdj():String {
@@ -41,19 +43,19 @@ public class SkinLayer extends BodyPart {
 		return _desc || defaultDesc();
 	}
 	public function set desc(value:String):void {
-		_desc = value == defaultDesc() ? "" : value;
+		_desc = value;
 	}
 	public function get descRaw():String {
 		return _desc;
 	}
 	public function set descRaw(value:String):void {
-		_desc = value == defaultDesc() ? "" : value;
+		_desc = value;
 	}
 	public function get adj():String {
 		return _adj;
 	}
 	public function set adj(value:String):void {
-		_adj = value == defaultAdj() ? "" : value;
+		_adj = value;
 	}
 	[Deprecated("Use color, not tone")]
 	public function get tone():String {
@@ -82,9 +84,9 @@ public class SkinLayer extends BodyPart {
 	}
 	override public function restore(keepColor:Boolean = true):void {
 		super.restore(keepColor);
-		if (!keepColor) color = "no";
+		if (!keepColor) color = "";
 		adj  = "";
-		desc = "skin";
+		desc = "";
 	}
 	public function SkinLayer(skin:Skin) {
 		super(skin.creature, ["adj", "desc", "color", "color2", "pattern"]);
@@ -102,15 +104,6 @@ public class SkinLayer extends BodyPart {
 
 	override public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
 		super.loadFromObject(o, ignoreErrors);
-		if (_adj == "tattooed") {
-			pattern = Skin.PATTERN_MAGICAL_TATTOO;
-		} else if (_adj == "covered with various intricate battle tattoos") {
-			pattern = Skin.PATTERN_BATTLE_TATTOO;
-		} else if (color == "white and black") {
-			color = "white";
-			color2 = "black";
-			pattern = Skin.PATTERN_ORCA_UNDERBODY;
-		}
 	}
 }
 }

@@ -7,13 +7,12 @@ package classes.Scenes.NPCs
 	import classes.*;
 import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.UniqueSexScenes;
+	import classes.Scenes.SceneLib;
 	
 	public class HolliPureScene extends NPCAwareContent
 	{
 	
-	public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-	
+		
 	public function HolliPureScene() 
 	{	
 	}
@@ -42,18 +41,18 @@ public function treeMenu():void {
 		menu();
 		addButton(0, "Destroy It", destroyDatFuckingPlantAtP2);
 		if (player.fatigue + 50 < player.maxFatigue()) addButton(1, "Water It", waterIt);
-		if (player.HP > 150 && player.soulforce>= 50 && player.findPerk(PerkLib.SoulApprentice) >= 0) addButton(2, "Use SFIB", useSouforceInfusedBlood);
+		if (player.HP > 150 && player.soulforce>= 50 && player.hasPerk(PerkLib.SoulApprentice)) addButton(2, "Use SFIB", useSouforceInfusedBlood);
 		addButton(14, "Back", inventory.inventoryMenu);
 	}
 	else if (flags[kFLAGS.FLOWER_LEVEL] == 3) {
 		outputText("The familiar plant has blossomed into a nicely sized tree, though you doubt it has finished growing just yet.  It sports an outstretched canopy with nice, green leaves.  The vaginal flower is still there and is in full bloom, now several feet across and practically dripping with moisture.  Just up the trunk, there's a pair of small, roughly b-cup breasts bulging out of the bark.  They're exquisitely smooth and soft, and they ooze sweet-smelling sap that your tongue would love to taste.  In the canopy above, tentacle vines idly writhe about, though they show no signs of aggression.");
-		if(player.findPerk(PerkLib.DragonFireBreath) >= 0 || player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0 || player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {
+		if(player.hasPerk(PerkLib.DragonFireBreath) || player.hasPerk(PerkLib.FireLord) || player.hasPerk(PerkLib.Hellfire) || player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {
 			outputText("\n\nIt could be burned down with your supernatural fire, but it would definitely tire you.");
 		}
 		menu();
 		addButton(0, "Torch It", torchP3Tree);
 		if (player.fatigue + 50 < player.maxFatigue()) addButton(1, "Water It", waterIt);
-		if (player.HP > 150 && player.soulforce>= 50 && player.findPerk(PerkLib.SoulApprentice) >= 0) addButton(2, "Use SFIB", useSouforceInfusedBlood);
+		if (player.HP > 150 && player.soulforce>= 50 && player.hasPerk(PerkLib.SoulApprentice)) addButton(2, "Use SFIB", useSouforceInfusedBlood);
 		addButton(3, "Drink Sap", drinkThePlantGirlsSap);
 		addButton(14, "Back", inventory.inventoryMenu);
 	}
@@ -80,7 +79,7 @@ public function treeMenu():void {
 		if(player.tentacleCocks() >= 10 && player.lust >= 33) addButton(1, "TentacleBone", fullOnTentacleTasticGangBangForHolli);
 	//	if(player.stamenCocks() >= 10) && player.lust >= 33) addButton(1, "StamenBone", fullOnTentacleTasticGangBangForHolli);
 		if (player.hasVagina() && player.lust >= 33) addButton(2, "Ride Holli", vaginalDomHollisTentacruels);
-		if (player.isAlraune()) addButton(3, "TentacleDuel", uniquuuesexscene.alrauneExtraSceneWithHollicyntiaTentacleDuel);
+		if (player.isAlraune()) addButton(3, "TentacleDuel", SceneLib.uniqueSexScene.alrauneExtraSceneWithHollicyntiaTentacleDuel);
 		else addButtonDisabled(2, "TentacleDuel", "This scene requires to be an alraune of some kind.");
 		addButton(5, "Drink Sap", haveAMapleSyrupSnack);
 		if (flags[kFLAGS.HOLLI_FRUIT] > 0) addButton(6, "Eat A Fruit", eatHolliFruit);
@@ -192,14 +191,14 @@ public function flowerGrowsToP3():void {
 	outputText("  The distinct sound of wood bowing and creaking under new weight catches your ears, and well before you can get to the plant, you can see a leafy canopy stretching towards the sky.  <b>It's grown into a small tree, with bark, leaves, and everything!</b>  Warily, you round one of the ancient standing stones to get a better look.");
 	outputText("\n\nThe first thing you notice is that the weird flower remains, affixed at waist height to the side of the tree.  Glancing further up the smooth, knotless trunk, you see the most surprising thing of all - a pair of almond-colored nipples, perched upon small, tit-like bulges in the wood.  The bark on these globular protrusion is smoother and fairer than the surrounding surface.  On one of them, a trickle of sap has formed into a heavy bead, and it smells sweet, like maple syrup");
 	outputText("\n\nA dollop of something moist landing in your hair startles you from your visual inspection.  Gingerly, you touch your fingers to the wet spot and come away with a thick, viscous fluid that smells faintly musky... and salty...  It's cum!  You recoil, looking up in time to see a half dozen tentacles curling between the branches rubbing against each other.  Well now, your little pet plant is growing up.  There's no easy way to get rid of it now");
-	if(player.findPerk(PerkLib.DragonFireBreath) >= 0 || player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0 || player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {
+	if(player.hasPerk(PerkLib.DragonFireBreath) || player.hasPerk(PerkLib.FireLord) || player.hasPerk(PerkLib.Hellfire) || player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {
 		outputText(", though you suppose you could burn it down with magical fire if you set your mind to it");
 	}
 	flags[kFLAGS.FLOWER_LEVEL] = 3;
 	flags[kFLAGS.FUCK_FLOWER_GROWTH_COUNTER] = 0;
 	outputText(".\n\n<b>What do you do?</b>");
 	menu();
-	if(player.findPerk(PerkLib.DragonFireBreath) >= 0 || player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0 || player.hasStatusEffect(StatusEffects.KnowsWhitefire)) addButton(0, "Torch It", torchP3Tree);
+	if(player.hasPerk(PerkLib.DragonFireBreath) || player.hasPerk(PerkLib.FireLord) || player.hasPerk(PerkLib.Hellfire) || player.hasStatusEffect(StatusEffects.KnowsWhitefire)) addButton(0, "Torch It", torchP3Tree);
 	addButton(1, "Leave It", playerMenu);
 }
 private function drinkThePlantGirlsSap():void {
@@ -222,7 +221,7 @@ private function torchP3Tree():void {
 	//[(nerdfire)
 	if(player.hasStatusEffect(StatusEffects.KnowsWhitefire)) outputText("Closing your eyes to focus, you gather your energies, and unleash your white, supernatural flames upon the thing.");
 	//(bromancefire)
-	else if(player.findPerk(PerkLib.FireLord) >= 0) outputText("Sucking in your breath, you inflate your chest and stir the embers of the jaguar demon's gift.  Dredging up an enormous pine-green fireball, you exhale and launch it at the tree.");
+	else if(player.hasPerk(PerkLib.FireLord)) outputText("Sucking in your breath, you inflate your chest and stir the embers of the jaguar demon's gift.  Dredging up an enormous pine-green fireball, you exhale and launch it at the tree.");
 	else outputText("Sucking in your breath, you inflate your chest and stir the embers of your fiery gift.  Dredging up an enormous fireball, you exhale and launch it at the tree.");
 	outputText("  It goes up by the torch, though the fire starts to fade sooner than you would expect.  You huff, but repeat the action, layering a new blaze atop the previous one; you put all your concentration into this new conflagration, stoking the inferno with every ounce of your ");
 	if(player.hasStatusEffect(StatusEffects.KnowsWhitefire)) outputText("magical will");
@@ -381,16 +380,16 @@ private function fertilizeHolli(cock:Boolean = true):void {
 	if(cock && player.hasCock()) {
 		odds += player.cumQ()/300;
 		if(odds > 40) odds = 40;
-		if(player.findPerk(PerkLib.MaraesGiftStud) >= 0) odds += 10;
-		if(player.findPerk(PerkLib.FerasBoonAlpha) >= 0) odds += 10;
-		if(player.findPerk(PerkLib.ElvenBounty) >= 0) odds += 2;
+		if(player.hasPerk(PerkLib.MaraesGiftStud)) odds += 10;
+		if(player.hasPerk(PerkLib.FerasBoonAlpha)) odds += 10;
+		if(player.hasPerk(PerkLib.ElvenBounty)) odds += 2;
 	}
 	if(!cock && player.hasVagina()) {
 		odds += player.totalFertility()/5;
 		if(odds > 40) odds = 40;
-		if(player.findPerk(PerkLib.MaraesGiftFertility) >= 0) odds += 10;
-		if(player.findPerk(PerkLib.FerasBoonBreedingBitch) >= 0) odds += 10;
-		if(player.findPerk(PerkLib.ElvenBounty) >= 0) odds += 2;
+		if(player.hasPerk(PerkLib.MaraesGiftFertility)) odds += 10;
+		if(player.hasPerk(PerkLib.FerasBoonBreedingBitch)) odds += 10;
+		if(player.hasPerk(PerkLib.ElvenBounty)) odds += 2;
 	}
 	if(odds >= rand(101)) {
 		flags[kFLAGS.HOLLI_FRUIT] += 1 + rand(Math.floor(odds/10));

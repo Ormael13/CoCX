@@ -9,14 +9,14 @@ import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
-import classes.Scenes.UniqueSexScenes;
+import classes.Items.Armors.SuccubusArmor;
+import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 use namespace CoC;
 
 	public class CorruptedDriderScene extends BaseContent
 	{
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-
 		public function CorruptedDriderScene()
 		{
 		}
@@ -30,7 +30,7 @@ use namespace CoC;
 //*Encounter Intro (done)
 		public function driderEncounter():void
 		{
-			spriteSelect(77);
+			spriteSelect(SpriteDb.s_drider);
 			clearOutput();
 			//Load monster stats so we can display things like eye/hide color!
 			var drider:CorruptedDrider = new CorruptedDrider();
@@ -64,7 +64,7 @@ use namespace CoC;
 		//*Victory Intro: (done)
 		public function defeatDriderIntro():void
 		{
-			spriteSelect(77);
+			spriteSelect(SpriteDb.s_drider);
 			clearOutput();
 			outputText("All eight of the drider's black and " + monster.hairColor + " striped legs collapse under her weight while she struggles ");
 			if (monster.HP < 1) outputText("to try to continue the fight, her movements slowed by pain and weakness.");
@@ -93,10 +93,7 @@ use namespace CoC;
 			}
 			var rideCock:Function =null;
 			var rideOvi:Function =null;
-			var bikiniTits:Function =null;
-			if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armor is LustyMaidensArmor) bikiniTits = (player.armor as LustyMaidensArmor).lustyMaidenPaizuri;
 			var temp3:Function =null;
-			if (player.pcCanUseUniqueSexScene()) temp3 = uniquuuesexscene.pcUniqueSexScenesChoiceMenu;
 			if (player.hasVagina() && player.lust >= 33) {
 				rideCock = winVSDriderTakeItsCockInCunt;
 				rideOvi = victoryVSDriderRideOviVaginal;
@@ -112,15 +109,17 @@ use namespace CoC;
 			if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
 				outputText("\n\nWhat do you do?");
 				choices("Butt Fuck", buttFuckBUTTFUCKBUTTTFUCKBUTTFUCK, "Fuck Pussy", vagFuck, "Bondage Fuck", careful, "FuckSpinner", fuckSpinner, "Ride Cock", rideCock,
-					"Ride Ovi", rideOvi, "RideOviAnal", rideOviAss, "B.Titfuck", bikiniTits, "U. Sex Scenes", temp3, "Leave", cleanupAfterCombat);
-			}
+					"Ride Ovi", rideOvi, "RideOviAnal", rideOviAss, "B.Titfuck", null/*placeholder*/, "", null, "Leave", cleanupAfterCombat);
+                LustyMaidensArmor.addTitfuckButton(7);
+                SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatDriderIntro);
+            }
 			else cleanupAfterCombat();
 		}
 
 //Lose to drider
 		public function loseToDrider():void
 		{
-			spriteSelect(77);
+			spriteSelect(SpriteDb.s_drider);
 			if (flags[kFLAGS.SFW_MODE] > 0) { //No rape in SFW mode.
 				clearOutput();
 				cleanupAfterCombat();
@@ -147,7 +146,7 @@ use namespace CoC;
 		private function winDriderPCDickInSpiderCunt():void
 		{
 			var x:int = player.cockThatFits(monster.vaginalCapacity());
-			spriteSelect(77);
+			spriteSelect(SpriteDb.s_drider);
 			clearOutput();
 			//*Summary: Fuck her cunt with a wang that fits it, lose control of the
 			//situation when she kisses you with potent, envenomed lips.  Get
@@ -287,7 +286,7 @@ use namespace CoC;
 		private function winDriderPCDickInSpiderCunt2():void
 		{
 			var x:int = player.cockThatFits(monster.vaginalCapacity());
-			spriteSelect(77);
+			spriteSelect(SpriteDb.s_drider);
 			clearOutput();
 			outputText("<b>Sometime Later...</b>\n");
 
@@ -315,7 +314,7 @@ use namespace CoC;
 //*Victory Rape: Ride Spider-Cawk in Vagoo (done)
 		private function winVSDriderTakeItsCockInCunt():void
 		{
-			spriteSelect(77);
+			spriteSelect(SpriteDb.s_drider);
 			clearOutput();
 			outputText("Your eyes lower towards the drider-woman's thick, demonic shaft lying exposed to your wicked intention.  Easing yourself over to the defeated arachnid, you slowly reach out and squeeze her pained member, a quiet, unwanted moan escaping from between her soft lips.  Gently caressing her length, you make sure to trace your fingers around every bump and curve of the corrupted tool that throbs heatedly in your palm, using your thumb to apply pressure underneath her growing cock.  The drider lies fully erect in no time at all, and you respond by hastily jerking her pride before relinquishing your grip and moving away from your new toy.  Any reluctance she may have held before has vanished with your gratuitous touch, the exhausted spider-lady now humping aimlessly at the air in an attempt to relieve herself - using her trembling hands to fondle her breasts while whining pathetically at her lack of sexual gratification.  An idea sparks in your head - you figure it'd be more satisfying to watch the spidertaur squirm than to give her relief straight away.\n\n");
 
@@ -350,7 +349,7 @@ use namespace CoC;
 //*Victory Rape: Ride Ovi Vaginal (done)
 		private function victoryVSDriderRideOviVaginal():void
 		{
-			spriteSelect(77);
+			spriteSelect(SpriteDb.s_drider);
 			clearOutput();
 			//*Summary:  Roll the drider over and squat on an ovipositor - reuse anal intro? (fuck you bitch, i'm taking your shitty kids to the lake and turning them pink)
 			player.slimeFeed();
@@ -421,7 +420,7 @@ use namespace CoC;
 //*Victory Rape: Ride Ovi Anal sex-insenitive (done)
 		private function victoryVSDriderRideOviAnal():void
 		{
-			spriteSelect(77);
+			spriteSelect(SpriteDb.s_drider);
 			//*Summary: Force the drider onto her back and then fish out her ovipositor, jerk it off, then climb on top for some egg-based buttlovin'
 			clearOutput();
 			outputText("Eyeing the small lump of the spider's retracted ovipositor, you resolve to have a little fun with it, even if it means giving the spider exactly what she wants in a way that she doesn't.  You tear off your [armor] while the drider watches with ");
@@ -523,7 +522,7 @@ use namespace CoC;
 //(please view the spinneret as a spider-horsecock because for all intents and purposes that is really what it is) - shambadibs (1.5-inch width max because i'm racist against buur-bous american penis) (also probably a corruption minimum this is a pretty dick move) (I GET IT)
 		private function victoryVSDriderStickDickInSpinneret():void
 		{
-			spriteSelect(77);
+			spriteSelect(SpriteDb.s_drider);
 			clearOutput();
 			var x:Number = player.smallestCockIndex();
 			outputText("Quickly shedding your [armor], you eye up the incapacitated drider, wondering how best to take advantage of your successes.  A remarkably nasty thought strikes you, and your lips nearly curl into a devious grin then and there.  You stride toward your trophy, taking pleasure in the simmering hatred in her eyes as she glares up at you.  A sudden bout of mocking laughter stops your progress; the drider seems to have noticed ");
@@ -575,7 +574,7 @@ use namespace CoC;
 //*Loss Ride Ovi Anal unsexed - gats (done)
 		private function loseVSDriderGetAnalledOvi():void
 		{
-			spriteSelect(77);
+			spriteSelect(SpriteDb.s_drider);
 			clearOutput();
 			outputText("You fall to the ground, defeated by the agile arachnid-woman as she slowly advances towards you, her engorged clit growing larger and larger as it throbs in your direction.  You've managed to find yourself crumpled face down in the dirt, your [butt] in full display of the aroused drider while she grins lustfully at your broken figure.  Grunting, you begin to pull yourself off the ground, only to hear your attacker 'tsk' before feeling the warm stickiness of her web launch upon your limbs, gluing your hands to your ankles and leaving you completely vulnerable.  You struggle against the bindings, but to no avail.  Lifting your head, you turn to see the drider stroking her now fully-enlarged demon cock, replacing the hardened clit that once adorned her moist pussy.\n\n");
 			outputText("\"<i>You just had to make it harder for yourself, didn't you?</i>\"\n\n");
@@ -632,7 +631,7 @@ use namespace CoC;
 //*Loss Vaginal Impregnation and forced BJ - Symphonie (done)
 		private function loseVSDriderAndVaginallyImpreggleOvi():void
 		{
-			spriteSelect(77);
+			spriteSelect(SpriteDb.s_drider);
 			clearOutput();
 			//FAST FACTS: Drider uses webbing to spread eagle you then oviposits your womb while making you suck some dick.
 			//SYMNOTE: I think I've done a proper naga pass on this but it was really late so don't trust me 100% on that. I honestly can't imagine the way this scene is set up ever working for centaur, the posing would have to be completely different, but if someone else wants to try to centaurify it you are welcome to. I think there could probably stand to be a few offhand references to your cock and tits if you have them in the later parts, I'm not good at sewing those in. (done)
@@ -727,10 +726,10 @@ use namespace CoC;
 		private function loseVSDriderAndGetFuckedANDAnalImpreggegity():void
 		{
 			var x:int = player.cockThatFits(monster.vaginalCapacity());
-			spriteSelect(77);
+			spriteSelect(SpriteDb.s_drider);
 			//Poor males.  All the buttsexes. (yo this is an actual paragraph of the game text right)
 			clearOutput();
-			if (player.lust >= player.maxLust()) outputText("Unable to resist the desire coursing through your body, you strip off your [armor] and start stroking " + sMultiCockDesc() + ", displaying it in the hope that it will draw the drider's attention, while at the same time just trying to get yourself off and attain release.");
+			if (player.lust >= player.maxOverLust()) outputText("Unable to resist the desire coursing through your body, you strip off your [armor] and start stroking " + sMultiCockDesc() + ", displaying it in the hope that it will draw the drider's attention, while at the same time just trying to get yourself off and attain release.");
 			else {
 				outputText("You slump down, too beat up to mount an effective defense, let alone stay up on your [feet].  The drider skitters over to you and effortlessly peels you out of your [armor], exposing your ");
 				if (player.lust < 50) outputText("soft");
@@ -780,7 +779,7 @@ use namespace CoC;
 //Summary: what goes up must come down
 		public function birthSpiderEggsFromAnusITSBLEEDINGYAYYYYY():void
 		{
-			spriteSelect(77);
+			spriteSelect(SpriteDb.s_drider);
 			outputText("\nYour gut rumbles dangerously.  As if by instinct, you drop down and bend over, supporting half your weight on your hands while you lower your [butt] to just above ground level.  You grunt suddenly, your pregnant asshole dilating wide as a heavy weight seems to settle atop it, just inside you.  Clenching and tingling, your pucker slowly opens, releasing a torrent of green goop, along with a spherical white egg.  It drops into the messy puddle, cushioned from the fall by the heavy slime still leaking from your slightly agape anus.\n\n");
 			outputText("The feeling of giving birth in such a way is oddly soothing, almost pleasant.  Your muscles move on their own, slowly and repeatedly clenching, relaxing, and forcing the eggs downward.  The next orb slips through your ring more easily than the first, shooting tingles of pleasure out from your pucker and making you gasp in surprise.  Hot on its heels, another egg follows, catching at your anal ring for a moment before your next contraction squeezes it out into the growing pile of goop.  It feels even better, good enough to make you cross your eyes and exhale contentedly.");
 			//(buttstretch)
@@ -807,7 +806,7 @@ use namespace CoC;
 
 		public function driderPregVagBirth():void
 		{
-			spriteSelect(77);
+			spriteSelect(SpriteDb.s_drider);
 			outputText("\nYou shudder violently, your stomach growling fiercely at you.  It feels as if something is moving around in your womb, and you bend over on all fours, raising your ass into the air as if it is the most natural thing in the world.  A slimy green fluid starts leaking out of your cunt, making a small puddle on the ground.  The sensation is extremely pleasurable as you feel it running down your thighs.  Groaning, you start to push out a small, smooth green ball, and the action makes your pussy so much wetter.  Groaning, you push out another, and another, each ball rubbing against your inner walls before dropping into the slimy pool of goo.  After the sixth, you orgasm, spraying your cum all over the ground underneath you, each egg squeezing out and prolonging the intense feeling.");
 			player.cuntChange(40, true, true, false);
 			outputText("\n\n");
@@ -848,7 +847,7 @@ use namespace CoC;
 		private function buttFuckADriderOhBaby():void
 		{
 			var x:int = player.cockThatFits(monster.analCapacity());
-			spriteSelect(77);
+			spriteSelect(SpriteDb.s_drider);
 			clearOutput();
 			outputText("As soon as the drider-girl goes down, you leap into action.  Before she has a chance to recover, you run over and leap onto her back, balancing shakily as the drider stumbles back up onto her many legs, trying to shake you off.  You grab onto the drider's hair for support, pulling tight each time you're nearly displaced.  Yelping in agony, she soon learns her lesson and settles down, submitting to your dominance.\n\n");
 
@@ -882,7 +881,7 @@ use namespace CoC;
 
 		private function driderVagSmartFuck():void
 		{
-			spriteSelect(77);
+			spriteSelect(SpriteDb.s_drider);
 			clearOutput();
 			//Drider Non-reverse Rape
 			//Requires a cock that fits and either a spider/drider abdomen or a bundle of tough spider silk
@@ -914,7 +913,7 @@ use namespace CoC;
 //[No]
 		private function dontSilkRapeDrider():void
 		{
-			spriteSelect(77);
+			spriteSelect(SpriteDb.s_drider);
 			clearOutput();
 			outputText("Deciding against wasting the valuable material for little more than a quick fuck, you ponder your other options for using the defeated girl.");
 			//(Return to "win" menu)
@@ -923,7 +922,7 @@ use namespace CoC;
 
 		private function driderTiedUpPartTwo(useItem:Boolean):void
 		{
-			spriteSelect(77);
+			spriteSelect(SpriteDb.s_drider);
 			var x:Number = player.cockThatFits(monster.vaginalCapacity());
 			if (x < 0) x = player.smallestCockIndex();
 			var y:Number = x + 1;
@@ -961,7 +960,7 @@ use namespace CoC;
 
 		private function driderTiedUpPartThree():void
 		{
-			spriteSelect(77);
+			spriteSelect(SpriteDb.s_drider);
 			var x:Number = player.cockThatFits(monster.vaginalCapacity());
 			if (x < 0) x = player.smallestCockIndex();
 			var y:Number = x + 1;
@@ -1012,7 +1011,7 @@ use namespace CoC;
 
 		private function driderTiedUpPartFour():void
 		{
-			spriteSelect(77);
+			spriteSelect(SpriteDb.s_drider);
 			var x:Number = player.cockThatFits(monster.vaginalCapacity());
 			if (x < 0) x = player.smallestCockIndex();
 			var y:Number = x + 1;

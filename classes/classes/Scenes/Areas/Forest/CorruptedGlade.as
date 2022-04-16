@@ -2,6 +2,8 @@ package classes.Scenes.Areas.Forest {
 import classes.*;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.Combat.Combat;
+import classes.display.SpriteDb;
 
 public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 
@@ -29,7 +31,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 		}
 
 		public function intro():void {
-			spriteSelect(92);
+			spriteSelect(SpriteDb.s_corruptedGlade);
 			outputText("Walking through the woods, you find a damp patch overgrown with corrupted plant-life.  Every flower seems warped into a colorful imitation of a female's genitals, each vine appears throbbing and veiny, and every knot on the nearby trees is capped with a nipple-like protrusion, leaking dark sap.");
 			if (player.cor <= 33) { //disgusted reaction
 				//Get plant-cum dripped on you if not fast and unlucky!
@@ -77,7 +79,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 
 		private function flowerFun():void {
 			clearOutput();
-			spriteSelect(92);
+			spriteSelect(SpriteDb.s_corruptedGlade);
 			if (player.hasCock()) { //Sex scenes for those with cawks
 				if (player.cocks.length == 1) { //Single Cawk
 					outputText("You grin to yourself as you decide to see just how close to a pussy these perverted little flowers are.  The thick stem bends with ease as you grasp it and bend it towards your groin, your other hand fumbling to open your [armor].  In seconds you free yourself and gingerly bring the folds closer, the musky scent that fills the air rapidly bringing you to a full, throbbing hardness.  The first touch of petals to your skin slicks you with the flower's silky secretions, allowing you to easily slip between the petals.  Though the flower looks fairly deep, you quickly feel yourself bottom out inside the petal's slippery grip.  Shrugging, you decide to make the best of it and begin thrusting into the plant, enjoying the unusual sensations along the front-most parts of your [cock].  As you pound away, you begin to notice a change in the rear of the flower.\n\n");
@@ -137,7 +139,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 
 		private function tentacleFun():void {
 			clearOutput();
-			spriteSelect(92);
+			spriteSelect(SpriteDb.s_corruptedGlade);
 			if (player.vaginas.length > 0 && rand(2) == 0) { //Vaginal Variant 50% of the time
 				outputText("You saunter over to a dangling group of perverted looking vines, discarding your [armor] along the way. Running your fingertips along the bulbous-tipped tentacle-like vines, you find one that looks ");
 				var tentacle:int = rand(3); //Big, medium or small size tentacle
@@ -256,7 +258,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 
 		private function treeBoobFun():void {
 			clearOutput();
-			spriteSelect(92);
+			spriteSelect(SpriteDb.s_corruptedGlade);
 			outputText("Stepping carefully around the other hazards of the glade, you close on the strange trees with equal parts curiosity and desire.  Up close, it's easy to see the strange growths that sprout from the bark – dozens of full ripe-looking breasts, each capped with a swollen and leaking nipple.  You touch one, marveling at the smooth texture of its chocolate-colored skin.   In response a runner of sap oozes free of the nipple and slides down the curved surface.\n\n");
 			outputText("You lean forwards and lick around the nipple's surface, sampling the sweetness of the trickling sap.   The stuff nearly overpowers you with a taste like syrupy cream as more sap drips free of the fully-erect tree-nipple.  Unable to resist testing this nonsensical oddity, you engulf the entire nipple between your lips, suckling hard.   The tree seems to oblige your efforts with a fresh discharge of the sticky sap.   Your tongue tingles and vibrates with the sinfully sweet taste in your mouth, dancing in circles around the nipple, coaxing yet more nectar from swollen plant-jug.  It's easy to lose yourself in that taste, falling into a rhythm of alternatively sucking, swallowing, and licking.\n\n");
 			outputText("In time you realize the breast has long since been emptied by your hungry mouth, and you pull free with a pop, letting your tongue run over your now over-sensitive lips.  It seems your entire mouth has been affected by the tree's sap, and is now as sensitive and receptive as a maiden's box.  You don't think you could drink any more sap with how full you feel, and you make ready to depart this perverted place.");
@@ -338,7 +340,7 @@ public class CorruptedGlade extends BaseContent implements TimeAwareInterface {
 				case 2: //Whitefire
 					outputText("You narrow your eyes, focusing your mind with deadly intent. You snap your fingers and the glade is enveloped in a flash of white flames! By the time the fire dies out, charred plants are all that remain of the glade.\n\n");
 					destroyAmount++;
-					useMana(40, 5);//fatigue(20, USEFATG_MAGIC);
+					useMana(40, Combat.USEMANA_WHITE);//fatigue(20, USEFATG_MAGIC);
 					break;
 				case 3: //Axe
 					outputText("You grab an axe from your toolbox and hack away at the plants without mercy. Eventually, you manage to chop down every perverted plant in the glade save for some of the trees. They gradually wither away. ");

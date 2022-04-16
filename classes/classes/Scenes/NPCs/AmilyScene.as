@@ -9,6 +9,7 @@ import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 import classes.lists.BreastCup;
+import classes.display.SpriteDb;
 
 public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 	{
@@ -126,12 +127,12 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			}
 			if (model.time.hours == 6) {
 				//Pure amily flips her shit and moves out!
-				if (flags[kFLAGS.AMILY_FOLLOWER] == 1 && player.cor >= 66 + player.corruptionTolerance() && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00173] > 0) {
+				if (flags[kFLAGS.AMILY_FOLLOWER] == 1 && player.cor >= 66 + player.corruptionTolerance && flags[kFLAGS.AMILY_WARNING] > 0) {
 					amilyScene.farewellNote();
 					needNext = true;
 				}
 				//Amily moves back in once uncorrupt.
-				if (flags[kFLAGS.AMILY_TREE_FLIPOUT] == 0 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00173] > 0 && player.cor <= 25 + player.corruptionTolerance() && flags[kFLAGS.AMILY_FOLLOWER] == 0) {
+				if (flags[kFLAGS.AMILY_TREE_FLIPOUT] == 0 && flags[kFLAGS.AMILY_WARNING] > 0 && player.cor <= 25 + player.corruptionTolerance && flags[kFLAGS.AMILY_FOLLOWER] == 0) {
 					amilyScene.amilyReturns();
 					needNext = true;
 				}
@@ -168,8 +169,8 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			return flags[kFLAGS.AMILY_FOLLOWER] == 2;
 		}
 		public function amilySprite():void {
-			if(flags[kFLAGS.AMILY_NOT_FURRY] == 0) spriteSelect(3);
-			else spriteSelect(65);
+			if(flags[kFLAGS.AMILY_NOT_FURRY] == 0) spriteSelect(SpriteDb.s_amily);
+			else spriteSelect(SpriteDb.s_amily_defurr);
 		}
 
 		private function rackCount():int {
@@ -213,7 +214,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			flags[kFLAGS.AMILY_VILLAGE_EXPLORED]++;
 			clearOutput();
 			//50% chance of ghost-girl
-			if((flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00365] == 0 && rackCount() >= 2 && rand(10) <= 3) && !followerShouldra() && flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] != .5) {
+			if((flags[kFLAGS.SHOULDRA_MAIDEN_COUNTDOWN] == 0 && rackCount() >= 2 && rand(10) <= 3) && !followerShouldra() && flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] != .5) {
 				shouldraScene.shouldraGreeting();
 				return;
 			}
@@ -290,7 +291,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				if(!player.hasStatusEffect(StatusEffects.Infested)) flags[kFLAGS.AMILY_GROSSED_OUT_BY_WORMS] = 0;
 			}
 			//Corrupt blow up! - requires you've met Amily
-			if(flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] == 0 && flags[kFLAGS.AMILY_MET] > 0 && player.cor > 25 + player.corruptionTolerance()) {
+			if(flags[kFLAGS.AMILY_CORRUPT_FLIPOUT] == 0 && flags[kFLAGS.AMILY_MET] > 0 && player.cor > 25 + player.corruptionTolerance) {
 				meetAmilyAsACorruptAsshat();
 				return;
 			}
@@ -606,7 +607,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				}
 			}
 			//[Surprise Remeeting]
-			/*(random chance of happening instead of [Normal Remeeting] if player meets 'requirements' for stalking Amily)
+			//(random chance of happening instead of [Normal Remeeting] if player meets 'requirements' for stalking Amily)
 			if(player.spe > 50 && player.inte > 40 && rand(4) == 0) {
 				outputText("Deciding to find Amily first instead of waiting for her to find you, you set off into the ruins. Using all of your knowledge, skill and cunning to figure out where she is likely to be, you make your way there without giving yourself away.\n\n");
 				//[Amily is not pregnant]
@@ -623,16 +624,14 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				}
 				outputText("How do you approach her?");
 				//Announce yourself / Scare her
-				simpleChoices("Announce",sneakyUberAmilyRemeetingsAnnounce,"Scare Her",scareAmilyRemeetingsProBaws,"",0,"",0,"",0);
+				simpleChoices("Announce",sneakyUberAmilyRemeetingsAnnounce,"Scare Her",scareAmilyRemeetingsProBaws,"",null,"",null,"",null);
 				return;
-			}*/
+			}
 
 			//[Normal Remeeting]
 			//Did the PC genderchange?  OH SHIT SON!
 			//Alternatively: get bitched at
 			if(flags[kFLAGS.AMILY_PC_GENDER] != player.gender) {
-			//Stripped this out since it was making her flip out weirdly at genderless folks
-			//|| (player.gender == 0 && flags[kFLAGS.AMILY_AFFECTION] < 15)) {
 				amilyNewGenderConfrontation();
 				return;
 			}
@@ -713,84 +712,34 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 		}
 
 		private function determineAmilySexEvent(forced:Boolean = false):Function {
-			var sex:Function = null;
 			if (!forced && player.lust < 35) return null;
 			//If Amily is lesbo lover!
+			var sex:Function = forced ? amilySexHappens : sexWithAmily;
+            var choices:Array = [];
 			if (flags[kFLAGS.AMILY_CONFESSED_LESBIAN] > 0 && player.gender == 2) {
-				//Futa amily!
+                choices.push(girlyGirlMouseSex);
 				if (flags[kFLAGS.AMILY_WANG_LENGTH] > 0) {
-					//If not pregnant, always get fucked!
-					if (!pregnancy.isPregnant) sex = hermilyOnFemalePC;
-					//else 50/50
-					else {
-						if (rand(2) == 0) sex = girlyGirlMouseSex;
-						else sex = hermilyOnFemalePC;
-					}
+                    choices.push(hermilyOnFemalePC);
+					if (!player.isPregnant()) choices.push(hermilyOnFemalePC, hermilyOnFemalePC);
 				}
-				//LESBO LUVIN!
-				else sex = girlyGirlMouseSex;
 			}
 			//If Amily is a herm lover!
 			if (player.gender == 3 && flags[kFLAGS.AMILY_HERM_QUEST] == 2) {
+                if (flags[kFLAGS.AMILY_AFFECTION] > 40 && pregnancy.event >= 6)
+                    return sex; //force pregnant sex scene
+                choices.push(sex);
+                choices.push(girlyGirlMouseSex);
+				if (!pregnancy.isPregnant) choices.push(sex, sex);
 				//Amily is herm too!
 				if (flags[kFLAGS.AMILY_WANG_LENGTH] > 0) {
-					//If Amily is not pregnant
-					if (!pregnancy.isPregnant) {
-						//If PC is also not pregnant, 50/50 odds
-						if (!player.isPregnant()) {
-							//Herm Amily knocks up PC
-							if (rand(2) == 0) sex = hermilyOnFemalePC;
-							//PC uses dick on amily
-							else {
-								if (forced) sex = amilySexHappens;
-								else sex = sexWithAmily;
-							}
-						}
-						//If PC is preg, knock up amily.
-						else {
-							if (forced) sex = amilySexHappens;
-							else sex = sexWithAmily;
-						}
-
-					}
-					//Amily is preg
-					else {
-						//Pc is not
-						if (!player.isPregnant()) sex = hermilyOnFemalePC;
-						//PC is preg too!
-						else {
-							//Herm Amily knocks up PC
-							if(rand(2) == 0) sex = hermilyOnFemalePC;
-							//PC uses dick on amily
-							else {
-								if (forced) sex = amilySexHappens;
-								else sex = sexWithAmily;
-							}
-						}
-					}
-				}
-				//Amily still girl!
-				else {
-					//Not pregnant? KNOCK THAT SHIT UP
-					if (!pregnancy.isPregnant) sex = sexWithAmily;
-					//Pregnant?  Random tribbing!
-					else {
-						//Lesbogrind
-						if (rand(2) == 0) sex = girlyGirlMouseSex;
-						//Fuck!
-						else {
-							if (forced) sex = amilySexHappens;
-							else sex = sexWithAmily;
-						}
-					}
+                    choices.push(hermilyOnFemalePC);
+					if (!player.isPregnant()) choices.push(hermilyOnFemalePC, hermilyOnFemalePC);
 				}
 			}
 			//Dudesex!
-			if (player.gender == 1) {
-				if (forced) sex = amilySexHappens;
-				else sex = sexWithAmily;
-			}
-			return sex;
+			if (player.gender == 1)
+				choices.push(sex);
+			return choices[rand(choices.length)];
 		}
 
 		//[Accept Eagerly]
@@ -876,7 +825,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			amilySprite();
 			outputText("Grinning with mischief, you carefully sneak up behind her. Suddenly grabbing her shoulders, you shout, \"<i>Gotcha!</i>\" She jolts with a panicked squeal and whirls around, bringing along a scything slash from her dagger!\n\n");
 			//[Player Speed less than 50]
-			if(player.spe < 50 || player.findPerk(PerkLib.Evade) < 0) {
+			if(player.spe < 50 || !player.hasPerk(PerkLib.Evade)) {
 				//{Player takes minor HP damage}
 				player.takePhysDamage(5);
 				outputText("You scramble backwards, but it still cuts a nasty gash into your flesh.  Amily looks poised to strike again, but stops when she sees that it's you. She looks apologetic – well, somewhat. \"<i>Are you all right? I'm sorry, but that was honestly the stupidest thing I've ever seen someone do!</i>\" She approaches you and makes sure that you aren't seriously hurt. \"<i>You'll live,</i>\" she says rather quickly.\n\n");
@@ -1193,7 +1142,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 						else outputText("\"<i>You're coming along nicely, lover mine.</i>\" She smiles, proud as can be at your display of skill. \"<i>So, what brings you running to me?</i>\" she teases.\n\n");
 			}
 			//Sex / Talk / Talk then sex
-			if (player.lust >= 33) simpleChoices("Sex", sexWithAmily, "Talk", talkToAmily, "Both", talkThenSexWithAmily, "", null, "", null);
+			if (player.lust >= 33) simpleChoices("Sex", sexWithAmily, "Talk", talkToAmily, "Both", determineAmilySexEvent() == null ? null : talkThenSexWithAmily, "", null, "", null);
 			else simpleChoices("", null, "Talk", talkToAmily, "", null, "", null, "", null);
 		}
 
@@ -1253,7 +1202,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			}
 			//Sex / Talk / Talk then sex
 			//(Same as [Normal Remeeting))
-			if (player.lust >= 33) simpleChoices("Sex", sexWithAmily, "Talk", talkToAmily, "Both", talkThenSexWithAmily, "", null, "", null);
+			if (player.lust >= 33) simpleChoices("Sex", sexWithAmily, "Talk", talkToAmily, "Both", determineAmilySexEvent() == null ? null : talkThenSexWithAmily, "", null, "", null);
 			else simpleChoices("", null, "Talk", talkToAmily, "", null, "", null, "", null);
 			//Affection -1;
 			flags[kFLAGS.AMILY_AFFECTION] -= 1;
@@ -1499,21 +1448,21 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 			outputText("\"<i>These are...?</i>\" You begin hesitantly, unable to say it.\n\n");
 
-			outputText("“<i>Our children, yours and mine");
+			outputText("\"<i>Our children, yours and mine");
 			// Mix
 			if (flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS] > 0 && flags[kFLAGS.AMILY_BIRTH_TOTAL] > 0)
 			{
-				outputText(".</i>”");
+				outputText(".</i>\"");
 			}
 			// Only PC birth
 			else if (flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS] > 0 && flags[kFLAGS.AMILY_BIRTH_TOTAL] == 0)
 			{
-				outputText(", planted by me inside of you.</i>”");
+				outputText(", planted by me inside of you.</i>\"");
 			}
 			// Only Amily birth
 			else if (flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS] == 0 && flags[kFLAGS.AMILY_BIRTH_TOTAL] > 0)
 			{
-				outputText(", planted by you inside of me.</i>”");
+				outputText(", planted by you inside of me.</i>\"");
 			}
 			outputText("  Amily trills happily.\n\n");
 
@@ -1531,7 +1480,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 			outputText("You spend over an hour getting to know your many sons and daughters, helping them pack up their meager supplies and wishing them well as they set off. Then, with Amily's hand in yours, you return to your camp, leaving behind this empty village to be reclaimed by the wilderness.\n\n");
 			//Oh boy.  So excited.  wee.  Blech.
-			outputText("\\[<b>Amily has joined you as a lover.</b>\\]\n\n");
+			outputText("<b>Amily has joined you as a lover.</b>\n\n");
 			//Set amily follower flag
 			flags[kFLAGS.AMILY_FOLLOWER] = 1;
 			flags[kFLAGS.AMILY_CUP_SIZE] = 1;
@@ -1981,7 +1930,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				{
 					outputText("You pause for a few moments, trying to think of a way to phrase this delicately, then ask her how she thinks your children are doing.\n\n");
 
-					outputText("A hint of worry creeps into her expression, matching your own; but she remains resolute. “<i>The first of our kids grew up so fast, and they seem to be doing OK out there without their parents to dote on them. The eldest are doing a great job caring for the young ones.</i>” she answers.\n\n");
+					outputText("A hint of worry creeps into her expression, matching your own; but she remains resolute. \"<i>The first of our kids grew up so fast, and they seem to be doing OK out there without their parents to dote on them. The eldest are doing a great job caring for the young ones.</i>\" she answers.\n\n");
 				}
 
 				outputText("Feeling somewhat more reassured, but not entirely so, you get ready to leave.\n\n");
@@ -2426,48 +2375,6 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			if (!pregnancy.isPregnant) outputText("Okay... Well, I'm sure you'll be back. I will need your help again if this doesn't set,");
 			else outputText("Okay dear...But you better come back some time. You don't want your children to have abandonment issues, do you?");
 			outputText("</i>\" Amily says while rubbing her stomach. You smile at her and nod, promising you'll come back, before setting off for your own camp.");
-			/*OLD
-			outputText("Amily really didn't waste any time getting to her hidden bedroom, sprinting as fast as she could with you in tow.");
-			if(flags[kFLAGS.AMILY_INCUBATION] > 0) outputText("  Even in a slightly pregnant state she goes surprisingly fast, though she's also rather cautious of her small bump.");
-			outputText("\n\n");
-
-			outputText("Once inside, the two of you get to work undoing each others clothes, tossing the garments across the room with little care for them. Amily bites her lower lip as she examines your naked form again, before practically jumping you. She wraps her small hands around your stiff [cock] in an almost painful fashion, rubbing and teasing it, and presses her mouth against yours, her tongue exploring every inch of your mouth that it can reach, and you quickly respond by doing the same favor for Amily.");
-			if(flags[kFLAGS.AMILY_INCUBATION] > 0) outputText("  Really it seems the only thing in-between you two now is Amily's small stomach bulge.");
-			outputText("\n\n");
-
-			outputText("Not releasing her grip on your raging erection, or breaking the passionate kiss for even a single second, she moves back toward the bed and takes you with her. You're quite surprised that the quiet mousegirl has come out of her shell and is being so forward. Is this the effect you have on her?\n\n");
-
-			outputText("Finally putting some distance between the two of you, Amily flops back onto the bed and places her hands behind her head, presenting her beautiful body to you. Finding the sight irresistible, you move your head between her legs and start licking at her moist vag, pushing your tongue or your fingers in every once in a while, and sucking on her sensitive clit to stimulate her further. In response, Amily moans loudly and spreads her legs further apart, an invitation to continue. You happily oblige your lover, burying two fingers into her wet cunt while you move to other parts of her body.");
-			if(flags[kFLAGS.AMILY_INCUBATION] > 0) outputText("  As you move your head across her beautiful form, you stop at her growing baby bump and give it a small kiss.");
-			outputText("  Your head hovers at her breasts ");
-			if(flags[kFLAGS.AMILY_INCUBATION] > 0) outputText("which seem to have grown from the pregnancy ");
-			outputText("and get to work licking and suckling her nipples, and rubbing the sensitive mounds.");
-			if(flags[kFLAGS.AMILY_INCUBATION] > 0) outputText("  When you get a dribble of milk in your mouth it surprises you, but you certainly don't stop \"<i>Hah... You're going to have to teach the children how that's done,</i>\" Amily says in between fevered breaths.");
-			outputText("\n\n");
-
-			outputText("By the time you start teasing her neck and collarbone, Amily's hands are clinging onto your back and she's impatiently grinding against your raging erection. \"<i>Please don't tease me anymore...</i>\" Amily whispers into your ear, making you almost feel a little bad for teasing your love in such a way.\n\n");
-
-			outputText("As an apology you quickly push your [cock] past her dampened nether-lips, and set to work thrusting in and out of your mousegirl lover.");
-			if(flags[kFLAGS.AMILY_INCUBATION] > 0) outputText("  You are of course mindful of her baby bump, not going too fast and making sure you're in a position that's comfortable for the two of you.  You don't want to harm your future offspring with the lovely mouse maiden.");
-			outputText("  It's not too long before you're going at a regular pace, stuffing Amily's fuckhole with your familiar manhood.\n\n");
-
-			outputText("Amily moans from the pleasure and raises her hips up to meet your thrusts, desperate for more of your loving, whispering a few dirty things to you between shallow breaths \"<i>");
-			//not preggo
-			if(flags[kFLAGS.AMILY_INCUBATION] == 0) outputText("Fill me up with everything you have...I want to be a mother for your children, just as much as I want to be a mother of my own people...");
-			else outputText("No need to hold back, pump as much cum into me as you can...");
-			outputText("</i>\" she whispers in a sultry tone, and her words are enough to send you over the edge. You grunt loudly, feeling as if your cock is about to explode from the exertion, blasting Amily so full of your cum that it starts to ooze out. Amily gives a cute little cry, and her vaginal walls clamp down on your sensitive member with enough force to make you wince, as girlcum sprays out onto your thighs.\n\n");
-
-			//no preggo
-			if(flags[kFLAGS.AMILY_INCUBATION] == 0) outputText("\"<i>If that didn't knock me up...I don't care as much as you'd think. It was magnificent either way,");
-			else outputText("\"<i>Hmm...My kids are pretty lucky that their father is such a virile specimen,");
-			outputText("</i>\" Amily says as she catches her breath, reaching up to ruffle your hair. You give her a bashful smile, glad to see you've made her so happy.\n\n");
-
-			outputText("The two of you lie together for some time, and it's with great regret that you tell her that you need to check in on your own camp. Amily seems dissapointed, not wanting you to leave, but understands why you need to go. \"<i>");
-			//no pregg
-			if(flags[kFLAGS.AMILY_INCUBATION] == 0) outputText("Okay...Well, I'm sure you'll be back. I will need your help again if this doesn't set,");
-			else outputText("Okay dear... but you'd better come back some time. You don't want your children to have abandonment issues, do you?");
-			outputText("</i>\" Amily says, rubbing her stomach. You smile at her and nod, promising you'll come back, before setting off for your own camp.");
-			*/
 			//boost affection
 			flags[kFLAGS.AMILY_AFFECTION] += 2 + rand(4);
 			flags[kFLAGS.AMILY_FUCK_COUNTER]++;
@@ -2504,7 +2411,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("Amily teases you for a little while, running her pussy-lips and tail along the tip of your erection a few times, earning a few moans and groans from you. Amily smirks slightly before sliding herself down your fully erect " + Appearance.cockNoun(CockTypesEnum.HUMAN) + ", taking as much as she can. You're a little worried that this might be harmful for your offspring, or worse - that they'll know what's going on... but Amily really seems to know more about this than you do, so you're just going to go along with her suggestions on the matter.\n\n");
 
 			outputText("Amily manages to keep a rather impressive rhythm and pace as she rides your cock like a mechanical bull. In time you manage to return her motions, thrusting your hips up to meet her and twisting yourself around counter-clockwise. The way Amily shrieks, or squeeks, in pleasure is a good sign, and as a result, you pick up speed with your gyrations. The intense pleasure makes you wish this session didn't have to end, but as you feel your orgasm rapidly approach, you sigh in defeat and resolve to make it a memorable one. You quickly clasp your hands around Amily's hips and pick up speed, making Amily gasp in surprise. You keep your motions up for another few minutes, before the two of you bring each other to a powerful simultaneous orgasm, mixed fluids drooling from Amily's thoroughly stretched cunt");
-			if(flags[kFLAGS.AMILY_WANG_LENGTH] > 0) outputText(", her own mouse-cock spewing futa-cum all over her belly");
+			if(flags[kFLAGS.AMILY_WANG_LENGTH] > 0) outputText(", her own mouse-cock spewing futa-cum all over your belly");
 			outputText(".\n\n");
 
 			if(flags[kFLAGS.AMILY_WANG_LENGTH] > 0) outputText("\"<i>Remember when you said this cock was a bad thing?</i>\" you tease, causing Amily to blush and playfully punch you in the shoulder.  \"<i>Sh-shut up!  It's... it's pretty incredible, there, I said it.</i>\"\n\n");
@@ -2567,12 +2474,12 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			amilySprite();
 			if(flags[kFLAGS.AMILY_CLOTHING] == 0) flags[kFLAGS.AMILY_CLOTHING] = "rags";
 			//Amily freakout
-			if(player.cor >= 50 + player.corruptionTolerance() && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00173] == 0 && flags[kFLAGS.AMILY_FOLLOWER] == 1) {
+			if(player.cor >= 50 + player.corruptionTolerance && flags[kFLAGS.AMILY_WARNING] == 0 && flags[kFLAGS.AMILY_FOLLOWER] == 1) {
 				amilyTaintWarning();
 				return;
 			}
 			//Clear warning if PC is good!
-			if(player.cor < 50 + player.corruptionTolerance() && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00173] > 0) flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00173] = 0;
+			if(player.cor < 50 + player.corruptionTolerance && flags[kFLAGS.AMILY_WARNING] > 0) flags[kFLAGS.AMILY_WARNING] = 0;
 			//Preggo birthing!
 			if (pregnancy.isPregnant && pregnancy.incubation == 0 && flags[kFLAGS.AMILY_FOLLOWER] == 2) {
 				clearOutput();
@@ -2624,7 +2531,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 						flags[kFLAGS.FOLLOWER_AT_FARM_AMILY_GIBS_MILK] = 2;
 						outputText("\n\nYou wordlessly hold out your hand. Grinning, Amily produces a bottle of succubus milk and places it in your palm.");
 
-						outputText("\n\n“<i>I'll leave my regular production with the rest of the payment Whitney owes you [master].</i>”\n\n");
+						outputText("\n\n\"<i>I'll leave my regular production with the rest of the payment Whitney owes you [master].</i>\"\n\n");
 
 						inventory.takeItem(consumables.SUCMILK, amilyFollowerEncounter);
 						return;
@@ -2948,7 +2855,9 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
             if (flags[kFLAGS.AMILY_VISITING_URTA] == 4 && flags[kFLAGS.URTA_COMFORTABLE_WITH_OWN_BODY] >= 0 && !SceneLib.urtaQuest.urtaBusy()) addButton(3, "Urta", SceneLib.followerInteractions.amilyUrtaSex).hint("Take Amily for a visit to Urta in Tel'Adre for some threesome sexy times.");
             if (flags[kFLAGS.AMILY_OWNS_BIKINI] > 0 && player.hasCock() && !amilyCorrupt()) addButton(4, "Swim", amilySwimFuckIntro).hint("What's a better pleasure than to take Amily for a swim and do some fuck?");
 			if (izmaFollower() && flags[kFLAGS.AMILY_X_IZMA_POTION_3SOME] > 0 && player.hasCock()) {
-				outputText("You could see if Amily and Izma are up for another round of Amily's fertility potion, though contraceptives won't matter at all once she takes that.\n");
+				outputText("You could see if Amily and Izma are up for another round of Amily's fertility potion, though contraceptives won't matter at all once she takes that.");
+                sceneHunter.print("\n<b>Minor variations for their pregnancy. Current pregnancy: Amily - " + (pregnancy.isPregnant ? "yes" : "no") + ", Izma - " + (izmaScene.pregnancy.isPregnant ? "yes" : "no") + ".</b>");
+                outputText("\n\n");
 				addButton(5, "Izma3Some", drinkThePotion).hint("Get into a threesome with Amily and Izma. This will pretty much get them pregnant.");
 			}
 			if (flags[kFLAGS.GIVEN_AMILY_NURSE_OUTFIT] > 0 && player.hasCock() && player.cockThatFits(61) >= 0 && player.lust >= 33) {
@@ -3331,7 +3240,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				if(player.wetness() >= 5) outputText(" audibly squelching and slurpring thanks to the wetness of your pussy,");
 				outputText(" doing her best to make you buck and writhe under her, a job you think she's doing just fine at.\n\n");
 
-				outputText("Together you thresh and thrust, hips pounding together furiously, until Amily grunts suddenly, loudly and deeply, as her hot futa essence wells up from deep inside of her and begins gushing into you. At that, you lose it yourself, your own fluids pouring forth to mingle with hers and run out of your " + vaginaDescript() + "");
+				outputText("Together you thrash and thrust, hips pounding together furiously, until Amily grunts suddenly, loudly and deeply, as her hot futa essence wells up from deep inside of her and begins gushing into you. At that, you lose it yourself, your own fluids pouring forth to mingle with hers and run out of your " + vaginaDescript() + "");
 				//if herm: your (cockdescript cocknumber)
 				if(player.hasCock()) outputText(", " + sMultiCockDesc() + " spraying jism to fall upon you both like sex-scented rain");
 				outputText(". Panting with your mutual release, Amily slides wetly from your sex and falls upon your belly, to rest there for a moment.\n\n");
@@ -3426,10 +3335,14 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				else if (player.hasItem(armors.NURSECL))
 					outputText("You have a hunch if you had a penis that wasn't too big, giving Amily a nurse's outfit might set off some kinky roleplay.\n\n");
 				else {
-					outputText("You have a hunch that if you had a nurse's outfit you could get Amily to give you a rather erotic checkup, provided ");
-					if (!player.hasCock())
-						outputText("you had a dick.");
-					else if (player.cockThatFits(61) < 0) outputText(" your dick could fit.");
+					outputText("You have a hunch that if you had a nurse's outfit you could get Amily to give you a rather erotic checkup");
+                    if (player.cockThatFits(61) < 0) {
+                        outputText(", provided ");
+                        if (!player.hasCock())
+                            outputText("you had a dick.");
+                        else if (player.cockThatFits(61) < 0) outputText(" your dick could fit.");
+                    }
+                    else outputText(".");
 				}
 			}
 			if (haveGift)
@@ -4534,7 +4447,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText(".  She rubs her head all over your crotch, making sure to catch as much of your musk as possible; as well as exciting you further. Finally when she's done she begins saying, \"<i>Thank you for allowing this worthless cunt to taste your wonderful essence, my " + player.mf("master","mistress") + ".</i>\" Amily gives your shaft a small lick and then continues, \"<i>Blessed be, oh great Marae, for granting this slutty cumdumpster mercy and allowing me to have and serve my " + player.mf("master","mistress") + " so fully. Amen.</i>\"  ");
 			outputText("With that said, she grins widely and dives into her task, brutally shoving as much of your shaft into her mouth as she can.");
 			//[(if PC is huge)
-			if(player.cockArea(0) > 61) outputText("  However, even she has her limits. At one point Amily's throat just can't take in any more of you, and the rest of your shaft is left out of her mouth. She's determined to take in all of you however; and keeps trying to push more of your shaft inside, until you get tired of waiting and tell her to just start bobbing like a good slut. She immediately complies.");
+			if(player.biggestCockArea() > 61) outputText("  However, even she has her limits. At one point Amily's throat just can't take in any more of you, and the rest of your shaft is left out of her mouth. She's determined to take in all of you however; and keeps trying to push more of your shaft inside, until you get tired of waiting and tell her to just start bobbing like a good slut. She immediately complies.");
 			outputText("\n\n");
 
 			outputText("Amily's skills have been honed to near perfection.  She is familiar with your [cock] and is able to massage every single sensitive spot on your cock. Every time she bobs her head, she slurps noisily on your shaft and rakes her teeth teasingly; always careful so she won't hurt this most precious part of her " + player.mf("master","mistress") + ".\n\n");
@@ -4742,7 +4655,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("</i>\" you say, nonchalantly attempting to pull away from her. \"<i>No!</i>\" Amily screams; her legs tighten about your waist with such force that she actually lifts herself off of the ground in her eagerness to plant herself firmly against your crotch, rubbing her slavering pussy against you. \"<i>Mine! My fuck! Mine!</i>\" she squeaks indignantly. You laugh at how far you've pushed your little mouse slave.  Sliding your [cock] against her pussy, you bend down and grope her breasts roughly, drawing a desperate moan from her; slowly you get closer to her ears, then whisper, \"<i>Go ahead,</i>\" while humping against her to further excite her.\n\n");
 
 			//(If PC is Huge)
-			if(player.cockArea(0) >= 61) {
+			if(player.biggestCockArea() >= 61) {
 				outputText("She quivers with tension; for a moment, you think she's going to kiss you in gratitude. But then, instead, she remembers her place and pushes backward, her tail awkwardly coiling around your [cock] and pulling on it to clumsily maneuver it into place. You can feel the heat emanating from her juicy cunt as the tip brushes against its lips, but no matter how much she pushes, she just can't seem to get it in. She pushes and grinds against your [cock] with all her might, with no regards if she hurts herself in the process. You decide to stop her before she does something irreversible. \"<i>F-Forgive me " + player.mf("master","mistress") + ". This slut's useless cunt is unfit for your glorious [cock], " + player.mf("master","mistress") + ".</i>\" You pat her in the head and tell her that someday, perhaps, she will be able to take all of you in, but for now she should take it slow. You grind against her, lubing up your [cock] as well as you can, and stretching her bit by bit. Then with a bit of effort you finally manage to get some if it inside. \"<i>See? This is how you get a huge cock inside you Amily,</i>\" you tell her. \"<i>You truly are most wise " + player.mf("master","mistress") + ",</i>\" Amily comments. You smile and say, \"<i>Now get back in character slut,</i>\" giving her ass a good slap.\n\n");
 			}
 			else {
@@ -4888,7 +4801,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("You press your cockhead against Amily's throbbing ass and, with a groan, push inside. Amily moans lewdly, the pain of having her ass penetrated not even registering beyond the pleasure of the act. \"<i>Yesssss... " + player.mf("Master","Mistress") + ", fuck your mousy slut's ass! Fuck me until my ass is gaping wide. Oh! " + player.mf("master","mistress") + ", I love being your fucktoy!</i>\" Amily screams in praise as you fill her insides.\n\n");
 
 			//[(if PC is huge)
-			if(player.cockArea(0) >= 61) outputText("You force as much of your shaft in as you can; until you reach a point where pushing against Amily just rocks her and your shaft won't go deeper. Amily "+((flags[kFLAGS.AMILY_NOT_FURRY]==0)?"squeaks":"squeals")+" desperately. \"<i>No, no, no! I want all of " + player.mf("master","mistress") + ". Please " + player.mf("master","mistress") + "! Push harder!</i>\" Amily says, gripping the floor with her "+((flags[kFLAGS.AMILY_NOT_FURRY]==0)?"claws":"hands")+" and pushing back herself. But no matter how much you try, you're unable to drive any more of your [cock] inside.");
+			if(player.biggestCockArea() >= 61) outputText("You force as much of your shaft in as you can; until you reach a point where pushing against Amily just rocks her and your shaft won't go deeper. Amily "+((flags[kFLAGS.AMILY_NOT_FURRY]==0)?"squeaks":"squeals")+" desperately. \"<i>No, no, no! I want all of " + player.mf("master","mistress") + ". Please " + player.mf("master","mistress") + "! Push harder!</i>\" Amily says, gripping the floor with her "+((flags[kFLAGS.AMILY_NOT_FURRY]==0)?"claws":"hands")+" and pushing back herself. But no matter how much you try, you're unable to drive any more of your [cock] inside.");
 			else {
 				outputText("You push until your hips meet her cushiony ass ");
 				if(player.balls > 0) outputText("and your [balls] slap against her pussy, causing her juices to squirt all over them.");
@@ -5014,6 +4927,10 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			clearOutput();
 			outputText("You take Amily by the hand and allow her to lead you to where it is she plans on having sex with you. Soon enough, through many twists and turns, you are in a makeshift bedroom in an otherwise gutted building.\n\n");
 
+            if (player.gender == 3 && flags[kFLAGS.AMILY_WANG_LENGTH == 0])
+                outputText("You suggest using your other sex this time.  ");
+            else if (player.gender == 3 && flags[kFLAGS.AMILY_WANG_LENGTH == 0])
+                outputText("You suggest indulging in your feminine parts.  ");
 			//(If first time:
 			if(flags[kFLAGS.AMILY_TIMES_FUCKED_FEMPC] == 0) outputText("Amily stops and lets go of your hand, blushing faintly and looking embarrassed. \"<i>So, ah... how do we do this? I... I've never been attracted to another woman before, how does sex even work between us?</i>\"\n\n");
 			else outputText("\"<i>Remember how you had to take charge the first time?</i>\" She grins. \"<i>Care to see if you've still got it?</i>\"\n\n");
@@ -5032,8 +4949,11 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 			outputText("Under such mininstrations, it is no surprise that, inevitably, both of you cum, leaving each other's faces splattered with your juices. Sighing with relief, you roll off of Amily's body and lay there in her bed, breathing heavily from your exertions.\n\n");
 
-			if(flags[kFLAGS.AMILY_TIMES_FUCKED_FEMPC] == 0) outputText("\"<i>...I didn't know it could feel so good with another woman.... But I was never attracted to women before.</i>\" Amily murmurs to herself.\n\n");
-			else outputText("\"<i>...Does it make me a lesbian, that I love this so much? Or am I just so lonely for company that even another woman is good?</i>\" Amily asks. Then she musters the energy to shake her head. \"<i>It doesn't matter. I love you.</i>\"\n\n");
+            
+            if (flags[kFLAGS.AMILY_TIMES_FUCKED_FEMPC] == 0) outputText("\"<i>...I didn't know it could feel so good with another woman.... But I was never attracted to women before.</i>\" Amily murmurs to herself.\n\n");
+            else {
+                outputText("\"<i>...Does it make me a lesbian, that I love this so much? Or am I just so lonely for company that even " + (player.gender == 2 ? "another woman" : "this kind of sex") + " is good?</i>\" Amily asks. Then she musters the energy to shake her head. \"<i>It doesn't matter. I love you.</i>\"\n\n");
+            }
 
 			outputText("Your own strength returning to you, you sit up and smile at your mousey lover before giving her a deep kiss, tasting your juices and letting her get a taste of her own. Then you redress yourself and return to your camp.");
 			player.sexReward("cum","Vaginal");
@@ -5161,7 +5081,11 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("You stare at her in surprise. Then, you take hold of her hands and smile at her. You tell her that nothing would make you happier than to have her here, living with you, being with her. Amily squeaks loudly with joy and passionately embraces you, kissing you as deeply as she can. When she finally lets you go for lack of air, she takes a good long look around the camp, as if she's seeing it for the first time.\n\n");
 
 			outputText("\"<i>Well, I better start moving in, huh?</i>\" she jokes. She then flops down on your sleeping roll beside you, \"<i>There we are, I'm moved in.</i>\" She grins at you, and you can't help but laugh.\n\n");
-
+			outputText("\n\n<b>As if remembering something Amily pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
+			if (player.hasKeyItem("Radiant shard") >= 0){
+				player.addKeyValue("Radiant shard",1,+1);
+			}
+			else player.createKeyItem("Radiant shard", 1,0,0,0);
 			//(Amily becomes a follower; quest is over)
 			//Disable village encounters!
 			flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 1;
@@ -5367,7 +5291,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 						flags[kFLAGS.AMILY_OFFER_ACCEPTED] = 1;
 						//(Use the Remeeting scene options.)
 						if (player.lust >= 33) sex = sexWithAmily;
-						if (sex != null) simpleChoices("Sex", sex, "Talk", talkToAmily, "Both", talkThenSexWithAmily, "", null, "", null);
+						if (sex != null) simpleChoices("Sex", sex, "Talk", talkToAmily, "Both", determineAmilySexEvent() == null ? null : talkThenSexWithAmily, "", null, "", null);
 						else simpleChoices("", null, "Talk", talkToAmily, "", null, "", null, "", null);
 						return;
 					}
@@ -5380,7 +5304,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 						flags[kFLAGS.AMILY_OFFER_ACCEPTED] = 1;
 						//(Use the Remeeting scene options.)
 						if (player.lust >= 33) sex = sexWithAmily;
-						if (sex != null) simpleChoices("Sex", sex, "Talk", talkToAmily, "Both", talkThenSexWithAmily, "", null, "", null);
+						if (sex != null) simpleChoices("Sex", sex, "Talk", talkToAmily, "Both", determineAmilySexEvent() == null ? null : talkThenSexWithAmily, "", null, "", null);
 						else simpleChoices("", null, "Talk", talkToAmily, "", null, "", null, "", null);
 						return;
 					}
@@ -5728,7 +5652,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			outputText("\"<i>Hey there, [name], how... are you?</i>\" She trails off with a troubled expression. \"<i>You seem different...</i>\" She murmurs, studying you intently, and then she obviously comes to a sudden realization. \"<i>Have you had contact with demons!? You... This feeling... You're corrupted!</i>\" You take a step towards her, causing her to leap back. \"<i>N-No! Stay away!</i>\" She yells, hand darting towards her blowpipe. She spits a dart right at you!\n\n");
 
 			//(if PC doesn't have the perk Evasion or Feline Flexibility)
-			if(player.findPerk(PerkLib.Evade) < 0 && player.findPerk(PerkLib.Flexibility) < 0) {
+			if(!player.hasPerk(PerkLib.Evade) && !player.hasPerk(PerkLib.Flexibility)) {
 				outputText("Amily's sudden reaction catches you off guard and the dart hits you; almost immediately you feel your body going stiff. Amily doesn't even wait to see if she hit you or not before running away, yelling back at you.\n\n");
 
 				outputText("\"<i>Don't come near me again!  You're tainted, ruined!</i>\" Her voice is panicked, as she disappears into the ruins.\n\n");
@@ -5878,9 +5802,9 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 			outputText("You tell your pet mouse that she is to head towards the lake, find a farm, present herself to the lady who works there and do as she says.");
 
-			outputText("\n\n“<i>You’re... you’re sending me away?</i>” An expression of miserable horror dawns on Amily’s face. “<i>Have... have I done something to offend you [master]? Please punish me any way you see fit, I deserve it, but please don’t take me away from your glorious person!</i>” You laugh fondly.");
+			outputText("\n\n\"<i>You’re... you’re sending me away?</i>\" An expression of miserable horror dawns on Amily’s face. \"<i>Have... have I done something to offend you [master]? Please punish me any way you see fit, I deserve it, but please don’t take me away from your glorious person!</i>\" You laugh fondly.");
 
-			outputText("\n\n“<i>This isn’t a punishment, but I need you to be doing more than sitting around diddling yourself to the thought of servicing me. I’ll visit often and keep you well fed, don’t worry about that - and all that farm work will make you nice and limber for when I’m throwing you around. Go on now.</i>” Slightly mollified but still looking uncertain, Amily gets up off her knees and trundles off in the direction of the lake.");
+			outputText("\n\n\"<i>This isn’t a punishment, but I need you to be doing more than sitting around diddling yourself to the thought of servicing me. I’ll visit often and keep you well fed, don’t worry about that - and all that farm work will make you nice and limber for when I’m throwing you around. Go on now.</i>\" Slightly mollified but still looking uncertain, Amily gets up off her knees and trundles off in the direction of the lake.");
 
 			outputText("\n\nShe will make a hard worker for Whitney, you think, but you doubt she will be much use protection wise.");
 
@@ -5895,7 +5819,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 			outputText("You tell her to head back to camp; there are things you need to do to her you can’t do whilst she’s here. Repeatedly. Amily bites her lip, trembling with excitement.");
 
-			outputText("\n\n“<i>Immediately, [master]!</i>” You watch the purple blur disappear over the hill and laugh to yourself.");
+			outputText("\n\n\"<i>Immediately, [master]!</i>\" You watch the purple blur disappear over the hill and laugh to yourself.");
 
 			flags[kFLAGS.FOLLOWER_AT_FARM_AMILY] = 0;
 
@@ -5909,10 +5833,10 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 			outputText("You tell Amily that you want her hooked up to a milking machine whenever possible; you need her fluids.");
 
-			outputText("\n\n“<i>You want to use me like an animal, [master]? Drain my teats every day like the fuck-cow I am?</i>” Amily quivers, staining the ground beneath her with pussy juices at the thought.");
+			outputText("\n\n\"<i>You want to use me like an animal, [master]? Drain my teats every day like the fuck-cow I am?</i>\" Amily quivers, staining the ground beneath her with pussy juices at the thought.");
 
-			if (flags[kFLAGS.FARM_UPGRADES_REFINERY] == 0) outputText("\n\n“<i>I-I’m sorry though, master. The milk I produce wouldn’t be much use to you. Talk to Mistress Whitney, maybe she can be build a machine that can concentrate it.</i>”");
-			else outputText("\n\n“<i>It will be an honor, [master]!</i>”");
+			if (flags[kFLAGS.FARM_UPGRADES_REFINERY] == 0) outputText("\n\n\"<i>I-I’m sorry though, master. The milk I produce wouldn’t be much use to you. Talk to Mistress Whitney, maybe she can be build a machine that can concentrate it.</i>\"");
+			else outputText("\n\n\"<i>It will be an honor, [master]!</i>\"");
 
 			if (flags[kFLAGS.FARM_UPGRADES_REFINERY] == 1) flags[kFLAGS.FOLLOWER_PRODUCTION_AMILY] = 1;
 
@@ -5926,7 +5850,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 			outputText("You tell Amily to stop producing succubus milk; you’re practically drowning in the stuff.");
 
-		outputText("\n\n“<i>Ooh... what a fabulous idea.</i>” Amily moans and begins to paw at her vagina. You cough deliberately before she can immerse herself entirely in the fantasy. “<i>O-of course [master]. I’ll stop immediately.</i>”");
+		outputText("\n\n\"<i>Ooh... what a fabulous idea.</i>\" Amily moans and begins to paw at her vagina. You cough deliberately before she can immerse herself entirely in the fantasy. \"<i>O-of course [master]. I’ll stop immediately.</i>\"");
 
 			flags[kFLAGS.FOLLOWER_PRODUCTION_AMILY] = 0;
 
@@ -6126,7 +6050,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				outputText("\"<i>Imps,</i>\" Amily says. \"<i>They're weak and small, easy to cut down. They're also all over the place, looking to rape anything they can get their hands on; they can also use some black magic to get you horny. I used to kill them all the time, but there was always more.</i>\" Amily smiles a bit. \"<i>They have big cocks as well, I wouldn't mind having a cock that big inside me,</i>\" She says, her eyes slowly moving towards your crotch.\n\n");
 
 				//[(if PC has a dick < 24 area)
-				if(player.cockArea(0) < 24 && player.hasCock()) outputText("\"<i>" + player.mf("Master","Mistress") + ", can you grow a bigger cock to fuck your loyal cumdumpster?</i>\"");
+				if(player.biggestCockArea() < 24 && player.hasCock()) outputText("\"<i>" + player.mf("Master","Mistress") + ", can you grow a bigger cock to fuck your loyal cumdumpster?</i>\"");
 				//(else if PC has a dick >= 24 area)
 				else if(player.hasCock()) outputText("\"<i>" + player.mf("Master","Mistress") + " I'm so horny, can you take your huge cock and jam it into your slutty mouse slave?</i>\"");
 				//(else)
@@ -6511,7 +6435,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			clearOutput();
 			outputText("You strip while Amily watches hungrily. Finally naked, you order the mouse to come closer and use her breasts to pleasure you. Amily quickly scoots closer on her knees and press her breasts around your [cock].");
 			//[(if PC is huge)
-			if(player.cockArea(0) >= 61) outputText("  She can't get her breasts all the way around though, still she doesn't stop, determined to do as you ordered.");
+			if(player.biggestCockArea() >= 61) outputText("  She can't get her breasts all the way around though, still she doesn't stop, determined to do as you ordered.");
 			outputText("\n\n");
 
 			outputText("Amily begins moving her ");
@@ -6535,7 +6459,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 			outputText("Amily jumps up and rushes to nuzzle at your still erect [cock]. \"<i>Thank you! Thank you! Thank you!</i>\" she says excitedly. Then with a lick of her lips, she opens wide to accept your meat.  ");
 			//[(if PC is huge)
-			if(player.cockArea(0) > 50) outputText("You didn't think it was possible, but somehow ");
+			if(player.biggestCockArea() > 50) outputText("You didn't think it was possible, but somehow ");
 			outputText("Amily manages to fit all of you inside her in one go.  She gurgles in ecstasy and sends vibrations along your shaft, drawing a moan of pleasure from you. Her tongue darts out of her mouth to lick at ");
 			if(player.balls > 0) outputText("your " + ballsDescriptLight());
 			else if(player.hasVagina()) outputText("your " + vaginaDescript());
@@ -6666,7 +6590,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 			outputText("She backs off and gives your tip a light kiss, which quickly turns into a slurp as you feel your [cock] slip into her throat; there is barely any resistance, your cock glides down her throat, Amily doesn't gag at all.");
 			//[(if PC is huge)
-			if(player.cockArea(0) > 50) outputText("  You smirk, pleased; with your size, you'd probably choke whomever tried to swallow your [cock] to death. But Amily doesn't choke or gag, she's only capable of moaning in delight with each inch that she manages to fit inside her hungry maw.");
+			if(player.biggestCockArea() > 50) outputText("  You smirk, pleased; with your size, you'd probably choke whomever tried to swallow your [cock] to death. But Amily doesn't choke or gag, she's only capable of moaning in delight with each inch that she manages to fit inside her hungry maw.");
 			outputText("\n\n");
 
 			outputText("In no time at all, you're all the way inside her maw; she looks up at you smiling, as her tongue darts out to give ");
@@ -6827,6 +6751,11 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 			outputText("Amily grins and replies seductively, \"<i>Yes, " + player.mf("master","mistress") + "... Your orders are my pleasure.</i>\"\n\n");
 			outputText("<b>(Corrupted Amily added to slaves)</b>");
+			if (player.hasKeyItem("Radiant shard") >= 0){
+				player.addKeyValue("Radiant shard",1,+1);
+			}
+			else player.createKeyItem("Radiant shard", 1,0,0,0);
+			outputText("\n\n<b>Before heading for your camp as if remembering something Amily pulls a shining shard from her inventory and hand it over to you as a gift. You acquired a Radiant shard!</b>");
 			//Add corrupted amily flag here
 			flags[kFLAGS.AMILY_FOLLOWER] = 2;
 			//Switch to less lovey pregnancy!
@@ -6834,7 +6763,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			//Make babies disappear
 			//pregnancyStore.knockUpForce(); //Clear Pregnancy - though this seems unneccessary to me. Maybe it was needed in an older version of the code?
 			//Set other flags if Amily is moving in for the first time
-			if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00173] == 0) {
+			if(flags[kFLAGS.AMILY_WARNING] == 0) {
 				flags[kFLAGS.AMILY_CUP_SIZE] = 5;
 				flags[kFLAGS.AMILY_NIPPLE_LENGTH] = .5;
 				flags[kFLAGS.AMILY_HIP_RATING] = 12;
@@ -7012,7 +6941,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			clearOutput();
 			amilySprite();
 			outputText("Amily approaches you, looking concerned.  \"<i>Darling... I don't know what's been going on, but you need to start taking better care of yourself.  I can smell the corruption taking root in you - if you don't stop, you'll soon start acting like any other demon.</i>\"\n\n");
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00173] = 1;
+			flags[kFLAGS.AMILY_WARNING] = 1;
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -7056,7 +6985,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			//Move in
 			flags[kFLAGS.AMILY_FOLLOWER] = 1;
 			//Clear 'warning'
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00173] = 0;
+			flags[kFLAGS.AMILY_WARNING] = 0;
 			//Disable village encounters
 			flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 1;
 		}
@@ -7111,6 +7040,8 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			doNext(camp.returnToCampUseOneHour); // To camp
 		}
 
+//Anyone, find a place to call it please
+/*
 		// NOTE: Not sure how this ties in.
 		// Be a humongous asshole to Amily and tell her that she's, in effect, a whiny bitch.  Or something.
 		private function amilySufferNotTheFurryToLive():void
@@ -7121,6 +7052,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			clearOutput();
 			outputText("You laugh spitefully as you look at the now humanized mouse girl. You tell her, with a grin on your face, that you did all this to screw with her; she should really trust her gut next time. Continuing with your tirade, you tell her that she's a complete fool, as well as a hypocrite that pretends to be noble, but is just a whore deep down inside. Pausing only to savor the look of betrayal on her face, you remark that her clinging to some twisted ideal of repopulating her people is just a depraved pipe dream; one that will never happen. You smirk and taunt her, implying that she should \"enjoy\" her new body as you depart, leaving your words to ring through her as she visibly tears up. The faint sounds of sniffling are all that echo behind you as you head back to camp.");
 		}
+*/
 
 		public function amilyDefurryOfferAtCamp():void
 		{
@@ -7397,7 +7329,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 
 			// Reset urta cumtimer
 			flags[kFLAGS.URTA_CUM_NO_CUM_DAYS] = 0;
-			flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 3+rand(4);
+			urta.hoursUntilHorny(3+rand(4));
 			//Enable threesome mode!
 			if(flags[kFLAGS.AMILY_VISITING_URTA] == 0) {
 				outputText("\n\n(<b>Urta unlocked in Amily's sex menu!</b>)");
@@ -7833,7 +7765,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 				if(player.lib >= 60) outputText(", eagerly anticipating the opportunity to drink in her form while it's bound up in body-hugging black fabric.");
 				else if(player.cor < 50) outputText(", happy to share the fruits of your adventure with your mousy lover.");
 				else outputText(", secretly hoping she'll get used to putting on a show for you.");
-				outputText("\n\nAmily's eyes open so wide they're nearly as big around as her ears, and she happily bounds up to you, touching the fabric carefully.  \"<i>It's so beautiful, [name],</i>\" she says, \"Do you really think I would look good in something like this?</i>\"  She bounces on her toes, still touching the fabric but unwilling to take it out of your hands.");
+				outputText("\n\nAmily's eyes open so wide they're nearly as big around as her ears, and she happily bounds up to you, touching the fabric carefully.  \"<i>It's so beautiful, [name],</i>\" she says, \"<i>Do you really think I would look good in something like this?</i>\"  She bounces on her toes, still touching the fabric but unwilling to take it out of your hands.");
 				outputText("\n\nYou push the pile of tiny triangles and string into the mouse-girl's hands and say, \"<i>Why don't you try it on and come for a swim in the stream with me?  Then we can see just how good it looks on you.</i>\"");
 				outputText("\n\nShe squeaks in excitement and runs off, cheeks aglow.  The saucy sway of her " + amilyHips() + " draws your eye as she vanishes behind a rock and makes it clear she's not too shy to change around you - she's just building up to a big reveal.  You suppress the urge to follow her and sneak a peak.  Seeing her half-clothed isn't exactly a new thing for you, and you want to be floored when you see how she fills it out.  Sitting back on a rock, the sounds of swishing fabric reaches your ears, and before you know it, Amily calls out, \"<i>Okay, I'm ready!");
 				if(flags[kFLAGS.AMILY_WANG_LENGTH] > 0) outputText("  D-don't laugh, okay?");
@@ -8032,7 +7964,7 @@ public class AmilyScene extends NPCAwareContent implements TimeAwareInterface
 			if(flags[kFLAGS.IZMA_NO_COCK] > 0) outputText("former-");
 			outputText("hermaphrodite giggles, and whispers, \"<i>I didn't need them anyway.</i>\"");
 
-			outputText("\n\nAmily's big, fuzzy ears tickle your head as she nuzzles at the nape of her neck.  Her arm falls across your torso onto the far side of your [chest] to gently cup ");
+			outputText("\n\nAmily's big, fuzzy ears tickle your head as she nuzzles at the nape of your neck.  Her arm falls across your torso onto the far side of your [chest] to gently cup ");
 			if(player.averageNipplesPerBreast() <= 1) outputText("one of your nipples");
 			else outputText("at your multitude of nipples");
 			outputText(".  Panting eagerly, she licks up the underside of your chin, eventually cresting your jawline.  Her lips meet yours, their supple, slippery pressure heavenly on your own, and a slim tongue sides across the paired puckers to delve inside your maw.  You return the gesture in kind, slithering around your flexible organ to taste her mouth... her lips... her everything.  You make love to her mouth the way you imagine you'll be making love to her nethers in a few moments.");

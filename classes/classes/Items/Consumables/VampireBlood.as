@@ -1,9 +1,12 @@
 package classes.Items.Consumables {
+import classes.BodyParts.Antennae;
 import classes.BodyParts.Arms;
 import classes.BodyParts.Ears;
 import classes.BodyParts.Eyes;
 import classes.BodyParts.Face;
+import classes.BodyParts.Horns;
 import classes.BodyParts.RearBody;
+import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
 import classes.CoC;
 import classes.Items.Consumable;
@@ -96,6 +99,24 @@ public class VampireBlood extends Consumable {
                 outputText("\n\n");
                 CoC.instance.transformations.EyesChangeColor(["blood-red"]).applyEffect();
 
+                changes++;
+            }
+
+            if (rand(3) == 0 && changes < changeLimit && player.tailType != Tail.NONE) {
+                outputText("\n\n");
+                CoC.instance.transformations.TailNone.applyEffect();
+                changes++;
+            }
+
+            if (rand(3) == 0 && changes < changeLimit && player.horns.type == Horns.NONE) {
+                outputText("\n\n");
+                CoC.instance.transformations.HornsNone.applyEffect();
+                changes++;
+            }
+
+            if (rand(3) == 0 && changes < changeLimit && player.antennae.type == Antennae.NONE) {
+                outputText("\n\n");
+                CoC.instance.transformations.AntennaeNone.applyEffect();
                 changes++;
             }
 

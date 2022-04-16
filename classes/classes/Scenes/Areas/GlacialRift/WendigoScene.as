@@ -115,7 +115,7 @@ package classes.Scenes.Areas.GlacialRift
 				else if (player.hasPlainSkinOnly()) CoC.instance.transformations.SkinFur(Skin.COVERAGE_LOW, {color: player.coatColor}).applyEffect(false);
 			}
 			else {
-        CoC.instance.transformations.FaceAnimalTeeth.applyEffect(false);
+				CoC.instance.transformations.FaceAnimalTeeth.applyEffect(false);
 				if (!player.hasPlainSkinOnly() && !player.hasPartialCoat(Skin.FUR)) CoC.instance.transformations.SkinPlain.applyEffect(false);
 			}
 			if (player.tailType != Tail.WENDIGO) CoC.instance.transformations.TailWendigo.applyEffect(false);

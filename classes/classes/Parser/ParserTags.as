@@ -7,6 +7,7 @@ import classes.Measurements;
 import classes.internals.Utils;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects;
+import classes.Scenes.NPCs.Forgefather;
 import classes.PlayerAppearance;
 import classes.internals.Utils;
 
@@ -62,7 +63,7 @@ public class ParserTags {
         "feet"                  : function ():* { return CoC.instance.player.feet(); },
         "foot"                  : function ():* { return CoC.instance.player.foot(); },
         "fullchest"             : function ():* { return CoC.instance.player.allChestDesc(); },
-        "gargoylematerial"      : function ():* { return PlayerAppearance.getGargoyleMaterial(CoC.instance.flags[kFLAGS.GARGOYLE_BODY_MATERIAL]); },
+        "gargoylematerial"      : function ():* { return Forgefather.material; },
         "hair"                  : function ():* { return CoC.instance.player.hairDescript(); },
         "hairshortdesc"         : function ():* { return Appearance.hairShortDescription(CoC.instance.player); },
         "haircolor"             : function ():* { return CoC.instance.player.hairColor; },
@@ -114,6 +115,7 @@ public class ParserTags {
         "doubletallness"        : function ():* { return Measurements.footInchOrMetres(CoC.instance.player.tallness * 2); },
         "quadrupletallness"     : function ():* { return Measurements.footInchOrMetres(CoC.instance.player.tallness * 2); },
         "teasetext"             : function ():* { return SceneLib.combat.teaseText(); },
+        "themonster"            : function ():* { return CoC.instance.monster.a + CoC.instance.monster.short; },
         "tongue"                : function ():* { return Appearance.tongueDescription(CoC.instance.player); },
         "uppergarment"          : function ():* { return CoC.instance.player.upperGarmentName; },
         "vag"                   : function ():* { return CoC.instance.player.vaginaDescript(); },
@@ -190,6 +192,39 @@ public class ParserTags {
         "breasts": function ():String {return SceneLib.telAdre.rubi.rubiBreasts();}
 
     };
+
+    /**
+     * provides lookups for subject: "exc" (Excellia)
+     * note that these are only used in doubleArgLookups
+     */
+    internal static var excelliaLookups:Object = {
+        "race"  : function ():String {return SceneLib.excelliaFollower.girlRacial(); },
+        "moo"   : function ():String {return SceneLib.excelliaFollower.humanCow("moan", "moo"); },
+        "slut"   : function ():String {return SceneLib.excelliaFollower.humanCow("slut", "cow"); }
+    };
+
+    /**
+     * provides lookups for subject: "onyx" (Onyx/Krystal, second gargoyle in the TempleOfTheDivine)
+     * note that these are only used in doubleArgLookups
+     *
+     * unhandled terms (I have not decided how to support them yet):
+     * arianMF("mas","mis")
+     * arianMF("master","mistress")
+     * arianMF("male","girly")
+     */
+    internal static var onyxLookups:Object = {
+        "man": function ():String {SceneLib.highMountains.templeofdivine.onyxMF("man", "woman"); },
+        // argh! "Man" is the mass-noun for humanity, and I'm loathe to choose an even more esoteric variant.
+        // Elverson/Spivak terminology is already esoteric enough, and it lacks a ungendered mass noun.
+
+        "ey"    : function ():String {return SceneLib.highMountains.templeofdivine.onyxMF("he", "she"); },
+        "em"    : function ():String {return SceneLib.highMountains.templeofdivine.onyxMF("him", "her"); },
+        "eir"   : function ():String {return SceneLib.highMountains.templeofdivine.onyxMF("his", "her"); },
+        "eirs"  : function ():String {return SceneLib.highMountains.templeofdivine.onyxMF("his", "hers"); },
+        "emself": function ():String {return SceneLib.highMountains.templeofdivine.onyxMF("himself", "herself"); },
+        "name"  : function ():String {return SceneLib.highMountains.templeofdivine.onyxName(); }
+    };
+
     /** PC ASCII Aspect lookups for subject: "cock"*/
     internal static var cockLookups:Object = {
         "all"      : function ():* { return CoC.instance.player.multiCockDescriptLight(); },
@@ -432,8 +467,11 @@ public class ParserTags {
      */
     internal static var twoWordTagsLookup:Object = {
         // NPCs:
-        "rubi"   : rubiLookups,
-        "arian"  : arianLookups,
+        "rubi"  : rubiLookups,
+        "arian" : arianLookups,
+        "exc"   : excelliaLookups,
+        "onyx"  : onyxLookups,
+
         "monster": monsterLookups,
 
         // PC Attributes:

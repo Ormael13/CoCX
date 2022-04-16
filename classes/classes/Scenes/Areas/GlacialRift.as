@@ -154,7 +154,7 @@ use namespace CoC;
 					wendigoScene.encounterWendigo();
 					break;
 				case 7: //Find Valeria! She can be found there if you rejected her offer initially at Tower of the Phoenix or didn't find her. She can never be Lost Forever.
-					spriteSelect(79);
+					spriteSelect(SpriteDb.s_valeria);
 					flags[kFLAGS.VALERIA_FOUND_IN_GLACIAL_RIFT] = 1;
 					clearOutput();
 					outputText("As you make your way across the Rift's icy extremities, you hear a metallic CLANK CLANK approaching through the snow flurries. You turn in time to see a suit of plated mail charging toward you, its helm and limbs filled with bright blue goo. It skids to a stop a few yards away, a greatsword forming from the goo of its hand. A beautiful, feminine face appears beneath the armor’s visor grinning at you. You suddenly recognize her face!\n\n");
@@ -241,19 +241,12 @@ use namespace CoC;
 		}
 
 		public function SubZeroConditionsTick():void {
-			var HPD:Number = 0.1;
-			if ((Math.round(player.damageIcePercent())) >= 55) HPD -= 0.01;
-			if ((Math.round(player.damageIcePercent())) >= 70) HPD -= 0.01;
-			if ((Math.round(player.damageIcePercent())) >= 80) HPD -= 0.01;
-			if ((Math.round(player.damageIcePercent())) >= 90) HPD -= 0.01;
-			if ((Math.round(player.damageIcePercent())) >= 95) HPD -= 0.01;
-			if (player.hasPerk(PerkLib.FireAffinity) && HPD > 0) HPD *= 2;
-			if (CoC.instance.inCombat) HPD *= 0.5;
-			if (HPD > 0) {
-				HPD *= player.maxHP();
-				HPD = Math.round(HPD);
-				HPChange(-HPD, true);
-			}
+			var HPD:Number = 0.05;
+			if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) HPD *= 2;
+			HPD *= player.maxHP();
+			HPD = Math.round(HPD);
+			outputText("Cold environment slowly seeps into your body. ");
+			player.takeIceDamage(HPD, true);
 		}
 
 		private function fightValeria():void {

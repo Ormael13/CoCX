@@ -36,6 +36,14 @@ package classes.Items
 			return desc;
 		}
 		
+		override public function canUse():Boolean {
+			if (game.player.hasPerk(PerkLib.Rigidity)) {
+				outputText("You would very like to equip this item but your body stiffness prevents you from doing so.");
+				return false;
+			}
+			return true;
+		}
+		
 		override public function useText():void {
 			outputText("You equip " + longName + ".  ");
 		}

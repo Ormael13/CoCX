@@ -16,20 +16,13 @@ import classes.Scenes.Dungeons.BeeHive.DemonicBee;
 import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 
 	public class BeeHive extends DungeonAbstractContent
-	{
-		private static const DUNGEON_BEE_HIVE_1:int	= 169;
-		private static const DUNGEON_BEE_HIVE_2:int	= 170;
-		private static const DUNGEON_BEE_HIVE_3:int	= 171;
-		private static const DUNGEON_BEE_HIVE_4:int	= 172;
-		private static const DUNGEON_BEE_HIVE_5:int	= 173;
-		
+	{		
 		public function BeeHive() {}
 		
 		public function enterDungeon():void {
 			inDungeon = true;
-			dungeonLoc = 169;
-			if (flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] == 1 && flags[kFLAGS.TIFA_FOLLOWER] < 6) room1Pass();
-			playerMenu();
+			if (flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] < 2.75) room1Pass();
+			else room1South();
 		}
 		
 		public function exitDungeon():void {
@@ -40,6 +33,8 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 		}
 		
 		private function room1Pass():void {
+			clearOutput();
+			dungeonLoc = DUNGEON_BEE_HIVE_1;
 			outputText("As vague as the directions from that bee-girl were, you still managed to find the path she was indicating, and now you find yourself staring at the \"Hive\" she was talking about. It's quite an impressive sight, an edifice of wax built around the trees of the Deepwoods, it's almost the size of a small hill, it’s top reaching for the canopy and its sides vanishing into the gloom on either side of your vision. ");
 			outputText("Fortunately, there are no battles being fought in your path, despite the mental image of her usage of the word \"siege\" had invoked, and you can see an entrance into the hive. Unfortunately, it's not unguarded.\n\n");
 			outputText("There are two creatures standing in your way, and they could be identical twin sisters. They look like the bee-girls you have seen in the Forest... and yet they couldn't be more different. They're huge, easily seven feet tall and while their breasts aren't exactly small, their physiques can only be described as amazonian, with muscles visibly rippling under their tanned yellow skin even from here. ");
@@ -60,6 +55,8 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 					outputText("Apologising, you hurry past them before they realize you aren't actually one of them.\n\n");
 				}
 				EngineCore.awardAchievement("Buzz Off", kACHIEVEMENTS.DUNGEON_BUZZ_OFF);
+				flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] = 2.75;
+				doNext(playerMenu);
 			}
 			else {
 				outputText("You tell them that you come in peace, trying to look non-threatening as you approach.\n\n");
@@ -191,6 +188,7 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 		}
 		
 		private function room6():void {
+			clearOutput();
 			outputText("As you enter the first thing that hits you is the overpowering smell of honey. At the deepest reach of the room is a large shape of a sex-addled bee you presume to be the queen. Several smaller bees, the corrupted handmaidens, are busily pistoning in and out of a multitude of orifices in her abdomen.\n\n");
 			outputText("As you approach the queen they finally take notice of you.\n\n");
 			outputText("\"<i>Hey, girlzzz therezzz an interloper in the throne room! Letzzz add it to the orgy, mother izzz about to turn and we will need willing incubatorzzz.</i>\"\n\n");
@@ -245,7 +243,7 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 			flags[kFLAGS.TIFA_AFFECTION] = 1;
 			outputText("As you put an end to the life of the fallen bee queen, the princesses and the remaining guards fill the room, looking at the scene with grief. Bridgess talks first.\n\n");
 			outputText("\"<i>Mother izzz dead, thizzz izzz a terrible day for all of uzzz. However azzz the eldezzzt it izzz my rezzzponsability to take up to the tazzzk of queen in her zzztead.</i>\"\n\n");
-			outputText("She walks up to you and does a formal gesture\n\n");
+			outputText("She walks up to you and does a formal gesture.\n\n");
 			outputText("\"<i>You have our thankzzz for zzzaving our hive from corruption and azzz zzzuch I will give you permizzzion to have free pazzzage into the Hive and trade with my honeybrewerzzz for our zzzpecializzzed goodzzz. For now, pleazzze leave, I need zzzome time to mourn my motherzzz death.</i>\"\n\n");
 			outputText("You are escorted out of the Hive but just as you are about to go back to camp, Tifa grabs your arm.\n\n");
 			outputText("\"<i>I’m zzzorry that you had to do thizzz but again thizzz wazzz for the bezzzt. Zzzay what izzz your name?</i>\"\n\n");
@@ -258,31 +256,29 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 		}
 		
 		public function room1South():void {
-			dungeonLoc = 169;
+			dungeonLoc = DUNGEON_BEE_HIVE_1;
 			clearOutput();
 			outputText("<b><u></u>Entrance</b>\n");
 			if (flags[kFLAGS.TIFA_FOLLOWER] > 5) {
 				outputText("The guards let you pass into the Hive reminding you not to stir troubles.\n\n");
 				outputText("\"<i>You are welcome into the Hive azzz by the queen'zzz orderzzz zzzo long azzz you don’t go further than the honeybrewerzzz hallzzz</i>\"");
 			}
-			else if (flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] > 1) outputText("No one's there to block your path to the Hive, it seems you can proceed.");
+			else if (flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] > 2.5) outputText("No one's there to block your path to the Hive, it seems you can proceed.");
 			else outputText("The two guards fall to the ground, "+(flags[kFLAGS.DISCOVERED_BEE_HIVE_DUNGEON] == 2.5 ? "too busy masturbating":"their wounds too great")+" to keep up on fighting. You get past them and enter the Hive.");
 			dungeons.setDungeonButtons(room2Center, null, null, null);
 			addButton(11, "Leave", exitDungeon);
 		}
 		public function room4East():void {
-			dungeonLoc = 170;
+			dungeonLoc = DUNGEON_BEE_HIVE_2;
 			clearOutput();
-			if (flags[kFLAGS.TIFA_FOLLOWER] < 2){
-				room4();
-			}
+			if (flags[kFLAGS.TIFA_FOLLOWER] < 2) room4();
 			if (CoC.instance.inCombat) return;
 			outputText("<b><u></u>Princess cells</b>\n");
 			outputText("Even with the corrupted guard defeated, lingering in this area is dangerous, best not tarry long.");
 			dungeons.setDungeonButtons(null, null, room2Center, null);
 		}
 		public function room2Center():void {
-			dungeonLoc = 171;
+			dungeonLoc = DUNGEON_BEE_HIVE_3;
 			clearOutput();
 			outputText("<b><u></u>Honey Brewers halls</b>\n");
 			if (flags[kFLAGS.TIFA_FOLLOWER] > 5) {
@@ -296,7 +292,7 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 			}
 		}
 		public function room3West():void {
-			dungeonLoc = 172;
+			dungeonLoc = DUNGEON_BEE_HIVE_4;
 			clearOutput();
 			outputText("<b><u></u>The Library</b>\n");
 			room3();
@@ -306,7 +302,7 @@ import classes.Scenes.Dungeons.BeeHive.TheCorruptedHandmaidens;
 			}
 		}
 		public function room5North(first:Boolean = true):void {
-			dungeonLoc = 173;
+			dungeonLoc = DUNGEON_BEE_HIVE_5;
 			clearOutput();
 			outputText("<b><u></u>Far corridor towards the throne room</b>\n");
 			if (flags[kFLAGS.TIFA_FOLLOWER] > 4) outputText("The way to the throne room is open.");

@@ -46,8 +46,8 @@ import classes.Items.*;
 			[ "Grigori", customGrigori, true, "You are a normal villager if not for that dragon cock and the ability to use an ice dragon's breath. That damn ancestor of yours had to go and fuck some dragoness, didn't he?" ],
 			//[ "Sora", customSora, true, "As a Kitsune, you always got weird looks, but none could doubt your affinity for magic......." ],kitsune start
 			//[ "Sora", customSora, true, "As a Kitsune, you always got weird looks, but none could doubt your affinity for magic......." ],cow/mino start
-			[ "Teekna", customTeekna, true, "You were a pretty normal villager, the only oddity other people noticed was your dyed pink hair and yellow eyes. Your ancestor just couldn't keep it in his pants apparently. At least they left some goodies behind for you!" ],
-			[ "Veseshe", customVeseshe, true, "The village sure liked to pierce their arrows into you. But with your natural agility and a bit of elven blood flowing in your veins they sure were trying..." ],
+			[ "Teekna", customTeekna, true, "You were a rather average villager. The thing that made you stand out was your pink hair and yellow eyes. Your ancestors couldn't keep it in their pants, apparently! At least they left some goodies behind for you." ],
+			[ "Veseshe", customVeseshe, true, "The villagers sure liked to pierce their arrows into you... Though, with your natural agility and a bit of elven blood flowing in your veins, they sure were <i>trying.</i>" ],
 			//[ "Sora", customSora, true, "As a Kitsune, you always got weird looks, but none could doubt your affinity for magic......." ],raiju start
 			//[ "Sora", customSora, true, "As a Kitsune, you always got weird looks, but none could doubt your affinity for magic......." ],oni start
 			//[ "Sora", customSora, true, "As a Kitsune, you always got weird looks, but none could doubt your affinity for magic......." ],orc start
@@ -57,23 +57,23 @@ import classes.Items.*;
 
 			[ "With pre-defined history:", null, false, "" ],
 			[ "Annetta", customAnnetta, true, "You're a rather well-endowed hermaphrodite that sports a thick, dog-knotted cock, an unused pussy, and a nice, stretchy butt-hole.  You've also got horns and demonic high-heels on your feet.  It makes you wonder why you would ever get chosen to be champion!" ],
-			[ "Ceveo", customCeveo, true, "As a wandering mage you had found your way into no small amount of trouble in the search for knowledge." ],
-			[ "Charlie", customCharlie, true, "You're strong, smart, fast, and tough.  It also helps that you've got four dongs well beyond what others have lurking in their trousers.  With your wings, bow, weapon, and tough armor, you're a natural for protecting the town." ],
+			[ "Ceveo", customCeveo, true, "As a wandering mage, you had found your way into no small amount of trouble in the search for knowledge." ],
+			[ "Charlie", customCharlie, true, "You're strong, smart, fast, and tough.  It also helps that you've got four dongs, well beyond what others have lurking in their trousers.  With your wings, bow, weapon, and tough armor, you're a natural for protecting the town." ],
 			[ "Chimera", customChimera, true, "Your body is wrecked by your own experiments with otherworldly transformation items, and now you have no more money to buy any more from smugglers... But you would make your body as strong as your will. Or die trying." ],
 			[ "Etis", customEtis, true, "Kitsune-dragon hybrid with 3 tentacle cocks, tentacle hair, tentacle (well, draconic) tongue and very strong magic affinity." ],
 			[ "Isaac", customIsaac, true, "Born of a disgraced priestess, Isaac was raised alone until she was taken by illness.  He worked a number of odd jobs until he was eventually chosen as champion." ],
 			//[ "XXXname", customXXXname, true, "" ],
 			[ "Leah", customLeah, true, "No Notes Available." ],
 			[ "Lukaz", customLukaz, true, "No Notes Available." ],
-			[ "Mara", customMara, true, "You're a bunny-girl with bimbo-tier curves, jiggly and soft, a curvy, wet girl with a bit of a flirty past." ],
+			[ "Mara", customMara, true, "You're a bunny-girl with bimbo-tier curves, jiggly and soft. A curvy, wet girl with a bit of a flirty past." ],
 			[ "Mihari", customMihari, true, "The portal is not something you fear, not with your imposing armor and inscribed spellblade.  You're much faster and stronger than every champion that came before you, but will it be enough?" ],
-			[ "Mirvanna", customMirvanna, true, "You're an equine dragon-herm with a rather well-proportioned body.  Ingnam is certainly going to miss having you whoring yourself out around town.  You don't think they'll miss cleaning up all the messy sex, though." ],
+			[ "Mirvanna", customMirvanna, true, "You're an equine dragon-herm with a rather well-proportioned body.  Ingnam is certainly going to miss having you whoring yourself out around town.  You don't think they'll miss cleaning up after all the messy sex, though." ],
 			[ "Nami", customNami, true, "Your exotic appearance caused you some trouble growing up, but you buried your nose in books until it came time to go through the portal." ],
 			[ "Nixi", customNixi, true, "As a German-Shepherd morph, the rest of the village never really knew what to do with you... until they sent you through the portal to face whatever's on the other side..." ],
 			[ "Prismere", customPrismere, true, "You're more of a scout than a fighter, but you still feel confident you can handle your responsibilities as champion.  After all, what's to worry about when you can outrun everything you encounter?  You have olive skin, deep red hair, and a demonic tail and wings to blend in with the locals." ],
 			[ "Rann Rayla", customRannRayla, true, "You're a young, fiery redhead who\'s utterly feminine.  You've got C-cup breasts and long red hair.  Being a champion can\'t be that bad, right?" ],
 			[ "Sera", customSera, true, "You're something of a shemale - three rows of C-cup breasts matched with three, plump, juicy cocks.  Some decent sized balls, bat wings, and cat-like ears round out the package." ],
-			[ "Siveen", customSiveen, true, "You are a literal angel from beyond, and you take the place of a vilage's champion for your own reasons..." ],
+			[ "Siveen", customSiveen, true, "You are a literal angel from beyond, and you take the place of a village's champion in the name of celestial intervention." ],
 			[ "Tyriana", customTyriana, true, "Your many, posh tits, incredible fertility, and well-used cunt made you more popular than the village bicycle.  With your cat-like ears, paws, and tail, you certainly had a feline appeal.  It's time to see how you fare in the next chapter of your life." ],
 			[ "Vahdunbrii", customVahdunbrii, true, "You're something of a powerhouse, and you wager that between your odd mutations, power strong enough to threaten the village order, and talents, you're the natural choice to send through the portal." ],
 			[ "Zavos", customZavos, true, "You are a local sorcerer, with a deep affinity for the dark arts.  You were assigned the role of champion as punishment for a crime you never committed." ],
@@ -247,7 +247,7 @@ import classes.Items.*;
 			player.strStat.core.value = 10;
 			player.libStat.core.value = 30;
 			player.cor = 30;
-			outputText("As a wandering mage you had found your way into no small amount of trouble in the search for knowledge.  A strange tome here, a ritual there, most people found your pale form unsettling. They would be further troubled if they could see your feet!  Lets not even begin on the blood magic.  Yes, your interest in examining every aspect of magic has run you down a strange path, so when you wandered into ingnam and began to hear of the exile of the Champion, and the superstitions that surrounded it you were intrigued, as every little rumor and ritual often had a grain of truth.  You snuck into the cave prior to the ritual, where the old man supposedly led every Champion, and there you found a strange portal that emanated a certain degree of spacial transparency -  more than the portal's own.  Within it must have been a whole new world!  Throwing caution to the wind, your curiosities engulfing you, you dove in with nary a thought for the consequences.");
+			outputText("As a wandering mage you, had found your way into no small amount of trouble in the search for knowledge.  A strange tome here, a ritual there, most people found your pale form unsettling. They would be further troubled if they could see your feet!  Lets not even begin on the blood magic.  Yes, your interest in examining every aspect of magic has run you down a strange path, so when you wandered into Ingnam and began to hear of the exile of the Champion, and the superstitions that surrounded it you were intrigued, as every little rumor and ritual often had a grain of truth.  You snuck into the cave prior to the ritual, where the old man supposedly led every Champion, and there you found a strange portal that emanated a certain degree of spacial transparency -  more than the portal's own.  Within it must have been a whole new world!  Throwing caution to the wind, your curiosities engulfing you, you dove in with nary a thought for the consequences.");
 		}
 
 		private function customCharaun():void {
@@ -298,7 +298,7 @@ import classes.Items.*;
 		}
 
 		private function customCharlie():void {
-			outputText("You're strong, smart, fast, and tough.  It also helps that you've got four dongs well beyond what others have lurking in their trousers.  With your wings, bow, weapon, and tough armor, you're a natural for protecting the town.");
+			outputText("You're strong, smart, fast, and tough.  It also helps that you've got four dongs, well beyond what others have lurking in their trousers.  With your wings, bow, weapon, and tough armor, you're a natural for protecting the town.");
 			player.touStat.core.value += 2;
 			player.fertility = 5;
 			player.hairLength= 26;
@@ -675,7 +675,7 @@ import classes.Items.*;
 		private function customMara():void {
 			//#226096893686530
 			//For the custom PC Profile can you make a Bimbo Bunny girl (no bunny feet) (named Mara) dont really care about clothes i can get what i want pretty quickly and I change from time to time.
-			outputText("You're a bunny-girl with bimbo-tier curves, jiggly and soft, a curvy, wet girl with a bit of a flirty past.");
+			outputText("You're a bunny-girl with bimbo-tier curves, jiggly and soft. A curvy, wet girl with a bit of a flirty past.");
 			player.speStat.core.value += 3;
 			player.intStat.core.value += 2;
 			player.clitLength = .5;
@@ -762,7 +762,7 @@ import classes.Items.*;
 
 		private function customMirvanna():void {
 			//Any equine or dragonny attributes accompanying it a big plus! As I'm a dragon-unicorn furry (Qilin~). Bonus points if you add a horns type for unicorn horns.
-			outputText("You're an equine dragon-herm with a rather well-proportioned body.  Ingnam is certainly going to miss having you whoring yourself out around town.  You don't think they'll miss cleaning up all the messy sex, though.");
+			outputText("You're an equine dragon-herm with a rather well-proportioned body.  Ingnam is certainly going to miss having you whoring yourself out around town.  You don't think they'll miss cleaning up after all the messy sex, though.");
 			player.speStat.core.value += 3;
 			player.intStat.core.value += 2;
 			player.strStat.core.value += 3;
@@ -1161,7 +1161,7 @@ import classes.Items.*;
 
 			player.createPerk(PerkLib.MessyOrgasms, 1.5, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PastLifeScholar)) player.createPerk(PerkLib.HistoryScholar, 0, 0, 0, 0);
-			//Apperance: Cat Ears, Large Bat Like Wings, 3 Rows of breasts (C cub, 0,2 nipples)
+			//Appearance: Cat Ears, Large Bat Like Wings, 3 Rows of breasts (C cub, 0,2 nipples)
 			player.ears.type = Ears.CAT;
 			player.wings.type = Wings.BAT_LIKE_LARGE;
 			player.wings.desc = "large, bat-like";
@@ -1212,7 +1212,7 @@ import classes.Items.*;
 			player.speStat.core.value = 25;
 			player.intStat.core.value = 25;
 			player.wisStat.core.value = 25;
-			outputText("You are a literal angel from beyond, and you take the place of a vilage's champion for your own reasons...");
+			outputText("You are a literal angel from beyond, and you take the place of a village's champion in the name of celestial intervention.");
 		}
 
 		private function customSora():void {
@@ -1291,7 +1291,7 @@ import classes.Items.*;
 			player.createStatusEffect(StatusEffects.Kelt, 100, 0, 0, 0);
 			if (!player.hasPerk(PerkLib.PastLifeSlut)) player.createPerk(PerkLib.HistorySlut,0,0,0,0);
 			if (!player.hasPerk(PerkLib.PastLifeWhore)) player.createPerk(PerkLib.HistoryScout,0,0,0,0);
-			outputText("The village sure liked to pierce their arrows into you. But with your natural agility and a bit of elven blood flowing in your veins they sure were trying...");
+			outputText("The villagers sure liked to pierce their arrows into you... Though, with your natural agility and a bit of elven blood flowing in your veins, they sure were <i>trying.</i>");
 		}
 
 		private function customTeekna():void {
@@ -1321,7 +1321,7 @@ import classes.Items.*;
 			player.createKeyItem("Blueprint - Mechanism", 0, 0, 0, 0);
 			if(!player.hasStatusEffect(StatusEffects.BonusVCapacity)) player.createStatusEffect(StatusEffects.BonusVCapacity,0,0,0,0);
 			else player.addStatusValue(StatusEffects.BonusVCapacity,1, 5 + rand(10));
-			outputText("You were a pretty normal villager, the only oddity other people noticed was your dyed pink hair and yellow eyes. Your ancestor just couldn't keep it in his pants apparently. At least they left some goodies behind for you!");
+			outputText("You were a rather average villager. The thing that made you stand out was your pink hair and yellow eyes. Your ancestors couldn't keep it in their pants, apparently! At least they left some goodies behind for you.");
 		}
 
 		private function customSora6():void {
@@ -1458,7 +1458,7 @@ import classes.Items.*;
 			//CoC.instance.monk = 5;
 
 			// Bimbo Sophie
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00282] = 1;
+			flags[kFLAGS.SOPHIE_BIMBO_ACCEPTED] = 1;
 
 			// Isabella
 			flags[kFLAGS.ISABELLA_FOLLOWER_ACCEPTED] = 1;
@@ -1471,7 +1471,7 @@ import classes.Items.*;
 			flags[kFLAGS.GOO_OBEDIENCE] = 100;
 
 			// Ceraph
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00286] = 1;
+			flags[kFLAGS.CERAPH_FOLLOWER_PIERCING] = 1;
 
 			// Holli
 			flags[kFLAGS.FUCK_FLOWER_LEVEL] = 4;
@@ -1798,7 +1798,7 @@ import classes.Items.*;
 			if (!player.hasPerk(PerkLib.Fast)) player.createPerk(PerkLib.Fast, 1, 0, 0, 0); // gaining speed is pain in ass... this one is not for history flavor
 			if (!player.hasPerk(PerkLib.Smart)) player.createPerk(PerkLib.Smart, 1, 0, 0, 0); // int is easy to get, just for history flavor
 			if (!player.hasPerk(PerkLib.Lusty)) player.createPerk(PerkLib.Lusty, 1, 0, 0, 0); // have a lust problem
-			if (!player.hasPerk(PerkLib.HotBlooded)) player.createPerk(PerkLib.HotBlooded, 20, 0, 0, 0); // even with your willpower and religious training you sometimes struggling to restrain your impulse
+			if (!player.hasPerk(PerkLib.HotBlooded)) player.createPerk(PerkLib.HotBlooded, 0, 0, 0, 0); // even with your willpower and religious training you sometimes struggling to restrain your impulse
 			if (!player.hasPerk(PerkLib.Pervert)) player.createPerk(PerkLib.Pervert, 0.25, 0, 0, 0); // you always ready for something VERY lewd
 			if (!player.hasPerk(PerkLib.Masochist)) player.createPerk(PerkLib.Masochist, 0, 0, 0, 0); // with your knowlege of healing and innatural body it is easy for you to enjoy things which would be really painful for others
 			if (!player.hasPerk(PerkLib.Sadist)) player.createPerk(PerkLib.Sadist, 0, 0, 0, 0); // and you are always ready to return favor

@@ -6,13 +6,12 @@ package classes.Scenes.Areas.Mountain
 import classes.*;
 import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 public class HellHoundScene extends BaseContent
 	{
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-
-		public function HellHoundScene()
+				public function HellHoundScene()
 		{
 		}
 
@@ -38,7 +37,7 @@ public class HellHoundScene extends BaseContent
 				outputText("\n\n<b>New codex entry unlocked: Hellhounds!</b>")
 			}
 			startCombat(new HellHound());
-			spriteSelect(27);
+			spriteSelect(SpriteDb.s_hellhound);
 		}
 
 
@@ -47,7 +46,7 @@ public class HellHoundScene extends BaseContent
 			if (doSFWloss()) return; //No rape in SFW mode.
 			//Lust or HP loss texts here
 			clearOutput();
-			if (player.lust >= player.maxLust()) outputText("Overcome by sexual desire, you submit to the hungry hellhound.\n\n");
+			if (player.lust >= player.maxOverLust()) outputText("Overcome by sexual desire, you submit to the hungry hellhound.\n\n");
 			else outputText("Too weak to continue fighting, you fall to your knees.\n\n");
 			outputText("The heads of the hellhound grin with desire as he rises onto his hind legs. As the hellhound stands before you, your eyes widen at the sight of its equipment: a pair of eight-inch long black rods, one above the other, with a sack containing a quad of flaming balls underneath. As the hound swaggers closer, you gulp at the thought of what those fiery balls are going to be pumping into you. You are helpless against the hellhound as he pushes you onto your ");
 			if (player.lowerBody == LowerBody.HOOFED) outputText("hocks and knees");
@@ -105,9 +104,9 @@ public class HellHoundScene extends BaseContent
 			}
 			if (player.isLiliraune()) addButton(2, "TakeBothIn", takeBothIn);
 			if (monster.HP < 1) addButton (12, "Slay", killHellhound);
-			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
 			addButton(14, "Leave", cleanupAfterCombat);
-		}
+			SceneLib.uniqueSexScene.pcUSSPreChecksV2(hellHoundPostFightSexScenes);
+					}
 		public function hellHoundGetsRaped():void
 		{
 			clearOutput();

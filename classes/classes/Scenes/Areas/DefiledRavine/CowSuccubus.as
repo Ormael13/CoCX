@@ -15,12 +15,13 @@ package classes.Scenes.Areas.DefiledRavine
 	import classes.CoC;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Scenes.Monsters.AbstractSuccubus;
-	import classes.Scenes.Areas.BlightRidge.DemonScene;
+	import classes.Scenes.SceneLib;
 	
 	use namespace CoC;
 	
 	public class CowSuccubus extends AbstractSuccubus
 	{
+		
 		public function cowsuccubusMilkSpray():void {
 			outputText("\"<i>How about a taste?</i>\"  The succubus asks, pressing her tits together.  Before you can reply, a veritable jet of milk sprays in your direction!\n");
 			//Miss:
@@ -55,6 +56,12 @@ package classes.Scenes.Areas.DefiledRavine
 				else seduceAttack();
 			}
 			if (choice == 2) cowsuccubusMilkSpray();
+		}
+		
+		override public function defeated(hpVictory:Boolean):void
+		{
+			game.flags[kFLAGS.DEMONS_DEFEATED]++;
+			SceneLib.defiledravine.demonScene.defeatCowSuccubus();
 		}
 		
 		public function CowSuccubus() 

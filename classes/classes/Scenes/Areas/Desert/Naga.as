@@ -80,7 +80,7 @@ public class Naga extends Monster
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if (flags[kFLAGS.SAMIRAH_FOLLOWER] > 9) SceneLib.desert.nagaScene.nagaRapeChoice2();
+			if (flags[kFLAGS.SAMIRAH_FOLLOWER] > 9 && !sceneHunter.other) SceneLib.desert.nagaScene.nagaRapeChoice2();
 			else SceneLib.desert.nagaScene.nagaRapeChoice();
 		}
 
@@ -112,18 +112,18 @@ public class Naga extends Monster
 				this.long = "You are fighting a naga. She resembles a beautiful and slender woman from the waist up, with dark hair hanging down to her neck. Her upper body is deeply tanned, covered with semi-visible web of purple lines, while her lower body is covered with shiny scales, striped in a pattern reminiscent of the dunes around you. Instead of bifurcating into legs, her hips elongate into a snake's body which stretches far out behind her, leaving a long and curving trail in the sand.  She's completely naked, with her round C-cup breasts showing in plain sight. In her mouth you can see a pair of sharp, venomous fangs and a long forked tongue moving rapidly as she hisses at you.";
 				this.drop = new WeightedDrop().
 					add(null,1).
-					add(useables.PCSHARD,6).
-					add(headjewelries.GNHAIR,5).
-					add(consumables.REPTLUM,4).
-					add(consumables.SNAKOIL,3);
+					add(useables.PCSHARD,7).
+					add(consumables.SNAKOIL,7).
+					add(headjewelries.GNHAIR,4).
+					add(consumables.REPTLUM,1);
 			}
 			else {
 				this.long = "You are fighting a naga. She resembles a beautiful and slender woman from the waist up, with dark hair hanging down to her neck. Her upper body is deeply tanned, while her lower body is covered with shiny scales, striped in a pattern reminiscent of the dunes around you. Instead of bifurcating into legs, her hips elongate into a snake's body which stretches far out behind her, leaving a long and curving trail in the sand.  She's completely naked, with her round C-cup breasts showing in plain sight. In her mouth you can see a pair of sharp, venomous fangs and a long forked tongue moving rapidly as she hisses at you.";
 				this.drop = new WeightedDrop().
 					add(null,1).
-					add(headjewelries.GNHAIR,5).
-					add(consumables.REPTLUM,4).
-					add(consumables.SNAKOIL,3);
+					add(consumables.SNAKOIL,10).
+					add(headjewelries.GNHAIR,6).
+					add(consumables.REPTLUM,3);
 			}
 			// this.plural = false;
 			this.createVagina(false, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_NORMAL);

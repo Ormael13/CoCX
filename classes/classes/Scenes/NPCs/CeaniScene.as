@@ -11,7 +11,7 @@ package classes.Scenes.NPCs
 	import classes.Items.WeaponRangeLib;
 	import classes.Items.UndergarmentLib;
 	import classes.Scenes.NPCs.Ceani;
-	import classes.display.SpriteDb;
+    import classes.display.SpriteDb;
 
 public class CeaniScene extends NPCAwareContent
 	{
@@ -144,7 +144,7 @@ public function beachInteractionsAfterArcheryTraining():void
 			doNext(camp.returnToCampUseTwoHours);
 		}	
 	}
-	if (player.hasItem(consumables.FISHFIL) || player.hasItem(consumables.FREFISH)) {
+	else if (player.hasItem(consumables.FISHFIL) || player.hasItem(consumables.FREFISH)) {
 		outputText("You find Ceani lazily resting on the beach and head out to say hello.\n\n");
 		outputText("\"<i>Hey it’s you [name] nice to see you. I was wondering how you were. How is your demon hunting going?</i>\"\n\n");
 		outputText("You tell her your latest accomplishment as she smiles widely. However her belly rumbles. You realise she must be getting hungry and pull a fish out of your bags. Ceani eyes sparkles as she see the fish.\n\n");
@@ -159,10 +159,10 @@ public function beachInteractionsAfterArcheryTraining():void
 			if (player.hasItem(consumables.FISHFIL)) player.destroyItems(consumables.FISHFIL, 1);
 			if (player.hasItem(consumables.FREFISH)) player.destroyItems(consumables.FREFISH, 1);
 		}
-		var x:int = player.cockThatFits(36, "length");
 		menu();
 		addButton(0, "Talk", beachInteractionsTalk);
-		if (player.gender > 1 || (player.hasCock() && player.cocks[x].cockLength >= 15 && player.cockThatFits(36, "length") >= 0)) addButton(1, "Date", beachInteractionsDate);
+		if (player.hasVagina() || player.findCock(1, 15, 36, "length") >= 0) addButton(1, "Date", beachInteractionsDate);
+		if (flags[kFLAGS.CEANI_AFFECTION] == 100) addButton(2, "Come2Camp", come2campCeani);
 	}
 	else {
 		outputText("You find Ceani lazily resting on the beach and head out to say hello.\n\n");
@@ -193,10 +193,9 @@ public function oceanInteractionsAfterArcheryTraining():void
 			if (player.hasItem(consumables.FISHFIL)) player.destroyItems(consumables.FISHFIL, 1);
 			if (player.hasItem(consumables.FREFISH)) player.destroyItems(consumables.FREFISH, 1);
 		}
-		var x:int = player.cockThatFits(36, "length");
 		menu();
 		addButton(0, "Talk", beachInteractionsTalk);
-		if (player.gender > 1 || (player.hasCock() && player.cocks[x].cockLength >= 15 && player.cockThatFits(36, "length") >= 0)) addButton(1, "Date", oceanInteractionsDate);
+        if (player.hasVagina() || player.findCock(1, 15, 36, "length") >= 0) addButton(1, "Date", oceanInteractionsDate);
 		if (flags[kFLAGS.CEANI_AFFECTION] == 100) addButton(2, "Come2Camp", come2campCeani);
 	}
 	else {
@@ -364,7 +363,7 @@ public function beachInteractionsDateUnderwater1():void
 
 public function beachInteractionsDateUnderwater2():void
 {
-	if (player.findPerk(PerkLib.AquaticAffinity) >= 0) {
+	if (player.hasPerk(PerkLib.AquaticAffinity)) {
 		outputText("You and Ceani dive into the waves, the both of you racing underwater and playing as you try to be the first to reach the coral barrier.\n\n");
 		outputText("Ceani is just as fast as you if not faster ");
 		if (player.spe >= 200) {
@@ -385,10 +384,13 @@ public function beachInteractionsDateUnderwater2():void
 	if (player.armor != ArmorLib.NOTHING) outputText(". You were too busy pondering these details to notice as Ceani slowly removed your [armor]");
 	if (player.lowerGarment != UndergarmentLib.NOTHING) outputText(" and undergarment");
 	outputText(". Ceani surprise you by grabbing your shoulder and kissing you. Is it just you or the water around you both is starting to get even warmer. The two of you play with each other tongue for a moment. You aren’t so surprised to find a sea salt taste on Ceani’s saliva, as the both of you have been pretty much talking underwater for this long.\n\n");
-	if (player.gender == 3) {
+	if (player.gender == 3) { //additional check
 		outputText("Now that you think of it, you could take her as a man or a woman, so which way do you prefer?\n\n");
 		menu();
-		addButton(0, "Male", underwaterDateMaleVer);
+        if (player.findCock(1, 15, 36, "length") >= 0)
+		    addButton(0, "Male", underwaterDateMaleVer);
+        else
+		    addButtonDisabled(0, "Male", "Too big!");
 		addButton(1, "Female", underwaterDateFemaleVer);
 	}
 	if (player.gender == 1) underwaterDateMaleVer();
@@ -397,7 +399,7 @@ public function beachInteractionsDateUnderwater2():void
 
 public function underwaterDateMaleVer():void
 {
-	var x:int = player.cockThatFits(36, "length");
+	var x:int = player.findCock(1, 15, 36, "length");
 	outputText("You barely register Ceani hand moving down to your cock as she begins to stroke it.\n\n");
 	outputText("\"<i>Mmmm... since we are underwater we won’t need lubrication as I am pretty much as wet as I can be.</i>\"\n\n");
 	if (player.cocks[x].cockLength >= 22) {
@@ -502,7 +504,10 @@ public function beachInteractionsDateOnTheBeach2():void
 	if (player.gender == 3) {
 		outputText("It occurs to you that you could fuck her as a man or a woman so which way do you prefer?\n\n");
 		menu();
-		addButton(0, "Male", beachDateMaleVer);
+        if (player.findCock(1, 15, 36, "length") >= 0)
+		    addButton(0, "Male", beachDateMaleVer);
+        else
+		    addButtonDisabled(0, "Male", "Too big!");
 		addButton(1, "Female", beachDateFemaleVer);
 	}
 	if (player.gender == 1) beachDateMaleVer();
@@ -510,7 +515,7 @@ public function beachInteractionsDateOnTheBeach2():void
 }
 
 public function beachDateMaleVer():void {
-	var x:int = player.cockThatFits(36, "length");
+	var x:int = player.findCock(1, 15, 36, "length");
 	if (player.cocks[x].cockLength >= 22) {
 		outputText("Ceani licks her lips as she eye your massive [cock], truth be told, finding someone with a cock large enough to fit her pussy up to the cervix must be a difficult task.\n\n");
 		outputText("\"<i>Mmmmmm... you have quite the beast you know? Do you realise how hard it is to find a dick that can properly fit in my cunny? I had wet dreams about this one...</i>\"\n\n");

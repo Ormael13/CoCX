@@ -26,25 +26,21 @@ import classes.Scenes.NPCs.Jinx;
 import classes.Scenes.NPCs.Syth;
 import classes.Scenes.NPCs.Rangiku;
 import classes.Scenes.NPCs.Veronika;
+import classes.Scenes.SceneLib;
 import classes.Stats.Buff;
-
-//import classes.Scenes.Places.HeXinDao.*;
-//import classes.Items.Armor;
-//import classes.Scenes.Dungeons.DeepCave.ValaScene;
 
 public class HeXinDao extends BaseContent
 {
     public var ignisarenaseer:IgnisArenaSeerScene = new IgnisArenaSeerScene();
     public var neisaScene:NeisaFollower = new NeisaFollower();
     public var chichiScene:ChiChiFollower = new ChiChiFollower();
-	public var journeytotheeast:JourneyToTheEast = new JourneyToTheEast();
     public var riverdungeon:RiverDungeon = new RiverDungeon();
 	public var eraendirorsbulg:EraendirAndOrsbulg = new EraendirAndOrsbulg();
 
     public function HeXinDao() {}
 	
 	public function riverislandVillageStuff0():void {
-		spriteSelect(-1);
+		spriteSelect(null);
         clearOutput();
 		if (isLunarNewYear()) {
 			outputText("As you enter the town you notice something out of the norm. It would seem the citizens are celebrating something. There are red drapes everywhere and even a giant snake-like Muppet parading in the streets. What is going on in He’Xin’Dao? Maybe you should attend?");
@@ -70,18 +66,18 @@ public class HeXinDao extends BaseContent
 		addButton(2, "Clothing", riverislandVillageStuffLunarClothing);
 		if (model.time.hours > 19) addButton(3, "Fireworks", riverislandVillageStuffLunarFireworks);
 		else addButtonDisabled(3, "Fireworks", "You need to wait till 8 PM for that.");
-		if (flags[kFLAGS.CHI_CHI_AFFECTION] >= 20 && flags[kFLAGS.CHI_CHI_FOLLOWER] != 2 && model.time.hours > 17) addButton(4, "Chi Chi", riverislandVillageStuffLunarChiChi);
+		if (flags[kFLAGS.CHI_CHI_AFFECTION] >= 20 && flags[kFLAGS.CHI_CHI_FOLLOWER] != 2 && !player.hasStatusEffect(StatusEffects.ChiChiOff) && model.time.hours > 17) addButton(4, "Chi Chi", riverislandVillageStuffLunarChiChi);
 		else addButtonDisabled(4, "Chi Chi", "You need to wait until it's 6 PM or later for that.");
 		addButton(14, "Back", riverislandVillageStuff1).hint("Leave festival part of He'Xin'Dao.");
 	}
 	public function riverislandVillageStuffLunarGifts():void {
 		clearOutput();
 		outputText("There seems to be a gift exchange going about. Some people are handing over red envelopes, something about luck for the coming year. You get hold of one and open it hoping for great luck. You open the envelope and... ");
-		var Gems:Number = 50;
-		Gems += rand(100);
-		outputText("Wow! You were lucky! There was " + Gems + " spirit stones inside! This sure is good fortune for the coming year.");
+		var SpiritStones:Number = 50;
+		SpiritStones += rand(100);
+		outputText("Wow! You were lucky! There was " + SpiritStones + " spirit stones inside! This sure is good fortune for the coming year.");
 		player.createStatusEffect(StatusEffects.CanGetLunarGift,0,0,0,0);
-		flags[kFLAGS.SPIRIT_STONES] += Gems;
+		flags[kFLAGS.SPIRIT_STONES] += SpiritStones;
 		statScreenRefresh();
 		doNext(riverislandVillageStuffLunar);
 	}
@@ -89,7 +85,7 @@ public class HeXinDao extends BaseContent
 		clearOutput();
 		outputText("The local restaurant seems to be offering some speciality food and best of all; it's free! Some " + flags[kFLAGS.LUNAR_NEW_YEAR_ANIMAL] + "-morphs are passing it all over for extra thematics. You proceed to grab a plate of these strange ravioli the people calls jiǎozi, taking the rice dessert they call niángāo right after. The meal is comforting and you would believe everything in Mareth was going fine right now if not for the reddish stormy sky in the far distance which contrasts these festivities.");
 		player.refillHunger(50);
-		cheatTime2(30);
+		eachMinuteCount(30);
 		doNext(riverislandVillageStuffLunar);
 	}
 	public function riverislandVillageStuffLunarClothing():void {
@@ -137,7 +133,7 @@ public class HeXinDao extends BaseContent
 			outputText("\n\n\"<i>Come over people! Look the part! Buy a dress for the festivities only for 50 gems! C'mon and buy while there's some left!</i>\"");
 			outputText("\n\nYou put the dress in your bag for now. Now to put it on.");
 		}
-		else if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 3) {
+		else if (flags[kFLAGS.CHI_CHI_FOLLOWER] == 3 && !player.hasStatusEffect(StatusEffects.ChiChiOff)) {
 			outputText("\n\n\"<i>Hey, Baka! I thought you'd never join in. I waited for you here all day, you know! Sit next to me and hold my hand, I want the folks out there to know we're together.</i>\"");
 			outputText("\n\nTogether as in a couple? Is she opening up or something? Your comment makes her light red cheeks even redder.");
 			outputText("\n\n\"<i>N..no! Nothing of the sort! It's not like I care if all the other girls look at you right now! I’m just preventing you from flirting with half of the town's feminine cast!</i>\"");
@@ -158,7 +154,7 @@ public class HeXinDao extends BaseContent
 	}
 
     public function riverislandVillageStuff():void {
-        spriteSelect(-1);
+        spriteSelect(null);
         clearOutput();
         outputText("He'Xin'Dao is a large village connected and assembled between many smaller islands in the middle of large river that flows from the east to the west. Aside from bridges connecting each of the islands together, two larger ones connects them as a whole to both sides of the river serving as the only points of access to the village.  The village is strategically laid out, preventing anyone from entering by swimming directly from the river to any of the islands, forcing people to use the bridges if they wish to enter.\n");
         outputText("\n\nNear one of major briges is located merchant area with various smaller or larger places where all visitors can buy or sell various items. Among then two attracts most attention with first been largest stall here and other largest shop. On almost opposite side of village near other brige is located medium sized shop with sign indicating it govern local exchanges and transformation items market.");
@@ -179,13 +175,13 @@ public class HeXinDao extends BaseContent
 			else addButtonDisabled(4, "Dungeon", "You need to find someone to form a party with you if you wish to enter!");
 		}
         //addButton(5, "", ); siedziba lokalnej grupy zrzeszającej soul cultivators - PC aby potem pojsc dalej bedzie musial dolaczyc tutaj (pomyslec nad wiarygodnym sposobem zmuszenia go do tego - moze jakies ciekawe itemy/inne rzeczy dla czlonkow beda a miejsce sie zwolni jak wywala tak goblinke tworzynie golemow, ktora potem oczywiscie wcisnie sie do obozu PC aby w spokoju rozwijac sie w tworzeniu golemow itp.)
-        addButton(6, "JourTTEast", journeytotheeast.enteringInn);
+        addButton(6, "JourTTEast", SceneLib.journeyToTheEast.enteringInn);
         addButton(7, "Arena", soularena);
         addButton(8, "Restaurant", restaurantShiraOfTheEast);
 		addButton(10, "Eraendir", eraendirorsbulg.EraendirMainMenu);
 		addButton(11, "Orsbulg", eraendirorsbulg.OrsbulgMainMenu);
 		addButton(12, "Golemancer", golemancershop);
-        if (flags[kFLAGS.CHI_CHI_AFFECTION] >= 20 && flags[kFLAGS.CHI_CHI_FOLLOWER] < 2) addButton(13, "Chi Chi", chichiScene.MeetingChiChiInHeXinDao);
+        if (flags[kFLAGS.CHI_CHI_AFFECTION] >= 20 && flags[kFLAGS.CHI_CHI_FOLLOWER] < 2 && !player.hasStatusEffect(StatusEffects.ChiChiOff)) addButton(13, "Chi Chi", chichiScene.MeetingChiChiInHeXinDao);
         addButton(14, "Leave", camp.returnToCampUseOneHour);
     }
     public function golemmerchant():void {
@@ -200,7 +196,7 @@ public class HeXinDao extends BaseContent
         menu();
         var buyItem1:Function = curry(confirmBuy1,golemmerchant,"Golem",1);
         var buyItem2:Function = curry(confirmBuy2,golemmerchant,"Golem",0.2);
-        var introText:String = "\"When you reach towards one of the items on the display, the golem says, \\\"<i>";
+        var introText:String = "\"When you reach towards one of the items on the display, the golem says, \"<i>";
         var costText:String = " Interested?  It is <b>";
         var endText1:String = " gems</b></i>.\"";
         var endText2:String = " spirit stones</b></i>.\"";
@@ -211,9 +207,9 @@ public class HeXinDao extends BaseContent
             return introText+desc+costText+(itype.value*0.2)+endText2;
         }
 		addButton(1, "1st Stall", TierI).hint("Check out the first stall selling common items and other items for soul cultivators that just started their journey.");
-        if (player.findPerk(PerkLib.SoulApprentice) >= 0) addButton(2, "2nd Stall", TierII).hint("Check out the second stall with items for Soul Apprentices, Soul Personage and Soul Warrior stage cultivators.");
+        if (player.hasPerk(PerkLib.SoulApprentice)) addButton(2, "2nd Stall", TierII).hint("Check out the second stall with items for Soul Apprentices, Soul Personage and Soul Warrior stage cultivators.");
 		else addButtonDisabled(2, "2nd Stall", "You need to be at least a Soul Apprentice to check those items.");
-        if (player.findPerk(PerkLib.SoulSprite) >= 0) addButton(3, "3rd Stall", TierIII).hint("Check out the third stall with items for Soul Sprites, Soul Scholars and Soul Elder stage cultivators.");
+        if (player.hasPerk(PerkLib.SoulSprite)) addButton(3, "3rd Stall", TierIII).hint("Check out the third stall with items for Soul Sprites, Soul Scholars and Soul Elder stage cultivators.");
 		else addButtonDisabled(3, "3rd Stall", "You need to be at least a Soul Sprite to check those items.");
 		function TierI():void {
 			menu();
@@ -227,7 +223,7 @@ public class HeXinDao extends BaseContent
 					sayLine2(consumables.BAGOCOS,"A quintessential item for all soul cultivators, this little bag is dimensionally transcendental, that is, it's bigger on the inside. ")).hint("Bag of Cosmos.");
 			if (flags[kFLAGS.HUNGER_ENABLED] > 0) addButton(4, "Fasting Pill", buyItem2,consumables.FATPILL,
 					sayLine2(consumables.FATPILL,"It's a rather useful item for soul cultivators, this little pill can help you stave off hunger for a few days.")).hint("Fasting Pill.");
-			if (player.findPerk(PerkLib.JobSoulCultivator) >= 0) {
+			if (player.hasPerk(PerkLib.JobSoulCultivator)) {
 				addButton(5, "Triple Thrust", buyItem2,consumables.TRITMAN,
 						sayLine2(consumables.TRITMAN,"It's a manual for Triple Thrust, this very simple technique allows you to unleash three thrusts that will become stronger and stronger as you train your body and soul."),
 						"\n\nWhether you are going to try to go deeper into all that 'soulforce' stuff or not, at least you now have something to begin with.  It seems like even the name of the manual could have been influenced by this realm's nature... either that or it's just a coincidence.  " //NTP-What does the second paragragh mean??? Tried my best here. #1
@@ -274,7 +270,7 @@ public class HeXinDao extends BaseContent
 					sayLine2(consumables.VPTRMAN,"It's a manual for Violet Pupil Transformation, this advanced technique allows you to channel soulforce into regenerative power that would fill your whole body allowing you to recover even from the brink of death.  It's only flaw is that it constantly drains the cultivator's soulforce so you could end up in a tight situation without enough soulforce to use other skills."),
 					"\n\nIt seems like it's similar to a healing spell soul skill, but instead of being used immediately, with enough soulforce it could be kept active for a very long period of time.  It should give you another edge during your crusade against demons.  Additionally, the ability to heal from the brink of death could prove to be useful in future fights.  "
 			).hint("Violet Pupil Transformation Manual.");
-			if (player.findPerk(PerkLib.SoulPersonage) >= 0) {
+			if (player.hasPerk(PerkLib.SoulPersonage)) {
 				addButton(4, "Sextuple Thrust", buyItem2,consumables.SEXTMAN,
 						sayLine2(consumables.SEXTMAN,"It's a manual for Sextuple Thrust, this simple technique allows you to unleash six thrusts that will become stronger and stronger as you train your body and soul."),
 						"\n\nWhether you are going to go deeper into all that 'soulforce' stuff or not, at least you now have something to train with.  Although seems even name of the manual mentioning thrusting seems like it could have been influenced by this realm nature...or it's just a coincidence.  " 
@@ -284,7 +280,7 @@ public class HeXinDao extends BaseContent
 						"\n\nWhether you are going to go deeper into all that 'soulforce' stuff or not, at least you now have something to begin with.  The name of the manual is strange, but it makes you remember something...but what and from where you not certain.  "
 				).hint("Grandiose Hail of Blades Manual.");
 			}
-			if (player.findPerk(PerkLib.SoulWarrior) >= 0) {
+			if (player.hasPerk(PerkLib.SoulWarrior)) {
 				addButton(7, "MGSFRecovPill", buyItem2,consumables.MG_SFRP,
 					sayLine2(consumables.MG_SFRP,"It's a rather useful item for all cultivators at Soul Warrior stage or higher, this small pill can help you restore some of your soulforce and would provide much more than the low-grade one.")).hint("Mid-grade Soulforce Recovery Pill.");
 			}
@@ -308,13 +304,13 @@ public class HeXinDao extends BaseContent
 			addButton(14, "Back", golemmerchant);
             statScreenRefresh();
 		}/*
-		if (player.findPerk(PerkLib.SoulExalt) >= 0) { lub soul overlord - each soul stage above starting allow to extend channeling time by 1 round
+		if (player.hasPerk(PerkLib.SoulExalt)) { lub soul overlord - each soul stage above starting allow to extend channeling time by 1 round
 			addButton(1, "GHoMB", buyItem2,consumables.HOB4MAN,
 					sayLine2(consumables.HOB4MAN,"It's a manual for Grandiose Hail of Moon Blades, this technique allows you to form massive amount of etheral weapons traveling at extreme speeds that will become stronger and stronger as you train your body and soul."),
 					"\n\nYou already went so deep into becoming cultivator so why not?  'Few' more weapons formed will not hurt at this point, right?  "
 			).hint("Grandiose Heavenly Hail of Yin-Yang Blades: Endless Tide Manual.");
 		}*/
-		if (player.findPerk(PerkLib.SoulOverlord) >= 0) {
+		if (player.hasPerk(PerkLib.SoulOverlord)) {
 			addButton(10, "HGSFRecovPill", buyItem2,consumables.HG_SFRP,
 					sayLine2(consumables.HG_SFRP,"It's a rather useful item for all cultivators at Soul Overlord stage or higher, this small pill can help you restore some of your soulforce and would provide much more than the mid-grade one.")).hint("High-grade Soulforce Recovery Pill.");
 		}
@@ -568,7 +564,7 @@ public class HeXinDao extends BaseContent
         addButton(6, "Shelf 4", soulequipmentshelf4).hint("Flying Swords");
         addButton(7, "Shelf 5", soulequipmentshelf5).hint("Consumables");
         addButton(8, "Shelf 6", soulequipmentshelf6).hint("Misc");
-		//addButton(7, weapons.MACE.shortName, weaponBuy, weapons.MACE);//awl - wymagać bedzie możliwość lewitacji czy coś od PC aby to używać
+		//addButton(7, weapons.MACE.shortName, weaponBuy, weapons.MACE);//(?magically enchanced?) awl - wymagać bedzie możliwość lewitacji czy coś od PC aby to używać
         //addButton(12, "Talk", ).hint("Tak with .");
         addButton(14, "Back", riverislandVillageStuff);
         statScreenRefresh();
@@ -598,20 +594,19 @@ public class HeXinDao extends BaseContent
         addButton(4, weapons.SCLAYMO.shortName, weaponBuy2, weapons.SCLAYMO);
         addButton(5, weapons.S_GAUNT.shortName, weaponBuy2, weapons.S_GAUNT);
         addButton(6, weapons.CLAWS.shortName, weaponBuy2, weapons.CLAWS);
-        addButton(7, weapons.RIBBON.shortName, weaponBuy2, weapons.RIBBON);
+        addButton(7, weapons.DAISHO.shortName, weaponBuy2, weapons.DAISHO);
         addButton(8, weapons.TCLAYMO.shortName, weaponBuy2, weapons.TCLAYMO);
         addButton(9, weapons.ACLAYMO.shortName, weaponBuy2, weapons.ACLAYMO);
         addButton(10, weapons.WHIP.shortName, weaponBuy2, weapons.WHIP);
         addButton(11, weapons.PWHIP.shortName, weaponBuy2, weapons.PWHIP);
         addButton(12, weapons.ZWNDER.shortName, weaponBuy2, weapons.ZWNDER);
-        addButton(13, weapons.PRURUMI.shortName, weaponBuy2, weapons.PRURUMI);
         addButton(14, "Back", serenamerchant);
     }
     public function soulequipmentshelf3():void {
         menu();
-        if (player.findPerk(PerkLib.SoulApprentice) >= 0) addButton(0, armors.LAYOARM.shortName, weaponBuy3, armors.LAYOARM);
+        if (player.hasPerk(PerkLib.SoulApprentice)) addButton(0, armors.LAYOARM.shortName, weaponBuy3, armors.LAYOARM);
 		else addButtonDisabled(0, "???", "Req. Soul Apprentice");
-        if (player.findPerk(PerkLib.SoulPersonage) >= 0) addButton(1, armors.HAYOARM.shortName, weaponBuy3, armors.HAYOARM);
+        if (player.hasPerk(PerkLib.SoulPersonage)) addButton(1, armors.HAYOARM.shortName, weaponBuy3, armors.HAYOARM);
 		else addButtonDisabled(1, "???", "Req. Soul Personage");
         //addButton(11, weapons.MACE.shortName, weaponBuy, weapons.MACE);//basic armor made of soulmetal that works with unhindered perk xD czyli coś ala bikini lub ogólnie tylko underwear z fragmentami zbroi lewitującymi wokół postaci i tylko w wypadku ataku wroga przesuwające sie aby przyjąć atak
         //addButton(12, weapons.MACE.shortName, weaponBuy, weapons.MACE);//basic light armor made of soulmetal
@@ -659,14 +654,19 @@ public class HeXinDao extends BaseContent
     }
     public function soulequipmentshelf6():void {
         menu();
-		addButton(5, weapons.W_STAFF.shortName, weaponBuy6, weapons.W_STAFF);
+		addButton(1, weapons.W_STAFF.shortName, weaponBuy6, weapons.W_STAFF);
+		addButton(2, weapons.AWL_.shortName, weaponBuy6, weapons.AWL_);
+		addButton(3, weapons.RULER.shortName, weaponBuy6, weapons.RULER);
+		addButton(4, weapons.NRSABER.shortName, weaponBuy6, weapons.NRSABER);
+		addButton(5, weapons.RIBBON.shortName, weaponBuy6, weapons.RIBBON);
         addButton(6, weapons.GUANDAO.shortName, weaponBuy6, weapons.GUANDAO);
         addButton(7, weapons.HSWORDS.shortName, weaponBuy6, weapons.HSWORDS);
 		addButton(8, weapons.SNAKESW.shortName, weaponBuy6, weapons.SNAKESW);
 		//addButton(9, Changdao
         addButton(10, weapons.FLYWHIS.shortName, weaponBuy6, weapons.FLYWHIS);
-        addButton(11, weapons.CHAKRAM.shortName, weaponBuy6, weapons.CHAKRAM);
-        addButton(12, shields.MABRACE.shortName, weaponBuy6, shields.MABRACE);
+        addButton(11, weapons.PRURUMI.shortName, weaponBuy6, weapons.PRURUMI);
+        addButton(12, weapons.CHAKRAM.shortName, weaponBuy6, weapons.CHAKRAM);
+        addButton(13, shields.MABRACE.shortName, weaponBuy6, shields.MABRACE);
         addButton(14, "Back", serenamerchant);
     }
 
@@ -867,9 +867,9 @@ public class HeXinDao extends BaseContent
 
 public function soularena():void {
 	clearOutput();//arena do walk z przeciwnikami na exp tylko - zadnych sex scenes tylko walk do wygranej niewazne czy przez hp czy lust - przeciwnicy: ?weak deviant golem?, niskopoziomowi przeciwnicy uzywajacy soul skills (moze po prostu wesje zwyklych przeciwnikow ale z dodanymi soul attakami?)
-	if (flags[kFLAGS.CHI_CHI_AFFECTION] >= 10 && flags[kFLAGS.CHI_CHI_AFFECTION] < 15) chichiScene.EnterOfTheChiChi();
+	if (flags[kFLAGS.CHI_CHI_AFFECTION] >= 10 && flags[kFLAGS.CHI_CHI_AFFECTION] < 15 && !player.hasStatusEffect(StatusEffects.ChiChiOff)) chichiScene.EnterOfTheChiChi();
 	else {
-		outputText("Coming closer to the arena you see two muscular tigersharks standing on each side of the entrance, they only briefly glance at you the moment you pass by them. IA few a moments after you entered, a tall, slightly muscular male cat-morph approaches you. Most of its body is covered by armor yet two long tails waves behind him from time to time.");//osoba zarządzająca areną bedzie male nekomanta npc
+		outputText("Coming closer to the arena you see two muscular tigersharks standing on each side of the entrance, they only briefly glance at you the moment you pass by them. In few a moments after you entered, a tall, slightly muscular male cat-morph approaches you. Most of its body is covered by armor yet two long tails waves behind him from time to time.");//osoba zarządzająca areną bedzie male nekomanta npc
 		outputText("\n\n\"<i>Welcome to the Soul Arena. Don't start fights outside of the proper place or you will be thrown out. If you break any rules here you will be kicked out. Go ahead and pick an area where you want to train or instead go to the challenges area. Oh and fights in each section cost some spirit stones so be sure to have enough of them as we not run charity here,</i>\"");
 		outputText(" without wasting time the nekomata overseer of this place explains to you all that you needed to know about the place and walks away.\n\nSo which of the three possible areas do you want to visit this time?");
 		if (flags[kFLAGS.IGNIS_ARENA_SEER] >= 1) outputText("\n\nYou notice Ignis sitting in the stands, a notebook in his paws. The kitsune seems to be watching the fights and taking notes.");
@@ -977,6 +977,7 @@ public function soularena():void {
 		if (flags[kFLAGS.CHI_CHI_AFFECTION] < 10) flags[kFLAGS.CHI_CHI_AFFECTION]++;
 		startCombat(new mon());
 		monster.createStatusEffect(StatusEffects.NoLoot, 0, 0, 0, 0);
+		monster.XP = monster.XP * 2;
     }
 	public function gaunletsinbetween():void {
 		cleanupAfterCombat();
@@ -1114,17 +1115,24 @@ public function soularena():void {
 	}
 	private function golemancershop1():void {
 		menu();
+		if (player.hasPerk(PerkLib.AdvancedGolemancyTheory) || player.hasPerk(PerkLib.EpicGolemMaker)) addButton(0, "Energy Core", buyItemEnergyCore).hint("A power source for devices.");
+		else addButtonDisabled(0, "???", "Items only for Epic Golemancer users or possesing Advanced Golemancy Theory knowledge.");
+		if (player.hasPerk(PerkLib.EpicGolemMaker)) addButton(1, "Mechanism", buyItemMechanism).hint("A complex set of gears and gyros.");
+		else addButtonDisabled(1, "???", "Items only for Epic Golemancer users.");
 		addButton(5, "G.Rod", buyItem, weapons.G_ROD).hint("Golemancer Rod");
 		addButton(6, "G.E.Man", buyItem, weaponsrange.G_E_MAN).hint("Golemancy Evocation Manuscript");
-		addButton(7, "Y.U.Panel", buyItem, shields.Y_U_PAN).hint("Yogi Uh Panel");/*
+		addButton(7, "Y.U.Panel", buyItem, shields.Y_U_PAN).hint("Yogi Uh Panel");
 		if (player.hasPerk(PerkLib.MasterGolemMaker)) {
 			if (player.hasKeyItem("Golems, Animations and You") >= 0) addButtonDisabled(12, "G,A&Y Man.", "You already bought 'Golems, Animations and You' manual.");
 			else addButton(12, "G,A&Y Man.", golemancershopPermGolemsUpgradesGuide).hint("Buy 'Golems, Animations and You' manual to make golems great again.");
-		}*/
+		}
+		else addButtonDisabled(12, "???", "Req. Master Golem Maker perk.");
 		if (player.hasPerk(PerkLib.JobGolemancer)) {
-			if (player.statusEffectv1(StatusEffects.GolemancerShop) == 0) addButton(13, "'Free Cores?'", golemancershopNotSoFreeCores).hint("A dark side of you whispers: 'Dew it!!! Press this button!!! Dew it now!!!'");
-			else if (player.statusEffectv1(StatusEffects.GolemancerShop) == 0) addButtonDisabled(13, "'Free Cores?'", "You already 'Dew It and pressed the button'. No more freebies for ya...")
-			else addButtonDisabled(13, "'Free Cores?'", "How could such an esteemed and well known golemancer like you ask for freebies? Go smash a few golems to take their cores instead to try beg her...")
+			if (player.hasPerk(PerkLib.MasterGolemMaker)) addButtonDisabled(13, "'Free Cores?'", "How could such an esteemed and well known golemancer like you ask for freebies? Go smash a few golems to take their cores instead to try beg her...");
+			else {
+				if (player.statusEffectv1(StatusEffects.GolemancerShop) == 0) addButton(13, "'Free Cores?'", golemancershopNotSoFreeCores).hint("A dark side of you whispers: 'Dew it!!! Press this button!!! Dew it now!!!'");
+				else addButtonDisabled(13, "'Free Cores?'", "You already 'Dew It and pressed the button'. No more freebies for ya...");
+			}
 		}
 		addButton(14, "Leave", riverislandVillageStuff);
 	}
@@ -1144,13 +1152,13 @@ public function soularena():void {
 		menu();
 		if (player.statusEffectv1(StatusEffects.GolemancerShop) == 1) {
 			outputText("3000 gems and it's yours, how's that for a price?</i>\"");
-			if (player.gems > 2999) addButtonDisabled(1, "Buy", "You do not have enough gems to buy this.");
-			else addButton(1, "Buy", golemancershopPermGolemsUpgradesGuideYes);
+			if (player.gems >= 3000) addButton(1, "Buy", golemancershopPermGolemsUpgradesGuideYes);
+			else addButtonDisabled(1, "Buy", "You do not have enough gems to buy this.");
 		}
 		if (player.statusEffectv1(StatusEffects.GolemancerShop) == 0) {
-			outputText("Come to think of it you have been a very faithful customer so I will make you a one time deal by cuting the price down by two thirds of the total. 500 gems and it's yours.</i>\"");
-			if (player.gems > 499) addButtonDisabled(1, "Buy", "You not have enough gems to buy this.");
-			else addButton(1, "Buy", golemancershopPermGolemsUpgradesGuideYes);
+			outputText("Come to think of it you have been a very faithful customer so I will make you a one time deal by cuting the price down to ine sixth of the total. 500 gems and it's yours.</i>\"");
+			if (player.gems >= 500) addButton(1, "Buy", golemancershopPermGolemsUpgradesGuideYes);
+			else addButtonDisabled(1, "Buy", "You not have enough gems to buy this.");
 		}
 		addButton(3, "Don't Buy", golemancershopRepeat);
 	}
@@ -1160,7 +1168,46 @@ public function soularena():void {
 		statScreenRefresh();
 		outputText("She counts the gems before handing your purchase over.\n\n");
 		outputText("\"<i>Always happy to do business, anything else you want to buy?</i>\"\n\n");
+		player.createStatusEffect(StatusEffects.GolemUpgrades1, 0, 0, 0, 0);
+		player.createStatusEffect(StatusEffects.GolemUpgrades2, 0, 0, 0, 0);
+		player.createStatusEffect(StatusEffects.GolemUpgrades3, 0, 0, 0, 0);
 		player.createKeyItem("Golems, Animations and You", 0, 0, 0, 0);
+		doNext(golemancershopRepeat);
+	}
+	private function buyItemEnergyCore():void {
+		clearOutput();
+		var cost:int = 1015 / 5;//zmniejszane do /10 dla golemancer pc?
+		outputText("\"<i>That will be " + cost + " spirit stones. Show me da money baby.</i>\"\n\n");
+		menu();
+		if (flags[kFLAGS.SPIRIT_STONES] < cost) addButtonDisabled(1, "Buy", "You do not have enough spirit stones to buy this.");
+		else if (flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] >= 200) addButtonDisabled(1, "Buy", "You can't store any more of this type of items.");
+		else addButton(1, "Buy", buyItemEnergyCoreYes);
+		addButton(3, "Don't Buy", golemancershopRepeat);
+	}
+	private function buyItemEnergyCoreYes():void {
+		flags[kFLAGS.SPIRIT_STONES] -= 1015 / 5;// * 3
+		statScreenRefresh();
+		outputText("She counts the stones before handing your purchase over.\n\n");
+		outputText("\"<i>Always happy to do business, anything else you want to buy?</i>\"\n\n");
+		flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES]++;
+		doNext(golemancershopRepeat);
+	}
+	private function buyItemMechanism():void {
+		clearOutput();
+		var cost:int = 1200 / 5;//zmniejszane do /10 dla golemancer pc?
+		outputText("\"<i>That will be " + cost + " spirit stones. Show me da money baby.</i>\"\n\n");
+		menu();
+		if (flags[kFLAGS.SPIRIT_STONES] < cost) addButtonDisabled(1, "Buy", "You do not have enough spirit stones to buy this.");
+		else if (flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES] >= 200) addButtonDisabled(1, "Buy", "You can't store any more of this type of items.");
+		else addButton(1, "Buy", buyItemMechanismYes);
+		addButton(3, "Don't Buy", golemancershopRepeat);
+	}
+	private function buyItemMechanismYes():void {
+		flags[kFLAGS.SPIRIT_STONES] -= 1200 / 5;// * 3
+		statScreenRefresh();
+		outputText("She counts the stones before handing your purchase over.\n\n");
+		outputText("\"<i>Always happy to do business, anything else you want to buy?</i>\"\n\n");
+		flags[kFLAGS.CAMP_CABIN_MECHANISM_RESOURCES]++;
 		doNext(golemancershopRepeat);
 	}	
 	private function buyItem(odd:ItemType):void {
@@ -1200,10 +1247,10 @@ public function soularena():void {
         }
         clearOutput();
         outputText("You take a seat and look at the menu. ");
-        if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 1) outputText("A dog morph that looks like a pekinese comes over to take your order.");
+        if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 1 || player.hasStatusEffect(StatusEffects.ChiChiOff)) outputText("A dog morph that looks like a pekinese comes over to take your order.");
         else outputText("A literally blazing mouse girl come over to take your order. Blazing is actually an understatement as her arms, legs and even her tail are on fire. ");
         outputText("\n\n\"<i>Hello my name is ");
-        if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 1) outputText("Rin");
+        if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 1 || player.hasStatusEffect(StatusEffects.ChiChiOff)) outputText("Rin");
         else outputText("Chi Chi");
         outputText(" and I will be your waitress today. We have dumplings, Won ton soups and ramen offered in mild, spicy and inferno versions of the dishes. What will it be?</i>\"");
         menu();
@@ -1214,14 +1261,12 @@ public function soularena():void {
     private function orderFood(str:int,spe:int,inte:int,tou:int=5):void{
         outputText("\n\nShe notes your order on a piece of paper.");
         outputText("\n\n\"<i>How spicy would you like it to be?</i>\"");
-        if (player.statusEffectv1(StatusEffects.ShiraOfTheEastFoodBuff1) < 25) {
-            player.removeStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff1);
-            player.createStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff1, 25, 0, 0, 0);
-        }
-        else player.createStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff1, 25, 0, 0, 0);
-
-        if (player.statStore.hasBuff("ShiraOfTheEastFoodBuff")) player.statStore.removeBuffs("ShiraOfTheEastFoodBuff");
-        player.statStore.addBuffObject({str:str, spe:spe, inte:inte, tou:tou},"ShiraOfTheEastFoodBuff",{text:"Restorant meals"})
+        player.removeStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff1);
+        player.createStatusEffect(StatusEffects.ShiraOfTheEastFoodBuff1, 25, 0, 0, 0);
+        player.buff("ShiraOfTheEastFoodBuff").remove();
+        player.buff("ShiraOfTheEastFoodBuff")
+            .setStats( { "str": str, "spe": spe, "int": inte, "tou": tou })
+            .withText("Restaurant meals!"); //no timer - removed in events with the status effect
 
         menu();
         addButton(0, "Mild", restaurantSpicing,"mild");
@@ -1231,7 +1276,7 @@ public function soularena():void {
 
     private function restaurantSpicing(level:String):void{
         outputText("\n\nShe finishs noting your order, bows graciously then heads to the kitchen. ");
-        if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 1) outputText("The waitress");
+        if (flags[kFLAGS.CHI_CHI_FOLLOWER] > 1 || player.hasStatusEffect(StatusEffects.ChiChiOff)) outputText("The waitress");
         else outputText("Chi Chi");
         outputText(" comes back with your order a few minutes later.");
         switch(level){

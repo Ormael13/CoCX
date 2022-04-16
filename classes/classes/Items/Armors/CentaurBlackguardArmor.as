@@ -14,7 +14,7 @@ package classes.Items.Armors
 			super("TaurBAr","Taur B. Armor","some taur blackguard armor","a set of taur blackguard armor",23,0,1698,"A suit of blackguard's armor for centaurs.","Heavy")
 		}
 		override public function canUse():Boolean{
-			if (game.player.isTaur()){return true}
+			if (game.player.isTaur()){return super.canUse()}
 			outputText("The blackguard's armor is designed for centaurs, so it doesn't really fit you. You place the armor back in your inventory");
 			return false;
 		}

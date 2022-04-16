@@ -6,6 +6,7 @@ package classes.Scenes.Camp
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+    import classes.display.SpriteDb;
 	
 	public class UniqueCampScenes extends BaseContent
 	{
@@ -17,7 +18,7 @@ package classes.Scenes.Camp
 public function manageyourgarden():void
 {
 	clearOutput();
-	outputText("Your daughters are busy bickering about whose the most beautiful flower of them all.\n\n");
+	outputText("Your daughters are busy bickering. Who is the most beautiful flower of them all? You don't think they'll ever agree.\n\n");
 	menu();
 	if (flags[kFLAGS.ALRAUNE_GROWING] > 14) addButton(0, "Play", playwithyourplantdaughters);
 	if (flags[kFLAGS.ALRAUNE_DAILY_WATERING] < 1) addButton(9, "Water", wateryourgarden);
@@ -27,7 +28,7 @@ public function manageyourgarden():void
 public function wateryourgarden():void
 {
 	clearOutput();
-	outputText("You water your sprouts, making sure they don’t lack anything. This includes spending a little time ensuring no weeds get so much as half a chance to encroach on your private garden.\n\n");
+	outputText("You water your sprouts, then spend some time tending their garden. Weeding, pruning and fertilizing, you do it all. Nothing will harm your private garden\n\n");
 	flags[kFLAGS.ALRAUNE_DAILY_WATERING] = 1;
 	if (flags[kFLAGS.ALRAUNE_GROWING] < 22) flags[kFLAGS.ALRAUNE_GROWING]++;
 	doNext(camp.returnToCampUseOneHour);
@@ -38,14 +39,14 @@ public function playwithyourplantdaughters():void
 	clearOutput();
 	outputText("You decide to set some time aside to play with your sprouts. You tell them as much while you pull water toys you bought in Tel'Adre out of your pack. The happiness on their little faces warms your heart.\n\n");
 	outputText("\"<i>Wow, really mom? You are the best!</i>\"\n\n");
-	outputText("Your daughters all cheer up as they pick up the toys and rush to the rivers to fill them up. Soon you’re all splashing each other. The experience is refreshing and soothing. You never thought you would appreciate having children this much. Perhaps parenting comes included in the whole “being a child of a fertility goddess” deal, you ponder, before being splashed in the face by one of your daughters, breaking you out of your reverie, and dragging you back into the game.\n\n");
+	outputText("Your daughters all cheer up as they pick up the toys and rush to the rivers to fill them up. Soon you’re all splashing each other. The experience is refreshing and soothing. You never thought you would appreciate having children this much. Perhaps parenting comes included in the whole \"being a child of a fertility goddess\" deal, you ponder, before being splashed in the face by one of your daughters, breaking you out of your reverie, and dragging you back into the game.\n\n");
 	doNext(camp.returnToCampUseOneHour);
 }
 
 public function playsRathazulAndSoulgemScene():void
 {
 	clearOutput();
-	spriteSelect(49);
+	spriteSelect(SpriteDb.s_rathazul);
 	outputText("As you pass by Rathazul considers you, then asks \"<i>May I ask what you’re planning to do with that soul gem of yours? Because yes I know exactly what this dangerous crystal you’re carrying is</i>\"\n\n");
 	outputText("When you mention you want to create a golem, Rathazul seems to lose himself in thought, as if trying to remember something.\n\n");
 	outputText("\"<i>Years ago, when I was younger, I knew a woman who specialised in such constructs. She was obsessed with creating the perfect servant. However when the demons came, hungry for power, she embraced them instead of fleeing and became one of those aberrations. Her laboratory is likely still located in the same area as before - hidden somewhere in the place now called the blighted ridges. If you go there, be careful. ");
@@ -59,16 +60,16 @@ public function droppingToZeroSatietyAsGargoyle():void
 {
 	clearOutput();
 	if (player.hasPerk(PerkLib.GargoylePure)) {
-		outputText("Unable to sustain your movement longer you are forced into an emergency rest. And only wake up a few hours later after absorbing enough energy to regain movement.\n\n");
+		outputText("Unable to sustain your movement any longer, you slow to a stop. Despite your best efforts, you shut down. You open your eyes, looking up at the sky to judge the time. You've been asleep for eight hours. At least now, you've absorbed enough energy to regain movement.\n\n");
 		doNext(camp.returnToCampUseEightHours);
 	}
 	else {
-		outputText("Unable to sustain your movement longer you are unable to maintain control, you need sex NOW!\n\n");
+		outputText("Your reserves are running low. Your body begins to shake. you are unable to control yourself. you need sex NOW!\n\n");
 		if (player.hasVagina()) {
 			outputText("You rush into the mountain starved for energy and seduce the first minotaur you can find putting your drooling pussy on display. The minotaur, used to having to fight for a hole to fuck, does not complain and lies down for you to take him in.  Your eyes zero in as a dollop of pre escapes his ribbed horse-like member, locating the source of the scent.\n\n");
 			//Too small
 			if(player.vaginalCapacity() < monster.cockArea(0)) {
-				outputText("Restraint evaporates as you lower yourself, your aching " + vaginaDescript(0) + " desperate for contact.  Your thighs quiver as you touch his wobbling column of maleness, the slick pre-cum soaking into your engorged clitty, filling it with tingling warmth.  Oblivious to the apparent size difference, your body pushes downwards, your knees giving out, forcing his flared head against your " + vaginaDescript(0) + " roughly.  The need to be speared on the beast's meat is overwhelming urged on by constantly leaking pre-cum currently pumping into your love-canal.  With strength born of unnatural lust, you grip his flanks and drive yourself downwards, feeling yourself stretch painfully as you take in his length.  ");
+				outputText("Restraint evaporates as you lower yourself, your aching " + vaginaDescript(0) + " desperate for contact.  Your thighs quiver as you touch his wobbling column of maleness, the slick pre-cum soaking into your engorged clitty, filling it with tingling warmth.  Oblivious to the apparent size difference, your body pushes downwards, your knees giving out, forcing his flared head against your " + vaginaDescript(0) + " roughly.  The need to be speared on the beast's meat is overwhelming urged on by the constantly leaking pre-cum currently pumping into your love-canal.  With strength born of unnatural lust, you grip his flanks and drive yourself downwards, feeling yourself stretch painfully as you take in his length.  ");
 			}
 			//Good match
 			if(player.vaginalCapacity() >= monster.cockArea(0) && player.vaginalCapacity() < monster.cockArea(0) * 1.5) {
@@ -96,7 +97,7 @@ public function droppingToZeroSatietyAsGargoyle():void
 			dynStats("spe", -.5, "int", -.5, "sen", 1.5, "cor", 1);
 		}
 		else {
-			outputText("You rush into the forest starved for energy and forcefully grab the first goblin you can find wiping your rock hard cock against her face with clear intent. The goblin getting the idea that your pretty much ready to kill to get laid decide against puting any form of resistance.\n\n");
+			outputText("You rush into the forest starved for energy and forcefully grab the first goblin you can find wiping your rock hard cock against her face. The goblin, getting the idea that you're pretty much ready to kill to get laid, decides against resisting.\n\n");
 			var x:Number = player.cockThatFits(monster.vaginalCapacity());
 			outputText(images.showImage("goblin-win-male-goblinboners"));
 			outputText("You begin to fondle your cock as you walk towards the unsuspecting goblin girl, taking in the sight of her perfectly round cheeks as they jiggle against her hurried movements, her soft thighs clenched against the eager hand between them.  Bending down, you quickly grab the goblin's ample hips, causing the girl to squeak in surprise as she turns around to catch the sight of your erect length.\n\n");
@@ -114,9 +115,9 @@ public function droppingToZeroSatietyAsGargoyle():void
 
 public function badendManticoreOuroboros():void {
 	clearOutput();
-	outputText("You eye your penis then your tail pussy then back at your penis. The smell of precum dripping from your maleness.. it drives you insane with desire.");
-	outputText("\n\nWithout thinking any further you curl your tail between your legs and plug it to your own twitching cock. The pleasure is instantaneous as you instinctively sting yourself and start cuming nonstop into your tail. Your legs twitches and spasms making you fall to the ground on short notice. Your brain begins to melt as your thoughts shrinks to cuming and feeding, your own fluids fueling you with the endless supply of stamina needed to never stop cuming.");
-	outputText("\n\nGuess this is what you get for messing around with designs known only to mother nature. Even if you tried to stop now you wouldn't be able to as you tail instinctively tries to milk your dick to a last drop that will never come. Unable to form coherent thought anymore you become a creature of pure basest instinct. Month and year will pass before ultimately you die out of old age having long lost the ability to process rational thought.");
+	outputText("You eye your penis, then your tail pussy, then back at your penis. The smell of precum dripping from your maleness.. it drives you insane with desire.");
+	outputText("\n\n Without thinking any further you curl your tail between your legs and plug it to your own twitching cock. The pleasure is instantaneous as you instinctively sting yourself, [cock] twitching as you unleash a deluge of cum into your tail. Your [legs] spasm, making you fall to the ground hard. You try to pull yourself off, but your arms aren't responding, your eyes rolling back as the pleasure overwhelms your mind. Your thoughts fade away, replaced by the need. The endless thirst and satiation, cumming and feeding. You let out a worldess moan, your own fluids fueling you with the endless supply of stamina needed to never stop cumming.");
+	outputText("\n\n Even if you tried to stop now, you wouldn't be able to. Your will is nonexistent, your own body betraying you. Your tail instinctively tries to milk your dick to a last drop that will never come. Unable to form coherent thoughts anymore, you become a creature of pure basest instinct. Months and years will pass before ultimately you die of old age... Not that you know, or care, having long lost the ability to process rational thought.");
 	EventParser.gameOver();
 }
 

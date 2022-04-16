@@ -24,7 +24,7 @@ public class Marble extends Monster
 				return;
 			}
 			//Determine if evaded
-			if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 60) {
+			if(player.hasPerk(PerkLib.Evade) && rand(100) < 60) {
 				outputText("You easily sidestep as Marble tries to deliver a huge overhand blow.");
 				return;
 			}
@@ -49,7 +49,7 @@ public class Marble extends Monster
 				outputText("Marble makes a wide sweeping attack with her hammer, which is difficult to avoid even from a blinded opponent.\n");
 			}
 			//Determine if evaded
-			if(player.findPerk(PerkLib.Evade) >= 0 && rand(100) < 10) {
+			if(player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
 				outputText("You barely manage to avoid a wide sweeping attack from marble by rolling under it.");
 				return;
 			}

@@ -17,6 +17,7 @@ import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.Places.WoodElves;
 import classes.Scenes.SceneLib;
 import classes.lists.Gender;
+import classes.display.SpriteDb;
 
 import coc.xxc.BoundStory;
 import coc.xxc.stmts.ZoneStmt;
@@ -77,8 +78,12 @@ use namespace CoC;
 				tentacleBeastScene.encounter();
 			}
 		}
+		private var _forestOutskirtsEncounter:GroupEncounter = null;
 		private var _forestEncounter:GroupEncounter = null;
 		private var _deepwoodsEncounter:GroupEncounter = null;
+		public function get forestOutskirtsEncounter():GroupEncounter {
+			return _forestOutskirtsEncounter;
+		}
 		public function get forestEncounter():GroupEncounter {
 			return _forestEncounter;
 		}
@@ -88,6 +93,118 @@ use namespace CoC;
 		private function init():void {
             const game:CoC = CoC.instance;
             const fn:FnHelpers = Encounters.fn;
+			_forestOutskirtsEncounter = Encounters.group("outskirtsforest", {
+						//General Golems, Goblin and Imp Encounters
+						name: "common",
+						call: SceneLib.exploration.genericGolGobImpEncounters
+					}, {
+						//Helia monogamy fucks
+						name  : "helcommon",
+						call  : SceneLib.helScene.helSexualAmbush,
+						chance: 0.2,
+						when  : SceneLib.helScene.helSexualAmbushCondition
+					}, {
+						name  : "Tamani",
+						chance: 0.6,
+						call  : function ():void {
+							if (flags[kFLAGS.TAMANI_DAUGHTER_PREGGO_COUNTDOWN] == 0
+								&& flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 16 && flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] < 3) {
+								tamaniDaughtersScene.encounterTamanisDaughters();
+							} else {
+								tamaniScene.encounterTamani();
+							}
+						},
+						when  : function ():Boolean {
+							return flags[kFLAGS.TAMANI_TIME_OUT] == 0
+								   && player.gender > 0
+								   && (player.hasCock() || player.hasKeyItem("Deluxe Dildo") < 0)
+								   && flags[kFLAGS.SOUL_SENSE_TAMANI] < 3;
+						}
+					}, {
+						name  : "Tamani_Daughters",
+						call  : encounterTamanisDaughtersFn,
+						when  : function ():Boolean {
+							return player.gender > 0
+								&& player.hasCock()
+								&& flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] >= 16
+								&& flags[kFLAGS.SOUL_SENSE_TAMANI_DAUGHTERS] < 3;
+						}
+					}, {
+						name  : "corrGlade",
+						call  : corruptedGladeFn,
+						when  : function():Boolean {
+							return flags[kFLAGS.CORRUPTED_GLADES_DESTROYED] < 100;
+						},
+						chance: function():Number {
+							return (100 - 0.75*(flags[kFLAGS.CORRUPTED_GLADES_DESTROYED]||0))/100;
+						}
+					}, {
+						name: "trip",
+						call: tripOnARoot
+					}, {
+						name  : "beegirl",
+						call  : beeGirlScene.beeEncounter,
+						chance: 0.20
+					}, {
+						name  : "truffle",
+						call  : findTruffle,
+						chance: 0.20
+					}, {
+						name  : "chitin",
+						call  : findChitin,
+						chance: 0.20
+					}, {
+						name  : "healpill",
+						call  : findHPill,
+						chance: 0.20
+					}, {
+						name  : "woods",
+						call  : camp.cabinProgress.gatherWoods,
+						when  : camp.cabinProgress.canGatherWoods,
+						chance: 4
+					}, {
+						name  : "marble",
+						call  : marbleVsImp,
+						when  : function ():Boolean {
+							//can be triggered one time after Marble has been met, but before the addiction quest starts.
+							return player.exploredForest > 0
+								   && !player.hasStatusEffect(StatusEffects.MarbleRapeAttempted)
+								   && !player.hasStatusEffect(StatusEffects.NoMoreMarble)
+								   && player.hasStatusEffect(StatusEffects.Marble)
+								   && flags[kFLAGS.MARBLE_WARNING] == 0;
+						},
+						chance: 0.05
+					}, {
+						name: "walk",
+						call: forestWalkFn
+					}, {
+						name  : "essrayle",
+						call  : essrayle.essrayleMeetingI,
+						when  : function():Boolean {
+							return player.gender > 0
+								   && (flags[kFLAGS.ESSY_MET_IN_DUNGEON] == 0
+									   || flags[kFLAGS.TOLD_MOTHER_TO_RELEASE_ESSY] == 1)
+						},
+						chance: 0.25
+					}, {
+						name  : "bigjunk",
+						call  : bigJunkForestScene,
+						chance: bigJunkChance
+					}, {
+						name  : "konstantin",
+						call  : SceneLib.konstantin.meetKonstantinAtForest,
+						when  : function():Boolean {
+							return (flags[kFLAGS.KONSTANTIN_FOLLOWER] < 2);
+						},
+						chance: 1.5
+					}, {
+						name  : "luna",
+						call  : SceneLib.lunaFollower.fullMoonEventResistWinFireHerForest,
+						when  : function():Boolean {
+							return (flags[kFLAGS.LUNA_FOLLOWER] == 2);
+						},
+						chance: 2
+					});
 			_forestEncounter = Encounters.group("forest", {
 						//General Golems, Goblin and Imp Encounters
 						name: "common",
@@ -102,7 +219,7 @@ use namespace CoC;
 						name  : "deepwoods",
 						call  : discoverDeepwoods,
 						when  : function ():Boolean {
-							return (player.level >= 7) && !deepwoodsDiscovered();
+							return ((player.level + combat.playerLevelAdjustment()) >= 7) && !deepwoodsDiscovered();
 						},
 						chance: Encounters.ALWAYS
 					},  {
@@ -144,13 +261,14 @@ use namespace CoC;
 							//Extra chance of Jojo encounter.
 							return (player.hasPerk(PerkLib.PiercedFurrite)
 									&& rand(5) == 0
-									&& (player.cor > 25 || JojoScene.monk > 0)) ? 1.2 : 1;
+									&& (player.cor > 25 || JojoScene.monk > 0)) ? 2.4 : 2;
 						},
 						call  : jojoEncounter
 					}, {
 						name  : "tentaBeast",
 						call  : tentacleBeastEncounterFn,
-						when  : fn.ifLevelMin(3)
+						when  : fn.ifLevelMin(3),
+						chance: 0.80
 					}, {
 						name  : "corrGlade",
 						call  : corruptedGladeFn,
@@ -161,16 +279,13 @@ use namespace CoC;
 							return (100 - 0.75*(flags[kFLAGS.CORRUPTED_GLADES_DESTROYED]||0))/100;
 						}
 					}, {
-						name: "trip",
-						call: tripOnARoot
-					}, {
 						name  : "beegirl",
 						call  : beeGirlScene.beeEncounter,
-						chance: 0.50
+						chance: 1.0
 					}, {
 						name  : "WoodElf",
 						call  : SceneLib.woodElves.findElves,
-						chance: 0.50,
+						chance: 0.5,
 						when  : function ():Boolean {
 							return WoodElves.WoodElvesQuest == WoodElves.QUEST_STAGE_NOT_STARTED && player.level >= 10 && !player.blockingBodyTransformations()
 						}
@@ -182,13 +297,9 @@ use namespace CoC;
 							return WoodElves.WoodElvesQuest == WoodElves.QUEST_STAGE_METELFSANDEVENBEATSTHEM && player.level >= 10 && !player.blockingBodyTransformations()
 						}
 					}, {
-						name  : "truffle",
-						call  : findTruffle,
-						chance: 0.35
-					}, {
 						name  : "chitin",
 						call  : findChitin,
-						chance: 0.05
+						chance: 0.10
 					}, {
 						name  : "healpill",
 						call  : findHPill,
@@ -213,17 +324,17 @@ use namespace CoC;
 					}, {
 						name: "diana",
 						when: function():Boolean {
-							return flags[kFLAGS.DIANA_FOLLOWER] == 5 && flags[kFLAGS.DIANA_AFFECTION] == 100 && !player.hasStatusEffect(StatusEffects.DianaOff);
+							return flags[kFLAGS.DIANA_FOLLOWER] < 6 && !(flags[kFLAGS.DIANA_FOLLOWER] != 3 && flags[kFLAGS.DIANA_LVL_UP] >= 8) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff);
 						},
 						chance: 0.5,
-						call: SceneLib.dianaScene.postNameForestEnc
+						call: SceneLib.dianaScene.repeatEnc
 					}, {
-						name: "m1 cerberus",
-						when: function ():Boolean {
-							return player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2) && player.statusEffectv1(StatusEffects.TelAdreTripxiGuns2) == 0 && player.hasKeyItem("M1 Cerberus") < 0;
+						name: "dianaName",
+						when: function():Boolean {
+							return ((flags[kFLAGS.DIANA_FOLLOWER] < 3 || flags[kFLAGS.DIANA_FOLLOWER] == 5) && flags[kFLAGS.DIANA_LVL_UP] >= 8) && !player.hasStatusEffect(StatusEffects.DianaOff) && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1;
 						},
-						chance: 50,
-						call: partsofM1Cerberus
+						chance: 0.5,
+						call: SceneLib.dianaScene.postNameEnc
 					}, {
 						name: "walk",
 						call: forestWalkFn
@@ -256,13 +367,6 @@ use namespace CoC;
 						},
 						chance: 0.7
 					}, {
-						name  : "konstantin",
-						call  : SceneLib.konstantin.meetKonstantinAtForest,
-						when  : function():Boolean {
-							return (flags[kFLAGS.KONSTANTIN_FOLLOWER] < 2);
-						},
-						chance: 0.8
-					}, {
 						name  : "luna",
 						call  : SceneLib.lunaFollower.fullMoonEventResistWinFireHerForest,
 						when  : function():Boolean {
@@ -281,10 +385,6 @@ use namespace CoC;
 						call  : game.succubusScene.encounterSuccubus,
 						when  : fn.ifLevelMin(3),
 						chance: 0.50
-					}, {
-						name  : "healpill",
-						call  : findHPill,
-						chance: 0.10
 					}
 					*/
 			_deepwoodsEncounter = Encounters.group("deepwoods", /*CoC.instance.commonEncounters,*/ {
@@ -411,12 +511,10 @@ use namespace CoC;
 				}
 			}, {
 				name: "tentabeast",
-				call: tentacleBeastDeepwoodsEncounterFn,
-				when: Encounters.fn.ifLevelMin(2)
+				call: tentacleBeastDeepwoodsEncounterFn
 			}, {
 				name: "alraune",
-				call: alrauneEncounterFn,
-				when: Encounters.fn.ifLevelMin(3)
+				call: alrauneEncounterFn
 			}, {
 				name: "lilirauneIngrediant",
 				call  : lilirauneIngrediantEvent,
@@ -438,20 +536,13 @@ use namespace CoC;
 			}, {
 				name: "ted",
 				when: function():Boolean {
-					return flags[kFLAGS.TED_LVL_UP] >= 1 && flags[kFLAGS.TED_LVL_UP] < 4 && !player.hasStatusEffect(StatusEffects.TedOff) && player.statusEffectv1(StatusEffects.CampSparingNpcsTimers4) < 1;
+					return flags[kFLAGS.TED_LVL_UP] >= 1 && flags[kFLAGS.TED_LVL_UP] < 2 && !player.hasStatusEffect(StatusEffects.TedOff) && player.statusEffectv1(StatusEffects.CampSparingNpcsTimers4) < 1;
 				},
 				call: SceneLib.tedScene.introPostHiddenCave
 			},{
 				name: "dungeon",
-				call: SceneLib.dungeons.enterDeepCave,
+				call: SceneLib.dungeons.deepcave.enterDungeon,
 				when: SceneLib.dungeons.canFindDeepCave
-			}, {
-				name: "snippler",
-				when: function ():Boolean {
-					return player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns4) && player.statusEffectv1(StatusEffects.TelAdreTripxiGuns4) == 0 && player.hasKeyItem("Snippler") < 0;
-				},
-				chance: 30,
-				call: partsofSnippler
 			}, {
 				name  : "walk",
 				call  : deepwoodsWalkFn,
@@ -459,7 +550,8 @@ use namespace CoC;
 			});
 		}
 		public function exploreDeepwoods():void {
-			player.addStatusValue(StatusEffects.ExploredDeepwoods,1,1);
+			player.addStatusValue(StatusEffects.ExploredDeepwoods, 1, 1);
+			//player.createStatusEffect(StatusEffects.GnomeHomeBuff,1,0,0,0);
 			deepwoodsEncounter.execEncounter();
 		}
 
@@ -513,6 +605,16 @@ use namespace CoC;
 			outputText("\n\nShe gives a wistful sigh. \"<i>I haven't really explored much since getting to the farm.  Between the jobs Whitney gives me, keeping in practice with my hammer, milking to make sure I don't get too full, cooking, and beauty sleep, I don't get a lot of free time to do much else.</i>\"  She sighs again.  \"<i>Well, I need to get this back, so I'll see you later!</i>\"");
 			//end event
 			doNext(camp.returnToCampUseOneHour);
+		}
+		public function exploreForestOutskirts():void
+		{
+			clearOutput();
+			doNext(camp.returnToCampUseOneHour);
+			//Increment forest exploration counter.
+			player.exploredForest++;
+//			forestStory.execute();
+			forestOutskirtsEncounter.execEncounter();
+			flushOutputTextToGUI();
 		}
 		public function exploreForest():void
 		{
@@ -632,7 +734,7 @@ use namespace CoC;
 		//Will be standalone
 		private function trappedSatyr():void {
 			clearOutput();
-			spriteSelect(99);
+			spriteSelect(SpriteDb.s_stuckSatyr);
 			outputText("As you wander through the woods, you find yourself straying into yet another corrupt glade.  However, this time the perverse grove isn't unoccupied; loud bleatings and brayings of pleasure split the air, and as you push past a bush covered in dripping, glans-shaped berries, you spot the source.\n\n");
 			outputText("A humanoid figure with a set of goat-like horns and legs - a satyr - is currently buried balls-deep in one of the vagina-flowers that scatter the grove, whooping in delight as he hungrily pounds into its ravenously sucking depths.  He stops on occasion to turn and take a slobbering suckle from a nearby breast-like growth; evidently, he doesn't care that he's stuck there until the flower's done with him.");
 			if (flags[kFLAGS.CODEX_ENTRY_SATYRS] <= 0) {
@@ -656,7 +758,7 @@ use namespace CoC;
 		//[=No=]
 		private function ignoreSatyr():void {
 			clearOutput();
-			spriteSelect(99);
+			spriteSelect(SpriteDb.s_stuckSatyr);
 			outputText("You shake your head, " +
 					((player.cor < 50)
 							? "disgusted by the strange thoughts this place seems to put into your mind"
@@ -668,7 +770,7 @@ use namespace CoC;
 		//Player returns to camp
 		private function rapeSatyr():void {
 			clearOutput();
-			spriteSelect(99);
+			spriteSelect(SpriteDb.s_stuckSatyr);
 			var x:Number = player.biggestCockIndex();
 			if (player.cor < 33) {
 				outputText("For a moment you hesitate... taking someone from behind without their consent seems wrong... but then again you doubt a satyr would pass on the opportunity if you were in his position.")
@@ -713,7 +815,7 @@ use namespace CoC;
 		//[=Leave=]
 		private function dontRepeatFuckSatyr():void {
 			clearOutput();
-			spriteSelect(99);
+			spriteSelect(SpriteDb.s_stuckSatyr);
 			outputText("You've had your fun, and you don't really want to fool around in the forest all day, so you grab your [armor] and leave the rutting satyr behind.");
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -780,22 +882,6 @@ use namespace CoC;
 			clearOutput();
 			outputText("You spot a weird looking flower on a patch of grass that is ripe with corruption. It looks pretty normal save for it having two pistils instead of just one. You feel oddly drawn to it, deciding to bag it just in case.\n\n");
 			inventory.takeItem(consumables.STRFLOW, camp.returnToCampUseOneHour);
-		}
-		public function partsofM1Cerberus():void {
-			clearOutput();
-			outputText("As you explore the forest you run into what appears to be the half buried remains of some old contraption. Wait this might just be what that gun vendor was talking about! You proceed to dig up the items releasing this to indeed be the remains of a broken firearm.\n\n");
-			outputText("You carefully put the pieces of the M1 Cerberus in your back and head back to your camp.\n\n");
-			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
-			player.createKeyItem("M1 Cerberus", 0, 0, 0, 0);
-			doNext(camp.returnToCampUseOneHour);
-		}
-		public function partsofSnippler():void {
-			clearOutput();
-			outputText("As you explore the deepwoods you run into what appears to be the half buried remains of some old contraption. Wait this might just be what that gun vendor was talking about! You proceed to dig up the items releasing this to indeed be the remains of a broken firearm.\n\n");
-			outputText("You carefully put the pieces of the Snippler in your back and head back to your camp.\n\n");
-			player.addStatusValue(StatusEffects.TelAdreTripxi, 2, 1);
-			player.createKeyItem("Snippler", 0, 0, 0, 0);
-			doNext(camp.returnToCampUseOneHour);
 		}
 		public function discoverDeepwoods():void {
 			player.createStatusEffect(StatusEffects.ExploredDeepwoods, 0, 0, 0, 0);

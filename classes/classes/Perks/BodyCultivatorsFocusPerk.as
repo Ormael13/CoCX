@@ -1,6 +1,6 @@
 /**
  * ...
- * @author Liadri/Ormael
+ * @author Ormael
  */
 package classes.Perks 
 {
@@ -17,8 +17,8 @@ package classes.Perks
 		
 		public function BodyCultivatorsFocusPerk() 
 		{
-			super("Body Cultivator's Focus", "Body Cultivator's Focus",
-					"Your body cultivator's weapon grants you additional focus, increasing your physical soulskills power.");
+			super("Body Cultivator's Focus", "Body Cultivator's Focus (M)",
+					"Your body cultivator's melee weapon grants you additional focus, increasing your physical soulskills power.");
 		}
 	}
 }

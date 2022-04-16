@@ -29,6 +29,7 @@ package classes.Items
 				PerkLib.WizardsAndDaoistsEndurance,20,20,0,0);
 		public const BKIMONO:ArmorWithPerk = new ArmorWithPerk("B.Kimono","B.Kimono","blue kimono","a blue kimono",0,1,200,"This lovely blue kimono is adorned with a floral pattern. It will likely increase your spiritual power as a kitsune.","Light",
 				PerkLib.WizardsAndDaoistsEndurance,20,20,0,0);
+		public const BMARMOR:BattleMaidenArmor = new BattleMaidenArmor();
 		public const BONSTRP:ArmorWithPerk = new ArmorWithPerk("BonStrp","BonStrp","barely-decent bondage straps","a set of bondage straps",0,0,40,"These leather straps and well-placed hooks are actually designed in such a way as to be worn as clothing.  While they technically would cover your naughty bits, virtually every other inch of your body would be exposed.","Light",
 				PerkLib.SluttySeduction,10,0,0,0,"Your fetishy bondage outfit allows you access to an improved form of 'Tease'.", false, false).withTag(ItemTags.REVEALING,ItemTags.AGILE) as ArmorWithPerk;
 		public const C_CLOTH:ComfortableClothes = new ComfortableClothes();
@@ -52,6 +53,7 @@ package classes.Items
 		public const FULLCHN:Armor = new Armor("FullChn","Full Chain","full-body chainmail","a full suit of chainmail armor",8,0,320,"This full suit of chainmail armor covers its wearer from head to toe in protective steel rings.","Medium");
 		public const FULLPLT:Armor = new Armor("FullPlt","Full Plate","full platemail","a suit of full-plate armor",21,0,1260,"A highly protective suit of steel platemail.  It would be hard to find better physical protection than this.","Heavy");
 		public const G_CHANG:Armor = new Armor("G.Chang","GreenChangshan","Green Lunar new year dress (m)","a Green Lunar new year dress (m)",0,0,100,"A simple yet elegant green changshan with dragon motif. This clothing is said to bring in good luck increasing evasiveness and critical chance.","Light");
+		public const G_DIVES:Armor = new Armor("G.DiveS","GreenDivingSuit","Green Diving Suit","a Green Diving Suit",25,5,1800,"A green diving suit. Good for diving, stomping splicers or slaying demons.","Heavy");
 		public const G_QIPAO:Armor = new Armor("G.Qipao","GreenQipao","Green Lunar new year dress (f)","a Green Lunar new year dress (f)",0,0,100,"A simple yet elegant green qipao with floral motif. This dress is said to bring in good luck increasing evasiveness and critical chance.","Light");
 		public const GELARMR:Armor = new Armor("GelArmr","GelArmr","glistening gel-armor plates","a suit of gel armor",10,0,600,"This suit of interlocking plates is made from a strange green material.  It feels spongy to the touch but is amazingly resiliant.","Heavy");
 		public const GTECHC_:GoblinTechnomancerClothes = new GoblinTechnomancerClothes();
@@ -96,6 +98,7 @@ package classes.Items
 				PerkLib.SluttySeduction,8,0,0,0,"Your fetishy rubberwear allows you access to 'Seduce', an improved form of 'Tease'.", true, false);
 		public const RKIMONO:ArmorWithPerk = new ArmorWithPerk("R.Kimono","R.Kimono","red kimono","a red kimono",0,1,200,"This lovely red kimono is adorned with a floral pattern. It will likely increase your spiritual power as a kitsune.","Light",
 				PerkLib.WizardsAndDaoistsEndurance,20,20,0,0);
+		public const S_ARMOR:SuccubusArmor = new SuccubusArmor();
 		public const S_SWMWR:SluttySwimwear = new SluttySwimwear();
 		public const SAMUARM:Armor = new Armor("SamuArm","Samu.Armor","samurai armor","a suit of samurai armor",18,0,300,"This suit of armor is originally worn by the Samurai, the warriors from the far East.","Heavy");
 		public const SAQBIKNI:ArmorWithPerk = new ArmorWithPerk("SAqBikini","S Aq Bikini","Sexy Aquamarine Bikini","a Sexy Aquamarine Bikini",0,0,160,"This item helps female swimmers look sexy while not hindering movement. A perfect dress for a day at the beach.","Light",

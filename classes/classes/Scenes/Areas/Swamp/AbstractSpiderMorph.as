@@ -88,7 +88,7 @@ public class AbstractSpiderMorph extends Monster
 				if (hasVagina()) outputText("The saucy dominatrix exhausts her supply of aphrodisiac toxin for the moment and finally steps back, admiring her work and giving you a lewd wink.  You ");
 				else outputText("The confident male exhausts his supply of aphrodisiac toxin for the moment and finally steps back, admiring his work and giving you a lewd wink.  You ");
 				player.dynStats("lus", 60);
-				if (player.lust >= player.maxLust()) outputText("wobble, utterly defeated and about to cave in to your lust.");
+				if (player.lust >= player.maxOverLust()) outputText("wobble, utterly defeated and about to cave in to your lust.");
 				else outputText("struggle not to fall down and start masturbating on the spot.");
 				outputText("\n");
 				return;

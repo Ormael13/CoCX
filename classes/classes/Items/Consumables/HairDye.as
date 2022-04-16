@@ -6,6 +6,7 @@ import classes.CoC;
 import classes.EngineCore;
 import classes.Items.Consumable;
 import classes.Scenes.SceneLib;
+import classes.ItemType;
 
 public class HairDye extends Consumable
 	{
@@ -31,6 +32,7 @@ public class HairDye extends Consumable
 				EngineCore.addButtonDisabled(0, "Immune", "Your body is immune to any and all transformations.");
 			}
 			else{
+                //hair
 				if (game.player.hairLength > 0) {
 					outputText("You have " + game.player.hairColor + " hair.");
 					if (game.player.hairColor != _color) EngineCore.addButton(0, "Hair", dyeHair);
@@ -39,47 +41,38 @@ public class HairDye extends Consumable
 					outputText("You don't have any hair.");
 					EngineCore.addButtonDisabled(0, "Hair", "You are bald!");
 				}
-				if (game.player.hasCoatOfType(Skin.FUR)) {
-					outputText("\n\nYou have [skin coat].");
-					if (game.player.coatColor != _color) EngineCore.addButton(1, "Fur", dyeFur);
-					else EngineCore.addButtonDisabled(1, "Fur", "Your already have " + _color + " fur!");
-				} else {
-					outputText("\n\nYou don't have any fur.");
-					EngineCore.addButtonDisabled(1, "Fur", "You don't have any fur!");
-				}
-				if (game.player.hasCoatOfType(Skin.SCALES)) {
-					outputText("\n\nYou have [skin coat].");
-					if (game.player.coatColor != _color) {
-						if (game.player.hasItem(game.useables.REAGENT, 1)) EngineCore.addButton(2, "Scales", dyeScales);
-						else EngineCore.addButtonDisabled(2, "Scales", "You do not have enough reagents! (1)");
-					}
-					else EngineCore.addButtonDisabled(2, "Scale", "Your already have " + _color + " scales!");
-				} else {
-					outputText("\n\nYou don't have any scales.");
-					EngineCore.addButtonDisabled(2, "Scale", "You don't have any scales!");
-				}
-				if (game.player.hasCoatOfType(Skin.CHITIN)) {
-					outputText("\n\nYou have [skin coat].");
-					if (game.player.coatColor != _color) {
-						if (game.player.hasItem(game.useables.REAGENT, 2)) EngineCore.addButton(3, "Chitin", dyeChitin);
-						else EngineCore.addButtonDisabled(3, "Chitin", "You do not have enough reagents! (2)");
-					}
-					else EngineCore.addButtonDisabled(3, "Chitin", "Your already have " + _color + " chitin!");
-				} else {
-					outputText("\n\nYou don't have any chitin.");
-					EngineCore.addButtonDisabled(3, "Chitin", "You don't have any scales!");
-				}
-				if (game.player.hasCoatOfType(Skin.DRAGON_SCALES)) {
-					outputText("\n\nYou have [skin coat].");
-					if (game.player.coatColor != _color) {
-						if (game.player.hasItem(game.useables.REAGENT, 2)) EngineCore.addButton(7, "D.Scales", dyeDragonScales);
-						else EngineCore.addButtonDisabled(7, "D.Scales", "You do not have enough reagents! (2)");
-					}
-					else EngineCore.addButtonDisabled(7, "D.Scale", "Your already have " + _color + " dragon scales!");
-				} else {
-					outputText("\n\nYou don't have any dragon scales.");
-					EngineCore.addButtonDisabled(7, "D.Scale", "You don't have any scales!");
-				}
+                //coat
+                var coatShort:String = player.hasCoat() ? player.skin.shortName : "coat";
+                var coatText:String = "You rub the dye into your "+ coatShort + ", then use a bucket of cool lakewater to rinse it off a few minutes later.  ";
+                var itemReq:ItemType = game.useables.REAGENT;
+                var itemCnt:int = 0;
+                var alreadyText:String = "You already have " + _color + " " + coatText;
+                switch(game.player.coatType()) {
+                    case Skin.FUR:
+                        break;
+                    case Skin.SCALES:
+                        itemCnt = 1;
+                        break;
+                    case Skin.CHITIN:
+                        itemCnt = 2;
+                        break;
+                    case Skin.DRAGON_SCALES:
+                        itemCnt = 2;
+                        break;
+                }
+                if (game.player.hasCoat())
+				    outputText("\n\nYou have [skin coat].");
+                else
+				    outputText("\n\nYou don't have any skin coat (yet?), but maybe some parts of your body are still coated?");
+                if (itemReq != ItemType.NOTHING && itemCnt > 0)
+                    outputText("\n\nYou'll need " + itemReq.shortName + " x " + itemCnt + " to dye your coat.");
+                //button
+                if (game.player.hasCoat() && game.player.coatColor == _color)
+                    EngineCore.addButtonDisabled(1, "Coat", alreadyText);
+                else if (itemReq != ItemType.NOTHING && itemCnt > 0 && !game.player.hasItem(itemReq, itemCnt))
+                    EngineCore.addButtonDisabled(1, "Coat", "You don't have enough " + itemReq.shortName + "!");
+                else
+                    EngineCore.addButton(1, "Coat", dyeCoat, coatText, itemReq, itemCnt);
 			}
 			EngineCore.addButton(14, "Nevermind", dyeCancel);
 			return true;
@@ -105,50 +98,15 @@ public class HairDye extends Consumable
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 			SceneLib.inventory.itemGoNext();
 		}
-		private function dyeFur():void {
+
+		private function dyeCoat(text:String, itemReq:ItemType, itemCnt:int):void {
 			clearOutput();
-			outputText("You rub the dye into your fur, then use a bucket of cool lakewater to rinse it off a few minutes later.  ");
+			outputText(text);
 			game.player.skin.coat.color = _color;
-			outputText("You now have [skin coat]!");
-			if (game.player.lust > 50) {
-				outputText("\n\nThe cool water calms your urges somewhat, letting you think more clearly.");
-				game.player.dynStats("lus", -15);
-			}
-			CoC.instance.mainViewManager.updateCharviewIfNeeded();
-			SceneLib.inventory.itemGoNext();
-		}
-		private function dyeScales():void {
-			clearOutput();
-			outputText("You rub the dye into your scales, then use a bucket of cool lakewater to rinse it off a few minutes later.  ");
-			game.player.skin.coat.color = _color;
-			player.consumeItem(game.useables.REAGENT, 1);
-			outputText("You now have [skin coat]!");
-			if (game.player.lust > 50) {
-				outputText("\n\nThe cool water calms your urges somewhat, letting you think more clearly.");
-				game.player.dynStats("lus", -15);
-			}
-			CoC.instance.mainViewManager.updateCharviewIfNeeded();
-			SceneLib.inventory.itemGoNext();
-		}
-		private function dyeChitin():void {
-			clearOutput();
-			outputText("You rub the dye into your chitin, then use a bucket of cool lakewater to rinse it off a few minutes later.  ");
-			game.player.skin.coat.color = _color;
-			player.consumeItem(game.useables.REAGENT, 2);
-			outputText("You now have [skin coat]!");
-			if (game.player.lust > 50) {
-				outputText("\n\nThe cool water calms your urges somewhat, letting you think more clearly.");
-				game.player.dynStats("lus", -15);
-			}
-			CoC.instance.mainViewManager.updateCharviewIfNeeded();
-			SceneLib.inventory.itemGoNext();
-		}
-		private function dyeDragonScales():void {
-			clearOutput();
-			outputText("You rub the dye into your dragon scales, then use a bucket of cool lakewater to rinse it off a few minutes later.  ");
-			game.player.skin.coat.color = _color;
-			player.consumeItem(game.useables.REAGENT, 2);
-			outputText("You now have [skin coat]!");
+            if (itemReq != ItemType.NOTHING && itemCnt > 0)
+			    player.consumeItem(itemReq, itemCnt);
+            if (game.player.hasCoat())
+			    outputText("You now have [skin coat]!");
 			if (game.player.lust > 50) {
 				outputText("\n\nThe cool water calms your urges somewhat, letting you think more clearly.");
 				game.player.dynStats("lus", -15);

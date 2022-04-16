@@ -347,6 +347,26 @@ package classes.GeneticMemories {
 			  	return CoC.instance.transformations.FaceAnimalTeeth;
 		  	}
 	  	});
+	  	public static const BUCKTEETH:int = 28;
+	  	EnumValue.add(Memories, BUCKTEETH, "BUCKTEETH", {
+		  	id: "Buck Teeth",
+		  	name: "Buck Teeth",
+		  	cost: 100,
+		 	title: "Buck Teeth",
+		  	transformation: function(): Transformation {
+			  	return CoC.instance.transformations.FaceBuckteeth;
+		  	}
+	  	});
+	  	public static const MOUSE:int = 29;
+	  	EnumValue.add(Memories, MOUSE, "MOUSE", {
+		  	id: "Mouse Teeth",
+		  	name: "Mouse Teeth",
+		  	cost: 100,
+		 	title: "Mouse Teeth",
+		  	transformation: function(): Transformation {
+			  	return CoC.instance.transformations.FaceMouse;
+		  	}
+	  	});
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

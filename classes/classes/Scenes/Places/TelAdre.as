@@ -89,7 +89,7 @@ private function encounterTelAdre():void {
 private function telAdreCrystal():void {
 	if(!player.hasStatusEffect(StatusEffects.TelAdre)) player.createStatusEffect(StatusEffects.TelAdre,0,0,0,0);
 	//-70+ corruption, or possessed by exgartuan
-	if (player.hasStatusEffect(StatusEffects.Exgartuan) || player.cor >= 70 + player.corruptionTolerance()) {
+	if (player.hasStatusEffect(StatusEffects.Exgartuan) || player.cor >= 70 + player.corruptionTolerance) {
 		outputText("The crystal pendant begins to vibrate in the air, swirling around and glowing dangerously black.  Edryn snatches her hand back and says, \"<i>I'm sorry, but you're too far gone to step foot into our city.  If by some miracle you can shake the corruption within you, return to us.</i>\"\n\n");
 		outputText("You shrug and step back.  You could probably defeat these two, but you know you'd have no hope against however many friends they had beyond the walls.  You turn around and leave, a bit disgruntled at their hospitality.  After walking partway down the dune you spare a glance over your shoulder and discover the city has vanished!  Surprised, you dash back up the dune, flinging sand everywhere, but when you crest the apex, the city is gone.");
 		doNext(camp.returnToCampUseOneHour);
@@ -187,7 +187,7 @@ public function telAdreMenu():void {
 		else meetingLunaFirstTime();
 		return;
 	}
-	spriteSelect(-1);
+	spriteSelect(null);
 	outputText(images.showImage("location-teladre"));
 	clearOutput();
 	outputText("Tel'Adre is a massive city, though most of its inhabitants tend to hang around the front few city blocks.  It seems the fall of Mareth did not leave the city of Tel'Adre totally unscathed.  A massive tower rises up in the center of the city, shimmering oddly.  From what you overhear in the streets, the covenant's magic-users slave away in that tower, working to keep the city veiled from outside dangers.  There does not seem to be a way to get into the unused portions of the city, but you'll keep your eyes open.\n\n");
@@ -211,13 +211,13 @@ public function telAdreMenuShow():void { //Just displays the normal Tel'Adre men
 		homes = true;
 	menu();
 	addButton(0, "Shops", armorShops);
-	addButton(1, "Bakery", bakeryScene.bakeryuuuuuu);
-	addButton(2, "Bar", enterBarTelAdre);
-	addButton(3, "Gym", gymDesc);
-	if (homes) addButton(4, "Homes", houses);
-	if (flags[kFLAGS.ARIAN_PARK] > 0 && flags[kFLAGS.ARIAN_PARK] < 4) addButton(5, "Park", SceneLib.arianScene.visitThePark);
-	addButton(6, "Pawn", oswaldPawn);
-	addButton(8, "Tower", library.visitZeMagesTower);
+	addButton(1, "Pawn", oswaldPawn);
+	addButton(2, "Bakery", bakeryScene.bakeryuuuuuu);
+	addButton(3, "Bar", enterBarTelAdre);
+	addButton(4, "Gym", gymDesc);
+	if (homes) addButton(5, "Homes", houses);
+	if (flags[kFLAGS.ARIAN_PARK] > 0 && flags[kFLAGS.ARIAN_PARK] < 4) addButton(6, "Park", SceneLib.arianScene.visitThePark);
+	addButton(7, "Tower", library.visitZeMagesTower);
 	addButton(14, "Leave", camp.returnToCampUseOneHour);
 }
 
@@ -265,9 +265,9 @@ public function houses():void {
 
 
 public function oswaldPawn():void {
-	spriteSelect(47);
+	spriteSelect(SpriteDb.s_oswald);
 	clearOutput();
-	if(!player.hasStatusEffect(StatusEffects.Oswald)) {
+	if (!player.hasStatusEffect(StatusEffects.Oswald)) {
 		outputText("Upon closer inspection, you realize the pawnbroker appears to be some kind of golden retriever.  He doesn't look entirely comfortable and he slouches, but he manages to smile the entire time.  His appearance is otherwise immaculate, including his classy suit-jacket and tie, though he doesn't appear to be wearing any pants.  Surprisingly, his man-bits are retracted.  ");
 		if(player.cor < 75) outputText("Who would've thought that seeing someone NOT aroused would ever shock you?");
 		else outputText("What a shame, but maybe you can give him a reason to stand up straight?");
@@ -280,7 +280,7 @@ public function oswaldPawn():void {
 		outputText("You see Oswald fiddling with a top hat as you approach his stand again.  He looks up and smiles, padding up to you and rubbing his furry hands together.  He asks, \"<i>Have any merchandise for me " + player.mf("sir","dear") + "?</i>\"\n\n");
 		outputText("(You can sell an item here, but Oswald will not let you buy them back, so be sure of your sales.  You can shift-click to sell all items in a selected stack.)");
 	}
-	if(player.hasKeyItem("Carrot") < 0 && flags[kFLAGS.NIEVE_STAGE] == 3)
+	if (player.hasKeyItem("Carrot") < 0 && flags[kFLAGS.NIEVE_STAGE] == 3)
 	{
 		outputText("\n\nIn passing, you mention that you're looking for a carrot.\n\nOswald's tophat tips precariously as his ears perk up, and he gladly announces, \"<i>I happen to have come across one recently - something of a rarity in these dark times, you see.  I could let it go for 500 gems, if you're interested.</i>\"");
 		if (player.gems < 500) {
@@ -306,9 +306,14 @@ private function buyCarrotFromOswald():void {
 	addButton(0,"Next",oswaldPawn);
 }
 
-private function oswaldPawnMenu(page:int = 1):void { //Moved here from Inventory.as
+private function oswaldPawnMenu(page:int = 1, refresh:Boolean = false):void { //Moved here from Inventory.as
 	var slot:int;
-	spriteSelect(47);
+	spriteSelect(SpriteDb.s_oswald);
+	if (refresh) {
+		clearOutput();
+		outputText("You see Oswald fiddling with a top hat as you approach his stand again.  He looks up and smiles, padding up to you and rubbing his furry hands together.  He asks, \"<i>Have any merchandise for me " + player.mf("sir","dear") + "?</i>\"\n\n");
+		outputText("(You can sell an item here, but Oswald will not let you buy them back, so be sure of your sales.  You can shift-click to sell all items in a selected stack.)");
+	}
 	outputText("\n\n<b><u>Oswald's Estimates</u></b>");
 	menu();
 	var totalItems:int = 0;
@@ -320,7 +325,7 @@ private function oswaldPawnMenu(page:int = 1):void { //Moved here from Inventory
 				totalItems += player.itemSlots[slot].quantity;
 			}
 		}
-		if (inventory.getMaxSlots() > 10) addButton(13, "Next", oswaldPawnMenu, page + 1);
+		if (inventory.getMaxSlots() > 10) addButton(13, "Next", oswaldPawnMenu, page + 1, refresh = true);
 	}
 	if (page == 2) {
 		for (slot = 10; slot < 20; slot++) {
@@ -330,25 +335,32 @@ private function oswaldPawnMenu(page:int = 1):void { //Moved here from Inventory
 				totalItems += player.itemSlots[slot].quantity;
 			}
 		}
-		addButton(13, "Prev", oswaldPawnMenu, page - 1);
+		addButton(13, "Prev", oswaldPawnMenu, page - 1, refresh = true);
 	}
+	addButton(10, "Misc", oswaldPawnMenu2);
 	if (totalItems > 1) addButton(12, "Sell All", oswaldPawnSellAll);
+	addButton(14, "Back", telAdreMenu);
+}
+private function oswaldPawnMenu2():void {
+	spriteSelect(SpriteDb.s_oswald);
+	menu();
+	if (player.keyItemv1("Backpack") < 12) addButton(5, "Backpack", buyBackpack).hint("This backpack will allow you to carry more items.");
 	switch (flags[kFLAGS.KATHERINE_UNLOCKED]) {
 		case 1:
 		case 2: addButton(10, "Kath's Alley", katherine.visitKatherine); break;
 		case 3: addButton(10, "Safehouse", katherineEmployment.katherineTrainingWithUrta); break;
 		case 4: addButton(10, "Kath's Alley", katherineEmployment.postTrainingAlleyDescription); //Appears until Kath gives you her housekeys
 	}
-	addButton(14, "Back", telAdreMenu);
+	addButton(14, "Back", oswaldPawn);
 }
 
 private function oswaldPawnSell(slot:int):void { //Moved here from Inventory.as
-	spriteSelect(47);
+	spriteSelect(SpriteDb.s_oswald);
 	var itemValue:int = int(player.itemSlots[slot].itype.value / 2);
 	clearOutput();
 	if (flags[kFLAGS.SHIFT_KEY_DOWN] == 1) {
 		if (itemValue == 0)
-			outputText("You hand over " + num2Text(player.itemSlots[slot].quantity) + " " +  player.itemSlots[slot].itype.shortName + " to Oswald.  He shrugs and says, “<i>Well ok, it isn't worth anything, but I'll take it.</i>”");
+			outputText("You hand over " + num2Text(player.itemSlots[slot].quantity) + " " +  player.itemSlots[slot].itype.shortName + " to Oswald.  He shrugs and says, \"<i>Well ok, it isn't worth anything, but I'll take it.</i>\"");
 		else outputText("You hand over " + num2Text(player.itemSlots[slot].quantity) + " " +  player.itemSlots[slot].itype.shortName + " to Oswald.  He nervously pulls out " + num2Text(itemValue * player.itemSlots[slot].quantity)  + " gems and drops them into your waiting hand.");
 		while (player.itemSlots[slot].quantity > 0){
 			player.itemSlots[slot].removeOneItem();
@@ -360,11 +372,11 @@ private function oswaldPawnSell(slot:int):void { //Moved here from Inventory.as
 		if (player.hasPerk(PerkLib.Greedy)) itemValue *= 2;
 		if (player.hasPerk(PerkLib.TravelingMerchantOutfit)) itemValue *= 2;
 		if (itemValue == 0)
-		outputText("You hand over " + player.itemSlots[slot].itype.longName + " to Oswald.  He shrugs and says, “<i>Well ok, it isn't worth anything, but I'll take it.</i>”");
+		outputText("You hand over " + player.itemSlots[slot].itype.longName + " to Oswald.  He shrugs and says, \"<i>Well ok, it isn't worth anything, but I'll take it.</i>\"");
 		else outputText("You hand over " + player.itemSlots[slot].itype.longName + " to Oswald.  He nervously pulls out " + num2Text(itemValue) + " gems and drops them into your waiting hand.");
 		player.itemSlots[slot].removeOneItem();
 		if (itemValue != 0 && player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for double the amount.");
-		if (itemValue != 0 && player.hasPerk(PerkLib.Greedy) && player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for four time the amount.");
+		if (itemValue != 0 && player.hasPerk(PerkLib.Greedy) && player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for four times the amount.");
 		player.gems += itemValue;
 	}
 	statScreenRefresh();
@@ -372,7 +384,7 @@ private function oswaldPawnSell(slot:int):void { //Moved here from Inventory.as
 }
 
 private function oswaldPawnSellAll():void {
-	spriteSelect(47);
+	spriteSelect(SpriteDb.s_oswald);
 	var itemValue:int = 0;
 	clearOutput();
 	for (var slot:int = 0; slot < 20; slot++) {
@@ -385,11 +397,48 @@ private function oswaldPawnSellAll():void {
 	if (player.hasPerk(PerkLib.TravelingMerchantOutfit)) itemValue *= 2;
 	outputText("You lay out all the items you're carrying on the counter in front of Oswald.  He examines them all and nods.  Nervously, he pulls out " + num2Text(itemValue) + " gems and drops them into your waiting hand.");
 	if (player.hasPerk(PerkLib.Greedy) || player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for double the amount.");
-	if (player.hasPerk(PerkLib.Greedy) && player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for four time the amount.");
+	if (player.hasPerk(PerkLib.Greedy) && player.hasPerk(PerkLib.TravelingMerchantOutfit)) outputText("Thanks to a little magic and a lot of hard bargaining you managed to sell your item for four times the amount.");
 
 	player.gems += itemValue;
 	statScreenRefresh();
 	doNext(oswaldPawn);
+}
+
+private function buyBackpack():void {
+	spriteSelect(SpriteDb.s_oswald);
+	clearOutput();
+	outputText("You ask Oswald if he has a backpack to spare.");
+	outputText("\n\n\"<i>Yes. They come in two sizes. What will you pick?</i>\" he asks.");
+	outputText("\n\n<b><u>Backpack Size and Pricings</u></b>");
+	outputText("\nSmall: 100 gems, +2 inventory slot");
+	outputText("\nMedium: 200 gems, +4 inventory slots");
+	menu();
+	if (player.keyItemv1("Backpack") < 2) addButton(0, "Small", buyBackpackConfirmation, 2, "Small", 100, "Grants additional two slot. \n\nCost: 100 gems");
+	if (player.keyItemv1("Backpack") < 4) addButton(1, "Medium", buyBackpackConfirmation, 4, "Medium", 200, "Grants additional four slots. \n\nCost: 200 gems");
+	addButton(14, "Nevermind", oswaldPawnMenu2);
+}
+private function buyBackpackConfirmation(size:int = 2, sizeDesc:String = "Small", price:int = 100):void {
+	spriteSelect(SpriteDb.s_oswald);
+	clearOutput();
+	if (player.gems < price) {
+		outputText("You count out your gems and realize it's beyond your price range.");
+		doNext(buyBackpack);
+		return;
+	}
+	outputText("\"<i>Here you go.</i>\"");
+	if (player.hasKeyItem("Backpack") >= 0) {
+		outputText("\n\n<b>(Key Item Upgraded: " + sizeDesc + " Backpack! You now have " + num2Text(size - player.keyItemv1("Backpack")) + " extra inventory slots");
+		player.addKeyValue("Backpack", 1, size - player.keyItemv1("Backpack"));
+		outputText(" for a total of " + num2Text(inventory.getMaxSlots()) + " slots.)</b>");
+	}
+	else {
+		outputText("\n\n<b>(Key Item Gained: " + sizeDesc + " Backpack! You now have " + num2Text(size) + " extra inventory slots");
+		player.createKeyItem("Backpack", size, 0, 0, 0);
+		outputText(" for a total of " + num2Text(inventory.getMaxSlots()) + " slots.)</b>");
+	}
+	player.gems -= price;
+	statScreenRefresh();
+	doNext(buyBackpack);
 }
 
 private function anotherButton(button:int, nam:String, func:Function, arg:* = -9000):int {
@@ -406,7 +455,7 @@ private function enterBarTelAdre():void {
 public function barTelAdre():void {
 	// Dominka & Edryn both persist their sprites if you back out of doing anything with them -- I
 	// I guess this is good a place as any to catch-all the sprite, because I don't think theres ever a case you get a sprite from just entering the bar?
-	spriteSelect( -1);
+	spriteSelect(null);
 
 	hideUpDown();
 	var button:int = 0;
@@ -430,7 +479,7 @@ public function barTelAdre():void {
 		button = anotherButton(button,"Ask4Amily",SceneLib.followerInteractions.askAboutAmily);
 	}
 	//DOMINIKA
-	if(model.time.hours > 17 && model.time.hours < 20 && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00150] != -1) {
+	if(model.time.hours > 17 && model.time.hours < 20 && flags[kFLAGS.DOMINIKA_MET] != -1) {
 		button = anotherButton(button,"Dominika",dominika.fellatrixBarApproach);
 	}
 	//EDRYN!
@@ -558,11 +607,11 @@ public function barTelAdre():void {
 		}
 		//Urta X Scylla threesome
 		if (scylla.action == Scylla.SCYLLA_ACTION_FUCKING_URTA) {
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00143] == 0)
+			if (flags[kFLAGS.URTA_SCYLLA_TIMES_CAUGHT] == 0)
 				outputText("\n\n<b>Though Urta would normally be here getting sloshed, her usual spot is completely vacant.  You ask around but all you get are shrugs and giggles.  Something isn't quite right here.  You see an empty bottle of one of her favorite brands of whiskey still rolling on her table, so she can't have been gone long.  Maybe she had guard business, or had to head to the back rooms for something?</b>");
 			else
 				outputText("\n\nUrta's usual place is vacant, though her table still holds a half-drank mug of something potent and alcoholic.  If it's anything like the last time this happened, she's snuck into a back room with Scylla to relieve some pressure.  It might not hurt to join in...");
-			flags[kFLAGS.URTA_TIME_SINCE_LAST_CAME] = 4;
+			SceneLib.urta.hoursUntilHorny(4);
 			button = anotherButton(button, "Back Room", SceneLib.urta.scyllaAndUrtaSittingInATree);
 		}
 		else if (SceneLib.urta.urtaBarDescript()) {
@@ -585,6 +634,7 @@ public function barTelAdre():void {
 //-----------------
 public function carpentryShopEntry():void {
 	clearOutput();
+    spriteSelect(SpriteDb.s_carpenter);
 	outputText("You enter the shop marked by a sign with hammer and saw symbol painted on it. There are array of tools all hung neatly. A six feet tall zebra-morph stallion stands behind the counter. He appears to be wearing typical lumberjack outfit.\n\n");
 	outputText("\"<i>Welcome to my hardware shop dear customer. Feel free to look around,</i>\" he says. \n\n");
 	if (flags[kFLAGS.CODEX_ENTRY_ZEBRAS] <= 0) {
@@ -613,12 +663,12 @@ public function carpentryShopInside():void {
 public function carpentryShopBuyNails():void {
 	clearOutput();
 	if (player.hasKeyItem("Carpenter's Toolbox") >= 0) {
-		outputText("You ask him if he has nails for sale. He replies \"<i>Certainly! I've got nails. Your toolbox can hold up to "+(flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2 ? "six":"two")+" hundred nails. I'll be selling nails at a price of two gems per nail.</i>\" \n\n");
+		outputText("You ask him if he has nails for sale. He replies \"<i>Certainly! I've got nails. Your toolbox can hold up to "+(flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2 ? "seven":"two")+" hundred and fifty nails. I'll be selling nails at a price of two gems per nail.</i>\" \n\n");
 		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) {
-			outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/600")
+			outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/750")
 		}
 		else if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 2) {
-			outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/200")
+			outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/250")
 		}
 		menu();
 		addButton(0, "Buy 10", carpentryShopBuyNailsAmount, 10);
@@ -653,17 +703,17 @@ private function carpentryShopBuyNailsYes():void {
 		if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_HAMMER_TIME] >= 300) awardAchievement("Hammer Time", kACHIEVEMENTS.GENERAL_HAMMER_TIME);
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] += nails;
 		outputText("You hand over " + (nails * 2) + " gems. \"<i>Done,</i>\" he says as he hands over bundle of " + nails +" nails to you.\n\n");
-		if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 600 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) {
+		if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 750 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) {
 			outputText("Unfortunately, your toolbox can't hold anymore nails. You notify him and he refunds you the gems.\n\n");
-			player.gems += ((flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] - 600) * 2);
-			flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 600;
-			outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/600");
+			player.gems += ((flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] - 750) * 2);
+			flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 750;
+			outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/750");
 		}
-		else if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 200 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 2) {
+		else if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] > 250 && flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 2) {
 			outputText("Unfortunately, your toolbox can't hold anymore nails. You notify him and he refunds you the gems.\n\n");
-			player.gems += ((flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] - 200) * 2);
-			flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 200;
-			outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/200");
+			player.gems += ((flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] - 250) * 2);
+			flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] = 250;
+			outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/250");
 		}
 	}
 	else outputText("\"<i>I'm sorry, my friend. You do not have enough gems.</i>\"");
@@ -676,10 +726,10 @@ public function carpentryShopBuyWood():void {
 	clearOutput();
 	outputText("You ask him if he has wood for sale. He replies \"<i>Certainly! I've got extra supply of wood. I'll be selling wood at a price of 5 gems per wood plank.</i>\" \n\n");
 	if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) {
-		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/900")
+		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/1200")
 	}
 	else if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 3) {
-		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/300")
+		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/400")
 	}
 	menu();
 	addButton(0, "Buy 10", carpentryShopBuyWoodAmount, 10);
@@ -709,17 +759,17 @@ private function carpentryShopBuyWoodYes():void {
 		if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_IM_NO_LUMBERJACK] >= 100) awardAchievement("I'm No Lumberjack", kACHIEVEMENTS.GENERAL_IM_NO_LUMBERJACK);
 		flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] += wood;
 		outputText("You hand over " + (wood * 5) + " gems. \"<i>I'll have the caravan deliver the wood to your camp as soon as you leave my shop,</i>\" he says.\n\n");
-		if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > 900 && (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3)) {
+		if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > 1200 && (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3)) {
 			outputText("Unfortunately, your wood supply seem to be full. You inform him. He refunds you the gems.\n\n");
-			player.gems += ((flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] - 900) * 5);
-			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] - 900);
-			outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/900");
+			player.gems += ((flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] - 1200) * 5);
+			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] - 1200);
+			outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/1200");
 		}
-		else if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > 300 && (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 3)) {
+		else if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] > 400 && (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 3)) {
 			outputText("Unfortunately, your wood supply seem to be full. You inform him. He refunds you the gems.\n\n");
-			player.gems += ((flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] - 300) * 5);
-			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] - 300);
-			outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/300");
+			player.gems += ((flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] - 400) * 5);
+			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] - 400);
+			outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/400");
 		}
 	}
 	else outputText("\"<i>I'm sorry, my friend. You do not have enough gems.</i>\"");
@@ -732,10 +782,10 @@ public function carpentryShopBuyStone():void {
 	clearOutput();
 	outputText("You ask him if he has stones for sale. He replies \"<i>Certainly! I've got extra supply of stones. I'll be selling stones at a price of 10 gems per stone.</i>\" \n\n");
 	if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) {
-		outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/900")
+		outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/1200")
 	}
 	else if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 4) {
-		outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/300")
+		outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/400")
 	}
 	menu();
 	addButton(0, "Buy 10", carpentryShopBuyStoneAmount, 10);
@@ -765,17 +815,17 @@ private function carpentryShopBuyStoneYes():void {
 		if (flags[kFLAGS.ACHIEVEMENT_PROGRESS_YABBA_DABBA_DOO] >= 100) awardAchievement("Yabba Dabba Doo", kACHIEVEMENTS.GENERAL_YABBA_DABBA_DOO);
 		flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += stone;
 		outputText("You hand over " + (stone * 10) + " gems. \"<i>I'll have the caravan deliver the stones to your camp as soon as you leave my shop,</i>\" he says.\n\n");
-		if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] > 900 && (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4)) {
+		if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] > 1200 && (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4)) {
 			outputText("Unfortunately, your stone supply seem to be full. You inform him. He refunds you the gems.\n\n");
-			player.gems += ((flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] - 900) * 10);
-			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] - 900);
-			outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/900");
+			player.gems += ((flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] - 1200) * 10);
+			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] - 1200);
+			outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/1200");
 		}
-		else if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] > 300 && (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 4)) {
+		else if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] > 400 && (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 4)) {
 			outputText("Unfortunately, your stone supply seem to be full. You inform him. He refunds you the gems.\n\n");
-			player.gems += ((flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] - 300) * 10);
-			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] - 300);
-			outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/300");
+			player.gems += ((flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] - 400) * 10);
+			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] - 400);
+			outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/400");
 		}
 	}
 	else outputText("\"<i>I'm sorry, my friend. You do not have enough gems.</i>\"");
@@ -788,10 +838,10 @@ public function carpentryShopSellNails():void {
 	clearOutput();
 	outputText("You ask him if he's willing to buy nails from you. He says, \"<i>Certainly! I'll be buying nails at a rate of one gem per nail.</i>\" \n\n");
 	if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) {
-		outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/600")
+		outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/750")
 	}
 	else if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 2) {
-		outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/200")
+		outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/250")
 	}
 	menu();
 	if (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 1) addButton(0, "Sell 1", carpentryShopSellNailsAmount, 1);
@@ -821,10 +871,10 @@ private function carpentryShopSellNailsYes():void {
 		flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] -= nails;
 		outputText("You sign the permission form for " + num2Text(nails) + " " + (flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] ? "piece" : "pieces") + " of nails to be taken from your camp. \"<i>Deal. Here are " + nails + " gems,</i>\" he says.\n\n");
 		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 2) {
-		outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/600");
+		outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/750");
 		}
 		else {
- 		outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/200");
+ 		outputText("Nails: " + flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] + "/250");
 		}
 	}
 	else outputText("\"<i>I'm sorry, my friend. You do not have enough nails.</i>\"");
@@ -837,10 +887,10 @@ public function carpentryShopSellWood():void {
 	clearOutput();
 	outputText("You ask him if he's willing to buy wood from you. He says, \"<i>Certainly! I'll be buying wood at a rate of two gems per piece.</i>\" \n\n");
 	if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) {
-		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/900")
+		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/1200")
 	}
 	else if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 3) {
-		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/300")
+		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/400")
 	}
 	menu();
 	if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 1) addButton(0, "Sell 1", carpentryShopSellWoodAmount, 1);
@@ -870,10 +920,10 @@ private function carpentryShopSellWoodYes():void {
 		flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] -= wood;
 		outputText("You sign the permission form for " + num2Text(wood) + " " + (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] == 1 ? "piece" : "pieces") + " of wood to be unloaded from your camp. \"<i>Deal. Here are " + (wood * 2) + " gems,</i>\" he says.\n\n");
 		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 3) {
-		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/900");
+		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/1200");
 		}
 		else {
-		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/300");
+		outputText("Wood: " + flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] + "/400");
 		}
 	}
 	else outputText("\"<i>I'm sorry, my friend. You do not have enough wood.</i>\"");
@@ -886,10 +936,10 @@ public function carpentryShopSellStone():void {
 	clearOutput();
 	outputText("You ask him if he's willing to buy stones from you. He says, \"<i>Certainly! I'll be buying stones at a rate of four gems per piece.</i>\" \n\n");
 	if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) {
-		outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/900")
+		outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/1200")
 	}
 	else if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] < 4) {
-		outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/300")
+		outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/400")
 	}
 	menu();
 	if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 1) addButton(0, "Sell 1", carpentryShopSellStoneAmount, 1);
@@ -919,10 +969,10 @@ private function carpentryShopSellStoneYes():void {
 		flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= stone;
 		outputText("You sign the permission form for " + num2Text(stone) + " " + (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] == 1 ? "piece" : "pieces") + " of stones to be unloaded from your camp. \"<i>Deal. Here are " + (stone * 4) + " gems,</i>\" he says.\n\n");
 		if (flags[kFLAGS.MATERIALS_STORAGE_UPGRADES] >= 4) {
-		outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/900");
+		outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/1200");
 		}
 		else {
-		outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/300");
+		outputText("Stone: " + flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] + "/400");
 		}
 	}
 	else outputText("\"<i>I'm sorry, my friend. You do not have enough stones.</i>\"");
@@ -1087,16 +1137,17 @@ public function kaibaShopMainMenu2():void {
 			addButtonDisabled(3, "R.DeadeyeAim", "You already bought item from Kaiba today.");
 			addButtonDisabled(4, "R.Ambidexty", "You already bought item from Kaiba today.");
 			addButtonDisabled(5, "E.R.Armor", "You already bought item from Kaiba today.");
-			addButtonDisabled(6, "L.Blaster", "You already bought item from Kaiba today.");
-			addButtonDisabled(7, "I.Q.Gown", "You already bought item from Kaiba today.");
+			addButtonDisabled(6, "I.Q.Gown", "You already bought item from Kaiba today.");
+			addButtonDisabled(7, "VladimirReg", "You already bought item from Kaiba today.");
+			addButtonDisabled(8, "Asterius", "You already bought item from Kaiba today.");
 		}
 		else {
 			addButton(3, "R.DeadeyeAim", buyItem, jewelries.RINGDEA).hint("Ring of deadeye aim - Remove range accuracy penalty when flying and increase range accuracy by 20%.");
 			addButton(4, "R.Ambidexty", buyItem, jewelries.RNGAMBI).hint("Ring of Ambidexty - Remove melee accuracy penalty when flying and increase melee accuracy by 15%.");
 			addButton(5, "E.R.Armor", buyItem, armors.ERA).hint("Elven Ranger Armor - +50% to Bow and spear damage, Agile, Revealing, Slutty seduction +10.");
-			addButton(6, "L.Blaster", buyItem, weaponsrange.LBLASTR).hint("Lactoblaster - A rare weapon wich may only be in Kaiba inventory for a moment buy it while you can!");
-			addButton(7, "I.Q.Gown", buyItem, armors.IQG).hint("Ice queen gown - A rare dress wich may only be in Kaiba inventory for a moment buy it while you can!");
-
+			addButton(6, "I.Q.Gown", buyItem, armors.IQG).hint("Ice queen gown - A rare dress wich may only be in Kaiba inventory for a moment buy it while you can!");
+			addButton(7, "VladimirReg", buyItem, armors.VLAR).hint("Vladimir Regalia - These burgundy clothes fit for a noble seems to naturaly befit the style of what could be a vampire.");
+			addButton(8, "Asterius", buyItem, weapons.ASTERIUS).hint("Asterius Rage - A pair of mighty but clearly cursed magical axes rumored to be the artefact of the fallen war deity Asterius.");
 		}
 		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
 		addButton(13, "-2-", kaibaShopMainMenuPage2);
@@ -1109,9 +1160,10 @@ public function kaibaShopMainMenu2():void {
 			addButtonDisabled(5, "Hodr's bow", "You already bought item from Kaiba today.");
 			addButtonDisabled(6, "Avelynn", "You already bought item from Kaiba today.");
 			addButtonDisabled(7, "Oni enchanted drinking jug", "You already bought item from Kaiba today.");
-			addButtonDisabled(8, "Oni Noble Kimono", "You already bought item from Kaiba today.");
-			addButtonDisabled(9, "Oni Tyrant Kimono", "You already bought item from Kaiba today.");
-			addButtonDisabled(10, "Demon tail ring", "You already bought item from Kaiba today.");
+			addButtonDisabled(8, "Storm Ruler", "You already bought item from Kaiba today.");
+			addButtonDisabled(10, "Oni Noble Kimono", "You already bought item from Kaiba today.");
+			addButtonDisabled(11, "Oni Tyrant Kimono", "You already bought item from Kaiba today.");
+			addButtonDisabled(12, "Demon tail ring", "You already bought item from Kaiba today.");
 		}
 		else {
 			addButton(2, "C.S.Necklace", buyItem, necklaces.CSNECK).hint("Crinos Shape necklace - Allow PC to use Crinos Shape even without perk Job: Beast Warrior with wrath costs and boost as the one gained from picking Job: Beast Warrior.");
@@ -1119,16 +1171,18 @@ public function kaibaShopMainMenu2():void {
 			addButton(4, "Soul Drill", buyItem, weapons.SDRILL).hint("Soul Drill - 1H large weapon that can deal more damage the more soulforce is feed to it each turn.");
 			addButton(5, "Hodr's bow", buyItem, weaponsrange.BOWHODR).hint("Hodr's bow - Bow that would apply blindess status or deal increased damage to blinded targets.");
 			addButton(6, "Avelynn", buyItem, weaponsrange.AVELYNN).hint("Avelynn - Crossbow that will shoot two additional bolts each time.");
-			addButton(7, "Oni enchanted drinking gourd", buyItem, miscjewelries.ONI_GOURD).hint("A magical drinking gourd beloved by onis. Suposedly it greatly increases its users attack power but also grants an endless supply of fresh drinks!");
-			addButton(8, "Oni Noble Kimono", buyItem, armors.OEKIMO).hint("The garbs of an oni noble. Suposedly it was stolen from an oni somewhere in the high mountain before being sold to kaiba by an unicorn. This is a temporary sale.");
-			addButton(9, "Oni Tyrant Kimono", buyItem, armors.OTKIMO).hint("The garbs of an oni tyrant. Suposedly it was stolen from an oni somewhere in the high mountain before being sold to kaiba by an unicorn. This is a temporary sale.");
-			addButton(10, "Demon tail ornament", buyItem, miscjewelries.DMAGETO).hint("This golden band covered with black magic incantation is big enough for an arm bracelet but was designed so it could serve as a ornament for a demon tail. This is a temporary sale.");
+			addButton(7, "Oni enchanted drinking gourd", buyItem, miscjewelries.ONI_GOURD).hint("Oni enchanted drinking gourd - A magical drinking gourd beloved by onis. Suposedly it greatly increases its users attack power but also grants an endless supply of fresh drinks!");
+			addButton(8, "Storm Ruler", buyItem, weapons.S_RULER).hint("Storm Ruler - It's large sized weapon belonging to mace/hammer type with 10% chance to trigger stun effect. It deal lightning type of damage and 50% more damage to huge or larger enemies. Additionally have Body's Cultivator (20%).");
+			addButton(10, "Oni Noble Kimono", buyItem, armors.OEKIMO).hint("The garbs of an oni noble. Suposedly it was stolen from an oni somewhere in the high mountain before being sold to kaiba by an unicorn. This is a temporary sale.");
+			addButton(11, "Oni Tyrant Kimono", buyItem, armors.OTKIMO).hint("The garbs of an oni tyrant. Suposedly it was stolen from an oni somewhere in the high mountain before being sold to kaiba by an unicorn. This is a temporary sale.");
+			addButton(12, "Demon tail ornament", buyItem, miscjewelries.DMAGETO).hint("This golden band covered with black magic incantation is big enough for an arm bracelet but was designed so it could serve as a ornament for a demon tail. This is a temporary sale.");
 		}
 		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
 		addButton(13, "-3-", kaibaShopMainMenuPage3);
 	}
 	if (flags[kFLAGS.KAIBA_SHELFS] == 2) {
 		if (player.hasStatusEffect(StatusEffects.KaibaDailyLimit)) {
+			addButtonDisabled(2, "MoonGSword", "You already bought item from Kaiba today.");
 			addButtonDisabled(3, "Wrathless", "You already bought item from Kaiba today.");
 			addButtonDisabled(4, "T.M.Outfit", "You already bought item from Kaiba today.");
 			addButtonDisabled(5, "W.I.Cloak", "You already bought item from Kaiba today.");
@@ -1139,7 +1193,8 @@ public function kaibaShopMainMenu2():void {
 			addButtonDisabled(10, "S.Ornament", "You already bought item from Kaiba today.");
 		}
 		else {
-			addButton(3, "Wrathless", buyItem, necklaces.WRATHLE).hint("Wrathless - +5% to spellpower and removes all penalty to spellcasting or using m. specials if wrath is not at max value.");
+			addButton(2, "MoonGSword", buyItem, weapons.MGSWORD).hint("Moonlight Greatsword - dealing magical dmg instead of physical, using charge weapon will give 2x larger bonus and can use range attack in case there is no range weapon equipped.");
+			addButton(3, "Wrathless", buyItem, necklaces.WRATHLE).hint("Wrathless - +10% to spellpower and removes all penalty to spellcasting or using m. specials if wrath is not at max value.");
 			addButton(4, "T.M.Outfit", buyItem, armors.TRMOUTF).hint("Traveling Merchant Outfit - Increase all gems gained by 100% and increase the potency of gem based ability by 150%, reduce spellcasting cost by 60%.");
 			addButton(5, "W.I.Cloak", buyItem, armors.WALIC).hint("Walpurgis Izalia Cloak - Increase fire and darkness damage by 100%, weaken all other elemental damage by 99%, increase fire resistance by 25%, reduce spellcasting cost by 60%.");
 			addButton(6, "S.S.Clothing", buyItem, armors.SCANSC).hint("Scandalous Succubus Clothing - Slutty seduction 15, Count as naked, +25% to Lust strike tease damage, Double tease experience gained, Raise corruption over time, Incompatible with bra or panty, double the effect of Masochist and Sadist.");
@@ -1256,6 +1311,10 @@ public function tripxiShopMainMenu():void {
 			player.removeKeyItem("Double barreled dragon gun");
 			player.addStatusValue(StatusEffects.TelAdreTripxiGuns1, 3, 1);
 		}
+		if (player.hasKeyItem("Lactoblasters") >= 0) {
+			player.removeKeyItem("Lactoblasters");
+			player.addStatusValue(StatusEffects.TelAdreTripxiGuns2, 3, 1);
+		}
 		doNext(telAdreMenu);
 	}
 	else {
@@ -1282,18 +1341,19 @@ public function tripxiShopMainMenu2a():void {
 	menu();
 	addButton(0, weaponsrange.FLINTLK.shortName, buyItemT1, weaponsrange.FLINTLK);
 	addButton(1, weaponsrange.BLUNDER.shortName, buyItemT1, weaponsrange.BLUNDER);
-	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns1) > 0) addButton(2, weaponsrange.DESEAGL.shortName, buyItemT1, weaponsrange.DESEAGL);
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) addButtonDisabled(2, "???", "Search the Desert.");
-	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns2) > 0) addButton(3, weaponsrange.M1CERBE.shortName, buyItemT1, weaponsrange.M1CERBE);
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2)) addButtonDisabled(3, "???", "Search the Forest.");
-	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns3) > 0) addButton(4, weaponsrange.TRFATBI.shortName, buyItemT1, weaponsrange.TRFATBI);
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns3)) addButtonDisabled(4, "???", "Search the Volcanic Crag.");
-	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns4) > 0) addButton(5, weaponsrange.SNIPPLE.shortName, buyItemT1, weaponsrange.SNIPPLE);
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns4)) addButtonDisabled(5, "???", "Search the Deepwoods.");
-	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns5) > 0) addButton(6, weaponsrange.TOUHOM3.shortName, buyItemT2, weaponsrange.TOUHOM3);
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns5)) addButtonDisabled(6, "???", "Search the Caves.");
-	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns6) > 0) addButton(7, weaponsrange.TWINGRA.shortName, buyItemT2, weaponsrange.TWINGRA);
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns6)) addButtonDisabled(7, "???", "Search the Battlefield(O).");
+	addButton(2, weaponsrange.DUEL_P_.shortName, buyItemT1, weaponsrange.DUEL_P_);
+	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns1) > 0) addButton(4, weaponsrange.DESEAGL.shortName, buyItemT1, weaponsrange.DESEAGL);
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) addButtonDisabled(4, "???", "Search the Desert. (lvl 6+)");
+	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns2) > 0) addButton(5, weaponsrange.M1CERBE.shortName, buyItemT1, weaponsrange.M1CERBE);
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2)) addButtonDisabled(5, "???", "Search the Swamp.");
+	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns3) > 0) addButton(6, weaponsrange.TRFATBI.shortName, buyItemT1, weaponsrange.TRFATBI);
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns3)) addButtonDisabled(6, "???", "Search the Volcanic Crag.");
+	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns4) > 0) addButton(7, weaponsrange.SNIPPLE.shortName, buyItemT1, weaponsrange.SNIPPLE);
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns4)) addButtonDisabled(7, "???", "Search the Plains.");
+	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns5) > 0) addButton(8, weaponsrange.TOUHOM3.shortName, buyItemT1, weaponsrange.TOUHOM3);
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns5)) addButtonDisabled(8, "???", "Search the Caves.");
+	if (player.statusEffectv1(StatusEffects.TelAdreTripxiGuns6) > 0) addButton(9, weaponsrange.TWINGRA.shortName, buyItemT1, weaponsrange.TWINGRA);
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns6)) addButtonDisabled(9, "???", "Search the Battlefield(B).");
 	addButtonDisabled(10, "-1-", "Shelf 1");
 	addButton(11, "-2-", tripxiShopMainMenu2b);
 	addButton(12, "-3-", tripxiShopMainMenu2c);
@@ -1304,29 +1364,31 @@ public function tripxiShopMainMenu2b():void {
 	menu();
 	addButton(0, weaponsrange.ADBSHOT.shortName, buyItemT1, weaponsrange.ADBSHOT);
 	addButton(1, weaponsrange.ADBSCAT.shortName, buyItemT1, weaponsrange.ADBSCAT);
-	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns1) > 0) addButton(2, weaponsrange.DPISTOL.shortName, buyItemT2, weaponsrange.DPISTOL);
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) addButtonDisabled(2, "???", "Search the Blight Ridge.");
-	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns2) > 0) addButton(3, weaponsrange.TDPISTO.shortName, buyItemT2, weaponsrange.TDPISTO);
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2)) addButtonDisabled(3, "???", "Search the Defiled Ravine.");
-	//4 - Sakuno M2
-	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns3) > 0) addButton(5, weaponsrange.HARPGUN.shortName, buyItemT2, weaponsrange.HARPGUN);
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns3)) addButtonDisabled(5, "???", "Search the Beach.");
-	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns5) > 0) addButton(6, weaponsrange.DERPLAU.shortName, buyItemT2, weaponsrange.DERPLAU);
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns5)) addButtonDisabled(6, "???", "Search the Mountains.");
-	//7 - Tediore pistol
+	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns1) > 0) addButton(4, weaponsrange.DPISTOL.shortName, buyItemT2, weaponsrange.DPISTOL);
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) addButtonDisabled(4, "???", "Search the Blight Ridge.");
+	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns2) > 0) addButton(5, weaponsrange.TDPISTO.shortName, buyItemT2, weaponsrange.TDPISTO);
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2)) addButtonDisabled(5, "???", "Search the Defiled Ravine.");
+	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns3) > 0) addButton(6, weaponsrange.HARPGUN.shortName, buyItemT2, weaponsrange.HARPGUN);
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns3)) addButtonDisabled(6, "???", "Search the Beach.");
+	//7 - Sakuno M2
+	if (player.statusEffectv2(StatusEffects.TelAdreTripxiGuns5) > 0) addButton(8, weaponsrange.DERPLAU.shortName, buyItemT2, weaponsrange.DERPLAU);
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns5)) addButtonDisabled(8, "???", "Search the Mountains.");
+	//9 - Tediore pistol
 	addButton(10, "-1-", tripxiShopMainMenu2a);
 	addButtonDisabled(11, "-2-", "Shelf 2");
-	addButton(12, "-2-", tripxiShopMainMenu2c);
+	addButton(12, "-3-", tripxiShopMainMenu2c);
 	addButton(14, "Leave", telAdreMenu);
 }
 
 public function tripxiShopMainMenu2c():void {
 	menu();
-	addButton(0, weaponsrange.DUEL_P_.shortName, buyItemT1, weaponsrange.DUEL_P_);
-	addButton(1, weaponsrange.IVIARG_.shortName, buyItemT1, weaponsrange.IVIARG_);
-	if (player.statusEffectv3(StatusEffects.TelAdreTripxiGuns1) > 0) addButton(2, weaponsrange.DBDRAGG.shortName, buyItemT3, weaponsrange.DBDRAGG);
-	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) addButtonDisabled(2, "???", "Search the Volcanic Crag.");
-	//3 - Lactoblasters
+	addButton(0, weaponsrange.IVIARG_.shortName, buyItemT1, weaponsrange.IVIARG_);
+	addButton(1, weaponsrange.HARKON1.shortName, buyItemT1, weaponsrange.HARKON1);
+	if (player.statusEffectv3(StatusEffects.TelAdreTripxiGuns1) > 0) addButton(4, weaponsrange.DBDRAGG.shortName, buyItemT3, weaponsrange.DBDRAGG);
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns1)) addButtonDisabled(4, "???", "Search the Volcanic Crag.");
+	if (player.statusEffectv3(StatusEffects.TelAdreTripxiGuns2) > 0) addButton(5, weaponsrange.LBLASTR.shortName, buyItemT3, weaponsrange.LBLASTR);
+	else if (player.hasStatusEffect(StatusEffects.TelAdreTripxiGuns2)) addButtonDisabled(5, "???", "Search the Mountains.");
+	//6 lub 7 - Harkonnen II - BP req. from some dark place/area?
 	//addButton(0, weaponsrange.FLINTLK.shortName, buyItemT3, weaponsrange.);
 	//addButton(1, weaponsrange.FLINTLK.shortName, buyItemT3, weaponsrange.);
 

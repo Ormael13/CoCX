@@ -14,12 +14,12 @@ package classes.Scenes.Areas.DefiledRavine
 	import classes.BodyParts.Tail;
 	import classes.CoC;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.Scenes.Areas.BlightRidge.DemonScene;
+	import classes.Scenes.SceneLib;
 	
 	use namespace CoC;
 	
 	public class MinoIncubus extends Monster 
-	{
+	{		
 		public function minoincubusPheromones():void {
 			outputText("The mino incubus smiles at you and lifts his loincloth, flicking it at you.  Thick ropes of pre-cum fly through the air, ");
 			if(rand(3) == 0) {
@@ -96,6 +96,12 @@ package classes.Scenes.Areas.DefiledRavine
 				if (choice == 2) minoincubusHeadbutt();
 				if (choice == 3) minoincubusPheromones();
 			}
+		}
+		
+		override public function defeated(hpVictory:Boolean):void
+		{
+			game.flags[kFLAGS.DEMONS_DEFEATED]++;
+			SceneLib.defiledravine.demonScene.defeatMinoIncubus();
 		}
 		
 		public function MinoIncubus() 

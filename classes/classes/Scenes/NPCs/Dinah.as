@@ -44,37 +44,37 @@ import classes.internals.*;
 		}
 		public function soulskillCostManyBirds():Number {
 			var cost:Number = 10;
-			if (findPerk(PerkLib.DaoistCultivator) >= 0) cost -= 1;
+			if (hasPerk(PerkLib.DaoistCultivator)) cost -= 1;
 			return cost;
 		}
 		public function soulskillCostHailofBlades():Number {
 			var cost:Number = 50;
-			if (findPerk(PerkLib.DaoistCultivator) >= 0) cost -= 5;
+			if (hasPerk(PerkLib.DaoistCultivator)) cost -= 5;
 			return cost;
 		}
 		
 		public function SoulskillMod():Number {
 			var mod1:Number = 1;
-			if (findPerk(PerkLib.DaoistCultivator) >= 0) mod1 += .1;
-			if (findPerk(PerkLib.DaoistApprenticeStage) >= 0) {
-				if (findPerk(PerkLib.SoulApprentice) >= 0) mod1 += .2;
-				if (findPerk(PerkLib.SoulPersonage) >= 0) mod1 += .2;
-				if (findPerk(PerkLib.SoulWarrior) >= 0) mod1 += .2;
+			if (hasPerk(PerkLib.DaoistCultivator)) mod1 += .2;
+			if (hasPerk(PerkLib.DaoistApprenticeStage)) {
+				if (hasPerk(PerkLib.SoulApprentice)) mod1 += .4;
+				if (hasPerk(PerkLib.SoulPersonage)) mod1 += .4;
+				if (hasPerk(PerkLib.SoulWarrior)) mod1 += .4;
 			}
-			if (findPerk(PerkLib.DaoistWarriorStage) >= 0) {
-				if (findPerk(PerkLib.SoulSprite) >= 0) mod1 += .3;
-				if (findPerk(PerkLib.SoulScholar) >= 0) mod1 += .3;
-				if (findPerk(PerkLib.SoulElder) >= 0) mod1 += .3;
+			if (hasPerk(PerkLib.DaoistWarriorStage)) {
+				if (hasPerk(PerkLib.SoulSprite)) mod1 += .6;
+				if (hasPerk(PerkLib.SoulScholar)) mod1 += .6;
+				if (hasPerk(PerkLib.SoulElder)) mod1 += .6;
 			}
 			return mod1;
 		}
 		public function SpellMod():Number {
 			var mod2:Number = 1;
-			if (findPerk(PerkLib.GrandMage) >= 0) mod2 += .3;
-			if (findPerk(PerkLib.Channeling) >= 0) mod2 += .2;
-			if (findPerk(PerkLib.Mage) >= 0) mod2 += .1;
-			if (findPerk(PerkLib.Spellpower) >= 0) mod2 += .1;
-			if (findPerk(PerkLib.JobSorcerer) >= 0) mod2 += .1;
+			if (hasPerk(PerkLib.GrandMage)) mod2 += .3;
+			if (hasPerk(PerkLib.Channeling)) mod2 += .2;
+			if (hasPerk(PerkLib.Mage)) mod2 += .1;
+			if (hasPerk(PerkLib.Spellpower)) mod2 += .1;
+			if (hasPerk(PerkLib.JobSorcerer)) mod2 += .1;
 			return mod2;
 		}
 		
@@ -134,13 +134,11 @@ import classes.internals.*;
 			damage *= SpellMod();
 			damage = Math.round(damage);
 			if (player.hasStatusEffect(StatusEffects.Blizzard)) {
-			player.addStatusValue(StatusEffects.Blizzard, 1, -1);
-			outputText("Dinah narrows her eyes and focuses her mind with deadly intent. She snaps her fingers and you are enveloped in a flash of white flames!  Thanks to surrounding you ice shards this attack isn't at it peak power!  ");
-			damage *= 0.2;
+				player.addStatusValue(StatusEffects.Blizzard, 1, -1);
+				outputText("Dinah narrows her eyes and focuses her mind with deadly intent. She snaps her fingers and you are enveloped in a flash of white flames!  Thanks to surrounding you ice shards this attack isn't at it peak power!  ");
+				damage *= 0.2;
 			}
-			else {
-			outputText("Dinah narrows her eyes and focuses her mind with deadly intent. She snaps her fingers and you are enveloped in a flash of white flames!  ");
-			}
+			else outputText("Dinah narrows her eyes and focuses her mind with deadly intent. She snaps her fingers and you are enveloped in a flash of white flames!  ");
 			if (player.isGoo()) {
 				damage *= 1.5;
 				outputText("It's super effective!  ");
@@ -154,7 +152,7 @@ import classes.internals.*;
 			outputText("She flushes, drawing on her body's desires to empower her muscles and hasten her up.");
 			outputText("The rush of success and power flows through her body.  <b>She looks like she can move faster!</b>");
 			createStatusEffect(StatusEffects.Blink, 50, 0, 0, 0);
-			if (findPerk(PerkLib.JobEnchanter) >= 0) this.speStat.core.value += (5 + (inte / 10)) * 1.5 * SpellMod();
+			if (hasPerk(PerkLib.JobEnchanter)) this.speStat.core.value += (5 + (inte / 10)) * 1.5 * SpellMod();
 			else this.speStat.core.value += (5 + (inte / 10)) * 1.2 * SpellMod();
 			mana -= spellCostBlink();
 			flags[kFLAGS.DINAH_SPELLS_CASTED]++;
@@ -181,8 +179,8 @@ import classes.internals.*;
 		{
 			var damage:int = (inte * 1.1) + rand(25);
 			damage = Math.round(damage);
+			outputText("Dinah cast a spell, materializing a fireball before throwing it at you. ");
 			player.takeFireDamage(damage, true);
-			outputText("Dinah cast a spell, materializing a fireball before throwing it at you. " + damage + " fire damage!");
 		}
 		
 		public function hellcatInfernalClawDinah():void
@@ -198,7 +196,7 @@ import classes.internals.*;
 			player.takePhysDamage(physdamage, true);
 			if (player.hasStatusEffect(StatusEffects.Hemorrhage)) player.addStatusValue(StatusEffects.Hemorrhage, 1, 1);
 			else player.createStatusEffect(StatusEffects.Hemorrhage,3,0.05,0,0);
-			outputText("" + physdamage + " physical damage, " + firedamage + " fire damage. Reeling in pain you begin to bleed and burn at the same time.");
+			outputText(" Reeling in pain you begin to bleed and burn at the same time.");
 		}
 		
 		public function hellcatFelineCurseDinah():void

@@ -126,7 +126,7 @@ public class GoblinElder extends Goblin
 			else {
 				outputText("Her shield hits you! ");
 				//Get hit
-				if (rand(100) < 40 && player.findPerk(PerkLib.Resolute) < 0) {
+				if (rand(100) < 40 && !player.hasPerk(PerkLib.Resolute)) {
 					outputText("The impact from the shield has left you with a concussion. <b>You are stunned.</b> ");
 					player.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
 				}
@@ -282,12 +282,12 @@ public class GoblinElder extends Goblin
 			}//level up giving 2x all growns and so follow next level ups's as long each npc break lvl 100 (also makes npc use new better gear)
 			this.a = "the ";
 			this.short = "goblin elder";
-			if (flags[kFLAGS.GOBLIN_ELDER_TALK_COUNTER] > 0) {
+			if (flags[kFLAGS.PRISCILLA_TALK_COUNTER] > 0) {
 				a = "";
 				short = "Priscilla";
 			}
 			this.imageName = "goblinelder";
-			this.long = "The goblin before you stands a little over four feet tall. It's difficult to determine an age of goblin thanks to their corrupt nature but this one looks unusual. Her skin tone is yellowish-green skin and her hair is crimson black. Her body is painted in imp and minotaur blood to scare away anybody who would try to rape her. She's wearing a shark-tooth necklace and her ears are pierced with what appears to be lethicite. Her breasts look to be FF-cups despite her \"age\". Unlike most goblins, she's well armed. She's wielding a crudely fashioned metal sword and a large metal square shield. She's wearing a spider-silk loincloth and the imp skulls hang from the leather strap holding her loincloth together. Her helmet is fashioned out of a minotaur skull and her chestpiece appears to be carved from minotaur ribcage. Her pauldrons are also fashioned from bones. Despite how well-armored she is, her lethicite-pierced nipples are exposed. It's obvious she has travelled quite a lot and slain a lot of minotaurs and imps. She must have lived long thanks to Reducto to keep her breasts at normal size.";
+			this.long = "The goblin before you stands a little over four feet tall. It's difficult to determine an age of goblin thanks to their corrupt nature but this one looks unusual. Her skin tone is yellowish-green skin and her hair is crimson black. Her body is painted in imp and minotaur blood to scare away anybody who would try to rape her. She's wearing a shark-tooth necklace and her ears are pierced with what appears to be lethicite. Her breasts look to be FF-cups despite her \"age\". Unlike most goblins, she's well armed. She's wielding a crudely fashioned metal sword and a large metal square shield. She's wearing a spider-silk loincloth and the imp skulls hang from the leather strap holding her loincloth together. Her helmet is fashioned out of a minotaur skull and her chestpiece appears to be carved from minotaur ribcage. Her pauldrons are also fashioned from bones. Despite how well-armored she is, her lethicite-pierced nipples are exposed. It's obvious she has traveled quite a lot and slain a lot of minotaurs and imps. She must have lived long thanks to Reducto to keep her breasts at normal size.";
 			this.createVagina(false, VaginaClass.WETNESS_DROOLING, VaginaClass.LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 40, 0, 0, 0);
 			createBreastRow(Appearance.breastCupInverse("FF"));

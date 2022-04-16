@@ -123,10 +123,10 @@ public class Evangeline1 extends Monster
 		
 		public function SpellMod():Number {
 			var mod:Number = 1;
-			if (findPerk(PerkLib.JobSorcerer) >= 0) mod += .1;
-			if (findPerk(PerkLib.Mage) >= 0) mod += .2;
-			if (findPerk(PerkLib.Spellpower) >= 0) mod += .2;
-			if (findPerk(PerkLib.WizardsFocus) >= 0) mod += .5;
+			if (hasPerk(PerkLib.JobSorcerer)) mod += .1;
+			if (hasPerk(PerkLib.Mage)) mod += .2;
+			if (hasPerk(PerkLib.Spellpower)) mod += .2;
+			if (hasPerk(PerkLib.WizardsFocus)) mod += .5;
 			return mod;
 		}
 		
@@ -148,10 +148,10 @@ public class Evangeline1 extends Monster
 		
 		public function BlindSpell():void {
 			outputText("Evangeline glare at you and point at you.  A bright flash erupts before you!\n");
-			if ((player.findPerk(MutationsLib.GorgonsEyes) < 0 && rand(100) > 20) && !player.hasPerk(PerkLib.BlindImmunity)) {
+			if ((!player.hasPerk(MutationsLib.GorgonsEyes) && rand(100) > 20) && !player.hasPerk(PerkLib.BlindImmunity)) {
 				player.createStatusEffect(StatusEffects.Blind,2,0,0,0);
 			}
-			else if (player.findPerk(MutationsLib.GorgonsEyes) >= 0) {
+			else if (player.hasPerk(MutationsLib.GorgonsEyes)) {
 				outputText("Your mutated eyes not been affected at all by this flash!");
 			}
 			else {
@@ -191,7 +191,7 @@ public class Evangeline1 extends Monster
 		
 		public function ArouseSpell():void {
 			outputText("Evangeline make a series of arcane gestures, drawing on her own lust to inflict it upon you!\n", true);
-			var lustDmg:Number = player.lustVuln * (inte/5*SpellMod() + rand(player.lib - player.inte*2 + player.cor)/5);
+			var lustDmg:Number = player.lustVuln * (inte/5*SpellMod() + (player.lib / 6) + (player.effectiveSensitivity() / 6));
 			if(player.lust < (player.maxLust() * 0.3)) outputText("You squirms as the magic affects you.  ");
 			if(player.lust >= (player.maxLust() * 0.3) && player.lust < (player.maxLust() * 0.6)) outputText("You staggers, suddenly weak and having trouble focusing on staying upright.  ");
 			if(player.lust >= (player.maxLust() * 0.6)) outputText("Your eyes glaze over with desire for a moment.  ");
@@ -370,12 +370,12 @@ public class Evangeline1 extends Monster
 				initStrTouSpeInte(41, 46, 55, 100);
 				this.weaponName = "inscribed spellblade";
 				this.weaponVerb="slash";
-				this.weaponAttack = 9;
+				this.weaponAttack = 10;
 				this.armorName = "practically indecent steel armor";
-				this.armorDef = 11;
+				this.armorDef = 12;
 				this.armorMDef = 1;
 				this.bonusHP = 240;
-				this.bonusLust = 76;
+				this.bonusLust = 75;
 				this.lust = 70;
 				this.additionalXP += 40;
 				this.level = 15;

@@ -7,8 +7,10 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
 import classes.Scenes.Areas.Lake.*;
+import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.Holidays;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 use namespace CoC;
 
@@ -42,7 +44,15 @@ use namespace CoC;
 			//Diana
 			if (player.level >= 3 && flags[kFLAGS.DIANA_FOLLOWER] < 6 && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff) && rand(5) == 0) {
 				player.createStatusEffect(StatusEffects.NearWater,0,0,0,0);
-				SceneLib.dianaScene.repeatLakeEnc();
+				if ((flags[kFLAGS.DIANA_FOLLOWER] < 3 || flags[kFLAGS.DIANA_FOLLOWER] == 5) && flags[kFLAGS.DIANA_LVL_UP] >= 8)
+                    SceneLib.dianaScene.postNameEnc();
+                else
+				    SceneLib.dianaScene.repeatEnc();
+				return;
+			}
+			//Belisa
+			if (BelisaFollower.BelisaInGame && BelisaFollower.BelisaFollowerStage < 3 && BelisaFollower.BelisaEncounternum >= 1 && rand(5) == 0) {
+				SceneLib.belisa.subsequentEncounters();
 				return;
 			}
 			//Helia monogamy fucks
@@ -182,7 +192,7 @@ use namespace CoC;
 				//OOZE!
 				else {
 					flags[kFLAGS.TIMES_MET_OOZE]++;
-					spriteSelect(25);
+					spriteSelect(SpriteDb.s_green_slime);
 					//High int starts on even footing.
 					if (player.inte >= 25) {
 						clearOutput();

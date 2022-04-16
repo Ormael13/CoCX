@@ -4,22 +4,17 @@ package classes.Scenes.Dungeons
 import classes.EventParser;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Dungeons.DenOfDesire.*;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 //import classes.Scenes.NPCs.;
 public class DenOfDesire extends DungeonAbstractContent
 	{
-		private static const DUNGEON_DEN_OF_DESIRE_ENTRANCE:int  			= 64;
-		private static const DUNGEON_DEN_OF_DESIRE_GREAT_HALL_AREA:int  	= 65;
-		private static const DUNGEON_DEN_OF_DESIRE_LABORATORY:int  			= 66;
-		private static const DUNGEON_DEN_OF_DESIRE_HERO_SLAYER_OMNIBUS:int  = 67;
-		
 		public function DenOfDesire() { }
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		
+				
 		public function enterDungeon():void {
 			inDungeon = true;
-			dungeonLoc = 64;
+			dungeonLoc = DUNGEON_DEN_OF_DESIRE_ENTRANCE;
 			playerMenu();
 		}
 		public function exitDungeon():void {
@@ -31,6 +26,7 @@ public class DenOfDesire extends DungeonAbstractContent
 		
 		public function defeatedByObsidianGargoyle():void {
 			clearOutput();
+			spriteSelect(SpriteDb.s_obsidian_gargoyle);
 			outputText("This abomination proves too much for you and you fall unconscious. As you come to, you feel weirdly horny… horrifyingly so even. You look around you and can only see crystalline walls. You try to punch them but they won't open, stronger than any other substance you have encountered so far. Next to you is dozens of people locked in a perpetual orgy. One in particular stands out, she seems to be a herm. She walk to you with a sad expression.");
 			outputText(" \"<i>Sorry, it seems I made yet another victim. It's ok though, you'll get to experience pleasure from the feelings of this body while you’re here. Albeit you'll likely go mad from it before long, as they all have before you.</i>\" She laughs hysterically then jumps back right into the fray.\n\n");
 			outputText("You scream in horror as you finally realize what's happening. The gargoyle didn't just rape you, she literally devoured your soul and now you're stuck for eternity, to be a part of the many victims powering this foul creature’s twisted core!\n\n");
@@ -39,7 +35,8 @@ public class DenOfDesire extends DungeonAbstractContent
 		}
 		public function defeatedObsidianGargoyle():void {
 			clearOutput();
-			outputText("Screaming in agony, the abominations body begins to fissure everywhere as she look at you with a tearful expression of release and say a final “thank you”. Her body breaks down, crumbling on the ground into a pile of stone rubble. What looks to be a good hundred or more different ghostly forms escape from the stony remains, moving upward to whatever place they are going, although you notice a few remain stuck in a gem like stone.\n\n");
+			spriteSelect(SpriteDb.s_obsidian_gargoyle);
+			outputText("Screaming in agony, the abominations body begins to fissure everywhere as she look at you with a tearful expression of release and say a final \"thank you\". Her body breaks down, crumbling on the ground into a pile of stone rubble. What looks to be a good hundred or more different ghostly forms escape from the stony remains, moving upward to whatever place they are going, although you notice a few remain stuck in a gem like stone.\n\n");
 			outputText("<b>(Key Item Acquired: Black Soul Gem!)</b>");
 			player.createKeyItem("Black Soul Gem", 0, 0, 0, 0);
 			flags[kFLAGS.DEN_OF_DESIRE_BOSSES] = 2;
@@ -65,7 +62,7 @@ public class DenOfDesire extends DungeonAbstractContent
 			clearOutput();
 			if (player.isAlraune())
 			{
-				uniquuuesexscene.AlrauneDungeonBadEnd();
+				SceneLib.uniqueSexScene.AlrauneDungeonBadEnd();
 			}
 			else {
 				outputText("<b>Several years later</b>\n\n");
@@ -92,7 +89,7 @@ public class DenOfDesire extends DungeonAbstractContent
 		
 		//Rooms
 		public function roomEntrance():void {
-			dungeonLoc = 64;
+			dungeonLoc = DUNGEON_DEN_OF_DESIRE_ENTRANCE;
 			clearOutput();
 			outputText("<b><u>Entrance</u></b>\n");
 			outputText("You stand in what looks like the entrance to some very old ruins, yet for some reason it's uncharacteristically tidy and clean. Likely something lives here, and not something friendly either.");
@@ -100,10 +97,11 @@ public class DenOfDesire extends DungeonAbstractContent
 			addButton(11, "Leave", exitDungeon);
 		}
 		public function roomGreatHallArea():void {
-			dungeonLoc = 65;
+			dungeonLoc = DUNGEON_DEN_OF_DESIRE_GREAT_HALL_AREA;
 			clearOutput();
 			outputText("<b><u>Great Hall</u></b>\n");
 			if(flags[kFLAGS.DEN_OF_DESIRE_BOSSES] < 2) {
+				spriteSelect(SpriteDb.s_obsidian_gargoyle);
 				outputText("\n\nAs you set foot into a great hall, lined with obsidian statues depicting demons in various act of utter debauchery, one of the statues starts moving, turning its head toward you, as it slides off of the literally rock hard cock of the other statue on the pedestal representing a minor incubus.");
 				outputText("\n\n\"<i>An intruder? Here? Please do me! Let me fuck your soul out! I've been starved for years and I'm pent up for a release. Master won't ever let me have release. I must.... FEED!</i>\"");
 				outputText("\n\nThe lust crazed gargoyle, because it clearly is a gargoyle, is made out of carved obsidian and you can see the souls of dozens of people screaming for help within this abominations sparkling body. She starts walking toward you, fingering herself all the while with a dreamy expression.");
@@ -116,14 +114,14 @@ public class DenOfDesire extends DungeonAbstractContent
 			dungeons.setDungeonButtons(roomLaboratory, roomEntrance, null, null);
 		}
 		public function roomLaboratory():void {
-			dungeonLoc = 66;
+			dungeonLoc = DUNGEON_DEN_OF_DESIRE_LABORATORY;
 			clearOutput();
 			outputText("<b><u>Laboratory</u></b>\n");
 			outputText("This room seems to have served as a laboratory used to perform magical experiments on not so willing test subjects. Many lifeless corpses are stockpiled in a container, likely the bodies of failed experiments.");
 			dungeons.setDungeonButtons(roomHeroSlayerOmnibusRoom, roomGreatHallArea, null, null);
 		}
 		public function roomHeroSlayerOmnibusRoom():void {
-			dungeonLoc = 67;
+			dungeonLoc = DUNGEON_DEN_OF_DESIRE_HERO_SLAYER_OMNIBUS;
 			clearOutput();
 			outputText("<b><u>Hero slayer omnibus room</u></b>\n");
 			if(flags[kFLAGS.DEN_OF_DESIRE_BOSSES] < 3) {

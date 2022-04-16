@@ -3,6 +3,7 @@ import classes.*;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.NPCs.JojoScene;
+import classes.display.SpriteDb;
 
 public class Rubi extends TelAdreAbstractContent {
 public function Rubi(){
@@ -69,8 +70,8 @@ public function Rubi(){
 //const RUBI_SETUP:int = 1014;
 
 private function rubiSprite():void {
-	if(flags[kFLAGS.RUBI_HORNTYPE] > 0) spriteSelect(102);
-	else spriteSelect(101);
+	if(flags[kFLAGS.RUBI_HORNTYPE] > 0) spriteSelect(SpriteDb.s_rubi_horns);
+	else spriteSelect(SpriteDb.s_rubi_hornless);
 }
 
 private function initializeRubi():void {
@@ -623,7 +624,7 @@ public function rubisFuckingHouseYouPervert():void {
 		flags[kFLAGS.RUBIS_HOUSE_FIRST_TIME]++;
 	}
 	//Bimbo Shopping!
-	else if(rubiBimbo() && (player.findPerk(PerkLib.BimboBrains) >= 0 || player.findPerk(PerkLib.FutaFaculties) >= 0) && rand(7) == 0) {
+	else if(rubiBimbo() && (player.hasPerk(PerkLib.BimboBrains) || player.hasPerk(PerkLib.FutaFaculties)) && rand(7) == 0) {
 		flags[kFLAGS.RUBI_BIMBO_MINIDRESS] = 1;
 		outputText("Rather than order anything, you stop Rubi as she's going by your table and pull her close.  \"<i>How about we get out of here?</i>\"  you whisper into her ear.");
 		outputText("\n\nRubi's mouth pulls into a Cheshire-like grin and she nods.  \"<i>Like, for sure!  Just let me get Dia to cover my tables, kay?</i>\"  She promptly heads off into the back room, returning minutes later with the young canine waitress behind her.  Rubi points out a few tables, says some things to her replacement, and then returns to your side.");
@@ -665,7 +666,7 @@ public function rubisFuckingHouseYouPervert():void {
 	else {
 		outputText("Rather than order anything, you stop Rubi as [rubi ey]'s going by your table and pull [rubi em] close.  \"<i>How about we get out of here?</i>\" you whisper into [rubi eir] ear.");
 		outputText("\n\nThe little demon-" + rubiMF("boy","girl") + " blushes and [rubi eir] tail swishes excitedly behind [rubi em].  \"<i>Again?</i>\" [rubi ey] asks, looking around furtively, \"<i>let me get Dia to cover my shift.</i>\"  [rubi Ey] promptly heads off into the back room, returning minutes later with the young canine waitress behind [rubi em].  Rubi points out a few tables, says some things to [rubi eir] replacement, and then returns to your side.");
-		outputText("\n\n“<i>Let's go</i>,” [rubi ey] whispers and you head off towards [rubi eir] place.  It doesn't take long for the two of you to make your way through the streets of Tel'Adre and up through Rubi's well tended garden.");
+		outputText("\n\n\"<i>Let's go</i>,\" [rubi ey] whispers and you head off towards [rubi eir] place.  It doesn't take long for the two of you to make your way through the streets of Tel'Adre and up through Rubi's well tended garden.");
 		outputText("\n\nBefore you know it, you're once again standing in Rubi's tastefully decorated living room.  Lots of pillows and cushions are strewn about the room to sit or lay on, and a large plush couch sits opposite a fireplace. On the mantel above the fireplace sits a slightly scorched portrait of a happy-looking human couple with a young boy.  You'd guess that's Rubi's family from before the demons attacked [rubi eir] village.");
 		outputText("\n\nRubi stretches out on the couch and says,  \"<i>So babe, now that you've got me here, what do you want to do?</i>\"");
 	}
@@ -674,7 +675,7 @@ public function rubisFuckingHouseYouPervert():void {
 	addButton(0,"Sex",rubiSexMenu);
 	addButton(1,"Closet",goInRubisClosetSoThatYouCanComeOutOfTheCloset);
 	addButton(2,"Talk",talkToRubiInHouse);
-	if(rubiAffection() >= 50 && !rubiBimbo() && flags[kFLAGS.RUBI_COCK_SIZE] > 0 && (!rubiBimbo() || flags[kFLAGS.RUBI_DEBIMBO] > 0)) {
+	if(rubiAffection() >= 50 && flags[kFLAGS.RUBI_COCK_SIZE] > 0 && (!rubiBimbo() || flags[kFLAGS.RUBI_DEBIMBO] > 0)) {
 		//First Time:
 		if(flags[kFLAGS.TIMES_RUBI_MASSAGED] == 0) outputText("\n\nRubi gestures to some bottles and a box from the bakery before mentioning, \"<i>You look awful tense, babe.  I know you've got it hard out there, and well, I-I thought maybe I could really pamper you today, if you'd like.</i>\"");
 		else outputText("\n\nRubi nods towards the bottles and box in the corner and gives you a sly wink.  \"<i>Want another massage?</i>\"");

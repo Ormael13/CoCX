@@ -19,7 +19,7 @@ use namespace CoC;
 			this.a = "";
 			this.short = "Oaklee";
 			this.imageName = "oaklee";
-			this.long = "You are fighting Oaklee.";//cow-bicorn-drider hybryd
+			this.long = "You are fighting Oaklee.";//cow-bicorn-drider hybryd (no longer valid races combo)
 			
 		}
 	}

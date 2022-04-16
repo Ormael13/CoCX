@@ -6,7 +6,7 @@ import classes.CockTypesEnum;
 import classes.EventParser;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 
 /**
 	 * ...
@@ -23,9 +23,7 @@ import classes.Scenes.UniqueSexScenes;
 		private const GARDENER_LEFT:int = 1;
 		private const GARDENER_FUCKED:int = 2;
 		private const GARDENER_KILLED:int = 3;
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-
-		public function gardenerDefeated():Boolean
+				public function gardenerDefeated():Boolean
 		{
 			return flags[kFLAGS.D3_GARDENER_DEFEATED] > 0;
 
@@ -65,7 +63,7 @@ import classes.Scenes.UniqueSexScenes;
 			clearOutput();
 			if (player.isAlraune())
 			{
-				uniquuuesexscene.AlrauneDungeonBadEnd();
+				SceneLib.uniqueSexScene.AlrauneDungeonBadEnd();
 			}
 			else {
 				//Start setting up to fuck the succubus -> surprise tentacle grape, idiot.
@@ -297,7 +295,7 @@ import classes.Scenes.UniqueSexScenes;
 			clearOutput();
 			if (player.isAlraune())
 			{
-				uniquuuesexscene.AlrauneDungeonBadEnd();
+				SceneLib.uniqueSexScene.AlrauneDungeonBadEnd();
 			}
 			else {
 				outputText("Your fall doesn't take you very far. A cushion of interceding plants stops you long before any harm could befall you, holding you nearly horizontally above the rich, loamy earth. There's a bit of a salty-sweat scent in the air. You can't quite identify it, but then again, you don't really have time to. Bands of floral flesh are circling around your arms and [legs]. They aren't constrictive. As a matter of fact, they're kind of comforting - like being surrounded in a lovers arms. Of course, these arms conform perfectly to your flesh, pressing down on you from all sides.");
@@ -360,7 +358,7 @@ import classes.Scenes.UniqueSexScenes;
 			clearOutput();
 			if (player.isAlraune())
 			{
-				uniquuuesexscene.AlrauneDungeonBadEnd();
+				SceneLib.uniqueSexScene.AlrauneDungeonBadEnd();
 			}
 			else {
 				outputText("You drop to the ground, defeated and degraded");
@@ -385,7 +383,7 @@ import classes.Scenes.UniqueSexScenes;
 			clearOutput();
 			if (player.isAlraune())
 			{
-				uniquuuesexscene.AlrauneDungeonBadEnd();
+				SceneLib.uniqueSexScene.AlrauneDungeonBadEnd();
 			}
 			else {
 				outputText("<i>\"I'll be your doggie,\"</i> you gasp with an accompanying needy arch of your back.");
@@ -547,7 +545,7 @@ import classes.Scenes.UniqueSexScenes;
 			clearOutput();
 			if (player.isAlraune())
 			{
-				uniquuuesexscene.AlrauneDungeonBadEnd();
+				SceneLib.uniqueSexScene.AlrauneDungeonBadEnd();
 			}
 			else {
 				outputText("<i>\"I'll... I'll play with the tentacles,\"</i> you gasp out, as much to yourself as the succubus, finally coming to terms with your shameful predicament. Somehow, being forced to endlessly climax seems subtly more dignified than crawling around on a leash. You tell yourself that you'll simply bide your time - wait for a chance to slip free of the vines' ceaseless squirming. You resolve not to give up even though you've lost this battle.");

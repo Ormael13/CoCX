@@ -22,7 +22,7 @@ package classes.Items.WeaponsRange
 		}
 		
 		override public function canUse():Boolean {
-			if (game.player.cor < (33 + game.player.corruptionTolerance())) return true;
+			if (game.player.cor < (33 + game.player.corruptionTolerance)) return super.canUse();
 			outputText("You grab hold of the handle of the bow only to have it grow burning hot.  You're forced to let it go lest you burn yourself.  Something within the bow must be displeased.  ");
 			return false;
 		}

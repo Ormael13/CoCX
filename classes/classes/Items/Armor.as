@@ -67,13 +67,11 @@ package classes.Items
 			if (this.supportsUndergarment == false && (game.player.upperGarment != UndergarmentLib.NOTHING || game.player.lowerGarment != UndergarmentLib.NOTHING)) {
 				var output:String = "";
 				var wornUpper:Boolean = false;
-
 				output += "It would be awkward to put on " + longName + " when you're currently wearing ";
 				if (game.player.upperGarment != UndergarmentLib.NOTHING) {
 					output += game.player.upperGarment.longName;
 					wornUpper = true;
 				}
-
 				if (game.player.lowerGarment != UndergarmentLib.NOTHING) {
 					if (wornUpper) {
 						output += " and ";
@@ -123,7 +121,7 @@ package classes.Items
 
 		override public function unequip(player:Player, returnToInventory:Boolean, output:Boolean = false):void
 		{
-			while(player.findPerk(PerkLib.BulgeArmor) >= 0) player.removePerk(PerkLib.BulgeArmor);// TODO remove this Exgartuan hack
+			while(player.hasPerk(PerkLib.BulgeArmor)) player.removePerk(PerkLib.BulgeArmor);// TODO remove this Exgartuan hack
 			if (returnToInventory) {
 				var itype:ItemType = unequipReturnItem(player, output);
 				if (itype != null) {

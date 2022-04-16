@@ -2,12 +2,11 @@
 import classes.*;
 import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 
 public class HolliScene extends NPCAwareContent {
 
-	public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-	
+		
 	public function HolliScene()
 	{
 	}
@@ -94,7 +93,7 @@ public function treeMenu(output:Boolean = true):void {
 	}
 	else if(flags[kFLAGS.FUCK_FLOWER_LEVEL] == 3) {
 		if(output) outputText("The familiar plant has blossomed into a nicely sized tree, though you doubt it has finished growing just yet.  It sports an outstretched canopy with nice, green leaves.  Unfortunately, you can still trace the corrupted veins on their undersides from below.  The vaginal flower is still there and is in full bloom, now several feet across and practically dripping with moisture.  Just up the trunk, there's a pair of small, roughly b-cup breasts bulging out of the bark.  They're exquisitely smooth and soft, and they ooze sweet-smelling sap that your tongue would love to taste.  In the canopy above, tentacle vines idly writhe about, though they show no sizes of aggression.");
-		if(player.findPerk(PerkLib.DragonFireBreath) >= 0 || player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0 || player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {
+		if(player.hasPerk(PerkLib.DragonFireBreath) || player.hasPerk(PerkLib.FireLord) || player.hasPerk(PerkLib.Hellfire) || player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {
 			if(output) outputText("\n\nIt could be burned down with your supernatural fire, but it would definitely tire you.");
 			burnIt = torchP3Tree;
 		}
@@ -159,7 +158,7 @@ public function treeMenu(output:Boolean = true):void {
 		} else {
 			addButtonDisabled(2, "TentacleBone");
 		}
-		if (player.isAlraune()) addButton(3, "TentacleDuel", uniquuuesexscene.alrauneExtraSceneWithHollicyntiaTentacleDuel).hint("There's no way you wont end up getting pluged in all of your holes from this.");
+		if (player.isAlraune()) addButton(3, "TentacleDuel", SceneLib.uniqueSexScene.alrauneExtraSceneWithHollicyntiaTentacleDuel).hint("There's no way you wont end up getting pluged in all of your holes from this.");
 		else addButtonDisabled(3, "TentacleDuel", "This scene requires to be an alraune of some kind.");
 		addButton(5,"Drink Sap", haveAMapleSyrupSnack);
 		if(flags[kFLAGS.HOLLI_FRUIT] > 0) addButton(6,"Eat A Fruit", eatHolliFruit);
@@ -191,18 +190,18 @@ private function helpWithFarm():void
 	
 	outputText("You ask if a plant goddess might not be able to help the farm you recently acquired.");
 
-	outputText("\n\n“<i>Ah yes,</i>” Holli breathes. “<i>The patch of verdant orderliness between me and mother. It feels bright and cold to me... the life that grows there so starchy and dull. Empty calories.</i>” You wait as she hums to herself absently.");
+	outputText("\n\n\"<i>Ah yes,</i>\" Holli breathes. \"<i>The patch of verdant orderliness between me and mother. It feels bright and cold to me... the life that grows there so starchy and dull. Empty calories.</i>\" You wait as she hums to herself absently.");
 
 	// PC not had sex with Holli that day:
 	if (flags[kFLAGS.HOLLI_FUCKED_TODAY] == 0)
 	{
-		outputText("\n\n“<i>I could help with your little patch of boringness,</i>” Holli smirks eventually, before closing her eyes and beginning to slowly paw at her flower. “<i>But oh... it’s been so long since you properly fertilised me. How can you expect a goddess to bless your crops if she has not been showered with worship?</i>” You roll your eyes. You can guess what you have to do in order to get this being’s help.");
+		outputText("\n\n\"<i>I could help with your little patch of boringness,</i>\" Holli smirks eventually, before closing her eyes and beginning to slowly paw at her flower. \"<i>But oh... it’s been so long since you properly fertilised me. How can you expect a goddess to bless your crops if she has not been showered with worship?</i>\" You roll your eyes. You can guess what you have to do in order to get this being’s help.");
 
 		treeMenu(false);
 	}
 	else
 	{
-		outputText("\n\n“<i>I can help you with it,</i>” she says eventually. “<i>But nourishing such dullness will take effort. I can give your produce a boost, but only once, and it won’t last forever. Would you like that?</i>”");
+		outputText("\n\n\"<i>I can help you with it,</i>\" she says eventually. \"<i>But nourishing such dullness will take effort. I can give your produce a boost, but only once, and it won’t last forever. Would you like that?</i>\"");
 
 		menu();
 		addButton(0, "Yes", doFarmFuckery);
@@ -215,7 +214,7 @@ private function doFarmFuckery():void
 	clearOutput();
 	outputText("Holli closes her eyes and hums. The sound seems to reverberate in your bones, and you feel the ground move uneasily below you. Holli’s roots shift ponderously, and you hear new growth crackling, burying eagerly through the soil, moisture being taken in. The tree woman opens her eyes to lazily grin at you as the portentous sounds below you continue.");
 
-	outputText("\n\n“<i>It’s happening. I hope you and your doggie enjoy what I have done!</i>”");
+	outputText("\n\n\"<i>It’s happening. I hope you and your doggie enjoy what I have done!</i>\"");
 
 	flags[kFLAGS.FOLLOWER_AT_FARM_HOLLI] = 1;
 	
@@ -226,7 +225,7 @@ private function noPlzDontFuckWithFarm():void
 {
 	clearOutput();
 	
-	outputText("“<i>Such a fickle mortal,</i>” she sighs. “<i>But I am a kind goddess. Ask me for it anytime, assuming you’ve... performed the rites.</i>”");
+	outputText("\"<i>Such a fickle mortal,</i>\" she sighs. \"<i>But I am a kind goddess. Ask me for it anytime, assuming you’ve... performed the rites.</i>\"");
 	
 	treeMenu(false);
 }
@@ -237,16 +236,16 @@ private function fertilizeHolli(cock:Boolean = true):void {
 	if(cock && player.hasCock()) {
 		odds += player.cumQ()/300;
 		if(odds > 40) odds = 40;
-		if(player.findPerk(PerkLib.MaraesGiftStud) >= 0) odds += 10;
-		if(player.findPerk(PerkLib.FerasBoonAlpha) >= 0) odds += 10;
-		if(player.findPerk(PerkLib.ElvenBounty) >= 0) odds += 2;
+		if(player.hasPerk(PerkLib.MaraesGiftStud)) odds += 10;
+		if(player.hasPerk(PerkLib.FerasBoonAlpha)) odds += 10;
+		if(player.hasPerk(PerkLib.ElvenBounty)) odds += 2;
 	}
 	if(!cock && player.hasVagina()) {
 		odds += player.totalFertility()/5;
 		if(odds > 40) odds = 40;
-		if(player.findPerk(PerkLib.MaraesGiftFertility) >= 0) odds += 10;
-		if(player.findPerk(PerkLib.FerasBoonBreedingBitch) >= 0) odds += 10;
-		if(player.findPerk(PerkLib.ElvenBounty) >= 0) odds += 2;
+		if(player.hasPerk(PerkLib.MaraesGiftFertility)) odds += 10;
+		if(player.hasPerk(PerkLib.FerasBoonBreedingBitch)) odds += 10;
+		if(player.hasPerk(PerkLib.ElvenBounty)) odds += 2;
 	}
 	if(odds >= rand(101)) {
 		flags[kFLAGS.HOLLI_FRUIT] += 1 + rand(Math.floor(odds/10));
@@ -297,7 +296,7 @@ private function destroyDatFukkinTree2():void {
 private function letZeFuckingSproutLive2():void {
 	clearOutput();
 	outputText("You tell Zenji that he shouldn’t destroy the plant, neither of you knows what exactly it’s here for or even if it’s corrupted.\n\n");
-	outputText("Zenji peers at the plant suspiciously. \"<i>I know danger when I see it, [name], and dis plant is up to no good.” He takes a deep breath, “But if you tink you can handle whatever it grows up to be, den so be it. But don’ say I didn’ warn you…</i>\"\n\n");
+	outputText("Zenji peers at the plant suspiciously. \"<i>I know danger when I see it, [name], and dis plant is up to no good.\" He takes a deep breath, \"But if you tink you can handle whatever it grows up to be, den so be it. But don’ say I didn’ warn you…</i>\"\n\n");
 	ZenjiScenes.ZenjiHolli = true;
 	doNext(playerMenu);
 }
@@ -425,7 +424,7 @@ public function flowerGrowsToP3():void {
 	outputText("\n\nThe first thing you notice is that the vaginal tentacle flower remains, affixed at waist height to the side of the tree.  It looks bigger, the petals huge and glossy, undoubtedly far more capable of swallowing dick than ever before.  The tree isn't that thick, just yet.  Glancing further up the smooth, knotless trunk, you see the most surprising thing of all - a pair of almond-colored nipples, perched upon small, tit-like bulges in the wood.  The bark on these globular protrusion is smoother and fairer than the surrounding surface.  On one of them, a trickle of sap has formed into a heavy bead, and it smells sweet, like maple syrup.");
 	outputText("\n\nA dollop of something moist landing in your hair startles you from your visual inspection.  Gingerly, you touch your fingers to the wet spot and come away with a thick, viscous fluid that smells faintly musky... and salty...  It's cum!  You recoil, looking up in time to see a half dozen tentacles curling between the branches rubbing against each other in what can only be described as an orgy of frotting cock-lust.  Well now, your little pet plant is growing up.  There's no easy way to get rid of it now");
 	var burnIt:Function = null;
-	if(player.findPerk(PerkLib.DragonFireBreath) >= 0 || player.findPerk(PerkLib.FireLord) >= 0 || player.findPerk(PerkLib.Hellfire) >= 0 || player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {
+	if(player.hasPerk(PerkLib.DragonFireBreath) || player.hasPerk(PerkLib.FireLord) || player.hasPerk(PerkLib.Hellfire) || player.hasStatusEffect(StatusEffects.KnowsWhitefire)) {
 		outputText(", though you suppose you could burn it down with magical fire if you set your mind to it");
 		burnIt = torchP3Tree;
 	}
@@ -546,7 +545,7 @@ private function torchP3Tree():void {
 	//[(nerdfire)
 	if(player.hasStatusEffect(StatusEffects.KnowsWhitefire)) outputText("Closing your eyes to focus, you gather your energies, and unleash your white, supernatural flames upon the thing.");
 	//(bromancefire)
-	else if(player.findPerk(PerkLib.FireLord) >= 0) outputText("Sucking in your breath, you inflate your chest and stir the embers of the jaguar demon's gift.  Dredging up an enormous pine-green fireball, you exhale and launch it at the tree.");
+	else if(player.hasPerk(PerkLib.FireLord)) outputText("Sucking in your breath, you inflate your chest and stir the embers of the jaguar demon's gift.  Dredging up an enormous pine-green fireball, you exhale and launch it at the tree.");
 	else outputText("Sucking in your breath, you inflate your chest and stir the embers of your fiery gift.  Dredging up an enormous fireball, you exhale and launch it at the tree.");
 	outputText("  It goes up by the torch, though the fire starts to fade sooner than you would expect.  You huff, but repeat the action, layering a new blaze atop the previous one; you put all your concentration into this new conflagration, stoking the inferno with every ounce of your ");
 	if(player.hasStatusEffect(StatusEffects.KnowsWhitefire)) outputText("magical will");
@@ -640,7 +639,7 @@ private function stayQuietWhileAmilyBitchesAboutFuckingArborday():void {
 	flags[kFLAGS.AMILY_FOLLOWER] = 0;
 	//Set - amily flipped her shit
 	flags[kFLAGS.AMILY_TREE_FLIPOUT] = 1;
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00173] = 0;
+	flags[kFLAGS.AMILY_WARNING] = 0;
 	//Enable village encounters
 	flags[kFLAGS.AMILY_VILLAGE_ENCOUNTERS_DISABLED] = 0;
 	//Change to plain mouse birth!

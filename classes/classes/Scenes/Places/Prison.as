@@ -1307,13 +1307,13 @@ public class Prison extends BaseContent implements TimeAwareInterface
 			addButton(7, "Inventory", inventory.inventoryMenu);
 			//Check lust
 			if (player.lust >= 30) {
-				if (player.lust >= player.maxLust()) {
+				if (player.lust >= player.maxOverLust()) {
 					outputText("\n\n<b>You are debilitatingly aroused, and can think of doing nothing other than masturbating.</b>");
 					removeButton(0);
 					removeButton(4);
 				}
                 addButton(8, "Masturbate", SceneLib.masturbation.masturbateMenu);
-                if ((((player.findPerk(PerkLib.HistoryReligious) >= 0 || player.findPerk(PerkLib.PastLifeReligious) >= 0) && player.cor <= 66) || (player.findPerk(PerkLib.Enlightened) >= 0 && player.cor < 10)) && !(player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0) || flags[kFLAGS.SFW_MODE] >= 1) addButton(8, "Meditate", SceneLib.masturbation.masturbateMenu);
+                if ((((player.hasPerk(PerkLib.HistoryReligious) || player.hasPerk(PerkLib.PastLifeReligious)) && player.cor <= 66) || (player.hasPerk(PerkLib.Enlightened) && player.cor < 10)) && !(player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0) || flags[kFLAGS.SFW_MODE] >= 1) addButton(8, "Meditate", SceneLib.masturbation.masturbateMenu);
             }
 			//Alter menu depending on punishment.
 			if (flags[kFLAGS.PRISON_PUNISHMENT] == 1) {
@@ -2717,7 +2717,7 @@ public class Prison extends BaseContent implements TimeAwareInterface
 					if(player.hasVagina())
 					{
 						outputText("(Placeholder) \"<i>You're going to get a special treat today, [boy], but first you need to beg me to put a baby in your dirty [cunt].</i>\" After a brief hesitation, you do so. She makes you present yourself like a bitch in heat while continuing to beg. Finally she gives you want you want, and fills your womb with her potent seed.\n\n");
-						player.knockUp(PregnancyStore.PREGNANCY_IMP, 350, 50);
+						if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, 350, 50);
 						player.cuntChange(32,true,true,false);
 						break;
 					}
@@ -2823,7 +2823,7 @@ public class Prison extends BaseContent implements TimeAwareInterface
 							outputText(" and in response she binds your arms tightly behind your back, affixes a wide spreader bar between your knees, and shove your [face] to the floor. \"<i>You misunderstand, slave. You have no choice. I will be filling your sweet little baby hole with cum, but first you <b>will</b> beg me to do it.</i>\" She then begins to finger your [clit], quickly filling you with unmanagable lust. [if (esteem < 40) \"It's not long before your willpower drains\"][if (esteem >= 40) \"You hold out as long as you can, but eventually you cave to your lust\"] and beg her to fuck your [pussy] and make you her breeder bitch. She does so, and you cum explosively the moment you feel her warm juices begin to fill your womb.");
 						}
 						player.cuntChange(32,true,true,false);
-						player.knockUp(PregnancyStore.PREGNANCY_IMP, 350, 70);
+						if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, 350, 70);
 						break;
 					}
 				case 7:

@@ -22,12 +22,12 @@ package classes.Items.Jewelries
 			//Value
 			desc += "\nBase value: " + String(value);
 			//Perk
-			desc += "\nSpecial: Libido +5";
+			desc += "\nSpecial: Libido +5%";
 			return desc;
 		}
 		
 		override public function playerEquip():Jewelry {
-			game.player.statStore.addBuff('lib',+5,'RingOfLibido',{text:'Ring Of Libido'});
+			game.player.statStore.addBuff('lib.mult',0.05,'RingOfLibido',{text:'Ring Of Libido'});
 			return super.playerEquip();
 		}
 		

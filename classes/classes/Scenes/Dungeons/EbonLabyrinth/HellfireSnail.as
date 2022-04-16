@@ -43,7 +43,7 @@ use namespace CoC;
 			damage *= damage2;
 			damage = Math.round(damage);
 			damage = player.takeFireDamage(damage, true);
-			if (!player.hasPerk(PerkLib.FireAffinity)) {
+			if (!player.hasPerk(PerkLib.FireAffinity) && !player.hasPerk(PerkLib.AffinityIgnis)) {
 				if (player.hasStatusEffect(StatusEffects.BurnDoT)) player.addStatusValue(StatusEffects.BurnDoT, 1, 1);
 				else player.createStatusEffect(StatusEffects.BurnDoT,3,0.05,0,0);
 				outputText(" You’re on fire!!!");
@@ -59,46 +59,27 @@ use namespace CoC;
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			SceneLib.dungeons.ebonlabyrinth.defeatHellfireSnail();
+			SceneLib.dungeons.ebonlabyrinth.hellfireSnailScene.defeat();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			SceneLib.dungeons.ebonlabyrinth.defeatedByHellfireSnail();
+			SceneLib.dungeons.ebonlabyrinth.hellfireSnailScene.defeatedBy();
 		}
 		
 		public function HellfireSnail() 
 		{
-			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss) == 65) {
-				initStrTouSpeInte(100, 300, 80, 150);
-				initWisLibSensCor(150, 260, 200, 10);
-				this.armorDef = 225;
-				this.armorMDef = 225;
-				this.bonusHP = 12500;
-				this.bonusLust = 525;
-				this.level = 65;
-				this.gems = 200 + rand(80);
-			}
-			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss) == 70) {
-				initStrTouSpeInte(120, 350, 110, 180);
-				initWisLibSensCor(180, 310, 200, 10);
-				this.armorDef = 300;
-				this.armorMDef = 300;
-				this.bonusHP = 25000;
-				this.bonusLust = 580;
-				this.level = 70;
-				this.gems = 250 + rand(90);
-			}
-			if (player.statusEffectv1(StatusEffects.EbonLabyrinthBoss) == 75) {
-				initStrTouSpeInte(140, 400, 140, 210);
-				initWisLibSensCor(210, 360, 200, 10);
-				this.armorDef = 375;
-				this.armorMDef = 375;
-				this.bonusHP = 37500;
-				this.bonusLust = 635;
-				this.level = 75;
-				this.gems = 300 + rand(100);
-			}
+            var mod:int = inDungeon ? SceneLib.dungeons.ebonlabyrinth.enemyLevelMod : 0;
+            initStrTouSpeInte(100 + 20*mod, 300 + 50*mod, 80 + 30*mod, 150 + 30*mod);
+            initWisLibSensCor(150 + 30*mod, 260 + 50*mod, 200, 10);
+            this.armorDef = 225 + 75*mod;
+            this.armorMDef = 225 + 75*mod;
+            this.bonusHP = 12500 + 10000*mod; //THICC
+            this.bonusLust = 525 + 55*mod;
+            this.level = 60 + 5*mod; //starts from 65 due to EL levelMod calculations;
+            this.gems = int((1000 + rand(200)) * Math.exp(0.2*mod));
+            this.additionalXP = int(5000 * Math.exp(0.2*mod));
+			
 			this.a = "";
 			this.short = "Hellfire Snail";
 			this.imageName = "snail";

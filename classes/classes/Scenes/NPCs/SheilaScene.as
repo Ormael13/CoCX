@@ -2735,7 +2735,7 @@ private function forcedSheilaOral(dick:Boolean = true):void {
 		if(player.exploredForest >= 40) outputText(" - in fact, there are quite a few I've seen who look like better lovers than you.  Maybe I should carry you to the forest and tie you to a nice pussy-shaped giant flower to give you lessons");
 		outputText(".  ");
 		//[(minotaur addiction score =/= 0%)
-		if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] > 0 || player.findPerk(PerkLib.MinotaurCumAddict) >= 0) {
+		if(flags[kFLAGS.MINOTAUR_CUM_ADDICTION_TRACKER] > 0 || player.hasPerk(PerkLib.MinotaurCumAddict)) {
 			outputText("Perhaps I'll turn you over to a minotaur; you're bound to get better at using your tongue when you're addicted to their amazing seed.  Would you like that?  The first thing you'd see in the morning would be a huge flared cock, right in front of you, dripping with heavenly precum and waiting for your mouth... or your cunt.  You could be just another minotaur-fucking slut of the plains.  ");
 		}
 		outputText("Or I could take you home and give you personal training myself, whenever I feel like it, and invite travelers to do the same");
@@ -3250,7 +3250,7 @@ private function normalSheilaPregNotifREPEATEDED():void {
 	if(sheilaCorruption() > 80) flags[kFLAGS.SHEILA_CORRUPTION] = 80;
 	menu();
 	//[Help(requires >80 speed, centaur >= 5', naga, or big wings and archery)][Walk With Her][Let Her Go]
-	if((player.spe > 80 && player.findPerk(PerkLib.Runner) >= 0) || (player.isTaur()) || player.isNaga() || (player.canFly && player.hasKeyItem("Bow") >= 0))
+	if((player.spe > 80 && player.hasPerk(PerkLib.Runner)) || (player.isTaur()) || player.isNaga() || (player.canFly && player.hasKeyItem("Bow") >= 0))
 		addButton(0,"Help",normalSheilaPregNotifREPEATEDEDHelpABitchOut);
 	addButton(1,"WalkWithHer",normalSheilaPregNotifREPEATEDEDWalkWithHer);
 	addButton(2,"Let Her Go",normalSheilaPregNotifREPEATEDEDLetHerGo);
@@ -3361,7 +3361,7 @@ private function normalSheilaPregNotifREPEATEDEDHelpABitchOut():void {
 		fatigue(20);
 	}
 	//(else spd >= 80 and Runner perk)
-	else if(player.spe >= 80 && player.findPerk(PerkLib.Runner) >= 0) {
+	else if(player.spe >= 80 && player.hasPerk(PerkLib.Runner)) {
 		outputText("\n\n\"<i>Just do what you normally do, and I'll help.</i>\"");
 		
 		outputText("\n\nSheila looks at you blankly, but takes your hand and begins walking.  Or rather, more like meandering.  Her head turns listlessly as she drags you onward.");
@@ -4362,7 +4362,7 @@ private function clitSwellingDemonSheilaClitSoundingAnal():void {
 		player.slimeFeed();
 	}
 	player.clitLength++;
-	if(player.findPerk(PerkLib.BigClit) >= 0) player.clitLength += 1;
+	if(player.hasPerk(PerkLib.BigClit)) player.clitLength += 1;
 	if(player.cor < 50) {
 		dynStats("cor", 10);
 		sheilaCorruption(-10);
@@ -5071,167 +5071,5 @@ private function leaveScarredBlade():void {
 	flags[kFLAGS.SCARRED_BLADE_STATUS] = -1;
 	doNext(camp.returnToCampUseOneHour);
 }
-
-/*Sheila's Lethicite:
-
-[piercing for magicfags]
-//add [S. Lethicite] to Rare Menu of any piercing
-
-[blah blah blah Tel'Adre blah blah piercing bodyparts furry shit gems - Rare Menu - S. Lethicite]
-You hold out the stone you acquired from Sheila to the artist, and ask if she can use it.
-
-"A Lethite?  Yeah, I can work with that; it's right there on the menu.  You didn't need to bring your own, though."  She considers for a bit.  "Well, it'll save me some material costs... 100 gems instead of 1000.  I'll have to fit and polish it, and the labor's not free.  Still want it?"
-
-[Yes]/[No] (no goes back one screen)
-
-
-[blah blah blah Tel'Adre blah blah piercing bodyparts furry shit gems - Rare Menu - S. Lethicite - Yes]
-//suppress usual Yara output
-You can feel an odd, foreign arousal filling you as your skin wicks latent magical energy from your new piercing.  Yara's bewildered eyes meet yours briefly, then seem to gloss over as the magic dissipates, jumping the gap from you to her.  "Th-that looks nice," she says, shaking.  Her thighs clap together hurriedly, though not before a wet spot forms on the front of her pants, and she finishes her appraisal in a hurry.  "Thank you!  Co... co... cum again!"  Blushing, she shoos you out of the store.  <b>It looks like Sheila's gift has amplified your talent for magical emotional manipulation!</b>  You can only imagine how demons will react to the wellspring of tainted energy, though.
-
-(Gained Perk: Pierced: Lethicite)
-
-//subtract 100 gems, add perk, remove Sheila's Lethicite key item, set sheilacite = 2
-
-
-
-
-da perk:
-Pierced: Lethicite - Sheila's stolen soul aids your black magic, but demons practically line up behind you now.
-
-da effect:
-//improve black magic output by like 15-20% or someshit and increase demon and imp encounter rate by two or three times a normal Lethite piercing effect
-//what am I, a fucking dev?
-//if using Arouse against either version of Sheila with this perk active, automatically set monster lust = 100 and add to spell effect the output "The residual magic from Sheila's lethicite flares up in you, resonating with the woman as you cast your spell; her eyes widen as her knees buckle and dump her onto the ground, drooling lubrication from her vagina."
-
-
-Scarred Blade - Blacksmith-made:
-//[Craft] button in Weapons option of Tel'Adre if PC has Sheila's Lethicite
-
-The blacksmith turns an appraising eye on you as you approach him without looking at any of the weapons on display.
-
-"What do you want?" he says, with characteristic gruffness.
-
-You pull out the dark purple crystal you received from Sheila and ask if it would be possible to alloy a blade from it.  He doesn't move to take it from your outstretched hand just yet, but you can see a hint of interest in the softening of his features.  "That's a lethicite.  Where'd you get it?" asks the smith.
-
-"Stole it from a demon," you lie.
-
-He considers for a moment more before responding.  "Well done, then."  At that, he takes the crystal gingerly from your hand.  "Never worked with this before.  I promise nothing, but come back in two weeks.  I should have an update for you."
-//remove Sheila's Lethicite key item, set sheilacite = 3, start sheilaforge timer, increment once per day at 0:00
-
-//repeat visits to weapons shop while sheilacite = 3
-[if sheilaforge < 14]
-The weaponsmith looks up from the forge as you enter.  "Oh, it's you.  I'm not done yet."  With a gesture, he dismisses you.  You can only content yourself with looking at the finished products.
-
-//goto normal weapon list
-
-
-[if 14 <= sheilaforge < 21]
-The smith looks up as you enter, and you could swear the already-thin, no-nonsense line of his mouth becomes even tighter.  "It's you.  Come here."
-
-Obligingly, you approach him, though the forge's heat is stifling.  "I finished.  The crystal impregnated the metal easily, but the blade itself... just have a look."  He picks up a tatty scabbard from a pile of half-finished weapons and holds it to you - as he does, you notice for the first time the numerous bandages on his hands.  A bit wary, you unsheathe the blade halfway; it hisses against the oiled leather as you draw it.  The revealed form of the weapon is slim, curved rakishly, and glows with an umbral light against the backdrop of the lit forge, but its broad side is covered in deep lines.
-
-"Damnedest thing.  I couldn't straighten the blade for the life of me - with every hammer blow it would leap, vibrating, from the anvil, and warp somewhere else, adding a new twist for each one I took out.  After a few failures, I settled for a backsword design and channeled the bending toward the flat edge.  That's not the uncanny bit though.  You can see how sharp it is; the edge fairly shaped itself with just a touch of the grinder.  I haven't honed it - didn't need to.  But when I tried to etch a design just above the hilt, it would slide under the stencil, leaving a gouge on the blade."
-
-Closer examination reveals the veracity of his claim: all the numerous scratches and flaws on the blade have their origins right above the tang, from the smith's abortive attempts at decoration.  Yet though several ugly gashes stop just short of the edge, none of them actually break the perfect arc, as if cutting were all the blade cared about.
-
-"Damnedest thing," he repeats, breaking your train of thought.  "Every time the blade slipped, it would twist toward my hands.  It's as if it's alive and eager to find flesh.  Truth be told... I was debating whether to turn it over to the Covenant and tell you the crystal couldn't be used.  But you're here, so take it and go."  Giving you barely enough time to sheathe the blade again, he places a strong hand against your back and all-but-pushes you out to the street.
-
-//gain 1 Scarred Blade, set sheilacite = 4
-
-
-[if sheilaforge >=21]
-The weaponsmith is at the forge.  As you approach, he looks up at you and quickly composes his face into a grimace.
-
-"It's you.  I tried using your crystal.  It took to the metal easily enough but I couldn't get it to keep a... reliable edge.  City officials, ah, picked up the wasted scrap a little bit ago."  He looks away in what you guess is professional regret.  "Sorry."
-
-//set sheilacite = 6
-
-
-[Scarred Blade]
-//tooltip
-This saber, made from lethicite-imbued metal, eagerly seeks flesh; it resonates with disdain and delivers deep, jagged wounds as it tries to bury itself in the bodies of others.
-
-//base attack power
-~10
-
-//hit effect - deals med-high% armor-piercing damage with a power of (corruption - 70) in addition to normal damage, output (only once if d. attack):
-The blade jerks orgasmically as you send it home on [enemy], vibrating and trying to writhe out of your grip to get further inside them!
-
-//if hitting Sheila with it, double all damage after calculation and output this instead of normal output:
-The blade clings longingly to the woman, as if it had finally found its way home; when you pull it free with great effort, it leaves a long, tortuous cut in its wake.
-//i found the control room!  -Metal Man
-
-if PC has <= 70 corruption with Scarred Blade equipped, output this at end of hour
-The scratched sword you carry jerks wildly like a bucking horse, and, tilting hilt-downward, slides itself right out of its scabbard.  Before you can pick it up and re-sheathe it, it lashes out at your hand, cutting you and landing with the point out.  Even when you try to circle it and grab the handle, the uncanny saber spins its edge around to fend you off.  Sighing with irritation, you abandon it for now.
-
-//deal 10 pts damage before armor, unequip Scarred Blade, remove from inventory, set sheilacite = 5
-//don't put in Benoit's shop if blade leaves inventory and sheilacite > 4
-
-if sheilacite >= 5 and PC corr > 70, output this at end of hour
-A nearby flash of light on metal catches your eye.  Drawing closer to it, you find the blade you abandoned before sticking point-down in the dirt.  The tainted saber leans toward you, presenting its hilt almost pleadingly.  Take up the sword again?
-
-[Yes]/[No] (don't set a spacebar default here)
-
-//if PC says yes, add Scarred Blade to inventory and set sheilacite = 4
-//if no, set sheilacite = 6
-
-
-tutoring Kid A while she wields Scarred Blade
-The anemone attempts to draw the bloodthirsty saber at your insistence, but as she pulls it free of the scabbard, it jerks from her hands, lashing across her thigh before clattering noisily to the ground and spinning away.  Her shock grows as thick, clear fluid seeps from the cut, and she covers her mouth with her hands, looking up at you with piteous, wet eyes.  [(if corr <=70)The blade's edge flashes toward you as well, when you try to pick it up.  After a few frustrated attempts, it becomes clear that you'll have to abandon it for now.]
-//empty Kidweapon; if corr <=70, set sheilacite = 5, else add Scarred Blade to inventory
-
-
-
-
-to maybe do:
-
-
-demon Sheila dreams!
-- loyal squire/lady-in-waiting anxiously offering you her vag/hidden wanger re: demon Sheila's talk
-- worm Sheila dream if sheilapreg = -2
-- dream with PC in [Jojo/Sheila]'s place if sheilapreg = -3
-(TBD)
-
-XP-4 rape-pregnancy finale
--crying in the bushes
-{TBD}
-
-demon Sheila bangin' other wildlife
-(TBD)
-
-fuzzify Sheila by giving her a mighty veggie
--mistakes it for normal kangafrootloops when PC shows it to her during some lunch scene
--or else PC can sneak it in with her other forage during lunch
--end up with soft auburn fur all over, except for a large vase-shaped bare patch on her front that encompasses her face, neck, breasts, and navel
--tail gets longer
--be hella shy about being different from all her friends
--also be shy about whipping out her furry vag for sex
--no fuckin' muzzle
--super saiyan 4
-(TBD)
-
-demon cunt training!
--if you can fit in demon Sheila's snizz (cockarea <= 56), you can have her drip on your base while you're inside of her, to swell your dick up and stretch her pussy from the inside
-(TBD)
-
-
-something with huge tits
--titjobs are fucking boring
--maybe nipple torture?
--maybe they grow so big that she can only get off with her tails, so you restrain them and fuck with her
-(TBD)
-
-
-hidden bad end from losing to demon via HP 2+ times
-gets annoyed, takes you home, ties you up, keeps you "safe"
-(TBD)
-
-demon sheila item use - gives confirmation request
-lactaid: Sheila starts lactating, feeds player (succubus milk effect)
-incubus draft: Sheila won't take it unless the player agrees to give up the quest and live with her; route to neutral bad end
-(TBD)
-
-*/
 }
 }

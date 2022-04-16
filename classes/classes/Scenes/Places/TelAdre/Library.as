@@ -15,20 +15,32 @@
 
 //[Mage's Tower]
 public function visitZeMagesTower():void {
-	
-	if(flags[kFLAGS.TIMES_BEEN_TO_LIBRARY] == 0) firstTowerVisit();
+	if (flags[kFLAGS.TIMES_BEEN_TO_LIBRARY] == 0) firstTowerVisit();
 	else towerFollowUpVisits();
 	menu();
-	if(flags[kFLAGS.TIMES_BEEN_TO_LIBRARY] == 0 || model.time.hours <= 17)  {
+	addButton(0,"Study",studyInTA);
+	if (flags[kFLAGS.TIMES_BEEN_TO_LIBRARY] == 0 || model.time.hours <= 17) {
 		addButton(1,"You Okay?",youOkayBuddy);
 		if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00175] > 0) addButton(2,"Mali",talkToMali);
 	}
-	if(flags[kFLAGS.TIMES_VISITED_MALI] > 0) addButton(2,"Mali",talkToMali);
-	addButton(0,"Study",studyInTA);
+	if (flags[kFLAGS.TIMES_VISITED_MALI] > 0) addButton(2,"Mali",talkToMali);
+	if (flags[kFLAGS.TIMES_BEEN_TO_LIBRARY] > 0 && player.gems >= 240) {
+		addButton(5, "A.Staff", buyStarterStaff, weapons.A_STAFF).hint("Buy Amphyst Staff.");
+		addButton(6, "R.Staff", buyStarterStaff, weapons.R_STAFF).hint("Buy Ruby Staff.");
+		addButton(7, "S.Staff", buyStarterStaff, weapons.S_STAFF).hint("Buy Sapphire Staff.");
+		addButton(8, "T.Staff", buyStarterStaff, weapons.T_STAFF).hint("Buy Topaz Staff.");
+	}
 	flags[kFLAGS.TIMES_BEEN_TO_LIBRARY]++;
-	addButton(4,"Back",telAdre.telAdreMenu);
+	addButton(14,"Back",telAdre.telAdreMenu);
 }
 
+private function buyStarterStaff(type:ItemType):void {
+	clearOutput();
+	player.gems -= 240;
+	statScreenRefresh();
+	outputText("You pay 240 gems and Quinn hands over choosen basic elemental staff to you.");
+	inventory.takeItem(type, telAdre.telAdreMenu);
+}
 
 //(first visit)
 private function firstTowerVisit():void {
@@ -209,7 +221,7 @@ private function studyInTA():void {
 			}
 		}
 		//OR (player is bimbo/bimbro/whatever) 
-		else if((player.lib > 75 || player.cor > 75 || player.findPerk(PerkLib.BimboBrains) >= 0 || player.findPerk(PerkLib.FutaFaculties) >= 0 || player.findPerk(PerkLib.BroBrains) >= 0) && rand(2) == 0) outputText("\n\nYou pick up a book from a table randomly and open it up.  Incredibly disappointed, you soon realize that there are no pictures of people fucking at all.  Reading sucks.  You eventually toss the book aside and resolve to go do something more fun.");
+		else if((player.lib > 75 || player.cor > 75 || player.hasPerk(PerkLib.BimboBrains) || player.hasPerk(PerkLib.FutaFaculties) || player.hasPerk(PerkLib.BroBrains)) && rand(2) == 0) outputText("\n\nYou pick up a book from a table randomly and open it up.  Incredibly disappointed, you soon realize that there are no pictures of people fucking at all.  Reading sucks.  You eventually toss the book aside and resolve to go do something more fun.");
 		//OR (history) 
 		else outputText("\n\nSelecting a book randomly from the scattered tomes, you find a historical text documenting life in Mareth.  It's dreadfully dull, and though you do your best to learn what you can the dry work is putting you to sleep.  Eventually you close the book and accept that you're not going to be learning anything tonight.");
 		menu();

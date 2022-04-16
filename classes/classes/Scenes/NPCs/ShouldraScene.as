@@ -5,6 +5,7 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 public class ShouldraScene extends NPCAwareContent implements TimeAwareInterface {
 
@@ -64,7 +65,7 @@ public class ShouldraScene extends NPCAwareContent implements TimeAwareInterface
 				return true;
 			}
 			//Ghostgirl recruitment priority
-			if (flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] == .5 && model.time.hours == 6) {
+			if (flags[kFLAGS.SHOULDRA_FOLLOWER_STATE] == .5 && model.time.hours >= 10 && model.time.hours < 18) {
                 SceneLib.shouldraFollower.morningShouldraAlert();
                 return true;
 			}
@@ -74,12 +75,12 @@ public class ShouldraScene extends NPCAwareContent implements TimeAwareInterface
                 return true;
 			}
 			//Ghostgirl madness
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00365] > 0) {
+			if (flags[kFLAGS.SHOULDRA_MAIDEN_COUNTDOWN] > 0) {
 				if (player.cockTotal() > 1 || player.faceType != Face.HUMAN || player.lowerBody != LowerBody.HUMAN || player.tailType > Tail.NONE || player.horns.count > 0 || player.cor > 15 || player.longestCockLength() > 10 || player.tallness < 65 || player.tallness > 78 || player.hasVagina())
-					flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00365] = 0;
+					flags[kFLAGS.SHOULDRA_MAIDEN_COUNTDOWN] = 0;
 				else {
-					flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00365]--;
-					if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00365] == 0) {
+					flags[kFLAGS.SHOULDRA_MAIDEN_COUNTDOWN]--;
+					if (flags[kFLAGS.SHOULDRA_MAIDEN_COUNTDOWN] == 0) {
 						paladinModeFollowup();
 						return true;
 					}
@@ -91,9 +92,9 @@ public class ShouldraScene extends NPCAwareContent implements TimeAwareInterface
 
 //Intro
 internal function shouldraGreeting():void {
-	spriteSelect(66);
+	spriteSelect(SpriteDb.s_ghostGirl);
 	clearOutput();
-	if(silly() && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00366] == 0) {
+	if(silly() && flags[kFLAGS.SHOULDRA_MAIDEN_TIMES_MET] == 0) {
 		//NO MUTANTS ALLOWED
 		if(player.cockTotal() > 1 || player.faceType != Face.HUMAN || player.lowerBody != LowerBody.HUMAN || player.tailType > Tail.NONE || player.horns.count > 0 || player.cor > 15 || player.longestCockLength() > 10 || player.tallness < 65 || player.tallness > 78 || player.hasVagina()) {}
 		else {
@@ -142,7 +143,7 @@ internal function shouldraGreeting():void {
 
 //[yep]
 private function yankeeEchoPapa():void {
-	spriteSelect(66);
+	spriteSelect(SpriteDb.s_ghostGirl);
 	clearOutput();
 	outputText("You graciously accept her offer, and she nods happily.  \"<i>Perfect!  Now then, let's get to it...</i>\"\n\n");
 	//[skip to 'let her in' text (i.e. win sex intro)]
@@ -150,7 +151,7 @@ private function yankeeEchoPapa():void {
 }
 //[nah]
 private function novemberAlphaHotel():void {
-	spriteSelect(66);
+	spriteSelect(SpriteDb.s_ghostGirl);
 	clearOutput();
 	outputText("You shake your head slowly, raising your [weapon] as you regard her.  \"<i>Ah, so that's how you want it?</i>\" she titters, a smile gracing her features.  \"<i>In that case, enough talk... have at you!</i>\"\n\n");
 	startCombat(new Shouldra());
@@ -159,7 +160,7 @@ private function novemberAlphaHotel():void {
 //Victory Scenarios
 //Ghost Girl Defeated
 internal function defeatDannyPhantom():void {
-	spriteSelect(67);
+	spriteSelect(SpriteDb.s_ghostGirl2);
 	clearOutput();
 	//defeat by damage)
 	if(monster.HP <= monster.minHP()) {
@@ -188,7 +189,7 @@ internal function defeatDannyPhantom():void {
 }
 //(deny entry)
 private function noSlimingSlimer():void {
-	spriteSelect(67);
+	spriteSelect(SpriteDb.s_ghostGirl2);
 	clearOutput();
 	outputText("You shake your head angrily at the brazen girl, ");
 	//([if first time]
@@ -204,7 +205,7 @@ private function noSlimingSlimer():void {
 
 //(let her in)
 private function littlePigLittlePigLetMeIn():void {
-	spriteSelect(67);
+	spriteSelect(SpriteDb.s_ghostGirl2);
 	clearOutput();
 	outputText("You decide ");
 	if(flags[kFLAGS.TIMES_POSSESSED_BY_SHOULDRA] == 0) outputText("you can afford being a little adventurous with the obviously desperate girl");
@@ -227,16 +228,15 @@ private function littlePigLittlePigLetMeIn():void {
 	var gender:Function = null;
 	//Genderless Scene
 	if(player.gender == 0) gender = genderlessGhostBuster;
-	else if(player.gender == 1) gender = penisLossThatIsntALoss;
+	else if(player.gender == 1 || player.gender == 3) gender = penisSexMerged;
 	else if(player.gender == 2) gender = ghostGinaWinSexings;
-	else if(player.gender == 3) gender = hermaphroditeGhostsCumEctoplasm;
 
 	flags[kFLAGS.TIMES_POSSESSED_BY_SHOULDRA]++;
 	simpleChoices("Sex Here", gender, "Lake", lake, "", null, "", null, "", null);
 }
 //Lake Victory Scenes
 private function nowOnVickiLake():void {
-	spriteSelect(67);
+	spriteSelect(SpriteDb.s_ghostGirl2);
 	clearOutput();
 	//(go to lake), (penis), (vagina), (herm)
 	//(go to lake)
@@ -260,7 +260,7 @@ private function nowOnVickiLake():void {
 
 //Shark Girl x Ghost Girl - Introduction
 private function sharkbustersVictory():void {
-	spriteSelect(67);
+	spriteSelect(SpriteDb.s_ghostGirl2);
 	clearOutput();
 	outputText("You reach the lake without incident, and quickly hop into the waiting boat. As you cast off the dock, you keep an eye out for any signs of your intended prey; luckily, you did not have to wait long. A telltale fin breaks the surface of the water, heading unerringly towards you. You turn about and row back to shore, hopping out and waiting anxiously (the ghost girl screaming warnings in your ear about sharks in the lake not helping anything). The \"<i>shark</i>\" reaches the shore and breaches beautifully. You narrowly avoid getting splashed, and she lands solidly, spinning to face you. The shark girl gives you one of her vicious, tooth-filled smiles. \"<i>Wanna play? Heads up th-...grfgh!</i>\"\n\n");
 
@@ -282,7 +282,7 @@ private function sharkbustersVictory():void {
 
 //Shark Girl x Ghost Girl - Vagina Scene (Giantess)
 private function sharkyEctoginas():void {
-	spriteSelect(67);
+	spriteSelect(SpriteDb.s_ghostGirl2);
 	clearOutput();
 	outputText("On her beckoning, you approach the ghost-turned-shark with an eyebrow raised. In lieu of words, the ghost gestures towards her undercarriage, still (hardly) enclosed in her black bikini. To her bemusement, the gray arm spasms as its host fights against this third-party rape. It seems as if the shark girl nearly succeeds, the yellow eyes even changing shade slightly, before the ghost girl thrusts herself back into the driver's seat. Despite signs of continued struggle, she winks an again-amber orb at you, and runs a hand along her rough thigh in anticipation. You push her backwards until she is forced to use her shark tail as a tripod, then drop level to her nautical nethers, the cloth dripping with a mixture of water, sweat, and an occasional small droplet of femspunk. You give it a little lick, not surprised with the salty taste in your tongue, then go at it with steadily increasing vigor. Her legs quiver with the power of her budding arousal, and her breathing quickens, short moans and sultry sighs escaping her throat. You hook your fingers around her bikini bottom and prepare to expose her naughty bits, but are stopped when her hips suddenly puff up to pull the fabric tight against her flesh once again. You slip your digits away and lean back, realizing you're about to be treated to the effects of her spell. The ghost girl gives an especially passionate groan, but interrupts it with a concerned gasp. The shark girl's visage momentarily restructures while she's distracted, showing hints of her possessor's features. After noticing and correcting the slight, she turns to you. \"<i>...I think... I cast... the wrong spell...");
 	//[if repeat]
@@ -320,7 +320,7 @@ private function sharkyEctoginas():void {
 
 //Shark Girl x Ghost Girl - Penis Scene (Saliva Growth)
 private function ghostIzmaPenis():void {
-	spriteSelect(67);
+	spriteSelect(SpriteDb.s_ghostGirl2);
 	clearOutput();
 	outputText("You swiftly disrobe and lay your [armor] to the side, revealing your stiffening [cocks] in all of its glory. The ghost-girl's eyes brighten at the sight, and she even allows herself a little swoon (which looks absolutely silly, given her current tough shark-like vessel) as she regards your manhood.  ");
 	outputText("She staggers forward, dropping to her knees in front of you");
@@ -361,7 +361,7 @@ private function ghostIzmaPenis():void {
 
 //Slime x Ghost Girl - Introduction
 private function ghostGooGurlzDuckfaces():void {
-	spriteSelect(67);
+	spriteSelect(SpriteDb.s_ghostGirl2);
 	clearOutput();
 	//[if boat not unlocked, and if it is, 50/50 chance of either encounter; preliminary stuff: breasts smaller than Z's, met Markus; also, choice for herms and all that]
 	outputText("You hike easily along a path leading around the lake, keeping a wary eye on any potential playthings. With effort, you ignore the increasingly frustrated telepathic protests from your otherworldly companion. You begin to whistle a jaunty tune, but cut the noise short as you glance over and see a perfect recipient for the ghost girl's lust; an amoeba-like glob of goo. The ghost girl's complaints cease as she notices the squishy thing, and you can imagine her eyes lighting up as she queries, \"<i>Ooh, ooh, can we rape that?</i>\"  With a widening smile, you confirm her excitement. Realizing you can't exactly sneak up on the thing, as you don't know how exactly its perception works, you bid the ghost to act as vanguard. \"<i>...Exactly what does that involve?</i>\" she responds hesitantly, and you sigh, bluntly telling her to go and possess the thing. \"<i>Ah,</i>\" she says softly. \"<i>That makes sense.</i>\"\n\n");
@@ -385,7 +385,7 @@ private function ghostGooGurlzDuckfaces():void {
 }
 //Slime x Ghost Girl - Vagina Scene (Female Inflation)
 private function slimeGinaFlation():void {
-	spriteSelect(67);
+	spriteSelect(SpriteDb.s_ghostGirl2);
 	//[if vagina]
 	outputText("You stand for a moment, chin resting upon your hand as you consider the best way to pleasure both of you. Nodding as a thought comes to you, you kneel down next to the ghost girl turned slime girl and sink your fingers into her pliable form. The mass responds with a shudder of pleasure, and you're a bit surprised at the reaction. You ask her if that actually felt good, and her semi-tangible mouth pulls up into a smirk. \"<i>Very,</i>\" she says in the most alluring voice she can manage given the strange voice she has to work with. Encouraged, you go back to your work with vigor, digging deeply into the squishy ooze. You massage the stuff as it quivers under your capable hands. Aroused groans begin issuing from the sensitive girl. You slowly centralize the stimulation into one grabbable region. Like a ceramic sculptor you begin kneading the green goo, forming the stuff into a rounded-off cone.\n\n");
 
@@ -447,7 +447,7 @@ private function slimeGinaFlation():void {
 
 //Slime x Ghost Girl - Penis Scene (Slime Cum Inflation)
 private function slimeyPenorsAhoy():void {
-	spriteSelect(67);
+	spriteSelect(SpriteDb.s_ghostGirl2);
 	var x:Number = player.biggestCockIndex();
 	outputText("\"<i>Wait a sec,</i>\" she bids, and you watch curiously as the slime begins to roil angrily. Before your eyes, the unremarkable mass shoots upwards and reforms into a jiggling recreation of the spirit you've come to know. The two large circles that stood in for eyes even glow with the same amber fire. \"<i>Ever get taken for a ride by a goo-ghost?</i>\" she asks coyly, sliding towards you with arms outstretched. With a grin and a head shake, you move to meet her.  To your surprise - and hers as well, judging from her reaction - her skin seems incredibly sensitive to your touch. The goo nearly flinches away from your questing fingers as you caress every part of her \"<i>body</i>\" that you can reach. You're rewarded by a satisfied grunt, and suddenly, she hooks her hands around your head and pulls you into her slime-filled bosom. The enamoured ghost girl ignores your struggles for several moments before she apparently comes to her senses and releases you from your suffocating predicament. \"<i>Sorry!  This slime is a bit more insidious than I thought...</i>\" she explains, a blush inexplicably finding its way to her emerald face. No harm, no foul, you insist, and she nods in appreciation. \"<i>Oh!</i>\" she exclaims, struck with inspiration, \"<i>I've got a good idea!</i>\"\n\n");
 
@@ -506,7 +506,7 @@ private function slimeyPenorsAhoy():void {
 //Victory Scenes (Repurposed Loss Scenes)
 //Genderless Scene
 private function genderlessGhostBuster():void {
-	spriteSelect(67);
+	spriteSelect(SpriteDb.s_ghostGirl2);
 	clearOutput();
 	outputText("Excited to help relieve the girl of her accumulating lust, you allow her control of your arms. She eagerly cups a hand against your crotch to feel... nothing. Confused, she quickly wriggles out of your [armor] and goes in for another grope, feeling nothing but skin. \"<i>Son of a...please don't tell me you don't have any sexual bits I can play with!</i>\" she huffs, and you chuckle sheepishly, not knowing what to tell her. She groans and falls back onto your [butt], muttering a string of curse words under your breath. \"<i>That's it!</i>\" she fumes. \"<i>I'm going to get off, whether you want me to or not!</i>\" She resumes cursing and wiggling your hips for a bit longer, then stops suddenly, a smirk playing across your face. \"<i>Whether you want me to or not...</i>\"\n\n");
 
@@ -545,9 +545,9 @@ private function genderlessGhostBuster():void {
 	flags[kFLAGS.SHOULDRA_GENDERLESS_FUCK_COUNT]++;
 	cleanupAfterCombat();
 }
-//Penis Scene
-private function penisLossThatIsntALoss():void {
-	spriteSelect(67);
+
+private function penisSexMerged():void {
+	spriteSelect(SpriteDb.s_ghostGirl2);
 	var x:Number = player.biggestCockIndex();
 	clearOutput();
 	if(player.hasStatusEffect(StatusEffects.Infested)) {
@@ -558,17 +558,17 @@ private function penisLossThatIsntALoss():void {
 		penisGartuanGhostSmexVictory();
 		return;
 	}
-	if(flags[kFLAGS.SHOULDRA_PENIS_DEFEAT_TIMES] == 0) outputText("She abruptly gasps in excitement and begins moving your hands towards your groin, though you swiftly reclaim control. \"<i>You have a penis,</i>\" she telepathically pulses to you with an anxious and excited edge to her voice. \"<i>My hosts... they rarely... they...</i>\"");
-	else outputText("She chuckles softly as she recalls the times you've shared, and she hungrily goes for your maleness once more, though you throw her off of it.");
-	outputText("  The communication suddenly breaks as the ghost girl's will surges against yours, all thoughts of submissiveness vanishing from her mind.  ");
+	if(flags[kFLAGS.SHOULDRA_PENIS_DEFEAT_TIMES] == 0) outputText("She abruptly gasps in excitement and begins moving her hands towards your groin, though you swiftly reclaim control of the unruly appendages. \"<i>You have a penis,</i>\" she telepathically pulses to you with an anxious and excited edge to her voice. \"<i>My hosts... they rarely... they...</i>\"");	
+	else outputText("She chuckles softly as she recalls the times you've shared, and she hungrily goes for your maleness once more, though you mentally throw her off of it. ");
+	outputText("The communication suddenly breaks as the ghost-girl's will surges against yours, all thoughts of submissiveness vanishing from her mind.  ");
 	//[if intelligence <50]
 	if(player.inte < 50) outputText("It's not very hard for her to break down your fortifications, and you soon feel yourself being pushed aside by her vast mental capacity.");
-	else if(player.inte < 90 || player.cockThatFits(80) == -1) outputText("You begin to gain an edge, but the ghost girl is craftier than you expected. She begins to pulse mental intrusions at you, scrambling your thoughts just long enough for her to overtake you and push you to the side.  \"<i>You are one hundred years too early to challenge me,</i>\" she chides. \"<i>My intellect has long surpassed most any living creature on this plane.</i>\"");
+	else if(player.inte < 90 || player.cockThatFits(80) == -1) outputText("You begin to gain an edge, but the ghost girl is craftier than you expected, and she begins to pulse mental intrusions at you, scrambling your thoughts just long enough for her to overtake you and push you to the side.  \"<i>You are one hundred years too early to challenge me,</i>\" she chides. \"<i>My intellect has long surpassed most any living creature on this plane.</i>\"");
 	else {
 		x = player.cockThatFits(80);
 		outputText("The ghost girl puts up a good fight, but you're more than prepared for her mental assault. You feel her panic well as her intrusions are overwhelmed, and though she attempts to disengage the mental link, you easily stop her. She screams mental protests at you, but your ringing ears only strengthen your psychological dominance over the poor spirit. Before long, she's reduced to a whimpering wreck. \"<i>Out,</i>\" you command, tired of the troublesome specter's meddlings. Of course, she won't even try to rebel now, resignedly accumulating her essence and beginning her exit. Within moments the ghost girl flows out of your body and resolidifies before you.\n\n");
 
-		outputText("She moves to leave in a huff, but you stop her with a single telepathic demand. She's yours, you remind her, and since she's gone through the trouble of trying to get you off, she might as well finish the job. Even as her lips purse in a stubborn pout, a dominating wave of influence sweeps over her, and regardless of herself, she begins unsteadily moving towards you. Resolving to meet halfway, you stride over to her and push her to your knees. As she watches, you shed your [armor] and hoist your " + cockDescript(x) + " up to her lips, leaving a fairly clear implication of your expectations. The ghost girl's eyes widen at the sight of your manhood, and she cringes as a new wave of arousal sweeps through her. She gives a little whimper at her inability to quell her overwhelming libido, but you simply laugh mockingly and gesture at your maleness.  \"<i>Ghost blowjob,</i>\" you mutter snidely.\n\n");
+		outputText("She moves to leave in a huff, but you stop her with a single telepathic demand. She's yours, you remind her, and since she's gone through the trouble of trying to get you off, she might as well finish the job. Even as her lips purse in a stubborn pout, a dominating wave of influence sweeps over her, and regardless of herself, she begins unsteadily moving towards you. Resolving to meet halfway, you stride over to her and push her to her knees. As she watches, you shed your [armor] and hoist your " + cockDescript(x) + " up to her lips, leaving a fairly clear implication of your expectations. The ghost girl's eyes widen at the sight of your manhood, and she cringes as a new wave of arousal sweeps through her. She gives a little whimper at her inability to quell her overwhelming libido, but you simply laugh mockingly and gesture at your maleness.  \"<i>Ghost blowjob,</i>\" you mutter snidely.\n\n");
 
 		outputText("You don't even give her the chance to act of her own volition, simply reaching out, taking ahold of her head, and slamming her onto your " + cockDescript(x) + ".  She takes it surprisingly well, unsurprisingly easily, taking most of the shaft in the first thrust alone.  With not as much as even a sputter, she impatiently double-handedly grabs your [butt] and thrusts her head forward.  Before you know it, your entire " + cockDescript(x) + " is wrapped in a fleshy tunnel of love.");
 		if(player.cockTotal() > 1) {
@@ -594,7 +594,7 @@ private function penisLossThatIsntALoss():void {
 		outputText(".  ");
 		if(player.balls == 0) outputText("The first effects of the spell make themselves known in a big way when an overladen cumsack forms and drops between your legs.  ");
 		outputText("The strange feeling focuses on your testes, making it a bit hard to concentrate on keeping the ghost girl subdued.  Your management of willpower does not waver until you feel your legs being pushed farther apart.  A curious glance turns into a horrified stare as you gaze upon your now ");
-		if(player.ballSize >= 9) outputText("gargantuan");
+		if(player.ballSize >= 10) outputText("gargantuan");
 		else outputText("basketball");
 		outputText("-sized balls.\n\n");
 
@@ -606,10 +606,28 @@ private function penisLossThatIsntALoss():void {
 		return;
 	}
 	outputText("\n\n");
-	outputText("Taking complete control of your body as if it was never actually yours, she removes your [armor] and throws them carelessly to the ground. Grabbing up your " + cockDescript(x) + " in both hands and fondling it awkwardly, she strikes you as obviously inexperienced with the male anatomy, despite her levels of intelligence. She continues to grope your lengthening member, admitting, \"<i>Even with the rare male bodies I have possessed, I rarely got to play with their...</i>\" You feel your face flush as the ghost girl relives her awkward previous possessions. Your penis finally extends to its full length, and your hands slide up and down its length in a clumsy yet admittedly effective technique. Sweat soon begins lathering your body as you sink to your knees, confusingly overwhelmed by the pleasure of a simple self-stimulation. You've never felt this good while masturbating! You figure the otherworldly influence of your new 'room-mate' has something to do with this. As if to prove your theory, your mouth moves in the strange archaic language of the girl, and your body stiffens in both pain and pleasure as ");
-	if(player.balls > 0) outputText("your testicles churn with fertility and ");
-	outputText("your manhood swells with new-found girth. The growth forces your hands further apart until your quivering pecker resembles a very excited fire hydrant. Drool begins to run from the corners of your mouth as she bites against your lower lip, head thrown back in the ecstasy of the stimulation. Finally, you feel a tightening in your scrotum, and you—all by yourself this time, as the ghost girl is in complete thrall of your body's orgasm—move your hand down to the bottom of your shaft. Remarkably, you actually feel the semen wriggling towards release under your fingers. With a final ecstatic scream equally parts ghost and human, your back arches as a geyser of semen bursts forth, showering you not unlike a fountain. After a long while kneeling and quivering, you finally get your wits about you and raise yourself back up, noting the lack of resistance from your non-corporeal friend. You sigh in relief as you watch your now-flaccid penis diminishing to its original proportions.\n\n");
-	outputText("Her pleasure dealt with, the ghost girl appears head-first from your belly, flowing out and reconstituting herself into the normal, brown-eyed girl you first encountered.  Almost as an afterthought, she reaches down and plunges a hand into her still-dripping cunt. Evidently, she's taken ahold of something, and with a bit of effort she tugs a handful of translucent green goo right out. \"<i>Ectoplasm,</i>\" she explains, reaching down and grabbing her tunic. Reaching into a pocket, she produces a small bottle and pushes the slimy substance inside. \"<i>Essentially the product of a ghost orgasm, which you've so kindly provided for me.</i>\" She smiles, hands you the bottle, then moves to her clothing and swiftly dresses. With a little wave, she wanders away, rounding a corner and disappearing from sight. You resolve to find her again—her magic was pretty fun!");
+	if (player.gender == 1) {
+		outputText("Taking complete control of your body as if it was never actually yours, she removes your [armor] and throws them carelessly to the ground. Grabbing up your " + cockDescript(x) + " in both hands and fondling it awkwardly, she strikes you as obviously inexperienced with the male anatomy, despite her levels of intelligence. She continues to grope your lengthening member, admitting, \"<i>Even with the rare male bodies I have possessed, I rarely got to play with their...</i>\" You feel your face flush as the ghost girl relives her awkward previous possessions. Your penis finally extends to its full length, and your hands slide up and down its length in a clumsy yet admittedly effective technique. Sweat soon begins lathering your body as you sink to your knees, confusingly overwhelmed by the pleasure of a simple self-stimulation. You've never felt this good while masturbating! You figure the otherworldly influence of your new 'room-mate' has something to do with this. As if to prove your theory, your mouth moves in the strange archaic language of the girl, and your body stiffens in both pain and pleasure as ");
+		if(player.balls > 0) outputText("your testicles churn with fertility and ");
+		outputText("your manhood swells with new-found girth. The growth forces your hands further apart until your quivering pecker resembles a very excited fire hydrant. Drool begins to run from the corners of your mouth as she bites against your lower lip, head thrown back in the ecstasy of the stimulation. Finally, you feel a tightening in your scrotum, and you—all by yourself this time, as the ghost girl is in complete thrall of your body's orgasm—move your hand down to the bottom of your shaft. Remarkably, you actually feel the semen wriggling towards release under your fingers. With a final ecstatic scream equally parts ghost and human, your back arches as a geyser of semen bursts forth, showering you not unlike a fountain. After a long while kneeling and quivering, you finally get your wits about you and raise yourself back up, noting the lack of resistance from your non-corporeal friend. You sigh in relief as you watch your now-flaccid penis diminishing to its original proportions.\n\n");
+		outputText("Her pleasure dealt with, the ghost girl appears head-first from your belly, flowing out and reconstituting herself into the normal, brown-eyed girl you first encountered.  Almost as an afterthought, she reaches down and plunges a hand into her still-dripping cunt. Evidently, she's taken ahold of something, and with a bit of effort she tugs a handful of translucent green goo right out. \"<i>Ectoplasm,</i>\" she explains, reaching down and grabbing her tunic. Reaching into a pocket, she produces a small bottle and pushes the slimy substance inside. \"<i>Essentially the product of a ghost orgasm, which you've so kindly provided for me.</i>\" She smiles, hands you the bottle, then moves to her clothing and swiftly dresses. With a little wave, she wanders away, rounding a corner and disappearing from sight. You resolve to find her again—her magic was pretty fun!");
+	}
+	else {
+		outputText("Taking complete control of your body as if it was never actually yours, she removes your [armor] and throws them carelessly to the ground. Grabbing up your " + cockDescript(x) + " in both hands and fondling it awkwardly, she strikes you as obviously inexperienced with the male anatomy, despite her levels of intelligence. She continues to grope your lengthening member, admitting, \"<i>Even with the rare male bodies I have possessed, I rarely got to play with their...</i>\"\n\n");
+
+		outputText("You feel your face flush as the ghost girl relives her awkward previous possessions. Your penis finally extends fully, and your hands slide up and down its length in a clumsy yet admittedly effective technique. She 'ooo's in surprise as one of your hands slips a bit lower and brushes against an entirely and completely female cunt.  ");
+		if(player.balls > 0) outputText("Stopping her double-handed stroke technique, she slips your hand under your obtrusive [balls] and gently pushes them aside to get a better look at your previously unnoticed female sex.  ");
+		outputText("She chuckles malevolently, and you groan, mind cycling through the possible outcomes of the girl's impulses. Your lips curl unbidden in an evil smile, then begin mouthing an archaic incantation. You wince inwardly, bracing for the worst. She finishes and goes back to the vigorous stroking, and you are left to wonder what the spell was meant to do- that is, until you feel a tingling beginning at the base of your " + cockDescript(x) + ", slowly climbing up the shaft until your entire length is covered in the sensation.\n\n");
+
+		outputText("Your eyes widen as your proud, rigid member becomes significantly more elastic. As the ghost girl continues to stroke, you marvel at the odd sensation, flexible yet still firm. She stops suddenly, and begins bending the shaft downwards, and you have a fairly good idea of what she plans to do with your magically-altered manhood. True enough, she promptly loops your bendy dick over and inserts it firmly into your fuck-hole, creating the most confusingly arousing feeling you've ever experienced. She continues to push until your shaft reaches its limit, shoving the entire thing into your slavering slit.");
+		player.cuntChange(player.cockArea(x),true,true,false);
+		outputText("  Unable to do much in your current position, the ghost girl launches into spellcasting once more with a determined edge to her voice. The tingling feeling returns, this time beginning in your head and intensifying. You sharply inhale as your glans begins vibrating and wiggling around, stimulating your tunnel better than any dildo. The vibration has a similar effect on the penis itself, and you can't resist a moan as the tingles creep up your shaft. This tension lasts for an impressive amount of time, and the ghost-girl, getting sick of your endurance, cries a single word, intensifying the jostling of your dick and drawing a throaty gurgle from you. Any conceptions of restraint are quickly shattered under the stimulation, and you climax hard, writhing on the cracked pavement and crying out in ecstasy as a result of an actual occurrence of a ghost-assisted self-fuck. You're only pushed further over the edge with the journey of your seed through your misshapen urethra, the curve causing a small 'traffic jam' of cum and stretching the urethra further out.\n\n");
+
+		outputText("Finally, the seed spills out with an explosive splash into your carnal canal, and your scream only intensifies, the ghost girl joining in with her own melodic voice inside your mind. Gout after gout of cum bursts into you. Your vibrating head keeps the semen from leaking out as your belly protrudes a bit to accommodate. After many blissful moments, your orgasm winds down, and you collapse. Luckily, you remain mindful enough to drag your dick, with the vibration dying down, back out into the open, a torrential mixture of female lovejuice and semen pouring out and pooling around your [butt]. You lie there for minutes, gathering your wits and feeling your penis gradually stiffen once more, the effects worn out. After several attempts, you manage to summon enough strength to slide yourself into a sitting position, wondering what happens now.\n\n");
+
+		outputText("Her pleasure dealt with, the ghost girl appears head-first from your belly, flowing out and reconstituting herself into the normal, brown-eyed girl you first encountered.  Almost as an afterthought, she smiles, moving to her clothing and swiftly dressing, then gives you a little wave before wandering away, rounding a corner and disappearing from sight. You resolve to find her again- her magic was pretty fun!");
+	}
+	
 	player.orgasm();
 	flags[kFLAGS.SHOULDRA_PENIS_DEFEAT_TIMES]++;
     if (CoC.instance.inCombat) {
@@ -622,23 +640,22 @@ private function penisLossThatIsntALoss():void {
 	}
 }
 
-
 private function letShouldraIn():void {
-	spriteSelect(67);
+	spriteSelect(SpriteDb.s_ghostGirl2);
 	clearOutput();
 	outputText("The ghost girl squeals in excitement as you allow her partial control- only enough for her to feel your penis as if it were her own.  With an ecstatic, victorious scream, she impales herself upon your dick, taking the entire thing down her throat like it's nothing.  Your jet-stream of cum rockets into her gob, blasting her head straight off your dick to slam into your " + chestDesc() + " with an \"<i>Oof.</i>\"\n\n");
 	ghostBJFinisher(true);
 }
 //deny her
 private function kickShouldraOut():void {
-	spriteSelect(67);
+	spriteSelect(SpriteDb.s_ghostGirl2);
 	clearOutput();
 	outputText("Reminding her that this is a punishment for underestimating you, you firmly deny her request for entry.  Her bright yellow eyes glaze over in her disappointment, but she dare not go against your wishes.  The ghost girl turns back around and mechanically goes back to her work.  As soon as she slides her puckered lips down your twitching shaft, however, you're already past your point of endurance, and a jet of cum lifts her head right off of your dick.  The back of her head slams into your " + chestDesc() + " with an \"<i>Oof.</i>\"\n\n");
 	ghostBJFinisher(false);
 }
 //back to this thing okay
 private function ghostBJFinisher(inside:Boolean):void {
-	spriteSelect(67);
+	spriteSelect(SpriteDb.s_ghostGirl2);
 	var x:Number = player.cockThatFits(80);
 	outputText("Like a backed up geyser, your gigantic testicles push hot, thick strands of seed out of your belaboured " + cockDescript(x) + " straight up in the air.  The cum splatters on both you and the ");
 	if(inside) outputText("excitedly convulsing");
@@ -667,7 +684,7 @@ private function ghostBJFinisher(inside:Boolean):void {
 //Penis With Worm Infestation Scene
 //[penis selection with worm infestation]
 private function dewormYourGhost():void {
-	spriteSelect(67);
+	spriteSelect(SpriteDb.s_ghostGirl2);
 	clearOutput();
 	outputText("As the ghost girl settles into your body, she swiftly recognizes the unfamiliar bulge against your [armor], and you feel a wave of joy run though your body as she regards your dick. The skin on the back of your hand shudders, and you jump in surprise when the spirit's face appears on it. She waits patiently for you to get over the initial shock, then asks, \"<i>May I... please... I mean, you... ah...</i>\" You guess she must be slightly overwhelmed by her discovery. You softly ask her if she is referring to your maleness, and she responds with a suddenly anxious \"<i>Mmhmm!</i>\"\n\n");
 
@@ -685,7 +702,7 @@ private function dewormYourGhost():void {
 
 //Penis With Exgartuan Scene
 private function penisGartuanGhostSmexVictory():void {
-	spriteSelect(67);
+	spriteSelect(SpriteDb.s_ghostGirl2);
 	var x:Number = player.biggestCockIndex();
 	clearOutput();
 	outputText("You feel an almost overwhelming surge of anxious arousal as the ghost girl regards your excessively large " + cockDescript(x) + ". You decide to play along and place your hand over the bulge in your [armor], enjoying her gleeful titter as your member twitches and hardens, just a tad. You begin to strip, but are halted by a familiar booming voice coming from the half-erect member. \"<i>WHO THE HELL IS THIS BITCH?</i>\" a perplexed Exgartuan yells grumpily. \"<i>Living in peoples' bodies is MY THING!</i>\"\n\n");
@@ -732,7 +749,7 @@ private function ghostGinaWinSexings():void {
 		ginaBoobgartuanShouldra();
 		return;
 	}
-	spriteSelect(67);
+	spriteSelect(SpriteDb.s_ghostGirl2);
 	clearOutput();
 	outputText("The ghost girl heaves a mildly disappointed sigh as she settles into your body fully.  \"<i>I've had... many female hosts,</i>\" she explains. You momentarily feel embarrassed by the ghost's disapproval, and you almost move to apologize before the words catch in your throat and you cross your arms defensively.  ");
 	if(flags[kFLAGS.SHOULDRA_VAGINAL_POSSESSIONS] == 0) outputText("She 'hmm's several times inside your head, but you can feel a surge of elation as she apparently reaches a solution. \"<i>Of course!</i>\" she cries excitedly.  \"<i>I actually have never done this before!</i>\"\n\n");
@@ -751,83 +768,10 @@ private function ghostGinaWinSexings():void {
         cleanupAfterCombat();
 	else doNext(camp.returnToCampUseOneHour);
 }
-//Hermaphrodite Scene
-private function hermaphroditeGhostsCumEctoplasm():void {
-	spriteSelect(67);
-	var x:Number = player.biggestCockIndex();
-	clearOutput();
-	if(flags[kFLAGS.SHOULDRA_HERMSEX_COUNT] == 0) outputText("She abruptly gasps in excitement and begins moving her hands towards your groin, though you swiftly reclaim control of the unruly appendages. \"<i>You have a penis,</i>\" she telepathically pulses to you with an anxious and excited edge to her voice. \"<i>My hosts... they rarely... they... </i>\"  ");
-	//[if repeated]
-	if(flags[kFLAGS.SHOULDRA_HERMSEX_COUNT] > 0) outputText("She chuckles softly as she recalls the times you've shared, and she hungrily goes for your maleness once more, though you mentally throw her off of it.  ");
-	outputText("The communication suddenly breaks as the ghost-girl's will surges against yours, all thoughts of submissiveness vanishing from her mind.  ");
-	if(player.inte < 50) outputText("It's not very hard for her to break down your fortifications, and you soon feel yourself being pushed aside by her vast mental capacity.");
-	else if(player.inte < 90 || player.cockThatFits(80) == -1) outputText("You begin to gain an edge, but the ghost girl is craftier than you expected, and she begins to pulse mental intrusions at you, scrambling your thoughts for just long enough for her to overtake you and push you to the side.  \"<i>You are one hundred years too early to challenge me,</i>\" she chides. \"<i>My intellect has long surpassed most any living creature on this plane.</i>\"");
-	else {
-		x = player.cockThatFits(80);
-		outputText("The ghost girl puts up a good fight, but you're more than prepared for her mental assault. You feel her panic well as her intrusions are overwhelmed, and though she attempts to disengage the mental link, you easily stop her. She screams mental protests at you, but your ringing ears only strengthen your psychological dominance over the poor spirit. Before long, she's reduced to a whimpering wreck. \"<i>Out,</i>\" you command, tired of the troublesome specter's meddlings. Of course, she won't even try to rebel now, resignedly accumulating her essence and beginning her exit. Within moments the ghost girl flows out of your body and resolidifies before you.\n\n");
-
-		outputText("She moves to leave in a huff, but you stop her with a single telepathic demand. She's yours, you remind her, and since she's gone through the trouble of trying to get you off, she might as well finish the job. Even as her lips purse in a stubborn pout, a dominating wave of influence sweeps over her, and regardless of herself, she begins unsteadily moving towards you. Resolving to meet halfway, you stride over to her and push her to her knees.  As she watches, you shed your [armor] and hoist your " + cockDescript(x) + " up to her lips, leaving a fairly clear implication of your expectations. The ghost girl's eyes widen at the sight of your manhood, and she cringes as a new wave of arousal sweeps through her. She gives a little whimper at her inability to quell her overwhelming libido, but you simply laugh mockingly and gesture at your maleness.  \"<i>Ghost blowjob,</i>\" you mutter snidely.\n\n");
-
-		outputText("You don't even give her the chance to act of her own volition, simply reaching out, taking ahold of her head, and slamming her onto your " + cockDescript(x) + ".  She takes it surprisingly well, unsurprisingly easily, taking most of the shaft in the first thrust alone.  With not as much as even a sputter, she impatiently double-handedly grabs your [butt] and thrusts her head forward.  Before you know it, your entire " + cockDescript(x) + " is wrapped in a fleshy tunnel of love.");
-		if(player.cockTotal() > 1) {
-			outputText("  Mindful of ");
-			if(player.cockTotal() == 2) outputText("your other dick");
-			else outputText("the rest of " + multiCockDescriptLight());
-			outputText(", the mentally dominated girl quickly clutches ");
-			if(player.cockTotal() == 2) outputText("your other shaft and pumps it vigorously.");
-			else if(player.cockTotal() == 3) outputText("your other two shafts and pumps them vigorously.");
-			else outputText("two other shafts and pumps them vigorously.");
-		}
-		outputText("\n\n");
-
-		outputText("The ghost girl goes to town on your genitals, the combination of your will and her still-rising lust fueling her movements.\n\n");
-
-		outputText("Although her mouth is quite full, her voice rings clearly in your head as she starts casting a spell.  You glance down at her, surmising from her almost serene expression and heavy-rimmed eyes that she's even gotten over her inability to orgasm.  She finishes her spell with the usual flourish before once more focusing her attention to your pleasure.  ");
-		if(player.cockTotal() == 2) outputText("Taking her hand away from your other dick, the ");
-		else if(player.cockTotal() >= 3) outputText("Taking her hands away from your other dicks, the ");
-		else outputText("The ");
-		outputText("ghost girl smiles around your phallus, and you can only guess what she has planned.  You don't have long to wait, however; a strange roiling arises ");
-		if(player.balls > 0) outputText("in your " + ballsDescriptLight());
-		else outputText("near the base of your shaft");
-		outputText(".  ");
-		if(player.balls == 0) outputText("The first effects of the spell make themselves known in a big way when an overladen cumsack forms and drops between your legs.  ");
-		outputText("The strange feeling focuses on your testes, making it a bit hard to concentrate on keeping the ghost girl subdued.  Your management of willpower does not waver until you feel your legs being pushed farther apart.  A curious glance turns into a horrified stare as you gaze upon your now ");
-		if(player.ballSize > 10) outputText("gargantuan");
-		else outputText("basketball");
-		outputText("-sized balls.\n\n");
-
-		outputText("Taking advantage of your distraction, your former mind slave pushes you over and jumps on top of you.  Her impotently sopping box leaves streaks of clear fluid across your belly as she continues her work on your cock");
-		if(player.cockTotal() > 1) outputText("s");
-		outputText(" while swaying her hips to and fro.  Both of her hands get to work on rubbing your ever-growing testicles, but two hands can't cover the growing amount of space necessary for effective stimulation.  She shrugs, content with patting, tickling, and squeezing the skin she can reach.  A massive churning begins in your gargantuan cumsack, a movement that actually shakes the ground.  Both of you knows what that signifies, the ghost girl going so far as to disengage from her feverish oral to stare longingly at you.  It seems you hold the key to sating her lust or denying her the orgasm she so craves; what do you do?");
-
-		simpleChoices("LetHerCum", letShouldraIn, "KeepHerOut", kickShouldraOut, "", null, "", null, "", null);
-		return;
-	}
-	outputText("\n\n");
-
-	outputText("Taking complete control of your body as if it was never actually yours, she removes your [armor] and throws them carelessly to the ground. Grabbing up your " + cockDescript(x) + " in both hands and fondling it awkwardly, she strikes you as obviously inexperienced with the male anatomy, despite her levels of intelligence. She continues to grope your lengthening member, admitting, \"<i>Even with the rare male bodies I have possessed, I rarely got to play with their...</i>\"\n\n");
-
-	outputText("You feel your face flush as the ghost girl relives her awkward previous possessions. Your penis finally extends fully, and your hands slide up and down its length in a clumsy yet admittedly effective technique. She 'ooo's in surprise as one of your hands slips a bit lower and brushes against an entirely and completely female cunt.  ");
-	if(player.balls > 0) outputText("Stopping her double-handed stroke technique, she slips your hand under your obtrusive [balls] and gently pushes them aside to get a better look at your previously unnoticed female sex.  ");
-	outputText("She chuckles malevolently, and you groan, mind cycling through the possible outcomes of the girl's impulses. Your lips curl unbidden in an evil smile, then begin mouthing an archaic incantation. You wince inwardly, bracing for the worst. She finishes and goes back to the vigorous stroking, and you are left to wonder what the spell was meant to do- that is, until you feel a tingling beginning at the base of your " + cockDescript(x) + ", slowly climbing up the shaft until your entire length is covered in the sensation.\n\n");
-
-	outputText("Your eyes widen as your proud, rigid member becomes significantly more elastic. As the ghost girl continues to stroke, you marvel at the odd sensation, flexible yet still firm. She stops suddenly, and begins bending the shaft downwards, and you have a fairly good idea of what she plans to do with your magically-altered manhood. True enough, she promptly loops your bendy dick over and inserts it firmly into your fuck-hole, creating the most confusingly arousing feeling you've ever experienced. She continues to push until your shaft reaches its limit, shoving the entire thing into your slavering slit.");
-	player.cuntChange(player.cockArea(x),true,true,false);
-	outputText("  Unable to do much in your current position, the ghost girl launches into spellcasting once more with a determined edge to her voice. The tingling feeling returns, this time beginning in your head and intensifying. You sharply inhale as your glans begins vibrating and wiggling around, stimulating your tunnel better than any dildo. The vibration has a similar effect on the penis itself, and you can't resist a moan as the tingles creep up your shaft. This tension lasts for an impressive amount of time, and the ghost-girl, getting sick of your endurance, cries a single word, intensifying the jostling of your dick and drawing a throaty gurgle from you. Any conceptions of restraint are quickly shattered under the stimulation, and you climax hard, writhing on the cracked pavement and crying out in ecstasy as a result of an actual occurrence of a ghost-assisted self-fuck. You're only pushed further over the edge with the journey of your seed through your misshapen urethra, the curve causing a small 'traffic jam' of cum and stretching the urethra further out.\n\n");
-
-	outputText("Finally, the seed spills out with an explosive splash into your carnal canal, and your scream only intensifies, the ghost girl joining in with her own melodic voice inside your mind. Gout after gout of cum bursts into you. Your vibrating head keeps the semen from leaking out as your belly protrudes a bit to accommodate. After many blissful moments, your orgasm winds down, and you collapse. Luckily, you remain mindful enough to drag your dick, with the vibration dying down, back out into the open, a torrential mixture of female lovejuice and semen pouring out and pooling around your [butt]. You lie there for minutes, gathering your wits and feeling your penis gradually stiffen once more, the effects worn out. After several attempts, you manage to summon enough strength to slide yourself into a sitting position, wondering what happens now.\n\n");
-
-	outputText("Her pleasure dealt with, the ghost girl appears head-first from your belly, flowing out and reconstituting herself into the normal, brown-eyed girl you first encountered.  Almost as an afterthought, she smiles, moving to her clothing and swiftly dressing, then gives you a little wave before wandering away, rounding a corner and disappearing from sight. You resolve to find her again- her magic was pretty fun!");
-	player.orgasm();
-	flags[kFLAGS.SHOULDRA_HERMSEX_COUNT]++;
-    if (CoC.instance.inCombat)
-        cleanupAfterCombat();
-	else doNext(camp.returnToCampUseOneHour);
-}
 
 //Loss Introduction
 internal function loseToShouldra():void {
-	spriteSelect(67);
+	spriteSelect(SpriteDb.s_ghostGirl2);
 	clearOutput();
 	outputText("You fall with a dull thud onto the abandoned road, thoroughly beaten by the seemingly unremarkable young woman.  As you struggle to rise, she casually walks over to you, standing with hands on hips and staring down at you.  You freeze, not wanting to make any sudden moves against this unpredictable opponent.  She slowly takes off her loose-fitting tunic, exposing her firm and squeezable C-cups. Curiously, she kicks off her comfortable shoes, but leaves her tight leggings on. You suspect something fishy, and raise an eyebrow as she straddles you. Unexpectedly, she hops up and spins completely around, landing on your abdomen, butt facing you, with enough force to elicit an 'oof'. You glance down at her; she half-turns, looking mischievously (and with a hint of evil intent) back at you. A small rumbling against your belly is the only warning you get before her leggings suddenly bulge weirdly, containing a substantially larger amount of flesh than a moment previous. Her ass continues to swell up, beginning to billow up and over the increasingly more constrictive waistband, and you can't help but raise a hand and squeeze the burgeoning buttflesh. You take pleasure in the sensation as it pulses further around your hand, squishing deeper into the cheek. Small rips begin to form on the cloth as her hips join in on the growth, the increasing amount of posterior raising her up slightly with each passing moment.  ");
 	//[if dick]
@@ -863,7 +807,7 @@ internal function loseToShouldra():void {
 //Penis Scene
 //[If you have a penis]
 private function ourDadTaughtUsNotToBeAshamedOfOurDicks():void {
-	spriteSelect(67);
+	spriteSelect(SpriteDb.s_ghostGirl2);
 	var x:Number = player.biggestCockIndex();
 	//[first encounter]
 	if(flags[kFLAGS.SHOULDRA_PENIS_DEFEAT_TIMES] == 0) outputText("She abruptly gasps in excitement, ");
@@ -892,7 +836,7 @@ private function ourDadTaughtUsNotToBeAshamedOfOurDicks():void {
 
 //Penis With Worm Infestation Scene
 private function loseToShouldraWithWorms():void {
-	spriteSelect(67);
+	spriteSelect(SpriteDb.s_ghostGirl2);
 	//[first encounter]
 	if(flags[kFLAGS.SHOULDRA_WORM_SCENE_COUNTER] == 0) outputText("She abruptly gasps in excitement, ");
 	else outputText("She 'ooo's softly as she recalls your anatomy, ");
@@ -908,7 +852,7 @@ private function loseToShouldraWithWorms():void {
 
 //Vagina Scene
 private function ghostGinaLosses():void {
-	spriteSelect(67);
+	spriteSelect(SpriteDb.s_ghostGirl2);
 	outputText("The ghost girl heaves a mildly disappointed sigh as she settles into your body fully.  \"<i>I've had... many female hosts,</i>\" she explains. You are almost embarrassed regarding her disapproval, and actually contemplate apologizing before remembering the source of the lament. You cross your arms (or try, as the ghost still has full control of your body) and give an annoyed huff.  ");
 	if(flags[kFLAGS.SHOULDRA_VAGINAL_POSSESSIONS] == 0) outputText("She 'hmm's several times, raising your hand and tapping your finger against your chin. She snaps your fingers as a revelation washes over her.  \"<i>Of course!</i>\" she cries excitedly.  \"<i>I actually have never done this before!</i>\"");
 	else outputText("\"<i>Oh well, I suppose I can always just do that again,</i>\" she muses. \"<i>It worked well enough the first time.</i>\"");
@@ -935,7 +879,7 @@ private function ghostGinaLosses():void {
 
 //Hermaphrodite Scene
 private function loseToShouldraAsHerm():void {
-	spriteSelect(67);
+	spriteSelect(SpriteDb.s_ghostGirl2);
 	if(flags[kFLAGS.SHOULDRA_HERMSEX_COUNT] == 0) outputText("She abruptly gasps in excitement, ");
 	else outputText("She coos softly as she recalls your anatomy, ");
 	outputText("and you feel your hands moving unbidden towards your crotch. You snap the sneaky extremities back to your sides, knowing exactly what she wants to do. The ghost girl soon proves herself the stronger in the contest of wills, however, and eventually, your will breaks and she takes complete control once again. She forces your body to stand, removing your [armor] and throwing them carelessly to the ground. She takes your [cock] in both hands and fondles it awkwardly, obviously inexperienced with the male anatomy.  \"<i>Most of my hosts have been women,</i>\" she explains as she continues to grope your lengthening member.  \"<i>And even then, I rarely got to play with their...</i>\"\n\n");
@@ -964,7 +908,7 @@ private function loseToShouldraAsHerm():void {
 
 //Enormous Cock Scene
 private function shouldraGiantCockLoss():void {
-	spriteSelect(67);
+	spriteSelect(SpriteDb.s_ghostGirl2);
 	var x:Number = player.biggestCockIndex();
 	outputText("Her attention inevitably moves to your gigantic dick, somehow still contained in your garments, and she swiftly clamors to free it from its prison. Practically tearing off your [armor], she tilts your head back in order to fully take in your " + cockDescript(x) + ", a small line of drool escaping the edge of your mouth. She opens your mouth as if to speak, but cannot find words, instead settling for a long and anxious groan. Her first reaction is to simply hug the titantic shaft, squeezing happily. Eventually, she seems to realize her original intent and draws back, stroking your chin with your hand while she apparently ascertains the best way to stimulate your monster. With a small 'aha!', she struggles to stand, unused to such a strange center of balance. Bringing you along for the ride, she begins wandering the streets of the city, taking control of your mouth and shouting \"<i>My oh my, how on earth will I ever blow my load with this GIANT dick?</i>\" Her efforts are rewarded when you hear a small pitter-patter of feet, distantly at first, but hastily heading toward you. A duo of goblins rush out around a corner, take a moment to confirm the reported size of your manhood, and hurry over, undressing, tripping and shoving each other in an effort to win the race to win your attention. As they reach you the excited little creatures nearly bowl you over as they start stroking and licking every inch of cockflesh they can reach. \"<i>Girls!</i>\" the ghost exclaims sternly (with your voice), crossing your arms in front of you as they turn their heads to regard you. She allows a hint of a smile to show at the corners of your mouth as she continues, \"<i>Trust me when I say there will be enough of me for both of you.</i>\"\n\n");
 
@@ -1065,7 +1009,7 @@ private function shouldraGiantCockLoss():void {
 }
 //Genderless Scene
 private function genderlessShouldrasLossRapes():void {
-	spriteSelect(67);
+	spriteSelect(SpriteDb.s_ghostGirl2);
 	outputText("Excited to find out what manner of host you are, the ghost-girl swiftly assumes complete control of your body and cups a hand against your crotch to feel... nothing. Confused, she quickly wriggles out of your [armor] and goes in for another grope, feeling nothing but skin. \"<i>Son of a... please don't tell me you don't have any sexual bits I can play with!</i>\" she huffs, and you chuckle sheepishly, not knowing what to tell her. She groans unhappily and falls back onto your [butt], muttering a string of curse words under your breath. \"<i>That's it!</i>\" she fumes. \"<i>I'm going to get off, whether you want me to or not!</i>\" She resumes cursing and wiggling your hips for a bit longer, then stops suddenly, a smirk playing across your face. \"<i>Whether you want me to or not...</i>\"\n\n");
 
 	outputText("She hops up and makes for the decrepit hut you first saw her in.  ");
@@ -1120,7 +1064,7 @@ private function genderlessShouldrasLossRapes():void {
 
 //Penis With Exgartuan Scene
 private function ghostGartuanLossSceneOrSomeShit():void {
-	spriteSelect(67);
+	spriteSelect(SpriteDb.s_ghostGirl2);
 	var x:Number = player.biggestCockIndex();
 	outputText("Your entire body shivers in delight as the ghost girl regards your excessively large " + cockDescript(x) + ". She places your hand over the bulge in your [armor] and titters in glee as your member twitches and hardens, just a tad. She strips eagerly, but is halted by a familiar booming voice coming from the half-erect member. \"<i>WHO THE HELL IS THIS BITCH?</i>\" a perplexed Exgartuan yells grumpily. \"<i>Living in peoples' bodies is MY THING!</i>\"\n\n");
 
@@ -1160,7 +1104,7 @@ private function ghostGartuanLossSceneOrSomeShit():void {
 
 //[super secret paladin 'sex' scene; prerequisites: human face, human body, human legs, no tail, no horns, light/olive/dark/ebony complexion, slightly to severely masculine face, 0-15 corruption, 4-10 inch normal penis, 1-2 inch testicles, no-adjective to narrow hips, height between 5'5</i>\" and 6'5</i>\"]
 private function superCoolPaladinSexStuffDudeGasmJizzMonkies():void {
-	spriteSelect(66);
+	spriteSelect(SpriteDb.s_ghostGirl);
 	clearOutput();
 
 	outputText("While gallantly striding through the wreckage of the town, you sense danger, and pause mid-stride. You strain your valiant ears for any out-of-place sounds, and your heroic eyes widen as you hear a shuffling from one of the heretical half-destroyed huts. Cursing your wise self for getting caught off-guard in such an unlawful place as this, you ready your incredibly just [weapon] and wait. Another unsanctimonious sound issues forth, and you tense yourself. You are caught very slightly off-guard when a completely human leg steps out of the doorway. A virtuous maiden soon stands before you, eyeing you up curiously. After taking a breath to steady yourself, you inquire upon how such an untainted woman would find herself in a place such as this. Instead of the very reasonable response of being cowed by your almighty presence, the girl laughs softly, arching an eyebrow at your behavior. You narrow your eyes angrily at such a slight to your devout mannerisms and demand an apology. \"<i>Ah, I'm very sorry,</i>\" she replies, only a hint of humor to her admittedly lovely voice, \"<i>I was not expecting such a... remarkable man, such as yourself, to wander by. What business have you here?</i>\"\n\n");
@@ -1168,28 +1112,28 @@ private function superCoolPaladinSexStuffDudeGasmJizzMonkies():void {
 	outputText("While she speaks, you cannot help but notice how pure her body is in appearance; her loose-fitting tunic flows very modestly down to her thighs, preserving her frame from the lecherous eyes of any devious creatures that may be lurking about. Her leather leggings, while form-fitting, are done so in a stylish and innocent way, and you take little offense. You inform her of your ecclesiastical quest to rid the world of all taint, and she nods with what you assume to be admiration. On impulse, you take the hand of the lady before you and raise it to your lips, then inquire on her marital status. It takes her a moment to get over the shock of such a blunt question, but she composes herself quite quickly. \"<i>I am quite single,</i>\" she assures you, a smirk beginning to play across her face. \"<i>Is this a remarkably subtle attempt to court me?</i>\"\n\n");
 
 	outputText("You look up to gaze into her moderately attractive face. Is it?");
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00366]++;
+	flags[kFLAGS.SHOULDRA_MAIDEN_TIMES_MET]++;
 	doYesNo(courtCrazyGirlsDotCom,noCourtingYouFag);
 }
 //(no)
 private function noCourtingYouFag():void {
-	spriteSelect(66);
+	spriteSelect(SpriteDb.s_ghostGirl);
 	clearOutput();
 	outputText("You quickly tell her that there's been a misunderstanding; surely your order would not allow such a relationship. She nods, not seeming very bothered by the dismissal. \"<i>What a shame. Farewell, then, paladin friend,</i>\" she says, turning back towards her shack. \"<i>Perhaps we will meet again.</i>\"  You're left to watch her go, and you soon depart as well.");
 	doNext(camp.returnToCampUseOneHour);
 }
 //(yup)
 private function courtCrazyGirlsDotCom():void {
-	spriteSelect(66);
+	spriteSelect(SpriteDb.s_ghostGirl);
 	clearOutput();
 	outputText("Her smile widens as she regards your venerable visage. \"<i>Is that so?</i>\" she says softly. \"<i>Interesting. I'll be back in a moment.</i>\" She returns to her \"<i>house,</i>\" rummaging around for some time before returning to you, hands hidden behind her. \"<i>If I am to be sought by a paladin, we must do things right,</i>\" she explains, handing you a small silk handkerchief. The white fabric slides around your fingers like a sacrosanct flow of holy water, and you reverently tuck her gift into your [armor], laying it over your heart. \"<i>Come back in two days' time, please,</i>\" she asks softly. Your eyes meet for a long moment, and it appears as if she's struggling to say something. She instead breaks away and starts back towards her shelter. \"<i>Be safe,</i>\" she advises, and with a smile and a wave, she's gone. For moments you stand silently, then you turn and start away with long, saintly strides. There's more work to do.\n\n");
-	flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00365] = 48;
+	flags[kFLAGS.SHOULDRA_MAIDEN_COUNTDOWN] = 48;
 	doNext(camp.returnToCampUseOneHour);
 }
 
 //(two days later)
 public function paladinModeFollowup():void {
-	spriteSelect(67);
+	spriteSelect(SpriteDb.s_ghostGirl2);
 	outputText("\n");
 	outputText("You feel a very slight bit anxious after two days away from the innocent maiden that you have professed your interest in. Your wanderings lead you to the spot where you first met, and sure enough, you hear a sound from a nearby dilapidated building. The completely human girl is soon standing in front of you once again, and you exchange smiles. \"<i>How's life been treating you?</i>\" she asks politely, intending to spark a conversation. You take a short while describing your continuing quest to slay all corruption that stands before you, and she hangs on every word, nodding every once and a while to show she's paying attention. The conversation inexorably shifts to your budding relationship, and a gleam begins in her completely normal brown eye. \"<i>Why don't you and I continue this chat away from prying eyes?</i>\" she suggests, grabbing you by the wrist with a surprisingly strong hand and leading you into her abode.  You duck under the warped entryway and step into the shack. Surprised, you take in the spartan-like furnishings and the lack of clutter in the room; it's as if she was raised by monks!\n\n");
 
@@ -1207,7 +1151,7 @@ public function paladinModeFollowup():void {
 //Vagina with Boobgartuan Scene
 //[vagina selection with BoobGartuan in tow]
 private function ginaBoobgartuanShouldra():void {
-	spriteSelect(67);
+	spriteSelect(SpriteDb.s_ghostGirl2);
 	clearOutput();
 	outputText("\"<i>Ah,</i>\" she sighs while settling into your form, \"<i>only ladyparts... well... ugh.</i>\"  You can sense her disappointment, and regardless of the ridiculousness of the situation, you feel cheering her up would be helpful. On sudden inspiration, you begin to tickle and tease your [allbreasts].  Before long, the ghost girl's protests change to grunts of satisfaction.  \"<i>Those are... nice,</i>\" she admits, and with her pleasure in mind, you knead the torpedoes more forcibly, eliciting a small gasp from her.  What you didn't have in mind, however, was the occupant of the oversized orbs you're handling.  With a boobquake that actually forces your hands away, the archdemon Exgartuan surges to alertness.");
 	outputText("\n\n\"<i>RIGHT, THEN, WHAT THE FUCK IS THIS!?</i>\"  Several moments pass before you realize your demonic knockers are referring to your temporary \"roommate.\"    Before you can begin to explain, the spirit moves her essence up into your shoulder, her head pushing out of the skin to get a better look at your moving, talking [allbreasts].");

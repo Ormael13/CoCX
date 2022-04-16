@@ -50,6 +50,11 @@ public class Antennae extends BodyPart {
 		name: "sea dragon",
 		appearanceDesc: "By the sides of your head are four bioluminescent strands that run down your neck, beautifully lighting up your front and giving you an air of mystique."
 	});
+	public static const JABBERWOCKY: int = 8;
+	EnumValue.add(Types, JABBERWOCKY, "JABBERWOCKY", {
+		name: "jabberwocky",
+		appearanceDesc: "By the sides of your head are two long strands not unlike tentacles that run down your neck enhancing your senses."
+	});
 
 	public function Antennae() {
 		super(null, null);

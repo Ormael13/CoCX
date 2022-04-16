@@ -21,13 +21,15 @@ import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.WeaponLib;
+import classes.Scenes.NPCs.NPCAwareContent;
 import classes.Scenes.SceneLib;
+import classes.Scenes.NPCs.Forgefather;
 import classes.Stats.Buff;
 import classes.display.SpriteDb;
 
 use namespace CoC;
 
-	public class TempleOfTheDivine extends BaseContent
+	public class TempleOfTheDivine extends BaseContent 
 	{
 
 		public function TempleOfTheDivine()
@@ -40,10 +42,18 @@ use namespace CoC;
 			return flags[kFLAGS.SAPPHIRE_AFFECTION];
 		}
 
+        public function onyxMF(boy:String, girl:String):String {
+            return (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) ? girl : boy;
+        }
+
+        public function onyxName():String {
+            return onyxMF("Onyx", "Krystal");
+        }
+
 		public function firstvisitintro():void {
 			flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] = 1;
 			flags[kFLAGS.SAPPHIRE_TALKS] = 0;
-			spriteSelect(SpriteDb.s_gargoyle);
+			spriteSelect(SpriteDb.s_sapphire);
 			clearOutput();
 			outputText("As you wander the mountains, you eventually climb to the very top, something you never expected to do. Weirdly enough, sitting on a nearby peak is what appears to be a massive temple. You approach the intimidating doors of the building and open them wide. Instantly you’re taken aback by the sight in front of you. ");
 			outputText("There are ancient bloodstains marking the stone floor and stained glass windows depicting various deities adorning each wall. At the end of the building that obviously once was a holy site, sits one depicting Marae. Under each window is a somewhat damaged altar, the light outside shining faintly upon it.");
@@ -70,7 +80,7 @@ use namespace CoC;
 		}
 		public function repeatvisitintro():void {
 			clearOutput();
-			spriteSelect(SpriteDb.s_gargoyle);
+			spriteSelect(SpriteDb.s_sapphire);
 			outputText("You decide to make a trip to the temple. However as soon as you enter the sacred ground, Sapphire screeches and takes flight, spear at the ready. Luckily, she calms down once she recognizes you, assuming a relaxed pose in the middle of the temple.");
 			outputText("\n\n\"<i>Well, hello there! Nice to see you again [name]. You're welcome here, as usual... So are you here to pray?");
 			if (flags[kFLAGS.SAPPHIRE_AFFECTION] > 99) outputText(" Or perhaps you're here for something more... mutually agreeable, instead?");
@@ -88,18 +98,19 @@ use namespace CoC;
 			outputText("\n\nTemple Repair progress: " + flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] + "");
 			menu();
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] >= 1) {
-				addButton(0, "Pray", PlayerPrayAtTemple).hint("Offer your prayer to one of the temple altar.");
-				addButton(1, "Repair", TempleAltairsRebuildMenu).hint("Do reparation to the temple.");
+				addButton(0, "Pray", PlayerPrayAtTemple).hint("Offer your prayer to one of the temple altars.");
+				addButton(1, "Repair", TempleAltairsRebuildMenu).hint("Restore the temple.");
 			}
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1) {
 				if (havingOrUsingBSwordOrExcalibur()) addButton(2, "Put Sword", puttingBSwordOrExcaliburOnAltair);
-				if (player.statusEffectv2(StatusEffects.TempleOfTheDivineTracker) == 2) addButton(2, "Take Sword", takingExcaliburFromAltair);
+				if (player.statusEffectv2(StatusEffects.TempleOfTheDivineTracker) == 2 || player.statusEffectv2(StatusEffects.TempleOfTheDivineTracker) == 3) addButton(2, "Take Sword", takingExcaliburFromAltair);
 				if (player.hasItem(consumables.P_PEARL, 1)) addButton(3, "Pearl", puttingPurePearlOnAltair);
 				if (player.statusEffectv3(StatusEffects.TempleOfTheDivineTracker) == 2) addButton(3, "Pearl", takingPurePearlFromAltair);
 			}
 			addButton(5, "Sapphire", sapphiremenu).hint("Have a chat with the gargoyle.");
-			if (flags[kFLAGS.ONYX_PATH] > 0) addButton(6, "" + flags[kFLAGS.ONYX_NAME] + "", krystalonyxmenu).hint("Have a sex with " + flags[kFLAGS.ONYX_NAME] + ".");
+			if (flags[kFLAGS.ONYX_PATH] > 0) addButton(6, "[onyx name]", krystalonyxmenu).hint("Have a sex with [onyx name].");
 			addButton(7, "Basement", templeBasement).hint("Visit the temple basement.");
+			if (flags[kFLAGS.FORGEFATHER_MOVED_TO_TEMPLE] == 1) addButton(8, "Workshop", SceneLib.forgefatherScene.workshopMainMenu);
 			addButton(14,"Leave", camp.returnToCampUseOneHour);
 		}
 
@@ -196,7 +207,7 @@ use namespace CoC;
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] >= 6) blessingPower += 0.1;
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] >= 8) blessingPower += 0.05;
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] >= 18) blessingPower += 0.05;
-			if (player.statusEffectv2(StatusEffects.TempleOfTheDivineTracker) == 2) blessingPower += 0.05;
+			if (player.statusEffectv2(StatusEffects.TempleOfTheDivineTracker) == 2 || player.statusEffectv2(StatusEffects.TempleOfTheDivineTracker) == 3) blessingPower += 0.05;
 			if (player.statusEffectv3(StatusEffects.TempleOfTheDivineTracker) == 2) blessingPower += 0.05;
 			player.createStatusEffect(StatusEffects.BlessingOfDivineMarae, 169, blessingPower, 0, 0);
 			if (player.HP < player.maxHP()) player.HP = player.maxHP();
@@ -238,7 +249,7 @@ use namespace CoC;
 		}
 		public function PlayerPrayAtTempleFeraAltair():void {
 			clearOutput();
-			outputText("You pray to the huntress patron Fera. As you word out your prayer, lewd fantasies of all kind flow into your mind. Fera delicious caress pleases you, healing your wounds and washing away your pure thoughts. You also feel the blessing of the deity empowering your “talents”.\n");
+			outputText("You pray to the huntress patron Fera. As you word out your prayer, lewd fantasies of all kind flow into your mind. Fera delicious caress pleases you, healing your wounds and washing away your pure thoughts. You also feel the blessing of the deity empowering your \"talents\".\n");
 			loosingMaraeBlessing();
 			loosingTaothBlessing();
 			loosingFenrirBlessing();
@@ -268,17 +279,17 @@ use namespace CoC;
 				addButton(0, "Altars", rebuildGodsAltairs).hint("Repair the altar.");
 				if ((flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] == 3 || flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] == 4) && flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1) {
 					if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 150) addButton(1, "Statue of Marae", rebuildStatueOfMarae).hint("Repair the statue.");
-					else addButtonDisabled(1, "Statue of Marae", "You not have enough stones.");
+					else addButtonDisabled(1, "Statue of Marae", "You not have enough stones. Required: 150");
 				}
 				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] >= 5 && flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] < 7) {
 					if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= 500) addButton(2, "Gargoyles", repairGargoylesOnTheWalls).hint("Repair some of the decorative gargoyles.");
-					else addButtonDisabled(2, "Gargoyles", "You not have enough stones.");
+					else addButtonDisabled(2, "Gargoyles", "You not have enough stones. Required: 500");
 				}
 				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] >= 7 && flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] < 17) {
 					if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= 50 && flags[kFLAGS.CAMP_CABIN_NAILS_RESOURCES] >= 10) addButton(3, "Prayer Bench", makeNewPrayerBenches).hint("Repair some of the temple banches.");
-					else addButtonDisabled(3, "Prayer Bench", "You not have enough wood or/and nails.");
+					else addButtonDisabled(3, "Prayer Bench", "You not have enough wood (50) or/and nails (10).");
 				}
-				addButton(13, "CheckProgress", currentStateOfTemple).hint("I think I must ask Lia for fancy tooltip here.");
+				addButton(13, "CheckProgress", currentStateOfTemple).hint("See how far the sculpture has progressed.");
 				addButton(14, "Back", templemainmenu);
 			}
 			else {
@@ -395,7 +406,7 @@ use namespace CoC;
 				if (flags[kFLAGS.ONYX_PATH] < 1) outputText(" While Sapphire is the last living stony guardian of the temple, this still gives off the illusion of a platoon of guardians watching faithfully over this divine place.");
 				if (player.isGargoyle()) outputText(" Your own pedestal stands right next to Sapphire's, allowing you to keep close to her when you need to rest (using your pedestal allows you to sleep with Sapphire if your relation is high enough).");
 				if (flags[kFLAGS.ONYX_PATH] > 0) {
-					outputText(" On the opposite side stands " + flags[kFLAGS.ONYX_NAME] + "'s pedestal. ");
+					outputText(" On the opposite side stands [onyx name]'s pedestal. ");
 					if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("She");
 					else outputText("He");
 					outputText(" is looking at you expectantly.");
@@ -428,7 +439,8 @@ use namespace CoC;
 		public function takingExcaliburFromAltair():void {
 			clearOutput();
 			outputText("You feel the power of the altar diminishing, however the weapon is stronger than ever and likely ready for its primary use, demon slaying.\n\n");
-			player.addStatusValue(StatusEffects.TempleOfTheDivineTracker,2,-1);
+			if (player.statusEffectv2(StatusEffects.TempleOfTheDivineTracker) == 3) player.addStatusValue(StatusEffects.TempleOfTheDivineTracker,2,-2);
+			else player.addStatusValue(StatusEffects.TempleOfTheDivineTracker,2,-1);
 			inventory.takeItem(weapons.EXCALIB, templemainmenu);
 		}
 		private function havingOrUsingBSwordOrExcalibur():Boolean {
@@ -455,14 +467,14 @@ use namespace CoC;
 		}
 		public function takingPurePearlFromAltair():void {
 			clearOutput();
-			outputText("You recover the pearl from the Altar the temple power dimming slightly.");
+			outputText("You recover the pearl from the Altar. The temple's power dimms slightly.");
 			player.addStatusValue(StatusEffects.TempleOfTheDivineTracker,3,-2);
 			inventory.takeItem(consumables.P_PEARL, templemainmenu);
 		}
 
 		public function sapphiremenu():void {
 			clearOutput()
-			spriteSelect(SpriteDb.s_gargoyle);
+			spriteSelect(SpriteDb.s_sapphire);
 			outputText("You admit that you were actually looking for her, a response which she seems happy about, as she casually sits next to you and starts conversing.\n\n");
 			outputText("\n\n\"<i>So [name] what did you want to talk about?</i>\"");
 			menu();
@@ -473,7 +485,7 @@ use namespace CoC;
 		}
 		public function TalkThisPlace():void {
 			clearOutput();
-			spriteSelect(SpriteDb.s_gargoyle);
+			spriteSelect(SpriteDb.s_sapphire);
 			outputText(" You admit to being curious and Sapphire is glad to tell you about the history of the building. She starts to ");
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] >= 1) {
 				outputText("explain again.\n\n");
@@ -492,9 +504,9 @@ use namespace CoC;
 		}
 		public function TalkHer():void {
 			clearOutput();
-			spriteSelect(SpriteDb.s_gargoyle);
+			spriteSelect(SpriteDb.s_sapphire);
 			if (flags[kFLAGS.SAPPHIRE_TALKS] == 2 || flags[kFLAGS.SAPPHIRE_TALKS] == 6) {
-				outputText("Now that some time has passed you ask her if she is ready to tell you more about the events she foreshadowed in your previous discussion.\n\n");
+				outputText("Now, that some time has passed, you ask her if she is ready to tell you more about the events she foreshadowed in your previous discussion.\n\n");
 				outputText("\"<i>It pains me to even think about the events of that day, the day the demons appeared. They poured into the cities below us like a tidal wave, devouring souls and corrupting everything in their path. Eventually they began climbing the mountain, and we knew they would be on our doorstep within hours. To prevent them from destroying this holy ground we devised a plan. No matter what the cost to us, the temple had to be protected. ");
 				outputText("As such one by one, we sacrificed ourselves in a ritual to create from us everlasting guardians. I was the last one to be put on the altar. They finished the ritual just as the demons started pouring in. Many desperate enchantments and prayers were put into the creation of each of us, hoping to create a combination by chance that would correctly dispatch the demons. The other gargoyles didn't receive the protections required to face the demons as I did, thus they were destroyed one by one. ");
 				outputText("Amidst the chaos, the altars were damaged extensively and rendered useless. As I kept killing more and more of them, they retreated. Satisfied with their dirty work, they just ran away, like the cowards they are, to prevent further casualties.</i>\"\n\n");
@@ -525,7 +537,7 @@ use namespace CoC;
 		}
 		public function TalkSex():void {
 			clearOutput();
-			spriteSelect(SpriteDb.s_gargoyle);
+			spriteSelect(SpriteDb.s_sapphire);
 			if (flags[kFLAGS.SAPPHIRE_SEX] == 1) {
 				outputText("Sapphire looks at you expectantly her tail agitated by the excitement of potential physical release.\n\n");
 				outputText("\"<i>Feeling antsy? How would you like us to do it then?");
@@ -561,7 +573,7 @@ use namespace CoC;
 
 		public function SapphireGargoyleDoubleTailfuck():void {
 			clearOutput();
-			spriteSelect(SpriteDb.s_gargoyle);
+			spriteSelect(SpriteDb.s_sapphire);
 			outputText("You check Sapphire’s tail then look at yours. An idea sparks in your mind as you tell Sapphire to get on all fours.\n\n");
 			outputText("\"<i>I don't know what’s on your mind but I'm very curious to try it now.</i>\"\n\n");
 			outputText("She complies and you go to her backside, positioning yourself to have your [ass] facing hers. You tell her to entwine her tail around yours, then insert her tip in your pussy. She gets the hint as you proceed to do the same with hers. Now, having both of your tail tips in each others pussies, you tell her to move forward and backward. She yelps in surprise as you do the same, both of your tails sliding in and out of each other's pussies at a decent rhythm. Gosh truth be told you are enjoying your tail just as much as your pussy right now. It’s like discovering you had a ");
@@ -578,21 +590,18 @@ use namespace CoC;
 		}
 		public function SapphireTripleTailOuroboros():void {
 			clearOutput();
-			spriteSelect(SpriteDb.s_gargoyle);
-			outputText("You think it over then remember about " + flags[kFLAGS.ONYX_NAME] + " being there too. The third gargoyle must be starving for sex. Unable to decide which one you want to fuck or get fucked by you propose the lot of you tail fuck each other, something to which your two stony mates are more then happy to agree. You all sit in a perfect triangle, positioning your tails appropriately and smiling in anticipation for a threesome that will go down in history.\n\n");
-			outputText("You begin by kissing Sapphire then exchanging with " + flags[kFLAGS.ONYX_NAME] + " the tree of you taking turns in order to feel each other's properly. You are not surprised to discover that out of the three of you " + flags[kFLAGS.ONYX_NAME] + " is the best kisser. Once you all are suitably aroused you playfully insert your tail in Sapphire’s pussy as she position hers over ");
+			spriteSelect(SpriteDb.s_sapphire);
+			outputText("You think it over then remember about [onyx name] being there too. The third gargoyle must be starving for sex. Unable to decide which one you want to fuck or get fucked by you propose the lot of you tail fuck each other, something to which your two stony mates are more then happy to agree. You all sit in a perfect triangle, positioning your tails appropriately and smiling in anticipation for a threesome that will go down in history.\n\n");
+			outputText("You begin by kissing Sapphire then exchanging with [onyx name] the tree of you taking turns in order to feel each other's properly. You are not surprised to discover that out of the three of you [onyx name] is the best kisser. Once you all are suitably aroused you playfully insert your tail in Sapphire’s pussy as she position hers over ");
 			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("Krystal’s waiting cunt");
 			else outputText("Onyx’s rock hard dick");
-			outputText(". Not to be left unstimulated you welcome " + flags[kFLAGS.ONYX_NAME] + "’s tail ");
+			outputText(". Not to be left unstimulated you welcome [onyx name]’s tail ");
 			if (player.gender == 2 || player.gender == 3) outputText("in your ready snatch");
 			if (player.gender == 3) outputText(" and ");
 			if (player.gender == 1 || player.gender == 3) outputText("around your throbbing [cock]");
 			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText(". Krystal giggle");
 			else outputText(". Onyx chuckle");
-			outputText(" at the anticipation of ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("his");
-			outputText(" privates being played with.\n\n\"<i>Oh [name] this is gunna be so much fun!</i>\"\n\n");
+			outputText(" at the anticipation of [onyx eir] privates being played with.\n\n\"<i>Oh [name] this is gunna be so much fun!</i>\"\n\n");
 			outputText("You count to ten and the three of you begin tail teasing each other, making a chorus of moans sapphire tigh vagina gripping your tail.\n\n");
 			outputText("\"<i>Oh my gosh [name]!!... this feeling is aaahh...Aaaaaaahhhn!!! Fuck meee fuck my brain out!</i>\"\n\n");
 			outputText("This was an understatement, Sapphire’s cunt is pretty much eating your tail and although it does not produce any form of lubrication, her rough stone skin slides perfectly against yours, the friction creating heat ");
@@ -600,9 +609,7 @@ use namespace CoC;
 			outputText("inside her vagina like a wet stone and making you gasp at the caressing of your tail tip. Gosh your tail is feeling so good, you wouldn’t even mind it if the rest of your body was left unattended!");
 			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText(" Krystal seems to be locked in a blissful dreamy expression of her own");
 			else outputText(" Onyx seems to enjoy the feeling of his cock");
-			outputText(" as ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("she");
-			else outputText("he");
+			outputText(" as [onyx ey]");
 			if (player.gender == 1 || player.gender == 3) outputText(" jerks");
 			if (player.gender == 3) outputText(" and");
 			if (player.gender == 2 || player.gender == 3) outputText(" penetrates");
@@ -610,17 +617,14 @@ use namespace CoC;
 			if (player.gender == 2 || player.gender == 3) outputText("pussy is alight with pleasure");
 			if (player.gender == 3) outputText(" and your ");
 			if (player.gender == 1 || player.gender == 3) {
-				outputText("rock hard cock is pulsing from ");
-				if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-				else outputText("his");
-				outputText(" ministration");
+				outputText("rock hard cock is pulsing from [onyx eir] ministration");
 			}
 			outputText(" making you moan in complete bliss. Truth be told, you don’t know how long you will hold out until you reach your peak and lose control. Your tail is not any less sensible than your ");
 			if (player.gender == 2 || player.gender == 3) outputText("pussy");
 			if (player.gender == 3) outputText("or your ");
 			if (player.gender == 1 || player.gender == 3) outputText("cock");
 			outputText(", it quakes in Sapphire hot cunt from the constant pleasure of penetration and touch, squirming and feeling for Sapphire every hot spots just like a cock, only increasing Sapphire own delight. The tempo accelerate as the sound of rock grinding against rock and heavy panting assisted with moans fills the temple. Soon the three of you lock in a silent scream as you all orgasm together, ");
-			if (!player.isGargoyle()) outputText("Sapphire and " + flags[kFLAGS.ONYX_NAME] + " ");
+			if (!player.isGargoyle()) outputText("Sapphire and [onyx name] ");
 			outputText("freezing in the characteristic immobilism related to a gargoyle's stone form as you all lose consciousness from the intense fuck. ");
 			if (player.isGargoyle()) {
 				outputText("Anybody finding the three of you right now would think the artists of the temple were serious perverts carving a trio of statues fucking");
@@ -629,13 +633,13 @@ use namespace CoC;
 			}
 			else outputText("You regain your sense faster than your two stony friends. Mainly because you can’t petrify from pleasure like they do.\n\n");
 			if (player.isGargoyle()) {
-				outputText("The three of you come to way later, somewhat aware of having frozen for several hours. You proceed to break out from the other two as they do the same, still smiling after this incident. Sapphire and " + flags[kFLAGS.ONYX_NAME] + " nod as you propose that you should have that kind of bonding more often.\n\n");
+				outputText("The three of you come to way later, somewhat aware of having frozen for several hours. You proceed to break out from the other two as they do the same, still smiling after this incident. Sapphire and [onyx name] nod as you propose that you should have that kind of bonding more often.\n\n");
 				sapphireAffection(5);
 				player.sexReward("Default","Default",true,false);
 				doNext(camp.returnToCampUseFourHours);
 			}
 			else {
-				outputText("You proceed to break out from the other two still locked in their stone form. Sapphire and " + flags[kFLAGS.ONYX_NAME] + " are still frozen in time but you guess from their looks that they will want to do this again.\n\n");
+				outputText("You proceed to break out from the other two still locked in their stone form. Sapphire and [onyx name] are still frozen in time but you guess from their looks that they will want to do this again.\n\n");
 				sapphireAffection(5);
 				player.sexReward("Default","Default",true,false);
 				doNext(camp.returnToCampUseOneHour);
@@ -643,7 +647,7 @@ use namespace CoC;
 		}
 		public function SapphireMutualMasturbation():void {
 			clearOutput();
-			spriteSelect(SpriteDb.s_gargoyle);
+			spriteSelect(SpriteDb.s_sapphire);
 			outputText("Unable to decide on a position you decide to help the temple guardian blow some steam by fingering her. The both of you sit down next to each other and you open the games by kissing Sapphire.");
 			if (player.isGargoyle()) outputText(" While neither of you actually have Saliva the feeling of her stone rugged tongue against yours is quite good.");
 			else outputText(" Her mouth lacking fluids is a weird experience at first but once her tongue is slick with your saliva it starts to feel like anyone else’s, albeit her tongue is slightly longer.");
@@ -670,7 +674,7 @@ use namespace CoC;
 		}
 		public function SapphireFuckHer():void {
 			clearOutput();
-			spriteSelect(SpriteDb.s_gargoyle);
+			spriteSelect(SpriteDb.s_sapphire);
 			outputText("Her pussy lips shine polished gems and you can’t stop your cock from hardening in prospect of the gargoyle waiting folds.\n\n");
 			outputText("You begin to gently pull sapphire into a kiss as you lay her over the nearest altar. Sapphire tongue is actually quite skilled for someone who barely discovered the joy of sex. You entwine and seek each other's out for a few minute caressing the gargoyle smooth stone skin with your hand. Sapphire gasp as your fingers trace the outline of her perfectly sculpted curves.\n\n");
 			outputText("\"<i>Ahhhn [name] I...mmm</i>\"\n\n");
@@ -697,176 +701,52 @@ use namespace CoC;
 
 		public function krystalonyxmenu():void {
 			clearOutput();
-			spriteSelect(SpriteDb.s_gargoyle);
-			outputText("Waving over at " + flags[kFLAGS.ONYX_NAME] + ", you ask ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("him");
-			outputText(" if ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("she");
-			else outputText("he");
-			outputText(" would feel like indulging in some quality time with you. ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("Her");
-			else outputText("His");
-			outputText(" eternal watch must get boring sometimes. ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("She");
-			else outputText("He");
-			outputText(" fawns over you, clearly showing ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("his");
-			outputText(" interest.\n\n");
-			outputText("\n\n\"<i>You're my savior and hero! How could I refuse such a request?");
+			spriteSelect(SpriteDb.s_sapphire);
+			outputText("Waving over at [onyx name], you ask [onyx em] if [onyx ey] would feel like indulging in some quality time with you. [onyx Eir] eternal watch must get boring sometimes. [onyx Ey] fawns over you, clearly showing [onyx eir] interest.\n\n");
+			outputText("\"<i>You're my savior and hero! How could I refuse such a request?");
 			if (player.isGargoyle()) outputText(" There’s even a water source nearby to use as lube if necessary.");
 			outputText("</i>\"\n\n");
-			outputText("Being sure of what you both want, you proceed to a private room in the temple. You undress under the lusty gaze of " + flags[kFLAGS.ONYX_NAME] + ", who seems to devour you with ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("his");
-			outputText(" eyes, glowing with an intense desire. Once you're done, " + flags[kFLAGS.ONYX_NAME] + " slowly proceeds to embrace you. Damn, ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("his");
-			outputText(" stone body is hot, and you can’t help but wonder if it's because ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("she");
-			else outputText("he");
-			outputText("'s horny, or if it's the sunshine under which ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("she");
-			else outputText("he");
-			outputText(" basks all day long. This only arouses you more, and ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("she");
-			else outputText("he");
-			outputText(" slowly proceeds to ");
-			if ((flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) && player.breastRows[0].breastRating >= 1) outputText("mash her breasts with yours and gently push you");
-			if ((flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) && player.breastRows[0].breastRating == 0) outputText("push her generous breasts on your chest and gently move you");
-			if (flags[kFLAGS.ONYX_GENDER] == 3) outputText("gently push you");
-			outputText(" to the stone floor as ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("she");
-			else outputText("he");
-			outputText(" lowers a hand to your ");
-			if (player.gender == 2 || player.gender == 3) outputText("[cunt]");
-			if (player.gender == 3) outputText(" and ");
-			if (player.gender == 1 || player.gender == 3) outputText("[cock]");
-			outputText(".\n\n");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("She");
-			else outputText("He");
-			outputText(" gently and slowly ");
-			if (player.hasVagina()) outputText("fingers");
-			else outputText("strokes");
-			outputText(" you until you're quite aroused and nearly as hot as ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("she");
-			else outputText("he");
-			outputText(" is, fawning over you for some time, wanting you to feel ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("his");
-			outputText(" appreciation and affection while getting you ready for what comes next.\n\n");
-			if (player.lust + 50 < player.maxLust()) player.lust += 50;
-			else player.lust = player.maxLust();
+			outputText("Being sure of what you both want, you proceed to a private room in the temple. You undress under the lusty gaze of [onyx name], who seems to devour you with [onyx eir] eyes, glowing with an intense desire. Once you're done, [onyx name] slowly proceeds to embrace you. Damn, [onyx eir] stone body is hot, and you can’t help but wonder if it's because [onyx ey]'s horny, or if it's the sunshine under which [onyx ey] basks all day long. This only arouses you more, and [onyx ey] slowly proceeds to ");
+			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2)
+                outputText(player.breastRows[0].breastRating > 0 ? "mash her breasts with yours and gently push you" : "push her generous breasts on your chest and gently move you");
+			else outputText("gently push you");
+			outputText(" to the stone floor as [onyx ey] lowers a hand to your " + (player.hasCock() ? "[cock]" : "[cunt]"));
+			outputText(".\n\n[onyx Ey] gently and slowly " + (player.hasCock() ? "strokes" : "fingers") + " you until you're quite aroused and nearly as hot as [onyx ey] is, fawning over you for some time, wanting you to feel [onyx eir] appreciation and affection while getting you ready for what comes next.\n\n");
+            player.dynStats("lus", 50);
+            //menu
 			menu();
-			if (player.hasVagina()) addButton(0, "Tail Fuck", KrystalOnyxTailFuck).hint("Let's put her/his lovely tail to good use.");
-			if (player.hasVagina() && (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2)) addButton(1, "Tribadism", KrystalTribadism).hint("Why not grind yourself on that lovely stone pussy.");
-			addButton(2, "69", KrystalOnyx69).hint("You wonder what her pussy/his cock tastes like, and if she/he will return the favor.");
-			if (player.hasVagina() && (flags[kFLAGS.ONYX_GENDER] == 2 || flags[kFLAGS.ONYX_GENDER] == 3)) addButton(3, "Get fucked", KrystalOnyxGetFucked).hint("You’ve been eyeing that rock hard cock for a while.");
-			if (player.hasCock() && (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2)) addButton(4, "Fuck Her", KrystalFuckHer).hint("How about a feel of that rocky hole?");
+			if (player.hasVagina()) addButton(0, "Tail Fuck", KrystalOnyxTailFuck).hint("Let's put [onyx eir] lovely tail to good use.");
+            else addButtonDisabled(0, "Tail Fuck", "Req. vagina");
+			addButton(2, "69", KrystalOnyx69).hint("You wonder what [onyx eir] " + (flags[kFLAGS.ONYX_GENDER] == 2 || flags[kFLAGS.ONYX_GENDER] == 3 ? "cock" : "pussy") +  "tastes like, and if [onyx ey] will return the favor.");
+            if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) {
+                if (player.hasVagina()) addButton(1, "Tribadism", KrystalTribadism).hint("Why not grind yourself on that lovely stone pussy.");
+                else addButtonDisabled(1, "Tribadism", "Req. vagina");
+                if (player.hasCock()) addButton(4, "Fuck Her", KrystalFuckHer).hint("How about a feel of that rocky hole?");
+                else addButtonDisabled(4, "Fuck Her", "Req. cock");
+            }
+            if (flags[kFLAGS.ONYX_GENDER] == 3 || flags[kFLAGS.ONYX_GENDER] == 2) {
+			    if (player.hasVagina()) addButton(3, "Get fucked", KrystalOnyxGetFucked).hint("You’ve been eyeing that rock hard cock for a while.");
+                else addButtonDisabled(3, "Get fucked", "Req. vagina");
+            }
 			addButton(14, "Back", templemainmenu);
 		}
 
 		public function KrystalOnyxTailFuck():void {
 			clearOutput();
-			spriteSelect(SpriteDb.s_gargoyle);
-			outputText("Lying under ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("him");
-			outputText(" you ask if ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("she");
-			else outputText("he");
-			outputText(" would like to penetrate you with that lovely tail of ");
+			spriteSelect(SpriteDb.s_sapphire);
+			outputText("Lying under [onyx em] you ask if [onyx ey] would like to penetrate you with that lovely tail of ");
 			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("hers. She");
 			else outputText("his. He");
-			outputText(" blushes for a moment, but agrees and slowly retracts ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("his");
-			outputText(" spikes until ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("his");
-			outputText(" tail is smooth and ready. ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("She");
-			else outputText("He");
-			outputText(" lies on you, ");
+			outputText(" blushes for a moment, but agrees and slowly retracts [onyx eir] spikes until [onyx eir] tail is smooth and ready. [onyx Ey] lies on you, ");
 			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her stone breasts mashing against your chest as she");
 			else outputText("His rock hard cock across your chest as he");
-			outputText(" looks behind you both and slowly moves ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("his");
-			outputText(" tail toward your [cunt]. ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("She");
-			else outputText("He");
-			outputText(" tickles your entrance for a moment with ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("his");
-			outputText(" tip, giving you a cute smile and making you gasp as ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("she");
-			else outputText("he");
-			outputText(" slowly inserts ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("his");
-			outputText(" tail into your snatch. You grow more aroused as ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("she");
-			else outputText("he");
-			outputText(" proceeds deeper and deeper until ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("she");
-			else outputText("he");
-			outputText(" reaches your cervix. You're filled so perfectly by ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("his");
-			outputText(" tail, despite the fact ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("she");
-			else outputText("he");
-			outputText(" is not moving the warmth and girth of ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("his");
-			outputText(" stone tail alone is enough to make you gasp.\n\n");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("She");
-			else outputText("He");
-			outputText(" starts to slide ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("his");
-			outputText(" tail in and out of you, taking ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("his");
-			outputText(" time to tickle every sensitive spot inside your moist depths. ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("She");
-			else outputText("He");
-			outputText(" seems to enjoy this as well since ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("she");
-			else outputText("he");
-			outputText(" moans lustily, and you assume that it's very likely in ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("his");
-			outputText(" former form ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("she");
-			else outputText("he");
-			outputText(" had developed a fetish for tail fucking to the point ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("his");
-			outputText(" tail is as responsive as a man's penis.\n\nSince ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("she");
-			else outputText("he");
-			outputText(" seems to be getting off on ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("his");
-			outputText(" own, you allow yourself to focus your mind on your own pleasure as ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("she");
-			else outputText("he");
-			outputText(" slowly but certainly brings you to the edge. A few seconds later you are both orgasming in perfect synchronization as you squirt all along ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("his");
-			outputText(" tail length. With a content smile you doze off next to ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("him");
-			outputText(" in a scene of lovemaking fit for a master artist to paint in a fresco.\n\nYou wake up a while later and redress, heading back to camp.\n\n");
+			outputText(" looks behind you both and slowly moves [onyx eir] tail toward your [cunt]. [onyx Ey] tickles your entrance for a moment with [onyx eir] tip, giving you a cute smile and making you gasp as [onyx ey] slowly inserts [onyx eir] tail into your snatch. You grow more aroused as [onyx ey] proceeds deeper and deeper until [onyx ey] reaches your cervix. You're filled so perfectly by [onyx eir] tail, despite the fact [onyx ey] is not moving the warmth and girth of [onyx eir] stone tail alone is enough to make you gasp.\n\n[onyx Ey] starts to slide [onyx eir] tail in and out of you, taking [onyx eir] time to tickle every sensitive spot inside your moist depths. [onyx Ey] seems to enjoy this as well since [onyx ey] moans lustily, and you assume that it's very likely in [onyx eir] former form [onyx ey] had developed a fetish for tail fucking to the point [onyx eir] tail is as responsive as a man's penis.\n\nSince [onyx ey] seems to be getting off on [onyx eir] own, you allow yourself to focus your mind on your own pleasure as [onyx ey] slowly but certainly brings you to the edge. A few seconds later you are both orgasming in perfect synchronization as you squirt all along [onyx eir] tail length. With a content smile you doze off next to [onyx em] in a scene of lovemaking fit for a master artist to paint in a fresco.\n\nYou wake up a while later and redress, heading back to camp.\n\n");
 			player.sexReward("Default","Default",true,false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function KrystalTribadism():void {
 			clearOutput();
-			spriteSelect(SpriteDb.s_gargoyle);
+			spriteSelect(SpriteDb.s_sapphire);
 			outputText("Krystal's pussy looks like it could use some attention and so does yours. You slowly push the gargoyle down on her back as you begin to grind your pussy against her nether lips. With the lubrication of your feminine juices, her smooth stone pussy soon becomes as slippery as wet ice, and grinding yourself on it is even easier than it would be with a woman made of flesh. ");
 			outputText("The both of you moan like cheap whores as your clits engorge from the repeated motions. You begin to grope Krystal's breasts, which are surprisingly malleable despite her stone skin, making her gasp in pleasure as she grabs your [breasts]. Seems she enjoys it just like any normal woman would, despite her stony body.\n\n");
 			outputText("Soon you climax ");
@@ -877,86 +757,53 @@ use namespace CoC;
 		}
 		public function KrystalOnyx69():void {
 			clearOutput();
-			spriteSelect(SpriteDb.s_gargoyle);
+			spriteSelect(SpriteDb.s_sapphire);
 			outputText("Your eyes zero in on ");
 			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("Krystal's smoothly shaped pussy");
 			else outputText("Onyx's perfectly carved cock");
-			outputText(" and you start to ponder what a gargoyle tastes like. Determined to get the answer to this very important question, you tell " + flags[kFLAGS.ONYX_NAME] + " to lay on ");
+			outputText(" and you start to ponder what a gargoyle tastes like. Determined to get the answer to this very important question, you tell [onyx name] to lay on ");
 			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her back. She");
 			else outputText("his back. He");
-			outputText(" is quick to comply and you take your time to position your genitals right above ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("his");
-			outputText(" face and ");
+			outputText(" is quick to comply and you take your time to position your genitals right above [onyx eir] face and ");
 			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("give her pussy a quick lick. She");
 			else outputText("give his glans a quick lick. He");
 			outputText(" moans in appreciation and responds by firmly grabbing your ass ");
 			if (player.hasVagina()) {
-				outputText("and filling your [cunt] with ");
-				if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-				else outputText("his");
-				outputText(" stony tongue");
+				outputText("and filling your [cunt] with [onyx eir] stony tongue");
 			}
 			if (player.hasCock()) outputText("and suckling on your cockhead.");
-			outputText(" You moan in delight and proceed to reward ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("his");
-			outputText(" effort with");
+			outputText(" You moan in delight and proceed to reward [onyx eir] effort with");
 			if (player.hasVagina()) outputText(" pussy juices.");
-			if (player.hasCock()) outputText(" precum.");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("She");
-			else outputText("He");
-			outputText(" strangely doesn't have a bad taste, albeit very different from a creature of flesh and blood.\n\n");
+			if (player.hasCock()) outputText(" precum.[onyx Ey] strangely doesn't have a bad taste, albeit very different from a creature of flesh and blood.\n\n");
 			if (player.isGargoyle()) {
-				outputText("You pleasure each other for several minutes, both of your stone tails flailing wildly from the impending orgasm. Your moans get louder and louder until you finally freeze in place at your shared climax, prolonging this perfect moment for what looks like a passionate eternity. When you come to your mouth is where you left it and you decide to pull it off " + flags[kFLAGS.ONYX_NAME] + "'s genitals. " + flags[kFLAGS.ONYX_NAME] + " is still petrified in pleasure, ");
+				outputText("You pleasure each other for several minutes, both of your stone tails flailing wildly from the impending orgasm. Your moans get louder and louder until you finally freeze in place at your shared climax, prolonging this perfect moment for what looks like a passionate eternity. When you come to your mouth is where you left it and you decide to pull it off [onyx name]'s genitals. [onyx name] is still petrified in pleasure, ");
 				if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("she");
 				else outputText("he");
 				outputText(" likely will come to later.");
 			}
 			else {
 				outputText("You pleasure each other for several minutes as you try to match your tempo with that of your stony partner's. Soon you orgasm ");
-				if (player.hasCock()) outputText("blowing your load in " + flags[kFLAGS.ONYX_NAME] + "'s waiting mouth");
-				if (player.hasVagina()) outputText("" + flags[kFLAGS.ONYX_NAME] + " drinking the flood of your juices and licking your pussy clean");
+				if (player.hasCock()) outputText("blowing your load in [onyx name]'s waiting mouth");
+				if (player.hasVagina()) outputText("[onyx name] drinking the flood of your juices and licking your pussy clean");
 			}
-			outputText(" You doze off tired and wake up an hour later, your mouth still where you left it. You resolve to pull it off " + flags[kFLAGS.ONYX_NAME] + " who, still petrified in pleasure, will likely come to later.\n\n");
+			outputText(" You doze off tired and wake up an hour later, your mouth still where you left it. You resolve to pull it off [onyx name] who, still petrified in pleasure, will likely come to later.\n\n");
 			outputText("For now you proceed to redress and head back to camp.\n\n");
 			player.sexReward("Default","Default",true,false);
 			doNext(camp.returnToCampUseOneHour);
 		}
 		public function KrystalOnyxGetFucked():void {
 			clearOutput();
-			spriteSelect(SpriteDb.s_gargoyle);
-			outputText("The moment you made " + flags[kFLAGS.ONYX_NAME] + "'s perfectly defined shaft you knew you would use it! You begin to slide your hand against ");
-			if (flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("his");
-			outputText(" perfect pillar of maleness in order to wake it up. " + flags[kFLAGS.ONYX_NAME] + "'s reaction is immediate as ");
-			if (flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("his");
-			outputText(" cock grows erect within seconds, as hard as diamond and ready for your use");
+			spriteSelect(SpriteDb.s_sapphire);
+			outputText("The moment you made [onyx name]'s perfectly defined shaft you knew you would use it! You begin to slide your hand against [onyx ey] perfect pillar of maleness in order to wake it up. [onyx name]'s reaction is immediate as [onyx ey] cock grows erect within seconds, as hard as diamond and ready for your use");
 			if (!player.isGargoyle()) outputText(". Well not so ready yet... there's still the need for lubrication");
-			outputText(". You lower your head and proceed to suck on " + flags[kFLAGS.ONYX_NAME] + "'s perfect cock");
+			outputText(". You lower your head and proceed to suck on [onyx name]'s perfect cock");
 			if (!player.isGargoyle()) outputText(", liberally coating the entire length with your saliva");
-			outputText(". " + flags[kFLAGS.ONYX_NAME] + " shivers in delight at your expert cocksucking but you’re not done yet. You move yourself into position and slowly begin to insert the hard tool inside your [cunt] ");
+			outputText(". [onyx name] shivers in delight at your expert cocksucking but you’re not done yet. You move yourself into position and slowly begin to insert the hard tool inside your [cunt] ");
 			if (player.isGargoyle()) {
-				outputText(" moaning in delight at the perfect grinding of ");
-				if (flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-				else outputText("his");
-				outputText(" perfectly shaped stone dick in your stone pussy wich begins to heat up from the friction");
+				outputText(" moaning in delight at the perfect grinding of [onyx eir] perfectly shaped stone dick in your stone pussy wich begins to heat up from the friction");
 			}
 			else outputText("gasping as the cold hard stone enters you");
-			outputText(".\n\nIt’s obvious " + flags[kFLAGS.ONYX_NAME] + " had a lot of experience using a cock before, likely from ");
-			if (flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("his");
-			outputText(" past life as the Obsidian Gargoyle. ");
-			if (flags[kFLAGS.ONYX_GENDER] == 2) outputText("Her");
-			else outputText("His");
-			outputText(" talent at fucking rivals that of the demons, and soon you find yourself at the mercy of ");
-			if (flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("his");
-			outputText(" perfect gargoyle cock. ");
-			if (flags[kFLAGS.ONYX_GENDER] == 2) outputText("She");
-			else outputText("He");
-			outputText(" pushes you on your back and takes charge, fucking your pussy so well your eyes cross and your tongue falls out of your mouth as you pant in lust.");
+			outputText(".\n\nIt’s obvious [onyx name] had a lot of experience using a cock before, likely from [onyx ey] past life as the Obsidian Gargoyle. [onyx Eir] talent at fucking rivals that of the demons, and soon you find yourself at the mercy of [onyx ey] perfect gargoyle cock. [onyx Ey] pushes you on your back and takes charge, fucking your pussy so well your eyes cross and your tongue falls out of your mouth as you pant in lust.");
 			if (player.breastRows[0].breastRating >= 1) {
 				outputText(" You barely register ");
 				if (flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
@@ -965,44 +812,17 @@ use namespace CoC;
 			}
 			outputText("\n\n");
 			if (player.isGargoyle()) {
-				outputText("Soon ");
-				if (flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-				else outputText("his");
-				outputText(" skill proves to much for you, as you lose it entirely to pleasure. Your mind regressing to that of an animal in heat, reaching nirvana several times over, screeching your bliss to the heavens. Your mouth gapes wide open as " + flags[kFLAGS.ONYX_NAME] + " reaches ");
-				if (flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-				else outputText("his");
-				outputText(" peak, the both of you petrifying in a silent orgasmic scream. You stay there under ");
+				outputText("Soon [onyx eir] skill proves to much for you, as you lose it entirely to pleasure. Your mind regressing to that of an animal in heat, reaching nirvana several times over, screeching your bliss to the heavens. Your mouth gapes wide open as [onyx name] reaches [onyx eir] peak, the both of you petrifying in a silent orgasmic scream. You stay there under ");
 				if (flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
 				else outputText("him");
-				outputText(" for hours, untouched by time, until you recover mobility then push ");
-				if (flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-				else outputText("his");
-				outputText(" still frozen form off you. Wow, what a fuck! If you didn’t know any better, you think you might get addicted to ");
-				if (flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-				else outputText("his");
-				outputText(" dick.\n\n");
+				outputText(" for hours, untouched by time, until you recover mobility then push [onyx eir] still frozen form off you. Wow, what a fuck! If you didn’t know any better, you think you might get addicted to [onyx eir] dick.\n\n");
 				outputText("You head back to camp, giving the unconscious gargoyle a parting kiss.\n\n");
 			}
 			else {
-				outputText("Soon ");
-				if (flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-				else outputText("his");
-				outputText(" skill proves to much for you, as you lose it entirely to pleasure. Your mind regressing to that of an animal in heat, reaching nirvana several times over, you scream out your bliss, splattering Krystal's/Onyx's cock with a constant waterfall of girl cum which only serves to accelerate and ease ");
-				if (flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-				else outputText("his");
-				outputText(" pumping. You are still drooling on the ground as " + flags[kFLAGS.ONYX_NAME] + " reaches ");
-				if (flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-				else outputText("his");
-				outputText(" peak, petrifying in a silent orgasmic scream. You stay there under ");
+				outputText("Soon [onyx eir] skill proves to much for you, as you lose it entirely to pleasure. Your mind regressing to that of an animal in heat, reaching nirvana several times over, you scream out your bliss, splattering Krystal's/Onyx's cock with a constant waterfall of girl cum which only serves to accelerate and ease [onyx eir] pumping. You are still drooling on the ground as [onyx name] reaches [onyx eir] peak, petrifying in a silent orgasmic scream. You stay there under ");
 				if (flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
 				else outputText("him");
-				outputText(" for several minutes as you calm down and recover your senses, then push ");
-				if (flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-				else outputText("his");
-				outputText(" still frozen form off of you. Wow, what a fuck! If you didn’t know any better, you think you might get addicted to ");
-				if (flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-				else outputText("his");
-				outputText(" dick.\n\n");
+				outputText(" for several minutes as you calm down and recover your senses, then push [onyx eir] still frozen form off of you. Wow, what a fuck! If you didn’t know any better, you think you might get addicted to [onyx eir] dick.\n\n");
 				outputText("You head back to camp, giving the unconscious gargoyle a parting kiss.\n\n");
 			}
 			player.sexReward("Default","Default",true,false);
@@ -1010,7 +830,7 @@ use namespace CoC;
 		}
 		public function KrystalFuckHer():void {
 			clearOutput();
-			spriteSelect(SpriteDb.s_gargoyle);
+			spriteSelect(SpriteDb.s_sapphire);
 			outputText("Krystal sure has a lovely body, you can’t deny that. Her breasts are perfectly shaped, her face could make any man fall for her and that pussy looks so inviting it would be impossible to say no. You slowly push Krystal to the ground ");
 			if (player.isGargoyle()) {
 				outputText("readying your [cock] for the smoking hot gargoyle ");
@@ -1040,6 +860,7 @@ use namespace CoC;
 			clearOutput();
 			if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] == 2) {
 				outputText("You wander back into the Temple basement atelier.");
+				
 				menu();
 				addButton(0, "Statue", currentStateOfStatue).hint("Check on the statue.");
 				addButton(1, "Strange Book", strangeBookOfGolems).hint("Examine the strange book.");
@@ -1047,12 +868,12 @@ use namespace CoC;
 				addButton(4, "Back", templemainmenu);
 			}
 			if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] == 1) {
-				outputText("As you wander down into the basement of the temple you find what looks like an old abandoned Atelier. Down there are two unfinished statues of what looks like a gargoyle. Either could be carved in any way you wish.\n\n");
+				outputText("As you wander down into the basement of the temple you find what looks like an old abandoned Atelier. Down there is a plinth, surrounded by various depictions of what looks like gargoyles. One could follow their examples and create a gargoyle of their own.\n\n");
 				flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE]++;
-				outputText("There are two statues, one looks to be made of alabaster and the other of marble. You're pretty much sure that alabaster would conduct and resist magic easier, although it is less resistant to physical blows, while one made out of marble would be a way stronger material for delivering strikes.");
+				outputText("There is a plinth, surrounded by what looks to be depictions of various gargoyles, of all materials and forms. You're pretty sure that using these as a refernce, you could craft a gargoyle statue of your own, albeit of raw stone.");
 				menu();
-				addButton(0, "Marble", chooseToWorkOnMarbleStatue);
-				addButton(1, "Alabaster", chooseToWorkOnAlabasterStatue);
+				addButton(0, "Begin", chooseToWorkOnStoneStatue);
+				addButton(4, "Back", templemainmenu);
 			}
 		}
 
@@ -1119,34 +940,13 @@ use namespace CoC;
 			clearOutput();
 			outputText("You conduct the ritual according to the book, carrying the statue to the altar and mixing your own blood with the ingredients as to carefully bind the new gargoyle to you, in case it’s soul is unstable. You draw the required arcane circles around the statue under the gaze of Sapphire. Once done, you place the Black Soul Gem on the altar and chant the arcane words.\n\n");
 			outputText("\"<i>Shira Khrim Almisry Ohm Ak Tar Marae Kann Tharr Shul Elysro An Siryr Ahn Ekatyr Evenar Sethe Omaris!</i>\"\n\n");
-			outputText("As you chant the last word, the gem seems to be assimilated directly into the "+(flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1 ? "alabaster":"marble")+" body, disappearing without a trace. The statue's eyes start to dimly glow with a pale purple light as the new gargoyle awakens with a surprised expression. \"<i>What happened...? I was dead, finally destroyed by your hands and at rest. But now I’m alive again. My thoughts free of the constant plague of sexual desires, and in a new body. Am I to be given a second chance?</i>\"\n\n");
+			outputText("As you chant the last word, the gem seems to be assimilated directly into the "+(Forgefather.material)+" body, disappearing without a trace. The statue's eyes start to dimly glow with a pale purple light as the new gargoyle awakens with a surprised expression. \"<i>What happened...? I was dead, finally destroyed by your hands and at rest. But now I’m alive again. My thoughts free of the constant plague of sexual desires, and in a new body. Am I to be given a second chance?</i>\"\n\n");
 			outputText("You start by asking the gargoyle for its name, not desiring to force it into the role of a slave again.\n\n");
 			outputText("\"<i>My name?... While I used to be one soul, I am now many. Since I'm a living statue and I’m closer to a ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("Female");
-			if (flags[kFLAGS.ONYX_GENDER] == 3) outputText("Male");
-			outputText(" being, I guess I’ll name myself ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) {
-				outputText("Krystal");
-				flags[kFLAGS.ONYX_NAME] = "Krystal";
-			}
-			else {
-				outputText("Onyx");
-				flags[kFLAGS.ONYX_NAME] = "Onyx";
-			}
-			outputText(". Are you going to be my master from now on?</i>\"\n\n");
-			outputText("You have no intention of being such a thing, and you clearly state to " + flags[kFLAGS.ONYX_NAME] + " that the only order you'll ever give ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("him");
-			outputText(" is to help Sapphire guard this temple from potential corrupted influences such as demons and minotaurs. For the rest of ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
-			else outputText("his");
-			outputText(" time, ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("she");
-			else outputText("he");
-			outputText(" is officially free to act and live as ");
-			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("she");
-			else outputText("he");
-			outputText(" wishes, without the constraints of obedience to a master. " + flags[kFLAGS.ONYX_NAME] + "'s face would shed tears if it could, after living for years as a slave to a demon master, the freedom you offer the gargoyle is something it only dared to dream of.\n\n");
+			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("female");
+			if (flags[kFLAGS.ONYX_GENDER] == 3) outputText("male");
+			outputText(" being, I guess I’ll name myself [onyx name]. Are you going to be my master from now on?</i>\"\n\n");
+			outputText("You have no intention of being such a thing, and you clearly state to [onyx name] that the only order you'll ever give [onyx em] is to help Sapphire guard this temple from potential corrupted influences such as demons and minotaurs. For the rest of [onyx eir] time, [onyx ey] is officially free to act and live as [onyx ey] wishes, without the constraints of obedience to a master. [onyx name]'s face would shed tears if it could, after living for years as a slave to a demon master, the freedom you offer the gargoyle is something it only dared to dream of.\n\n");
 			outputText("\"<i>If that's the condition, then I will do as you ask. Thank you so much for everything, and should you ever need anything special, I will be here in the temple for you. It feels so good to finally be able to make my own choices again.</i>\"\n\n");
 			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("She gives you an affectionate kiss on the cheek, surprising you, then flies to perch on a nearby pedestal and begins her watch.");
 			else outputText("He warmly hugs you to show his appreciation, then flies to perch on a nearby pedestal and begins his watch.");
@@ -1159,127 +959,124 @@ use namespace CoC;
 		public function currentStateOfStatue():void {
 			clearOutput();
 			outputText("This statue looks like ");
-			if (flags[kFLAGS.GARGOYLE_BODY_SCULPTING_PROGRESS] >= 11) outputText("a finished");
-			else outputText("an incomplete");
-			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText(" marble");
-			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText(" alabaster");
-			outputText(" gargoyle. This statue looks like ");
-			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) == 1) outputText("it has a gorgeous female face");
-			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) == 2) outputText("it has a handsome male face");
-			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) == 3) outputText("it has a face that would look good on a male or a female");
-			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1) || player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) == 0) outputText("its face is yet to be finished");
+			if (Forgefather.statueProgress >= 11) outputText("a finished");
+			else outputText("an incomplete stone gargoyle. This statue looks like ");
+			if (Forgefather.gender == 1) outputText("it has a gorgeous female face");
+			if (Forgefather.gender == 2) outputText("it has a handsome male face");
+			if (Forgefather.gender == 3) outputText("it has a face that would look good on a male or a female");
+			if (Forgefather.gender == 0) outputText("its face is yet to be finished");
 			outputText(" and its ");
-			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker2) == 1) outputText("bald head looks great.");
-			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker2) == 2) outputText("short hair looks great.");
-			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker2) == 3) outputText("moderately long hair looks great.");
-			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker2) == 4) outputText("long hair looks great.");
-			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2) || player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker2) == 0) outputText("hair is yet to be sculpted.");
-			if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker2) > 0) {
+			if (Forgefather.hairLength == 1) outputText("bald head looks great.");
+			if (Forgefather.hairLength == 2) outputText("short hair looks great.");
+			if (Forgefather.hairLength == 3) outputText("moderately long hair looks great.");
+			if (Forgefather.hairLength == 4) outputText("long hair looks great.");
+			if (Forgefather.hairLength == 0) outputText("hair is yet to be sculpted.");
+			if (Forgefather.chest > 0) {
 				outputText("\n\nStatue have ");
-				if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker2) == 1)outputText("flat chest");
-				if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker2) == 2)outputText("A-cup breasts");
-				if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker2) == 3)outputText("B-cup breasts");
-				if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker2) == 4)outputText("C-cup breasts");
-				if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker2) == 5)outputText("D-cup breasts");
-				if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker2) == 6)outputText("DD-cup breasts");
-				if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker2) == 7)outputText("big DD-cup breasts");
+				if (Forgefather.chest == 1)outputText("flat chest");
+				if (Forgefather.chest == 2)outputText("A-cup breasts");
+				if (Forgefather.chest == 3)outputText("B-cup breasts");
+				if (Forgefather.chest == 4)outputText("C-cup breasts");
+				if (Forgefather.chest == 5)outputText("D-cup breasts");
+				if (Forgefather.chest == 6)outputText("DD-cup breasts");
+				if (Forgefather.chest == 7)outputText("big DD-cup breasts");
 				outputText(".\n\n");
 			}
-			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2) || player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker2) == 0) outputText("\n\nThere's a block where its chest would be.\n\n");
-			if ((!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2) || player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) < 1) && (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker3) || player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker3) < 1 || player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker3) < 1)) outputText("There's a block where its crotch would be.");
+			if (Forgefather.chest == 0) outputText("\n\nThere's a block where its chest would be.\n\n");
+			if ((Forgefather.cock < 1) && ((Forgefather.vagina) < 1 || Forgefather.balls < 1)) outputText("There's a block where its crotch would be.");
 			else {
 				outputText("At the statue crotch ");
-				if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) > 1) {
+				if (Forgefather.cock > 1) {
 					outputText("hangs a ");
-					if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) == 2) outputText("4 inch");
-					if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) == 3) outputText("4.5 inch");
-					if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) == 4) outputText("5 inch");
-					if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) == 5) outputText("5.5 inch");
-					if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) == 6) outputText("6 inch");
-					if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) == 7) outputText("6.5 inch");
-					if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) == 8) outputText("7 inch");
-					if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) == 9) outputText("7.5 inch");
-					if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) == 10) outputText("8 inch");
-					if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) == 11) outputText("8.5 inch");
-					if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) == 12) outputText("9 inch");
+					if (Forgefather.cock == 2) outputText("4 inch");
+					if (Forgefather.cock == 3) outputText("4.5 inch");
+					if (Forgefather.cock == 4) outputText("5 inch");
+					if (Forgefather.cock == 5) outputText("5.5 inch");
+					if (Forgefather.cock == 6) outputText("6 inch");
+					if (Forgefather.cock == 7) outputText("6.5 inch");
+					if (Forgefather.cock == 8) outputText("7 inch");
+					if (Forgefather.cock == 9) outputText("7.5 inch");
+					if (Forgefather.cock == 10) outputText("8 inch");
+					if (Forgefather.cock == 11) outputText("8.5 inch");
+					if (Forgefather.cock == 12) outputText("9 inch");
 					outputText(" long cock");
-					if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker3) > 1) {
+					if (Forgefather.balls > 1) {
 						outputText(" along with a pair of ");
-						if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker3) == 2) outputText("large");
-						if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker3) == 3) outputText("baseball-sized");
-						if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker3) == 4) outputText("apple-sized");
-						if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker3) == 5) outputText("grapefruit-sized");
+						if (Forgefather.balls == 2) outputText("large");
+						if (Forgefather.balls == 3) outputText("baseball-sized");
+						if (Forgefather.balls == 4) outputText("apple-sized");
+						if (Forgefather.balls == 5) outputText("grapefruit-sized");
 						outputText(" balls");
 					}
 					outputText(".");
 				}
-				if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) == 1 && player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker3) > 1) {
+				if (Forgefather.cock == 1 && Forgefather.balls > 1) {
 					outputText(" rests a pair of ");
-					if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker3) == 2) outputText("large");
-					if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker3) == 3) outputText("baseball-sized");
-					if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker3) == 4) outputText("apple-sized");
-					if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker3) == 5) outputText("grapefruit-sized");
+					if (Forgefather.balls == 2) outputText("large");
+					if (Forgefather.balls == 3) outputText("baseball-sized");
+					if (Forgefather.balls == 4) outputText("apple-sized");
+					if (Forgefather.balls == 5) outputText("grapefruit-sized");
 					outputText(" balls.");
 				}
-				if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker3) > 0) {
-					if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker3) == 2) {
-						if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) > 1) outputText(" Beneath it");
-						else if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker3) > 1) outputText(" Beneath them");
+				if (Forgefather.vagina > 0) {
+					if (Forgefather.vagina  == 2) {
+						if (Forgefather.balls > 1) outputText(" Beneath them");
+						else if (Forgefather.cock > 1) outputText(" Beneath it");
 						outputText(" is a tight vagina, with a tiny clit.");
 					}
 					else outputText("");
 				}
 			}
 			outputText("\n\nAll the details in its");
-			if (flags[kFLAGS.GARGOYLE_WINGS_TYPE] == 2) outputText(" bat");
-			if (flags[kFLAGS.GARGOYLE_WINGS_TYPE] == 1) outputText(" feathered");
+			if (Forgefather.wings == 1) outputText(" bat");
+			if (Forgefather.wings == 2) outputText(" feathered");
 			outputText(" wings ");
-			if (flags[kFLAGS.GARGOYLE_WINGS_TYPE] >= 1) outputText("are completed and the wings folded behind its back");
+			if (Forgefather.wings >= 1) outputText("are completed and the wings folded behind its back");
 			else outputText("have yet to be done");
 			outputText(".\n\nIt's arms ");
-			if (player.statusEffectv4(StatusEffects.GargoyleTFSettingTracker1) == 1) outputText("ends with a set of bestial four fingered sharp stone claws");
-			if (player.statusEffectv4(StatusEffects.GargoyleTFSettingTracker1) == 2) outputText("ends with very human fist");
-			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1) || player.statusEffectv4(StatusEffects.GargoyleTFSettingTracker1) == 0) outputText("have yet to be sculpted");
+			if (Forgefather.arms == 1) outputText("ends with a set of bestial four fingered sharp stone claws");
+			if (Forgefather.arms == 2) outputText("ends with very human fist");
+			if (Forgefather.arms == 0) outputText("have yet to be sculpted");
 			outputText(". It's legs ");
-			if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker1) == 1) outputText("ends with clawed bestial feets with three toe at the front and one at the back");
-			if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker1) == 2) outputText("are human like");
-			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1) || player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker1) == 0) outputText("have yet to be defined");
+			if (Forgefather.lowerBody == 1) outputText("ends with clawed bestial feets with three toe at the front and one at the back");
+			if (Forgefather.lowerBody == 2) outputText("are human like");
+			if (Forgefather.lowerBody == 0) outputText("have yet to be defined");
 			outputText(". Its ");
-			if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker1) == 1) outputText("mace like");
-			if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker1) == 2) outputText("axe like");
-			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1) || player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker1) == 0) outputText("unfinished");
+			if (Forgefather.tail == 1) outputText("mace like");
+			if (Forgefather.tail == 2) outputText("axe like");
+			if (Forgefather.tail == 0) outputText("unfinished");
 			outputText(" tail seems to be there right above its ");
-			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) == 1 || player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) == 2 || player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) == 3) {
+			if (Forgefather.gender != 0) {
 				outputText("perfectly made ");
-				if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) == 1) outputText("feminine");
-				if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) == 2) outputText("masculine");
-				if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) == 3) outputText("androgynous");
+				if (Forgefather.gender == 1) outputText("feminine");
+				if (Forgefather.gender == 2) outputText("masculine");
+				if (Forgefather.gender == 3) outputText("androgynous");
 			}
-			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1))outputText("unfinished");
+			if (Forgefather.gender == 0 )outputText("unfinished");
 			outputText(" body.");
-			if (flags[kFLAGS.GARGOYLE_BODY_SCULPTING_PROGRESS] >= 1) outputText("\n\nProgress: " + flags[kFLAGS.GARGOYLE_BODY_SCULPTING_PROGRESS]);
+			if (Forgefather.statueProgress >= 1) outputText("\n\nProgress: " + Forgefather.statueProgress);
 			menu();
-			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1) || player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker1) < 1) addButton(0, "Frame&Face", SculptFrameAndFace);
+			if (Forgefather.gender < 1) addButton(0, "Frame&Face", SculptFrameAndFace);
 			else addButtonDisabled(0, "Frame&Face", "You already sculpted the Frame and Face.");
-			if (flags[kFLAGS.GARGOYLE_WINGS_TYPE] < 1) addButton(1, "Wings", SculptWings);
+			if (Forgefather.wings < 1) addButton(1, "Wings", SculptWings);
 			else addButtonDisabled(1, "Wings", "You already sculpted the Wings.");
-			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1) || player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker1) < 1) addButton(2, "Tail", SculptTail);
+			if (Forgefather.tail < 1) addButton(2, "Tail", SculptTail);
 			else addButtonDisabled(2, "Tail", "You already sculpted the Tail.");
-			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1) || player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker1) < 1) addButton(3, "Legs", SculptLegs);
+			if (Forgefather.lowerBody < 1) addButton(3, "Legs", SculptLegs);
 			else addButtonDisabled(3, "Legs", "You already sculpted the Legs.");
-			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1) || player.statusEffectv4(StatusEffects.GargoyleTFSettingTracker1) < 1) addButton(4, "Arms", SculptArms);
+			if (Forgefather.arms < 1) addButton(4, "Arms", SculptArms);
 			else addButtonDisabled(4, "Arms", "You already sculpted the Arms.");
-			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2) || player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker2) < 1) addButton(5, "Hair", SculptHair);
+			if (Forgefather.hairLength < 1) addButton(5, "Hair", SculptHair);
 			else addButtonDisabled(5, "Hair", "You already sculpted the Hair.");
-			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2) || player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker2) < 1) addButton(6, "Chest", SculptChest);
+			if (Forgefather.chest < 1) addButton(6, "Chest", SculptChest);
 			else addButtonDisabled(6, "Chest", "You already sculpted the Chest.");
-			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker3) || player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker3) < 1) addButton(7, "Pussy", SculptPussy);
+			if (Forgefather.vagina < 1) addButton(7, "Pussy", SculptPussy);
 			else addButtonDisabled(7, "Pussy", "You already sculpted the Pussy Area.");
-			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2) || player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) < 1) addButton(8, "Cock", SculptCock);
+			if (Forgefather.cock < 1) addButton(8, "Cock", SculptCock);
 			else addButtonDisabled(8, "Cock", "You already sculpted the Cock Area.");
-			if (!player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker3) || player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker3) < 1) addButton(9, "Balls", SculptBalls);
+			if (Forgefather.balls < 1) addButton(9, "Balls", SculptBalls);
 			else addButtonDisabled(9, "Balls", "You already sculpted the Balls Area.");
-			if (flags[kFLAGS.GARGOYLE_BODY_SCULPTING_PROGRESS] >= 11 && flags[kFLAGS.GARGOYLE_QUEST] >= 3 && !player.isGargoyle()) addButton(13, "Ritual", becomingGargoyle);
+			if (Forgefather.statueProgress >= 10 && flags[kFLAGS.GARGOYLE_QUEST] >= 3 && !player.isGargoyle()) addButton(13, "Ritual", becomingGargoyle);
 			addButton(14, "Back", BackToSapphire);
 		}
 		public function BackToSapphire():void {
@@ -1288,21 +1085,14 @@ use namespace CoC;
 			doNext(templemainmenu);
 		}
 
-		public function chooseToWorkOnMarbleStatue():void {
-			flags[kFLAGS.GARGOYLE_BODY_MATERIAL] = 1;
+		public function chooseToWorkOnStoneStatue():void {
+			//flags[kFLAGS.GARGOYLE_BODY_MATERIAL] = 1;
 			flags[kFLAGS.GARGOYLE_BODY_SCULPTING_PROGRESS] = 1;
 			flags[kFLAGS.GARGOYLE_QUEST] = 1;
-			flags[kFLAGS.GARGOYLE_WINGS_TYPE] = 0;
+			//flags[kFLAGS.GARGOYLE_WINGS_TYPE] = 0;
 			currentStateOfStatue();
 		}
-		public function chooseToWorkOnAlabasterStatue():void {
-			flags[kFLAGS.GARGOYLE_BODY_MATERIAL] = 2;
-			flags[kFLAGS.GARGOYLE_BODY_SCULPTING_PROGRESS] = 1;
-			flags[kFLAGS.GARGOYLE_QUEST] = 1;
-			flags[kFLAGS.GARGOYLE_WINGS_TYPE] = 0;
-			currentStateOfStatue();
-		}
-
+		
 		public function SculptFrameAndFace():void {
 			menu();
 			addButton(0, "Feminine", SculptFeminineFrameAndFace).hint("Sculpt a feminine frame and face.");
@@ -1311,18 +1101,21 @@ use namespace CoC;
 			addButton(14, "Back", currentStateOfStatue);
 		}
 		public function SculptFeminineFrameAndFace():void {
-			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker1, 1, 1);
-			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker1, 1, 0, 0, 0);
+			SceneLib.forgefatherScene.setGargoyleGender(1);
+			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker1, 1, 1);
+			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker1, 1, 0, 0, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptMasculineFrameAndFace():void {
-			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker1, 1, 2);
-			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker1, 2, 0, 0, 0);
+			SceneLib.forgefatherScene.setGargoyleGender(2);
+			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker1, 1, 2);
+			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker1, 2, 0, 0, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptAndrogynousFrameAndFace():void {
-			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker1, 1, 3);
-			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker1, 3, 0, 0, 0);
+			SceneLib.forgefatherScene.setGargoyleGender(3);
+			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker1, 1, 3);
+			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker1, 3, 0, 0, 0);
 			SecondPartOfSculptingText();
 		}
 
@@ -1333,11 +1126,13 @@ use namespace CoC;
 			addButton(14, "Back", currentStateOfStatue);
 		}
 		public function SculptBatWings():void {
-			flags[kFLAGS.GARGOYLE_WINGS_TYPE] = 2;
+			SceneLib.forgefatherScene.setGargoyleWings(2);
+			//flags[kFLAGS.GARGOYLE_WINGS_TYPE] = 2;
 			SecondPartOfSculptingText();
 		}
 		public function SculptFeatheredWings():void {
-			flags[kFLAGS.GARGOYLE_WINGS_TYPE] = 1;
+			SceneLib.forgefatherScene.setGargoyleWings(1);
+			//flags[kFLAGS.GARGOYLE_WINGS_TYPE] = 1;
 			SecondPartOfSculptingText();
 		}
 
@@ -1348,13 +1143,15 @@ use namespace CoC;
 			addButton(14, "Back", currentStateOfStatue);
 		}
 		public function SculptMaceTail():void {
-			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker1, 2, 1);
-			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker1, 0, 1, 0, 0);
+			SceneLib.forgefatherScene.setGargoyleTail(1);
+			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker1, 2, 1);
+			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker1, 0, 1, 0, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptAxeTail():void {
-			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker1, 2, 2);
-			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker1, 0, 2, 0, 0);
+			SceneLib.forgefatherScene.setGargoyleTail(2);
+			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker1, 2, 2);
+			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker1, 0, 2, 0, 0);
 			SecondPartOfSculptingText();
 		}
 
@@ -1365,13 +1162,15 @@ use namespace CoC;
 			addButton(14, "Back", currentStateOfStatue);
 		}
 		public function SculptClawedLegs():void {
-			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker1, 3, 1);
-			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker1, 0, 0, 1, 0);
+			SceneLib.forgefatherScene.setGargoyleLowerBody(1);
+			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker1, 3, 1);
+			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker1, 0, 0, 1, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptHumaneLegs():void {
-			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker1, 3, 2);
-			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker1, 0, 0, 2, 0);
+			SceneLib.forgefatherScene.setGargoyleLowerBody(2);
+			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker1, 3, 2);
+			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker1, 0, 0, 2, 0);
 			SecondPartOfSculptingText();
 		}
 
@@ -1382,13 +1181,15 @@ use namespace CoC;
 			addButton(14, "Back", currentStateOfStatue);
 		}
 		public function SculptClawedArms():void {
-			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker1, 4, 1);
-			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker1, 0, 0, 0, 1);
+			SceneLib.forgefatherScene.setGargoyleArms(1);
+			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker1, 4, 1);
+			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker1, 0, 0, 0, 1);
 			SecondPartOfSculptingText();
 		}
 		public function SculptHumaneArms():void {
-			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker1, 4, 2);
-			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker1, 0, 0, 0, 2);
+			SceneLib.forgefatherScene.setGargoyleArms(2);
+			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker1)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker1, 4, 2);
+			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker1, 0, 0, 0, 2);
 			SecondPartOfSculptingText();
 		}
 
@@ -1401,23 +1202,27 @@ use namespace CoC;
 			addButton(14, "Back", currentStateOfStatue);
 		}
 		public function SculptBald():void {
-			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 1, 1);
-			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 1, 0, 0, 0);
+			SceneLib.forgefatherScene.setGargoyleHair(1);
+			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 1, 1);
+			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 1, 0, 0, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptShort():void {
-			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 1, 2);
-			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 2, 0, 0, 0);
+			SceneLib.forgefatherScene.setGargoyleHair(2);
+			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 1, 2);
+			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 2, 0, 0, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptMedium():void {
-			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 1, 3);
-			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 3, 0, 0, 0);
+			SceneLib.forgefatherScene.setGargoyleHair(3);
+			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 1, 3);
+			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 3, 0, 0, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptLong():void {
-			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 1, 4);
-			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 4, 0, 0, 0);
+			SceneLib.forgefatherScene.setGargoyleHair(4);
+			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 1, 4);
+			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 4, 0, 0, 0);
 			SecondPartOfSculptingText();
 		}
 
@@ -1433,61 +1238,66 @@ use namespace CoC;
 			addButton(14, "Back", currentStateOfStatue);
 		}
 		public function SculptFlat():void {
-			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 2, 1);
-			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 1, 0, 0);
+			SceneLib.forgefatherScene.setGargoyleChest(1);
+			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 2, 1);
+			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 1, 0, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptACup():void {
-			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 2, 2);
-			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 2, 0, 0);
+			SceneLib.forgefatherScene.setGargoyleChest(2);
+			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 2, 2);
+			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 2, 0, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptBCup():void {
-			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 2, 3);
-			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 3, 0, 0);
+			SceneLib.forgefatherScene.setGargoyleChest(3);
+			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 2, 3);
+			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 3, 0, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptCCup():void {
-			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 2, 4);
-			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 4, 0, 0);
+			SceneLib.forgefatherScene.setGargoyleChest(4);
+			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 2, 4);
+			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 4, 0, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptDCup():void {
-			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 2, 5);
-			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 5, 0, 0);
+			SceneLib.forgefatherScene.setGargoyleChest(5);
+			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 2, 5);
+			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 5, 0, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptDDCup():void {
-			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 2, 6);
-			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 6, 0, 0);
+			SceneLib.forgefatherScene.setGargoyleChest(6);
+			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 2, 6);
+			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 6, 0, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptBigDDCup():void {
-			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 2, 7);
-			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 7, 0, 0);
+			SceneLib.forgefatherScene.setGargoyleChest(7);
+			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 2, 7);
+			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 7, 0, 0);
 			SecondPartOfSculptingText();
 		}
 
 		public function SculptPussy():void {
 			menu();
-			if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) != 1) addButton(0, "No", SculptPussyNo).hint("Don't sculpt pussy.");
+			if (Forgefather.cock != 1) addButton(0, "No", SculptPussyNo).hint("Don't sculpt pussy.");
 			addButton(1, "Yes", SculptPussyYes).hint("Sculpt pussy.");
 			addButton(14, "Back", currentStateOfStatue);
 		}
 		public function SculptPussyNo():void {
-			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker3)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker3, 1, 1);
-			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker3, 1, 0, 0, 0);
+			SceneLib.forgefatherScene.setGargoyleVagina(1);
 			SecondPartOfSculptingText();
 		}
 		public function SculptPussyYes():void {
-			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker3)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker3, 1, 2);
-			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker3, 2, 0, 0, 0);
+			SceneLib.forgefatherScene.setGargoyleVagina(2);
 			SecondPartOfSculptingText();
 		}
 
 		public function SculptCock():void {
 			menu();
-			if (player.statusEffectv1(StatusEffects.GargoyleTFSettingTracker3) != 1) addButton(0, "None", SculptNoCock).hint("Don't sculpt cock.");
+			if (Forgefather.vagina != 1) addButton(0, "None", SculptNoCock).hint("Don't sculpt cock.");
 			addButton(1, "4\"", SculptCock1).hint("Sculpt 4' cock.");
 			addButton(2, "4.5\"", SculptCock2).hint("Sculpt 4.5' cock.");
 			addButton(3, "5\"", SculptCock3).hint("Sculpt 5' cock.");
@@ -1502,70 +1312,82 @@ use namespace CoC;
 			addButton(14, "Back", currentStateOfStatue);
 		}
 		public function SculptNoCock():void {
-			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 3, 1);
-			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 0, 1, 0);
+			SceneLib.forgefatherScene.setGargoyleCock(1);
+			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 3, 1);
+			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 0, 1, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptCock1():void {
-			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 3, 2);
-			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 0, 2, 0);
+			SceneLib.forgefatherScene.setGargoyleCock(2);
+			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 3, 2);
+			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 0, 2, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptCock2():void {
-			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 3, 3);
-			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 0, 3, 0);
+			SceneLib.forgefatherScene.setGargoyleCock(3);
+			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 3, 3);
+			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 0, 3, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptCock3():void {
-			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 3, 4);
-			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 0, 4, 0);
+			SceneLib.forgefatherScene.setGargoyleCock(4);
+			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 3, 4);
+			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 0, 4, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptCock4():void {
-			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 3, 5);
-			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 0, 5, 0);
+			SceneLib.forgefatherScene.setGargoyleCock(5);
+			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 3, 5);
+			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 0, 5, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptCock5():void {
-			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 3, 6);
-			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 0, 6, 0);
+			SceneLib.forgefatherScene.setGargoyleCock(6);
+			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 3, 6);
+			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 0, 6, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptCock6():void {
-			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 3, 7);
-			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 0, 7, 0);
+			SceneLib.forgefatherScene.setGargoyleCock(7);
+			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 3, 7);
+			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 0, 7, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptCock7():void {
-			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 3, 8);
-			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 0, 8, 0);
+			SceneLib.forgefatherScene.setGargoyleCock(8);
+			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 3, 8);
+			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 0, 8, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptCock8():void {
-			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 3, 9);
-			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 0, 9, 0);
+			SceneLib.forgefatherScene.setGargoyleCock(9);
+			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 3, 9);
+			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 0, 9, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptCock9():void {
-			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 3, 10);
-			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 0, 10, 0);
+			SceneLib.forgefatherScene.setGargoyleCock(10);
+			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 3, 10);
+			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 0, 10, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptCock10():void {
-			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 3, 11);
-			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 0, 11, 0);
+			SceneLib.forgefatherScene.setGargoyleCock(11);
+			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 3, 11);
+			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 0, 11, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptCock11():void {
-			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 3, 12);
-			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 0, 12, 0);
+			SceneLib.forgefatherScene.setGargoyleCock(12);
+			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker2)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker2, 3, 12);
+			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker2, 0, 0, 12, 0);
 			SecondPartOfSculptingText();
 		}
 
 		public function SculptBalls():void {
 			menu();
 			addButton(0, "No", SculptBallsNo).hint("Don't sculpt balls.");
-			if (player.statusEffectv3(StatusEffects.GargoyleTFSettingTracker2) >= 2)  {
+			if (Forgefather.cock >= 2)  {
 				addButton(1, "Large", SculptBallsLarge).hint("Sculpt large balls.");
 				addButton(2, "Baseball", SculptBallsBaseballSized).hint("Sculpt baseball-sized balls.");
 				addButton(3, "Apple", SculptBallsAppleSized).hint("Sculpt apple-sized balls.");
@@ -1574,35 +1396,40 @@ use namespace CoC;
 			addButton(14, "Back", currentStateOfStatue);
 		}
 		public function SculptBallsNo():void {
-			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker3)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker3, 2, 1);
-			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker3, 0, 1, 0, 0);
+			SceneLib.forgefatherScene.setGargoyleBalls(1);
+			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker3)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker3, 2, 1);
+			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker3, 0, 1, 0, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptBallsLarge():void {
-			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker3)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker3, 2, 2);
-			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker3, 0, 2, 0, 0);
+			SceneLib.forgefatherScene.setGargoyleBalls(2);
+			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker3)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker3, 2, 2);
+			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker3, 0, 2, 0, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptBallsBaseballSized():void {
-			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker3)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker3, 2, 3);
-			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker3, 0, 3, 0, 0);
+			SceneLib.forgefatherScene.setGargoyleBalls(3);
+			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker3)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker3, 2, 3);
+			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker3, 0, 3, 0, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptBallsAppleSized():void {
-			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker3)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker3, 2, 4);
-			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker3, 0, 4, 0, 0);
+			SceneLib.forgefatherScene.setGargoyleBalls(4);
+			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker3)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker3, 2, 4);
+			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker3, 0, 4, 0, 0);
 			SecondPartOfSculptingText();
 		}
 		public function SculptBallsGrapefruitSized():void {
-			if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker3)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker3, 2, 5);
-			else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker3, 0, 5, 0, 0);
+			SceneLib.forgefatherScene.setGargoyleBalls(5);
+			//if (player.hasStatusEffect(StatusEffects.GargoyleTFSettingTracker3)) player.addStatusValue(StatusEffects.GargoyleTFSettingTracker3, 2, 5);
+			//else player.createStatusEffect(StatusEffects.GargoyleTFSettingTracker3, 0, 5, 0, 0);
 			SecondPartOfSculptingText();
 		}
 
 		public function SecondPartOfSculptingText():void {
 			clearOutput();
 			outputText("You work for six hours, sculpting the statue part to your liking with an artist's passion, then head back to camp for a break.");
-			flags[kFLAGS.GARGOYLE_BODY_SCULPTING_PROGRESS]++;
+			Forgefather.statueProgress++;
 			doNext(camp.returnToCampUseSixHours);
 		}
 
@@ -1660,7 +1487,8 @@ use namespace CoC;
 			becomingGargoyleYes2();
 		}
 		public function becomingGargoyleYes2():void {
-			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) {
+			SceneLib.forgefatherScene.createGargoyleState();
+			/*if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) {
 				player.skinTone = "light gray";
 				player.hairColor = "light gray";
 			}
@@ -1737,7 +1565,7 @@ use namespace CoC;
 			if (player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker3) >= 2) {
 				player.balls = 2;
 				player.ballSize = player.statusEffectv2(StatusEffects.GargoyleTFSettingTracker3) - 1;
-			}
+			}*/
 			becomingGargoyleYes3();
 		}
 
@@ -1748,9 +1576,9 @@ use namespace CoC;
 			outputText("You reply that you will do whatever is needed to defeat the demons and if that means becoming an immortal artificial being, then so be it. Defeated by your determination, Sapphire finally complies as she chants \"<i>Shira Khrim Almisry Ohm Ak Tar Marae Kann Tharr Shul Elysro An Siryr Ahn Ekatyr Evenar Sethe Omaris!</i>\"\n\n");
 			outputText("As she practically screams the last word, your vision fade to black and you lose consciousness.\n\n");
 			outputText("You come to several seconds later and, as you open your eyes, it seems you're sitting on a pedestal, your pedestal. It looks like your previous body turned to ashes on the altar and is no more, so it will be extremely difficult going back to being human, if such a thing is even possible. You flex your arms for a few seconds admiring your perfectly defined form, majestic wings and ");
-			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText("marble");
-			if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText("alabaster");
-			outputText(" stone body, strong enough to shatter rocks and solid enough that the sharpest sword will leave you damageless as you’re suddenly rocked over by a terrifying hunger.\n\n");
+			//if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 1) outputText("marble");
+			//if (flags[kFLAGS.GARGOYLE_BODY_MATERIAL] == 2) outputText("alabaster");
+			outputText("stone body, strong enough to shatter rocks and solid enough that the sharpest sword will leave you damageless as you’re suddenly rocked over by a terrifying hunger.\n\n");
 			if (player.hasPerk(PerkLib.GargoylePure)) {
 				outputText("Energy! You need energy to stay alive now. As you are masterless, while food used to be your main source of power, you are now a magical construct and Soulforce is what powers you now!\n\n");
 				outputText("<b>Gain perk: Gargoyle - Need to gain sustenance from soulforce to stay alive.</b>\n\n");

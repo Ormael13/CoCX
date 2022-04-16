@@ -50,6 +50,9 @@ package classes.Items
 		public const FLINTLK:WeaponRange = new WeaponRange("Flintlk", "Flintlock", "flintlock pistol", "a flintlock pistol", "shot", 14, 310, "A flintlock pistol. Pew pew pew. Can fire once before a reload is required.", "Pistol");
 		public const GTHRAXE:WeaponRange = new WeaponRange("GThrAxe", "GThrowAxes", "gnoll throwing axes", "a gnoll throwing axes", "shot", 25, 1250, "A set of throwing axes made and used by the gnoll barbarian, they are actually heavier than standard throwing weapon but all the more effective. You can carry up to 10 on you and need to retrieve them after battles.", "Throwing");
 		public const GTHRSPE:WeaponRange = new WeaponRange("GThrSpe", "GThrowSpear", "gnoll throwing spear", "a gnoll throwing spear", "shot", 18, 900, "A standard javelin for ranged combat made by the gnolls. You can carry up to 20 on you and need to retrieve them after battles.", "Throwing");
+		public const HARKON1:WeaponRangeWithPerk = new WeaponRangeWithPerk("Harkon1", "Harkonnen", "Harkonnen", "a Harkonnen", "shot", 160, 3230, "This 30 mm, single-shot breech loader cannon use 'true damage' shells.", "2H Firearm",
+				PerkLib.Accuracy2,20,0,0,0);
+		//public const HARKON2:WeaponRange = new WeaponRange("Harkon2", "HarkonnenII", "Harkonnen II", "a Harkonnen II", "shot", 260, 5230, ".", "2H Firearm");
 		public const HARPGUN:WeaponRange = new WeaponRange("HarpGun", "HarpoonGun", "Harpoon gun", "a Harpoon gun", "shot", 50, 1030, "Standard issue goblin weaponry for underwater combat.", "Rifle");
 		public const HEXBOW_:WeaponRangeWithPerk = new WeaponRangeWithPerk("HeXbow", "HeavyXbow", "heavy crossbow", "a heavy crossbow", "shot", 25, 1250, "This is a heavy crossbow. High penetrative power and good accuracy.", "Crossbow",
 				PerkLib.Accuracy1,40,0,0,0);

@@ -74,8 +74,8 @@ use namespace CoC;
 			var resist:int = 0;
 			if (player.inte < 30) resist = Math.round(player.inte);
 			else resist = 30;
-			if (player.findPerk(PerkLib.Whispered) >= 0) resist += 20;
-			if ((player.findPerk(PerkLib.HistoryReligious) >= 0 || player.findPerk(PerkLib.PastLifeReligious) >= 0) && player.cor < 20) resist += 20 - player.cor;
+			if (player.hasPerk(PerkLib.Whispered)) resist += 20;
+			if ((player.hasPerk(PerkLib.HistoryReligious) || player.hasPerk(PerkLib.PastLifeReligious)) && player.cor < 20) resist += 20 - player.cor;
 			var select:int = rand(7);
 			//Attack:
 			if (select == 0) {
@@ -142,28 +142,37 @@ use namespace CoC;
 				else if (!hasStatusEffect(StatusEffects.AbilityCooldown1)) Dragonbreath();
 				else FlybyAttack();
 			}
-			var choice:Number = rand(7);
-			if (choice == 0) PentaAttack();
-			if (choice == 1) SnakeBite();
-			if (choice == 2 || choice == 3) {
-				if (!hasStatusEffect(StatusEffects.AbilityCooldown1)) Dragonbreath();
-				else SnakeBite();
-			}
-			if (choice == 4 || choice == 5) {
-				if (!player.hasStatusEffect(StatusEffects.Sealed)) Curse();
-				else PentaAttack();
-			}
-			if (choice == 6) TakeFlight();
+            else switch(rand(7)) {
+                case 0:
+                    PentaAttack();
+                    break;
+                case 1:
+                    SnakeBite();
+                    break;
+                case 2:
+                case 3:
+                    if (!hasStatusEffect(StatusEffects.AbilityCooldown1)) Dragonbreath();
+				    else SnakeBite();
+                    break;
+                case 4:
+                case 5:
+                    if (!player.hasStatusEffect(StatusEffects.Sealed)) Curse();
+				    else PentaAttack();
+                    break;
+                case 6:
+                    TakeFlight();
+                    break;
+            }
 		}
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			SceneLib.dungeons.ebonlabyrinth.defeatChaosChimera();
+			SceneLib.dungeons.ebonlabyrinth.chaosChimeraScene.defeat();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			SceneLib.dungeons.ebonlabyrinth.defeatedByChaosChimera();
+			SceneLib.dungeons.ebonlabyrinth.chaosChimeraScene.defeatedBy();
 		}
 		
 		public function ChaosChimera() 

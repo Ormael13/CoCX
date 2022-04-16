@@ -13,7 +13,7 @@ package classes.Items.Weapons
 		
 		public function Nodachi() 
 		{
-			super("Nodachi","Nodachi","nodachi","a nodachi","keen cut",65,2600,"A curved over 3m long bladed weapon that cuts through flesh with the greatest of ease.", "Massive");
+			super("Nodachi","Nodachi","nodachi","a nodachi","keen cut",65,2600,"A curved over 3m long bladed weapon that cuts through flesh with the greatest of ease.", "Massive", "Dueling");
 		}
 		
 		override public function get attack():Number {
@@ -25,7 +25,7 @@ package classes.Items.Weapons
 		}
 		
 		override public function canUse():Boolean {
-			if (game.player.hasPerk(PerkLib.GigantGrip)) return true;
+			if (game.player.hasPerk(PerkLib.GigantGrip)) return super.canUse();
 			outputText("You aren't skilled in handling massive weapons, even when using both hands to use this sword.  ");
 			return false;
 		}

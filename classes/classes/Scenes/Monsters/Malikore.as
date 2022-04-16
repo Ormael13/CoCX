@@ -46,7 +46,7 @@ use namespace CoC;
 					outputText(" damage and poisoning you. You feel extremely aroused and ");
 					if (rand(2) == 0) {
 						outputText("your movements slow down");
-						player.addCombatBuff('spe', -3);
+						player.addCombatBuff('spe', -3, "Malikore Venom", "MalikoreVenom");
 					}
 					else {
 						if (rand(2) == 0) {

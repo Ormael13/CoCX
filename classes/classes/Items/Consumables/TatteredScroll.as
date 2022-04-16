@@ -4,6 +4,7 @@
 package classes.Items.Consumables {
 import classes.Items.Consumable;
 import classes.PerkLib;
+import classes.display.SpriteDb;
 
 public class TatteredScroll extends Consumable {
 	public static const ITEM_VALUE:int = 6;
@@ -73,7 +74,7 @@ public class TatteredScroll extends Consumable {
 		}
 		if (!game.inCombat) {
 			//RAEP
-			game.spriteSelect(50);
+			game.spriteSelect(SpriteDb.s_sandwich);
 			outputText("\n\nYou hear the soft impact of clothes hitting the ground behind you, and turn to see that the sand witch has found you! You cannot resist a peek at your uninvited guest, beholding a curvy dark-skinned beauty, her form dominated by a quartet of lactating breasts.  Somewhere in your lust-fogged mind you register the top two as something close to double-Ds, and her lower pair to be about Cs.  She smiles and leans over you, pushing you to the ground violently.\n\nShe turns around and drops, planting her slick honey-pot firmly against your mouth.  Her scent is strong, overpowering in its intensity.  Your tongue darts out for a taste and finds a treasure trove of sticky sweetness.  Instinctively you tongue-fuck her, greedily devouring her cunny-juice, shoving your tongue in as far as possible while suckling her clit.  Dimly you feel the milk spattering over you, splashing off you and into the cracked earth.  Everywhere the milk touches feels silky smooth and sensitive, and your hands begin stroking your body, rubbing it in as the witch sprays more and more of it.  You lose track of time, orgasming many times, slick and sticky with sexual fluids.");
 			player.orgasm();
 			dynStats("lib", 1, "sen", 5);

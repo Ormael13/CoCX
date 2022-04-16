@@ -107,6 +107,8 @@ public class MainMenu extends BaseContent {
 			outputText("\n\n<b>Eternal holiday enabled.</b>");
 		if (isEaster())
 			outputText("\n\n<b>It's Easter!  Enjoy the eggs!</b>");
+		if (isAprilFools())
+			outputText("\n\n<b>It's April Fools!</b>");
 		if (isValentine())
 			outputText("\n\n<b>It's Valentine's!</b>");
 		if (isHalloween())
@@ -146,10 +148,11 @@ public class MainMenu extends BaseContent {
 		outputText("</ul>");
 		outputText("<b>Game Mod Angels:</b>\n");
 		outputText("<ul>");
-		outputText("<li> Aimong</li>");
+		outputText("<li> Aimozg</li>");
 		outputText("<li> Liadri</li>");
 		outputText("<li> Pyromania</li>");
 		outputText("<li> Jtecx</li>");
+		outputText("<li> Svalkash</li>");
 		outputText("<li> Zetta</li>\n");
 		outputText("<li> Zavos/Zevos</li>");
 		outputText("<li> Xana</li>");
@@ -179,11 +182,12 @@ public class MainMenu extends BaseContent {
 		 outputText("<li> Prisoner416</li>");
 		 outputText("<li> Chibodee</li>");
 		 outputText("");*/
-		outputText("<b>Graphical Prettiness:</b>");
+		outputText("<b>Graphical & Code Prettiness:</b>");
 		outputText("<ul>");
         outputText("<li> Dasutin (Background Images)</li>");
 		outputText("<li> Invader (Button Graphics, Font, and Other Hawtness)</li>");
 		outputText("<li> Jtecx (Menu Reworks - PerkSimplified, MutationsDB, InvMgmt(Mobile), FastLvl, SFMenu, ElemMenu)</li>");
+		outputText("<li> Svalkash (SceneHunter)</li>");
 		outputText("</ul>");
 		outputText("<b>Supplementary Events:</b>");
 		outputText("<ul>");
@@ -194,6 +198,7 @@ public class MainMenu extends BaseContent {
 		outputText("<li> Lord Snakebite (Centipede TF, part of Ghost TF rework, Mitzi & Excellia X-packs)</li>");
 		outputText("<li> T0uchMe (part of Ghost TF rework)</li>");
 		outputText("<li> Pyromania (Zenji the troll. Various typo revisions, editing and proofreading.)</li>");
+		outputText("<li> Lunaraia (Adaptations slot for internal mutation name idea)</li>");
 		outputText("<li> Apex (part of Michiko)</li>");
 		outputText("<li> Dxasmodeus (Tentacles, Worms, Giacomo)</li>");
 		outputText("<li> Kirbster (Christmas Bunny Trap)</li>");

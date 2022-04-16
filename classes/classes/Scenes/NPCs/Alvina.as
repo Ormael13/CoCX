@@ -87,8 +87,7 @@ import classes.internals.*;
 			else if (player.cor >= 10) damage = Math.round(damage * 1.3);
 			else damage = Math.round(damage * 1.4);
 			if (hasStatusEffect(StatusEffects.Maleficium)) damage *= 2;
-			outputText("Alvina weaves her scythe above her head tracing complicated arcane signs");
-			outputText(", as a purple flame surges under you, searing your flesh. ");
+			outputText("Alvina weaves her scythe above her head tracing complicated arcane signs, as a purple flame surges under you, searing your flesh. ");
 			//outputText(". (" + damage + ")");
 			player.takeFireDamage(damage, true);//, true
 			if (player.hasStatusEffect(StatusEffects.BurnDoT)) player.addStatusValue(StatusEffects.BurnDoT, 1, 1);
@@ -141,7 +140,7 @@ import classes.internals.*;
 			damage += eBaseIntelligenceDamage() * 4;
 			if (hasStatusEffect(StatusEffects.Maleficium)) damage *= 2;
 			outputText("Large crystalline shards of ice form in a fan around Alvina. She waves her scythe in an arc launching them in a barrage at you. You are impaled several times over, your wounds bleeding grievously. ");
-			damage = player.takeIceDamage(damage, true);//, true
+			player.takeIceDamage(damage, true);
 			if (player.hasStatusEffect(StatusEffects.IzmaBleed)) player.addStatusValue(StatusEffects.IzmaBleed,1,1);
 			else player.createStatusEffect(StatusEffects.IzmaBleed,5,0,0,0);
 			statScreenRefresh();
@@ -277,7 +276,7 @@ import classes.internals.*;
 		override public function defeated(hpVictory:Boolean):void
 		{
 			cleanupAfterCombat();
-			SceneLib.alvinaFollower.alvinaThirdEncounterYesNeverWon();
+			doNext(SceneLib.alvinaFollower.alvinaThirdEncounterYesNeverWon);
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void

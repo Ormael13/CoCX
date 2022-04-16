@@ -138,13 +138,13 @@ public class EngineCore {
         var before:Number = CoC.instance.player.soulforce;
         if (changeNum == 0) return 0;
         if (changeNum > 0) {
-            if (CoC.instance.player.soulforce + int(changeNum) > maxSoulforce()) {
+            if (CoC.instance.player.soulforce + int(changeNum) > maxOverSoulforce()) {
                 //	if(CoC.instance.player.HP >= maxHP()) {
                 //	if (display) HPChangeNotify(changeNum);
                 //		return CoC.instance.player.HP - before;
                 //	}
                 //	if (display) HPChangeNotify(changeNum);
-                CoC.instance.player.soulforce = maxSoulforce();
+                CoC.instance.player.soulforce = maxOverSoulforce();
             }
             else {
                 //	if (display) HPChangeNotify(changeNum);
@@ -176,13 +176,13 @@ public class EngineCore {
         var before:Number = CoC.instance.player.mana;
         if (changeNum == 0) return 0;
         if (changeNum > 0) {
-            if (CoC.instance.player.mana + int(changeNum) > maxMana()) {
+            if (CoC.instance.player.mana + int(changeNum) > maxOverMana()) {
                 //	if(CoC.instance.player.HP >= maxHP()) {
                 //	if (display) HPChangeNotify(changeNum);
                 //		return CoC.instance.player.HP - before;
                 //	}
                 //	if (display) HPChangeNotify(changeNum);
-                CoC.instance.player.mana = maxMana();
+                CoC.instance.player.mana = maxOverMana();
             }
             else {
                 //	if (display) HPChangeNotify(changeNum);
@@ -633,6 +633,13 @@ public class EngineCore {
         btn.showDisabled(text, toolTipText, toolTipHeader);
         CoC.instance.flushOutputTextToGUI();
         return btn;
+    }
+
+    public static function addButtonIfTrue(pos:int, text:String, func1:Function, toolTipText:String, condition:Boolean):CoCButton {
+        if (condition)
+            return addButton(pos, text, func1);
+        else
+            return addButtonDisabled(pos, text, toolTipText);
     }
 
     public static function button(pos:int):CoCButton {

@@ -6,6 +6,7 @@ package classes.Scenes.Places
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.Lake.*;
+import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.Places.Boat.*;
 import classes.Scenes.SceneLib;
 
@@ -28,6 +29,11 @@ public class Boat extends AbstractLakeContent
 		public function boatExplore():void
 		{
 			player.addStatusValue(StatusEffects.BoatDiscovery, 1, 1);
+			//Belisa
+			if (BelisaFollower.BelisaInGame == true && BelisaFollower.BelisaEncounternum == 1) {
+				SceneLib.belisa.secondEncounter();
+				return;
+			}
 			//Helia monogamy fucks
 			if (flags[kFLAGS.PC_PROMISED_HEL_MONOGAMY_FUCKS] == 1 && flags[kFLAGS.HEL_RAPED_TODAY] == 0 && rand(10) == 0 && player.gender > 0 && !SceneLib.helScene.followerHel()) {
 				SceneLib.helScene.helSexualAmbush();
@@ -58,35 +64,29 @@ public class Boat extends AbstractLakeContent
 			
 			//BUILD LIST OF CHOICES
 			var choice:Array = [0, 1, 2, 3, 4];
-			if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && player.level > 2)
-				choice[choice.length] = 5;
-			if (player.hasKeyItem("Fishing Pole") >= 0) choice[choice.length] = 6;
+			if (player.hasKeyItem("Fishing Pole") >= 0) choice[choice.length] = 5;
 			//MAKE YOUR CHOICE
 			var selector:Number = choice[rand(choice.length)];
 			//RUN CHOSEN EVENT
 			switch (selector) {
 				case 0:
-					outputText("You row for nearly an hour, until your arms practically burn with exhaustion from all the rowing.");
+					if (rand(2) == 0) outputText("You row for nearly an hour, until your arms practically burn with exhaustion from all the rowing.");
+					else outputText("You give up on finding anything interesting, and decide to go check up on your camp.");
 					doNext(camp.returnToCampUseOneHour);
 					return;
 				case 1:
-					outputText("You give up on finding anything interesting, and decide to go check up on your camp.");
-					doNext(camp.returnToCampUseOneHour);
+					sharkGirlScene.sharkGirlEncounter(1);
 					return;
 				case 2:
-					sharkGirlScene.sharkGirlEncounter(1);
-					return;
-				case 3:
-					sharkGirlScene.sharkGirlEncounter(1);
-					return;
-				case 4:
 					flags[kFLAGS.ANEMONE_OR_SEA_ANEMONE] = 1;
 					SceneLib.anemoneScene.mortalAnemoneeeeee();
 					return;
-				case 5:
-					lake.fetishZealotScene.zealotBoat();
+				case 3:
+				case 4:
+					if (flags[kFLAGS.FACTORY_SHUTDOWN] > 0 && player.level > 2) lake.fetishZealotScene.zealotBoat();
+					else sharkGirlScene.sharkGirlEncounter(1);
 					return;
-				case 6:
+				case 5:
 					outputText("This is a calm day at the lake, you managed to hold your boat in place and, while you found nothing of note, couldn’t help yourself but to enjoy a few hour using your newly acquired fishing pole. You even spotted Calu in the distance doing the same thing from her usual sitting spot.\n\n");
 					outputText("<b>You got a fish!</b>");
 					inventory.takeItem(consumables.FREFISH, camp.returnToCampUseOneHour);

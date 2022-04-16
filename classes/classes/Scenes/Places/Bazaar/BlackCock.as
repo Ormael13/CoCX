@@ -51,7 +51,7 @@ import classes.CoC;
 
 		public function enterTheBlackCock():void {
 			clearOutput();
-			spriteSelect(-1);
+			spriteSelect(null);
 			outputText(images.showImage("location-bazaar-theblackcock"));
 			//General descriptor
 			outputText("You enter the tent to find much of what you'd expect: A bunch of wooden tables and a sectioned-off portion in the back where you presume the cooking happens. Next to the flap leading into the kitchen there is a big \"keep out\" sign stuck into the ground through the tent's bottom. ");
@@ -677,7 +677,7 @@ import classes.CoC;
 			}
 			else if (player.hasVagina()) { //Female
 				outputText("\n\nAs his hand slowly slides down your body you watch his face. Eyes bright with an eagerness to please are locked onto your [vagina] as he bites his lip. Then he rubs a single digit across your [clit]. Then he looks up and catches you watching him and, for some reason, you both burst into laughter. You can't help but wonder at the pure elation coming from the happy fog in your lungs.");
-				outputText("\n\nAfter the laughing has died down, and with your hand still firmly wrapped around his cock, he goes for your [pussy] again. Again he uses his fingers to stimulate your clit, handling the sensitive protruding gland with confidence as he brings a shuddering sensation of trembling ecstasy crashing through your mind and body. You look over and he catches your eye. For some reason, probably the drugs, the two of you are suddenly laughing as he maintains a firm grip on your [cock]. Once the joke is over he hands you the pipe and tells you to take a deep hit. As you do this, soft fingers begin moving around inside you, dipping into your moistened lady parts with a single questing finger.");
+				outputText("\n\nAfter the laughing has died down, and with your hand still firmly wrapped around his cock, he goes for your [pussy] again. Again he uses his fingers to stimulate your clit, handling the sensitive protruding gland with confidence as he brings a shuddering sensation of trembling ecstasy crashing through your mind and body. You look over and he catches your eye. For some reason, probably the drugs, the two of you are suddenly laughing as he maintains a firm grip on your [clit]. Once the joke is over he hands you the pipe and tells you to take a deep hit. As you do this, soft fingers begin moving around inside you, dipping into your moistened lady parts with a single questing finger.");
 				if (player.vaginas[0].vaginalLooseness >= 2) {
 					outputText("\n\nAnother finger slides alongside the first, and then another until you're groaning from the feeling of multiple wiggling fingers playing around inside of you.");
 				}
@@ -1232,7 +1232,7 @@ import classes.CoC;
 			}
 			else {
 				outputText("Frida smiles at you as you take a seat in one of the barstools.");
-				if (flags[kFLAGS.BLACK_COCK_FRIDAS_CAKE_EATEN_COUNTER] > 0) outputText("\n\n\"</i>You come here for another piece of cake?<i>\"");
+				if (flags[kFLAGS.BLACK_COCK_FRIDAS_CAKE_EATEN_COUNTER] > 0) outputText("\n\n\"</i>You come here for another piece of cake?</i>\"");
 				else outputText("\n\n\"<i>You ready for a piece of cake now, hun?</i>\"");
 			}
 			if (flags[kFLAGS.CODEX_ENTRY_ECHIDNAS] <= 0) {
@@ -1395,16 +1395,16 @@ import classes.CoC;
 		public function satyrTFs():void {
 			var changes:int = 0;
 			var changeLimit:int = 3;
-			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0 || player.findPerk(PerkLib.PastLifeAlchemist) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.Enhancement) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.Fusion) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.Enchantment) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.Refinement) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.Saturation) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.Perfection) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.Creationism) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.EzekielBlessing) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
+			if (player.hasPerk(PerkLib.HistoryAlchemist) || player.hasPerk(PerkLib.PastLifeAlchemist)) changeLimit++;
+			if (player.hasPerk(PerkLib.Enhancement)) changeLimit++;
+			if (player.hasPerk(PerkLib.Fusion)) changeLimit++;
+			if (player.hasPerk(PerkLib.Enchantment)) changeLimit++;
+			if (player.hasPerk(PerkLib.Refinement)) changeLimit++;
+			if (player.hasPerk(PerkLib.Saturation)) changeLimit++;
+			if (player.hasPerk(PerkLib.Perfection)) changeLimit++;
+			if (player.hasPerk(PerkLib.Creationism)) changeLimit++;
+			if (player.hasPerk(PerkLib.EzekielBlessing)) changeLimit++;
+			if (player.hasPerk(PerkLib.TransformationResistance)) changeLimit--;
 			//Stats and genital changes
 			if (rand(2) == 0) {
 				outputText("\n\nHeat floods your loins as thoughts of tight round asses and dripping pussies flood your mind.");
@@ -1415,14 +1415,14 @@ import classes.CoC;
 				}
 			}
 			if (player.blockingBodyTransformations()) changeLimit = 0;
-			if (rand(3) == 0 && changes < changeLimit && player.cocks[player.smallestCockIndex()].length < 12) {
+			if (rand(3) == 0 && changes < changeLimit && player.cocks[player.smallestCockIndex()].cockLength < 12) {
 				outputText("\n\nHeat funnels into your cock as the alcohol flushes through you. Reaching down to inspect it, you find it has grown longer.");
-				player.cocks[player.smallestCockIndex()].length++;
+				player.cocks[player.smallestCockIndex()].cockLength += 1;
 				changes++;
 			}
-			if (rand(3) == 0 && changes < changeLimit && player.cocks[player.smallestCockIndex()].girth < 4) {
+			if (rand(3) == 0 && changes < changeLimit && player.cocks[player.smallestCockIndex()].cockThickness < 4) {
 				outputText("\n\nYou cock feels warm. When you reach down to inspect it your suspicions are confirmed. it's gotten thicker.");
-				player.cocks[player.smallestCockIndex()].girth += 0.5;
+				player.cocks[player.smallestCockIndex()].cockThickness += 0.5;
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.balls > 0) {
@@ -1507,14 +1507,14 @@ import classes.CoC;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.cockTotal() == 1 && player.countCocksOfType(CockTypesEnum.HUMAN) == 0) {
 				outputText("You feel a stirring in your loins as your cock grows rock hard. You " + player.clothedOrNakedLower("pull it out from your [armor], to ") + "take a look. It seems you now <b>have a human dick again</b>.");
-				player.cocks.type = CockTypesEnum.HUMAN;
+				player.cocks.cockType = CockTypesEnum.HUMAN;
 				changes++;
 			}
 			if (rand(3) == 0 && changes < changeLimit && player.cockTotal() > 1 && (player.cockTotal() - player.countCocksOfType(CockTypesEnum.HUMAN)) > 0) {
 				outputText("One of your penises begins to feel strange. You " + player.clothedOrNakedLower("pull it out from your [armor], releasing", "notice") + " a plume of thick smoke. When you look down you see it has <b>become a human dick</b>.");
 				for (var i:int = 0; i < player.cockTotal(); i++) {
-					if (player.cocks[i].type != CockTypesEnum.HUMAN) {
-						player.cocks[i].type = CockTypesEnum.HUMAN;
+					if (player.cocks[i].cockType != CockTypesEnum.HUMAN) {
+						player.cocks[i].cockType = CockTypesEnum.HUMAN;
 						break;
 					}
 				}
@@ -1526,16 +1526,16 @@ import classes.CoC;
 		public function rhinoTFs():void {
 			var changes:int = 0;
 			var changeLimit:int = 3;
-			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0 || player.findPerk(PerkLib.PastLifeAlchemist) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.Enhancement) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.Fusion) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.Enchantment) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.Refinement) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.Saturation) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.Perfection) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.Creationism) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.EzekielBlessing) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
+			if (player.hasPerk(PerkLib.HistoryAlchemist) || player.hasPerk(PerkLib.PastLifeAlchemist)) changeLimit++;
+			if (player.hasPerk(PerkLib.Enhancement)) changeLimit++;
+			if (player.hasPerk(PerkLib.Fusion)) changeLimit++;
+			if (player.hasPerk(PerkLib.Enchantment)) changeLimit++;
+			if (player.hasPerk(PerkLib.Refinement)) changeLimit++;
+			if (player.hasPerk(PerkLib.Saturation)) changeLimit++;
+			if (player.hasPerk(PerkLib.Perfection)) changeLimit++;
+			if (player.hasPerk(PerkLib.Creationism)) changeLimit++;
+			if (player.hasPerk(PerkLib.EzekielBlessing)) changeLimit++;
+			if (player.hasPerk(PerkLib.TransformationResistance)) changeLimit--;
 			// Stats Changes
 			//------------
 			if (rand(3) == 0 && player.str < 100) {
@@ -1817,16 +1817,16 @@ import classes.CoC;
 		public function echidnaTFs():void {
 			var changes:int = 0;
 			var changeLimit:int = 3;
-			if (player.findPerk(PerkLib.HistoryAlchemist) >= 0 || player.findPerk(PerkLib.PastLifeAlchemist) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.Enhancement) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.Fusion) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.Enchantment) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.Refinement) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.Saturation) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.Perfection) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.Creationism) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.EzekielBlessing) >= 0) changeLimit++;
-			if (player.findPerk(PerkLib.TransformationResistance) >= 0) changeLimit--;
+			if (player.hasPerk(PerkLib.HistoryAlchemist) || player.hasPerk(PerkLib.PastLifeAlchemist)) changeLimit++;
+			if (player.hasPerk(PerkLib.Enhancement)) changeLimit++;
+			if (player.hasPerk(PerkLib.Fusion)) changeLimit++;
+			if (player.hasPerk(PerkLib.Enchantment)) changeLimit++;
+			if (player.hasPerk(PerkLib.Refinement)) changeLimit++;
+			if (player.hasPerk(PerkLib.Saturation)) changeLimit++;
+			if (player.hasPerk(PerkLib.Perfection)) changeLimit++;
+			if (player.hasPerk(PerkLib.Creationism)) changeLimit++;
+			if (player.hasPerk(PerkLib.EzekielBlessing)) changeLimit++;
+			if (player.hasPerk(PerkLib.TransformationResistance)) changeLimit--;
 			var i:int = 0;
 			// Stats Changes
 			//------------
@@ -2039,7 +2039,7 @@ import classes.CoC;
 			if (rand(3) == 0 && changes < changeLimit && player.hasCock() && player.cumMultiplier < 25) {
 				var mult:Number = 1 + rand(4);
 				//Lots of cum raises cum multiplier cap to 3 instead of 1.5
-				if (player.findPerk(PerkLib.MessyOrgasms) >= 0) mult += rand(20);
+				if (player.hasPerk(PerkLib.MessyOrgasms)) mult += rand(20);
 				mult *= 0.1;
 				player.cumMultiplier += mult;
 				//Flavor text
@@ -2053,7 +2053,7 @@ import classes.CoC;
 				player.shrinkTits();
 				changes++;
 			}
-			if (rand(4) == 0 && changes < changeLimit && player.echidnaScore() >= 3 && player.hasVagina() && player.findPerk(PerkLib.Oviposition) < 0) {
+			if (rand(4) == 0 && changes < changeLimit && player.echidnaScore() >= 3 && player.hasVagina() && !player.hasPerk(PerkLib.Oviposition)) {
 				outputText("\n\nDeep inside yourself there is a change.  It makes you feel a little woozy, but passes quickly.  Beyond that, you aren't sure exactly what just happened, but you are sure it originated from your womb.\n");
 				outputText("(<b>Perk Gained: Oviposition</b>)");
 				player.createPerk(PerkLib.Oviposition, 0, 0, 0, 0);

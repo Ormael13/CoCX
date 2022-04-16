@@ -4,6 +4,7 @@ import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Stats.Buff;
+import classes.display.SpriteDb;
 
 public class Roxanne extends BazaarAbstractContent implements TimeAwareInterface {
 
@@ -77,7 +78,7 @@ public function RoxanneAppearance():void {
 //[Drinking Table Approach, Not Met Yet]
 public function Roxanne1stApproach():void {
 	clearOutput();
-	spriteSelect(78);
+	spriteSelect(SpriteDb.s_poisontail);
 	outputText("You hesitantly approach the drinking lizard-folk, taking note of their unusual garments and appearance.  They all wear black jackets with silver trim, tight-fitting leather pants, and tall, black boots.  Oddly, the most feminine of them appears to be the leader.  Her jacket is filled out with large, well-rounded DD-cup breasts, and her boots forgo the traditional shape for a sluttier, higher heel.  Her scales are a dark purple, glittering darkly in the light, and while her head has a lizard-like shape, a pair of dragon-like horns bulge from the back of her skull in place of hair.  The other lizans all appear to be males, but they act as if they're quite intimidated by the feminine leader.\n\n");
 	outputText("Suddenly, the alpha-lizan glances up and meets your eye, her expression turning into a leering sneer as she asks, \"<i>See something you like " + player.mf("buddy","girly") + "?  Come on over, tell us your story!</i>\"\n\n");
 	outputText("Do you approach?");
@@ -90,7 +91,7 @@ public function Roxanne1stApproach():void {
 
 //[Approach] – Flag as Met
 public function RoxanneChooseApproachOrRepeat():void {
-	spriteSelect(78);
+	spriteSelect(SpriteDb.s_poisontail);
 	clearOutput();
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00221] == 0) {
 		flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00221]++;
@@ -164,7 +165,7 @@ private function roxanneDrinkingContestLoseDeliberately():void {
 }
 
 private function roxanneDrinkingContest():void {
-	spriteSelect(78);
+	spriteSelect(SpriteDb.s_poisontail);
 	clearOutput();
 	outputText("Roxanne ");
 	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00225] >= 200) outputText("stumbles over her huge manhood, working towards");
@@ -251,7 +252,7 @@ private function roxanneDrinkingContest():void {
 
 //[GET A JOB OF BLOWNESS]
 private function roxanneGivesABlowjob():void {
-	spriteSelect(78);
+	spriteSelect(SpriteDb.s_poisontail);
 	clearOutput();
 	var x:Number = player.biggestCockIndex();
 	outputText("You open the lower portion of your [armor] and, pulling it back, hang out your [cocks]; ");
@@ -296,7 +297,7 @@ private function roxanneGivesABlowjob():void {
 }
 //[Receive Oral – Vaginalingus]
 private function roxanneCunnilingus():void {
-	spriteSelect(78);
+	spriteSelect(SpriteDb.s_poisontail);
 	clearOutput();
 	outputText("You shimmy out of your [armor] and lean back, exposing your " + vaginaDescript() + " to the drunken lizan's maw.  She wobbles back and forth for a moment, clutching at your [legs] to steady herself before she leans in, brushing her scaled nose against your vulva.  You shudder from the sudden contact with her scales, but she doesn't rush it, instead huffing and sniffing at the moist entrance.  Her alcohol-lidded eyes gaze up at you, the bleary orbs slightly confused as her jaw slowly opens to release her tongue.\n\n");
 	outputText("The pink length of Poisontail's tongue oozes out like a sentient creature, waggling slightly as if sniffing the air before it presses on the ");
@@ -342,7 +343,7 @@ private function roxanneCunnilingus():void {
 }
 //[Receive Oral – SkyrRimjoooooooob]
 private function roxanneRimjob():void {
-	spriteSelect(78);
+	spriteSelect(SpriteDb.s_poisontail);
 	clearOutput();
 	outputText("You shimmy out of your [armor] and smirk, turning around to lean onto the table");
 	if(player.biggestTitSize() >= 2) outputText(", your breasts cushioning you from the hard wood below");
@@ -396,7 +397,7 @@ private function roxanneRimjob():void {
 
 //[OH SHIT YOU SO DRUNK AND GETTING REAMED BY LIZARD CAWK]
 private function roxanneReamsYouNormal():void {
-	spriteSelect(78);
+	spriteSelect(SpriteDb.s_poisontail);
 	clearOutput();
 	outputText("A foot interposes itself between you and the table, and a shove sends you flopping onto the booze-soaked planks face-down, the last few inches of descent slowed by Roxanne's firm hands.  A scaled digit digs under your [armor], pulling and tugging.  As each piece is forcibly removed, you're left more and more naked, totally exposed to the heat of the fire and the smooth scales of the lizan's body.  The room lurches when you to try to move and stop her, and you flop back down, ignoring the drunken spin of your surroundings.  Laughing heartily, the pirate leans over you to pin your hands to the table.  While her position has the intended effect of restraining you, it also gives you the enviable ability to feel Roxanne's iron-hard nipples pressing into your back.\n\n");
 
@@ -422,7 +423,7 @@ private function roxanneReamsYouNormal():void {
 	outputText("\"<i>Unf... you're so fucking tight, [name]!  Gods, I hate Ceraph's curse and this wretched world... but your ass... your gorgeous, cock-slurping asshole... it's divine,</i>\" praises Roxanne, smacking your ass-pillows in between her slow, rump-filling pumps.  She continues ranting with her thrusts, picking up the pace while she says, \"<i>So hot... my beautiful, drunken anal slut.  Look at you... you're soaked in your spilt beer, panting while I ream your rump.  Did you even want to win?  I bet you secretly wanted this, didn't you?  Go on, nod and tell me how much you want this.</i>\"\n\n");
 
 	outputText("You shake your head no, and are rewarded for your disobedience with a violent, butt-jiggling tail-whip.  Gasping from the pain, your " + assholeDescript() + " contracts involuntarily, milking Roxanne's member for a few more drops of pre.  The aggressive lizard really gets into it, her massive, DD-cup tits pinning you to the table while she smacks your cheeks with her flexible lizan tail.   Pounding and slapping you, she abuses you for every dick-milking squeeze you'll give her, ");
-	if(player.findPerk(PerkLib.Masochist) < 0) outputText("until you're voluntarily working your abdominal muscles to avoid the pain.");
+	if(!player.hasPerk(PerkLib.Masochist)) outputText("until you're voluntarily working your abdominal muscles to avoid the pain.");
 	else outputText("until you're moaning with delight from every butt-reddening strike.");
 	outputText("  Breaking under the onslaught, you mewl drunkenly, \"<i>Fuck my assh... plug me with your cum,</i>\" and wonder if you actually meant it.\n\n");
 
@@ -479,7 +480,7 @@ private function roxanneReamsYouNormal():void {
 
 //[Roxanne HAS A FUCKING TORPEDO DICK BUTTFUCK]
 private function roxanneFucksYourAssOHGODITSHUGE():void {
-	spriteSelect(78);
+	spriteSelect(SpriteDb.s_poisontail);
 	clearOutput();
 	outputText("Gosh, Roxanne is so strong... she's such a good friend to help you into her wagon, even while she has to drag the weight of her huge prick.  The lizan spins you in her arms and kisses you full on the face, her massive tongue battering through your lips to explore the recesses of your still-slack mouth.  A moment later, your sluggish reflexes catch up to the kiss, and you lick and suck at her tongue, clinging to the ");
 	if(player.tallness >= 80) outputText("small ");
@@ -562,7 +563,7 @@ private function applyHangover():void {
 
 //PC has a big butt and loses to normal Roxanne
 private function bigBootyRoxanneContestLoss():void {
-	spriteSelect(78);
+	spriteSelect(SpriteDb.s_poisontail);
 	clearOutput();
 	outputText("Gods, your head is swimming!  The room is pitching from side to side, and you " + player.mf("chuckle","giggle") + " as you idly wonder if this is what it would be like aboard Roxanne's ship.  Still, the well-endowed shemale doesn't seem to mind your tipsy bumbling in the slightest.  She hooks her hands under your [butt] and squeezes the spacious ass-flesh appreciatively, then growls, \"<i>Such a nice, round ass; perfect for stuffing with cock!  You're wasted as a champion.  You'd make a better cabin-" + player.mf("boy","girl") + ",</i>\" into your ear as she drags you towards her wagon.");
 	outputText("\n\nWooden planks rattle as you're pushed against the door, your cushiony cheeks smushing out to the sides to stretch your [armor].  The busty victor nuzzles your neck, leaving lewd, drunken licks all the way up to your chin.  Her moist sighs wash over you as she begins to pant faster and faster, her quickening arousal all but stealing the breath from both of your mouths.  Squishing up against your thigh, the lizard's semi-flaccid member is slowly filling, growing harder and harder as it floods with burgeoning passion.  At some point it escaped the pirate's imprisoning leather pants, and you drunkenly look down at it.");

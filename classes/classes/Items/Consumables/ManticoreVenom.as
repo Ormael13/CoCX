@@ -30,14 +30,12 @@ public class ManticoreVenom extends Consumable {
 		player.slimeFeed();
 		clearOutput();
 		outputText("You guzzle down the vial and your lust immediately spikes up, making you spontaneously orgasm. Your body seems to react strangely to the poison however.");
-		if (changes < changeLimit && rand(2) == 0) {
+		if (changes < changeLimit && rand(2) == 0 && player.MutagenBonus("spe", 1)) {
 			outputText("\n\nFeeling energetic you suddenly make a dash for the nearest tree and realize you're way faster than before.");
-			player.MutagenBonus("spe", 1);
 			changes++;
 		}
-		if (changes < changeLimit && rand(2) == 0) {
+		if (changes < changeLimit && rand(2) == 0 && player.MutagenBonus("int", 1)) {
 			outputText("\n\nYou can't help but think about the various ways you will ambush and thoroughly rape your foes. That terrorised look on their face will be priceless.");
-			player.MutagenBonus("int", 1);
 			changes++;
 		}
 		if (changes < changeLimit && rand(2) == 0) {
@@ -89,8 +87,8 @@ public class ManticoreVenom extends Consumable {
 		}
 		//Scorpion tail
 		if (player.arms.type == Arms.LION && changes < changeLimit && player.tailType != Tail.GARGOYLE && player.tailType != Tail.SCORPION && player.tailType != Tail.MANTICORE_PUSSYTAIL && rand(2) == 0) {
-      outputText("\n\n");
-      CoC.instance.transformations.TailScorpion.applyEffect();
+			outputText("\n\n");
+			CoC.instance.transformations.TailScorpion.applyEffect();
 			changes++;
 		}
 		//PussyTail (only females)

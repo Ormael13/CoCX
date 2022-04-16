@@ -103,9 +103,9 @@ public class Horns extends BodyPart {
 			var desc: String = "";
 
 			if (player.horns.count < 3) desc += "Tiny horns-like nub protrude from your forehead, resembling the horns of the young unicorn.";
-			if (player.horns.count >= 3 && player.horns.count < 6) desc += "One moderately sized horns grow from your forehead, similar in size to those on a young unicorn.";
-			if (player.horns.count >= 6 && player.horns.count < 12) desc += "One large horns sprout from your forehead, spiraling and pointing forwards like those of an unicorn.";
-			if (player.horns.count >= 12 && player.horns.count < 20) desc += "One very large and dangerous looking spiraling horns sprout from your forehead, pointing forward and over a foot long. It have dangerous looking tip.";
+			if (player.horns.count >= 3 && player.horns.count < 6) desc += "A moderately sized horn sprouts from your forehead, similar in size to those on a young unicorn.";
+			if (player.horns.count >= 6 && player.horns.count < 12) desc += "A large horn sprouts from your forehead, spiraling and pointing forwards like those of an unicorn.";
+			if (player.horns.count >= 12 && player.horns.count < 20) desc += "A very large and dangerous looking spiraling horn sprouts from your forehead, pointing forward and over a foot long. It have dangerous looking tip.";
 			if (player.horns.count >= 20) desc += "One huge and long spiraling horns erupt from your forehead, pointing forward. The weight of it is heavy and ends with dangerous and sharp looking tip.";
 
 			return desc;
@@ -121,10 +121,10 @@ public class Horns extends BodyPart {
 
 			if (player.horns.count >= 2) {
 				if (CoC.instance.transformations.FaceRhino.isPresent()) desc += "A second horns sprouts from your forehead just above the horns on your nose.";
-				else desc += "A single horns sprouts from your forehead. It is conical and resembles a rhino's horns.";
+				else desc += "A single horn sprouts from your forehead. It is conical and resembles a rhino's horn.";
 				desc += "You estimate it to be about seven inches long.";
 			} else {
-				desc += "A single horns sprouts from your forehead. It is conical and resembles a rhino's horns. You estimate it to be about six inches long.";
+				desc += "A single horn sprouts from your forehead. It is conical and resembles a rhino's horn. You estimate it to be about six inches long.";
 			}
 
 			return desc;
@@ -174,7 +174,7 @@ public class Horns extends BodyPart {
 		appearanceDescFunc: function(player: *): String {
 			var desc: String = "";
 
-			if (player.horns.count > 0) desc += " You have a pair of horns on your head warning anyone who looks that you are an oni and do mean serious business.";
+			if (player.horns.count > 0) desc += " You have a pair of horn on your head warning anyone who looks that you are an oni and mean serious business.";
 
 			return desc;
 		}
@@ -186,7 +186,7 @@ public class Horns extends BodyPart {
 		appearanceDescFunc: function(player: *): String {
 			var desc: String = "";
 
-			if (player.horns.count > 0) desc += " You have a single horns on your head warning anyone who looks that you are an oni and do mean serious business.";
+			if (player.horns.count > 0) desc += " You have a single horns on your head warning anyone who looks that you are an oni and mean serious business.";
 
 			return desc;
 		}
@@ -264,7 +264,7 @@ public class Horns extends BodyPart {
 		appearanceDescFunc: function(player: *): String {
 			var desc: String = "Two large sized spiraling horns grow from the side of your head, similar to those of a ram or frost wyrm. They kind of look great";
 
-			if (player.lowerBody == LowerBody.FROSTWYRM) desc += ", especially with your fur, which makes you look like a sheep serpentine dragon";
+			if (player.lowerBody == LowerBody.FROSTWYRM) desc += ", especially with your fluffy fur, which makes you look like a sheep serpentine dragon";
 
 			desc += ".";
 
@@ -293,6 +293,18 @@ public class Horns extends BodyPart {
 			var desc: String = "";
 
 			if (player.horns.count > 0) desc += " Two large-sized horns grow from the side of your head. The faint bioluminescent specks that line the length of each horn enhance with a mesmerizing glow. At the tip of each horn is a bright red glow, both as a gentle warning and an enthralling lure to unwary prey.";
+
+			return desc;
+		}
+	});
+
+	public static const JABBERWOCKY: int = 22;
+	EnumValue.add(Types, JABBERWOCKY, "JABBERWOCKY", {
+		name:"jabberwocky",
+		appearanceDescFunc: function(player: *): String {
+			var desc: String = "";
+
+			if (player.horns.count > 0) desc += " Four large-sized dragon horns grow from the side of your head curved like those of a jabberwocky.";
 
 			return desc;
 		}

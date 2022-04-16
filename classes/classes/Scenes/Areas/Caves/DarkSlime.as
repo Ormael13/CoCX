@@ -31,7 +31,7 @@ use namespace CoC;
 				return;
 			}
 			//Determine if evaded
-			if (short != "Kiha" && player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
+			if (player.hasPerk(PerkLib.Evade) && rand(100) < 10) {
 				if (hasPerk(PerkLib.Acid)) outputText("tries to slap you, but you evade her attack.");
 				else outputText(", but you evade the clumsy attack.");
 				return;
@@ -136,78 +136,24 @@ use namespace CoC;
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			SceneLib.dungeons.ebonlabyrinth.defeatedByDarkSlime();
+			SceneLib.caves.darkslimeScene.defeatedByDarkSlime();
 		}
 
 		public function DarkSlime()
 		{
-			if (player.hasStatusEffect(StatusEffects.EbonLabyrinthB)) {
-				if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 250) {
-					initStrTouSpeInte(195, 290, 120, 175);
-					initWisLibSensCor(175, 370, 300, 10);
-					this.weaponAttack = 45;
-					this.armorDef = 45;
-					this.armorMDef = 135;
-					this.bonusHP = 1400;
-					this.bonusMana = 350;
-					this.bonusLust = 750;
-					this.level = 80;
-				}
-				else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 200) {
-					initStrTouSpeInte(188, 272, 120, 170);
-					initWisLibSensCor(170, 346, 280, 10);
-					this.weaponAttack = 43;
-					this.armorDef = 40;
-					this.armorMDef = 120;
-					this.bonusHP = 1200;
-					this.bonusMana = 300;
-					this.bonusLust = 702;
-					this.level = 76;
-				}
-				else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 150) {
-					initStrTouSpeInte(181, 254, 130, 165);
-					initWisLibSensCor(165, 322, 260, 10);
-					this.weaponAttack = 41;
-					this.armorDef = 35;
-					this.armorMDef = 105;
-					this.bonusHP = 1000;
-					this.bonusMana = 250;
-					this.bonusLust = 654;
-					this.level = 72;
-				}
-				else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 100) {
-					initStrTouSpeInte(174, 236, 120, 160);
-					initWisLibSensCor(160, 298, 240, 10);
-					this.weaponAttack = 39;
-					this.armorDef = 30;
-					this.armorMDef = 90;
-					this.bonusHP = 800;
-					this.bonusMana = 200;
-					this.bonusLust = 606;
-					this.level = 68;
-				}
-				else if (player.statusEffectv1(StatusEffects.EbonLabyrinthB) > 50) {
-					initStrTouSpeInte(167, 218, 110, 155);
-					initWisLibSensCor(155, 274, 220, 10);
-					this.weaponAttack = 37;
-					this.armorDef = 25;
-					this.armorMDef = 75;
-					this.bonusHP = 600;
-					this.bonusMana = 150;
-					this.bonusLust = 558;
-					this.level = 64;
-				}
-				else {
-					initStrTouSpeInte(160, 200, 100, 150);
-					initWisLibSensCor(150, 250, 200, 10);
-					this.weaponAttack = 35;
-					this.armorDef = 20;
-					this.armorMDef = 60;
-					this.bonusHP = 400;
-					this.bonusMana = 100;
-					this.bonusLust = 510;
-					this.level = 60;
-				}
+			if (inDungeon) { //EL check
+                var mod:int = SceneLib.dungeons.ebonlabyrinth.enemyLevelMod;
+                initStrTouSpeInte(160 + 7*mod, 200 + 18*mod, 100 + 10*mod, 150 + 5*mod);
+                initWisLibSensCor(150 + 5*mod, 250 + 24*mod, 200 + 20*mod, 10);
+                this.weaponAttack = 35 + 2*mod;
+                this.armorDef = 20 + 5*mod;
+                this.armorMDef = 60 + 15*mod;
+                this.bonusHP = 400 + 200*mod;
+                this.bonusMana = 100 + 50*mod;
+                this.bonusLust = 510 + 48*mod;
+                this.level = 60 + 5*mod;
+                this.gems = int((90 + rand(45)) * Math.exp(0.2*mod));
+                this.additionalXP = int(750 * Math.exp(0.2*mod));
 			}
 			else {
 				initStrTouSpeInte(154, 187, 92, 145);
@@ -219,6 +165,7 @@ use namespace CoC;
 				this.bonusMana = 100;
 				this.bonusLust = 463;
 				this.level = 55;
+			    this.gems = rand(15) + 60; //they're high level, made it more!
 			}
 			this.a = "";
 			this.short = "dark slime";
@@ -244,7 +191,6 @@ use namespace CoC;
 			this.lust = 45;
 			this.lustVuln = .75;
 			this.temperment = TEMPERMENT_LOVE_GRAPPLES;
-			this.gems = rand(6) + 4;
 			this.drop = new ChainedDrop().add(weapons.PIPE,1/10)
 					.add(consumables.DSLIMEJ,1/2)
 					.elseDrop(useables.GREENGL);

@@ -28,7 +28,7 @@ public class Brigid extends Monster
 			//(Effect: Stagger/Stun)
 			var damage:Number = 5;
 			damage = player.takePhysDamage(damage, true);
-			if(player.findPerk(PerkLib.Resolute) >= 0) outputText("  Of course, your resolute posture prevents her from accomplishing much.");
+			if(player.hasPerk(PerkLib.Resolute)) outputText("  Of course, your resolute posture prevents her from accomplishing much.");
 			else player.createStatusEffect(StatusEffects.Stunned,0,0,0,0);
 		}
 

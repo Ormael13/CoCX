@@ -24,19 +24,12 @@ import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.ItemTags;
 import classes.Items.JewelryLib;
-import classes.PerkType;
 import classes.Scenes.Places.TelAdre.UmasShop;
-import classes.Stats.Buff;
+import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Stats.BuffBuilder;
 import classes.Stats.BuffableStat;
 import classes.Stats.PrimaryStat;
-import classes.Stats.RawStat;
 import classes.Stats.StatStore;
-import classes.StatusEffects.Combat.CombatInteBuff;
-import classes.StatusEffects.Combat.CombatSpeBuff;
-import classes.StatusEffects.Combat.CombatStrBuff;
-import classes.StatusEffects.Combat.CombatTouBuff;
-import classes.StatusEffects.Combat.CombatWisBuff;
 import classes.internals.Utils;
 import classes.lists.BreastCup;
 import classes.lists.Gender;
@@ -103,6 +96,7 @@ public class Creature extends Utils
 		public function get weaponName():String { return _weaponName; }
 		public function get weaponVerb():String { return _weaponVerb; }
 		public function get weaponAttack():Number { return _weaponAttack; }
+		//Warning: Deprecated since 0.8s2. New tagging system uses this args. DO NOT USE, MUST REPLACE WITH weaponSpecials
 		public function get weaponPerk():String { return _weaponPerk; }
 		public function get weaponType():String { return _weaponType; }
 		public function get weaponValue():Number { return _weaponValue; }
@@ -352,6 +346,34 @@ public class Creature extends Utils
 		public var wisStat:PrimaryStat;
 		public var libStat:PrimaryStat;
 		public var sensStat:BuffableStat;
+		
+		// auxiliary stats
+		
+		public var maxHpBaseStat: BuffableStat;
+		public var maxHpPerLevelStat: BuffableStat;
+		public var maxHpMultStat: BuffableStat;
+		public var maxLustBaseStat: BuffableStat;
+		public var maxLustPerLevelStat: BuffableStat;
+		public var maxLustPerLibStat: BuffableStat;
+		public var maxLustMultStat: BuffableStat;
+		public var maxWrathBaseStat: BuffableStat;
+		public var maxWrathPerLevelStat: BuffableStat;
+		public var maxWrathMultStat: BuffableStat;
+		public var maxFatigueBaseStat: BuffableStat;
+		public var maxFatiguePerLevelStat: BuffableStat;
+		public var maxFatiguePerSpeStat: BuffableStat;
+		public var maxFatigueMultStat: BuffableStat;
+		public var maxManaBaseStat: BuffableStat;
+		public var maxManaPerLevelStat: BuffableStat;
+		public var maxManaPerIntStat: BuffableStat;
+		public var maxManaPerWisStat: BuffableStat;
+		public var maxManaMultStat: BuffableStat;
+		public var maxSfBaseStat: BuffableStat;
+		public var maxSfPerLevelStat: BuffableStat;
+		public var maxSfPerWisStat: BuffableStat;
+		public var maxSfMultStat: BuffableStat;
+		
+		public var spellpowerStat: BuffableStat;
 
 		private var _stats: StatStore;
 
@@ -399,7 +421,7 @@ public class Creature extends Utils
 				CoC.instance.mainView.statsView.showStatDown(statName);
 			}
 		}
-		public function removeCurse(statName:String, power:Number, tier:Number = 0):void {
+		public function removeCurse(statName:String, power:Number, tier:Number = 0):Boolean {
 			var tierPower:String = "NOT PROPERLY ADDED STAT!";
 			if (tier == 0) tierPower = "Tribulation Vestiges";
 			if (tier == 1) tierPower = "Weakened";
@@ -412,30 +434,36 @@ public class Creature extends Utils
 			}
 			var current:Number = stat.valueOfBuff(tierPower);
 			if (statName == "sens" || statName == "cor") {
-				if (current >0){
-					if (power*2 >= current) {
+				if (current > 0) {
+					if (power >= current) {
 						stat.removeBuff(tierPower);
 						CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 						CoC.instance.mainView.statsView.showStatDown(statName);
-					} else if (power*2 < current) {
-						stat.addOrIncreaseBuff(tierPower, -power*2);
+					} else if (power < current) {
+						stat.addOrIncreaseBuff(tierPower, -power);
 						CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 						CoC.instance.mainView.statsView.showStatUp(statName);
 					}
+                    return true; //changed
 				}
+                else
+                    return false;
 			}
 			else {
 				if (current < 0) {
-					if (power*2 >= -current) {
+					if (power >= -current) {
 						stat.removeBuff(tierPower);
 						CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 						CoC.instance.mainView.statsView.showStatUp(statName);
-					} else if (power*2 < -current) {
-						stat.addOrIncreaseBuff(tierPower, power*2);
+					} else if (power < -current) {
+						stat.addOrIncreaseBuff(tierPower, power);
 						CoC.instance.mainView.statsView.refreshStats(CoC.instance);
 						CoC.instance.mainView.statsView.showStatDown(statName);
 					}
+                    return true; //changed
 				}
+                else
+                    return false;
 			}
 		}
 
@@ -481,8 +509,8 @@ public class Creature extends Utils
 			return 10;
 		}
 		protected function maxHP_base():Number {
-			var max:Number = 0;
-			var multimax:Number = 1;
+			var max:Number = maxHpBaseStat.value;
+			var multimax:Number = maxHpMultStat.value;
 			if (hasPerk(PerkLib.IcyFlesh)) {
 				max += int(inte * 2 + 50);
 				if (inte >= 21) max += Math.round(inte);
@@ -490,7 +518,7 @@ public class Creature extends Utils
 				if (inte >= 61) max += Math.round(inte);
 				if (inte >= 81) max += Math.round(inte);
 				if (inte >= 101) max += Math.round(inte) * Math.floor( (inte-100)/50 + 1);
-				if (hasPerk(MutationsLib.FrozenHeartFinalForm)) max *= 1.5;
+				if (hasPerk(MutationsLib.FrozenHeartEvolved)) max *= 1.5;
 			}
 			else if (hasPerk(PerkLib.HaltedVitals)) {
 				max += int(lib * 2 + 50);
@@ -509,7 +537,7 @@ public class Creature extends Utils
 				if (tou >= 101) max += Math.round(tou) * Math.floor( (tou-100)/50 + 1);
 			}
 			if (hasPerk(PerkLib.IcyFlesh)) {
-				if (hasPerk(MutationsLib.FrozenHeartFinalForm)) {
+				if (hasPerk(MutationsLib.FrozenHeartEvolved)) {
 					if (hasPerk(PerkLib.TankI)) max += Math.round(inte*18);
 					if (hasPerk(PerkLib.TankII)) max += Math.round(inte*18);
 					if (hasPerk(PerkLib.TankIII)) max += Math.round(inte*18);
@@ -568,24 +596,24 @@ public class Creature extends Utils
 			if (hasPerk(PerkLib.JobGuardian)) max += 120;
 			if (hasPerk(PerkLib.BodyCultivator)) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.FleshBodyApprenticeStage)) {
-				if (hasPerk(PerkLib.SoulApprentice)) max += (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (hasPerk(PerkLib.SoulPersonage)) max += (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (hasPerk(PerkLib.SoulWarrior)) max += (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulApprentice)) max += (250 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulPersonage)) max += (250 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulWarrior)) max += (250 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}
 			if (hasPerk(PerkLib.FleshBodyWarriorStage)) {
-				if (hasPerk(PerkLib.SoulSprite)) max += (300 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (hasPerk(PerkLib.SoulScholar)) max += (300 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (hasPerk(PerkLib.SoulElder)) max += (300 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulSprite)) max += (400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulScholar)) max += (400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulElder)) max += (400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}
 			if (hasPerk(PerkLib.FleshBodyElderStage)) {
-				if (hasPerk(PerkLib.SoulExalt)) max += (400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (hasPerk(PerkLib.SoulOverlord)) max += (400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (hasPerk(PerkLib.SoulTyrant)) max += (400 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulExalt)) max += (600 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulOverlord)) max += (600 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulTyrant)) max += (600 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}
 			if (hasPerk(PerkLib.FleshBodyOverlordStage)) {
-				if (hasPerk(PerkLib.SoulKing)) max += (500 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (hasPerk(PerkLib.SoulEmperor)) max += (500 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (hasPerk(PerkLib.SoulAncestor)) max += (500 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulKing)) max += (800 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulEmperor)) max += (800 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
+				if (hasPerk(PerkLib.SoulAncestor)) max += (800 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			}
 			if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) max += (600 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) max += (900 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
@@ -593,7 +621,7 @@ public class Creature extends Utils
 			if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) max += (1500 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.AscensionHardiness)) max += perkv1(PerkLib.AscensionHardiness) * 400;
 			if (hasPerk(PerkLib.ChiReflowDefense)) max += UmasShop.NEEDLEWORK_DEFENSE_EXTRA_HP;
-			max += level * 60;
+			max += level * maxHpPerLevelStat.value;
 			if (level <= 6) max += level * 60;
 			if (hasPerk(PerkLib.UnlockBody)) max += level * 60;
 			if (hasPerk(PerkLib.UnlockBody2ndStage)) max += level * 60;
@@ -648,6 +676,7 @@ public class Creature extends Utils
 				if (game.player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) maxHP_mult1 += 0.5;
 				if (game.player.hasKeyItem("Upgraded Armor plating 3.0") >= 0) maxHP_mult1 += 0.75;
 			}
+			if (game.player.hasPerk(PerkLib.SharedPower) && game.player.perkv1(PerkLib.SharedPower) > 0) maxHP_mult1 += (0.1*game.player.perkv1(PerkLib.SharedPower));
 			return maxHP_mult1;
 		}
 		public function maxHP():Number {
@@ -656,77 +685,28 @@ public class Creature extends Utils
 		}
 		public function maxOverHP():Number {
 			var maxOver:Number = maxHP();
-			if (hasPerk(PerkLib.HiddenJobBloodDemon)) {
-				if (hasPerk(PerkLib.IcyFlesh)) maxOver += Math.round(inte * 10);
-				else maxOver += Math.round(tou * 10);
-			}
-			if (hasPerk(PerkLib.WayOfTheBlood)) {
-				if (hasPerk(PerkLib.IcyFlesh)) maxOver += Math.round(inte * 10);
-				else maxOver += Math.round(tou * 10);
-			}
-			if (hasPerk(PerkLib.YourPainMyPower)) {
-				if (hasPerk(PerkLib.IcyFlesh)) maxOver += Math.round(inte * 10);
-				else maxOver += Math.round(tou * 10);
-			}
-			if (hasPerk(PerkLib.MyBloodForBloodPuppies)) {
-				if (hasPerk(PerkLib.IcyFlesh)) maxOver += Math.round(inte * 10);
-				else maxOver += Math.round(tou * 10);
-			}
-			if (hasPerk(PerkLib.BloodDemonToughness)) {
-				if (hasPerk(PerkLib.IcyFlesh)) maxOver += Math.round(inte * 10);
-				else maxOver += Math.round(tou*10);
-			}
+			var maxOver2:Number = 1;
+			if (hasPerk(PerkLib.HiddenJobBloodDemon)) maxOver2 += 0.1;
+			if (hasPerk(PerkLib.WayOfTheBlood)) maxOver2 += 0.1;
+			if (hasPerk(PerkLib.YourPainMyPower)) maxOver2 += 0.1;
+			if (hasPerk(PerkLib.MyBloodForBloodPuppies)) maxOver2 += 0.1;
+			if (hasPerk(PerkLib.BloodDemonToughness)) maxOver2 += 0.1;
 			//
-			if (hasPerk(PerkLib.BloodDemonWisdom)) {
-				if (hasPerk(PerkLib.IcyFlesh)) maxOver += Math.round(inte * 10);
-				else maxOver += Math.round(tou*10);
-			}
+			if (hasPerk(PerkLib.BloodDemonWisdom)) maxOver2 += 0.1;
 			//
-			if (hasPerk(PerkLib.BloodDemonIntelligence)) {
-				if (hasPerk(PerkLib.IcyFlesh)) maxOver += Math.round(inte * 10);
-				else maxOver += Math.round(tou*10);
-			}
+			if (hasPerk(PerkLib.BloodDemonIntelligence)) maxOver2 += 0.1;
+			if (hasPerk(PerkLib.MunchkinAtWork)) maxOver2 += 0.1;
+			maxOver *= maxOver2;//~180%
+			maxOver = Math.round(maxOver);
 			return Math.min(19999999,maxOver);
 		}
 		public function minHP():Number {
 			return 0;
 		}
 		protected function maxLust_base():Number {
-			var max:Number = 100;
-			var multimax:Number = 1;
-			if (hasPerk(PerkLib.InhumanDesireI)) max += Math.round(lib*3);
-			if (hasPerk(PerkLib.InhumanDesireII)) max += Math.round(lib*3);
-			if (hasPerk(PerkLib.InhumanDesireIII)) max += Math.round(lib*3);
-			if (hasPerk(PerkLib.InhumanDesireIV)) max += Math.round(lib*3);
-			if (hasPerk(PerkLib.InhumanDesireV)) max += Math.round(lib*3);
-			if (hasPerk(PerkLib.InhumanDesireVI)) max += Math.round(lib*3);
-			if (hasPerk(PerkLib.BasicSelfControl)) max += 45;
-			if (hasPerk(PerkLib.HalfStepToImprovedSelfControl)) max += 75;
-			if (hasPerk(PerkLib.ImprovedSelfControl)) max += 120;
-			if (hasPerk(PerkLib.HalfStepToAdvancedSelfControl)) max += 180;
-			if (hasPerk(PerkLib.AdvancedSelfControl)) max += 300;
-			if (hasPerk(PerkLib.HalfStepToSuperiorSelfControl)) max += 480;
-			if (hasPerk(PerkLib.SuperiorSelfControl)) max += 750;
-			if (hasPerk(PerkLib.HalfStepToPeerlessSelfControl)) max += 1050;
-			if (hasPerk(PerkLib.PeerlessSelfControl)) max += 1500;
-			if (hasPerk(PerkLib.HalfStepToInhumanSelfControl)) max += 2250;
-			if (hasPerk(PerkLib.InhumanSelfControl)) max += 3000;
-			if (hasPerk(PerkLib.HalfStepToEpicSelfControl)) max += 4500;
-			if (hasPerk(PerkLib.EpicSelfControl)) max += 6750;
-			if (hasPerk(PerkLib.HalfStepToLegendarySelfControl)) max += 10500;
-			if (hasPerk(PerkLib.LegendarySelfControl)) max += 15000;
-			if (hasPerk(PerkLib.HalfStepToMythicalSelfControl)) max += 22500;
-			if (hasPerk(PerkLib.MythicalSelfControl)) max += 30000;
-			if (hasPerk(PerkLib.Mage)) max += 15;
-			if (hasPerk(PerkLib.GrandMage)) max += 30;
-			if (hasPerk(PerkLib.Archmage)) max += 45;
-			if (hasPerk(PerkLib.GrandArchmage)) max += 60;
-			if (hasPerk(PerkLib.GrandArchmage2ndCircle)) max += 75;
-			if (hasPerk(PerkLib.GrandArchmage3rdCircle)) max += 90;
-			if (hasPerk(PerkLib.GreyMageApprentice)) max += 20;
-			if (hasPerk(PerkLib.GreyMage)) max += 40;
-			if (hasPerk(PerkLib.GreyArchmage)) max += 80;
-			if (hasPerk(PerkLib.GrandGreyArchmage)) max += 160;
+			var max:Number = maxLustBaseStat.value;
+			var multimax:Number = maxLustMultStat.value;
+			max += maxLustPerLibStat.value*lib;
 			if (hasPerk(PerkLib.ElementalBondUrges)) {
 				if (hasStatusEffect(StatusEffects.SummonedElementalsAir)) max += maxLust_ElementalBondUrgesMulti() * 3 * statusEffectv2(StatusEffects.SummonedElementalsAir);
 				if (hasStatusEffect(StatusEffects.SummonedElementalsEarth)) max += maxLust_ElementalBondUrgesMulti() * 3 * statusEffectv2(StatusEffects.SummonedElementalsEarth);
@@ -746,34 +726,13 @@ public class Creature extends Utils
 				if (hasStatusEffect(StatusEffects.SummonedElementalsFireE)) max += maxLust_ElementalBondUrgesMulti() * 15 * statusEffectv2(StatusEffects.SummonedElementalsFireE);
 				if (hasStatusEffect(StatusEffects.SummonedElementalsWaterE)) max += maxLust_ElementalBondUrgesMulti() * 15 * statusEffectv2(StatusEffects.SummonedElementalsWaterE);
 			}
-			if (hasPerk(PerkLib.BroBody) || hasPerk(PerkLib.BimboBody) || hasPerk(PerkLib.FutaForm)) max += 60;
-			if (hasPerk(PerkLib.OmnibusGift)) max += 45;
-			if (hasPerk(PerkLib.JobCourtesan)) max += 60;
-			if (hasPerk(PerkLib.JobSeducer)) max += 30;
-			if (hasPerk(PerkLib.GreyMagic)) max += 30;
-			if (hasPerk(PerkLib.PrestigeJobGreySage)) max += 300;
 			if (hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) max += (150 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) max += (225 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) max += (300 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.EclassHeavenTribulationSurvivor)) max += (375 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.AscensionDesires)) max += perkv1(PerkLib.AscensionDesires) * 30;
-			max += level * 3;
+			max += level * maxLustPerLevelStat.value;
 			if (level <= 6) max += level * 3;
-			if (hasPerk(PerkLib.UnlockArdor)) max += level * 3;
-			if (hasPerk(PerkLib.UnlockArdor2ndStage)) max += level * 3;
-			if (hasPerk(PerkLib.UnlockArdor3rdStage)) max += level * 3;
-			if (hasPerk(PerkLib.UnlockArdor4thStage)) max += level * 3;
-			if (hasPerk(PerkLib.AscensionUnlockedPotential)) max += level * 6;
-			if (hasPerk(PerkLib.AscensionUnlockedPotential3rdStage)) max += level * 6;
-			if (hasPerk(PerkLib.DemonicDesireI)) multimax += 0.05;
-			if (hasPerk(PerkLib.DemonicDesireII)) multimax += 0.05;
-			if (hasPerk(PerkLib.DemonicDesireIII)) multimax += 0.05;
-			if (hasPerk(PerkLib.DemonicDesireVI)) multimax += 0.05;
-			if (hasPerk(PerkLib.DemonicDesireV)) multimax += 0.05;
-			if (hasPerk(PerkLib.DemonicDesireVI)) multimax += 0.05;
-			if (hasPerk(PerkLib.LimitBreakerHeart1stStage)) multimax += 0.05;
-			if (hasPerk(PerkLib.LimitBreakerHeart2ndStage)) multimax += 0.1;
-			if (hasPerk(PerkLib.DeityJobMunchkin)) multimax += 0.2;
 			max *= multimax;
 			max = Math.round(max);
 			return max;
@@ -791,6 +750,13 @@ public class Creature extends Utils
 			return multiValue1b;
 		}
 		public function maxLust_mult():Number {
+			var maxmult:Number = 1;
+			if (game.player.angelScore() >= 5) maxmult -= 0.15;
+			if (game.player.angelScore() >= 16) maxmult -= 0.3;
+			if (game.player.demonScore() >= 5) maxmult += 0.2;
+			if (game.player.demonScore() >= 11) maxmult += 0.4;
+			if (game.player.demonScore() >= 16) maxmult += 0.6;
+			if (TyrantiaFollower.TyrantiaTrainingSessions > 0.5) maxmult += 0.01 * TyrantiaFollower.TyrantiaTrainingSessions;
 			return 1;
 		}
 		public function maxLust():Number {
@@ -800,9 +766,10 @@ public class Creature extends Utils
 		public function maxOverLust():Number {
 			var max1:Number = Math.round(maxLust_base()*maxLust_mult());
 			var max2:Number = 1;
-			max1 *= max2;//~170%
-			max1 = Math.round(max1);//~809 905,5
-			return Math.min(199999,max1);
+			if (hasPerk(PerkLib.MunchkinAtWork)) max2 += 0.1;
+			max1 *= max2;//~110%
+			max1 = Math.round(max1);
+			return Math.min(219999,max1);
 		}
 		public function maxFatigue():Number {
 			return 150;
@@ -937,6 +904,7 @@ public class Creature extends Utils
 			}
 			lust = Utils.boundFloat(mins.lust, lust + dlust, maxLust());
 			cor  = Utils.boundFloat(mins.cor, cor + dcor, 100);
+            if (cor < 1.0) cor = 0;//check [0,1] to avoid confusion
 
 			// old_hp / old_max = new_hp / new_max
 			HP = oldHPratio * maxHP();
@@ -1050,7 +1018,7 @@ public class Creature extends Utils
 		}
 
 		public function get coatColor():String {
-			if (!skin.hasCoat()) return hairColor;
+			//if (!skin.hasCoat()) return hairColor;
 			return skin.coat.color;
 		}
 		public function get coatColor2():String {
@@ -1233,16 +1201,68 @@ public class Creature extends Utils
 			wisStat = new PrimaryStat(this,'wis');
 			libStat = new PrimaryStat(this,'lib');
 			sensStat = new BuffableStat(this,'sens', {base:15, min:0});
+			
+			maxHpBaseStat = new BuffableStat(this, 'maxhp_base', {base:0});
+			maxHpPerLevelStat = new BuffableStat(this, 'maxhp_perlevel', {base:60});
+			maxHpMultStat = new BuffableStat(this, 'maxhp_mult', {base:1});
+			maxLustBaseStat = new BuffableStat(this, 'maxlust_base', {base:100});
+			maxLustPerLevelStat = new BuffableStat(this, 'maxlust_perlevel', {base:3});
+			maxLustPerLibStat = new BuffableStat(this, 'maxlust_perlib', {base:0});
+			maxLustMultStat = new BuffableStat(this, 'maxlust_mult', {base:1});
+			maxWrathBaseStat = new BuffableStat(this, 'maxwrath_base', {base:500});
+			maxWrathPerLevelStat = new BuffableStat(this, 'maxwrath_perlevel', {base:5});
+			maxWrathMultStat = new BuffableStat(this, 'maxwrath_mult', {base:1});
+			maxFatigueBaseStat = new BuffableStat(this, 'maxfatigue_base', {base:150});
+			maxFatiguePerLevelStat = new BuffableStat(this, 'maxfatigue_perlevel', {base:5});
+			maxFatiguePerSpeStat = new BuffableStat(this, 'maxfatigue_perspe', {base:0});
+			maxFatigueMultStat = new BuffableStat(this, 'maxfatigue_mult', {base:1});
+			maxManaBaseStat = new BuffableStat(this, 'maxmana_base', {base:300});
+			maxManaPerLevelStat = new BuffableStat(this, 'maxmana_perlevel', {base:10});
+			maxManaPerIntStat = new BuffableStat(this, 'maxmana_perint', {base:0});
+			maxManaPerWisStat = new BuffableStat(this, 'maxmana_perwis', {base:0});
+			maxManaMultStat = new BuffableStat(this, 'maxmana_mult', {base:1});
+			maxSfBaseStat = new BuffableStat(this, 'maxsf_base', {base:50});
+			maxSfPerLevelStat = new BuffableStat(this, 'maxsf_perlevel', {base:5});
+			maxSfPerWisStat = new BuffableStat(this, 'maxsf_perwis', {base:0});
+			maxSfMultStat = new BuffableStat(this, 'maxsf_mult', {base:1});
+			
+			spellpowerStat = new BuffableStat(this, 'spellpower', {base:1});
 
-			_stats = new StatStore({
-				'str': strStat,
-				'tou': touStat,
-				'spe': speStat,
-				'int': intStat,
-				'wis': wisStat,
-				'lib': libStat,
-				'sens': sensStat
-			});
+			_stats = new StatStore([
+				strStat,
+				touStat,
+				speStat,
+				intStat,
+				wisStat,
+				libStat,
+				sensStat,
+				
+				maxHpBaseStat,
+				maxHpPerLevelStat,
+				maxHpMultStat,
+				maxLustBaseStat,
+				maxLustPerLevelStat,
+				maxLustPerLibStat,
+				maxLustMultStat,
+				maxWrathBaseStat,
+				maxWrathPerLevelStat,
+				maxWrathMultStat,
+				maxFatigueBaseStat,
+				maxFatiguePerLevelStat,
+				maxFatiguePerSpeStat,
+				maxFatigueMultStat,
+				maxManaBaseStat,
+				maxManaPerLevelStat,
+				maxManaPerIntStat,
+				maxManaPerWisStat,
+				maxManaMultStat,
+				maxSfBaseStat,
+				maxSfPerLevelStat,
+				maxSfPerWisStat,
+				maxSfMultStat,
+				
+				spellpowerStat
+			]);
 
 			skin = new Skin(this);
 			underBody = new UnderBody(this);
@@ -1435,24 +1455,6 @@ public class Creature extends Utils
 		}
 
 		/**
-		 * STOP USING THIS! Use Creature.hasPerk or Creature.getPerk instead!
-		 * Perks are no longer stored as an array this is an extremely slow compatibility measure.
-		 * @deprecated
-		 * @see Creature.hasPerk
-		 * @see Creature.getPerk
-		 * @param ptype
-		 * @return {Number} Index of perk in array if it exists. -1 if perk does not exist.
-		 */
-		public function findPerk(ptype:PerkType):Number
-		{
-			var perk:PerkClass = this._perks.get(ptype);
-			if (perk) {
-				return this._perks.asArray().indexOf(perk);
-			}
-			return -1;
-		}
-
-		/**
 		 * Check if this creature has a perk.
 		 * @param ptype {PerkType}
 		 * @return {Boolean} True if creature has the perk, otherwise false.
@@ -1577,36 +1579,32 @@ public class Creature extends Utils
 			return this._statusEffects.addStatusValue(stype, statusValueNum, bonus);
 		}
 
-		public function statusEffectv1(stype:StatusEffectType):Number
+		public function getStatusValue(stype:StatusEffectType, statusValueNum:int):Number
 		{
 			if (this._statusEffects.hasStatusEffect(stype)) {
-				return this._statusEffects.getStatusValue(stype, 1);
+				return this._statusEffects.getStatusValue(stype, statusValueNum);
 			}
 			return 0;
+		}
+
+		public function statusEffectv1(stype:StatusEffectType):Number
+		{
+            return getStatusValue(stype, 1);
 		}
 
 		public function statusEffectv2(stype:StatusEffectType):Number
 		{
-			if (this._statusEffects.hasStatusEffect(stype)) {
-				return this._statusEffects.getStatusValue(stype, 2);
-			}
-			return 0;
+            return getStatusValue(stype, 2);
 		}
 
 		public function statusEffectv3(stype:StatusEffectType):Number
 		{
-			if (this._statusEffects.hasStatusEffect(stype)) {
-				return this._statusEffects.getStatusValue(stype, 3);
-			}
-			return 0;
+            return getStatusValue(stype, 3);
 		}
 
 		public function statusEffectv4(stype:StatusEffectType):Number
 		{
-			if (this._statusEffects.hasStatusEffect(stype)) {
-				return this._statusEffects.getStatusValue(stype, 4);
-			}
-			return 0;
+            return getStatusValue(stype, 4);
 		}
 
 		public function cleanAllBuffs():void
@@ -1632,27 +1630,10 @@ public class Creature extends Utils
 		 * @param buff Creature stat is decremented by this value.
 		 * @return (oldStat-newStat)
 		 */
-		public function addCombatBuff(stat:String, buff:Number):Number {
-			switch(stat) {
-				case 'str':
-					return (createOrFindStatusEffect(StatusEffects.GenericCombatStrBuff)
-							as CombatStrBuff).applyEffect(buff);
-				case 'spe':
-					return (createOrFindStatusEffect(StatusEffects.GenericCombatSpeBuff)
-							as CombatSpeBuff).applyEffect(buff);
-				case 'tou':
-					return (createOrFindStatusEffect(StatusEffects.GenericCombatTouBuff)
-							as CombatTouBuff).applyEffect(buff);
-				case 'int':
-				case 'inte':
-					return (createOrFindStatusEffect(StatusEffects.GenericCombatInteBuff)
-							as CombatInteBuff).applyEffect(buff);
-				case 'wis':
-					return (createOrFindStatusEffect(StatusEffects.GenericCombatWisBuff)
-							as CombatWisBuff).applyEffect(buff);
-			}
-			trace("/!\\ ERROR: addCombatBuff('"+stat+"', "+buff+")");
-			return 0;
+		public function addCombatBuff(stat:String, buff:Number, text:String = "Combat Buff", tag:String = "CombatBuff"):Number {
+			if (stat == "inte") stat = "int";
+            this.buff(tag).withText(text).addStat(stat,buff).combatPermanent();
+            return 0;
 		}
 		/*
 
@@ -1692,15 +1673,7 @@ public class Creature extends Utils
 		{
 			if (cocks.length == 0)
 				return 0;
-			var counter:Number = cocks.length;
-			var index:Number = 0;
-			while (counter > 0)
-			{
-				counter--;
-				if (cockArea(index) < cockArea(counter))
-					index = counter;
-			}
-			return cockArea(index);
+			return cockArea(findCock(1, -1, -1, "area"));
 		}
 
 		//Find the second biggest dick and it's area.
@@ -1708,82 +1681,30 @@ public class Creature extends Utils
 		{
 			if (cocks.length <= 1)
 				return 0;
-			var counter:Number = cocks.length;
-			var index:Number = 0;
-			var index2:Number = -1;
-			//Find the biggest
-			while (counter > 0)
-			{
-				counter--;
-				if (cockArea(index) < cockArea(counter))
-					index = counter;
-			}
-			//Reset counter and find the next biggest
-			counter = cocks.length;
-			while (counter > 0)
-			{
-				counter--;
-				//Is this spot claimed by the biggest?
-				if (counter != index)
-				{
-					//Not set yet?
-					if (index2 == -1)
-						index2 = counter;
-					//Is the stored value less than the current one?
-					if (cockArea(index2) < cockArea(counter))
-					{
-						index2 = counter;
-					}
-				}
-			}
-			//If it couldn't find a second biggest...
-			if (index == index2)
-				return 0;
-			return cockArea(index2);
+			return cockArea(findCock(2, -1, -1, "area"));
 		}
 
 		public function longestCock():Number
 		{
 			if (cocks.length == 0)
 				return 0;
-			var counter:Number = cocks.length;
-			var index:Number = 0;
-			while (counter > 0)
-			{
-				counter--;
-				if (cocks[index].cockLength < cocks[counter].cockLength)
-					index = counter;
-			}
-			return index;
+			return findCock(1, -1, -1, "length");
 		}
 
 		public function longestCockLength():Number
 		{
 			if (cocks.length == 0)
 				return 0;
-			var counter:Number = cocks.length;
-			var index:Number = 0;
-			while (counter > 0)
-			{
-				counter--;
-				if (cocks[index].cockLength < cocks[counter].cockLength)
-					index = counter;
-			}
-			return cocks[index].cockLength;
+			return cocks[longestCock()].cockLength;
 		}
 
 		public function longestHorseCockLength():Number
 		{
 			if (cocks.length == 0)
 				return 0;
-			var counter:Number = cocks.length;
-			var index:Number = 0;
-			while (counter > 0)
-			{
-				counter--;
-				if ((cocks[index].cockType != CockTypesEnum.HORSE && cocks[counter].cockType == CockTypesEnum.HORSE) || (cocks[index].cockLength < cocks[counter].cockLength && cocks[counter].cockType == CockTypesEnum.HORSE))
-					index = counter;
-			}
+			var index:Number = findCockWithType(CockTypesEnum.HORSE, 1, -1, -1, "length");
+            if (index < 0)
+                index = 0;
 			return cocks[index].cockLength;
 		}
 
@@ -1825,66 +1746,24 @@ public class Creature extends Utils
 			return thick;
 		}
 
-		public function thickestCock():Number
+		public function thickestCockIndex():Number
 		{
-			if (cocks.length == 0)
-				return 0;
-			var counter:Number = cocks.length;
-			var index:Number = 0;
-			while (counter > 0)
-			{
-				counter--;
-				if (cocks[index].cockThickness < cocks[counter].cockThickness)
-					index = counter;
-			}
-			return index;
+			return findCock(1, -1, -1, "thickness");
 		}
 
 		public function thickestCockThickness():Number
 		{
-			if (cocks.length == 0)
-				return 0;
-			var counter:Number = cocks.length;
-			var index:Number = 0;
-			while (counter > 0)
-			{
-				counter--;
-				if (cocks[index].cockThickness < cocks[counter].cockThickness)
-					index = counter;
-			}
-			return cocks[index].cockThickness;
+			return cocks[thickestCockIndex()].cockThickness;
 		}
 
 		public function thinnestCockIndex():Number
 		{
-			if (cocks.length == 0)
-				return 0;
-			var counter:Number = cocks.length;
-			var index:Number = 0;
-			while (counter > 0)
-			{
-				counter--;
-				if (cocks[index].cockThickness > cocks[counter].cockThickness)
-					index = counter;
-			}
-			return index;
+			return findCock(-1, -1, -1, "thickness");
 		}
 
 		public function smallestCockIndex():Number
 		{
-			if (cocks.length == 0)
-				return 0;
-			var counter:Number = cocks.length;
-			var index:Number = 0;
-			while (counter > 0)
-			{
-				counter--;
-				if (cockArea(index) > cockArea(counter))
-				{
-					index = counter;
-				}
-			}
-			return index;
+			return findCock(-1, -1, -1, "area");
 		}
 
 		public function smallestCockLength():Number
@@ -1896,114 +1775,24 @@ public class Creature extends Utils
 
 		public function shortestCockIndex():Number
 		{
-			if (cocks.length == 0)
-				return 0;
-			var counter:Number = cocks.length;
-			var index:Number = 0;
-			while (counter > 0)
-			{
-				counter--;
-				if (cocks[index].cockLength > cocks[counter].cockLength)
-					index = counter;
-			}
-			return index;
+			return findCock(-1, -1, -1, "length");
 		}
 
 		public function shortestCockLength():Number
 		{
 			if (cocks.length == 0)
 				return 0;
-			var counter:Number = cocks.length;
-			var index:Number = 0;
-			while (counter > 0)
-			{
-				counter--;
-				if (cocks[index].cockLength > cocks[counter].cockLength)
-					index = counter;
-			}
-			return cocks[index].cockLength;
+			return cocks[shortestCockIndex()].cockLength;
 		}
 
-		//Find the biggest cock that fits inside a given range
-		public function cockThatFits(i_fits:Number, type:String = "area", i_min:Number = 0):Number
-		{
-			if (cocks.length <= 0)
-				return -1;
-			var i:int = cocks.length;
-			//Current largest fitter
-			var best:int = -1;
-			while (i > 0)
-			{
-				i--;
-				var ival:Number;
-				var bestval:Number;
-				if (type == "area") {
-					ival   = cockArea(i);
-					bestval = best==-1?0:cockArea(best);
-				} else if (type == "length") {
-					ival = cocks[i].cockLength;
-					bestval = best==-1?0:cocks[best].cockLength;
-				}
-				if (i_min <= ival && ival <= i_fits)
-				{
-					//If one already fits
-					if (best >= 0)
-					{
-						//See if the newcomer beats the saved small guy
-						if (ival > bestval)
-							best = i;
-					}
-					//Store the index of fitting dick
-					else
-						best = i;
-				}
-			}
-			return best;
-		}
+        public function cockThatFits(i_fits:Number, type:String = "area"):Number {
+            return findCock(1, -1, i_fits, type);
+        }
 
 		//Find the 2nd biggest cock that fits inside a given value
 		public function cockThatFits2(fits:Number = 0):Number
 		{
-			if (cockTotal() == 1)
-				return -1;
-			var counter:Number = cocks.length;
-			//Current largest fitter
-			var index:Number = -1;
-			var index2:Number = -1;
-			while (counter > 0)
-			{
-				counter--;
-				//Does this one fit?
-				if (cockArea(counter) <= fits)
-				{
-					//If one already fits
-					if (index >= 0)
-					{
-						//See if the newcomer beats the saved small guy
-						if (cockArea(counter) > cockArea(index))
-						{
-							//Save old wang
-							if (index != -1)
-								index2 = index;
-							index = counter;
-						}
-						//If this one fits and is smaller than the other great
-						else
-						{
-							if ((cockArea(index2) < cockArea(counter)) && counter != index)
-							{
-								index2 = counter;
-							}
-						}
-						if (index >= 0 && index == index2)
-							trace("FUCK ERROR COCKTHATFITS2 SHIT IS BROKED!");
-					}
-					//Store the index of fitting dick
-					else
-						index = counter;
-				}
-			}
-			return index2;
+			return findCock(2, -1, fits, "area");
 		}
 
 		public function smallestCockArea():Number
@@ -2013,166 +1802,136 @@ public class Creature extends Utils
 			return cockArea(smallestCockIndex());
 		}
 
-		public function smallestCock():Number
-		{
-			return cockArea(smallestCockIndex());
-		}
-
 		public function biggestCockIndex():Number
 		{
-			if (cocks.length == 0)
-				return 0;
-			var counter:Number = cocks.length;
-			var index:Number = 0;
-			while (counter > 0)
-			{
-				counter--;
-				if (cockArea(index) < cockArea(counter))
-					index = counter;
-			}
-			return index;
+			return findCock(1, -1, -1, "area");
 		}
 
 		//Find the second biggest dick's index.
 		public function biggestCockIndex2():Number
 		{
-			if (cocks.length <= 1)
-				return 0;
-			var counter:Number = cocks.length;
-			var index:Number = 0;
-			var index2:Number = 0;
-			//Find the biggest
-			while (counter > 0)
-			{
-				counter--;
-				if (cockArea(index) < cockArea(counter))
-					index = counter;
-			}
-			//Reset counter and find the next biggest
-			counter = cocks.length;
-			while (counter > 0)
-			{
-				counter--;
-				//Make sure index2 doesn't get stuck
-				//at the same value as index1 if the
-				//initial location is biggest.
-				if (index == index2 && counter != index)
-					index2 = counter;
-				//Is the stored value less than the current one?
-				if (cockArea(index2) < cockArea(counter))
-				{
-					//Make sure we don't set index2 to be the same
-					//as the biggest dick.
-					if (counter != index)
-						index2 = counter;
-				}
-			}
-			//If it couldn't find a second biggest...
-			if (index == index2)
-				return 0;
-			return index2;
+			return findCock(2, -1, -1, "area");
 		}
 
 		public function smallestCockIndex2():Number
 		{
-			if (cocks.length <= 1)
-				return 0;
-			var counter:Number = cocks.length;
-			var index:Number = 0;
-			var index2:Number = 0;
-			//Find the smallest
-			while (counter > 0)
-			{
-				counter--;
-				if (cockArea(index) > cockArea(counter))
-					index = counter;
-			}
-			//Reset counter and find the next biggest
-			counter = cocks.length;
-			while (counter > 0)
-			{
-				counter--;
-				//Make sure index2 doesn't get stuck
-				//at the same value as index1 if the
-				//initial location is biggest.
-				if (index == index2 && counter != index)
-					index2 = counter;
-				//Is the stored value less than the current one?
-				if (cockArea(index2) > cockArea(counter))
-				{
-					//Make sure we don't set index2 to be the same
-					//as the biggest dick.
-					if (counter != index)
-						index2 = counter;
-				}
-			}
-			//If it couldn't find a second biggest...
-			if (index == index2)
-				return 0;
-			return index2;
+			return findCock(-2, -1, -1, "area");
 		}
 
 		//Find the third biggest dick index.
 		public function biggestCockIndex3():Number
 		{
-			if (cocks.length <= 2)
-				return 0;
-			var counter:Number = cocks.length;
-			var index:Number = 0;
-			var index2:Number = -1;
-			var index3:Number = -1;
-			//Find the biggest
-			while (counter > 0)
-			{
-				counter--;
-				if (cockArea(index) < cockArea(counter))
-					index = counter;
-			}
-			//Reset counter and find the next biggest
-			counter = cocks.length;
-			while (counter > 0)
-			{
-				counter--;
-				//If this index isn't used already
-				if (counter != index)
-				{
-					//Has index been set to anything yet?
-					if (index2 == -1)
-						index2 = counter;
-					//Is the stored value less than the current one?
-					else if (cockArea(index2) < cockArea(counter))
-					{
-						index2 = counter;
-					}
-				}
-			}
-			//If it couldn't find a second biggest...
-			if (index == index2 || index2 == -1)
-				index2 = 0;
-			//Reset counter and find the next biggest
-			counter = cocks.length;
-			while (counter > 0)
-			{
-				counter--;
-				//If this index isn't used already
-				if (counter != index && counter != index2)
-				{
-					//Has index been set to anything yet?
-					if (index3 == -1)
-						index3 = counter;
-					//Is the stored value less than the current one?
-					else if (cockArea(index3) < cockArea(counter))
-					{
-						index3 = counter;
-					}
-				}
-			}
-			//If it fails for some reason.
-			if (index3 == -1)
-				index3 = 0;
-			return index3;
+			return findCock(3, -1, -1, "area");
 		}
 
+        //Checks if the cock is tentacle/stamen
+        public function cockIsTentacle(num:int):Boolean {
+            return cocks[num].cockType == CockTypesEnum.STAMEN || cocks[num].cockType == CockTypesEnum.TENTACLE;
+        }
+
+        /**
+        * Returns the count of the cocks which meet the requirements
+        * Assumes that TENTACLE type is the same as STAMEN (because it's the same, isn't it?)
+        * @param    type        Cock type, UNDEFINED = "any"
+        * @param    minSize     Minimum size, 0/-1 = no checking
+        * @param    maxSize     Maximum size, -1 = no checking
+        * @param    compareBy   The measurement to compare by, "area", "length" or "thickness"
+        * @param    tentUnlim   If true, doesn't check the maximum size for tentacle cocks (you can twist them, makes sense?)
+        * @return   The count of matching dicks
+        */
+        public function countCocksWithType(type:CockTypesEnum, minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", tentUnlim:Boolean = true):int {
+            if (compareBy != "area" && compareBy != "length" && compareBy != "thickness") //sanity check
+                throw new Error("Wrong compareBy value!");
+            var cnt:int = 0;
+            var tent:Boolean = (type == CockTypesEnum.STAMEN || type == CockTypesEnum.TENTACLE);
+            for (var i:int = 0; i < cocks.length; ++i) {
+                var isize:Number = compareBy == "length" ? cocks[i].cockLength :
+                                compareBy == "thickness" ? cocks[i].cockThickness :
+                                cockArea(i);
+                if ((isize >= minSize || minSize < 0) && (isize < maxSize || maxSize < 0 || tentUnlim && cockIsTentacle(i))
+                && (cocks[i].cockType == type || tent && cockIsTentacle(i) || type == CockTypesEnum.UNDEFINED))
+                    ++cnt;
+            }
+            return cnt;
+        }
+		
+		public function countCocks(minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", tentUnlim:Boolean = true):int {
+			return countCocksWithType(CockTypesEnum.UNDEFINED, minSize, maxSize, compareBy, tentUnlim);
+		}
+
+        /**
+        * Returns number of the biggest cock that meets the requirements
+        * Assumes that TENTACLE type is the same as STAMEN (because it's the same, isn't it?)
+        * @param    biggest     "0/1" = biggest, "-1" = smallest, "2" = second biggest, "-2" = second smallest, ...
+        * @param    type        Cock type, UNDEFINED = "any"
+        * @param    minSize     Minimum size, 0/-1 = no checking
+        * @param    maxSize     Maximum size, -1 = no checking
+        * @param    compareBy   The measurement to compare by, "area", "length" or "thickness"
+        * @return   The number of the biggest (comparing by 'compareBy') matching dick, -1 if no any
+        */
+        public function findCockWithType(type:CockTypesEnum, biggest:int = 1, minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", tentUnlim:Boolean = true):int {
+            if (compareBy != "area" && compareBy != "length" && compareBy != "thickness") //sanity check
+                throw new Error("Wrong compareBy value!");
+            var sorted:Array = new Array();
+            var tent:Boolean = (type == CockTypesEnum.STAMEN || type == CockTypesEnum.TENTACLE);
+            //create an array of fitting cocks, sorted descending
+            for (var num:int = 0; num < cocks.length; ++num) {
+                var nsize:Number = compareBy == "length" ? cocks[num].cockLength :
+                                compareBy == "thickness" ? cocks[num].cockThickness :
+                                cockArea(num);
+                if ((nsize >= minSize || minSize < 0) && (nsize < maxSize || maxSize < 0 || tentUnlim && cockIsTentacle(num))
+                && (cocks[num].cockType == type || tent && cockIsTentacle(num) || type == CockTypesEnum.UNDEFINED)) {
+                    var j:int;
+                    for (j = 0; j < sorted.length; ++j) {
+                        var jsize:Number = compareBy == "length" ? cocks[sorted[j]].cockLength :
+                                compareBy == "thickness" ? cocks[sorted[j]].cockThickness :
+                                cockArea(sorted[j]);
+                        if (jsize < nsize) {
+                            sorted.insertAt(j, num);
+                            break;
+                        }
+                    }
+                    //smallest
+                    if (j == sorted.length)
+                        sorted.push(num);
+                }
+            }
+            if (sorted.length == 0 || Math.abs(biggest) > sorted.length)
+                return -1;
+            if (biggest > 0)
+                return sorted[biggest - 1];
+            if (biggest < 0)
+                return sorted[sorted.length + biggest];
+			return sorted[0];
+        }
+		
+		public function findCock(biggest:int = 1, minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", tentUnlim:Boolean = true):int {
+			return findCockWithType(CockTypesEnum.UNDEFINED, biggest, minSize, maxSize, compareBy, tentUnlim);
+		}
+
+        public function findCockWithTypeNotIn(arr:Array, type:CockTypesEnum, biggest:int = 1, minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", tentUnlim:Boolean = true):int {
+            var ret:int = -1;
+            var sign:int = (biggest >= 0) ? 1 : -1;
+            var cnt:int = sign;
+            var biggest_cnt:int = sign;
+            //correct 'biggest' value to account for zeros
+            if (biggest == 0) biggest = 1;
+            do {
+                ret = findCockWithType(type, cnt, minSize, maxSize, compareBy, tentUnlim); //find n-th cock
+                if (ret >= 0 && arr.indexOf(ret) == -1) { //count those outside of the array
+                    if (biggest_cnt == biggest) //if found b-th cock, return it
+                        return ret;
+                    else
+                        biggest_cnt += sign;
+                }
+                cnt += sign;
+            } while (ret >= 0);
+            return -1;
+        }
+
+		public function findCockNotIn(arr:Array, biggest:int = 1, minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", tentUnlim:Boolean = true):int {
+			return findCockWithTypeNotIn(arr, CockTypesEnum.UNDEFINED, biggest, minSize, maxSize, compareBy, tentUnlim);
+		}
 
 		public function cockDescript(cockIndex:int = 0):String
 		{
@@ -2327,14 +2086,6 @@ public class Creature extends Utils
 		{
 			if (hasStatusEffect(StatusEffects.LactationReduction))
 				changeStatusValue(StatusEffects.LactationReduction, 1, 0);
-			if (hasStatusEffect(StatusEffects.LactationReduc0))
-				removeStatusEffect(StatusEffects.LactationReduc0);
-			if (hasStatusEffect(StatusEffects.LactationReduc1))
-				removeStatusEffect(StatusEffects.LactationReduc1);
-			if (hasStatusEffect(StatusEffects.LactationReduc2))
-				removeStatusEffect(StatusEffects.LactationReduc2);
-			if (hasStatusEffect(StatusEffects.LactationReduc3))
-				removeStatusEffect(StatusEffects.LactationReduc3);
 			if (hasPerk(PerkLib.Feeder))
 			{
 				//You've now been milked, reset the timer for that
@@ -2342,7 +2093,7 @@ public class Creature extends Utils
 				changeStatusValue(StatusEffects.Feeder, 2, 0);
 			}
 		}
-		public function boostLactation(todo:Number):Number
+		public function boostLactation(todo:Number, directIncrease:Boolean = false):Number
 		{
 			if (breastRows.length == 0)
 				return 0;
@@ -2351,38 +2102,31 @@ public class Creature extends Utils
 			var changes:Number = 0;
 			var temp2:Number = 0;
 			//Prevent lactation decrease if lactating.
-			if (todo >= 0)
-			{
-				if (hasStatusEffect(StatusEffects.LactationReduction))
+			if (todo >= 0 && hasStatusEffect(StatusEffects.LactationReduction))
 					changeStatusValue(StatusEffects.LactationReduction, 1, 0);
-				if (hasStatusEffect(StatusEffects.LactationReduc0))
-					removeStatusEffect(StatusEffects.LactationReduc0);
-				if (hasStatusEffect(StatusEffects.LactationReduc1))
-					removeStatusEffect(StatusEffects.LactationReduc1);
-				if (hasStatusEffect(StatusEffects.LactationReduc2))
-					removeStatusEffect(StatusEffects.LactationReduc2);
-				if (hasStatusEffect(StatusEffects.LactationReduc3))
-					removeStatusEffect(StatusEffects.LactationReduc3);
-			}
 			if (todo > 0)
 			{
 				while (todo > 0)
 				{
 					counter = breastRows.length;
-					todo -= .1;
+                    //select breast row with the lowest lactation
 					while (counter > 0)
 					{
 						counter--;
 						if (breastRows[index].lactationMultiplier > breastRows[counter].lactationMultiplier)
 							index = counter;
 					}
-					temp2 = .1;
-					if (breastRows[index].lactationMultiplier > 1.5)
-						temp2 /= 2;
-					if (breastRows[index].lactationMultiplier > 2.5)
-						temp2 /= 2;
-					if (breastRows[index].lactationMultiplier > 3)
-						temp2 /= 2;
+					temp2 = todo > .1 ? .1 : todo;
+					todo -= temp2;
+                    //diminishing increase - NOT INCLUDING LACTAID, IT WORKS WELL
+                    if (!directIncrease) {
+                        if (breastRows[index].lactationMultiplier > 1.5)
+                            temp2 /= 2;
+                        if (breastRows[index].lactationMultiplier > 2.5)
+                            temp2 /= 2;
+                        if (breastRows[index].lactationMultiplier > 3)
+                            temp2 /= 2;
+                    }
 					changes += temp2;
 					breastRows[index].lactationMultiplier += temp2;
 				}
@@ -2393,35 +2137,20 @@ public class Creature extends Utils
 				{
 					counter = breastRows.length;
 					index = 0;
-					if (todo > -.1)
-					{
-						while (counter > 0)
-						{
-							counter--;
-							if (breastRows[index].lactationMultiplier < breastRows[counter].lactationMultiplier)
-								index = counter;
-						}
-						//trace(biggestLactation());
-						breastRows[index].lactationMultiplier += todo;
-						if (breastRows[index].lactationMultiplier < 0)
-							breastRows[index].lactationMultiplier = 0;
-						todo = 0;
-					}
-					else
-					{
-						todo += .1;
-						while (counter > 0)
-						{
-							counter--;
-							if (breastRows[index].lactationMultiplier < breastRows[counter].lactationMultiplier)
-								index = counter;
-						}
-						temp2 = todo;
-						changes += temp2;
-						breastRows[index].lactationMultiplier += temp2;
-						if (breastRows[index].lactationMultiplier < 0)
-							breastRows[index].lactationMultiplier = 0;
-					}
+                    //select breast row with the lowest lactation
+                    while (counter > 0)
+                    {
+                        counter--;
+                        if (breastRows[index].lactationMultiplier < breastRows[counter].lactationMultiplier)
+                            index = counter;
+                    }
+                    temp2 = todo < -.1 ? -.1 : todo;
+                    todo -= temp2;
+                    //normal decrease
+                    changes += temp2;
+                    breastRows[index].lactationMultiplier += temp2;
+                    if (breastRows[index].lactationMultiplier < 0)
+                        breastRows[index].lactationMultiplier = 0;
 				}
 			}
 			return changes;
@@ -2532,7 +2261,7 @@ public class Creature extends Utils
 				quantity *= 2;
 			if (hasPerk(PerkLib.OneTrackMind))
 				quantity *= 1.1;
-			if (hasPerk(MutationsLib.MinotaurTesticlesFinalForm))
+			if (hasPerk(MutationsLib.MinotaurTesticlesEvolved))
 				quantity *= 2.5;
 			if (hasPerk(PerkLib.MaraesGiftStud))
 				quantity += 350;
@@ -2542,15 +2271,15 @@ public class Creature extends Utils
 				quantity += 200 + (perkv1(PerkLib.MagicalVirility) * 100);
 			if (hasPerk(PerkLib.FerasBoonSeeder))
 				quantity += 1000;
-			if (hasPerk(MutationsLib.MinotaurTesticlesEvolved))
+			if (hasPerk(MutationsLib.MinotaurTesticlesPrimitive))
+				quantity += 200;
+			if (hasPerk(MutationsLib.NukiNutsPrimitive))
 				quantity += 200;
 			if (hasPerk(MutationsLib.NukiNutsEvolved))
-				quantity += 200;
-			if (hasPerk(MutationsLib.NukiNutsFinalForm))
 				quantity *= 2;
-			if (hasPerk(MutationsLib.EasterBunnyEggBagEvolved))
+			if (hasPerk(MutationsLib.EasterBunnyEggBagPrimitive))
 				quantity *= 1.5;
-			if (hasPerk(MutationsLib.EasterBunnyEggBagFinalForm))
+			if (hasPerk(MutationsLib.EasterBunnyEggBagEvolved))
 				quantity *= 3;
 			if (hasPerk(PerkLib.ProductivityDrugs))
 				quantity += (perkv3(PerkLib.ProductivityDrugs));
@@ -2614,12 +2343,7 @@ public class Creature extends Utils
 		}
 
 		public function countCocksOfType(type:CockTypesEnum):int {
-			if (cocks.length == 0) return 0;
-			var counter:int = 0;
-			for (var x:int = 0; x < cocks.length; x++) {
-				if (cocks[x].cockType == type) counter++;
-			}
-			return counter;
+            return countCocksWithType(type, -1, -1);
 		}
 
 		public function anemoneCocks():int { //How many anemonecocks?
@@ -2686,6 +2410,10 @@ public class Creature extends Utils
 			return countCocksOfType(CockTypesEnum.CAVE_WYRM);
 		}
 
+		public function raijuCocks():int { //How many cave wyrm-cocks?
+			return countCocksOfType(CockTypesEnum.RAIJU);
+		}
+
 		public function pigCocks():int { //How many lizard/snake-cocks?
 			return countCocksOfType(CockTypesEnum.PIG);
 		}
@@ -2708,6 +2436,10 @@ public class Creature extends Utils
 
 		public function gryphonCocks():int { //How many gryphoncocks?
 			return countCocksOfType(CockTypesEnum.GRYPHON);
+		}
+
+		public function beeCocks():int { //How many beecocks?
+			return countCocksOfType(CockTypesEnum.BEE);
 		}
 
 
@@ -2792,11 +2524,10 @@ public class Creature extends Utils
 			return (cocks.length);
 		}
 
-		//BOolean alternate
+		//Boolean alternate
 		public function hasCock():Boolean
 		{
 			return cocks.length >= 1;
-
 		}
 
 		public function hasSockRoom():Boolean
@@ -2879,6 +2610,7 @@ public class Creature extends Utils
 				bonusStr += 30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				bonusSpe += 30 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			}
+			if (game.player.hasPerk(PerkLib.AffinityUndine)) bonusSpe += 50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			if (game.player.armorName == "Sexy Aquamarine Bikini" || game.player.armorName == "Sexy Black Bikini" || game.player.armorName == "Sexy Blue Bikini" || game.player.armorName == "Sexy Green Bikini" || game.player.armorName == "Sexy Pink Bikini" || game.player.armorName == "Sexy Red Bikini" || game.player.armorName == "Sexy White Bikini" || game.player.armorName == "Sexy Yellow Bikini") {
 				bonusStr += 20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 				bonusSpe += 20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
@@ -2886,6 +2618,7 @@ public class Creature extends Utils
 			if (game.player.necklaceName == "Magic coral and pearl necklace") bonusSpe += 10 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			game.player.buff("UnderwaterCombatBoost").addStats({str:bonusStr,spe:bonusSpe}).withText("Fighting Underwater").combatPermanent();
 			HP = oldHPratio * maxHP();
+			if (game.player.hasPerk(PerkLib.AffinityIgnis)) createStatusEffect(StatusEffects.UnderwaterAndIgnis, 0, 0, 0, 0);
 		}
 
 		//Naked
@@ -2905,18 +2638,7 @@ public class Creature extends Utils
 				return true;//dodać inne typy wrogów: nieumarli/duchy
 			return false;
 		}
-
-		//Unique sex scenes
-		public function pcCanUseUniqueSexScene():Boolean
-		{
-			if ((game.player.tailType == Tail.MANTICORE_PUSSYTAIL && game.monster.hasCock()) || (game.player.isAlraune() && game.monster.hasCock()) || (game.player.isAlraune() && game.monster.hasVagina()) || game.player.tailType == Tail.HINEZUMI || game.player.tailType == Tail.SALAMANDER ||
-			((game.player.gender == 1 || game.player.gender == 2) && (game.player.tailType == Tail.HINEZUMI || game.player.tailType == Tail.MOUSE || game.player.tailType == Tail.DEMONIC)) || (game.player.isInGoblinMech() && game.player.hasKeyItem("Cum Reservoir") >= 0 && game.monster.hasCock()) ||
-			(game.player.raijuScore() >= 10 && !game.monster.hasPerk(PerkLib.EnemyHugeType) && !game.monster.hasPerk(PerkLib.EnemyGigantType) && !game.monster.hasPerk(PerkLib.EnemyColossalType) && !game.monster.isAlraune() && !game.monster.isDrider() && !game.monster.isGoo() && !game.monster.isNaga() && !game.monster.isScylla() && !game.monster.isTaur()) ||
-			(game.player.yukiOnnaScore() >= 14 && game.monster.hasCock() && !game.monster.hasPerk(PerkLib.UniqueNPC) && !game.monster.hasPerk(PerkLib.EnemyHugeType) && !game.monster.hasPerk(PerkLib.EnemyGigantType) && !game.monster.hasPerk(PerkLib.EnemyColossalType) && !game.monster.isAlraune() && !game.monster.isDrider() && !game.monster.isGoo() && !game.monster.isNaga() && !game.monster.isScylla() && !game.monster.isTaur()))
-				return true;
-			return false;
-		}
-
+        
 		//check for vagoo
 		public function hasVagina():Boolean
 		{
@@ -3374,7 +3096,7 @@ public class Creature extends Utils
 		public function isAlraune():Boolean { return lowerBodyPart.isAlraune(); }
 		public function isLiliraune():Boolean { return lowerBodyPart.isLiliraune(); }
 		public function isElf():Boolean {
-			return hasPerk(MutationsLib.ElvishPeripheralNervSysFinalForm) || game.player.elfScore() >= 10 || game.player.woodElfScore() >= 17;
+			return hasPerk(MutationsLib.ElvishPeripheralNervSysEvolved) || game.player.elfScore() >= 10 || game.player.woodElfScore() >= 17;
 		}
 
 		public function isFlying():Boolean {
@@ -4084,7 +3806,7 @@ public class Creature extends Utils
 			var flychance:Number = 20;
 			if (hasPerk(PerkLib.AdvancedAerialCombat)) flychance += 5;
 			if (hasPerk(PerkLib.GreaterAerialCombat)) flychance += 15;
-			if (hasPerk(MutationsLib.HarpyHollowBonesEvolved)) flychance += 10;
+			if (hasPerk(MutationsLib.HarpyHollowBonesPrimitive)) flychance += 10;
 			if ((game.player.hasKeyItem("Jetpack") >= 0 || game.player.hasKeyItem("MK2 Jetpack") >= 0) && game.player.isInGoblinMech()) flychance += 25;
 			if (hasPerk(PerkLib.Evade)) {
 				chance += 5;
@@ -4095,8 +3817,8 @@ public class Creature extends Utils
 			}
 			if (hasPerk(PerkLib.ElvenSense)) {
 				chance += 5;
-				if (hasPerk(MutationsLib.ElvishPeripheralNervSysEvolved)) chance += 10;
-				if (hasPerk(MutationsLib.ElvishPeripheralNervSysFinalForm)) chance += 15;
+				if (hasPerk(MutationsLib.ElvishPeripheralNervSysPrimitive)) chance += 10;
+				if (hasPerk(MutationsLib.ElvishPeripheralNervSysEvolved)) chance += 15;
 			}
 			if (hasPerk(PerkLib.Flexibility)) chance += 6;
 			if (hasPerk(PerkLib.Misdirection) && (armorName == "red, high-society bodysuit" || armorName == "Fairy Queen Regalia")) chance += 10;
@@ -4108,7 +3830,7 @@ public class Creature extends Utils
 			if (game.player.hasKeyItem("Nitro Boots") >= 0 && game.player.tallness < 48 && game.player.isBiped()) chance += 30;
 			if (hasPerk(PerkLib.JunglesWanderer)) chance += 35;
 			if (hasStatusEffect(StatusEffects.Illusion)) {
-				if (hasPerk(MutationsLib.KitsuneThyroidGlandFinalForm)) chance += 20;
+				if (hasPerk(MutationsLib.KitsuneThyroidGlandEvolved)) chance += 20;
 				else chance += 10;
 			}
 			if (hasStatusEffect(StatusEffects.HurricaneDance)) chance += 25;
@@ -4128,6 +3850,20 @@ public class Creature extends Utils
 				else chance -= 30;
 			}
 			if (game.player.hasStatusEffect(StatusEffects.Snow) && game.player.tallness < 84) chance -= 50;
+			if (hasPerk(PerkLib.ElementalBody)) {
+				if (perkv1(PerkLib.ElementalBody) == 1) {
+					if (perkv2(PerkLib.ElementalBody) == 1) chance += 10;
+					if (perkv2(PerkLib.ElementalBody) == 2) chance += 20;
+					if (perkv2(PerkLib.ElementalBody) == 3) chance += 30;
+					if (perkv2(PerkLib.ElementalBody) == 4) chance += 40;
+				}
+				if (perkv1(PerkLib.ElementalBody) == 3 || perkv1(PerkLib.ElementalBody) == 4)  {
+					if (perkv2(PerkLib.ElementalBody) == 1) chance += 5;
+					if (perkv2(PerkLib.ElementalBody) == 2) chance += 10;
+					if (perkv2(PerkLib.ElementalBody) == 3) chance += 15
+					if (perkv2(PerkLib.ElementalBody) == 4) chance += 20;
+				}
+			}
 			if (hasStatusEffect(StatusEffects.Flying)) chance += flychance;
 			return chance;
 		}
@@ -4165,8 +3901,8 @@ public class Creature extends Utils
 			if (hasPerk(PerkLib.JobRogue)) generalevasion += 5;
 			if (hasPerk(PerkLib.Spectre) && hasPerk(PerkLib.Incorporeality)) generalevasion += 10;
 			if (hasPerk(PerkLib.ElvenSense)) generalevasion += 5;
-			if (hasPerk(MutationsLib.ElvishPeripheralNervSysEvolved)) generalevasion += 10;
-			if (hasPerk(MutationsLib.ElvishPeripheralNervSysFinalForm)) generalevasion += 15;
+			if (hasPerk(MutationsLib.ElvishPeripheralNervSysPrimitive)) generalevasion += 10;
+			if (hasPerk(MutationsLib.ElvishPeripheralNervSysEvolved)) generalevasion += 15;
 			if (generalevasion > 0) flyeavsion += generalevasion;
 			if (hasPerk(PerkLib.AdvancedAerialCombat)) flyeavsion += 5;
 			if (hasPerk(PerkLib.GreaterAerialCombat)) flyeavsion += 15;
@@ -4181,7 +3917,7 @@ public class Creature extends Utils
 			if (hasPerk(PerkLib.Unhindered) && game.player.armor.hasTag(ItemTags.AGILE) && (roll < 10)) return "Unhindered";
 			if (hasPerk(PerkLib.JunglesWanderer) && (roll < 35)) return "Jungle's Wanderer";
 			if (hasStatusEffect(StatusEffects.Illusion)) {
-				if (hasPerk(MutationsLib.KitsuneThyroidGlandFinalForm) && roll < 20) return "Illusion";
+				if (hasPerk(MutationsLib.KitsuneThyroidGlandEvolved) && roll < 20) return "Illusion";
 				else if (roll < 10) return "Illusion";
 			}
 			if (hasStatusEffect(StatusEffects.Flying) && (roll < flyeavsion)) return "Flying";
@@ -4347,6 +4083,7 @@ public class Creature extends Utils
 				"speed": "spe",
 				"intellect": "int",
 				"inte": "int",
+				"wisdom": "wis",
 				"libido": "lib",
 				"sensitivity": "sen",
 				"sens": "sen",
@@ -4355,8 +4092,7 @@ public class Creature extends Utils
 				"sca": "scale",
 				"scaled": "scale",
 				"res": "scale",
-				"resisted": "scale",
-				"wisdom": "wis"
+				"resisted": "scale"
 			};
 
 			for (var i:int = 0; i < args.length; i += 2)

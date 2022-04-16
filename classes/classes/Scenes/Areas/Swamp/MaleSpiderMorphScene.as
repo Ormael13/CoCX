@@ -8,12 +8,12 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
-import classes.Scenes.UniqueSexScenes;
+import classes.Items.Armors.SuccubusArmor;
+import classes.Scenes.SceneLib;
+import classes.display.SpriteDb;
 
 public class MaleSpiderMorphScene extends BaseContent
 	{
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-
 		public function MaleSpiderMorphScene()
 		{
 		}
@@ -22,7 +22,7 @@ public class MaleSpiderMorphScene extends BaseContent
 		public function greetMaleSpiderMorph():void
 		{
 			clearOutput();
-			spriteSelect(74);
+			spriteSelect(SpriteDb.s_spiderguy);
 			outputText("A spider-morph drops out of a tree in front of you, hanging by a single thread of sparkling webbing.  His purple eyes gaze deeply into your own while he looks you up and down.  ");
 			//DANGER MODE:
 			if (rand(2) == 0) {
@@ -44,7 +44,7 @@ public class MaleSpiderMorphScene extends BaseContent
 
 		private function fightSpiderBoy():void {
 			startCombat(new MaleSpiderMorph());
-			spriteSelect(74);
+			spriteSelect(SpriteDb.s_spiderguy);
 			playerMenu();
 		}
 
@@ -52,7 +52,7 @@ public class MaleSpiderMorphScene extends BaseContent
 		private function talkToSpiderBoy():void
 		{
 			clearOutput();
-			spriteSelect(74);
+			spriteSelect(SpriteDb.s_spiderguy);
 			outputText("The male spider-morph grins even wider, displaying the partially retracted tips of his two fangs.  You smile back nervously while he rotates about and drops lightly onto his feet, gleefully approaching you in spite of his nudity.  Sensing your discomfort, he stops a few yards away and pulls some food from a pouch on his hip, offering you some dried meats and fruits.  You take one of the more harmless looking ones and sit down with him.  ");
 			player.refillHunger(20, false);
 			outputText("He starts talking first, telling of how his people were a young race of transformed off-worlders.  The demons put a quick end to that, and recruited a large amount of the more aggressive driders and arachnes from his tribe.  He quickly explains that arachne are like him, but with chitinous exoskeletons covering their whole body, except for the face.  Driders on the other hand, have the body of a human from the hips up but a giant spider body below.\n\n");
@@ -66,17 +66,7 @@ public class MaleSpiderMorphScene extends BaseContent
 		public function defeatSpiderBoy():void
 		{
 			clearOutput();
-			spriteSelect(74);
-		/*	var mount:Function =null;
-			var buttfuck:Function =null;
-			var frot:Function =null;
-			if (player.hasVagina()) mount = victoryCowgirlRidingOnSpiderBoi;
-			if (player.hasCock()) {
-				if (player.cockThatFits(monster.analCapacity()) != -1) buttfuck = victoryButtFuck;
-				if (player.biggestCockArea() > monster.analCapacity()) frot = victoryFrotTheSpoidah;
-			}
-		*/	var bikiniTits:Function = null;
-			if (player.hasVagina() && player.biggestTitSize() >= 4 && player.armorName == "lusty maiden's armor") bikiniTits = createCallBackFunction2((player.armor as LustyMaidensArmor).lustyMaidenPaizuri,player,monster);
+			spriteSelect(SpriteDb.s_spiderguy);
 			outputText("The male spider-morph collapses onto his hands and knees, ");
 			if (monster.lust >= monster.maxLust()) outputText("masturbating with furious abandon, working his ebon dick with such vigor that the spider's pre-cum-slicked dick-skin noisily slides itself back and forth over his fattened glans; it becomes apparent just how much foreskin he truly has at this point, as even with his frenzied rubbing his glans remains shrouded in the thick excess skin while his fist slaps lewdly against his groin.  Dribbles of pre-cum leak from between his fingers to spill on the ground.");
 			else outputText("wobbling back and forth as he tries to stay up and fight.  There's no way he can oppose you, as beaten as he is now.");
@@ -91,10 +81,10 @@ public class MaleSpiderMorphScene extends BaseContent
 				if (player.cockThatFits(monster.analCapacity()) != -1) addButton(1, "FuckHisButt", victoryButtFuck);
 				if (player.biggestCockArea() > monster.analCapacity()) addButton(2, "Frot", victoryFrotTheSpoidah);
 			}
-			addButton(3, "B.Titfuck", bikiniTits);
-			if (player.pcCanUseUniqueSexScene()) addButton(13, "U. Sex Scenes", uniquuuesexscene.pcUniqueSexScenesChoiceMenu).hint("Other non typical sex scenes.");
+			LustyMaidensArmor.addTitfuckButton(3);
 			addButton(14, "Leave", cleanupAfterCombat);
-		}
+			SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatSpiderBoy);
+					}
 
 //Loss selector
 		public function loseToMaleSpiderMorph():void
@@ -104,7 +94,7 @@ public class MaleSpiderMorphScene extends BaseContent
 			if (player.hasCock()) choices[choices.length] = 0;
 			if (player.hasVagina()) choices[choices.length] = 1;
 			if (player.gender == 0) {
-				spriteSelect(74);
+				spriteSelect(SpriteDb.s_spiderguy);
 				clearOutput();
 				outputText("The raven-haired spider-guy tears off your [armor], and disgusted by what he finds, he kicks you in the head, knocking you out.");
 				player.HP = 1;
@@ -121,7 +111,7 @@ public class MaleSpiderMorphScene extends BaseContent
 		{
 			var x:int = player.cockThatFits(monster.analCapacity());
 			clearOutput();
-			spriteSelect(74);
+			spriteSelect(SpriteDb.s_spiderguy);
 			//*Summary:  Reaming some anus.
 			outputText("You approach and turn the spider-boy around, pushing the spider's bulbous abdomen aside to give yourself a better view of the his tight, heart-shaped ass.  ");
 			if (monster.lust >= monster.maxLust()) outputText("He's too distracted by his foreskin fondling to pay much attention to your anal-focused attentions.");
@@ -181,7 +171,7 @@ public class MaleSpiderMorphScene extends BaseContent
 		private function victoryFrotTheSpoidah():void
 		{
 			clearOutput();
-			spriteSelect(74);
+			spriteSelect(SpriteDb.s_spiderguy);
 			outputText("You push the ");
 			if (monster.lust >= monster.maxLust()) outputText("masturbating");
 			else outputText("injured");
@@ -221,7 +211,7 @@ public class MaleSpiderMorphScene extends BaseContent
 		{
 			//*Summary: Throw him on his back and mount up on that throbbing, ebon piece of uncut spidercock as he looks to you meekly, panting, needing something to tend to his foreskinned dick so badly...
 			clearOutput();
-			spriteSelect(74);
+			spriteSelect(SpriteDb.s_spiderguy);
 			outputText("You hastily remove your [armor] to bare yourself in preparation for the coming pleasure.  Throughout it all, the spider-boy doesn't react.  He's too busy ");
 			if (monster.HP < 1) outputText("trying to stay upright");
 			else outputText("trying to drown himself in pleasure");
@@ -272,7 +262,7 @@ public class MaleSpiderMorphScene extends BaseContent
 		private function spiderBoyLossMaleButtfuck():void
 		{
 			clearOutput();
-			spriteSelect(74);
+			spriteSelect(SpriteDb.s_spiderguy);
 			outputText("You collapse");
 			if (player.HP < 1) {
 				outputText(" in a semi-conscious heap, unable to stand, barely able to flop onto your back and look up ");
@@ -291,7 +281,7 @@ public class MaleSpiderMorphScene extends BaseContent
 			if (player.HP < 1) outputText("and silently mouth, \"<i>Please, no.</i>\"");
 			else outputText("and give a little nod, too intoxicated by arousal to decline any form of sex.");
 			outputText("  His only response is to squeeze tight on your [butt] and press forward until his pre-cum-soaked foreskin is glazing your rim in preparation for the coming penetration.  ");
-			if (player.lust >= player.maxLust()) outputText(SMultiCockDesc() + " bounces atop your belly, reacting strongly to the tingling sensation radiating from your " + assholeDescript() + ".");
+			if (player.lust >= player.maxOverLust()) outputText(SMultiCockDesc() + " bounces atop your belly, reacting strongly to the tingling sensation radiating from your " + assholeDescript() + ".");
 			else {
 				outputText(SMultiCockDesc() + " ");
 				if (player.lust < 50) outputText("slowly fills with blood");
@@ -349,12 +339,12 @@ public class MaleSpiderMorphScene extends BaseContent
 		private function loseToSpiderBoyVagFucked():void
 		{
 			clearOutput();
-			spriteSelect(74);
+			spriteSelect(SpriteDb.s_spiderguy);
 			outputText("As your ");
 			if (player.HP < 1) outputText("wounds overwhelm");
 			else outputText("lust overwhelms");
 			outputText(" you, your [legs] grow shaky, then give out entirely.  You flop down on your back");
-			if (player.lust >= player.maxLust()) outputText(", caressing yourself with reckless abandon while praying the sexy spider-boy will come violate you with his thick-skinned prick.");
+			if (player.lust >= player.maxOverLust()) outputText(", caressing yourself with reckless abandon while praying the sexy spider-boy will come violate you with his thick-skinned prick.");
 			else outputText(", clearly too injured and fatigued by the battle to make more than a few token movements.");
 			outputText("  He pounces you, lightning fast, quick enough that you don't even react until he's on top of you.  Chitin-clad legs brush your " + hipDescript() + ", the hard knees sinking deep into the swampy loam.  Grinning happily, the spider-boy leans over you and sucks a " + nippleDescript(0) + " ");
 			if (player.hasFuckableNipples()) outputText("into his mouth before plunging his tongue into the tit-pussy's passage");
@@ -413,7 +403,7 @@ public class MaleSpiderMorphScene extends BaseContent
 		public function spiderPregVagBirth():void
 		{
 			outputText("\n");
-			spriteSelect(74);
+			spriteSelect(SpriteDb.s_spiderguy);
 			if (player.vaginas.length == 0) {
 				outputText("You feel a terrible pressure in your groin... then an incredible pain accompanied by the rending of flesh.  You look down and behold a vagina.  ");
 				player.createVagina();

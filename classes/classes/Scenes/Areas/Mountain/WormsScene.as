@@ -29,6 +29,7 @@ package classes.Scenes.Areas.Mountain
 {
 	import classes.*;
 	import classes.GlobalFlags.*;
+    import classes.display.SpriteDb;
 	
 	public class WormsScene extends BaseContent
 	{
@@ -38,7 +39,7 @@ package classes.Scenes.Areas.Mountain
 		}
 		
 		public function wormEncounter():void {
-			spriteSelect(76);
+			spriteSelect(SpriteDb.s_dickworms);
 			clearOutput();
 			if (!player.hasStatusEffect(StatusEffects.MetWorms)) { //First encounter
 				outputText("As you are exploring, a rather pungent, peaty smell assails your nostrils. You hear a strange rustling and an off-kilter squishing noise in the distance. As you explore the area you come upon a most grotesque sight. Before you is a cohesive mass of writhing, wriggling worms! While normally solitary creatures, these appear to have coalesced into a monstrous living colony!\n\n");
@@ -60,7 +61,7 @@ package classes.Scenes.Areas.Mountain
 		}
 
 		public function wormToggle():void {
-			spriteSelect(76);
+			spriteSelect(SpriteDb.s_dickworms);
 			clearOutput();
 			outputText("While wandering, you come across a crudely illustrated sign.  It depicts an imp in obvious discomfort, covered in white little worms.  It looks as if one of them is even crawling into the imp's penis!\n\nHow do you feel about that?");
 			simpleChoices("Aroused", wormsOn, "Grossed Out", wormsOff, "Who Cares?", wormsPartiallyOn, "", null, "", null);
@@ -92,14 +93,14 @@ package classes.Scenes.Areas.Mountain
 		}
 			
 		private function wormsConfront():void {
-			spriteSelect(76);
+			spriteSelect(SpriteDb.s_dickworms);
 			clearOutput();
 			outputText("You turn to confront the worms and combat begins!");
 			startCombat(new WormMass());
 		}
 
 		private function wormsDoNothing():void {
-			spriteSelect(76);
+			spriteSelect(SpriteDb.s_dickworms);
 			clearOutput();
 			outputText("You do nothing, allowing the worms to enter combat range!");
 			startCombat(new WormMass());
@@ -118,7 +119,7 @@ package classes.Scenes.Areas.Mountain
 		}
 
 		public function infest1():void {
-			spriteSelect(76);
+			spriteSelect(SpriteDb.s_dickworms);
 			outputText("Trapped within the mass of worms, you are utterly helpless. The constant moving all over your body provides naught but unwanted stimulation. Your cock, not knowing any better, springs to attention, creating a peak in the mass. The worms immediately recognize what has happened to you. One particularly fat worm finds itself perched on top of your dick's throbbing glans. You feel it prodding about your urethral opening and come to a horrible realization that your precious penis is completely vulnerable to thousands of creatures capable of invading your body!!! Before you can react or curse your fate, the fat worm quickly forces open your urethra and begins to push its way inside your dick!\n\n");
 			outputText("Crying out in shock, you feel the fat worm push its way, inch by inch, into your urethra. Your nerves light up like a Christmas tree as each individual cell tells you of the creature's presence and movement deeper into your body. The fat beast easily finds its way into your prostate and settles within the organ. As it settles, it begins flailing inside your sex. The sensations shift from shock to grotesque pleasure as your body only senses the stimulation conductive to orgasmic response. Your groin cramps and bloats quickly by the torrent of semen building within you and the invader's presence. Obviously sensitive to your fluids, you feel the worm thrash around some more, causing your body to respond by making more semen. The flopping creature quickly erodes any orgasmic discipline you are capable of and with a great shrill cry, you force lances of cum into the air, launching goo and worms alike in a sick display of forced pleasure. After you empty your body of spunk, the remaining worms become hyperaggressive.\n\n");
 			outputText("Excited by the feel of your fluids on them, many smaller worms push their way into your penis. Your cock distends as the worms fight to get inside you and to the source of the milk that has so excited them. Your prostate quickly fills up with the squirming creatures. The discomfort in your bloated bludgeon and the ceaseless stimulation of your organs causes your body to produce more cum. However, you find yourself unable to climax as the invaders rest inside your body submerged in your salty lust. The rest of the colony disperses, having accomplished its true goal of infesting your body.\n\n");
@@ -138,7 +139,7 @@ package classes.Scenes.Areas.Mountain
 
 		//spontaneous orgasm - chance to avoid being raped by monsters who would care.
 		public function infestOrgasm():void {
-			spriteSelect(76);
+			spriteSelect(SpriteDb.s_dickworms);
 			clearOutput();
 			outputText("The ceaseless squirming of your uninvited guests send your body into paroxysms. Collapsing to your knees, you immediately begin pushing gouts of dick milk out of your body. You feel tremendous pressure in your pelvis and in your cock as you realize that you are pushing worms out with each torrent of cum! Stream upon stream of cum breaks free from the prison of your body, carrying some of the worms inside you with it. Once the orgasm passes, you collapse to the ground, totally spent. Before you pass out, you feel the unfortunate presence of the fat worm still in your body.");
 			player.orgasm();
@@ -168,7 +169,7 @@ package classes.Scenes.Areas.Mountain
 		}
 		
 		public function playerInfest():void {
-			spriteSelect(76);
+			spriteSelect(SpriteDb.s_dickworms);
 			//Keep logic sane if this attack brings victory
 		//Gone	menuLoc = 0;
 			if(player.fatigue + combat.physicalCost(40) > player.maxFatigue()) {
@@ -205,7 +206,7 @@ package classes.Scenes.Areas.Mountain
 			//Viable target?
 			if(monster.short == "minotaur" || monster.short == "imp") {
 				if(monster.lust > 70) {
-					outputText("Your load washes over the " + monster.short + " and " + monster.pronoun1 + " stops dead in " + monster.pronoun3 + " tracks as " + monster.pronoun1 + " chokes and sputters to clear the cum from " + monster.pronoun3 + " face and nose to breathe. The " + monster.short + " stumbles, attempting to stand in your fresh cum puddle and quickly busts its ass on the ground. The worms quickly take over and swarm around the " + monster.short + "' s " + monster.cockDescriptShort(0) + ". With wild hunger, the worms easily push into the " + monster.short + "'s urethra and begin venturing into your victim's body. The " + monster.short + " begins to convulse wildly as " + monster.pronoun3 + " body begins to react to the squirming invaders. The " + monster.short + " quickly peaks and cum flies in all directions, along with some worms. You laugh hysterically as the " + monster.short + " must now endure the endless orgasms your new pets provide. You choose to unload one last batch on your fallen foe to ensure a good infestation and walk away to leave the " + monster.short + " in the hell of endless pleasure.\n");
+					outputText("Your load washes over the " + monster.short + " and [monster he] stops dead in [monster his] tracks as [monster he] chokes and sputters to clear the cum from [monster his] face and nose to breathe. The " + monster.short + " stumbles, attempting to stand in your fresh cum puddle and quickly busts its ass on the ground. The worms quickly take over and swarm around the " + monster.short + "' s " + monster.cockDescriptShort(0) + ". With wild hunger, the worms easily push into the " + monster.short + "'s urethra and begin venturing into your victim's body. The " + monster.short + " begins to convulse wildly as [monster his] body begins to react to the squirming invaders. The " + monster.short + " quickly peaks and cum flies in all directions, along with some worms. You laugh hysterically as the " + monster.short + " must now endure the endless orgasms your new pets provide. You choose to unload one last batch on your fallen foe to ensure a good infestation and walk away to leave the " + monster.short + " in the hell of endless pleasure.\n");
 					monster.lust = 100;
 					cleanupAfterCombat();
 					return;

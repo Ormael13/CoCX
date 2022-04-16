@@ -16,8 +16,8 @@ public class IceElemental extends Monster
 		public function baseElementalAttack():void {
 			outputText(""+(flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4?"Undine":"The ice elemental")+" crystalizes its fist within a block of hardened ice before jabbing at you.");
 			var damage:Number = inte + wis;
-			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 0.3;
-			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 3;
+			if (player.hasPerk(PerkLib.FromTheFrozenWaste) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 0.3;
+			if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) damage *= 3;
 			damage *= ((flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] + 1) * 1.25);
 			damage = Math.round(damage);
 			//Dodge
@@ -26,15 +26,15 @@ public class IceElemental extends Monster
 			{
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
 				outputText(" It hits you square in the chest. ");
-				damage = player.takeIceDamage(damage, true);
+				player.takeIceDamage(damage, true);
 			}
 		}
 		
 		public function fluffyOfPunches():void {
 			outputText(""+(flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] == 4?"Undine":"The ice elemental")+" crystalizes its fist in ice. Jagged icicles emerge as the elemental jabs at you.");
 			var damage:Number = inte + wis;
-			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 0.3;
-			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 3;
+			if (player.hasPerk(PerkLib.FromTheFrozenWaste) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 0.3;
+			if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) damage *= 3;
 			damage *= ((flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] + 1) * 1.5);
 			damage = Math.round(damage);
 			//Dodge
@@ -43,8 +43,8 @@ public class IceElemental extends Monster
 			{
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
 				outputText(" The strikes connect, hitting you directly in the chest. ");
-				damage = player.takeIceDamage(damage, true);
-				damage = player.takeIceDamage(damage, true);
+				player.takeIceDamage(damage, true);
+				player.takeIceDamage(damage, true);
 			}
 		}
 		

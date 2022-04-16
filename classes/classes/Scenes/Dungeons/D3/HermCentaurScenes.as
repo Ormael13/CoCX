@@ -4,7 +4,7 @@ import classes.BaseContent;
 import classes.EventParser;
 import classes.GlobalFlags.kFLAGS;
 import classes.PregnancyStore;
-import classes.Scenes.UniqueSexScenes;
+import classes.Scenes.SceneLib;
 import classes.StatusEffects;
 import classes.Scenes.SceneLib;
 import classes.PerkLib;
@@ -21,8 +21,7 @@ import classes.PerkLib;
 			
 		}
 
-		public var uniquuuesexscene:UniqueSexScenes = new UniqueSexScenes();
-		
+				
 		public function encounterThePony():void
 		{
 			outputText("\n\nA gigantic, demonic centaur is here!  She grins down at your sudden arrival and gestures at the mammoth dong between her thighs as she taunts, \"<i>You are not prepared.</i>\"");
@@ -252,7 +251,7 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight)
 			player.orgasm();
 			dynStats("cor+", 5);
 			player.sexReward("vaginalFluids");
-			player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
+			if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP);
 			menu();
             cleanupAfterCombat(SceneLib.d3.resumeFromFight);
         }
@@ -367,7 +366,7 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight)
 			clearOutput();
 			if (player.isAlraune())
 			{
-				uniquuuesexscene.AlrauneDungeonBadEnd();
+				SceneLib.uniqueSexScene.AlrauneDungeonBadEnd();
 			}
 			else {
 				outputText("<b>Months later...</b>");
@@ -472,7 +471,7 @@ cleanupAfterCombat(SceneLib.d3.resumeFromFight)
 			clearOutput();
 			if (player.isAlraune())
 			{
-				uniquuuesexscene.AlrauneDungeonBadEnd();
+				SceneLib.uniqueSexScene.AlrauneDungeonBadEnd();
 			}
 			else {
 				outputText("As the years roll by, you see lots of pussy, and lots of injections.  They test all kinds of cocktails on you.  Ones that makes your balls swell, or your seed runny, or thick, or even black.  Eventually, one of your children comes out as something other than an imp.  The first proper demon infant.  Too fucked up to feel anything but pride, you can only marvel at your amazing virility as you seed the birth of a new species, knocking up every demon with a cunt in a month-long orgy.  Your jism fuels the ascendency of an entire race, dooming Mareth.");

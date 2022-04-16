@@ -37,7 +37,7 @@ import classes.Scenes.NPCs.MagnoliaFollower;
 use namespace CoC;
 
 	public class Inventory extends BaseContent {
-		private static const inventorySlotName:Array = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty"];
+		private static const inventorySlotName:Array = ["first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth", "eleventh", "twelfth", "thirteenth", "fourteenth", "fifteenth", "sixteenth", "seventeenth", "eighteenth", "nineteenth", "twentieth"];
 
 		private var itemStorage:Array;
 		private var pearlStorage:Array;
@@ -82,7 +82,7 @@ use namespace CoC;
                 callNext = inventoryCombatHandler; //Player will return to combat after item use
 			}
 			else {
-				spriteSelect(-1);
+				spriteSelect(null);
 				callNext = inventoryMenu; //In camp or in a dungeon player will return to inventory menu after item use
 			}
 			hideMenus();
@@ -105,7 +105,7 @@ use namespace CoC;
 			outputText("<b>Weapon (Range):</b> " + player.weaponRange.name + " (Attack: " + player.weaponRangeAttack + ")");
 			if (player.weaponRangePerk == "Bow" || player.weaponRangePerk == "Crossbow") outputText(" (Bow/Crosbow-type weapon)");
 			if (player.weaponRangePerk == "Throwing") outputText(" (Throwing weapon-type weapon)");
-			if (player.weaponRangePerk == "Pistol" || player.weaponRangePerk == "Rifle" || player.weaponRangePerk == "2H Firearm" || player.weaponRangePerk == "Dual Firearms") outputText(" (Firearms-type weapon)");
+			if (player.weaponRangePerk == "Pistol" || player.weaponRangePerk == "Rifle" || player.weaponRangePerk == "2H Firearm" || player.weaponRangePerk == "Dual Firearms" || player.weaponRangePerk == "Quad Firearms") outputText(" (Firearms-type weapon)");
 			outputText("\n");
 			outputText("<b>Shield:</b> " + player.shield.name + " (Block Rating: " + player.shieldBlock + ")");
 			if (player.shieldPerk == "Large") outputText(" (Large)");
@@ -159,37 +159,7 @@ use namespace CoC;
 					}
 				}
 				addButton(13, "Prev", inventoryMenu, page - 1);
-			}/*
-			if (!CoC.instance.inCombat && inDungeon == false && inRoomedDungeon == false && flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0) {
-                var miscNieve:Boolean = Holidays.nieveHoliday() && flags[kFLAGS.NIEVE_STAGE] > 0 && flags[kFLAGS.NIEVE_STAGE] < 5;
-                var miscHolli:Boolean         = flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 1 && flags[kFLAGS.FUCK_FLOWER_LEVEL] < 4 || flags[kFLAGS.FLOWER_LEVEL] >= 1 && flags[kFLAGS.FLOWER_LEVEL] < 4);
-				if (miscNieve
-					|| miscHolli
-					|| player.hasKeyItem("Dragon Egg") >= 0
-					|| player.hasKeyItem("Gryphon Statuette") >= 0
-					|| player.hasKeyItem("Peacock Statuette") >= 0
-					|| flags[kFLAGS.ANEMONE_KID] > 0
-					|| flags[kFLAGS.ALRAUNE_SEEDS] > 0
-					|| (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] > 1 && flags[kFLAGS.CHRISTMAS_TREE_LEVEL] < 8)) {
-					if (miscNieve) {
-						if (flags[kFLAGS.NIEVE_STAGE] == 1)
-							outputText("\nThere's some odd snow here that you could do something with...\n");
-                        else outputText("\nYou have a snow" + Holidays.nieveMF("man", "woman") + " here that seems like it could use a little something...\n");
-                    }
-					if (player.hasKeyItem("Dragon Egg") >= 0) {
-                        SceneLib.emberScene.emberCampDesc();
-					}
-					if (flags[kFLAGS.ANEMONE_KID] > 0) {
-						SceneLib.anemoneScene.anemoneBarrelDescription();
-					}
-					if (flags[kFLAGS.ALRAUNE_SEEDS] > 0) {
-						outputText("\nYou have " + flags[kFLAGS.ALRAUNE_SEEDS] + " alraune seeds planted in your garden.");
-						if (flags[kFLAGS.ALRAUNE_GROWING] > 14) outputText(" Some have already grown to adulthood.");
-						outputText("\n");
-					}
-					addButton(13, "Misc.", miscitemsMenu);
-				}
-			}*/
+			}
             if (!CoC.instance.inCombat) {
                 addButton(10, "Unequip/Misc", manageEquipmentmiscitemsMenu);
 				if (player.hasKeyItem("Bag of Cosmos") >= 0) {
@@ -217,7 +187,7 @@ use namespace CoC;
 				callNext = inventoryCombatHandler; //Player will return to combat after item use
 			}
 			else {
-				spriteSelect(-1);
+				spriteSelect(null);
 				callNext = inventoryMenu; //In camp or in a dungeon player will return to inventory menu after item use
 			}
 			hideMenus();
@@ -261,8 +231,8 @@ use namespace CoC;
 			if (inDungeon == false && inRoomedDungeon == false && flags[kFLAGS.IN_PRISON] == 0 && flags[kFLAGS.IN_INGNAM] == 0) {
 				var miscNieve:Boolean = Holidays.nieveHoliday() && flags[kFLAGS.NIEVE_STAGE] > 0 && flags[kFLAGS.NIEVE_STAGE] < 5;
                 var miscHolli:Boolean = flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 1 && flags[kFLAGS.FUCK_FLOWER_LEVEL] < 4 || flags[kFLAGS.FLOWER_LEVEL] >= 1 && flags[kFLAGS.FLOWER_LEVEL] < 4);
-				if (miscNieve || miscHolli || player.hasKeyItem("Dragon Egg") >= 0 || player.hasKeyItem("Gryphon Statuette") >= 0 || player.hasKeyItem("Peacock Statuette") >= 0 || (player.hasKeyItem("Rathazul's Purity Elixir") >= 0 && player.perkv1(PerkLib.PurityElixir) < 5)
-					|| flags[kFLAGS.ANEMONE_KID] > 0 || flags[kFLAGS.ALRAUNE_SEEDS] > 0 || (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] > 1 && flags[kFLAGS.CHRISTMAS_TREE_LEVEL] < 8)) {
+				if (miscNieve || miscHolli || player.hasKeyItem("Dragon Egg") >= 0 || (player.hasKeyItem("Rathazul's Purity Elixir") >= 0 && player.perkv1(PerkLib.PurityElixir) < 5)
+					|| flags[kFLAGS.ANEMONE_KID] > 0 || flags[kFLAGS.ALRAUNE_SEEDS] > 0 || (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] > 0 && flags[kFLAGS.CHRISTMAS_TREE_LEVEL] < 8)) {
 					if (miscNieve) {
 						if (flags[kFLAGS.NIEVE_STAGE] == 1)
 							outputText("\nThere's some odd snow here that you could do something with...\n");
@@ -283,17 +253,15 @@ use namespace CoC;
 					}
 					if (Holidays.nieveHoliday()) {
 						if (flags[kFLAGS.NIEVE_STAGE] > 0 && flags[kFLAGS.NIEVE_STAGE] < 5) addButton(1, "Snow", Holidays.nieveBuilding);
-						if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 0 && player.hasKeyItem("Mysterious Seed") >= 0) addButton(7, "Mysterious Seed", Magnolia.treeMenu);
-						if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] > 1 && flags[kFLAGS.CHRISTMAS_TREE_LEVEL] < 8) {
-							if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 6 && player.hasKeyItem("Decorations") >= 0) addButton(7, "Decorate Tree", Magnolia.treeMenu);
-							else addButton(7, (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] >= 7 ? "Ch. Tree" : "Green Tree"), Magnolia.treeMenu);
+						if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 1 && player.hasKeyItem("Mysterious Seed") >= 0) addButton(7, "Mysterious Seed", Magnolia.treeMenu);
+						if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] > 2 && flags[kFLAGS.CHRISTMAS_TREE_LEVEL] < 9) {
+							if (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] == 7 && player.hasKeyItem("Decorations") >= 0) addButton(7, "Decorate Tree", Magnolia.treeMenu);
+							else addButton(7, (flags[kFLAGS.CHRISTMAS_TREE_LEVEL] >= 8 ? "Ch. Tree" : "Green Tree"), Magnolia.treeMenu);
 						}
 					}
 					if (flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 1 && flags[kFLAGS.FUCK_FLOWER_LEVEL] < 4) addButton(2, (flags[kFLAGS.FUCK_FLOWER_LEVEL] >= 3 ? "Tree" : "Plant"), SceneLib.holliScene.treeMenu);
 					if (flags[kFLAGS.FUCK_FLOWER_KILLED] == 0 && flags[kFLAGS.FLOWER_LEVEL] >= 1 && flags[kFLAGS.FLOWER_LEVEL] < 4) addButton(2, (flags[kFLAGS.FLOWER_LEVEL] >= 3 ? "Tree" : "Plant"), HolliPure.treeMenu);
 					if (flags[kFLAGS.ALRAUNE_SEEDS] > 0 && model.time.hours >= 6) addButton(0, "Garden", Gardening.manageyourgarden).hint("Visit your plant offspring");
-					if (player.hasKeyItem("Gryphon Statuette") >= 0) addButton(6, "Gryphon", CoC.instance.mutations.skybornSeed, 1);
-					if (player.hasKeyItem("Peacock Statuette") >= 0) addButton(6, "Peacock", CoC.instance.mutations.skybornSeed, 2);
 					if (player.hasKeyItem("Rathazul's Purity Elixir") >= 0 && player.perkv1(PerkLib.PurityElixir) < 5) addButton(9, "PurityElixir", PurityElixir);
 				}
 			}
@@ -304,10 +272,21 @@ use namespace CoC;
 		}
 
 		private function PurityElixir():void {
-			outputText("You feel something unlock within you as you drink the elixir, some of the veil of corruption being washed out of you as the liquid undo and counteract some of the vile demonic changes your body was afflicted with.");
-			if (player.hasPerk(PerkLib.PurityElixir)) player.addPerkValue(PerkLib.PurityElixir, 1, 1);
-			else player.createPerk(PerkLib.PurityElixir, 1, 0, 0, 0);
-			player.removeKeyItem("Rathazul's Purity Elixir");
+            clearOutput();
+            if (player.getAllMinStats().cor == 0) {
+                outputText("You take out the elixir, but reconsider. ");
+                if (player.cor > 0) outputText("All of your corruption can be removed using simpler methods.");
+                else outputText("You're completely pure!");
+                outputText("\n\nYou decide to leave the elixir for worse times.");
+            }
+            else {
+                outputText("You feel something unlock within you as you drink the elixir, some of the veil of corruption being washed out of you as the liquid undo and counteract some of the vile demonic changes your body was afflicted with.");
+                outputText("\n\n<b>Minimum corruption lowered!</b>");
+                if (player.keyItemv1("Rathazul's Purity Elixir") > 1) player.addKeyValue("Rathazul's Purity Elixir", 1, -1);
+                else player.removeKeyItem("Rathazul's Purity Elixir");
+                if (player.hasPerk(PerkLib.PurityElixir)) player.addPerkValue(PerkLib.PurityElixir, 1, 1);
+                else player.createPerk(PerkLib.PurityElixir, 1, 0, 0, 0);
+            }
 			doNext(inventoryMenu);
 		}
 		
@@ -319,8 +298,11 @@ use namespace CoC;
 			if (player.armor == armors.UHAYOARM) currentArmorSFDrainrate += 240;
 			if (player.armor == armors.HBARMOR) currentArmorSFDrainrate += 180;
 			if (player.vehicles == vehicles.HB_MECH) {
-				/*if (upgrade 1) currentArmorSFDrainrate += ?40?;
-				else */currentArmorSFDrainrate += 60;
+				if (player.hasKeyItem("HB Internal Systems") >= 0) {
+					if (player.keyItemv1("HB Internal Systems") == 2) currentArmorSFDrainrate += 40;
+					else currentArmorSFDrainrate += 50;
+				}
+				else currentArmorSFDrainrate += 60;
 			}
 			maxSFCapacity = 0;
 			if (player.armor == armors.LAYOARM) maxSFCapacity += 1500;
@@ -332,8 +314,14 @@ use namespace CoC;
 			}
 			if (player.upperGarment == undergarments.HBSHIRT) maxSFCapacity += 350;
 			if (player.lowerGarment == undergarments.HBSHORT) maxSFCapacity += 350;
-			if (player.vehicles == vehicles.HB_MECH) maxSFCapacity += 1000;
-			if (player.vehicles == vehicles.HB_MECH) maxSFCapacity += 1000;
+			if (player.vehicles == vehicles.HB_MECH) {
+				maxSFCapacity += 1000;
+				if (player.hasKeyItem("HB Internal Systems") >= 0) {
+					if (player.keyItemv1("HB Internal Systems") == 2) maxSFCapacity += 5000;
+					else maxSFCapacity += 2000;
+				}
+			}
+			//if (player.vehicles == vehicles.HB_MECH) maxSFCapacity += 1000;
 			outputText("Currently used Ayo Armor name: "+player.armorName+"\n\n");
 			outputText("Currently used Ayo Armor soulforce drain rate (per hour): "+currentArmorSFDrainrate+"\n\n");
 			outputText("Soulforce reserves in armor: "+flags[kFLAGS.SOULFORCE_STORED_IN_AYO_ARMOR]+" / "+maxSFCapacity+"\n\n");
@@ -473,18 +461,12 @@ use namespace CoC;
 			if (flags[kFLAGS.ALRAUNE_SEEDS] > 0) {
 				if (model.time.hours >= 6) addButton(5, "Garden", Gardening.manageyourgarden).hint("Visit your plant offspring");
 			}
-			if (player.hasKeyItem("Gryphon Statuette") >= 0) {
-				addButton(6, "Gryphon", CoC.instance.mutations.skybornSeed, 1);
-			}
-			if (player.hasKeyItem("Peacock Statuette") >= 0) {
-				addButton(6, "Peacock", CoC.instance.mutations.skybornSeed, 2);
-			}
 			addButton(14, "Back", inventoryMenu);
 		}*/
 
 		public function BagOfCosmosMenu():void {
 			hideMenus();
-			spriteSelect(-1);
+			spriteSelect(null);
 			menu();
 			addButton(0, "Bag Store", pickItemToPlaceInBagOfCosmos);
 			addButton(1, "Bag Take", pickItemToTakeFromBagOfCosmos);
@@ -493,30 +475,54 @@ use namespace CoC;
 
 		public function SkyPoisonPearlMenu():void {
 			hideMenus();
-			spriteSelect(-1);
+			spriteSelect(null);
 			menu();
 			addButton(0, "Pearl Store 1", pickItemToPlaceInSkyPoisonPearl5).hint("Store item in Sky Poison Pearl (central section).");
 			addButton(5, "Pearl Take 1", pickItemToTakeFromSkyPoisonPearl5).hint("Take item from Sky Poison Pearl (central section).");
-			if (player.level >= 1) addButton(6, "Pearl Take 2", pickItemToTakeFromSkyPoisonPearl1).hint("Take item from Sky Poison Pearl (east section).");
-			if (player.level >= 2) addButton(7, "Pearl Take 3", pickItemToTakeFromSkyPoisonPearl2).hint("Take item from Sky Poison Pearl (south section).");
-			if (player.level >= 3) addButton(8, "Pearl Take 4", pickItemToTakeFromSkyPoisonPearl3).hint("Take item from Sky Poison Pearl (west section).");
-			if (player.level >= 4) addButton(9, "Pearl Take 5", pickItemToTakeFromSkyPoisonPearl4).hint("Take item from Sky Poison Pearl (north section).");
-			if (player.level >= 5) addButton(11, "Pearl Take 6", pickItemToTakeFromSkyPoisonPearl6).hint("Take item from Sky Poison Pearl (above section).");
-			if (player.level >= 6) addButton(13, "Pearl Take 7", pickItemToTakeFromSkyPoisonPearl7).hint("Take item from Sky Poison Pearl (below section).");
-			if (player.level >= 1) addButton(1, "Pearl Store 2", pickItemToPlaceInSkyPoisonPearl1).hint("Store item in Sky Poison Pearl (east section).");
+			if (player.level >= 6) addButton(6, "Pearl Take 2", pickItemToTakeFromSkyPoisonPearl1).hint("Take item from Sky Poison Pearl (east section).");
+			if (player.level >= 12) addButton(7, "Pearl Take 3", pickItemToTakeFromSkyPoisonPearl2).hint("Take item from Sky Poison Pearl (south section).");
+			if (player.level >= 18) addButton(8, "Pearl Take 4", pickItemToTakeFromSkyPoisonPearl3).hint("Take item from Sky Poison Pearl (west section).");
+			if (player.level >= 24) addButton(9, "Pearl Take 5", pickItemToTakeFromSkyPoisonPearl4).hint("Take item from Sky Poison Pearl (north section).");
+			if (player.level >= 30) addButton(11, "Pearl Take 6", pickItemToTakeFromSkyPoisonPearl6).hint("Take item from Sky Poison Pearl (above section).");
+			if (player.level >= 36) addButton(13, "Pearl Take 7", pickItemToTakeFromSkyPoisonPearl7).hint("Take item from Sky Poison Pearl (below section).");
+			if (player.level >= 6) addButton(1, "Pearl Store 2", pickItemToPlaceInSkyPoisonPearl1).hint("Store item in Sky Poison Pearl (east section).");
 			else addButtonDisabled(1, "Pearl Store 2", "Req. LvL 6+ to unlock this.");
-			if (player.level >= 2) addButton(2, "Pearl Store 3", pickItemToPlaceInSkyPoisonPearl2).hint("Store item in Sky Poison Pearl (south section).");
+			if (player.level >= 12) addButton(2, "Pearl Store 3", pickItemToPlaceInSkyPoisonPearl2).hint("Store item in Sky Poison Pearl (south section).");
 			else addButtonDisabled(2, "Pearl Store 3", "Req. LvL 12+ to unlock this.");
-			if (player.level >= 3) addButton(3, "Pearl Store 4", pickItemToPlaceInSkyPoisonPearl3).hint("Store item in Sky Poison Pearl (west section).");
+			if (player.level >= 18) addButton(3, "Pearl Store 4", pickItemToPlaceInSkyPoisonPearl3).hint("Store item in Sky Poison Pearl (west section).");
 			else addButtonDisabled(3, "Pearl Store 4", "Req. LvL 18+ to unlock this.");
-			if (player.level >= 4) addButton(4, "Pearl Store 5", pickItemToPlaceInSkyPoisonPearl4).hint("Store item in Sky Poison Pearl (north section).");
+			if (player.level >= 24) addButton(4, "Pearl Store 5", pickItemToPlaceInSkyPoisonPearl4).hint("Store item in Sky Poison Pearl (north section).");
 			else addButtonDisabled(4, "Pearl Store 5", "Req. LvL 24+ to unlock this.");
-			if (player.level >= 5) addButton(10, "Pearl Store 6", pickItemToPlaceInSkyPoisonPearl6).hint("Store item in Sky Poison Pearl (above section).");
+			if (player.level >= 30) addButton(10, "Pearl Store 6", pickItemToPlaceInSkyPoisonPearl6).hint("Store item in Sky Poison Pearl (above section).");
 			else addButtonDisabled(10, "Pearl Store 6", "Req. LvL 30+ to unlock this.");
-			if (player.level >= 6) addButton(12, "Pearl Store 7", pickItemToPlaceInSkyPoisonPearl7).hint("Store item in Sky Poison Pearl (below section).");
+			if (player.level >= 36) addButton(12, "Pearl Store 7", pickItemToPlaceInSkyPoisonPearl7).hint("Store item in Sky Poison Pearl (below section).");
 			else addButtonDisabled(12, "Pearl Store 7", "Req. LvL 36+ to unlock this.");
 			addButton(14, "Back", inventoryMenu);
 		}
+
+		public function SkyPoisonPearlMenuv2():void{
+			//clearOutput();
+			hideMenus();
+			spriteSelect(null);
+			var pLvl:int = Math.floor(player.level/6);
+			menu();
+			addButton(0, "Store In", SPPStoreItems).hint("Put your items into the Sky Poison Pearl.");
+			if (player.itemSlots.length == 0 || pLvl * 14 == pearlStorage.length) addButtonDisabled(0, "Store In", "You either don't have anything to store, or can't store any more currently!");
+			addButton(1, "Take out", SPPTakeOut).hint("Take Items out of your Sky Poison Pearl.")
+			if (pearlStorage.length == 0) addButtonDisabled(1, "Take Out", "You have nothing in your Pearl to take out!");
+
+		}
+
+		private function SPPStoreItems():void{
+			clearOutput();
+			outputText("What do you want to put into storage?");
+			var pLvl:int = Math.floor(player.level/6);
+			outputText("You have "+ 14 * pLvl + " slots total, of which " + pearlStorage.length + " slots are used.");
+			menu();
+			pickItemToPlaceInStorage2(placeInSkyPoisonPearl5, allAcceptable, "sky poison pearl", false)
+		}
+
+		private function SPPTakeOut():void{}
 
 		public function stash():void {
 			/*Hacked in cheat to enable shit
@@ -525,7 +531,7 @@ use namespace CoC;
 			//REMOVE THE ABOVE BEFORE RELASE ()
 			hideMenus();
 			clearOutput();
-			spriteSelect(-1);
+			spriteSelect(null);
 			menu();
 
 			if (player.hasKeyItem("Camp - Chest") >= 0 || player.hasKeyItem("Camp - Murky Chest") >= 0 || player.hasKeyItem("Camp - Ornate Chest") >= 0) {
@@ -567,7 +573,7 @@ use namespace CoC;
 			if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] < 2) {
 			//Weapon Rack
 			if (player.hasKeyItem("Equipment Rack - Weapons") >= 0) {
-				outputText("There's a weapon rack set up here, set up to hold up to nine various weapons.");
+				outputText("There's a weapon rack set up here, able to hold up to nine various weapons.");
 				addButton(7, "W.Rack Put", pickItemToPlaceInWeaponRack);
 				if (weaponRackDescription()) addButton(8, "W.Rack Take", pickItemToTakeFromWeaponRack);
 				outputText("\n\n");
@@ -593,37 +599,33 @@ use namespace CoC;
 		public function warehouse():void {
 			hideMenus();
 			clearOutput();
-			spriteSelect(-1);
+			spriteSelect(null);
 			menu();
-			if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 2) {
-				outputText("You stand inside your warehouse looking at the goods stored inside.");
-				outputText("\n\n");
-			}
-			if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 4) {
-				outputText("You stand inside your warehouse and connected to it medium-sized granary looking at the goods and food stored inside.");
-				outputText("\n\n");
-			}
-			if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 6) {
-				outputText("You stand inside your warehouses and connecting them medium-sized granary looking at the goods and food stored inside.");
-				outputText("\n\n");
-			}
+			outputText("You walk inside your warehouse");
+			if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 2) outputText(", looking at the goods stored inside.");
+            else outputText(".")
+			if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 4) outputText(" and connected to it medium-sized granary looking at the goods and food stored inside.");
+			if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] == 6) outputText("s and connecting them medium-sized granary looking at the goods and food stored inside.");
 			//Warehouse part 1 and 2
 			if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] >= 2) {
 				addButton(0, "Warehouse P1", pickItemToPlaceInWarehouse1).hint("Put item in 1st Warehouse.");
 				if (warehouse1Description()) addButton(1, "Warehouse T1", pickItemToTakeFromWarehouse1).hint("Take item from 1st Warehouse.");
+				outputText("\n\n");
 			}
 			if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] >= 6) {
 				addButton(2, "Warehouse P2", pickItemToPlaceInWarehouse2).hint("Put item in 2nd Warehouse.");
 				if (warehouse2Description()) addButton(3, "Warehouse T2", pickItemToTakeFromWarehouse2).hint("Take item from 2nd Warehouse.");
+				outputText("\n\n");
 			}
 			//Granary
 			if (flags[kFLAGS.CAMP_UPGRADES_WAREHOUSE_GRANARY] >= 4) {
 				addButton(5, "Granary Put", pickItemToPlaceInGranary).hint("Put food in Granary.");
 				if (granaryDescription()) addButton(6, "Granary Take", pickItemToTakeFromGranary).hint("Take food from Granary.");
+				outputText("\n\n");
 			}
 			//Weapon Rack
 			if (player.hasKeyItem("Equipment Rack - Weapons") >= 0) {
-				outputText("There's a weapon rack set up here, set up to hold up to nine various weapons.");
+				outputText("There's a weapon rack set up here, able to hold up to nine various weapons.");
 				addButton(7, "W.Rack Put", pickItemToPlaceInWeaponRack2).hint("Put weapon on the rack.");
 				if (weaponRackDescription()) addButton(8, "W.Rack Take", pickItemToTakeFromWeaponRack2).hint("Take weapon from the rack.");
 				outputText("\n\n");
@@ -1196,22 +1198,23 @@ use namespace CoC;
 					addButton(2, "Shield", unequipShield).hint(player.shield.description, capitalizeFirstLetter(player.shield.name));
 				}
 				else addButtonDisabled(2, "Shield", "You not have shield equipped.");
-				if (player.weaponFlyingSwords != FlyingSwordsLib.NOTHING && !player.hasPerk(PerkLib.Rigidity)) {
+				if (player.weaponFlyingSwords != FlyingSwordsLib.NOTHING) {
 					addButton(3, "Flying Sword", unequipFlyingSwords).hint(player.weaponFlyingSwords.description, capitalizeFirstLetter(player.weaponFlyingSwords.name));
 				}
 				else {
 					if (player.hasPerk(PerkLib.FlyingSwordPath)) addButtonDisabled(3, "Flying Sword", "You not have flying sword equipped.");
 					else addButtonDisabled(3, "Flying Sword", "You not have flying sword equipped. (Req. perk: Flying Swords Control)");
 				}
-				if (player.armor != ArmorLib.NOTHING && !player.hasPerk(PerkLib.Rigidity)) {
-					addButton(5, "Armour", unequipArmor).hint(player.armor.description, capitalizeFirstLetter(player.armor.name));
+				if (player.armor != ArmorLib.NOTHING) {
+					if (player.hasPerk(PerkLib.Rigidity)) addButtonDisabled(5, "Armour", "Your body stiffness prevents you from unequipping this armor.");
+					else addButton(5, "Armour", unequipArmor).hint(player.armor.description, capitalizeFirstLetter(player.armor.name));
 				}
 				else addButtonDisabled(5, "Armour", "You not have armor equipped.");
 				if (player.upperGarment != UndergarmentLib.NOTHING && !player.hasPerk(PerkLib.Rigidity)) {
 					addButton(6, "Upperwear", unequipUpperwear).hint(player.upperGarment.description, capitalizeFirstLetter(player.upperGarment.name));
 				}
 				else addButtonDisabled(6, "Upperwear", "You not have upperwear equipped.");
-				if (player.vehicles != VehiclesLib.NOTHING) {
+				if (player.vehicles != VehiclesLib.NOTHING && !player.hasPerk(PerkLib.Rigidity)) {
 					addButton(7, "Vehicle", unequipVehicle).hint(player.vehicles.description, capitalizeFirstLetter(player.vehicles.name));
 				}
 				else addButtonDisabled(7, "Vehicle", "You not using currently any vehicle.");
@@ -1224,7 +1227,8 @@ use namespace CoC;
 			}
 			if (page == 2) {
 				if (player.headJewelry != HeadJewelryLib.NOTHING) {
-					addButton(0, "Head Acc", unequipHeadJewel).hint(player.headJewelry.description, capitalizeFirstLetter(player.headJewelry.name));
+					if (player.hasPerk(PerkLib.Rigidity)) addButtonDisabled(0, "Head Acc", "Your body stiffness prevents you from unequipping this head accesory.");
+					else addButton(0, "Head Acc", unequipHeadJewel).hint(player.headJewelry.description, capitalizeFirstLetter(player.headJewelry.name));
 				}
 				else addButtonDisabled(0, "Head Acc", "You not have equipped any head accesory.");
 				if (player.necklace != NecklaceLib.NOTHING) {

@@ -441,6 +441,28 @@ package classes.GeneticMemories {
 			}
 		});
 
+		public static const MOUSE:int = 35;
+		EnumValue.add(Memories, MOUSE, "MOUSE", {
+			id: "Mouse Tail",
+			name: "Mouse Tail",
+			cost: 100,
+			title: "Mouse",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.TailMouse;
+			}
+		});
+
+		public static const HINEZUMI:int = 36;
+		EnumValue.add(Memories, HINEZUMI, "HINEZUMI", {
+			id: "Hinezumi Tail",
+			name: "Hinezumi Tail",
+			cost: 100,
+			title: "Hinezumi",
+			transformation: function(): Transformation {
+				return CoC.instance.transformations.TailHinezumi;
+			}
+		});
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

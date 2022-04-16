@@ -10,7 +10,7 @@ import classes.Items.Mutations;
 import classes.Items.WeaponLib;
 	import classes.CoC;
 	import classes.BodyParts.*;
-	import classes.display.SpriteDb;
+    import classes.display.SpriteDb;
 	import classes.Scenes.SceneLib;
 	import classes.Items.Mutations;
 
@@ -77,7 +77,7 @@ public class YukiOnnaScene extends BaseContent
 		public function encounterYukiOnnaYes():void {
 			clearOutput();
 			outputText("She pulls you in and as your two mouths connect you drift pleasantly through mind numbing pleasure. The kiss is wonderful so why is everything around you feeling so cold… desperate for bodily warmth you try and rub yourself against your partner but it only makes it worse. You're literally chilling to death as if all heat was stripped away from you. You’re starting to feel sleepy so you close your eyes, savoring the chilly tingling sensation, how easy it would be to just let go and lose yourself to the cold.\n\n");
-			if (player.gender == 1 || player.blockingBodyTransformations()) {
+			if (player.gender == 1 || player.hasPerk(PerkLib.BroBody) || player.hasPerk(PerkLib.FutaForm) || player.blockingBodyTransformations()) {
 				outputText("You eventually lose consciousness abandoning yourself fully to the kiss.\n\n");
 				outputText("You wake up somewhere else familiar. This is Yu’s cave and you are sleeping right next to a bonfire. Yu isn't far either, watching on you.\n\n");
 				outputText("\"<i>Dummy [name] nearly got killed. Yu found [name] out in the blizzard sleeping in the snow and colder than death.</i>\"\n\n");
@@ -124,12 +124,13 @@ public class YukiOnnaScene extends BaseContent
 					CoC.instance.transformations.SkinPatternNone.applyEffect(false);
 				}
 				if (!player.hasPerk(PerkLib.ColdAffinity)) player.createPerk(PerkLib.ColdAffinity, 0, 0, 0, 0);
+				if (player.hasCock()) player.killCocks(-1);
 				player.createPerk(PerkLib.DeadMetabolism, 0, 0, 0, 0);
 				player.createPerk(PerkLib.IcyFlesh, 0, 0, 0, 0);
 				player.femininity = 100;
 			}
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
-			if (CoC.instance.inCombat) cleanupAfterCombat();
+			if (CoC.instance.inCombat) cleanupAfterCombatTFEvent();
 			else doNext(camp.returnToCampUseEightHours);
 		}
 		public function encounterYukiOnnaYes2():void {

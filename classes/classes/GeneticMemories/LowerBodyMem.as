@@ -497,6 +497,50 @@ package classes.GeneticMemories {
 		  }
 		});
 
+		public static const MOUSE: int = 40;
+		EnumValue.add(Memories, MOUSE, "MOUSE", {
+		  id: "Mouse Lower Body",
+			name: "Mouse Legs",
+		  cost: 100,
+		  title: "Mouse",
+		  transformation: function(): Transformation {
+		    return CoC.instance.transformations.LowerBodyMouse
+		  }
+		});
+
+		public static const HINEZUMI: int = 41;
+		EnumValue.add(Memories, HINEZUMI, "HINEZUMI", {
+		  id: "Hinezumi Lower Body",
+			name: "Hinezumi Legs",
+		  cost: 100,
+		  title: "Hinezumi",
+		  transformation: function(): Transformation {
+		    return CoC.instance.transformations.LowerBodyHinezumi
+		  }
+		});
+
+		public static const GAZER: int = 42;
+		EnumValue.add(Memories, GAZER, "GAZER", {
+		  id: "Gazer Lower Body",
+			name: "Gazer Legs",
+		  cost: 100,
+		  title: "Gazer",
+		  transformation: function(): Transformation {
+		    return CoC.instance.transformations.LowerBodyGazer
+		  }
+		});
+
+		public static const FROSTWYRM: int = 43;
+		EnumValue.add(Memories, FROSTWYRM, "FROSTWYRM", {
+		  id: "Frost wyrm Lower Body",
+			name: "Frost wyrm Lower Body",
+		  cost: 100,
+		  title: "Frost wyrm",
+		  transformation: function(): Transformation {
+		    return CoC.instance.transformations.LowerBodyFrostwyrm
+		  }
+		});
+
 		public static function getMemory(memoryId: Number): * {
 			return Memories[memoryId] || Memories[0];
 		}

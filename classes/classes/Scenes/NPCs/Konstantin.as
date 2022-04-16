@@ -7,6 +7,7 @@ package classes.Scenes.NPCs
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.Scenes.SceneLib;
+	import classes.Scenes.NPCs.TyrantiaFollower;
 	
 	public class Konstantin extends NPCAwareContent
 	{
@@ -59,7 +60,7 @@ package classes.Scenes.NPCs
 				flags[kFLAGS.KONSTANTIN_SERVICES] = 0;
 			}
 			menu();
-			if (player.armorName == "nothing") addButtonDisabled(1, "Armor", "You need to wear any armor to pick this option.");
+			if (player.armorName == "nothing" || player.armorName == "gear") addButtonDisabled(0, "Armor", "You need to wear any armor to pick this option.");
 			else addButton(0, "Armor", meetKonstantinAtForestArmor);
 			if (player.weaponName == "fists") addButtonDisabled(1, "Weapon", "You need to use any melee weapon to pick this option.");
 			else addButton(1, "Weapon", meetKonstantinAtForestWeapon);
@@ -223,6 +224,7 @@ package classes.Scenes.NPCs
 			outputText("Wanting to divert my mind from the loneliness feeling, I focuses on improved my smithing skill, so I spent the next couple years practicing. Every now and then a customer passed through the forest me and requested my services, and then one day, one of them kept coming with more regularity...but I bet that you know what happened after that.</i>\"\n\n");
 			outputText("With a smirk, you answer that you do. Thanking him for his conversation, you return to your taks.\n\n");
 			doNext(KonstantinTalkMenu);
+			eachMinuteCount(5);
 		}
 		public function KonstantinTalkHisWork():void {
 			clearOutput();
@@ -248,6 +250,7 @@ package classes.Scenes.NPCs
 			}
 			outputText(".</i>\"\n\nThanking him for his conversation, you leave Konstantin to his own things.\n\n");
 			doNext(KonstantinTalkMenu);
+			eachMinuteCount(5);
 		}
 		public function KonstantinTalkTheCamp():void {
 			clearOutput();
@@ -275,6 +278,7 @@ package classes.Scenes.NPCs
 				outputText("\"<i>So all in all, I think that this is a great places. Good company, no demons in the proximity, and a great potential for the years to come.</i>\"\n\n");
 			}
 			doNext(KonstantinTalkMenu);
+			eachMinuteCount(5);
 		}
 		
 		public function KonstantinSmithingMenu():void {
@@ -369,6 +373,7 @@ package classes.Scenes.NPCs
 			if (player.hasItem(useables.D_SCALE) && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] < 1) addButton(3, "Dragonscale", KonstantinCraftingDragonscaleItems);
 			if (player.hasItem(useables.EBONBLO) && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] < 1) addButton(4, "Ebonbloom", KonstantinCraftingEbonbloomItems);
 			if (player.hasItem(useables.WT_BRAN)) addButton(5, "W.T.Branch", KonstantinCraftingYggdrasilItems);
+			if (TyrantiaFollower.TyraniaThePhalluspear && player.hasItem(weapons.SPEAR) && player.hasItem(consumables.L_DRAFT, 5) && player.hasItem(useables.T_SSILK) && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 3) addButton(6, "ThePhalluspear", KonstantinCraftingThePhalluspear);
 			if (player.hasItem(useables.DBAPLAT)) addButton(8, "D.Bark Armor", KonstantinCraftingDivineBarkArmor);
 			if (player.hasItem(useables.TBAPLAT)) addButton(9, "T.Bark Armor", KonstantinCraftingTentacledBarkArmor);
 			if (player.hasItem(useables.DBAPLAT) && player.hasItem(weapons.W_STAFF)) addButton(10, "Puritas", KonstantinCraftingPuritas);
@@ -438,6 +443,7 @@ package classes.Scenes.NPCs
 			addButton(6, "Shirt", KonstantinCraftingSpiderSilkItems2, 5, null, null, undergarments.SSSHIRT.description);
 			addButton(7, "Panties", KonstantinCraftingSpiderSilkItems2, 6, null, null, undergarments.SSPANTY.description);
 			addButton(8, "Loincloth", KonstantinCraftingSpiderSilkItems2, 7, null, null, undergarments.SS_LOIN.description);
+			addButton(14, "Back", KonstantinMainCampMenu);
 		}
 		private function KonstantinCraftingSpiderSilkItems2(spidersilkType:int):void {
 			if (spidersilkType == 1 || spidersilkType == 2 || spidersilkType == 3) { //Armor or robes
@@ -522,6 +528,7 @@ package classes.Scenes.NPCs
 			addButton(6, "Vest", KonstantinCraftingDragonscaleItems2, 5, null, null, undergarments.DS_VEST.description);
 			addButton(7, "Thong", KonstantinCraftingDragonscaleItems2, 6, null, null, undergarments.DSTHONG.description);
 			addButton(8, "Loincloth", KonstantinCraftingDragonscaleItems2, 7, null, null, undergarments.DS_LOIN.description);
+			addButton(14, "Back", KonstantinMainCampMenu);
 		}
 		private function KonstantinCraftingDragonscaleItems2(dragonscaleType:int):void {
 			if (dragonscaleType == 1 || dragonscaleType == 2 || dragonscaleType == 3) { //Armor or robes
@@ -615,6 +622,7 @@ package classes.Scenes.NPCs
 			addButton(8, "Corset", KonstantinCraftingEbonbloomItems2, 9, null, null, undergarments.EW_CORS.description);
 			addButton(10, "R.Jock", KonstantinCraftingEbonbloomItems2, 10, null, null, undergarments.R_JOCK.description);
 			addButton(11, "R.Thong", KonstantinCraftingEbonbloomItems2, 11, null, null, undergarments.R_THONG.description);
+			addButton(14, "Back", KonstantinMainCampMenu);
 		}
 		private function KonstantinCraftingEbonbloomItems2(ebonbloomType:int):void {
 			if (ebonbloomType == 1 || ebonbloomType == 2 || ebonbloomType == 3 || ebonbloomType == 4) { //Armor or robes
@@ -690,25 +698,25 @@ package classes.Scenes.NPCs
 				case 6: //Jock
 				//	outputText(images.showImage("rathazul-craft-ebonweavejock"));
 					outputText("The bear takes the ebonbloom flowers and works on his bench for an hour while you wait.  Once he has finished, Konstantin is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHanging in one of  Konstantin’s racks is a jock. As you inspect it, you notice the black cloth has an oily sheen. ");
-					outputText("You run your hand over the garment and see see that the fabric is smoother than ingnam’s finest cloth. And yet, it has a strange slickness to it unlike any fabric you know of. You also note the jock is also elastic, allowing it to fit your form regardless of how large your assets are. You thank Konstantin and collect your new jock.");
+					outputText("You run your hand over the garment and see see that the fabric is smoother than Ingnam’s finest cloth. And yet, it has a strange slickness to it unlike any fabric you know of. You also note the jock is also elastic, allowing it to fit your form regardless of how large your assets are. You thank Konstantin and collect your new jock.");
 					itype = undergarments.EW_JOCK;
 					break;
 				case 7: //Thong
 				//	outputText(images.showImage("rathazul-craft-ebonweavethong"));
 					outputText("The bear takes the ebonbloom flowers and works on his bench for an hour while you wait.  Once he has finished, Konstantin is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHanging in one of  Konstantin’s racks is a thong. As you inspect it, you notice the black cloth has an oily sheen. ");
-					outputText("You run your hand over the garment and see see that the fabric is smoother than ingnam’s finest cloth. And yet, it has a strange slickness to it unlike any fabric you know of. You also note the thong is also elastic, allowing it to fit your form regardless of how large your assets are. You thank Konstantin and collect your new thong.");
+					outputText("You run your hand over the garment and see see that the fabric is smoother than Ingnam’s finest cloth. And yet, it has a strange slickness to it unlike any fabric you know of. You also note the thong is also elastic, allowing it to fit your form regardless of how large your assets are. You thank Konstantin and collect your new thong.");
 					itype = undergarments.EWTHONG;
 					break;
 				case 8: //Vest
 				//	outputText(images.showImage("rathazul-craft-ebonweavevest"));
 					outputText("The bear takes the ebonbloom flowers and works on his bench for an hour while you wait.  Once he has finished, Konstantin is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHanging in one of  Konstantin’s racks is a vest. As you inspect it, you notice the black cloth has an oily sheen. ");
-					outputText("You run your hand over the garment and see see that the fabric is smoother than ingnam’s finest cloth. And yet, it has a strange slickness to it unlike any fabric you know of. You also note the vest is also elastic, allowing it to fit your form regardless of how large your assets are. You thank Konstantin and collect your new vest.");
+					outputText("You run your hand over the garment and see see that the fabric is smoother than Ingnam’s finest cloth. And yet, it has a strange slickness to it unlike any fabric you know of. You also note the vest is also elastic, allowing it to fit your form regardless of how large your assets are. You thank Konstantin and collect your new vest.");
 					itype = undergarments.EW_VEST;
 					break;
 				case 9: //Corset
 				//	outputText(images.showImage("rathazul-craft-ebonweavecorset"));
 					outputText("The bear takes the ebonbloom flowers and works on his bench for an hour while you wait.  Once he has finished, Konstantin is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHanging in one of  Konstantin’s racks is a corset. As you inspect it, you notice the black cloth has an oily sheen. ");
-					outputText("You run your hand over the garment and see see that the fabric is smoother than ingnam’s finest cloth. And yet, it has a strange slickness to it unlike any fabric you know of. You also note the corset is also elastic, allowing it to fit your form regardless of how large your assets are. You thank Konstantin and collect your new corset.");
+					outputText("You run your hand over the garment and see see that the fabric is smoother than Ingnam’s finest cloth. And yet, it has a strange slickness to it unlike any fabric you know of. You also note the corset is also elastic, allowing it to fit your form regardless of how large your assets are. You thank Konstantin and collect your new corset.");
 					itype = undergarments.EW_CORS;
 					break;
 				case 10: //Rune Jock
@@ -716,7 +724,7 @@ package classes.Scenes.NPCs
 					outputText("The bear takes the ebonbloom flowers and works on his bench for an hour while you wait.  Once he has finished, Konstantin is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHanging in one of  Konstantin’s racks is a jock. As you inspect it, you notice the black cloth has an oily sheen. ");
 					outputText("Adorning the cup is a rune seething with black magic.  ");
 					if (player.hasStatusEffect(StatusEffects.KnowsArouse)) outputText("You blush, recognizing the rune to represent lust.  ");
-					outputText("You run your hand over the garment and see see that the fabric is smoother than ingnam’s finest cloth. And yet, it has a strange slickness to it unlike any fabric you know of. You also note the jock is also elastic, allowing it to fit your form regardless of how large your assets are. You thank Konstantin and collect your new jock.");
+					outputText("You run your hand over the garment and see see that the fabric is smoother than Ingnam’s finest cloth. And yet, it has a strange slickness to it unlike any fabric you know of. You also note the jock is also elastic, allowing it to fit your form regardless of how large your assets are. You thank Konstantin and collect your new jock.");
 					itype = undergarments.R_JOCK;
 					break;
 				case 11: //Rune Thongs
@@ -724,7 +732,7 @@ package classes.Scenes.NPCs
 					outputText("The bear takes the ebonbloom flowers and works on his bench for an hour while you wait.  Once he has finished, Konstantin is beaming with pride, \"<i>I think you'll be pleased. Go ahead and take a look.</i>\"\n\nHanging in one of  Konstantin’s racks is a thong. As you inspect it, you notice the black cloth has an oily sheen. ");
 					outputText("Adorning the front is a rune seething with black magic.  ");
 					if (player.hasStatusEffect(StatusEffects.KnowsArouse)) outputText("You blush, recognizing the rune to represent lust.  ");
-					outputText("You run your hand over the garment and see see that the fabric is smoother than ingnam’s finest cloth. And yet, it has a strange slickness to it unlike any fabric you know of. You also note the thong is also elastic, allowing it to fit your form regardless of how large your assets are. You thank Konstantin and collect your new thong.");
+					outputText("You run your hand over the garment and see see that the fabric is smoother than Ingnam’s finest cloth. And yet, it has a strange slickness to it unlike any fabric you know of. You also note the thong is also elastic, allowing it to fit your form regardless of how large your assets are. You thank Konstantin and collect your new thong.");
 					itype = undergarments.R_THONG;
 					break;
 				default:
@@ -741,6 +749,7 @@ package classes.Scenes.NPCs
 			addButton(1, "Sword", KonstantinCraftingYggdrasilItems2, 2, null, null, weapons.WDBLADE.description);
 			addButton(2, "Bow", KonstantinCraftingYggdrasilItems2, 3, null, null, weaponsrange.WARDBOW.description);
 			addButton(3, "Staff", KonstantinCraftingYggdrasilItems2, 4, null, null, weapons.WDSTAFF.description);
+			addButton(14, "Back", KonstantinMainCampMenu);
 		}
 		private function KonstantinCraftingYggdrasilItems2(yggdrasilType:int):void {
 			player.destroyItems(useables.WT_BRAN, 1);
@@ -788,6 +797,17 @@ package classes.Scenes.NPCs
 			}
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = 0;
 			inventory.takeItem(itype, camp.returnToCampUseOneHour);
+		}
+		private function KonstantinCraftingThePhalluspear():void {
+			clearOutput();
+			player.destroyItems(weapons.SPEAR, 1);
+			player.destroyItems(consumables.L_DRAFT, 5);
+			player.destroyItems(useables.T_SSILK, 1);
+			flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] -= 3;
+			outputText("You bring the materials to Konstantine, and the smith nods, his face serious.\n\n");
+			outputText("\"<i>I’ll need a few hours,</i>\" he says simply. \"<i>Give me the materials, and I’ll craft this for you.</i>\" You hand Konstantine the materials, and he smiles wryly. \"<i>Honestly, I’m not entirely comfortable with this…kind of weapon.</i>\" He admits. \"<i>But I won’t deny the value of it in today’s world.</i>\"\n\n");
+			outputText("The tip glistens with a pink sheen, and you can tell that the blade poking out is razor-sharp. \"<i>Here it is,</i>\" he declares. \"<i>A Phalluspear. Freshly made. I hope you enjoy wielding it more than I did making it.</i>\" An odd thing to say, but you can hardly complain with the results!\n\n");
+			inventory.takeItem(weapons.PHALLUS, camp.returnToCampUseOneHour);
 		}
 		private function KonstantinCraftingDivineBarkArmor():void {
 			clearOutput();
@@ -858,7 +878,8 @@ package classes.Scenes.NPCs
 			outputText("\"<i>The price for any of those services remains the same, 25 gems.</i>\"\n\n");
 			outputText("Sounds like a good offer. What will you do?\n\n");
 			menu();
-			addButton(0, "Armor", meetKonstantinAtForestArmor);
+			if (player.armorName == "nothing" || player.armorName == "gear") addButtonDisabled(0, "Armor", "You need to wear any armor to pick this option.");
+			else addButton(0, "Armor", meetKonstantinAtForestArmor);
 			if (player.weaponName == "fists") addButtonDisabled(1, "Weapon", "You need to use any melee weapon to pick this option.");
 			else addButton(1, "Weapon", meetKonstantinAtForestWeapon);
 			addButton(2, "Nothing", meetKonstantinAtForestNothing);
@@ -882,7 +903,7 @@ package classes.Scenes.NPCs
 				outputText("As you’re about to sit, your ursine friend points to you.\n\n");
 				outputText("\"<i>Hey, [name]. Better take out those.</i>\" he suggests \"<i>Well feel more fresh that way, and I don’t think that anyone is gonna come in and see us.</i>\"\n\n");
 				outputText("Nodding, you remove you clothing and leave it next to his bed, then you hop in and sit beside the naked bear, feeling the warm embrace of his fur on your [skin].\n\n");
-				outputText("\"<i>“So, you came here only to hand around naked with me?</i>\" he jokingly remarks.\n\n");
+				outputText("\"<i>\"So, you came here only to hand around naked with me?</i>\" he jokingly remarks.\n\n");
 				outputText("Blushing, you admit that you’d like to do what you were seeking, spend a good time with him, if he catches what you mean. He nods and smiles, enveloping you in one of his bear-hugs.\n\n");
 				outputText("\"<i>It’s okay, " + player.mf("man", "girl") + ". We always have those urges sooner or later. And, on those times is much more sooner than later. And, with you, I’d be more than happy.</i>\" he assures you. \"<i>So, what’s on your mind?</i>\"\n\n");
 				flags[kFLAGS.KONSTANTIN_SEX_MENU] = 1;
@@ -891,10 +912,10 @@ package classes.Scenes.NPCs
 			menu();
 			addButton(0, "Give BJ", KonstantinSexMenuGiveBJ);
 			if (player.hasCock()) {
-				addButton(1, "Recive BJ", KonstantinSexMenuReciveBJ);
+				addButton(1, "Receive BJ", KonstantinSexMenuReciveBJ);
 				addButton(2, "69", KonstantinSexMenu69);
 			}
-			addButton(3, "Recive Anal", KonstantinSexMenuReciveAnal);
+			addButton(3, "Receive Anal", KonstantinSexMenuReciveAnal);
 			if (flags[kFLAGS.CAMP_UPGRADES_HOT_SPRINGS] >= 4) addButton(4, "Hot Spring Fuck", KonstantinSexMenuHotSpringFuck);
 			addButton(14, "Back", KonstantinMainCampMenu);
 		}

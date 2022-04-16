@@ -17,8 +17,8 @@ public class QuatroElementalBoss extends Monster
 		public function baseElementalAttack():void {
 			outputText("Elemental concentrate fire on it fist and send punch toward you.");
 			var damage:Number = inte + wis;
-			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
-			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
+			if (player.hasPerk(PerkLib.FromTheFrozenWaste) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 3;
+			if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) damage *= 0.3;
 			damage *= ((flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] + 1) * 2);
 			damage = Math.round(damage);
 			//Dodge
@@ -34,8 +34,8 @@ public class QuatroElementalBoss extends Monster
 		public function fluffyOfPunches():void {
 			outputText("Elemental concentrate fire on it fists and goes wild at you sending flurry of punches.");
 			var damage:Number = inte + wis;
-			if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
-			if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
+			if (player.hasPerk(PerkLib.FromTheFrozenWaste) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 3;
+			if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) damage *= 0.3;
 			damage *= ((flags[kFLAGS.RIVER_DUNGEON_ELEMENTAL_MIXER] + 1) * 1.5);
 			damage = Math.round(damage);
 			//Dodge
@@ -56,8 +56,8 @@ public class QuatroElementalBoss extends Monster
 			if (player.getEvasionRoll()) outputText(" You slide underneath the barrage. Talk about Pyromania!");
 			else {
 				var damage:Number = inte + wis;
-				if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 3;
-				if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 0.3;
+				if (player.hasPerk(PerkLib.FromTheFrozenWaste) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 3;
+				if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) damage *= 0.3;
 				damage *= 3.75;
 				damage = Math.round(damage);
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
@@ -104,8 +104,8 @@ public class QuatroElementalBoss extends Monster
 			if (player.getEvasionRoll()) outputText(" You slide underneath the barrage!");
 			else {
 				var damage:Number = inte + wis;
-				if (player.findPerk(PerkLib.FromTheFrozenWaste) >= 0 || player.findPerk(PerkLib.ColdAffinity) >= 0) damage *= 0.3;
-				if (player.findPerk(PerkLib.FireAffinity) >= 0) damage *= 3;
+				if (player.hasPerk(PerkLib.FromTheFrozenWaste) || player.hasPerk(PerkLib.ColdAffinity)) damage *= 0.3;
+				if (player.hasPerk(PerkLib.FireAffinity) || player.hasPerk(PerkLib.AffinityIgnis)) damage *= 3;
 				damage *= 3.75;
 				damage = Math.round(damage);
 				if (hasStatusEffect(StatusEffects.Provoke)) damage = Math.round(damage * statusEffectv2(StatusEffects.Provoke));
@@ -254,6 +254,7 @@ public class QuatroElementalBoss extends Monster
 			armorDef += 10;
 			armorMDef += 60;
 			bonusHP += 125;
+			level += 2;
 			this.strStat.core.value *= 1.3;
 			this.touStat.core.value *= 1.3;
 			this.removePerk(PerkLib.FireNature);
@@ -271,6 +272,7 @@ public class QuatroElementalBoss extends Monster
 			armorName = "magma skin covered with layer of steam";
 			armorDef += 5;
 			armorMDef = 30;
+			level += 2;
 			this.wisStat.core.value *= 1.3;
 			this.strStat.core.value *= 1.2;
 			this.touStat.core.value *= 1.2;
@@ -283,7 +285,7 @@ public class QuatroElementalBoss extends Monster
 		{
 			clearOutput();
 			outputText("The elemental falls again, defeatedly collapsing on the ground. You wonder if you should wait or try to inspect the dormant elemental quickly. Before you can react, a sudden gust of wind shakes the room, causing the remains of the elemental to swirl in a small vortex before spinning back into shape. ");
-			outputText("The revenant rises once more before it speaks to you in a cacophony of different voices, <i>“I will not be aired once more.”</i> Without further warning, it rushes toward you, prepared for combat.");
+			outputText("The revenant rises once more before it speaks to you in a cacophony of different voices, <i>\"I will not be aired once more.\"</i> Without further warning, it rushes toward you, prepared for combat.");
 			player.addStatusValue(StatusEffects.RivereDungeonIB, 2, 1);
 			_fightPhase = 4;
 			short = "quatro elemental";
@@ -291,6 +293,7 @@ public class QuatroElementalBoss extends Monster
 			weaponAttack += 5;
 			armorDef += 5;
 			armorMDef = 30;
+			level += 2;
 			this.intStat.core.value *= 1.3;
 			this.wisStat.core.value *= 1.2;
 			this.strStat.core.value *= 1.1;
@@ -355,8 +358,8 @@ public class QuatroElementalBoss extends Monster
 			this.lustVuln = 0;
 			this.drop = new ChainedDrop()
 					.add(useables.ELSHARD, 1);
-			this.level = 24;
-			this.additionalXP = 200;
+			this.level = 21;
+			this.additionalXP = 250;
 			this.createPerk(PerkLib.EnemyElementalType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
