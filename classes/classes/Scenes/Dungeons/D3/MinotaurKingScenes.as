@@ -59,7 +59,7 @@ public class MinotaurKingScenes extends BaseContent
 				addButton(4, "SloppySeconds", sloppySeconds);
 			}
 			if (player.hasVagina()) addButton(5, "Ride Him", mechanicalbullhue);
-			addButton(14, "RecruitHer", recruitExcellia).hint("Keep Excellia after you deal with the Lethice.");
+			if (!flags[kFLAGS.EXCELLIA_RECRUITED]) addButton(14, "RecruitHer", recruitExcellia).hint("Keep Excellia after you deal with the Lethice.");
 		}
 
         private function recruitExcellia():void {

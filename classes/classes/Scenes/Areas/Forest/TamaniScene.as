@@ -64,7 +64,7 @@ private function tamaniGivesBirth():void {
 }
 
 internal function tamaniChest():String {
-	var descript:String = "";
+	var descript:String;
 	switch (flags[kFLAGS.TAMANI_TIMES_IMPREGNATED]) {
 		case -1:
 		case  0: descript = (rand(2) == 0 ? "ample " : "handful of "); break;
@@ -103,17 +103,41 @@ public function TamaniDefeated2():void {
 		addButton(4, "Leave", cleanupAfterCombat);
 }
 
-//[Encounter Tamani – female]
-private function tamaniFemaleEncounter():void {
+private function tamaniFirstDescription():void {
 	spriteSelect(SpriteDb.s_tamani);
 	clearOutput();
-	outputText("A goblin leaps out from behind a rock outcropping.  She keeps her arms folded across her " + tamaniChest() + " and glares at you.  The little thing is only about four feet tall, with pink and black dyed hair cut into a cute little 'do.  The greenish-gray skin of her breasts bulges out around her arms, supported by a few leather straps, amplifying her cleavage.  Her cunt lips are pierced multiple times, inflamed, and slightly parted.  There really isn't any clothing on her to hide them, just more of the ever-present straps wrapping around her thighs.\n\n");
+	outputText("A goblin leaps out from behind a rock outcropping. She keeps her arms folded across her " + tamaniChest() + " and glares at you. The little thing is only about four feet tall, with pink and black dyed hair cut into a cute little 'do. The greenish-gray skin of her breasts bulges out around her arms, supported by a few leather straps, amplifying her cleavage. Her cunt lips are pierced multiple times, inflamed, and slightly parted. There really isn't any clothing on her to hide them, just more of the ever-present straps wrapping around her thighs.\n\n");
+}
+
+//[Encounter Tamani – female]
+private function tamaniFemaleEncounter():void {
+	if (player.hasCock()) { //from herm encounter
+		clearOutput();
+		outputText("You admit that you were indeed looking for some juicy, big cocks, and ask if she had any problem with it. You may wield one, but your girly parts still require some attention sometimes.\n\n");
+	}
+	else tamaniFirstDescription(); //female-only - first description
 	outputText("She says, \"<i>There's only so much cock around, and I got dibs on ALL of it, O.K. skank?</i>\"\n\n");
 	//[Umm OK?] [No]
 	simpleChoices("Umm OK?", tamaniFemaleYes, "No", tamaniFemaleNo, "PreferGirls", preferTamaniFemdom, "", null, "", null);
 }
 
-//(Umm OK?)
+//[Encounter Tamani – HAZ COCK]
+//[First Time]
+private function tamaniHermFirstEncounter():void {
+	tamaniFirstDescription();
+	outputText("The goblin makes you an offer that's difficult to turn down, \"<i>Hey there stud, want to fuck me pregnant?  I promise my box will milk your dick dry.  Just let Tamani take care of all your boners OK?</i>\"\n\n");
+	outputText("While looking at your crotch, she notices something and sniffs. \"<i>Wait... so you're a girl too? What if... what if you were looking for cocks here?</i>\" Her eyes widen in suspicion. \n\n");
+	outputText("She's certainly fighting an urge to just hop on your dick, seeing a rival within you. \"<i>So. Why did you came here? I demand an answer!</i>\"\n\n");
+	outputText("You can fuck the goblin, refuse, or agree that you were looking for cocks too. Though you're not sure that she'll see you as a rival after you fuck her at least once with your dick.");
+	//[Fuck Her] [Refuse]
+	menu();
+	addButton(0, "Fuck Her", tamaniFirstTimeConsentual).hint("Show her that your dick isn't just a decoration.");
+	addButton(1, "Refuse", tamaniFirstTimeRefusal).hint("You're not in the mood right now, but also not a rival.");
+	addButton(2, "ForCocks", tamaniFemaleEncounter).hint("You were looking for cocks. Is something wrong with that?");
+}
+
+
+	//(Umm OK?)
 private function tamaniFemaleYes():void {
 	spriteSelect(SpriteDb.s_tamani);
 	clearOutput();
@@ -121,7 +145,9 @@ private function tamaniFemaleYes():void {
 	outputText("She pulls out a long pink dick and tosses it to you.  You catch it and it flops around, nearly slapping you in the cheek.  ");
 	if(player.cor < 50) outputText("Gross.\n\n");
 	else outputText("Getting cock-slapped would've been kind of hot...\n\n");
-	outputText("The goblin leaves you with a warning, \"<i>Be careful, it likes to leak aphrodisiacs like crazy.  Believe me, those are FUN to get addicted to.  Oh, and remember – Tamani owns all the cocks around here, so if you ever grow one, come pay your dues!</i>\"\n\n");
+	outputText("The goblin leaves you with a warning, \"<i>Be careful, it likes to leak aphrodisiacs like crazy.  Believe me, those are FUN to get addicted to.  ");
+	if (player.hasCock()) outputText("Oh, and don't forget to come back and use your other sex next time when you're done playing with my toy.</i>\"\n\n");
+	else outputText("Oh, and remember — Tamani owns all the cocks around here, so if you ever grow one, come pay your dues!</i>\"\n\n");
 	outputText("(<b>Deluxe Dildo acquired!</b>)");
 	player.createKeyItem("Deluxe Dildo",0,0,0,0);
 	doNext(camp.returnToCampUseOneHour);
@@ -140,16 +166,14 @@ private function tamaniFemaleNo(): void {
 //[Encounter Tamani – HAZ COCK]
 //[First Time]
 private function tamaniMaleFirstEncounter():void {
-	spriteSelect(SpriteDb.s_tamani);
-	flags[kFLAGS.TAMANI_MET] = 1; //Indicates you've met her as a male at least once
-	clearOutput();
-	outputText("A goblin leaps out from behind a rock outcropping.  For something so small, she has a lot of curves.  She advances towards you, rolling her hips in a suggestive way, immediately diverting your blood-flow to your crotch.  The little thing is only about four feet tall, with pink and black dyed hair cut into a cute little 'do.  The greenish-gray skin of her breasts jiggles pleasantly with every step, supported by a few leather straps, amplifying her cleavage.  Her cunt lips are pierced multiple times, inflamed, and slightly parted.  There really isn't any clothing on her to hide them, just more of the ever-present straps wrapping around her thighs.\n\n");
+	tamaniFirstDescription();
 	outputText("The goblin makes you an offer that's difficult to turn down, \"<i>Hey there stud, want to fuck me pregnant?  I promise my box will milk your dick dry.  Just let Tamani take care of all your boners OK?</i>\"");
 	//[Fuck Her] [Refuse]
 	simpleChoices("Fuck Her", tamaniFirstTimeConsentual, "Refuse", tamaniFirstTimeRefusal, "", null, "", null, "", null);
 }
 //[Fuck Her – Consentual First Time]
 private function tamaniFirstTimeConsentual():void {
+	flags[kFLAGS.TAMANI_MET] = 1; //Indicates you've met her as a male at least once
 	spriteSelect(SpriteDb.s_tamani);
 	tamaniKnockUp();
 	clearOutput();
@@ -210,7 +234,10 @@ private function tamaniFirstTimeConsentual():void {
 private function tamaniFirstTimeRefusal():void {
 	spriteSelect(SpriteDb.s_tamani);
 	clearOutput();
-	outputText("Tamani's eyes widen in surprise, \"<i>Don't let the size fool you, big " + player.mf("boy", "girl") + ". I can take more than you think,</i>\" she says while her hands begins playing with her box, \"<i>Are you sure you don't want to just let off a little steam?</i>\"\n\n");
+	flags[kFLAGS.TAMANI_MET] = 1; //Indicates you've met her as a male at least once
+	outputText("You explain that you aren't in the mood for this right now.");
+	if (player.hasVagina()) outputText("  Seeing her suspicion, you also point out that you're not her rival in any way, and you don't need more cocks than your own.")
+	outputText("\n\nTamani's eyes widen in surprise, \"<i>Don't let the size fool you, big " + player.mf("boy", "girl") + ". I can take more than you think,</i>\" she says while her hands begins playing with her box, \"<i>Are you sure you don't want to just let off a little steam?</i>\"\n\n");
 	//[Fuck Her (Goes to fuck her - consensual first time)]
 	//[No means no]
 	simpleChoices("Fuck Her", tamaniFirstTimeConsentual, "No", tamaniSecondRefusal, "", null, "", null, "", null);
@@ -232,6 +259,7 @@ private function tamaniMaleRepeatEncounter():void {
 	//(IF FUCKED - check to see if she's pregnant or has given birth)
 	if (pregnancy.isPregnant || flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] > 0) outputText("While exploring, you're startled by the feeling of tiny hands stroking the insides of your thighs.  You look down and find Tamani there, grinning wolfishly,  \"<i>Ready for another fuck, big " + player.mf("boy", "girl") + "?</i>\"\n\n");
 	//(ELSE)
+
 	else outputText("While exploring, you're startled by the feeling of tiny hands stroking the insides of your thighs.  You look down and find Tamani the goblin there, grinning with desire, \"<i>Ready to stuff me with cum?  I'm not taking no for an answer this time.</i>\"\n\n");
 	if(flags[kFLAGS.TAMANI_TIMES_HYPNOTISED] > 19 && rand(2) == 0) {
 		getRapedByTamaniYouHypnoSlut();
@@ -244,11 +272,29 @@ private function tamaniMaleRepeatEncounter():void {
 		flags[kFLAGS.SOUL_SENSE_TAMANI]++;
 		outputText("\n\n<b>You have meet her enough times to be able to find her in the future when using soul sense. (Removes Tamani from forest explore encounters pool!)</b>\n\n");
 	}
-	//[Take Her – win sex]
-	//[Let Her – Get dommed]
-	//[No – starts fight]
-	simpleChoices("Take Her", tamaniSexWon, "Let Her", tamaniSexLetHer, "No", tamaniStartFight, "", null, "", null);
+	menu();
+	addButton(0, "Take Her", tamaniSexWon);
+	addButton(1, "Let Her", tamaniSexLetHer);
+	addButton(2, "No", tamaniStartFight);
+	//deluxe dildo option
+	if (player.hasVagina() && player.hasKeyItem("Deluxe Dildo") < 0) {
+		outputText("You notice a huge dildo she dropped not far away right before approaching you. You can ask her about it — if she already has your cock, maybe she could give you that one? Sharing is caring.");
+		addButton(3, "Dildo", tamaniDildo);
+	}
 }
+
+	private function tamaniDildo():void {
+		clearOutput();
+		outputText("You ask Tamani about that dildo, explaining that you need some cocks too, and she clearly wouldn't want you to use some of 'hers' in the forest.\n\n");
+		outputText("She sneers, \"<i>Really? You have such a nice tool yourself, and it's not enough for you? Fuck, if only I had one of those...</i>\" Tamani rolls her eyes, dreaming.\n\n");
+		outputText("\"<i>Well, okay. It's one of the best that I have. Now you can keep your hot little box stuffed all the time.</i>\" She takes the huge pink dick in her hand and tosses it to you. You catch it, and it flops around, nearly slapping you in the cheek.  ");
+		if(player.cor < 50) outputText("Gross.\n\n");
+		else outputText("Getting cock-slapped would've been kind of hot...\n\n");
+		outputText("\"<i>So, you're happy now? Ready to help me make some children?</i>\" - she asks, confidently approaching you...\n\n");
+		outputText("(<b>Deluxe Dildo acquired!</b>)");
+		player.createKeyItem("Deluxe Dildo",0,0,0,0);
+		doNext(tamaniSexLetHer);
+	}
 
 private function tamaniStartFight():void {
 	clearOutput();
@@ -707,20 +753,24 @@ internal function tamaniKnockUp():void {
 }
 
 public function encounterTamani():void {
-	//Fems:
-	if (player.cockTotal() <= 0) {
-		tamaniFemaleEncounter();
-	}
-	//Dudezillaz:
-	else if (flags[kFLAGS.TAMANI_MET] == 0) {
-			tamaniMaleFirstEncounter();
-	}
-	else {
-		switch (pregnancy.event) {
-			case  2: tamaniPregnantEncounter();	break;	//She's moderately pregnant
-			case  3: tamaniPoopsOutBabies(); break;		//She's close to giving birth so do it now
-			default: tamaniMaleRepeatEncounter();		//She's not pregnant or is only slightly pregnant
-		}
+	switch(player.gender) {
+		case 1:
+			if (flags[kFLAGS.TAMANI_MET] == 0)
+				tamaniMaleFirstEncounter();
+			else switch (pregnancy.event) {
+				case  2: tamaniPregnantEncounter();	break;	//She's moderately pregnant
+				case  3: tamaniPoopsOutBabies(); break;		//She's close to giving birth so do it now
+				default: tamaniMaleRepeatEncounter();		//She's not pregnant or is only slightly pregnant
+			}
+			break;
+		case 2:
+			tamaniFemaleEncounter();
+			break;
+		case 3:
+			if (flags[kFLAGS.TAMANI_MET] == 0) tamaniHermFirstEncounter();
+			else tamaniMaleRepeatEncounter();
+			break;
+		default: throw new Error("Something has broken in 'encounterTamani()': gender is invalid!");
 	}
 }
 //TAMANI HYPNO SHIT
@@ -918,10 +968,9 @@ internal function tamaniBeaten():void {
 //Butts McGee Facesitting Tamaniz
 private function preferTamaniFemdom():void {
 	clearOutput();
-	//Tamani Facesit
-	//===========Tamani============
-	//((Female PC has a third option when they encounter Tamani, labeled 'Like girls' if this is implemented; it gets them the following text.))
-	outputText("\"<i>You're into girls, huh?</i>\" Tamani laughs, turning around and giving her fat butt a playful swat.  You watch as she does it a second time, laughing more at you than <i>with</i> you now, and then turns back around.  \"<i>Tell you what then, slut! I've had crap luck today finding a good stud, so I'll make you a deal.</i>\"");
+	if (player.hasCock()) outputText("\"<i>You prefer girl-on-girl relationships, huh?");
+	else outputText("\"<i>You're into girls, huh?");
+	outputText("</i>\" Tamani laughs, turning around and giving her fat butt a playful swat.  You watch as she does it a second time, laughing more at you than <i>with</i> you now, and then turns back around.  \"<i>Tell you what then, slut! I've had crap luck today finding a good stud, so I'll make you a deal.</i>\"");
 	outputText("\n\nTamani advances closer, staring you straight in the eye with an impish smirk.  \"<i>I'll let you get me off if you swear to stay away from </i>my<i> cocks. Deal?</i>\"");
 	menu();
 	addButton(0,"Accept",acceptTamaniFacesits);

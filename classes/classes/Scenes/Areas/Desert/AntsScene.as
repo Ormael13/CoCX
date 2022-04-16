@@ -14,6 +14,8 @@ import classes.display.SpriteDb;
 
 	public class AntsScene extends BaseContent
 	{
+		public const phyllaCapacity:Number = 50;
+
 		public function AntsScene() {}
 
 		public function phyllaSprite(nude:Boolean = false):void {
@@ -34,11 +36,6 @@ import classes.display.SpriteDb;
 			else if (flags[kFLAGS.PHYLLA_SAVED] == 1)
 				enterTheColony();
 			else firstAntColonyEncounter();
-		}
-
-		private function get phyllaCapacity():Number
-		{
-			return flags[kFLAGS.PHYLLA_CAPACITY];
 		}
 
 //First Encounter
@@ -453,7 +450,6 @@ import classes.display.SpriteDb;
 		{
 			clearOutput();
             phyllaSprite();
-			if (!recalling) flags[kFLAGS.PHYLLA_CAPACITY] = 50;
 			outputText("As you turn to leave, something is different; the crowd seems unusually silent. Phylla swiftly climbs down from her seat and jumps into the arena.  You glance warily at the gnoll but it's already being dragged out.  Phylla runs to you, and gives you a massive hug, wrapping all four of her arms around you and squeezing as hard as she can.  Her open display of affection leaves you more than a little shocked, given the creaking and soft cracking of bone in your body.  Interlocking her fingers with yours, she turns and raises your hands in the air, proclaiming your victory to every ant in the colony.  The awed crowd suddenly erupts, filling the stadium with cheers for your victory.  She turns towards the exit and tugs on your sleeve.");
 			outputText("\n\nPhylla drags you blindly through myriads of unlit tunnels until you reach the Queen's chamber, where Chylla seems to be awaiting you. Though, something is different than the last time you saw her; she's dressed just as regally as Phylla is, but it appears more...  formal.");
 			outputText("\n\n\"<i>Phylla seems to have been right about you. You are as smart as you are strong. Though I had my doubts, you are truly something special.  You have my blessing to start your own colony with Phylla, should you choose to.</i>\" Chylla turns to her daughter and nods some kind of silent message.  You're not sure if the Ant-Queen has really warmed up to you, or she's just saying it because she must in her role as Queen, bestowing a great honor on someone she detests.  Whatever the reason, Phylla seems ecstatic about what's to come next.");

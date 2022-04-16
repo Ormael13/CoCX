@@ -12,17 +12,14 @@ import classes.display.SpriteDb;
 public class PhyllaScene extends BaseContent implements TimeAwareInterface
 	{
 
+		public const phyllaCapacity:Number = 50;
+
 		public var pregnancy:PregnancyStore;
 
 		public function PhyllaScene()
 		{
 			pregnancy = new PregnancyStore(kFLAGS.PHYLLA_VAGINAL_PREGNANCY_TYPE, kFLAGS.PHYLLA_DRIDER_INCUBATION, 0, 0);
 			EventParser.timeAwareClassAdd(this);
-		}
-
-		private function get phyllaCapacity():Number
-		{
-			return flags[kFLAGS.PHYLLA_CAPACITY];
 		}
 
 		//Implementation of TimeAwareInterface
