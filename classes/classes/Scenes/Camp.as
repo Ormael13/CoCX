@@ -1590,7 +1590,7 @@ public class Camp extends NPCAwareContent{
 				else if (flags[kFLAGS.ANT_KIDS] > 1000) outputText(" some of your children exit the anthill using main or one of the additionally entrances to unload some dirt. Some of them instead of unloading dirt coming out to fulfill some other task that their mother gave them.  You feel a little nostalgic seeing how this former small colony grown to such a magnificent size.");
 				else outputText(" Phylla appear out of the anthill to unload some dirt.  She looks over to your campsite and gives you an excited wave before heading back into the colony.  It makes you feel good to know she's so close.");
 				outputText("\n\n");
-				buttons.add("Phylla", SceneLib.desert.antsScene.introductionToPhyllaFollower);
+				buttons.add("Phylla", SceneLib.phyllaScene.introductionToPhyllaFollower);
 			}
 			//Samirah
 			if (flags[kFLAGS.SAMIRAH_FOLLOWER] > 9) {
