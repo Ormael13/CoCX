@@ -266,19 +266,40 @@ public function ayaneCockWorship():void
 	player.sexReward("vaginalFluids","Dick");
 	player.sexReward("saliva","Dick");
 	player.orgasm('Dick');
-	if (player.inRut) {
+	if (!pregnancy.isPregnant) {
 		if (debug) outputText("\n\n<b>DEBUG: Ayane pregcheck.</b>");
+		doNext(breedayaneweneedallthefoxes);
+	}
+	else if (pregnancy.isPregnant) {
+		if (debug) outputText("\n\n<b>DEBUG: Ayane impregnation check skipped.</b>");
+		doNext(camp.returnToCampUseOneHour);
+	}
+}
+private function breedayaneweneedallthefoxes():void
+{
+	if (debug) outputText("\n\n<b>DEBUG: Begining ayane pregcheck.</b>\n\n")
+
+	if (player.inRut) {
 		player.removeStatusEffect(StatusEffects.Rut);
 		dynStats("sen", -2);
 		outputText("\n\nYou have a feeling that your recent fun with Ayane has caused her to become pregnant. You wonder if she will be able to produce a litter soon.\n\n");
 		outputText("\n\nEven though you are not sure how long it will be before you have a daughter, you are sure that you will have one soon.\n\n");
 		pregnancy.knockUp(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_AYANE); //Will always impregnate unless contraceptives are in use
 		if (debug) outputText("\n\n<b>DEBUG: Ayane pregcheck returned good.</b>");
+		trace("Ayane got PREGNANT!");
 		doNext(camp.returnToCampUseOneHour);
 	}
-	else
-	if (debug) outputText("\n\n<b>DEBUG: Ayane impregnation skipped.</b>");
-	doNext(camp.returnToCampUseOneHour);
+	else if (rand(100) < Math.sqrt(player.cumQ())) {
+		trace("Ayane got random chance PREGNANT!");
+		if (debug) outputText("\n\n<b>DEBUG: Ayane chance pregcheck returned good.</b>");
+		pregnancy.knockUpForce(PregnancyStore.PREGNANCY_PLAYER, PregnancyStore.INCUBATION_AYANE); //Will always impregnate unless contraceptives are in use
+		doNext(camp.returnToCampUseOneHour);
+	}
+	else {
+		if (debug) outputText("\n\n<b>DEBUG: Ayane pregcheck returned as skipped.</b>");
+		trace("Ayane pregcheck failed (not in heat and bad cum volume)");
+		doNext(camp.returnToCampUseOneHour);
+	}
 }
 
 public function ayaneVaginalWorship():void
