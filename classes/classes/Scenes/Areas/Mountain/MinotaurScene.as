@@ -534,7 +534,7 @@ public function minoPheromones():void {
 		dynStats("lus", 5+rand(5));
 	}
 	//YOU LOSE!
-	if (player.lust >= player.maxLust())
+	if (player.lust >= player.maxOverLust())
         doNext(SceneLib.combat.endLustLoss);
     else doNext(SceneLib.combat.combatMenu);
 }

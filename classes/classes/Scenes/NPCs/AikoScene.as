@@ -635,7 +635,7 @@ internal function aikoLosesIntro():void {
 internal function aikoWinsIntro():void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_aiko);		
-	outputText("You slump to the ground, [if (player.lust >= player.maxLust())crippled with desire|thoroughly thrashed], looking up at the fiery-eyed fox-woman.\n\n");
+	outputText("You slump to the ground, [if (player.lust >= player.maxOverLust())crippled with desire|thoroughly thrashed], looking up at the fiery-eyed fox-woman.\n\n");
 	if (flags[kFLAGS.AIKO_TIMES_MET] == 1) {
 		if (player.kitsuneScore() > 0) {
 			if (player.tail.type == Tail.FOX && player.tail.venom == 9) { //what's the difference in tail.type == Tail.FOX here and tailtype == 13 above?
@@ -1225,7 +1225,7 @@ public function sparWithAikoWin():void {
 public function sparWithAikoLose(aikoLust:int):void {
 	clearOutput();
 	spriteSelect(SpriteDb.s_aiko);
-	outputText("You fall to the ground in a heap, overcome by [if (player.lust >= player.maxLust())lust|exhaustion]. Aiko stands over you for a moment, hands on her hips as she smirks victoriously.\n\n"
+	outputText("You fall to the ground in a heap, overcome by [if (player.lust >= player.maxOverLust())lust|exhaustion]. Aiko stands over you for a moment, hands on her hips as she smirks victoriously.\n\n"
 	+"<i>\"Well, to the victor go the spoils...\"</i> she says, giggling as she advances on you.");
 	playerchoice = false;
 	//[Consensual] - Aiko’s choice - Based on Aiko’s current Lust score and/or Affection for the PC
@@ -1311,7 +1311,7 @@ public function pcLosesDomFight():void {
 		if (player.hasVagina())
 			player.orgasm('vagina');
 	} else {
-		outputText("You fall to the ground in a heap, overcome by your [if (player.lust >= player.maxLust())lust|wounds]. Aiko stands over you for a moment, murmuring an incantation under her breath, and you watch her point her first two fingers at your forehead just before the world goes dark.\n\n");
+		outputText("You fall to the ground in a heap, overcome by your [if (player.lust >= player.maxOverLust())lust|wounds]. Aiko stands over you for a moment, murmuring an incantation under her breath, and you watch her point her first two fingers at your forehead just before the world goes dark.\n\n");
 	}
 	cleanupAfterCombat();
 }

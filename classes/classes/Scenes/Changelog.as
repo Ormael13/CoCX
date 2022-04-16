@@ -251,8 +251,8 @@ package classes.Scenes
 			outputText("-Minor text fixes, Excellia racial inconsistencies. (Svalkash)\n");
 			outputText("-Bag from Adventure guild for Iron Plate adventures can store now additionaly up to 10 severed tentaclers in 5th slot.\n");
 			outputText("-Changed Hot Spring check for herms (now it considers your femininity, dick & breast size). (Svalkash)\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Restore spell can't be casted with use of HP instead of mana.\n");
+			outputText("-New super perk: Munchkin@Work. Gained by having merely 1 super perk, having 'Munchkin@Gym' super munchkin perk, lvl 120+. Effect: +10% to OverMax HP / Lust / Wrath / Mana / Soulforce, +2 prestige job slots, +1 hidden job slot.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

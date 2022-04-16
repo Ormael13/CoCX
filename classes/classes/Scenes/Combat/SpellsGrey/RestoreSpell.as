@@ -13,6 +13,8 @@ public class RestoreSpell extends AbstractGreySpell {
 			[TAG_HEALING]
 		);
 		baseManaCost = 80;
+		isLastResortApplicable = false;
+		isBloodMagicApplicable = false;
 	}
 	
 	override public function get isKnown():Boolean {

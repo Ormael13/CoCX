@@ -90,7 +90,7 @@ import classes.VaginaClass;
 				return;
 			}
 			
-			if (player.lust >= player.maxLust())
+			if (player.lust >= player.maxOverLust())
 			{
 				doNext(SceneLib.combat.endLustLoss);
 				return;

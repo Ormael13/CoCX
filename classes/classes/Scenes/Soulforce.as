@@ -7,14 +7,8 @@ package classes.Scenes
 import classes.*;
 import classes.BodyParts.*;
 import classes.IMutations.IMutationsLib;
-import classes.IMutations.KitsuneThyroidGlandMutation;
-import classes.Scenes.Areas.Forest.Kitsune;
-import classes.Scenes.NPCs.DivaScene;
-
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.DeepSea.Kraken;
-import classes.Scenes.Areas.Forest.Alraune;
-import classes.Scenes.Areas.Forest.Nightmare;
 import classes.Scenes.Areas.Forest.TamainsDaughtersScene;
 import classes.Scenes.Areas.Forest.TamaniScene;
 import classes.Scenes.Areas.Forest.TentacleBeastRaging;
@@ -22,45 +16,29 @@ import classes.Scenes.Areas.Forest.WorldTree;
 import classes.Scenes.Areas.HighMountains.IzumiScene;
 import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.Dungeons.D3.SuccubusGardener;
-import classes.Scenes.Dungeons.DenOfDesire.HeroslayerOmnibus;
-import classes.Scenes.Dungeons.DenOfDesire.ObsidianGargoyle;
 import classes.Scenes.Dungeons.RiverDungeon.QuatroElementalBoss;
 import classes.Scenes.Explore.Pierce;
 import classes.Scenes.Explore.TheDummy;
-import classes.Scenes.Monsters.DarkElfRanger;
-import classes.Scenes.Monsters.DarkElfScout;
-import classes.Scenes.Monsters.DarkElfSlaver;
-import classes.Scenes.Monsters.DarkElfSniper;
 import classes.Scenes.Monsters.Malikore;
-import classes.Scenes.Monsters.Manticore;
 import classes.Scenes.Monsters.Oozaru;
 import classes.Scenes.NPCs.Alvina;
 import classes.Scenes.NPCs.Aria;
-import classes.Scenes.NPCs.Aurora;
 import classes.Scenes.NPCs.Belisa;
 import classes.Scenes.NPCs.BelisaFollower;
-import classes.Scenes.NPCs.CelessScene;
-import classes.Scenes.NPCs.Diana;
 import classes.Scenes.NPCs.DivaScene;
-import classes.Scenes.NPCs.Electra;
 import classes.Scenes.NPCs.LilyFollower;
 import classes.Scenes.NPCs.Neisa;
 import classes.Scenes.NPCs.RyuBiDragon;
 import classes.Scenes.NPCs.Sonya;
-import classes.Scenes.NPCs.Tyrantia;
 import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.Scenes.NPCs.Zenji;
 import classes.Scenes.NPCs.ZenjiScenes;
 import classes.Scenes.Places.Boat.Marae;
 import classes.Scenes.Places.HeXinDao.AdventurerGuild;
-import classes.Player;
 import classes.Items.*;
 import classes.Scenes.Places.TrollVillage;
-import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 import classes.Stats.Buff;
 import classes.Scenes.Dungeons.EbonLabyrinth.*;
-
-import classes.Scenes.Metamorph;
 import classes.GeneticMemories.*;
 
 use namespace CoC;
@@ -256,7 +234,7 @@ public class Soulforce extends BaseContent
 		menuItems.push("MetamorphFull", (player.hasPerk(PerkLib.Metamorph))? AllMetamorphOptionsUnlock: false, "Unlock all Metamorph options.");
 		menuItems.push("BelisaTest", (BelisaFollower.BelisaInGame && BelisaFollower.BelisaFollowerStage < 3 && BelisaFollower.BelisaEncounternum >= 1) ? belisatest : false, "Belisa Trigger");
 		menuItems.push("BeliConfFix", (TyrantiaFollower.TyrantiaFollowerStage >= 4 && BelisaFollower.BelisaFollowerStage >= 5 && BelisaFollower.BelisaEncounternum >= 5 && BelisaFollower.BelisaAffectionMeter >= 80 && !BelisaFollower.BelisaConfessed) ? belisatest2 : false, "Belisa Confession Fix");
-		menuItems.push("LilyTest", (LilyFollower.LilyFollowerState == false) ? lilytest : false, "Lily Trigger");
+		menuItems.push("LilyTest", !LilyFollower.LilyFollowerState ? lilytest : false, "Lily Trigger");
 		menuItems.push("FixJiangshi", jiangshiBuggedItemsCleanUpCrew0, "Shit! Here we go Again! Fixing Jiangshi! (better use it only once or may be some bugs i not plan to account for in case of using this more than once - i not blocked using it more than once so belive ppl will be reasonable to not click like mad this)");
 		menuItems.push("BodyPartEditor", SceneLib.debugMenu.bodyPartEditorRoot, "");
 		menuItems.push("ClickItTwice", AddMaxBackpack00, "Golem Army and Ascension: Additional Organ Mutation/Prestige perks correction pre global save upgrade on new public build.");
@@ -279,7 +257,7 @@ public class Soulforce extends BaseContent
 		menuItems.push("Remove Shard", cheatRemoveShard, "Remove 1 radiant shard");
 		menuItems.push("ZenjiQ", ZenjiQ, "Zenji Expac 2 debug tool");
 		menuItems.push("LustBreath", (player.hasPerk(PerkLib.DragonPoisonBreath))? FairyTest: false, "Replacing 1 perk with another");
-		//menuItems.push("Mutationtest", mutation3, "MutationTest")
+		menuItems.push("Mutationtest", mutation3, "MutationTest")
 		//menuItems.push("Mutation test reset", resetMutations, "Reset Mutations");
 		menuGen(menuItems, page, accessSoulforceMenu);
 	}
@@ -2649,7 +2627,7 @@ public class Soulforce extends BaseContent
 		StatsMenuSen();
 	}
 	public function SubSen3():void {
-		dynStats("sen", -50);;
+		dynStats("sen", -50);
 		statScreenRefresh();
 		StatsMenuSen();
 	}
@@ -4426,7 +4404,7 @@ public class Soulforce extends BaseContent
 			}
 			else SceneLib.ryubi.RyuBiEnterTheDragon();*/
 			if (BelisaFollower.BelisaInGame && BelisaFollower.BelisaFollowerStage < 3 && BelisaFollower.BelisaEncounternum >= 1 && !player.hasStatusEffect(StatusEffects.SpoodersOff)) addButton(0, "???", belisatest).hint("Shy Spooder");
-			if (LilyFollower.LilyFollowerState == false && !player.hasStatusEffect(StatusEffects.SpoodersOff)) addButton(1, "???", lilytest).hint("Lewd Spooder");
+			if (!LilyFollower.LilyFollowerState && !player.hasStatusEffect(StatusEffects.SpoodersOff)) addButton(1, "???", lilytest).hint("Lewd Spooder");
 			if (player.level >= 45 && TyrantiaFollower.TyrantiaFollowerStage < 4 && !TyrantiaFollower.TyraniaIsRemovedFromThewGame && !player.hasStatusEffect(StatusEffects.SpoodersOff)) addButton(2, "???", FightTyrantia).hint("Scary Spooder");
 			if (player.level >= 3 && flags[kFLAGS.IZMA_ENCOUNTER_COUNTER] > 0 && (flags[kFLAGS.IZMA_WORMS_SCARED] == 0 || !player.hasStatusEffect(StatusEffects.Infested)) && flags[kFLAGS.IZMA_FOLLOWER_STATUS] <= 0) addButton(3, "???", tigerSharkGal).hint("Tigershark Gal?");
 			if (player.level >= 3 && flags[kFLAGS.DIANA_FOLLOWER] < 6 && player.statusEffectv4(StatusEffects.CampSparingNpcsTimers2) < 1 && !player.hasStatusEffect(StatusEffects.DianaOff)) addButton(4, "???", shyHealer).hint("Shy Healer");
@@ -4464,10 +4442,9 @@ public class Soulforce extends BaseContent
 	}
 	
 	private function canfaceTribulation():Boolean {
-		if ((player.level >= 27 && player.hasPerk(PerkLib.SoulWarrior) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) ||
+		return (player.level >= 27 && player.hasPerk(PerkLib.SoulWarrior) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.HclassHeavenTribulationSurvivor)) ||
 				(player.level >= 54 && player.hasPerk(PerkLib.SoulElder) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.GclassHeavenTribulationSurvivor)) ||
-				(player.level >= 78 && player.hasPerk(PerkLib.SoulOverlord) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor))) return true;
-		else return false;
+				(player.level >= 78 && player.hasPerk(PerkLib.SoulOverlord) && !player.hasStatusEffect(StatusEffects.TribulationCountdown) && !player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor));
 	}
 	public function tribulationsPrompt():void {
 		clearOutput();

@@ -101,7 +101,7 @@ public class BeeGirl extends Monster {
 				}
 				paralyze.increaseBee();
 			}
-			if (player.lust >= player.maxLust())
+			if (player.lust >= player.maxOverLust())
 				doNext(SceneLib.combat.endLustLoss);
 			else doNext(EventParser.playerMenu);
 		}
