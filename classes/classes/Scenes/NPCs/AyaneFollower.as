@@ -233,17 +233,11 @@ public function ayaneWorship():void
 	clearOutput();
 	outputText("You tell Ayane you could use some relief. She quickly takes the hint, helping you to remove any clothes you might be wearing and kneeling down, her face level with your hips as she whispers holy prayers.\n\n");
 	menu();
-	if (player.hasCock() && player.hasVagina()) {
-		 addButton(0, "Herm Worship", ayaneHermWorship);
-	}
-/* 	else addButtonDisabled(0, "Herm Worship", "You need a cock and a vagina for this");
-	if (player.hasCock()) {
-		addButton(1, "Cock Worship", ayaneCockWorship);
-	} */
+	if (player.hasCock() && player.hasVagina()) addButton(0, "Herm Worship", ayaneHermWorship);
+	else addButtonDisabled(0, "Herm Worship", "You need a cock and a vagina for this");
+	if (player.hasCock()) addButton(1, "Cock Worship", ayaneCockWorship);
 	else addButtonDisabled(1, "Cock Worship", "You need a cock for this");
-	if (player.hasVagina()) {
-		addButton(2, "Vaginal Worship", ayaneVaginalWorship);
-	}
+	if (player.hasVagina()) addButton(2, "Vaginal Worship", ayaneVaginalWorship);
 	else addButtonDisabled(2, "Vaginal Worship", "You need a Vagina for this");
 	if (!player.hasCock() && !player.hasVagina()) {
 		outputText("You tell Ayane you could use some relief. She quickly takes the hint, helping you to remove any clothes you might be wearing and kneeling down, her face level with your hips before her face contorts in confusion, finding nothing attached to your crotch.");
@@ -314,7 +308,8 @@ public function ayaneVaginalWorship():void
 	player.orgasm('vaginal');
 	doNext(camp.returnToCampUseOneHour);
 }
-/* public function ayaneHermWorship():void
+
+public function ayaneHermWorship():void
 {
 	clearOutput();
 	outputText("Go Yell at daikael on discord because she is a fucking idiot and forgot to finish this before pushing."); //daitodo
@@ -332,7 +327,7 @@ public function ayaneVaginalWorship():void
 		doNext(camp.returnToCampUseOneHour);
 	}
 	doNext(camp.returnToCampUseOneHour);
-} */
+}
 
 public function ayaneAnal():void
 {

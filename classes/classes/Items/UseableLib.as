@@ -34,9 +34,12 @@ use namespace CoC;
 		public const TIN_ORE:SimpleUseable = new SimpleUseable("Tin Ore", "Tin ore", "a Tin ore", 40, 
 			"A Tin ore.",
 			"You look over the chunk of Tin ore. Likely usefull to making some equipment.");
-		public const IRONORE:SimpleUseable = new SimpleUseable("Iron Ore", "Iron ore", "an Iron ore", 40, 
+		public const IRONORE:SimpleUseable = new SimpleUseable("Iron Ore", "Iron ore", "an Iron ore", 90, 
 			"An Iron ore.",
 			"You look over the chunk of Iron ore. Likely usefull to making some equipment.");
+		public const BRONZEB:SimpleUseable = new SimpleUseable("BronzeB", "Bronze bar", "a Bronze bar", 80, 
+			"A Bronze bar.",
+			"You look over the Bronze bar. Likely usefull to making some equipment.");
 		public const B_CHITN:SimpleUseable = new SimpleUseable("B.Chitn", "B.Chitn", "a large shard of chitinous plating", 100,
 			"A perfect piece of black chitin from a bee-girl.  It still has some fuzz on it.",
 			"You look over the scale carefully but cannot find a use for it.  Maybe someone else will know how to use it.");
@@ -52,6 +55,9 @@ use namespace CoC;
 		public const EBONBLO:SimpleUseable = new SimpleUseable("Ebonblo", "Ebonbloom", "an ebonbloom", 600, 
 			"Grey metallic flowers such as these are known to bloom in the deepest caves that run below the mountains of Mareth. Prized by mountain dwellers, these blooms fetch a high price due to their rarity and alchemical value.", 
 			"You look over the grey metallic flowers such as these are known to bloom in the deepest caves that run below the mountains of Mareth. Prized by mountain dwellers, these blooms fetch a high price due to their rarity and alchemical value.");
+		public const EBONING:SimpleUseable = new SimpleUseable("EbonIng", "Ebon Ingot", "an ebon ingot", 600, 
+			"An Ebon ingot.", 
+			"You look over the Ebon ingot. Likely usefull to making some weapons.");
 		public const WT_BRAN:SimpleUseable = new SimpleUseable("WT.Bran", "W.T.Branch", "a World Tree Branch", 200,
 			"A branch from World Tree.  It's infused with small amount of soulforce.",
 			"You look over the branch of World Tree.  Maybe someone else will know how to use it.");
@@ -79,6 +85,12 @@ use namespace CoC;
 		public const E_ICHOR:SimpleUseable = new SimpleUseable("E.Ichor", "E-Ichor vial", "a vial of E-Ichor", 1,
 			"An vial of E-Ichor.",
 			"You look at the vial of substance called E-Ichor. It occasionally glows gently in your hand.  It may be useful for taking on mutations.");
+		public const SKYMETA:SimpleUseable = new SimpleUseable("Skymetal", "Skymetal" , "a Skymetal", 900,
+			"A Skymetal ore.",
+			"You gaze at the skymetal ore. Likely usefull to making some weapons.");
+		public const MOONSTO:SimpleUseable = new SimpleUseable("Moonsto", "Moonstone" , "a Moonstone", 900,
+			"A Moonstone.",
+			"You gaze at the Moonstone. Likely usefull to making some weapons.");
 		public const AMEGEM:SimpleUseable = new SimpleUseable("Amet.Gem", "Amethyst Gem" , "an Amethyst Gem", 1200,
 			"An Amethyst Gem.",
 			"You gaze at the Amethyst Gem. It would make for great ornamentation, if one knew how to use it.");

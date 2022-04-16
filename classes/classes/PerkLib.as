@@ -3814,6 +3814,8 @@ public class PerkLib
 				"Grants a 5 point damage bonus to dick-based tease attacks.");
 		public static const Cornucopia:PerkType = mk("Cornucopia", "Cornucopia",
 				"Vaginal and Anal capacities increased by 30.");
+		public static const CraftedArrows:PerkType = mk("Crafted Arrows", "Crafted Arrows",
+				"You have personaly crafted arrows in your quiver. Depending on their type it will increase bow attack from 10% to 40%");
 		public static const DemonicLethicite:PerkType = mk("Demonic Lethicite", "Demonic Lethicite",
 				"Improves soulforce and makes you more demonic.");//Effects: maxSoulforce += lib; +1 demonscore; 10 min corruption
 		public static const DemonSlayer:DemonSlayerPerk = new DemonSlayerPerk();

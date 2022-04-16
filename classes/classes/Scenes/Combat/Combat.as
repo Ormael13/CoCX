@@ -3404,7 +3404,29 @@ public class Combat extends BaseContent {
 					if (player.lowerGarment == undergarments.HBSHORT) damage *= 1.05;
 				}
 			}
-			if (weaponRangePerk == "Bow" && player.hasStatusEffect(StatusEffects.FletchingTable) && player.statusEffectv2(StatusEffects.FletchingTable) > 0) damage *= (1 + (0.1 * player.statusEffectv2(StatusEffects.FletchingTable)));
+			if (weaponRangePerk == "Bow" && player.hasStatusEffect(StatusEffects.FletchingTable)) {
+				if (player.statusEffectv1(StatusEffects.FletchingTable) > 0) damage *= (1 + (0.1 * player.statusEffectv1(StatusEffects.FletchingTable)));
+				if (player.statusEffectv2(StatusEffects.FletchingTable) > 0) damage *= (1 + (0.1 * player.statusEffectv2(StatusEffects.FletchingTable)));
+				if (player.hasPerk(PerkLib.CraftedArrows)) {
+					if (player.perkv4(PerkLib.CraftedArrows) > 0) {
+						player.addPerkValue(PerkLib.CraftedArrows, 4, -1);
+						damage *= 1.4;
+					}
+					else if (player.perkv3(PerkLib.CraftedArrows) > 0) {
+						player.addPerkValue(PerkLib.CraftedArrows, 3, -1);
+						damage *= 1.3;
+					}
+					else if (player.perkv2(PerkLib.CraftedArrows) > 0) {
+						player.addPerkValue(PerkLib.CraftedArrows, 2, -1);
+						damage *= 1.2;
+					}
+					else if (player.perkv1(PerkLib.CraftedArrows) > 0) {
+						player.addPerkValue(PerkLib.CraftedArrows, 1, -1);
+						damage *= 1.1;
+					}
+					else player.removePerk(PerkLib.CraftedArrows);
+				}
+			}
 			damage *= (1 + (0.01 * masteryArcheryLevel()));
             if (damage == 0) {
                 if (monster.inte > 0) {

@@ -253,8 +253,8 @@ package classes.Scenes
 			outputText("-Changed Hot Spring check for herms (now it considers your femininity, dick & breast size). (Svalkash)\n");
 			outputText("-Restore spell can't be casted with use of HP instead of mana.\n");
 			outputText("-New super perk: Munchkin@Work. Gained by having merely 1 super perk, having 'Munchkin@Gym' super munchkin perk, lvl 120+. Effect: +10% to OverMax HP / Lust / Wrath / Mana / Soulforce, +2 prestige job slots, +1 hidden job slot.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Fletching table accessable at Elven Village allows now to craft special arrows - 100 per unit of material used (they would be used first before normal ones) and Reinforce. Like improving string those options takes 8 hours.\n");
+			outputText("-Ayane Worship Scene for Herms & pregnancy. (Daikael the fluff enthusiast)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

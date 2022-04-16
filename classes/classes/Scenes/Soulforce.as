@@ -1809,10 +1809,10 @@ public class Soulforce extends BaseContent
 		}
 		if (page == 2) {
 			addButton(0, "GolemCore", AddGolemCore).hint("Add 1 Golem Core.");
-			//addButton(1, "", ).hint("Add 1 .");
-			//addButton(2, "", ).hint("Add 1 .");
-			//addButton(3, "", ).hint("Add 1 .");
-			//addButton(4, "", ).hint("Add 1 .");
+			addButton(1, "BronzeBar", AddBronzeBar).hint("Add 1 Bronse bar.");
+			addButton(2, "EbonIngot", AddEbonIngot).hint("Add 1 Ebon Ingot.");
+			addButton(3, "Skymetal", AddSkymetalOre).hint("Add 1 Skymetal Ore.");
+			addButton(4, "Moonstone", AddMoonstone).hint("Add 1 Moonstone.");
 			addButton(5, "Mechanism", AddMechanism).hint("Add 1 Mechanism.");
 			//addButton(6, "", ).hint("Add 1 .");
 			//addButton(7, "", ).hint("Add 1 .");
@@ -2107,6 +2107,22 @@ public class Soulforce extends BaseContent
 	public function AddGolemCore():void {
 		outputText("\n\n<b>(Gained 1 Golem Core!)</b>\n\n");
 		inventory.takeItem(useables.GOLCORE, curry(MaterialMenu, 2));
+	}
+	public function AddBronzeBar():void {
+		outputText("\n\n<b>(Gained 1 Bronze bar!)</b>\n\n");
+		inventory.takeItem(useables.BRONZEB, curry(MaterialMenu, 2));
+	}
+	public function AddEbonIngot():void {
+		outputText("\n\n<b>(Gained 1 Ebon Ingot!)</b>\n\n");
+		inventory.takeItem(useables.EBONING, curry(MaterialMenu, 2));
+	}
+	public function AddSkymetalOre():void {
+		outputText("\n\n<b>(Gained 1 Skymetal Ore!)</b>\n\n");
+		inventory.takeItem(useables.SKYMETA, curry(MaterialMenu, 2));
+	}
+	public function AddMoonstone():void {
+		outputText("\n\n<b>(Gained 1 Moonstone!)</b>\n\n");
+		inventory.takeItem(useables.MOONSTO, curry(MaterialMenu, 2));
 	}
 	public function AddPolarMidnightScroll():void {
 		outputText("\n\n<b>(Gained 1 Polar Midnight scroll!)</b>\n\n");
