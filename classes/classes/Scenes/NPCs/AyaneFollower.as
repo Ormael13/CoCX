@@ -236,10 +236,10 @@ public function ayaneWorship():void
 	if (player.hasCock() && player.hasVagina()) {
 		 addButton(0, "Herm Worship", ayaneHermWorship);
 	}
-	else addButtonDisabled(0, "Herm Worship", "You need a cock and a vagina for this");
+/* 	else addButtonDisabled(0, "Herm Worship", "You need a cock and a vagina for this");
 	if (player.hasCock()) {
 		addButton(1, "Cock Worship", ayaneCockWorship);
-	}
+	} */
 	else addButtonDisabled(1, "Cock Worship", "You need a cock for this");
 	if (player.hasVagina()) {
 		addButton(2, "Vaginal Worship", ayaneVaginalWorship);
@@ -314,7 +314,7 @@ public function ayaneVaginalWorship():void
 	player.orgasm('vaginal');
 	doNext(camp.returnToCampUseOneHour);
 }
-public function ayaneHermWorship():void
+/* public function ayaneHermWorship():void
 {
 	clearOutput();
 	outputText("Go Yell at daikael on discord because she is a fucking idiot and forgot to finish this before pushing."); //daitodo
@@ -332,7 +332,7 @@ public function ayaneHermWorship():void
 		doNext(camp.returnToCampUseOneHour);
 	}
 	doNext(camp.returnToCampUseOneHour);
-}
+} */
 
 public function ayaneAnal():void
 {
