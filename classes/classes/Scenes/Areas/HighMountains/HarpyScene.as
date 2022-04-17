@@ -67,7 +67,7 @@ public class HarpyScene extends BaseContent
 			}
 			//Dick that fits or has cunt
 			if (x >= 0 || player.hasVagina()) {
-				if (player.lust >= player.maxLust()) harpyLossLust();
+				if (player.lust >= player.maxOverLust()) harpyLossLust();
 				else harpyDamageLoss();
 			}
 			//No fitu

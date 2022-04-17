@@ -108,7 +108,7 @@ import classes.internals.ChainedDrop;
 				}
 				paralyze.increaseWasp1();
 			}
-			if (player.lust >= player.maxLust()) doNext(SceneLib.combat.endLustLoss);
+			if (player.lust >= player.maxOverLust()) doNext(SceneLib.combat.endLustLoss);
 			else doNext(EventParser.playerMenu);
 		}
 

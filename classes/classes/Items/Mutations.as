@@ -399,8 +399,7 @@ public final class Mutations extends MutationsHelper {
         if (player.hasPerk(PerkLib.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
         else {
 			var lowgraderestore1:Number = Math.round(player.maxSoulforce() * 0.01) + 100;
-			player.soulforce += lowgraderestore1;
-            if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+			EngineCore.SoulforceChange(lowgraderestore1, false);
             if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(5);
             outputText("Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.[pg](Recovered soulforce: "+lowgraderestore1+")");
             statScreenRefresh();
@@ -411,8 +410,7 @@ public final class Mutations extends MutationsHelper {
         if (player.hasPerk(PerkLib.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
         else {
             var lowgraderestore2:Number = (Math.round(player.maxSoulforce() * 0.01) + 100) * 10;
-            player.soulforce += lowgraderestore2;
-            if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+            EngineCore.SoulforceChange(lowgraderestore2, false);
             if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(50);
             outputText("Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.[pg](Recovered soulforce: "+lowgraderestore2+")");
             statScreenRefresh();
@@ -423,8 +421,7 @@ public final class Mutations extends MutationsHelper {
         if (player.hasPerk(PerkLib.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
         else {
             var midgraderestore1:Number = Math.round(player.maxSoulforce() * 0.02) + 600;
-            player.soulforce += midgraderestore1;
-            if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+            EngineCore.SoulforceChange(midgraderestore1, false);
             if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(25);
             outputText("Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.[pg](Recovered soulforce: "+midgraderestore1+")");
             statScreenRefresh();
@@ -435,8 +432,7 @@ public final class Mutations extends MutationsHelper {
         if (player.hasPerk(PerkLib.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
         else {
             var midgraderestore2:Number = (Math.round(player.maxSoulforce() * 0.02) + 600) * 10;
-            player.soulforce += midgraderestore2;
-            if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+            EngineCore.SoulforceChange(midgraderestore2, false);
             if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(250);
             outputText("Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.[pg](Recovered soulforce: "+midgraderestore2+")");
             statScreenRefresh();
@@ -447,8 +443,7 @@ public final class Mutations extends MutationsHelper {
         if (player.hasPerk(PerkLib.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
         else {
             var highgraderestore1:Number = Math.round(player.maxSoulforce() * 0.03) + 3600;
-            player.soulforce += highgraderestore1;
-            if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+            EngineCore.SoulforceChange(highgraderestore1, false);
             if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(125);
             outputText("Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.[pg](Recovered soulforce: "+highgraderestore1+")");
             statScreenRefresh();
@@ -459,8 +454,7 @@ public final class Mutations extends MutationsHelper {
         if (player.hasPerk(PerkLib.EnergyDependent)) outputText("Sadly due to your current condition you not gained any soulforce.");
         else {
             var highgraderestore2:Number = (Math.round(player.maxSoulforce() * 0.03) + 3600) * 10;
-            player.soulforce += highgraderestore2;
-            if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+            EngineCore.SoulforceChange(highgraderestore2, false);
             if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(1250);
             outputText("Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.[pg](Recovered soulforce: "+highgraderestore2+")");
             statScreenRefresh();
@@ -469,8 +463,7 @@ public final class Mutations extends MutationsHelper {
 
     //	public function superiorgradesoulforcerecoverypill(player:Player):void {
     //		outputText("You cram the pill in your mouth and swallow it.  Surprisingly there is no discomfort, only a cool calming sensation that springs up from your soul.[pg](Recovered soulforce: 21600)");
-    //		player.soulforce += 21600;
-    //		if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+    //		EngineCore.SoulforceChange(21600, false);
     //		if (player.isGargoyle() && player.hasPerk(PerkLib.GargoylePure)) player.refillGargoyleHunger(625);
     //		statScreenRefresh();
     //	}
@@ -491,8 +484,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (player.hasStatusEffect(StatusEffects.KnowsTripleThrust)) {
             outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
-            player.soulforce += 20;
-            if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+            EngineCore.SoulforceChange(20, false);
         }
     }
     public function sextuplethrustmanual(player:Player):void {
@@ -506,8 +498,7 @@ public final class Mutations extends MutationsHelper {
             }
             if (player.hasStatusEffect(StatusEffects.KnowsSextupleThrust)) {
                 outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
-                player.soulforce += 45;
-                if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+                EngineCore.SoulforceChange(45, false);
             }
         } else {
             outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
@@ -526,8 +517,7 @@ public final class Mutations extends MutationsHelper {
             }
             if (player.hasStatusEffect(StatusEffects.KnowsNonupleThrust)) {
                 outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
-                player.soulforce += 100;
-                if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+                EngineCore.SoulforceChange(100, false);
             }
         } else {
             outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
@@ -546,8 +536,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (player.hasStatusEffect(StatusEffects.KnowsYinYangBlast)) {
             outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
-            player.soulforce += 25;
-            if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+            EngineCore.SoulforceChange(25, false);
         }
     }
 
@@ -561,8 +550,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (player.hasStatusEffect(StatusEffects.KnowsDracoSweep)) {
             outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
-            player.soulforce += 25;
-            if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+            EngineCore.SoulforceChange(25, false);
         }
     }
 
@@ -576,8 +564,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (player.hasStatusEffect(StatusEffects.KnowsManyBirds)) {
             outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
-            player.soulforce += 25;
-            if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+            EngineCore.SoulforceChange(25, false);
         }
     }
 
@@ -591,8 +578,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (player.hasStatusEffect(StatusEffects.KnowsHailOfBlades)) {
             outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
-            player.soulforce += 25;
-            if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+            EngineCore.SoulforceChange(25, false);
         }
     }
     public function hailofbladesmanual2(player:Player):void {
@@ -606,8 +592,7 @@ public final class Mutations extends MutationsHelper {
             }
             if (player.hasStatusEffect(StatusEffects.KnowsGrandioseHailOfBlades)) {
                 outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
-                player.soulforce += 45;
-                if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+                EngineCore.SoulforceChange(45, false);
             }
         } else {
             outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
@@ -626,8 +611,7 @@ public final class Mutations extends MutationsHelper {
             }
             if (player.hasStatusEffect(StatusEffects.KnowsGrandioseHailOfMoonBlades)) {
                 outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
-                player.soulforce += 45;
-                if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+                EngineCore.SoulforceChange(45, false);
             }
         } else {
             outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
@@ -646,8 +630,7 @@ public final class Mutations extends MutationsHelper {
             }
             if (player.hasStatusEffect(StatusEffects.KnowsSextupleThrust)) {
                 outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
-                player.soulforce += 45;
-                if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+                EngineCore.SoulforceChange(45, false);
             }
         } else {
             outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
@@ -667,8 +650,7 @@ public final class Mutations extends MutationsHelper {
             }
             if (player.hasStatusEffect(StatusEffects.KnowsComet)) {
                 outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
-                player.soulforce += 100;
-                if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+                EngineCore.SoulforceChange(100, false);
             }
         } else {
             outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
@@ -687,8 +669,7 @@ public final class Mutations extends MutationsHelper {
             }
             if (player.hasStatusEffect(StatusEffects.KnowsVioletPupilTransformation)) {
                 outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
-                player.soulforce += 100;
-                if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+                EngineCore.SoulforceChange(100, false);
             }
         } else {
             outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
@@ -713,8 +694,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (player.hasStatusEffect(StatusEffects.KnowsFlamesOfLove)) {
             outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
-            player.soulforce += 25;
-            if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+            EngineCore.SoulforceChange(25, false);
         }
     }
 
@@ -729,8 +709,7 @@ public final class Mutations extends MutationsHelper {
             }
             if (player.hasStatusEffect(StatusEffects.KnowsFlamesOfLove)) {
                 outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
-                player.soulforce += 50;
-                if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+                EngineCore.SoulforceChange(50, false);
             }
         } else {
             outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
@@ -748,8 +727,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (player.hasStatusEffect(StatusEffects.KnowsIciclesOfLove)) {
             outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
-            player.soulforce += 25;
-            if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+            EngineCore.SoulforceChange(25, false);
         }
     }
 
@@ -764,8 +742,7 @@ public final class Mutations extends MutationsHelper {
             }
             if (player.hasStatusEffect(StatusEffects.KnowsIciclesOfLove)) {
                 outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
-                player.soulforce += 50;
-                if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+                EngineCore.SoulforceChange(50, false);
             }
         } else {
             outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
@@ -783,8 +760,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (player.hasStatusEffect(StatusEffects.KnowsStormOfSisterhood)) {
             outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
-            player.soulforce += 25;
-            if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+            EngineCore.SoulforceChange(25, false);
         }
     }
 
@@ -799,8 +775,7 @@ public final class Mutations extends MutationsHelper {
             }
             if (player.hasStatusEffect(StatusEffects.KnowsStormOfSisterhood)) {
                 outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
-                player.soulforce += 50;
-                if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+                EngineCore.SoulforceChange(50, false);
             }
         } else {
             outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
@@ -818,8 +793,7 @@ public final class Mutations extends MutationsHelper {
         }
         if (player.hasStatusEffect(StatusEffects.KnowsNightOfBrotherhood)) {
             outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
-            player.soulforce += 25;
-            if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+            EngineCore.SoulforceChange(25, false);
         }
     }
 
@@ -834,8 +808,7 @@ public final class Mutations extends MutationsHelper {
             }
             if (player.hasStatusEffect(StatusEffects.KnowsNightOfBrotherhood)) {
                 outputText("When you open the manual, it turns out you already know this soul skill.  Having a hunch you read whole manual and when it disappears into thin air you feel it does restored some of your soulforce.");
-                player.soulforce += 50;
-                if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();
+                EngineCore.SoulforceChange(50, false);
             }
         } else {
             outputText("You open the manual, and discover to your horror it's way too complicated soulskill to learn currently.  What makes it worst it's nature of manual that would vanish in a moment whenever you memorized everything about this soulskill or not.  Moment later it start disappears into thin air before you can put it away. ");
@@ -852,23 +825,20 @@ public final class Mutations extends MutationsHelper {
 
     public function verydilutedarcaneregenconcotion(player:Player):void {
 		var verydilutedarcaneregen:Number = Math.round(player.maxMana() * 0.01) + 200;
-		player.mana += verydilutedarcaneregen;
-        outputText("You grab your mana potion, pull the cork off and swiftly chug it down.[pg](Recovered mana: "+verydilutedarcaneregen+")");
-        if (player.mana > player.maxMana()) player.mana = player.maxMana();
+		outputText("You grab your mana potion, pull the cork off and swiftly chug it down.[pg](Recovered mana: "+verydilutedarcaneregen+")");
+        EngineCore.ManaChange(verydilutedarcaneregen, false);
         statScreenRefresh();
     }
     public function dilutedarcaneregenconcotion(player:Player):void {
         var dilutedarcaneregen:Number = Math.round(player.maxMana() * 0.02) + 1200;
-		player.mana += dilutedarcaneregen;
-        outputText("You grab your mana potion, pull the cork off and swiftly chug it down.[pg](Recovered mana: "+dilutedarcaneregen+")");
-        if (player.mana > player.maxMana()) player.mana = player.maxMana();
+		outputText("You grab your mana potion, pull the cork off and swiftly chug it down.[pg](Recovered mana: "+dilutedarcaneregen+")");
+        EngineCore.ManaChange(dilutedarcaneregen, false);
         statScreenRefresh();
     }
     public function arcaneregenconcotion(player:Player):void {
         var arcaneregen:Number = Math.round(player.maxMana() * 0.03) + 7200;
-		player.mana += arcaneregen;
-        outputText("You grab your mana potion, pull the cork off and swiftly chug it down.[pg](Recovered mana: "+arcaneregen+")");
-        if (player.mana > player.maxMana()) player.mana = player.maxMana();
+		outputText("You grab your mana potion, pull the cork off and swiftly chug it down.[pg](Recovered mana: "+arcaneregen+")");
+        EngineCore.ManaChange(arcaneregen, false);
         statScreenRefresh();
     }
 

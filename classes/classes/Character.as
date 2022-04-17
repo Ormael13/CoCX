@@ -823,9 +823,10 @@ import classes.CoC;
 		public override function maxOverSoulforce():Number {
 			var max1:Number = maxSoulforce();
 			var max2:Number = 1;
-			max1 *= max2;//~170%
-			max1 = Math.round(max1);//~809 905,5
-			if (max1 > 1499999) max1 = 1499999;
+			if (hasPerk(PerkLib.MunchkinAtWork)) max2 += 0.1;
+			max1 *= max2;//~110%
+			max1 = Math.round(max1);
+			if (max1 > 1699999) max1 = 1699999;
 			return max1;
 		}
 
@@ -879,9 +880,10 @@ import classes.CoC;
 			if (hasPerk(PerkLib.AsuraToughness)) max2 += 0.1;
 			//
 			if (hasPerk(PerkLib.AsuraSpeed)) max2 += 0.1;
-			max1 *= max2;//~170%
-			max1 = Math.round(max1);//~809 905,5
-			if (max1 > 809999) max1 = 809999;
+			if (hasPerk(PerkLib.MunchkinAtWork)) max2 += 0.1;
+			max1 *= max2;//~180%
+			max1 = Math.round(max1);//~857 546,5
+			if (max1 > 859999) max1 = 859999;
 			return max1;
 		}
 		public function maxSafeWrathMagicalAbilities():Number {
@@ -995,9 +997,10 @@ import classes.CoC;
 		public override function maxOverMana():Number {
 			var max1:Number = maxMana();
 			var max2:Number = 1;
-			max1 *= max2;//~170%
-			max1 = Math.round(max1);//~809 905,5
-			if (max1 > 2499999) max1 = 2499999;
+			if (hasPerk(PerkLib.MunchkinAtWork)) max2 += 0.1;
+			max1 *= max2;//~110%
+			max1 = Math.round(max1);
+			if (max1 > 2749999) max1 = 2749999;
 			return max1;
 		}
 

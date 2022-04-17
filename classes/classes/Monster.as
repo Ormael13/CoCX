@@ -356,7 +356,8 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.BloodDemonWisdom)) maxOver2 += 0.1;
 			//
 			if (hasPerk(PerkLib.BloodDemonIntelligence)) maxOver2 += 0.1;
-			maxOver *= maxOver2;//~170%
+			if (hasPerk(PerkLib.MunchkinAtWork)) maxOver2 += 0.1;
+			maxOver *= maxOver2;//~180%
 			maxOver = Math.round(maxOver);
 			return maxOver;
 		}
@@ -689,6 +690,7 @@ import flash.utils.getQualifiedClassName;
 			if (hasPerk(PerkLib.AsuraToughness)) temp2 += 0.1;
 			//
 			if (hasPerk(PerkLib.AsuraSpeed)) temp2 += 0.1;
+			if (hasPerk(PerkLib.MunchkinAtWork)) temp2 += 0.1;
 			temp1 *= temp2;
 			return temp1;
 		}

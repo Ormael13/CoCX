@@ -1384,7 +1384,7 @@ public class BeeGirlScene extends BaseContent
 				//Generic male bee-rape
 				if (player.gender == 1) {
 					clearOutput();
-					if (player.lust >= player.maxLust()) outputText("Overcome by lust, you throw yourself into her waiting arms.  ");
+					if (player.lust >= player.maxOverLust()) outputText("Overcome by lust, you throw yourself into her waiting arms.  ");
 					else outputText("Overcome by your wounds, you are unable to resist as she lifts you into her arms and embraces you.  ");
 					outputText("At first she holds you close, but as she does, a stinger slowly emerges from her abdomen, as well as a thick knot like organ, both covered in a sweet-smelling lubricant. Your mind synaesthetically sees a myriad of colors and scents, and you don't resist as she gently pushes you down to your stomach. Nor do you protest as she leans over you, her stinger - thank goodness it isn't poison - looming close to your anus. With no more words she shoves the thick, lengthy stinger and knot inside of you. Her 'cock' slipping in slowly, the lube keeping you from shaking out of your scent-induced pleasure coma. Your hand even ventures to your own engorged ");
 					if (player.cockTotal() == 1) outputText("member");

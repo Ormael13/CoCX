@@ -10936,8 +10936,8 @@ use namespace CoC;
 		}
 		public function maxPrestigeJobs():Number {
 			var prestigeJobs2:Number = 2;
-			//if (hasPerk(PerkLib.DeityJobMunchkin))
-			//	prestigeJobs2++;
+			if (hasPerk(PerkLib.MunchkinAtWork))
+				prestigeJobs2 += 2;
 			if (hasPerk(PerkLib.AscensionBuildingPrestigeX))
 				prestigeJobs2 += perkv1(PerkLib.AscensionBuildingPrestigeX);
 			return prestigeJobs2;
@@ -10958,6 +10958,8 @@ use namespace CoC;
 		}
 		public function maxHiddenJobs():Number {
 			var hiddenJobs2:Number = 1;
+			if (hasPerk(PerkLib.MunchkinAtWork))
+				hiddenJobs2++;
 			return hiddenJobs2;
 		}
 		public function freeHiddenJobsSlots():Number {

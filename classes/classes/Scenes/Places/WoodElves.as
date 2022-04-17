@@ -829,7 +829,7 @@ import classes.internals.SaveableState;
 			if (!player.hasStatusEffect(StatusEffects.FletchingTable)) player.createStatusEffect(StatusEffects.FletchingTable,0,0,0,0);
 			outputText("You approach the fletching table. Here you can craft improved arrowheads using elven tools.");
 			menu();
-			
+			addButton(1, "CraftArrows", FletchingCraftArrows);
 			addButton(2, "AdjustString", FletchingAdjustString);
 			addButton(3, "Reinforce", FletchingReinforce);
 			addButton(14, "Back", GroveLayout);
@@ -838,11 +838,35 @@ import classes.internals.SaveableState;
 		public function FletchingCraftArrows():void {
 			outputText("What kind of arrows would you like to create?");
 			menu();
-			
-			addButton(14, "Back", GroveLayout);
+			if (player.hasItem(useables.IRONORE, 1)) addButton(0, "Iron", FletchingCraftArrows2, useables.IRONORE, 1).hint("Use iron to craft arrows.");
+			if (player.hasItem(useables.MOONSTO, 1)) addButton(1, "Moonstone", FletchingCraftArrows2, useables.MOONSTO, 2).hint("Use moonstone to craft arrows.");
+			if (player.hasItem(useables.SKYMETA, 1)) addButton(2, "Skymetal", FletchingCraftArrows2, useables.SKYMETA, 3).hint("Use moonstone to craft arrows.");
+			if (player.hasItem(useables.EBONING, 1)) addButton(3, "EbonIng", FletchingCraftArrows2, useables.EBONING, 4).hint("Use ebonbloom ignot to craft arrows.");
+			//Iron(Can be gathered by mining) +10 % Damage
+			//Moonstone(Obtained by mining at night) +20 % Damage
+			//Skymetal(Found in glacial rift) +30% Damage
+			//Ebonbloom(Requires Ebonbloom) +40% Damage
+			addButton(14, "Back", Fletching);
 		}
-		private function FletchingCraftArrows2():void {
-			outputText("What kind of arrows would you like to create?");
+		private function FletchingCraftArrows2(itype:ItemType, type:Number):void {
+			outputText("You work for 8 hours crafting a full quiver of " + itype.shortName + " arrows. Those will serve you well in your adventures.");
+			if (!player.hasPerk(PerkLib.CraftedArrows)) player.createPerk(PerkLib.CraftedArrows,0,0,0,0);
+			switch (type) {
+				case 1:
+					player.addPerkValue(PerkLib.CraftedArrows, 1, 100);
+					break;
+				case 2:
+					player.addPerkValue(PerkLib.CraftedArrows, 2, 100);
+					break;
+				case 3:
+					player.addPerkValue(PerkLib.CraftedArrows, 3, 100);
+					break;
+				case 4:
+					player.addPerkValue(PerkLib.CraftedArrows, 4, 100);
+					break;
+			}
+			player.destroyItems(itype, 1);
+			doNext(camp.returnToCampUseEightHours);
 		}
 
 		public function FletchingAdjustString():void {
@@ -851,20 +875,20 @@ import classes.internals.SaveableState;
 			if (player.statusEffectv2(StatusEffects.FletchingTable) > 0) addButtonDisabled(0, "SpiderSilk", "You already used this for improving bow string.");
 			else {
 				if (player.hasItem(useables.T_SSILK, 1)) addButton(0, "SpiderSilk", FletchingAdjustString2, useables.T_SSILK);
-				else addButtonDisabled(0, "SpiderSilk", "You need to have spider silk.");
+				else addButtonDisabled(0, "SpiderSilk", "You need spider silk.");
 			}
 			if (player.statusEffectv2(StatusEffects.FletchingTable) > 1) addButtonDisabled(1, "Ebonbloom", "You already used this for improving bow string.");
 			else {
 				if (player.hasItem(useables.EBONBLO, 1)) {
-					if (player.statusEffectv2(StatusEffects.FletchingTable) != 1) addButtonDisabled(1, "Ebonbloom", "You need to imprpve string with spider silk first.");
+					if (player.statusEffectv2(StatusEffects.FletchingTable) < 1) addButtonDisabled(1, "Ebonbloom", "You need to improve string with spider silk first.");
 					else addButton(1, "Ebonbloom", FletchingAdjustString2, useables.EBONBLO);
 				}
-				else addButtonDisabled(1, "Ebonbloom", "You need to have ebonbloom.");
+				else addButtonDisabled(1, "Ebonbloom", "You need ebonbloom.");
 			}
 			//Spider silk(Can be gathered from spider enemy) +10 % Damage
 			//Ebonbloom(Requires Ebonbloom) +20% Damage
 			//Unicorn hair(Obtained from Celess) +30 % Damage
-			addButton(14, "Back", GroveLayout);
+			addButton(14, "Back", Fletching);
 		}
 		private function FletchingAdjustString2(itype:ItemType):void {
 			outputText("You work for 8 hours adjusting your new " + itype.shortName + " string to your bow. This will serve you well in your adventures.");
@@ -876,11 +900,49 @@ import classes.internals.SaveableState;
 		public function FletchingReinforce():void {
 			outputText("You may choose to reinforce your bow using various materials. What would you use?");
 			menu();
-			
-			addButton(14, "Back", GroveLayout);
+			if (player.statusEffectv1(StatusEffects.FletchingTable) > 0) addButtonDisabled(0, "Bronze", "You already used this for reinforcing bow.");
+			else {
+				if (player.hasItem(useables.BRONZEB, 1)) addButton(0, "Bronze", FletchingReinforce2, useables.T_SSILK);
+				else addButtonDisabled(0, "Bronze", "You need spider silk.");
+			}
+			if (player.statusEffectv1(StatusEffects.FletchingTable) > 1) addButtonDisabled(1, "Iron", "You already used this for reinforcing bow.");
+			else {
+				if (player.hasItem(useables.IRONORE, 1)) {
+					if (player.statusEffectv1(StatusEffects.FletchingTable) < 1) addButtonDisabled(1, "Iron", "You need to reinforce bow with bronze first.");
+					else addButton(1, "Iron", FletchingReinforce2, useables.IRONORE);
+				}
+				else addButtonDisabled(1, "Iron", "You need iron ore.");
+			}
+			if (player.statusEffectv1(StatusEffects.FletchingTable) > 2) addButtonDisabled(2, "Moonstone", "You already used this for reinforcing bow.");
+			else {
+				if (player.hasItem(useables.MOONSTO, 1)) {
+					if (player.statusEffectv1(StatusEffects.FletchingTable) < 2) addButtonDisabled(2, "Moonstone", "You need to reinforce bow with iron first.");
+					else addButton(2, "Moonstone", FletchingReinforce2, useables.MOONSTO);
+				}
+				else addButtonDisabled(2, "Moonstone", "You need moonstone.");
+			}
+			if (player.statusEffectv1(StatusEffects.FletchingTable) > 3) addButtonDisabled(3, "EbonIng", "You already used this for reinforcing bow.");
+			else {
+				if (player.hasItem(useables.EBONING, 1)) {
+					if (player.statusEffectv1(StatusEffects.FletchingTable) < 3) addButtonDisabled(3, "EbonIng", "You need to reinforce bow with moonstone first.");
+					else addButton(3, "EbonIng", FletchingReinforce2, useables.EBONING);
+				}
+				else addButtonDisabled(3, "EbonIng", "You need ebon ingot.");
+			}
+			//Bronze(Can be gathered by mining) +10 % Damage)
+			//Iron(Can be gathered by mining) +20 % Damage
+			//Moonstone(Obtained by mining at night) +30 % Damage
+			//Ebonbloom(Ebony ingot)(Requires Ebonbloom) +40% Damage
+			//Divine Ice(Requires Divine ice, found in glacial rift) +50% Damage
+			//Orichalcum(Found in deep sea) +60% Damage
+			//Skymetal(Found in End game zone) +70% Damage
+			addButton(14, "Back", Fletching);
 		}
-		private function FletchingReinforce2():void {
-			outputText("You work for 8 hours applying your new [MatName] reinforcement to your bow. This will serve you well in your adventures.");
+		private function FletchingReinforce2(itype:ItemType):void {
+			outputText("You work for 8 hours applying your new " + itype.shortName + " reinforcement to your bow. This will serve you well in your adventures.");
+			player.addStatusValue(StatusEffects.FletchingTable, 1, 1);
+			player.destroyItems(itype, 1);
+			doNext(camp.returnToCampUseEightHours);
 		}
 
 		//Elenwen is nearly as skilled as Kindra but is very picky on who she teaches to. Better be an elf also her training is slower as she tends to fool around

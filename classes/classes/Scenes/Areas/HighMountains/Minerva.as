@@ -177,7 +177,7 @@ public class Minerva extends Monster
 				else {
 					outputText("  Your mind clouds over as the song flows through your ears and fills your mind with sweet bliss.");
 					player.dynStats("lus", 1000);
-					if (player.lust >= player.maxLust()) outputText("  You lower your [weapon] and dreamily walk into the siren's sweet embrace.  You absent-mindedly disrobe yourself as you move in closer, the song getting louder with each step you take, until you finally bury yourself into the siren's soft bosom and she wraps her feathery arms around your body.  She stops singing her beautiful song and whispers into your ear, \"<i>You're all mine now.</i>\"");
+					if (player.lust >= player.maxOverLust()) outputText("  You lower your [weapon] and dreamily walk into the siren's sweet embrace.  You absent-mindedly disrobe yourself as you move in closer, the song getting louder with each step you take, until you finally bury yourself into the siren's soft bosom and she wraps her feathery arms around your body.  She stops singing her beautiful song and whispers into your ear, \"<i>You're all mine now.</i>\"");
 				}
 				removeStatusEffect(StatusEffects.SirenSong);
 			}
