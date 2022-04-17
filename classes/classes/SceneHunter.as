@@ -113,16 +113,16 @@ public class SceneHunter extends BaseContent {
         var vagB:Boolean = vagF != null && player.hasVagina();
         var assB:Boolean = assF != null;
         var hermB:Boolean = hermF != null && player.hasCock() && player.hasVagina();
-        //Auto-calls. No auto call when dick is just inactive - player should know!
+        //Auto-calls. No auto call when dick is just inactive — player should know!
         if (!(dickB && dickActive) && !vagB && !assB && !(hermB && dickActive)) { //sanity checks
             outputText("<b><u>SceneHunter.selectGender() was called in a wrong way. Please report this.</b></u>");
             goNext(true);
             return;
         }
-        /* if ONLY dick is available  - no "active" checks in the first part, should be failsafe
+        /* if ONLY dick is available  — no "active" checks in the first part, should be failsafe
         or if !uniHerms:
-            - dick active and higher priority than vag (always higher than ass!!)
-            - dick active and no vag */
+            — dick active and higher priority than vag (always higher than ass!!)
+            — dick active and no vag */
         if (hermB && (!dickB && !vagB && !assB || !uniHerms) && dickActive) { //!uniherms - auto
             hermF();
             return;
