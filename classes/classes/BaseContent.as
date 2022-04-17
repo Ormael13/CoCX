@@ -9,7 +9,6 @@ import classes.Scenes.Inventory;
 import classes.Scenes.Places.Ingnam;
 import classes.Scenes.Places.Prison;
 import classes.Scenes.SceneLib;
-import classes.Scenes.Soulforce;
 import classes.Transformations.TransformationLib;
 import classes.internals.Utils;
 
