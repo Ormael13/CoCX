@@ -91,16 +91,18 @@ public class Weapon extends Useable //Equipable
 		
 		override public function useText():void {
 			outputText("You equip " + longName + ".  ");
-			if ((perk == "Large" && game.player.shield != ShieldLib.NOTHING && !game.player.hasPerk(PerkLib.GigantGrip)) || (perk == "Massive" && game.player.shield != ShieldLib.NOTHING)) {
-				outputText("Because this weapon requires the use of two hands, you have unequipped your shield. ");
-			}
-			if (perk == "Dual Large" || perk == "Dual" || perk == "Dual Small") {
-				outputText("Because those weapons requires the use of two hands, you have unequipped your shield. ");
-			}
 		}
 		
 		override public function canUse():Boolean {
-			if (game.player.hasPerk(PerkLib.Rigidity)) {
+			if ((perk == "Large" && game.player.shield != ShieldLib.NOTHING && !game.player.hasPerk(PerkLib.GigantGrip)) || (perk == "Massive" && game.player.shield != ShieldLib.NOTHING)) {
+				outputText("Because this weapon requires the use of two hands, you have unequipped your shield. ");
+				return false;
+			}
+			else if (perk == "Dual Large" || perk == "Dual" || perk == "Dual Small") {
+				outputText("Because those weapons requires the use of two hands, you have unequipped your shield. ");
+				return false;
+			}
+			else if (game.player.hasPerk(PerkLib.Rigidity)) {
 				outputText("You would very like to equip this item but your body stiffness prevents you from doing so.");
 				return false;
 			}
@@ -108,6 +110,18 @@ public class Weapon extends Useable //Equipable
 		}
 		
 		public function playerEquip():Weapon { //This item is being equipped by the player. Add any perks, etc. - This function should only handle mechanics, not text output
+			var temp:Array = perk.split(", ");
+            var temp2:Array = ["Large", "Massive", "Dual", "Dual Large", "Dual Small"]
+            for each (var temp3:String in temp2){
+                if (temp.indexOf(temp3) && game.player.shield != ShieldLib.NOTHING){
+                    if (temp3 == "Large") {
+                        if (game.player.hasPerk(PerkLib.GigantGrip)){
+                            break;
+                        }
+                    }
+                    SceneLib.inventory.unequipShield();
+                }
+            }/*
 			if ((perk == "Large" && game.player.shield != ShieldLib.NOTHING && !game.player.hasPerk(PerkLib.GigantGrip))
 			|| (perk == "Massive" && game.player.shield != ShieldLib.NOTHING)
 			|| (perk == "Dual" && game.player.shield != ShieldLib.NOTHING)
@@ -115,7 +129,7 @@ public class Weapon extends Useable //Equipable
 			|| (perk == "Dual Small" && game.player.shield != ShieldLib.NOTHING)
 			|| (game.player.shieldPerk == "Massive" && game.player.shield != ShieldLib.NOTHING && !game.player.hasPerk(PerkLib.GigantGrip))) {
 				SceneLib.inventory.unequipShield();
-			}
+			}*/
 			if (game.flags[kFLAGS.FERAL_COMBAT_MODE] == 1) game.flags[kFLAGS.FERAL_COMBAT_MODE] = 0;
 			return this;
 		}
