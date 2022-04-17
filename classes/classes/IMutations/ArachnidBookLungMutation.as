@@ -4,10 +4,8 @@
  */
 package classes.IMutations
 {
-import classes.BodyParts.Tail;
-import classes.PerkClass;
-import classes.PerkLib;
-import classes.PerkType;
+    import classes.PerkClass;
+    import classes.PerkType;
     import classes.Player;
 
     public class ArachnidBookLungMutation extends PerkType
