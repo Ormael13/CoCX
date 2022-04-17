@@ -6693,7 +6693,7 @@ public function rebirthFromBadEnd():void {
 			addButton(4, "TamaniFirst", SceneLib.forest.tamaniScene.tamaniFirstTimeConsentual);
 		else addButtonDisabled(4, "T. First", "Requires fucking a certain goblin the first time you see her (+ having a cock).");
 		//Tamani first time
-		if (flags[kFLAGS.TAMANI_MET] == 1 && player.hasVagina())
+		if (player.hasKeyItem("Deluxe Dildo") >= 0 && player.hasVagina())
 			addButton(5, "TamaniFem", SceneLib.forest.tamaniScene.preferTamaniFemdom);
 		else addButtonDisabled(5, "T. Fem", "Requires accepting a dildo from a certain goblin (+ having a vagina).");
 		//bruh
