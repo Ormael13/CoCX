@@ -232,9 +232,9 @@ public function ayaneWorship():void
 	spriteSelect(SpriteDb.s_ayane_nude);
 	clearOutput();
 	outputText("You tell Ayane you could use some relief. She quickly takes the hint, helping you to remove any clothes you might be wearing and kneeling down, her face level with your hips as she whispers holy prayers.\n\n");
-	menu();
+	menu();/*
 	if (player.hasCock() && player.hasVagina()) addButton(0, "Herm Worship", ayaneHermWorship);
-	else addButtonDisabled(0, "Herm Worship", "You need a cock and a vagina for this");
+	else addButtonDisabled(0, "Herm Worship", "You need a cock and a vagina for this");*/
 	if (player.hasCock()) addButton(1, "Cock Worship", ayaneCockWorship);
 	else addButtonDisabled(1, "Cock Worship", "You need a cock for this");
 	if (player.hasVagina()) addButton(2, "Vaginal Worship", ayaneVaginalWorship);
