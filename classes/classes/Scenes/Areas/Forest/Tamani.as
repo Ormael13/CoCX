@@ -84,25 +84,7 @@ public class Tamani extends Goblin
 
 		override public function defeated(hpVictory:Boolean):void
 		{
-			if (hpVictory) {
-				outputText("Tamani is defeated!", true);
-			} else {
-				outputText("Tamani gives up on defeating you and starts masturbating!", true);
-			}
-			if(player.lust >= 33 && player.cockTotal() > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
-				outputText("  You could fuck her, but if that's the case why did you bother fighting her?\n\nWhat do you do to her?");
-				var temp:Function = null;
-				var temp2:Function = null;
-				var temp3:Function = null;
-				if (player.hasCock() && player.cockThatFits(analCapacity()) >= 0) temp = SceneLib.forest.tamaniScene.tamaniAnalShits;
-				SceneLib.uniqueSexScene.pcUSSPreChecksV2(SceneLib.forest.tamaniScene.TamaniDefeated2);
-								//NOT PREGGERS
-				if (!SceneLib.forest.tamaniScene.pregnancy.isPregnant && player.canOvipositSpider()) {
-					temp2 = SceneLib.forest.tamaniScene.tamaniBeaten;
-				}
-				EngineCore.simpleChoices("Fuck", SceneLib.forest.tamaniScene.tamaniSexWon, "Buttfuck", temp, "Lay Eggs", temp2, "U. Sex Scenes", temp3, "Leave", SceneLib.combat.cleanupAfterCombatImpl);
-			}
-			else SceneLib.combat.cleanupAfterCombatImpl();
+			SceneLib.forest.tamaniScene.tamaniDefeated(hpVictory);
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
@@ -112,16 +94,17 @@ public class Tamani extends Goblin
 					if(rand(2) == 0) SceneLib.forest.tamaniScene.tamaniSexLost();
 					else SceneLib.forest.tamaniScene.tamaniSexLetHer();
 				}else {
-					outputText("Tamani sighs as you begin to lose conscious, \"<i>You dummy, why'd you get rid of the fun parts?</i>\"", true);
+					outputText("Tamani sighs as you begin to lose consciousness, \"<i>You dummy, why'd you get rid of the fun parts?</i>\"", true);
 					SceneLib.combat.cleanupAfterCombatImpl();
 				}
 			} else {
 				if(player.cockTotal() > 0) {
-				//hypnoslut loss scene
-				if(game.flags[kFLAGS.TAMANI_TIMES_HYPNOTISED] > 19 && rand(2) == 0) {
-					SceneLib.forest.tamaniScene.getRapedByTamaniYouHypnoSlut();
-				} else if(rand(2) == 0) SceneLib.forest.tamaniScene.tamaniSexLost();
-				else SceneLib.forest.tamaniScene.tamaniSexLetHer();
+					//hypnoslut loss scene
+					if(game.flags[kFLAGS.TAMANI_TIMES_HYPNOTISED] > 19 && rand(2) == 0)
+						SceneLib.forest.tamaniScene.getRapedByTamaniYouHypnoSlut();
+					else if(rand(2) == 0)
+						SceneLib.forest.tamaniScene.tamaniSexLost();
+					else SceneLib.forest.tamaniScene.tamaniSexLetHer();
 				} else {
 					outputText("You give into your lusts and masturbate, but Tamani doesn't seem to care.  She kicks and punches you over and over, screaming, \"<i>You dummy, why'd you get rid of the fun parts?</i>\"", true);
 					player.takePhysDamage(10000);

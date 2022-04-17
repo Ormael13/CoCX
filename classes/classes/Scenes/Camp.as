@@ -10,27 +10,17 @@ import classes.BodyParts.Tail;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.*;
-import classes.Items.ConsumableLib;
 import classes.Items.Consumables.SimpleConsumable;
-import classes.Scenes.Areas.Forest.WoodElvesHuntingParty;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.Places.TrollVillage;
 import classes.Scenes.Places.WoodElves;
 import classes.Scenes.Camp.*;
-import classes.Scenes.Dungeons.*;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.Places.Boat.MaraeScene;
 import classes.Scenes.Places.HeXinDao.AdventurerGuild;
-import classes.Scenes.Soulforce;
-import classes.Scenes.SceneLib;
 import classes.lists.Gender;
 import classes.display.SpriteDb;
-import classes.internals.SaveableState;
-import classes.Scenes.Metamorph;
 
-import coc.view.ButtonData;
-
-import coc.view.CoCButton;
 import coc.view.ButtonDataList;
 import coc.view.MainView;
 
@@ -1004,7 +994,6 @@ public class Camp extends NPCAwareContent{
 		if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 10 || flags[kFLAGS.CAMP_BUILT_CABIN] >= 1) addButton(9, "Enter Cabin", cabinProgress.initiateCabin).hint("Enter your cabin."); //Enter cabin for furnish.
 		if (player.hasPerk(PerkLib.JobSoulCultivator) || debug) addButton(10, "Soulforce", soulforce.accessSoulforceMenu).hint("Spend some time on the cultivation, or spend some of the soulforce.");
 		else if (!player.hasPerk(PerkLib.JobSoulCultivator) && player.hasPerk(PerkLib.Metamorph)) addButton(10, "Metamorph", SceneLib.metamorph.openMetamorph).hint("Use your soulforce to mold your body.");
-		var canFap:Boolean = !player.hasStatusEffect(StatusEffects.Dysfunction) && (flags[kFLAGS.UNABLE_TO_MASTURBATE_BECAUSE_CENTAUR] == 0 && !player.isTaur());
 		if (player.lust >= 30) {
 			addButton(11, "Masturbate", SceneLib.masturbation.masturbateMenu);
 			if ((((player.hasPerk(PerkLib.HistoryReligious) || player.hasPerk(PerkLib.PastLifeReligious)) && player.cor <= 66) || (player.hasPerk(PerkLib.Enlightened) && player.cor < 10)) && !(player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0) || flags[kFLAGS.SFW_MODE] >= 1) addButton(11, "Meditate", SceneLib.masturbation.masturbateMenu);
@@ -1324,7 +1313,7 @@ public class Camp extends NPCAwareContent{
 				buttons.add("Arian", arianScene.visitAriansHouse);
 			}
 			//Belisa
-			if (BelisaFollower.BelisaInCamp && DriderTown.DriderTownComplete == false) {
+			if (BelisaFollower.BelisaInCamp && !DriderTown.DriderTownComplete) {
 				outputText("On the water, Belisa anchored her silk dome. However, since you’ve seen it, the dwelling has changed. Instead of a fully submerged bubble-like structure, it’s got a silky curtain for a door, and a solid wooden dock’s been added to anchor the odd building to the ground. Outside the dwelling, a small stall’s been set up, and Belisa’s wares are on display.\n\n");
 				buttons.add("Belisa", SceneLib.belisa.BelisaMainCampMenu).hint("Visit Belisa.");
 			}
@@ -1505,7 +1494,7 @@ public class Camp extends NPCAwareContent{
 				else buttons.add("Kiha", kihaScene.encounterKiha2).disableIf(player.statusEffectv3(StatusEffects.CampSparingNpcsTimers1) > 0, "Training.");
 			}
 			//Lily
-			if (LilyFollower.LilyFollowerState && DriderTown.DriderTownComplete == false) {
+			if (LilyFollower.LilyFollowerState && !DriderTown.DriderTownComplete) {
 				outputText("A line of targets have been set up along the river and a small house of silk has been constructed in one of the trees. You hear the occasional whizz of arrows, or rustling in the trees.\n\n");
 				buttons.add("Lily", SceneLib.lily.LilyCampFollower).hint("Visit Lily.");
 			}
@@ -1598,7 +1587,7 @@ public class Camp extends NPCAwareContent{
 				buttons.add("Samirah", SceneLib.samirah.samirahMainCampMenu);
 			}
 			//Tyrantia
-			if (TyrantiaFollower.TyrantiaFollowerStage >= 4 && DriderTown.DriderTownComplete == false) {
+			if (TyrantiaFollower.TyrantiaFollowerStage >= 4 && !DriderTown.DriderTownComplete) {
 				outputText("A decent distance away from your camp, in between the river and some trees, a hut’s been erected. Constructed mostly from stone and logs, with odd, goopy webbing as a crude mortar, the dwelling is nonetheless huge. ");
 				outputText("Tyrantia occasionally walks into the dwelling, coming out with a different tool or material. She’s keeping herself busy, if the line of demon skulls around the house are any indication.\n\n");
 				buttons.add("Tyrantia", SceneLib.tyrania.TyrantiaAtCamp).hint("Visit Tyrantia.");
@@ -6699,7 +6688,15 @@ public function rebirthFromBadEnd():void {
 		if (flags[kFLAGS.ANT_WAIFU] || flags[kFLAGS.PHYLLA_STAY_HOME])
 			addButton(3, "PhyFirstTime", SceneLib.desert.antsScene.antGirlGoodEnd);
 		else addButtonDisabled(3, "P. First", "Requires winning in the coliseum.");
-        //bruh
+        //Tamani first time
+		if (flags[kFLAGS.TAMANI_MET] == 1 && player.hasCock())
+			addButton(4, "TamaniFirst", SceneLib.forest.tamaniScene.tamaniFirstTimeConsentual);
+		else addButtonDisabled(4, "T. First", "Requires fucking a certain goblin the first time you see her (+ having a cock).");
+		//Tamani first time
+		if (flags[kFLAGS.TAMANI_MET] == 1 && player.hasVagina())
+			addButton(5, "TamaniFem", SceneLib.forest.tamaniScene.preferTamaniFemdom);
+		else addButtonDisabled(5, "T. Fem", "Requires accepting a dildo from a certain goblin (+ having a vagina).");
+		//bruh
 		addButtonDisabled(13, "BadEnds", "SH is too lazy to add them");
         addButton(14, "Wake Up", recallWakeUp);
     }

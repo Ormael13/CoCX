@@ -1208,7 +1208,7 @@ public static const TAMANI_PREGNANCY_TYPE:int                                   
 public static const TAMANI_PREGNANCY_INCUBATION:int                                 = 1200;
 public static const TAMANI_PREGNANCY_COUNT:int                                      = 1201; //Just how many has she got stuffed in there?
 public static const TAMANI_TIMES_IMPREGNATED:int                                    = 1202;
-public static const TAMANI_MET:int                                                  = 1203;
+public static const TAMANI_MET:int                                                  = 1203; //0 - not met, 1 - first time accepted, 2 - refused
 public static const TAMANI_NUMBER_OF_DAUGHTERS:int                                  = 1204;
 public static const TAMANI_DAUGHTERS_PREGNANCY_TYPE:int                             = 1205;
 public static const TAMANI_DAUGHTERS_PREGNANCY_COUNT:int                            = 1206;
