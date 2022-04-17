@@ -75,7 +75,8 @@ public class IMutationsLib
 
 			}
 			function mutationsMetabolism():void{
-				//MutationsList.push([SlimeMetabolismIM,SlimeMetabolismMutation]);
+				IMutationsList.push([DisplacerMetabolismIM,DisplacerMetabolismMutation]);
+				//IMutationsList.push([SlimeMetabolismIM,SlimeMetabolismMutation]);
 			}
 			function mutationsOvaries():void{
 
