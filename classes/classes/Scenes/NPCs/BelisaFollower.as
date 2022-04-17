@@ -8,6 +8,7 @@ import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.UndergarmentLib;
 import classes.Scenes.Areas.Swamp.CorruptedDrider;
+import classes.Scenes.NPCs.DriderTown;
 import classes.Scenes.NPCs.LilyFollower;
 import classes.Scenes.NPCs.TyrantiaFollower;
 import classes.internals.SaveableState;
@@ -509,6 +510,7 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 			}
 		}
 		cleanupAfterCombat();
+		//lvl up stuff if flag sert to npc's training
 	}
 	
 	public function BelisaHangFish():void {
@@ -698,7 +700,7 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		}
 		outputText("<i>\"Oh, hello!\"</i> Belisa says brightly, her lower-half bobbing slightly. <i>\"What’s brought you over here?\"</i>");
 		if (BelisaConfessed) outputText("<i>\"...Anything I can help you with?\"</i> When she thinks you aren’t looking, she takes a glance down, beads of drool forming on her fangs.");
-		outputText("\n\n");outputText("Follower Stage: "+BelisaFollowerStage+"\n\n");outputText("Encounternum: "+BelisaEncounternum+"\n\n");
+		outputText("\n\n");
 		menu();
 		addButton(0, "Appearance", BelisaAppearance);
 		addButton(1, "Talk", BelisaTalk);
@@ -777,7 +779,7 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		outputText("You ask your cute Drider-girl if she’d like you in her womb again.\n\n");
 		outputText("Belisa’s face lights up, and she nods wordlessly. Her cheeks are bright red, but the smile on her face makes it clear she’s more used to the idea than before. <i>\"I…Was hoping you’d come back for more…\"</i>\n\n");
 		outputText("You tell her that you want her. You want her love,and that nothing on Mareth would stop you from coming back to your spider-girl.\n\n");
-		outputText("<i>\"Oh...My.\"</i> Belisa shudders a bit at that, back legs tapping rapidly on the floor. <i>\"That...Just made me…\"</i> You take her hand, and she leads you up into her hammock-bed. As soon as you clamber in, she pounces on you, her eight legs quivering with excitement. Her fingers scrabble at your [armor], and you return the favor, slipping your [arms] into her robe and sliding it off her.\n\n");
+		outputText("<i>\"Oh...My.\"</i> Belisa shudders a bit at that, back legs tapping rapidly on the floor. <i>\"That...Just made me…\"</i> You take her hand, and she leads you up into her hammock-bed. As soon as you clamber in, she pounces on you, her eight legs quivering with excitement. Her fingers scrabble at your [armor], and you return the favor, slipping your arms into her robe and sliding it off her.\n\n");
 		outputText("Belisa runs her fangs along your shoulder, the needle-tips giving you goosebumps. You shudder as she brings both her hands to your cheeks, her soft palms cool against your flushed face. With a sweet smile, Belisa leans in, her hazelnut eyes shining. She leans into you, her hardening nipples like pinpricks against the lush softness that is her upper body. She takes your [cock] in one hand, eyes all but glowing as she rubs your [cockhead], slowly guiding it to her dark-lipped pussy.\n\n");
 		outputText("You sink into her, your [cockhead] catching on a few folds before slipping past, her tight chasm clamping down as you bottom out. Belisa moans into your shoulder, kissing the vulnerable side of your neck as you begin to pull back. As you slowly slide back out, Belisa shivers, front legs wrapping around your waist as she presses her soft titflesh against your [chest]. You open your mouth as she gyrates her hips, your [cockhead] barely inside her entrance, and she brings her hips slowly down, rubbing you against every side of her depths.\n\n");
 		outputText("<i>\"A-aghn…\"</i> Belisa moans, closing her eyes. <i>\"[name]...\"</i> You take the back of her head in one hand, taking her open mouth and ravishing it with your [tongue]. Your Drider tightens as soon as your lips lock, and you bring your hips up, burying yourself into her. Her surprised moan reverberating through your mouth and teeth, you bring one hand to her stomach, guiding her back up and off your [cock]. You warn Belisa that you’re going to speed up, and she nods fiercely, licking your lips and pulling her head back just enough for you to see the hungry look in her eyes.\n\n");
@@ -790,7 +792,7 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		outputText("<i>\"mmm…Mine.\"</i> Belisa whispers, finally closing her eyes. Her labored breathing slows, and you realize that she’s falling asleep with her legs still around you…But you don’t mind. For the life of you, you can’t think of anything better to do than cuddle with your Drider-girl.\n\n");
 		player.sexReward("vaginalFluids","Dick");
 		var rng:Number = (Math.random() * 3 + 1);
-		if (rng == 1) doNext(BelisaAfterSex1);
+		if (rng == 1) doNext(curry(BelisaAfterSex1, true));
 		else doNext(BelisaAfterSex2);
 	}
 	
@@ -990,8 +992,9 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		outputText("<i>\"Aw...Thank you.\"</i> Belisa’s still a bit bashful, but she seems to appreciate the gesture. <i>\"I...Hate to ask something of you so soon...But can you do something for me, love?\"</i>\n\n");
 		outputText("You ask her what it is. Belisa leans in, kisses you on the cheek, then whispers in your ear. <i>\"I want...To cuddle. Like, just...Lie here with me, hold me close. Can you do that?\"</i> Still tired from your lovemaking, you don’t respond, you just rest your head on her cheek, sighing tiredly as you drift off to sleep in each other’s arms.\n\n");
 		BelisaAffection(10);
+		DriderTown.BelisaPregnancy = 72;
 		player.sexReward("vaginalFluids","Dick");
-		doNext(curry(BelisaAfterSex1, true));
+		doNext(BelisaAfterSex1);
 	}
 	public function BelisaVirginLesbian():void {
 		clearOutput();
@@ -1032,7 +1035,7 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		outputText("<i>\"I’m guessing you have to go now?\"</i> You give her a nod. You tell her that you have work you need to do. Belisa, still naked, body glistening with sweat and your combined love juices, looks you in the eyes, biting her lip. <i>\"Look…I know you’re capable…But stay safe.\"</i> Belisa notices you looking at her, and she sighs, covering her C-cups with one arm. \"You may be capable, powerful and all that…But…You’re still one person. Just…Come back to me.\"\n\n");
 		outputText("You give Belisa a chaste kiss on the cheek, and as you get dressed, you tell Belisa that you’ll always return. No demon’s going to get the best of you. She shakes her head, but doesn’t say anything. You dress and come back, ruffling her long, black hair roughly. <i>\"Headpats for luck!\"</i> You yell, stopping just short of giving Belisa a noogie.\n\n");
 		outputText("<i>\"H-hey!\"</i> She yells, and you laugh, tossing the door open and leaving back to camp. Belisa sticks her head out the door, then looks down, realizing she’s naked…and she almost joined you outside. <i>\"Eep!\"</i> She slams the door shut, and you head back to camp.\n\n");
-		//if (preg) ;//pregnancy chance 100%
+		if (preg && DriderTown.BelisaPregnancy == 0 && DriderTown.BelisaKidsEggsHatching < 48 && rand(100) < 50) DriderTown.BelisaPregnancy = 72;
 		if (CoC.instance.inCombat) cleanupAfterCombat();
 		doNext(camp.returnToCampUseOneHour);
 	}
@@ -1045,12 +1048,9 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		outputText("<i>\"Well...I mean, I wouldn’t mind at all. They’re yours, and more of you is a good thing.\"</i> She blushes, seemingly embarrassed by that declaration. You smile, putting your palms on her cheeks. You remind Belisa that they’d also be half her, which makes her smile.\n\n");
 		outputText("You cuddle in the afterglow with your Drider lover, but after a while, you gently pull yourself from her arms.\n\n");
 		outputText("<i>\"You’ve got to go, huh?\"</i> Belisa asks, somewhat saddened. <i>\"Come back soon, [name].\"</i>\n\n");
+		if (DriderTown.BelisaPregnancy == 0 && DriderTown.BelisaKidsEggsHatching < 48 && rand(100) < 50) DriderTown.BelisaPregnancy = 72;
 		if (CoC.instance.inCombat) cleanupAfterCombat();
 		doNext(camp.returnToCampUseOneHour);
-	}
-	
-	public function BelisaEggLyaing():void {
-		
 	}
 
 	public function timeChange():Boolean {

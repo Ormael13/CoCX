@@ -6,6 +6,7 @@ import classes.GlobalFlags.*;
 import classes.Scenes.Combat.CombatAbility;
 import classes.Scenes.Places.HeXinDao.JourneyToTheEast;
 import classes.Scenes.NPCs.BelisaFollower;
+import classes.Scenes.NPCs.DriderTown;
 import classes.Scenes.NPCs.EvangelineFollower;
 import classes.Scenes.NPCs.Forgefather;
 import classes.Scenes.NPCs.IsabellaScene;
@@ -1086,8 +1087,18 @@ public class PlayerInfo extends BaseContent {
 		if (flags[kFLAGS.AMILY_MET] > 0)
 			childStats += "<b>Litters With Amily:</b> " + (flags[kFLAGS.AMILY_BIRTH_TOTAL] + flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS]) + "\n";
 
-		if (flags[kFLAGS.BEHEMOTH_CHILDREN] > 0)
+		if (flags[kFLAGS.AYANE_CHILDREN_MALES] > 0)
+			childStats += "<b>Ayane Offspring (Males):</b> " + flags[kFLAGS.AYANE_CHILDREN_MALES] + "\n";
+		if (flags[kFLAGS.AYANE_CHILDREN_FEMALES] > 0)
+			childStats += "<b>Ayane Offspring (Females):</b> " + flags[kFLAGS.AYANE_CHILDREN_FEMALES] + "\n";
+		if (flags[kFLAGS.AYANE_CHILDREN_HERMS] > 0)
+			childStats += "<b>Ayane Offspring (Herms):</b> " + flags[kFLAGS.AYANE_CHILDREN_HERMS] + "\n";
+
+        if (flags[kFLAGS.BEHEMOTH_CHILDREN] > 0)
 			childStats += "<b>Children With Behemoth:</b> " + flags[kFLAGS.BEHEMOTH_CHILDREN] + "\n";
+
+		if (DriderTown.BelisaKids > 0)
+			childStats += "<b>Drider Children With Belisa:</b> " + DriderTown.BelisaKids + "\n";
 
 		if (flags[kFLAGS.BENOIT_EGGS] > 0)
 			childStats += "<b>Benoit Eggs Laid:</b> " + flags[kFLAGS.BENOIT_EGGS] + "\n";
@@ -1111,14 +1122,7 @@ public class PlayerInfo extends BaseContent {
         if (flags[kFLAGS.EMBER_EGGS] > 0)
 			childStats += "<b>Ember Eggs Produced:</b> " + flags[kFLAGS.EMBER_EGGS] + "\n";
 
-		if (flags[kFLAGS.AYANE_CHILDREN_MALES] > 0)
-			childStats += "<b>Ayane Offspring (Males):</b> " + flags[kFLAGS.AYANE_CHILDREN_MALES] + "\n";
-		if (flags[kFLAGS.AYANE_CHILDREN_FEMALES] > 0)
-			childStats += "<b>Ayane Offspring (Females):</b> " + flags[kFLAGS.AYANE_CHILDREN_FEMALES] + "\n";
-		if (flags[kFLAGS.AYANE_CHILDREN_HERMS] > 0)
-			childStats += "<b>Ayane Offspring (Herms):</b> " + flags[kFLAGS.AYANE_CHILDREN_HERMS] + "\n";
-
-        if (flags[kFLAGS.EXCELLIA_MALE_KIDS] > 0)
+		if (flags[kFLAGS.EXCELLIA_MALE_KIDS] > 0)
 			childStats += "<b>Excellia Offspring (Human Males):</b> " + flags[kFLAGS.EXCELLIA_MALE_KIDS] + "\n";
 		if (flags[kFLAGS.EXCELLIA_FEMALE_KIDS] > 0)
 			childStats += "<b>Excellia Offspring (Human Females):</b> " + flags[kFLAGS.EXCELLIA_FEMALE_KIDS] + "\n";
@@ -2001,13 +2005,13 @@ public class PlayerInfo extends BaseContent {
 				}
 				else addButtonDisabled(1, "M(at)G", "You need to reach level 105 first.");
 				if (player.level >= 120) {
-					if (player.hasPerk(PerkLib.MunchkinAtWork)) addButtonDisabled(1, "M(at)W", "You already have this perk.");
+					if (player.hasPerk(PerkLib.MunchkinAtWork)) addButtonDisabled(2, "M(at)W", "You already have this perk.");
 					else {
-						if (player.hasPerk(PerkLib.MunchkinAtGym)) addButton(1, "M(at)W", perkMunchkinAtWork).hint("Choose the 'Munchkin @Work' super munchkin perk. (+25% to Str/Tou/Spe/Inte/Wis/Lib multi, +100 to Sens, increase by 5% caps for mutagen, alchemic, knowledge multi)");
-						else addButtonDisabled(1, "M(at)W", "You do not have yet 'Munchkin @Gym' super munchkin perk.");
+						if (player.hasPerk(PerkLib.MunchkinAtGym)) addButton(2, "M(at)W", perkMunchkinAtWork).hint("Choose the 'Munchkin @Work' super munchkin perk. (+25% to Str/Tou/Spe/Inte/Wis/Lib multi, +100 to Sens, increase by 5% caps for mutagen, alchemic, knowledge multi)");
+						else addButtonDisabled(2, "M(at)W", "You do not have yet 'Munchkin @Gym' super munchkin perk.");
 					}
 				}
-				else addButtonDisabled(1, "M(at)W", "You need to reach level 120 first.");
+				else addButtonDisabled(2, "M(at)W", "You need to reach level 120 first.");
 			}
 			else {
 				if (player.hasPerk(PerkLib.DeityJobMunchkin)) addButtonDisabled(0, "DJ:M", "You already have this perk.");

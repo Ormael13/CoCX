@@ -465,8 +465,6 @@ private function goblinsBirthScene2():void {
 	doNext(camp.returnToCampUseOneHour);
 }
 
-
-
 public function PCGoblinDaughters():void {
 	clearOutput();
 	if (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] > 9 && player.hasStatusEffect(StatusEffects.PCDaughtersWorkshop)) {

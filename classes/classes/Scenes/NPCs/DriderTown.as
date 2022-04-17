@@ -18,8 +18,19 @@ import classes.display.SpriteDb;
 		public static var DriderTownComplete:Boolean;
 		public static var SisterBangEnabled:Boolean;
 		public static var BelisaKids:Number;
+		public static var BelisaPregnancy:Number;
+		public static var BelisaKidsEggs:Number;
+		public static var BelisaKidsEggsHatching:Number;
 		public static var LilyKidsPC:Number;
+		public static var LilyKidsPCPregnancy:Number;
+		public static var LilyKidsIzma:Number;
+		public static var LilyKidsIzmaPregnancy:Number;
+		public static var LilyKidsSidone:Number;
+		public static var LilyKidsSidonePregnancy:Number;
 		public static var TyrantiaKids:Number;
+		public static var TyrantiaPregnancy:Number;
+		public static var TyrantiaKidsEggs:Number;
+		public static var TyrantiaKidsEggsHatching:Number;
 		
 		public function stateObjectName():String {
 			return "DriderTown";
@@ -29,8 +40,19 @@ import classes.display.SpriteDb;
 			DriderTownComplete = false;
 			SisterBangEnabled = false;
 			BelisaKids = 0;
+			BelisaPregnancy = 0;
+			BelisaKidsEggs = 0;
+			BelisaKidsEggsHatching = 0;
 			LilyKidsPC = 0;
+			LilyKidsPCPregnancy = 0;
+			LilyKidsIzma = 0;
+			LilyKidsIzmaPregnancy = 0;
+			LilyKidsSidone = 0;
+			LilyKidsSidonePregnancy = 0;
 			TyrantiaKids = 0;
+			TyrantiaPregnancy = 0;
+			TyrantiaKidsEggs = 0;
+			TyrantiaKidsEggsHatching = 0;
 		}
 
 		public function saveToObject():Object {
@@ -38,8 +60,19 @@ import classes.display.SpriteDb;
 				"DriderTownComplete": DriderTownComplete,
 				"SisterBangEnabled": SisterBangEnabled,
 				"BelisaKids": BelisaKids,
+				"BelisaPregnancy": BelisaPregnancy,
+				"BelisaKidsEggs": BelisaKidsEggs,
+				"BelisaKidsEggsHatching": BelisaKidsEggsHatching,
 				"LilyKidsPC": LilyKidsPC,
-				"TyrantiaKids": TyrantiaKids
+				"LilyKidsPCPregnancy": LilyKidsPCPregnancy,
+				"LilyKidsIzma": LilyKidsIzma,
+				"LilyKidsIzmaPregnancy": LilyKidsIzmaPregnancy,
+				"LilyKidsSidone": LilyKidsSidone,
+				"LilyKidsSidonePregnancy": LilyKidsSidonePregnancy,
+				"TyrantiaKids": TyrantiaKids,
+				"TyrantiaPregnancy": TyrantiaPregnancy,
+				"TyrantiaKidsEggs": TyrantiaKidsEggs,
+				"TyrantiaKidsEggsHatching": TyrantiaKidsEggsHatching
 			};
 		}
 
@@ -48,8 +81,19 @@ import classes.display.SpriteDb;
 				DriderTownComplete = o ["DriderTownComplete"];
 				SisterBangEnabled = o ["SisterBangEnabled"];
 				BelisaKids = o ["BelisaKids"];
+				BelisaPregnancy = o ["BelisaPregnancy"];
+				BelisaKidsEggs = o ["BelisaKidsEggs"];
+				BelisaKidsEggsHatching = o ["BelisaKidsEggsHatching"];
 				LilyKidsPC = o ["LilyKidsPC"];
-				TyrantiaKids = o ["TyrantiaKids"];	
+				LilyKidsPCPregnancy = o ["LilyKidsPCPregnancy"];
+				LilyKidsIzma = o ["LilyKidsIzma"];
+				LilyKidsIzmaPregnancy = o ["LilyKidsIzmaPregnancy"];
+				LilyKidsSidone = o ["LilyKidsSidone"];
+				LilyKidsSidonePregnancy = o ["LilyKidsSidonePregnancy"];
+				TyrantiaKids = o ["TyrantiaKids"];
+				TyrantiaPregnancy = o ["TyrantiaPregnancy"];
+				TyrantiaKidsEggs = o ["TyrantiaKidsEggs"];
+				TyrantiaKidsEggsHatching = o ["TyrantiaKidsEggsHatching"];
 			} else {
 				// loading from old save
 				resetState();
@@ -64,9 +108,8 @@ public function DriderTownEnter():void {
 	clearOutput();
 	outputText("The Stone Hutch, Treehouse and Watery Orb have been changed and expanded. The Stone hutch has large swathes of silk hung off it, connecting to poles stuck deep into the ground and creating a large covered pavilion around it. The extension is enclosed with wicker walls lined with stone. The treehouse hasn’t changed much, but there’s a rope bridge connecting the flat roof of Tyrantia’s hutch with the silken treehouse.\n\n");
 	outputText("Belisa’s Orb appears at first glance to have been punctured and dragged to shore. The three dwellings are connected by strings of more spider silk, with odd, dangling lamps lighting up the connected houses. Gravel paths have been constructed between the three houses.\n\n");
-	/*if (BelisaKids > 0) {
-	outputText("Several egg-sacs are hung inside Tyrantia’s hutch, now a longhouse, and one of the Drider sisters is always on guard by the door. Several small Drider-kids wander around their little complex, playing, weaving or play-fighting with the others. Belisa frequently looks over at the smaller Driders, a smile on her face as she watches them play.\n\n");
-	}
+	if (BelisaKidsEggs > 0) outputText("Several egg-sacs are hung inside Tyrantia’s hutch, now a longhouse, and one of the Drider sisters is always on guard by the door. ");
+	if (BelisaKids > 0) outputText("Several small Drider-kids wander around their little complex, playing, weaving or play-fighting with the others. Belisa frequently looks over at the smaller Driders, a smile on her face as she watches them play. You currently have "+BelisaKids+" kids milling around.\n\n");/*
 	if (TyrantiaKids > 0) {
 	outputText("A small area near the middle of Drider-town has been turned into a meadow. Flowers seem to bloom at random, far faster than normal. Your children with Tyrantia seem to like this spot, gravitating towards it when not doing anything in particular. [Tyrantiakids_number] Uniriders play near or around the meadow. Just getting near this part of camp seems to invigorate your mind, and you feel cleaner of heart than you did before.\n\n"); 
 	//if Pure Celess exists
@@ -320,5 +363,57 @@ public function TriFuckta():void {
 //Put to next day
 }
 */
+
+public function BelisaBroodmotherMoment():void {
+	clearOutput();
+	outputText("As you head back into camp, you find Belisa waiting by your "+(flags[kFLAGS.CAMP_BUILT_CABIN] > 0 ? "cabin":"bedroll")+". Her front legs are rubbing together, and she’s twiddling her thumbs, clearly nervous about something.\n\n");
+	outputText("You ask Belisa if there’s something wrong, and she snaps out of her reverie, finally noticing you. She walks over, barely using her front legs as they shake nervously.\n\n");
+	outputText("\"<i>Well, the thing is…</i>\" She tears up a little, spreading her arms for a hug. You smile, wrapping your arms around your nervous lover. You hear a slight sloshing noise, and she blushes, burying her face in her hands. \"<i>I’m carrying eggs, and they’re yours.</i>\" Reassuring your emotional Drider, you tell her that it’s great news. You put a hand to her belly, asking her when they’ll come.\n\n");
+	outputText("\"<i>Well...In a day or so. We’re not like most races, since our eggs aren’t as...intensive to make...Lily knows more about it than me.</i>\" She holds onto you tight. \"<i>But after the eggs are laid, there’s an incubation period. Usually it’s around ten days...And not all eggs are fertilized in each batch, too.</i>\" She nuzzles your [chest], inhaling deeply through her nose. \"<i>Would you mind...Just holding me for a bit?</i>\"\n\n");
+	outputText("You nod, wrapping your arms around Belisa’s upper body, holding her close. The expectant broodmother lets out a little sigh. \"<i>Sorry, but...I needed that.</i>\" She walks back to her house, and you watch her, slightly concerned. At least the pregnancy won’t last long.\n\n");
+	BelisaPregnancy -= 24;
+	doNext(playerMenu);
+	eachMinuteCount(5);
+}
+public function BelisaEggLaying():void {
+	clearOutput();
+	var eggsB:Number = 4 + rand(3);
+	outputText("You hear a gasp from around Belisa’s area of camp. You run over, to see your Drider lover squatting over a trough. You notice Tyrantia rushing over, and Belisa leans on her older sister, closing her eyes as her front legs shake.\n\n");
+	outputText("\"<i>It’s okay, sis. Just push. Lean on me.</i>\" The much larger Drider folds her legs as Belisa begins to let out a shrill wail.\n\n");
+	if (LilyFollower.LilyFollowerState) outputText("The middle sister comes over as fast as she can, positioning herself on the other side of the trough, holding her hands out. Belisa takes Lily’s hands, and the siblings lock eyes.\n\n");
+	outputText("As you make your way over, you hear a sloshing sound, and Belisa pants for air as she pulls up her robe, revealing her sopping wet cunt, which shivers rapidly. With a groan, a single white orb widens her quim slightly as it exits, landing softly in the trough. You get to Belisa, and she locks eyes with you, sighing slightly in relief as you take her other side, you and Tyrantia both supporting Belisa as her legs shake.\n\n");
+	outputText("Belisa lays "+(eggsB*2)+" eggs, and when she’s done, your Drider-lover slides to the ground. Tyrantia takes the trough, bringing it inside, and you wrap your arms around Belisa, whispering soothing words into her ears.\n\n");
+	BelisaPregnancy = 0;
+	BelisaKidsEggs = eggsB;
+	BelisaKidsEggsHatching = 240;
+	doNext(playerMenu);
+	eachMinuteCount(5);
+}
+public function BelisaEggsHatched():void {
+	clearOutput();
+	outputText("As you return to camp, you see Belisa waiting for you at your "+(flags[kFLAGS.CAMP_BUILT_CABIN] > 0 ? "Cabin":"Bedroll")+", with "+BelisaKidsEggs+" much smaller Driders around her. She beams at you, and brings them over. When your new Drider children realize who you are, they run over to you as fast as they can, covering you in chitinous limbs until Belisa laughs, pulling your children off you.\n\n");
+	outputText("Tyrantia comes over, helping Belisa escort the young driders back to her hutch. She gives you a smile and a thumbs-up, before leaving you with Belisa.\n\n");
+	outputText("\"<i>...Thank you.</i>\" She says simply, wrapping her arms around you. \"<i>They’re rambunctious…but I wouldn’t expect anything different from your kids.</i>\" You give her a mock-protest, but Belisa laughs, cutting you off with a sweet kiss on the lips. ");
+	outputText("\"<i>I know you’re busy…But please come visit them, would you?</i>\" With that, Belisa catches sight of one of your new children rushing out from the hutch, with Tyrantia in hot pursuit. \"<i>Oh, shoot!</i>\" She cries, rushing off to corral your wayward spawn. Drider-town seems to be busier now.\n\n");
+	BelisaKidsEggsHatching = 0;
+	BelisaKids += BelisaKidsEggs;
+	BelisaKidsEggs = 0;
+	doNext(playerMenu);
+	eachMinuteCount(5);
+}
+
+public function LilyBroodmotherMoment():void {
+	clearOutput();
+	outputText("\"<i></i>\"\n\n");
+	doNext(playerMenu);
+	eachMinuteCount(5);
+}
+
+public function TyrantiaBroodmotherMoment():void {
+	clearOutput();
+	outputText("\"<i></i>\"\n\n");
+	doNext(playerMenu);
+	eachMinuteCount(5);
+}
 	}
 }
