@@ -43,6 +43,7 @@ public class IMutationsLib
 		public static const CatLikeNimblenessIM:PerkType = new CatLikeNimblenessMutation();
 		public static const DisplacerMetabolismIM:PerkType = new DisplacerMetabolismMutation();
 		public static const KitsuneThyroidGlandIM:PerkType = new KitsuneThyroidGlandMutation();
+		public static const TrachealSystemIM:PerkType = new TrachealSystemMutation();
 
 
 		/**
@@ -102,6 +103,7 @@ public class IMutationsLib
 			function mutationsAdaptations():void{
 				IMutationsList.push([ArachnidBookLungIM, ArachnidBookLungMutation]);
 				IMutationsList.push([CatLikeNimblenessIM, CatLikeNimblenessMutation]);
+				IMutationsList.push([TrachealSystemIM,TrachealSystemMutation]);
 			}
 			function mutationsDeprecated():void{
 				IMutationsList.push([MutationsTemplateIM,MutationTemplate]);
