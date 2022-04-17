@@ -27,6 +27,7 @@ package classes.IMutations
             if (descS != "")descS += ".";
             return descS;
         }
+
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
@@ -42,8 +43,9 @@ package classes.IMutations
             }
             return "Black Heart" + sufval;
         }
+
         //Mutation Requirements
-        public static function mutationReqs(pTier:int = 0):void{
+        public static function pReqs(pTier:int = 0):void{
             try{
                 //This helps keep the requirements output clean.
                 IMutationsLib.BlackHeartIM.requirements = [];
@@ -59,6 +61,17 @@ package classes.IMutations
             }catch(e:Error){
                 trace(e.getStackTrace());
             }
+        }
+
+        //Ignore the variable. Reusing the function that triggers this elsewhere and they need the int.
+        public static function perkLvl(useless:int = 0):int{
+            return 3;
+        }
+
+        //Mutations Buffs
+        public function pBuffs(pTier:int = 1):Object{
+            var pBuffs:Object = {};
+            return pBuffs;
         }
 
         public function BlackHeartMutation() {

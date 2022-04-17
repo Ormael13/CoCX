@@ -13,6 +13,14 @@ import classes.BodyParts.RearBody;
 import classes.BodyParts.Tail;
 import classes.IMutations.*;
 
+/**
+ * Mutations 3.0 Handles perk creation slightly differently in a few ways.
+ * .withBuffs is not used here, instead, buffs are created in a pBuffs function within the mutation file itself, and must return an object.
+ * Requirements, as seen below compared to PerkLib/MutationsLib, are also not handled below, and are instead dynamically loaded in, via pReqs function, also stored within the mutations file itself.
+ * Mutations are themselves handling their iterations via v1 checks.
+ * The goal of this is to allow for everything related to the mutation itself to be hosted within its own file, and to reduce the number of perks being created for the player.
+ * Refer to Basecontent's createDynamicPerk function to see how they are used.
+ */
 public class IMutationsLib
 	{
 		public function get game():CoC{
@@ -74,13 +82,14 @@ public class IMutationsLib
 
 			}
 			function mutationsThyroidGlands():void{
-				MutationsList.push([KitsuneThyroidGlandIM, 3, MBuffs.KTGM, KitsuneThyroidGlandMutation.mutationReqs]);
+				MutationsList.push([KitsuneThyroidGlandIM, KitsuneThyroidGlandMutation]);
+				MutationsList.push([ArachnidBookLungIM, ArachnidBookLungMutation]);
 			}
 			function mutationsParaThyroidGlands():void{
 
 			}
 			function mutationsAdaptations():void{
-				MutationsList.push([ArachnidBookLungIM]);
+				MutationsList.push([ArachnidBookLungIM, ArachnidBookLungMutation]);
 			}
 			function mutationsDeprecated():void{
 				MutationsList = MutationsLib.mutationsArray()
