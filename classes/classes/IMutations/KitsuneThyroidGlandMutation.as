@@ -58,7 +58,7 @@ package classes.IMutations
                             }, "2+ fox tails");
                 }
                 else{
-                    var pLvl:int = pTier * 30
+                    var pLvl:int = pTier * 30;
                     IMutationsLib.KitsuneThyroidGlandIM.requireLevel(pLvl);
                 }
             }catch(e:Error){

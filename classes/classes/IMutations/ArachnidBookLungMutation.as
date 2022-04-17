@@ -21,7 +21,7 @@ package classes.IMutations
                 descS += ", increases all Web abilities effectiveness by half ";
             }
             if (pTier >= 3){
-                descS += ", and gives them a 50% chance to immobilize opponents for 2 rounds when opponent tries to struggle out.";
+                descS += ", and gives them a 50% chance to immobilize opponents for 2 rounds when opponent tries to struggle out";
             }
             if (descS != "")descS += ".";
             return descS;
@@ -56,8 +56,8 @@ package classes.IMutations
                             }, "Arachnid race");
                 }
                 else{
-                    var pLvl:int = pTier * 30
-                    IMutationsLib.ArachnidBookLungIM.requireLevel(pLvl)
+                    var pLvl:int = pTier * 30;
+                    IMutationsLib.ArachnidBookLungIM.requireLevel(pLvl);
                 }
             }catch(e:Error){
                 trace(e.getStackTrace());

@@ -1,7 +1,8 @@
 /**
- * Created by JTecx on 21.08.21.
- * V2 on 31.03.22
- * Based on PerkLib, created by Aimozg.
+ * Based on PerkLib, created by Aimozg
+ * Created by JTecx
+ * V2 on 21.08.21
+ * V3 on 31.03.22
  */
 package classes.IMutations
 {
@@ -12,6 +13,7 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.RearBody;
 import classes.BodyParts.Tail;
 import classes.IMutations.*;
+import classes.Scenes.Areas.Caves.DarkSlime;
 
 /**
  * Mutations 3.0 Handles perk creation slightly differently in a few ways.
@@ -28,11 +30,15 @@ public class IMutationsLib
 		}
 		//Example -v
 		//This one does nothing, and is simply to showcase.
-		//Mutations start here.
-		public static const KitsuneThyroidGlandIM:PerkType = new KitsuneThyroidGlandMutation();
-		public static const ArachnidBookLungIM:PerkType = new ArachnidBookLungMutation();
-		public static const BlackHeartIM:PerkType = new BlackHeartMutation()
 		public static const MutationsTemplateIM:PerkType = new MutationTemplate();
+		//Disabled mutations here.
+		public static const SlimeMetabolismIM:PerkType = new SlimeMetabolismMutation();
+		//Mutations start here.
+		public static const ArachnidBookLungIM:PerkType = new ArachnidBookLungMutation();
+		public static const BlackHeartIM:PerkType = new BlackHeartMutation();
+		public static const CatLikeNimblenessIM:PerkType = new CatLikeNimblenessMutation();
+		public static const KitsuneThyroidGlandIM:PerkType = new KitsuneThyroidGlandMutation();
+
 
 		/**
 		*Returns an array of arrays of mutation body parts in PerkType type.
@@ -41,9 +47,9 @@ public class IMutationsLib
 		*This feeds the Perks/Mutations DB and Evangeline's Mutations information.
 		*/
 		public static function mutationsArray(spec:String = "", merge:Boolean = false):Array {
-			var MutationsList:Array = []
+			var IMutationsList:Array = []
 			function mutationsHeart():void{
-
+				IMutationsList.push([BlackHeartIM, BlackHeartMutation]);
 			}
 			function mutationsMuscle():void{
 
@@ -64,7 +70,7 @@ public class IMutationsLib
 
 			}
 			function mutationsMetabolism():void{
-
+				//MutationsList.push([SlimeMetabolismIM,SlimeMetabolismMutation]);
 			}
 			function mutationsOvaries():void{
 
@@ -82,19 +88,17 @@ public class IMutationsLib
 
 			}
 			function mutationsThyroidGlands():void{
-				MutationsList.push([KitsuneThyroidGlandIM, KitsuneThyroidGlandMutation]);
+				IMutationsList.push([KitsuneThyroidGlandIM, KitsuneThyroidGlandMutation]);
 			}
 			function mutationsParaThyroidGlands():void{
 
 			}
 			function mutationsAdaptations():void{
-				MutationsList.push([ArachnidBookLungIM, ArachnidBookLungMutation]);
+				IMutationsList.push([ArachnidBookLungIM, ArachnidBookLungMutation]);
+				IMutationsList.push([CatLikeNimblenessIM, CatLikeNimblenessMutation]);
 			}
 			function mutationsDeprecated():void{
-				MutationsList = MutationsLib.mutationsArray()
-				for each (var i:PerkType in MutationsLib.mutationsArray("Deprecated")){
-					MutationsList.push(i);
-				}
+				IMutationsList.push([MutationsTemplateIM,MutationTemplate]);
 			}
 
 			switch(spec){
@@ -170,14 +174,12 @@ public class IMutationsLib
 
 			if (merge){
 				var finalrez:Array = [];
-				for each(var mutatetype:Array in MutationsList){
-					for each (var mutate:PerkType in mutatetype){
-						finalrez.push(mutate);
-					}
+				for each(var mutatetype:Array in IMutationsList){
+					finalrez.push(mutatetype[0]);
 				}
-				MutationsList = finalrez;
+				IMutationsList = finalrez;
 			}
-			return MutationsList;
+			return IMutationsList;
 		}
 
 		/*

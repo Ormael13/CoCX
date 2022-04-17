@@ -17,10 +17,10 @@ package classes.IMutations
                 descS += "";
             }
             if (pTier >= 2){
-                descS += "";
+                descS += ", ";
             }
             if (pTier >= 3){
-                descS += "";
+                descS += ", ";
             }
             if (descS != "")descS += ".";
             return descS;
@@ -48,11 +48,11 @@ package classes.IMutations
                 //This helps keep the requirements output clean.
                 IMutationsLib.BlackHeartIM.requirements = [];
                 if (pTier == 0){
-                    IMutationsLib.BlackHeartIM.requireHeartMutationSlot()
+                    IMutationsLib.BlackHeartIM.requireHeartMutationSlot();
                 }
                 else{
-                    var pLvl:int = pTier * 30
-                    IMutationsLib.BlackHeartIM.requireLevel(pLvl)
+                    var pLvl:int = pTier * 30;
+                    IMutationsLib.BlackHeartIM.requireLevel(pLvl);
                 }
             }catch(e:Error){
                 trace(e.getStackTrace());

@@ -5,24 +5,24 @@
 package classes.IMutations
 {
     import classes.PerkClass;
-    import classes.PerkLib;
-    import classes.PerkType;
-    import classes.Player;
+import classes.PerkLib;
+import classes.PerkType;
+import classes.Player;
 
-    public class BlackHeartMutation extends PerkType
+public class CatLikeNimblenessMutation extends PerkType
     {
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
             var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.BlackHeartIM)
+            var pTier:int = player.perkv1(IMutationsLib.CatLikeNimblenessIM)
             if (pTier >= 1){
-                descS += "Increased Lust strike power, Empower Fascinate";
+                descS += "Increases Evasion";
             }
             if (pTier >= 2){
-                descS += ", Adds extra Lust damage to Lust strike dependent on Wisdom (Wis/10) and lowers Fascinate CD by 1";
+                descS += "";
             }
             if (pTier >= 3){
-                descS += ", Adds extra Lust damage to Lust strike dependent on Sensitivity (Sensitivity/10) and extends Facinate Stun to 2 turns";
+                descS += "";
             }
             if (descS != "")descS += ".";
             return descS;
@@ -31,7 +31,7 @@ package classes.IMutations
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
-            switch (player.perkv1(IMutationsLib.BlackHeartIM)){
+            switch (player.perkv1(IMutationsLib.CatLikeNimblenessIM)){
                 case 2:
                     sufval = "(Primitive)";
                     break;
@@ -41,22 +41,23 @@ package classes.IMutations
                 default:
                     sufval = "";
             }
-            return "Black Heart" + sufval;
+            return "Cat-like Nimbleness" + sufval;
         }
 
         //Mutation Requirements
         public static function pReqs(pTier:int = 0):void{
             try{
                 //This helps keep the requirements output clean.
-                IMutationsLib.BlackHeartIM.requirements = [];
+                IMutationsLib.CatLikeNimblenessIM.requirements = [];
                 if (pTier == 0){
-                    IMutationsLib.BlackHeartIM.requireHeartMutationSlot().requirePerk(PerkLib.DarkCharm).requireCor(100).requireCustomFunction(function (player:Player):Boolean {
-                        return player.demonScore() >= 11;
-                    }, "Demon race");
+                    IMutationsLib.CatLikeNimblenessIM.requirePerk(PerkLib.Flexibility)
+                            .requireCustomFunction(function (player:Player):Boolean {
+                        return player.catScore() >= 8 || player.nekomataScore() >= 10 || player.displacerbeastScore() >= 14 || player.hellcatScore() >= 10 || player.cheshireScore() >= 11 || player.sphinxScore() >= 14;
+                    }, "Any cat race");
                 }
                 else{
                     var pLvl:int = pTier * 30;
-                    IMutationsLib.BlackHeartIM.requireLevel(pLvl);
+                    IMutationsLib.CatLikeNimblenessIM.requireLevel(pLvl);
                 }
             }catch(e:Error){
                 trace(e.getStackTrace());
@@ -71,12 +72,14 @@ package classes.IMutations
         //Mutations Buffs
         public function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {};
-            pBuffs['lib.mult'] =  0.05 * pTier;
+            if (pTier > 1){
+                pBuffs['spe.mult'] = 0.1 * (pTier - 1);
+            }
             return pBuffs;
         }
 
-        public function BlackHeartMutation() {
-            super("Black Heart IM", "Black Heart", ".");
+        public function CatLikeNimblenessMutation() {
+            super("Cat-like Nimbleness IM", "Cat-like Nimbleness", ".");
         }
 
         override public function keepOnAscension(respec:Boolean = false):Boolean {

@@ -49,7 +49,7 @@ public class MutationsLib
 				".");
 		public static const KitsuneParathyroidGlandsFinalForm:PerkType = mk("Kitsune Parathyroid Glands (Final Form)", "Kitsune Parathyroid Glands (Final Form)",
 				".");
-		//accesable perks
+		//accessable perks
 		public static const ArachnidBookLung:PerkType = mk("Arachnid Book Lung", "Arachnid Book Lung",
 				"Increase the web and poison capacity by 100%.").withBuffs({'int.mult':0.05});
 		public static const ArachnidBookLungPrimitive:PerkType = mk("Arachnid Book Lung (Primitive)", "Arachnid Book Lung (Primitive)",
@@ -480,7 +480,6 @@ public class MutationsLib
 			}
 			function mutationsThyroidGlands():void{
 				MutationsList.push([KitsuneThyroidGland, KitsuneThyroidGlandPrimitive, KitsuneThyroidGlandEvolved]);
-				//MutationsList.push([KitsuneThyroidGland, 3]);
 				//MutationsList.push([NekomataThyroidGland, NekomataThyroidGlandEvolved, NekomataThyroidGlandFinalForm]);
 			}
 			function mutationsParaThyroidGlands():void{
