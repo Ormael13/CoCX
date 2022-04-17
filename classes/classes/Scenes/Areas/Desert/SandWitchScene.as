@@ -1,8 +1,6 @@
 ﻿package classes.Scenes.Areas.Desert {
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
-import classes.Scenes.SceneLib;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
@@ -631,7 +629,7 @@ public function sexMenu():void {
         addButtonIfTrue(6, "Use Shouldra", SceneLib.shouldraFollower.sandWitchGetsGhostly, "Not for genderless...", player.gender != 0);
     else addButtonDisabled(6, "???", "Req. to be posessed by some ghost");
     addButtonIfTrue(7, "Ride", centaurRide, "Req. low corruption and centaur lower body", lowCor && player.isTaur());
-    addButtonIfTrue(8, "Taur Rape", centaurRide, "Req. high corruption and centaur lower body", hiCor && player.isTaur());
+    addButtonIfTrue(8, "Taur Rape", centaurRape, "Req. high corruption and centaur lower body", hiCor && player.isTaur());
 	addButtonIfTrue(9, "Lay Eggs", ovipositSandWitches, "Req. oviposition", player.gender > 0 && player.canOviposit());
     
 	SceneLib.uniqueSexScene.pcUSSPreChecksV2(sexMenu);
