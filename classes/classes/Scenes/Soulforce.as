@@ -216,7 +216,7 @@ public class Soulforce extends BaseContent
 		outputText("<b>Cultivation stage:</b> " + cultStanding + "\n");
 	}
 
-	public function SoulforceCheats1(page:int):void{
+	public function SoulforceCheats1(page:int = 0):void{
 		clearOutput();
 		outputText("Collection of current used cheats that with time will be removed or replaced by new ones.");
 		outputText("\n\nAscension points: " + player.ascensionPerkPoints + "");
@@ -255,87 +255,29 @@ public class Soulforce extends BaseContent
 		menuItems.push("Fix Shards", cheatFixShards, "Check player's quest and give the deserved shards");
 		menuItems.push("Add Shard", cheatAddShard, "Add 1 radiant shard");
 		menuItems.push("Remove Shard", cheatRemoveShard, "Remove 1 radiant shard");
-		menuItems.push("ZenjiQ", ZenjiQ, "Zenji Expac 2 debug tool");
+		//menuItems.push("ZenjiQ", ZenjiQ, "Zenji Expac 2 debug tool");
 		menuItems.push("LustBreath", (player.hasPerk(PerkLib.DragonPoisonBreath))? FairyTest: false, "Replacing 1 perk with another");
-		menuItems.push("Mutationtest", mutation3, "MutationTest")
+		//menuItems.push("Mutationstest2", mutations2, "MutationsTest2");
 		//menuItems.push("Mutation test reset", resetMutations, "Reset Mutations");
 		menuGen(menuItems, page, accessSoulforceMenu);
 	}
 
-	public function mutation3():void{
+
+	public function mutations2():void{
 		clearOutput();
 		menu();
+		var page:int = 0;
+		var menuItems:Array = [];
 		for each (var pArray:Array in IMutationsLib.mutationsArray("Thyroid")){
-			var pPerk:PerkType = pArray[0];
-			var pLvl:int = player.perkv1(pPerk);
-			mutationFuncTrigger(pArray[3]);
-			trace("Requirements loaded in.");
-			outputText(""+pPerk.name() + " Perk Tier: " + pLvl);
-			var reqs:Array = [];
-			if (pPerk.available(player) && pArray[1] >= pLvl){
-				addButton(0,pPerk.name(), getMutation);
+			var temp:Array = [];
+			temp = createDynamicPerk(pArray[0], pArray[1]);
+			for each (var i:* in temp){
+				menuItems.push(i);
 			}
-			else{
-				trace("Unable to meet requirements/requirements borked.");
-			}
-			for each (var cond:Object in pPerk.requirements) {
-				var reqStr:String = cond.text;
-				var color:String = "";
-				if (!(reqStr.indexOf("Mutation") >= 0)) { //Ignores the "free mutation slot" note.
-					if (cond.fn(player)) {
-						color = "#008000";
-					}
-					else {
-						color = "#800000";
-					}
-					reqs.push("<font color='"+color+"'>"+cond.text+"</font>");
-				}
-			}
-			outputText("Requirements: " + reqs.join(", "));
-			addButton(4, "back",SoulforceCheats1,2);
+			menuItems.push(temp[0]);
 		}
-
-		//Functions that need to be triggered externally go here. I.E. Requirements/Buffs due to circular dependency.
-		function mutationFuncTrigger(fTrigger:Function):*{
-			try{
-				fTrigger(pLvl);
-				trace("Success");
-			}
-			catch (e:Error){
-				trace("Failed. \n" + e.getStackTrace());
-			}
-		}
-
-		//Gives the player the actual mutation itself.
-		function getMutation():void{
-			if (!player.hasPerk(pPerk)){
-				player.createPerk(pPerk, 1,0,0,0);
-			}
-			else{
-				player.setPerkValue(pPerk,1,pLvl + 1);
-			}
-			setBuffs();
-			trace("Mutation applied.");
-			outputText("Done");
-			doNext(curry(SoulforceCheats1, 2));
-		}
-
-		//Sets up the buff for the perk.
-		function setBuffs():void{
-			var stname:String = "perk_" + pPerk.id;
-			var pBuff:Object = mutationFuncTrigger(pArray[2]);
-			if (player.statStore.hasBuff(stname)){
-				player.statStore.removeBuffs(stname);
-			}
-			player.statStore.addBuffObject(
-					pBuff,
-					stname,
-					{text:pPerk.name(), save:false}
-			);
-			trace("Buffs Applied.");
-		}
+		menuGen(menuItems, page, curry(SoulforceCheats1, 2));
 	}
-
 
 	public function FairyTest():void {
 		player.removePerk(PerkLib.DragonPoisonBreath);

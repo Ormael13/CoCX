@@ -16,17 +16,18 @@ package classes.IMutations
             var descS:String = "";
             var pTier:int = player.perkv1(IMutationsLib.BlackHeartIM)
             if (pTier >= 1){
-                descS += "";
+                descS += "Increased Lust strike power, Empower Fascinate";
             }
             if (pTier >= 2){
-                descS += "";
+                descS += ", Adds extra Lust damage to Lust strike dependent on Wisdom (Wis/10) and lowers Fascinate CD by 1";
             }
             if (pTier >= 3){
-                descS += "";
+                descS += ", Adds extra Lust damage to Lust strike dependent on Sensitivity (Sensitivity/10) and extends Facinate Stun to 2 turns";
             }
             if (descS != "")descS += ".";
             return descS;
         }
+
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
@@ -42,8 +43,9 @@ package classes.IMutations
             }
             return "Black Heart" + sufval;
         }
+
         //Mutation Requirements
-        public static function mutationReqs(pTier:int = 0):void{
+        public static function pReqs(pTier:int = 0):void{
             try{
                 //This helps keep the requirements output clean.
                 IMutationsLib.BlackHeartIM.requirements = [];
@@ -53,12 +55,25 @@ package classes.IMutations
                     }, "Demon race");
                 }
                 else{
-                    var pLvl:int = pTier * 30
-                    IMutationsLib.BlackHeartIM.requireLevel(pLvl)
+                    var pLvl:int = pTier * 30;
+                    IMutationsLib.BlackHeartIM.requireLevel(pLvl);
                 }
             }catch(e:Error){
                 trace(e.getStackTrace());
             }
+        }
+
+        //Perk Max Level
+        //Ignore the variable. Reusing the function that triggers this elsewhere and they need the int.
+        public static function perkLvl(useless:int = 0):int{
+            return 3;
+        }
+
+        //Mutations Buffs
+        public function pBuffs(pTier:int = 1):Object{
+            var pBuffs:Object = {};
+            pBuffs['lib.mult'] =  0.05 * pTier;
+            return pBuffs;
         }
 
         public function BlackHeartMutation() {

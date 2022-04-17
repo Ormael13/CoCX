@@ -17,14 +17,15 @@ package classes.IMutations
                 descS += "";
             }
             if (pTier >= 2){
-                descS += "";
+                descS += ", ";
             }
             if (pTier >= 3){
-                descS += "";
+                descS += ", ";
             }
             if (descS != "")descS += ".";
             return descS;
         }
+
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
@@ -40,21 +41,34 @@ package classes.IMutations
             }
             return "PerkName Here" + sufval;
         }
+
         //Mutation Requirements
-        public static function mutationReqs(pTier:int = 0):void{
+        public static function pReqs(pTier:int = 0):void{
             try{
                 //This helps keep the requirements output clean.
                 IMutationsLib.BlackHeartIM.requirements = [];
                 if (pTier == 0){
-                    IMutationsLib.BlackHeartIM.requireHeartMutationSlot()
+                    IMutationsLib.BlackHeartIM.requireHeartMutationSlot();
                 }
                 else{
-                    var pLvl:int = pTier * 30
-                    IMutationsLib.BlackHeartIM.requireLevel(pLvl)
+                    var pLvl:int = pTier * 30;
+                    IMutationsLib.BlackHeartIM.requireLevel(pLvl);
                 }
             }catch(e:Error){
                 trace(e.getStackTrace());
             }
+        }
+
+        //Perk Max Level
+        //Ignore the variable. Reusing the function that triggers this elsewhere and they need the int.
+        public static function perkLvl(useless:int = 0):int{
+            return 3;
+        }
+
+        //Mutations Buffs
+        public function pBuffs(pTier:int = 1):Object{
+            var pBuffs:Object = {};
+            return pBuffs;
         }
 
         public function MutationTemplate() {

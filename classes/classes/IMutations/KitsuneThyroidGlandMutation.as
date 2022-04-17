@@ -28,6 +28,7 @@ package classes.IMutations
             if (descS != "")descS += ".";
             return descS;
         }
+
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
@@ -43,8 +44,9 @@ package classes.IMutations
             }
             return "Kitsune Thyroid Gland " + sufval;
         }
+
         //Mutation Requirements
-        public static function mutationReqs(pTier:int = 0):void{
+        public static function pReqs(pTier:int = 0):void{
             try{
                 //This helps keep the requirements output clean.
                 IMutationsLib.KitsuneThyroidGlandIM.requirements = [];
@@ -56,7 +58,7 @@ package classes.IMutations
                             }, "2+ fox tails");
                 }
                 else{
-                    var pLvl:int = pTier * 30
+                    var pLvl:int = pTier * 30;
                     IMutationsLib.KitsuneThyroidGlandIM.requireLevel(pLvl);
                 }
             }catch(e:Error){
@@ -64,6 +66,21 @@ package classes.IMutations
             }
         }
 
+        //Perk Max Level
+        //Ignore the variable. Reusing the function that triggers this elsewhere and they need the int.
+        public static function perkLvl(useless:int = 0):int{
+            return 3;
+        }
+
+        public static function pBuffs(pTier:int = 1):Object{
+            var pBuffs:Object = {};
+            pBuffs['spe.mult'] = 0.05 * pTier;
+            if (pTier - 1 >= 0) pBuffs['wis.mult'] = 0.05 * (pTier - 1);
+            if (pTier - 2 >= 0) pBuffs['int.mult'] = 0.05 * (pTier - 1);
+            return pBuffs
+        }
+
+        //Mutations Buffs
         public function KitsuneThyroidGlandMutation() {
             super("Kitsune Thyroid Gland IM", "Kitsune Thyroid Gland", ".");
         }

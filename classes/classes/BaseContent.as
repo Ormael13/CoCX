@@ -1038,6 +1038,94 @@ import coc.xxc.StoryContext;
                     ++btnsActive;
             return btnsActive;
         }
+
+
+		/**Creates Dynamic Perks that fulfill three criteria.
+		 * 1.Uses perkv1 to store variants of the same perk.
+		 * 2.Has a changing Buff state due to the variants.
+		 * 3.Has a changing Requirement state due to the varients.		 *
+		 * @param pPerk: Takes in the perk to be augmented.
+		 * @param pClass: Perk file/Class name, to simplify and unify called functions.
+		 * @return Array: Two item Array consisting of perk name[0], and a prepared function that will create/modify the perk/mutation[1].
+		 * Use in conjunction with menuGen.
+		 */
+		protected function createDynamicPerk(pPerk:PerkType, pClass:Class):*{
+			var pLvl:int = player.perkv1(pPerk);	//Gets Mutation Level if it exists.
+			var pMax:int = extPerkTrigger(pClass.perkLvl, pLvl);	//Max Mutation Level
+			//outputText(""+pPerk.name() + " Perk Tier: " + pLvl + "\n");
+			extPerkTrigger(pClass.pReqs, pLvl);	//Requirements Loading.
+			trace("Requirements loaded in.");
+			if (pPerk.available(player) && pMax >= pLvl){
+				trace("Requirements met, adding in.");
+				return([pPerk.name(), getPerk]);
+			}
+			else{
+				trace("Unable to meet requirements/requirements borked.");
+				return([pPerk.name(), false]);
+			}
+			/*	//Requirements debug.
+			var reqs:Array = [];
+			for each (var cond:Object in pPerk.requirements) {
+				var reqStr:String = cond.text;
+				var color:String = "";
+				if (!(reqStr.indexOf("Mutation") >= 0)) { //Ignores the "free mutation slot" note.
+					if (cond.fn(player)) {
+						color = "#008000";
+					}
+					else {
+						color = "#800000";
+					}
+					reqs.push("<font color='"+color+"'>"+cond.text+"</font>");
+				}
+			}
+			outputText("Requirements: " + reqs.join(", "));*/
+
+			//Functions that need to be triggered externally go here. I.E. Requirements/Buffs due to circular dependency.
+			function extPerkTrigger(fTrigger:Function, pLvl2:int):*{
+				try{
+					var result:* = fTrigger(pLvl2);
+					trace("Success");
+					return result
+				}
+				catch (e:Error){
+					trace("Failed. \n" + e.getStackTrace());
+				}
+			}
+
+			//Gives the player the actual mutation itself.
+			function getPerk():Boolean{
+				try{
+					if (!player.hasPerk(pPerk)){
+						player.createPerk(pPerk, 1,0,0,0);
+					}
+					else{
+						player.setPerkValue(pPerk,1,pLvl + 1);
+					}
+					setBuffs();
+					trace("Perk applied.");
+				} catch(e:Error){
+					trace(e.getStackTrace())
+					outputText("Something has gone wrong with Dynamic Perks. Please report this to JTecx along with which perk/mutation was selected, along with the bonk stick.");
+					return false;
+				}
+				return true;
+			}
+
+			//Sets up the buff for the perk.
+			function setBuffs():void{
+				var stname:String = "perk_" + pPerk.id;
+				var pBuff:Object = extPerkTrigger(pClass.pBuffs, pLvl + 1);
+				if (player.statStore.hasBuff(stname)){
+					player.statStore.removeBuffs(stname);
+				}
+				player.statStore.addBuffObject(
+						pBuff,
+						stname,
+						{text:pPerk.name(), save:false}
+				);
+				trace("Buffs Applied.");
+			}
+		}
 	}
 
 }
