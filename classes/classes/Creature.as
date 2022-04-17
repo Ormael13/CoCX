@@ -1660,6 +1660,11 @@ public class Creature extends Utils
 			if (i_cockIndex >= cocks.length || i_cockIndex < 0)
 				return 0;
 			return (cocks[i_cockIndex].cockThickness * cocks[i_cockIndex].cockLength);
+			//This formula below will allow for cylindrical cock calculation. i.e. it's closest resemblence to horse cocks, but other cocks are more cylindrical than rectangular.
+			//However, this also means all places that check for this will need to be adjusted, and thus, will not actually ever be used.
+			//Go forth, and keep fucking with your rectangular dicks! -Jtecx
+			//var cArea:Number = 2 * Math.PI * (cocks[i_cockIndex].cockThickness/2) * ((cocks[i_cockIndex].cockThickness/2) + cocks[i_cockIndex].cockLength);
+			//return cArea;
 		}
 
 		public function biggestCockLength():Number

@@ -6,22 +6,21 @@ package classes.IMutations
 {
     import classes.PerkClass;
     import classes.PerkType;
-    import classes.Player;
 
-    public class ArachnidBookLungMutation extends PerkType
+    public class SlimeMetabolismMutation extends PerkType
     {
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
             var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.ArachnidBookLungIM)
+            var pTier:int = player.perkv1(IMutationsLib.SlimeMetabolismIM)
             if (pTier >= 1){
-                descS += "Increase web and poison capacity by " + 100 * pTier + "%";
+                descS += "";
             }
             if (pTier >= 2){
-                descS += ", increases all Web abilities effectiveness by half ";
+                descS += ", ";
             }
             if (pTier >= 3){
-                descS += ", and gives them a 50% chance to immobilize opponents for 2 rounds when opponent tries to struggle out";
+                descS += ", ";
             }
             if (descS != "")descS += ".";
             return descS;
@@ -30,7 +29,7 @@ package classes.IMutations
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
-            switch (player.perkv1(IMutationsLib.ArachnidBookLungIM)){
+            switch (player.perkv1(IMutationsLib.SlimeMetabolismIM)){
                 case 2:
                     sufval = "(Primitive)";
                     break;
@@ -40,24 +39,20 @@ package classes.IMutations
                 default:
                     sufval = "";
             }
-            return "Arachnid Book Lung" + sufval;
+            return "Slime Mutation" + sufval;
         }
 
         //Mutation Requirements
         public static function pReqs(pTier:int = 0):void{
             try{
                 //This helps keep the requirements output clean.
-                IMutationsLib.ArachnidBookLungIM.requirements = [];
+                IMutationsLib.SlimeMetabolismIM.requirements = [];
                 if (pTier == 0){
-
-                    IMutationsLib.ArachnidBookLungIM.requireAdaptationsMutationSlot()
-                            .requireCustomFunction(function (player:Player):Boolean {
-                                return player.spiderScore() >= 5 || player.atlachNachaScore() >= 21;
-                            }, "Arachnid race");
+                    IMutationsLib.SlimeMetabolismIM.requireMetabolismMutationSlot();
                 }
                 else{
                     var pLvl:int = pTier * 30;
-                    IMutationsLib.ArachnidBookLungIM.requireLevel(pLvl);
+                    IMutationsLib.SlimeMetabolismIM.requireLevel(pLvl);
                 }
             }catch(e:Error){
                 trace(e.getStackTrace());
@@ -71,14 +66,13 @@ package classes.IMutations
         }
 
         //Mutations Buffs
-        public static function pBuffs(pTier:int = 1):Object{
+        public function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {};
-            pBuffs['int.mult'] = 0.05 * pTier;
-            return pBuffs
+            return pBuffs;
         }
 
-        public function ArachnidBookLungMutation() {
-            super("Arachnid Book Lung IM", "Arachnid Book Lung", ".");
+        public function SlimeMetabolismMutation() {
+            super("Slime Metabolism IM", "Slime Metabolism", ".");
         }
 
         override public function keepOnAscension(respec:Boolean = false):Boolean {
