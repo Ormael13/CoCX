@@ -208,7 +208,7 @@ import classes.VaginaClass;
 				createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
 				return;
 			}
-			outputText("Your duplicate chuckles in the face of your attacks.");
+			outputText("\n\nYour duplicate chuckles in the face of your attacks.");
 			addTalkShit();
 		}
 		

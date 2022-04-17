@@ -1877,7 +1877,7 @@ public class Creature extends Utils
         public function findCockWithType(type:CockTypesEnum, biggest:int = 1, minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", tentUnlim:Boolean = true):int {
             if (compareBy != "area" && compareBy != "length" && compareBy != "thickness") //sanity check
                 throw new Error("Wrong compareBy value!");
-            var sorted:Array = new Array();
+            var sorted:Array = [];
             var tent:Boolean = (type == CockTypesEnum.STAMEN || type == CockTypesEnum.TENTACLE);
             //create an array of fitting cocks, sorted descending
             for (var num:int = 0; num < cocks.length; ++num) {

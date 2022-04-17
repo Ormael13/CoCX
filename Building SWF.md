@@ -21,12 +21,9 @@ java.args=-Xmx384m -Dsun.io.useCanonCaches=false
 5. In Project Properties -> SDKs add a new AS3 SDK. Select FlexSDK folder - *%AppData%\Local\FlashDevelop\Apps\flexsdk\4.6.0\\*
 6. That's it, you can build the project!
 
+### IntelliJ Idea
+The repository already contains a project for it. If you already have SDK (otherwise, you can download it from FlashDevelop or other source, but be sure to match versions), you can use the project to build SWFs. But don't forget to change paths to your SDK in Project Structure. 
+
 ## *Linux*
 
-> It's possible to use IntelliJ IDEA Ultimate with Linux too. Maybe SDK installs will get easier.
-
-If you're afraid of GUIs, it's possible through the terminal too.
-1. You'll need the correct versions of SDKs - FlexSDK **4.6.0** with AirSDK **3.1**.
-2. FlexSDK doesn't have installers for Linux (only for MacOS), so you'll need to compile them yourself.
-3. As for Windows, change the memory limit for FlexSDK to something more realistic.
-4. In the repository, */devTools/buildSwf.sh* contains the required compiler arguments for building the SWF file. Should be started from the root.
+> It's possible?

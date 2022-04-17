@@ -307,6 +307,8 @@ public class SceneLib {
 	
 	public static var fleshGolemScenes:FleshGolemScene = new FleshGolemScene();
 
+    public static var phyllaScene:PhyllaScene = new PhyllaScene();
+
     public static var uniqueSexScene:UniqueSexScenes = new UniqueSexScenes();
 
     public function SceneLib() {
