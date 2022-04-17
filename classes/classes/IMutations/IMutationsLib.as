@@ -83,7 +83,6 @@ public class IMutationsLib
 			}
 			function mutationsThyroidGlands():void{
 				MutationsList.push([KitsuneThyroidGlandIM, KitsuneThyroidGlandMutation]);
-				MutationsList.push([ArachnidBookLungIM, ArachnidBookLungMutation]);
 			}
 			function mutationsParaThyroidGlands():void{
 
