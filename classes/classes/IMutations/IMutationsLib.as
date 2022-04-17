@@ -33,10 +33,15 @@ public class IMutationsLib
 		public static const MutationsTemplateIM:PerkType = new MutationTemplate();
 		//Disabled mutations here.
 		public static const SlimeMetabolismIM:PerkType = new SlimeMetabolismMutation();
+		//public static const NekomataThyroidGlandIM:PerkType = new NekomataThyroidGlandMutation();
+		//public static const HellcatParathyroidGlandsIM:PerkType = new HellcatParathyroudGlandMutation();
+		//public static const CaveWyrmLungsIM:PerkType = new CaveWyrmLungsMutation();
+		//public static const KitsuneParathyroidGlandIM:PerkType = new KitsuneParathyroidGlandMutation();
 		//Mutations start here.
 		public static const ArachnidBookLungIM:PerkType = new ArachnidBookLungMutation();
 		public static const BlackHeartIM:PerkType = new BlackHeartMutation();
 		public static const CatLikeNimblenessIM:PerkType = new CatLikeNimblenessMutation();
+		public static const DisplacerMetabolismIM:PerkType = new DisplacerMetabolismMutation();
 		public static const KitsuneThyroidGlandIM:PerkType = new KitsuneThyroidGlandMutation();
 
 
