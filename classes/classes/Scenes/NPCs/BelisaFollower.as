@@ -257,11 +257,12 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		if (!BelisaInCamp && BelisaQuestComp && BelisaAffectionMeter >= 80 && player.statusEffectv1(StatusEffects.TelAdre) >= 1 && flags[kFLAGS.HEXINDAO_UNLOCKED] >= 1 && player.hasStatusEffect(StatusEffects.MetWhitney) && player.statusEffectv1(StatusEffects.MetWhitney) > 1) addButton(7, "ComeW/Me", BelisaComeCamp);
 		else if (BelisaInCamp) addButtonDisabled(7,"ComeW/Me", "She's already at your camp!");
 		else addButtonDisabled(7, "???", "Req. 80+ affection, healing her tooth injury and finding: Farm, Tel'Adre, He'Xin'Dao.");
-		addButton(8, "Back", Encounterback);
 		if (BelisaInCamp && BelisaConfessed && BelisaAffectionMeter >= 80) {
 			if (flags[kFLAGS.SLEEP_WITH] != "Belisa") addButton(12, "Sleep With", BelisaSleepToggle);
 			else addButton(12, "Sleep Alone", BelisaSleepToggle);
 		}
+		if (BelisaInCamp) addButton(14, "Back", BelisaMainCampMenu);
+		else addButton(14, "Back", Encounterback);
 	}
 	
 	public function BelisaTalkYou():void {
@@ -275,7 +276,11 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		}
 		else {
 			outputText("After some time talking with your Drider friend, you excuse yourself. You still need to keep watch over the portal. Belisa gives you an odd smile, smoothing her robe as she stands. \"<i>Come back when you have some more stories, Champion.</i>\"\n\n");
-			doNext(camp.returnToCampUseOneHour);
+			if (BelisaInCamp) {
+				eachMinuteCount(15);
+				doNext(BelisaTalk);
+			}
+			else doNext(camp.returnToCampUseOneHour);
 		}
 	}
 	public function BelisaTalkAbsisters(): void {
@@ -298,7 +303,11 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		outputText("<i>\"...Well, I lived in a Drider colony not far from the deepwoods.\"</i> Belisa begins, fidgeting with her needles. She begins to work on another robe. <i>\"Mother was grooming me to be our town’s manaweaver...but then the demons came.\"</i> She looks at you, and you give her an odd look. <i>\"Oh...You meant...My house?\"</i> Her face brightens a bit. <i>\"Well...Before they came, Driders could come in different types. The type of the parents didn’t really matter, but certain spider-types are better at certain things than others.\"</i> She realizes she’s gotten off track, and blushes, looking down at her weaving.\n\n");
 		outputText("<i>\"Aaaaaanyways, my silk’s slightly different from most Drider’s. It’s lighter, stronger, and when submerged in water, it can do some really cool things. Momma Oaklee taught me how to keep it waterproof while weaving, and how to do other things with it. So, when I needed a safe place to hide...I made one underwater!\"</i>\n\n");
 		BelisaAffection(5);
-		doNext(camp.returnToCampUseOneHour);
+		if (BelisaInCamp) {
+			eachMinuteCount(15);
+			doNext(BelisaTalk);
+		}
+		else doNext(camp.returnToCampUseOneHour);
 	}
 	
 	public function BelisaTalkHer():void {
@@ -769,7 +778,7 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 			else if (BelisaAffectionMeter < 60) outputText("Belisa stares at you for a moment, her blush getting redder. <i>\"...No.\"</i> She shakes herself, slapping her cheeks. <i>\"It’s not that I don’t trust you…But…\"</i> She winces. <i>\"Just…I can’t, okay?\"</i>\n\nYou apologize, and Belisa nods, accepting your apology. She heads back inside, and you back away, leaving her in peace to do…whatever she’s doing now.\n\n");
 			else if (BelisaAffectionMeter < 80) outputText("Belisa blushes, turning her head away from you shyly. <i>\"...[name], I can’t right now, okay?\"</i> She heads back into her home, and you can hear some rustling inside. You can hear a small gasp, and a wet <i>schluck</i>. Is...Is Belisa...?\n\n");
 			else if (BelisaAffectionMeter >= 80) outputText("Your shy Drider looks you up and down, a small bit of drool dripping from the corner of her mouth. She snaps out of it, then immediately turns her head. <i>\"Nope! Nope nope nope nope! Nope!\"</i> She sprints as fast as she can, launching herself face-first into the water. Judging from her reaction…she wants to…? But…Something’s in the way? You’re not sure whether to be amused or insulted by her reaction.\n\n");
-			if (BelisaInCamp) doNext(camp.campLoversMenu);
+			if (BelisaInCamp) doNext(BelisaMainCampMenu);
 			else doNext(camp.returnToCampUseOneHour);
 		}
 	}

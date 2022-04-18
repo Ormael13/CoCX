@@ -79,10 +79,10 @@ import coc.view.ButtonDataList;
 				ZenjiHolli = o["ZenjiHolli"];
 				ZenjiMarried = o["ZenjiMarried"];
 				ZenjiFigMulti = valueOr(o["ZenjiFigMulti"], 0);
-				ZenjiSleepCount =  valueOr(o["ZenjiSleepCount"], 0);
-				ZenjiLoverDays =  valueOr(o["ZenjiLoverDays"], 0);
-				ZenjiLoverDaysTracker =  valueOr(o["ZenjiLoverDaysTracker"], 0);
-				ZenjiTalkCount =  valueOr(o["ZenjiTalkCount"], 0);
+				ZenjiSleepCount = valueOr(o["ZenjiSleepCount"], 0);
+				ZenjiLoverDays = valueOr(o["ZenjiLoverDays"], 0);
+				ZenjiLoverDaysTracker = valueOr(o["ZenjiLoverDaysTracker"], 0);
+				ZenjiTalkCount = valueOr(o["ZenjiTalkCount"], 0);
 			} else {
 				// loading from old save
 				resetState();

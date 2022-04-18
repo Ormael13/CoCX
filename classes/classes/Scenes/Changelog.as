@@ -256,7 +256,7 @@ package classes.Scenes
 			outputText("-Fletching table accessable at Elven Village allows now to craft special arrows - 100 per unit of material used (they would be used first before normal ones) and Reinforce. Like improving string those options takes 8 hours.\n");
 			outputText("-Ayane Worship Scene for Herms & pregnancy. (Daikael the fluff enthusiast)\n");
 			outputText("-Herm PCs now can ask Tamani for her dildo. (Svalkash)\n");
-			outputText("-\n");
+			outputText("-Golems post combat options buttons locations slight moved. Troll post fight option to Leave moved to bottom right corner.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

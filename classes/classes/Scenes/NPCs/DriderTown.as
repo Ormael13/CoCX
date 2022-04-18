@@ -80,10 +80,10 @@ import classes.display.SpriteDb;
 			if (o) {
 				DriderTownComplete = o ["DriderTownComplete"];
 				SisterBangEnabled = o ["SisterBangEnabled"];
-				BelisaKids = o ["BelisaKids"];
-				BelisaPregnancy = o ["BelisaPregnancy"];
-				BelisaKidsEggs = o ["BelisaKidsEggs"];
-				BelisaKidsEggsHatching = o ["BelisaKidsEggsHatching"];
+				BelisaKids = valueOr(o["BelisaKids"], 0);
+				BelisaPregnancy = valueOr(o["BelisaPregnancy"], 0);
+				BelisaKidsEggs = valueOr(o["BelisaKidsEggs"], 0);
+				BelisaKidsEggsHatching = valueOr(o["BelisaKidsEggsHatching"], 0);
 				LilyKidsPC = o ["LilyKidsPC"];
 				LilyKidsPCPregnancy = o ["LilyKidsPCPregnancy"];
 				LilyKidsIzma = o ["LilyKidsIzma"];
@@ -408,7 +408,46 @@ public function LilyBroodmotherMoment():void {
 	doNext(playerMenu);
 	eachMinuteCount(5);
 }
+/*
+public function TyrantiaPreg():void {
+	clearOutput();
+	outputText("You get back to camp, and you see your giantess lover. She stands near your [tent/cabin], and as she sees you, the giantess puts a hand on her slightly swollen belly.\n\n");
+	outputText("<i>“Oh...Hey [name].”</i> She fidgets. <i>“Look...There’s something I need to tell you.”</i> She walks towards you, taking your hands and bringing them to her slightly swollen belly. <i>“I’m...My eggs were fertilized. By you.”</i> She blinks, wincing. <i>“Not that I would...You’re the only one I love, [name].”</i> She wraps her arms around you, hugging you close. <i>“Tomorrow, I’ll lay the eggs. Can you be there?”</i> You nod, and Tyrantia exhales, relieved.\n\n");
+	outputText("<i>“I love you.”</i> She lets go of you, going back to her hutch. <i>“Even though you made it so I can’t fight for another day.”</i> She rubs the top of your head. <i>“Asshole.”</i> Her smile takes the sting entirely out of those words. You can tell that, despite everything, your Drider giantess is very happy.\n\n");
+	doNext(camp.returnToCamp);
+}
 
+public function TyrantiaEggLay():void {
+	clearOutput();
+	outputText("You hear an almost orgasmic moan coming from Tyrantia’s Hutch. You walk over, and inside the longhouse, Tyrantia’s standing over a trough made of wood and silk. The giantess’s cheeks are bright red, and seeing you, she waves you over.\n\n");
+	outputText("<i>“The eggs are coming”</i>, she moans, and you ask her if there’s anything you can do. <i>“Just...Take my hand. It’ll be easier if I have something to hold onto.”</i> You nod, taking your giant lover’s hand. You rub her swollen belly, and Tyrantia groans, this time much more pleasurably. You hear a slight plop as a few silvery orbs fall from your Drider-girl’s leaking twat and into the trough. Speeding up your belly rubs, you try to hold Tyrantia steady as more eggs begin to fall, one or two at a time. On the other side of her, you see Lily rush over. Tyrantia wraps a fuzzy arm around Lily, leaning slightly on her younger sister as the eggs drop.\n\n");
+	outputText("In a few minutes, it’s over. A dozen translucent orbs fill the trough. Tyrantia shudders, falling to her knees, and both you and Lily can’t hold the giantess up. <i>“I’ll put these in your nursery nook, sister”</i>, Lily soothes. <i>“You did a great job. They look healthy so far.”</i> Lily leaves you two alone, and you put a hand on Tyrantia’s cheek, telling her that she did great.\n\n");
+	outputText("<i>“...Not done yet, [name]”</i>, she says weakly. <i>“They need to grow, to hatch...to…”</i> Her eyes are closing, and you tell her that she just delivered. That she needs to rest. Tyrantia looks like she wants to protest, but Belisa walks in, putting a hand on Tyrantia’s shoulder.\n\n");
+	outputText("<i>“Sister, [name] is right. Egg-laying is tiring. Close your eyes, dear sister. We’ll make sure nothing happens to your little ones.”</i> Belisa and Lily help Tyrantia stagger over to the bed, the giantess flopping face-down into it. Belisa and Lily give you warm smiles, Lily taking Tyrantia’s eggs while Belisa puts a hand on your shoulder.\n\n");
+	outputText("<i>“We’ll make sure she rests.”</i> Belisa smiles. <i>“Do what you need to, sweet [name]. We’ll look after her.”</i> You nod, heading back to your part of camp.\n\n");
+	outputText("\n\n");
+	doNext(camp.returnToCampUseOneHour);
+}
+
+public function TyrantiaHatching():void {
+	clearOutput();
+	outputText("You hear a worried cry from Dridertown. <i>“[name], [name]! Come quickly!”</i> Belisa runs over to you, taking your hand. <i>“Tyrantia’s in the egg nook right now. Your podlings are hatching!”</i> You follow Belisa’s lead, sprinting as fast as you can to be by Tyrantia’s side. Belisa leads you into the longhouse, then down a crude set of stairs into an underground, cave-like structure lined with little nooks and crannies. In the back, you see tyrantia, nervously standing over three eggs. There much less than before, but before you can ask, the giantess puts a finger over your mouth.\n\n");
+	outputText("As you watch, one of the eggs begins to tear, a curved horn piercing it from the inside. Fluids drip from the egg, and a tiny head pokes out, horse-ears waggling. Unlike Tyrantia, this little one has white hair, and a single horn poking out. It pulls its spider legs out, one at a time, but quickly slips. Lunging forward, Tyrantia gently takes the newborn by the Drider-half, picking...her up. Her silk-spinners are covered in some sort of skin, and Tyrantia nods, assuring you that it’s normal for Driders to come out like that. Their spinnerets aren’t quite formed yet.\n\n");
+	outputText("She looks at the horn and horse-ears nervously, but you put a hand on your lover’s shoulder, assuring her that as long as they’re not corrupt, it doesn’t matter. A second Drider-baby breaks through their egg, shocking both of you out of your thoughts. This time, you take charge, gently picking your newborn up and holding them in your arms. This one’s a male, and his six eyes look at you, wide-eyed and mouth open. You hold him for a moment, before Tyrantia holds out her hands for her baby boy. You oblige, and as soon as you pass him over, the baby latches onto Tyrantia’s teat, suckling for all he’s worth.\n\n");
+	outputText("This Pod had (3-4 Drider babies, 50% male or female after the first two). You help Tyrantia carry your newborns over to one of the cubbies built into the wall. She swaddles them in blankets made from Belisa’s silk, and you lay them to rest.\n\n");
+	outputText("<i>“They won’t be like this for long,”</i> she says, clearly not liking that fact. <i>“But...They’re so beautiful.”</i> You agree, putting a hand on Tyrantia’s shoulder as you watch your babies go to sleep.\n\n");
+	//if first time, extra text below
+	outputText("(If first time) You ask her about the rest of the eggs, and Tyrantia shrugs, a somewhat pained expression on her face. <i>“Oh, that’s normal.”</i> She shrugs. <i>“Not all eggs either get fertilized, something goes wrong, or they just got punctured on the way out. Three to Ten seems to be the norm for us. Honestly, I expected less than three...all things considered.”</i> You nod, happy that at least something is normal.\n\n");
+	outputText("<i>“...They’ve only got one horn though.”</i> Tyrantia seems nervous. <i>“Did something go wrong?”</i> You assure her that no, nothing went wrong. You tell the nervous mother of your kids that if anything, that’s a great sign.\n\n");
+	outputText("<i>“How so?”</i> She seems nervous. <i>“I would’ve thought no horns at all would be best.”</i> You shake your head, telling her that Unicorns are known for their purity. Who knows, if your kids really are part-unicorn, they might have an aura that’s the opposite of Tyrantia’s.\n\n");
+	outputText("<i>“What, you mean like some sort of...Purity Aura?”</i> This seems to give her pause. <i>“...I hope you’re right. If you are, maybe I’m...Maybe...”</i> She seems to look at you and change her mind about what she’s saying. <i>“I love you.”</i> She hugs you tight, smiling at the little Uni-riders as they struggle with their swaddlings.\n\n");
+if (rand(2) == 0) {
+  a TyrantiaFollower.TyrantiaKids += 3
+} else {
+  b TyrantiaFollower.TyrantiaKids += 4;	
+	}
+} 
+*/
 public function TyrantiaBroodmotherMoment():void {
 	clearOutput();
 	outputText("\"<i></i>\"\n\n");

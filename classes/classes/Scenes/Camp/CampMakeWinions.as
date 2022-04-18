@@ -663,31 +663,31 @@ public class CampMakeWinions extends BaseContent
 			clearOutput();
 			outputText("What you gonna do now?\n\n");
 			menu();
-			addButton(1, "Leave", cleanupAfterCombat);
-			addButton(3, "Scavenge", golemScavenge1);
+			addButton(10, "Scavenge", golemScavenge1);
+			addButton(14, "Leave", cleanupAfterCombat);
 		}
 		public function postFightGolemOptions2():void {
 			clearOutput();
 			if (!player.hasStatusEffect(StatusEffects.GolemScavenge)) player.createStatusEffect(StatusEffects.GolemScavenge,2 + rand(2),0,0,0);
 			outputText("What you gonna do now?\n\nAmount of golems you can scavenge: "+player.statusEffectv1(StatusEffects.GolemScavenge)+"\n\n");
 			menu();
-			addButton(1, "Leave", cleanupAfterCombat);
-			addButton(3, "Scavenge", golemScavenge2);
+			addButton(10, "Scavenge", golemScavenge2);
+			addButton(14, "Leave", cleanupAfterCombat);
 		}
 		public function postFightGolemOptions3():void {
 			clearOutput();
 			outputText("What you gonna do now?\n\n");
 			menu();
-			addButton(1, "Leave", cleanupAfterCombat);
-			addButton(3, "Scavenge", golemScavenge3);
+			addButton(10, "Scavenge", golemScavenge3);
+			addButton(14, "Leave", cleanupAfterCombat);
 		}
 		public function postFightGolemOptions4():void {
 			clearOutput();
 			if (!player.hasStatusEffect(StatusEffects.GolemScavenge)) player.createStatusEffect(StatusEffects.GolemScavenge,2 + rand(2),1,0,0);
 			outputText("What you gonna do now?\n\nAmount of golems you can scavenge: "+player.statusEffectv1(StatusEffects.GolemScavenge)+"\n\n");
 			menu();
-			addButton(1, "Leave", cleanupAfterCombat);
-			addButton(3, "Scavenge", golemScavenge4);
+			addButton(10, "Scavenge", golemScavenge4);
+			addButton(14, "Leave", cleanupAfterCombat);
 		}
 		private function golemScavenge1():void {
 			clearOutput();
