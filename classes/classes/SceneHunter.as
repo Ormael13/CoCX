@@ -195,10 +195,14 @@ public class SceneHunter extends BaseContent {
     public function selectFitNofit(fitF:Function, nofitF:Function, maxSize:Number, compareBy:String = "area"):void {
         //Auto-calls
         if (!dickSelect) {
-            if (player.findCock(1, -1, maxSize, compareBy, false) >= 0)
+            if (player.findCock(1, -1, maxSize, compareBy, false) >= 0) {
+                print("Failed/passed size check - dick fits, but you certainly can try to use something <i>bigger</i> than " + maxSize + " " + compareBy);
                 fitF();
-            else
+            }
+            else {
+                print("Failed/passed size check - dick doesn't fit " + maxSize + " " + compareBy);
                 nofitF();
+            }
             return;
         }
         //Dialogue
@@ -219,12 +223,6 @@ public class SceneHunter extends BaseContent {
 
     //Calls the 'fun' function, finding the biggest cock index in selected limits
     public function callFitNofit(fun:Function, max:Number, compareBy:String = "area"):void {
-        if (!dickSelect) {
-            var x:int = player.cockThatFits(max, compareBy);
-            if (x < 0) x = player.smallestCockIndex(); //selecting smallest here, not biggest. Because you disabled me. Ass.
-            fun(x);
-            return;
-        }
         //Invalid calls may be created, but must NEVER be called.
         var fitF:Function   = curry(fun, player.findCock(1, -1, max, compareBy));
         var nofitF:Function = curry(fun, player.findCock(1, max , -1, compareBy)); //selecting bigger here, because you're cool.
@@ -245,12 +243,19 @@ public class SceneHunter extends BaseContent {
         var smallProvided:Boolean = smallMax >= 0 && smallF != null;
         //Auto-calls
         if (!dickSelect) {
-            if (player.findCock(1, bigMin, totalMax, compareBy) >= 0)
+            if (player.findCock(1, bigMin, totalMax, compareBy) >= 0) {
+                print("Passed? Size check, but alt scene available for dicks smaller than " + bigMin + " " + compareBy);
                 bigF();
-            else if (player.findCock(1, smallProvided ? smallMax : -1, bigMin, compareBy, false) >= 0) //called even if mediumMin is not provived (-1 = no minimum)
+            }
+            else if (player.findCock(1, smallProvided ? smallMax : -1, bigMin, compareBy, false) >= 0) {
+                print("Failed size check, dick must be bigger than " + bigMin + " " + compareBy);
+                if (smallProvided) print("Passed? Another size check, but alt scene available for dicks smaller than " + smallMax + " " + compareBy);
                 mediumF();
-            else
+            }
+            else {
+                print("Failed 2 size checks, dick must be bigger than " + smallMax + " or " + bigMin + " " + compareBy);
                 smallF(); //if smallMax is provided, smallF MUST be provided too
+            }
             return;
         }
         //Dialogue
@@ -286,10 +291,6 @@ public class SceneHunter extends BaseContent {
 
     //Calls the 'fun' function, finding the biggest cock index in selected limits
     public function callBigSmall(fun:Function, bigMin:Number, smallMax:Number = -1, compareBy:String = "area", totalMax:Number = -1):void {
-        if (!dickSelect) {
-            fun(player.findCock(1, -1, totalMax, compareBy));
-            return;
-        }
         //Invalid calls may be created, but must NEVER be called.
         var bigF:Function   = curry(fun, player.findCock(1, bigMin, totalMax, compareBy));
         var mediumF:Function= curry(fun, player.findCock(1, smallMax , bigMin, compareBy));
@@ -305,26 +306,22 @@ public class SceneHunter extends BaseContent {
     * @param    twoF        Multicock / Two cocks (or more)
     * @param    threeF      (Optional) Three (or more)
     * @param    fourF       (Optional) Four (or more)
-    * @param    moreF       (Optional) More (5, 10)
     */
     public function selectSingleMulti(singleF:Function, twoF:Function, threeF:Function = null, fourF:Function = null, compareBy:String = "area", totalMax:Number = -1):void {
         var cnt:int = player.countCocks(-1, totalMax, compareBy);
         //Auto-calls
         if (!dickSelect) {
+            if (printChecks) { //Print check, at least?
+                var max:int = fourF != null ? 4 : threeF != null ? 3 : twoF != null ? 2 : 1;
+                if (cnt < max) print("Failed: multicock check, up to " + max);
+            }
             if (fourF  != null && cnt >= 4)
                 fourF();
             else if (threeF != null && cnt >= 3)
                 threeF();
             else if (twoF   != null && cnt >= 2)
-                fourF();
-            else if (singleF != null)
-                singleF();
-            return;
-        }
-        //If single, no bother
-        if (cnt == 1) {
-            print("Failed: multicock check");
-            singleF();
+                twoF();
+            else singleF();
             return;
         }
         //Dialogue
@@ -361,14 +358,14 @@ public class SceneHunter extends BaseContent {
     public function get other():Boolean {
         return flags[kFLAGS.SCENEHUNTER_OTHER];
     }
-    //nothing more here for now... Will it just check the value, or new next will be here too?
 
-    //Recalling is 'technically' a SceneHunter feature, so I'll store its flag here.
-    //Set to true to disable everything but text in recalled scenes
+    /*
+    Recalling is 'technically' a SceneHunter feature, so I'll store its flag here.
+    Set to true to disable everything but text in recalled scenes
+    */
     public var _recalling:Boolean = false; //set to true when a scene is recalled.
 
     //No disabling flag for this one, but I'll leave it here for now in case I'll need to lock it..
-
     /**
      * The dialogue to select scene options based on corruption.
      * When disabled, overrides "tentacle always fit" behavior.

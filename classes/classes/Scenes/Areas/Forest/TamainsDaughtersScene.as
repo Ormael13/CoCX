@@ -218,7 +218,7 @@ private function fuckYoDaughtersHomie():void {
 		var daughters:Number = int(flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] * 0.75);
 		sceneHunter.print("Present daughters: " + daughters);
 		if (player.cockArea(x) <= 50) {
-			outputText("You pick a random body from the crowd, impaling her on your [cock " + x + "].  The others crowd around, jealous of your chosen cock-sleeve.  She looks up at you, blissful as she hugs against you and grinds her tight body down, raping her virginal hole on the firmness of your [cock " + x + "].  The others massage your [legs], licking and nibbling your skin as they compete to tempt you into taking them next.");
+			outputText("You pick a random body from the crowd, impaling her on your [cock " + (x+1) + "].  The others crowd around, jealous of your chosen cock-sleeve.  She looks up at you, blissful as she hugs against you and grinds her tight body down, raping her virginal hole on the firmness of your [cock " + (x+1) + "].  The others massage your [legs], licking and nibbling your skin as they compete to tempt you into taking them next.");
 			if (tamaniPresent) {
 				outputText("  Tamani pushes aside the smaller sluts and ");
 				if (player.balls > 0) outputText("cups your [balls].");
@@ -256,7 +256,7 @@ private function fuckYoDaughtersHomie():void {
 			outputText("The pressure of orgasm spikes as the first blast takes ");
 			if (!tamaniPresent) outputText("your goblin daughter");
 			else outputText("Tamani");
-			outputText(" in her waiting womb, painting her walls white.  Each successive glob mixes into the slurry of sexual fluids brewing in her slit, until it starts to dribble out.  The goblin on your face cums noisily, filling your mouth with female moisture.   With no other choice, you swallow it down while your tongue keeps trying to pleasure her.  A sudden void of sensation and cold air overtakes your [cock " + x + "] as you hear the goblins squabbling.  In no time flat a fresh cunt is squeezing over your still-orgasming member, clamping down to form a tight seal as you pump it full of even more fertile seed.\n\n");
+			outputText(" in her waiting womb, painting her walls white.  Each successive glob mixes into the slurry of sexual fluids brewing in her slit, until it starts to dribble out.  The goblin on your face cums noisily, filling your mouth with female moisture.   With no other choice, you swallow it down while your tongue keeps trying to pleasure her.  A sudden void of sensation and cold air overtakes your [cock " + (x+1) + "] as you hear the goblins squabbling.  In no time flat a fresh cunt is squeezing over your still-orgasming member, clamping down to form a tight seal as you pump it full of even more fertile seed.\n\n");
 
 			//(Go to End if < 10 daughters), else keep goin
 			if (daughters > 10) {
@@ -277,7 +277,7 @@ private function fuckYoDaughtersHomie():void {
 					outputText("The first daughter to take your seed climbs onto your face and plants herself there, smearing your [face] with a mixture of cum and vaginal wetness.  She pinches her budding chest and grinds on top of you, asking, \"<i>You realize I'm going to be pregnant don't you?  I can already feel your little swimmers tickling all my eggs.  Can you imagine what I'll look like in a few days?  With bigger tits leaking milk and my belly stuffed with offspring?  Just let your dick do the thinking and keep cumming until we're all stuffed, ok?  Don't hold back now, we're just aching for more!</i>\"\n\n");
 				}
 
-				outputText("The perverse thoughts get to you, worming their way inside you until they reach your [cock " + x + "].  It clenches and explodes, packing the slut's womb with cream.  She's lifted off by her sisters, and your next blast fires into the air, splattering over the assembled goblins with a wet plop.  Many gather it up, licking and slurping it, or shoveling it directly into their waiting cunts.  Another pussy is placed on you, and the sensation of new flesh taking you makes the contraction feel even longer.  She staggers off a few moments later, looking pregnant already.  The cycle repeats until");
+				outputText("The perverse thoughts get to you, worming their way inside you until they reach your [cock " + (x+1) + "].  It clenches and explodes, packing the slut's womb with cream.  She's lifted off by her sisters, and your next blast fires into the air, splattering over the assembled goblins with a wet plop.  Many gather it up, licking and slurping it, or shoveling it directly into their waiting cunts.  Another pussy is placed on you, and the sensation of new flesh taking you makes the contraction feel even longer.  She staggers off a few moments later, looking pregnant already.  The cycle repeats until");
 				if (daughters < 20) outputText(" the majority ");
 				else outputText(" half ");
 				outputText("of the girls have spooge-slicked cunts and big grins.\n\n");
@@ -291,7 +291,7 @@ private function fuckYoDaughtersHomie():void {
 				if (daughters > 20) {
 					outputText("You lie there, feeling like an empty husk.  The crowd starts to disperse");
 					if (tamaniPresent) outputText(" while Tamani walks away");
-					outputText(", but a few of the little sluts don't look satisfied yet.  They crowd around.  One straddles your chest and begins dancing in an erotic display.  Somehow, your [cock " + x + "] still manages to twitch weakly in response.  Another goblin opens a satchel and pulls out some fruit and a canteen.  She delicately begins feeding you, clearing wanting you to regain your strength.  It seems they aren't finished with you yet.  You down what feels like gallons of water, and then find yourself presented with another flask of pink goo.  Shrugging, you gulp it down willingly, enjoying the sensation of your [cock] re-inflating to its maximum, turgid size.\n\n");
+					outputText(", but a few of the little sluts don't look satisfied yet.  They crowd around.  One straddles your chest and begins dancing in an erotic display.  Somehow, your [cock " + (x+1) + "] still manages to twitch weakly in response.  Another goblin opens a satchel and pulls out some fruit and a canteen.  She delicately begins feeding you, clearing wanting you to regain your strength.  It seems they aren't finished with you yet.  You down what feels like gallons of water, and then find yourself presented with another flask of pink goo.  Shrugging, you gulp it down willingly, enjoying the sensation of your [cock] re-inflating to its maximum, turgid size.\n\n");
 
 					outputText("Sighing happily, you lie there as the remainder of your daughters take you, fucking you one after another.  The whole time you don't stop eating, converting all of the girl's rations into gallons of baby batter.  Your daughters don't seem to mind, and take turns posing sexily and feeding you while they take turns riding your pole until they're bloating and pregnant.  By the time the last one rises up on shaky legs, you're exhausted and your eyes are drifting closed.  ");
 					if (daughters < 50) outputText("Girlish giggles sooth you to sleep as the crowd slowly disperses.");
@@ -412,7 +412,7 @@ private function legTamanisDaughtersRAEPYou():void {
 			outputText("A sudden flow of fluids soaks your [face] and dribbles from your chin.  The face-riding goblin bucks like a bronco, nearly breaking your nose before the strength drains from her body and she slides off into the dirt, panting weakly.   Confronted with the sight of ");
 			if(cocks > 2) outputText("so many girls impaled on your flesh");
 			else if(cocks == 2) outputText("your daughters' whorish expressions of pleasure");
-			else outputText("the sultry gaze of Tamani's oldest daughter as she rides your [cock "+x+"]");
+			else outputText("the sultry gaze of Tamani's oldest daughter as she rides your [cock "+(x+1)+"]");
 			outputText(", you can do nothing but cum.  ");
 			if(cocks > 1) outputText("Twitching powerfully, your body unloads into the tight, fertile cum-receptacles, giving them exactly what they want.");
 			else outputText("Twitching powerfully, your body unloads into the tight, fertile cum-receptacle, giving her exactly what she wants.");
@@ -444,7 +444,7 @@ private function legTamanisDaughtersRAEPYou():void {
 				if (player.biggestTitSize() < 1) outputText("chest");
 				else outputText(allBreastsDescript());
 				outputText(" as she mounts you, ");
-				outputText("squeezing her dripping wet cunt around your [cock " + x + "].  She explains, caressing your cheek as you start to drool, \"<i>You see, [name], this potion is a special one.  You can probably feel it now, emptying your mind and shutting down your thought processes.  That's what it's supposed to do.  You won't remember anything when I'm done either, aside from how great my pussy feels on your [cock " + x + "]</i>.\"\n\n");
+				outputText("squeezing her dripping wet cunt around your [cock " + (x+1) + "].  She explains, caressing your cheek as you start to drool, \"<i>You see, [name], this potion is a special one.  You can probably feel it now, emptying your mind and shutting down your thought processes.  That's what it's supposed to do.  You won't remember anything when I'm done either, aside from how great my pussy feels on your [cock " + (x+1) + "]</i>.\"\n\n");
 
 				outputText("You drool, accepting the truth.  She's so right, there's no way you'd ever forget the feeling of hot wetness as it rubs around your shaft.  Tamani keeps talking, confidently riding you as your mind soaks up her instructions, \"<i>My hot little cunt needs filling, and your cock knows it.  It wants it.</i>\"  She leans back, allowing you a glimpse of pinkness and sticky female juices while she teases her button, \"<i>Just the sight of my pussy gets you hard and ready.  The thought of feeling that hot hole mounting you just diverts all your blood and willpower into your ready fuckstick.  You CAN'T resist my pussy.</i>\"\n\n");
 
@@ -474,27 +474,27 @@ private function legTamanisDaughtersRAEPYou():void {
 				if (daughters < 40) sceneHunter.print("Failed check: need more daughters!");
 				//(SMALL PACK)
 				if(daughters < 20) {
-					outputText("The smaller girls take turns, mounting your cum-soaked rod one after another, using their hungry cunts like cum-sponges until your [cock "+x+"] is polished with feminine fluids and cleaned of any residual jism.  After so many repeated mountings, you're hard and ready to cum again, and the horny sluts know it.   You're crammed back into each one of them, one after another in a barrage of quick fucks.  Each girl is only given a few seconds on your rod before she's pulled off by her peers and replaced by another ecstatic goblin.  While waiting for their next turn, the spare girls tease you, tweaking your " + nippleDescript(0) + "s while licking your ears and whispering, \"<i>Don't cum for her, it'll be much better in my hot little box,</i>\" or, \"<i>You won't cum for that skank, will you?  Save your baby-batter for me!</i>\"\n\n");
+					outputText("The smaller girls take turns, mounting your cum-soaked rod one after another, using their hungry cunts like cum-sponges until your [cock "+(x+1)+"] is polished with feminine fluids and cleaned of any residual jism.  After so many repeated mountings, you're hard and ready to cum again, and the horny sluts know it.   You're crammed back into each one of them, one after another in a barrage of quick fucks.  Each girl is only given a few seconds on your rod before she's pulled off by her peers and replaced by another ecstatic goblin.  While waiting for their next turn, the spare girls tease you, tweaking your " + nippleDescript(0) + "s while licking your ears and whispering, \"<i>Don't cum for her, it'll be much better in my hot little box,</i>\" or, \"<i>You won't cum for that skank, will you?  Save your baby-batter for me!</i>\"\n\n");
 
-					outputText("Amazingly, you orgasm again.  An orgiastic squeal erupts from your [cock "+x+"]'s current owner, breaking off into pants and gasps ");
+					outputText("Amazingly, you orgasm again.  An orgiastic squeal erupts from your [cock "+(x+1)+"]'s current owner, breaking off into pants and gasps ");
 					if(player.cumQ() < 100) outputText("as you twitch underneath her, emptying the last of your cum inside her.");
 					else if(player.cumQ() < 500) outputText("as you twitch underneath her, pumping her full of cum, thoroughly seeding her womb with spunk.");
 					else outputText("as you twitch underneath her in powerful spasms, blasting huge gouts of cum into her waiting body until her belly is bloated with seed and it begins to squirt out around you in time with each eruption of spunk.");
-					outputText("  Disappointed moans rise up from the others as they realize they've lost the cum-lottery.   The winner, patting her belly happily, stands up, filling the air with a loud 'slurrrrrp' as her twat noisily releases your [cock "+x+"].");
+					outputText("  Disappointed moans rise up from the others as they realize they've lost the cum-lottery.   The winner, patting her belly happily, stands up, filling the air with a loud 'slurrrrrp' as her twat noisily releases your [cock "+(x+1)+"].");
 					if(player.cumQ() >= 500) outputText("  A few enterprising goblins gather around, gathering up the loose spunk and shoveling it into their holes.");
 					outputText("\n\n");
 
-					outputText("Tired from the sexual acrobatics, your daughters gather up their possessions and begin dispersing, but a few stick around to lick your [cock "+x+"] clean and give you deep french-kisses.  Exhausted as well, you begin to doze off, but not before a girlish voice whispers in your ear, \"<i>Thanks daddy!  I'll bring your daughters back once they've grown up so you can have their cherries too.</i>\"\n\n");
+					outputText("Tired from the sexual acrobatics, your daughters gather up their possessions and begin dispersing, but a few stick around to lick your [cock "+(x+1)+"] clean and give you deep french-kisses.  Exhausted as well, you begin to doze off, but not before a girlish voice whispers in your ear, \"<i>Thanks daddy!  I'll bring your daughters back once they've grown up so you can have their cherries too.</i>\"\n\n");
 				}
 				//(MEDIUM PACK (or bigger))
 				else {
-					outputText("The smaller girls take turns, mounting your cum-soaked rod one after another, using their hungry cunts like cum-sponges until your [cock "+x+"] is polished with feminine fluids and cleaned of any residual jism.  After so many repeated mountings, you're hard and ready to cum again, and the horny sluts know it.   You're crammed back into each one of them, one after another in a barrage of quick fucks.  Each girl is only given a few seconds on your rod before she's pulled off by her peers and replaced by another ecstatic goblin.  While waiting for their next turn, the spare girls tease you, tweaking your " + nippleDescript(0) + "s while licking your ears and whispering, \"<i>Don't cum for her, it'll be much better in my hot little box,</i>\" or, \"<i>You won't cum for that skank, will you?  Save your babby-batter for me!</i>\"\n\n");
+					outputText("The smaller girls take turns, mounting your cum-soaked rod one after another, using their hungry cunts like cum-sponges until your [cock "+(x+1)+"] is polished with feminine fluids and cleaned of any residual jism.  After so many repeated mountings, you're hard and ready to cum again, and the horny sluts know it.   You're crammed back into each one of them, one after another in a barrage of quick fucks.  Each girl is only given a few seconds on your rod before she's pulled off by her peers and replaced by another ecstatic goblin.  While waiting for their next turn, the spare girls tease you, tweaking your " + nippleDescript(0) + "s while licking your ears and whispering, \"<i>Don't cum for her, it'll be much better in my hot little box,</i>\" or, \"<i>You won't cum for that skank, will you?  Save your babby-batter for me!</i>\"\n\n");
 
 					outputText("Amazingly, you orgasm again.  An orgiastic squeal erupts from your [cock]'s current owner, breaking off into pants and gasps ");
 					if(player.cumQ() < 100) outputText("as you twitch underneath her, emptying the last of your cum inside her.");
 					else if(player.cumQ() < 500) outputText("as you twitch underneath her, pumping her full of cum, thoroughly seeding her womb with spunk.");
 					else outputText("as you twitch underneath her in powerful spasms, blasting huge gouts of cum into her waiting body until her belly is bloated with seed and it begins to squirt out around you in time with each eruption of spunk.");
-					outputText("  Disappointed moans rise up from the others as they realize they've lost the cum-lottery.   The winner, patting her belly happily, stands up, filling the air with a loud 'slurrrrrp' as her twat noisily releases your [cock "+x+"].");
+					outputText("  Disappointed moans rise up from the others as they realize they've lost the cum-lottery.   The winner, patting her belly happily, stands up, filling the air with a loud 'slurrrrrp' as her twat noisily releases your [cock "+(x+1)+"].");
 					if(player.cumQ() >= 500) outputText("A few enterprising goblins gather around, gathering up the loose spunk and shoveling it into their holes.");
 					outputText("\n\n");
 
@@ -540,7 +540,7 @@ private function legTamanisDaughtersRAEPYou():void {
 				if(daughters < 20) outputText("pert ");
 				else if(daughters > 40) outputText("heavy ");
 				outputText("breasts over every part of it.");
-				if(cocks == 2) outputText("  Another one of the petite sluts climbs aboard your [cock "+y+"], squealing happily to her sister as she joins her in riding you.");
+				if(cocks == 2) outputText("  Another one of the petite sluts climbs aboard your [cock "+(y+1)+"], squealing happily to her sister as she joins her in riding you.");
 				if(cocks > 2) {
 					outputText("  A third, wearing slutty pink make-up with platinum blonde hair, lays out across your ");
 					if(cocks > 3) outputText("remaining " + multiCockDescriptLight());
@@ -600,7 +600,7 @@ private function legTamanisDaughtersRAEPYou():void {
 				if(cocks == 1) outputText("The purple-lipped cock-slut grabs your [cock] and makes a show of smearing the slippery fluid over your shaft, lubricating it as she jacks you off.  Her warm lips form a tight seal on your [cockhead] as the young goblin begins lapping at your pre-cum as she sucks it from your urethra.   It feels heavenly, and your " + hipDescript() + " pump weakly into the air in an instinctive bid to enhance the sensation.");
 				//(multiple)
 				else {
-					outputText("The purple-lipped cock-slut grabs hold of one of your [cocks] and makes a show of smearing the slippering fluid over the shaft, lubricating it as she begins to jack you off.  Her sisters, taking the cue, step over the other sated sluts and grab hold of your [cock "+y+"], fondling it lovingly.  ");
+					outputText("The purple-lipped cock-slut grabs hold of one of your [cocks] and makes a show of smearing the slippering fluid over the shaft, lubricating it as she begins to jack you off.  Her sisters, taking the cue, step over the other sated sluts and grab hold of your [cock "+(y+1)+"], fondling it lovingly.  ");
 					if(cocks > 2) outputText("They spread out until every one of your [cocks] has at least one goblin hanging off it, stroking and touching you.  ");
 					outputText("It feels heavenly, and your " + hipDescript() + " pump weakly into the air in an instinctive bid to enhance the sensation.");
 				}
@@ -613,7 +613,7 @@ private function legTamanisDaughtersRAEPYou():void {
 
 				outputText("Ripples of convulsive pleasure wrack your midsection as you feel the muscular contractions of your orgasm threatening to tear you apart.   Your ");
 				//(single)
-				if(cocks == 1) outputText("[Cock "+x+"] blasts a wave of seed directly into your cock-obsessed daughter's mouth, flooding it until she falls off of it with jism dripping from her nostrils.  You squirt a massive spurt high into the air overhead, and more than a few goblins are running around with their tongues out, trying to catch it in their mouths.   Each wave of seed is larger than the last, erupting from your [cock] like a geyser.   Soon everyone is spattered in a layer of the stuff, and your gut-clenching orgasm tapers down to a more reasonable, but constant, slow flow of semen.  Each of your daughters comes up and takes turns angling your shaft into her waiting cunt, allowing the thick fluid to fill her to capacity before waddling off.  Then the next girl does the same, and the next, and the next...");
+				if(cocks == 1) outputText("[Cock "+(x+1)+"] blasts a wave of seed directly into your cock-obsessed daughter's mouth, flooding it until she falls off of it with jism dripping from her nostrils.  You squirt a massive spurt high into the air overhead, and more than a few goblins are running around with their tongues out, trying to catch it in their mouths.   Each wave of seed is larger than the last, erupting from your [cock] like a geyser.   Soon everyone is spattered in a layer of the stuff, and your gut-clenching orgasm tapers down to a more reasonable, but constant, slow flow of semen.  Each of your daughters comes up and takes turns angling your shaft into her waiting cunt, allowing the thick fluid to fill her to capacity before waddling off.  Then the next girl does the same, and the next, and the next...");
 				//(Multi)
 				else outputText("[cock All] blast waves of seed directly into your cock-obsessed daughters' mouths, flooding them until they fall off with jism dripping from their nostrils.   You spurt massive loads high into the air overhead, and more than a few goblins are running around with their tongues out, trying to catch the seed in their mouths.  Each wave is larger than the last, erupting from your [cocks] like a geyser.  Soon everyone is covered in a thick coating of the stuff, and your gut-clenching orgasm tapers down to a more reasonable, but constant, slow flow of semen.  Each of your daughters comes up and guides a shaft into her waiting cunt, filling herself to capacity with the thick fluid before waddling off.   Then the next set of girls does the same, and the next, and the next....");
 				outputText("You're done in by the effort, and quickly lose consciousness.");
