@@ -786,7 +786,7 @@ public class KitsuneScene extends BaseContent
 		{
 			clearOutput();
 			outputText("Something just doesn't sit right with you about this woman, and you cautiously raise your [weapon], watching her carefully.\n\n");
-			startCombat(new Kitsune(monster.hairColor));// TODO refactor
+			startCombat(new Kitsune(monster.hairColor));
 			kitsuneSprite();
 			//Blonde
 			if (monster.hairColor == "blonde") outputText("\"<i>Ah, so we're going to play like that, are we?</i>\"  she says with a grin, making a small clawing motion in the air.  \"<i>Very well my darling, if that's how you want it, but I won't be taking it easy on you just because you're cute~.</i>\"");

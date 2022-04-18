@@ -45,7 +45,6 @@ public class Parser
 			{
 
 				// ---------------------------------------------------------------------------------
-				// TODO: Get rid of this shit.
 				// UGLY hack to patch legacy functionality in TiTS
 				// This needs to go eventually
 
@@ -153,7 +152,6 @@ public class Parser
 			if (lookupParserDebug) trace("WARNING: trying to look-up two-word tag in parent");
 
 			// ---------------------------------------------------------------------------------
-			// TODO: Get rid of this shit.
 			// UGLY hack to patch legacy functionality in TiTS
 			// This needs to go eventually
 
@@ -469,7 +467,6 @@ public class Parser
 			//
 
 
-			// TODO: (NOT YET) Allows nested condition parenthesis, because I'm masochistic
 
 
 			// POSSIBLE BUG: A actual statement starting with "if" could be misinterpreted as an if-statement

@@ -401,7 +401,6 @@ import classes.Stats.Buff;
 		}
 
 		// Player opts to leave rather than do anything
-		// TODO: Bulk this up some, its way short.
 		protected function fuckinChegIt():void
 		{
 			hideUpDown();
@@ -1293,7 +1292,6 @@ import classes.Stats.Buff;
 
 			outputText("  You jackhammer against her, extending your orgasm for as long as you can, but eventually your ejaculation ends, leaving you sprawled on the cavern floor panting for breath.  Izumi refuses to let you off that easily, however, keeping your softening cock lodged deep within her ass for as long as possible, squatting over you with a satisfied smirk on her face.\n\n");
 
-			// TODO: probably add some cumq variants here
 
 			outputText("\"<i>Hah. So, looks like you had fun after all, huh?</i>\" she says when she finally deigns to release you, your softening erection slipping slickly free of her as she stands and stretches, the muscles undulating attractively across her body.  \"<i>It’s been a long time since I had someone else to do that kind of thing with, so I’m glad to know I’m still up to scratch, you know? Ahaha!</i>\"\n\n");
 
@@ -1331,7 +1329,6 @@ import classes.Stats.Buff;
 			else outputText(" load");
 			outputText(" into her twitching pussy.\n\n");
 
-			// TODO: Add cumq variants
 
 			outputText("When you finally release her, the two of you can only gasp for breath as you sag back onto the ground.  Izumi avoids your gaze, blushing furiously as she absently wipes her mouth with the back of her hand.\n\n");
 
@@ -1345,7 +1342,6 @@ import classes.Stats.Buff;
 
 		// No bits, no scenes. Izumi had no scenes written for genderless players. In some cases, other scenes would do a p. reasonable job with some reformatting.
 		// This is one of the ones where I think something new has to be written. Get it coded, get it working, then considering doing it.
-		// TODO: Actual genderless scene potentials
 		// Eatin the oni; might as well put your mouf to work rite?
 		protected function noDickNoVagNoService():void
 		{
@@ -1387,7 +1383,6 @@ import classes.Stats.Buff;
 			
 			flags[kFLAGS.IZUMI_SEEN_PC_GENDER] = player.gender;
 
-			// TODO: Theres some logical holes with where/what Izumi can know about the players actual gender (A Standard Problem I guess)
 
 			outputText("Before you can protest, you find yourself being spun effortlessly upside down by the oversized Oni, suspended by your");
 			if(player.isNaga()) outputText(" tail");

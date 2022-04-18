@@ -1509,7 +1509,6 @@ private function rubiAppearance():void {
 }
 
 //Get Dressed
-//FIXME These should be stored and saved in their own array, instead of flags
 private function playDressUp():void {
 	clearOutput();
 	rubiSprite();
@@ -1590,7 +1589,6 @@ private function playDressUp():void {
 	}
 	addButton(14,"Back",rubiAppearance);
 }
-//FIXME use a submenu instead of this second function
 private function playDressUp2():void {
 	clearOutput();
 	rubiSprite();
@@ -3593,7 +3591,6 @@ private function pickAnItemToFeedRubi():void {
 
 
 //(Give Clothes)
-//FIXME These should be stored and saved in their own string array, instead of flags
 public function giveRubiClothes(itype:ItemType = null):void {
 	clearOutput();
 	rubiSprite();

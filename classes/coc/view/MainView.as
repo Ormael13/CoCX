@@ -623,7 +623,6 @@ public class MainView extends Block {
 
 	//////// Bottom Button Methods ////////
 
-	// TODO: Refactor button set-up code to use callback and toolTipViewText here.
 	public function setButton(index:int, label:String = '', callback:Function = null, toolTipViewText:String = ''):void {
 		if (index < 0 || index >= BOTTOM_BUTTON_COUNT) {
 			trace("MainView.setButton called with out of range index:", index);

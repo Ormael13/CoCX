@@ -1304,7 +1304,6 @@ public function saveGameObject(slot:String, isFile:Boolean):void
 
 		// Keybinds
         saveFile.data.controls = CoC.instance.inputManager.SaveBindsToObj();
-        // TODO @Oxdeception recheck
 		saveFile.data.world = [];
 		saveFile.data.world.x = [];
 		for each(var npc:XXCNPC in XXCNPC.SavedNPCs){
@@ -2313,7 +2312,6 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 
 
 				// backwards compatibility
-				//TODO is there a better way to do this?
 				if(saveFile.data.vaginas[i].clitLength == undefined) {
 					player.vaginas[i].clitLength = VaginaClass.DEFAULT_CLIT_LENGTH;
 					trace("Clit length was not loaded, setting to default.");
@@ -2804,7 +2802,6 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			game.inputManager.LoadBindsFromObj(saveFile.data.controls);
 		}
 
-		// TODO @Oxdeception recheck
 		XXCNPC.unloadSavedNPCs();
 		if(saveFile.data.world == undefined){saveFile.data.world = [];}
 		if(saveFile.data.world.x == undefined){saveFile.data.world.x = [];}

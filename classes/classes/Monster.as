@@ -1907,25 +1907,6 @@ import flash.utils.getQualifiedClassName;
 				createStatusEffect(StatusEffects.Stunned, 2, 0, 0, 0);
 				return;
 			}
-			//If grappling... TODO implement grappling
-//			if (game.gameState == 2) {
-//				game.gameState = 1;
-				//temperment - used for determining grapple behaviors
-				//0 - avoid grapples/break grapple
-				//1 - lust determines > 50 grapple
-				//2 - random
-				//3 - love grapples
-				/*
-				 //		if(temperment == 0) eGrappleRetreat();
-				 if (temperment == 1) {
-				 //			if(lust < 50) eGrappleRetreat();
-				 mainClassPtr.doNext(3);
-				 return;
-				 }
-				 mainClassPtr.outputText("Lust Placeholder!!");
-				 mainClassPtr.doNext(3);
-				 return;*/
-//			}
 			performCombatAction();
 		}
 
@@ -2283,7 +2264,7 @@ import flash.utils.getQualifiedClassName;
 			}
 			if (lustDelta > 0) {
 				//Imp mob uber interrupt!
-			  	if(hasStatusEffect(StatusEffects.ImpUber)) { // TODO move to proper class
+			  	if(hasStatusEffect(StatusEffects.ImpUber)) {
 					outputText("\nThe imps in the back stumble over their spell, their loincloths tenting obviously as your display interrupts their casting.  One of them spontaneously orgasms, having managed to have his spell backfire.  He falls over, weakly twitching as a growing puddle of whiteness surrounds his defeated form.");
 					//(-5% of max enemy HP)
 					HP -= bonusHP * .05;

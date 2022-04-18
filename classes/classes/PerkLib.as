@@ -16,7 +16,6 @@ public class PerkLib
 		public function get game():CoC{
 			return CoC.instance;
 		}
-		// UNSORTED perks TODO these are mostly incorrect perks: tested but never created
 		public static const Buttslut:PerkType = mk("Buttslut", "Buttslut",
 				"");
 		public static const Focused:PerkType = mk("Focused", "Focused",
@@ -7046,4 +7045,4 @@ public class PerkLib
 	}
 	initDependencies();
 }
-}
+}
