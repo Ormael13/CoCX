@@ -74,71 +74,86 @@ public class BeeGirlScene extends BaseContent
 			if (clearScreen) clearOutput();
 			spriteSelect(SpriteDb.s_bee_girl);
 			outputText("That's when she comes into view.  A great woman, yellow and black, a Bee-like handmaiden would be the best comparison.  She sits atop a great flower while humming her tune, happily picking the petals off of another flower.  Her body is thin, save her abdomen.  Her head is more humanoid than bee, with black eyes, floppy antennae, and luscious black lips that glimmer wetly");
+			//Alraune race
 			if (player.lowerBody == LowerBody.PLANT_FLOWER) {
 				AlrauneAndBee();
 				return;
 			}
+			else sceneHunter.print("Check failed: Alraune body");
+			//Exgartuan
 			if (player.statusEffectv1(StatusEffects.Exgartuan) == 1 && player.cockArea(0) > 100 && player.statusEffectv2(StatusEffects.Exgartuan) == 0) { //Exgartuan messes with things!
 				beeEncounterWithExgartuan();
 				return;
 			}
+			else sceneHunter.print("Check failed: Exgartuan");
+			//Worms
 			if (player.hasStatusEffect(StatusEffects.Infested) || player.hasStatusEffect(StatusEffects.WormPlugged)) { //Worms now mess with things too!
 				beeEncounterWithWorms();
 				return;
 			}
+			//Bee-morph
 			var isBeeMorph:Boolean = player.race() == "bee-morph";
 			if (player.hasCock() && (player.findCockWithType(CockTypesEnum.BEE, 1, 50, -1) >= 0 || isBeeMorph && player.biggestCockArea() >= 50)) {
 				outputText(" in the light.\n\n");
                 if (isBeeMorph && player.hasVagina() && rand(2) == 0) //herms!
 				    beeEncounterAsBeeMorphFemale();
-                else
-				    beeEncounterAsBeeMorphMaleOrGiantCock(isBeeMorph);
+                else beeEncounterAsBeeMorphMaleOrGiantCock(isBeeMorph);
+				return;
 			}
 			else if (isBeeMorph) {
 				outputText(" in the light.\n\n");
 				beeEncounterAsBeeMorphFemale();
+				return;
 			}
-			else if (flags[kFLAGS.BEE_GIRL_COMBAT_LOSSES] + flags[kFLAGS.BEE_GIRL_COMBAT_WINS_WITH_RAPE] + flags[kFLAGS.BEE_GIRL_COMBAT_WINS_WITHOUT_RAPE] >= 5) {
+			else sceneHunter.print("Check failed: bee race, cock area greater than 50 (or just big enough bee cock)");
+			//Fighs counter
+			if (flags[kFLAGS.BEE_GIRL_COMBAT_LOSSES] + flags[kFLAGS.BEE_GIRL_COMBAT_WINS_WITH_RAPE] + flags[kFLAGS.BEE_GIRL_COMBAT_WINS_WITHOUT_RAPE] >= 5) {
 				if (flags[kFLAGS.BEE_GIRL_COMBAT_LOSSES] > flags[kFLAGS.BEE_GIRL_COMBAT_WINS_WITH_RAPE] + flags[kFLAGS.BEE_GIRL_COMBAT_WINS_WITHOUT_RAPE])
 					beeEncounterSheBeatsYouRegularly();
 				else if (flags[kFLAGS.BEE_GIRL_COMBAT_WINS_WITHOUT_RAPE] >= flags[kFLAGS.BEE_GIRL_COMBAT_WINS_WITH_RAPE])
 					beeEncounterSheFearsYou();
 				else beeEncounterSheDesiresYou();
+				return;
 			}
-			else {
-				switch (attitude) {
-					case BEE_GIRL_PLAYER_AFRAID:
-						beeEncounterAfraid();
-						break;
-					case BEE_GIRL_PLAYER_VOLUNTARY_EGGING:
-						beeEncounterAfraidRepeat();
-						break;
-					case BEE_GIRL_PLAYER_DISGUSTED:
-						beeEncounterDisgusted();
-						break;
-					case BEE_GIRL_PLAYER_DUTY:
-						beeEncounterDuty();
-						break;
-					default: //Any other attitude options lead to the classic bee encounter
-						outputText(", bending into a smile as she sees you approach.  Standing, she welcomes you in, her wings giving a small buzz as her arms spread open for a welcoming embrace.\n\n");
-						//Chance to avoid raaaaeeeeep
-						if (player.lust < player.maxLust() * 0.75) {
-							outputText("You barely stop yourself from gleefully throwing yourself into her arms.  You realize the harmonic buzzing of her wings and the unearthly scent of her honey briefly robbed you of your reason.  Feeling momentarily more clear-headed, what do you do?");
-							menu();
-							addButton(0, "Fight", fightTheBeeGirl);
-							addButton(1, "Talk", beeTalk);
-                            if (player.gender == 3)
-                                if (player.lib > 50)
-							        addButton(2, "Seduce", seduceBeeGirl);
-                                else
-                                    addButtonDisabled(2, "Seduce", "You need more libido to overpower her pheromones.");
-							else
-                                addButtonDisabled(2, "Seduce", "Suprising it was for all the time here... sadly only herm part is mostly done without male/female varaints so i will look into some writer help with finishing this scene for all genders soon.");
-							addButton(4, "Leave", camp.returnToCampUseOneHour);
-						}
-						else beeEncounterClassic(false);
-				}
+			else sceneHunter.print("Check failed: consecutive losses/wins/rapes");
+			//Attitudes
+			switch (attitude) {
+				case BEE_GIRL_PLAYER_AFRAID:
+					beeEncounterAfraid();
+					break;
+				case BEE_GIRL_PLAYER_VOLUNTARY_EGGING:
+					beeEncounterAfraidRepeat();
+					break;
+				case BEE_GIRL_PLAYER_DISGUSTED:
+					beeEncounterDisgusted();
+					break;
+				case BEE_GIRL_PLAYER_DUTY:
+					beeEncounterDuty();
+					break;
+				default: //Any other attitude options lead to the classic bee encounter
+					beeEncounterDefault();
+					break;
 			}
+		}
+
+		private function beeEncounterDefault():void {
+			outputText(", bending into a smile as she sees you approach.  Standing, she welcomes you in, her wings giving a small buzz as her arms spread open for a welcoming embrace.\n\n");
+			//Chance to avoid raaaaeeeeep
+			if (player.lust < player.maxLust() * 0.75) {
+				outputText("You barely stop yourself from gleefully throwing yourself into her arms.  You realize the harmonic buzzing of her wings and the unearthly scent of her honey briefly robbed you of your reason.  Feeling momentarily more clear-headed, what do you do?");
+				menu();
+				addButton(0, "Fight", fightTheBeeGirl);
+				addButton(1, "Talk", beeTalk);
+				if (player.gender == 3)
+					if (player.lib > 50)
+						addButton(2, "Seduce", seduceBeeGirl);
+					else
+						addButtonDisabled(2, "Seduce", "You need more libido to overpower her pheromones.");
+				else
+					addButtonDisabled(2, "Seduce", "Suprising it was for all the time here... sadly only herm part is mostly done without male/female varaints so i will look into some writer help with finishing this scene for all genders soon.");
+				addButton(4, "Leave", camp.returnToCampUseOneHour);
+			}
+			else beeEncounterClassic(false);
 		}
 
 		private function beeEncounterAsBeeMorphMaleOrGiantCock(isBeeMorph:Boolean):void {
@@ -760,7 +775,7 @@ public class BeeGirlScene extends BaseContent
 		public function beeSexForCocks(clearScreen:Boolean = true, disableBadEnd:Boolean = false):void {
 			if (clearScreen) clearOutput();
 			spriteSelect(SpriteDb.s_bee_girl);
-			if (badEndWarning == true && rand(2) == 0) {
+			if (badEndWarning && rand(2) == 0) {
 				beeDroneBadEnd();
 				return;
 			}
