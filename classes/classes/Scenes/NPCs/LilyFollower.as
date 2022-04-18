@@ -280,7 +280,7 @@ import classes.display.SpriteDb;
 			outputText("Pulling at Lily’s chain, you run your teeth on her neck, and as you let out a groan, your [cock] finally spilling over, Lily wails for a third time, her walls clamping down on you hard. Finally, this sends you over the edge, and you slam your [cock] in as far as it’ll go, spurting your load into her innermost depths. As you fill her, your cum leaking out from her tight fuckhole, Tyrantia groans, a smile on her face as she wipes her love juices off on Lily’s chitinous backside. You let Lily fall, and her eyes are closed. Her breathing is ragged, and you give your fucktoy time to recover from her ordeal.\n\n");
 			outputText("A full fifteen minutes later, Lily opens one of her eyes, moaning slightly. <i>\"Wow…[name], I…Didn’t expect that. Without a doubt, that was the best I’ve had in…well…A LONG time.\"</i> She seems to realize that there was someone else, and she whirls around, catching sight of Tyrantia. <i>\"Oh, hey sis.\"</i> Tyrantia says, waving her Dick cheekily. <i>\"Fancy meeting you here.\"</i>\n\n");
 			player.sexReward("saliva","Dick");
-			if (LilyFollowerState == false) LilyTyrantiaAfterFirst();
+			if (!LilyFollowerState) LilyTyrantiaAfterFirst();
 			else LilyTyrantiaAfterSex();
 		}
 		public function LilyTyrantia3Lick():void {
@@ -292,7 +292,7 @@ import classes.display.SpriteDb;
 			outputText("<i>\"Oh, this little bitch likes it, huh?\"</i> Tyrantia asks, gripping the shaft with both hands. <i>\"Good\"</i>. She sinks her Dick in, nearly a foot at once. Lily sprays Tyrantia’s lower body with her fluids, but this just makes Tyrantia sink it in a little more, twisting before she pulls back and out. Without the Dick inside her, Lily’s legs spasm, and she nearly falls over.\n\n");
 			outputText("<i>\"Oh, oh my.\"</i> Lily breathes heavily, her face covered in your femcum. You climb off of your well-fucked toy, and she gasps for air.\n\n");
 			player.sexReward("saliva","Pussy");
-			if (LilyFollowerState == false) LilyTyrantiaAfterFirst();
+			if (!LilyFollowerState) LilyTyrantiaAfterFirst();
 			else LilyTyrantiaAfterSex();
 		}
 		
@@ -827,4 +827,4 @@ import classes.display.SpriteDb;
 			startCombat(new Lily());
 		}
 	}
-}
+}
