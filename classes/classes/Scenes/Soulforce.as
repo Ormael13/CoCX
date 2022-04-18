@@ -1678,7 +1678,6 @@ public class Soulforce extends BaseContent
 			addButton(13, "-1-", EquipmentMenu, page - 1);
 			addButton(14, "Back", curry(SoulforceCheats1, 0));
 		}
-
 	}
 	public function NonEquipmentMenu(page:int = 1):void {
 		menu();

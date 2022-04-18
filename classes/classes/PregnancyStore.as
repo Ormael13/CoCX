@@ -81,7 +81,6 @@ package classes
 		public static const INCUBATION_DRIDER:int               = 400;
 		public static const INCUBATION_GOO_GIRL:int             =  85;
 		public static const INCUBATION_EMBER:int                = 336;
-		public static const INCUBATION_AYANE:int				= 336;
 		public static const INCUBATION_SATYR:int                = 160;
 		public static const INCUBATION_COTTON:int               = 350;
 		public static const INCUBATION_URTA:int                 = 515;
@@ -104,6 +103,12 @@ package classes
 		public static const INCUBATION_MITZI:int				= 312;
 		public static const INCUBATION_EXCELLIA:int				= 480;
 		public static const INCUBATION_ZENJI:int                = 720;
+		public static const INCUBATION_AYANE:int				= 336;
+		/*public static const INCUBATION_BELISA:int				= 300;
+		public static const INCUBATION_LILY:int					= 300;
+		public static const INCUBATION_TYRANTIA:int				= 300;
+		public static const INCUBATION_ETNA:int					= 300;
+		public static const INCUBATION_CHI_CHI:int				= 300;*/
 		
 		private static const MAX_FLAG_VALUE:int                 = 2999;
 		private static const PREG_TYPE_MASK:int                 = 0x0000FFFF; //Should be safe with 65535 different pregnancy types
