@@ -221,6 +221,11 @@ public class Camp extends NPCAwareContent{
 			SceneLib.dridertown.BelisaEggsHatched();
 			return;
 		}
+		if (TyrantiaFollower.TyrantiaFollowerStage == 4 && TyrantiaFollower.TyrantiaAffectionMeter >= 100) {
+			hideMenus();
+			SceneLib.tyrania.unlockingCorruptLegendariesOption();
+			return;
+		}
 		if (marbleScene.marbleFollower()) {
 			//Cor < 50
 			//No corrupt: Jojo, Amily, or Vapula
