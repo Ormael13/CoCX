@@ -110,7 +110,7 @@ public class Parser
 			if (lookupParserDebug) trace("WARNING: Doing lookup for subject", subject, " aspect ", aspect);
 
 			// Figure out if we need to capitalize the resulting text
-			var capitalize:Boolean = isUpperCase(aspect.charAt(0));
+			var capitalize:Boolean = isUpperCase(subject.charAt(0)) || isUpperCase(aspect.charAt(0));
 
 
 			// Only perform lookup in twoWordNumericTagsLookup if aspect can be cast to a valid number
