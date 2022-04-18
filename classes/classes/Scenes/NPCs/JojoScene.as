@@ -2247,7 +2247,16 @@ public function talkMenu():void
 	if (player.cor <= 10 && player.lust >= 33 && monk == -1) addButtonDisabled(9, "Sex?", "You need to spend more time with Jojo. \n\nTalk sessions: " + flags[kFLAGS.TIMES_TALKED_WITH_JOJO] + "/6 \nTraining sessions: " + flags[kFLAGS.TIMES_TRAINED_WITH_JOJO] + "/10 \nMeditation sessions: " + player.statusEffectv1(StatusEffects.JojoMeditationCount) + "/10 \nYou must be pure enough and have sufficient lust as well.");
 	if (player.cor <= 10 && player.lust >= 33 && flags[kFLAGS.TIMES_TALKED_WITH_JOJO] >= 6 && flags[kFLAGS.TIMES_TRAINED_WITH_JOJO] >= 10 && player.statusEffectv1(StatusEffects.JojoMeditationCount) >= 10 && monk > -3) addButton(9, "Sex?", offerSexFirstTimeHighAffection).hint("You've spent quite the time with Jojo, maybe you can offer him if he's willing to have sex with you?"); //Will unlock consensual sex scenes.
 	if (monk <= -3) removeButton(9);
+	if (TyrantiaFollower.TyrantiaFollowerStage == 5) addButton(10, "Tyrantia", TyrantiaEggQuestJoJo);
 	addButton(14, "Back", jojoCamp);
+}
+
+private function TyrantiaEggQuestJoJo():void {
+	clearOutput();
+	outputText("You ask Jojo about his holy mantras and abilities, and if he could purify the unborn in such a way. You tell him about Tyrantia’s desire to have a family, and her guilt over her own corruption and how that’d affect a child.\n\n");
+	outputText("Jojo shakes his head, sending a ripple through his fur. \"<i>My methods draw upon a conscious desire to be free from taint and corruption.</i>\" He sits down. \"<i>I will meditate on your request, but I do not believe that I can help you.</i>\" You thank Jojo for his time and walk away, heavy-hearted.");
+	eachMinuteCount(15);
+	doNext(talkMenu);
 }
 
 //Talk
