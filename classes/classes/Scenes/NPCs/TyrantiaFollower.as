@@ -11,6 +11,8 @@ import classes.Scenes.Areas.DefiledRavine.DemonPackDefiledRavine;
 import classes.Scenes.SceneLib;
 import classes.internals.SaveableState;
 
+import coc.view.ButtonDataList;
+
 	public class TyrantiaFollower extends NPCAwareContent implements SaveableState
 	{
 		public static var TyraniaIsRemovedFromThewGame:Boolean;
@@ -123,7 +125,7 @@ public function firstEncounterYesHideSurrender():void {
 	outputText("\"<i>A likely story. You act as if I haven’t fought your kind of cowardly builder-types before.</i>\" She folds her arms, lowering her spear…\n\n");
 	outputText("and dodges to one side as another golem comes hurtling through the space her upper body had been in before. She grabs it before it can hit you, spinning the hundreds of pounds of stone like a toy before slamming it into the ground, where it shatters.\n\n");
 	outputText("She looks at the golem leg in her hands, looks at you, looks back at the leg...then shrugs. \"<i>Okay, fair enough. Stupid thing wanted to hit you too.</i>\" A demon incubus claws his way out of the ruins, but the spider-giant turns, whipping the golem’s arm at the creature. It crushes the luckless demon’s skull, and she turns back to you, completely unphased.\n\n");
-	outputText("\"<i>So...who are you?</i>\" You tell her your name, that you’re a champion from Ignam, and that you’re no fan of demons either. \"<i>No Kiddin’? Well shit. Name’s Tyrantia. Sorry. I’m a bit busy right now, so why don’t you come back another time, and we’ll get a fresh start, okay?</i>\"\n\n");
+	outputText("\"<i>So...who are you?</i>\" You tell her your name, that you’re a champion from Ingnam, and that you’re no fan of demons either. \"<i>No Kiddin’? Well shit. Name’s Tyrantia. Sorry. I’m a bit busy right now, so why don’t you come back another time, and we’ll get a fresh start, okay?</i>\"\n\n");
 	tyraniaAffection(5);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -380,7 +382,7 @@ public function repeatEncounterBattlefieldTalkHer():void {
 	addButton(2, "Different Parts", repeatEncounterBattlefieldTalkHerDifferentParts);
 	//3 - Goblin
 	//4 - Izumi
-	//5 - Kids
+	//if (TyrantiaFollowerStage == 4 && DriderTown.DriderTownComplete && TyrantiaAffectionMeter >= 80) addButton(5, "Kids", talkHerKids);
 	if (TyrantiaFollowerStage < 4) addButton(6, "LotB", repeatEncounterBattlefieldTalkHerLifeOnTheBattlefield).hint("Life on the Battlefield");
 	addButton(14, "Back", repeatEncounterBattlefieldTalk);
 }
@@ -480,20 +482,20 @@ public function repeatEncounterBattlefieldTalkHerIzumi():void {
 	tyraniaAffection(5);
 	doNext(camp.returnToCampUseOneHour);
 }
-public function repeatEncounterBattlefieldTalkHerKids():void {
+public function talkHerKids():void {
 	clearOutput();
-	outputText("\"You ask your giantess if she’d ever thought about having a family. She looks down at you, her expression a mix between sadness, amusement, and annoyance. Tyrantia tilts her head, bringing one hand to her chin. You wait patiently for her answer, but you don’t have to wait long. </i>\"\n\n");
-	outputText("“...Yeah, I have.” She admits. “Honestly, I’ve thought about it a lot, the last little while.” She smiles sadly down at you. “It’s all your fault, really.” The giantess sits down on the ground, folding her spider-legs underneath her massive frame. You instinctively hug the giant Drider-girl, and she lets out her little “Tk-tk-tk” laugh that she shares with her sisters. \n\n");
-	outputText("“...Look, [name]. I love you...I’d love nothing more than to lay your eggs, watch over them till they hatch, and bring up a new generation of Driders with you”. Evidently she’s thought about this a lot. “...I’d really like that”. Her voice is a bare whisper, and bitter tears begin to fall from her eyes. “...But I can’t allow it”.  \n\n");
-	outputText("Surprised, you ask her why not, and she shakes her head, pointing at her horns. “Look at these, look at me, and then ask yourself why I wouldn’t be willing to have kids”. You blink, sighing as it clicks.  \n\n");
-	outputText("“Yeah. I have a hard enough time dealing with my own shit, [name]. I’m not gonna force that situation on a kid. They…don’t deserve that.” You reluctantly agree, then a thought occurs to you. You ask Tyrantia about her eggs, how they are specifically. The giantess blushes. “Well...They’re squishy and soft, not like the Lizans or Harpies. Our people’s eggs were way more susceptible to corruption. That’s why we ended up corrupt in the first place.” She closes her eyes. “[name], when I told you I couldn’t be what you wanted me to be, what did you think I meant?” You hold her close, and you promise Tyrantia that you’ll try to make this work. You tell her that even if you can’t have a family, that you’ll stay with her.  \n\n");
-	outputText("She sniffles, wrapping her furry arms around you. “Thank you”. She gives you a brave smile. “Hey, if anyone can make this work, it’ll be you, ‘champ’”. You mock protest at the jab, but you know she’s just kidding. Walking away from your Drider lover, you think of a few people you could see.  \n\n");
-	//if you have Ralthazul
-	outputText("Ralthazul, the mousey alchemist, is one. \n\n");
-	//If you have Jojo
-	outputText("Jojo could be of some assistance, perhaps. \n\n");
-	//If you have Arian
-	outputText("Arian has purification powers. \n\n");
+	outputText("You ask your giantess if she’d ever thought about having a family. She looks down at you, her expression a mix between sadness, amusement, and annoyance. Tyrantia tilts her head, bringing one hand to her chin. You wait patiently for her answer, but you don’t have to wait long.\n\n");
+	outputText("\"<i>...Yeah, I have.</i>\" She admits. \"<i>Honestly, I’ve thought about it a lot, the last little while.</i>\" She smiles sadly down at you. \"<i>It’s all your fault, really.” The giantess sits down on the ground, folding her spider-legs underneath her massive frame. You instinctively hug the giant Drider-girl, and she lets out her little \"<i>Tk-tk-tk</i>\" laugh that she shares with her sisters.\n\n");
+	outputText("\"<i>...Look, [name]. I love you...I’d love nothing more than to lay your eggs, watch over them till they hatch, and bring up a new generation of Driders with you.</i>\" Evidently she’s thought about this a lot. \"<i>...I’d really like that.</i>\" Her voice is a bare whisper, and bitter tears begin to fall from her eyes. \"<i>...But I can’t allow it</i>\".\n\n");
+	outputText("Surprised, you ask her why not, and she shakes her head, pointing at her horns. \"<i>Look at these, look at me, and then ask yourself why I wouldn’t be willing to have kids”. You blink, sighing as it clicks.\n\n");
+	outputText("\"<i>Yeah. I have a hard enough time dealing with my own shit, [name]. I’m not gonna force that situation on a kid. They…don’t deserve that.</i>\" You reluctantly agree, then a thought occurs to you. You ask Tyrantia about her eggs, how they are specifically. The giantess blushes. \"<i>Well...They’re squishy and soft, not like the Lizans or Harpies. Our people’s eggs were way more susceptible to corruption. That’s why we ended up corrupt in the first place.</i>\" She closes her eyes. \"<i>[name], when I told you I couldn’t be what you wanted me to be, what did you think I meant?</i>\" You hold her close, and you promise Tyrantia that you’ll try to make this work. You tell her that even if you can’t have a family, that you’ll stay with her.\n\n");
+	outputText("She sniffles, wrapping her furry arms around you. \"<i>Thank you.</i>\" She gives you a brave smile. \"<i>Hey, if anyone can make this work, it’ll be you, ‘champ’.</i>\" You mock protest at the jab, but you know she’s just kidding. Walking away from your Drider lover, you think of a few people you could see.\n\n");
+	if (player.hasStatusEffect(StatusEffects.CampRathazul)) {
+		outputText("Ralthazul, the mousey alchemist, is one.\n\n");
+		TyrantiaFollowerStage = 5;
+	}
+	if (player.hasStatusEffect(StatusEffects.PureCampJojo) && flags[kFLAGS.JOJO_BIMBO_STATE] != 3) outputText("Jojo could be of some assistance, perhaps.\n\n");
+	if (arianScene.arianFollower()) outputText("Arian has purification powers.\n\n");
 	tyraniaAffection(5);
 	doNext(camp.returnToCampUseOneHour);
 }
@@ -1081,6 +1083,7 @@ public function TyrantiaAtCamp():void {
 	else addButton(3, "Training", TyrantiaTraining);
 	addButton(4, "Sex", TyrantiaSexMenu);
 	//5 - JoinMe addButton(2, "JoinMe", TyrantiaFollowerOptions);
+	if (TyrantiaFollowerStage >= 5) addButton(10, "Items", itemImproveMenu);
 	addButton(14, "Leave", camp.campLoversMenu);
 }
 
@@ -1099,6 +1102,70 @@ public function TyrantiaAppearance():void {
 	//outputText("She holds her egg-swollen belly, occasionally looking down at it and smiling. Looking at you, Tyrantia waves bashfully, the expression looking out of place on the giantess.\n\n");
 	doNext(TyrantiaAtCamp);
 }
+
+public function unlockingCorruptLegendariesOption():void {
+	clearOutput();
+	outputText("As you head back into camp, you pass by Tyrantia’s Hutch. Your giantess waves you over, and as you get closer, you notice the trough full of bubbling, black liquid. She looks down at it intensely, and as you watch, she plunges her hand into the mixture, her horns glowing black as she pulls a dagger from the ooze. The dagger’s a double-ended instrument, with a spike on one end, and…A pommel that looks like Anal beads, nearly as long as the dagger itself.\n\n");
+	outputText("\"<i>Huh…That’s weird.</i>\" She puts the dagger down, and she looks up at you. \"<i>...This was a normal iron dagger. But…</i>\" She looks at the perverse spike she’s created. \"<i>It’s…much stronger now, but corrupted. It’s almost like the demon weapons I saw them make in the lab…</i>\" She blinks. \"<i>Okay.</i>\" She looks up at you, scratching her ass with one hand. \"<i>So…According to one of Lily’s books, Unicorns could use their inherent magic to enchant weapons, making them into legendary armaments.</i>\" She looks down at the dagger. \"<i>Bicorns, according to some of the demon’s lab notes, can do the same, but…with different effects.</i>\"\n\n");
+	outputText("You can clearly see Tyrantia straining to think, eyeing the dagger in her hands. \"<i>From what I can tell…I can do the same thing. This dagger is clearly changed…Stronger, tougher, but obviously corrupt.</i>\" She sighs, putting the dagger down carefully. \"<i>Well…I’m still learning how to use this ability, but I’m sure that it could be useful. Making your weapons stronger, or more damaging could save your life in a fight.</i>\" She stomps her back legs awkwardly. \"<i>Well…With great power and all that. I’m sure I can find a use for it.</i>\"\n\n");
+	outputText("You ask if she’d be willing to upgrade your weapons, and she nods. \"<i>But I can’t do much with it right now. Give me some time to figure it out.</i>\"\n\n");
+	TyrantiaFollowerStage = 5;
+	doNext(playerMenu);
+	eachMinuteCount(5);
+}
+public function itemImproveMenu():void {
+	var improvableItems:Array = [
+		[weapons.BFSWORD, weapons.NPHBLDE, weapons.EBNYBLD],
+		[weapons.DBFSWO, weapons.T_HEART, weapons.DORSOUL],
+		[weapons.MASTGLO, weapons.KARMTOU, weapons.YAMARG],
+		[weapons.KATANA, weapons.MASAMUN, weapons.BLETTER],
+		[weapons.W_STAFF, weapons.U_STAFF, weapons.N_STAFF],
+		[weapons.DEMSCYT, weapons.LHSCYTH, null],
+		[weapons.UGATANA, weapons.MOONLIT, weapons.C_BLADE],
+		[weapons.L__AXE, weapons.WG_GAXE, weapons.DE_GAXE],
+		[weapons.SPEAR, weapons.SESPEAR, weapons.DSSPEAR],
+		[weapons.JRAPIER, weapons.Q_GUARD, weapons.B_WIDOW],
+		[weapons.OTETSU, weapons.POCDEST, weapons.DOCDEST],
+		[weapons.BFTHSWORD, weapons.ARMAGED, weapons.CHAOSEA],
+		[weaponsrange.BOWLONG, weaponsrange.ARTEMIS, weaponsrange.WILDHUN],
+		[weaponsrange.SHUNHAR, weaponsrange.KSLHARP, weaponsrange.LEVHARP],
+		[shields.SANCTYN, shields.SANCTYL, shields.SANCTYD],
+		[armors.LMARMOR, armors.BMARMOR, armors.S_ARMOR]
+	];
+	clearOutput();
+	outputText("You ask your Drider lover if she’d be willing to upgrade a piece of your gear. She nods simply, bringing out a trough on wheels, filled with ebony liquid that bubbles, despite being under no heat.\n\n");// legendary
+	outputText("\"<i>If you want this.</i>\" She says simply. \"<i>I will enchant something for you.</i>\"");
+	outputText("\n\n<b>You currently have "+player.keyItemv1("Radiant shard")+" radiant shards.</b>")
+	var selectfrom:int = 2;
+	var selectMenu:ButtonDataList = new ButtonDataList();
+	for (var i:int = 0; i < improvableItems.length; i++) {
+		if (improvableItems[i][selectfrom] == null) {/*do nothing*/
+		}
+		else {
+			var item:ItemType = improvableItems[i][selectfrom];
+			var from:ItemType = improvableItems[i][0];
+			selectMenu.add(item.id, curry(improveItem, item, from)).disableIf(!player.hasItem(from),"You need a "+from+" as a base to create this item")
+			.disableIf(player.keyItemv1("Radiant shard") < 1,"You need one radiant shard in order to create this item.")
+			.disableIf(player.gems < 10000,"You need at least 10 000 gems in order to create this item");
+		}
+	}
+	submenu(selectMenu, TyrantiaAtCamp);
+	
+	function improveItem(item:ItemType, from:ItemType):void {
+		clearOutput();
+		outputText("\"<i>You sure about this?”</i>\" Tyrantia asks, hesitant. You nod, and she sighs, relieved. \"<i>Okay, just making sure.</i>\" You hand her the base item, and she takes it in her meaty hands, turning it over. Tyrantia closes her eyes, a black aura growing from her horns. It focuses, darkening further, until with a grunt, Tyrantia’s horns fire twin beams of black energy, converging on the item in her hands.\n\n");
+		outputText("Tyrantia sets her jaw, the black energy thickening, until the piece of equipment in her hands is covered in a black miasma, so thick you can barely see the outline of it. Opening her eyes, your Drider lover lowers it into her vat of ebony goo, submerging it completely. The stream of energy from her horns stops, and she cracks her knuckles, squaring up, glaring at the vat of goo as if it had wronged her somehow. Her horns begin to glow, and you can feel the magical power building in the air, Tyrantia’s black and pink aura flaring as she places her palms on the surface of the tarlike liquid.\n\n");
+		outputText("With a roar of effort, she plants her feet, magical energy bursting from her horn. Immediately, the goo bubbles, as if boiling, and a disgusting stench, like burning hair and cheese, wafts from it. The ooze bubbles over, clouds of dark vapor escaping into the air…Until a pink bubble stops the cascade of smoke, forcing it back down into the improvised cauldron. A few seconds pass, Tyrantia pouring more and more energy into the vat…until the pink skein of magic breaks, sending a small explosion of black vapor into the air.\n\n");
+		outputText("It takes a while for the smoke to clear, but when it does, you can see Tyrantia, peering owlishly into her vat. When you walk over, all the ooze is gone, turned to smoke in this strange, almost ritualistic process. But on the bottom of the vat is your new item.\n\n");
+		outputText("Tyrantia picks it up gingerly, handing it to you. \"<i>I hope this helps you on your travels…Gods know I’ve done wrong if it doesn’t.</i>\" She seems to feel slightly nauseous, and you voice concern.\n\n");
+		outputText("\"<i>Oh, it’s nothing…</i>\" Your Drider lover burps, wincing. \"<i>Casting spells was never easy for me, that’s all…and magical abilities aren’t any different.</i>\" She flexes one arm. \"<i>There’s a reason I prefer my Dick.</i>\"\n\n");
+		if(player.keyItemv1("Radiant shard") == 1) player.removeKeyItem("Radiant shard");
+		else player.addKeyValue("Radiant shard",1,-1);
+		player.gems -= 10000;
+		player.destroyItems(from, 1);
+		inventory.takeItem(item, camp.returnToCampUseOneHour);
+	}
+}
 /*
 //Requires DriderTown, no kids, 80% affection.
 public function TyrantiaTalkKids():void {
@@ -1112,45 +1179,6 @@ public function TyrantiaTalkKids():void {
 //Starts the egg purification quest
 }
 
-public function TyrantiaPreg():void {
-	clearOutput();
-	outputText("You get back to camp, and you see your giantess lover. She stands near your [tent/cabin], and as she sees you, the giantess puts a hand on her slightly swollen belly.\n\n");
-	outputText("<i>“Oh...Hey [name].”</i> She fidgets. <i>“Look...There’s something I need to tell you.”</i> She walks towards you, taking your hands and bringing them to her slightly swollen belly. <i>“I’m...My eggs were fertilized. By you.”</i> She blinks, wincing. <i>“Not that I would...You’re the only one I love, [name].”</i> She wraps her arms around you, hugging you close. <i>“Tomorrow, I’ll lay the eggs. Can you be there?”</i> You nod, and Tyrantia exhales, relieved.\n\n");
-	outputText("<i>“I love you.”</i> She lets go of you, going back to her hutch. <i>“Even though you made it so I can’t fight for another day.”</i> She rubs the top of your head. <i>“Asshole.”</i> Her smile takes the sting entirely out of those words. You can tell that, despite everything, your Drider giantess is very happy.\n\n");
-	doNext(camp.returnToCamp);
-}
-
-public function TyrantiaEggLay():void {
-	clearOutput();
-	outputText("You hear an almost orgasmic moan coming from Tyrantia’s Hutch. You walk over, and inside the longhouse, Tyrantia’s standing over a trough made of wood and silk. The giantess’s cheeks are bright red, and seeing you, she waves you over.\n\n");
-	outputText("<i>“The eggs are coming”</i>, she moans, and you ask her if there’s anything you can do. <i>“Just...Take my hand. It’ll be easier if I have something to hold onto.”</i> You nod, taking your giant lover’s hand. You rub her swollen belly, and Tyrantia groans, this time much more pleasurably. You hear a slight plop as a few silvery orbs fall from your Drider-girl’s leaking twat and into the trough. Speeding up your belly rubs, you try to hold Tyrantia steady as more eggs begin to fall, one or two at a time. On the other side of her, you see Lily rush over. Tyrantia wraps a fuzzy arm around Lily, leaning slightly on her younger sister as the eggs drop.\n\n");
-	outputText("In a few minutes, it’s over. A dozen translucent orbs fill the trough. Tyrantia shudders, falling to her knees, and both you and Lily can’t hold the giantess up. <i>“I’ll put these in your nursery nook, sister”</i>, Lily soothes. <i>“You did a great job. They look healthy so far.”</i> Lily leaves you two alone, and you put a hand on Tyrantia’s cheek, telling her that she did great.\n\n");
-	outputText("<i>“...Not done yet, [name]”</i>, she says weakly. <i>“They need to grow, to hatch...to…”</i> Her eyes are closing, and you tell her that she just delivered. That she needs to rest. Tyrantia looks like she wants to protest, but Belisa walks in, putting a hand on Tyrantia’s shoulder.\n\n");
-	outputText("<i>“Sister, [name] is right. Egg-laying is tiring. Close your eyes, dear sister. We’ll make sure nothing happens to your little ones.”</i> Belisa and Lily help Tyrantia stagger over to the bed, the giantess flopping face-down into it. Belisa and Lily give you warm smiles, Lily taking Tyrantia’s eggs while Belisa puts a hand on your shoulder.\n\n");
-	outputText("<i>“We’ll make sure she rests.”</i> Belisa smiles. <i>“Do what you need to, sweet [name]. We’ll look after her.”</i> You nod, heading back to your part of camp.\n\n");
-	outputText("\n\n");
-	doNext(camp.returnToCampUseOneHour);
-}
-
-public function TyrantiaHatching():void {
-	clearOutput();
-	outputText("You hear a worried cry from Dridertown. <i>“[name], [name]! Come quickly!”</i> Belisa runs over to you, taking your hand. <i>“Tyrantia’s in the egg nook right now. Your podlings are hatching!”</i> You follow Belisa’s lead, sprinting as fast as you can to be by Tyrantia’s side. Belisa leads you into the longhouse, then down a crude set of stairs into an underground, cave-like structure lined with little nooks and crannies. In the back, you see tyrantia, nervously standing over three eggs. There much less than before, but before you can ask, the giantess puts a finger over your mouth.\n\n");
-	outputText("As you watch, one of the eggs begins to tear, a curved horn piercing it from the inside. Fluids drip from the egg, and a tiny head pokes out, horse-ears waggling. Unlike Tyrantia, this little one has white hair, and a single horn poking out. It pulls its spider legs out, one at a time, but quickly slips. Lunging forward, Tyrantia gently takes the newborn by the Drider-half, picking...her up. Her silk-spinners are covered in some sort of skin, and Tyrantia nods, assuring you that it’s normal for Driders to come out like that. Their spinnerets aren’t quite formed yet.\n\n");
-	outputText("She looks at the horn and horse-ears nervously, but you put a hand on your lover’s shoulder, assuring her that as long as they’re not corrupt, it doesn’t matter. A second Drider-baby breaks through their egg, shocking both of you out of your thoughts. This time, you take charge, gently picking your newborn up and holding them in your arms. This one’s a male, and his six eyes look at you, wide-eyed and mouth open. You hold him for a moment, before Tyrantia holds out her hands for her baby boy. You oblige, and as soon as you pass him over, the baby latches onto Tyrantia’s teat, suckling for all he’s worth.\n\n");
-	outputText("This Pod had (3-4 Drider babies, 50% male or female after the first two). You help Tyrantia carry your newborns over to one of the cubbies built into the wall. She swaddles them in blankets made from Belisa’s silk, and you lay them to rest.\n\n");
-	outputText("<i>“They won’t be like this for long,”</i> she says, clearly not liking that fact. <i>“But...They’re so beautiful.”</i> You agree, putting a hand on Tyrantia’s shoulder as you watch your babies go to sleep.\n\n");
-	//if first time, extra text below
-	outputText("(If first time) You ask her about the rest of the eggs, and Tyrantia shrugs, a somewhat pained expression on her face. <i>“Oh, that’s normal.”</i> She shrugs. <i>“Not all eggs either get fertilized, something goes wrong, or they just got punctured on the way out. Three to Ten seems to be the norm for us. Honestly, I expected less than three...all things considered.”</i> You nod, happy that at least something is normal.\n\n");
-	outputText("<i>“...They’ve only got one horn though.”</i> Tyrantia seems nervous. <i>“Did something go wrong?”</i> You assure her that no, nothing went wrong. You tell the nervous mother of your kids that if anything, that’s a great sign.\n\n");
-	outputText("<i>“How so?”</i> She seems nervous. <i>“I would’ve thought no horns at all would be best.”</i> You shake your head, telling her that Unicorns are known for their purity. Who knows, if your kids really are part-unicorn, they might have an aura that’s the opposite of Tyrantia’s.\n\n");
-	outputText("<i>“What, you mean like some sort of...Purity Aura?”</i> This seems to give her pause. <i>“...I hope you’re right. If you are, maybe I’m...Maybe...”</i> She seems to look at you and change her mind about what she’s saying. <i>“I love you.”</i> She hugs you tight, smiling at the little Uni-riders as they struggle with their swaddlings.\n\n");
-if (rand(2) == 0) {
-  a TyrantiaFollower.TyrantiaKids += 3
-} else {
-  b TyrantiaFollower.TyrantiaKids += 4;	
-	}
-}
-
 public function JojoReaction():void {
 		clearOutput();
 		//This is to play the evening after Tyrantia is brought in. 
@@ -1162,4 +1190,4 @@ public function JojoReaction():void {
 doNext(camp.returnToCamp);
 }*/
 }
-}
+}

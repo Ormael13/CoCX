@@ -408,6 +408,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 		outputText("You ask " + _name + " what are radiant shards exactly."+
 				"\n\n<i>\"Well from what I think I may know they are the remains of artifacts of past legend. Items long lost to time that were probably used in the mythical age. They are useless by themselves, just small fragment of lost power, but if you were to bring in multiple, as well as a base for the shards to fuse with, I could weave back the lost item to life.\"</i>\n\n"+
 				"\n\n Truthfully, that your little girl talks about such grown up subject so early both makes you proud and creeps you out.");
+		doNext(campInteraction);
 	}
 
 	/*

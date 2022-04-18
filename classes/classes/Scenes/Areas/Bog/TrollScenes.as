@@ -35,7 +35,7 @@ package classes.Scenes.Areas.Bog
 			else addButtonDisabled(1, "Female Rape", "You need a vagina for this scene.");
 			if (player.hasCock()) addButton(2, "Anal Rape", encounterAdultMaleTrollLostAnalRape);
 			else addButtonDisabled(2, "Anal Rape", "You need a penis for this scene.");
-			addButton(3, "Leave", encounterAdultMaleTrollLostLeave);
+			addButton(14, "Leave", encounterAdultMaleTrollLostLeave);
 			LustyMaidensArmor.addTitfuckButton(7);
 		}
 		public function encounterAdultMaleTrollLostFemaleRape():void {
@@ -152,7 +152,7 @@ package classes.Scenes.Areas.Bog
 			}
 			if (player.hasVagina()) addButton(3, "Female Rape", encounterAdultFemaleTrollLostFemaleRape);
 			else addButtonDisabled(3, "Female Rape", "You need a vagina for this scene.");
-			addButton(4, "Leave", encounterAdultFemaleTrollLostLeave);
+			addButton(14, "Leave", encounterAdultFemaleTrollLostLeave);
 		}
 		public function encounterAdultFemaleTrollLostRape():void {
 			clearOutput();
@@ -227,7 +227,7 @@ package classes.Scenes.Areas.Bog
 			else addButtonDisabled(1, "Female Rape", "You need a vagina for this scene.");
 			if (player.hasCock()) addButton(2, "Anal Rape", encounterAdultGlacialMaleTrollLostAnalRape);
 			else addButtonDisabled(2, "Anal Rape", "You need a penis for this scene.");
-			addButton(3, "Leave", encounterAdultGlacialMaleTrollLostLeave);
+			addButton(14, "Leave", encounterAdultGlacialMaleTrollLostLeave);
 			LustyMaidensArmor.addTitfuckButton(7);
 		}
 		public function encounterAdultGlacialMaleTrollLostFemaleRape():void {
@@ -302,7 +302,7 @@ package classes.Scenes.Areas.Bog
 				addButtonDisabled(1, "Rape", "You need a penis for this scene.");
 				addButtonDisabled(2, "Anal Rape", "You need a penis for this scene.");
 			}
-			addButton(4, "Leave", encounterAdultGlacialFemaleTrollLostLeave);
+			addButton(14, "Leave", encounterAdultGlacialFemaleTrollLostLeave);
 		}
 		public function encounterAdultGlacialFemaleTrollLostRape():void {
 			clearOutput();

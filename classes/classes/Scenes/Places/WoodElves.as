@@ -226,13 +226,12 @@ import classes.internals.SaveableState;
 			player.sexReward("vaginalFluids", "Vaginal");
 			player.sexReward("vaginalFluids", "Vaginal");
 			player.sexReward("vaginalFluids", "Vaginal");
-			player.ears.type = Ears.ELVEN;
-			player.eyes.type = Eyes.ELF;
+			CoC.instance.transformations.EarsElven.applyEffect(false);
+			CoC.instance.transformations.FaceElf.applyEffect(false);
 			CoC.instance.transformations.FaceElf.applyEffect(false);
 			CoC.instance.transformations.TongueElf.applyEffect(false);
-			player.arms.type = Arms.ELF;
-			player.lowerBody = LowerBody.ELF;
-			if (player.legCount != 2) player.legCount = 2;
+			CoC.instance.transformations.ArmsElf.applyEffect(false);
+			CoC.instance.transformations.LowerBodyElf.applyEffect(false);
 			outputText("\n\n");
 			CoC.instance.transformations.HairSilky.applyEffect(false);
 			player.wings.type = Wings.NONE;
@@ -902,7 +901,7 @@ import classes.internals.SaveableState;
 			menu();
 			if (player.statusEffectv1(StatusEffects.FletchingTable) > 0) addButtonDisabled(0, "Bronze", "You already used this for reinforcing bow.");
 			else {
-				if (player.hasItem(useables.BRONZEB, 1)) addButton(0, "Bronze", FletchingReinforce2, useables.T_SSILK);
+				if (player.hasItem(useables.BRONZEB, 1)) addButton(0, "Bronze", FletchingReinforce2, useables.BRONZEB);
 				else addButtonDisabled(0, "Bronze", "You need spider silk.");
 			}
 			if (player.statusEffectv1(StatusEffects.FletchingTable) > 1) addButtonDisabled(1, "Iron", "You already used this for reinforcing bow.");

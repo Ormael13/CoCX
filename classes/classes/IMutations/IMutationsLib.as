@@ -42,6 +42,7 @@ public class IMutationsLib
 		public static const BlackHeartIM:PerkType = new BlackHeartMutation();
 		public static const CatLikeNimblenessIM:PerkType = new CatLikeNimblenessMutation();
 		public static const DisplacerMetabolismIM:PerkType = new DisplacerMetabolismMutation();
+		public static const DraconicBonesIM:PerkType = new DraconicBonesMutation();
 		public static const KitsuneThyroidGlandIM:PerkType = new KitsuneThyroidGlandMutation();
 		public static const TrachealSystemIM:PerkType = new TrachealSystemMutation();
 
@@ -92,7 +93,7 @@ public class IMutationsLib
 
 			}
 			function mutationsBone():void{
-
+				IMutationsList.push([DraconicBonesIM,DraconicBonesMutation]);
 			}
 			function mutationsThyroidGlands():void{
 				IMutationsList.push([KitsuneThyroidGlandIM, KitsuneThyroidGlandMutation]);
