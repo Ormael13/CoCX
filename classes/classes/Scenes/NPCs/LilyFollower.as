@@ -372,7 +372,7 @@ import classes.display.SpriteDb;
 			else addButtonDisabled(3, "Bondage", "Req. 40%+ submissiveness.");
 			addButton(4, "M.Her", LilyJillOff);
 			addButton(5, "R.Play", LilyRape);
-			addButton(6, "3Somes", Lily3Somes);
+			if (LilyFollowerState) addButton(6, "3Somes", Lily3Somes);
 			//if (LilySubmissivenessMeter == 100) addButton(7, "Exhibition", LilyExhibition);
 		}
 

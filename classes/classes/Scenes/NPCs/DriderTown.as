@@ -90,10 +90,10 @@ import classes.display.SpriteDb;
 				LilyKidsIzmaPregnancy = o ["LilyKidsIzmaPregnancy"];
 				LilyKidsSidone = o ["LilyKidsSidone"];
 				LilyKidsSidonePregnancy = o ["LilyKidsSidonePregnancy"];
-				TyrantiaKids = o ["TyrantiaKids"];
-				TyrantiaPregnancy = o ["TyrantiaPregnancy"];
-				TyrantiaKidsEggs = o ["TyrantiaKidsEggs"];
-				TyrantiaKidsEggsHatching = o ["TyrantiaKidsEggsHatching"];
+				TyrantiaKids = valueOr(o["TyrantiaKids"], 0);
+				TyrantiaPregnancy = valueOr(o["TyrantiaPregnancy"], 0);
+				TyrantiaKidsEggs = valueOr(o["TyrantiaKidsEggs"], 0);
+				TyrantiaKidsEggsHatching = valueOr(o["TyrantiaKidsEggsHatching"], 0);
 			} else {
 				// loading from old save
 				resetState();
@@ -144,6 +144,7 @@ public function DriderTownSisters():void {
 	addButton(1, "Belisa", SceneLib.belisa.BelisaMainCampMenu);
 	addButton(2, "Lily", SceneLib.lily.LilyCampFollower);
 	addButton(3, "Tyrantia", SceneLib.tyrania.TyrantiaAtCamp);
+	addButton(14, "Leave", camp.campLoversMenu);
 }
 /*
 public function FamilySex():void {
