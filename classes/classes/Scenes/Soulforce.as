@@ -2771,7 +2771,7 @@ public class Soulforce extends BaseContent
 	}
 	public function AddThePearls1():void {
 		outputText("\n\n");
-		inventory.takeItem(consumables.E_PEARL, AddThePearls2);
+		inventory.takeItem(consumables.E5PEARL, AddThePearls2);
 	}
 	public function AddThePearls2():void {
 		outputText("\n\n");

@@ -3,9 +3,7 @@
  */
 package classes
 {
-import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
-import classes.CoC;
 import classes.Stats.StatUtils;
 
 import flash.utils.Dictionary;
