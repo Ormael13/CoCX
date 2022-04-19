@@ -540,7 +540,7 @@ internal function tentacleLossRape():void {
 	}
 	else sceneHunter.print("Check failed... genderless. Come on, try it, it's funny.");
 	//Bad-end counter
-	if (player.isHerm) {
+	if (player.isHerm()) {
 		if(!player.hasStatusEffect(StatusEffects.TentacleBadEndCounter))
 			player.createStatusEffect(StatusEffects.TentacleBadEndCounter,0,0,0,0);
 		else

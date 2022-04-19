@@ -3140,13 +3140,6 @@ public class Camp extends NPCAwareContent{
 	}
 
 	private function swimInStream():void {
-		var izmaJoinsStream:Boolean = false;
-		var marbleJoinsStream:Boolean = false;
-		var heliaJoinsStream:Boolean = false;
-		var amilyJoinsStream:Boolean = false;
-		var emberJoinsStream:Boolean = false;
-		var rathazulJoinsStream:Boolean = false; //Rare, 10% chance.
-
 		var prankChooser:Number = rand(3);
 		clearOutput();
 		outputText("You ponder over the nearby stream that's flowing. Deciding you'd like a dip, ");
@@ -3183,29 +3176,16 @@ public class Camp extends NPCAwareContent{
 		//Ember
 		if (rand(4) == 0 && camp.followerEmber()) {
 			outputText("\n\nYou catch a glimpse of Ember taking a daily bath.");
-			emberJoinsStream = true;
 		}
 		//Rathazul (RARE)
 		if (rand(10) == 0 && player.hasStatusEffect(StatusEffects.CampRathazul)) {
 			outputText("\n\nYou spot Rathazul walking into the shallow section of stream, most likely taking a bath to get rid of the smell.");
-			rathazulJoinsStream = true;
 		}
 		//Pranks!
 		if (prankChooser == 0 && (camp.izmaFollower() || (camp.followerHel() && flags[kFLAGS.HEL_CAN_SWIM]) || camp.marbleFollower() || (camp.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_OWNS_BIKINI] > 0))) {
 			outputText("\n\nYou could play some pranks by making the water curiously warm. Do you?");
 			doYesNo(swimInStreamPrank1, swimInStreamFinish);
-			return;
 		}
-				/*if (prankChooser == 1 && (camp.izmaFollower() || (camp.followerHel() && flags[kFLAGS.HEL_CAN_SWIM]) || camp.marbleFollower()) )
-                    {
-                        outputText("\n\nYou could play some pranks by grabbing the leg of one of them and surprise them. Do you?");
-                        doYesNo(swimInStreamPrank2, swimInStreamFinish);
-                    }*/
-		/*if (prankChooser == 2 && player.lust >= 33) {
-                outputText("\n\nYou're feeling horny right now. Do you masturbate in the stream?");
-                doYesNo(swimInStreamFap, swimInStreamFinish);
-                return;
-            }*/
 		else doNext(swimInStreamFinish);
 
 	}
@@ -3222,31 +3202,21 @@ public class Camp extends NPCAwareContent{
 		//Play joke on them!
 		clearOutput();
 		outputText("You look around to make sure no one is looking then you smirk and you can feel yourself peeing. When you're done, you swim away.  ");
-		if (rand(prankRoll) == 0 && camp.izmaFollower() && pranked == false && izmaJoinsStream == true) {
+		if (rand(prankRoll) == 0 && camp.izmaFollower() && !pranked && izmaJoinsStream) {
 			outputText("\n\nIzma just swims over, unaware of the warm spot you just created. \"<i>Who've pissed in the stream?</i>\" she growls. You swim over to her and tell her that you admit you did pee in the stream. \"<i>Oh, alpha! What a naughty alpha you are,</i>\" she grins, her shark-teeth clearly visible.");
 			pranked = true;
 		}
-		if (rand(prankRoll) == 0 && (camp.followerHel() && flags[kFLAGS.HEL_CAN_SWIM]) && pranked == false && heliaJoinsStream == true) {
+		if (rand(prankRoll) == 0 && (camp.followerHel() && flags[kFLAGS.HEL_CAN_SWIM]) && !pranked && heliaJoinsStream) {
 			outputText("\n\nHelia swims around until she hits the warm spot you just created. \"<i>Heyyyyyyy,</i>\" the salamander yells towards you. She comes towards you and asks \"<i>Did you just piss in the stream?</i>\" after which you sheepishly chuckle and tell her that you admit it. Yes, you've done it. \"<i>I knew it! Oh, you're naughty, lover mine!</i>\" she says.");
 			pranked = true;
 		}
-		if (rand(prankRoll) == 0 && camp.marbleFollower() && pranked == false && marbleJoinsStream == true) {
+		if (rand(prankRoll) == 0 && camp.marbleFollower() && !pranked && marbleJoinsStream) {
 			outputText("\n\nMarble is oblivious to the warm spot and when she swims over, she yells \"<i>Hey, sweetie! Did you just urinate in the stream?</i>\" You sheepishly smile and admit that yes, you did it. She says, \"<i>You're naughty, you know, sweetie!</i>\"");
 			pranked = true;
 		}
-		/*if (rand(prankRoll) == 0 && camp.amilyFollower() && flags[kFLAGS.AMILY_OWNS_BIKINI] > 0 && pranked == false && amilyJoinsStream == true)
-            {
-                outputText("");
-                pranked = true;
-            }*/
-		if (pranked == false) outputText("  No one managed to swim past where you left the warm spot before it dissipated. You feel a bit disappointed and just go back to swimming.");
+		if (!pranked) outputText("  No one managed to swim past where you left the warm spot before it dissipated. You feel a bit disappointed and just go back to swimming.");
 		else outputText("  You feel accomplished from the prank and resume swimming. ");
 		awardAchievement("Urine Trouble", kACHIEVEMENTS.GENERAL_URINE_TROUBLE);
-		doNext(swimInStreamFinish);
-	}
-
-	private function swimInStreamFap():void {
-		clearOutput();
 		doNext(swimInStreamFinish);
 	}
 
