@@ -20,7 +20,11 @@ import classes.display.SpriteDb;
 		public static var BelisaKids:Number;
 		public static var BelisaPregnancy:Number;
 		public static var BelisaKidsEggs:Number;
+		public static var BelisaKidsEggs1:Number;
+		public static var BelisaKidsEggs2:Number;
 		public static var BelisaKidsEggsHatching:Number;
+		public static var BelisaKidsEggsHatching1:Number;
+		public static var BelisaKidsEggsHatching2:Number;
 		public static var LilyKidsPC:Number;
 		public static var LilyKidsPCPregnancy:Number;
 		public static var LilyKidsIzma:Number;
@@ -31,7 +35,11 @@ import classes.display.SpriteDb;
 		public static var TyrantiaFemaleKids:Number;
 		public static var TyrantiaPregnancy:Number;
 		public static var TyrantiaKidsEggs:Number;
+		public static var TyrantiaKidsEggs1:Number;
+		public static var TyrantiaKidsEggs2:Number;
 		public static var TyrantiaKidsEggsHatching:Number;
+		public static var TyrantiaKidsEggsHatching1:Number;
+		public static var TyrantiaKidsEggsHatching2:Number;
 		
 		public function stateObjectName():String {
 			return "DriderTown";
@@ -43,7 +51,11 @@ import classes.display.SpriteDb;
 			BelisaKids = 0;
 			BelisaPregnancy = 0;
 			BelisaKidsEggs = 0;
+			BelisaKidsEggs1 = 0;
+			BelisaKidsEggs2 = 0;
 			BelisaKidsEggsHatching = 0;
+			BelisaKidsEggsHatching1 = 0;
+			BelisaKidsEggsHatching2 = 0;
 			LilyKidsPC = 0;
 			LilyKidsPCPregnancy = 0;
 			LilyKidsIzma = 0;
@@ -54,7 +66,11 @@ import classes.display.SpriteDb;
 			TyrantiaFemaleKids = 0;
 			TyrantiaPregnancy = 0;
 			TyrantiaKidsEggs = 0;
+			TyrantiaKidsEggs1 = 0;
+			TyrantiaKidsEggs2 = 0;
 			TyrantiaKidsEggsHatching = 0;
+			TyrantiaKidsEggsHatching1 = 0;
+			TyrantiaKidsEggsHatching2 = 0;
 		}
 
 		public function saveToObject():Object {
@@ -64,7 +80,11 @@ import classes.display.SpriteDb;
 				"BelisaKids": BelisaKids,
 				"BelisaPregnancy": BelisaPregnancy,
 				"BelisaKidsEggs": BelisaKidsEggs,
+				"BelisaKidsEggs1": BelisaKidsEggs1,
+				"BelisaKidsEggs2": BelisaKidsEggs2,
 				"BelisaKidsEggsHatching": BelisaKidsEggsHatching,
+				"BelisaKidsEggsHatching1": BelisaKidsEggsHatching1,
+				"BelisaKidsEggsHatching2": BelisaKidsEggsHatching2,
 				"LilyKidsPC": LilyKidsPC,
 				"LilyKidsPCPregnancy": LilyKidsPCPregnancy,
 				"LilyKidsIzma": LilyKidsIzma,
@@ -75,7 +95,11 @@ import classes.display.SpriteDb;
 				"TyrantiaFemaleKids": TyrantiaFemaleKids,
 				"TyrantiaPregnancy": TyrantiaPregnancy,
 				"TyrantiaKidsEggs": TyrantiaKidsEggs,
-				"TyrantiaKidsEggsHatching": TyrantiaKidsEggsHatching
+				"TyrantiaKidsEggs1": TyrantiaKidsEggs1,
+				"TyrantiaKidsEggs2": TyrantiaKidsEggs2,
+				"TyrantiaKidsEggsHatching": TyrantiaKidsEggsHatching,
+				"TyrantiaKidsEggsHatching1": TyrantiaKidsEggsHatching1,
+				"TyrantiaKidsEggsHatching2": TyrantiaKidsEggsHatching2
 			};
 		}
 
@@ -86,7 +110,11 @@ import classes.display.SpriteDb;
 				BelisaKids = valueOr(o["BelisaKids"], 0);
 				BelisaPregnancy = valueOr(o["BelisaPregnancy"], 0);
 				BelisaKidsEggs = valueOr(o["BelisaKidsEggs"], 0);
+				BelisaKidsEggs1 = valueOr(o["BelisaKidsEggs1"], 0);
+				BelisaKidsEggs2 = valueOr(o["BelisaKidsEggs2"], 0);
 				BelisaKidsEggsHatching = valueOr(o["BelisaKidsEggsHatching"], 0);
+				BelisaKidsEggsHatching1 = valueOr(o["BelisaKidsEggsHatching1"], 0);
+				BelisaKidsEggsHatching2 = valueOr(o["BelisaKidsEggsHatching2"], 0);
 				LilyKidsPC = o ["LilyKidsPC"];
 				LilyKidsPCPregnancy = o ["LilyKidsPCPregnancy"];
 				LilyKidsIzma = o ["LilyKidsIzma"];
@@ -97,7 +125,11 @@ import classes.display.SpriteDb;
 				TyrantiaFemaleKids = valueOr(o["TyrantiaFemaleKids"], 0);
 				TyrantiaPregnancy = valueOr(o["TyrantiaPregnancy"], 0);
 				TyrantiaKidsEggs = valueOr(o["TyrantiaKidsEggs"], 0);
+				TyrantiaKidsEggs1 = valueOr(o["TyrantiaKidsEggs1"], 0);
+				TyrantiaKidsEggs2 = valueOr(o["TyrantiaKidsEggs2"], 0);
 				TyrantiaKidsEggsHatching = valueOr(o["TyrantiaKidsEggsHatching"], 0);
+				TyrantiaKidsEggsHatching1 = valueOr(o["TyrantiaKidsEggsHatching1"], 0);
+				TyrantiaKidsEggsHatching2 = valueOr(o["TyrantiaKidsEggsHatching2"], 0);
 			} else {
 				// loading from old save
 				resetState();
@@ -112,10 +144,10 @@ public function DriderTownEnter():void {
 	clearOutput();
 	outputText("The Stone Hutch, Treehouse and Watery Orb have been changed and expanded. The Stone hutch has large swathes of silk hung off it, connecting to poles stuck deep into the ground and creating a large covered pavilion around it. The extension is enclosed with wicker walls lined with stone. The treehouse hasn’t changed much, but there’s a rope bridge connecting the flat roof of Tyrantia’s hutch with the silken treehouse.\n\n");
 	outputText("Belisa’s Orb appears at first glance to have been punctured and dragged to shore. The three dwellings are connected by strings of more spider silk, with odd, dangling lamps lighting up the connected houses. Gravel paths have been constructed between the three houses.\n\n");
-	if (BelisaKidsEggs > 0 || TyrantiaKidsEggs > 0) outputText("Several egg-sacs are hung inside Tyrantia’s hutch, now a longhouse, and one of the Drider sisters is always on guard by the door. ");
+	if (BelisaKidsEggs > 0 || BelisaKidsEggs1 > 0 || BelisaKidsEggs2 > 0 || TyrantiaKidsEggs > 0 || TyrantiaKidsEggs1 > 0 || TyrantiaKidsEggs2 > 0) outputText("Several egg-sacs are hung inside Tyrantia’s hutch, now a longhouse, and one of the Drider sisters is always on guard by the door.\n\n");
 	if (BelisaKids > 0) outputText("Several small Drider-kids wander around their little complex, playing, weaving or play-fighting with the others. Belisa frequently looks over at the smaller Driders, a smile on her face as she watches them play. You currently have "+BelisaKids+" kids milling around.\n\n");
 	if ((TyrantiaFemaleKids+TyrantiaMaleKids) > 0) {
-	outputText("A small area near the middle of Drider-town has been turned into a meadow. Flowers seem to bloom at random, far faster than normal. Your children with Tyrantia seem to like this spot, gravitating towards it when not doing anything in particular. "+(TyrantiaFemaleKids+TyrantiaMaleKids)+" Uniriders play near or around the meadow. Just getting near this part of camp seems to invigorate your mind, and you feel cleaner of heart than you did before.\n\n");/*
+		outputText("A small area near the middle of Drider-town has been turned into a meadow. Flowers seem to bloom at random, far faster than normal. Your children with Tyrantia seem to like this spot, gravitating towards it when not doing anything in particular. "+(TyrantiaFemaleKids+TyrantiaMaleKids)+" Uniriders play near or around the meadow. Just getting near this part of camp seems to invigorate your mind, and you feel cleaner of heart than you did before.\n\n");/*
 	//if Pure Celess exists
 	switch (rand(4)) {
   case 0: 
@@ -142,8 +174,7 @@ public function DriderTownEnter():void {
 }//outputText("\"<i></i>\"\n\n");
 
 public function DriderTownSisters():void {
-	clearOutput();
-	outputText("You decide to have a visit with one of your three lovely Driders. The only question is, which one?\n\n"); 
+	outputText("You decide to have a visit with one of your three lovely Driders. The only question is, which one?\n\n"+TyrantiaPregnancy+"\n"+TyrantiaKidsEggsHatching+"\n"+TyrantiaKidsEggsHatching1+"\n"+TyrantiaKidsEggsHatching2+"\n"+TyrantiaKidsEggs+"\n"+TyrantiaKidsEggs1+"\n"+TyrantiaKidsEggs2+"\n\n"+BelisaPregnancy+"\n"+BelisaKidsEggsHatching+"\n"+BelisaKidsEggsHatching1+"\n"+BelisaKidsEggsHatching2+"\n"+BelisaKidsEggs+"\n"+BelisaKidsEggs1+"\n"+BelisaKidsEggs2+"\n\n");
 	menu();
 	addButton(1, "Belisa", SceneLib.belisa.BelisaMainCampMenu);
 	addButton(2, "Lily", SceneLib.lily.LilyCampFollower);
@@ -171,8 +202,18 @@ public function BelisaEggLaying():void {
 	outputText("As you make your way over, you hear a sloshing sound, and Belisa pants for air as she pulls up her robe, revealing her sopping wet cunt, which shivers rapidly. With a groan, a single white orb widens her quim slightly as it exits, landing softly in the trough. You get to Belisa, and she locks eyes with you, sighing slightly in relief as you take her other side, you and Tyrantia both supporting Belisa as her legs shake.\n\n");
 	outputText("Belisa lays "+(eggsB*2)+" eggs, and when she’s done, your Drider-lover slides to the ground. Tyrantia takes the trough, bringing it inside, and you wrap your arms around Belisa, whispering soothing words into her ears.\n\n");
 	BelisaPregnancy = 0;
-	BelisaKidsEggs = eggsB;
-	BelisaKidsEggsHatching = 240;
+	if (BelisaKidsEggsHatching1 > 0) {
+		BelisaKidsEggs2 = eggsB;
+		BelisaKidsEggsHatching2 = 120;
+	}
+	else if (BelisaKidsEggsHatching > 0) {
+		BelisaKidsEggs1 = eggsB;
+		BelisaKidsEggsHatching1 = 120;
+	}
+	else {
+		BelisaKidsEggs = eggsB;
+		BelisaKidsEggsHatching = 120;
+	}
 	doNext(playerMenu);
 	eachMinuteCount(15);
 }
@@ -182,9 +223,21 @@ public function BelisaEggsHatched():void {
 	outputText("Tyrantia comes over, helping Belisa escort the young driders back to her hutch. She gives you a smile and a thumbs-up, before leaving you with Belisa.\n\n");
 	outputText("\"<i>...Thank you.</i>\" She says simply, wrapping her arms around you. \"<i>They’re rambunctious…but I wouldn’t expect anything different from your kids.</i>\" You give her a mock-protest, but Belisa laughs, cutting you off with a sweet kiss on the lips. ");
 	outputText("\"<i>I know you’re busy…But please come visit them, would you?</i>\" With that, Belisa catches sight of one of your new children rushing out from the hutch, with Tyrantia in hot pursuit. \"<i>Oh, shoot!</i>\" She cries, rushing off to corral your wayward spawn. Drider-town seems to be busier now.\n\n");
-	BelisaKidsEggsHatching = 0;
-	BelisaKids += BelisaKidsEggs;
-	BelisaKidsEggs = 0;
+	if (BelisaKidsEggsHatching < 2) {
+		BelisaKidsEggsHatching = 0;
+		BelisaKids += BelisaKidsEggs;
+		BelisaKidsEggs = 0;
+	}
+	if (BelisaKidsEggsHatching1 < 2) {
+		BelisaKidsEggsHatching1 = 0;
+		BelisaKids += BelisaKidsEggs1;
+		BelisaKidsEggs1 = 0;
+	}
+	if (BelisaKidsEggsHatching2 < 2) {
+		BelisaKidsEggsHatching2 = 0;
+		BelisaKids += BelisaKidsEggs2;
+		BelisaKidsEggs2 = 0;
+	}
 	doNext(playerMenu);
 	eachMinuteCount(15);
 }
@@ -214,8 +267,18 @@ public function TyrantiaEggLaying():void {
 	outputText("<i>“Sister, [name] is right. Egg-laying is tiring. Close your eyes, dear sister. We’ll make sure nothing happens to your little ones.”</i> Belisa and Lily help Tyrantia stagger over to the bed, the giantess flopping face-down into it. Belisa and Lily give you warm smiles, Lily taking Tyrantia’s eggs while Belisa puts a hand on your shoulder.\n\n");
 	outputText("<i>“We’ll make sure she rests.”</i> Belisa smiles. <i>“Do what you need to, sweet [name]. We’ll look after her.”</i> You nod, heading back to your part of camp.\n\n");
 	TyrantiaPregnancy = 0;
-	TyrantiaKidsEggs = (3 + rand(2));
-	TyrantiaKidsEggsHatching = 240;
+	if (TyrantiaKidsEggsHatching1 > 0) {
+		TyrantiaKidsEggs2 = (3 + rand(2));
+		TyrantiaKidsEggsHatching2 = 120;
+	}
+	else if (TyrantiaKidsEggsHatching > 0) {
+		TyrantiaKidsEggs1 = (3 + rand(2));
+		TyrantiaKidsEggsHatching1 = 120;
+	}
+	else {
+		TyrantiaKidsEggs = (3 + rand(2));
+		TyrantiaKidsEggsHatching = 120;
+	}
 	doNext(playerMenu);
 	eachMinuteCount(15);
 }
@@ -238,14 +301,33 @@ public function TyrantiaEggsHatched():void {
 	var kid3:Number = rand(2);
 	if (kid3 == 0) TyrantiaFemaleKids += 1;
 	else TyrantiaMaleKids += 1;
-	if (TyrantiaKidsEggs == 4) {
-		var kid4:Number = rand(2);
-		if (kid4 == 0) TyrantiaFemaleKids += 1;
-		else TyrantiaMaleKids += 1;
+	if (TyrantiaKidsEggsHatching < 2) {
+		if (TyrantiaKidsEggs == 4) {
+			var kid4a:Number = rand(2);
+			if (kid4a == 0) TyrantiaFemaleKids += 1;
+			else TyrantiaMaleKids += 1;
+		}
+		TyrantiaKidsEggsHatching = 0;
+		TyrantiaKidsEggs = 0;
 	}
-	TyrantiaKidsEggsHatching = 0;
-	BelisaKids += BelisaKidsEggs;
-	TyrantiaKidsEggs = 0;
+	if (TyrantiaKidsEggsHatching1 < 2) {
+		if (TyrantiaKidsEggs1 == 4) {
+			var kid4b:Number = rand(2);
+			if (kid4b == 0) TyrantiaFemaleKids += 1;
+			else TyrantiaMaleKids += 1;
+		}
+		TyrantiaKidsEggsHatching1 = 0;
+		TyrantiaKidsEggs1 = 0;
+	}
+	if (TyrantiaKidsEggsHatching2 < 2) {
+		if (TyrantiaKidsEggs2 == 4) {
+			var kid4c:Number = rand(2);
+			if (kid4c == 0) TyrantiaFemaleKids += 1;
+			else TyrantiaMaleKids += 1;
+		}
+		TyrantiaKidsEggsHatching2 = 0;
+		TyrantiaKidsEggs2 = 0;
+	}
 	doNext(playerMenu);
 	eachMinuteCount(15);
 }
