@@ -216,7 +216,7 @@ public class Camp extends NPCAwareContent{
 			SceneLib.dridertown.BelisaEggLaying();
 			return;
 		}
-		if (DriderTown.BelisaKidsEggsHatching == 1) {
+		if (DriderTown.BelisaKidsEggsHatching == 1 || DriderTown.BelisaKidsEggsHatching1 == 1 || DriderTown.BelisaKidsEggsHatching2 == 1) {
 			hideMenus();
 			SceneLib.dridertown.BelisaEggsHatched();
 			return;
@@ -231,7 +231,7 @@ public class Camp extends NPCAwareContent{
 			SceneLib.dridertown.TyrantiaEggLaying();
 			return;
 		}
-		if (DriderTown.TyrantiaKidsEggsHatching == 1) {
+		if (DriderTown.TyrantiaKidsEggsHatching == 1 || DriderTown.TyrantiaKidsEggsHatching1 == 1 || DriderTown.TyrantiaKidsEggsHatching2 == 1) {
 			hideMenus();
 			SceneLib.dridertown.TyrantiaEggsHatched();
 			return;
@@ -1033,8 +1033,8 @@ public class Camp extends NPCAwareContent{
 			addButton(11, "Masturbate", SceneLib.masturbation.masturbateMenu);
 			if ((((player.hasPerk(PerkLib.HistoryReligious) || player.hasPerk(PerkLib.PastLifeReligious)) && player.cor <= 66) || (player.hasPerk(PerkLib.Enlightened) && player.cor < 10)) && !(player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0) || flags[kFLAGS.SFW_MODE] >= 1) addButton(11, "Meditate", SceneLib.masturbation.masturbateMenu);
 		}
-		addButton(12, "Wait", doWaitMenu).hint("Wait for one to eight hours. Or until the night comes.");
-		if (player.fatigue > 40 || player.HP / player.maxHP() <= .9) addButton(12, "Rest", restMenu).hint("Rest for one to eight hours. Or until fully healed / night comes.");
+		addButton(12, "Wait", doWaitMenu).hint("Wait for one to twelve hours. Or until the night comes.");
+		if (player.fatigue > 40 || player.HP / player.maxHP() <= .9) addButton(12, "Rest", restMenu).hint("Rest for one to twelve hours. Or until fully healed / night comes.");
 		if(((model.time.hours <= 5 || model.time.hours >= 21) && !canExploreAtNight) || (!isNightTime && canExploreAtNight)) {
 			addButton(12, "Sleep", doSleep).hint("Turn yourself in for the night.");
 			if(isAWerewolf && flags[kFLAGS.LUNA_MOON_CYCLE] == 8) {
@@ -1299,8 +1299,6 @@ public class Camp extends NPCAwareContent{
 				outputText("The Stone Hutch, Treehouse and Watery Orb have been changed and expanded. The Stone hutch has large swathes of silk hung off it, connecting to poles stuck deep into the ground and creating a large covered pavilion around it. ");
 				outputText("The extension is enclosed with wicker walls lined with stone. The treehouse hasn’t changed much, but there’s a rope bridge connecting the flat roof of Tyrantia’s hutch with the silken treehouse.\n\n");
 				outputText("Belisa’s Orb appears at first glance to have been punctured and dragged to shore. The three dwellings are connected by strings of more spider silk, with odd, dangling lamps lighting up the connected houses. Gravel paths have been constructed between the three houses.\n\n");
-				if (DriderTown.BelisaKidsEggs > 0) outputText("Several egg-sacs are hung inside Tyrantia’s hutch, now a longhouse, and one of the Drider sisters is always on guard by the door. ");
-				if (DriderTown.BelisaKids > 0) outputText("Several small Drider-kids wander around their little complex, playing, weaving or play-fighting with the others. Belisa frequently looks over at the smaller Driders, a smile on her face as she watches them play. You currently have "+DriderTown.BelisaKids+" kids milling around.\n\n");
 				buttons.add("DriderTown", SceneLib.dridertown.DriderTownEnter).hint("Check up on Belisa, Lily & Tyrantia.");
 			}
 			//Alvina
@@ -1352,8 +1350,6 @@ public class Camp extends NPCAwareContent{
 			//Belisa
 			if (BelisaFollower.BelisaInCamp && !DriderTown.DriderTownComplete) {
 				outputText("On the water, Belisa anchored her silk dome. However, since you’ve seen it, the dwelling has changed. Instead of a fully submerged bubble-like structure, it’s got a silky curtain for a door, and a solid wooden dock’s been added to anchor the odd building to the ground. Outside the dwelling, a small stall’s been set up, and Belisa’s wares are on display.\n\n");
-				if (DriderTown.BelisaKidsEggs > 0) outputText("Several egg-sacs are hung inside Tyrantia’s hutch, now a longhouse, and one of the Drider sisters is always on guard by the door. ");
-				if (DriderTown.BelisaKids > 0) outputText("Several small Drider-kids wander around their little complex, playing, weaving or play-fighting with the others. Belisa frequently looks over at the smaller Driders, a smile on her face as she watches them play. You currently have "+DriderTown.BelisaKids+" kids milling around.\n\n");
 				buttons.add("Belisa", SceneLib.belisa.BelisaMainCampMenu).hint("Visit Belisa.");
 			}
 			//Cai'Lin
@@ -3382,17 +3378,16 @@ public class Camp extends NPCAwareContent{
 //-----------------
 	public function restMenu():void {
 		menu();
-		addButton(0, "1 Hour", restFor, 1).hint("Rest for one hour.");
+		addButton(0, "1 Hour", 	restFor, 1).hint("Rest for one hour.");
 		addButton(1, "2 Hours", restFor, 2).hint("Rest for two hours.");
-		addButton(2, "4 Hours", restFor, 4).hint("Rest for four hours.");
-		addButton(3, "8 Hours", restFor, 8).hint("Rest for eight hours.");
-		if (player.isNightCreature())
-		{
-			addButton(4, "Till Dawn", restTillDawn).hint("Rest until the dawn comes.");
-		}
-		else{
-			addButton(4, "Till Dusk", restTillDusk).hint("Rest until the night comes.");
-		}
+		addButton(2, "3 Hours", restFor, 3).hint("Rest for three hours.");
+		addButton(3, "4 Hours", restFor, 4).hint("Rest for four hours.");
+		addButton(4, "6 Hours", restFor, 6).hint("Rest for six hours.");
+		addButton(5, "8 Hours", restFor, 8).hint("Rest for eight hours.");
+		addButton(6, "10 Hours",restFor, 10).hint("Rest for ten hours.");
+		addButton(7, "12 Hours",restFor, 12).hint("Rest for twelve hours.");
+		if (player.isNightCreature()) addButton(8, "Till Dawn", restTillDawn).hint("Rest until the dawn comes.");
+		else addButton(8, "Till Dusk", restTillDusk).hint("Rest until the night comes.");
 		addButton(14, "Back", playerMenu);
 	}
 
@@ -3500,12 +3495,16 @@ public class Camp extends NPCAwareContent{
 //-----------------
 	public function doWaitMenu():void {
 		menu();
-		addButton(0, "1 Hour", doWaitFor, 1).hint("Wait one hour.");
+		addButton(0, "1 Hour",  doWaitFor, 1).hint("Wait one hour.");
 		addButton(1, "2 Hours", doWaitFor, 2).hint("Wait two hours.");
-		addButton(2, "4 Hours", doWaitFor, 4).hint("Wait four hours.");
-		addButton(3, "8 Hours", doWaitFor, 8).hint("Wait eight hours.");
-		if (player.isNightCreature()) addButton(4, "Till Dawn", doWaitTillDawn).hint("Wait until the dawn comes.");
-		else addButton(4, "Till Dusk", doWaitTillDusk).hint("Wait until the night comes.");
+		addButton(2, "3 Hours", doWaitFor, 3).hint("Wait three hours.");
+		addButton(3, "4 Hours", doWaitFor, 4).hint("Wait four hours.");
+		addButton(4, "6 Hours", doWaitFor, 6).hint("Wait six hours.");
+		addButton(5, "8 Hours", doWaitFor, 8).hint("Wait eight hours.");
+		addButton(6, "10 Hours", doWaitFor, 10).hint("Wait ten hours.");
+		addButton(7, "12 Hours", doWaitFor, 12).hint("Wait twelve hours.");
+		if (player.isNightCreature()) addButton(8, "Till Dawn", doWaitTillDawn).hint("Wait until the dawn comes.");
+		else addButton(8, "Till Dusk", doWaitTillDusk).hint("Wait until the night comes.");
 		addButton(14, "Back", playerMenu);
 	}
 

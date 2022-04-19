@@ -1010,6 +1010,7 @@ import classes.CoC;
 			var multimaxven:Number = 1;
 			if (CoC.instance.transformations.FaceSnakeFangs.isPresent()) maxven += 200;
 			if (CoC.instance.transformations.FaceSpiderFangs.isPresent()) maxven += 200;
+			if (CoC.instance.transformations.FaceJabberwocky.isPresent()) maxven += 200;
 			if (game.player.tailType == Tail.BEE_ABDOMEN) maxven += 300;
 			if (game.player.tailType == Tail.SPIDER_ADBOMEN) maxven += 300;
 			if (game.player.tailType == Tail.SCORPION) maxven += 300;
