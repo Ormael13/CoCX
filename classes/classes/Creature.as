@@ -757,7 +757,7 @@ public class Creature extends Utils
 			if (game.player.demonScore() >= 11) maxmult += 0.4;
 			if (game.player.demonScore() >= 16) maxmult += 0.6;
 			if (TyrantiaFollower.TyrantiaTrainingSessions > 0.5) maxmult += 0.01 * TyrantiaFollower.TyrantiaTrainingSessions;
-			return 1;
+			return maxmult;
 		}
 		public function maxLust():Number {
 			var max:Number = Math.round(maxLust_base()*maxLust_mult());
@@ -1115,7 +1115,6 @@ public class Creature extends Utils
 		public var butt:Butt = new Butt();
 
 		//Piercings
-		//TODO: Pull this out into it's own class and enum.
 		public var nipplesPierced:Number = 0;
 		public var nipplesPShort:String = "";
 		public var nipplesPLong:String = "";
@@ -1149,7 +1148,6 @@ public class Creature extends Utils
 		//Sexual Stuff
 		//MALE STUFF
 		//public var cocks:Array;
-		//TODO: Tuck away into Male genital class?
 		public var cocks:Array;
 		//balls
 		public var balls:Number = 0;
@@ -1167,7 +1165,6 @@ public class Creature extends Utils
 		}
 
 		//FEMALE STUFF
-		//TODO: Box into Female genital class?
 		public var vaginas:Vector.<VaginaClass>;
 		//Fertility is a % out of 100.
 		public var fertility:Number = 10;
@@ -1400,7 +1397,6 @@ public class Creature extends Utils
 
 		*/
 		//Monsters have few perks, which I think should be a status effect for clarity's sake.
-		//TODO: Move perks into monster status effects.
 		private var _perks:PerkManager;
 
 		public function get perkManager():PerkManager
@@ -1530,12 +1526,10 @@ public class Creature extends Utils
 
 		//Current status effects. This has got very muddy between perks and status effects. Will have to look into it.
 		//Someone call the grammar police!
-		//TODO: Move monster status effects into perks. Needs investigation though.
 		private var _statusEffects:StatusEffectManager;
 
 		//Current status effects. This has got very muddy between perks and status effects. Will have to look into it.
 		//Someone call the grammar police!
-		//TODO: Move monster status effects into perks. Needs investigation though.
 		/**
 		 * List of all status effects.
 		 */

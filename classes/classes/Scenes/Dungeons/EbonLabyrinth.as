@@ -387,21 +387,22 @@ public class EbonLabyrinth extends DungeonAbstractContent {
     private function bossSelector(tier:int = 0):void {
         //Make the pool of encounters
         var choices:Array = [];
-        for (var boss:int = 0; boss < bossPool[tier].length; ++boss) //[bit_num, function]
+        var boss:int;
+        for (boss = 0; boss < bossPool[tier].length; ++boss) //[bit_num, function]
             if (!getBit(bossTracker, bossPool[tier][boss][0])) //if the bit is not set
                 choices.push(boss); //save boss index
         //If the array is empty, clear tracker and restart.
         if (choices.length == 0) {
             //reset the bits AND add them to the array
-            for (var b:int = 0; b < bossPool[tier].length; ++b) { //[bit_num, function]
-                setBit(bossTracker, bossPool[tier][b][0], false); //set the boss bit
+            for (boss = 0; boss < bossPool[tier].length; ++boss) { //[bit_num, function]
+                bossTracker = setBit(bossTracker, bossPool[tier][boss][0], false); //set the boss bit
                 choices.push(boss);
             }
         }
         //Otherwise, select the boss and set the bit.
-        var selected:int = choices[rand(choices.length)]; //select boss index
-        setBit(bossTracker, bossPool[tier][selected][0], true); //set the boss bit
-        bossPool[tier][selected][1](); //call encounter function
+        boss = choices[rand(choices.length)]; //select boss index
+        bossTracker = setBit(bossTracker, bossPool[tier][boss][0], true); //set the boss bit
+        bossPool[tier][boss][1](); //call encounter function
     }
 
     //selects an enemy and starts the encounter

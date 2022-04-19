@@ -26,7 +26,6 @@ package classes.Items.Weapons
 		}
 		
 		public function calcWizardsMult():Number {
-			var desc:String = "";
 			var multadd:Number = 0.4;
             if (game && game.player) {
                 multadd = (40 - game.player.cor) / 100;
@@ -38,7 +37,7 @@ package classes.Items.Weapons
 			return multadd;
 		}
 
-        private static var lastCor:Number = 40; //optimization
+        private static var lastCor:Number = 40;
 
         public function updateWizardsMult():void {
             if (game.player.cor != lastCor) {
@@ -72,6 +71,11 @@ package classes.Items.Weapons
 			if (game.player.cor < (33 + game.player.corruptionTolerance)) return super.canUse();
 			outputText("You grab hold of the handle of the staff only to have it grow burning hot. You're forced to let it go lest you burn yourself. Something within the staff must be displeased.");
 			return false;
+		}
+
+		override public function get description():String {
+			updateWizardsMult(); //To display *correct* values
+			return super.description;
 		}
 	}
 }

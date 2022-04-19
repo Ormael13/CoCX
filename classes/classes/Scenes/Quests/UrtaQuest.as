@@ -43,7 +43,6 @@ public class UrtaQuest extends NPCAwareContent
 //const EDRYN_BIRF_COUNTDOWN:int = 722;
 
 //You play as Urta, which copies everyone about you into this new variable. Very clumsy.
-//TODO: Figure out this whole thing. You play as Urta but the whole quest saves you state into this variable and swaps back and forth
 //whenever you "leave" the quest
 public var urtaQItems1:ItemSlotClass = new ItemSlotClass();
 public var urtaQItems2:ItemSlotClass = new ItemSlotClass();
@@ -917,7 +916,7 @@ public function runIntoAGoblin(camped:Boolean = false):void {
 	}
 	outputText("\n\n\"<i>Hey there lady-stud!  You look like you could use a hot cunt to fertilize a few times!</i>\" a reedy, high-pitched goblin voice calls.  Shit, one of those guttersluts.  They're almost as bad as demons.  Worst of all, you know they'll play to your basest, most well-concealed fetishes.  Just the idea of having one of them split on your cock, slowly ballooning with seed and loving it...  well, if you're being honest with yourself, it makes you stiffen a little.  You turn around to face the curvy little preg-hungry whore, and as soon as you see her, you realize she's not going to go away until she's had a ride on your dick or been subdued.");
 	outputText("\n\n<b>It's a fight!</b>");
-	startCombat(new GoblinBroodmother());// TODO extract to Monsters.GoblinBroodMother class
+	startCombat(new GoblinBroodmother());
 }
 
 
@@ -1599,7 +1598,7 @@ private function gnollAlphaBitchIntro():void {
 	monster.bonusHP = 750;
 	monster.level += 11;
 	monster.short = "alpha gnoll";
-	monster.HP   = monster.maxHP(); // TODO extract to AlphaGnoll class
+	monster.HP   = monster.maxHP();
 	monster.long = "The gnoll standing before you is obviously an alpha among her kind; she has to be over seven feet tall and rippling with muscle, not that this stops her from having a curvy form, squeezable ass and full E-cup boobs.  The remnants of what must have once been a gorgeous and expensive silken dress are draped across her figure, torn off at the knees and hanging by only a single shoulder, arms bare and exposed.  A heavy necklace of gold is wrapped around her neck, while bracelets of more of the same adorn her arms, and piercings of gold stud her ears.  She carries a mighty-looking spear in her hands, which she brandishes at you menacingly, and a basket of throwing javelins is strapped to her back.";
 	doNext(playerMenu);
 }

@@ -87,7 +87,7 @@ public class SceneHunter extends BaseContent {
     //--------------------------------------------------------------------------------------------------
 
     public function get uniHerms():Boolean {
-        return flags[kFLAGS.SCENEHUNTER_UNI_HERMS];
+        return _passCheck || flags[kFLAGS.SCENEHUNTER_UNI_HERMS];
     }
 
     /**
@@ -102,7 +102,8 @@ public class SceneHunter extends BaseContent {
     * @param    dickActive      If false, "dick" button will be disabled.
     * @param    dickDisabledMsg The message to write on the disabled dick button
     */
-    public function selectGender(dickF:Function, vagF:Function, assA:* = null, hermF:Function = null, dickPriority:int = 1, dickActive:Boolean = true, dickDisabledMsg:String = ""):void {
+    public function selectGender(dickF:Function, vagF:Function, assA:* = null, hermF:Function = null,
+                                 dickPriority:int = 1, dickActive:Boolean = true, dickDisabledMsg:String = ""):void {
         //decomposing ass
         var assText:String = (assA is Array) ? assA[0] : "Ass";
         var assF:Function = (assA is Function)  ? assA as Function :
@@ -173,6 +174,7 @@ public class SceneHunter extends BaseContent {
             else
                 addButtonDisabled(3, "Herm", "Not a herm.");
         }
+        _passCheck = false; //reset one-time check skipper
     }
 
     //--------------------------------------------------------------------------------------------------
@@ -180,7 +182,7 @@ public class SceneHunter extends BaseContent {
     //--------------------------------------------------------------------------------------------------
 
     public function get dickSelect():Boolean {
-        return flags[kFLAGS.SCENEHUNTER_DICK_SELECT];
+        return _passCheck || flags[kFLAGS.SCENEHUNTER_DICK_SELECT];
     }
 
     /**
@@ -195,10 +197,14 @@ public class SceneHunter extends BaseContent {
     public function selectFitNofit(fitF:Function, nofitF:Function, maxSize:Number, compareBy:String = "area"):void {
         //Auto-calls
         if (!dickSelect) {
-            if (player.findCock(1, -1, maxSize, compareBy, false) >= 0)
+            if (player.findCock(1, -1, maxSize, compareBy, false) >= 0) {
+                print("Failed/passed size check - dick fits, but you certainly can try to use something <i>bigger</i> than " + maxSize + " " + compareBy);
                 fitF();
-            else
+            }
+            else {
+                print("Failed/passed size check - dick doesn't fit " + maxSize + " " + compareBy);
                 nofitF();
+            }
             return;
         }
         //Dialogue
@@ -215,16 +221,11 @@ public class SceneHunter extends BaseContent {
             addButton(1, "Too big", restoreText, beforeText, nofitF);
         else
             addButtonDisabled(1, "Too big", "Requires dick " + compareBy + " greater than " + maxSize);
+        _passCheck = false; //reset one-time check skipper
     }
 
     //Calls the 'fun' function, finding the biggest cock index in selected limits
     public function callFitNofit(fun:Function, max:Number, compareBy:String = "area"):void {
-        if (!dickSelect) {
-            var x:int = player.cockThatFits(max, compareBy);
-            if (x < 0) x = player.smallestCockIndex(); //selecting smallest here, not biggest. Because you disabled me. Ass.
-            fun(x);
-            return;
-        }
         //Invalid calls may be created, but must NEVER be called.
         var fitF:Function   = curry(fun, player.findCock(1, -1, max, compareBy));
         var nofitF:Function = curry(fun, player.findCock(1, max , -1, compareBy)); //selecting bigger here, because you're cool.
@@ -245,12 +246,19 @@ public class SceneHunter extends BaseContent {
         var smallProvided:Boolean = smallMax >= 0 && smallF != null;
         //Auto-calls
         if (!dickSelect) {
-            if (player.findCock(1, bigMin, totalMax, compareBy) >= 0)
+            if (player.findCock(1, bigMin, totalMax, compareBy) >= 0) {
+                print("Passed? Size check, but alt scene available for dicks smaller than " + bigMin + " " + compareBy);
                 bigF();
-            else if (player.findCock(1, smallProvided ? smallMax : -1, bigMin, compareBy, false) >= 0) //called even if mediumMin is not provived (-1 = no minimum)
+            }
+            else if (player.findCock(1, smallProvided ? smallMax : -1, bigMin, compareBy, false) >= 0) {
+                print("Failed size check, dick must be bigger than " + bigMin + " " + compareBy);
+                if (smallProvided) print("Passed? Another size check, but alt scene available for dicks smaller than " + smallMax + " " + compareBy);
                 mediumF();
-            else
+            }
+            else {
+                print("Failed 2 size checks, dick must be bigger than " + smallMax + " or " + bigMin + " " + compareBy);
                 smallF(); //if smallMax is provided, smallF MUST be provided too
+            }
             return;
         }
         //Dialogue
@@ -282,14 +290,11 @@ public class SceneHunter extends BaseContent {
             else
                 addButtonDisabled(1, "Small", "Requires dick " + compareBy + " less than " + bigMin);
         }
+        _passCheck = false; //reset one-time check skipper
     }
 
     //Calls the 'fun' function, finding the biggest cock index in selected limits
     public function callBigSmall(fun:Function, bigMin:Number, smallMax:Number = -1, compareBy:String = "area", totalMax:Number = -1):void {
-        if (!dickSelect) {
-            fun(player.findCock(1, -1, totalMax, compareBy));
-            return;
-        }
         //Invalid calls may be created, but must NEVER be called.
         var bigF:Function   = curry(fun, player.findCock(1, bigMin, totalMax, compareBy));
         var mediumF:Function= curry(fun, player.findCock(1, smallMax , bigMin, compareBy));
@@ -305,26 +310,22 @@ public class SceneHunter extends BaseContent {
     * @param    twoF        Multicock / Two cocks (or more)
     * @param    threeF      (Optional) Three (or more)
     * @param    fourF       (Optional) Four (or more)
-    * @param    moreF       (Optional) More (5, 10)
     */
     public function selectSingleMulti(singleF:Function, twoF:Function, threeF:Function = null, fourF:Function = null, compareBy:String = "area", totalMax:Number = -1):void {
         var cnt:int = player.countCocks(-1, totalMax, compareBy);
         //Auto-calls
         if (!dickSelect) {
+            if (printChecks) { //Print check, at least?
+                var max:int = fourF != null ? 4 : threeF != null ? 3 : twoF != null ? 2 : 1;
+                if (cnt < max) print("Failed: multicock check, up to " + max);
+            }
             if (fourF  != null && cnt >= 4)
                 fourF();
             else if (threeF != null && cnt >= 3)
                 threeF();
             else if (twoF   != null && cnt >= 2)
-                fourF();
-            else if (singleF != null)
-                singleF();
-            return;
-        }
-        //If single, no bother
-        if (cnt == 1) {
-            print("Failed: multicock check");
-            singleF();
+                twoF();
+            else singleF();
             return;
         }
         //Dialogue
@@ -352,6 +353,7 @@ public class SceneHunter extends BaseContent {
             else
                 addButtonDisabled(3, "Four", "Not enough.");
         }
+        _passCheck = false; //reset one-time check skipper
     }
 
     //--------------------------------------------------------------------------------------------------
@@ -361,14 +363,21 @@ public class SceneHunter extends BaseContent {
     public function get other():Boolean {
         return flags[kFLAGS.SCENEHUNTER_OTHER];
     }
-    //nothing more here for now... Will it just check the value, or new next will be here too?
 
-    //Recalling is 'technically' a SceneHunter feature, so I'll store its flag here.
-    //Set to true to disable everything but text in recalled scenes
+    //Can be set to avoid exactly **ONE** check. For example, start uniHerms selector without uniHerms enabled.
+    private var _passCheck:Boolean = false;
+    //Skips the next check. For example, start uniHerms selector without uniHerms enabled. (Excluding 'other' checks - they work differently each time.)
+    public function passCheckOnce():void {
+        _passCheck = true;
+    }
+
+    /*
+    Recalling is 'technically' a SceneHunter feature, so I'll store its flag here.
+    Set to true to disable everything but text in recalled scenes
+    */
     public var _recalling:Boolean = false; //set to true when a scene is recalled.
 
     //No disabling flag for this one, but I'll leave it here for now in case I'll need to lock it..
-
     /**
      * The dialogue to select scene options based on corruption.
      * When disabled, overrides "tentacle always fit" behavior.

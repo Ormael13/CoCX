@@ -15,30 +15,7 @@ import classes.internals.ChainedDrop;
 public class BeeGirl extends Monster {
 
 		override public function defeated(hpVictory:Boolean):void {
-			clearOutput();
-			if(player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
-				if (hpVictory) {
-					outputText("You smile in satisfaction as the " + short + " collapses, unable to continue fighting.  The sweet scent oozing from between her legs is too much to bear, arousing you painfully, and you see an easy way to relieve it..\n\nWhat do you do to her?");
-				}
-				else {
-					outputText("You smile in satisfaction as the " + short + " spreads her legs and starts frigging her honey-soaked cunt.  The sweet scent oozing from between her legs is too much to bear, arousing you painfully, and you see an easy way to relieve it..\n\nWhat do you do to her?");
-				}
-				player.lust += 33;
-				player.dynStats("lus", 1);
-				SceneLib.forest.beeGirlScene.afterfightoptionswithBeeGirl();
-			}
-			else if (player.hasStatusEffect(StatusEffects.Feeder) && flags[kFLAGS.SFW_MODE] <= 0) {
-				if (hpVictory) {
-					outputText("You smile in satisfaction as the " + short + " collapses, unable to continue fighting.  The sweet scent oozing from between her legs is too much to bear, arousing you painfully.\n\nWhat do you do?");
-				}
-				else {
-					outputText("You smile in satisfaction as the " + short + " spreads her legs and starts frigging her honey-soaked cunt.  The sweet scent oozing from between her legs is too much to bear, arousing you painfully.\n\nWhat do you do?");
-				}
-				SceneLib.forest.beeGirlScene.afterfightoptionswithBeeGirl();
-			}
-			else {
-                SceneLib.combat.finishCombat();
-            }
+			SceneLib.forest.beeGirlScene.afterfightoptionswithBeeGirl(hpVictory);
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void

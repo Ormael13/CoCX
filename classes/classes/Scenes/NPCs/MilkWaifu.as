@@ -213,8 +213,6 @@ private function sendToFarm():void
 private function backToCamp():void
 {
 	clearOutput();
-	
-	//TODO
 	outputText("\"<i>I want you to head on back to camp,</i>\" you tell her. \"<i>You’ll be more useful to me there.</i>\" [bathgirlName]’s brow crinkles but she seems to accept your instruction.");
 
 	outputText("\"<i>As you wish.</i>\" She wipes her hands before walking slowly down and out of the farm’s gate.");

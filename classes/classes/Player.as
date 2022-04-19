@@ -109,7 +109,6 @@ use namespace CoC;
 		public var autoSave:Boolean = false;
 
 		//Lust vulnerability
-		//TODO: Kept for backwards compatibility reasons but should be phased out.
 		public var lustVuln:Number = 1;
 
 		//Mastery attributes
@@ -4431,7 +4430,7 @@ use namespace CoC;
 		}
 
 		public function racialParagonSelectedRace():Race {
-			return Race.ALL_RACES[flags[kFLAGS.APEX_SELECTED_RACE]]; // for debugging, TODO fix later
+			return Race.ALL_RACES[flags[kFLAGS.APEX_SELECTED_RACE]];
 		}
 
 		//Determine Inner Chimera Rating
@@ -10819,8 +10818,6 @@ use namespace CoC;
 			End("Player","racialScore");
 			return fusedEelementalCounter;
 		}
-
-		//TODO: (logosK) elderSlime, succubus pussy/demonic eyes, arachne, wasp, lactabovine/slut, sleipnir, hellhound, ryu, quetzalcoatl, eredar, anihilan,
 
 		public function currentBasicJobs():Number {
 			var basicJobs:Number = 0;

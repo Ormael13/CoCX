@@ -1400,7 +1400,6 @@ public class Appearance extends Utils
 			//Descriptive descriptions - 50% chance of being called
 			if (rand(2) == 0) {
 				//Doggie descriptors - 50%
-				//TODO Conditionals don't make sense, need to introduce a class variable to keep of "something" or move race or Creature/Character
 				if (i_creature.hasFur() > 2 && !haveDescription && rand(2) == 0) {
 					description += "bitch-";
 					haveDescription = true;
@@ -2577,7 +2576,6 @@ public class Appearance extends Utils
 						descript += cockNoun(CockTypesEnum.HORSE) + "s";
 						descripted = true;
 					}
-					//TODO More group cock type descriptions!
 					if (creature.cocks[0].cockType.Index > 2) {
 						descript += cockAdjectives(averageLength, averageThickness, CockTypesEnum.HUMAN, creature) + ", ";
 						descript += cockNoun(creature.cocks[0].cockType) + "s";
