@@ -3382,10 +3382,10 @@ public class Camp extends NPCAwareContent{
 //-----------------
 	public function restMenu():void {
 		menu();
-		addButton(0, "1 Hour", rest1).hint("Rest for one hour.");
-		addButton(1, "2 Hours", rest2).hint("Rest for two hours.");
-		addButton(2, "4 Hours", rest4).hint("Rest for four hours.");
-		addButton(3, "8 Hours", rest8).hint("Rest for eight hours.");
+		addButton(0, "1 Hour", restFor, 1).hint("Rest for one hour.");
+		addButton(1, "2 Hours", restFor, 2).hint("Rest for two hours.");
+		addButton(2, "4 Hours", restFor, 4).hint("Rest for four hours.");
+		addButton(3, "8 Hours", restFor, 8).hint("Rest for eight hours.");
 		if (player.isNightCreature())
 		{
 			addButton(4, "Till Dawn", restTillDawn).hint("Rest until the dawn comes.");
@@ -3396,40 +3396,17 @@ public class Camp extends NPCAwareContent{
 		addButton(14, "Back", playerMenu);
 	}
 
-	public function rest1():void {
-		waitingORresting = 1;
-		rest();
-	}
-
-	public function rest2():void {
-		waitingORresting = 2;
-		rest();
-	}
-
-	public function rest4():void {
-		waitingORresting = 4;
-		rest();
-	}
-
-	public function rest8():void {
-		waitingORresting = 8;
+	public function restFor(hours:int):void {
+		waitingORresting = hours;
 		rest();
 	}
 
 	public function restTillDusk():void {
-		waitingORresting = 21 - model.time.hours;
-		rest();
+		restFor(21 - model.time.hours);
 	}
 
 	public function restTillDawn():void {
-		var TimeBeforeDawn:Number;
-		if (model.time.hours >= 22) {
-			TimeBeforeDawn = 6 + (24 - model.time.hours)
-		} else {
-			TimeBeforeDawn = 6 - model.time.hours
-		}
-		waitingORresting = TimeBeforeDawn;
-		rest();
+		restFor(model.time.hours >= 22 ? 6 + (24 - model.time.hours) : 6 - model.time.hours);
 	}
 
 	public function rest():void {
@@ -3523,51 +3500,26 @@ public class Camp extends NPCAwareContent{
 //-----------------
 	public function doWaitMenu():void {
 		menu();
-		addButton(0, "1 Hour", doWait1).hint("Wait one hour.");
-		addButton(1, "2 Hours", doWait2).hint("Wait two hours.");
-		addButton(2, "4 Hours", doWait4).hint("Wait four hours.");
-		addButton(3, "8 Hours", doWait8).hint("Wait eight hours.");
+		addButton(0, "1 Hour", doWaitFor, 1).hint("Wait one hour.");
+		addButton(1, "2 Hours", doWaitFor, 2).hint("Wait two hours.");
+		addButton(2, "4 Hours", doWaitFor, 4).hint("Wait four hours.");
+		addButton(3, "8 Hours", doWaitFor, 8).hint("Wait eight hours.");
 		if (player.isNightCreature()) addButton(4, "Till Dawn", doWaitTillDawn).hint("Wait until the dawn comes.");
 		else addButton(4, "Till Dusk", doWaitTillDusk).hint("Wait until the night comes.");
 		addButton(14, "Back", playerMenu);
 	}
 
-	public function doWait1():void {
-		waitingORresting = 1;
-		doWait();
-	}
-
-	public function doWait2():void {
-		waitingORresting = 2;
-		doWait();
-	}
-
-	public function doWait4():void {
-		waitingORresting = 4;
-		doWait();
-	}
-
-	public function doWait8():void {
-		waitingORresting = 8;
+	public function doWaitFor(hours:int):void {
+		waitingORresting = hours;
 		doWait();
 	}
 
 	public function doWaitTillDusk():void {
-		waitingORresting = 21 - model.time.hours;
-		doWait();
+		doWaitFor(21 - model.time.hours);
 	}
 
 	public function doWaitTillDawn():void {
-		var TimeBeforeDawn:Number;
-		if (model.time.hours >= 22)
-		{
-			TimeBeforeDawn = 6+(24-model.time.hours)
-		}
-		else{
-			TimeBeforeDawn = 6 - model.time.hours
-		}
-		waitingORresting = TimeBeforeDawn ;
-		doWait();
+		doWaitFor(model.time.hours >= 22 ? 6 + (24 - model.time.hours) : 6 - model.time.hours);
 	}
 
 	public function doWait():void {
