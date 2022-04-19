@@ -3,12 +3,8 @@
  */
 package classes
 {
-import classes.Player;
-import classes.BodyParts.Arms;
 import classes.BodyParts.Face;
-import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
-import classes.GlobalFlags.kFLAGS;
 import classes.Perks.*;
 
 public class PerkLib
@@ -1660,7 +1656,7 @@ public class PerkLib
 		public static const HalfStepToAdvancedTranquilness:PerkType = mk("Half-step-to Advanced Tranquilness", "Half-step-to Advanced Tranquilness",
 				"Increases maximum wrath.",
 				"You've chosen the 'Half-step-to Advanced Tranquilness' perk. Thanks to your advanced anger managment training, your maximum wrath has been increased by 300!")
-				.withBuffs({'maxwrath_base':+300});;
+				.withBuffs({'maxwrath_base':+300});
 		public static const HalfStepToEpicEndurance:PerkType = mk("Half-step-to Epic Endurance", "Half-step-to Epic Endurance",
 				"Increases maximum fatigue by 3000.",
 				"You've chosen the 'Half-step-to Epic Endurance' perk. Thanks to your epic physical conditioning, your maximum fatigue has been increased by 3000!")

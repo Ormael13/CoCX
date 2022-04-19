@@ -21,8 +21,6 @@ import classes.PerkLib;
 import classes.Scenes.Areas.Forest.KitsuneScene;
 import classes.Scenes.SceneLib;
 import classes.Stats.Buff;
-import classes.Transformations.PossibleEffect;
-import classes.Transformations.Transformation;
 import classes.Transformations.TransformationUtils;
 
 import classes.CoC;
@@ -198,24 +196,6 @@ public final class Mutations extends MutationsHelper {
         } else player.createStatusEffect(StatusEffects.Airweed, 24, 0, 0, 0);
     }
 
-    public function purePearlConfirm(player:Player):void {
-        clearOutput();
-        outputText("Are you sure you want to just eat the pearl?\n\n");
-        if (!player.hasStatusEffect(StatusEffects.SiegweirdTraining2) && flags[kFLAGS.SIEGWEIRD_FOLLOWER] < 3
-        && (!player.hasStatusEffect(StatusEffects.AlvinaTraining2) || player.statusEffectv1(StatusEffects.AlvinaTraining2) < 3)
-        || flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] < 1)
-            outputText("<i>You have a feeling that you might find more important uses for itin future.</i>")
-        doYesNo(curry(purePearl, player), playerMenu);
-    }
-
-    public function purePearl(player:Player):void {
-        clearOutput();
-        outputText("You cram the pearl in your mouth and swallow it like a giant pill with some difficulty.  Surprisingly there is no discomfort, only a cool calming sensation that springs up from your core.");
-        dynStats("lus", -25, "cor", -10);
-        player.addCurse("lib", 10, 1);
-        if (!player.hasPerk(PerkLib.PurityBlessing)) player.createPerk(PerkLib.PurityBlessing, 0, 0, 0, 0);
-    }
-
     public function ezekielfruit(player:Player):void {
         clearOutput();
         outputText("You take first bite of fruit that Evangeline gave you.  Surprisingly it taste delicious as nothing else you tasted before so without thinking more you ate rest of the fruit.");
@@ -314,22 +294,6 @@ public final class Mutations extends MutationsHelper {
         HPChange(EngineCore.maxHP(), true);
         fatigue(-100);
         statScreenRefresh();
-    }
-
-    public function lowgradeelementalPearl(player:Player):void {
-        clearOutput();
-        outputText("You cram the pearl in your mouth and swallow it like a giant pill with some difficulty.  Surprisingly there is no discomfort, only a calming sensation of three steams of mystical energies spreading in your body.");
-        if (!player.hasPerk(PerkLib.ElementalConjurerMindAndBodyResolve)) player.createPerk(PerkLib.ElementalConjurerMindAndBodyResolve, 0, 0, 0, 0);
-    }
-    public function middlegradeelementalPearl(player:Player):void {
-        clearOutput();
-        outputText("You cram the pearl in your mouth and swallow it like a giant pill with some difficulty.  Surprisingly there is no discomfort, only a calming sensation of five steams of mystical energies spreading in your body.");
-        if (!player.hasPerk(PerkLib.ElementalConjurerMindAndBodyDedication)) player.createPerk(PerkLib.ElementalConjurerMindAndBodyDedication, 0, 0, 0, 0);
-    }
-    public function highgradeelementalPearl(player:Player):void {
-        clearOutput();
-        outputText("You cram the pearl in your mouth and swallow it like a giant pill with some difficulty.  Surprisingly there is no discomfort, only a calming sensation of seven steams of mystical energies spreading in your body.");
-        if (!player.hasPerk(PerkLib.ElementalConjurerMindAndBodySacrifice)) player.createPerk(PerkLib.ElementalConjurerMindAndBodySacrifice, 0, 0, 0, 0);
     }
 
     public function bagofcosmosA1(player:Player):void {

@@ -6090,11 +6090,18 @@ public function rebirthFromBadEnd():void {
                 //radiant shard fix - now for everyone!
                 if (player.hasKeyItem("Radiant shard") < 0) {
                     outputText("\n\nNow legendary weapon is crafted from radiant shards. You deserve these!\n");
-                    outputText("\n\n(if you already had some, please remove them, heh)\n");
+                    outputText("\n\n(If you already have some, please remove them, heh..)\n");
                     soulforce.fixShards();
                 }
                 flags[kFLAGS.MOD_SAVE_VERSION] = 35.001;
             }
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.002) {
+				//If something needs a fix, abort - not ready to update the version yet!
+				if (consumables.E3PEARL.fixSave()) return;
+				if (consumables.E5PEARL.fixSave()) return;
+				if (consumables.E7PEARL.fixSave()) return;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 35.002;
+			}
             outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
             doNext(doCamp);
             return;
