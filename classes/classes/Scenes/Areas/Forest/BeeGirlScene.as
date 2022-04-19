@@ -1487,16 +1487,16 @@ public class BeeGirlScene extends BaseContent
 
 			var dicksFit:int = player.countCocks(-1, monster.vaginalCapacity());
 			//dicks
-			addButtonIfTrue(0, "Use Cock", rapeTheBeeGirlWithADick, "Req. cock area smaller than " + monster.vaginalCapacity(), dicksFit > 0, "Fuck her with " + oMultiCockDesc() + ".");
-			addButtonIfTrue(1, "Multicock", rapeTheBeeMultiCockStuff, "Req. at least 2 cocks with area smaller than " + monster.vaginalCapacity(), dicksFit > 1, "You could use more than one of your [cocks] on her.");
+			addButtonIfTrue(0, "Use Cock", rapeTheBeeGirlWithADick, "Req. cock area smaller than " + monster.vaginalCapacity(), dicksFit > 0, "Fuck her with your dick.");
+			addButtonIfTrue(1, "Multicock", rapeTheBeeMultiCockStuff, "Req. at least 2 cocks with area smaller than " + monster.vaginalCapacity(), dicksFit > 1, "More dicks, more fun!");
 			//vag
 			addButtonIfTrue(2, "Use Vagina", rapeABeeGirlWithYourVagina, "Req. a vagina", player.hasVagina(), "You could make her get off your " + vaginaDescript() + ".");
 			//herm
 			addButtonIfTrue(3, "Herm Style", futaRapesBeeGirl, "Req. a vagina and a dick", player.isHerm(), "You could try to please both your 'male' and 'female' halves on the bee."); //can be non-fitting and non-taur
 			//corrupt
 			addButtonIfTrue(4, "Self-Egg", beeGirlRapeForTheDistinguishedGentleman,
-				"Req. high strength, corruption, and a dick/vagina/long tongue/big tits",
-				player.cor >= 75 && player.str >= 60 && (player.tongue.type == Tongue.SNAKE || player.hasCock() || player.hasVagina() || player.biggestTitSize() >= 4),
+				"Req. high strength, corruption (75), and a dick/vagina/long tongue/big tits",
+				player.cor >= 75 - player.corruptionTolerance && player.str >= 60 && (player.tongue.type == Tongue.SNAKE || player.hasCock() || player.hasVagina() || player.biggestTitSize() >= 4),
 				"You could play with her a bit and try to make her lay eggs into herself."
 			);
 			//racial
