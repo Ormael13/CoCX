@@ -946,7 +946,14 @@ public function TyrantiaFuck():void {
 	outputText("<i>“Not like that, [name]!”</i> Tyrantia protests, then looks up, seeing the glob of girlcum on the roof of the cave. <i>“Oh...Wow...Maybe like that as well.”</i> She blushes, laughing. <i>“What can I say? You were great.”</i> Suddenly, she surges forward, hugging your naked body again. Unlike before, this isn’t a sexy grip, but a giant, fuzzy, warm bear hug. <i>“I’m really glad I met you.”</i> This warmth, both emotional and physical, reminds you so much of home, despite the oddity of the woman. You hug the giantess back, as much as you can. The moment passes, and she lets you go. <i>“I’m just glad nothing tried to join the fun...But we should probably arm up. No need to tempt fate, yeah?”</i>\n\n");
 	outputText("You gather up the pieces of your [armor] scattered around the cave, and turn back to watch as you dress. You watch as Tyrantia slowly, methodically slides the steel plates over her spider half, then covers herself. You watch as the gentle giant of a lover you know slowly covers herself back up, becoming the imposing, frankly terrifying figure you saw on the battlefield.\n\n");
 	outputText("<i>“I know, I like this less, too.”</i> Comes her low voice, her fangs menacingly poking out from her helm. <i>“But it’s more practical, these days.”</i> You pull yourself from the cave, waving goodbye to the Drider woman. You roll your shoulders, forcing your aching legs to work as you head back to camp.\n\n");
-	if (TyrantiaFollowerStage >= 6 && DriderTown.TyrantiaPregnancy == 0 && DriderTown.TyrantiaKidsEggsHatching < 48 && rand(100) < 50) DriderTown.TyrantiaPregnancy = 72;
+	if (TyrantiaFollowerStage >= 6) {
+		if (TyrantiaFollowerStage >= 7 && DriderTown.TyrantiaPregnancy == 0 && rand(100) < 50) DriderTown.TyrantiaPregnancy = 72;
+		else {
+			TyrantiaFollowerStage = 7;
+			DriderTown.TyrantiaPregnancy = 0;
+			if (rand(100) < 50) DriderTown.TyrantiaPregnancy = 72;
+		}
+	}
 	player.sexReward("vaginalFluids","Dick");
     if (CoC.instance.inCombat) cleanupAfterCombat();
 	doNext(camp.returnToCampUseOneHour);
@@ -992,7 +999,14 @@ public function TyrantiaHugFuck():void {
 	outputText("Reluctantly, you tell Tyrantia that you need to get back to camp. She nods, picking you up in her arms. <i>“I love you.”</i> This is a bare whisper, a lot more vulnerable than you’d expect from a woman who’s literally picked you up like it’s nothing. You tell Tyrantia that you love her back, and this gets you another happy little noise from your giantess.\n\n");
 	outputText("<i>“Umm...I just realized something.”</i> She says, blushing. You tilt your head, confused, and she scratches her head. <i>“...We left our clothes back at camp.\" </i> You facepalm, realizing that neither of you thought about the aftermath of your little sexcapade.\n\n");
 	outputText("<i>“Well...I know how we could keep ourselves...Kind of covered.”</i> She grins, putting you down. <i>“But it might be a bit...Stimulating.”</i>\n\n");
-	if (TyrantiaFollowerStage >= 6 && DriderTown.TyrantiaPregnancy == 0 && DriderTown.TyrantiaKidsEggsHatching < 48 && rand(100) < 50) DriderTown.TyrantiaPregnancy = 72;
+	if (TyrantiaFollowerStage >= 6) {
+		if (TyrantiaFollowerStage >= 7 && DriderTown.TyrantiaPregnancy == 0 && rand(100) < 50) DriderTown.TyrantiaPregnancy = 72;
+		else {
+			TyrantiaFollowerStage = 7;
+			DriderTown.TyrantiaPregnancy = 0;
+			if (rand(100) < 50) DriderTown.TyrantiaPregnancy = 72;
+		}
+	}
 	menu();
 	addButton(1, "Yes", TyrantiaHugFuckCover);
 	addButton(2, "No", TyrantiaHugFuckLolno);
@@ -1092,6 +1106,7 @@ public function TyrantiaAtCamp():void {
 	addButton(4, "Sex", TyrantiaSexMenu);
 	//5 - JoinMe addButton(2, "JoinMe", TyrantiaFollowerOptions);
 	if (TyraniaCorrupteedLegendaries >= 1) addButton(10, "Items", itemImproveMenu);
+	if (DriderTown.DriderTownComplete) addButton(13, "Back", SceneLib.dridertown.DriderTownEnter).hint("Return to main DriderTown menu.");
 	addButton(14, "Leave", camp.campLoversMenu);
 }
 

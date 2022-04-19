@@ -266,9 +266,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			//Spooders pregnancy
 			if (DriderTown.BelisaPregnancy > 1) DriderTown.BelisaPregnancy -= 1;
 			if (DriderTown.BelisaKidsEggsHatching > 1) DriderTown.BelisaKidsEggsHatching -= 1;
+			if (DriderTown.BelisaKidsEggsHatching1 > 1) DriderTown.BelisaKidsEggsHatching1 -= 1;
+			if (DriderTown.BelisaKidsEggsHatching2 > 1) DriderTown.BelisaKidsEggsHatching2 -= 1;
 			//lily part
 			if (DriderTown.TyrantiaPregnancy > 1) DriderTown.TyrantiaPregnancy -= 1;
 			if (DriderTown.TyrantiaKidsEggsHatching > 1) DriderTown.TyrantiaKidsEggsHatching -= 1;
+			if (DriderTown.TyrantiaKidsEggsHatching1 > 1) DriderTown.TyrantiaKidsEggsHatching1 -= 1;
+			if (DriderTown.TyrantiaKidsEggsHatching2 > 1) DriderTown.TyrantiaKidsEggsHatching2 -= 1;
 			//Alter max speed if you have oversized parts. (Realistic mode)
 			if (flags[kFLAGS.HUNGER_ENABLED] >= 1)
 			{

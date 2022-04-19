@@ -257,8 +257,8 @@ package classes.Scenes
 			outputText("-Ayane Worship Scene for Herms & pregnancy. (Daikael the fluff enthusiast)\n");
 			outputText("-Herm PCs now can ask Tamani for her dildo. (Svalkash)\n");
 			outputText("-Golems post combat options buttons locations slight moved. Troll post fight option to Leave moved to bottom right corner.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Elemental pearls perk checks added/fixed. (Svalkash)\n");
+			outputText("-Rest/Wait option in camp got few more options added.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
