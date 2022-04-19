@@ -539,14 +539,13 @@ public class BeeGirlScene extends BaseContent
 			player.dynStats("lus", 33); //that means PC always has enough lust
 
 			menu();
-			addButtonIfTrue(0, "Rape", rapeTheBeeGirl, "HOW?!", player.gender > 0);
-			addButtonIfTrue(1, "Dildo Rape", beeGirlsGetsDildoed, "Req. Deluxe dildo", player.hasKeyItem("Deluxe Dildo") >= 0);
-			addButtonIfTrue(2, "B. Feed", milkAndHoneyAreKindaFunny, "Req. Feeder perk", player.hasStatusEffect(StatusEffects.Feeder));
-			SceneLib.uniqueSexScene.pcUSSPreChecksV2(afterfightoptionswithBeeGirl);
+			addButton(0, "Rape", rapeTheBeeGirl);
 			addButton(14, "Leave", leaveAfterDefeating);
 		}
 
-		private function leaveAfterDefeating():void {
+		private function leaveAfterDefeating(fromRape:Boolean = false):void {
+			if (fromRape) flags[kFLAGS.BEE_GIRL_COMBAT_WINS_WITHOUT_RAPE]--; //undo 'rape' changes
+			//work with counters
 			if (monster.HP < 1) flags[kFLAGS.BEE_GIRL_COMBAT_WINS_WITHOUT_RAPE]++; //This only happens if you beat her up and then don't rape her
 			else flags[kFLAGS.BEE_GIRL_COMBAT_WINS_WITH_RAPE]++; //All wins by lust count towards the desire option, even when you leave
 			cleanupAfterCombat();
@@ -555,7 +554,7 @@ public class BeeGirlScene extends BaseContent
 		private function AlrauneAndBee():void {
 			spriteSelect(SpriteDb.s_bee_girl);
 			clearOutput();
-			outputText("The bee girl can smell your floral scent long before you enter the small clearing where she is playing about. She looks at you almost entranced, as you slowly move around on your vines, displaying your verdant and fertile body for her to see. This time around you're the seducer, and the bee girl seems to have already fallen to your charms. The fact that you're spraying your aphrodisiac pollen into the air around you doesn't help the poor bee girl’s plight as she practically fawns over you, already flushed in anticipation and her honeyed smell intensifies with her arousal.\n\n");
+			outputText("The bee girl can smell your floral scent long before you enter the small clearing where she is playing about. She looks at you almost entranced, as you slowly move around on your vines, displaying your verdant and fertile body for her to see. This time around you're the seducer, and the bee girl seems to have already fallen to your charms. The fact that you're spraying your aphrodisiac pollen into the air around you doesn't help the poor bee girl’s plight as she practically fawns over you, already flushed in anticipation, and her honeyed smell intensifies with her arousal.\n\n");
 			outputText("\"<i>What great fragranzzze! I don’t care what kind of flower you are, but if your nectar smellzzz and tastes as good as your zzzcent, the honeybrewerzzz will clearly want some of it.</i>\"\n\n");
 			outputText("She makes a sharp whistle and four additional bee girls fly down next to you, clearly more of the Fertile Caste girls looking for unfortunate souls to incubate their eggs.\n\n");
 			outputText("It doesn’t take long for their intention to become clear as they fly closer and slowly start rubbing at your plant like skin. You blush wildly at the attention, and feel more nectar begin to flood out of your pussy, as the bee girls' group efforts stimulate you in so many ways. One of them kisses you, tongue finding your own, as another suckles gently on your left breast. Your pussy is not ignored either as a bee girl fingers you methodically, aiming to keep the nectar flow steady. You moan, quite appreciative of the attention the bees are providing, though you can’t help but wonder what they want from you.  While you’re busy enjoying yourself to the fullest, the fifth bee girl collects your nectar as it flows out, filling container after container with your precious liquid. You don’t mind though, with your pussy gushing so much, you are afraid that without the bee girl's help, you would probably overflow your flower. It would be such a careless waste for your nectar to simply drip to the ground, though a perverted part of you can’t help but think of how sexy it would be to be engulfed in your liquid lust entirely, all at the mercy of the bee girls tender hands. ");
@@ -1509,8 +1508,12 @@ public class BeeGirlScene extends BaseContent
 			addButtonIfTrue(8, "Naga", corruptNagaBitchesRapeABee, "Req. naga body and fangs",
 				player.isNaga() && player.faceType == Face.SNAKE_FANGS,
 				"You could focus on your snakelike, 'naga' attributes.");
+			addButtonIfTrue(9, "B. Feed", milkAndHoneyAreKindaFunny, "Req. Feeder perk", player.hasStatusEffect(StatusEffects.Feeder));
+			//dildo, uss
+			addButtonIfTrue(10, "Dildo Rape", beeGirlsGetsDildoed, "Req. Deluxe dildo", player.hasKeyItem("Deluxe Dildo") >= 0);
+			SceneLib.uniqueSexScene.pcUSSPreChecksV2(afterfightoptionswithBeeGirl);
 			//leave
-			addButton(14, "Leave", leaveAfterDefeating);
+			addButton(14, "Leave", leaveAfterDefeating, true);
 		}
 
 
@@ -2167,13 +2170,12 @@ public class BeeGirlScene extends BaseContent
 		public function beeGirlsGetsDildoed():void {
 			spriteSelect(SpriteDb.s_bee_girl);
 			clearOutput();
-			flags[kFLAGS.BEE_GIRL_COMBAT_WINS_WITH_RAPE]++;
 			outputText("You advance on your ");
 			if(monster.HP <= monster.minHP()) outputText("hapless");
 			else outputText("horny");
 			outputText(" foe, pulling your new favorite toy from your pouch like a knight drawing a sword.  The only difference is, your \"sword\" jiggles and leaks pink fluid.   Rushing forward, you close the distance in a leap and gently slap her face.   She looks up at you, dazed and confused, opening her mouth in protest.   The artificial dong easily muffles her noise-hole. From the blush that colors her cheeks, you can tell its fluids are already starting to affect her.\n\n");
 
-			outputText("The bee-bitch's eyes are lidded seductively when you yank out the offending implement.  She licks her lips, as if beckoning you to ram it back into her throat, but the toy is already beginning to swell and you have other plans for it.  You sit down on her chest, just under her exposed breasts and reach down past her honeypot for her abdomen.  Once she realizes where you're headed, she starts squirming mightily, but can't get anywhere from her current position.   Reaching down next to her stinger, you part the softer flesh there and find the organ you were looking for.\n\n");
+			outputText("The bee-bitch's eyes are lidded seductively when you yank out the offending implement.  She licks her lips, as if beckoning you to ram it back into her throat, but the toy is already beginning to swell, and you have other plans for it.  You sit down on her chest, just under her exposed breasts and reach down past her honeypot for her abdomen.  Once she realizes where you're headed, she starts squirming mightily, but can't get anywhere from her current position.   Reaching down next to her stinger, you part the softer flesh there and find the organ you were looking for.\n\n");
 
 			outputText("A little stimulation causes it to begin growing out, a messy black organ with numerous bulbs and knots along its length, open at the top and sloshing with honey and fluids.  Your captive stops struggling as it grows harder, a strange female parody of a penis.  Finally, this bitch will be taking something uncomfortable in a hole that wasn't meant to take it.\n\n");
 
@@ -2195,7 +2197,6 @@ public class BeeGirlScene extends BaseContent
 		{
 			spriteSelect(SpriteDb.s_bee_girl);
 			clearOutput();
-			flags[kFLAGS.BEE_GIRL_COMBAT_WINS_WITH_RAPE]++;
 			player.slimeFeed();
 			outputText("You sit the bee-girl up; she's a bit dazed from the fight as her head moves in circles.  You kiss her honey-flavored lips, sticking your tongue into her mouth and causing her to snap out of her daze.  She's surprised at this unexpected show of affection, but understanding her situation, she begins kissing you back.  Both of your tongues rub and slide against one another as you occasionally plunge into each other's mouth.  Your hand rubs up her thigh onto her honeypot.  You drive two fingers into it, circling them around.  Making sure they are covered in her sweet love-honey, you pull the two fingers out and raise them up.  The bee-girl sees your honey-covered fingers and slowly pulls back from the kiss.  You suck the honey off the index then you point the middle at her mouth and push forward.  Her lips wrap around the finger and suck it into her mouth as her tongue laps around it, cleaning all the honey off it.  You take the finger out of her mouth and examine the work she did.\n\n");
 			outputText("\"<i>Do you know what goes great with honey?</i>\" you ask.\n\n");
