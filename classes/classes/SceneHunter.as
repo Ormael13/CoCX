@@ -87,7 +87,7 @@ public class SceneHunter extends BaseContent {
     //--------------------------------------------------------------------------------------------------
 
     public function get uniHerms():Boolean {
-        return flags[kFLAGS.SCENEHUNTER_UNI_HERMS];
+        return _passCheck || flags[kFLAGS.SCENEHUNTER_UNI_HERMS];
     }
 
     /**
@@ -102,7 +102,8 @@ public class SceneHunter extends BaseContent {
     * @param    dickActive      If false, "dick" button will be disabled.
     * @param    dickDisabledMsg The message to write on the disabled dick button
     */
-    public function selectGender(dickF:Function, vagF:Function, assA:* = null, hermF:Function = null, dickPriority:int = 1, dickActive:Boolean = true, dickDisabledMsg:String = ""):void {
+    public function selectGender(dickF:Function, vagF:Function, assA:* = null, hermF:Function = null,
+                                 dickPriority:int = 1, dickActive:Boolean = true, dickDisabledMsg:String = ""):void {
         //decomposing ass
         var assText:String = (assA is Array) ? assA[0] : "Ass";
         var assF:Function = (assA is Function)  ? assA as Function :
@@ -173,6 +174,7 @@ public class SceneHunter extends BaseContent {
             else
                 addButtonDisabled(3, "Herm", "Not a herm.");
         }
+        _passCheck = false; //reset one-time check skipper
     }
 
     //--------------------------------------------------------------------------------------------------
@@ -180,7 +182,7 @@ public class SceneHunter extends BaseContent {
     //--------------------------------------------------------------------------------------------------
 
     public function get dickSelect():Boolean {
-        return flags[kFLAGS.SCENEHUNTER_DICK_SELECT];
+        return _passCheck || flags[kFLAGS.SCENEHUNTER_DICK_SELECT];
     }
 
     /**
@@ -219,6 +221,7 @@ public class SceneHunter extends BaseContent {
             addButton(1, "Too big", restoreText, beforeText, nofitF);
         else
             addButtonDisabled(1, "Too big", "Requires dick " + compareBy + " greater than " + maxSize);
+        _passCheck = false; //reset one-time check skipper
     }
 
     //Calls the 'fun' function, finding the biggest cock index in selected limits
@@ -287,6 +290,7 @@ public class SceneHunter extends BaseContent {
             else
                 addButtonDisabled(1, "Small", "Requires dick " + compareBy + " less than " + bigMin);
         }
+        _passCheck = false; //reset one-time check skipper
     }
 
     //Calls the 'fun' function, finding the biggest cock index in selected limits
@@ -349,6 +353,7 @@ public class SceneHunter extends BaseContent {
             else
                 addButtonDisabled(3, "Four", "Not enough.");
         }
+        _passCheck = false; //reset one-time check skipper
     }
 
     //--------------------------------------------------------------------------------------------------
@@ -357,6 +362,13 @@ public class SceneHunter extends BaseContent {
 
     public function get other():Boolean {
         return flags[kFLAGS.SCENEHUNTER_OTHER];
+    }
+
+    //Can be set to avoid exactly **ONE** check. For example, start uniHerms selector without uniHerms enabled.
+    private var _passCheck:Boolean = false;
+    //Skips the next check. For example, start uniHerms selector without uniHerms enabled. (Excluding 'other' checks - they work differently each time.)
+    public function passCheckOnce():void {
+        _passCheck = true;
     }
 
     /*
