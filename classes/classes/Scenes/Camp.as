@@ -221,7 +221,22 @@ public class Camp extends NPCAwareContent{
 			SceneLib.dridertown.BelisaEggsHatched();
 			return;
 		}
-		if (TyrantiaFollower.TyrantiaFollowerStage == 4 && TyrantiaFollower.TyrantiaAffectionMeter >= 100) {
+		if (DriderTown.TyrantiaPregnancy >= 30 && DriderTown.TyrantiaPregnancy < 48) {
+			hideMenus();
+			SceneLib.dridertown.TyrantiaBroodmotherMoment();
+			return;
+		}
+		if (DriderTown.TyrantiaPregnancy == 1) {
+			hideMenus();
+			SceneLib.dridertown.TyrantiaEggLaying();
+			return;
+		}
+		if (DriderTown.TyrantiaKidsEggsHatching == 1) {
+			hideMenus();
+			SceneLib.dridertown.TyrantiaEggsHatched();
+			return;
+		}
+		if (TyrantiaFollower.TyraniaCorrupteedLegendaries == 0 && TyrantiaFollower.TyrantiaAffectionMeter >= 100) {
 			hideMenus();
 			SceneLib.tyrania.unlockingCorruptLegendariesOption();
 			return;

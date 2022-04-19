@@ -257,6 +257,7 @@ public class Soulforce extends BaseContent
 		menuItems.push("Remove Shard", cheatRemoveShard, "Remove 1 radiant shard");
 		//menuItems.push("ZenjiQ", ZenjiQ, "Zenji Expac 2 debug tool");
 		menuItems.push("LustBreath", (player.hasPerk(PerkLib.DragonPoisonBreath))? FairyTest: false, "Replacing 1 perk with another");
+		menuItems.push("TyrantPF", (TyrantiaFollower.TyrantiaFollowerStage == 5 && TyrantiaFollower.TyraniaCorrupteedLegendaries == 0)? FairyTest5: false, "Patching Tyrantia corrupted legendaries unlock");
 		//menuItems.push("Mutationstest2", mutations2, "MutationsTest2");
 		//menuItems.push("Mutation test reset", resetMutations, "Reset Mutations");
 		menuGen(menuItems, page, accessSoulforceMenu);
@@ -279,6 +280,11 @@ public class Soulforce extends BaseContent
 		menuGen(menuItems, page, curry(SoulforceCheats1, 2));
 	}
 
+	public function FairyTest5():void {
+		TyrantiaFollower.TyrantiaFollowerStage = 4;
+		TyrantiaFollower.TyraniaCorrupteedLegendaries = 1;
+		doNext(curry(SoulforceCheats1, 0));
+	}
 	public function FairyTest():void {
 		player.removePerk(PerkLib.DragonPoisonBreath);
 		player.createPerk(PerkLib.DragonLustPoisonBreath, 0, 0, 0, 0);

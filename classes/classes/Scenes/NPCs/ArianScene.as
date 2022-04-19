@@ -1072,14 +1072,22 @@ private function denyAriansMoveIn():void {
 private function talkToArianChoices():void {
 	clearOutput();
 	outputText("You tell Arian you'd like to talk to [Arian em].  Arian smiles at the prospect of chatting with you.  \"<i>I love talking with you; so what do you want to talk about?</i>\"");
-
 	menu();
 	if(flags[kFLAGS.ARIAN_VIRGIN] > 0) addButton(0,"Sexy Talk",arianSexingTalk);
 	if(flags[kFLAGS.ARIAN_S_DIALOGUE] >= 3) addButton(1,"Teach Magic",arianMagicLessons);
 	if(arianFollower()) addButton(2,"Scales",arianScalesTalk);
-	if(!arianFollower() && flags[kFLAGS.ARIAN_S_DIALOGUE] >= 6) addButton(4,"Invite2Camp",inviteArianToCamp);
+	if(!arianFollower() && flags[kFLAGS.ARIAN_S_DIALOGUE] >= 6) addButton(4, "Invite2Camp", inviteArianToCamp);
+	if (TyrantiaFollower.TyrantiaFollowerStage == 5) addButton(5, "Tyrantia", TyrantiaEggQuestArian);
 	if(flags[kFLAGS.ARIAN_VIRGIN] == 0 && flags[kFLAGS.ARIAN_S_DIALOGUE] < 3) outputText("\n\n<b>Arian doesn't have much to talk about right now.  Maybe you ought to just visit him from time to time or find him an item that would help combat [Arian eir] sickness.</b>");
 	addButton(14,"Back",arianHomeMenu);
+}
+
+private function TyrantiaEggQuestArian():void {
+	clearOutput();
+	outputText("You ask your wizard-lizard about Purifying the unborn. You explain Tyrantia’s situation, and why she struggles so much with it. [Arian Ey] gives you an odd look, and shakes [Arian eir] head.\n\n");
+	outputText("\"<i>I’m afraid not. I’m sorry, but my anti-corruption magic can harm, and someone with less constitution could even be injured by it. What you’re thinking simply isn’t possible. Not in the way you’re thinking. My spell would be quite destructive to such a vulnerable little one.</i>\" Arian puts a hand on your shoulder. \"<i>I wish I could help you, I really do.</i>\" Arian seems genuinely sad about your situation. You thank Arian for [Arian eir] time, leaving.");
+	eachMinuteCount(15);
+	doNext(talkToArianChoices);
 }
 
 private function arianScalesTalk():void {
