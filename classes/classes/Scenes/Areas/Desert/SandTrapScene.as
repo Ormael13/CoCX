@@ -6,7 +6,6 @@ import classes.BodyParts.Skin;
 import classes.BodyParts.Wings;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
-import classes.Items.Armors.SuccubusArmor;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
@@ -365,19 +364,19 @@ private function useSandTarpsHands():void {
 		//Cock less than 6 inches: 
 		if(player.cocks[0].cockLength < 6) {
 			// balls:
-			if(player.balls == 0) outputText("\n\nThe sandtrap only needs one hand to pump your diminutive cock; it barely moves its wrist as it jerks you, occasionally wriggling its oily fingers along the bottom of your [cock "+x[0]+"] to stimulate you even further.");
-			else outputText("\n\nThe sandtrap only needs one hand to pump your diminutive cock; it barely moves its wrist as it jerks you, occasionally wriggling its oily fingers along the bottom of your [cock "+x[0]+"] to incite you even further, whilst it uses its free hand to gently cup your [balls].");
+			if(player.balls == 0) outputText("\n\nThe sandtrap only needs one hand to pump your diminutive cock; it barely moves its wrist as it jerks you, occasionally wriggling its oily fingers along the bottom of your [cock "+(x[0]+1)+"] to stimulate you even further.");
+			else outputText("\n\nThe sandtrap only needs one hand to pump your diminutive cock; it barely moves its wrist as it jerks you, occasionally wriggling its oily fingers along the bottom of your [cock "+(x[0]+1)+"] to incite you even further, whilst it uses its free hand to gently cup your [balls].");
 			outputText("  Your small size doesn't seem to bother it; if anything, judging from the red rising in its thin cheeks and its shortening breath, the girliness of your cock actually seems to excite it.  It pauses and, whilst you are both panting lightly, it slowly and gently circles your head with its index finger whilst it still holds the entirety of your cock with the rest of its hand.");
 		}
 		//Cock 6-16 inches: 
 		else if(player.cocks[0].cockLength < 16) {
 			//[no balls:
-			if(player.balls == 0) outputText("\n\nThe sandtrap glides its hand up and down your [cock "+x[0]+"], picking up a warm smooth rhythm.");
+			if(player.balls == 0) outputText("\n\nThe sandtrap glides its hand up and down your [cock "+(x[0]+1)+"], picking up a warm smooth rhythm.");
 			//Balls:
-			else outputText("\n\nThe sandtrap glides its hand up and down your [cock "+x[0]+"], picking up a warm smooth rhythm as it gently cups your [balls] with its free hand. It slows down intermittently to move its palm around your length, letting every inch of your dick feel the tips of its delicate fingers.");
+			else outputText("\n\nThe sandtrap glides its hand up and down your [cock "+(x[0]+1)+"], picking up a warm smooth rhythm as it gently cups your [balls] with its free hand. It slows down intermittently to move its palm around your length, letting every inch of your dick feel the tips of its delicate fingers.");
 		}
 		//Cock more than 16 inches: 
-		else outputText("\n\nThe sandtrap quickly comes to the realisation it needs both hands for this.  Still cupping your behind, it moves one oily hand up the top end of your massive shaft, while the other works the other half.  You sigh with deep satisfaction, enjoying the all-too-rare sensation of having every inch of your [cock "+x[0]+"] immersed in pleasure.  The creature screws its face up and looks away in distaste at the size of your straining dick, which is in danger of poking it in the nose.  As you enjoy the warm, slippery sensation inundating you, you find you couldn't care less what it thinks.");
+		else outputText("\n\nThe sandtrap quickly comes to the realisation it needs both hands for this.  Still cupping your behind, it moves one oily hand up the top end of your massive shaft, while the other works the other half.  You sigh with deep satisfaction, enjoying the all-too-rare sensation of having every inch of your [cock "+(x[0]+1)+"] immersed in pleasure.  The creature screws its face up and looks away in distaste at the size of your straining dick, which is in danger of poking it in the nose.  As you enjoy the warm, slippery sensation inundating you, you find you couldn't care less what it thinks.");
 		//number of cock fork
 		//One cock: 
         switch(player.cockTotal()) {
@@ -386,7 +385,7 @@ private function useSandTarpsHands():void {
             outputText("\n\nThe warm, oily double sensation is unbearably good and although you try to hold on to savor it as long as possible, it isn't long before you reach a toe-curling peak and, with a wordless bark, spurt out line after line of jizz.  The trap flinches slightly when your first cumshots hit it in the face and chest, but then goes back to gently rubbing you, guiding you up and down your warm, slippery orgasm.");
             break;
         case 2:
-            outputText("  As the sandtrap begins to pump you faster, your disregarded [cock "+x[1]+"] bobs in hard, eager concert with your [cock "+x[0]+"].  You gasp as the trap slows down momentarily to grasp your second sex.  It is clumsy at first as it moves its lubricated palms in tandem, then with increasing confidence as it finds a position and rhythm that suits it, until it is jerking you off furiously, clutching your butt cheeks so tightly you hazily realize the indents of its slender digits will be with you for hours afterwards.");
+            outputText("  As the sandtrap begins to pump you faster, your disregarded [cock "+(x[1]+1)+"] bobs in hard, eager concert with your [cock "+(x[0]+1)+"].  You gasp as the trap slows down momentarily to grasp your second sex.  It is clumsy at first as it moves its lubricated palms in tandem, then with increasing confidence as it finds a position and rhythm that suits it, until it is jerking you off furiously, clutching your butt cheeks so tightly you hazily realize the indents of its slender digits will be with you for hours afterwards.");
             outputText("\n\nThe warm, oily double sensation is unbearably good and although you try to hold on to savor it as long as possible, it isn't long before you reach a toe-curling peak and, with a wordless bark, spurt out line after line of jizz.  The trap flinches slightly when your first cumshots hit it in the face and chest, but then goes back to gently rubbing you, guiding you up and down your warm, slippery orgasm.");
             break;
         case 3:

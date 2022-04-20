@@ -216,7 +216,7 @@ public class Camp extends NPCAwareContent{
 			SceneLib.dridertown.BelisaEggLaying();
 			return;
 		}
-		if (DriderTown.BelisaKidsEggsHatching == 1) {
+		if (DriderTown.BelisaKidsEggsHatching == 1 || DriderTown.BelisaKidsEggsHatching1 == 1 || DriderTown.BelisaKidsEggsHatching2 == 1) {
 			hideMenus();
 			SceneLib.dridertown.BelisaEggsHatched();
 			return;
@@ -231,7 +231,7 @@ public class Camp extends NPCAwareContent{
 			SceneLib.dridertown.TyrantiaEggLaying();
 			return;
 		}
-		if (DriderTown.TyrantiaKidsEggsHatching == 1) {
+		if (DriderTown.TyrantiaKidsEggsHatching == 1 || DriderTown.TyrantiaKidsEggsHatching1 == 1 || DriderTown.TyrantiaKidsEggsHatching2 == 1) {
 			hideMenus();
 			SceneLib.dridertown.TyrantiaEggsHatched();
 			return;
@@ -1033,8 +1033,8 @@ public class Camp extends NPCAwareContent{
 			addButton(11, "Masturbate", SceneLib.masturbation.masturbateMenu);
 			if ((((player.hasPerk(PerkLib.HistoryReligious) || player.hasPerk(PerkLib.PastLifeReligious)) && player.cor <= 66) || (player.hasPerk(PerkLib.Enlightened) && player.cor < 10)) && !(player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0) || flags[kFLAGS.SFW_MODE] >= 1) addButton(11, "Meditate", SceneLib.masturbation.masturbateMenu);
 		}
-		addButton(12, "Wait", doWaitMenu).hint("Wait for one to eight hours. Or until the night comes.");
-		if (player.fatigue > 40 || player.HP / player.maxHP() <= .9) addButton(12, "Rest", restMenu).hint("Rest for one to eight hours. Or until fully healed / night comes.");
+		addButton(12, "Wait", doWaitMenu).hint("Wait for one to twelve hours. Or until the night comes.");
+		if (player.fatigue > 40 || player.HP / player.maxHP() <= .9) addButton(12, "Rest", restMenu).hint("Rest for one to twelve hours. Or until fully healed / night comes.");
 		if(((model.time.hours <= 5 || model.time.hours >= 21) && !canExploreAtNight) || (!isNightTime && canExploreAtNight)) {
 			addButton(12, "Sleep", doSleep).hint("Turn yourself in for the night.");
 			if(isAWerewolf && flags[kFLAGS.LUNA_MOON_CYCLE] == 8) {
@@ -1299,8 +1299,6 @@ public class Camp extends NPCAwareContent{
 				outputText("The Stone Hutch, Treehouse and Watery Orb have been changed and expanded. The Stone hutch has large swathes of silk hung off it, connecting to poles stuck deep into the ground and creating a large covered pavilion around it. ");
 				outputText("The extension is enclosed with wicker walls lined with stone. The treehouse hasn’t changed much, but there’s a rope bridge connecting the flat roof of Tyrantia’s hutch with the silken treehouse.\n\n");
 				outputText("Belisa’s Orb appears at first glance to have been punctured and dragged to shore. The three dwellings are connected by strings of more spider silk, with odd, dangling lamps lighting up the connected houses. Gravel paths have been constructed between the three houses.\n\n");
-				if (DriderTown.BelisaKidsEggs > 0) outputText("Several egg-sacs are hung inside Tyrantia’s hutch, now a longhouse, and one of the Drider sisters is always on guard by the door. ");
-				if (DriderTown.BelisaKids > 0) outputText("Several small Drider-kids wander around their little complex, playing, weaving or play-fighting with the others. Belisa frequently looks over at the smaller Driders, a smile on her face as she watches them play. You currently have "+DriderTown.BelisaKids+" kids milling around.\n\n");
 				buttons.add("DriderTown", SceneLib.dridertown.DriderTownEnter).hint("Check up on Belisa, Lily & Tyrantia.");
 			}
 			//Alvina
@@ -1352,8 +1350,6 @@ public class Camp extends NPCAwareContent{
 			//Belisa
 			if (BelisaFollower.BelisaInCamp && !DriderTown.DriderTownComplete) {
 				outputText("On the water, Belisa anchored her silk dome. However, since you’ve seen it, the dwelling has changed. Instead of a fully submerged bubble-like structure, it’s got a silky curtain for a door, and a solid wooden dock’s been added to anchor the odd building to the ground. Outside the dwelling, a small stall’s been set up, and Belisa’s wares are on display.\n\n");
-				if (DriderTown.BelisaKidsEggs > 0) outputText("Several egg-sacs are hung inside Tyrantia’s hutch, now a longhouse, and one of the Drider sisters is always on guard by the door. ");
-				if (DriderTown.BelisaKids > 0) outputText("Several small Drider-kids wander around their little complex, playing, weaving or play-fighting with the others. Belisa frequently looks over at the smaller Driders, a smile on her face as she watches them play. You currently have "+DriderTown.BelisaKids+" kids milling around.\n\n");
 				buttons.add("Belisa", SceneLib.belisa.BelisaMainCampMenu).hint("Visit Belisa.");
 			}
 			//Cai'Lin
@@ -3144,13 +3140,6 @@ public class Camp extends NPCAwareContent{
 	}
 
 	private function swimInStream():void {
-		var izmaJoinsStream:Boolean = false;
-		var marbleJoinsStream:Boolean = false;
-		var heliaJoinsStream:Boolean = false;
-		var amilyJoinsStream:Boolean = false;
-		var emberJoinsStream:Boolean = false;
-		var rathazulJoinsStream:Boolean = false; //Rare, 10% chance.
-
 		var prankChooser:Number = rand(3);
 		clearOutput();
 		outputText("You ponder over the nearby stream that's flowing. Deciding you'd like a dip, ");
@@ -3187,29 +3176,16 @@ public class Camp extends NPCAwareContent{
 		//Ember
 		if (rand(4) == 0 && camp.followerEmber()) {
 			outputText("\n\nYou catch a glimpse of Ember taking a daily bath.");
-			emberJoinsStream = true;
 		}
 		//Rathazul (RARE)
 		if (rand(10) == 0 && player.hasStatusEffect(StatusEffects.CampRathazul)) {
 			outputText("\n\nYou spot Rathazul walking into the shallow section of stream, most likely taking a bath to get rid of the smell.");
-			rathazulJoinsStream = true;
 		}
 		//Pranks!
 		if (prankChooser == 0 && (camp.izmaFollower() || (camp.followerHel() && flags[kFLAGS.HEL_CAN_SWIM]) || camp.marbleFollower() || (camp.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_OWNS_BIKINI] > 0))) {
 			outputText("\n\nYou could play some pranks by making the water curiously warm. Do you?");
 			doYesNo(swimInStreamPrank1, swimInStreamFinish);
-			return;
 		}
-				/*if (prankChooser == 1 && (camp.izmaFollower() || (camp.followerHel() && flags[kFLAGS.HEL_CAN_SWIM]) || camp.marbleFollower()) )
-                    {
-                        outputText("\n\nYou could play some pranks by grabbing the leg of one of them and surprise them. Do you?");
-                        doYesNo(swimInStreamPrank2, swimInStreamFinish);
-                    }*/
-		/*if (prankChooser == 2 && player.lust >= 33) {
-                outputText("\n\nYou're feeling horny right now. Do you masturbate in the stream?");
-                doYesNo(swimInStreamFap, swimInStreamFinish);
-                return;
-            }*/
 		else doNext(swimInStreamFinish);
 
 	}
@@ -3226,31 +3202,21 @@ public class Camp extends NPCAwareContent{
 		//Play joke on them!
 		clearOutput();
 		outputText("You look around to make sure no one is looking then you smirk and you can feel yourself peeing. When you're done, you swim away.  ");
-		if (rand(prankRoll) == 0 && camp.izmaFollower() && pranked == false && izmaJoinsStream == true) {
+		if (rand(prankRoll) == 0 && camp.izmaFollower() && !pranked && izmaJoinsStream) {
 			outputText("\n\nIzma just swims over, unaware of the warm spot you just created. \"<i>Who've pissed in the stream?</i>\" she growls. You swim over to her and tell her that you admit you did pee in the stream. \"<i>Oh, alpha! What a naughty alpha you are,</i>\" she grins, her shark-teeth clearly visible.");
 			pranked = true;
 		}
-		if (rand(prankRoll) == 0 && (camp.followerHel() && flags[kFLAGS.HEL_CAN_SWIM]) && pranked == false && heliaJoinsStream == true) {
+		if (rand(prankRoll) == 0 && (camp.followerHel() && flags[kFLAGS.HEL_CAN_SWIM]) && !pranked && heliaJoinsStream) {
 			outputText("\n\nHelia swims around until she hits the warm spot you just created. \"<i>Heyyyyyyy,</i>\" the salamander yells towards you. She comes towards you and asks \"<i>Did you just piss in the stream?</i>\" after which you sheepishly chuckle and tell her that you admit it. Yes, you've done it. \"<i>I knew it! Oh, you're naughty, lover mine!</i>\" she says.");
 			pranked = true;
 		}
-		if (rand(prankRoll) == 0 && camp.marbleFollower() && pranked == false && marbleJoinsStream == true) {
+		if (rand(prankRoll) == 0 && camp.marbleFollower() && !pranked && marbleJoinsStream) {
 			outputText("\n\nMarble is oblivious to the warm spot and when she swims over, she yells \"<i>Hey, sweetie! Did you just urinate in the stream?</i>\" You sheepishly smile and admit that yes, you did it. She says, \"<i>You're naughty, you know, sweetie!</i>\"");
 			pranked = true;
 		}
-		/*if (rand(prankRoll) == 0 && camp.amilyFollower() && flags[kFLAGS.AMILY_OWNS_BIKINI] > 0 && pranked == false && amilyJoinsStream == true)
-            {
-                outputText("");
-                pranked = true;
-            }*/
-		if (pranked == false) outputText("  No one managed to swim past where you left the warm spot before it dissipated. You feel a bit disappointed and just go back to swimming.");
+		if (!pranked) outputText("  No one managed to swim past where you left the warm spot before it dissipated. You feel a bit disappointed and just go back to swimming.");
 		else outputText("  You feel accomplished from the prank and resume swimming. ");
 		awardAchievement("Urine Trouble", kACHIEVEMENTS.GENERAL_URINE_TROUBLE);
-		doNext(swimInStreamFinish);
-	}
-
-	private function swimInStreamFap():void {
-		clearOutput();
 		doNext(swimInStreamFinish);
 	}
 
@@ -3382,54 +3348,30 @@ public class Camp extends NPCAwareContent{
 //-----------------
 	public function restMenu():void {
 		menu();
-		addButton(0, "1 Hour", rest1).hint("Rest for one hour.");
-		addButton(1, "2 Hours", rest2).hint("Rest for two hours.");
-		addButton(2, "4 Hours", rest4).hint("Rest for four hours.");
-		addButton(3, "8 Hours", rest8).hint("Rest for eight hours.");
-		if (player.isNightCreature())
-		{
-			addButton(4, "Till Dawn", restTillDawn).hint("Rest until the dawn comes.");
-		}
-		else{
-			addButton(4, "Till Dusk", restTillDusk).hint("Rest until the night comes.");
-		}
+		addButton(0, "1 Hour", 	restFor, 1).hint("Rest for one hour.");
+		addButton(1, "2 Hours", restFor, 2).hint("Rest for two hours.");
+		addButton(2, "3 Hours", restFor, 3).hint("Rest for three hours.");
+		addButton(3, "4 Hours", restFor, 4).hint("Rest for four hours.");
+		addButton(4, "6 Hours", restFor, 6).hint("Rest for six hours.");
+		addButton(5, "8 Hours", restFor, 8).hint("Rest for eight hours.");
+		addButton(6, "10 Hours",restFor, 10).hint("Rest for ten hours.");
+		addButton(7, "12 Hours",restFor, 12).hint("Rest for twelve hours.");
+		if (player.isNightCreature()) addButton(8, "Till Dawn", restTillDawn).hint("Rest until the dawn comes.");
+		else addButton(8, "Till Dusk", restTillDusk).hint("Rest until the night comes.");
 		addButton(14, "Back", playerMenu);
 	}
 
-	public function rest1():void {
-		waitingORresting = 1;
-		rest();
-	}
-
-	public function rest2():void {
-		waitingORresting = 2;
-		rest();
-	}
-
-	public function rest4():void {
-		waitingORresting = 4;
-		rest();
-	}
-
-	public function rest8():void {
-		waitingORresting = 8;
+	public function restFor(hours:int):void {
+		waitingORresting = hours;
 		rest();
 	}
 
 	public function restTillDusk():void {
-		waitingORresting = 21 - model.time.hours;
-		rest();
+		restFor(21 - model.time.hours);
 	}
 
 	public function restTillDawn():void {
-		var TimeBeforeDawn:Number;
-		if (model.time.hours >= 22) {
-			TimeBeforeDawn = 6 + (24 - model.time.hours)
-		} else {
-			TimeBeforeDawn = 6 - model.time.hours
-		}
-		waitingORresting = TimeBeforeDawn;
-		rest();
+		restFor(model.time.hours >= 22 ? 6 + (24 - model.time.hours) : 6 - model.time.hours);
 	}
 
 	public function rest():void {
@@ -3523,51 +3465,30 @@ public class Camp extends NPCAwareContent{
 //-----------------
 	public function doWaitMenu():void {
 		menu();
-		addButton(0, "1 Hour", doWait1).hint("Wait one hour.");
-		addButton(1, "2 Hours", doWait2).hint("Wait two hours.");
-		addButton(2, "4 Hours", doWait4).hint("Wait four hours.");
-		addButton(3, "8 Hours", doWait8).hint("Wait eight hours.");
-		if (player.isNightCreature()) addButton(4, "Till Dawn", doWaitTillDawn).hint("Wait until the dawn comes.");
-		else addButton(4, "Till Dusk", doWaitTillDusk).hint("Wait until the night comes.");
+		addButton(0, "1 Hour",  doWaitFor, 1).hint("Wait one hour.");
+		addButton(1, "2 Hours", doWaitFor, 2).hint("Wait two hours.");
+		addButton(2, "3 Hours", doWaitFor, 3).hint("Wait three hours.");
+		addButton(3, "4 Hours", doWaitFor, 4).hint("Wait four hours.");
+		addButton(4, "6 Hours", doWaitFor, 6).hint("Wait six hours.");
+		addButton(5, "8 Hours", doWaitFor, 8).hint("Wait eight hours.");
+		addButton(6, "10 Hours", doWaitFor, 10).hint("Wait ten hours.");
+		addButton(7, "12 Hours", doWaitFor, 12).hint("Wait twelve hours.");
+		if (player.isNightCreature()) addButton(8, "Till Dawn", doWaitTillDawn).hint("Wait until the dawn comes.");
+		else addButton(8, "Till Dusk", doWaitTillDusk).hint("Wait until the night comes.");
 		addButton(14, "Back", playerMenu);
 	}
 
-	public function doWait1():void {
-		waitingORresting = 1;
-		doWait();
-	}
-
-	public function doWait2():void {
-		waitingORresting = 2;
-		doWait();
-	}
-
-	public function doWait4():void {
-		waitingORresting = 4;
-		doWait();
-	}
-
-	public function doWait8():void {
-		waitingORresting = 8;
+	public function doWaitFor(hours:int):void {
+		waitingORresting = hours;
 		doWait();
 	}
 
 	public function doWaitTillDusk():void {
-		waitingORresting = 21 - model.time.hours;
-		doWait();
+		doWaitFor(21 - model.time.hours);
 	}
 
 	public function doWaitTillDawn():void {
-		var TimeBeforeDawn:Number;
-		if (model.time.hours >= 22)
-		{
-			TimeBeforeDawn = 6+(24-model.time.hours)
-		}
-		else{
-			TimeBeforeDawn = 6 - model.time.hours
-		}
-		waitingORresting = TimeBeforeDawn ;
-		doWait();
+		doWaitFor(model.time.hours >= 22 ? 6 + (24 - model.time.hours) : 6 - model.time.hours);
 	}
 
 	public function doWait():void {
@@ -6090,11 +6011,18 @@ public function rebirthFromBadEnd():void {
                 //radiant shard fix - now for everyone!
                 if (player.hasKeyItem("Radiant shard") < 0) {
                     outputText("\n\nNow legendary weapon is crafted from radiant shards. You deserve these!\n");
-                    outputText("\n\n(if you already had some, please remove them, heh)\n");
+                    outputText("\n\n(If you already have some, please remove them, heh..)\n");
                     soulforce.fixShards();
                 }
                 flags[kFLAGS.MOD_SAVE_VERSION] = 35.001;
             }
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.002) {
+				//If something needs a fix, abort - not ready to update the version yet!
+				if (consumables.E3PEARL.fixSave()) return;
+				if (consumables.E5PEARL.fixSave()) return;
+				if (consumables.E7PEARL.fixSave()) return;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 35.002;
+			}
             outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
             doNext(doCamp);
             return;

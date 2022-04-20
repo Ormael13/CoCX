@@ -1,8 +1,6 @@
 package classes.Items.Weapons 
 {
 	import classes.PerkLib;
-	import classes.EventParser;
-    import classes.TimeAwareInterface;
 
 	public class NocturnusStaff extends WeaponWithPerk
 	{
@@ -28,14 +26,13 @@ package classes.Items.Weapons
 		}
 		
 		public function calcWizardsMult():Number {
-			var desc:String = "";
 			var multadd:Number = 0.6;
             if (game && game.player)
                 multadd += game.player.cor * 0.044;
 			return multadd;
 		}
 
-        private static var lastCor:Number = 0; //optimization
+        private static var lastCor:Number = 0;
 
         public function updateWizardsMult():void {
             if (game.player.cor != lastCor) {
@@ -68,6 +65,11 @@ package classes.Items.Weapons
 			if (game.player.level >= 40) return super.canUse();
 			outputText("You try and wield the legendary weapon but to your disapointment the item simply refuse to stay put in your hands. It would seem you yet lack the power and right to wield this item.");
 			return false;
+		}
+
+		override public function get description():String {
+			updateWizardsMult(); //To display *correct* values
+			return super.description;
 		}
 	}
 }

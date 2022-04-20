@@ -4,11 +4,9 @@ import classes.CoC;
 import classes.EngineCore;
 import classes.GlobalFlags.kFLAGS;
 import classes.Measurements;
-import classes.internals.Utils;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects;
 import classes.Scenes.NPCs.Forgefather;
-import classes.PlayerAppearance;
 import classes.internals.Utils;
 
 public class ParserTags {
@@ -39,7 +37,7 @@ public class ParserTags {
         "ass"                   : function ():* { return CoC.instance.player.buttDescript(); },
         "asshole"               : function ():* { return CoC.instance.player.assholeDescript(); },
         "balls"                 : function ():* { return CoC.instance.player.ballsDescriptLight(); },
-        "ballsarticle"         : function ():* { return CoC.instance.player.ballsDescriptArticle(); },
+        "ballsarticle"          : function ():* { return CoC.instance.player.ballsDescriptArticle(); },
         "bodytype"              : function ():* { return CoC.instance.player.bodyType(); },
         "boyfriend"             : function ():* { return CoC.instance.player.mf("boyfriend", "girlfriend"); },
         "breasts"               : function ():* { return CoC.instance.player.breastDescript(0); },

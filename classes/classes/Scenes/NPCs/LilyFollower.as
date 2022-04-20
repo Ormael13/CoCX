@@ -9,6 +9,7 @@ import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.UndergarmentLib;
 import classes.Scenes.Camp;
+import classes.Scenes.SceneLib;
 import classes.Scenes.NPCs.Lily;
 import classes.internals.SaveableState;
 import classes.display.SpriteDb;
@@ -776,6 +777,7 @@ import classes.display.SpriteDb;
 			else addButtonDisabled(2, "Sex", "Your lust is too low.");
 			//addButton(3, "House", LilyHouse);
 			addButton(4, "Spar", LilySpar);
+			if (DriderTown.DriderTownComplete) addButton(13, "Back", SceneLib.dridertown.DriderTownEnter).hint("Return to main DriderTown menu.");
 			addButton(14, "Leave", camp.campLoversMenu);
 		}
 		
@@ -803,6 +805,7 @@ import classes.display.SpriteDb;
 			else addButtonDisabled(2, "Sex", "Your lust is too low.");
 			//addButton(3, "House", LilyHouse);
 			addButton(4, "Spar", LilySpar);
+			if (DriderTown.DriderTownComplete) addButton(13, "Back", SceneLib.dridertown.DriderTownEnter).hint("Return to main DriderTown menu.");
 			addButton(14, "Leave", camp.campLoversMenu);
 		}
 		

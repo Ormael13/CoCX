@@ -4,12 +4,10 @@
 package classes.Items
 {
 import classes.BaseContent;
-import classes.EngineCore;
 import classes.Items.Consumables.*;
 import classes.Items.Consumables.CentipedeVenom;
 import classes.Player;
 import classes.Scenes.SceneLib;
-import classes.CoC;
 
 public final class ConsumableLib extends BaseContent
 	{
@@ -186,12 +184,12 @@ public final class ConsumableLib extends BaseContent
 		public const BIMBOLQ:BimboLiqueur     = new BimboLiqueur();
 		public const BROBREW:SimpleConsumable = mk("BroBrew", "BroBrew", "a can of Bro Brew", 1000, "This aluminum can is labelled as 'Bro Brew'.  It even has a picture of a muscly, bare-chested man flexing on it.  A small label in the corner displays: \"Demon General's Warning: Bro Brew's effects are as potent (and irreversible) as they are refreshing.", m.broBrew);
 		public const HUMMUS2:SimpleConsumable = mk("Hummus2", "S.Hummus", "a blob of cheesy-looking super hummus", 6, "This pile of hummus doesn't look that clean, and you really don't remember where you got it from.  It looks bland.  So bland that you feel blander just by looking at it.", m.superHummus);
-		public const P_PEARL:SimpleConsumable = mk("P.Pearl", "P.Pearl", "a pure pearl", 1000, "Marae gave you this pure pearl as a reward for shutting down the demonic factory.", m.purePearlConfirm);
-		public const EZEKFRU:SimpleConsumable = mk("EzekFru", "EzekielFruit", "a simple looking fruit", 300, "Evangeline gave you this fruit as means of showing her gratitude.", m.ezekielfruit);
-		public const E3PEARL:SimpleConsumable = mk("E3Pearl", "Elemen3CPearl", "a simple looking three-colored pearl", 200, "A pearl formed after defeating a group of golems. It's surrounded by faint aura of elements.", m.lowgradeelementalPearl);
-		public const E_PEARL:SimpleConsumable = mk("E5Pearl", "Elemen5CPearl", "a simple looking five-colored pearl", 400, "A pearl formed after defeating an obsidian gargoyle. It's surrounded by weak aura of elements.", m.middlegradeelementalPearl);
-		public const E7PEARL:SimpleConsumable = mk("E7Pearl", "Elemen7CPearl", "a simple looking seven-colored pearl", 800, "A pearl formed after defeating a living statue. It's surrounded by aura of elements.", m.highgradeelementalPearl);
-
+		public const P_PEARL:PurePearl = new PurePearl();
+		public const EZEKFRU:SimpleConsumable = mk("EzekFru", "EzekielFruit", "a magical fruit", 300,
+			"Evangeline gave you this fruit as means of showing her gratitude. Eating it will probably strengthen your body and mind.\n\n<b>Effect: all stats +10%</b>", m.ezekielfruit);
+		public const E3PEARL:ElementalPearl = new ElementalPearl(3);
+		public const E5PEARL:ElementalPearl = new ElementalPearl(5);
+		public const E7PEARL:ElementalPearl = new ElementalPearl(7);
 		//NON-TRANSFORMATIVE ITEMS
 		public const AGILI_E:SimpleConsumable = mk("Agil.E.", "Agility E.", "an agility elixir", 6, "This greenish elixir is supposed to increase the user’s natural swiftness and agility.", m.agilityElixir);
 		public const AIRWEED:SimpleConsumable = mk("Airweed", "Airweed", "an Airweed", 10, "Upon consumption, this magic seaweed grants water breathing for 24 hours.", m.airweed);
