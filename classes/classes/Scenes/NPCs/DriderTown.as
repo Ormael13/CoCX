@@ -174,7 +174,7 @@ public function DriderTownEnter():void {
 }//outputText("\"<i></i>\"\n\n");
 
 public function DriderTownSisters():void {
-	outputText("You decide to have a visit with one of your three lovely Driders. The only question is, which one?\n\n"+TyrantiaPregnancy+"\n"+TyrantiaKidsEggsHatching+"\n"+TyrantiaKidsEggsHatching1+"\n"+TyrantiaKidsEggsHatching2+"\n"+TyrantiaKidsEggs+"\n"+TyrantiaKidsEggs1+"\n"+TyrantiaKidsEggs2+"\n\n"+BelisaPregnancy+"\n"+BelisaKidsEggsHatching+"\n"+BelisaKidsEggsHatching1+"\n"+BelisaKidsEggsHatching2+"\n"+BelisaKidsEggs+"\n"+BelisaKidsEggs1+"\n"+BelisaKidsEggs2+"\n\n");
+	outputText("You decide to have a visit with one of your three lovely Driders. The only question is, which one?\n\n");
 	menu();
 	addButton(1, "Belisa", SceneLib.belisa.BelisaMainCampMenu);
 	addButton(2, "Lily", SceneLib.lily.LilyCampFollower);

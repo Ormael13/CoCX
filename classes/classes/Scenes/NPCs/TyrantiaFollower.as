@@ -947,11 +947,11 @@ public function TyrantiaFuck():void {
 	outputText("You gather up the pieces of your [armor] scattered around the cave, and turn back to watch as you dress. You watch as Tyrantia slowly, methodically slides the steel plates over her spider half, then covers herself. You watch as the gentle giant of a lover you know slowly covers herself back up, becoming the imposing, frankly terrifying figure you saw on the battlefield.\n\n");
 	outputText("<i>“I know, I like this less, too.”</i> Comes her low voice, her fangs menacingly poking out from her helm. <i>“But it’s more practical, these days.”</i> You pull yourself from the cave, waving goodbye to the Drider woman. You roll your shoulders, forcing your aching legs to work as you head back to camp.\n\n");
 	if (TyrantiaFollowerStage >= 6) {
-		if (TyrantiaFollowerStage >= 7 && DriderTown.TyrantiaPregnancy == 0 && rand(100) < 50) DriderTown.TyrantiaPregnancy = 72;
+		if (TyrantiaFollowerStage >= 7 && DriderTown.TyrantiaPregnancy == 0 && rand(100) < chanceToFail()) DriderTown.TyrantiaPregnancy = 72;
 		else {
 			TyrantiaFollowerStage = 7;
 			DriderTown.TyrantiaPregnancy = 0;
-			if (rand(100) < 50) DriderTown.TyrantiaPregnancy = 72;
+			if (rand(100) < chanceToFail()) DriderTown.TyrantiaPregnancy = 72;
 		}
 	}
 	player.sexReward("vaginalFluids","Dick");
@@ -1000,11 +1000,11 @@ public function TyrantiaHugFuck():void {
 	outputText("<i>“Umm...I just realized something.”</i> She says, blushing. You tilt your head, confused, and she scratches her head. <i>“...We left our clothes back at camp.\" </i> You facepalm, realizing that neither of you thought about the aftermath of your little sexcapade.\n\n");
 	outputText("<i>“Well...I know how we could keep ourselves...Kind of covered.”</i> She grins, putting you down. <i>“But it might be a bit...Stimulating.”</i>\n\n");
 	if (TyrantiaFollowerStage >= 6) {
-		if (TyrantiaFollowerStage >= 7 && DriderTown.TyrantiaPregnancy == 0 && rand(100) < 50) DriderTown.TyrantiaPregnancy = 72;
+		if (TyrantiaFollowerStage >= 7 && DriderTown.TyrantiaPregnancy == 0 && rand(100) < chanceToFail()) DriderTown.TyrantiaPregnancy = 72;
 		else {
 			TyrantiaFollowerStage = 7;
 			DriderTown.TyrantiaPregnancy = 0;
-			if (rand(100) < 50) DriderTown.TyrantiaPregnancy = 72;
+			if (rand(100) < chanceToFail()) DriderTown.TyrantiaPregnancy = 72;
 		}
 	}
 	menu();
@@ -1091,6 +1091,13 @@ public function GetPhallustuffed():void {
 	player.sexReward("Default","Vaginal");
 	if (CoC.instance.inCombat) cleanupAfterCombat();
 	doNext(camp.returnToCampUseOneHour);
+}
+	
+private function chanceToFail():Number {
+	var chance:Number = 10;
+	chance += Math.min(player.cumQ() / 25,40);
+	chance += Math.min(player.virilityQ() * 100, 50);
+	return chance;
 }
 
 public function TyrantiaAtCamp():void {

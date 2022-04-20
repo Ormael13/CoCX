@@ -826,4 +826,4 @@ import classes.display.SpriteDb;
 			startCombat(new Lily());
 		}
 	}
-}
+}
