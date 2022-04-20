@@ -427,7 +427,7 @@ public class SceneHunter extends BaseContent {
     //Some common checks for easier access
 
     //Prints dick requirements if not found
-    public function check_dick_typed(type:CockTypesEnum, minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", moreText:String = ""):void {
+    public function checkDickWithType(type:CockTypesEnum, minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", moreText:String = ""):void {
         if (printChecks && player.findCockWithType(type, 1, minSize, maxSize, compareBy) < 0) {
             outputText("\n\n<b>FAILED DICK CHECK:")
             if (type != CockTypesEnum.UNDEFINED)
@@ -441,8 +441,8 @@ public class SceneHunter extends BaseContent {
             outputText("</b>\n\n")
         }
     }
-    public function check_dick(minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", moreText:String = ""):void {
-        check_dick_typed(CockTypesEnum.UNDEFINED, minSize, maxSize, compareBy, moreText);
+    public function checkDick(minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", moreText:String = ""):void {
+        checkDickWithType(CockTypesEnum.UNDEFINED, minSize, maxSize, compareBy, moreText);
     }
 
     //Prints dick requirements if not found

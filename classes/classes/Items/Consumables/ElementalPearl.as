@@ -38,7 +38,7 @@ public class ElementalPearl extends Consumable {
         descr += "\n\n<b>Effect: removes debuffs created by " + requiredPerk.name() + " perk.</b>";
         super(
             "E"+tier+"Pearl",
-            "Elemen"+tier+"CPearl",
+            "El."+tier+"C.Pearl",
             "an iridescent "+NUMBER_WORDS_NORMAL[tier]+"-colored pearl",
             tier == 3 ? 200 : tier == 5 ? 400 : 800,
             descr

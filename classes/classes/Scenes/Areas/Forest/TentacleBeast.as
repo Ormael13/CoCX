@@ -52,6 +52,7 @@ public class TentacleBeast extends Monster
 
 		override public function defeated(hpVictory:Boolean):void
 		{
+			player.removeStatusEffect(StatusEffects.TentacleBadEndCounter); //clear counter
 			if (hpVictory) {
 				outputText("The creature lets out an ear-piercing screech as it collapses upon itself. Its green coloring quickly fades to brown as the life drains from it, leaving you victorious.", true);
 				EngineCore.awardAchievement("Tentacle Beast Slayer", kACHIEVEMENTS.GENERAL_TENTACLE_BEAST_SLAYER);
@@ -77,10 +78,10 @@ public class TentacleBeast extends Monster
 				cleanupAfterCombat();
 			}
 			else {
-				if(!hpVictory && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
-					outputText("  Perhaps you could use it to sate yourself?", true);
-					EngineCore.doYesNo(SceneLib.forest.tentacleBeastScene.tentacleVictoryRape,cleanupAfterCombat);
-				} else {
+				if(!hpVictory && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0)
+					SceneLib.forest.tentacleBeastScene.tentacleVictory();
+				else {
+					sceneHunter.print("Maybe lust-defeat would leave more opportunities?");
 					cleanupAfterCombat();
 				}
 			}

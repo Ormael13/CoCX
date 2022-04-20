@@ -3140,13 +3140,6 @@ public class Camp extends NPCAwareContent{
 	}
 
 	private function swimInStream():void {
-		var izmaJoinsStream:Boolean = false;
-		var marbleJoinsStream:Boolean = false;
-		var heliaJoinsStream:Boolean = false;
-		var amilyJoinsStream:Boolean = false;
-		var emberJoinsStream:Boolean = false;
-		var rathazulJoinsStream:Boolean = false; //Rare, 10% chance.
-
 		var prankChooser:Number = rand(3);
 		clearOutput();
 		outputText("You ponder over the nearby stream that's flowing. Deciding you'd like a dip, ");
@@ -3183,29 +3176,16 @@ public class Camp extends NPCAwareContent{
 		//Ember
 		if (rand(4) == 0 && camp.followerEmber()) {
 			outputText("\n\nYou catch a glimpse of Ember taking a daily bath.");
-			emberJoinsStream = true;
 		}
 		//Rathazul (RARE)
 		if (rand(10) == 0 && player.hasStatusEffect(StatusEffects.CampRathazul)) {
 			outputText("\n\nYou spot Rathazul walking into the shallow section of stream, most likely taking a bath to get rid of the smell.");
-			rathazulJoinsStream = true;
 		}
 		//Pranks!
 		if (prankChooser == 0 && (camp.izmaFollower() || (camp.followerHel() && flags[kFLAGS.HEL_CAN_SWIM]) || camp.marbleFollower() || (camp.amilyFollower() && flags[kFLAGS.AMILY_FOLLOWER] == 1 && flags[kFLAGS.AMILY_OWNS_BIKINI] > 0))) {
 			outputText("\n\nYou could play some pranks by making the water curiously warm. Do you?");
 			doYesNo(swimInStreamPrank1, swimInStreamFinish);
-			return;
 		}
-				/*if (prankChooser == 1 && (camp.izmaFollower() || (camp.followerHel() && flags[kFLAGS.HEL_CAN_SWIM]) || camp.marbleFollower()) )
-                    {
-                        outputText("\n\nYou could play some pranks by grabbing the leg of one of them and surprise them. Do you?");
-                        doYesNo(swimInStreamPrank2, swimInStreamFinish);
-                    }*/
-		/*if (prankChooser == 2 && player.lust >= 33) {
-                outputText("\n\nYou're feeling horny right now. Do you masturbate in the stream?");
-                doYesNo(swimInStreamFap, swimInStreamFinish);
-                return;
-            }*/
 		else doNext(swimInStreamFinish);
 
 	}
@@ -3222,31 +3202,21 @@ public class Camp extends NPCAwareContent{
 		//Play joke on them!
 		clearOutput();
 		outputText("You look around to make sure no one is looking then you smirk and you can feel yourself peeing. When you're done, you swim away.  ");
-		if (rand(prankRoll) == 0 && camp.izmaFollower() && pranked == false && izmaJoinsStream == true) {
+		if (rand(prankRoll) == 0 && camp.izmaFollower() && !pranked && izmaJoinsStream) {
 			outputText("\n\nIzma just swims over, unaware of the warm spot you just created. \"<i>Who've pissed in the stream?</i>\" she growls. You swim over to her and tell her that you admit you did pee in the stream. \"<i>Oh, alpha! What a naughty alpha you are,</i>\" she grins, her shark-teeth clearly visible.");
 			pranked = true;
 		}
-		if (rand(prankRoll) == 0 && (camp.followerHel() && flags[kFLAGS.HEL_CAN_SWIM]) && pranked == false && heliaJoinsStream == true) {
+		if (rand(prankRoll) == 0 && (camp.followerHel() && flags[kFLAGS.HEL_CAN_SWIM]) && !pranked && heliaJoinsStream) {
 			outputText("\n\nHelia swims around until she hits the warm spot you just created. \"<i>Heyyyyyyy,</i>\" the salamander yells towards you. She comes towards you and asks \"<i>Did you just piss in the stream?</i>\" after which you sheepishly chuckle and tell her that you admit it. Yes, you've done it. \"<i>I knew it! Oh, you're naughty, lover mine!</i>\" she says.");
 			pranked = true;
 		}
-		if (rand(prankRoll) == 0 && camp.marbleFollower() && pranked == false && marbleJoinsStream == true) {
+		if (rand(prankRoll) == 0 && camp.marbleFollower() && !pranked && marbleJoinsStream) {
 			outputText("\n\nMarble is oblivious to the warm spot and when she swims over, she yells \"<i>Hey, sweetie! Did you just urinate in the stream?</i>\" You sheepishly smile and admit that yes, you did it. She says, \"<i>You're naughty, you know, sweetie!</i>\"");
 			pranked = true;
 		}
-		/*if (rand(prankRoll) == 0 && camp.amilyFollower() && flags[kFLAGS.AMILY_OWNS_BIKINI] > 0 && pranked == false && amilyJoinsStream == true)
-            {
-                outputText("");
-                pranked = true;
-            }*/
-		if (pranked == false) outputText("  No one managed to swim past where you left the warm spot before it dissipated. You feel a bit disappointed and just go back to swimming.");
+		if (!pranked) outputText("  No one managed to swim past where you left the warm spot before it dissipated. You feel a bit disappointed and just go back to swimming.");
 		else outputText("  You feel accomplished from the prank and resume swimming. ");
 		awardAchievement("Urine Trouble", kACHIEVEMENTS.GENERAL_URINE_TROUBLE);
-		doNext(swimInStreamFinish);
-	}
-
-	private function swimInStreamFap():void {
-		clearOutput();
 		doNext(swimInStreamFinish);
 	}
 
@@ -3378,73 +3348,30 @@ public class Camp extends NPCAwareContent{
 //-----------------
 	public function restMenu():void {
 		menu();
-		addButton(0, "1 Hour", rest1).hint("Rest for one hour.");
-		addButton(1, "2 Hours", rest2).hint("Rest for two hours.");
-		addButton(2, "3 Hours", rest3).hint("Rest for three hours.");
-		addButton(3, "4 Hours", rest4).hint("Rest for four hours.");
-		addButton(4, "6 Hours", rest6).hint("Rest for six hours.");
-		addButton(5, "8 Hours", rest8).hint("Rest for eight hours.");
-		addButton(6, "10 Hours", rest10).hint("Rest for ten hours.");
-		addButton(7, "12 Hours", rest12).hint("Rest for twelve hours.");
+		addButton(0, "1 Hour", 	restFor, 1).hint("Rest for one hour.");
+		addButton(1, "2 Hours", restFor, 2).hint("Rest for two hours.");
+		addButton(2, "3 Hours", restFor, 3).hint("Rest for three hours.");
+		addButton(3, "4 Hours", restFor, 4).hint("Rest for four hours.");
+		addButton(4, "6 Hours", restFor, 6).hint("Rest for six hours.");
+		addButton(5, "8 Hours", restFor, 8).hint("Rest for eight hours.");
+		addButton(6, "10 Hours",restFor, 10).hint("Rest for ten hours.");
+		addButton(7, "12 Hours",restFor, 12).hint("Rest for twelve hours.");
 		if (player.isNightCreature()) addButton(8, "Till Dawn", restTillDawn).hint("Rest until the dawn comes.");
 		else addButton(8, "Till Dusk", restTillDusk).hint("Rest until the night comes.");
 		addButton(14, "Back", playerMenu);
 	}
 
-	public function rest1():void {
-		waitingORresting = 1;
-		rest();
-	}
-
-	public function rest2():void {
-		waitingORresting = 2;
-		rest();
-	}
-
-	public function rest3():void {
-		waitingORresting = 3;
-		rest();
-	}
-
-	public function rest4():void {
-		waitingORresting = 4;
-		rest();
-	}
-
-	public function rest6():void {
-		waitingORresting = 6;
-		rest();
-	}
-
-	public function rest8():void {
-		waitingORresting = 8;
-		rest();
-	}
-
-	public function rest10():void {
-		waitingORresting = 10;
-		rest();
-	}
-
-	public function rest12():void {
-		waitingORresting = 12;
+	public function restFor(hours:int):void {
+		waitingORresting = hours;
 		rest();
 	}
 
 	public function restTillDusk():void {
-		waitingORresting = 21 - model.time.hours;
-		rest();
+		restFor(21 - model.time.hours);
 	}
 
 	public function restTillDawn():void {
-		var TimeBeforeDawn:Number;
-		if (model.time.hours >= 22) {
-			TimeBeforeDawn = 6 + (24 - model.time.hours)
-		} else {
-			TimeBeforeDawn = 6 - model.time.hours
-		}
-		waitingORresting = TimeBeforeDawn;
-		rest();
+		restFor(model.time.hours >= 22 ? 6 + (24 - model.time.hours) : 6 - model.time.hours);
 	}
 
 	public function rest():void {
@@ -3538,75 +3465,30 @@ public class Camp extends NPCAwareContent{
 //-----------------
 	public function doWaitMenu():void {
 		menu();
-		addButton(0, "1 Hour", doWait1).hint("Wait one hour.");
-		addButton(1, "2 Hours", doWait2).hint("Wait two hours.");
-		addButton(2, "3 Hours", doWait3).hint("Wait three hours.");
-		addButton(3, "4 Hours", doWait4).hint("Wait four hours.");
-		addButton(4, "6 Hours", doWait6).hint("Wait six hours.");
-		addButton(5, "8 Hours", doWait8).hint("Wait eight hours.");
-		addButton(6, "10 Hours", doWait10).hint("Wait ten hours.");
-		addButton(7, "12 Hours", doWait12).hint("Wait twelve hours.");
+		addButton(0, "1 Hour",  doWaitFor, 1).hint("Wait one hour.");
+		addButton(1, "2 Hours", doWaitFor, 2).hint("Wait two hours.");
+		addButton(2, "3 Hours", doWaitFor, 3).hint("Wait three hours.");
+		addButton(3, "4 Hours", doWaitFor, 4).hint("Wait four hours.");
+		addButton(4, "6 Hours", doWaitFor, 6).hint("Wait six hours.");
+		addButton(5, "8 Hours", doWaitFor, 8).hint("Wait eight hours.");
+		addButton(6, "10 Hours", doWaitFor, 10).hint("Wait ten hours.");
+		addButton(7, "12 Hours", doWaitFor, 12).hint("Wait twelve hours.");
 		if (player.isNightCreature()) addButton(8, "Till Dawn", doWaitTillDawn).hint("Wait until the dawn comes.");
 		else addButton(8, "Till Dusk", doWaitTillDusk).hint("Wait until the night comes.");
 		addButton(14, "Back", playerMenu);
 	}
 
-	public function doWait1():void {
-		waitingORresting = 1;
-		doWait();
-	}
-
-	public function doWait2():void {
-		waitingORresting = 2;
-		doWait();
-	}
-
-	public function doWait3():void {
-		waitingORresting = 3;
-		doWait();
-	}
-
-	public function doWait4():void {
-		waitingORresting = 4;
-		doWait();
-	}
-
-	public function doWait6():void {
-		waitingORresting = 6;
-		doWait();
-	}
-
-	public function doWait8():void {
-		waitingORresting = 8;
-		doWait();
-	}
-
-	public function doWait10():void {
-		waitingORresting = 10;
-		doWait();
-	}
-
-	public function doWait12():void {
-		waitingORresting = 12;
+	public function doWaitFor(hours:int):void {
+		waitingORresting = hours;
 		doWait();
 	}
 
 	public function doWaitTillDusk():void {
-		waitingORresting = 21 - model.time.hours;
-		doWait();
+		doWaitFor(21 - model.time.hours);
 	}
 
 	public function doWaitTillDawn():void {
-		var TimeBeforeDawn:Number;
-		if (model.time.hours >= 22)
-		{
-			TimeBeforeDawn = 6+(24-model.time.hours)
-		}
-		else{
-			TimeBeforeDawn = 6 - model.time.hours
-		}
-		waitingORresting = TimeBeforeDawn ;
-		doWait();
+		doWaitFor(model.time.hours >= 22 ? 6 + (24 - model.time.hours) : 6 - model.time.hours);
 	}
 
 	public function doWait():void {
@@ -6809,4 +6691,4 @@ public function rebirthFromBadEnd():void {
         }
         */
 	}
-}
+}
