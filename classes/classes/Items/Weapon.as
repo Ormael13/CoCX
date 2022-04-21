@@ -113,7 +113,7 @@ public class Weapon extends Useable //Equipable
 			var temp:Array = perk.split(", ");
             var temp2:Array = ["Large", "Massive", "Dual", "Dual Large", "Dual Small"]
             for each (var temp3:String in temp2){
-                if (temp.indexOf(temp3) && game.player.shield != ShieldLib.NOTHING){
+                if (temp.indexOf(temp3) >= 0 && game.player.shield != ShieldLib.NOTHING){
                     if (temp3 == "Large") {
                         if (game.player.hasPerk(PerkLib.GigantGrip)){
                             break;
