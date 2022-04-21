@@ -170,7 +170,7 @@ public function DriderTownEnter():void {
 	addButton(1, "Sisters", DriderTownSisters);
 	//addButton(2, "Children", DriderTownKids);
 	//only at night
-	if (model.time.hours > 20 && BelisaFollower.BelisaAffectionMeter >= 100 && LilyFollower.LilyAffectionMeter >= 100 && TyrantiaFollower.TyrantiaAffectionMeter >= 100) {
+	if (model.time.hours > 20 && BelisaFollower.BelisaAffectionMeter >= 100 && LilyFollower.LilyAffectionMeter >= 100 && TyrantiaFollower.TyrantiaAffectionMeter >= 100) {//
 		if (SisterBangEnabled) {
 			if (player.gender > 0) addButton(3, "Bonding", FamilySex);
 			else addButtonDisabled(3, "Bonding", "No bonding for genderless one.");
