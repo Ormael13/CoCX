@@ -6672,6 +6672,10 @@ public function rebirthFromBadEnd():void {
 		if (player.hasKeyItem("Deluxe Dildo") >= 0 && player.hasVagina())
 			addButton(5, "TamaniFem", SceneLib.forest.tamaniScene.preferTamaniFemdom);
 		else addButtonDisabled(5, "T. Fem", "Requires accepting a dildo from a certain goblin (+ having a vagina).");
+		//Erlking revenge
+		if (player.hasKeyItem("Golden Antlers") >= 0 && player.gender > 0)
+			addButton(6, "Erlk.Revenge", SceneLib.forest.erlkingScene.howDareYou);
+		else addButtonDisabled(6, "Ek.Rev", "Requires taking your revenge on some cocky hunter. <i>Don't get cocky, kid...</i>");
 		//bruh
 		addButtonDisabled(13, "BadEnds", "SH is too lazy to add them");
         addButton(14, "Wake Up", recallWakeUp);

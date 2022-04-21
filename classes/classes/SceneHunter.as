@@ -117,7 +117,7 @@ public class SceneHunter extends BaseContent {
         //Auto-calls. No auto call when dick is just inactive — player should know!
         if (!(dickB && dickActive) && !vagB && !assB && !(hermB && dickActive)) { //sanity checks
             outputText("<b><u>SceneHunter.selectGender() was called in a wrong way. Please report this.</b></u>");
-            goNext(true);
+            doNext(playerMenu);
             return;
         }
         /* if ONLY dick is available  — no "active" checks in the first part, should be failsafe
