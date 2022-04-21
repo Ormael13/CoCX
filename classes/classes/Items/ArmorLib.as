@@ -49,6 +49,8 @@ package classes.Items
 				PerkLib.WizardsEndurance,15,0,0,0);
 		public const EWROBE_:ArmorWithPerk = new ArmorWithPerk("EWRobe","E.W. Robe","ebonweave robe","an ebonweave robe",2,10,600,"This robe is ebonweave, created using refined ebonbloom petals. This robe is as comfortable as cloth yet more protective than chainmail. The cloth has a mystic aura, helpful when working magic.","Light",
 				PerkLib.WizardsEndurance,30,0,0,0);
+		public const FCLOTHS:ArmorWithPerk =  new ArmorWithPerk("FCloths","Fur Clothes","Fur Clothes","fur clothes",1,0,40,"Generic brown fur clothing that trolls wear. It’s made to be form fitting and suit anyone of reasonable size or shape.\n","Light",
+				PerkLib.SluttySeduction,10,0,0,0,"", false, false);
 		public const FQR:ArmorWithPerk = new FairyQueenRegalia();
 		public const FULLCHN:Armor = new Armor("FullChn","Full Chain","full-body chainmail","a full suit of chainmail armor",8,0,320,"This full suit of chainmail armor covers its wearer from head to toe in protective steel rings.","Medium");
 		public const FULLPLT:Armor = new Armor("FullPlt","Full Plate","full platemail","a suit of full-plate armor",21,0,1260,"A highly protective suit of steel platemail.  It would be hard to find better physical protection than this.","Heavy");
@@ -61,6 +63,7 @@ package classes.Items
 		public const H_GARB_:HereticsGarb = new HereticsGarb();
 		public const HBARMOR:HBArmor = new HBArmor();
 		public const HAYOARM:HeavyAyoArmor = new HeavyAyoArmor();
+		public const HLEATHR:Armor = new Armor("HLeathr", "Hvy Lthr", "Heavy Leather", "a heavy leather armour", 10,0,375, "Layers of cured animal hide to offer greater protection from damage.\n", "Heavy");
 		public const I_CORST:InquisitorsCorset = new InquisitorsCorset();
 		public const I_ROBES:InquisitorsRobes = new InquisitorsRobes();
 		public const INDECST:ArmorWithPerk = new ArmorWithPerk("IndecSt","Indec StAr","practically indecent steel armor","a suit of practically indecent steel armor",5,0,400,"This suit of steel 'armor' has two round disks that barely cover the nipples, a tight chainmail bikini, and circular butt-plates.","Medium",
@@ -121,6 +124,7 @@ package classes.Items
 				PerkLib.WizardsEndurance,30,0,0,0);
 		public const SSARMOR:Armor = new Armor("SSArmor","SS.Armor","spider-silk armor","a suit of spider-silk armor",25,0,1500,"This armor is as white as the driven snow.  It's crafted out of thousands of strands of spider-silk into an impenetrable protective suit.  The surface is slightly spongy, but so tough you wager most blows would bounce right off.","Heavy");
 		public const SCANSC:ArmorWithPerk = new ScandalousSuccubusClothing();
+		public const SLEATHR:Armor = new Armor("SLeathr", "Stud.Leather", "Studded Leather", "a cured leather armor", 8, 0,250, "A cured leather armor, it’s tough and can offer some modest protection while also allowing freedom of movement.", "Light");
 		public const TCKIMO:ArmorWithPerk = new TamamoNoMaeCursedKimono();
 		public const IBKIMO:ArmorWithPerk = new InariBlessedKimono();
 		public const SWHBIKNI:ArmorWithPerk = new ArmorWithPerk("SWhBikini","S Wh Bikini","Sexy White Bikini","a Sexy White Bikini",0,0,160,"This item helps female swimmers look sexy while not hindering movement. A perfect dress for a day at the beach.","Light",

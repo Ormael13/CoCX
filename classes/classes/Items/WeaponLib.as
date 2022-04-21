@@ -73,6 +73,7 @@ package classes.Items
 		public const G_ROD  :Weapon = new Weapon("G. Rod", "G. Rod", "Golemancer Rod", "a Golemancer Rod", "smack", 0, 100, "This metal rod seems to empower golems through energy influx.", "Wand");
 		public const G_SHURI:GiantShuriken = new GiantShuriken();
 		public const GUANDAO:GuanDao = new GuanDao();
+		public const G_SPEAR:Weapon = new Weapon("G.Spear", "G.Spear", "Guard's Spear", "a guard's spear", "thrust", 16,450,"A very sturdy and well-made spear\n", "", "Spear")
 		public const H_GAUNT:Weapon = new Weapon("H.Gaunt", "H.Gaunt", "hooked gauntlets", "a set of hooked gauntlets", "clawing punch", 0, 400, "These metal gauntlets are covered in nasty looking hooks that are sure to tear at your foes flesh and cause them harm.","Bleed25","Gauntlet");
 		public const HALBERD:Halberd = new Halberd();
 		public const HNTCANE:HuntsmansCane = new HuntsmansCane();
@@ -130,6 +131,8 @@ package classes.Items
 		public const SCLAYMO:SapphireClaymore = new SapphireClaymore();
 		public const SDAGGER:Weapon = new Weapon("SDagger","S.Dagger","sapphire dagger","an sapphire dagger","stab",3,240,"This dagger is made of azure metal and richly decorated with sapphires and silver engravings. The magic within this azure blade will radiate magical frost when charged with magic.", "Small", "Dagger");
 		public const SESPEAR:SeraphicSpear = new SeraphicSpear();
+		public const SIM_SPR:Weapon = new Weapon("Sim_Spr", "Sim.Spear", "simple spear", "a simple spear", "thrust", 10, 250, "A fairly crude-looking spear", "","Spear")
+		public const SIM_STF:Weapon = new WeaponWithPerk ("Sim_Stf", "Sim.Staff", "simple staff", "a simple staff", "smack", 11, 75, "A simple staff, faint pure energy emanates from it.\n", "",PerkLib.WizardsFocus, 0.1, 0, 0, 0, "", "Staff");
 		public const SKYPIER:Skypiercer = new Skypiercer();
 		public const SNAKESW:Weapon = new Weapon("SnakeSw", "SnakeSword", "Snake Sword", "a Snake Sword", "whip-slash", 20, 800, "This unassuming double-edged sword is comprised of segmented pieces which, when swung, will lash out akin to a whip.", "Whipping", "Sword");
 		public const SDRILL :SoulDrill = new SoulDrill();
