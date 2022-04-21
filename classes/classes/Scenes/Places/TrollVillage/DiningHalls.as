@@ -43,7 +43,7 @@ public class DiningHalls extends TrollVillageAbstractContent{
             if (TrollVillage.ZenjiFollowing) outputText(" Zenji sits beside you, \"<i>You know, my mother grows de best figs here. It’s been some time since I had any fig juice.</i>\"\n");
             outputText("\nSoon enough your juice arrives, you hold the polished wooden cup in your palms, it’s a rather large serving. You take a sip, the fig’s normally tart flavor is balanced by some sweetness. ");
             if (TrollVillage.ZenjiFollowing) outputText("You pass the juice to Zenji, he takes a large sip. \"<i>Ah, dat’s de good stuff…</i>\" He sighs as he gives you the rest of the juice.\n\n");
-                        player.refillHunger((TrollVillage.ZenjiFollowing)? 9:18);
+            player.refillHunger((TrollVillage.ZenjiFollowing)? 9:18);
             statScreenRefresh();
             doNext(RandomChatter);
         }

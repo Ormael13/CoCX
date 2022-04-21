@@ -820,7 +820,9 @@ import flash.utils.getQualifiedClassName;
 				if (armorMod < 100) armorMod -= 10;
 				else armorMod *= 0.9;
 			}
+			if (game.player.weapon == game.weapons.SIM_SPR) armorMod *= 0.7;
 			if (game.player.weapon == game.weapons.HALBERD) armorMod *= 0.6;
+			if (game.player.weapon == game.weapons.G_SPEAR) armorMod *= 0.55;
 			if (game.player.weapon == game.weapons.GUANDAO) armorMod *= 0.4;
 			if (game.player.hasPerk(PerkLib.LungingAttacks)) armorMod *= 0.5;
 			if (armorMod < 0) armorMod = 0;
