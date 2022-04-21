@@ -232,6 +232,7 @@ public class AbstractSpell extends CombatAbility {
 					if (monster.short == "goo-girl") damage *= 1.5;
 					if (monster.short == "tentacle beast") damage *= 1.2;
 				}
+				if (player.statStore.hasBuff("AjidAji")) damage *= 1.3;
 				if (Forgefather.channelInlay == "ruby" && Forgefather.refinement == 4) damage *= 1.25
 				if (Forgefather.channelInlay == "ruby" && Forgefather.refinement == 5) damage *= 1.5
 				if (Forgefather.gem == "ruby" && Forgefather.refinement == 4) damage *= 1.12

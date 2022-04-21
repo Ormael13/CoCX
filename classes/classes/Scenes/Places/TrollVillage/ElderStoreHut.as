@@ -66,7 +66,7 @@ public class ElderStoreHut extends TrollVillageAbstractContent{
             outputText("You open the small packet before eating the soft, yellow peppers with the provided sauce. It’s not too spicy, and the taste is fairly pleasant. The sauce accentuates the flavor while giving it a faint nuttiness.\n" +
                     "\n" +
                     "Your tongue still sizzles softly, you feel like your fire-based spells will be more powerful for some time.\n");
-            player.statStore.addBuff('inte', +30, 'tag', {rate: Buff.RATE_HOURS, tick:1})
+            player.statStore.addBuff('inte', +0, 'AjidAji', {rate: Buff.RATE_HOURS, tick:1})
             //this is suppposed to boost fire damage by 30% for an hour. but I can't find the specific stat for it.
             player.refillHunger(18);
             return;
@@ -77,6 +77,7 @@ public class ElderStoreHut extends TrollVillageAbstractContent{
             outputText("You hold it in your mouth as it slowly dissolves, it’ll be gone in a few minutes.\n" +
                     "\n" +
                     "You can feel a small sense of power within you as if mana flows through you with more ease.\n");
+            player.statStore.addBuff('inte', +0, 'DMorada', {rate: Buff.RATE_HOURS, tick:1})
             //Missing +25% Mana regen boost for an hour. Same issue as above.
             if (rand(4) < 4 && player.ballSize >= 1){
                 outputText("You feel your balls churn slightly, it’s apparent your cum production has increased.");
