@@ -306,14 +306,14 @@ public class ErlKingScene extends BaseContent
 			doNext(camp.returnToCampUseOneHour);
 		}
 
-		protected function mockSlow(pScore:int = 0):void {
+		protected function mockSlow():void {
 			clearOutput();
 			outputText("You calmly jog through the forest, not paying any attention to the fog slowly enveloping you. After several minutes, you can't see anything through it... not that you care. Slowing down further, you wait for hellhounds to approach, swaying your butt from side to side. \n\n");
 			outputText("It doesn't take long for them to reach you, roughly throwing your body at the ground. You moan faintly and smile, trying not to give out that you planned these events all along. Changing your position to something more comfortable to wait for the Hunter, you by chance brush against the hound's cock, making it back away cautiously. You smirk at the poor doggo.\n\n");
 			repeatWildHuntGivenToTheHounds();
 		}
 
-		protected function mockFast(pScore:int = 0):void {
+		protected function mockFast():void {
 			clearOutput();
 			outputText("You pick up the speed, easily maneuvering around the woods. You try to stay at the edge of the fog, not outrunning it, but at the same time not inhaling the weird gas.\n\n");
 			outputText("You hear sounds of Erlking's hounds in a distance - they're completely absorbed by the chase, trying to reach you... but you won't give up so easily. You jump overa small rivulet and slow down sligtly, contendedly listening to the sounds of splashes and annoyed snarls.\n\n");
