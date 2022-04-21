@@ -809,16 +809,11 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 	
 	public function BelisaAnal():void {
 		clearOutput();
-		outputText("You tell Belisa that you want to make love to her. The Drider-girl blushes, wrapping her arms around your waist and gently pulling you in towards her. You let her slide your [armor] off\n\n");
-		if (player.upperGarment != UndergarmentLib.NOTHING){ //Need the command for if player is wearing uppergarment
-			outputText("and she slides her soft fingers underneath your [uppergarment]. With a rustle and a smile, your [uppergarment] is tossed back down to the floor below.\n\n");
-		}
-		if (player.lowerGarment != UndergarmentLib.NOTHING) { //again, I need the correct command here
-			outputText("Belisa licks her lips as she slides your [lowergarment] aside, wrapping both hands around your [cock].\n\n");
-		}
-		else {
-			outputText("With your [cock] exposed, Belisa wastes no time, wrapping both hands around your shaft.\n\n");
-		}
+		outputText("You tell Belisa that you want to make love to her. The Drider-girl blushes, wrapping her arms around your waist and gently pulling you in towards her. You let her slide your [armor] off");
+		if (player.upperGarment != UndergarmentLib.NOTHING) outputText("and she slides her soft fingers underneath your [uppergarment]. With a rustle and a smile, your [uppergarment] is tossed back down to the floor below");
+		outputText(".\n\n");
+		if (player.lowerGarment != UndergarmentLib.NOTHING) outputText("Belisa licks her lips as she slides your [lowergarment] aside, wrapping both hands around your [cock].\n\n");
+		else outputText("With your [cock] exposed, Belisa wastes no time, wrapping both hands around your shaft.\n\n");
 		outputText("Her slippery palms are warm, nails barely touching your [cock] as she gives you an amateurish handjob. While not unpleasant, her hands around your tool isn’t what you had in mind.\n\n");
 		outputText("You grasp her shoulders, pulling Belisa into a kiss. After a few seconds, you tell her that she did a fine job warming you up, but you had something else in mind. Rubbing one of her Drider legs, you tell Belisa that you want to try something different, if she’s up for some fun.\"Okay, [name],\" Belisa breathes, her cooter already leaking dollops of pre. \"What is it?\n\n");
 		outputText("You poke her clit teasingly, and you scootch away, keeping one hand on her shoulder as you maneuver yourself. You slide one foot underneath her, mounting her sideways on the bed. As she tries to turn her upper body, you slap her ass, asking her to trust you. Belisa subsides, but is clearly confused.\n\n");
