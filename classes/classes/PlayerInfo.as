@@ -1172,7 +1172,11 @@ public class PlayerInfo extends BaseContent {
 			childStats += "<b>Kiha Offspring (Herms):</b> " + flags[kFLAGS.KIHA_CHILDREN_HERMS] + "\n";
         if (SceneLib.kihaFollower.totalKihaChildren() > 0)
             childStats += "<b>Total Children With Kiha:</b> " + SceneLib.kihaFollower.totalKihaChildren() + "\n";
-        if (SceneLib.mountain.salon.lynnetteApproval() != 0)
+        
+		if (DriderTown.LilyKidsPC > 0)
+			childStats += "<b>Drider Children With Lily:</b> " + DriderTown.LilyKidsPC + "\n";
+
+		if (SceneLib.mountain.salon.lynnetteApproval() != 0)
             childStats += "<b>Lynnette Children:</b> " + flags[kFLAGS.LYNNETTE_BABY_COUNT] + "\n";
 
 		if (flags[kFLAGS.MARBLE_KIDS] > 0)
@@ -1213,7 +1217,13 @@ public class PlayerInfo extends BaseContent {
 		if (flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] > 0)
 			childStats += "<b>Children With Tamani:</b> " + flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] + " (after all forms of natural selection)\n";
 
-        if (SceneLib.urtaPregs.urtaKids() > 0)
+        if ((DriderTown.TyrantiaFemaleKids + DriderTown.TyrantiaMaleKids) > 0) {
+			childStats += "<b>Drider Children With Tyrantia (total):</b> " + (DriderTown.TyrantiaFemaleKids + DriderTown.TyrantiaMaleKids) + "\n";
+			childStats += "<b>Drider Children With Tyrantia (females):</b> " + DriderTown.TyrantiaFemaleKids + "\n";
+			childStats += "<b>Drider Children With Tyrantia (males):</b> " + DriderTown.TyrantiaMaleKids + "\n";
+		}
+
+		if (SceneLib.urtaPregs.urtaKids() > 0)
             childStats += "<b>Children With Urta:</b> " + SceneLib.urtaPregs.urtaKids() + "\n";
 
 		if (flags[kFLAGS.ZENJI_KIDS] > 0)

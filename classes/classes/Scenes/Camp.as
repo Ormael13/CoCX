@@ -221,6 +221,16 @@ public class Camp extends NPCAwareContent{
 			SceneLib.dridertown.BelisaEggsHatched();
 			return;
 		}
+		if (DriderTown.LilyKidsPCPregnancy == 1) {
+			hideMenus();
+			SceneLib.dridertown.LilyEggLayingPC();
+			return;
+		}
+		if (DriderTown.LilyKidsPCEggsHatching == 1 || DriderTown.LilyKidsPCEggsHatching1 == 1 || DriderTown.LilyKidsPCEggsHatching2 == 1) {
+			hideMenus();
+			SceneLib.dridertown.LilyEggsHatchedPC();
+			return;
+		}
 		if (DriderTown.TyrantiaPregnancy >= 30 && DriderTown.TyrantiaPregnancy < 48) {
 			hideMenus();
 			SceneLib.dridertown.TyrantiaBroodmotherMoment();
@@ -4569,7 +4579,7 @@ public function rebirthFromBadEnd():void {
 		childPerformance += (flags[kFLAGS.MINERVA_CHILDREN] + flags[kFLAGS.BEHEMOTH_CHILDREN] + flags[kFLAGS.MARBLE_KIDS] + (flags[kFLAGS.SHEILA_JOEYS] + flags[kFLAGS.SHEILA_IMPS]) + izmaScene.totalIzmaChildren() + isabellaScene.totalIsabellaChildren() + kihaFollower.totalKihaChildren() + emberScene.emberChildren() + urtaPregs.urtaKids() + sophieBimbo.sophieChildren());
 		childPerformance += (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] + flags[kFLAGS.KELLY_KIDS] + flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] + flags[kFLAGS.COTTON_KID_COUNT] + flags[kFLAGS.AMILY_BIRTH_TOTAL] + flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS] + joyScene.getTotalLitters() + SceneLib.excelliaFollower.totalExcelliaChildren() + flags[kFLAGS.ZENJI_KIDS]);
 		childPerformance += ((flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 4) + (flags[kFLAGS.LYNNETTE_BABY_COUNT] / 4) + (flags[kFLAGS.ANT_KIDS] / 100) + (flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] / 4) + (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] / 4) + (flags[kFLAGS.MITZI_DAUGHTERS] / 4));
-		childPerformance += ((DriderTown.BelisaKids / 4));// + lily kids + tyrantia kids
+		childPerformance += ((DriderTown.BelisaKids / 4) + (DriderTown.LilyKidsPC / 4) + ((DriderTown.TyrantiaFemaleKids + DriderTown.TyrantiaMaleKids) / 4));
 		performancePointsPrediction += Math.sqrt(childPerformance);
 		//Various Level trackers
 		performancePointsPrediction += player.level;

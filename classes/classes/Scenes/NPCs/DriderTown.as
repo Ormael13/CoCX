@@ -28,6 +28,12 @@ import classes.display.SpriteDb;
 		public static var BelisaKidsEggsHatching2:Number;
 		public static var LilyKidsPC:Number;
 		public static var LilyKidsPCPregnancy:Number;
+		public static var LilyKidsPCEggs:Number;
+		public static var LilyKidsPCEggs1:Number;
+		public static var LilyKidsPCEggs2:Number;
+		public static var LilyKidsPCEggsHatching:Number;
+		public static var LilyKidsPCEggsHatching1:Number;
+		public static var LilyKidsPCEggsHatching2:Number;
 		public static var LilyKidsIzma:Number;
 		public static var LilyKidsIzmaPregnancy:Number;
 		public static var LilyKidsSidone:Number;
@@ -59,6 +65,12 @@ import classes.display.SpriteDb;
 			BelisaKidsEggsHatching2 = 0;
 			LilyKidsPC = 0;
 			LilyKidsPCPregnancy = 0;
+			LilyKidsPCEggs = 0;
+			LilyKidsPCEggs1 = 0;
+			LilyKidsPCEggs2 = 0;
+			LilyKidsPCEggsHatching = 0;
+			LilyKidsPCEggsHatching1 = 0;
+			LilyKidsPCEggsHatching2 = 0;
 			LilyKidsIzma = 0;
 			LilyKidsIzmaPregnancy = 0;
 			LilyKidsSidone = 0;
@@ -88,6 +100,12 @@ import classes.display.SpriteDb;
 				"BelisaKidsEggsHatching2": BelisaKidsEggsHatching2,
 				"LilyKidsPC": LilyKidsPC,
 				"LilyKidsPCPregnancy": LilyKidsPCPregnancy,
+				"LilyKidsPCEggs": LilyKidsPCEggs,
+				"LilyKidsPCEggs1": LilyKidsPCEggs1,
+				"LilyKidsPCEggs2": LilyKidsPCEggs2,
+				"LilyKidsPCEggsHatching": LilyKidsPCEggsHatching,
+				"LilyKidsPCEggsHatching1": LilyKidsPCEggsHatching1,
+				"LilyKidsPCEggsHatching2": LilyKidsPCEggsHatching2,
 				"LilyKidsIzma": LilyKidsIzma,
 				"LilyKidsIzmaPregnancy": LilyKidsIzmaPregnancy,
 				"LilyKidsSidone": LilyKidsSidone,
@@ -118,6 +136,12 @@ import classes.display.SpriteDb;
 				BelisaKidsEggsHatching2 = valueOr(o["BelisaKidsEggsHatching2"], 0);
 				LilyKidsPC = o ["LilyKidsPC"];
 				LilyKidsPCPregnancy = o ["LilyKidsPCPregnancy"];
+				LilyKidsPCEggs = valueOr(o["LilyKidsPCEggs"], 0);
+				LilyKidsPCEggs1 = valueOr(o["LilyKidsPCEggs1"], 0);
+				LilyKidsPCEggs2 = valueOr(o["LilyKidsPCEggs2"], 0);
+				LilyKidsPCEggsHatching = valueOr(o["LilyKidsPCEggsHatching"], 0);
+				LilyKidsPCEggsHatching1 = valueOr(o["LilyKidsPCEggsHatching1"], 0);
+				LilyKidsPCEggsHatching2 = valueOr(o["LilyKidsPCEggsHatching2"], 0);
 				LilyKidsIzma = o ["LilyKidsIzma"];
 				LilyKidsIzmaPregnancy = o ["LilyKidsIzmaPregnancy"];
 				LilyKidsSidone = o ["LilyKidsSidone"];
@@ -165,12 +189,12 @@ public function DriderTownEnter():void {
     break;
 	}*/
 	}
-	//if (LilyKidsPC > 0) outputText("From her treehouse, Lily watches her spider-children at play. Some sit underneath the tree, reading, while others rush around the tree, throwing silk lines at each other.\n\n");
+	if (LilyKidsPC > 0) outputText("From her treehouse, Lily watches her spider-children at play. Some sit underneath the tree, reading, while others rush around the tree, throwing silk lines at each other.\n\n");
 	menu();
 	addButton(1, "Sisters", DriderTownSisters);
 	//addButton(2, "Children", DriderTownKids);
 	//only at night
-	if (model.time.hours > 20 && BelisaFollower.BelisaAffectionMeter >= 100 && LilyFollower.LilyAffectionMeter >= 100 && TyrantiaFollower.TyrantiaAffectionMeter >= 100) {
+	if (model.time.hours > 20 && BelisaFollower.BelisaAffectionMeter >= 100 && LilyFollower.LilyAffectionMeter >= 100 && TyrantiaFollower.TyrantiaAffectionMeter >= 100) {//
 		if (SisterBangEnabled) {
 			if (player.gender > 0) addButton(3, "Bonding", FamilySex);
 			else addButtonDisabled(3, "Bonding", "No bonding for genderless one.");
@@ -253,9 +277,53 @@ public function BelisaEggsHatched():void {
 	eachMinuteCount(15);
 }
 
-public function LilyBroodmotherMoment():void {
+public function LilyEggLayingPC():void {
 	clearOutput();
-	outputText("\"<i></i>\"\n\n");
+	var eggsL:Number = 3 + rand(4);
+	outputText("As you return to camp, you can hear a muffled cry from Lily’s section of camp. You rush over to see your Drider-toy squatting over a silk net.\n\n");
+	if (BelisaFollower.BelisaInCamp && TyrantiaFollower.TyrantiaFollowerStage >= 4) outputText("\"<i>Lily’s gonna lay her eggs.</i>\" Tyrantia calls. \"<i>Belisa, I’ve got her, you’ve got the net.</i>\" The two sisters move quickly, positioning her close to the net.\n\n");
+	else if (BelisaFollower.BelisaInCamp) outputText("\"<i>You came just in time!</i>\" Belisa calls out. \"<i>She’s going to lay, any minute now!</i>\" She leans Lily against a tree. \"<i>Hold on, sis.</i>\"\n\n");
+	else if (TyrantiaFollower.TyrantiaFollowerStage >= 4) outputText("\"<i>Good timing, [name]!</i>\" The giantess says. \"<i>Help me out, wouldya?</i>\" Lily leans on her larger sister, and groans, eyes opening and closing rapidly \"<i>It’s okay, sis. Hold in there.</i>\"\n\n");
+	outputText("Lily moans, her hips shaking, and as you get closer, you can tell she’s going through contractions. She closes her eyes, gasping as her pussy gapes, revealing a slick, white orb. She moans, her lips closing, and the orb vanishing.\n\n");
+	outputText("\"<i>...[name]…Can you…touch?</i>\" She points down to her cunt, and you nod, getting underneath her spider-half. You begin to pleasure her clit, massaging her pussy lips with your finger. Her pained moans subside, replaced with pleasure, and you’re rewarded with a soft <i>plop</i>, as her first egg lands gently in the net, ejected alongside some sticky femcum.\n\n");
+	outputText("Once the first egg is out, the rest follow quickly. One after another, the pale orbs fall from your Drider-lover’s cunt. "+(eggsL*2)+" in total. Once the last one leaves, Lily’s legs begin to shake, and you’re barely able to get out from underneath her before she falls. You make sure Lily’s labored breathing slows, then bring your unhatched offspring to a nursery nook. You leave a kiss on your broodmother’s cheek, before heading back to camp.\n\n");
+	LilyKidsPCPregnancy = 0;
+	if (LilyKidsPCEggsHatching1 > 0) {
+		LilyKidsPCEggs2 = eggsL;
+		LilyKidsPCEggsHatching2 = 120;
+	}
+	else if (BelisaKidsEggsHatching > 0) {
+		LilyKidsPCEggs1 = eggsL;
+		LilyKidsPCEggsHatching1 = 120;
+	}
+	else {
+		LilyKidsPCEggs = eggsL;
+		LilyKidsPCEggsHatching = 120;
+	}
+	doNext(playerMenu);
+	eachMinuteCount(5);
+}
+public function LilyEggsHatchedPC():void {
+	clearOutput();
+	outputText("As you pass by Lily’s house, you suddenly feel a wet slap against your back. You turn around, to see a little Drider, purple eyes wide, looking up at you. Grinning, you reach down, scooping up the little one before you head over to Lily’s house.\n\n");
+	outputText("Inside, you see several tiny little spiderlings running around the place, while Lily tries to calm them down. You laugh, picking one up as it tries to flee. Lily sees you, sighing in relief as she manages to corral your wayward spawn. Finally realizing who you are, one of the Driders climbs you, planting her tiny back half on the top of your head with a proud look on her pale face.\n\n");
+	outputText("After a few minutes of play with your newborns, they curl up, closing their eyes. Lily, relieved, pulls them into a nursery nook.\n\n");
+	outputText("\"<i>Too bad you missed them hatching…But thank you for the help.</i>\" She kisses you on the cheek, for once not acting like your submissive spider. \"<i>I love you.</i>\"\n\n");
+	if (LilyKidsPCEggsHatching < 2) {
+		LilyKidsPCEggsHatching = 0;
+		LilyKidsPC += LilyKidsPCEggs;
+		LilyKidsPCEggs = 0;
+	}
+	if (LilyKidsPCEggsHatching1 < 2) {
+		LilyKidsPCEggsHatching1 = 0;
+		LilyKidsPC += LilyKidsPCEggs1;
+		LilyKidsPCEggs1 = 0;
+	}
+	if (LilyKidsPCEggsHatching2 < 2) {
+		LilyKidsPCEggsHatching2 = 0;
+		LilyKidsPC += LilyKidsPCEggs2;
+		LilyKidsPCEggs2 = 0;
+	}
 	doNext(playerMenu);
 	eachMinuteCount(5);
 }
@@ -432,6 +500,7 @@ public function SpooderBang():void {
 	outputText("The largest of your spider lovers holds Lily up, giving you a grin as you pull out of Lily’s love-hole. Your spooge drips from her, and you feel a warm sense of pride. You undo Lily’s bindings, and the two of you drag Lily over to the nest-bed.\n\n"); 
 	outputText("“<i>You know, I still can’t believe this, sometimes.”</i> Tyrantia says softly. “<i>Having them back, y’know?”</i> She wraps an arm around you, gently pulling you into a warm, fuzzy hug. “<i>And I have you to thank for it.”</i> Despite the giantess’s cunt still dripping love-juice, she doesn’t go any further, her cheek rubbing against yours.\n\n"); 
 	outputText("You gently remind Tyrantia that they’re all family now. She seems to like this, the giantess tightening her grip on you, letting out her tk-tk-tk sound. “<i>You sweet thing, you.”</i> The giantess sighs. She looks down at her sisters, out cold, then back at you. Her eyes seem drawn to your [cock], but she’s making an effort to ignore it.\n\n"); 
+	player.sexReward("vaginalFluids","Dick");
 	menu();
 	addButton(1, "Bed", SpooderBangBedtime);
 	addButton(2, "Round2", SpooderBangFight);
@@ -468,6 +537,7 @@ public function SpooderBangFight():void {
 	outputText("“<i>[Master], look after yourself.”</i> Lily adds. “<i>You can’t fuck me senseless if you’re filled with demon-spunk...”</i>\n\n"); 
 	outputText("“<i>Stay strong, champion.”</i> This from Tyrantia, who puts a hand on your shoulder. “<i>We love you.”</i>\n\n"); 
 	outputText("Feeling invigorated, you stride into camp, ready to face a new day!\n\n"); 
+	player.sexReward("vaginalFluids","Dick");
 	sleepForAnight();
 }
 /*
@@ -550,7 +620,9 @@ public function TriFuckta():void {
 	outputText("“<i>[master], look after yourself.”</i> Lily adds. “<i>You can’t fuck me senseless if you’re filled with demon-spunk...”</i>\n\n");
 	outputText("“<i>Stay strong, champion.”</i> This from Tyrantia, who puts a hand on your shoulder. “<i>We love you.”</i>\n\n");
 	outputText("Feeling invigorated, you stride into camp, ready to face a new day!\n\n");
-	outputText("\n\n");
+	player.sexReward("vaginalFluids","Dick");
+	player.sexReward("vaginalFluids","Dick");
+	player.sexReward("vaginalFluids","Dick");
 //Put to next day
 }*/
 private function sleepForAnight():void {
