@@ -44,6 +44,7 @@ public class SceneHunter extends BaseContent {
         outputText("\nChristmas elf: enabled sex option even when corrupt.");
         outputText("\nLizan Rogue: medium-corrupt PCs now can persuade Lizan Rogue.");
         outputText("\nNaga <b>after</b> Samirah recruitment: enabled scenes. They're too good to miss.");
+        outputText("\nKitsune scene: replace lose scene randomizer with a selector. I hate randomizers.");
         outputText("\n<i>This opens up more scenes. They are lore-accurate and still explained in the game (so you won't get Amily living with corrupt Jojo or other nonsense), but be warned that the original writers intended some details to work the other way.</i>");
         outputText("\n<i>Some one-time scenes with many options and checks can be replayed using 'Camp Actions -> Spend Time -> Recall'.</i>");
         //Scene list link

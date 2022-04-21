@@ -632,7 +632,7 @@ public static const RUBI_GOT_BIMBO_SKIRT:int                                    
 public static const RUBI_PROFIT:int                                                 =  624; //
 public static const RUBI_BIMBO_MINIDRESS:int                                        =  625; //
 public static const MANSION_VISITED:int                                             =  626; //
-public static const redheadIsFuta:int                                               =  627; //
+public static const REDHEAD_IS_FUTA:int                                               =  627; //
 public static const MET_KITSUNES:int                                                =  628; //
 public static const AMILY_OVIPOSITED_COUNT:int                                      =  629; //
 public static const AMILY_OVIPOSITED_COUNTDOWN:int                                  =  630; //
