@@ -508,6 +508,8 @@ public class DebugMenu extends BaseContent
 			shieldArray.push(shields.GREATSH);
 			shieldArray.push(shields.KITE_SH);
 			shieldArray.push(shields.TOWERSH);
+			shieldArray.push(shields.SPI_FOC);
+			shieldArray.push(shields.BSHIELD);
 
 			//------------
 			// Armours
