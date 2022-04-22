@@ -6033,6 +6033,11 @@ public function rebirthFromBadEnd():void {
 				if (consumables.E7PEARL.fixSave()) return;
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.002;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.003) {
+				//If something needs a fix, abort - not ready to update the version yet!
+				celessScene.fixQuestFinished();
+				flags[kFLAGS.MOD_SAVE_VERSION] = 35.003;
+			}
             outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
             doNext(doCamp);
             return;
@@ -6586,7 +6591,7 @@ public function rebirthFromBadEnd():void {
 		if (flags[kFLAGS.BENOIT_STATUS] == 1 || flags[kFLAGS.BENOIT_STATUS] == 2) NPCsDedicked++;
 		if (flags[kFLAGS.ARIAN_HEALTH] > 0 && flags[kFLAGS.ARIAN_COCK_SIZE] <= 0) NPCsDedicked++;
 		if (flags[kFLAGS.KATHERINE_UNLOCKED] > 0 && flags[kFLAGS.KATHERINE_DICK_COUNT] <= 0) NPCsDedicked++;
-		if (flags[kFLAGS.MET_KITSUNES] > 0 && flags[kFLAGS.redheadIsFuta] == 0) NPCsDedicked++;
+		if (flags[kFLAGS.MET_KITSUNES] > 0 && flags[kFLAGS.REDHEAD_IS_FUTA] == 0) NPCsDedicked++;
 		if (flags[kFLAGS.KELT_BREAK_LEVEL] == 4) NPCsDedicked++;
 		if (NPCsDedicked >= 3) awardAchievement("Dick Banisher", kACHIEVEMENTS.GENERAL_DICK_BANISHER);
 		if (NPCsDedicked >= 7) awardAchievement("You Bastard", kACHIEVEMENTS.GENERAL_YOU_BASTARD); //Take that, dedickers!
@@ -6686,6 +6691,10 @@ public function rebirthFromBadEnd():void {
 		if (player.hasKeyItem("Golden Antlers") >= 0 && player.gender > 0)
 			addButton(6, "Erlk.Revenge", SceneLib.forest.erlkingScene.howDareYou);
 		else addButtonDisabled(6, "Ek.Rev", "Requires taking your revenge on some cocky hunter. <i>Don't get cocky, kid...</i>");
+		//Nightmare
+		if (celessScene.questFinishedNightmare)
+			addButton(7, "Nightmare", SceneLib.forest.nightmareScene.nightmareVictory).hint("Please check that no transformations are applied after the scene -- SH.");
+		else addButtonDisabled(7, "Nm.", "Requires being impregnated by a certain corrupted centauress?")
 		//bruh
 		addButtonDisabled(13, "BadEnds", "SH is too lazy to add them");
         addButton(14, "Wake Up", recallWakeUp);
