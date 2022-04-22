@@ -61,6 +61,7 @@ public class NightmareScene extends BaseContent
 			outputText("\"<i>It's all okay, I will help you become honest with yourself big girl. By the time you cum out your soul you will yearn for cock and thirst for cum, especially mine, or perhaps I will restrain myself? Lets see...</i>\"\n\n");
 			outputText("With this said she weaves a sign, watching with glee as your clothes fly away from you to go pile up on the side.\n\n");
 			outputText("\"<i>You won’t need these for what is to come next.</i>\"\n\n");
+			sceneHunter.print("Fork: can TF / perm-TFed / gargoyle (special)");
 			if (!player.blockingBodyTransformations()) {
 				if (!player.hasVagina()) {
 					outputText("You can’t help but weakly try and shove her away, but the nightmare proves too strong. She kicks you on all fours and aligns her unholy cock with your [asshole]. You try to crawl away, but she responds by jamming her entire length into your hole.\n\n");
@@ -101,6 +102,7 @@ public class NightmareScene extends BaseContent
 						player.clitLength = .25;
 					}
 				}
+				sceneHunter.print("Fork: Taur lower body");
 				if (player.isTaur()) {
 					outputText("The nightmare licks her lip in anticipation as she examines your prone form.\n\n");
 					outputText("\"<i>Mmmm it has been so long since last I had a mare. Tell me girl... do you yearn for me? Do you desire my tool?</i>\"\n\n");
