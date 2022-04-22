@@ -4,11 +4,9 @@
 package classes.Scenes.Areas.Forest
 {
 import classes.*;
-import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
-import classes.Items.Armors.SuccubusArmor;
 import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
@@ -24,57 +22,10 @@ public class AkbalScene extends BaseContent
 			if (flags[kFLAGS.SPARRABLE_NPCS_TRAINING] == 2) {
 				if (flags[kFLAGS.AKBAL_DEFEATS_COUNTER] >= 1) flags[kFLAGS.AKBAL_DEFEATS_COUNTER]++;
 				else flags[kFLAGS.AKBAL_DEFEATS_COUNTER] = 1;
-				if (flags[kFLAGS.AKBAL_DEFEATS_COUNTER] == 1 && flags[kFLAGS.AKBAL_LVL_UP] < 1) {
+				//level up
+				if (flags[kFLAGS.AKBAL_LVL_UP] < 13 && flags[kFLAGS.AKBAL_DEFEATS_COUNTER]  >= flags[kFLAGS.AKBAL_LVL_UP] + 1) {
 					flags[kFLAGS.AKBAL_DEFEATS_COUNTER] = 0;
-					flags[kFLAGS.AKBAL_LVL_UP] = 1;
-				}
-				if (flags[kFLAGS.AKBAL_DEFEATS_COUNTER] == 2 && flags[kFLAGS.AKBAL_LVL_UP] == 1) {
-					flags[kFLAGS.AKBAL_DEFEATS_COUNTER] = 0;
-					flags[kFLAGS.AKBAL_LVL_UP] = 2;
-				}
-				if (flags[kFLAGS.AKBAL_DEFEATS_COUNTER] == 3 && flags[kFLAGS.AKBAL_LVL_UP] == 2) {
-					flags[kFLAGS.AKBAL_DEFEATS_COUNTER] = 0;
-					flags[kFLAGS.AKBAL_LVL_UP] = 3;
-				}
-				if (flags[kFLAGS.AKBAL_DEFEATS_COUNTER] == 4 && flags[kFLAGS.AKBAL_LVL_UP] == 3) {
-					flags[kFLAGS.AKBAL_DEFEATS_COUNTER] = 0;
-					flags[kFLAGS.AKBAL_LVL_UP] = 4;
-				}
-				if (flags[kFLAGS.AKBAL_DEFEATS_COUNTER] == 5 && flags[kFLAGS.AKBAL_LVL_UP] == 4) {
-					flags[kFLAGS.AKBAL_DEFEATS_COUNTER] = 0;
-					flags[kFLAGS.AKBAL_LVL_UP] = 5;
-				}
-				if (flags[kFLAGS.AKBAL_DEFEATS_COUNTER] == 6 && flags[kFLAGS.AKBAL_LVL_UP] == 5) {
-					flags[kFLAGS.AKBAL_DEFEATS_COUNTER] = 0;
-					flags[kFLAGS.AKBAL_LVL_UP] = 6;
-				}
-				if (flags[kFLAGS.AKBAL_DEFEATS_COUNTER] == 7 && flags[kFLAGS.AKBAL_LVL_UP] == 6) {
-					flags[kFLAGS.AKBAL_DEFEATS_COUNTER] = 0;
-					flags[kFLAGS.AKBAL_LVL_UP] = 7;
-				}
-				if (flags[kFLAGS.AKBAL_DEFEATS_COUNTER] == 8 && flags[kFLAGS.AKBAL_LVL_UP] == 7) {
-					flags[kFLAGS.AKBAL_DEFEATS_COUNTER] = 0;
-					flags[kFLAGS.AKBAL_LVL_UP] = 8;
-				}
-				if (flags[kFLAGS.AKBAL_DEFEATS_COUNTER] == 9 && flags[kFLAGS.AKBAL_LVL_UP] == 8) {
-					flags[kFLAGS.AKBAL_DEFEATS_COUNTER] = 0;
-					flags[kFLAGS.AKBAL_LVL_UP] = 9;
-				}
-				if (flags[kFLAGS.AKBAL_DEFEATS_COUNTER] == 10 && flags[kFLAGS.AKBAL_LVL_UP] == 9) {
-					flags[kFLAGS.AKBAL_DEFEATS_COUNTER] = 0;
-					flags[kFLAGS.AKBAL_LVL_UP] = 10;
-				}
-				if (flags[kFLAGS.AKBAL_DEFEATS_COUNTER] == 11 && flags[kFLAGS.AKBAL_LVL_UP] == 10) {
-					flags[kFLAGS.AKBAL_DEFEATS_COUNTER] = 0;
-					flags[kFLAGS.AKBAL_LVL_UP] = 11;
-				}
-				if (flags[kFLAGS.AKBAL_DEFEATS_COUNTER] == 12 && flags[kFLAGS.AKBAL_LVL_UP] == 11) {
-					flags[kFLAGS.AKBAL_DEFEATS_COUNTER] = 0;
-					flags[kFLAGS.AKBAL_LVL_UP] = 12;
-				}
-				if (flags[kFLAGS.AKBAL_DEFEATS_COUNTER] == 13 && flags[kFLAGS.AKBAL_LVL_UP] == 12) {
-					flags[kFLAGS.AKBAL_DEFEATS_COUNTER] = 0;
-					flags[kFLAGS.AKBAL_LVL_UP] = 13;
+					++flags[kFLAGS.AKBAL_LVL_UP];
 				}
 			}
 			if (hpVictory) {//[General Victory]
@@ -97,7 +48,6 @@ public class AkbalScene extends BaseContent
 					var vagoo:Function =null;
 					var vagooLick:Function =null;
 					var buttFuck:Function =null;
-					var bikiniTits:Function =null;
 					if (player.hasCock()) {
 						buttFuck = rapeAkbal;
 						addButton(0, "Butt-fuck", buttFuck);
@@ -126,7 +76,6 @@ public class AkbalScene extends BaseContent
 				var vagoo:Function =null;
 				var vagooLick:Function =null;
 				var buttFuck:Function =null;
-				var bikiniTits:Function =null;
 				if (player.hasCock()) {
 					buttFuck = rapeAkbal;
 				addButton(0, "Butt-fuck", buttFuck);
@@ -139,9 +88,6 @@ public class AkbalScene extends BaseContent
 			}
 				LustyMaidensArmor.addTitfuckButton(3);
 				SceneLib.uniqueSexScene.pcUSSPreChecksV2(akbalDefeated2);
-								//Rape / Don't Rape
-			//EngineCore.simpleChoices("Butt-fuck", buttFuck, "Take Vaginally", vagoo, "Force Lick", vagooLick, "B.Titfuck", bikiniTits, );
-				return;
 			}
 		}
 
