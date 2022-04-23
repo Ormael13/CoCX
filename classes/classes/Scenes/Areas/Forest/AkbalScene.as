@@ -703,7 +703,7 @@ package classes.Scenes.Areas.Forest
 			outputText("You ready your [weapon] and prepare to battle the demon jaguar.");
 			//[battle ensues]
 			startCombat(new Akbal());
-			flags[kFLAGS.PLAYER_RESISTED_AKBAL]++;
+			flags[kFLAGS.AKBAL_SUBMISSION_COUNTER] = 0;
 		}
 
 		//[Submit]
@@ -714,19 +714,21 @@ package classes.Scenes.Areas.Forest
 			flags[kFLAGS.AKBAL_SUBMISSION_STATE] = 2;
 			flags[kFLAGS.AKBAL_BITCH_Q] = -1;
 			//Big booty special
-			if (flags[kFLAGS.AKBAL_SUBMISSION_COUNTER] > 5 && flags[kFLAGS.PLAYER_RESISTED_AKBAL] < 2 && player.butt.type >= 13 && player.tone < 80) {
+			if (flags[kFLAGS.AKBAL_SUBMISSION_COUNTER] > 5 && player.butt.type >= 13 && player.tone < 80) {
 				akbalBigButtSubmit();
 				return;
 			}
 			clearOutput();
+			sceneHunter.print("Check failed: at least 5 submissions without resists, big butt (13), low muscle tone (80)");
+			sceneHunter.print("Fork: nagas, taurs, others");
 			//Naga variant goez here
 			if (player.isNaga()) {
 				outputText(images.showImage("akbal-deepwoods-naga-sumbitanal"));
-				outputText("After a few moments of thinking you nod to Akbal and the masculine voice in your head commands you to disrobe. You take off your [armor], setting it aside moments before the demon is upon you.\n\n");
+				outputText("After a few moments of thinking you nod to Akbal, and the masculine voice in your head commands you to disrobe. You take off your [armor], setting it aside moments before the demon is upon you.\n\n");
 
-				outputText("Akbal pushes you face first into the ground and places his forward paws on your back, pinning your chest against the ground. He removes the paw and you attempt to reposition yourself only to have your body pushed back down, a silent command for you to stay in this position.  You can't help but squirm a little as your bottom half is bunched up under your abdomen, putting your [butt] in the air.\n\n");
+				outputText("Akbal pushes you face-first into the ground and places his forward paws on your back, pinning your chest against the ground. He removes the paw, and you attempt to reposition yourself only to have your body pushed back down, a silent command for you to stay in this position.  You can't help but squirm a little as your bottom half is bunched up under your abdomen, putting your [butt] in the air.\n\n");
 
-				outputText("His paws slide to your waist, melting into hands along the way. You look from beneath your arm and watch as Akbal's body changes, becoming more humanoid.  Once his transformation is complete he gets on his knees behind you and roughly pulls your upturned bottom half back.  When he shoves his face into your [butt] you flinch at the sudden and inexplicably erotic feeling.\n\n");
+				outputText("His paws slide to your waist, melting into hands along the way. You look from beneath your arm and watch as Akbal's body changes, becoming more humanoid.  Once his transformation is complete he gets on his knees behind you and roughly pulls your upturned bottom halfback.  When he shoves his face into your [butt] you flinch at the sudden and inexplicably erotic feeling.\n\n");
 
 				outputText("He works his slippery wet tongue into your " + assholeDescript() + ", greedily lapping at your exposed backside as if it were a quickly-melting ice cream cone. The sensation causes you to groan as you push back against the tongue, suddenly lost in ecstasy. A part of your long tail wraps around his waist, holding him there as you revel in the sensation of being rimmed by a pro.  You even arch your back, allowing his long, thick jaguar tongue to penetrate deeper into your " + assholeDescript() + ". You feel his saliva, thick and warm like melted candy, sliding inside of you and coating your insides.\n\n");
 
@@ -734,13 +736,13 @@ package classes.Scenes.Areas.Forest
 				outputText("A sudden warmth heats your innards, making you shiver in ecstasy.  Akbal takes a moment to uncoil your bottom half from around his chest before he rises to mount you. A single paw shoves your lifted chest and face back into the dirt, causing cold earth to cling to your body as Akbal gets into position above you.\n\n");
 
 				//(Small/Virgin Pucker)
-				if (player.ass.analLooseness < 3) {
+				if (player.ass.analLooseness < AssClass.LOOSENESS_LOOSE) {
 					outputText("You feel him poking around your " + assholeDescript() + " and quickly realize his member is not only insanely large but its head is covered in a dozen tiny barbs. You grit your teeth, expecting pain and yet, thanks to the weird saliva he slathered your innards with, there is none as his gargantuan member forcibly widens your " + assholeDescript() + ".\n\n");
 
 					outputText("The feeling of being stretched by Akbal's long, slimy member makes you shudder, the weird spit even heats up, creating a steamy warmth inside you as Akbal's equally hot member stretches you out and makes your body spasm slightly. After a few slow, shallow strokes you begin to feel the barbs vibrate. This vibrating drives you insane, and the wicked looking barbs feel more like humming sex beads than punishing spikes. When Akbal picks up the pace you grit your teeth as you are stretched beyond your natural limits.");
 				}
 				//(Medium Pucker)
-				else if (player.ass.analLooseness < 5) {
+				if (player.ass.analLooseness < AssClass.LOOSENESS_GAPING) {
 					outputText("You feel him poking around your " + assholeDescript() + " and quickly realize his member is not only quite large but covered in almost a dozen tiny barbs. Yet, thanks to the weird spit he slathered your innards with, there is none as his gargantuan member forcibly widens your " + assholeDescript() + ".\n\n");
 
 					outputText("Akbal's titanic member stretches your " + assholeDescript() + " and makes you groan beneath him, reveling in the slick heat and fullness of your bowels. His saliva heats up, creating a steamy,pleasurable warmth inside your body. As he begins to pump his huge sex organ in and out of you the barbs covering his head begin to vibrate and hit your body with tidal waves of unbearable pleasure, feeling more like vibrating sex beads than punishing spikes. Your body begins to act of its own accord, your [butt] grinding against his thrusts as his large sex pump slides in with his trunk slamming into your [butt] in rhythmic, echoing claps.");
@@ -749,19 +751,19 @@ package classes.Scenes.Areas.Forest
 				else {
 					outputText("You feel him poking around your " + assholeDescript() + " and quickly realize his member is not only quite large but covered in almost a dozen tiny barbs. When Akbal begins to penetrate you he is surprised when his trunk suddenly slams into your [butt], the sudden invasion causing you to croon.\n\n");
 
-					outputText("The weird spit he slathered your insides with begins to heat up instantly and the barbs covering his cock head start vibrating. The sensation of the vibrating barbs is like a dozen small slimy sex beads spinning and shaking as they are pushed inside you. Akbal wastes no time and begins forcibly fucking your " + assholeDescript() + " with reckless abandon, his every brutal thrust causing your body to slide forward through the dirt. You try to meet his deep thrusts but the jaguar fucks you with speed and force befitting a cheetah and the constantly vibrating barbs make your body shiver with each hammer blow to your insides.");
+					outputText("The weird spit he slathered your insides with begins to heat up instantly, and the barbs covering his cock head start vibrating. The sensation of the vibrating barbs is like a dozen small slimy sex beads spinning and shaking as they are pushed inside you. Akbal wastes no time and begins forcibly fucking your " + assholeDescript() + " with reckless abandon, his every brutal thrust causing your body to slide forward through the dirt. You try to meet his deep thrusts, but the jaguar fucks you with speed and force befitting a cheetah, and the constantly vibrating barbs make your body shiver with each hammer blow to your insides.");
 				}
 				player.buttChange(monster.cockArea(0), true);
 				outputText("\n\n");
 
 				//(ending)
-				outputText("Akbal works his hips fast, piston-pumping his long demon-cat dick in and out of your " + assholeDescript() + ". Your voice rises and falls with his frantic thrusts. Your body is racked by orgasm after orgasm and soon you're lying on your chest and knees in a pool of your own love juices.\n\n");
+				outputText("Akbal works his hips fast, piston-pumping his long demon-cat dick in and out of your " + assholeDescript() + ". Your voice rises and falls with his frantic thrusts. Your body is racked by orgasm after orgasm, and soon you're lying on your chest and knees in a pool of your own love juices.\n\n");
 
-				outputText("Akbal releases a harsh growl and you feel the large feline member twitching and swelling inside you. A growl sounds in your own chest as the hot, corrupted seed of the demon cat shoots into you. Despite having reached his climax the jaguar's piston-pumping doesn't slow until he's erupted no less than six times, masterfully working your hole the entire time.\n\n");
+				outputText("Akbal releases a harsh growl, and you feel the large feline member twitching and swelling inside you. A growl sounds in your own chest as the hot, corrupted seed of the demon cat shoots into you. Despite having reached his climax the jaguar's piston-pumping doesn't slow until he's erupted no less than six times, masterfully working your hole the entire time.\n\n");
 
 				outputText("After his last massive eruption you feel the jaguar demon pull out, releasing even more of his copious loads from your happy hole in an oddly satisfying cascade of thick white cream that rushes like a waterfall down your body.\n\n");
 
-				outputText("The jaguar demon no longer seems to mind your presence in his territory as he drapes his tired body over yours and the two of you fall into a sex-induced coma.");
+				outputText("The jaguar demon no longer seems to mind your presence in his territory as he drapes his tired body over yours, and the two of you fall into a sex-induced coma.");
 				//[+ 4-12 Corruption]
 				dynStats("cor", 4 + rand(8));
 				//[+ 1-2 Speed]
@@ -795,7 +797,7 @@ package classes.Scenes.Areas.Forest
 
 				outputText("The jaguar demon begins pushing you forward with his powerful hips, his demon-cat-dick sliding up the crevice of your [butt].  He steers you towards a tree, forcing you chest-first against the rough bark.\n\n");
 
-				outputText("Looking back you watch Akbal bend low, losing sight of the jaguar demon as he disappears behind you.  For a moment you wonder what he's doing but soon you feel him shove his face into your [butt] with a snarl.  He begins working his slippery wet tongue into your " + assholeDescript() + ", greedily lapping at your exposed backside as if it were a quickly-melting ice cream cone.  The sensation causes you to groan and grind against the tongue, suddenly lost in ecstasy.  You are surprised at the strength in the demon's neck as he smashes your body against the tree with nothing but his mouth.  You feel his saliva, thick and warm like melted candy, sliding inside of you and coating your insides.");
+				outputText("Looking back you watch Akbal bend low, losing sight of the jaguar demon as he disappears behind you.  For a moment you wonder what he's doing, but soon you feel him shove his face into your [butt] with a snarl.  He begins working his slippery wet tongue into your " + assholeDescript() + ", greedily lapping at your exposed backside as if it were a quickly-melting ice cream cone.  The sensation causes you to groan and grind against the tongue, suddenly lost in ecstasy.  You are surprised at the strength in the demon's neck as he smashes your body against the tree with nothing but his mouth.  You feel his saliva, thick and warm like melted candy, sliding inside of you and coating your insides.");
 				//(If Player has Vagina)
 				if (player.hasVagina())
 					outputText("  Akbal slurps his way down to your " + vaginaDescript(0) + " twisting his face and drilling his tongue into you, mercilessly attacking your " + clitDescript() + " as you scream, howl, and cringe in ecstasy.  He then uses his lips to gently suck your " + clitDescript() + " into his mouth and twirl his tongue on it, making your grind your swollen sex against his jaguar lips.");
@@ -807,27 +809,27 @@ package classes.Scenes.Areas.Forest
 
 				//(Small/Virgin Pucker)
 				//[Small/virgin pucker]
-				if (player.ass.analLooseness < 3) {
+				if (player.ass.analLooseness < AssClass.LOOSENESS_LOOSE) {
 					outputText("You feel him poking around your " + assholeDescript() + " and quickly realize his member is not only insanely large but its head is covered in a dozen tiny barbs.  You grit your teeth, expecting pain and yet, thanks to the weird saliva he slathered your innards with, there is none as his gargantuan member forcibly widens your " + assholeDescript() + ".\n\n");
 					outputText("The feeling of being stretched by Akbal's long, slimy member makes you shudder.  The weird spit even heats up which creates a steamy warmth inside you as Akbal's hot member makes your body spasm slightly.  After a few slow, shallow strokes you begin to feel the barbs vibrate.  This vibrating sends your body into convulsions, the wicked-looking barbs feel more like humming sex beads than punishing spikes.  When Akbal picks up the pace you grit your teeth as you are stretched beyond your natural limits.");
 				}
 				//(Medium Pucker)
-				else if (player.ass.analLooseness < 5) {
+				else if (player.ass.analLooseness < AssClass.LOOSENESS_GAPING) {
 					outputText("You feel him poking around your " + assholeDescript() + " and quickly realize his member is not only quite large but covered in almost a dozen tiny barbs.  Yet,  thanks to the weird spit he slathered your innards with, there is none as his gargantuan member forcibly widens your " + assholeDescript() + ".\n\n");
 					outputText("Akbal's titanic member stretches your " + assholeDescript() + " and makes you groan and claw at the tree he has you pressed against, reveling in the slick heat and fullness of your bowels.  His saliva heats up, creating a steamy yet pleasurable warmth inside your body.  As he begins to pump his huge sex organ in and out of you the barbs covering his head begin to vibrate and hit your body with tidal waves of unbearable pleasure, feeling more like vibrating sex beads than punishing spikes.  You lean back into his thrusts as his trunk begins slamming into your [butt] in rhythmic claps that echo throughout the forest.");
 				}
 				//(Gapping Pucker - Remember Akbal's dick is 15 inches)
 				else {
 					outputText("You feel him poking around your " + assholeDescript() + " and quickly realize his member is not only quite large but covered in almost a dozen tiny barbs.  When Akbal begins to penetrate you he groans in surprise as his large dick sinks into your [butt] easily, the sudden invasion causing you to croon.\n\n");
-					outputText("The weird spit he slathered your insides with begins to heat up instantly and the barbs covering his cock head start vibrating.  The sensation is like a dozen small slimy sex beads spinning and shaking as they are pushed inside you.  Akbal wastes no time and begins forcibly fucking your " + assholeDescript() + " with reckless abandon, his every brutal thrust causing the tree you're shoved up against to shake back and forth.  You try to meet his deep thrusts but the jaguar fucks you with speed and force befitting a cheetah and the constantly vibrating barbs make your body shiver with each hammer blow to your insides.");
+					outputText("The weird spit he slathered your insides with begins to heat up instantly, and the barbs covering his cock head start vibrating.  The sensation is like a dozen small slimy sex beads spinning and shaking as they are pushed inside you.  Akbal wastes no time and begins forcibly fucking your " + assholeDescript() + " with reckless abandon, his every brutal thrust causing the tree you're shoved up against to shake back and forth.  You try to meet his deep thrusts, but the jaguar fucks you with speed and force befitting a cheetah, and the constantly vibrating barbs make your body shiver with each hammer blow to your insides.");
 				}
 				player.buttChange(monster.cockArea(0), true);
 				outputText("\n\n");
 
 				//(ending)
-				outputText("Akbal works his hips fast, piston-pumping his long demon-cat dick in and out of your " + assholeDescript() + ".  Your body is racked by orgasm after orgasm and soon the ground beneath your pawing hooves is covered in a thick layer of your own love juices.  Then Akbal releases a harsh growl and you feel the large feline member twitching and swelling inside you.  A growl sounds in your own chest as the hot, corrupted seed of the demon cat shoots into you.  The feeling of the hot, wet warmth being fucked deeper into you is so close to supreme bliss you can scarcely tell the difference.\n\n");
+				outputText("Akbal works his hips fast, piston-pumping his long demon-cat dick in and out of your " + assholeDescript() + ".  Your body is racked by orgasm after orgasm and soon the ground beneath your pawing hooves is covered in a thick layer of your own love juices.  Then Akbal releases a harsh growl, and you feel the large feline member twitching and swelling inside you.  A growl sounds in your own chest as the hot, corrupted seed of the demon cat shoots into you.  The feeling of the hot, wet warmth being fucked deeper into you is so close to supreme bliss you can scarcely tell the difference.\n\n");
 
-				outputText("After a few moments you realize Akbal isn't slowing down.  His piston pumping hips drive right through his orgasm and never stop slamming into your [butt].  He continues until he's erupted no less than eight times, masterfully working your hole the entire time.\n\n");
+				outputText("After a few moments, you realize Akbal isn't slowing down.  His piston pumping hips drive right through his orgasm and never stop slamming into your [butt].  He continues until he's erupted no less than eight times, masterfully working your hole the entire time.\n\n");
 
 				outputText("After his last massive eruption you feel the jaguar demon pull out, releasing even more of his copious load from your happy hole in an oddly satisfying cascade of thick white cream that rushes like a waterfall down your legs");
 				if (player.cockTotal() > 0)
@@ -853,7 +855,7 @@ package classes.Scenes.Areas.Forest
 			outputText(images.showImage("akbal-deepwoods-sumbitanal"));
 			outputText("After thinking for a minute, you nod to Akbal.  The deep voice in your head commands you to disrobe.  You obediently take off your [armor] and set it aside just before the demon is upon you.\n\n");
 
-			outputText("Akbal pushes you face-first into the ground and places his forward paws on your back, pinning your chest against the ground.  He removes them after a few seconds and you attempt to reposition yourself, only for you to be pushed back down again: a silent yet forceful command for you to stay in this position.\n\n");
+			outputText("Akbal pushes you face-first into the ground and places his forward paws on your back, pinning your chest against the ground.  He removes them after a few seconds, and you attempt to reposition yourself, only for you to be pushed back down again: a silent yet forceful command for you to stay in this position.\n\n");
 
 			outputText("His paws slide to your waist, changing into hands along the way.  You look back and watch as his body starts morphing into a more humanoid shape, his muscles shifting themselves beneath his skin as his body changes to something better suited to dominate you.\n\n");
 
@@ -872,7 +874,7 @@ package classes.Scenes.Areas.Forest
 
 			outputText("You feel him poking around your " + assholeDescript() + ", learning quickly that not only is his member insanely large, but its head is covered in dozens of tiny barbs.  ");
 			//[Small/virgin pucker]
-			if (player.ass.analLooseness < 3) {
+			if (player.ass.analLooseness < AssClass.LOOSENESS_LOOSE) {
 				outputText("You grit your teeth, expecting pain. However, thanks to the weird saliva he slathered your innards with, you feel none as his gargantuan member forcibly widens your " + assholeDescript() + ".");
 				player.buttChange(monster.cockArea(0), true);
 				outputText("\n\n");
@@ -880,7 +882,7 @@ package classes.Scenes.Areas.Forest
 				outputText("Being stretched by Akbal's long and slick member makes you shudder. The weird spit even begins to heat up, creating a steamy warmth inside you as Akbal's equally hot member stretches you out, your body spasming slightly in response.  After a few slow and shallow strokes, you can feel the barbs begin to vibrate.  The sudden motion sends your body into convulsions, the wicked-looking barbs acting more like humming sex beads than barbs.  When Akbal picks up the pace, you can only grit your teeth harder as you're stretched more and more beyond your natural limits.\n\n");
 			}
 			//[Medium Pucker]
-			else if (player.ass.analLooseness < 5) {
+			else if (player.ass.analLooseness < AssClass.LOOSENESS_GAPING) {
 				outputText("Thanks to the weird saliva he slathered your innards with, you feel no pain as his gargantuan member forcibly widens your " + assholeDescript() + ".");
 				player.buttChange(monster.cockArea(0), true);
 				outputText("\n\n");
@@ -901,7 +903,7 @@ package classes.Scenes.Areas.Forest
 				outputText("in sexual bliss");
 			outputText(".\n\n");
 
-			outputText("Akbal releases a harsh growl and you feel his large feline member twitch and swell inside you.  You let out a growl of your own as the hot, corrupted seed of the demon cat shoots into you.  Feeling the hot, wet warmth being fucked deeper into you is so close to supreme bliss that you can scarcely tell the difference.\n\n");
+			outputText("Akbal releases a harsh growl, and you feel his large feline member twitch and swell inside you.  You let out a growl of your own as the hot, corrupted seed of the demon cat shoots into you.  Feeling the hot, wet warmth being fucked deeper into you is so close to supreme bliss that you can scarcely tell the difference.\n\n");
 
 			outputText("After the sensation begins to settle, you realize Akbal isn't slowing down.  His hips carry on with their pistoning right through his orgasm and continually slam into your [butt].  He persists until he's erupted no less than eight times, masterfully working your hole the entire time.\n\n");
 
@@ -932,17 +934,17 @@ package classes.Scenes.Areas.Forest
 			if (flags[kFLAGS.AKBAL_SUBMISSION_COUNTER] < 4) {
 				outputText("You awake in your camp feeling dangerous, powerful and fiercely satisfied.");
 			}
-				//[After 8th submission, if whispered and corruption is greater than 80%]
+			//[After 8th submission, if whispered and corruption is greater than 80%]
 			//(fighting Akbal disables this scene, but you retain the ability if you rape him after)
-			else if (flags[kFLAGS.PLAYER_RESISTED_AKBAL] == 0 && flags[kFLAGS.AKBAL_SUBMISSION_COUNTER] >= 8 && player.cor > 80) {
-				if (player.cor < 80 || player.hasPerk(PerkLib.FireLord)) {
+			else if (flags[kFLAGS.AKBAL_SUBMISSION_COUNTER] >= 8 && player.cor > 80) {
+				if (player.hasPerk(PerkLib.FireLord)) {
 					outputText("You awake in your camp feeling dangerous, powerful and fiercely satisfied.");
 				}
 				else {
-					outputText("You open your eyes and almost yell in surprise when you see Akbal's emerald eyes looking into yours.  You are still in the forest and his lithe jaguar body is still over you; you quickly realize he hasn't moved you, as you're still resting in a puddle of mixed sex juices.\n\n");
+					outputText("You open your eyes and almost yell in surprise when you see Akbal's emerald eyes looking into yours.  You are still in the forest, and his lithe jaguar body is still over you; you quickly realize he hasn't moved you, as you're still resting in a puddle of mixed sex juices.\n\n");
 					outputText("\"<i>You are a loyal pet,</i>\" Akbal says as he stands. The compliment makes you smile, but it quickly fades into a look of fear when he suddenly releases a bone-chilling roar right in your face.  Green flames begin to pour from his open maw, and you scream as you flail your hands in a pointless attempt to block the fire.\n\n");
 					outputText("After a moment of horror, you realize you aren't burning.  You can feel the emerald flames inside your lungs, glowing with a palpable warmth.  Akbal snaps his teeth together, a feral grin on his face as he halts the torrent of flame.\n\n");
-					outputText("You can feel Akbal's demonic presence inside your lungs, slowly building up until it finally explodes out of your open mouth in a titanic roar, accompanied with a jet of emerald flame.\n\n");
+					outputText("You can feel Akbal's demonic presence inside your lungs, slowly building up until it finally explodes out of your open mouth in a titanic roar, accompanied by a jet of emerald flame.\n\n");
 					outputText("<b>(You are now capable of breathing Akbal's fire!)</b>");
 					//['LOTF' or 'Terrestrial Fire Lord' appears as perk]
 					//[Gain 'Terrestrial Fire' in Specials]
@@ -964,18 +966,6 @@ package classes.Scenes.Areas.Forest
 			doNext(playerMenu);
 		}
 
-		/*
-		   [Items]
-		   [Jaguar Pelt]
-		   The pelt of a Jaguar demon.  It's surprisingly durable and flexible.
-		   (maybe have the alchemist or that shop guy offer to turn it into armor)
-
-		   [Demon Jaguar Cloak]
-		   Def + 2
-		   Speed +10
-		   Evasion+5
-		 */
-
 		private function akbalBigButtSubmit():void {
 			clearOutput();
 			outputText(images.showImage("akbal-deepwoods-bigbuttanaled"));
@@ -987,7 +977,7 @@ package classes.Scenes.Areas.Forest
 			else if (player.hasVagina())
 				outputText(" and [vagina]");
 			outputText(".  You cannot help but squirm from the attention, feeling the slippery-hot length of his muscle probing your sensitive ring.  In its wake, the panther's flexible tongue leaves behind copious amounts of his slick saliva that makes your skin tingle pleasantly.  You don't have long to wonder at this as he broadens his roving attentions to slather each of your cheeks with love, licking and lapping over your " + player.skinFurScales() + " in what could only be described as worship.  A tremor of gleeful pride works through your mind - your master approves of his servant's body!");
-			outputText("\n\nWith your ass in the air, you pant in relaxed pleasure, allowing Akbal to work your [butt] into a glorious shine.  Only after every inch of your pillowy derriere has been slathered with panther-spit does he return to his real intent, spreading your cheeks wide to expose your saliva-glossed asshole.  Your pucker twitches hungrily, tingling from your god's perverse fluids, sensitive and desirous of affection.  He does not deny your body's unspoken request, and the long, wriggling tongue slides through, twisting into your back door to deck your interior with more of his lovely juices.  You cannot help but moan at this - it feels better than it should, like a hot, slippery massage for your insides.");
+			outputText("\n\nWith your ass in the air, you pant in relaxed pleasure, allowing Akbal to work your [butt] into a glorious shine.  Only after every inch of your pillowy derrière has been slathered with panther-spit does he return to his real intent, spreading your cheeks wide to expose your saliva-glossed asshole.  Your pucker twitches hungrily, tingling from your god's perverse fluids, sensitive and desirous of affection.  He does not deny your body's unspoken request, and the long, wriggling tongue slides through, twisting into your back door to deck your interior with more of his lovely juices.  You cannot help but moan at this - it feels better than it should, like a hot, slippery massage for your insides.");
 			if (player.hasCock())
 				outputText("  Bobbing beneath you, [eachCock] makes no secret of how much you're enjoying this, with thin drops of pre-cum dangling precariously below.");
 			else if (player.hasVagina())
@@ -1050,10 +1040,9 @@ package classes.Scenes.Areas.Forest
 		//2. AKBAL'S MY BITCH
 		//By Foxxling
 		//Akbal’s My Bitch Expansion
-		//Auto Rape Intro Scene
 		private function akbitchEncounter():void {
 			clearOutput();
-			outputText("As you explore the deep woods you begin to hear a soft slurping sound. In this world you know that any strange sound, especially the wet ones, most likely means something dangerous is up ahead... or something dangerous is fucking something a little less dangerous.  As you cautiously advance you spy the pelt of the jaguar demon, Akbal.  The demon jaguar sits in the middle of the clearing with one leg extended as he repeatedly swipes his wide tongue against his hole, probably cleaning up imp spunk thanks to you.  He is so utterly focused on the task that he doesn’t notice your approach.");
+			outputText("As you explore the deep woods, you begin to hear a soft slurping sound. In this world you know that any strange sound, especially the wet ones, most likely means something dangerous is up ahead... or something dangerous is fucking something a little less dangerous.  As you cautiously advance you spy the pelt of the jaguar demon, Akbal.  The demon jaguar sits in the middle of the clearing with one leg extended as he repeatedly swipes his wide tongue against his hole, probably cleaning up imp spunk thanks to you.  He is so utterly focused on the task that he doesn’t notice your approach.");
 			flags[kFLAGS.AKBAL_BITCH_Q] = 1;
 			if ((player.cor < 40 + player.corruptionTolerance && !player.hasPerk(PerkLib.Pervert) && !player.hasPerk(PerkLib.Sadist)) || player.lust < 33) {
 				sceneHunter.print("Check failed: (high corruption or Pervert/Sadist perk) + high lust")
