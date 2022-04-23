@@ -6038,6 +6038,14 @@ public function rebirthFromBadEnd():void {
 				celessScene.fixQuestFinished();
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.003;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.004) {
+				//If something needs a fix, abort - not ready to update the version yet!
+				if (player.hasPerk(PerkLib.PrestigeJobTempest)) {
+					player.removePerk(PerkLib.JobDervish);
+					player.perkPoints += 1;
+				}
+				flags[kFLAGS.MOD_SAVE_VERSION] = 35.004;
+			}
             outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
             doNext(doCamp);
             return;

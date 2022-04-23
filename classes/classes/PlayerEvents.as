@@ -268,7 +268,10 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (DriderTown.BelisaKidsEggsHatching > 1) DriderTown.BelisaKidsEggsHatching -= 1;
 			if (DriderTown.BelisaKidsEggsHatching1 > 1) DriderTown.BelisaKidsEggsHatching1 -= 1;
 			if (DriderTown.BelisaKidsEggsHatching2 > 1) DriderTown.BelisaKidsEggsHatching2 -= 1;
-			//lily part
+			if (DriderTown.LilyKidsPCPregnancy > 1) DriderTown.LilyKidsPCPregnancy -= 1;
+			if (DriderTown.LilyKidsPCEggsHatching > 1) DriderTown.LilyKidsPCEggsHatching -= 1;
+			if (DriderTown.LilyKidsPCEggsHatching1 > 1) DriderTown.LilyKidsPCEggsHatching1 -= 1;
+			if (DriderTown.LilyKidsPCEggsHatching2 > 1) DriderTown.LilyKidsPCEggsHatching2 -= 1;
 			if (DriderTown.TyrantiaPregnancy > 1) DriderTown.TyrantiaPregnancy -= 1;
 			if (DriderTown.TyrantiaKidsEggsHatching > 1) DriderTown.TyrantiaKidsEggsHatching -= 1;
 			if (DriderTown.TyrantiaKidsEggsHatching1 > 1) DriderTown.TyrantiaKidsEggsHatching1 -= 1;

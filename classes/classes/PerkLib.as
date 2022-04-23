@@ -4926,7 +4926,7 @@ public class PerkLib
                     .requireInt(150)
                     .requireLevel(54);
             PrestigeJobTempest.requirePrestigeJobSlot()
-                    .requirePerks(JobDervish, JobWarrior, DualWield)
+                    .requirePerks(JobWarrior, DualWield)
                     .requireSpe(200)
                     .requireLevel(54);
 			//Tier 10 Speed Perks
