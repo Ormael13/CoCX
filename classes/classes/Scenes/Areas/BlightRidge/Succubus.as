@@ -44,8 +44,8 @@ use namespace CoC;
                 this.bonusHP = 960 + 960*mod;
                 this.bonusLust = 332 + 22*mod;
                 this.level = 62 + 5*mod;
-                this.additionalXP = int(500 * Math.exp(0.2*mod));
-                this.gems = int((60 + rand(30)) * Math.exp(0.2*mod));
+                this.additionalXP = int(500 * Math.exp(0.3*mod));
+                this.gems = int((60 + rand(30)) * Math.exp(0.3*mod));
             }
 			else {
 				this.short = "succubus";
