@@ -1174,16 +1174,16 @@ public class Creature extends Utils
 
 		public function get clitLength():Number {
 			if (vaginas.length==0) {
-				trace("[ERROR] get clitLength called with no vaginas present");
-				return VaginaClass.DEFAULT_CLIT_LENGTH;
+				throw new Error("[ERROR] get clitLength called with no vaginas present");
+				//return VaginaClass.DEFAULT_CLIT_LENGTH;
 			}
 			return vaginas[0].clitLength;
 		}
 
 		public function set clitLength(value:Number):void {
 			if (vaginas.length==0) {
-				trace("[ERROR] set clitLength called with no vaginas present");
-				return;
+				throw new Error("[ERROR] set clitLength called with no vaginas present");
+				//return;
 			}
 			vaginas[0].clitLength = value;
 		}
@@ -1879,7 +1879,7 @@ public class Creature extends Utils
                                 compareBy == "thickness" ? cocks[num].cockThickness :
                                 cockArea(num);
                 if ((nsize >= minSize || minSize < 0) && (nsize < maxSize || maxSize < 0 || tentUnlim && cockIsTentacle(num))
-                && (cocks[num].cockType == type || tent && cockIsTentacle(num) || type == CockTypesEnum.UNDEFINED)) {
+                && (type == CockTypesEnum.UNDEFINED || cocks[num].cockType == type || tent && cockIsTentacle(num))) {
                     var j:int;
                     for (j = 0; j < sorted.length; ++j) {
                         var jsize:Number = compareBy == "length" ? cocks[sorted[j]].cockLength :
