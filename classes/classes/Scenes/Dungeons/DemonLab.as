@@ -4,28 +4,23 @@
  */
 package classes.Scenes.Dungeons 
 {
-import classes.BodyParts.LowerBody;
-import classes.BodyParts.Tail;
-import classes.CockTypesEnum;
-import classes.EventParser;
-import classes.PerkLib;
-import classes.PerkLib;
-import classes.Scenes.UniqueSexScenes;
-import classes.VaginaClass;
+import classes.*;
+//import classes.BodyParts.LowerBody;
+//import classes.BodyParts.Tail;
+//import classes.Scenes.UniqueSexScenes;
 import classes.GlobalFlags.kFLAGS;
-import classes.GlobalFlags.kACHIEVEMENTS;
-import classes.Items.Consumables.MinotaurBlood;
-import classes.Scenes.SceneLib;
-import classes.CoC;
-import classes.StatusEffects;
-import classes.display.SpriteDb;
+//import classes.GlobalFlags.kACHIEVEMENTS;
+//import classes.Items.Consumables.MinotaurBlood;
+//import classes.Scenes.SceneLib;
+//import classes.display.SpriteDb;
+//import classes.internals.SaveableState;
 
 //Things that will need to be put in other files
 //Key Card Key Item
 //Enemies
 //
-public class DemonLab extends DungeonAbstractContent extends NPCAwareContent implements TimeAwareInterface implements SaveableState
-	{
+public class DemonLab extends DungeonAbstractContent// implements SaveableState
+	{/*
 	public static var MainAreaComplete:Number; //goes up by one for each of the main areas you complete, 1-3 for each ballroom section, 4 for dungeon complete
 	public static var SexlessLabState:int; //0 for undiscovered, 1 for sexless helped, 2 when the interaction scene has been seen after, 3 for not helped, 4 for escorted to Tel'Adre
 	public static var TyrantLabEntry:int; //0 for undiscovered, 1 for Demon fought, 2 for Demon let go. 
@@ -47,30 +42,30 @@ public class DemonLab extends DungeonAbstractContent extends NPCAwareContent imp
 	public static var WayOutBlocked:Boolean; //true for blocked, false for not
 	public static var FSpreaderState:int; //0 for undiscovered, 1 for freed, 2 if they've killed the fuckers in the panic room, 3 for Escorted to Tel'Adre
 	
-public function resetState():void {
-MainAreaComplete = 0;
-SexlessLabState = 0;
-TyrantLabEntry = 0;
-TyrantLabState = 0;
-DridersState = 0;
-EnteredBefore = false;
-TyrantFollower = false;
-DivaFollower = false;
-KihaFollower = false;
-Followercount = 0;
-DragonLabEntry = 0;
-Keycardgot = false;
-PanicRoomState = 0;
-NightwalkerEntry = false;
-NightwalkerLabstate = 0;
-TyrantCodec = false;
-NightCodec = false;
-FSpreaderCodec = false;
-WayOutBlocked = false;
-FSpreaderState = 0;
-		}
-public function saveToObject():Object {
-			return {
+	public function resetState():void {
+		MainAreaComplete = 0;
+		SexlessLabState = 0;
+		TyrantLabEntry = 0;
+		TyrantLabState = 0;
+		DridersState = 0;
+		EnteredBefore = false;
+		TyrantFollower = false;
+		DivaFollower = false;
+		KihaFollower = false;
+		Followercount = 0;
+		DragonLabEntry = 0;
+		Keycardgot = false;
+		PanicRoomState = 0;
+		NightwalkerEntry = false;
+		NightwalkerLabstate = 0;
+		TyrantCodec = false;
+		NightCodec = false;
+		FSpreaderCodec = false;
+		WayOutBlocked = false;
+		FSpreaderState = 0;
+	}
+	public function saveToObject():Object {
+		return {
 			"MainAreaComplete": MainAreaComplete,
 			"SexlessLabState": SexlessLabState,
 			"TyrantLabEntry": TyrantLabEntry,
@@ -91,10 +86,10 @@ public function saveToObject():Object {
 			"FSpreaderCodec": FSpreaderCodec,
 			"WayOutBlocked": WayOutBlocked,
 			"FSpreaderState": FSpreaderState,
-			}
 		}
-public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
-			if (o) {
+	}
+	public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
+		if (o) {
 			SexlessLabState=o ["SexlessLabState"];
 			TyrantLabEntry=o ["TyrantLabEntry"];
 			TyrantLabState=o ["TyrantLabState"];
@@ -115,16 +110,16 @@ public function loadFromObject(o:Object, ignoreErrors:Boolean):void {
 			MainAreaComplete = o ["MainAreaComplete"];
 			WayOutBlocked = o ["WayOutBlocked"];
 			FSpreaderState = o ["FSpreaderState"];
-			} else {
-				// loading from old save
-				resetState();
-				}
-			}
-
-			public function DemonLab() {
-			Saves.registerSaveableState(this);
+		} else {
+			// loading from old save
+			resetState();
 		}
-		
+	}
+*/
+	public function DemonLab() {
+		//Saves.registerSaveableState(this);
+	}
+		/*
 		//========================================================
 		//Room Code
 		//========================================================
@@ -960,7 +955,5 @@ public function TelAdreBring():void {
 	DivaFollower = false;
 	doNext(camp.returnToCampUseOneHour);
 		}
-	}
+*/}
 }
-
-

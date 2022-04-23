@@ -467,6 +467,15 @@ public class PerkLib
 		public static const OffensiveStaffChanneling:PerkType = mk("Offensive Staff Channeling", "Offensive Staff Channeling",
 				"Allows you to cast splited offensive spell without increased mana cost when using staff (3 parts at 70% power) or partial staff (2 parts at 80% power) as focus. (Effect will not activate if you already have ways to multicast spells at reduced power)",
 				"You've chosen the 'Offensive Staff Channeling' perk. Allows you to cast splited offensive spell without increased mana cost when using staff (3 parts at 70% power) or partial staff (2 parts at 80% power) as focus. (Effect will not activate if you already have ways to multicast spells at reduced power)");
+		public static const SelfbuffsProficiency:PerkType = mk("Selfbuffs Proficiency", "Selfbuffs Proficiency",
+				"Increase max selfbuff bonus by 20%.",
+				"You've chosen the 'Selfbuffs Proficiency' perk. Increase max selfbuff bonus by 20%.");
+		public static const SelfbuffsProficiencyEx:PerkType = mk("Selfbuffs Proficiency (Ex)", "Selfbuffs Proficiency (Ex)",
+				".",
+				"You've chosen the 'Selfbuffs Proficiency (Ex)' perk. ");
+		public static const SelfbuffsProficiencySu:PerkType = mk("Selfbuffs Proficiency (Su)", "Selfbuffs Proficiency (Su)",
+				".",
+				"You've chosen the 'Selfbuffs Proficiency (Su)' perk. ");
 		public static const ElementalConjurerKnowledge:PerkType = mk("Elemental Conjurer Knowledge", "Elemental Conjurer Knowledge",
 				"You gained knowledge how to make elementals rank up process less resource consuming. (-40% needed mana/fatigue and 40% less HP lost during failure)",
 				"You've chosen the 'Elemental Conjurer Knowledge' perk, gaining knowledge on how to make the elemental rank up process less resource consuming. (-40% needed mana/fatigue and 40% less HP lost during failure)");
@@ -491,9 +500,6 @@ public class PerkLib
 		/*public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, increasing amount of food you can eat. As side effect your vitality increased (+x to max Tou (scalable)).");
-		public static const :PerkType = mk("", "",
-				".",
-				"You've chosen the '' perk, .");
 		public static const :PerkType = mk("", "",
 				".",
 				"You've chosen the '' perk, .");
@@ -729,7 +735,7 @@ public class PerkLib
 				"Start every battle with Might enabled, if you meet Black Magic requirements before it starts.",
 				"You've chosen the 'Battlemage' perk. You start every battle with Might effect, as long as your Lust is sufficient to cast it before battle.");
 		public static const Battleshield:PerkType = mk("Battleshield", "Battleshield",
-				"Start every battle with Blink enabled, if you meet Black Magic requirements before it starts.",
+				"Start every battle with Mana Shield enabled, if you meet Lust requirements to cast it before battle.",
 				"You've chosen the 'Battleshield' perk. You start every battle with Mana Shield, as long as your Lust is sufficient to cast it before battle.");
 		public static const Bellows:PerkType = mk("Bellows", "Bellows",
 				"You've found an efficient way to keep the fire hot, allowing you to work faster. This increases your armor proficiency. (+5% phys/mag resistance)",
@@ -5250,6 +5256,15 @@ public class PerkLib
             ImprovedManaShield.requirePerk(ArcaneShielding)
                     .requireInt(125)
                     .requireLevel(24);
+            SelfbuffsProficiency.requirePerk(JobEnchanter)
+                    .requireInt(120)
+                    .requireLevel(24);/*
+            SelfbuffsProficiencyEx.requirePerks(SelfbuffsProficiency, LongerLastingBuffsI)
+                    .requireInt(170)
+                    .requireLevel(36);
+            SelfbuffsProficiencySu.requirePerks(SelfbuffsProficiencyEx, EverLastingBuffs)
+                    .requireInt(220)
+                    .requireLevel(48);*/
             //Tier 5 Intelligence perks
             GrandArchmage2ndCircle.requirePerk(GrandArchmage)
                     .requireInt(150)

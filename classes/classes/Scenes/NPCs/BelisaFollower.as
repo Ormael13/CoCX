@@ -526,7 +526,7 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 	public function BelisaHangFish():void {
 		clearOutput();
 		outputText("<i>\"Oh, is that all?\"</i> Belisa pops down under the water, then into her silk orb. \"A-ha!\" She comes out with two odd, hooked spears. <i>\"If you want to fish with me, I’ll teach you how we Driders do it!\"</i>\n\n");
-		if (player.hasGills()) outputText(" She brings an odd bunch of silk down with her, and you look at it curiously. She drapes it over your head, and you breathe in a lungful of fresh air. You point at your gills, and she nods, taking a breath herself. She gives you a thumbs-up, and doesn’t give you the air-bag again.\n\n");
+		if (player.hasGills() || player.hasPerk(PerkLib.AffinityUndine)) outputText(" She brings an odd bunch of silk down with her, and you look at it curiously. She drapes it over your head, and you breathe in a lungful of fresh air. You point at your gills, and she nods, taking a breath herself. She gives you a thumbs-up, and doesn’t give you the air-bag again.\n\n");
 		else outputText(" You dive down, deep into the lake with Belisa. Eventually, you begin to run low on air, and...she keeps going down! You turn back, but Belisa grabs your foot, pulling you down to her. The spider-girl produces an odd, silky bag, draping it over your head. You struggle at first, but you quickly realize that the bag’s...full of breathable air? She takes it off your head, and giggles, sending bubbles back up to the surface of the water.\n\n");
 		outputText("You spend an hour under the water with Belisa, and she swims with you. You catch a few fish, but you can’t hold a candle to the water-spider. Her eight lower limbs move precisely, and she swims circles around you. You miss your spear throw a few times, and when you do, she gives you a bright laugh, swimming over to your spear and bringing it back to you. It’s odd, but a lot of fun, just throwing spears and swimming deep under the lake. Eventually, you point back to the surface. Belisa’s bright smile shrinks a little, but she nods, guiding you back to her silky orb.\n\n");
 		outputText("<i>\"I forgot how nice it was to have a fishing partner\"</i>, she says simply, taking your hand as you leave the water together. <i>\"Come back soon, okay?\"</i> She looks into your eyes, then pulls her hand away. <i>\"It gets lonely out here.\"</i> You smile to yourself as Belisa dives back into the water, and head back to camp.\n\n");
@@ -1082,4 +1082,4 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 		return false;
 	}
 	}
-}
+}

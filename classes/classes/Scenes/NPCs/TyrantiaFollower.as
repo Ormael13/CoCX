@@ -1112,7 +1112,7 @@ public function TyrantiaAtCamp():void {
 	else addButton(3, "Training", TyrantiaTraining);
 	addButton(4, "Sex", TyrantiaSexMenu);
 	//5 - JoinMe addButton(2, "JoinMe", TyrantiaFollowerOptions);
-	if (TyraniaCorrupteedLegendaries >= 1) addButton(10, "Items", itemImproveMenu);
+	if (TyraniaCorrupteedLegendaries >= 1) addButton(10, "Items", itemImproveMenuCorrupt);
 	if (DriderTown.DriderTownComplete) addButton(13, "Back", SceneLib.dridertown.DriderTownEnter).hint("Return to main DriderTown menu.");
 	addButton(14, "Leave", camp.campLoversMenu);
 }
@@ -1141,7 +1141,7 @@ public function unlockingCorruptLegendariesOption():void {
 	doNext(playerMenu);
 	eachMinuteCount(5);
 }
-public function itemImproveMenu():void {
+public function itemImproveMenuCorrupt():void {
 	var improvableItems:Array = [
 		[weapons.BFSWORD, weapons.NPHBLDE, weapons.EBNYBLD],
 		[weapons.DBFSWO, weapons.T_HEART, weapons.DORSOUL],
@@ -1213,4 +1213,4 @@ public function JojoReaction():void {
 doNext(camp.returnToCamp);
 }*/
 }
-}
+}

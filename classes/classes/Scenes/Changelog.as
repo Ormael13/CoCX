@@ -260,9 +260,9 @@ package classes.Scenes
 			outputText("-Elemental pearls perk checks added/fixed. (Svalkash)\n");
 			outputText("-Rest/Wait option in camp got few more options added.\n");
 			outputText("-You can now <b>deliberately</b> lose to Erlking or his hounds even when fast enough (requires 30+ corruption). (Svalkash)\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New tier 4 intelligence lvl-up perk: Selfbuffs Proficiency. Req. Job: Enchanter perk, 120+ int. Effect: Increase max selfbuff bonus by 20%.\n");
+			outputText("-\n");//New tier 6 intelligence lvl-up perk: Selfbuffs Proficiency (Ex). Req. Selfbuffs Proficiency & Long(er) Lasting Buffs I perks, 170+ int. Effect: .
+			outputText("-\n");//New tier 8 intelligence lvl-up perk: Selfbuffs Proficiency (Su). Req. Selfbuffs Proficiency (Ex) & (Ever)Lasting Buffs perks, 220+ int. Effect: .
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -283,7 +283,7 @@ package classes.Scenes
 			outputText("putting B. Sword after picking Ecalibur disabling option to pick sword at Temple, all 3 Hall of Blade soulskill variants dealing phys not magical dmg, Lightning Claw lowering phys dmg when used as part of feral style attack, using goblin Cum Reservoir not empting it out, Yuki Onna Transform scene not making sure to give proper genitalia setup, Archer's Stamina perks not giving fatigue related to ");
 			outputText("current Speed value, Half-Frost Wyrm or Half Spider-morph racial bonus been attained super easy, Mysterious Seed not causing for misc items menu appear as inventory submenu, unable to add arcane circuits to 5th arcane circle, doppleganger fight won't drag unnecessary due to getting messly 1k lust after 5th round in fight, Gazer Eyes mutation not keeping True seeing perk, Magical Eye Drops as item ");
 			outputText("find in Caves instead of Eye Drops, raiju tf removing/humanizing raiju paws, picking no elemental during minions turn skipping many following up phases of the turn, epic/legendary/mythical perks for stats not affecting monsters, harpy wings not setting shark score to 0, Siren been excluded form races list for appearance screen, Minor Minerva and parsertag, Encaps. pod multicockdescript, ");
-			outputText("Elf hair mutation, holiday events appearing in Ingnam/prison, Minotaur-Dormammu bug for all damage sources, bee chitin/stripes mutation repeat, CumWitch herm / SandWitch taur scene, equipping at once specific combinations of melee weapon and shield when not meeting req. to do so\n");/*ostatni punkt changelogu
+			outputText("Elf hair mutation, holiday events appearing in Ingnam/prison, Minotaur-Dormammu bug for all damage sources, bee chitin/stripes mutation repeat, CumWitch herm / SandWitch taur scene, equipping at once specific combinations of melee weapon and shield when not meeting req. to do so, Blood Chains too long stun duration\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");
 			//outputText("-New tier 5 strength lvl-up perk: Titan Grip (Su). Req. Titan Grip (Ex) perk and 120+ str. Effect: Allow to wield massive weapons in one hand.\n");może inny effeckt a dual wieldable massive weapons pod innym perkiem - jakiś lepszy niż Titan Grip? xD

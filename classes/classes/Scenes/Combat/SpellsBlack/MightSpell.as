@@ -57,6 +57,7 @@ public class MightSpell extends AbstractBlackSpell {
 	 */
 	public function calcBoost():Number {
 		var MightBoostCap:Number = 1.5;
+		if (player.hasPerk(PerkLib.SelfbuffsProficiency)) MightBoostCap += 0.3;
 		MightBoostCap *= player.intStat.core.max;
 		MightBoostCap            = Math.round(MightBoostCap);
 		var MightBoost:Number    = player.intStat.core.value;
