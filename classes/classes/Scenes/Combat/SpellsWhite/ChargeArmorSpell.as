@@ -76,6 +76,7 @@ public class ChargeArmorSpell extends AbstractWhiteSpell {
 	override protected function doSpellEffect(display:Boolean = true):void {
 		var ChargeArmorBoostCap:Number = 4;
 		var ChargeArmorBoost:Number = 5;
+		if (player.hasPerk(PerkLib.SelfbuffsProficiency)) ChargeArmorBoostCap += 0.8;
 		ChargeArmorBoostCap *= ChargeArmorBoost;
 		if (player.hasPerk(PerkLib.DivineArmament)) {
 			ChargeArmorBoostCap *= 2;

@@ -1010,6 +1010,10 @@ public class Combat extends BaseContent {
 
     internal function buildOtherActions(buttons:ButtonDataList):void {
         var bd:ButtonData;
+		if (CombatAbilities.BloodChains.currentCooldown > 0) {
+			outputText("Blood Chains cooldown is "+CombatAbilities.BloodChains.currentCooldown+" turn(s)");
+			if (monster.hasStatusEffect(StatusEffects.Stunned)) outputText("Left stun duration: " + monster.statusEffectv1(StatusEffects.Stunned) + "");
+		}
         buttons.add("Surrender(H)", combat.surrenderByHP, "Stop defending up to the point enemy would beat you down to minimal HP.");
         buttons.add("Surrender(L)", combat.surrenderByLust, "Fantasize about your opponent in a sexual way so much it would fill up your lust you'll end up getting raped.");
         if (player.hasPerk(PerkLib.DoubleAttack) || player.hasPerk(PerkLib.DoubleAttackLarge) || player.hasPerk(PerkLib.DoubleAttackSmall) || player.hasPerk(PerkLib.Combo) || (player.hasPerk(PerkLib.JobBeastWarrior) && (player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon())) ||
@@ -16069,4 +16073,4 @@ public class Combat extends BaseContent {
         return inteWisLibScale(player.lib, randomize);
     }
 }
-}
+}

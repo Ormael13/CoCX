@@ -489,7 +489,7 @@ public function repeatEncounterBattlefieldTalkHerIzumi():void {
 public function talkHerKids():void {
 	clearOutput();
 	outputText("You ask your giantess if she’d ever thought about having a family. She looks down at you, her expression a mix between sadness, amusement, and annoyance. Tyrantia tilts her head, bringing one hand to her chin. You wait patiently for her answer, but you don’t have to wait long.\n\n");
-	outputText("\"<i>...Yeah, I have.</i>\" She admits. \"<i>Honestly, I’ve thought about it a lot, the last little while.</i>\" She smiles sadly down at you. \"<i>It’s all your fault, really.” The giantess sits down on the ground, folding her spider-legs underneath her massive frame. You instinctively hug the giant Drider-girl, and she lets out her little \"<i>Tk-tk-tk</i>\" laugh that she shares with her sisters.\n\n");
+	outputText("\"<i>...Yeah, I have.</i>\" She admits. \"<i>Honestly, I’ve thought about it a lot, the last little while.</i>\" She smiles sadly down at you. \"<i>It’s all your fault, really.”</i> The giantess sits down on the ground, folding her spider-legs underneath her massive frame. You instinctively hug the giant Drider-girl, and she lets out her little \"<i>Tk-tk-tk</i>\" laugh that she shares with her sisters.\n\n");
 	outputText("\"<i>...Look, [name]. I love you...I’d love nothing more than to lay your eggs, watch over them till they hatch, and bring up a new generation of Driders with you.</i>\" Evidently she’s thought about this a lot. \"<i>...I’d really like that.</i>\" Her voice is a bare whisper, and bitter tears begin to fall from her eyes. \"<i>...But I can’t allow it</i>\".\n\n");
 	outputText("Surprised, you ask her why not, and she shakes her head, pointing at her horns. \"<i>Look at these, look at me, and then ask yourself why I wouldn’t be willing to have kids”. You blink, sighing as it clicks.\n\n");
 	outputText("\"<i>Yeah. I have a hard enough time dealing with my own shit, [name]. I’m not gonna force that situation on a kid. They…don’t deserve that.</i>\" You reluctantly agree, then a thought occurs to you. You ask Tyrantia about her eggs, how they are specifically. The giantess blushes. \"<i>Well...They’re squishy and soft, not like the Lizans or Harpies. Our people’s eggs were way more susceptible to corruption. That’s why we ended up corrupt in the first place.</i>\" She closes her eyes. \"<i>[name], when I told you I couldn’t be what you wanted me to be, what did you think I meant?</i>\" You hold her close, and you promise Tyrantia that you’ll try to make this work. You tell her that even if you can’t have a family, that you’ll stay with her.\n\n");
@@ -1112,7 +1112,7 @@ public function TyrantiaAtCamp():void {
 	else addButton(3, "Training", TyrantiaTraining);
 	addButton(4, "Sex", TyrantiaSexMenu);
 	//5 - JoinMe addButton(2, "JoinMe", TyrantiaFollowerOptions);
-	if (TyraniaCorrupteedLegendaries >= 1) addButton(10, "Items", itemImproveMenu);
+	if (TyraniaCorrupteedLegendaries >= 1) addButton(10, "Items", itemImproveMenuCorrupt);
 	if (DriderTown.DriderTownComplete) addButton(13, "Back", SceneLib.dridertown.DriderTownEnter).hint("Return to main DriderTown menu.");
 	addButton(14, "Leave", camp.campLoversMenu);
 }
@@ -1141,7 +1141,7 @@ public function unlockingCorruptLegendariesOption():void {
 	doNext(playerMenu);
 	eachMinuteCount(5);
 }
-public function itemImproveMenu():void {
+public function itemImproveMenuCorrupt():void {
 	var improvableItems:Array = [
 		[weapons.BFSWORD, weapons.NPHBLDE, weapons.EBNYBLD],
 		[weapons.DBFSWO, weapons.T_HEART, weapons.DORSOUL],
@@ -1213,4 +1213,4 @@ public function JojoReaction():void {
 doNext(camp.returnToCamp);
 }*/
 }
-}
+}

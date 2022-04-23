@@ -52,6 +52,7 @@ public class BlinkSpell extends AbstractBlackSpell {
 	 */
 	public function calcBoost():Number {
 		var BlinkBoostCap:Number = 2;
+		if (player.hasPerk(PerkLib.SelfbuffsProficiency)) BlinkBoostCap += 0.4;
 		BlinkBoostCap *= player.intStat.core.max;
 		var BlinkBoost:Number    = player.intStat.core.value;
 		//BlinkBoost += Math.round(player.intStat.max * 0.1); - może tylko jak bedzie mieć perk z prestige job: magus / warock / inny związany z spells

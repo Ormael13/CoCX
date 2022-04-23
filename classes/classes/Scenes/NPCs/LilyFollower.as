@@ -360,6 +360,7 @@ import classes.display.SpriteDb;
 			}
 			outputText("<b>Lily has joined you as a lover.</b>\n\n");
 			LilyFollowerState = true;
+			DriderTown.LilyKidsPCPregnancy = 0;
 			cleanupAfterCombat(camp.returnToCampUseOneHour);
 		}
 		

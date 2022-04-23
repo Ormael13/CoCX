@@ -1,6 +1,5 @@
-//Side Dungeon: River Dungeon (Dungeon with multiple floors below He'Xin'Dao)
 /**
- * ...
+ * Side Dungeon: River Dungeon (Dungeon with multiple floors below He'Xin'Dao)
  * @author Ormael, Liadri
  */
 package classes.Scenes.Dungeons 

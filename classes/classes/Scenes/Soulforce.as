@@ -26,6 +26,7 @@ import classes.Scenes.NPCs.Aria;
 import classes.Scenes.NPCs.Belisa;
 import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.NPCs.DivaScene;
+import classes.Scenes.NPCs.DriderTown;
 import classes.Scenes.NPCs.LilyFollower;
 import classes.Scenes.NPCs.Neisa;
 import classes.Scenes.NPCs.RyuBiDragon;
@@ -232,7 +233,7 @@ public class Soulforce extends BaseContent
 		menuItems.push("Body State", BodyStateMenu, "For more precisely adjusting a few other body values or parts than Stats Adj option.");
 		menuItems.push("Test dynamic stat", TestDynamicStats, "Test Dynamic stats.");
 		menuItems.push("MetamorphFull", (player.hasPerk(PerkLib.Metamorph))? AllMetamorphOptionsUnlock: false, "Unlock all Metamorph options.");
-		menuItems.push("BelisaTest", (BelisaFollower.BelisaInGame && BelisaFollower.BelisaFollowerStage < 3 && BelisaFollower.BelisaEncounternum >= 1) ? belisatest : false, "Belisa Trigger");
+		menuItems.push("BelisaTest", (BelisaFollower.BelisaInGame && BelisaFollower.BelisaFollowerStage < 3) ? belisatest3 : false, "Belisa Trigger");
 		menuItems.push("BeliConfFix", (TyrantiaFollower.TyrantiaFollowerStage >= 4 && BelisaFollower.BelisaFollowerStage >= 5 && BelisaFollower.BelisaEncounternum >= 5 && BelisaFollower.BelisaAffectionMeter >= 80 && !BelisaFollower.BelisaConfessed) ? belisatest2 : false, "Belisa Confession Fix");
 		menuItems.push("LilyTest", !LilyFollower.LilyFollowerState ? lilytest : false, "Lily Trigger");
 		menuItems.push("FixJiangshi", jiangshiBuggedItemsCleanUpCrew0, "Shit! Here we go Again! Fixing Jiangshi! (better use it only once or may be some bugs i not plan to account for in case of using this more than once - i not blocked using it more than once so belive ppl will be reasonable to not click like mad this)");
@@ -258,6 +259,7 @@ public class Soulforce extends BaseContent
 		//menuItems.push("ZenjiQ", ZenjiQ, "Zenji Expac 2 debug tool");
 		menuItems.push("LustBreath", (player.hasPerk(PerkLib.DragonPoisonBreath))? FairyTest: false, "Replacing 1 perk with another");
 		menuItems.push("TyrantPF", (TyrantiaFollower.TyrantiaFollowerStage == 5 && TyrantiaFollower.TyraniaCorrupteedLegendaries == 0)? FairyTest5: false, "Patching Tyrantia corrupted legendaries unlock");
+		menuItems.push("LilyPregF", (DriderTown.LilyKidsPCPregnancy != 0 && LilyFollower.LilyFollowerState)? FairyTest3: false, "Curing Lily Infertility ^^");
 		//menuItems.push("Mutationstest2", mutations2, "MutationsTest2");
 		//menuItems.push("Mutation test reset", resetMutations, "Reset Mutations");
 		menuGen(menuItems, page, accessSoulforceMenu);
@@ -280,6 +282,10 @@ public class Soulforce extends BaseContent
 		menuGen(menuItems, page, curry(SoulforceCheats1, 2));
 	}
 
+	public function FairyTest3():void {
+		DriderTown.LilyKidsPCPregnancy = 0;
+		doNext(curry(SoulforceCheats1, 0));
+	}
 	public function FairyTest5():void {
 		TyrantiaFollower.TyrantiaFollowerStage = 4;
 		TyrantiaFollower.TyraniaCorrupteedLegendaries = 1;
@@ -293,6 +299,10 @@ public class Soulforce extends BaseContent
 	public function belisatest2():void{
 		BelisaFollower.BelisaConfessed = true;
 		doNext(curry(SoulforceCheats1,2));
+	}
+	public function belisatest3():void {
+		if (BelisaFollower.BelisaEncounternum >= 1) SceneLib.belisa.subsequentEncounters();
+		else SceneLib.belisa.firstEncounter();
 	}
 	public function resetMutations():void{
 		clearOutput();
