@@ -571,7 +571,7 @@ package classes.Scenes.Areas.Forest
 		}
 
 		private function loseToAckballllllz():void {
-			if (player.isTaur) {
+			if (player.isTaur()) {
 				akbalRapesTaurs();
 				return;
 			}
