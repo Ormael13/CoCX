@@ -29,7 +29,7 @@ package classes.Items.Weapons
 		public function calcWizardsMult():Number {
 			var multadd:Number = 0.6;
             if (game && game.player)
-                multadd += (100 - game.player.cor) * 0.34;
+                multadd += (100 - game.player.cor) * 0.034;
 			return multadd;
 		}
 

@@ -275,6 +275,7 @@ public function HeavenTribulationThunderDoom():void {
 	EventParser.gameOver();
 }
 public function HclassHTintro():void {
+	spriteSelect(null);
 	outputText("\nAn expanse of ink-black clouds form from nowhere, engulfing the land in near-total darkness. You stand, looking up into the artificial night. You see a part of the clouds, directly above you, and from it, crimson lightning splits the sky, carving a trench in the ground in front of you. The unnatural lightning spreads, jagged webs across the black sky, the thunder roaring constantly in your ears. Your heart beats faster, your [skin] crawling with each crack.\n");
 	startCombat(new HclassHeavenTribulation());
 }
@@ -303,6 +304,7 @@ public function HclassHTsurvived():void {
 	cleanupAfterCombat();
 }
 public function GclassHTintro():void {
+	spriteSelect(null);
 	outputText("\nAn expanse of ink-black clouds form from nowhere, engulfing the land in near-total darkness. You stand, looking up into the artificial night. You see a part of the clouds, directly above you, and from it, crimson lightning splits the sky, carving a trench in the ground in front of you. The unnatural lightning spreads, jagged webs across the black sky, the thunder roaring constantly in your ears. Your heart beats faster, your [skin] crawling with each crack. The wind howls, and you break into a cold sweat. Your second tribulation starts now.\n");
 	startCombat(new GclassHeavenTribulation());
 }
@@ -342,6 +344,7 @@ public function GclassHTsurvived():void {
 	cleanupAfterCombat();
 }
 public function FclassHTintro():void {
+	spriteSelect(null);
 	outputText("\n An expanse of ink-black clouds form from nowhere, engulfing the land in near-total darkness. You stand, looking up into the artificial night. You see a part of the clouds, directly above you, and from it, crimson lightning splits the sky, carving a trench in the ground in front of you. The unnatural lightning spreads, jagged webs across the black sky, the thunder roaring constantly in your ears. Your heart beats faster, your [skin] crawling with each crack. The wind howls, and you break into a cold sweat. Your third tribulation starts now.\n");
 	startCombat(new FclassHeavenTribulation());
 }

@@ -198,7 +198,7 @@ public class SceneHunter extends BaseContent {
     public function selectFitNofit(fitF:Function, nofitF:Function, maxSize:Number, compareBy:String = "area"):void {
         //Auto-calls
         if (!dickSelect) {
-            if (player.findCock(1, -1, maxSize, compareBy, false) >= 0) {
+            if (player.findCock(1, -1, maxSize, compareBy) >= 0) {
                 print("Failed/passed size check - dick fits, but you certainly can try to use something <i>bigger</i> than " + maxSize + " " + compareBy);
                 fitF();
             }
@@ -213,12 +213,12 @@ public class SceneHunter extends BaseContent {
         outputText("\n\n<b>Will you use the dick that will certainly fit, or press your luck and try to use a bigger 'tool'?</b>");
         menu();
         //fitting cocks
-        if (player.findCock(1, -1, maxSize, compareBy, true) >= 0)
+        if (player.findCock(1, -1, maxSize, compareBy) >= 0)
             addButton(0, "Fitting", restoreText, beforeText, fitF);
         else
             addButtonDisabled(0, "Fitting", "Requires dick " + compareBy + " less than " + maxSize);
         //too big
-        if (player.findCock(1, maxSize, -1, compareBy, true) >= 0)
+        if (player.findCock(1, maxSize, -1, compareBy) >= 0)
             addButton(1, "Too big", restoreText, beforeText, nofitF);
         else
             addButtonDisabled(1, "Too big", "Requires dick " + compareBy + " greater than " + maxSize);
@@ -251,7 +251,7 @@ public class SceneHunter extends BaseContent {
                 print("Passed? Size check, but alt scene available for dicks smaller than " + bigMin + " " + compareBy);
                 bigF();
             }
-            else if (player.findCock(1, smallProvided ? smallMax : -1, bigMin, compareBy, false) >= 0) {
+            else if (player.findCock(1, smallProvided ? smallMax : -1, bigMin, compareBy) >= 0) {
                 print("Failed size check, dick must be bigger than " + bigMin + " " + compareBy);
                 if (smallProvided) print("Passed? Another size check, but alt scene available for dicks smaller than " + smallMax + " " + compareBy);
                 mediumF();
@@ -274,19 +274,19 @@ public class SceneHunter extends BaseContent {
         //medium-small
         if (smallProvided) {
             //medium cocks
-            if (player.findCock(1, smallMax, bigMin, compareBy, false) >= 0) //tentacles don't fit
+            if (player.findCock(1, smallMax, bigMin, compareBy) >= 0) //tentacles don't fit
                 addButton(1, "Medium", restoreText, beforeText, mediumF);
             else
                 addButtonDisabled(1, "Medium", "Requires dick " + compareBy + " greater than " + smallMax + " and less than " + bigMin);
             //small cocks
-            if (player.findCock(1, -1, smallMax, compareBy, false) >= 0) //tentacles don't fit
+            if (player.findCock(1, -1, smallMax, compareBy) >= 0) //tentacles don't fit
                 addButton(2, "Small", restoreText, beforeText, smallF);
             else
                 addButtonDisabled(2, "Small", "Requires dick " + compareBy + " less than " + smallMax);
         }
         else {
             //replaced "Medium" text with "Small" to avoid player confusion
-            if (player.findCock(1, -1, bigMin, compareBy, false) >= 0) //tentacles don't fit
+            if (player.findCock(1, -1, bigMin, compareBy) >= 0) //tentacles don't fit
                 addButton(1, "Small", restoreText, beforeText, mediumF);
             else
                 addButtonDisabled(1, "Small", "Requires dick " + compareBy + " less than " + bigMin);
