@@ -11,7 +11,6 @@ import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
-import classes.GlobalFlags.*;
 import classes.Scenes.SceneLib;
 import classes.StatusEffects.Combat.ParalyzeVenomDebuff;
 import classes.internals.ChainedDrop;
@@ -21,28 +20,17 @@ import classes.internals.ChainedDrop;
 		public function waspSpearAttack():void {
 			outputText("The " + short + " lunges at you, jabbing with her spear.  You dodge the first attack easily, ");
 			var evade:String = player.getEvasionReason();
-			if (evade == EVASION_EVADE) {
+			if (evade == EVASION_EVADE)
 				outputText("and you anticipate the upcoming spear strikes, dodging her attacks thanks to your incredible evasive ability!");
-				return;
-			}
-			else if (evade == EVASION_FLEXIBILITY) {
+			else if (evade == EVASION_FLEXIBILITY)
 				outputText("and you use your incredible flexibility to barely fold your body and avoid her attacks!");
-				return;
-			}
-			else if (evade == EVASION_MISDIRECTION) {
+			else if (evade == EVASION_MISDIRECTION)
 				outputText("and you use technique from Raphael to sidestep and completely avoid her barrage of attacks!");
-				return;
-			}
-			else if (evade == EVASION_SPEED || evade != null) {
+			else if (evade == EVASION_SPEED || evade != null)
 				outputText("and you successfully dodge her barrages of spear attacks!");
-				return;
-			}
-			else if (hasStatusEffect(StatusEffects.Blind) && rand(3) > 0) {
+			else if (hasStatusEffect(StatusEffects.Blind) && rand(3) > 0)
 					outputText("and step away as you watch the " + short + "'s blind attacks strike only air. ");
-					return;
-				}
-			else
-			{
+			else {
 				outputText("but she follows through with a spear strike, tearing into your " + (player.armor.name == "nothing" ? "" : "[armorName] and the underlying") + " flesh. ");
 				var paralyze:ParalyzeVenomDebuff = player.statusEffectByType(StatusEffects.ParalyzeVenom) as ParalyzeVenomDebuff;
 				if (paralyze) {
