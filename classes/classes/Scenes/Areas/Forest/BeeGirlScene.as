@@ -72,7 +72,7 @@ public class BeeGirlScene extends BaseContent
 		private function beeEncounterSelect(clearScreen:Boolean = true):void {
 			if (clearScreen) clearOutput();
 			spriteSelect(SpriteDb.s_bee_girl);
-			outputText("That's when she comes into view.  A great woman, yellow and black, a Bee-like handmaiden would be the best comparison.  She sits atop a great flower while humming her tune, happily picking the petals off of another flower.  Her body is thin, save her abdomen.  Her head is more humanoid than bee, with black eyes, floppy antennae, and luscious black lips that glimmer wetly");
+			outputText("That's when she comes into view.  A great woman, yellow and black, a Bee-like handmaiden would be the best comparison.  She sits atop a great flower while humming her tune, happily picking the petals off of another flower.  Her body is thin, save her abdomen.  Her head is more humanoid than bee, with black eyes, floppy antennae, and luscious black lips that glimmer wetly.");
 			//Alraune race
 			if (player.lowerBody == LowerBody.PLANT_FLOWER) {
 				AlrauneAndBee();

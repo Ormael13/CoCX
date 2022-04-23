@@ -67,7 +67,7 @@ public class ElementalPearl extends Consumable {
 
     public function eatIt():void {
         clearOutput();
-        outputText("You cram the pearl in your mouth and swallow it like a giant pill with some difficulty.  Surprisingly there is no discomfort, only a calming sensation of three steams of mystical energies spreading in your body and restoring your lost strength, speed and toughness.");
+        outputText("You cram the pearl in your mouth and swallow it like a giant pill with some difficulty.  Surprisingly there is no discomfort, only a calming sensation of three steams of mystical energies spreading in your body and restoring your lost strength, speed and toughness.\n\n");
         player.createPerk(itemPerk, 0, 0, 0, 0);
         outputText("<b>Gained perk: " + itemPerk.name() + "</b>")
         SceneLib.inventory.itemGoNext();

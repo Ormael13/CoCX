@@ -1734,7 +1734,7 @@ public class Soulforce extends BaseContent
 			addButton(11, "Midnight gossamer", AddGossa).hint("Add 1 Midnight Gossamer.");
 			addButton(12, consumables.VAMPBLD.shortName, addConsumable, consumables.VAMPBLD).hint("Add 1 " + consumables.VAMPBLD.longName + ".");
 			//addButton(11, "", ).hint("Add 1 .");
-			if (!player.hasPerk(PerkLib.ElementalConjurerMindAndBodySacrifice)) addButton(12, "E.Pearls", AddThePearls).hint("Add all three Elemental Pearls.");
+			addButton(12, "E.Pearls", AddThePearls).hint("Add all three Elemental Pearls.");
 			addButton(13, "-1-", NonEquipmentMenu, page - 1);
 			addButton(14, "Back", curry(SoulforceCheats1, 0));
 		}

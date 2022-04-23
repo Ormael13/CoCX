@@ -28,7 +28,7 @@ package classes.Items.Weapons
 		public function calcWizardsMult():Number {
 			var multadd:Number = 0.6;
             if (game && game.player)
-                multadd += game.player.cor * 0.044;
+                multadd += game.player.cor * 0.05;
 			return multadd;
 		}
 

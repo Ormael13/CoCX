@@ -590,10 +590,8 @@ import classes.StatusEffects;
 			{
 				addButton(2, "Eggs", goToEggPile);
 			}
-			if (flags[kFLAGS.D3_DEMONIC_SCYTHE] == 0)
-			{
-				addButton(3, "Scythe", goToEggPile);
-			}
+			if (flags[kFLAGS.D3_DEMONIC_SCYTHE] == 0) addButton(3, "Scythe", takeScythe);
+			if (flags[kFLAGS.D3_GOBLIN_MECH_PRIME] == 0) addButton(4, "Mech", takeMech);
 			
 			return false;
 		}
