@@ -468,14 +468,14 @@ public class PerkLib
 				"Allows you to cast splited offensive spell without increased mana cost when using staff (3 parts at 70% power) or partial staff (2 parts at 80% power) as focus. (Effect will not activate if you already have ways to multicast spells at reduced power)",
 				"You've chosen the 'Offensive Staff Channeling' perk. Allows you to cast splited offensive spell without increased mana cost when using staff (3 parts at 70% power) or partial staff (2 parts at 80% power) as focus. (Effect will not activate if you already have ways to multicast spells at reduced power)");
 		public static const SelfbuffsProficiency:PerkType = mk("Selfbuffs Proficiency", "Selfbuffs Proficiency",
-				"Increase max selfbuff bonus by 20%.",
-				"You've chosen the 'Selfbuffs Proficiency' perk. Increase max selfbuff bonus by 20%.");
+				"Increase max selfbuff max cap by 20%.",
+				"You've chosen the 'Selfbuffs Proficiency' perk. Increase max selfbuff max cap by 20%.");
 		public static const SelfbuffsProficiencyEx:PerkType = mk("Selfbuffs Proficiency (Ex)", "Selfbuffs Proficiency (Ex)",
-				".",
-				"You've chosen the 'Selfbuffs Proficiency (Ex)' perk. ");
+				"Increase max selfbuff max cap by 30%(50%).",
+				"You've chosen the 'Selfbuffs Proficiency (Ex)' perk. Increase max selfbuff max cap by 30%(50%).");
 		public static const SelfbuffsProficiencySu:PerkType = mk("Selfbuffs Proficiency (Su)", "Selfbuffs Proficiency (Su)",
-				".",
-				"You've chosen the 'Selfbuffs Proficiency (Su)' perk. ");
+				"Increase max selfbuff max cap by 50%(100%). Enable recasting all active buffs.",
+				"You've chosen the 'Selfbuffs Proficiency (Su)' perk. Increase max selfbuff max cap by 50%(100%). Enable recasting all active buffs.");
 		public static const ElementalConjurerKnowledge:PerkType = mk("Elemental Conjurer Knowledge", "Elemental Conjurer Knowledge",
 				"You gained knowledge how to make elementals rank up process less resource consuming. (-40% needed mana/fatigue and 40% less HP lost during failure)",
 				"You've chosen the 'Elemental Conjurer Knowledge' perk, gaining knowledge on how to make the elemental rank up process less resource consuming. (-40% needed mana/fatigue and 40% less HP lost during failure)");
@@ -4926,7 +4926,7 @@ public class PerkLib
                     .requireInt(150)
                     .requireLevel(54);
             PrestigeJobTempest.requirePrestigeJobSlot()
-                    .requirePerks(JobDervish, JobWarrior, DualWield)
+                    .requirePerks(JobWarrior, DualWield)
                     .requireSpe(200)
                     .requireLevel(54);
 			//Tier 10 Speed Perks
