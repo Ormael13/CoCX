@@ -2,12 +2,8 @@
 package classes.Scenes.Areas.GlacialRift
 {
 import classes.*;
-import classes.BodyParts.LowerBody;
-import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
-import classes.Items.Armors.SuccubusArmor;
-import classes.Scenes.SceneLib;
 import classes.Scenes.SceneLib;
 
 public class YetiScene extends BaseContent
@@ -23,10 +19,10 @@ public class YetiScene extends BaseContent
 				outputText(" To your surprise the thing you at first identified as a stupid beast speaks up.\n\n");
 				flags[kFLAGS.MET_YETI_FIRST_TIME] = 1;
 			}
-			outputText("\"<i>Thought some other dumb intruder got in home but me lucky today, female must've came here by accident so will patch roof later. Female alone, no male scent on her so may forgive intrusion and let out if snu snu. No fun in days and gal look like could use warmth.</i>\"\n\n" +
+			outputText("\"<i>Thought some other dumb intruder got in home but me lucky today, female must've come here by accident so will patch roof later. Female alone, no male scent on her so may forgive intrusion and let out if snu-snu. No fun in days and gal look like could use warmth.</i>\"\n\n" +
 					"He makes you what you imagine and know instinctively is a seductive yet fanged smile, offering his massive hand forward in invitation. This here is yeti courtship if you've seen one before. You have to admit that by yeti standards this guy is quite handsome. How are you going to handle him? ");
 			menu();
-			addButton(0, "Snu Snu", SnuSnu);
+			addButton(0, "Snu-Snu", SnuSnu);
 			addButton(1, "No", NoSnuSnu);
 		}
 
@@ -44,17 +40,16 @@ public class YetiScene extends BaseContent
 					" Guess he just wasn't lucky in finding one. Not that you can judge him since the blizzard would make anyone blind in this frozen landscape." +
 					" Your instincts kicking in full swing you take a whiff of his musky scent, smiling in contentment, that's the smell of a strong man, one worthy of fathering your offsprings." +
 					" You lay down in bed, spreading your two furry legs apart, your arms open for a hug, in invitation for the courting male to proceed." +
-					" His impressive twelve inch rod stands proudly, warm cum bubbling from the tip and you just almost beg him with your eyes to put it in." +
+					" His impressive twelve-inch rod stands proudly, warm cum bubbling from the tip, and you just almost beg him with your eyes to put it in." +
 					" He starts by teasing your entrance, aligning his glan for a powerful first strike, you make a frustrated groan annoyed by the delay, urging him to get down to business." +
 					" You want to be bred and won't take any delay or further teasing.\n\n" +
-					"On cue the male thrust his yeti rod in your pussy, making you coo in delight as you put your massive hands on his shoulder and wrap your legs around his torso, the male beginning to mate you in earnest and you respond positively by impaling yourself back on his cock at every opportunity." +
+					"On cue the male thrust his yeti rod in your pussy, making you coo in delight as you put your massive hands on his shoulder and wrap your legs around his torso, the male beginning to mate you in earnest, and you respond positively by impaling yourself back on his cock at every opportunity." +
 					" His thrusts are powerful and accurate, hitting the spot on every strike and confirming to you that he's a good mate.\n\n" +
 					"\"<i>Girl be eager, me like that. Give you strong offspring.</i>\"\n\n" +
 					"His cock reacts favorably to your ministrations, twitching in your pussy. Reaching for the climax your mate roars as he fills you with a mighty jet of yeti cum, warming up your womb with his seeds." +
 					" The strength of his ejaculation is all you need to reach over the edge, achieving your own orgasm as the male bottoms up in you filling you to the brim with his virile seed, giving a solid shot at his paternity.\n\n" +
 					"A few seconds later he escorts you to the exit. You are positively beaming, pondering whether the seed of your mate took as you leave the cave." +
 					" Probably not since most yeti intercourse would fail to conceive a child but who knows, you could get lucky eventually. Thoroughly satisfied you head back to camp.");
-			player.sexReward("cum","Vaginal");
 			player.sexReward("cum","Vaginal");
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -63,15 +58,13 @@ public class YetiScene extends BaseContent
 			clearOutput();
 			if (doSFWloss()) return;
 			if (player.HP <= 0) outputText("You feel your strength give way as your fighting stance wavers; the yeti beast senses your exhaustion and tackles you to the ground. With a groan, you stare up at the yeti as he pins you beneath him. There is a brief comfort from having such a warm, furred creature pressed against you in the frozen cave, though you feel the heat and pressure of his monstrous prick sliding out of its sheath and grinding against your body. His intentions are clear: he’s going to enjoy your warmth forcefully.");
-			else outputText("You reach your limit; your loins are distracting you too much as you give up on fighting entirely. Your hands instead take to touching yourself through your armor lewdly: the only thing convincing you to keep anything on is the chill of the ice caverns surrounding you, but as you look at the ice yeti moving closer to loom over you, his monstrous red prick unsheathed fully and streaming the frigid air with it’s heat, you doubt you’ll be cold much longer.");
-			//The Yeti decides what to do with you.
-			//if (rand(2) == 0) getFuckedByYetiDoggyStyle();
-			//else getFuckedByYetiFacial();
+			else outputText("You reach your limit; your loins are distracting you too much as you give up on fighting entirely. Your hands instead take to touching yourself through your armor lewdly: the only thing convincing you to keep anything on is the chill of the ice caverns surrounding you, but as you look at the ice yeti moving closer to loom over you, his monstrous red prick unsheathed fully and streaming the frigid air with its heat, you doubt you’ll be cold much longer.");
+			outputText("\n\n");
 			getFuckedByYetiDoggyStyle();
 		}
 
 		private function getFuckedByYetiDoggyStyle():void {
-			outputText("Your body is pinned completely under the large beast, his hand roughly feeling you up through your armor as his monstrous prick slides from the furred sheath to grind over you. All the forceful touching and groping sends shivers down your spine, but despite all that, the warmth of his body pressed against yours is oddly soothing and you find yourself relaxing into it to avoid the cold. WIth a grunt, his large hands cup over your [butt] and fondle your ass through your [armor]. His forceful touch combined with the heat of his monstrous slick cock grinding over you excites your body, and the scent of the beasts rutting musk edges you even further, ");
+			outputText("Your body is pinned completely under the large beast, his hand roughly feeling you up through your armor as his monstrous prick slides from the furred sheath to grind over you. All the forceful touching and groping sends shivers down your spine, but despite all that, the warmth of his body pressed against yours is oddly soothing, and you find yourself relaxing into it to avoid the cold. WIth a grunt, his large hands cup over your [butt] and fondle your ass through your [armor]. His forceful touch combined with the heat of his monstrous slick cock grinding over you excites your body, and the scent of the beasts rutting musk edges you even further, ");
 			//Genderless PCs
 			if (!player.hasCock() && !player.hasVagina()) outputText("tingling your body with arousal.");
 			//Gendered PCs
@@ -79,7 +72,7 @@ public class YetiScene extends BaseContent
 			if (player.hasCock() && player.hasVagina()) outputText(" as well as ");
 			if (player.hasVagina()) outputText("making the lips of your " + vaginaDescript(0) + " begin to drool and grow moist");
 			outputText(". With a sudden jerk you are spun around and shoved onto your hands and knees, his limbs pinning down yours to the ice cavern floor. With a gasp, you feel frost collecting on your limbs, ice crawling up them as they are frozen in place, trapping you as the yeti has his way with you. With a strong yank of his hands, the yeti exposes your [butt], you shiver as it’s briefly left in the cold air.\n\n");
-			outputText("A hot slick throbbing length is quickly nestled between your asscheeks, humping between your firm mounds as you feel the welcome warmth of the yeti’s cock. You gasp as the naturally slick monster prick drools over your " + assholeDescript() + ", smearing the warm preparation fluids all along your taint. The yeti continues to hump you earnestly as his warm furred body lays over yours, and you can’t help but the soft warmth oddly pleasurable despite your limbs being trapped in ice.  ");
+			outputText("A hot slick throbbing length is quickly nestled between your asscheeks, humping between your firm mounds as you feel the welcome warmth of the yeti’s cock. You gasp as the naturally slick monster prick drools over your " + assholeDescript() + ", smearing the warm preparation fluids all along your taint. The yeti continues to hump you earnestly as his warm furred body lays over yours, and you can’t help, but the soft warmth oddly pleasurable despite your limbs being trapped in ice.  ");
 			if (player.hasCock()) outputText("Your [cocks] is now fully erect, despite being in the cold air.  ");
 			outputText("With a needy grunt the yeti ceases his humping, and when you turn your head, you can see him lining up, one of his hands gripping the hilt of his monstrous length. He presses the pulsing cockhead to your pucker, pushing in against your resistance and coaxing a low moan from your lips. With a persistent shove he slides in past the stiff flesh of your rim, nestling in your warmth. The beast gives a guttural moan from his maw, bucking his hips as he gets more of his massive cock inside you. You can only whimper and strain against the ice binding your limbs in place as the beast takes your hole.\n\n");
 			outputText("The sound of flesh smacking flesh bounces off the ice walls of the cavern as the yeti beats your ass into oblivion, his giant huge member impaling you fully over and over, each savage thrust making your limbs ache from the strain of your bindings. Moans slip past your lips despite your discomforts, the furred beast wrapped around you like a heated fur sweater, the brutal thrusts against your ass making it burn up in all the right ways. You can feel his prespunk dripping out of your pucker and leaving warm trails down your taint and legs.  ");
@@ -97,35 +90,27 @@ public class YetiScene extends BaseContent
 			if (player.hasCock()) outputText("Ropes of cum shoot from your [cocks], splashing all over the cavern flooring and steaming against the cold ice. ");
 			if (player.hasVagina()) outputText("Your  " + vaginaDescript(0) + " is drenched in your sex, leaving your legs slick in your pleasure and dripping down to steam on the icy flooring under you. ");
 			player.buttChange(18, true);
-			outputText("With a low snarl the yeti rams into you hard enough to make your ice bindings crack: hilted in you as much as he can manage, he begins to pump you full of his cold resistant spunk. It warms your gut and lower body in ways that make you groan, his baseball sized balls filling you well past your limits as it flood your inner confines, spilling out to drenching your taint and groin. Soon there is a large heated pool on the floor under you. With a wet pop the yeti pulls his spent cock from your over stuffed hole, more spunk spilling out to splash onto the floor. Without any further ceremony the beast’s prick returns to it’s sheath and the yeti leaves out the way he came in, leaving you a trapped, helpless fuckhole to be used later.\n\n");
+			outputText("With a low snarl the yeti rams into you hard enough to make your ice bindings crack: hilted in you as much as he can manage, he begins to pump you full of his cold resistant spunk. It warms your gut and lower body in ways that make you groan, his baseball sized balls filling you well past your limits as it flood your inner confines, spilling out to drenching your taint and groin. Soon there is a large heated pool on the floor under you. With a wet pop the yeti pulls his spent cock from your over stuffed hole, more spunk spilling out to splash onto the floor. Without any further ceremony the beast’s prick returns to its sheath, and the yeti leaves out the way he came in, leaving you a trapped, helpless fuckhole to be used later.\n\n");
 			outputText("You struggle against the ice binding your limbs, one of them cracked from the earlier rutting, and with some effort you manage to break free. ");
-			outputText("Collecting your things, you notice you lost some gems during the struggle, but you ignore them since you are eager to leave the cavern. Taking the exit the yeti had used to wander back out into the rift, you begin your long walk to camp.. but as you trek through the frigid fields of the glacial rift, you notice your ass stays hot despite the cold. Perhaps it’s a special quality of the yeti’s cum?");
+			outputText("Collecting your things, you notice you lost some gems during the struggle, but you ignore them since you are eager to leave the cavern. Taking the exit the yeti had used to wander back out into the rift, you begin your long walk to camp... but as you trek through the frigid fields of the glacial rift, you notice your ass stays hot despite the cold. Perhaps it’s a special quality of the yeti’s cum?");
 			player.sexReward("cum","Anal");
 			cleanupAfterCombat();
 		}
-		//Not used as it's not written and may or may not be added.
-		/*private function getFuckedByYetiFacial():void {
-			player.orgasm();
-			cleanupAfterCombat();
-		}*/
 
 		public function winAgainstYeti():void {
 			clearOutput();
-			if (monster.HP <= 0) outputText("The yeti beast’s bruised and battered body stares you down, though it’s obvious his muscles are giving out. With a loud thump he falls on his back, and lays there, vulnerable. A bellowed groan of defeat echoes the cavern walls and the threat passes. What do you do now?");
+			if (monster.HP <= 0) outputText("The yeti's bruised and battered body stares you down, though it’s obvious his muscles are giving out. With a loud thump he falls on his back, and lays there, vulnerable. A bellowed groan of defeat echoes the cavern walls, and the threat passes. What do you do now?");
 			else outputText("The beast looks at you with a hungry gaze, his hot thick member sliding from the sheath between his legs. Unable to fight it any longer, the yeti wraps his hands around his long hot prick, protecting it from the cold as he pleasures the slick, stiff flesh. You lower your guard as you realize the monster is no longer willing to fight, content to just touch himself while looking warily at you. So, what do you do now?");
 			//Options
 			menu();
-			if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
-				if (player.hasCock()) {
-					addButton(0, "Buttfuck", fuckYetiInTheAss);
-				}
-				if (player.hasVagina()) {
-					addButton(1, "RideHisCock", rideYetisCock);
-				}
+			if (player.lust >= 33) {
+				addButtonIfTrue(0, "Buttfuck", fuckYetiInTheAss, "Req. a cock", player.hasCock());
+				addButtonIfTrue(1, "RideHisCock", rideYetisCock, "Req. a vagina", player.hasVagina());
+				LustyMaidensArmor.addTitfuckButton(2);
+				SceneLib.uniqueSexScene.pcUSSPreChecksV2(winAgainstYeti);
 			}
-			LustyMaidensArmor.addTitfuckButton(2);
-			SceneLib.uniqueSexScene.pcUSSPreChecksV2(winAgainstYeti);
-						addButton(14, "Leave", cleanupAfterCombat);
+			else outputText("You're not aroused enough to rape him.")
+			addButton(14, "Leave", cleanupAfterCombat);
 		}
 
 		private function fuckYetiInTheAss():void {
@@ -143,7 +128,7 @@ public class YetiScene extends BaseContent
 			if (player.biggestCockArea() <= 20 && player.cocks[player.biggestCockIndex()].cockType == CockTypesEnum.DOG) outputText("With a final thrust, you pop your knot past the beast’s rim, joining you two together with you as the alpha and him your bitch as you ready to breed him with your seed. You lean forward, hitting your limit as you give out a low groan.\n\n");
 			if (player.balls > 0) outputText("Your [balls] clench as your body readies to fire. You pump the yeti’s ass full of your spunk, firing out countless ropes of your seed, coating the beasts wall in your musky cum. \n\n");
 			if (player.cocks.length > 1) outputText("Your other cocks unload and coat his furred rear, drenching his rump in your spunk and messing his white fur with your sticky cream. With a satisfied huff you pull out, trails of your seed following your cock and leaking out across his abused rear. The beast groans as he unloads over his chest, his giant globs of thick spunk matting his fur. \n\n");
-			outputText("Without any delay you tuck your [cocks] into your [armor] and make your way out of the cavern through the passageway the yeti came in through, leaving the fearsome yeti looking like a well used whore and collecting a few spoils along the way.");
+			outputText("Without any delay you tuck your [cocks] into your [armor] and make your way out of the cavern through the passageway the yeti came in through, leaving the fearsome yeti looking like a well-used whore and collecting a few spoils along the way.");
 			player.sexReward("Default","Dick",true,false);
 			cleanupAfterCombat();
 		}
@@ -159,7 +144,7 @@ public class YetiScene extends BaseContent
 			if (player.tallness >= 60 && player.tallness < 72) outputText("the thick, soft fur of his chest");
 			if (player.tallness >= 72) outputText("the nape of his neck");
 			outputText(", the yeti’s thick musk surrounding you. \n\n");
-			outputText("Now wrapped in thick, warm fur and benefitting from the yeti’s comforting body heat, your shivers soon subside. With surprising gentleness, the yeti shifts so that his back is pressed against the cave wall, putting the two of you into a sitting position with you cuddled up in his lap. You give the big softie a little wink and, burying your hands in his pelt, start to rock your hips slightly, gently taking a tiny portion of his cock in and out of your " + vaginaDescript(0) + ", careful to keep the remained locked in the warmth between between your bodies. \n\n");
+			outputText("Now wrapped in thick, warm fur and benefitting from the yeti’s comforting body heat, your shivers soon subside. With surprising gentleness, the yeti shifts so that his back is pressed against the cave wall, putting the two of you into a sitting position with you cuddled up in his lap. You give the big softie a little wink and, burying your hands in his pelt, start to rock your hips slightly, gently taking a tiny portion of his cock in and out of your " + vaginaDescript(0) + ", careful to keep the remained locked in the warmth between your bodies. \n\n");
 			outputText("You continue to bounce on the yeti’s cock, grinding your hips against him and squeezing your vaginal muscles to milk him. Holding you tight against him, the yeti shifts one of his big hands from your back to your [chest], giving you gentle squeezes and pinches through your [armor] and forcing a little gasp from you. Letting out a deep, throaty laugh at your reaction, the yeti starts to move his own hips in tandem with yours, stuffing you with even more of his cock than ever before. You grit your teeth and moan as the narrow head of his prick slides through your cervix, poking at the entrance to your womb. \n\n");
 			outputText("You give out a final, whimpered moan as you climax, humping on the yeti’s prick as fast as you can while his arms restrain you. Shocks of pleasure shoot through you, making your whole body spasm in the beasts embrace. As your [vagina] squeezes down on him, the yeti throws his head back and, with a final mighty thrust into your depths, cums as well, hilting in you as much as he can manage as you pumps you full of his thick, hot spunk. Pouring into you, the yeti’s cum warms your gut and lower body in ways that make you groan and gasp with pleasure. His baseball-sized balls fill you well past your limits as spunk floods your innermost depths, spilling out to drench your thighs and groin, squelching wetly between your entwined bodies. \n\n");
 			outputText("With a wet pop, the yeti’s cock slides from your over-stuffed hole and back into its sheathe, letting more spunk spill out to stain his fur. Still gasping from your recent orgasm, you spend the next few minutes snuggled up to the warm, damp yeti, clinging to his soft fur until you feel it’s time to go. You look up to the yeti to say goodbye, but find him snoring quietly, his chest hefting your entire body with every breath. With a little smirk, you give him a kiss on the cheek and, securing your equipment, head back to camp.");
