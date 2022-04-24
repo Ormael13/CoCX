@@ -20,15 +20,12 @@ import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.*;
 import classes.Scenes.Areas.Desert.SandWitchScene;
-import classes.Scenes.Dungeons.DungeonAbstractContent;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.NPCs.XXCNPC;
 import classes.Scenes.SceneLib;
 import classes.Scenes.Metamorph;
 import classes.lists.BreastCup;
 import classes.lists.Gender;
-import classes.Stats.BuffableStat;
-import classes.Stats.IStat;
 import classes.display.SpriteDb;
 
 import classes.GeneticMemories.*;
@@ -585,7 +582,6 @@ import coc.view.MainView;
 			//Genetalia
 			player.balls = 2;
 			player.ballSize = 1;
-			player.clitLength = 0;
 			player.createCock();
 			player.cocks[0].cockLength = 5.5;
 			player.cocks[0].cockThickness = 1;

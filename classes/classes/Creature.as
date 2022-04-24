@@ -1174,16 +1174,16 @@ public class Creature extends Utils
 
 		public function get clitLength():Number {
 			if (vaginas.length==0) {
-				throw new Error("[ERROR] get clitLength called with no vaginas present");
-				//return VaginaClass.DEFAULT_CLIT_LENGTH;
+				CoC_Settings.error("get clitLength called with no vaginas present");
+				return VaginaClass.DEFAULT_CLIT_LENGTH;
 			}
 			return vaginas[0].clitLength;
 		}
 
 		public function set clitLength(value:Number):void {
 			if (vaginas.length==0) {
-				throw new Error("[ERROR] set clitLength called with no vaginas present");
-				//return;
+				CoC_Settings.error("set clitLength called with no vaginas present");
+				return;
 			}
 			vaginas[0].clitLength = value;
 		}
@@ -2826,18 +2826,18 @@ public class Creature extends Utils
 			//Various Errors preventing action
 			if (arraySpot < 0 || totalRemoved <= 0)
 			{
-				//trace("ERROR: removeCock called but arraySpot is negative or totalRemoved is 0.");
+				CoC_Settings.error("removeCock called but arraySpot is negative or totalRemoved is 0.");
 				return;
 			}
 			if (cocks.length == 0)
 			{
-				//trace("ERROR: removeCock called but cocks do not exist.");
+				CoC_Settings.error("removeCock called but cocks do not exist.");
 			}
 			else
 			{
 				if (arraySpot > cocks.length - 1)
 				{
-					//trace("ERROR: removeCock failed - array location is beyond the bounds of the array.");
+					CoC_Settings.error("removeCock failed - array location is beyond the bounds of the array.");
 				}
 				else
 				{
@@ -2876,18 +2876,18 @@ public class Creature extends Utils
 			//Various Errors preventing action
 			if (arraySpot < -1 || totalRemoved <= 0)
 			{
-				//trace("ERROR: removeVagina called but arraySpot is negative or totalRemoved is 0.");
+				CoC_Settings.error("removeVagina called but arraySpot is negative or totalRemoved is 0.");
 				return;
 			}
 			if (vaginas.length == 0)
 			{
-				//trace("ERROR: removeVagina called but cocks do not exist.");
+				CoC_Settings.error("removeVagina called but cocks do not exist.");
 			}
 			else
 			{
 				if (arraySpot > vaginas.length - 1)
 				{
-					//trace("ERROR: removeVagina failed - array location is beyond the bounds of the array.");
+					CoC_Settings.error("removeVagina failed - array location is beyond the bounds of the array.");
 				}
 				else
 				{
@@ -2903,22 +2903,22 @@ public class Creature extends Utils
 			//Various Errors preventing action
 			if (arraySpot < -1 || totalRemoved <= 0)
 			{
-				//trace("ERROR: removeBreastRow called but arraySpot is negative or totalRemoved is 0.");
+				CoC_Settings.error("removeBreastRow called but arraySpot is negative or totalRemoved is 0.");
 				return;
 			}
 			if (breastRows.length == 0)
 			{
-				//trace("ERROR: removeBreastRow called but cocks do not exist.");
+				CoC_Settings.error("removeBreastRow called but cocks do not exist.");
 			}
 			else if (breastRows.length == 1 || breastRows.length - totalRemoved < 1)
 			{
-				//trace("ERROR: Removing the current breast row would break the Creature classes assumptions about breastRow contents.");
+				CoC_Settings.error("Removing the current breast row would break the Creature classes assumptions about breastRow contents.");
 			}
 			else
 			{
 				if (arraySpot > breastRows.length - 1)
 				{
-					//trace("ERROR: removeBreastRow failed - array location is beyond the bounds of the array.");
+					CoC_Settings.error("removeBreastRow failed - array location is beyond the bounds of the array.");
 				}
 				else
 				{

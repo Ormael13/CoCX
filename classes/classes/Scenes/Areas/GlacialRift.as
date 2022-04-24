@@ -122,6 +122,7 @@ use namespace CoC;
 						break;
 					}
 					else {
+						sceneHunter.print("Check failed: yeti race, vagina, high femininity");
 						outputText(". A massive hulking creature barrels around the corner and sets its gaze on you, its clawed hands and feet launching its body over the iced caverns with ease as you stare the beast down. The white blur of an ice yeti attacks you!");
 						GlacialRiftConditions();
 						startCombat(new Yeti());

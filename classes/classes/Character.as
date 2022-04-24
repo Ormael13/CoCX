@@ -434,7 +434,7 @@ import classes.CoC;
 			//Various Errors preventing action
 			if (keyItems.length <= 0)
 			{
-				//trace("ERROR: KeyItem could not be removed because player has no key items.");
+				CoC_Settings.error("KeyItem could not be removed because player has no key items.");
 				return;
 			}
 			while (counter > 0)
@@ -455,8 +455,8 @@ import classes.CoC;
 			//Various Errors preventing action
 			if (keyItems.length <= 0)
 			{
+				CoC_Settings.error("Looking for keyitem '" + keyItemName + "' to change value " + statusValueNum + ", and player has no key items.");
 				return;
-					//trace("ERROR: Looking for keyitem '" + statusName + "' to change value " + statusValueNum + ", and player has no key items.");
 			}
 			while (counter > 0)
 			{
@@ -466,7 +466,7 @@ import classes.CoC;
 				{
 					if (statusValueNum < 1 || statusValueNum > 4)
 					{
-						//trace("ERROR: AddKeyValue called with invalid key value number.");
+						CoC_Settings.error("ERROR: AddKeyValue called with invalid key value number.");
 						return;
 					}
 					if (statusValueNum == 1)
@@ -480,7 +480,7 @@ import classes.CoC;
 					return;
 				}
 			}
-			//trace("ERROR: Looking for keyitem '" + statusName + "' to change value " + statusValueNum + ", and player does not have the key item.");
+			CoC_Settings.error("Looking for key item '" + keyItemName + "' to change value " + statusValueNum + ", and player does not have the key item.");
 		}
 
 		public function keyItemv1(keyItemName:String):Number
@@ -489,8 +489,8 @@ import classes.CoC;
 			//Various Errors preventing action
 			if (keyItems.length <= 0)
 			{
+				CoC_Settings.error("ERROR: Looking for keyItem '" + keyItemName + "', and player has no key items.");
 				return 0;
-					//trace("ERROR: Looking for keyItem '" + statusName + "', and player has no key items.");
 			}
 			while (counter > 0)
 			{
@@ -498,7 +498,7 @@ import classes.CoC;
 				if (keyItems[counter].keyName == keyItemName)
 					return keyItems[counter].value1;
 			}
-			//trace("ERROR: Looking for key item '" + statusName + "', but player does not have it.");
+			CoC_Settings.error("Looking for key item '" + keyItemName + "', but player does not have it.");
 			return 0;
 		}
 
@@ -508,8 +508,8 @@ import classes.CoC;
 			//Various Errors preventing action
 			if (keyItems.length <= 0)
 			{
+				CoC_Settings.error("ERROR: Looking for keyItem '" + keyItemName + "', and player has no key items.");
 				return 0;
-					//trace("ERROR: Looking for keyItem '" + statusName + "', and player has no key items.");
 			}
 			while (counter > 0)
 			{
@@ -517,7 +517,7 @@ import classes.CoC;
 				if (keyItems[counter].keyName == keyItemName)
 					return keyItems[counter].value2;
 			}
-			//trace("ERROR: Looking for key item '" + statusName + "', but player does not have it.");
+			CoC_Settings.error("Looking for key item '" + keyItemName + "', but player does not have it.");
 			return 0;
 		}
 
@@ -527,8 +527,8 @@ import classes.CoC;
 			//Various Errors preventing action
 			if (keyItems.length <= 0)
 			{
+				CoC_Settings.error("ERROR: Looking for keyItem '" + keyItemName + "', and player has no key items.");
 				return 0;
-					//trace("ERROR: Looking for keyItem '" + statusName + "', and player has no key items.");
 			}
 			while (counter > 0)
 			{
@@ -536,7 +536,7 @@ import classes.CoC;
 				if (keyItems[counter].keyName == keyItemName)
 					return keyItems[counter].value3;
 			}
-			//trace("ERROR: Looking for key item '" + statusName + "', but player does not have it.");
+			CoC_Settings.error("Looking for key item '" + keyItemName + "', but player does not have it.");
 			return 0;
 		}
 
@@ -546,8 +546,8 @@ import classes.CoC;
 			//Various Errors preventing action
 			if (keyItems.length <= 0)
 			{
+				CoC_Settings.error("ERROR: Looking for keyItem '" + keyItemName + "', and player has no key items.");
 				return 0;
-					//trace("ERROR: Looking for keyItem '" + statusName + "', and player has no key items.");
 			}
 			while (counter > 0)
 			{
@@ -555,7 +555,7 @@ import classes.CoC;
 				if (keyItems[counter].keyName == keyItemName)
 					return keyItems[counter].value4;
 			}
-			//trace("ERROR: Looking for key item '" + statusName + "', but player does not have it.");
+			CoC_Settings.error("Looking for key item '" + keyItemName + "', but player does not have it.");
 			return 0;
 		}
 

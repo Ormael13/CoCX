@@ -16,11 +16,9 @@ import classes.GlobalFlags.*;
 import classes.Items.*;
 import classes.Scenes.Camp.CampScenes;
 import classes.Scenes.Camp.HarvestMoonScenes;
-import classes.Scenes.Camp.HclassHeavenTribulation;
 import classes.Scenes.Camp.UniqueCampScenes;
 import classes.Scenes.Dungeons.DeepCave.ValaScene;
 import classes.Scenes.NPCs.BelisaFollower;
-import classes.Scenes.NPCs.CelessScene;
 import classes.Scenes.NPCs.DivaScene;
 import classes.Scenes.NPCs.DriderTown;
 import classes.Scenes.NPCs.LilyFollower;
@@ -45,7 +43,6 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 		private var campScenes:CampScenes = new CampScenes();
 		private var checkedTurkey:int; //Make sure we test each of these events just once in timeChangeLarge
 		private var checkedDream:int;
-		private var displayedBeeCock:Boolean;
 		private var dreams:Dreams = new Dreams();
 
 		//Implementation of TimeAwareInterface
@@ -1223,13 +1220,13 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			if (player.armor == armors.CTPALAD && !player.isTaur())
 			{
 				outputText("Due to your current body shape you are no longer able to wear the centaur armor and thus you drop the over encumbering equipment back into your inventory");
-				SceneLib.inventory.takeItem(player.setArmor(armors.NOTHING), playerMenu);
+				SceneLib.inventory.takeItem(player.setArmor(ArmorLib.NOTHING), playerMenu);
 				needNext = true;
 			}
 			if (player.armor == armors.KBDRESS && !player.isScylla() && !player.isKraken())
 			{
 				outputText("Due to your current body shape you are no longer able to wear the Kraken black dress and thus you put the over item back into your inventory");
-				SceneLib.inventory.takeItem(player.setArmor(armors.NOTHING), playerMenu);
+				SceneLib.inventory.takeItem(player.setArmor(ArmorLib.NOTHING), playerMenu);
 				needNext = true;
 			}
 

@@ -1,22 +1,14 @@
 package classes.Scenes.Places{
 	import classes.*;
 	import classes.BodyParts.Antennae;
-	import classes.BodyParts.Arms;
-	import classes.BodyParts.Ears;
-	import classes.BodyParts.Eyes;
-	import classes.BodyParts.Face;
-	import classes.BodyParts.Hair;
 	import classes.BodyParts.Horns;
-	import classes.BodyParts.LowerBody;
 	import classes.BodyParts.RearBody;
 	import classes.BodyParts.Skin;
 	import classes.BodyParts.Tail;
-	import classes.BodyParts.Tongue;
 	import classes.BodyParts.Wings;
 	import classes.GlobalFlags.kFLAGS;
-	import classes.Items.Armors.Nothing;
+import classes.Items.ArmorLib;
 	import classes.Scenes.Areas.Forest.WoodElvesHuntingParty;
-	import classes.Scenes.SceneLib;
     import classes.display.SpriteDb;
 import classes.internals.SaveableState;
 	import classes.CoC;
@@ -291,7 +283,7 @@ import classes.internals.SaveableState;
 					"\n\n\"<i>It’s nice to meet you, little sister. My name is Elenwen. Please, join us in the bed and relax.</i>\"\n\n" +
 					"Elenwen has short hair, blond like all of the others, and her eyes are slightly slanted, giving her a slightly piercing gaze that contrasts with her soft, gentle voice. Her hips and breasts are full and womanly, and also exposed - neither she nor her neighbor are wearing a stitch between them." +
 					" Distantly you realize that you aren’t either, though the thought brings no embarrassment with it - after all, you’re all sisters here, right?");
-			if (player.armor != armors.NOTHING) outputText(" Wait, didn’t you have some things with you before? Important things…?");
+			if (player.armor != ArmorLib.NOTHING) outputText(" Wait, didn’t you have some things with you before? Important things…?");
 			outputText("\n\n\"<i>And I'm Alyssa,</i>\" says the elf sitting next to Elenwen, her chiming tone driving away your hesitation again. Her blond hair is done up in adorable braided twintails, accentuating her slender, girlish build, and her eyes are large and filled with gentle curiosity. \"<i>Oh look, Elenwen, her hair is still...</i>\"\n\n" +
 					"With a shock you realize why everyone must have been staring at you! Your hair is "+ player.hairColor +", not blonde like it should be! Your face becomes hot with shame and tears begin to fill your eyes as you realize something is separating you from your sisters. However, Elenwen quickly speaks to you to soothe your worries." +
 					"\n\n\"<i>Don’t worry, little sister! We’ll make it all right. Just let Alyssa and I take care of everything.</i>\" She turns to face her companion. \"<i>Alyssa, you manage her after we’re finished here, okay? I did the last one, after all; it’s only fair.</i>\"\n\n" +
@@ -944,12 +936,15 @@ import classes.internals.SaveableState;
 			doNext(camp.returnToCampUseEightHours);
 		}
 
+		//unused
+		/*
 		//Elenwen is nearly as skilled as Kindra but is very picky on who she teaches to. Better be an elf also her training is slower as she tends to fool around
 		private function bowSkill(diff:Number):Number {
 			player.addStatusValue(StatusEffects.Kelt,1,diff);
 			if (player.statusEffectv1(StatusEffects.Kelt) >= 100) player.changeStatusValue(StatusEffects.Kelt,1,100);//Kelt track basic archery skill that caps on 100 not 150 so not need to thanks me for fixing too high cap on this training ;)
 			return player.statusEffectv1(StatusEffects.Kelt);
 		}
+		*/
 
 		public function Elenwen():void {
 			clearOutput();
@@ -978,7 +973,7 @@ import classes.internals.SaveableState;
 					" She moans in arousal under your sudden turnabout but quickly recovers and pulls away from the kiss." +
 					" \"<i>Oh, playing dominant now are we, [name]? Let’s see how long you can keep that up~♥</i>\"" +
 					"\n\nHer hand drifts down your body as she speaks, sliding ");
-					if (player.armor == armors.NOTHING) outputText("down to your glistening slit");
+					if (player.armor == ArmorLib.NOTHING) outputText("down to your glistening slit");
 					else outputText("under your equipment to your glistening slit");
 			outputText(" to give you a loving stroke, ending in her finger rubbing on your stiff, sensitive button." +
 					" You gasp at the stimulation but manage to retaliate by slipping a hand under her white dress to prod at her lips as well." +
@@ -1049,7 +1044,7 @@ import classes.internals.SaveableState;
 					" She pauses her exercises and wipes her brow before smiling at you and replying. " +
 					"\"<i>Of course, little sis! Let’s dance together!</i>\"");
 			if (WoodElfSpearTraining == QUEST_STAGE_SPEARTRAININGFIRST){
-				if (player.armor == armors.NOTHING) outputText("\n\nShe looks approvingly at your lack of clothing, not with her standard expression of perverted lust but with a serious glance.");
+				if (player.armor == ArmorLib.NOTHING) outputText("\n\nShe looks approvingly at your lack of clothing, not with her standard expression of perverted lust but with a serious glance.");
 				else outputText("\n\nHer first instruction is to strip. Unlike her usual, somewhat perverted expression when she says that, she appears serious.");
 				WoodElfSpearTraining = QUEST_STAGE_SPEARTRAINING0;
 			}
