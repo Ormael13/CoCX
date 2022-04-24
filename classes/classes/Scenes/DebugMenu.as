@@ -498,6 +498,8 @@ public class DebugMenu extends BaseContent
 			weaponArray.push(weaponsrange.LCROSBW);
 			weaponArray.push(weaponsrange.FLINTLK);
 			weaponArray.push(weapons.UGATANA);
+			weaponArray.push(weapons.DDAGGER);
+			weaponArray.push(weapons.D_LANCE);
 
 			//------------
 			// Shields

@@ -70,13 +70,19 @@ public class ChargeArmorSpell extends AbstractWhiteSpell {
 		if (player.hasStatusEffect(StatusEffects.SiegweirdTraining)) spellChargeArmorMultiplier *= 0.5;
 		if (player.hasPerk(PerkLib.EverLastingBuffs)) spellChargeArmorMultiplier *= 2;
 		if (player.hasPerk(PerkLib.EternalyLastingBuffs)) spellChargeArmorMultiplier *= 2;
+		if (player.hasPerk(PerkLib.SelfbuffsProficiencySu)) spellChargeArmorMultiplier *= 2;
 		return spellChargeArmorMultiplier;
 	}
 	
 	override protected function doSpellEffect(display:Boolean = true):void {
 		var ChargeArmorBoostCap:Number = 4;
 		var ChargeArmorBoost:Number = 5;
-		if (player.hasPerk(PerkLib.SelfbuffsProficiency)) ChargeArmorBoostCap += 0.8;
+		if (player.hasPerk(PerkLib.SelfbuffsProficiency)) {
+			var capB:Number = 1.2;
+			if (player.hasPerk(PerkLib.SelfbuffsProficiencyEx)) capB += 0.8;
+			if (player.hasPerk(PerkLib.SelfbuffsProficiencySu)) capB *= 5;
+			ChargeArmorBoostCap *= capB;
+		}
 		ChargeArmorBoostCap *= ChargeArmorBoost;
 		if (player.hasPerk(PerkLib.DivineArmament)) {
 			ChargeArmorBoostCap *= 2;

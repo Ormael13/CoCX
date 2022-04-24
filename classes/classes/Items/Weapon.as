@@ -96,10 +96,12 @@ public class Weapon extends Useable //Equipable
 		override public function canUse():Boolean {
 			if ((perk == "Large" && game.player.shield != ShieldLib.NOTHING && !game.player.hasPerk(PerkLib.GigantGrip)) || (perk == "Massive" && game.player.shield != ShieldLib.NOTHING)) {
 				outputText("Because this weapon requires the use of two hands, you have unequipped your shield. ");
+				SceneLib.inventory.unequipShield();
 				return false;
 			}
-			else if (perk == "Dual Large" || perk == "Dual" || perk == "Dual Small") {
+			else if ((perk == "Dual Large" || perk == "Dual" || perk == "Dual Small") && game.player.shield != ShieldLib.NOTHING) {
 				outputText("Because those weapons requires the use of two hands, you have unequipped your shield. ");
+				SceneLib.inventory.unequipShield();
 				return false;
 			}
 			else if (game.player.hasPerk(PerkLib.Rigidity)) {

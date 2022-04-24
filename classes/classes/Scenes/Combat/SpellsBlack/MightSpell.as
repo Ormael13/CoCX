@@ -25,6 +25,7 @@ public class MightSpell extends AbstractBlackSpell {
 		var spellMightMultiplier:Number = 1;
 		if (player.hasPerk(PerkLib.EverLastingBuffs)) spellMightMultiplier *= 2;
 		if (player.hasPerk(PerkLib.EternalyLastingBuffs)) spellMightMultiplier *= 2;
+		if (player.hasPerk(PerkLib.SelfbuffsProficiencySu)) spellMightMultiplier *= 2;
 		return spellMightMultiplier;
 	}
 	
@@ -57,7 +58,12 @@ public class MightSpell extends AbstractBlackSpell {
 	 */
 	public function calcBoost():Number {
 		var MightBoostCap:Number = 1.5;
-		if (player.hasPerk(PerkLib.SelfbuffsProficiency)) MightBoostCap += 0.3;
+		if (player.hasPerk(PerkLib.SelfbuffsProficiency)) {
+			var capB:Number = 1.2;
+			if (player.hasPerk(PerkLib.SelfbuffsProficiencyEx)) capB += 0.8;
+			if (player.hasPerk(PerkLib.SelfbuffsProficiencySu)) capB *= 5;
+			MightBoostCap *= capB;
+		}
 		MightBoostCap *= player.intStat.core.max;
 		MightBoostCap            = Math.round(MightBoostCap);
 		var MightBoost:Number    = player.intStat.core.value;
@@ -66,13 +72,13 @@ public class MightSpell extends AbstractBlackSpell {
 		if (player.hasPerk(PerkLib.JobEnchanter)) MightBoost *= 1.2;
 		MightBoost *= spellModBlack();
 		if (MightBoost > MightBoostCap) MightBoost = MightBoostCap;
-		return Math.round(MightBoost)
+		return Math.round(MightBoost);
 	}
 	
 	public function calcDuration():Number {
 		var MightDuration:Number = 5;
 		MightDuration += combat.magic.perkRelatedDurationBoosting();
-		return MightDuration
+		return MightDuration;
 	}
 	
 	override protected function doSpellEffect(display:Boolean = true):void {

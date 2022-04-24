@@ -957,6 +957,28 @@ public class Combat extends BaseContent {
 			if (player.hasStatusEffect(StatusEffects.SimplifiedNonPCTurn) && player.statusEffectv1(StatusEffects.SimplifiedNonPCTurn) == 1) player.addStatusValue(StatusEffects.SimplifiedNonPCTurn, 1, -1);
 			if (player.armor == armors.BMARMOR) dynStats("lus", -(Math.round(player.maxLust() * 0.02)));
 			if (player.hasStatusEffect(StatusEffects.TyrantState)) dynStats("lus", (Math.round(player.maxLust() * 0.05)));
+			if (player.hasPerk(PerkLib.SelfbuffsProficiencyEx)) {
+				if (!player.hasPerk(PerkLib.HexKnowledge)) {
+					if (player.hasStatusEffect(StatusEffects.ChargeWeapon) && player.statusEffectv2(StatusEffects.ChargeWeapon) <= 1 && player.mana >= CombatAbilities.ChargeWeapon.manaCost()) {
+						player.removeStatusEffect(StatusEffects.ChargeWeapon);
+						CombatAbilities.ChargeWeapon.autocast();
+					}
+					if (player.hasStatusEffect(StatusEffects.ChargeArmor) && player.statusEffectv2(StatusEffects.ChargeArmor) <= 1 && player.mana >= CombatAbilities.ChargeArmor.manaCost()) {
+						player.removeStatusEffect(StatusEffects.ChargeArmor);
+						CombatAbilities.ChargeArmor.autocast();
+					}
+				}
+				if (!player.hasPerk(PerkLib.DivineKnowledge)) {
+					if (player.buff("Might").isPresent() && player.buff("Might").getRemainingTicks() < 2 && player.mana >= CombatAbilities.Might.manaCost()) {
+						player.buff("Might").remove();
+						CombatAbilities.Might.autocast();
+					}
+					if (player.buff("Blink").isPresent() && player.buff("Blink").getRemainingTicks() < 2 && player.mana >= CombatAbilities.Blink.manaCost()) {
+						player.buff("Blink").remove();
+						CombatAbilities.Blink.autocast();
+					}
+				}
+			}
         }
         mainView.hideMenuButton(MainView.MENU_DATA);
         mainView.hideMenuButton(MainView.MENU_APPEARANCE);
@@ -16073,4 +16095,4 @@ public class Combat extends BaseContent {
         return inteWisLibScale(player.lib, randomize);
     }
 }
-}
+}
