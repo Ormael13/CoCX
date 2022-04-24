@@ -95,16 +95,36 @@ import classes.internals.SaveableState;
 		//WaizAbiStory: 1 - x, 2 - x, 3 - x
 		public function bimboMonkey():void {
 			clearOutput();
-			outputText("\n\n");
+			outputText("\"<i>O Hai there,</i>\" she says looking over you from head to feet and back. \"<i>Mmmmm maybe you could put a good 'fight' or if not then att least good beatdown...</i>\" she trails out licking her lips slowly.\n\n");
+			outputText("Wait what fight she mean? Is that some nonsense that any bimbo here would say or is ther deeper meaning to this?\n\n");
+			outputText("\"<i>I not know. For now until Overgod decide otherwise you gonna be "+player.mf("blue balled","dry")+".</i>\" Her shoulders lowers in resignation.\n\n");
 			menu();
-			addButton(4, "Back", curry(SceneLib.journeyToTheEast.enteringInn, false));
+			//1 - Sex (Koshu appearance here)
+			//2 - Fight (And here)
+			//3 - Drink (but not he.... jk also here appears)
+			addButton(14, "Back", curry(SceneLib.journeyToTheEast.enteringInn, false));
+		}//outputText("\"<i></i>\"\n\n");
+		public function bimboMonkeySex():void {
+			clearOutput();
+			outputText("\"<i></i>\"\n\n");
+			
+		}
+		public function bimboMonkeyFight():void {
+			clearOutput();
+			outputText("\"<i></i>\"\n\n");
+			
+		}
+		public function bimboMonkeyDrink():void {
+			clearOutput();
+			outputText("\"<i></i>\"\n\n");
+			
 		}
 		
 		public function WaizAbiMainMenu():void {
 			
 		}
 		
-		public function c():void {
+		/*public function c():void {
 			
 		}
 		
@@ -114,6 +134,6 @@ import classes.internals.SaveableState;
 		
 		public function a():void {
 			
-		}
+		}*/
 	}
 }

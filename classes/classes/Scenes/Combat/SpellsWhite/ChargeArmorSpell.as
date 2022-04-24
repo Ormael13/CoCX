@@ -1,6 +1,7 @@
 package classes.Scenes.Combat.SpellsWhite {
 import classes.PerkLib;
 import classes.Scenes.Combat.AbstractWhiteSpell;
+import classes.Scenes.Combat.CombatAbilities;
 import classes.StatusEffects;
 
 public class ChargeArmorSpell extends AbstractWhiteSpell {
@@ -36,7 +37,8 @@ public class ChargeArmorSpell extends AbstractWhiteSpell {
 		if (player.hasStatusEffect(StatusEffects.ChargeArmor)) {
 			if (player.statusEffectv2(StatusEffects.ChargeArmor) <= 0) {
 				player.removeStatusEffect(StatusEffects.ChargeArmor);
-				if (display) outputText("<b>Charged Armor effect wore off!</b>\n\n");
+				if (player.hasPerk(PerkLib.SelfbuffsProficiencyEx) && player.mana >= CombatAbilities.ChargeArmor.manaCost()) CombatAbilities.ChargeArmor.autocast();
+				else if (display) outputText("<b>Charged Armor effect wore off!</b>\n\n");
 			} else {
 				if (!player.hasPerk(PerkLib.PureMagic)) player.addStatusValue(StatusEffects.ChargeArmor, 2, -1);
 			}
