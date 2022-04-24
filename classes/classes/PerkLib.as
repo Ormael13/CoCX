@@ -468,14 +468,14 @@ public class PerkLib
 				"Allows you to cast splited offensive spell without increased mana cost when using staff (3 parts at 70% power) or partial staff (2 parts at 80% power) as focus. (Effect will not activate if you already have ways to multicast spells at reduced power)",
 				"You've chosen the 'Offensive Staff Channeling' perk. Allows you to cast splited offensive spell without increased mana cost when using staff (3 parts at 70% power) or partial staff (2 parts at 80% power) as focus. (Effect will not activate if you already have ways to multicast spells at reduced power)");
 		public static const SelfbuffsProficiency:PerkType = mk("Selfbuffs Proficiency", "Selfbuffs Proficiency",
-				"Increase max selfbuff max cap by 20%.",
-				"You've chosen the 'Selfbuffs Proficiency' perk. Increase max selfbuff max cap by 20%.");
+				"Increase max selfbuff max cap by 30%.",
+				"You've chosen the 'Selfbuffs Proficiency' perk. Increase max selfbuff max cap by 30%.");
 		public static const SelfbuffsProficiencyEx:PerkType = mk("Selfbuffs Proficiency (Ex)", "Selfbuffs Proficiency (Ex)",
-				"Increase max selfbuff max cap by 30%(50%).",
-				"You've chosen the 'Selfbuffs Proficiency (Ex)' perk. Increase max selfbuff max cap by 30%(50%).");
+				"Increase max selfbuff max cap by 70%(100%). Enable recasting all active buffs when they're about to expire.",
+				"You've chosen the 'Selfbuffs Proficiency (Ex)' perk. Increase max selfbuff max cap by 70%(100%). Enable recasting all active buffs when they're about to expire.");
 		public static const SelfbuffsProficiencySu:PerkType = mk("Selfbuffs Proficiency (Su)", "Selfbuffs Proficiency (Su)",
-				"Increase max selfbuff max cap by 50%(100%). Enable recasting all active buffs.",
-				"You've chosen the 'Selfbuffs Proficiency (Su)' perk. Increase max selfbuff max cap by 50%(100%). Enable recasting all active buffs.");
+				"Increase max selfbuff max cap five times at the cost of using twice more mana to cast.",
+				"You've chosen the 'Selfbuffs Proficiency (Su)' perk. Increase max selfbuff max cap five times at the cost of using twice more mana to cast.");
 		public static const ElementalConjurerKnowledge:PerkType = mk("Elemental Conjurer Knowledge", "Elemental Conjurer Knowledge",
 				"You gained knowledge how to make elementals rank up process less resource consuming. (-40% needed mana/fatigue and 40% less HP lost during failure)",
 				"You've chosen the 'Elemental Conjurer Knowledge' perk, gaining knowledge on how to make the elemental rank up process less resource consuming. (-40% needed mana/fatigue and 40% less HP lost during failure)");
@@ -5258,13 +5258,7 @@ public class PerkLib
                     .requireLevel(24);
             SelfbuffsProficiency.requirePerk(JobEnchanter)
                     .requireInt(120)
-                    .requireLevel(24);/*
-            SelfbuffsProficiencyEx.requirePerks(SelfbuffsProficiency, LongerLastingBuffsI)
-                    .requireInt(170)
-                    .requireLevel(36);
-            SelfbuffsProficiencySu.requirePerks(SelfbuffsProficiencyEx, EverLastingBuffs)
-                    .requireInt(220)
-                    .requireLevel(48);*/
+                    .requireLevel(24);
             //Tier 5 Intelligence perks
             GrandArchmage2ndCircle.requirePerk(GrandArchmage)
                     .requireInt(150)
@@ -5329,6 +5323,9 @@ public class PerkLib
             GreyArchmage.requirePerk(GreyMage)
                     .requireInt(175)
                     .requireLevel(36);
+            SelfbuffsProficiencyEx.requirePerks(SelfbuffsProficiency, LongerLastingBuffsI)
+                    .requireInt(170)
+                    .requireLevel(36);
             //Tier 7 Intelligence perks
 			HalfStepToPeerlessSpirituality.requireWis(160)
                     .requireInt(240)
@@ -5344,6 +5341,9 @@ public class PerkLib
                     .requireLevel(48);
             GrandGreyArchmage.requirePerk(GreyArchmage)
                     .requireInt(225)
+                    .requireLevel(48);
+            SelfbuffsProficiencySu.requirePerks(SelfbuffsProficiencyEx, EverLastingBuffs)
+                    .requireInt(220)
                     .requireLevel(48);
             //Tier 9 Intelligence perks
         /*	PrestigeJobSeer.requirePrestigeJobSlot()

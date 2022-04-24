@@ -28,7 +28,7 @@ public class ChargeWeaponSpell extends AbstractWhiteSpell {
 	}
 	
 	override public function manaCost():Number {
-		return super.manaCost() * costMultiplier()
+		return super.manaCost() * costMultiplier();
 	}
 	
 	override public function advance(display:Boolean):void {
@@ -79,13 +79,19 @@ public class ChargeWeaponSpell extends AbstractWhiteSpell {
 		if (player.hasStatusEffect(StatusEffects.SiegweirdTraining)) spellChargeWeaponMultiplier *= 0.5;
 		if (player.hasPerk(PerkLib.EverLastingBuffs)) spellChargeWeaponMultiplier *= 2;
 		if (player.hasPerk(PerkLib.EternalyLastingBuffs)) spellChargeWeaponMultiplier *= 2;
+		if (player.hasPerk(PerkLib.SelfbuffsProficiencySu)) spellChargeWeaponMultiplier *= 2;
 		return spellChargeWeaponMultiplier;
 	}
 	
 	override protected function doSpellEffect(output:Boolean = true):void {
 		var ChargeWeaponBoostCap:Number = 4;
 		var ChargeWeaponBoost:Number = 5;
-		if (player.hasPerk(PerkLib.SelfbuffsProficiency)) ChargeWeaponBoostCap += 0.8;
+		if (player.hasPerk(PerkLib.SelfbuffsProficiency)) {
+			var capB:Number = 1.2;
+			if (player.hasPerk(PerkLib.SelfbuffsProficiencyEx)) capB += 0.8;
+			if (player.hasPerk(PerkLib.SelfbuffsProficiencySu)) capB *= 5;
+			ChargeWeaponBoostCap *= capB;
+		}
 		ChargeWeaponBoostCap *= ChargeWeaponBoost;
 		if (player.hasPerk(PerkLib.DivineArmament)) {
 			ChargeWeaponBoostCap *= 2;
