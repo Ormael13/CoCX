@@ -743,7 +743,7 @@ use namespace CoC;
 			if (player.hasPerk(PerkLib.StrongBack)) slots++;
 			if (player.hasPerk(PerkLib.StrongBack2)) slots++;
 			if (player.hasPerk(PerkLib.StrongBack3)) slots++;
-			if (player.hasKeyItem("Backpack")) slots += player.keyItemv1("Backpack");
+			if (player.hasKeyItem("Backpack") >= 0) slots += player.keyItemv1("Backpack");
 			//Constrain slots to between 5 and 20.
 			if (slots < 5) slots = 5;
 			if (slots > 20) slots = 20;
