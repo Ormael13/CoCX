@@ -309,7 +309,7 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
             return btnSet;
         }
         private function USSGobMech():Array{
-            var btnSet:Array = [player.keyItemv1("Cum Reservoir")?"Cum Reservoir":"Fill the reservoir"];
+            var btnSet:Array = [player.hasKeyItem("Cum Reservoir") >= 0 && player.keyItemv1("Cum Reservoir")?"Cum Reservoir":"Fill the reservoir"];
             if (player.isInGoblinMech() && player.hasKeyItem("Cum Reservoir") >= 0 && monster.hasCock()) {
                 if (player.keyItemv1("Cum Reservoir") == 4) btnSet.push(false, "Reservoir is already full. You need to use all this stored cum before you harvest new one.");
                 else btnSet.push(gobomechFillTheReservoir, "");
