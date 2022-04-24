@@ -34,6 +34,7 @@ package classes.Scenes.Areas.Forest
 			if (hpVictory) {
 				outputText("Akbal falls to the ground in a beaten bloody heap...");
 				sceneHunter.print("You wonder how would he look if he was aroused enough...");
+				cleanupAfterCombat();
 			}
 			else {//[Victory via Lust]
 				outputText("Akbal falls to the ground, unable to go on. Yet a growl still rumbles in his chest, and you quickly recognize the submissive gesture when he bows his head, his cat belly hugging the ground.  His body begins shifting, and soon he has a vaguely humanoid form. You assume this is the form he uses for sex, as his lust is out of control.\n\n");
