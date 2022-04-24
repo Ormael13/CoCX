@@ -768,7 +768,7 @@ use namespace CoC;
 		//Clear storage slots
 		public function clearStorage():void {
 			//Various Errors preventing action
-			if (itemStorage == null) trace("ERROR: Cannot clear storage because storage does not exist.");
+			if (itemStorage == null) CoC_Settings.error("Cannot clear storage because storage does not exist.");
 			else {
 				trace("Attempted to remove " + itemStorage.length + " storage slots.");
 				itemStorage.splice(0, itemStorage.length);
@@ -777,7 +777,7 @@ use namespace CoC;
 
 		public function clearGearStorage():void {
 			//Various Errors preventing action
-			if (gearStorage == null) trace("ERROR: Cannot clear storage because storage does not exist.");
+			if (gearStorage == null) CoC_Settings.error("Cannot clear storage because storage does not exist.");
 			else {
 				trace("Attempted to remove " + gearStorage.length + " storage slots.");
 				gearStorage.splice(0, gearStorage.length);
@@ -786,7 +786,7 @@ use namespace CoC;
 
 		public function clearPearlStorage():void {
 			//Various Errors preventing action
-			if (pearlStorage == null) trace("ERROR: Cannot clear storage because storage does not exist.");
+			if (pearlStorage == null) CoC_Settings.error("Cannot clear storage because storage does not exist.");
 			else {
 				trace("Attempted to remove " + pearlStorage.length + " storage slots.");
 				pearlStorage.splice(0, pearlStorage.length);
@@ -795,7 +795,7 @@ use namespace CoC;
 
 		public function initializeGearStorage():void {
 			//Completely empty storage array
-			if (gearStorage == null) trace("ERROR: Cannot clear gearStorage because storage does not exist.");
+			if (gearStorage == null) CoC_Settings.error("Cannot clear gearStorage because storage does not exist.");
 			else {
 				trace("Attempted to remove " + gearStorage.length + " gearStorage slots.");
 				gearStorage.splice(0, gearStorage.length);
@@ -810,7 +810,7 @@ use namespace CoC;
 
 		public function initializePearlStorage():void {
 			//Completely empty storage array
-			if (pearlStorage == null) trace("ERROR: Cannot clear pearlStorage because storage does not exist.");
+			if (pearlStorage == null) CoC_Settings.error("Cannot clear pearlStorage because storage does not exist.");
 			else {
 				trace("Attempted to remove " + pearlStorage.length + " pearlStorage slots.");
 				pearlStorage.splice(0, pearlStorage.length);

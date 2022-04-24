@@ -2398,7 +2398,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			}
 
 			if (ptype == null) {
-				trace("ERROR: Unknown perk id=" + id);
+				CoC_Settings.error("Unknown perk id=" + id);
 				//(saveFile.data.perks as Array).splice(i,1);
 				// NEVER EVER EVER MODIFY DATA IN THE SAVE FILE LIKE THIS. EVER. FOR ANY REASON.
 			} else {

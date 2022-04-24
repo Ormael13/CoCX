@@ -2,6 +2,7 @@
  * Coded by aimozg on 28.07.2017.
  */
 package coc.view.charview {
+import classes.CoC_Settings;
 import classes.internals.Utils;
 
 import coc.view.Color;
@@ -51,7 +52,7 @@ public class KeyColor {
 					hsl.l += values[0];
 					break;
 				default:
-					trace("Error: invalid color transform '" + tf + "'");
+					CoC_Settings.error("invalid color transform '" + tf + "'");
 					break;
 			}
 			hsl.h = hsl.h % 360;

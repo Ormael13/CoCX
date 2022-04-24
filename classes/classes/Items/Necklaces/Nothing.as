@@ -8,7 +8,7 @@ package classes.Items.Necklaces
 	{
 		public function Nothing()
 		{
-			super("nojewel", "nojewel", "nothing", "nothing", 0, 0, 0, "no jewelry", "necklace");
+			super("noneckjewel", "noneckjewel", "nothing", "nothing", 0, 0, 0, "no jewelry", "necklace");
 		}
 		
 		override public function playerRemove():Necklace {
