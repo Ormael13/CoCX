@@ -6660,9 +6660,10 @@ public function rebirthFromBadEnd():void {
         outputText("You close your eyes, remembering all this life put you through. All your fights, friends... lovers.\n\n");
         outputText("Though many things are still repeatable, you still remember some unique events of your life, and one question bothers you - what would happen if you were different at the moment? How would you and your companions look and behave right now?\n");
 		outputText("Falling asleep, you think about it, recalling the exact time and place...\n\n");
-		outputText("<i>I ask thee, eternal time...</i>\n");
-		outputText("\n\nThis part is WIP. You can add more scenes.");
-		outputText("\nThe idea behind is to try unique scenes with different ways or options or body parts.");
+		outputText("\n\n<b>This part is WIP, and will be updated with SceneHunter.</b>");
+		outputText("\n<i>All scenes listed here are unique one-timers that contained multiple choices or different variations for player's - or even followers' - race or body parts. When recalling, your <b>current</b> body and game state is used, so you can try to explore more options for yourself!");
+		outputText("\nOf course, you need to unlock the scene in the game first. The hints are provided above the buttons.");
+		outputText("\nIt's recommended to enable SceneHunter 'Print Checks' feature to keep track of all hidden checks during these scenes.</i>");
         recalling = true; //Setting the flag to disable everything but text
         menu();
         //Marble scene
@@ -6702,15 +6703,17 @@ public function rebirthFromBadEnd():void {
 		//Nightmare
 		if (celessScene.questFinishedNightmare)
 			addButton(7, "Nightmare", SceneLib.forest.nightmareScene.nightmareVictory).hint("Please check that no transformations are applied after the scene -- SH.");
-		else addButtonDisabled(7, "Nm.", "Requires being impregnated by a certain corrupted centauress?")
+		else addButtonDisabled(7, "Nm.", "Unlocked after you are impregnated by a certain corrupted centauress.");
 		//bruh
 		addButtonDisabled(13, "BadEnds", "SH is too lazy to add them");
         addButton(14, "Wake Up", recallWakeUp);
     }
 
     public function recallWakeUp():void {
+		clearOutput();
+		outputText("You wake up from your dreams, satisfied. Well, this was a fun ride. But you still a lot ahead, so daydreaming is not the best way to waste your time. So... time to experience a few fresh adventures, so you'll have more to recall later?");
         recalling = false; //EVERY recall scene must return here to clear the flag.
-        campSpendTimeActions();
+        doNext(returnToCampUseOneHour);
     }
 
 	/*
