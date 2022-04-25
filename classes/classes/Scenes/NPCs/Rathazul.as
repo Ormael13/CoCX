@@ -1,7 +1,6 @@
 ﻿package classes.Scenes.NPCs{
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
-import classes.Scenes.NPCs.BelisaFollower;
 import classes.display.SpriteDb;
 
 public class Rathazul extends NPCAwareContent implements TimeAwareInterface {
@@ -173,14 +172,13 @@ private function rathazulWorkOffer():Boolean {
 	spriteSelect(SpriteDb.s_rathazul);
 	var totalOffers:int = 0;
 	var spoken:Boolean = false;
-	var purify:Boolean = false;
 	var debimbo:Boolean = false;
 	var lethiciteDefense:Function = null;
 	if (flags[kFLAGS.MINERVA_PURIFICATION_RATHAZUL_TALKED] == 1 && flags[kFLAGS.MINERVA_PURIFICATION_PROGRESS] < 10) {
 		purificationByRathazulBegin();
 		return true;
 	}
-	if (BelisaFollower.BelisaQuestOn && BelisaFollower.BelisaRalthTalked == false) {
+	if (BelisaFollower.BelisaQuestOn && !BelisaFollower.BelisaRalthTalked) {
 		BelisaRalthazulTalk();
 		return true;
 	}
@@ -192,27 +190,22 @@ private function rathazulWorkOffer():Boolean {
 	var pCounter:int = 0;
 	//Item purification offer
 	if(player.hasItem(consumables.INCUBID)) {
-		purify = true;
 		totalOffers++;
 		pCounter++;
 	}
 	if(player.hasItem(consumables.SUCMILK)) {
-		purify = true;
 		totalOffers++;
 		pCounter++;
 	}
 	if(player.hasItem(consumables.SDELITE)) {
-		purify = true;
 		totalOffers++;
 		pCounter++;
 	}
 	if(player.hasItem(consumables.LABOVA_)) {
-		purify = true;
 		totalOffers++;
 		pCounter++;
 	}
 	if(player.hasItem(consumables.MINOCUM)) {
-		purify = true;
 		totalOffers++;
 		pCounter++;
 	}
@@ -221,7 +214,6 @@ private function rathazulWorkOffer():Boolean {
 			outputText("The rat mentions, \"<i>I see you have at least one tainted item on you... for 20 gems I could remove most of the taint, making it a good deal safer to use.  Of course, who knows what kind of freakish transformations it would cause...</i>\"\n\n");
 		else
 			outputText("The rat mentions, \"<i>I see you have a number of demonic items on your person.  For 20 gems I could attempt to remove the taint from one of them, rendering it a good deal safer for consumption.  Of course it would not remove most of the transformative properties of the item...</i>\"\n\n");
-		purify = true;
 		spoken = true;
 		totalOffers += pCounter;
 	}
