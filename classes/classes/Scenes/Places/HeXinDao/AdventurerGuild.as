@@ -296,7 +296,7 @@ package classes.Scenes.Places.HeXinDao
 				menu();
 				addButton(0, "Quest", BoardkeeperYangQuest);
 				addButton(1, "Talk", BoardkeeperYangTalk);
-				if (player.keyItemv1("Adventurer Guild: Copper plate") > 1)
+				if (player.hasKeyItem("Adventurer Guild: Copper plate") >= 0)
                     addButton(2, "Promotion", BoardkeeperYangPromotion).hint("Ask Yang for a promotion once you have completed enough jobs.");
                 else if (player.hasKeyItem("Adventurer Guild: Iron plate") >= 0)
                     addButtonDisabled(2, "Promotion", "Max level (NYI)");
