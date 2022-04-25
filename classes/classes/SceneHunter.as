@@ -2,12 +2,17 @@ package classes {
 import classes.GlobalFlags.kFLAGS;
 
 public class SceneHunter extends BaseContent {
+    public function get progress():String {
+        return "<i>Selectors, menus and checks are currently added to: Holidays, Beach, BlightRidge, Desert, Forest, GlacialRift encounters (not including some unique NPCs and dungeons yet).</i>";
+    }
+
     public function settingsPage():void {
         clearOutput();
         menu();
 		displayHeader("SceneHunter Settings - WIP");
         outputText("The following are QoL improvements meant to make some scenes (and their variations) easier to access.");
         outputText("\nAll these features blend into the game (almost) seamlessly, are lore-accurate and don't change anything gameplay-related.");
+        outputText("\n\n" + progress);
 
         addButton(0, "UniHerms", toggle, kFLAGS.SCENEHUNTER_UNI_HERMS);
         outputText("\n\n<b>Universal Herms:</b> ");
