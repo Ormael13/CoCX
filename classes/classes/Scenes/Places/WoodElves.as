@@ -220,7 +220,7 @@ import classes.internals.SaveableState;
 			player.sexReward("vaginalFluids", "Vaginal");
 			CoC.instance.transformations.EarsElven.applyEffect(false);
 			CoC.instance.transformations.FaceElf.applyEffect(false);
-			CoC.instance.transformations.FaceElf.applyEffect(false);
+			CoC.instance.transformations.EyesElf.applyEffect(false);
 			CoC.instance.transformations.TongueElf.applyEffect(false);
 			CoC.instance.transformations.ArmsElf.applyEffect(false);
 			CoC.instance.transformations.LowerBodyElf.applyEffect(false);
