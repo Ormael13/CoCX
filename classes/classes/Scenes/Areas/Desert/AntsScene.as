@@ -902,7 +902,7 @@ import classes.display.SpriteDb;
 		private function waifuQuestOver():void
 		{
 			if (recalling) {
-				camp.recallScenes();
+				camp.recallWakeUp();
 				return;
 			}
 			clearOutput();

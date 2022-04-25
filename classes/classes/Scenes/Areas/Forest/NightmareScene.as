@@ -187,12 +187,8 @@ public class NightmareScene extends BaseContent
 					if (player.thickness < 70) player.thickness = 70;
 					if (player.tone > 30) player.tone = 30;
 					player.fertility += 10;
-					player.createPerk(PerkLib.BicornBlessing, 0, 0, 0, 0);
-					player.cor = 100;
-					player.sexReward("cum", "Vaginal");
-					player.knockUpForce(PregnancyStore.PREGNANCY_CELESS, PregnancyStore.INCUBATION_CELESS);
-					player.addStatusValue(StatusEffects.CanMeetNightmare, 1, 1);
 					CelessScene.instance.nightmareDefeated();
+					return;
 				}
 			}
 			else if (player.blockingBodyTransformations() && player.hasVagina()){
@@ -225,13 +221,9 @@ public class NightmareScene extends BaseContent
 				else {
 					outputText("You wake up your alone in the clearing. Seems everyone left while you were sleeping. You feel horribly aroused by your defiled body and all the more by the powerful black magic you are permeated with. Somehow the centauress permanently desecrated your body with her energy, and you can feel this \"blessing\" resonating with your newfound corruption.\n\n");
 					if (!recalling) {
-						player.createPerk(PerkLib.BicornBlessing, 0, 0, 0, 0);
-						player.cor = 100;
-						player.sexReward("cum", "Vaginal");
-						player.knockUpForce(PregnancyStore.PREGNANCY_CELESS, PregnancyStore.INCUBATION_CELESS);
-						player.addStatusValue(StatusEffects.CanMeetNightmare, 1, 1);
 						CelessScene.instance.nightmareDefeated();
 						player.sexReward("cum", "Vaginal");
+						return;
 					}
 				}
 			}
@@ -245,11 +237,12 @@ public class NightmareScene extends BaseContent
 					player.sexReward("cum", "Oral");
 					player.sexReward("cum", "Anal");
 					doNext(camp.returnToCampUseFourHours);
+					return;
 				}
 			}
 			//should be reached ONLY with recall
 			if (!recalling) throw new Error("Bruh, SH messed up the returns. Report this pls.");
-			camp.recallWakeUp();
+			doNext(camp.recallWakeUp);
 		}
 	}
 }
