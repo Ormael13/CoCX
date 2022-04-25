@@ -265,7 +265,7 @@ package classes.Scenes
 			outputText("-Lactoblasters got bit diff msg in combat for enemy reaction to lust inducing effect of the weapon. Also atk scaling for super high milk productions been... adjusted.\n");
 			outputText("-New tier 6 intelligence lvl-up perk: Selfbuffs Proficiency (Ex). Req. Selfbuffs Proficiency & Long(er) Lasting Buffs I perks, 170+ int. Effect: Increase max selfbuff max cap by 70%(100%). Enable recasting all active buffs when they're about to expire.\n");
 			outputText("-New tier 8 intelligence lvl-up perk: Selfbuffs Proficiency (Su). Req. Selfbuffs Proficiency (Ex) & (Ever)Lasting Buffs perks, 220+ int. Effect: Increase max selfbuff max cap five times at the cost of using twice more mana to cast.\n");
-			outputText("-\n");
+			outputText("-Minotaur Sons can be moved to Soul Sense now after meeting them 3 times.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

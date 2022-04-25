@@ -477,7 +477,7 @@ import classes.display.SpriteDb;
 				addButton(2, "Fuck", LilyBondageCabinFuck);
 			}
 			//if (player.hasKeyItem("Deluxe Dildo") >= 0 && player.hasVagina()) addButton(3, "Dildo", LilyBondageCabinDildo);
-			//addButton(4, "Tease", LilyBondageCabinTease);
+			addButton(4, "Tease", LilyBondageCabinTease);
 		}
 		
 		public function LilyBondageCabinWait():void {
@@ -494,7 +494,7 @@ import classes.display.SpriteDb;
 				addButton(2, "Fuck", LilyBondageCabinFuck);
 			}
 			//if (player.hasKeyItem("Deluxe Dildo") >= 0 && player.hasVagina()) addButton(3, "Dildo", LilyBondageCabinDildo);
-			//addButton(4, "Tease", LilyBondageCabinTease);
+			addButton(4, "Tease", LilyBondageCabinTease);
 		}
 		
 		public function LilyBondageCabinAssDangle():void {
@@ -523,7 +523,8 @@ import classes.display.SpriteDb;
 			outputText("<i></i>\n\n");
 			outputText("<i></i>\n\n");
 			outputText("<i></i>\n\n");
-			
+			player.sexReward("vaginalFluids","Pussy");
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		public function LilyBondageCabinFuck():void {
@@ -544,10 +545,26 @@ import classes.display.SpriteDb;
 		
 		public function LilyBondageCabinTease():void {
 			clearOutput();
-			outputText("<i></i>\n\n");
-			outputText("<i></i>\n\n");
-			outputText("<i></i>\n\n");
-			
+			outputText("You grin, an idea forming in your head. You run your hands along her womanly back, her black hair. Lily pulls at her bindings, but you slap her thorax, right next to her silk-hole. You tell Lily to make more silk, and are rewarded with a spurt of crude strands. You slap her again, getting more silk, and you grin, wrapping several strands around each of your Drider-pet’s legs, twisting the strands together, then tossing the rope over one of the cabin’s support beams. You come back around to her front, still holding your improvised ropes. Lily tilts her head, slightly confused.\n\n");
+			outputText("<i>“Mmph?”</i> Still gagged, she can’t ask. You grin devilishly, pulling on the ropes. Lily cries out as you pull on the rope, lifting your Drider-toy an inch or so off the ground. <i>“Mmph?! Mmph!”</i> Lily begins to kick a bit, but you can tell that the Drider’s more curious than apprehensive. You keep pulling until the Drider is a few feet off the ground, dangling from your cabin’s support beams by her many legs. You watch for a few seconds, content with your work, as she flails. Eventually, Lily gets used to her current situation, and you see her dripping pussy begin to leak more, swollen with her arousal.\n\n");
+			outputText("You take a single finger, and you begin to slowly rub the very edges of Lily’s lips. Barely touching her, you run your finger along her lips, slowly, teasingly tracing your way towards her gash. Lily lets a muffled groan, thrusting her hips forward, but you saw it coming, and you pull your fingers back. You tut, telling Lily that she needs to learn some restraint. Lily moans weakly, and you order her to stay still, or she won’t get any.\n\n");
+			outputText("You go back to her pussy lips, and go back to your slow, winding laps. At first, Lily’s breathing levels, and she groans occasionally when you brush her button…but as you sink a finger in, one knuckle deep, you pull it out right away. Your Drider-toy moans, shaking, and you slap her lower breast. She gasps at the sudden pain, and you look up, seeing hope in her eyes…\n\n");
+			outputText("You bring two fingers to her lips, and start the slow circles again. No penetration, no release…Just slow rubs. Lily moans, her legs shaking, but she’s held up by the ropes, unable to flee, or touch herself. She strains, her front legs reaching towards her slick pussy.\n\n");
+			outputText("<i>“MMMmmMMPH!”</i> Lily strains, and you stop your finger, reaching her nub. You flick her clit with one finger, and with your free hand, you reach up, palming one of Lily’s breasts, just beside her piercing.\n\n");
+			outputText("<i>“Shhh…”</i> You whisper, bringing your mouth to your toy’s ear. Slowly, you resume your slow, steady strokes, but you grin, whispering sweet nothings into your toy’s ear, scraping your teeth along her neck. Her breathing speeds up, and you flick her clit again. Lily bites her lip, a bare whisper of a moan escaping her mouth. You tut, pulling her pierced nipple.\n\n");
+			outputText("<i>“Mmm…”</i> Lily’s shaking intensifies, and as you sink a finger in, two knuckles deep this time, Lily shudders, a full-body spasm that shakes her on the ropes. A trickle of sticky, clear fluid flows past your fingertips, and you chuckle, taking her leavings on your hand. You wave it under her nose, and when she leans forward, smelling it, you wipe it off in your fucktoy’s hair.\n\n");
+			outputText("As Lily regains her balance, you step in, wrapping one hand around her waist, resting your palm on her luscious ass. Making a firm chop with your other hand, you begin rubbing your fucktoy’s lips, up and down her gash, ignoring the lubricant dripping down your fingers and pooling on the ground below. She begins to move her hips with your hand, trying to get penetration…but you grin, sliding a finger down the crack of her ass. Realizing what’s about to happen, Lily clenches, but you slide your finger in all the same.\n\n");
+			outputText("Now, you work with both her holes, occasionally pulling her chain with your teeth. When she clenches, asshole trying to milk your finger, you stop, getting a frustrated groan from Lily each time. You bring her just to the edge of cumming, only to stop. Each time, her cries of frustration get louder.\n\n");
+			outputText("Finally, after three times, you turn your hand, and begin to sink five fingers into Lily’s drooling snatch. She gasps, frustrated moans giving way to a higher-pitched whine. She knows what you’re doing, but is helpless to stop you. Another time, her pussy clenches, and you stop, her walls trying to milk your fingers. Her pussy lips are swollen, and she’s started to struggle with the silk ropes. Once more, and Lily begins to cry, moaning into her gag as she wordlessly begs, eyes wet, pleading for her release.\n\n");
+			outputText("You remove your finger from her ass, sliding off the gag. You finger her dripping cunt with one finger, asking her if she wants to cum.\n\n");
+			outputText("<i>“Y-y-y-yes!”</i> Lily’s legs flail, and she thrusts her hips. <i>“I-I-I-I w-want…”</i> You bring two fingers in, rubbing her clit with the same slow speed. You ask her again what she wants.\n\n");
+			outputText("<i>“I WANT TO CUM!”</i> She wails. <i>“Please, let me cum!”</i> You tut. Not what you were looking for. <i>“"+ player.mf("Master", "Mistress") +" please…I-I-I want to c-cum! Make me…Take me!”</i> Almost sobbing, Lily’s swollen cunt is shaking, the spider bitch is so <i>close</i>.\n\n");
+			outputText("Finally, you decide to humor your little toy. Reaching in, pulling her head roughly, you french Lily, sinking four fingers into her sopping cunt. You bend her human-half back, tweaking her clit and pinning her upper body against her Spider-half. Wailing, screaming, her legs rip the silok in two places, sending her bobbing crazily. You feel something warm and wet slam into your [leg], and as you look down, you realize that Lily’s still cumming, spraying her arousal all over the cabin. Your hand is almost forcibly ejected from her cunt, each finger liberally covered in her femspunk.\n\n");
+			outputText("Finally sated, Lily’s eyes roll back into her head, and she falls limp, still dangling from her silken ropes. You wipe your hand off in her hair, closing the door and heading back to camp.\n\n");
+			lilySubmissiveness(15);
+			lilyAffection(5);
+			player.sexReward("vaginalFluids");
+			doNext(camp.returnToCampUseOneHour);
 		}
 		
 		public function Lily3Somes():void {

@@ -14,6 +14,7 @@ import classes.Scenes.Areas.Forest.TamaniScene;
 import classes.Scenes.Areas.Forest.TentacleBeastRaging;
 import classes.Scenes.Areas.Forest.WorldTree;
 import classes.Scenes.Areas.HighMountains.IzumiScene;
+import classes.Scenes.Areas.HighMountains.MinotaurMobScene;
 import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.Dungeons.D3.SuccubusGardener;
 import classes.Scenes.Dungeons.RiverDungeon.QuatroElementalBoss;
@@ -50,6 +51,7 @@ public class Soulforce extends BaseContent
 	public var tamaniScene:TamaniScene = new TamaniScene();
 	public var izumiScenes:IzumiScene = new IzumiScene();
 	public var worldtreeScene:WorldTree = new WorldTree();
+	public var minotaurSonsScene:MinotaurMobScene = new MinotaurMobScene();
 
 	public function accessSoulforceMenu():void {
 		clearOutput();
@@ -4271,7 +4273,14 @@ public class Soulforce extends BaseContent
 		//next page button?
 		if (flags[kFLAGS.SOUL_SENSE_PRISCILLA] >= 3) addButton(5, "Priscilla", PriscillaEnc).hint("Req. 320+ soulforce");
 		else addButtonDisabled(5, "Priscilla", "");
-		addButtonDisabled(6, "Mino Sons", "");
+		if (flags[kFLAGS.SOUL_SENSE_MINOTAUR_SONS] >= 3) {
+			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] >= 3) {
+				if (player.hasVagina()) addButton(6, "Mino Sons", MinotaurSonsEnc).hint("Req. at least 260+ soulforce (more sons will increase needed SF)");
+				else addButtonDisabled(6, "Mino Sons", "Req. to have vagina.");
+			}
+			else addButtonDisabled(6, "Mino Sons", "Req. to have 3+ (still alive) minotaur sons.");
+		}
+		else addButtonDisabled(6, "Mino Sons", "");
 		//button 7 - Sheila (non demon ver) find
 		//button 8 - ?Behemoth find?
 		//previous page button?
@@ -4338,7 +4347,17 @@ public class Soulforce extends BaseContent
 			doNext(SoulSense);
 		}
 	}
-	//button 6
+	public function MinotaurSonsEnc():void {
+		if (player.soulforce >= 10 * (26 + Math.round((flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3)/2))) {
+			player.soulforce -= 10 * (26 + Math.round((flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3)/2));
+			statScreenRefresh();
+			minotaurSonsScene.meetMinotaurSons();
+		}
+		else {
+			outputText("\n\nYour current soulforce is too low.");
+			doNext(SoulSense);
+		}
+	}
 	//button 7
 	//button 8
 	public function findWorldTree():void {
