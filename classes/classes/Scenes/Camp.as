@@ -6045,9 +6045,15 @@ public function rebirthFromBadEnd():void {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.004;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.005) {
-				if (player.hasPerk(PerkLib.BlessingOfTheAncestorTree) && !transformations.EyesElf.isPresent()) {
-					outputText("\n\nThe elves couldn't even transform you properly! Fen'Harel blesses you with a pair of proper elven eyes. Now you're also gloomy most of the time as a side effect.")
-					transformations.EyesElf.applyEffect(false);
+				if (player.hasPerk(PerkLib.BlessingOfTheAncestorTree)) {
+					if (!transformations.EyesElf.isPresent()) {
+						outputText("\n\nThe elves couldn't even transform you properly! Fen'Harel blesses you with a pair of proper elven eyes. Now you're also gloomy most of the time as a side effect.")
+						transformations.EyesElf.applyEffect(false);
+					}
+					if (player.skin.base.adj != "flawless") {
+						outputText("\n\nYour flawless elves skin was not so flawless! But now it is.");
+						player.skin.base.adj = "flawless";
+					}
 				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.005;
 			}

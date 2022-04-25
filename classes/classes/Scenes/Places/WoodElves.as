@@ -232,8 +232,8 @@ import classes.internals.SaveableState;
 				CoC.instance.transformations.SkinPatternNone.applyEffect(false);
 			}
 			player.skin.base.color = "light";
-			player.skinAdj = "flawless";
 			player.skinType = Skin.PLAIN;
+			player.skin.base.adj = "flawless";
 			player.tone = 0;
 			player.thickness = 20;
 			player.femininity = 80;
