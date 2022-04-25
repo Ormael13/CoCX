@@ -227,7 +227,6 @@ package classes.Scenes
 			outputText("-Decreased Urta's passive affection loss. Increased Urta's 'hours since last cum' gains, fixed improper 'days without cum' counting for inflation BJ scene. Added talk options after most BJs for Urta, so you won't leave immediately after pleasing her. (Svalkash)\n");
 			outputText("-Minor Vapula fixes, new cock-finding function. Added chastity belt scene to sex menu (which was clearly intended from the beginning). (Svalkash)\n");
 			outputText("-Made Ted less annoying by disabling him after acquiring the talisman. (Svalkash) ((actualy i made another change that makes him disabled/stop appearing after he is beaten once more after dropping jade talisman (Ormael)))\n");
-			outputText("-USS optimization. Moved USS to SceneLib - please don't create MORE instances of it in every class. (Svalkash)\n");
 			outputText("-Reworked some sex menus to provide better choices and greyed out buttons-hints for unavailable scenes. (Svalkash)\n");
 			outputText("-SceneHunter (new settings page) added to make more scenes available and notify the player of hidden checks the game does." + sceneHunter.progress + " (Svalkash)\n");
 			outputText("-Implemented 3 new scenes for regular imp. Implemented tentacle cock branch for centaur fuck (also imp).\n");
