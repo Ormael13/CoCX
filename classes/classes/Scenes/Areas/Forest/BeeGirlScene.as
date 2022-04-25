@@ -72,7 +72,7 @@ public class BeeGirlScene extends BaseContent
 		private function beeEncounterSelect(clearScreen:Boolean = true):void {
 			if (clearScreen) clearOutput();
 			spriteSelect(SpriteDb.s_bee_girl);
-			outputText("That's when she comes into view.  A great woman, yellow and black, a Bee-like handmaiden would be the best comparison.  She sits atop a great flower while humming her tune, happily picking the petals off of another flower.  Her body is thin, save her abdomen.  Her head is more humanoid than bee, with black eyes, floppy antennae, and luscious black lips that glimmer wetly.");
+			outputText("That's when she comes into view.  A great woman, yellow and black, a Bee-like handmaiden would be the best comparison.  She sits atop a great flower while humming her tune, happily picking the petals off of another flower.  Her body is thin, save her abdomen.  Her head is more humanoid than bee, with black eyes, floppy antennae, and luscious black lips that glimmer wetly in the light.\n\n");
 			//Alraune race
 			if (player.lowerBody == LowerBody.PLANT_FLOWER) {
 				AlrauneAndBee();
@@ -93,14 +93,12 @@ public class BeeGirlScene extends BaseContent
 			//Bee-morph
 			var isBeeMorph:Boolean = player.race() == "bee-morph";
 			if (player.hasCock() && (player.findCockWithType(CockTypesEnum.BEE, 1, 50, -1) >= 0 || isBeeMorph && player.biggestCockArea() >= 50)) {
-				outputText(" in the light.\n\n");
-                if (isBeeMorph && player.hasVagina() && rand(2) == 0) //herms!
+				if (isBeeMorph && player.hasVagina() && rand(2) == 0) //herms!
 				    beeEncounterAsBeeMorphFemale();
                 else beeEncounterAsBeeMorphMaleOrGiantCock(isBeeMorph);
 				return;
 			}
 			else if (isBeeMorph) {
-				outputText(" in the light.\n\n");
 				beeEncounterAsBeeMorphFemale();
 				return;
 			}
@@ -136,7 +134,7 @@ public class BeeGirlScene extends BaseContent
 		}
 
 		private function beeEncounterDefault():void {
-			outputText(", bending into a smile as she sees you approach.  Standing, she welcomes you in, her wings giving a small buzz as her arms spread open for a welcoming embrace.\n\n");
+			outputText("Her lips bend into a smile as she sees you approach.  Standing, she welcomes you in, her wings giving a small buzz as her arms spread open for a welcoming embrace.\n\n");
 			//Chance to avoid raaaaeeeeep
 			if (player.lust < player.maxLust() * 0.75) {
 				outputText("You barely stop yourself from gleefully throwing yourself into her arms.  You realize the harmonic buzzing of her wings and the unearthly scent of her honey briefly robbed you of your reason.  Feeling momentarily more clear-headed, what do you do?");
@@ -203,7 +201,6 @@ public class BeeGirlScene extends BaseContent
 		}
 
 		private function beeEncounterAfraid():void {
-			outputText(" in the light.\n\n");
 			outputText("Her face breaks into a smile at the sight of you.  Her buzzing dies down and you notice that the mind numbing smell in the glade isn’t as strong as you were last here.  The handmaiden turns to the side and shows you that her bee abdomen is quite slender today; it doesn’t look like she has any eggs this time.  <i>\"Zzzo, the queen hazzz zzzaid that we can try a little experiment with you, if thingzzz work out, maybe we won’t use zzzo much buzzzing and honey.\"</i>  She giggles, <i>\"Firzzzt time, no eggzzz, zzzo you don’t have to worry.  Are you ready to have zzzome fun?\"</i>");
 			simpleChoices("Fight", fightTheBeeGirl, "Have Sex", beeEncounterAfraidFirstTimeSex, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
 		}
@@ -263,7 +260,6 @@ public class BeeGirlScene extends BaseContent
 		}
 
 		private function beeEncounterAfraidRepeat():void {
-			outputText(" in the light.\n\n");
             var sex:Function, honey:Function;
             outputText("Her face breaks into a smile at the sight of you and her buzzing dies down.  Once again, the smell in the grove is much weaker than it was when you first came to this grove.  Those same flowers have been scattered around to ease off on the scent’s mind affecting powers.");
             if (rand(2) == 0) {
@@ -354,13 +350,11 @@ public class BeeGirlScene extends BaseContent
 		}
 
 		private function beeEncounterDisgusted():void {
-			outputText(" in the light.\n\n");
 			outputText("Her face breaks into a frown at the sight of you.  At once her buzzing stops and she looks at you and says <i>\"Oh, it’zzz you again, juzzzt go away; I need to find zzzomeone that actually will carry my queen’zzz eggzzz.\"</i>  Your mind is pulled from its stupor, as she directs you out of the clearing with a dismissive look.");
 			simpleChoices("Fight", fightTheBeeGirl, "", null, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
 		}
 
 		private function beeEncounterDuty():void {
-			outputText(" in the light.\n\n");
 			outputText("Her face breaks into a smile and her buzzing dies down.  You shake your head slightly to clear away the effect that you were under and look back at the smiling bee girl.");
 			simpleChoices("Fight", fightTheBeeGirl, "Talk", beeEncounterDutyTalk, "", null, "", null, "Leave", camp.returnToCampUseOneHour);
 		}
@@ -396,21 +390,18 @@ public class BeeGirlScene extends BaseContent
         }
 
 		private function beeEncounterSheFearsYou():void {
-			outputText(" in the light.\n\n");
 			outputText("Her mouth opens wide in panic as she catches sight of you.  She drops the flower and starts to draw back yelling <i>\"Pleazzze don't hurt me again!  I won't try to lay eggzzz in you any more, just let me go!\"</i>\n\n");
 			outputText("What will you do with her?");
 			simpleChoices("Fight", fightTheBeeGirl, "", null, "", null, "", null, "Leave", beeEncounterLeaveNoFight);
 		}
 
 		private function beeEncounterSheDesiresYou():void {
-			outputText(" in the light.\n\n");
 			outputText("Her mouth opens wide in panic as she catches sight of you.  She drops the flower and starts to draw back yelling <i>\"No!  I won't give in to the dezzzire!  Go away!\"</i>\n\n");
 			outputText("What will you do with her?");
 			simpleChoices("Fight", fightTheBeeGirl, "", null, "", null, "", null, "Leave", beeEncounterLeaveNoFight);
 		}
 
 		private function beeEncounterSheBeatsYouRegularly():void {
-			outputText(" in the light.\n\n");
 			outputText("Her mouth breaks out in a grin at the sight of you.  <i>\"Hello again naughty " + player.mf("boy", "girl") + ",\"</i> her buzzing really starting to get inside your head as she stands up and beckons to you.  <i>\"Juzzzt make it eazzier on yourzzzelf and let me lay my eggzzz in you.  No fuzzzzz, no fighting.  Just let yourzzzelf be carried away.\"</i>\n\n");
 			if (player.lust < player.maxLust() * 0.50 || rand(5) == 0) { //Chance to avoid raaaaeeeeep
 				outputText("With great difficulty you manage to stop yourself from throwing yourself into her arms.  Losing to this girl isn’t helping you resist her charms at all.  You’re finding It harder and harder to fight the call of her incredible song and unnatural scent, it may be wise to run now; but what will you do now that you have your senses again?");

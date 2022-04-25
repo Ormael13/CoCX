@@ -227,12 +227,11 @@ package classes.Scenes
 			outputText("-Decreased Urta's passive affection loss. Increased Urta's 'hours since last cum' gains, fixed improper 'days without cum' counting for inflation BJ scene. Added talk options after most BJs for Urta, so you won't leave immediately after pleasing her. (Svalkash)\n");
 			outputText("-Minor Vapula fixes, new cock-finding function. Added chastity belt scene to sex menu (which was clearly intended from the beginning). (Svalkash)\n");
 			outputText("-Made Ted less annoying by disabling him after acquiring the talisman. (Svalkash) ((actualy i made another change that makes him disabled/stop appearing after he is beaten once more after dropping jade talisman (Ormael)))\n");
-			outputText("-USS optimization (changed menuGen, so touched Yara too. If she's broken, I'm the one to blame). Moved USS to SceneLib - please don't create MORE instances of it in every class. (Svalkash)\n");
-			outputText("-SceneHunter (new settings page) added. Checks are currently added only to Holidays, male and female cancers and demons from BlightRidge, Phouka, SandWitch, CumWitch, Naga, Chameleon, LizanRogue, Troll, Cavewyrm, Excelia (first slave scene), Sandtrap checks, Tamani and daughters, Bee scenes, Corrupted glades, Tentacle Beast, Erlking, mansion kitsunes and Nightmare, Akbal, Faerie, ");
-			outputText("Alraune. (Svalkash)\n");
-			outputText("-Implemented 3 new scenes for regular imp. Implemented tentacle cock branch for centaur fuck (also imp). Reworked sex menu for imps. (Svalkash)\n");
+			outputText("-Reworked some sex menus to provide better choices and greyed out buttons-hints for unavailable scenes. (Svalkash)\n");
+			outputText("-SceneHunter (new settings page) added to make more scenes available and notify the player of hidden checks the game does." + sceneHunter.progress + " (Svalkash)\n");
+			outputText("-Implemented 3 new scenes for regular imp. Implemented tentacle cock branch for centaur fuck (also imp).\n");
 			outputText("-Improved isEaster() calculation - now it counts the first Easter day using some complicated Gaussian function, and gives a 7 days window after it. (Svalkash)\n");
-			outputText("-Reworked Sand Witch and Naga scene menus, adding more buttons instead of random routers and hidden checks. Added corruptionTolerance to their checks. Adapted Naga (and SandWitch) genderless scenes for non-genderless PCs. (Svalkash)\n");
+			outputText("-Added corruptionTolerance to Sand Witch and Naga scenes. Adapted Naga (and SandWitch) genderless scenes for non-genderless PCs. (Svalkash)\n");
 			outputText("-Grey Ink/Abyssal Ink would now be able to give Ink Spray perk too.\n");
 			outputText("-Bit increased Tentacle beast enc chances and lowered truffle find chance in forest.\n");
 			outputText("-New melee weapon (by Canadian Snas): The Phalluspear - craftable by Konstantine after PC have Tyrantia in camp and gather needed materials. Cost 1600 gems. Base atk is 40, it's Large spear type weapon. Can toggle between dealing 25% and 100% as lust dmg.\n");
@@ -261,15 +260,16 @@ package classes.Scenes
 			outputText("-Elemental pearls perk checks added/fixed. (Svalkash)\n");
 			outputText("-Rest/Wait option in camp got few more options added.\n");
 			outputText("-You can now <b>deliberately</b> lose to Erlking or his hounds even when fast enough (requires 30+ corruption). (Svalkash)\n");
-			outputText("-New tier 4 intelligence lvl-up perk: Selfbuffs Proficiency. Req. Job: Enchanter perk, 120+ int. Effect: Increase max selfbuff max cap by 20%.\n");
+			outputText("-New tier 4 intelligence lvl-up perk: Selfbuffs Proficiency. Req. Job: Enchanter perk, 120+ int. Effect: Increase max selfbuff max cap by 30%.\n");
 			outputText("-Prestige Job: Tempest not req. anymore Job: Dervish perk.\n");
 			outputText("-Lactoblasters got bit diff msg in combat for enemy reaction to lust inducing effect of the weapon. Also atk scaling for super high milk productions been... adjusted.\n");
+			outputText("-New tier 6 intelligence lvl-up perk: Selfbuffs Proficiency (Ex). Req. Selfbuffs Proficiency & Long(er) Lasting Buffs I perks, 170+ int. Effect: Increase max selfbuff max cap by 70%(100%). Enable recasting all active buffs when they're about to expire.\n");
+			outputText("-New tier 8 intelligence lvl-up perk: Selfbuffs Proficiency (Su). Req. Selfbuffs Proficiency (Ex) & (Ever)Lasting Buffs perks, 220+ int. Effect: Increase max selfbuff max cap five times at the cost of using twice more mana to cast.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");//New tier 6 intelligence lvl-up perk: Selfbuffs Proficiency (Ex). Req. Selfbuffs Proficiency & Long(er) Lasting Buffs I perks, 170+ int. Effect: .
-			outputText("-\n");//New tier 8 intelligence lvl-up perk: Selfbuffs Proficiency (Su). Req. Selfbuffs Proficiency (Ex) & (Ever)Lasting Buffs perks, 220+ int. Effect: .
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

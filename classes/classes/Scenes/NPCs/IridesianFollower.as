@@ -4,15 +4,46 @@
  */
 package classes.Scenes.NPCs 
 {
-	public class IridesianFollower 
+import classes.*;
+import classes.GlobalFlags.kFLAGS;
+import classes.Scenes.SceneLib;
+
+	public class IridesianFollower extends NPCAwareContent
 	{
 		
 		public function IridesianFollower() 
 		{
 			
 		}
-		
-	}/*
+
+public function firstMeetingIridesian():void {
+	clearOutput();
+	outputText("As you wander the battlefield you hear nearby sounds of the battle. Walking into that direction you finds large group of imps battling lone person dressed into robe. From under the hood sticks out medium lenth single horn and throu holes on the back extends few pairs of tentacle-like appendixes.\n\n");
+	outputText("\"<i>Begone foul creatures!!!</i>\" you can hear the sole figure yelling ocassionaly when another imp fell after one of back tentacles tips glowing for brief moment. In few minutes you spends watching it deals with most of remaining imps as the rest fleed in all directions. Then he turns his attnetion toward you.\n\n");
+	outputText("\"<i>Another Tarnished One?</i>\" he speaks slowly until assuming combat posture. \"<i>Rip or Tear? What you choose?</i>\"\n\n");
+	//start combat here
+}
+public function firstMeetingIridesianVictory():void {
+	
+}
+public function firstMeetingIridesianDefeat():void {
+	
+}
+public function repeatMeetingIridesian():void {
+	clearOutput();
+	//outputText("\"<i></i>\"\n\n");
+	//outputText("\"<i></i>\"\n\n");
+}
+/*
+public function a():void {
+	
+}
+public function b():void {
+	
+}
+public function c():void {
+	
+}
 public function IridesianMainCampMenu():void {
 	
 }
@@ -64,4 +95,5 @@ public function itemImproveMenuPure():void {
 		inventory.takeItem(item, camp.returnToCampUseOneHour);
 	}
 }*/
+	}
 }

@@ -11968,13 +11968,15 @@ public class Combat extends BaseContent {
         player.statStore.advanceTime(Buff.RATE_ROUNDS,1);
         monster.statStore.advanceTime(Buff.RATE_ROUNDS,1);
         if (player.statStore.recentlyRemovedTags["WarriorsRage"]){
-            EngineCore.outputText("\nYour warriors rage has ended.\n");
+			EngineCore.outputText("\nYour warriors rage has ended.\n");
         }
         if (player.statStore.recentlyRemovedTags["Might"]){
-            EngineCore.outputText("\nYour powers wanes as your Might spell ends.\n");
+			if (player.hasPerk(PerkLib.SelfbuffsProficiencyEx) && player.mana >= CombatAbilities.Might.manaCost()) CombatAbilities.Might.autocast();
+			else EngineCore.outputText("\nYour powers wanes as your Might spell ends.\n");
         }
         if (player.statStore.recentlyRemovedTags["Blink"]){
-            EngineCore.outputText("\nYour speeds wanes as your Blink spell ends.\n");
+			if (player.hasPerk(PerkLib.SelfbuffsProficiencyEx) && player.mana >= CombatAbilities.Blink.manaCost()) CombatAbilities.Blink.autocast();
+			else EngineCore.outputText("\nYour speeds wanes as your Blink spell ends.\n");
         }
         statScreenRefresh();
         flags[kFLAGS.ENEMY_CRITICAL] = 0;
@@ -16073,4 +16075,4 @@ public class Combat extends BaseContent {
         return inteWisLibScale(player.lib, randomize);
     }
 }
-}
+}
