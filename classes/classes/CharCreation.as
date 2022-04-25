@@ -356,16 +356,12 @@ import coc.view.MainView;
 				if (hadOldVagina) player.createVagina(true);
 				if (player.balls > 2) player.balls = 2;
 				if (player.ballSize > 2) player.ballSize = 2;
-				if (player.clitLength > 1.5) player.clitLength = 1.5;
 				while (player.breastRows.length > 1)
 				{
 					player.removeBreastRow(1, 1);
 				}
 				if (player.nippleLength > 0.25) player.nippleLength = 0.25;
 				while (player.biggestTitSize() > 14) player.shrinkTits(true);
-				//Sorry but you can't come, Valeria!
-			//	if (!(oldPlayer.armor is GooArmor))
-			//	player.setArmor(armors.C_CLOTH);
 			}
 			//Clear Statuses
 			var statusTemp:Array = [];

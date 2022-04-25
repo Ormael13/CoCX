@@ -35,7 +35,7 @@ public class GameSettings extends BaseContent {
 		addButton(3, "Font Size", fontSettingsMenu);
 		addButton(4, "Controls", displayControls);		
 		addButton(5, "Gameplay(2)", settingsScreenGameSettings2);
-		addButton(6, "Scenes", sceneHunter_inst.settingsPage);
+		addButton(6, "SceneHunter", sceneHunter_inst.settingsPage);
 		addButton(14, "Back", CoC.instance.mainMenu.mainMenu);
         if (flags[kFLAGS.HARDCORE_MODE] > 0) {
 			debug                               = false;
