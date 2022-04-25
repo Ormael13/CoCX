@@ -219,8 +219,8 @@ import classes.internals.SaveableState;
 			player.sexReward("vaginalFluids", "Vaginal");
 			player.sexReward("vaginalFluids", "Vaginal");
 			CoC.instance.transformations.EarsElven.applyEffect(false);
-			CoC.instance.transformations.EyesElf.applyEffect(false);
 			CoC.instance.transformations.FaceElf.applyEffect(false);
+			CoC.instance.transformations.EyesElf.applyEffect(false);
 			CoC.instance.transformations.TongueElf.applyEffect(false);
 			CoC.instance.transformations.ArmsElf.applyEffect(false);
 			CoC.instance.transformations.LowerBodyElf.applyEffect(false);
@@ -642,7 +642,7 @@ import classes.internals.SaveableState;
 						" You think out loud. It's just that you need time to yourself. Besides, if you spent all your time here there wouldn't be any time left for your quest." +
 						"\n\nElenwen shrugs before replying to your statement. Guess you have been thinking out loud. \"<i>You're free to come and go. Besides that, you fighting to save the land is something we should be proud of. Who knows, you might even free the blessed tree eventually.</i>\"" +
 						"\n\nFreeing the blessed tree uh… that might be something worth looking into. Regardless, you spend the few remaining hours with them and only leave at dusk promising not only to them but yourself that you will visit once in a while.");
-				WoodElvesQuest = QUEST_STAGE_PCCAMEBACK
+				WoodElvesQuest = QUEST_STAGE_PCCAMEBACK;
 				GroveLayout2(true);
 			}
 			else GroveLayout2();
