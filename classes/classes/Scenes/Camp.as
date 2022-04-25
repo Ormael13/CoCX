@@ -6034,17 +6034,22 @@ public function rebirthFromBadEnd():void {
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.002;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.003) {
-				//If something needs a fix, abort - not ready to update the version yet!
 				celessScene.fixQuestFinished();
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.003;
 			}
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.004) {
-				//If something needs a fix, abort - not ready to update the version yet!
 				if (player.hasPerk(PerkLib.PrestigeJobTempest)) {
 					player.removePerk(PerkLib.JobDervish);
 					player.perkPoints += 1;
 				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.004;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.005) {
+				if (player.hasPerk(PerkLib.BlessingOfTheAncestorTree) && !transformations.EyesElf.isPresent()) {
+					outputText("\n\nThe elves couldn't even transform you properly! Fen'Harel blesses you with a pair of proper elven eyes. Now you're also gloomy most of the time as a side effect.")
+					transformations.EyesElf.applyEffect(false);
+				}
+				flags[kFLAGS.MOD_SAVE_VERSION] = 35.005;
 			}
             outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
             doNext(doCamp);

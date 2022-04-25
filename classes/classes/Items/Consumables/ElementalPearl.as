@@ -85,7 +85,6 @@ public class ElementalPearl extends Consumable {
     */
     public function fixSave():Boolean {
         if (player.hasPerk(itemPerk) && !player.hasPerk(requiredPerk)) {
-            clearOutput();
             outputText("<i>Oops. Seems like you have an impossible perk combination. Someone has probably forgotten write on a pearl that it's useless when you're not an elementalist. So... umm...</i>\n\n");
             outputText("You cough and vomit, expelling the pearl. Surprisingly, it's completely intact. Damn sphere even managed to burn your tongue on its way out.");
             player.removePerk(itemPerk);
