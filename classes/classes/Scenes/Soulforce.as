@@ -1809,7 +1809,7 @@ public class Soulforce extends BaseContent
 			addButton(2, "HellfireSnail", FightHellfireSnail).hint("Test fight with Hellfire Snail.");
 			addButton(3, "ChaosChimera", FightChaosChimera).hint("Test fight with Chaos Chimera.");
 			addButton(4, "Q. E. Boss", FightQuatroElementalBoss).hint("Test fight with Quatro Elemental Boss.");
-			//addButton(5, "", ).hint("Test fight with .");
+			if (player.level >= 45) addButton(5, "Oculicorn", FightIridesian).hint("Test fight with Oculicorn.");
 			addButton(6, "Aria", FightAria).hint("Test fight with melkie huntress Aria.");
 			addButton(7, "Neisa", FightNeisa).hint("Test fight with Neisa.");
 			addButton(8, "SomeMalikore", FightRandomnMalikore).hint("Test fight with some malikore.");
@@ -2826,6 +2826,9 @@ public class Soulforce extends BaseContent
 		clearOutput();
 		outputText("Entering battle with Mana Weaver! Enjoy ^^");
 		startCombat(new Belisa());
+	}
+	public function FightIridesian():void {
+		SceneLib.iridesianFollower.firstMeetingIridesian();
 	}
 	public function FightZenji():void {
 		clearOutput();

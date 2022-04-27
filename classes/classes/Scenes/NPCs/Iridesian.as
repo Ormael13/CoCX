@@ -38,7 +38,7 @@ import classes.internals.*;
 		}
 		
 		public function castHailOfBladesSoulskillIridesian():void {
-			outputText("Letting soulforce leak out around him, horned gazer form six ethereal two meter long weapons. Then he thrust his hand outwards and in the blink of an eye, weapons shoot forwards you. Weapons hits you, dealing ");
+			outputText("Letting soulforce leak out around him, oculicorn form six ethereal two meter long weapons. Then he thrust his hand outwards and in the blink of an eye, weapons shoot forwards you. Weapons hits you, dealing ");
 			soulforce -= soulskillCostHailofBlades();
 			bladesD();
 			bladesD();
@@ -80,7 +80,7 @@ import classes.internals.*;
 		}
 		
 		private function IridesianOmnicast():void {
-			outputText("Horned gazer suddenly fixates you with all of its eye unleashing a barrage of rays at you! ");
+			outputText("Oculicorn suddenly fixates you with all of its eye unleashing a barrage of rays at you! ");
 			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) IridesianOmnicastD();
 			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) IridesianOmnicastD();
 			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) IridesianOmnicastD();
@@ -104,27 +104,32 @@ import classes.internals.*;
 		{
 			if (!hasStatusEffect(StatusEffects.AbilityCooldown1)) IridesianDominationGaze();
 			else {
-				if ((soulforce >= soulskillCostHailofBlades()) && rand(2) == 0) castHailOfBladesSoulskillIridesian();
-				else IridesianOmnicast();
+				var choice:Number = rand(2);
+				if (choice == 0) IridesianOmnicast();
+				if (choice == 1) {
+					if (soulforce >= soulskillCostHailofBlades()) castHailOfBladesSoulskillIridesian();
+					else IridesianOmnicast();
+				}
 			}
 		}
 		
 		public function Iridesian() 
 		{
-			initStrTouSpeInte(32, 279, 76, 270);
-            initWisLibSensCor(112, 160, 30, 60);
-            this.armorDef = 20;
+			initStrTouSpeInte(32, 259, 97, 112);
+            initWisLibSensCor(270, 160, 103, 60);
+            this.armorDef = 150;
             this.armorMDef = 150;
-            this.bonusHP = 2500;
-            this.bonusLust = 250;
-            this.bonusSoulforce = 500;
+            this.bonusHP = 2000;
+            this.bonusLust = 323;
+            this.bonusWrath = 500;
+            this.bonusSoulforce = 1000;
             this.level = 60;
             this.gems = 1300 + rand(260);
             this.additionalXP = 6000;
-			this.a = "";
-			this.short = "Horned Gazer";//Iridesian
+			this.a = "the ";
+			this.short = "Oculicorn";//Iridesian
 			this.imageName = "gazer";
-			this.long = "You are fighting a Horned Gazer. This powerful creature would look like a human save for the hooves, the mono all encompassing eye in his head, sharp teeth and ten eye mounted stalks expending from his back. Medium long single horn adorn his forehead ocassionaly glowing with mild white light.";
+			this.long = "You are fighting an Oculicorn. This powerful creature would look like a human save for the hooves, the mono all encompassing eye in his head, sharp teeth and ten eye mounted stalks expending from his back. Medium long single horn adorn his forehead ocassionaly glowing with mild white light.";
 			// this.plural = false;
 			this.createCock(12,2.5,CockTypesEnum.HORSE);
 			this.balls = 2;
@@ -156,13 +161,22 @@ import classes.internals.*;
 			//this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			//this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			//this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.MonsterRegeneration, 2, 0, 0, 0);
+			this.createPerk(PerkLib.JobSoulCultivator, 0, 0, 0, 0);
+			this.createPerk(PerkLib.DaoistCultivator, 0, 0, 0, 0);
+			this.createPerk(PerkLib.DaoistApprenticeStage, 0, 0, 0, 0);
+			this.createPerk(PerkLib.SoulApprentice, 0, 0, 0, 0);
+			this.createPerk(PerkLib.SoulPersonage, 0, 0, 0, 0);
+			this.createPerk(PerkLib.SoulWarrior, 0, 0, 0, 0);
+			this.createPerk(PerkLib.DaoistWarriorStage, 0, 0, 0, 0);
+			this.createPerk(PerkLib.SoulSprite, 0, 0, 0, 0);
+			this.createPerk(PerkLib.SoulScholar, 0, 0, 0, 0);
+			this.createPerk(PerkLib.SoulElder, 0, 0, 0, 0);
 			/*this.abilities = [
 				{ call: eyeTyrantOmnicast, type: ABILITY_MAGIC, range: RANGE_RANGED, tags:[]},
 				{ call: eyeTyrantDominationGaze, type: ABILITY_MAGIC, range: RANGE_RANGED, tags:[], condition: function():Boolean { return !hasStatusEffect(StatusEffects.AbilityCooldown1) }}
 			]*/
 			checkMonster();
 		}
-		
 	}
-
 }
