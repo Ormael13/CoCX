@@ -132,12 +132,8 @@ package classes.Scenes.NPCs
 			outputText("placing her palms together, Diana's aura flares. soulforce leaks out around her, and she brings her palms out to her sides. Eyes focused on you, Diana forms six ethereal swords nearly six feet long, splaying out behind her like a fan of blades. She thrusts her hand outwards and in the blink of an eye, the etherial blades shoot towards you. ");
 			soulforce -= soulskillCostHailOfBlades1();
 			outputText("The blades cut deep, inflicting");
-			BladesD();
-			BladesD();
-			BladesD();
-			BladesD();
-			BladesD();
-			BladesD();
+			var hob1:Number = 6;
+			while (hob1-->0) BladesD();
 			outputText(" damage!");
 		}
 		private function BladesD():void {

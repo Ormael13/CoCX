@@ -885,6 +885,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const AnemoneVenom:StatusEffectType              = AnemoneVenomDebuff.TYPE;
 		public static const ApophisVenom:StatusEffectType              = mkCombat("Apophis Venom");
 		public static const ArcaneWeb:StatusEffectType                 = mkCombat("Arcane Web");
+		public static const ATranscendentSoulField:StatusEffectType    = mkCombat("Absolute TranscendentSoul Field");
 		public static const AttackDisabled:StatusEffectType            = mkCombat("Attack Disabled");
 		public static const BalanceOfLife:StatusEffectType             = mkCombat("Balance of Life");
 		public static const Bammed1:StatusEffectType                   = mkCombat("Bammed1");//v1 - melee attack	v2 - range attack
@@ -1070,6 +1071,7 @@ import classes.StatusEffects.VampireThirstEffect;
 		public static const Thunderstorm:StatusEffectType              = mkCombat("Thunderstorm");
 		public static const Titsmother:StatusEffectType                = mkCombat("Titsmother");
 		public static const TooAngryTooDie:StatusEffectType            = mkCombat("Too Angry Too Die");
+		public static const TranscendentSoulField:StatusEffectType     = mkCombat("TranscendentSoul Field");
 		public static const TranceTransformation:StatusEffectType      = mkCombat("Trance Transformation");
 		public static const TrollHold:StatusEffectType                 = mkCombat("Troll Hold");
 		public static const TyrantState:StatusEffectType               = mkCombat("Tyrant State");
