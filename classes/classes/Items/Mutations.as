@@ -9497,7 +9497,7 @@ public final class Mutations extends MutationsHelper {
         if (!player.hasCoatOfType(Skin.CHITIN) && (player.ears.type == Ears.HUMAN || player.ears.type == Ears.ELFIN) && player.lowerBody != LowerBody.GARGOYLE && rand(3) == 0 && changes < changeLimit) {
 			outputText("[pg]");
             transformations.SkinPlain.applyEffect();
-			transformations.SkinChitin(Skin.COVERAGE_LOW, {colors: ["brown", "black", "grey"]}).applyEffect();
+			transformations.SkinChitin(Skin.COVERAGE_LOW, {colors: ["pale white"]}).applyEffect();
             changes++;
         }
         //(Gain human face)
