@@ -103,10 +103,10 @@ import classes.internals.*;
 		
 		private function IridesianOmnicast():void {
 			outputText("Oculicorn suddenly fixates you with all of its eye unleashing a barrage of rays at you! ");
-			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) IridesianOmnicastD();
-			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) IridesianOmnicastD();
-			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) IridesianOmnicastD();
-			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) IridesianOmnicastD();
+			IridesianOmnicastD();
+			IridesianOmnicastD();
+			IridesianOmnicastD();
+			IridesianOmnicastD();
 			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) IridesianOmnicastD();
 			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) IridesianOmnicastD();
 			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) IridesianOmnicastD();
@@ -116,8 +116,8 @@ import classes.internals.*;
 			outputText("\n\n");
 		}
 		private function IridesianOmnicastD():void {
-			var damage:Number = eBaseIntelligenceDamage() * 0.1;
-			damage += eBaseWisdomDamage() * 0.1;
+			var damage:Number = eBaseIntelligenceDamage() * 0.15;
+			damage += eBaseWisdomDamage() * 0.15;
 			damage = Math.round(damage);
 			damage = player.takeMagicDamage(damage, true);
 		}

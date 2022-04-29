@@ -28,10 +28,10 @@ use namespace CoC;
 		
 		private function eyeTyrantOmnicast():void {
 			outputText("The gazer suddenly fixates you with all of its eye unleashing a barrage of rays at you! ");
-			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) eyeTyrantOmnicastD();
-			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) eyeTyrantOmnicastD();
-			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) eyeTyrantOmnicastD();
-			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) eyeTyrantOmnicastD();
+			eyeTyrantOmnicastD();
+			eyeTyrantOmnicastD();
+			eyeTyrantOmnicastD();
+			eyeTyrantOmnicastD();
 			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) eyeTyrantOmnicastD();
 			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) eyeTyrantOmnicastD();
 			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) eyeTyrantOmnicastD();
@@ -41,8 +41,8 @@ use namespace CoC;
 			outputText("\n\n");
 		}
 		private function eyeTyrantOmnicastD():void {
-			var damage:Number = eBaseIntelligenceDamage() * 0.15;
-			damage += eBaseWisdomDamage() * 0.15;
+			var damage:Number = eBaseIntelligenceDamage() * 0.25;
+			damage += eBaseWisdomDamage() * 0.25;
 			damage = Math.round(damage);
 			damage = player.takeMagicDamage(damage, true);
 		}
