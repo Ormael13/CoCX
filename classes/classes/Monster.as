@@ -349,6 +349,7 @@ import flash.utils.getQualifiedClassName;
 			//
 			if (hasPerk(PerkLib.BloodDemonIntelligence)) maxOver2 += 0.1;
 			if (hasPerk(PerkLib.MunchkinAtWork)) maxOver2 += 0.1;
+			if (hasPerk(PerkLib.OverMaxHP)) maxOver2 += (0.01 * perkv1(PerkLib.OverMaxHP));
 			maxOver *= maxOver2;//~180%
 			maxOver = Math.round(maxOver);
 			return maxOver;

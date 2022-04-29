@@ -9,6 +9,7 @@ import classes.BodyParts.Butt;
 import classes.BodyParts.Face;
 import classes.BodyParts.Hips;
 import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
 import classes.internals.*;
@@ -55,7 +56,7 @@ import classes.internals.*;
 			outputText(" damage!");
 		}
 		public function castGrandioseHailOfBladesSoulskillIridesian():void {
-			outputText("Letting soulforce leak out around her, oculicorn form eighteen ethereal two meter long weapons in two rows. Then he thrust his hand outwards and in the blink of an eye, weapons shoot forwards you. Weapons hits you, dealing ");
+			outputText("Letting soulforce leak out around him, oculicorn form eighteen ethereal two meter long weapons in two rows. Then he thrust his hand outwards and in the blink of an eye, weapons shoot forwards you. Weapons hits you, dealing ");
 			soulforce -= soulskillCostGrandioseHailofBlades();
 			createStatusEffect(StatusEffects.AbilityCooldown2, 3, 0, 0, 0);
 			var ghobI:Number = 18;
@@ -63,7 +64,7 @@ import classes.internals.*;
 			outputText(" damage!");
 		}
 		public function castGrandioseHailOfMoonBladesSoulskillIridesian():void {
-			outputText("Letting soulforce leak out around her, oculicorn form fifty four ethereal two meter long weapons in four rows. Then he thrust his hand outwards and in the blink of an eye, weapons shoot forwards you. Weapons hits you, dealing ");
+			outputText("Letting soulforce leak out around him, oculicorn form fifty four ethereal two meter long weapons in four rows. Then he thrust his hand outwards and in the blink of an eye, weapons shoot forwards you. Weapons hits you, dealing ");
 			soulforce -= soulskillCostGrandioseHailofMoonBlades();
 			createStatusEffect(StatusEffects.AbilityCooldown3, 9, 0, 0, 0);
 			var ghombI:Number = 54;
@@ -93,6 +94,16 @@ import classes.internals.*;
 			outputText(" ");
 		}
 		
+		public function castEnergyProjectionIridesian():void {
+			outputText("His eye begins to glow with a harsh radiance as energy gathers around him. In a flash, you're struck by a large cross-shaped explosion. ");
+			soulforce -= soulskillCostHailofBlades();
+			var damage:Number = eBaseIntelligenceDamage();
+			damage += eBaseWisdomDamage();
+			damage *= SoulskillMod();
+			damage = Math.round(damage);
+			damage = player.takeFireDamage(damage, true);
+		}
+		
 		private function IridesianDominationGaze():void {
 			outputText("The eyes gaze bore deep within your very mind with a single order.\n\n");
 			outputText("\"<i>Stillness</i>\"\n\n");
@@ -107,23 +118,47 @@ import classes.internals.*;
 			IridesianOmnicastD();
 			IridesianOmnicastD();
 			IridesianOmnicastD();
-			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) IridesianOmnicastD();
-			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) IridesianOmnicastD();
-			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) IridesianOmnicastD();
-			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) IridesianOmnicastD();
-			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) IridesianOmnicastD();
-			if (player.hasStatusEffect(StatusEffects.Stunned) || !player.getEvasionRoll() || rand(2) == 0) IridesianOmnicastD();
+			IridesianOmnicastD();
+			IridesianOmnicastD();
 			outputText("\n\n");
 		}
 		private function IridesianOmnicastD():void {
 			var damage:Number = eBaseIntelligenceDamage() * 0.15;
 			damage += eBaseWisdomDamage() * 0.15;
 			damage = Math.round(damage);
-			damage = player.takeMagicDamage(damage, true);
+			var element:Number = rand(5);
+			if (element == 0) damage = player.takeMagicDamage(damage, true);
+			if (element == 1) damage = player.takeFireDamage(damage, true);
+			if (element == 2) damage = player.takeIceDamage(damage, true);
+			if (element == 3) damage = player.takeLightningDamage(damage, true);
+			if (element == 4) damage = player.takeDarknessDamage(damage, true);
 		}
+		
+		private function AuraOfPurityIridesian():void {
+			var damage:Number = eBaseIntelligenceDamage();
+			damage *= 12;
+			if (player.cor < 33) damage = Math.round(damage * 1.0);
+			else if (player.cor < 50) damage = Math.round(damage * 1.1);
+			else if (player.cor < 75) damage = Math.round(damage * 1.2);
+			else if (player.cor < 90) damage = Math.round(damage * 1.3);
+			else damage = Math.round(damage * 1.4); //30% more damage against very high corruption.
+			var crit:Boolean = false;
+			var critChance:int = 15;
+			if (rand(100) < critChance) {
+				crit = true;
+				damage *= 1.75;
+			}
+            damage = Math.round(damage);
+            outputText("Oculicorn aura of purity burns you with holy fire for ");
+            damage = player.takeFireDamage(damage, true);
+            outputText(" damage!");
+            if (crit) outputText(" <b>*Critical Hit!*</b>");
+			outputText("\n\n");
+        }
 		
 		override protected function performCombatAction():void
 		{
+			if (player.cor > 20) AuraOfPurityIridesian();
 			if (!hasStatusEffect(StatusEffects.TranscendentSoulField) && soulforce >= 10) createStatusEffect(StatusEffects.TranscendentSoulField, 5, 5, 0, 0);
 			if (hasStatusEffect(StatusEffects.TranscendentSoulField)) {
 				if (soulforce >= 10) soulforce -= 10;
@@ -131,7 +166,7 @@ import classes.internals.*;
 			}
 			if (!hasStatusEffect(StatusEffects.AbilityCooldown1)) IridesianDominationGaze();
 			else {
-				var choice:Number = rand(4);
+				var choice:Number = rand(5);
 				if (choice == 0) IridesianOmnicast();
 				if (choice == 1) {
 					if (soulforce >= soulskillCostHailofBlades()) castHailOfBladesSoulskillIridesian();
@@ -145,13 +180,17 @@ import classes.internals.*;
 					if (soulforce >= soulskillCostGrandioseHailofMoonBlades() && !hasStatusEffect(StatusEffects.AbilityCooldown3)) castGrandioseHailOfMoonBladesSoulskillIridesian();
 					else IridesianOmnicast();
 				}
+				if (choice == 4) {
+					if (soulforce >= soulskillCostGrandioseHailofBlades()) castEnergyProjectionIridesian();
+					else IridesianOmnicast();
+				}
 			}
 		}
 		
 		override public function get long():String
 		{
 			var str:String = "";
-			str += "You are fighting an Oculicorn. This powerful creature would look like a human save for the hooves, the mono all encompassing eye in his head, sharp teeth and ten eye mounted stalks expending from his back. Medium long single horn adorn his forehead ocassionaly glowing with mild white light.";
+			str += "You are fighting an Oculicorn. This powerful creature would look like a human save for the hooves, horse tail, the mono all encompassing eye in his head, sharp teeth and six eye mounted stalks expending from his back. Medium long single horn adorn his forehead ocassionaly glowing with mild white light.";
 			if (hasStatusEffect(StatusEffects.TranscendentSoulField))
 			{
 				str += "\n\n<i>From time to time you can notice faint glimmer of protective bubble surrounding him.</i>";
@@ -162,7 +201,7 @@ import classes.internals.*;
 		public function Iridesian() 
 		{
 			initStrTouSpeInte(32, 259, 97, 112);
-            initWisLibSensCor(270, 160, 103, 60);
+            initWisLibSensCor(270, 160, 103, 0);
             this.armorDef = 150;
             this.armorMDef = 150;
             this.bonusHP = 2000;
@@ -191,6 +230,7 @@ import classes.internals.*;
 			this.butt.type = Butt.RATING_AVERAGE + 1;
 			this.lowerBody = LowerBody.HOOFED;
 			this.faceType = Face.ANIMAL_TOOTHS;
+			this.tailType = Tail.HORSE;
 			this.skinTone = "light grey";
 			this.hairColor = "black";
 			this.hairLength = 16;
@@ -204,11 +244,12 @@ import classes.internals.*;
 			this.drop = new WeightedDrop(consumables.ME_DROP, 1);
 			this.createStatusEffect(StatusEffects.TranscendentSoulField, 5, 5, 0, 0);//X times less dmg, +X lvl diff bonus
 			//this.createStatusEffect(StatusEffects.Flying, 50, 0, 0, 0);
-			//this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EpicWisdom, 0, 0, 0, 0);
 			//this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
-			//this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
+			this.createPerk(PerkLib.InsightfulResourcesI, 0, 0, 0, 0);
 			//this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
-			this.createPerk(PerkLib.MonsterRegeneration, 2, 0, 0, 0);
+			this.createPerk(PerkLib.OverMaxHP, 5, 0, 0, 0);
+			this.createPerk(PerkLib.MonsterRegeneration, 1, 0, 0, 0);
 			this.createPerk(PerkLib.JobSoulCultivator, 0, 0, 0, 0);
 			this.createPerk(PerkLib.DaoistCultivator, 0, 0, 0, 0);
 			this.createPerk(PerkLib.DaoistApprenticeStage, 0, 0, 0, 0);
@@ -219,10 +260,6 @@ import classes.internals.*;
 			this.createPerk(PerkLib.SoulSprite, 0, 0, 0, 0);
 			this.createPerk(PerkLib.SoulScholar, 0, 0, 0, 0);
 			this.createPerk(PerkLib.SoulElder, 0, 0, 0, 0);
-			/*this.abilities = [
-				{ call: eyeTyrantOmnicast, type: ABILITY_MAGIC, range: RANGE_RANGED, tags:[]},
-				{ call: eyeTyrantDominationGaze, type: ABILITY_MAGIC, range: RANGE_RANGED, tags:[], condition: function():Boolean { return !hasStatusEffect(StatusEffects.AbilityCooldown1) }}
-			]*/
 			checkMonster();
 		}
 	}
