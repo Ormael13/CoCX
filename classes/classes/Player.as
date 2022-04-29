@@ -4924,6 +4924,10 @@ use namespace CoC;
 				chimeraCounter++;
 			if (atlachNachaScore() >= 12)
 				chimeraCounter++;
+			if (cyclopScore() >= 12)
+				chimeraCounter++;
+			if (gazerScore() >= 14 && statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 6)
+				chimeraCounter++; 
 
 			End("Player","racialScore");
 			return chimeraCounter;
@@ -4988,6 +4992,8 @@ use namespace CoC;
 			if (ratatoskrScore() >= 18)
 				grandchimeraCounter++;
 			if (cancerScore() >= 20)
+				grandchimeraCounter++;
+			if (gazerScore() >= 21 && statusEffectv1(StatusEffects.GazerEyeStalksPlayer) >= 10)
 				grandchimeraCounter++;
 
 			End("Player","racialScore");

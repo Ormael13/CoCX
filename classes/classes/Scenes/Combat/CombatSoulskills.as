@@ -494,30 +494,18 @@ public class CombatSoulskills extends BaseCombatContent {
 		soulforcecost = Math.round(soulforcecost);
 		if (player.hasStatusEffect(StatusEffects.BloodCultivator)) player.takePhysDamage(soulforcecost);
 		else player.soulforce -= soulforcecost;
+		var triTru:Number = 3;
+		if (player.hasPerk(PerkLib.FlurryOfBlows) && player.isFistOrFistWeapon()) triTru += 3;
 		if (monster.hasStatusEffect(StatusEffects.FrozenSolid)) {
 			outputText("Your [weapon] hits the ice in three specific points, making it explode along with your frozen adversary!");
-			MultiThrustD();
-			MultiThrustD();
-			MultiThrustD();
-			if (player.hasPerk(PerkLib.FlurryOfBlows) && player.isFistOrFistWeapon()) {
-				MultiThrustD();
-				MultiThrustD();
-				MultiThrustD();
-			}
+			while (triTru-->0) MultiThrustD();
 			monster.statStore.removeBuffs("FrozenSolid");
 			monster.removeStatusEffect(StatusEffects.FrozenSolid);
 			outputText(" damage!");
 		}
 		else {
 			outputText("Your [weapon] hits thrice against [themonster],");
-			MultiThrustD();
-			MultiThrustD();
-			MultiThrustD();
-			if (player.hasPerk(PerkLib.FlurryOfBlows) && player.isFistOrFistWeapon()) {
-				MultiThrustD();
-				MultiThrustD();
-				MultiThrustD();
-			}
+			while (triTru-->0) MultiThrustD();
 			outputText(" damage!");
 		}
 		outputText("\n\n");
@@ -540,43 +528,19 @@ public class CombatSoulskills extends BaseCombatContent {
 		soulforcecost = Math.round(soulforcecost);
 		if (player.hasStatusEffect(StatusEffects.BloodCultivator)) player.takePhysDamage(soulforcecost);
 		else player.soulforce -= soulforcecost;
+		var sexTru:Number = 6;
+		if (player.hasPerk(PerkLib.FlurryOfBlows) && player.isFistOrFistWeapon()) sexTru += 6;
 		player.createStatusEffect(StatusEffects.CooldownSextupleThrust, 1, 0, 0, 0);
 		if (monster.hasStatusEffect(StatusEffects.FrozenSolid)) {
 			outputText("Your [weapon] hits the ice in three specific points, making it explode along with your frozen adversary!");
-			MultiThrustD();
-			MultiThrustD();
-			MultiThrustD();
-			MultiThrustD();
-			MultiThrustD();
-			MultiThrustD();
-			if (player.hasPerk(PerkLib.FlurryOfBlows) && player.isFistOrFistWeapon()) {
-				MultiThrustD();
-				MultiThrustD();
-				MultiThrustD();
-				MultiThrustD();
-				MultiThrustD();
-				MultiThrustD();
-			}
+			while (sexTru-->0) MultiThrustD();
 			monster.statStore.removeBuffs("FrozenSolid");
 			monster.removeStatusEffect(StatusEffects.FrozenSolid);
 			outputText(" damage!");
 		}
 		else {
 			outputText("Your [weapon] hits sixfold against [themonster],");
-			MultiThrustD();
-			MultiThrustD();
-			MultiThrustD();
-			MultiThrustD();
-			MultiThrustD();
-			MultiThrustD();
-			if (player.hasPerk(PerkLib.FlurryOfBlows) && player.isFistOrFistWeapon()) {
-				MultiThrustD();
-				MultiThrustD();
-				MultiThrustD();
-				MultiThrustD();
-				MultiThrustD();
-				MultiThrustD();
-			}
+			while (sexTru-->0) MultiThrustD();
 			outputText(" damage!");
 		}
 		outputText("\n\n");
@@ -599,55 +563,19 @@ public class CombatSoulskills extends BaseCombatContent {
 		soulforcecost = Math.round(soulforcecost);
 		if (player.hasStatusEffect(StatusEffects.BloodCultivator)) player.takePhysDamage(soulforcecost);
 		else player.soulforce -= soulforcecost;
+		var nonTru:Number = 9;
+		if (player.hasPerk(PerkLib.FlurryOfBlows) && player.isFistOrFistWeapon()) nonTru += 9;
 		player.createStatusEffect(StatusEffects.CooldownNonupleThrust, 2, 0, 0, 0);
 		if (monster.hasStatusEffect(StatusEffects.FrozenSolid)) {
 			outputText("Your [weapon] hits the ice in three specific points, making it explode along with your frozen adversary!");
-			MultiThrustD();
-			MultiThrustD();
-			MultiThrustD();
-			MultiThrustD();
-			MultiThrustD();
-			MultiThrustD();
-			MultiThrustD();
-			MultiThrustD();
-			MultiThrustD();
-			if (player.hasPerk(PerkLib.FlurryOfBlows) && player.isFistOrFistWeapon()) {
-				MultiThrustD();
-				MultiThrustD();
-				MultiThrustD();
-				MultiThrustD();
-				MultiThrustD();
-				MultiThrustD();
-				MultiThrustD();
-				MultiThrustD();
-				MultiThrustD();
-			}
+			while (nonTru-->0) MultiThrustD();
 			monster.statStore.removeBuffs("FrozenSolid");
 			monster.removeStatusEffect(StatusEffects.FrozenSolid);
 			outputText(" damage!");
 		}
 		else {
 			outputText("Your [weapon] hits ninefold against [themonster],");
-			MultiThrustD();
-			MultiThrustD();
-			MultiThrustD();
-			MultiThrustD();
-			MultiThrustD();
-			MultiThrustD();
-			MultiThrustD();
-			MultiThrustD();
-			MultiThrustD();
-			if (player.hasPerk(PerkLib.FlurryOfBlows) && player.isFistOrFistWeapon()) {
-				MultiThrustD();
-				MultiThrustD();
-				MultiThrustD();
-				MultiThrustD();
-				MultiThrustD();
-				MultiThrustD();
-				MultiThrustD();
-				MultiThrustD();
-				MultiThrustD();
-			}
+			while (nonTru-->0) MultiThrustD();
 			outputText(" damage!");
 		}
 		outputText("\n\n");
@@ -1039,12 +967,8 @@ public class CombatSoulskills extends BaseCombatContent {
 		if (player.hasStatusEffect(StatusEffects.BloodCultivator)) player.takePhysDamage(soulforcecost);
 		else player.soulforce -= soulforcecost;
 		outputText("Weapons hits [themonster], dealing ");
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
+		var hob1:Number = 6;
+		while (hob1-->0) BladesD();
 		outputText(" damage!\n\n");
 		combat.heroBaneProc2();
 		combat.EruptingRiposte2();
@@ -1068,24 +992,8 @@ public class CombatSoulskills extends BaseCombatContent {
 		else player.soulforce -= soulforcecost;
 		player.createStatusEffect(StatusEffects.CooldownGrandioseHailOfBlades, 3, 0, 0, 0);
 		outputText("Weapons hits [themonster], dealing ");
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
+		var hob2:Number = 18;
+		while (hob2-->0) BladesD();
 		outputText(" damage!\n\n");
 		combat.heroBaneProc2();
 		combat.EruptingRiposte2();
@@ -1109,60 +1017,8 @@ public class CombatSoulskills extends BaseCombatContent {
 		else player.soulforce -= soulforcecost;
 		player.createStatusEffect(StatusEffects.CooldownGrandioseHailOfMoonBlades, 9, 0, 0, 0);
 		outputText("Weapons hits [themonster], dealing ");
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
-		BladesD();
+		var hob3:Number = 54;
+		while (hob3-->0) BladesD();
 		outputText(" damage!\n\n");
 		combat.heroBaneProc2();
 		combat.EruptingRiposte2();

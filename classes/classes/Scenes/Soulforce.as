@@ -11,13 +11,11 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.DeepSea.Kraken;
 import classes.Scenes.Areas.Forest.TamainsDaughtersScene;
 import classes.Scenes.Areas.Forest.TamaniScene;
-import classes.Scenes.Areas.Forest.TentacleBeastRaging;
 import classes.Scenes.Areas.Forest.WorldTree;
 import classes.Scenes.Areas.HighMountains.IzumiScene;
 import classes.Scenes.Areas.HighMountains.MinotaurMobScene;
 import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.Dungeons.D3.SuccubusGardener;
-import classes.Scenes.Dungeons.RiverDungeon.QuatroElementalBoss;
 import classes.Scenes.Explore.Pierce;
 import classes.Scenes.Explore.TheDummy;
 import classes.Scenes.Monsters.Malikore;
@@ -645,11 +643,6 @@ public class Soulforce extends BaseContent
 		player.statStore.addBuff('sens',+10,'tag',{text:'Debug buff!', rate: Buff.RATE_HOURS, tick: 1});
 		statScreenRefresh();
 		doNext(curry(SoulforceCheats1,0));
-	}
-	public function FightQuatroElementalBoss():void {
-		clearOutput();
-		outputText("Entering battle with Quatro Elemental Boss! Enjoy ^^");
-		startCombat(new QuatroElementalBoss());
 	}
 	public function FightAria():void {
 		clearOutput();
@@ -1789,7 +1782,6 @@ public class Soulforce extends BaseContent
 		if (page == 1) {
 			addButton(0, "FightForPearl", FightForPearl).hint("Test fight to get Sky Poison Pearl legally (aside we cheat to start fight)");
 			addButton(1, "Marae", FightMarae).hint("Test fight with Marae (depending on game stage she can be buffed or unbuffed).");
-			addButton(2, "Pierce", FightPierce).hint("Test fight with Pierce.");
 			addButton(3, "SuccGard", FightSuccubusGardener).hint("Test fight with Succubus Gardener. (Also it will glitch right after fight so not start this fight if you got unsaved progress that you not wanna loose as only way to handle post fight glitch is restarting game)");
 			addButton(4, "The Dummy", FightTheDummy).hint("Fight with The Dummy.");
 			addButton(5, "M.WSeaver", FightBelisa).hint("Test fight with Mana Weaver.");
@@ -1799,7 +1791,7 @@ public class Soulforce extends BaseContent
 			addButton(9, "RyuBi", FightRyuBi).hint("Test fight with RyuBi.");
 			addButton(10, "LvLUP Eva", LvLUPEva).hint("LvL UP forcefully Evangeline for testing purpose up to the limit.");
 			addButton(11, "DELvL Eva", DELvLEva).hint("DE LvL forcefully Evangeline for testing purpose down toward the lvl 12.");
-			addButton(12, "FeralT.Beast", FightFeralBeast).hint("Test fight with feral tentacle beast.");
+			addButton(12, "Pierce", FightPierce).hint("Test fight with Pierce.");
 			addButton(13, "-2-", EnemiesMenu, page + 1);
 			addButton(14, "Back", curry(SoulforceCheats1, 0));
 		}
@@ -1808,8 +1800,7 @@ public class Soulforce extends BaseContent
 			addButton(1, "Hydra", FightHydra).hint("Test fight with Hydra.");
 			addButton(2, "HellfireSnail", FightHellfireSnail).hint("Test fight with Hellfire Snail.");
 			addButton(3, "ChaosChimera", FightChaosChimera).hint("Test fight with Chaos Chimera.");
-			addButton(4, "Q. E. Boss", FightQuatroElementalBoss).hint("Test fight with Quatro Elemental Boss.");
-			//addButton(5, "", ).hint("Test fight with .");
+			if (player.level >= 45) addButton(5, "Oculicorn", FightIridesian).hint("Test fight with Oculicorn.");
 			addButton(6, "Aria", FightAria).hint("Test fight with melkie huntress Aria.");
 			addButton(7, "Neisa", FightNeisa).hint("Test fight with Neisa.");
 			addButton(8, "SomeMalikore", FightRandomnMalikore).hint("Test fight with some malikore.");
@@ -2827,6 +2818,9 @@ public class Soulforce extends BaseContent
 		outputText("Entering battle with Mana Weaver! Enjoy ^^");
 		startCombat(new Belisa());
 	}
+	public function FightIridesian():void {
+		SceneLib.iridesianFollower.firstMeetingIridesian();
+	}
 	public function FightZenji():void {
 		clearOutput();
 		outputText("Entering battle with Zenji! Enjoy ^^");
@@ -2867,11 +2861,6 @@ public class Soulforce extends BaseContent
 		outputText("\n\n<b>Evangeline get weaker! (cheat stop working when she reach lvl 12)</b>");
 		if (flags[kFLAGS.EVANGELINE_LVL_UP] > 6) flags[kFLAGS.EVANGELINE_LVL_UP]--;
 		EnemiesMenu(1);
-	}
-	public function FightFeralBeast():void {
-		clearOutput();
-		outputText("Entering battle with feral tentacle beast! Enjoy ^^");
-		startCombat(new TentacleBeastRaging());
 	}
 	public function RevertCabinProgress():void {
 		flags[kFLAGS.CAMP_CABIN_PROGRESS] = 2;

@@ -894,7 +894,7 @@ import classes.internals.SaveableState;
 			if (player.statusEffectv1(StatusEffects.FletchingTable) > 0) addButtonDisabled(0, "Bronze", "You already used this for reinforcing bow.");
 			else {
 				if (player.hasItem(useables.BRONZEB, 1)) addButton(0, "Bronze", FletchingReinforce2, useables.BRONZEB);
-				else addButtonDisabled(0, "Bronze", "You need spider silk.");
+				else addButtonDisabled(0, "Bronze", "You need bronze bar.");
 			}
 			if (player.statusEffectv1(StatusEffects.FletchingTable) > 1) addButtonDisabled(1, "Iron", "You already used this for reinforcing bow.");
 			else {
