@@ -1783,7 +1783,7 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 			}
 			if (player.rearBody.type != RearBody.TENTACLE_EYESTALKS && player.hasPerk(PerkLib.Omnicaster)) {
 				if (player.hasStatusEffect(StatusEffects.GazerEyeStalksPlayer)) player.removeStatusEffect(StatusEffects.GazerEyeStalksPlayer);
-				outputText("\nNo text yet. \n\n(<b>Lost Perk: Omnicaster</b>)");
+				outputText("\nLacking the occulatory prowess of many eyes you also lose the ability to omnicast. \n\n(<b>Lost Perk: Omnicaster</b>)");
 				player.removePerk(PerkLib.Omnicaster);
 				needNext = true;
 			}

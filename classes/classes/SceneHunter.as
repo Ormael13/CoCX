@@ -19,7 +19,7 @@ public class SceneHunter extends BaseContent {
         if (flags[kFLAGS.SCENEHUNTER_UNI_HERMS]) {
             outputText("<b><font color=\"#008000\">ENABLED</font></b>");
             outputText("\nMakes scenes unique to male/female PCs accessible to herms. Allows the player to choose the scene when the sex is led by the PC, randomly selects it in rape scenes.");
-            outputText("\nAlso adjusted some genderless (anal/oral only) scenes so they will look fitting - no genderless mentions or jokes.");
+            outputText("\nAlso adjusted some genderless (anal/oral only) scenes, so they will look fitting - no genderless mentions or jokes.");
             outputText("\n<i>New scenes may lack the description of herm's other genitalia. Some scenes may look slightly off (rare).</i>");
         }
         else {
@@ -32,7 +32,7 @@ public class SceneHunter extends BaseContent {
         if (flags[kFLAGS.SCENEHUNTER_DICK_SELECT]) {
             outputText("<b><font color=\"#008000\">ENABLED</font></b>");
             outputText("\nWhen the scene presents different options for small/big/ dick sizes, adds selectors for the player to choose the exact 'tool' if different options are available. The dick is selected randomly in rape scenes. Also in scenes with options for multicocks and single cock, sometimes lets you choose if you want to use only one.");
-            outputText("\n<i>Well, you can change which dick will be used now. Yay. Though some rare scenes (especially small dick femdom) may look slightly weird if you have a bigger cock.</i>");
+            outputText("\n<i>Well, you can change, which dick will be used now. Yay. Though some rare scenes (especially small dick femdom) may look slightly weird if you have a bigger cock.</i>");
         }
         else {
             outputText("<b><font color=\"#800000\">DISABLED</font></b>");
@@ -45,11 +45,11 @@ public class SceneHunter extends BaseContent {
             outputText("<b><font color=\"#008000\">ENABLED</font></b>");
         else
             outputText("<b><font color=\"#800000\">DISABLED</font></b>");
-        outputText("\nTweaks which didn't fit into the previous categories. Full list goes here.");
+        outputText("\nTweaks, which didn't fit into the previous categories. Full list goes here.");
         outputText("\nChristmas elf: enabled sex option even when corrupt.");
         outputText("\nLizan Rogue: medium-corrupt PCs now can persuade Lizan Rogue.");
         outputText("\nNaga <b>after</b> Samirah recruitment: enabled scenes. They're too good to miss.");
-        outputText("\nKitsune scene: replace lose scene randomizer with a selector. I hate randomizers.");
+        outputText("\nKitsune, Basilisk scenes: replace lose scene randomizer with a selector. I hate randomizers.");
         outputText("\n<i>This opens up more scenes. They are lore-accurate and still explained in the game (so you won't get Amily living with corrupt Jojo or other nonsense), but be warned that the original writers intended some details to work the other way.</i>");
         outputText("\n<i>Some one-time scenes with many options and checks can be replayed using 'Camp Actions -> Spend Time -> Recall'.</i>");
         //Scene list link
