@@ -1198,7 +1198,6 @@ public class BeeGirlScene extends BaseContent
 			spriteSelect(SpriteDb.s_bee_girl);
 			clearOutput();
 			flags[kFLAGS.BEE_GIRL_COMBAT_LOSSES]++;
-			if (doSFWloss()) return;
 			sceneHunter.print("randoms here again (for both taurs and non-taurs)...");
 			//Centaur lost to giant bee:
 			if (player.isTaur()) {

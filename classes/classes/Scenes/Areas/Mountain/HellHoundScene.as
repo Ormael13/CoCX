@@ -43,7 +43,6 @@ public class HellHoundScene extends BaseContent
 
 		public function hellhoundRapesPlayer():void
 		{
-			if (doSFWloss()) return; //No rape in SFW mode.
 			//Lust or HP loss texts here
 			clearOutput();
 			if (player.lust >= player.maxOverLust()) outputText("Overcome by sexual desire, you submit to the hungry hellhound.\n\n");

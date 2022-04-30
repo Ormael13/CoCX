@@ -125,7 +125,7 @@ import classes.Scenes.Monsters.Goblin;
 		}
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			if (player.gender == 0 || flags[kFLAGS.SFW_MODE] > 0) {
+			if (player.gender == 0) {
 				outputText("You collapse in front of goblins, too wounded to fight.  They growl and kick you in the head, making your vision spin. As your sight fades, you hear them murmur, \"<i>Fucking dicks can't even bother to grow a dick or cunt.</i>\"");
 				SceneLib.combat.cleanupAfterCombatImpl();
 			} 

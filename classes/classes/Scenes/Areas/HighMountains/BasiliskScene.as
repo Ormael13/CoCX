@@ -65,7 +65,7 @@ public class BasiliskScene extends BaseContent
 			//Player Lust victory:
 			else outputText("No longer able to control its raging erection, the basilisk closes its eyes and sinks to one knee.  It would probably be attempting to signal its submission to you if it weren't furiously masturbating its long, purple cock, which has emerged straining from the creature's genital slit.");
 
-			if (player.gender == 0 || flags[kFLAGS.SFW_MODE] <= 0) {
+			if (player.gender == 0) {
 				outputText("You can't think of anything to do to him.");
 				cleanupAfterCombat();
 				return;

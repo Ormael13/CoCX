@@ -135,7 +135,6 @@ public class GoblinScene extends BaseContent
 				cleanupAfterCombat();
 				return;
 			}
-			if (doSFWloss()) return;
 			if (player.hasPerk(PerkLib.BimboBrains) || player.hasPerk(PerkLib.FutaFaculties)) {
 				//[Female Bimbo Loss Against Goblin]
 				if (player.hasVagina()) {
@@ -331,7 +330,7 @@ public class GoblinScene extends BaseContent
 			}
 
 			if (player.lust >= 33 && player.gender > 0 && (fitsFuck != null || cuntFuck != null || tooBig != null ||
-					corruptTooBig != null || buttseks != null || feeder != null || spiderCondom != null || eggs != null) && flags[kFLAGS.SFW_MODE] <= 0) {
+					corruptTooBig != null || buttseks != null || feeder != null || spiderCondom != null || eggs != null)) {
 				story.display("strings/defeated/prompt-sex");
 				if (fitsFuck != null) addButton(0, "Dick Fuck", fitsFuck);
 				if (tooBig != null) addButton(1, "DickTooBig", tooBig);

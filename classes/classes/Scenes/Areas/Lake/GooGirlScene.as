@@ -151,7 +151,6 @@ public class GooGirlScene extends AbstractLakeContent
 //===============
 		public function getBeatByGooGirl():void
 		{
-			if (doSFWloss()) return; //No rape in SFW mode.
 			flags[kFLAGS.GOOGIRL_CONSECUTIVE_LOSSES]++;
 			if (flags[kFLAGS.GOOGIRL_CONSECUTIVE_LOSSES] >= 5 && player.gooScore() >= 4) gooGirlBadEnd();
 			else if (player.gender == 0) genderlessLoseToGooGal();
@@ -310,7 +309,7 @@ public class GooGirlScene extends AbstractLakeContent
 			outputText("The excitement of your scuffle proves too much for the goo-girl to keep up with and she collapses into the slime of her lower torso, her skin wiggling as she struggles to maintain cohesion. Her expression is one of disappointment, and she looks at you with big, hopeful eyes, reaching out a hand, as if to offer an apology for her over-exuberance.\n\n");
 
 			//Victory – Neuter
-			if (player.gender == 0 || player.lust < 33 || flags[kFLAGS.SFW_MODE] > 0) {
+			if (player.gender == 0 || player.lust < 33) {
 				outputText("The goo-girl, while an unusual creature, seems unable to communicate and clearly has nothing of value.  Of no particular use in your quest, you shoo the dripping blob back to the shore. She seems disappointed at first, but bounces back quickly enough, spotting movement in the "+GooLocation+".  She splashes in and takes off at top speed, " + gooColor9() + " blur while you take your leave.");
 				cleanupAfterCombat();
 			}

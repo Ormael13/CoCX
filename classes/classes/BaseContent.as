@@ -240,10 +240,6 @@ import coc.xxc.StoryContext;
 			SceneLib.combat.startCombatImpl(monster_,plotFight_);
 		}
 
-		protected function doSFWloss():Boolean {
-			return EngineCore.doSFWloss();
-		}
-
 
 		protected function startCombatImmediate(monster:Monster, _plotFight:Boolean = false):void
 		{

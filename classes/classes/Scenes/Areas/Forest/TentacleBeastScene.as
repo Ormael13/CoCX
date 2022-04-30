@@ -527,7 +527,6 @@ private function futaTentacleEpilogue():void {
 
 internal function tentacleLossRape():void {
 	clearOutput();
-	if (doSFWloss()) return; //Disables rape in SFW mode.
 	if (player.isAlraune()){
 		alrauneLoss();
 		return;

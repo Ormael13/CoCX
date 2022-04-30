@@ -759,7 +759,6 @@ public class KitsuneScene extends BaseContent
 
 		public function loseToKitsunes():void
 		{
-			if (doSFWloss()) return; //No rape in SFW mode.
 			clearOutput();
 			//[LOSE FIGHT]
 			if (!sceneHunter.other) { //old behavior
@@ -1084,10 +1083,6 @@ public class KitsuneScene extends BaseContent
 //Damage victory
 		public function defeatTheKitsunes(display:Boolean = true):void
 		{
-			if (flags[kFLAGS.SFW_MODE]) {
-				cleanupAfterCombat();
-				return;
-			}
 			if (display) {
 				clearOutput();
 				if (monster.HP < 1) {

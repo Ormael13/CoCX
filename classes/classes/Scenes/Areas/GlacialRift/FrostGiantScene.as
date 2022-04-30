@@ -22,7 +22,7 @@ package classes.Scenes.Areas.GlacialRift
 			outputText("The giant staggers and falls down on his knees. You wonder what you should do next.");
 			if (player.weaponName == "fists" && player.weaponRangeName == "nothing" && player.armor.name == "nothing" && player.shieldName == "nothing") awardAchievement("Like Chuck Norris", kACHIEVEMENTS.GENERAL_LIKE_CHUCK_NORRIS);
 			menu();
-			if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
+			if (player.lust >= 33) {
 				if (player.hasCock()) addButton(0, "Nosefuck", noseJob);
 				if (player.hasVagina()) addButton(1, "RideVaginally", rideVaginally);
 				addButton(2, "Ride Anally", rideAnally);
@@ -39,7 +39,7 @@ package classes.Scenes.Areas.GlacialRift
 			outputText("Young giant staggers and falls down on his knees. You wonder what you should do next.");
 			if (player.weaponName == "fists" && player.weaponRangeName == "nothing" && player.armor.name == "nothing" && player.shieldName == "nothing") awardAchievement("Texas Ranger", kACHIEVEMENTS.GENERAL_TEXAS_RANGER);
 			menu();
-			if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
+			if (player.lust >= 33) {
 				if (player.hasCock()) addButton(0, "Nosefuck", noseJob);
 				if (player.hasVagina()) addButton(1, "RideVaginally", rideVaginally);
 				addButton(2, "Ride Anally", rideAnally);

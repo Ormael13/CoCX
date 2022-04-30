@@ -7,7 +7,6 @@ import classes.*;
 import classes.BodyParts.Face;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
-import classes.Scenes.SceneLib;
 
 public class HarpyScene extends BaseContent
 	{
@@ -26,36 +25,34 @@ public class HarpyScene extends BaseContent
 			if (monster.HP < 1) outputText("The harpy screams out in one last, pained cry before her wings give way, the feathered woman collapsing into a weary heap.");
 			//(Enemy defeated by lust)
 			else outputText("The harpy can't contain her lust anymore and crumples to the ground before you, on her knees with her plush, heavy ass resting on her feet. She coos pathetically, with one hand between her legs furiously fingering herself, and the other pressed against your crotch, a needy look in her eyes.");
-			//Genderless get nothing.
-			if (player.gender == 0) {
-				cleanupAfterCombat();
-				return;
-			}
 			//Rape options
-			if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
+			if (player.lust >= 33) {
 				outputText("  What do you do to her?");
 				menu();
-				if (player.hasCock()) {
-					if (player.cockThatFits(monster.analCapacity()) >= 0) addButton(0, "Anal", winAndRapeHarpyAnally).hint("Put your cock to a good use and take the harpy from behind.");
-					if (player.cockThatFits(monster.vaginalCapacity()) >= 0) addButton(1, "Pussy", victoryHarpyGetsHerPussyRaped).hint("That harpy's pussy looks inviting...");
-				}
+				addButtonIfTrue(0, "Anal", winAndRapeHarpyAnally, "Req. a dick with area smaller than " + monster.analCapacity(), player.cockThatFits(monster.analCapacity()) >= 0, "Put your cock to a good use and take the harpy from behind.");
+				addButtonIfTrue(1, "Pussy", victoryHarpyGetsHerPussyRaped, "Req. a dick with area smaller than " + monster.vaginalCapacity(), player.cockThatFits(monster.vaginalCapacity()) >= 0, "That harpy's pussy looks inviting...");
 				addButton(2, "Oral", WinOnHarpyAndOralRape);
 				if (player.hasVagina()) {
-					if (player.isNaga()) outputText("  If you weren't a naga, you could scissor her.");
-					else addButton(3, "Scissor", harpyScissorSurprise).hint("Get into some girl-on-girl activity with the harpy.");
-					if (player.clitLength >= 3.5) addButton(4, "Clit Fuck", clitFuckAHarpy).hint("Fuck the harpy with your big clit.");
+					addButtonIfTrue(3, "Scissor", harpyScissorSurprise, "If you weren't a naga, you could scissor her.", !player.isNaga(), "Get into some girl-on-girl activity with the harpy.");
+					addButtonIfTrue(4, "Clit Fuck", clitFuckAHarpy, "Req. a vagina and a bigger clit (3.5\")", player.clitLength >= 3.5, "Fuck the harpy with your big clit.");
 				}
-				if (player.canOvipositSpider() && (player.faceType == Face.SNAKE_FANGS || player.faceType == Face.SPIDER_FANGS)) addButton(5, "Lay Eggs", spoidahsLegEggsInHarpeis).hint("Use your ovipositor to lay the eggs into harpy.");
+				else {
+					addButtonDisabled(3, "Scissor", "Req. a vagina");
+					addButtonDisabled(4, "Clit Fuck", "Req. a vagina");
+				}
+				addButtonIfTrue(5, "Lay Eggs", spoidahsLegEggsInHarpeis, "Req. spider ovipositor and snake/spider fangs", player.canOvipositSpider() && (player.faceType == Face.SNAKE_FANGS || player.faceType == Face.SPIDER_FANGS), "Use your ovipositor to lay the eggs into harpy.");
 				addButton(14, "Leave", cleanupAfterCombat);
 				SceneLib.uniqueSexScene.pcUSSPreChecksV2(harpyVictoryuuuuu);
 							}
 			//Not horny?  Iz over
-			else cleanupAfterCombat();
+			else {
+				outputText("You're not aroused enough to rape the poor birb.")
+				cleanupAfterCombat();
+			}
 		}
 
 		public function harpyLossU():void
 		{
-			if (doSFWloss()) return; //No rape in SFW mode.
 			//NO MALE RAPE IF DICK TOO BIG
 			var x:Number = -1;
 			if (player.hasCock()) x = player.cockThatFits(monster.vaginalCapacity());
@@ -80,7 +77,6 @@ public class HarpyScene extends BaseContent
 
 		private function harpyGooGenderlessLoss():void
 		{
-			if (doSFWloss()) return; //No rape in SFW mode.
 			clearOutput();
 			outputText("The triumphant harpy looks down at your goopy form, ready to take you.  She seems a little confused though, and begins poking at your gelatinous body.\n\n");
 
@@ -104,7 +100,6 @@ public class HarpyScene extends BaseContent
 //Requires pussy or cock small enough for harpy!
 		private function harpyLossLust():void
 		{
-			if (doSFWloss()) return; //No rape in SFW mode.
 			clearOutput();
 			//Merauder wroted.
 			var x:Number = -1;
@@ -166,7 +161,6 @@ public class HarpyScene extends BaseContent
 //No genderless folks.
 		private function harpyDamageLoss():void
 		{
-			if (doSFWloss()) return; //No rape in SFW mode.
 			clearOutput();
 
 			var x:Number = -1;

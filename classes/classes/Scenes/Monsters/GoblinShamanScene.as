@@ -62,7 +62,6 @@ public class GoblinShamanScene extends BaseContent
 		//[LOSS SEXAHNZ]
 		public function goblinShamanBeatYaUp():void {
 			clearOutput();
-			if (doSFWloss()) return;
 			var x:int;
 			if(player.lust <= 99) outputText("You collapse, utterly beaten. To make sure you'll be easier to handle, the victorious shaman saunters up, pink arousing flames glow in her left hand. She exposes your nether regions and throws the pink flames right into your groin! You are unable to fight back. \n\n");
 
@@ -231,7 +230,7 @@ public class GoblinShamanScene extends BaseContent
 				feeder = giveGoblinAMilkMustache;
 			}
 			if (player.lust >= 33 && player.gender > 0 && (fitsFuck != null || cuntFuck != null || tooBig != null ||
-					corruptTooBig != null || buttseks != null || feeder != null || spiderCondom != null || eggs != null) && flags[kFLAGS.SFW_MODE] <= 0) {
+					corruptTooBig != null || buttseks != null || feeder != null || spiderCondom != null || eggs != null)) {
 				outputText("\n\n<b>What do you do to her, and if anything, which of your body parts do you use?</b>");
 				menu();
 				if (fitsFuck != null) addButton(0, "Dick Fuck", fitsFuck);

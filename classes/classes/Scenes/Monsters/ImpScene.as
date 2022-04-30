@@ -44,7 +44,7 @@ use namespace CoC;
             addButton(14, "Leave", cleanupAfterCombat);
 			if (player.lust > 33) {
                 if (!player.isTaur()) {
-                    addButtonIfTrue(0, "Male Rape", rapeImpWithDick, ("Req. dick with area < " + monster.analCapacity()), player.cockThatFits(monster.analCapacity()) >= 0);
+                    addButtonIfTrue(0, "Male Rape", rapeImpWithDick, ("Req. dick with area smaller than " + monster.analCapacity()), player.cockThatFits(monster.analCapacity()) >= 0);
                     addButtonIfTrue(1, "Female Rape", rapeImpWithPussy, "Req. vagina", player.hasVagina());
                     addButtonIfTrue(4, "Use Condom", curry(rapeImpWithDick, 1), "Req. Condom item, non-taur and fitting dick", player.cockThatFits(monster.analCapacity()) >= 0 && player.hasItem(useables.CONDOM));
                     //taur
@@ -56,7 +56,7 @@ use namespace CoC;
                     addButtonDisabled(1, "Female Rape", "Req. non-Taur");
                     addButtonDisabled(4, "Use Condom", "Req. non-Taur");
                     //taur
-                    addButtonIfTrue(5, "Centaur Rape", rapeImpWithDick, ("Req. dick with area < " + monster.analCapacity() + " or pussy."), player.cockThatFits(monster.analCapacity()) >= 0 || player.hasVagina());
+                    addButtonIfTrue(5, "Centaur Rape", rapeImpWithDick, ("Req. dick with area smaller than " + monster.analCapacity() + " or pussy."), player.cockThatFits(monster.analCapacity()) >= 0 || player.hasVagina());
 					addButtonIfTrue(6, "Group Vaginal", centaurGirlOnImps, "Req. vagina", player.hasVagina());
                 }
                 addButton(2, "Oral Give", oralGive);
@@ -291,7 +291,7 @@ use namespace CoC;
 			else {
 				outputText("Do you focus on your maleness or girl-parts?");
                 menu();
-                addButtonIfTrue(0, "Male", centaurOnImpMale, ("Req. dick with area < " + monster.analCapacity()), player.cockThatFits(monster.analCapacity()) >= 0);
+                addButtonIfTrue(0, "Male", centaurOnImpMale, ("Req. dick with area smaller than " + monster.analCapacity()), player.cockThatFits(monster.analCapacity()) >= 0);
                 addButtonIfTrue(1, "Female Rape", rapeImpWithPussy, "Req. vagina.", player.hasVagina());
                 addButton(14, "Leave", cleanupAfterCombat);
 			}
@@ -1513,7 +1513,6 @@ use namespace CoC;
 
 		public function impRapesYou():void {
 			clearOutput();
-			if (doSFWloss()) return;
 			if (player.isAlraune()){
 				impRapesAlraune();
 				return;
@@ -1820,8 +1819,8 @@ use namespace CoC;
                 return;
 			}
             sceneHunter.print("Failed check: Alraune/Liliraune race");
-			if(player.hasVagina() && (player.gender == 2 || rand(2) == 0) && flags[kFLAGS.SFW_MODE] <= 0) getRapedAsAGirl();
-			else if(player.hasCock() && flags[kFLAGS.SFW_MODE] <= 0) loseToImpLord();
+			if(player.hasVagina() && (player.gender == 2 || rand(2) == 0)) getRapedAsAGirl();
+			else if(player.hasCock()) loseToImpLord();
 			else {
 				outputText("Taking a look at your defeated form, the " + monster.short + " snarls, \"<i>Useless,</i>\" before kicking you in the head, knocking you out cold.");
 				player.takePhysDamage(9999);
@@ -1839,8 +1838,8 @@ use namespace CoC;
 			else outputText("  You place one of your front hooves on his chest, knocking him onto his back.  He attempts to get back up, but you apply more pressure to his thick, manly chest, until he gasps.  The imp gets the idea quickly and stops masturbating, all of his focus now on you.");
 			menu();
 			//Continues in, Male Anal, Female Vaginal, or Breastfeed
-			if(player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
-                addButtonIfTrue(0,"FuckHisAss", impLordBumPlug, "Req. cock with area < " + monster.analCapacity(), player.cockThatFits(monster.analCapacity()) >= 0);
+			if(player.lust >= 33) {
+                addButtonIfTrue(0,"FuckHisAss", impLordBumPlug, "Req. cock with area smaller than " + monster.analCapacity(), player.cockThatFits(monster.analCapacity()) >= 0);
                 addButtonIfTrue(1,"Get Blown", getBlownByAnImpLord, "Req. cock", player.hasCock());
                 addButtonIfTrue(2,"Ride Cock", femaleVagRape, "Req. vagina", player.hasVagina());
 				if(player.hasPerk(PerkLib.Feeder) && monster.short != "imp overlord" && monster.short != "imp warlord") addButton(3,"Breastfeed",feederBreastfeedRape);
@@ -2107,7 +2106,6 @@ use namespace CoC;
 		//MALE LOSE
 		private function loseToImpLord():void {
 			clearOutput();
-			if (doSFWloss()) return;
 			outputText(images.showImage("implord-loss-male"));
 			outputText("Unable to control your lust you fall to the ground, remove your [armor] and begin masturbating furiously.  The powerful imp saunters over to you smirking evilly as he towers over your fallen form. You look up at him nervously.  He grabs your chin with one of his clawed hands, while the other digs through his satchel.  He pulls out a vial filled with glowing green liquid, and pops the cork stopper off with his thumb. Before you can react, the demon forces open your mouth and pours the liquid in.  Instinct reacts faster than logic and you swallow the substance as it's poured down your throat.");
 			outputText("\n\nYou cough and splutter, grabbing your gut, as a hot pain fills your stomach.  The imp laughs as you roll around in agony for several long moments, before the burning turns to an arousing warmth that spreads to your [hips] and [asshole].  Groaning, you feel your cheeks flush with arousal, and your eyes glaze over once more with insatiable lust.");
@@ -2156,7 +2154,6 @@ use namespace CoC;
 		//FEMALE LOSE
 		private function getRapedAsAGirl():void {
 			clearOutput();
-			if (doSFWloss()) return;
 			outputText(images.showImage("implord-loss-female"));
 			outputText("You collapse from exhaustion, your [vagina] beginning to soak your [armor].  You groan loudly, desperately trying to continue the fight, or flee, but the exhaustion is too much.  You close your eyes for a moment, but hearing a loud thud near your face causes you to painfully open your eyes.  You see a large bestial hoof near your face, while the other hoof is used to roll you onto your back.");
 
@@ -2255,8 +2252,8 @@ use namespace CoC;
 				impRapesAlraune();
                 return;
 			}
-			if(player.hasVagina() && (player.gender == 2 || rand(2) == 0) && flags[kFLAGS.SFW_MODE] <= 0) getRapedAsAGirlByImpOverlord();
-			else if(player.hasCock() && flags[kFLAGS.SFW_MODE] <= 0) loseToImpOverlord();
+			if(player.hasVagina() && (player.gender == 2 || rand(2) == 0)) getRapedAsAGirlByImpOverlord();
+			else if(player.hasCock()) loseToImpOverlord();
 			else {
 				outputText("Taking a look at your defeated form, the " + monster.short + " snarls, \"<i>Useless,</i>\" before kicking you in the head, knocking you out cold.");
 				player.takePhysDamage(9999);
@@ -2266,7 +2263,6 @@ use namespace CoC;
 
 		private function loseToImpOverlord():void {
 			clearOutput();
-			if (doSFWloss()) return;
 			outputText(images.showImage("impoverlord-loss-male"));
 			outputText("Unable to control your lust you fall to the ground, remove your [armor] and begin masturbating furiously.  The powerful imp saunters over to you smirking evilly as he towers over your fallen form. You look up at him nervously.  He grabs your chin with one of his clawed hands, while the other digs through his satchel.  He pulls out a vial filled with glowing green liquid, and pops the cork stopper off with his thumb. Before you can react, the demon forces open your mouth and pours the liquid in.  Instinct reacts fast then logic and you swallow the substance as it's poured down your throat.");
 			outputText("\n\nYou cough and splutter, grabbing your gut, as a hot pain fills your stomach.  The imp laughs as you roll around in agony for several long moments, before the burning turns to an arousing warmth that spreads to your [hips] and [asshole].  Groaning, you feel your cheeks flush with arousal, and your eyes glaze over once more with insatiable lust.");
@@ -2314,7 +2310,6 @@ use namespace CoC;
 		//FEMALE LOSE
 		private function getRapedAsAGirlByImpOverlord():void {
 			clearOutput();
-			if (doSFWloss()) return;
 			outputText(images.showImage("impoverlord-loss-female"));
 			outputText("You collapse from exhaustion, your [vagina] beginning to soak your [armor].  You groan loudly, desperately trying to continue the fight, or flee, but the exhaustion is too much.  You close your eyes for a moment, but hearing a loud thud near your face causes you to painfully open your eyes.  You see a large bestial hoof near your face, while the other hoof is used to roll you onto your back.");
 

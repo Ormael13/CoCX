@@ -70,7 +70,7 @@ public class MaleSpiderMorphScene extends BaseContent
 			outputText("The male spider-morph collapses onto his hands and knees, ");
 			if (monster.lust >= monster.maxLust()) outputText("masturbating with furious abandon, working his ebon dick with such vigor that the spider's pre-cum-slicked dick-skin noisily slides itself back and forth over his fattened glans; it becomes apparent just how much foreskin he truly has at this point, as even with his frenzied rubbing his glans remains shrouded in the thick excess skin while his fist slaps lewdly against his groin.  Dribbles of pre-cum leak from between his fingers to spill on the ground.");
 			else outputText("wobbling back and forth as he tries to stay up and fight.  There's no way he can oppose you, as beaten as he is now.");
-			if (player.gender > 0 && player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
+			if (player.gender > 0 && player.lust >= 33) {
 				outputText("\n\nWhat do you do?");
 				//[CHOICES]
 				//simpleChoices("Mount", mount, "FuckHisButt", buttfuck, "Frot", frot, "B.Titfuck", bikiniTits, "Leave", cleanupAfterCombat);
@@ -89,7 +89,6 @@ public class MaleSpiderMorphScene extends BaseContent
 //Loss selector
 		public function loseToMaleSpiderMorph():void
 		{
-			if (doSFWloss()) return; //No rape in SFW mode.
 			var choices:Array = [];
 			if (player.hasCock()) choices[choices.length] = 0;
 			if (player.hasVagina()) choices[choices.length] = 1;

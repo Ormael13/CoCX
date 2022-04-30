@@ -98,7 +98,7 @@ public function tamaniDefeated(hpVictory:Boolean):void {
 	clearOutput();
 	if (hpVictory) outputText("Tamani is defeated!");
 	else outputText("Tamani gives up on defeating you and starts masturbating!");
-	if(player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
+	if(player.lust >= 33) {
 		outputText("  You could fuck her, but if that's the case why did you bother fighting her?\n\nWhat do you do to her?");
 		menu();
 		addButton(0, "Fuck", tamaniSexWon);
