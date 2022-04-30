@@ -125,7 +125,7 @@ internal function sharkWinChoices():void {
 		outputText("The shark-girl begins masturbating, giving up on dominating you.  The sight is truly entrancing.");
 		dynStats("lus", 15);
 	}
-	if(player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
+	if(player.lust >= 33 && player.gender > 0) {
 		outputText("  Do you have your way with her or leave?");
         var dildo:Function = (player.hasKeyItem("Deluxe Dildo") >= 0 ? sharkGirlGetsDildoed : null);
 		var temp3:Function =null;
@@ -165,7 +165,7 @@ public function oceanSharkWinChoices():void {
 	outputText("The shark girl unable to fight further as she slowly lets the currents carry her. Well, you could have fun with her but are you in the mood to begin with?");
 	menu();
 	addButton(0, "Leave", cleanupAfterCombat);
-	if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
+	if (player.lust >= 33 && player.gender > 0) {
 		if (player.hasCock()) addButton(1, "Fuck Her", sharkgirlOceanDickFuck1);
 		if (player.hasVagina()) addButton(2, "Sixty nine", sharkgirlOceanSixtyNine1);
 		SceneLib.uniqueSexScene.pcUSSPreChecksV2(oceanSharkWinChoices);
@@ -177,7 +177,7 @@ public function oceanTigerSharkWinChoices():void {
 	outputText("The tiger shark girl unable to fight further as she slowly lets the currents carry her. Well, you could have fun with her but are you in the mood to begin with?");
 	menu();
 	addButton(0, "Leave", cleanupAfterCombat);
-	if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
+	if (player.lust >= 33 && player.gender > 0) {
 		if (player.hasCock()) addButton(1, "Fuck Her", sharkgirlOceanDickFuck2);
 		if (player.hasVagina()) addButton(2, "Sixty nine", sharkgirlOceanSixtyNine2);
 		SceneLib.uniqueSexScene.pcUSSPreChecksV2(oceanTigerSharkWinChoices);
@@ -189,7 +189,7 @@ public function oceanSharkspackWinChoices():void {
 	outputText("The shark girl frenzy breaks formation before your might, leaving their weakest member behind. Well, you could have fun with her but are you in the mood to begin with?");
 	menu();
 	addButton(0, "Leave", cleanupAfterCombat);
-	if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
+	if (player.lust >= 33 && player.gender > 0) {
 		if (player.hasCock()) addButton(1, "Fuck Her", sharkgirlOceanDickFuck2);
 		if (player.hasVagina()) addButton(2, "Sixty nine", sharkgirlOceanSixtyNine2);
 		SceneLib.uniqueSexScene.pcUSSPreChecksV2(oceanSharkspackWinChoices);
@@ -411,11 +411,6 @@ Putting it on: (Lust increases)
 -------------------------------*/
 //Loss Rape scenes:
 internal function sharkLossRape():void {
-	if (flags[kFLAGS.SFW_MODE] > 0) {
-		doSFWloss();
-		cleanupAfterCombat();
-		return;
-	}
 	clearOutput();
 	spriteSelect(SpriteDb.s_sharkgirl);
 	//Genderless:
@@ -472,34 +467,18 @@ internal function sharkLossRape():void {
 		cleanupAfterCombat();
 		return;
 	}
-	doNext(playerMenu);
 }
 public function sharkLossOceanRape():void {
-	if (flags[kFLAGS.SFW_MODE] > 0) {
-		doSFWloss();
-		cleanupAfterCombat();
-		return;
-	}
 	clearOutput();
 	spriteSelect(SpriteDb.s_sharkgirl);
 	sharkLossOceanRape2();
 }
 public function tigersharkLossOceanRape():void {
-	if (flags[kFLAGS.SFW_MODE] > 0) {
-		doSFWloss();
-		cleanupAfterCombat();
-		return;
-	}
 	clearOutput();
 	spriteSelect(SpriteDb.s_izma);
 	sharkLossOceanRape2();
 }
 public function sharkspackLossOceanRape():void {
-	if (flags[kFLAGS.SFW_MODE] > 0) {
-		doSFWloss();
-		cleanupAfterCombat();
-		return;
-	}
 	clearOutput();
 	spriteSelect(SpriteDb.s_izma);
 	sharkLossOceanRape3();

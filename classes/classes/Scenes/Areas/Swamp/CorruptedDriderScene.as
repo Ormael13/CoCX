@@ -106,7 +106,7 @@ use namespace CoC;
 			}
 
 			//(Qualifies for any rape?:)
-			if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
+			if (player.lust >= 33) {
 				outputText("\n\nWhat do you do?");
 				choices("Butt Fuck", buttFuckBUTTFUCKBUTTTFUCKBUTTFUCK, "Fuck Pussy", vagFuck, "Bondage Fuck", careful, "FuckSpinner", fuckSpinner, "Ride Cock", rideCock,
 					"Ride Ovi", rideOvi, "RideOviAnal", rideOviAss, "B.Titfuck", null/*placeholder*/, "", null, "Leave", cleanupAfterCombat);
@@ -120,11 +120,6 @@ use namespace CoC;
 		public function loseToDrider():void
 		{
 			spriteSelect(SpriteDb.s_drider);
-			if (flags[kFLAGS.SFW_MODE] > 0) { //No rape in SFW mode.
-				clearOutput();
-				cleanupAfterCombat();
-				return;
-			}
 			//Build array of choices
 			var select:Array = [];
 			if (player.hasCock()) select[select.length] = 0;

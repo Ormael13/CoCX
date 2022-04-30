@@ -69,7 +69,6 @@ public class GnollSpearThrowerScene extends BaseContent
 		public function hyenaSpearLossAnal():void
 		{
 			spriteSelect(SpriteDb.s_spear_gnoll);
-			if (doSFWloss()) return;
 			//Oh shit get anal raped.
 			if (player.hasItem(consumables.S_DREAM)) {
 				SceneLib.plains.gnollScene.yoDawgIHeardULiekGNollBallzzzdahdakjldh();
@@ -166,7 +165,7 @@ public class GnollSpearThrowerScene extends BaseContent
 			if (monster.HP <= 0) outputText(" dazed");
 			else outputText(" aroused");
 			outputText(" to fight further.  One spotted paw holds tight to the shaft while the tawny warrior slowly falls to her knees, the will to fight completely gone.  Her head bows to you in submission as you slowly approach the defeated hyena.");
-			if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
+			if (player.lust >= 33 && player.gender > 0) {
 				outputText("\n\nUsing the hyena to get off would be easy.  What do you do?");
 				menu();
 				if (player.hasCock()) addButton(0, "Get BJ", hyenaVictoryRapeFellatio).hint("Make the gnoll suck you off.", "Get Blowjob");

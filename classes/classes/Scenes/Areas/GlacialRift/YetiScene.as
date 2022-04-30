@@ -56,7 +56,6 @@ public class YetiScene extends BaseContent
 
 		public function loseToYeti():void {
 			clearOutput();
-			if (doSFWloss()) return;
 			if (player.HP <= 0) outputText("You feel your strength give way as your fighting stance wavers; the yeti beast senses your exhaustion and tackles you to the ground. With a groan, you stare up at the yeti as he pins you beneath him. There is a brief comfort from having such a warm, furred creature pressed against you in the frozen cave, though you feel the heat and pressure of his monstrous prick sliding out of its sheath and grinding against your body. His intentions are clear: he’s going to enjoy your warmth forcefully.");
 			else outputText("You reach your limit; your loins are distracting you too much as you give up on fighting entirely. Your hands instead take to touching yourself through your armor lewdly: the only thing convincing you to keep anything on is the chill of the ice caverns surrounding you, but as you look at the ice yeti moving closer to loom over you, his monstrous red prick unsheathed fully and streaming the frigid air with its heat, you doubt you’ll be cold much longer.");
 			outputText("\n\n");

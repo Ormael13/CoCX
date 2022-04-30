@@ -422,7 +422,6 @@ import coc.view.MainView;
                     kFLAGS.SCENEHUNTER_UNI_HERMS,
                     kFLAGS.LOW_STANDARDS_FOR_ALL,
                     kFLAGS.HYPER_HAPPY,
-                    kFLAGS.SFW_MODE,
                     kFLAGS.NEW_GAME_PLUS_BONUS_UNLOCKED_HERM,
                     kFLAGS.MELEE_DAMAGE_OVERHAUL,
                     kFLAGS.LVL_UP_FAST,
@@ -1710,7 +1709,6 @@ import coc.view.MainView;
 			statScreenRefresh();
 			if (player.hasPerk(PerkLib.PastLifeCultivator) || player.hasPerk(PerkLib.PastLifeFighter) || player.hasPerk(PerkLib.PastLifeScout) || player.hasPerk(PerkLib.PastLifeScholar) || player.hasPerk(PerkLib.PastLifeSmith) || player.hasPerk(PerkLib.PastLifeTactician) || player.hasPerk(PerkLib.PastLifeWhore)) chooseToPlayHalf();
 			else chooseToPlay();
-			return;
 		}
 
 		private function chooseToPlayHalf():void {

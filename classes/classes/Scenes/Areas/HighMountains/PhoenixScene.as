@@ -114,7 +114,7 @@ public class PhoenixScene extends BaseContent
 		public function winAgainstPhoenix():void {
 			flags[kFLAGS.PHOENIX_HP_LOSS_COUNTER] = 0; //Reset counter if you win.
 			outputText("With one final grunt, the phoenix collapses against a nearby rock, barely able to support herself. The once-proud soldier has been reduced to a " + (monster.lust >= monster.maxLust() ? "dazed, lust-crazed slut, desperately pulling at her clothing in a mad attempt to expose herself": "a beaten, battered heap; completely unable to resist your advances") + ". ");
-			if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
+			if (player.lust >= 33) {
 				outputText("What do you do? \n\n");
 				menu();
 				if (player.hasCock()) {
@@ -136,7 +136,7 @@ public class PhoenixScene extends BaseContent
 		public function winAgainstPhoenix1():void {
 			flags[kFLAGS.PHOENIX_HP_LOSS_COUNTER] = 0; //Reset counter if you win.
 			outputText("With one final grunt, the phoenixes collapses, barely able to support themself. The once-proud soldiers has been reduced to a " + (monster.lust >= monster.maxLust() ? "dazed, lust-crazed sluts, desperately pulling at their clothing in a mad attempt to expose themself": "a beaten, battered heap; completely unable to resist your advances") + ". Still most of them seems to have some strength left as all lift off leaving behind one of them pressumable the weakest one. ");
-			if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
+			if (player.lust >= 33) {
 				outputText("What do you do? \n\n");
 				menu();
 				if (player.hasCock()) {
@@ -278,7 +278,6 @@ public class PhoenixScene extends BaseContent
 					return;
 				}
 			}
-			if (doSFWloss()) return; //No rape in SFW mode.
 			outputText("You collapse to the rocky ground, far too " + (player.lust >= player.maxLust() ? "turned on": "drained") + " to continue the fight. The phoenix smirks as you drop, carefully shedding her tattered clothing to expose her lush hips and breasts before making her way over to you, swaying sensuously with each step. ");
 			outputText("\n\n\"<i>I was just going to kill you and be done with it,</i>\" her hand grasps your chin as she speaks, turning your head up so that you can see both her gloating face and the throbbing, fully erect lizardcock that juts out above her soaked snatch. \"<i>But after that pathetic performance, I think I've come up with a much better use for you...</i>\"");
 			if (player.hasCock() && rand(2) == 0) {
@@ -297,7 +296,6 @@ public class PhoenixScene extends BaseContent
 					return;
 				}
 			}
-			if (doSFWloss()) return; //No rape in SFW mode.
 			outputText("You collapse to the rocky ground, far too " + (player.lust >= player.maxLust() ? "turned on": "drained") + " to continue the fight. The phoenixes smirks as you drop, then after short and heated talks one of them carefully shedding her tattered clothing to expose her lush hips and breasts before making her way over to you, swaying sensuously with each step. ");
 			outputText("\n\n\"<i>We were just going to kill you and be done with it,</i>\" her hand grasps your chin as she speaks, turning your head up so that you can see both her gloating face and the throbbing, fully erect lizardcock that juts out above her soaked snatch. \"<i>But after that pathetic performance, We've come up with a much better use for you...</i>\"");
 			if (player.hasCock() && rand(2) == 0) {

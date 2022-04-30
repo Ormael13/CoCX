@@ -98,14 +98,12 @@ public class GoblinAssassinScene extends BaseContent
 		public function gobboAssassinBeatYaUp1():void {
 			clearOutput();
 			spriteSelect(SpriteDb.s_goblinAssassin);
-			if (doSFWloss()) return;
 			if(player.lust <= (player.maxLust() * 0.99)) outputText("You collapse, utterly beaten. To make sure you'll be easier to handle, the victorious assassin saunters up, a pair of fluid filled needles in her hands. She jams them into your [player.legs], emptying the contents into you before you can so much as stammer a protest. Burning lust pours through your veins unbidden, and you moan out loud as the chemicals have their way with you as easily as the goblin soon will.\n\n");
 			gobboAssassinBeatYaUp();
 		}
 		public function gobboAssassinBeatYaUp2():void {
 			clearOutput();
 			spriteSelect(SpriteDb.s_goblinAssassin);
-			if (doSFWloss()) return;
 			outputText("After you collapse on the ground, the goblins hold a short huddle to try and figure out what to do. It ends pretty quickly with the tallest one walking towards you. You don't have to be a genius to know she's going to have you all to herself.");
 			outputText(" To make sure you'll be easier to handle, the victorious assassin saunters up, a pair of fluid filled needles in her hands. She jams them into your [player.legs], emptying the contents into you before you can so much as stammer a protest. Burning lust pours through your veins unbidden, and you moan out loud as the chemicals have their way with you as easily as the goblin soon will.");
 			outputText("\n\n");
@@ -280,7 +278,7 @@ public class GoblinAssassinScene extends BaseContent
 				feeder = giveGoblinAMilkMustache;
 			}
 			if (player.lust >= 33 && player.gender > 0 && (fitsFuck != null || cuntFuck != null || tooBig != null ||
-					corruptTooBig != null || buttseks != null || feeder != null || spiderCondom != null || eggs != null) && flags[kFLAGS.SFW_MODE] <= 0) {
+					corruptTooBig != null || buttseks != null || feeder != null || spiderCondom != null || eggs != null)) {
 				outputText("\n\n<b>What do you do to her, and if anything, which of your body parts do you use?</b>");
 				menu();
 				if (fitsFuck != null) addButton(0, "Dick Fuck", fitsFuck);

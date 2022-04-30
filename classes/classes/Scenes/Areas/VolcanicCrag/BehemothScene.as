@@ -209,15 +209,9 @@ public class BehemothScene extends BaseContent
 			player.gems -= gemsLost;
 			statScreenRefresh();
 			CoC.instance.inCombat = false;
-			if (doSFWloss()) {
-				outputText("\n\n\"<i>I win and you know what that means? I'll take some of your gems,</i>\" he says and he takes " + gemsLost + " gems from your pouch, \"<i>I'll take care of you while you're recovering.</i>\" You black out...");
-				HPChange(player.maxHP() / 2, false);
-				fatigue(-50);
-				return;
-			}
 			if (player.HP <= 0) outputText("You collapse from your injuries.");
 			else outputText("You collapse from your overwhelming desires.");
-			outputText("\n\n\"<i>I win and you know what that means? I'll take some of your gems and I get to fuck your ass. Don't you worry, I'll be gentle,</i>\" he says with a grin. He takes " + gemsLost + " gems from your pouch. \"<i>I will give you some of your gems back should you beat me,</i>\" he says.");
+			outputText("\n\n\"<i>I win and you know what that means? I'll take some of your gems, and I get to fuck your ass. Don't you worry, I'll be gentle,</i>\" he says with a grin. He takes " + gemsLost + " gems from your pouch. \"<i>I will give you some of your gems back should you beat me,</i>\" he says.");
 			doNext(analCatchBehemoth);
 		}
 		

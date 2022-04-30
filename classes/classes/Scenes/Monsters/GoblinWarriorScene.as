@@ -81,13 +81,11 @@ public class GoblinWarriorScene extends BaseContent
 		//[LOSS SEXAHNZ]
 		public function gobboWarriorBeatYaUp1():void {
 			clearOutput();
-			if (doSFWloss()) return;
 			if (player.lust <= 99) outputText("You collapse, utterly beaten. To make sure you'll be easier to handle, the victorious warrior saunters up, a pair of fluid filled potions in her hands. She forcibly jams the Lust Drafts, emptying the contents into you before you can so much as stammer a protest. Burning lust pours through your veins unbidden, and you moan out loud as the chemicals have their way with you as easily as the goblin soon will.\n\n");
 			gobboWarriorBeatYaUp();
 		}
 		public function gobboWarriorBeatYaUp2():void {
 			clearOutput();
-			if (doSFWloss()) return;
 			if (player.lust <= 99) outputText("You collapse, utterly beaten. To make sure you'll be easier to handle, the victorious warrior, picked by leader goblin, saunters up, a pair of fluid filled potions in her hands. She forcibly jams the Lust Drafts, emptying the contents into you before you can so much as stammer a protest. Burning lust pours through your veins unbidden, and you moan out loud as the chemicals have their way with you as easily as the goblin soon will. After that you hear short discussion what to do with you, ended by larger goblin order to give you to best warrior in group to handle.\n\n");
 			gobboWarriorBeatYaUp();
 		}
@@ -254,7 +252,7 @@ public class GoblinWarriorScene extends BaseContent
 				feeder = giveGoblinAMilkMustache;
 			}
 			if (player.lust >= 33 && player.gender > 0 && (fitsFuck != null || cuntFuck != null || tooBig != null ||
-					corruptTooBig != null || buttseks != null || feeder != null || spiderCondom != null || eggs != null) && flags[kFLAGS.SFW_MODE] <= 0) {
+					corruptTooBig != null || buttseks != null || feeder != null || spiderCondom != null || eggs != null)) {
 				outputText("\n\n<b>What do you do to her, and if anything, which of your body parts do you use?</b>");
 				menu();
 				if (fitsFuck != null) addButton(0, "Dick Fuck", fitsFuck);

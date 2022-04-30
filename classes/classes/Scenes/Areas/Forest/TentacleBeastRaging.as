@@ -61,9 +61,7 @@ public class TentacleBeastRaging extends Monster
 				outputText("The tentacle beast's mass begins quivering and sighing, the tentacles wrapping around each other and feverishly caressing each other.  It seems the beast has given up on fighting.");
 			}
 			if (hpVictory) SceneLib.forest.tentacleBeastScene.choiceofaction();
-			else if (!flags[kFLAGS.SFW_MODE] <= 0)
-				SceneLib.forest.tentacleBeastScene.tentacleVictory();
-			else cleanupAfterCombat();
+			else SceneLib.forest.tentacleBeastScene.tentacleVictory();
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void

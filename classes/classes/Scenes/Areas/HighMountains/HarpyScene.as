@@ -7,7 +7,6 @@ import classes.*;
 import classes.BodyParts.Face;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
-import classes.Scenes.SceneLib;
 
 public class HarpyScene extends BaseContent
 	{
@@ -32,7 +31,7 @@ public class HarpyScene extends BaseContent
 				return;
 			}
 			//Rape options
-			if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
+			if (player.lust >= 33) {
 				outputText("  What do you do to her?");
 				menu();
 				if (player.hasCock()) {
@@ -55,7 +54,6 @@ public class HarpyScene extends BaseContent
 
 		public function harpyLossU():void
 		{
-			if (doSFWloss()) return; //No rape in SFW mode.
 			//NO MALE RAPE IF DICK TOO BIG
 			var x:Number = -1;
 			if (player.hasCock()) x = player.cockThatFits(monster.vaginalCapacity());
@@ -80,7 +78,6 @@ public class HarpyScene extends BaseContent
 
 		private function harpyGooGenderlessLoss():void
 		{
-			if (doSFWloss()) return; //No rape in SFW mode.
 			clearOutput();
 			outputText("The triumphant harpy looks down at your goopy form, ready to take you.  She seems a little confused though, and begins poking at your gelatinous body.\n\n");
 
@@ -104,7 +101,6 @@ public class HarpyScene extends BaseContent
 //Requires pussy or cock small enough for harpy!
 		private function harpyLossLust():void
 		{
-			if (doSFWloss()) return; //No rape in SFW mode.
 			clearOutput();
 			//Merauder wroted.
 			var x:Number = -1;
@@ -166,7 +162,6 @@ public class HarpyScene extends BaseContent
 //No genderless folks.
 		private function harpyDamageLoss():void
 		{
-			if (doSFWloss()) return; //No rape in SFW mode.
 			clearOutput();
 
 			var x:Number = -1;

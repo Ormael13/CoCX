@@ -2990,7 +2990,7 @@ public static const USE_OLD_INTERFACE:int                                       
 public static const IMAGEPACK_OFF:int                                               = 2982; // 1 if imagepack is disabled.
 public static const SPRITE_STYLE:int                                                = 2983; // 1 if old sprites are used.
 public static const AUTO_LEVEL:int                                                  = 2984; // 1 if automatic leveling is enabled.
-public static const SFW_MODE:int                                                    = 2985; // 1 if SFW is enabled.
+public static const UNKNOWN_FLAG_NUMBER_02985:int                                   = 2985; // formerly SFW mode, now unused
 public static const WATERSPORTS_ENABLED:int                                         = 2986; // 1 if watersport scenes are enabled.
 public static const USE_METRICS:int                                                 = 2987; // No longer used. Previously: 0 for imperial, 1 for metric.
 public static const USE_OLD_FONT:int                                                = 2988; // Side bar font.

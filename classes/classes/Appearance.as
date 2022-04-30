@@ -1335,15 +1335,7 @@ public class Appearance extends Utils
 			if (description != "")
 				description += " ";
 
-			if (CoC.instance.flags[kFLAGS.SFW_MODE] > 0) { //Removes something that might offend sensitive people.
-				options = ["vagina",
-				"pussy",
-				"cooter",
-				"snatch",
-				"muff"];
-			}
-			else {
-				options = ["vagina",
+			options = ["vagina",
 				"pussy",
 				"cooter",
 				"twat",
@@ -1351,7 +1343,6 @@ public class Appearance extends Utils
 				"snatch",
 				"fuck-hole",
 				"muff"];
-			}
 			description += randomChoice(options);
 			//Something that would be nice to have but needs a variable in Creature or Character.
 			//if(i_creature.bunnyScore() >= 3) description += "rabbit hole";
@@ -1449,9 +1440,6 @@ public class Appearance extends Utils
 				"clit",
 				"clit",
 				"button"];
-			if (CoC.instance.flags[kFLAGS.SFW_MODE] > 0) {
-				options = ["bump", "button"];
-			}
 			description += randomChoice(options);
 
 			return description;
@@ -1874,18 +1862,12 @@ public class Appearance extends Utils
 			}
 
 			//asshole descriptor
-			if (CoC.instance.flags[kFLAGS.SFW_MODE] > 0) {
-			description += randomChoice("rear end",
-					"backdoor");
-			}
-			else {
 			description += randomChoice("ass",
 					"anus",
 					"pucker",
 					"backdoor",
 					"asshole",
 					"butthole");
-			}
 			return description;
 		}
 

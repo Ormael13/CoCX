@@ -1041,7 +1041,7 @@ public class Camp extends NPCAwareContent{
 		else if (!player.hasPerk(PerkLib.JobSoulCultivator) && player.hasPerk(PerkLib.Metamorph)) addButton(10, "Metamorph", SceneLib.metamorph.openMetamorph).hint("Use your soulforce to mold your body.");
 		if (player.lust >= 30) {
 			addButton(11, "Masturbate", SceneLib.masturbation.masturbateMenu);
-			if ((((player.hasPerk(PerkLib.HistoryReligious) || player.hasPerk(PerkLib.PastLifeReligious)) && player.cor <= 66) || (player.hasPerk(PerkLib.Enlightened) && player.cor < 10)) && !(player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0) || flags[kFLAGS.SFW_MODE] >= 1) addButton(11, "Meditate", SceneLib.masturbation.masturbateMenu);
+			if ((((player.hasPerk(PerkLib.HistoryReligious) || player.hasPerk(PerkLib.PastLifeReligious)) && player.cor <= 66) || (player.hasPerk(PerkLib.Enlightened) && player.cor < 10)) && !(player.hasStatusEffect(StatusEffects.Exgartuan) && player.statusEffectv2(StatusEffects.Exgartuan) == 0)) addButton(11, "Meditate", SceneLib.masturbation.masturbateMenu);
 		}
 		addButton(12, "Wait", doWaitMenu).hint("Wait for one to twelve hours. Or until the night comes.");
 		if (player.fatigue > 40 || player.HP / player.maxHP() <= .9) addButton(12, "Rest", restMenu).hint("Rest for one to twelve hours. Or until fully healed / night comes.");
@@ -6057,6 +6057,8 @@ public function rebirthFromBadEnd():void {
 				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.005;
 			}
+			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02985] != 0) //reset SFW mode flag just in case
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02985] = 0;
             outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
             doNext(doCamp);
             return;

@@ -39,7 +39,7 @@ public function oceanScyllaWin():void {
 		outputText("You could take advantage of her and punish her for trying to impose herself on you. Do you rape her?\n\n");
 		menu();
 		addButton(0, "No", oceanScyllaWin2);
-		if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
+		if (player.lust >= 33 && player.gender > 0) {
 			addButton(1, "Fuck Her", oceanScyllaWin3);
 			SceneLib.uniqueSexScene.pcUSSPreChecksV2(oceanScyllaWin);
 					}
@@ -76,11 +76,6 @@ public function oceanScyllaWin3():void {
 }
 
 public function oceanScyllaLoss():void {
-	if (flags[kFLAGS.SFW_MODE] > 0) {
-		doSFWloss();
-		cleanupAfterCombat();
-		return;
-	}
 	clearOutput();
 	//spriteSelect(SpriteDb.s_izma);
 	oceanScyllaLoss2();

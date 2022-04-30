@@ -27,7 +27,6 @@ package classes.Scenes.Areas.Plains
 //Gnoll Rape
 		public function getRapedByGnoll():void
 		{
-			if (doSFWloss()) return;
 			//Oh shit get anal raped.
 			if (player.hasItem(consumables.S_DREAM)) {
 				yoDawgIHeardULiekGNollBallzzzdahdakjldh();
@@ -110,7 +109,7 @@ package classes.Scenes.Areas.Plains
 			else outputText("The hyena girl heaves a giant breath and takes a single step backwards.  Her club thumps to the ground and her hands fall to her shaft, stroking along its rough length.");
 
 			//Do You Rape The Gnoll?
-			if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
+			if (player.lust >= 33) {
 				outputText("  The gnoll is at your mercy.  What will you do with her?");
 				menu();
 				if (player.hasCock()) {

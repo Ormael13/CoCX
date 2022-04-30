@@ -78,7 +78,7 @@ public class TentacleBeast extends Monster
 				cleanupAfterCombat();
 			}
 			else {
-				if(!hpVictory && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0)
+				if(!hpVictory && player.gender > 0)
 					SceneLib.forest.tentacleBeastScene.tentacleVictory();
 				else {
 					sceneHunter.print("Maybe lust-defeat would leave more opportunities?");

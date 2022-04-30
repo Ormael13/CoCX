@@ -952,10 +952,6 @@ public function nagaFUCKSJOOOOOO():void {
 public function nagaRapeChoice():void {
 	if (monster.HP < 1) outputText("You've defeated the " + gorgonOrNaga + "!  ");
 	else outputText("The " + gorgonOrNaga + " writhes in the sand, masturbating feverishly!  She's completely forgotten about fighting you.  ");
-	if (flags[kFLAGS.SFW_MODE] > 0) {
-		cleanupAfterCombat();
-		return;
-	}
 	if (player.lust < 33) {
 		outputText("You aren't aroused enough to fuck her.");
 		cleanupAfterCombat();

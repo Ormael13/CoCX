@@ -18,7 +18,7 @@ package classes.Scenes.Areas.Tundra
 			if (player.HP <= 0) outputText("her onslaught");
 			else outputText("your rising lust");
 			outputText(", you collapse to your knees, utterly at the valkyrie’s mercy.  She plants her spear in the ground, just inches from your head, and rolls you onto your back with her foot. \n\n");
-			if (monster.lust >= 70 && flags[kFLAGS.SFW_MODE] <= 0) loseToValkyrieForcedOral();
+			if (monster.lust >= 70) loseToValkyrieForcedOral();
 			else {
 				outputText("With one swift, contemptuous kick to the head, she knocks you right out.");
 				outputText("  You are utterly freezing after such long exposure to the cold.");
@@ -61,7 +61,7 @@ package classes.Scenes.Areas.Tundra
 			//-If Female: [Get Licked] [Scissor]
 			//-If Herm: All Options)
 			menu();
-			if (player.lust >= 33 && flags[kFLAGS.SFW_MODE] <= 0) {
+			if (player.lust >= 33) {
 				if (player.hasCock()) {
 					addButton(0, "Aerial Fuck", valkyrieAerialFuck);
 					addButton(1, "Anal Fuck", valkyrieAnalFuck);

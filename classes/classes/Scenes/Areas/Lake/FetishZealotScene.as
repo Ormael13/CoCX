@@ -85,7 +85,6 @@ public class FetishZealotScene extends AbstractLakeContent
 //Raping the player
 		public function zealotLossRape():void
 		{
-			if (doSFWloss()) return; //No rape in SFW mode.
 			clearOutput();
 			var broseph:String = player.mf("dude", "chick");
 			//Pre Rape Scene - lose by hp
@@ -261,7 +260,7 @@ public class FetishZealotScene extends AbstractLakeContent
 			if (monster.HP < 1) outputText("The zealot collapses from his wounds, too hurt to continue controlling his powers.");
 			//Defeated by lust
 			else outputText("The zealot quivers for a moment before collapsing, his desires becoming too great for even him to control.");
-			if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
+			if (player.lust >= 33 && player.gender > 0) {
 				outputText("\n\nDo you want to take advantage of his vulnerable state to sate your lusts?");
 				menu();
 				addButton(0, "Yes", zealotWinRape);

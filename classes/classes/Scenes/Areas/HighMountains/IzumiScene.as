@@ -1129,11 +1129,6 @@ import classes.Stats.Buff;
 			{
 				addButton(14, "Leave", lossSceneLeave);
 			}
-			if (flags[kFLAGS.SFW_MODE] > 0) {
-				outputText("<b>SFW mode is enabled.</b>");
-				menu();
-				doNext(lossSceneLeave);
-			}
 			
 		}
 

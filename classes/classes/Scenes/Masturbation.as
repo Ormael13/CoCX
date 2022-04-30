@@ -16,10 +16,6 @@ public class Masturbation extends BaseContent {
 
 		public function masturbateMenu():void {
 			menu();
-			if (flags[kFLAGS.SFW_MODE] > 0) {
-				meditate();
-				return;
-			}
 			if (prison.inPrison && !prison.prisonCanMasturbate()) {
 				doNext(playerMenu);
 				return;
