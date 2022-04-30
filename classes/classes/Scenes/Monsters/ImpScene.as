@@ -44,7 +44,7 @@ use namespace CoC;
             addButton(14, "Leave", cleanupAfterCombat);
 			if (player.lust > 33) {
                 if (!player.isTaur()) {
-                    addButtonIfTrue(0, "Male Rape", rapeImpWithDick, ("Req. dick with area < " + monster.analCapacity()), player.cockThatFits(monster.analCapacity()) >= 0);
+                    addButtonIfTrue(0, "Male Rape", rapeImpWithDick, ("Req. dick with area smaller than " + monster.analCapacity()), player.cockThatFits(monster.analCapacity()) >= 0);
                     addButtonIfTrue(1, "Female Rape", rapeImpWithPussy, "Req. vagina", player.hasVagina());
                     addButtonIfTrue(4, "Use Condom", curry(rapeImpWithDick, 1), "Req. Condom item, non-taur and fitting dick", player.cockThatFits(monster.analCapacity()) >= 0 && player.hasItem(useables.CONDOM));
                     //taur
@@ -56,7 +56,7 @@ use namespace CoC;
                     addButtonDisabled(1, "Female Rape", "Req. non-Taur");
                     addButtonDisabled(4, "Use Condom", "Req. non-Taur");
                     //taur
-                    addButtonIfTrue(5, "Centaur Rape", rapeImpWithDick, ("Req. dick with area < " + monster.analCapacity() + " or pussy."), player.cockThatFits(monster.analCapacity()) >= 0 || player.hasVagina());
+                    addButtonIfTrue(5, "Centaur Rape", rapeImpWithDick, ("Req. dick with area smaller than " + monster.analCapacity() + " or pussy."), player.cockThatFits(monster.analCapacity()) >= 0 || player.hasVagina());
 					addButtonIfTrue(6, "Group Vaginal", centaurGirlOnImps, "Req. vagina", player.hasVagina());
                 }
                 addButton(2, "Oral Give", oralGive);
@@ -291,7 +291,7 @@ use namespace CoC;
 			else {
 				outputText("Do you focus on your maleness or girl-parts?");
                 menu();
-                addButtonIfTrue(0, "Male", centaurOnImpMale, ("Req. dick with area < " + monster.analCapacity()), player.cockThatFits(monster.analCapacity()) >= 0);
+                addButtonIfTrue(0, "Male", centaurOnImpMale, ("Req. dick with area smaller than " + monster.analCapacity()), player.cockThatFits(monster.analCapacity()) >= 0);
                 addButtonIfTrue(1, "Female Rape", rapeImpWithPussy, "Req. vagina.", player.hasVagina());
                 addButton(14, "Leave", cleanupAfterCombat);
 			}
@@ -1839,7 +1839,7 @@ use namespace CoC;
 			menu();
 			//Continues in, Male Anal, Female Vaginal, or Breastfeed
 			if(player.lust >= 33) {
-                addButtonIfTrue(0,"FuckHisAss", impLordBumPlug, "Req. cock with area < " + monster.analCapacity(), player.cockThatFits(monster.analCapacity()) >= 0);
+                addButtonIfTrue(0,"FuckHisAss", impLordBumPlug, "Req. cock with area smaller than " + monster.analCapacity(), player.cockThatFits(monster.analCapacity()) >= 0);
                 addButtonIfTrue(1,"Get Blown", getBlownByAnImpLord, "Req. cock", player.hasCock());
                 addButtonIfTrue(2,"Ride Cock", femaleVagRape, "Req. vagina", player.hasVagina());
 				if(player.hasPerk(PerkLib.Feeder) && monster.short != "imp overlord" && monster.short != "imp warlord") addButton(3,"Breastfeed",feederBreastfeedRape);

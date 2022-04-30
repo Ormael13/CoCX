@@ -1115,8 +1115,8 @@ public class DesertCave extends DungeonAbstractContent
 			menu();
             //Male options
 			if(player.hasCock()) {
-				addButtonIfTrue(0,"Fuck Her",menFuckUpSomeCumWitch, "Req. cock with area < " + monster.vaginalCapacity(), player.cockThatFits(monster.vaginalCapacity()) >= 0);
-				addButtonIfTrue(1,"Too Big Fuck",maleTooBigVictorySex, "Req. cock with area > " + monster.vaginalCapacity(), player.biggestCockArea() > monster.vaginalCapacity());
+				addButtonIfTrue(0,"Fuck Her",menFuckUpSomeCumWitch, "Req. cock with area smaller than " + monster.vaginalCapacity(), player.cockThatFits(monster.vaginalCapacity()) >= 0);
+				addButtonIfTrue(1,"Too Big Fuck",maleTooBigVictorySex, "Req. cock with area larger than " + monster.vaginalCapacity(), player.biggestCockArea() > monster.vaginalCapacity());
                 addButtonIfTrue(2,"Tentacles",tentacleVictoryGangbangCumWitch, "Req. 3 tentacle/stamen cocks", player.countCocksWithType(CockTypesEnum.TENTACLE) >= 3).hint("Fuck the Cum Witch with your tentacle cocks.");
 			}
             //Female Victory Sex
