@@ -833,6 +833,10 @@ public class Soulforce extends BaseContent
 			player.createPerk(PerkLib.SensualLover, 0, 0, 0, 0);
 			outputText("\n\n<b>(Gained Perk: Sensual Lover!)</b>");
 		}
+		if (!player.hasPerk(PerkLib.ThickSkin)) {
+			player.createPerk(PerkLib.ThickSkin, 0, 0, 0, 0);
+			outputText("\n\n<b>(Gained Perk: Thick Skin!)</b>");
+		}
 		if (player.hasPerk(PerkLib.Perfection) && !player.hasPerk(PerkLib.Creationism)) {
 			player.createPerk(PerkLib.Creationism, 0, 0, 0, 0);
 			outputText("\n\n<b>(Gained Perk: Creationism!)</b>");

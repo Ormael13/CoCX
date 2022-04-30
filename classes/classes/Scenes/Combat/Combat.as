@@ -1010,11 +1010,7 @@ public class Combat extends BaseContent {
 
     internal function buildOtherActions(buttons:ButtonDataList):void {
         var bd:ButtonData;
-		if (CombatAbilities.BloodChains.currentCooldown > 0) {
-			outputText("Blood Chains cooldown is "+CombatAbilities.BloodChains.currentCooldown+" turn(s)");
-			if (monster.hasStatusEffect(StatusEffects.Stunned)) outputText("Left stun duration: " + monster.statusEffectv1(StatusEffects.Stunned) + "");
-		}
-        buttons.add("Surrender(H)", combat.surrenderByHP, "Stop defending up to the point enemy would beat you down to minimal HP.");
+		buttons.add("Surrender(H)", combat.surrenderByHP, "Stop defending up to the point enemy would beat you down to minimal HP.");
         buttons.add("Surrender(L)", combat.surrenderByLust, "Fantasize about your opponent in a sexual way so much it would fill up your lust you'll end up getting raped.");
         if (player.hasPerk(PerkLib.DoubleAttack) || player.hasPerk(PerkLib.DoubleAttackLarge) || player.hasPerk(PerkLib.DoubleAttackSmall) || player.hasPerk(PerkLib.Combo) || (player.hasPerk(PerkLib.JobBeastWarrior) && (player.hasNaturalWeapons() || player.haveNaturalClawsTypeWeapon())) ||
             ((player.hasPerk(PerkLib.Berzerker) || (player.hasPerk(PerkLib.Lustzerker)) && player.hasPerk(MutationsLib.SalamanderAdrenalGlandsEvolved))) || player.hasPerk(PerkLib.Poisoning) || player.hasPerk(PerkLib.SwiftCasting) || player.hasStatusEffect(StatusEffects.SoulDrill1) || player.hasStatusEffect(StatusEffects.ThePhalluspear1)) {
@@ -7750,6 +7746,7 @@ public class Combat extends BaseContent {
 		if (monster.hasPerk(PerkLib.EnemyColossalType)) monsterLvlAdjustment += 10;
 		//if (player.hasPerk(PerkLib.EnemyGodType))
         if (monster.hasStatusEffect(StatusEffects.TranscendentSoulField)) monsterLvlAdjustment += monster.statusEffectv2(StatusEffects.TranscendentSoulField);
+        if (monster.hasStatusEffect(StatusEffects.ATranscendentSoulField)) monsterLvlAdjustment += monster.statusEffectv2(StatusEffects.ATranscendentSoulField);
         return monsterLvlAdjustment;
     }
 
@@ -7801,6 +7798,7 @@ public class Combat extends BaseContent {
         damage *= doDamageReduction();
 		if (damage < 1) damage = 1;
         if (monster.hasStatusEffect(StatusEffects.TranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.TranscendentSoulField));
+        if (monster.hasStatusEffect(StatusEffects.ATranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.ATranscendentSoulField));
         if (player.hasStatusEffect(StatusEffects.Minimise)) damage *= 0.01;
         if (player.hasPerk(PerkLib.Sadist)) {
             damage *= 1.2;
@@ -7899,6 +7897,7 @@ public class Combat extends BaseContent {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         damage *= doDamageReduction();
         if (monster.hasStatusEffect(StatusEffects.TranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.TranscendentSoulField));
+        if (monster.hasStatusEffect(StatusEffects.ATranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.ATranscendentSoulField));
 		if (damage < 1) damage = 1;
         if (player.hasPerk(PerkLib.Sadist)) {
             damage *= 1.2;
@@ -7968,6 +7967,7 @@ public class Combat extends BaseContent {
         damage *= doDamageReduction();
 		if (damage < 1) damage = 1;
         if (monster.hasStatusEffect(StatusEffects.TranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.TranscendentSoulField));
+        if (monster.hasStatusEffect(StatusEffects.ATranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.ATranscendentSoulField));
         if (player.hasPerk(PerkLib.Sadist)) {
             damage *= 1.2;
             dynStats("lus", 3);
@@ -8060,6 +8060,7 @@ public class Combat extends BaseContent {
         damage *= doDamageReduction();
 		if (damage < 1) damage = 1;
         if (monster.hasStatusEffect(StatusEffects.TranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.TranscendentSoulField));
+        if (monster.hasStatusEffect(StatusEffects.ATranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.ATranscendentSoulField));
         if (player.hasPerk(PerkLib.Sadist)) {
             damage *= 1.2;
             dynStats("lus", 3);
@@ -8143,6 +8144,7 @@ public class Combat extends BaseContent {
         damage *= doDamageReduction();
 		if (damage < 1) damage = 1;
         if (monster.hasStatusEffect(StatusEffects.TranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.TranscendentSoulField));
+        if (monster.hasStatusEffect(StatusEffects.ATranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.ATranscendentSoulField));
         if (player.hasPerk(PerkLib.Sadist)) {
             damage *= 1.2;
             dynStats("lus", 3);
@@ -8228,6 +8230,7 @@ public class Combat extends BaseContent {
         damage *= doDamageReduction();
 		if (damage < 1) damage = 1;
         if (monster.hasStatusEffect(StatusEffects.TranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.TranscendentSoulField));
+        if (monster.hasStatusEffect(StatusEffects.ATranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.ATranscendentSoulField));
         if (player.hasPerk(PerkLib.Sadist)) {
             damage *= 1.2;
             dynStats("lus", 3);
@@ -8306,6 +8309,7 @@ public class Combat extends BaseContent {
         damage *= doDamageReduction();
 		if (damage < 1) damage = 1;
         if (monster.hasStatusEffect(StatusEffects.TranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.TranscendentSoulField));
+        if (monster.hasStatusEffect(StatusEffects.ATranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.ATranscendentSoulField));
         if (player.hasPerk(PerkLib.Sadist)) {
             damage *= 1.2;
             dynStats("lus", 3);
@@ -8378,6 +8382,7 @@ public class Combat extends BaseContent {
         damage *= doDamageReduction();
 		if (damage < 1) damage = 1;
         if (monster.hasStatusEffect(StatusEffects.TranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.TranscendentSoulField));
+        if (monster.hasStatusEffect(StatusEffects.ATranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.ATranscendentSoulField));
         if (player.hasPerk(PerkLib.Sadist)) {
             damage *= 1.2;
             dynStats("lus", 3);
@@ -8446,6 +8451,7 @@ public class Combat extends BaseContent {
         damage *= doDamageReduction();
 		if (damage < 1) damage = 1;
         if (monster.hasStatusEffect(StatusEffects.TranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.TranscendentSoulField));
+        if (monster.hasStatusEffect(StatusEffects.ATranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.ATranscendentSoulField));
         if (player.hasPerk(PerkLib.Sadist)) {
             damage *= 1.2;
             dynStats("lus", 3);
@@ -8518,6 +8524,7 @@ public class Combat extends BaseContent {
         damage *= doDamageReduction();
 		if (damage < 1) damage = 1;
         if (monster.hasStatusEffect(StatusEffects.TranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.TranscendentSoulField));
+        if (monster.hasStatusEffect(StatusEffects.ATranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.ATranscendentSoulField));
         if (player.hasPerk(PerkLib.Sadist)) {
             damage *= 1.2;
             dynStats("lus", 3);
@@ -8586,6 +8593,7 @@ public class Combat extends BaseContent {
         damage *= doDamageReduction();
 		if (damage < 1) damage = 1;
         if (monster.hasStatusEffect(StatusEffects.TranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.TranscendentSoulField));
+        if (monster.hasStatusEffect(StatusEffects.ATranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.ATranscendentSoulField));
         if (player.hasPerk(PerkLib.Sadist)) {
             damage *= 1.2;
             dynStats("lus", 3);
@@ -8653,6 +8661,7 @@ public class Combat extends BaseContent {
         MDOCount++; // for multipile attacks to prevent stupid repeating of damage messages
         if (damage < 1) damage = 1;
         if (monster.hasStatusEffect(StatusEffects.TranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.TranscendentSoulField));
+        if (monster.hasStatusEffect(StatusEffects.ATranscendentSoulField)) damage *= (1 / monster.statusEffectv1(StatusEffects.ATranscendentSoulField));
         if (player.hasPerk(PerkLib.Sadist)) {
             damage *= 1.2;
             if (player.armorName == "Scandalous Succubus Clothing") {
@@ -16088,4 +16097,4 @@ public class Combat extends BaseContent {
         return inteWisLibScale(player.lib, randomize);
     }
 }
-}
+}
