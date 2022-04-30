@@ -1736,8 +1736,11 @@ public class SaveUpdater extends NPCAwareContent {
 				}
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.005;
 			}
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02985] != 0) //reset SFW mode flag just in case
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02985] = 0;
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.006) {
+				if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02985] != 0) //reset SFW mode flag just in case
+					flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02985] = 0;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 35.006;
+			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
 			return;
