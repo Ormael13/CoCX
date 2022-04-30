@@ -36,6 +36,6 @@ public class EyeTyrantScene extends BaseContent {
         if (player.hasStatusEffect(StatusEffects.TFDealer2) && player.statusEffectv1(StatusEffects.TFDealer2) < 1) player.addStatusValue(StatusEffects.TFDealer2, 1, 1);
         else player.createStatusEffect(StatusEffects.TFDealer2, 1, 0, 0, 0);
         cleanupAfterCombat();
-		}
+	}
 }
 }

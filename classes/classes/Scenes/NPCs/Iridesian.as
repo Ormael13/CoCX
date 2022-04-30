@@ -31,6 +31,12 @@ import classes.internals.*;
 			if (hasPerk(PerkLib.DaoistCultivator)) cost -= 80;
 			return cost;
 		}
+		public function soulskillCostEnergyProjection():Number {
+			var cost:Number = 200;
+			if (hasPerk(PerkLib.DaoistCultivator)) cost -= 20;
+			if (hasStatusEffect(StatusEffects.TrueFormAngel)) cost *= 3;
+			return cost;
+		}
 		
 		public function SoulskillMod():Number {
 			var mod1:Number = 1;
@@ -95,31 +101,38 @@ import classes.internals.*;
 		}
 		
 		public function castEnergyProjectionIridesian():void {
-			outputText("His eye begins to glow with a harsh radiance as energy gathers around him. In a flash, you're struck by a large cross-shaped explosion. ");
-			soulforce -= soulskillCostHailofBlades();
+			outputText("His eye begins to glow with a harsh radiance as energy gathers around him. In a flash, you're struck by a large cross-shaped explosion"+(hasStatusEffect(StatusEffects.TrueFormAngel)?"s":"")+". ");
+			soulforce -= soulskillCostEnergyProjection();
 			var damage:Number = eBaseIntelligenceDamage();
 			damage += eBaseWisdomDamage();
 			damage *= SoulskillMod();
 			damage = Math.round(damage);
-			damage = player.takeFireDamage(damage, true);
+			player.takeFireDamage(damage, true);
+			if (hasStatusEffect(StatusEffects.TrueFormAngel)) {
+				player.takeFireDamage(damage, true);
+				player.takeFireDamage(damage, true);
+			}
 		}
 		
 		private function IridesianDominationGaze():void {
 			outputText("The eyes gaze bore deep within your very mind with a single order.\n\n");
 			outputText("\"<i>Stillness</i>\"\n\n");
 			outputText("You suddenly panic as you are held in place, fighting against the mind control as the thing takes aim.\n\n");
-			createStatusEffect(StatusEffects.AbilityCooldown1, 3, 0, 0, 0);
-			player.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+			if (hasStatusEffect(StatusEffects.TrueFormAngel)) {
+				createStatusEffect(StatusEffects.AbilityCooldown1, 7, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.Stunned, 3, 0, 0, 0);
+			}
+			else {
+				createStatusEffect(StatusEffects.AbilityCooldown1, 3, 0, 0, 0);
+				player.createStatusEffect(StatusEffects.Stunned, 1, 0, 0, 0);
+			}
 		}
 		
 		private function IridesianOmnicast():void {
 			outputText("Oculicorn suddenly fixates you with all of its eye unleashing a barrage of rays at you! ");
-			IridesianOmnicastD();
-			IridesianOmnicastD();
-			IridesianOmnicastD();
-			IridesianOmnicastD();
-			IridesianOmnicastD();
-			IridesianOmnicastD();
+			var omni:Number = 6;
+			if (hasStatusEffect(StatusEffects.TrueFormAngel)) omni *= 4;
+			while (omni-->0) IridesianOmnicastD();
 			outputText("\n\n");
 		}
 		private function IridesianOmnicastD():void {
@@ -136,7 +149,8 @@ import classes.internals.*;
 		
 		private function AuraOfPurityIridesian():void {
 			var damage:Number = eBaseIntelligenceDamage();
-			damage *= 12;
+			if (hasStatusEffect(StatusEffects.TrueFormAngel)) damage *= 18;
+			else damage *= 12;
 			if (player.cor < 33) damage = Math.round(damage * 1.0);
 			else if (player.cor < 50) damage = Math.round(damage * 1.1);
 			else if (player.cor < 75) damage = Math.round(damage * 1.2);
@@ -181,19 +195,59 @@ import classes.internals.*;
 					else IridesianOmnicast();
 				}
 				if (choice == 4) {
-					if (soulforce >= soulskillCostGrandioseHailofBlades()) castEnergyProjectionIridesian();
+					if (soulforce >= soulskillCostEnergyProjection()) castEnergyProjectionIridesian();
 					else IridesianOmnicast();
 				}
 			}
 		}
 		
+		private function angelification():void {
+			clearOutput();
+			var TB:Number = Math.round(touStat.core.value * 0.2);
+			var SB:Number = Math.round(speStat.core.value * 0.1);
+			var WB:Number = Math.round(wisStat.core.value * 0.3);
+			touStat.core.value += TB;
+			speStat.core.value += SB;
+			wisStat.core.value += WB;
+			addPerkValue(PerkLib.OverMaxHP, 1, 5);
+			addPerkValue(PerkLib.MonsterRegeneration, 1, 1);
+			addStatusValue(StatusEffects.TranscendentSoulField, 1, 5);
+			addStatusValue(StatusEffects.TranscendentSoulField, 2, 5);
+			HP = maxOverHP();
+			lustVuln += 0.15;
+			bonusWrath += 500;
+			bonusSoulforce += 1000;
+			outputText("Staggering back, Oculicorn wastes no time and above his head starts to manifest sort of halo. It have wings on the sides and in the middle of fron forms something resambliong eyeball. After halo formation a wave of light wash over it changing him. His horn grows longer, his monoeye pupil split into three seperate ones and his teeth grow longer and sharper. ");
+			outputText("Eyestalks behind his back shows grew additional eyeballs located along the length of the stalks. Bottom half not change much aside gorwing fur all over it. After the wave reach his feet he starts to levitate.");
+			outputText("\n\n\"<i>Behold my true form foul creature!!!</i>\" he speaks with barely hidden content and reassume combat pose.");
+			createStatusEffect(StatusEffects.TrueFormAngel, 0, 0, 0, 0);
+			createStatusEffect(StatusEffects.Flying, 50, 0, 0, 0);
+			short = "Arch-Oculicorn";
+			SceneLib.combat.combatRoundOver();
+		}
+		
+		override public function defeated(hpVictory:Boolean):void
+		{
+			if (!hasStatusEffect(StatusEffects.TrueFormAngel)) {
+				angelification();
+				return;
+			}
+			cleanupAfterCombat();
+		}
+		
 		override public function get long():String
 		{
 			var str:String = "";
-			str += "You are fighting an Oculicorn. This powerful creature would look like a human save for the hooves, horse tail, the mono all encompassing eye in his head, sharp teeth and six eye mounted stalks expending from his back. Medium long single horn adorn his forehead ocassionaly glowing with mild white light.";
+			if (hasStatusEffect(StatusEffects.TrueFormAngel)) {
+				str += "You are fighting an Arch-Oculicorn. This powerful creature looks humanoid with hooves, horse tail and fur covering his whole bottom half. Monoeye on his head posses now three pupils, sharp teeth and long single horn adorn his forehead ocassionaly glowing with mild white light. ";
+				str += "Above his head hoover halo with wings on it sides and something akin to single eye at the front. Six stalks expending from his back each with three eyeballs placed along the stalk length with fouth at the end. While he does have legs he moves by levitating around instead.";
+			}
+			else str += "You are fighting an Oculicorn. This powerful creature look like a human save for the hooves, horse tail, the mono all encompassing eye in his head and six eye mounted stalks expending from his back. Medium long single horn adorn his forehead ocassionaly glowing with mild white light.";
 			if (hasStatusEffect(StatusEffects.TranscendentSoulField))
 			{
-				str += "\n\n<i>From time to time you can notice faint glimmer of protective bubble surrounding him.</i>";
+				str += "\n\n<i>From time to time you can notice faint glimmers of orange protective field surrounding him.";
+				if (hasStatusEffect(StatusEffects.TrueFormAngel)) str += " After your attacks if assume octagonal shapes.";
+				str += "</i>";
 			}
 			return str;
 		}
@@ -206,8 +260,8 @@ import classes.internals.*;
             this.armorMDef = 150;
             this.bonusHP = 2000;
             this.bonusLust = 323;
-            this.bonusWrath = 500;
-            this.bonusSoulforce = 1000;
+			this.bonusWrath = 500;
+			this.bonusSoulforce = 1000;
             this.level = 60;
             this.gems = 1300 + rand(260);
             this.additionalXP = 6000;
@@ -233,7 +287,7 @@ import classes.internals.*;
 			this.tailType = Tail.HORSE;
 			this.skinTone = "light grey";
 			this.hairColor = "black";
-			this.hairLength = 16;
+			this.hairLength = 10;
 			this.weaponName = "fist";
 			this.weaponVerb="punch";
 			this.weaponAttack = 5;
@@ -243,7 +297,6 @@ import classes.internals.*;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.drop = new WeightedDrop(consumables.ME_DROP, 1);
 			this.createStatusEffect(StatusEffects.TranscendentSoulField, 5, 5, 0, 0);//X times less dmg, +X lvl diff bonus
-			//this.createStatusEffect(StatusEffects.Flying, 50, 0, 0, 0);
 			this.createPerk(PerkLib.EpicWisdom, 0, 0, 0, 0);
 			//this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.InsightfulResourcesI, 0, 0, 0, 0);
