@@ -491,23 +491,26 @@ import classes.CoC;
 				}
 			}
 			else{
+				var kItem:int = 0;
 				for each (var counter:int in keyItems.length){
 					if(keyItems[counter].keyName == keyItemName) {
-						var kItem:int = counter;
+						 kItem = counter;
 						break;
 					}
 				}
-				switch (keyValue){
-					case 1:
-						return keyItems[kItem].value1;
-					case 2:
-						return keyItems[kItem].value2;
-					case 3:
-						return keyItems[kItem].value3;
-					case 4:
-						return keyItems[kItem].value4;
-					default:
-						CoC_Settings.error("ERROR: Invalid keyValue requested for item " + keyItemName + ".");
+				if (kItem != 0){
+					switch (keyValue){
+						case 1:
+							return keyItems[kItem].value1;
+						case 2:
+							return keyItems[kItem].value2;
+						case 3:
+							return keyItems[kItem].value3;
+						case 4:
+							return keyItems[kItem].value4;
+						default:
+							CoC_Settings.error("ERROR: Invalid keyValue requested for item " + keyItemName + ".");
+					}
 				}
 			}
 			return 0;
