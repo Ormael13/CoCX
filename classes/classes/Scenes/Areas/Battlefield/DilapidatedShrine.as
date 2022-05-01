@@ -137,7 +137,6 @@ import classes.GlobalFlags.kFLAGS;
 					break;
 			}
 			outputText("\n\n")
-			menu();
 			doNext(westSection);
 			cheatTime(1/12);
 		}

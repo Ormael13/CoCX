@@ -1639,7 +1639,6 @@ import coc.view.MainView;
 			flags[kFLAGS.HUNGER_ENABLED] = 1;
 			flags[kFLAGS.GAME_DIFFICULTY] = 2;
 			player.hunger = 50;
-			menu();
 			doNext(startTheGame);
 		}
 
