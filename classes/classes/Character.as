@@ -489,102 +489,29 @@ import classes.CoC;
 				if (CoC.instance.debug){
 					EngineCore.outputText("ERROR: Looking for keyItem '" + keyItemName + "', and player has no key items.");
 				}
-				return 0;
 			}
 			else{
-				var kItem:* = keyItems[keyItems.indexOf(keyItemName)]
+				for each (var counter:int in keyItems.length){
+					if(keyItems[counter].keyName == keyItemName) {
+						var kItem:int = counter;
+						break;
+					}
+				}
 				switch (keyValue){
 					case 1:
-						return kItem.value1;
+						return keyItems[kItem].value1;
 					case 2:
-						return kItem.value2;
+						return keyItems[kItem].value2;
 					case 3:
-						return kItem.value3;
+						return keyItems[kItem].value3;
 					case 4:
-						return kItem.value4;
+						return keyItems[kItem].value4;
 					default:
 						CoC_Settings.error("ERROR: Invalid keyValue requested for item " + keyItemName + ".");
 				}
 			}
-		}
-
-		/*
-		public function keyItemv1(keyItemName:String):Number
-		{
-			var counter:Number = keyItems.length;
-			//Various Errors preventing action
-			if (keyItems.length <= 0)
-			{
-				CoC_Settings.error("ERROR: Looking for keyItem '" + keyItemName + "', and player has no key items.");
-				return 0;
-			}
-			while (counter > 0)
-			{
-				counter--;
-				if (keyItems[counter].keyName == keyItemName)
-					return keyItems[counter].value1;
-			}
-			CoC_Settings.error("Looking for key item '" + keyItemName + "', but player does not have it.");
 			return 0;
 		}
-
-		public function keyItemv2(keyItemName:String):Number
-		{
-			var counter:Number = keyItems.length;
-			//Various Errors preventing action
-			if (keyItems.length <= 0)
-			{
-				CoC_Settings.error("ERROR: Looking for keyItem '" + keyItemName + "', and player has no key items.");
-				return 0;
-			}
-			while (counter > 0)
-			{
-				counter--;
-				if (keyItems[counter].keyName == keyItemName)
-					return keyItems[counter].value2;
-			}
-			CoC_Settings.error("Looking for key item '" + keyItemName + "', but player does not have it.");
-			return 0;
-		}
-
-		public function keyItemv3(keyItemName:String):Number
-		{
-			var counter:Number = keyItems.length;
-			//Various Errors preventing action
-			if (keyItems.length <= 0)
-			{
-				CoC_Settings.error("ERROR: Looking for keyItem '" + keyItemName + "', and player has no key items.");
-				return 0;
-			}
-			while (counter > 0)
-			{
-				counter--;
-				if (keyItems[counter].keyName == keyItemName)
-					return keyItems[counter].value3;
-			}
-			CoC_Settings.error("Looking for key item '" + keyItemName + "', but player does not have it.");
-			return 0;
-		}
-
-		public function keyItemv4(keyItemName:String):Number
-		{
-			var counter:Number = keyItems.length;
-			//Various Errors preventing action
-			if (keyItems.length <= 0)
-			{
-				CoC_Settings.error("ERROR: Looking for keyItem '" + keyItemName + "', and player has no key items.");
-				return 0;
-			}
-			while (counter > 0)
-			{
-				counter--;
-				if (keyItems[counter].keyName == keyItemName)
-					return keyItems[counter].value4;
-			}
-			CoC_Settings.error("Looking for key item '" + keyItemName + "', but player does not have it.");
-			return 0;
-		}
-		*/
 
 		public function removeKeyItems():void
 		{
