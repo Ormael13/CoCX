@@ -7,13 +7,6 @@
 package classes.IMutations
 {
 import classes.*;
-import classes.BodyParts.Arms;
-import classes.BodyParts.Face;
-import classes.BodyParts.LowerBody;
-import classes.BodyParts.RearBody;
-import classes.BodyParts.Tail;
-import classes.IMutations.*;
-import classes.Scenes.Areas.Caves.DarkSlime;
 
 /**
  * Mutations 3.0 Handles perk creation slightly differently in a few ways.
@@ -43,6 +36,11 @@ public class IMutationsLib
 		public static const CatLikeNimblenessIM:PerkType = new CatLikeNimblenessMutation();
 		public static const DisplacerMetabolismIM:PerkType = new DisplacerMetabolismMutation();
 		public static const DraconicBonesIM:PerkType = new DraconicBonesMutation();
+		public static const DraconicHeartIM:PerkType = new DraconicHeartMutation();
+		public static const DraconicLungIM:PerkType = new DraconicLungMutation();
+		public static const DrakeLungIM:PerkType = new DrakeLungMutation();
+		public static const EasterBunnyEggBagIM:PerkType = new EasterBunnyEggBagMutation();
+		public static const EclipticMindIM:PerkType = new EclipticMindMutation();
 		public static const KitsuneThyroidGlandIM:PerkType = new KitsuneThyroidGlandMutation();
 		public static const TrachealSystemIM:PerkType = new TrachealSystemMutation();
 
@@ -57,6 +55,7 @@ public class IMutationsLib
 			var IMutationsList:Array = []
 			function mutationsHeart():void{
 				IMutationsList.push([BlackHeartIM, BlackHeartMutation]);
+				IMutationsList.push([DraconicHeartIM, DraconicHeartMutation]);
 			}
 			function mutationsMuscle():void{
 
@@ -74,26 +73,27 @@ public class IMutationsLib
 
 			}
 			function mutationsLungs():void{
-
+				IMutationsList.push([DraconicLungIM, DraconicLungMutation]);
+				IMutationsList.push([DrakeLungIM, DrakeLungMutation]);
 			}
 			function mutationsMetabolism():void{
-				IMutationsList.push([DisplacerMetabolismIM,DisplacerMetabolismMutation]);
+				IMutationsList.push([DisplacerMetabolismIM, DisplacerMetabolismMutation]);
 				//IMutationsList.push([SlimeMetabolismIM,SlimeMetabolismMutation]);
 			}
 			function mutationsOvaries():void{
 
 			}
 			function mutationsTesticles():void{
-
+				IMutationsList.push([EasterBunnyEggBagIM,EasterBunnyEggBagMutation]);
 			}
 			function mutationsEyes():void{
 
 			}
 			function mutationsPeriNervSys():void{
-
+				IMutationsList.push([EclipticMindIM, EclipticMindMutation]);
 			}
 			function mutationsBone():void{
-				IMutationsList.push([DraconicBonesIM,DraconicBonesMutation]);
+				IMutationsList.push([DraconicBonesIM, DraconicBonesMutation]);
 			}
 			function mutationsThyroidGlands():void{
 				IMutationsList.push([KitsuneThyroidGlandIM, KitsuneThyroidGlandMutation]);
@@ -104,10 +104,10 @@ public class IMutationsLib
 			function mutationsAdaptations():void{
 				IMutationsList.push([ArachnidBookLungIM, ArachnidBookLungMutation]);
 				IMutationsList.push([CatLikeNimblenessIM, CatLikeNimblenessMutation]);
-				IMutationsList.push([TrachealSystemIM,TrachealSystemMutation]);
+				IMutationsList.push([TrachealSystemIM, TrachealSystemMutation]);
 			}
 			function mutationsDeprecated():void{
-				IMutationsList.push([MutationsTemplateIM,MutationTemplate]);
+				IMutationsList.push([MutationsTemplateIM, MutationTemplate]);
 			}
 
 			switch(spec){
@@ -190,19 +190,5 @@ public class IMutationsLib
 			}
 			return IMutationsList;
 		}
-
-		/*
-		private static function initMutations():void{
-			try {
-				//Example. Doesn't actually do anything.v
-				MutationTemplate.mutationReqs();
-				ArachnidBookLungMutation.mutationReqs();
-				BlackHeartMutation.mutationReqs();
-				KitsuneThyroidGlandMutation.mutationReqs();
-				} catch (e:Error) {
-					trace(e.getStackTrace());
-				}
-			}
-		initMutations();*/
 	}
 }
