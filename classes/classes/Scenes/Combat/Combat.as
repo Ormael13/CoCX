@@ -3922,7 +3922,7 @@ public class Combat extends BaseContent {
 				doWaterDamage(damage, true, true);
                 break;
             case 5:
-                outputText("You form and unleash wave of moonlight. ");
+                outputText("You form and unleash a wave of moonlight. ");
 				doMagicDamage(damage, true, true);
                 break;
             default:
@@ -14362,7 +14362,7 @@ public class Combat extends BaseContent {
                 SceneLib.dungeons.ebonlabyrinth.depth = 0;
                 doNext(playerMenu);
             } else {
-                outputText("You're trapped in your foe's home turf - there is nowhere to run!\n\n");
+                outputText("You're trapped in your foe's domain - there is nowhere to run!\n\n");
                 enemyAI();
             }
             return;
@@ -14374,7 +14374,7 @@ public class Combat extends BaseContent {
         //Attempt texts!
         if (monster.short == "Marae") {
             outputText("Your boat is blocked by tentacles! ");
-            if (!player.canFly()) outputText("You may not be able to swim fast enough. ");
+            if (!player.canFly()) outputText("You will not be able to swim fast enough. ");
             else outputText("You grit your teeth with effort as you try to fly away but the tentacles suddenly grab your [legs] and pull you down. ");
             outputText("It looks like you cannot escape. ");
             enemyAI();
@@ -14415,7 +14415,7 @@ public class Combat extends BaseContent {
             else if (player.hasStatusEffect(StatusEffects.NoFlee)) {
                 clearOutput();
                 if (monster.short == "goblin") outputText("You try to flee but get stuck in the sticky white goop surrounding you.\n\n");
-                else outputText("You put all your skills at running to work and make a supreme effort to escape, but are unable to get away!\n\n");
+                else outputText("You put all your skills at running to work, ducking and diving in an effort to escape, but are unable to get away!\n\n");
                 enemyAI();
                 return;
             }
@@ -14515,7 +14515,7 @@ public class Combat extends BaseContent {
                 if (player.hasPerk(PerkLib.Runner)) outputText("Using your skill at running, y");
                 else outputText("Y");
                 outputText("ou easily outpace the dragon, who begins hurling imprecations at you.  \"What the hell, [name], you weenie; are you so scared that you can't even stick out your punishment?\"");
-                outputText("\n\nNot to be outdone, you call back, \"Sucks to you!  If even the mighty Last Ember of Hope can't catch me, why do I need to train?  Later, little bird!\"");
+                outputText("\n\nNot to be outdone, you call back, \"Sucks to be you!  If even the mighty Last Ember of Hope can't catch me, why do I need to train?  Later, little bird!\"");
                 inCombat = false;
                 clearStatuses(false);
                 doNext(camp.returnToCampUseOneHour);
@@ -14656,22 +14656,22 @@ public class Combat extends BaseContent {
 	public function takeFlightWings():void {
 		clearOutput();
         if (player.wings.type == Wings.WINDY_AURA && player.arms.type == Arms.KAMAITACHI) outputText("You create a small cyclone to ride upon and lift yourself up in the air.\n\n");
-        else if (player.wings.type == Wings.THUNDEROUS_AURA) outputText("You take flight letting the storm carry you up.\n\n");
-        else if (player.wings.type == Wings.ETHEREAL) outputText("You take flight letting the storm carry you up.\n\n");
-        else if (player.wings.type == Wings.LEVITATION) outputText("You take flight letting the storm carry you up.\n\n");
-        else outputText("You open you wing taking flight.\n\n");
+        else if (player.wings.type == Wings.THUNDEROUS_AURA) outputText("You take flight, letting the storm carry you up.\n\n");
+        else if (player.wings.type == Wings.ETHEREAL) outputText("You take flight, letting the storm carry you up.\n\n");
+        else if (player.wings.type == Wings.LEVITATION) outputText("You take flight, letting the storm carry you up.\n\n");
+        else outputText("You open your wings, taking off.\n\n");
         player.createStatusEffect(StatusEffects.Flying, flightDurationNatural(), 0, 0, 0);
         takeFlight();
 	}
 	public function takeFlightByFlyingSword():void {
 		clearOutput();
-		outputText("You jump on your "+player.weaponFlyingSwordsName+" taking flight.\n\n");
+		outputText("You jump on your "+player.weaponFlyingSwordsName+", riding it skyward.\n\n");
         player.createStatusEffect(StatusEffects.Flying, 1, 1, 0, 0);
         takeFlight();
 	}
 	public function takeFlightNoWings():void {
 		clearOutput();
-		outputText("You surround your body with soulforce taking off int the air"+(player.weaponFlyingSwordsName != "nothing"?" as "+player.weaponFlyingSwordsName+" hover near you ready to be used at moment notice":"")+".\n\n");
+		outputText("You surround your body with soulforce, taking off into the air"+(player.weaponFlyingSwordsName != "nothing"?" as "+player.weaponFlyingSwordsName+" hover near you ready to be used at moment notice":"")+".\n\n");
         player.createStatusEffect(StatusEffects.Flying, 1, 2, 0, 0);
         takeFlight();
 	}
@@ -14757,7 +14757,7 @@ public class Combat extends BaseContent {
         clearOutput();
         if (player.fatigue + physicalCost(50) > player.maxFatigue()) {
             clearOutput();
-            outputText("You are too tired to perform a great dive attack.");
+            outputText("You are too tired to perform a great dive.");
             doNext(combatMenu);
             return;
         }
@@ -14782,9 +14782,9 @@ public class Combat extends BaseContent {
 		if (Forgefather.gem == "emerald" && Forgefather.refinement == 4) damage *= 1.12;
 		if (Forgefather.gem == "emerald" && Forgefather.refinement == 5) damage *= 1.25;
         outputText("You focus on [Themonster], ");
-		if (player.statusEffectv1(StatusEffects.Flying) == 0) outputText("fold your wing and dive down");
-		if (player.statusEffectv1(StatusEffects.Flying) == 1) outputText("direct your "+player.weaponFlyingSwordsName+" downward and dive down");
-		if (player.statusEffectv1(StatusEffects.Flying) == 2) outputText("fold your arms and dive down");
+		if (player.statusEffectv1(StatusEffects.Flying) == 0) outputText("fold your wings and dive");
+		if (player.statusEffectv1(StatusEffects.Flying) == 1) outputText("direct your "+player.weaponFlyingSwordsName+" downward");
+		if (player.statusEffectv1(StatusEffects.Flying) == 2) outputText("fold your arms and dive");
 		outputText(", using gravity to increase the impact");
         if (player.hasPerk(PerkLib.DeathPlunge)) {
             if (player.weaponAttack < 51) damage *= (1 + (player.weaponAttack * 0.03));
@@ -14794,7 +14794,7 @@ public class Combat extends BaseContent {
             else damage *= (5.5 + ((player.weaponAttack - 200) * 0.01));
             outputText(" of your [weapon]. Your [weapon] strikes true, inflicting severe wounds as ");
             if (player.lowerBody == LowerBody.HARPY && player.statusEffectv1(StatusEffects.Flying) != 1) {
-                outputText("your talons leaves a bloody trail");
+                outputText("your talons leave a bloody trail across your foe");
                 damage *= 1.5;
             }
 			else outputText("the rest of your body collides against your target" + (monster.plural?"s":"") + "");
@@ -14891,7 +14891,7 @@ public class Combat extends BaseContent {
 		if (monster.plural) fireDMG *= 2;
 		fireDMG *= fireDamageBoostedByDao();
 		fireDMG = Math.round(fireDMG);
-        outputText("You start concentrate on the lust flowing in your body, your veins while imaging a joy of sharing flames of love with enemy. Shortly after that lust starts to gather around your hands getting hotter and hotter till it envelop your hands in flames.\n\n");
+        outputText("You concentrate on the lust flowing in your body, your veins while imaging a joy of sharing flames of love with enemy. Shortly after that lust starts to gather around your hands getting hotter and hotter till it envelop your hands in flames.\n\n");
         outputText("And with almost orgasmic joy, you sends a wave of flames toward [themonster] while mumbling about 'sharing the flames of love'. ");
 		doFireDamage(fireDMG, true, true);
         outputText("\n\n");
