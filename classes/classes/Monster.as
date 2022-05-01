@@ -2209,7 +2209,7 @@ import flash.utils.getQualifiedClassName;
             game.player.clearStatuses(false);
             var temp:Number = rand(10) + 1;
 			if(temp > player.gems) temp = player.gems;
-			outputText("\n\nYou'll probably wake up in eight hours or so, missing " + temp + " gems.");
+			outputText("\n\nYou'll probably wake up in six hours or so, missing " + temp + " gems.");
 			player.gems -= temp;
 			EngineCore.doNext(SceneLib.camp.returnToCampUseSixHours);
 		}

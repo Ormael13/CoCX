@@ -2028,7 +2028,8 @@ public class PlayerInfo extends BaseContent {
 				else addButtonDisabled(0, "DJ:M", "You do not have enough super perk points to obtain this perk.");
 				if (player.hasPerk(PerkLib.MunchkinAtGym)) addButtonDisabled(1, "M(at)G", "You already have this perk.");
 				else addButtonDisabled(1, "M(at)G", "You do not have enough super perk points to obtain this perk.");
-				addButtonDisabled(2, "M(at)W", "Soon");
+				if (player.hasPerk(PerkLib.MunchkinAtWork)) addButtonDisabled(2, "M(at)W", "You already have this perk.");
+				else addButtonDisabled(2, "M(at)W", "You do not have enough super perk points to obtain this perk.");
 			}
 			addButton(12, "Next", superPerkBuyMenu, page + 1);
 			if (player.perkPoints > 2) addButton(13, "Convert", superPerkConvertMenu);

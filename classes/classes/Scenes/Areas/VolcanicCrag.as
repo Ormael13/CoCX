@@ -125,6 +125,7 @@ public class VolcanicCrag extends BaseContent
 			HPD = Math.round(HPD);
 			outputText("Hot environment slowly seeps into your body. ");
 			player.takeFireDamage(HPD, true);
+			outputText("\n\n");
 		}
 		
 		public function partsofTripxiFatbilly():void {

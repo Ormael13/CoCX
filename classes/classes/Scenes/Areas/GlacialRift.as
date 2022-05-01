@@ -248,6 +248,7 @@ use namespace CoC;
 			HPD = Math.round(HPD);
 			outputText("Cold environment slowly seeps into your body. ");
 			player.takeIceDamage(HPD, true);
+			outputText("\n\n");
 		}
 
 		private function fightValeria():void {
