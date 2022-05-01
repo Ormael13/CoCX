@@ -491,14 +491,14 @@ import classes.CoC;
 				}
 			}
 			else{
-				var kItem:int = 0;
+				var kItem:int = -1;
 				for each (var counter:int in keyItems.length){
 					if(keyItems[counter].keyName == keyItemName) {
 						 kItem = counter;
 						break;
 					}
 				}
-				if (kItem != 0){
+				if (kItem != -1){
 					switch (keyValue){
 						case 1:
 							return keyItems[kItem].value1;
