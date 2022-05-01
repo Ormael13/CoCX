@@ -646,6 +646,7 @@ public class BelisaFollower extends NPCAwareContent implements TimeAwareInterfac
 	}
 	public function belisaBuy1(itype:ItemType, cost:Number):void {
 		clearOutput();
+		if (itype == useables.T_SSILK) outputText("<i>\"Oh, you want raw silk?\"</i> She looks mildly disappointed, but pulls out a few spools from one of her boxes. <i>\"You know we Driders were the best weavers on Mareth, right?\"</i> She sighs, clearly not very pleased with selling her silk raw. <i>\"Okay, that’s 300 gems.\"</i>\n\n");
 		player.gems -= cost;
 		statScreenRefresh();
 		inventory.takeItem(itype, BelisaShop);
