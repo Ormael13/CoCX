@@ -1742,11 +1742,6 @@ public class Combat extends BaseContent {
         return historyWhoreB;
     }
 
-    private function normalAttack():void {
-        clearOutput();
-        attack();
-    }
-
     public function basemeleeattacks():void {
         /*if (flags[kFLAGS.MELEE_DAMAGE_OVERHAUL] == 1) {
 	MDODialogs = true; // JA dialogs, look 3875
@@ -11888,12 +11883,6 @@ public class Combat extends BaseContent {
         }
     }
 
-    // This is a bullshit work around to get the parser to do what I want without having to fuck around in it's code.
-    public function teaseText():String {
-        tease(true);
-        return "";
-    }
-
     // Just text should force the function to purely emit the test text to the output display, and not have any other side effects
     public function tease(justText:Boolean = false):void {
         teases.tease(justText);
@@ -16088,4 +16077,4 @@ public class Combat extends BaseContent {
         return inteWisLibScale(player.lib, randomize);
     }
 }
-}
+}

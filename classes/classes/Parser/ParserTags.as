@@ -112,7 +112,6 @@ public class ParserTags {
         "tallness"              : function ():* { return Measurements.footInchOrMetres(CoC.instance.player.tallness); },
         "doubletallness"        : function ():* { return Measurements.footInchOrMetres(CoC.instance.player.tallness * 2); },
         "quadrupletallness"     : function ():* { return Measurements.footInchOrMetres(CoC.instance.player.tallness * 2); },
-        "teasetext"             : function ():* { return SceneLib.combat.teaseText(); },
         "themonster"            : function ():* { return CoC.instance.monster.a + CoC.instance.monster.short; },
         "tongue"                : function ():* { return Appearance.tongueDescription(CoC.instance.player); },
         "uppergarment"          : function ():* { return CoC.instance.player.upperGarmentName; },
