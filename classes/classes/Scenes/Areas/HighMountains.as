@@ -98,7 +98,7 @@ use namespace CoC;
 				return;
 			}
 			//25% minotaur sons!
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] >= 3 && rand(4) == 0 && player.hasVagina() && flags[kFLAGS.SOUL_SENSE_MINOTAUR_SONS] < 3) {
+			if (flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] >= 3 && rand(4) == 0 && player.hasVagina() && flags[kFLAGS.SOUL_SENSE_MINOTAUR_SONS] < 3) {
 				spriteSelect(SpriteDb.s_minotaur);
 				minotaurMobScene.meetMinotaurSons();
 				return;

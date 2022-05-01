@@ -1,16 +1,6 @@
 ﻿package classes.Scenes.Combat {
 import classes.BaseContent;
-import classes.BodyParts.Antennae;
-import classes.BodyParts.Arms;
-import classes.BodyParts.Ears;
-import classes.BodyParts.Face;
-import classes.BodyParts.Horns;
-import classes.BodyParts.LowerBody;
-import classes.BodyParts.RearBody;
-import classes.BodyParts.Skin;
-import classes.BodyParts.Tail;
-import classes.BodyParts.Tongue;
-import classes.BodyParts.Wings;
+import classes.BodyParts.*;
 import classes.CoC;
 import classes.CoC_Settings;
 import classes.CockTypesEnum;
@@ -28,27 +18,17 @@ import classes.PotionType;
 import classes.Scenes.Areas.Beach.Gorgon;
 import classes.Scenes.Areas.Bog.CorruptedMaleTroll;
 import classes.Scenes.Areas.Caves.DisplacerBeast;
-import classes.Scenes.Areas.Desert.Naga;
-import classes.Scenes.Areas.Desert.SandTrap;
-import classes.Scenes.Areas.Forest.Alraune;
-import classes.Scenes.Areas.Forest.BeeGirl;
-import classes.Scenes.Areas.Forest.Kitsune;
-import classes.Scenes.Areas.GlacialRift.FrostGiant;
-import classes.Scenes.Areas.GlacialRift.GlacialMaleTroll;
-import classes.Scenes.Areas.GlacialRift.WinterWolf;
-import classes.Scenes.Areas.HighMountains.Basilisk;
-import classes.Scenes.Areas.HighMountains.Harpy;
+import classes.Scenes.Areas.Desert.*;
+import classes.Scenes.Areas.Forest.*;
+import classes.Scenes.Areas.GlacialRift.*;
+import classes.Scenes.Areas.HighMountains.*;
 import classes.Scenes.Areas.Mountain.Minotaur;
 import classes.Scenes.Areas.Ocean.SeaAnemone;
 import classes.Scenes.Areas.Tundra.YoungFrostGiant;
 import classes.Scenes.Dungeons.DeepCave.EncapsulationPod;
 import classes.Scenes.Dungeons.D3.*;
-import classes.Scenes.Dungeons.EbonLabyrinth.ChaosChimera;
-import classes.Scenes.Dungeons.EbonLabyrinth.DarkSlimeEmpress;
-import classes.Scenes.Dungeons.EbonLabyrinth.HellfireSnail;
-import classes.Scenes.Dungeons.EbonLabyrinth.LivingFailure;
-import classes.Scenes.Dungeons.HelDungeon.HarpyMob;
-import classes.Scenes.Dungeons.HelDungeon.HarpyQueen;
+import classes.Scenes.Dungeons.EbonLabyrinth.*;
+import classes.Scenes.Dungeons.HelDungeon.*;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.Codex;
@@ -14316,8 +14296,8 @@ public class Combat extends BaseContent {
             addButton(0, "Next", combatMenu, false);
             return;
         }
-        if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00329] == 1 && (monster.short == "minotaur gang" || monster.short == "minotaur tribe")) {
-            flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00329] = 0;
+        if (monster is MinotaurMob) {
+            flags[kFLAGS.MINOTAUR_SONS_WASTED_TURN] = 0;
             //(Free run away)
             clearOutput();
             outputText("You slink away while the pack of brutes is arguing.  Once they finish that argument, they'll be sorely disappointed!");
