@@ -480,11 +480,11 @@ public class PerkLib
 				"You gained knowledge how to make elementals rank up process less resource consuming. (-40% needed mana/fatigue and 40% less HP lost during failure)",
 				"You've chosen the 'Elemental Conjurer Knowledge' perk, gaining knowledge on how to make the elemental rank up process less resource consuming. (-40% needed mana/fatigue and 40% less HP lost during failure)");
 		public static const ElementalConjurerKnowledgeEx:PerkType = mk("Elemental Conjurer Knowledge (Ex)", "Elemental Conjurer Knowledge (Ex)",
-				"Decrease chance to fail when ranking up an elemental or/and replace mana with elemental energy gained from sacrificing elemental shards to arcane circle.",
-				"You've chosen the 'Elemental Conjurer Knowledge (Ex)' perk, .");
+				"Decrease chance to fail (by ~10%) when ranking up an elemental and replace mana/fatigue with elemental energy gained from sacrificing elemental shards to arcane circle.",
+				"You've chosen the 'Elemental Conjurer Knowledge (Ex)' perk. Decrease chance to fail (by ~10%) when ranking up an elemental and replace mana/fatigue with elemental energy gained from sacrificing elemental shards to arcane circle.");
 		public static const ElementalConjurerKnowledgeSu:PerkType = mk("Elemental Conjurer Knowledge (Su)", "Elemental Conjurer Knowledge (Su)",
 				"Allows you to convert soulforce into elemental energy.",
-				"You've chosen the 'Elemental Conjurer Knowledge (Su)' perk, .");
+				"You've chosen the 'Elemental Conjurer Knowledge (Su)' perk. ");
 		public static const PartySynergy:PerkType = mk("Party Synergy", "Party Synergy",
 				"You and your companions in party will recieve multi bonus to basic stats like str or wis (+20% for PC and +50% for henchman). With each member beyond first bonus will increase arithmeticaly.",
 				"You've chosen the 'Party Synergy' perk. You and your companions in party will recieve multi bonus to basic stats like str or wis (+20% for PC and +50% for henchman). With each member beyond first bonus will increase arithmeticaly.");
@@ -5620,8 +5620,8 @@ public class PerkLib
                     .requireWis(150)
                     .requireLevel(30);
             FirstAttackElementalsEx.requirePerks(FirstAttackElementals, ElementalContractRank5)
-                    .requireLevel(30);
-			/*ElementalConjurerKnowledgeEx.requirePerks(ElementalConjurerKnowledge, ElementalContractRank4)
+                    .requireLevel(30);/*
+			ElementalConjurerKnowledgeEx.requirePerks(ElementalConjurerKnowledge, ElementalContractRank4)
 					.requireWis(150)
                     .requireLevel(30);*/
 			NamedBullet.requirePerk(ExpertGunslinger)

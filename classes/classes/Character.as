@@ -588,7 +588,7 @@ import classes.CoC;
 				if (hasPerk(MutationsLib.OrcAdrenalGlandsPrimitive)) min -= maxHP() * 0.02;
 			}
 			if (hasPerk(PerkLib.Rage)) min -= maxHP() * 0.05;
-			if (hasPerk(PerkLib.TooAngryToDie)) min += maxWrath();
+			if (hasPerk(PerkLib.TooAngryToDie)) min -= maxWrath();
 			if (hasPerk(PerkLib.DeityJobMunchkin)) {
 				min -= str;
 				min -= tou;

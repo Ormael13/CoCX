@@ -162,6 +162,7 @@ public class DarkSlimeScene extends BaseContent
             player.createStatusEffect(StatusEffects.SlimeCraving, 0, 0, 0, 1); //Value four indicates this tracks strength and speed separately
         if (!player.hasPerk(PerkLib.DarkSlimeCore)) player.createPerk(PerkLib.DarkSlimeCore, 0,0,0,0);
         CoC.instance.mainViewManager.updateCharviewIfNeeded();
+		cleanupAfterCombat();//doNext(camp.returnToCampUseOneHour);
     }
 
     public function beatingDarkSlimeScram():void {
