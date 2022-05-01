@@ -14296,8 +14296,8 @@ public class Combat extends BaseContent {
             addButton(0, "Next", combatMenu, false);
             return;
         }
-        if (monster is MinotaurMob) {
-            flags[kFLAGS.MINOTAUR_SONS_WASTED_TURN] = 0;
+        if (monster is MinotaurMob && (monster as MinotaurMob).wastedTurn) {
+            (monster as MinotaurMob).wastedTurn = false;
             //(Free run away)
             clearOutput();
             outputText("You slink away while the pack of brutes is arguing.  Once they finish that argument, they'll be sorely disappointed!");
