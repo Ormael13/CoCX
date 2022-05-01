@@ -962,7 +962,7 @@ package classes.Scenes.Places.HeXinDao
 		}
 		public function BoardkeeperYangPromotion():void {
 			clearOutput();
-			if (player.keyItemv1("Adventurer Guild: Copper plate") > 1) {
+			if (player.keyItemvX("Adventurer Guild: Copper plate", 1) > 1) {
 				if (flags[kFLAGS.SPIRIT_STONES] >= 10) {
 					outputText("Yang nods, \"<i>Yep, it’s definitely time we promoted you. You pass from Copper plate to Iron, congratulations!</i>\"\n\n");
 					outputText("She hands you a new necklace, which you proceed to don up.\n\n");
@@ -978,7 +978,7 @@ package classes.Scenes.Places.HeXinDao
 					outputText("\"<i>Its ok just go to Moga Hen, he should be able to exchange those gem of yours for the local currency.</i>\"");
 				}
 			}
-			if (player.keyItemv1("Adventurer Guild: Iron plate") > 1) {
+			if (player.keyItemvX("Adventurer Guild: Iron plate", 1) > 1) {
 				if (flags[kFLAGS.SPIRIT_STONES] >= 15) {
 					outputText("Yang nod. \"<i>Yep it’s definitely time we promoted hou. You pass from Iron plate to Bronze, congratulations!</i>\"\n\n");
 					outputText("She hand you over a new necklace which you proceed to don up.\n\n");

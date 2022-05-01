@@ -418,11 +418,11 @@ public class Soulforce extends BaseContent
 	}
 
 	public function cheatRemoveShard():void {
-		if(player.keyItemv1("Radiant shard") == 1)
+		if(player.keyItemvX("Radiant shard", 1) == 1)
 			player.removeKeyItem("Radiant shard");
 		else
 			player.addKeyValue("Radiant shard", 1, -1);
-		outputText("\n\n<b>You currently have "+ player.keyItemv1("Radiant shard") +" radiant shards.</b>");
+		outputText("\n\n<b>You currently have "+ player.keyItemvX("Radiant shard", 1) +" radiant shards.</b>");
 		doNext(curry(SoulforceCheats1, 2));
 	}
 
@@ -431,7 +431,7 @@ public class Soulforce extends BaseContent
 			player.addKeyValue("Radiant shard", 1, cnt);
 		else
 			player.createKeyItem("Radiant shard", cnt, 0, 0, 0);
-		outputText("\n\n<b>You currently have "+ player.keyItemv1("Radiant shard") + " radiant shards.</b>");
+		outputText("\n\n<b>You currently have "+ player.keyItemvX("Radiant shard", 1) + " radiant shards.</b>");
 		doNext(curry(SoulforceCheats1,2));
 	}
 

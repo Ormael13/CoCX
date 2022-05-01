@@ -5,24 +5,23 @@
 package classes.IMutations
 {
     import classes.PerkClass;
-import classes.PerkLib;
-import classes.PerkType;
-import classes.Player;
+    import classes.PerkType;
+    import classes.Player;
 
-public class CatLikeNimblenessMutation extends PerkType
+public class DraconicHeartMutation extends PerkType
     {
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
             var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.CatLikeNimblenessIM)
+            var pTier:int = player.perkv1(IMutationsLib.DraconicHeartIM)
             if (pTier >= 1){
-                descS += "Increases Evasion";
+                descS = "Your heart was strengthened to better handle your changing body. (+1 Fatigue / +4 SF / +5 Mana / +1 Wrath regen)";
             }
             if (pTier >= 2){
-                descS += "";
+                descS = "Each heartbeat fills your body with great power. (+2 Fatigue / +8 SF / +10 Mana / +2 Wrath regen, +5% of max core Str as phantom Str)";
             }
             if (pTier >= 3){
-                descS += "";
+                descS = "Your heart metamorphosis reached pseudo-dragon level. (+3 Fatigue / +12 SF / +15 Mana / +3 Wrath regen, +1% HP regen, +15% of max core Str as phantom Str)";
             }
             if (descS != "")descS += ".";
             return descS;
@@ -31,7 +30,7 @@ public class CatLikeNimblenessMutation extends PerkType
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
-            switch (player.perkv1(IMutationsLib.CatLikeNimblenessIM)){
+            switch (player.perkv1(IMutationsLib.DraconicHeartIM)){
                 case 2:
                     sufval = "(Primitive)";
                     break;
@@ -41,46 +40,45 @@ public class CatLikeNimblenessMutation extends PerkType
                 default:
                     sufval = "";
             }
-            return "Cat-like Nimbleness" + sufval;
+            return "Draconic Heart" + sufval;
         }
 
         //Mutation Requirements
         public static function pReqs(pTier:int = 0):void{
             try{
                 //This helps keep the requirements output clean.
-                IMutationsLib.CatLikeNimblenessIM.requirements = [];
+                IMutationsLib.DraconicHeartIM.requirements = [];
                 if (pTier == 0){
-                    IMutationsLib.CatLikeNimblenessIM.requirePerk(PerkLib.Flexibility)
-                            .requireCustomFunction(function (player:Player):Boolean {
-                        return player.catScore() >= 8 || player.nekomataScore() >= 10 || player.displacerbeastScore() >= 14 || player.hellcatScore() >= 10 || player.cheshireScore() >= 11 || player.sphinxScore() >= 14;
-                    }, "Any cat race");
+                    IMutationsLib.DraconicHeartIM.requireHeartMutationSlot()
+                    .requirePerk(IMutationsLib.DraconicBonesIM)
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return (player.dragonScore() >= 8 || player.frostWyrmScore() >= 10 || player.leviathanScore() >= 20);
+                    }, "Dragon race or its variants");
                 }
                 else{
                     var pLvl:int = pTier * 30;
-                    IMutationsLib.CatLikeNimblenessIM.requireLevel(pLvl);
+                    IMutationsLib.DraconicHeartIM.requireLevel(pLvl);
                 }
             }catch(e:Error){
                 trace(e.getStackTrace());
             }
         }
 
+        //Perk Max Level
         //Ignore the variable. Reusing the function that triggers this elsewhere and they need the int.
         public static function perkLvl(useless:int = 0):int{
             return 3;
         }
 
-        //Perk Max Level
         //Mutations Buffs
         public function pBuffs(pTier:int = 1):Object{
-            var pBuffs:Object = {};
-            if (pTier > 1){
-                pBuffs['spe.mult'] = 0.1 * (pTier - 1);
-            }
+            var pBuffs:Object = {}; //0.05, 0.1, 0.2
+            pBuffs['str.mult'] = 0.05*2^pTier-1
             return pBuffs;
         }
 
-        public function CatLikeNimblenessMutation() {
-            super("Cat-like Nimbleness IM", "Cat-like Nimbleness", ".");
+        public function DraconicHeartMutation() {
+            super("Draconic Heart IM", "Draconic Heart", ".");
         }
 
         override public function keepOnAscension(respec:Boolean = false):Boolean {

@@ -1,6 +1,6 @@
 /**
  * Original code by aimozg on 27.01.14.
- * Reworked for Mutations by Jtecx on 14.03.22.
+ * Extended for Mutations by Jtecx on 14.03.22.
  */
 package classes.IMutations
 {
@@ -84,9 +84,7 @@ public class DraconicBonesMutation extends PerkType
         //Mutations Buffs
         public function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {};
-            if (pTier == 1) pBuffs['tou.mult'] = 0.05;
-            if (pTier == 2) pBuffs['tou.mult'] = 0.1;
-            if (pTier == 3) pBuffs['tou.mult'] = 0.2;
+            pBuffs['tou.mult'] = 0.05*2^pTier-1
             return pBuffs;
         }
 

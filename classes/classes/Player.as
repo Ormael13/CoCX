@@ -799,10 +799,10 @@ use namespace CoC;
 			if (vehiclesName == "Howling Banshee Mech") {
 				armorDef += 15;
 				if (hasKeyItem("HB Armor Plating") >= 0) {
-					if (keyItemv1("HB Armor Plating") == 1) armorDef += 15;
-					if (keyItemv1("HB Armor Plating") == 2) armorDef += 25;
-					if (keyItemv1("HB Armor Plating") == 3) armorDef += 35;
-					if (keyItemv1("HB Armor Plating") == 4) armorDef += 45;
+					if (keyItemvX("HB Armor Plating", 1) == 1) armorDef += 15;
+					if (keyItemvX("HB Armor Plating", 1) == 2) armorDef += 25;
+					if (keyItemvX("HB Armor Plating", 1) == 3) armorDef += 35;
+					if (keyItemvX("HB Armor Plating", 1) == 4) armorDef += 45;
 				}
 			}
 			armorDef = Math.round(armorDef);
@@ -1023,10 +1023,10 @@ use namespace CoC;
 			if (vehiclesName == "Howling Banshee Mech") {
 				armorMDef += 15;
 				if (hasKeyItem("HB Leather Insulation") >= 0) {
-					if (keyItemv2("HB Leather Insulation") == 1) armorMDef += 15;
-					if (keyItemv2("HB Leather Insulation") == 2) armorMDef += 25;
-					if (keyItemv2("HB Leather Insulation") == 3) armorMDef += 35;
-					if (keyItemv2("HB Leather Insulation") == 4) armorMDef += 45;
+					if (keyItemvX("HB Leather Insulation", 2) == 1) armorMDef += 15;
+					if (keyItemvX("HB Leather Insulation", 2) == 2) armorMDef += 25;
+					if (keyItemvX("HB Leather Insulation", 2) == 3) armorMDef += 35;
+					if (keyItemvX("HB Leather Insulation", 2) == 4) armorMDef += 45;
 				}
 			}
 			armorMDef = Math.round(armorMDef);
