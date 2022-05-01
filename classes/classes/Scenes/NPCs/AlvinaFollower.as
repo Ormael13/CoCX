@@ -813,7 +813,7 @@ public function alvinaCampAdvancedStudy():void
 		player.destroyItems(useables.SOULGEM, 5);
 		if (player.hasKeyItem("Stone Statue Lethicite") >= 0) player.removeKeyItem("Stone Statue Lethicite");
 		else {
-			if (player.keyItemv1("Marae's Lethicite") > 1) player.addKeyValue("Marae's Lethicite", 1, -1);
+			if (player.keyItemvX("Marae's Lethicite", 1) > 1) player.addKeyValue("Marae's Lethicite", 1, -1);
 			else player.removeKeyItem("Marae's Lethicite");
 		}
 		outputText("You show up with all the required items and the demoness smiles.\n\n");

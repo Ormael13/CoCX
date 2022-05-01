@@ -995,7 +995,7 @@ public class SaveUpdater extends NPCAwareContent {
 			clearOutput();
 			outputText("A little Backpack cleanup - nothing to worry about. Or maybe... what will you put into a new and larger inventory? Refound included if necessary.");
 			if (player.hasKeyItem("Backpack") >= 0) {
-				player.gems += 200 * player.keyItemv1("Backpack");
+				player.gems += 200 * player.keyItemvX("Backpack", 1);
 				player.removeKeyItem("Backpack");
 			}
 			doNext(camp.doCamp);
@@ -1582,7 +1582,7 @@ public class SaveUpdater extends NPCAwareContent {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 35;
 			clearOutput();
 			outputText("Jiangshi getting Tag'd and your backpack feel somehow cheaper (no worry will get back some gems for it if needed).");
-			if (player.hasKeyItem("Backpack") >= 0) player.gems += (150 * player.keyItemv1("Backpack"));
+			if (player.hasKeyItem("Backpack") >= 0) player.gems += (150 * player.keyItemvX("Backpack", 1));
 			if (player.hasKeyItem("Adventurer Guild: Copper plate") >= 0 && AdventurerGuild.Slot01Cap < 1) {
 				outputText(" Very small present from Adventure Guild for having easier to manage all the loot ;)");
 				AdventurerGuild.Slot01Cap = 10;

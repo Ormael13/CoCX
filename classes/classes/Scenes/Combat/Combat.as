@@ -2431,7 +2431,7 @@ public class Combat extends BaseContent {
         if (player.hasKeyItem("HB Agility") >= 0) {
 			damage += player.spe;
 			damage += scalingBonusSpeed() * 0.20;
-			if (player.keyItemv1("HB Agility") == 1) {
+			if (player.keyItemvX("HB Agility", 1) == 1) {
 				damage += (player.spe / 2);
 				damage += scalingBonusSpeed() * 0.10;
 			}
@@ -3222,7 +3222,7 @@ public class Combat extends BaseContent {
         }
 		if (player.vehicles == vehicles.HB_MECH) {
 			if (player.hasKeyItem("HB Rapid Reload") >= 0) {
-				if (player.keyItemv1("HB Rapid Reload") == 1) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 4;
+				if (player.keyItemvX("HB Rapid Reload", 1) == 1) flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 4;
 				else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 3;
 			}
 			else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = 2;
@@ -3363,7 +3363,7 @@ public class Combat extends BaseContent {
 				if (player.hasKeyItem("HB Rapid Reload") >= 0) {
 					if (player.inte < 201) player.weaponRangeAttack *= (1 + (player.inte / 200));
 					else player.weaponRangeAttack *= 2;
-					if (player.keyItemv1("HB Rapid Reload") == 1) {
+					if (player.keyItemvX("HB Rapid Reload", 1) == 1) {
 						player.weaponRangeAttack *= 1.25;
 						damage += player.spe;
 						damage += scalingBonusSpeed() * 0.2;
@@ -15426,7 +15426,7 @@ public class Combat extends BaseContent {
 	
 	public function StealthModeMechCost():Number {
 		var SMMC:Number = 100;
-		if (player.keyItemv1("HB Stealth System") >= 2) SMMC -= 20;
+		if (player.keyItemvX("HB Stealth System", 1) >= 2) SMMC -= 20;
 		//if (player.keyItemv1("HB Stealth System") >= 3) SMMC -= 20;
 		//SMMC -= 10;
 		return SMMC;
@@ -16097,4 +16097,4 @@ public class Combat extends BaseContent {
         return inteWisLibScale(player.lib, randomize);
     }
 }
-}
+}

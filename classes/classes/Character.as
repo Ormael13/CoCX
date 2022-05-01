@@ -483,6 +483,32 @@ import classes.CoC;
 			CoC_Settings.error("Looking for key item '" + keyItemName + "' to change value " + statusValueNum + ", and player does not have the key item.");
 		}
 
+		public function keyItemvX(keyItemName:String, keyValue:int):Number{
+			if (keyItems.length <= 0){	//If there's nothing, then it shouldn't be considered an error to report. Code handles it fine.
+				trace("ERROR: Looking for keyItem '" + keyItemName + "', and player has no key items.");
+				if (CoC.instance.debug){
+					EngineCore.outputText("ERROR: Looking for keyItem '" + keyItemName + "', and player has no key items.");
+				}
+				return 0;
+			}
+			else{
+				var kItem:* = keyItems[keyItems.indexOf(keyItemName)]
+				switch (keyValue){
+					case 1:
+						return kItem.value1;
+					case 2:
+						return kItem.value2;
+					case 3:
+						return kItem.value3;
+					case 4:
+						return kItem.value4;
+					default:
+						CoC_Settings.error("ERROR: Invalid keyValue requested for item " + keyItemName + ".");
+				}
+			}
+		}
+
+		/*
 		public function keyItemv1(keyItemName:String):Number
 		{
 			var counter:Number = keyItems.length;
@@ -558,6 +584,7 @@ import classes.CoC;
 			CoC_Settings.error("Looking for key item '" + keyItemName + "', but player does not have it.");
 			return 0;
 		}
+		*/
 
 		public function removeKeyItems():void
 		{

@@ -282,7 +282,7 @@ use namespace CoC;
             else {
                 outputText("You feel something unlock within you as you drink the elixir, some of the veil of corruption being washed out of you as the liquid undo and counteract some of the vile demonic changes your body was afflicted with.");
                 outputText("\n\n<b>Minimum corruption lowered!</b>");
-                if (player.keyItemv1("Rathazul's Purity Elixir") > 1) player.addKeyValue("Rathazul's Purity Elixir", 1, -1);
+                if (player.keyItemvX("Rathazul's Purity Elixir", 1) > 1) player.addKeyValue("Rathazul's Purity Elixir", 1, -1);
                 else player.removeKeyItem("Rathazul's Purity Elixir");
                 if (player.hasPerk(PerkLib.PurityElixir)) player.addPerkValue(PerkLib.PurityElixir, 1, 1);
                 else player.createPerk(PerkLib.PurityElixir, 1, 0, 0, 0);
@@ -299,7 +299,7 @@ use namespace CoC;
 			if (player.armor == armors.HBARMOR) currentArmorSFDrainrate += 180;
 			if (player.vehicles == vehicles.HB_MECH) {
 				if (player.hasKeyItem("HB Internal Systems") >= 0) {
-					if (player.keyItemv1("HB Internal Systems") == 2) currentArmorSFDrainrate += 40;
+					if (player.keyItemvX("HB Internal Systems", 1) == 2) currentArmorSFDrainrate += 40;
 					else currentArmorSFDrainrate += 50;
 				}
 				else currentArmorSFDrainrate += 60;
@@ -317,7 +317,7 @@ use namespace CoC;
 			if (player.vehicles == vehicles.HB_MECH) {
 				maxSFCapacity += 1000;
 				if (player.hasKeyItem("HB Internal Systems") >= 0) {
-					if (player.keyItemv1("HB Internal Systems") == 2) maxSFCapacity += 5000;
+					if (player.keyItemvX("HB Internal Systems", 1) == 2) maxSFCapacity += 5000;
 					else maxSFCapacity += 2000;
 				}
 			}
@@ -743,7 +743,7 @@ use namespace CoC;
 			if (player.hasPerk(PerkLib.StrongBack)) slots++;
 			if (player.hasPerk(PerkLib.StrongBack2)) slots++;
 			if (player.hasPerk(PerkLib.StrongBack3)) slots++;
-			if (player.hasKeyItem("Backpack") >= 0) slots += player.keyItemv1("Backpack");
+			if (player.hasKeyItem("Backpack") >= 0) slots += player.keyItemvX("Backpack", 1);
 			//Constrain slots to between 5 and 20.
 			if (slots < 5) slots = 5;
 			if (slots > 20) slots = 20;
