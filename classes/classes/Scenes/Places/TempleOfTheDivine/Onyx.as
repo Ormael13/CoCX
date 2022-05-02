@@ -38,22 +38,22 @@ use namespace CoC;
 			else outputText("gently push you");
 			outputText(" to the stone floor as [onyx ey] lowers a hand to your " + (player.hasCock() ? "[cock]" : "[cunt]"));
 			outputText(".\n\n[onyx Ey] gently and slowly " + (player.hasCock() ? "strokes" : "fingers") + " you until you're quite aroused and nearly as hot as [onyx ey] is, fawning over you for some time, wanting you to feel [onyx eir] appreciation and affection while getting you ready for what comes next.\n\n");
+			sceneHunter.print("Most scenes have variations for Gargoyle PC.");
 			player.dynStats("lus", 50);
 			//menu
 			menu();
-			if (player.hasVagina()) addButton(0, "Tail Fuck", KrystalOnyxTailFuck).hint("Let's put [onyx eir] lovely tail to good use.");
-			else addButtonDisabled(0, "Tail Fuck", "Req. vagina");
+			addButtonIfTrue(0, "Tail Fuck", KrystalOnyxTailFuck, "Req. a vagina",
+				player.hasVagina(), "Let's put [onyx eir] lovely tail to good use.");
 			addButton(2, "69", KrystalOnyx69).hint("You wonder what [onyx eir] " + (flags[kFLAGS.ONYX_GENDER] == 2 || flags[kFLAGS.ONYX_GENDER] == 3 ? "cock" : "pussy") + "tastes like, and if [onyx ey] will return the favor.");
 			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) {
-				if (player.hasVagina()) addButton(1, "Tribadism", KrystalTribadism).hint("Why not grind yourself on that lovely stone pussy.");
-				else addButtonDisabled(1, "Tribadism", "Req. vagina");
-				if (player.hasCock()) addButton(4, "Fuck Her", KrystalFuckHer).hint("How about a feel of that rocky hole?");
-				else addButtonDisabled(4, "Fuck Her", "Req. cock");
+				addButtonIfTrue(1, "Tribadism", KrystalTribadism, "Req. a vagina",
+					player.hasVagina(), "Why not grind yourself on that lovely stone pussy.");
+				addButtonIfTrue(4, "Fuck Her", KrystalFuckHer, "Req. a cock",
+					player.hasCock(), "How about a feel of that rocky hole?");
 			}
-			if (flags[kFLAGS.ONYX_GENDER] == 3 || flags[kFLAGS.ONYX_GENDER] == 2) {
-				if (player.hasVagina()) addButton(3, "Get fucked", KrystalOnyxGetFucked).hint("You’ve been eyeing that rock hard cock for a while.");
-				else addButtonDisabled(3, "Get fucked", "Req. vagina");
-			}
+			if (flags[kFLAGS.ONYX_GENDER] == 3 || flags[kFLAGS.ONYX_GENDER] == 2)
+				addButtonIfTrue(3, "Get fucked", KrystalOnyxGetFucked, "Req. a vagina",
+					player.hasVagina(), "You’ve been eyeing that rock hard cock for a while.");
 			addButton(14, "Back", SceneLib.templeofdivine.templeMainMenu);
 		}
 
@@ -75,7 +75,7 @@ use namespace CoC;
 			clearOutput();
 			spriteSelect(SpriteDb.s_sapphire);
 			outputText("Krystal's pussy looks like it could use some attention and so does yours. You slowly push the gargoyle down on her back as you begin to grind your pussy against her nether lips. With the lubrication of your feminine juices, her smooth stone pussy soon becomes as slippery as wet ice, and grinding yourself on it is even easier than it would be with a woman made of flesh. ");
-			outputText("The both of you moan like cheap whores as your clits engorge from the repeated motions. You begin to grope Krystal's breasts, which are surprisingly malleable despite her stone skin, making her gasp in pleasure as she grabs your [breasts]. Seems she enjoys it just like any normal woman would, despite her stony body.\n\n");
+			outputText("both of you moan like cheap whores as your clits engorge from the repeated motions. You begin to grope Krystal's breasts, which are surprisingly malleable despite her stone skin, making her gasp in pleasure as she grabs your [breasts]. Seems she enjoys it just like any normal woman would, despite her stony body.\n\n");
 			outputText("Soon you climax ");
 			if (player.isGargoyle()) outputText("and petrify along with Krystal, both of your bodies frozen in place for some time. You regain consciousness a while later and give her still frozen form a parting kiss as you head back to camp.\n\n");
 			else outputText("and cover Krystal's stone pussy with your girl cum. Krystal petrifies from the orgasm, frozen with an expression of extreme pleasure as you doze off on your statuesque lover. When you wake up, you give her still frozen form a parting kiss as you head back to camp.\n\n");
@@ -92,7 +92,7 @@ use namespace CoC;
 			outputText(" and you start to ponder what a gargoyle tastes like. Determined to get the answer to this very important question, you tell [onyx name] to lay on ");
 			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("her back. She");
 			else outputText("his back. He");
-			outputText(" is quick to comply and you take your time to position your genitals right above [onyx eir] face and ");
+			outputText(" is quick to comply, and you take your time to position your genitals right above [onyx eir] face and ");
 			if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("give her pussy a quick lick. She");
 			else outputText("give his glans a quick lick. He");
 			outputText(" moans in appreciation and responds by firmly grabbing your ass ");
@@ -104,7 +104,7 @@ use namespace CoC;
 			if (player.hasVagina()) outputText(" pussy juices.");
 			if (player.hasCock()) outputText(" precum.[onyx Ey] strangely doesn't have a bad taste, albeit very different from a creature of flesh and blood.\n\n");
 			if (player.isGargoyle()) {
-				outputText("You pleasure each other for several minutes, both of your stone tails flailing wildly from the impending orgasm. Your moans get louder and louder until you finally freeze in place at your shared climax, prolonging this perfect moment for what looks like a passionate eternity. When you come to your mouth is where you left it and you decide to pull it off [onyx name]'s genitals. [onyx name] is still petrified in pleasure, ");
+				outputText("You pleasure each other for several minutes, both of your stone tails flailing wildly from the impending orgasm. Your moans get louder and louder until you finally freeze in place at your shared climax, prolonging this perfect moment for what looks like a passionate eternity. When you come to your mouth is where you left it, and you decide to pull it off [onyx name]'s genitals. [onyx name] is still petrified in pleasure, ");
 				if (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) outputText("she");
 				else outputText("he");
 				outputText(" likely will come to later.");
@@ -115,7 +115,7 @@ use namespace CoC;
 				if (player.hasVagina()) outputText("[onyx name] drinking the flood of your juices and licking your pussy clean");
 			}
 			outputText(" You doze off tired and wake up an hour later, your mouth still where you left it. You resolve to pull it off [onyx name] who, still petrified in pleasure, will likely come to later.\n\n");
-			outputText("For now you proceed to redress and head back to camp.\n\n");
+			outputText("For now, you proceed to redress and head back to camp.\n\n");
 			player.sexReward("Default", "Default", true, false);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -127,12 +127,12 @@ use namespace CoC;
 			if (!player.isGargoyle()) outputText(". Well not so ready yet... there's still the need for lubrication");
 			outputText(". You lower your head and proceed to suck on [onyx name]'s perfect cock");
 			if (!player.isGargoyle()) outputText(", liberally coating the entire length with your saliva");
-			outputText(". [onyx name] shivers in delight at your expert cocksucking but you’re not done yet. You move yourself into position and slowly begin to insert the hard tool inside your [cunt] ");
+			outputText(". [onyx name] shivers in delight at your expert cocksucking, but you’re not done yet. You move yourself into position and slowly begin to insert the hard tool inside your [cunt] ");
 			if (player.isGargoyle()) {
 				outputText(" moaning in delight at the perfect grinding of [onyx eir] perfectly shaped stone dick in your stone pussy wich begins to heat up from the friction");
 			}
 			else outputText("gasping as the cold hard stone enters you");
-			outputText(".\n\nIt’s obvious [onyx name] had a lot of experience using a cock before, likely from [onyx ey] past life as the Obsidian Gargoyle. [onyx Eir] talent at fucking rivals that of the demons, and soon you find yourself at the mercy of [onyx ey] perfect gargoyle cock. [onyx Ey] pushes you on your back and takes charge, fucking your pussy so well your eyes cross and your tongue falls out of your mouth as you pant in lust.");
+			outputText(".\n\nIt’s obvious [onyx name] had a lot of experience using a cock before, likely from [onyx ey] past life as the Obsidian Gargoyle. [onyx Eir] talent at fucking rivals that of the demons, and soon you find yourself at the mercy of [onyx ey] perfect gargoyle cock. [onyx Ey] pushes you on your back and takes charge, fucking your pussy so well that your eyes cross and your tongue falls out of your mouth as you pant in lust.");
 			if (player.breastRows[0].breastRating >= 1) {
 				outputText(" You barely register ");
 				if (flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
@@ -141,14 +141,14 @@ use namespace CoC;
 			}
 			outputText("\n\n");
 			if (player.isGargoyle()) {
-				outputText("Soon [onyx eir] skill proves to much for you, as you lose it entirely to pleasure. Your mind regressing to that of an animal in heat, reaching nirvana several times over, screeching your bliss to the heavens. Your mouth gapes wide open as [onyx name] reaches [onyx eir] peak, the both of you petrifying in a silent orgasmic scream. You stay there under ");
+				outputText("Soon [onyx eir] skill proves too much for you, as you lose it entirely to pleasure. Your mind regressing to that of an animal in heat, reaching nirvana several times over, screeching your bliss to the heavens. Your mouth gapes wide open as [onyx name] reaches [onyx eir] peak, both of you petrifying in a silent orgasmic scream. You stay there under ");
 				if (flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
 				else outputText("him");
 				outputText(" for hours, untouched by time, until you recover mobility then push [onyx eir] still frozen form off you. Wow, what a fuck! If you didn’t know any better, you think you might get addicted to [onyx eir] dick.\n\n");
 				outputText("You head back to camp, giving the unconscious gargoyle a parting kiss.\n\n");
 			}
 			else {
-				outputText("Soon [onyx eir] skill proves to much for you, as you lose it entirely to pleasure. Your mind regressing to that of an animal in heat, reaching nirvana several times over, you scream out your bliss, splattering Krystal's/Onyx's cock with a constant waterfall of girl cum which only serves to accelerate and ease [onyx eir] pumping. You are still drooling on the ground as [onyx name] reaches [onyx eir] peak, petrifying in a silent orgasmic scream. You stay there under ");
+				outputText("Soon [onyx eir] skill proves too much for you, as you lose it entirely to pleasure. Your mind regressing to that of an animal in heat, reaching nirvana several times over, you scream out your bliss, splattering Krystal's/Onyx's cock with a constant waterfall of girl cum which only serves to accelerate and ease [onyx eir] pumping. You are still drooling on the ground as [onyx name] reaches [onyx eir] peak, petrifying in a silent orgasmic scream. You stay there under ");
 				if (flags[kFLAGS.ONYX_GENDER] == 2) outputText("her");
 				else outputText("him");
 				outputText(" for several minutes as you calm down and recover your senses, then push [onyx eir] still frozen form off of you. Wow, what a fuck! If you didn’t know any better, you think you might get addicted to [onyx eir] dick.\n\n");
@@ -172,13 +172,13 @@ use namespace CoC;
 			outputText(" You kiss Krystal, tasting her tongue with yours as you caress her breasts. She coos in delight, her tail waving from side to side as you slowly insert yourself in her stony, yet very malleable and accommodating, pussy. It's like the thing was made with an imprint of your dick, it hugs your shaft perfectly. ");
 			outputText(" You moan in pleasure as you start to fuck the lusty gargoyle, enjoying the ministrations of her perfect pussy on your cock. You both make for the perfect match, and soon you find yourself on the verge of climax.\n\n");
 			if (player.isGargoyle()) {
-				outputText("You orgasm together in a climax so perfect that you petrify and lose the ability to move or think straight. You realise you’re still bottomed out in her but you don’t care. You wish this perfect moment would last forever as you are kept at the peak of orgasm. Eventually the pleasure recedes and the both of you regain movement. ");
+				outputText("You orgasm together in a climax so perfect that you petrify and lose the ability to move or think straight. You realise you’re still bottomed out in her, but you don’t care. You wish this perfect moment would last forever as you are kept at the peak of orgasm. Eventually the pleasure recedes, and both of you regain movement. ");
 				outputText("If Krystal could blush she would, as she slowly removes herself from your now flaccid tool, looking like she had the orgasm of her life.\n\n");
 				outputText("\"<i>Wow uh... [name] you sure do have excellent stamina.</i>\"\n\n");
 				outputText("You redress and head back to camp utterly satisfied.\n\n");
 			}
 			else {
-				outputText(" You cum, filling the gargoyle with creamy whiteness as the both of you orgasm, Krystal momentarily losing its ability to move, petrified by pleasure. You begin to remove your dick from the gargoyle pussy but discover to your annoyance that her frozen cunt is so tight you have to almost forcefully open her snatch to get yourself loose. ");
+				outputText(" You cum, filling the gargoyle with creamy whiteness as both of you orgasm, Krystal momentarily losing its ability to move, petrified by pleasure. You begin to remove your dick from the gargoyle pussy but discover to your annoyance that her frozen cunt is so tight you have to almost forcefully open her snatch to get yourself loose. ");
 				outputText("Eventually, an hour later you manage to slide out, a massive trail of cum following suit as you kept fucking her in your attempt to get free from her stony snatch.\n\n");
 				outputText("You proceed to redress and head back to camp.\n\n");
 			}

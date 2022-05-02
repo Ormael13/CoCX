@@ -4745,42 +4745,46 @@ public function rebirthFromBadEnd():void {
         menu();
         //Marble scene
 		if (flags[kFLAGS.MARBLE_PURIFIED] == 1)
-			addButton(0, "Marble & Clara", SceneLib.marblePurification.defeatClaraCuntInAFight, false);
+			addButton(0, "Marble & Clara", SceneLib.marblePurification.defeatClaraCuntInAFight, false).hint("The punishment for Marble's bitchy sister.");
         else
 			addButtonDisabled(0, "M & C", "Requires completing Marble's purification quest.");
         //Excellia slave first scene
 		if (flags[kFLAGS.EXCELLIA_RECRUITED] == 2)
-			addButton(1, "Excellia Slv", SceneLib.excelliaFollower.ExcelliaPathChoiceMakeSlave);
+			addButton(1, "Excellia Slv", SceneLib.excelliaFollower.ExcelliaPathChoiceMakeSlave).hint("Excellia acknowledges herself as your slave.");
         else
 			addButtonDisabled(1, "E. Slv", "Requires enslaving a certain cow-slut.");
         
         //Phylla demon fuck
 		if (flags[kFLAGS.ANT_COLONY_KEPT_HIDDEN] || flags[kFLAGS.PHYLLA_SAVED]) {
             if (player.cor >= 66 - player.corruptionTolerance && player.gender > 0)
-                addButton(2, "PhyllaCart", SceneLib.desert.antsScene.demonsFuckAntgirl);
+                addButton(2, "PhyllaCart", SceneLib.desert.antsScene.demonsFuckAntgirl).hint("Maybe you should have left Phylla to demons and watch them having fun?");
             else addButtonDisabled(2, "PhyllaCart", "You must be corrupted and not genderless to recall this.");
         }
         else addButtonDisabled(2, "P. Cart", "Requires saving one ant-girl.");
 		//Phylla keks
 		if (flags[kFLAGS.ANT_WAIFU] || flags[kFLAGS.PHYLLA_STAY_HOME])
-			addButton(3, "PhyFirstTime", SceneLib.desert.antsScene.antGirlGoodEnd);
+			addButton(3, "PhyFirstTime", SceneLib.desert.antsScene.antGirlGoodEnd).hint("Your first time with Phylla.");
 		else addButtonDisabled(3, "P. First", "Requires winning in the coliseum.");
         //Tamani first time
 		if (flags[kFLAGS.TAMANI_MET] == 1 && player.hasCock())
-			addButton(4, "TamaniFirst", SceneLib.forest.tamaniScene.tamaniFirstTimeConsentual);
+			addButton(4, "TamaniFirst", SceneLib.forest.tamaniScene.tamaniFirstTimeConsentual).hint("First time with Tamani.");
 		else addButtonDisabled(4, "T. First", "Requires fucking a certain goblin the first time you see her (+ having a cock).");
 		//Tamani first time
 		if (player.hasKeyItem("Deluxe Dildo") >= 0 && player.hasVagina())
-			addButton(5, "TamaniFem", SceneLib.forest.tamaniScene.preferTamaniFemdom);
-		else addButtonDisabled(5, "T. Fem", "Requires accepting a dildo from a certain goblin (+ having a vagina).");
+			addButton(5, "TamaniLes", SceneLib.forest.tamaniScene.preferTamaniFemdom).hint("Girl-on-girl event with Tamani.");
+		else addButtonDisabled(5, "T. Les.", "Requires accepting a dildo from a certain goblin (+ having a vagina).");
 		//Erlking revenge
 		if (player.hasKeyItem("Golden Antlers") >= 0 && player.gender > 0)
-			addButton(6, "Erlk.Revenge", SceneLib.forest.erlkingScene.howDareYou);
+			addButton(6, "Erlk.Revenge", SceneLib.forest.erlkingScene.howDareYou).hint("You show Erlking <b>who</b> is the hunter here.");
 		else addButtonDisabled(6, "Ek.Rev", "Requires taking your revenge on some cocky hunter. <i>Don't get cocky, kid...</i>");
 		//Nightmare
 		if (celessScene.questFinishedNightmare)
-			addButton(7, "Nightmare", SceneLib.forest.nightmareScene.nightmareVictory).hint("Please check that no transformations are applied after the scene -- SH.");
+			addButton(7, "Nightmare", SceneLib.forest.nightmareScene.nightmareVictory).hint("Demonic bicorn fucks you into a pile of mess.");
 		else addButtonDisabled(7, "Nm.", "Unlocked after you are impregnated by a certain corrupted centauress.");
+		//Sapphire
+		if (flags[kFLAGS.SAPPHIRE_AFFECTION] == 100)
+			addButton(8, "SapphireFirst", SceneLib.templeofdivine.sapphire.sapphireFirstTime).hint("Sapphire discovers carnal pleasures");
+		else addButtonDisabled(8, "S. First", "Spend some more time with a certain gargoyle. NOT THIS ONE!!!")
 		//bruh
 		addButtonDisabled(13, "BadEnds", "SH is too lazy to add them");
         addButton(14, "Wake Up", recallWakeUp);
