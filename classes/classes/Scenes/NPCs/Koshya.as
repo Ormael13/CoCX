@@ -105,7 +105,7 @@ import classes.internals.*;
 			this.bonusLust = 58;
 			this.bonusWrath = 50;
 			this.bonusSoulforce = 100;
-			this.lustVuln = .75;
+			this.lustVuln = 0;
 			this.lust = 30;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 18;
