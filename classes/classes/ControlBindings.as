@@ -1,4 +1,5 @@
 package classes{
+import classes.GameSettings;
 import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
 import classes.Scenes.SceneLib;
@@ -465,6 +466,20 @@ internal class ControlBindings {
                     function ():void {
                         trace(CoC.instance.mainViewManager.traceSelf());
                         CoC.instance.outputHistory();
+                    }
+            );
+            inputManager.AddBindableControl(
+                    "Font Size+",
+                    "Increase font size",
+                    function():void{
+                        CoC.instance.gameSettings.incFontSize();
+                    }
+            );
+            inputManager.AddBindableControl(
+                    "Font Size-",
+                    "Decrease font size",
+                    function():void{
+                        CoC.instance.gameSettings.decFontSize();
                     }
             );
             inputManager.AddBindableControl(
