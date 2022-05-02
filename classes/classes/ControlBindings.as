@@ -616,6 +616,8 @@ internal class ControlBindings {
             inputManager.BindKeyToControl(Keyboard.F, "Button 14", InputManager.SECONDARYKEY);
             inputManager.BindKeyToControl(Keyboard.G, "Button 15", InputManager.SECONDARYKEY);
             inputManager.BindKeyToControl(Keyboard.H, "History");
+            inputManager.BindKeyToControl(187, "Font Size+");
+            inputManager.BindKeyToControl(189, "Font Size-");
 
             inputManager.RegisterDefaults();
 
