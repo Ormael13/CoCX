@@ -3,170 +3,88 @@ package classes.Scenes.Areas.HighMountains
 import classes.*;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Armors.LustyMaidensArmor;
-import classes.Items.Armors.SuccubusArmor;
 import classes.Scenes.Areas.Ashlands.PhoenixSquadAshland;
 import classes.Scenes.Areas.VolcanicCrag.PhoenixPlatoon;
 import classes.Scenes.SceneLib;
-import classes.display.SpriteDb;
 
 public class PhoenixScene extends BaseContent
 	{
 				
 		//" + (player.cocks.length == 1 ? "": "") + "
-		public function PhoenixScene() 
-		{
-		}
-		
-		public function encounterPhoenix1():void {
-            spriteSelect(SpriteDb.s_phoenix);
-			if (flags[kFLAGS.PHOENIX_ENCOUNTERED] <= 0) encounterPhoenixFirstTime1();
-			else encounterPhoenixRepeat1();
-		}
-		
-		public function encounterPhoenix2():void {
-            spriteSelect(SpriteDb.s_phoenix);
-			if (flags[kFLAGS.PHOENIX_ENCOUNTERED] <= 0) encounterPhoenixFirstTime2();
-			else encounterPhoenixRepeat2();
-		}
-		
-		public function encounterPhoenix3():void {
-            spriteSelect(SpriteDb.s_phoenix);
-			if (flags[kFLAGS.PHOENIX_ENCOUNTERED] <= 0) encounterPhoenixFirstTime3();
-			else encounterPhoenixRepeat3();
-		}
-		
-		public function encounterPhoenixFirstTime1():void {
+		public function PhoenixScene() {}
+
+		//type: 0 - Phoenix, 1 - Squad, 2 - Platoon
+		public function encounterPhoenix(type:int = 0):void {
 			clearOutput();
-			outputText("Strolling along the mountain path, you realise that you are quite close to the tower where you and Hel fought the Harpy Queen and her little army of hybrids. Pausing for a moment, you are relieved to hear a distinct lack of noise, which hopefully means that no-one's tried to move back into the stronghold after ");
-			if (flags[kFLAGS.HARPY_QUEEN_EXECUTED] > 0) outputText("her Highness became an ex-harpy.");
-			else outputText("you evicted her Majesty from her seat of power.");
-			outputText("\n\nA little smile crosses your features as you remember Hel's reaction to seeing her father again and you continue on your way, a slight bounce in your " + (player.isBiped() || player.isTaur() ? "step": "slither") + ". However, less than half a minute later you stop in your tracks when a cascade of rocks suddenly starts rolling down a slope to your right. It's at this point that you realise that the mountain is hardly ever quite this quiet, there's almost always some harpy screeching in the distance or, more often than not, right next to you. Fearing an ambush, you keep your eyes fixed on the peak of the small ridge, gripping your [weapon] tightly as you slow to a snail's pace. Your head darts from side to side as you try to keep watch on every possible hiding place at once, wondering if your previous idea about the tower being abandoned was completely wrong. What if those harpies you drove out decided to re-occupy their old roost? Images of you suddenly being swarmed by a mass of furious, bitter bird-girls enter your head and your jaw clenches slightly, [legs] starting to move a little faster as you try to distance yourself from the area as quickly as you can manage.");
-			outputText("\n\nAs if on cue the sound of wings fills the air and you spin around to pinpoint their source, body readying itself to bolt away in case your wild imaginings become a little too real. However, instead of a flying horde you find yourself facing a red blur in the air, darting towards you with incredible speed. Almost relieved, you're still more than ready for a fight, something that comes in handy as a great burst of flame shoots towards you.");
-			outputText("\n\nLuckily, thanks to your caution, you have just enough time to leap away from the great cone of fire, rolling away from the blast as it scorches a wide line on the ground right where you had been standing. The aerial arsonist circles around after their miss, wheeling through the sky before dropping to the earth in front of you, body almost completely hidden behind a great tower shield. Huge red wings and a pair of scaly, clawed feet are all you can spy around the worn-looking metal, but that is more than enough for you to identify your attacker as a phoenix, one of the very creatures you went up against during your assault on the tower.");
-			outputText("\n\nThe shield lowers slightly revealing what would be a pretty, if dirty, face if it were not marred by a dark scowl. She drops the shield completely, exposing her body entirely as she takes a step towards you, a ragged looking chainmail vest and equally worn leather loincloth hardly able to contain her ample figure. Her other hand holds a shiny scimitar, although it appears to be just as well-used as the rest of her equipment. That doesn't make it any less threatening as she points it towards you though, every aspect of her stance and expression revealing the barely-restrained hate she seems to feel for you.");
-			if (flags[kFLAGS.HARPY_QUEEN_EXECUTED] > 0) outputText("\n\n\"<i>YOU! You and your lizard <b>bitch</b> killed my mother! My sisters may be too scared to face you again, but I'm not going to let you get away with what you did.</i>\"");
-			else outputText("\n\n\"<i>Finally found you. I should've known that you would be skulking around here, probably gloating over how you forced a family out of their home, right? Mother may have convinced the others that you're not worth our time, but I'm not going to let you get away with it.</i>\"");
-			outputText("\n\nBefore you even have a chance to think up a reply the savage bird-woman charges you, the blade in her hand a whirlwind of steel that your eyes can barely keep track of.");
+			if (flags[kFLAGS.PHOENIX_ENCOUNTERED] <= 0) {
+				if (type == 0) outputText("Strolling along the mountain path, you realise that you are quite close to the tower where you and Hel fought the Harpy Queen and her little army of hybrids. Pausing for a moment, you are relieved to hear a distinct lack of noise, which hopefully means that no-one's tried to move back into the stronghold after ");
+				else outputText("Strolling along the " + (type == 1 ? "ashland" : "volcanic crag") + ", you think back to the tower where you and Hel fought the Harpy Queen and her little army of hybrids after ");
+				if (flags[kFLAGS.HARPY_QUEEN_EXECUTED] > 0)
+					outputText("her Highness became an ex-harpy.");
+				else outputText("you evicted her Majesty from her seat of power.");
+				outputText("\n\nA little smile crosses your features as you remember Hel's reaction to seeing her father again, and you continue on your way, a slight bounce in your " + (player.isBiped() || player.isTaur() ? "step" : "slither") + ". However, less than half a minute later you stop in your tracks when a cascade of rocks suddenly starts rolling down a slope to your right. It's at this point that you realise that the " + (type == 0 ? "mountain" : type == 1 ? "ashland" : "crag") + " is hardly ever quite this quiet, there's almost always some " + (type == 0 ? "harpies" : "monsters") + " screeching in the distance or, more often than not, right next to you. Fearing an ambush, you keep your eyes fixed on the peak of the small ridge, gripping your [weapon] tightly as you slow to a snail's pace. Your head darts from side to side as you try to keep watch on every possible hiding place at once, wondering if your previous " + (type == 0 ? "idea about the tower being abandoned was completely wrong" : "thought not jinxed anything") + ". What if those harpies you drove out decided to " + (type == 0 ? "re-occupy their old roost" : "move here") + "? Images of you suddenly being swarmed by a mass of furious, bitter bird-girls enter your head, and your jaw clenches slightly, [legs] starting to move a little faster as you try to distance yourself from the area as quickly as you can manage.");
+				outputText("\n\nAs if on cue the sound of wings fills the air, and you spin around to pinpoint their source, body readying itself to bolt away in case your wild imaginings become a little too real. However, instead of a flying horde you find yourself facing a red blur in the air, darting towards you with incredible speed. Almost relieved, you're still more than ready for a fight, something that comes in handy as a great burst of flame shoots towards you.");
+				outputText("\n\nLuckily, thanks to your caution, you have just enough time to leap away from the great cone of fire, rolling away from the blast as it scorches a wide line on the ground right where you had been standing. The aerial arsonist circles around after their miss, wheeling through the sky before dropping to the earth in front of you, body almost completely hidden behind a great tower shield. Huge red wings and a pair of scaly, clawed feet are all you can spy around the worn-looking metal, but that is more than enough for you to identify your attacker as a phoenix, one of the very creatures you went up against during your assault on the tower.");
+				outputText("\n\nThe shield lowers slightly revealing what would be a pretty, if dirty, face if it were not marred by a dark scowl. She drops the shield completely, exposing her body entirely as she takes a step towards you, a ragged looking chainmail vest and equally worn leather loincloth hardly able to contain her ample figure. Her other hand holds a shiny scimitar, although it appears to be just as well-used as the rest of her equipment. That doesn't make it any less threatening as she points it towards you though, every aspect of her stance and expression revealing the barely-restrained hate she seems to feel for you.");
+				if (flags[kFLAGS.HARPY_QUEEN_EXECUTED] > 0) {
+					outputText("\n\n\"<i>YOU! You and your lizard <b>bitch</b> killed my mother! ");
+					if (type == 0) outputText("My sisters may be too scared to face you again, but I'm not going to let you get away with what you did.</i>\"");
+					else outputText("The Firstborn should have step up to replace our mother, yet that <b>weakling</b> acts too indifferent and lofty to do this and lead attack against you, but we're not going to let you get away with what you did.</i>\"");
+				}
+				else outputText("\n\n\"<i>Finally found you. " + (type == 0 ? "I" : "We") + " should've known that you would be skulking around here, probably gloating over how you forced a family out of their home, right? Mother" + (type == 0 ? "" : "or the Firstborn") + " may have convinced the others that you're not worth our time, but " + (type == 0 ? "I" : "we") + "'m not going to let you get away with it.</i>\"");
+				outputText("\n\nBefore you even have a chance to think up a reply the savage bird-woman charges you, the blade in her hand a whirlwind of steel that your eyes can barely keep track of.");
+				if (type != 0) outputText(" And distracted by her speach you failed to notice many more phoenixes landing nearby.");
+			}
+			else {
+				outputText("Strolling along the " + (type == 0 ? "mountain path" : type == 1 ? "ashland" : "volcanic crag") + ", you spot the familiar Phoenix" + (type == 0 ? "" : type == 1 ? "squad" : "platoon") + ". You ready your [weapon].");
+				if (flags[kFLAGS.PHOENIX_ENCOUNTERED] == 1) outputText("\n\n\"<i>Back again?</i>\" The " + (type == 0 ? "" : "leading") + "phoenix says with a glare. \"<i>But... I guess you're a worthy opponent. Let's see what you're made of!</i>\"");
+				else outputText("\n\n\"<i>Back again?</i>\" The leading phoenix says with a glare. \"<i>Get ready for a rematch!</i>\"");
+				outputText(" the phoenix yells as ")
+				if (type == 0) outputText("she readies her scimitar and shield")
+				else outputText("whole " + (type == 1 ? "squad" : "platoon") + " ready their scimitars and shields");
+				outputText(". You assume a combat stance.");
+			}
 			flags[kFLAGS.PHOENIX_ENCOUNTERED]++;
-			startCombat(new Phoenix());
-		}
-		
-		public function encounterPhoenixFirstTime2():void {
-			clearOutput();
-			outputText("Strolling along the ashland, you think back to the tower where you and Hel fought the Harpy Queen and her little army of hybrids after ");
-			if (flags[kFLAGS.HARPY_QUEEN_EXECUTED] > 0) outputText("her Highness became an ex-harpy.");
-			else outputText("you evicted her Majesty from her seat of power.");
-			outputText("\n\nA little smile crosses your features as you remember Hel's reaction to seeing her father again and you continue on your way, a slight bounce in your " + (player.isBiped() || player.isTaur() ? "step": "slither") + ". However, less than half a minute later you stop in your tracks when a cascade of rocks suddenly starts rolling down a slope to your right. It's at this point that you realise that the crag is hardly ever quite this quiet, there's almost always some monsters screeching in the distance or, more often than not, right next to you. Fearing an ambush, you keep your eyes fixed on the peak of the small ridge, gripping your [weapon] tightly as you slow to a snail's pace. Your head darts from side to side as you try to keep watch on every possible hiding place at once, wondering if your previous thought not jinxed anything. What if those harpies you drove out decided to move here? Images of you suddenly being swarmed by a mass of furious, bitter bird-girls enter your head and your jaw clenches slightly, [legs] starting to move a little faster as you try to distance yourself from the area as quickly as you can manage.");
-			outputText("\n\nAs if on cue the sound of wings fills the air and you spin around to pinpoint their source, body readying itself to bolt away in case your wild imaginings become a little too real. However, instead of a flying horde you find yourself facing a red blur in the air, darting towards you with incredible speed. Almost relieved, you're still more than ready for a fight, something that comes in handy as a great burst of flame shoots towards you.");
-			outputText("\n\nLuckily, thanks to your caution, you have just enough time to leap away from the great cone of fire, rolling away from the blast as it scorches a wide line on the ground right where you had been standing. The aerial arsonist circles around after their miss, wheeling through the sky before dropping to the earth in front of you, body almost completely hidden behind a great tower shield. Huge red wings and a pair of scaly, clawed feet are all you can spy around the worn-looking metal, but that is more than enough for you to identify your attacker as a phoenix, one of the very creatures you went up against during your assault on the tower.");
-			outputText("\n\nThe shield lowers slightly revealing what would be a pretty, if dirty, face if it were not marred by a dark scowl. She drops the shield completely, exposing her body entirely as she takes a step towards you, a ragged looking chainmail vest and equally worn leather loincloth hardly able to contain her ample figure. Her other hand holds a shiny scimitar, although it appears to be just as well-used as the rest of her equipment. That doesn't make it any less threatening as she points it towards you though, every aspect of her stance and expression revealing the barely-restrained hate she seems to feel for you.");
-			if (flags[kFLAGS.HARPY_QUEEN_EXECUTED] > 0) outputText("\n\n\"<i>YOU! You and your lizard <b>bitch</b> killed my mother! The Firstborn should have step up to replace our mother, yet that <b>weakling</b> acts too indifferent and lofty to do this and lead attack against you, but We're not going to let you get away with what you did.</i>\"");
-			else outputText("\n\n\"<i>Finally found you. We should've known that you would be skulking around here, probably gloating over how you forced a family out of their home, right? Mother or Firstborn may have convinced the others that you're not worth our time, but We not going to let you get away with it.</i>\"");
-			outputText("\n\nBefore you even have a chance to think up a reply the savage bird-woman charges you, the blade in her hand a whirlwind of steel that your eyes can barely keep track of. And distracted by her speach you failed to notice many more phoenixes landing nearby.");
-			flags[kFLAGS.PHOENIX_ENCOUNTERED]++;
-			startCombat(new PhoenixSquadAshland());
-		}
-		
-		public function encounterPhoenixFirstTime3():void {
-			clearOutput();
-			outputText("Strolling along the vulcanic crag, you think back to the tower where you and Hel fought the Harpy Queen and her little army of hybrids after ");
-			if (flags[kFLAGS.HARPY_QUEEN_EXECUTED] > 0) outputText("her Highness became an ex-harpy.");
-			else outputText("you evicted her Majesty from her seat of power.");
-			outputText("\n\nA little smile crosses your features as you remember Hel's reaction to seeing her father again and you continue on your way, a slight bounce in your " + (player.isBiped() || player.isTaur() ? "step": "slither") + ". However, less than half a minute later you stop in your tracks when a cascade of rocks suddenly starts rolling down a slope to your right. It's at this point that you realise that the crag is hardly ever quite this quiet, there's almost always some monsters screeching in the distance or, more often than not, right next to you. Fearing an ambush, you keep your eyes fixed on the peak of the small ridge, gripping your [weapon] tightly as you slow to a snail's pace. Your head darts from side to side as you try to keep watch on every possible hiding place at once, wondering if your previous thought not jinxed anything. What if those harpies you drove out decided to move here? Images of you suddenly being swarmed by a mass of furious, bitter bird-girls enter your head and your jaw clenches slightly, [legs] starting to move a little faster as you try to distance yourself from the area as quickly as you can manage.");
-			outputText("\n\nAs if on cue the sound of wings fills the air and you spin around to pinpoint their source, body readying itself to bolt away in case your wild imaginings become a little too real. However, instead of a flying horde you find yourself facing a red blur in the air, darting towards you with incredible speed. Almost relieved, you're still more than ready for a fight, something that comes in handy as a great burst of flame shoots towards you.");
-			outputText("\n\nLuckily, thanks to your caution, you have just enough time to leap away from the great cone of fire, rolling away from the blast as it scorches a wide line on the ground right where you had been standing. The aerial arsonist circles around after their miss, wheeling through the sky before dropping to the earth in front of you, body almost completely hidden behind a great tower shield. Huge red wings and a pair of scaly, clawed feet are all you can spy around the worn-looking metal, but that is more than enough for you to identify your attacker as a phoenix, one of the very creatures you went up against during your assault on the tower.");
-			outputText("\n\nThe shield lowers slightly revealing what would be a pretty, if dirty, face if it were not marred by a dark scowl. She drops the shield completely, exposing her body entirely as she takes a step towards you, a ragged looking chainmail vest and equally worn leather loincloth hardly able to contain her ample figure. Her other hand holds a shiny scimitar, although it appears to be just as well-used as the rest of her equipment. That doesn't make it any less threatening as she points it towards you though, every aspect of her stance and expression revealing the barely-restrained hate she seems to feel for you.");
-			if (flags[kFLAGS.HARPY_QUEEN_EXECUTED] > 0) outputText("\n\n\"<i>YOU! You and your lizard <b>bitch</b> killed my mother! The Firstborn should have step up to replace our mother, yet that <b>weakling</b> acts too indifferent and lofty to do this and lead attack against you, but We're not going to let you get away with what you did.</i>\"");
-			else outputText("\n\n\"<i>Finally found you. We should've known that you would be skulking around here, probably gloating over how you forced a family out of their home, right? Mother or Firstborn may have convinced the others that you're not worth our time, but We not going to let you get away with it.</i>\"");
-			outputText("\n\nBefore you even have a chance to think up a reply the savage bird-woman charges you, the blade in her hand a whirlwind of steel that your eyes can barely keep track of. And distracted by her speach you failed to notice many more phoenixes landing nearby.");
-			flags[kFLAGS.PHOENIX_ENCOUNTERED]++;
-			startCombat(new PhoenixPlatoon());
-		}
-		
-		public function encounterPhoenixRepeat1():void {
-            clearOutput();
-			outputText("Strolling along the mountain path, you spot the familiar Phoenix. You ready your [weapon].");
-			if (flags[kFLAGS.PHOENIX_ENCOUNTERED] == 1) outputText("\n\n\"<i>Back again?</i>\" The phoenix says with a glare. \"<i>But... I guess you're a worthy opponent. Let's see what you're made of!</i>\" The phoenix yells as she readies her scimitar and shield. You assume a combat stance.");
-			else outputText("\n\n\"<i>Back again?</i>\" The phoenix says with a glare. \"<i>Get ready for a rematch!</i>\" The phoenix yells as she readies her scimitar and shield. You assume a combat stance.");
-			flags[kFLAGS.PHOENIX_ENCOUNTERED]++;
-			startCombat(new Phoenix());
-		}
-		
-		public function encounterPhoenixRepeat2():void {
-            clearOutput();
-			outputText("Strolling along the ashlands, you spot the familiar Phoenix squad. You ready your [weapon].");
-			if (flags[kFLAGS.PHOENIX_ENCOUNTERED] == 1) outputText("\n\n\"<i>Back again?</i>\" The leading phoenix says with a glare. \"<i>But... I guess you're a worthy opponent. Let's see what you're made of!</i>\" The phoenix yells as whole squad readies their scimitars and shields. You assume a combat stance.");
-			else outputText("\n\n\"<i>Back again?</i>\" The leading phoenix says with a glare. \"<i>Get ready for a rematch!</i>\" The phoenix yells as whole squad readies their scimitars and shields. You assume a combat stance.");
-			flags[kFLAGS.PHOENIX_ENCOUNTERED]++;
-			startCombat(new PhoenixSquadAshland());
-		}
-		
-		public function encounterPhoenixRepeat3():void {
-            clearOutput();
-			outputText("Strolling along the vulcanic crag, you spot the familiar Phoenix platoon. You ready your [weapon].");
-			if (flags[kFLAGS.PHOENIX_ENCOUNTERED] == 1) outputText("\n\n\"<i>Back again?</i>\" The leading phoenix says with a glare. \"<i>But... I guess you're a worthy opponent. Let's see what you're made of!</i>\" The phoenix yells as whole platoon readies their scimitars and shields. You assume a combat stance.");
-			else outputText("\n\n\"<i>Back again?</i>\" The leading phoenix says with a glare. \"<i>Get ready for a rematch!</i>\" The phoenix yells as whole platoon readies their scimitars and shields. You assume a combat stance.");
-			flags[kFLAGS.PHOENIX_ENCOUNTERED]++;
-			startCombat(new PhoenixPlatoon());
+			startCombat(type == 0 ? new Phoenix() : type == 1 ? new PhoenixSquadAshland() : new PhoenixPlatoon());
 		}
 		
 		//VICTORY!
-		public function winAgainstPhoenix():void {
+		public function winAgainstPhoenix(many:Boolean = false):void {
 			flags[kFLAGS.PHOENIX_HP_LOSS_COUNTER] = 0; //Reset counter if you win.
-			outputText("With one final grunt, the phoenix collapses against a nearby rock, barely able to support herself. The once-proud soldier has been reduced to a " + (monster.lust >= monster.maxLust() ? "dazed, lust-crazed slut, desperately pulling at her clothing in a mad attempt to expose herself": "a beaten, battered heap; completely unable to resist your advances") + ". ");
+			if (many) outputText("With one final grunt, the phoenixes collapses, barely able to support themself. The once-proud soldiers has been reduced to a " + (monster.lust >= monster.maxLust() ? "dazed, lust-crazed sluts, desperately pulling at their clothing in a mad attempt to expose themself": "a beaten, battered heap; completely unable to resist your advances") + ". Still most of them seems to have some strength left as all lift off leaving behind one of them pressumable the weakest one. ");
+			else outputText("With one final grunt, the phoenix collapses against a nearby rock, barely able to support herself. The once-proud soldier has been reduced to a " + (monster.lust >= monster.maxLust() ? "dazed, lust-crazed slut, desperately pulling at her clothing in a mad attempt to expose herself": "a beaten, battered heap; completely unable to resist your advances") + ". ");
 			if (player.lust >= 33) {
 				outputText("What do you do? \n\n");
 				menu();
-				if (player.hasCock()) {
-					if (player.cockThatFits(monster.vaginalCapacity()) >= 0) addButton(0, "Missionary", missionaryWithPhoenix);
-					else outputText("<b>Unfortunately, " + (player.cocks.length == 1 ? "your cock doesn't": "none of your cocks") + " fit in her vagina.</b>\n");
-					if (player.cockThatFits(monster.analCapacity()) >= 0) addButton(1, "Fuck Ass", fuckPhoenixsButt);
-					else outputText("<b>Unfortunately, " + (player.cocks.length == 1 ? "your cock doesn't": "none of your cocks") + " fit in her ass.</b>\n");
-					addButton(2, "Get Wanked", getWanked);
-				}
+				addButtonIfTrue(0, "Missionary", missionaryWithPhoenix,
+					"Req. a cock with area smaller than " + monster.vaginalCapacity(),
+					player.cockThatFits(monster.vaginalCapacity()) >= 0);
+				addButtonIfTrue(1, "Fuck Ass", fuckPhoenixsButt,
+					"Req. a cock with area smaller than " + monster.analCapacity(),
+					player.cockThatFits(monster.analCapacity()) >= 0);
+				addButtonIfTrue(2, "Get Wanked", getWanked, "Req. a cock", player.hasCock());
 				addButton(3, "Ride Anal", rideAnal);
-				if (player.hasVagina()) addButton(4, "Ride Vaginal", rideVaginal);
-				//addButton(5, "Suck Her Dick", rideAnal);
+				addButtonIfTrue(4, "Ride Vaginal", rideVaginal, "Req. a vagina", player.hasVagina());
 				LustyMaidensArmor.addTitfuckButton(7);
 				SceneLib.uniqueSexScene.pcUSSPreChecksV2(winAgainstPhoenix);
 								addButton(14, "Leave", cleanupAfterCombat);
 			}
 			else cleanupAfterCombat();
 		}
-		public function winAgainstPhoenix1():void {
-			flags[kFLAGS.PHOENIX_HP_LOSS_COUNTER] = 0; //Reset counter if you win.
-			outputText("With one final grunt, the phoenixes collapses, barely able to support themself. The once-proud soldiers has been reduced to a " + (monster.lust >= monster.maxLust() ? "dazed, lust-crazed sluts, desperately pulling at their clothing in a mad attempt to expose themself": "a beaten, battered heap; completely unable to resist your advances") + ". Still most of them seems to have some strength left as all lift off leaving behind one of them pressumable the weakest one. ");
-			if (player.lust >= 33) {
-				outputText("What do you do? \n\n");
-				menu();
-				if (player.hasCock()) {
-					if (player.cockThatFits(monster.vaginalCapacity()) >= 0) addButton(0, "Missionary", missionaryWithPhoenix);
-					else outputText("<b>Unfortunately, " + (player.cocks.length == 1 ? "your cock doesn't": "none of your cocks") + " fit in her vagina.</b>\n");
-					if (player.cockThatFits(monster.analCapacity()) >= 0) addButton(1, "Fuck Ass", fuckPhoenixsButt);
-					else outputText("<b>Unfortunately, " + (player.cocks.length == 1 ? "your cock doesn't": "none of your cocks") + " fit in her ass.</b>\n");
-					addButton(2, "Get Wanked", getWanked);
-				}
-				addButton(3, "Ride Anal", rideAnal);
-				if (player.hasVagina()) addButton(4, "Ride Vaginal", rideVaginal);
-				//addButton(5, "Suck Her Dick", rideAnal);
-				addButton(14, "Leave", cleanupAfterCombat);
-				SceneLib.uniqueSexScene.pcUSSPreChecksV2(winAgainstPhoenix1);
-							}
-			else cleanupAfterCombat();
-		}
 		
 		public function missionaryWithPhoenix():void {
 			clearOutput();
+			//TODO: fix cock finding!
 			outputText("You charge at the defenseless phoenix, quickly disarming her before throwing the defeated girl to the ground, leaving her moaning in the dirt on her back. She grunts, shaking her head vigourously to try and clear her mind, before looking up at you with grim, fierce eyes. ");
 			outputText("\n\n\"<i>I’ll never submit! I am a noble phoenix, not some-</i>\" Completely ignoring her you yank her chain shirt up, revealing the heaving, plush D-cups beneath " + (monster.lust >= monster.maxLust() ? " nipples already standing at attention in the cool air": "") + ". The phoenix gasps at the sudden exposure and turns her head away, squeezing her eyes closed, determined to not look you in the eye as you take your pleasure.");
-			outputText("\n\nKneeling before her you tear away her loincloth, forcing her legs apart to reveal her " + (monster.lust >= monster.maxLust() ? " slick pussy and half-rigid cock, clearly aroused despite her insistence on not enjoying herself": " tight slit and slowly engorging lizard-shaft, apparently her current condition is more enticing than she wants to admit") + ". You run a pair of fingers along her cleft, trailing it all the way up to the tip of her stirring member before circling around her tip and sliding back down. The phoenix whines pitifully as her prick reacts accordingly, twitching as it hardens at your teasing touch before you bring your fingers back to her slickening entrance and ease them between her soft lips. She groans, gritting her teeth as you go deeper and deeper inside her, wiggling against her walls whilst she soaks your hand with arousal.");
-			outputText("\n\nHer neck cranes as she struggles to control herself; slow, heavy breathing accentuating her tits as they tremble gently with each mouthful of air. With a grin you whip your fingers out of her and, as she writhes at the sudden emptiness, force them into her gasping mouth. Eyes shooting wide open, she sputters and shakes her head, but you don’t let up until she’s had a good, long taste, wrapping her reptilian tongue around your dripping digits to make sure she gets a full sampling of her own flavour. The way her tongue constricts your sodden fingers floods your groin with warmth and you feel your " + (player.cocks.length == 1 ? "member": "members") + " starting to thicken as she slurps at her own spunk.");
+			outputText("\n\nKneeling before her, you tear away her loincloth, forcing her legs apart to reveal her " + (monster.lust >= monster.maxLust() ? " slick pussy and half-rigid cock, clearly aroused despite her insistence on not enjoying herself": " tight slit and slowly engorging lizard-shaft, apparently her current condition is more enticing than she wants to admit") + ". You run a pair of fingers along her cleft, trailing it all the way up to the tip of her stirring member before circling around her tip and sliding back down. The phoenix whines pitifully as her prick reacts accordingly, twitching as it hardens at your teasing touch before you bring your fingers back to her slickening entrance and ease them between her soft lips. She groans, gritting her teeth as you go deeper and deeper inside her, wiggling against her walls whilst she soaks your hand with arousal.");
+			outputText("\n\nHer neck cranes as she struggles to control herself; slow, heavy breathing accentuating her tits as they tremble gently with each mouthful of air. With a grin you whip your fingers out of her and, as she writhes at the sudden emptiness, force them into her gasping mouth. Eyes shooting wide open, she sputters and shakes her head, but you don’t let up until she’s had a good, long taste, wrapping her reptilian tongue around your dripping digits to make sure she gets a full sampling of her own flavour. The way her tongue constricts your sodden fingers floods your groin with warmth, and you feel your " + (player.cocks.length == 1 ? "member": "members") + " starting to thicken as she slurps at her own spunk.");
 			outputText("\n\nWithdrawing your hand you chide her, asking that if she doesn’t want it so much, why is she so wet?");
 			outputText("\n\n\"<i>I-I am not! It’s natural!</i>\" As she speaks, her tongue darts out to lick her lips, almost as if searching for more of her delicious juice.");
 			outputText("\n\nOh, really? Is she sure she doesn’t just want your cock? Doesn't need it with every fibre of her being? She's not going to try and jump you like an animal in heat, begging you for your seed?");
-			outputText("\n\n\"<i>I... N-No, I'm a p-proud warrior... I-</i>\" her words are quickly cut off as your hand clamps around her shaft, feeling it throb in time with her excited heartbeat. Your own " + (player.cocks.length == 1 ? "[cock] stirs": "[cocks] stir") + " as you gently squeeze her, pressing against the insides of your leggings with nigh-unbearable pressure. A grin spreads across your face as her voice trails off into a keening whine and her thighs start to grind against one another, smearing her feathers with femcum. ");
+			outputText("\n\n\"<i>I... N-No, I'm a p-proud warrior... I-</i>\" her words are quickly cut off as your hand clamps around her shaft, feeling it throb in time with her excited heartbeat. Your own " + (player.cocks.length == 1 ? "[cock] stirs": "[cocks] stir") + " as you gently squeeze her, pressing against the insides of your leggings with nigh-unbearable pressure. A grin spreads across your face as her voice trails off into a keening whine, and her thighs start to grind against one another, smearing her feathers with femcum. ");
 			outputText("\n\nGrasping her thighs, you spread them apart again, even wider this time. She moans and tries weakly to close them, but you hold her fast, kneeling between them and pinning her with your own legs. Pressing her hard cock against her stomach, you completely expose your prize; her thoroughly sodden cunt" + (player.cocks.length > 1 ? " and the enticingly tight ring below it": "") + ". Wasting no time, you reach down and free " + (player.cocks.length == 1 ? "your member, grunting as it": "all of your pricks, grunting as one") + " slaps against the top of her pussy, landing on her clit with a soft slap. She gasps sharply at the treatment, but begins to moan you shift your hips, letting your meat slide down between her wet, plump lips. Releasing her now-leaking rod, you grasp her soft hips whilst you continue to tease her, running your tip up and down her drooling slit. When you reach the top of her gash, you slide against her button and press into the base of her aching lizardcock, smirking as a thick rivulet of spunk rolls down her shaft in response. ");
-			if (player.cocks.length >= 2) outputText("Whilst you tease her sensitive pussy, your [cock 2] moves in to prod at her tight ass. As soon as the [cockHead 2] touches her pucker she jumps, squirming desperately in an attempt to wriggle away. However your grip is far too firm and you hold her in place, forcing her to endure the feeling of your imminent intrusion. ");
+			if (player.cocks.length >= 2) outputText("Whilst you tease her sensitive pussy, your [cock 2] moves in to prod at her tight ass. As soon as the [cockHead 2] touches her pucker she jumps, squirming desperately in an attempt to wriggle away. However, your grip is far too firm, and you hold her in place, forcing her to endure the feeling of your imminent intrusion. ");
 			outputText("\n\nYour constant stimulation is clearly leaving the phoenix conflicted; part of her trying desperately to resist the pleasure coursing through her, the rest a barely restrained whore all too eager to let you stuff her with virile spunk and leave her a sweating, quivering mess on this mountain. She tries to keep her eyes closed, turning her face away from you whilst biting her lip, all in an attempt to stop herself from groaning as you touch and caress her needy body. In no time at all " + (player.cocks.length == 1 ? "your length is dripping lubrication, both your own and hers,": "your lengths are slathered with a combination of your fluids,") + " gently spreading her equally soaked pussy " + (player.cocks.length > 1 ? " and pucker": "") + " as you unconsciously press against her harder and harder. Unable to hold yourself back, you ensure that you're lined up " + (player.cocks.length == 1 ? "with her, the tip of your member pushing into her soaking snatch, stretching her just enough to draw out a moan as she struggles to control herself.": "with both of her holes, your shafts forcing their way into her just enough to coax a low whine from the sensitive girl.") + " Tightening your grip on her hips, you drag her down your " + (player.cocks.length > 1 ? "yearning shaft": "twin poles") + " with an agonizing slowness, relishing in every twitching inch that you sink into her. ");
 			outputText("\n\nHer voice slowly builds as you slip into her slick, tight tunnel" + (player.cocks.length > 1 ? " and even tighter ass": "") + ", her hips trying to thrust against you in hopes of speeding up your torturously slow intrusion. You resist her, stopping your movement completely as you firmly hold her lower body still. She cries out as you remain motionless inside her, your throat rumbling as her body quakes around you, almost overcome by the blissful feeling of her spasming pussy " + (player.cocks.length > 1 ? " and back passage": "") + ". ");
 			outputText("\n\nHer eyes shoot open and stare into yours pleadingly, seconds ticking by with no movement except for her body trying to coax you further inside, grasping and squeezing your " + (player.cocks.length == 1 ? " [cock]": "rods") + ". You simply hold her gaze, watching her face intently as the desperation builds, her expression imploring you to continue. She tries to wrap her legs around your hips, the move spreading her entrance" + (player.cocks.length > 1 ? "s": "") + " slightly wider as her surprisingly strong thighs tighten about your waist.");
@@ -183,7 +101,7 @@ public class PhoenixScene extends BaseContent
 			outputText("\n\nWell, that'll have to do, you suppose. Your hands move to her thighs, grasping them tightly as you pull your bodies together. She nearly screams as your " + (player.cocks.length == 1 ? "length starts": "members start") + " moving inside her again, moaning loudly by the time you hips meet hers. The phoenix squirms as you hilt her, groaning and writhing around you as you try to cope with her crushing depths. She bites her lip, though it does little to stop her moans from pouring out of her whilst you slam into her hips, her slick pussy virtually drooling as you use her body like a grunting, hot cocksleeve.");
 			outputText("\n\nAs you pummel her, you feel her hands snaking their way down her body, zeroing in on the hard, purple shaft that bounces in the air with each thrust of your hips. Her stomach is glazed with precum, showing exactly how needy her lizardlike member is for release, another thin stream of pre oozing from it as you ride the girl's tight hole" + (player.cocks.length == 1 ? "": "s") + ". ");
 			outputText("\n\nHowever, just before her fingers can reach her aching prick, you grab her wrists, pinning them above her head. The move buries your shaft" + (player.cocks.length == 1 ? "": "s") + " inside her as lean over the girl, a frustrated moan coming from her as your bodies press together intimately. You feel her member twitch as your bodies enclose it, precum coating your [armor] as the pressure forces it from her hot length. ");
-			outputText("\n\nShe moans again, more lustfully this time as you resume your pounding, each stroke rubbing her cock between your bodies. You dip your head to her chest, lips sealing around a perky nipple whilst you thrust harder and faster. She arches her back as your tongue flicks across the sensitive nub, groaning and tightening the grip she has on your waist in time with your rapid humping. Her tail flits about between you legs, though it's clear to see that she lack the energy to use it in any kind of an aggressive fashion.");
+			outputText("\n\nShe moans again, more lustfully this time as you resume your pounding, each stroke rubbing her cock between your bodies. You dip your head to her chest, lips sealing around a perky nipple whilst you thrust harder and faster. She arches her back as your tongue flicks across the sensitive nub, groaning and tightening the grip she has on your waist in time with your rapid humping. Her tail flits about between you legs, though it's clear to see that she lack the energy to use it in any kind of aggressive fashion.");
 			outputText("\n\nWith such a relentless pace, it isn't long before her cries start to get louder and higher, driving you to slam your hips into the girl. Her breasts bounce with each stroke, hands balling into fists as you push harder against her, squeezing her drooling reptilian shaft between you. It squelches slightly as it slides between your two cum-slick bodies, the motion making the girl grunt every time you change direction.");
 			outputText("\n\nShe cums first" + (player.cocks.length == 1 ? "": ", the rapid pace of your twin shafts too much for her to bear") + ", gripping your shoulders hard enough for her claws pierce your armour. He eyes squeeze shut as her body gives in, not wanting to see you as you claim the girl as yours. Despite herself, a deep groan rumbles in her throat as the pleasure overwhelms her, her chest heaving upwards as she tries to futilely fight one last time against your grip.");
 			outputText("\n\nYou moan in kind as her spasming pussy " + (player.cocks.length == 1 ? "": "and quivering sphincter") + " tightens around your [cock]" + (player.cocks.length == 1 ? "": "and [cock 2]") + ". Her hips start to buck as her member erupts, her legs pistoning her upwards to your body as hot jizz pumps between you both with every twitch of her sensitive shaft. ");

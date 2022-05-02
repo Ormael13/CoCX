@@ -79,7 +79,7 @@ public class VolcanicCrag extends BaseContent
 				case 1:
 					if (flags[kFLAGS.HEL_PHOENIXES_DEFEATED] > 0) {
 						VolcanicCragConditions();
-						phoenixScene.encounterPhoenix3();
+						phoenixScene.encounterPhoenix(2);
 					}
 					else behemothScene.behemothIntro();
 					break;

@@ -119,7 +119,7 @@ use namespace CoC;
 				}
 			}
 			if (flags[kFLAGS.HEL_PHOENIXES_DEFEATED] > 0 && rand(4) == 0) {
-				phoenixScene.encounterPhoenix1();
+				phoenixScene.encounterPhoenix(0);
 				return;
 			}
 			if (player.hasKeyItem("Gryphon Statuette") < 0 && player.hasKeyItem("Peacock Statuette") < 0 && player.avianScore() >= 6 && rand(4) == 0) {

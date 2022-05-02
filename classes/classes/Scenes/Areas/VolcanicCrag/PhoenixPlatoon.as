@@ -65,7 +65,7 @@ import classes.internals.WeightedDrop;
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			SceneLib.highMountains.phoenixScene.winAgainstPhoenix1();
+			SceneLib.highMountains.phoenixScene.winAgainstPhoenix(true);
 		}
 
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
