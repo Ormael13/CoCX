@@ -4649,7 +4649,7 @@ public final class Mutations extends MutationsHelper {
             else if (player.hasFur()) outputText("[pg]You sigh, suddenly feeling your fur become hot and wet.  You look down as your [armor] sinks partway into you.  With a start you realize your fur has melted away, melding into the slime-like coating that now serves as your skin.  You've become partly liquid and incredibly gooey!");
             else if (player.hasScales()) outputText("[pg]You sigh, feeling slippery wetness over your scales.  You reach to scratch it and come away with a slippery wet coating.  Your scales have transformed into a slimy goop!  Looking closer, you realize your entire body has become far more liquid in nature, and is semi-solid.  Your [armor] has even sunk partway into you.");
             else if (player.skin.base.type != Skin.GOO) outputText("[pg]You sigh, feeling your [armor] sink into you as your [skin] becomes less solid, gooey even.  You realize your entire body has become semi-solid and partly liquid!");
-            player.skin.setBaseOnly({adj: "slimy", type: Skin.GOO});
+            player.skin.setBaseOnly({type: Skin.GOO, adj: "slimy"});
             if (!InCollection(player.skin.base.color, gooSkinColors) && type == 0) {
                 player.skin.base.color = randomChoice(gooSkinColors);
                 outputText("  Stranger still, your skintone changes to [skin color]!");
@@ -9946,7 +9946,7 @@ public final class Mutations extends MutationsHelper {
         //Transparent skin
         if (player.hasPlainSkinOnly() && !player.hasGhostSkin() && !player.isGargoyle() && rand(3) == 0 && changes < changeLimit && type == 1) {
             outputText("[pg]You feel lightheaded all of a sudden. You bring your hands up to clutch your head only to find the color slowly fading from your skin or rather it’s losing its opacity altogether. You examine your body and see that you’ve become almost entirely transparent, adding to your ethereal appearance. <b>You now have transparent skin.</b>");
-            player.skin.setBaseOnly({adj: "transparent", type: Skin.TRANSPARENT});
+            player.skin.setBaseOnly({type: Skin.TRANSPARENT, adj: "transparent"});
             changes++;
         }
         //Skin pattern - black or white veins pattern - adv ghost tf
@@ -17475,4 +17475,4 @@ public final class Mutations extends MutationsHelper {
 		player.herbXP(HE);
     }
 }
-}
+}

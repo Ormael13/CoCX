@@ -139,7 +139,8 @@ public class DarkSlimeScene extends BaseContent
         CoC.instance.transformations.ArmsGoo.applyEffect(false);
         player.lowerBody = LowerBody.GOO;
         player.rearBody.type = RearBody.METAMORPHIC_GOO;
-        player.skin.setBaseOnly({adj: "slimy", type: Skin.GOO});
+        player.skin.setBaseOnly({type: Skin.GOO});
+		if (player.skinAdj != "slimy") player.skinAdj = "slimy";
         var darkgooSkinColors:Array = ["indigo", "light purple", "purple", "purplish black", "dark purple"];
         var choosencolor:String = randomChoice(darkgooSkinColors);
         player.skin.base.color = choosencolor;
@@ -158,11 +159,10 @@ public class DarkSlimeScene extends BaseContent
         CoC.instance.transformations.WingsNone.applyEffect(false);
         player.tail.type = Tail.NONE;
         player.gills.type = Gills.NONE;
-        if (!player.hasStatusEffect(StatusEffects.SlimeCraving))
-            player.createStatusEffect(StatusEffects.SlimeCraving, 0, 0, 0, 1); //Value four indicates this tracks strength and speed separately
+        if (!player.hasStatusEffect(StatusEffects.SlimeCraving)) player.createStatusEffect(StatusEffects.SlimeCraving, 0, 0, 0, 1); //Value four indicates this tracks strength and speed separately
         if (!player.hasPerk(PerkLib.DarkSlimeCore)) player.createPerk(PerkLib.DarkSlimeCore, 0,0,0,0);
         CoC.instance.mainViewManager.updateCharviewIfNeeded();
-		cleanupAfterCombat();//doNext(camp.returnToCampUseOneHour);
+		cleanupAfterCombat();
     }
 
     public function beatingDarkSlimeScram():void {
