@@ -73,7 +73,7 @@ import classes.internals.WeightedDrop;
 				outputText("\n\nYour foes doesn't seem disgusted enough to leave...");
 				doNext(SceneLib.combat.endLustLoss);
 			} else {
-				SceneLib.highMountains.phoenixScene.loseToPhoenix1();
+				SceneLib.highMountains.phoenixScene.loseToPhoenix(true);
 			}
 		}
 		
