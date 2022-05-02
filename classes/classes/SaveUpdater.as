@@ -1741,6 +1741,12 @@ public class SaveUpdater extends NPCAwareContent {
 					flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02985] = 0;
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.006;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.007) {
+				CoC.instance.inputManager.BindKeyToControl(187, "Font Size+");//Updating to set default keybindings for font zoom/shrink
+				CoC.instance.inputManager.BindKeyToControl(189, "Font Size-");
+				flags[kFLAGS.MOD_SAVE_VERSION] = 35.007;
+			}
+
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
 			return;

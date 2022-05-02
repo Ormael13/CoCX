@@ -1,4 +1,5 @@
 package classes{
+import classes.GameSettings;
 import classes.GlobalFlags.kFLAGS;
 import classes.CoC;
 import classes.Scenes.SceneLib;
@@ -468,6 +469,20 @@ internal class ControlBindings {
                     }
             );
             inputManager.AddBindableControl(
+                    "Font Size+",
+                    "Increase font size",
+                    function():void{
+                        CoC.instance.gameSettings.incFontSize();
+                    }
+            );
+            inputManager.AddBindableControl(
+                    "Font Size-",
+                    "Decrease font size",
+                    function():void{
+                        CoC.instance.gameSettings.decFontSize();
+                    }
+            );
+            inputManager.AddBindableControl(
                     "Cheat! Give Hummus",
                     "Cheat code to get free hummus",
                     function (keyCode:int):void {
@@ -601,6 +616,8 @@ internal class ControlBindings {
             inputManager.BindKeyToControl(Keyboard.F, "Button 14", InputManager.SECONDARYKEY);
             inputManager.BindKeyToControl(Keyboard.G, "Button 15", InputManager.SECONDARYKEY);
             inputManager.BindKeyToControl(Keyboard.H, "History");
+            inputManager.BindKeyToControl(187, "Font Size+");
+            inputManager.BindKeyToControl(189, "Font Size-");
 
             inputManager.RegisterDefaults();
 
