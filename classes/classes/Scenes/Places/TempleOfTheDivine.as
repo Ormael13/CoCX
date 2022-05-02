@@ -97,16 +97,19 @@ import classes.Scenes.Places.TempleOfTheDivine.*;
 			if (anyOfAltairsRepaired()) {
 				outputText("Would you like to pray, and if yes, to whom?");
 				menu();
-				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1 && !player.hasStatusEffect(StatusEffects.BlessingOfDivineMarae)) addButton(0, "Marae", PlayerPrayAtTempleMaraeAltair).hint("Pray to Marae for empowered white magic.");
-				else addButtonDisabled(0, "Marae", "You not yet restored this altair.");
+				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1 && !player.hasStatusEffect(StatusEffects.BlessingOfDivineMarae))
+					addButtonIfTrue(0, "Marae", PlayerPrayAtTempleMaraeAltair,
+						"Marae can't help you anymore in her current condition...",
+						flags[kFLAGS.FACTORY_SHUTDOWN] == 1, "Pray to Marae for empowered white magic.");
+				else addButtonDisabled(0, "Marae", "You haven't restored this altair yet.");
 				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_TAOTH] == 1 && !player.statStore.hasBuff("TaothBlessing")) addButton(1, "Taoth", PlayerPrayAtTempleTaothAltair).hint("Pray the trickster god for an increase to your Agility, (if kitsune)kitsune powers (end of cut) and guile.");
-				else addButtonDisabled(1, "Taoth", "You not yet restored this altair.");
+				else addButtonDisabled(1, "Taoth", "You haven't restored this altair yet.");
 				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FERA] == 1 && !player.hasStatusEffect(StatusEffects.BlessingOfDivineFera)) addButton(2, "Fera", PlayerPrayAtTempleFeraAltair).hint("Pray the fallen goddess Fera for an increase to your innuendo and resilience to desire.");
-				else addButtonDisabled(2, "Fera", "You not yet restored this altair.");
-				addButtonDisabled(3, "E.e.ie.", "You not yet restored this altair.");
+				else addButtonDisabled(2, "Fera", "You haven't restored this altair yet.");
+				addButtonDisabled(3, "E.e.ie.", "You haven't restored this altair yet.");
 				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] == 1 && !player.statStore.hasBuff("FenrirBlessing")) addButton(4, "Fenrir", PlayerPrayAtTempleFenrirAltair).hint("Pray to the god sharing your body for an increase to your might.");
-				else addButtonDisabled(4, "Fenrir", "You not yet restored this altair.");
-				//FUCK, STOP HINTING NYI OPTIONS, IT'S MISLEADING
+				else addButtonDisabled(4, "Fenrir", "You haven't restored this altair yet.");
+				//FUCK, STOP WRITING NYI OPTIONS, IT'S MISLEADING
 				/*
 				addButtonDisabled(5, "???", "You not yet restored this altair.");//life godess
 				addButtonDisabled(6, "Krat..", "You not yet restored this altair.");
@@ -294,8 +297,8 @@ import classes.Scenes.Places.TempleOfTheDivine.*;
 		public function rebuildGodsAltairs():void {
 			menu();
 			addRebuildButton(0, "Marae", rebuildMaraeAltair,
-				flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] < 1, flags[kFLAGS.FACTORY_SHUTDOWN] == 1,
-				"Marae is corrupted. You need to clean her from the corruption... if it's still possible.");
+				flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] < 1, flags[kFLAGS.FACTORY_SHUTDOWN] > 0,
+				"Marae is corrupted. You need to <i>at least try to</i> clean her from the corruption... if it's still possible.");
 			addRebuildButton(1, "Taoth", rebuildTaothAltair,
 				flags[kFLAGS.TEMPLE_OF_THE_DIVINE_TAOTH] < 1, flags[kFLAGS.URTA_QUEST_STATUS] == 1,
 				"Urta might find out something about this one in the future. But you'll need to treat her VERY well and <b>often</b> for that...");
@@ -373,7 +376,12 @@ import classes.Scenes.Places.TempleOfTheDivine.*;
 			clearOutput();
 			outputText("The Altar of Marae ");
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] < 1) outputText("is broken, a large fissure running along its center. Crude graffiti litters the once pure stone with obscenities.");
-			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1) outputText("shines, illuminated by a ray of light as if beckoning the faithful. A single white flower trails its way up one side, assuring her divine presence is there.");
+			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1) {
+				if (flags[kFLAGS.FACTORY_SHUTDOWN] == 1)
+					outputText("shines, illuminated by a ray of light as if beckoning the faithful. A single white flower trails its way up one side, assuring her divine presence is there.");
+				else
+					outputText("glows dimly, sometimes gleaming with purplish colors. It definitely doesn't fit for any kind of prayer - the best blessing you can get from it is tentacle slap across your face. But it's still an altar, so you can use it for different kinds of ceremonies.");
+			}
 			outputText("\n\nTo the left of Marae's Altar, the Altar of Taoth");
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_TAOTH] < 1) outputText(" lies shattered into pieces. The trickster god cannot even be visualised from the rubble that once made up his effigy.");
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_TAOTH] == 1) outputText(", the trickster god, has a mesmerising outlook, his effigy making a mocking smile. You swear you can hear faint laughter coming from its direction.");

@@ -623,20 +623,6 @@ import coc.xxc.StoryContext;
             return "ERROR: allVaginaDescript called with no vaginas.";
 		}
 
-/* Now called directly
-		protected function breastCup(val:Number):String
-		{
-			return Appearance.breastCup(val);
-		}
-*/
-
-/* Replaced with calls to Appearance.cockDescription
-		protected function NPCCockDescript(cockType:*,cockLength:Number=0,lust:Number=50):String
-		{
-			return CoC.instance.NPCCockDescript(cockType,cockLength,lust);
-		}
-*/
-
 		/**
 		 * Apply statmods to the player. dynStats wraps the regular stats call, but supports "named" arguments of the form:
 		 * 		"statname", value.
