@@ -4267,7 +4267,7 @@ public class Soulforce extends BaseContent
 		if (flags[kFLAGS.SOUL_SENSE_PRISCILLA] >= 3) addButton(5, "Priscilla", PriscillaEnc).hint("Req. 320+ soulforce");
 		else addButtonDisabled(5, "Priscilla", "");
 		if (flags[kFLAGS.SOUL_SENSE_MINOTAUR_SONS] >= 3) {
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] >= 3) {
+			if (flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] >= 3) {
 				if (player.hasVagina()) addButton(6, "Mino Sons", MinotaurSonsEnc).hint("Req. at least 260+ soulforce (more sons will increase needed SF)");
 				else addButtonDisabled(6, "Mino Sons", "Req. to have vagina.");
 			}
@@ -4341,8 +4341,8 @@ public class Soulforce extends BaseContent
 		}
 	}
 	public function MinotaurSonsEnc():void {
-		if (player.soulforce >= 10 * (26 + Math.round((flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3)/2))) {
-			player.soulforce -= 10 * (26 + Math.round((flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3)/2));
+		if (player.soulforce >= 10 * (26 + Math.round((flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] - 3)/2))) {
+			player.soulforce -= 10 * (26 + Math.round((flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] - 3)/2));
 			statScreenRefresh();
 			minotaurSonsScene.meetMinotaurSons();
 		}

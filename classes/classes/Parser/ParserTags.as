@@ -112,7 +112,6 @@ public class ParserTags {
         "tallness"              : function ():* { return Measurements.footInchOrMetres(CoC.instance.player.tallness); },
         "doubletallness"        : function ():* { return Measurements.footInchOrMetres(CoC.instance.player.tallness * 2); },
         "quadrupletallness"     : function ():* { return Measurements.footInchOrMetres(CoC.instance.player.tallness * 2); },
-        "teasetext"             : function ():* { return SceneLib.combat.teaseText(); },
         "themonster"            : function ():* { return CoC.instance.monster.a + CoC.instance.monster.short; },
         "tongue"                : function ():* { return Appearance.tongueDescription(CoC.instance.player); },
         "uppergarment"          : function ():* { return CoC.instance.player.upperGarmentName; },
@@ -211,16 +210,16 @@ public class ParserTags {
      * arianMF("male","girly")
      */
     internal static var onyxLookups:Object = {
-        "man": function ():String {SceneLib.highMountains.templeofdivine.onyxMF("man", "woman"); },
+        "man": function ():String {SceneLib.templeofdivine.onyx.onyxMF("man", "woman"); },
         // argh! "Man" is the mass-noun for humanity, and I'm loathe to choose an even more esoteric variant.
         // Elverson/Spivak terminology is already esoteric enough, and it lacks a ungendered mass noun.
 
-        "ey"    : function ():String {return SceneLib.highMountains.templeofdivine.onyxMF("he", "she"); },
-        "em"    : function ():String {return SceneLib.highMountains.templeofdivine.onyxMF("him", "her"); },
-        "eir"   : function ():String {return SceneLib.highMountains.templeofdivine.onyxMF("his", "her"); },
-        "eirs"  : function ():String {return SceneLib.highMountains.templeofdivine.onyxMF("his", "hers"); },
-        "emself": function ():String {return SceneLib.highMountains.templeofdivine.onyxMF("himself", "herself"); },
-        "name"  : function ():String {return SceneLib.highMountains.templeofdivine.onyxName(); }
+        "ey"    : function ():String {return SceneLib.templeofdivine.onyx.onyxMF("he", "she"); },
+        "em"    : function ():String {return SceneLib.templeofdivine.onyx.onyxMF("him", "her"); },
+        "eir"   : function ():String {return SceneLib.templeofdivine.onyx.onyxMF("his", "her"); },
+        "eirs"  : function ():String {return SceneLib.templeofdivine.onyx.onyxMF("his", "hers"); },
+        "emself": function ():String {return SceneLib.templeofdivine.onyx.onyxMF("himself", "herself"); },
+        "name"  : function ():String {return SceneLib.templeofdivine.onyx.onyxName(); }
     };
 
     /** PC ASCII Aspect lookups for subject: "cock"*/

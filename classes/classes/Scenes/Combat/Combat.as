@@ -1,16 +1,6 @@
 ﻿package classes.Scenes.Combat {
 import classes.BaseContent;
-import classes.BodyParts.Antennae;
-import classes.BodyParts.Arms;
-import classes.BodyParts.Ears;
-import classes.BodyParts.Face;
-import classes.BodyParts.Horns;
-import classes.BodyParts.LowerBody;
-import classes.BodyParts.RearBody;
-import classes.BodyParts.Skin;
-import classes.BodyParts.Tail;
-import classes.BodyParts.Tongue;
-import classes.BodyParts.Wings;
+import classes.BodyParts.*;
 import classes.CoC;
 import classes.CoC_Settings;
 import classes.CockTypesEnum;
@@ -28,27 +18,17 @@ import classes.PotionType;
 import classes.Scenes.Areas.Beach.Gorgon;
 import classes.Scenes.Areas.Bog.CorruptedMaleTroll;
 import classes.Scenes.Areas.Caves.DisplacerBeast;
-import classes.Scenes.Areas.Desert.Naga;
-import classes.Scenes.Areas.Desert.SandTrap;
-import classes.Scenes.Areas.Forest.Alraune;
-import classes.Scenes.Areas.Forest.BeeGirl;
-import classes.Scenes.Areas.Forest.Kitsune;
-import classes.Scenes.Areas.GlacialRift.FrostGiant;
-import classes.Scenes.Areas.GlacialRift.GlacialMaleTroll;
-import classes.Scenes.Areas.GlacialRift.WinterWolf;
-import classes.Scenes.Areas.HighMountains.Basilisk;
-import classes.Scenes.Areas.HighMountains.Harpy;
+import classes.Scenes.Areas.Desert.*;
+import classes.Scenes.Areas.Forest.*;
+import classes.Scenes.Areas.GlacialRift.*;
+import classes.Scenes.Areas.HighMountains.*;
 import classes.Scenes.Areas.Mountain.Minotaur;
 import classes.Scenes.Areas.Ocean.SeaAnemone;
 import classes.Scenes.Areas.Tundra.YoungFrostGiant;
 import classes.Scenes.Dungeons.DeepCave.EncapsulationPod;
 import classes.Scenes.Dungeons.D3.*;
-import classes.Scenes.Dungeons.EbonLabyrinth.ChaosChimera;
-import classes.Scenes.Dungeons.EbonLabyrinth.DarkSlimeEmpress;
-import classes.Scenes.Dungeons.EbonLabyrinth.HellfireSnail;
-import classes.Scenes.Dungeons.EbonLabyrinth.LivingFailure;
-import classes.Scenes.Dungeons.HelDungeon.HarpyMob;
-import classes.Scenes.Dungeons.HelDungeon.HarpyQueen;
+import classes.Scenes.Dungeons.EbonLabyrinth.*;
+import classes.Scenes.Dungeons.HelDungeon.*;
 import classes.Scenes.NPCs.*;
 import classes.Scenes.Places.TelAdre.UmasShop;
 import classes.Scenes.Codex;
@@ -1072,15 +1052,7 @@ public class Combat extends BaseContent {
             } else if (player.lust < 50) {
                 bd.disable("Your current lust is too low.");
             }
-        }/*
-        if (player.hasStatusEffect(StatusEffects.KnowsFlamesOfLove)) {
-            bd = buttons.add("Flames of Love", flamesOfLove).hint("Turn your burning lust into literal flames of passion. Can your enemies take your heat?  \n\nWould go into cooldown after use for: 3 rounds  \n\nLust cost: 90% of current lust");
-            if (player.hasStatusEffect(StatusEffects.CooldownFlamesOfLove)) {
-                bd.disable("You need more time before you can use Flames of Love again.");
-            } else if (player.lust < 50) {
-                bd.disable("Your current lust is too low.");
-            }
-        }*/
+        }
         if (player.hasStatusEffect(StatusEffects.KnowsIciclesOfLove)) {
             bd = buttons.add("Icicles of Love", iciclesOfLove).hint("Crystalise your lust into cold spikes. Impale your foes with love!  \n\nWould go into cooldown after use for: "+Math.round(player.statusEffectv1(StatusEffects.KnowsIciclesOfLove))+" round  \n\nLust cost: "+iciclesOfLoveLC()+"% of current lust");
             if (player.hasStatusEffect(StatusEffects.CooldownIciclesOfLove)) {
@@ -1088,15 +1060,7 @@ public class Combat extends BaseContent {
             } else if (player.lust < 50) {
                 bd.disable("Your current lust is too low.");
             }
-        }/*
-        if (player.hasStatusEffect(StatusEffects.KnowsIciclesOfLove)) {
-            bd = buttons.add("Icicles of Love", iciclesOfLove).hint("Crystalise your lust into cold spikes. Impale your foes with love!  \n\nWould go into cooldown after use for: 3 rounds  \n\nLust cost: 90% of current lust");
-            if (player.hasStatusEffect(StatusEffects.CooldownIciclesOfLove)) {
-                bd.disable("You need more time before you can use Icicles of Love again.");
-            } else if (player.lust < 50) {
-                bd.disable("Your current lust is too low.");
-            }
-        }*/
+        }
 		if (player.hasStatusEffect(StatusEffects.KnowsStormOfSisterhood)) {
 			bd = buttons.add("Storm of Sisterhood", stormOfSisterhood).hint("Focus your wrath into the storm of sisterhood.  \n\nWould go into cooldown after use for: "+Math.round(player.statusEffectv1(StatusEffects.KnowsStormOfSisterhood))+" round  \n\nWrath cost: "+stormOfSisterhoodWC()+"% of current wrath");
 			if (player.hasStatusEffect(StatusEffects.CooldownStormOfSisterhood)) {
@@ -1736,11 +1700,6 @@ public class Combat extends BaseContent {
         if (player.hasPerk(PerkLib.SexChampion)) historyWhoreB += 0.15;
         if (player.hasPerk(PerkLib.SexDeity)) historyWhoreB += 0.15;
         return historyWhoreB;
-    }
-
-    private function normalAttack():void {
-        clearOutput();
-        attack();
     }
 
     public function basemeleeattacks():void {
@@ -11897,12 +11856,6 @@ public class Combat extends BaseContent {
         }
     }
 
-    // This is a bullshit work around to get the parser to do what I want without having to fuck around in it's code.
-    public function teaseText():String {
-        tease(true);
-        return "";
-    }
-
     // Just text should force the function to purely emit the test text to the output display, and not have any other side effects
     public function tease(justText:Boolean = false):void {
         teases.tease(justText);
@@ -14336,8 +14289,8 @@ public class Combat extends BaseContent {
             addButton(0, "Next", combatMenu, false);
             return;
         }
-        if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00329] == 1 && (monster.short == "minotaur gang" || monster.short == "minotaur tribe")) {
-            flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00329] = 0;
+        if (monster is MinotaurMob && (monster as MinotaurMob).wastedTurn) {
+            (monster as MinotaurMob).wastedTurn = false;
             //(Free run away)
             clearOutput();
             outputText("You slink away while the pack of brutes is arguing.  Once they finish that argument, they'll be sorely disappointed!");

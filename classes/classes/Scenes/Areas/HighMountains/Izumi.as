@@ -196,18 +196,11 @@ public class Izumi extends Monster
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
 			flags[kFLAGS.IZUMI_TIMES_LOST_FIGHT]++;
+			this.cleanup();
 			if (player.hasStatusEffect(StatusEffects.Titsmother))
-			{
-				this.cleanup();
 				SceneLib.highMountains.izumiScenes.deathBySnuSnuIMeanGiantOniTits();
-				return;
-			}
 			else
-			{
-				this.cleanup();
 				SceneLib.highMountains.izumiScenes.fuckedUpByAFuckhugeOni();
-				return;
-			}
 		}
 		
 		// Override combat AI

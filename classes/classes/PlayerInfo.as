@@ -1229,8 +1229,8 @@ public class PlayerInfo extends BaseContent {
 		if (flags[kFLAGS.ZENJI_KIDS] > 0)
             childStats += "<b>Kids with Zenji:</b> " + flags[kFLAGS.ZENJI_KIDS] + "\n";
         //Mino sons
-		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] > 0)
-			childStats += "<b>Number of Adult Minotaur Offspring:</b> " + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] + "\n";
+		if (flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] > 0)
+			childStats += "<b>Number of Adult Minotaur Offspring:</b> " + flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] + "\n";
 
 		//Alraune daughters
 		if (flags[kFLAGS.ALRAUNE_SEEDS] > 0)

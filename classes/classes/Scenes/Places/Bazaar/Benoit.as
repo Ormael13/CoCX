@@ -1861,8 +1861,6 @@ public function femoitSexIntro():void
 
 			outputText("\n\nYou assure her that she can do it someday when you're ready.");
 			flags[kFLAGS.BENOIT_STATUS] = 3; //Hermaphrodite Benoite.
-
-			menu();
 			doNext(camp.returnToCampUseOneHour);
 		}
 	}
