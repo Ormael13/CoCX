@@ -5,23 +5,22 @@
 package classes.IMutations
 {
     import classes.PerkClass;
-import classes.PerkLib;
-import classes.PerkType;
-import classes.Player;
+    import classes.PerkType;
+    import classes.Player;
 
-public class CatLikeNimblenessMutation extends PerkType
+public class EclipticMindMutation extends PerkType
     {
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
-            var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.CatLikeNimblenessIM)
-            if (pTier >= 1){
-                descS += "Increases Evasion";
-            }
-            if (pTier >= 2){
-                descS += "";
-            }
+            var descS:String = "Allows you to retain an aura at all time, gaining whichever corresponds to your alignment. Empower the effect of your aura based on your purity or corruption score";
+            var pTier:int = player.perkv1(IMutationsLib.EclipticMindIM)
             if (pTier >= 3){
+                descS += " x3";
+            }
+            else if (pTier >= 2){
+                descS += " x2";
+            }
+            else {
                 descS += "";
             }
             if (descS != "")descS += ".";
@@ -31,7 +30,7 @@ public class CatLikeNimblenessMutation extends PerkType
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
-            switch (player.perkv1(IMutationsLib.CatLikeNimblenessIM)){
+            switch (player.perkv1(IMutationsLib.EclipticMindIM)){
                 case 2:
                     sufval = "(Primitive)";
                     break;
@@ -41,46 +40,43 @@ public class CatLikeNimblenessMutation extends PerkType
                 default:
                     sufval = "";
             }
-            return "Cat-like Nimbleness" + sufval;
+            return "Ecliptic Mind" + sufval;
         }
 
         //Mutation Requirements
         public static function pReqs(pTier:int = 0):void{
             try{
                 //This helps keep the requirements output clean.
-                IMutationsLib.CatLikeNimblenessIM.requirements = [];
+                IMutationsLib.EclipticMindIM.requirements = [];
                 if (pTier == 0){
-                    IMutationsLib.CatLikeNimblenessIM.requirePerk(PerkLib.Flexibility)
+                    IMutationsLib.EclipticMindIM.requirePeripheralNervSysMutationSlot()
                             .requireCustomFunction(function (player:Player):Boolean {
-                        return player.catScore() >= 8 || player.nekomataScore() >= 10 || player.displacerbeastScore() >= 14 || player.hellcatScore() >= 10 || player.cheshireScore() >= 11 || player.sphinxScore() >= 14;
-                    }, "Any cat race");
+                        return player.alicornScore() >= 12 || player.unicornScore() >= 12 || player.alicornkinScore() >= 10 || player.unicornkinScore() >= 10;
+                    }, "Unicorn or Bicorn race");
                 }
                 else{
                     var pLvl:int = pTier * 30;
-                    IMutationsLib.CatLikeNimblenessIM.requireLevel(pLvl);
+                    IMutationsLib.EclipticMindIM.requireLevel(pLvl);
                 }
             }catch(e:Error){
                 trace(e.getStackTrace());
             }
         }
 
+        //Perk Max Level
         //Ignore the variable. Reusing the function that triggers this elsewhere and they need the int.
         public static function perkLvl(useless:int = 0):int{
             return 3;
         }
 
-        //Perk Max Level
         //Mutations Buffs
         public function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {};
-            if (pTier > 1){
-                pBuffs['spe.mult'] = 0.1 * (pTier - 1);
-            }
             return pBuffs;
         }
 
-        public function CatLikeNimblenessMutation() {
-            super("Cat-like Nimbleness IM", "Cat-like Nimbleness", ".");
+        public function EclipticMindMutation() {
+            super("Ecliptic Mind IM", "Ecliptic Mind", ".");
         }
 
         override public function keepOnAscension(respec:Boolean = false):Boolean {

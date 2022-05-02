@@ -489,9 +489,9 @@ public function repeatEncounterBattlefieldTalkHerIzumi():void {
 public function talkHerKids():void {
 	clearOutput();
 	outputText("You ask your giantess if she’d ever thought about having a family. She looks down at you, her expression a mix between sadness, amusement, and annoyance. Tyrantia tilts her head, bringing one hand to her chin. You wait patiently for her answer, but you don’t have to wait long.\n\n");
-	outputText("\"<i>...Yeah, I have.</i>\" She admits. \"<i>Honestly, I’ve thought about it a lot, the last little while.</i>\" She smiles sadly down at you. \"<i>It’s all your fault, really.”</i> The giantess sits down on the ground, folding her spider-legs underneath her massive frame. You instinctively hug the giant Drider-girl, and she lets out her little \"<i>Tk-tk-tk</i>\" laugh that she shares with her sisters.\n\n");
+	outputText("\"<i>...Yeah, I have.</i>\" She admits. \"<i>Honestly, I’ve thought about it a lot, the last little while.</i>\" She smiles sadly down at you. \"<i>It’s all your fault, really.\"</i> The giantess sits down on the ground, folding her spider-legs underneath her massive frame. You instinctively hug the giant Drider-girl, and she lets out her little \"<i>Tk-tk-tk</i>\" laugh that she shares with her sisters.\n\n");
 	outputText("\"<i>...Look, [name]. I love you...I’d love nothing more than to lay your eggs, watch over them till they hatch, and bring up a new generation of Driders with you.</i>\" Evidently she’s thought about this a lot. \"<i>...I’d really like that.</i>\" Her voice is a bare whisper, and bitter tears begin to fall from her eyes. \"<i>...But I can’t allow it</i>\".\n\n");
-	outputText("Surprised, you ask her why not, and she shakes her head, pointing at her horns. \"<i>Look at these, look at me, and then ask yourself why I wouldn’t be willing to have kids”. You blink, sighing as it clicks.\n\n");
+	outputText("Surprised, you ask her why not, and she shakes her head, pointing at her horns. \"<i>Look at these, look at me, and then ask yourself why I wouldn’t be willing to have kids.\"</i> You blink, sighing as it clicks.\n\n");
 	outputText("\"<i>Yeah. I have a hard enough time dealing with my own shit, [name]. I’m not gonna force that situation on a kid. They…don’t deserve that.</i>\" You reluctantly agree, then a thought occurs to you. You ask Tyrantia about her eggs, how they are specifically. The giantess blushes. \"<i>Well...They’re squishy and soft, not like the Lizans or Harpies. Our people’s eggs were way more susceptible to corruption. That’s why we ended up corrupt in the first place.</i>\" She closes her eyes. \"<i>[name], when I told you I couldn’t be what you wanted me to be, what did you think I meant?</i>\" You hold her close, and you promise Tyrantia that you’ll try to make this work. You tell her that even if you can’t have a family, that you’ll stay with her.\n\n");
 	outputText("She sniffles, wrapping her furry arms around you. \"<i>Thank you.</i>\" She gives you a brave smile. \"<i>Hey, if anyone can make this work, it’ll be you, ‘champ’.</i>\" You mock protest at the jab, but you know she’s just kidding. Walking away from your Drider lover, you think of a few people you could see.\n\n");
 	if (player.hasStatusEffect(StatusEffects.CampRathazul)) {
@@ -1170,7 +1170,7 @@ public function itemImproveMenuCorrupt():void {
 		outputText("\"<i>But I’ll need something called a 'Radiant Shard'.</i>\" She stops chewing, then blinks. \"<i>No, I’ll need three of them, and 20000 Gems.</i>\" You give Tyrantia a shocked look, and she shrugs. \"<i>I’m going off some kind of residual species memory right now.</i>\"");
 		TyraniaCorrupteedLegendaries = 2;
 	}
-	outputText("\n\n<b>You currently have " + player.keyItemv1("Radiant shard") + " radiant shards.</b>");
+	outputText("\n\n<b>You currently have " + player.keyItemvX("Radiant shard", 1) + " radiant shards.</b>");
 	var selectfrom:int = 2;
 	var selectMenu:ButtonDataList = new ButtonDataList();
 	for (var i:int = 0; i < improvableItems.length; i++) {
@@ -1180,7 +1180,7 @@ public function itemImproveMenuCorrupt():void {
 			var item:ItemType = improvableItems[i][selectfrom];
 			var from:ItemType = improvableItems[i][0];
 			selectMenu.add(item.id, curry(improveItem, item, from)).disableIf(!player.hasItem(from),"You need a "+from+" as a base to create this item")
-			.disableIf(player.keyItemv1("Radiant shard") < 3,"You need at least three radiant shards in order to create this item.")
+			.disableIf(player.keyItemvX("Radiant shard", 1) < 3,"You need at least three radiant shards in order to create this item.")
 			.disableIf(player.gems < 20000,"You need at least 10 000 gems in order to create this item");
 		}
 	}
@@ -1194,7 +1194,7 @@ public function itemImproveMenuCorrupt():void {
 		outputText("It takes a while for the smoke to clear, but when it does, you can see Tyrantia, peering owlishly into her vat. When you walk over, all the ooze is gone, turned to smoke in this strange, almost ritualistic process. But on the bottom of the vat is your new item.\n\n");
 		outputText("Tyrantia picks it up gingerly, handing it to you. \"<i>I hope this helps you on your travels…Gods know I’ve done wrong if it doesn’t.</i>\" She seems to feel slightly nauseous, and you voice concern.\n\n");
 		outputText("\"<i>Oh, it’s nothing…</i>\" Your Drider lover burps, wincing. \"<i>Casting spells was never easy for me, that’s all…and magical abilities aren’t any different.</i>\" She flexes one arm. \"<i>There’s a reason I prefer my Dick.</i>\"\n\n");
-		if(player.keyItemv1("Radiant shard") == 3) player.removeKeyItem("Radiant shard");
+		if(player.keyItemvX("Radiant shard", 1) == 3) player.removeKeyItem("Radiant shard");
 		else player.addKeyValue("Radiant shard",1,-3);
 		player.gems -= 20000;
 		player.destroyItems(from, 1);

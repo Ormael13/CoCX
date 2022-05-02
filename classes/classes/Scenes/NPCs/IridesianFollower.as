@@ -70,7 +70,7 @@ public function itemImproveMenuPure():void {
 	];
 	clearOutput();
 	outputText("\"<i></i>\"\n\n");
-	outputText("\n\n<b>You currently have " + player.keyItemv1("Radiant shard") + " radiant shards.</b>");
+	outputText("\n\n<b>You currently have " + player.keyItemvX("Radiant shard", 1) + " radiant shards.</b>");
 	var selectfrom:int = 1;
 	var selectMenu:ButtonDataList = new ButtonDataList();
 	for (var i:int = 0; i < improvableItems.length; i++) {
@@ -80,7 +80,7 @@ public function itemImproveMenuPure():void {
 			var item:ItemType = improvableItems[i][selectfrom];
 			var from:ItemType = improvableItems[i][0];
 			selectMenu.add(item.id, curry(improveItem, item, from)).disableIf(!player.hasItem(from),"You need a "+from+" as a base to create this item")
-			.disableIf(player.keyItemv1("Radiant shard") < 3,"You need at least three radiant shards in order to create this item.")
+			.disableIf(player.keyItemvX("Radiant shard", 1) < 3,"You need at least three radiant shards in order to create this item.")
 			.disableIf(player.gems < 20000,"You need at least 10 000 gems in order to create this item");
 		}
 	}
@@ -89,7 +89,7 @@ public function itemImproveMenuPure():void {
 	function improveItem(item:ItemType, from:ItemType):void {
 		clearOutput();
 		outputText("\"<i></i>\"\n\n");
-		if(player.keyItemv1("Radiant shard") == 3) player.removeKeyItem("Radiant shard");
+		if(player.keyItemvX("Radiant shard", 1) == 3) player.removeKeyItem("Radiant shard");
 		else player.addKeyValue("Radiant shard",1,-3);
 		player.gems -= 20000;
 		player.destroyItems(from, 1);

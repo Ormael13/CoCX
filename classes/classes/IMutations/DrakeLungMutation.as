@@ -5,24 +5,22 @@
 package classes.IMutations
 {
     import classes.PerkClass;
-import classes.PerkLib;
-import classes.PerkType;
-import classes.Player;
+    import classes.PerkType;
 
-public class CatLikeNimblenessMutation extends PerkType
+    public class DrakeLungMutation extends PerkType
     {
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
             var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.CatLikeNimblenessIM)
+            var pTier:int = player.perkv1(IMutationsLib.DrakeLungIM)
             if (pTier >= 1){
-                descS += "Increases Evasion";
+                descS = "Increases the power of dragon breath attack. (+300% to dragon breath damage that race is using)";
             }
             if (pTier >= 2){
-                descS += "";
+                descS = "Further increases increases dragon breath attack power. (+600% to dragon breath damage that race is using)";
             }
             if (pTier >= 3){
-                descS += "";
+                descS = "Allows to use breath attack more often with increase to its power. (+900% to dragon breath damage that race is using AND breath usable once per combat)";
             }
             if (descS != "")descS += ".";
             return descS;
@@ -31,7 +29,7 @@ public class CatLikeNimblenessMutation extends PerkType
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
-            switch (player.perkv1(IMutationsLib.CatLikeNimblenessIM)){
+            switch (player.perkv1(IMutationsLib.DrakeLungIM)){
                 case 2:
                     sufval = "(Primitive)";
                     break;
@@ -41,46 +39,41 @@ public class CatLikeNimblenessMutation extends PerkType
                 default:
                     sufval = "";
             }
-            return "Cat-like Nimbleness" + sufval;
+            return "Drake Lung" + sufval;
         }
 
         //Mutation Requirements
         public static function pReqs(pTier:int = 0):void{
             try{
                 //This helps keep the requirements output clean.
-                IMutationsLib.CatLikeNimblenessIM.requirements = [];
+                IMutationsLib.DrakeLungIM.requirements = [];
                 if (pTier == 0){
-                    IMutationsLib.CatLikeNimblenessIM.requirePerk(PerkLib.Flexibility)
-                            .requireCustomFunction(function (player:Player):Boolean {
-                        return player.catScore() >= 8 || player.nekomataScore() >= 10 || player.displacerbeastScore() >= 14 || player.hellcatScore() >= 10 || player.cheshireScore() >= 11 || player.sphinxScore() >= 14;
-                    }, "Any cat race");
+                    IMutationsLib.DrakeLungIM.requireHeartMutationSlot();
                 }
                 else{
                     var pLvl:int = pTier * 30;
-                    IMutationsLib.CatLikeNimblenessIM.requireLevel(pLvl);
+                    IMutationsLib.DrakeLungIM.requireLevel(pLvl);
                 }
             }catch(e:Error){
                 trace(e.getStackTrace());
             }
         }
 
+        //Perk Max Level
         //Ignore the variable. Reusing the function that triggers this elsewhere and they need the int.
         public static function perkLvl(useless:int = 0):int{
             return 3;
         }
 
-        //Perk Max Level
         //Mutations Buffs
         public function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {};
-            if (pTier > 1){
-                pBuffs['spe.mult'] = 0.1 * (pTier - 1);
-            }
+            pBuffs['spe.mult'] = 0.05*2^pTier-1
             return pBuffs;
         }
 
-        public function CatLikeNimblenessMutation() {
-            super("Cat-like Nimbleness IM", "Cat-like Nimbleness", ".");
+        public function DrakeLungMutation() {
+            super("Drake Lung IM", "Drake Lung", ".");
         }
 
         override public function keepOnAscension(respec:Boolean = false):Boolean {

@@ -333,7 +333,5 @@ import classes.internals.*;
 			this.createPerk(PerkLib.EnemyResiliance, 0, 0, 0, 0);
 			checkMonster();
 		}
-
 	}
-
 }

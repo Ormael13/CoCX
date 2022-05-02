@@ -483,79 +483,38 @@ import classes.CoC;
 			CoC_Settings.error("Looking for key item '" + keyItemName + "' to change value " + statusValueNum + ", and player does not have the key item.");
 		}
 
-		public function keyItemv1(keyItemName:String):Number
-		{
-			var counter:Number = keyItems.length;
-			//Various Errors preventing action
-			if (keyItems.length <= 0)
-			{
-				CoC_Settings.error("ERROR: Looking for keyItem '" + keyItemName + "', and player has no key items.");
-				return 0;
+		public function keyItemvX(keyItemName:String, keyValue:int):Number{
+			if (keyItems.length <= 0){	//If there's nothing, then it shouldn't be considered an error to report. Code handles it fine.
+				trace("ERROR: Looking for keyItem '" + keyItemName + "', and player has no key items.");
+				if (CoC.instance.debug){
+					EngineCore.outputText("ERROR: Looking for keyItem '" + keyItemName + "', and player has no key items.");
+				}
 			}
-			while (counter > 0)
-			{
-				counter--;
-				if (keyItems[counter].keyName == keyItemName)
-					return keyItems[counter].value1;
+			else{
+				var kItem:int = -1;
+				var counter:int = keyItems.length
+				while (counter > 0){
+					counter--;
+					if(keyItems[counter].keyName == keyItemName) {
+						kItem = counter;
+						break;
+					}
+				}
+				if (kItem != -1){
+					switch (keyValue){
+						case 1:
+							return keyItems[kItem].value1;
+						case 2:
+							return keyItems[kItem].value2;
+						case 3:
+							return keyItems[kItem].value3;
+						case 4:
+							return keyItems[kItem].value4;
+						default:
+							CoC_Settings.error("ERROR: Invalid keyValue requested for item " + keyItemName + ".");
+					}
+				}
 			}
-			CoC_Settings.error("Looking for key item '" + keyItemName + "', but player does not have it.");
-			return 0;
-		}
-
-		public function keyItemv2(keyItemName:String):Number
-		{
-			var counter:Number = keyItems.length;
-			//Various Errors preventing action
-			if (keyItems.length <= 0)
-			{
-				CoC_Settings.error("ERROR: Looking for keyItem '" + keyItemName + "', and player has no key items.");
-				return 0;
-			}
-			while (counter > 0)
-			{
-				counter--;
-				if (keyItems[counter].keyName == keyItemName)
-					return keyItems[counter].value2;
-			}
-			CoC_Settings.error("Looking for key item '" + keyItemName + "', but player does not have it.");
-			return 0;
-		}
-
-		public function keyItemv3(keyItemName:String):Number
-		{
-			var counter:Number = keyItems.length;
-			//Various Errors preventing action
-			if (keyItems.length <= 0)
-			{
-				CoC_Settings.error("ERROR: Looking for keyItem '" + keyItemName + "', and player has no key items.");
-				return 0;
-			}
-			while (counter > 0)
-			{
-				counter--;
-				if (keyItems[counter].keyName == keyItemName)
-					return keyItems[counter].value3;
-			}
-			CoC_Settings.error("Looking for key item '" + keyItemName + "', but player does not have it.");
-			return 0;
-		}
-
-		public function keyItemv4(keyItemName:String):Number
-		{
-			var counter:Number = keyItems.length;
-			//Various Errors preventing action
-			if (keyItems.length <= 0)
-			{
-				CoC_Settings.error("ERROR: Looking for keyItem '" + keyItemName + "', and player has no key items.");
-				return 0;
-			}
-			while (counter > 0)
-			{
-				counter--;
-				if (keyItems[counter].keyName == keyItemName)
-					return keyItems[counter].value4;
-			}
-			CoC_Settings.error("Looking for key item '" + keyItemName + "', but player does not have it.");
 			return 0;
 		}
 
@@ -631,7 +590,7 @@ import classes.CoC;
 				if (hasPerk(MutationsLib.OrcAdrenalGlandsPrimitive)) min -= maxHP() * 0.02;
 			}
 			if (hasPerk(PerkLib.Rage)) min -= maxHP() * 0.05;
-			if (hasPerk(PerkLib.TooAngryToDie)) min += maxWrath();
+			if (hasPerk(PerkLib.TooAngryToDie)) min -= maxWrath();
 			if (hasPerk(PerkLib.DeityJobMunchkin)) {
 				min -= str;
 				min -= tou;

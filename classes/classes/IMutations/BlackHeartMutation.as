@@ -1,6 +1,6 @@
 /**
  * Original code by aimozg on 27.01.14.
- * Reworked for Mutations by Jtecx on 14.03.22.
+ * Extended for Mutations by Jtecx on 14.03.22.
  */
 package classes.IMutations
 {

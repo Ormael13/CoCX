@@ -344,7 +344,7 @@ private function oswaldPawnMenu(page:int = 1, refresh:Boolean = false):void { //
 private function oswaldPawnMenu2():void {
 	spriteSelect(SpriteDb.s_oswald);
 	menu();
-	if (player.hasKeyItem("Backpack") && player.keyItemv1("Backpack") < 12) addButton(5, "Backpack", buyBackpack).hint("This backpack will allow you to carry more items.");
+	if (player.hasKeyItem("Backpack") && player.keyItemvX("Backpack", 1) < 12) addButton(5, "Backpack", buyBackpack).hint("This backpack will allow you to carry more items.");
 	switch (flags[kFLAGS.KATHERINE_UNLOCKED]) {
 		case 1:
 		case 2: addButton(10, "Kath's Alley", katherine.visitKatherine); break;
@@ -413,8 +413,8 @@ private function buyBackpack():void {
 	outputText("\nSmall: 100 gems, +2 inventory slot");
 	outputText("\nMedium: 200 gems, +4 inventory slots");
 	menu();
-	if (player.keyItemv1("Backpack") < 2) addButton(0, "Small", buyBackpackConfirmation, 2, "Small", 100, "Grants additional two slot. \n\nCost: 100 gems");
-	if (player.keyItemv1("Backpack") < 4) addButton(1, "Medium", buyBackpackConfirmation, 4, "Medium", 200, "Grants additional four slots. \n\nCost: 200 gems");
+	if (player.keyItemvX("Backpack", 1) < 2) addButton(0, "Small", buyBackpackConfirmation, 2, "Small", 100, "Grants additional two slot. \n\nCost: 100 gems");
+	if (player.keyItemvX("Backpack", 1) < 4) addButton(1, "Medium", buyBackpackConfirmation, 4, "Medium", 200, "Grants additional four slots. \n\nCost: 200 gems");
 	addButton(14, "Nevermind", oswaldPawnMenu2);
 }
 private function buyBackpackConfirmation(size:int = 2, sizeDesc:String = "Small", price:int = 100):void {
@@ -427,8 +427,8 @@ private function buyBackpackConfirmation(size:int = 2, sizeDesc:String = "Small"
 	}
 	outputText("\"<i>Here you go.</i>\"");
 	if (player.hasKeyItem("Backpack") >= 0) {
-		outputText("\n\n<b>(Key Item Upgraded: " + sizeDesc + " Backpack! You now have " + num2Text(size - player.keyItemv1("Backpack")) + " extra inventory slots");
-		player.addKeyValue("Backpack", 1, size - player.keyItemv1("Backpack"));
+		outputText("\n\n<b>(Key Item Upgraded: " + sizeDesc + " Backpack! You now have " + num2Text(size - player.keyItemvX("Backpack", 1)) + " extra inventory slots");
+		player.addKeyValue("Backpack", 1, size - player.keyItemvX("Backpack", 1));
 		outputText(" for a total of " + num2Text(inventory.getMaxSlots()) + " slots.)</b>");
 	}
 	else {

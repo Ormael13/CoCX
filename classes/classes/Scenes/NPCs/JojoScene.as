@@ -129,7 +129,7 @@ public function corruptCampJojo():void {
 			return;
 		}
 		//Offer lethicite jojo tf if the player is ready
-		if(!player.hasStatusEffect(StatusEffects.JojoTFOffer) && player.hasKeyItem("Marae's Lethicite") >= 0 && player.keyItemv2("Marae's Lethicite") < 3 && player.cor >= 75) {
+		if(!player.hasStatusEffect(StatusEffects.JojoTFOffer) && player.hasKeyItem("Marae's Lethicite") >= 0 && player.keyItemvX("Marae's Lethicite", 2) < 3 && player.cor >= 75) {
 			jojoMutationOffer();
 			player.createStatusEffect(StatusEffects.JojoTFOffer,0,0,0,0);
 			return;
