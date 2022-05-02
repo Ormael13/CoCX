@@ -2556,7 +2556,6 @@ public function apparantlyJojoDOESlift():void
 		{
 			outputText("Jojo frowns, \"<i>I am willing to teach you [name], when I can.  However I am no master, therefore I am unworthy of taking a disciple.  But as your friend, I will teach you what I know so that you may protect yourself.  I believe our time would be better spent meditating.  There is very little you can do with these techniques without first finding your center.</i>\"\n\n");
 			// Kick back to previous menu
-			menu();
 			doNext(jojoCamp);
 			return;
 		}
@@ -2564,7 +2563,6 @@ public function apparantlyJojoDOESlift():void
 		{
 			outputText("Jojo smiles, \"<i>I am not a master, therefore I am unworthy of taking you on as a disciple... but as a friend I can teach you all I know.  Whenever you are ready, just ask.</i>.\"\n\n");
 			// Sounds like this should kick back to menu
-			menu();
 			doNext(jojoCamp);
 			return;
 		}
@@ -2576,7 +2574,6 @@ public function apparantlyJojoDOESlift():void
 		{
 			outputText("You ask the monk to continue your training; but he shakes his head.\n\n");
 			outputText("\"<i>Not yet [name]. Your body must be fit and rested before our training sessions. Rest first, and come back to me later.</i>\"\n\n");
-			menu();
 			doNext(jojoCamp);
 			return;
 		}

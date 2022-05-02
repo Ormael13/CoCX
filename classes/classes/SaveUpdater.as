@@ -1741,6 +1741,22 @@ public class SaveUpdater extends NPCAwareContent {
 					flags[kFLAGS.UNKNOWN_FLAG_NUMBER_02985] = 0;
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.006;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.007) {
+				CoC.instance.inputManager.BindKeyToControl(187, "Font Size+");//Updating to set default keybindings for font zoom/shrink
+				CoC.instance.inputManager.BindKeyToControl(189, "Font Size-");
+				flags[kFLAGS.MOD_SAVE_VERSION] = 35.007;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.008) { //Sapphire affection adjusted. Need some fixing.
+				if (flags[kFLAGS.WEDDINGS_UNLOCKED] == 1) //checked sex before, now transformed to a wedding check.
+					flags[kFLAGS.SAPPHIRE_AFFECTION] = 100;
+				else if (flags[kFLAGS.SAPPHIRE_AFFECTION] > 5)
+					flags[kFLAGS.SAPPHIRE_AFFECTION] = 60;
+				else flags[kFLAGS.SAPPHIRE_AFFECTION] *= 10; //should work.
+				flags[kFLAGS.WEDDINGS_UNLOCKED] = 0; //was sex
+				if (flags[kFLAGS.SAPPHIRE_TALKS] > 3)
+					flags[kFLAGS.SAPPHIRE_TALKS] -= 4;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 35.008;
+			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
 			return;

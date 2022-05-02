@@ -16,6 +16,8 @@ import classes.display.SpriteDb;
 	 */
 	public class MinotaurMob extends Monster 
 	{
+		public var wastedTurn:Boolean = false;
+
 		private function precumTease():void {
 			var teased:Boolean = false;
 			var damage:Number = 0;
@@ -114,7 +116,7 @@ import classes.display.SpriteDb;
 		}
 		//Waste  a turn
 		private function minotaurGangWaste():void {
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00329] = 1;
+			wastedTurn = true;
 			game.spriteSelect(SpriteDb.s_minotaurSons);
 			outputText("\"<i>Oh man I can't wait to go hilt-deep in that pussy... I'm going to wreck " + player.mf("him", "her") + ",</i>\" promises one bull to his brother.  The other laughs and snorts, telling him how he'll have to do the deed during sloppy seconds.  It quickly escalates, and soon, every single one of the beast-men is taunting the others, bickering over how and when they'll get to have you.  While they're wasting their time, it's your chance to act!");
 		}
@@ -161,7 +163,7 @@ import classes.display.SpriteDb;
 				else minotaurThisIsSparta();
 			}
 			else {
-				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00329] = 0;
+				wastedTurn = false;
 				var select:Number = rand(7);
 				if(select <= 2) precumTease();
 				else if(select <= 4) minotaurGangGropeAttack();
@@ -193,13 +195,13 @@ import classes.display.SpriteDb;
 		{
 			this.a = "the ";
 			if (flags[kFLAGS.ETNA_FOLLOWER] == 3) this.short = "300 jealous minotaurs Ex-es";
-			else if (game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] < 20) this.short = "minotaur gang";
+			else if (game.flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] < 20) this.short = "minotaur gang";
 			else this.short = "minotaur tribe";
 			this.imageName = "minotaurmob";
 			if (flags[kFLAGS.ETNA_FOLLOWER] == 3)
 				this.long = "Whoa, it looks like all of Etna’s sexual partners have amassed in one group to take her and you down. The bull men are all over the chapel!";
 			else 
-				this.long = Num2Text(game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326]) + " shaggy beastmen stand around you in a loose circle.  Their postures aren't exactly threatening.  If anything, they seem to be standing protectively around you, as if their presence would somehow shelter you from the rest of the mountain.  All of their features share a brotherly similarity, though there's still a fair bit of differences between your minotaur sons.  One of them is a head above the rest, a massive hulk of muscle so big he seems to dwarf the rest.  In stark contrast, a feminine minitaur keeps his distance in the rear."+(game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] >= 20?"  The tribe constantly makes hoots and cat-calls, fully expecting to be fucking you soon.":"");
+				this.long = Num2Text(game.flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE]) + " shaggy beastmen stand around you in a loose circle.  Their postures aren't exactly threatening.  If anything, they seem to be standing protectively around you, as if their presence would somehow shelter you from the rest of the mountain.  All of their features share a brotherly similarity, though there's still a fair bit of differences between your minotaur sons.  One of them is a head above the rest, a massive hulk of muscle so big he seems to dwarf the rest.  In stark contrast, a feminine minitaur keeps his distance in the rear."+(game.flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] >= 20?"  The tribe constantly makes hoots and cat-calls, fully expecting to be fucking you soon.":"");
 			this.plural = true;
 			this.pronoun1 = "they";
 			this.pronoun2 = "them";
@@ -239,11 +241,11 @@ import classes.display.SpriteDb;
 				this.createPerk(PerkLib.Enemy300Type, 0, 0, 0, 0);
 			}
 			else {
-				bonusHP += 50 * (game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3);
-				if((game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3) * 2 > 13) lustVuln = .3;
-				else lustVuln -= (game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3) * 0.02;
-				this.bonusLust = 115 * Math.round((game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3)/2);
-				var level:int = 26 + Math.round((game.flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3)/2);
+				bonusHP += 50 * (game.flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] - 3);
+				if((game.flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] - 3) * 2 > 13) lustVuln = .3;
+				else lustVuln -= (game.flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] - 3) * 0.02;
+				this.bonusLust = 115 * Math.round((game.flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] - 3)/2);
+				var level:int = 26 + Math.round((game.flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] - 3)/2);
 				if(level > 29) level = 29;
 				this.level = level;
 			}
@@ -255,7 +257,7 @@ import classes.display.SpriteDb;
 			this.tailType = Tail.COW;
 			this.special1 = SceneLib.mountain.minotaurScene.minoPheromones;
 			this.drop = NO_DROP;
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00328] > 20 || flags[kFLAGS.ETNA_FOLLOWER] == 3) this.createPerk(PerkLib.EnemyLargeGroupType, 0, 0, 0, 0);
+			if (flags[kFLAGS.MINOTAUR_SONS_GROW_COUNTDOWN] > 20 || flags[kFLAGS.ETNA_FOLLOWER] == 3) this.createPerk(PerkLib.EnemyLargeGroupType, 0, 0, 0, 0);
 			else this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			checkMonster();

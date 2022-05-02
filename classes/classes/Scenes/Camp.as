@@ -4058,7 +4058,7 @@ public class Camp extends NPCAwareContent{
 		else addButtonDisabled(5, "???", "Search the deepwoods.");
 		if (flags[kFLAGS.MET_MINERVA] >= 4) addButton(6, "Oasis Tower", SceneLib.highMountains.minervaScene.encounterMinerva).hint("Visit the ruined tower in the high mountains where Minerva resides.");
 		else addButtonDisabled(6, "???", "Search the high mountains.");
-		if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] > 0) addButton(7, "Temple", SceneLib.highMountains.templeofdivine.repeatvisitintro).hint("Visit the temple in the high mountains where Sapphire resides.");
+		if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] > 0) addButton(7, "Temple", SceneLib.templeofdivine.repeatvisitintro).hint("Visit the temple in the high mountains where Sapphire resides.");
 		else addButtonDisabled(7, "???", "Search the high mountains.");
 		if (flags[kFLAGS.YU_SHOP] == 2) addButton(8, "Winter Gear", SceneLib.glacialYuShop.YuIntro).hint("Visit the Winter gear shop.");
 		else addButtonDisabled(8, "???", "Search the (outer) glacial rift.");
@@ -4574,7 +4574,7 @@ public function rebirthFromBadEnd():void {
 		//Children
 		var childPerformance:int = 0;
 		childPerformance += (flags[kFLAGS.MINERVA_CHILDREN] + flags[kFLAGS.BEHEMOTH_CHILDREN] + flags[kFLAGS.MARBLE_KIDS] + (flags[kFLAGS.SHEILA_JOEYS] + flags[kFLAGS.SHEILA_IMPS]) + izmaScene.totalIzmaChildren() + isabellaScene.totalIsabellaChildren() + kihaFollower.totalKihaChildren() + emberScene.emberChildren() + urtaPregs.urtaKids() + sophieBimbo.sophieChildren());
-		childPerformance += (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] + flags[kFLAGS.KELLY_KIDS] + flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] + flags[kFLAGS.COTTON_KID_COUNT] + flags[kFLAGS.AMILY_BIRTH_TOTAL] + flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS] + joyScene.getTotalLitters() + SceneLib.excelliaFollower.totalExcelliaChildren() + flags[kFLAGS.ZENJI_KIDS]);
+		childPerformance += (flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] + flags[kFLAGS.KELLY_KIDS] + flags[kFLAGS.EDRYN_NUMBER_OF_KIDS] + flags[kFLAGS.COTTON_KID_COUNT] + flags[kFLAGS.AMILY_BIRTH_TOTAL] + flags[kFLAGS.PC_TIMES_BIRTHED_AMILYKIDS] + joyScene.getTotalLitters() + SceneLib.excelliaFollower.totalExcelliaChildren() + flags[kFLAGS.ZENJI_KIDS]);
 		childPerformance += ((flags[kFLAGS.TAMANI_NUMBER_OF_DAUGHTERS] / 4) + (flags[kFLAGS.LYNNETTE_BABY_COUNT] / 4) + (flags[kFLAGS.ANT_KIDS] / 100) + (flags[kFLAGS.PHYLLA_DRIDER_BABIES_COUNT] / 4) + (flags[kFLAGS.PC_GOBLIN_DAUGHTERS] / 4) + (flags[kFLAGS.MITZI_DAUGHTERS] / 4));
 		childPerformance += ((DriderTown.BelisaKids / 4) + (DriderTown.LilyKidsPC / 4) + ((DriderTown.TyrantiaFemaleKids + DriderTown.TyrantiaMaleKids) / 4));
 		performancePointsPrediction += Math.sqrt(childPerformance);
@@ -4745,42 +4745,46 @@ public function rebirthFromBadEnd():void {
         menu();
         //Marble scene
 		if (flags[kFLAGS.MARBLE_PURIFIED] == 1)
-			addButton(0, "Marble & Clara", SceneLib.marblePurification.defeatClaraCuntInAFight, false);
+			addButton(0, "Marble & Clara", SceneLib.marblePurification.defeatClaraCuntInAFight, false).hint("The punishment for Marble's bitchy sister.");
         else
 			addButtonDisabled(0, "M & C", "Requires completing Marble's purification quest.");
         //Excellia slave first scene
 		if (flags[kFLAGS.EXCELLIA_RECRUITED] == 2)
-			addButton(1, "Excellia Slv", SceneLib.excelliaFollower.ExcelliaPathChoiceMakeSlave);
+			addButton(1, "Excellia Slv", SceneLib.excelliaFollower.ExcelliaPathChoiceMakeSlave).hint("Excellia acknowledges herself as your slave.");
         else
 			addButtonDisabled(1, "E. Slv", "Requires enslaving a certain cow-slut.");
         
         //Phylla demon fuck
 		if (flags[kFLAGS.ANT_COLONY_KEPT_HIDDEN] || flags[kFLAGS.PHYLLA_SAVED]) {
             if (player.cor >= 66 - player.corruptionTolerance && player.gender > 0)
-                addButton(2, "PhyllaCart", SceneLib.desert.antsScene.demonsFuckAntgirl);
+                addButton(2, "PhyllaCart", SceneLib.desert.antsScene.demonsFuckAntgirl).hint("Maybe you should have left Phylla to demons and watch them having fun?");
             else addButtonDisabled(2, "PhyllaCart", "You must be corrupted and not genderless to recall this.");
         }
         else addButtonDisabled(2, "P. Cart", "Requires saving one ant-girl.");
 		//Phylla keks
 		if (flags[kFLAGS.ANT_WAIFU] || flags[kFLAGS.PHYLLA_STAY_HOME])
-			addButton(3, "PhyFirstTime", SceneLib.desert.antsScene.antGirlGoodEnd);
+			addButton(3, "PhyFirstTime", SceneLib.desert.antsScene.antGirlGoodEnd).hint("Your first time with Phylla.");
 		else addButtonDisabled(3, "P. First", "Requires winning in the coliseum.");
         //Tamani first time
 		if (flags[kFLAGS.TAMANI_MET] == 1 && player.hasCock())
-			addButton(4, "TamaniFirst", SceneLib.forest.tamaniScene.tamaniFirstTimeConsentual);
+			addButton(4, "TamaniFirst", SceneLib.forest.tamaniScene.tamaniFirstTimeConsentual).hint("First time with Tamani.");
 		else addButtonDisabled(4, "T. First", "Requires fucking a certain goblin the first time you see her (+ having a cock).");
 		//Tamani first time
 		if (player.hasKeyItem("Deluxe Dildo") >= 0 && player.hasVagina())
-			addButton(5, "TamaniFem", SceneLib.forest.tamaniScene.preferTamaniFemdom);
-		else addButtonDisabled(5, "T. Fem", "Requires accepting a dildo from a certain goblin (+ having a vagina).");
+			addButton(5, "TamaniLes", SceneLib.forest.tamaniScene.preferTamaniFemdom).hint("Girl-on-girl event with Tamani.");
+		else addButtonDisabled(5, "T. Les.", "Requires accepting a dildo from a certain goblin (+ having a vagina).");
 		//Erlking revenge
 		if (player.hasKeyItem("Golden Antlers") >= 0 && player.gender > 0)
-			addButton(6, "Erlk.Revenge", SceneLib.forest.erlkingScene.howDareYou);
+			addButton(6, "Erlk.Revenge", SceneLib.forest.erlkingScene.howDareYou).hint("You show Erlking <b>who</b> is the hunter here.");
 		else addButtonDisabled(6, "Ek.Rev", "Requires taking your revenge on some cocky hunter. <i>Don't get cocky, kid...</i>");
 		//Nightmare
 		if (celessScene.questFinishedNightmare)
-			addButton(7, "Nightmare", SceneLib.forest.nightmareScene.nightmareVictory).hint("Please check that no transformations are applied after the scene -- SH.");
+			addButton(7, "Nightmare", SceneLib.forest.nightmareScene.nightmareVictory).hint("Demonic bicorn fucks you into a pile of mess.");
 		else addButtonDisabled(7, "Nm.", "Unlocked after you are impregnated by a certain corrupted centauress.");
+		//Sapphire
+		if (flags[kFLAGS.SAPPHIRE_AFFECTION] == 100)
+			addButton(8, "SapphireFirst", SceneLib.templeofdivine.sapphire.sapphireFirstTime).hint("Sapphire discovers carnal pleasures");
+		else addButtonDisabled(8, "S. First", "Spend some more time with a certain gargoyle. NOT THIS ONE!!!")
 		//bruh
 		addButtonDisabled(13, "BadEnds", "SH is too lazy to add them");
         addButton(14, "Wake Up", recallWakeUp);

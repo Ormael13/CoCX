@@ -61,7 +61,7 @@ use namespace CoC;
 			select = choice[rand(choice.length)];
 			switch(select) {
 				case 0:
-					if (flags[kFLAGS.HEL_PHOENIXES_DEFEATED] > 0) phoenixScene.encounterPhoenix2();
+					if (flags[kFLAGS.HEL_PHOENIXES_DEFEATED] > 0) phoenixScene.encounterPhoenix(1);
 					else {
 						clearOutput();
 						outputText("As you take a stroll, from behind nearby ash pile emerge huge golem. Looks like you have encountered 'true fire golem'! You ready your [weapon] for a fight!");

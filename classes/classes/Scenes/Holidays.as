@@ -69,7 +69,6 @@ public class Holidays {
             EngineCore.doNext(SceneLib.camp.returnToCampUseOneHour);
         }
         EngineCore.simpleChoices("Fuck It", fuck, "Mount It", mount, "", null, "", null, "No Way", SceneLib.camp.returnToCampUseOneHour);
-        //addButton(3, "Smash It", pumpkinSmash);
         //[HOLY SHIT YOU BE FUCKING A PUMPKIN]
         function pumpkinFuck():void {
             EngineCore.clearOutput();

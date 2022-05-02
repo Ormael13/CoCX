@@ -492,7 +492,9 @@ import classes.CoC;
 			}
 			else{
 				var kItem:int = -1;
-				for each (var counter:int in keyItems.length){
+				var counter:int = keyItems.length
+				while (counter > 0){
+					counter--;
 					if(keyItems[counter].keyName == keyItemName) {
 						kItem = counter;
 						break;

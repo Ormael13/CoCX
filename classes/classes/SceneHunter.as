@@ -194,7 +194,6 @@ public class SceneHunter extends BaseContent {
     /**
     * The dialogue to select fitting or not fitting dick. If dickSelect is disabled, tries to call "fitting" function
     * If doesn't fit, selects the biggest one because HELL WHY NOT.
-    * When disabled, overrides "tentacle always fit" behavior.
     * @param    fitF        Function to call when fits
     * @param    nofitF      Function to call when doesn't
     * @param    maxSize     Maximum fitting size
@@ -241,7 +240,6 @@ public class SceneHunter extends BaseContent {
     /**
     * The dialogue to select one of 3 dick sizes. There's no points in the game when more are used.
     * When disabled, selects the biggest one.
-    * Always overrides "tentacles always fit" behavior for 'smaller' options - your 3-foot-long tentacle is not SMALL in any way :)
     * Assumes that you have any fitting dick - no max size for "Big"
     * @param    bigF, mediumF, smallF   Function for "Big", "Medium", "Small" buttons respectively.
     * @param    bigMin, smallMax        Borderline sizes for "Big"-"Medium" and "Medium"-"Small"
@@ -311,7 +309,6 @@ public class SceneHunter extends BaseContent {
     /**
     * The dialogue to select single cock or multicocks
     * If doesn't fit, selects the biggest one because HELL WHY NOT.
-    * When disabled, overrides "tentacle always fit" behavior.
     * @param    singleF     Single cock
     * @param    twoF        Multicock / Two cocks (or more)
     * @param    threeF      (Optional) Three (or more)
@@ -386,7 +383,6 @@ public class SceneHunter extends BaseContent {
     //No disabling flag for this one, but I'll leave it here for now in case I'll need to lock it..
     /**
      * The dialogue to select scene options based on corruption.
-     * When disabled, overrides "tentacle always fit" behavior.
      * @param    pureButton Array ["Name", function, optional - "Description"] for the first button
      * @param    corButton  Array ["Name", function, optional - "Description"] for the second button
      * @param    maxForPure Max corruption for pure button

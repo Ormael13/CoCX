@@ -6716,12 +6716,12 @@ use namespace CoC;
 						gooCounter++;
 				}
 			}
-			if (vaginalCapacity() > 9000)
+			if (vaginalCapacity() >= 9000)
 				gooCounter++;
 			if (hasStatusEffect(StatusEffects.SlimeCraving))
 				gooCounter++;
-			//if (hasPerk(PerkLib.SlimeCore))
-			//	gooCounter++;
+			if (hasPerk(PerkLib.SlimeCore))
+				gooCounter++;
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				gooCounter += 50;
 			if (hasPerk(PerkLib.AscensionHybridTheory) && gooCounter >= 4)
@@ -6770,12 +6770,12 @@ use namespace CoC;
 						magmagooCounter++;
 				}
 			}
-			if (vaginalCapacity() > 9000)
+			if (vaginalCapacity() >= 9000)
 				magmagooCounter++;
 			if (hasStatusEffect(StatusEffects.SlimeCraving))
 				magmagooCounter++;
-			//if (hasPerk(PerkLib.SlimeCore))
-			//	magmagooCounter++;
+			if (hasPerk(PerkLib.MagmaSlimeCore))
+				magmagooCounter++;
 			if (hasPerk(PerkLib.ChimericalBodyUltimateStage))
 				magmagooCounter += 50;
 			if (hasPerk(PerkLib.AscensionHybridTheory) && magmagooCounter >= 4)
@@ -6826,7 +6826,7 @@ use namespace CoC;
 						darkgooCounter++;
 				}
 			}
-			if (vaginalCapacity() > 9000)
+			if (vaginalCapacity() >= 9000)
 				darkgooCounter++;
 			if (hasStatusEffect(StatusEffects.SlimeCraving))
 				darkgooCounter++;

@@ -22,10 +22,7 @@ package classes.Scenes.NPCs	{
 	import classes.BodyParts.Wings;
 	import classes.GlobalFlags.kFLAGS;
 	import classes.internals.SaveableState;
-	import classes.Scenes.Areas.HighMountains.TempleOfTheDivine;
 	import classes.Scenes.SceneLib;
-	import classes.Stats.Buff;
-    import classes.display.SpriteDb;
 	
 	public class Forgefather extends NPCAwareContent implements SaveableState	{
 		
@@ -57,7 +54,6 @@ package classes.Scenes.NPCs	{
 		public static var refinementExplained:Boolean;
 		public static var inlaysExplained:Boolean;
 		public static var gemstonesExplained:Boolean;
-		public var templeofdivine:TempleOfTheDivine = new TempleOfTheDivine();
 		
 		public function Forgefather() {
 			Saves.registerSaveableState(this);
@@ -379,17 +375,17 @@ package classes.Scenes.NPCs	{
 				addButtonDisabled(3, "Explain Inlays", "Carve channels in your form first");
 				addButtonDisabled(4, "Explain Gems", "Carve channels in your form first");
 			}
-			if (materialsExplained != false && refinement < 4) addButton(6, "Change Mat's", changeMaterials).hint("Change your body's material.");
+			if (materialsExplained && refinement < 4) addButton(6, "Change Mat's", changeMaterials).hint("Change your body's material.");
 			else if (refinement >= 4) addButtonDisabled(6, "Change Mat's", "You've crossed the rubicon, there is no turning back.");
 			else addButtonDisabled(6, "Change Mat's", "Maybe you should learn what the materials do first?");
-			if (refinementExplained != false) addButton(7, "Refine Body", refineBody).hint("Refine your form.");
+			if (refinementExplained) addButton(7, "Refine Body", refineBody).hint("Refine your form.");
 			else addButtonDisabled(7, "Refine Body", "Maybe you should learn about refining your form first?");
-			if (inlaysExplained != false) addButton(8, "Change Inlays", inlayBody).hint("Set/Change your Inlays.");
+			if (inlaysExplained) addButton(8, "Change Inlays", inlayBody).hint("Set/Change your Inlays.");
 			else addButtonDisabled(8, "Change Inlays", "Maybe you should learn about inlays first?");
-			if (gemstonesExplained != false) addButton(9, "Change Gems", blingBody).hint("Set/Change your Gems.");
+			if (gemstonesExplained) addButton(9, "Change Gems", blingBody).hint("Set/Change your Gems.");
 			else addButtonDisabled(9, "Change Inlays", "Maybe you should learn about Gemstones first?");
-			if (gemstonesExplained != false) addButton(13, "Trade for Gems", trade4Gems).hint("Temporary measure.");
-			addButton(14, "Back", templeofdivine.templemainmenu);			
+			if (gemstonesExplained) addButton(13, "Trade for Gems", trade4Gems).hint("Temporary measure.");
+			addButton(14, "Back", SceneLib.templeofdivine.templeMainMenu);
 		}
 		
 		public function explainMaterials(): void{
@@ -488,11 +484,11 @@ package classes.Scenes.NPCs	{
 						else addButtonDisabled(0, "Refine", "Not enough materials");
 					} 
 					else if (refinement == 3){
-						if (hasChannelMats == true) addButton(0, "Carve Channel", refineFunc);
+						if (hasChannelMats) addButton(0, "Carve Channel", refineFunc);
 						else addButtonDisabled(0, "Carve Channel", "Not enough materials");
 					}
 					else if (refinement == 4){
-						if (hasPolishingMats == true) addButton(0, "Polish Form", refineFunc);
+						if (hasPolishingMats) addButton(0, "Polish Form", refineFunc);
 						else addButtonDisabled(0, "Polish Form", "Not enough materials");
 					}
 					
@@ -647,23 +643,23 @@ package classes.Scenes.NPCs	{
 		public function inlayFunc(inlayNew:String, replace:Boolean):void{
 			switch (inlayNew){
 				case "amethyst":
-					if (replace == false) player.destroyItems(useables.AMEGEM, 15);
+					if (!replace) player.destroyItems(useables.AMEGEM, 15);
 					else player.destroyItems(useables.AMEGEM, 20);
 					break;
 				case "emerald":
-					if (replace == false) player.destroyItems(useables.EMDGEM, 15);
+					if (!replace) player.destroyItems(useables.EMDGEM, 15);
 					else player.destroyItems(useables.EMDGEM, 20);
 					break;
 				case "ruby":
-					if (replace == false) player.destroyItems(useables.RBYGEM, 15);
+					if (!replace) player.destroyItems(useables.RBYGEM, 15);
 					else player.destroyItems(useables.RBYGEM, 20);
 					break;
 				case "sapphire":
-					if (replace == false) player.destroyItems(useables.SAPPGEM, 15);
+					if (!replace) player.destroyItems(useables.SAPPGEM, 15);
 					else player.destroyItems(useables.SAPPGEM, 20);
 					break;
 				case "topaz":
-					if (replace == false) player.destroyItems(useables.TPAZGEM, 15);
+					if (!replace) player.destroyItems(useables.TPAZGEM, 15);
 					else player.destroyItems(useables.TPAZGEM, 20);
 					break;
 			}
@@ -674,23 +670,23 @@ package classes.Scenes.NPCs	{
 		public function blingFunc(gemNew:String, replace:Boolean):void{
 			switch (gemNew){
 				case "amethyst":
-					if (replace == false) player.destroyItems(useables.AMEGEM, 10);
+					if (!replace) player.destroyItems(useables.AMEGEM, 10);
 					else player.destroyItems(useables.AMEGEM, 15);
 					break;
 				case "emerald":
-					if (replace == false) player.destroyItems(useables.EMDGEM, 10);
+					if (!replace) player.destroyItems(useables.EMDGEM, 10);
 					else player.destroyItems(useables.EMDGEM, 15);
 					break;
 				case "ruby":
-					if (replace == false) player.destroyItems(useables.RBYGEM, 10);
+					if (!replace) player.destroyItems(useables.RBYGEM, 10);
 					else player.destroyItems(useables.RBYGEM, 15);
 					break;
 				case "sapphire":
-					if (replace == false) player.destroyItems(useables.SAPPGEM, 10);
+					if (!replace) player.destroyItems(useables.SAPPGEM, 10);
 					else player.destroyItems(useables.SAPPGEM, 15);
 					break;
 				case "topaz":
-					if (replace == false) player.destroyItems(useables.TPAZGEM, 10);
+					if (!replace) player.destroyItems(useables.TPAZGEM, 10);
 					else player.destroyItems(useables.TPAZGEM, 15);
 					break;
 			}
