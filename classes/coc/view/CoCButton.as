@@ -153,6 +153,8 @@ public class CoCButton extends Block {
 		this.callback      = callback;
 		this.toolTipText = toolTipText;
 		this.toolTipHeader = toolTipHeader || text;
+		if (this.labelText)
+			this.labelText = Parser.recursiveParser(this.labelText);
         if (this.toolTipText)
             this.toolTipText = Parser.recursiveParser(this.toolTipText);
         if (this.toolTipHeader)
