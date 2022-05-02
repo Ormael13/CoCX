@@ -311,6 +311,8 @@ public class SceneLib {
 
     public static var phyllaScene:PhyllaScene = new PhyllaScene();
 
+    public static var templeofdivine:TempleOfTheDivine = new TempleOfTheDivine();
+
     public static var uniqueSexScene:UniqueSexScenes = new UniqueSexScenes();
 
     public function SceneLib() {

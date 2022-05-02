@@ -22,7 +22,6 @@ use namespace CoC;
 		public var minotaurMobScene:MinotaurMobScene = new MinotaurMobScene();
 		public var izumiScenes:IzumiScene = new IzumiScene();
 		public var phoenixScene:PhoenixScene = new PhoenixScene();
-		public var templeofdivine:TempleOfTheDivine = new TempleOfTheDivine();
 		public var darkelfScene:DarkElfScene = new DarkElfScene();
 		
 		public function HighMountains()
@@ -43,7 +42,7 @@ use namespace CoC;
 			flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN]++;
 			doNext(playerMenu);
 			
-			if (SceneLib.d3.discoverD3() == true)
+			if (SceneLib.d3.discoverD3())
 			{
 				return;
 			}
@@ -94,7 +93,7 @@ use namespace CoC;
 			}*/
 			//Temple of the Divine
 			if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] < 1 && rand(4) == 0) {
-				templeofdivine.firstvisitintro();
+				SceneLib.templeofdivine.firstvisitintro();
 				return;
 			}
 			//25% minotaur sons!
@@ -195,7 +194,6 @@ use namespace CoC;
 					startCombat(new Harpy());
 					spriteSelect(SpriteDb.s_harpy);
 				}
-				return;
 			}
 		}
 		

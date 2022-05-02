@@ -4058,7 +4058,7 @@ public class Camp extends NPCAwareContent{
 		else addButtonDisabled(5, "???", "Search the deepwoods.");
 		if (flags[kFLAGS.MET_MINERVA] >= 4) addButton(6, "Oasis Tower", SceneLib.highMountains.minervaScene.encounterMinerva).hint("Visit the ruined tower in the high mountains where Minerva resides.");
 		else addButtonDisabled(6, "???", "Search the high mountains.");
-		if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] > 0) addButton(7, "Temple", SceneLib.highMountains.templeofdivine.repeatvisitintro).hint("Visit the temple in the high mountains where Sapphire resides.");
+		if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] > 0) addButton(7, "Temple", SceneLib.templeofdivine.repeatvisitintro).hint("Visit the temple in the high mountains where Sapphire resides.");
 		else addButtonDisabled(7, "???", "Search the high mountains.");
 		if (flags[kFLAGS.YU_SHOP] == 2) addButton(8, "Winter Gear", SceneLib.glacialYuShop.YuIntro).hint("Visit the Winter gear shop.");
 		else addButtonDisabled(8, "???", "Search the (outer) glacial rift.");
