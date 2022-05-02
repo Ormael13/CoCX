@@ -666,7 +666,7 @@ public function etnaMarriage():void
 		outputText("realize however that to properly propose to her, you would need an engagement ring, preferably a ruby one.");
 		doNext(etnaCampMenu);
 	}
-	else if (flags[kFLAGS.SAPPHIRE_TALKS] < 4) {
+	else if (!SceneLib.templeofdivine.canMarry()) {
 		if (!player.hasItem(jewelries.ENDGRNG, 1)) outputText("realize however that to properly propose to her, you would need an engagement ring, preferably a ruby one also ");
 		outputText("realise to your annoyance that the two of you will need a holy place to recite your vows, one with a still working altar of Marae and active priestess likely.");
 		doNext(etnaCampMenu);

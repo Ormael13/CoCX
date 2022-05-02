@@ -12,8 +12,6 @@ import classes.Stats.Buff;
 import classes.display.SpriteDb;
 import classes.Scenes.Places.TempleOfTheDivine.*;
 
-use namespace CoC;
-
 	public class TempleOfTheDivine extends BaseContent {
 
 		public function TempleOfTheDivine() {}
@@ -22,21 +20,9 @@ use namespace CoC;
 		public var onyx:Onyx = new Onyx();
 		public var playerBuilder:PlayerGargoyleBuilder = new PlayerGargoyleBuilder();
 
-/*
-		public function sapphireAffection(changes:Number = 0):Number {
-			flags[kFLAGS.SAPPHIRE_AFFECTION] += changes;
-			if (flags[kFLAGS.SAPPHIRE_AFFECTION] > 100) flags[kFLAGS.SAPPHIRE_AFFECTION] = 100;
-			return flags[kFLAGS.SAPPHIRE_AFFECTION];
+		public function canMarry():Boolean {
+			return flags[kFLAGS.WEDDINGS_UNLOCKED]; //talked
 		}
-
-		public function onyxMF(boy:String, girl:String):String {
-			return (flags[kFLAGS.ONYX_GENDER] == 1 || flags[kFLAGS.ONYX_GENDER] == 2) ? girl : boy;
-		}
-
-		public function onyxName():String {
-			return onyxMF("Onyx", "Krystal");
-		}
-		*/
 
 		public function firstvisitintro():void {
 			flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] = 1;
@@ -72,9 +58,9 @@ use namespace CoC;
 			spriteSelect(SpriteDb.s_sapphire);
 			outputText("You decide to make a trip to the temple. However, as soon as you enter the sacred ground, Sapphire screeches and takes flight, spear at the ready. Luckily, she calms down once she recognizes you, assuming a relaxed pose in the middle of the temple.");
 			outputText("\n\n\"<i>Well, hello there! Nice to see you again [name]. You're welcome here, as usual... So are you here to pray?");
-			if (flags[kFLAGS.SAPPHIRE_AFFECTION] > 99) outputText(" Or perhaps you're here for something more... mutually agreeable, instead?");
+			if (flags[kFLAGS.SAPPHIRE_AFFECTION] == 100) outputText(" Or perhaps you're here for something more... mutually agreeable, instead?");
 			outputText("</i>\"");
-			if (flags[kFLAGS.SAPPHIRE_AFFECTION] > 99) outputText(" she says, winking with a lusty smile.");
+			if (flags[kFLAGS.SAPPHIRE_AFFECTION] == 100) outputText(" she says, winking with a lusty smile.");
 			mainmenu();
 		}
 

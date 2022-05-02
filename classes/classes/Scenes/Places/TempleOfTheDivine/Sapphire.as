@@ -17,10 +17,19 @@ use namespace CoC;
 		public function Sapphire() {
 		}
 
+		/*
+		* <60 - not talked enough.
+		* Reaches 60 after 3 talks (full story), then ready for sex.
+		* After sex talk, 100 - horny.
+		* */
 		public function sapphireAffection(changes:Number = 0):Number {
 			flags[kFLAGS.SAPPHIRE_AFFECTION] += changes;
 			if (flags[kFLAGS.SAPPHIRE_AFFECTION] > 100) flags[kFLAGS.SAPPHIRE_AFFECTION] = 100;
 			return flags[kFLAGS.SAPPHIRE_AFFECTION];
+		}
+
+		public function canSex():Boolean {
+			return flags[kFLAGS.SAPPHIRE_AFFECTION] >= 60;
 		}
 
 		public function sapphiremenu():void {
@@ -31,7 +40,9 @@ use namespace CoC;
 			menu();
 			addButton(0, "This place", TalkThisPlace).hint("Learn about the temple.");
 			addButton(1, "Her", TalkHer).hint("How about her?");
-			if (flags[kFLAGS.SAPPHIRE_AFFECTION] > 5) addButton(2, "Sex", TalkSex).hint("Have some sweet time with her.");
+			addButtonIfTrue(2, "Sex", TalkSex, "You need to know her better.", canSex(), "Have some sweet time with her.");
+			if (!flags[kFLAGS.WEDDINGS_UNLOCKED])
+				addButton(3, "Weddings", talkWeddings).hint("Ask if you can have a wedding in the temple.");
 			addButton(4, "Back", SceneLib.templeofdivine.templeMainMenu);
 		}
 
@@ -58,7 +69,7 @@ use namespace CoC;
 		public function TalkHer():void {
 			clearOutput();
 			spriteSelect(SpriteDb.s_sapphire);
-			if (flags[kFLAGS.SAPPHIRE_TALKS] == 2 || flags[kFLAGS.SAPPHIRE_TALKS] == 6) {
+			if (flags[kFLAGS.SAPPHIRE_TALKS] == 2) {
 				outputText("Now, that some time has passed, you ask her if she is ready to tell you more about the events she foreshadowed in your previous discussion.\n\n");
 				outputText("\"<i>It pains me to even think about the events of that day, the day the demons appeared. They poured into the cities below us like a tidal wave, devouring souls and corrupting everything in their path. Eventually they began climbing the mountain, and we knew they would be on our doorstep within hours. To prevent them from destroying this holy ground we devised a plan. No matter what the cost to us, the temple had to be protected. ");
 				outputText("As such one by one, we sacrificed ourselves in a ritual to create from us everlasting guardians. I was the last one to be put on the altar. They finished the ritual just as the demons started pouring in. Many desperate enchantments and prayers were put into the creation of each of us, hoping to create a combination by chance that would correctly dispatch the demons. The other gargoyles didn't receive the protections required to face the demons as I did, thus they were destroyed one by one. ");
@@ -68,14 +79,14 @@ use namespace CoC;
 				outputText("You thank her for her time and walk back to camp.");
 				flags[kFLAGS.SAPPHIRE_TALKS]++;
 			}
-			if (flags[kFLAGS.SAPPHIRE_TALKS] == 1 || flags[kFLAGS.SAPPHIRE_TALKS] == 5) {
+			if (flags[kFLAGS.SAPPHIRE_TALKS] == 1) {
 				outputText("Didn't she say that she was raised in the temple? Last time you checked Gargoyles were magically constructed creatures that do not age or die. How could she have been raised in the first place?\n\n");
 				outputText("\"<i>This isn’t how I used to be. I was once of flesh and blood just like you. I was born in the former capital city which serves as the main demon base now. My mother was a priestess at the temple, so naturally I became one as well . My childhood was mostly spent learning holy texts and chanting in the chorus. I don't think it was a waste, these lands used to be beautiful before the demon outbreak. At 16, I was among many selected to work directly in the temple of the divine. It was a great privilege. ");
 				outputText("I prayed, tended to the temple, and worked under the abbot for many years as a nun. I would have continued to do so had the demons not come. In the end I couldn’t save anyone... I'm sorry, I don't feel like talking about this any further, at least for now. Please, leave me be.</i>\"\n\n");
 				outputText("You excuse yourself and leave, returning back to your camp.");
 				flags[kFLAGS.SAPPHIRE_TALKS]++;
 			}
-			if (flags[kFLAGS.SAPPHIRE_TALKS] == 0 || flags[kFLAGS.SAPPHIRE_TALKS] == 4) {
+			if (flags[kFLAGS.SAPPHIRE_TALKS] == 0) {
 				outputText("You're curious about her story and decide to ask her.\n\n");
 				outputText("\"<i>My story? Well that's nothing special. I have been guarding this place for years, even before the demons came. I was raised here in this temple. I have always had a fascination with gods, Marae in particular. It was only natural for me to become a priestess of her cult. In recent years, I mostly dealt with the occasional thieves and demons that somehow manage to break through the ward. Even then, only a very powerful opponent could manage that.</i>\"\n\n");
 				outputText("You ask her how she is able to contend with demons, especially the most dangerous ones.\n\n");
@@ -83,16 +94,31 @@ use namespace CoC;
 				outputText("You thank her for her time and proceed to head back to your camp.");
 				flags[kFLAGS.SAPPHIRE_TALKS]++;
 			}
-			sapphireAffection(2);
-			if (flags[kFLAGS.SAPPHIRE_TALKS] > 6) flags[kFLAGS.SAPPHIRE_TALKS] = 4;
-			if (flags[kFLAGS.SAPPHIRE_TALKS] == 3) flags[kFLAGS.SAPPHIRE_TALKS]++;
+			if (flags[kFLAGS.SAPPHIRE_AFFECTION] < 60)
+				sapphireAffection(20); //raise until pre-sex cap
+			if (flags[kFLAGS.SAPPHIRE_TALKS] == 3) flags[kFLAGS.SAPPHIRE_TALKS] = 0;
+			doNext(camp.returnToCampUseOneHour);
+		}
+
+		private function talkWeddings():void {
+			clearOutput();
+			outputText("You would like to have a wedding here at the temple. Would this pose a problem?\n\n");
+			outputText("\"<i>Certainly not. I would even gladly put on the mantle of priestess for the event. ");
+			if (!flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE])
+				outputText("However, with the altar of Marae in this state, I cannot formally operate the ritual of the sacred vow. If you repaired the altar, I would definitively see to it that those two fortunate souls be united.");
+			else {
+				outputText("Also, thanks to your assistance, the temple has a functional altar now, and thus I can perform the sacred rites in accordance to traditions. Be wary though, that during the rites, the temple defences will be down. Should the demon decide to attack, you may have to handle the wedding crashers.");
+				flags[kFLAGS.WEDDINGS_UNLOCKED] = 1;
+			}
+			outputText("</i>\"\n\nYou will keep that in mind. On this, you thank her for her assistance. She bows.");
+			outputText("\n\n\"<i>Anytime champion.</i>\"");
 			doNext(camp.returnToCampUseOneHour);
 		}
 
 		public function TalkSex():void {
 			clearOutput();
 			spriteSelect(SpriteDb.s_sapphire);
-			if (flags[kFLAGS.SAPPHIRE_SEX] == 1) {
+			if (flags[kFLAGS.SAPPHIRE_AFFECTION] == 100) {
 				outputText("Sapphire looks at you expectantly her tail agitated by the excitement of potential physical release.\n\n");
 				outputText("\"<i>Feeling antsy? How would you like us to do it then?");
 				if (player.isGargoyle()) outputText(" There’s even running water if we ever need... something slippery.");
@@ -119,8 +145,7 @@ use namespace CoC;
 				outputText("Sapphire would blush if she could however she’s frozen in a post orgasm rigor mortis, her expression seems to be as close to happiness as one can be. After a minute she recover mobility.\n\n");
 				outputText("\"<i>Thanks for letting me discover again what it is to be a woman. Please come back more often, it feels empty in the temple without you around.</i>\"\n\n");
 				outputText("You smile, leaving her embrace as you promise to come back and visit.\n\n");
-				flags[kFLAGS.SAPPHIRE_SEX] = 1;
-				sapphireAffection(5);
+				sapphireAffection(100); //jump to max - failsafe.
 				doNext(camp.returnToCampUseOneHour);
 			}
 		}
@@ -138,7 +163,6 @@ use namespace CoC;
 			outputText(", at this rate you will develop a tail fetish.\n\n");
 			outputText("You fuck each other passionately, drawing closer then moving apart, making the both of you moan in delight at this intense mutual penetration. This is like fucking and getting fucked at the same time… simply perfect. By all means you don’t know anymore whether you will cum from your tail or from your pussy.\n\n");
 			outputText("After a fair hour of constant sex, the pair of you finally orgasm and you both fall on the ground tails still tangled up and petrified in pleasure. You wake up a few minutes later tail still in each other pussy and completely satisfied. You get back your gear and wave a goodbye to Sapphire as you head back to camp.\n\n");
-			sapphireAffection(5);
 			player.sexReward("Default", "Default", true, false);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -189,13 +213,11 @@ use namespace CoC;
 			else outputText("You regain your sense faster than your two stony friends. Mainly because you can’t petrify from pleasure like they do.\n\n");
 			if (player.isGargoyle()) {
 				outputText("The three of you come to way later, somewhat aware of having frozen for several hours. You proceed to break out from the other two as they do the same, still smiling after this incident. Sapphire and [onyx name] nod as you propose that you should have that kind of bonding more often.\n\n");
-				sapphireAffection(5);
 				player.sexReward("Default", "Default", true, false);
 				doNext(camp.returnToCampUseFourHours);
 			}
 			else {
 				outputText("You proceed to break out from the other two still locked in their stone form. Sapphire and [onyx name] are still frozen in time but you guess from their looks that they will want to do this again.\n\n");
-				sapphireAffection(5);
 				player.sexReward("Default", "Default", true, false);
 				doNext(camp.returnToCampUseOneHour);
 			}
@@ -224,7 +246,6 @@ use namespace CoC;
 			else outputText("she");
 			outputText(" unfreeze and break the embrace as she remove her stony tail from your private.\n\n");
 			outputText("You smile, leaving her embrace as you promise to come back and visit.\n\n");
-			sapphireAffection(5);
 			player.sexReward("Default", "Default", true, false);
 			doNext(camp.returnToCampUseOneHour);
 		}
@@ -251,7 +272,6 @@ use namespace CoC;
 				outputText("\"<i>Oops... I got carried away. I hope you don’t mind [name].</i>\"\n\n");
 				outputText("You nod absentmindedly and gear up as you head back to camp.\n\n");
 			}
-			sapphireAffection(5);
 			player.sexReward("Default", "Default", true, false);
 			doNext(camp.returnToCampUseOneHour);
 		}

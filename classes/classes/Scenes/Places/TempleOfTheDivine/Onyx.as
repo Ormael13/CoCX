@@ -194,7 +194,7 @@ use namespace CoC;
 		public function makingNewGargoylePart1():void {
 			clearOutput();
 			outputText("Thinking about your lonely friend up there, you look at the spare gargoyle body and take the Black Soul Gem out of your pack. Maybe she could use the company of another gargoyle.\n\n");
-			outputText("Everyone deserves a second chance, but you ponder if using the soul of a formerly sex starved aberration is a bright idea.");
+			outputText("Everyone deserves a second chance, but you ponder if using the soul of a formerly sex-starved aberration is a bright idea.");
 			menu();
 			addButton(0, "Yes", makingNewGargoylePart2);
 			addButton(1, "No", SceneLib.templeofdivine.templeBasement);
