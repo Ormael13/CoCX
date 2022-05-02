@@ -3334,7 +3334,7 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.Telekinesis)) {
                 outputText("Weapons begins to float around you as you draw several projectiles from your arsenal using your powers.\n\n");
                 TelekinesisThrow();
-                outputText(" Adding to the initial attack you begin grabbing additionnal [weaponrange] before taking aim.\n\n");
+                outputText(" Adding to the initial attack, you begin grab additional [weaponrange] before taking aim.\n\n");
             }
             throwWeapon();
         }
@@ -14106,7 +14106,7 @@ public class Combat extends BaseContent {
         useMana(30, USEMANA_WHITE_HEAL);
         outputText("You initiate a healing spell. ");
         CombatAbilities.Heal.doEffect(false);
-        outputText("\n\nIt's only when you finish your casting that [themonster] name snaps out of the hypnosis and realise what is going on. ");
+        outputText("\n\nIt's only when you finish your casting that [themonster] snaps out of the hypnosis...But it's too late. ");
         if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
         statScreenRefresh();
         flags[kFLAGS.SPELLS_CAST]++;
@@ -14122,7 +14122,7 @@ public class Combat extends BaseContent {
         outputText("You initiate a Darkness spell. ");
         CombatAbilities.DarknessShard.doEffect(false);
         CombatAbilities.DarknessShard.doEffect(false);
-        outputText("\n\nIt's only when you finish your casting that [themonster] name snaps out of the hypnosis and realise what is going on just in time to receive a surprise cast, taking heavy damage from your magic as you unleash darkness shard.");
+        outputText("\n\nIt's only when you finish your casting that [themonster] snaps out of the hypnosis. Their eyes widen just in time to receive a darkness shard to the gut.");
         if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
         statScreenRefresh();
         flags[kFLAGS.SPELLS_CAST]++;
@@ -14138,7 +14138,7 @@ public class Combat extends BaseContent {
         outputText("You initiate a Darkness spell. ");
         CombatAbilities.DuskWave.doEffect(false);
         CombatAbilities.DuskWave.doEffect(false);
-        outputText("\n\nIt's only when you finish your casting that [themonster] name snaps out of the hypnosis and realise what is going on just in time to receive a surprise cast, taking heavy damage from your magic as you unleash dusk wave.");
+        outputText("\n\nIt's only when you finish your casting that [themonster] snaps out of the hypnosis. Your wave of darkness bowls over your foe.");
         if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
         statScreenRefresh();
         flags[kFLAGS.SPELLS_CAST]++;
@@ -14156,12 +14156,12 @@ public class Combat extends BaseContent {
         clearOutput();
         outputText("You maintain eye contact with the target insidiously coiling your tail around it. ");
         if (rand(4) == 0) {
-            outputText("It's only when you are fully wrapped around your victim that [themonster] snaps out and realise [monster his] predicament.");
+            outputText("It's only when you are fully wrapped around your victim that [themonster] snaps out of it.");
             monster.createStatusEffect(StatusEffects.Constricted, 1 + rand(4), 0, 0, 0);
             monster.removeStatusEffect(StatusEffects.HypnosisNaga);
         } else {
             var Duuuration:Number = monster.statusEffectv1(StatusEffects.HypnosisNaga);
-            outputText("You maintain the trance smiling as you prolong the mesmerising dance, moving your hips from side to side and displaying your assets. [Themonster] is lost in your gaze unable to act.");
+            outputText("You maintain the trance, smiling as you prolong the mesmerising dance, moving your hips from side to side and displaying your assets. [Themonster] is lost in your gaze, and unable to act.");
             monster.createStatusEffect(StatusEffects.Constricted, Duuuration, 0, 0, 0);
         }
         enemyAI();
@@ -14175,7 +14175,7 @@ public class Combat extends BaseContent {
         var lustDmg:int = (10 + (player.lib * 0.1)) * monster.lustVuln;
         lustDmg *= damagemultiplier;
         lustDmg = Math.round(lustDmg);
-        outputText("You maintain the trance smiling as you prolong the mesmerising dance, moving your hips from side to side and displaying your assets. [Themonster] is lost in your gaze unable to act. ");
+        outputText("You maintain the trance, smiling as you prolong the mesmerising dance, moving your hips from side to side and displaying your assets. [Themonster] is lost in your gaze, and unable to act. ");
         monster.teased(lustDmg);
         outputText("\n\n");
         enemyAI();
@@ -14208,7 +14208,7 @@ public class Combat extends BaseContent {
 
     public function BearLeggoMyEggo():void {
         clearOutput();
-        outputText("You let your opponent free ending your grab.\n\n");
+        outputText("You let your opponent free, ending your grab.\n\n");
         monster.removeStatusEffect(StatusEffects.GrabBear);
         enemyAI();
     }
@@ -14244,7 +14244,7 @@ public class Combat extends BaseContent {
         //Rut doesnt let you run from dicks.
         if (player.inRut && monster.cockTotal() > 0) {
             clearOutput();
-            outputText("The thought of another male in your area competing for all the pussy infuriates you!  No way will you run!");
+            outputText("The thought of another male in your area competing for all the pussy infuriates you. There will be <i>no</i> competition to mate!");
             //Pass false to combatMenu instead:		menuLoc = 3;
             //		doNext(combatMenu);
             menu();
@@ -14285,7 +14285,7 @@ public class Combat extends BaseContent {
                 return;
             }
             else{
-                outputText("You are currently being grappled by [monster name] vines theres no way for you to simply break free!");
+                outputText("You are currently being grappled by [monster name] vines, there's no way for you to simply break free!");
                 menu();
                 addButton(0, "Next", combatMenu, false);
                 return;
@@ -14308,11 +14308,11 @@ public class Combat extends BaseContent {
             return;
         }
         if (player.statStore.hasBuff("Supercharged")) {
-            outputText("Run...SERIOUSLY? There is no way you could run! You need to discharge NOW! Your genitals are glistening with dripping plasma with how much you need to FUCK at the time!");
+            outputText("Run...SERIOUSLY? There is no way you could run! You need to discharge NOW! Your genitals are glistening with dripping plasma with how much you need to FUCK!");
             if (monster.isHerm() && player.isHerm()) outputText(" Cock or cunt you don't even care! All you WANT is for that herm to fuck you wildly until your charge is gone!");
             else{
-                if(monster.hasCock() && player.hasVagina()) outputText("Your drooling outlet DEMAND that plug!");
-                else if(player.hasCock() && monster.hasVagina()) outputText("Your drooling plug DEMAND that outlet!");
+                if(monster.hasCock() && player.hasVagina()) outputText("Your drooling outlet DEMANDS that plug!");
+                else if(player.hasCock() && monster.hasVagina()) outputText("Your drooling plug DEMANDS that outlet!");
             }
             //Pass false to combatMenu instead:		menuLoc = 3;
             //		doNext(combatMenu);
@@ -14329,7 +14329,7 @@ public class Combat extends BaseContent {
             return;
         }
         if (monster.hasStatusEffect(StatusEffects.RunDisabled)) {
-            outputText("You'd like to run, but you can't scale the walls of the pit with so many demonic hands pulling you down!");
+            outputText("You'd like to run, but you can't scale the walls of the pit, not with so many demonic hands pulling you down!");
             //Pass false to combatMenu instead:		menuLoc = 3;
             //		doNext(combatMenu);
             menu();
@@ -14357,7 +14357,7 @@ public class Combat extends BaseContent {
         if (inDungeon || inRoomedDungeon) {
             clearOutput();
             if (monster.short == "Hellfire Snail") {
-                outputText("You run as fast as you can, taking random corridors and running past the confused enemies all the way back to the labyrinth entrance. Of course the slug thing can't follow you she's way too slow however as a result you lose all the progression you made in the maze!\n\n");
+                outputText("You run as fast as you can, taking random corridors and running past the confused enemies all the way back to the labyrinth entrance. You lose the slug-woman quickly, however your flight attracts more attention, forcing you all the way back to the surface. \n\n");
                 SceneLib.dungeons.ebonlabyrinth.room = 1;
                 SceneLib.dungeons.ebonlabyrinth.depth = 0;
                 doNext(playerMenu);
@@ -14387,14 +14387,14 @@ public class Combat extends BaseContent {
             outputText(", and Ember, caught up in the moment, gives chase.  ");
         }
         if (monster.short == "lizan rogue") {
-            outputText("As you retreat the lizan doesn't even attempt to stop you. When you look back to see if he's still there you find nothing but the empty bog around you.");
+            outputText("As you retreat the lizan doesn't even attempt to stop you. When you look back for him, you find nothing but the empty bog around you.");
             CoC.instance.inCombat = false;
             clearStatuses(false);
             doNext(camp.returnToCampUseOneHour);
             return;
         }
 		if (monster.short == "training dummy") {
-			outputText("As you retreat the training dummy just stands there in it usual spot. ");
+			outputText("As you retreat the training dummy just stands there. ");
 		}
 		else if (player.canFly()) {
             if(player.wings.type != Wings.ETHEREAL || player.wings.type != Wings.LEVITATION || player.wings.type != Wings.THUNDEROUS_AURA){
@@ -14468,7 +14468,7 @@ public class Combat extends BaseContent {
                 }
                 //Run failed:
                 else {
-                    outputText("You try to shake off the fog and run but the anemone slinks over to you and her tentacles wrap around your waist.  <i>\"Stay?\"</i> she asks, pressing her small breasts into you as a tentacle slides inside your [armor] and down to your nethers.  The combined stimulation of the rubbing and the tingling venom causes your knees to buckle, hampering your resolve and ending your escape attempt.");
+                    outputText("You try to shake off the fog and run, but the anemone slinks over to you and her tentacles wrap around your waist.  <i>\"Stay?\"</i> she asks, pressing her small breasts into you as a tentacle slides inside your [armor] and down to your nethers.  The combined stimulation of the rubbing and the tingling venom causes your knees to buckle, hampering your resolve and ending your escape attempt.");
                     //(gain lust, temp lose spd/str)
                     (monster as Anemone).applyVenom((4 + player.effectiveSensitivity() / 20));
                     combatRoundOver();
@@ -14500,7 +14500,7 @@ public class Combat extends BaseContent {
                 }
                 //Run failed:
                 else {
-                    outputText("You try to shake off the fog and run but the anemone slinks over to you and her tentacles wrap around your waist.  <i>\"Stay?\"</i> she asks, pressing her small breasts into you as a tentacle slides inside your [armor] and down to your nethers.  The combined stimulation of the rubbing and the tingling venom causes your knees to buckle, hampering your resolve and ending your escape attempt.");
+                    outputText("You try to shake off the fog and run, but the anemone slinks over to you and her tentacles wrap around your waist.  <i>\"Stay?\"</i> she asks, pressing her small breasts into you as a tentacle slides inside your [armor] and down to your nethers.  The combined stimulation of the rubbing and the tingling venom causes your knees to buckle, hampering your resolve and ending your escape attempt.");
                     //(gain lust, temp lose spd/str)
                     (monster as SeaAnemone).applyVenom((4 + player.effectiveSensitivity() / 20));
                     combatRoundOver();
@@ -14608,15 +14608,15 @@ public class Combat extends BaseContent {
                             outputText("Your " + hipDescript() + " forces your gait to lurch slightly side to side, which causes the fat of your " + player.skinTone + " ");
                             if (player.butt.type >= 20) outputText(buttDescript() + " and ");
                             outputText(chestDesc() + " to wobble immensely, throwing you off balance and preventing you from moving quick enough to escape.");
-                        } else if (player.butt.type >= 20) outputText("Your " + player.skinTone + buttDescript() + " and " + chestDesc() + " wobble and bounce heavily, throwing you off balance and preventing you from moving quick enough to escape.");
-                        else outputText("Your " + chestDesc() + " jiggle and wobble side to side like the " + player.skinTone + " sacks of milky fat they are, with such force as to constantly throw you off balance, preventing you from moving quick enough to escape.");
+                        } else if (player.butt.type >= 20) outputText("Your " + player.skinTone + buttDescript() + " and " + chestDesc() + " wobble and bounce heavily, throwing you off balance and preventing you from escaping.");
+                        else outputText("Your " + chestDesc() + " jiggle and wobble side to side like the " + player.skinTone + " sacks of milky fat they are, with enough force to constantly throw you off balance, preventing you from escaping.");
                     }
                     //FOR PLAYERS WITH MASSIVE BREASTS
                     else if (player.biggestTitSize() >= 66) {
                         if (player.hips.type >= 20) {
                             outputText("Your " + chestDesc() + " nearly drag along the ground while your " + hipDescript() + " swing side to side ");
-                            if (player.butt.type >= 20) outputText("causing the fat of your " + player.skinTone + buttDescript() + " to wobble heavily, ");
-                            outputText("forcing your body off balance and preventing you from moving quick enough to get escape.");
+                            if (player.butt.type >= 20) outputText("causing the fat of your " + player.skinTone + buttDescript() + " to wobble, ");
+                            outputText("forcing you off balance and preventing you from escaping.");
                         } else if (player.butt.type >= 20) outputText("Your " + chestDesc() + " nearly drag along the ground while the fat of your " + player.skinTone + buttDescript() + " wobbles heavily from side to side, forcing your body off balance and preventing you from moving quick enough to escape.");
                         else outputText("Your " + chestDesc() + " nearly drag along the ground, preventing you from moving quick enough to get escape.");
                     }
@@ -14624,7 +14624,7 @@ public class Combat extends BaseContent {
                     else if (player.hips.type >= 20) {
                         outputText("Your " + hipDescript() + " swing heavily from side to side ");
                         if (player.butt.type >= 20) outputText("causing your " + player.skinTone + buttDescript() + " to wobble obscenely ");
-                        outputText("and forcing your body into an awkward gait that slows you down, preventing you from escaping.");
+                        outputText(", forcing your body into an awkward gait that prevents you from escaping.");
                     }
                     //JUST DA BOOTAH
                     else if (player.butt.type >= 20) outputText("Your " + player.skinTone + buttDescript() + " wobbles so heavily that you're unable to move quick enough to escape.");
@@ -14891,8 +14891,8 @@ public class Combat extends BaseContent {
 		if (monster.plural) fireDMG *= 2;
 		fireDMG *= fireDamageBoostedByDao();
 		fireDMG = Math.round(fireDMG);
-        outputText("You concentrate on the lust flowing in your body, your veins while imaging a joy of sharing flames of love with enemy. Shortly after that lust starts to gather around your hands getting hotter and hotter till it envelop your hands in flames.\n\n");
-        outputText("And with almost orgasmic joy, you sends a wave of flames toward [themonster] while mumbling about 'sharing the flames of love'. ");
+        outputText("You concentrate on the lust flowing in your body, your veins heating up rapidly. With every beat of your heart, the heat rises, the heat in your groin transfering to the palm of your hands. \n\n");
+        outputText("With almost orgasmic joy, you send a wave of flames toward [themonster]. ");
 		doFireDamage(fireDMG, true, true);
         outputText("\n\n");
         enemyAI();
