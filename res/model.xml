@@ -547,6 +547,7 @@
         <cell rect="165,689,130,108" name="legs_fg/snail" dx="42" dy="97"/>
         <cell rect="122,1514,173,86" name="legs_fg/liliraune" dx="2" dy="123"/>
 		<cell rect="1166,1114,70,100" name="legs_fg/sandWorm" dx="61" dy="47"/>
+		<cell rect="1514,798,173,156" name="legs_fg/kirin" dx="57" dy="93"/>
 		<cell rect="1253,1114,70,100" name="legs_truefg/sandWorm" dx="98" dy="45"/>
 		<cell rect="1166,1234,70,100" name="hands/sandWorm" dx="93" dy="46"/>
 		<cell rect="1253,1234,70,100" name="hands_bg/sandWorm" dx="46" dy="35"/>
@@ -566,6 +567,7 @@
         <cell rect="644,1114,173,156" name="legs/centipede" dx="45" dy="75"/>
         <cell rect="722,434,130,108" name="legs/frostWyrm" dx="42" dy="97"/>
         <cell rect="853,543,80,88" name="legs/fairyFlying" dx="65" dy="89"/>
+		<cell rect="1340,798,173,156" name="legs/kirin" dx="57" dy="93"/>
         <cell rect="122,1114,173,156" name="legs_bg/hydra2" dx="29" dy="47"/>
         <cell rect="296,1114,173,156" name="legs_bg/hydra3" dx="29" dy="47"/>
         <cell rect="470,1114,173,156" name="legs_bg/hydra4" dx="29" dy="47"/>
@@ -898,8 +900,10 @@
         <cell rect="61,223,59,32" name="ears/elfin" dx="75" dy="36"/>
         <cell rect="31,223,29,32" name="ears_bg/horse" dx="91" dy="24"/>
         <cell rect="121,190,59,32" name="ears_bg/goat" dx="75" dy="37"/>
+		<cell rect="391,256,59,32" name="ears_bg/kirin" dx="75" dy="37"/>
         <cell rect="91,256,29,32" name="ears/displacer" dx="89" dy="21"/>
         <cell rect="121,223,59,32" name="ears/goat" dx="75" dy="37"/>
+		<cell rect="391,289,59,32" name="ears/kirin" dx="75" dy="37"/>
         <cell rect="121,256,59,32" name="ears_bg/dragon" dx="75" dy="37"/>
         <cell rect="121,289,59,32" name="ears/dragon" dx="75" dy="37"/>
         <cell rect="181,190,29,65" name="ears_bg/fox" dx="90" dy="4"/>
@@ -1066,6 +1070,8 @@
 		<cell rect="911,230,49,58" name="penis/sharkbig" dx="78" dy="106"/>
 		<cell rect="661,290,49,35" name="penis/raiju" dx="79" dy="106"/>
         <cell rect="661,230,49,58" name="penis/raijubig" dx="77" dy="103"/>
+		<cell rect="911,290,49,58" name="penis/kirin" dx="77" dy="103"/>
+        <cell rect="911,350,49,58" name="penis/kirinbig" dx="77" dy="103"/>
         <cell rect="11,290,49,29" name="balls/Bhumansmall" dx="79" dy="104"/>
         <cell rect="11,320,49,29" name="balls/Bhumanlarge" dx="79" dy="104"/>
         <cell rect="11,350,49,29" name="balls/Bhumanhuge" dx="79" dy="105"/>
@@ -1124,8 +1130,10 @@
         <cell rect="561,230,49,58" name="penis_taur/caveWyrmbig_taur" dx="118" dy="135"/>
 		<cell rect="911,200,49,35" name="penis_taur/shark_taur" dx="118" dy="135"/>
         <cell rect="911,230,49,58" name="penis_taur/sharkbig_taur" dx="118" dy="135"/>
-		<cell rect="661,290,49,35" name="penis/raiju_taur" dx="119" dy="135"/>
-        <cell rect="661,230,49,58" name="penis/raijubig_taur" dx="116" dy="134"/>
+		<cell rect="661,290,49,35" name="penis_taur/raiju_taur" dx="119" dy="135"/>
+        <cell rect="661,230,49,58" name="penis_taur/raijubig_taur" dx="116" dy="134"/>
+		<cell rect="911,290,49,58" name="penis_taur/kirin_taur" dx="117" dy="134"/>
+        <cell rect="911,350,49,58" name="penis_taur/kirinbig_taur" dx="117" dy="133"/>
         <cell rect="11,290,49,29" name="balls_taur/Bhumansmall_taur" dx="121" dy="128"/>
         <cell rect="11,320,49,29" name="balls_taur/Bhumanlarge_taur" dx="121" dy="128"/>
         <cell rect="11,350,49,29" name="balls_taur/Bhumanhuge_taur" dx="121" dy="128"/>
@@ -1307,6 +1315,8 @@
         <cell rect="759,561,83,139" name="tail/wendigo_taur" dx="144" dy="49"/>
         <cell rect="508,351,82,69" name="tail/kamaitachi" dx="95" dy="87"/>
         <cell rect="508,351,82,69" name="tail/kamaitachi_taur" dx="144" dy="50"/>
+		<cell rect="593,351,82,69" name="tail/kirin" dx="95" dy="87"/>
+        <cell rect="593,351,82,69" name="tail/kirin_taur" dx="140" dy="88"/>
         <cell rect="255,211,83,139" name="tail_bg/cat" dx="108" dy="40"/>
         <cell rect="255,211,83,139" name="tail_bg/cat_taur" dx="158" dy="51"/>
         <cell rect="339,211,83,139" name="tail_bg/cat2" dx="108" dy="40"/>

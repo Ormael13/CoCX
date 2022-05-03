@@ -3586,7 +3586,7 @@ public class Combat extends BaseContent {
 						damage1B *= 2;
 						damage1Ba *= 2;
 					}
-                    monster.teased(monster.lustVuln * damage1B);
+                    monster.teased(damage1B);
                     if (monster.hasStatusEffect(StatusEffects.BeeVenom)) {
                         monster.addStatusValue(StatusEffects.BeeVenom, 3, damage1Ba);
                     } else monster.createStatusEffect(StatusEffects.BeeVenom, 0, 0, damage1Ba, 0);
@@ -3621,7 +3621,7 @@ public class Combat extends BaseContent {
 						lustdamage *= 2;
 						DBPaa *= 2;
 					}
-                    monster.teased(monster.lustVuln * lustdamage, false);
+                    monster.teased(lustdamage, false);
                     monster.statStore.addBuffObject({tou:-(DBPaa*2)}, "Poison",{text:"Poison"});
                     if (monster.hasStatusEffect(StatusEffects.ManticoreVenom)) {
                         monster.addStatusValue(StatusEffects.ManticoreVenom, 3, DBPaa);
@@ -3661,7 +3661,7 @@ public class Combat extends BaseContent {
 							damage2B *= 2;
 							damage2Ba *= 2;
 						}
-                        monster.teased(monster.lustVuln * damage2B);
+                        monster.teased(damage2B);
                         monster.statStore.addBuffObject({tou:-poisonScaling}, "Poison",{text:"Poison"});
                         if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
                             monster.addStatusValue(StatusEffects.NagaVenom, 3, damage2Ba);
@@ -4592,7 +4592,7 @@ public class Combat extends BaseContent {
                                 else outputText("\n[Themonster] shiver" + s + " and moan" + s + " involuntarily from the injected chemicals effects.");
                             }
                         }
-                        monster.teased(monster.lustVuln * rangeweaponLustDmg, false);
+                        monster.teased(rangeweaponLustDmg, false);
                     }
                 }
                 outputText("\n\n");
@@ -4863,13 +4863,13 @@ public class Combat extends BaseContent {
         damage = Math.round(damage);
         if (player.hasKeyItem("Lustnade Launcher") >= 0) {
             player.createStatusEffect(StatusEffects.CooldownLustnadeLauncher, 5, 0, 0, 0);
-            outputText("You ready the Lustnade launcher and shoot. The exploding container covers the entire area in pink mist, massively arousing everyone in the vicinity for " + damage + " lust damage.");
-            monster.teased(damage);
+            outputText("You ready the Lustnade launcher and shoot. The exploding container covers the entire area in pink mist, massively arousing everyone in the vicinity for " + Math.round(monster.lustVuln * damage) + " lust damage.");
+            monster.teased(Math.round(monster.lustVuln * monster.lustVuln * damage));
         } else {
             outputText("You spray a cloud of aphrodisiac with your gas gun. [monster a] [monster name] tries to pinch [monster his] nose and hold [monster his] breath ");
             if (rand(100) > 25) {
-                outputText("but it’s too late and you can see arousal flushing [monster a] [monster name] skin for " + damage + " lust damage.");
-                monster.teased(damage);
+                outputText("but it’s too late and you can see arousal flushing [monster a] [monster name] skin for " + Math.round(monster.lustVuln * damage) + " lust damage.");
+                monster.teased(Math.round(monster.lustVuln * damage));
             } else outputText("and it worked, to an extent, allowing your opponent to retreat away from the gas.");
         }
         if (monster.lust >= monster.maxLust()) doNext(endLustVictory);
@@ -5278,7 +5278,7 @@ public class Combat extends BaseContent {
                         damage3B *= damage3Ba;
                         poisonScaling *= damage3Ba;
                         damage3B *= 1 + (poisonScaling / 10);
-                        monster.teased(monster.lustVuln * damage3B);
+                        monster.teased(Math.round(monster.lustVuln * damage3B));
                         monster.statStore.addBuffObject({tou:-poisonScaling}, "Poison",{text:"Poison"});
                         if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
                             monster.addStatusValue(StatusEffects.NagaVenom, 3, damage3Ba);
@@ -5538,19 +5538,19 @@ public class Combat extends BaseContent {
                     lustdamage *= 0.14;
                     if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) lustDmg2 *= 2;
                     lustdamage *= lustDmg2;
-                    monster.teased(monster.lustVuln * lustdamage, false);
+                    monster.teased(Math.round(monster.lustVuln * lustdamage), false);
                     monster.statStore.addBuffObject({tou:-(lustDmg2*2)}, "Poison",{text:"Poison"});
                     player.tailVenom -= player.VenomWebCost();
                     flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
                     if (player.tailVenom >= player.VenomWebCost()) {
-                        monster.teased(monster.lustVuln * lustdamage, false);
+                        monster.teased(Math.round(monster.lustVuln * lustdamage), false);
                         monster.statStore.addBuffObject({tou:-(lustDmg2*2)}, "Poison",{text:"Poison"});
                         player.tailVenom -= player.VenomWebCost();
                         flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
                     }
                     var dBd1c:Number = 1;
                     if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) dBd1c *= 2;
-                    monster.teased(monster.lustVuln * lustdamage * dBd1c, false);
+                    monster.teased(Math.round(monster.lustVuln * lustdamage * dBd1c), false);
                     combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
                     monster.statStore.addBuffObject({spe:-(dBd1c*10)}, "Poison",{text:"Poison"});
                     if (monster.hasStatusEffect(StatusEffects.ManticoreVenom)) monster.addStatusValue(StatusEffects.ManticoreVenom,3,(dBd1c*5));
@@ -5582,7 +5582,7 @@ public class Combat extends BaseContent {
                 if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) lustDmg3 *= 2;
                 lustdamage2 *= lustDmg3;
                 if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) dBd2c *= 2;
-                monster.teased(monster.lustVuln * lustdamage2 * dBd2c, false);
+                monster.teased(Math.round(monster.lustVuln * lustdamage2 * dBd2c), false);
                 combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
                 if (monster.hasStatusEffect(StatusEffects.BeeVenom)) monster.addStatusValue(StatusEffects.BeeVenom,3,(dBd2c*5));
                 else monster.createStatusEffect(StatusEffects.BeeVenom, 0, 0, (dBd2c*5), 0);
@@ -6144,10 +6144,10 @@ public class Combat extends BaseContent {
 				}
 				else if (player.weapon == weapons.MGSWORD) doMagicDamage(damage, true, true);
 				else if (player.weapon == weapons.PHALLUS) {
-					if (player.statusEffectv1(StatusEffects.ThePhalluspear1) == 1) monster.teased(monster.lustVuln * Math.round(damage * 0.05));
+					if (player.statusEffectv1(StatusEffects.ThePhalluspear1) == 1) monster.teased(Math.round(monster.lustVuln * damage * 0.05));
 					else {
 						doPhysicalDamage(Math.round(damage * 0.75), true, true);
-						monster.teased(monster.lustVuln * Math.round(damage * 0.0125));
+						monster.teased(Math.round(monster.lustVuln * damage * 0.0125));
 					}
 				}
                 else {
@@ -6288,7 +6288,7 @@ public class Combat extends BaseContent {
                 if (player.hasPerk(PerkLib.PoisonNails) && player.isFistOrFistWeapon()) {
                     var lust0damage:Number = 35 + rand(player.lib / 10);
                     lust0damage *= 0.14;
-                    monster.teased(monster.lustVuln * lust0damage);
+                    monster.teased(Math.round(monster.lustVuln * lust0damage));
                     monster.statStore.addBuffObject({tou:-2, spe:-2}, "Poison",{text:"Poison"});
                     if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
                         monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
@@ -6301,111 +6301,113 @@ public class Combat extends BaseContent {
                     if (monster.lustVuln == 0) {
                         outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
                     }
-                    if (player.tailType == Tail.BEE_ABDOMEN) {
-                        outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
-                        var damageB:Number = 35 + rand(player.lib / 10);
-						var damageBa:Number = 1;
-                        if (player.level < 10) damageB += 20 + (player.level * 3);
-                        else if (player.level < 20) damageB += 50 + (player.level - 10) * 2;
-                        else if (player.level < 30) damageB += 70 + (player.level - 20) * 1;
-                        else damageB += 80;
-                        damageB *= 0.2;
-						if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) damageBa *= 2;
-						damageB *= damageBa;
-                        monster.teased(monster.lustVuln * damageB);
-                        if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
-                            monster.addStatusValue(StatusEffects.NagaVenom, 3, damageBa);
-                        } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, damageBa, 0);
-                        player.tailVenom -= player.VenomWebCost();
-						flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
-                    }
-                    if (player.tailType == Tail.SCORPION) {
-                        outputText("  [monster he] seems to be effected by the poison, its movement turning sluggish.");
-						var damBa:Number = 1;
-						if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) damBa *= 2;
-                        monster.statStore.addBuffObject({spe:-(damBa*2)}, "Poison",{text:"Poison"});
-                        if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
-                            monster.addStatusValue(StatusEffects.NagaVenom, 3, damBa);
-                        } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, damBa, 0);
-                        player.tailVenom -= player.VenomWebCost();
-						flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
-                    }
-                    if (player.tailType == Tail.MANTICORE_PUSSYTAIL) {
-                        outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
-                        var lustdamage:Number = 35 + rand(player.lib / 10);
-						var DBPaaa:Number = 1;
-						if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) DBPaaa *= 2;
-                        if (player.level < 10) lustdamage += 20 + (player.level * 3);
-                        else if (player.level < 20) lustdamage += 50 + (player.level - 10) * 2;
-                        else if (player.level < 30) lustdamage += 70 + (player.level - 20) * 1;
-                        else lustdamage += 80;
-                        if (player.hasPerk(PerkLib.RacialParagon)) lustdamage *= RacialParagonAbilityBoost();
-                        lustdamage *= 0.14;
-						lustdamage *= DBPaaa;
-                        monster.teased(monster.lustVuln * lustdamage);
-                        monster.statStore.addBuffObject({tou:-(DBPaaa*2)}, "Poison",{text:"Poison"});
-                        if (monster.hasStatusEffect(StatusEffects.ManticoreVenom)) {
-                            monster.addStatusValue(StatusEffects.ManticoreVenom, 3, DBPaaa);
-                        } else monster.createStatusEffect(StatusEffects.ManticoreVenom, 0, 0, DBPaaa, 0);
-                        player.tailVenom -= player.VenomWebCost();
-						flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
-                    }
-                    if (player.faceType == Face.SNAKE_FANGS) {
-                        outputText("  [monster he] seems to be effected by the poison, its movement turning sluggish.");
-						var DBPaaaa:Number = 1;
-						if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) DBPaaaa *= 2;
-                        monster.statStore.addBuffObject({spe:-DBPaaaa}, "Poison",{text:"Poison"});
-                        var venomType:StatusEffectType = StatusEffects.NagaVenom;
-                        if (player.nagaScore() >= 23) venomType = StatusEffects.ApophisVenom;
-                        if (monster.hasStatusEffect(venomType)) {
-                            monster.addStatusValue(venomType, 2, 0.4);
-                            monster.addStatusValue(venomType, 1, (DBPaaaa*0.4));
-                        } else monster.createStatusEffect(venomType, (DBPaaaa*0.4), 0.4, 0, 0);
-                        player.tailVenom -= player.VenomWebCost();
-						flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
-                    }
-                    if (player.faceType == Face.SPIDER_FANGS) {
-                        if (player.lowerBody == LowerBody.ATLACH_NACHA){
-                            outputText("  [monster he] seems to be affected by the poison, showing increasing sign of weakness and arousal.");
-                            var damage4B:Number = 35 + rand(player.lib / 10);
-                            var poisonScaling:Number = 1;
-							var damage4Ba:Number = 1;
+					else {
+						if (player.tailType == Tail.BEE_ABDOMEN) {
+							outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
+							var damageB:Number = 35 + rand(player.lib / 10);
+							var damageBa:Number = 1;
+							if (player.level < 10) damageB += 20 + (player.level * 3);
+							else if (player.level < 20) damageB += 50 + (player.level - 10) * 2;
+							else if (player.level < 30) damageB += 70 + (player.level - 20) * 1;
+							else damageB += 80;
+							damageB *= 0.2;
+							if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) damageBa *= 2;
+							damageB *= damageBa;
+							monster.teased(Math.round(monster.lustVuln * damageB));
+							if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
+								monster.addStatusValue(StatusEffects.NagaVenom, 3, damageBa);
+							} else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, damageBa, 0);
+							player.tailVenom -= player.VenomWebCost();
+							flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
+						}
+						if (player.tailType == Tail.SCORPION) {
+							outputText("  [monster he] seems to be effected by the poison, its movement turning sluggish.");
+							var damBa:Number = 1;
+							if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) damBa *= 2;
+							monster.statStore.addBuffObject({spe:-(damBa*2)}, "Poison",{text:"Poison"});
+							if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
+								monster.addStatusValue(StatusEffects.NagaVenom, 3, damBa);
+							} else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, damBa, 0);
+							player.tailVenom -= player.VenomWebCost();
+							flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
+						}
+						if (player.tailType == Tail.MANTICORE_PUSSYTAIL) {
+							outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
+							var lustdamage:Number = 35 + rand(player.lib / 10);
+							var DBPaaa:Number = 1;
+							if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) DBPaaa *= 2;
+							if (player.level < 10) lustdamage += 20 + (player.level * 3);
+							else if (player.level < 20) lustdamage += 50 + (player.level - 10) * 2;
+							else if (player.level < 30) lustdamage += 70 + (player.level - 20) * 1;
+							else lustdamage += 80;
+							if (player.hasPerk(PerkLib.RacialParagon)) lustdamage *= RacialParagonAbilityBoost();
+							lustdamage *= 0.14;
+							lustdamage *= DBPaaa;
+							monster.teased(Math.round(monster.lustVuln * lustdamage));
+							monster.statStore.addBuffObject({tou:-(DBPaaa*2)}, "Poison",{text:"Poison"});
+							if (monster.hasStatusEffect(StatusEffects.ManticoreVenom)) {
+								monster.addStatusValue(StatusEffects.ManticoreVenom, 3, DBPaaa);
+							} else monster.createStatusEffect(StatusEffects.ManticoreVenom, 0, 0, DBPaaa, 0);
+							player.tailVenom -= player.VenomWebCost();
+							flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
+						}
+						if (player.faceType == Face.SNAKE_FANGS) {
+							outputText("  [monster he] seems to be effected by the poison, its movement turning sluggish.");
+							var DBPaaaa:Number = 1;
 							if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) DBPaaaa *= 2;
-                            poisonScaling += player.lib/100;
-                            poisonScaling += player.tou/100;
-                            if (player.level < 10) damage4B += 20 + (player.level * 3);
-                            else if (player.level < 20) damage4B += 50 + (player.level - 10) * 2;
-                            else if (player.level < 30) damage4B += 70 + (player.level - 20) * 1;
-                            else damage4B += 80;
-                            damage4B *= 0.2;
-							damage4B *= damage4Ba;
-                            damage4B *= 1+(poisonScaling/10);
-							poisonScaling *= damage4Ba;
-                            monster.teased(monster.lustVuln * damage4B);
-                            monster.statStore.addBuffObject({tou:-poisonScaling}, "Poison",{text:"Poison"});
-                            if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
-                                monster.addStatusValue(StatusEffects.NagaVenom, 3, damage4Ba);
-                            } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, damage4Ba, 0);
-                            player.tailVenom -= player.VenomWebCost();
+							monster.statStore.addBuffObject({spe:-DBPaaaa}, "Poison",{text:"Poison"});
+							var venomType:StatusEffectType = StatusEffects.NagaVenom;
+							if (player.nagaScore() >= 23) venomType = StatusEffects.ApophisVenom;
+							if (monster.hasStatusEffect(venomType)) {
+								monster.addStatusValue(venomType, 2, 0.4);
+								monster.addStatusValue(venomType, 1, (DBPaaaa*0.4));
+							} else monster.createStatusEffect(venomType, (DBPaaaa*0.4), 0.4, 0, 0);
+							player.tailVenom -= player.VenomWebCost();
 							flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
-                        } else {
-                            outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
-                            var lustDmg:int = 6 * monster.lustVuln;
-							if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) lustDmg *= 2;
-                            monster.teased(lustDmg);
-                            if (monster.lustVuln > 0) {
-                                monster.lustVuln += 0.01;
-                                if (monster.lustVuln > 1) monster.lustVuln = 1;
-                            }
-                            player.tailVenom -= player.VenomWebCost();
-							flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
-                        }
-                    }
-                    if (monster.lust >= monster.maxLust()) {
-                        outputText("\n\n");
-                        checkAchievementDamage(damage);
-                        doNext(endLustVictory);
-                    }
+						}
+						if (player.faceType == Face.SPIDER_FANGS) {
+							if (player.lowerBody == LowerBody.ATLACH_NACHA){
+								outputText("  [monster he] seems to be affected by the poison, showing increasing sign of weakness and arousal.");
+								var damage4B:Number = 35 + rand(player.lib / 10);
+								var poisonScaling:Number = 1;
+								var damage4Ba:Number = 1;
+								if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) DBPaaaa *= 2;
+								poisonScaling += player.lib/100;
+								poisonScaling += player.tou/100;
+								if (player.level < 10) damage4B += 20 + (player.level * 3);
+								else if (player.level < 20) damage4B += 50 + (player.level - 10) * 2;
+								else if (player.level < 30) damage4B += 70 + (player.level - 20) * 1;
+								else damage4B += 80;
+								damage4B *= 0.2;
+								damage4B *= damage4Ba;
+								damage4B *= 1+(poisonScaling/10);
+								poisonScaling *= damage4Ba;
+								monster.teased(Math.round(monster.lustVuln * damage4B));
+								monster.statStore.addBuffObject({tou:-poisonScaling}, "Poison",{text:"Poison"});
+								if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
+									monster.addStatusValue(StatusEffects.NagaVenom, 3, damage4Ba);
+								} else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, damage4Ba, 0);
+								player.tailVenom -= player.VenomWebCost();
+								flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
+							} else {
+								outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
+								var lustDmg:int = 6 * monster.lustVuln;
+								if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) lustDmg *= 2;
+								monster.teased(lustDmg);
+								if (monster.lustVuln > 0) {
+									monster.lustVuln += 0.01;
+									if (monster.lustVuln > 1) monster.lustVuln = 1;
+								}
+								player.tailVenom -= player.VenomWebCost();
+								flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
+							}
+						}
+						if (monster.lust >= monster.maxLust()) {
+							outputText("\n\n");
+							checkAchievementDamage(damage);
+							doNext(endLustVictory);
+						}
+					}
                     outputText("\n");
                 } else outputText("  You do not have enough venom to apply on [weapon]!\n");
             }
@@ -7037,7 +7039,7 @@ public class Combat extends BaseContent {
 		if (player.weapon == weapons.VENCLAW && monster.lustVuln > 0) {
             outputText("\n[monster he] seems to be affected by the poison, showing increasing sign of arousal.");
             var Ldamage:Number = 8 + rand(3);
-            monster.teased(monster.lustVuln * Ldamage);
+            monster.teased(Math.round(monster.lustVuln * Ldamage));
             monster.statStore.addBuffObject({tou:-1}, "Poison",{text:"Poison"});
             if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
                 monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
@@ -7546,30 +7548,30 @@ public class Combat extends BaseContent {
                 if (lock) {
                     if (percent > 30) {
                         if (random_value <= 20) outputText("Due to your recklessness, you barely hit [monster a] [monster name]. ");
-                        if ((random_value > 20) && (random_value <= 40)) outputText("You underestimated [monster a] [monster name]'s moves and just slighty wounded your foe. ");
-                        if ((random_value > 40) && (random_value <= 70)) outputText("As your [weapon] cracked the ground, you wounder how lucky [monster a] [monster name] are. ");
+                        if ((random_value > 20) && (random_value <= 40)) outputText("You underestimated [monster a] [monster name]'s moves, your [weapon] grazing your foe. ");
+                        if ((random_value > 40) && (random_value <= 70)) outputText("As you swing your [weapon] down at [monster a] [monster name], they dodge back. your [weapon] cracks the ground below. [monster a] [monster name] was very lucky they didn't take that hit! ");
                         if ((random_value > 70) && (random_value <= 85)) outputText("You rush towards your foe. " + firstLetterUpperCase("[monster a]") + " [monster name] trying to parry your strike, but it's not enough to stop your hard blow! ");
-                        if ((random_value > 85) && (random_value <= 100)) outputText("Your foe watching you coming closer and preparing to deal with your attack. But you move so fast that [monster a] [monster name] did not had time to react on your powerful slash! ");
-                        if ((random_value > 100) && (random_value < higher_threshold)) outputText("As you watch [monster a] [monster name] moves like in the slow motion, you easily hit the vital point of your foe! ");
-                        if (random_value == higher_threshold) outputText("You unleashed a deadly blow with all your might upon [monster a] [monster name]! ");
+                        if ((random_value > 85) && (random_value <= 100)) outputText("Your foe watches you coming closer, trying to dodge. You move so fast that [monster a] [monster name] doesn't have time to react to your powerful strike! ");
+                        if ((random_value > 100) && (random_value < higher_threshold)) outputText("As you watch [monster a] [monster name] recoils. Time seems to slow, and you bat aside your foe's clumsy block, landing a hard blow into their vitals.");
+                        if (random_value == higher_threshold) outputText("You crush their defenses, landing a deadly blow on [monster a] [monster name]! ");
                     }
                 }
                 if (percent <= 30) {
-                    if (random_value <= 20) outputText("You were tricked by stance and barely hit [monster a] [monster name]. ");
+                    if (random_value <= 20) outputText("[monster a] [monster name] feints, and you fall for it, your [weapon] missing outright. ");
                     if ((random_value > 20) && (random_value <= 40)) outputText("You underestimated [monster a] [monster name]'s moves and just slighty wounded your foe. "); // copy-pasta
-                    if ((random_value > 40) && (random_value <= 70)) outputText("You face the splendid moves of [monster a] [monster name] which prevent you from attacking! But your will doesn't falter so easily and with the next swing you manage to strike your foe! ");
+                    if ((random_value > 40) && (random_value <= 70)) outputText(" [monster a] [monster name] dodges your first strike handily, but their movements unbalance them, and you rush in. Your next swing lands solidly! ");
                     if ((random_value > 70) && (random_value <= 85)) outputText("You hit [monster a] [monster name]! "); // default one, sorry :D
                     if ((random_value > 85) && (random_value <= 100)) outputText("Predicting [monster a] [monster name] moves, you strike a powerful blow! ");
                     if ((random_value > 100) && (random_value < higher_threshold)) outputText("Your mighty blow made [monster a] [monster name] stagger for a moment! ");
                     if (random_value == higher_threshold) outputText("Nimbly shortening the distance, you hit [monster a] [monster name] with overwhelming power! ");
                 } else if (!lock) {
-                    if (random_value <= 20) outputText("You hit your opponent, but defence stance of [monster a] [monster name] almost totally absorbed your attack. ");
-                    if ((random_value > 20) && (random_value <= 40)) outputText("You hit [monster a] [monster name], but [monster.pronoun1] moves so deft that yours strike loses most of its strength. ");
-                    if ((random_value > 40) && (random_value <= 70)) outputText("As you hurtle toward [monster a] [monster name], you draw your weapon and prepare to hit. Getting close enough, you swing and crush your [weapon] onto [monster.pronoun2]. No matter how agile your foe is, [monster.pronoun1] wasn't able to evade your attack! ");
-                    if ((random_value > 70) && (random_value <= 85)) outputText("You take the [weapon] in steady grip of your hands and widely swing at the foe. " + firstLetterUpperCase("[monster a]") + " [monster name] predicted your attack, but you manage to change it's trajectory just in time! ");
+                    if (random_value <= 20) outputText("You hit your opponent, but the [monster a] [monster name] catches the blow handily, rendering your blow useless. ");
+                    if ((random_value > 20) && (random_value <= 40)) outputText("You hit [monster a] [monster name], but [monster.pronoun1] moves with the blow. It lands, but most of the impact is gone. ");
+                    if ((random_value > 40) && (random_value <= 70)) outputText("As you hurtle toward [monster a] [monster name], you ready your [weapon] and prepare to hit. Getting close enough, you swing and crush your [weapon] onto [monster.pronoun2]. The [monster.pronoun1] wasn't able to evade your attack! ");
+                    if ((random_value > 70) && (random_value <= 85)) outputText("You take your [weapon] in steady grip of your hands and widely swing at the foe. " + firstLetterUpperCase("[monster a]") + " [monster name] predicted your attack, but you manage to ajdust, landing the blow anyway. ");
                     if ((random_value > 85) && (random_value <= 100)) outputText("You miraculously reflected [monster a] [monster name] attack and did riposte to [monster.pronoun2]! ");
-                    if ((random_value > 100) && (random_value < higher_threshold)) outputText("Fighting on the of edge of your capabilities, you managed to deal several certain hits to [monster a] [monster name]! ");
-                    if (random_value == higher_threshold) outputText("You found a gap in [monster a] [monster name]'s defence. Using perfect timing, you put all your strength to break through it! ");
+                    if ((random_value > 100) && (random_value < higher_threshold)) outputText("With a sudden burst of adrenaline, you managed to get inside their guard, landing several hard blows on [monster a] [monster name]! ");
+                    if (random_value == higher_threshold) outputText("You found a gap in [monster a] [monster name]'s defence. You block a strike, then take advantage of the opening. Your [weapon] lands a devastating blow, right in their weak point! ");
                 }
             }
             random_value /= 100; // back to %
@@ -7633,29 +7635,29 @@ public class Combat extends BaseContent {
             // damage dialogs for just attack
             if ((MDODialogs) && (!isBowDamageMDO) && (MDOCount == 1)) {
                 if (speed_difference > 200) {
-                    if (random_value <= 20) outputText("Due to your recklessness, you barely hit [monster a] [monster name]. ");
-                    if ((random_value > 20) && (random_value <= 40)) outputText("You underestimated [monster a] [monster name]'s moves and just slighty wounded your foe. ");
-                    if ((random_value > 40) && (random_value <= 70)) outputText("As your [weapon] cracked the ground, you wounder how lucky [monster a] [monster name] are. ");
-                    if ((random_value > 70) && (random_value <= 85)) outputText("You rush towards your foe. " + firstLetterUpperCase("[monster a]") + " [monster name] trying to parry your strike, but it's not enough to stop your hard blow! ");
-                    if ((random_value > 85) && (random_value <= 100)) outputText("Your foe watching you coming closer and preparing to deal with your attack. But you move so fast that [monster a] [monster name] did not had time to react on your powerful slash! ");
-                    if ((random_value > 100) && (random_value < higher_threshold)) outputText("As you watch [monster a] [monster name] moves like in the slow motion, you easily hit the vital point of your foe! ");
-                    if (random_value == higher_threshold) outputText("You unleashed a deadly blow with all your might upon [monster a] [monster name]! ");
+                    if (random_value <= 20) outputText("Due to your recklessness, your strike is poorly aimed, missing [monster a] [monster name]. ");
+                    if ((random_value > 20) && (random_value <= 40)) outputText("You underestimated [monster a] [monster name]'s moves, your [weapon] grazing your foe. ");
+                        if ((random_value > 40) && (random_value <= 70)) outputText("As you swing your [weapon] down at [monster a] [monster name], they dodge back. your [weapon] cracks the ground below. [monster a] [monster name] was very lucky they didn't take that hit! ");
+                        if ((random_value > 70) && (random_value <= 85)) outputText("You rush towards your foe. " + firstLetterUpperCase("[monster a]") + " [monster name] trying to parry your strike, but it's not enough to stop your hard blow! ");
+                        if ((random_value > 85) && (random_value <= 100)) outputText("Your foe watches you coming closer, trying to dodge. You move so fast that [monster a] [monster name] doesn't have time to react to your powerful strike! ");
+                        if ((random_value > 100) && (random_value < higher_threshold)) outputText("As you watch [monster a] [monster name] recoils. Time seems to slow, and you bat aside your foe's clumsy block, landing a hard blow into their vitals.");
+                        if (random_value == higher_threshold) outputText("You crush their defenses, landing a deadly blow on [monster a] [monster name]! ");
                 } else if (speed_difference >= 0) {
-                    if (random_value <= 20) outputText("You were tricked by stance and barely hit [monster a] [monster name]. ");
+                    if (random_value <= 20) outputText("[monster a] [monster name] feints, and you fall for it, your [weapon] missing outright. ");
                     if ((random_value > 20) && (random_value <= 40)) outputText("You underestimated [monster a] [monster name]'s moves and just slighty wounded your foe. "); // copy-pasta
-                    if ((random_value > 40) && (random_value <= 70)) outputText("You face the splendid moves of [monster a] [monster name] which prevent you from attacking! But your will doesn't falter so easily and with the next swing you manage to strike your foe! ");
+                    if ((random_value > 40) && (random_value <= 70)) outputText(" [monster a] [monster name] dodges your first strike handily, but their movements unbalance them, and you rush in. Your next swing lands solidly! ");
                     if ((random_value > 70) && (random_value <= 85)) outputText("You hit [monster a] [monster name]! "); // default one, sorry :D
                     if ((random_value > 85) && (random_value <= 100)) outputText("Predicting [monster a] [monster name] moves, you strike a powerful blow! ");
                     if ((random_value > 100) && (random_value < higher_threshold)) outputText("Your mighty blow made [monster a] [monster name] stagger for a moment! ");
                     if (random_value == higher_threshold) outputText("Nimbly shortening the distance, you hit [monster a] [monster name] with overwhelming power! ");
                 } else  {
-                    if (random_value <= 20) outputText("You hit your opponent, but defence stance of [monster a] [monster name] almost totally absorbed your attack. ");
-                    if ((random_value > 20) && (random_value <= 40)) outputText("You hit [monster a] [monster name], but [monster.pronoun1] moves so deft that yours strike loses most of its strength. ");
-                    if ((random_value > 40) && (random_value <= 70)) outputText("As you hurtle toward [monster a] [monster name], you draw your weapon and prepare to hit. Getting close enough, you swing and crush your [weapon] onto [monster.pronoun2]. No matter how agile your foe is, [monster.pronoun1] wasn't able to evade your attack! ");
-                    if ((random_value > 70) && (random_value <= 85)) outputText("You take the [weapon] in steady grip of your hands and widely swing at the foe. " + firstLetterUpperCase("[monster a]") + " [monster name] predicted your attack, but you manage to change it's trajectory just in time! ");
+                    if (random_value <= 20) outputText("You hit your opponent, but the [monster a] [monster name] catches the blow handily, rendering your blow useless. ");
+                    if ((random_value > 20) && (random_value <= 40)) outputText("You hit [monster a] [monster name], but [monster.pronoun1] moves with the blow. It lands, but most of the impact is gone. ");
+                    if ((random_value > 40) && (random_value <= 70)) outputText("As you hurtle toward [monster a] [monster name], you ready your [weapon] and prepare to hit. Getting close enough, you swing and crush your [weapon] onto [monster.pronoun2]. The [monster.pronoun1] wasn't able to evade your attack! ");
+                    if ((random_value > 70) && (random_value <= 85)) outputText("You take your [weapon] in steady grip of your hands and widely swing at the foe. " + firstLetterUpperCase("[monster a]") + " [monster name] predicted your attack, but you manage to ajdust, landing the blow anyway. ");
                     if ((random_value > 85) && (random_value <= 100)) outputText("You miraculously reflected [monster a] [monster name] attack and did riposte to [monster.pronoun2]! ");
-                    if ((random_value > 100) && (random_value < higher_threshold)) outputText("Fighting on the of edge of your capabilities, you managed to deal several certain hits to [monster a] [monster name]! ");
-                    if (random_value == higher_threshold) outputText("You found a gap in [monster a] [monster name]'s defence. Using perfect timing, you put all your strength to break through it! ");
+                    if ((random_value > 100) && (random_value < higher_threshold)) outputText("With a sudden burst of adrenaline, you managed to get inside their guard, landing several hard blows on [monster a] [monster name]! ");
+                    if (random_value == higher_threshold) outputText("You found a gap in [monster a] [monster name]'s defence. You block a strike, then take advantage of the opening. Your [weapon] lands a devastating blow, right in their weak point! ");
                 }
             }
             random_value /= 100; // back to %
@@ -9494,8 +9496,8 @@ public class Combat extends BaseContent {
             if (lustDmg > (monster.maxLust()/10)) lustDmg = Math.round(monster.maxLust()/10);
             outputText("[monster A] [monster name] slowly succumbs to [monster his] basest desires as your aura of corruption seeps through [monster him].");
             if (monster.cor < 100) outputText("Your victims purity is slowly becoming increasingly eroded by your seeping corruption.");
-            lustDmg = Math.round(lustDmg);
-            monster.teased(monster.lustVuln * lustDmg, false);
+            lustDmg = Math.round(monster.lustVuln * lustDmg);
+            monster.teased(lustDmg, false);
             outputText("\n\n");
             bonusExpAfterSuccesfullTease();
         }
@@ -9539,7 +9541,7 @@ public class Combat extends BaseContent {
                 else outputText("The effects of your pollen are quite pronounced on [monster a] [monster name] as [monster he] begin to shake, stealing glances at your body.");
             }
             if (lustDmgA > (monster.maxLust()/10)) lustDmgA = Math.round(monster.maxLust()/10);
-            lustDmgA = Math.round(lustDmgA);
+            lustDmgA = Math.round(monster.lustVuln * lustDmgA);
             monster.teased(lustDmgA, false);
             outputText("\n\n");
             bonusExpAfterSuccesfullTease();
@@ -11613,7 +11615,7 @@ public class Combat extends BaseContent {
                 }
             }
             monster.statStore.addBuffObject({str:-monster.statusEffectv1(StatusEffects.NagaVenom), spe:-monster.statusEffectv1(StatusEffects.NagaVenom)}, "Poison",{text:"Poison"});
-            if (monster.statusEffectv3(StatusEffects.NagaVenom) >= 1) monster.lust += monster.statusEffectv3(StatusEffects.NagaVenom);
+            if (monster.statusEffectv3(StatusEffects.NagaVenom) >= 1 && monster.lustVuln > 0) monster.lust += monster.statusEffectv3(StatusEffects.NagaVenom);
             if (combatIsOver()) return;
         }
         //Apophis Venom
@@ -11637,12 +11639,10 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
                 damage1B *= 2;
             }
-            monster.teased(monster.lustVuln * damage1B);
+            monster.teased(Math.round(monster.lustVuln * damage1B));
             combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
-
             monster.statStore.addBuffObject({str:-monster.statusEffectv1(StatusEffects.ApophisVenom)*2, spe:-monster.statusEffectv1(StatusEffects.ApophisVenom)*2, tou:-monster.statusEffectv1(StatusEffects.ApophisVenom)*2}, "Poison",{text:"Poison"});
-
-            if (monster.statusEffectv3(StatusEffects.ApophisVenom) >= 1) monster.lust += monster.statusEffectv3(StatusEffects.ApophisVenom);
+            if (monster.statusEffectv3(StatusEffects.ApophisVenom) >= 1 && monster.lustVuln > 0) monster.lust += monster.statusEffectv3(StatusEffects.ApophisVenom);
             if (combatIsOver()) return;
         }
         //Bee Venom
@@ -11666,12 +11666,12 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
                 damage1B *= 2;
             }
-            monster.teased(monster.lustVuln * damage1B);
+            monster.teased(Math.round(monster.lustVuln * damage1B));
             combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
             monster.lustVuln += 0.05;
             monster.statStore.addBuffObject({tou:-monster.statusEffectv1(StatusEffects.ManticoreVenom)*2}, "Poison",{text:"Poison"});
 
-            if (monster.statusEffectv3(StatusEffects.BeeVenom) >= 1) monster.lust += monster.statusEffectv3(StatusEffects.BeeVenom);
+            if (monster.statusEffectv3(StatusEffects.BeeVenom) >= 1 && monster.lustVuln > 0) monster.lust += monster.statusEffectv3(StatusEffects.BeeVenom);
             if (combatIsOver()) return;
         }
         //Jabberwocky Poison Breath
@@ -11695,12 +11695,12 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
                 damage1B *= 2;
             }
-            monster.teased(monster.lustVuln * damage1B);
+            monster.teased(Math.round(monster.lustVuln * damage1B));
             combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
             monster.lustVuln += 0.05;
             monster.statStore.addBuffObject({tou:-monster.statusEffectv1(StatusEffects.JabberwockyVenom)*2}, "Poison",{text:"Poison"});
 
-            if (monster.statusEffectv3(StatusEffects.JabberwockyVenom) >= 1) monster.lust += monster.statusEffectv3(StatusEffects.JabberwockyVenom);
+            if (monster.statusEffectv3(StatusEffects.JabberwockyVenom) >= 1 && monster.lustVuln > 0) monster.lust += monster.statusEffectv3(StatusEffects.JabberwockyVenom);
             if (combatIsOver()) return;
         }
         //Manticore Venom
@@ -11724,12 +11724,10 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
                 damage1B *= 2;
             }
-            monster.teased(monster.lustVuln * damage1B);
+            monster.teased(Math.round(monster.lustVuln * damage1B));
             combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
-
             monster.statStore.addBuffObject({tou:-monster.statusEffectv1(StatusEffects.ManticoreVenom)*2}, "Poison",{text:"Poison"});
-
-            if (monster.statusEffectv3(StatusEffects.ManticoreVenom) >= 1) monster.lust += monster.statusEffectv3(StatusEffects.ManticoreVenom);
+            if (monster.statusEffectv3(StatusEffects.ManticoreVenom) >= 1 && monster.lustVuln > 0) monster.lust += monster.statusEffectv3(StatusEffects.ManticoreVenom);
             if (combatIsOver()) return;
         }
         if (monster.short == "harpy") {
@@ -12238,7 +12236,7 @@ public class Combat extends BaseContent {
             if (monster.statusEffectv1(StatusEffects.OrcaHasSmashed) >= 1) {
                 damage *= 1.50;
                 monster.addStatusValue(StatusEffects.OrcaHasSmashed, 1, -1);
-                outputText("This blow is particularly vicious as your opponent defences were previously crushed. ");
+                outputText("This blow lands hard on your opponent's already crushed defenses. ");
             }
             if (player.hasPerk(PerkLib.RacialParagon)) damage *= RacialParagonAbilityBoost();
             damage *= SAMulti;
@@ -12259,7 +12257,7 @@ public class Combat extends BaseContent {
             }
             damage = Math.round(damage);
             //Dealing damage -
-            outputText("You receive your falling opponent on the length of your weapon running [monster him] through. ");
+            outputText("You brace your [weapon], impaling your falling opponent on the length of your weapon.  ");
             doPhysicalDamage(damage, true, true);
             outputText(" damage");
             if (crit) {
@@ -12317,7 +12315,7 @@ public class Combat extends BaseContent {
             monster.removeStatusEffect(StatusEffects.OrcaHasWacked);
             monster.createStatusEffect(StatusEffects.OrcaHasWackedFinish, 0, 0, 0, 0);
         }
-        outputText("[monster He] heaves, trying to catch [monster his] breath before [monster he] stands back up, apparently prepared to fight some more. ");
+        outputText("[monster He] heaves, trying to catch [monster his] breath before [monster he] stands back up, preparing to fight once more. ");
         outputText("\n\n");
         enemyAI();
     }
@@ -12383,7 +12381,7 @@ public class Combat extends BaseContent {
         } else {
             outputText("You launch yourself at your opponent,");
             if (40 + rand(player.spe) > monster.spe) {
-                outputText("grappling it with your powerful pincers as you prepare to crush it to death.");
+                outputText("grabbing it with your powerful pincers as you prepare to crush it to death.");
             }
             //Failure
             else {
@@ -12409,7 +12407,7 @@ public class Combat extends BaseContent {
         clearOutput();
         if (monster.hasStatusEffect(StatusEffects.Flying)) {
             clearOutput();
-            outputText("There is absolutely no point to you causing a tremor against an opponent that isn't even touching the ground!");
+            outputText("There is no point in causing a tremor against an opponent that isn't even touching the ground!");
             //Gone		menuLoc = 1;
             menu();
             addButton(0, "Next", combatMenu, false);
@@ -12425,7 +12423,7 @@ public class Combat extends BaseContent {
         }
         fatigue(10, USEFATG_PHYSICAL);
         //WRAP IT UPPP
-        outputText("You wriggle underground, collapsing the tunnel behind you. You shake, causing some serious seismic activity. [monster a] [monster name] loses [monster his] balance, falling on the ground dazed. ");
+        outputText("You wriggle underground, collapsing the tunnel behind you. You shake, causing some serious seismic activity. [monster a] [monster name] loses [monster his] balance, falling to the ground, dazed. ");
         damage = unarmedAttack();
         damage *= player.tallness / 10;
         damage *= scalingBonusStrength() * 0.5;
@@ -12637,8 +12635,8 @@ public class Combat extends BaseContent {
     }
 
     public function RandomTeaseKiss():void {
-        outputText("You pull in opponent name into a wild french kiss forcing your tongue in as you begin to choke the protest out of [monster him]. " +
-                "Your opponent eventually starts to struggles and shove you off his face, doing [monster his] best not to show how much this aroused [monster him].");
+        outputText("You pull in [monster a] [monster name] into a wild french kiss, forcing your tongue in as you begin to choke the protest out of [monster him]. " +
+                "Your opponent starts to struggle, shoving you off his face. They stagger back, doing [monster his] best not to show how much this aroused [monster him].");
         monster.teased(StraddleDamage, false);
         if (Randomcrit) outputText(" <b>Critical!</b>");
     }
@@ -12654,10 +12652,10 @@ public class Combat extends BaseContent {
     }
 
     public function RandomTeaseIfEnnemyCockIfPCNoVirgin():void {
-        outputText("You lower yourself onto [monster a] [monster name] " + monster.cockDescriptShort() + " and begin to gently gyrate your hips in order to coax the delicious pre out, " +
+        outputText("You lower yourself onto [monster a] [monster name] " + monster.cockDescriptShort() + " and begin to gently gyrate your hips, " +
                 "drooling from your mouth as you drink in the pleasure. [monster a] [monster name] mouths open to let out a confused moan as you work [monster his] tool. " +
-                "You bounce up and down the rod, keeping your pussy tightly wrapped around [monster a] [monster name] aching member in order to speed up the inevitable and messy orgasm your " +
-                "skilled cunt will force out of [monster him]. Your opponent finally try and fight back for a moment, forcing you to unplug from [monster his] dick momentarily but the damage is already done. " +
+                "You bounce up and down the rod, keeping your pussy tightly wrapped around [monster a] [monster name]'s aching member in order to speed up the inevitable and messy orgasm your " +
+                "skilled cunt will force out of [monster him]. Your opponent finally fights back, forcing you up and off [monster his] dick. You back off, but the damage is already done, your foe's arousal clear. " +
                 "And you lick your lips still riding on your own pleasure.");
         StraddleDamage *= 1.5;
         StraddleDamage = Math.round(StraddleDamage);
@@ -12668,16 +12666,16 @@ public class Combat extends BaseContent {
 
     public function RandomTeaseStranglingTail():void {
         outputText("You wrap your prehensile tail around [monster a] [monster name] " + monster.cockDescriptShort() + " and skillfully begin to stroke it, your tail tip poking inside the urethra every now and then, " +
-                "pre gushing out through whatever space is left between. [monster a] [monster name] mouths open to let out a confused moan as you work [monster his] tool. ");
+                "pre gushing out through whatever space is left between. [monster a] [monster name]'s mouth opens to let out a confused moan as you work [monster his] tool. ");
         if (monster.balls > 0) outputText("Your hand is busy massaging the ball sack beneath, intent on speeding up the inevitable and messy orgasm your skillful play will force out of [monster him].");
-        outputText("Your opponent finally fights back, forcing you to unwrap your tail from them. You bakc off, but the damage is done already.");
+        outputText("Your opponent finally fights back, forcing you to unwrap your tail from them. You back off, but the damage has already been done.");
         monster.teased(StraddleDamage, false);
         if (Randomcrit) outputText(" <b>Critical!</b>");
     }
 
     public function RandomTeaseButtfuckTail():void {
         outputText("You smile mischievously as you insert inch after inch of your tail into your opponent, slowly stretching that cute pucker of [monster his], " +
-                "[monster a] [monster name] eyes widen as you slowly proceed to analy tail fuck [monster him]. Ahhh such tightness in that hole. " +
+                "[monster a] [monster name]'s eyes widen as you slowly proceed to analy tail fuck [monster him]. Ahhh such tightness in that hole. " +
                 "Sadly it only lasts for a while before [monster he] finally fights back. " +
                 "You give [monster a] a smirk and a wink, yanking your tail out in one go. You get back into a fighting stance, but the damage is already done.");
         monster.teased(StraddleDamage, false);
@@ -12687,7 +12685,7 @@ public class Combat extends BaseContent {
     public function RandomTeaseViolateOpponentBreast():void {
         outputText("You begin to groppe [monster a] [monster name] " + monster.breastDescript(0) + " with both hands, licking the areola and smirking knowingly as the tips hardens in reaction. " +
                 "[monster a] [monster name] moans coax you in doubling up the attention your tongue circling a nipple then moving to the other. " +
-                "It takes great effort from [monster a] [monster name] to snap out and force you off [monster his] tormented chest but the blush you see on [monster his] cheeks definitively was worth it.");
+                "It takes great effort from [monster a] [monster name] to snap out and force you off [monster his] tormented chest but the blush you see on [monster his] cheeks was worth it.");
         monster.teased(StraddleDamage, false);
         if (Randomcrit) outputText(" <b>Critical!</b>");
     }
@@ -12695,7 +12693,7 @@ public class Combat extends BaseContent {
     public function RandomTeaseViolateOpponentPussy():void {
         outputText("You mischievously begin to finger [monster a] [monster name] " + monster.vaginaDescript() + " forcing a surprised moan out of [monster him] as you attack [monster his] clitoris relentlessly. " +
                 "clear, sticky pre coats your hand, a clear sign of your victim's pleasure as you rub their clit." +
-                "It takes great effort from [monster a] [monster name], [monster his] lets loose a cry, breaking your hold and forcing your fingers from [monster his] tormented cunt. You back off, but you see their blushing cheeks.");
+                "It takes great effort from [monster a] [monster name], [monster he] lets loose a cry, breaking your hold and forcing your fingers from [monster his] tormented cunt. You back off, but you see their blushing cheeks.");
         monster.teased(StraddleDamage, false);
         if (Randomcrit) outputText(" <b>Critical!</b>");
     }
@@ -12714,7 +12712,7 @@ public class Combat extends BaseContent {
     public function RandomTeaseManticoreTailSpike():void {
         outputText("Taking advantage of your opponent's precarious position, you reach back and grab one of your back-spikes. " +
                 "You grin widely as you bring your hand down, stabbing your opponent with your venomous spike. You bat aside their clumsy attempt at a block, stabbing them again and again. With each stab, venom frothes from the spike, and blood spills from the deep injuries." +
-                "Your victim eventually rallies, blocking your stabbing wrist, then knocking the spike from your hand. You jump off them before they can strike you, but as they fight their way upright, you can tell that it was worth it");
+                "Your victim eventually rallies, blocking your wrist, then knocking the spike from your hand. You jump off them before they can strike you, but as they fight their way upright, you can tell that it was worth it");
         if (player.hasPerk(MutationsLib.ManticoreMetabolismEvolved) && player.tail.type == Tail.MANTICORE_PUSSYTAIL) StraddleDamage *= 2;
         monster.teased(StraddleDamage, false);
         if (Randomcrit) outputText(" <b>Critical!</b>");
@@ -12748,7 +12746,7 @@ public class Combat extends BaseContent {
     }
 
     public function RandomTeaseJabberwocky():void {
-        outputText("You inhale deeply before forcing in a kiss onto your opponent breathing poison directly down [monster His] throat!");
+        outputText("You inhale deeply before forcing yourself in, kissing your foe. You force their mouth open, breathing poison directly down [monster His] throat!");
         var dam4Ba:Number = 1;
         var Multiplier:Number = 1;
         if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) Multiplier += 1;
@@ -12789,7 +12787,7 @@ public class Combat extends BaseContent {
     }
 
     public function RandomTeaseHarpy():void {
-        outputText("You wrap your wings around [monster a] [monster name] firmly planting your plush backside down onto [monster his] cock and slipping it between your cheeks. " +
+        outputText("You wrap your wings around [monster a] [monster name], firmly planting your plush backside down onto [monster his] cock and slipping it between your cheeks. " +
                 "Your soft ass completely engulfs [monster his] dick and hugs it tightly. " +
                 "You moving your hips up and down massaging and stroking it between your warm soft flesh. You pull [monster a] [monster name] into a kiss, " +
                 "your drug laced lipstick already having an effect on [monster him]. " +
@@ -13173,7 +13171,7 @@ public class Combat extends BaseContent {
                     damage *= 1.75;
                 }
                 if (player.hasPerk(PerkLib.KrakenBlackDress)) damage *= 2;
-                monster.teased(monster.lustVuln * damage);
+                monster.teased(Math.round(monster.lustVuln * damage));
                 if (crit) outputText(" <b>Critical!</b>");
                 teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
             }
@@ -13222,7 +13220,7 @@ public class Combat extends BaseContent {
         doPhysicalDamage(damage, true, true);
 		//Enemy faints -
 		if(monster.HP <= monster.minHP()) {
-			outputText("You can feel [themonster]'s life signs beginning to fade, and before you squeze all the life from [monster him], you let go, dropping [monster him] to the floor, unconscious but alive.  In no time, [monster his]'s eyelids begin fluttering, and you've no doubt they'll regain consciousness soon.  ");
+			outputText("You can feel [themonster]'s life signs beginning to fade, and before you squeeze all the life from [monster him], you let go, dropping [monster him] to the floor, unconscious but alive.  In no time, [monster his]'s eyelids begin fluttering, and you've no doubt they'll regain consciousness soon.  ");
 			if(monster.short == "demons")
 				outputText("The others quickly back off, terrified at the idea of what you might do to them.");
 			outputText("\n\n");
@@ -13257,7 +13255,7 @@ public class Combat extends BaseContent {
             outputText("You look over [monster a] [monster name], but can't figure out how to tease such an unusual foe.\n\n");
         }
         if (monster.lustVuln == 0) {
-            outputText("You giggle and run your hands against you victim flesh purposely left exposed out of your web for you to groppe and play with but it has no effect!  Your foe clearly does not experience lust in the same way as you.\n\n");
+            outputText("You giggle and run your hands against your victim's flesh, naughty bits purposely left exposed for you to grope and tease, but it has no effect!  Your foe clearly does not experience lust in the same way as you.\n\n");
             enemyAI();
             return;
         }
@@ -13366,7 +13364,7 @@ public class Combat extends BaseContent {
                     crit = true;
                     damage *= 1.75;
                 }
-                monster.teased(monster.lustVuln * damage, false);
+                monster.teased(Math.round(monster.lustVuln * damage), false);
                 outputText(" Your unwilling toy makes an involuntary moan letting you know that your touch hit the mark.");
                 if (crit) outputText(" <b>Critical!</b>");
                 teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
@@ -13481,7 +13479,7 @@ public class Combat extends BaseContent {
                     outputText("stroking his " + monster.cockDescriptShort(0) + " from inside of you to feast on his precum.");
                 }
                 if (monster.gender == 2) {
-                    outputText("forcefully filling her pussy and ass with your fluid form as you molest her breast.");
+                    outputText("forcefully filling her pussy and ass with your fluid form as you molest her breasts.");
                 }
                 if (monster.gender == 3) {
                     outputText("forcefully filling her pussy and ass with your fluid form as you molest her breast. Unsatisfied with her female parts you also stroke her cock to feast on her precum.");
@@ -13513,7 +13511,7 @@ public class Combat extends BaseContent {
                     crit = true;
                     damage *= 1.75;
                 }
-                monster.teased(monster.lustVuln * damage);
+                monster.teased(Math.round(monster.lustVuln * damage));
                 if (crit) outputText(" <b>Critical!</b>");
                 teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
             }
@@ -13566,7 +13564,7 @@ public class Combat extends BaseContent {
 				lustDmg *= dam4Baa;
                 lustDmg *= 1+(poisonScaling/10);
 				poisonScaling *= dam4Baa;
-                monster.teased(monster.lustVuln * lustDmg, true);
+                monster.teased(Math.round(monster.lustVuln * lustDmg), true);
                 monster.statStore.addBuffObject({tou:-poisonScaling}, "Poison",{text:"Poison"});
                 if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
                 monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
@@ -13663,12 +13661,12 @@ public class Combat extends BaseContent {
                 crit = true;
                 damage *= 1.75;
             }
-            monster.teased(monster.lustVuln * damage, false);
+            monster.teased(Math.round(monster.lustVuln * damage), false);
             if (crit) outputText(" <b>Critical!</b>");
             teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
             if (monster.lust>100)
             {
-                outputText("\n\nYour partner cums, achieving orgasm from excessive arousal. You sigh in bliss as your victims fills your tail with a delicious load of cum.");
+                outputText("\n\nYour partner cums, achieving orgasm from excessive arousal. You sigh in bliss as your victim fills your tail with a delicious load of cum.");
                 if (player.hunger < player.maxHunger())
                 {
                     player.refillHunger(10, false);
@@ -13773,7 +13771,7 @@ public class Combat extends BaseContent {
                 crit = true;
                 damage *= 1.75;
             }
-            monster.teased(monster.lustVuln * damage, false);
+            monster.teased(Math.round(monster.lustVuln * damage), false);
             if (crit) outputText(" <b>Critical!</b>");
             teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
             if (monster.lust>100)
@@ -13883,7 +13881,7 @@ public class Combat extends BaseContent {
                 crit = true;
                 damage *= 1.75;
             }
-            monster.teased(monster.lustVuln * damage, false);
+            monster.teased(Math.round(monster.lustVuln * damage), false);
             if (crit) outputText(" <b>Critical!</b>");
             teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
             if (monster.lust>100)
@@ -13916,7 +13914,7 @@ public class Combat extends BaseContent {
         if (monster.hasPerk(PerkLib.EnemyConstructType) || monster.hasPerk(PerkLib.EnemyPlantType)) {
             outputText("You gleefully bite in your foe but ");
             if (monster.hasPerk(PerkLib.EnemyConstructType)) {
-                outputText("yelp in pain. This thing's skin is hard as rock...not surprising, since golems do are made of solid stones.");
+                outputText("yelp in pain. This thing's skin is hard as rock...not surprising, since golems are made of solid stones.");
             }
             if (monster.hasPerk(PerkLib.EnemyPlantType)) {
                 outputText("almost instantly spit it out. What manner of disgusting blood is this? Saps?");
@@ -13945,7 +13943,7 @@ public class Combat extends BaseContent {
             var lustDmg:int = (10 + (player.lib * 0.1)) * monster.lustVuln;
             if (player.hasPerk(MutationsLib.HollowFangsEvolved)) lustDmg *= 1.5;
             if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= RacialParagonAbilityBoost();
-            lustDmg = Math.round(lustDmg);
+            lustDmg = Math.round(monster.lustVuln * lustDmg);
             outputText(" [monster he] can’t help but moan, aroused from the aphrodisiac in your saliva for ");
             monster.teased(lustDmg);
             outputText(".");
@@ -13974,7 +13972,7 @@ public class Combat extends BaseContent {
 
     public function VampireLeggoMyEggo():void {
         clearOutput();
-        outputText("You let your opponent free ending your embrace.");
+        outputText("You let your opponent free, ending your embrace.");
         outputText("\n\n");
         monster.removeStatusEffect(StatusEffects.EmbraceVampire);
         enemyAI();
@@ -14033,7 +14031,7 @@ public class Combat extends BaseContent {
     public function displacerCombatFeed():void {
         clearOutput();
         fatigue(50, USEFATG_PHYSICAL);
-        outputText("You lick your lips in anticipation as you hold your victim's arms to the ground and plug your two tentacle suckers to [the monster] breasts. She struggles, flushing red as you flood her nipples with your lactation inducing venom and begin to force the delicious milk out of her tits.\n\n");
+        outputText("You lick your lips in anticipation as you hold your victim's arms to the ground and plug your two tentacle suckers to [the monster]'s breasts. She struggles, flushing red as you flood her nipples with your lactation inducing venom and begin to force the delicious milk out of her tits.\n\n");
         monster.createStatusEffect(StatusEffects.DisplacerPlug, 1 + rand(3), 0, 0, 0);
         addButton(0, "Next", SceneLib.combat.combatMenu, false);
     }
@@ -14107,7 +14105,7 @@ public class Combat extends BaseContent {
 
     public function HypnosisCoil():void {
         clearOutput();
-        outputText("You maintain eye contact with the target insidiously coiling your tail around it. ");
+        outputText("You maintain eye contact with the target, insidiously coiling your tail around it. ");
         if (rand(4) == 0) {
             outputText("It's only when you are fully wrapped around your victim that [themonster] snaps out of it.");
             monster.createStatusEffect(StatusEffects.Constricted, 1 + rand(4), 0, 0, 0);
@@ -14261,7 +14259,7 @@ public class Combat extends BaseContent {
             return;
         }
         if (player.statStore.hasBuff("Supercharged")) {
-            outputText("Run...SERIOUSLY? There is no way you could run! You need to discharge NOW! Your genitals are glistening with dripping plasma with how much you need to FUCK!");
+            outputText("Run...SERIOUSLY? There is no way you could run! You need to discharge NOW! Your genitals are glistening with dripping plasma. You need to FUCK!");
             if (monster.isHerm() && player.isHerm()) outputText(" Cock or cunt you don't even care! All you WANT is for that herm to fuck you wildly until your charge is gone!");
             else{
                 if(monster.hasCock() && player.hasVagina()) outputText("Your drooling outlet DEMANDS that plug!");
@@ -14367,7 +14365,7 @@ public class Combat extends BaseContent {
             //Stuck!
             else if (player.hasStatusEffect(StatusEffects.NoFlee)) {
                 clearOutput();
-                if (monster.short == "goblin") outputText("You try to flee but get stuck in the sticky white goop surrounding you.\n\n");
+                if (monster.short == "goblin") outputText("You try to flee, but get stuck in the sticky white goop surrounding you.\n\n");
                 else outputText("You put all your skills at running to work, ducking and diving in an effort to escape, but are unable to get away!\n\n");
                 enemyAI();
                 return;
