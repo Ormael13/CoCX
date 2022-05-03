@@ -142,7 +142,7 @@ public class DivaScene extends XXCNPC{
             display(baseRef + "intro/camp");
         }
 
-        if (player.cockThatFits(24) < 0) { //check if ANY is fitting, otherwise this is trash
+        if (player.cockThatFits(24) > 0) { //check if ANY is fitting, otherwise this is trash
             display(baseRef + "male/tooBig");
             player.cocks[player.smallestCockIndex()].cockLength = 18; //much better
             if (timesReduced < 5)

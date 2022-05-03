@@ -461,11 +461,6 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 
 		public function loseToFemaleSpiderMorph():void
 		{
-            if (flags[kFLAGS.SFW_MODE] > 0 && CoC.instance.inCombat) { //No rape in SFW mode.
-                clearOutput();
-				cleanupAfterCombat();
-				return;
-			}
 			if (player.hasCock()) {
 				if (player.cockThatFits(monster.vaginalCapacity()) == -1) femaleSpiderMorphTooBigWebRape();
 				else spiderMorphFemaleRidesACawk();
@@ -486,7 +481,7 @@ public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInte
 			outputText("The spider-girl drops to her knees and wobbles unsteadily");
 			if (monster.lust >= monster.maxLust()) outputText(", thrusting two of her carapace-covered finger-tips deep into her sloppy box as she gives into her lust.  She actually has the temerity to demand, \"<i>Fuck me, fuck me now!</i>\"");
 			else outputText(", too wounded to fight back or run away.");
-			if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
+			if (player.lust >= 33 && player.gender > 0) {
 				outputText("\n\nWhat do you do to her?");
 				var scissor:Function =null;
 				var pussyFuck:Function =null;

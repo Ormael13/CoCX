@@ -309,9 +309,9 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
             return btnSet;
         }
         private function USSGobMech():Array{
-            var btnSet:Array = [player.hasKeyItem("Cum Reservoir") >= 0 && player.keyItemv1("Cum Reservoir")?"Cum Reservoir":"Fill the reservoir"];
+            var btnSet:Array = [player.hasKeyItem("Cum Reservoir") >= 0 && player.keyItemvX("Cum Reservoir", 1)?"Cum Reservoir":"Fill the reservoir"];
             if (player.isInGoblinMech() && player.hasKeyItem("Cum Reservoir") >= 0 && monster.hasCock()) {
-                if (player.keyItemv1("Cum Reservoir") == 4) btnSet.push(false, "Reservoir is already full. You need to use all this stored cum before you harvest new one.");
+                if (player.keyItemvX("Cum Reservoir", 1) == 4) btnSet.push(false, "Reservoir is already full. You need to use all this stored cum before you harvest new one.");
                 else btnSet.push(gobomechFillTheReservoir, "");
             }
             else btnSet.push(false, "Req. to be in goblin mech, having Cum Reservoir upgrade instaled on it and enemy with cock.");
@@ -700,10 +700,10 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 			outputText("Having made your intentions obvious, you get under your mech and pull out the reservoir tube, paying no heed to your confused victim, [monster he]'s going to find out soon enough anyway. You run back to [themonster], tube in hand, and plug it on [monster his] " + monster.cockDescriptShort(0) + " fastening it in place with straps. Satisfied with the result, you run back to your mech and press the start button activating the vacuum.\n\n");
 			outputText("[Themonster]’s eyes widen as your engine forcely starts milking [monster his] dick. Of course [monster he] struggles for a bit against the pleasure inducing contraption but the aphrodisiac dripping syringes you added in the fastening make short work of any resistance [monster he] has left, causing [monster him] to jerk up and down on the ground in unwanted, yet forced consecutive orgasms. You watch with keen interest as the tube fills up with a constant flow of freshly harvested cum, smiling at the fluctuation of the volume needle on your motherboard. ");
 			outputText("Since you have nothing to do but wait, you slowly enjoy a coffee, laid back in your driver’s seat and whistling, as the engine’s cum-o-meter fills up. Soon [themonster] eyes rolls in their socket as [monster he] completely lose control of [monster his] body, [monster his] sexual organ taking over for [monster his] brain. The needle finally reaches ");
-			if (player.keyItemv1("Cum Reservoir") == 1) outputText("1 quarters");
-			if (player.keyItemv1("Cum Reservoir") == 2) outputText("2 quarters");
-			if (player.keyItemv1("Cum Reservoir") == 3) outputText("3 quarters");
-			if (player.keyItemv1("Cum Reservoir") == 4) outputText("full");
+			if (player.keyItemvX("Cum Reservoir", 1) == 1) outputText("1 quarters");
+			if (player.keyItemvX("Cum Reservoir", 1) == 2) outputText("2 quarters");
+			if (player.keyItemvX("Cum Reservoir", 1) == 3) outputText("3 quarters");
+			if (player.keyItemvX("Cum Reservoir", 1) == 4) outputText("full");
 			outputText(", a little before the cum pump falls unconscious, well that's a good harvest.\n\nYou go to the passed out cum cow and unfasten your equipment before jumping back into the mech, heading back to camp.\n\n");
 			cleanupAfterCombat();
 		}

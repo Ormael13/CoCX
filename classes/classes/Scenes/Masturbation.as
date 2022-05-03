@@ -16,10 +16,6 @@ public class Masturbation extends BaseContent {
 
 		public function masturbateMenu():void {
 			menu();
-			if (flags[kFLAGS.SFW_MODE] > 0) {
-				meditate();
-				return;
-			}
 			if (prison.inPrison && !prison.prisonCanMasturbate()) {
 				doNext(playerMenu);
 				return;
@@ -89,7 +85,7 @@ public class Masturbation extends BaseContent {
 			if (player.canOviposit() && player.hasFuckableNipples() && player.lust >= 33 && player.biggestTitSize() >= 21) {
 				addButton(button++, "LayInTits", layEggsInYerTits);
 			}
-			if (player.hasVagina() && player.isInGoblinMech() && player.keyItemv1("Cum Reservoir") == 4) {
+			if (player.hasVagina() && player.isInGoblinMech() && player.keyItemvX("Cum Reservoir", 1) == 4) {
 				addButton(button++, "Impregnator 1.0", gobomechImpregnator1);
 				addButton(button++, "Fucking machine", gobomechFuckingMachine);
 			}
@@ -2821,7 +2817,7 @@ public class Masturbation extends BaseContent {
 		private function centaurDudesGetHorseAids():void {
 			var x:int = player.biggestCockIndex();
 			clearOutput();
-			if (player.keyItemv1("Fake Mare") == 0) {
+			if (player.keyItemvX("Fake Mare", 1) == 0) {
 				if (player.cor < 50)
 					outputText("Deciding to give the mare-like cocksleeve you got from Whitney a try, you spend a few awkward minutes dragging the lump of metal off to someplace secluded and setting it up.  When you're done, you stand behind a wood-and-iron replica of a mare, adjusted to the perfect height for you.  Looking \"<i>her</i>\" over, your eyes are drawn to the slick black lips of the Onahole between her legs, craftily shaped like a horsecunt, and what looks like a second, smaller one above it simulating an anus.\n\n");
 				//[If Med-High Corruption:]
@@ -2884,7 +2880,7 @@ public class Masturbation extends BaseContent {
 		//[Masturbate] -- [CentaurPole] -- [Fem/Herm Centaurs]
 		private function centaurGirlsGetHorseAids():void {
 			clearOutput();
-			if (player.keyItemv1("Centaur Pole") == 0) {
+			if (player.keyItemvX("Centaur Pole", 1) == 0) {
 				//[If low Corruption:]
 				if (player.cor < 50)
 					outputText("Feeling a bit antsy, you decide to give Whitney's so-called \"<i>Centaur Pole</i>\" a try.  You dig it out of your stash and spend a few awkward minutes dragging it off someplace secluded and setting it up.\n\n");
@@ -2916,7 +2912,7 @@ public class Masturbation extends BaseContent {
 			}
 			doNext(camp.returnToCampUseOneHour);
 			player.addKeyValue("Centaur Pole", 1, 1);
-			trace("Times Ridden Pole" + player.keyItemv1("Centaur Pole"));
+			trace("Times Ridden Pole" + player.keyItemvX("Centaur Pole", 1));
 		}
 
 		//Self/Exgartuan

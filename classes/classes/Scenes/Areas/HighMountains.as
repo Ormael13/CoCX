@@ -22,7 +22,6 @@ use namespace CoC;
 		public var minotaurMobScene:MinotaurMobScene = new MinotaurMobScene();
 		public var izumiScenes:IzumiScene = new IzumiScene();
 		public var phoenixScene:PhoenixScene = new PhoenixScene();
-		public var templeofdivine:TempleOfTheDivine = new TempleOfTheDivine();
 		public var darkelfScene:DarkElfScene = new DarkElfScene();
 		
 		public function HighMountains()
@@ -43,7 +42,7 @@ use namespace CoC;
 			flags[kFLAGS.DISCOVERED_HIGH_MOUNTAIN]++;
 			doNext(playerMenu);
 			
-			if (SceneLib.d3.discoverD3() == true)
+			if (SceneLib.d3.discoverD3())
 			{
 				return;
 			}
@@ -94,11 +93,11 @@ use namespace CoC;
 			}*/
 			//Temple of the Divine
 			if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] < 1 && rand(4) == 0) {
-				templeofdivine.firstvisitintro();
+				SceneLib.templeofdivine.firstvisitintro();
 				return;
 			}
 			//25% minotaur sons!
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] >= 3 && rand(4) == 0 && player.hasVagina() && flags[kFLAGS.SOUL_SENSE_MINOTAUR_SONS] < 3) {
+			if (flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] >= 3 && rand(4) == 0 && player.hasVagina() && flags[kFLAGS.SOUL_SENSE_MINOTAUR_SONS] < 3) {
 				spriteSelect(SpriteDb.s_minotaur);
 				minotaurMobScene.meetMinotaurSons();
 				return;
@@ -119,7 +118,7 @@ use namespace CoC;
 				}
 			}
 			if (flags[kFLAGS.HEL_PHOENIXES_DEFEATED] > 0 && rand(4) == 0) {
-				phoenixScene.encounterPhoenix1();
+				phoenixScene.encounterPhoenix(0);
 				return;
 			}
 			if (player.hasKeyItem("Gryphon Statuette") < 0 && player.hasKeyItem("Peacock Statuette") < 0 && player.avianScore() >= 6 && rand(4) == 0) {
@@ -195,7 +194,6 @@ use namespace CoC;
 					startCombat(new Harpy());
 					spriteSelect(SpriteDb.s_harpy);
 				}
-				return;
 			}
 		}
 		

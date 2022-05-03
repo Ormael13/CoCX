@@ -63,7 +63,7 @@ public class VolcanicCrag extends BaseContent
 				return;
 			}
 			//Forgefather
-			if (flags[kFLAGS.ONYX_PATH] > 0 && flags[kFLAGS.SAPPHIRE_AFFECTION] > 5 && (player.hasPerk(PerkLib.GargoylePure) || player.hasPerk(PerkLib.GargoyleCorrupted)) && flags[kFLAGS.FORGEFATHER_MOVED_TO_TEMPLE] != 1) {
+			if (flags[kFLAGS.ONYX_PATH] > 0 && flags[kFLAGS.SAPPHIRE_AFFECTION] >= 60 && (player.hasPerk(PerkLib.GargoylePure) || player.hasPerk(PerkLib.GargoyleCorrupted)) && flags[kFLAGS.FORGEFATHER_MOVED_TO_TEMPLE] != 1) {
 				VolcanicCragConditions();
 				if (flags[kFLAGS.MET_FORGEFATHER] == 0) {
 					SceneLib.forgefatherScene.meetForgefather();
@@ -79,7 +79,7 @@ public class VolcanicCrag extends BaseContent
 				case 1:
 					if (flags[kFLAGS.HEL_PHOENIXES_DEFEATED] > 0) {
 						VolcanicCragConditions();
-						phoenixScene.encounterPhoenix3();
+						phoenixScene.encounterPhoenix(2);
 					}
 					else behemothScene.behemothIntro();
 					break;
@@ -125,6 +125,7 @@ public class VolcanicCrag extends BaseContent
 			HPD = Math.round(HPD);
 			outputText("Hot environment slowly seeps into your body. ");
 			player.takeFireDamage(HPD, true);
+			outputText("\n\n");
 		}
 		
 		public function partsofTripxiFatbilly():void {

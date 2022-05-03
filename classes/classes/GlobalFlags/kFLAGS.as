@@ -281,7 +281,7 @@ public static const TIMES_EXPLORED_SWAMP:int                                    
 public static const SHOW_SPRITES_FLAG:int                                           =  273; // Sprites off? toggle
 public static const RATHAZUL_SILK_ARMOR_COUNTDOWN:int                               =  274; // Rathazul silk armor queue - 1 = armor done!
 public static const UNKNOWN_FLAG_NUMBER_00275:int                                   =  275; // Rathazul armor type selector - 1=armor, 2=robes (3=bra, 4=panties, 5=loincloth)
-public static const UNKNOWN_FLAG_NUMBER_00276:int                                   =  276; // Times Encountered Basilisk
+public static const TIMES_ENCOUNTERED_BASILISK:int                                   =  276; // Times Encountered Basilisk
 public static const UNKNOWN_FLAG_NUMBER_00277:int                                   =  277; // Times Encountered Drider
 public static const UNKNOWN_FLAG_NUMBER_00278:int                                   =  278; // LOTTIE DISABLED (1+ = YUS)
 public static const UNKNOWN_FLAG_NUMBER_00279:int                                   =  279; // LOTTIE FIGURE (HIGHER = SLIMMER)
@@ -330,13 +330,13 @@ public static const UNKNOWN_FLAG_NUMBER_00321:int                               
 public static const UNKNOWN_FLAG_NUMBER_00322:int                                   =  322; // LOTTIE: LA BOVA COUNTDOWN - counts down to 1 before she'll use it again.  Also used to track if LaBova has ever been used
 public static const UNKNOWN_FLAG_NUMBER_00323:int                                   =  323; // LOTTIE: HAS SHE USED REDUCTO?
 public static const UNKNOWN_FLAG_NUMBER_00324:int                                   =  324; // LOTTIE: HAM SAMMICH
-public static const UNKNOWN_FLAG_NUMBER_00325:int                                   =  325; // Times met minotaur mob
-public static const UNKNOWN_FLAG_NUMBER_00326:int                                   =  326; // Number of grown up minotaur offspring - TRIBE SIZE
-public static const UNKNOWN_FLAG_NUMBER_00327:int                                   =  327; // Number of minotaur sons pending growing up
-public static const UNKNOWN_FLAG_NUMBER_00328:int                                   =  328; // Grow up countdown
-public static const UNKNOWN_FLAG_NUMBER_00329:int                                   =  329; // Minos wasting a turn? (1 = yes)
-public static const UNKNOWN_FLAG_NUMBER_00330:int                                   =  330; // Cooldown on minotaur cum repeat messages
-public static const JOJO_TIMES_MILKED:int                                   =  331; // Times Jojo Milked
+public static const MINOTAUR_SONS_TIMES_MET:int                                   	=  325; // Times met minotaur mob
+public static const MINOTAUR_SONS_TRIBE_SIZE:int                                   	=  326; // Number of grown up minotaur offspring - TRIBE SIZE
+public static const MINOTAUR_SONS_CHILDREN:int                                   	=  327; // Number of minotaur sons pending growing up
+public static const MINOTAUR_SONS_GROW_COUNTDOWN:int                                =  328; // Grow up countdown
+public static const UNKNOWN_FLAG_NUMBER_00329:int                                   =  329;
+public static const MINOCUM_WARNING_COOLDOWN:int                                    =  330; // Cooldown on minotaur cum repeat messages
+public static const JOJO_TIMES_MILKED:int                                   		=  331; // Times Jojo Milked
 public static const JOJO_COCK_MILKING_COOLDOWN:int                                  =  332; // Jojo milk cooldown 4 hours
 public static const UNKNOWN_FLAG_NUMBER_00333:int                                   =  333; // Times PC been cock milked
 public static const FAP_ARENA_SESSIONS:int                                          =  334; // Times fap arena'ed
@@ -2451,8 +2451,8 @@ public static const RYUBI_02442:int                                   = 2442; //
 public static const FOUND_TEMPLE_OF_THE_DIVINE:int                                  = 2443;
 public static const SAPPHIRE_AFFECTION:int                           		        = 2444;
 public static const SAPPHIRE_TALKS:int                       			            = 2445;
-public static const SAPPHIRE_SEX:int                                   				= 2446;
-public static const SAPPHIRE_02447:int                                   = 2447;							//Not Yet Used Flag
+public static const WEDDINGS_UNLOCKED:int                                   		= 2446; //SAPPHIRE_SEX before, now removed and replaced.
+public static const UNKNOWN_FLAG_NUMBER_02447:int                                   = 2447;							//Not Yet Used Flag
 public static const ONYX_PATH:int                                   				= 2448;//slave or free
 public static const UNKNOWN_FLAG_NUMBER_02449:int                                   = 2449;
 public static const ONYX_GENDER:int                                   				= 2450;
@@ -2990,7 +2990,7 @@ public static const USE_OLD_INTERFACE:int                                       
 public static const IMAGEPACK_OFF:int                                               = 2982; // 1 if imagepack is disabled.
 public static const SPRITE_STYLE:int                                                = 2983; // 1 if old sprites are used.
 public static const AUTO_LEVEL:int                                                  = 2984; // 1 if automatic leveling is enabled.
-public static const SFW_MODE:int                                                    = 2985; // 1 if SFW is enabled.
+public static const UNKNOWN_FLAG_NUMBER_02985:int                                   = 2985; // formerly SFW mode, now unused
 public static const WATERSPORTS_ENABLED:int                                         = 2986; // 1 if watersport scenes are enabled.
 public static const USE_METRICS:int                                                 = 2987; // No longer used. Previously: 0 for imperial, 1 for metric.
 public static const USE_OLD_FONT:int                                                = 2988; // Side bar font.

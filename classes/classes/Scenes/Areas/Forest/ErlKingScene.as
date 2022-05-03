@@ -270,8 +270,6 @@ public class ErlKingScene extends BaseContent
 			outputText("It seems the Erlking has no interest in chasing prey that won’t run.\n\n");
 
 			if (player.inte < 80) dynStats("int+", 1);
-
-			menu();
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -302,7 +300,6 @@ public class ErlKingScene extends BaseContent
 				if (rand(2) == 0) dynStats("tou+", 1);
 				else dynStats("spe+", 1);
 			}
-			menu();
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -478,8 +475,6 @@ public class ErlKingScene extends BaseContent
 			outputText("\"<i>As you wish,</i>\" says the Erlking.  The fog rolls in once more, engulfing the Erlking and his steed.  It clears a moment later, leaving you alone in the forest.\n\n");
 
 			outputText("You get the feeling you won’t be seeing him anymore.\n\n");
-
-			menu();
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -859,8 +854,6 @@ public class ErlKingScene extends BaseContent
 			//[Libido + 2]
 			dynStats("lib+", 2, "lus=", 0);
 			player.sexReward("Default","Default",true,false);
-
-			menu();
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -886,8 +879,6 @@ public class ErlKingScene extends BaseContent
 			//[Sensitivity -2]
 			dynStats("sen-", 2, "lus=", 0);
 			player.sexReward("Default","Default",true,false);
-
-			menu();
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -913,8 +904,6 @@ public class ErlKingScene extends BaseContent
 			//[Sensitivity -2, Libido +2]
 			dynStats("sen-", 2, "lib+", 2, "lus=", 0);
 			player.sexReward("Default","Default",true,false);
-
-			menu();
 			doNext(camp.returnToCampUseOneHour);
 		}
 
@@ -947,7 +936,6 @@ public class ErlKingScene extends BaseContent
 
 			//[Lust +20, Libido +2]
 			dynStats("lus+", 20, "lib+", 2);
-			menu();
 			doNext(camp.returnToCampUseOneHour);
 		}
 

@@ -21,7 +21,7 @@ public class GreenSlime extends Monster
 			else {
 				var temp3:Function = null;
 				//Boobfeed.
-				if (player.hasStatusEffect(StatusEffects.Feeder) && flags[kFLAGS.SFW_MODE] <= 0) {
+				if (player.hasStatusEffect(StatusEffects.Feeder)) {
 					//Eligable to rape
 					if(player.lust >= 33 && player.gender > 0) {
 						outputText("\n\nYou're horny enough to try and rape it, though you'd rather see how much milk you can squirt into it.  What do you do?");
@@ -34,7 +34,7 @@ public class GreenSlime extends Monster
 					}
 				}
 				//Not a breastfeeder
-				else if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
+				else if (player.lust >= 33 && player.gender > 0) {
 					outputText("  Sadly you realize your own needs have not been met.  Of course, you could always play with the poor thing... Do you rape it?");
 					EngineCore.simpleChoices("Rape",SceneLib.lake.greenSlimeScene.slimeVictoryRape,"",null,"",null,"",null,"Leave",SceneLib.combat.cleanupAfterCombatImpl);
                     SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeated);

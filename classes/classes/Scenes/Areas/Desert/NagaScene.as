@@ -952,10 +952,6 @@ public function nagaFUCKSJOOOOOO():void {
 public function nagaRapeChoice():void {
 	if (monster.HP < 1) outputText("You've defeated the " + gorgonOrNaga + "!  ");
 	else outputText("The " + gorgonOrNaga + " writhes in the sand, masturbating feverishly!  She's completely forgotten about fighting you.  ");
-	if (flags[kFLAGS.SFW_MODE] > 0) {
-		cleanupAfterCombat();
-		return;
-	}
 	if (player.lust < 33) {
 		outputText("You aren't aroused enough to fuck her.");
 		cleanupAfterCombat();
@@ -1255,7 +1251,7 @@ public function naggaTease():void {
         }
 		if (monster.hasStatusEffect(StatusEffects.HypnosisNaga)) damage *= 0.5;
 		if (player.hasPerk(PerkLib.RacialParagon)) damage *= combat.RacialParagonAbilityBoost();
-		monster.teased(monster.lustVuln * damage);
+		monster.teased(Math.round(monster.lustVuln * damage));
         if (crit) outputText(" <b>Critical!</b>");
         SceneLib.combat.teaseXP(1 + SceneLib.combat.bonusExpAfterSuccesfullTease());
     }
@@ -1265,8 +1261,6 @@ public function naggaTease():void {
         outputText("\n[Themonster] seems unimpressed.");
     }
     outputText("\n\n");
-    //OLD
-    //monster.lust += 5 + rand(15);
     if (monster.lust >= monster.maxLust()) {
         doNext(SceneLib.combat.endLustVictory);
         return;
@@ -1367,4 +1361,4 @@ private function beePositANagaPlease():void {
 	cleanupAfterCombat();
 }
 	}
-}
+}

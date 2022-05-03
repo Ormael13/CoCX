@@ -379,11 +379,18 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 			[weaponsrange.BOWLONG, weaponsrange.ARTEMIS, weaponsrange.WILDHUN],
 			[weaponsrange.SHUNHAR, weaponsrange.KSLHARP, weaponsrange.LEVHARP],
 			[shields.SANCTYN, shields.SANCTYL, shields.SANCTYD],
-			[armors.LMARMOR, armors.BMARMOR, armors.S_ARMOR]
+			[armors.LMARMOR, armors.BMARMOR, armors.S_ARMOR],
+			[armors.IBKIMO, armors.BLKIMONO, armors.TCKIMO],
+			[armors.IBKIMO, armors.BKIMONO, armors.TCKIMO],
+			[armors.IBKIMO, armors.PKIMONO, armors.TCKIMO],
+			[armors.IBKIMO, armors.RKIMONO, armors.TCKIMO],
+			[armors.IBKIMO, armors.WKIMONO, armors.TCKIMO],
+			[armors.CTPALAD, null, armors.CTBGUAR]
+			//[armors.OEKIMO, armors., armors.OTKIMO],
 		];
 		clearOutput();
 		outputText(""+_name+" can empower items using materials gems and her innate magic to bless or corrupt gear by using radiant shards and gems. Would you like her to create an epic item and in that case which?");// legendary
-		outputText("\n\n<b>You currently have "+player.keyItemv1("Radiant shard")+" radiant shards.</b>")
+		outputText("\n\n<b>You currently have "+player.keyItemvX("Radiant shard", 1)+" radiant shards.</b>")
 		//Celess
 		var selectfrom:int = isCorrupt ? 2 : 1;
 		var selectMenu:ButtonDataList = new ButtonDataList();
@@ -394,7 +401,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				var item:ItemType = improvableItems[i][selectfrom];
 				var from:ItemType = improvableItems[i][0];
 				selectMenu.add(item.id, curry(improveItem, item, from)).disableIf(!player.hasItem(from),"You need a "+from+" as a base to create this item")
-				.disableIf(player.keyItemv1("Radiant shard") < 3,"You need at least three radiant shards in order to create this item.")
+				.disableIf(player.keyItemvX("Radiant shard", 1) < 3,"You need at least three radiant shards in order to create this item.")
 				.disableIf(player.gems < 10000,"You need at least 20 000 gems in order to create this item");
 			}
 		}
@@ -416,7 +423,7 @@ public class CelessScene extends XXCNPC implements TimeAwareInterface {
 				"A miracle happens, as the armament, gems and shards combines, changes shape and starts to glow with holy power.\n\n" +
 				"Finally done, she comes back to you and solemnly deposits the blessed armament in your hand.");
 			}
-			if(player.keyItemv1("Radiant shard") == 3) player.removeKeyItem("Radiant shard");
+			if(player.keyItemvX("Radiant shard", 1) == 3) player.removeKeyItem("Radiant shard");
 			else player.addKeyValue("Radiant shard",1,-3);
 			player.gems -= 20000;
 			player.destroyItems(from, 1);

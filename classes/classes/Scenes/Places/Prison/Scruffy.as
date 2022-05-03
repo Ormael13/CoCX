@@ -55,6 +55,7 @@ public class Scruffy extends Imp
 			this.special1 = lustMagicAttack;
 			this.wings.type = Wings.IMP;
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
+			this.createPerk(PerkLib.OverMaxHP, 7, 0, 0, 0);
 			checkMonster();
 		}
 		

@@ -132,11 +132,6 @@ private function startSandTarpFight():void {
 
 
 public function sandtrapmentLoss(clear:Boolean = false):void {
-	if (flags[kFLAGS.SFW_MODE] > 0) { //No rape in SFW mode.
-		clearOutput();
-		cleanupAfterCombat();
-		return;
-	}
 	if(flags[kFLAGS.SANDTRAP_LOSS_REPEATS] >= 2 && player.eyes.type == Eyes.BLACK_EYES_SAND_TRAP && player.wings.type == Wings.GIANT_DRAGONFLY) {
 		loseLastFightWithSandTrap();
 		return;

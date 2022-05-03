@@ -527,7 +527,6 @@ private function futaTentacleEpilogue():void {
 
 internal function tentacleLossRape():void {
 	clearOutput();
-	if (doSFWloss()) return; //Disables rape in SFW mode.
 	if (player.isAlraune()){
 		alrauneLoss();
 		return;
@@ -560,7 +559,7 @@ internal function tentacleLossRape():void {
 	outputText("The rape is inevitable. Though you still have a chance to tease the approaching beast. Maybe it'll make him to focus on some specific parts of your body and try to take the situation back in your hands?");
 	menu();
 	addButtonIfTrue(0, "Dick", dickScene, "", player.hasCock());
-	addButtonIfTrue(1, "Vagina", vagScene, "", player.hasCock());
+	addButtonIfTrue(1, "Vagina", vagScene, "", player.hasVagina());
 	addButtonIfTrue(2, "Both", hermScene, "Not a herm.", player.isHerm());
 	addButtonIfTrue(3, "Breasts", milkLoss, "Req. very high lactation and not genderless",
 		player.biggestLactation() >= 3.5 && player.gender > 0);

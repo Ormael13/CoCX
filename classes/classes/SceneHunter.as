@@ -19,7 +19,7 @@ public class SceneHunter extends BaseContent {
         if (flags[kFLAGS.SCENEHUNTER_UNI_HERMS]) {
             outputText("<b><font color=\"#008000\">ENABLED</font></b>");
             outputText("\nMakes scenes unique to male/female PCs accessible to herms. Allows the player to choose the scene when the sex is led by the PC, randomly selects it in rape scenes.");
-            outputText("\nAlso adjusted some genderless (anal/oral only) scenes so they will look fitting - no genderless mentions or jokes.");
+            outputText("\nAlso adjusted some genderless (anal/oral only) scenes, so they will look fitting - no genderless mentions or jokes.");
             outputText("\n<i>New scenes may lack the description of herm's other genitalia. Some scenes may look slightly off (rare).</i>");
         }
         else {
@@ -32,7 +32,7 @@ public class SceneHunter extends BaseContent {
         if (flags[kFLAGS.SCENEHUNTER_DICK_SELECT]) {
             outputText("<b><font color=\"#008000\">ENABLED</font></b>");
             outputText("\nWhen the scene presents different options for small/big/ dick sizes, adds selectors for the player to choose the exact 'tool' if different options are available. The dick is selected randomly in rape scenes. Also in scenes with options for multicocks and single cock, sometimes lets you choose if you want to use only one.");
-            outputText("\n<i>Well, you can change which dick will be used now. Yay. Though some rare scenes (especially small dick femdom) may look slightly weird if you have a bigger cock.</i>");
+            outputText("\n<i>Well, you can change, which dick will be used now. Yay. Though some rare scenes (especially small dick femdom) may look slightly weird if you have a bigger cock.</i>");
         }
         else {
             outputText("<b><font color=\"#800000\">DISABLED</font></b>");
@@ -45,11 +45,11 @@ public class SceneHunter extends BaseContent {
             outputText("<b><font color=\"#008000\">ENABLED</font></b>");
         else
             outputText("<b><font color=\"#800000\">DISABLED</font></b>");
-        outputText("\nTweaks which didn't fit into the previous categories. Full list goes here.");
+        outputText("\nTweaks, which didn't fit into the previous categories. Full list goes here.");
         outputText("\nChristmas elf: enabled sex option even when corrupt.");
         outputText("\nLizan Rogue: medium-corrupt PCs now can persuade Lizan Rogue.");
         outputText("\nNaga <b>after</b> Samirah recruitment: enabled scenes. They're too good to miss.");
-        outputText("\nKitsune scene: replace lose scene randomizer with a selector. I hate randomizers.");
+        outputText("\nKitsune, Basilisk scenes: replace lose scene randomizer with a selector. I hate randomizers.");
         outputText("\n<i>This opens up more scenes. They are lore-accurate and still explained in the game (so you won't get Amily living with corrupt Jojo or other nonsense), but be warned that the original writers intended some details to work the other way.</i>");
         outputText("\n<i>Some one-time scenes with many options and checks can be replayed using 'Camp Actions -> Spend Time -> Recall'.</i>");
         //Scene list link
@@ -194,7 +194,6 @@ public class SceneHunter extends BaseContent {
     /**
     * The dialogue to select fitting or not fitting dick. If dickSelect is disabled, tries to call "fitting" function
     * If doesn't fit, selects the biggest one because HELL WHY NOT.
-    * When disabled, overrides "tentacle always fit" behavior.
     * @param    fitF        Function to call when fits
     * @param    nofitF      Function to call when doesn't
     * @param    maxSize     Maximum fitting size
@@ -241,7 +240,6 @@ public class SceneHunter extends BaseContent {
     /**
     * The dialogue to select one of 3 dick sizes. There's no points in the game when more are used.
     * When disabled, selects the biggest one.
-    * Always overrides "tentacles always fit" behavior for 'smaller' options - your 3-foot-long tentacle is not SMALL in any way :)
     * Assumes that you have any fitting dick - no max size for "Big"
     * @param    bigF, mediumF, smallF   Function for "Big", "Medium", "Small" buttons respectively.
     * @param    bigMin, smallMax        Borderline sizes for "Big"-"Medium" and "Medium"-"Small"
@@ -311,7 +309,6 @@ public class SceneHunter extends BaseContent {
     /**
     * The dialogue to select single cock or multicocks
     * If doesn't fit, selects the biggest one because HELL WHY NOT.
-    * When disabled, overrides "tentacle always fit" behavior.
     * @param    singleF     Single cock
     * @param    twoF        Multicock / Two cocks (or more)
     * @param    threeF      (Optional) Three (or more)
@@ -386,7 +383,6 @@ public class SceneHunter extends BaseContent {
     //No disabling flag for this one, but I'll leave it here for now in case I'll need to lock it..
     /**
      * The dialogue to select scene options based on corruption.
-     * When disabled, overrides "tentacle always fit" behavior.
      * @param    pureButton Array ["Name", function, optional - "Description"] for the first button
      * @param    corButton  Array ["Name", function, optional - "Description"] for the second button
      * @param    maxForPure Max corruption for pure button

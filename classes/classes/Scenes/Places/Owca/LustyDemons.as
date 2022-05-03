@@ -105,6 +105,7 @@ public class LustyDemons extends Monster
 					add(consumables.IMPFOOD, 1);
 			this.createPerk(PerkLib.EnemyLargeGroupType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
+			this.createPerk(PerkLib.OverMaxHP, 28, 0, 0, 0);
 			createStatusEffect(StatusEffects.Vapula,0,0,0,0);
 			checkMonster();
 		}

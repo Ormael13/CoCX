@@ -14,7 +14,7 @@
 public function defeatGS():void {
 	menu();
 	//Boobfeed.
-	if (player.hasStatusEffect(StatusEffects.Feeder) && flags[kFLAGS.SFW_MODE] <= 0) {
+	if (player.hasStatusEffect(StatusEffects.Feeder)) {
 		//Eligable to rape
 		if(player.lust >= 33 && player.gender > 0) {
 			outputText("\n\nYou're horny enough to try and rape it, though you'd rather see how much milk you can squirt into it.  What do you do?");
@@ -30,7 +30,7 @@ public function defeatGS():void {
 		}
 	}
 	//Not a breastfeeder
-	else if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
+	else if (player.lust >= 33 && player.gender > 0) {
 		outputText("  Sadly you realize your own needs have not been met.  Of course, you could always play with the poor thing... Do you rape it?");
 		addButton(0,"Rape",slimeVictoryRape);
 		SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatGS);
@@ -824,7 +824,6 @@ internal function rapeOozeWithMilk():void {
 
 		public function slimeLoss():void
 		{
-			if (doSFWloss()) return; //No rape in SFW mode.
 			clearOutput();
 			doNext(playerMenu);
 			if (player.gender == 2 || (player.gender == 3 && rand(2) == 0)) {

@@ -42,7 +42,6 @@ public class FetishCultistScene extends AbstractLakeContent
 
 		public function cultistRapesYou():void
 		{
-			if (doSFWloss()) return; //No rape in SFW mode.
 			monster.lust = 1;
 			monster.HP = 10;
 			var changed:Boolean = false;
@@ -512,7 +511,7 @@ public class FetishCultistScene extends AbstractLakeContent
 			if (monster.HP < 1) outputText("Hurt too much to continue controlling her powers, the cultist collapses helplessly.");
 			//Defeated by lust
 			else outputText("Overwhelmed by her lusts, the cultist loses the ability to control herself and collapses.");
-			if (player.lust >= 33 && player.gender > 0 && flags[kFLAGS.SFW_MODE] <= 0) {
+			if (player.lust >= 33 && player.gender > 0) {
 				outputText("\n\nDo you want to take advantage of her vulnerable state to sate your lusts?");
 				menu();
 				addButton(0, "Yes", playerRapesCultist);

@@ -57,6 +57,7 @@ package classes.Scenes.NPCs
 			this.tailType = Tail.DEMONIC;
 			this.lowerBody = LowerBody.DEMONIC_HIGH_HEELS;
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
+			this.createPerk(PerkLib.OverMaxHP, 50, 0, 0, 0);//v1 = enemy lvl
 			checkMonster();
 		}
 	}

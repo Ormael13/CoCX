@@ -11,13 +11,11 @@ import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Areas.DeepSea.Kraken;
 import classes.Scenes.Areas.Forest.TamainsDaughtersScene;
 import classes.Scenes.Areas.Forest.TamaniScene;
-import classes.Scenes.Areas.Forest.TentacleBeastRaging;
 import classes.Scenes.Areas.Forest.WorldTree;
 import classes.Scenes.Areas.HighMountains.IzumiScene;
 import classes.Scenes.Areas.HighMountains.MinotaurMobScene;
 import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.Dungeons.D3.SuccubusGardener;
-import classes.Scenes.Dungeons.RiverDungeon.QuatroElementalBoss;
 import classes.Scenes.Explore.Pierce;
 import classes.Scenes.Explore.TheDummy;
 import classes.Scenes.Monsters.Malikore;
@@ -258,7 +256,6 @@ public class Soulforce extends BaseContent
 		menuItems.push("Fix Shards", cheatFixShards, "Check player's quest and give the deserved shards");
 		menuItems.push("Add Shard", cheatAddShard, "Add 1 radiant shard");
 		menuItems.push("Remove Shard", cheatRemoveShard, "Remove 1 radiant shard");
-		//menuItems.push("ZenjiQ", ZenjiQ, "Zenji Expac 2 debug tool");
 		menuItems.push("LustBreath", (player.hasPerk(PerkLib.DragonPoisonBreath))? FairyTest: false, "Replacing 1 perk with another");
 		menuItems.push("TyrantPF", (TyrantiaFollower.TyrantiaFollowerStage == 5 && TyrantiaFollower.TyraniaCorrupteedLegendaries == 0)? FairyTest5: false, "Patching Tyrantia corrupted legendaries unlock");
 		menuItems.push("LilyPregF", (DriderTown.LilyKidsPCPregnancy != 0 && LilyFollower.LilyFollowerState)? FairyTest3: false, "Curing Lily Infertility ^^");
@@ -367,47 +364,6 @@ public class Soulforce extends BaseContent
 			outputText("\nNo shards, go complete quests :(");
 	}
 
-	public function ZenjiQ():void{
-		clearOutput();
-		outputText("Zenji Debug Menu: \n");
-		outputText("ZenjiVillageStage: " + TrollVillage.ZenjiVillageStage + "\n" +
-		"JabalaUnlocked: " + TrollVillage.JabalaUnlocked + "\n" +
-		"YenzaUnlocked: " + TrollVillage.YenzaUnlocked + "\n" +
-		"KaljiUnlocked: " + TrollVillage.KaljiUnlocked + "\n" +
-		"ZenjiFollowing: " + TrollVillage.ZenjiFollowing + "\n" +
-		"KuruUnlocked: " + TrollVillage.KuruUnlocked + "\n" +
-		"HalkanoUnlocked: " + TrollVillage.HalkanoUnlocked + "\n" +
-		"ZenjiBerated: " + TrollVillage.ZenjiBerated + "\n" +
-		"YenzaLockdown: " + TrollVillage.YenzaLockdown + "\n" +
-		"ZenjiTrollVillageTimeChk: " + TrollVillage.ZenjiTrollVillageTimeChk + "\n" +
-		"YubiUnlocked: " + TrollVillage.YubiUnlocked + "\n" +
-		"KaljiMBJDeny: " + TrollVillage.KaljiMBJDeny + "\n" +
-		"ZenjiMoneyHelp: " + TrollVillage.ZenjiMoneyHelp + "\n" +
-		"JabalaLoveChat: " + TrollVillage.JabalaLoveChat + "\n" +
-		"ZenjiMarriageDress: " + TrollVillage.ZenjiMarriageDress + "\n"+
-		"Zenji Marriage Vars: \n" +
-		"ZenjiSleepCount: " + ZenjiScenes.ZenjiSleepCount + "\n" +
-		"ZenjiTalkCount: " + ZenjiScenes.ZenjiTalkCount + "\n" +
-		"ZenjiLoverDays: " + ZenjiScenes.ZenjiLoverDays
-		);
-		menu();
-		addButton(0, "Reset EventLine", reset).hint("Reset chain.");
-		addButton(1, "Force Village", villageNow).hint("Force encounters village");
-		addButton(14, "Leave", curry(SoulforceCheats1, 2));
-
-		function reset ():void{
-			clearOutput();
-			SceneLib.trollVillage.resetState();
-			outputText("All Parameters cleared!");
-			doNext(camp.doCamp);
-		}
-
-		function villageNow():void{
-			SceneLib.trollVillage.FirstEncountersoftheTrollKind();
-		}
-
-	}
-
 	public function cheatRemoveRP():void {
 		clearOutput();
 		if (player.removePerk(PerkLib.RacialParagon)) {
@@ -420,11 +376,11 @@ public class Soulforce extends BaseContent
 	}
 
 	public function cheatRemoveShard():void {
-		if(player.keyItemv1("Radiant shard") == 1)
+		if(player.keyItemvX("Radiant shard", 1) == 1)
 			player.removeKeyItem("Radiant shard");
 		else
 			player.addKeyValue("Radiant shard", 1, -1);
-		outputText("\n\n<b>You currently have "+ player.keyItemv1("Radiant shard") +" radiant shards.</b>");
+		outputText("\n\n<b>You currently have "+ player.keyItemvX("Radiant shard", 1) +" radiant shards.</b>");
 		doNext(curry(SoulforceCheats1, 2));
 	}
 
@@ -433,7 +389,7 @@ public class Soulforce extends BaseContent
 			player.addKeyValue("Radiant shard", 1, cnt);
 		else
 			player.createKeyItem("Radiant shard", cnt, 0, 0, 0);
-		outputText("\n\n<b>You currently have "+ player.keyItemv1("Radiant shard") + " radiant shards.</b>");
+		outputText("\n\n<b>You currently have "+ player.keyItemvX("Radiant shard", 1) + " radiant shards.</b>");
 		doNext(curry(SoulforceCheats1,2));
 	}
 
@@ -646,11 +602,6 @@ public class Soulforce extends BaseContent
 		statScreenRefresh();
 		doNext(curry(SoulforceCheats1,0));
 	}
-	public function FightQuatroElementalBoss():void {
-		clearOutput();
-		outputText("Entering battle with Quatro Elemental Boss! Enjoy ^^");
-		startCombat(new QuatroElementalBoss());
-	}
 	public function FightAria():void {
 		clearOutput();
 		outputText("Entering battle with Melkie! Enjoy ^^");
@@ -839,6 +790,10 @@ public class Soulforce extends BaseContent
 		if (!player.hasPerk(PerkLib.SensualLover)) {
 			player.createPerk(PerkLib.SensualLover, 0, 0, 0, 0);
 			outputText("\n\n<b>(Gained Perk: Sensual Lover!)</b>");
+		}
+		if (!player.hasPerk(PerkLib.ThickSkin)) {
+			player.createPerk(PerkLib.ThickSkin, 0, 0, 0, 0);
+			outputText("\n\n<b>(Gained Perk: Thick Skin!)</b>");
 		}
 		if (player.hasPerk(PerkLib.Perfection) && !player.hasPerk(PerkLib.Creationism)) {
 			player.createPerk(PerkLib.Creationism, 0, 0, 0, 0);
@@ -1789,7 +1744,6 @@ public class Soulforce extends BaseContent
 		if (page == 1) {
 			addButton(0, "FightForPearl", FightForPearl).hint("Test fight to get Sky Poison Pearl legally (aside we cheat to start fight)");
 			addButton(1, "Marae", FightMarae).hint("Test fight with Marae (depending on game stage she can be buffed or unbuffed).");
-			addButton(2, "Pierce", FightPierce).hint("Test fight with Pierce.");
 			addButton(3, "SuccGard", FightSuccubusGardener).hint("Test fight with Succubus Gardener. (Also it will glitch right after fight so not start this fight if you got unsaved progress that you not wanna loose as only way to handle post fight glitch is restarting game)");
 			addButton(4, "The Dummy", FightTheDummy).hint("Fight with The Dummy.");
 			addButton(5, "M.WSeaver", FightBelisa).hint("Test fight with Mana Weaver.");
@@ -1799,7 +1753,7 @@ public class Soulforce extends BaseContent
 			addButton(9, "RyuBi", FightRyuBi).hint("Test fight with RyuBi.");
 			addButton(10, "LvLUP Eva", LvLUPEva).hint("LvL UP forcefully Evangeline for testing purpose up to the limit.");
 			addButton(11, "DELvL Eva", DELvLEva).hint("DE LvL forcefully Evangeline for testing purpose down toward the lvl 12.");
-			addButton(12, "FeralT.Beast", FightFeralBeast).hint("Test fight with feral tentacle beast.");
+			addButton(12, "Pierce", FightPierce).hint("Test fight with Pierce.");
 			addButton(13, "-2-", EnemiesMenu, page + 1);
 			addButton(14, "Back", curry(SoulforceCheats1, 0));
 		}
@@ -1808,7 +1762,6 @@ public class Soulforce extends BaseContent
 			addButton(1, "Hydra", FightHydra).hint("Test fight with Hydra.");
 			addButton(2, "HellfireSnail", FightHellfireSnail).hint("Test fight with Hellfire Snail.");
 			addButton(3, "ChaosChimera", FightChaosChimera).hint("Test fight with Chaos Chimera.");
-			addButton(4, "Q. E. Boss", FightQuatroElementalBoss).hint("Test fight with Quatro Elemental Boss.");
 			if (player.level >= 45) addButton(5, "Oculicorn", FightIridesian).hint("Test fight with Oculicorn.");
 			addButton(6, "Aria", FightAria).hint("Test fight with melkie huntress Aria.");
 			addButton(7, "Neisa", FightNeisa).hint("Test fight with Neisa.");
@@ -2870,11 +2823,6 @@ public class Soulforce extends BaseContent
 		outputText("\n\n<b>Evangeline get weaker! (cheat stop working when she reach lvl 12)</b>");
 		if (flags[kFLAGS.EVANGELINE_LVL_UP] > 6) flags[kFLAGS.EVANGELINE_LVL_UP]--;
 		EnemiesMenu(1);
-	}
-	public function FightFeralBeast():void {
-		clearOutput();
-		outputText("Entering battle with feral tentacle beast! Enjoy ^^");
-		startCombat(new TentacleBeastRaging());
 	}
 	public function RevertCabinProgress():void {
 		flags[kFLAGS.CAMP_CABIN_PROGRESS] = 2;
@@ -4277,7 +4225,7 @@ public class Soulforce extends BaseContent
 		if (flags[kFLAGS.SOUL_SENSE_PRISCILLA] >= 3) addButton(5, "Priscilla", PriscillaEnc).hint("Req. 320+ soulforce");
 		else addButtonDisabled(5, "Priscilla", "");
 		if (flags[kFLAGS.SOUL_SENSE_MINOTAUR_SONS] >= 3) {
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] >= 3) {
+			if (flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] >= 3) {
 				if (player.hasVagina()) addButton(6, "Mino Sons", MinotaurSonsEnc).hint("Req. at least 260+ soulforce (more sons will increase needed SF)");
 				else addButtonDisabled(6, "Mino Sons", "Req. to have vagina.");
 			}
@@ -4351,8 +4299,8 @@ public class Soulforce extends BaseContent
 		}
 	}
 	public function MinotaurSonsEnc():void {
-		if (player.soulforce >= 10 * (26 + Math.round((flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3)/2))) {
-			player.soulforce -= 10 * (26 + Math.round((flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] - 3)/2));
+		if (player.soulforce >= 10 * (26 + Math.round((flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] - 3)/2))) {
+			player.soulforce -= 10 * (26 + Math.round((flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] - 3)/2));
 			statScreenRefresh();
 			minotaurSonsScene.meetMinotaurSons();
 		}

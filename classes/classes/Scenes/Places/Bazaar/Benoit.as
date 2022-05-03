@@ -343,7 +343,7 @@ public function benoitsBuyMenu():void {
 			flags[kFLAGS.BENOIT_3],createCallBackFunction(benoitTransactBuy,3),
 			flags[kFLAGS.BENOIT_4],createCallBackFunction(benoitTransactBuy,4),
 			flags[kFLAGS.BENOIT_5],createCallBackFunction(benoitTransactBuy,5));
-	if (player.keyItemv1("Backpack") < 12) addButton(5, "Backpack", buyBackpack).hint("This backpack will allow you to carry more items.");
+	if (player.keyItemvX("Backpack", 1) < 12) addButton(5, "Backpack", buyBackpack).hint("This backpack will allow you to carry more items.");
 	if (flags[kFLAGS.BENOIT_CLOCK_BOUGHT] <= 0 && flags[kFLAGS.CAMP_CABIN_FURNITURE_NIGHTSTAND] > 0) addButton(6, "Alarm Clock", buyAlarmClock).hint("This mechanical clock looks like it was originally constructed by the Goblins before the corruption spreaded throughout Mareth.");
 	if (flags[kFLAGS.BENOIT_PISTOL_BOUGHT] < 2 && flags[kFLAGS.BENOIT_AFFECTION] == 100) addButton(7, "Zweihander", buyZweihander);
 	addButton(14, "Back", benoitIntro);
@@ -668,12 +668,12 @@ private function buyBackpack():void {
 	outputText("\nDouble Extra Large: 500 gems, +10 inventory slots");
 	outputText("\nTriple Extra Large: 600 gems, +12 inventory slots");
 	menu();
-	if (player.keyItemv1("Backpack") < 2) addButton(0, "Small", buyBackpackConfirmation, 2, "Small", 100, "Grants additional two slot. \n\nCost: 100 gems");
-	if (player.keyItemv1("Backpack") < 4) addButton(1, "Medium", buyBackpackConfirmation, 4, "Medium", 200, "Grants additional four slots. \n\nCost: 200 gems");
-	if (player.keyItemv1("Backpack") < 6) addButton(2, "Large", buyBackpackConfirmation, 6, "Large", 300, "Grants additional six slots. \n\nCost: 300 gems");
-	if (player.keyItemv1("Backpack") < 8) addButton(3, "X Large", buyBackpackConfirmation, 8, "X Large", 400, "Grants additional eight slots. \n\nCost: 400 gems");
-	if (player.keyItemv1("Backpack") < 10) addButton(4, "XX Large", buyBackpackConfirmation, 10, "XX Large", 500, "Grants additional ten slots. \n\nCost: 500 gems");
-	if (player.keyItemv1("Backpack") < 12) addButton(5, "XXX Large", buyBackpackConfirmation, 12, "XXX Large", 600, "Grants additional twelve slots. \n\nCost: 600 gems");
+	if (player.keyItemvX("Backpack", 1) < 2) addButton(0, "Small", buyBackpackConfirmation, 2, "Small", 100, "Grants additional two slot. \n\nCost: 100 gems");
+	if (player.keyItemvX("Backpack", 1) < 4) addButton(1, "Medium", buyBackpackConfirmation, 4, "Medium", 200, "Grants additional four slots. \n\nCost: 200 gems");
+	if (player.keyItemvX("Backpack", 1) < 6) addButton(2, "Large", buyBackpackConfirmation, 6, "Large", 300, "Grants additional six slots. \n\nCost: 300 gems");
+	if (player.keyItemvX("Backpack", 1) < 8) addButton(3, "X Large", buyBackpackConfirmation, 8, "X Large", 400, "Grants additional eight slots. \n\nCost: 400 gems");
+	if (player.keyItemvX("Backpack", 1) < 10) addButton(4, "XX Large", buyBackpackConfirmation, 10, "XX Large", 500, "Grants additional ten slots. \n\nCost: 500 gems");
+	if (player.keyItemvX("Backpack", 1) < 12) addButton(5, "XXX Large", buyBackpackConfirmation, 12, "XXX Large", 600, "Grants additional twelve slots. \n\nCost: 600 gems");
 	addButton(14, "Nevermind", benoitsBuyMenu);
 }
 private function buyBackpackConfirmation(size:int = 2, sizeDesc:String = "Small", price:int = 100):void {
@@ -685,8 +685,8 @@ private function buyBackpackConfirmation(size:int = 2, sizeDesc:String = "Small"
 	}
 	outputText("\"<i>Here you go.  I have no need for zis,</i>\" " + benoitMF("Benoit", "Benoite") + " says.");
 	if (player.hasKeyItem("Backpack") >= 0) {
-		outputText("\n\n<b>(Key Item Upgraded: " + sizeDesc + " Backpack! You now have " + num2Text(size - player.keyItemv1("Backpack")) + " extra inventory slots");
-		player.addKeyValue("Backpack", 1, size - player.keyItemv1("Backpack"));
+		outputText("\n\n<b>(Key Item Upgraded: " + sizeDesc + " Backpack! You now have " + num2Text(size - player.keyItemvX("Backpack", 1)) + " extra inventory slots");
+		player.addKeyValue("Backpack", 1, size - player.keyItemvX("Backpack", 1));
 		outputText(" for a total of " + num2Text(inventory.getMaxSlots()) + " slots.)</b>");
 	}
 	else {
@@ -1861,8 +1861,6 @@ public function femoitSexIntro():void
 
 			outputText("\n\nYou assure her that she can do it someday when you're ready.");
 			flags[kFLAGS.BENOIT_STATUS] = 3; //Hermaphrodite Benoite.
-
-			menu();
 			doNext(camp.returnToCampUseOneHour);
 		}
 	}

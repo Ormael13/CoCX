@@ -2263,8 +2263,6 @@ private function lvlUpCheckup():void {
 			else outputText("\n\nKiha tells about how she plans to get into Lethice's stronghold and defeat Lethice once and for all.");
 			outputText("\n\nThe " + (totalKihaChildren() == 1 ? "kid" : "kids") + " are happy to hear about the story. \"<i>Thank you for being with me and listening to my story, my Doofus,</i>\" Kiha says before giving you a peck on your cheek.");
 			dynStats("cor", -2, "lus", -50, "scale", false);
-
-			menu();
 			doNext(camp.returnToCampUseOneHour);
 		}
 

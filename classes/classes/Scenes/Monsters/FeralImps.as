@@ -142,6 +142,7 @@ import classes.internals.*;
 				this.gems = rand(5) + 5;
 				this.special1 = clawAttack;
 				this.createPerk(PerkLib.EnemyForBeginnersType, 0, 0, 0, 0);
+				this.createPerk(PerkLib.OverMaxHP, 1, 0, 0, 0);
 			}
 			if (flags[kFLAGS.FERAL_EXTRAS] == 2) {
 				this.a = "the ";
@@ -167,6 +168,7 @@ import classes.internals.*;
 				this.level = 7;
 				this.gems = rand(15) + 25;
 				this.special1 = clawAttack;
+				this.createPerk(PerkLib.OverMaxHP, 7, 0, 0, 0);
 			}
 			if (flags[kFLAGS.FERAL_EXTRAS] == 3) {
 				this.a = "the ";
@@ -193,6 +195,7 @@ import classes.internals.*;
 				this.gems = rand(20) + 40;
 				this.special1 = clawAttack;
 				this.special2 = doubleAttack;
+				this.createPerk(PerkLib.OverMaxHP, 16, 0, 0, 0);
 			}
 			if (flags[kFLAGS.FERAL_EXTRAS] == 4) {
 				this.a = "a ";
@@ -232,6 +235,7 @@ import classes.internals.*;
 				this.level = 15;
 				this.gems = rand(20) + 30;
 				this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
+				this.createPerk(PerkLib.OverMaxHP, 15, 0, 0, 0);
 			}
 			if (flags[kFLAGS.FERAL_EXTRAS] == 5) {
 				this.a = "the ";
@@ -255,6 +259,7 @@ import classes.internals.*;
 				this.level = 2;
 				this.gems = rand(5) + 5;
 				this.special1 = clawAttack;
+				this.createPerk(PerkLib.OverMaxHP, 2, 0, 0, 0);
 			}
 			if (flags[kFLAGS.FERAL_EXTRAS] != 4) {
 				this.createCock(4, 1, CockTypesEnum.DEMON);

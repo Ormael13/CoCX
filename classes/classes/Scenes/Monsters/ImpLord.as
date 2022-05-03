@@ -163,6 +163,7 @@ public class ImpLord extends Imp
 				{call: lustMagicAttack1, type: ABILITY_MAGIC, range: RANGE_RANGED, tags:[]}
 			];
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
+			this.createPerk(PerkLib.OverMaxHP, 7, 0, 0, 0);
 			checkMonster();
 		}
 		

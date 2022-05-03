@@ -83,7 +83,7 @@ public class GameSettings extends BaseContent {
 		else
 			outputText("Silly Mode: <font color=\"#800000\"><b>OFF</b></font>\n You're an incorrigable stick-in-the-mud with no sense of humor.");
 		outputText("\n\n");
-		if (flags[kFLAGS.WATERSPORTS_ENABLED] >= 1 && flags[kFLAGS.SFW_MODE] <= 0) {
+		if (flags[kFLAGS.WATERSPORTS_ENABLED] >= 1) {
 			outputText("Watersports: <font color=\"#008000\"><b>Enabled</b></font>\n Watersports scenes are enabled. (You kinky person)");
 		}
 		else
@@ -141,12 +141,6 @@ public class GameSettings extends BaseContent {
 		else
 			outputText("Hyper Happy Mode: <font color=\"#800000\"><b>OFF</b></font>\n Male enhancement potions shrink female endowments, and vice versa.");
 		outputText("\n\n");
-		if (flags[kFLAGS.SFW_MODE] >= 1) {
-			outputText("SFW Mode: <font color=\"#008000\"><b>ON</b></font>\n Sex scenes are disabled and adult materials are hidden.");
-		}
-		else
-			outputText("SFW Mode: <font color=\"#800000\"><b>OFF</b></font>\n Sex scenes are enabled.");
-		outputText("\n\n");
 		menu();
 		addButton(0, "Toggle Debug", toggleDebug).hint("Turn on debug mode. Debug mode is intended for testing purposes but can be thought of as a cheat mode.  Items are infinite and combat is easy to escape from.  Weirdness and bugs are to be expected.");
 		if (player) {
@@ -167,7 +161,6 @@ public class GameSettings extends BaseContent {
 		addButton(2, "Silly Toggle", toggleSillyFlag).hint("Toggles silly mode. Funny, crazy and nonsensical scenes may occur if enabled.");
 		addButton(3, "Low Standards", toggleStandards);
 		addButton(4, "Hyper Happy", toggleHyperHappy);
-		addButton(5, "SFW Toggle", toggleSFW).hint("Toggles SFW Mode. If enabled, sex scenes are hidden and all adult materials are censored. \n\nCurrently under development, only disables most sex scenes. Soon, it'll disable rape scenes."); //Softcore Mode
 		addButton(6, "Auto level", toggleAutoLevel).hint("Toggles automatic leveling when you accumulate sufficient experience.");
 		addButton(10, "Fast Lvl", toggleInstaLvl).hint("Immediately level to highest possible from XP instead of spamming next.");
 		addButton(12, "Mutation Assist", mutationSubMenu).hint("Mutation Tracker Spoiler Mode. For when you want to discover mutations by yourself, or with some help.");
@@ -329,12 +322,6 @@ public class GameSettings extends BaseContent {
 	public function toggleHyperHappy():void {
 		//toggle hyper happy
 		flags[kFLAGS.HYPER_HAPPY] = !flags[kFLAGS.HYPER_HAPPY];
-		settingsScreenGameSettings();
-	}
-
-	public function toggleSFW():void {
-		if (flags[kFLAGS.SFW_MODE] < 1) flags[kFLAGS.SFW_MODE] = 1;
-		else flags[kFLAGS.SFW_MODE] = 0;
 		settingsScreenGameSettings();
 	}
 

@@ -1229,8 +1229,8 @@ public class PlayerInfo extends BaseContent {
 		if (flags[kFLAGS.ZENJI_KIDS] > 0)
             childStats += "<b>Kids with Zenji:</b> " + flags[kFLAGS.ZENJI_KIDS] + "\n";
         //Mino sons
-		if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] > 0)
-			childStats += "<b>Number of Adult Minotaur Offspring:</b> " + flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] + "\n";
+		if (flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] > 0)
+			childStats += "<b>Number of Adult Minotaur Offspring:</b> " + flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] + "\n";
 
 		//Alraune daughters
 		if (flags[kFLAGS.ALRAUNE_SEEDS] > 0)
@@ -2028,7 +2028,8 @@ public class PlayerInfo extends BaseContent {
 				else addButtonDisabled(0, "DJ:M", "You do not have enough super perk points to obtain this perk.");
 				if (player.hasPerk(PerkLib.MunchkinAtGym)) addButtonDisabled(1, "M(at)G", "You already have this perk.");
 				else addButtonDisabled(1, "M(at)G", "You do not have enough super perk points to obtain this perk.");
-				addButtonDisabled(2, "M(at)W", "Soon");
+				if (player.hasPerk(PerkLib.MunchkinAtWork)) addButtonDisabled(2, "M(at)W", "You already have this perk.");
+				else addButtonDisabled(2, "M(at)W", "You do not have enough super perk points to obtain this perk.");
 			}
 			addButton(12, "Next", superPerkBuyMenu, page + 1);
 			if (player.perkPoints > 2) addButton(13, "Convert", superPerkConvertMenu);

@@ -344,7 +344,7 @@ private function oswaldPawnMenu(page:int = 1, refresh:Boolean = false):void { //
 private function oswaldPawnMenu2():void {
 	spriteSelect(SpriteDb.s_oswald);
 	menu();
-	if (player.hasKeyItem("Backpack") && player.keyItemv1("Backpack") < 12) addButton(5, "Backpack", buyBackpack).hint("This backpack will allow you to carry more items.");
+	if (player.hasKeyItem("Backpack") && player.keyItemvX("Backpack", 1) < 12) addButton(5, "Backpack", buyBackpack).hint("This backpack will allow you to carry more items.");
 	switch (flags[kFLAGS.KATHERINE_UNLOCKED]) {
 		case 1:
 		case 2: addButton(10, "Kath's Alley", katherine.visitKatherine); break;
@@ -413,8 +413,8 @@ private function buyBackpack():void {
 	outputText("\nSmall: 100 gems, +2 inventory slot");
 	outputText("\nMedium: 200 gems, +4 inventory slots");
 	menu();
-	if (player.keyItemv1("Backpack") < 2) addButton(0, "Small", buyBackpackConfirmation, 2, "Small", 100, "Grants additional two slot. \n\nCost: 100 gems");
-	if (player.keyItemv1("Backpack") < 4) addButton(1, "Medium", buyBackpackConfirmation, 4, "Medium", 200, "Grants additional four slots. \n\nCost: 200 gems");
+	if (player.keyItemvX("Backpack", 1) < 2) addButton(0, "Small", buyBackpackConfirmation, 2, "Small", 100, "Grants additional two slot. \n\nCost: 100 gems");
+	if (player.keyItemvX("Backpack", 1) < 4) addButton(1, "Medium", buyBackpackConfirmation, 4, "Medium", 200, "Grants additional four slots. \n\nCost: 200 gems");
 	addButton(14, "Nevermind", oswaldPawnMenu2);
 }
 private function buyBackpackConfirmation(size:int = 2, sizeDesc:String = "Small", price:int = 100):void {
@@ -427,8 +427,8 @@ private function buyBackpackConfirmation(size:int = 2, sizeDesc:String = "Small"
 	}
 	outputText("\"<i>Here you go.</i>\"");
 	if (player.hasKeyItem("Backpack") >= 0) {
-		outputText("\n\n<b>(Key Item Upgraded: " + sizeDesc + " Backpack! You now have " + num2Text(size - player.keyItemv1("Backpack")) + " extra inventory slots");
-		player.addKeyValue("Backpack", 1, size - player.keyItemv1("Backpack"));
+		outputText("\n\n<b>(Key Item Upgraded: " + sizeDesc + " Backpack! You now have " + num2Text(size - player.keyItemvX("Backpack", 1)) + " extra inventory slots");
+		player.addKeyValue("Backpack", 1, size - player.keyItemvX("Backpack", 1));
 		outputText(" for a total of " + num2Text(inventory.getMaxSlots()) + " slots.)</b>");
 	}
 	else {
@@ -1150,7 +1150,8 @@ public function kaibaShopMainMenu2():void {
 			addButton(8, "Asterius", buyItem, weapons.ASTERIUS).hint("Asterius Rage - A pair of mighty but clearly cursed magical axes rumored to be the artefact of the fallen war deity Asterius.");
 		}
 		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
-		addButton(13, "-2-", kaibaShopMainMenuPage2);
+		addButton(12, "-2-", kaibaShopMainMenuPage2);
+		addButton(13, "-3-", kaibaShopMainMenuPage3);
 	}
 	if (flags[kFLAGS.KAIBA_SHELFS] == 1) {
 		if (player.hasStatusEffect(StatusEffects.KaibaDailyLimit)) {
@@ -1163,7 +1164,6 @@ public function kaibaShopMainMenu2():void {
 			addButtonDisabled(8, "Storm Ruler", "You already bought item from Kaiba today.");
 			addButtonDisabled(10, "Oni Noble Kimono", "You already bought item from Kaiba today.");
 			addButtonDisabled(11, "Oni Tyrant Kimono", "You already bought item from Kaiba today.");
-			addButtonDisabled(12, "Demon tail ring", "You already bought item from Kaiba today.");
 		}
 		else {
 			addButton(2, "C.S.Necklace", buyItem, necklaces.CSNECK).hint("Crinos Shape necklace - Allow PC to use Crinos Shape even without perk Job: Beast Warrior with wrath costs and boost as the one gained from picking Job: Beast Warrior.");
@@ -1175,37 +1175,33 @@ public function kaibaShopMainMenu2():void {
 			addButton(8, "Storm Ruler", buyItem, weapons.S_RULER).hint("Storm Ruler - It's large sized weapon belonging to mace/hammer type with 10% chance to trigger stun effect. It deal lightning type of damage and 50% more damage to huge or larger enemies. Additionally have Body's Cultivator (20%).");
 			addButton(10, "Oni Noble Kimono", buyItem, armors.OEKIMO).hint("The garbs of an oni noble. Suposedly it was stolen from an oni somewhere in the high mountain before being sold to kaiba by an unicorn. This is a temporary sale.");
 			addButton(11, "Oni Tyrant Kimono", buyItem, armors.OTKIMO).hint("The garbs of an oni tyrant. Suposedly it was stolen from an oni somewhere in the high mountain before being sold to kaiba by an unicorn. This is a temporary sale.");
-			addButton(12, "Demon tail ornament", buyItem, miscjewelries.DMAGETO).hint("This golden band covered with black magic incantation is big enough for an arm bracelet but was designed so it could serve as a ornament for a demon tail. This is a temporary sale.");
 		}
 		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
+		addButton(12, "-1-", kaibaShopMainMenuPage1);
 		addButton(13, "-3-", kaibaShopMainMenuPage3);
 	}
 	if (flags[kFLAGS.KAIBA_SHELFS] == 2) {
 		if (player.hasStatusEffect(StatusEffects.KaibaDailyLimit)) {
+			addButtonDisabled(0, "S.Ornament", "You already bought item from Kaiba today.");
+			addButtonDisabled(1, "Demon tail ring", "You already bought item from Kaiba today.");
 			addButtonDisabled(2, "MoonGSword", "You already bought item from Kaiba today.");
 			addButtonDisabled(3, "Wrathless", "You already bought item from Kaiba today.");
 			addButtonDisabled(4, "T.M.Outfit", "You already bought item from Kaiba today.");
 			addButtonDisabled(5, "W.I.Cloak", "You already bought item from Kaiba today.");
 			addButtonDisabled(6, "S.S.Clothing", "You already bought item from Kaiba today.");
-			addButtonDisabled(7, "T.C.Kimono", "You already bought item from Kaiba today.");
-			addButtonDisabled(8, "I.B.Kimono", "You already bought item from Kaiba today.");
-			addButtonDisabled(9, "C.B.G.Armor", "You already bought item from Kaiba today.");
-			addButtonDisabled(10, "S.Ornament", "You already bought item from Kaiba today.");
 		}
 		else {
+			addButton(0, "S.Ornament", buyItem, headjewelries.DMONSKUL).hint("Skull hair ornament - An unique hair accessory for evil wizards greatly empower ones magic power scaling with corruption, An unique find buy it while you can because this won't last forever!");
+			addButton(1, "Demon tail ornament", buyItem, miscjewelries.DMAGETO).hint("This golden band covered with black magic incantation is big enough for an arm bracelet but was designed so it could serve as a ornament for a demon tail. This is a temporary sale.");
 			addButton(2, "MoonGSword", buyItem, weapons.MGSWORD).hint("Moonlight Greatsword - dealing magical dmg instead of physical, using charge weapon will give 2x larger bonus and can use range attack in case there is no range weapon equipped.");
 			addButton(3, "Wrathless", buyItem, necklaces.WRATHLE).hint("Wrathless - +10% to spellpower and removes all penalty to spellcasting or using m. specials if wrath is not at max value.");
 			addButton(4, "T.M.Outfit", buyItem, armors.TRMOUTF).hint("Traveling Merchant Outfit - Increase all gems gained by 100% and increase the potency of gem based ability by 150%, reduce spellcasting cost by 60%.");
 			addButton(5, "W.I.Cloak", buyItem, armors.WALIC).hint("Walpurgis Izalia Cloak - Increase fire and darkness damage by 100%, weaken all other elemental damage by 99%, increase fire resistance by 25%, reduce spellcasting cost by 60%.");
 			addButton(6, "S.S.Clothing", buyItem, armors.SCANSC).hint("Scandalous Succubus Clothing - Slutty seduction 15, Count as naked, +25% to Lust strike tease damage, Double tease experience gained, Raise corruption over time, Incompatible with bra or panty, double the effect of Masochist and Sadist.");
-			addButton(7, "T.C.Kimono", buyItem, armors.TCKIMO).hint("Tamamo no Mae Cursed Kimono - Slutty seduction 15, Count as naked and empower magical and soulforce ability, An unique find buy it while you can because this won't last forever!");
-			addButton(8, "I.B.Kimono", buyItem, armors.IBKIMO).hint("Inari Blessed Kimono - Slutty seduction 15, Count as naked and empower magical and soulforce ability, An unique find buy it while you can because this won't last forever!");
-			addButton(9, "C.B.G.Armor", buyItem, armors.CTBGUAR).hint("Centaur Blackguard Armor - Count as a light and heavy armor, An unique find buy it while you can because this won't last forever!");
-			addButton(10, "S.Ornament", buyItem, headjewelries.DMONSKUL).hint("Skull hair ornament - An unique hair accessory for evil wizards greatly empower ones magic power scaling with corruption, An unique find buy it while you can because this won't last forever!");
-
 		}
 		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
-		addButton(13, "-1-", kaibaShopMainMenuPage1);
+		addButton(12, "-1-", kaibaShopMainMenuPage1);
+		addButton(13, "-2-", kaibaShopMainMenuPage2);
 	}
 	addButton(14, "Leave", telAdreMenu);
 }

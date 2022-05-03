@@ -350,7 +350,7 @@ private function bimboSophieGetsBooted4Firebutt():void {
 	outputText("\n\n<i>\"N-no, Sophie.  You need to leave, now.\"</i>");
 	
 	//{If PC has a gang of Mino Sons}
-	if(flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00326] >= 3) {
+	if(flags[kFLAGS.MINOTAUR_SONS_TRIBE_SIZE] >= 3) {
 		outputText("\n\nAs you're trying to get rid of the dumb blonde you made, you hear the clop of hooves approaching.  You look up in time to see a few familiar faces - your minotaur sons!");
 		outputText("\n\n<i>\"Hey there, mom,\"</i> the biggest of them says, <i>\"Whatcha got there?  You bring us a present?\"</i>");
 		outputText("\n\nNo, you di- hey, wait a minute...");

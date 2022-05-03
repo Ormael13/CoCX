@@ -326,14 +326,12 @@ import classes.internals.*;
 			this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.MindOverBodyI, 0, 0, 0, 0);
-			//this.createPerk(PerkLib.TankI, 0, 0, 0, 0);
+			this.createPerk(PerkLib.OverMaxHP, 100, 0, 0, 0);
 			this.createPerk(PerkLib.Phylactery, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyResiliance, 0, 0, 0, 0);
 			checkMonster();
 		}
-
 	}
-
 }

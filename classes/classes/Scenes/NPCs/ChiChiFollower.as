@@ -602,7 +602,7 @@ public function chichiSex0():void {
 }
 public function chichiSex1():void {
 	outputText("Well sure. If it will make her happy, you will propose to her.");
-	if (player.hasItem(jewelries.ENDGRNG, 1) && flags[kFLAGS.SAPPHIRE_TALKS] >= 4) {
+	if (player.hasItem(jewelries.ENDGRNG, 1) && SceneLib.templeofdivine.canMarry()) {
 		outputText(" You have the ruby ring on you, but is this really the time?\n\n");
 		menu();
 		addButton(1, "Yes", chichiSex3).hint("Taking this step leads to a fight. Save your game!");
@@ -610,7 +610,7 @@ public function chichiSex1():void {
 	}
 	else {
 		outputText(" You ");
-		if (flags[kFLAGS.SAPPHIRE_TALKS] < 4) {
+		if (!SceneLib.templeofdivine.canMarry()) {
 			if (!player.hasItem(jewelries.ENDGRNG, 1)) outputText("also realize to your annoyance that not only are you missing a wedding ring but the two of you will need a holy place to recite your vows, one with a still working altar of Marae and active priestess. Come to think of it her favorite color was red maybe a ruby ring would do.");
 			else outputText("realise to your annoyance that the two of you will need a holy place to recite your vows, one with a still working altar of Marae and active priestess likely.");
 		}
