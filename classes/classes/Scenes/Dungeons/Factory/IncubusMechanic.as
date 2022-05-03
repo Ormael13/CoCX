@@ -227,6 +227,8 @@ public class IncubusMechanic extends Monster {
 			this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			this.createPerk(PerkLib.UniqueNPC, 0, 0, 0, 0);
+			if (flags[kFLAGS.D3_MECHANIC_LAST_GREET] > 0) this.createPerk(PerkLib.OverMaxHP, 38, 0, 0, 0);
+			else this.createPerk(PerkLib.OverMaxHP, 14, 0, 0, 0);
 			checkMonster();
 		}
 	}
