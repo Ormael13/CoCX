@@ -13,7 +13,7 @@ package classes.Scenes.Camp
 	public class Jabberwocky extends Monster
 	{
 		public function ClawSwipe():void {
-			outputText("The jabberwocky slices you with its claw for ");
+			outputText("The jabberwocky lashes out at you, its claws leaving a trail of red across your [skin]. ");
 			ClawSwipeDmg();
 			ClawSwipeDmg();
 			outputText(" damage.");
@@ -32,7 +32,7 @@ package classes.Scenes.Camp
 		}
 		
 		private function HyperFang():void {
-			outputText("The jabberwocky bites you with it’s massive incisors, causing a deep wound. You start to bleed. ");
+			outputText("The jabberwocky bites you with it’s massive incisors, biting deep into your flesh. Blood pools at the fang's base, and as it lets go, your blood begins to flow. ");
 			var damage:Number = 0;
 			damage += eBaseDamage();
 			player.takePhysDamage(damage, true);
@@ -46,7 +46,7 @@ package classes.Scenes.Camp
 		}
 		
 		private function FireBreath():void {
-			outputText("The jabberwock inhales and breathes a massive cone of fire in your direction. ");
+			outputText("The jabberwock inhales, letting a massive cone of fire loose in your direction. ");
 			var damage:Number = 0;
 			damage += eBaseIntelligenceDamage();
 			damage += eBaseWisdomDamage();
