@@ -32,8 +32,8 @@ import classes.internals.*;
 			return cost;
 		}
 		public function soulskillCostEnergyProjection():Number {
-			var cost:Number = 200;
-			if (hasPerk(PerkLib.DaoistCultivator)) cost -= 20;
+			var cost:Number = 50;
+			if (hasPerk(PerkLib.DaoistCultivator)) cost -= 5;
 			if (hasStatusEffect(StatusEffects.TrueFormAngel)) cost *= 3;
 			return cost;
 		}

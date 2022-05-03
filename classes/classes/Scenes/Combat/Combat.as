@@ -3586,7 +3586,7 @@ public class Combat extends BaseContent {
 						damage1B *= 2;
 						damage1Ba *= 2;
 					}
-                    monster.teased(monster.lustVuln * damage1B);
+                    monster.teased(damage1B);
                     if (monster.hasStatusEffect(StatusEffects.BeeVenom)) {
                         monster.addStatusValue(StatusEffects.BeeVenom, 3, damage1Ba);
                     } else monster.createStatusEffect(StatusEffects.BeeVenom, 0, 0, damage1Ba, 0);
@@ -3621,7 +3621,7 @@ public class Combat extends BaseContent {
 						lustdamage *= 2;
 						DBPaa *= 2;
 					}
-                    monster.teased(monster.lustVuln * lustdamage, false);
+                    monster.teased(lustdamage, false);
                     monster.statStore.addBuffObject({tou:-(DBPaa*2)}, "Poison",{text:"Poison"});
                     if (monster.hasStatusEffect(StatusEffects.ManticoreVenom)) {
                         monster.addStatusValue(StatusEffects.ManticoreVenom, 3, DBPaa);
@@ -3661,7 +3661,7 @@ public class Combat extends BaseContent {
 							damage2B *= 2;
 							damage2Ba *= 2;
 						}
-                        monster.teased(monster.lustVuln * damage2B);
+                        monster.teased(damage2B);
                         monster.statStore.addBuffObject({tou:-poisonScaling}, "Poison",{text:"Poison"});
                         if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
                             monster.addStatusValue(StatusEffects.NagaVenom, 3, damage2Ba);
@@ -4592,7 +4592,7 @@ public class Combat extends BaseContent {
                                 else outputText("\n[Themonster] shiver" + s + " and moan" + s + " involuntarily from the injected chemicals effects.");
                             }
                         }
-                        monster.teased(monster.lustVuln * rangeweaponLustDmg, false);
+                        monster.teased(rangeweaponLustDmg, false);
                     }
                 }
                 outputText("\n\n");
@@ -4863,13 +4863,13 @@ public class Combat extends BaseContent {
         damage = Math.round(damage);
         if (player.hasKeyItem("Lustnade Launcher") >= 0) {
             player.createStatusEffect(StatusEffects.CooldownLustnadeLauncher, 5, 0, 0, 0);
-            outputText("You ready the Lustnade launcher and shoot. The exploding container covers the entire area in pink mist, massively arousing everyone in the vicinity for " + damage + " lust damage.");
-            monster.teased(damage);
+            outputText("You ready the Lustnade launcher and shoot. The exploding container covers the entire area in pink mist, massively arousing everyone in the vicinity for " + Math.round(monster.lustVuln * damage) + " lust damage.");
+            monster.teased(Math.round(monster.lustVuln * monster.lustVuln * damage));
         } else {
             outputText("You spray a cloud of aphrodisiac with your gas gun. [monster a] [monster name] tries to pinch [monster his] nose and hold [monster his] breath ");
             if (rand(100) > 25) {
-                outputText("but it’s too late and you can see arousal flushing [monster a] [monster name] skin for " + damage + " lust damage.");
-                monster.teased(damage);
+                outputText("but it’s too late and you can see arousal flushing [monster a] [monster name] skin for " + Math.round(monster.lustVuln * damage) + " lust damage.");
+                monster.teased(Math.round(monster.lustVuln * damage));
             } else outputText("and it worked, to an extent, allowing your opponent to retreat away from the gas.");
         }
         if (monster.lust >= monster.maxLust()) doNext(endLustVictory);
@@ -5278,7 +5278,7 @@ public class Combat extends BaseContent {
                         damage3B *= damage3Ba;
                         poisonScaling *= damage3Ba;
                         damage3B *= 1 + (poisonScaling / 10);
-                        monster.teased(monster.lustVuln * damage3B);
+                        monster.teased(Math.round(monster.lustVuln * damage3B));
                         monster.statStore.addBuffObject({tou:-poisonScaling}, "Poison",{text:"Poison"});
                         if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
                             monster.addStatusValue(StatusEffects.NagaVenom, 3, damage3Ba);
@@ -5538,19 +5538,19 @@ public class Combat extends BaseContent {
                     lustdamage *= 0.14;
                     if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) lustDmg2 *= 2;
                     lustdamage *= lustDmg2;
-                    monster.teased(monster.lustVuln * lustdamage, false);
+                    monster.teased(Math.round(monster.lustVuln * lustdamage), false);
                     monster.statStore.addBuffObject({tou:-(lustDmg2*2)}, "Poison",{text:"Poison"});
                     player.tailVenom -= player.VenomWebCost();
                     flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
                     if (player.tailVenom >= player.VenomWebCost()) {
-                        monster.teased(monster.lustVuln * lustdamage, false);
+                        monster.teased(Math.round(monster.lustVuln * lustdamage), false);
                         monster.statStore.addBuffObject({tou:-(lustDmg2*2)}, "Poison",{text:"Poison"});
                         player.tailVenom -= player.VenomWebCost();
                         flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
                     }
                     var dBd1c:Number = 1;
                     if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) dBd1c *= 2;
-                    monster.teased(monster.lustVuln * lustdamage * dBd1c, false);
+                    monster.teased(Math.round(monster.lustVuln * lustdamage * dBd1c), false);
                     combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
                     monster.statStore.addBuffObject({spe:-(dBd1c*10)}, "Poison",{text:"Poison"});
                     if (monster.hasStatusEffect(StatusEffects.ManticoreVenom)) monster.addStatusValue(StatusEffects.ManticoreVenom,3,(dBd1c*5));
@@ -5582,7 +5582,7 @@ public class Combat extends BaseContent {
                 if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) lustDmg3 *= 2;
                 lustdamage2 *= lustDmg3;
                 if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) dBd2c *= 2;
-                monster.teased(monster.lustVuln * lustdamage2 * dBd2c, false);
+                monster.teased(Math.round(monster.lustVuln * lustdamage2 * dBd2c), false);
                 combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
                 if (monster.hasStatusEffect(StatusEffects.BeeVenom)) monster.addStatusValue(StatusEffects.BeeVenom,3,(dBd2c*5));
                 else monster.createStatusEffect(StatusEffects.BeeVenom, 0, 0, (dBd2c*5), 0);
@@ -6144,10 +6144,10 @@ public class Combat extends BaseContent {
 				}
 				else if (player.weapon == weapons.MGSWORD) doMagicDamage(damage, true, true);
 				else if (player.weapon == weapons.PHALLUS) {
-					if (player.statusEffectv1(StatusEffects.ThePhalluspear1) == 1) monster.teased(monster.lustVuln * Math.round(damage * 0.05));
+					if (player.statusEffectv1(StatusEffects.ThePhalluspear1) == 1) monster.teased(Math.round(monster.lustVuln * damage * 0.05));
 					else {
 						doPhysicalDamage(Math.round(damage * 0.75), true, true);
-						monster.teased(monster.lustVuln * Math.round(damage * 0.0125));
+						monster.teased(Math.round(monster.lustVuln * damage * 0.0125));
 					}
 				}
                 else {
@@ -6288,7 +6288,7 @@ public class Combat extends BaseContent {
                 if (player.hasPerk(PerkLib.PoisonNails) && player.isFistOrFistWeapon()) {
                     var lust0damage:Number = 35 + rand(player.lib / 10);
                     lust0damage *= 0.14;
-                    monster.teased(monster.lustVuln * lust0damage);
+                    monster.teased(Math.round(monster.lustVuln * lust0damage));
                     monster.statStore.addBuffObject({tou:-2, spe:-2}, "Poison",{text:"Poison"});
                     if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
                         monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
@@ -6301,111 +6301,113 @@ public class Combat extends BaseContent {
                     if (monster.lustVuln == 0) {
                         outputText("  It has no effect!  Your foe clearly does not experience lust in the same way as you.");
                     }
-                    if (player.tailType == Tail.BEE_ABDOMEN) {
-                        outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
-                        var damageB:Number = 35 + rand(player.lib / 10);
-						var damageBa:Number = 1;
-                        if (player.level < 10) damageB += 20 + (player.level * 3);
-                        else if (player.level < 20) damageB += 50 + (player.level - 10) * 2;
-                        else if (player.level < 30) damageB += 70 + (player.level - 20) * 1;
-                        else damageB += 80;
-                        damageB *= 0.2;
-						if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) damageBa *= 2;
-						damageB *= damageBa;
-                        monster.teased(monster.lustVuln * damageB);
-                        if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
-                            monster.addStatusValue(StatusEffects.NagaVenom, 3, damageBa);
-                        } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, damageBa, 0);
-                        player.tailVenom -= player.VenomWebCost();
-						flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
-                    }
-                    if (player.tailType == Tail.SCORPION) {
-                        outputText("  [monster he] seems to be effected by the poison, its movement turning sluggish.");
-						var damBa:Number = 1;
-						if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) damBa *= 2;
-                        monster.statStore.addBuffObject({spe:-(damBa*2)}, "Poison",{text:"Poison"});
-                        if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
-                            monster.addStatusValue(StatusEffects.NagaVenom, 3, damBa);
-                        } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, damBa, 0);
-                        player.tailVenom -= player.VenomWebCost();
-						flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
-                    }
-                    if (player.tailType == Tail.MANTICORE_PUSSYTAIL) {
-                        outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
-                        var lustdamage:Number = 35 + rand(player.lib / 10);
-						var DBPaaa:Number = 1;
-						if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) DBPaaa *= 2;
-                        if (player.level < 10) lustdamage += 20 + (player.level * 3);
-                        else if (player.level < 20) lustdamage += 50 + (player.level - 10) * 2;
-                        else if (player.level < 30) lustdamage += 70 + (player.level - 20) * 1;
-                        else lustdamage += 80;
-                        if (player.hasPerk(PerkLib.RacialParagon)) lustdamage *= RacialParagonAbilityBoost();
-                        lustdamage *= 0.14;
-						lustdamage *= DBPaaa;
-                        monster.teased(monster.lustVuln * lustdamage);
-                        monster.statStore.addBuffObject({tou:-(DBPaaa*2)}, "Poison",{text:"Poison"});
-                        if (monster.hasStatusEffect(StatusEffects.ManticoreVenom)) {
-                            monster.addStatusValue(StatusEffects.ManticoreVenom, 3, DBPaaa);
-                        } else monster.createStatusEffect(StatusEffects.ManticoreVenom, 0, 0, DBPaaa, 0);
-                        player.tailVenom -= player.VenomWebCost();
-						flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
-                    }
-                    if (player.faceType == Face.SNAKE_FANGS) {
-                        outputText("  [monster he] seems to be effected by the poison, its movement turning sluggish.");
-						var DBPaaaa:Number = 1;
-						if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) DBPaaaa *= 2;
-                        monster.statStore.addBuffObject({spe:-DBPaaaa}, "Poison",{text:"Poison"});
-                        var venomType:StatusEffectType = StatusEffects.NagaVenom;
-                        if (player.nagaScore() >= 23) venomType = StatusEffects.ApophisVenom;
-                        if (monster.hasStatusEffect(venomType)) {
-                            monster.addStatusValue(venomType, 2, 0.4);
-                            monster.addStatusValue(venomType, 1, (DBPaaaa*0.4));
-                        } else monster.createStatusEffect(venomType, (DBPaaaa*0.4), 0.4, 0, 0);
-                        player.tailVenom -= player.VenomWebCost();
-						flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
-                    }
-                    if (player.faceType == Face.SPIDER_FANGS) {
-                        if (player.lowerBody == LowerBody.ATLACH_NACHA){
-                            outputText("  [monster he] seems to be affected by the poison, showing increasing sign of weakness and arousal.");
-                            var damage4B:Number = 35 + rand(player.lib / 10);
-                            var poisonScaling:Number = 1;
-							var damage4Ba:Number = 1;
+					else {
+						if (player.tailType == Tail.BEE_ABDOMEN) {
+							outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
+							var damageB:Number = 35 + rand(player.lib / 10);
+							var damageBa:Number = 1;
+							if (player.level < 10) damageB += 20 + (player.level * 3);
+							else if (player.level < 20) damageB += 50 + (player.level - 10) * 2;
+							else if (player.level < 30) damageB += 70 + (player.level - 20) * 1;
+							else damageB += 80;
+							damageB *= 0.2;
+							if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) damageBa *= 2;
+							damageB *= damageBa;
+							monster.teased(Math.round(monster.lustVuln * damageB));
+							if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
+								monster.addStatusValue(StatusEffects.NagaVenom, 3, damageBa);
+							} else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, damageBa, 0);
+							player.tailVenom -= player.VenomWebCost();
+							flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
+						}
+						if (player.tailType == Tail.SCORPION) {
+							outputText("  [monster he] seems to be effected by the poison, its movement turning sluggish.");
+							var damBa:Number = 1;
+							if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) damBa *= 2;
+							monster.statStore.addBuffObject({spe:-(damBa*2)}, "Poison",{text:"Poison"});
+							if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
+								monster.addStatusValue(StatusEffects.NagaVenom, 3, damBa);
+							} else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, damBa, 0);
+							player.tailVenom -= player.VenomWebCost();
+							flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
+						}
+						if (player.tailType == Tail.MANTICORE_PUSSYTAIL) {
+							outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
+							var lustdamage:Number = 35 + rand(player.lib / 10);
+							var DBPaaa:Number = 1;
+							if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) DBPaaa *= 2;
+							if (player.level < 10) lustdamage += 20 + (player.level * 3);
+							else if (player.level < 20) lustdamage += 50 + (player.level - 10) * 2;
+							else if (player.level < 30) lustdamage += 70 + (player.level - 20) * 1;
+							else lustdamage += 80;
+							if (player.hasPerk(PerkLib.RacialParagon)) lustdamage *= RacialParagonAbilityBoost();
+							lustdamage *= 0.14;
+							lustdamage *= DBPaaa;
+							monster.teased(Math.round(monster.lustVuln * lustdamage));
+							monster.statStore.addBuffObject({tou:-(DBPaaa*2)}, "Poison",{text:"Poison"});
+							if (monster.hasStatusEffect(StatusEffects.ManticoreVenom)) {
+								monster.addStatusValue(StatusEffects.ManticoreVenom, 3, DBPaaa);
+							} else monster.createStatusEffect(StatusEffects.ManticoreVenom, 0, 0, DBPaaa, 0);
+							player.tailVenom -= player.VenomWebCost();
+							flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
+						}
+						if (player.faceType == Face.SNAKE_FANGS) {
+							outputText("  [monster he] seems to be effected by the poison, its movement turning sluggish.");
+							var DBPaaaa:Number = 1;
 							if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) DBPaaaa *= 2;
-                            poisonScaling += player.lib/100;
-                            poisonScaling += player.tou/100;
-                            if (player.level < 10) damage4B += 20 + (player.level * 3);
-                            else if (player.level < 20) damage4B += 50 + (player.level - 10) * 2;
-                            else if (player.level < 30) damage4B += 70 + (player.level - 20) * 1;
-                            else damage4B += 80;
-                            damage4B *= 0.2;
-							damage4B *= damage4Ba;
-                            damage4B *= 1+(poisonScaling/10);
-							poisonScaling *= damage4Ba;
-                            monster.teased(monster.lustVuln * damage4B);
-                            monster.statStore.addBuffObject({tou:-poisonScaling}, "Poison",{text:"Poison"});
-                            if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
-                                monster.addStatusValue(StatusEffects.NagaVenom, 3, damage4Ba);
-                            } else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, damage4Ba, 0);
-                            player.tailVenom -= player.VenomWebCost();
+							monster.statStore.addBuffObject({spe:-DBPaaaa}, "Poison",{text:"Poison"});
+							var venomType:StatusEffectType = StatusEffects.NagaVenom;
+							if (player.nagaScore() >= 23) venomType = StatusEffects.ApophisVenom;
+							if (monster.hasStatusEffect(venomType)) {
+								monster.addStatusValue(venomType, 2, 0.4);
+								monster.addStatusValue(venomType, 1, (DBPaaaa*0.4));
+							} else monster.createStatusEffect(venomType, (DBPaaaa*0.4), 0.4, 0, 0);
+							player.tailVenom -= player.VenomWebCost();
 							flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
-                        } else {
-                            outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
-                            var lustDmg:int = 6 * monster.lustVuln;
-							if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) lustDmg *= 2;
-                            monster.teased(lustDmg);
-                            if (monster.lustVuln > 0) {
-                                monster.lustVuln += 0.01;
-                                if (monster.lustVuln > 1) monster.lustVuln = 1;
-                            }
-                            player.tailVenom -= player.VenomWebCost();
-							flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
-                        }
-                    }
-                    if (monster.lust >= monster.maxLust()) {
-                        outputText("\n\n");
-                        checkAchievementDamage(damage);
-                        doNext(endLustVictory);
-                    }
+						}
+						if (player.faceType == Face.SPIDER_FANGS) {
+							if (player.lowerBody == LowerBody.ATLACH_NACHA){
+								outputText("  [monster he] seems to be affected by the poison, showing increasing sign of weakness and arousal.");
+								var damage4B:Number = 35 + rand(player.lib / 10);
+								var poisonScaling:Number = 1;
+								var damage4Ba:Number = 1;
+								if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) DBPaaaa *= 2;
+								poisonScaling += player.lib/100;
+								poisonScaling += player.tou/100;
+								if (player.level < 10) damage4B += 20 + (player.level * 3);
+								else if (player.level < 20) damage4B += 50 + (player.level - 10) * 2;
+								else if (player.level < 30) damage4B += 70 + (player.level - 20) * 1;
+								else damage4B += 80;
+								damage4B *= 0.2;
+								damage4B *= damage4Ba;
+								damage4B *= 1+(poisonScaling/10);
+								poisonScaling *= damage4Ba;
+								monster.teased(Math.round(monster.lustVuln * damage4B));
+								monster.statStore.addBuffObject({tou:-poisonScaling}, "Poison",{text:"Poison"});
+								if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
+									monster.addStatusValue(StatusEffects.NagaVenom, 3, damage4Ba);
+								} else monster.createStatusEffect(StatusEffects.NagaVenom, 0, 0, damage4Ba, 0);
+								player.tailVenom -= player.VenomWebCost();
+								flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
+							} else {
+								outputText("  [monster he] seems to be affected by the poison, showing increasing sign of arousal.");
+								var lustDmg:int = 6 * monster.lustVuln;
+								if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) lustDmg *= 2;
+								monster.teased(lustDmg);
+								if (monster.lustVuln > 0) {
+									monster.lustVuln += 0.01;
+									if (monster.lustVuln > 1) monster.lustVuln = 1;
+								}
+								player.tailVenom -= player.VenomWebCost();
+								flags[kFLAGS.VENOM_TIMES_USED] += 0.2;
+							}
+						}
+						if (monster.lust >= monster.maxLust()) {
+							outputText("\n\n");
+							checkAchievementDamage(damage);
+							doNext(endLustVictory);
+						}
+					}
                     outputText("\n");
                 } else outputText("  You do not have enough venom to apply on [weapon]!\n");
             }
@@ -7037,7 +7039,7 @@ public class Combat extends BaseContent {
 		if (player.weapon == weapons.VENCLAW && monster.lustVuln > 0) {
             outputText("\n[monster he] seems to be affected by the poison, showing increasing sign of arousal.");
             var Ldamage:Number = 8 + rand(3);
-            monster.teased(monster.lustVuln * Ldamage);
+            monster.teased(Math.round(monster.lustVuln * Ldamage));
             monster.statStore.addBuffObject({tou:-1}, "Poison",{text:"Poison"});
             if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
                 monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
@@ -9494,8 +9496,8 @@ public class Combat extends BaseContent {
             if (lustDmg > (monster.maxLust()/10)) lustDmg = Math.round(monster.maxLust()/10);
             outputText("[monster A] [monster name] slowly succumbs to [monster his] basest desires as your aura of corruption seeps through [monster him].");
             if (monster.cor < 100) outputText("Your victims purity is slowly becoming increasingly eroded by your seeping corruption.");
-            lustDmg = Math.round(lustDmg);
-            monster.teased(monster.lustVuln * lustDmg, false);
+            lustDmg = Math.round(monster.lustVuln * lustDmg);
+            monster.teased(lustDmg, false);
             outputText("\n\n");
             bonusExpAfterSuccesfullTease();
         }
@@ -9539,7 +9541,7 @@ public class Combat extends BaseContent {
                 else outputText("The effects of your pollen are quite pronounced on [monster a] [monster name] as [monster he] begin to shake, stealing glances at your body.");
             }
             if (lustDmgA > (monster.maxLust()/10)) lustDmgA = Math.round(monster.maxLust()/10);
-            lustDmgA = Math.round(lustDmgA);
+            lustDmgA = Math.round(monster.lustVuln * lustDmgA);
             monster.teased(lustDmgA, false);
             outputText("\n\n");
             bonusExpAfterSuccesfullTease();
@@ -11613,7 +11615,7 @@ public class Combat extends BaseContent {
                 }
             }
             monster.statStore.addBuffObject({str:-monster.statusEffectv1(StatusEffects.NagaVenom), spe:-monster.statusEffectv1(StatusEffects.NagaVenom)}, "Poison",{text:"Poison"});
-            if (monster.statusEffectv3(StatusEffects.NagaVenom) >= 1) monster.lust += monster.statusEffectv3(StatusEffects.NagaVenom);
+            if (monster.statusEffectv3(StatusEffects.NagaVenom) >= 1 && monster.lustVuln > 0) monster.lust += monster.statusEffectv3(StatusEffects.NagaVenom);
             if (combatIsOver()) return;
         }
         //Apophis Venom
@@ -11637,12 +11639,10 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
                 damage1B *= 2;
             }
-            monster.teased(monster.lustVuln * damage1B);
+            monster.teased(Math.round(monster.lustVuln * damage1B));
             combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
-
             monster.statStore.addBuffObject({str:-monster.statusEffectv1(StatusEffects.ApophisVenom)*2, spe:-monster.statusEffectv1(StatusEffects.ApophisVenom)*2, tou:-monster.statusEffectv1(StatusEffects.ApophisVenom)*2}, "Poison",{text:"Poison"});
-
-            if (monster.statusEffectv3(StatusEffects.ApophisVenom) >= 1) monster.lust += monster.statusEffectv3(StatusEffects.ApophisVenom);
+            if (monster.statusEffectv3(StatusEffects.ApophisVenom) >= 1 && monster.lustVuln > 0) monster.lust += monster.statusEffectv3(StatusEffects.ApophisVenom);
             if (combatIsOver()) return;
         }
         //Bee Venom
@@ -11666,12 +11666,12 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
                 damage1B *= 2;
             }
-            monster.teased(monster.lustVuln * damage1B);
+            monster.teased(Math.round(monster.lustVuln * damage1B));
             combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
             monster.lustVuln += 0.05;
             monster.statStore.addBuffObject({tou:-monster.statusEffectv1(StatusEffects.ManticoreVenom)*2}, "Poison",{text:"Poison"});
 
-            if (monster.statusEffectv3(StatusEffects.BeeVenom) >= 1) monster.lust += monster.statusEffectv3(StatusEffects.BeeVenom);
+            if (monster.statusEffectv3(StatusEffects.BeeVenom) >= 1 && monster.lustVuln > 0) monster.lust += monster.statusEffectv3(StatusEffects.BeeVenom);
             if (combatIsOver()) return;
         }
         //Jabberwocky Poison Breath
@@ -11695,12 +11695,12 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
                 damage1B *= 2;
             }
-            monster.teased(monster.lustVuln * damage1B);
+            monster.teased(Math.round(monster.lustVuln * damage1B));
             combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
             monster.lustVuln += 0.05;
             monster.statStore.addBuffObject({tou:-monster.statusEffectv1(StatusEffects.JabberwockyVenom)*2}, "Poison",{text:"Poison"});
 
-            if (monster.statusEffectv3(StatusEffects.JabberwockyVenom) >= 1) monster.lust += monster.statusEffectv3(StatusEffects.JabberwockyVenom);
+            if (monster.statusEffectv3(StatusEffects.JabberwockyVenom) >= 1 && monster.lustVuln > 0) monster.lust += monster.statusEffectv3(StatusEffects.JabberwockyVenom);
             if (combatIsOver()) return;
         }
         //Manticore Venom
@@ -11724,12 +11724,10 @@ public class Combat extends BaseContent {
             if (player.hasPerk(PerkLib.ImprovedVenomGlandSu)) {
                 damage1B *= 2;
             }
-            monster.teased(monster.lustVuln * damage1B);
+            monster.teased(Math.round(monster.lustVuln * damage1B));
             combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
-
             monster.statStore.addBuffObject({tou:-monster.statusEffectv1(StatusEffects.ManticoreVenom)*2}, "Poison",{text:"Poison"});
-
-            if (monster.statusEffectv3(StatusEffects.ManticoreVenom) >= 1) monster.lust += monster.statusEffectv3(StatusEffects.ManticoreVenom);
+            if (monster.statusEffectv3(StatusEffects.ManticoreVenom) >= 1 && monster.lustVuln > 0) monster.lust += monster.statusEffectv3(StatusEffects.ManticoreVenom);
             if (combatIsOver()) return;
         }
         if (monster.short == "harpy") {
@@ -12637,7 +12635,7 @@ public class Combat extends BaseContent {
     }
 
     public function RandomTeaseKiss():void {
-        outputText("You pull in opponent name into a wild french kiss forcing your tongue in as you begin to choke the protest out of [monster him]. " +
+        outputText("You pull in [monster a] [monster name] into a wild french kiss forcing your tongue in as you begin to choke the protest out of [monster him]. " +
                 "Your opponent eventually starts to struggles and shove you off his face, doing [monster his] best not to show how much this aroused [monster him].");
         monster.teased(StraddleDamage, false);
         if (Randomcrit) outputText(" <b>Critical!</b>");
@@ -13173,7 +13171,7 @@ public class Combat extends BaseContent {
                     damage *= 1.75;
                 }
                 if (player.hasPerk(PerkLib.KrakenBlackDress)) damage *= 2;
-                monster.teased(monster.lustVuln * damage);
+                monster.teased(Math.round(monster.lustVuln * damage));
                 if (crit) outputText(" <b>Critical!</b>");
                 teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
             }
@@ -13366,7 +13364,7 @@ public class Combat extends BaseContent {
                     crit = true;
                     damage *= 1.75;
                 }
-                monster.teased(monster.lustVuln * damage, false);
+                monster.teased(Math.round(monster.lustVuln * damage), false);
                 outputText(" Your unwilling toy makes an involuntary moan letting you know that your touch hit the mark.");
                 if (crit) outputText(" <b>Critical!</b>");
                 teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
@@ -13513,7 +13511,7 @@ public class Combat extends BaseContent {
                     crit = true;
                     damage *= 1.75;
                 }
-                monster.teased(monster.lustVuln * damage);
+                monster.teased(Math.round(monster.lustVuln * damage));
                 if (crit) outputText(" <b>Critical!</b>");
                 teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
             }
@@ -13566,7 +13564,7 @@ public class Combat extends BaseContent {
 				lustDmg *= dam4Baa;
                 lustDmg *= 1+(poisonScaling/10);
 				poisonScaling *= dam4Baa;
-                monster.teased(monster.lustVuln * lustDmg, true);
+                monster.teased(Math.round(monster.lustVuln * lustDmg), true);
                 monster.statStore.addBuffObject({tou:-poisonScaling}, "Poison",{text:"Poison"});
                 if (monster.hasStatusEffect(StatusEffects.NagaVenom)) {
                 monster.addStatusValue(StatusEffects.NagaVenom, 3, 1);
@@ -13663,7 +13661,7 @@ public class Combat extends BaseContent {
                 crit = true;
                 damage *= 1.75;
             }
-            monster.teased(monster.lustVuln * damage, false);
+            monster.teased(Math.round(monster.lustVuln * damage), false);
             if (crit) outputText(" <b>Critical!</b>");
             teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
             if (monster.lust>100)
@@ -13773,7 +13771,7 @@ public class Combat extends BaseContent {
                 crit = true;
                 damage *= 1.75;
             }
-            monster.teased(monster.lustVuln * damage, false);
+            monster.teased(Math.round(monster.lustVuln * damage), false);
             if (crit) outputText(" <b>Critical!</b>");
             teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
             if (monster.lust>100)
@@ -13883,7 +13881,7 @@ public class Combat extends BaseContent {
                 crit = true;
                 damage *= 1.75;
             }
-            monster.teased(monster.lustVuln * damage, false);
+            monster.teased(Math.round(monster.lustVuln * damage), false);
             if (crit) outputText(" <b>Critical!</b>");
             teaseXP(1 + combat.bonusExpAfterSuccesfullTease());
             if (monster.lust>100)
@@ -13945,7 +13943,7 @@ public class Combat extends BaseContent {
             var lustDmg:int = (10 + (player.lib * 0.1)) * monster.lustVuln;
             if (player.hasPerk(MutationsLib.HollowFangsEvolved)) lustDmg *= 1.5;
             if (player.hasPerk(PerkLib.RacialParagon)) lustDmg *= RacialParagonAbilityBoost();
-            lustDmg = Math.round(lustDmg);
+            lustDmg = Math.round(monster.lustVuln * lustDmg);
             outputText(" [monster he] can’t help but moan, aroused from the aphrodisiac in your saliva for ");
             monster.teased(lustDmg);
             outputText(".");
