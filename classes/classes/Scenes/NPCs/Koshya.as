@@ -109,7 +109,7 @@ import classes.internals.*;
 			this.lust = 30;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 18;
-			this.gems = rand(25) + 138;
+			this.gems = rand(15) + 10;
 			this.drop = NO_DROP;
 			this.createStatusEffect(StatusEffects.ATranscendentSoulField, 10, 10, 0, 0);//X times less dmg, +X lvl diff bonus
 			this.createPerk(PerkLib.DieHardHP, 10, 0, 0, 0);

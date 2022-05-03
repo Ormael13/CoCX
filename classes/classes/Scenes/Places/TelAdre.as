@@ -1162,8 +1162,6 @@ public function kaibaShopMainMenu2():void {
 			addButtonDisabled(6, "Avelynn", "You already bought item from Kaiba today.");
 			addButtonDisabled(7, "Oni enchanted drinking jug", "You already bought item from Kaiba today.");
 			addButtonDisabled(8, "Storm Ruler", "You already bought item from Kaiba today.");
-			addButtonDisabled(10, "Oni Noble Kimono", "You already bought item from Kaiba today.");
-			addButtonDisabled(11, "Oni Tyrant Kimono", "You already bought item from Kaiba today.");
 		}
 		else {
 			addButton(2, "C.S.Necklace", buyItem, necklaces.CSNECK).hint("Crinos Shape necklace - Allow PC to use Crinos Shape even without perk Job: Beast Warrior with wrath costs and boost as the one gained from picking Job: Beast Warrior.");
@@ -1173,8 +1171,6 @@ public function kaibaShopMainMenu2():void {
 			addButton(6, "Avelynn", buyItem, weaponsrange.AVELYNN).hint("Avelynn - Crossbow that will shoot two additional bolts each time.");
 			addButton(7, "Oni enchanted drinking gourd", buyItem, miscjewelries.ONI_GOURD).hint("Oni enchanted drinking gourd - A magical drinking gourd beloved by onis. Suposedly it greatly increases its users attack power but also grants an endless supply of fresh drinks!");
 			addButton(8, "Storm Ruler", buyItem, weapons.S_RULER).hint("Storm Ruler - It's large sized weapon belonging to mace/hammer type with 10% chance to trigger stun effect. It deal lightning type of damage and 50% more damage to huge or larger enemies. Additionally have Body's Cultivator (20%).");
-			addButton(10, "Oni Noble Kimono", buyItem, armors.OEKIMO).hint("The garbs of an oni noble. Suposedly it was stolen from an oni somewhere in the high mountain before being sold to kaiba by an unicorn. This is a temporary sale.");
-			addButton(11, "Oni Tyrant Kimono", buyItem, armors.OTKIMO).hint("The garbs of an oni tyrant. Suposedly it was stolen from an oni somewhere in the high mountain before being sold to kaiba by an unicorn. This is a temporary sale.");
 		}
 		//addButton(0, "Necklace", buyItem, necklaces.CSNECK);
 		addButton(12, "-1-", kaibaShopMainMenuPage1);
@@ -1192,7 +1188,7 @@ public function kaibaShopMainMenu2():void {
 		}
 		else {
 			addButton(0, "S.Ornament", buyItem, headjewelries.DMONSKUL).hint("Skull hair ornament - An unique hair accessory for evil wizards greatly empower ones magic power scaling with corruption, An unique find buy it while you can because this won't last forever!");
-			addButton(1, "Demon tail ornament", buyItem, miscjewelries.DMAGETO).hint("This golden band covered with black magic incantation is big enough for an arm bracelet but was designed so it could serve as a ornament for a demon tail. This is a temporary sale.");
+			addButton(1, "Demon tail ornament", buyItem, miscjewelries.DMAGETO).hint("Demon tail ornament - This golden band covered with black magic incantation is big enough for an arm bracelet but was designed so it could serve as a ornament for a demon tail. This is a temporary sale.");
 			addButton(2, "MoonGSword", buyItem, weapons.MGSWORD).hint("Moonlight Greatsword - dealing magical dmg instead of physical, using charge weapon will give 2x larger bonus and can use range attack in case there is no range weapon equipped.");
 			addButton(3, "Wrathless", buyItem, necklaces.WRATHLE).hint("Wrathless - +10% to spellpower and removes all penalty to spellcasting or using m. specials if wrath is not at max value.");
 			addButton(4, "T.M.Outfit", buyItem, armors.TRMOUTF).hint("Traveling Merchant Outfit - Increase all gems gained by 100% and increase the potency of gem based ability by 150%, reduce spellcasting cost by 60%.");

@@ -271,7 +271,8 @@ package classes.Scenes
 			outputText("-Now you NEED to rebuild Marae's altar for any wedding. When Marae is corrupted, you can do it too, although you still can't get any blessings from it. (Svalkash)\n");
 			outputText("-True Demon enemies getting innate OverMax HP effect. It would be % one with number matching enemy current lvl so factory bosses for ex. would have between 10 to 16 % OverMax HP bonus.\n");
 			//outputText("-True Angel enemies getting innate Diehard effect. It would be % one with number matching enemy current lvl.\n");
-			outputText("-As Kaiba warned on some items been temporal offer ended. Inari Blessed Kimono, Tamamo no Mae Cursed Kimono, Centaur Blackguard Armor went into Celess/Tyrantia legendaries upgrade menu. Black / Blue / Purple / Red / White Kimono to Inari Blessed Kimono / Tamamo no Mae Cursed Kimono and Centaur Armor to Centaur Blackguard Armor.\n");
+			outputText("-As Kaiba warned on some items been temporal offer ended. Inari Blessed Kimono, Tamamo no Mae Cursed Kimono, Oni Noble kimono, Oni Tyrant kimono, Centaur Blackguard Armor went into Celess/Tyrantia legendaries upgrade menu. Black / Blue / Purple / Red / White Kimono to Inari Blessed Kimono / Tamamo no Mae Cursed Kimono, ");
+			outputText("Sakura Petal Kimono to Oni Noble kimono / Oni Tyrant kimono and Centaur Armor to Centaur Blackguard Armor.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
