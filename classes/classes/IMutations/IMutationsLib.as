@@ -6,7 +6,8 @@
  */
 package classes.IMutations
 {
-import classes.*;
+import classes.CoC;
+import classes.PerkType;
 
 /**
  * Mutations 3.0 Handles perk creation slightly differently in a few ways.
