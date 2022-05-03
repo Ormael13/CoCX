@@ -105,14 +105,14 @@ import classes.internals.*;
 			this.bonusLust = 58;
 			this.bonusWrath = 50;
 			this.bonusSoulforce = 100;
-			this.lustVuln = .75;
+			this.lustVuln = 0;
 			this.lust = 30;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.level = 18;
 			this.gems = rand(25) + 138;
 			this.drop = NO_DROP;
 			this.createStatusEffect(StatusEffects.ATranscendentSoulField, 10, 10, 0, 0);//X times less dmg, +X lvl diff bonus
-			this.createPerk(PerkLib.OverMaxHP, 10, 0, 0, 0);
+			this.createPerk(PerkLib.DieHardHP, 10, 0, 0, 0);
 			this.createPerk(PerkLib.MonsterRegeneration, 2, 0, 0, 0);
 			this.createPerk(PerkLib.JobSoulCultivator, 0, 0, 0, 0);
 			this.createPerk(PerkLib.InsightfulResourcesI, 0, 0, 0, 0);

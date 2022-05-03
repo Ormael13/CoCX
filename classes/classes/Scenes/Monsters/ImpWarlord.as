@@ -111,6 +111,7 @@ public class ImpWarlord extends Imp
 				{call: doubleAttack, type: ABILITY_PHYSICAL, range: RANGE_MELEE, tags:[TAG_WEAPON,TAG_BODY]}
 			];
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
+			this.createPerk(PerkLib.OverMaxHP, 16, 0, 0, 0);
 			checkMonster();
 		}
 		

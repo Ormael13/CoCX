@@ -139,12 +139,10 @@ public class DarkSlimeScene extends BaseContent
         CoC.instance.transformations.ArmsGoo.applyEffect(false);
         player.lowerBody = LowerBody.GOO;
         player.rearBody.type = RearBody.METAMORPHIC_GOO;
-        player.skin.setBaseOnly({type: Skin.GOO});
-		if (player.skinAdj != "slimy") player.skinAdj = "slimy";
+        player.skin.setBaseOnly({adj: "slimy", type: Skin.GOO, pattern: Skin.PATTERN_NONE});
         var darkgooSkinColors:Array = ["indigo", "light purple", "purple", "purplish black", "dark purple"];
         var choosencolor:String = randomChoice(darkgooSkinColors);
         player.skin.base.color = choosencolor;
-        CoC.instance.transformations.SkinPatternNone.applyEffect(false);
         player.hairColor = choosencolor;
         CoC.instance.transformations.EyesFiendish.applyEffect(false);
         CoC.instance.transformations.EyesChangeColor(["red"]).applyEffect(false);

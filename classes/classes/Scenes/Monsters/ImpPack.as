@@ -76,6 +76,7 @@ use namespace CoC;
 			this.special1 = lustMagicAttack;
 			this.createPerk(PerkLib.EnemyGroupType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
+			this.createPerk(PerkLib.OverMaxHP, 15, 0, 0, 0);
 			checkMonster();
 		}
 	}

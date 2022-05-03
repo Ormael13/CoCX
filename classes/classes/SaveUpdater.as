@@ -5,6 +5,7 @@ import classes.BodyParts.Eyes;
 import classes.BodyParts.Face;
 import classes.BodyParts.Horns;
 import classes.BodyParts.LowerBody;
+import classes.BodyParts.RearBody;
 import classes.BodyParts.Skin;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kACHIEVEMENTS;
@@ -1756,6 +1757,10 @@ public class SaveUpdater extends NPCAwareContent {
 				if (flags[kFLAGS.SAPPHIRE_TALKS] > 3)
 					flags[kFLAGS.SAPPHIRE_TALKS] -= 4;
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.008;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.009) {
+				if (player.lowerBody == LowerBody.GOO && player.arms.type == Arms.GOO && player.rearBody.type == RearBody.METAMORPHIC_GOO && player.skinAdj != "slimy") player.skinAdj = "slimy";
+				flags[kFLAGS.MOD_SAVE_VERSION] = 35.009;
 			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);

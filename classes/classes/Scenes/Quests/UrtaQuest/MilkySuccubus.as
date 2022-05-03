@@ -136,6 +136,7 @@ use namespace CoC;
 			this.special3 = whipAttack;
 			this.drop = NO_DROP;
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
+			this.createPerk(PerkLib.OverMaxHP, 31, 0, 0, 0);
 			checkMonster();
 		}
 

@@ -117,6 +117,7 @@ package classes.Scenes.Areas.DefiledRavine
 					add(consumables.SUCMILK, 10);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
+			this.createPerk(PerkLib.OverMaxHP, 45, 0, 0, 0);
 			checkMonster();
 		}
 	}

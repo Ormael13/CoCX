@@ -256,7 +256,6 @@ public class Soulforce extends BaseContent
 		menuItems.push("Fix Shards", cheatFixShards, "Check player's quest and give the deserved shards");
 		menuItems.push("Add Shard", cheatAddShard, "Add 1 radiant shard");
 		menuItems.push("Remove Shard", cheatRemoveShard, "Remove 1 radiant shard");
-		//menuItems.push("ZenjiQ", ZenjiQ, "Zenji Expac 2 debug tool");
 		menuItems.push("LustBreath", (player.hasPerk(PerkLib.DragonPoisonBreath))? FairyTest: false, "Replacing 1 perk with another");
 		menuItems.push("TyrantPF", (TyrantiaFollower.TyrantiaFollowerStage == 5 && TyrantiaFollower.TyraniaCorrupteedLegendaries == 0)? FairyTest5: false, "Patching Tyrantia corrupted legendaries unlock");
 		menuItems.push("LilyPregF", (DriderTown.LilyKidsPCPregnancy != 0 && LilyFollower.LilyFollowerState)? FairyTest3: false, "Curing Lily Infertility ^^");
@@ -363,47 +362,6 @@ public class Soulforce extends BaseContent
 		}
 		else
 			outputText("\nNo shards, go complete quests :(");
-	}
-
-	public function ZenjiQ():void{
-		clearOutput();
-		outputText("Zenji Debug Menu: \n");
-		outputText("ZenjiVillageStage: " + TrollVillage.ZenjiVillageStage + "\n" +
-		"JabalaUnlocked: " + TrollVillage.JabalaUnlocked + "\n" +
-		"YenzaUnlocked: " + TrollVillage.YenzaUnlocked + "\n" +
-		"KaljiUnlocked: " + TrollVillage.KaljiUnlocked + "\n" +
-		"ZenjiFollowing: " + TrollVillage.ZenjiFollowing + "\n" +
-		"KuruUnlocked: " + TrollVillage.KuruUnlocked + "\n" +
-		"HalkanoUnlocked: " + TrollVillage.HalkanoUnlocked + "\n" +
-		"ZenjiBerated: " + TrollVillage.ZenjiBerated + "\n" +
-		"YenzaLockdown: " + TrollVillage.YenzaLockdown + "\n" +
-		"ZenjiTrollVillageTimeChk: " + TrollVillage.ZenjiTrollVillageTimeChk + "\n" +
-		"YubiUnlocked: " + TrollVillage.YubiUnlocked + "\n" +
-		"KaljiMBJDeny: " + TrollVillage.KaljiMBJDeny + "\n" +
-		"ZenjiMoneyHelp: " + TrollVillage.ZenjiMoneyHelp + "\n" +
-		"JabalaLoveChat: " + TrollVillage.JabalaLoveChat + "\n" +
-		"ZenjiMarriageDress: " + TrollVillage.ZenjiMarriageDress + "\n"+
-		"Zenji Marriage Vars: \n" +
-		"ZenjiSleepCount: " + ZenjiScenes.ZenjiSleepCount + "\n" +
-		"ZenjiTalkCount: " + ZenjiScenes.ZenjiTalkCount + "\n" +
-		"ZenjiLoverDays: " + ZenjiScenes.ZenjiLoverDays
-		);
-		menu();
-		addButton(0, "Reset EventLine", reset).hint("Reset chain.");
-		addButton(1, "Force Village", villageNow).hint("Force encounters village");
-		addButton(14, "Leave", curry(SoulforceCheats1, 2));
-
-		function reset ():void{
-			clearOutput();
-			SceneLib.trollVillage.resetState();
-			outputText("All Parameters cleared!");
-			doNext(camp.doCamp);
-		}
-
-		function villageNow():void{
-			SceneLib.trollVillage.FirstEncountersoftheTrollKind();
-		}
-
 	}
 
 	public function cheatRemoveRP():void {

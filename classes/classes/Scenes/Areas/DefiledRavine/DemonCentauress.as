@@ -58,9 +58,9 @@ package classes.Scenes.Areas.DefiledRavine
 			this.lowerBody = LowerBody.DEMONIC_HIGH_HEELS;
 			//this.createPerk(PerkLib.InhumanDesireI, 0, 0, 0, 0);
 			//this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
-			//this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBeastOrAnimalMorphType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
+			this.createPerk(PerkLib.OverMaxHP, 41, 0, 0, 0);
 			this.checkMonster();
 		}
 	}
