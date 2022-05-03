@@ -1017,15 +1017,7 @@ public class SaveUpdater extends NPCAwareContent {
 				player.removePerk(PerkLib.MythicalGolemMaker);
 				player.createPerk(PerkLib.EpicGolemMaker3rdCircle, 0, 0, 0, 0);
 			}
-			if (!player.hasStatusEffect(StatusEffects.StrTouSpeCounter1)) {
-				player.createStatusEffect(StatusEffects.StrTouSpeCounter1, 0, 0, 0, 0);
-				player.createStatusEffect(StatusEffects.StrTouSpeCounter2, 0, 0, 0, 0);
-				player.createStatusEffect(StatusEffects.IntWisCounter1, 0, 0, 0, 0);
-				player.createStatusEffect(StatusEffects.IntWisCounter2, 0, 0, 0, 0);
-				player.createStatusEffect(StatusEffects.LibSensCounter1, 0, 0, 0, 0);
-				player.createStatusEffect(StatusEffects.LibSensCounter2, 0, 0, 0, 0);
-				player.strtouspeintwislibsenCalculation2();
-			}
+			player.updateRacialAndPerkBuffs();
 			if (player.blockingBodyTransformations()) {
 				if (player.hasPerk(PerkLib.BimboBody)) player.removePerk(PerkLib.BimboBody);
 				if (player.hasPerk(PerkLib.BimboBrains)) player.removePerk(PerkLib.BimboBrains);

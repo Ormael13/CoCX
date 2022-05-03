@@ -152,7 +152,7 @@ public class Camp extends NPCAwareContent{
 			HPChange(Math.round(player.maxHP() / 2), false);
 			player.removeStatusEffect(StatusEffects.PostAnemoneBeatdown);
 		}
-        
+  
 		//Clear out Izma's saved loot status
 		flags[kFLAGS.BONUS_ITEM_AFTER_COMBAT_ID] = "";
 		//History perk backup
@@ -3740,7 +3740,7 @@ public class Camp extends NPCAwareContent{
 			if (timeQ != 1) outputText("You lie down to resume sleeping for the remaining " + num2Text(timeQ) + " hours.\n");
 			else outputText("You lie down to resume sleeping for the remaining hour.\n");
 		}
-		player.sleepUpdateStat();
+		player.updateRacialAndPerkBuffs();
 		goNext(true);
 	}
 

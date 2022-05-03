@@ -2636,7 +2636,7 @@ public class Creature extends Utils
 				return true;//dodać inne typy wrogów: nieumarli/duchy
 			return false;
 		}
-        
+  
 		//check for vagoo
 		public function hasVagina():Boolean
 		{
@@ -2711,16 +2711,34 @@ public class Creature extends Utils
 		}
 
 		//Rewritten!
+		public function looksFemale():Boolean {
+			var titSize:Number = biggestTitSize();
+			if (hasCock() && hasVagina()) // herm
+				return (titSize >= 3 ||
+						titSize == 2 && femininity >= 15 ||
+						titSize == 1 && femininity >= 40 ||
+						femininity >= 65);
+			if (hasCock()) // male
+				return (
+						titSize >= 3 && femininity >= 5 ||
+						titSize == 2 && femininity >= 35 ||
+						titSize == 1 && femininity >= 65 ||
+						femininity >= 95);
+			if (hasVagina()) // pure female
+				return (titSize > 0 ||
+						femininity >= 40);
+			// genderless
+			return (titSize >= 3 ||
+					titSize == 2 && femininity >= 15 ||
+					titSize == 1 && femininity >= 40 ||
+					femininity >= 65);
+		}
+		public function looksMale():Boolean {
+			return !looksFemale();
+		}
 		public function mf(male:String, female:String):String
 		{
-			if (hasCock() && hasVagina()) // herm
-				return (biggestTitSize() >= 3 || biggestTitSize() == 2 && femininity >= 15 || biggestTitSize() == 1 && femininity >= 40 || femininity >= 65) ? female : male;
-			if (hasCock()) // male
-				return (biggestTitSize() >= 3 && femininity >= 5 || biggestTitSize() == 2 && femininity >= 35 || biggestTitSize() == 1 && femininity >= 65 || femininity >= 95) ? female : male;
-			if (hasVagina()) // pure female
-				return (biggestTitSize() >= 3 || femininity >= 75) ? female : male;
-			// genderless
-			return (biggestTitSize() >= 3 || biggestTitSize() == 2 && femininity >= 15 || biggestTitSize() == 1 && femininity >= 40 || femininity >= 65) ? female : male;
+			return looksFemale() ? female : male;
 		}
 
 		public function maleFemaleHerm(caps:Boolean = false):String

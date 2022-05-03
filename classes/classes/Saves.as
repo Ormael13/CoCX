@@ -2810,6 +2810,7 @@ public function loadGameObject(saveData:Object, slot:String = "VOID"):void
 			}
 		}
 
+		player.updateRacialAndPerkBuffs();
 		doNext(playerMenu);
 	}
 }

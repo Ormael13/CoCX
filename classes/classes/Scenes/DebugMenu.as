@@ -24,10 +24,13 @@ import classes.Items.Consumable;
 import classes.Items.ConsumableLib;
 import classes.Parser.Parser;
 import classes.Scenes.NPCs.JojoScene;
+import classes.Stats.Buff;
+import classes.Stats.StatUtils;
 import classes.Transformations.PossibleEffect;
 import classes.Transformations.Transformation;
 import classes.Transformations.Transformation;
 import classes.internals.EnumValue;
+import classes.internals.race.RacialRequirement;
 
 import coc.view.Block;
 
@@ -791,11 +794,37 @@ public class DebugMenu extends BaseContent
 			mainViewManager.showPlayerDoll(true);
 			CoC.instance.playerAppearance.appearance(true);
 			outputText("[pg]");
+			var body:BodyData = player.bodyData();
 			for each (var race:Race in Race.ALL_RACES) {
 				if (!race) continue;
-				var score:int = race.score(player);
+				var score:int = race.basicScore(body);
 				if (score == 0) continue;
-				outputText(race.name+" score: "+race.score(player)+"\n");
+				outputText("<b>"+race.name+" score: "+race.basicScore(body)+"</b>\n");
+				score = 0;
+				for each (var rr:RacialRequirement in race.requirements) {
+					outputText("\t");
+					if (rr.check(body, score)) {
+						score += rr.score;
+						outputText("[font-green]")
+					} else {
+						outputText("[font-default]")
+					}
+					outputText(rr.describe(true)+"[/font]\n")
+				}
+				if (race.tiers.length>0) {
+					outputText("\t<b>Tiers:</b>")
+				}
+				for each(var tier:RaceTier in race.tiers) {
+					outputText("\t");
+					if (tier.check(body, score)) {
+						outputText("[font-green]"+tier.nameFor(body)+"[/font]")
+					} else {
+						outputText(tier.nameFor(body))
+					}
+					outputText(" ("+tier.minScore+") ");
+					outputText(tier.describeBuffs());
+					outputText("\n");
+				}
 			}
 			flushOutputTextToGUI();
 		}

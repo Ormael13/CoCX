@@ -961,6 +961,7 @@ public class PlayerAppearance extends BaseContent {
 	}
 
 	public function RacialScores():void {
+		var body:BodyData = player.bodyData();
 		var score:int;
 		var tempStr:int;
 		var tempSpd:int;
@@ -1220,7 +1221,7 @@ public class PlayerAppearance extends BaseContent {
 						tempStr+=100; tempTou+=100; tempSpd+=100; tempInt +=100; tempWis+=100;
 					}
 					break;
-				case "alabaster":					
+				case "alabaster":
 					if (Forgefather.refinement == 1) {
 						tempInt+=100; tempWis+=50; tempMana+=20; tempSDmg+=15; tempStr-=10; tempSpd -=10;
 					}
@@ -1723,6 +1724,25 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.werewolfScore() >= 1) outputText("\n<font color=\"#008000\">Werewolf: " + player.werewolfScore() + "</font>");
 		else if (player.werewolfScore() < 1) outputText("\n<font color=\"#ff0000\">Werewolf: 0</font>");
 		//Wolf
+		var race:Race = Race.WOLF;
+		var rscore:int = race.totalScore(body);
+		var rtier:RaceTier = race.getTier(body, rscore);
+		if (rtier) {
+			outputText("\n[font-blue]"+
+					Utils.capitalizeFirstLetter(rtier.nameFor(body))+": "+rscore
+			);
+			if (rtier.hasBuffs()) {
+				outputText(" (");
+				outputText(rtier.describeBuffs());
+				outputText(")");
+			}
+			outputText("[/font]");
+		} else {
+			outputText((rscore > 0 ? "\n[font-green]" :"[font-red]")+
+					Utils.capitalizeFirstLetter(race.name)+": " + rscore +
+					"[/font]"
+			);
+		}
 		if (player.wolfScore() >= 21) outputText("\n<font color=\"#0000a0\">Fenrir: " + player.wolfScore() + " (+145% to Str racial multi, +80% to Tou racial multi, +100% to Spe racial multi, -10% to Int racial multi)</font>");
 		else if (player.wolfScore() >= 10 && player.hasFur() && player.coatColor == "glacial white") outputText("\n<font color=\"#0000a0\">Winter wolf: " + player.wolfScore() + " (+65% to Str racial multi, +40% to Tou racial multi, +55% to Spe racial multi, -10% to Int racial multi)</font>");
 		else if (player.wolfScore() >= 8) outputText("\n<font color=\"#0000a0\">Wolf-morph: " + player.wolfScore() + " (+50% to Str racial multi, +30% to Tou racial multi, +50% to Spe racial multi, -10% to Int racial multi)</font>");
@@ -1804,7 +1824,7 @@ public class PlayerAppearance extends BaseContent {
 		clearOutput();
 		outputText("You sit down on your sleeping " + (flags[kFLAGS.CAMP_CABIN_FURNITURE_BED] > 0 ? "bed" : "bag") + " and contemplate your current outlook on life. You have been through much and became bigger, better, way more than what you once were.");
 		if (player.race() != player.startingRace) outputText(" While you were formerly a " + player.startingRace + " you now are a " + player.race() + " for better or for worse and have decided to live this new life to its fullest.");
-		player.strtouspeintwislibsenCalculation2();
+		player.updateRacialAndPerkBuffs();
 		outputText(" As if this reflection unlocked some hidden door in you, you feel your body awaken with newfound vigor and might. Let your adversaries come, you are ready for them now!");
 		doNext(playerMenu);
 	}

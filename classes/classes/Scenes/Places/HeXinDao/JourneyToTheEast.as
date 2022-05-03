@@ -527,7 +527,7 @@ package classes.Scenes.Places.HeXinDao
 			if (player.hasPerk(PerkLib.FutaForm)) player.removePerk(PerkLib.FutaForm);
 			if (player.hasPerk(PerkLib.FutaFaculties)) player.removePerk(PerkLib.FutaFaculties);
 			player.statStore.replaceBuffObject({'str.mult':0.2,'tou.mult':0.2,'lib.mult':0.2,'sens':80}, 'Jiangshi Curse Tag', { text: 'Jiangshi Curse Tag' });
-			player.strtouspeintwislibsenCalculation2();
+			player.updateRacialAndPerkBuffs();
 			awardAchievement("Thriller", kACHIEVEMENTS.EPIC_THRILLER);
 			CoC.instance.mainViewManager.updateCharviewIfNeeded();
 			doNext(camp.returnToCampUseFourHours);

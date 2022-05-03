@@ -36,6 +36,12 @@ public class Utils extends Object
 				return func.apply(null,args.concat(args2));
 			};
 		}
+		// returns same function that doesn't crash on too many arguments
+		public static function varargify(func:Function):Function {
+			return function(...args):* {
+				return func.apply(this, args.slice(0, func.length));
+			}
+		}
 		public static function bindThis(func:Function,thiz:Object):Function {
 			return function(...args2):* {
 				return func.apply(thiz,args2);
@@ -450,6 +456,20 @@ public class Utils extends Object
 			}
 
 			return mergedString;
+		}
+		
+		/**
+		 * Converts an input to string, trying to stringify objects either with their `toString()` method or `JSON.stringify()`
+		 */
+		public static function stringify(input:*):String {
+			if (input is String) return input;
+			if (typeof input !== "object" || !input) return ""+input;
+			if (typeof input.toString === "function") return input.toString();
+			try {
+				return JSON.stringify(input);
+			} catch (e:*) {
+			}
+			return ""+input;
 		}
 
 		// Basically, you pass an arbitrary-length list of arguments, and it returns one of them at random.

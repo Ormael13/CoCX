@@ -414,7 +414,7 @@ import coc.view.MainView;
                     kFLAGS.STRENGTH_SCALING,
                     kFLAGS.SPEED_SCALING,
                     kFLAGS.SECONDARY_STATS_SCALING,
-                    kFLAGS.WATERSPORTS_ENABLED, 
+                    kFLAGS.WATERSPORTS_ENABLED,
 				    kFLAGS.SILLY_MODE_ENABLE_FLAG,
                     kFLAGS.SCENEHUNTER_PRINT_CHECKS,
                     kFLAGS.SCENEHUNTER_OTHER,
@@ -1780,13 +1780,7 @@ import coc.view.MainView;
 			clearOutput();
 			statScreenRefresh();
 			outputText("Would you like to play through the " + (1 * (1 + player.newGamePlusMod())) + "-day"+(player.newGamePlusMod() > 0 ? "s":"")+" prologue in Ingnam or just skip?");
-			player.createStatusEffect(StatusEffects.StrTouSpeCounter1,0,0,0,0);
-			player.createStatusEffect(StatusEffects.StrTouSpeCounter2,0,0,0,0);
-			player.createStatusEffect(StatusEffects.IntWisCounter1,0,0,0,0);
-			player.createStatusEffect(StatusEffects.IntWisCounter2,0,0,0,0);
-			player.createStatusEffect(StatusEffects.LibSensCounter1,0,0,0,0);
-			player.createStatusEffect(StatusEffects.LibSensCounter2,0,0,0,0);
-			player.sleepUpdateStat();
+			player.updateRacialAndPerkBuffs();
 			player.HP = player.maxHP();
 			Metamorph.resetMetamorph();
 			//doYesNo(goToIngnam, arrival);

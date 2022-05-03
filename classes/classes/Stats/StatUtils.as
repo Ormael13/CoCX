@@ -12,7 +12,26 @@ import flash.sampler.startSampling;
 public class StatUtils {
 	public function StatUtils() {
 	}
-
+	
+	/**
+	 * Merge `src` into `dest`, producing sum/product of common keys
+	 * @return dest
+	 */
+	public static function mergeBuffObjects(dest:Object, src:Object):Object {
+		for (var key:String in src) {
+			if (key in dest) {
+				if (MultiplicativeStats.indexOf(key) >= 0) {
+					dest[key] *= src[key];
+				} else {
+					dest[key] += src[key];
+				}
+			} else {
+				dest[key] = src[key]
+			}
+		}
+		return dest;
+	}
+	
 	/**
 	 * Warning: can cause infinite recursion if called from owner.findStat() unchecked
 	 */
@@ -205,5 +224,6 @@ public class StatUtils {
 		
 		['spellpower', "Spellpower"],
 	]);
+	public static const MultiplicativeStats:/*String*/Array = [];
 }
 }
