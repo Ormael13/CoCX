@@ -349,7 +349,12 @@ import flash.utils.getQualifiedClassName;
 			//
 			if (hasPerk(PerkLib.BloodDemonIntelligence)) maxOver2 += 0.1;
 			if (hasPerk(PerkLib.MunchkinAtWork)) maxOver2 += 0.1;
-			if (hasPerk(PerkLib.OverMaxHP)) maxOver2 += (0.01 * perkv1(PerkLib.OverMaxHP));
+			if (hasPerk(PerkLib.OverMaxHP)) {
+				if (hasPerk(PerkLib.Enemy300Type)) maxOver2 += (0.15 * perkv1(PerkLib.OverMaxHP));
+				else if (hasPerk(PerkLib.EnemyLargeGroupType)) maxOver2 += (0.1 * perkv1(PerkLib.OverMaxHP));
+				else if (hasPerk(PerkLib.EnemyGroupType)) maxOver2 += (0.05 * perkv1(PerkLib.OverMaxHP));
+				else maxOver2 += (0.01 * perkv1(PerkLib.OverMaxHP));
+			}
 			maxOver *= maxOver2;//~180%
 			maxOver = Math.round(maxOver);
 			return maxOver;
@@ -386,6 +391,12 @@ import flash.utils.getQualifiedClassName;
 				min -= wis;
 				min -= lib;
 				min -= sens;
+			}
+			if (hasPerk(PerkLib.DieHardHP)) {
+				if (hasPerk(PerkLib.Enemy300Type)) min -= (maxHP() * 0.15 * perkv1(PerkLib.DieHardHP));
+				else if (hasPerk(PerkLib.EnemyLargeGroupType)) min -= (maxHP() * 0.1 * perkv1(PerkLib.DieHardHP));
+				else if (hasPerk(PerkLib.EnemyGroupType)) min -= (maxHP() * 0.05 * perkv1(PerkLib.DieHardHP));
+				else min -= (maxHP() * 0.01 * perkv1(PerkLib.DieHardHP));
 			}
 			min = Math.round(min);
 			return min;

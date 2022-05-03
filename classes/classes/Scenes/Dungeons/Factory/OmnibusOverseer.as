@@ -123,6 +123,7 @@ public class OmnibusOverseer extends Monster
 			this.createPerk(PerkLib.DemonicDesireI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
+			this.createPerk(PerkLib.OverMaxHP, 16, 0, 0, 0);
 			checkMonster();
 		}
 		

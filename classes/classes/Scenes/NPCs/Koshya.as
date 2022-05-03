@@ -112,7 +112,7 @@ import classes.internals.*;
 			this.gems = rand(25) + 138;
 			this.drop = NO_DROP;
 			this.createStatusEffect(StatusEffects.ATranscendentSoulField, 10, 10, 0, 0);//X times less dmg, +X lvl diff bonus
-			this.createPerk(PerkLib.OverMaxHP, 10, 0, 0, 0);
+			this.createPerk(PerkLib.DieHardHP, 10, 0, 0, 0);
 			this.createPerk(PerkLib.MonsterRegeneration, 2, 0, 0, 0);
 			this.createPerk(PerkLib.JobSoulCultivator, 0, 0, 0, 0);
 			this.createPerk(PerkLib.InsightfulResourcesI, 0, 0, 0, 0);
