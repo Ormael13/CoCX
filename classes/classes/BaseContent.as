@@ -1022,14 +1022,18 @@ import coc.xxc.StoryContext;
         }
 
 
-		/**Creates Dynamic Perks that fulfill three criteria.
-		 * 1.Uses perkv1 to store variants of the same perk.
+		/**Creates Dynamic Perks that fulfill three criteria, returned in menuGen format.
+		 *
+		 * 1.Will use perkV1 to store variants of the same perk.
+		 *
 		 * 2.Has a changing Buff state due to the variants.
-		 * 3.Has a changing Requirement state due to the varients.		 *
+		 *
+		 * 3.Has a changing Requirement state due to the varients.
+		 *
 		 * @param pPerk: Takes in the perk to be augmented.
 		 * @param pClass: Perk file/Class name, to simplify and unify called functions.
 		 * @return Array: Two item Array consisting of perk name[0], and a prepared function that will create/modify the perk/mutation[1].
-		 * Use in conjunction with menuGen.
+		 *
 		 */
 		protected function createDynamicPerk(pPerk:PerkType, pClass:Class):*{
 			var pLvl:int = player.perkv1(pPerk);	//Gets Mutation Level if it exists.
@@ -1039,12 +1043,13 @@ import coc.xxc.StoryContext;
 			trace("Requirements loaded in.");
 			if (pPerk.available(player) && pMax >= pLvl){
 				trace("Requirements met, adding in.");
-				return([pPerk.name(), getPerk]);
+				return([pPerk.name(), acquirePerk, pPerk.desc()]);	//This is witchcraft, not sure how acquirePerk still recalls which perk to give, but it does.
 			}
 			else{
 				trace("Unable to meet requirements/requirements borked.");
-				return([pPerk.name(), false]);
+				return([pPerk.name(), false, "You don't meet the requirements for this!"]);
 			}
+
 			/*	//Requirements debug.
 			var reqs:Array = [];
 			for each (var cond:Object in pPerk.requirements) {
@@ -1066,16 +1071,16 @@ import coc.xxc.StoryContext;
 			function extPerkTrigger(fTrigger:Function, pLvl2:int):*{
 				try{
 					var result:* = fTrigger(pLvl2);
-					trace("Success");
+					trace("External Function Trigger Success");
 					return result
 				}
 				catch (e:Error){
-					trace("Failed. \n" + e.getStackTrace());
+					trace("External Function Trigger Failed. \n" + e.getStackTrace());
 				}
 			}
 
 			//Gives the player the actual mutation itself.
-			function getPerk():Boolean{
+			function acquirePerk():Boolean{
 				try{
 					if (!player.hasPerk(pPerk)){
 						player.createPerk(pPerk, 1,0,0,0);
@@ -1105,8 +1110,39 @@ import coc.xxc.StoryContext;
 						stname,
 						{text:pPerk.name(), save:false}
 				);
-				trace("Buffs Applied.");
+				trace("Perk Buffs Applied.");
 			}
+		}
+
+		//Use if a Dynamic Perk's buffs have been updated.
+		protected function updateDynamicPerkBuffs(pPerk:PerkType, pClass:Class):*{
+			var stname:String = "perk_" + pPerk.id;
+			var pLvl:int = player.perkv1(pPerk);
+			var pBuff:Object = extPerkTrigger(pClass.pBuffs, pLvl);
+			if (player.statStore.hasBuff(stname)){
+				player.statStore.removeBuffs(stname);
+				player.statStore.addBuffObject(
+						pBuff,
+						stname,
+						{text:pPerk.name(), save:false}
+				);
+				trace("Perk Buffs Updated.");
+			}
+			else{
+				trace("Perk Buff update failed due to perk not existing.");
+			}
+
+			function extPerkTrigger(fTrigger:Function, pLvl2:int):*{
+				try{
+					var result:* = fTrigger(pLvl2);
+					trace("External Function Trigger Success");
+					return result
+				}
+				catch (e:Error){
+					trace("External Function Trigger Failed. \n" + e.getStackTrace());
+				}
+			}
+
 		}
 	}
 
