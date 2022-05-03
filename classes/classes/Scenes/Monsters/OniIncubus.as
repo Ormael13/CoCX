@@ -104,6 +104,7 @@ import classes.internals.*;
 				this.bonusLust = 210;
 				this.level = 65;
 				this.additionalXP = 300;
+				this.createPerk(PerkLib.OverMaxHP, 65, 0, 0, 0);
 			}// this.plural = false;
 			this.createCock(36,7);
 			this.balls = 2;

@@ -47,6 +47,7 @@ use namespace CoC;
                 this.level = 63 + 5*mod;
                 this.additionalXP = int(700 * Math.exp(0.3*mod));
                 this.gems = int((80 + rand(40)) * Math.exp(0.3*mod));
+				this.createPerk(PerkLib.OverMaxHP, (63 + 5*mod), 0, 0, 0);
 			}
 			else {
 				this.short = "omnibus";
@@ -59,7 +60,8 @@ use namespace CoC;
 				this.bonusLust = 209;
 				this.level = 29;
 				this.additionalXP = 70;
-			    this.gems = rand(40)+20;
+			    this.gems = rand(40) + 20;
+				this.createPerk(PerkLib.OverMaxHP, 29, 0, 0, 0);
 			}
 			this.a = "the ";
 			this.imageName = "omnibus";

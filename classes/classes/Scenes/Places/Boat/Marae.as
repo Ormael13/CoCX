@@ -141,6 +141,7 @@ public class Marae extends Monster
 				this.additionalXP = 4000;
 				this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 				this.createPerk(PerkLib.MonsterRegeneration, 3, 0, 0, 0);
+				this.createPerk(PerkLib.OverMaxHP, 140, 0, 0, 0);
 			}
 			else {
 				this.long = "This being is known as the goddess of Mareth. She is no longer corrupted thanks to your actions at the factory. She's white all over and textured with bark. Her breasts are modestly sized.";
