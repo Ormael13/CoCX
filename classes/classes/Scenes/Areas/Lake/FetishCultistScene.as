@@ -8,7 +8,6 @@ import classes.BodyParts.LowerBody;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Places.Mindbreaker;
 import classes.Scenes.SceneLib;
-import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 public class FetishCultistScene extends AbstractLakeContent
