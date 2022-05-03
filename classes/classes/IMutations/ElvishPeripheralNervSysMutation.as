@@ -14,7 +14,7 @@ public class ElvishPeripheralNervSysMutation extends PerkType
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
             var pTier:int = player.perkv1(IMutationsLib.ElvishPeripheralNervSysIM)
-            var perChg = 5 * pTier
+            var perChg:int = 5 * pTier
             var descS:String = "Your Elvish Peripheral NervSys is giving you +" + perChg +"% of max core Spe as phantom Spe and allows you to keep Elven Sense even without elf arms/legs";
             /*
             if (pTier >= 1){

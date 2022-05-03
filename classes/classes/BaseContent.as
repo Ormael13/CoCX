@@ -1067,11 +1067,11 @@ import coc.xxc.StoryContext;
 			function extPerkTrigger(fTrigger:Function, pLvl2:int):*{
 				try{
 					var result:* = fTrigger(pLvl2);
-					trace("Success");
+					trace("External Function Trigger Success");
 					return result
 				}
 				catch (e:Error){
-					trace("Failed. \n" + e.getStackTrace());
+					trace("External Function Trigger Failed. \n" + e.getStackTrace());
 				}
 			}
 
@@ -1114,7 +1114,7 @@ import coc.xxc.StoryContext;
 		protected function updateDynamicPerkBuffs(pPerk:PerkType, pClass:Class):*{
 			var stname:String = "perk_" + pPerk.id;
 			var pLvl:int = player.perkv1(pPerk);
-			var pBuff:Object = pClass.pBuffs(pLvl);
+			var pBuff:Object = extPerkTrigger(pClass.pBuffs, pLvl);
 			if (player.statStore.hasBuff(stname)){
 				player.statStore.removeBuffs(stname);
 				player.statStore.addBuffObject(
@@ -1126,6 +1126,17 @@ import coc.xxc.StoryContext;
 			}
 			else{
 				trace("Perk Buff update failed due to perk not existing.");
+			}
+
+			function extPerkTrigger(fTrigger:Function, pLvl2:int):*{
+				try{
+					var result:* = fTrigger(pLvl2);
+					trace("External Function Trigger Success");
+					return result
+				}
+				catch (e:Error){
+					trace("External Function Trigger Failed. \n" + e.getStackTrace());
+				}
 			}
 
 		}
