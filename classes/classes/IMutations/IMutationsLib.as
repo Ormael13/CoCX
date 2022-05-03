@@ -41,6 +41,10 @@ public class IMutationsLib
 		public static const DrakeLungIM:PerkType = new DrakeLungMutation();
 		public static const EasterBunnyEggBagIM:PerkType = new EasterBunnyEggBagMutation();
 		public static const EclipticMindIM:PerkType = new EclipticMindMutation();
+		public static const ElvishPeripheralNervSysIM:PerkType = new ElvishPeripheralNervSysMutation();
+		public static const FeyArcaneBloodstreamIM:PerkType = new FeyArcaneBloodstreamMutation();
+		public static const FloralOvariesIM:PerkType = new FloralOvariesMutation();
+		public static const FrozenHeartIM:PerkType = new FrozenHeartMutation();
 		public static const KitsuneThyroidGlandIM:PerkType = new KitsuneThyroidGlandMutation();
 		public static const TrachealSystemIM:PerkType = new TrachealSystemMutation();
 
@@ -56,6 +60,7 @@ public class IMutationsLib
 			function mutationsHeart():void{
 				IMutationsList.push([BlackHeartIM, BlackHeartMutation]);
 				IMutationsList.push([DraconicHeartIM, DraconicHeartMutation]);
+				IMutationsList.push([FrozenHeartIM, FrozenHeartMutation]);
 			}
 			function mutationsMuscle():void{
 
@@ -67,7 +72,7 @@ public class IMutationsLib
 
 			}
 			function mutationsBloodStream():void{
-
+				IMutationsList.push([FeyArcaneBloodstreamIM, FeyArcaneBloodstreamMutation]);
 			}
 			function mutationsFaT():void{
 
@@ -81,16 +86,17 @@ public class IMutationsLib
 				//IMutationsList.push([SlimeMetabolismIM,SlimeMetabolismMutation]);
 			}
 			function mutationsOvaries():void{
-
+				IMutationsList.push([FloralOvariesIM, FloralOvariesMutation]);
 			}
 			function mutationsTesticles():void{
-				IMutationsList.push([EasterBunnyEggBagIM,EasterBunnyEggBagMutation]);
+				IMutationsList.push([EasterBunnyEggBagIM, EasterBunnyEggBagMutation]);
 			}
 			function mutationsEyes():void{
 
 			}
 			function mutationsPeriNervSys():void{
 				IMutationsList.push([EclipticMindIM, EclipticMindMutation]);
+				IMutationsList.push([ElvishPeripheralNervSysIM, ElvishPeripheralNervSysMutation]);
 			}
 			function mutationsBone():void{
 				IMutationsList.push([DraconicBonesIM, DraconicBonesMutation]);
