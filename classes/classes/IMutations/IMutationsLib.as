@@ -10,12 +10,20 @@ import classes.CoC;
 import classes.PerkType;
 
 /**
+ * The goal of Mutations 3.0 is to allow for everything related to the mutation itself to be hosted within its own file, and to reduce the number of perks being created for the player.
+ *
  * Mutations 3.0 Handles perk creation slightly differently in a few ways.
- * .withBuffs is not used here, instead, buffs are created in a pBuffs function within the mutation file itself, and must return an object.
- * Requirements, as seen below compared to PerkLib/MutationsLib, are also not handled below, and are instead dynamically loaded in, via pReqs function, also stored within the mutations file itself.
+ *
+ * First, .withBuffs is not used here, instead, buffs are created in a pBuffs function within the mutation file itself, and must return an object.
+ *
+ * Requirements, as seen below compared to PerkLib/MutationsLib, are also not handled below, and are instead dynamically created, via pReqs function, also stored within the mutations file itself.
+ * These can be checked seperately, or when sent to createDynamicPerks, will handle it as well.
+ *
  * Mutations are themselves handling their iterations via v1 checks.
- * The goal of this is to allow for everything related to the mutation itself to be hosted within its own file, and to reduce the number of perks being created for the player.
+ *
  * Refer to Basecontent's createDynamicPerk function to see how they are used.
+ *
+ * Refer to Basecontent's updateDynamicPerkBuff function to see how to update buffs associated with perks created by createDynamicBuffs.
  */
 public class IMutationsLib
 	{
