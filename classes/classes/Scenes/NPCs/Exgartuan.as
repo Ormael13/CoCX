@@ -627,7 +627,7 @@ public function exgartuanCombatUpdate():Boolean {
 			}
 			//(+lust! Possible + enemy lust)
 			dynStats("lus", 2+player.effectiveSensitivity()/10);
-			if(rand(3) == 0) monster.lust += 5 + monster.lib/10;
+			if(rand(3) == 0 && monster.lustVuln > 0) monster.lust += 5 + monster.lib/10;
 			return true;
 		}
 	}

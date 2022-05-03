@@ -96,6 +96,7 @@ package classes.Scenes
 			outputText("-New tier 3 intelligence lvl-up perk: Offensive Staff Channeling. Req. Staff Channeling and Grey Magic perks, knowing any attack spell, 120+ int. Effect: Allow to cast splited offensive spell without increased mana cost when using staff (3 parts at 70% power) or partial staff (2 parts at 80% power) as focus. (Effect will not activate if you already have ways to multicast spells at reduced power)\n");
 			outputText("-New tier 4 intelligence lvl-up perk: Selfbuffs Proficiency. Req. Job: Enchanter perk, 120+ int. Effect: Increase max selfbuff max cap by 30%.\n");
 			outputText("-New tier 4 intelligence lvl-up perk: Improved Mana Shield. Req. Arcane Shielding perk, 125+ int. Effect: Increasing fourfold amount of damage Mana Shield spell can withstand before deactivating. (1:4 ratio for physical attacks and 1:20 ratio for magical attacks)\n");
+			outputText("-New tier 5 wisdom lvl-up perk: Elemental Conjurer Knowledge (Ex). Req. Elemental Conjurer Knowledge and Elemental Contract Rank 4 perks, 150+ wis. Effect: Decrease chance to fail (by ~10%) when ranking up an elemental and replace mana/fatigue with elemental energy gained from sacrificing elemental shards to arcane circle. (if not enough energy stored it will check as before for mana/fatigue costs)\n");
 			outputText("-New tier 7 intelligence lvl-up perk: Super Convergence. Req. Convergence perk, 225+ int. Effect: Grey magic area of effect spells strike one more time (three times) against single targets. Against groups would deal 50-250% more dmg depending on size (250% for small groups, 100% for large groups).\n");
 			outputText("-New tier 10 intelligence lvl-up perk: Grand Grey Archmage (2nd Circle). Req. Grand Grey Archmage perk and 275+ int. Effect: Increases grey spell strength by 50%, mana pool by 900, lust bar by 320, regain it 150% faster. Grey spells costs lowered by 20%.\n");
 			outputText("-New tier 12 wisdom lvl-up perk: Greater shared power. Req. Elemental touch perk. Effect: Double the effect of Shared power.\n");
@@ -147,7 +148,6 @@ package classes.Scenes
 			//outputText("-New tier 0 misc lvl-up perk: Metamorph (Ex). Req. Metamorph perk. Effect: Opening more options to change PC body. Some would be accesable right away and other will require to unlock them using genetic memory.\n");
 			//outputText("-New tier 9 strength lvl-up perk: Prestige Job: Stalker. Req. Job: Warrior and Hunter perks, 150+ str/spe. Effect: +60 to str multi and +20 to spe multi (scalable with NG tiers), +20% damage and critical damage with thrown weapon.\n");
 			//outputText("-Dam can be upgraded 2 times (up to 3rd tier of wood dam) and Fishery once (to allow 2 npc's working at it - it also gonna increase each worker fish production by 20%)\n");
-			outputText("-New tier 5 wisdom lvl-up perk: Elemental Conjurer Knowledge (Ex). Req. Elemental Conjurer Knowledge and Elemental Contract Rank 4 perks, 150+ wis. Effect: Decrease chance to fail (by ~10%) when ranking up an elemental and replace mana/fatigue with elemental energy gained from sacrificing elemental shards to arcane circle. (if not enough energy stored it will check as before for mana/fatigue costs)\n");
 			//outputText("-New tier 11 wisdom lvl-up perk: Elemental Conjurer Knowledge (Su). Req. Elemental Conjurer Knowledge (Ex) and Elemental Contract Rank 10 perks, 300+ wis. Effect: .\n");
 			//outputText("-New tier 8 intelligence lvl-up perk: Trance. Req. Prestige Job: Seer perk and 200+. Effect: \n");
 			//outputText("-2nd and futher sections of Sky Poison Pearl unlocks each level instead each six levels (so to unlock all of them need to reach lvl 6 not 42).\n");
@@ -269,9 +269,9 @@ package classes.Scenes
 			outputText("-Minerva - restored 'Get Licked' scene and adapted for purified Minerva. (Svalkash)\n");
 			outputText("-Reworked Sapphire affection counter (retroactive). Added a proper dialogue about wedding from Lia's gdocs. (Svalkash)\n");
 			outputText("-Now you NEED to rebuild Marae's altar for any wedding. When Marae is corrupted, you can do it too, although you still can't get any blessings from it. (Svalkash)\n");
-			//outputText("-True Demon enemies getting innate Diehard effect. It would be % one with number matching enemy current lvl so factory bosses for ex. would have between 10 to 16 % Diehard bonus.\n");
-			//outputText("-True Angel enemies getting innate OverMax HP effect. It would be % one with number matching enemy current lvl.\n");
-			outputText("-\n");
+			outputText("-True Demon enemies getting innate OverMax HP effect. It would be % one with number matching enemy current lvl so factory bosses for ex. would have between 10 to 16 % OverMax HP bonus.\n");
+			//outputText("-True Angel enemies getting innate Diehard effect. It would be % one with number matching enemy current lvl.\n");
+			outputText("-As Kaiba warned on some items been temporal offer ended. Inari Blessed Kimono, Tamamo no Mae Cursed Kimono, Centaur Blackguard Armor went into Celess/Tyrantia legendaries upgrade menu. Black / Blue / Purple / Red / White Kimono to Inari Blessed Kimono / Tamamo no Mae Cursed Kimono and Centaur Armor to Centaur Blackguard Armor.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
