@@ -81,10 +81,10 @@ package classes.Scenes.Camp
 			flags[kFLAGS.PATCHOULI_AND_WONDERLAND] = 2;
 			clearOutput();
 			if (hpVictory){
-				outputText("The jabberwocky dies from the fatal wound you dealt him, its death throes echoing through the forest. While examining the beast’s corpse, you find a peculiar blade stuck in his back. It looks to be enchanted, albeit in which way, you have no idea. On the hilt is carved a single V. You proceed to get out of here with a still shaking Patchouli.\n\n");
+				outputText("The jabberwocky roars from the fatal wound you dealt it, its thrashing last moments echoing through the forest. While examining the beast’s corpse, you find a peculiar blade stuck in his back. It looks to be enchanted, albeit in which way, you have no idea. On the hilt is carved a single V. You proceed to get out of here with a still shaking Patchouli.\n\n");
 				SceneLib.inventory.takeItem(weapons.VBLADE, cleanupAfterCombat);
 			} else {
-				outputText("The jabberwock falls to the ground, unable to fight further as it begins to masturbate fiercely. You pick up a few items you found in the area, and hurry to get the hell out before the seemingly indestructible beast is back up and ready to fight.\n\n");
+				outputText("The jabberwock falls to the ground, unable to fight further as it begins to masturbate fiercely. You pick up a few items you found in the area, and get the hell out before the seemingly indestructible beast is back up and ready to fight.\n\n");
 				cleanupAfterCombat();
 			}
 		}
