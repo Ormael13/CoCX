@@ -94,7 +94,7 @@ public class ArouseSpell extends AbstractBlackSpell {
 			crit = true;
 			lustDmg *= 1.75;
 		}
-		lustDmg = Math.round(lustDmg);
+		lustDmg = Math.round(monster.lustVuln * lustDmg);
 		monster.teased(lustDmg, false);
 		if (crit) outputText(" <b>Critical!</b>");
 		if (player.hasPerk(PerkLib.EromancyMaster)) combat.teaseXP(1 + combat.bonusExpAfterSuccesfullTease());

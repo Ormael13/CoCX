@@ -43,6 +43,7 @@ package classes.Items
 		public const DSCLROB:Armor = new ArmorWithPerk("DSclRob", "D.Scale Robes", "dragonscale robes", "a dragonscale robes", 0, 10, 500, "This robe is expertly made from dragon scales. It offers high protection while being lightweight and should be comfortable to wear all day.", "Light",
 				PerkLib.WizardsEndurance,20,0,0,0);
 		public const EHGARB_:EbonweaveHereticsGarb = new EbonweaveHereticsGarb();
+		public const ERA:ArmorWithPerk = new ElvenRangerArmor();
 		public const EWJACK_:ArmorWithPerk = new ArmorWithPerk("EWJack","E.W. Jacket","ebonweave jacket","an ebonweave jacket",12,12,960,"This outfit is ebonweave, created using refined ebonbloom petals. The outfit consists of a leatherlike jacket, a mesh breastplate and a set of arrowproof clothing. Between them all, the outfit provide layers of protection rivaling heavier, more traditional armor.","Light",
 				PerkLib.WizardsEndurance,15,0,0,0);
 		public const EWPLTMA:ArmorWithPerk = new ArmorWithPerk("EWPltMa","E.W. Platemail","ebonweave platemail","an ebonweave platemail",30,6,4320,"The armor is ebonweave, created using refined ebonbloom petals. The armor consists of two layers, an outer layer of ebonweave playing, and an inner layer of arrowproof ebonweave cloth.","Heavy",
@@ -66,6 +67,7 @@ package classes.Items
 		public const HLEATHR:Armor = new Armor("HLeathr", "Hvy Lthr", "Heavy Leather", "a heavy leather armour", 10,0,375, "Layers of cured animal hide to offer greater protection from damage.\n", "Heavy");
 		public const I_CORST:InquisitorsCorset = new InquisitorsCorset();
 		public const I_ROBES:InquisitorsRobes = new InquisitorsRobes();
+		public const IBKIMO:ArmorWithPerk = new InariBlessedKimono();
 		public const INDECST:ArmorWithPerk = new ArmorWithPerk("IndecSt","Indec StAr","practically indecent steel armor","a suit of practically indecent steel armor",5,0,400,"This suit of steel 'armor' has two round disks that barely cover the nipples, a tight chainmail bikini, and circular butt-plates.","Medium",
 				PerkLib.SluttySeduction,6,0,0,0,"Your incredibly revealing steel armor allows you access to 'Seduce', an improved form of 'Tease'.").withTag(ItemTags.REVEALING) as ArmorWithPerk;
 		public const INDEDSR:ArmorWithPerk = new ArmorWithPerk("IndeDSR","Indec D.Scale Robe","indecent dragonscale robe","an indecent dragonscale robe",0,4,400,"More of a longcoat than a robe, this outfit is crafted from dragon scales. Discrete straps centered around the belt keep the front perpetually open, displaying your groin and any cleavage you might have. The dragonscale is treated to be durable yet remain comfortable.","Light",
@@ -74,6 +76,7 @@ package classes.Items
 				PerkLib.WizardsEnduranceAndSluttySeduction,20,5,0,0,"Your indecent ebonweave robe allows you access to 'Seduce', an improved form of 'Tease'.").withTag(ItemTags.REVEALING) as ArmorWithPerk;
 		public const INDESSR:ArmorWithPerk = new ArmorWithPerk("IndeSSR","Indec S.S. Robe","indecent spider silk robe","an indecent spider silk robe",0,2,200,"More of a longcoat than a robe, this outfit is crafted from alchemically treated spider silk. Discrete straps centered around the belt keep the front perpetually open, displaying your groin and any cleavage you might have.","Light",
 				PerkLib.WizardsEnduranceAndSluttySeduction,15,5,0,0,"Your indecent spider silk robe allows you access to 'Seduce', an improved form of 'Tease'.").withTag(ItemTags.REVEALING) as ArmorWithPerk;
+		public const IQG:ArmorWithPerk = new IceQueenGown();
 		public const KBDRESS:Armor = new KrakenBlackDress();
 		public const LEATHRA:Armor = new Armor("LeathrA","LeathrA","leather armor segments","a set of leather armor",5,0,100,"This is a suit of well-made leather armor.  It looks fairly rugged.","Light");
 		public const URTALTA:LeatherArmorSegments = new LeatherArmorSegments();
@@ -125,8 +128,6 @@ package classes.Items
 		public const SSARMOR:Armor = new Armor("SSArmor","SS.Armor","spider-silk armor","a suit of spider-silk armor",25,0,1500,"This armor is as white as the driven snow.  It's crafted out of thousands of strands of spider-silk into an impenetrable protective suit.  The surface is slightly spongy, but so tough you wager most blows would bounce right off.","Heavy");
 		public const SCANSC:ArmorWithPerk = new ScandalousSuccubusClothing();
 		public const SLEATHR:Armor = new Armor("SLeathr", "Stud.Leather", "Studded Leather", "a cured leather armor", 8, 0,250, "A cured leather armor, it’s tough and can offer some modest protection while also allowing freedom of movement.", "Light");
-		public const TCKIMO:ArmorWithPerk = new TamamoNoMaeCursedKimono();
-		public const IBKIMO:ArmorWithPerk = new InariBlessedKimono();
 		public const SWHBIKNI:ArmorWithPerk = new ArmorWithPerk("SWhBikini","S Wh Bikini","Sexy White Bikini","a Sexy White Bikini",0,0,160,"This item helps female swimmers look sexy while not hindering movement. A perfect dress for a day at the beach.","Light",
 				PerkLib.SluttySeduction,10,0,0,0,"Your revealing chain bikini allows you access to 'Seduce', an improved form of 'Tease'.", false, false);
 		public const SYEBIKNI:ArmorWithPerk = new ArmorWithPerk("SYeBikini","S Ye Bikini","Sexy Yellow Bikini","a Sexy Yellow Bikini",0,0,160,"This item helps female swimmers look sexy while not hindering movement. A perfect dress for a day at the beach.","Light",
@@ -134,6 +135,7 @@ package classes.Items
 		public const T_BSUIT:ArmorWithPerk = new ArmorWithPerk("T.BSuit","Bodysuit","semi-transparent bodysuit","a semi-transparent, curve-hugging bodysuit",0,0,50,"A semi-transparent bodysuit. It looks like it will cling to all the curves of your body.","Light",
 				PerkLib.SluttySeduction,7,0,0,0,"Your clingy transparent bodysuit allows you access to 'Seduce', an improved form of 'Tease'.");
 		public const TBARMOR:Armor = new MaraeArmor();
+		public const TCKIMO:ArmorWithPerk = new TamamoNoMaeCursedKimono();
 		public const TRMOUTF:Armor = new TravelingMerchantOutfit();
 		public const TRADITC:ArmorWithPerk = new ArmorWithPerk("TraditC","TraditionalCloth","Traditional clothes","a Traditional clothes",0,0,160,"These clothes bear resemblance to the traditional outfit whore by people in He'Xin'Dao on important days however there is something lewd and obscene about this more skimpy variant of the design. These clothes naturally assist soulforce manipulation.","Light",
 				PerkLib.SluttySeduction,10,0,0,0,"Your revealing clothes allows you access to 'Seduce', an improved form of 'Tease'.", false, false);
@@ -143,11 +145,9 @@ package classes.Items
 		public const W_ROBES:ArmorWithPerk = new ArmorWithPerk("W.Robes","W.Robes","wizard's robes","a wizard's robes",0,1,50,"These robes appear to have once belonged to a female wizard.  They're long with a slit up the side and full billowing sleeves.  The top is surprisingly low cut.  Somehow you know wearing it would aid your spellcasting.","Light",
 				PerkLib.WizardsEndurance,25,0,0,0);
 		public const WALIC:ArmorWithPerk = new WalpurgisIzaliaRobe();
-		public const VLAR:ArmorWithPerk = new VladimirRegalia();
-		public const ERA:ArmorWithPerk = new ElvenRangerArmor();
-		public const IQG:ArmorWithPerk = new IceQueenGown();
 		public const WKIMONO:ArmorWithPerk = new ArmorWithPerk("W.Kimono","W.Kimono","white kimono","a white kimono",0,1,200,"This lovely white kimono is adorned with a floral pattern. It will likely increase your spiritual power as a kitsune.","Light",
 				PerkLib.WizardsAndDaoistsEndurance,20,20,0,0);
+		public const VLAR:ArmorWithPerk = new VladimirRegalia();
 		/*
 		private static function mk(id:String,shortName:String,name:String,longName:String,def:Number,value:Number,description:String,perk:String=""):Armor {
 			return new Armor(id,shortName,name,longName,def,value,description,perk);

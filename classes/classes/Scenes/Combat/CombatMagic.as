@@ -727,7 +727,7 @@ public class CombatMagic extends BaseCombatContent {
 					damageB *= dam4Bab;
 					poisonScaling *= dam4Bab;
 					damageB *= 1+(poisonScaling/10);
-					monster.teased(monster.lustVuln * damageB, false);
+					monster.teased(Math.round(monster.lustVuln * damageB), false);
 					monster.statStore.addBuffObject({tou:-poisonScaling}, "Poison",{text:"Poison"});
 					var venomType:StatusEffectType = StatusEffects.NagaVenom;
 					if (player.nagaScore() >= 23) venomType = StatusEffects.ApophisVenom;

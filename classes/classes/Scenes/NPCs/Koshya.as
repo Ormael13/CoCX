@@ -14,8 +14,8 @@ import classes.internals.*;
 	public class Koshya extends Monster
 	{
 		public function soulskillCostEnergyProjection():Number {
-			var cost:Number = 100;
-			//if (hasPerk(PerkLib.DaoistCultivator)) cost -= 10;
+			var cost:Number = 50;
+			//if (hasPerk(PerkLib.DaoistCultivator)) cost -= 5;
 			if (hasStatusEffect(StatusEffects.TrueFormAngel)) cost *= 3;
 			return cost;
 		}

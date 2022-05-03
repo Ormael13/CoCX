@@ -66,7 +66,13 @@ public function itemImproveMenuPure():void {
 		[weaponsrange.BOWLONG, weaponsrange.ARTEMIS, weaponsrange.WILDHUN],
 		[weaponsrange.SHUNHAR, weaponsrange.KSLHARP, weaponsrange.LEVHARP],
 		[shields.SANCTYN, shields.SANCTYL, shields.SANCTYD],
-		[armors.LMARMOR, armors.BMARMOR, armors.S_ARMOR]
+		[armors.LMARMOR, armors.BMARMOR, armors.S_ARMOR],
+		[armors.IBKIMO, armors.BLKIMONO, armors.TCKIMO],
+		[armors.IBKIMO, armors.BKIMONO, armors.TCKIMO],
+		[armors.IBKIMO, armors.PKIMONO, armors.TCKIMO],
+		[armors.IBKIMO, armors.RKIMONO, armors.TCKIMO],
+		[armors.IBKIMO, armors.WKIMONO, armors.TCKIMO],
+		[armors.CTPALAD, null, armors.CTBGUAR]
 	];
 	clearOutput();
 	outputText("\"<i></i>\"\n\n");
