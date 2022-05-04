@@ -43,7 +43,7 @@ public class SceneHunter extends BaseContent {
         outputText("\n\n<b>Select Loss:</b> ");
         if (flags[kFLAGS.SCENEHUNTER_SELECT_LOSS]) {
             outputText("<b><font color=\"#008000\">ENABLED</font></b>");
-            outputText("\nSome scenes with many loss variations will allow you to select the specific scene.");
+            outputText("\nSome scenes with many loss variations will allow you to select the specific scene. Works best in conjunction with UniHerms or Dick select, which open more scenes.");
             outputText("\n<i>Wait, it's illegal, the monster should choose how to rape you... fuck the RNG!</i>");
         }
         else {

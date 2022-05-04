@@ -454,8 +454,17 @@ import classes.Stats.Buff;
 			if (player.isTaur()) outputText(" flank and forcing you sideways onto the ground.");
 			else outputText(" chest and forcing you backwards onto the ground.");
 			outputText("  You grunt from the impact and try to sit up, but Izumi easily restrains you with a single well-muscled arm.  \"<i>Well now, let’s see what we’re workin’ with here, shall we?</i>\" she announces casually, as she pulls aside your [armor] to reveal your cock.\n\n");
-
-			sceneHunter.selectBigSmall(surrenderLargeCock, 14, surrenderMediumCock, 6, surrenderSmallCock, "length");
+			if (sceneHunter.dickSelect && !sceneHunter.selectLoss) {
+				var choices:Array = [];
+				if (player.findCock(1, 14, -1, "length") >= 0)
+					choices.push(surrenderLargeCock);
+				if (player.findCock(1, 6, 14, "length") >= 0)
+					choices.push(surrenderMediumCock);
+				if (player.findCock(-1, -1, 6, "length") >= 0)
+					choices.push(surrenderSmallCock);
+				choices[rand(choices.length)]();
+			}
+			else sceneHunter.selectBigSmall(surrenderLargeCock, 14, surrenderMediumCock, 6, surrenderSmallCock, "length");
 		}
 
 		protected function surrenderSmallCock():void
