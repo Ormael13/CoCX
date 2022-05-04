@@ -1762,6 +1762,19 @@ public class SaveUpdater extends NPCAwareContent {
 				if (player.lowerBody == LowerBody.GOO && player.arms.type == Arms.GOO && player.rearBody.type == RearBody.METAMORPHIC_GOO && player.skinAdj != "slimy") player.skinAdj = "slimy";
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.009;
 			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.010) {
+				if (Forgefather.gender > 0) Forgefather.statueProgress++;
+				if (Forgefather.wings > 0) Forgefather.statueProgress++;
+				if (Forgefather.tail > 0) Forgefather.statueProgress++;
+				if (Forgefather.lowerBody > 0) Forgefather.statueProgress++;
+				if (Forgefather.arms > 0) Forgefather.statueProgress++;
+				if (Forgefather.hairLength > 0) Forgefather.statueProgress++;
+				if (Forgefather.chest > 0) Forgefather.statueProgress++;
+				if (Forgefather.vagina > 0) Forgefather.statueProgress++;
+				if (Forgefather.cock > 0) Forgefather.statueProgress++;
+				if (Forgefather.balls > 0) Forgefather.statueProgress++;
+				flags[kFLAGS.MOD_SAVE_VERSION] = 35.010;
+			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
 			return;

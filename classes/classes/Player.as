@@ -1173,7 +1173,7 @@ use namespace CoC;
 		}
 		//Spear-type
 		public function isSpearTypeWeapon():Boolean {
-			return (weaponClass("Spear"));
+			return (weaponClass("Spear")) || weapon == game.weapons.SKYPIER;
 		}
 		//Scythe-type
 		public function isScytheTypeWeapon():Boolean {
