@@ -36,6 +36,7 @@ public class GooGirlScene extends AbstractLakeContent
 //[Lake]
 		public function encounterGooGirl():void
 		{
+			monster = new GooGirl();
 			clearOutput();
 			spriteSelect(SpriteDb.s_googirlsprite);
 			GooLocation = "lake";
@@ -48,12 +49,13 @@ public class GooGirlScene extends AbstractLakeContent
 				flags[kFLAGS.CODEX_ENTRY_GOOGIRLS] = 1;
 				outputText("\n\n<b>New codex entry unlocked: Goo Girls!</b>")
 			}
-			startCombat(new GooGirl());
+			startCombat(monster);
 			doNext(playerMenu);
 		}
 //[Beach]
 		public function encounterGooGirlBeach():void
 		{
+			monster = new GooGirlBeach();
 			clearOutput();
 			spriteSelect(SpriteDb.s_googirlsprite);
 			GooLocation = "beach";
@@ -63,7 +65,7 @@ public class GooGirlScene extends AbstractLakeContent
 				flags[kFLAGS.CODEX_ENTRY_GOOGIRLS] = 1;
 				outputText("\n\n<b>New codex entry unlocked: Goo Girls!</b>")
 			}
-			startCombat(new GooGirlBeach());
+			startCombat(monster);
 			doNext(playerMenu);
 		}
 
