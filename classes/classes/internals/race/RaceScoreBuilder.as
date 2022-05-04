@@ -1,10 +1,12 @@
 package classes.internals.race {
 
 import classes.BodyData;
+import classes.BodyParts.Antennae;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Wings;
 import classes.CockTypesEnum;
 import classes.PerkType;
+import classes.internals.Utils;
 
 public class RaceScoreBuilder {
 	internal var raceBuilder:RaceBuilder;
@@ -20,12 +22,19 @@ public class RaceScoreBuilder {
 		this.minScore = minScore;
 	}
 	
-	public function earType(type1:*, score1:int, ...rest:Array):RaceScoreBuilder {
-		addSlotRequirement(BodyData.SLOT_EAR_TYPE, type1, score1, rest);
-		return next;
-	}
 	public function armType(type1:*, score1:int, ...rest:Array):RaceScoreBuilder {
 		addSlotRequirement(BodyData.SLOT_ARM_TYPE, type1, score1, rest);
+		return next;
+	}
+	public function antennaeType(type1:*, score1:int, ...rest:Array):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_ANTENNAE_TYPE, type1, score1, rest);
+		return next;
+	}
+	public function noAntennae(score:int):RaceScoreBuilder {
+		return antennaeType(Antennae.NONE, score);
+	}
+	public function earType(type1:*, score1:int, ...rest:Array):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_EAR_TYPE, type1, score1, rest);
 		return next;
 	}
 	public function eyeType(type1:*, score1:int, ...rest:Array):RaceScoreBuilder {
@@ -34,6 +43,17 @@ public class RaceScoreBuilder {
 	}
 	public function eyeColor(type1:*, score1:int, ...rest:Array):RaceScoreBuilder {
 		addSlotRequirement(BodyData.SLOT_EYE_COLOR, type1, score1, rest);
+		return next;
+	}
+	public function eyeTypeOfColor(type:*, color:*, score:int):RaceScoreBuilder {
+		addRequirement(
+				RacialRequirement.joinAnd(
+						"eyes",
+						false,
+						slotRequirement(BodyData.SLOT_EYE_TYPE, type, score),
+						slotRequirement(BodyData.SLOT_EYE_COLOR, color, score)
+				)
+		)
 		return next;
 	}
 	public function faceType(type1:*, score1:int, ...rest:Array):RaceScoreBuilder {
@@ -48,12 +68,24 @@ public class RaceScoreBuilder {
 		addSlotRequirement(BodyData.SLOT_HAIR_COLOR, type1, score1, rest);
 		return next;
 	}
+	public function height(type1:*, score1:int, ...rest:Array):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_HEIGHT, type1, score1, rest);
+		return next;
+	}
 	public function legType(type1:*, score1:int, ...rest:Array):RaceScoreBuilder {
 		addSlotRequirement(BodyData.SLOT_LEG_TYPE, type1, score1, rest);
 		return next;
 	}
 	public function rearType(type1:*, score1:int, ...rest:Array):RaceScoreBuilder {
 		addSlotRequirement(BodyData.SLOT_REAR_TYPE, type1, score1, rest);
+		return next;
+	}
+	public function skinBaseType(type1:*, score1:int, ...rest:Array):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_SKIN_BASE_TYPE, type1, score1, rest);
+		return next;
+	}
+	public function skinBaseColor(type1:*, score1:int, ...rest:Array):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_SKIN_BASE_COLOR, type1, score1, rest);
 		return next;
 	}
 	public function skinCoatType(type1:*, score1:int, ...rest:Array):RaceScoreBuilder {
@@ -63,6 +95,16 @@ public class RaceScoreBuilder {
 	public function skinCoatColor(type1:*, score1:int, ...rest:Array):RaceScoreBuilder {
 		addSlotRequirement(BodyData.SLOT_SKIN_COAT_COLOR, type1, score1, rest);
 		return next;
+	}
+	public function skinPlainOnly(score:int):RaceScoreBuilder {
+		return customRequirement(
+				"skin",
+				"plain",
+				function(body:BodyData):Boolean {
+					return body.player.hasPlainSkinOnly();
+				},
+				score
+		);
 	}
 	public function tailType(type1:*, score1:int, ...rest:Array):RaceScoreBuilder {
 		addSlotRequirement(BodyData.SLOT_TAIL_TYPE, type1, score1, rest);
@@ -89,15 +131,76 @@ public class RaceScoreBuilder {
 		))
 		return next;
 	}
+	public function hasVagina(score: int): RaceScoreBuilder {
+		addRequirement(new RacialRequirement(
+				"vagina",
+				"has",
+				RaceUtils.hasVaginaFn(true),
+				score,
+				minScore
+		))
+		return next;
+	}
 	
 	public function perk(perk:PerkType, score:int):RaceScoreBuilder {
 		addRequirement(new RacialRequirement(
 				"",
-				"Perk: "+perk.name(),
+				perk.name()+" perk",
 				RaceUtils.hasPerkFn(perk),
 				score,
 				minScore
 		))
+		return next;
+	}
+	public function allPerks(perks:/*PerkType*/Array, score:int):RaceScoreBuilder {
+		addRequirement(new RacialRequirement(
+				"",
+				perks.map(function(e:PerkType,...rest:Array):String{
+					return e.name();
+				}).join(", ")+" perks",
+				RaceUtils.hasAllPerksFn(perks),
+				score,
+				minScore
+		))
+		return next;
+	}
+	
+	/**
+	 * @param checkFn `function (body:BodyData):Boolean`
+	 */
+	public function customRequirement(
+			group:String,
+			name:String,
+			checkFn:Function,
+			score: int
+	):RaceScoreBuilder {
+		addRequirement(new RacialRequirement(
+				group,
+				name,
+				checkFn,
+				score,
+				minScore
+		));
+		return next;
+	}
+	
+	/**
+	 * @param checkFn `function (body:BodyData):Boolean`
+	 * @param scoreFn `function (body:BodyData):int`
+	 */
+	public function customScoreRequirement(
+			group:String,
+			name:String,
+			checkFn:Function,
+			scoreFn:Function
+	):RaceScoreBuilder {
+		addRequirement(new CustomRacialRequirement(
+				group,
+				name,
+				checkFn,
+				scoreFn,
+				minScore
+		));
 		return next;
 	}
 	
@@ -124,8 +227,10 @@ public class RaceScoreBuilder {
 			rest:Array
 	):void {
 		var slotName:String = BodyData.Slots[slot].name;
+		var nameFn:Function = BodyData.Slots[slot].nameFn;
+		var argumentFn:Function = RaceUtils.argumentSlotFn(slot);
 		var requirements:Array = parseArgs(
-				slot,
+				argumentFn, nameFn,
 				type1, score1, rest,
 				"["+raceBuilder.name+" "+ slotName+"] ");
 		for each (var req:* in requirements) {
@@ -138,6 +243,23 @@ public class RaceScoreBuilder {
 			));
 		}
 	}
+	private function slotRequirement(slot:int, type:*, score:int):RacialRequirement {
+		var slotName:String = BodyData.Slots[slot].name;
+		var nameFn:Function = BodyData.Slots[slot].nameFn;
+		var argumentFn:Function = RaceUtils.argumentSlotFn(slot);
+		var operatorObject:Object = RaceUtils.parseOperatorObject(
+				type,
+				nameFn,
+				"["+raceBuilder.name+" "+ slotName+"] "
+		);
+		return new RacialRequirement(
+				slotName,
+				operatorObject.name,
+				RaceUtils.composeOpArg(argumentFn, operatorObject.operatorFn),
+				score,
+				minScore
+		)
+	}
 	
 	/**
 	 * @return {{
@@ -146,14 +268,20 @@ public class RaceScoreBuilder {
 	 *     check(body:BodyData, score:int): Boolean
 	 * }[]}
 	 */
-	private static function parseArgs(slot:int, type1:*, score1:int, rest:Array, errorContext:String=""):Array {
+	private static function parseArgs(
+			argumentFn:Function,
+			nameFn: Function,
+			type1:*,
+			score1:int,
+			rest:Array,
+			errorContext:String=""):Array {
 		if (rest.length%2 !== 0) {
 			throw new Error(errorContext+"Invalid argument count ("+(rest.length+2)+")")
 		}
 		var result:Array = [];
-		result.push(parseArgPair(slot, type1, score1));
+		result.push(parseArgPair(argumentFn, nameFn, type1, score1));
 		for (var i:int = 0; i < rest.length; i+=2) {
-			result.push(parseArgPair(slot, rest[i], rest[i+1]));
+			result.push(parseArgPair(argumentFn, nameFn, rest[i], rest[i+1]));
 		}
 		return result;
 	}
@@ -165,11 +293,10 @@ public class RaceScoreBuilder {
 	 *     check(body:BodyData, score:int): Boolean
 	 * }}
 	 */
-	private static function parseArgPair(slot:int, type:*, score:int, errorContext:String=""):Object {
-		var argumentFn:Function = RaceUtils.argumentSlotFn(slot);
+	private static function parseArgPair(argumentFn:Function, nameFn: Function, type:*, score:int, errorContext:String=""):Object {
 		var operatorObject:Object = RaceUtils.parseOperatorObject(
 				type,
-				BodyData.Slots[slot].nameFn,
+				nameFn,
 				errorContext
 		);
 		return {

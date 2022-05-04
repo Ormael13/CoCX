@@ -5,6 +5,7 @@ import classes.internals.race.RaceTierRequirement;
 
 public class RaceTier {
 	
+	public var tierNumber:int;
 	public var requirements:/*RaceTierRequirement*/Array;
 	public var name:String;
 	private var nameFn:Function;
@@ -12,12 +13,14 @@ public class RaceTier {
 	public var buffs:Object;
 	
 	public function RaceTier(
+			tierNumber:int,
 			name:String,
 			nameFn:Function,
 			minScore:int,
 			buffs:Object,
 			requirements:/*RaceTierRequirement*/Array
 	) {
+		this.tierNumber = tierNumber;
 		this.name = name;
 		this.nameFn = nameFn;
 		this.minScore = minScore;

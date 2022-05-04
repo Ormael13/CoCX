@@ -3,6 +3,7 @@ import classes.BodyData;
 import classes.RaceTier;
 
 public class RaceTierBuilder {
+	public var tierNumber: int;
 	public var raceBuilder:RaceBuilder;
 	public var minScore:int;
 	public var maleName:String;
@@ -14,11 +15,13 @@ public class RaceTierBuilder {
 	
 	public function RaceTierBuilder(
 			raceBuilder: RaceBuilder,
+			tierNumber: int,
 			minScore: int,
 			maleName: String,
 			femaleName: String
 	) {
 		this.raceBuilder = raceBuilder;
+		this.tierNumber = tierNumber;
 		this.minScore = minScore;
 		this.maleName = maleName;
 		this.maleTauricName = maleName;
@@ -57,6 +60,7 @@ public class RaceTierBuilder {
 			}
 		}
 		raceBuilder.tiers.push(new RaceTier(
+				tierNumber,
 				maleName,
 				nameFunction,
 				minScore,

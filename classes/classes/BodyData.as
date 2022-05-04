@@ -1,6 +1,7 @@
 package classes {
 import classes.BodyParts.*;
 import classes.internals.EnumValue;
+import classes.internals.Utils;
 import classes.lists.Gender;
 
 /**
@@ -85,25 +86,36 @@ public class BodyData {
 			return RearBody.Types[value].name;
 		}
 	});
-	public static const SLOT_SKIN_COAT_TYPE:int = 10;
-	EnumValue.add(Slots,SLOT_SKIN_COAT_TYPE, "SKIN_COAT_TYPE", {
-		name:"skin coat",
+	public static const SLOT_SKIN_BASE_TYPE:int = 10;
+	EnumValue.add(Slots,SLOT_SKIN_BASE_TYPE, "SKIN_BASE_TYPE", {
+		name:"skin",
 		nameFn: function(value:int):String {
 			return Skin.SkinTypes[value].name;
 		}
 	});
-	public static const SLOT_SKIN_COAT_COLOR:int = 11;
-	EnumValue.add(Slots,SLOT_SKIN_COAT_COLOR, "SKIN_COAT_COLOR", {
-		name:"skin coat color"
+	public static const SLOT_SKIN_BASE_COLOR:int = 11;
+	EnumValue.add(Slots,SLOT_SKIN_BASE_COLOR, "SKIN_BASE_COLOR", {
+		name:"skin color"
 	});
-	public static const SLOT_TAIL_TYPE:int = 12;
+	public static const SLOT_SKIN_COAT_TYPE:int = 12;
+	EnumValue.add(Slots,SLOT_SKIN_COAT_TYPE, "SKIN_COAT_TYPE", {
+		name:"coat",
+		nameFn: function(value:int):String {
+			return Skin.SkinTypes[value].name;
+		}
+	});
+	public static const SLOT_SKIN_COAT_COLOR:int = 13;
+	EnumValue.add(Slots,SLOT_SKIN_COAT_COLOR, "SKIN_COAT_COLOR", {
+		name:"coat color"
+	});
+	public static const SLOT_TAIL_TYPE:int = 14;
 	EnumValue.add(Slots,SLOT_TAIL_TYPE, "TAIL_TYPE", {
 		name:"tail",
 		nameFn: function(value:int):String {
 			return Tail.Types[value].name;
 		}
 	});
-	public static const SLOT_WING_TYPE:int = 13;
+	public static const SLOT_WING_TYPE:int = 15;
 	EnumValue.add(Slots,SLOT_WING_TYPE, "WING_TYPE", {
 		name:"wings",
 		nameFn: function(value:int):String {
@@ -111,7 +123,7 @@ public class BodyData {
 		}
 	});
 	// Other stats
-	public static const SLOT_GENDER:int = 14;
+	public static const SLOT_GENDER:int = 16;
 	EnumValue.add(Slots,SLOT_GENDER, "GENDER", {
 		name:"gender",
 		nameFn: function(value:int):String {
@@ -122,6 +134,13 @@ public class BodyData {
 				case Gender.GENDER_HERM: return "hermaphrodite";
 			}
 			return ""+value;
+		}
+	});
+	public static const SLOT_HEIGHT:int = 17;
+	EnumValue.add(Slots,SLOT_HEIGHT, "HEIGHT", {
+		name: "height",
+		nameFn: function (value:Number):String {
+			return Measurements.footInchOrMetres(value);
 		}
 	});
 	
@@ -160,6 +179,8 @@ public class BodyData {
 		data[SLOT_HAIR_COLOR] = player.hairColor;
 		data[SLOT_LEG_TYPE] = player.lowerBodyPart.type;
 		data[SLOT_REAR_TYPE] = player.rearBody.type;
+		data[SLOT_SKIN_BASE_TYPE] = player.skin.base.type;
+		data[SLOT_SKIN_BASE_COLOR] = player.skin.base.color;
 		data[SLOT_SKIN_COAT_TYPE] = player.skin.coat.type;
 		data[SLOT_SKIN_COAT_COLOR] = player.skin.coat.color;
 		data[SLOT_TAIL_TYPE] = player.tail.type;

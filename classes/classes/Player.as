@@ -1079,7 +1079,7 @@ use namespace CoC;
 		public function hasTentacleAttacks():Boolean{return LowerBody.hasTentacles(this) || hasPerk(PerkLib.MorphicWeaponry);}
 		public function hasNaturalWeapons():Boolean { return (haveNaturalClaws() || hasABiteAttack() || hasAWingAttack() || hasAGoreAttack() || hasATailSlapAttack() || hasTalonsAttack || hasTentacleAttacks || isAlraune() || isTaur());}
 		//Some other checks
-		public function isGoblinoid():Boolean { return (goblinScore() > 9 || gremlinScore() > 14); }
+		public function isGoblinoid():Boolean { return (racialTier(Race.GOBLIN) > 0 || gremlinScore() > 14); }
 		public function isSlime():Boolean { return (hasPerk(PerkLib.DarkSlimeCore) || hasPerk(PerkLib.SlimeCore)); }
 		public function isHarpy():Boolean { return (harpyScore() > 10 || thunderbirdScore() > 15 || phoenixScore() > 15); }
 		public function isWerewolf():Boolean { return (werewolfScore() >= 12); }
@@ -4428,6 +4428,15 @@ use namespace CoC;
 		public function finalRacialScore(score: Number, race:Race):Number {
 			return race.finalizeScore(bodyData(), score);
 		}
+		
+		public function racialScore(race:Race, bodyData:BodyData = null):int {
+			if (!bodyData) bodyData = this.bodyData();
+			return race.totalScore(bodyData);
+		}
+		public function racialTier(race:Race, bodyData:BodyData = null):int {
+			if (!bodyData) bodyData = this.bodyData();
+			return race.getTierNumber(bodyData);
+		}
 
 		public function racialParagonSelectedRace():Race {
 			return Race.ALL_RACES[flags[kFLAGS.APEX_SELECTED_RACE]];
@@ -4757,6 +4766,7 @@ use namespace CoC;
 		//Determine Chimera Race Rating
 		public function chimeraScore():Number {
 			Begin("Player","racialScore","chimera");
+			var body:BodyData = bodyData();
 			var chimeraCounter:Number = 0;
 			if (catScore() >= 8)
 				chimeraCounter++;
@@ -4776,7 +4786,7 @@ use namespace CoC;
 				chimeraCounter++;
 //			if (dogScore() >= 4)
 //				chimeraCounter++;
-            if (wolfScore() >= 8)
+            if (racialTier(Race.WOLF, body) >= 1)
                 chimeraCounter++;
 			if (werewolfScore() >= 12)
 				chimeraCounter++;
@@ -4802,7 +4812,7 @@ use namespace CoC;
 				chimeraCounter++;
 			if (beeScore() >= 17)
 				chimeraCounter++;
-			if (goblinScore() >= 10)
+			if (racialTier(Race.GOBLIN, body) >= 1)
 				chimeraCounter++;
 			if (gremlinScore() >= 15)
 				chimeraCounter++;
@@ -4937,13 +4947,14 @@ use namespace CoC;
 		public function grandchimeraScore():Number {
 			Begin("Player","racialScore","grandchimera");
 			var grandchimeraCounter:Number = 0;
+			var body:BodyData = bodyData();
 			if (nekomataScore() >= 12)
 				grandchimeraCounter++;
 			if (dragonScore() >= 24)
 				grandchimeraCounter++;
 			if (jabberwockyScore() >= 20)
 				grandchimeraCounter++;
-			if (wolfScore() >= 10 && hasFur() && coatColor == "glacial white")
+			if (racialTier(Race.WOLF, body) >= 2)
 				grandchimeraCounter++;
 //			if (werewolfScore() >= 12)
 //				grandchimeraCounter++;
@@ -6352,56 +6363,7 @@ use namespace CoC;
 		//Goblin score
 		public function goblinScore():Number
 		{
-			Begin("Player","racialScore","goblin");
-			var goblinCounter:Number = 0;
-			if (faceType == Face.HUMAN || faceType == Face.ANIMAL_TOOTHS)
-				goblinCounter++;
-			if (ears.type == Ears.ELFIN)
-				goblinCounter++;
-			if (tallness < 48)
-				goblinCounter++;
-			if (hasVagina())
-				goblinCounter++;
-			if (hasPlainSkinOnly()) {
-				goblinCounter++;
-				if (InCollection(skin.base.color, ["pale yellow", "grayish-blue", "green", "dark green", "emerald"]))
-					goblinCounter++;
-				if (eyes.type == Eyes.HUMAN && (InCollection(eyes.colour, ["red", "yellow", "purple"])))
-					goblinCounter++;
-				if (InCollection(hairColor, ["red", "purple", "green", "blue", "pink", "orange"]))
-					goblinCounter++;
-				if (arms.type == Arms.HUMAN)
-					goblinCounter++;
-				if (lowerBody == LowerBody.HUMAN)
-					goblinCounter++;
-				if (antennae.type == Antennae.NONE)
-					goblinCounter++;
-			}
-			if (hasPerk(PerkLib.GoblinoidBlood))
-				goblinCounter++;
-			if (hasPerk(PerkLib.BouncyBody))
-				goblinCounter++;
-			if (hasPerk(MutationsLib.NaturalPunchingBag))
-				goblinCounter++;
-			if (hasPerk(MutationsLib.NaturalPunchingBagPrimitive))
-				goblinCounter++;
-			if (hasPerk(MutationsLib.NaturalPunchingBagEvolved))
-				goblinCounter++;
-			if (hasPerk(MutationsLib.NaturalPunchingBag) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
-				goblinCounter++;
-			if (hasPerk(MutationsLib.NaturalPunchingBagPrimitive) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
-				goblinCounter++;
-			if (hasPerk(MutationsLib.NaturalPunchingBagEvolved) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
-				goblinCounter++;
-			if (hasPerk(PerkLib.GoblinsDescendant) || hasPerk(PerkLib.BloodlineGoblin))
-				goblinCounter += increaseFromBloodlinePerks();
-			if (!InCollection(skin.base.color, ["pale yellow", "grayish-blue", "green", "dark green", "emerald"]))
-				goblinCounter = 0;
-			if (ears.type != Ears.ELFIN)
-				goblinCounter = 0;
-			goblinCounter = finalRacialScore(goblinCounter, Race.GOBLIN);
-			End("Player","racialScore");
-			return goblinCounter;
+			return racialScore(Race.GOBLIN);
 		}
 
 		//Goblin score
@@ -9275,7 +9237,7 @@ use namespace CoC;
 
 		//Wolf/Fenrir score
 		public function wolfScore():Number {
-			return Race.WOLF.totalScore(bodyData());;
+			return racialScore(Race.WOLF);
 		}
 
 		//Werewolf score
@@ -11286,10 +11248,11 @@ use namespace CoC;
 					maxWisCap2 += 50;
 				}
 			}
-			var race:Race = Race.WOLF;
-			var tier:RaceTier = race.getTier(body);
-			if (tier && tier.hasBuffs()) {
-				StatUtils.mergeBuffObjects(buffs, tier.buffs);
+			for each (var race:Race in Race.ALL_RACES) {
+				var tier:RaceTier = race.getTier(body);
+				if (tier && tier.hasBuffs()) {
+					StatUtils.mergeBuffObjects(buffs, tier.buffs);
+				}
 			}
 			if (werewolfScore() >= 12) {
 				/*if (werewolfScore() >= 12) {
@@ -11447,12 +11410,6 @@ use namespace CoC;
 				maxSpeCap2 += 70;
 				maxTouCap2 += 35;
 			}//+15/10-20
-			if (goblinScore() >= 10) {
-				maxStrCap2 -= 50;
-				maxSpeCap2 += 75;
-				maxIntCap2 += 100;
-				maxLibCap2 += 25;
-			}
 			if (gremlinScore() >= 15) {
 				if (gremlinScore() >= 18) {
 					maxStrCap2 -= 50;

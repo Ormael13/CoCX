@@ -7,10 +7,32 @@ import classes.internals.race.RacialRequirement;
 public class Race {
     public static const ALL_RACES:/*Race*/Array = [];
     
-    // Race builder helper functions. Can be used as a substitute for
+    // Race builder helper functions. Can be used as a substitute for type
+	// Ex. faceType( ANY(Face.HUMAN, Face.TROLL), +1)
+	// instead of faceType( Face.HUMAN, +1, Face.TROLL, +1)
+	
     private static function ANY(...options:Array):* {
         return {operator:"any",options:options};
     }
+	private static function NONE(...options:Array):* {
+        return {operator:"none",options:options};
+    }
+	private static function LESS_THAN(value:Number):* {
+        return {operator:"lt",value:value};
+    }
+	private static function GREATER_THAN(value:Number):* {
+        return {operator:"gt",value:value};
+    }
+	private static function AT_MOST(value:Number):* {
+        return {operator:"lte",value:value};
+    }
+	private static function AT_LEAST(value:Number):* {
+        return {operator:"gte",value:value};
+    }
+	private static function NOT(value:Number):* {
+        return {operator:"ne",value:value};
+    }
+	
 	private static const raceClass:Class = Race;
     private static function buildRace(id:int, name:String): RaceBuilder {
         return new RaceBuilder(raceClass, id, name);
@@ -29,57 +51,57 @@ public class Race {
     public static const RACCOON:Race = new Race("Raccoon",11,"raccoonScore", 8);
     public static const DOG:Race = new Race("Dog",12,"dogScore", 4);
 	public static const WOLF: Race =
-								buildRace(13, "wolf")
-										.withBasicScores()
-											.faceType(ANY(Face.WOLF, Face.ANIMAL_TOOTHS), +1)
-											.eyeType(
-													Eyes.FENRIR, +3,
-													Eyes.FERAL, -11
-												)
-											.eyeColor("glacial blue", +2)
-											.earType(Ears.WOLF, +1)
-											.armType(Arms.WOLF, +1)
-											.legType(LowerBody.WOLF, +1)
-											.tailType(Tail.WOLF, +1)
-											.skinCoatType(Skin.FUR, +2)
-											.skinCoatColor("glacial white", +1)
-											.hairColor("glacial white", +1)
-											.wingType(Wings.NONE, +1)
-											.rearType(RearBody.FENRIR_ICE_SPIKES, +6)
-											.perk(PerkLib.FreezingBreath, +3)
-											.ifScoreAtLeast(1)
-												.hasCockOfType(CockTypesEnum.WOLF, +1)
-										.and()
-										.withTier(8, "wolf-boy", "wolf-girl")
-											.tauricName("wolf-taur")
-											.buffs({
-												"str.mult": +0.50,
-												"tou.mult": +0.30,
-												"spe.mult": +0.50,
-												"int.mult": -0.10
-											})
-										.and()
-										.withTier(10, "winter wolf")
-											.tauricName("winter wolf-taur")
-											.requireSkinCoatType(Skin.FUR)
-											.requireSkinCoatColor("glacial white")
-											.buffs({
-												"str.mult": +0.65,
-												"tou.mult": +0.40,
-												"spe.mult": +0.55,
-												"int.mult": -0.10
-											})
-										.and()
-											.withTier(21, "Fenrir")
-											.tauricName("winter wolf-taur")
-											.buffs({
-												"str.mult": +1.45,
-												"tou.mult": +0.70,
-												"spe.mult": +1.00,
-												"int.mult": -0.10
-											})
-										.and()
-										.build();
+			buildRace(13, "wolf")
+					.withBasicScores()
+						.faceType(ANY(Face.WOLF, Face.ANIMAL_TOOTHS), +1)
+						.eyeType(
+								Eyes.FENRIR, +3,
+								Eyes.FERAL, -11
+							)
+						.eyeColor("glacial blue", +2)
+						.earType(Ears.WOLF, +1)
+						.armType(Arms.WOLF, +1)
+						.legType(LowerBody.WOLF, +1)
+						.tailType(Tail.WOLF, +1)
+						.skinCoatType(Skin.FUR, +2)
+						.skinCoatColor("glacial white", +1)
+						.hairColor("glacial white", +1)
+						.wingType(Wings.NONE, +1)
+						.rearType(RearBody.FENRIR_ICE_SPIKES, +6)
+						.perk(PerkLib.FreezingBreath, +3)
+						.ifScoreAtLeast(1)
+							.hasCockOfType(CockTypesEnum.WOLF, +1)
+					.and()
+					.withTier(8, "wolf-boy", "wolf-girl")
+						.tauricName("wolf-taur")
+						.buffs({
+							"str.mult": +0.50,
+							"tou.mult": +0.30,
+							"spe.mult": +0.50,
+							"int.mult": -0.10
+						})
+					.and()
+					.withTier(10, "winter wolf")
+						.tauricName("winter wolf-taur")
+						.requireSkinCoatType(Skin.FUR)
+						.requireSkinCoatColor("glacial white")
+						.buffs({
+							"str.mult": +0.65,
+							"tou.mult": +0.40,
+							"spe.mult": +0.55,
+							"int.mult": -0.10
+						})
+					.and()
+						.withTier(21, "Fenrir")
+						.tauricName("winter wolf-taur")
+						.buffs({
+							"str.mult": +1.45,
+							"tou.mult": +0.70,
+							"spe.mult": +1.00,
+							"int.mult": -0.10
+						})
+					.and()
+					.build();
     public static const WEREWOLF:Race = new Race("Werewolf",14, "werewolfScore", 12);
     public static const FOX:Race = new Race("Fox",15,"foxScore", 7);
     public static const FERRET:Race = new Race("Ferret",16,"ferretScore", 4);
@@ -91,7 +113,59 @@ public class Race {
     public static const COW:Race = new Race("Cow",22,"cowScore", 10);
     public static const SANDTRAP:Race = new Race("SANDTRAP",23,"sandTrapScore", 5);
     public static const BEE:Race = new Race("Bee",24,"beeScore", 17);
-    public static const GOBLIN:Race = new Race("Goblin",25, "goblinScore", 10);
+    public static const GOBLIN: Race =
+			buildRace(25, "goblin")
+					.withBasicScores()
+						.faceType(ANY(Face.HUMAN,Face.ANIMAL_TOOTHS), +1)
+						.earType(
+								Ears.ELFIN, +1,
+								NOT(Ears.ELFIN), -100
+							)
+						.height(LESS_THAN(48), +1)
+						.perk(PerkLib.GoblinoidBlood, +1)
+						.perk(PerkLib.BouncyBody, +1)
+						.perk(MutationsLib.NaturalPunchingBag, +1)
+						.perk(MutationsLib.NaturalPunchingBagPrimitive, +1)
+						.perk(MutationsLib.NaturalPunchingBagEvolved, +1)
+						.skinPlainOnly(+1)
+						.skinBaseColor(NONE("pale yellow", "grayish-blue", "green", "dark green", "emerald"), -100)
+						.allPerks([MutationsLib.NaturalPunchingBag, PerkLib.ChimericalBodySemiImprovedStage], +1)
+						.allPerks([MutationsLib.NaturalPunchingBagPrimitive, PerkLib.ChimericalBodySemiSuperiorStage], +1)
+						.allPerks([MutationsLib.NaturalPunchingBagEvolved, PerkLib.ChimericalBodySemiEpicStage], +1)
+						.hasVagina(+1)
+						.customScoreRequirement(
+								"",
+								"goblin bloodline",
+								function(body:BodyData):Boolean {
+									return body.player.hasPerk(PerkLib.GoblinsDescendant) || body.player.hasPerk(PerkLib.BloodlineGoblin)
+								},
+								function(body:BodyData):int {
+									return body.player.increaseFromBloodlinePerks();
+								}
+						)
+					.and()
+					.withConditionedScores(
+							function(body:BodyData):Boolean {
+								return body.player.hasPlainSkinOnly();
+							},
+							"plain skin; "
+					)
+						.skinBaseColor(ANY("pale yellow", "grayish-blue", "green", "dark green", "emerald"), +1)
+						.eyeTypeOfColor(Eyes.HUMAN, ANY("red", "yellow", "purple"), +1)
+						.hairColor(ANY("red", "purple", "green", "blue", "pink", "orange"), +1)
+						.armType(Arms.HUMAN, +1)
+						.legType(LowerBody.HUMAN, +1)
+						.noAntennae(+1)
+					.and()
+					.withTier(10, "goblin")
+						.buffs({
+							"str.mult": -0.50,
+							"spe.mult": +0.75,
+							"int.mult": +1.00,
+							"lib.mult": +0.25
+						})
+					.and()
+					.build();
     public static const DEMON:Race = new Race("Demon",26,"demonScore", 11);
     public static const DEVIL:Race = new Race("Devil",27,"devilkinScore", 11);
     public static const SHARK:Race = new Race("Shark",28, "sharkScore", 10);
@@ -168,8 +242,15 @@ public class Race {
     public static const ANGEL:Race = new Race("Angel",99, "angelScore", 11);
     public static const APOPHIS:Race = new Race("Apophis",100, "apophisScore", 23);
     public static const CYCLOP:Race = new Race("Cyclop",101, "cyclopScore", 12);
-    public static const ALICORN:Race = new Race("Alicorn",103, "alicornScore", 8);
+    public static const ALICORN:Race = new Race("Alicorn",102, "alicornScore", 8);
 
+	public static const AllRacesByName:/*Race*/Array =
+								ALL_RACES.slice()
+										.filter(function(e:Race,...rest:Array):Boolean {
+											return !!e
+										})
+										.sortOn("name");
+	
     public var name:String;
     public var id:int;
     private var playerFunctionName:String;
@@ -242,6 +323,11 @@ public class Race {
 			if (i.check(body, score)) tier = i;
 		}
 		return tier;
+	}
+	public function getTierNumber(body:BodyData, score:int=-1):int {
+		var tier:RaceTier = getTier(body,score);
+		if (!tier) return 0;
+		return tier.tierNumber;
 	}
 	
 	public function nameFor(body:BodyData, score:int=-1):String {

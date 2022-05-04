@@ -804,12 +804,12 @@ public class DebugMenu extends BaseContent
 				for each (var rr:RacialRequirement in race.requirements) {
 					outputText("\t");
 					if (rr.check(body, score)) {
-						score += rr.score;
+						score += rr.score(body);
 						outputText("[font-green]")
 					} else {
 						outputText("[font-default]")
 					}
-					outputText(rr.describe(true)+"[/font]\n")
+					outputText(rr.describe(body, true)+"[/font]\n")
 				}
 				if (race.tiers.length>0) {
 					outputText("\t<b>Tiers:</b>")

@@ -8,11 +8,6 @@ public class RaceUtils {
 	function RaceUtils() {
 	}
 	
-	
-	/*****************************************************
-	 * Functions creating functions for `ConditionedRaceScoreBuilder`s
-	 *****************************************************/
-	
 	/*****************************************************
 	 * Functions creating functions for `RacialRequirement`s
 	 *****************************************************/
@@ -57,12 +52,31 @@ public class RaceUtils {
 		var name:String;
 		
 		if (typeof op === "object" && op && "operator" in op) {
-			switch (op["operator"]) {
+			var operator:* = op["operator"];
+			switch (operator) {
 				case "any":
+				case "none":
+					var none:Boolean = operator == "none";
 					var anyOptions:Array = op["options"] as Array;
 					if (!anyOptions) throw new Error(errorContext+"Invalid operator");
-					operatorFn = operatorAnyFn(anyOptions);
-					name = Utils.mergeSentences(anyOptions.map(Utils.varargify(nameProvider))," or ");
+					operatorFn = none ? operatorNoneFn(anyOptions) : operatorAnyFn(anyOptions);
+					name = (none?"not ":"") + Utils.mergeSentences(anyOptions.map(Utils.varargify(nameProvider))," or ");
+					break;
+				case "lt":
+				case "lte":
+				case "gt":
+				case "gte":
+				case "ne":
+					var compValue:Number = op["value"] as Number;
+					if (!isFinite(compValue)) throw new Error(errorContext+"Invalid operator");
+					operatorFn = operatorCompareFn(operator, compValue);
+					name = {
+						"lt": "less than ",
+						"lte": "at most ",
+						"gt": "greater than ",
+						"gte": "at least ",
+						"ne": "not "
+					}[operator] + nameProvider(compValue);
 					break;
 				default:
 					throw new Error(errorContext+"Unknown operator");
@@ -80,10 +94,10 @@ public class RaceUtils {
 	/**
 	 * @param argumentFn `(body) => input`
 	 * @param operatorFn `(input) => boolean`
-	 * @return `(body, score) => operatorFn(argumentFn(body))`
+	 * @return `(body) => operatorFn(argumentFn(body))`
 	 */
 	public static function composeOpArg(argumentFn:Function, operatorFn:Function):Function {
-		return function (body:BodyData, score:int):Boolean {
+		return function (body:BodyData):Boolean {
 			return operatorFn(argumentFn(body));
 		}
 	}
@@ -97,6 +111,14 @@ public class RaceUtils {
 		}
 	}
 	/**
+	 * @return `(input) => options.indexOf(input) < 0`
+	 */
+	public static function operatorNoneFn(options:Array):Function {
+		return function(input:*):Boolean {
+			return options.indexOf(input) < 0;
+		}
+	}
+	/**
 	 * @return `(input) => input == value
 	 */
 	public static function operatorEqFn(value:*):Function {
@@ -104,9 +126,41 @@ public class RaceUtils {
 			return input == value;
 		}
 	}
+	/**
+	 * @return `(input) => input < / <= / > / >= / == / != value
+	 */
+	public static function operatorCompareFn(operator:String, value:*):Function {
+		switch (operator) {
+			case "lt":
+				return function (input:*):Boolean {
+					return input < value;
+				}
+			case "lte":
+				return function (input:*):Boolean {
+					return input <= value;
+				}
+			case "gt":
+				return function (input:*):Boolean {
+					return input > value;
+				}
+			case "gte":
+				return function (input:*):Boolean {
+					return input >= value;
+				}
+			case "ne":
+				return function (input:*):Boolean {
+					return input != value;
+				}
+			case "eq":
+				return function (input:*):Boolean {
+					return input == value;
+				}
+		}
+		throw new Error("Invalid operator "+operator);
+	}
 	
 	/**
-	 * @return `(body, score) => body.data[slot]`
+	 * @return `(body) => body.data[slot]`
 	 */
 	public static function argumentSlotFn(slot:int):Function {
 		return function(body:BodyData):* {
@@ -115,21 +169,47 @@ public class RaceUtils {
 	}
 	
 	/**
-	 * @return `(body, score) => body.player.hasPerk(ptype)`
+	 * @return `(body) => body.player.hasPerk(ptype)`
 	 */
 	public static function hasPerkFn(ptype:PerkType):Function {
-		return function (body:BodyData, score:int):Boolean {
+		return function (body:BodyData):Boolean {
 			return body.player.hasPerk(ptype);
 		}
 	}
 	/**
-	 * @return `(body, score) => body.player.cockType(ctype) > 0`
+	 * @return `(body) => body.player.hasPerk(ptype)`
+	 */
+	public static function hasAllPerksFn(ptypes:/*PerkType*/Array):Function {
+		return function (body:BodyData):Boolean {
+			for each(var i:PerkType in ptypes) {
+				if (!body.player.hasPerk(i)) return false;
+			}
+			return true;
+		}
+	}
+	/**
+	 * @return `(body) => body.player.cockType(ctype) > 0`
 	 */
 	public static function hasCockOfTypeFn(ctype:CockTypesEnum):Function {
-		return function (body:BodyData, score:int):Boolean {
+		return function (body:BodyData):Boolean {
 			return body.player.countCocksWithType(ctype) > 0;
 		}
 	}
+	/**
+	 * @return `(body) => body.player.hasVagina() == test`
+	 */
+	public static function hasVaginaFn(test:Boolean):Function {
+		if (test) {
+			return function (body:BodyData):Boolean {
+				return body.player.hasVagina();
+			}
+		} else {
+			return function (body:BodyData):Boolean {
+				return !body.player.hasVagina();
+			}
+		}
+	}
+	
 	
 	
 }

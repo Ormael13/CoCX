@@ -3,12 +3,14 @@ public class ConditionedRaceScoreBuilder extends RaceScoreBuilder{
 	private var condition:Function;
 	private var conditionName:String;
 	public function ConditionedRaceScoreBuilder(
+			raceBuilder:RaceBuilder,
 			prev:RaceScoreBuilder,
 			condition:Function,
-			conditionName:String
+			conditionName:String,
+			minScore:int
 	) {
-		super(prev.raceBuilder, prev, prev.minScore);
-		this.next = prev;
+		super(raceBuilder, prev, minScore);
+		this.next = prev||this;
 		this.condition = condition;
 		this.conditionName = conditionName;
 	}

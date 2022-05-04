@@ -1,5 +1,6 @@
 package classes.internals.race {
 import classes.Race;
+import classes.RaceTier;
 import classes.internals.Utils;
 
 public class RaceBuilder {
@@ -22,10 +23,27 @@ public class RaceBuilder {
 	public function withBasicScores():RaceScoreBuilder {
 		return new RaceScoreBuilder(this);
 	}
+	/**
+	 * @param conditionFn `(body:BodyData) => boolean`
+	 * @return
+	 */
+	public function withConditionedScores(
+			conditionFn:Function,
+			conditionName:String,
+			minScore:int=0
+	):RaceScoreBuilder {
+		return new ConditionedRaceScoreBuilder(this, null, conditionFn, conditionName, minScore);
+	}
 	
 	public function withTier(minScore:int, name:String, femaleName:String=""):RaceTierBuilder {
 		if (!femaleName) femaleName = name;
-		var builder:RaceTierBuilder = new RaceTierBuilder(this, minScore, name, femaleName);
+		var builder:RaceTierBuilder = new RaceTierBuilder(
+				this,
+				this.tiers.length+1,
+				minScore,
+				name,
+				femaleName
+		);
 		return builder
 	}
 	
