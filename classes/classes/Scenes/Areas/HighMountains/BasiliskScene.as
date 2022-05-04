@@ -235,7 +235,7 @@ public class BasiliskScene extends BaseContent
 			player.sexReward("Default","Default",true,false);
 			dynStats("sen", 1);
 
-			if (sceneHunter.other) {
+			if (sceneHunter.selectLoss) {
 				outputText("<i>Or maybe you hope for the exact opposite? Perhaps, you're not even trying to move on purpose, waiting for someone to find and fuck you like a proper slut? Who would it be?</i>");
 				menu();
 				addButton(0, "Nobody", basiliskAdvantageNobody);
