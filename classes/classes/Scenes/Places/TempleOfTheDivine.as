@@ -78,7 +78,7 @@ import classes.Scenes.Places.TempleOfTheDivine.*;
 				addButton(0, "Pray", PlayerPrayAtTemple).hint("Offer your prayer to one of the temple altars.");
 				addButton(1, "Repair", TempleAltairsRebuildMenu).hint("Restore the temple.");
 			}
-			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1) {
+			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1 && flags[kFLAGS.FACTORY_SHUTDOWN] == 1) { //req. PURE Marae
 				if (havingOrUsingBSwordOrExcalibur()) addButton(2, "Put Sword", puttingBSwordOrExcaliburOnAltair);
 				if (player.statusEffectv2(StatusEffects.TempleOfTheDivineTracker) == 2 || player.statusEffectv2(StatusEffects.TempleOfTheDivineTracker) == 3) addButton(2, "Take Sword", takingExcaliburFromAltair);
 				if (player.hasItem(consumables.P_PEARL, 1)) addButton(3, "Pearl", puttingPurePearlOnAltair);
@@ -97,7 +97,7 @@ import classes.Scenes.Places.TempleOfTheDivine.*;
 			if (anyOfAltairsRepaired()) {
 				outputText("Would you like to pray, and if yes, to whom?");
 				menu();
-				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1 && !player.hasStatusEffect(StatusEffects.BlessingOfDivineMarae))
+				if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1 && flags[kFLAGS.FACTORY_SHUTDOWN] == 1 && !player.hasStatusEffect(StatusEffects.BlessingOfDivineMarae)) //req. PURE Marae
 					addButtonIfTrue(0, "Marae", PlayerPrayAtTempleMaraeAltair,
 						"Marae can't help you anymore in her current condition...",
 						flags[kFLAGS.FACTORY_SHUTDOWN] == 1, "Pray to Marae for empowered white magic.");
@@ -297,8 +297,7 @@ import classes.Scenes.Places.TempleOfTheDivine.*;
 		public function rebuildGodsAltairs():void {
 			menu();
 			addRebuildButton(0, "Marae", rebuildMaraeAltair,
-				flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] < 1, flags[kFLAGS.FACTORY_SHUTDOWN] > 0,
-				"Marae is corrupted. You need to <i>at least try to</i> clean her from the corruption... if it's still possible.");
+				flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] < 1, true, "");
 			addRebuildButton(1, "Taoth", rebuildTaothAltair,
 				flags[kFLAGS.TEMPLE_OF_THE_DIVINE_TAOTH] < 1, flags[kFLAGS.URTA_QUEST_STATUS] == 1,
 				"Urta might find out something about this one in the future. But you'll need to treat her VERY well and <b>often</b> for that...");
@@ -313,7 +312,8 @@ import classes.Scenes.Places.TempleOfTheDivine.*;
 
 		public function rebuildMaraeAltair():void {
 			clearOutput();
-			outputText("You work for 8 hours, sculpting stone and repairing the altar of Marae. By the time you're done you can feel divine power amass around it anew.");
+			outputText("You work for 8 hours, sculpting stone and repairing the altar of Marae.");
+            if (flags[kFLAGS.FACTORY_SHUTDOWN] == 1) outputText(" By the time you're done you can feel divine power amass around it anew.");
 			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 50;
 			flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] = 1;
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] < 3) flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS]++;
@@ -346,8 +346,10 @@ import classes.Scenes.Places.TempleOfTheDivine.*;
 
 		public function rebuildStatueOfMarae():void {
 			clearOutput();
-			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] < 4) outputText("You work for the entire day sculpting stone and repairing the statue of Marae. It looks slightly better, but it is far from finished.");
-			else outputText("You work for the entire day sculpting stone and repairing the statue of Marae. By the time you're done you can feel divine power radiate from it empowering the entire temple.");
+                outputText("You work for the entire day sculpting stone and repairing the statue of Marae. ");
+			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS] < 4) outputText("It looks slightly better, but it is far from finished.");
+			else if (flags[kFLAGS.FACTORY_SHUTDOWN] == 1) outputText("By the time you're done you can feel divine power radiating from it.");
+            else outputText("Even though the altar is dysfunctional, the repaired statue looks like a nice addition to the temple.");
 			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] -= 150;
 			flags[kFLAGS.TEMPLE_OF_THE_DIVINE_PROGRESS]++;
 			doNext(camp.returnToCampUseEightHours);
@@ -379,8 +381,15 @@ import classes.Scenes.Places.TempleOfTheDivine.*;
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_MARAE] == 1) {
 				if (flags[kFLAGS.FACTORY_SHUTDOWN] == 1)
 					outputText("shines, illuminated by a ray of light as if beckoning the faithful. A single white flower trails its way up one side, assuring her divine presence is there.");
-				else
-					outputText("glows dimly, sometimes gleaming with purplish colors. It definitely doesn't fit for any kind of prayer - the best blessing you can get from it is tentacle slap across your face. But it's still an altar, so you can use it for different kinds of ceremonies.");
+                else if (flags[kFLAGS.CORRUPTED_MARAE_KILLED])
+                    outputText("is dark and colorless. Its surface is covered in myriads of small cracks, and even Sapphire looks slightly worried about its state. Good thing she doesn't know what happened to Marae...");
+				else if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2)
+					outputText("glows dimly, sometimes gleaming with purplish color. It definitely doesn't fit for any kind of prayer - the best blessing you can get from Marae right now is a tentacle slap across your face. But it's still an altar, so you can use it for different kinds of ceremonies.");
+                else {
+                    outputText("is restored, but doesn't seem to function. ");
+                    if (flags[kFLAGS.MET_MARAE]) outputText("You're not sure if Marae knows about the restored altar at all - she spends whatever power she has left to protect herself from lake's corruption.");
+                    else outputText("Maybe something is still broken.");
+                }
 			}
 			outputText("\n\nTo the left of Marae's Altar, the Altar of Taoth");
 			if (flags[kFLAGS.TEMPLE_OF_THE_DIVINE_TAOTH] < 1) outputText(" lies shattered into pieces. The trickster god cannot even be visualised from the rubble that once made up his effigy.");
