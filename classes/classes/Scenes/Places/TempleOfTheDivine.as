@@ -29,15 +29,15 @@ import classes.Scenes.Places.TempleOfTheDivine.*;
 			flags[kFLAGS.SAPPHIRE_TALKS] = 0;
 			spriteSelect(SpriteDb.s_sapphire);
 			clearOutput();
-			outputText("As you wander the mountains, you eventually climb to the very top, something you never expected to do. Weirdly enough, sitting on a nearby peak is what appears to be a massive temple. You approach the intimidating doors of the building and open them wide. Instantly you’re taken aback by the sight in front of you. ");
-			outputText("There are ancient bloodstains marking the stone floor and stained-glass windows depicting various deities adorning each wall. At the end of the building that obviously once was a holy site, sits one depicting Marae. Under each window is a somewhat damaged altar, the light outside shining faintly upon it.");
+			outputText("As you wander the mountains, you find a path leading straight up the mountain. You've never seen this path before, but it's well-built, if old. You decide to take the path up, and to your surprise, the path leads all the way up the mountain! You make it to the peak, and what you see shocks you. While the structure is old, it's massive, clearly the work of many skilled workers. On the mountain's peak is what appears to be a massive temple. You approach the intimidating doors of the building and open them wide. Instantly you’re taken aback by the sight in front of you. ");
+			outputText("There are ancient bloodstains marking the stone floor, and splatters of gore covering the stained-glass windows adorning each wall. The glass appears to be depicting various deities. At the end of the building that obviously once was a holy site, sits one depicting Marae. Under each window is a somewhat damaged altar, the light outside shining faintly upon it.");
 			outputText("\n\nAs you walk towards Marae’s Altar, a threatening voice echoes through the temple. \"<i>No one will defile this sacred place! I will slay you before you can cause any further damage!</i>\"");
 			outputText("\n\nYou realize that you were never alone in the room as a large and heavy object hits you from behind, sending you sprawling to the ground. As you try to stand up, something grabs you by the leg, lifting you upside down in the air with apparent ease. While uncomfortable, and most definitely a shock, this gives you enough time to take a good look at what, or more specifically who, grabbed you. ");
 			outputText("It seems to be a 7-foot tall, stone-skinned gargoyle. She carries a huge halberd and appears to be about to impale you on it. Although you wriggle, you find no weakness in her grip, you can’t escape from this one. Knowing your death is near, you utter a swift ");
 			if (player.cor > 66) outputText("and desperate ");
 			outputText("prayer to whichever gods may be listening. This has a surprising effect on the gargoyle, stilling her almost instantly.");
 			outputText("\n\n\"<i>Demons... do not pray, you clearly still have a soul. Perhaps I misjudged you.</i>\"");
-			outputText("\n\nWith little ceremony, she roughly sets you back on the ground, caring little for your well-being, merely in order to thoroughly examine you. You tell her that you ");
+			outputText("\n\nWith little ceremony, she roughly sets you back on the ground, caring little for your well-being. She thoroughly examines you, her gaze flinty and suspicious. You tell her that you ");
 			if (SceneLib.dungeons.checkFactoryClear()) {
 				if (player.humanScore() < 14) outputText("were");
 				else outputText("are");
@@ -119,11 +119,11 @@ import classes.Scenes.Places.TempleOfTheDivine.*;
 				if (anyOfAltairsRepaired() && player.gems >= 5000) addButton(13, "Remove Curses", PlayerRemoveCurses).hint("Make a donation to a divinity in order to be freed of all curses or hexes.");
 				else if (!anyOfAltairsRepaired()) addButtonDisabled(13, "Remove Curses", "Without a functionning altar you cannot call upon divine power for deliverence.")
 				else if (!player.statStore.hasBuff("Weakened") && !player.statStore.hasBuff("Drained") && !player.statStore.hasBuff("Damaged")) addButtonDisabled(13, "Remove Curses", "You are not currently under the affliction of a curse or hex.")
-				else if (player.gems < 5000) addButtonDisabled(13, "Remove Curses", "You need at least 5000 gem in order to request deliverance from your maledictions and other status ailments.")
+				else if (player.gems < 5000) addButtonDisabled(13, "Remove Curses", "You need at least 5000 gems in order to request deliverance from your maledictions and other status ailments.")
 				addButton(14, "Back", templeMainMenu);
 			}
 			else {
-				outputText("You attempt a prayer to a god of Mareth. Sadly, if this place ever housed the god’s divine power, its ruined state no longer can contain it. It seems you will get no benefit from praying here until you repair the altars, with the god simply unable to contact you while the building is in this sinful state.\n\n");
+				outputText("You attempt a prayer to a god of Mareth. Sadly, if this place ever housed the god’s divine power, its ruined state no longer contains it. It seems you will get no benefit from praying here until you repair the altars, with the god simply unable to contact you while the building is in this sinful state.\n\n");
 				doNext(camp.returnToCampUseOneHour);
 			}
 		}
@@ -304,10 +304,10 @@ import classes.Scenes.Places.TempleOfTheDivine.*;
 				"Urta might find out something about this one in the future. But you'll need to treat her VERY well and <b>often</b> for that...");
 			addRebuildButton(2, "Fenrir", rebuildFenrirAltair,
 				flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FENRIR] < 1, player.hasKeyItem("Gleipnir Collar") >= 0,
-				"There's a certain ice wolfie in a cold region. But don't think it's <b>easy</b> to earn his blessing.");
+				"There's a certain ice wolfie in a cold region. But don't think it'll be <b>easy</b> to earn his blessing.");
 			addRebuildButton(3, "Fera", rebuildFeraAltair,
 				flags[kFLAGS.TEMPLE_OF_THE_DIVINE_FERA] < 1, flags[kFLAGS.PUMPKIN_FUCK_YEAR_DONE] != 0 && player.cor >= 80 - player.corruptionTolerance,
-				"You need to fuck a pumpkin during the Halloween... no, really. Fuck a pumpkin. And you are required to be highly corrupted too.");
+				"You need to fuck a pumpkin during Halloween... no, really. Fuck a pumpkin. And you are required to be highly corrupted too.");
 			addButton(14, "Back", TempleAltairsRebuildMenu);
 		}
 
@@ -416,7 +416,7 @@ import classes.Scenes.Places.TempleOfTheDivine.*;
 		public function puttingBSwordOrExcaliburOnAltair():void {
 			clearOutput();
 			if (player.weapon == weapons.B_SWORD || player.hasItem(weapons.B_SWORD, 1)) {
-				outputText("You feel a weird resonance engulf you, as the power of the Altar of Marae echos with an item on your person.\n\n");
+				outputText("You feel a weird resonance engulf you, as the power of the Altar of Marae echos with an item on you.\n\n");
 				outputText("Pulling out the Beautiful Sword, you notice the weapon is now shining with a dim white light. Curious, you place the weapon on the altar, and watch as the sword surges with power, the light seeming to be absorbed into the blade. The altar feels way more potent with the sword resting upon it. However, it occurs to you, such a weapon likely is a powerful artifact, and that as such, it could be useful in your battles against the demons.");
 				if (player.weapon == weapons.B_SWORD) player.setWeapon(WeaponLib.FISTS);
 				else player.destroyItems(weapons.B_SWORD, 1);
@@ -434,7 +434,7 @@ import classes.Scenes.Places.TempleOfTheDivine.*;
 
 		public function takingExcaliburFromAltair():void {
 			clearOutput();
-			outputText("You feel the power of the altar diminishing, however the weapon is stronger than ever and likely ready for its primary use, demon slaying.\n\n");
+			outputText("You feel the power of the altar diminishing, however the weapon is stronger than ever. This sword is a demon slaying relic, and you swing it experimentally.\n\n");
 			if (player.statusEffectv2(StatusEffects.TempleOfTheDivineTracker) == 3) player.addStatusValue(StatusEffects.TempleOfTheDivineTracker, 2, -2);
 			else player.addStatusValue(StatusEffects.TempleOfTheDivineTracker, 2, -1);
 			inventory.takeItem(weapons.EXCALIB, templeMainMenu);
@@ -454,7 +454,7 @@ import classes.Scenes.Places.TempleOfTheDivine.*;
 		}
 
 		public function puttingPurePearlOnAltairYes():void {
-			outputText("\n\nAs you place the pearl on the altar, you feel the holy power radiating from the temple increase a step further. The place practically radiates purity now. A horde of imps, attracted by the aura emanating from the temple, attempts to enter the building with the intention to put out the offending light. You prepare yourself for a fight, but end up watching in stunned silence as the corrupt beings catch fire and are reduced to ashes as soon as they fly inside the temple’s boundaries. It would seem the temple divine protections have increased.");
+			outputText("\n\nAs you place the pearl on the altar, you feel the holy power radiating from the temple increase a step further. The place practically radiates purity now. A horde of imps, attracted by the aura emanating from the temple, attempts to enter the building with the intention to put out the offending light. You prepare yourself for a fight, but end up watching in stunned silence as the corrupt beings catch fire and are reduced to ashes as soon as they fly inside the temple’s boundaries. It would seem the temple's divine protections have increased.");
 			player.destroyItems(consumables.P_PEARL, 1);
 			if (player.hasStatusEffect(StatusEffects.TempleOfTheDivineTracker)) player.addStatusValue(StatusEffects.TempleOfTheDivineTracker, 3, 2);
 			else player.createStatusEffect(StatusEffects.TempleOfTheDivineTracker, 0, 0, 2, 0);
@@ -485,9 +485,9 @@ import classes.Scenes.Places.TempleOfTheDivine.*;
 				addButton(4, "Back", templeMainMenu);
 			}
 			if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] == 1) {
-				outputText("As you wander down into the basement of the temple, you find what looks like an old abandoned Atelier. Down there is a plinth, surrounded by various depictions of what looks like gargoyles. One could follow their examples and create a gargoyle of their own.\n\n");
+				outputText("As you wander down into the basement of the temple, you find what looks like an old abandoned Altar. Down there is a plinth, surrounded by various depictions of what looks like gargoyles. One could follow their examples and create a gargoyle of their own.\n\n");
 				flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE]++;
-				outputText("There is a plinth, surrounded by what looks to be depictions of various gargoyles, of all materials and forms. You're pretty sure that using these as a refernce, you could craft a gargoyle statue of your own, albeit of raw stone.");
+				outputText("There is a plinth, surrounded by what looks to be depictions of various gargoyles, of all materials and forms. You're pretty sure that using these as a reference, you could craft a gargoyle statue of your own, made from raw stone.");
 				menu();
 				addButton(0, "Begin", playerBuilder.chooseToWorkOnStoneStatue);
 				addButton(4, "Back", templeMainMenu);
