@@ -71,7 +71,7 @@ package classes.Scenes.NPCs
 			if (player.gems >= 25) {
 				player.gems -= 25;
 				outputText("You take the [armor] and hand it to Konstantin. He starts working on it, idly whistling while you patiently sit on the nearby ");
-				if (flags[kFLAGS.KONSTANTIN_FOLLOWER] == 2) outputText("tree stump");
+				if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2) outputText("tree stump");
 				else outputText("couch");
 				outputText(".\n\nApplying the best of his smithing skills to the [armor], he starts tossing away the parts of it that are too damaged due to the blows that it has received or too weakened for the continued use, replacing them with brand new pieces of the same material. He also strengthens the inner structure of each piece and fixes them so they don’t leave a bit of your body unprotected.\n\n");
 				outputText("Once he’s finished, your [armor] looks clean, beautiful and as good as if it was brand new.");
@@ -84,7 +84,7 @@ package classes.Scenes.NPCs
 				}
 				else {
 					outputText(" Thanking him for services, you take the armor, thank the bear-morph");
-					if (flags[kFLAGS.KONSTANTIN_FOLLOWER] == 2) outputText(", and return to your daily tasks");
+					if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2) outputText(", and return to your daily tasks");
 					outputText(".\n\n");
 				}
 			}
@@ -96,7 +96,7 @@ package classes.Scenes.NPCs
 			if (player.gems >= 25) {
 				player.gems -= 25;
 				outputText("Handing the [weapon] to the bear smith, you hop on ");
-				if (flags[kFLAGS.KONSTANTIN_FOLLOWER] == 2) outputText("one of his couches");
+				if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2) outputText("one of his couches");
 				else outputText("the tree stump");
 				outputText(" while he gets to work. Konstantin goes to his anvil, where he examines your weapon and figures how he is going to work with it.\n\n");
 				outputText("Later, you start hearing the sound of metal on metal caused by the bear’s tool, accompanied by a song that he’s humming to pass the time. Once he’s done with the anvil, he turns to sharpening and polishing your [weapon].\n\n");
@@ -110,7 +110,7 @@ package classes.Scenes.NPCs
 				}
 				else {
 					outputText(" After giving thanks to the friendly ursine, you return to your ");
-					if (flags[kFLAGS.KONSTANTIN_FOLLOWER] == 2) {
+					if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2) {
 						if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 10 || flags[kFLAGS.CAMP_BUILT_CABIN] >= 1) outputText("cabin");
 						else outputText("bedroll");
 					}
@@ -125,11 +125,11 @@ package classes.Scenes.NPCs
 			clearOutput();
 			outputText("Not having needed anything from his services at the moment, you thank the bear for his offer.\n\n");
 			outputText("\"<i>Okay, " + player.mf("man","girl") + ". ");
-			if (flags[kFLAGS.KONSTANTIN_FOLLOWER] == 2) outputText("Stop by again soon if you happen to need help with your stuff");
+			if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2) outputText("Stop by again soon if you happen to need help with your stuff");
 			else outputText("Was a pleasure to meet you, still, stop by again soon if you happen to need a good smith");
 			outputText(".</i>\"\n\n");
 			outputText("Assuring him that you’ll do so, you bid him farewell and proceed to return to your ");
-			if (flags[kFLAGS.KONSTANTIN_FOLLOWER] == 2) {
+			if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 2) {
 				if (flags[kFLAGS.CAMP_CABIN_PROGRESS] >= 10 || flags[kFLAGS.CAMP_BUILT_CABIN] >= 1) outputText("cabin");
 				else outputText("bedroll");
 			}
