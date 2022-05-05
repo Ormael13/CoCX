@@ -2763,7 +2763,7 @@ public class Combat extends BaseContent {
             (monster as HarpyMob).harpyHordeGangBangStruggle();
             skipMonsterAction = true;
         } else if (player.hasStatusEffect(StatusEffects.GooArmorBind)) {
-            (monster as GooArmor).struggleAtGooBind();
+            (monster as Valeria).struggleAtGooBind();
             if (player.statusEffectv1(StatusEffects.GooArmorBind) >= 5) {
                 if (monster.hasStatusEffect(StatusEffects.Spar)) SceneLib.valeria.pcWinsValeriaSparDefeat();
                 else SceneLib.dungeons.heltower.gooArmorBeatsUpPC();
