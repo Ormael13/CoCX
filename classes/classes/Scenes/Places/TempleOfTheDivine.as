@@ -485,8 +485,8 @@ import classes.Scenes.Places.TempleOfTheDivine.*;
 		public function templeBasement():void {
 			clearOutput();
 			if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] == 2) {
-				outputText("You wander back into the Temple basement atelier.");
-
+				outputText("You wander back into the Temple basement atelier.\n\n");
+				outputText("There is a plinth, surrounded by what looks to be depictions of various gargoyles, of all materials and forms. You're pretty sure that using these as a refernce, you could craft a gargoyle statue of your own, albeit of raw stone.");
 				menu();
 				addButton(0, "Statue", playerBuilder.currentStateOfStatue).hint("Check on the statue.");
 				addButton(1, "Strange Book", playerBuilder.strangeBookOfGolems).hint("Examine the strange book.");
@@ -496,7 +496,6 @@ import classes.Scenes.Places.TempleOfTheDivine.*;
 			if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] == 1) {
 				outputText("As you wander down into the basement of the temple, you find what looks like an old abandoned Atelier. Down there is a plinth, surrounded by various depictions of what looks like gargoyles. One could follow their examples and create a gargoyle of their own.\n\n");
 				flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE]++;
-				outputText("There is a plinth, surrounded by what looks to be depictions of various gargoyles, of all materials and forms. You're pretty sure that using these as a refernce, you could craft a gargoyle statue of your own, albeit of raw stone.");
 				menu();
 				addButton(0, "Begin", playerBuilder.chooseToWorkOnStoneStatue);
 				addButton(4, "Back", templeMainMenu);
