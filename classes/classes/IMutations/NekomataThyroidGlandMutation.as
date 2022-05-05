@@ -7,12 +7,12 @@ package classes.IMutations
     import classes.PerkClass;
     import classes.PerkType;
 
-    public class MutationTemplate extends PerkType
+    public class NekomataThyroidGlandMutation extends PerkType
     {
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
             var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.MutationsTemplateIM)
+            var pTier:int = player.perkv1(IMutationsLib.NekomataThyroidGlandIM)
             if (pTier >= 1){
                 descS += "";
             }
@@ -29,7 +29,7 @@ package classes.IMutations
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
-            switch (player.perkv1(IMutationsLib.MutationsTemplateIM)){
+            switch (player.perkv1(IMutationsLib.NekomataThyroidGlandIM)){
                 case 2:
                     sufval = "(Primitive)";
                     break;
@@ -39,20 +39,20 @@ package classes.IMutations
                 default:
                     sufval = "";
             }
-            return "PerkName Here" + sufval;
+            return "Nekomata Thyroid Gland" + sufval;
         }
 
         //Mutation Requirements
         public static function pReqs(pTier:int = 0):void{
             try{
                 //This helps keep the requirements output clean.
-                IMutationsLib.MutationsTemplateIM.requirements = [];
+                IMutationsLib.NekomataThyroidGlandIM.requirements = [];
                 if (pTier == 0){
-                    IMutationsLib.MutationsTemplateIM.requireHeartMutationSlot();
+                    IMutationsLib.NekomataThyroidGlandIM.requireHeartMutationSlot();
                 }
                 else{
                     var pLvl:int = pTier * 30;
-                    IMutationsLib.MutationsTemplateIM.requireLevel(pLvl);
+                    IMutationsLib.NekomataThyroidGlandIM.requireLevel(pLvl);
                 }
             }catch(e:Error){
                 trace(e.getStackTrace());
@@ -71,8 +71,8 @@ package classes.IMutations
             return pBuffs;
         }
 
-        public function MutationTemplate() {
-            super("PerkName Here IM", "PerkName Here", ".");
+        public function NekomataThyroidGlandMutation() {
+            super("Nekomata Thyroid Gland IM", "Nekomata Thyroid Gland", ".");
         }
 
         override public function keepOnAscension(respec:Boolean = false):Boolean {
