@@ -4696,7 +4696,7 @@ public function rebirthFromBadEnd():void {
 		//------------
 		//Misc check!
 		if (ceraphIsFollower()) pop--; //Ceraph doesn't stay in your camp.
-		if (player.armorName == "goo armor") pop++; //Include Valeria if you're wearing her.
+		if (player.armor == armors.GOOARMR) pop++; //Include Valeria if you're wearing her.
 		if (flags[kFLAGS.CLARA_IMPRISONED] > 0) pop++;
 		//------------
 		//Children check!

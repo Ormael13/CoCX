@@ -40,10 +40,7 @@ public class GooGirlScene extends AbstractLakeContent
 			clearOutput();
 			spriteSelect(SpriteDb.s_googirlsprite);
 			GooLocation = "lake";
-			outputText("As you walk around the "+GooLocation+", you notice a pale red light pulsing in the ");
-			if (!flags[kFLAGS.FACTORY_SHUTDOWN] == 2) outputText("sapphire ");
-			else outputText("murky ");
-			outputText("waters. You pause, trying to figure out what the shape might be. Just under the surface of the water, there appears to be a fist-sized heart shedding a crimson glow. Leaning closer, you gaze down into your reflection only to find your face rising up with pursed lips, trying to kiss you! You jerk backwards, and the pseudo-head quivers, resolving its face into a gooey-looking girl, her ");
+			outputText("As you walk around the "+GooLocation+", you notice a pale red light pulsing in the " + (flags[kFLAGS.FACTORY_SHUTDOWN] == 1 ? "sapphire" : "murky") + " waters. You pause, trying to figure out what the shape might be. Just under the surface of the water, there appears to be a fist-sized heart shedding a crimson glow. Leaning closer, you gaze down into your reflection only to find your face rising up with pursed lips, trying to kiss you! You jerk backwards, and the pseudo-head quivers, resolving its face into a gooey-looking girl, her ");
 			outputText(gooColor() + " slime body sculpting itself into a humanoid shape. The girl curiously tilts her head to one side, as if trying to figure out why you're backing away, before she happily surges forward!");
 			if (flags[kFLAGS.CODEX_ENTRY_GOOGIRLS] <= 0) {
 				flags[kFLAGS.CODEX_ENTRY_GOOGIRLS] = 1;
@@ -363,7 +360,7 @@ public class GooGirlScene extends AbstractLakeContent
 				addButtonIfTrue(5, "Lay Eggs", layBeeEggsInGoo,  "Req. a bee ovipositor", player.canOvipositBee());
 				addButtonIfTrue(6, "Breastfeed", victoryRapeAGooGalAsFeeder, "Req. Feeder perk", player.hasPerk(PerkLib.Feeder));
 				//Valeria part
-				if (player.armorName == "goo armor" && !player.isButtPregnant() && !player.isPregnant()) {
+				if (player.armor == armors.GOOARMR && !player.isButtPregnant() && !player.isPregnant()) {
 					outputText("\n\nValeria's armored form seems to ebb towards the puddled goo-woman before you, almost eager to close the distance with her despite her pledge to protect you. ");
 					if (flags[kFLAGS.TIMES_VALERIA_GOO_THREESOMED] == 0)
 						outputText("Do you offer a threesome with the girl to Valeria? It could get a little weird....");

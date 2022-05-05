@@ -19,7 +19,6 @@ import classes.Scenes.Dungeons.D3.SuccubusGardener;
 import classes.Scenes.Explore.Pierce;
 import classes.Scenes.Explore.TheDummy;
 import classes.Scenes.Monsters.Malikore;
-import classes.Scenes.Monsters.Oozaru;
 import classes.Scenes.NPCs.Alvina;
 import classes.Scenes.NPCs.Aria;
 import classes.Scenes.NPCs.Belisa;
@@ -28,15 +27,12 @@ import classes.Scenes.NPCs.DivaScene;
 import classes.Scenes.NPCs.DriderTown;
 import classes.Scenes.NPCs.Lilith;
 import classes.Scenes.NPCs.LilyFollower;
-import classes.Scenes.NPCs.Neisa;
 import classes.Scenes.NPCs.RyuBiDragon;
 import classes.Scenes.NPCs.Sonya;
 import classes.Scenes.NPCs.TyrantiaFollower;
-import classes.Scenes.NPCs.ZenjiScenes;
 import classes.Scenes.Places.Boat.Marae;
 import classes.Scenes.Places.HeXinDao.AdventurerGuild;
 import classes.Items.*;
-import classes.Scenes.Places.TrollVillage;
 import classes.Stats.Buff;
 import classes.Scenes.Dungeons.EbonLabyrinth.*;
 import classes.GeneticMemories.*;
@@ -421,7 +417,7 @@ public class Soulforce extends BaseContent
 	}
 	private function jiangshiBuggedItemsCleanUpCrew3():void {
 		if (player.armor != ArmorLib.NOTHING) {
-			if (player.armorName == "goo armor") player.armor.removeText();
+			if (player.armor == armors.GOOARMR) player.armor.removeText();
 			inventory.takeItem(player.setArmor(armors.TRADITC), jiangshiBuggedItemsCleanUpCrew4);
 		}
 		else doNext(jiangshiBuggedItemsCleanUpCrew4);

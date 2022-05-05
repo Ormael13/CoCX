@@ -296,7 +296,7 @@ public class SaveUpdater extends NPCAwareContent {
 		if (flags[kFLAGS.TIMES_MASTURBATED] >= 100) awardAchievement("Master-bation", kACHIEVEMENTS.GENERAL_FAPSTER);
 		if (flags[kFLAGS.TIMES_MASTURBATED] >= 1000) awardAchievement("Grand Master-bation", kACHIEVEMENTS.GENERAL_FAPSTER_2);
 
-		if (player.armorName == "goo armor") awardAchievement("Goo Armor", kACHIEVEMENTS.GENERAL_GOO_ARMOR);
+		if (player.armor == armors.GOOARMR) awardAchievement("Goo Armor", kACHIEVEMENTS.GENERAL_GOO_ARMOR);
 		if (helspawnFollower()) awardAchievement("Helspawn", kACHIEVEMENTS.GENERAL_HELSPAWN);
 		if (flags[kFLAGS.URTA_KIDS_MALES] + flags[kFLAGS.URTA_KIDS_FEMALES] + flags[kFLAGS.URTA_KIDS_HERMS] > 0) awardAchievement("Urta's True Lover", kACHIEVEMENTS.GENERAL_URTA_TRUE_LOVER);
 		if (flags[kFLAGS.CORRUPTED_MARAE_KILLED] > 0) awardAchievement("Godslayer", kACHIEVEMENTS.GENERAL_GODSLAYER);
@@ -1918,7 +1918,7 @@ public class SaveUpdater extends NPCAwareContent {
 			}
 		}
 		if (player.armor != ArmorLib.NOTHING) {
-			if (player.armorName == "goo armor") player.armor.removeText();
+			if (player.armor == armors.GOOARMR) player.armor.removeText();
 			inventory.takeItem(player.setArmor(armors.TRADITC), jiangshiBuggedItemsCleanUpCrew);
 			return;
 		}
