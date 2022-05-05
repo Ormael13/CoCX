@@ -2074,6 +2074,7 @@ public class Camp extends NPCAwareContent{
 		else addButtonDisabled(7, "Herbalism", "Would you kindly find Rathazul first?");
 		if (player.explored >= 1) addButton(9, "Dummy", DummyTraining).hint("Train your mastery level on this dummy.");
 		addButton(10, "Questlog", questlog.accessQuestlogMainMenu).hint("Check your questlog.");
+		addButton(11, "Recall", recallScenes).hint("Recall some of the unique events happened during your adventure.");
 		if (flags[kFLAGS.LETHICE_DEFEATED] > 0) addButton(13, "Ascension", promptAscend).hint("Perform an ascension? This will restart your adventures with your items, and gems carried over. The game will also get harder.");
 		else addButtonDisabled(13, "Ascension", "Don't you have a job to finish first. Like... to defeat someone, maybe Lethice?");
 		addButton(14, "Back", playerMenu);
@@ -2091,7 +2092,6 @@ public class Camp extends NPCAwareContent{
 			addButtonDisabled(2, "Watch Sky", "The option to watch sunset is available at 7pm.");
 		}
 		addButton(3, "Read Codex", codex.accessCodexMenu).hint("Read any codex entries you have unlocked.");
-		addButton(4, "Recall", recallScenes).hint("Recall some of the unique events happened during your adventure.");
 		if (player.hasKeyItem("Gryphon Statuette") >= 0) addButton(9, "Gryphon", useGryphonStatuette);
 		if (player.hasKeyItem("Peacock Statuette") >= 0) addButton(9, "Peacock", usePeacockStatuette);
 		addButton(14, "Back", campActions);
@@ -4696,7 +4696,7 @@ public function rebirthFromBadEnd():void {
 		//------------
 		//Misc check!
 		if (ceraphIsFollower()) pop--; //Ceraph doesn't stay in your camp.
-		if (player.armorName == "goo armor") pop++; //Include Valeria if you're wearing her.
+		if (player.armor == armors.GOOARMR) pop++; //Include Valeria if you're wearing her.
 		if (flags[kFLAGS.CLARA_IMPRISONED] > 0) pop++;
 		//------------
 		//Children check!

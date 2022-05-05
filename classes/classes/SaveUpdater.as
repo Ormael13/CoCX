@@ -296,7 +296,7 @@ public class SaveUpdater extends NPCAwareContent {
 		if (flags[kFLAGS.TIMES_MASTURBATED] >= 100) awardAchievement("Master-bation", kACHIEVEMENTS.GENERAL_FAPSTER);
 		if (flags[kFLAGS.TIMES_MASTURBATED] >= 1000) awardAchievement("Grand Master-bation", kACHIEVEMENTS.GENERAL_FAPSTER_2);
 
-		if (player.armorName == "goo armor") awardAchievement("Goo Armor", kACHIEVEMENTS.GENERAL_GOO_ARMOR);
+		if (player.armor == armors.GOOARMR) awardAchievement("Goo Armor", kACHIEVEMENTS.GENERAL_GOO_ARMOR);
 		if (helspawnFollower()) awardAchievement("Helspawn", kACHIEVEMENTS.GENERAL_HELSPAWN);
 		if (flags[kFLAGS.URTA_KIDS_MALES] + flags[kFLAGS.URTA_KIDS_FEMALES] + flags[kFLAGS.URTA_KIDS_HERMS] > 0) awardAchievement("Urta's True Lover", kACHIEVEMENTS.GENERAL_URTA_TRUE_LOVER);
 		if (flags[kFLAGS.CORRUPTED_MARAE_KILLED] > 0) awardAchievement("Godslayer", kACHIEVEMENTS.GENERAL_GODSLAYER);
@@ -1775,6 +1775,12 @@ public class SaveUpdater extends NPCAwareContent {
 				if (Forgefather.balls > 0) Forgefather.statueProgress++;
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.010;
 			}
+			//TODO: disable this before the next major update, public ver. players don't need to see this.
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.011) {
+				flags[kFLAGS.SCENEHUNTER_LOSS_SELECT] = flags[kFLAGS.SCENEHUNTER_OTHER];
+				outputText("\n\nSceneHunter update: new <b>Select Loss</b> feature. Set equal to the 'Other' flag by default. You can toggle its value in settings.");
+				flags[kFLAGS.MOD_SAVE_VERSION] = 35.011;
+			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);
 			return;
@@ -1912,7 +1918,7 @@ public class SaveUpdater extends NPCAwareContent {
 			}
 		}
 		if (player.armor != ArmorLib.NOTHING) {
-			if (player.armorName == "goo armor") player.armor.removeText();
+			if (player.armor == armors.GOOARMR) player.armor.removeText();
 			inventory.takeItem(player.setArmor(armors.TRADITC), jiangshiBuggedItemsCleanUpCrew);
 			return;
 		}

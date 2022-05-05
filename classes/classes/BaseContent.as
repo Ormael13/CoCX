@@ -341,7 +341,7 @@ import coc.xxc.StoryContext;
 		{
 			return EngineCore.addButtonDisabled(pos, text, toolTipText, toolTipHeader);
 		}
-        public static function addButtonIfTrue(pos:int, text:String, func1:Function, toolTipDisabled:String, condition:Boolean, tooltipText:String = ""):CoCButton {
+		protected function addButtonIfTrue(pos:int, text:String, func1:Function, toolTipDisabled:String, condition:Boolean, tooltipText:String = ""):CoCButton {
             return EngineCore.addButtonIfTrue(pos, text, func1, toolTipDisabled, condition, tooltipText);
         }
 		protected function button(pos:int):CoCButton

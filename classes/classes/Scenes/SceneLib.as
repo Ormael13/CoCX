@@ -247,7 +247,7 @@ public class SceneLib {
 
     public static var vala:ValaScene = new ValaScene();
     
-    public static var valeria:Valeria = new Valeria();
+    public static var valeria:ValeriaScene = new ValeriaScene();
 
     public static var vapula:Vapula = new Vapula();
 

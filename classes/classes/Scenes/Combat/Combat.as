@@ -2763,7 +2763,7 @@ public class Combat extends BaseContent {
             (monster as HarpyMob).harpyHordeGangBangStruggle();
             skipMonsterAction = true;
         } else if (player.hasStatusEffect(StatusEffects.GooArmorBind)) {
-            (monster as GooArmor).struggleAtGooBind();
+            (monster as Valeria).struggleAtGooBind();
             if (player.statusEffectv1(StatusEffects.GooArmorBind) >= 5) {
                 if (monster.hasStatusEffect(StatusEffects.Spar)) SceneLib.valeria.pcWinsValeriaSparDefeat();
                 else SceneLib.dungeons.heltower.gooArmorBeatsUpPC();
@@ -4793,7 +4793,7 @@ public class Combat extends BaseContent {
             enemyAI();
             return;
         }
-        if (player.armorName == "goo armor") {
+        if (player.armor == armors.GOOARMR) {
             outputText("As you fantasize, you feel Valeria rubbing her gooey body all across your sensitive skin");
             if (player.gender > 0) outputText(" and genitals");
             outputText(", arousing you even further.\n");
