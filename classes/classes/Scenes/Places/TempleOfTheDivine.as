@@ -489,13 +489,10 @@ import classes.Scenes.Places.TempleOfTheDivine.*;
 				menu();
 				addButton(0, "Statue", playerBuilder.currentStateOfStatue).hint("Check on the statue.");
 				addButton(1, "Strange Book", playerBuilder.strangeBookOfGolems).hint("Examine the strange book.");
-				if (player.hasKeyItem("Black Soul Gem") >= 0 && flags[kFLAGS.ONYX_PATH] < 1) addButton(2, "Spare Statue", onyx.makingNewGargoyle).hint("Check on the spare statue.");
-				addButton(4, "Back", templeMainMenu);
-			}
 			if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] == 1) {
-				outputText("As you wander down into the basement of the temple, you find what looks like an old abandoned Altar. Down there is a plinth, surrounded by various depictions of what looks like gargoyles. One could follow their examples and create a gargoyle of their own.\n\n");
+				outputText("As you wander down into the basement of the temple, you find what looks like an old abandoned Atelier. Down there is a plinth, surrounded by various depictions of what looks like gargoyles. One could follow their examples and create a gargoyle of their own.\n\n");
 				flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE]++;
-				outputText("There is a plinth, surrounded by what looks to be depictions of various gargoyles, of all materials and forms. You're pretty sure that using these as a reference, you could craft a gargoyle statue of your own, made from raw stone.");
+				outputText("There is a plinth, surrounded by what looks to be depictions of various gargoyles, of all materials and forms. You're pretty sure that using these as a refernce, you could craft a gargoyle statue of your own, albeit of raw stone.");
 				menu();
 				addButton(0, "Begin", playerBuilder.chooseToWorkOnStoneStatue);
 				addButton(4, "Back", templeMainMenu);
