@@ -15251,13 +15251,13 @@ use namespace CoC;
 		public function EnergyDependentRestore():void {
 			var intBuff:Number = buff("Energy Vampire").getValueOfStatBuff("int.mult");
 			var speBuff:Number = buff("Energy Vampire").getValueOfStatBuff("spe.mult");
-			if (intBuff < +1.8) {
-				if (hasStatusEffect(StatusEffects.AlterBindScroll2)) buff("Energy Vampire").addStats({ "int.mult": +0.20 }).withText("Energy Vampire");
-				else buff("Energy Vampire").addStats({ "int.mult": +0.10 }).withText("Energy Vampire");
+			if (hasStatusEffect(StatusEffects.AlterBindScroll2)) {
+				if (intBuff < +1.8) buff("Energy Vampire").addStats({ "int.mult": +0.20 }).withText("Energy Vampire");
+				if (speBuff < +0.9) buff("Energy Vampire").addStats({ "spe.mult": +0.10 }).withText("Energy Vampire");
 			}
-			if (speBuff < +0.9) {
-				if (hasStatusEffect(StatusEffects.AlterBindScroll2)) buff("Energy Vampire").addStats({ "spe.mult": +0.10 }).withText("Energy Vampire");
-				else buff("Energy Vampire").addStats({ "spe.mult": +0.05 }).withText("Energy Vampire");
+			else {
+				if (intBuff < +0.9) buff("Energy Vampire").addStats({ "int.mult": +0.10 }).withText("Energy Vampire");
+				if (speBuff < +0.45) buff("Energy Vampire").addStats({ "spe.mult": +0.05 }).withText("Energy Vampire");
 			}
 			if (!CoC.instance.monster.hasPerk(PerkLib.EnemyTrueDemon)) {
 				if (hasStatusEffect(StatusEffects.AlterBindScroll2)) soulforce += maxSoulforce() * 0.08;
@@ -15265,12 +15265,8 @@ use namespace CoC;
 				if (soulforce > maxSoulforce()) soulforce = maxSoulforce();
 				outputText(" You feel slightly more alive from the soulforce you vampirised from your sexual partner orgasm.");
 			}
-			if (HP < maxHP()) {
-				EngineCore.HPChange(25 + (lib/2), true);
-			}
-			if (mana < maxMana()) {
-				EngineCore.ManaChange(25 + (inte/2), true);
-			}
+			if (HP < maxHP()) EngineCore.HPChange(25 + (lib/2), true);
+			if (mana < maxMana()) EngineCore.ManaChange(25 + (inte/2), true);
 			EngineCore.changeFatigue(-(25 + (spe/2)));
 			removeCurse("lib", 5, 1);
 			removeCurse("lib", 5, 2);

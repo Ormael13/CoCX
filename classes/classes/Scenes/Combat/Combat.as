@@ -11000,6 +11000,7 @@ public class Combat extends BaseContent {
         if (player.hasPerk(MutationsLib.DraconicHeart)) fatiguecombatrecovery += 1;
         if (player.hasPerk(MutationsLib.DraconicHeartPrimitive)) fatiguecombatrecovery += 1;
         if (player.hasPerk(MutationsLib.DraconicHeartEvolved)) fatiguecombatrecovery += 1;
+		if (player.hasPerk(MutationsLib.KitsuneParathyroidGlandsPrimitive)) fatiguecombatrecovery += 5;
         if (player.hasPerk(PerkLib.HydraRegeneration) && !player.hasStatusEffect(StatusEffects.HydraRegenerationDisabled)) fatiguecombatrecovery += 1 * player.statusEffectv1(StatusEffects.HydraTailsPlayer);
         if (player.hasPerk(PerkLib.JobGunslinger)) fatiguecombatrecovery += 1;
 		if (player.hasPerk(PerkLib.AmateurGunslinger)) fatiguecombatrecovery += 1;
@@ -11065,7 +11066,8 @@ public class Combat extends BaseContent {
         if (player.hasPerk(MutationsLib.DraconicHeart)) soulforceregen += 4;
         if (player.hasPerk(MutationsLib.DraconicHeartPrimitive)) soulforceregen += 4;
         if (player.hasPerk(MutationsLib.DraconicHeartEvolved)) soulforceregen += 4;
-        if (player.hasPerk(MutationsLib.KitsuneThyroidGlandEvolved) && player.hasPerk(PerkLib.StarSphereMastery)) soulforceregen += (player.perkv1(PerkLib.StarSphereMastery) * 3);
+		if (player.hasPerk(MutationsLib.KitsuneThyroidGlandPrimitive)) soulforceregen += 40;
+        if (player.hasPerk(MutationsLib.KitsuneThyroidGlandEvolved) && player.hasPerk(PerkLib.StarSphereMastery)) soulforceregen += (player.perkv1(PerkLib.StarSphereMastery) * 4);
         return soulforceregen;
     }
 
@@ -11139,8 +11141,8 @@ public class Combat extends BaseContent {
         if (player.hasPerk(MutationsLib.FeyArcaneBloodstream)) manaregen += 5;
         if (player.hasPerk(MutationsLib.FeyArcaneBloodstream)) manaregen += 10;
         if (player.hasPerk(MutationsLib.FeyArcaneBloodstream)) manaregen += 15;
-		if (player.hasPerk(MutationsLib.KitsuneThyroidGlandPrimitive)) manaregen += 20;
-        if (player.hasPerk(MutationsLib.KitsuneThyroidGlandEvolved) && player.hasPerk(PerkLib.StarSphereMastery)) manaregen += (player.perkv1(PerkLib.StarSphereMastery) * 2);
+		if (player.hasPerk(MutationsLib.KitsuneParathyroidGlandsPrimitive)) manaregen += 30;
+        if (player.hasPerk(MutationsLib.KitsuneParathyroidGlandsEvolved) && player.hasPerk(PerkLib.StarSphereMastery)) manaregen += (player.perkv1(PerkLib.StarSphereMastery) * 3);
         if (player.miscJewelry == miscjewelries.DMAGETO || player.miscJewelry2 == miscjewelries.DMAGETO) manaregen += Math.round(player.maxMana()*0.02);
         return manaregen;
     }

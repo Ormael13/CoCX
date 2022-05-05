@@ -540,7 +540,7 @@ import flash.utils.getQualifiedClassName;
 
 		public override function maxSoulforce():Number {
 			//Base soulforce
-			var temp:Number = 50 + this.bonusSoulforce;
+			var temp:Number = 50 + this.level * 5 + this.bonusSoulforce;
 			if (hasPerk(PerkLib.JobSoulCultivator)) temp += 50;
 			if (hasPerk(PerkLib.SoulApprentice)) {
 				temp += 30;
@@ -606,7 +606,7 @@ import flash.utils.getQualifiedClassName;
 
 		public override function maxWrath():Number {
 			//Base wrath
-			var temp:Number = 500 + (this.bonusWrath * 5);
+			var temp:Number = 500 + this.level * 5 + this.bonusWrath * 5;
 			if (hasPerk(PerkLib.DoubleAttack)) temp += 50;
 			if (hasPerk(PerkLib.TripleAttack)) temp += 50;
 			if (hasPerk(PerkLib.QuadrupleAttack)) temp += 50;

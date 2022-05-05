@@ -177,18 +177,18 @@ public class MagicSpecials extends BaseCombatContent {
 			var terror:Number = 9;
 			if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono) || player.hasPerk(PerkLib.InariBlessedKimono)) terror -= 1;
 			if (player.hasPerk(PerkLib.NaturalInstincts)) terror -= 1;
-			if (player.tailCount == 9 && player.hasPerk(MutationsLib.KitsuneThyroidGland)) {
+			if (player.tailCount == 9 && player.hasPerk(MutationsLib.KitsuneParathyroidGlands)) {
 				bd.toolTipText += "\nWould go into cooldown after use for: "+(terror-4)+" rounds\n";
 				bd.requireSoulforce(20 * soulskillCost() * soulskillcostmulti());
-				bd.requireFatigue(200);
-			} else if (player.tailCount == 9 || player.hasPerk(MutationsLib.KitsuneThyroidGland)) {
+				bd.requireFatigue(200 * kitsuneskill2Cost());
+			} else if (player.tailCount == 9 || player.hasPerk(MutationsLib.KitsuneParathyroidGlands)) {
 				bd.toolTipText += "\nWould go into cooldown after use for: "+(terror-2)+" rounds\n";
 				bd.requireSoulforce(20 * soulskillCost() * soulskillcostmulti());
-				bd.requireFatigue(100);
+				bd.requireFatigue(100 * kitsuneskill2Cost());
 			} else {
 				bd.toolTipText += "\nWould go into cooldown after use for: "+terror+" rounds\n";
 				bd.requireSoulforce(20 * soulskillCost() * soulskillcostmulti());
-				bd.requireFatigue(50);
+				bd.requireFatigue(50 * kitsuneskill2Cost());
 			}
 			if (player.hasStatusEffect(StatusEffects.CooldownTerror)) {
 				bd.disable("<b>You need more time before you can use Terror again.</b>\n\n");
@@ -209,18 +209,18 @@ public class MagicSpecials extends BaseCombatContent {
 			var illusion:Number = 9;
 			if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono) || player.hasPerk(PerkLib.InariBlessedKimono)) illusion -= 1;
 			if (player.hasPerk(PerkLib.NaturalInstincts)) illusion -= 1;
-			if (player.tailType == 13 && player.tailCount == 9 && player.hasPerk(MutationsLib.KitsuneThyroidGland)) {
+			if (player.tailType == 13 && player.tailCount == 9 && player.hasPerk(MutationsLib.KitsuneParathyroidGlands)) {
 				bd.toolTipText += "\nWould go into cooldown after use for: "+(illusion-4)+" rounds\n";
 				bd.requireSoulforce(20 * soulskillCost() * soulskillcostmulti());
-				bd.requireFatigue(200);
-			} else if ((player.tailType == 13 && player.tailCount == 9) || player.hasPerk(MutationsLib.KitsuneThyroidGland)) {
+				bd.requireFatigue(200 * kitsuneskill2Cost());
+			} else if ((player.tailType == 13 && player.tailCount == 9) || player.hasPerk(MutationsLib.KitsuneParathyroidGlands)) {
 				bd.toolTipText += "\nWould go into cooldown after use for: "+(illusion-2)+" rounds\n";
 				bd.requireSoulforce(20 * soulskillCost() * soulskillcostmulti());
-				bd.requireFatigue(100);
+				bd.requireFatigue(100 * kitsuneskill2Cost());
 			} else {
 				bd.toolTipText += "\nWould go into cooldown after use for: "+illusion+" rounds\n";
 				bd.requireSoulforce(20 * soulskillCost() * soulskillcostmulti());
-				bd.requireFatigue(50);
+				bd.requireFatigue(50 * kitsuneskill2Cost());
 			}
 			if (player.hasStatusEffect(StatusEffects.CooldownIllusion)) {
 				bd.disable("You need more time before you can use Illusion again.");
@@ -3965,12 +3965,18 @@ public class MagicSpecials extends BaseCombatContent {
 
 	public function kitsuneskillCost():Number {
 		var modksc:Number = 1;
+		if (player.hasPerk(MutationsLib.KitsuneThyroidGland)) modksc -= 0.5;
 		if (player.tailCount == 9 && player.tailType == Tail.FOX) {
-			if (player.hasPerk(MutationsLib.KitsuneThyroidGlandEvolved)) modksc += 2;
-			else if (player.hasPerk(MutationsLib.KitsuneThyroidGlandPrimitive)) modksc += 1;
+			if (player.hasPerk(MutationsLib.KitsuneThyroidGlandEvolved)) modksc *= 3;
+			else if (player.hasPerk(MutationsLib.KitsuneThyroidGlandPrimitive)) modksc *= 2;
 			else modksc += 0.5;
 		}
 		return modksc;
+	}
+	public function kitsuneskill2Cost():Number {
+		var modks2c:Number = 1;
+		if (player.hasPerk(MutationsLib.KitsuneParathyroidGlandsPrimitive)) modks2c -= 0.5;
+		return modks2c;
 	}
 
 	//Terror
@@ -3996,24 +4002,24 @@ public class MagicSpecials extends BaseCombatContent {
 		var ItemMod:Number = 0;
 		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono) || player.hasPerk(PerkLib.InariBlessedKimono)) ItemMod += 1;
 		if (player.hasPerk(PerkLib.NaturalInstincts)) ItemMod += 1;
-		if (player.tailCount == 9 && player.tailType == Tail.FOX && player.hasPerk(MutationsLib.KitsuneThyroidGland)) {
+		if (player.tailCount == 9 && player.tailType == Tail.FOX && player.hasPerk(MutationsLib.KitsuneParathyroidGlands)) {
 			player.createStatusEffect(StatusEffects.CooldownTerror, 5-ItemMod, 0, 0, 0);
-			fatigue(200, USEFATG_MAGIC_NOBM);
+			fatigue((200 * kitsuneskill2Cost()), USEFATG_MAGIC_NOBM);
 		}
-		else if ((player.tailCount == 9 && player.tailType == Tail.FOX) || player.hasPerk(MutationsLib.KitsuneThyroidGland)) {
+		else if ((player.tailCount == 9 && player.tailType == Tail.FOX) || player.hasPerk(MutationsLib.KitsuneParathyroidGlands)) {
 			player.createStatusEffect(StatusEffects.CooldownTerror, 7-ItemMod, 0, 0, 0);
-			fatigue(100, USEFATG_MAGIC_NOBM);
+			fatigue((100 * kitsuneskill2Cost()), USEFATG_MAGIC_NOBM);
 		}
 		else {
 			player.createStatusEffect(StatusEffects.CooldownTerror, 9-ItemMod, 0, 0, 0);
-			fatigue(50, USEFATG_MAGIC_NOBM);
+			fatigue((50 * kitsuneskill2Cost()), USEFATG_MAGIC_NOBM);
 		}
 		//Inflicts fear and reduces enemy SPD.
 		outputText("The world goes dark, an inky shadow blanketing everything in sight as you fill [themonster]'s mind with visions of otherworldly terror that defy description.  They cower in horror as they succumb to your illusion, believing themselves beset by eldritch horrors beyond their wildest nightmares.\n\n");
 		var speedDebuff:Number = 0;
-		if (player.hasPerk(MutationsLib.KitsuneThyroidGlandEvolved)) {
-			if (monster.spe >= 51) speedDebuff += 50;
-			else speedDebuff += 50 - monster.spe;
+		if (player.hasPerk(MutationsLib.KitsuneParathyroidGlandsEvolved)) {
+			if (monster.spe >= 71) speedDebuff += 70;
+			else speedDebuff += 70 - monster.spe;
 		}
 		else {
 			if (monster.spe >= 21) speedDebuff += 20;
@@ -4045,17 +4051,17 @@ public class MagicSpecials extends BaseCombatContent {
 		var ItemMod:Number = 0;
 		if (player.hasPerk(PerkLib.TamamoNoMaeCursedKimono) || player.hasPerk(PerkLib.InariBlessedKimono)) ItemMod += 1;
 		if (player.hasPerk(PerkLib.NaturalInstincts)) ItemMod += 1;
-		if (player.tailCount == 9 && player.tailType == Tail.FOX && player.hasPerk(MutationsLib.KitsuneThyroidGland)) {
+		if (player.tailCount == 9 && player.tailType == Tail.FOX && player.hasPerk(MutationsLib.KitsuneParathyroidGlands)) {
 			player.createStatusEffect(StatusEffects.CooldownIllusion,5-ItemMod,0,0,0);
-			fatigue(200, USEFATG_MAGIC_NOBM);
+			fatigue((200 * kitsuneskill2Cost()), USEFATG_MAGIC_NOBM);
 		}
-		else if ((player.tailCount == 9 && player.tailType == Tail.FOX) || player.hasPerk(MutationsLib.KitsuneThyroidGland)) {
+		else if ((player.tailCount == 9 && player.tailType == Tail.FOX) || player.hasPerk(MutationsLib.KitsuneParathyroidGlands)) {
 			player.createStatusEffect(StatusEffects.CooldownIllusion,7-ItemMod,0,0,0);
-			fatigue(100, USEFATG_MAGIC_NOBM);
+			fatigue((100 * kitsuneskill2Cost()), USEFATG_MAGIC_NOBM);
 		}
 		else {
 			player.createStatusEffect(StatusEffects.CooldownIllusion,9-ItemMod,0,0,0);
-			fatigue(50, USEFATG_MAGIC_NOBM);
+			fatigue((50 * kitsuneskill2Cost()), USEFATG_MAGIC_NOBM);
 		}
 		if(monster.hasStatusEffect(StatusEffects.Shell)) {
 			outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");

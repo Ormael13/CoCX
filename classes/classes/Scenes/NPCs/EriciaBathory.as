@@ -2,7 +2,7 @@
  * ...
  * @author ...
  */
-package classes.Scenes.Explore 
+package classes.Scenes.NPCs 
 {
 import classes.*;
 import classes.BodyParts.Butt;
@@ -11,10 +11,10 @@ import classes.BodyParts.Hips;
 import classes.GlobalFlags.kFLAGS;
 import classes.internals.*;
 
-	public class Werewolfs extends Monster
+	public class EriciaBathory extends Monster
 	{
 		
-		public function Werewolfs() 
+		public function EriciaBathory() 
 		{
 			
 		}

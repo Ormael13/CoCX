@@ -14,9 +14,9 @@ import classes.internals.*;
 	public class Koshya extends Monster
 	{
 		public function soulskillCostEnergyProjection():Number {
-			var cost:Number = 50;
-			//if (hasPerk(PerkLib.DaoistCultivator)) cost -= 5;
-			if (hasStatusEffect(StatusEffects.TrueFormAngel)) cost *= 3;
+			var cost:Number = 20;
+			//if (hasPerk(PerkLib.DaoistCultivator)) cost -= 2;
+			if (hasStatusEffect(StatusEffects.TrueFormAngel)) cost *= 2;
 			return cost;
 		}
 		/*
@@ -42,7 +42,7 @@ import classes.internals.*;
 			var damage:Number = eBaseIntelligenceDamage();
 			damage += eBaseWisdomDamage();
 			//damage *= SoulskillMod();
-			if (hasStatusEffect(StatusEffects.TrueFormAngel)) damage *= 2;
+			if (hasStatusEffect(StatusEffects.TrueFormAngel)) damage *= 3;
 			damage = Math.round(damage);
 			player.takeFireDamage(damage, true);
 		}
@@ -65,7 +65,7 @@ import classes.internals.*;
 		override public function get long():String
 		{
 			var str:String = "";
-			str += "You're fighting pale blue skinned women with snow white medium long hair. Using her snow-white wings she constantly stays airborne.";// A powerful pure aura emanates from her.
+			str += "You're fighting pale blue skinned women with snow white medium long hair. Using her snow-white wings she constantly stays airborne. On her hands you can see pair of runic bracelets.";// A powerful pure aura emanates from her.
 			if (hasStatusEffect(StatusEffects.ATranscendentSoulField))
 			{
 				str += "\n\n<i>From time to time you can notice faint glimmers of orange protective field surrounding her.";

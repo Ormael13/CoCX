@@ -266,15 +266,27 @@ public class Soulforce extends BaseContent
 		menu();
 		var page:int = 0;
 		var menuItems:Array = [];
+		outputText("MutationsApplicator");
 		for each (var pArray:Array in IMutationsLib.mutationsArray("Thyroid")){
 			var temp:Array = [];
-			temp = createDynamicPerk(pArray[0], pArray[1]);
+			temp = cDynPerk(pArray[0], pArray[1]);
+			if (temp[1] is Function){
+				temp.insertAt(1,curry(temp[1], testdone));
+				temp.removeAt(2);
+			}
+
 			for each (var i:* in temp){
 				menuItems.push(i);
 			}
-			menuItems.push(temp[0]);
+			//menuItems.push(temp[0]);
 		}
 		menuGen(menuItems, page, curry(SoulforceCheats1, 2));
+
+		function testdone():void{
+			clearOutput();
+			outputText("testDone!");
+			doNext(accessSoulforceMenu);
+		}
 	}
 
 	public function FairyTest3():void {
