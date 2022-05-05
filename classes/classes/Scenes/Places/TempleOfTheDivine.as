@@ -12,7 +12,7 @@
 			addButton(1, "Yes", puttingPurePearlOnAltairYes);
 		}
 		public function puttingPurePearlOnAltairYes():void {
-			outputText("\n\nAs you place the pearl on the altar, you feel the holy power radiating from the temple increase a step further. The place practically radiates purity now. A horde of imps, attracted by the aura emanating from the temple, attempts to enter the building with the intention to put out the offending light. You prepare yourself for a fight, but end up watching in stunned silence as the corrupt beings catch fire and are reduced to ashes as soon as they fly inside the temple’s boundaries. It would seem the temple's divine protections have increased.");
+			outputText("\n\nAs you place the pearl on the altar, you feel the holy power radiating from the temple increase. The place practically radiates purity now. A horde of imps, attracted by the aura emanating from the temple, attempts to enter the building with the intention to destroy the holy energy. You prepare yourself for a fight, but as the corrupt beings enter the sacred grounds, they catch fire, flailing madly as their bodies burn from the inside with golden light. They disintegrate midair, ashes raining down onto the temple floor. It would seem the temple's divine protections have increased.");
 			player.destroyItems(consumables.P_PEARL, 1);
 			if (player.hasStatusEffect(StatusEffects.TempleOfTheDivineTracker)) player.addStatusValue(StatusEffects.TempleOfTheDivineTracker, 3, 2);
 			else player.createStatusEffect(StatusEffects.TempleOfTheDivineTracker, 0, 0, 2, 0);
@@ -24,7 +24,7 @@
 		}
 		public function takingPurePearlFromAltair():void {
 			clearOutput();
-			outputText("You recover the pearl from the Altar. The temple's power dimms slightly.");
+			outputText("You recover the pearl from the Altar. The temple's light dims.");
 			player.addStatusValue(StatusEffects.TempleOfTheDivineTracker, 3, -2);
 			inventory.takeItem(consumables.P_PEARL, templeMainMenu);
 		}
@@ -36,7 +36,7 @@
 				addButton(0, "Statue", playerBuilder.currentStateOfStatue).hint("Check on the statue.");
 				addButton(1, "Strange Book", playerBuilder.strangeBookOfGolems).hint("Examine the strange book.");
 			if (flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE] == 1) {
-				outputText("As you wander down into the basement of the temple, you find what looks like an old abandoned Atelier. Down there is a plinth, surrounded by various depictions of what looks like gargoyles. One could follow their examples and create a gargoyle of their own.\n\n");
+				outputText("As you wander down into the basement of the temple, you find what looks like an old abandoned Altar. Down there is a plinth, surrounded by various depictions of what looks like gargoyles. One could follow their examples and create a gargoyle of their own.\n\n");
 				flags[kFLAGS.FOUND_TEMPLE_OF_THE_DIVINE]++;
 				menu();
 				addButton(0, "Begin", playerBuilder.chooseToWorkOnStoneStatue);
