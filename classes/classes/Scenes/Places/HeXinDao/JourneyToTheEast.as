@@ -506,7 +506,7 @@ package classes.Scenes.Places.HeXinDao
 				player.setShield(ShieldLib.NOTHING);
 			}
 			if (player.armor != ArmorLib.NOTHING) {
-				if (player.armorName == "goo armor") player.armor.removeText();
+				if (player.armor == armors.GOOARMR) player.armor.removeText();
 				else flags[kFLAGS.PLAYER_DISARMED_ARMOR_ID] = player.armor.id;
 			}
 			player.setArmor(armors.TRADITC);

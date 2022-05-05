@@ -164,6 +164,8 @@ use namespace CoC;
 			this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyHugeType, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
+			this.createPerk(PerkLib.OverMaxHP, (60 + 5*mod), 0, 0, 0);
 			this.checkMonster();
 		}
 	}

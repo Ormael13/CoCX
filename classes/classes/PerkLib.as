@@ -3732,7 +3732,6 @@ public class PerkLib
 		public static const MinotaurCumResistance:PerkType = mk("Minotaur Cum Resistance", "Minotaur Cum Resistance",
 				"You can never become a Minotaur Cum Addict. Grants immunity to Minotaur Cum addiction.");
 		public static const MindbreakerBrain1toX:MindBreakerBrain = new MindBreakerBrain();
-		//public static const ELFElvenSpearDancingFlurry1to4:ELFElvenSpearDancingFlurry = new ELFElvenSpearDancingFlurry();
 		public static const NaturalHerbalism:PerkType = mk("Natural herbalism", "Natural herbalism",
 				"Gain three times as many herbs and items from gathering and crafting. Poultice heals for 50% more. Gain herbalism experience faster.");
 		public static const Necromancy:PerkType = mk("Necromancy", "Necromancy",
@@ -7059,4 +7058,4 @@ public class PerkLib
 	}
 	initDependencies();
 }
-}
+}

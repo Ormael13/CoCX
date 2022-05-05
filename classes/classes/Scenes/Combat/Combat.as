@@ -1717,7 +1717,8 @@ public class Combat extends BaseContent {
         }
         if ((player.weaponSpecials("") || player.weaponSpecials("Dual") || player.weaponSpecials("Hybrid"))) {
             if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] >= 0) {
-                flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = Math.min(maxCurrentAttacks(), (flags[kFLAGS.DOUBLE_ATTACK_STYLE]||0)+1);
+                flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = Math.min(maxCurrentAttacks(), (flags[kFLAGS.DOUBLE_ATTACK_STYLE] || 0) + 1);
+				if (canSpearDance() && player.isSpearTypeWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise() && player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry1to4)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += player.perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4);
                 if (player.statusEffectv1(StatusEffects.CounterAction) > 0) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = player.statusEffectv1(StatusEffects.CounterAction);
                 if (player.hasStatusEffect(StatusEffects.BladeDance) || player.weaponSpecials("Dual")) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] *= 2;
                 if (flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] > 1 && player.hasPerk(PerkLib.SteelStorm) && !player.hasStatusEffect(StatusEffects.CounterAction) && player.weaponSpecials("Dual")) {
@@ -1743,6 +1744,7 @@ public class Combat extends BaseContent {
                     if (player.hasPerk(PerkLib.DoubleAttackLarge)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 2;
                     else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
                 } else flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
+				if (canSpearDance() && player.isSpearTypeWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise() && player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry1to4)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += player.perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4);
                 if (player.statusEffectv1(StatusEffects.CounterAction) > 0) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = player.statusEffectv1(StatusEffects.CounterAction);
 				if ((player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking)) && (player.hasPerk(PerkLib.FuelForTheFire) || player.hasPerk(PerkLib.Anger))) {
 					if (player.hasPerk(PerkLib.Anger) && player.hp100 < 50) {
@@ -1807,6 +1809,7 @@ public class Combat extends BaseContent {
         if (player.weaponSpecials("Massive")) {
             //	if (flags[kFLAGS.DOUBLE_ATTACK_STYLE] >= 0) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
 			flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] = 1;
+			//	if (canSpearDance() && player.isSpearTypeWeapon() && player.isNotHavingShieldCuzPerksNotWorkingOtherwise() && player.hasPerk(PerkLib.ELFElvenSpearDancingFlurry1to4)) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += player.perkv1(PerkLib.ELFElvenSpearDancingFlurry1to4);
 			if ((player.hasStatusEffect(StatusEffects.Berzerking) || player.hasStatusEffect(StatusEffects.Lustzerking)) && (player.hasPerk(PerkLib.FuelForTheFire) || player.hasPerk(PerkLib.Anger))) {
 				if (player.hasPerk(PerkLib.Anger) && player.hp100 < 50) {
 					if (player.hp100 < 100) flags[kFLAGS.MULTIPLE_ATTACKS_STYLE] += 2;
@@ -2760,7 +2763,7 @@ public class Combat extends BaseContent {
             (monster as HarpyMob).harpyHordeGangBangStruggle();
             skipMonsterAction = true;
         } else if (player.hasStatusEffect(StatusEffects.GooArmorBind)) {
-            (monster as GooArmor).struggleAtGooBind();
+            (monster as Valeria).struggleAtGooBind();
             if (player.statusEffectv1(StatusEffects.GooArmorBind) >= 5) {
                 if (monster.hasStatusEffect(StatusEffects.Spar)) SceneLib.valeria.pcWinsValeriaSparDefeat();
                 else SceneLib.dungeons.heltower.gooArmorBeatsUpPC();
@@ -3141,6 +3144,7 @@ public class Combat extends BaseContent {
         if (player.weaponRangePerk == "Bow" || player.weaponRangePerk == "Crossbow") {
             if (player.weaponRangePerk == "Crossbow") flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = Math.min((flags[kFLAGS.DOUBLE_STRIKE_STYLE] || 0) + 1, 3);
             else flags[kFLAGS.MULTIPLE_ARROWS_STYLE] = Math.min((flags[kFLAGS.DOUBLE_STRIKE_STYLE] || 0) + 1, maxBowAttacks());
+			if (player.isElf() && player.hasPerk(PerkLib.ELFMasterShot) && player.weaponRangePerk == "Bow") flags[kFLAGS.MULTIPLE_ARROWS_STYLE] += 1;
             if (player.weaponRangeName == "Avelynn") flags[kFLAGS.MULTIPLE_ARROWS_STYLE] *= 3;
         }
         if (player.weaponRangePerk == "Throwing") {
@@ -4789,7 +4793,7 @@ public class Combat extends BaseContent {
             enemyAI();
             return;
         }
-        if (player.armorName == "goo armor") {
+        if (player.armor == armors.GOOARMR) {
             outputText("As you fantasize, you feel Valeria rubbing her gooey body all across your sensitive skin");
             if (player.gender > 0) outputText(" and genitals");
             outputText(", arousing you even further.\n");

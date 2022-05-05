@@ -271,7 +271,8 @@ package classes.Scenes
 			outputText("-Now you NEED to rebuild Marae's altar for any wedding. When Marae is corrupted, you can do it too, although you still can't get any blessings from it. (Svalkash)\n");
 			outputText("-True Demon enemies getting innate OverMax HP effect. It would be % one with number matching enemy current lvl so factory bosses for ex. would have between 10 to 16 % OverMax HP bonus.\n");
 			//outputText("-True Angel enemies getting innate Diehard effect. It would be % one with number matching enemy current lvl.\n");
-			outputText("-As Kaiba warned on some items been temporal offer ended. Inari Blessed Kimono, Tamamo no Mae Cursed Kimono, Centaur Blackguard Armor went into Celess/Tyrantia legendaries upgrade menu. Black / Blue / Purple / Red / White Kimono to Inari Blessed Kimono / Tamamo no Mae Cursed Kimono and Centaur Armor to Centaur Blackguard Armor.\n");
+			outputText("-As Kaiba warned on some items been temporal offer ended. Inari Blessed Kimono, Tamamo no Mae Cursed Kimono, Oni Noble kimono, Oni Tyrant kimono, Centaur Blackguard Armor went into Celess/Tyrantia legendaries upgrade menu. Black / Blue / Purple / Red / White Kimono to Inari Blessed Kimono / Tamamo no Mae Cursed Kimono, ");
+			outputText("Sakura Petal Kimono to Oni Noble kimono / Oni Tyrant kimono and Centaur Armor to Centaur Blackguard Armor.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -293,7 +294,7 @@ package classes.Scenes
 			outputText("putting B. Sword after picking Ecalibur disabling option to pick sword at Temple, all 3 Hall of Blade soulskill variants dealing phys not magical dmg, Lightning Claw lowering phys dmg when used as part of feral style attack, using goblin Cum Reservoir not empting it out, Yuki Onna Transform scene not making sure to give proper genitalia setup, Archer's Stamina perks not giving fatigue related to ");
 			outputText("current Speed value, Half-Frost Wyrm or Half Spider-morph racial bonus been attained super easy, Mysterious Seed not causing for misc items menu appear as inventory submenu, unable to add arcane circuits to 5th arcane circle, doppleganger fight won't drag unnecessary due to getting messly 1k lust after 5th round in fight, Gazer Eyes mutation not keeping True seeing perk, Magical Eye Drops as item ");
 			outputText("find in Caves instead of Eye Drops, raiju tf removing/humanizing raiju paws, picking no elemental during minions turn skipping many following up phases of the turn, epic/legendary/mythical perks for stats not affecting monsters, harpy wings not setting shark score to 0, Siren been excluded form races list for appearance screen, Minor Minerva and parsertag, Encaps. pod multicockdescript, ");
-			outputText("Elf hair mutation, holiday events appearing in Ingnam/prison, Minotaur-Dormammu bug for all damage sources, equipping at once specific combinations of melee weapon and shield when not meeting req. to do so, Blood Chains too long stun duration, cyclop/gazer scores not included in chimera race check");
+			outputText("Elf hair mutation, holiday events appearing in Ingnam/prison, Minotaur-Dormammu bug for all damage sources, equipping at once specific combinations of melee weapon and shield when not meeting req. to do so, Blood Chains too long stun duration, cyclop/gazer scores not included in chimera race check, Wood Elf perks not adding extra shoot & not affecting Skypiercer");
 			outputText("\n");/*ostatni punkt changelogu
 			//outputText("-Added in current version race effects to Metamorph perk: \n");
 			//outputText("-New shield (by Ormael): Spiked Massive Shield - obtained by . Base block 42, cost 5600 gems. Req. to have 120+ str to reach base block value. \n");

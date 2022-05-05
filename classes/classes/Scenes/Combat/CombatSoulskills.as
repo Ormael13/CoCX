@@ -189,7 +189,7 @@ public class CombatSoulskills extends BaseCombatContent {
 			}
 		}
 		if (player.hasStatusEffect(StatusEffects.KnowsNightOfBrotherhood)) {
-			bd = buttons.add("Night of Brotherhood", combat.nightOfBrotherhood).hint("Let your wrath darken into a burst of darkness, fuelled by your brotherhood".  \n\nWould go into cooldown after use for: 1 round  \n\nWrath cost: 30% of current wrath");
+			bd = buttons.add("Night of Brotherhood", combat.nightOfBrotherhood).hint("Let your wrath darken into a burst of darkness, fuelled by your brotherhood.  \n\nWould go into cooldown after use for: 1 round  \n\nWrath cost: 30% of current wrath");
 			if (player.hasStatusEffect(StatusEffects.CooldownNightOfBrotherhood)) {
 				bd.disable("You need more time before you can use Night of Brotherhood again.");
 			} else if (player.wrath < 50) {

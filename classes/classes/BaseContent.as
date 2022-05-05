@@ -341,7 +341,7 @@ import coc.xxc.StoryContext;
 		{
 			return EngineCore.addButtonDisabled(pos, text, toolTipText, toolTipHeader);
 		}
-        public static function addButtonIfTrue(pos:int, text:String, func1:Function, toolTipDisabled:String, condition:Boolean, tooltipText:String = ""):CoCButton {
+		protected function addButtonIfTrue(pos:int, text:String, func1:Function, toolTipDisabled:String, condition:Boolean, tooltipText:String = ""):CoCButton {
             return EngineCore.addButtonIfTrue(pos, text, func1, toolTipDisabled, condition, tooltipText);
         }
 		protected function button(pos:int):CoCButton
@@ -1035,13 +1035,13 @@ import coc.xxc.StoryContext;
 		 * @return Array: Two item Array consisting of perk name[0], and a prepared function that will create/modify the perk/mutation[1].
 		 *
 		 */
-		protected function createDynamicPerk(pPerk:PerkType, pClass:Class):*{
+		protected function cDynPerk(pPerk:PerkType, pClass:Class):*{
 			var pLvl:int = player.perkv1(pPerk);	//Gets Mutation Level if it exists.
-			var pMax:int = extPerkTrigger(pClass.perkLvl, pLvl);	//Max Mutation Level
+			var pMax:int = extPerkTrigger(pClass.perkLvl, 0);	//Max Mutation Level
 			//outputText(""+pPerk.name() + " Perk Tier: " + pLvl + "\n");
 			extPerkTrigger(pClass.pReqs, pLvl);	//Requirements Loading.
 			trace("Requirements loaded in.");
-			if (pPerk.available(player) && pMax >= pLvl){
+			if (pPerk.available(player) && pMax > pLvl){
 				trace("Requirements met, adding in.");
 				return([pPerk.name(), acquirePerk, pPerk.desc()]);	//This is witchcraft, not sure how acquirePerk still recalls which perk to give, but it does.
 			}
@@ -1072,7 +1072,7 @@ import coc.xxc.StoryContext;
 				try{
 					var result:* = fTrigger(pLvl2);
 					trace("External Function Trigger Success");
-					return result
+					return result;
 				}
 				catch (e:Error){
 					trace("External Function Trigger Failed. \n" + e.getStackTrace());
@@ -1080,22 +1080,29 @@ import coc.xxc.StoryContext;
 			}
 
 			//Gives the player the actual mutation itself.
-			function acquirePerk():Boolean{
+			function acquirePerk(nextFunc:Function = null):void{
 				try{
-					if (!player.hasPerk(pPerk)){
-						player.createPerk(pPerk, 1,0,0,0);
+					if (nextFunc == null){
+						trace("Missing nextFunc, aborting perk adding.");
+						outputText("Someone forgot to add a nextFunc to their acquirePerk. Please report which perk you selected. The perk was not applied.");
+						nextFunc = camp.returnToCampUseOneHour;
 					}
 					else{
-						player.setPerkValue(pPerk,1,pLvl + 1);
+						if (!player.hasPerk(pPerk)){
+							player.createPerk(pPerk, 1,0,0,0);
+						}
+						else{
+							player.setPerkValue(pPerk,1,pLvl + 1);
+						}
+						setBuffs();
+						trace("Perk applied.");
 					}
-					setBuffs();
-					trace("Perk applied.");
 				} catch(e:Error){
-					trace(e.getStackTrace())
+					trace(e.getStackTrace());
 					outputText("Something has gone wrong with Dynamic Perks. Please report this to JTecx along with which perk/mutation was selected, along with the bonk stick.");
-					return false;
+					doNext(camp.returnToCampUseOneHour);
 				}
-				return true;
+				nextFunc();
 			}
 
 			//Sets up the buff for the perk.

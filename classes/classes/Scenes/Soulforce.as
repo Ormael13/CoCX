@@ -19,24 +19,20 @@ import classes.Scenes.Dungeons.D3.SuccubusGardener;
 import classes.Scenes.Explore.Pierce;
 import classes.Scenes.Explore.TheDummy;
 import classes.Scenes.Monsters.Malikore;
-import classes.Scenes.Monsters.Oozaru;
 import classes.Scenes.NPCs.Alvina;
 import classes.Scenes.NPCs.Aria;
 import classes.Scenes.NPCs.Belisa;
 import classes.Scenes.NPCs.BelisaFollower;
 import classes.Scenes.NPCs.DivaScene;
 import classes.Scenes.NPCs.DriderTown;
+import classes.Scenes.NPCs.Lilith;
 import classes.Scenes.NPCs.LilyFollower;
-import classes.Scenes.NPCs.Neisa;
 import classes.Scenes.NPCs.RyuBiDragon;
 import classes.Scenes.NPCs.Sonya;
 import classes.Scenes.NPCs.TyrantiaFollower;
-import classes.Scenes.NPCs.Zenji;
-import classes.Scenes.NPCs.ZenjiScenes;
 import classes.Scenes.Places.Boat.Marae;
 import classes.Scenes.Places.HeXinDao.AdventurerGuild;
 import classes.Items.*;
-import classes.Scenes.Places.TrollVillage;
 import classes.Stats.Buff;
 import classes.Scenes.Dungeons.EbonLabyrinth.*;
 import classes.GeneticMemories.*;
@@ -270,15 +266,27 @@ public class Soulforce extends BaseContent
 		menu();
 		var page:int = 0;
 		var menuItems:Array = [];
+		outputText("MutationsApplicator");
 		for each (var pArray:Array in IMutationsLib.mutationsArray("Thyroid")){
 			var temp:Array = [];
-			temp = createDynamicPerk(pArray[0], pArray[1]);
+			temp = cDynPerk(pArray[0], pArray[1]);
+			if (temp[1] is Function){
+				temp.insertAt(1,curry(temp[1], testdone));
+				temp.removeAt(2);
+			}
+
 			for each (var i:* in temp){
 				menuItems.push(i);
 			}
-			menuItems.push(temp[0]);
+			//menuItems.push(temp[0]);
 		}
 		menuGen(menuItems, page, curry(SoulforceCheats1, 2));
+
+		function testdone():void{
+			clearOutput();
+			outputText("testDone!");
+			doNext(accessSoulforceMenu);
+		}
 	}
 
 	public function FairyTest3():void {
@@ -421,7 +429,7 @@ public class Soulforce extends BaseContent
 	}
 	private function jiangshiBuggedItemsCleanUpCrew3():void {
 		if (player.armor != ArmorLib.NOTHING) {
-			if (player.armorName == "goo armor") player.armor.removeText();
+			if (player.armor == armors.GOOARMR) player.armor.removeText();
 			inventory.takeItem(player.setArmor(armors.TRADITC), jiangshiBuggedItemsCleanUpCrew4);
 		}
 		else doNext(jiangshiBuggedItemsCleanUpCrew4);
@@ -611,11 +619,6 @@ public class Soulforce extends BaseContent
 		clearOutput();
 		outputText("Entering battle with Lethice! Enjoy ^^");
 		startCombat(new Lethice());
-	}
-	public function FightNeisa():void {
-		clearOutput();
-		outputText("Entering battle with Neisa! Enjoy ^^");
-		startCombat(new Neisa());
 	}
 	public function FightAlvina():void {
 		clearOutput();
@@ -1743,17 +1746,18 @@ public class Soulforce extends BaseContent
 		menu();
 		if (page == 1) {
 			addButton(0, "FightForPearl", FightForPearl).hint("Test fight to get Sky Poison Pearl legally (aside we cheat to start fight)");
-			addButton(1, "Marae", FightMarae).hint("Test fight with Marae (depending on game stage she can be buffed or unbuffed).");
-			addButton(3, "SuccGard", FightSuccubusGardener).hint("Test fight with Succubus Gardener. (Also it will glitch right after fight so not start this fight if you got unsaved progress that you not wanna loose as only way to handle post fight glitch is restarting game)");
+			addButton(1, "M.WSeaver", FightBelisa).hint("Test fight with Mana Weaver.");
+			if (player.level >= 45 && TyrantiaFollower.TyrantiaFollowerStage < 4 && !TyrantiaFollower.TyraniaIsRemovedFromThewGame) addButton(2, "D.Giantess", FightTyrantia).hint("Test fight with Drider Giantess.");
+			//3
 			addButton(4, "The Dummy", FightTheDummy).hint("Fight with The Dummy.");
-			addButton(5, "M.WSeaver", FightBelisa).hint("Test fight with Mana Weaver.");
-			if (player.level >= 45 && TyrantiaFollower.TyrantiaFollowerStage < 4 && !TyrantiaFollower.TyraniaIsRemovedFromThewGame) addButton(6, "D.Giantess", FightTyrantia).hint("Test fight with Drider Giantess.");
-			addButton(7, "Zenji", FightZenji).hint("Test fight with Zenji.");
+			//5
+			addButton(6, "GothGirl", FightLilith).hint("Fight with devilish cute goth girl.");
+			if (player.level >= 45) addButton(7, "Oculicorn", FightIridesian).hint("Test fight with Oculicorn.");
 			addButton(8, "Sonya", FightSonya).hint("Test fight with Sonya.");
 			addButton(9, "RyuBi", FightRyuBi).hint("Test fight with RyuBi.");
-			addButton(10, "LvLUP Eva", LvLUPEva).hint("LvL UP forcefully Evangeline for testing purpose up to the limit.");
-			addButton(11, "DELvL Eva", DELvLEva).hint("DE LvL forcefully Evangeline for testing purpose down toward the lvl 12.");
-			addButton(12, "Pierce", FightPierce).hint("Test fight with Pierce.");
+			addButton(10, "Marae", FightMarae).hint("Test fight with Marae (depending on game stage she can be buffed or unbuffed).");
+			addButton(11, "SuccGard", FightSuccubusGardener).hint("Test fight with Succubus Gardener. (Also it will glitch right after fight so not start this fight if you got unsaved progress that you not wanna loose as only way to handle post fight glitch is restarting game)");
+			addButton(12, "Lethice", FightLethice).hint("Test fight with Lethice.");
 			addButton(13, "-2-", EnemiesMenu, page + 1);
 			addButton(14, "Back", curry(SoulforceCheats1, 0));
 		}
@@ -1762,13 +1766,13 @@ public class Soulforce extends BaseContent
 			addButton(1, "Hydra", FightHydra).hint("Test fight with Hydra.");
 			addButton(2, "HellfireSnail", FightHellfireSnail).hint("Test fight with Hellfire Snail.");
 			addButton(3, "ChaosChimera", FightChaosChimera).hint("Test fight with Chaos Chimera.");
-			if (player.level >= 45) addButton(5, "Oculicorn", FightIridesian).hint("Test fight with Oculicorn.");
-			addButton(6, "Aria", FightAria).hint("Test fight with melkie huntress Aria.");
-			addButton(7, "Neisa", FightNeisa).hint("Test fight with Neisa.");
-			addButton(8, "SomeMalikore", FightRandomnMalikore).hint("Test fight with some malikore.");
-			addButton(9, "Lethice", FightLethice).hint("Test fight with Lethice.");
-			addButton(10, "LvLUP Aurora", LvLUPAurora).hint("LvL UP forcefully Aurora for testing purpose up to the limit.");
-			addButton(11, "DELvL Aurora", DELvLAurora).hint("DE LvL forcefully Aurora for testing purpose down toward the lvl 1.");
+			addButton(5, "LvLUP Eva", LvLUPEva).hint("LvL UP forcefully Evangeline for testing purpose up to the limit.");
+			addButton(6, "DELvL Eva", DELvLEva).hint("DE LvL forcefully Evangeline for testing purpose down toward the lvl 12.");
+			addButton(7, "LvLUP Aurora", LvLUPAurora).hint("LvL UP forcefully Aurora for testing purpose up to the limit.");
+			addButton(8, "DELvL Aurora", DELvLAurora).hint("DE LvL forcefully Aurora for testing purpose down toward the lvl 1.");
+			addButton(9, "Aria", FightAria).hint("Test fight with melkie huntress Aria.");
+			addButton(10, "SomeMalikore", FightRandomnMalikore).hint("Test fight with some malikore.");
+			addButton(11, "Pierce", FightPierce).hint("Test fight with Pierce.");
 			addButton(12, "Alvina", FightAlvina).hint("Test fight with Alvina.");
 			addButton(13, "-1-", EnemiesMenu, page - 1);
 			addButton(14, "Back", curry(SoulforceCheats1, 0));
@@ -2783,11 +2787,10 @@ public class Soulforce extends BaseContent
 	public function FightIridesian():void {
 		SceneLib.iridesianFollower.firstMeetingIridesian();
 	}
-	public function FightZenji():void {
+	public function FightLilith():void {
 		clearOutput();
-		outputText("Entering battle with Zenji! Enjoy ^^");
-		flags[kFLAGS.ZENJI_PROGRESS] = 1;
-		startCombat(new Zenji());
+		outputText("Entering battle with devilish cute goth girl! Enjoy ^^");
+		startCombat(new Lilith());
 	}
 	public function FightSonya():void {
 		clearOutput();

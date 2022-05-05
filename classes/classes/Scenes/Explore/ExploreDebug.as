@@ -87,7 +87,7 @@ package classes.Scenes.Explore
 			function ():Monster {return new Amily();},
 			function ():Monster {return new Brigid();},
 			function ():Monster {return new Ceraph();},
-			function ():Monster {return new GooArmor();},
+			function ():Monster {return new Valeria();},
 			function ():Monster {return new Farmers();},
 			function ():Monster {return new GoblinBroodmother();},
 			function ():Monster {return new HarpyMob();},
