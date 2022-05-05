@@ -1777,7 +1777,7 @@ public class SaveUpdater extends NPCAwareContent {
 			}
 			//TODO: disable this before the next major update, public ver. players don't need to see this.
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.011) {
-				flags[kFLAGS.SCENEHUNTER_SELECT_LOSS] = flags[kFLAGS.SCENEHUNTER_OTHER];
+				flags[kFLAGS.SCENEHUNTER_LOSS_SELECT] = flags[kFLAGS.SCENEHUNTER_OTHER];
 				outputText("\n\nSceneHunter update: new <b>Select Loss</b> feature. Set equal to the 'Other' flag by default. You can toggle its value in settings.");
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.011;
 			}

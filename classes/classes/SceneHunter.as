@@ -39,9 +39,9 @@ public class SceneHunter extends BaseContent {
             outputText("\nThe biggest <b>fitting</b> dick is always used. Multicocks too.");
         }
 
-        addButton(2, "SelectLoss", toggle, kFLAGS.SCENEHUNTER_SELECT_LOSS);
-        outputText("\n\n<b>Select Loss:</b> ");
-        if (flags[kFLAGS.SCENEHUNTER_SELECT_LOSS]) {
+        addButton(2, "LossSelect", toggle, kFLAGS.SCENEHUNTER_LOSS_SELECT);
+        outputText("\n\n<b>Loss Select:</b> ");
+        if (flags[kFLAGS.SCENEHUNTER_LOSS_SELECT]) {
             outputText("<b><font color=\"#008000\">ENABLED</font></b>");
             outputText("\nSome scenes with many loss variations will allow you to select the specific scene. Works best in conjunction with UniHerms or Dick select, which open more scenes.");
             outputText("\n<i>Wait, it's illegal, the monster should choose how to rape you... fuck the RNG!</i>");
@@ -73,6 +73,7 @@ public class SceneHunter extends BaseContent {
         outputText("\nChristmas elf: enabled sex option even when corrupt.");
         outputText("\nLizan Rogue: medium-corrupt PCs now can persuade Lizan Rogue.");
         outputText("\nNaga <b>after</b> Samirah recruitment: enabled scenes. They're too good to miss.");
+        outputText("\nGreen slime: removed rape corruption checks.");
         outputText("\n<i>This opens up more scenes. They are lore-accurate and still explained in the game (so you won't get Amily living with corrupt Jojo or other nonsense), but be warned that the original writers intended some details to work the other way.</i>");
         outputText("\n<i>Some one-time scenes with many options and checks can be replayed using 'Camp Actions -> Spend Time -> Recall'.</i>");
 
@@ -374,8 +375,51 @@ public class SceneHunter extends BaseContent {
     // SelectLoss
     //--------------------------------------------------------------------------------------------------
 
-    public function get selectLoss():Boolean {
-        return flags[kFLAGS.SCENEHUNTER_SELECT_LOSS];
+    public function get lossSelect():Boolean {
+        return _passCheck || flags[kFLAGS.SCENEHUNTER_LOSS_SELECT];
+    }
+
+    /**
+     * Loss scene selection menu. Selects the scene randomly if disabled. Each array item can be composed as:
+     * Button: [position, "Name", function]
+     * Disabled button: [position, "Name", null]
+     * Button with condition: [position, "Name", function, "disabled tooltip", condition, "enabled tooltip"]
+     * @param    options    Scene array
+     * @param    msg        Message to print before menu
+     */
+    public function selectLossMenu(options:Array, msg:String = ""):void {
+        var choices:Array = []; //enabled functions
+        //init when enabled
+        if (lossSelect) {
+            outputText(msg);
+            menu();
+        }
+        //select choices or add buttons
+        for (var i:int = 0; i < options.length; ++i) {
+            var arr:Array = options[i] as Array;
+            if (arr == null) throw new Error("selectLossMenu called with non-array arguments!");
+            //button
+            if (arr.length == 3) {
+                if (lossSelect) {
+                    if (arr[2] == null) addButtonDisabled(arr[0], arr[1], "");
+                    else addButton.apply(this, arr);
+                }
+                else if (arr[2] != null)
+                    choices.push(arr[2]);
+            }
+            //condition
+            else if (arr.length >= 5 && arr.length <= 6) {
+                if (lossSelect)
+                    addButtonIfTrue.apply(this, arr);
+                else if (arr[4])
+                    choices.push(arr[2]);
+            }
+            else throw new Error("selectLossMenu - argument length mismatch!");
+        }
+        //if disabled, just select random choice
+        if (!lossSelect)
+            choices[rand(choices.length)]();
+        _passCheck = false; //reset one-time check skipper
     }
 
     //--------------------------------------------------------------------------------------------------

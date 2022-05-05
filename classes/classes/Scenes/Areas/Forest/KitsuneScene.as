@@ -761,7 +761,7 @@ public class KitsuneScene extends BaseContent
 		{
 			clearOutput();
 			//[LOSE FIGHT]
-			if (!sceneHunter.selectLoss) { //old behavior
+			if (!sceneHunter.lossSelect) { //old behavior
 				var scene:Array = [];
 				outputText("<b>If you tired of this randomizer with 3 conditional scenes, you can replace it with a selector in Scene settings.</b> ");
 				//Shared Scenes

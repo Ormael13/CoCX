@@ -221,7 +221,7 @@ public class BasiliskScene extends BaseContent
 			outputText("Working briskly, the basilisk tears off your [armor] until you are entirely naked.  It then rummages through your pockets; it carelessly discards everything it finds without apparent interest.  It grabs a handful of gems from your purse and then prowls back to you.\n\n");
 
 			//Male/Herm:
-			if(player.hasCock()) {
+			if(player.hasCock() && (!player.hasVagina() || rand(2) == 0)) {
 				outputText("With surprising gentleness and deftness, the basilisk rubs your [cock] with one palm");
 				if(player.hasVagina()) outputText(" and sticks some of the smaller fingers of its other hand in your " + vaginaDescript(0));
 				outputText(", thankfully angling its sickle claw away.  You can't do anything against it, and some of its mental compulsion remains; a backwash of erotic images from your past fill your head, and you can't even grit your teeth as the gentle, insistent pressure brushing your prick makes you rock hard.  It stops when you are erect and then, with the very faintest of smiles playing over its cruel mouth, leaves. You're naked, your [cock] is begging for release; you're utterly helpless... you can only hope that the spell will wear off, and before anything else in the mountain finds you.\n\n");
@@ -235,27 +235,17 @@ public class BasiliskScene extends BaseContent
 			player.sexReward("Default","Default",true,false);
 			dynStats("sen", 1);
 
-			if (sceneHunter.selectLoss) {
-				outputText("<i>Or maybe you hope for the exact opposite? Perhaps, you're not even trying to move on purpose, waiting for someone to find and fuck you like a proper slut? Who would it be?</i>");
-				menu();
-				addButton(0, "Nobody", basiliskAdvantageNobody);
-				addButton(1, "Harpy", basiliskAdvantageHarpy);
-				addButton(2, "Imp", basiliskAdvantageImp);
-				addButton(3, "Goblin", basiliskAdvantageGoblin);
-				addButton(4, "Minotaur", basiliskAdvantageMinotaur);
-			}
-			else {
-				//More to go here?
-				var sceneNum:Number = rand(5);
-				var scene:Function =
-					sceneNum == 0 ? basiliskAdvantageHarpy :
-						sceneNum == 1 ? basiliskAdvantageImp :
-							sceneNum == 2 ? basiliskAdvantageGoblin :
-								sceneNum == 3 ? basiliskAdvantageMinotaur :
-									basiliskAdvantageNobody;
-				doNext(scene);
-			}
+			sceneHunter.selectLossMenu([
+					[0, "Nobody", basiliskAdvantageNobody],
+					[1, "Harpy", basiliskAdvantageHarpy],
+					[2, "Imp", basiliskAdvantageImp],
+					[3, "Goblin", basiliskAdvantageGoblin],
+					[4, "Minotaur", basiliskAdvantageMinotaur],
+				],
+				"<i>Or maybe you hope for the exact opposite? Perhaps, you're not even trying to move on purpose, waiting for someone to find and fuck you like a proper slut? Who would it be?</i>\n\n"
+			);
 		}
+
 		//basilisk vag rape
 		//Requires: Player has vag and is in heat, currently has egg pregnancy, or has oviposition perk
 		private function basiliskHasVagEggStuff():void {

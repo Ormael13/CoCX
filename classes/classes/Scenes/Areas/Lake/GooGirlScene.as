@@ -154,7 +154,7 @@ public class GooGirlScene extends AbstractLakeContent
 				return;
 			}
 			else sceneHunter.print("Bad-end check failed: goo-morph, 5 consecutive losses.");
-			if (sceneHunter.uniHerms && !sceneHunter.selectLoss) {
+			if (sceneHunter.uniHerms && !sceneHunter.lossSelect) {
 				var choices:Array = [];
 				choices.push(genderlessLoseToGooGal);
 				if (player.hasCock()) choices.push(dudeLoseToGooGal);
