@@ -37,7 +37,7 @@ public function wateryourgarden():void
 public function playwithyourplantdaughters():void
 {
 	clearOutput();
-	outputText("You decide to set some time aside to play with your sprouts. You tell them as much while you pull water toys you bought in Tel'Adre out of your pack. The happiness on their little faces warms your heart.\n\n");
+	outputText("You decide to set some time aside to play with your sprouts. You tell them as much, and with a flourish, you pull water toys you bought in Tel'Adre out of your pack. The happiness on their little faces warms your heart.\n\n");
 	outputText("\"<i>Wow, really mom? You are the best!</i>\"\n\n");
 	outputText("Your daughters all cheer up as they pick up the toys and rush to the rivers to fill them up. Soon you’re all splashing each other. The experience is refreshing and soothing. You never thought you would appreciate having children this much. Perhaps parenting comes included in the whole \"being a child of a fertility goddess\" deal, you ponder, before being splashed in the face by one of your daughters, breaking you out of your reverie, and dragging you back into the game.\n\n");
 	doNext(camp.returnToCampUseOneHour);
@@ -47,7 +47,7 @@ public function playsRathazulAndSoulgemScene():void
 {
 	clearOutput();
 	spriteSelect(SpriteDb.s_rathazul);
-	outputText("As you pass by Rathazul considers you, then asks \"<i>May I ask what you’re planning to do with that soul gem of yours? Because yes I know exactly what this dangerous crystal you’re carrying is</i>\"\n\n");
+	outputText("As you pass by Rathazul considers you, then asks \"<i>May I ask what you’re planning to do with that soul gem of yours?</i>\" as you look at the elder in surprise, he shakes his head at you.  <i> \" Yes, [name], I know what that dangerous crystal is</i>\"\n\n");
 	outputText("When you mention you want to create a golem, Rathazul seems to lose himself in thought, as if trying to remember something.\n\n");
 	outputText("\"<i>Years ago, when I was younger, I knew a woman who specialised in such constructs. She was obsessed with creating the perfect servant. However when the demons came, hungry for power, she embraced them instead of fleeing and became one of those aberrations. Her laboratory is likely still located in the same area as before - hidden somewhere in the place now called the blighted ridges. If you go there, be careful. ");
 	outputText("Losing her humanity likely didn't do any good to her already fragile sanity. None can say  what you will find.</i>\"\n\n");
@@ -77,10 +77,10 @@ public function droppingToZeroSatietyAsGargoyle():void
 			}
 			//Bigger than he is
 			if(player.vaginalCapacity() >= monster.cockArea(0) *1.5) {
-				outputText("Restraint evaporates as you lower yourself, your aching " + vaginaDescript(0) + " desperate for contact.  Your thighs quiver as you touch his wobbling column of maleness, the slick pre-cum soaking into your engorged clitty, filling it with tingling warmth.  With a lusty giggle you slip his head inside your " + vaginaDescript(0) + ", allowing him to drool his musky pre-seed deep inside your wide love-canal.  Sinking down slowly, your easily encompass all of his equine-like member, enjoying the feeling of his three thick cock-ridges as they slip through your lips.  Eventually you take all of him, wishing he was just a bit bigger...");
+				outputText("Restraint evaporates as you lower yourself, your aching " + vaginaDescript(0) + " desperate for contact.  Your thighs quiver as you touch his wobbling column of maleness, the slick pre-cum soaking into your engorged clitty, filling it with tingling warmth.  With a lusty giggle you slip his head inside your " + vaginaDescript(0) + ", allowing him to drool his musky pre-seed deep inside your wide love-canal.  Sinking down slowly, you easily encompass all of his equine-like member, enjoying the feeling of his three thick cock-ridges as they slip through your lips.  Eventually you take all of him, wishing he was just a bit bigger...");
 			}
 			//Resume sexings, p2
-			outputText("\n\nAt last you feel the minotaur's meaty hands grab you by the " + hipDescript() + ", forcefully grinding up and down along his length like a cheap sex-toy.  ");
+			outputText("\n\nAt last you feel the minotaur's meaty hands grab you by the " + hipDescript() + ", forcefully grinding up and down his length like a cheap sex-toy.  ");
 			//Size variants
 			//Too small
 			if(player.vaginalCapacity() < monster.cockArea(0)) outputText("Every ridge of his " + monster.cockDescriptShort(0) + " presses tightly against your walls, smearing more of his wondrous pre-seed into your body with every stroke.  ");
@@ -97,7 +97,7 @@ public function droppingToZeroSatietyAsGargoyle():void
 			dynStats("spe", -.5, "int", -.5, "sen", 1.5, "cor", 1);
 		}
 		else {
-			outputText("You rush into the forest starved for energy and forcefully grab the first goblin you can find wiping your rock hard cock against her face. The goblin, getting the idea that you're pretty much ready to kill to get laid, decides against resisting.\n\n");
+			outputText("You rush into the forest, starved for energy and forcefully grab the first goblin you can find. You pin her down, wiping your rock hard cock against her face. The goblin, getting the idea that you're pretty much ready to kill to get laid, decides against resisting.\n\n");
 			var x:Number = player.cockThatFits(monster.vaginalCapacity());
 			outputText(images.showImage("goblin-win-male-goblinboners"));
 			outputText("You begin to fondle your cock as you walk towards the unsuspecting goblin girl, taking in the sight of her perfectly round cheeks as they jiggle against her hurried movements, her soft thighs clenched against the eager hand between them.  Bending down, you quickly grab the goblin's ample hips, causing the girl to squeak in surprise as she turns around to catch the sight of your erect length.\n\n");
@@ -115,7 +115,7 @@ public function droppingToZeroSatietyAsGargoyle():void
 
 public function badendManticoreOuroboros():void {
 	clearOutput();
-	outputText("You eye your penis, then your tail pussy, then back at your penis. The smell of precum dripping from your maleness.. it drives you insane with desire.");
+	outputText("You eye your penis, then your tail pussy, then back at your penis. The smell of precum dripping from your maleness...You shouldn't...Should you?");
 	outputText("\n\n Without thinking any further you curl your tail between your legs and plug it to your own twitching cock. The pleasure is instantaneous as you instinctively sting yourself, [cock] twitching as you unleash a deluge of cum into your tail. Your [legs] spasm, making you fall to the ground hard. You try to pull yourself off, but your arms aren't responding, your eyes rolling back as the pleasure overwhelms your mind. Your thoughts fade away, replaced by the need. The endless thirst and satiation, cumming and feeding. You let out a worldess moan, your own fluids fueling you with the endless supply of stamina needed to never stop cumming.");
 	outputText("\n\n Even if you tried to stop now, you wouldn't be able to. Your will is nonexistent, your own body betraying you. Your tail instinctively tries to milk your dick to a last drop that will never come. Unable to form coherent thoughts anymore, you become a creature of pure basest instinct. Months and years will pass before ultimately you die of old age... Not that you know, or care, having long lost the ability to process rational thought.");
 	EventParser.gameOver();
