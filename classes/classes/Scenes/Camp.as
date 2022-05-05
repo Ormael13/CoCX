@@ -4784,7 +4784,11 @@ public function rebirthFromBadEnd():void {
 		//Sapphire
 		if (flags[kFLAGS.SAPPHIRE_AFFECTION] == 100)
 			addButton(8, "SapphireFirst", SceneLib.templeofdivine.sapphire.sapphireFirstTime).hint("Sapphire discovers carnal pleasures");
-		else addButtonDisabled(8, "S. First", "Spend some more time with a certain gargoyle. NOT THIS ONE!!!")
+		else addButtonDisabled(8, "S. First", "Spend some more time with a certain gargoyle. NOT THIS ONE!!!");
+		//Venus cock scenes
+		if (flags[kFLAGS.FACTORY_SHUTDOWN] == 2 && flags[kFLAGS.KAIJU_COCK] == 1)
+			addButton(9, "VenusCock", SceneLib.lake.kaiju.kaijuGrowsWangus).hint("Venus discovers her new cock.");
+		else addButtonDisabled(9, "V. Cock", "Overload the factory and meet your old friend at the lake.")
 		//bruh
 		addButtonDisabled(13, "BadEnds", "SH is too lazy to add them");
         addButton(14, "Wake Up", recallWakeUp);
