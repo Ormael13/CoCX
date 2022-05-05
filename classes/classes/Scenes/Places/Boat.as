@@ -65,10 +65,7 @@ public class Boat extends AbstractLakeContent
 			//BUILD LIST OF CHOICES
 			var choice:Array = [0, 1, 2, 3, 4];
 			if (player.hasKeyItem("Fishing Pole") >= 0) choice[choice.length] = 5;
-			if (player.level >= 5 && flags[kFLAGS.KAIJU_DISABLED] == 0) {
-				choice[choice.length] = 6; //moved kaiju here}
-				trace("Bruh");
-			}
+			if (player.level >= 5 && flags[kFLAGS.KAIJU_DISABLED] == 0)  choice[choice.length] = 6; //moved kaiju here
 			//MAKE YOUR CHOICE
 			var selector:Number = choice[rand(choice.length)];
 			//RUN CHOSEN EVENT

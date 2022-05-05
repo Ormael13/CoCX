@@ -26,7 +26,6 @@ public class Kaiju extends AbstractLakeContent {
 	//First encounter
 	//Boat
 	public function kaijuMeeting():void {
-		trace("Bruh2");
 		clearOutput();
 		if(flags[kFLAGS.KAIJU_MEETINGS] == 0) {
 			outputText("Your explorations take you to a small island you haven't seen before.  It appears to be a large, smooth rock hill jutting out of the water.  Do you explore it?");
