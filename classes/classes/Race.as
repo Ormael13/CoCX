@@ -1,5 +1,6 @@
 package classes {
 import classes.BodyParts.*;
+import classes.Scenes.Areas.Forest.KitsuneScene;
 import classes.internals.Utils;
 import classes.internals.race.RaceBuilder;
 import classes.internals.race.RacialRequirement;
@@ -12,10 +13,10 @@ public class Race {
 	// instead of faceType( Face.HUMAN, +1, Face.TROLL, +1)
 	
     private static function ANY(...options:Array):* {
-        return {operator:"any",options:options};
+        return {operator:"any",options:Utils.flatten(options)};
     }
 	private static function NONE(...options:Array):* {
-        return {operator:"none",options:options};
+        return {operator:"none",options:Utils.flatten(options)};
     }
 	private static function LESS_THAN(value:Number):* {
         return {operator:"lt",value:value};
@@ -52,7 +53,7 @@ public class Race {
     public static const DOG:Race = new Race("Dog",12,"dogScore", 4);
 	public static const WOLF: Race =
 			buildRace(13, "wolf")
-					.withBasicScores()
+					.withScores()
 						.faceType(ANY(Face.WOLF, Face.ANIMAL_TOOTHS), +1)
 						.eyeType(
 								Eyes.FENRIR, +3,
@@ -69,9 +70,8 @@ public class Race {
 						.wingType(Wings.NONE, +1)
 						.rearType(RearBody.FENRIR_ICE_SPIKES, +6)
 						.perk(PerkLib.FreezingBreath, +3)
-						.ifScoreAtLeast(1)
-							.hasCockOfType(CockTypesEnum.WOLF, +1)
-					.and()
+						.hasCockOfType(CockTypesEnum.WOLF, +1)
+					.end()
 					.withTier(8, "wolf-boy", "wolf-girl")
 						.tauricName("wolf-taur")
 						.buffs({
@@ -80,7 +80,7 @@ public class Race {
 							"spe.mult": +0.50,
 							"int.mult": -0.10
 						})
-					.and()
+					.end()
 					.withTier(10, "winter wolf")
 						.tauricName("winter wolf-taur")
 						.requireSkinCoatType(Skin.FUR)
@@ -91,7 +91,7 @@ public class Race {
 							"spe.mult": +0.55,
 							"int.mult": -0.10
 						})
-					.and()
+					.end()
 						.withTier(21, "Fenrir")
 						.tauricName("winter wolf-taur")
 						.buffs({
@@ -100,12 +100,148 @@ public class Race {
 							"spe.mult": +1.00,
 							"int.mult": -0.10
 						})
-					.and()
+					.end()
 					.build();
     public static const WEREWOLF:Race = new Race("Werewolf",14, "werewolfScore", 12);
     public static const FOX:Race = new Race("Fox",15,"foxScore", 7);
     public static const FERRET:Race = new Race("Ferret",16,"ferretScore", 4);
-    public static const KITSUNE:Race = new Race("Kitsune",17, "kitsuneScore", 9);
+    public static const KITSUNE:Race = buildRace(17, "kitsune")
+			.withScores()
+				.eyeType(Eyes.FOX, +1)
+				.earType(
+						Ears.FOX, +1,
+						NOT(Ears.FOX), -1
+				)
+				.tailTypeAndCount(Tail.FOX, 1, -7)
+				.tailType(NOT(Tail.FOX), -7)
+				.customScoreRequirement("tail", "2+ fox tails",
+						function (body:BodyData):Boolean {
+							return body.tailType == Tail.FOX && body.tailCount >= 2;
+						},
+						function (body:BodyData):int {
+							return body.tailCount;
+						}
+				)
+				// TODO @aimozg fur or magical tattoo
+				.armType(ANY(Arms.HUMAN,Arms.KITSUNE,Arms.FOX), +1)
+				.legType(
+						ANY(LowerBody.FOX,LowerBody.HUMAN), +1,
+						NONE(LowerBody.FOX,LowerBody.HUMAN), -1
+				)
+				.faceType(
+						ANY(Face.ANIMAL_TOOTHS,Face.HUMAN,Face.FOX), +1,
+						NONE(Face.ANIMAL_TOOTHS,Face.HUMAN,Face.FOX), -1
+				)
+			.end()
+			.withScoresAfter(5)
+				.customRequirement("skin coat", "skin coat other than fur",
+						function (body:BodyData):Boolean {
+							return body.hasCoat && body.skinCoatType != Skin.FUR;
+						}, -2
+				)
+				.skinBaseType(Skin.PLAIN, +1, NOT(Skin.PLAIN), -3)
+				.hairColor(ANY(KitsuneScene.basicKitsuneHair,KitsuneScene.elderKitsuneColors), +1)
+				.customRequirement("vagina","Vag of Holding",
+						function(body:BodyData):Boolean {
+							return body.player.vaginalCapacity() >= 8000;
+						},
+						+1)
+				.perk(PerkLib.StarSphereMastery, +1)
+				.anyPerk([PerkLib.EnlightenedKitsune,PerkLib.CorruptedKitsune],+1)
+				.perk(PerkLib.NinetailsKitsuneOfBalance, +1)
+				.perk(MutationsLib.KitsuneThyroidGland, +1)
+				.perk(MutationsLib.KitsuneThyroidGlandPrimitive, +1)
+				.perk(MutationsLib.KitsuneThyroidGlandEvolved, +1)
+				.perk(MutationsLib.KitsuneParathyroidGlands, +1)
+				.perk(MutationsLib.KitsuneParathyroidGlandsEvolved, +1)
+				.perk(MutationsLib.KitsuneParathyroidGlandsFinalForm, +1)
+				.customRequirement("", "Chimerical Body Semi-Improved Stage + Kitsune Mutation I",
+						function (body:BodyData):Boolean {
+							return (body.player.hasPerk(MutationsLib.KitsuneThyroidGland)
+									|| body.player.hasPerk(MutationsLib.KitsuneParathyroidGlands)
+									) && body.player.hasPerk(PerkLib.ChimericalBodySemiImprovedStage)
+						},
+						+1
+				)
+				.customRequirement("", "Chimerical Body Semi-Superior Stage + Kitsune Mutation II",
+						function (body:BodyData):Boolean {
+							return (body.player.hasPerk(MutationsLib.KitsuneThyroidGlandPrimitive)
+									|| body.player.hasPerk(MutationsLib.KitsuneParathyroidGlandsEvolved)
+									) && body.player.hasPerk(PerkLib.ChimericalBodySemiSuperiorStage)
+						},
+						+1
+				)
+				.customRequirement("", "Chimerical Body Semi-Epic Stage + Kitsune Mutation III",
+						function (body:BodyData):Boolean {
+							return (body.player.hasPerk(MutationsLib.KitsuneThyroidGlandEvolved)
+									|| body.player.hasPerk(MutationsLib.KitsuneParathyroidGlandsFinalForm)
+									) && body.player.hasPerk(PerkLib.ChimericalBodySemiEpicStage)
+						},
+						+1
+				)
+			.end()
+			.withTier(9, "kitsune")
+				.tauricName("kitsune-taur")
+				.require("2+ fox tails", function(body:BodyData):Boolean {
+					return body.tailType == Tail.FOX && body.tailCount >= 2
+				})
+				.buffs({
+					"str.mult": -0.35,
+					"spe.mult": +0.25,
+					"int.mult": +0.60,
+					"wis.mult": +0.75,
+					"lib.mult": +0.30,
+					"sens": +20,
+					"maxsf_mult": +0.20,
+					"maxfatigue_base": +100
+				})
+			.end()
+			.withTier(16, "nine tailed kitsune")
+				.tauricName("nine tailed kitsune-taur")
+				.requirePreviousTier()
+				.requireTailCount(9)
+				.buffs({
+					"str.mult": -0.40,
+					"spe.mult": +0.30,
+					"int.mult": +1.10,
+					"wis.mult": +1.25,
+					"lib.mult": +0.45,
+					"sens": +30,
+					"maxsf_mult": +0.40,
+					"maxfatigue_base": +300
+				})
+			.end()
+			.withTier(21, "nine tailed kitsune of balance")
+				.tauricName("nine tailed kitsune-taur of balance")
+				.requirePreviousTier()
+				.requirePerk(PerkLib.NinetailsKitsuneOfBalance)
+				.buffs({
+					"str.mult": -0.45,
+					"spe.mult": +0.40,
+					"int.mult": +1.25,
+					"wis.mult": +1.60,
+					"lib.mult": +0.80,
+					"sens": +45,
+					"maxsf_mult": +0.65,
+					"maxfatigue_base": +500
+				})
+			.end()
+			.withTier(26, "Inari")
+				.tauricName("Inari-taur")
+				.requirePreviousTier()
+				.buffs({
+					"str.mult": -0.50,
+					"spe.mult": +0.50,
+					"int.mult": +1.40,
+					"wis.mult": +2.00,
+					"lib.mult": +0.60,
+					"sens": +60,
+					"maxsf_mult": +1.00,
+					"maxfatigue_base": +1000
+				})
+			.end()
+			.withBloodline([PerkLib.KitsunesDescendant,PerkLib.BloodlineKitsune])
+			.build()
     public static const HORSE:Race = new Race("Horse",18, "horseScore", 7);
     public static const UNICORN:Race = new Race("Unicorn",19,"unicornScore", 8);
     public static const CENTAUR:Race = new Race("Centaur",20, "centaurScore", 8);
@@ -115,7 +251,7 @@ public class Race {
     public static const BEE:Race = new Race("Bee",24,"beeScore", 17);
     public static const GOBLIN: Race =
 			buildRace(25, "goblin")
-					.withBasicScores()
+					.withScores()
 						.faceType(ANY(Face.HUMAN,Face.ANIMAL_TOOTHS), +1)
 						.earType(
 								Ears.ELFIN, +1,
@@ -133,17 +269,7 @@ public class Race {
 						.allPerks([MutationsLib.NaturalPunchingBagPrimitive, PerkLib.ChimericalBodySemiSuperiorStage], +1)
 						.allPerks([MutationsLib.NaturalPunchingBagEvolved, PerkLib.ChimericalBodySemiEpicStage], +1)
 						.hasVagina(+1)
-						.customScoreRequirement(
-								"",
-								"goblin bloodline",
-								function(body:BodyData):Boolean {
-									return body.player.hasPerk(PerkLib.GoblinsDescendant) || body.player.hasPerk(PerkLib.BloodlineGoblin)
-								},
-								function(body:BodyData):int {
-									return body.player.increaseFromBloodlinePerks();
-								}
-						)
-					.and()
+					.end()
 					.withConditionedScores(
 							function(body:BodyData):Boolean {
 								return body.player.hasPlainSkinOnly();
@@ -156,7 +282,7 @@ public class Race {
 						.armType(Arms.HUMAN, +1)
 						.legType(LowerBody.HUMAN, +1)
 						.noAntennae(+1)
-					.and()
+					.end()
 					.withTier(10, "goblin")
 						.buffs({
 							"str.mult": -0.50,
@@ -164,7 +290,8 @@ public class Race {
 							"int.mult": +1.00,
 							"lib.mult": +0.25
 						})
-					.and()
+					.end()
+					.withBloodline([PerkLib.GoblinsDescendant, PerkLib.BloodlineGoblin])
 					.build();
     public static const DEMON:Race = new Race("Demon",26,"demonScore", 11);
     public static const DEVIL:Race = new Race("Devil",27,"devilkinScore", 11);

@@ -20,8 +20,15 @@ public class RaceBuilder {
 		requirements.push(requirement);
 	}
 	
-	public function withBasicScores():RaceScoreBuilder {
+	public function withScores():RaceScoreBuilder {
 		return new RaceScoreBuilder(this);
+	}
+	public function withScoresAfter(minScore:int):RaceScoreBuilder {
+		return new RaceScoreBuilder(this, null, minScore);
+	}
+	public function withBloodline(bloodlinePerks:/*PerkType*/Array):RaceBuilder {
+		requirements.unshift(new BloodlineRacialRequirement(this.name+" bloodline",bloodlinePerks));
+		return this;
 	}
 	/**
 	 * @param conditionFn `(body:BodyData) => boolean`

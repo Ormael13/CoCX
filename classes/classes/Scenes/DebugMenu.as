@@ -797,22 +797,32 @@ public class DebugMenu extends BaseContent
 			var body:BodyData = player.bodyData();
 			for each (var race:Race in Race.ALL_RACES) {
 				if (!race) continue;
-				var score:int = race.basicScore(body);
-				if (score == 0) continue;
-				outputText("<b>"+race.name+" score: "+race.basicScore(body)+"</b>\n");
+				var score:int = race.totalScore(body);
+				//if (score == 0) continue;
+				outputText("<b>"+race.name+" score: "+score+"</b>\n");
 				score = 0;
+				var minScore:int = 0;
 				for each (var rr:RacialRequirement in race.requirements) {
+					if (rr.minScore != minScore) {
+						outputText("\t<b>After score "+rr.minScore+":</b>\n");
+						minScore = rr.minScore;
+					}
 					outputText("\t");
 					if (rr.check(body, score)) {
-						score += rr.score(body);
-						outputText("[font-green]")
+						var rscore:int = rr.score(body);
+						score += rscore;
+						if (rscore >= 0) {
+							outputText("[font-green]")
+						} else {
+							outputText("[font-red]")
+						}
 					} else {
 						outputText("[font-default]")
 					}
-					outputText(rr.describe(body, true)+"[/font]\n")
+					outputText(rr.describe(body)+"[/font]\n")
 				}
 				if (race.tiers.length>0) {
-					outputText("\t<b>Tiers:</b>")
+					outputText("\t<b>Tiers:</b>\n")
 				}
 				for each(var tier:RaceTier in race.tiers) {
 					outputText("\t");

@@ -3057,11 +3057,12 @@ public class Soulforce extends BaseContent
 	}
 	private function SoulforceRegeneration00():Number {
 		var SFR00:Number = 0;
+		var kitsuneTier:int = player.racialTier(Race.KITSUNE);
 		if (player.kitsuneScore() >= 5) {
-			if (player.kitsuneScore() >= 9 && player.tailType == 13 && player.tailCount >= 2) {
-				if (player.kitsuneScore() >= 16) {
-					if (player.kitsuneScore() >= 21 && player.tailCount == 9 && player.hasPerk(PerkLib.NinetailsKitsuneOfBalance)) {
-						if (player.kitsuneScore() >= 26) SFR00 += 200;
+			if (kitsuneTier >= 1) {
+				if (kitsuneTier >= 2) {
+					if (kitsuneTier >= 3) {
+						if (kitsuneTier >= 4) SFR00 += 200;
 						else SFR00 += 150;
 					}
 					else SFR00 += 80;
@@ -3496,11 +3497,12 @@ public class Soulforce extends BaseContent
 	}
 	public function AmountOfSoulforceRecoveredDuringCultivation(mod:Number):Number {
 		var costPercent:Number = 100;
+		var kitsuneTier:int = player.racialTier(Race.KITSUNE);
 		if (player.kitsuneScore() >= 5) {
-			if (player.kitsuneScore() >= 9 && player.tailType == 13 && player.tailCount >= 2) {
-				if (player.kitsuneScore() >= 16) {
-					if (player.kitsuneScore() >= 21 && player.tailCount == 9 && player.hasPerk(PerkLib.NinetailsKitsuneOfBalance)) {
-						if (player.kitsuneScore() >= 26) costPercent += 1000;
+			if (kitsuneTier >= 1) {
+				if (kitsuneTier >= 2) {
+					if (kitsuneTier >= 3) {
+						if (kitsuneTier >= 4) costPercent += 1000;
 						else costPercent += 650;
 					}
 					else costPercent += 400;

@@ -691,7 +691,7 @@ public class MutationsLib
 					return player.tailType == Tail.FOX && player.tailCount >= 2;
 				}, "2+ fox tails")
 				.requireCustomFunction(function (player:Player):Boolean {
-					return player.kitsuneScore() >= 9;
+					return player.racialTier(Race.KITSUNE) >= 1;
 				}, "Kitsune race");
 				LactaBovinaOvaries.requireOvariesMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.hasVagina();
@@ -889,7 +889,7 @@ public class MutationsLib
 						.requirePerk(DraconicBonesPrimitive);
 				DraconicHeartEvolved.requireLevel(60)
 						.requirePerk(DraconicHeartPrimitive);
-				DraconicLungsEvolved.requireLevel(60)	
+				DraconicLungsEvolved.requireLevel(60)
 						.requirePerk(DraconicLungsPrimitive);
 				DrakeLungsEvolved.requireLevel(60)
 						.requirePerk(DrakeLungsPrimitive);

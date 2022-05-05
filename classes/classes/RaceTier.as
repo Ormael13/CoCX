@@ -11,6 +11,7 @@ public class RaceTier {
 	private var nameFn:Function;
 	public var minScore:int;
 	public var buffs:Object;
+	public var extraBonuses:/*String*/Array;
 	
 	public function RaceTier(
 			tierNumber:int,
@@ -18,7 +19,8 @@ public class RaceTier {
 			nameFn:Function,
 			minScore:int,
 			buffs:Object,
-			requirements:/*RaceTierRequirement*/Array
+			requirements:/*RaceTierRequirement*/Array,
+			extraBonuses:/*String*/Array
 	) {
 		this.tierNumber = tierNumber;
 		this.name = name;
@@ -26,6 +28,7 @@ public class RaceTier {
 		this.minScore = minScore;
 		this.buffs = buffs
 		this.requirements = requirements.slice();
+		this.extraBonuses = extraBonuses.slice();
 	}
 	
 	public function nameFor(body:BodyData):String {
@@ -41,18 +44,20 @@ public class RaceTier {
 	}
 	
 	public function hasBuffs():Boolean {
+		//noinspection LoopStatementThatDoesntLoopJS
 		for (var key:String in buffs) {
 			return true;
 		}
 		return false;
 	}
-	public function describeBuffs(separator:String = ", "):String {
+	public function describeBuffs(separator:String = ", ", withExtraBonuses:Boolean = true):String {
 		var s:Array = [];
 		for (var key:String in buffs) {
 			s.push(StatUtils.explainBuff(key,buffs[key]));
 		}
+		if (withExtraBonuses) Utils.pushAll(s, extraBonuses);
 		if (s.length > 0) {
-			return Utils.mergeSentences(s, separator, separator);
+			return s.join(separator);
 		}
 		return "";
 	}

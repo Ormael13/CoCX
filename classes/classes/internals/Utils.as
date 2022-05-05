@@ -152,6 +152,18 @@ public class Utils extends Object
 			target.push.apply(target, values);
 			return target;
 		}
+		
+		/**
+		 * Returns flattened array with elements from all sub-arrays in a single list.
+		 */
+		public static function flatten(src:Array, dst:Array=null):Array {
+			if (!dst) dst = [];
+			for each(var e:* in src) {
+				if (e is Array) flatten(e, dst);
+				else dst.push(e);
+			}
+			return dst;
+		}
 
 		/**
 		 * @return src.find( el => el[propName] == propValue ) || defaultValue
@@ -424,7 +436,7 @@ public class Utils extends Object
 			return (string.substr(0, 1).toLowerCase() + string.substr(1));
 		}
 
-		public static function mergeSentences(sentences: Array, lastDivider: String = ", and ", divider: String = ", "): String {
+		public static function mergeSentences(sentences: Array, lastDivider: String = ", and ", divider: String = ", ", lowerCase:Boolean=true): String {
 			var mergedString: String = "";
 
 			sentences = sentences.filter(function(element: *, index: int, array: Array): Boolean {
@@ -438,7 +450,7 @@ public class Utils extends Object
 			for (var i: int = 0; i < sentences.length; i++) {
 				var s: String = sentences[i];
 
-				if (i > 0) {
+				if (i > 0 && lowerCase) {
 					s = lowerCaseFirstLetter(s);
 				}
 

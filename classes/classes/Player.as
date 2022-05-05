@@ -3740,39 +3740,6 @@ use namespace CoC;
 						race = "ferret-" + mf("boy", "girl");
 				}
 			}
-			if (TopRace == "kitsune") {
-				if (tailType == 13 && tailCount >= 2 && kitsuneScore() >= 9) {
-					if (TopScore >= 16 && tailCount == 9) {
-						if (TopScore >= 21 && hasPerk(PerkLib.NinetailsKitsuneOfBalance)) {
-							if (TopScore >= 26 && tailCount >= 9) {
-								if (isTaur()) {
-									race = "Inari-taur";
-								} else {
-									race = "Inari";
-								}
-							} else {
-								if (isTaur()) {
-									race = "nine tailed kitsune-taur of balance";
-								} else {
-									race = "nine tailed kitsune of balance";
-								}
-							}
-						} else {
-							if (isTaur()) {
-								race = "nine tailed kitsune-taur";
-							} else {
-								race = "nine tailed kitsune";
-							}
-						}
-					} else {
-						if (isTaur()) {
-							race = "kitsune-taur";
-						} else {
-							race = "kitsune";
-						}
-					}
-				}
-			}
 			if (TopRace == "kitshoo") {
 				if (TopScore >= 6) {
 					if (isTaur()) race = "kitshoo-taur";
@@ -3877,10 +3844,6 @@ use namespace CoC;
 			}
 			if (TopRace == "bee") {
 				race = "bee-morph";
-			}
-			if (TopRace == "goblin") {
-				if (TopScore >= 10)
-					race = "goblin";
 			}
 			if (TopRace == "gremlin") {
 				if (TopScore >= 15) {
@@ -4794,7 +4757,7 @@ use namespace CoC;
 				chimeraCounter++;
 //			if (ferretScore() >= 4)
 //				chimeraCounter++;
-			if (kitsuneScore() >= 9 && tailType == 13 && tailCount >= 2)
+			if (racialTier(Race.KITSUNE, body) >= 1)
 				chimeraCounter++;
 			if (horseScore() >= 7)
 				chimeraCounter++;
@@ -4960,7 +4923,7 @@ use namespace CoC;
 //				grandchimeraCounter++;
 //			if (ferretScore() >= 4)
 //				grandchimeraCounter++;
-			if (kitsuneScore() >= 16 && tailType == 13 && tailCount == 9)
+			if (racialTier(Race.KITSUNE, body) >= 2)
 				grandchimeraCounter++;
 			if (demonScore() >= 16 && hasPerk(PerkLib.Phylactery))
 				grandchimeraCounter++;
@@ -6051,88 +6014,7 @@ use namespace CoC;
 
 		//Determine kitsune Rating
 		public function kitsuneScore():Number {
-			Begin("Player","racialScore","kitsune");
-			var kitsuneCounter:Number = 0;
-			var kitsuneCounter2:Number = 0;
-			if (eyes.type == Eyes.FOX) {
-				kitsuneCounter++;
-				kitsuneCounter2++;
-			}
-			if (ears.type == Ears.FOX) {
-				kitsuneCounter++;
-				kitsuneCounter2++;
-			}
-			//If the character has ears other than fox ears, -1
-			if (ears.type != Ears.FOX)
-				kitsuneCounter--;
-			if (tailType == Tail.FOX && tailCount >= 2) {
-				kitsuneCounter += tailCount;
-				kitsuneCounter2 += tailCount;
-			}
-			if (tailType != Tail.FOX || (tailType == Tail.FOX && tailCount < 2))
-				kitsuneCounter -= 7;
-			if (skin.base.pattern == Skin.PATTERN_MAGICAL_TATTOO || hasFur()) {
-				kitsuneCounter++;
-				kitsuneCounter2++;
-			}
-			if (skin.base.type == Skin.PLAIN)
-				kitsuneCounter ++;
-			if (InCollection(hairColor, KitsuneScene.basicKitsuneHair) || InCollection(hairColor, KitsuneScene.elderKitsuneColors))
-				kitsuneCounter++;
-			if (hasCoat() && !hasCoatOfType(Skin.FUR))
-				kitsuneCounter -= 2;
-			if (skin.base.type != Skin.PLAIN)
-				kitsuneCounter -= 3;
-			if (arms.type == Arms.HUMAN || arms.type == Arms.KITSUNE || arms.type == Arms.FOX) {
-				kitsuneCounter++;
-				kitsuneCounter2++;
-			}
-			if (lowerBody == LowerBody.FOX || lowerBody == LowerBody.HUMAN) {
-				kitsuneCounter++;
-				kitsuneCounter2++;
-			}
-			if (lowerBody != LowerBody.HUMAN && lowerBody != LowerBody.FOX)
-				kitsuneCounter--;
-			if (faceType == Face.ANIMAL_TOOTHS || faceType == Face.HUMAN || faceType == Face.FOX) {
-				kitsuneCounter++;
-				kitsuneCounter2++;
-			}
-			if (faceType != Face.ANIMAL_TOOTHS || faceType != Face.HUMAN && faceType != Face.FOX)
-				kitsuneCounter--;
-			//If the character has a 'vag of holding', +1
-			if (vaginalCapacity() >= 8000)
-				kitsuneCounter++;
-			//When character get Hoshi no tama
-			if (hasPerk(PerkLib.StarSphereMastery))
-				kitsuneCounter++;
-			if (hasPerk(PerkLib.EnlightenedKitsune) || hasPerk(PerkLib.CorruptedKitsune))
-				kitsuneCounter++;
-			if (hasPerk(PerkLib.NinetailsKitsuneOfBalance))
-				kitsuneCounter++;
-			if (hasPerk(MutationsLib.KitsuneThyroidGland))
-				kitsuneCounter++;
-			if (hasPerk(MutationsLib.KitsuneThyroidGlandPrimitive))
-				kitsuneCounter++;
-			if (hasPerk(MutationsLib.KitsuneThyroidGlandEvolved))
-				kitsuneCounter++;
-			if (hasPerk(MutationsLib.KitsuneParathyroidGlands))
-				kitsuneCounter++;
-			if (hasPerk(MutationsLib.KitsuneParathyroidGlandsEvolved))
-				kitsuneCounter++;
-			if (hasPerk(MutationsLib.KitsuneParathyroidGlandsFinalForm))
-				kitsuneCounter++;
-			if ((hasPerk(MutationsLib.KitsuneThyroidGland) || hasPerk(MutationsLib.KitsuneParathyroidGlands)) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
-				kitsuneCounter++;
-			if ((hasPerk(MutationsLib.KitsuneThyroidGlandPrimitive) || hasPerk(MutationsLib.KitsuneParathyroidGlandsEvolved)) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
-				kitsuneCounter++;
-			if ((hasPerk(MutationsLib.KitsuneThyroidGlandEvolved) || hasPerk(MutationsLib.KitsuneParathyroidGlandsFinalForm)) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
-				kitsuneCounter++;
-			if (hasPerk(PerkLib.KitsunesDescendant) || hasPerk(PerkLib.BloodlineKitsune))
-				kitsuneCounter += increaseFromBloodlinePerks();
-			if (kitsuneCounter2 < 5) kitsuneCounter = kitsuneCounter2;
-			kitsuneCounter = finalRacialScore(kitsuneCounter, Race.KITSUNE);
-			End("Player","racialScore");
-			return kitsuneCounter;
+			return racialScore(Race.KITSUNE);
 		}
 
 		//Determine Dragon Rating
@@ -11468,45 +11350,8 @@ use namespace CoC;
 					maxLibCap2 += 100;
 				}
 			}//+20/10-20
-			if (kitsuneScore() >= 9 && tailType == 13 && tailCount >= 2) {
-				if (kitsuneScore() >= 16 && tailCount == 9) {
-					if (kitsuneScore() >= 21 && hasPerk(PerkLib.NinetailsKitsuneOfBalance)) {
-						if (kitsuneScore() >= 26) {
-							maxStrCap2 -= 50;
-							maxSpeCap2 += 50;
-							maxIntCap2 += 140;
-							maxWisCap2 += 200;
-							maxLibCap2 += 110;
-							currentSen += 60;
-						}
-						else {
-							maxStrCap2 -= 45;
-							maxSpeCap2 += 40;
-							maxIntCap2 += 125;
-							maxWisCap2 += 160;
-							maxLibCap2 += 80;
-							currentSen += 45;
-						}
-					}
-					else {
-						maxStrCap2 -= 40;
-						maxSpeCap2 += 30;
-						maxIntCap2 += 110;
-						maxWisCap2 += 125;
-						maxLibCap2 += 45;
-						currentSen += 30;
-					}
-				}
-				else {
-					maxStrCap2 -= 35;
-					maxSpeCap2 += 25;
-					maxIntCap2 += 60;
-					maxWisCap2 += 75;
-					maxLibCap2 += 30;
-					currentSen += 20;
-				}
-			}//+50/50-60
-		/*	if (kitshooScore() >= 6) {
+			/*
+			if (kitshooScore() >= 6) {
 				if (tailType == 26) {
 					if (tailCount == 1) {
 						maxStrCap2 -= 2;
@@ -11525,7 +11370,8 @@ use namespace CoC;
 					}
 				}
 			}
-		*/	if (beeScore() >= 17) {
+			*/
+			if (beeScore() >= 17) {
 				maxTouCap2 += 80;
 				maxSpeCap2 += 80;
 				maxIntCap2 += 50;
@@ -12740,6 +12586,10 @@ use namespace CoC;
 			}
 			if (!hasPerk(PerkLib.AbsoluteStrength) && statStore.hasBuff('Absolute Strength')) statStore.removeBuffs('Absolute Strength');
 			var buffs:Object = calcRacialBuffs();
+			var ngScaledRacialBuffs:/*String*/Array = ["maxfatigue_base"];
+			for each(var buffName:String in ngScaledRacialBuffs) {
+				if (buffName in buffs) buffs[buffName] *= (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
+			}
 			statStore.replaceBuffObject(buffs, "Racials", {text:"Racials"});
 		}
 

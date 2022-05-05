@@ -6,9 +6,12 @@ import classes.Scenes.NPCs.Forgefather;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.SceneLib;
 import classes.internals.Utils;
+import classes.internals.race.RacialRequirement;
 
 import coc.xxc.BoundStory;
 import coc.xxc.Story;
+
+import flash.events.TextEvent;
 
 public class PlayerAppearance extends BaseContent {
 
@@ -960,7 +963,7 @@ public class PlayerAppearance extends BaseContent {
 		return Face.getAppearanceDescription(player);
 	}
 
-	public function RacialScores():void {
+	public function RacialScores(clickedRace:Race = null):void {
 		var body:BodyData = player.bodyData();
 		var score:int;
 		var tempStr:int;
@@ -987,6 +990,78 @@ public class PlayerAppearance extends BaseContent {
 		
 		clearOutput();
 		outputText("<b>Current racial scores (and bonuses to stats if applicable):</b>\n");
+		
+		for each(var race:Race in Race.AllRacesByName) {
+			// skip "old" races
+			if (race.requirements.length == 0 || race.tiers.length == 0) continue;
+			
+			outputText("\n");
+			var rscore:int     = race.totalScore(body);
+			var rtier:RaceTier = race.getTier(body, rscore);
+			
+			if (rtier) {
+				outputText("[font-blue]");
+			} else if (rscore > 0) {
+				outputText("[font-green]");
+			} else {
+				outputText("[font-red]");
+			}
+			outputText('<u><a href="event:'+race.id+'">'+
+					Utils.capitalizeFirstLetter(rtier?rtier.nameFor(body):race.name)+"</a></u>");
+			outputText(": "+rscore);
+			outputText("[/font]");
+			if (rtier) {
+				if (rtier.hasBuffs()) {
+					outputText(" (");
+					outputText(rtier.describeBuffs());
+					outputText(")");
+				}
+				outputText("[/font]");
+			}
+			if (race == clickedRace) {
+				flushOutputTextToGUI();
+				mainView.mainText.scrollV = mainView.mainText.textHeight;
+				score = 0;
+				var minScore:int = 0;
+				outputText("\n");
+				for each (var rr:RacialRequirement in race.requirements) {
+					if (rr.minScore != minScore) {
+						outputText("\t<b>After score "+rr.minScore+":</b>\n");
+						minScore = rr.minScore;
+					}
+					outputText("\t");
+					if (rr.check(body, score)) {
+						rscore = rr.score(body);
+						score += rscore;
+						if (rscore >= 0) {
+							outputText("[font-green]")
+						} else {
+							outputText("[font-red]")
+						}
+					} else {
+						outputText("[font-default]")
+					}
+					outputText(rr.describe(body)+"[/font]\n")
+				}
+				if (race.tiers.length>0) {
+					outputText("\t<b>Tiers:</b>\n")
+				}
+				for each(var tier:RaceTier in race.tiers) {
+					outputText("\t<b>");
+					if (tier.check(body, score)) {
+						outputText("[font-green]"+tier.nameFor(body)+"[/font]")
+					} else {
+						outputText(tier.nameFor(body))
+					}
+					outputText(" ("+tier.minScore+") </b>");
+					outputText(tier.describeBuffs());
+					outputText("\n");
+				}
+			}
+		}
+		mainView.linkHandler = function(event:String):void {
+			RacialScores(Race.ALL_RACES[parseInt(event)]);
+		}
 		//Druid fusions
 		if (player.hasPerk(PerkLib.ElementalBody)) {
 			if (player.perkv1(PerkLib.ElementalBody) == 1) {
@@ -1012,29 +1087,6 @@ public class PlayerAppearance extends BaseContent {
 				if (player.perkv2(PerkLib.ElementalBody) == 2) outputText("\n<font color=\"#0000a0\">Adept Undine: +100% to Str racial multi, +75% to Tou racial multi, +125% to Wis racial multi, +10 natural armor/magic resistance (scal), +20% Spell/Soulskill power +10% Evasion</font>");
 				if (player.perkv2(PerkLib.ElementalBody) == 3) outputText("\n<font color=\"#0000a0\">Greater Undine: +125% to Str racial multi, +100% to Tou racial multi, +150% to Wis racial multi, +15 natural armor/magic resistance (scal), +30% Spell/Soulskill power, +15% Evasion</font>");
 				if (player.perkv2(PerkLib.ElementalBody) == 4) outputText("\n<font color=\"#0000a0\">Primordial Undine: +150% to Str racial multi, +125% to Tou racial multi, +175% to Wis racial multi, +20 natural armor/magic resistance (scal), +40% Spell/Soulskill power, +20% Evasion</font>");
-			}
-		}
-		for each(var race:Race in Race.AllRacesByName) {
-			// skip "old" races
-			if (race.requirements.length == 0 || race.tiers.length == 0) continue;
-			
-			var rscore:int     = race.totalScore(body);
-			var rtier:RaceTier = race.getTier(body, rscore);
-			if (rtier) {
-				outputText("\n[font-blue]" +
-						Utils.capitalizeFirstLetter(rtier.nameFor(body)) + ": " + rscore
-				);
-				if (rtier.hasBuffs()) {
-					outputText(" (");
-					outputText(rtier.describeBuffs());
-					outputText(")");
-				}
-				outputText("[/font]");
-			} else {
-				outputText((rscore > 0 ? "\n[font-green]" : "[font-red]") +
-						Utils.capitalizeFirstLetter(race.name) + ": " + rscore +
-						"[/font]"
-				);
 			}
 		}
 		//Alicorn
@@ -1503,18 +1555,6 @@ public class PlayerAppearance extends BaseContent {
 		//if (player.kitshooScore() >= 6) outputText("\n<font color=\"#0000a0\">Kitshoo: " + player.kitshooScore() + "</font>");
 		//else if (player.kitshooScore() >= 1) outputText("\n<font color=\"#008000\">Kitshoo: " + player.kitshooScore() + "</font>");
 		//else if (player.kitshooScore() < 1) outputText("\n<font color=\"#ff0000\">Kitshoo: 0</font>");
-		//Kitsune
-		if (player.kitsuneScore() >= 9 && player.tailType == Tail.FOX && player.tailCount >= 2) {
-			if (player.kitsuneScore() >= 16 && player.tailCount == 9) {
-				if (player.kitsuneScore() >= 21 && player.hasPerk(PerkLib.NinetailsKitsuneOfBalance)) {
-					if (player.kitsuneScore() >= 26 && player.tailCount >= 9) outputText("\n<font color=\"#0000a0\">Inari: " + player.kitsuneScore() + " (-50% to Str racial multi, +50% to Spe racial multi, +140% to Int racial multi, +200% to Wis racial multi, +110% to Lib racial multi, +60 to min Sens, +" + (1000 * (1 + player.newGamePlusMod())) + " max Fatigue, +100% max Soulforce)</font>");
-					else outputText("\n<font color=\"#0000a0\">Nine Tails Kitsune of Balance: " + player.kitsuneScore() + " (-45% to Str racial multi, +40% to Spe racial multi, +125% to Int racial multi, +160% to Wis racial multi, +80% to Lib racial multi, +45 to min Sens, +" + (500 * (1 + player.newGamePlusMod())) + " max Fatigue, +65% max Soulforce)</font>");
-				}
-				else outputText("\n<font color=\"#0000a0\">Nine Tails Kitsune: " + player.kitsuneScore() + " (-40% to Str racial multi, +30% to Spe racial multi, +110% to Int racial multi, +125% to Wis racial multi, +45% to Lib racial multi, +30 to min Sens, +" + (300 * (1 + player.newGamePlusMod())) + " max Fatigue, +40% max Soulforce)</font>");
-			} else outputText("\n<font color=\"#0000a0\">Kitsune: " + player.kitsuneScore() + " (-35% to Str racial multi, +25% to Spe racial multi, +60% to Int racial multi, +75% to Wis racial multi, +30% to Lib racial multi, +20 to min Sens, +" + (100 * (1 + player.newGamePlusMod())) + " max Fatigue, +20% max Soulforce)</font>");
-		}
-		else if (player.kitsuneScore() >= 1) outputText("\n<font color=\"#008000\">Kitsune: " + player.kitsuneScore() + "</font>");
-		else if (player.kitsuneScore() < 1) outputText("\n<font color=\"#ff0000\">Kitsune: 0</font>");
 		//Lizard
 		if (player.lizardScore() >= 8) outputText("\n<font color=\"#0000a0\">Lizard-morph: " + player.lizardScore() + " (+70% to Tou racial multi, +50% to Int racial multi, +" + (100 * (1 + player.newGamePlusMod())) + " max Fatigue)</font>");
 		else if (player.lizardScore() >= 1) outputText("\n<font color=\"#008000\">Lizard-morph: " + player.lizardScore() + "</font>");

@@ -617,16 +617,6 @@ import classes.CoC;
 			if (game.player.dragonScore() >= 24) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.dragonScore() >= 32) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.foxScore() >= 7) max += (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (game.player.kitsuneScore() >= 9 && game.player.tailType == 13 && game.player.tailCount >= 2) {
-				max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-				if (game.player.kitsuneScore() >= 16 && game.player.tailCount == 9) {
-					max += (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-					if (game.player.kitsuneScore() >= 21 && hasPerk(PerkLib.NinetailsKitsuneOfBalance)) {
-						max += (200 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-						if (game.player.kitsuneScore() >= 26) max += (500 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-					}
-				}
-			}
 			if (game.player.lizardScore() >= 8) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (game.player.unicornScore() >= 10) max += (20 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (hasPerk(PerkLib.EromancyBeginner)) max += Math.round(lib);
@@ -707,16 +697,6 @@ import classes.CoC;
 			if (game.player.alicornScore() >= 12) multimax += 0.2;
 			if (game.player.angelScore() >= 11) multimax += 1;
 			if (game.player.demonScore() >= 11) multimax -= 0.8;
-			if (game.player.kitsuneScore() >= 9 && game.player.tailType == 13 && game.player.tailCount >= 2) {
-				multimax += 0.2;
-				if (game.player.kitsuneScore() >= 16 && game.player.tailCount == 9) {
-					multimax += 0.2;
-					if (game.player.kitsuneScore() >= 21 && hasPerk(PerkLib.NinetailsKitsuneOfBalance)) {
-						multimax += 0.25;
-						if (game.player.kitsuneScore() >= 26) multimax += 0.35;
-					}
-				}
-			}
 			if (isGargoyle() && Forgefather.material == "marble")
 			{
 				if (Forgefather.refinement == 1) multimax += (.15);

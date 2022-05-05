@@ -12,6 +12,16 @@ public class RaceUtils {
 	 * Functions creating functions for `RacialRequirement`s
 	 *****************************************************/
 	
+	// Most racial requirements are made through function composition
+	// Example.
+	// "fox ears" is composed of 2 parts:
+	// - argument function that returns ear type
+	// - operator function that checks that argument is "fox"
+	//
+	// argFn = (body) => body.earType
+	// opFn = (value) => value==Ears.FOX
+	// checkFn = (body) => opFn(argFn(body)) = body.earType==Ears.FOX
+	
 	/**
 	 * Parses operator definition.
 	 * Examples:
@@ -60,7 +70,12 @@ public class RaceUtils {
 					var anyOptions:Array = op["options"] as Array;
 					if (!anyOptions) throw new Error(errorContext+"Invalid operator");
 					operatorFn = none ? operatorNoneFn(anyOptions) : operatorAnyFn(anyOptions);
-					name = (none?"not ":"") + Utils.mergeSentences(anyOptions.map(Utils.varargify(nameProvider))," or ");
+					name = (none?"neither ":"") +
+							Utils.mergeSentences(
+									anyOptions.map(Utils.varargify(nameProvider)),
+									(none?" nor ":" or "),
+									", ", false
+							);
 					break;
 				case "lt":
 				case "lte":
@@ -177,7 +192,7 @@ public class RaceUtils {
 		}
 	}
 	/**
-	 * @return `(body) => body.player.hasPerk(ptype)`
+	 * @return `(body) => ptypes.every(ptype=>body.player.hasPerk(ptype))`
 	 */
 	public static function hasAllPerksFn(ptypes:/*PerkType*/Array):Function {
 		return function (body:BodyData):Boolean {
@@ -185,6 +200,17 @@ public class RaceUtils {
 				if (!body.player.hasPerk(i)) return false;
 			}
 			return true;
+		}
+	}
+	/**
+	 * @return `(body) => ptypes.some(ptype=>body.player.hasPerk(ptype))`
+	 * */
+	public static function hasAnyPerkFn(ptypes:/*PerkType*/Array):Function {
+		return function (body:BodyData):Boolean {
+			for each(var i:PerkType in ptypes) {
+				if (body.player.hasPerk(i)) return true;
+			}
+			return false;
 		}
 	}
 	/**

@@ -1,17 +1,22 @@
 package classes.internals.race {
 import classes.BodyData;
+import classes.PerkType;
 import classes.RaceTier;
+import classes.internals.Utils;
 
 public class RaceTierBuilder {
 	public var tierNumber: int;
 	public var raceBuilder:RaceBuilder;
 	public var minScore:int;
-	public var maleName:String;
-	public var maleTauricName:String;
-	public var femaleName:String;
-	public var femaleTauricName:String;
+	public var name:String;
+	/**
+	 * (body)=>String
+	 */
+	public var nameFn:Function;
 	public var buffObj:Object = {};
 	public var requirements:/*RaceTierRequirement*/Array = [];
+	public var requiresPreviousTier:Boolean = false;
+	public var extraBonuses:/*String*/Array = [];
 	
 	public function RaceTierBuilder(
 			raceBuilder: RaceBuilder,
@@ -23,20 +28,36 @@ public class RaceTierBuilder {
 		this.raceBuilder = raceBuilder;
 		this.tierNumber = tierNumber;
 		this.minScore = minScore;
-		this.maleName = maleName;
-		this.maleTauricName = maleName;
-		this.femaleName = femaleName;
-		this.femaleTauricName = femaleName;
+		this.name = maleName;
+		this.nameFn = function(body:BodyData):String {
+			return body.looksFemale ? femaleName : maleName;
+		}
 	}
 	
 	public function tauricName(name:String, femaleName:String=""):RaceTierBuilder {
-		this.maleTauricName = name;
-		this.femaleTauricName = femaleName || name;
+		femaleName ||=name;
+		var oldNameFn:Function = this.nameFn;
+		this.nameFn = function(body:BodyData):String {
+			if (body.isTaur) return body.looksFemale ? name : femaleName;
+			return oldNameFn(body);
+		}
+		return this;
+	}
+	
+	/**
+	 * @param fn `function (body:BodyData):String` returning gendered/tauric/otherwise special name
+	 */
+	public function customNamingFunction(fn:Function):RaceTierBuilder {
+		this.nameFn = fn;
 		return this;
 	}
 	
 	public function buffs(buffObject:Object):RaceTierBuilder {
 		this.buffObj = buffObject;
+		return this;
+	}
+	public function withExtraBonuses(...bonusDescriptions:/*String*/Array):RaceTierBuilder {
+		Utils.pushAll(extraBonuses,bonusDescriptions);
 		return this;
 	}
 	
@@ -48,24 +69,44 @@ public class RaceTierBuilder {
 		addSlotRequirement(BodyData.SLOT_SKIN_COAT_COLOR, color);
 		return this;
 	}
+	public function requireTailType(type:*):RaceTierBuilder {
+		addSlotRequirement(BodyData.SLOT_TAIL_TYPE, type);
+		return this;
+	}
+	public function requireTailCount(count:*):RaceTierBuilder {
+		addSlotRequirement(BodyData.SLOT_TAIL_COUNT, count);
+		return this;
+	}
+	public function requirePerk(perk:PerkType):RaceTierBuilder {
+		requirements.push(new RaceTierRequirement(
+				perk.name+" perk",
+				RaceUtils.hasPerkFn(perk)
+		));
+		return this;
+	}
+	public function requirePreviousTier():RaceTierBuilder {
+		requiresPreviousTier = true;
+		return this;
+	}
 	
-	public function and():RaceBuilder {
-		var nameFunction:Function;
-		var names:/*String*/Array = [maleName,femaleName,maleTauricName,femaleTauricName];
-		nameFunction = function(body:BodyData):String {
-			if (!body.isTaur) {
-				return names[body.looksMale?0:1]
-			} else {
-				return names[body.looksMale?2:3]
-			}
-		}
+	/**
+	 * @param checkFn (body:BodyData)=>Boolean
+	 * @return
+	 */
+	public function require(name:String, checkFn:Function):RaceTierBuilder {
+		requirements.push(new RaceTierRequirement(name,checkFn));
+		return this;
+	}
+	
+	public function end():RaceBuilder {
 		raceBuilder.tiers.push(new RaceTier(
 				tierNumber,
-				maleName,
-				nameFunction,
+				name,
+				nameFn,
 				minScore,
 				buffObj,
-				requirements
+				requirements,
+				extraBonuses
 		))
 		return raceBuilder;
 	}
@@ -89,7 +130,7 @@ public class RaceTierBuilder {
 		);
 		requirements.push(new RaceTierRequirement(
 				operatorObject.name,
-				operatorObject.check
+				checkFn
 		));
 	}
 	

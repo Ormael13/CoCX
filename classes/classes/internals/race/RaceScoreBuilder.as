@@ -49,9 +49,9 @@ public class RaceScoreBuilder {
 		addRequirement(
 				RacialRequirement.joinAnd(
 						"eyes",
-						false,
-						slotRequirement(BodyData.SLOT_EYE_TYPE, type, score),
-						slotRequirement(BodyData.SLOT_EYE_COLOR, color, score)
+						" ",
+						slotRequirement(BodyData.SLOT_EYE_COLOR, color, score, "$name"),
+						slotRequirement(BodyData.SLOT_EYE_TYPE, type, score)
 				)
 		)
 		return next;
@@ -99,7 +99,7 @@ public class RaceScoreBuilder {
 	public function skinPlainOnly(score:int):RaceScoreBuilder {
 		return customRequirement(
 				"skin",
-				"plain",
+				"plain skin",
 				function(body:BodyData):Boolean {
 					return body.player.hasPlainSkinOnly();
 				},
@@ -113,6 +113,17 @@ public class RaceScoreBuilder {
 	public function noTail(score:int):RaceScoreBuilder {
 		return tailType(Tail.NONE, score);
 	}
+	public function tailTypeAndCount(type:*, count:*, score:int):RaceScoreBuilder {
+		addRequirement(
+				RacialRequirement.joinAnd(
+						"tail",
+						" ",
+						slotRequirement(BodyData.SLOT_TAIL_COUNT, count, score, "$name"),
+						slotRequirement(BodyData.SLOT_TAIL_TYPE, type, score)
+				)
+		)
+		return next;
+	}
 	public function wingType(type1:*, score1:int, ...rest:Array):RaceScoreBuilder {
 		addSlotRequirement(BodyData.SLOT_WING_TYPE, type1, score1, rest);
 		return next;
@@ -124,7 +135,7 @@ public class RaceScoreBuilder {
 	public function hasCockOfType(type:CockTypesEnum, score:int):RaceScoreBuilder {
 		addRequirement(new RacialRequirement(
 				"cock",
-				type.DisplayName,
+				type.DisplayName+" cock",
 				RaceUtils.hasCockOfTypeFn(type),
 				score,
 				minScore
@@ -134,7 +145,7 @@ public class RaceScoreBuilder {
 	public function hasVagina(score: int): RaceScoreBuilder {
 		addRequirement(new RacialRequirement(
 				"vagina",
-				"has",
+				"has vagina",
 				RaceUtils.hasVaginaFn(true),
 				score,
 				minScore
@@ -159,6 +170,22 @@ public class RaceScoreBuilder {
 					return e.name();
 				}).join(", ")+" perks",
 				RaceUtils.hasAllPerksFn(perks),
+				score,
+				minScore
+		))
+		return next;
+	}
+	public function anyPerk(perks:/*PerkType*/Array, score:int):RaceScoreBuilder {
+		var names:/*String*/Array = perks.map(function (e:PerkType, ...rest:Array):String {
+			return e.name();
+		});
+		var name:String;
+		if (perks.length <= 3) name = names.join(" or ") + " perk";
+		else name = "any of " + names.join(", ") + " perks";
+		addRequirement(new RacialRequirement(
+				"",
+				name,
+				RaceUtils.hasAnyPerkFn(perks),
 				score,
 				minScore
 		))
@@ -204,11 +231,7 @@ public class RaceScoreBuilder {
 		return next;
 	}
 	
-	public function ifScoreAtLeast(minScore:int):RaceScoreBuilder {
-		return new RaceScoreBuilder(raceBuilder, this, minScore);
-	}
-	
-	public function and():RaceBuilder {
+	public function end():RaceBuilder {
 		return raceBuilder;
 	}
 	
@@ -236,14 +259,14 @@ public class RaceScoreBuilder {
 		for each (var req:* in requirements) {
 			addRequirement(new RacialRequirement(
 					slotName,
-					req.name,
+					req.name+" "+slotName,
 					req.check,
 					req.score,
 					minScore
 			));
 		}
 	}
-	private function slotRequirement(slot:int, type:*, score:int):RacialRequirement {
+	private function slotRequirement(slot:int, type:*, score:int, namePattern:String = "$name $slot"):RacialRequirement {
 		var slotName:String = BodyData.Slots[slot].name;
 		var nameFn:Function = BodyData.Slots[slot].nameFn;
 		var argumentFn:Function = RaceUtils.argumentSlotFn(slot);
@@ -254,7 +277,7 @@ public class RaceScoreBuilder {
 		);
 		return new RacialRequirement(
 				slotName,
-				operatorObject.name,
+				namePattern.replace(/\$name/,operatorObject.name).replace(/\$slot/,slotName),
 				RaceUtils.composeOpArg(argumentFn, operatorObject.operatorFn),
 				score,
 				minScore
