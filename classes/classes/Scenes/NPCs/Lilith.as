@@ -18,12 +18,62 @@ import classes.internals.*;
 
 	public class Lilith extends Monster
 	{
+		public function castEnergyProjectionLilith():void {
+			outputText("Her eyes begins to glow with a harsh radiance as energy gathers around her. In a flash, you're struck by a large cross-shaped explosion. ");
+			soulforce -= 20;//soulskillCostEnergyProjection();
+			var damage:Number = eBaseIntelligenceDamage();
+			damage += eBaseWisdomDamage();
+			//damage *= SoulskillMod();
+			if (hasStatusEffect(StatusEffects.TrueFormAngel)) damage *= 3;
+			damage = Math.round(damage);
+			player.takeFireDamage(damage, true);
+		}
 		
+		private function lilithInfernalFlare():void {
+			mana -= 50;
+			var damage:Number = 0;
+			damage += eBaseIntelligenceDamage() * 4;
+			if (player.cor >= 66) damage = Math.round(damage * 1.0);
+			else if (player.cor >= 50) damage = Math.round(damage * 1.1);
+			else if (player.cor >= 25) damage = Math.round(damage * 1.2);
+			else if (player.cor >= 10) damage = Math.round(damage * 1.3);
+			else damage = Math.round(damage * 1.4);
+			if (hasStatusEffect(StatusEffects.Maleficium)) damage *= 2;
+			outputText("Goth girl moves her hands in air tracing complicated arcane signs, as a purple flame surges under you, searing your flesh. ");
+			player.takeFireDamage(damage, true);
+			if (player.hasStatusEffect(StatusEffects.BurnDoT)) player.addStatusValue(StatusEffects.BurnDoT, 1, 1);
+			else player.createStatusEffect(StatusEffects.BurnDoT,5,0.05,0,0);
+			statScreenRefresh();
+			outputText("\n");
+		}
+		
+		private function lilithLustStrike():void {
+			outputText("Goth girl start drawing symbols in the air toward you.");
+			var lustDmg:Number = this.lust / 10 + this.lib / 10 + this.inte / 10 + this.wis / 10 + this.sens / 10;
+			lustDmg = Math.round(lustDmg);
+			player.dynStats("lus", lustDmg, "scale", false);
+			outputText(" <b>(<font color=\"#ff00ff\">" + lustDmg + "</font>)</b>");
+		}
+		
+		override protected function performCombatAction():void
+		{
+			var choice:Number = rand(3);
+			if (choice == 0) lilithLustStrike();
+			if (choice == 1) {
+				if (soulforce >= 20) castEnergyProjectionLilith();
+				else eAttack();
+			}
+			if (choice == 2) {
+				if (mana >= 50) lilithInfernalFlare();
+				else eAttack();
+			}
+			if (choice == 3) eAttack();
+		}
 		
 		override public function get long():String
 		{
 			var str:String = "";
-			str += "You're fighting pale skinned woman with snow black hair. Even her eyes or lips are pitch black. And you would mistake her for normal human woman if not noticable goat-like horns, small bat wings or arrow tipped tail.";// A powerful pure aura emanates from her.
+			str += "You're fighting pale skinned woman with snow black hair. Even her eyes or lips are pitch black. And you would mistake her for normal human woman wearing catsuit if not noticable goat-like horns, small bat wings or arrow tipped tail.";// A powerful pure aura emanates from her.
 			if (hasStatusEffect(StatusEffects.ATranscendentSoulField))
 			{
 				str += "\n\n<i>From time to time you can notice faint glimmers of orange protective field surrounding her.";
@@ -79,12 +129,13 @@ import classes.internals.*;
 			this.wings.desc = "tiny hidden";
 			this.tailType = Tail.DEMONIC;
 			this.lowerBody = LowerBody.DEMONIC_HIGH_HEELS;
+			this.createStatusEffect(StatusEffects.ATranscendentSoulField, 10, 10, 0, 0);//X times less dmg, +X lvl diff bonus
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Phylactery, 0, 0, 0, 0);
 			this.createPerk(PerkLib.OverMaxHP, 18, 0, 0, 0);//v1 = enemy lvl
 			this.createPerk(PerkLib.DieHardHP, 10, 0, 0, 0);
 			this.createPerk(PerkLib.MonsterRegeneration, 1, 0, 0, 0);
-			//this.createPerk(PerkLib.JobSoulCultivator, 0, 0, 0, 0);
+			this.createPerk(PerkLib.JobSoulCultivator, 0, 0, 0, 0);
 			//this.createPerk(PerkLib.InsightfulResourcesI, 0, 0, 0, 0);
 			checkMonster();
 		}

@@ -273,12 +273,12 @@ package classes.Scenes
 			//outputText("-True Angel enemies getting innate Diehard effect. It would be % one with number matching enemy current lvl.\n");
 			outputText("-As Kaiba warned on some items been temporal offer ended. Inari Blessed Kimono, Tamamo no Mae Cursed Kimono, Oni Noble kimono, Oni Tyrant kimono, Centaur Blackguard Armor went into Celess/Tyrantia legendaries upgrade menu. Black / Blue / Purple / Red / White Kimono to Inari Blessed Kimono / Tamamo no Mae Cursed Kimono, ");
 			outputText("Sakura Petal Kimono to Oni Noble kimono / Oni Tyrant kimono and Centaur Armor to Centaur Blackguard Armor.\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Moved Quest items bag button one menu higher (still the same place in menu layout but one menu earlier). Dummy training button was moved to middle of the bottom row.\n");
+			outputText("-New mutation perk: Kitsune Parathyroid Glands. Req. having Enlightened/Corrupted Kitsune perk, 2+ fox tails and free Parathyroid glands mutation slot. Effects: Lower cooldowns for Illusion and Terror by three turns, +5% spe multi, +5% inte multi\n");
+			outputText("-New mutation perk: Kitsune Parathyroid Glands (Primitive). Req. having Kitsune Parathyroid Glands perk. Effects: Increase mana and fatigue recovery. Decrease by 50% fatigue cost of Illusion and Terror specials, +5% spe multi, +10% inte multi\n");
+			outputText("-New mutation perk: Kitsune Parathyroid Glands (Evolved). Req. having Kitsune Parathyroid Glands (Primitive) perk. Effects: Grant bonus mana regeneration depending on your Star Sphere rank. Increase speed debuff of Terror to 70, increase evasion boost from Illusion to 30%, +5% spe multi, +20% inte multi\n");
+			outputText("-Kitsune Glands perks stat bonuses are changed to: +5% spe multi, +5% wis multi, +5% spe multi, +10% wis multi, +5% spe multi, +20% wis multi. They won't boost mana recovery anymore and sf recovery boosts are 33% stronger, they won't affect Ilusion/Terror specials. 1st perk would lower by 50% base cost of fox fire specials.\n");
+			outputText("-Monsters max wrath and soulforce would increase with each lvl (+5 per lvl for both).\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

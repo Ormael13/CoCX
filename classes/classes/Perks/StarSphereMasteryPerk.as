@@ -13,8 +13,12 @@ package classes.Perks
 		
 		override public function desc(params:PerkClass = null):String
 		{
-			if (player.hasPerk(MutationsLib.KitsuneThyroidGlandEvolved)) return "Regenerate " + params.value1 + " fatigue, " + (params.value1 * 2) + " soulforce and " + (params.value1 * 2) + " mana every round. Increase Fox Fire damage by " + (params.value1 * 5) + "%. (Rank: " + params.value1 + ")";
-			else return "Regenerate " + params.value1 + " fatigue every round and increase Fox Fire damage by " + (params.value1 * 5) + "%. (Rank: " + params.value1 + ")";
+			var fr:Number = 1;
+			var sr:String = "";
+			var mr:String = "";
+			if (player.hasPerk(MutationsLib.KitsuneThyroidGlandEvolved)) sr = ", " + (params.value1 * 4) + " soulforce";
+			if (player.hasPerk(MutationsLib.KitsuneParathyroidGlandsEvolved)) mr = ", " + (params.value1 * 3) + " mana";
+			return "Regenerate " + (params.value1 * fr) + " fatigue"+sr+mr+" every round. Increase Fox Fire damage by " + (params.value1 * 5) + "%. (Rank: " + params.value1 + ")";
 		}
 		
 		public function StarSphereMasteryPerk() 

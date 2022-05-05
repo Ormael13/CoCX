@@ -3828,7 +3828,7 @@ public class Creature extends Utils
 			if (game.player.hasKeyItem("Nitro Boots") >= 0 && game.player.tallness < 48 && game.player.isBiped()) chance += 30;
 			if (hasPerk(PerkLib.JunglesWanderer)) chance += 35;
 			if (hasStatusEffect(StatusEffects.Illusion)) {
-				if (hasPerk(MutationsLib.KitsuneThyroidGlandEvolved)) chance += 20;
+				if (hasPerk(MutationsLib.KitsuneParathyroidGlandsEvolved)) chance += 30;
 				else chance += 10;
 			}
 			if (hasStatusEffect(StatusEffects.HurricaneDance)) chance += 25;
@@ -3915,7 +3915,7 @@ public class Creature extends Utils
 			if (hasPerk(PerkLib.Unhindered) && game.player.armor.hasTag(ItemTags.AGILE) && (roll < 10)) return "Unhindered";
 			if (hasPerk(PerkLib.JunglesWanderer) && (roll < 35)) return "Jungle's Wanderer";
 			if (hasStatusEffect(StatusEffects.Illusion)) {
-				if (hasPerk(MutationsLib.KitsuneThyroidGlandEvolved) && roll < 20) return "Illusion";
+				if (hasPerk(MutationsLib.KitsuneParathyroidGlandsEvolved) && roll < 30) return "Illusion";
 				else if (roll < 10) return "Illusion";
 			}
 			if (hasStatusEffect(StatusEffects.Flying) && (roll < flyeavsion)) return "Flying";

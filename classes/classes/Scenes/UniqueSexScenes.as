@@ -781,20 +781,22 @@ package classes.Scenes
 		}
 
 		public function jiangshiDrainHimMinotaurs():void {
-			clearOutput();
+			clearOutput();//
 			outputText("The minotaur falls, unable to fight any longer."+(monster.lust >= monster.maxLust()?" His massive erection throbbing, drooling excessive amounts of precum as he moos softly, panting with desperate need.":"")+" His churning balls are full of excessive amounts of his virile energy. A fountain of energy, in more ways than one, and it's a fountain you intend to drink every last possible drop from. Already driven over the edge, the masculine scent of his musk only serves to remind you of the prize you've won. All you can think of now is the alluring sight of lifeforce that fill his balls.\n\n");
 			outputText("Unceremoniously, you drop on the prone minotaur with eager readiness as you begin deepthroating his juicy cock for his soulforce. The bull moos, jumping slightly in shock before he gives in to the pleasure at the sudden but aggressive attention.\n\n");
 			outputText("Lacking a gag reflex or a need for air, you easily slide his massive member down your throat as you blow him. His full balls churn, yet you only receive a steady stream of precum from him. Impatiently, you poke the minotaur's massive balls with your nails, causing them to further swell in size as the venom forces him to produce even more cum.\n\n");
 			outputText("The minotaur moos eagerly, forcefully bucking into your gaping maw. You wring your tongue around his massive shaft, coaxing him closer to orgasm. The massive bull can only handle this torture for so long and begins unloading shot after shot into your throat causing your belly to inflate briefly before you absorb the fluid and deflate back to your normal size. Fitting your maker accounted for a bukake scenario.\n\n");
 			outputText("The bulky bull-man lies down, exhausted and utterly spent as you pull away. You feel his massive, slowly deflating erection fall from your throat before you stand up, energized from the filling meal.\n\n");
 			var intBuff:Number = player.buff("Energy Vampire").getValueOfStatBuff("int.mult");
-			//FIXME: it looks weird, is it a bug?
 			var speBuff:Number = player.buff("Energy Vampire").getValueOfStatBuff("spe.mult");
-			if (player.hasStatusEffect(StatusEffects.AlterBindScroll2)) 
-			if (intBuff < +0.5) {
-				player.buff("Energy Vampire").addStats({ "int.mult": +0.50 }).withText("Energy Vampire");
+			if (player.hasStatusEffect(StatusEffects.AlterBindScroll2)) {
+				if (intBuff < +1.0) player.buff("Energy Vampire").addStats({ "int.mult": +1.00 }).withText("Energy Vampire");
+				if (speBuff < +0.5) player.buff("Energy Vampire").addStats({ "spe.mult": +0.50 }).withText("Energy Vampire");
 			}
-			player.buff("Energy Vampire").addStats({ "spe.mult": +0.25 }).withText("Energy Vampire");
+			else {
+				if (intBuff < +0.5) player.buff("Energy Vampire").addStats({ "int.mult": +0.50 }).withText("Energy Vampire");
+				if (speBuff < +0.25) player.buff("Energy Vampire").addStats({ "spe.mult": +0.25 }).withText("Energy Vampire");
+			}
 			if (player.hasStatusEffect(StatusEffects.AlterBindScroll2)) player.soulforce += player.maxSoulforce() * 0.4;
 			else player.soulforce += player.maxSoulforce() * 0.2;
 			if (player.soulforce > player.maxSoulforce()) player.soulforce = player.maxSoulforce();

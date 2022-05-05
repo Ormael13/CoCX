@@ -2072,9 +2072,11 @@ public class Camp extends NPCAwareContent{
 		//addButton(5, "Craft", kGAMECLASS.crafting.accessCraftingMenu).hint("Craft some items.");
 		if (player.hasStatusEffect(StatusEffects.CampRathazul)) addButton(7, "Herbalism", HerbalismMenu).hint("Use ingrediants to craft poultrice and battle medicines.")
 		else addButtonDisabled(7, "Herbalism", "Would you kindly find Rathazul first?");
-		if (player.explored >= 1) addButton(9, "Dummy", DummyTraining).hint("Train your mastery level on this dummy.");
+		if (AdventurerGuild.Slot01Cap > 0) addButton(9, "Quest Loot", questItemsBag).hint("Manage your bag with quest items.");
+		else addButtonDisabled(9, "Quest Loot", "You have to join Adventure Guild to have bag for quest items.");
 		addButton(10, "Questlog", questlog.accessQuestlogMainMenu).hint("Check your questlog.");
 		addButton(11, "Recall", recallScenes).hint("Recall some of the unique events happened during your adventure.");
+		if (player.explored >= 1) addButton(12, "Dummy", DummyTraining).hint("Train your mastery level on this dummy.");
 		if (flags[kFLAGS.LETHICE_DEFEATED] > 0) addButton(13, "Ascension", promptAscend).hint("Perform an ascension? This will restart your adventures with your items, and gems carried over. The game will also get harder.");
 		else addButtonDisabled(13, "Ascension", "Don't you have a job to finish first. Like... to defeat someone, maybe Lethice?");
 		addButton(14, "Back", playerMenu);
@@ -2153,8 +2155,6 @@ public class Camp extends NPCAwareContent{
 		else addButtonDisabled(5, "Fill bottle", "You need one empty pill bottle and ten low-grade soulforce recovery pills.");
 		if (player.hasItem(consumables.MG_SFRP, 10) && (player.hasItem(useables.E_P_BOT, 1))) addButton(6, "Fill bottle", fillUpPillBottle01).hint("Fill up one of your pill bottles with mid-grade soulforce recovery pills.");
 		else addButtonDisabled(6, "Fill bottle", "You need one empty pill bottle and ten mid-grade soulforce recovery pills.");
-		if (AdventurerGuild.Slot01Cap > 0) addButton(9, "Quest Loot", questItemsBag).hint("Manage your bag with quest items.");
-		else addButtonDisabled(9, "Quest Loot", "You have to join Adventure Guild to have bag for quest items.");
 		if (player.hasPerk(PerkLib.FclassHeavenTribulationSurvivor)) addButton(10, "Clone", VisitClone).hint("Check on your clone.");
 		else addButtonDisabled(10, "Clone", "Would you kindly go face F class Heaven Tribulation first?");
 		if (player.hasItem(useables.ENECORE, 1) && flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] < 200) addButton(12, "E.Core", convertingEnergyCoreIntoFlagValue).hint("Convert Energy Core item into flag value.");
@@ -2831,7 +2831,7 @@ public class Camp extends NPCAwareContent{
 		else addButtonDisabled(10, "SeveredTent", "You can't store more severed tentacles in your bag.");
 		if (AdventurerGuild.Slot05 > 0) addButton(11, "SeveredTent", questItemsBagSeveredTentacle1Down);
 		else addButtonDisabled(11, "SeveredTent", "You not have any severed tentacles in your bag.");
-		addButton(14, "Back", campMiscActions);
+		addButton(14, "Back", campActions);
 	}
 	private function questItemsBagImpSkull1UP():void {
 		player.destroyItems(useables.IMPSKLL, 1);
