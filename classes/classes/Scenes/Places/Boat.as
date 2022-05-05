@@ -14,9 +14,9 @@ public class Boat extends AbstractLakeContent
 	{
 		public var sharkGirlScene:SharkGirlScene = new SharkGirlScene();
 		public var marae:MaraeScene = new MaraeScene();
-		public function Boat()
-		{
-		}
+		public var kaiju:Kaiju = new Kaiju();
+		public function Boat() {}
+
 		public function discoverBoat():void {
 			player.createStatusEffect(StatusEffects.BoatDiscovery,0,0,0,0);
 			clearOutput();
@@ -30,7 +30,7 @@ public class Boat extends AbstractLakeContent
 		{
 			player.addStatusValue(StatusEffects.BoatDiscovery, 1, 1);
 			//Belisa
-			if (BelisaFollower.BelisaInGame == true && BelisaFollower.BelisaEncounternum == 1) {
+			if (BelisaFollower.BelisaInGame && BelisaFollower.BelisaEncounternum == 1) {
 				SceneLib.belisa.secondEncounter();
 				return;
 			}
@@ -65,6 +65,10 @@ public class Boat extends AbstractLakeContent
 			//BUILD LIST OF CHOICES
 			var choice:Array = [0, 1, 2, 3, 4];
 			if (player.hasKeyItem("Fishing Pole") >= 0) choice[choice.length] = 5;
+			if (player.level >= 5 && flags[kFLAGS.KAIJU_DISABLED] == 0) {
+				choice[choice.length] = 6; //moved kaiju here}
+				trace("Bruh");
+			}
 			//MAKE YOUR CHOICE
 			var selector:Number = choice[rand(choice.length)];
 			//RUN CHOSEN EVENT
@@ -90,6 +94,9 @@ public class Boat extends AbstractLakeContent
 					outputText("This is a calm day at the lake, you managed to hold your boat in place and, while you found nothing of note, couldn’t help yourself but to enjoy a few hour using your newly acquired fishing pole. You even spotted Calu in the distance doing the same thing from her usual sitting spot.\n\n");
 					outputText("<b>You got a fish!</b>");
 					inventory.takeItem(consumables.FREFISH, camp.returnToCampUseOneHour);
+					return;
+				case 6:
+					kaiju.kaijuMeeting();
 					return;
 			}
 		}
