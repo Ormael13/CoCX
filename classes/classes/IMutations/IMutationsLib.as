@@ -56,6 +56,7 @@ public class IMutationsLib
 		public static const FrozenHeartIM:PerkType = new FrozenHeartMutation();
 		public static const GazerEyesIM:PerkType = new GazerEyesMutation();
 		public static const GorgonEyesIM:PerkType = new GorgonEyesMutation();
+		public static const HarpyHollowBonesIM:PerkType = new HarpyHollowBonesMutation();
 		public static const KitsuneThyroidGlandIM:PerkType = new KitsuneThyroidGlandMutation();
 		public static const TrachealSystemIM:PerkType = new TrachealSystemMutation();
 
@@ -112,6 +113,7 @@ public class IMutationsLib
 			}
 			function IMutationsBone():void{
 				IMutationsList.push([DraconicBonesIM, DraconicBonesMutation]);
+				IMutationsList.push([HarpyHollowBonesIM, HarpyHollowBonesMutation]);
 			}
 			function IMutationsThyroidGlands():void{
 				IMutationsList.push([KitsuneThyroidGlandIM, KitsuneThyroidGlandMutation]);
