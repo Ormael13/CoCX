@@ -54,6 +54,7 @@ public class IMutationsLib
 		public static const FeyArcaneBloodstreamIM:PerkType = new FeyArcaneBloodstreamMutation();
 		public static const FloralOvariesIM:PerkType = new FloralOvariesMutation();
 		public static const FrozenHeartIM:PerkType = new FrozenHeartMutation();
+		public static const GazerEyesIM:PerkType = new GazerEyesMutation();
 		public static const KitsuneThyroidGlandIM:PerkType = new KitsuneThyroidGlandMutation();
 		public static const TrachealSystemIM:PerkType = new TrachealSystemMutation();
 
@@ -101,7 +102,7 @@ public class IMutationsLib
 				IMutationsList.push([EasterBunnyEggBagIM, EasterBunnyEggBagMutation]);
 			}
 			function mutationsEyes():void{
-
+				IMutationsList.push([GazerEyesIM,GazerEyesMutation]);
 			}
 			function mutationsPeriNervSys():void{
 				IMutationsList.push([EclipticMindIM, EclipticMindMutation]);
