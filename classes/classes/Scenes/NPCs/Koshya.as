@@ -49,9 +49,9 @@ import classes.internals.*;
 		
 		override protected function performCombatAction():void
 		{
-			if (!hasStatusEffect(StatusEffects.ATranscendentSoulField) && soulforce >= 10) createStatusEffect(StatusEffects.ATranscendentSoulField, 10, 10, 0, 0);
+			if (!hasStatusEffect(StatusEffects.ATranscendentSoulField) && soulforce >= 20) createStatusEffect(StatusEffects.ATranscendentSoulField, 20, 20, 0, 0);
 			if (hasStatusEffect(StatusEffects.ATranscendentSoulField)) {
-				if (soulforce >= 10) soulforce -= 10;
+				if (soulforce >= 20) soulforce -= 20;
 				else removeStatusEffect(StatusEffects.ATranscendentSoulField);
 			}
 			var choice:Number = rand(3);
@@ -62,14 +62,46 @@ import classes.internals.*;
 			if (choice > 0) eAttack();
 		}
 		
+		private function angelification():void {
+			clearOutput();
+			var TB:Number = Math.round(touStat.core.value * 0.2);
+			var SB:Number = Math.round(speStat.core.value * 0.1);
+			var WB:Number = Math.round(wisStat.core.value * 0.3);
+			touStat.core.value += TB;
+			speStat.core.value += SB;
+			wisStat.core.value += WB;
+			createPerk(PerkLib.MonsterRegeneration, 3, 0, 0, 0);
+			addPerkValue(PerkLib.DieHardHP, 1, 10);
+			addStatusValue(StatusEffects.TranscendentSoulField, 1, 20);
+			addStatusValue(StatusEffects.TranscendentSoulField, 2, 20);
+			HP = maxHP();
+			bonusWrath += 1000;
+			bonusSoulforce += 2000;
+			outputText("Staggering back, woman lands in a bit ungracefull pose buit it saved her from falling down unstylish. When you think she gave up her halo starts to glow much more intensively, spreading then to her whole body triggering transformation. After half minute maybe bit longer cocoon of the light fade to reveal her new form.");
+			outputText("\n\nActualy the parts of what supposed to be 'cocoon' are her newly grown five pairs of wings with three to four eye-like organs located on each of it. Her main body not change alot aside from having similar to the ones on wings eyeball growns. On her forhead opened two additional eyes. Halo that was hovering above her head expanded and split into two with some additional eyes on them starting to retate around her.");
+			outputText("\n\n\"<i>It's unfortunate to me unravel this form!!!</i>\" she speaks with noticable dissapointed as she fly up ready to continue fight.");
+			createStatusEffect(StatusEffects.TrueFormAngel, 0, 0, 0, 0);
+			SceneLib.combat.combatRoundOver();
+		}
+		
+		override public function defeated(hpVictory:Boolean):void
+		{
+			if (!hasStatusEffect(StatusEffects.TrueFormAngel)) {
+				angelification();
+				return;
+			}
+			cleanupAfterCombat();
+		}
+		
 		override public function get long():String
 		{
 			var str:String = "";
-			str += "You're fighting pale blue skinned women with snow white medium long hair. Using her snow-white wings she constantly stays airborne. On her hands you can see pair of runic bracelets.";// A powerful pure aura emanates from her.
+			if (hasStatusEffect(StatusEffects.TrueFormAngel)) str += "You're fighting pale blue skinned women with snow white medium long hair. Using her six pairs of snow-white wings she constantly stays airborne. On wings or her body you can see many closed eyeballs. Runic bracelets on her hands looks like they been partialy cracked. Around her rotate twin halo with more eyes on them. A powerful pure aura emanates from her.";
+			else str += "You're fighting pale blue skinned women with snow white medium long hair. Using her snow-white wings she constantly stays airborne. On her hands you can see pair of runic bracelets. Above her head you see halo.";
 			if (hasStatusEffect(StatusEffects.ATranscendentSoulField))
 			{
 				str += "\n\n<i>From time to time you can notice faint glimmers of orange protective field surrounding her.";
-				if (hasStatusEffect(StatusEffects.TrueFormAngel)) str += " After your attacks if assume octagonal shapes.";
+				if (hasStatusEffect(StatusEffects.TrueFormAngel)) str += " After your attacks it take octagonal shapes for a brief moment.";
 				str += "</i>";
 			}
 			return str;
@@ -90,7 +122,7 @@ import classes.internals.*;
 			this.tallness = 8*12+6;
 			this.hips.type = Hips.RATING_AVERAGE;
 			this.butt.type = Butt.RATING_AVERAGE;
-			initStrTouSpeInte(45, 95, 80, 50);
+			initStrTouSpeInte(45, 100, 110, 50);
 			initWisLibSensCor(110, 25, 15, 0);
 			this.skinTone = "pale blue";
 			this.hairColor = "white";
@@ -111,9 +143,9 @@ import classes.internals.*;
 			this.level = 18;
 			this.gems = rand(15) + 10;
 			this.drop = NO_DROP;
-			this.createStatusEffect(StatusEffects.ATranscendentSoulField, 10, 10, 0, 0);//X times less dmg, +X lvl diff bonus
+			this.createStatusEffect(StatusEffects.ATranscendentSoulField, 20, 20, 0, 0);//X times less dmg, +X lvl diff bonus
 			this.createPerk(PerkLib.DieHardHP, 10, 0, 0, 0);
-			this.createPerk(PerkLib.MonsterRegeneration, 2, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyTrueAngel, 0, 0, 0, 0);
 			this.createPerk(PerkLib.JobSoulCultivator, 0, 0, 0, 0);
 			this.createPerk(PerkLib.InsightfulResourcesI, 0, 0, 0, 0);
 			checkMonster();

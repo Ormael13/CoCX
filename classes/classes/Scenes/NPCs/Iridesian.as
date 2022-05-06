@@ -173,9 +173,9 @@ import classes.internals.*;
 		override protected function performCombatAction():void
 		{
 			if (player.cor > 20) AuraOfPurityIridesian();
-			if (!hasStatusEffect(StatusEffects.TranscendentSoulField) && soulforce >= 10) createStatusEffect(StatusEffects.TranscendentSoulField, 5, 5, 0, 0);
+			if (!hasStatusEffect(StatusEffects.TranscendentSoulField) && soulforce >= 20) createStatusEffect(StatusEffects.TranscendentSoulField, 10, 10, 0, 0);
 			if (hasStatusEffect(StatusEffects.TranscendentSoulField)) {
-				if (soulforce >= 10) soulforce -= 10;
+				if (soulforce >= 20) soulforce -= 20;
 				else removeStatusEffect(StatusEffects.TranscendentSoulField);
 			}
 			if (!hasStatusEffect(StatusEffects.AbilityCooldown1)) IridesianDominationGaze();
@@ -209,11 +209,11 @@ import classes.internals.*;
 			touStat.core.value += TB;
 			speStat.core.value += SB;
 			wisStat.core.value += WB;
-			addPerkValue(PerkLib.DieHardHP, 1, 5);
-			addPerkValue(PerkLib.MonsterRegeneration, 1, 1);
-			addStatusValue(StatusEffects.TranscendentSoulField, 1, 5);
-			addStatusValue(StatusEffects.TranscendentSoulField, 2, 5);
-			HP = maxOverHP();
+			addPerkValue(PerkLib.DieHardHP, 1, 10);
+			addPerkValue(PerkLib.MonsterRegeneration, 1, 3);
+			addStatusValue(StatusEffects.TranscendentSoulField, 1, 10);
+			addStatusValue(StatusEffects.TranscendentSoulField, 2, 10);
+			HP = maxHP();
 			lustVuln += 0.15;
 			bonusWrath += 500;
 			bonusSoulforce += 1000;
@@ -246,7 +246,7 @@ import classes.internals.*;
 			if (hasStatusEffect(StatusEffects.TranscendentSoulField))
 			{
 				str += "\n\n<i>From time to time you can notice faint glimmers of orange protective field surrounding him.";
-				if (hasStatusEffect(StatusEffects.TrueFormAngel)) str += " After your attacks if assume octagonal shapes.";
+				if (hasStatusEffect(StatusEffects.TrueFormAngel)) str += " After your attacks it take octagonal shapes for a brief moment.";
 				str += "</i>";
 			}
 			return str;
@@ -296,13 +296,13 @@ import classes.internals.*;
 			this.lust = 30;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.drop = new WeightedDrop(consumables.ME_DROP, 1);
-			this.createStatusEffect(StatusEffects.TranscendentSoulField, 5, 5, 0, 0);//X times less dmg, +X lvl diff bonus
+			this.createStatusEffect(StatusEffects.TranscendentSoulField, 10, 10, 0, 0);//X times less dmg, +X lvl diff bonus
 			this.createPerk(PerkLib.EpicWisdom, 0, 0, 0, 0);
 			//this.createPerk(PerkLib.RefinedBodyI, 0, 0, 0, 0);
 			this.createPerk(PerkLib.InsightfulResourcesI, 0, 0, 0, 0);
 			//this.createPerk(PerkLib.EnemyBossType, 0, 0, 0, 0);
-			this.createPerk(PerkLib.DieHardHP, 5, 0, 0, 0);
-			this.createPerk(PerkLib.MonsterRegeneration, 1, 0, 0, 0);
+			this.createPerk(PerkLib.DieHardHP, 10, 0, 0, 0);
+			this.createPerk(PerkLib.MonsterRegeneration, 2, 0, 0, 0);
 			this.createPerk(PerkLib.JobSoulCultivator, 0, 0, 0, 0);
 			this.createPerk(PerkLib.DaoistCultivator, 0, 0, 0, 0);
 			this.createPerk(PerkLib.DaoistApprenticeStage, 0, 0, 0, 0);

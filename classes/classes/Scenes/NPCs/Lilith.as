@@ -70,14 +70,40 @@ import classes.internals.*;
 			if (choice == 3) eAttack();
 		}
 		
+		private function angelification():void {
+			clearOutput();
+			var TB:Number = Math.round(touStat.core.value * 0.2);
+			var SB:Number = Math.round(speStat.core.value * 0.1);
+			var WB:Number = Math.round(wisStat.core.value * 0.3);
+			touStat.core.value += TB;
+			speStat.core.value += SB;
+			wisStat.core.value += WB;
+			addPerkValue(PerkLib.DieHardHP, 1, 10);
+			addPerkValue(PerkLib.MonsterRegeneration, 1, 3);
+			addStatusValue(StatusEffects.TranscendentSoulField, 1, 10);
+			addStatusValue(StatusEffects.TranscendentSoulField, 2, 10);
+			HP = maxOverHP();
+			lustVuln += 0.15;
+			bonusWrath += 500;
+			bonusSoulforce += 1000;
+			outputText("");
+			outputText("\n\n\"<i></i>\" .");
+			createStatusEffect(StatusEffects.TrueFormAngel, 0, 0, 0, 0);
+			SceneLib.combat.combatRoundOver();
+		}
+		
 		override public function get long():String
 		{
-			var str:String = "";
-			str += "You're fighting pale skinned woman with snow black hair. Even her eyes or lips are pitch black. And you would mistake her for normal human woman wearing catsuit if not noticable goat-like horns, small bat wings or arrow tipped tail.";// A powerful pure aura emanates from her.
+			var str:String = "";//You're fighting pale skinned woman with snow black hair. Even her eyes or lips are pitch black. And you would mistake her for normal human woman wearing catsuit if not noticable goat-like horns, small bat wings or arrow tipped tail. 
+			if (hasStatusEffect(StatusEffects.TrueFormAngel)) str += "</i>";
+			else {
+				str += "You're fighting devilish cute goth girl. She stands about nine feet tall and is hugely voluptuous, with breasts two times the size of her head. Her hips flare out into an exaggerated hourglass shape, with a long tail tipped with a fleshy arrow-head spade that waves above her spankable butt. ";
+				str += "Her raven hair cascades around ram horns that gleam like polished ivory, and her red eyes following your every move. A black catsuit huggs her curves, clinging to her body tightly. A powerful aura emanates from her.";
+			}
 			if (hasStatusEffect(StatusEffects.ATranscendentSoulField))
 			{
 				str += "\n\n<i>From time to time you can notice faint glimmers of orange protective field surrounding her.";
-				if (hasStatusEffect(StatusEffects.TrueFormAngel)) str += " After your attacks if assume octagonal shapes.";
+				if (hasStatusEffect(StatusEffects.TrueFormAngel)) str += " After your attacks it take octagonal shapes for a brief moment.";
 				str += "</i>";
 			}
 			return str;
@@ -89,21 +115,17 @@ import classes.internals.*;
 			this.short = "goth girl";
 			this.imageName = "lilith";
 			this.long = "";
-			//this.long = "She stands about six feet tall and is hugely voluptuous, her impressive breasts wobble delightfully as she moves.  Her hips flare out into an exaggerated hourglass shape, with a long tail tipped with a fleshy arrow-head spade that waves above her spankable butt.  She is wearing rags that cover only a tiny fraction of her body, concealing just her naughty bits to make the whole display more erotic.  She's using a leather whip as a weapon.";
-			//this.long = "You are fighting a milky, cow-like succubus.  She stands about seven feet tall and is hugely voluptuous, with breasts three times the size of her head, tipped with a cluster of four obscenely teat-like nipples.  Her hips flare out into an exaggerated hourglass shape, with a long tail tipped with a fleshy arrow-head spade that waves above her spankable butt.  A small cowbell is tied at the base of the arrow-head with a cute little ribbon.  Wide, cow-like horns, easily appropriate for a minotaur, rise from her head, and she flicks bovine ears about the sides of her head whilst sashaying from side to side on demonic, high-heeled feet.  Her skin is a vibrant purple with splotches of shiny black here and there, including one large spot covering her right eye.  She's using a leather whip as a weapon.";
-			//this.long = "The succubus across from you balances gracefully on her spiked heels, twirling and moving unpredictably.  Sexy dark stockings hug every curve of her perfectly shaped flesh until they disappear into her tiny miniskirt.  Her impressive breasts wobble delightfully as she moves, despite the inadequate efforts of her straining vest.  A pair of foot-long horns curve up from her otherwise perfect face and forehead, wreathed in lustrous blonde hair.  The very air around her is filled with an unidentifiable fragrance that makes you tingle and shiver.";
-			//this.long = "This succubus has everything you would expect from one of her kind: a bust that would drive women wild with jealousy, hips that could melt a preacher's conviction, an ass so perfectly rounded that it seems designed to be cupped, and a smoldering visage that simultaneously entices whilst wearing a domineering grin. Her raven hair cascades around ram horns that gleam like polished ivory, and her red eyes greedily drink in your every motion. What clothing she wears is only designed to enhance her rampant sexuality, somehow making her look more naked than if she actually were.";
 			//this.plural = false;
 			this.createVagina(true, VaginaClass.WETNESS_NORMAL, VaginaClass.LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 30, 0, 0, 0);
-			createBreastRow(Appearance.breastCupInverse("B"));
+			createBreastRow(Appearance.breastCupInverse("P"));
 			this.ass.analLooseness = AssClass.LOOSENESS_NORMAL;
 			this.ass.analWetness = AssClass.WETNESS_NORMAL;
-			this.tallness = 8*12+6;
+			this.tallness = 9*12+6;
 			this.hips.type = Hips.RATING_CURVY;
 			this.butt.type = Butt.RATING_LARGE;
-			initStrTouSpeInte(45, 95, 80, 50);
-			initWisLibSensCor(110, 25, 15, 0);
+			initStrTouSpeInte(90, 90, 90, 100);
+			initWisLibSensCor(100, 125, 75, 50);
 			this.skinTone = "light";
 			this.hairColor = "black";
 			this.hairLength = 16;
@@ -114,9 +136,9 @@ import classes.internals.*;
 			this.armorDef = 150;
 			this.armorMDef = 150;
             this.bonusHP = 500;
-			this.bonusLust = 58;
-			this.bonusWrath = 50;
-			this.bonusSoulforce = 100;
+			this.bonusLust = 218;
+			this.bonusWrath = 100;
+			this.bonusSoulforce = 200;
 			this.lustVuln = .75;
 			this.lust = 30;
 			this.level = 18;
@@ -129,12 +151,14 @@ import classes.internals.*;
 			this.wings.desc = "tiny hidden";
 			this.tailType = Tail.DEMONIC;
 			this.lowerBody = LowerBody.DEMONIC_HIGH_HEELS;
-			this.createStatusEffect(StatusEffects.ATranscendentSoulField, 10, 10, 0, 0);//X times less dmg, +X lvl diff bonus
+			this.createStatusEffect(StatusEffects.ATranscendentSoulField, 20, 20, 0, 0);//X times less dmg, +X lvl diff bonus
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Phylactery, 0, 0, 0, 0);
 			this.createPerk(PerkLib.OverMaxHP, 18, 0, 0, 0);//v1 = enemy lvl
 			this.createPerk(PerkLib.DieHardHP, 10, 0, 0, 0);
 			this.createPerk(PerkLib.MonsterRegeneration, 1, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyTrueAngel, 0, 0, 0, 0);
+			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			this.createPerk(PerkLib.JobSoulCultivator, 0, 0, 0, 0);
 			//this.createPerk(PerkLib.InsightfulResourcesI, 0, 0, 0, 0);
 			checkMonster();
