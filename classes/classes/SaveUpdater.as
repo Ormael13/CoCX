@@ -564,10 +564,10 @@ public class SaveUpdater extends NPCAwareContent {
 		}
 		if (flags[kFLAGS.MOD_SAVE_VERSION] == 9) {
 			flags[kFLAGS.MOD_SAVE_VERSION] = 10;
-			if (flags[kFLAGS.MARAE_LETHICITE] > 0 && player.hasKeyItem("Marae's Lethicite") >= 0) {
+			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_2019] > 0 && player.hasKeyItem("Marae's Lethicite") >= 0) {
 				player.removeKeyItem("Marae's Lethicite"); //Remove the old.
-				player.createKeyItem("Marae's Lethicite", flags[kFLAGS.MARAE_LETHICITE], 0, 0, 0);
-				flags[kFLAGS.MARAE_LETHICITE] = 0; //Reclaim the flag.
+				player.createKeyItem("Marae's Lethicite", flags[kFLAGS.UNKNOWN_FLAG_NUMBER_2019], 0, 0, 0);
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_2019] = 0; //Reclaim the flag.
 			}
 		}
 		if (flags[kFLAGS.MOD_SAVE_VERSION] == 10) {
@@ -1685,6 +1685,9 @@ public class SaveUpdater extends NPCAwareContent {
 		if (int(flags[kFLAGS.MOD_SAVE_VERSION]) == 35) { //now using float to store versions!
 			clearOutput();
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.001) {
+				//SH announcement
+				outputText("\n\n<b>New settings page added: SceneHunter. Here, you can enable some flags, making some scenes easier to discover or select.</b>");
+				outputText("\n\n<b>If you don't like the view of your armor, you can disable most armors with new button in Display settings.</b>");
 				//Labyrinth reward fix
 				if (flags[kFLAGS.EBON_LABYRINTH] >= 11)
 					flags[kFLAGS.EBON_LABYRINTH] = 600;
@@ -1780,6 +1783,9 @@ public class SaveUpdater extends NPCAwareContent {
 				flags[kFLAGS.SCENEHUNTER_LOSS_SELECT] = flags[kFLAGS.SCENEHUNTER_OTHER];
 				outputText("\n\nSceneHunter update: new <b>Select Loss</b> feature. Set equal to the 'Other' flag by default. You can toggle its value in settings.");
 				flags[kFLAGS.MOD_SAVE_VERSION] = 35.011;
+			}
+			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.012) { // add it to the next small update, no need to hurry.
+				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_2019] = 0; // Reclaim lethicite flag AGAIN.
 			}
 			outputText("\n\n<i>Save</i> version updated to " + flags[kFLAGS.MOD_SAVE_VERSION] + "\n");
 			doNext(camp.doCamp);

@@ -411,8 +411,11 @@ public class SceneHunter extends BaseContent {
             else if (arr.length >= 5 && arr.length <= 6) {
                 if (lossSelect)
                     addButtonIfTrue.apply(this, arr);
-                else if (arr[4])
-                    choices.push(arr[2]);
+                else {
+                    if (arr[4]) //check condition
+                        choices.push(arr[2]);
+                    else print("Loss scene (random) check failed: " + arr[3]); //print msg if printer is enabled
+                }
             }
             else throw new Error("selectLossMenu - argument length mismatch!");
         }
