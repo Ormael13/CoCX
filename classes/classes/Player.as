@@ -4484,6 +4484,11 @@ use namespace CoC;
 		public function internalChimeraScore():Number {
 			Begin("Player","racialScore","internalChimeraScore");
 			var internalChimeraCounter:Number = 0;
+			var pMutations:Array = MutationsLib.mutationsArray("", true);
+			for each (var pPerk:PerkType in pMutations){
+				if (hasPerk(pPerk)) internalChimeraCounter++;
+			}
+			/*
 			if (hasPerk(MutationsLib.ArachnidBookLung))
 				internalChimeraCounter++;
 			if (hasPerk(MutationsLib.ArachnidBookLungPrimitive))
@@ -4597,25 +4602,13 @@ use namespace CoC;
 			if (hasPerk(MutationsLib.HinezumiBurningBloodPrimitive))
 				internalChimeraCounter++;
 			if (hasPerk(MutationsLib.HinezumiBurningBloodEvolved))
-				internalChimeraCounter++;/*
-			if (hasPerk(MutationsLib.HeartOfTheStorm))
 				internalChimeraCounter++;
-			if (hasPerk(MutationsLib.HeartOfTheStormPrimitive))
-				internalChimeraCounter++;
-			if (hasPerk(MutationsLib.HeartOfTheStormEvolved))
-				internalChimeraCounter++;*/
 			if (hasPerk(MutationsLib.HollowFangs))
 				internalChimeraCounter++;
 			if (hasPerk(MutationsLib.HollowFangsPrimitive))
 				internalChimeraCounter++;
 			if (hasPerk(MutationsLib.HollowFangsEvolved))
 				internalChimeraCounter++;
-			//if (hasPerk(PerkLib.))
-			//	internalChimeraCounter++;
-			//if (hasPerk(PerkLib.))
-			//	internalChimeraCounter++;
-			//if (hasPerk(PerkLib.))
-			//	internalChimeraCounter++;
 			if (hasPerk(MutationsLib.KitsuneThyroidGland))
 				internalChimeraCounter++;
 			if (hasPerk(MutationsLib.KitsuneThyroidGlandPrimitive))
@@ -4744,6 +4737,7 @@ use namespace CoC;
 				internalChimeraCounter++;
 			if (hasPerk(MutationsLib.YetiFatEvolved))
 				internalChimeraCounter++;
+			 */
 			End("Player","racialScore");
 			return internalChimeraCounter;
 		}
