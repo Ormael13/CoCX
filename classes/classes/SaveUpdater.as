@@ -1685,6 +1685,9 @@ public class SaveUpdater extends NPCAwareContent {
 		if (int(flags[kFLAGS.MOD_SAVE_VERSION]) == 35) { //now using float to store versions!
 			clearOutput();
 			if (flags[kFLAGS.MOD_SAVE_VERSION] < 35.001) {
+				//SH announcement
+				outputText("\n\n<b>New settings page added: SceneHunter. Here, you can enable some flags, making some scenes easier to discover or select.</b>");
+				outputText("\n\n<b>If you don't like the view of your armor, you can disable most armors with new button in Display settings.</b>");
 				//Labyrinth reward fix
 				if (flags[kFLAGS.EBON_LABYRINTH] >= 11)
 					flags[kFLAGS.EBON_LABYRINTH] = 600;
