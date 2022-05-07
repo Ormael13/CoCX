@@ -111,6 +111,24 @@ import classes.internals.*;
 		
 		public function Lilith() 
 		{
+			createBreastRow(Appearance.breastCupInverse("RR"));//G_BIG ?K - 1 head size, RR - 2 heads size, ZZ - 3 heads size?
+			this.tallness = 9*12+2;
+			this.hairLength = 16;//this.hairLength = 21;//very long, flowing locks of - between shouled length and ass length//this.hairLength = 40;//obscenely long, >= 40 a mniej niż tallness
+			this.hips.type = Hips.RATING_CURVY;
+			this.butt.type = Butt.RATING_LARGE;
+			initStrTouSpeInte(90, 90, 90, 100);
+			initWisLibSensCor(100, 125, 75, 50);
+			this.weaponAttack = 5;
+			this.armorDef = 150;
+			this.armorMDef = 150;
+            this.bonusHP = 500;
+			this.bonusLust = 218;
+			this.bonusWrath = 100;
+			this.bonusSoulforce = 200;
+			this.level = 18;
+			this.gems = rand(15) + 10;
+			this.createStatusEffect(StatusEffects.ATranscendentSoulField, 20, 20, 0, 0);//X times less dmg, +X lvl diff bonus
+			this.createPerk(PerkLib.OverMaxHP, 18, 0, 0, 0);//v1 = enemy lvl
 			this.a = "the ";
 			this.short = "goth girl";
 			this.imageName = "lilith";
@@ -118,31 +136,15 @@ import classes.internals.*;
 			//this.plural = false;
 			this.createVagina(true, VaginaClass.WETNESS_NORMAL, VaginaClass.LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 30, 0, 0, 0);
-			createBreastRow(Appearance.breastCupInverse("P"));
 			this.ass.analLooseness = AssClass.LOOSENESS_NORMAL;
 			this.ass.analWetness = AssClass.WETNESS_NORMAL;
-			this.tallness = 9*12+6;
-			this.hips.type = Hips.RATING_CURVY;
-			this.butt.type = Butt.RATING_LARGE;
-			initStrTouSpeInte(90, 90, 90, 100);
-			initWisLibSensCor(100, 125, 75, 50);
 			this.skinTone = "light";
-			this.hairColor = "black";
-			this.hairLength = 16;
+			this.hairColor = "raven";
 			this.weaponName = "fist";
 			this.weaponVerb="punch";
-			this.weaponAttack = 5;
 			this.armorName = "skin";
-			this.armorDef = 150;
-			this.armorMDef = 150;
-            this.bonusHP = 500;
-			this.bonusLust = 218;
-			this.bonusWrath = 100;
-			this.bonusSoulforce = 200;
 			this.lustVuln = .75;
 			this.lust = 30;
-			this.level = 18;
-			this.gems = rand(15) + 10;
 			this.drop = NO_DROP;
 			this.temperment = TEMPERMENT_RANDOM_GRAPPLES;
 			this.horns.type = Horns.DEMON;
@@ -151,10 +153,8 @@ import classes.internals.*;
 			this.wings.desc = "tiny hidden";
 			this.tailType = Tail.DEMONIC;
 			this.lowerBody = LowerBody.DEMONIC_HIGH_HEELS;
-			this.createStatusEffect(StatusEffects.ATranscendentSoulField, 20, 20, 0, 0);//X times less dmg, +X lvl diff bonus
 			this.createPerk(PerkLib.EnemyTrueDemon, 0, 0, 0, 0);
 			this.createPerk(PerkLib.Phylactery, 0, 0, 0, 0);
-			this.createPerk(PerkLib.OverMaxHP, 18, 0, 0, 0);//v1 = enemy lvl
 			this.createPerk(PerkLib.DieHardHP, 10, 0, 0, 0);
 			this.createPerk(PerkLib.MonsterRegeneration, 1, 0, 0, 0);
 			this.createPerk(PerkLib.EnemyTrueAngel, 0, 0, 0, 0);

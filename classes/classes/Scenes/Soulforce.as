@@ -23,6 +23,7 @@ import classes.Scenes.NPCs.Alvina;
 import classes.Scenes.NPCs.Aria;
 import classes.Scenes.NPCs.Belisa;
 import classes.Scenes.NPCs.BelisaFollower;
+import classes.Scenes.NPCs.Carrera;
 import classes.Scenes.NPCs.DivaScene;
 import classes.Scenes.NPCs.DriderTown;
 import classes.Scenes.NPCs.Lilith;
@@ -1720,22 +1721,22 @@ public class Soulforce extends BaseContent
 			addButton(9, "DragonScale", AddDragonscale).hint("Add 1 Dragonscale.");
 			addButton(10, "S.Shard", AddShard).hint("Add 1 S.Shard.");//addButton(10, "", ).hint("Add 1 .");
 			addButton(11, "HEALHERB", AddHerb).hint("Add 1 HEALHERB.");
-			//addButton(12, "", ).hint("Add 1 .");
+			addButton(12, "Copp+Tin", AddCooperTinOre).hint("Add 1 Cooper and Tin ore.");
 			addButton(13, "-2-", MaterialMenu, page + 1);
 			addButton(14, "Back", curry(SoulforceCheats1, 0));
 		}
 		if (page == 2) {
-			addButton(0, "GolemCore", AddGolemCore).hint("Add 1 Golem Core.");
-			addButton(1, "BronzeBar", AddBronzeBar).hint("Add 1 Bronse bar.");
-			addButton(2, "EbonIngot", AddEbonIngot).hint("Add 1 Ebon Ingot.");
-			addButton(3, "Skymetal", AddSkymetalOre).hint("Add 1 Skymetal Ore.");
-			addButton(4, "Moonstone", AddMoonstone).hint("Add 1 Moonstone.");
-			addButton(5, "Mechanism", AddMechanism).hint("Add 1 Mechanism.");
+			addButton(0, "Skymetal", AddSkymetalOre).hint("Add 1 Skymetal Ore.");
+			addButton(1, "Moonstone", AddMoonstone).hint("Add 1 Moonstone.");
+			//addButton(2, "", ).hint("Add 1 .");
+			//addButton(3, "", ).hint("Add 1 .");
+			//addButton(4, "", ).hint("Add 1 .");
+			//addButton(5, "", ).hint("Add 1 .");
 			//addButton(6, "", ).hint("Add 1 .");
-			//addButton(7, "", ).hint("Add 1 .");
-			//addButton(8, "", ).hint("Add 1 .");
-			addButton(9, "F.Imp S.", AddFeralImpSkull).hint("Add 1 Feral Imp Skull.");
-			addButton(10, "EnergyCore", AddEnergyCore).hint("Add 1 Energy Core.");
+			addButton(7, "GolemCore", AddGolemCore).hint("Add 1 Golem Core.");
+			addButton(8, "Mechanism", AddMechanism).hint("Add 1 Mechanism.");
+			addButton(9, "EnergyCore", AddEnergyCore).hint("Add 1 Energy Core.");
+			addButton(10, "F.Imp S.", AddFeralImpSkull).hint("Add 1 Feral Imp Skull.");
 			addButton(11, "MetShoTom", AddMeteorShowerTome).hint("Add 1 Meteor Shower tome.");
 			addButton(12, "PolMidScr", AddPolarMidnightScroll).hint("Add 1 Polar Midnight scroll.");
 			addButton(13, "-1-", MaterialMenu, page - 1);
@@ -1766,6 +1767,7 @@ public class Soulforce extends BaseContent
 			addButton(1, "Hydra", FightHydra).hint("Test fight with Hydra.");
 			addButton(2, "HellfireSnail", FightHellfireSnail).hint("Test fight with Hellfire Snail.");
 			addButton(3, "ChaosChimera", FightChaosChimera).hint("Test fight with Chaos Chimera.");
+			addButton(4, "AnotSucc", FightCarrera).hint("Fight with prtobably another succubus out there...");
 			addButton(5, "LvLUP Eva", LvLUPEva).hint("LvL UP forcefully Evangeline for testing purpose up to the limit.");
 			addButton(6, "DELvL Eva", DELvLEva).hint("DE LvL forcefully Evangeline for testing purpose down toward the lvl 12.");
 			addButton(7, "LvLUP Aurora", LvLUPAurora).hint("LvL UP forcefully Aurora for testing purpose up to the limit.");
@@ -2008,6 +2010,14 @@ public class Soulforce extends BaseContent
 		outputText("\n\n<b>(Gained 1 Healing Herb!)</b>\n\n");
 		inventory.takeItem(consumables.HEALHERB, curry(MaterialMenu, 1));
 	}
+	public function AddCooperTinOre():void {
+		outputText("\n\n<b>(Gained 1 Copper Ore!)</b>\n\n");
+		inventory.takeItem(useables.COP_ORE, AddCooperTinOre1);
+	}
+	public function AddCooperTinOre1():void {
+		outputText("\n\n<b>(Gained 1 Tin Ore!)</b>\n\n");
+		inventory.takeItem(useables.TIN_ORE, curry(MaterialMenu, 1));
+	}
 	public function AddEnergyCore():void {
 		outputText("\n\n<b>(Gained 1 Energy Core!)</b>\n\n");
 		flags[kFLAGS.CAMP_CABIN_ENERGY_CORE_RESOURCES] += 1;
@@ -2023,14 +2033,6 @@ public class Soulforce extends BaseContent
 	public function AddGolemCore():void {
 		outputText("\n\n<b>(Gained 1 Golem Core!)</b>\n\n");
 		inventory.takeItem(useables.GOLCORE, curry(MaterialMenu, 2));
-	}
-	public function AddBronzeBar():void {
-		outputText("\n\n<b>(Gained 1 Bronze bar!)</b>\n\n");
-		inventory.takeItem(useables.BRONZEB, curry(MaterialMenu, 2));
-	}
-	public function AddEbonIngot():void {
-		outputText("\n\n<b>(Gained 1 Ebon Ingot!)</b>\n\n");
-		inventory.takeItem(useables.EBONING, curry(MaterialMenu, 2));
 	}
 	public function AddSkymetalOre():void {
 		outputText("\n\n<b>(Gained 1 Skymetal Ore!)</b>\n\n");
@@ -2791,6 +2793,11 @@ public class Soulforce extends BaseContent
 		clearOutput();
 		outputText("Entering battle with devilish cute goth girl! Enjoy ^^");
 		startCombat(new Lilith());
+	}
+	public function FightCarrera():void {
+		clearOutput();
+		outputText("Entering battle with another succubus or maybe not your every succubus? Enjoy ^^");
+		startCombat(new Carrera());
 	}
 	public function FightSonya():void {
 		clearOutput();

@@ -18,7 +18,7 @@ package classes.Scenes.NPCs
 		}
 		/*
 		Konstantin flags:
-		KONSTANTIN_FOLLOWER: 1 - Meet at forest, 2 - Came to camp
+		KONSTANTIN_FOLLOWER: 1 - Meet at forest, 2 - Came to camp, 3 - unlocked smelting
 		KONSTANTIN_SERVICES: 1/2 - reached before he join the camp
 		*/
 		private function buildedAnythingInCamp():Boolean {
@@ -184,9 +184,10 @@ package classes.Scenes.NPCs
 			menu();
 			addButton(0, "Appearance", KonstantinAppearance);
 			addButton(1, "Talk", KonstantinTalkMenu);
-			addButton(2, "Smithing", KonstantinSmithingMenu);
-			addButton(3, "Tinkering", KonstantinTinkeringMenu).hint("Add some temporary boosts to you weapons or armor.");
-			addButton(4, "Sex", KonstantinSexMenu);
+			addButton(2, "Sex", KonstantinSexMenu);
+			addButton(5, "Smithing", KonstantinSmithingMenu);
+			if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 3) addButton(6, "Smelting", KonstantinSmeltingMenu);
+			addButton(7, "Tinkering", KonstantinTinkeringMenu).hint("Add some temporary boosts to you weapons or armor.");
 			addButton(14, "Leave", camp.campFollowers);
 		}
 		
@@ -209,6 +210,7 @@ package classes.Scenes.NPCs
 			addButton(0, "Him", KonstantinTalkHim);
 			addButton(1, "His Work", KonstantinTalkHisWork);
 			addButton(2, "The camp", KonstantinTalkTheCamp);
+			if (flags[kFLAGS.KONSTANTIN_FOLLOWER] == 2) addButton(13, "Better Smiting", KonstantinTalkBetterSmiting);
 			addButton(14, "Back", KonstantinMainCampMenu);
 		}
 		public function KonstantinTalkHim():void {
@@ -277,6 +279,16 @@ package classes.Scenes.NPCs
 				if (flags[kFLAGS.CAMP_UPGRADES_SPARING_RING] >= 2) outputText("\"<i>And there is this place where we can spend our excess energy. Quite good, since it also keep us in shape if someday if someday the demons get too cocky and intend to storm our camp.</i>\"\n\n");
 				outputText("\"<i>So all in all, I think that this is a great places. Good company, no demons in the proximity, and a great potential for the years to come.</i>\"\n\n");
 			}
+			doNext(KonstantinTalkMenu);
+			eachMinuteCount(5);
+		}
+		public function KonstantinTalkBetterSmiting():void {
+			clearOutput();
+			outputText("Konstantin deposes his hammer, now that he has a new item in his grasp before he moves toward his storage to retrieve a new ingot.\n\n");
+			outputText("\"<i>You know, [name], what I forge here is nothing extraordinary… just conventional steel. However, there are places across Mareth... Remote locations that are untapped by the other races. Such places are ripe with rare materials, things that only an adventurer like yourself could retrieve. If you could bring me some of that material, I could smelt you the ingots you need for some extremely powerful equipment. Don't worry about the cost. For you, I’ll work for the usual rate. Honestly, it'd be a pleasure if I could get my hands on some high-quality mythril.</i>\"\n\n");
+			outputText("You promise Konstantin to keep a lookout for rare materials in your journey.\n\n");
+			outputText("<b>Unlocked Smelting!</b>\n\n");
+			flags[kFLAGS.KONSTANTIN_FOLLOWER] = 3;
 			doNext(KonstantinTalkMenu);
 			eachMinuteCount(5);
 		}
@@ -869,6 +881,64 @@ package classes.Scenes.NPCs
 			outputText("\"<i>Well, I’m no magician, but I can tell you that whatever energy within the staff appears to have balanced out. The previous form of this staff has great power, but this power could only be used for a single type of magic. This restriction no longer exists.  Beyond that, the raw magical power in the staff has exceeded any other I’ve seen or worked with. I have no doubt it will be invaluable to your crusade.</i>\"\n\n");
 			outputText("You take the staff. From the first touch you feel the immense arcane power within the wood.\n\n");
 			inventory.takeItem(weapons.ASCENSU, camp.returnToCampUseFourHours);
+		}
+		
+		public function KonstantinSmeltingMenu():void {
+			clearOutput();
+			outputText("Konstantin eyes you expectantly.\n\n");
+			outputText("\"<i>So [name], do you have anything special for me today?</i>\"\n\n");
+			menu();
+			if (player.hasItem(useables.COP_ORE) && player.hasItem(useables.TIN_ORE)) addButton(0, "Copper/Tin", KonstantinSmeltingMenuCopperAndTin);
+			if (player.hasItem(useables.EBONBLO)) addButton(1, "Ebonbloom", KonstantinSmeltingMenuEbonbloom);
+			addButton(14, "No", KonstantinSmeltingMenuNo);
+		}
+		private function KonstantinSmeltingMenuCopperAndTin():void {
+			menu();
+			if (player.hasItem(useables.COP_ORE) && player.hasItem(useables.TIN_ORE)) addButton(0, "One", KonstantinSmeltingMenuProcess, "copper and tin", 1);
+			//if (player.hasItem(useables.COP_ORE, 5) && player.hasItem(useables.TIN_ORE, 5)) addButton(1, "Five", KonstantinSmeltingMenuProcess, "copper and tin", 2, true);
+			addButton(14, "Back", KonstantinSmeltingMenu);
+		}
+		private function KonstantinSmeltingMenuEbonbloom():void {
+			menu();
+			if (player.hasItem(useables.EBONBLO)) addButton(0, "One", KonstantinSmeltingMenuProcess, "ebonbloom", 3);
+			//if (player.hasItem(useables.EBONBLO, 5)) addButton(1, "Five", KonstantinSmeltingMenuProcess, "ebonbloom", 4, true);
+			addButton(14, "Back", KonstantinSmeltingMenu);
+		}
+		private function KonstantinSmeltingMenuNo():void {
+			outputText("No, not at the moment but you keep on looking. Hearing this, the bear smith nods and resumes his work.\n\n");
+			doNext(KonstantinMainCampMenu);
+		}
+		private function KonstantinSmeltingMenuProcess(material:String = "", craft:Number = 1, amount:Boolean = false):void {
+			outputText("The bear smith grabs the ore from you and examines it.\n\n");
+			outputText("\"<i>That...THAT is some genuine "+material+"! I will be able to forge some amazing stuff with this. The ingots are on me. You got the materials, after all. They’re yours… But if you want me to make something from them, I still need to get paid.</i>\"\n\n");
+			outputText("He gets to work immediately, gently sliding the "+material+" into his forge.. Once they’re all properly melted, he pours the molten "+material+" into an ingot cast. He looks down at the bar, smiling to himself as if anticipating the work he could do. Konstantin lays the mold on the ground, letting the air cool it. He looks at you before speaking. \"<i>Water in the bar would be bad, [name], best to let it air dry.</i>\" He waits by the bar and hands it to you once it's safe to touch.\n\n");
+			outputText("\"<i>Here, [name], freshly smelted "+material+".");
+			if (amount) outputText(" Of course, I would need more of it for armor or weapons but for now it'd do a great job for smaller items. I could still make arrowheads, or…</i>\" He scratches his chin in thought.\n\n");
+			else outputText("</i>\"\n\n");
+			var itype:ItemType;
+			switch(craft) {
+			case 1: //1 Copper+Tin ore
+				player.destroyItems(useables.COP_ORE, 1);
+				player.destroyItems(useables.TIN_ORE, 1);
+				itype = useables.BRONZEB;
+				break;
+			case 2: //5 Copper+Tin ores
+				player.destroyItems(useables.COP_ORE, 5);
+				player.destroyItems(useables.TIN_ORE, 5);
+				itype = useables.BRONZEB;
+				break;
+			case 3: //1 Ebonbloom
+				player.destroyItems(useables.EBONBLO, 1);
+				itype = useables.EBONING;
+				break;
+			case 4: //5 Ebonblooms
+				player.destroyItems(useables.EBONBLO, 5);
+				itype = useables.EBONING;
+				break;
+			default:
+				outputText("Something bugged! Please report this bug to Ormael/Aimozg.");
+			}
+			inventory.takeItem(itype, camp.returnToCampUseOneHour);
 		}
 		
 		public function KonstantinTinkeringMenu():void {
