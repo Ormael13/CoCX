@@ -382,7 +382,7 @@ public class Mountain extends BaseContent
 					startCombat(new MinotaurLord());
 					return;
 				}
-				minotaurScene.getRapedByMinotaur(true);
+				minotaurScene.minotaurAutorape();
 				spriteSelect(SpriteDb.s_minotaur);
 			}
 		}
