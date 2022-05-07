@@ -185,7 +185,7 @@ public class Mountain extends BaseContent
 							var check4a:Boolean = flags[kFLAGS.HELLHOUND_MASTER_PROGRESS] == 0;
 							var check4b:Boolean = flags[kFLAGS.HELLHOUND_MASTER_PROGRESS] == 1
 												  && player.hasKeyItem("Marae's Lethicite") >= 0
-												  && player.keyItemvX("Marae's Lethicite", 2) < 3;
+												  && player.keyItemvX("Marae's Lethicite", 1) > 0;
 							return flags[kFLAGS.HELLHOUND_MASTER_PROGRESS] < 3
 								   && check1 && check2 && check3 && (check4a || check4b);
 						},

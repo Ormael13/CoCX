@@ -208,7 +208,7 @@ public class HellHoundScene extends BaseContent
 
 			outputText("Some time later, you find yourself at the base of the mountains.  Your mind is once again your own.  After a few moments you realize that you can still feel the faint call of the hellhound master's voice in your mind, then it's gone.  You could probably find it again without too much trouble if you just head back into the mountains, but there isn't really much point unless you've got something to trade for the hellfire he mentioned...");
 
-			if (player.hasKeyItem("Marae's Lethicite") >= 0 && player.keyItemvX("Marae's Lethicite", 2) < 3) outputText(" You extract Marae's lethicite from your pack, and wonder if you really want to trade it for the hellfire he offered.");
+			outputText(" You extract Marae's lethicite from your pack, and wonder if you really want to trade it for the hellfire he offered.");
 			//advance to repeat version
 			flags[kFLAGS.HELLHOUND_MASTER_PROGRESS] = 1;
 			doNext(camp.returnToCampUseOneHour);
@@ -234,27 +234,24 @@ public class HellHoundScene extends BaseContent
 			outputText("You barely spare a thought at the interior in your hurry to get to the master.  As you burst into the room, the master's eyes light up at the sight of you.  \"<i>Ah!  It is my favorite fan.  Have you brought me a piece of that pink crystal I asked you for?</i>\"\n\n");
 
 			//Player chooses to either give Merae's full Lethicite, or a regular piece of Lethicite.  Limited by what they have, of course.  They cannot choose to leave at this point.  Merae's Lethicite -> G, Regular Lethicite -> H.
-			if (player.keyItemvX("Marae's Lethicite", 2) == 0) simpleChoices("Give All", giveALLTHELETHICITES, "Give Part", giveLethicitePiece, "", null, "", null, "", null);
-			else doNext(giveLethicitePiece);
+			menu();
+			addButton(0, "Give Part", giveLethicitePiece);
+			addButtonIfTrue(1, "Give All", giveALLTHELETHICITES,  "Oops. You've already wasted a part of it somewhere.",
+				player.keyItemvX("Marae's Lethicite", 1) == 3);
 		}
 
 //Regular Lethicite
 		private function giveLethicitePiece():void
 		{
 			clearOutput();
-			//Give a single piece of Lethicite, get hellfire
 			outputText("You produce the pink crystal and hand it to the master.  As the crystal touches his hand, he gives a low growl of pleasure and holds the crystal up to his eyes.  \"<i>Ah yes, excellent!  Thank you so much for this tasty treat of power.</i>\"\n\n");
-			//if (PC gave 2/3 Merae's crystal)
-			if (player.keyItemvX("Marae's Lethicite", 1) == 2) {
+			if (player.keyItemvX("Marae's Lethicite", 1) == 3) {
+				outputText("He looks at the crystal for some time, obviously wanting to consume it all, but then breaks a small part of it and giving the crystal back to you.  \"<i>This is enough for the hellfire, I think.  Go ahead and keep the rest, my favorite fan!</i>\"\n\n");
+			}
+			else if (player.keyItemvX("Marae's Lethicite", 1) == 2) {
 				outputText("He looks at the crystal for a moment, before biting off half of it and giving the other half back to you.  \"<i>This is enough for the hellfire, I think.  Go ahead and keep the rest, my favorite fan!</i>\"\n\n");
-				//Replace 2/3 Merae's Lethicite with regular lethicite.
-				player.addKeyValue("Marae's Lethicite", 1, -1);
 			}
-			else {
-				//Remove 1 lethicite crystal from the PC
-				flags[kFLAGS.MARAE_LETHICITE]--;
-				player.addKeyValue("Marae's Lethicite", 1, -1);
-			}
+			player.addKeyValue("Marae's Lethicite", 1, -1);
 			outputText("He rolls the crystal around in his mouth for a few moments before swallowing the crystal.  In a moment, white flames rise up around his body, and he gives you a wicked grin.  \"<i>Now, let me give you the gift promised for this tribute.</i>\"\n\n");
 
 			outputText("He extracts a special cup from his throne, and starts to stroke the two of his large 10-inch pointed members with one hand.  \"<i>Watch closely, I want you to see where this power comes from.</i>\"  He starts to pant as the movements of his hands intensifies.  At the same time the aura concentrates on his pair of cocks, and he brings the cup in front of them.  He gives a satisfied groan, and white hot cum sprays around the cup, carrying the same flame.  Clearly he isn't finished yet, and he brings the cup under his equipment, to catch a spray of less masculine fluids, flowing out from the omnibus's other genitals.\n\n");
