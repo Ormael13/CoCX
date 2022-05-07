@@ -97,7 +97,7 @@ use namespace CoC;
 			// this.plural = false;
 			this.createVagina(false, VaginaClass.WETNESS_SLAVERING, VaginaClass.LOOSENESS_NORMAL);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 300, 0, 0, 0);
-			createBreastRow(Appearance.breastCupInverse("Z"));
+			createBreastRow(Appearance.breastCupInverse("ZZ"));
 			this.ass.analLooseness = AssClass.LOOSENESS_STRETCHED;
 			this.ass.analWetness = AssClass.WETNESS_SLIME_DROOLING;
 			this.tallness = 84;
