@@ -73,7 +73,7 @@ package classes.Scenes.Areas.DefiledRavine
 			// this.plural = false;
 			this.createVagina(false, VaginaClass.WETNESS_SLICK, VaginaClass.LOOSENESS_GAPING);
 			this.createStatusEffect(StatusEffects.BonusVCapacity, 100, 0, 0, 0);
-			createBreastRow(Appearance.breastCupInverse("P"));
+			createBreastRow(Appearance.breastCupInverse("RR"));
 			this.ass.analLooseness = AssClass.LOOSENESS_LOOSE;
 			this.ass.analWetness = AssClass.WETNESS_SLIMY;
 			this.tallness = 84;
