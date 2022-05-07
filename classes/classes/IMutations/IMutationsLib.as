@@ -57,6 +57,8 @@ public class IMutationsLib
 		public static const GazerEyesIM:PerkType = new GazerEyesMutation();
 		public static const GorgonEyesIM:PerkType = new GorgonEyesMutation();
 		public static const HarpyHollowBonesIM:PerkType = new HarpyHollowBonesMutation();
+		public static const HeartOfTheStormIM:PerkType = new HeartOfTheStormMutation();
+		public static const HinezumiBurningBloodIM:PerkType = new HinezumiBurningBloodMutation();
 		public static const KitsuneThyroidGlandIM:PerkType = new KitsuneThyroidGlandMutation();
 		public static const TrachealSystemIM:PerkType = new TrachealSystemMutation();
 
@@ -70,9 +72,10 @@ public class IMutationsLib
 		public static function mutationsArray(spec:String = "", merge:Boolean = false):Array {
 			var IMutationsList:Array = []
 			function IMutationsHeart():void{
-				IMutationsList.push([BlackHeartIM, BlackHeartMutation]);
-				IMutationsList.push([DraconicHeartIM, DraconicHeartMutation]);
-				IMutationsList.push([FrozenHeartIM, FrozenHeartMutation]);
+				IMutationsList.push([BlackHeartIM,BlackHeartMutation]);
+				IMutationsList.push([DraconicHeartIM,DraconicHeartMutation]);
+				IMutationsList.push([FrozenHeartIM,FrozenHeartMutation]);
+				IMutationsList.push([HeartOfTheStormIM,HeartOfTheStormMutation]);
 			}
 			function IMutationsMuscle():void{
 
@@ -84,50 +87,51 @@ public class IMutationsLib
 
 			}
 			function IMutationsBloodStream():void{
-				IMutationsList.push([FeyArcaneBloodstreamIM, FeyArcaneBloodstreamMutation]);
+				IMutationsList.push([FeyArcaneBloodstreamIM,FeyArcaneBloodstreamMutation]);
+				IMutationsList.push([HinezumiBurningBloodIM,HinezumiBurningBloodMutation]);
 			}
 			function IMutationsFaT():void{
 
 			}
 			function IMutationsLungs():void{
-				IMutationsList.push([DraconicLungIM, DraconicLungMutation]);
-				IMutationsList.push([DrakeLungIM, DrakeLungMutation]);
+				IMutationsList.push([DraconicLungIM,DraconicLungMutation]);
+				IMutationsList.push([DrakeLungIM,DrakeLungMutation]);
 			}
 			function IMutationsMetabolism():void{
-				IMutationsList.push([DisplacerMetabolismIM, DisplacerMetabolismMutation]);
+				IMutationsList.push([DisplacerMetabolismIM,DisplacerMetabolismMutation]);
 				//IMutationsList.push([SlimeMetabolismIM,SlimeMetabolismMutation]);
 			}
 			function IMutationsOvaries():void{
-				IMutationsList.push([FloralOvariesIM, FloralOvariesMutation]);
+				IMutationsList.push([FloralOvariesIM,FloralOvariesMutation]);
 			}
 			function IMutationsTesticles():void{
-				IMutationsList.push([EasterBunnyEggBagIM, EasterBunnyEggBagMutation]);
+				IMutationsList.push([EasterBunnyEggBagIM,EasterBunnyEggBagMutation]);
 			}
 			function IMutationsEyes():void{
 				IMutationsList.push([GazerEyesIM,GazerEyesMutation]);
 				IMutationsList.push([GorgonEyesIM,GorgonEyesMutation]);
 			}
 			function IMutationsPeriNervSys():void{
-				IMutationsList.push([EclipticMindIM, EclipticMindMutation]);
-				IMutationsList.push([ElvishPeripheralNervSysIM, ElvishPeripheralNervSysMutation]);
+				IMutationsList.push([EclipticMindIM,EclipticMindMutation]);
+				IMutationsList.push([ElvishPeripheralNervSysIM,ElvishPeripheralNervSysMutation]);
 			}
 			function IMutationsBone():void{
-				IMutationsList.push([DraconicBonesIM, DraconicBonesMutation]);
-				IMutationsList.push([HarpyHollowBonesIM, HarpyHollowBonesMutation]);
+				IMutationsList.push([DraconicBonesIM,DraconicBonesMutation]);
+				IMutationsList.push([HarpyHollowBonesIM,HarpyHollowBonesMutation]);
 			}
 			function IMutationsThyroidGlands():void{
-				IMutationsList.push([KitsuneThyroidGlandIM, KitsuneThyroidGlandMutation]);
+				IMutationsList.push([KitsuneThyroidGlandIM,KitsuneThyroidGlandMutation]);
 			}
 			function IMutationsParaThyroidGlands():void{
 
 			}
 			function IMutationsAdaptations():void{
-				IMutationsList.push([ArachnidBookLungIM, ArachnidBookLungMutation]);
-				IMutationsList.push([CatLikeNimblenessIM, CatLikeNimblenessMutation]);
-				IMutationsList.push([TrachealSystemIM, TrachealSystemMutation]);
+				IMutationsList.push([ArachnidBookLungIM,ArachnidBookLungMutation]);
+				IMutationsList.push([CatLikeNimblenessIM,CatLikeNimblenessMutation]);
+				IMutationsList.push([TrachealSystemIM,TrachealSystemMutation]);
 			}
 			function IMutationsDeprecated():void{
-				IMutationsList.push([MutationsTemplateIM, MutationTemplate]);
+				IMutationsList.push([MutationsTemplateIM,MutationTemplate]);
 			}
 
 			switch(spec){

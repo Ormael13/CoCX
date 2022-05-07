@@ -6,22 +6,24 @@ package classes.IMutations
 {
     import classes.PerkClass;
     import classes.PerkType;
-    import classes.Player;
+import classes.Player;
 
-public class DraconicHeartMutation extends PerkType
+public class HeartOfTheStormMutation extends PerkType
     {
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
             var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.DraconicHeartIM)
+            var pTier:int = player.perkv1(IMutationsLib.HeartOfTheStormIM)
             if (pTier >= 1){
-                descS = "Your heart was strengthened to better handle your changing body. (+1 Fatigue / +4 SF / +5 Mana / +1 Wrath regen)";
-            }
-            if (pTier >= 2){
-                descS = "Each heartbeat fills your body with great power. (+2 Fatigue / +8 SF / +10 Mana / +2 Wrath regen, +5% of max core Str as phantom Str)";
+                descS += "Increase the power of all Wind and Lightning racial abilities";
             }
             if (pTier >= 3){
-                descS = "Your heart metamorphosis reached pseudo-dragon level. (+3 Fatigue / +12 SF / +15 Mana / +3 Wrath regen, +1% HP regen, +15% of max core Str as phantom Str)";
+                descS += ", you can fly continuously as long as you yourself can fly, if you have enery attacks they now include a chance to stun";
+            }
+            if (pTier >=2){
+                descS += " and you increase wind and electricity resistance by ";
+                if (pTier == 2) descS += "10%";
+                if (pTier == 3) descS += "30%";
             }
             if (descS != "")descS += ".";
             return descS;
@@ -30,7 +32,7 @@ public class DraconicHeartMutation extends PerkType
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
-            switch (player.perkv1(IMutationsLib.DraconicHeartIM)){
+            switch (player.perkv1(IMutationsLib.HeartOfTheStormIM)){
                 case 2:
                     sufval = "(Primitive)";
                     break;
@@ -40,24 +42,23 @@ public class DraconicHeartMutation extends PerkType
                 default:
                     sufval = "";
             }
-            return "Draconic Heart" + sufval;
+            return "Heart Of The Storm" + sufval;
         }
 
         //Mutation Requirements
         public static function pReqs(pTier:int = 0):void{
             try{
                 //This helps keep the requirements output clean.
-                IMutationsLib.DraconicHeartIM.requirements = [];
+                IMutationsLib.HeartOfTheStormIM.requirements = [];
                 if (pTier == 0){
-                    IMutationsLib.DraconicHeartIM.requireHeartMutationSlot()
-                    .requirePerk(IMutationsLib.DraconicBonesIM)
-                    .requireCustomFunction(function (player:Player):Boolean {
-                        return (player.dragonScore() >= 8 || player.frostWyrmScore() >= 10 || player.leviathanScore() >= 20);
-                    }, "Dragon race or its variants");
+                    IMutationsLib.HeartOfTheStormIM.requireHeartMutationSlot()
+                        .requireCustomFunction(function (player:Player):Boolean {
+                            return player.raijuScore() >= 10 || player.thunderbirdScore() >= 12 || player.kamaitachiScore() >= 14 || player.couatlScore() >= 11;
+                        }, "Stormborn race");
                 }
                 else{
                     var pLvl:int = pTier * 30;
-                    IMutationsLib.DraconicHeartIM.requireLevel(pLvl);
+                    IMutationsLib.HeartOfTheStormIM.requireLevel(pLvl);
                 }
             }catch(e:Error){
                 trace(e.getStackTrace());
@@ -72,15 +73,15 @@ public class DraconicHeartMutation extends PerkType
 
         //Mutations Buffs
         public function pBuffs(pTier:int = 1):Object{
-            var pBuffs:Object = {}; //0.05, 0.1, 0.2
-            if (pTier >= 1) pBuffs['str.mult'] += 0.05;
-            if (pTier >= 2) pBuffs['str.mult'] += 0.1;
-            if (pTier >= 3) pBuffs['str.mult'] += 0.2;
+            var pBuffs:Object = {};
+            if (pTier >= 1) pBuffs['spe.mult'] += 0.05;
+            if (pTier >= 2) pBuffs['spe.mult'] += 0.1;
+            if (pTier >= 3) pBuffs['spe.mult'] += 0.2;
             return pBuffs;
         }
 
-        public function DraconicHeartMutation() {
-            super("Draconic Heart IM", "Draconic Heart", ".");
+        public function HeartOfTheStormMutation() {
+            super("Heart Of The Storm IM", "Heart Of The Storm", ".");
         }
 
         override public function keepOnAscension(respec:Boolean = false):Boolean {

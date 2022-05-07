@@ -68,7 +68,9 @@ package classes.IMutations
         //Mutations Buffs
         public function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {};
-            pBuffs['spe.mult'] = 0.05*2^pTier-1
+            if (pTier >= 1) pBuffs['spe.mult'] += 0.05;
+            if (pTier >= 2) pBuffs['spe.mult'] += 0.1;
+            if (pTier >= 3) pBuffs['spe.mult'] += 0.2;
             return pBuffs;
         }
 
