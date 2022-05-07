@@ -6,6 +6,7 @@ package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.Scenes.Crafting;
 	import classes.Scenes.SceneLib;
 	import classes.Scenes.NPCs.TyrantiaFollower;
 	

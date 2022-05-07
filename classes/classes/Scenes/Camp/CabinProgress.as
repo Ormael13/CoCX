@@ -4,6 +4,7 @@ import classes.*;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.Camp;
+import classes.Scenes.Crafting;
 import classes.Scenes.SceneLib;
 
 /**
@@ -250,7 +251,7 @@ import classes.Scenes.SceneLib;
 		public function quarrySite():void {
 			clearOutput();
 			outputText("As you explore the mountain area you run into what appears to be a very good mineral formation.");
-			if (player.hasKeyItem("Old Pickaxe") < 0) outputText(" Next to it is an old pickaxe left by a native who likely met an unfortunate end.");
+			if (player.hasKeyItem("Old Pickaxe") < 0) outputText(" Next to it is an old pickaxe and leather bag with runic engraving left by a native who likely met an unfortunate end.");
 			if (!player.hasStatusEffect(StatusEffects.ResourceNode1)) player.createStatusEffect(StatusEffects.ResourceNode1, 0, 0, 0, 0);
 			if (player.statusEffectv2(StatusEffects.ResourceNode1) < 5) {
 				if (player.statusEffectv2(StatusEffects.ResourceNode1) == 4) outputText("You have found this quarry enough times to be able to find it in the future without trouble. ('Quarry' option has been unlocked in Places menu)\n\n");
@@ -265,8 +266,12 @@ import classes.Scenes.SceneLib;
 			addButton(14, "Leave", camp.returnToCampUseOneHour);
 		}
 		private function quarrySitePickaxe():void {
-			outputText("\n\nYou pick up the old mining tool. This should prove useful when digging up gems, ore or stone from the landscape.");
+			outputText("\n\nYou pick up the old mining tool. This should prove useful when digging up gems, ore or stone from the landscape. Also inspecting leather bag it turns oput to be some lowest quality bag enchanted to store ores and other crafting materials in it. (It can store up to 5 pieces of 4 types of crafting materials)");
 			player.createKeyItem("Old Pickaxe", 0, 0, 0, 0);
+			Crafting.BagSlot01Cap = 5;
+			Crafting.BagSlot02Cap = 5;
+			Crafting.BagSlot03Cap = 5;
+			Crafting.BagSlot04Cap = 5;
 			doNext(quarrySite);
 		}
 		private function quarrySiteMine():void {
