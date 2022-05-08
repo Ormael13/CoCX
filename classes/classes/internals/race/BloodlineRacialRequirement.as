@@ -18,5 +18,9 @@ public class BloodlineRacialRequirement extends RacialRequirement {
 	override public function score(body:BodyData):int {
 		return body.player.increaseFromBloodlinePerks();
 	}
+	
+	override public function varyingScore():Boolean {
+		return true;
+	}
 }
 }

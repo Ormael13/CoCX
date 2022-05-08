@@ -1,13 +1,14 @@
 package classes.internals.race {
 import classes.BodyData;
 import classes.PerkType;
+import classes.Race;
 import classes.RaceTier;
 import classes.Stats.StatUtils;
 import classes.internals.Utils;
 
 public class RaceTierBuilder {
 	public var tierNumber: int;
-	public var raceBuilder:RaceBuilder;
+	public var race:Race;
 	public var minScore:int;
 	public var name:String;
 	/**
@@ -19,14 +20,20 @@ public class RaceTierBuilder {
 	public var requiresPreviousTier:Boolean = false;
 	public var extraBonuses:/*String*/Array = [];
 	
+	private static var currentBuilder:RaceTierBuilder = null;
+	
 	public function RaceTierBuilder(
-			raceBuilder: RaceBuilder,
+			race: Race,
 			tierNumber: int,
 			minScore: int,
 			maleName: String,
 			femaleName: String
 	) {
-		this.raceBuilder = raceBuilder;
+		if (currentBuilder != null) {
+			trace('[ERROR] Race tier '+currentBuilder.name+" end() was not called.");
+		}
+		currentBuilder = this;
+		this.race = race;
 		this.tierNumber = tierNumber;
 		this.minScore = minScore;
 		this.name = maleName;
@@ -103,13 +110,13 @@ public class RaceTierBuilder {
 		return this;
 	}
 	
-	public function end():RaceBuilder {
+	public function end():void {
 		for (var stat:String in buffObj) {
 			if (!StatUtils.isKnownStat(stat)) {
-				trace("[ERROR] Race "+raceBuilder.name+" tier "+name+" buffs non-existing stat "+stat);
+				trace("[ERROR] Race "+race.name+" tier "+name+" buffs non-existing stat "+stat);
 			}
 		}
-		raceBuilder.tiers.push(new RaceTier(
+		race.tiers.push(new RaceTier(
 				tierNumber,
 				name,
 				nameFn,
@@ -118,7 +125,7 @@ public class RaceTierBuilder {
 				requirements,
 				extraBonuses
 		))
-		return raceBuilder;
+		currentBuilder = null;
 	}
 	
 	/*************************************************************************************/
@@ -132,7 +139,7 @@ public class RaceTierBuilder {
 		var operatorObject:Object = RaceUtils.parseOperatorObject(
 				type,
 				BodyData.Slots[slot].nameFn,
-				"["+raceBuilder.name+" "+BodyData.Slots[slot].name+"]"
+				"["+race.name+" "+BodyData.Slots[slot].name+"]"
 		);
 		var checkFn:Function = RaceUtils.composeOpArg(
 				RaceUtils.argumentSlotFn(slot),

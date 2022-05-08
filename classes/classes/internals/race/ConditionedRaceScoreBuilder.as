@@ -1,16 +1,16 @@
 package classes.internals.race {
+import classes.Race;
+
 public class ConditionedRaceScoreBuilder extends RaceScoreBuilder{
 	private var condition:Function;
 	private var conditionName:String;
 	public function ConditionedRaceScoreBuilder(
-			raceBuilder:RaceBuilder,
-			prev:RaceScoreBuilder,
+			race:Race,
 			condition:Function,
 			conditionName:String,
 			minScore:int
 	) {
-		super(raceBuilder, prev, minScore);
-		this.next = prev||this;
+		super(race, minScore);
 		this.condition = condition;
 		this.conditionName = conditionName;
 	}

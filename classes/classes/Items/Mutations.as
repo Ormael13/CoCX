@@ -17,13 +17,10 @@ import classes.BodyParts.Wings;
 import classes.GlobalFlags.kACHIEVEMENTS;
 import classes.GlobalFlags.kFLAGS;
 import classes.Items.Consumables.EmberTF;
-import classes.PerkLib;
-import classes.Scenes.Areas.Forest.KitsuneScene;
+import classes.Races.KitsuneRace;
 import classes.Scenes.SceneLib;
 import classes.Stats.Buff;
 import classes.Transformations.TransformationUtils;
-
-import classes.CoC;
 
 public final class Mutations extends MutationsHelper {
     public function Mutations() {
@@ -11253,10 +11250,10 @@ public final class Mutations extends MutationsHelper {
 
         //[Change Hair Color: Golden-blonde or Reddish-orange]
         var fox_hair:Array = ["golden blonde", "reddish-orange", "silver", "white", "red", "black"];
-        if (!InCollection(player.hairColor, fox_hair) && !InCollection(player.hairColor, KitsuneScene.basicKitsuneHair) && !InCollection(player.hairColor, KitsuneScene.elderKitsuneColors) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
+        if (!InCollection(player.hairColor, fox_hair) && !InCollection(player.hairColor, KitsuneRace.KitsuneHairColors) && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
             if (player.tailType == Tail.FOX && player.tailCount > 1)
-                if (player.tailCount < 9) player.hairColor = randomChoice(KitsuneScene.basicKitsuneHair);
-                else player.hairColor = randomChoice(KitsuneScene.elderKitsuneColors);
+                if (player.tailCount < 9) player.hairColor = randomChoice(KitsuneRace.BasicKitsuneHairColors);
+                else player.hairColor = randomChoice(KitsuneRace.ElderKitsuneColors);
             else player.hairColor = randomChoice(fox_hair);
             outputText("[pg]Your scalp begins to tingle, and you gently grasp a strand of hair, pulling it out to check it.  Your hair has become [haircolor]!");
         }
@@ -11434,12 +11431,12 @@ public final class Mutations extends MutationsHelper {
         //FOURTH
         if ((enhanced || player.lowerBody == LowerBody.FOX) && !player.hasFur() && player.lowerBody != LowerBody.GARGOYLE && changes < changeLimit && rand(4) == 0) {
             if (player.kitsuneScore() >= 4)
-                if (InCollection(player.hairColor, KitsuneScene.basicKitsuneFur) || InCollection(player.hairColor, KitsuneScene.elderKitsuneColors)) {
+                if (InCollection(player.hairColor, KitsuneRace.KitsuneFurColors)) {
                     player.skin.coat.color = player.hairColor;
                 } else if (player.tailType == Tail.FOX && player.tailCount == 9)
-                    player.skin.coat.color = randomChoice(KitsuneScene.elderKitsuneColors);
+                    player.skin.coat.color = randomChoice(KitsuneRace.ElderKitsuneColors);
                 else
-                    player.skin.coat.color = randomChoice(KitsuneScene.basicKitsuneFur);
+                    player.skin.coat.color = randomChoice(KitsuneRace.BasicKitsuneFurColors);
             else {
                 player.skin.coat.color = randomChoice("orange and white", "orange and white", "orange and white", "red and white", "black and white", "white", "tan", "brown");
             }
@@ -12092,16 +12089,15 @@ public final class Mutations extends MutationsHelper {
 			transformations.EarsFox.applyEffect();
         });
         //[Change Hair Color: Golden-blonde, SIlver Blonde, White, Black, Red]
-        mutationStep(!InCollection(player.hairColor, KitsuneScene.basicKitsuneHair) && player.lowerBody != LowerBody.GARGOYLE && !InCollection(player.hairColor, KitsuneScene.elderKitsuneColors), mystic ? 2 : 4, function ():void {
-            if (player.tailType == Tail.FOX && player.tailCount == 9) player.hairColor = randomChoice(KitsuneScene.elderKitsuneColors);
-            else player.hairColor = randomChoice(KitsuneScene.basicKitsuneHair);
+        mutationStep(!InCollection(player.hairColor, KitsuneRace.KitsuneHairColors) && player.lowerBody != LowerBody.GARGOYLE, mystic ? 2 : 4, function ():void {
+            if (player.tailType == Tail.FOX && player.tailCount == 9) player.hairColor = randomChoice(KitsuneRace.ElderKitsuneColors);
+            else player.hairColor = randomChoice(KitsuneRace.BasicKitsuneHairColors);
             outputText("[pg]Your scalp begins to tingle, and you gently grasp a strand, pulling it forward to check it.  Your hair has become the same [haircolor] as a kitsune's!");
         });
         var tone:Array = mystic ? ["dark", "ebony", "ashen", "sable", "milky white"] : ["tan", "olive", "light"];
         //[Change Skin Type: remove fur or scales, change skin to Tan, Olive, or Light]
         var changed:Boolean = mutationStep(player.skin.hasFur()
-                && !InCollection(player.coatColor, KitsuneScene.basicKitsuneFur)
-                && !InCollection(player.coatColor, KitsuneScene.elderKitsuneColors)
+                && !InCollection(player.coatColor, KitsuneRace.KitsuneFurColors)
                 && !InCollection(player.coatColor, ["orange and white", "black and white", "red and white", "tan", "brown"])
                 || !player.skin.hasFur() && player.skin.hasCoat(), mystic ? 1 : 2, function ():void {
             outputText("[pg]You begin to tingle all over your [skin], starting as a cool, pleasant sensation but gradually worsening until you are furiously itching all over.");

@@ -1,6 +1,5 @@
 package classes.internals.race {
 import classes.BodyData;
-import classes.internals.Utils;
 
 public class RacialRequirement {
 	
@@ -35,6 +34,9 @@ public class RacialRequirement {
 	}
 	public function score(body:BodyData): int {
 		return _score;
+	}
+	public function varyingScore():Boolean {
+		return false;
 	}
 	
 	public function check(body:BodyData, currentScore:int):Boolean {

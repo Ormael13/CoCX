@@ -6,6 +6,7 @@ import classes.Scenes.NPCs.Forgefather;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.SceneLib;
 import classes.internals.Utils;
+import classes.internals.race.BloodlineRacialRequirement;
 import classes.internals.race.CustomRacialRequirement;
 import classes.internals.race.RacialRequirement;
 
@@ -126,9 +127,7 @@ public class PlayerAppearance extends BaseContent {
 		ApexRaceDisplayTextUpdate();
 		// Display selected race
 		var races:Array = [];
-		for (var i:int = 0; i < Race.ALL_RACES.length; i++) {
-			var x:Race = Race.ALL_RACES[i];
-			if (!x) continue; // Skip non-existing races
+		for each(var x:Race in Race.AllRacesByName) {
 			races.push( { label: x.name, race: x} );
 		}
 		// fill the races
@@ -1043,14 +1042,13 @@ public class PlayerAppearance extends BaseContent {
 						outputText("[font-default]")
 					}
 					outputText(rr.name);
-					if (rr instanceof CustomRacialRequirement && !rr.check(body, score)) {
+					if (rr.varyingScore() && !rr.check(body, score)) {
 						// do not display (+X) for requirements that have varying values and
 						// didn't pass, because value could be incorrect
 					} else {
 						outputText(" (" + rr.score(body) + ")");
 					}
 					outputText("[/font]\n");
-					outputText(rr.describe(body)+"[/font]\n")
 				}
 				if (race.tiers.length>0) {
 					outputText("\t<b>Tiers:</b>\n")
@@ -1069,7 +1067,7 @@ public class PlayerAppearance extends BaseContent {
 			}
 		}
 		mainView.linkHandler = function(event:String):void {
-			var clickedRace2:Race = Race.ALL_RACES[parseInt(event)];
+			var clickedRace2:Race = Race.byId(parseInt(event));
 			if (clickedRace2 == clickedRace) clickedRace2 = null;
 			RacialScores(clickedRace2);
 		}

@@ -4,10 +4,10 @@
  */
 package classes.IMutations
 {
-    import classes.PerkClass;
-    import classes.PerkType;
-    import classes.Player;
-import classes.Race;
+import classes.PerkClass;
+import classes.PerkType;
+import classes.Player;
+import classes.Races;
 
 public class DraconicHeartMutation extends PerkType
     {
@@ -53,7 +53,7 @@ public class DraconicHeartMutation extends PerkType
                     IMutationsLib.DraconicHeartIM.requireHeartMutationSlot()
                     .requirePerk(IMutationsLib.DraconicBonesIM)
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return (player.racialTier(Race.DRAGON) >= 1 || player.frostWyrmScore() >= 10 || player.leviathanScore() >= 20);
+                        return (player.racialTierNumber(Races.DRAGON) >= 1 || player.frostWyrmScore() >= 10 || player.leviathanScore() >= 20);
                     }, "Dragon race or its variants");
                 }
                 else{

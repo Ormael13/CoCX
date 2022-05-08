@@ -32,5 +32,9 @@ public class CustomRacialRequirement extends RacialRequirement{
 	override public function score(body:BodyData):int {
 		return scoreFn(body);
 	}
+	
+	override public function varyingScore():Boolean {
+		return true;
+	}
 }
 }

@@ -4,13 +4,13 @@
  */
 package classes.IMutations
 {
-    import classes.BodyParts.Arms;
-    import classes.BodyParts.LowerBody;
-    import classes.BodyParts.Tail;
-    import classes.PerkClass;
-    import classes.PerkType;
-    import classes.Player;
-import classes.Race;
+import classes.BodyParts.Arms;
+import classes.BodyParts.LowerBody;
+import classes.BodyParts.Tail;
+import classes.PerkClass;
+import classes.PerkType;
+import classes.Player;
+import classes.Races;
 
 public class DraconicBonesMutation extends PerkType
     {
@@ -64,7 +64,7 @@ public class DraconicBonesMutation extends PerkType
                                 return (Tail.hasDraconicTail(player) || LowerBody.hasDraconicLegs(player) && LowerBody.hasTail(player));
                             }, "Dragon race or its variants tail")
                             .requireCustomFunction(function (player:Player):Boolean {
-                                return (player.racialTier(Race.DRAGON) >= 1 || player.jabberwockyScore() >= 10 || player.frostWyrmScore() >= 10 || player.leviathanScore() >= 20);
+                                return (player.racialTierNumber(Races.DRAGON) >= 1 || player.jabberwockyScore() >= 10 || player.frostWyrmScore() >= 10 || player.leviathanScore() >= 20);
                             }, "Dragon race or its variants");
                 }
                 else{

@@ -6,8 +6,10 @@ package classes.Scenes
 {
 import classes.*;
 import classes.BodyParts.*;
-import classes.IMutations.IMutationsLib;
+import classes.GeneticMemories.*;
 import classes.GlobalFlags.kFLAGS;
+import classes.IMutations.IMutationsLib;
+import classes.Items.*;
 import classes.Scenes.Areas.DeepSea.Kraken;
 import classes.Scenes.Areas.Forest.TamainsDaughtersScene;
 import classes.Scenes.Areas.Forest.TamaniScene;
@@ -16,10 +18,10 @@ import classes.Scenes.Areas.HighMountains.IzumiScene;
 import classes.Scenes.Areas.HighMountains.MinotaurMobScene;
 import classes.Scenes.Dungeons.D3.Lethice;
 import classes.Scenes.Dungeons.D3.SuccubusGardener;
+import classes.Scenes.Dungeons.EbonLabyrinth.*;
 import classes.Scenes.Explore.Pierce;
 import classes.Scenes.Explore.TheDummy;
 import classes.Scenes.Monsters.Malikore;
-import classes.Scenes.Monsters.Oozaru;
 import classes.Scenes.NPCs.Alvina;
 import classes.Scenes.NPCs.Aria;
 import classes.Scenes.NPCs.Belisa;
@@ -35,11 +37,8 @@ import classes.Scenes.NPCs.Zenji;
 import classes.Scenes.NPCs.ZenjiScenes;
 import classes.Scenes.Places.Boat.Marae;
 import classes.Scenes.Places.HeXinDao.AdventurerGuild;
-import classes.Items.*;
 import classes.Scenes.Places.TrollVillage;
 import classes.Stats.Buff;
-import classes.Scenes.Dungeons.EbonLabyrinth.*;
-import classes.GeneticMemories.*;
 
 use namespace CoC;
 
@@ -3057,7 +3056,7 @@ public class Soulforce extends BaseContent
 	}
 	private function SoulforceRegeneration00():Number {
 		var SFR00:Number = 0;
-		var kitsuneTier:int = player.racialTier(Race.KITSUNE);
+		var kitsuneTier:int = player.racialTierNumber(Races.KITSUNE);
 		if (player.kitsuneScore() >= 5) {
 			if (kitsuneTier >= 1) {
 				if (kitsuneTier >= 2) {
@@ -3497,7 +3496,7 @@ public class Soulforce extends BaseContent
 	}
 	public function AmountOfSoulforceRecoveredDuringCultivation(mod:Number):Number {
 		var costPercent:Number = 100;
-		var kitsuneTier:int = player.racialTier(Race.KITSUNE);
+		var kitsuneTier:int = player.racialTierNumber(Races.KITSUNE);
 		if (player.kitsuneScore() >= 5) {
 			if (kitsuneTier >= 1) {
 				if (kitsuneTier >= 2) {

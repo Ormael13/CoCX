@@ -1316,14 +1316,14 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				player.createPerk(PerkLib.ImprovedVenomGlandSu, 0, 0, 0, 0);
 			}
 			//Kitsune hunger perk
-			if (player.racialTier(Race.KITSUNE) >= 1) { //Check for being a kitsune enough
+			if (player.racialTierNumber(Races.KITSUNE) >= 1) { //Check for being a kitsune enough
 				if (!player.hasPerk(PerkLib.KitsuneEnergyThirst)) {
 					outputText("\nYou begin fantasizing about pussies and cocks, foaming at the idea of fucking or getting fucked. It looks like you acquired the kitsune's hunger for sex and can now feed off the life force extracted from the orgasms of your partners. \n\n(<b>Gained Perk: Kitsune Hunger</b>)\n");
 					player.createPerk(PerkLib.KitsuneEnergyThirst, 0, 0, 0, 0);
 					needNext = true;
 				}
 			}
-			if (player.racialTier(Race.KITSUNE) == 0) { //Check for being a kitsune enough
+			if (player.racialTierNumber(Races.KITSUNE) == 0) { //Check for being a kitsune enough
 				if (player.hasPerk(PerkLib.KitsuneEnergyThirst)) {
 					outputText("\nYour mind clears up as you become less of a kitsune. You also lost the hunger for life force only sex could provide you. \n\n(<b>Lost Perk: Kitsune Hunger</b>)\n");
 					player.removePerk(PerkLib.KitsuneEnergyThirst);

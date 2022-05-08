@@ -1,7 +1,6 @@
 package classes.Scenes
 {
 import classes.*;
-import classes.BodyParts.Ears;
 import classes.BodyParts.Antennae;
 import classes.BodyParts.Arms;
 import classes.BodyParts.Beard;
@@ -15,7 +14,6 @@ import classes.BodyParts.Horns;
 import classes.BodyParts.LowerBody;
 import classes.BodyParts.RearBody;
 import classes.BodyParts.Skin;
-import classes.BodyParts.SkinLayer;
 import classes.BodyParts.Tail;
 import classes.BodyParts.Tongue;
 import classes.BodyParts.Wings;
@@ -24,30 +22,23 @@ import classes.Items.Consumable;
 import classes.Items.ConsumableLib;
 import classes.Parser.Parser;
 import classes.Scenes.NPCs.JojoScene;
-import classes.Stats.Buff;
-import classes.Stats.StatUtils;
 import classes.Transformations.PossibleEffect;
-import classes.Transformations.Transformation;
 import classes.Transformations.Transformation;
 import classes.internals.EnumValue;
 import classes.internals.race.RacialRequirement;
 
 import coc.view.Block;
-
 import coc.view.Color;
 import coc.view.MainView;
-import coc.view.StatsView;
 
 import fl.controls.ComboBox;
 import fl.controls.TextInput;
 import fl.data.DataProvider;
 
 import flash.display.DisplayObject;
-
 import flash.events.Event;
 import flash.events.TextEvent;
 import flash.utils.describeType;
-import flash.utils.setTimeout;
 
 public class DebugMenu extends BaseContent
 	{
@@ -795,8 +786,7 @@ public class DebugMenu extends BaseContent
 			CoC.instance.playerAppearance.appearance(true);
 			outputText("[pg]");
 			var body:BodyData = player.bodyData();
-			for each (var race:Race in Race.ALL_RACES) {
-				if (!race) continue;
+			for each (var race:Race in Race.AllRacesByName) {
 				var score:int = race.totalScore(body);
 				//if (score == 0) continue;
 				outputText("<b>"+race.name+" score: "+score+"</b>\n");
