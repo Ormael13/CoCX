@@ -3,7 +3,7 @@ import classes.GlobalFlags.kFLAGS;
 
 public class SceneHunter extends BaseContent {
     public function get progress():String {
-        return "<i>Selectors, menus and checks are currently added to: Holidays, Beach, BlightRidge, Desert, Forest, GlacialRift, HighMountains encounters (not including some unique NPCs and dungeons yet).</i>";
+        return "<i>Selectors, menus and checks are currently added to: Holidays, Beach, BlightRidge, Desert, Forest, GlacialRift, HighMountains, Mountains, Ocean, Plains, Swamp encounters (not including some unique NPCs and dungeons yet).</i>";
     }
 
     public function settingsPage():void {
@@ -74,6 +74,7 @@ public class SceneHunter extends BaseContent {
         outputText("\nLizan Rogue: medium-corrupt PCs now can persuade Lizan Rogue.");
         outputText("\nNaga <b>after</b> Samirah recruitment: enabled scenes. They're too good to miss.");
         outputText("\nGreen slime: removed rape corruption checks.");
+        outputText("\nGnoll: disabled dick size requirements in multicock anal. Because why not?");
         outputText("\n<i>This opens up more scenes. They are lore-accurate and still explained in the game (so you won't get Amily living with corrupt Jojo or other nonsense), but be warned that the original writers intended some details to work the other way.</i>");
         outputText("\n<i>Some one-time scenes with many options and checks can be replayed using 'Camp Actions -> Spend Time -> Recall'.</i>");
 
@@ -511,15 +512,6 @@ public class SceneHunter extends BaseContent {
     }
     public function checkDick(minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", moreText:String = ""):void {
         checkDickWithType(CockTypesEnum.UNDEFINED, minSize, maxSize, compareBy, moreText);
-    }
-
-    //Prints dick requirements if not found
-    public function check_race(race:String):void {
-        if (printChecks && player.race() != race) {
-            outputText("\n\n<b>FAILED RACE CHECK:")
-            outputText("\n    Expected: " + race);
-            outputText("</b>\n\n")
-        }
     }
 }
 }
