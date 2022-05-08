@@ -7,7 +7,6 @@ import classes.*;
 import classes.BodyParts.Tongue;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
-import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 public class FemaleSpiderMorphScene extends BaseContent implements TimeAwareInterface
