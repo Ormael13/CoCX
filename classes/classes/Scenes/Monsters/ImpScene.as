@@ -1510,99 +1510,99 @@ use namespace CoC;
 			}
             sceneHunter.print("Failed check: Bimbo/Futa, non-taur, vagina");
 			//Lust loss
-			if(player.lust >= player.maxLust()) {
-				//25% chance of sprocket rape for super-thick people.
-				if(player.cocks.length >= 1 && player.thickestCockThickness() >= 4) {
-                    if (rand(4) == 0) {
-                        sprocketImp();
-                        return;
-                    }
-				}
-                else
-                    sceneHunter.print("Failed dick check: multicock + max thickness > 4 (random)");
-				//Female or Futa
-				if(player.hasVagina() && rand(2) == 0) {
-					outputText(images.showImage("imp-loss-female-fuck"));
-					outputText("You sink to the ground, too overcame by lust and desire to fight.  The imp smiles, a wicked look glinting in his eyes.  He drops his loincloth to reveal a hardening cock.  Your eyes bulge a bit as it grows...and grows...and grows!  That imp has a twelve-inch cock... and he's walking towards you.   Your " + vaginaDescript(0) + " practically juices itself in anticipation, and you find yourself spreading your [legs] in preparation.");
-					outputText("\n\nHe smiles and presses his cock against your " + vaginaDescript(0) + ".  Your lust-driven mind is speechless, leaving you panting and moaning like a whore.");
-					//If too big, only partly penetrate.
-					if(player.vaginalCapacity() < monster.cockArea(0)) {
-						if(player.vaginas[0].virgin) {
-							outputText("  He plunges in hard, breaking your hymen and stealing your virginity.  A look of surprise crosses his face, chased away by ecstasy.  If you had a rational bit left in your mind, you'd notice he looks... stronger somehow, but you're too horny to care.");
-							player.vaginas[0].virgin = false;
-						}
-						else {
-							outputText("  He pushes against your tight little pussy, struggling to penetrate you.");
-						}
-						outputText("  His cock only sinks a few inches in, but he begins fucking you hard, each time claiming a bit more of your pussy for his demonic tool.  You feel a painful stretching as he gets half of it inside you, ruining your " + vaginaDescript(0) + " for most humans.  He fucks you like this for what seems like forever, never getting much further. ");
-						player.cuntChange(monster.cockArea(0),true);
-					}
-					else {
-						outputText("  He plunges in violently, ramming his " + monster.cockDescriptShort(0) + " in to the hilt, leaving you gasping in pain and surprise.  He leaves it there, giving you a second to get used to him, and then begins fucking you hard, slapping your ass every few thrusts to remind you who is in charge.");
-						player.cuntChange(12,true,true,false);
-					}
-					if(player.gender == 3) outputText("\n\nThe rough fucking becomes more and more pleasurable as time passes, until you cannot help but stroke your [cock] along with each plunge he takes in your " + vaginaDescript(0) + ".  You feel yourself clench around him as your sexual organs release, erupting spurts of cum and milking the demon's cock like your life depended on it.");
-					if(player.gender == 2) outputText("\n\nThe rough fucking becomes more and more pleasurable as time passes.  You moan loudly and lewdly with each thrust, hips squeezing around the demon-cock, relishing the feeling of fullness.  Before long you cannot help but cum all over him, " + vaginaDescript(0) + " locking around his cock like a vice, muscles rippling, milking him for his cum.");
-					outputText("  The imp's " + monster.cockDescriptShort(0) + " explodes inside you, pumping huge loads of hot demon-seed inside you with each eruption.  You swoon, feeling it fill your womb and distend your belly as the imp's orgasm fills you with an unnatural quantity of corrupted semen.\n\nWith a sigh, he pulls his dick free, and you flop back on your back, cum surging out onto the ground from your well-fucked hole.  ");
-					if(player.pregnancyIncubation > 0 && player.pregnancyIncubation <= 216) {
-						outputText("You wonder what this will do to whatever is growing in your womb...  ");
-					}
-					else {
-						if(player.inHeat) outputText("You find yourself hoping you're pregnant as you swiftly lose consciousness.");
-						else if(player.pregnancyIncubation <= 0) {
-							if(player.cor > 75) outputText("With an appreciative moan, you bury your fingers in its slimy warmth, hoping you are pregnant with some fiendish offspring, and lose consciousness.");
-							else outputText("You hope you don't become pregnant, but promptly lose consciousness before you can contemplate the prospect any further.");
-						}
-					}
-					if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 14); //Bigger imp means faster pregnancy
-					dynStats("lib", 1, "sen", 1, "lus", 1, "cor", 1);
-					player.sexReward("cum");
-				}
-				//Male or genderless
-				else {
-					//Alternate male-only case
-					if (player.hasCock() && rand(2) == 0) {
-						outputText(images.showImage("imp-loss-male-fuck"));
-						clearOutput();
-						outputText("Your eyes glaze over with lust as the imp's dark magic destroys your will to continue fighting. You sink to your ");
-						if(player.isTaur()) outputText("hocks and knees, your [cock] hurting from the massive blood pressure caused by your unbridled lust. He approaches you and stops about two feet in front of you, watching with delight your helpless state");
-						else outputText("knees, pull out your [cock] and begin mindlessly stroking yourself as the imp approaches you, a wicked grin on his face. Your mind races with thoughts and images of sucking the imp's cock. He approaches you and stops about two feet in front of you, watching with delight as you succumb to your own lust");
-						outputText(". Your eyes glance down to his waist and see a massive bulge form under his loincloth, the sight of which causes your [cock] to twitch and begin leaking pre-cum.\n\n");
-						outputText("The imp drops his loincloth, revealing his huge 12-inch penis, and then forcefully grabs your head and pulls you down on to his hard throbbing demon dick. He shoves his cock past your lips and deep down your throat in one slow, forceful push. You can barely accommodate his huge cock, and yet your lust makes you hunger for more. You cough and gag while the imp proceeds to fuck your mouth hard, slapping his hot balls against your chin, disregarding your need to breathe.  ");
-						if(player.isTaur()) outputText("Dropping down to the ground, your [cock] trembles against your body to the rhythm of the imp's thrusts, leaving your underbelly smeared with its own pre-cum.\n\n");
-						else outputText("On all fours now, your [cock] bounces up and down against you to the rhythm of the imp's thrusts, leaving your belly smeared in your own pre-cum.\n\n");
-						if(player.ballSize >= 5) outputText("Your huge [balls] swing heavily against you as well, responding to the force of the imp's thrusts, slapping your own ass and driving your [cock] even stiffer with lust, the pre-cum pulsing out of your cock in time with the slapping.\n\n");
-						outputText("You begin to feel light-headed from lack of air just as the imp grips your head firmly and begins making rapid, shallow thrusts down your throat, nearing his orgasm. Suddenly he clenches tight, his claws digging into your head and thrusts down your throat as far as he can, holding his massive cock deep in your stomach. Your eyes go wide as you feel the imp's balls on your chin spasm violently.  His cock pulses in your mouth as the thick demon cum is pumped violently down your throat. It feels like an eternity as the imp continues to fill your guts with his hot cum, his orgasm lasting far longer than any human's. ");
-						player.refillHunger(40);
-						outputText("He slowly withdraws his still-pumping cock from you, coating your throat and then mouth with an almost continual spray of his unnaturally hot and sticky demon seed. The imp pulls out of your mouth just in time to splatter your face with his cum before his orgasm stops, coating your lips, nose, eyes, and hair with his incredibly thick and sticky cum.\n\n");
-						outputText("You fall to the ground gasping, exhausted and unable to move, the demon cum on your face and inside you still burning with intense heat and corruption. You lose consciousness, your [cock] still firmly erect, your lust not sated.");
-						dynStats("lus", 20, "cor", 2);
-						cleanupAfterCombat();
-						player.sexReward("cum");
-						return;
-					}
-					else {
-						outputText("You sink to the ground, too overcome by lust and desire to fight.  The imp smiles and circles you, dropping his loincloth as he goes.  You are roughly shoved to the ground, your backside slapped hard.  You're too horny to do anything but moan from the pain ");
-						if(!player.isTaur()) outputText("as you are disrobed");
-						outputText(".  As the imp presses a large bulk against your backside, you realize he has a massive penis!\n\nThe imp pushes his " + monster.cockDescriptShort(0) + " into your ass and fucks you hard, with little regard to your pleasure.  After a rough fucking, he cums, stuffing your ass full of hot demon cum.  His orgasm lasts far longer than any human's, leaving your belly slightly distended.");
-						player.buttChange(monster.cockArea(0), true,true,false);
-						dynStats("lib", 1, "sen", 1, "lus", 1, "cor", 1);
-						if(player.sens > 40) {
-							outputText("  You manage to orgasm from the feeling of being filled by hot cum.");
-							if(player.gender == 1) outputText("  You jizz all over the ground in front of you, spraying cum in huge squirts in time with the demon's thrusts.");
-							player.sexReward("cum");
-							dynStats("cor", 1);
-						}
-						outputText("\n\nYou drop to the ground when he's done with you, cum spilling from your abused ass all over the ground, too exhausted to move.  Consciousness fades.  ");
-					}
-				}
-			}
+			if(player.lust >= player.maxLust())
+				sceneHunter.selectLossMenu([
+						[0, "Vaginal", vaginal, "Req. a vagina", player.hasVagina()],
+						[1, "SuckHim", vaginal, "Req. a cock", player.hasCock()],
+						[2, "Anal", assFuck],
+						[3, "UrethraFuck", assFuck, "Req. multiple dicks, one of which is at least 4-inch wide.", player.cocks.length >= 1 && player.thickestCockThickness() >= 4],
+					],
+					"The imp is going to use his gigantic dick anyway, but you probably can provide a hint <i>where</i> he can put it.\n\n"
+				);
 			//HP or insta-loss
 			else {
 				outputText("\n<b>You fall, defeated by the imp!</b>\nThe last thing you see before losing consciousness is the creature undoing its crude loincloth to reveal a rather disproportionately-sized member.");
 			}
 			cleanupAfterCombat();
+
+			//========================================
+			function vaginal():void {
+				outputText(images.showImage("imp-loss-female-fuck"));
+				outputText("You sink to the ground, too overcame by lust and desire to fight.  The imp smiles, a wicked look glinting in his eyes.  He drops his loincloth to reveal a hardening cock.  Your eyes bulge a bit as it grows...and grows...and grows!  That imp has a twelve-inch cock... and he's walking towards you.   Your " + vaginaDescript(0) + " practically juices itself in anticipation, and you find yourself spreading your [legs] in preparation.");
+				outputText("\n\nHe smiles and presses his cock against your " + vaginaDescript(0) + ".  Your lust-driven mind is speechless, leaving you panting and moaning like a whore.");
+				//If too big, only partly penetrate.
+				if(player.vaginalCapacity() < monster.cockArea(0)) {
+					if(player.vaginas[0].virgin) {
+						outputText("  He plunges in hard, breaking your hymen and stealing your virginity.  A look of surprise crosses his face, chased away by ecstasy.  If you had a rational bit left in your mind, you'd notice he looks... stronger somehow, but you're too horny to care.");
+						player.vaginas[0].virgin = false;
+					}
+					else {
+						outputText("  He pushes against your tight little pussy, struggling to penetrate you.");
+					}
+					outputText("  His cock only sinks a few inches in, but he begins fucking you hard, each time claiming a bit more of your pussy for his demonic tool.  You feel a painful stretching as he gets half of it inside you, ruining your " + vaginaDescript(0) + " for most humans.  He fucks you like this for what seems like forever, never getting much further. ");
+					player.cuntChange(monster.cockArea(0),true);
+				}
+				else {
+					outputText("  He plunges in violently, ramming his " + monster.cockDescriptShort(0) + " in to the hilt, leaving you gasping in pain and surprise.  He leaves it there, giving you a second to get used to him, and then begins fucking you hard, slapping your ass every few thrusts to remind you who is in charge.");
+					player.cuntChange(12,true,true,false);
+				}
+				if(player.gender == 3) outputText("\n\nThe rough fucking becomes more and more pleasurable as time passes, until you cannot help but stroke your [cock] along with each plunge he takes in your " + vaginaDescript(0) + ".  You feel yourself clench around him as your sexual organs release, erupting spurts of cum and milking the demon's cock like your life depended on it.");
+				if(player.gender == 2) outputText("\n\nThe rough fucking becomes more and more pleasurable as time passes.  You moan loudly and lewdly with each thrust, hips squeezing around the demon-cock, relishing the feeling of fullness.  Before long you cannot help but cum all over him, " + vaginaDescript(0) + " locking around his cock like a vice, muscles rippling, milking him for his cum.");
+				outputText("  The imp's " + monster.cockDescriptShort(0) + " explodes inside you, pumping huge loads of hot demon-seed inside you with each eruption.  You swoon, feeling it fill your womb and distend your belly as the imp's orgasm fills you with an unnatural quantity of corrupted semen.\n\nWith a sigh, he pulls his dick free, and you flop back on your back, cum surging out onto the ground from your well-fucked hole.  ");
+				if(player.pregnancyIncubation > 0 && player.pregnancyIncubation <= 216) {
+					outputText("You wonder what this will do to whatever is growing in your womb...  ");
+				}
+				else {
+					if(player.inHeat) outputText("You find yourself hoping you're pregnant as you swiftly lose consciousness.");
+					else if(player.pregnancyIncubation <= 0) {
+						if(player.cor > 75) outputText("With an appreciative moan, you bury your fingers in its slimy warmth, hoping you are pregnant with some fiendish offspring, and lose consciousness.");
+						else outputText("You hope you don't become pregnant, but promptly lose consciousness before you can contemplate the prospect any further.");
+					}
+				}
+				if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 14); //Bigger imp means faster pregnancy
+				dynStats("lib", 1, "sen", 1, "lus", 1, "cor", 1);
+				player.sexReward("cum", "Vaginal");
+				cleanupAfterCombat();
+			}
+
+			function suckHimMale():void {
+				outputText(images.showImage("imp-loss-male-fuck"));
+				clearOutput();
+				outputText("Your eyes glaze over with lust as the imp's dark magic destroys your will to continue fighting. You sink to your ");
+				if(player.isTaur()) outputText("hocks and knees, your [cock] hurting from the massive blood pressure caused by your unbridled lust. He approaches you and stops about two feet in front of you, watching with delight your helpless state");
+				else outputText("knees, pull out your [cock] and begin mindlessly stroking yourself as the imp approaches you, a wicked grin on his face. Your mind races with thoughts and images of sucking the imp's cock. He approaches you and stops about two feet in front of you, watching with delight as you succumb to your own lust");
+				outputText(". Your eyes glance down to his waist and see a massive bulge form under his loincloth, the sight of which causes your [cock] to twitch and begin leaking pre-cum.\n\n");
+				outputText("The imp drops his loincloth, revealing his huge 12-inch penis, and then forcefully grabs your head and pulls you down on to his hard throbbing demon dick. He shoves his cock past your lips and deep down your throat in one slow, forceful push. You can barely accommodate his huge cock, and yet your lust makes you hunger for more. You cough and gag while the imp proceeds to fuck your mouth hard, slapping his hot balls against your chin, disregarding your need to breathe.  ");
+				if(player.isTaur()) outputText("Dropping down to the ground, your [cock] trembles against your body to the rhythm of the imp's thrusts, leaving your underbelly smeared with its own pre-cum.\n\n");
+				else outputText("On all fours now, your [cock] bounces up and down against you to the rhythm of the imp's thrusts, leaving your belly smeared in your own pre-cum.\n\n");
+				if(player.ballSize >= 5) outputText("Your huge [balls] swing heavily against you as well, responding to the force of the imp's thrusts, slapping your own ass and driving your [cock] even stiffer with lust, the pre-cum pulsing out of your cock in time with the slapping.\n\n");
+				outputText("You begin to feel light-headed from lack of air just as the imp grips your head firmly and begins making rapid, shallow thrusts down your throat, nearing his orgasm. Suddenly he clenches tight, his claws digging into your head and thrusts down your throat as far as he can, holding his massive cock deep in your stomach. Your eyes go wide as you feel the imp's balls on your chin spasm violently.  His cock pulses in your mouth as the thick demon cum is pumped violently down your throat. It feels like an eternity as the imp continues to fill your guts with his hot cum, his orgasm lasting far longer than any human's. ");
+				player.refillHunger(40);
+				outputText("He slowly withdraws his still-pumping cock from you, coating your throat and then mouth with an almost continual spray of his unnaturally hot and sticky demon seed. The imp pulls out of your mouth just in time to splatter your face with his cum before his orgasm stops, coating your lips, nose, eyes, and hair with his incredibly thick and sticky cum.\n\n");
+				outputText("You fall to the ground gasping, exhausted and unable to move, the demon cum on your face and inside you still burning with intense heat and corruption. You lose consciousness, your [cock] still firmly erect, your lust not sated.");
+				dynStats("lus", 20, "cor", 2);
+				cleanupAfterCombat();
+				player.sexReward("cum", "Lips");
+			}
+
+			function assFuck():void {
+				outputText("You sink to the ground, too overcame by lust and desire to fight.  The imp smiles and circles you, dropping his loincloth as he goes.  You are roughly shoved to the ground, your backside slapped hard.  You're too horny to do anything but moan from the pain ");
+				if(!player.isTaur()) outputText("as you are disrobed");
+				outputText(".  As the imp presses a large bulk against your backside, you realize he has a massive penis!\n\nThe imp pushes his " + monster.cockDescriptShort(0) + " into your ass and fucks you hard, with little regard to your pleasure.  After a rough fucking, he cums, stuffing your ass full of hot demon cum.  His orgasm lasts far longer than any human's, leaving your belly slightly distended.");
+				player.buttChange(monster.cockArea(0), true,true,false);
+				dynStats("lib", 1, "sen", 1, "lus", 1, "cor", 1);
+				if(player.sens > 40) {
+					outputText("  You manage to orgasm from the feeling of being filled by hot cum.");
+					if(player.hasCock()) outputText("  You jizz all over the ground in front of you, spraying cum in huge squirts in time with the demon's thrusts.");
+					dynStats("cor", 1);
+				}
+				player.sexReward("cum", "Anal");
+				outputText("\n\nYou drop to the ground when he's done with you, cum spilling from your abused ass all over the ground, too exhausted to move.  Consciousness fades.  ");
+				cleanupAfterCombat();
+			}
 		}
+
+
 		public function impRapesYou2():void {
 			clearOutput();
 			outputText("\n<b>You fall, defeated by the imp!</b>\nThe last thing you see before losing consciousness is the creatures stating to argue over something, after undoing their crude loincloth to reveal a rather disproportionately-sized members.");
