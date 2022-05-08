@@ -74,6 +74,7 @@ public class GnollSpearThrowerScene extends BaseContent
 				SceneLib.plains.gnollScene.yoDawgIHeardULiekGNollBallzzzdahdakjldh();
 				return;
 			}
+			sceneHunter.print("Check failed: Suc.Dream in inventory");
 			clearOutput();
 			outputText("The gnoll laughs, a sharp, barking sound of mocking, as you sink to ground, ");
 			//<Physical Defeat>
