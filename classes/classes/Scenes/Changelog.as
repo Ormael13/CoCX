@@ -213,7 +213,7 @@ package classes.Scenes
 			outputText("-Buffed stat-boosting jewelry: now it increases stat multiplier. Still useless trash compared to resistances in the late game. Maybe one day someone will balance all this stuff properly... (Svalkash)\n");
 			outputText("-Fixes: Diana last encounter repeating after recruiting her, body lotions not working (at all), Phylla dick checks comparing area instead of length and vice versa (Svalkash)\n");
 			outputText("-Added: Grey Spellpower, Tier 1 & 2 cooldown info to Stats > Combat subpage.\n");
-			outputText("-Kitsune 2nd tier thyroid gland mutation would now give +20 mana regen and boost by 50% foxfire fire dmg at 9 tails as it says.\n");
+			outputText("-Kitsune 2nd tier thyroid gland mutation would now boost by 50% foxfire fire dmg at 9 tails as it says.\n");
 			outputText("-Added option to manualy toogle on/off Shift on attribute menu during level-up (mainly to make apk users live bit easier)\n");
 			outputText("-Added a button to disable 'Sleep With' to Ember. (Svalkash)\n");
 			outputText("-Sophie breastfeed scene properly restored, added bimbo hints and light corruption check. (Svalkash)\n");
@@ -254,7 +254,7 @@ package classes.Scenes
 			outputText("-Changed Hot Spring check for herms (now it considers your femininity, dick & breast size). (Svalkash)\n");
 			outputText("-Restore spell can't be casted with use of HP instead of mana.\n");
 			outputText("-New super perk: Munchkin@Work. Gained by having merely 1 super perk, having 'Munchkin@Gym' super munchkin perk, lvl 120+. Effect: +10% to OverMax HP / Lust / Wrath / Mana / Soulforce, +2 prestige job slots, +1 hidden job slot.\n");
-			outputText("-Fletching table accessable at Elven Village allows now to craft special arrows - 100 per unit of material used (they would be used first before normal ones) and Reinforce. Like improving string those options takes 8 hours.\n");
+			outputText("-Fletching table accessable at Elven Village allows now to craft special arrows - 100 per pack of arrowheads used (they would be used first before normal ones) and Reinforce. Like improving string those options takes 8 hours.\n");
 			outputText("-Ayane Worship Scene for Herms & pregnancy. (Daikael the fluff enthusiast)\n");
 			outputText("-Herm PCs now can ask Tamani for her dildo. (Svalkash)\n");
 			outputText("-Golems post combat options buttons locations slight moved. Troll post fight option to Leave moved to bottom right corner.\n");
@@ -280,6 +280,7 @@ package classes.Scenes
 			outputText("-Kitsune Glands perks stat bonuses are changed to: +5% spe multi, +5% wis multi, +5% spe multi, +10% wis multi, +5% spe multi, +20% wis multi. They won't boost mana recovery anymore and sf recovery boosts are 33% stronger, they won't affect Ilusion/Terror specials. 1st perk would lower by 50% base cost of fox fire specials.\n");
 			outputText("-Monsters max wrath and soulforce would increase with each lvl (+5 per lvl for both).\n");
 			outputText("-When in camp Konstantine have new talk option that would unlock new option in his main menu: Smelthing. If PC would have 1 copper+tin ore or 1 ebonbloom he can smelt it into respectively 1 bronze bar or 1 ebon ignot.\n");
+			outputText("-New usable items: hundred of iron/moonstone/skymetal/ebonbloom arrowheads and unicron hair. Made by Konstantin after unlocking his Smelting option using matching material, hair is gained from any unicorn npc that is in camp (Celess, Diana). Whole pack cost 1 gem for each.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -287,12 +288,17 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
-			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");//New Blood Soulskill: Scarlet Spirit Charge - learned from Crimson Jade. Cost 0 health.
 			outputText("-\n");// selfbuff that boost spe, maybe str and tou, maybe int, hp regen - zuzywa hp and/or sf per turn aby być aktywnym
 			outputText("-\n");//?Vala?, ?Tamani+her brood?, ?minotaur sons? - for out of camp lvl-ing npc's
+			outputText("-\n");//Motivation (Ex) now req. additionaly Intermediate Leadership perk//Motivation (Su) now req. additionaly Advanced Leadership perk
+			outputText("-\n");//New range weapon (by Liadri):  - buyable at Tripxi shop in Tel'Adre after PC find and bring back it parts from  area. Cost xx0 gems. Base atk is xx and ammo clip size x.
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
+			outputText("-\n");
 			outputText("-\n");
 			outputText("-Fixed Bugs: One of Ingnam Tavern food options having wrong price listed on menu, unique sex scenes accesable during Druid fusion, Wisp potentialy softlocking Mino King fight, selfsucking in masturbation menu restoring max 100 hunger, Swift Casting not usable when having Giant's Grip and Large weapon, White or Black magic buffs autocastable when having perk that disable use of white/black magic, ");
 			outputText("putting B. Sword after picking Ecalibur disabling option to pick sword at Temple, all 3 Hall of Blade soulskill variants dealing phys not magical dmg, Lightning Claw lowering phys dmg when used as part of feral style attack, using goblin Cum Reservoir not empting it out, Yuki Onna Transform scene not making sure to give proper genitalia setup, Archer's Stamina perks not giving fatigue related to ");
@@ -310,7 +316,6 @@ package classes.Scenes
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
 			//outputText("-New tier   lvl-up perk: . Req. . Effect: .\n");
-			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
@@ -400,9 +405,7 @@ package classes.Scenes
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
-			outputText("-\n");
 			outputText("-Added in current version race effects to Metamorph perk: \n");Goo, Siren, Avian-morph, Bear/(Red?) Panda, Fire Snail, Melkie, Centipede(what about Centaur race? need rework still or nah? or just adding to Metamorph menu but how i mean with what bodyparts?)
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
@@ -435,9 +438,6 @@ package classes.Scenes
 			outputText("\n");cel na 0.8(/9): może jakas lokacja w places umieszczona takie mini miasto zanim sie odkryje wlasciwa lokacje lub miasto ale dostepne tylko czesciowo zanim sie nie znajdzie wlasciwej lokacji i z niej eksploracji odkryje miasta we właściwy sposob ^^
 			outputText("\n");cel na 0.8(/9): pododawać 1-3 grey spells (single target fire and ice spell)
 			outputText("\n");cel na 0.8(/9): dodać Grey spells: ?were-beast spell?, ?some single target spell?
-			outputText("\n");
-			outputText("\n");
-			outputText("\n");
 			outputText("\n");
 			outputText("\n");
 			outputText("\n");
