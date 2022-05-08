@@ -157,7 +157,7 @@ package classes.Scenes.Areas.Plains
 			//(if cumQ()>500)
 			else outputText("Your " + cockDescript(x) + " convulses, pouring cum into her.  Her clitoris bulges even more as the jism backs up, the skin pulling tight and shiny as the pressure builds.  Finally, gouts of cum begin spurting back out the tip of her clitoris, splashing against your crotch.");
 			outputText("  With a lusty groan, you pull out with a long, slippery sound, and leave the gnoll panting on the dusty ground.");
-			player.sexReward("Default","Dick",true,false);
+			player.sexReward("vaginalFluids","Dick");
 			cleanupAfterCombat();
 		}
 
@@ -332,7 +332,7 @@ package classes.Scenes.Areas.Plains
 			clearOutput();
 			outputText("Finally, you feel the gnoll's clit slide out of your anus as the overly-endowed girl collapses at your side.  Broken utterly, she pants with depraved exhaustion, no strength left to continue pounding your body into the dirt.  Even now, she strokes her massive clit with one spotted paw as the other helplessly massages the basketball-sized testicles that audibly churn with gallons of the girl's jizz.  Finding a reserve of strength you didn't know you had, you rise tenderly and gather your belongings, creeping away before the hyena-girl can get her second wind.");
 			//[24 hours pass, player asshole size increased, sensitivity significantly lowered, toughness lowered temporarily, fatigue maxed, remove one succubi's dream]
-			player.sexReward("Default","Default",true,false);
+			player.sexReward("vaginalFluids","Anal");
 			dynStats("lib", 2, "sen", -10);
 			cleanupAfterCombat();
 		}

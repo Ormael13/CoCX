@@ -292,7 +292,7 @@ private function femaleTakesAdvantageOfSatyr():void {
 	
 	outputText("\n\nYou grind your pussy into his face one last time, then, with regal delicacy, you remove yourself from the unconscious, sex-splattered satyr.  Picking up your clothes, you redress yourself.  Once you're decent, you leave the unconscious goatman as prey for whatever creature comes to investigate the stink of cum spattered about in such copious quantities.");
 	//reduce lust
-	player.sexReward("Default","Default",true,false);
+	player.sexReward("saliva","Vaginal");
 	cleanupAfterCombat();
 }
 	

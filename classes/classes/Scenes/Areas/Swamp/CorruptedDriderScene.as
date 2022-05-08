@@ -250,7 +250,7 @@ use namespace CoC;
 			outputText(".  Even unconscious, her vagina continues its rhythmic contractions around your cock, working you towards another burst of orgasmic pleasure while you wait for your strength to come back...\n\n");
 			//[NEXT]
 			doNext(winDriderPCDickInSpiderCunt2);
-			player.sexReward("Default","Dick",true,false);
+			player.sexReward("vaginalFluids","Dick");
 			dynStats("lib", 1, "sen", 1);
 		}
 
@@ -278,7 +278,7 @@ use namespace CoC;
 			player.lust = player.maxLust();
 			flags[kFLAGS.COMBAT_BONUS_XP_VALUE] = monster.XP;
 			cleanupAfterCombat();
-			player.sexReward("Default","Dick",true,false);
+			player.sexReward("vaginalFluids","Dick");
 			dynStats("lib", 1, "sen", 1);
 		}
 
@@ -383,7 +383,7 @@ use namespace CoC;
 			//GET KNOCKED UP
 			//Pregnancy Goes Here
 			player.knockUp(PregnancyStore.PREGNANCY_DRIDER_EGGS, PregnancyStore.INCUBATION_DRIDER, 151);
-			player.sexReward("Default","Vaginal",true,false);
+			player.sexReward("Default","Vaginal");
 			dynStats("cor", .5);
 			cleanupAfterCombat();
 		}
@@ -485,7 +485,7 @@ use namespace CoC;
 			outputText("By the time you finish getting dressed, she's fallen into a fitful slumber.  What an ordeal!");
 			//GET KNOCKED UP
 			player.buttKnockUp(PregnancyStore.PREGNANCY_DRIDER_EGGS, PregnancyStore.INCUBATION_DRIDER - 200, 10); //Butt pregnancy goes faster
-			player.sexReward("Default","Anal",true,false);
+			player.sexReward("Default","Anal");
 			dynStats("cor", .5);
 			cleanupAfterCombat();
 		}
@@ -538,7 +538,7 @@ use namespace CoC;
 			}
 			outputText("\n\n");
 			outputText("Your lust sated, you disengage from her with a little pop, leaving her to lick her lips happily and groan unintelligible babble.  You wipe your " + cockDescript(x) + " off on her hair to clean it off a bit, then redress and head out.  With a glance at the snoozing drider over your shoulder, you head out of the smelly swamp and start back towards camp.");
-			player.sexReward("Default","Dick",true,false);
+			player.sexReward("saliva","Dick");
 			dynStats("cor", .5);
 			cleanupAfterCombat();
 		}
@@ -595,7 +595,7 @@ use namespace CoC;
 			//GET KNOCKED UP
 			player.buttKnockUp(PregnancyStore.PREGNANCY_DRIDER_EGGS, PregnancyStore.INCUBATION_DRIDER - 200, 10); //Butt pregnancy goes faster
 			//(slimefeed, set lust to 100?)
-			player.sexReward("cum","Anal",true,false);
+			player.sexReward("cum","Anal");
 			dynStats("sen", 1, "lus", 800, "cor", 1);
 			cleanupAfterCombat();
 		}
@@ -813,7 +813,7 @@ use namespace CoC;
 
 			outputText("Nearby, two more of your little girls are in a stand-off, as each skitters back and forth in front of the other, ready to charge.  Suddenly one leaps forward and grabs the other before attempting to bite her arm.  Of course the attack is completely harmless - they are still much too young to have grown their fangs.  The other then turns the tables on her sister by grappling her sister to the ground, and soon, they're both letting out tiny giggles.\n\n");
 
-			outputText("You lie back and your exhaustion finally begins to get the better of you when combined with the contentment from seeing your babies enjoying themselves.  Your eyelids begin to droop, and before you know it, you've slipped into unconsciousness.  You awaken later on, a sticky feeling between your legs to go with your wet pussy");
+			outputText("You lie back, and your exhaustion finally begins to get the better of you when combined with the contentment from seeing your babies enjoying themselves.  Your eyelids begin to droop, and before you know it, you've slipped into unconsciousness.  You awaken later on, a sticky feeling between your legs to go with your wet pussy");
 			if (player.hasCock()) outputText(" and raging hard on");
 			outputText(".  After remembering where you are, the next thing you notice is the absence of your drider children.  Only a pile of empty, broken egg shells and some messy webbing in the trees remain.  As you stand up and prepare to move on, the sun reflecting off something in the corner of your eye catches your attention.\n\n");
 
@@ -982,7 +982,7 @@ use namespace CoC;
 			outputText("\n\nYou feel your cock starting to contract and pull the drider tight against you, fingers digging into the soft flesh of her hips as you press her as closely to you as you can manage.  Fully hilted within her, the entire length of your [cock " + y + "] is squeezed and teased by her still-spasming cunt all at once.  The heat is incredible, enhanced by the sheer amount of wet, warm fluid gushing down both of your hips, leaving you crying out as you finally start to cum.  Your body is wracked with unbelievable pleasure whilst your member explodes inside her, painting her insides white with fertile cream.  She barely realizes what's going on at this point, completely zoned out after her own mind-numbing orgasm, only able to softly grunt at each steaming load that you fire into her.  You take the opportunity to sink your teeth into her collar, marking her as [if (corruption < 40) yours][if (corruption >= 40) your slut] at the same time as your seed marks her pussy as your property, moaning deeply the entire time.");
 
 			outputText("\n\nFinally finished, you collapse on top of the similarly exhausted woman, barely capable of moving after such a breathtaking end.  Your shaft still twinges after such a powerful climax, not helped by the way her pussy continually shudders around you.  The drider, smothered underneath you, begins to sink slowly into the soft ground of the swamp, still completely oblivious to anything going on around her.  Deciding it would be a terrible shame if your new cumdump were to be lost so soon after acquiring it, you heave yourself onto unsteady legs, cock drizzling as you withdraw yourself from the abused, sperm-stuffed cunt that surrounded it.");
-			player.sexReward("Default","Dick",true,false);
+			player.sexReward("vaginalFluids","Dick");
 			dynStats("sen", -1);
 			doNext(driderTiedUpPartFour);
 		}
