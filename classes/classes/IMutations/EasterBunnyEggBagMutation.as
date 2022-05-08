@@ -14,7 +14,7 @@ public class EasterBunnyEggBagMutation extends PerkType
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
             var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.EasterBunnyEggBagIM)
+            var pTier:int = player.perkv1(IMutationsLib.EasterBunnyEggBagIM);
             if (pTier >= 1){
                 descS += "Keep oviposition, easter bunny balls and egg throw ability so long as you have balls. May now shoot more then one egg per round";
             }

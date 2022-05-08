@@ -12,7 +12,7 @@ package classes.IMutations
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
             var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.FrozenHeartIM)
+            var pTier:int = player.perkv1(IMutationsLib.FrozenHeartIM);
             if (pTier >= 1){
                 descS += "Allow you to retain the ability Ice barrage and hungering cold at all times";
             }

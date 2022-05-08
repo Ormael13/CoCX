@@ -13,7 +13,7 @@ public class EclipticMindMutation extends PerkType
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
             var descS:String = "Allows you to retain an aura at all time, gaining whichever corresponds to your alignment. Empower the effect of your aura based on your purity or corruption score";
-            var pTier:int = player.perkv1(IMutationsLib.EclipticMindIM)
+            var pTier:int = player.perkv1(IMutationsLib.EclipticMindIM);
             if (pTier >= 3){
                 descS += " x3";
             }

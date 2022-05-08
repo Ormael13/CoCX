@@ -13,7 +13,7 @@ public class FeyArcaneBloodstreamMutation extends PerkType
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
             var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM)
+            var pTier:int = player.perkv1(IMutationsLib.FeyArcaneBloodstreamIM);
             if (pTier >= 1){
                 descS += "Your Fey Arcane Bloodstream grants you an eternal lifespan, increased mana recovery and increased magical power";
             }
@@ -72,8 +72,9 @@ public class FeyArcaneBloodstreamMutation extends PerkType
         //Mutations Buffs
         public function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {};
-            pBuffs['int.mult'] = 0.05*2^pTier-1
-            return pBuffs;
+            if (pTier >= 1) pBuffs['int.mult'] += 0.05;
+            if (pTier >= 2) pBuffs['int.mult'] += 0.1;
+            if (pTier >= 3) pBuffs['int.mult'] += 0.2;            return pBuffs;
         }
 
         public function FeyArcaneBloodstreamMutation() {
