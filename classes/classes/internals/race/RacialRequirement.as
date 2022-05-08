@@ -10,13 +10,15 @@ public class RacialRequirement {
 	 */
 	public var checkFn:Function;
 	private var _score:int;
+	public var failScore:int;
 	public var minScore:int;
 	
 	/**
 	 * @param group ex. "face"
 	 * @param name ex. "Wolf"
 	 * @param check `(body:BodyData) => boolean`
-	 * @param score
+	 * @param score points if check passed
+	 * @param failScore points if check failed
 	 * @param minScore
 	 */
 	public function RacialRequirement(
@@ -24,15 +26,17 @@ public class RacialRequirement {
 			name: String,
 			check: Function,
 			score: int,
+			failScore: int,
 			minScore: int
 	) {
 		this.group = group;
 		this.name = name;
 		this.checkFn = check;
 		this._score = score;
+		this.failScore = failScore;
 		this.minScore = minScore;
 	}
-	public function score(body:BodyData): int {
+	public function passScore(body:BodyData): int {
 		return _score;
 	}
 	public function varyingScore():Boolean {
@@ -42,11 +46,11 @@ public class RacialRequirement {
 	public function check(body:BodyData, currentScore:int):Boolean {
 		return currentScore >= minScore && checkFn(body);
 	}
-	public function getScore(body: BodyData, currentScore:int):int {
-		return check(body, currentScore) ? score(body) : 0;
+	public function calcScore(body: BodyData, currentScore:int):int {
+		return check(body, currentScore) ? passScore(body) : failScore;
 	}
 	public function describe(body: BodyData):String {
-		var score:int = this.score(body);
+		var score:int = this.passScore(body);
 		return name+" ("+(score>0?"+"+score:score)+")";
 	}
 	
@@ -58,12 +62,13 @@ public class RacialRequirement {
 					return conditionFn(body) && checkFn(body);
 				},
 				_score,
+				failScore,
 				minScore
 		)
 	}
 	
 	/**
-	 * Group multiple requirements as a single one.
+	 * Group multiple requirements as a single one. Uses score of first.
 	 * @param nameSeparator string to join description, ex. " and " -> "fox ears and naga tail"
 	 */
 	public static function joinAnd(
@@ -88,6 +93,7 @@ public class RacialRequirement {
 					return true;
 				},
 				req1._score,
+				req1.failScore,
 				req1.minScore
 		)
 	}

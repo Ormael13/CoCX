@@ -11,11 +11,12 @@ public class BloodlineRacialRequirement extends RacialRequirement {
 				name,
 				RaceUtils.hasAnyPerkFn(perks),
 				0,
+				0,
 				0
 		);
 	}
 	
-	override public function score(body:BodyData):int {
+	override public function passScore(body:BodyData):int {
 		return body.player.increaseFromBloodlinePerks();
 	}
 	

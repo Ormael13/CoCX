@@ -2,7 +2,7 @@
  * ...
  * @author Ormael
  */
-package classes.Scenes.Areas.BlightRidge 
+package classes.Scenes.Areas.BlightRidge
 {
 
 import classes.*;
@@ -23,8 +23,8 @@ import classes.Scenes.SceneLib;
 	{
 		public var FactoryScene:Factory = new Factory();
 		public var campwinions:CampMakeWinions = new CampMakeWinions();
-                
-		public function DemonScene() 
+  
+		public function DemonScene()
 		{}
 		
 		//MinoIncubus
@@ -149,7 +149,7 @@ import classes.Scenes.SceneLib;
 			outputText(".  The demon underneath you grunts in an attempt to sound displeased, but it's plain to see the pre-cum he's dripping all over the ground.  What a slut!  You slap his ass and begin roughly butt-fucking him, panting with each plunge into the depths of his ridged passage, gradually increasing your tempo until your " + hipDescript() + " fill the surrounding area with loud slapping noises.");
 			if(player.balls > 0) outputText("  Your [balls] swing freely, smacking into the demon's own and making both of you squeal and dribble more pre-cum.");
 			outputText("\n\n");
-			//(CUM)  
+			//(CUM)
 			if(player.balls > 0) outputText("You feel your [balls] draw up tight against your body.  ");
 			outputText("Warm heat begins to build inside your groin, pooling under the base of your [cock].  You realize you're about to paint this demon's gut with white, the thought only turning you on more.  ");
 			if(player.cumQ() > 200) outputText("You groan as you feel your urethra being stretched by the sheer volume of fluid beginning to shoot through it.  ");
@@ -306,7 +306,7 @@ import classes.Scenes.SceneLib;
 							player.sexReward("Default","Dick");
 							player.orgasm();
 							if (player.isGargoyle() && player.hasPerk(PerkLib.GargoyleCorrupted)) player.refillGargoyleHunger(30);
-							if (player.jiangshiScore() >= 20 && player.hasPerk(PerkLib.EnergyDependent)) player.EnergyDependentRestore();
+							if (player.isRace(Races.JIANGSHI) && player.hasPerk(PerkLib.EnergyDependent)) player.EnergyDependentRestore();
 							cleanupAfterCombat();
 					}
 				}
@@ -385,9 +385,9 @@ import classes.Scenes.SceneLib;
         public function OGRBM_toobig():void {
 			var x:Number = player.biggestCockIndex();
             //[MALE TOO DAMN BIGGA WIGGA]
-            //[lust] 
+            //[lust]
             if (monster.lust > 99) outputText("Ignoring her squeals of pleasure, you force omnibus onto her back, oogling her perky breasts, indecent cock, and soaked cunt.  She looks up at you hungrily, and you have the feeling that on some level you're still giving her what she wants.  Wary of the demon's wiles, you pull her hands together and use some scraps of cloth to bind them up.  Moaning with helpless desire, the demon grinds her crotch against your [leg], spreading her thighs apart into a near split and giving you a world-class view of her juicy purple cunt.\n\n");
-            //[hp] 
+            //[hp]
             else outputText("Ignoring her grunts of pain, you force omnibus onto her back, oogling her perky breasts, limp cock, and hairless cunt.  She looks up at you with disdain, growling at you from the back of her throat. Wary of the demon's abilities, you tie up her hands with a few pieces of tattered cloth.  She seems to like it, judging by her tenting erection and now-glistening gash.  The slut even goes so far as to begin grinding her crotch against you, spreading her thighs wider and wider as she gets off on being restrained.  You're given a perfect view of her enticing purple cunt.\n\n");
             outputText("Omnibus licks her lips and gazes up at you, begging with a voice that drips with seductive intent, \"<i>Please, don't rape me Champion!  Don't tie me down and rape me like a helpless village-girl!</i>\"\n\n");
             if (player.cor < 33) outputText("Her words shame you.  Have you really sunk this low?  You wonder just how much this world has already corrupted you as you ready yourself to rape a sex-demon.");
@@ -429,7 +429,7 @@ import classes.Scenes.SceneLib;
 			clearOutput();
 			//lust
 			if (monster.lust > 99) outputText("Ignoring her squeals of pleasure, you force omnibus onto her back, oogling her perky breasts, indecent cock, and soaked cunt.  She looks up at you hungrily, and you have the feeling that on some level you're still giving her what she wants. Wary of the demon's wiles, you pull her hands together and use some tattered strips of cloth to bind them up.  Moaning with helpless desire, the demon grinds her crotch against your [leg], spreading her thighs apart into a near split and giving you a world-class view of her pulsating black demon-cock.\n\n");
-			//[hp] 
+			//[hp]
 			else outputText("Ignoring her grunts of pain, you force omnibus onto her back, oogling her perky breasts, limp cock, and hairless cunt.  She looks up at you with disdain, growling at you from the back of her throat.  Mindful of the demon's abilities, you tie up her hands with some tattered strips of cloth.  She seems to like it, judging by her tenting erection and now-glistening gash.  The slut even goes so far as to begin grinding her crotch against you, spreading her thighs wider and wider as she gets off on being restrained.  You're given a perfect view of her pulsating black demon-cock.\n\n");
 			outputText("Omnibus licks her lips and gazes up at you, begging with a voice that drips with seductive intent, \"<i>Please don't rape me!  I took a vow of chastity!</i>\"\n\n");
 			if (player.cor < 33) outputText("Her words shame you.  Have you really sunk this low?  You wonder just how much this world has already corrupted you as you ready yourself to get off on a sex-demon's tool.");
@@ -530,7 +530,7 @@ import classes.Scenes.SceneLib;
 					player.sexReward("cum","Lips");
 					player.orgasm();
 					dynStats("cor", 25);
-					player.buttChange(monster.cockArea(0), true);	
+					player.buttChange(monster.cockArea(0), true);
 					cleanupAfterCombat();
 				}
 				//Male/Genderless
@@ -621,9 +621,9 @@ import classes.Scenes.SceneLib;
 		
 		public function SuccubusGetsRapedByMale():void {
 			clearOutput();
-			//(LUSTY) 
+			//(LUSTY)
 			if(monster.lust > 99) outputText("Panting hotly, the succubus staggers towards you, her eyes fixated on the bulge in your crotch.  Dark viscous liquid drips from her dusky folds as her hips undulate hypnotically.  Blue fingers smear the corrupted lubricants over the smooth outer folds of her sex as she lies back enticingly, giving up on anything but bedding you.  In moments your [armor] are on the floor and you approach your prize.\n\n");
-			//(HP) 
+			//(HP)
 			else outputText("The succubus collapses on the floor, groaning in pain.  Most of her rags have been destroyed by the combat and her blue skin is marked with deep purple bruises and bloody lacerations.  You undress, straddling your conquest and gazing down on her helpless, curvaceous form.  She looks up at you and forces a smile, licking the blood from a cracked lip and beginning to masturbate for you.\n\n");
 			//((TOO BIG))
 			sceneHunter.selectFitNofit(SGRBM_fits, SGRBM_toobig, monster.vaginalCapacity());
@@ -686,7 +686,7 @@ import classes.Scenes.SceneLib;
             outputText(".  ");
             //Big cum
             if(player.cumQ() >= 50 && player.cumQ() < 400) outputText("You inhale as black cum spatters from her entrance, her belly distending slightly as you empty what feels like a gallon inside her.");
-            //((Ginormohuge)) 
+            //((Ginormohuge))
             if(player.cumQ() >= 400) outputText("Gasping in pleasure and surprise, you marvel as her belly visibly expands with each eruption of your dark load.  At first it looks like a tiny belly, but by the time the orgasm finishes, your girlish double looks like a woman in her ninth month of pregnancy – with twins.");
             outputText("\n\nYou pant with exertion and pull back, only to have your " + player.cockDescript(x) + " plunge right back in. Beginning another rough fucking session, your hips force-fuck her beyond your control.  Exhausted, you lean over her, figuring you may as well enjoy your double's wondrous breasts until your demonic cock has finally sated itself.  You just hope you don't black out from the waves of pleasure each of your new nubs radiates.\n\n\nHours later you pull away, sated.  For now.");
 			//common
@@ -793,7 +793,7 @@ import classes.Scenes.SceneLib;
 				outputText("\n\n");
 				//[[Cum]]
 				outputText("The succubus licks her lips in anticipation as she curls her toes tighter around you, making you bulge and twitch in obscene pleasure.  With a naughty smile, she caresses your ass with her bulbous demonic tail.  Before you can react, it plunges inside you, easily slipping through your " + assholeDescript() + " and pressing tightly against your prostate.  The suddenness pushes you over the edge, but she immediately wraps her fingers around you, pinching tightly, bottling your cum inside you.  You cry out in pain and surprise as your entire thick load is trapped inside you.  After nearly a full minute, your groin aches with the discomfort of it all.\n\n");
-				//More cum paragraph.  HAHA! TINY BABY CUM! 
+				//More cum paragraph.  HAHA! TINY BABY CUM!
 				outputText("She wastes no time, and caresses you again.  You instantly feel another surge of heat and desire as a fresh load of cum brews behind your first strangled orgasm.  You need to cum so bad, her foot still stroking and squeezing you full of perverted desire.  She slaps your ");
 				if(player.balls > 0) outputText("balls");
 				else outputText("ass");
@@ -848,7 +848,7 @@ import classes.Scenes.SceneLib;
 			if (monster.short == "mino incubus") outputText("mino incubus");
 			outputText(" before dragging the corpse away. That's one less foul creature prowling the realms. ");
 			if (player.cor < 25) dynStats("cor", -0.5);
-			menu(); 
+			menu();
 			addButton(1, "Leave", cleanupAfterCombat);
 			addButton(2, "Take Skull", takeSkull);
 			if (player.hasPerk(PerkLib.PrestigeJobNecromancer)) addButton(3, "Harvest", harvestBones);

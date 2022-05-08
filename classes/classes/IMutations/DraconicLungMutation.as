@@ -54,7 +54,7 @@ public class DraconicLungMutation extends PerkType
                     IMutationsLib.DraconicLungIM.requireLungsMutationSlot()
                     .requirePerks(PerkLib.DragonFireBreath, PerkLib.DragonIceBreath, PerkLib.DragonLightningBreath, PerkLib.DragonDarknessBreath)
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return (player.racialTierNumber(Races.DRAGON) >= 1);
+                        return (player.isRace(Races.DRAGON));
                     }, "Dragon race");
                 }
                 else{

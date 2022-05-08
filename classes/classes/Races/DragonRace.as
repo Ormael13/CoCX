@@ -36,24 +36,26 @@ public class DragonRace extends Race {
 				.hasCockOfType(CockTypesEnum.DRAGON, +1)
 				.gender(Gender.GENDER_FEMALE, +1);
 		addScoresAfter(5)
-				.perk(MutationsLib.DraconicBones, +1)
-				.perk(MutationsLib.DraconicBonesPrimitive, +1)
-				.perk(MutationsLib.DraconicBonesEvolved, +1)
-				.perk(MutationsLib.DraconicHeart, +1)
-				.perk(MutationsLib.DraconicHeartPrimitive, +1)
-				.perk(MutationsLib.DraconicHeartEvolved, +1)
-				.perk(MutationsLib.DraconicLungs, +1)
-				.perk(MutationsLib.DraconicLungsPrimitive, +1)
-				.perk(MutationsLib.DraconicLungsEvolved, +1);
+				.mutationPerks([
+						MutationsLib.DraconicBones,
+						MutationsLib.DraconicBonesPrimitive,
+						MutationsLib.DraconicBonesEvolved,
+						MutationsLib.DraconicHeart,
+						MutationsLib.DraconicHeartPrimitive,
+						MutationsLib.DraconicHeartEvolved,
+						MutationsLib.DraconicLungs,
+						MutationsLib.DraconicLungsPrimitive,
+						MutationsLib.DraconicLungsEvolved
+				]);
 		addScoresAfter(8)
 				.height(GREATER_THAN(120), +1)
-				.anyPerk([
+				.hasAnyPerk([
 					PerkLib.DragonFireBreath,
 					PerkLib.DragonIceBreath,
 					PerkLib.DragonLightningBreath,
 					PerkLib.DragonDarknessBreath
 				], +1)
-				.allPerks([
+				.hasAllPerks([
 					PerkLib.DragonFireBreath,
 					PerkLib.DragonIceBreath,
 					PerkLib.DragonLightningBreath,

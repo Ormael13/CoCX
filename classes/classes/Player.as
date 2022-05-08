@@ -633,11 +633,10 @@ use namespace CoC;
 			}
 			if (yggdrasilScore() >= 10 || alrauneScore() >= 13) armorDef += (10 * newGamePlusMod);
 			//Dragon score bonuses
-			if (dragonScore() >= 16) {
-				if (dragonScore() >= 32) armorDef += (10 * newGamePlusMod);
-				else if (dragonScore() >= 24) armorDef += (4 * newGamePlusMod);
-				else armorDef += (1 * newGamePlusMod);
-			}
+			var tier:int = racialTierNumber(Races.DRAGON);
+			if (tier >= 3) armorDef += (10 * newGamePlusMod);
+			else if (tier >= 2) armorDef += (4 * newGamePlusMod);
+			else if (tier >= 1) armorDef += (1 * newGamePlusMod);
 			if (frostWyrmScore() >= 18) {
 				/*if (frostWyrmScore() >= 30) armorDef += (10 * newGamePlusMod);
 				else */if (frostWyrmScore() >= 26) armorDef += (4 * newGamePlusMod);
@@ -874,11 +873,10 @@ use namespace CoC;
 			}*/
 			if (yggdrasilScore() >= 10) armorMDef += (10 * newGamePlusMod);
 			//Dragon score bonuses
-			if (dragonScore() >= 16) {
-				if (dragonScore() >= 32) armorMDef += (10 * newGamePlusMod);
-				else if (dragonScore() >= 24) armorMDef += (4 * newGamePlusMod);
-				else armorMDef += (1 * newGamePlusMod);
-			}
+			var tier:int = racialTierNumber(Races.DRAGON);
+			if (tier >= 3) armorMDef += (10 * newGamePlusMod);
+			else if (tier >= 2) armorMDef += (4 * newGamePlusMod);
+			else if (tier > 1) armorMDef += (1 * newGamePlusMod);
 			if (frostWyrmScore() >= 18) {
 				/*if (frostWyrmScore() >= 30) armorMDef += (10 * newGamePlusMod);
 				else */if (frostWyrmScore() >= 26) armorMDef += (4 * newGamePlusMod);
@@ -1077,11 +1075,11 @@ use namespace CoC;
 		public function hasTentacleAttacks():Boolean{return LowerBody.hasTentacles(this) || hasPerk(PerkLib.MorphicWeaponry);}
 		public function hasNaturalWeapons():Boolean { return (haveNaturalClaws() || hasABiteAttack() || hasAWingAttack() || hasAGoreAttack() || hasATailSlapAttack() || hasTalonsAttack || hasTentacleAttacks || isAlraune() || isTaur());}
 		//Some other checks
-		public function isGoblinoid():Boolean { return (racialTierNumber(Races.GOBLIN) > 0 || gremlinScore() > 14); }
+		public function isGoblinoid():Boolean { return (isRace(Races.GOBLIN) || gremlinScore() > 14); }
 		public function isSlime():Boolean { return (hasPerk(PerkLib.DarkSlimeCore) || hasPerk(PerkLib.SlimeCore)); }
 		public function isHarpy():Boolean { return (harpyScore() > 10 || thunderbirdScore() > 15 || phoenixScore() > 15); }
 		public function isWerewolf():Boolean { return (werewolfScore() >= 12); }
-		public function isNightCreature():Boolean { return (vampireScore() >= 10 || batScore() >= 6 || jiangshiScore() >= 20); }
+		public function isNightCreature():Boolean { return (vampireScore() >= 10 || batScore() >= 6 || isRace(Races.JIANGSHI)); }
 		public function hasDarkVision():Boolean { return (Eyes.Types[eyes.type].Darkvision); }
 		public function isHavingEnhancedHearing():Boolean { return (ears.type == Ears.ELVEN); }
 		//Weapons for Whirlwind
@@ -4278,11 +4276,6 @@ use namespace CoC;
 					}
 				}
 			}
-			if (TopRace == "jiangshi") {
-				if (TopScore >= 20) {
-					race = "Jiangshi";
-				}
-			}
 			if (TopRace == "atlach nacha") {
 				if (TopScore >= 30) {
 					race = "greater Atlach Nacha"
@@ -4375,6 +4368,14 @@ use namespace CoC;
 		public function racialTier(race:Race, bodyData:BodyData = null):RaceTier {
 			if (!bodyData) bodyData = this.bodyData();
 			return race.getTier(bodyData);
+		}
+		
+		/**
+		 * true if player qualifies as specified race and tier.
+		 * DOES NOT mean that this is player's top race!
+		 */
+		public function isRace(race:Race, minTier:int=1):Boolean {
+			return racialTierNumber(race) >= minTier;
 		}
 
 		public function racialParagonSelectedRace():Race {
@@ -4705,7 +4706,6 @@ use namespace CoC;
 		//Determine Chimera Race Rating
 		public function chimeraScore():Number {
 			Begin("Player","racialScore","chimera");
-			var body:BodyData = bodyData();
 			var chimeraCounter:Number = 0;
 			if (catScore() >= 8)
 				chimeraCounter++;
@@ -4719,13 +4719,13 @@ use namespace CoC;
 				chimeraCounter++;
 			if (lizardScore() >= 8)
 				chimeraCounter++;
-			if (racialTierNumber(Races.DRAGON) >= 1)
+			if (isRace(Races.DRAGON))
 				chimeraCounter++;
 			if (raccoonScore() >= 8)
 				chimeraCounter++;
 //			if (dogScore() >= 4)
 //				chimeraCounter++;
-            if (racialTierNumber(Races.WOLF, body) >= 1)
+            if (isRace(Races.WOLF))
                 chimeraCounter++;
 			if (werewolfScore() >= 12)
 				chimeraCounter++;
@@ -4733,7 +4733,7 @@ use namespace CoC;
 				chimeraCounter++;
 //			if (ferretScore() >= 4)
 //				chimeraCounter++;
-			if (racialTierNumber(Races.KITSUNE, body) >= 1)
+			if (isRace(Races.KITSUNE))
 				chimeraCounter++;
 			if (horseScore() >= 7)
 				chimeraCounter++;
@@ -4751,7 +4751,7 @@ use namespace CoC;
 				chimeraCounter++;
 			if (beeScore() >= 17)
 				chimeraCounter++;
-			if (racialTierNumber(Races.GOBLIN, body) >= 1)
+			if (isRace(Races.GOBLIN))
 				chimeraCounter++;
 			if (gremlinScore() >= 15)
 				chimeraCounter++;
@@ -4886,20 +4886,19 @@ use namespace CoC;
 		public function grandchimeraScore():Number {
 			Begin("Player","racialScore","grandchimera");
 			var grandchimeraCounter:Number = 0;
-			var body:BodyData = bodyData();
 			if (nekomataScore() >= 12)
 				grandchimeraCounter++;
-			if (racialTierNumber(Races.DRAGON) >= 2)
+			if (isRace(Races.DRAGON, 2))
 				grandchimeraCounter++;
 			if (jabberwockyScore() >= 20)
 				grandchimeraCounter++;
-			if (racialTierNumber(Races.WOLF, body) >= 2)
+			if (isRace(Races.WOLF, 2))
 				grandchimeraCounter++;
 //			if (werewolfScore() >= 12)
 //				grandchimeraCounter++;
 //			if (ferretScore() >= 4)
 //				grandchimeraCounter++;
-			if (racialTierNumber(Races.KITSUNE, body) >= 2)
+			if (isRace(Races.KITSUNE, 2))
 				grandchimeraCounter++;
 			if (demonScore() >= 16 && hasPerk(PerkLib.Phylactery))
 				grandchimeraCounter++;
@@ -4948,49 +4947,6 @@ use namespace CoC;
 
 			End("Player","racialScore");
 			return grandchimeraCounter;
-		}
-
-		//Determine Jiangshi Rating
-		public function jiangshiScore():Number {
-			Begin("Player","racialScore","jiangshi");
-			var jiangshiCounter:Number = 0;
-			if (hasPlainSkinOnly() && skinAdj != "slippery")
-				jiangshiCounter++;
-			if (InCollection(skin.base.color, ["ghostly pale", "light blue", "snow white"]))
-				jiangshiCounter++;
-			if (hairType == Hair.NORMAL)
-				jiangshiCounter++;
-			if (faceType == Face.JIANGSHI)
-				jiangshiCounter++;
-			if (eyes.type == Eyes.JIANGSHI)
-				jiangshiCounter += 2;
-			if (ears.type == Ears.HUMAN)
-				jiangshiCounter++;
-			if (tongue.type == 0)
-				jiangshiCounter++;
-			if (gills.type == 0)
-				jiangshiCounter++;
-			if (antennae.type == 0)
-				jiangshiCounter++;
-			if (horns.type == Horns.SPELL_TAG && horns.count > 0)
-				jiangshiCounter++;
-			if (wings.type == Wings.NONE)
-				jiangshiCounter += 2;
-			if (tailType == 0)
-				jiangshiCounter++;
-			if (arms.type == Arms.JIANGSHI)
-				jiangshiCounter++;
-			if (lowerBody == LowerBody.JIANGSHI)
-				jiangshiCounter++;
-			if (rearBody.type == RearBody.NONE)
-				jiangshiCounter++;
-			if (skin.base.pattern == Skin.PATTERN_NONE)
-				jiangshiCounter++;
-			if (hasPerk(PerkLib.Undeath))
-				jiangshiCounter += 2;
-			jiangshiCounter = finalRacialScore(jiangshiCounter, Races.JIANGSHI);
-			End("Player","racialScore");
-			return jiangshiCounter;
 		}
 
 		//determine demon rating
@@ -10332,7 +10288,7 @@ use namespace CoC;
 				flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00229] = 1;
 			}
 			if (isGargoyle() && hasPerk(PerkLib.GargoyleCorrupted)) refillGargoyleHunger(30);
-			if (jiangshiScore() >= 20 && hasPerk(PerkLib.EnergyDependent)) EnergyDependentRestore();
+			if (isRace(Races.JIANGSHI) && hasPerk(PerkLib.EnergyDependent)) EnergyDependentRestore();
 		}
 
 		public function minoCumAddiction(raw:Number = 10):void {
@@ -12010,13 +11966,6 @@ use namespace CoC;
 				maxWisCap2 += 2 * perkv1(PerkLib.AscensionOneRaceToRuleThemAllX) * level;
 				maxLibCap2 += 2 * perkv1(PerkLib.AscensionOneRaceToRuleThemAllX) * level;
 			}
-			if (jiangshiScore() >= 20) {
-				maxStrCap2 += 150;
-				maxSpeCap2 -= 90;
-				maxIntCap2 -= 90;
-				maxWisCap2 += 130;
-				maxLibCap2 += 200;
-			}//+110 strength +80 toughness +60 Wisdom +100 Libido +50 sensitivity
 			if (gargoyleScore() >= 22) {//990
 				switch (Forgefather.material){
 					case "stone":
@@ -13962,7 +13911,7 @@ use namespace CoC;
 			if (Wasfluidinvolved) {
 				slimeFeed();
 				if (isGargoyle() && hasPerk(PerkLib.GargoyleCorrupted)) refillGargoyleHunger(30);
-				if (jiangshiScore() >= 20 && hasPerk(PerkLib.EnergyDependent)) EnergyDependentRestore();
+				if (isRace(Races.JIANGSHI) && hasPerk(PerkLib.EnergyDependent)) EnergyDependentRestore();
 				if (hasPerk(PerkLib.DemonEnergyThirst)) createStatusEffect(StatusEffects.DemonEnergyThirstFeed, 0, 0, 0, 0);
 				if (hasPerk(PerkLib.KitsuneEnergyThirst)) createStatusEffect(StatusEffects.KitsuneEnergyThirstFeed, 0, 0, 0, 0);
 				switch (fluidtype)

@@ -6321,13 +6321,13 @@ public class PerkLib
 			VenomousAdiposeTissue.requireTou(10)
 					.requireMaxVenom(100);
 			CursedTag.requireCustomFunction(function (player:Player):Boolean {
-                return player.jiangshiScore() >= 20;
+                return player.isRace(Races.JIANGSHI);
             }, "Jiangshi race");
 			ImprovedCursedTag.requirePerk(CursedTag).requireCustomFunction(function (player:Player):Boolean {
-                return player.jiangshiScore() >= 20;
+				return player.isRace(Races.JIANGSHI);
             }, "Jiangshi race");
 			GreaterCursedTag.requirePerk(ImprovedCursedTag).requireCustomFunction(function (player:Player):Boolean {
-                return player.jiangshiScore() >= 20;
+				return player.isRace(Races.JIANGSHI);
             }, "Jiangshi race");
             //Tier 1
 			ChimericalBodyInitialStage.requireLevel(6)

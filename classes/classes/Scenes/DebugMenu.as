@@ -790,41 +790,7 @@ public class DebugMenu extends BaseContent
 				var score:int = race.totalScore(body);
 				//if (score == 0) continue;
 				outputText("<b>"+race.name+" score: "+score+"</b>\n");
-				score = 0;
-				var minScore:int = 0;
-				for each (var rr:RacialRequirement in race.requirements) {
-					if (rr.minScore != minScore) {
-						outputText("\t<b>After score "+rr.minScore+":</b>\n");
-						minScore = rr.minScore;
-					}
-					outputText("\t");
-					if (rr.check(body, score)) {
-						var rscore:int = rr.score(body);
-						score += rscore;
-						if (rscore >= 0) {
-							outputText("[font-green]")
-						} else {
-							outputText("[font-red]")
-						}
-					} else {
-						outputText("[font-default]")
-					}
-					outputText(rr.describe(body)+"[/font]\n")
-				}
-				if (race.tiers.length>0) {
-					outputText("\t<b>Tiers:</b>\n")
-				}
-				for each(var tier:RaceTier in race.tiers) {
-					outputText("\t");
-					if (tier.check(body, score)) {
-						outputText("[font-green]"+tier.nameFor(body)+"[/font]")
-					} else {
-						outputText(tier.nameFor(body))
-					}
-					outputText(" ("+tier.minScore+") ");
-					outputText(tier.describeBuffs());
-					outputText("\n");
-				}
+				outputText(race.printDetails(body));
 			}
 			flushOutputTextToGUI();
 		}

@@ -1,9 +1,7 @@
 package classes.internals.race {
 
 import classes.BodyData;
-import classes.BodyParts.Antennae;
-import classes.BodyParts.Tail;
-import classes.BodyParts.Wings;
+import classes.BodyParts.*;
 import classes.CockTypesEnum;
 import classes.PerkType;
 import classes.Race;
@@ -19,172 +17,195 @@ public class RaceScoreBuilder {
 		this.minScore = minScore;
 	}
 	
-	public function armType(type:*, score:int, customName:String = ""):RaceScoreBuilder {
-		addSlotRequirement(BodyData.SLOT_ARM_TYPE, type, score, customName);
+	public function armType(type:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_ARM_TYPE, type, score, failScore, customName);
 		return this;
 	}
-	public function antennaeType(type:*, score:int, customName:String = ""):RaceScoreBuilder {
-		addSlotRequirement(BodyData.SLOT_ANTENNAE_TYPE, type, score, customName);
+	public function antennaeType(type:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_ANTENNAE_TYPE, type, score, failScore, customName);
 		return this;
 	}
 	public function noAntennae(score:int):RaceScoreBuilder {
 		return antennaeType(Antennae.NONE, score);
 	}
-	public function earType(type:*, score:int, customName:String = ""):RaceScoreBuilder {
-		addSlotRequirement(BodyData.SLOT_EAR_TYPE, type, score, customName);
+	public function earType(type:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_EAR_TYPE, type, score, failScore, customName);
 		return this;
 	}
-	public function eyeType(type:*, score:int, customName:String = ""):RaceScoreBuilder {
-		addSlotRequirement(BodyData.SLOT_EYE_TYPE, type, score, customName);
+	public function eyeType(type:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_EYE_TYPE, type, score, failScore, customName);
 		return this;
 	}
-	public function eyeColor(type:*, score:int, customName:String = ""):RaceScoreBuilder {
-		addSlotRequirement(BodyData.SLOT_EYE_COLOR, type, score, customName);
+	public function eyeColor(type:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_EYE_COLOR, type, score, failScore, customName);
 		return this;
 	}
-	public function eyeTypeOfColor(type:*, color:*, score:int):RaceScoreBuilder {
+	public function eyeTypeOfColor(type:*, color:*, score:int, failScore:int=0):RaceScoreBuilder {
 		addRequirement(
 				RacialRequirement.joinAnd(
 						"eyes",
 						" ",
-						slotRequirement(BodyData.SLOT_EYE_COLOR, color, score, "$name"),
-						slotRequirement(BodyData.SLOT_EYE_TYPE, type, score)
+						slotRequirement(BodyData.SLOT_EYE_COLOR, color, score, failScore, "$name"),
+						slotRequirement(BodyData.SLOT_EYE_TYPE, type, score, failScore)
 				)
 		)
 		return this;
 	}
-	public function faceType(type:*, score:int, customName:String = ""):RaceScoreBuilder {
-		addSlotRequirement(BodyData.SLOT_FACE_TYPE, type, score, customName);
+	public function faceType(type:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_FACE_TYPE, type, score, failScore, customName);
 		return this;
 	}
-	public function hairType(type:*, score:int, customName:String = ""):RaceScoreBuilder {
-		addSlotRequirement(BodyData.SLOT_HAIR_TYPE, type, score, customName);
+	public function gillType(value:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_GILLS_TYPE, value, score, failScore, customName);
 		return this;
 	}
-	public function hairColor(type:*, score:int, customName:String = ""):RaceScoreBuilder {
-		addSlotRequirement(BodyData.SLOT_HAIR_COLOR, type, score, customName);
+	public function noGills(score:int, failScore:int=0):RaceScoreBuilder {
+		return gillType(Gills.NONE, score, failScore);
+	}
+	public function hairType(type:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_HAIR_TYPE, type, score, failScore, customName);
 		return this;
 	}
-	public function height(type:*, score:int, customName:String = ""):RaceScoreBuilder {
-		addSlotRequirement(BodyData.SLOT_HEIGHT, type, score, customName);
+	public function hairColor(type:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_HAIR_COLOR, type, score, failScore, customName);
 		return this;
 	}
-	public function hornType(type:*, score:int, customName:String = ""):RaceScoreBuilder {
-		addSlotRequirement(BodyData.SLOT_HORN_TYPE, type, score, customName);
+	public function height(type:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_HEIGHT, type, score, failScore, customName);
 		return this;
 	}
-	public function legType(type:*, score:int, customName:String = ""):RaceScoreBuilder {
-		addSlotRequirement(BodyData.SLOT_LEG_TYPE, type, score, customName);
+	public function hornType(type:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_HORN_TYPE, type, score, failScore, customName);
 		return this;
 	}
-	public function rearType(type:*, score:int, customName:String = ""):RaceScoreBuilder {
-		addSlotRequirement(BodyData.SLOT_REAR_TYPE, type, score, customName);
+	public function legType(type:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_LEG_TYPE, type, score, failScore, customName);
 		return this;
 	}
-	public function skinBaseType(type:*, score:int, customName:String = ""):RaceScoreBuilder {
-		addSlotRequirement(BodyData.SLOT_SKIN_BASE_TYPE, type, score, customName);
+	public function rearType(type:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_REAR_TYPE, type, score, failScore, customName);
 		return this;
 	}
-	public function skinBaseColor(type:*, score:int, customName:String = ""):RaceScoreBuilder {
-		addSlotRequirement(BodyData.SLOT_SKIN_BASE_COLOR, type, score, customName);
+	public function noRearBody(score:int, failScore:int=0):RaceScoreBuilder {
+		return rearType(RearBody.NONE, score, failScore);
+	}
+	public function skinBaseType(type:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_SKIN_BASE_TYPE, type, score, failScore, customName);
 		return this;
 	}
-	public function skinCoatType(type:*, score:int, customName:String = ""):RaceScoreBuilder {
-		addSlotRequirement(BodyData.SLOT_SKIN_COAT_TYPE, type, score, customName);
+	public function skinBaseColor(value:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_SKIN_BASE_COLOR, value, score, failScore, customName);
 		return this;
 	}
-	public function skinCoatColor(type:*, score:int, customName:String = ""):RaceScoreBuilder {
-		addSlotRequirement(BodyData.SLOT_SKIN_COAT_COLOR, type, score, customName);
+	public function skinBasePattern(value:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_SKIN_BASE_PATTERN, value, score, failScore, customName);
 		return this;
 	}
-	public function skinPlainOnly(score:int):RaceScoreBuilder {
+	public function skinBaseAdj(value:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_SKIN_BASE_ADJ, value, score, failScore, customName);
+		return this;
+	}
+	public function skinCoatType(type:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_SKIN_COAT_TYPE, type, score, failScore, customName);
+		return this;
+	}
+	public function skinCoatColor(type:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_SKIN_COAT_COLOR, type, score, failScore, customName);
+		return this;
+	}
+	public function skinPlainOnly(score:int, failScore:int=0):RaceScoreBuilder {
 		return customRequirement(
 				"skin",
 				"plain skin",
 				function(body:BodyData):Boolean {
 					return body.player.hasPlainSkinOnly();
 				},
-				score
+				score,
+				failScore
 		);
 	}
-	public function tailType(type:*, score:int, customName:String = ""):RaceScoreBuilder {
-		addSlotRequirement(BodyData.SLOT_TAIL_TYPE, type, score, customName);
+	public function tailType(type:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_TAIL_TYPE, type, score, failScore, customName);
 		return this;
 	}
 	public function noTail(score:int):RaceScoreBuilder {
 		return tailType(Tail.NONE, score);
 	}
-	public function tailTypeAndCount(type:*, count:*, score:int, customName:String = ""):RaceScoreBuilder {
+	public function tailTypeAndCount(type:*, count:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
 		addRequirement(
 				RacialRequirement.joinAnd(
 						"tail",
 						" ",
-						slotRequirement(BodyData.SLOT_TAIL_COUNT, count, score, "$name"),
-						slotRequirement(BodyData.SLOT_TAIL_TYPE, type, score)
+						slotRequirement(BodyData.SLOT_TAIL_COUNT, count, score, failScore, "$name"),
+						slotRequirement(BodyData.SLOT_TAIL_TYPE, type, score, failScore)
 				), customName
 		)
 		return this;
 	}
-	public function tongueType(type:*, score:int, customName:String = ""):RaceScoreBuilder {
-		addSlotRequirement(BodyData.SLOT_TONGUE_TYPE, type, score, customName);
+	public function tongueType(type:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_TONGUE_TYPE, type, score, failScore, customName);
 		return this;
 	}
-	public function wingType(type:*, score:int, customName:String = ""):RaceScoreBuilder {
-		addSlotRequirement(BodyData.SLOT_WING_TYPE, type, score, customName);
+	public function wingType(type:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_WING_TYPE, type, score, failScore, customName);
 		return this;
 	}
 	public function noWings(score:int):RaceScoreBuilder {
 		return wingType(Wings.NONE, score);
 	}
-	public function gender(type:*, score:int, customName:String = ""):RaceScoreBuilder {
-		addSlotRequirement(BodyData.SLOT_GENDER, type, score, customName);
+	public function gender(type:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_GENDER, type, score, failScore, customName);
 		return this;
 	}
 	
-	public function hasCockOfType(type:CockTypesEnum, score:int, customName:String = ""):RaceScoreBuilder {
+	public function hasCockOfType(type:CockTypesEnum, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
 		addRequirement(new RacialRequirement(
 				"cock",
 				type.DisplayName+" cock",
 				RaceUtils.hasCockOfTypeFn(type),
 				score,
+				failScore,
 				minScore
 		), customName)
 		return this;
 	}
-	public function hasVagina(score: int, customName:String = ""): RaceScoreBuilder {
+	public function hasVagina(score: int, failScore:int=0, customName:String = ""): RaceScoreBuilder {
 		addRequirement(new RacialRequirement(
 				"vagina",
 				"has vagina",
 				RaceUtils.hasVaginaFn(true),
 				score,
+				failScore,
 				minScore
 		), customName)
 		return this;
 	}
 	
-	public function perk(perk:PerkType, score:int, customName:String = ""):RaceScoreBuilder {
+	public function hasPerk(perk:PerkType, score:int, failScore:int =0, customName:String = ""):RaceScoreBuilder {
 		addRequirement(new RacialRequirement(
-				"",
+				"perk",
 				perk.name()+" perk",
 				RaceUtils.hasPerkFn(perk),
 				score,
+				failScore,
 				minScore
 		), customName)
 		return this;
 	}
-	public function allPerks(perks:/*PerkType*/Array, score:int, customName:String = ""):RaceScoreBuilder {
+	public function hasAllPerks(perks:/*PerkType*/Array, score:int, failScore:int =0, customName:String = ""):RaceScoreBuilder {
 		addRequirement(new RacialRequirement(
-				"",
+				"perk",
 				perks.map(function(e:PerkType,...rest:Array):String{
 					return e.name();
 				}).join(", ")+" perks",
 				RaceUtils.hasAllPerksFn(perks),
 				score,
+				failScore,
 				minScore
 		), customName)
 		return this;
 	}
-	public function anyPerk(perks:/*PerkType*/Array, score:int, customName:String = ""):RaceScoreBuilder {
+	public function hasAnyPerk(perks:/*PerkType*/Array, score:int, failScore:int =0, customName:String = ""):RaceScoreBuilder {
 		var names:/*String*/Array = perks.map(function (e:PerkType, ...rest:Array):String {
 			return e.name();
 		});
@@ -192,13 +213,31 @@ public class RaceScoreBuilder {
 		if (perks.length <= 3) name = names.join(" or ") + " perk";
 		else name = "any of " + names.join(", ") + " perks";
 		addRequirement(new RacialRequirement(
-				"",
+				"perk",
 				name,
 				RaceUtils.hasAnyPerkFn(perks),
 				score,
+				failScore,
 				minScore
 		), customName)
 		return this;
+	}
+	
+	/**
+	 * +1 per each perk present. Listed as a single entry named "mutations"
+	 */
+	public function mutationPerks(perks:/*PerkType*/Array):RaceScoreBuilder {
+		return customScoreRequirement(
+				"perk",
+				"mutations",
+				RaceUtils.hasAnyPerkFn(perks),
+				function (body:BodyData):int {
+					var score:int = 0;
+					for each (var perk:PerkType in perks) {
+						if (body.player.hasPerk(perk)) score++;
+					}
+					return score;
+				});
 	}
 	
 	/**
@@ -208,13 +247,15 @@ public class RaceScoreBuilder {
 			group:String,
 			name:String,
 			checkFn:Function,
-			score: int
+			score: int,
+			failScore:int=0
 	):RaceScoreBuilder {
 		addRequirement(new RacialRequirement(
 				group,
 				name,
 				checkFn,
 				score,
+				failScore,
 				minScore
 		));
 		return this;
@@ -228,13 +269,15 @@ public class RaceScoreBuilder {
 			group:String,
 			name:String,
 			checkFn:Function,
-			scoreFn:Function
+			scoreFn:Function,
+			failScore:int=0
 	):RaceScoreBuilder {
 		addRequirement(new CustomRacialRequirement(
 				group,
 				name,
 				checkFn,
 				scoreFn,
+				failScore,
 				minScore
 		));
 		return this;
@@ -254,6 +297,7 @@ public class RaceScoreBuilder {
 			slot:int,
 			type:*,
 			score:int,
+			failScore: int,
 			customName:String
 	):void {
 		var slotName:String = BodyData.Slots[slot].name;
@@ -261,13 +305,13 @@ public class RaceScoreBuilder {
 		var argumentFn:Function = RaceUtils.argumentSlotFn(slot);
 		var req:Object = parseArgPair(
 				argumentFn, nameFn,
-				type, score,
-				"["+race.name+" "+ slotName+"] ");
+				type, "["+race.name+" "+ slotName+"] ");
 		addRequirement(new RacialRequirement(
 				slotName,
 				customName || (req.name+" "+slotName),
 				req.check,
-				req.score,
+				score,
+				failScore,
 				minScore
 		));
 	}
@@ -275,6 +319,7 @@ public class RaceScoreBuilder {
 			slot:int,
 			type:*,
 			score:int,
+			failScore:int,
 			namePattern:String = "$name $slot"
 	):RacialRequirement {
 		var slotName:String = BodyData.Slots[slot].name;
@@ -290,25 +335,24 @@ public class RaceScoreBuilder {
 				namePattern.replace(/\$name/,operatorObject.name).replace(/\$slot/,slotName),
 				RaceUtils.composeOpArg(argumentFn, operatorObject.operatorFn),
 				score,
+				failScore,
 				minScore
 		)
 	}
 	
 	/**
 	 * @return {{
-	 *     score: int,
 	 *     name: String,
 	 *     check(body:BodyData, score:int): Boolean
 	 * }}
 	 */
-	private static function parseArgPair(argumentFn:Function, nameFn: Function, type:*, score:int, errorContext:String=""):Object {
+	private static function parseArgPair(argumentFn:Function, nameFn: Function, type:*, errorContext:String=""):Object {
 		var operatorObject:Object = RaceUtils.parseOperatorObject(
 				type,
 				nameFn,
 				errorContext
 		);
 		return {
-			score: score,
 			name: operatorObject.name,
 			check: RaceUtils.composeOpArg(argumentFn, operatorObject.operatorFn)
 		}

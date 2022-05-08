@@ -610,17 +610,17 @@ public class MutationsLib
 					return (Tail.hasDraconicTail(player) || LowerBody.hasDraconicLegs(player) && LowerBody.hasTail(player));
 				}, "Dragon race or its variants tail")
 				.requireCustomFunction(function (player:Player):Boolean {
-					return (player.racialTierNumber(Races.DRAGON) >= 1 || player.jabberwockyScore() >= 10 || player.frostWyrmScore() >= 10 || player.leviathanScore() >= 20);
+					return (player.isRace(Races.DRAGON) || player.jabberwockyScore() >= 10 || player.frostWyrmScore() >= 10 || player.leviathanScore() >= 20);
 				}, "Dragon race or its variants");
 				DraconicHeart.requireHeartMutationSlot()
 				.requirePerk(DraconicBones)
 				.requireCustomFunction(function (player:Player):Boolean {
-					return (player.racialTierNumber(Races.DRAGON) >= 1 || player.frostWyrmScore() >= 10 || player.leviathanScore() >= 20);
+					return (player.isRace(Races.DRAGON) || player.frostWyrmScore() >= 10 || player.leviathanScore() >= 20);
 				}, "Dragon race or its variants");
 				DraconicLungs.requireLungsMutationSlot()
 				.requirePerks(PerkLib.DragonFireBreath, PerkLib.DragonIceBreath, PerkLib.DragonLightningBreath, PerkLib.DragonDarknessBreath)
 				.requireCustomFunction(function (player:Player):Boolean {
-					return (player.racialTierNumber(Races.DRAGON) >= 1);
+					return (player.isRace(Races.DRAGON));
 				}, "Dragon race");
 				DrakeLungs.requireLungsMutationSlot()
 				.requireAnyPerk(PerkLib.DragonFireBreath, PerkLib.DragonIceBreath, PerkLib.DragonLightningBreath, PerkLib.DragonDarknessBreath, PerkLib.DragonWaterBreath)
@@ -690,7 +690,7 @@ public class MutationsLib
 					return player.tailType == Tail.FOX && player.tailCount >= 2;
 				}, "2+ fox tails")
 				.requireCustomFunction(function (player:Player):Boolean {
-					return player.racialTierNumber(Races.KITSUNE) >= 1;
+					return player.isRace(Races.KITSUNE);
 				}, "Kitsune race");
 				LactaBovinaOvaries.requireOvariesMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.hasVagina();

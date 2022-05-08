@@ -365,7 +365,7 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
         }
         private function USSJiangshiDrn():Array{
             var btnSet:Array = [];
-            if (player.jiangshiScore() >= 20) {
+            if (player.isRace(Races.JIANGSHI)) {
                 if (monster.hasPerk(PerkLib.EnemyTrueDemon)) {
                     if (monster.hasCock()) btnSet.push("Drain him", jiangshiDrainHimTrueDemons, "");
                     else btnSet.push("Drain him", false, "Only male/herm true demon enemies.");
@@ -803,7 +803,7 @@ import classes.Scenes.Quests.UrtaQuest.MinotaurLord;
 			outputText("The bulky bull-man lies down, exhausted and utterly spent as you pull away. You feel his massive, slowly deflating erection fall from your throat before you stand up, energized from the filling meal.\n\n");
 			var intBuff:Number = player.buff("Energy Vampire").getValueOfStatBuff("int.mult");
 			var speBuff:Number = player.buff("Energy Vampire").getValueOfStatBuff("spe.mult");
-			if (player.hasStatusEffect(StatusEffects.AlterBindScroll2)) 
+			if (player.hasStatusEffect(StatusEffects.AlterBindScroll2))
 			if (intBuff < +0.5) {
 				player.buff("Energy Vampire").addStats({ "int.mult": +0.50 }).withText("Energy Vampire");
 			}

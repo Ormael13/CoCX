@@ -26,17 +26,15 @@ public class KitsuneRace extends Race {
 		super("kitsune", id);
 		addScores()
 				.eyeType(Eyes.FOX, +1)
-				.earType(Ears.FOX, +1)
-				.earType(NOT(Ears.FOX), -1)
-				.tailTypeAndCount(Tail.FOX, 1, -7)
-				.tailType(NOT(Tail.FOX), -7)
+				.earType(Ears.FOX, +1, -1)
 				.customScoreRequirement("tail", "2+ fox tails",
 						function (body:BodyData):Boolean {
 							return body.tailType == Tail.FOX && body.tailCount >= 2;
 						},
 						function (body:BodyData):int {
 							return body.tailCount;
-						}
+						},
+						-7
 				)
 				.customRequirement("skin", "fur or magical tatoo",
 						function (body:BodyData):Boolean {
@@ -44,33 +42,32 @@ public class KitsuneRace extends Race {
 									|| body.skinBasePattern == Skin.PATTERN_MAGICAL_TATTOO
 						}, +1)
 				.armType(ANY(Arms.HUMAN, Arms.KITSUNE, Arms.FOX), +1)
-				.legType(ANY(LowerBody.FOX, LowerBody.HUMAN), +1)
-				.legType(NONE(LowerBody.FOX, LowerBody.HUMAN), -1)
-				.faceType(ANY(Face.ANIMAL_TOOTHS, Face.HUMAN, Face.FOX), +1)
-				.faceType(NONE(Face.ANIMAL_TOOTHS, Face.HUMAN, Face.FOX), -1);
+				.legType(ANY(LowerBody.FOX, LowerBody.HUMAN), +1, -1)
+				.faceType(ANY(Face.ANIMAL_TOOTHS, Face.HUMAN, Face.FOX), +1, -1);
 		addScoresAfter(5)
 				.customRequirement("skin coat", "skin coat other than fur",
 						function (body:BodyData):Boolean {
 							return body.hasCoat && body.skinCoatType != Skin.FUR;
 						}, -2
 				)
-				.skinBaseType(Skin.PLAIN, +1)
-				.skinBaseType(NOT(Skin.PLAIN), -3)
+				.skinBaseType(Skin.PLAIN, +1, -3)
 				.hairColor(ANY(KitsuneHairColors), +1)
 				.customRequirement("vagina", "Vag of Holding",
 						function (body:BodyData):Boolean {
 							return body.player.vaginalCapacity() >= 8000;
 						},
 						+1)
-				.perk(PerkLib.StarSphereMastery, +1)
-				.anyPerk([PerkLib.EnlightenedKitsune, PerkLib.CorruptedKitsune], +1)
-				.perk(PerkLib.NinetailsKitsuneOfBalance, +1)
-				.perk(MutationsLib.KitsuneThyroidGland, +1)
-				.perk(MutationsLib.KitsuneThyroidGlandPrimitive, +1)
-				.perk(MutationsLib.KitsuneThyroidGlandEvolved, +1)
-				.perk(MutationsLib.KitsuneParathyroidGlands, +1)
-				.perk(MutationsLib.KitsuneParathyroidGlandsEvolved, +1)
-				.perk(MutationsLib.KitsuneParathyroidGlandsFinalForm, +1)
+				.hasPerk(PerkLib.StarSphereMastery, +1)
+				.hasAnyPerk([PerkLib.EnlightenedKitsune, PerkLib.CorruptedKitsune], +1)
+				.hasPerk(PerkLib.NinetailsKitsuneOfBalance, +1)
+				.mutationPerks([
+					MutationsLib.KitsuneThyroidGland,
+					MutationsLib.KitsuneThyroidGlandPrimitive,
+					MutationsLib.KitsuneThyroidGlandEvolved,
+					MutationsLib.KitsuneParathyroidGlands,
+					MutationsLib.KitsuneParathyroidGlandsEvolved,
+					MutationsLib.KitsuneParathyroidGlandsFinalForm
+				])
 				.customRequirement("", "Chimerical Body Semi-Improved Stage + Kitsune Mutation I",
 						function (body:BodyData):Boolean {
 							return (body.player.hasPerk(MutationsLib.KitsuneThyroidGland)

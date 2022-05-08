@@ -992,8 +992,8 @@ import classes.CoC;
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 40) max += 10 * (flags[kFLAGS.SOUL_CULTIVATION] - 39);//Soul Saint
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 43) max += 12 * (flags[kFLAGS.SOUL_CULTIVATION] - 42);//Soul Paragon
 			if (flags[kFLAGS.SOUL_CULTIVATION] >= 46) max += 12 * (flags[kFLAGS.SOUL_CULTIVATION] - 45);//Soul Immortal
-			if (game.player.dragonScore() >= 16) max += 50;
-			if (game.player.dragonScore() >= 24) max += 50;
+			if (game.player.isRace(Races.DRAGON, 1)) max += 50;
+			if (game.player.isRace(Races.DRAGON,2)) max += 50;
 			if (game.player.pigScore() >= 10) max += 25;
 			if (game.player.pigScore() >= 15) max += 20;
 			if (game.player.orcaScore() >= 14) max += 35;

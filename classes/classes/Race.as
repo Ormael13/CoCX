@@ -46,7 +46,7 @@ public class Race {
 			try {
 				Utils.Begin("Race", "basicScore", name);
 				for each(var req:RacialRequirement in requirements) {
-					score += req.getScore(body, score);
+					score += req.calcScore(body, score);
 				}
 				if (score < 0) score = 0;
 			} finally {
@@ -109,6 +109,65 @@ public class Race {
 		return this.tiers[0].minScore;
 	}
 	
+	public function printDetails(body:BodyData):String {
+		var s:String = "";
+		var score:int = 0;
+		var minScore:int = 0;
+		for each (var rr:RacialRequirement in requirements) {
+			if (rr.minScore != minScore) {
+				s += "\t<b>After score "+rr.minScore+":</b>\n";
+				minScore = rr.minScore;
+			}
+			s += "\t";
+			var pass:Boolean = rr.check(body, score);
+			var rscore:int = rr.calcScore(body, score);
+			if (pass && rscore >= 0) {
+				s += "[font-green]";
+			} else if (!pass && rscore < 0) {
+				s += "[font-red]";
+			} else if (!pass && rscore == 0) {
+				s += "[font-default]";
+			} else {
+				// pass and got negative, or fail and got positive
+				s += "[font-yellow]";
+			}
+			score += rscore;
+			s += rr.name;
+			if (rr.varyingScore() && !rr.check(body, score)) {
+				// do not display (+X) for requirements that have varying values and
+				// didn't pass, because value could be incorrect
+				if (rscore != 0) {
+					s += "(??/"+rscore+")";
+				}
+			} else {
+				if (!pass) {
+					rscore = rr.passScore(body);
+				}
+				s += " (" + (rscore>0?"+"+rscore:rscore);
+				if (rr.failScore != 0) {
+					s += "/"+rr.failScore;
+				}
+				s += ")";
+			}
+			s += "[/font]\n";
+		}
+		if (tiers.length>0) {
+			s += "\t<b>Tiers:</b>\n";
+		}
+		for each(var tier:RaceTier in tiers) {
+			s += "\t<b>";
+			if (tier.check(body, score)) {
+				s += "[font-green]"+tier.nameFor(body)+"[/font]";
+			} else {
+				s += tier.nameFor(body);
+			}
+			s += " ("+tier.minScore+") </b>";
+			s += tier.describeBuffs();
+			s += "\n";
+		}
+		return s;
+	}
+	
 	// Race builder helper functions. Can be used as a substitute for type
 	// Ex. faceType( ANY(Face.HUMAN, Face.TROLL), +1)
 	// instead of faceType(Face.HUMAN, +1).faceType(Face.TROLL, +1)
@@ -131,7 +190,7 @@ public class Race {
 	protected static function AT_LEAST(value:Number):* {
 		return {operator:"gte",value:value};
 	}
-	protected static function NOT(value:Number):* {
+	protected static function NOT(value:*):* {
 		return {operator:"ne",value:value};
 	}
 	

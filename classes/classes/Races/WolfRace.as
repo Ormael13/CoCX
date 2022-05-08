@@ -27,7 +27,7 @@ public class WolfRace extends Race {
 				.hairColor("glacial white", +1)
 				.wingType(Wings.NONE, +1)
 				.rearType(RearBody.FENRIR_ICE_SPIKES, +6)
-				.perk(PerkLib.FreezingBreath, +3)
+				.hasPerk(PerkLib.FreezingBreath, +3)
 				.hasCockOfType(CockTypesEnum.WOLF, +1);
 		buildTier(8, "wolf-boy", "wolf-girl")
 				.tauricName("wolf-taur")

@@ -17,6 +17,7 @@ public class CustomRacialRequirement extends RacialRequirement{
 			name:String,
 			checkFn:Function,
 			scoreFn:Function,
+			failScore:int,
 			minScore:int
 	) {
 		super(
@@ -24,12 +25,13 @@ public class CustomRacialRequirement extends RacialRequirement{
 				name,
 				checkFn,
 				0,
+				failScore,
 				minScore
 		);
 		this.scoreFn = scoreFn;
 	}
 	
-	override public function score(body:BodyData):int {
+	override public function passScore(body:BodyData):int {
 		return scoreFn(body);
 	}
 	

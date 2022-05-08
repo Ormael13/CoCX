@@ -1021,49 +1021,8 @@ public class PlayerAppearance extends BaseContent {
 			if (race == clickedRace) {
 				flushOutputTextToGUI();
 				mainView.mainText.scrollV = mainView.mainText.textHeight;
-				score = 0;
-				var minScore:int = 0;
 				outputText("\n");
-				for each (var rr:RacialRequirement in race.requirements) {
-					if (rr.minScore != minScore) {
-						outputText("\t<b>After score "+rr.minScore+":</b>\n");
-						minScore = rr.minScore;
-					}
-					outputText("\t");
-					if (rr.check(body, score)) {
-						rscore = rr.score(body);
-						score += rscore;
-						if (rscore >= 0) {
-							outputText("[font-green]")
-						} else {
-							outputText("[font-red]")
-						}
-					} else {
-						outputText("[font-default]")
-					}
-					outputText(rr.name);
-					if (rr.varyingScore() && !rr.check(body, score)) {
-						// do not display (+X) for requirements that have varying values and
-						// didn't pass, because value could be incorrect
-					} else {
-						outputText(" (" + rr.score(body) + ")");
-					}
-					outputText("[/font]\n");
-				}
-				if (race.tiers.length>0) {
-					outputText("\t<b>Tiers:</b>\n")
-				}
-				for each(var tier:RaceTier in race.tiers) {
-					outputText("\t<b>");
-					if (tier.check(body, score)) {
-						outputText("[font-green]"+tier.nameFor(body)+"[/font]")
-					} else {
-						outputText(tier.nameFor(body))
-					}
-					outputText(" ("+tier.minScore+") </b>");
-					outputText(tier.describeBuffs());
-					outputText("\n");
-				}
+				outputText(race.printDetails(body));
 			}
 		}
 		mainView.linkHandler = function(event:String):void {
@@ -1536,9 +1495,6 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.jabberwockyScore() >= 10) outputText("\n<font color=\"#0000a0\">Lesser Jabberwocky: " + player.jabberwockyScore() + " (+50% to Str racial multi, +40% to Tou racial multi, +50% to Spe racial multi, +20% to Int racial multi, -20% to Wis racial multi, +10% to Lib racial multi)</font>");
 		else if (player.jabberwockyScore() >= 1) outputText("\n<font color=\"#008000\">Lesser Jabberwocky: " + player.jabberwockyScore() + "</font>");
 		else if (player.jabberwockyScore() < 1) outputText("\n<font color=\"#ff0000\">Lesser Jabberwocky: 0</font>");
-		//Jiangshi
-		if (player.jiangshiScore() >= 20) outputText("\n<font color=\"#0000a0\">Jiangshi: " + player.jiangshiScore() + " (+150% to Str racial multi, -90 min Spe, -90 min Int, +130% to Wis racial multi, +200% to Lib racial multi)</font>");
-		else if (player.jiangshiScore() < 20) outputText("\n<font color=\"#008000\">Jiangshi: " + player.jiangshiScore() + "</font>");
 		//Kamaitachi
 		if (player.kamaitachiScore() >= 18) outputText("\n<font color=\"#0000a0\">Greater Kamaitachi: " + player.kamaitachiScore() + " (-35% to Str racial multi, +200% to Spe racial multi, +55% to Int racial multi, +100% to Wis racial multi, +50 sens)</font>");
 		else if (player.kamaitachiScore() >= 14) outputText("\n<font color=\"#0000a0\">Kamaitachi: " + player.kamaitachiScore() + " (-20% to Str racial multi, +140% to Spe racial multi, +45% to Int racial multi, +70% to Wis racial multi, +25 sens)</font>");

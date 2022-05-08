@@ -64,7 +64,7 @@ public class DraconicBonesMutation extends PerkType
                                 return (Tail.hasDraconicTail(player) || LowerBody.hasDraconicLegs(player) && LowerBody.hasTail(player));
                             }, "Dragon race or its variants tail")
                             .requireCustomFunction(function (player:Player):Boolean {
-                                return (player.racialTierNumber(Races.DRAGON) >= 1 || player.jabberwockyScore() >= 10 || player.frostWyrmScore() >= 10 || player.leviathanScore() >= 20);
+                                return (player.isRace(Races.DRAGON) || player.jabberwockyScore() >= 10 || player.frostWyrmScore() >= 10 || player.leviathanScore() >= 20);
                             }, "Dragon race or its variants");
                 }
                 else{

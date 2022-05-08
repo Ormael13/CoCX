@@ -80,7 +80,7 @@ public class Races {
 	public static const SLIME:Race = new Race("Slime",72, "gooScore", 11);
 	public static const MAGMASLIME:Race = new Race("Magma slime",73, "magmagooScore", 13);
 	public static const DARKSLIME:Race = new Race("Dark slime",74, "darkgooScore", 13);
-	public static const JIANGSHI:Race = new Race("Jiangshi",75,"jiangshiScore", 20);
+	public static const JIANGSHI:Race = new JiangshiRace(75);
 	public static const POLTERGEIST:Race = new Race("Poltergeist",76, "poltergeistScore", 6);
 	public static const BANSHEE:Race = new Race("Banshee",77, "bansheeScore", 4);
 	public static const MELKIE:Race = new Race("Melkie",78, "melkieScore", 18);

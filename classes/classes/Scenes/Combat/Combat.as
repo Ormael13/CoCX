@@ -15,6 +15,7 @@ import classes.Monster;
 import classes.MutationsLib;
 import classes.PerkLib;
 import classes.PotionType;
+import classes.Races;
 import classes.Scenes.Areas.Beach.Gorgon;
 import classes.Scenes.Areas.Bog.CorruptedMaleTroll;
 import classes.Scenes.Areas.Caves.DisplacerBeast;
@@ -6040,7 +6041,7 @@ public class Combat extends BaseContent {
 				if (player.weapon == weapons.VBLADE) {
 					var vbladeeffect:Boolean = false;
 					var vbladeeffectChance:int = 1;
-					if (rand(100) < vbladeeffectChance) { 
+					if (rand(100) < vbladeeffectChance) {
 						vbladeeffect = true;
 						damage *= 5;
 					}
@@ -14252,7 +14253,7 @@ public class Combat extends BaseContent {
             addButton(0, "Next", combatMenu, false);
             return;
         }
-        if (player.jiangshiScore() > 19) {
+        if (player.isRace(Races.JIANGSHI)) {
             outputText("Your cadaverous rigidity prevents any form of escape in battle!");
             //Pass false to combatMenu instead:		menuLoc = 3;
             //		doNext(combatMenu);

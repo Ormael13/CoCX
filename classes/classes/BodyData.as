@@ -71,6 +71,7 @@ public class BodyData {
 	public function get eyeColor():int {
 		return data[SLOT_EYE_COLOR];
 	}
+	
 	public static const SLOT_FACE_TYPE:int = _slotid++;
 	EnumValue.add(Slots,SLOT_FACE_TYPE, "FACE_TYPE", {
 		name:"face",
@@ -81,6 +82,19 @@ public class BodyData {
 	public function get faceType():int {
 		return data[SLOT_FACE_TYPE];
 	}
+	
+	public static const SLOT_GILLS_TYPE:int = _slotid++;
+	EnumValue.add(Slots,SLOT_GILLS_TYPE, "GILL_TYPE", {
+		name:"gills",
+		nameFn: function(value:int):String {
+			if (value == Gills.NONE) return "no";
+			return Gills.Types[value].name;
+		}
+	});
+	public function get gillsType():int {
+		return data[SLOT_GILLS_TYPE];
+	}
+	
 	public static const SLOT_HAIR_TYPE:int = _slotid++;
 	EnumValue.add(Slots,SLOT_HAIR_TYPE, "HAIR_TYPE", {
 		name:"hair",
@@ -125,6 +139,7 @@ public class BodyData {
 	EnumValue.add(Slots,SLOT_REAR_TYPE, "REAR_TYPE", {
 		name:"rear",
 		nameFn: function(value:int):String {
+			if (value == RearBody.NONE) return "ordinary";
 			return RearBody.Types[value].name;
 		}
 	});
@@ -169,6 +184,14 @@ public class BodyData {
 	});
 	public function get skinBasePattern():int {
 		return data[SLOT_SKIN_BASE_PATTERN];
+	}
+	
+	public static const SLOT_SKIN_BASE_ADJ:int = _slotid++;
+	EnumValue.add(Slots,SLOT_SKIN_BASE_ADJ, "SKIN_BASE_ADJ", {
+		name:"skin"
+	});
+	public function get skinBaseAdj():int {
+		return data[SLOT_SKIN_BASE_ADJ];
 	}
 	
 	public static const SLOT_SKIN_COAT_TYPE:int = _slotid++;
@@ -309,6 +332,7 @@ public class BodyData {
 		data[SLOT_EYE_TYPE] = player.eyes.type;
 		data[SLOT_EYE_COLOR] = player.eyes.colour;
 		data[SLOT_FACE_TYPE] = player.facePart.type;
+		data[SLOT_GILLS_TYPE] = player.gills.type;
 		data[SLOT_HAIR_TYPE] = player.hairType;
 		data[SLOT_HAIR_COLOR] = player.hairColor;
 		data[SLOT_HORN_TYPE] = player.horns.type;
@@ -318,6 +342,7 @@ public class BodyData {
 		data[SLOT_SKIN_BASE_TYPE] = player.skin.base.type;
 		data[SLOT_SKIN_BASE_COLOR] = player.skin.base.color;
 		data[SLOT_SKIN_BASE_PATTERN] = player.skin.base.pattern;
+		data[SLOT_SKIN_BASE_ADJ] = player.skin.base.adj;
 		if (player.skin.coverage > Skin.COVERAGE_NONE) {
 			data[SLOT_SKIN_COAT_TYPE]  = player.skin.coat.type;
 			data[SLOT_SKIN_COAT_COLOR] = player.skin.coat.color;
