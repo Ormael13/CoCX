@@ -13,7 +13,7 @@ public class HeartOfTheStormMutation extends PerkType
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
             var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.HeartOfTheStormIM)
+            var pTier:int = player.perkv1(IMutationsLib.HeartOfTheStormIM);
             if (pTier >= 1){
                 descS += "Increase the power of all Wind and Lightning racial abilities";
             }

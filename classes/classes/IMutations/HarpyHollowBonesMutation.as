@@ -12,7 +12,7 @@ package classes.IMutations
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
             var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.HarpyHollowBonesIM)
+            var pTier:int = player.perkv1(IMutationsLib.HarpyHollowBonesIM);
             if (pTier >= 1){
                 descS = "Your bones are hollow like those of a harpy, decreasing your toughness, but increasing your speed and physical damage by 20%";
             }

@@ -13,7 +13,7 @@ public class DraconicHeartMutation extends PerkType
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
             var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.DraconicHeartIM)
+            var pTier:int = player.perkv1(IMutationsLib.DraconicHeartIM);
             if (pTier >= 1){
                 descS = "Your heart was strengthened to better handle your changing body. (+1 Fatigue / +4 SF / +5 Mana / +1 Wrath regen)";
             }

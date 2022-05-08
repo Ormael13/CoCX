@@ -15,7 +15,7 @@ public class GazerEyesMutation extends PerkType
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
             var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.GazerEyesIM)
+            var pTier:int = player.perkv1(IMutationsLib.GazerEyesIM);
             if (pTier >= 1){
                 descS += "Keep true sight at all times and empower gaze attacks";
             }

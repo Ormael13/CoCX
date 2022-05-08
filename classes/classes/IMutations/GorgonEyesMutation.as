@@ -13,7 +13,7 @@ public class GorgonEyesMutation extends PerkType
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
             var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.GorgonEyesIM)
+            var pTier:int = player.perkv1(IMutationsLib.GorgonEyesIM);
             if (pTier >= 1){
                 descS += "Allows you to use Petrify with any type of eyes and improves your resistance to attacks that are related to sight";
             }
@@ -75,8 +75,14 @@ public class GorgonEyesMutation extends PerkType
         //Mutations Buffs
         public function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {};
-            pBuffs['spe.mult'] = 0.05 * pTier;
-            pBuffs['sens'] = 5 * pTier;
+            if (pTier >= 1) {
+                pBuffs['spe.mult'] += 0.05;
+                pBuffs['sens'] += 5
+            }
+            if (pTier >= 2) {
+                pBuffs['spe.mult'] += 0.1;
+                pBuffs['sens'] += 10;
+            }
             return pBuffs;
         }
 

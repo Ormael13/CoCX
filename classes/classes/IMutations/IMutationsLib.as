@@ -59,8 +59,10 @@ public class IMutationsLib
 		public static const HarpyHollowBonesIM:PerkType = new HarpyHollowBonesMutation();
 		public static const HeartOfTheStormIM:PerkType = new HeartOfTheStormMutation();
 		public static const HinezumiBurningBloodIM:PerkType = new HinezumiBurningBloodMutation();
+		public static const HollowFangsIM:PerkType = new HollowFangsMutation();
 		public static const KitsuneThyroidGlandIM:PerkType = new KitsuneThyroidGlandMutation();
 		public static const TrachealSystemIM:PerkType = new TrachealSystemMutation();
+		public static const VampiricBloodstreamIM:PerkType = new VampiricBloodstreamMutation();
 
 
 		/**
@@ -81,7 +83,7 @@ public class IMutationsLib
 
 			}
 			function IMutationsMouth():void{
-
+				IMutationsList.push([HollowFangsIM,HollowFangsMutation]);
 			}
 			function IMutationsAdrGland():void{
 
@@ -89,6 +91,7 @@ public class IMutationsLib
 			function IMutationsBloodStream():void{
 				IMutationsList.push([FeyArcaneBloodstreamIM,FeyArcaneBloodstreamMutation]);
 				IMutationsList.push([HinezumiBurningBloodIM,HinezumiBurningBloodMutation]);
+				IMutationsList.push([VampiricBloodstreamIM,VampiricBloodstreamMutation]);
 			}
 			function IMutationsFaT():void{
 

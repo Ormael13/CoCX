@@ -12,7 +12,7 @@ package classes.IMutations
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
             var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.DrakeLungIM)
+            var pTier:int = player.perkv1(IMutationsLib.DrakeLungIM);
             if (pTier >= 1){
                 descS = "Increases the power of dragon breath attack. (+300% to dragon breath damage that race is using)";
             }

@@ -16,7 +16,7 @@ public class DraconicBonesMutation extends PerkType
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
             var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.DraconicBonesIM)
+            var pTier:int = player.perkv1(IMutationsLib.DraconicBonesIM);
             if (pTier >= 1){
                 descS = "Increases toughness, increases unarmed attack damage by 10";
             }

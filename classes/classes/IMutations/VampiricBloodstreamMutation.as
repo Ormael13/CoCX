@@ -5,33 +5,38 @@
 package classes.IMutations
 {
     import classes.PerkClass;
-import classes.PerkLib;
-import classes.PerkType;
+    import classes.PerkType;
 import classes.Player;
+import classes.StatusEffects;
 
-public class DraconicLungMutation extends PerkType
+public class VampiricBloodstreamMutation extends PerkType
     {
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
-            var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.DraconicLungIM);
-            if (pTier >= 1){
-                descS = "Allows you to use breath attacks more often. (All dragon breaths usable once per combat)";
-            }
+            var descS:String = "Your bloodstream has started to adapt to the presence of vampiric blood.";
+            var pTier:int = player.perkv1(IMutationsLib.VampiricBloodstreamIM);
             if (pTier >= 2){
-                descS = "Increases threefold the power of dragon breath attacks. (+300% to dragon breaths damage, +5% of max core Spe as phantom Spe)";
+                descS += " Vampire Thirst stack now decays every 2 days.";
             }
+            descS += " Increases the maximum numbers of stacks of Vampire Thirst by " + vampStackC();
             if (pTier >= 3){
-                descS = "Increases dragon breath attacks power and allows you to combine all 4 basic breath types more often. (+900% to dragon breaths damage, +20% of max core Spe as phantom Spe)";
+                descS += ", and increase their potency by 50%";
             }
             if (descS != "")descS += ".";
             return descS;
+
+            function vampStackC():int{
+                if (pTier == 1) return 15;
+                if (pTier == 2) return 30;
+                if (pTier == 3) return 60;
+                return 0;
+            }
         }
 
         //Name. Need it say more?
         override public function name(params:PerkClass=null):String {
             var sufval:String;
-            switch (player.perkv1(IMutationsLib.DraconicLungIM)){
+            switch (player.perkv1(IMutationsLib.VampiricBloodstreamIM)){
                 case 2:
                     sufval = "(Primitive)";
                     break;
@@ -41,24 +46,26 @@ public class DraconicLungMutation extends PerkType
                 default:
                     sufval = "";
             }
-            return "Draconic Lung" + sufval;
+            return "Vampiric Bloodstream" + sufval;
         }
 
         //Mutation Requirements
         public static function pReqs(pTier:int = 0):void{
             try{
                 //This helps keep the requirements output clean.
-                IMutationsLib.DraconicLungIM.requirements = [];
+                IMutationsLib.VampiricBloodstreamIM.requirements = [];
                 if (pTier == 0){
-                    IMutationsLib.DraconicLungIM.requireLungsMutationSlot()
-                    .requirePerks(PerkLib.DragonFireBreath, PerkLib.DragonIceBreath, PerkLib.DragonLightningBreath, PerkLib.DragonDarknessBreath)
+                    IMutationsLib.VampiricBloodstreamIM.requireBloodsteamMutationSlot()
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return (player.dragonScore() >= 8);
-                    }, "Dragon race");
+                        return player.hasStatusEffect(StatusEffects.VampireThirst);
+                    }, "Vampire Thirst")
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.vampireScore() >= 10;//potem dodać mosquito race i ew. inne co mogą wypijać krew
+                    }, "Vampire race");
                 }
                 else{
                     var pLvl:int = pTier * 30;
-                    IMutationsLib.DraconicLungIM.requireLevel(pLvl);
+                    IMutationsLib.VampiricBloodstreamIM.requireLevel(pLvl);
                 }
             }catch(e:Error){
                 trace(e.getStackTrace());
@@ -74,14 +81,14 @@ public class DraconicLungMutation extends PerkType
         //Mutations Buffs
         public function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {};
-            if (pTier >= 1) pBuffs['spe.mult'] += 0.05;
-            if (pTier >= 2) pBuffs['spe.mult'] += 0.1;
-            if (pTier >= 3) pBuffs['spe.mult'] += 0.2;
+            if (pTier >= 1) pBuffs['lib.mult'] += 0.05;
+            if (pTier >= 2) pBuffs['lib.mult'] += 0.1;
+            if (pTier >= 3) pBuffs['lib.mult'] += 0.15;
             return pBuffs;
         }
 
-        public function DraconicLungMutation() {
-            super("Draconic Lung IM", "Draconic Lung", ".");
+        public function VampiricBloodstreamMutation() {
+            super("Vampiric Bloodstream IM", "Vampiric Bloodstream", ".");
         }
 
         override public function keepOnAscension(respec:Boolean = false):Boolean {

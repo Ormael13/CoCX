@@ -13,7 +13,7 @@ public class FloralOvariesMutation extends PerkType
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
             var descS:String = "";
-            var pTier:int = player.perkv1(IMutationsLib.FloralOvariesIM)
+            var pTier:int = player.perkv1(IMutationsLib.FloralOvariesIM);
             if (pTier >= 1){
                 descS += "Potency on Alraune pollen increases with rank";
             }
