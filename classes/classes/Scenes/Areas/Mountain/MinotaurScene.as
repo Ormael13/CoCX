@@ -85,10 +85,8 @@ private function tentaRouter():void {
 
 private function oviRouter():void {
 	sceneHunter.print("Different options for bee and drider ovipositors.");
-	if (player.canOvipositSpider)
-		layEggsInAMinotaurSpiderLike();
-	else if (player.canOvipositBee())
-		layBeeEggsInCowbutt();
+	if (player.canOvipositSpider()) layEggsInAMinotaurSpiderLike();
+	else if (player.canOvipositBee()) layBeeEggsInCowbutt();
 }
 
 private function killMinotaur():void {
@@ -1050,3 +1048,4 @@ private function rapeEndingEL():void {
 
 }
 }
+

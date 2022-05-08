@@ -1298,19 +1298,19 @@ public class CombatTeases extends BaseCombatContent {
 					bonusChance += 2;
 					bonusDamage += 3;
 				}
-				if (player.clitLength > 1.5) {
+				if (player.hasVagina() && player.clitLength > 1.5) {
 					bonusChance += 2;
 					bonusDamage += 3;
 				}
-				if (player.clitLength > 3.5) {
+				if (player.hasVagina() && player.clitLength > 3.5) {
 					bonusChance += 2;
 					bonusDamage += 3;
 				}
-				if (player.clitLength > 7) {
+				if (player.hasVagina() && player.clitLength > 7) {
 					bonusChance += 2;
 					bonusDamage += 3;
 				}
-				if (player.clitLength > 12) {
+				if (player.hasVagina() && player.clitLength > 12) {
 					bonusChance += 2;
 					bonusDamage += 3;
 				}

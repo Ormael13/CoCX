@@ -6,6 +6,7 @@ package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.GlobalFlags.kFLAGS;
+	import classes.Scenes.Crafting;
 	import classes.Scenes.SceneLib;
 	import classes.Scenes.NPCs.TyrantiaFollower;
 	
@@ -385,6 +386,17 @@ package classes.Scenes.NPCs
 			if (player.hasItem(useables.D_SCALE) && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] < 1) addButton(3, "Dragonscale", KonstantinCraftingDragonscaleItems);
 			if (player.hasItem(useables.EBONBLO) && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] < 1) addButton(4, "Ebonbloom", KonstantinCraftingEbonbloomItems);
 			if (player.hasItem(useables.WT_BRAN)) addButton(5, "W.T.Branch", KonstantinCraftingYggdrasilItems);
+			if (flags[kFLAGS.KONSTANTIN_FOLLOWER] >= 3) {
+				if (player.hasItem(useables.IRONORE) || Crafting.BagSlot04 > 0) addButton(6, "Iron", KonstantinCraftingIronItems);
+				if (player.hasItem(useables.MOONSTO) || Crafting.BagSlot07 > 0) addButton(7, "Moonstone", KonstantinCraftingMoonstoneItems);
+				if (player.hasItem(useables.SKYMETA) || Crafting.BagSlot08 > 0) addButton(8, "Skymetal", KonstantinCraftingSkymetalItems);
+				if (player.hasItem(useables.EBONING) || Crafting.BagSlot06 > 0) addButton(9, "EbonbIng", KonstantinCraftingEbonbIngItems);
+			}
+			addButton(13, "Misc", KonstantinSmithingMenu2).hint("Specific crafting options.");
+			addButton(14, "Back", KonstantinMainCampMenu);
+		}//usunąć fragmenty " && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] < 1" jak sie całkiem przeniesie crafting z Ratha do Kona
+		private function KonstantinSmithingMenu2():void {
+			menu();
 			if (TyrantiaFollower.TyraniaThePhalluspear && player.hasItem(weapons.SPEAR) && player.hasItem(consumables.L_DRAFT, 5) && player.hasItem(useables.T_SSILK) && flags[kFLAGS.CAMP_CABIN_METAL_PIECES_RESOURCES] >= 3) addButton(6, "ThePhalluspear", KonstantinCraftingThePhalluspear);
 			if (player.hasItem(useables.DBAPLAT)) addButton(8, "D.Bark Armor", KonstantinCraftingDivineBarkArmor);
 			if (player.hasItem(useables.TBAPLAT)) addButton(9, "T.Bark Armor", KonstantinCraftingTentacledBarkArmor);
@@ -392,8 +404,8 @@ package classes.Scenes.NPCs
 			if (player.hasItem(useables.TBAPLAT) && player.hasItem(weapons.W_STAFF)) addButton(11, "Depravatio", KonstantinCraftingDepravito);
 			if (player.hasItem(useables.TBAPLAT) && player.hasItem(weapons.PURITAS)) addButton(12, "Ascensus", KonstantinCraftingPuritasAscensus);
 			if (player.hasItem(useables.DBAPLAT) && player.hasItem(weapons.DEPRAVA)) addButton(12, "Ascensus", KonstantinCraftingDepravitoAscensus);
-			addButton(14, "Back", KonstantinMainCampMenu);
-		}//usunąć fragmenty " && flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] < 1" jak sie całkiem przeniesie crafting z Ratha do Kona
+			addButton(14, "Back", KonstantinSmithingMenu);
+		}
 		
 		private function KonstantinCraftingNotEnoughMaterials1():void {
 			clearOutput();
@@ -810,6 +822,78 @@ package classes.Scenes.NPCs
 			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00275] = 0;
 			inventory.takeItem(itype, camp.returnToCampUseOneHour);
 		}
+		private function KonstantinCraftingIronItems():void {
+			outputText("What would you like for Konstantin to create?");
+			menu();
+			addButton(0, "Arrowheads", KonstantinCraftinArrowItems, 1);
+			//armor
+			//weapon
+			addButton(14, "Back", KonstantinMainCampMenu);
+		}
+		private function KonstantinCraftingMoonstoneItems():void {
+			outputText("What would you like for Konstantin to create?");
+			menu();
+			addButton(0, "Arrowheads", KonstantinCraftinArrowItems, 2);
+			//armor
+			//weapon
+			addButton(14, "Back", KonstantinMainCampMenu);
+		}
+		private function KonstantinCraftingSkymetalItems():void {
+			outputText("What would you like for Konstantin to create?");
+			menu();
+			addButton(0, "Arrowheads", KonstantinCraftinArrowItems, 3);
+			//armor
+			//weapon
+			addButton(14, "Back", KonstantinMainCampMenu);
+		}
+		private function KonstantinCraftingEbonbIngItems():void {
+			outputText("What would you like for Konstantin to create?");
+			menu();
+			addButton(0, "Arrowheads", KonstantinCraftinArrowItems, 4);
+			//armor
+			//weapon
+			addButton(14, "Back", KonstantinMainCampMenu);
+		}
+		private function KonstantinCraftinArrowItems(arrowsType:int):void {
+			clearOutput();
+			outputText("Konstantin nods and gets to work, heating up the metal and hammering it down with precision.\n\n");
+			outputText("\"<i>Well, I'm no elf or centaur but I sure know how to make some pretty good arrowheads. Pierce some demons with those will you?</i>\"\n\n");
+			outputText("He hands over to you the freshly crafted arrowheads in a small bag.\n\n");
+			var itype:ItemType;
+			var atype:String;
+			switch(arrowsType) {
+			case 1: //G.Sword
+				if (Crafting.BagSlot04 > 0) Crafting.BagSlot04 -= 1;
+				else player.destroyItems(useables.IRONORE, 1);
+				itype = useables.IARROWHEAD;
+				atype = "iron";
+				break;
+			case 2: //Sword
+				if (Crafting.BagSlot07 > 0) Crafting.BagSlot07 -= 1;
+				else player.destroyItems(useables.MOONSTO, 1);
+				itype = useables.MARROWHEAD;
+				atype = "moonstone";
+				break;
+			case 3: //Bow
+				if (Crafting.BagSlot08 > 0) Crafting.BagSlot08 -= 1;
+				else player.destroyItems(useables.SKYMETA, 1);
+				itype = useables.SARROWHEAD;
+				atype = "skymetal";
+				break;
+			case 4: //Staff
+				if (Crafting.BagSlot06 > 0) Crafting.BagSlot06 -= 1;
+				else player.destroyItems(useables.EBONING, 1);
+				itype = useables.EARROWHEAD;
+				atype = "ebonbloom";
+				break;
+			default:
+				outputText("Something bugged! Please report this bug to Ormael/Aimozg.");
+				itype = useables.IARROWHEAD;
+			}
+			outputText("<b>Got "+atype+" arrowheads!</b>\n\n");
+			inventory.takeItem(itype, camp.returnToCampUseOneHour);
+		}
+		
 		private function KonstantinCraftingThePhalluspear():void {
 			clearOutput();
 			player.destroyItems(weapons.SPEAR, 1);

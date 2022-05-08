@@ -7,10 +7,11 @@ package classes.Scenes.Places{
 	import classes.BodyParts.Tail;
 	import classes.BodyParts.Wings;
 	import classes.GlobalFlags.kFLAGS;
-import classes.Items.ArmorLib;
+	import classes.Items.ArmorLib;
+	import classes.Scenes.Crafting;
 	import classes.Scenes.Areas.Forest.WoodElvesHuntingParty;
     import classes.display.SpriteDb;
-import classes.internals.SaveableState;
+	import classes.internals.SaveableState;
 	import classes.CoC;
 
 	public class WoodElves extends BaseContent implements SaveableState {
@@ -818,7 +819,7 @@ import classes.internals.SaveableState;
 			clearOutput();
 			spriteSelect(SpriteDb.s_WoodElves);
 			if (!player.hasStatusEffect(StatusEffects.FletchingTable)) player.createStatusEffect(StatusEffects.FletchingTable,0,0,0,0);
-			outputText("You approach the fletching table. Here you can craft improved arrowheads using elven tools.");
+			outputText("You approach the fletching table. Here you can craft improved arrows using elven tools.");
 			menu();
 			addButton(1, "CraftArrows", FletchingCraftArrows);
 			addButton(2, "AdjustString", FletchingAdjustString);
@@ -829,34 +830,35 @@ import classes.internals.SaveableState;
 		public function FletchingCraftArrows():void {
 			outputText("What kind of arrows would you like to create?");
 			menu();
-			if (player.hasItem(useables.IRONORE, 1)) addButton(0, "Iron", FletchingCraftArrows2, useables.IRONORE, 1).hint("Use iron to craft arrows.");
-			if (player.hasItem(useables.MOONSTO, 1)) addButton(1, "Moonstone", FletchingCraftArrows2, useables.MOONSTO, 2).hint("Use moonstone to craft arrows.");
-			if (player.hasItem(useables.SKYMETA, 1)) addButton(2, "Skymetal", FletchingCraftArrows2, useables.SKYMETA, 3).hint("Use moonstone to craft arrows.");
-			if (player.hasItem(useables.EBONING, 1)) addButton(3, "EbonIng", FletchingCraftArrows2, useables.EBONING, 4).hint("Use ebonbloom ignot to craft arrows.");
-			//Iron(Can be gathered by mining) +10 % Damage
+			if (player.hasItem(useables.IARROWHEAD, 1)) addButton(0, "Iron", FletchingCraftArrows2, "iron", 1).hint("Use iron arrowheads to craft arrows.");
+			if (player.hasItem(useables.MARROWHEAD, 1)) addButton(1, "Moonstone", FletchingCraftArrows2, "moonstone", 2).hint("Use moonstone arrowheads to craft arrows.");
+			if (player.hasItem(useables.SARROWHEAD, 1)) addButton(2, "Skymetal", FletchingCraftArrows2, "skymetal", 3).hint("Use skymetal arrowheads to craft arrows.");
+			if (player.hasItem(useables.EARROWHEAD, 1)) addButton(3, "Ebonbloom", FletchingCraftArrows2, "ebonbloom", 4).hint("Use ebonbloom arrowheads to craft arrows.");
 			//Moonstone(Obtained by mining at night) +20 % Damage
 			//Skymetal(Found in glacial rift) +30% Damage
-			//Ebonbloom(Requires Ebonbloom) +40% Damage
 			addButton(14, "Back", Fletching);
 		}
-		private function FletchingCraftArrows2(itype:ItemType, type:Number):void {
-			outputText("You work for 8 hours crafting a full quiver of " + itype.shortName + " arrows. Those will serve you well in your adventures.");
+		private function FletchingCraftArrows2(itype:String, type:Number):void {
+			outputText("You work for 8 hours crafting a full quiver of " + itype + " arrows. Those will serve you well in your adventures.");
 			if (!player.hasPerk(PerkLib.CraftedArrows)) player.createPerk(PerkLib.CraftedArrows,0,0,0,0);
 			switch (type) {
 				case 1:
+					player.destroyItems(useables.IARROWHEAD, 1);
 					player.addPerkValue(PerkLib.CraftedArrows, 1, 100);
 					break;
 				case 2:
+					player.destroyItems(useables.MARROWHEAD, 1);
 					player.addPerkValue(PerkLib.CraftedArrows, 2, 100);
 					break;
 				case 3:
+					player.destroyItems(useables.SARROWHEAD, 1);
 					player.addPerkValue(PerkLib.CraftedArrows, 3, 100);
 					break;
 				case 4:
+					player.destroyItems(useables.EARROWHEAD, 1);
 					player.addPerkValue(PerkLib.CraftedArrows, 4, 100);
 					break;
 			}
-			player.destroyItems(itype, 1);
 			doNext(camp.returnToCampUseEightHours);
 		}
 
@@ -876,9 +878,14 @@ import classes.internals.SaveableState;
 				}
 				else addButtonDisabled(1, "Ebonbloom", "You need ebonbloom.");
 			}
-			//Spider silk(Can be gathered from spider enemy) +10 % Damage
-			//Ebonbloom(Requires Ebonbloom) +20% Damage
-			//Unicorn hair(Obtained from Celess) +30 % Damage
+			if (player.statusEffectv2(StatusEffects.FletchingTable) > 2) addButtonDisabled(2, "UnicornHair", "You already used this for improving bow string.");
+			else {
+				if (player.hasItem(useables.UNICORNH, 1)) {
+					if (player.statusEffectv2(StatusEffects.FletchingTable) < 2) addButtonDisabled(2, "UnicornHair", "You need to improve string with ebonbloom first.");
+					else addButton(2, "UnicornHair", FletchingAdjustString2, useables.UNICORNH);
+				}
+				else addButtonDisabled(2, "UnicornHair", "You need unicron hair.");
+			}
 			addButton(14, "Back", Fletching);
 		}
 		private function FletchingAdjustString2(itype:ItemType):void {
@@ -893,46 +900,60 @@ import classes.internals.SaveableState;
 			menu();
 			if (player.statusEffectv1(StatusEffects.FletchingTable) > 0) addButtonDisabled(0, "Bronze", "You already used this for reinforcing bow.");
 			else {
-				if (player.hasItem(useables.BRONZEB, 1)) addButton(0, "Bronze", FletchingReinforce2, useables.BRONZEB);
+				if (player.hasItem(useables.BRONZEB, 1) || Crafting.BagSlot03 > 0) addButton(0, "Bronze", FletchingReinforce2, useables.BRONZEB, 1);
 				else addButtonDisabled(0, "Bronze", "You need bronze bar.");
 			}
 			if (player.statusEffectv1(StatusEffects.FletchingTable) > 1) addButtonDisabled(1, "Iron", "You already used this for reinforcing bow.");
 			else {
-				if (player.hasItem(useables.IRONORE, 1)) {
+				if (player.hasItem(useables.IRONORE, 1) || Crafting.BagSlot04 > 0) {
 					if (player.statusEffectv1(StatusEffects.FletchingTable) < 1) addButtonDisabled(1, "Iron", "You need to reinforce bow with bronze first.");
-					else addButton(1, "Iron", FletchingReinforce2, useables.IRONORE);
+					else addButton(1, "Iron", FletchingReinforce2, useables.IRONORE, 2);
 				}
 				else addButtonDisabled(1, "Iron", "You need iron ore.");
 			}
 			if (player.statusEffectv1(StatusEffects.FletchingTable) > 2) addButtonDisabled(2, "Moonstone", "You already used this for reinforcing bow.");
 			else {
-				if (player.hasItem(useables.MOONSTO, 1)) {
+				if (player.hasItem(useables.MOONSTO, 1) || Crafting.BagSlot07 > 0) {
 					if (player.statusEffectv1(StatusEffects.FletchingTable) < 2) addButtonDisabled(2, "Moonstone", "You need to reinforce bow with iron first.");
-					else addButton(2, "Moonstone", FletchingReinforce2, useables.MOONSTO);
+					else addButton(2, "Moonstone", FletchingReinforce2, useables.MOONSTO, 3);
 				}
 				else addButtonDisabled(2, "Moonstone", "You need moonstone.");
 			}
 			if (player.statusEffectv1(StatusEffects.FletchingTable) > 3) addButtonDisabled(3, "EbonIng", "You already used this for reinforcing bow.");
 			else {
-				if (player.hasItem(useables.EBONING, 1)) {
+				if (player.hasItem(useables.EBONING, 1) || Crafting.BagSlot06 > 0) {
 					if (player.statusEffectv1(StatusEffects.FletchingTable) < 3) addButtonDisabled(3, "EbonIng", "You need to reinforce bow with moonstone first.");
-					else addButton(3, "EbonIng", FletchingReinforce2, useables.EBONING);
+					else addButton(3, "EbonIng", FletchingReinforce2, useables.EBONING, 4);
 				}
 				else addButtonDisabled(3, "EbonIng", "You need ebon ingot.");
 			}
-			//Bronze(Can be gathered by mining) +10 % Damage)
-			//Iron(Can be gathered by mining) +20 % Damage
 			//Moonstone(Obtained by mining at night) +30 % Damage
-			//Ebonbloom(Ebony ingot)(Requires Ebonbloom) +40% Damage
 			//Divine Ice(Requires Divine ice, found in glacial rift) +50% Damage
 			//Orichalcum(Found in deep sea) +60% Damage
 			//Skymetal(Found in End game zone) +70% Damage
 			addButton(14, "Back", Fletching);
 		}
-		private function FletchingReinforce2(itype:ItemType):void {
+		private function FletchingReinforce2(itype:ItemType, type:Number):void {
 			outputText("You work for 8 hours applying your new " + itype.shortName + " reinforcement to your bow. This will serve you well in your adventures.");
 			player.addStatusValue(StatusEffects.FletchingTable, 1, 1);
-			player.destroyItems(itype, 1);
+			switch (type) {
+				case 1:
+					if (Crafting.BagSlot03 > 0) Crafting.BagSlot03 -= 1;
+					else player.destroyItems(itype, 1);
+					break;
+				case 2:
+					if (Crafting.BagSlot04 > 0) Crafting.BagSlot04 -= 1;
+					else player.destroyItems(itype, 1);
+					break;
+				case 3:
+					if (Crafting.BagSlot07 > 0) Crafting.BagSlot07 -= 1;
+					else player.destroyItems(itype, 1);
+					break;
+				case 4:
+					if (Crafting.BagSlot06 > 0) Crafting.BagSlot06 -= 1;
+					else player.destroyItems(itype, 1);
+					break;
+			}
 			doNext(camp.returnToCampUseEightHours);
 		}
 
@@ -1124,10 +1145,5 @@ import classes.internals.SaveableState;
 			}
 			doNext(camp.returnToCampUseOneHour);
 		}
-
-
-
-
-
 	}
 }
