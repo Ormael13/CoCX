@@ -4,23 +4,26 @@
  */
 package classes.IMutations
 {
-    import classes.PerkClass;
-    import classes.PerkType;
+import classes.BodyParts.Tail;
+import classes.PerkClass;
+import classes.PerkLib;
+import classes.PerkType;
+import classes.Player;
 
-    public class KitsuneParathyroidGlandMutation extends PerkType
+public class KitsuneParathyroidGlandMutation extends PerkType
     {
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
             var descS:String = "";
             var pTier:int = player.perkv1(IMutationsLib.KitsuneParathyroidGlandIM);
             if (pTier >= 1){
-                descS += "";
+                descS += "Illusion and Terror cooldown reduced by 3 turns";
             }
             if (pTier >= 2){
-                descS += ", ";
+                descS += ", Mana and fatigue recovery increased, 50% reduced costs for Illusion and Terror";
             }
             if (pTier >= 3){
-                descS += ", ";
+                descS += ", further boost mana regen based on star sphere rank, speed debuff from Terror increased to 70, evasion boost from Illusion increased by 30%";
             }
             if (descS != "")descS += ".";
             return descS;
@@ -48,7 +51,14 @@ package classes.IMutations
                 //This helps keep the requirements output clean.
                 IMutationsLib.KitsuneParathyroidGlandIM.requirements = [];
                 if (pTier == 0){
-                    IMutationsLib.KitsuneParathyroidGlandIM.requireHeartMutationSlot();
+                    IMutationsLib.KitsuneParathyroidGlandIM.requireParathyroidGlandMutationSlot()
+                    .requireAnyPerk(PerkLib.EnlightenedKitsune, PerkLib.CorruptedKitsune)
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.tailType == Tail.FOX && player.tailCount >= 2;
+                    }, "2+ fox tails")
+                    .requireCustomFunction(function (player:Player):Boolean {
+                        return player.kitsuneScore() >= 9;
+                    }, "Kitsune race");
                 }
                 else{
                     var pLvl:int = pTier * 30;
@@ -68,6 +78,18 @@ package classes.IMutations
         //Mutations Buffs
         public function pBuffs(pTier:int = 1):Object{
             var pBuffs:Object = {};
+            if (pTier >= 1) {
+                pBuffs['spe.mult'] += 0.05;
+                pBuffs['int.mult'] += 0.05;
+            }
+            if (pTier >= 2) {
+                pBuffs['spe.mult'] += 0.05;
+                pBuffs['int.mult'] += 0.1;
+            }
+            if (pTier >= 3) {
+                pBuffs['spe.mult'] += 0.05;
+                pBuffs['int.mult'] += 0.2;
+            }
             return pBuffs;
         }
 
