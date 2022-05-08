@@ -17,13 +17,13 @@ package classes.Scenes
 		public static var BagSlot04:Number;
 		public static var BagSlot04Cap:Number;//Iron Ore
 		public static var BagSlot05:Number;
-		public static var BagSlot05Cap:Number;//Moonstone
+		public static var BagSlot05Cap:Number;//Ebonbloom
 		public static var BagSlot06:Number;
-		public static var BagSlot06Cap:Number;//Skymetal
+		public static var BagSlot06Cap:Number;//Ebon Ingot
 		public static var BagSlot07:Number;
-		public static var BagSlot07Cap:Number;
+		public static var BagSlot07Cap:Number;//Moonstone
 		public static var BagSlot08:Number;
-		public static var BagSlot08Cap:Number;
+		public static var BagSlot08Cap:Number;//Skymetal
 		public static var BagSlot09:Number;
 		public static var BagSlot09Cap:Number;
 		public static var BagSlot10:Number;
@@ -375,8 +375,10 @@ public function accessCraftingMaterialsBag():void {
 	if (BagSlot02Cap > 0) outputText("<b>Tin Ore:</b> "+BagSlot02+" / "+BagSlot02Cap+"\n");
 	if (BagSlot03Cap > 0) outputText("<b>Bronze Bar:</b> "+BagSlot03+" / "+BagSlot03Cap+"\n");
 	if (BagSlot04Cap > 0) outputText("<b>Iron Ore:</b> "+BagSlot04+" / "+BagSlot04Cap+"\n");
-	//if (BagSlot05Cap > 0) outputText("<b>Moonstone:</b> "+BagSlot05+" / "+BagSlot05Cap+"\n");
-	//if (BagSlot06Cap > 0) outputText("<b>Skymetal:</b> "+BagSlot06+" / "+BagSlot06Cap+"\n");
+	if (BagSlot05Cap > 0) outputText("<b>Ebonbloom:</b> "+BagSlot05+" / "+BagSlot05Cap+"\n");
+	if (BagSlot06Cap > 0) outputText("<b>Ebon Ingot:</b> "+BagSlot06+" / "+BagSlot06Cap+"\n");
+	//if (BagSlot07Cap > 0) outputText("<b>Moonstone:</b> "+BagSlot07+" / "+BagSlot07Cap+"\n");
+	//if (BagSlot08Cap > 0) outputText("<b>Skymetal:</b> "+BagSlot08+" / "+BagSlot08Cap+"\n");
 	menu();
 	if (BagSlot01 < BagSlot01Cap) {
 		if (player.hasItem(useables.COP_ORE, 1)) addButton(0, "CopperOre", craftingMaterialsCopperOre1UP);
