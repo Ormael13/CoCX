@@ -3,7 +3,7 @@ import classes.GlobalFlags.kFLAGS;
 
 public class SceneHunter extends BaseContent {
     public function get progress():String {
-        return "<i>Selectors, menus and checks are currently added to: Holidays, Beach, BlightRidge, Desert, Forest, GlacialRift, HighMountains encounters (not including some unique NPCs and dungeons yet).</i>";
+        return "<i>Selectors, menus and checks are currently added to: Holidays, Beach, BlightRidge, Desert, Forest, GlacialRift, HighMountains, Mountains, Ocean, Plains encounters (not including some unique NPCs and dungeons yet).</i>";
     }
 
     public function settingsPage():void {
@@ -512,15 +512,6 @@ public class SceneHunter extends BaseContent {
     }
     public function checkDick(minSize:Number = -1, maxSize:Number = -1, compareBy:String = "area", moreText:String = ""):void {
         checkDickWithType(CockTypesEnum.UNDEFINED, minSize, maxSize, compareBy, moreText);
-    }
-
-    //Prints dick requirements if not found
-    public function check_race(race:String):void {
-        if (printChecks && player.race() != race) {
-            outputText("\n\n<b>FAILED RACE CHECK:")
-            outputText("\n    Expected: " + race);
-            outputText("</b>\n\n")
-        }
     }
 }
 }
