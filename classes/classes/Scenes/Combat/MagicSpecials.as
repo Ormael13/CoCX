@@ -399,7 +399,7 @@ public class MagicSpecials extends BaseCombatContent {
 				bd.disable("You try to tap into the power within you, but your aching throat reminds you that you're not yet ready to unleash it again...");
 			} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 		}
-		if (player.hasPerk(MutationsLib.DraconicLungsEvolved) || (player.dragonScore() >= 16 && player.hasPerk(MutationsLib.DraconicLungs))) {
+		if (player.hasPerk(MutationsLib.DraconicLungsEvolved) || (player.racialTier(Race.DRAGON) >= 2 && player.hasPerk(MutationsLib.DraconicLungs))) {
 			bd = buttons.add("TrueDragonBreath", trueDragonBreath);
 			if (player.hasPerk(MutationsLib.DraconicLungsEvolved)) {
 				bd.hint("Unleash all four elements fused together from your mouth. This can only be done once per fight. \n", "True Dragon Breath");

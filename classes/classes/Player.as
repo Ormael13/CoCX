@@ -3638,32 +3638,6 @@ use namespace CoC;
 				if (isTaur()) race = "lizan-taur";
 				else race = "lizan";
 			}
-			if (TopRace == "dragon") {
-				if (TopScore >= 32) {
-					if (isTaur()) race = "ancient dragon-taur";
-					else {
-						race = "ancient dragon";
-						if (faceType == Face.HUMAN)
-							race = "ancient dragon-" + mf("man", "girl");
-					}
-				}
-				else if (TopScore >= 24) {
-					if (isTaur()) race = " elder dragon-taur";
-					else {
-						race = "elder dragon";
-						if (faceType == Face.HUMAN)
-							race = "elder dragon-" + mf("man", "girl");
-					}
-				}
-				else {
-					if (isTaur()) race = "dragon-taur";
-					else {
-						race = "dragon";
-						if (faceType == Face.HUMAN)
-							race = "dragon-" + mf("man", "girl");
-					}
-				}
-			}
 			if (TopRace == "jabberwocky") {
 				if (TopScore >= 10) {
 					if (TopScore >= 30) {
@@ -4743,7 +4717,7 @@ use namespace CoC;
 				chimeraCounter++;
 			if (lizardScore() >= 8)
 				chimeraCounter++;
-			if (dragonScore() >= 16)
+			if (racialTier(Race.DRAGON) >= 1)
 				chimeraCounter++;
 			if (raccoonScore() >= 8)
 				chimeraCounter++;
@@ -4913,7 +4887,7 @@ use namespace CoC;
 			var body:BodyData = bodyData();
 			if (nekomataScore() >= 12)
 				grandchimeraCounter++;
-			if (dragonScore() >= 24)
+			if (racialTier(Race.DRAGON) >= 2)
 				grandchimeraCounter++;
 			if (jabberwockyScore() >= 20)
 				grandchimeraCounter++;
@@ -6019,107 +5993,7 @@ use namespace CoC;
 
 		//Determine Dragon Rating
 		public function dragonScore():Number {
-			Begin("Player","racialScore","dragon");
-			var dragonCounter:Number = 0;
-			var dragonCounter2:Number = 0;
-			if (faceType == Face.DRAGON || faceType == Face.DRAGON_FANGS) {
-				dragonCounter++;
-				dragonCounter2++;
-			}
-			if (faceType == Face.JABBERWOCKY || faceType == Face.BUCKTOOTH)
-				dragonCounter -= 10;
-			if (eyes.type == Eyes.DRACONIC) {
-				dragonCounter++;
-				dragonCounter2++;
-			}
-			if (ears.type == Ears.DRAGON) {
-				dragonCounter++;
-				dragonCounter2++;
-			}
-			if (tailType == Tail.DRACONIC) {
-				dragonCounter++;
-				dragonCounter2++;
-			}
-			if (tongue.type == Tongue.DRACONIC) {
-				dragonCounter++;
-				dragonCounter2++;
-			}
-			if (wings.type == Wings.DRACONIC_SMALL) {
-				dragonCounter++;
-				dragonCounter2++;
-			}
-			if (wings.type == Wings.DRACONIC_LARGE) {
-				dragonCounter += 2;
-				dragonCounter2 += 2;
-			}
-			if (wings.type == Wings.DRACONIC_HUGE) {
-				dragonCounter += 4;
-				dragonCounter2 += 4;
-			}
-			if (wings.type == Wings.FEY_DRAGON || lowerBody == LowerBody.FROSTWYRM)
-				dragonCounter -= 10;
-			if (lowerBody == LowerBody.DRAGON) {
-				dragonCounter++;
-				dragonCounter2++;
-			}
-			if (arms.type == Arms.DRACONIC) {
-				dragonCounter++;
-				dragonCounter2++;
-			}
-			if (hasPartialCoat(Skin.DRAGON_SCALES) || hasCoatOfType(Skin.DRAGON_SCALES)) {
-				dragonCounter++;
-				dragonCounter2++;
-			}
-			if (horns.type == Horns.DRACONIC_X4_12_INCH_LONG) {
-				dragonCounter += 2;
-				dragonCounter2 += 2;
-			}
-			if (horns.type == Horns.DRACONIC_X2) {
-				dragonCounter++;
-				dragonCounter2++;
-			}
-			if (horns.type == Horns.FROSTWYRM)
-				dragonCounter -= 3;
-			if (dragonCocks() > 0 || hasVagina())
-				dragonCounter++;
-			if (tallness > 120 && dragonCounter >= 8)
-				dragonCounter++;
-			if (dragonCounter >= 8 && (hasPerk(PerkLib.DragonFireBreath) || hasPerk(PerkLib.DragonIceBreath) || hasPerk(PerkLib.DragonLightningBreath) || hasPerk(PerkLib.DragonDarknessBreath))) {
-				dragonCounter++;
-				if (hasPerk(PerkLib.DragonFireBreath) && hasPerk(PerkLib.DragonIceBreath) && hasPerk(PerkLib.DragonLightningBreath) && hasPerk(PerkLib.DragonDarknessBreath)) {
-					dragonCounter++;
-				}
-			}
-			if (hasPerk(MutationsLib.DraconicBones))
-				dragonCounter++;
-			if (hasPerk(MutationsLib.DraconicBonesPrimitive))
-				dragonCounter++;
-			if (hasPerk(MutationsLib.DraconicBonesEvolved))
-				dragonCounter++;
-			if (hasPerk(MutationsLib.DraconicHeart))
-				dragonCounter++;
-			if (hasPerk(MutationsLib.DraconicHeartPrimitive))
-				dragonCounter++;
-			if (hasPerk(MutationsLib.DraconicHeartEvolved))
-				dragonCounter++;
-			if (hasPerk(MutationsLib.DraconicLungs))
-				dragonCounter++;
-			if (hasPerk(MutationsLib.DraconicLungsPrimitive))
-				dragonCounter++;
-			if (hasPerk(MutationsLib.DraconicLungsEvolved))
-				dragonCounter++;
-			if ((hasPerk(MutationsLib.DraconicBones) || hasPerk(MutationsLib.DraconicHeart) || hasPerk(MutationsLib.DraconicLungs)) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
-				dragonCounter++;
-			if ((hasPerk(MutationsLib.DraconicBonesPrimitive) || hasPerk(MutationsLib.DraconicHeartPrimitive) || hasPerk(MutationsLib.DraconicLungsPrimitive)) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
-				dragonCounter++;
-			if ((hasPerk(MutationsLib.DraconicBonesEvolved) || hasPerk(MutationsLib.DraconicHeartEvolved) || hasPerk(MutationsLib.DraconicLungsEvolved)) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
-				dragonCounter++;
-			if (hasPerk(PerkLib.DragonsDescendant) || hasPerk(PerkLib.BloodlineDragon))
-				dragonCounter += increaseFromBloodlinePerks();
-			if (dragonCounter2 < 5) dragonCounter = dragonCounter2;
-			dragonCounter = finalRacialScore(dragonCounter, Race.DRAGON);
-			End("Player","racialScore");
-			return dragonCounter;
+			return racialScore(Race.DRAGON);
 		}
 
 		//Determine Jabberwocky Rating
@@ -11044,35 +10918,6 @@ use namespace CoC;
 				maxTouCap2 += 70;
 				maxIntCap2 += 50;
 			}//+10/10-20
-			if (dragonScore() >= 16) {
-				if (dragonScore() >= 32) {
-					maxStrCap2 += 100;
-					maxTouCap2 += 100;
-					maxSpeCap2 += 100;
-					maxIntCap2 += 80;
-					maxWisCap2 += 80;
-					maxLibCap2 += 60;
-					currentSen += 40;
-				}
-				else if (dragonScore() >= 24) {
-					maxStrCap2 += 80;
-					maxTouCap2 += 80;
-					maxSpeCap2 += 80;
-					maxIntCap2 += 70;
-					maxWisCap2 += 70;
-					maxLibCap2 += 40;
-					currentSen += 30;
-				}
-				else {
-					maxStrCap2 += 50;
-					maxTouCap2 += 50;
-					maxSpeCap2 += 50;
-					maxIntCap2 += 40;
-					maxWisCap2 += 40;
-					maxLibCap2 += 30;
-					currentSen += 20;
-				}
-			}
 			if (jabberwockyScore() >= 10) {
 				if (jabberwockyScore() >= 30) {
 					maxStrCap2 += 125;
@@ -12586,7 +12431,7 @@ use namespace CoC;
 			}
 			if (!hasPerk(PerkLib.AbsoluteStrength) && statStore.hasBuff('Absolute Strength')) statStore.removeBuffs('Absolute Strength');
 			var buffs:Object = calcRacialBuffs();
-			var ngScaledRacialBuffs:/*String*/Array = ["maxfatigue_base"];
+			var ngScaledRacialBuffs:/*String*/Array = ["maxfatigue_base","maxlust_base"];
 			for each(var buffName:String in ngScaledRacialBuffs) {
 				if (buffName in buffs) buffs[buffName] *= (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			}
@@ -14356,8 +14201,6 @@ use namespace CoC;
 			if (devilkinScore() >= 11) max += (150 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (devilkinScore() >= 16) max += (80 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (devilkinScore() >= 21) max += (90 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (dragonScore() >= 24) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (dragonScore() >= 32) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (minotaurScore() >= 10) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (phoenixScore() >= 5) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (salamanderScore() >= 7) max += (25 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));

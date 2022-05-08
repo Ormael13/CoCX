@@ -98,6 +98,18 @@ public class BodyData {
 	public function get hairColor():int {
 		return data[SLOT_HAIR_COLOR];
 	}
+	
+	public static const SLOT_HORN_TYPE:int = _slotid++;
+	EnumValue.add(Slots,SLOT_HORN_TYPE, "HORN_TYPE", {
+		name:"horns",
+		nameFn: function(value:int):String {
+			return Horns.Types[value].name;
+		}
+	});
+	public function get hornType():int {
+		return data[SLOT_HORN_TYPE];
+	}
+	
 	public static const SLOT_LEG_TYPE:int = _slotid++;
 	EnumValue.add(Slots,SLOT_LEG_TYPE, "LEG_TYPE", {
 		name:"legs",
@@ -108,6 +120,7 @@ public class BodyData {
 	public function get legType():int {
 		return data[SLOT_LEG_TYPE];
 	}
+	
 	public static const SLOT_REAR_TYPE:int = _slotid++;
 	EnumValue.add(Slots,SLOT_REAR_TYPE, "REAR_TYPE", {
 		name:"rear",
@@ -149,6 +162,15 @@ public class BodyData {
 	public function get skinBaseColor():int {
 		return data[SLOT_SKIN_BASE_COLOR];
 	}
+	
+	public static const SLOT_SKIN_BASE_PATTERN:int = _slotid++;
+	EnumValue.add(Slots,SLOT_SKIN_BASE_PATTERN, "SKIN_BASE_PATTERN", {
+		name:"skin pattern"
+	});
+	public function get skinBasePattern():int {
+		return data[SLOT_SKIN_BASE_PATTERN];
+	}
+	
 	public static const SLOT_SKIN_COAT_TYPE:int = _slotid++;
 	EnumValue.add(Slots,SLOT_SKIN_COAT_TYPE, "SKIN_COAT_TYPE", {
 		name:"coat",
@@ -159,6 +181,7 @@ public class BodyData {
 	public function get skinCoatType():int {
 		return data[SLOT_SKIN_COAT_TYPE];
 	}
+	
 	public static const SLOT_SKIN_COAT_COLOR:int = _slotid++;
 	EnumValue.add(Slots,SLOT_SKIN_COAT_COLOR, "SKIN_COAT_COLOR", {
 		name:"coat color"
@@ -166,6 +189,15 @@ public class BodyData {
 	public function get skinCoatColor():int {
 		return data[SLOT_SKIN_COAT_COLOR];
 	}
+	
+	public static const SLOT_SKIN_COAT_PATTERN:int = _slotid++;
+	EnumValue.add(Slots,SLOT_SKIN_COAT_PATTERN, "SKIN_COAT_PATTERN", {
+		name:"coat pattern"
+	});
+	public function get skinCoatPattern():int {
+		return data[SLOT_SKIN_COAT_PATTERN];
+	}
+	
 	public static const SLOT_TAIL_TYPE:int = _slotid++;
 	EnumValue.add(Slots,SLOT_TAIL_TYPE, "TAIL_TYPE", {
 		name:"tail",
@@ -188,6 +220,18 @@ public class BodyData {
 	public function get tailCount():int {
 		return data[SLOT_TAIL_COUNT];
 	}
+	
+	public static const SLOT_TONGUE_TYPE:int = _slotid++;
+	EnumValue.add(Slots,SLOT_TONGUE_TYPE, "TONGUE_TYPE", {
+		name:"tongue",
+		nameFn: function(value:int):String {
+			return Tongue.Types[value].name;
+		}
+	});
+	public function get tongueType():int {
+		return data[SLOT_TONGUE_TYPE];
+	}
+	
 	public static const SLOT_WING_TYPE:int = _slotid++;
 	EnumValue.add(Slots,SLOT_WING_TYPE, "WING_TYPE", {
 		name:"wings",
@@ -199,6 +243,7 @@ public class BodyData {
 	public function get wingType():int {
 		return data[SLOT_WING_TYPE];
 	}
+	
 	// Other stats
 	public static const SLOT_GENDER:int = _slotid++;
 	EnumValue.add(Slots,SLOT_GENDER, "GENDER", {
@@ -239,6 +284,9 @@ public class BodyData {
 	public function get looksFemale():Boolean {
 		return player.looksFemale();
 	}
+	public function mf(male:String, female:String):String {
+		return looksMale ? male : female;
+	}
 	public function get hasCoat():Boolean {
 		return skinCoverage > Skin.COVERAGE_NONE;
 	}
@@ -263,17 +311,34 @@ public class BodyData {
 		data[SLOT_FACE_TYPE] = player.facePart.type;
 		data[SLOT_HAIR_TYPE] = player.hairType;
 		data[SLOT_HAIR_COLOR] = player.hairColor;
+		data[SLOT_HORN_TYPE] = player.horns.type;
 		data[SLOT_LEG_TYPE] = player.lowerBodyPart.type;
 		data[SLOT_REAR_TYPE] = player.rearBody.type;
+		data[SLOT_SKIN_COVERAGE] = player.skin.coverage;
 		data[SLOT_SKIN_BASE_TYPE] = player.skin.base.type;
 		data[SLOT_SKIN_BASE_COLOR] = player.skin.base.color;
-		data[SLOT_SKIN_COAT_TYPE] = player.skin.coat.type;
-		data[SLOT_SKIN_COAT_COLOR] = player.skin.coat.color;
+		data[SLOT_SKIN_BASE_PATTERN] = player.skin.base.pattern;
+		if (player.skin.coverage > Skin.COVERAGE_NONE) {
+			data[SLOT_SKIN_COAT_TYPE]  = player.skin.coat.type;
+			data[SLOT_SKIN_COAT_COLOR] = player.skin.coat.color;
+			data[SLOT_SKIN_COAT_PATTERN] = player.skin.coat.pattern;
+		} else {
+			data[SLOT_SKIN_COAT_TYPE]  = -1;
+			data[SLOT_SKIN_COAT_COLOR] = "no";
+			data[SLOT_SKIN_COAT_PATTERN] = Skin.PATTERN_NONE;
+		}
 		data[SLOT_TAIL_TYPE] = player.tail.type;
 		data[SLOT_TAIL_COUNT] = player.tail.count;
 		data[SLOT_WING_TYPE] = player.wings.type;
 		data[SLOT_GENDER]    = player.gender;
-		
+		data[SLOT_HEIGHT]    = player.tallness;
+	}
+	
+	public function equals(other:BodyData):Boolean {
+		for (var i:int = 0; i < data.length; i++) {
+			if (data[i] !== other.data[i]) return false;
+		}
+		return true;
 	}
 	
 	public function clone():BodyData {

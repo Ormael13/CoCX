@@ -649,10 +649,6 @@ public class Creature extends Utils
 		protected function maxHP_mult():Number {
 			var maxHP_mult1:Number = 1;
 			maxHP_mult1 += (countCockSocks("green") * 0.02);
-			if (game.player.dragonScore() >= 5) maxHP_mult1 += 0.05;
-			if (game.player.dragonScore() >= 16) maxHP_mult1 += 0.05;
-			if (game.player.dragonScore() >= 24) maxHP_mult1 += 0.1;
-			if (game.player.dragonScore() >= 32) maxHP_mult1 += 0.1;
 			if (game.player.vehiclesName == "Goblin Mech Alpha") {
 				if (game.player.hasKeyItem("Upgraded Armor plating 1.0") >= 0) maxHP_mult1 += 0.2;
 				if (game.player.hasKeyItem("Upgraded Armor plating 2.0") >= 0) maxHP_mult1 += 0.35;

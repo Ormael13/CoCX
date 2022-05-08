@@ -4,13 +4,14 @@ import classes.Scenes.Areas.Forest.KitsuneScene;
 import classes.internals.Utils;
 import classes.internals.race.RaceBuilder;
 import classes.internals.race.RacialRequirement;
+import classes.lists.Gender;
 
 public class Race {
     public static const ALL_RACES:/*Race*/Array = [];
     
     // Race builder helper functions. Can be used as a substitute for type
 	// Ex. faceType( ANY(Face.HUMAN, Face.TROLL), +1)
-	// instead of faceType( Face.HUMAN, +1, Face.TROLL, +1)
+	// instead of faceType(Face.HUMAN, +1).faceType(Face.TROLL, +1)
 	
     private static function ANY(...options:Array):* {
         return {operator:"any",options:Utils.flatten(options)};
@@ -47,7 +48,105 @@ public class Race {
     public static const DISPLACERBEAST:Race = new Race("Displacer beast",6, "displacerbeastScore", 14);
     public static const SPHINX:Race = new Race("Sphinx",7, "sphinxScore", 14);
     public static const LIZARD:Race = new Race("Lizard",8, "lizardScore", 8);
-    public static const DRAGON:Race = new Race("Dragon",9, "dragonScore", 16);
+    public static const DRAGON:Race =
+		buildRace(9, "dragon")
+				.withScores()
+					.faceType(ANY(Face.DRAGON,Face.DRAGON_FANGS), +1)
+					.faceType(ANY(Face.JABBERWOCKY,Face.BUCKTOOTH), -10)
+					.eyeType(Eyes.DRACONIC,+1)
+					.earType(Ears.DRAGON,+1)
+					.tailType(Tail.DRACONIC, +1)
+					.tongueType(Tongue.DRACONIC,+1)
+					.wingType(Wings.DRACONIC_SMALL,+1)
+					.wingType(Wings.DRACONIC_LARGE,+2)
+					.wingType(Wings.DRACONIC_HUGE,+4)
+					.wingType(Wings.FEY_DRAGON,-10)
+					.legType(LowerBody.DRAGON,+1)
+					.legType(LowerBody.FROSTWYRM,-10)
+					.armType(Arms.DRACONIC,+1)
+					.skinCoatType(Skin.DRAGON_SCALES, +1)
+					.hornType(Horns.DRACONIC_X2, +1)
+					.hornType(Horns.DRACONIC_X4_12_INCH_LONG, +2)
+					.hornType(Horns.FROSTWYRM, -3)
+					.hasCockOfType(CockTypesEnum.DRAGON,+1)
+					.gender(Gender.GENDER_FEMALE, +1)
+				.end()
+				.withScoresAfter(5)
+					.perk(MutationsLib.DraconicBones, +1)
+					.perk(MutationsLib.DraconicBonesPrimitive, +1)
+					.perk(MutationsLib.DraconicBonesEvolved, +1)
+					.perk(MutationsLib.DraconicHeart, +1)
+					.perk(MutationsLib.DraconicHeartPrimitive, +1)
+					.perk(MutationsLib.DraconicHeartEvolved, +1)
+					.perk(MutationsLib.DraconicLungs, +1)
+					.perk(MutationsLib.DraconicLungsPrimitive, +1)
+					.perk(MutationsLib.DraconicLungsEvolved, +1)
+				.end()
+				.withScoresAfter(8)
+					.height(GREATER_THAN(120),+1)
+					.anyPerk([PerkLib.DragonFireBreath,PerkLib.DragonIceBreath,PerkLib.DragonLightningBreath,PerkLib.DragonDarknessBreath],+1)
+					.allPerks([PerkLib.DragonFireBreath,PerkLib.DragonIceBreath,PerkLib.DragonLightningBreath,PerkLib.DragonDarknessBreath],+1)
+				.end()
+				.withBloodline([PerkLib.DragonsDescendant,PerkLib.BloodlineDragon])
+				.withTier(16, "dragon")
+					.customNamingFunction(function(body:BodyData):String {
+						if (body.isTaur) return "dragon-taur";
+						if (body.faceType == Face.HUMAN) return "dragon-"+body.mf("man","girl");
+						return "dragon";
+					})
+					.buffs({
+						"maxhp_mult": +0.10,
+						"str.mult": +0.50,
+						"tou.mult": +0.50,
+						"spe.mult": +0.50,
+						"int.mult": +0.40,
+						"wis.mult": +0.40,
+						"lib.mult": +0.30,
+						"sens": +20
+					})
+					.withExtraBonuses("+1 Armor / Magic Resistance")
+				.end()
+				.withTier(24,"elder dragon")
+					.customNamingFunction(function(body:BodyData):String {
+						if (body.isTaur) return "elder dragon-taur";
+						if (body.faceType == Face.HUMAN) return "elder dragon-"+body.mf("man","girl");
+						return "elder dragon";
+					})
+					.buffs({
+						"maxfatigue_base": +100,
+						"maxlust_base": +25,
+						"maxhp_mult": +0.20,
+						"str.mult": +0.80,
+						"tou.mult": +0.80,
+						"spe.mult": +0.80,
+						"int.mult": +0.70,
+						"wis.mult": +0.70,
+						"lib.mult": +0.40,
+						"sens": +30
+					})
+					.withExtraBonuses("+4 Armor / Magic Resistance")
+				.end()
+				.withTier(32,"ancient dragon")
+					.customNamingFunction(function(body:BodyData):String {
+						if (body.isTaur) return "ancient dragon-taur";
+						if (body.faceType == Face.HUMAN) return "ancient dragon-"+body.mf("man","girl");
+						return "ancient dragon";
+					})
+					.buffs({
+						"maxfatigue_base": +200,
+						"maxlust_base": +50,
+						"maxhp_mult": +0.30,
+						"str.mult": +1.00,
+						"tou.mult": +1.00,
+						"spe.mult": +1.00,
+						"int.mult": +0.80,
+						"wis.mult": +0.80,
+						"lib.mult": +0.60,
+						"sens": +40
+					})
+					.withExtraBonuses("+10 Armor / Magic Resistance")
+				.end()
+				.build()
     public static const DRAGONNE:Race = new Race("Dragonne",10, "dragonneScore", 6);
     public static const RACCOON:Race = new Race("Raccoon",11,"raccoonScore", 8);
     public static const DOG:Race = new Race("Dog",12,"dogScore", 4);
@@ -55,10 +154,8 @@ public class Race {
 			buildRace(13, "wolf")
 					.withScores()
 						.faceType(ANY(Face.WOLF, Face.ANIMAL_TOOTHS), +1)
-						.eyeType(
-								Eyes.FENRIR, +3,
-								Eyes.FERAL, -11
-							)
+						.eyeType(Eyes.FENRIR, +3)
+						.eyeType(Eyes.FERAL, -11)
 						.eyeColor("glacial blue", +2)
 						.earType(Ears.WOLF, +1)
 						.armType(Arms.WOLF, +1)
@@ -108,10 +205,8 @@ public class Race {
     public static const KITSUNE:Race = buildRace(17, "kitsune")
 			.withScores()
 				.eyeType(Eyes.FOX, +1)
-				.earType(
-						Ears.FOX, +1,
-						NOT(Ears.FOX), -1
-				)
+				.earType(Ears.FOX, +1)
+				.earType(NOT(Ears.FOX), -1)
 				.tailTypeAndCount(Tail.FOX, 1, -7)
 				.tailType(NOT(Tail.FOX), -7)
 				.customScoreRequirement("tail", "2+ fox tails",
@@ -122,16 +217,16 @@ public class Race {
 							return body.tailCount;
 						}
 				)
-				// TODO @aimozg fur or magical tattoo
+				.customRequirement("skin","fur or magical tatoo",
+						function(body:BodyData):Boolean {
+							return body.skinCoatType == Skin.FUR
+									|| body.skinBasePattern == Skin.PATTERN_MAGICAL_TATTOO
+						}, +1)
 				.armType(ANY(Arms.HUMAN,Arms.KITSUNE,Arms.FOX), +1)
-				.legType(
-						ANY(LowerBody.FOX,LowerBody.HUMAN), +1,
-						NONE(LowerBody.FOX,LowerBody.HUMAN), -1
-				)
-				.faceType(
-						ANY(Face.ANIMAL_TOOTHS,Face.HUMAN,Face.FOX), +1,
-						NONE(Face.ANIMAL_TOOTHS,Face.HUMAN,Face.FOX), -1
-				)
+				.legType(ANY(LowerBody.FOX,LowerBody.HUMAN), +1)
+				.legType(NONE(LowerBody.FOX,LowerBody.HUMAN), -1)
+				.faceType(ANY(Face.ANIMAL_TOOTHS,Face.HUMAN,Face.FOX), +1)
+				.faceType(NONE(Face.ANIMAL_TOOTHS,Face.HUMAN,Face.FOX), -1)
 			.end()
 			.withScoresAfter(5)
 				.customRequirement("skin coat", "skin coat other than fur",
@@ -139,7 +234,8 @@ public class Race {
 							return body.hasCoat && body.skinCoatType != Skin.FUR;
 						}, -2
 				)
-				.skinBaseType(Skin.PLAIN, +1, NOT(Skin.PLAIN), -3)
+				.skinBaseType(Skin.PLAIN, +1)
+				.skinBaseType(NOT(Skin.PLAIN), -3)
 				.hairColor(ANY(KitsuneScene.basicKitsuneHair,KitsuneScene.elderKitsuneColors), +1)
 				.customRequirement("vagina","Vag of Holding",
 						function(body:BodyData):Boolean {
@@ -253,10 +349,8 @@ public class Race {
 			buildRace(25, "goblin")
 					.withScores()
 						.faceType(ANY(Face.HUMAN,Face.ANIMAL_TOOTHS), +1)
-						.earType(
-								Ears.ELFIN, +1,
-								NOT(Ears.ELFIN), -100
-							)
+						.earType(Ears.ELFIN, +1)
+						.earType(NOT(Ears.ELFIN), -100)
 						.height(LESS_THAN(48), +1)
 						.perk(PerkLib.GoblinoidBlood, +1)
 						.perk(PerkLib.BouncyBody, +1)

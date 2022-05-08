@@ -16,7 +16,8 @@ public class RaceBuilder {
 		this.raceClass = raceClass;
 	}
 	
-	public function addRequirement(requirement:RacialRequirement):void {
+	public function addRequirement(requirement:RacialRequirement, customName:String = ""):void {
+		if (customName) requirement.name = customName;
 		requirements.push(requirement);
 	}
 	

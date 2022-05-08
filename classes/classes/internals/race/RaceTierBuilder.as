@@ -2,6 +2,7 @@ package classes.internals.race {
 import classes.BodyData;
 import classes.PerkType;
 import classes.RaceTier;
+import classes.Stats.StatUtils;
 import classes.internals.Utils;
 
 public class RaceTierBuilder {
@@ -56,6 +57,10 @@ public class RaceTierBuilder {
 		this.buffObj = buffObject;
 		return this;
 	}
+	
+	/**
+	 * Add description of bonuses other than buffs.
+	 */
 	public function withExtraBonuses(...bonusDescriptions:/*String*/Array):RaceTierBuilder {
 		Utils.pushAll(extraBonuses,bonusDescriptions);
 		return this;
@@ -99,6 +104,11 @@ public class RaceTierBuilder {
 	}
 	
 	public function end():RaceBuilder {
+		for (var stat:String in buffObj) {
+			if (!StatUtils.isKnownStat(stat)) {
+				trace("[ERROR] Race "+raceBuilder.name+" tier "+name+" buffs non-existing stat "+stat);
+			}
+		}
 		raceBuilder.tiers.push(new RaceTier(
 				tierNumber,
 				name,

@@ -8,6 +8,7 @@ package classes.IMutations
 import classes.PerkLib;
 import classes.PerkType;
 import classes.Player;
+import classes.Race;
 
 public class DraconicLungMutation extends PerkType
     {
@@ -53,7 +54,7 @@ public class DraconicLungMutation extends PerkType
                     IMutationsLib.DraconicLungIM.requireLungsMutationSlot()
                     .requirePerks(PerkLib.DragonFireBreath, PerkLib.DragonIceBreath, PerkLib.DragonLightningBreath, PerkLib.DragonDarknessBreath)
                     .requireCustomFunction(function (player:Player):Boolean {
-                        return (player.dragonScore() >= 8);
+                        return (player.racialTier(Race.DRAGON) >= 1);
                     }, "Dragon race");
                 }
                 else{

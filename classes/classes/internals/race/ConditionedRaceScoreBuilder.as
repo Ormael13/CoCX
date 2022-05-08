@@ -15,8 +15,8 @@ public class ConditionedRaceScoreBuilder extends RaceScoreBuilder{
 		this.conditionName = conditionName;
 	}
 	
-	override protected function addRequirement(requirement:RacialRequirement):void {
-		super.addRequirement(requirement.withCondition(condition, conditionName));
+	override protected function addRequirement(requirement:RacialRequirement, customName:String = ""):void {
+		super.addRequirement(requirement.withCondition(condition, conditionName),customName);
 	}
 }
 }

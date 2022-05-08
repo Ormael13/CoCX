@@ -6,6 +6,7 @@ import classes.Scenes.NPCs.Forgefather;
 import classes.Scenes.NPCs.JojoScene;
 import classes.Scenes.SceneLib;
 import classes.internals.Utils;
+import classes.internals.race.CustomRacialRequirement;
 import classes.internals.race.RacialRequirement;
 
 import coc.xxc.BoundStory;
@@ -1041,6 +1042,14 @@ public class PlayerAppearance extends BaseContent {
 					} else {
 						outputText("[font-default]")
 					}
+					outputText(rr.name);
+					if (rr instanceof CustomRacialRequirement && !rr.check(body, score)) {
+						// do not display (+X) for requirements that have varying values and
+						// didn't pass, because value could be incorrect
+					} else {
+						outputText(" (" + rr.score(body) + ")");
+					}
+					outputText("[/font]\n");
 					outputText(rr.describe(body)+"[/font]\n")
 				}
 				if (race.tiers.length>0) {
@@ -1060,7 +1069,9 @@ public class PlayerAppearance extends BaseContent {
 			}
 		}
 		mainView.linkHandler = function(event:String):void {
-			RacialScores(Race.ALL_RACES[parseInt(event)]);
+			var clickedRace2:Race = Race.ALL_RACES[parseInt(event)];
+			if (clickedRace2 == clickedRace) clickedRace2 = null;
+			RacialScores(clickedRace2);
 		}
 		//Druid fusions
 		if (player.hasPerk(PerkLib.ElementalBody)) {
@@ -1221,18 +1232,6 @@ public class PlayerAppearance extends BaseContent {
 		if (player.dogScore() >= 4) outputText("\n<font color=\"#0000a0\">Dog-morph: " + player.dogScore() + " (+15% to Spe racial multi, -5% to Int racial multi)</font>");
 		else if (player.dogScore() >= 1) outputText("\n<font color=\"#008000\">Dog-morph: " + player.dogScore() + "</font>");
 		else if (player.dogScore() < 1) outputText("\n<font color=\"#ff0000\">Dog-morph: 0</font>");
-		//Dragon
-		if (player.dragonScore() >= 32) {
-			outputText("\n<font color=\"#0000a0\">Ancient Dragon: " + player.dragonScore() + " (+100% to Str / Tou / Spe racial multi, +80% to Int / Wis racial multi, +60% to Lib racial multi, +40 to min Sen, ");
-			outputText("+30% max HP, +" + (50 * (1 + player.newGamePlusMod())) + " max Lust, +" + (200 * (1 + player.newGamePlusMod())) + " max Fatigue, +" + (10 * (1 + player.newGamePlusMod())) + " Armor / Magic Resistance)</font>");
-		}
-		else if (player.dragonScore() >= 24) {
-			outputText("\n<font color=\"#0000a0\">Elder Dragon: " + player.dragonScore() + " (+80% to Str / Tou / Spe racial multi, +70% to Int / Wis racial multi, +40% to Lib racial multi, +30 to min Sen, ");
-			outputText("+20% max HP, +" + (25 * (1 + player.newGamePlusMod())) + " max Lust, +" + (100 * (1 + player.newGamePlusMod())) + " max Fatigue, +" + (4 * (1 + player.newGamePlusMod())) + " Armor / Magic Resistance)</font>");
-		}
-		else if (player.dragonScore() >= 16) outputText("\n<font color=\"#0000a0\">Dragon: " + player.dragonScore() + " (+50% to Str / Tou / Spe racial multi, +40% to Int / Wis racial multi, +30% to Lib racial multi, +20 to min Sen, +10% max HP, +" + (1 + player.newGamePlusMod()) + " Armor / Magic Resistance)</font>");
-		else if (player.dragonScore() >= 1) outputText("\n<font color=\"#008000\">Dragon: " + player.dragonScore() + "</font>");
-		else if (player.dragonScore() < 1) outputText("\n<font color=\"#ff0000\">Dragon: 0</font>");
 		//Dragonne
 		outputText("\nDragonne: " + player.dragonneScore());
 		//Easter Bunny

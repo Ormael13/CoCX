@@ -154,8 +154,11 @@ public class StatUtils {
 			return stat;
 		}
 	}
+	public static function isKnownStat(stat:String):Boolean {
+		return stat in PlainNumberStats || stat in PercentageStats;
+	}
 	public static function isPlainNumberStat(statname:String):Boolean {
-		return !(statname in PlainNumberStats);
+		return statname in PlainNumberStats;
 	}
 	public static function isPercentageStat(statname:String):Boolean {
 		return statname in PercentageStats;

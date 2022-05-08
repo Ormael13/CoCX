@@ -611,17 +611,17 @@ public class MutationsLib
 					return (Tail.hasDraconicTail(player) || LowerBody.hasDraconicLegs(player) && LowerBody.hasTail(player));
 				}, "Dragon race or its variants tail")
 				.requireCustomFunction(function (player:Player):Boolean {
-					return (player.dragonScore() >= 8 || player.jabberwockyScore() >= 10 || player.frostWyrmScore() >= 10 || player.leviathanScore() >= 20);
+					return (player.racialTier(Race.DRAGON) >= 1 || player.jabberwockyScore() >= 10 || player.frostWyrmScore() >= 10 || player.leviathanScore() >= 20);
 				}, "Dragon race or its variants");
 				DraconicHeart.requireHeartMutationSlot()
 				.requirePerk(DraconicBones)
 				.requireCustomFunction(function (player:Player):Boolean {
-					return (player.dragonScore() >= 8 || player.frostWyrmScore() >= 10 || player.leviathanScore() >= 20);
+					return (player.racialTier(Race.DRAGON) >= 1 || player.frostWyrmScore() >= 10 || player.leviathanScore() >= 20);
 				}, "Dragon race or its variants");
 				DraconicLungs.requireLungsMutationSlot()
 				.requirePerks(PerkLib.DragonFireBreath, PerkLib.DragonIceBreath, PerkLib.DragonLightningBreath, PerkLib.DragonDarknessBreath)
 				.requireCustomFunction(function (player:Player):Boolean {
-					return (player.dragonScore() >= 8);
+					return (player.racialTier(Race.DRAGON) >= 1);
 				}, "Dragon race");
 				DrakeLungs.requireLungsMutationSlot()
 				.requireAnyPerk(PerkLib.DragonFireBreath, PerkLib.DragonIceBreath, PerkLib.DragonLightningBreath, PerkLib.DragonDarknessBreath, PerkLib.DragonWaterBreath)
