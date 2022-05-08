@@ -180,7 +180,11 @@ public class BodyData {
 	
 	public static const SLOT_SKIN_BASE_PATTERN:int = _slotid++;
 	EnumValue.add(Slots,SLOT_SKIN_BASE_PATTERN, "SKIN_BASE_PATTERN", {
-		name:"skin pattern"
+		name:"skin pattern",
+		nameFn: function(value:int):String {
+			if (value === Skin.PATTERN_NONE) return "no";
+			return Skin.PatternTypes[value].name;
+		}
 	});
 	public function get skinBasePattern():int {
 		return data[SLOT_SKIN_BASE_PATTERN];
@@ -215,7 +219,11 @@ public class BodyData {
 	
 	public static const SLOT_SKIN_COAT_PATTERN:int = _slotid++;
 	EnumValue.add(Slots,SLOT_SKIN_COAT_PATTERN, "SKIN_COAT_PATTERN", {
-		name:"coat pattern"
+		name:"coat pattern",
+		nameFn: function(value:int):String {
+			if (value === Skin.PATTERN_NONE) return "no";
+			return Skin.PatternTypes[value].name;
+		}
 	});
 	public function get skinCoatPattern():int {
 		return data[SLOT_SKIN_COAT_PATTERN];

@@ -683,7 +683,7 @@ public class MutationsLib
 					return player.facePart.type == 34;//player.facePart.isAny(Face.VAMPIRE, Face.)
 				}, "Vampire fangs")
 				.requireCustomFunction(function (player:Player):Boolean {
-					return player.vampireScore() >= 10;//potem dodać mosquito race i ew. inne co mogą wypijać krew
+					return player.isRace(Races.VAMPIRE);//potem dodać mosquito race i ew. inne co mogą wypijać krew
 				}, "Vampire race");
 				//KitsuneThyroidGlandMutation.mutationReqs();
 				KitsuneThyroidGland.requireThyroidGlandMutationSlot().requireAnyPerk(PerkLib.EnlightenedKitsune, PerkLib.CorruptedKitsune).requireCustomFunction(function (player:Player):Boolean {
@@ -771,7 +771,7 @@ public class MutationsLib
 					return player.hasStatusEffect(StatusEffects.VampireThirst);
 				}, "Vampire Thirst")
 				.requireCustomFunction(function (player:Player):Boolean {
-					return player.vampireScore() >= 10;//potem dodać mosquito race i ew. inne co mogą wypijać krew
+					return player.isRace(Races.VAMPIRE);//potem dodać mosquito race i ew. inne co mogą wypijać krew
 				}, "Vampire race");
 				VenomGlands.requireMouthMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.facePart.isAny(Face.SNAKE_FANGS, Face.SPIDER_FANGS);

@@ -60,7 +60,23 @@ public class DragonRace extends Race {
 					PerkLib.DragonIceBreath,
 					PerkLib.DragonLightningBreath,
 					PerkLib.DragonDarknessBreath
-				], +1);
+				], +1)
+				.chimericalBodyPerks1([
+					MutationsLib.DraconicBones,
+					MutationsLib.DraconicHeart,
+					MutationsLib.DraconicLungs
+				])
+				.chimericalBodyPerks2([
+					MutationsLib.DraconicBonesPrimitive,
+					MutationsLib.DraconicHeartPrimitive,
+					MutationsLib.DraconicLungsPrimitive
+				])
+				.chimericalBodyPerks3([
+					MutationsLib.DraconicBonesEvolved,
+					MutationsLib.DraconicHeartEvolved,
+					MutationsLib.DraconicLungsEvolved
+				])
+		;
 		addBloodline([PerkLib.DragonsDescendant, PerkLib.BloodlineDragon]);
 		buildTier(16, "dragon")
 				.customNamingFunction(function (body:BodyData):String {

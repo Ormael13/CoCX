@@ -82,8 +82,7 @@ public class RaceUtils {
 				case "gt":
 				case "gte":
 				case "ne":
-					var compValue:Number = op["value"] as Number;
-					if (!isFinite(compValue)) throw new Error(errorContext+"Invalid operator");
+					var compValue:* = op["value"];
 					operatorFn = operatorCompareFn(operator, compValue);
 					name = {
 						"lt": "less than ",

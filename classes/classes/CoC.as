@@ -382,6 +382,8 @@ public class CoC extends MovieClip
 
     public function run():void
     {
+        trace("Loading races");
+        Races.load();
         mainMenu.mainMenu();
         this.stop();
 

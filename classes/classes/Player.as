@@ -1079,7 +1079,7 @@ use namespace CoC;
 		public function isSlime():Boolean { return (hasPerk(PerkLib.DarkSlimeCore) || hasPerk(PerkLib.SlimeCore)); }
 		public function isHarpy():Boolean { return (harpyScore() > 10 || thunderbirdScore() > 15 || phoenixScore() > 15); }
 		public function isWerewolf():Boolean { return (werewolfScore() >= 12); }
-		public function isNightCreature():Boolean { return (vampireScore() >= 10 || batScore() >= 6 || isRace(Races.JIANGSHI)); }
+		public function isNightCreature():Boolean { return (isRace(Races.VAMPIRE) || batScore() >= 6 || isRace(Races.JIANGSHI)); }
 		public function hasDarkVision():Boolean { return (Eyes.Types[eyes.type].Darkvision); }
 		public function isHavingEnhancedHearing():Boolean { return (ears.type == Ears.ELVEN); }
 		//Weapons for Whirlwind
@@ -4218,21 +4218,9 @@ use namespace CoC;
 					}
 				}
 			}
-			if (TopRace == "gargoyle") {
-				if (TopScore >= 20) {
-					if (hasPerk(PerkLib.GargoylePure)) race = "pure gargoyle";
-					else race = "corrupted gargoyle";
-				}
-			}
 			if (TopRace == "bat") {
 				race = "bat ";
 				race += mf("boy", "girl");
-			}
-			if (TopRace == "vampire") {
-				if (TopScore >= 10) {
-					if (TopScore >= 20) race = "pureblood vampire";
-					else race = "vampire";
-				}
 			}
 			if (TopRace == "avian") {
 				race = "avian-morph";
@@ -4849,7 +4837,7 @@ use namespace CoC;
 				chimeraCounter++;
 			if (batScore() >= 10)
 				chimeraCounter++;
-			if (vampireScore() >= 10)
+			if (isRace(Races.VAMPIRE))
 				chimeraCounter++;
 			if (jabberwockyScore() >= 10)
 				chimeraCounter++;
@@ -4859,7 +4847,7 @@ use namespace CoC;
 				chimeraCounter++;
 			if (peacockScore() >= 9)
 				chimeraCounter++;
-*/			if (gargoyleScore() >= 22)
+*/			if (isRace(Races.GARGOYLE))
 				chimeraCounter++;
 			if (gooScore() >= 11)
 				chimeraCounter++;
@@ -9537,102 +9525,7 @@ use namespace CoC;
 
 		//Vampire
 		public function vampireScore():int {
-            Begin("Player","racialScore","vampire");
-            var counter:int = 0;
-            if (ears.type == Ears.BAT)
-				counter -= 10;
-            if (ears.type == Ears.VAMPIRE)
-				counter++;
-			if (wings.type == Wings.VAMPIRE)
-				counter += 4;
-            if (faceType == Face.VAMPIRE)
-				counter += 2;
-			if (eyes.type == Eyes.VAMPIRE)
-				counter++;
-			if (eyes.colour == "blood-red")
-				counter++;
-			if (InCollection(skinTone, "pale"))
-				counter++;
-			if (counter >= 8) {
-				if (arms.type == Arms.HUMAN)
-					counter++;
-				if (lowerBody == LowerBody.HUMAN)
-					counter++;
-			}
-			if (tail.type == Tail.NONE)
-				counter++;
-			if (horns.type == Horns.NONE)
-				counter++;
-			if (antennae.type == Antennae.NONE)
-				counter++;
-			if (hasPerk(MutationsLib.VampiricBloodsteam))
-				counter++;
-			if (hasPerk(MutationsLib.VampiricBloodsteamPrimitive))
-				counter++;
-			if (hasPerk(MutationsLib.VampiricBloodsteamEvolved))
-				counter++;
-			if (hasPerk(MutationsLib.HollowFangs))
-				counter++;
-			if (hasPerk(MutationsLib.HollowFangsPrimitive))
-				counter++;
-			if (hasPerk(MutationsLib.HollowFangsEvolved))
-				counter++;
-			if ((hasPerk(MutationsLib.VampiricBloodsteam) || hasPerk(MutationsLib.HollowFangs)) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
-				counter++;
-			if ((hasPerk(MutationsLib.VampiricBloodsteamPrimitive) || hasPerk(MutationsLib.HollowFangsPrimitive)) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
-				counter++;
-			if ((hasPerk(MutationsLib.VampiricBloodsteamEvolved) || hasPerk(MutationsLib.HollowFangsEvolved)) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
-				counter++;
-			if (hasPerk(PerkLib.VampiresDescendant) || hasPerk(PerkLib.BloodlineVampire))
-				counter += increaseFromBloodlinePerks();
-			counter = finalRacialScore(counter, Races.VAMPIRE);
-			End("Player","racialScore");
-			return counter < 0? 0:counter;
-		}
-
-		//Gargoyle
-		public function gargoyleScore():Number {
-			Begin("Player","racialScore","gargoyle");
-			var gargoyleCounter:Number = 0;
-			if (InCollection(hairColor, ["light gray", "quartz white", "gray", "dark gray", "black", "caramel"]))
-				gargoyleCounter++;
-			if (InCollection(skin.base.color, ["light gray", "quartz white", "gray", "dark gray", "black", "caramel"]))
-				gargoyleCounter++;
-			if (hairType == Hair.NORMAL)
-				gargoyleCounter++;
-			if (skinType == Skin.STONE)
-				gargoyleCounter++;
-			if (horns.type == Horns.GARGOYLE)
-				gargoyleCounter++;
-			if (eyes.type == Eyes.GEMSTONES)
-				gargoyleCounter++;
-			if (ears.type == Ears.ELFIN)
-				gargoyleCounter++;
-			if (faceType == Face.DEVIL_FANGS)
-				gargoyleCounter++;
-			if (tongue.type == Tongue.DEMONIC)
-				gargoyleCounter++;
-			if (arms.type == Arms.GARGOYLE || arms.type == Arms.GARGOYLE_2)
-				gargoyleCounter++;
-			if (tailType == Tail.GARGOYLE || tailType == Tail.GARGOYLE_2)
-				gargoyleCounter++;
-			if (lowerBody == LowerBody.GARGOYLE || lowerBody == LowerBody.GARGOYLE_2)
-				gargoyleCounter++;
-			if (wings.type == Wings.GARGOYLE_LIKE_LARGE || Wings.FEATHERED_LARGE)
-				gargoyleCounter += 4;
-			if (gills.type == Gills.NONE)
-				gargoyleCounter++;
-			if (rearBody.type == RearBody.NONE)
-				gargoyleCounter++;
-			if (antennae.type == Antennae.NONE)
-				gargoyleCounter++;
-			if (hasPerk(PerkLib.GargoylePure) || hasPerk(PerkLib.GargoyleCorrupted))
-				gargoyleCounter++;
-			if (hasPerk(PerkLib.TransformationImmunity))
-				gargoyleCounter += 5;
-			gargoyleCounter = finalRacialScore(gargoyleCounter, Races.GARGOYLE);
-			End("Player","racialScore");
-			return gargoyleCounter;
+            return racialScore(Races.VAMPIRE);
 		}
 
 		public function atlachFullTfCheck():Boolean {
@@ -10936,7 +10829,7 @@ use namespace CoC;
 			for each (var race:Race in Race.AllRaces) {
 				var tier:RaceTier = race.getTier(body);
 				if (tier && tier.hasBuffs()) {
-					StatUtils.mergeBuffObjects(buffs, tier.buffs);
+					StatUtils.mergeBuffObjects(buffs, tier.buffs(body));
 				}
 			}
 			if (werewolfScore() >= 12) {
@@ -11912,19 +11805,6 @@ use namespace CoC;
 				maxIntCap2 += 35;
 				maxLibCap2 += 45;
 			}
-			if (vampireScore() >= 10) {
-				if (vampireScore() >= 20) {
-					maxStrCap2 += 70;
-					maxSpeCap2 += 70;
-					maxIntCap2 += 70;
-					maxLibCap2 += 90;
-				} else {
-					maxStrCap2 += 35;
-					maxSpeCap2 += 35;
-					maxIntCap2 += 35;
-					maxLibCap2 += 45;
-				}
-			}
 			if (internalChimeraScore() >= 1 && !hasPerk(PerkLib.RacialParagon)) {
 				maxStrCap2 += 5 * internalChimeraScore();
 				maxTouCap2 += 5 * internalChimeraScore();
@@ -11965,226 +11845,6 @@ use namespace CoC;
 				maxIntCap2 += 2 * perkv1(PerkLib.AscensionOneRaceToRuleThemAllX) * level;
 				maxWisCap2 += 2 * perkv1(PerkLib.AscensionOneRaceToRuleThemAllX) * level;
 				maxLibCap2 += 2 * perkv1(PerkLib.AscensionOneRaceToRuleThemAllX) * level;
-			}
-			if (gargoyleScore() >= 22) {//990
-				switch (Forgefather.material){
-					case "stone":
-						switch(Forgefather.refinement){
-							case 1:
-								maxStrCap2 += 50;
-								maxTouCap2 += 50;
-								maxSpeCap2 += 50;
-								maxIntCap2 += 50;
-								maxWisCap2 += 50;
-								maxLibCap2 += 50;
-								break;
-							case 2:
-								maxStrCap2 += 75;
-								maxTouCap2 += 75;
-								maxSpeCap2 += 75;
-								maxIntCap2 += 75;
-								maxWisCap2 += 75;
-								maxLibCap2 += 75;
-								break;
-							case 3:
-								maxStrCap2 += 100;
-								maxTouCap2 += 100;
-								maxSpeCap2 += 100;
-								maxIntCap2 += 100;
-								maxWisCap2 += 100;
-								maxLibCap2 += 100;
-								break;
-						}
-						break;
-					case "alabaster":
-						//Alabaster - Magic (Int+100%, +20% max mana, +15% spell dmg)
-						switch(Forgefather.refinement){
-							case 1:
-								maxIntCap2 += 100;
-								maxWisCap2 += 50;
-								maxStrCap2 -= 10;
-								maxTouCap2 -= 10;
-								break;
-							case 2:
-								maxIntCap2 += 150;
-								maxWisCap2 += 75;
-								maxStrCap2 -= 15;
-								maxTouCap2 -= 15;
-								break;
-							case 3:
-								maxIntCap2 += 200;
-								maxWisCap2 += 100;
-								maxStrCap2 -= 20;
-								maxTouCap2 -= 20;
-								break;
-							case 4:
-								maxIntCap2 += 200;
-								maxWisCap2 += 100;
-								maxStrCap2 -= 20;
-								maxTouCap2 -= 20;
-								break;
-							case 5:
-								maxIntCap2 += 500;
-								maxWisCap2 += 250;
-								maxStrCap2 -= 30;
-								maxTouCap2 -= 30;
-								break;
-						}
-						break;
-					case "marble":
-						switch(Forgefather.refinement){
-							case 1:
-								maxWisCap2 += 100;
-								maxStrCap2 += 50;
-								maxIntCap2 -= 10;
-								break;
-							case 2:
-								maxWisCap2 += 150;
-								maxStrCap2 += 75;
-								maxIntCap2 -= 15;
-								break;
-							case 3:
-								maxWisCap2 += 200;
-								maxStrCap2 += 100;
-								maxIntCap2 -= 20;
-								break;
-							case 4:
-								maxWisCap2 += 200;
-								maxStrCap2 += 100;
-								maxIntCap2 -= 20;
-								break;
-							case 5:
-								maxWisCap2 += 500;
-								maxStrCap2 += 200;
-								maxIntCap2 -= 30;
-								break;
-						}
-						break;
-					case "granite":
-						switch(Forgefather.refinement){
-							case 1:
-								maxTouCap2 += 100;
-								maxStrCap2 += 50;
-								maxIntCap2 -= 10;
-								maxWisCap2 -= 10;
-								break;
-							case 2:
-								maxTouCap2 += 150;
-								maxStrCap2 += 75;
-								maxIntCap2 -= 15;
-								maxWisCap2 -= 15;
-								break;
-							case 3:
-								maxTouCap2 += 200;
-								maxStrCap2 += 100;
-								maxIntCap2 -= 20;
-								maxWisCap2 -= 20;
-								break;
-							case 4:
-								maxTouCap2 += 200;
-								maxStrCap2 += 100;
-								maxIntCap2 -= 20;
-								maxWisCap2 -= 20;
-								break;
-							case 5:
-								maxTouCap2 += 500;
-								maxStrCap2 += 250;
-								maxIntCap2 -= 30;
-								maxWisCap2 -= 30;
-								break;
-						}
-						break;
-					case "ebony":
-						switch(Forgefather.refinement){
-							case 1:
-								maxStrCap2 += 100;
-								maxSpeCap2 += 50;
-								maxIntCap2 -= 10;
-								maxWisCap2 -= 10;
-								break;
-							case 2:
-								maxStrCap2 += 150;
-								maxSpeCap2 += 75;
-								maxIntCap2 -= 15;
-								maxWisCap2 -= 15;
-								break;
-							case 3:
-								maxStrCap2 += 200;
-								maxSpeCap2 += 100;
-								maxIntCap2 -= 20;
-								maxWisCap2 -= 20;
-								break;
-							case 4:
-								maxStrCap2 += 200;
-								maxSpeCap2 += 100;
-								maxIntCap2 -= 20;
-								maxWisCap2 -= 20;
-								break;
-							case 5:
-								maxStrCap2 += 500;
-								maxSpeCap2 += 250;
-								maxIntCap2 -= 30;
-								maxWisCap2 -= 30;
-								break;
-						}
-						break;
-					case "sandstone":
-						switch(Forgefather.refinement){
-							case 1:
-								maxSpeCap2 += 100;
-								maxStrCap2 += 25;
-								maxIntCap2 += 25;
-								maxWisCap2 -= 10;
-								break;
-							case 2:
-								maxSpeCap2 += 150;
-								maxStrCap2 += 35;
-								maxIntCap2 += 35;
-								maxWisCap2 -= 15;
-								break;
-							case 3:
-								maxSpeCap2 += 200;
-								maxStrCap2 += 50;
-								maxIntCap2 += 50;
-								maxWisCap2 -= 20;
-								break;
-							case 4:
-								maxSpeCap2 += 200;
-								maxStrCap2 += 50;
-								maxIntCap2 += 50;
-								maxWisCap2 -= 20;
-								break;
-							case 5:
-								maxSpeCap2 += 500;
-								maxStrCap2 += 125;
-								maxIntCap2 += 125;
-								maxWisCap2 -= 30;
-								break;
-						}
-						break;
-						
-				}
-				if (hasPerk(PerkLib.GargoylePure)) {
-					maxWisCap2 += 130;
-					maxLibCap2 -= 20;
-					currentSen -= 10;
-				}
-				if (hasPerk(PerkLib.GargoyleCorrupted)) {
-					maxWisCap2 -= 20;
-					maxLibCap2 += 140;
-				}
-				switch (Forgefather.channelInlay){
-					case "emerald":
-						if (Forgefather.refinement == 5) maxSpeCap2 += 100;
-						else maxSpeCap2 += 50;
-						break;
-				}
-				switch (Forgefather.gem){
-					case "emerald":
-						if (Forgefather.refinement == 5) maxSpeCap2 += 50;
-						else maxSpeCap2 += 25;
-						break;
-				}
 			}
 			if (fairyScore() >= 23) {
 				maxStrCap2 -= 20;

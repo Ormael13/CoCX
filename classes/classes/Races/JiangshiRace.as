@@ -41,6 +41,7 @@ public class JiangshiRace extends Race {
 					"wis.mult": +1.30,
 					"lib.mult": +2.00
 				})
+				.end();
 	}
 }
 }

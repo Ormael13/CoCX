@@ -73,10 +73,10 @@ public class Races {
 	public static const YETI:Race = new Race("Yeti",65, "yetiScore", 14);
 	public static const YUKIONNA:Race = new Race("Yuki Onna",66, "yukiOnnaScore", 14);
 	public static const BAT:Race = new Race("Bat",67, "batScore", 10);
-	public static const VAMPIRE:Race = new Race("Vampire",68, "vampireScore", 10);
+	public static const VAMPIRE:Race = new VampireRace(68);
 	public static const JABBERWOCKY:Race = new Race("Jabberwocky",69, "jabberwockyScore", 10);
 	public static const AVIAN:Race = new Race("Avian",70, "avianScore", 9);
-	public static const GARGOYLE:Race = new Race("Gargoyle",71, "gargoyleScore", 22);
+	public static const GARGOYLE:Race = new GargoyleRace(71);
 	public static const SLIME:Race = new Race("Slime",72, "gooScore", 11);
 	public static const MAGMASLIME:Race = new Race("Magma slime",73, "magmagooScore", 13);
 	public static const DARKSLIME:Race = new Race("Dark slime",74, "darkgooScore", 13);
@@ -109,14 +109,17 @@ public class Races {
 	public static const CYCLOP:Race = new Race("Cyclop",101, "cyclopScore", 12);
 	public static const ALICORN:Race = new Race("Alicorn",102, "alicornScore", 8);
 	
-	Race.AllRacesByName = Race.AllRaces.slice()
-										.filter(function(e:Race,...rest:Array):Boolean {
-											return !!e
-										})
-										.sortOn("name");
-	
-	
 	function Races() {
+	}
+	
+	public static function load():void {
+		// all loading is done in static inits, here we just sort them by name
+		
+		Race.AllRacesByName = Race.AllRaces.slice()
+				.filter(function(e:Race,...rest:Array):Boolean {
+					return !!e
+				})
+				.sortOn("name");
 	}
 }
 }

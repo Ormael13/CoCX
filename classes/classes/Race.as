@@ -123,13 +123,10 @@ public class Race {
 			var rscore:int = rr.calcScore(body, score);
 			if (pass && rscore >= 0) {
 				s += "[font-green]";
-			} else if (!pass && rscore < 0) {
-				s += "[font-red]";
-			} else if (!pass && rscore == 0) {
-				s += "[font-default]";
-			} else {
-				// pass and got negative, or fail and got positive
+			} else if (pass && rscore < 0) {
 				s += "[font-yellow]";
+			} else {
+				s += "[font-default]";
 			}
 			score += rscore;
 			s += rr.name;
@@ -137,17 +134,18 @@ public class Race {
 				// do not display (+X) for requirements that have varying values and
 				// didn't pass, because value could be incorrect
 				if (rscore != 0) {
-					s += "(??/"+rscore+")";
+					s += " [/font][font-red]("+rscore+" penalty)";
 				}
 			} else {
-				if (!pass) {
-					rscore = rr.passScore(body);
+				rscore = rr.passScore(body);
+				s += " (" + (rscore>0?"+"+rscore:rscore)+")";
+				if (rr.failScore < 0) {
+					if (pass) {
+						s += "[/font][font-default] (" + rr.failScore + " penalty)";
+					} else {
+						s += "[/font][font-red] (" + rr.failScore + " penalty)";
+					}
 				}
-				s += " (" + (rscore>0?"+"+rscore:rscore);
-				if (rr.failScore != 0) {
-					s += "/"+rr.failScore;
-				}
-				s += ")";
 			}
 			s += "[/font]\n";
 		}
@@ -156,13 +154,14 @@ public class Race {
 		}
 		for each(var tier:RaceTier in tiers) {
 			s += "\t<b>";
-			if (tier.check(body, score)) {
-				s += "[font-green]"+tier.nameFor(body)+"[/font]";
+			var present:Boolean = tier.check(body, score);
+			if (present) {
+				s += "[font-blue]"+tier.nameFor(body)+"[/font]";
 			} else {
-				s += tier.nameFor(body);
+				s += tier.name;
 			}
 			s += " ("+tier.minScore+") </b>";
-			s += tier.describeBuffs();
+			s += tier.describeBuffs(present ? body : null);
 			s += "\n";
 		}
 		return s;

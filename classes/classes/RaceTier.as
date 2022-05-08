@@ -10,7 +10,7 @@ public class RaceTier {
 	public var name:String;
 	private var nameFn:Function;
 	public var minScore:int;
-	public var buffs:Object;
+	protected var _buffs:Object;
 	public var extraBonuses:/*String*/Array;
 	
 	public function RaceTier(
@@ -22,11 +22,12 @@ public class RaceTier {
 			requirements:/*RaceTierRequirement*/Array,
 			extraBonuses:/*String*/Array
 	) {
+		var thiz:RaceTier = this;
 		this.tierNumber = tierNumber;
 		this.name = name;
-		this.nameFn = nameFn;
+		this.nameFn = nameFn || function(body:BodyData):String { return thiz.name };
 		this.minScore = minScore;
-		this.buffs = buffs
+		this._buffs = buffs
 		this.requirements = requirements.slice();
 		this.extraBonuses = extraBonuses.slice();
 	}
@@ -43,15 +44,22 @@ public class RaceTier {
 		return true;
 	}
 	
+	/**
+	 * @param body null if player doesn't have this tier, otherwise player body data
+	 */
+	public function buffs(body:BodyData):Object {
+		return _buffs;
+	}
 	public function hasBuffs():Boolean {
 		//noinspection LoopStatementThatDoesntLoopJS
-		for (var key:String in buffs) {
+		for (var key:String in _buffs) {
 			return true;
 		}
 		return false;
 	}
-	public function describeBuffs(separator:String = ", ", withExtraBonuses:Boolean = true):String {
+	public function describeBuffs(body:BodyData, separator:String = ", ", withExtraBonuses:Boolean = true):String {
 		var s:Array = [];
+		var buffs:Object = this.buffs(body);
 		for (var key:String in buffs) {
 			s.push(StatUtils.explainBuff(key,buffs[key]));
 		}

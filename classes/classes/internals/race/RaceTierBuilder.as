@@ -19,6 +19,8 @@ public class RaceTierBuilder {
 	public var requirements:/*RaceTierRequirement*/Array = [];
 	public var requiresPreviousTier:Boolean = false;
 	public var extraBonuses:/*String*/Array = [];
+	public var dynamicBuffFn:Function;
+	public var dynamicBuffDescription:String;
 	
 	private static var currentBuilder:RaceTierBuilder = null;
 	
@@ -62,6 +64,23 @@ public class RaceTierBuilder {
 	
 	public function buffs(buffObject:Object):RaceTierBuilder {
 		this.buffObj = buffObject;
+		return this;
+	}
+	
+	/**
+	 * @param description Description to show instead of buffs when player doesn't have this tier
+	 * @param dynamicBuffFn `(body:BodyData)=>buff object`
+	 */
+	public function withDynamicBuffs(
+			description:String,
+			dynamicBuffFn:Function
+	):RaceTierBuilder {
+		if (this.dynamicBuffFn != null) {
+			trace("[ERROR] Race tier "+name+" cannot have multiple dynamic buffs. Merge and provide a single function");
+			return this;
+		}
+		this.dynamicBuffDescription = description;
+		this.dynamicBuffFn = dynamicBuffFn;
 		return this;
 	}
 	
@@ -116,15 +135,31 @@ public class RaceTierBuilder {
 				trace("[ERROR] Race "+race.name+" tier "+name+" buffs non-existing stat "+stat);
 			}
 		}
-		race.tiers.push(new RaceTier(
-				tierNumber,
-				name,
-				nameFn,
-				minScore,
-				buffObj,
-				requirements,
-				extraBonuses
-		))
+		var tier:RaceTier;
+		if (this.dynamicBuffFn != null) {
+			tier = new DynamicBuffRaceTier(
+					tierNumber,
+					name,
+					nameFn,
+					minScore,
+					buffObj,
+					dynamicBuffFn,
+					dynamicBuffDescription,
+					requirements,
+					extraBonuses
+			);
+		} else {
+			tier = new RaceTier(
+					tierNumber,
+					name,
+					nameFn,
+					minScore,
+					buffObj,
+					requirements,
+					extraBonuses
+			);
+		}
+		race.tiers.push(tier);
 		currentBuilder = null;
 	}
 	

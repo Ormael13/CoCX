@@ -3,6 +3,7 @@ package classes.internals.race {
 import classes.BodyData;
 import classes.BodyParts.*;
 import classes.CockTypesEnum;
+import classes.PerkLib;
 import classes.PerkType;
 import classes.Race;
 
@@ -77,6 +78,9 @@ public class RaceScoreBuilder {
 	public function hornType(type:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
 		addSlotRequirement(BodyData.SLOT_HORN_TYPE, type, score, failScore, customName);
 		return this;
+	}
+	public function noHorns(score:int):RaceScoreBuilder {
+		return hornType(Horns.NONE, score);
 	}
 	public function legType(type:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
 		addSlotRequirement(BodyData.SLOT_LEG_TYPE, type, score, failScore, customName);
@@ -229,7 +233,7 @@ public class RaceScoreBuilder {
 	public function mutationPerks(perks:/*PerkType*/Array):RaceScoreBuilder {
 		return customScoreRequirement(
 				"perk",
-				"mutations",
+				"Mutations",
 				RaceUtils.hasAnyPerkFn(perks),
 				function (body:BodyData):int {
 					var score:int = 0;
@@ -238,6 +242,58 @@ public class RaceScoreBuilder {
 					}
 					return score;
 				});
+	}
+	
+	/**
+	 * +1 if has "Chimerical Body: Semi-Improved Stage" perk and any of these
+	 */
+	public function chimericalBodyPerks1(perks:/*PerkType*/Array):RaceScoreBuilder {
+		return chimericalBodyPerks(
+				PerkLib.ChimericalBodySemiImprovedStage,
+				"Chimerical Body Semi-Improved Stage + Mutation I",
+				perks
+		)
+	}
+	/**
+	 * +1 if has "Chimerical Body: Semi-Superior Stage" perk and any of these
+	 */
+	public function chimericalBodyPerks2(perks:/*PerkType*/Array):RaceScoreBuilder {
+		return chimericalBodyPerks(
+				PerkLib.ChimericalBodySemiSuperiorStage,
+				"Chimerical Body Semi-Superior Stage + Mutation II",
+				perks
+		)
+	}
+	/**
+	 * +1 if has "Chimerical Body: Semi-Epic Stage" perk and any of these
+	 */
+	public function chimericalBodyPerks3(perks:/*PerkType*/Array):RaceScoreBuilder {
+		return chimericalBodyPerks(
+				PerkLib.ChimericalBodySemiEpicStage,
+				"Chimerical Body Semi-Epic Stage + Mutation III",
+				perks
+		)
+	}
+	/**
+	 * +1 if has chimerical perk and any of these
+	 */
+	private function chimericalBodyPerks(
+			chimericalBodyPerk:PerkType,
+			name:String,
+			perks:/*PerkType*/Array
+	):RaceScoreBuilder {
+		return customRequirement(
+				"perk",
+				name,
+				function (body:BodyData):Boolean {
+					if (!body.player.hasPerk(chimericalBodyPerk)) return false;
+					for each (var perk:PerkType in perks) {
+						if (body.player.hasPerk(perk)) return true;
+					}
+					return false;
+				},
+				+1
+		)
 	}
 	
 	/**

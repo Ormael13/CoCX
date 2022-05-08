@@ -29,9 +29,9 @@ public class GoblinRace extends Race {
 				])
 				.skinPlainOnly(+1)
 				.skinBaseColor(ANY(GoblinSkinColors), +1, -100)
-				.hasAllPerks([MutationsLib.NaturalPunchingBag, PerkLib.ChimericalBodySemiImprovedStage], +1)
-				.hasAllPerks([MutationsLib.NaturalPunchingBagPrimitive, PerkLib.ChimericalBodySemiSuperiorStage], +1)
-				.hasAllPerks([MutationsLib.NaturalPunchingBagEvolved, PerkLib.ChimericalBodySemiEpicStage], +1)
+				.chimericalBodyPerks1([MutationsLib.NaturalPunchingBag])
+				.chimericalBodyPerks2([MutationsLib.NaturalPunchingBagPrimitive])
+				.chimericalBodyPerks3([MutationsLib.NaturalPunchingBagEvolved])
 				.hasVagina(+1);
 		addConditionedScores(
 				function (body:BodyData):Boolean {

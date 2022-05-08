@@ -68,30 +68,18 @@ public class KitsuneRace extends Race {
 					MutationsLib.KitsuneParathyroidGlandsEvolved,
 					MutationsLib.KitsuneParathyroidGlandsFinalForm
 				])
-				.customRequirement("", "Chimerical Body Semi-Improved Stage + Kitsune Mutation I",
-						function (body:BodyData):Boolean {
-							return (body.player.hasPerk(MutationsLib.KitsuneThyroidGland)
-									|| body.player.hasPerk(MutationsLib.KitsuneParathyroidGlands)
-							) && body.player.hasPerk(PerkLib.ChimericalBodySemiImprovedStage)
-						},
-						+1
-				)
-				.customRequirement("", "Chimerical Body Semi-Superior Stage + Kitsune Mutation II",
-						function (body:BodyData):Boolean {
-							return (body.player.hasPerk(MutationsLib.KitsuneThyroidGlandPrimitive)
-									|| body.player.hasPerk(MutationsLib.KitsuneParathyroidGlandsEvolved)
-							) && body.player.hasPerk(PerkLib.ChimericalBodySemiSuperiorStage)
-						},
-						+1
-				)
-				.customRequirement("", "Chimerical Body Semi-Epic Stage + Kitsune Mutation III",
-						function (body:BodyData):Boolean {
-							return (body.player.hasPerk(MutationsLib.KitsuneThyroidGlandEvolved)
-									|| body.player.hasPerk(MutationsLib.KitsuneParathyroidGlandsFinalForm)
-							) && body.player.hasPerk(PerkLib.ChimericalBodySemiEpicStage)
-						},
-						+1
-				);
+				.chimericalBodyPerks1([
+					MutationsLib.KitsuneThyroidGland,
+					MutationsLib.KitsuneParathyroidGlands
+				])
+				.chimericalBodyPerks2([
+					MutationsLib.KitsuneThyroidGlandPrimitive,
+					MutationsLib.KitsuneParathyroidGlandsEvolved
+				])
+				.chimericalBodyPerks3([
+					MutationsLib.KitsuneThyroidGlandEvolved,
+					MutationsLib.KitsuneParathyroidGlandsFinalForm
+				]);
 		addBloodline([PerkLib.KitsunesDescendant, PerkLib.BloodlineKitsune]);
 		buildTier(9, "kitsune")
 				.tauricName("kitsune-taur")
