@@ -152,6 +152,10 @@ use namespace CoC;
 		//Combat ability cooldowns. Index is ability id.
 		public var cooldowns:/*int*/Array = [];
 		
+		//Mining attributes
+		public var miningLevel:Number = 0;
+		public var miningXP:Number = 0;
+		
 		//Herbalism attributes
 		public var herbalismLevel:Number = 0;
 		public var herbalismXP:Number = 0;
@@ -14640,6 +14644,53 @@ use namespace CoC;
 					outputText("\n<b>Dual Wield (Firearms) skill leveled up to " + (dualWFLevel + 1) + "!</b>\n");
 					dualWFLevel++;
 					dualWFXP = 0;
+				}
+			}
+		}
+
+		public function maxMiningLevel():Number {
+			var maxLevel:Number = 2;
+			//if (hasPerk(PerkLib.SuperSensual)) {
+				//if (level < 48) maxLevel += level;
+				//else maxLevel += 48;
+			//}
+			//else {
+				if (level < 18) maxLevel += level;
+				else maxLevel += 18;
+			//}
+			return maxLevel;
+		}
+		public function MiningExpToLevelUp():Number {
+			var expToLevelUp:Number = 10;
+			var expToLevelUp00:Number = miningLevel + 1;
+			var expToLevelUp01:Number = 5;
+			var expToLevelUp02:Number = miningLevel + 1;
+			//if (hasPerk(PerkLib.ArouseTheAudience)) expToLevelUp00 -= 1;//2nd
+			//-2;//4th
+			//-3;//6th
+			//if (hasPerk(PerkLib.Sensual)) expToLevelUp01 -= 2;
+			//if (hasPerk(PerkLib.SuperSensual)) expToLevelUp01 -= 1;
+			//if (hasPerk(PerkLib.DazzlingDisplay)) expToLevelUp02 -= 1;//1st
+			//if (hasPerk(PerkLib.CriticalPerformance)) expToLevelUp02 -= 2;//3rd
+			//-3;//5th
+			expToLevelUp += expToLevelUp00 * expToLevelUp01 * expToLevelUp02;
+			return expToLevelUp;
+		}
+		public function mineXP(XP:Number = 0):void {
+			while (XP > 0) {
+				if (XP == 1) {
+					miningXP++;
+					XP--;
+				}
+				else {
+					miningXP += XP;
+					XP -= XP;
+				}
+				//Level dat shit up!
+				if (miningLevel < maxMiningLevel() && miningXP >= MiningExpToLevelUp()) {
+					outputText("\n\n<b>Mining skill leveled up to " + (miningLevel + 1) + "!</b>");
+					miningLevel++;
+					miningXP = 0;
 				}
 			}
 		}

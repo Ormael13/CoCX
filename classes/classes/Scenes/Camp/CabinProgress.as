@@ -141,7 +141,8 @@ import classes.Scenes.SceneLib;
 		//STAGE 4 - Gather woods, explore forest to encounter.
 		public function gatherWoods():void {
 			clearOutput();
-			outputText("While exploring the forest, you survey the trees. The trees are at the right thickness. You could cut down the trees.\n\n");
+			if (player.hasStatusEffect(StatusEffects.ResourceNode1) && player.statusEffectv1(StatusEffects.ResourceNode1) >= 5) outputText("You return to the forest where you found a good thick trees ready to be cut down.");
+			else outputText("While exploring the forest, you survey the trees. The trees are at the right thickness. You could cut down the trees.\n\n");
 			if (!player.hasStatusEffect(StatusEffects.ResourceNode1)) player.createStatusEffect(StatusEffects.ResourceNode1, 0, 0, 0, 0);
 			if (player.statusEffectv1(StatusEffects.ResourceNode1) < 5) {
 				if (player.statusEffectv1(StatusEffects.ResourceNode1) == 4) outputText("You have found this type of logging area enough times to be able to find them in the future without trouble. ('Woodcutting' option has been unlocked in Places menu)\n\n");
@@ -248,9 +249,10 @@ import classes.Scenes.SceneLib;
 			}
 		}
 		
-		public function quarrySite():void {
+		public function quarrySite(nightExploration:Boolean = false):void {
 			clearOutput();
-			outputText("As you explore the mountain area you run into what appears to be a very good mineral formation.");
+			if (player.hasStatusEffect(StatusEffects.ResourceNode1) && player.statusEffectv2(StatusEffects.ResourceNode1) >= 5) outputText("You return to the mountain area where you found before a very good mineral formation.");
+			else outputText("As you explore the mountain area you run into what appears to be a very good mineral formation.");
 			if (player.hasKeyItem("Old Pickaxe") < 0) outputText(" Next to it is an old pickaxe and leather bag with runic engraving left by a native who likely met an unfortunate end.");
 			if (!player.hasStatusEffect(StatusEffects.ResourceNode1)) player.createStatusEffect(StatusEffects.ResourceNode1, 0, 0, 0, 0);
 			if (player.statusEffectv2(StatusEffects.ResourceNode1) < 5) {
@@ -262,7 +264,10 @@ import classes.Scenes.SceneLib;
 				addButtonDisabled(0, "Mine", "You would need a pickaxe in order to retrieve the stone.");
 				addButton(1, "Pickaxe", quarrySitePickaxe);
 			}
-			else addButton(0, "Mine", quarrySiteMine);
+			else {
+				if (nightExploration) addButton(0, "Mine(N)", quarrySiteMine);
+				else addButton(0, "Mine(D)", quarrySiteMine);
+			}
 			addButton(14, "Leave", camp.returnToCampUseOneHour);
 		}
 		private function quarrySitePickaxe():void {
@@ -274,40 +279,67 @@ import classes.Scenes.SceneLib;
 			Crafting.BagSlot04Cap = 5;
 			doNext(quarrySite);
 		}
-		private function quarrySiteMine():void {
+		private function quarrySiteMine(nightExploration:Boolean = false):void {
 			if (player.fatigue > player.maxFatigue() - 50) {
 				outputText("\n\n<b>You are too tired to consider mining. Perhaps some rest will suffice?</b>");
 				doNext(camp.returnToCampUseOneHour);
 				return;
 			}
+			if (nightExploration) {
+				//later on add here chance to be ambushed by some enemy
+			}
 			outputText("\n\nYou begin slamming your pickaxe against the stone, spending the better part of the next two hours mining. This done, you bring back your prize to camp. ");
 			var minedStones:Number = 13 + Math.floor(player.str / 7);
 			minedStones = Math.round(minedStones);
 			fatigue(50, USEFATG_PHYSICAL);
-			if (rand(4) == 0) {
-				if (minedStones > (60 + (20 * player.newGamePlusMod()))) minedStones = (60 + (20 * player.newGamePlusMod()));
-				incrementStoneSupply(minedStones);
-				if (rand(2) == 0) inventory.takeItem(useables.TIN_ORE, camp.returnToCampUseTwoHours);
+			if (minedStones > (40 + (2 * player.miningLevel) + (20 * player.newGamePlusMod()))) minedStones = (40 + (2 * player.miningLevel) + (20 * player.newGamePlusMod()));
+			flags[kFLAGS.ACHIEVEMENT_PROGRESS_YABBA_DABBA_DOO] += minedStones;
+			incrementStoneSupply(minedStones);
+			player.mineXP(1);
+			if (rand(10) == 0) {
+				var gemsMined:Number = 1 + rand(1+player.miningLevel);
+				outputText(" Along with the stone you managed to dig up " + gemsMined + " gems!");
+				player.gems += gemsMined;
+			}
+			if (nightExploration) findOre(true);
+			else findOre();
+		}
+		
+		private function findOre(nightExploration:Boolean = false):void {
+			if (player.miningLevel > 0) {
+				if (rand(4) == 0) {
+					var itype:ItemType;
+					var ore:Number = 2; //0 = copper, 1 = tin, 2 = iron, 3 = moonstone
+					if (player.miningLevel > 1) ore += 1;
+					if (player.miningLevel > 2 && nightExploration) ore += 1;
+					var choice:Number = rand(ore);
+					switch(choice) {
+						case 0:
+							itype = useables.TIN_ORE;
+							break;
+						case 1:
+							itype = useables.COP_ORE;
+							break;
+						case 2:
+							itype = useables.IRONORE;
+							break;
+						case 3:
+							itype = useables.MOONSTO;
+							break;
+						default:
+							outputText("Something bugged! Please report this bug to Ormael/Aimozg.");
+					}
+					inventory.takeItem(itype, camp.returnToCampUseTwoHours);
+				}
 				else {
-					if (rand(2) == 0) inventory.takeItem(useables.IRONORE, camp.returnToCampUseTwoHours);
-					else inventory.takeItem(useables.COP_ORE, camp.returnToCampUseTwoHours);
+					outputText("After attempt to mine ore vein you ended with unusable piece.");
+					doNext(camp.returnToCampUseTwoHours);
 				}
 			}
 			else {
-				if (minedStones > (60 + (20 * player.newGamePlusMod()))) minedStones = (60 + (20 * player.newGamePlusMod()));
-				incrementStoneSupply(minedStones);
-				if (rand (10) == 0) {
-					var gemsMined:Number = 1 + rand(4);
-					outputText(" Along with the stone you managed to dig up " + gemsMined + " gems!");
-					player.gems += gemsMined;
-				}
-				flags[kFLAGS.ACHIEVEMENT_PROGRESS_YABBA_DABBA_DOO] += minedStones;
+				outputText(" Your mining skill is too low to find any ore.");
 				doNext(camp.returnToCampUseTwoHours);
 			}
-		}
-		
-		private function findOre():void { //Not used, will be in 1.1
-			var ore:int = rand(3); //0 = copper, 1 = tin, 2 = iron
 		}
 
 		private function checkToolbox():void {
@@ -349,7 +381,7 @@ import classes.Scenes.SceneLib;
 		}
 		
 		public function incrementWoodSupply(amount:int):void {
-			outputText("<b>(+" + amount + " wood!");
+			outputText("<b>(+" + amount + " wood"+(amount>1?"s":"")+"!");
 			flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] += amount;
 			if (flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] >= maxWoodSupply) {
 				flags[kFLAGS.CAMP_CABIN_WOOD_RESOURCES] = maxWoodSupply;
@@ -359,7 +391,7 @@ import classes.Scenes.SceneLib;
 		}
 		
 		public function incrementStoneSupply(amount:int):void {
-			outputText("<b>(+" + amount + " stone!");
+			outputText("<b>(+" + amount + " stone"+(amount>1?"s":"")+"!");
 			flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] += amount;
 			if (flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] >= maxStoneSupply) {
 				flags[kFLAGS.CAMP_CABIN_STONE_RESOURCES] = maxStoneSupply;

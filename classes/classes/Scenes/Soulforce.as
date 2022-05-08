@@ -31,6 +31,7 @@ import classes.Scenes.NPCs.LilyFollower;
 import classes.Scenes.NPCs.RyuBiDragon;
 import classes.Scenes.NPCs.Sonya;
 import classes.Scenes.NPCs.TyrantiaFollower;
+import classes.Scenes.NPCs.WaizAbi;
 import classes.Scenes.Places.Boat.Marae;
 import classes.Scenes.Places.HeXinDao.AdventurerGuild;
 import classes.Items.*;
@@ -1732,7 +1733,7 @@ public class Soulforce extends BaseContent
 			//addButton(3, "", ).hint("Add 1 .");
 			//addButton(4, "", ).hint("Add 1 .");
 			//addButton(5, "", ).hint("Add 1 .");
-			//addButton(6, "", ).hint("Add 1 .");
+			addButton(6, "UnicornHair", AddUnicornHair).hint("Add 1 Unicorn Hair.");
 			addButton(7, "GolemCore", AddGolemCore).hint("Add 1 Golem Core.");
 			addButton(8, "Mechanism", AddMechanism).hint("Add 1 Mechanism.");
 			addButton(9, "EnergyCore", AddEnergyCore).hint("Add 1 Energy Core.");
@@ -1749,7 +1750,7 @@ public class Soulforce extends BaseContent
 			addButton(0, "FightForPearl", FightForPearl).hint("Test fight to get Sky Poison Pearl legally (aside we cheat to start fight)");
 			addButton(1, "M.WSeaver", FightBelisa).hint("Test fight with Mana Weaver.");
 			if (player.level >= 45 && TyrantiaFollower.TyrantiaFollowerStage < 4 && !TyrantiaFollower.TyraniaIsRemovedFromThewGame) addButton(2, "D.Giantess", FightTyrantia).hint("Test fight with Drider Giantess.");
-			//3
+			addButton(3, "B.Monke", FightWaizAbi).hint("You not even want to let the innocent bimbo monke free? <i>*sigh*</i>");
 			addButton(4, "The Dummy", FightTheDummy).hint("Fight with The Dummy.");
 			//5
 			addButton(6, "GothGirl", FightLilith).hint("Fight with devilish cute goth girl.");
@@ -1767,7 +1768,7 @@ public class Soulforce extends BaseContent
 			addButton(1, "Hydra", FightHydra).hint("Test fight with Hydra.");
 			addButton(2, "HellfireSnail", FightHellfireSnail).hint("Test fight with Hellfire Snail.");
 			addButton(3, "ChaosChimera", FightChaosChimera).hint("Test fight with Chaos Chimera.");
-			addButton(4, "AnotSucc", FightCarrera).hint("Fight with prtobably another succubus out there...");
+			addButton(4, "AnotSucc", FightCarrera).hint("Fight with probably another succubus out there...");
 			addButton(5, "LvLUP Eva", LvLUPEva).hint("LvL UP forcefully Evangeline for testing purpose up to the limit.");
 			addButton(6, "DELvL Eva", DELvLEva).hint("DE LvL forcefully Evangeline for testing purpose down toward the lvl 12.");
 			addButton(7, "LvLUP Aurora", LvLUPAurora).hint("LvL UP forcefully Aurora for testing purpose up to the limit.");
@@ -2041,6 +2042,10 @@ public class Soulforce extends BaseContent
 	public function AddMoonstone():void {
 		outputText("\n\n<b>(Gained 1 Moonstone!)</b>\n\n");
 		inventory.takeItem(useables.MOONSTO, curry(MaterialMenu, 2));
+	}
+	public function AddUnicornHair():void {
+		outputText("\n\n<b>(Gained 1 Unicorn Hair!)</b>\n\n");
+		inventory.takeItem(useables.UNICORNH, curry(MaterialMenu, 2));
 	}
 	public function AddPolarMidnightScroll():void {
 		outputText("\n\n<b>(Gained 1 Polar Midnight scroll!)</b>\n\n");
@@ -2798,6 +2803,12 @@ public class Soulforce extends BaseContent
 		clearOutput();
 		outputText("Entering battle with another succubus or maybe not your every succubus? Enjoy ^^");
 		startCombat(new Carrera());
+	}
+	public function FightWaizAbi():void {
+		clearOutput();
+		flags[kFLAGS.WAIZABI_LVL_UP] = 0;
+		outputText("So you cheating and skipping guardian agnel gaze to beat poor Bimbo Monke? You're a Sexual Predator... <i>Start to dial local police number</i>");
+		startCombat(new WaizAbi());
 	}
 	public function FightSonya():void {
 		clearOutput();
