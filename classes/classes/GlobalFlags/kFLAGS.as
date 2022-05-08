@@ -147,7 +147,7 @@ public static const RAPHAEL_INTELLIGENCE_TRAINING:int                           
 public static const RAPHAEL_DISGUSTED_BY_PC_APPEARANCE:int                          =  139; // Raphael Disgusted by PC appearance
 public static const RAPHAEL_SECOND_DATE:int                                         =  140; // Raphael 2nd Date Happen?
 public static const HELLHOUND_MASTER_PROGRESS:int                                   =  141; // Hellhound Progression
-public static const UNKNOWN_FLAG_NUMBER_00142:int                                   =  142; // Can buy minotaur cum from goblins?
+public static const CAN_BUY_MINOCUM:int                                   			=  142; // Can buy minotaur cum from goblins?
 public static const URTA_SCYLLA_TIMES_CAUGHT:int                                    =  143; // How Many Times Have You Caught Urta + Scylla?
 public static const UNKNOWN_FLAG_NUMBER_00144:int                                   =  144; // Multitake Scylla meeting take advantage ever done?
 public static const URTA_TALKED_ABOUT_SCYLLA:int                                    =  145; // Urta confrontation about Scylla ever done?
