@@ -8,28 +8,12 @@ import classes.BodyParts.LowerBody;
 import classes.BodyParts.Tail;
 import classes.GlobalFlags.kFLAGS;
 import classes.Scenes.SceneLib;
-import classes.Scenes.SceneLib;
 import classes.display.SpriteDb;
 
 public class GnollSpearThrowerScene extends BaseContent
 	{
-				public function GnollSpearThrowerScene()
-		{
-		}
+		public function GnollSpearThrowerScene() {}
 
-		/*Content Guide: Just to help me make sure I got everything and to explain the layout, colored font is going to be used to identify when text should be used.  This will often be used in regards to specific characteristics, instead of the overall gender.  For example, a reference to a cuntboy's chest would be in Orange but a reference to her hips or groin would be red.
-		 Black – Universal text
-		 Blue – Text to be used on Male heroes
-		 Red – Text to be used on Female heroes
-		 Purple – Text to be used on Herm heroes
-		 Orange – Text to be used on Neuter heroes
-		 Green – Text to be used in special circumstances described in <>
-		 UNDERLINED TEXT – These are selectable options
-		 Bold Text – This text should appear as Bold in the game.
-		 Italicized Text – This text should appear as Italicized in the game.
-		 */
-
-//Female Gnoll.  First Page.
 		public function gnoll2Encounter():void
 		{
 			spriteSelect(SpriteDb.s_spear_gnoll);
@@ -64,7 +48,6 @@ public class GnollSpearThrowerScene extends BaseContent
 			startCombat(new GnollSpearThrower());
 		}
 
-
 //<Hyena Victorious – Anal>
 		public function hyenaSpearLossAnal():void
 		{
@@ -83,7 +66,7 @@ public class GnollSpearThrowerScene extends BaseContent
 			else outputText("arousal coursing through your veins, unable to think clearly enough to stand.");
 			outputText("  A jolt of fear passes through you as the hyena woman draws a long javelin from her back.  Her dark eyes glint gleefully as she plunges the javelin down, slamming it down into the ground in front of you.  You gasp with relief, glad for your life as she slams two more down, forming a rough pyramid in front of you.  ");
 			if (player.weaponName != "fists") outputText("Before you can recover, she tosses your [weapon] into the long grass.  She roughly pulls the [armor] from your body and it, too, is tossed into the high grass, leaving you naked before this amazon.");
-			else outputText("She roughly pulls the [armor] from your body and it's tossed into the high grass, leaving you naked before this amazon.");
+			else outputText("She roughly pulls the [armor] from your body, and it's tossed into the high grass, leaving you naked before this amazon.");
 			outputText("\n\n");
 
 			outputText("The warrior's spotted paws slide to her shapely waist, mocking laughter reaching your ears.  You find your eyes fixed on the paws that slide along the leather band holding her loincloth up.  With deft hands, the knot holding them parts, letting the rough leather swing out of the way.  You catch your breath as you finally gaze upon her.  A firm, black shaft, a good 15 inches long and 2 inches thick, stands before you.  What at first appeared to be a penis seems different in some way.  As your gaze slides along the dark shaft, you realize that the tip of the barrel-like member isn't that of a cock, but is instead the tight entrance of a massive clit.  You are shocked to realize that the flesh before you is a cunt unlike any you've seen on a creature before.  She lets you gaze in wonder for several moments as her powerful musk fills your mind.\n\n");
@@ -122,7 +105,7 @@ public class GnollSpearThrowerScene extends BaseContent
 			else outputText("One furred paw disappears before a single claw presses roughly against your " + assholeDescript() + " until she hears your breath catch in your throat.");
 			outputText("  A soft whimper escapes your lips when something hard and damp slides firmly along your rump.  You can hear lust-filled panting from the hyena as she grinds her massive clit against your trapped form, letting you feel the warmth of her body.\n\n");
 
-			outputText("Clawed hands slide around your sides to roughly squeeze your " + chestDesc() + ", using the painful hold to brace her body.  The hardened shaft vanishes as her hips pull back suddenly.  The barest touches against your entrance is all the warning you have before she shoves the two inch thick hyena meat roughly forward, stretching your poor hole wide around the sudden intruder.");
+			outputText("Clawed hands slide around your sides to roughly squeeze your " + chestDesc() + ", using the painful hold to brace her body.  The hardened shaft vanishes as her hips pull back suddenly.  The barest touches against your entrance is all the warning you have before she shoves the two-inch thick hyena meat roughly forward, stretching your poor hole wide around the sudden intruder.");
 			player.buttChange(30, true, true, false);
 			outputText("  The air fills with the sound of mocking laughter as the warrior forces herself deep into your passage.  Your ass is forced wide as your body tries desperately to cope with the sudden intrusion until her hips finally press against your [butt].\n\n");
 
@@ -137,7 +120,7 @@ public class GnollSpearThrowerScene extends BaseContent
 
 			outputText("The sound of her powerful body slapping against your bound form echoes through the grassy hills.  The gnoll's muzzle finally vanishes from your neck, leaving behind a perfect imprint of her sharp teeth.  Her breath moans out along the sweat of your skin in time to the thrusting of her hips as she fills your now-willing body.  Clawed hands clamp tight around your waist, pulling your hips back in time with her powerful motions.\n\n");
 
-			outputText("A warm weight starts to grow deep within your abused core.  A soft, needy whimpering fills the air and it takes some time before you realize it is being dragged from your mouth each time the thick shaft plows into you.  Suddenly, pleasure crashes through your body and mind as orgasm suddenly explodes within you.  ");
+			outputText("A warm weight starts to grow deep within your abused core.  A soft, needy whimpering fills the air, and it takes some time before you realize it is being dragged from your mouth each time the thick shaft plows into you.  Suddenly, pleasure crashes through your body and mind as orgasm suddenly explodes within you.  ");
 			//<Male>
 			if (player.hasCock()) outputText("Your cum spurts from your [cocks], spraying your seed over the dry ground, giving life to the savanna.");
 			//<Females>
@@ -166,15 +149,21 @@ public class GnollSpearThrowerScene extends BaseContent
 			if (monster.HP <= 0) outputText(" dazed");
 			else outputText(" aroused");
 			outputText(" to fight further.  One spotted paw holds tight to the shaft while the tawny warrior slowly falls to her knees, the will to fight completely gone.  Her head bows to you in submission as you slowly approach the defeated hyena.");
-			if (player.lust >= 33 && player.gender > 0) {
+			if (player.lust >= 33) {
 				outputText("\n\nUsing the hyena to get off would be easy.  What do you do?");
 				menu();
-				if (player.hasCock()) addButton(0, "Get BJ", hyenaVictoryRapeFellatio).hint("Make the gnoll suck you off.", "Get Blowjob");
-				if (player.hasVagina()) addButton(1, "Get Licked", victoryRapeHyenaCunnilingus).hint("Make the gnoll lick your pussy.");
+				addButtonIfTrue(0, "Get BJ", hyenaVictoryRapeFellatio,
+					"Req. a cock with area smaller than 40.", player.cockThatFits(40) >= 0,
+					"Make the gnoll suck you off.");
+				addButtonIfTrue(1, "Get Licked", victoryRapeHyenaCunnilingus,
+					"Req. a vagina.", player.hasVagina(), "Make the gnoll lick your pussy.");
 				SceneLib.uniqueSexScene.pcUSSPreChecksV2(hyenaVictory);
-								addButton(14, "Leave", cleanupAfterCombat);
+				addButton(14, "Leave", cleanupAfterCombat);
 			}
-			else doNext(cleanupAfterCombat);
+			else {
+				outputText("You're not aroused enough to rape her.");
+				cleanupAfterCombat();
+			}
 		}
 
 //<Hyena Defeat - Fellatio>
@@ -182,12 +171,8 @@ public class GnollSpearThrowerScene extends BaseContent
 		{
 			spriteSelect(SpriteDb.s_spear_gnoll);
 			var x:Number = player.cockThatFits(40);
-			if (x < 0) x = 0;
-			var y:Number = player.cockThatFits2(40);
-			if (player.cockTotal() > 1 && (y < 0 || y == x)) {
-				y = 0;
-				if (y == x) y = 1;
-			}
+			var y:Number = player.findCockNotIn([x]);
+			if (y < 0) sceneHunter.print("Check failed: multiple cocks.");
 			clearOutput();
 			outputText("Sensing the gnoll's will has broken, you impulsively order her to strip.  Tawny, spotted paws fall to the leather band around her waist, deftly untying the loincloth.  The material falls away from her groin, exposing a long, black shaft slipping free from a furred sheath.  You gaze in wonder, realizing that this hardening member is not a cock, but instead a long, thick clit.  The barrel-like tip of her pseudopenis is actually the entrance to her pussy.  You begin to understand why bondage and dominance are so ingrained in the culture of this savage race.\n\n");
 
@@ -219,7 +204,7 @@ public class GnollSpearThrowerScene extends BaseContent
 				outputText("free member.  Her powerful grips feel like a vice on the twin members as she begins to slide her paws along two of your shafts.  Moving in time to the rippling of her throat, the hands try hard to match the flood of sensations radiating from her muzzle.  Her own 'member' throbs, untouched, as she loses herself in trying to pleasure you.\n\n");
 			}
 
-			outputText("Waves of pleasure radiate through you from the amazon's incredible skill and stamina.  It becomes hard to focus on anything but the lust flowing through your body and it takes some time to realize that the whimpering noise filling the air is coming from your own mouth.  ");
+			outputText("Waves of pleasure radiate through you from the amazon's incredible skill and stamina.  It becomes hard to focus on anything but the lust flowing through your body, and it takes some time to realize that the whimpering noise filling the air is coming from your own mouth.  ");
 			//<Cock 0 is 7\" or greater>
 			if (player.cocks[x].cockLength >= 7) outputText("The muzzle starts to pull away from your " + cockDescript(x) + " until the tip finally slips from her throat, letting her gasp for breath.  ");
 			outputText("The gnoll starts to growl, the deep sound vibrating through your very core.  The lips lock around your cock, starting to suckle hard and fast, pushing you over the edge.\n\n");
@@ -254,11 +239,11 @@ public class GnollSpearThrowerScene extends BaseContent
 			clearOutput();
 			outputText("Dark brown eyes watch your approach, already slightly glazed in lust.  Slowly, the tawny head bows before you, acknowledging you as dominant.  It amazes you that this powerful, feral woman who fought so hard would now be so meek, but part of you knows that this submission will not last forever.\n\n");
 
-			outputText("It slowly dawns on you just how much power you have over this submissive warrior.  With a simple command, she stands with her head still bowed.  Unable to help yourself, you bring your right hand up to fondle one of the hyena's heavy breasts.  The large orbs are covered in soft fur with a black nipple poking through the cream colored pelt.  Impulsively, you lean forward, giving the already hard teat a lick.  The hyena moans softly into the savanna air as your tongue slides along her perky tit.\n\n");
+			outputText("It slowly dawns on you just how much power you have over this submissive warrior.  With a simple command, she stands with her head still bowed.  Unable to help yourself, you bring your right hand up to fondle one of the hyena's heavy breasts.  The large orbs are covered in soft fur with a black nipple poking through the cream-colored pelt.  Impulsively, you lean forward, giving the already hard teat a lick.  The hyena moans softly into the savanna air as your tongue slides along her perky tit.\n\n");
 
-			outputText("Pulling away from the beautiful gnoll, you decide to try another command.  Your heart pounds in your chest in anticipation as you order the hyena to drop her loincloth.  The leather garment falls away from her groin, exposing a 15 inch long and 2 inch thick shaft of dark flesh already slipping free from a furred sheath.  You gaze in wonder, realizing that this hardening member is not a cock, but instead a long, thick clit.  The barrel-like tip of her pseudopenis is actually her pussy.  You begin to understand why bondage and dominance are so ingrained in the culture of this savage race.\n\n");
+			outputText("Pulling away from the beautiful gnoll, you decide to try another command.  Your heart pounds in your chest in anticipation as you order the hyena to drop her loincloth.  The leather garment falls away from her groin, exposing a 15-inch-long and 2 inch thick shaft of dark flesh already slipping free from a furred sheath.  You gaze in wonder, realizing that this hardening member is not a cock, but instead a long, thick clit.  The barrel-like tip of her pseudopenis is actually her pussy.  You begin to understand why bondage and dominance are so ingrained in the culture of this savage race.\n\n");
 
-			outputText("A heady musk fills the air from the warrior's arousal, leaving you feeling light headed.  The scent alone causes juices to flow in your " + vaginaDescript(0) + ".  At another command, the hyena's deft paws slide along your form, roving about as they slowly remove your [armor], letting your bare skin warm in the air.  The strong, tawny paws linger even after you stand nude in the soft breeze.\n\n");
+			outputText("A heady musk fills the air from the warrior's arousal, leaving you feeling light-headed.  The scent alone causes juices to flow in your " + vaginaDescript(0) + ".  At another command, the hyena's deft paws slide along your form, roving about as they slowly remove your [armor], letting your bare skin warm in the air.  The strong, tawny paws linger even after you stand nude in the soft breeze.\n\n");
 
 			outputText("On impulse, you command the hyena to use that eager muzzle on you.  Instantly, her paws clutch you around the waist and lift, hefting you high into the air.  A girlish squeal escapes your lips as you find yourself dangling above the warrior.  The gnoll's powerful arms hold you steady as you squirm almost ten feet off the ground.  The amazon ignores all further commands as she lowers your vulnerable slit directly above her nose.\n\n");
 
@@ -270,12 +255,12 @@ public class GnollSpearThrowerScene extends BaseContent
 			player.cuntChange(8, true, true, false);
 			outputText("\n\n");
 
-			outputText("The gnoll lifts you off once more, before letting you plunge back down, once more forcing your cunt around her muzzle and her tongue to slide along your clit.  Your body is hefted and dropped as she fucks you with her muzzle.  The feeling is unbelievable, radiating through the very center of you where a warm weight starts to build.  Your eyes lose focus as your entire world narrows down to the feeling of the nose and tongue plunging deep into you again and again.  The intruder pulls out one last time before lips lock onto your " + clitDescript() + " and suckle hard.\n\n");
+			outputText("The gnoll lifts you off once more, before letting you plunge back down, once more forcing your cunt around her muzzle, and her tongue to slide along your clit.  Your body is hefted and dropped as she fucks you with her muzzle.  The feeling is unbelievable, radiating through the very center of you where a warm weight starts to build.  Your eyes lose focus as your entire world narrows down to the feeling of the nose and tongue plunging deep into you again and again.  The intruder pulls out one last time before lips lock onto your " + clitDescript() + " and suckle hard.\n\n");
 
 			outputText("That final action is too much for your abused body.  Pure ecstasy floods through your mind as your " + vaginaDescript(0) + " spasms wildly.  Your honey splashes out of you, the hyena trying to catch the juices on her tongue, though much splatters over her tawny throat and breasts.  Her deft tongue delves inside of you, twisting and heightening your orgasm.  The world fades to nothing but pleasure.\n\n");
 
-			outputText("When you awake some time later, still heady with pleasure, you find your [armor] piled neatly next to you, along with what appears to be a thank you gift from the now-absent gnoll.  The memory of the amazon's incredible strength and lithe form brings a smile to your lips as you prepare to leave.");
-			player.sexReward("Default","Vaginal",true,false);
+			outputText("When you awake some time later, still heady with pleasure, you find your [armor] piled neatly next to you, along with what appears to be a thank-you gift from the now-absent gnoll.  The memory of the amazon's incredible strength and lithe form brings a smile to your lips as you prepare to leave.");
+			player.sexReward("saliva","Vaginal");
 			cleanupAfterCombat();
 		}
 	}
