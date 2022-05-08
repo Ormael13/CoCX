@@ -282,7 +282,7 @@ public static const SHOW_SPRITES_FLAG:int                                       
 public static const RATHAZUL_SILK_ARMOR_COUNTDOWN:int                               =  274; // Rathazul silk armor queue - 1 = armor done!
 public static const UNKNOWN_FLAG_NUMBER_00275:int                                   =  275; // Rathazul armor type selector - 1=armor, 2=robes (3=bra, 4=panties, 5=loincloth)
 public static const TIMES_ENCOUNTERED_BASILISK:int                                   =  276; // Times Encountered Basilisk
-public static const UNKNOWN_FLAG_NUMBER_00277:int                                   =  277; // Times Encountered Drider
+public static const TIMES_ENCOUNTERED_DRIDERS:int                                   =  277; // Times Encountered Drider
 public static const UNKNOWN_FLAG_NUMBER_00278:int                                   =  278; // LOTTIE DISABLED (1+ = YUS)
 public static const UNKNOWN_FLAG_NUMBER_00279:int                                   =  279; // LOTTIE FIGURE (HIGHER = SLIMMER)
 public static const UNKNOWN_FLAG_NUMBER_00280:int                                   =  280; // LOTTIE CONFIDENCE (HIGHER = AWESOMER)

@@ -35,7 +35,7 @@ use namespace CoC;
 			//Load monster stats so we can display things like eye/hide color!
 			var drider:CorruptedDrider = new CorruptedDrider();
 			//First time
-			if (flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00277] == 0) {
+			if (flags[kFLAGS.TIMES_ENCOUNTERED_DRIDERS] == 0) {
 				outputText("While you explore the swamp, the sun's light withers and fades.  You look up through the mossy trees, but the sky is totally blocked from sight.  It's nearly as purple as twilight here, but you press on, brushing aside old spider-webs as you go.  Faintly, you can hear the sound of skittering legs moving around you, but with the way the damp air muffles everything, it's impossible to tell from which direction.\n\n");
 				outputText("You catch a blur of movement to the side, but by the time you turn for a better look, it's gone.  How odd.  Turning your eyes back to your path, you're shocked to see the form of a massive spider-woman in front of you.  She isn't just some humanoid spider-morph - she's a full-fledged drider, with a giant spider's body from the waist down and eight spindly legs supporting her.  Her eyes practically glow bright " + drider.skinTone + " while her venom-soaked lips twist into a cruel, confident smile.\n\n");
 				outputText("\"<i>My, what lovely prey I seem to have found tonight,</i>\" croons the drider.\n\n");
@@ -44,7 +44,7 @@ use namespace CoC;
 			//repeat intro:
 			else {
 				outputText("Bushwhacking your way through the dense foliage of the swamp, it soon becomes clear that you've wandered into spider territory.  Webbing hangs from trees and the dark, dank air hides ambushes well.  Diligence and wariness pay off, for you become aware of a skittering too near to be simple background noise.\n\n");
-				outputText("As far as you're aware, it's unlikely you'll be able to scare your stalker off, and so you simply wait for them to show themselves.  You search with your eyes and, noisily clearing your throat, make it clear you're aware of their presence.  Soft chuckling chimes around you, seeming to originate from several places in the scrub, but nothing appears.  You turn about and call again, raising your [weapon].  A gentle tap on the shoulder answers you, but when you look the vista is equally as desolate as the first time.  And where the hell is that laughing coming from?\n\n");
+				outputText("As far as you're aware, it's unlikely you'll be able to scare your stalker off, and so you simply wait for them to show themselves.  You search with your eyes and, noisily clearing your throat, make it clear you're aware of their presence.  Soft chuckling chimes around you, seeming to originate from several places in the scrub, but nothing appears.  You turn about and call again, raising your [weapon].  A gentle tap on the shoulder answers you, but when you look, the vista is equally as desolate as the first time.  And where the hell is that laughing coming from?\n\n");
 				outputText("Spinning again, you lose your patience and loudly demand your ambusher present itself.  A soft tug on your ");
 				if (player.tailType > Tail.NONE) outputText("tail ");
 				else outputText("hair ");
@@ -52,7 +52,7 @@ use namespace CoC;
 				outputText("\"<i>Clever little pet,</i>\" the phantom spits, resolving into the shape of a drider as your eyes focus and your adrenaline haze clears.  Raising a cupped hand to her ghoulishly grinning mouth, she laughs into it; a minute shivering in the air reveals the taut threads of silk attached to her finger.  The vibrations travel down them, shaking several silk-tied leaves and producing the raspy, laughing audience from before.  \"<i>It'd be so much easier on you if you'd just walked into the trap, sweetness.</i>\"\n\n");
 				outputText("You've yet to meet a wild drider that let you walk away without some sadistic display of power, and this one looks to be no different.");
 			}
-			flags[kFLAGS.UNKNOWN_FLAG_NUMBER_00277]++;
+			flags[kFLAGS.TIMES_ENCOUNTERED_DRIDERS]++;
 			if (flags[kFLAGS.CODEX_ENTRY_ARACHNES] <= 0) {
 				flags[kFLAGS.CODEX_ENTRY_ARACHNES] = 1;
 				outputText("\n\n<b>New codex entry unlocked: Arachnes, Spider-Morphs, and Driders!</b>")
@@ -70,70 +70,48 @@ use namespace CoC;
 			if (monster.HP < 1) outputText("to try to continue the fight, her movements slowed by pain and weakness.");
 			else outputText("to masturbate her swollen pussy-lips and the thick, juicy demon-cock that's sprouted in place of her clit.  She's so focused on getting off that she utterly gives up on the idea of fighting back, let alone dominating you as she seemed to plan originally.");
 			outputText("  The spider-herm lies in a miserable, defeated heap.");
-			var buttFuckBUTTFUCKBUTTTFUCKBUTTFUCK:Function =null;
-			if (player.cockThatFits(monster.analCapacity()) >= 0) buttFuckBUTTFUCKBUTTTFUCKBUTTFUCK = buttFuckADriderOhBaby;
-			var vagFuck:Function =null;
-			var fuckSpinner:Function =null;
-			var careful:Function =null;
-			if (player.hasCock() && player.lust >= 33) {
-				if (player.cockThatFits(monster.vaginalCapacity()) >= 0) {
-					outputText("\nYou could fuck her pussy, though you'd be within easy reach of her lips.  If she gets any crazy ideas, it'd be hard to stop her.");
-					vagFuck = winDriderPCDickInSpiderCunt;
-					if (player.tailType == Tail.SPIDER_ADBOMEN || player.hasItem(useables.T_SSILK)) {
-						outputText("\nYou could bind her up with some webbing for some bondage.  Her lips are dangerous, after all.");
-						careful = driderVagSmartFuck;
-					}
-				}
-				else outputText("\n<b>You're too big to fit inside her vagina.</b>");
-				if (player.cockThatFits(12) >= 0) {
-					fuckSpinner = victoryVSDriderStickDickInSpinneret;
-					outputText("\nYou could fuck her spinneret.");
-				}
-				else outputText("\n<b>You briefly consider shoving it in a spinneret, but there's no way you could fit inside the tight opening.</b>");
+			if (player.lust <= 33) {
+				outputText("\n\nYou're not aroused enough to rape her.");
+				cleanupAfterCombat();
+				return;
 			}
-			var rideCock:Function =null;
-			var rideOvi:Function =null;
-			var temp3:Function =null;
-			if (player.hasVagina() && player.lust >= 33) {
-				rideCock = winVSDriderTakeItsCockInCunt;
-				rideOvi = victoryVSDriderRideOviVaginal;
-				outputText("\nYou could ride the drider's retractible demon-cock or her ovipositor.");
-			}
-			var rideOviAss:Function =null;
-			if (player.lust >= 33) {
-				outputText("\nYou could always ride her ovipositor anally...");
-				rideOviAss = victoryVSDriderRideOviAnal;
-			}
-
-			//(Qualifies for any rape?:)
-			if (player.lust >= 33) {
-				outputText("\n\nWhat do you do?");
-				choices("Butt Fuck", buttFuckBUTTFUCKBUTTTFUCKBUTTFUCK, "Fuck Pussy", vagFuck, "Bondage Fuck", careful, "FuckSpinner", fuckSpinner, "Ride Cock", rideCock,
-					"Ride Ovi", rideOvi, "RideOviAnal", rideOviAss, "B.Titfuck", null/*placeholder*/, "", null, "Leave", cleanupAfterCombat);
-                LustyMaidensArmor.addTitfuckButton(7);
-                SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatDriderIntro);
-            }
-			else cleanupAfterCombat();
+			addButtonIfTrue(0, "Butt Fuck", buttFuckADriderOhBaby,
+				"Req. a dick with area fitting " + monster.analCapacity(),
+				player.cockThatFits(monster.analCapacity()) >= 0);
+			addButtonIfTrue(1, "Fuck Pussy", winDriderPCDickInSpiderCunt,
+				"<b>You're too big to fit inside her vagina.</b> Req. a dick with area fitting " + monster.vaginalCapacity(),
+				player.cockThatFits(monster.vaginalCapacity()) >= 0,
+				"You could fuck her pussy, though you'd be within easy reach of her lips.  If she gets any crazy ideas, it'd be hard to stop her.");
+			addButtonIfTrue(2, "Bondage Fuck", driderVagSmartFuck,
+				"<b>You're too big to fit inside her vagina.</b> Req. a dick with area fitting " + monster.vaginalCapacity() + " AND spider abdomen or tough spider-silk",
+				player.cockThatFits(monster.vaginalCapacity()) >= 0 && (player.tailType == Tail.SPIDER_ADBOMEN || player.hasItem(useables.T_SSILK)),
+				"You could bind her up with some webbing for some bondage.  Her lips are dangerous, after all.");
+			addButtonIfTrue(3, "FuckSpinner", victoryVSDriderStickDickInSpinneret,
+				"<b>You briefly consider shoving it in a spinneret, but there's no way you could fit inside the tight opening.</b> Req. a dick with area smaller than 12.",
+				player.cockThatFits(12) >= 0,
+				"You could fuck her spinneret.");
+			addButtonIfTrue(4, "Ride Cock", winVSDriderTakeItsCockInCunt, "Req. a vagina",
+				player.hasVagina(), "You could ride the drider's retractible demon-cock.");
+			addButtonIfTrue(5, "Ride Ovi", victoryVSDriderRideOviVaginal, "Req. a vagina",
+				player.hasVagina(), "You could ride the drider's retractible demon-cock or her ovipositor.");
+			addButton(6, "RideOviAnal", victoryVSDriderRideOviAnal).hint("You could always ride her ovipositor anally...");
+			LustyMaidensArmor.addTitfuckButton(7);
+			SceneLib.uniqueSexScene.pcUSSPreChecksV2(defeatDriderIntro);
+			addButton(14, "Leave", cleanupAfterCombat);
 		}
 
 //Lose to drider
 		public function loseToDrider():void
 		{
-			spriteSelect(SpriteDb.s_drider);
-			//Build array of choices
-			var select:Array = [];
-			if (player.hasCock()) select[select.length] = 0;
-			if (player.hasVagina()) select[select.length] = 1;
-			//Genderless scene has low chance for gendered folks
-			if (player.gender == 0 || (player.gender > 0 && rand(3) == 0)) select[select.length] = 2;
-			//SELECT SCENE HERE
-			var choice:Number = select[rand(select.length)];
-			//*Loss Ride Ovi Anal unsexed - gats (done)
-			if (choice == 2) loseVSDriderGetAnalledOvi();
-			//*Loss Vaginal Impregnation and forced BJ - Symphonie (done)
-			else if (choice == 1) loseVSDriderAndVaginallyImpreggleOvi();
-			//*Loss Ride & Impregnate Butt (done) MALE
-			else loseVSDriderAndGetFuckedANDAnalImpreggegity();
+			sceneHunter.selectLossMenu([
+					[0, "GetOviAnal", loseVSDriderGetAnalledOvi],
+					[1, "GetOviVag", loseVSDriderAndVaginallyImpreggleOvi, "Req. a vagina.", player.hasVagina()],
+					[2, "Use Dick", loseVSDriderAndGetFuckedANDAnalImpreggegity,
+						"Req. a dick with area fitting " + monster.vaginalCapacity(),
+						player.cockThatFits(monster.vaginalCapacity()) >= 0]
+				],
+				"<i>The drider smirks, crawling closer. You can't do anything - in a moment she'll web you to the ground and fuck like no tomorrow. But her corrupted eyes betray her - she wants it as much as you do. Maybe you could slightly change the course of actions?</i>\n\n"
+			);
 		}
 
 
@@ -628,10 +606,16 @@ use namespace CoC;
 		{
 			spriteSelect(SpriteDb.s_drider);
 			clearOutput();
-			//FAST FACTS: Drider uses webbing to spread eagle you then oviposits your womb while making you suck some dick.
-			//SYMNOTE: I think I've done a proper naga pass on this but it was really late so don't trust me 100% on that. I honestly can't imagine the way this scene is set up ever working for centaur, the posing would have to be completely different, but if someone else wants to try to centaurify it you are welcome to. I think there could probably stand to be a few offhand references to your cock and tits if you have them in the later parts, I'm not good at sewing those in. (done)
-			//(No reason it wouldn't work for hoers. The ovipositor is two feet, flexible, and at the tail end of her long-ass abdomen, while her genitals are all the way in front. She could DP a horsemans (or another drider) no problem if she tethered the human head to the bound forelegs. It won't be very comfortable, but this is a loss. So, in you get. -Z)
-			//[LUST: Desperately (jerking your " + cockDescript(0) + \"<i>/grinding your fingers against your " + clitDescript() + \"<i>/and shamelessly groping your " + biggestBreastSizeDescript() + \"<i>) you find yourself unable to continue fighting.  The carnal sexuality of the drider - her full chest, her gorgeous lips, and her pristine and gorgeous skin - has overwhelmed you.  Even if your mind was acutely aware that defeating your enemy was a necessity, your body would rebel. You need release.  More than that, you need her to provide it.] [BEATDOWN: With unceremonious indignity, you fall onto your " + buttDescript() + \"<i>.  It seems that you overestimated your capabilities, or underestimated the drider's strength, or perhaps both.  You have lost, and the expression that twinkles in her six eyes suggests that what awaits you is the violation you have come to expect from defeat.  Though weary, you steel yourself for what is to come. You may be her next victim, but you don't have to enjoy it.]
+			if (player.lust >= player.maxLust()) {
+				outputText("Desperately ");
+				if (player.hasCock()) outputText("jerking your [cock]");
+				if (player.gender == 3) outputText(player.biggestTitSize() > 0 ? ", " : " and ");
+				if (player.hasVagina()) outputText("grinding your fingers against your [clit]");
+				if (player.biggestTitSize() > 0) outputText((player.gender == 3 ? "," : "") + "shamelessly groping your [breasts]");
+				outputText("you find yourself unable to continue fighting.  The carnal sexuality of the drider - her full chest, her gorgeous lips, and her pristine and gorgeous skin - has overwhelmed you.  Even if your mind was acutely aware that defeating your enemy was a necessity, your body would rebel. You need release.  More than that, you need her to provide it.");
+			}
+			else
+				outputText("With unceremonious indignity, you fall onto your [butt]. It seems that you overestimated your capabilities, or underestimated the drider's strength, or perhaps both.  You have lost, and the expression that twinkles in her six eyes suggests that what awaits you is the violation you have come to expect from defeat.  Though weary, you steel yourself for what is to come. You may be her next victim, but you don't have to enjoy it.");
 			outputText("The drider ignores you at first, lifting her head and glancing from side to side.  It's unclear why - perhaps she is worried that another predator will have been attracted by the sounds of combat, and attempt to steal her prey away.  Whatever her reasons she's apparently satisfied with what she sees.  Her gaze returns to you, eyes twinkling maliciously.  \"<i>Aren't you <b>precocious</b>,</i>\" she chuckles, walking slowly towards your prone body.  \"<i>Such an aggressive little morsel.</i>\"  A single strong spider leg places itself on your chest, pushing you ");
 			if (player.isBiped() || player.isGoo()) outputText("down onto your back");
 			else outputText("over, onto your side and then to your back");
@@ -703,7 +687,7 @@ use namespace CoC;
 
 			outputText("Her thick cock feels like it might be stretching your throat less now, but you don't think it's gotten any smaller.  Your throat is just being as worn out as any sex hole, as gaped as any slut's cunt.  Your tongue is nearly limp in your mouth, and even your gagging is quieter.  Her crotch pushes up your nose every time you slap into it.  Wet noises echo in your head, and it sometimes takes a bit too long to remember they're coming from it.  She violates your mouth, and violates you.\n\n");
 
-			outputText("The cum explodes into your throat unexpectedly - but then, you can't even remember when she started fucking your mouth.  How could you have known how close she was?  The drider moans loudly, slapping into and grasping your cheeks with hard fingers as she pulls you down to blow her foul load deep into your maw.  You think you can feel it landing directly into your stomach.  Hair is pulled, and scratches dig into your scalp.  Shuddering and seizing a few last times, with a sigh she lets you go.  Cum keeps flowing as you fall back, drenching your mouth and then shooting across your features.  It pools out the corner of your mouth when your head slumps to the side.  The last few spurts drip across your ear, the drider squeezing them out carefully with her dark fingers.  She wriggles her behind and slowly pulls her ovipositor out, leaving the sticky weights in your womb as a reminder of her actions.  You haven't cum yet.  She doesn't care.\n\n");
+			outputText("The cum explodes into your throat unexpectedly - but then, you can't even remember when she started fucking your mouth.  How could you have known how close she was?  The drider moans loudly, slapping into and grasping your cheeks with hard fingers as she pulls you down to blow her foul load deep into your maw.  You think you can feel it landing directly into your stomach.  Hair is pulled, and scratches dig into your scalp.  Shuddering and seizing a few last times, with a sigh she lets you go.  Cum keeps flowing as you fall back, drenching your mouth and then shooting across your features.  It pools out the corner of your mouth when your head slumps to the side.  The last few spurts drip across your ear, the drider squeezing them out carefully with her dark fingers.  She wriggles her behind and slowly pulls her ovipositor out, leaving the sticky weights in your womb as a reminder of her actions.  You haven't cummed yet.  She doesn't care.\n\n");
 
 			outputText("She steps over you, satisfied and still groaning slightly.  Not fully retracted, her ovipositor drags over your belly and chest as she departs, smearing your pussy juices over you.\n\n");
 
@@ -713,7 +697,7 @@ use namespace CoC;
 			//Pregnancy Goes Here
 			player.knockUp(PregnancyStore.PREGNANCY_DRIDER_EGGS, PregnancyStore.INCUBATION_DRIDER, 151);
 			dynStats("lib", 1, "lus=", 100, "cor", 1);
-			player.sexReward("cum","Vaginal",true,false);
+			player.sexReward("cum","Vaginal");
 			cleanupAfterCombat();
 		}
 
@@ -726,7 +710,7 @@ use namespace CoC;
 			clearOutput();
 			if (player.lust >= player.maxOverLust()) outputText("Unable to resist the desire coursing through your body, you strip off your [armor] and start stroking " + sMultiCockDesc() + ", displaying it in the hope that it will draw the drider's attention, while at the same time just trying to get yourself off and attain release.");
 			else {
-				outputText("You slump down, too beat up to mount an effective defense, let alone stay up on your [feet].  The drider skitters over to you and effortlessly peels you out of your [armor], exposing your ");
+				outputText("You slump down, too beaten up to mount an effective defense, let alone stay up on your [feet].  The drider skitters over to you and effortlessly peels you out of your [armor], exposing your ");
 				if (player.lust < 50) outputText("soft");
 				else outputText("hard");
 				outputText("member");
@@ -793,7 +777,7 @@ use namespace CoC;
 				else outputText("gushes a river of lady-spunk");
 				outputText(" into the dirt, getting off along with your " + assholeDescript() + ".  ");
 			}
-			outputText("Once you come down from your high, you roll to the side and watch the tiny driders clambering out of their egg shells.\n\n");
+			outputText("Once you come down from your high, you roll to the side and watch the tiny driders clambering out of their eggshells.\n\n");
 			outputText("Your newborn children glance at you, chittering happily before they scurry off in the direction of the swamp.\n");
 			player.sexReward("Default","Vaginal",true,false);
 		}
@@ -939,7 +923,7 @@ use namespace CoC;
 
 			outputText("\n\nHer firm behind continually bumps against your throbbing shaft as she struggles against your attentions, rapidly bringing you to full hardness and making you wince as you press against the inside of your [armor].  You can feel a damp patch spreading against your tip, a result of the pre-cum being forced out of you with every grinding movement the drider makes against your crotch.  Unable to resist, you quickly drag one hand down her body, streaking a path through the mixture of sweat and swamp-water still clinging to her toned muscles, until finally driving it between your bodies to free your aching member.  You nearly gasp as it springs free, wetly slapping against her taut rear and driving her to another fit of panic as she squirms away from your thick meat, apparently terrified that you're going to stuff her tight ass.");
 
-			outputText("\n\nThe thought is definitely enticing, causing your [cock " + y + "] to twitch as you thrust it against the girl's back, smearing pre-cum on her already-slick skin.  However, you've already got a plan in mind and you feel that it's about time that you finish teasing the poor thing and finally put it into action.  Taking one last luxury you slide your free hand around her hip, suckling her neck as your searching fingers spread across her lower stomach.");
+			outputText("\n\nThe thought is definitely enticing, causing your [cock " + y + "] to twitch as you thrust it against the girl's back, smearing pre-cum on her already-slick skin.  However, you've already got a plan in mind, and you feel that it's about time that you finish teasing the poor thing and finally put it into action.  Taking one last luxury you slide your free hand around her hip, suckling her neck as your searching fingers spread across her lower stomach.");
 
 			outputText("\n\nShe inhales sharply as you find your target, fingertips brushing against her throbbing, erect clit.  You trail your hand down her slit, feeling how wet and ready she's getting for you.  You dip two fingers into her, sliding them past her puffy lips with ease, drawing out a flurry of uncontrolled cries as you wiggle them against her sensitive walls.  As you tease the woman, you realize that her arms have stopped struggling against their bonds, apparently she's putting all her effort into not crying out at your assault on her engorged sex.");
 
@@ -960,13 +944,13 @@ use namespace CoC;
 			if (x < 0) x = player.smallestCockIndex();
 			var y:Number = x + 1;
 			clearOutput();
-			outputText("The drider seems to be completely oblivious, apparently too focused on ignoring your hand still roaming over her chest to realize your intentions.  You start to prepare the ball of silk with one hand, keeping the other on her chest to distract her from your actions.  You notice that the silk is starting to glisten slightly as the juices on your hand begin to stain the material and the sight gives you a devious idea.  Wrapping the strands around your hand, you dip it down in between your bodies, trying to absorb as much pre-cum as possible.  You run it over your slick stomach, as well as the small of the spider-taur's back, making her squeak slightly at the strange, wet sensation.  As you brush the dampening sheet over your still-leaking length, you have to choke back a moan as the soft, slick, sticky silk sticks slightly to your [cock " + y + "].");
+			outputText("The drider seems to be completely oblivious, apparently too focused on ignoring your hand still roaming over her chest to realize your intentions.  You start to prepare the ball of silk with one hand, keeping the other on her chest to distract her from your actions.  You notice that the silk is starting to glisten slightly as the juices on your hand begin to stain the material, and the sight gives you a devious idea.  Wrapping the strands around your hand, you dip it down in between your bodies, trying to absorb as much pre-cum as possible.  You run it over your slick stomach, as well as the small of the spider-taur's back, making her squeak slightly at the strange, wet sensation.  As you brush the dampening sheet over your still-leaking length, you have to choke back a moan as the soft, slick, sticky silk sticks slightly to your [cock " + y + "].");
 
 			outputText("\n\nYou grunt as you pull the material off, a few strands clinging stubbornly to your head as you withdraw it from between your sweat-slicked bodies.  It crosses your mind that the grasping, wet cloth could make a great toy for playing with when you're all alone, but you dismiss the idea for now, reasoning that you've got a perfectly good slut here to play with and you might as well make the most of her.  The silk is now sodden, slowly dripping with the excess seed that you've collected in it.  Deciding that it's now or never, you remove your hand from the drider's breasts, pulling the wet material taut between your hands, forming a wide strip of tough silk.  Before she can react to the sudden loss of sensation, you strike, throwing your hands over her head and wrapping the cum-soaked material around her drooling mouth.  She thrashes as you pull it tight and tie it off, but her weakened body is no match for your own lust-fueled frame, especially with her arms already out of the way.");
 
-			outputText("\n\nOnce you are sure the gag is secure you jump to your feet abruptly, leaving the drider to splash back into the shallow water of the swamp floor, her hair and chest becoming drenched once again as water cascades over her struggling form.  You loom over the trapped girl, your cock twitching in the air as your eyes drink in her completely exposed form, the sight compelling you to start removing your armor as quickly as possible.  She seems to be having trouble with her new facial wear; you can see her mouth moving through the wet material and it looks as if she is trying to keep the silk away from her lips by pushing at it with her tongue.  It looks as though she isn't a big fan of the taste that you \"infused\" it with and she starts to whip her head left and right, trying to wash the silk in the water that she's lying in.");
+			outputText("\n\nOnce you are sure the gag is secure you jump to your feet abruptly, leaving the drider to splash back into the shallow water of the swamp floor, her hair and chest becoming drenched once again as water cascades over her struggling form.  You loom over the trapped girl, your cock twitching in the air as your eyes drink in her completely exposed form, the sight compelling you to start removing your armor as quickly as possible.  She seems to be having trouble with her new facial wear; you can see her mouth moving through the wet material, and it looks as if she is trying to keep the silk away from her lips by pushing at it with her tongue.  It looks as though she isn't a big fan of the taste that you \"infused\" it with, and she starts to whip her head left and right, trying to wash the silk in the water that she's lying in.");
 
-			outputText("\n\nYou finally free yourself of your [armor], releasing your body from its stuffy confines and throwing the damp clothing to a relatively dry patch of land nearby.  By the time you turn back to face the drider she has recovered from her surprise bath and her eyes stare at your nude form, each one widening with a mixture of apprehension and desire.  You start to advance on her, shaft bouncing with each step, a giddy smile plastered on your face.  However, as soon as you get in range she suddenly lashes out, trying to grab you with her myriad of spider-legs in a final attempt to be the one taking charge.");
+			outputText("\n\nYou finally free yourself of your [armor], releasing your body from its stuffy confines and throwing the damp clothing to a relatively dry patch of land nearby.  By the time you turn back to face the drider she has recovered from her surprise bath, and her eyes stare at your nude form, each one widening with a mixture of apprehension and desire.  You start to advance on her, shaft bouncing with each step, a giddy smile plastered on your face.  However, as soon as you get in range she suddenly lashes out, trying to grab you with her myriad of spider-legs in a final attempt to be the one taking charge.");
 
 			outputText("\n\nHer hard, spindly limbs grasp and sweep at you, hoping to take advantage of your unarmored, overly aroused state to get a good hold of you while she frees herself.  Luckily, she's still exhausted from the fight, not to mention how flushed her skin is with all the lust coursing through her, leaving her attempts weak and ineffectual at best.  You force your way through her flurry of legs, knocking aside or simply ignoring any attacks that are actually aimed at you.  Her attacks seem to get more and more unfocused the closer you get to her, her eyes more fixated on your hard shaft than where she's aiming.  Pre-cum has started rolling down her neck from the gag, only making you throb as you loom over the girl, who seems by now to be completely mesmerized by your meat.  You roughly sit down, just below the join of her human and spider bodies, her legs too weak at this point to even try and clutch at you.  You smile to yourself, tracing a finger from the top of her cleavage down to her belly button.");
 
@@ -1017,17 +1001,17 @@ use namespace CoC;
 				outputText("You chuckle to yourself at the thought of her waking up, still bound and gagged in her own swamp, packed with your cream.  You use her hair to clean the filth still clinging to your cock, but after smearing the collected juices into her soft, wet locks you only find yourself irritatingly, achingly hard once more.  Looking at her still-oozing cunt, you decide against filling her up a second time; it'd just make even more mess anyway.  You idly stroke yourself whilst deciding what to do, until the sight of her throat bulging as she swallows down another mouthful from the sodden gag strikes you with an idea.");
 				outputText("\n\nRoughly tearing away the silk from her face, you grab her hair and ram her mouth down your shaft, grunting with delight as you force your way into her already cum-slicked throat.  Her eyes shoot open as you facefuck her, smearing her mouth with her own juices whilst you drag her lips down your member at a blinding pace, the desire to finish yourself off the only thing running through your mind.  She gags slightly as your tip slams into the back of her throat, her tongue wildly working against your length as she tries to cope with the oral invasion, slathering it with saliva and only making each stroke that much easier.  Too weak to even pull at her bonds, she can only try as best she can to get you off quickly, her tongue darting under your tip even as she sucks for all she's worth.  You groan as she services you, the warmth and wetness almost as good as her pussy was, not to mention how your shaft jumps as her tongue constantly darts up and down your length.  Each time you hilt in her, her nose bumps against you, the lewd noise of her sloppy sucking echoing through the swamp.  Her chin runs with semen-laden drool, mouth too focused on pleasing you to even attempt to hold it all in.");
 
-				outputText("\n\nWith every thrust her lips are pressed firmly against your crotch, [if (hasBalls = true) [sack]|groin] smacking into her soaked chin with a wet slap, spraying seed and spit with such force that it splatters across her chest and neck.  The combination of her efforts and your own post-orgasmic sensitivity rapidly brings you to your second peak, her head almost a blur on your rod as you feel your control slipping.  Moaning happily you hilt yourself in her, driving her face into you just before your [cock " + y + "] throbs, releasing a surprisingly large load that coats the inside of her mouth a thick white.  She moans as your spunk shoots into her, attempting to swallow as much of it as she can, though most dribbles out between your girth and her mouth and cascades down onto the rest of her body in thick globules.  Sighing, you draw her off your shrinking member, making sure as her lips slide down you that they leave you completely clean of any evidence of your climax.  Satisfied, you release her head, which immediately slumps down and begins snoring gently, still drooling cum onto her chest.  As you start to check her for anything valuable, you wonder if something else will happen across her before she can get free.  In such a vulnerable state, she'll probably wind up thoroughly used if anything does finds her.  Pocketing your new riches, you realize as you walk away that the slut would probably enjoy it anyway.");
+				outputText("\n\nWith every thrust her lips are pressed firmly against your crotch, [if (hasBalls = true) [sack]|groin] smacking into her soaked chin with a wet slap, spraying seed and spit with such force that it splatters across her chest and neck.  The combination of her efforts and your own post-orgasmic sensitivity rapidly brings you to your second peak, her head almost a blur on your rod as you feel your control slipping.  Moaning happily, you hilt yourself in her, driving her face into you just before your [cock " + y + "] throbs, releasing a surprisingly large load that coats the inside of her mouth a thick white.  She moans as your spunk shoots into her, attempting to swallow as much of it as she can, though most dribbles out between your girth and her mouth and cascades down onto the rest of her body in thick globules.  Sighing, you draw her off your shrinking member, making sure as her lips slide down you that they leave you completely clean of any evidence of your climax.  Satisfied, you release her head, which immediately slumps down and begins snoring gently, still drooling cum onto her chest.  As you start to check her for anything valuable, you wonder if something else will happen across her before she can get free.  In such a vulnerable state, she'll probably wind up thoroughly used if anything does finds her.  Pocketing your new riches, you realize as you walk away that the slut would probably enjoy it anyway.");
 			}
 			//(if (30 =< corruption < 70)
 			else if (player.cor > 30) {
-				outputText("You decide to check on your new lover, subtly searching her for anything useful at the same time.  You slice away the bindings on her arms as you check her, ensuring she isn't keeping anything hidden anything behind her back.  She stirs slightly as your hands roam across her, eyes fluttering drunkenly as she tries to focus on you.  Her hands slowly move to yours, taking hold of them gently and pressing them against her taut belly.  Your brow furrows in confusion for a second, before a flash of understanding rushes through your head; she seems to think that she's pregnant!  Then again, considering how pent up you were before you flooded her, maybe she's not far wrong.");
+				outputText("You decide to check on your new lover, subtly searching her for anything useful at the same time.  You slice away the bindings on her arms as you check her, ensuring she isn't keeping anything hidden anything behind her back.  She stirs slightly as your hands roam across her, eyes fluttering drunkenly as she tries to focus on you.  Her hands slowly move to yours, taking hold of them gently and pressing them against her taut belly.  Your brow furrows in confusion for a second, before a flash of understanding rushes through your head; she seems to think that she's pregnant!  Then again, considering how pent-up you were before you flooded her, maybe she's not far wrong.");
 
 				outputText("\n\nYou rub her stomach slightly, watching as the apparent mother-to-be closes her eyes, resting her head against the tree as she coos softly at your touch.  Before long you're ready to head back to camp, but not until you've severed the bonds of the slumbering girl, though you're not sure whether it was out of pity or simply because of the chance that she's carrying your progeny.");
 			}
 			else {
-				outputText("You make sure she's comfortable before checking her for anything that could help your quest.  She stirs slightly as your hands caress her, eyes fluttering drunkenly as she tries to focus on you.  Something in the way her eyes bore into you fills you with a sense of shame at having taken advantage of her and you quickly sever her bonds, reasoning that she'll still be too weak to try anything.");
-				outputText("\n\nHer newly freed hands slowly move to yours, taking hold of them gently and pressing them against her taut belly.  Your brow furrows in confusion for a second, before a flash of understanding rushes through your head; she seems to think that she's pregnant!  Then again, considering how pent up you were before you finally flooded her, maybe she's not far wrong.  Though a little taken aback by the realization, you start to rub her stomach softly, watching as the apparent mother-to-be closes her eyes and rests her head against the tree, cooing happily at your touch.  You stay with her for a while, until she falls asleep again and reluctantly ready yourself to head back to camp, smiling softly at her contented expression.");
+				outputText("You make sure she's comfortable before checking her for anything that could help your quest.  She stirs slightly as your hands caress her, eyes fluttering drunkenly as she tries to focus on you.  Something in the way her eyes bore into you fills you with a sense of shame at having taken advantage of her, and you quickly sever her bonds, reasoning that she'll still be too weak to try anything.");
+				outputText("\n\nHer newly freed hands slowly move to yours, taking hold of them gently and pressing them against her taut belly.  Your brow furrows in confusion for a second, before a flash of understanding rushes through your head; she seems to think that she's pregnant!  Then again, considering how pent-up you were before you finally flooded her, maybe she's not far wrong.  Though a little taken aback by the realization, you start to rub her stomach softly, watching as the apparent mother-to-be closes her eyes and rests her head against the tree, cooing happily at your touch.  You stay with her for a while, until she falls asleep again and reluctantly ready yourself to head back to camp, smiling softly at her contented expression.");
 			}
 
 			//Plus gems and such
