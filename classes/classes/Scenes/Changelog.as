@@ -283,9 +283,10 @@ package classes.Scenes
 			outputText("-New usable items: hundred of iron/moonstone/skymetal/ebonbloom arrowheads, moonstone (ore) and unicorn hair. Made by Konstantin after unlocking his Smelting option using matching material, ore can be mined at night in quarry located in mountains (req. lvl 2+ mining skill), hair is gained from any unicorn npc that is in camp (Celess, Diana). Whole pack cost 1 gem for each.\n");
 			outputText("-Mining at Quarry will now give exp to mining skill. Ores can be found starting from lvl 1 of that skill. Level of it would also affect in smaller or larger degree amount of mined stones/gems.\n");
 			outputText("-There is possible to veture outside camp at night now. Places have now daylight & night version. (currently only quarry is possible to visit now at night)\n");
-			outputText("-\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-Revisiting Woodcutting area or Quarry area would start with slight different text (no you nto gonna feel agian like your PC stumbled on that area for the first time.... 1,234th first time :P\n");
+			outputText("-Added new skill: Mining. It level cap is 2 at lvl 0 and 20 at lvl 18+. Leveled by mining in various places in Mareth and the higher level the better ores or more material can be gained. Ocassionaly even chance to mine precious items will be boosted by higher level of that skill.\n");
+			outputText("-Atlach Nacha bonuses changed to +230% to Str racial multi, +265% to Tou racial multi, +300% to Int racial multi, +300% to Lib racial multi, -60% to Wis racial multi, +90 to Sens. It can now also reach Greater Atlach Nacha at 30+ pts with following bonuses: +340% to Str racial multi, +400% to Tou racial multi, +425% to Int racial multi, +425% to Lib racial multi, -90% to Wis racial multi, +150 to Sens. ");
+			outputText("Now it would additionaly could adccess Venom Glands internal mutation in addition to Arachnid Book Lung & Tracheal System.\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");

@@ -10534,15 +10534,13 @@ use namespace CoC;
 				score++;
 			// Perk +3 (TransformationImmunity)
 			if (hasPerk(PerkLib.TransformationImmunityAtlach))
-				score+=3;/*
-			// Perk +6 (Arachnid book lung)
+				score+=3;
 			if (hasPerk(MutationsLib.ArachnidBookLung))
 				score+=2;
 			if (hasPerk(MutationsLib.ArachnidBookLungPrimitive))
 				score+=2;
 			if (hasPerk(MutationsLib.ArachnidBookLungEvolved))
 				score+=2;
-			// Perk +3 (Tracheal)
 			if (hasPerk(MutationsLib.TrachealSystem))
 				score++;
 			if (hasPerk(MutationsLib.TrachealSystemPrimitive))
@@ -10551,13 +10549,12 @@ use namespace CoC;
 				score++;
 			if (hasPerk(MutationsLib.TrachealSystemFinalForm))
 				score++;
-			// Perk +3 (VenomGland)
 			if (hasPerk(MutationsLib.VenomGlands))
 				score++;
 			if (hasPerk(MutationsLib.VenomGlandsPrimitive))
 				score++;
 			if (hasPerk(MutationsLib.VenomGlandsEvolved))
-				score++;*/
+				score++;
 			if (isGargoyle()) score = 0;
 			if (hasPerk(PerkLib.ElementalBody)) score = 0;
 			End("Player","racialScore");
@@ -13154,26 +13151,26 @@ use namespace CoC;
 			}//+10/10-20
 			score = atlachNachaScore();
 			if (score >= 30) {
-				//30 Greater Atlach Nacha(360) +115 Strength +135 Toughness +150 Intelligence +150 Libido -50 wisdom +50 min/max sensitivity
-				maxStrCap2 += 115;
-				maxTouCap2 += 135;
-				maxIntCap2 += 150;
-				maxLibCap2 += 150;
-				maxWisCap2 -= 50;
-				currentSen += 50;
+				//30 Greater Atlach Nacha(1350)
+				maxStrCap2 += 340;
+				maxTouCap2 += 400;
+				maxIntCap2 += 425;
+				maxLibCap2 += 425;
+				maxWisCap2 -= 90;
+				currentSen += 150;
 			} else if (score >= 21) {
-				//21 Atlach Nacha(945) +80 Strength +90 Toughness +100 Intelligence +100 Libido -50 wisdom +50 sensitivity
-				maxStrCap2 += 280;
-				maxTouCap2 += 315;
-				maxIntCap2 += 350;
-				maxLibCap2 += 350;
-				maxWisCap2 -= 50;
+				//21 Atlach Nacha(945)
+				maxStrCap2 += 230;
+				maxTouCap2 += 265;
+				maxIntCap2 += 300;
+				maxLibCap2 += 300;
+				maxWisCap2 -= 60;
 				currentSen += 90;
 			} else if (score >= 14) {
-				//14 Incomplete Atlach Nacha(190) +50 toughness +75 intelligence +20 Libido -20 wisdom
+				//14 Incomplete Atlach Nacha(190)
 				maxTouCap2 += 60;
 				maxIntCap2 += 100;
-				maxLibCap2 += 40;
+				maxLibCap2 += 60;
 				maxWisCap2 -= 10;
 			}
 			if (hasPerk(PerkLib.ElementalBody)) {
