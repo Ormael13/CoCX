@@ -41,7 +41,7 @@ public class RaceScoreBuilder {
 		addSlotRequirement(BodyData.SLOT_EYE_COLOR, type, score, failScore, customName);
 		return this;
 	}
-	public function eyeTypeOfColor(type:*, color:*, score:int, failScore:int=0):RaceScoreBuilder {
+	public function eyeTypeAndColor(type:*, color:*, score:int, failScore:int =0):RaceScoreBuilder {
 		addRequirement(
 				RacialRequirement.joinAnd(
 						"eyes",
@@ -69,10 +69,6 @@ public class RaceScoreBuilder {
 	}
 	public function hairColor(type:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
 		addSlotRequirement(BodyData.SLOT_HAIR_COLOR, type, score, failScore, customName);
-		return this;
-	}
-	public function height(type:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
-		addSlotRequirement(BodyData.SLOT_HEIGHT, type, score, failScore, customName);
 		return this;
 	}
 	public function hornType(type:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
@@ -117,6 +113,17 @@ public class RaceScoreBuilder {
 		addSlotRequirement(BodyData.SLOT_SKIN_COAT_COLOR, type, score, failScore, customName);
 		return this;
 	}
+	public function skinCoatTypeAndColor(type:*, color:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		addRequirement(
+				RacialRequirement.joinAnd(
+						"skin coat",
+						" ",
+						slotRequirement(BodyData.SLOT_SKIN_COAT_COLOR, color, score, failScore, "$name"),
+						slotRequirement(BodyData.SLOT_SKIN_COAT_TYPE, type, score, failScore)
+				)
+		);
+		return this;
+	}
 	public function skinPlainOnly(score:int, failScore:int=0):RaceScoreBuilder {
 		return customRequirement(
 				"skin",
@@ -157,9 +164,25 @@ public class RaceScoreBuilder {
 	public function noWings(score:int):RaceScoreBuilder {
 		return wingType(Wings.NONE, score);
 	}
-	public function gender(type:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
-		addSlotRequirement(BodyData.SLOT_GENDER, type, score, failScore, customName);
+	public function gender(value:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_GENDER, value, score, failScore, customName);
 		return this;
+	}
+	public function height(value:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_HEIGHT, value, score, failScore, customName);
+		return this;
+	}
+	public function corruption(value:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		addOperatorRequirement(
+				"stats",
+				"$value corruption",
+				function (body:BodyData):* { return body.player.cor},
+				null,
+				value,
+				score,
+				failScore,
+				customName
+				)
 	}
 	
 	public function hasCockOfType(type:CockTypesEnum, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
@@ -228,9 +251,9 @@ public class RaceScoreBuilder {
 	}
 	
 	/**
-	 * +1 per each perk present. Listed as a single entry named "mutations"
+	 * +N per each perk present. Listed as a single entry named "mutations"
 	 */
-	public function mutationPerks(perks:/*PerkType*/Array):RaceScoreBuilder {
+	public function mutationPerks(perks:/*PerkType*/Array, scorePerPerk:int=+1):RaceScoreBuilder {
 		return customScoreRequirement(
 				"perk",
 				"Mutations",
@@ -238,7 +261,7 @@ public class RaceScoreBuilder {
 				function (body:BodyData):int {
 					var score:int = 0;
 					for each (var perk:PerkType in perks) {
-						if (body.player.hasPerk(perk)) score++;
+						if (body.player.hasPerk(perk)) score+=scorePerPerk;
 					}
 					return score;
 				});
@@ -354,7 +377,7 @@ public class RaceScoreBuilder {
 			type:*,
 			score:int,
 			failScore: int,
-			customName:String
+			customName:String=""
 	):void {
 		var slotName:String = BodyData.Slots[slot].name;
 		var nameFn:Function = BodyData.Slots[slot].nameFn;
@@ -370,6 +393,45 @@ public class RaceScoreBuilder {
 				failScore,
 				minScore
 		));
+	}
+	
+	/**
+	 * @example
+	 * // Would generate requirement named "at least <50> strength"
+	 * addOperatorRequirement(
+	 *  "stats",
+	 *  "$value strength",
+	 *  function (body:BodyData):* { return body.player.str; },
+	 *  function (value:*):String { return "<"+value+">"; },
+	 *  AT_LEAST(50),
+	 *  +1,
+	 *  0
+	 * )
+	 *
+	 * @param pattern naming template, "$value" is replaced with stringified values
+	 * @param argumentFn `(body:BodyData)=>*`
+	 * @param nameFn `(value:*)=>String`
+	 * @param value Operator descriptor
+	 */
+	private function addOperatorRequirement(
+			group:String,
+			pattern:String,
+			argumentFn:Function,
+			nameFn:Function,
+			value:*,
+			score:int,
+			failScore:int,
+			customName:String=""
+	):void {
+		var oo:Object = RaceUtils.parseOperatorObject(value,nameFn,"["+race.name+" "+pattern+"]");
+		addRequirement(new RacialRequirement(
+				group,
+				customName || pattern.replace(/\$value/g,oo.name),
+				RaceUtils.composeOpArg(argumentFn, oo.operatorFn),
+				score,
+				failScore,
+				minScore
+		))
 	}
 	private function slotRequirement(
 			slot:int,

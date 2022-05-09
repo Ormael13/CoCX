@@ -383,6 +383,7 @@ public class CoC extends MovieClip
     public function run():void
     {
         trace("Loading races");
+        // to make error msgs appear here rather than after game load
         Races.load();
         mainMenu.mainMenu();
         this.stop();

@@ -7,8 +7,9 @@ package classes.IMutations
     import classes.PerkClass;
     import classes.PerkType;
     import classes.Player;
+import classes.Races;
 
-    public class ArachnidBookLungMutation extends PerkType
+public class ArachnidBookLungMutation extends PerkType
     {
         //v1 contains the mutation tier
         override public function desc(params:PerkClass = null):String {
@@ -52,7 +53,7 @@ package classes.IMutations
 
                     IMutationsLib.ArachnidBookLungIM.requireAdaptationsMutationSlot()
                             .requireCustomFunction(function (player:Player):Boolean {
-                                return player.spiderScore() >= 5 || player.atlachNachaScore() >= 21;
+                                return player.spiderScore() >= 5 || player.isRace(Races.ATLACH_NACHA,2);
                             }, "Arachnid race");
                 }
                 else{

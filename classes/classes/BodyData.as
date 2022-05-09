@@ -290,8 +290,9 @@ public class BodyData {
 		}
 	});
 	public function get gender():int {
-		return data[SLOT_HEIGHT];
+		return data[SLOT_GENDER];
 	}
+	
 	public static const SLOT_HEIGHT:int = _slotid++;
 	EnumValue.add(Slots,SLOT_HEIGHT, "HEIGHT", {
 		name: "height",

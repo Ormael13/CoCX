@@ -1492,14 +1492,14 @@ public class PlayerEvents extends BaseContent implements TimeAwareInterface {
 				needNext = true;
 			}
 			//Jungle’s Wanderer
-			if (player.redpandaScore() >= 6) {
+			if (player.isRace(Races.REDPANDA)) {
 				if (!player.hasPerk(PerkLib.JunglesWanderer)) {
 					//outputText("\nWhile stretching, you notice that you're much more flexible than you were before.  \n\n(<b>Gained Perk: Jungle’s Wanderer</b>)\n");
 					player.createPerk(PerkLib.JunglesWanderer, 0, 0, 0, 0);
 					//needNext = true;
 				}
 			}
-			else if (player.hasPerk(PerkLib.JunglesWanderer) && player.redpandaScore() < 6) {
+			else if (player.hasPerk(PerkLib.JunglesWanderer) && !player.isRace(Races.REDPANDA)) {
 				//outputText("\nYou notice that you aren't as flexible as you were when you had a more feline body.  \n\n(<b>Lost Perk: Jungle’s Wanderer</b>)\n");
 				player.removePerk(PerkLib.JunglesWanderer);
 				//needNext = true;

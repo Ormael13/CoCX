@@ -1079,7 +1079,7 @@ use namespace CoC;
 		public function isSlime():Boolean { return (hasPerk(PerkLib.DarkSlimeCore) || hasPerk(PerkLib.SlimeCore)); }
 		public function isHarpy():Boolean { return (harpyScore() > 10 || thunderbirdScore() > 15 || phoenixScore() > 15); }
 		public function isWerewolf():Boolean { return (werewolfScore() >= 12); }
-		public function isNightCreature():Boolean { return (isRace(Races.VAMPIRE) || batScore() >= 6 || isRace(Races.JIANGSHI)); }
+		public function isNightCreature():Boolean { return (isRace(Races.VAMPIRE) || isRace(Races.BAT) || isRace(Races.JIANGSHI)); }
 		public function hasDarkVision():Boolean { return (Eyes.Types[eyes.type].Darkvision); }
 		public function isHavingEnhancedHearing():Boolean { return (ears.type == Ears.ELVEN); }
 		//Weapons for Whirlwind
@@ -4196,13 +4196,6 @@ use namespace CoC;
 				else
 					race = "manticore";
 			}
-			if (TopRace == "red panda") {
-				race = "red-panda-morph";
-				if (faceType == Face.HUMAN)
-					race = "red-panda-" + mf("boy", "girl");
-				if (isTaur())
-					race = "red-panda-taur";
-			}
 			if (TopRace == "bear and panda") {
 				if (faceType == Face.PANDA) race = "panda-morph";
 				else race = "bear-morph";
@@ -4217,13 +4210,6 @@ use namespace CoC;
 						else race = "siren";
 					}
 				}
-			}
-			if (TopRace == "bat") {
-				race = "bat ";
-				race += mf("boy", "girl");
-			}
-			if (TopRace == "avian") {
-				race = "avian-morph";
 			}
 			if (TopRace == "poltergeist") {
 				if (TopScore >= 6) {
@@ -4262,15 +4248,6 @@ use namespace CoC;
 						race = "dark slime ";
 						race += mf("boi", "girl");
 					}
-				}
-			}
-			if (TopRace == "atlach nacha") {
-				if (TopScore >= 30) {
-					race = "greater Atlach Nacha"
-				} else if (TopScore >= 18) {
-					race = "Atlach Nacha"
-				} else if (TopScore >= 10) {
-					race = "incomplete Atlach Nacha"
 				}
 			}
 			if (chimeraScore() >= 3)
@@ -4821,7 +4798,7 @@ use namespace CoC;
 //				chimeraCounter++;
 			if (manticoreScore() >= 15)
 				chimeraCounter += 2;
-			if (redpandaScore() >= 8)
+			if (isRace(Races.REDPANDA))
 				chimeraCounter++;
 			if (bearpandaScore() >= 10)
 				chimeraCounter++;
@@ -4835,17 +4812,17 @@ use namespace CoC;
 				chimeraCounter++;
 			if (melkieScore() >= 18)
 				chimeraCounter++;
-			if (batScore() >= 10)
+			if (isRace(Races.BAT))
 				chimeraCounter++;
 			if (isRace(Races.VAMPIRE))
 				chimeraCounter++;
 			if (jabberwockyScore() >= 10)
 				chimeraCounter++;
-			if (avianScore() >= 9)
+			if (isRace(Races.AVIAN))
 				chimeraCounter++;
-/*			if (gryphonScore() >= 9)
+/*			if (isRace(Races.GRYPHON))
 				chimeraCounter++;
-			if (peacockScore() >= 9)
+			if (isRace(Races.PEACOCK))
 				chimeraCounter++;
 */			if (isRace(Races.GARGOYLE))
 				chimeraCounter++;
@@ -4859,7 +4836,7 @@ use namespace CoC;
 				chimeraCounter++;
 			if (ratatoskrScore() >= 12)
 				chimeraCounter++;
-			if (atlachNachaScore() >= 12)
+			if (isRace(Races.ATLACH_NACHA))
 				chimeraCounter++;
 			if (cyclopScore() >= 12)
 				chimeraCounter++;
@@ -9365,29 +9342,6 @@ use namespace CoC;
 			return MaleMindbreakerCounter;
 		}
 
-		//Red Panda
-		public function redpandaScore():Number {
-			Begin("Player","racialScore","redpanda");
-			var redpandaCounter:Number = 0;
-			if (faceType == Face.RED_PANDA)
-				redpandaCounter += 2;
-			if (ears.type == Ears.RED_PANDA)
-				redpandaCounter++;
-			if (tailType == Tail.RED_PANDA)
-				redpandaCounter++;
-			if (arms.type == Arms.RED_PANDA)
-				redpandaCounter++;
-			if (lowerBody == LowerBody.RED_PANDA)
-				redpandaCounter++;
-			if (redpandaCounter >= 2 && skin.base.pattern == Skin.PATTERN_RED_PANDA_UNDERBODY)
-				redpandaCounter++;
-			if (redpandaCounter >= 2 && skinType == Skin.FUR)
-				redpandaCounter++;
-			redpandaCounter = finalRacialScore(redpandaCounter, Races.REDPANDA);
-			End("Player","racialScore");
-			return redpandaCounter;
-		}
-
 		//Bear or Panda
 		public function bearpandaScore():Number {
 			Begin("Player","racialScore","bearpanda");
@@ -9417,110 +9371,7 @@ use namespace CoC;
 
 		//Determine Avian Rating
 		public function avianScore():Number {
-			Begin("Player","racialScore","avian");
-			var avianCounter:Number = 0;
-			if (hairType == Hair.FEATHER)
-				avianCounter++;
-			if (faceType == Face.AVIAN)
-				avianCounter++;
-			if (ears.type == Ears.AVIAN)
-				avianCounter++;
-			if (tailType == Tail.AVIAN)
-				avianCounter++;
-			if (arms.type == Arms.AVIAN)
-				avianCounter++;
-			if (lowerBody == LowerBody.AVIAN)
-				avianCounter++;
-			if (wings.type == Wings.FEATHERED_AVIAN)
-				avianCounter += 2;
-			if (hasCoatOfType(Skin.FEATHER))
-				avianCounter++;
-			if (avianCocks() > 0)
-				avianCounter++;
-			avianCounter = finalRacialScore(avianCounter, Races.AVIAN);
-			End("Player","racialScore");
-			return avianCounter;
-		}
-
-		//Determine Gryphon Rating
-		public function gryphonScore():Number {
-			Begin("Player","racialScore","gryphon");
-			var gryphonCounter:Number = 0;
-			if (hairType == Hair.FEATHER)
-				gryphonCounter++;
-			if (faceType == Face.AVIAN)
-				gryphonCounter++;
-			if (ears.type == Ears.GRYPHON)
-				gryphonCounter++;
-			if (eyes.type == Eyes.GRYPHON)
-				gryphonCounter++;
-			if (tailType == Tail.GRIFFIN)
-				gryphonCounter++;
-			if (arms.type == Arms.GRYPHON)
-				gryphonCounter++;
-			if (lowerBody == LowerBody.GRYPHON)
-				gryphonCounter++;
-			if (wings.type == Wings.FEATHERED_AVIAN)
-				gryphonCounter += 2;
-			if (hasCoatOfType(Skin.FEATHER))
-				gryphonCounter++;
-			if (gryphonCocks() > 0)
-				gryphonCounter++;
-			gryphonCounter = finalRacialScore(gryphonCounter, Races.GRYPHON);
-			End("Player","racialScore");
-			return gryphonCounter;
-		}
-
-		//Determine Peacock Rating
-		public function peacockScore():Number {
-			Begin("Player","racialScore","peacock");
-			var peacockCounter:Number = 0;
-			if (hairType == Hair.FEATHER)
-				peacockCounter++;
-			if (faceType == Face.AVIAN)
-				peacockCounter++;
-			if (ears.type == Ears.AVIAN)
-				peacockCounter++;
-			if (tailType == Tail.AVIAN)
-				peacockCounter++;
-			if (arms.type == Arms.AVIAN)
-				peacockCounter++;
-			if (lowerBody == LowerBody.AVIAN)
-				peacockCounter++;
-			if (wings.type == Wings.FEATHERED_AVIAN)
-				peacockCounter += 2;
-			if (hasCoatOfType(Skin.FEATHER))
-				peacockCounter++;
-			if (avianCocks() > 0)
-				peacockCounter++;
-			peacockCounter = finalRacialScore(peacockCounter, Races.PEACOCK);
-			End("Player","racialScore");
-			return peacockCounter;
-		}
-
-		//Bat
-		public function batScore():int {
-            Begin("Player","racialScore","bat");
-			var counter:int = 0;
-			if (ears.type == Ears.BAT)
-				counter++;
-			if (ears.type == Ears.VAMPIRE)
-				counter -= 10;
-			if (arms.type == Arms.BAT)
-				counter += 5;
-			if (faceType == Face.VAMPIRE)
-				counter += 2;
-			if (eyes.type == Eyes.VAMPIRE)
-				counter++;
-			if (rearBody.type == RearBody.BAT_COLLAR)
-				counter++;
-			if (counter >= 8) {
-				if (lowerBody == LowerBody.HUMAN)
-					counter++;
-			}
-			counter = finalRacialScore(counter, Races.BAT);
-			End("Player","racialScore");
-			return counter < 0? 0:counter;
+			return racialScore(Races.AVIAN);
 		}
 
 		//Vampire
@@ -9532,86 +9383,6 @@ use namespace CoC;
 			return lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS && arms.type == Arms.SPIDER && eyes.type == Eyes.SPIDER && ears.type == Ears.ELFIN
 			&& rearBody.type == RearBody.ATLACH_NACHA && faceType == Face.SPIDER_FANGS && hasCoatOfType(Skin.CHITIN)
 			&& eyes.colour == "red" && coatColor == "midnight purple" && hairColor == "midnight purple";
-		}
-
-		public function atlachNachaScore():int {
-			var score:int = 0;
-			Begin("Player","racialScore","atlachNacha");
-			if (lowerBody == LowerBody.CHITINOUS_SPIDER_LEGS) {
-				// Chitin glove leg 1
-				score++;
-			} else if (lowerBody == LowerBody.ATLACH_NACHA) {
-				// Atlach drider body with tentacle 2 (From merge)
-				score += 2;
-			}
-			// Chitin glove arm 1
-			if (arms.type == Arms.SPIDER)
-				score++;
-			// Omni Eye on forehead 1
-			if (eyes.type == Eyes.SPIDER) {
-				score++;
-				// Red eye color 1
-				if (eyes.colour == "red")
-					score++;
-			}
-			if (tailType == Tail.SPIDER_ADBOMEN)
-				score++;
-			// Atlach Spider leg wings 4
-			if (rearBody.type == RearBody.ATLACH_NACHA)
-				score += 4;
-			// Spider fang face 1
-			if (faceType == Face.SPIDER_FANGS)
-				score++;
-			// Partial chitin//chitin 1
-			if (hasCoatOfType(Skin.CHITIN)) {
-				score++;
-				// Midnight purple chitin color 1
-				if (coatColor == "midnight purple")
-					score++;
-			}
-			// Midnight purple hair 1
-			if (hairColor == "midnight purple")
-				score++;
-			// elfin ears
-			if (ears.type == Ears.ELFIN)
-				score++;
-			// Corruption 50+ 1
-			if (cor >= 50)
-				score++;
-			// Ovipositor +1
-			if (canOvipositSpider())
-				score++
-			// Insanity +1 (Gained from merging)
-			if (hasPerk(PerkLib.Insanity))
-				score++;
-			// Perk +3 (TransformationImmunity)
-			if (hasPerk(PerkLib.TransformationImmunityAtlach))
-				score+=3;/*
-			// Perk +6 (Arachnid book lung)
-			if (hasPerk(MutationsLib.ArachnidBookLung))
-				score+=2;
-			if (hasPerk(MutationsLib.ArachnidBookLungPrimitive))
-				score+=2;
-			if (hasPerk(MutationsLib.ArachnidBookLungEvolved))
-				score+=2;
-			// Perk +3 (Tracheal)
-			if (hasPerk(MutationsLib.TrachealSystem))
-				score++;
-			if (hasPerk(MutationsLib.TrachealSystemPrimitive))
-				score++;
-			if (hasPerk(MutationsLib.TrachealSystemEvolved))
-				score++;
-			if (hasPerk(MutationsLib.TrachealSystemFinalForm))
-				score++;
-			// Perk +3 (VenomGland)
-			if (hasPerk(MutationsLib.VenomGlands))
-				score++;
-			if (hasPerk(MutationsLib.VenomGlandsPrimitive))
-				score++;
-			if (hasPerk(MutationsLib.VenomGlandsEvolved))
-				score++;*/
-			End("Player","racialScore");
-			return score;
 		}
 
 		public function fusedElementalScore():Number {
@@ -11383,11 +11154,6 @@ use namespace CoC;
 					currentSen += 45;
 				}
 			}//+60/50-60
-			if (redpandaScore() >= 8) {
-				maxStrCap2 += 15;
-				maxSpeCap2 += 75;
-				maxIntCap2 += 30;
-			}
 			if (bearpandaScore() >= 10) {
 				maxStrCap2 += 100;
 				maxTouCap2 += 70;
@@ -11756,11 +11522,6 @@ use namespace CoC;
 					maxWisCap2 -= 50;
 				}
 			}
-			if (avianScore() >= 9) {
-				maxStrCap2 += 30;
-				maxSpeCap2 += 75;
-				maxIntCap2 += 30;
-			}
 			if (isNaga()) {
 				if (lowerBody == LowerBody.FROSTWYRM) {
 					maxStrCap2 += 20;
@@ -11798,12 +11559,6 @@ use namespace CoC;
 			if (isAlraune()) {
 				maxTouCap2 += 15;
 				maxLibCap2 += 15;
-			}
-			if (batScore() >= 10) {
-				maxStrCap2 += 35;
-				maxSpeCap2 += 35;
-				maxIntCap2 += 35;
-				maxLibCap2 += 45;
 			}
 			if (internalChimeraScore() >= 1 && !hasPerk(PerkLib.RacialParagon)) {
 				maxStrCap2 += 5 * internalChimeraScore();
@@ -11874,30 +11629,6 @@ use namespace CoC;
 					currentSen += 20;
 				}
 			}//+10/10-20
-			score = atlachNachaScore();
-			if (score >= 30) {
-				//30 Greater Atlach Nacha(360) +115 Strength +135 Toughness +150 Intelligence +150 Libido -50 wisdom +50 min/max sensitivity
-				maxStrCap2 += 115;
-				maxTouCap2 += 135;
-				maxIntCap2 += 150;
-				maxLibCap2 += 150;
-				maxWisCap2 -= 50;
-				currentSen += 50;
-			} else if (score >= 21) {
-				//21 Atlach Nacha(945) +80 Strength +90 Toughness +100 Intelligence +100 Libido -50 wisdom +50 sensitivity
-				maxStrCap2 += 280;
-				maxTouCap2 += 315;
-				maxIntCap2 += 350;
-				maxLibCap2 += 350;
-				maxWisCap2 -= 50;
-				currentSen += 90;
-			} else if (score >= 14) {
-				//14 Incomplete Atlach Nacha(190) +50 toughness +75 intelligence +20 Libido -20 wisdom
-				maxTouCap2 += 60;
-				maxIntCap2 += 100;
-				maxLibCap2 += 40;
-				maxWisCap2 -= 10;
-			}
 			if (hasPerk(PerkLib.ElementalBody)) {
 				if (perkv1(PerkLib.ElementalBody) == 1) {
 					if (perkv2(PerkLib.ElementalBody) == 1) {

@@ -158,7 +158,7 @@ public class Race {
 			if (present) {
 				s += "[font-blue]"+tier.nameFor(body)+"[/font]";
 			} else {
-				s += tier.name;
+				s += tier.nameFor(body);
 			}
 			s += " ("+tier.minScore+") </b>";
 			s += tier.describeBuffs(present ? body : null);

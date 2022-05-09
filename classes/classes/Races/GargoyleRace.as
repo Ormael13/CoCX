@@ -38,7 +38,8 @@ public class GargoyleRace extends Race {
 				.customNamingFunction(
 						function(body:BodyData):String {
 							if (body.player.hasPerk(PerkLib.GargoylePure)) return "pure gargoyle";
-							else return "corrupted gargoyle"
+							else if (body.player.hasPerk(PerkLib.GargoyleCorrupted))  return "corrupted gargoyle"
+							else return "gargoyle" // to display the tier name in race db
 						}
 				)
 				.withDynamicBuffs("Material-dependent bonuses", calcBuffs)

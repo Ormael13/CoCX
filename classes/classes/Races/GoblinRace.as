@@ -39,7 +39,7 @@ public class GoblinRace extends Race {
 				},
 				"plain skin; "
 		)
-				.eyeTypeOfColor(Eyes.HUMAN, ANY(GoblinEyeColors), +1)
+				.eyeTypeAndColor(Eyes.HUMAN, ANY(GoblinEyeColors), +1)
 				.hairColor(ANY(GoblinHairColors), +1)
 				.armType(Arms.HUMAN, +1)
 				.legType(LowerBody.HUMAN, +1)

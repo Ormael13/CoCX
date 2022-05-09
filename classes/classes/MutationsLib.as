@@ -588,7 +588,7 @@ public class MutationsLib
 				//Perk związany ze skórą
 				//Tier 1
 				ArachnidBookLung.requireAdaptationsMutationSlot().requireCustomFunction(function (player:Player):Boolean {
-					return player.spiderScore() >= 5 || player.atlachNachaScore() >= 21;
+					return player.spiderScore() >= 5 || player.isRace(Races.ATLACH_NACHA, 2);
 				}, "Arachnid race");
 				BlackHeart.requireHeartMutationSlot().requirePerk(PerkLib.DarkCharm).requireCor(100).requireCustomFunction(function (player:Player):Boolean {
 					return player.demonScore() >= 11;
@@ -762,7 +762,7 @@ public class MutationsLib
 					return player.scyllaScore() >= 7;
 				}, "Scylla race");
 				TrachealSystem.requireCustomFunction(function (player:Player):Boolean {
-					return player.beeScore() >= 14 || player.mantisScore() >= 12 || player.scorpionScore() >= 4 || player.spiderScore() >= 5 || player.cancerScore() >= 13 || player.atlachNachaScore() >= 21;
+					return player.beeScore() >= 14 || player.mantisScore() >= 12 || player.scorpionScore() >= 4 || player.spiderScore() >= 5 || player.cancerScore() >= 13 || player.isRace(Races.ATLACH_NACHA,2);
 				}, "Any insect race");
 				TwinHeart.requireAdaptationsMutationSlot().requireCustomFunction(function (player:Player):Boolean {
 					return player.centaurScore() >= 8 || player.unicornScore() >= 12 || player.sphinxScore() >= 14 || player.cancerScore() >= 13 || player.isTaur() || player.isDrider();

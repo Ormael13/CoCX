@@ -1,6 +1,7 @@
 package classes.Scenes.NPCs {
 import classes.BodyParts.Face;
 import classes.Items.Consumables.VampireBlood;
+import classes.Races;
 import classes.Scenes.Camp;
 import classes.StatusEffects;
 import classes.display.SpriteDb;
@@ -148,7 +149,7 @@ public class DivaScene extends XXCNPC{
             if (timesReduced < 5)
                 timesReduced++;
         }
-        if (player.batScore() >= 6 || player.vampireScore() >= 6) {
+        if (player.isRace(Races.BAT) || player.isRace(Races.VAMPIRE)) {
             if (player.isFemale()) {
                 display(baseRef + "female/bat"); //full scene
                 player.sexReward("vaginalFluids","Vaginal");
