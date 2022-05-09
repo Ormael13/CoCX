@@ -760,9 +760,18 @@ use namespace CoC;
 				return;
 			}
 			if (loss) clearOutput();
+
+			sceneHunter.selectLossMenu([
+					[0, "Get Swarmed", getSwarmed, "Req. non-taur lower body", !player.isTaur()],
+					[1, "Tag Team", tagTeam, "Req. non-taur lower body", !player.isTaur()],
+					[2, "Get Pinned", getPinned, "Req. taur-like lower body", player.isTaur()],
+					[2, "Tied To Log", tiedToTheTree, "Req. taur-like lower body", player.isTaur(), "Let them tie you to the closest log."]
+				],
+				"Well, this is bad. Each <b>member of the horde will take his reward anyway... if so, maybe you could enjoy this too?</b>\n\n"
+			);
 			//CENTAUR
 			if(player.isTaur()) {
-				if(rand(2) == 0 && (player.cockTotal() == 0 || player.gender == 3)) {
+				function getPinned():void {
 					//(First encounter)
 					if(!player.hasStatusEffect(StatusEffects.ImpGangBang)) {
 						outputText("The imps stand anywhere from two to four feet tall, with scrawny builds and tiny demonic wings. Their red and orange skin is dirty, and their dark hair looks greasy. Some are naked, but most are dressed in ragged loincloths that do little to hide their groins. They all have a " + monster.cockDescriptShort(0) + " as long and thick as a man's arm, far oversized for their bodies. Watching an imp trip over its " + monster.cockDescriptShort(0) + " would be funny, if you weren't surrounded by a horde of leering imps closing in from all sides...\n\n");
@@ -854,7 +863,7 @@ use namespace CoC;
 					else outputText("your eyes roll back as you squirm");
 					outputText(".\n\n");
 
-					outputText("Finally the big imp pulls back his " + Appearance.cockNoun(CockTypesEnum.HORSE) + ", each ridge pulling on your pussy flesh as he slides out. You yelp and buck as the mushroom-head catches on your folds. ");
+					outputText("Finally, the big imp pulls back his " + Appearance.cockNoun(CockTypesEnum.HORSE) + ", each ridge pulling on your pussy flesh as he slides out. You yelp and buck as the mushroom-head catches on your folds. ");
 					//(If the character has a cock)
 					if(player.cockTotal() > 0) outputText("Your [cocks] bounces as the bulge passes over it.  ");
 					outputText("You moan as the mushroom-head reaches the entrance of your " + vaginaDescript(0) + ", your stretched pussy-flesh slowly returning to normal. The master imp pushes forward again, reclaiming your pussy for his monstrous cock. ");
@@ -862,7 +871,7 @@ use namespace CoC;
 					if(player.cor < 50) outputText("You try to buck your " + hipDescript() + ", fighting to break free as the bulge of his cock-head works its way high up into your belly. You're held down by too many imps. You can only writhe around the hot shaft stretching out your " + vaginaDescript(0) + ". The big imp grunts as his cock-head pops past your cervix, and you moan and shake in pain.  ");
 					//(High corruption)
 					else outputText("You moan in ecstasy as the hot " + Appearance.cockNoun(CockTypesEnum.HORSE) + " pushes deep into your " + vaginaDescript(0) + ", turning every inch of your pussy into a pleasure-sheath for the big imp. You know you're nothing but a fuck-toy for this corrupt creature, just a wet pussy for him to fill with cum, and the thought almost makes you orgasm as he forces his huge cock-head past your cervix.  ");
-					outputText("Finally the corrupt cock bottoms out against your womb. The imp pulls back again, and starts to fuck you slowly.\n\n");
+					outputText("Finally, the corrupt cock bottoms out against your womb. The imp pulls back again, and starts to fuck you slowly.\n\n");
 
 					//(If the character has breasts)
 					if(player.biggestTitSize() >= 2) outputText("The slow fucking shakes your breasts, and the imps sucking at your nipples cling tightly to your monstrously swollen [allbreasts]. Your " + biggestBreastSizeDescript() + " have grown three cup sizes since the imps pumped their venom into you. An ache starts deep in the base of your tits and works its way to your sore " + nippleDescript(0) + ". Your already bloated nipples swell as the imps suckle, and you gasp as the first rush of milk spills into their mouths. Your rider reaches around and starts to milk your udders, moving his hands between your [allbreasts] and forcing out more milk for his gangmates.\n\n");
@@ -923,12 +932,14 @@ use namespace CoC;
 					if(player.cor < 50) outputText("Your last coherent thought is to find a way to better hide your camp, so this never happens again.");
 					//(High corruption)
 					else outputText("Your last coherent thought is to find a way to make your own mutated master imp, maybe even a stable full of them...");
-					player.sexReward("cum");
+					player.sexReward("cum", "Vaginal");
 					dynStats("lib", 2, "cor", 3);
 					if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 14); //Bigger imp means faster pregnancy
+					if (CoC.instance.inCombat) cleanupAfterCombat();
+					else doNext(playerMenu);
 				}
 				//Scene number 2 - male possible.
-				else {
+				function tiedToTheTree():void {
 					//Scene 2 (Centaur, vaginal)
 					if(player.hasStatusEffect(StatusEffects.ImpGangBang)) {
 						//(Subsequent encounters - Low Corruption)
@@ -1071,7 +1082,7 @@ use namespace CoC;
 					if(player.hasVagina()) outputText("womb");
 					//(If the player doesn't have a vagina)
 					else outputText("guts");
-					outputText(" and he pumps more jism into you than his balls could possibly hold. Your belly stretches with every blast of cum and you shriek around yet another cock in your throat.\n\n");
+					outputText(" and he pumps more jism into you than his balls could possibly hold. Your belly stretches with every blast of cum, and you shriek around yet another cock in your throat.\n\n");
 
 					//(If the character has breasts)
 					if(player.biggestTitSize() > 2) outputText("The imp riding your " + biggestBreastSizeDescript() + " cums, his load lost in the flood of jism dripping off your abused fuck-udders. ");
@@ -1107,11 +1118,15 @@ use namespace CoC;
 					else {
 						if(player.buttChange(monster.cockArea(2), true)) outputText("\n");
 					}
+
+					if (CoC.instance.inCombat) cleanupAfterCombat();
+					else doNext(playerMenu);
 				}
 			}
 			//NOT CENTAUR
 			else {
-				if(rand(2) == 0 && (player.cockTotal() == 0 || player.gender == 3)) {
+				//if(rand(2) == 0 && (player.cockTotal() == 0 || player.gender == 3)) {
+				function getSwarmed():void {
 					//(First encounter)
 					if(!player.hasStatusEffect(StatusEffects.ImpGangBang)) {
 						outputText("The imps stand anywhere from two to four feet tall, with scrawny builds and tiny demonic wings. Their red and orange skin is dirty, and their dark hair looks greasy. Some are naked, but most are dressed in ragged loincloths that do little to hide their groins. They all have a " + monster.cockDescriptShort(0) + " as long and thick as a man's arm, far oversized for their bodies. Watching an imp trip over its " + monster.cockDescriptShort(0) + " would be funny, if you weren't surrounded by a horde of leering imps closing in from all sides...\n\n");
@@ -1212,9 +1227,9 @@ use namespace CoC;
 					if(player.biggestTitSize() >= 3) outputText(" and " + player.allBreastsDescript());
 					outputText(". The master imp pounds into you and you can see his " + monster.ballsDescriptLight() + " swell. Through the haze of your approaching orgasm you realize what's about to happen. Those oversized balls are about to pump more cum into you than any normal man could ever produce. They're going to pump demonic cum right into your womb.  ");
 					//(Low Corruption)
-					if(player.cor < 50) outputText("You scream as the base of his " + Appearance.cockNoun(CockTypesEnum.HORSE) + " bloats with corrupted jism, the thick bulge stretching your pussy even more as it pumps along the imp's shaft. The bulge swells your belly and you watch as it moves towards your womb. Another thick bulge forms at the base of the master imp's cock, and you thrash wildly, yelling in protest. \"<i>NOO - O - O - OOOOHhh!</i>\" The hot cum floods into your womb, and you hit your own orgasm, shaking as your " + vaginaDescript(0) + " clamps down on his cock and milks it of waves of cum. Another orgasm hits on the heels of the first one, and you buck as more demon-cum floods your womb. Gasping for air, you continue to come as your belly swells. Even as he pumps more corrupt cum into you the big imp keeps raping you, forcing you to another peak before you've come down from the last one.");
+					if(player.cor < 50) outputText("You scream as the base of his " + Appearance.cockNoun(CockTypesEnum.HORSE) + " bloats with corrupted jism, the thick bulge stretching your pussy even more as it pumps along the imp's shaft. The bulge swells your belly, and you watch as it moves towards your womb. Another thick bulge forms at the base of the master imp's cock, and you thrash wildly, yelling in protest. \"<i>NOO - O - O - OOOOHhh!</i>\" The hot cum floods into your womb, and you hit your own orgasm, shaking as your " + vaginaDescript(0) + " clamps down on his cock and milks it of waves of cum. Another orgasm hits on the heels of the first one, and you buck as more demon-cum floods your womb. Gasping for air, you continue to come as your belly swells. Even as he pumps more corrupt cum into you the big imp keeps raping you, forcing you to another peak before you've come down from the last one.");
 					//(High corruption)
-					else outputText("The thought of all that demon-jism in your womb pushes you over the edge. You cum hard, bucking your hips against the " + Appearance.cockNoun(CockTypesEnum.HORSE) + " pumping hot cum into your belly. Your eyes roll back in your head and you scream out your ecstasy as thick jets of cum fill your pussy. The imp keeps thrusting into his fuck-toy even as he fills your womb with his cum, forcing you to another peak before you've come down from the last one. The big imp is your master now.");
+					else outputText("The thought of all that demon-jism in your womb pushes you over the edge. You cum hard, bucking your hips against the " + Appearance.cockNoun(CockTypesEnum.HORSE) + " pumping hot cum into your belly. Your eyes roll back in your head, and you scream out your ecstasy as thick jets of cum fill your pussy. The imp keeps thrusting into his fuck-toy even as he fills your womb with his cum, forcing you to another peak before you've come down from the last one. The big imp is your master now.");
 					outputText("  You nearly black out as the orgasm blasts through you,  arching your back off the ground as the orgasm wracks your body, eyes rolling back in your head as your womb swells.\n\n");
 
 					outputText("Imp-jism rains down on your helpless spasming body. The imps spew cum into your hair, across your swollen belly, over your face");
@@ -1235,7 +1250,7 @@ use namespace CoC;
 					dynStats("lib", 2, "cor", 3);
 					if (!player.isGoblinoid()) player.knockUp(PregnancyStore.PREGNANCY_IMP, PregnancyStore.INCUBATION_IMP - 14); //Bigger imp means faster pregnancy
 				}
-				else {
+				function tagTeam():void {
 					//Imp Scene 2 (Bipedal, vaginal)
 					//Tag-team
 					//Include milking alt text in separate blocks.
@@ -1417,10 +1432,10 @@ use namespace CoC;
 					else {
 						if(player.buttChange(monster.cockArea(2), true)) outputText("\n");
 					}
+					if (CoC.instance.inCombat) cleanupAfterCombat();
+					else doNext(playerMenu);
 				}
 			}
-            if (CoC.instance.inCombat) cleanupAfterCombat();
-            else doNext(playerMenu);
 		}
 
         public function impRapesAlraune():void {
@@ -1513,9 +1528,9 @@ use namespace CoC;
 			if(player.lust >= player.maxLust())
 				sceneHunter.selectLossMenu([
 						[0, "Vaginal", vaginal, "Req. a vagina", player.hasVagina()],
-						[1, "SuckHim", vaginal, "Req. a cock", player.hasCock()],
+						[1, "SuckHim", suckHimMale, "Req. a cock", player.hasCock()],
 						[2, "Anal", assFuck],
-						[3, "UrethraFuck", assFuck, "Req. multiple dicks, one of which is at least 4-inch wide.", player.cocks.length >= 1 && player.thickestCockThickness() >= 4],
+						[3, "UrethraFuck", sprocketImp, "Req. multiple dicks, one of which is at least 4-inch wide.", player.cocks.length >= 1 && player.thickestCockThickness() >= 4],
 					],
 					"The imp is going to use his gigantic dick anyway, but you probably can provide a hint <i>where</i> he can put it.\n\n"
 				);
@@ -1800,18 +1815,23 @@ use namespace CoC;
 		}
 		public function loseToAnImpLord():void {
 			clearOutput();
+			if (player.gender == 0) {
+				outputText("Taking a look at your defeated form, the " + monster.short + " snarls, \"<i>Useless,</i>\" before kicking you in the head, knocking you out cold.");
+				player.takePhysDamage(9999);
+				cleanupAfterCombat();
+				return;
+			}
 			if (player.isAlraune()){
 				impRapesAlraune();
                 return;
 			}
             sceneHunter.print("Failed check: Alraune/Liliraune race");
-			if(player.hasVagina() && (player.gender == 2 || rand(2) == 0)) getRapedAsAGirl();
-			else if(player.hasCock()) loseToImpLord();
-			else {
-				outputText("Taking a look at your defeated form, the " + monster.short + " snarls, \"<i>Useless,</i>\" before kicking you in the head, knocking you out cold.");
-				player.takePhysDamage(9999);
-				cleanupAfterCombat();
-			}
+			sceneHunter.selectLossMenu([
+					[0, "getRapedAsAGirl", getRapedAsAGirl, "Req. a vagina", player.hasVagina()],
+					[1, "Anal", loseToImpLord, "Req. a cock", player.hasCock()]
+				],
+				"The imp is going to use his gigantic dick anyway, but you probably can provide a hint <i>where</i> he can put it.\n\n"
+			);
 		}
 
 		//Rape
