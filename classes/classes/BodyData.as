@@ -263,6 +263,17 @@ public class BodyData {
 		return data[SLOT_TONGUE_TYPE];
 	}
 	
+	public static const SLOT_VAGINA_TYPE:int = _slotid++;
+	EnumValue.add(Slots,SLOT_VAGINA_TYPE, "VAGINA_TYPE", {
+		name:"vagina",
+		nameFn: function(value:int):String {
+			return VaginaClass.Types[value].name;
+		}
+	});
+	public function get vaginaType():int {
+		return data[SLOT_TONGUE_TYPE];
+	}
+	
 	public static const SLOT_WING_TYPE:int = _slotid++;
 	EnumValue.add(Slots,SLOT_WING_TYPE, "WING_TYPE", {
 		name:"wings",
@@ -322,6 +333,12 @@ public class BodyData {
 	public function get hasCoat():Boolean {
 		return skinCoverage > Skin.COVERAGE_NONE;
 	}
+	public function get hasVagina():Boolean {
+		return gender === Gender.GENDER_FEMALE || gender === Gender.GENDER_HERM;
+	}
+	public function get hasCock():Boolean {
+		return gender === Gender.GENDER_MALE || gender === Gender.GENDER_HERM;
+	}
 	
 	public function BodyData(player:Player, update:Boolean = true) {
 		this.player = player;
@@ -363,6 +380,7 @@ public class BodyData {
 		}
 		data[SLOT_TAIL_TYPE] = player.tail.type;
 		data[SLOT_TAIL_COUNT] = player.tail.count;
+		data[SLOT_VAGINA_TYPE] = player.vaginaType();
 		data[SLOT_WING_TYPE] = player.wings.type;
 		data[SLOT_GENDER]    = player.gender;
 		data[SLOT_HEIGHT]    = player.tallness;

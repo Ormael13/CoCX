@@ -68,6 +68,7 @@ public class AtlachNachaRace extends Race{
 				})
 				.end()
 		
+		/* Not Yet Implemented
 		buildTier(30, "greater Atlach Nacha")
 				.buffs({
 					"str.mult": +1.15,
@@ -78,6 +79,8 @@ public class AtlachNachaRace extends Race{
 					"sens": +50
 				})
 				.end()
+				
+		 */
 	}
 }
 }

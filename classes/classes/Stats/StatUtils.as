@@ -63,6 +63,9 @@ public class StatUtils {
 		if (stat in PlainNumberStats) {
 			return PlainNumberStats[stat]+' '+x;
 		}
+		// fix rounding errors (1.15*100 = 114.999999...)
+		if (value < 0) value -= 0.001;
+		if (value > 0) value += 0.001;
 		var percent:String = signum + Math.floor(value * 100) + '%';
 		if (stat in PercentageStats) {
 			return PercentageStats[stat]+' '+percent;

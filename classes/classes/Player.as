@@ -3596,16 +3596,6 @@ use namespace CoC;
 					race = "displacer beast";
 				}
 			}
-			if (TopRace == "female mindbreaker") {
-				if (TopScore >= 20) {
-					race = "mindbreaker";
-				}
-			}
-			if (TopRace == "male mindbreaker") {
-				if (TopScore >= 20) {
-					race = "mindbreaker";
-				}
-			}
 			if (TopRace == "sphinx") {
 				if (TopScore >= 30) {
 					race = "noble sphinx";
@@ -4173,28 +4163,6 @@ use namespace CoC;
 						if (faceType == Face.HUMAN) race = "deer-" + mf("morph", "girl");
 					}
 				}
-			}
-			if (TopRace == "dragonne") {
-				if (TopScore >= 6) {
-					if (isTaur()) race = "dragonne-taur";
-					else {
-						race = "dragonne";
-						if (faceType == Face.HUMAN)
-							race = "dragonne-" + mf("man", "girl");
-					}
-				}
-			}
-			if (TopRace == "manticore") {
-				if (isTaur() && lowerBody == LowerBody.LION) {
-					if (TopScore >= 22)
-						race = "true manticore-taur";
-					else
-						race = "manticore-taur";
-				}
-				else if (TopScore >= 22)
-					race = "true manticore";
-				else
-					race = "manticore";
 			}
 			if (TopRace == "bear and panda") {
 				if (faceType == Face.PANDA) race = "panda-morph";
@@ -4796,7 +4764,7 @@ use namespace CoC;
 				chimeraCounter++;
 //			if (deerScore() >= 4)
 //				chimeraCounter++;
-			if (manticoreScore() >= 15)
+			if (isRace(Races.MANTICORE))
 				chimeraCounter += 2;
 			if (isRace(Races.REDPANDA))
 				chimeraCounter++;
@@ -9181,165 +9149,7 @@ use namespace CoC;
 
 		//Dragonne
 		public function dragonneScore():Number {
-			Begin("Player","racialScore","dragonne");
-			var dragonneCounter:Number = 0;
-			if (faceType == Face.CAT)
-				dragonneCounter++;
-			if (ears.type == Ears.CAT)
-				dragonneCounter++;
-			if (tailType == Tail.CAT)
-				dragonneCounter++;
-			if (tongue.type == Tongue.DRACONIC)
-				dragonneCounter++;
-			if (wings.type == Wings.DRACONIC_LARGE)
-				dragonneCounter += 2;
-			if (wings.type == Wings.DRACONIC_SMALL)
-				dragonneCounter++;
-			if (lowerBody == LowerBody.CAT)
-				dragonneCounter++;
-			if (skinType == Skin.SCALES && dragonneCounter > 0)
-				dragonneCounter++;
-			dragonneCounter = finalRacialScore(dragonneCounter, Races.DRAGONNE);
-			End("Player","racialScore");
-			return dragonneCounter;
-		}
-
-		//Manticore
-		public function manticoreScore():Number {
-			Begin("Player","racialScore","manticore");
-			var manticoreCounter:Number = 0;
-			if (faceType == Face.MANTICORE)
-				manticoreCounter++;
-			if (eyes.type == Eyes.MANTICORE)
-				manticoreCounter++;
-			if (ears.type == Ears.LION)
-				manticoreCounter++;
-			if (tailType == Tail.MANTICORE_PUSSYTAIL)
-				manticoreCounter += 2;
-			if (rearBody.type == RearBody.LION_MANE)
-				manticoreCounter++;
-			if (arms.type == Arms.LION)
-				manticoreCounter++;
-			if (lowerBody == LowerBody.LION)
-				manticoreCounter++;
-			if (tongue.type == Tongue.CAT)
-				manticoreCounter++;
-			if (wings.type == Wings.MANTICORE_SMALL)
-				manticoreCounter++;
-			if (wings.type == Wings.MANTICORE_LARGE)
-				manticoreCounter += 4;
-			if (!hasCock())
-				manticoreCounter++;
-			if (cocks.length > 0)
-				manticoreCounter -= 3;
-			if (vaginaType() == VaginaClass.MANTICORE)
-				manticoreCounter++;
-			if (cor >= 20)
-				manticoreCounter++;
-			if (hasPerk(MutationsLib.CatlikeNimbleness))
-				manticoreCounter++;
-			if (hasPerk(MutationsLib.CatlikeNimblenessPrimitive))
-				manticoreCounter++;
-			if (hasPerk(MutationsLib.CatlikeNimblenessEvolved))
-				manticoreCounter++;
-			if (hasPerk(MutationsLib.ManticoreMetabolism))
-				manticoreCounter++;
-			if (hasPerk(MutationsLib.ManticoreMetabolismPrimitive))
-				manticoreCounter++;
-			if (hasPerk(MutationsLib.ManticoreMetabolismEvolved))
-				manticoreCounter++;
-			if ((hasPerk(MutationsLib.ManticoreMetabolism) || hasPerk(MutationsLib.CatlikeNimbleness)) && hasPerk(PerkLib.ChimericalBodySemiImprovedStage))
-				manticoreCounter++;
-			if ((hasPerk(MutationsLib.ManticoreMetabolismPrimitive) || hasPerk(MutationsLib.CatlikeNimblenessPrimitive)) && hasPerk(PerkLib.ChimericalBodySemiSuperiorStage))
-				manticoreCounter++;
-			if (hasPerk(MutationsLib.CatlikeNimblenessEvolved) && hasPerk(PerkLib.ChimericalBodySemiEpicStage))
-				manticoreCounter++;
-			if (tailType != Tail.MANTICORE_PUSSYTAIL) manticoreCounter = 0;
-			manticoreCounter = finalRacialScore(manticoreCounter, Races.MANTICORE);
-			End("Player","racialScore");
-			return manticoreCounter;
-		}
-
-		public function femaleMindbreakerScore():Number {
-			Begin("Player","racialScore","Mindbreaker");
-			var femaleMindbreakerCounter:Number = 0;
-			if (faceType == Face.HUMAN)
-				femaleMindbreakerCounter++;
-			if (eyes.type == Eyes.MINDBREAKER)
-				femaleMindbreakerCounter++;
-			if (InCollection(eyes.colour, ["yellow", "orange", "light green"]))
-				femaleMindbreakerCounter++;
-			if (ears.type == Ears.HUMAN)
-				femaleMindbreakerCounter++;
-			if (tailType == Tail.NONE)
-				femaleMindbreakerCounter++;
-			if (rearBody.type == RearBody.MINDBREAKER)
-				femaleMindbreakerCounter+= 4;
-			if (arms.type == Arms.MINDBREAKER)
-				femaleMindbreakerCounter++;
-			if (lowerBody == LowerBody.MINDBREAKER)
-				femaleMindbreakerCounter++;
-			if (tongue.type == Tongue.MINDBREAKER)
-				femaleMindbreakerCounter++;
-			if (wings.type == Wings.NONE)
-				femaleMindbreakerCounter+= 3;
-			if (vaginaType() == VaginaClass.MINDBREAKER)
-				femaleMindbreakerCounter++;
-			if ((hairType == Hair.MINDBREAKER) && hairColor == "purple")
-				femaleMindbreakerCounter++;
-			if (hasPlainSkinOnly() && (InCollection(skin.base.color, ["pale", "ghostly white", "light purple"])))
-				femaleMindbreakerCounter++;
-			if (skinAdj == "slippery")
-				femaleMindbreakerCounter++;
-			if (hasPerk(PerkLib.Insanity))
-				femaleMindbreakerCounter++;
-			if (hasPerk(PerkLib.MindbreakerBrain1toX))
-				femaleMindbreakerCounter+= perkv1(PerkLib.MindbreakerBrain1toX);
-			if (hasCock()) femaleMindbreakerCounter = 0;
-			femaleMindbreakerCounter = finalRacialScore(femaleMindbreakerCounter, Races.FMINDBREAKER);
-			End("Player","racialScore");
-			return femaleMindbreakerCounter;
-		}
-
-		public function maleMindbreakerScore():Number {
-			Begin("Player","racialScore","Mindbreaker");
-			var MaleMindbreakerCounter:Number = 0;
-			if (faceType == Face.HUMAN)
-				MaleMindbreakerCounter++;
-			if (eyes.type == Eyes.MINDBREAKERMALE)
-				MaleMindbreakerCounter++;
-			if (InCollection(eyes.colour, ["yellow", "orange", "light green"]))
-				MaleMindbreakerCounter++;
-			if (ears.type == Ears.HUMAN)
-				MaleMindbreakerCounter++;
-			if (tailType == Tail.NONE)
-				MaleMindbreakerCounter ++;
-			if (rearBody.type == RearBody.MINDBREAKER)
-				MaleMindbreakerCounter+= 4;
-			if (arms.type == Arms.MINDBREAKER)
-				MaleMindbreakerCounter++;
-			if (lowerBody == LowerBody.MINDBREAKERMALE)
-				MaleMindbreakerCounter++;
-			if (tongue.type == Tongue.MINDBREAKERMALE)
-				MaleMindbreakerCounter++;
-			if (wings.type == Wings.NONE)
-				MaleMindbreakerCounter += 3;
-			if (countCocksOfType(CockTypesEnum.MINDBREAKER) > 0)
-				MaleMindbreakerCounter++;
-			if ((hairType == Hair.MINDBREAKERMALE) && hairColor == "purple")
-				MaleMindbreakerCounter++;
-			if (hasPlainSkinOnly() && (InCollection(skin.base.color, ["eldritch purple"])))
-				MaleMindbreakerCounter++;
-			if (skinAdj == "slippery")
-				MaleMindbreakerCounter ++;
-			if (hasPerk(PerkLib.Insanity))
-				MaleMindbreakerCounter++;
-			if (hasPerk(PerkLib.MindbreakerBrain1toX))
-				MaleMindbreakerCounter+= perkv1(PerkLib.MindbreakerBrain1toX);
-			if (hasVagina()) MaleMindbreakerCounter = 0;
-			MaleMindbreakerCounter = finalRacialScore(MaleMindbreakerCounter, Races.MMINDBREAKER);
-			End("Player","racialScore");
-			return MaleMindbreakerCounter;
+			return racialScore(Races.DRAGONNE);
 		}
 
 		//Bear or Panda
@@ -11013,24 +10823,6 @@ use namespace CoC;
 					currentSen += 50;
 				}
 			}
-			if (femaleMindbreakerScore() >= 20) {
-				maxStrCap2 -= 60;
-				maxSpeCap2 -= 10;
-				maxTouCap2 += 100;
-				maxIntCap2 += 550;
-				maxLibCap2 += 400;
-				maxWisCap2 -= 30;
-				currentSen += 50;
-			}
-			if (maleMindbreakerScore() >= 20) {
-				maxStrCap2 += 70;
-				maxSpeCap2 -= 40;
-				maxTouCap2 += 100;
-				maxIntCap2 += 450;
-				maxLibCap2 += 400;
-				maxWisCap2 -= 30;
-				currentSen += 50;
-			}
 			if (frostWyrmScore() >= 18) {
 				if (frostWyrmScore() >= 26) {
 					maxStrCap2 += 180;
@@ -11141,19 +10933,6 @@ use namespace CoC;
 				maxStrCap2 += 5;
 				maxSpeCap2 += 5;
 			}//+10/10-20
-			if (manticoreScore() >= 15) {
-				if (manticoreScore() >= 22) {
-					maxSpeCap2 += 160;
-					maxIntCap2 += 90;
-					maxLibCap2 += 140;
-					currentSen += 60;
-				} else {
-					maxSpeCap2 += 110;
-					maxIntCap2 += 70;
-					maxLibCap2 += 90;
-					currentSen += 45;
-				}
-			}//+60/50-60
 			if (bearpandaScore() >= 10) {
 				maxStrCap2 += 100;
 				maxTouCap2 += 70;
@@ -11773,7 +11552,14 @@ use namespace CoC;
 			}
 			if (!hasPerk(PerkLib.AbsoluteStrength) && statStore.hasBuff('Absolute Strength')) statStore.removeBuffs('Absolute Strength');
 			var buffs:Object = calcRacialBuffs();
-			var ngScaledRacialBuffs:/*String*/Array = ["maxfatigue_base","maxlust_base"];
+			/**
+			 * List of racial buff names that should get scaled with NG+
+			 */
+			var ngScaledRacialBuffs:/*String*/Array = [
+				"maxfatigue_base",
+				"maxlust_base",
+				"maxhp_base"
+			];
 			for each(var buffName:String in ngScaledRacialBuffs) {
 				if (buffName in buffs) buffs[buffName] *= (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]);
 			}
@@ -13528,8 +13314,6 @@ use namespace CoC;
 			if (gorgonScore() >= 11) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (gorgonScore() >= 17) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (horseScore() >= 7) max += (70 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (manticoreScore() >= 15) max += (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
-			if (manticoreScore() >= 22) max += (75 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (rhinoScore() >= 4) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (scyllaScore() >= 7) max += (50 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));
 			if (scyllaScore() >= 12) max += (100 * (1 + flags[kFLAGS.NEW_GAME_PLUS_LEVEL]));

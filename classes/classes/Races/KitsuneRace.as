@@ -23,7 +23,7 @@ public class KitsuneRace extends Race {
 	public static const KitsuneFurColors:/*String*/Array = BasicKitsuneFurColors.concat(ElderKitsuneColors);
 	
 	public function KitsuneRace(id:int) {
-		super("kitsune", id);
+		super("Kitsune", id);
 		addScores()
 				.eyeType(Eyes.FOX, +1)
 				.earType(Ears.FOX, +1, -1)

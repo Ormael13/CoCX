@@ -11,7 +11,7 @@ import classes.Race;
  */
 public class WolfRace extends Race {
 	public function WolfRace(id:int) {
-		super("wolf", id);
+		super("Wolf", id);
 		
 		addScores()
 				.faceType(ANY(Face.WOLF, Face.ANIMAL_TOOTHS), +1)

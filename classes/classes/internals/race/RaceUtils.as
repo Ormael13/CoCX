@@ -226,11 +226,25 @@ public class RaceUtils {
 	public static function hasVaginaFn(test:Boolean):Function {
 		if (test) {
 			return function (body:BodyData):Boolean {
-				return body.player.hasVagina();
+				return body.hasVagina;
 			}
 		} else {
 			return function (body:BodyData):Boolean {
-				return !body.player.hasVagina();
+				return !body.hasVagina;
+			}
+		}
+	}
+	/**
+	 * @return `(body) => body.player.hasVagina() == test`
+	 */
+	public static function hasCockFn(test:Boolean):Function {
+		if (test) {
+			return function (body:BodyData):Boolean {
+				return body.hasCock;
+			}
+		} else {
+			return function (body:BodyData):Boolean {
+				return !body.hasCock;
 			}
 		}
 	}

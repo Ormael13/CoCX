@@ -71,6 +71,17 @@ public class RaceScoreBuilder {
 		addSlotRequirement(BodyData.SLOT_HAIR_COLOR, type, score, failScore, customName);
 		return this;
 	}
+	public function hairTypeAndColor(type:*, color:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		addRequirement(
+				RacialRequirement.joinAnd(
+						"hair",
+						" ",
+						slotRequirement(BodyData.SLOT_HAIR_COLOR, color, score, failScore, "$name"),
+						slotRequirement(BodyData.SLOT_HAIR_TYPE, type, score, failScore)
+				)
+		);
+		return this;
+	}
 	public function hornType(type:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
 		addSlotRequirement(BodyData.SLOT_HORN_TYPE, type, score, failScore, customName);
 		return this;
@@ -157,6 +168,10 @@ public class RaceScoreBuilder {
 		addSlotRequirement(BodyData.SLOT_TONGUE_TYPE, type, score, failScore, customName);
 		return this;
 	}
+	public function vaginaType(type:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		addSlotRequirement(BodyData.SLOT_VAGINA_TYPE, type, score, failScore, customName);
+		return this;
+	}
 	public function wingType(type:*, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
 		addSlotRequirement(BodyData.SLOT_WING_TYPE, type, score, failScore, customName);
 		return this;
@@ -183,6 +198,7 @@ public class RaceScoreBuilder {
 				failScore,
 				customName
 				)
+		return this;
 	}
 	
 	public function hasCockOfType(type:CockTypesEnum, score:int, failScore:int=0, customName:String = ""):RaceScoreBuilder {
@@ -207,6 +223,39 @@ public class RaceScoreBuilder {
 		), customName)
 		return this;
 	}
+	public function noVagina(score: int, failScore:int=0, customName:String = ""): RaceScoreBuilder {
+		addRequirement(new RacialRequirement(
+				"vagina",
+				"no vagina",
+				RaceUtils.hasVaginaFn(false),
+				score,
+				failScore,
+				minScore
+		), customName)
+		return this;
+	}
+	public function hasCock(score: int, failScore:int=0, customName:String = ""): RaceScoreBuilder {
+		addRequirement(new RacialRequirement(
+				"cock",
+				"has cock",
+				RaceUtils.hasCockFn(true),
+				score,
+				failScore,
+				minScore
+		), customName)
+		return this;
+	}
+	public function noCock(score: int, failScore:int=0, customName:String = ""): RaceScoreBuilder {
+		addRequirement(new RacialRequirement(
+				"cock",
+				"no cock",
+				RaceUtils.hasCockFn(false),
+				score,
+				failScore,
+				minScore
+		), customName)
+		return this;
+	}
 	
 	public function hasPerk(perk:PerkType, score:int, failScore:int =0, customName:String = ""):RaceScoreBuilder {
 		addRequirement(new RacialRequirement(
@@ -218,6 +267,21 @@ public class RaceScoreBuilder {
 				minScore
 		), customName)
 		return this;
+	}
+	
+	/**
+	 * Require having a perk and give racial score = (score + perkv1)
+	 */
+	public function givePerkV1(perk:PerkType, score:int=0,failScore:int=0, customName:String = ""):RaceScoreBuilder {
+		return customScoreRequirement(
+				"perk",
+				customName || (perk.name()+" perk"),
+				RaceUtils.hasPerkFn(perk),
+				function(body:BodyData):int {
+					return score + body.player.perkv1(perk);
+				},
+				failScore
+				);
 	}
 	public function hasAllPerks(perks:/*PerkType*/Array, score:int, failScore:int =0, customName:String = ""):RaceScoreBuilder {
 		addRequirement(new RacialRequirement(

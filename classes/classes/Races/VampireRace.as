@@ -10,7 +10,7 @@ import classes.Race;
  */
 public class VampireRace extends Race {
 	public function VampireRace(id:int) {
-		super("vampire", id)
+		super("Vampire", id)
 		
 		addScores()
 				.earType(NOT(Ears.BAT), 0, -10)

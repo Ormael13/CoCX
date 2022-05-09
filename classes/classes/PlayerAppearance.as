@@ -1174,8 +1174,6 @@ public class PlayerAppearance extends BaseContent {
 		if (player.dogScore() >= 4) outputText("\n<font color=\"#0000a0\">Dog-morph: " + player.dogScore() + " (+15% to Spe racial multi, -5% to Int racial multi)</font>");
 		else if (player.dogScore() >= 1) outputText("\n<font color=\"#008000\">Dog-morph: " + player.dogScore() + "</font>");
 		else if (player.dogScore() < 1) outputText("\n<font color=\"#ff0000\">Dog-morph: 0</font>");
-		//Dragonne
-		outputText("\nDragonne: " + player.dragonneScore());
 		//Easter Bunny
 		if (player.easterbunnyScore() >= 1) {
 			if (player.hasPerk(PerkLib.EasterBunnyBalls)) {
@@ -1332,11 +1330,6 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.magmagooScore() >= 13) outputText("\n<font color=\"#0000a0\">Magma Slime: " + player.magmagooScore() + " (+35% to Str racial multi, +100% to Tou racial multi, -40% to Spe racial multi, +100% to Lib racial multi)</font>");
 		else if (player.magmagooScore() >= 1) outputText("\n<font color=\"#008000\">Magma Slime: " + player.magmagooScore() + "</font>");
 		else if (player.magmagooScore() < 1) outputText("\n<font color=\"#ff0000\">Magma Slime: 0</font>");
-		//Manticore
-		if (player.manticoreScore() >= 22) outputText("\n<font color=\"#0000a0\">True Manticore: " + player.manticoreScore() + " (+160% to Spe racial multi, +90% to Int racial multi, +140% to Lib racial multi, +60 min Sens, +" + (150 * (1 + player.newGamePlusMod())) + " max HP)</font>");
-		else if (player.manticoreScore() >= 15) outputText("\n<font color=\"#0000a0\">Manticore: " + player.manticoreScore() + " (+110% to Spe racial multi, +70% to Int racial multi, +90% to Lib racial multi, +45 min Sens, +" + (75 * (1 + player.newGamePlusMod())) + " max HP)</font>");
-		else if (player.manticoreScore() >= 1) outputText("\n<font color=\"#008000\">Manticore: " + player.manticoreScore() + "</font>");
-		else if (player.manticoreScore() < 1) outputText("\n<font color=\"#ff0000\">Manticore: 0</font>");
 		//Mantis
 		if (player.mantisScore() >= 12) {
 			outputText("\n<font color=\"#0000a0\">Mantis-morph: " + player.mantisScore() + " (-40% to Str racial multi, +60% to Tou racial multi, +");
@@ -1365,14 +1358,6 @@ public class PlayerAppearance extends BaseContent {
 		else if (player.melkieScore() >= 18) outputText("\n<font color=\"#0000a0\">Melkie: " + player.melkieScore() + " (+120% to Spe / Int racial multi, +80% to Lib racial multi, +50 min Sens)</font>");
 		else if (player.melkieScore() >= 1) outputText("\n<font color=\"#008000\">Melkie: " + player.melkieScore() + "</font>");
 		else if (player.melkieScore() < 1) outputText("\n<font color=\"#ff0000\">Melkie: 0</font>");
-		//Male Mindbreaker
-		if (player.maleMindbreakerScore() >= 20) outputText("\n<font color=\"#0000a0\">Male Mindbreaker: " + player.maleMindbreakerScore() + " (+70% to Str racial multi, -40% to Spe racial multi, +100% to tou racial multi, +450% to int racial multi, +400% to lib racial multi, -30% to Wis racial multi, +50 Sens)</font>");
-		else if (player.maleMindbreakerScore() >= 1) outputText("\n<font color=\"#008000\">Male Mindbreaker: " + player.maleMindbreakerScore() + "</font>");
-		else if (player.maleMindbreakerScore() < 1) outputText("\n<font color=\"#ff0000\">Male Mindbreaker: 0</font>");
-		//Female Mindbreaker
-		if (player.femaleMindbreakerScore() >= 20) outputText("\n<font color=\"#0000a0\">Female Mindbreaker: " + player.femaleMindbreakerScore() + " (-60% to Str racial multi, -10% to Spe racial multi, +100% to tou racial multi, +550% to int racial multi, +400% to lib racial multi, -30% to Wis racial multi, +50 Sens)</font>");
-		else if (player.femaleMindbreakerScore() >= 1) outputText("\n<font color=\"#008000\">Female Mindbreaker: " + player.femaleMindbreakerScore() + "</font>");
-		else if (player.femaleMindbreakerScore() < 1) outputText("\n<font color=\"#ff0000\">Female Mindbreaker: 0</font>");
 		//Minotaur
 		if (player.minotaurScore() >= 15) outputText("\n<font color=\"#0000a0\">Minotaur: " + player.minotaurScore() + " (+170% to Str racial multi, +45% to Tou racial multi, -20% to Spe racial multi, -40% to Int racial multi, +70% to Lib racial multi, +" + (50 * (1 + player.newGamePlusMod())) + " max Lust)</font>");
 		else if (player.minotaurScore() >= 10) outputText("\n<font color=\"#0000a0\">Bull-morph: " + player.minotaurScore() + " (+120% to Str racial multi, +45% to Tou racial multi, -20% to Spe racial multi, -40% to Int racial multi, +45% to Lib racial multi, +" + (50 * (1 + player.newGamePlusMod())) + " max Lust)</font>");

@@ -20,6 +20,7 @@ import classes.Items.ShieldLib;
 import classes.Items.WeaponLib;
 import classes.PerkLib;
 import classes.MutationsLib;
+import classes.Races;
 import classes.Scenes.Areas.Caves.DisplacerBeast;
 import classes.Scenes.Areas.Ocean.SeaAnemone;
 import classes.Scenes.Camp.CampMakeWinions;
@@ -70,7 +71,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 					}
 				}
 				if (player.hasPerk(PerkLib.AsuraStrength)) {
-					
+				
 				}
 			}
 			if (player.haveWeaponForCleave() && player.hasStatusEffect(StatusEffects.KnowsCleave)) {
@@ -202,7 +203,7 @@ public class PhysicalSpecials extends BaseCombatContent {
 				} else if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}
 			//Grapple
-			if ((player.lowerBody == LowerBody.SCYLLA || player.lowerBody == LowerBody.KRAKEN || player.maleMindbreakerScore() >= 20 || player.femaleMindbreakerScore() >= 20)  && !player.hasPerk(PerkLib.ElementalBody)) {
+			if ((player.lowerBody == LowerBody.SCYLLA || player.lowerBody == LowerBody.KRAKEN || player.isRace(Races.MMINDBREAKER) || player.isRace(Races.FMINDBREAKER))  && !player.hasPerk(PerkLib.ElementalBody)) {
 				bd = buttons.add("Grapple", scyllaGrapple).hint("Attempt to grapple a foe with your tentacles.");
 				if (combat.isEnnemyInvisible) bd.disable("You cannot use offensive skills against an opponent you cannot see or target.");
 			}

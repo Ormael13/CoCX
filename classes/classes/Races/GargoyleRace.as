@@ -11,7 +11,7 @@ public class GargoyleRace extends Race {
 	
 	
 	public function GargoyleRace(id:int) {
-		super("gargoyle", id);
+		super("Gargoyle", id);
 		
 		addScores()
 				.hairColor(ANY(GargoyleHairColors), +1)

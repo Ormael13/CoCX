@@ -2,7 +2,7 @@
  * ...
  * @author Liadri
  */
-package classes.Scenes.NPCs 
+package classes.Scenes.NPCs
 {
 	import classes.*;
 	import classes.BodyParts.Tail;
@@ -14,8 +14,8 @@ import classes.display.SpriteDb;
 	
 	public class EtnaFollower extends NPCAwareContent
 	{
-				
-		public function EtnaFollower() 
+		
+		public function EtnaFollower()
 		{}
 
 //flag ETNA_TALKED_ABOUT_HER: 0 - not know her name, 1 - know her name, 2 - Etna in Yandere mode
@@ -46,7 +46,7 @@ public function repeatEnc():void
 {
 	spriteSelect(SpriteDb.s_etna);
 	clearOutput();
-	if (player.manticoreScore() >= 12 && player.tailType == Tail.MANTICORE_PUSSYTAIL) {
+	if (player.isRace(Races.MANTICORE)) {
 		if (flags[kFLAGS.ETNA_TALKED_ABOUT_HER] >= 1 && !player.hasStatusEffect(StatusEffects.WildManticore)) {
 			outputText("You take a stroll in the mountain area when a spike passes a few inches away from your side.\n\n");
 			outputText("Etna moves out of the shadow of a nearby cave, adopting a combat stance. Seems you actually threaded on her hunting grounds. She makes a playful growl before calling to you.\n\n");

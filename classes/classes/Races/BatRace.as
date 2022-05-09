@@ -4,7 +4,7 @@ import classes.Race;
 
 public class BatRace extends Race {
 	public function BatRace(id: int) {
-		super("bat", id);
+		super("Bat", id);
 		
 		addScores()
 				.earType(Ears.BAT, +1)

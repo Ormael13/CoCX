@@ -14,7 +14,7 @@ public class GoblinRace extends Race {
 	public static const GoblinHairColors:/*String*/Array = ["red", "purple", "green", "blue", "pink", "orange"];
 	
 	public function GoblinRace(id:int) {
-		super("goblin", id);
+		super("Goblin", id);
 		
 		addScores()
 				.faceType(ANY(Face.HUMAN, Face.ANIMAL_TOOTHS), +1)

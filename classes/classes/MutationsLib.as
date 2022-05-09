@@ -705,7 +705,7 @@ public class MutationsLib
 					return player.lizardScore() >= 8;
 				}, "Lizan race");
 				ManticoreMetabolism.requireMetabolismMutationSlot().requireCustomFunction(function (player:Player):Boolean {
-					return player.manticoreScore() >= 15 && player.tailType == Tail.MANTICORE_PUSSYTAIL;
+					return player.isRace(Races.MANTICORE);
 				}, "Manticore race and tail");
 				MantislikeAgility.requireMusclesMutationSlot().requirePerk(TrachealSystem).requireCustomFunction(function (player:Player):Boolean {
 					return player.mantisScore() >= 12;

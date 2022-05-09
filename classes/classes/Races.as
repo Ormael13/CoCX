@@ -1,6 +1,7 @@
 package classes {
 import classes.BodyParts.*;
 import classes.Races.*;
+import classes.internals.Utils;
 
 public class Races {
 	
@@ -15,7 +16,7 @@ public class Races {
 	public static const SPHINX:Race = new Race("Sphinx",7, "sphinxScore", 14);
 	public static const LIZARD:Race = new Race("Lizard",8, "lizardScore", 8);
 	public static const DRAGON:Race = new DragonRace(9);
-	public static const DRAGONNE:Race = new Race("Dragonne",10, "dragonneScore", 6);
+	public static const DRAGONNE:Race = new DragonneRace(10);
 	public static const RACCOON:Race = new Race("Raccoon",11,"raccoonScore", 8);
 	public static const DOG:Race = new Race("Dog",12,"dogScore", 4);
 	public static const WOLF: Race = new WolfRace(13);
@@ -66,7 +67,7 @@ public class Races {
 	public static const RHINO:Race = new Race("Rhino",58, "rhinoScore", 4);
 	public static const ECHIDNA:Race = new Race("Echnida",59, "echidnaScore", 4);
 	public static const DEER:Race = new Race("Deer",60, "deerScore", 4);
-	public static const MANTICORE:Race = new Race("Manticore",61, "manticoreScore", 15);
+	public static const MANTICORE:Race = new ManticoreRace(61);
 	public static const REDPANDA:Race = new RedPandaRace(62);
 	public static const BEARANDPANDA:Race = new Race("Bear and Panda",63,"bearpandaScore", 10);
 	public static const SIREN:Race = new Race("Siren",64, "sirenScore", 10);
@@ -99,8 +100,8 @@ public class Races {
 	public static const ATLACH_NACHA:Race = new AtlachNachaRace(91);
 	public static const WOODELF:Race      = new Race("Wood Elf",92, "woodElfScore", 22);
 	public static const SEA_DRAGON:Race = new Race("Sea Dragon",93, "leviathanScore", 20);
-	public static const FMINDBREAKER:Race = new Race("Female Mind Breaker",94, "femaleMindbreakerScore", 20);
-	public static const MMINDBREAKER:Race = new Race("Male Mind Breaker",95, "maleMindbreakerScore", 20);
+	public static const FMINDBREAKER:Race = new FemaleMindbreakerRace(94);
+	public static const MMINDBREAKER:Race = new MaleMindbreakerRace(95);
 	public static const ELEMENTALFUSION:Race = new Race("Elemental Fusion",96, "fusedElementalScore", 5);
 	public static const GRYPHON:Race = new GryphonRace(97);
 	public static const PEACOCK:Race = new PeacockRace(98);

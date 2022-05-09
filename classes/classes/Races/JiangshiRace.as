@@ -11,7 +11,7 @@ public class JiangshiRace extends Race {
 	public static const JiangshiSkinColors:/*String*/Array = ["ghostly pale", "light blue", "snow white"];
 	
 	public function JiangshiRace(id:int) {
-		super("jiangshi", id);
+		super("Jiangshi", id);
 		
 		addScores()
 				.skinPlainOnly(+1)

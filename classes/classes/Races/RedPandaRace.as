@@ -6,7 +6,7 @@ import classes.Race;
 
 public class RedPandaRace extends Race{
 	public function RedPandaRace(id:int) {
-		super("red panda", id);
+		super("Red Panda", id);
 		
 		addScores()
 				.faceType(Face.RED_PANDA, +2)

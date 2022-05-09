@@ -14,7 +14,7 @@ import classes.lists.Gender;
  */
 public class DragonRace extends Race {
 	public function DragonRace(id:int) {
-		super("dragon", id);
+		super("Dragon", id);
 		addScores()
 				.faceType(ANY(Face.DRAGON, Face.DRAGON_FANGS), +1)
 				.faceType(ANY(Face.JABBERWOCKY, Face.BUCKTOOTH), -10)
