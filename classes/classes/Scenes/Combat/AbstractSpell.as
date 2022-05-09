@@ -96,6 +96,10 @@ public class AbstractSpell extends CombatAbility {
 		throw new Error("Method performSpellEffect() not implemented for ability " + name);
 	}
 	
+	protected function preSpellEffect():void {
+		MagicPrefixEffect();
+	}
+	
 	protected function postSpellEffect():void {
 		MagicAddonEffect();
 		if (player.weapon == weapons.DEMSCYT && player.cor < 90) dynStats("cor", 0.3);
@@ -107,6 +111,7 @@ public class AbstractSpell extends CombatAbility {
 				outputText("As soon as your magic touches the multicolored shell around [themonster], it sizzles and fades to nothing.  Whatever that thing is, it completely blocks your magic!\n\n");
 			}
 		} else {
+			preSpellEffect();
 			doSpellEffect(display);
 			postSpellEffect();
 			if (display) {
@@ -130,6 +135,10 @@ public class AbstractSpell extends CombatAbility {
 	///////////////////////////
 	// Shortcuts and utilities
 	///////////////////////////
+	
+	protected function MagicPrefixEffect():void {
+		combat.magic.MagicPrefixEffect();
+	}
 	
 	protected function MagicAddonEffect(numberOfProcs:Number = 1):void {
 		combat.magic.MagicAddonEffect(numberOfProcs);
