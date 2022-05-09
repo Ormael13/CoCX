@@ -61,7 +61,8 @@ public class IMutationsLib
 		public static const HollowFangsIM:PerkType = new HollowFangsMutation();
 		public static const KitsuneParathyroidGlandIM:PerkType = new KitsuneParathyroidGlandMutation();
 		public static const KitsuneThyroidGlandIM:PerkType = new KitsuneThyroidGlandMutation();
-
+		public static const LactaBovinaOvariesIM:PerkType = new LactaBovinaOvariesMutation();
+		public static const LizanMarrowIM:PerkType = new LizanMarrowMutation();
 		public static const TrachealSystemIM:PerkType = new TrachealSystemMutation();
 		public static const VampiricBloodstreamIM:PerkType = new VampiricBloodstreamMutation();
 
@@ -107,6 +108,7 @@ public class IMutationsLib
 			}
 			function IMutationsOvaries():void{
 				IMutationsList.push([FloralOvariesIM,FloralOvariesMutation]);
+				IMutationsList.push([LactaBovinaOvariesIM,LactaBovinaOvariesMutation]);
 			}
 			function IMutationsTesticles():void{
 				IMutationsList.push([EasterBunnyEggBagIM,EasterBunnyEggBagMutation]);
@@ -122,6 +124,7 @@ public class IMutationsLib
 			function IMutationsBone():void{
 				IMutationsList.push([DraconicBonesIM,DraconicBonesMutation]);
 				IMutationsList.push([HarpyHollowBonesIM,HarpyHollowBonesMutation]);
+				IMutationsList.push([LizanMarrowIM,LizanMarrowMutation]);
 			}
 			function IMutationsThyroidGlands():void{
 				IMutationsList.push([KitsuneThyroidGlandIM,KitsuneThyroidGlandMutation]);
