@@ -280,9 +280,9 @@ package classes.Scenes
 			outputText("-Kitsune Glands perks stat bonuses are changed to: +5% spe multi, +5% wis multi, +5% spe multi, +10% wis multi, +5% spe multi, +20% wis multi. They won't boost mana recovery anymore and sf recovery boosts are 33% stronger, they won't affect Ilusion/Terror specials. 1st perk would lower by 50% base cost of fox fire specials.\n");
 			outputText("-Monsters max wrath and soulforce would increase with each lvl (+5 per lvl for both).\n");
 			outputText("-When in camp Konstantine have new talk option that would unlock new option in his main menu: Smelthing. If PC would have 1 copper+tin ore or 1 ebonbloom he can smelt it into respectively 1 bronze bar or 1 ebon ignot.\n");
-			outputText("-New usable items: hundred of iron/moonstone/skymetal/ebonbloom arrowheads and unicron hair. Made by Konstantin after unlocking his Smelting option using matching material, hair is gained from any unicorn npc that is in camp (Celess, Diana). Whole pack cost 1 gem for each.\n");
-			outputText("-\n");
-			outputText("-\n");
+			outputText("-New usable items: hundred of iron/moonstone/skymetal/ebonbloom arrowheads, moonstone (ore) and unicorn hair. Made by Konstantin after unlocking his Smelting option using matching material, ore can be mined at night in quarry located in mountains (req. lvl 2+ mining skill), hair is gained from any unicorn npc that is in camp (Celess, Diana). Whole pack cost 1 gem for each.\n");
+			outputText("-Mining at Quarry will now give exp to mining skill. Ores can be found starting from lvl 1 of that skill. Level of it would also affect in smaller or larger degree amount of mined stones/gems.\n");
+			outputText("-There is possible to veture outside camp at night now. Places have now daylight & night version. (currently only quarry is possible to visit now at night)\n");
 			outputText("-\n");
 			outputText("-\n");
 			outputText("-\n");
