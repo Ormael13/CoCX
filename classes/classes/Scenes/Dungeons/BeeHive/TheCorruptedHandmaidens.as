@@ -5,12 +5,8 @@
 package classes.Scenes.Dungeons.BeeHive 
 {
 import classes.*;
-import classes.BodyParts.Horns;
-import classes.GlobalFlags.*;
 import classes.Scenes.SceneLib;
 import classes.internals.ChainedDrop;
-import classes.Scenes.Dungeons.BeeHive;
-import classes.Scenes.Dungeons.BeeHive.BeeGuards;
 
 	public class TheCorruptedHandmaidens extends BeeGuards {
 		
@@ -56,12 +52,12 @@ import classes.Scenes.Dungeons.BeeHive.BeeGuards;
 		
 		override public function defeated(hpVictory:Boolean):void
 		{
-			beehive.defeatCorruptedHandmiadens();
+			SceneLib.dungeons.beehive.defeatCorruptedHandmiadens();
 		}
 		
 		override public function won(hpVictory:Boolean, pcCameWorms:Boolean):void
 		{
-			beehive.defeatedByCorruptedHandmaidens();
+			SceneLib.dungeons.beehive.defeatedByCorruptedHandmaidens();
 		}
 		
 		public function TheCorruptedHandmaidens() 
