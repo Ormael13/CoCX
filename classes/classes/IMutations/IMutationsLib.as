@@ -38,7 +38,6 @@ public class IMutationsLib
 		//public static const NekomataThyroidGlandIM:PerkType = new NekomataThyroidGlandMutation();
 		//public static const HellcatParathyroidGlandsIM:PerkType = new HellcatParathyroidGlandMutation();
 		//public static const CaveWyrmLungsIM:PerkType = new CaveWyrmLungsMutation();
-		//public static const KitsuneParathyroidGlandIM:PerkType = new KitsuneParathyroidGlandMutation();
 		//Mutations start here.
 		public static const ArachnidBookLungIM:PerkType = new ArachnidBookLungMutation();
 		public static const BlackHeartIM:PerkType = new BlackHeartMutation();
@@ -60,7 +59,10 @@ public class IMutationsLib
 		public static const HeartOfTheStormIM:PerkType = new HeartOfTheStormMutation();
 		public static const HinezumiBurningBloodIM:PerkType = new HinezumiBurningBloodMutation();
 		public static const HollowFangsIM:PerkType = new HollowFangsMutation();
+		public static const KitsuneParathyroidGlandIM:PerkType = new KitsuneParathyroidGlandMutation();
 		public static const KitsuneThyroidGlandIM:PerkType = new KitsuneThyroidGlandMutation();
+		public static const LactaBovinaOvariesIM:PerkType = new LactaBovinaOvariesMutation();
+		public static const LizanMarrowIM:PerkType = new LizanMarrowMutation();
 		public static const TrachealSystemIM:PerkType = new TrachealSystemMutation();
 		public static const VampiricBloodstreamIM:PerkType = new VampiricBloodstreamMutation();
 
@@ -106,6 +108,7 @@ public class IMutationsLib
 			}
 			function IMutationsOvaries():void{
 				IMutationsList.push([FloralOvariesIM,FloralOvariesMutation]);
+				IMutationsList.push([LactaBovinaOvariesIM,LactaBovinaOvariesMutation]);
 			}
 			function IMutationsTesticles():void{
 				IMutationsList.push([EasterBunnyEggBagIM,EasterBunnyEggBagMutation]);
@@ -121,12 +124,13 @@ public class IMutationsLib
 			function IMutationsBone():void{
 				IMutationsList.push([DraconicBonesIM,DraconicBonesMutation]);
 				IMutationsList.push([HarpyHollowBonesIM,HarpyHollowBonesMutation]);
+				IMutationsList.push([LizanMarrowIM,LizanMarrowMutation]);
 			}
 			function IMutationsThyroidGlands():void{
 				IMutationsList.push([KitsuneThyroidGlandIM,KitsuneThyroidGlandMutation]);
 			}
 			function IMutationsParaThyroidGlands():void{
-
+				IMutationsList.push([KitsuneParathyroidGlandIM,KitsuneParathyroidGlandMutation])
 			}
 			function IMutationsAdaptations():void{
 				IMutationsList.push([ArachnidBookLungIM,ArachnidBookLungMutation]);
