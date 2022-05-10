@@ -40,7 +40,7 @@ import classes.Scenes.SceneLib;
 		}
 
 		private function tentaFail(cock:int, createdVag:Boolean = false):void {
-			flags[kFLAGS.D3_GARDENER_DEFEATED] = GARDENER_FUCKED;
+			if (!recalling) flags[kFLAGS.D3_GARDENER_DEFEATED] = GARDENER_FUCKED;
 			clearOutput();
 			//Start setting up to fuck the succubus -> surprise tentacle grape, idiot.
 			outputText("There's no way you're going to pass up an opportunity to put a succubus's lips to use. Pillowy");
@@ -77,7 +77,7 @@ import classes.Scenes.SceneLib;
 
 				outputText("\n\n<b>This thing is turning you into woman!</b>");
 
-				player.createVagina();
+				if (!recalling) player.createVagina();
 			}
 			else if (cock < 0) {
 				//Cooches only
@@ -95,8 +95,7 @@ import classes.Scenes.SceneLib;
 
 				outputText("\n\nYou cum when it thrusts back in, loosening you further, moulding your twat into the perfectly shaped receptacle for its unending, monstrous needs. Gushing, your pussy gratefully clings to its massive, orange-colored master, getting more and more elastic with every second. Your eyes roll back around your third cunt-clenching climax. You miss the sky vanishing behind clouds of green, writhing stalks, but at least you'll never miss that feeling of <i>fullness</i> ever again.");
 
-				menu();
-				addButton(0, "Next", tentaFailII);
+				doNext(tentaFailII);
 			}
 			//Dicks
 			else {
@@ -138,7 +137,7 @@ import classes.Scenes.SceneLib;
 
 					outputText("\n\nSometime later, you come to in between orgasms, surrounded in green, but there is so much sensory data coming from your crotch that your eyes might as well be blind by comparison. You marvel at this new life and wonder if you'll ever tire of admiring the texture of these walls. The next orgasm blasts those thoughts away, answering the question for you. Raw, unfiltered pleasure. That's what matters to you now.");
 
-					EventParser.gameOver();
+					doNext(tentaFailII);
 				}
 			}
 		}
@@ -146,19 +145,22 @@ import classes.Scenes.SceneLib;
 		private function tentaFailII():void
 		{
 			clearOutput();
-			outputText("\n\nYou're held captive, overwhelmed by your own senses, and brought to nirvana ceaselessly. The demons never even try to free your fate, held captive as you are by one of the eldest tentacle beasts. You spend the rest of your life feeding it, incapable of focusing on anything but your own feelings of ecstasy.");
-			EventParser.gameOver();
+			outputText("You're held in the garden, overwhelmed by your own senses, and brought to nirvana ceaselessly. The demons never even try to free your fate, held captive as you are by one of the eldest tentacle beasts. You spend the rest of your life feeding it, incapable of focusing on anything but your own feelings of ecstasy.");
+			if (!recalling)
+				EventParser.gameOver();
+			else doNext(camp.recallWakeUp);
 		}
 
 		private function endHer():void
 		{
 			clearOutput();
-			outputText("You circle behind her an put and end to her evil while she is busy with her pet, then turn to walk away. When you look back over your shoulder, her body is gone. Nothing remains but an empty pathway.");
+			outputText("You circle behind her and put and end to her evil while she is busy with her pet, then turn to walk away. When you look back over your shoulder, her body is gone. Nothing remains but an empty pathway.");
 
-			flags[kFLAGS.D3_GARDENER_DEFEATED] = GARDENER_KILLED;
-
-			menu();
-            cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+			if (!recalling) {
+				flags[kFLAGS.D3_GARDENER_DEFEATED] = GARDENER_KILLED;
+				cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+			}
+			else doNext(camp.recallWakeUp);
         }
 
 		private function leaveHer():void
@@ -166,10 +168,11 @@ import classes.Scenes.SceneLib;
 			clearOutput();
 			outputText("Figuring that the succubus's pets can keep her busy indefinitely, you turn away. A shriek of pleasure draws your attention back, and you turn in time to see dozens of coiling, leafy masses encircling her every limb, bodily carrying her into a wall of twisting, leaking cocks and pussies. Her orifices are stuffed with pumping lengths that froth with spit and girlcum, and her eyes, equal parts alarmed and aroused, widen before disappearing into the forest of green.");
 
-			flags[kFLAGS.D3_GARDENER_DEFEATED] = GARDENER_LEFT;
-
-			menu();
-            cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+			if (!recalling) {
+				flags[kFLAGS.D3_GARDENER_DEFEATED] = GARDENER_LEFT;
+				cleanupAfterCombat(SceneLib.d3.resumeFromFight);
+			}
+			else doNext(camp.recallWakeUp);
         }
 
 		public function surrenderToTheGardener(hpVictory:Boolean = false):void

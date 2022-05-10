@@ -4831,7 +4831,7 @@ public function rebirthFromBadEnd():void {
 		if (flags[kFLAGS.GAME_END] > 0)
 			addButton(13, "Lethice", SceneLib.d3.lethice.defeated, false).hint("While you can't make her your eternal slave, you can punish her for her arrogance in your memories as much as you want.");
 		else addButtonDisabled(13, "L.", "Req. completing the game :)");
-        addButton(14, "Wake Up", /*recallWakeUp*/ SceneLib.d3.succubusGardener.fuckUpTheGardener, true);
+        addButton(14, "Wake Up", recallWakeUp);
     }
 
 
