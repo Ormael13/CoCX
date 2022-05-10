@@ -487,7 +487,7 @@ private function aethertwinsFollowersEvolutionsToHumanTierGaunlets():void {
 	AetherTwinsFoodMenuGold = 0;
 	AetherTwinsFoodMenuGoldCap = 2;
 	AetherTwinsTalkMenu = 1;
-	doNext(aethertwinsFollowersMorphMain);
+	doNext(aethertwinsFollowers);
 	cheatTime(1/6);
 }
 private function aethertwinsFollowersEvolutionsToSkyTierGaunlets():void {
